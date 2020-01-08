@@ -41,10 +41,26 @@ LUIE.Data.UnitNames = {
     NPC_Hoarvor                           = 'Hoarvor',
     NPC_Auroran_Battlemage                = 'Auroran Battlemage',
     NPC_Watcher                           = 'Watcher',
+    NPC_Dremora_Narkynaz                  = 'Dremora Narkynaz',
+    NPC_Dremora_Kyngald                   = 'Dremora Kyngald',
+    NPC_Flame_Atronach                    = 'Flame Atronach',
+    NPC_Skeletal_Infernal                 = 'Skeletal Infernal',
+    NPC_Spectral_Storm_Mage               = 'Spectral Storm Mage',
+    NPC_Sainted_Archer                    = 'Sainted Archer',
+    NPC_Sainted_Charger                   = 'Sainted Charger',
+    NPC_Gargoyle                          = 'Gargoyle',
 
     NPC_Aura_of_Protection                = 'Aura of Protection',
 
     NPC_Naryu_Virian                      = 'Naryu Virian',
+
+    NPC_Heritance_Cutthroat               = 'Heritance Cutthroat',
+    NPC_Heritance_Deadeye                 = 'Heritance Deadeye',
+    NPC_Bandit_Incendiary                 = 'Bandit Incendiary',
+    NPC_Bandit_Rogue                      = 'Bandit Rogue',
+    NPC_Bandit_Savage                     = 'Bandit Savage',
+    NPC_Sea_Viper_Tempest                 = 'Sea Viper Tempest',
+    NPC_Sea_Viper_Charger                 = 'Sea Viper Charger',
 
     ----------------------------------------------------------------
     -- QUESTS ------------------------------------------------------
@@ -63,9 +79,15 @@ LUIE.Data.UnitNames = {
 
     -- Aldmeri Dominion
     Boss_Norion = 'Norion',
+    Elite_Canonreeve_Malanie = 'Canonreeve Malanie',
+    Elite_Mezelukhebruz = 'Mezelukhebruz',
+    Elite_Marrow = 'Marrow',
     Boss_High_Kinlady_Estre = 'High Kinlady Estre',
+    Elite_Free_Will = 'Free Will',
     Boss_Mayor_Aulus = 'Mayor Aulus',
+    Elite_General_Endare = 'General Endare',
     Boss_Prince_Naemon = 'Prince Naemon',
+    Elite_Baham = 'Baham',
     Boss_Vicereeve_Pelidil = 'Vicereeve Pelidil',
     Boss_Shade_of_Naemon = 'Shade of Naemon',
 
@@ -148,6 +170,11 @@ LUIE.Data.UnitNames = {
     -- Rivenspire
     Boss_Aesar_the_Hatespinner = 'Aesar the Hatespinner', -- Aesar's Web (Rivenspire)
     Boss_Magdelena = 'Magdelena', -- Magdelena's Haunt (Rivenspire)
+    Boss_Calixte_Darkblood = 'Calixte Darkblood', -- Old Kalgon's Keep (Rivenspire)
+    Boss_Louna_Darkblood = 'Louna Darkblood', -- Old Kalgon's Keep (Rivenspire)
+    Boss_Lyse_Darkblood = 'Lyse Darkblood', -- Old Kalgon's Keep (Rivenspire)
+    Boss_Stroda_gra_Drom = 'Stroda gra-Drom', -- East-Rock Landing (Rivenspire)
+    Boss_Desuuga_the_Siren = 'Desuuga the Siren', -- Siren's Cove (Rivenspire)
 
     -- Dolmen Bosses
     NPC_Dread_Xivkyn_Cauterizer = 'Dread Xivkyn Cauterizer',
@@ -241,6 +268,7 @@ LUIE.Data.UnitNames = {
     Boss_Cell_Haunter                     = 'Cell Haunter',
     Boss_Shadowrend                       = 'Shadowrend',
     Boss_Angata_the_Clannfear_Handler     = 'Angata the Clannfear Handler',
+    Boss_Skeletal_Destroyer               = 'Skeletal Destroyer',
     Boss_High_Kinlord_Rilis               = 'High Kinlord Rilis',
     NPC_The_Feast                         = 'The Feast',
 
@@ -309,6 +337,10 @@ LUIE.Data.UnitNames = {
     -- Selene's Web
     Boss_Treethane_Kerninn                = 'Treethane Kerninn',
     Boss_Longclaw                         = 'Longclaw',
+    Boss_Silentpaw                        = 'Silentpaw',
+    Boss_Heartstalker                     = 'Heartstalker',
+    Boss_Nighteyes                        = 'Nighteyes',
+    Boss_Shadowhiskers                    = 'Shadowhiskers',
     Boss_Queen_Aklayah                    = 'Queen Aklayah',
     Boss_Foulhide                         = 'Foulhide',
     Boss_Mennir_Many_Legs                 = 'Mennir Many-Legs',
@@ -320,7 +352,6 @@ LUIE.Data.UnitNames = {
     Boss_Cerise_the_Widow_Maker           = 'Cerise the Widow-Maker',
     Boss_Big_Rabbu                        = 'Big Rabbu',
     Boss_The_Whisperer                    = 'The Whisperer',
-
     Boss_Praxin_Douare                    = 'Praxin Douare',
 
     -- Spindleclutch II
@@ -338,6 +369,13 @@ LUIE.Data.UnitNames = {
     Boss_the_Rat_Whisperer                = 'The Rat Whisperer',
     Boss_Varaine_Pellingare               = 'Varaine Pellingare',
     Boss_Allene_Pellingare                = 'Allene Pellingare',
+
+    -- Wayrest Sewers II
+    Boss_Malubeth_the_Scourger            = 'Malubeth the Scourger',
+    Boss_Skull_Reaper                     = 'Skull Reaper',
+    Boss_Uulgarg_the_Risen                = 'Uulgarg the Risen',
+    Boss_Garron_the_Returned              = 'Garron the Returned',
+    Boss_The_Forgotten_One                = 'The Forgotten One',
 
     -- Frostvault
     NPC_Coldsnap_Ogre                     = 'Coldsnap Ogre',

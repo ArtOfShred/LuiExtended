@@ -1018,6 +1018,7 @@ local AbilityTables = {
     Skill_Shockwave                   = 4653,
     Skill_Doom_Truths_Gaze            = 9219,
     Skill_The_Feast                   = 11083,
+    Skill_Flame_Geyser                = 34376,
 
     -- Undead
     Skill_Desecrated_Ground           = 38828,
@@ -1315,6 +1316,12 @@ local AbilityTables = {
     Skill_Dark_Lance                  = 9441,
     Skill_Summon_Restless_Souls       = 9463,
     Skill_Hallucinogenic_Fumes        = 35006,
+
+    -- Wayrest Sewers II
+    Skill_Scourging_Spark             = 36613,
+    Skill_Necromantic_Implosion       = 17207,
+    Skill_Escaped_Souls               = GetString(SI_LUIE_SKILL_ESCAPED_SOULS),
+    Skill_Overhead_Smash              = 20915,
 
     -- Frostvault
     Skill_Rending_Bleed               = 117286,

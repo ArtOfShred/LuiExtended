@@ -10,6 +10,7 @@ local AbilityAlerts = CombatInfo.AbilityAlerts
 local UI = LUIE.UI
 local Effects = LUIE.Data.Effects
 local Alerts = LUIE.Data.AlertTable
+local AlertsZone = LUIE.Data.AlertZoneOverride
 
 local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
@@ -582,8 +583,10 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     unitName = zo_strformat("<<t:1>>", unitName)
 
     -- Override unitName here if we utilize a fakeName / bossName
-    if Alerts[abilityId].fakeName then
-        unitName = Alerts[abilityId].fakeName
+    if not Alerts[abilityId].summon and not Alerts[abilityId].destroy then
+        if Alerts[abilityId].fakeName then
+            unitName = Alerts[abilityId].fakeName
+        end
     end
     if Alerts[abilityId].bossName and DoesUnitExist('boss1') then
         unitName = zo_strformat("<<t:1>>", GetUnitName('boss1'))
@@ -614,7 +617,7 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
 
     -- Handle effects that override by ZoneId
     if Effects.MapDataOverride[abilityId] then
-        local index = GetCurrentMapZoneIndex()
+        local index = GetZoneId(GetCurrentMapZoneIndex())
         if Effects.MapDataOverride[abilityId][index] then
             if Effects.MapDataOverride[abilityId][index].name then
                 abilityName = Effects.MapDataOverride[abilityId][index].name
@@ -622,6 +625,24 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
             if Effects.MapDataOverride[abilityId][index].icon then
                 abilityIcon = Effects.MapDataOverride[abilityId][index].icon
             end
+        end
+    end
+
+    -- Override unitName here if we utilize a fakeName / bossName
+    if Alerts[abilityId].summon or Alerts[abilityId].destroy then
+        if Alerts[abilityId].fakeName then
+            unitName = Alerts[abilityId].fakeName
+        end
+        if Alerts[abilityId].bossName and DoesUnitExist('boss1') then
+            unitName = zo_strformat("<<t:1>>", GetUnitName('boss1'))
+        end
+    end
+
+    -- Override by zone specific here
+    if AlertsZone[abilityId] then
+        local index = GetZoneId(GetCurrentMapZoneIndex())
+        if AlertsZone[abilityId][index] then
+            unitName = AlertsZone[abilityId][index]
         end
     end
 
@@ -802,7 +823,7 @@ function AbilityAlerts.OnCombatIn(eventCode, resultType, isError, abilityName, a
 
     -- Handle effects that override by ZoneId
     if Effects.MapDataOverride[abilityId] then
-        local index = GetCurrentMapZoneIndex()
+        local index = GetZoneId(GetCurrentMapZoneIndex())
         if Effects.MapDataOverride[abilityId][index] then
             if Effects.MapDataOverride[abilityId][index].name then
                 abilityName = Effects.MapDataOverride[abilityId][index].name

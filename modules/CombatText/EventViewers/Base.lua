@@ -170,7 +170,7 @@ function CombatTextEventViewer:ControlLayout(control, abilityId, combatType, sou
         end
 
         if Effects.MapDataOverride[abilityId] then
-            local index = GetCurrentMapZoneIndex()
+            local index = GetZoneId(GetCurrentMapZoneIndex())
             if Effects.MapDataOverride[abilityId][index] then
                 if Effects.MapDataOverride[abilityId][index].icon then
                     iconPath = Effects.MapDataOverride[abilityId][index].icon

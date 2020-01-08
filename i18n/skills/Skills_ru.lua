@@ -51,7 +51,7 @@ local strings = {
     SI_LUIE_SKILL_BLOCK_TP =                             "Блокируется атака, получаемый урон снижен и действует иммунитет к оглушающим и отбрасывающим эффектам .",
     SI_LUIE_SKILL_RESURRECTION_IMMUNITY_TP =             "Reviving. Immune to damage and all negative effects.",
     SI_LUIE_SKILL_TAUNT_TP =                             "Спровоцирован.",
-    SI_LUIE_SKILL_DISGUISE_TP =                          "Маскировка. Вы можете быть обнаружены часовыми или выполняя подозрительную деятельность.\n\nПолучение урона снимет вашу маскировку.",
+    SI_LUIE_SKILL_DISGUISE_TP =                          "Disguised. You can be revealed by sentries or performing suspicious activity.\n\nTaking any damage other than fall damage will destroy your disguise.",
     SI_LUIE_SKILL_BATTLE_SPIRIT_TP =                     "• Здоровье увеличено на |cFFFFFF5000|r\n• Получаемый урон, исцеление и щиты от урона уменьшены на |cFFFFFF50|r%\n• Дальность действия способностей действующих на расстоянии |cFFFFFF28|r метров и более увеличена на |cFFFFFF8|r",
     SI_LUIE_SKILL_RECALL_PENALTY_TP =                    "Вы недавно пользовались перемещением к дорожному святилищу и должно заплатить дополнительное золото, чтобы воспользоваться им вновь.",
     SI_LUIE_SKILL_BATTLEGROUND_DESERTER_TP =             "You left a Battleground match early and cannot queue again or earn Alliance points from any PvP sources.",
@@ -234,6 +234,8 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_TP =           "Reduce Physical and Spell Resistance for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_TP =    "Reduce Physical and Spell Resistance.",
     SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_VALUE_TP = "Reduce Physical and Spell Resistance by |cFFFFFF<<2>>|r.",
+
+    SI_LUIE_SKILL_GENERIC_LOWER_MAX_HP_TP =              "Reduce Max Health by |cffffff<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     -- Resource Regeneration, Shields
     SI_LUIE_SKILL_GENERIC_HEALTH_RECOVERY_TP =           "Increase Health Recovery for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
@@ -1151,7 +1153,6 @@ local strings = {
     SI_LUIE_SKILL_SPIRITUAL_CLOAK_TP =                   "Prevent Soul Thirsters from pulling you into the spirit realm.",
     SI_LUIE_SKILL_BLESSING_GATHWEN_TP =                  "Reduce damage taken by |cFFFFFF3|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_MAIM_NPC_TP =                          "Reduce damage done by |cFFFFFF40|r% for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_DRAIN_ESSENCE_NPC_TP =                 "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nEvery time this effect deals damage it heals the caster.",
     SI_LUIE_SKILL_SUMMON_DARK_PROXY_TP =                 "A shadowy Clannfear fights at your side. The clannfear remains for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SUMMON_CLANNFEAR_TP =                  "A Clannfear fights at your side. The clannfear remains for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_POOL_OF_FIRE =                         "Pool of Fire",
@@ -1196,7 +1197,8 @@ local strings = {
     SI_LUIE_SKILL_POISON_SHOT_TP =                       "Afflicted with Poison Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds, stacking indefinitely.",
     SI_LUIE_SKILL_VENOMOUS_BURST_TP =                    "You and nearby allies take Poison Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SELENES_ROSE =                         "Selene's Roses",
-    SI_LUIE_SKILL_WEB_WRAP_TP =                          "Wrapped in webs and unable to take any actions for |cFFFFFF<<1>>|r seconds. Break free to remove.",
+    SI_LUIE_SKILL_WEB_WRAP_TP =                          "Wrapped in webs and unable to take any action for |cFFFFFF<<1>>|r seconds.\n\nAn ally near you can activate the |cFFFFFFFree Ally|r synergy to free you.",
+    SI_LUIE_SKILL_CONSTRICTING_WEBS_TP =                 "Wrapped in webs and unable to take any action for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_PRIMAL_MAUL =                          "Primal Maul",
     SI_LUIE_SKILL_ROOT_GUARD =                           "Root Guard",
     SI_LUIE_SKILL_EARTH_MENDER =                         "Earth Mender",
@@ -1282,7 +1284,7 @@ local strings = {
     SI_LUIE_SKILL_MOLTEN_PILLAR_INCALESCENCE =           "Molten Pillar Incalescence",
     SI_LUIE_SKILL_MOLTEN_PILLAR_TP =                     "Enemies within |cFFFFFF3|r meters of the pillar are hindered by sweltering heat, reducing their Movement Speed by |cFFFFFF60|r%.\n\nThe Ogre Shaman's Blazing Bolts will shackle any hindered targets, inflicting them with a |cFFFFFF4|r second immobilize.",
 
-    SI_LUIE_SKILL_DISGUISE_ALTMER_GLAMOUR_TP =           "Disguise yourself as an Altmer Noble.",
+    SI_LUIE_SKILL_DISGUISE_ALTMER_GLAMOUR_TP =           "Disguised as an Altmer Noble.",
     SI_LUIE_SKILL_WILDERKINGS_PROTECTION_TP =            "The blessing of the Wilderking makes you appear less threatening to the creatures in Greenheart, preventing some of them from attacking you.",
 
 }

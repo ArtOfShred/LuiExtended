@@ -1206,7 +1206,7 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
             end
 
         --Debug
-        --GameTooltip:SetAbilityId(84160)
+        --GameTooltip:SetAbilityId(36869)
 
         -- END TEMPORARY DEBUG FUNCTION HERE
         -- NORMAL BEHAVIOR:
@@ -1731,7 +1731,7 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
 
     -- Override name, icon, or hide based on MapZoneIndex
     if Effects.MapDataOverride[abilityId] then
-        local index = GetCurrentMapZoneIndex()
+        local index = GetZoneId(GetCurrentMapZoneIndex())
         if Effects.MapDataOverride[abilityId][index] then
             if Effects.MapDataOverride[abilityId][index].icon then
                 iconName = Effects.MapDataOverride[abilityId][index].icon
@@ -2029,7 +2029,7 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
 
         -- Override name, icon, or hide based on MapZoneIndex
         if Effects.MapDataOverride[abilityId] then
-            local index = GetCurrentMapZoneIndex()
+            local index = GetZoneId(GetCurrentMapZoneIndex())
             if Effects.MapDataOverride[abilityId][index] then
                 if Effects.MapDataOverride[abilityId][index].icon then
                     iconName = Effects.MapDataOverride[abilityId][index].icon
@@ -2241,7 +2241,7 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
         local target = zo_strformat("<<t:1>>",targetName)
 
         if Effects.MapDataOverride[abilityId] then
-            local index = GetCurrentMapZoneIndex()
+            local index = GetZoneId(GetCurrentMapZoneIndex())
             if Effects.MapDataOverride[abilityId][index] then
                 if Effects.MapDataOverride[abilityId][index].icon then
                     iconName = Effects.MapDataOverride[abilityId][index].icon
@@ -2799,7 +2799,7 @@ function SpellCastBuffs.AddNameAura()
             local abilityName = GetAbilityName(v.id)
             local abilityIcon = GetAbilityIcon(v.id)
             local zone = v.zone
-            if zone and GetCurrentMapZoneIndex() ~= zone then
+            if zone and GetZoneId(GetCurrentMapZoneIndex()) ~= zone then
                 return
             end
             SpellCastBuffs.EffectsList.reticleover1[ "Name Specific Buff" .. k ] = {
@@ -2816,7 +2816,7 @@ function SpellCastBuffs.AddNameAura()
             local abilityName = GetAbilityName(v.id)
             local abilityIcon = GetAbilityIcon(v.id)
             local zone = v.zone
-            if zone and GetCurrentMapZoneIndex() ~= zone then
+            if zone and GetZoneId(GetCurrentMapZoneIndex()) ~= zone then
                 return
             end
             SpellCastBuffs.EffectsList.reticleover2[ "Name Specific Buff" .. k ] = {

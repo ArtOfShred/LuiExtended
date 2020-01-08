@@ -355,6 +355,11 @@ CrowdControl.aoeNPCBoss = {
     -- Wayrest Sewers I
     [25591] = 1, -- Necrotic Essence (Investigator Garron)
 
+    -- Wayrest Sewers II
+    [36625] = 1, -- Scourging Spark (Malubeth the Scourger)
+    [36869] = 1, -- Scorching Flames (Uulgarg the Risen)
+    [36944] = 1, -- Necrotic Barrage (Garron the Returned)
+
 }
 
 CrowdControl.aoeNPCElite = {
@@ -483,7 +488,6 @@ CrowdControl.LavaAlerts = {
     [17314] = true, -- Fire Trap (Player)
 
     -- Quests
-    [14974] = true, -- CON_Knockback&Knockdown (Anchors from the Harbour)
     [31502] = true, -- MGQ2 Asakala Sahdina Barrier (Simply Misplaced)
     [31503] = true, -- MGQ2 Asakala Rashomta Barrier (Simply Misplaced)
     [21876] = true, -- Q4260 West Barrier Teleport (Breaking the Barrier)
@@ -521,124 +525,9 @@ CrowdControl.LavaAlerts = {
 
     -- Selene's Web
     [58521] = true, -- Web (Selene)
-}
 
--- List of CC that can't be removed with Break Free
-CrowdControl.UnbreakableList ={
-    -- Player
-    [115607] = true, -- Dismount Stun
-    [40349] = true, -- Feed (Player Vampire Bite stun)
-    [40520] = true, -- Q3047 - Knockdown (Player Werewolf Bite stun)
-
-    -- Traps
-    -- TODO: Do we have traps that apply unbreakable snares/etc show as UB color on ticks?
-    --[20260] = true, -- Rune Burst (Sigil of Frost)
-    --[33594] = true, -- Fire (Fire) -- Greenshade - Throne of the Wilderking
-
-    -- Quests
-    [14972] = true, -- CON_Knockback&Knockdown (Castle of the Worm)
-    [14974] = true, -- CON_Knockback&Knockdown (Anchors from the Harbour)
-    [25979] = true, -- FG4 RGT Event Knockback (Proving the Deed)
-    [31502] = true, -- MGQ2 Asakala Sahdina Barrier (Simply Misplaced)
-    [31503] = true, -- MGQ2 Asakala Rashomta Barrier (Simply Misplaced)
-    [32063] = true, -- Feedback (Tears of the Two Moons)
-    [21876] = true, -- Q4260 West Barrier Teleport (Breaking the Barrier)
-    [21878] = true, -- Q4260 East Barrier Teleport (Breaking the Barrier)
-    [22395] = true, -- Q4261 ROD Barrier Teleport (Sever All Ties)
-    [28771] = true, -- Q4220 Thirster Stun (The Mallari-Mora)
-    [21314] = true, -- Trap Sprung! (An Act of Kindness)
-    [23606] = true, -- Q4326 Crystal Backfire (Preventative Measure)
-    [37438] = true, -- Shocked (The Grips of Madness)
-    [43823] = true, -- IntroKB (The Orrery of Elden Root)
-    [36766] = true, -- Q4842 Stun Headgrab Knockback (The Unquiet Dead)
-    [33384] = true, -- Q4586 Aranias Vine Stun (The Witch of Silatar)
-
-    -----------------
-    -- ARENAS
-    -----------------
-
-    -- Dragonstar Arena
-    [54405] = true, -- Celestial Blast (Player)
-
-    -- Maelstrom Arena
-    [71720] = true, -- Stun (Matriarch Runa)
-
-    -----------------
-    -- DUNGEONS
-    -----------------
-
-    -- Banished Cells II
-    [33191] = true, -- Crushing Blow (High Kinlord Rilis)
-    [18847] = true, -- Soul Blast (High Kinlord Rilis)
-
-    -- Banished Cells II
-    [35680] = true, -- Immolating Bite (Maw of the Infernal)
-    [28772] = true, -- Stun (High Kinlord Rilis)
-    [28774] = true, -- Stun (High Kinlord Rilis)
-
-    -- Elden Hollow I
-    [46800] = true, -- Necrotic Circle (Canonreeve Oraneth)
-    [27890] = true, -- Darkness Below (Elden Hollow)
-
-    -- Elden Hollow II
-    [35372] = true, -- Emerge (Bogdan the Nightflame)
-    [30455] = true, -- Arachnophobia (The Opus of Torment)
-
-    -- City of Ash I
-    [25036] = true, -- Crushing Blow (Golor the Banekin Handler)
-    [34609] = true, -- Measured Uppercut (Warden of the Shrine)
-    [49138] = true, -- Oblivion Portal
-
-    -- City of Ash II
-    [54768] = true, -- Backdraft (Ash Titan - Theater)
-    [54224] = true, -- Monstrous Cleave (Ash Titan)
-    [54873] = true, -- Heavy Slash (Ash Titan)
-    [55575] = true, -- Meteor Strike (Valkyn Skoria)
-    [55391] = true, -- Meteor Strike (Valkyn Skoria)
-    [56563] = true, -- Book (Frigid Tome)
-    [70113] = true, -- Soul Scream (Scroll of Glorious Battle)
-
-    -- Tempest Island
-    [26676] = true, -- IntroKB (Valaran Stormcaller)
-    [26372] = true, -- Crushing Blow (Valaran Stormcaller)
-    [28391] = true, -- Q4538 Stoen Explosion (Conduit Stone)
-    [26716] = true, -- Skyward Slam (Stormfist)
-    [26851] = true, -- Summon Storm Atronach (Stormfist)
-    [26836] = true, -- Summon Storm Atronach (Stormfist)
-    [46809] = true, -- Gust of Wind (Stormreeve Neider)
-
-    -- Selene's Web
-    [31247] = true, -- Ensnare (Treethane Kerninn)
-    [58521] = true, -- Web (Selene)
-    [30969] = true, -- Summon Primal Spirit (Selene)
-    [30905] = true, -- IntroKB (Selene)
-
-    -- Spindleclutch I
-    [22087] = true, -- Inject Poison (Swarm Mother)
-    [18116] = true, -- Arachnophobia (The Whisperer)
-    [46219] = true, -- Web Blast (The Whisperer)
-    [22033] = true, -- Daedric Explosion (The Whisperer)
-
-    -- Spindleclutch II
-    [47140] = true, -- Knockdown (Bloodspawn)
-    [61442] = true, -- Harrowing Ring (Praxin Douare)
-    [43176] = true, -- Shocked (Praxin Douare)
-    [61444] = true, -- Shocked (Praxin Douare)
-    [32100] = true, -- Arachnophobia (Vorenor Winterbourne)
-
-    -- Wayrest Sewers I
-    [48932] = true, -- Backlash (Investigator Garron)
-    [25531] = true, -- Tidal Slash (Varaine Pellingare)
-    [35051] = true, -- Penetrating Daggers (Allene Pellingare)
-
-    -- Frostvault
-    [116666] = true, -- Skeletal Smash (Icestalker) -- Frostvault
-    [109835] = true, -- Frenzied Pummeling (Icestalker) -- Frostvault
-
-    -- TODO: Resort/check later
-    [88467] = true, -- Skyfall (Vvardenfell -- Divine Disaster)
-    [89756] = true, -- Guardian Shockwave (Vvardenfell -- The Magister Makes a Move)
-    [92671] = true, -- Pyroclast (Vvardenfell -- The Forgotten Wastes)
+    -- Wayrest Sewers II
+    [49052] = true, -- Pellingare Prison (Allene Pellingare)
 }
 
 CrowdControl.IgnoreList ={
@@ -691,10 +580,17 @@ CrowdControl.IgnoreList ={
 
 -- Not implemented - list of abilities that ACTION_RESULT_GAINED_DURATION fires in the opposite order of normal
 CrowdControl.ReversedLogic = {
+    -- Quests
+    [21876] = true, -- Q4260 West Barrier Teleport
+    [21878] = true, -- Q4260 East Barrier Teleport
     [39260] = true, -- Q4917 Push Player Back (Grahtwood - The Blacksap's Hold)
+
+    -- World Bosses
+    [83124] = true, -- Ferocious Bellow (Greenshade - World Boss - Thodundor's View)
 
     -- Dungeons
     [26716] = true, -- Skyward Slam (Stormfist) -- Tempest Island
+    [34848] = true, -- Primal Sweep -- Wayrest Sewers
 }
 
 -- Use on ACTION_RESULT_EFFECT_GAINED

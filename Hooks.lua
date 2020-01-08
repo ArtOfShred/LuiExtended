@@ -98,7 +98,7 @@ function LUIE.InitializeHooks()
             end
 
             if LUIE.Data.Effects.MapDataOverride[abilityId] then
-                local index = GetCurrentMapZoneIndex()
+                local index = GetZoneId(GetCurrentMapZoneIndex())
                 if LUIE.Data.Effects.MapDataOverride[abilityId][index] then
                     if LUIE.Data.Effects.MapDataOverride[abilityId][index].icon then
                         attackIcon = LUIE.Data.Effects.MapDataOverride[abilityId][index].icon

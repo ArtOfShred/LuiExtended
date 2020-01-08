@@ -145,6 +145,8 @@ LUIE.Data.Tooltips = {
     Generic_Reduce_Physical_Spell_Resist_No_Dur     = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_TP),
     Generic_Reduce_Physical_Spell_Resist_No_Dur_Value = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_VALUE_TP),
 
+    Generic_Lower_Max_HP                            = GetString(SI_LUIE_SKILL_GENERIC_LOWER_MAX_HP_TP),
+
     Generic_Test                                    = GetString(SI_LUIE_SKILL_TEST_TP),
 
     Generic_Bleed                                   = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_TP), "SUBSTRING", BleedDamage),
@@ -1182,6 +1184,7 @@ LUIE.Data.Tooltips = {
     Skill_Trapping_Bolt                             = GetString(SI_LUIE_SKILL_TRAPPING_BOLT_WORLD_TP),
     Skill_Poison_Spit                               = GetString(SI_LUIE_SKILL_POISON_SPIT_TP),
     Skill_Graven_Slash                              = GetString(SI_LUIE_SKILL_GRAVEN_SLASH_TP),
+    Skill_Constricting_Webs                         = GetString(SI_LUIE_SKILL_CONSTRICTING_WEBS_TP),
 
     ----------------------------------------------------------------
     -- QUESTS ------------------------------------------------------
@@ -1284,7 +1287,6 @@ LUIE.Data.Tooltips = {
     ----------------------------------------------------------------
 
     -- Banished Cells I
-    Skill_Drain_Essence_NPC                         = GetString(SI_LUIE_SKILL_DRAIN_ESSENCE_NPC_TP),
     Skill_Summon_Dark_Proxy                         = GetString(SI_LUIE_SKILL_SUMMON_DARK_PROXY_TP),
     Skill_Summon_Clannfear                          = GetString(SI_LUIE_SKILL_SUMMON_CLANNFEAR_TP),
 
@@ -1332,6 +1334,10 @@ LUIE.Data.Tooltips = {
 
     -- Wayrest Sewers I
     Skill_Growing_Torment                           = GetString(SI_LUIE_SKILL_GROWING_TORMENT_TP),
+
+    -- Wayrest Sewers II
+    Skill_Rend_Soul                                 = GetString(SI_LUIE_SKILL_REND_SOUL_TP),
+    Skill_Scorching_Flames                          = GetString(SI_LUIE_SKILL_SCORCHING_FLAMES_TP),
 
     -- Frostvault
     Skill_Maim                                      = GetString(SI_LUIE_SKILL_MAIM_NPC_TP),

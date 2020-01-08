@@ -164,3 +164,8 @@ Quests.QuestItemModifyOnRemove = {
 Quests.QuestAdvancedOverride = {
     ['Tell Chief Dushkul that Gargak is dead'] = 'Tell Chief Dushkul that Gargak is Dead',
 }
+
+Quests.QuestObjectiveCompleteOverride = {
+    ['Completed: Run to Next Checkpoint'] = 'Completed: Reach the Next Marker',
+    ['Completed: Reach Next Marker'] = 'Completed: Reach the Next Marker',
+}

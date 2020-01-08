@@ -295,7 +295,7 @@ local function ResolveAbilityName(abilityId, sourceName)
     end
 
     if Effects.MapDataOverride[abilityId] then
-        local index = GetCurrentMapZoneIndex()
+        local index = GetZoneId(GetCurrentMapZoneIndex())
         if Effects.MapDataOverride[abilityId][index] then
             abilityName = Effects.MapDataOverride[abilityId][index].name
         end
@@ -317,7 +317,7 @@ local function ResolveAbilityIcon(abilityId, sourceName)
     end
 
     if Effects.MapDataOverride[abilityId] then
-        local index = GetCurrentMapZoneIndex()
+        local index = GetZoneId(GetCurrentMapZoneIndex())
         if Effects.MapDataOverride[abilityId][index] then
             abilityIcon = Effects.MapDataOverride[abilityId][index].icon
         end
@@ -753,7 +753,7 @@ function CrowdControlTracker:OnDraw(abilityId, abilityIcon, ccDuration, result, 
     else
         ccText = self.controlText[result]
     end
-    if CrowdControl.UnbreakableList[abilityId] then
+    if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].unbreakable then
         self:SetupInfo(ccText, CombatInfo.SV.cct.colors.unbreakable, abilityIcon, wasDefault)
     else
         self:SetupInfo(ccText, CombatInfo.SV.cct.colors[result], abilityIcon, wasDefault)

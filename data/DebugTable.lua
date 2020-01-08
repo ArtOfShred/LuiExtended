@@ -8166,7 +8166,7 @@ LUIE.DebugAuras = {
     --[88617] = true, -- Summon the Dead -- Necromancer
     [88594] = true, -- Summon the Dead -- Necromancer
     [88595] = true, -- Summon the Dead -- Necromancer
-    --[88596] = true, -- Summon the Dead -- Necromancer
+    [88596] = true, -- Summon the Dead -- Necromancer
     [88612] = true, -- Summon the Dead -- Necromancer
     [88597] = true, -- Summon the Dead -- Necromancer
     [88598] = true, -- Summon the Dead -- Necromancer
@@ -10320,6 +10320,9 @@ LUIE.DebugAuras = {
     [83923] = true, -- Curse of Terror (Magdelena)
     [83880] = true, -- Reflective Shadows (Magdelena)
     [83227] = true, -- Dark Resurrection (Magdelena)
+    [83884] = true, -- Steal Essence (Magdelena)
+    [83886] = true, -- Shadow Flare (Magdelena)
+    [83883] = true, -- Shadow Flare (Magdelena)
 
     -------------------------------------
     -- MAIN QUEST -----------------------
@@ -11124,7 +11127,7 @@ LUIE.DebugAuras = {
     [25353] = true, -- Hidden Buff 7sec
 
     -- Real Marines
-    [44289] = true, -- Generic UFX Crouch Fiddle
+    --[44289] = true, -- Generic UFX Crouch Fiddle
     [22378] = true, -- Equiping...
 
     -- Teldur's End
@@ -14588,6 +14591,7 @@ LUIE.DebugAuras = {
     [18039] = true, -- Grappling Web (The Whisperer Nightmare)
     [21477] = true, -- Can Cast Daedric Explosion (The Whisperer Nightmare)
 
+    [27955] = true, -- Dummy (Praxin Douare)
     [28002] = true, -- Dummy (Praxin Douare)
 
     [27750] = true, -- Distorted Bolt (Praxin Douare)
@@ -14773,6 +14777,119 @@ LUIE.DebugAuras = {
     [35044] = true, -- Mind-Bending Mist (Allene Pellingare)
     [35075] = true, -- Ghost Burst (Allene Pellingare)
     [35107] = true, -- Ghost Burst (Allene Pellingare)
+
+    -- Wayrest Sewers II
+    [85915] = true, -- Teleport
+    [61183] = true, -- Throw Dagger Nerf Damage (Skeletal Warrior)
+    [42893] = true, -- Q4813 Yahyif Open Sickies Door (Yahyif)
+    [43933] = true, -- Phased (Malubeth the Scourger)
+    [47257] = true, -- Rend Soul (Altar Dummy)
+
+    [36412] = true, -- Ethereal Bolt (Malubeth the Scourger)
+    [36613] = true, -- Scourging Spark (Malubeth the Scourger)
+    [36614] = true, -- Scourging Spark (Malubeth the Scourger)
+    [36615] = true, -- Scourging Spark (Malubeth the Scourger)
+    [36617] = true, -- Scourging Spark (Malubeth the Scourger)
+    [36621] = true, -- Scourging Spark (Malubeth the Scourger)
+    [36625] = true, -- Scourging Spark (Malubeth the Scourger)
+    [36430] = true, -- Rend Soul (Malubeth the Scourger)
+    [36433] = true, -- Rend Soul (Malubeth the Scourger)
+    [36431] = true, -- Rend Soul (Malubeth the Scourger)
+    [36577] = true, -- Rend Soul (Malubeth the Scourger)
+    [47267] = true, -- Rend Soul2 (Malubeth the Scourger)
+    [36533] = true, -- Rend Soul (Malubeth the Scourger)
+
+    [35573] = true, -- DUN_WSH Zombie Leader (Zombie Harbringer)
+
+    [36951] = true, -- Voice to Wake the Dead (Skull Reaper)
+    [36952] = true, -- Voice to Wake the Dead (Risen Dead)
+    [36953] = true, -- Voice to Wake the Dead (Risen Dead)
+    [36954] = true, -- Voice to Wake the Dead (Risen Dead)
+    [36956] = true, -- Channel Energy (Risen Dead)
+    [36991] = true, -- Channel Energy (Risen Dead)
+    [48769] = true, -- Channel Energy (Risen Dead)
+    [36966] = true, -- Channel Energy (Risen Dead)
+    [48768] = true, -- Channel Energy (Risen Dead)
+    [48773] = true, -- Necromantic Burst (Risen Dead)
+    [48772] = true, -- Necromantic Burst (Risen Dead)
+
+    [36868] = true, -- Scorching Flames (Uulgarg the Risen)
+    [36870] = true, -- Scorching Flames (Uulgarg the Risen)
+    [36875] = true, -- Scorching Flames (Uulgarg the Risen)
+    [50782] = true, -- Scorching Flames (Uulgarg the Risen)
+    [36871] = true, -- Scorching Flames (Uulgarg the Risen)
+    [36869] = true, -- Scorching Flames (Uulgarg the Risen)
+
+    [36792] = true, -- Yahyif runs to Doom (Yahyif)
+    [36791] = true, -- Frontflip (Yahyif)
+    [37253] = true, -- Necrotic Bolt (Garron the Returned)
+    [36709] = true, -- Necrotic Bolt (Garron the Returned)
+    [36904] = true, -- Necrotic Barrage (Garron the Returned)
+    [48716] = true, -- No Com (Garron the Returned)
+    [36907] = true, -- Necrotic Barrage (Garron the Returned)
+    [36909] = true, -- Necrotic Barrage (Garron the Returned)
+    [36942] = true, -- Necrotic Barrage (Garron the Returned)
+    [36944] = true, -- Necrotic Barrage (Garron the Returned)
+    [36761] = true, -- Summon Minion (Garron the Returned)
+    [36773] = true, -- Summon Minion (Garron the Returned)
+    [48733] = true, -- Summon Minion (Garron the Returned)
+    [48734] = true, -- Summon Minion (Garron the Returned)
+    [48735] = true, -- Summon Minion (Garron the Returned)
+    [36776] = true, -- Necrotic Spike (Garron the Returned)
+    [36779] = true, -- Necrotic Burst (Garron the Returned)
+    [36782] = true, -- Transform (Garron the Returned)
+    [36780] = true, -- Summon Minion (Garron the Returned)
+
+    [36838] = true, -- Deceptive Teleport (Garron the Returned)
+    [36863] = true, -- Deceptive Teleport (Garron the Returned)
+    [36867] = true, -- Deceptive Teleport (Garron the Returned)
+    [36873] = true, -- Consume Life (Garron the Returned)
+    [36877] = true, -- Consume Life (Garron the Returned)
+    [36878] = true, -- Consume Life (Garron the Returned)
+
+    [36895] = true, -- Haunting Spectre (The Forgotten One)
+    [36905] = true, -- Haunting Spectre (The Forgotten One)
+    [36906] = true, -- Haunting Spectre (The Forgotten One)
+    [36897] = true, -- Haunting Spectre (The Forgotten One)
+    [36900] = true, -- Haunting Spectre (The Forgotten One)
+
+    [42901] = true, -- Varaine (Varaine Pellingare)
+    [42902] = true, -- Allene (Allene Pellingare)
+    [47007] = true, -- Nocom (Allene & Varaine Pellingare)
+
+    [36413] = true, -- Quick Strike (Varaine Pellingare)
+    [49159] = true, -- Cone of Rot (Varaine Pellingare)
+    [49161] = true, -- Cone of Rot (Varaine Pellingare)
+    [49160] = true, -- Cone of Rot (Varaine Pellingare)
+    [36534] = true, -- Spinning Cleave (Varaine Pellingare)
+    [36535] = true, -- Spinning Cleave (Varaine Pellingare)
+    [36396] = true, -- Bludgeon (Varaine Pellingare)
+    [36397] = true, -- Bludgeon (Varaine Pellingare)
+    [36398] = true, -- Bludgeon (Varaine Pellingare)
+
+    [36536] = true, -- Shield Sibling (Allene & Varaine Pellingare)
+    [36537] = true, -- Shield Sibling (Allene & Varaine Pellingare)
+
+    [49060] = true, -- PrisonCast (Allene Pellingare)
+    [49074] = true, -- PrisonCast (Allene Pellingare)
+    [49051] = true, -- Pellingare Prison (Allene Pellingare)
+    [49052] = true, -- Pellingare Prison (Allene Pellingare)
+    [49053] = true, -- Toxic Fumes (Allene Pellingare)
+    [49058] = true, -- Dummy (Allene Pellingare)
+    [49059] = true, -- Dummycheck (Allene Pellingare)
+    [49054] = true, -- Untargetdummy (Allene Pellingare)
+    [49107] = true, -- Dummy (Allene Pellingare)
+    [72443] = true, -- RemoveInvis (Allene Pellingare)
+    [49055] = true, -- Dummy (Allene Pellingare)
+    [49127] = true, -- MOD CD (Allene Pellingare)
+    [36378] = true, -- Quick Draw (Allene Pellingare)
+    [35838] = true, -- Necrotic Arrow (Allenge Pellingare)
+    [35839] = true, -- Necrotic Arrow (Allenge Pellingare)
+    [43511] = true, -- Remove Buffs (Player)
+    [36876] = true, -- DUN_WSH Kill Pel (Gedric Serre - Theater)
+
+
+
 
     -- Frostvault
     [115316] = true, -- Weatherman

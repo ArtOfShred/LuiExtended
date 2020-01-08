@@ -7195,8 +7195,8 @@ function ChatAnnouncements.HookFunction()
     -- For failure and updates (gonna need to punch a bunch of stuff in here to divide it up)
     local function ConditionCounterHook(journalIndex, questName, conditionText, conditionType, currConditionVal, newConditionVal, conditionMax, isFailCondition, stepOverrideText, isPushed, isComplete, isConditionComplete, isStepHidden)
         if isStepHidden or (isPushed and isComplete) or (currConditionVal >= newConditionVal) then
-        return true
-    end
+            return true
+        end
 
         local type -- This variable represents whether this message is an objective update or failure state message (1 = update, 2 = failure) There are too many conditionals to resolve what we need to print inside them so we do it after setting the formatting.
         local alertMessage -- Variable for alert message
@@ -7252,10 +7252,23 @@ function ChatAnnouncements.HookFunction()
             end
         end
 
+        -- Override text if its listed in the override table.
+        if Quests.QuestObjectiveCompleteOverride[formattedMessage] then
+            messageParams:SetText(Quests.QuestObjectiveCompleteOverride[formattedMessage])
+            alertMessage = Quests.QuestObjectiveCompleteOverride[formattedMessage]
+            formattedMessage = Quests.QuestObjectiveCompleteOverride[formattedMessage]
+        end
+
         messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_CONDITION_COUNTER_CHANGED)
 
         if type == 1 then
             if ChatAnnouncements.SV.Quests.QuestObjCompleteCA then
+                -- This event double fires on quest completion, if an equivalent message is already detected in queue, then abort!
+                for i = 1, #g_queuedMessages do
+                    if g_queuedMessages[i].message == formattedMessage then
+                        return true
+                    end
+                end
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedMessage, type = "QUEST" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
@@ -7273,6 +7286,12 @@ function ChatAnnouncements.HookFunction()
 
         if type == 2 then
             if ChatAnnouncements.SV.Quests.QuestFailCA then
+                -- This event double fires on quest completion, if an equivalent message is already detected in queue, then abort!
+                for i = 1, #g_queuedMessages do
+                    if g_queuedMessages[i].message == formattedMessage then
+                        return true
+                    end
+                end
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedMessage, type = "QUEST" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
