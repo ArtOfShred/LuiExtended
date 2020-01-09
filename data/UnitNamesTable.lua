@@ -61,12 +61,16 @@ LUIE.Data.UnitNames = {
     NPC_Bandit_Savage                     = 'Bandit Savage',
     NPC_Sea_Viper_Tempest                 = 'Sea Viper Tempest',
     NPC_Sea_Viper_Charger                 = 'Sea Viper Charger',
+    NPC_Sea_Viper_Deadeye                 = 'Sea Viper Deadeye',
     NPC_Corrupt_Spriggan                  = 'Corrupt Spriggan',
     NPC_Corrupt_Lurcher                   = 'Corrupt Lurcher',
 
     NPC_Veiled_Infernal                   = 'Veiled Infernal',
     NPC_Veiled_Bonelord                   = 'Veiled Bonelord',
     NPC_Veiled_Necromancer                = 'Veiled Necromancer',
+    NPC_Bone_Colossus                     = 'Bone Colossus',
+
+    NPC_Ancestral_Tempest                 = 'Ancestral Tempest',
 
     ----------------------------------------------------------------
     -- QUESTS ------------------------------------------------------
@@ -84,6 +88,11 @@ LUIE.Data.UnitNames = {
     Boss_Haskill = 'Haskill',
 
     -- Aldmeri Dominion
+
+    -- AQ Overland
+    Elite_Arstul = 'Arstul',
+
+    -- AD Quests
     Boss_Norion = 'Norion',
     Elite_Canonreeve_Malanie = 'Canonreeve Malanie',
     Elite_Mezelukhebruz = 'Mezelukhebruz',

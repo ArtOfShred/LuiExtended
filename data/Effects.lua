@@ -2248,13 +2248,13 @@ Effects.EffectOverrideByName = {
         [Unitnames.NPC_Spectral_Lamia] =          { icon = 'LuiExtended/media/icons/abilities/ability_lamia_strike_spectral.dds' }, -- Strike (Lamia)
     },
 
-    [89119] = {
+    [89119] = { -- Base = Bear
         [Unitnames.NPC_Dire_Wolf] =               { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_wolf.dds' }, -- Summon Beast (Spriggan)
         [Unitnames.NPC_Websnare_Spider] =         { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_spider.dds' }, -- Summon Beast (Spriggan)
         [Unitnames.NPC_Spider] =                  { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_spider.dds' }, -- Summon Beast (Spriggan)
         [Unitnames.NPC_Venomspit_Spider] =        { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_spider.dds' }, -- Summon Beast (Spriggan)
     },
-    [89102] = {
+    [89102] = { -- Base = Senche-Tiger
         [Unitnames.NPC_Thunderbug] =              { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_thunderbug.dds' }, -- Summon Beast (Spriggan)
         [Unitnames.NPC_Thunderbug_Lord] =         { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_thunderbug.dds' }, -- Summon Beast (Spriggan)
         [Unitnames.NPC_Hoarvor] =                 { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_hoarvor.dds' }, -- Summon Beast (Spriggan)
@@ -9453,9 +9453,8 @@ Effects.EffectOverride = {
     [34824] = { icon = 'esoui/art/icons/achievement_u23_dun1_killmonstersa.dds' }, -- Ancient Wrath (Player)
 
     -- Striking at the Heart
-    --[34597] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_shadow_wood.dds', name = Abilities.Skill_Shadow_Wood, tooltip = Tooltips.Skill_Shadow_Wood }, -- Q4690 Forest Spirit Layer
-    [48491] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_shadow_wood.dds', name = Abilities.Skill_Shadow_Wood }, -- Q4960 Naemon Shield Shade
-    [48490] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_shadow_wood.dds', name = Abilities.Skill_Shadow_Wood, tooltip = Tooltips.Skill_Shadow_Wood, unbreakable = 1 }, -- Q4960 Boss Shade World
+    [48491] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_call_corrupt_lurchers.dds', name = Abilities.Skill_Call_Corrupt_Lurchers }, -- Q4960 Naemon Shield Shade (Shade of Naemon)
+    [48498] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_undead_legion.dds', name = Abilities.Skill_Undead_Legion }, -- Q4960 Necor Skele Rise ((Shade of Naemon)
 
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------
@@ -11749,7 +11748,6 @@ Effects.FakeExternalDebuffs = {
     [43823] = { duration = 2150 }, -- IntroKB (Prince Naemon)
     [36766] = { duration = 5000 }, -- Q4842 Stun Headgrab Knockback (The Unquiet Dead)
     [33384] = { duration = 4000 }, -- Q4586 Aranias Vine Stun
-    [48490] = { duration = 0 }, -- Q4960 Boss Shade World
 
     ----------------------------------------------------------------
     -- ORSINIUM EVENTS ---------------------------------------------
@@ -12552,21 +12550,25 @@ Effects.MapDataOverride = {
     },
 
     [21582] = { -- Nature's Swarm (Spriggan)
+        [Zonenames.Zone_Hectahame] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds' }, -- Hectahame
         [Zonenames.Zone_Hectahame_Armory] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds' }, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds' }, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds' }, -- Hectahame Ritual Chamber
     },
     [31699] = { -- Nature's Swarm (Spriggan)
+        [Zonenames.Zone_Hectahame] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds' }, -- Hectahame
         [Zonenames.Zone_Hectahame_Armory] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds' }, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds' }, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds' }, -- Hectahame Ritual Chamber
     },
     [13475] = { -- Healing Salve (Spriggan)
+        [Zonenames.Zone_Hectahame] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_healing_salve_red.dds' }, -- Hectahame
         [Zonenames.Zone_Hectahame_Armory] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_healing_salve_red.dds' }, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_healing_salve_red.dds' }, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_healing_salve_red.dds' }, -- Hectahame Ritual Chamber
     },
     [13477] = { -- Control Beast (Spriggan)
+        [Zonenames.Zone_Hectahame] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_control_beast_red.dds' }, -- Hectahame
         [Zonenames.Zone_Hectahame_Armory] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_control_beast_red.dds' }, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_control_beast_red.dds' }, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_control_beast_red.dds' }, -- Hectahame Ritual Chamber
@@ -12574,44 +12576,57 @@ Effects.MapDataOverride = {
 
     [3757] = { -- Claw (Lurcher)
         [931] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw_red.dds' }, -- Elden Hollow II
+        [Zonenames.Zone_Hectahame] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw_red.dds' }, -- Hectahame
+        [Zonenames.Zone_Hectahame] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw_red.dds' }, -- Hectahame
         [Zonenames.Zone_Hectahame_Armory] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw_red.dds' }, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw_red.dds' }, -- Hectahame Arboretum
-        [Zonenames.Zone_Hectahame_Ritual_Chamber] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw_red.dds' }, -- Hectahame Ritual Chamber
+        [Zonenames.Zone_Hectahame_Ritual_Chamber] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw_red.dds' }, -- Valenheart
+        [559] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw_red.dds' }, -- Hectahame Ritual Chamber
         [108] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw_green.dds' }, -- Greenshade
     },
     [3860] = { -- Pulverize (Lurcher)
         [931] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_pulverize_red.dds' }, -- Elden Hollow II
+        [Zonenames.Zone_Hectahame] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_pulverize_red.dds' }, -- Hectahame
         [Zonenames.Zone_Hectahame_Armory] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_pulverize_red.dds' }, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_pulverize_red.dds' }, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_pulverize_red.dds' }, -- Hectahame Ritual Chamber
+        [559] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_pulverize_red.dds' }, -- Valenheart
         [108] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_pulverize_green.dds' }, -- Greenshade
     },
     [3855] = { -- Crushing Limbs (Lurcher)
         [931] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Elden Hollow II
+        [Zonenames.Zone_Hectahame] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Hectahame
         [Zonenames.Zone_Hectahame_Armory] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Hectahame Ritual Chamber
+        [559] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Valenheart
         [108] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_green.dds' }, -- Greenshade
     },
     [38554] = { -- Crushing Limbs (Lurcher)
         [931] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Elden Hollow II
+        [Zonenames.Zone_Hectahame] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Hectahame
         [Zonenames.Zone_Hectahame_Armory] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Hectahame Ritual Chamber
+        [559] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Valenheart
         [108] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_green.dds' }, -- Greenshade
     },
     [3767] = { -- Choking Pollen (Lurcher)
         [931] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Elden Hollow II
+        [Zonenames.Zone_Hectahame] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Hectahame
         [Zonenames.Zone_Hectahame_Armory] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Hectahame Ritual Chamber
+        [559] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Valenheart
         [108] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_green.dds' }, -- Greenshade
     },
     [4769] = { -- Choking Pollen (Lurcher)
         [931] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Elden Hollow II
+        [Zonenames.Zone_Hectahame] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Hectahame
         [Zonenames.Zone_Hectahame_Armory] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Hectahame Ritual Chamber
+        [559] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Valenheart
         [108] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_green.dds' }, -- Greenshade
     },
 

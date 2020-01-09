@@ -1298,6 +1298,7 @@ local strings = {
     SI_LUIE_SKILL_REND_SOUL_TP =                         "Levitated and afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nYour allies must disable the Daedric Altars in the room or you will suffer Oblivion damage equal to |cFFFFFF100|r% of your Max Health at the end of this duration.",
     SI_LUIE_SKILL_SCORCHING_FLAMES_TP =                  "Feared and ignited for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nEvery |cFFFFFF1|r second, a |cFFFFFF4|r meter pool of flame drops at your feet for |cFFFFFF30|r seconds.",
     SI_LUIE_SKILL_ESCAPED_SOULS =                        "Escaped Souls",
+    SI_LUIE_SKILL_CALL_CORRUPT_LURCHERS =                "Call Corrupt Lurchers",
 
 }
 

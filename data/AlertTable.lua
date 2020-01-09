@@ -96,7 +96,7 @@ LUIE.Data.AlertTable = {
     [28408] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1533, bossMatch = { Unitnames.Boss_Smiles_With_Knife } }, -- Whirlwind (Skirmisher)
 
     [37108] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000, cc = SNARE, eventdetect = true }, -- Arrow Spray (Archer)
-    [28628] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 6800, eventdetect = true }, -- Volley (Archer)
+    [28628] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 6800, eventdetect = true, refire = 2000 }, -- Volley (Archer)
     [74978] = { block = true, dodge = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 9000, cc = STUN }, -- Taking Aim (Archer)
 
     [14096] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1250 }, -- Heavy Attack (Footsoldier)
@@ -460,8 +460,8 @@ LUIE.Data.AlertTable = {
     [18514] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = SNARE }, -- Chill Touch (Ghost)
     [19137] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, cc = FEAR }, -- Haunting Spectre (Ghost)
 
-    [22521] = { avoid = true, priority = 2, auradetect = true, cc = SNARE, bossMatch = { Unitnames.Boss_Valanir_the_Restless } }, -- Defiled Ground (Lich)
-    [73925] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true, cc = STUN, duration = 7450, refire = 2000, bossMatch = { Unitnames.Boss_Valanir_the_Restless } }, -- Soul Cage (Lich)
+    [22521] = { avoid = true, priority = 2, auradetect = true, cc = SNARE, neverShowInterrupt = true, bossMatch = { Unitnames.Boss_Valanir_the_Restless } }, -- Defiled Ground (Lich)
+    [73925] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true, cc = STUN, duration = 7450, refire = 2000, neverShowInterrupt = true, bossMatch = { Unitnames.Boss_Valanir_the_Restless } }, -- Soul Cage (Lich)
 
     [50182] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STUN, eventdetect = true }, -- Consuming Energy (Spellfiend)
 
@@ -756,7 +756,8 @@ LUIE.Data.AlertTable = {
     [43827] = { avoid = true, priority = 2, auradetect = true, duration = 2916, eventdetect = true }, -- Projectile Vomit (Prince Naemon)
 
     -- Striking at the Heart
-    [48491] = { power = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = Unitnames.Boss_Shade_of_Naemon }, -- Q4960 Naemon Shield Shade
+    [48491] = { summon = true, priority = 2, eventdetect = true, reuslt = ACTION_RESULT_BEGIN, fakeName = Unitnames.Boss_Prince_Naemon, refire = 120000 }, -- Q4960 Naemon Shield Shade (Shade of Naemon)
+    [48498] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = Unitnames.Boss_Prince_Naemon, refire = 120000 }, -- Q4960 Necor Skele Rise (Shade of Naemon)
 
     --------------------------------------------------
     -- VVARDENFELL -----------------------------------
@@ -1246,17 +1247,19 @@ LUIE.Data.AlertZoneOverride = {
     },
 
     [29471] = { -- Thunder Thrall (Storm Mage)
-        --[810] = Unitnames.Elite_Canonreeve_Malanie, -- Smuggler's Tunnel -- TODO: Not sure if other storm mages are in this area
+        [Zonenames.Zone_Tanzelwil] = Unitnames.NPC_Ancestral_Tempest, -- Tanzelwil
+        [416] = Unitnames.NPC_Ancestral_Tempest, -- Inner Tanzelwil
+        [810] = Unitnames.Elite_Canonreeve_Malanie, -- Smuggler's Tunnel (Auridon)
         [389] = Unitnames.NPC_Spectral_Storm_Mage, -- Reliquary Ruins
         [555] = Unitnames.NPC_Sea_Viper_Tempest, -- Abecean Sea
     },
     [29510] = { -- Thunder Hammer (Thundermaul)
-        [211] = Unitnames.Boss_Norion, -- Tanzelwil
+        [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.Elite_Arstul, -- Maormer Invasion Camp
         [435] = Unitnames.NPC_Sainted_Charger, -- Cathedral of the Golden Path
         [555] = Unitnames.NPC_Sea_Viper_Charger, -- Abecean Sea
     },
     [17867] = { -- Shock Aura (Thundermaul)
-        [211] = Unitnames.Boss_Norion, -- Tanzelwil
+        [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.Elite_Arstul, -- Maormer Invasion Camp
         [435] = Unitnames.NPC_Sainted_Charger, -- Cathedral of the Golden Path
         [555] = Unitnames.NPC_Sea_Viper_Charger, -- Abecean Sea
     },
@@ -1264,18 +1267,34 @@ LUIE.Data.AlertZoneOverride = {
         [176] = Unitnames.NPC_Dremora_Hauzkyn, -- City of Ash
     },
     [28408] = { -- Whirlwind (Skirmisher)
+        [Zonenames.Zone_Mathiisen] = Unitnames.NPC_Heritance_Cutthroat, -- Mathiisen (Auridon)
         [390] = Unitnames.NPC_Heritance_Cutthroat, -- The Veiled Keep
         [548] = Unitnames.NPC_Bandit_Rogue, -- Silatar
     },
     [37108] = { -- Arrow Spray (Archer)
+        [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- Maormer Invasion Camp (Auridon)
+        [Zonenames.Zone_South_Beacon] = Unitnames.NPC_Sea_Viper_Deadeye, -- South Beacon (Auridon)
+        [Zonenames.Zone_Mathiisen] = Unitnames.NPC_Heritance_Deadeye, -- Mathiisen (Auridon)
+        [810] = Unitnames.NPC_Heritance_Deadeye, -- Smuggler's Tunnel (Auridon)
+
         [390] = Unitnames.NPC_Heritance_Deadeye, -- The Veiled Keep
         [435] = Unitnames.NPC_Sainted_Archer, -- Cathedral of the Golden Path
     },
     [28628] = { -- Volley (Archer)
+        [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- Maormer Invasion Camp (Auridon)
+        [Zonenames.Zone_South_Beacon] = Unitnames.NPC_Sea_Viper_Deadeye, -- South Beacon (Auridon)
+        [Zonenames.Zone_Mathiisen] = Unitnames.NPC_Heritance_Deadeye, -- Mathiisen (Auridon)
+        [810] = Unitnames.NPC_Heritance_Deadeye, -- Smuggler's Tunnel (Auridon)
+
         [390] = Unitnames.NPC_Heritance_Deadeye, -- The Veiled Keep
         [435] = Unitnames.NPC_Sainted_Archer, -- Cathedral of the Golden Path
     },
     [12439] = { -- Burning Arrow (Synergy)
+        [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- South Beacon (Auridon)
+        [Zonenames.Zone_South_Beacon] = Unitnames.NPC_Sea_Viper_Deadeye, -- South Beacon (Auridon)
+        [Zonenames.Zone_Mathiisen] = Unitnames.NPC_Heritance_Deadeye, -- Mathiisen (Auridon)
+        [810] = Unitnames.NPC_Heritance_Deadeye, -- Smuggler's Tunnel (Auridon)
+
         [390] = Unitnames.NPC_Heritance_Deadeye, -- The Veiled Keep
         [435] = Unitnames.NPC_Sainted_Archer, -- Cathedral of the Golden Path
     },
@@ -1285,6 +1304,7 @@ LUIE.Data.AlertZoneOverride = {
     --},
     [88555] = { -- Summon the Dead (Necromancer)
         [395] = Unitnames.NPC_Dremora_Narkynaz, -- The Refuge of Dread
+        [Zonenames.Zone_Hectahame] = Unitnames.NPC_Veiled_Necromancer, -- Hectahame
         [Zonenames.Zone_Hectahame_Armory] = Unitnames.NPC_Veiled_Necromancer, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = Unitnames.NPC_Veiled_Necromancer, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Veiled_Necromancer, -- Hectahame Ritual Chamber
@@ -1292,15 +1312,11 @@ LUIE.Data.AlertZoneOverride = {
     --[88556] = { -- Summon the Dead (Necromancer)
     --
     --},
-    [13397] = { -- Empower Undead (Necromancer)
-        [395] = Unitnames.NPC_Dremora_Narkynaz, -- The Refuge of Dread
-        [Zonenames.Zone_Hectahame_Armory] = Unitnames.NPC_Veiled_Necromancer, -- Hectahame Armory
-        [Zonenames.Zone_Hectahame_Arboretum] = Unitnames.NPC_Veiled_Necromancer, -- Hectahame Arboretum
-        [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Veiled_Necromancer, -- Hectahame Ritual Chamber
-    },
     [10805] = { -- Ignite (Synergy)
         [389] = Unitnames.NPC_Skeletal_Infernal, -- Reliquary Ruins
         [548] = Unitnames.NPC_Bandit_Incendiary, -- Silitar
+        [555] = Unitnames.Boss_Vicereeve_Pelidil, -- Abecean Sea
+        [Zonenames.Zone_Hectahame] = Unitnames.NPC_Veiled_Infernal, -- Hectahame
         [Zonenames.Zone_Hectahame_Armory] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Ritual Chamber
@@ -1308,7 +1324,8 @@ LUIE.Data.AlertZoneOverride = {
     [47095] = { -- Fire Rune (Fire Mage)
         [389] = Unitnames.NPC_Skeletal_Infernal, -- Reliquary Ruins
         [548] = Unitnames.NPC_Bandit_Incendiary, -- Silitar
-        [555] = Unitnames.Boss_Vicereeve_Pelidil, -- Abecean Sea (Note we only need this one here for Pelidil, NPC doesn't use Heat Wave or have any mobs to cast Ignite)
+        [555] = Unitnames.Boss_Vicereeve_Pelidil, -- Abecean Sea
+        [Zonenames.Zone_Hectahame] = Unitnames.NPC_Veiled_Infernal, -- Hectahame
         [Zonenames.Zone_Hectahame_Armory] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Ritual Chamber
@@ -1325,13 +1342,6 @@ LUIE.Data.AlertZoneOverride = {
     },
     [4799] = { -- Tail Spike (Clannfear)
         [395] = Unitnames.Elite_Marrow, -- The Refuge of Dread
-    },
-    [50216] = {-- Combustion (Flame Atronach)
-        [395] = Unitnames.NPC_Flame_Atronach, -- The Refuge of Dread
-    },
-
-    [4829] = {-- Fire Brand (Flesh Atronach)
-        [389] = Unitnames.NPC_Flesh_Atronach, -- Reliquary Ruins
     },
 
     [4653] = { -- Shockwave (Watcher)
@@ -1369,30 +1379,49 @@ LUIE.Data.AlertZoneOverride = {
     },
 
     [3767] = { -- Choking Pollen (Lurcher)
+        [Zonenames.Zone_Hectahame] = Unitnames.NPC_Corrupt_Lurcher, -- Hectahame
         [Zonenames.Zone_Hectahame_Armory] = Unitnames.NPC_Corrupt_Lurcher, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = Unitnames.NPC_Corrupt_Lurcher, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Corrupt_Lurcher, -- Hectahame Ritual Chamber
+        [559] = Unitnames.NPC_Corrupt_Lurcher, -- Valenheart
     },
     [21582] = { -- Nature's Swarm (Spriggan)
+        [Zonenames.Zone_Hectahame] = Unitnames.NPC_Corrupt_Spriggan, -- Hectahame
         [Zonenames.Zone_Hectahame_Armory] = Unitnames.NPC_Corrupt_Spriggan, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = Unitnames.NPC_Corrupt_Spriggan, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Corrupt_Lurcher, -- Hectahame Ritual Chamber
     },
     [13477] = { -- Control Beast (Spriggan)
+        [Zonenames.Zone_Hectahame] = Unitnames.NPC_Corrupt_Spriggan, -- Hectahame
         [Zonenames.Zone_Hectahame_Armory] = Unitnames.NPC_Corrupt_Spriggan, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = Unitnames.NPC_Corrupt_Spriggan, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Corrupt_Lurcher, -- Hectahame Ritual Chamber
     },
     [89102] = { -- Summon Beast (Spriggan)
+        [Zonenames.Zone_Hectahame] = Unitnames.NPC_Corrupt_Spriggan, -- Hectaham
         [Zonenames.Zone_Hectahame_Armory] = Unitnames.NPC_Corrupt_Spriggan, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = Unitnames.NPC_Corrupt_Spriggan, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Corrupt_Lurcher, -- Hectahame Ritual Chamber
     },
 
     [88507] = { -- Summon Abomination (Bonelord)
+        [Zonenames.Zone_Hectahame] = Unitnames.NPC_Veiled_Bonelord, -- Hectahame
         [Zonenames.Zone_Hectahame_Armory] = Unitnames.NPC_Veiled_Bonelord, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = Unitnames.NPC_Veiled_Bonelord, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Veiled_Bonelord, -- Hectahame Ritual Chamber
+    },
+    [5050] = { -- Bone Saw (Bone Colossus)
+        [Zonenames.Zone_Hectahame] = Unitnames.NPC_Bone_Colossus, -- Hectahame
+        [Zonenames.Zone_Hectahame_Armory] = Unitnames.NPC_Bone_Colossus, -- Hectahame Armory
+        [Zonenames.Zone_Hectahame_Arboretum] = Unitnames.NPC_Bone_Colossus, -- Hectahame Arboretum
+        [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Bone_Colossus, -- Hectahame Ritual Chamber
+    },
+
+    [22521] = { -- Defiled Ground (Lich)
+        [559] = Unitnames.Boss_Shade_of_Naemon, -- Valenheart
+    },
+    [73925] = { -- Soul Cage (Lich)
+        [559] = Unitnames.Boss_Shade_of_Naemon, -- Valenheart
     },
 
 }

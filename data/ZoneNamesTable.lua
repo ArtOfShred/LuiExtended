@@ -10,7 +10,14 @@ LUIE.Data.ZoneNames = {
     -- ALDMERI DOMINION --------------------------------------------
     ----------------------------------------------------------------
 
+    -- Auridon
+    Zone_Maormer_Invasion_Camp            = 'Maormer Invasion Camp',
+    Zone_Tanzelwil                        = 'Tanzelwil',
+    Zone_South_Beacon                     = 'South Beacon',
+    Zone_Mathiisen                        = 'Mathiisen',
+
     -- Greenshade
+    Zone_Hectahame                        = 'Hectahame',
     Zone_Hectahame_Armory                 = 'Hectahame Armory',
     Zone_Hectahame_Arboretum              = 'Hectahame Arboretum',
     Zone_Hectahame_Ritual_Chamber         = 'Hectahame Ritual Chamber',

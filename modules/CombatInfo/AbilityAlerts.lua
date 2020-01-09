@@ -653,9 +653,11 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
         local zoneName = GetPlayerActiveSubzoneName()
         if AlertsZone[abilityId][index] then
             unitName = AlertsZone[abilityId][index]
+            d(index .. ": " .. unitName)
         end
         if AlertsZone[abilityId][zoneName] then
             unitName = AlertsZone[abilityId][zoneName]
+            d(zoneName .. ": " .. unitName)
         end
     end
 
