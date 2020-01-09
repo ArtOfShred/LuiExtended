@@ -296,8 +296,12 @@ local function ResolveAbilityName(abilityId, sourceName)
 
     if Effects.MapDataOverride[abilityId] then
         local index = GetZoneId(GetCurrentMapZoneIndex())
+        local zoneName = GetPlayerActiveSubzoneName()
         if Effects.MapDataOverride[abilityId][index] then
             abilityName = Effects.MapDataOverride[abilityId][index].name
+        end
+        if Effects.MapDataOverride[abilityId][zoneName] then
+            abilityName = Effects.MapDataOverride[abilityId][zoneName].name
         end
     end
 
@@ -318,8 +322,12 @@ local function ResolveAbilityIcon(abilityId, sourceName)
 
     if Effects.MapDataOverride[abilityId] then
         local index = GetZoneId(GetCurrentMapZoneIndex())
+        local zoneName = GetPlayerActiveSubzoneName()
         if Effects.MapDataOverride[abilityId][index] then
             abilityIcon = Effects.MapDataOverride[abilityId][index].icon
+        end
+        if Effects.MapDataOverride[abilityId][zoneName] then
+            abilityIcon = Effects.MapDataOverride[abilityId][zoneName].icon
         end
     end
 

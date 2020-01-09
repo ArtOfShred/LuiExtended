@@ -1288,7 +1288,7 @@ local strings = {
     SI_LUIE_SKILL_WILDERKINGS_PROTECTION_TP =            "The blessing of the Wilderking makes you appear less threatening to the creatures in Greenheart, preventing some of them from attacking you.",
 
     SI_LUIE_SKILL_DISPERSE_CORRUPTION =                  "Disperse Corruption",
-    SI_LUIE_SKILL_ANCIENT_WRATH_TP =                     "Enemies that deal damage to you suffer Flame Damage.",
+    SI_LUIE_SKILL_ANCIENT_WRATH_TP =                     "Ancient Wrath returns Flame Damage to any enemy that attacks you.",
     SI_LUIE_SKILL_NECROTIC_CIRCLE_STUN_TP =              "Stunned for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nWhen this effect ends or you break free, you are afflicted with a |cFFFFFF1.2|r second unbreakable stun.",
     SI_LUIE_SKILL_TRAPPING_BOLT_WORLD_TP =               "Pinned to the ground for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nAn ally near you can activate the |cFFFFFFRemove Bolt|r synergy to free you.\n\nWhen this effect ends or you break free, you are afflicted with a |cFFFFFF1.3|r second unbreakable immobilize.",
 

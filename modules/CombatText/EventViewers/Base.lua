@@ -171,9 +171,15 @@ function CombatTextEventViewer:ControlLayout(control, abilityId, combatType, sou
 
         if Effects.MapDataOverride[abilityId] then
             local index = GetZoneId(GetCurrentMapZoneIndex())
+            local zoneName = GetPlayerActiveSubzoneName()
             if Effects.MapDataOverride[abilityId][index] then
                 if Effects.MapDataOverride[abilityId][index].icon then
                     iconPath = Effects.MapDataOverride[abilityId][index].icon
+                end
+            end
+            if Effects.MapDataOverride[abilityId][zoneName] then
+                if Effects.MapDataOverride[abilityId][zoneName].icon then
+                    iconPath = Effects.MapDataOverride[abilityId][zoneName].icon
                 end
             end
         end

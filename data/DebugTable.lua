@@ -11840,6 +11840,8 @@ LUIE.DebugAuras = {
     [34346] = true, -- Ancient Wrath
     [34824] = true, -- Ancient Wrath
     [47430] = true, -- Q4601 Shade Death Delay
+    [7246] = true, -- CV Delay 1 Seconds
+    [30002] = true, -- CV Ghost Flash
 
     -- Striking at the Heart
     [35496] = true, -- Q4690 Shade Layer

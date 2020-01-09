@@ -63,6 +63,7 @@ i18n/skills/Skills_$(language).lua
 data/AbilityTables.lua
 data/Tooltips.lua
 data/UnitNamesTable.lua
+data/ZoneNamesTable.lua
 data/Effects.lua
 data/CastBarTable.lua
 data/CombatTextConstants.lua

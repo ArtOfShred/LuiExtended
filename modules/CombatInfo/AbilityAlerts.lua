@@ -618,12 +618,21 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     -- Handle effects that override by ZoneId
     if Effects.MapDataOverride[abilityId] then
         local index = GetZoneId(GetCurrentMapZoneIndex())
+        local zoneName = GetPlayerActiveSubzoneName()
         if Effects.MapDataOverride[abilityId][index] then
             if Effects.MapDataOverride[abilityId][index].name then
                 abilityName = Effects.MapDataOverride[abilityId][index].name
             end
             if Effects.MapDataOverride[abilityId][index].icon then
                 abilityIcon = Effects.MapDataOverride[abilityId][index].icon
+            end
+        end
+        if Effects.MapDataOverride[abilityId][zoneName] then
+            if Effects.MapDataOverride[abilityId][zoneName].name then
+                abilityName = Effects.MapDataOverride[abilityId][zoneName].name
+            end
+            if Effects.MapDataOverride[abilityId][zoneName].icon then
+                abilityIcon = Effects.MapDataOverride[abilityId][zoneName].icon
             end
         end
     end
@@ -641,8 +650,12 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     -- Override by zone specific here
     if AlertsZone[abilityId] then
         local index = GetZoneId(GetCurrentMapZoneIndex())
+        local zoneName = GetPlayerActiveSubzoneName()
         if AlertsZone[abilityId][index] then
             unitName = AlertsZone[abilityId][index]
+        end
+        if AlertsZone[abilityId][zoneName] then
+            unitName = AlertsZone[abilityId][zoneName]
         end
     end
 
@@ -824,12 +837,21 @@ function AbilityAlerts.OnCombatIn(eventCode, resultType, isError, abilityName, a
     -- Handle effects that override by ZoneId
     if Effects.MapDataOverride[abilityId] then
         local index = GetZoneId(GetCurrentMapZoneIndex())
+        local zoneName = GetPlayerActiveSubzoneName()
         if Effects.MapDataOverride[abilityId][index] then
             if Effects.MapDataOverride[abilityId][index].name then
                 abilityName = Effects.MapDataOverride[abilityId][index].name
             end
             if Effects.MapDataOverride[abilityId][index].icon then
                 abilityIcon = Effects.MapDataOverride[abilityId][index].icon
+            end
+        end
+        if Effects.MapDataOverride[abilityId][zoneName] then
+            if Effects.MapDataOverride[abilityId][zoneName].name then
+                abilityName = Effects.MapDataOverride[abilityId][zoneName].name
+            end
+            if Effects.MapDataOverride[abilityId][zoneName].icon then
+                abilityIcon = Effects.MapDataOverride[abilityId][zoneName].icon
             end
         end
     end

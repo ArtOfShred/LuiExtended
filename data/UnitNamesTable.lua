@@ -61,6 +61,12 @@ LUIE.Data.UnitNames = {
     NPC_Bandit_Savage                     = 'Bandit Savage',
     NPC_Sea_Viper_Tempest                 = 'Sea Viper Tempest',
     NPC_Sea_Viper_Charger                 = 'Sea Viper Charger',
+    NPC_Corrupt_Spriggan                  = 'Corrupt Spriggan',
+    NPC_Corrupt_Lurcher                   = 'Corrupt Lurcher',
+
+    NPC_Veiled_Infernal                   = 'Veiled Infernal',
+    NPC_Veiled_Bonelord                   = 'Veiled Bonelord',
+    NPC_Veiled_Necromancer                = 'Veiled Necromancer',
 
     ----------------------------------------------------------------
     -- QUESTS ------------------------------------------------------

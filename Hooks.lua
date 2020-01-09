@@ -99,6 +99,7 @@ function LUIE.InitializeHooks()
 
             if LUIE.Data.Effects.MapDataOverride[abilityId] then
                 local index = GetZoneId(GetCurrentMapZoneIndex())
+                local zoneName = GetPlayerActiveSubzoneName()
                 if LUIE.Data.Effects.MapDataOverride[abilityId][index] then
                     if LUIE.Data.Effects.MapDataOverride[abilityId][index].icon then
                         attackIcon = LUIE.Data.Effects.MapDataOverride[abilityId][index].icon
@@ -107,6 +108,17 @@ function LUIE.InitializeHooks()
                         attackName = LUIE.Data.Effects.MapDataOverride[abilityId][index].name
                     end
                     if LUIE.Data.Effects.MapDataOverride[abilityId][index].hide then
+                        return
+                    end
+                end
+                if LUIE.Data.Effects.MapDataOverride[abilityId][zoneName] then
+                    if LUIE.Data.Effects.MapDataOverride[abilityId][zoneName].icon then
+                        attackIcon = LUIE.Data.Effects.MapDataOverride[abilityId][zoneName].icon
+                    end
+                    if LUIE.Data.Effects.MapDataOverride[abilityId][zoneName].name then
+                        attackName = LUIE.Data.Effects.MapDataOverride[abilityId][zoneName].name
+                    end
+                    if LUIE.Data.Effects.MapDataOverride[abilityId][zoneName].hide then
                         return
                     end
                 end

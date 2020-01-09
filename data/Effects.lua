@@ -9,6 +9,7 @@ local Effects = LUIE.Data.Effects
 
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
+local Zonenames = LUIE.Data.ZoneNames
 local Abilities = LUIE.Data.Abilities
 
 local zo_strformat = zo_strformat
@@ -12550,28 +12551,67 @@ Effects.MapDataOverride = {
         [933] = { icon = 'LuiExtended/media/icons/abilities/ability_bat_draining_bite_dark.dds' }, -- Wayrest Sewers II
     },
 
+    [21582] = { -- Nature's Swarm (Spriggan)
+        [Zonenames.Zone_Hectahame_Armory] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds' }, -- Hectahame Armory
+        [Zonenames.Zone_Hectahame_Arboretum] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds' }, -- Hectahame Arboretum
+        [Zonenames.Zone_Hectahame_Ritual_Chamber] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds' }, -- Hectahame Ritual Chamber
+    },
+    [31699] = { -- Nature's Swarm (Spriggan)
+        [Zonenames.Zone_Hectahame_Armory] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds' }, -- Hectahame Armory
+        [Zonenames.Zone_Hectahame_Arboretum] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds' }, -- Hectahame Arboretum
+        [Zonenames.Zone_Hectahame_Ritual_Chamber] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds' }, -- Hectahame Ritual Chamber
+    },
+    [13475] = { -- Healing Salve (Spriggan)
+        [Zonenames.Zone_Hectahame_Armory] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_healing_salve_red.dds' }, -- Hectahame Armory
+        [Zonenames.Zone_Hectahame_Arboretum] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_healing_salve_red.dds' }, -- Hectahame Arboretum
+        [Zonenames.Zone_Hectahame_Ritual_Chamber] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_healing_salve_red.dds' }, -- Hectahame Ritual Chamber
+    },
+    [13477] = { -- Control Beast (Spriggan)
+        [Zonenames.Zone_Hectahame_Armory] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_control_beast_red.dds' }, -- Hectahame Armory
+        [Zonenames.Zone_Hectahame_Arboretum] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_control_beast_red.dds' }, -- Hectahame Arboretum
+        [Zonenames.Zone_Hectahame_Ritual_Chamber] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_control_beast_red.dds' }, -- Hectahame Ritual Chamber
+    },
+
     [3757] = { -- Claw (Lurcher)
         [931] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw_red.dds' }, -- Elden Hollow II
+        [Zonenames.Zone_Hectahame_Armory] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw_red.dds' }, -- Hectahame Armory
+        [Zonenames.Zone_Hectahame_Arboretum] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw_red.dds' }, -- Hectahame Arboretum
+        [Zonenames.Zone_Hectahame_Ritual_Chamber] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw_red.dds' }, -- Hectahame Ritual Chamber
         [108] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw_green.dds' }, -- Greenshade
     },
     [3860] = { -- Pulverize (Lurcher)
         [931] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_pulverize_red.dds' }, -- Elden Hollow II
+        [Zonenames.Zone_Hectahame_Armory] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_pulverize_red.dds' }, -- Hectahame Armory
+        [Zonenames.Zone_Hectahame_Arboretum] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_pulverize_red.dds' }, -- Hectahame Arboretum
+        [Zonenames.Zone_Hectahame_Ritual_Chamber] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_pulverize_red.dds' }, -- Hectahame Ritual Chamber
         [108] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_pulverize_green.dds' }, -- Greenshade
     },
     [3855] = { -- Crushing Limbs (Lurcher)
         [931] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Elden Hollow II
+        [Zonenames.Zone_Hectahame_Armory] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Hectahame Armory
+        [Zonenames.Zone_Hectahame_Arboretum] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Hectahame Arboretum
+        [Zonenames.Zone_Hectahame_Ritual_Chamber] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Hectahame Ritual Chamber
         [108] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_green.dds' }, -- Greenshade
     },
     [38554] = { -- Crushing Limbs (Lurcher)
         [931] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Elden Hollow II
+        [Zonenames.Zone_Hectahame_Armory] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Hectahame Armory
+        [Zonenames.Zone_Hectahame_Arboretum] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Hectahame Arboretum
+        [Zonenames.Zone_Hectahame_Ritual_Chamber] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Hectahame Ritual Chamber
         [108] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_green.dds' }, -- Greenshade
     },
     [3767] = { -- Choking Pollen (Lurcher)
         [931] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Elden Hollow II
+        [Zonenames.Zone_Hectahame_Armory] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Hectahame Armory
+        [Zonenames.Zone_Hectahame_Arboretum] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Hectahame Arboretum
+        [Zonenames.Zone_Hectahame_Ritual_Chamber] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Hectahame Ritual Chamber
         [108] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_green.dds' }, -- Greenshade
     },
     [4769] = { -- Choking Pollen (Lurcher)
         [931] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Elden Hollow II
+        [Zonenames.Zone_Hectahame_Armory] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Hectahame Armory
+        [Zonenames.Zone_Hectahame_Arboretum] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Hectahame Arboretum
+        [Zonenames.Zone_Hectahame_Ritual_Chamber] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Hectahame Ritual Chamber
         [108] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_green.dds' }, -- Greenshade
     },
 
