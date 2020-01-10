@@ -1698,7 +1698,7 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
         if Effects.EffectOverride[abilityId].hideReduce == true and SpellCastBuffs.SV.HideReduce then
             return
         end
-        if Effects.EffectOverride[abilityId].isDisguise and SpellCastBuffs.SV.IgnoreDisguise then -- For Monk's Disguise / other buff based Disguise hiding
+        if Effects.EffectOverride[abilityId].isDisguise and SpellCastBuffs.SV.IgnoreDisguise then -- For Monk's Disguise / other buff based Disguise hiding.
             return
         end
         iconName = Effects.EffectOverride[abilityId].icon or iconName
@@ -1709,8 +1709,8 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
         if Effects.EffectOverride[abilityId].noDuplicate then
             for context, effectsList in pairs( SpellCastBuffs.EffectsList ) do
                 for k, v in pairs(effectsList) do
-                    -- Only remove the lower duration effects that were cast previously.
-                    if v.id == abilityId and v.ends < (1000*endTime) then
+                    -- Only remove the lower duration effects that were cast previously or simultaneously.
+                    if v.id == abilityId and v.ends <= (1000*endTime) then
                         SpellCastBuffs.EffectsList[context][ k ] = nil
                     end
                 end
@@ -1732,7 +1732,7 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
     -- Override name, icon, or hide based on MapZoneIndex
     if Effects.MapDataOverride[abilityId] then
         local index = GetZoneId(GetCurrentMapZoneIndex())
-        local zoneName = GetPlayerActiveSubzoneName()
+        local zoneName = GetPlayerLocationName()
         if Effects.MapDataOverride[abilityId][index] then
             if Effects.MapDataOverride[abilityId][index].icon then
                 iconName = Effects.MapDataOverride[abilityId][index].icon
@@ -2042,7 +2042,7 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
         -- Override name, icon, or hide based on MapZoneIndex
         if Effects.MapDataOverride[abilityId] then
             local index = GetZoneId(GetCurrentMapZoneIndex())
-            local zoneName = GetPlayerActiveSubzoneName()
+            local zoneName = GetPlayerLocationName()
             if Effects.MapDataOverride[abilityId][index] then
                 if Effects.MapDataOverride[abilityId][index].icon then
                     iconName = Effects.MapDataOverride[abilityId][index].icon
@@ -2266,7 +2266,7 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
 
         if Effects.MapDataOverride[abilityId] then
             local index = GetZoneId(GetCurrentMapZoneIndex())
-            local zoneName = GetPlayerActiveSubzoneName()
+            local zoneName = GetPlayerLocationName()
             if Effects.MapDataOverride[abilityId][index] then
                 if Effects.MapDataOverride[abilityId][index].icon then
                     iconName = Effects.MapDataOverride[abilityId][index].icon

@@ -1884,6 +1884,17 @@ function ChatAnnouncements.CreateSettings()
                 default = Defaults.ContextMessages.CurrencyMessageRemove,
             },
             {
+                -- Loot Message Combined (Quest)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_COMBINE),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_COMBINE_TP),
+                getFunc = function() return Settings.ContextMessages.CurrencyMessageCombine end,
+                setFunc = function(value) Settings.ContextMessages.CurrencyMessageCombine = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.ContextMessages.CurrencyMessageCombine,
+            },
+            {
                 -- Loot Message Group
                 type = "editbox",
                 name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_GROUP),

@@ -576,6 +576,7 @@ function CombatInfo.RegisterCombatInfo()
         end
         eventManager:RegisterForEvent(moduleName, EVENT_START_SOUL_GEM_RESURRECTION, CombatInfo.SoulGemResurrectionStart)
         eventManager:RegisterForEvent(moduleName, EVENT_END_SOUL_GEM_RESURRECTION, CombatInfo.SoulGemResurrectionEnd)
+        --eventManager:RegisterForEvent(moduleName, EVENT_CLIENT_INTERACT_RESULT, CombatInfo.ClientInteractResult)
         --[[counter = 0
         for id, _ in pairs (Effects.CastBreakOnRemoveEvent) do
             counter = counter + 1
@@ -1372,6 +1373,56 @@ function CombatInfo.GenerateCastbarPreview(state)
     uiTlw.castBar:SetHidden(not state)
     castbar:SetHidden(not state)
 end
+
+--[[
+function CombatInfo.ClientInteractResult(eventCode, result, interactTargetName)
+
+    local function DisplayInteractCast(icon, name, duration)
+        local currentTime = GetGameTimeMilliseconds()
+        local endTime = currentTime + duration
+        local remain = endTime - currentTime
+
+        castbar.remain = endTime
+        castbar.starts = currentTime
+        castbar.ends = endTime
+        castbar.icon:SetTexture(icon)
+        castbar.type = 1 -- CAST
+        castbar.bar.bar:SetValue(0)
+        castbar.id = 999999
+
+        if CombatInfo.SV.CastBarLabel then
+            castbar.bar.name:SetText(name)
+            castbar.bar.name:SetHidden(false)
+        end
+        if CombatInfo.SV.CastBarTimer then
+            castbar.bar.timer:SetText(string.format("%.1f", remain/1000))
+            castbar.bar.timer:SetHidden(false)
+        end
+
+        castbar:SetHidden(false)
+        g_casting = true
+        eventManager:RegisterForUpdate(moduleName .. "CastBar", 20, CombatInfo.OnUpdateCastbar)
+    end
+
+    -- If we succesfully interact then...
+    if result == CLIENT_INTERACT_RESULT_SUCCESS then
+        -- Check if the interact object name is in our table
+        if Castbar.InteractCast[interactTargetName] then
+            -- Get the map id and check if there is an entry for this id
+            index = GetZoneId(GetCurrentMapZoneIndex())
+            if Castbar.InteractCast[interactTargetName][index] then
+                local data = Castbar.InteractCast[interactTargetName][index]
+                local icon = data.icon
+                local name = data.name
+                local duration = data.duration
+                local delay = data.delay
+                zo_callLater(function() DisplayInteractCast(icon, name, duration) end, delay)
+            end
+        end
+    end
+
+end
+]]--
 
 function CombatInfo.SoulGemResurrectionStart(eventCode, durationMs)
     -- Just in case any other casts are present - stop them first

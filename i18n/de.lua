@@ -331,6 +331,7 @@ local strings = {
     SI_LUIE_CA_CURRENCY_MESSAGE_DESTROY =                "Du zerstörst %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_LOCKPICK =               "Dein %s bricht.",
     SI_LUIE_CA_CURRENCY_MESSAGE_REMOVE =                 "%s entfernt.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_COMBINE =                "You combine %s to make %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_GROUP =                  "%s plündert %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_DISGUISE_EQUIP =         "Du rüstest %s aus.",
     SI_LUIE_CA_CURRENCY_MESSAGE_DISGUISE_REMOVE =        "Du legst %s ab.",

@@ -56,7 +56,7 @@ function CombatTextCombatEventListener:OnCombatIn(...)
     -- Handle effects that override by ZoneId
     if Effects.MapDataOverride[abilityId] then
         local index = GetZoneId(GetCurrentMapZoneIndex())
-        local zoneName = GetPlayerActiveSubzoneName()
+        local zoneName = GetPlayerLocationName()
         if Effects.MapDataOverride[abilityId][index] then
             if Effects.MapDataOverride[abilityId][index].name then
                 abilityName = Effects.MapDataOverride[abilityId][index].name

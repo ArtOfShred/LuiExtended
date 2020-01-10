@@ -2044,6 +2044,13 @@ Effects.EffectOverrideByName = {
         [Unitnames.NPC_Naryu_Virian] =            { icon = 'LuiExtended/media/icons/abilities/ability_unarmed_attacklight.dds' } -- Attack (Tutorial)
     },
 
+    [10618] = { -- Quick Strike (Shared)
+        [Unitnames.Elite_Amuur] =                { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_cleaver_attack_light.dds' } -- Amuur (The First Patient)
+    },
+    [14096] = { -- Heavy Attack (Footsoldier)
+        [Unitnames.Elite_Amuur] =                { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_cleaver_attack_heavy.dds' } -- Amuur (The First Patient)
+    },
+
     -- HUMAN NPCS
     [29521] = { -- Aura of Protection (Shaman)
         [Unitnames.NPC_Aura_of_Protection] =      { hide = true } -- Aura of Protection (Aura of Protection) -- Hides this buff only on the Goblin Aura of Protection to prevent duplicate display
@@ -2437,7 +2444,6 @@ Effects.EffectMergeName = {
 -- If one of these id's is applied then we set the buffSlot for ON_EFFECT_CHANGED to be a single name identifier to prevent more than one aura from appearing. Only works with unlimited duration or equal duration effects.
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.EffectMergeId = {
-    [21314] = "MERGED_EFFECT_SPIKE_TRAP_QUEST", -- Trap Sprung! (Auridon - An Act of Kindness)
     [47768] = "MERGED_EFFECT_CC_IMMUNITY_QUEST", -- RobS Immunities 6 Sec (Grahtwood - A Lasting Winter)
 }
 
@@ -4110,6 +4116,7 @@ Effects.EffectOverride = {
     [30879] = { tooltip = Tooltips.Disguise_Kollopi_Essence }, -- Shimmering Glow (Kollopi Essence)
     [33534] = { tooltip = Tooltips.Disguise_Sea_Viper_Armor }, -- Seaside Disguise (Sea Viper Armor)
     [43722] = { tooltip = Tooltips.Disguise_Vulkhel_Guard }, -- First Auridon Marine Disguise (Vulkhel Guard Marcine Disguise)
+    [43716] = { tooltip = Tooltips.Disguise_Phaer_Mercenary }, -- Phaer Mercenary Disguise (Phaer Mercenary Disguise)
     [82631] = { icon = 'LuiExtended/media/icons/disguises/disguise_monks_disguise.dds', name = Abilities.Disguise_Monks_Disguise }, -- Monk Disguise Timer (Monk's Disguise)
 
     ----------------------------------------------------------------
@@ -9258,7 +9265,7 @@ Effects.EffectOverride = {
     [45784] = { hide = true }, -- Generic Spawn Fire Atronach AM
 
     -- The Mallari-Mora
-    [28771] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_atherial_shift.dds', name = Abilities.Skill_Aetherial_Shift, unbreakable = 1, tooltip = Tooltips.Generic_Stun }, -- Q4220 Thirster Stun (The Mallari-Mora)
+    [28771] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_atherial_shift.dds', name = Abilities.Skill_Aetherial_Shift, unbreakable = 1, tooltip = Tooltips.Skill_Aetherial_Shift }, -- Q4220 Thirster Stun (The Mallari-Mora)
     [21393] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_atherial_shift.dds', name = Abilities.Skill_Aetherial_Shift }, -- Q4220 Spirit Layer Ability
     [21403] = { icon = 'esoui/art/icons/ability_mage_054.dds', tooltip = Tooltips.Skill_Spiritual_Cloak }, -- Spiritual Cloak
 
@@ -9266,7 +9273,7 @@ Effects.EffectOverride = {
     [22931] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_micro_etched_crystal.dds', name = Abilities.Skill_Free_Spirit }, -- Freeing Spirit...
     [21315] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds' }, -- Spike Trap
     [21313] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', name = Abilities.Trap_Spike_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Spike_Trap_Auridon }, -- Crippled!
-    [21314] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', name = Abilities.Trap_Spike_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Spike_Trap_Auridon, hideReduce = true }, -- Trap Sprung!
+    [21314] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', name = Abilities.Trap_Spike_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Spike_Trap_Auridon, hideReduce = true, noDuplicate = true }, -- Trap Sprung!
 
     -- The Veiled Choice
     [23187] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_bind_hands.dds', name = Abilities.Skill_Unbind }, -- Q4236 PC Untie Palith
@@ -10404,7 +10411,7 @@ Effects.EffectOverride = {
     [83012] = { icon = 'LuiExtended/media/icons/abilities/ability_clannfear_devour.dds', hide = true }, -- Devour (Snapjaw)
     [85649] = { icon = 'LuiExtended/media/icons/abilities/ability_clannfear_devour.dds' }, -- Devour (Snapjaw)
     [83049] = { hide = true }, -- Charge (Clannfear)
-    [83040] = { icon = 'LuiExtended/media/icons/abilities/ability_clannfear_ferocious_charge.dds', name = Abilities.Skill_Ferocious_Charge }, -- Focused Charge (Clannfear)
+    [83033] = { icon = 'LuiExtended/media/icons/abilities/ability_clannfear_ferocious_charge.dds', name = Abilities.Skill_Ferocious_Charge }, -- Focused Charge (Clannfear)
     [83039] = { hide = true }, -- Ferocious Charge (Clannfear)
     [83035] = { hide = true }, -- Ferocious Charge (Clannfear)
     [83042] = { icon = 'LuiExtended/media/icons/abilities/ability_clannfear_ferocious_charge.dds' }, -- Ferocious Charge (Clannfear)

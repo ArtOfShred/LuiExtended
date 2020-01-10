@@ -6,6 +6,7 @@
 -- Cast Bar Table namespace
 LUIE.Data.CastBarTable = {}
 local CastBarTable = LUIE.Data.CastBarTable
+local Abilities = LUIE.Data.Abilities
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- When a hard CC effect is successfully applied to the player, instantly stop any in progress Casts
@@ -31,6 +32,9 @@ CastBarTable.CastBreakingActions = {
 }
 
 CastBarTable.BreakCastOnMove = {
+    -- Fake
+    --[999999] = true, -- Used for any interact based casts
+
     -- Innate
     [6811] = true, -- Recall
     [69293] = true, -- Sigil of Imperial Retreat
@@ -120,6 +124,7 @@ CastBarTable.BreakCastOnMove = {
     [21409] = true, -- Reading... (The Serpent's Beacon)
     [21393] = true, -- Q4220 PC Chooses to Rescue
     [22931] = true, -- Freeing Spirit... (An Act of Kindness)
+    [21968] = true, -- Binding Bear... (Silent Village)
 }
 
 CastBarTable.IgnoreCastBreakingActions = {
@@ -789,3 +794,13 @@ CastBarTable.CastChannelConvert = {
     [73686] = true, -- Old Orsinium Trophy (Malacath's Wrathful Flame)
     [92862] = true, -- Ringing Bell (Dreamer's Chime)
 }
+
+--[[
+CastBarTable.InteractCast = {
+
+    ['Aetherial Gateway'] = {
+        [394] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_atherial_shift.dds', name = Abilities.Skill_Aetherial_Shift, duration = 2000, delay = 750 }, -- Ezduiin Undercroft
+    }
+
+}
+]]--

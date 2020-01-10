@@ -82,10 +82,15 @@ Quests.QuestItemHideRemove = {
     [3555] = true, -- Earring of the Altmer Nobility (Wearing the Veil)
     [3356] = true, -- Runed Talisman (Breaking the Barrier)
     [3325] = true, -- Teleport Scroll (The Serpent's Beacon)
+    [3368] = true, -- Kindlepitch (The Serpent's Beacon)
+    [3369] = true, -- Fire Salts (The Serpent's Beacon)
     [3415] = true, -- Teleport Scroll (Depths of Madness)
     [3769] = true, -- Teleport Scroll (Depths of Madness)
     [3770] = true, -- Teleport Scroll (Depths of Madness)
     [3771] = true, -- Teleport Scroll (Depths of Madness)
+    [3403] = true, -- Bloodcrown Spores  (Depths of Madness)
+    [3404] = true, -- Lavendercap Mushrooms (Depths of Madness)
+    [3405] = true, -- Gleamcap Spores (Depths of Madness)
     [3395] = true, -- Binding Gem (Silent Village)
     [3291] = true, -- Micro Etched Crystal (An Act of Kindness)
     [3524] = true, -- Welyknd Stone (Eye of the Ancients)
@@ -157,6 +162,14 @@ Quests.QuestItemModifyOnRemove = {
     [4479] = function() Quests.QuestItemHideLoot[4479] = true Quests.QuestItemHideRemove[4479] = false end, -- Loriasel Tablet Notes (Eyes of Azura)
     [4442] = function() Quests.QuestItemHideRemove[4433] = nil end, -- Sigil Geode (Eyes of Azura)
     [3597] = function() Quests.QuestItemHideRemove[3596] = nil end, -- Rahkaz's Blade (The Enemy Within)
+}
+
+-- When this item is gained display the "material" quest items used to make it.
+Quests.QuestItemMerge = {
+
+    [3360] = { 3368, 3369 }, -- Volatile Fire Mixture (The Serpent's Beacon) -- Kindlepitch, Fire Salts
+    [3402] = { 3403, 3404, 3405 }, -- Spore Potion (The Depths of Madness) -- Bloodcrown Spores, Lavendercap Mushrooms, Gleamcap Spores
+
 }
 
 -- TODO: Find a way to extend this to the quest log text

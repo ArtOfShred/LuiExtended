@@ -833,6 +833,7 @@ local strings = {
     SI_LUIE_SKILL_DISGUISE_KOLLOPI_ESSENCE_TP =          "Cloaked in a haze of forest moths, preventing Wood Orcs from detecting you.\n\nWill not work in PvP enabled areas.",
     SI_LUIE_SKILL_DISGUISE_SEA_VIPER_ARMOR_TP =          "Disguised as a Maormer Soldier.",
     SI_LUIE_SKILL_DISGUISE_VULKHEL_GUARD_TP =            "Disguised as a First Auridon Marine.",
+    SI_LUIE_SKILL_DISGUISE_PHAER_MERCENARY_TP =          "Disguised as a Phaer Mercenary.",
 
     -- Weapon Sets
     SI_LUIE_SKILL_SET_ASYLUM_BOW =                       "The next Snipe, Scatter Shot, or Poison Arrow cast within |cffffff6|r seconds by your attacker deals |cffffff<<1>>|r% additional damage.",
@@ -1150,7 +1151,8 @@ local strings = {
     SI_LUIE_SKILL_TURRET_MODE_TP =                       "Charged by a power conduit, enabling the Sentry to shield itself with |cFFFFFFStatic Shield|r and use the |cFFFFFFThunderbolt|r ability.",
     SI_LUIE_SKILL_STATIC_CHARGE_TP =                     "Residual static energy from the Dolmen is suppressing your Health Recovery and you will be targeted by Static Charge, taking Oblivion damage.\n\nMove to reduce to the static buildup.",
     SI_LUIE_SKILL_INCAPACITATING_TERROR_TP =             "Feared and taking Frost Damage every |cFFFFFF3|r seconds.",
-    SI_LUIE_SKILL_SPIRITUAL_CLOAK_TP =                   "Prevent Soul Thirsters from pulling you into the spirit realm.",
+    SI_LUIE_SKILL_SPIRITUAL_CLOAK_TP =                   "A spiritual cloak prevents Soul Thirsters from pulling you into the spirit realm for |cFFFFFF1|r minute.",
+    SI_LUIE_SKILL_AETHERIAL_SHIFT_TP =                   "Stunned and shifting into the spirit realm over |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_BLESSING_GATHWEN_TP =                  "Reduce damage taken by |cFFFFFF3|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_MAIM_NPC_TP =                          "Reduce damage done by |cFFFFFF40|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SUMMON_DARK_PROXY_TP =                 "A shadowy Clannfear fights at your side. The clannfear remains for |cFFFFFF<<1>>|r seconds.",

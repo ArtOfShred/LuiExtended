@@ -11178,6 +11178,7 @@ LUIE.DebugAuras = {
     -- The Racer
     [25642] = true, -- Q4409 Frog Run Speed
     [48489] = true, -- Q4409-Timer,Short(15s)
+    [112463] = true, -- Speed
 
     -- Spirited Away
     [25651] = true, -- Distortion Spawn

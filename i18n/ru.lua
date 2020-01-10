@@ -346,6 +346,7 @@ local strings = {
     SI_LUIE_CA_CURRENCY_MESSAGE_DESTROY =                "Вы уничтожили %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_LOCKPICK =               "Ваша %s ломается.",
     SI_LUIE_CA_CURRENCY_MESSAGE_REMOVE =                 "Убрано %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_COMBINE =                "You combine %s to make %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_GROUP =                  "%s получает %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_DISGUISE_EQUIP =         "Вы надели %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_DISGUISE_REMOVE =        "Вы сняли %s.",

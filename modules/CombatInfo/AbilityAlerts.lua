@@ -618,7 +618,7 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     -- Handle effects that override by ZoneId
     if Effects.MapDataOverride[abilityId] then
         local index = GetZoneId(GetCurrentMapZoneIndex())
-        local zoneName = GetPlayerActiveSubzoneName()
+        local zoneName = GetPlayerLocationName()
         if Effects.MapDataOverride[abilityId][index] then
             if Effects.MapDataOverride[abilityId][index].name then
                 abilityName = Effects.MapDataOverride[abilityId][index].name
@@ -650,7 +650,7 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     -- Override by zone specific here
     if AlertsZone[abilityId] then
         local index = GetZoneId(GetCurrentMapZoneIndex())
-        local zoneName = GetPlayerActiveSubzoneName()
+        local zoneName = GetPlayerLocationName()
         if AlertsZone[abilityId][index] then
             unitName = AlertsZone[abilityId][index]
             d(index .. ": " .. unitName)
@@ -839,7 +839,7 @@ function AbilityAlerts.OnCombatIn(eventCode, resultType, isError, abilityName, a
     -- Handle effects that override by ZoneId
     if Effects.MapDataOverride[abilityId] then
         local index = GetZoneId(GetCurrentMapZoneIndex())
-        local zoneName = GetPlayerActiveSubzoneName()
+        local zoneName = GetPlayerLocationName()
         if Effects.MapDataOverride[abilityId][index] then
             if Effects.MapDataOverride[abilityId][index].name then
                 abilityName = Effects.MapDataOverride[abilityId][index].name

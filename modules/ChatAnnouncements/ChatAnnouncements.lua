@@ -519,6 +519,7 @@ ChatAnnouncements.Defaults = {
         CurrencyMessageDestroy          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DESTROY),
         CurrencyMessageLockpick         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LOCKPICK),
         CurrencyMessageRemove           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_REMOVE),
+        CurrencyMessageCombine          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_COMBINE),
         CurrencyMessageGroup            = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_GROUP),
         CurrencyMessageDisguiseEquip    = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DISGUISE_EQUIP),
         CurrencyMessageDisguiseRemove   = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DISGUISE_REMOVE),
@@ -3391,9 +3392,34 @@ function ChatAnnouncements.ResolveQuestItemChange()
                         end
                         local quantity = countChange > 1 and (" |cFFFFFFx" .. countChange .. "|r") or ""
 
-
                         formattedMessageP1 = ("|r" .. formattedIcon .. itemLink .. quantity .. "|c" .. color)
                         formattedMessageP2 = string.format(logPrefix, formattedMessageP1)
+
+                        -- Message for items being merged.
+                        if Quests.QuestItemMerge[itemId] then
+                            logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageCombine
+
+                            local line = ""
+                            for i = 1, #Quests.QuestItemMerge[itemId] do
+                                local comma
+                                if #Quests.QuestItemMerge[itemId] > 2 then
+                                    comma = i == #Quests.QuestItemMerge[itemId] and ", and " or i > 1 and ", " or ""
+                                else
+                                    comma = i > 1 and " and " or ""
+                                end
+                                local icon = GetQuestItemIcon(Quests.QuestItemMerge[itemId][i])
+                                local formattedIcon = ( ChatAnnouncements.SV.Inventory.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
+                                local usedId = Quests.QuestItemMerge[itemId][i]
+                                local usedLink = ""
+                                if ChatAnnouncements.SV.BracketOptionItem == 1 then
+                                    usedLink = string.format("|H0:quest_item:" .. usedId .. "|h|h")
+                                else
+                                    usedLink = string.format("|H1:quest_item:" .. usedId .. "|h|h")
+                                end
+                                line = (line .. comma .. "|r" .. formattedIcon .. usedLink .. quantity .. "|c" .. color)
+                            end
+                            formattedMessageP2 = string.format(logPrefix, line, formattedMessageP1)
+                        end
 
                         if ChatAnnouncements.SV.Inventory.LootTotal and total > 1 then
                             totalString = string.format(" |c%s%s|r %s|cFEFEFE%s|r", color, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
@@ -5251,7 +5277,7 @@ function ChatAnnouncements.OnPlayerActivated(eventCode, initial)
         g_tradeTarget = ZO_SELECTED_TEXT:Colorize(zo_strformat(SI_UNIT_NAME, tradeName))
     end
 
-    zo_callLater(function() g_loginHideQuestLoot = false end, 1000)
+    zo_callLater(function() g_loginHideQuestLoot = false end, 3000)
 
     if ChatAnnouncements.SV.Notify.DisguiseCA or ChatAnnouncements.SV.Notify.DisguiseCSA or ChatAnnouncements.SV.Notify.DisguiseAlert or ChatAnnouncements.SV.Notify.DisguiseWarnCA or ChatAnnouncements.SV.Notify.DisguiseWarnCSA or ChatAnnouncements.SV.Notify.DisguiseWarnAlert then
         if g_disguiseState == 0 then

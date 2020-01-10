@@ -559,6 +559,7 @@ LUIE.Data.Tooltips = {
     Disguise_Kollopi_Essence                        = GetString(SI_LUIE_SKILL_DISGUISE_KOLLOPI_ESSENCE_TP),
     Disguise_Sea_Viper_Armor                        = GetString(SI_LUIE_SKILL_DISGUISE_SEA_VIPER_ARMOR_TP),
     Disguise_Vulkhel_Guard                          = GetString(SI_LUIE_SKILL_DISGUISE_VULKHEL_GUARD_TP),
+    Disguise_Phaer_Mercenary                        = GetString(SI_LUIE_SKILL_DISGUISE_PHAER_MERCENARY_TP),
 
     ----------------------------------------------------------------
     -- CLASS SKILLS ------------------------------------------------
@@ -1197,6 +1198,7 @@ LUIE.Data.Tooltips = {
     Skill_Blessing_Gathwen                          = GetString(SI_LUIE_SKILL_BLESSING_GATHWEN_TP),
     Skill_Disguise_Altmer_Glamour                   = GetString(SI_LUIE_SKILL_DISGUISE_ALTMER_GLAMOUR_TP),
     Skill_Spiritual_Cloak                           = GetString(SI_LUIE_SKILL_SPIRITUAL_CLOAK_TP),
+    Skill_Aetherial_Shift                           = GetString(SI_LUIE_SKILL_AETHERIAL_SHIFT_TP),
     Skill_Divine_Speed                              = GetString(SI_LUIE_SKILL_DIVINE_SPEED_TP),
     Skill_Lightning_Fury                            = GetString(SI_LUIE_SKILL_QUEST_LIGHTNING_FURY_TP),
     Skill_Blacksaps_Brew                            = GetString(SI_LUIE_SKILL_BLACKSAPS_BREW_TP),

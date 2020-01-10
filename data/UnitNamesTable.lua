@@ -45,6 +45,10 @@ LUIE.Data.UnitNames = {
     NPC_Dremora_Kyngald                   = 'Dremora Kyngald',
     NPC_Flame_Atronach                    = 'Flame Atronach',
     NPC_Skeletal_Infernal                 = 'Skeletal Infernal',
+    NPC_Skeletal_Archer                   = 'Skeletal Archer',
+    NPC_Skeletal_Tempest                  = 'Skeletal Tempest',
+    NPC_Skeletal_Striker                  = 'Skeletal Striker',
+    NPC_Skeletal_Slayer                   = 'Skeletal Slayer',
     NPC_Spectral_Storm_Mage               = 'Spectral Storm Mage',
     NPC_Sainted_Archer                    = 'Sainted Archer',
     NPC_Sainted_Charger                   = 'Sainted Charger',
@@ -56,6 +60,7 @@ LUIE.Data.UnitNames = {
 
     NPC_Heritance_Cutthroat               = 'Heritance Cutthroat',
     NPC_Heritance_Deadeye                 = 'Heritance Deadeye',
+    NPC_Heritance_Incendiary              = 'Heritance Incendiary',
     NPC_Bandit_Incendiary                 = 'Bandit Incendiary',
     NPC_Bandit_Rogue                      = 'Bandit Rogue',
     NPC_Bandit_Savage                     = 'Bandit Savage',
@@ -71,6 +76,12 @@ LUIE.Data.UnitNames = {
     NPC_Bone_Colossus                     = 'Bone Colossus',
 
     NPC_Ancestral_Tempest                 = 'Ancestral Tempest',
+    NPC_Troll                             = 'Troll',
+    NPC_Bear                              = 'Bear',
+
+    NPC_Ghost_Viper_Deadeye               = 'Ghost Viper Deadeye',
+    NPC_Spirit_Deadeye                    = 'Spirit Deadeye',
+    NPC_Thundermaul                       = 'Thundermaul',
 
     ----------------------------------------------------------------
     -- QUESTS ------------------------------------------------------
@@ -91,8 +102,14 @@ LUIE.Data.UnitNames = {
 
     -- AQ Overland
     Elite_Arstul = 'Arstul',
+    Elite_Garggeel = 'Garggeel',
 
     -- AD Quests
+    Elite_Sorondil = 'Sorondil',
+    Elite_Amuur = 'Amuur',
+    Elite_Minantilles_Rage = 'Minantille\'s Rage',
+    Elite_Sanessalmo = 'Sanessalmo',
+    Elite_Uricantar = 'Uricantar',
     Boss_Norion = 'Norion',
     Elite_Canonreeve_Malanie = 'Canonreeve Malanie',
     Elite_Mezelukhebruz = 'Mezelukhebruz',

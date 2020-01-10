@@ -619,7 +619,7 @@ LUIE.Data.AlertTable = {
     [82934] = { summon = true, priority = 1, auradetect = true, neverShowInterrupt = true }, -- Shrieking Summons (Snapjaw)
     [83150] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Tail Whip (Snapjaw)
     [83009] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, cc = STUN, duration = 1500 }, -- Rending Leap (Snapjaw)
-    [83040] = { block = true, dodge = true, bs = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = Unitnames.NPC_Clannfear, refire = 250 }, -- Focused Charge (Clannfear - Snapjaw)
+    [83033] = { block = true, dodge = true, bs = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = Unitnames.NPC_Clannfear, refire = 500 }, -- Focused Charge (Clannfear - Snapjaw)
     --[83016] = { block = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250, duration = 1000, effectOnlyInterrupt = true, fakeName = Unitnames.NPC_Clannfear }, -- Necrotic Explosion (Clannfear - Snapjaw)
 
     -- World Boss - Nindaeril's Perch
@@ -1250,16 +1250,24 @@ LUIE.Data.AlertZoneOverride = {
         [Zonenames.Zone_Tanzelwil] = Unitnames.NPC_Ancestral_Tempest, -- Tanzelwil
         [416] = Unitnames.NPC_Ancestral_Tempest, -- Inner Tanzelwil
         [810] = Unitnames.Elite_Canonreeve_Malanie, -- Smuggler's Tunnel (Auridon)
+        --[Zonenames.Zone_Castle_Rilis] = Unitnames.NPC_Skeletal_Tempest, -- Castle Rilis (Auridon) -- Can't, elite here stops this from working
+        [392] = Unitnames.NPC_Skeletal_Tempest, -- The Vault of Exile (Auridon)
+        [394] = Unitnames.Elite_Uricantar, -- Ezduiin Undercroft (Auridon)
+
         [389] = Unitnames.NPC_Spectral_Storm_Mage, -- Reliquary Ruins
         [555] = Unitnames.NPC_Sea_Viper_Tempest, -- Abecean Sea
     },
     [29510] = { -- Thunder Hammer (Thundermaul)
-        [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.Elite_Arstul, -- Maormer Invasion Camp
+        [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.Elite_Arstul, -- Maormer Invasion Camp (Auridon)
+        [394] = Unitnames.NPC_Thundermaul, -- Ezduiin Undercroft (Auridon)
+
         [435] = Unitnames.NPC_Sainted_Charger, -- Cathedral of the Golden Path
         [555] = Unitnames.NPC_Sea_Viper_Charger, -- Abecean Sea
     },
     [17867] = { -- Shock Aura (Thundermaul)
-        [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.Elite_Arstul, -- Maormer Invasion Camp
+        [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.Elite_Arstul, -- Maormer Invasion Camp (Auridon)
+        [394] = Unitnames.NPC_Thundermaul, -- Ezduiin Undercroft (Auridon)
+
         [435] = Unitnames.NPC_Sainted_Charger, -- Cathedral of the Golden Path
         [555] = Unitnames.NPC_Sea_Viper_Charger, -- Abecean Sea
     },
@@ -1268,6 +1276,13 @@ LUIE.Data.AlertZoneOverride = {
     },
     [28408] = { -- Whirlwind (Skirmisher)
         [Zonenames.Zone_Mathiisen] = Unitnames.NPC_Heritance_Cutthroat, -- Mathiisen (Auridon)
+        [810] = Unitnames.NPC_Heritance_Cutthroat, -- Smuggler's Tunnel (Auridon)
+        --[Zonenames.Zone_Castle_Rilis] = Unitnames.NPC_Skeletal_Striker, -- Castle Rilis (Auridon) -- Can't, elite here stops this from working
+        [392] = Unitnames.NPC_Skeletal_Striker, -- The Vault of Exile (Auridon)
+        [Zonenames.Zone_Soulfire_Plateau] = Unitnames.NPC_Skeletal_Slayer, -- Soulfire Plateau (Auridon)
+        [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Cutthroat, -- Silsailen (Auridon)
+        [Zonenames.Zone_Errinorne_Isle] = Unitnames.NPC_Heritance_Cutthroat, -- Errinorne Isle (Auridon)
+
         [390] = Unitnames.NPC_Heritance_Cutthroat, -- The Veiled Keep
         [548] = Unitnames.NPC_Bandit_Rogue, -- Silatar
     },
@@ -1276,6 +1291,13 @@ LUIE.Data.AlertZoneOverride = {
         [Zonenames.Zone_South_Beacon] = Unitnames.NPC_Sea_Viper_Deadeye, -- South Beacon (Auridon)
         [Zonenames.Zone_Mathiisen] = Unitnames.NPC_Heritance_Deadeye, -- Mathiisen (Auridon)
         [810] = Unitnames.NPC_Heritance_Deadeye, -- Smuggler's Tunnel (Auridon)
+        --[Zonenames.Zone_Castle_Rilis] = Unitnames.NPC_Skeletal_Archer, -- Castle Rilis (Auridon) -- Can't, elite here stops this from working
+        [392] = Unitnames.NPC_Skeletal_Archer, -- The Vault of Exile (Auridon)
+        [Zonenames.Zone_Soulfire_Plateau] = Unitnames.NPC_Skeletal_Archer, -- Soulfire Plateau (Auridon)
+        [Zonenames.Zone_Hightide_Keep] = Unitnames.NPC_Skeletal_Archer, -- Hightide Keep (Auridon)
+        [Zonenames.Zone_Errinorne_Isle] = Unitnames.NPC_Heritance_Deadeye, -- Errinorne Isle (Auridon)
+        [Zonenames.Zone_Captain_Blanchetes_Ship] = Unitnames.NPC_Ghost_Viper_Deadeye, -- Captain Blanchete's Ship (Auridon)
+        [Zonenames.Zone_Ezduiin] = Unitnames.NPC_Spirit_Deadeye, -- Ezduiin (Auridon)
 
         [390] = Unitnames.NPC_Heritance_Deadeye, -- The Veiled Keep
         [435] = Unitnames.NPC_Sainted_Archer, -- Cathedral of the Golden Path
@@ -1285,6 +1307,13 @@ LUIE.Data.AlertZoneOverride = {
         [Zonenames.Zone_South_Beacon] = Unitnames.NPC_Sea_Viper_Deadeye, -- South Beacon (Auridon)
         [Zonenames.Zone_Mathiisen] = Unitnames.NPC_Heritance_Deadeye, -- Mathiisen (Auridon)
         [810] = Unitnames.NPC_Heritance_Deadeye, -- Smuggler's Tunnel (Auridon)
+        --[Zonenames.Zone_Castle_Rilis] = Unitnames.NPC_Skeletal_Archer, -- Castle Rilis (Auridon) -- Can't, elite here stops this from working
+        [392] = Unitnames.NPC_Skeletal_Archer, -- The Vault of Exile (Auridon)
+        [Zonenames.Zone_Soulfire_Plateau] = Unitnames.NPC_Skeletal_Archer, -- Soulfire Plateau (Auridon)
+        [Zonenames.Zone_Hightide_Keep] = Unitnames.NPC_Skeletal_Archer, -- Hightide Keep (Auridon)
+        [Zonenames.Zone_Errinorne_Isle] = Unitnames.NPC_Heritance_Deadeye, -- Errinorne Isle (Auridon)
+        [Zonenames.Zone_Captain_Blanchetes_Ship] = Unitnames.NPC_Ghost_Viper_Deadeye, -- Captain Blanchete's Ship (Auridon)
+        [Zonenames.Zone_Ezduiin] = Unitnames.NPC_Spirit_Deadeye, -- Ezduiin (Auridon)
 
         [390] = Unitnames.NPC_Heritance_Deadeye, -- The Veiled Keep
         [435] = Unitnames.NPC_Sainted_Archer, -- Cathedral of the Golden Path
@@ -1294,6 +1323,13 @@ LUIE.Data.AlertZoneOverride = {
         [Zonenames.Zone_South_Beacon] = Unitnames.NPC_Sea_Viper_Deadeye, -- South Beacon (Auridon)
         [Zonenames.Zone_Mathiisen] = Unitnames.NPC_Heritance_Deadeye, -- Mathiisen (Auridon)
         [810] = Unitnames.NPC_Heritance_Deadeye, -- Smuggler's Tunnel (Auridon)
+        --[Zonenames.Zone_Castle_Rilis] = Unitnames.NPC_Skeletal_Archer, -- Castle Rilis (Auridon) -- Can't, elite here stops this from working
+        [392] = Unitnames.NPC_Skeletal_Archer, -- The Vault of Exile (Auridon)
+        [Zonenames.Zone_Soulfire_Plateau] = Unitnames.NPC_Skeletal_Archer, -- Soulfire Plateau (Auridon)
+        [Zonenames.Zone_Hightide_Keep] = Unitnames.NPC_Skeletal_Archer, -- Hightide Keep (Auridon)
+        [Zonenames.Zone_Errinorne_Isle] = Unitnames.NPC_Heritance_Deadeye, -- Errinorne Isle (Auridon)
+        [Zonenames.Zone_Captain_Blanchetes_Ship] = Unitnames.NPC_Ghost_Viper_Deadeye, -- Captain Blanchete's Ship (Auridon)
+        [Zonenames.Zone_Ezduiin] = Unitnames.NPC_Spirit_Deadeye, -- Ezduiin (Auridon)
 
         [390] = Unitnames.NPC_Heritance_Deadeye, -- The Veiled Keep
         [435] = Unitnames.NPC_Sainted_Archer, -- Cathedral of the Golden Path
@@ -1303,6 +1339,8 @@ LUIE.Data.AlertZoneOverride = {
     --
     --},
     [88555] = { -- Summon the Dead (Necromancer)
+        [Zonenames.Zone_Tower_of_the_Vale] = Unitnames.Elite_Sanessalmo, -- Tower of the Vale (Auridon)
+
         [395] = Unitnames.NPC_Dremora_Narkynaz, -- The Refuge of Dread
         [Zonenames.Zone_Hectahame] = Unitnames.NPC_Veiled_Necromancer, -- Hectahame
         [Zonenames.Zone_Hectahame_Armory] = Unitnames.NPC_Veiled_Necromancer, -- Hectahame Armory
@@ -1313,6 +1351,9 @@ LUIE.Data.AlertZoneOverride = {
     --
     --},
     [10805] = { -- Ignite (Synergy)
+        [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Incendiary, -- Silsailen (Auridon)
+        [Zonenames.Zone_Tower_of_the_Vale] = Unitnames.Elite_Minantilles_Rage, -- Tower of the Vale (Auridon)
+
         [389] = Unitnames.NPC_Skeletal_Infernal, -- Reliquary Ruins
         [548] = Unitnames.NPC_Bandit_Incendiary, -- Silitar
         [555] = Unitnames.Boss_Vicereeve_Pelidil, -- Abecean Sea
@@ -1322,6 +1363,9 @@ LUIE.Data.AlertZoneOverride = {
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Ritual Chamber
     },
     [47095] = { -- Fire Rune (Fire Mage)
+        [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Incendiary, -- Silsailen (Auridon)
+        [Zonenames.Zone_Tower_of_the_Vale] = Unitnames.Elite_Minantilles_Rage, -- Tower of the Vale (Auridon)
+
         [389] = Unitnames.NPC_Skeletal_Infernal, -- Reliquary Ruins
         [548] = Unitnames.NPC_Bandit_Incendiary, -- Silitar
         [555] = Unitnames.Boss_Vicereeve_Pelidil, -- Abecean Sea
@@ -1411,10 +1455,15 @@ LUIE.Data.AlertZoneOverride = {
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Veiled_Bonelord, -- Hectahame Ritual Chamber
     },
     [5050] = { -- Bone Saw (Bone Colossus)
+        [Zonenames.Zone_Hightide_Keep] = Unitnames.Elite_Garggeel, -- Hightide Keep (Auridon)
+
         [Zonenames.Zone_Hectahame] = Unitnames.NPC_Bone_Colossus, -- Hectahame
         [Zonenames.Zone_Hectahame_Armory] = Unitnames.NPC_Bone_Colossus, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = Unitnames.NPC_Bone_Colossus, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Bone_Colossus, -- Hectahame Ritual Chamber
+    },
+    [5030] = { -- Voice to Wake the Dead (Bone Colossus)
+        [Zonenames.Zone_Hightide_Keep] = Unitnames.Elite_Garggeel, -- Hightide Keep (Auridon)
     },
 
     [22521] = { -- Defiled Ground (Lich)
@@ -1422,6 +1471,22 @@ LUIE.Data.AlertZoneOverride = {
     },
     [73925] = { -- Soul Cage (Lich)
         [559] = Unitnames.Boss_Shade_of_Naemon, -- Valenheart
+    },
+
+    [44736] = { -- Swinging Cleave (Troll)
+        [Zonenames.Zone_Castle_Rilis] = Unitnames.NPC_Troll, -- Castle Rilis (Auridon) -- TODO: Probably can do all of Auridon
+        [Zonenames.Zone_Nine_Prow_Landing] = Unitnames.NPC_Troll, -- Nine-Prow Landing (Auridon) -- TODO: Probably can do all of Auridon
+    },
+    [9009] = { -- Tremor (Troll)
+        [Zonenames.Zone_Castle_Rilis] = Unitnames.NPC_Troll, -- Castle Rilis (Auridon) -- TODO: Probably can do all of Auridon
+        [Zonenames.Zone_Nine_Prow_Landing] = Unitnames.NPC_Troll, -- Nine-Prow Landing (Auridon) -- TODO: Probably can do all of Auridon
+    },
+    [3415] = { -- Flurry (Werewolf)
+        [392] = Unitnames.Elite_Sorondil, -- The Vault of Exile (Auridon)
+    },
+
+    [4415] = { -- Crushing Swipe (Bear)
+        [381] = Unitnames.NPC_Bear, -- Auridon
     },
 
 }

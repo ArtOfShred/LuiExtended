@@ -15,6 +15,15 @@ LUIE.Data.ZoneNames = {
     Zone_Tanzelwil                        = 'Tanzelwil',
     Zone_South_Beacon                     = 'South Beacon',
     Zone_Mathiisen                        = 'Mathiisen',
+    Zone_Castle_Rilis                     = 'Castle Rilis',
+    Zone_Nine_Prow_Landing                = 'Nine-Prow Landing',
+    Zone_Soulfire_Plateau                 = 'Soulfire Plateau',
+    Zone_Silsailen                        = 'Silsailen',
+    Zone_Hightide_Keep                    = 'Hightide Keep',
+    Zone_Errinorne_Isle                   = 'Errinorne Isle',
+    Zone_Tower_of_the_Vale                = 'Tower of the Vale',
+    Zone_Captain_Blanchetes_Ship          = 'Captain Blanchete\'s Ship',
+    Zone_Ezduiin                          = 'Ezduiin',
 
     -- Greenshade
     Zone_Hectahame                        = 'Hectahame',

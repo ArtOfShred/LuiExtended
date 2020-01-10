@@ -99,7 +99,7 @@ function LUIE.InitializeHooks()
 
             if LUIE.Data.Effects.MapDataOverride[abilityId] then
                 local index = GetZoneId(GetCurrentMapZoneIndex())
-                local zoneName = GetPlayerActiveSubzoneName()
+                local zoneName = GetPlayerLocationName()
                 if LUIE.Data.Effects.MapDataOverride[abilityId][index] then
                     if LUIE.Data.Effects.MapDataOverride[abilityId][index].icon then
                         attackIcon = LUIE.Data.Effects.MapDataOverride[abilityId][index].icon
@@ -297,15 +297,15 @@ function LUIE.InitializeHooks()
                         counter = counter + 1
                     end
 
-                    -- Heavy handed - but functional way to mark duplicate abilities to not display (Duplicate shuffle auras, etc) by only displaying the one with the latest end time.
+                    -- Heavy handed - but functional way to mark duplicate abilities to not display by only displaying the one with the latest end time.
                     for i = 1, #trackBuffs do
                         local compareId = trackBuffs[i].abilityId
                         local compareTime = trackBuffs[i].endTime
                         -- Only re-iterate and compare if this ability is on the override table, this way we avoid as much of this double loop as possible.
                         if LUIE.Data.Effects.EffectOverride[compareId] and LUIE.Data.Effects.EffectOverride[compareId].noDuplicate then
                             for k, v in pairs(trackBuffs) do
-                                -- Only remove the lower duration effects that were cast previously.
-                                if v.abilityId == compareId and v.endTime < compareTime then
+                                -- Only remove the lower duration effects that were cast previously or simultaneously.
+                                if v.abilityId == compareId and v.endTime <= compareTime then
                                     v.markForRemove = true
                                 end
                             end
