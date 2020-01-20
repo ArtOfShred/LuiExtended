@@ -11257,6 +11257,7 @@ LUIE.DebugAuras = {
     [24660] = true, -- Defeated
     [30749] = true, -- Q4329 White Flag
     [25430] = true, -- Smoke Bomb
+    [25305] = true, -- Bat Jump
 
     -- Blessings of the Eight
     [47149] = true, -- Magefire

@@ -834,6 +834,7 @@ local strings = {
     SI_LUIE_SKILL_DISGUISE_SEA_VIPER_ARMOR_TP =          "Disguised as a Maormer Soldier.",
     SI_LUIE_SKILL_DISGUISE_VULKHEL_GUARD_TP =            "Disguised as a First Auridon Marine.",
     SI_LUIE_SKILL_DISGUISE_PHAER_MERCENARY_TP =          "Disguised as a Phaer Mercenary.",
+    SI_LUIE_SKILL_DISGUISE_QUENDELUUN_TP =               "Disguised as a member of the invading Ebonheart Pact forces.",
 
     -- Weapon Sets
     SI_LUIE_SKILL_SET_ASYLUM_BOW =                       "The next Snipe, Scatter Shot, or Poison Arrow cast within |cffffff6|r seconds by your attacker deals |cffffff<<1>>|r% additional damage.",
@@ -1050,7 +1051,7 @@ local strings = {
     SI_LUIE_SKILL_FREE_SPIRIT =                          "Free Spirit",
     SI_LUIE_SKILL_UNBIND =                               "Unbind",
     SI_LUIE_SKILL_BACKFIRE =                             "Backfire",
-    SI_LUIE_SKILL_DIVINE_SPEED_TP =                      "A divine blessing boosts your Movement Speed for |cFFFFFF2|r minutes.", -- TODO: ADD %
+    SI_LUIE_SKILL_DIVINE_SPEED_TP =                      "Increase Movement Speed by |cFFFFFF45|r% for |cFFFFFF2|r minutes.",
     SI_LUIE_SKILL_QUEST_LIGHTNING_FURY_TP =              "Lightning courses through your body causing all weapon attacks to deal Shock Damage.",
     SI_LUIE_SKILL_MANTLES_SHADOW =                       "Mantle's Shadow",
     SI_LUIE_SKILL_THROW_WATER =                          "Throw Water",
@@ -1130,7 +1131,7 @@ local strings = {
     SI_LUIE_SKILL_FROST_RAY_TP =                         "Afflicted with Frost Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nDeals additional Frost Damage if the channel is finished.",
     SI_LUIE_SKILL_LACERATE_GARGOYLE_TP =                 "Afflicted with Bleeding Damage every |cFFFFFF2.5|r seconds for |cFFFFFF16.5|r seconds.\n\nKnocked down for |cFFFFFF2|r seconds.",
     SI_LUIE_SKILL_VAMPIRIC_TOUCH_GARGOYLE_TP =           "Single target direct damage attacks restore Health.",
-    SI_LUIE_SKILL_SUMMON_THE_DEAD_TP =                   "An risen undead companion fights at your side. The undead remains for |cFFFFFF2|r minutes or until killed.",
+    SI_LUIE_SKILL_SUMMON_THE_DEAD_TP =                   "A risen undead companion fights at your side. The undead remains for |cFFFFFF2|r minutes or until killed.",
     SI_LUIE_SKILL_BURDENING_EYE_TP =                     "The Burdening Eye seeks out a nearby enemy and explodes, dealing Magic Damage and reducing the targets Movement Speed by |cFFFFFF80|r% for |cFFFFFF2|r seconds.",
     SI_LUIE_SKILL_SPELL_ABSORPTION_TP =                  "Reduce Flame, Frost, Shock, and Magic Damage taken by |cFFFFFF90|r% for |cFFFFFF<<1>>|r seconds while the channel is maintained.",
     SI_LUIE_SKILL_SHARD_SHIELD_TP =                      "Absorbing damage for |cFFFFFF5|r minutes.\n\nWhen the shield takes damage, as long as absorption remains, your attacker takes Physical Damage and is stunned for |cFFFFFF1.2|r seconds.",

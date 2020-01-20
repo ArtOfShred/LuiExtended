@@ -49,6 +49,7 @@ LUIE.Data.UnitNames = {
     NPC_Skeletal_Tempest                  = 'Skeletal Tempest',
     NPC_Skeletal_Striker                  = 'Skeletal Striker',
     NPC_Skeletal_Slayer                   = 'Skeletal Slayer',
+    NPC_Skeletal_Thundermaul              = 'Skeletal Thundermaul',
     NPC_Spectral_Storm_Mage               = 'Spectral Storm Mage',
     NPC_Sainted_Archer                    = 'Sainted Archer',
     NPC_Sainted_Charger                   = 'Sainted Charger',
@@ -82,6 +83,9 @@ LUIE.Data.UnitNames = {
     NPC_Ghost_Viper_Deadeye               = 'Ghost Viper Deadeye',
     NPC_Spirit_Deadeye                    = 'Spirit Deadeye',
     NPC_Thundermaul                       = 'Thundermaul',
+    NPC_Pact_Pyromancer                   = 'Pact Pyromancer',
+    NPC_Pact_Necromancer                  = 'Pact Necromancer',
+    NPC_Scamp                             = 'Scamp',
 
     ----------------------------------------------------------------
     -- QUESTS ------------------------------------------------------
@@ -110,6 +114,11 @@ LUIE.Data.UnitNames = {
     Elite_Minantilles_Rage = 'Minantille\'s Rage',
     Elite_Sanessalmo = 'Sanessalmo',
     Elite_Uricantar = 'Uricantar',
+    Elite_Centurion_Earran = 'Centurion Earran',
+    Elite_Nolonir = 'Nolonir',
+    Elite_Malangwe = 'Malangwe',
+    Elite_Karulae = 'Karulae',
+    Elite_Vregas = 'Vregas',
     Boss_Norion = 'Norion',
     Elite_Canonreeve_Malanie = 'Canonreeve Malanie',
     Elite_Mezelukhebruz = 'Mezelukhebruz',

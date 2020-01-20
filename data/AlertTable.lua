@@ -58,6 +58,7 @@ LUIE.Data.AlertTable = {
     -- alwaysShowInterrupt = true -- Show an interrupt even if this effect doesn't display a duration.
     -- noSelf = true -- Do not show this alert if you are the target/source of it. This is used for warning party members of attacks they have to help you deal with.
     -- durationOnlyIfTarget = true -- Only show a duration timer if the player is the target, this makes some events we can't detect interrupts for less annoying for other players if they get interrupted early.
+    -- hideIfNoSource = true -- Hide if this event has no source name (this factors in after all name overrides including zone ones).
 
     --------------------------------------------------
     -- JUSTICE NPC'S ---------------------------------
@@ -324,7 +325,7 @@ LUIE.Data.AlertTable = {
     [5685] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Corrosive Bite (Giant Spider)
     [8087] = { block = true, avoid = true, priority = 3, eventdetect = true, refire = 1200, result = ACTION_RESULT_BEGIN, duration = 5100 }, -- Poison Spray (Giant Spider)
     [4737] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = SNARE }, -- Encase (Giant Spider)
-    --[13382] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Devour (Giant Spider)
+    [13382] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, hideIfNoSource = true, alwaysShowInterrupt = true }, -- Devour (Giant Spider)
 
     [9226] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1400 }, -- Sting (Wasp)
     [25110] = { block = true, dodge = true, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = STUN }, -- Focused Charge (Giant Wasp)
@@ -1260,6 +1261,7 @@ LUIE.Data.AlertZoneOverride = {
     [29510] = { -- Thunder Hammer (Thundermaul)
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.Elite_Arstul, -- Maormer Invasion Camp (Auridon)
         [394] = Unitnames.NPC_Thundermaul, -- Ezduiin Undercroft (Auridon)
+        [399] = Unitnames.NPC_Skeletal_Thundermaul, -- Wansalen (Auridon - Delve)
 
         [435] = Unitnames.NPC_Sainted_Charger, -- Cathedral of the Golden Path
         [555] = Unitnames.NPC_Sea_Viper_Charger, -- Abecean Sea
@@ -1267,6 +1269,7 @@ LUIE.Data.AlertZoneOverride = {
     [17867] = { -- Shock Aura (Thundermaul)
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.Elite_Arstul, -- Maormer Invasion Camp (Auridon)
         [394] = Unitnames.NPC_Thundermaul, -- Ezduiin Undercroft (Auridon)
+        [399] = Unitnames.NPC_Skeletal_Thundermaul, -- Wansalen (Auridon - Delve)
 
         [435] = Unitnames.NPC_Sainted_Charger, -- Cathedral of the Golden Path
         [555] = Unitnames.NPC_Sea_Viper_Charger, -- Abecean Sea
@@ -1282,8 +1285,13 @@ LUIE.Data.AlertZoneOverride = {
         [Zonenames.Zone_Soulfire_Plateau] = Unitnames.NPC_Skeletal_Slayer, -- Soulfire Plateau (Auridon)
         [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Cutthroat, -- Silsailen (Auridon)
         [Zonenames.Zone_Errinorne_Isle] = Unitnames.NPC_Heritance_Cutthroat, -- Errinorne Isle (Auridon)
-
+        [Zonenames.Zone_Quendeluun] = Unitnames.NPC_Heritance_Cutthroat, -- Quendeluun (Auridon)
+        [Zonenames.Zone_Wansalen] = Unitnames.NPC_Heritance_Cutthroat, -- Quendeluun (Auridon) - For a little section with npcs outside of the delv near Quendeluun.
+        [393] = Unitnames.NPC_Heritance_Cutthroat, -- Saltspray Cave (Auridon)
         [390] = Unitnames.NPC_Heritance_Cutthroat, -- The Veiled Keep
+        [Zonenames.Zone_Heritance_Proving_Ground] = Unitnames.NPC_Heritance_Cutthroat, -- Heritance Proving Ground (Auridon)
+        [Zonenames.Zone_Isle_of_Contemplation] = Unitnames.Elite_Karulae, -- Isle of Contemplation (Auridon)
+
         [548] = Unitnames.NPC_Bandit_Rogue, -- Silatar
     },
     [37108] = { -- Arrow Spray (Archer)
@@ -1298,8 +1306,11 @@ LUIE.Data.AlertZoneOverride = {
         [Zonenames.Zone_Errinorne_Isle] = Unitnames.NPC_Heritance_Deadeye, -- Errinorne Isle (Auridon)
         [Zonenames.Zone_Captain_Blanchetes_Ship] = Unitnames.NPC_Ghost_Viper_Deadeye, -- Captain Blanchete's Ship (Auridon)
         [Zonenames.Zone_Ezduiin] = Unitnames.NPC_Spirit_Deadeye, -- Ezduiin (Auridon)
-
+        [Zonenames.Zone_Quendeluun] = Unitnames.Elite_Centurion_Earran, -- Quendeluun (Auridon)
+        [393] = Unitnames.Elite_Malangwe, -- Saltspray Cave (Auridon)
         [390] = Unitnames.NPC_Heritance_Deadeye, -- The Veiled Keep
+        [Zonenames.Zone_Heritance_Proving_Ground] = Unitnames.NPC_Heritance_Deadeye, -- Heritance Proving Ground (Auridon)
+
         [435] = Unitnames.NPC_Sainted_Archer, -- Cathedral of the Golden Path
     },
     [28628] = { -- Volley (Archer)
@@ -1314,8 +1325,11 @@ LUIE.Data.AlertZoneOverride = {
         [Zonenames.Zone_Errinorne_Isle] = Unitnames.NPC_Heritance_Deadeye, -- Errinorne Isle (Auridon)
         [Zonenames.Zone_Captain_Blanchetes_Ship] = Unitnames.NPC_Ghost_Viper_Deadeye, -- Captain Blanchete's Ship (Auridon)
         [Zonenames.Zone_Ezduiin] = Unitnames.NPC_Spirit_Deadeye, -- Ezduiin (Auridon)
-
+        [Zonenames.Zone_Quendeluun] = Unitnames.Elite_Centurion_Earran, -- Quendeluun (Auridon)
+        [393] = Unitnames.Elite_Malangwe, -- Saltspray Cave (Auridon)
         [390] = Unitnames.NPC_Heritance_Deadeye, -- The Veiled Keep
+        [Zonenames.Zone_Heritance_Proving_Ground] = Unitnames.NPC_Heritance_Deadeye, -- Heritance Proving Ground (Auridon)
+
         [435] = Unitnames.NPC_Sainted_Archer, -- Cathedral of the Golden Path
     },
     [12439] = { -- Burning Arrow (Synergy)
@@ -1330,8 +1344,11 @@ LUIE.Data.AlertZoneOverride = {
         [Zonenames.Zone_Errinorne_Isle] = Unitnames.NPC_Heritance_Deadeye, -- Errinorne Isle (Auridon)
         [Zonenames.Zone_Captain_Blanchetes_Ship] = Unitnames.NPC_Ghost_Viper_Deadeye, -- Captain Blanchete's Ship (Auridon)
         [Zonenames.Zone_Ezduiin] = Unitnames.NPC_Spirit_Deadeye, -- Ezduiin (Auridon)
-
+        [Zonenames.Zone_Quendeluun] = Unitnames.Elite_Centurion_Earran, -- Quendeluun (Auridon)
+        [393] = Unitnames.Elite_Malangwe, -- Saltspray Cave (Auridon)
         [390] = Unitnames.NPC_Heritance_Deadeye, -- The Veiled Keep
+        [Zonenames.Zone_Heritance_Proving_Ground] = Unitnames.NPC_Heritance_Deadeye, -- Heritance Proving Ground (Auridon)
+
         [435] = Unitnames.NPC_Sainted_Archer, -- Cathedral of the Golden Path
     },
 
@@ -1340,6 +1357,9 @@ LUIE.Data.AlertZoneOverride = {
     --},
     [88555] = { -- Summon the Dead (Necromancer)
         [Zonenames.Zone_Tower_of_the_Vale] = Unitnames.Elite_Sanessalmo, -- Tower of the Vale (Auridon)
+        [Zonenames.Zone_Quendeluun] = Unitnames.NPC_Pact_Necromancer, -- Quendeluun (Auridon)
+        [Zonenames.Zone_Wansalen] = Unitnames.NPC_Pact_Necromancer, -- Quendeluun (Auridon) - For a little section with npcs outside of the delv near Quendeluun.
+        [Zonenames.Zone_Torinaan] = Unitnames.Elite_Vregas, -- Torinaan (Auridon)
 
         [395] = Unitnames.NPC_Dremora_Narkynaz, -- The Refuge of Dread
         [Zonenames.Zone_Hectahame] = Unitnames.NPC_Veiled_Necromancer, -- Hectahame
@@ -1353,6 +1373,8 @@ LUIE.Data.AlertZoneOverride = {
     [10805] = { -- Ignite (Synergy)
         [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Incendiary, -- Silsailen (Auridon)
         [Zonenames.Zone_Tower_of_the_Vale] = Unitnames.Elite_Minantilles_Rage, -- Tower of the Vale (Auridon)
+        [Zonenames.Zone_Quendeluun] = Unitnames.NPC_Pact_Pyromancer, -- Quendeluun (Auridon)
+        [Zonenames.Zone_Wansalen] = Unitnames.NPC_Pact_Pyromancer, -- Quendeluun (Auridon) - For a little section with npcs outside of the delv near Quendeluun.
 
         [389] = Unitnames.NPC_Skeletal_Infernal, -- Reliquary Ruins
         [548] = Unitnames.NPC_Bandit_Incendiary, -- Silitar
@@ -1365,6 +1387,8 @@ LUIE.Data.AlertZoneOverride = {
     [47095] = { -- Fire Rune (Fire Mage)
         [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Incendiary, -- Silsailen (Auridon)
         [Zonenames.Zone_Tower_of_the_Vale] = Unitnames.Elite_Minantilles_Rage, -- Tower of the Vale (Auridon)
+        [Zonenames.Zone_Quendeluun] = Unitnames.NPC_Pact_Pyromancer, -- Quendeluun (Auridon)
+        [Zonenames.Zone_Wansalen] = Unitnames.NPC_Pact_Pyromancer, -- Quendeluun (Auridon) - For a little section with npcs outside of the delv near Quendeluun.
 
         [389] = Unitnames.NPC_Skeletal_Infernal, -- Reliquary Ruins
         [548] = Unitnames.NPC_Bandit_Incendiary, -- Silitar
@@ -1386,6 +1410,7 @@ LUIE.Data.AlertZoneOverride = {
     },
     [4799] = { -- Tail Spike (Clannfear)
         [395] = Unitnames.Elite_Marrow, -- The Refuge of Dread
+        [Zonenames.Zone_Torinaan] = Unitnames.NPC_Clannfear -- Torinaan (Auridon)
     },
 
     [4653] = { -- Shockwave (Watcher)
@@ -1449,6 +1474,8 @@ LUIE.Data.AlertZoneOverride = {
     },
 
     [88507] = { -- Summon Abomination (Bonelord)
+        [399] = Unitnames.Elite_Nolonir, -- Wansalen (Auridon - Delve)
+
         [Zonenames.Zone_Hectahame] = Unitnames.NPC_Veiled_Bonelord, -- Hectahame
         [Zonenames.Zone_Hectahame_Armory] = Unitnames.NPC_Veiled_Bonelord, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = Unitnames.NPC_Veiled_Bonelord, -- Hectahame Arboretum
@@ -1456,6 +1483,7 @@ LUIE.Data.AlertZoneOverride = {
     },
     [5050] = { -- Bone Saw (Bone Colossus)
         [Zonenames.Zone_Hightide_Keep] = Unitnames.Elite_Garggeel, -- Hightide Keep (Auridon)
+        [399] = Unitnames.NPC_Bone_Colossus, -- Wansalen (Auridon - Delve)
 
         [Zonenames.Zone_Hectahame] = Unitnames.NPC_Bone_Colossus, -- Hectahame
         [Zonenames.Zone_Hectahame_Armory] = Unitnames.NPC_Bone_Colossus, -- Hectahame Armory
@@ -1489,4 +1517,20 @@ LUIE.Data.AlertZoneOverride = {
         [381] = Unitnames.NPC_Bear, -- Auridon
     },
 
+    [44086] = {-- Fire Runes (Giant Spider)
+        [393] = Unitnames.NPC_Spider, -- Saltspray Cave (Auridon)
+    },
+    [8087] = { -- Poison Spray (Giant Spider)
+        [393] = Unitnames.NPC_Spider, -- Saltspray Cave (Auridon)
+    },
+    [4737] = { -- Encase (Giant Spider)
+        [393] = Unitnames.NPC_Spider, -- Saltspray Cave (Auridon)
+    },
+    [13382] = { -- Devour (Giant Spider)
+        [393] = Unitnames.NPC_Spider, -- Saltspray Cave (Auridon)
+    },
+
+    [6160] = { -- Rain of Fire (Scamp)
+        [381] = Unitnames.NPC_Scamp, -- Auridon
+    },
 }

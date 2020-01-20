@@ -560,6 +560,7 @@ LUIE.Data.Tooltips = {
     Disguise_Sea_Viper_Armor                        = GetString(SI_LUIE_SKILL_DISGUISE_SEA_VIPER_ARMOR_TP),
     Disguise_Vulkhel_Guard                          = GetString(SI_LUIE_SKILL_DISGUISE_VULKHEL_GUARD_TP),
     Disguise_Phaer_Mercenary                        = GetString(SI_LUIE_SKILL_DISGUISE_PHAER_MERCENARY_TP),
+    Disguise_Quendeluun                             = GetString(SI_LUIE_SKILL_DISGUISE_QUENDELUUN_TP),
 
     ----------------------------------------------------------------
     -- CLASS SKILLS ------------------------------------------------

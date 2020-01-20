@@ -24,6 +24,11 @@ LUIE.Data.ZoneNames = {
     Zone_Tower_of_the_Vale                = 'Tower of the Vale',
     Zone_Captain_Blanchetes_Ship          = 'Captain Blanchete\'s Ship',
     Zone_Ezduiin                          = 'Ezduiin',
+    Zone_Quendeluun                       = 'Quendeluun',
+    Zone_Heritance_Proving_Ground         = 'Heritance Proving Ground',
+    Zone_Wansalen                         = 'Wansalen',
+    Zone_Isle_of_Contemplation            = 'Isle of Contemplation',
+    Zone_Torinaan                         = 'Torinaan',
 
     -- Greenshade
     Zone_Hectahame                        = 'Hectahame',

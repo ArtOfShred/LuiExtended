@@ -519,7 +519,15 @@ ChatAnnouncements.Defaults = {
         CurrencyMessageDestroy          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DESTROY),
         CurrencyMessageLockpick         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LOCKPICK),
         CurrencyMessageRemove           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_REMOVE),
-        CurrencyMessageCombine          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_COMBINE),
+        CurrencyMessageQuestTurnIn      = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TURNIN),
+        CurrencyMessageQuestUse         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_QUESTUSE),
+        CurrencyMessageQuestExhaust     = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_EXHAUST),
+        CurrencyMessageQuestOffer       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_OFFER),
+        CurrencyMessageQuestDiscard     = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DISCARD),
+        CurrencyMessageQuestConfiscate  = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_QUESTCONFISCATE),
+        CurrencyMessageQuestCombine     = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_COMBINE),
+        CurrencyMessageQuestMix         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_MIX),
+        CurrencyMessageQuestBundle      = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_BUNDLE),
         CurrencyMessageGroup            = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_GROUP),
         CurrencyMessageDisguiseEquip    = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DISGUISE_EQUIP),
         CurrencyMessageDisguiseRemove   = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DISGUISE_REMOVE),
@@ -549,6 +557,7 @@ local g_isLooted                    = false         -- Toggled on to modify loot
 local g_isPickpocketed              = false         -- Toggled on to modify loot notification to "pickpocketed."
 local g_isStolen                    = false         -- Toggled on to modify loot notification to "stolen."
 local g_itemReceivedIsQuestReward   = false         -- Toggled on to modify loot notification to "received." This overrides the "looted" tag applied to quest item rewards.
+local g_itemReceivedIsQuestAbandon  = false         -- Toggled on to modify remove notification to "removed" when a quest is abandoned.
 local g_itemsConfiscated            = false         -- Toggled on when items are confiscated to modify the notification message.
 local g_weAreInAStore               = false         -- Toggled on when the player opens a store.
 local g_weAreInAFence               = false         -- Toggled on when the player opens a fence.
@@ -3331,6 +3340,26 @@ function ChatAnnouncements.ResolveQuestItemChange()
                         end
 
                         logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageRemove
+
+                        if Quests.ItemRemovedMessage[itemId] then
+                            logPrefix = Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_TURNIN and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestTurnIn or
+                            Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_USE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestUse or
+                            Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_EXHAUST and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestExhaust or
+                            Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_OFFER and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestOffer or
+                            Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_DISCARD and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestDiscard or
+                            Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_CONFISCATE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestConfiscate
+                        end
+
+                        -- Any items that are removed at the same time a quest is turned or advanced in will be flagged to display as "Turned In."
+                        if g_itemReceivedIsQuestReward then
+                            logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestTurnIn
+                        end
+
+                        -- Any items that are removed at the same time a quest is abandoned will be flagged to display as "Removed."
+                        if g_itemReceivedIsQuestAbandon then
+                            logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageRemove
+                        end
+
                         local quantity = (countChange * -1) > 1 and (" |cFFFFFFx" .. (countChange * -1) .. "|r") or ""
 
                         formattedMessageP1 = ("|r" .. formattedIcon .. itemLink .. quantity .. "|c" .. color)
@@ -3385,6 +3414,12 @@ function ChatAnnouncements.ResolveQuestItemChange()
                         else
                             logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
                         end
+                        if Quests.ItemReceivedMessage[itemId] then
+                            logPrefix = Quests.ItemReceivedMessage[itemId] == LUIE_QUEST_MESSAGE_COMBINE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestCombine or
+                            Quests.ItemReceivedMessage[itemId] == LUIE_QUEST_MESSAGE_MIX and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestMix or
+                            Quests.ItemReceivedMessage[itemId] == LUIE_QUEST_MESSAGE_BUNDLE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestBundle or
+                            Quests.ItemReceivedMessage[itemId] == LUIE_QUEST_MESSAGE_LOOT and ChatAnnouncements.SV.ContextMessages.CurrencyMessageLoot
+                        end
 
                         -- Some quest items we want to limit the maximum possible quantity displayed when looted (for wierd item swapping) so replace the actual quantity with this value.
                         if Quests.QuestItemMaxQuantityAdd[itemId] then
@@ -3397,7 +3432,6 @@ function ChatAnnouncements.ResolveQuestItemChange()
 
                         -- Message for items being merged.
                         if Quests.QuestItemMerge[itemId] then
-                            logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageCombine
 
                             local line = ""
                             for i = 1, #Quests.QuestItemMerge[itemId] do
@@ -7040,6 +7074,14 @@ function ChatAnnouncements.HookFunction()
         end
     end
 
+    local function ResetQuestRewardStatus()
+        g_itemReceivedIsQuestReward = false
+    end
+
+    local function ResetQuestAbandonStatus()
+        g_itemReceivedIsQuestAbandon = false
+    end
+
     local function QuestAddedHook(journalIndex, questName, objectiveName)
         eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         ChatAnnouncements.PrintBufferedXP()
@@ -7112,10 +7154,6 @@ function ChatAnnouncements.HookFunction()
     local function QuestCompleteHook(questName, level, previousExperience, currentExperience, championPoints, questType, instanceDisplayType)
         eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         ChatAnnouncements.PrintBufferedXP()
-
-        local function ResetQuestRewardStatus()
-            g_itemReceivedIsQuestReward = false
-        end
 
         local questJournalObject = SYSTEMS:GetObject("questJournal")
         local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
@@ -7235,6 +7273,15 @@ function ChatAnnouncements.HookFunction()
             messageParams:SetSound(sound)
         end
 
+        d(conditionType)
+        if isConditionComplete and conditionType == QUEST_CONDITION_TYPE_GIVE_ITEM or conditionType == QUEST_CONDITION_TYPE_TALK_TO then
+            -- We set this variable to true in order to override the [Looted] message syntax that would be applied to a quest reward normally.
+            if ChatAnnouncements.SV.Inventory.Loot then
+                g_itemReceivedIsQuestReward = true
+                zo_callLater(ResetQuestRewardStatus, 500)
+            end
+        end
+
         if isConditionComplete and conditionType == QUEST_CONDITION_TYPE_GIVE_ITEM then
              messageParams:SetText(zo_strformat(SI_TRACKED_QUEST_STEP_DONE, conditionText))
              alertMessage = zo_strformat(SI_TRACKED_QUEST_STEP_DONE, conditionText)
@@ -7295,7 +7342,7 @@ function ChatAnnouncements.HookFunction()
                         return true
                     end
                 end
-                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedMessage, type = "QUEST" }
+                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedMessage, type = "MESSAGE" } -- We set the message type to MESSAGE so if we loot a quest item that progresses the quest this comes after.
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
             end
@@ -7318,7 +7365,7 @@ function ChatAnnouncements.HookFunction()
                         return true
                     end
                 end
-                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedMessage, type = "QUEST" }
+                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedMessage, type = "MESSAGE" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
             end
@@ -7343,7 +7390,7 @@ function ChatAnnouncements.HookFunction()
             local formattedString = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, message)
 
             if ChatAnnouncements.SV.Quests.QuestObjCompleteCA then
-                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
+                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
             end
@@ -7386,7 +7433,7 @@ function ChatAnnouncements.HookFunction()
                     else
                         formattedString = zo_strformat(SI_LUIE_CA_QUEST_ABANDONED, questNameFormatted)
                     end
-                    g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
+                    g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
                     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                     eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
                 end
@@ -7418,8 +7465,16 @@ function ChatAnnouncements.HookFunction()
             if not ChatAnnouncements.SV.Quests.QuestAbandonCSA then
                 PlaySound(SOUNDS.QUEST_ABANDONED)
             end
+
+            -- We set this variable to true in order to override the message syntax that would be applied to a quest reward normally with [Removed] instead.
+            if ChatAnnouncements.SV.Inventory.Loot then
+                g_itemReceivedIsQuestAbandon = true
+                zo_callLater(ResetQuestAbandonStatus, 500)
+            end
+
         end
         g_questIndex[questName] = nil
+
     end
 
     -- Quest Advancement displays all the "appropriate" conditions that the player needs to do to advance the current step
@@ -7437,7 +7492,7 @@ function ChatAnnouncements.HookFunction()
             if visibility == nil or visibility == QUEST_STEP_VISIBILITY_OPTIONAL then
                 if stepOverrideText ~= "" then
                     if ChatAnnouncements.SV.Quests.QuestObjUpdateCA then
-                        g_queuedMessages[g_queuedMessagesCounter] = { message = stepOverrideText, type = "QUEST" }
+                        g_queuedMessages[g_queuedMessagesCounter] = { message = stepOverrideText, type = "MESSAGE" }
                         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
                     end
@@ -7457,7 +7512,7 @@ function ChatAnnouncements.HookFunction()
 
                         if not (isFailCondition or isConditionComplete) and isVisible then
                             if ChatAnnouncements.SV.Quests.QuestObjUpdateCA then
-                                g_queuedMessages[g_queuedMessagesCounter] = { message = conditionText, type = "QUEST" }
+                                g_queuedMessages[g_queuedMessagesCounter] = { message = conditionText, type = "MESSAGE" }
                                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
                             end

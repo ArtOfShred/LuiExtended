@@ -7,6 +7,17 @@
 LUIE.Data.Quests = {}
 local Quests = LUIE.Data.Quests
 
+LUIE_QUEST_MESSAGE_TURNIN = 1
+LUIE_QUEST_MESSAGE_USE = 2
+LUIE_QUEST_MESSAGE_EXHAUST = 3
+LUIE_QUEST_MESSAGE_OFFER = 4
+LUIE_QUEST_MESSAGE_DISCARD = 5
+LUIE_QUEST_MESSAGE_CONFISCATE = 6
+LUIE_QUEST_MESSAGE_COMBINE = 7
+LUIE_QUEST_MESSAGE_MIX = 8
+LUIE_QUEST_MESSAGE_BUNDLE = 9
+LUIE_QUEST_MESSAGE_LOOT = 10
+
 -- List of Quest Items to ignore when Looted (Alot of quest items swap out for different id's mid quest and it looks silly having a ton of messages print)
 Quests.QuestItemHideLoot = {
      -- Seasonal Quests
@@ -99,6 +110,16 @@ Quests.QuestItemHideRemove = {
     [3279] = true, -- Rune of Magnus (The Mallari-Mora)
     [3532] = true, -- Crystal (Preventative Measure)
     [3491] = true, -- Crystal (Preventative Measure)
+
+    [3458] = true, -- Relic Rescue
+    [3459] = true, -- Relic Rescue
+    [3460] = true, -- Relic Rescue
+    [3461] = true, -- Relic Rescue
+    [3462] = true, -- Relic Rescue
+    [3463] = true, -- Relic Rescue
+    [3464] = true, -- Relic Rescue
+    [3465] = true, -- Relic Rescue
+
     [4492] = true, -- Rajhin's Mantle (A Lasting Winter)
     [3609] = true, -- Heart of Anumaril (Heart of the Matter)
     [4610] = true, -- Rahjin's Mantle (The Orrery of Elden Root)
@@ -169,6 +190,46 @@ Quests.QuestItemMerge = {
 
     [3360] = { 3368, 3369 }, -- Volatile Fire Mixture (The Serpent's Beacon) -- Kindlepitch, Fire Salts
     [3402] = { 3403, 3404, 3405 }, -- Spore Potion (The Depths of Madness) -- Bloodcrown Spores, Lavendercap Mushrooms, Gleamcap Spores
+
+}
+
+-- Message to override when an item is removed.
+--LUIE_QUEST_MESSAGE_TURNIN = 1
+--LUIE_QUEST_MESSAGE_USE = 2
+--LUIE_QUEST_MESSAGE_EXHAUST = 3
+--LUIE_QUEST_MESSAGE_OFFER = 4
+--LUIE_QUEST_MESSAGE_DISCARD = 5
+--LUIE_QUEST_MESSAGE_CONFISCATE = 6
+Quests.ItemRemovedMessage = {
+
+    -- Auridon (MSQ)
+    [5434] = LUIE_QUEST_MESSAGE_CONFISCATE, -- Deployment Plans (A Hostile Situation)
+    [5435] = LUIE_QUEST_MESSAGE_CONFISCATE, -- Poisoned Meat (A Hostile Situation)
+    [3470] = LUIE_QUEST_MESSAGE_TURNIN, -- Fistalle's Note (Putting the Pieces Together) -- TODO: Not sure if needed anymore
+    [3434] = LUIE_QUEST_MESSAGE_TURNIN, -- Armament Inventory (Putting the Pieces Together) -- TODO: Not sure if needed anymore
+    [3435] = LUIE_QUEST_MESSAGE_TURNIN, -- Heritance Officer's Uniform (Putting the Pieces Together) -- TODO: Not sure if needed anymore
+    [3534] = LUIE_QUEST_MESSAGE_TURNIN, -- Royal Blade (Lifting the Veil)
+    [3556] = LUIE_QUEST_MESSAGE_EXHAUST, -- Earring of Altmer Nobility (The Veil Falls)
+
+    [3544] = LUIE_QUEST_MESSAGE_TURNIN, -- Wedding Ring (Through the Ashes)
+    [3548] = LUIE_QUEST_MESSAGE_DISCARD, -- Missing Citizens (Through the Ashes)
+    [3543] = LUIE_QUEST_MESSAGE_DISCARD, -- Pendant (Through the Ashes)
+
+}
+
+-- Message to override when an item is received.
+--LUIE_QUEST_MESSAGE_COMBINE = 7
+--LUIE_QUEST_MESSAGE_MIX = 8
+--LUIE_QUEST_MESSAGE_BUNDLE = 9
+--LUIE_QUEST_MESSAGE_LOOT = 10
+Quests.ItemReceivedMessage = {
+
+    -- Auridon (MSQ)
+    [3429] = LUIE_QUEST_MESSAGE_LOOT, -- Deployment Plans (Ensuring Security)
+    [3470] = LUIE_QUEST_MESSAGE_LOOT, -- Fistalle's Note (Putting the Pieces Together)
+    [3434] = LUIE_QUEST_MESSAGE_LOOT, -- Armament Inventory (Putting the Pieces Together)
+
+    [3543] = LUIE_QUEST_MESSAGE_LOOT, -- Pendant (Through the Ashes)
 
 }
 

@@ -1883,17 +1883,110 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = Defaults.ContextMessages.CurrencyMessageRemove,
             },
+
             {
-                -- Loot Message Combined (Quest)
+                -- Loot Message Turn In (Quest)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TURNIN),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TURNIN_TP),
+                getFunc = function() return Settings.ContextMessages.CurrencyMessageQuestTurnIn end,
+                setFunc = function(value) Settings.ContextMessages.CurrencyMessageQuestTurnIn = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.ContextMessages.CurrencyMessageQuestTurnIn,
+            },
+            {
+                -- Loot Message Use (Quest)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_QUESTUSE),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_QUESTUSE_TP),
+                getFunc = function() return Settings.ContextMessages.CurrencyMessageQuestUse end,
+                setFunc = function(value) Settings.ContextMessages.CurrencyMessageQuestUse = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.ContextMessages.CurrencyMessageQuestUse,
+            },
+            {
+                -- Loot Message Exhaust (Quest)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EXHAUST),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EXHAUST_TP),
+                getFunc = function() return Settings.ContextMessages.CurrencyMessageQuestExhaust end,
+                setFunc = function(value) Settings.ContextMessages.CurrencyMessageQuestExhaust = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.ContextMessages.CurrencyMessageQuestExhaust,
+            },
+            {
+                -- Loot Message Offer (Quest)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_OFFER),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_OFFER_TP),
+                getFunc = function() return Settings.ContextMessages.CurrencyMessageQuestOffer end,
+                setFunc = function(value) Settings.ContextMessages.CurrencyMessageQuestOffer = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.ContextMessages.CurrencyMessageQuestOffer,
+            },
+            {
+                -- Loot Message Discard (Quest)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISCARD),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISCARD_TP),
+                getFunc = function() return Settings.ContextMessages.CurrencyMessageQuestDiscard end,
+                setFunc = function(value) Settings.ContextMessages.CurrencyMessageQuestDiscard = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.ContextMessages.CurrencyMessageQuestDiscard,
+            },
+            {
+                -- Loot Message Discard (Quest)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_QUESTCONFISCATE),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_QUESTCONFISCATE_TP),
+                getFunc = function() return Settings.ContextMessages.CurrencyMessageQuestConfiscate end,
+                setFunc = function(value) Settings.ContextMessages.CurrencyMessageQuestConfiscate = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.ContextMessages.CurrencyMessageQuestConfiscate,
+            },
+            {
+                -- Loot Message Combine (Quest)
                 type = "editbox",
                 name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_COMBINE),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_COMBINE_TP),
-                getFunc = function() return Settings.ContextMessages.CurrencyMessageCombine end,
-                setFunc = function(value) Settings.ContextMessages.CurrencyMessageCombine = value end,
+                getFunc = function() return Settings.ContextMessages.CurrencyMessageQuestCombine end,
+                setFunc = function(value) Settings.ContextMessages.CurrencyMessageQuestCombine = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = Defaults.ContextMessages.CurrencyMessageCombine,
+                default = Defaults.ContextMessages.CurrencyMessageQuestCombine,
             },
+            {
+                -- Loot Message Mix (Quest)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MIX),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MIX_TP),
+                getFunc = function() return Settings.ContextMessages.CurrencyMessageQuestMix end,
+                setFunc = function(value) Settings.ContextMessages.CurrencyMessageQuestMix = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.ContextMessages.CurrencyMessageQuestMix,
+            },
+            {
+                -- Loot Message Bundle (Quest)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUNDLE),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUNDLE_TP),
+                getFunc = function() return Settings.ContextMessages.CurrencyMessageQuestBundle end,
+                setFunc = function(value) Settings.ContextMessages.CurrencyMessageQuestBundle = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.ContextMessages.CurrencyMessageQuestBundle,
+            },
+
+
+
+
             {
                 -- Loot Message Group
                 type = "editbox",

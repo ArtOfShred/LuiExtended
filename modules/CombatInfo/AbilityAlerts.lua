@@ -661,6 +661,12 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
         end
     end
 
+    if Alerts[abilityId].hideIfNoSource then
+        if unitName == "" or unitName == nil then
+            return
+        end
+    end
+
     local notTheTarget
     if Alerts[abilityId].durationOnlyIfTarget and sourceUnitId == 0 then
         notTheTarget = true
