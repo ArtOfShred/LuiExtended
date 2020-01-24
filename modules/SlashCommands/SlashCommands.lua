@@ -116,7 +116,7 @@ function SlashCommands.RegisterSlashCommands()
     SLASH_COMMANDS["/witch"]        = nil
     SLASH_COMMANDS["/witchfest"]    = nil
     SLASH_COMMANDS["/report"]       = nil
-    SLASH_COMMAND_AUTO_COMPLETE:InvalidateSlashCommandCache()
+    --SLASH_COMMAND_AUTO_COMPLETE:InvalidateSlashCommandCache() -- TODO: Replace with a function that does something similar.
 
     -- Add commands based off menu options
     if SlashCommands.SV.SlashHome then
