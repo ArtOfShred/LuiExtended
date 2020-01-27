@@ -5577,10 +5577,10 @@ Effects.EffectOverride = {
     [60772] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_unarmed_restore.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (Unarmed)
 
     -- Two Handed
-    [16037] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_light.dds' }, -- Light Attack
-    [17162] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_medium.dds', name = Abilities.Skill_Medium_Attack }, -- Heavy Attack
-    [17163] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_heavy.dds' }, -- Heavy Attack
-    [60757] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_restore.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (2H)
+    [16037] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_two_handed_light.dds' }, -- Light Attack
+    [17162] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_two_handed_medium.dds', name = Abilities.Skill_Medium_Attack }, -- Heavy Attack
+    [17163] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_two_handed_heavy.dds' }, -- Heavy Attack
+    [60757] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_two_handed_restore.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (2H)
 
     -- One Hand and Shield
     [15435] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_light.dds' }, -- Light Attack
@@ -7024,7 +7024,7 @@ Effects.EffectOverride = {
     [43757] = { hide = true }, -- Cultist Synergy Cast
 
     -- Footsoldier (1H)
-    [14096] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds' }, -- Heavy Attack (Footsoldier)
+    [14096] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_heavy.dds' }, -- Heavy Attack (Footsoldier)
     [28499] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_throw_dagger.dds', hide = true }, -- Throw Dagger (Footsoldier)
     [28502] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_throw_dagger.dds', tooltip = Tooltips.Skill_Throw_Dagger }, -- Throw Dagger (Footsoldier)
     [28504] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_throw_dagger.dds', hideReduce = true, tooltip = Tooltips.Skill_Throw_Dagger }, -- Throw Dagger (Footsoldier)
@@ -7285,7 +7285,7 @@ Effects.EffectOverride = {
     [69157] = { icon = 'esoui/art/icons/ability_warrior_014.dds', hide = true, tooltip = Tooltips.Generic_Stagger }, -- Retaliation (Winterborn Warrior)
     [69153] = { icon = 'esoui/art/icons/ability_warrior_014.dds', tooltip = Tooltips.Generic_Stun }, -- Retaliation (Winterborn Warrior)
     [1347] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = Abilities.Skill_Retaliation }, -- Off-Balance (Winterborn Warrior)
-    [70070] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Strike (Winterborn Warrior)
+    [70070] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_heavy.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Strike (Winterborn Warrior)
     [64980] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_javelin.dds', hide = true }, -- Javelin (Winterborn Warrior)
     [14883] = { icon = 'esoui/art/icons/achievement_030.dds', name = Abilities.Skill_Off_Balace_Immunity, tooltip = Tooltips.Generic_Off_Balance_Immunity }, -- Off-Balance (Winterborn Warrior)
     [69282] = { hide = true }, -- Roll Dodge Back (Winterborn Warrior)
@@ -7896,7 +7896,7 @@ Effects.EffectOverride = {
     [12286] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_storm_bound.dds' }, -- Storm Bound (Storm Atronach)
 
     -- Xivilai
-    [7095] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds' }, -- Heavy Attack (Xivilai)
+    [7095] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_heavy.dds' }, -- Heavy Attack (Xivilai)
     [83072] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_freezing_edge.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Freezing Edge (Xivilai)
     [49203] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_frost_root.dds', tooltip = Tooltips.Generic_Immobilize }, -- Frozen Weapon (Xivilai)
     [88947] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_lightning_grasp.dds' }, -- Lightning Grasp (Xivilai)
@@ -9037,10 +9037,10 @@ Effects.EffectOverride = {
     -- Tutorial - Soul Shriven in Coldharbour
     [75527] = { hide = true }, -- Ultimate Protection (Tutorial)
     [64091] = { hide = true }, -- Power Bash (Tutorial - Used on Lyris)
-    [61748] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds' }, -- Heavy Attack (Tutorial)
+    [61748] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_heavy.dds' }, -- Heavy Attack (Tutorial)
     [63269] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heat_wave.dds' }, -- Heat Wave
     [63270] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heat_wave.dds', hide = true }, -- Heat Wave
-    [63737] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds' }, -- Heavy Attack (Dremora Churl)
+    [63737] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_heavy.dds' }, -- Heavy Attack (Dremora Churl)
     [63685] = { icon = 'esoui/art/icons/ability_2handed_001.dds', name = Abilities.Skill_Uppercut, tooltip = Tooltips.Generic_Knockback }, -- Uppercut Stun (Dremora Caitiff)
     [63686] = { icon = 'esoui/art/icons/ability_2handed_001.dds' }, -- Uppercut (Dremora Caitiff)
     [63761] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_pound.dds' }, -- Pound (Feral Soul Shriven)
@@ -9852,7 +9852,7 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     [100678] = { hide = true }, -- Major Protection (The Mind Trap)
-    [100671] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds' }, -- Heavy Attack (The Mind Trap)
+    [100671] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_heavy.dds' }, -- Heavy Attack (The Mind Trap)
     [100683] = { hide = true }, -- Block Me (The Mind Trap)
     [100677] = { hide = true }, -- Block Me (The Mind Trap)
     [100687] = { hide = true }, -- Off-Balance (The Mind Trap)
