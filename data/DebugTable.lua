@@ -732,8 +732,7 @@ LUIE.DebugAuras = {
     [88374] = true, -- Jester's Festival Illusion Daz (Sparkly Hat Dazzler)
     [87963] = true, -- Bestowed Cherry Blossoms (Cherry Blossom Branch)
     [89372] = true, -- Pelted! (Cherry Blossom Branch)
-
-    --[116879] = true, -- Alliance Pie (Revelry Pie)
+    [116879] = true, -- Alliance Pie (Revelry Pie)
     [118833] = true, -- Piessive (Revelry Pie)
     [116933] = true, -- Covered in Pie (Revelry Pie)
     [116935] = true, -- Pie (Revelry Pie)
@@ -741,20 +740,18 @@ LUIE.DebugAuras = {
     [116987] = true, -- Covered in Pie (Revelry Pie)
     [116989] = true, -- Covered in Pie (Revelry Pie)
     [116988] = true, -- Covered in Pie (Revelry Pie)
-    --[116942] = true, -- Covered in Pie (Revelry Pie)
-    --[116944] = true, -- Covered in Pie (Revelry Pie)
-    --[116943] = true, -- Covered in Pie (Revelry Pie)
-
-
-
-
+    [116942] = true, -- Covered in Pie (Revelry Pie)
+    [116944] = true, -- Covered in Pie (Revelry Pie)
+    [116943] = true, -- Covered in Pie (Revelry Pie)
     [102077] = true, -- Jester's Festival Scintillator (Jester's Scintillator
     [77027] = true, -- Anniversary Cake - Forreals (Jubilee Cake)
     [87998] = true, -- Anniversary Cake (2nd Annual Jubilee Cake)
     [102009] = true, -- Anniversary Cake (3rd Annual Jubilee Cake)
-    [115688] = true, -- Anniversary Cake (2019 Jubilee Cake)
-    [77123] = true, -- Anniversary EXP Buff (Any Jubilee Cake except 2019)
-    [118985] = true, -- Anniversary EXP Buff (2019 Jubilee Cake)
+    [77123] = true, -- Anniversary EXP Buff (Any Jubilee Cake except 2019 / 2020)
+    [115688] = true, -- Anniversary Cake (Jubilee Cake 2019)
+    [118985] = true, -- Anniversary EXP Buff (Jubilee Cake 2019)
+    [132097] = true, -- 6 Year Cake (Jubilee Cake 2020)
+    [136348] = true, -- Anniversary EXP Buff (Jubilee Cake 2020)
     [81575] = true, -- Event - WitchFest Cauldron (Witchmother's Whistle)
     [96118] = true, -- Witchmother's Boon (Witchmother's Whistle)
     [84361] = true, -- Witchmother's Brew (Witchmother's Whistle)

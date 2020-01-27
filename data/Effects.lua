@@ -266,6 +266,7 @@ Effects.IsExperienceBuff = {
     [86075] = true, -- Breda's Magnificent Mead
     [77123] = true, -- Anniversary EXP Buff
     [118985] = true, -- Anniversary EXP Buff
+    [136348] = true, -- Anniversary EXP Buff
     [96118] = true, -- Witchmother's Boon -- TODO: Check one more time
 }
 
@@ -3313,41 +3314,43 @@ Effects.EffectOverride = {
     [76349] = { icon = 'LuiExtended/media/icons/abilities/ability_item_pardon_edict_high.dds', name = Abilities.Innate_Pardon_Edict_High }, -- Full Pardon
 
     -- Seasonal Mementos & Items
-    [86792] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_festival_mints.dds', name = Abilities.Consumable_Festival_Mints }, -- Eating (High Hrothgar Festival Mints)
-    [86794] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_festival_mints.dds', name = Abilities.Consumable_Festival_Mints, tooltip = Tooltips.Event_Festival_Mints, unbreakable = 1 }, -- Very Cold (High Hrothgar Festival Mints)
-    [86739] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_festival_grog.dds', name = Abilities.Consumable_Sailors_Grog }, -- Drinking (Sailor's Warning Festival Grog)
-    [86740] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_festival_grog.dds', name = Abilities.Consumable_Sailors_Grog, tooltip = Tooltips.Event_Festival_Grog, unbreakable = 1 }, -- Very Drunk (Sailor's Warning Festival Grog)
-    [85355] = {icon = 'LuiExtended/media/icons/abilities/ability_event_torch_juggling.dds', name = Abilities.Memento_Fire_Breathers_Torches, unbreakable = 1 }, -- Flame Juggling (Consumable Version)
-    [85354] = {icon = 'LuiExtended/media/icons/abilities/ability_event_knife_juggling.dds', name = Abilities.Memento_Jugglers_Knives, unbreakable = 1 }, -- Dagger Juggling (Consumable Verison)
-    [85353] = {icon = 'LuiExtended/media/icons/abilities/ability_event_sword_swallowing.dds', name = Abilities.Memento_Sword_Swallowers_Blade, unbreakable = 1 }, -- Sword Swallowing (Consumable Version)
+    [86792] = { icon = 'LuiExtended/media/icons/consumables/abilities/ability_item_festival_mints.dds', name = Abilities.Consumable_Festival_Mints }, -- Eating (High Hrothgar Festival Mints)
+    [86794] = { icon = 'LuiExtended/media/icons/consumables/abilities/ability_item_festival_mints.dds', name = Abilities.Consumable_Festival_Mints, tooltip = Tooltips.Event_Festival_Mints, unbreakable = 1 }, -- Very Cold (High Hrothgar Festival Mints)
+    [86739] = { icon = 'LuiExtended/media/icons/abilities/ability_item_festival_grog.dds', name = Abilities.Consumable_Sailors_Grog }, -- Drinking (Sailor's Warning Festival Grog)
+    [86740] = { icon = 'LuiExtended/media/icons/abilities/ability_item_festival_grog.dds', name = Abilities.Consumable_Sailors_Grog, tooltip = Tooltips.Event_Festival_Grog, unbreakable = 1 }, -- Very Drunk (Sailor's Warning Festival Grog)
+    [85355] = {icon = 'LuiExtended/media/icons/mementos/memento_fire_breathers_torches.dds', name = Abilities.Memento_Fire_Breathers_Torches, unbreakable = 1 }, -- Flame Juggling (Consumable Version)
+    [85354] = {icon = 'LuiExtended/media/icons/mementos/memento_jugglers_knives.dds', name = Abilities.Memento_Jugglers_Knives, unbreakable = 1 }, -- Dagger Juggling (Consumable Verison)
+    [85353] = {icon = 'LuiExtended/media/icons/mementos/memento_sword_swallowers_blade.dds', name = Abilities.Memento_Sword_Swallowers_Blade, unbreakable = 1 }, -- Sword Swallowing (Consumable Version)
     [86774] = { icon = 'esoui/art/icons/achievement_newlifefestival_001.dds', name = Abilities.Memento_Mud_Ball }, -- Mudball (Mud Ball Pouch)
-    [87964] = { icon = 'LuiExtended/media/icons/abilities/ability_event_dazzler_1.dds', name = Abilities.Consumable_Sparkwreath_Dazzler }, -- Jester's Festival Illusion Daz (Sparkwreath Dazzler)
-    [87965] = { icon = 'LuiExtended/media/icons/abilities/ability_event_dazzler_1.dds', name = Abilities.Consumable_Plume_Dazzler }, -- Jester's Festival Illusion Daz (Plume Dazzler)
-    [87966] = { icon = 'LuiExtended/media/icons/abilities/ability_event_dazzler_1.dds', name = Abilities.Consumable_Spiral_Dazzler }, -- Jester's Festival Illusion Daz (Spiral Dazzler)
-    [88374] = { icon = 'LuiExtended/media/icons/abilities/ability_event_dazzler_2.dds', name = Abilities.Skill_Sparkly_Hat_Dazzler }, -- Jester's Festival Illusion Daz (Sparkly Hat Dazzler)
-    [87963] = { icon = 'LuiExtended/media/icons/abilities/ability_event_flower_garland.dds', name = Abilities.Memento_Cherry_Blossom_Branch }, -- Bestowed Cherry Blossoms (Cherry Blossom Branch)
+    [87964] = { icon = 'LuiExtended/media/icons/abilities/ability_item_dazzler_1.dds', name = Abilities.Consumable_Sparkwreath_Dazzler }, -- Jester's Festival Illusion Daz (Sparkwreath Dazzler)
+    [87965] = { icon = 'LuiExtended/media/icons/abilities/ability_item_dazzler_1.dds', name = Abilities.Consumable_Plume_Dazzler }, -- Jester's Festival Illusion Daz (Plume Dazzler)
+    [87966] = { icon = 'LuiExtended/media/icons/abilities/ability_item_dazzler_1.dds', name = Abilities.Consumable_Spiral_Dazzler }, -- Jester's Festival Illusion Daz (Spiral Dazzler)
+    [88374] = { icon = 'LuiExtended/media/icons/abilities/ability_item_dazzler_2.dds', name = Abilities.Skill_Sparkly_Hat_Dazzler }, -- Jester's Festival Illusion Daz (Sparkly Hat Dazzler)
+    [87963] = { icon = 'LuiExtended/media/icons/mementos/memento_cherry_blossom_branch.dds', name = Abilities.Memento_Cherry_Blossom_Branch }, -- Bestowed Cherry Blossoms (Cherry Blossom Branch)
     [116879] = { icon = 'esoui/art/icons/event_jestersday_pie1.dds', name = Abilities.Consumable_Revelry_Pie }, -- Alliance Pie (Revelry Pie)
-    [116942] = { tooltip = Tooltips.Event_Revelry_Pie }, -- Covered in Pie (Revelry Pie)
-    [116944] = { tooltip = Tooltips.Event_Revelry_Pie }, -- Covered in Pie (Revelry Pie)
-    [116943] = { tooltip = Tooltips.Event_Revelry_Pie }, -- Covered in Pie (Revelry Pie)
+    [116933] = { hide = true }, -- Covered in Pie (Revelry Pie)
+    [116942] = { tooltip = Tooltips.Event_Revelry_Pie, stack = 0 }, -- Covered in Pie (Revelry Pie)
+    [116944] = { tooltip = Tooltips.Event_Revelry_Pie, stack = 0 }, -- Covered in Pie (Revelry Pie)
+    [116943] = { tooltip = Tooltips.Event_Revelry_Pie, stack = 0 }, -- Covered in Pie (Revelry Pie)
     [102077] = { icon = 'LuiExtended/media/icons/mementos/memento_jesters_scintillator.dds', name = Abilities.Memento_Jesters_Scintillator, unbreakable = 1 }, -- Jester's Festival Scintillator (Jester's Scintillator)
     [77027] = { hide = true }, -- Anniversary Cake - Forreals (Jubilee Cake)
     [87998] = { hide = true }, -- Anniversary Cake (2nd Annual Jubilee Cake)
     [102009] = { hide = true }, -- Anniversary Cake (3rd Annual Jubilee Cake)
-    [77123] = { icon = 'LuiExtended/media/icons/mementos/memento_event_jubilee_cake.dds', name = Abilities.Memento_Jubliee_Cake, tooltip = Tooltips.Experience_Seasonal_Event }, -- Anniversary EXP Buff (Other Jubilee Cake)
-    [118985] = { icon = 'LuiExtended/media/icons/mementos/memento_event_jubilee_cake.dds', name = Abilities.Memento_Jubliee_Cake, tooltip = Tooltips.Experience_Seasonal_Event }, -- Anniversary EXP Buff (2019 Jubilee Cake)
+    [77123] = { icon = 'LuiExtended/media/icons/mementos/memento_jubilee_cake.dds', name = Abilities.Memento_Jubliee_Cake, tooltip = Tooltips.Experience_Seasonal_Event }, -- Anniversary EXP Buff (Other Jubilee Cake)
+    [118985] = { icon = 'LuiExtended/media/icons/mementos/memento_jubilee_cake.dds', name = Abilities.Memento_Jubliee_Cake, tooltip = Tooltips.Experience_Seasonal_Event }, -- Anniversary EXP Buff (Jubilee Cake 2019)
+    [136348] = { icon = 'LuiExtended/media/icons/mementos/memento_jubilee_cake.dds', name = Abilities.Memento_Jubliee_Cake, tooltip = Tooltips.Experience_Seasonal_Event }, -- Anniversary EXP Buff (Jubilee Cake 2020)
     [81575] = { icon = 'LuiExtended/media/icons/mementos/memento_witchmothers_whistle.dds', name = Abilities.Memento_Witchmothers_Whistle, hide = true }, -- Event - WitchFest Cauldron (Witchmother's Whistle)
-    [96118] = { icon = 'LuiExtended/media/icons/abilities/ability_event_witchmothers_brew.dds', tooltip = Tooltips.Experience_Seasonal_Event } , -- Witchmother's Boon (Witchmother's Whistle)
+    [96118] = { icon = 'LuiExtended/media/icons/mementos/memento_witchmothers_brew.dds', tooltip = Tooltips.Experience_Seasonal_Event } , -- Witchmother's Boon (Witchmother's Whistle)
     [84364] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds' }, -- Witchmother's Brew (Witchmother's Whistle)
     [84365] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds' }, -- Witchmother's Brew (Witchmother's Whistle)
     [84366] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds' }, -- Witchmother's Brew (Witchmother's Whistle)
     [84367] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds' }, -- Witchmother's Brew (Witchmother's Whistle)
     [84368] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds' }, -- Witchmother's Brew (Witchmother's Whistle)
     [84369] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds' }, -- Witchmother's Brew (Witchmother's Whistle)
-    [91369] = { icon = 'LuiExtended/media/icons/abilities/ability_event_steamy_spring_pie.dds', name = Abilities.Memento_The_Pie_of_Misrule, tooltip = Tooltips.Experience_Seasonal_Event }, -- Jester's Experience Boost Pie (The Pie of Misrule)
-    [92232] = { icon = 'LuiExtended/media/icons/abilities/ability_event_pelinals_ferocity.dds', tooltip = Tooltips.Experience_Seasonal_Pelinal }, -- Pelinal's Ferocity (Scroll of Pelinal's Ferocity)
-    [91449] = { icon = 'LuiExtended/media/icons/abilities/ability_event_bredas_magnificent_mead.dds', tooltip = Tooltips.Experience_Seasonal_Event }, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)
-    [86075] = { icon = 'LuiExtended/media/icons/abilities/ability_event_bredas_magnificent_mead.dds', tooltip = Tooltips.Experience_Seasonal_Event }, -- Breda's Magnificent Mead (Breda's Magnificent Mead)
+    [91369] = { icon = 'LuiExtended/media/icons/abilities/memento_the_pie_of_misrule.dds', name = Abilities.Memento_The_Pie_of_Misrule, tooltip = Tooltips.Experience_Seasonal_Event }, -- Jester's Experience Boost Pie (The Pie of Misrule)
+    [92232] = { icon = 'LuiExtended/media/icons/mementos/memento_pelinals_ferocity.dds', tooltip = Tooltips.Experience_Seasonal_Pelinal }, -- Pelinal's Ferocity (Scroll of Pelinal's Ferocity)
+    [91449] = { icon = 'LuiExtended/media/icons/abilities/memento_bredas_magnificent_mead.dds', tooltip = Tooltips.Experience_Seasonal_Event }, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)
+    [86075] = { icon = 'LuiExtended/media/icons/abilities/memento_bredas_magnificent_mead.dds', tooltip = Tooltips.Experience_Seasonal_Event }, -- Breda's Magnificent Mead (Breda's Magnificent Mead)
     [125820] = { icon = 'LuiExtended/media/icons/mementos/memento_skeletal_marionette.dds', name = Abilities.Memento_Skeletal_Marionette }, -- Witches Festival 2019 Marionette (Skeletal Marionette)
 
     -- Base Mementos
@@ -7260,9 +7263,9 @@ Effects.EffectOverride = {
     [50998] = { hide = true }, -- Rite of Passage (Healer)
     [44328] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', hide = true }, -- Rite of Passage (Healer)
     [44329] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', duration = 0, tooltip = Tooltips.Skill_Rite_of_Passage_NPC }, -- Rite of Passage (Healer)
-    [29669] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_coiled_lash.dds', hide = true }, -- Coiled Lash (Shaman)
-    [29520] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_aura_of_protection.dds', tooltip = Tooltips.Skill_Aura_of_Protection }, -- Aura of Protection (Shaman)
-    [29521] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_aura_of_protection.dds', tooltip = Tooltips.Skill_Aura_of_Protection_Other }, -- Aura of Protection (Shaman)
+    [29669] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_coiled_lash.dds', hide = true }, -- Coiled Lash (Shaman)
+    [29520] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_aura_of_protection.dds', tooltip = Tooltips.Skill_Aura_of_Protection }, -- Aura of Protection (Shaman)
+    [29521] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_aura_of_protection.dds', tooltip = Tooltips.Skill_Aura_of_Protection_Other }, -- Aura of Protection (Shaman)
     [29597] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = Tooltips.Generic_Stun }, -- Combustion (Shaman)
     [65314] = { hide = true }, -- Aura of Protection (Shaman)
     [65432] = { hide = true }, -- Aura of Protection (Shaman)
@@ -8226,11 +8229,11 @@ Effects.EffectOverride = {
 
     -- Hag
     [2901] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_staff_strike.dds' }, -- Staff Strike (Hag)
-    [2786] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_steal_essence.dds', tooltip = Tooltips.Skill_Steal_Essence }, -- Steal Essence (Hag)
-    [21642] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_steal_essence.dds' }, -- Steal Essence (Hag)
-    [3349] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_reflective_shadows.dds', tooltip = Tooltips.Skill_Reflective_Shadows }, -- Reflective Shadows (Hag)
-    [2821] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_luring_snare.dds', hide = true }, -- Luring Snare (Hag)
-    [32267] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_luring_snare.dds', name = Abilities.Skill_Luring_Snare, tooltip = Tooltips.Generic_Stun }, -- Grapple (Hag)
+    [2786] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_steal_essence.dds', tooltip = Tooltips.Skill_Steal_Essence }, -- Steal Essence (Hag)
+    [21642] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_steal_essence.dds' }, -- Steal Essence (Hag)
+    [3349] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_reflective_shadows.dds', tooltip = Tooltips.Skill_Reflective_Shadows }, -- Reflective Shadows (Hag)
+    [2821] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_luring_snare.dds', hide = true }, -- Luring Snare (Hag)
+    [32267] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_luring_snare.dds', name = Abilities.Skill_Luring_Snare, tooltip = Tooltips.Generic_Stun }, -- Grapple (Hag)
 
     -- Hagraven
     [10611] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds' }, -- Flare (Hagraven)
@@ -8533,9 +8536,9 @@ Effects.EffectOverride = {
     [8813] = { icon = 'LuiExtended/media/icons/abilities/ability_ghost_double_strike.dds' }, -- Double Strike (Ghost)
     [18514] = { icon = 'esoui/art/icons/ability_mage_052.dds' }, -- Chill Touch (Ghost)
     [18515] = { icon = 'esoui/art/icons/ability_mage_052.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Chill Touch (Ghost)
-    [19137] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_haunting_spectre.dds' }, -- Haunting Spectre (Ghost)
-    [19138] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_haunting_spectre.dds' }, -- Haunting Spectre (Ghost)
-    [19140] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_haunting_spectre.dds', tooltip = Tooltips.Generic_Fear }, -- Haunting Spectre (Ghost)
+    [19137] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_haunting_spectre.dds' }, -- Haunting Spectre (Ghost)
+    [19138] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_haunting_spectre.dds' }, -- Haunting Spectre (Ghost)
+    [19140] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_haunting_spectre.dds', tooltip = Tooltips.Generic_Fear }, -- Haunting Spectre (Ghost)
     [9541] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_spear.dds' }, -- Necrotic Spear (Lich)
     [22521] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_snare.dds' }, -- Defiled Ground (Lich)
     [20812] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_snare.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Magic, tooltipValue2 = 1, tooltipValue3 = 70 }, -- Defiled Ground (Lich)
@@ -8698,16 +8701,16 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Jester's Festival
-    [87474] = { icon = 'LuiExtended/media/icons/abilities/ability_event_flower_garland.dds', name = Abilities.Event_Petal_Pelters }, -- Flower Garland -- Springtime Flair
+    [87474] = { icon = 'LuiExtended/media/icons/mementos/memento_cherry_blossom_branch.dds', name = Abilities.Event_Petal_Pelters }, -- Flower Garland -- Springtime Flair
 
-    [88095] = { icon = 'LuiExtended/media/icons/abilities/ability_event_dazzler_3.dds', name = Abilities.Event_Sparkle_Dazzler }, -- Illusion Dazzler - Royal Revelry
-    [88123] = { icon = 'LuiExtended/media/icons/abilities/ability_event_dazzler_2.dds', name = Abilities.Event_Burst_Dazzler }, -- Illusion Dazzler - Royal Revelry
-    [88124] = { icon = 'LuiExtended/media/icons/abilities/ability_event_dazzler_1.dds', name = Abilities.Event_Flash_Dazzler }, -- Illusion Dazzler - Royal Revelry
+    [88095] = { icon = 'LuiExtended/media/icons/abilities/ability_item_dazzler_3.dds', name = Abilities.Event_Sparkle_Dazzler }, -- Illusion Dazzler - Royal Revelry
+    [88123] = { icon = 'LuiExtended/media/icons/abilities/ability_item_dazzler_2.dds', name = Abilities.Event_Burst_Dazzler }, -- Illusion Dazzler - Royal Revelry
+    [88124] = { icon = 'LuiExtended/media/icons/abilities/ability_item_dazzler_1.dds', name = Abilities.Event_Flash_Dazzler }, -- Illusion Dazzler - Royal Revelry
 
     -- New Life Festival
-    [84847] = {icon = 'LuiExtended/media/icons/abilities/ability_event_celebratory_belch.dds', name = Abilities.Skill_Celebratory_Belch, unbreakable = 1 }, -- Celebratory Belch (Stonetooth Bash)
+    [84847] = {icon = 'LuiExtended/media/icons/abilities/ability_quest_celebratory_belch.dds', name = Abilities.Skill_Celebratory_Belch, unbreakable = 1 }, -- Celebratory Belch (Stonetooth Bash)
     [83523] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_frigid_waters.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Event_Freezing }, -- Freezing (Snow Bear Plunge)
-    [83522] = { icon = 'LuiExtended/media/icons/abilities/ability_event_warm.dds', forcedContainer = 'short', tooltip = Tooltips.Event_Warm }, -- Warm (Snow Bear Plunge)
+    [83522] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_warmth.dds', forcedContainer = 'short', tooltip = Tooltips.Event_Warm }, -- Warm (Snow Bear Plunge)
 
     -- Seasonal Quests (New Life Festival)
     [84125] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = Abilities.Skill_Lava_Foot_Stomp, unbreakable = 1 }, -- Breton Male Dance (Lava Foot Stomp)
@@ -8717,9 +8720,9 @@ Effects.EffectOverride = {
     [84130] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = Abilities.Skill_Lava_Foot_Stomp, unbreakable = 1 }, -- Altmer Male Dance (Lava Foot Stomp)
     [84131] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = Abilities.Skill_Lava_Foot_Stomp, unbreakable = 1 }, -- Altmer Female Dance (Lava Foot Stomp)
     [84133] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = Abilities.Skill_Lava_Foot_Stomp, unbreakable = 1 }, -- Nord Dance (Lava Foot Stomp)
-    [84528] = {icon = 'LuiExtended/media/icons/abilities/ability_event_torch_juggling.dds', name = Abilities.Skill_Torch_Juggling, unbreakable = 1 }, -- Flame Juggling (Castle Charm Challenge)
-    [84506] = {icon = 'LuiExtended/media/icons/abilities/ability_event_knife_juggling.dds', name = Abilities.Skill_Knife_Juggling, unbreakable = 1 }, -- Dagger Juggling (Castle Charm Challenge)
-    [84533] = {icon = 'LuiExtended/media/icons/abilities/ability_event_sword_swallowing.dds', name = Abilities.Skill_Sword_Swallowing, unbreakable = 1 }, -- Sword Swallowing (Castle Charm Challenge)
+    [84528] = {icon = 'LuiExtended/media/icons/mementos/memento_fire_breathers_torches.dds', name = Abilities.Skill_Torch_Juggling, unbreakable = 1 }, -- Flame Juggling (Castle Charm Challenge)
+    [84506] = {icon = 'LuiExtended/media/icons/mementos/memento_jugglers_knives.dds', name = Abilities.Skill_Knife_Juggling, unbreakable = 1 }, -- Dagger Juggling (Castle Charm Challenge)
+    [84533] = {icon = 'LuiExtended/media/icons/mementos/memento_sword_swallowers_blade.dds', name = Abilities.Skill_Sword_Swallowing, unbreakable = 1 }, -- Sword Swallowing (Castle Charm Challenge)
     [84330] = { icon = 'esoui/art/icons/achievement_newlifefestival_001.dds', name = Abilities.Memento_Mud_Ball }, -- Mudball (Mud Ball Merriment)
 
     -- Seasonal Quests (Witches Festival)
@@ -9635,7 +9638,7 @@ Effects.EffectOverride = {
     [92580] = { hide = true }, -- Q5887 - AshurStealthOut (Fleeing the Past)
     [95123] = { hide = true }, -- Q5933 - NaryuStuckProtection (A Purposeful Writ)
     [86981] = { hide = true }, -- Summon Skaafin (Vvardenfell - Various Quest NPC's)
-    [85105] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_unstable_reaction.dds', hide = true }, -- Unstable Reaction (Reclaiming Vos)
+    [85105] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_unstable_reaction.dds', hide = true }, -- Unstable Reaction (Reclaiming Vos)
     [85537] = { hide = true }, -- Summon Personal Guard (Reclaiming Vos)
     [92720] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_necrotic_wave.dds' }, -- Necrotic Wave (Vvardenfell -- Ancestral Adversity)
     [92722] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_necrotic_wave.dds', name = 'Necrotic Wave' }, -- Stomp of Flame (Vvardenfell -- Ancestral Adversity)
@@ -9692,9 +9695,9 @@ Effects.EffectOverride = {
     [90148] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_pillars_of_nirn.dds' }, -- Sunder's Echo
     [90146] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_pillars_of_nirn.dds', hide = true }, -- Sunder's Echo
     [90147] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_pillars_of_nirn.dds' }, -- Sunder's Echo
-    [90139] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_empowered_strike.dds' }, -- Empowered Strike
-    [90141] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_empowered_strike.dds' }, -- Empowered Strike
-    [90142] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_empowered_strike.dds' }, -- Empowered Strike
+    [90139] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_blink_strike.dds' }, -- Empowered Strike
+    [90141] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_blink_strike.dds' }, -- Empowered Strike
+    [90142] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_blink_strike.dds' }, -- Empowered Strike
     [88963] = {hide = true}, -- Delay
 
     -- VVARDENFELL MQ - Divine Disaster
@@ -9894,7 +9897,7 @@ Effects.EffectOverride = {
     [52746] = { name = Abilities.Skill_Dawnbreaker }, -- Flawless Dawnbreaker (Champion Marcauld)
 
     -- Dragonstar Arena (Stage 2) - The Frozen Ring
-    [53329] = { icon = 'LuiExtended/media/icons/abilities/ability_event_warm.dds', name = Abilities.Skill_Warmth, duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = Tooltips.Skill_Warming_Aura }, -- Warming Aura
+    [53329] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_warmth.dds', name = Abilities.Skill_Warmth, duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = Tooltips.Skill_Warming_Aura }, -- Warming Aura
 
     [56755] = { icon = 'esoui/art/icons/ability_1handed_002_b.dds' }, -- Pierce Armor (Sovngarde Brawler)
     [56757] = { icon = 'esoui/art/icons/ability_1handed_002_b.dds', name = Abilities.Skill_Pierce_Armor, tooltip = Tooltips.Skill_Pierce_Armor_NPC }, -- Puncture (Sovngarde Brawler)
@@ -9907,7 +9910,7 @@ Effects.EffectOverride = {
     [53342] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds' }, -- Biting Cold (Biting Cold)
     [53341] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds', unbreakable = 1, stack = 1, stackAdd = 1, stackMax = 8, tooltip = Tooltips.Skill_Biting_Cold, groundLabel = true }, -- Biting Cold (Biting Cold)
     [60421] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds', unbreakable = 1, stack = 1, stackAdd = 1, tooltip = Tooltips.Skill_Biting_Cold_Vet, groundLabel = true }, -- Biting Cold (Biting Cold)
-    [53832] = { icon = 'LuiExtended/media/icons/abilities/ability_event_torch_juggling.dds', name = Abilities.Skill_Arena_Torch, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Torch_Grab }, -- Torch Grab (Player)
+    [53832] = { icon = 'LuiExtended/media/icons/mementos/memento_fire_breathers_torches.dds', name = Abilities.Skill_Arena_Torch, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Torch_Grab }, -- Torch Grab (Player)
 
     [53264] = { icon = 'esoui/art/icons/ability_2handed_005_b.dds' }, -- Rally (Sovngarde Slayer)
     [53259] = { icon = 'esoui/art/icons/ability_2handed_004_b.dds' }, -- Reverse Slice (Sovngarde Slayer)
@@ -10632,7 +10635,7 @@ Effects.EffectOverride = {
     [83924] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_shadow.dds' }, -- Shadow Bolt (Magdelena)
     [83922] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_curse_of_terror.dds' }, -- Curse of Terror (Magdelena)
     [83923] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_curse_of_terror.dds', tooltip = Tooltips.Generic_Fear }, -- Curse of Terror (Magdelena)
-    [83880] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_reflective_shadows.dds', tooltip = Tooltips.Skill_Reflective_Shadows }, -- Reflective Shadows (Magdelena)
+    [83880] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_reflective_shadows.dds', tooltip = Tooltips.Skill_Reflective_Shadows }, -- Reflective Shadows (Magdelena)
     [83227] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_zombie.dds' }, -- Dark Resurrection (Magdelena)
     [83886] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_shadow_flare.dds', tooltip = Tooltips.Generic_Knockback }, -- Shadow Flare (Magdelena)
     [83883] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_shadow_flare.dds' }, -- Shadow Flare (Magdelena)
@@ -11237,13 +11240,13 @@ Effects.EffectOverride = {
     -- Selene's Web
     [32428] = { hide = true }, -- Climb Away
 
-    [30909] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_ensnare.dds', tooltip = Tooltips.Skill_Ensnare, unbreakable = 1, hideReduce = true }, -- Ensnare
-    [31247] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_ensnare.dds', tooltip = Tooltips.Skill_Ensnare, unbreakable = 1, hideReduce = true }, -- Ensnare
+    [30909] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ensnare.dds', tooltip = Tooltips.Skill_Ensnare, unbreakable = 1, hideReduce = true }, -- Ensnare
+    [31247] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ensnare.dds', tooltip = Tooltips.Skill_Ensnare, unbreakable = 1, hideReduce = true }, -- Ensnare
     [49275] = { hide = true }, -- Ensnare (Treethane Kerninn)
-    [31248] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_ensnare.dds', tooltip = Tooltips.Skill_Ensnare, unbreakable = 1 }, -- Ensnare
+    [31248] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ensnare.dds', tooltip = Tooltips.Skill_Ensnare, unbreakable = 1 }, -- Ensnare
     [64171] = { hide = true }, -- SW_Boss3_WebGrip (Treethane Kerninn)
-    [30907] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_summon_primal_swarm.dds', name = Abilities.Skill_Primal_Swarm, hide = true }, -- Summon Primal Swarm (Treethane Kerninn)
-    [30908] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_summon_primal_swarm.dds', name = Abilities.Skill_Primal_Swarm, groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1 }, -- Summon Primal Swarm (Treethane Kerninn)
+    [30907] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_summon_primal_swarm.dds', name = Abilities.Skill_Primal_Swarm, hide = true }, -- Summon Primal Swarm (Treethane Kerninn)
+    [30908] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_summon_primal_swarm.dds', name = Abilities.Skill_Primal_Swarm, groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1 }, -- Summon Primal Swarm (Treethane Kerninn)
 
     [30781] = { icon = 'esoui/art/icons/ability_healer_022.dds', tooltip = Tooltips.Skill_Mirror_Ward }, -- Mirror Ward (Longclaw)
     [30785] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_shot.dds', name = Abilities.Skill_Quick_Shot }, -- Quick Shot (Longclaw)
@@ -11312,20 +11315,20 @@ Effects.EffectOverride = {
 
     [31191] = { hide = true }, -- Transform into Bosmer (Selene)
     [31218] = { hide = true }, -- Spiderexplosion (Selene)
-    [30731] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_primal_maul.dds', name = Abilities.Skill_Primal_Maul, hide = true }, -- Summon Primal Spirit (Selene)
+    [30731] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_primal_maul.dds', name = Abilities.Skill_Primal_Maul, hide = true }, -- Summon Primal Spirit (Selene)
     [30725] = { hide = true }, -- Dummy (Ghostbear)
     [30724] = { hide = true }, -- Dummy (Ghostbear)
 
-    [30730] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_primal_maul.dds', name = Abilities.Skill_Primal_Maul }, -- Summon Primal Spirit (Selene)
-    [30970] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_primal_maul.dds', name = Abilities.Skill_Primal_Maul, hide = true }, -- Summon Primal Spirit (Selene)
-    [30969] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_primal_maul.dds', name = Abilities.Skill_Primal_Maul, tooltip = Tooltips.Generic_Knockback, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Summon Primal Spirit (Selene)
+    [30730] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_primal_maul.dds', name = Abilities.Skill_Primal_Maul }, -- Summon Primal Spirit (Selene)
+    [30970] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_primal_maul.dds', name = Abilities.Skill_Primal_Maul, hide = true }, -- Summon Primal Spirit (Selene)
+    [30969] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_primal_maul.dds', name = Abilities.Skill_Primal_Maul, tooltip = Tooltips.Generic_Knockback, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Summon Primal Spirit (Selene)
 
     [30968] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds', name = Abilities.Skill_Quick_Strike }, -- Bash (Selene)
 
-    [30896] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_primal_leap.dds', name = Abilities.Skill_Primal_Leap, hide = true }, -- Summon Senche Spirit (Selene)
+    [30896] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_primal_leap.dds', name = Abilities.Skill_Primal_Leap, hide = true }, -- Summon Senche Spirit (Selene)
 
-    [30905] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_primal_leap.dds', name = Abilities.Skill_Primal_Leap, tooltip = Tooltips.Generic_Stun, unbreakable = 1 }, -- IntroKB (Spectral Senche-Tiger)
-    [30901] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_primal_leap.dds' }, -- IntroKB (Spectral Senche-Tiger)
+    [30905] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_primal_leap.dds', name = Abilities.Skill_Primal_Leap, tooltip = Tooltips.Generic_Stun, unbreakable = 1 }, -- IntroKB (Spectral Senche-Tiger)
+    [30901] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_primal_leap.dds' }, -- IntroKB (Spectral Senche-Tiger)
 
     [31986] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_root_guard.dds', name = Abilities.Skill_Root_Guard }, -- Summon Melee (Selene)
     [31984] = { icon = 'esoui/art/icons/ava_siege_hookpoint_001.dds', name = Abilities.Skill_Earth_Mender }, -- Summon Healer (Selene)
@@ -11552,9 +11555,9 @@ Effects.EffectOverride = {
     [36873] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_consume_life.dds' }, -- Consume Life (Garron the Returned)
     [36878] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_consume_life.dds' }, -- Consume Life (Garron the Returned)
 
-    [36895] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_haunting_spectre.dds' }, -- Haunting Spectre (The Forgotten One)
-    [36897] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_haunting_spectre.dds' }, -- Haunting Spectre (The Forgotten One)
-    [36900] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_haunting_spectre.dds', unbreakable = 1, tooltip = Tooltips.Generic_Lower_Max_HP, tooltipValue2 = 25 }, -- Haunting Spectre (The Forgotten One)
+    [36895] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_haunting_spectre.dds' }, -- Haunting Spectre (The Forgotten One)
+    [36897] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_haunting_spectre.dds' }, -- Haunting Spectre (The Forgotten One)
+    [36900] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_haunting_spectre.dds', unbreakable = 1, tooltip = Tooltips.Generic_Lower_Max_HP, tooltipValue2 = 25 }, -- Haunting Spectre (The Forgotten One)
 
     [47007] = { hide = true }, -- Nocom (Allene & Varaine Pellingare)
 
@@ -12047,10 +12050,10 @@ Effects.FakePlayerBuffs = {
     --[84130] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = Abilities.Skill_Lava_Foot_Stomp, duration = 10000}, -- Altmer Male Dance (Lava Foot Stomp)
     --[84131] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = Abilities.Skill_Lava_Foot_Stomp, duration = 10000}, -- Altmer Female Dance (Lava Foot Stomp)
     --[84133] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = Abilities.Skill_Lava_Foot_Stomp, duration = 10000}, -- Nord Dance (Lava Foot Stomp)
-    --[84528] = {icon = 'LuiExtended/media/icons/abilities/ability_event_torch_juggling.dds', name = Abilities.Skill_Torch_Juggling, duration = 12000}, -- Flame Juggling (Castle Charm Challenge)
-    --[84506] = {icon = 'LuiExtended/media/icons/abilities/ability_event_knife_juggling.dds', name = Abilities.Skill_Knife_Juggling, duration = 12000}, -- Dagger Juggling (Castle Charm Challenge)
-    --[84533] = {icon = 'LuiExtended/media/icons/abilities/ability_event_sword_swallowing.dds', name = Abilities.Skill_Sword_Swallowing, duration = 12000}, -- Sword Swallowing (Castle Charm Challenge)
-    --[84847] = {icon = 'LuiExtended/media/icons/abilities/ability_event_celebratory_belch.dds', name = Abilities.Skill_Celebratory_Belch, duration = 5000}, -- Celebratory Belch (Stonetooth Bash)
+    --[84528] = {icon = 'LuiExtended/media/icons/mementos/memento_fire_breathers_torches.dds', name = Abilities.Skill_Torch_Juggling, duration = 12000}, -- Flame Juggling (Castle Charm Challenge)
+    --[84506] = {icon = 'LuiExtended/media/icons/mementos/memento_jugglers_knives.dds', name = Abilities.Skill_Knife_Juggling, duration = 12000}, -- Dagger Juggling (Castle Charm Challenge)
+    --[84533] = {icon = 'LuiExtended/media/icons/mementos/memento_sword_swallowers_blade.dds', name = Abilities.Skill_Sword_Swallowing, duration = 12000}, -- Sword Swallowing (Castle Charm Challenge)
+    --[84847] = {icon = 'LuiExtended/media/icons/abilities/ability_quest_celebratory_belch.dds', name = Abilities.Skill_Celebratory_Belch, duration = 5000}, -- Celebratory Belch (Stonetooth Bash)
 
     ------------------------------
     -- Quests --------------------

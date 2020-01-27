@@ -103,7 +103,7 @@ local strings = {
     SI_LUIE_SKILL_COUNTERFEIT_PARDON_EDICT =             "Поддельный указ о помиловании",
     SI_LUIE_SKILL_LENIENCY_EDICT =                       "Указ о смягчении наказания",
     SI_LUIE_SKILL_GRAND_AMNESTY_EDICT =                  "Указ о большой амнистии",
-    SI_LUIE_SKILL_REVELRY_PIE_TP =                       "Covered in pie! Delicious!.",
+    SI_LUIE_SKILL_REVELRY_PIE_TP =                       "Covered in pie! Delicious!",
 
     ----------------------------------------------------------------
     -- EVENT TOOLTIPS ----------------------------------------------

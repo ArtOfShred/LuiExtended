@@ -103,7 +103,7 @@ local strings = {
     SI_LUIE_SKILL_COUNTERFEIT_PARDON_EDICT =             "Counterfeit Pardon Edict",
     SI_LUIE_SKILL_LENIENCY_EDICT =                       "Leniency Edict",
     SI_LUIE_SKILL_GRAND_AMNESTY_EDICT =                  "Grand Amnesty Edict",
-    SI_LUIE_SKILL_REVELRY_PIE_TP =                       "Covered in pie! Delicious!.",
+    SI_LUIE_SKILL_REVELRY_PIE_TP =                       "Covered in pie! Delicious!",
 
     ----------------------------------------------------------------
     -- EVENT TOOLTIPS ----------------------------------------------
