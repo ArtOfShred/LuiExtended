@@ -77,6 +77,7 @@ LUIE.Fonts = {
     ["Transformers"]            = "/LuiExtended/media/fonts/Transformers/transformers.ttf",
     ["Yellowjacket"]            = "/LuiExtended/media/fonts/Yellowjacket/yellowjacket.ttf",
     ["ProFontWindows"]          = "/LuiExtended/media/fonts/ProFontWindows/ProFontWindows.ttf",
+    ["FORCED SQUARE"]           = "/LuiExtended/media/fonts/ForcedSquare/FORCED_SQUARE.ttf",
 }
 
 LUIE.Sounds = {
