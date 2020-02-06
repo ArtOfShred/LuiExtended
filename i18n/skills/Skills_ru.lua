@@ -201,6 +201,7 @@ local strings = {
     SI_LUIE_SKILL_SIPHONER_TP =                          "Снижает Здоровье, Магию и Запас сил, а также их восстановление на |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_VENGEANCE_TP =                         "Ваша следующая способность, расходующая магию, применённая в течение |cFFFFFF<<1>>|r секунд обязательно нанесёт Критический удар.",
     SI_LUIE_SKILL_VENGEANCE_CHARGE =                     "Месть",
+    SI_LUIE_SKILL_REINFORCED_TP =                        "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>> while you are bracing.",
 
     ----------------------------------------------------------------
     -- GENERIC / SHARED TOOLTIPS -----------------------------------
@@ -523,7 +524,7 @@ local strings = {
     SI_LUIE_SKILL_PESTILENT_COLOSSUS_GROUND_TP =         "Taking Disease Damage every |cFFFFFF1|r second.\n\nWhen you take damage from this effect you are afflicted with Major Vulnerability for |cFFFFFF8|r seconds. This effect can occur once every |cFFFFFF20|r seconds.",
     SI_LUIE_SKILL_GLACIAL_COLOSSUS_TP =                  "A frostbitten Flesh Colossus smashes the ground three times over |cFFFFFF3|r seconds, dealing Frost Damage to enemies within |cFFFFFF8|r meters.\n\nThe final smash stuns all enemies hit for |cFFFFFF<<2>>|r seconds.\n\nDealing damage applies Major Vulnerability to any enemy hit for |cFFFFFF8|r seconds. Enemies hit cannot be affected again for |cFFFFFF20|r seconds.",
     SI_LUIE_SKILL_GLACIAL_COLOSSUS_GROUND_TP =           "Taking Frost Damage every |cFFFFFF1|r second.\n\nWhen you take damage from this effect you are afflicted with Major Vulnerability for |cFFFFFF8|r seconds. This effect can occur once every |cFFFFFF20|r seconds.\n\nThe final hit will knock you down for |cFFFFFF4|r seconds.",
-    SI_LUIE_SKILL_RUINOUS_SCYTHE_TP =                    "Every third cast of Ruinous Scythe will set all enemies hit Off Balance.",
+    SI_LUIE_SKILL_RUINOUS_SCYTHE_TP =                    "Every third cast of Ruinous Scythe will set all enemies hit Off Balance for |cFFFFFF7|r seconds.",
     SI_LUIE_SKILL_BONE_TOTEM_TP =                        "You and allies within the |cFFFFFF6|r meter radius of the totem gain Minor Protection.\n\nAfter |cFFFFFF2|r seconds, the totem begins fearing nearby enemies every |cFFFFFF2|r seconds, causing them to cower in place for |cFFFFFF4|r seconds.",
     SI_LUIE_SKILL_AGONY_TOTEM_TP =                       "You and allies within the |cFFFFFF6|r meter radius of the totem gain Minor Protection.\n\nAfter |cFFFFFF2|r seconds, the totem begins fearing nearby enemies every |cFFFFFF2|r seconds, causing them to cower in place for |cFFFFFF4|r seconds.\n\nAllies can activate the |cFFFFFFPure Agony|r synergy.",
     SI_LUIE_SKILL_EMPOWERING_GRASP_TP =                  "Increase damage and healing done by |cFFFFFF40|r% for |cFFFFFF<<1>>|r seconds.",
@@ -1097,7 +1098,7 @@ local strings = {
     SI_LUIE_SKILL_AURA_OF_PROTECTION_OTHER_TP =          "Reduce damage taken by |cFFFFFF25|r% while in proximity of the Aura of Protection.",
     SI_LUIE_SKILL_AGONIZING_FURY_TP =                    "Movement Speed reduced by |cFFFFFF10|r% for |cFFFFFF<<1>>|r seconds.\n\nThis effect stacks up to |cFFFFFF5|r times, to a maximum of |cFFFFFF50|r% Movement Speed reduction.",
     SI_LUIE_SKILL_GRASPING_VINES_TP =                    "Afflicted with Bleeding Damage every |cFFFFFF0.5|r seconds and immobilized for |cFFFFFF<<1>>|r seconds.\n\nThe vines explode at the end of the duration, dealing fire damage if you do not move away.",
-    SI_LUIE_SKILL_RETALIATION_NPC_TP =                   "Blocking and counterattacking any incoming hits for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_RETALIATION_NPC_TP =                   "Deal physical damage after |cFFFFFF<<1>>|r <<1[second/seconds]>> while actively bracing for attack, reducing damage taken by |cFFFFFF80|r% and granting immunity to Stun and Knockback effects.\n\nEnemies that deal damage with a melee Medium or Heavy Attack will be staggered, stunned for |cFFFFFF1|r second, and set Off Balance.",
     SI_LUIE_SKILL_BRIARHEART_RESURRECTION_TP =           "A Hagraven has restarted the beating briarheart of this enemy, restoring them to life.",
     SI_LUIE_SKILL_ENRAGE_DEVOTED_TP =                    "Increase damage done by |cFFFFFF20|r% for |cFFFFFF2|r minutes.",
     SI_LUIE_SKILL_ICE_PILLAR_TP =                        "Enemies within |cFFFFFF3|r meters of the pillar are chilled, reducing their Movement Speed by |cFFFFFF60|r%.\n\nThe Ogre Shaman's Frost Bolts will freeze any chilled targets, inflicting them with a |cFFFFFF4|r second immobilize.",
@@ -1108,7 +1109,8 @@ local strings = {
     SI_LUIE_SKILL_KOTU_GAVA_SWARM_TP =                   "Afflicted with Poison Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nAfter |cFFFFFF<<2>>|r <<2[second/seconds]>>, a swarm of Kotu Gava will spawn around you.",
     SI_LUIE_SKILL_HARDENED_SHELL_TP =                    "Chance when hit to reduce damage taken by |cFFFFFF50|r%.",
     SI_LUIE_SKILL_UNCANNY_DODGE_TP =                     "Unable to be taken off guard. Will always dodge the initial hit when engaged.",
-    SI_LUIE_SKILL_BLOCK_NPC_TP =                         "Brace for attack, reducing damage taken and granting immunity to Stun and Knockback effects.\n\nIncoming melee Heavy Attacks will be counterattacked while active.",
+    SI_LUIE_SKILL_BLOCK_NPC_TP =                         "Brace for attack, reducing damage taken by |cFFFFFF80|r% and granting immunity to Stun and Knockback effects.\n\nEnemies that deal damage with a melee Medium or Heavy Attack will be staggered, stunned for |cFFFFFF3|r seconds, and set Off Balance for |cFFFFFF7|r seconds.",
+    SI_LUIE_SKILL_BLOCK_NPC_THEATER_TP =                 "Brace for attack, reducing damage taken by |cFFFFFF80|r% and granting immunity to Stun and Knockback effects.",
     SI_LUIE_SKILL_CALL_ALLY_TP =                         "A summoned beast ally fights at your side. The beast remains for |cFFFFFF2|r minutes or until killed.",
     SI_LUIE_SKILL_VAMPIRIC_DRAIN_TP =                    "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nEvery time this effect deals damage it heals the vampire.",
     SI_LUIE_SKILL_DEVOUR_HUNGER_TP =                     "Stunned and afflicted with Bleeding Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nWhen this effect ends you will be knocked back for |cFFFFFF1.5|r seconds.",

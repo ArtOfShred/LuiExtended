@@ -2367,7 +2367,7 @@ LUIE.DebugAuras = {
     [61660] = true, -- Resilient (The Steed 75 - Resilient)
     [61661] = true, -- Resilient (The Steed 75 - Resilient)
     [64067] = true, -- Reinforced (The Steed 120 - Reinforced)
-    --[98314] = true, -- Reinforced (The Steed 120 - Reinforced)
+    [135653] = true, -- Reinforced (The Steed 120 - Reinforced)
 
     -- The Lady
     [60502] = true, -- Light Armor Focus (The Lady)
@@ -2560,6 +2560,7 @@ LUIE.DebugAuras = {
 
     -- BREAK FREE
     [16565] = true, -- Break Free
+    [46330] = true, -- Brace Cooldown
 
     -- MUNDUS STONE EVENTS
     [14031] = true, -- Mundus Use
@@ -7924,7 +7925,7 @@ LUIE.DebugAuras = {
     [29766] = true, -- Blocked Stack -- Guard
     [29765] = true, -- Uber Attack -- Guard
     [29767] = true, -- Uber Attack -- Guard
-    [84346] = true, -- Uber Attack -- Guard
+    --[84346] = true, -- Uber Attack -- Guard
 
     [34917] = true, -- Low Slash -- Brute
     [34919] = true, -- Low Slash -- Brute

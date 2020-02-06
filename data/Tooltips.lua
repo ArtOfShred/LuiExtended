@@ -284,6 +284,7 @@ LUIE.Data.Tooltips = {
     Champion_Vengeance                              = GetString(SI_LUIE_SKILL_VENGEANCE_TP),
     Champion_Retaliation                            = GetString(SI_LUIE_SKILL_RETALIATION_TP),
     Champion_Opportunist                            = GetString(SI_LUIE_SKILL_OPPORTUNIST_TP),
+    Champion_Reinforced                             = GetString(SI_LUIE_SKILL_REINFORCED_TP),
 
     ----------------------------------------------------------------
     -- CONSUMABLES & ITEMS -----------------------------------------
@@ -1098,6 +1099,7 @@ LUIE.Data.Tooltips = {
     Skill_Enrage_Devoted                            = GetString(SI_LUIE_SKILL_ENRAGE_DEVOTED_TP),
     Skill_Uncanny_Dodge                             = GetString(SI_LUIE_SKILL_UNCANNY_DODGE_TP),
     Skill_Block_NPC                                 = GetString(SI_LUIE_SKILL_BLOCK_NPC_TP),
+    Skill_Block_NPC_Theater                         = GetString(SI_LUIE_SKILL_BLOCK_NPC_THEATER_TP),
     Skill_Call_Ally                                 = GetString(SI_LUIE_SKILL_CALL_ALLY_TP),
     Skill_Feral_Guardian_NPC                        = GetString(SI_LUIE_SKILL_FERAL_GUARDIAN_NPC_TP),
     Skill_Basilisk_Powder                           = GetString(SI_LUIE_SKILL_BASILISK_POWDER_TP),

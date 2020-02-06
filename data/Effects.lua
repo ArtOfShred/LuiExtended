@@ -2431,6 +2431,7 @@ Effects.EffectHideSCT = {
     [55400] = true, -- Magicka Restore
     [55401] = true, -- Magicka Restore
     [45982] = true, -- Bash Stun
+    [16825] = true, -- Off-Balance Exploit
 
     -- Player - Champion Points
     [64245] = true, -- Shadowstrike
@@ -2451,7 +2452,6 @@ Effects.EffectHideSCT = {
 
     -- Sets
     [32755] = true, -- Nikulas' Heavy Armor (of Nikulas)
-
     [59499] = true, -- Mephala's Web (Spawn of Mephala)
     [75706] = true, -- Bahraha's Curse (of Bahraha's Curse)
     [34870] = true, -- Wilderqueen's Arch (of the Wilderqueen)
@@ -4104,7 +4104,7 @@ Effects.EffectOverride = {
     [98313] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_invigorating_bash.dds' }, -- Invigorating Bash
     [98294] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_phase.dds', tooltip = Tooltips.Champion_Phase }, -- Phase
     [61661] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_resilient.dds' }, -- Resilient
-    [98314] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_reinforced.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Reinforced
+    [135653] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_reinforced.dds', tooltip = Tooltips.Champion_Reinforced }, -- Reinforced
 
     -- The Lady
     [63110] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_spell_absorption.dds' }, -- Spell Absorption
@@ -4196,11 +4196,11 @@ Effects.EffectOverride = {
 
     -- Block
     [14890] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', forcedContainer = 'short', tooltip = Tooltips.Innate_Block }, -- Block
-    [16270] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', name = Abilities.Innate_Block }, -- Brace Cost
-    [88724] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', name = Abilities.Innate_Block }, -- Brace Cost
     [86310] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = Abilities.Innate_Block_Stun, hide = true, tooltip = Tooltips.Generic_Stagger }, -- Stagger (Player blocks NPC charged attack)
     [86309] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = Abilities.Innate_Block_Stun, tooltip = Tooltips.Generic_Stun }, -- Stun (Player blocks NPC charged attack)
     [86312] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = Abilities.Innate_Block_Stun, tooltip = Tooltips.Generic_Stun }, -- Stun (Player blocks Ogrim Body Slam)
+    [16270] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', name = Abilities.Innate_Brace }, -- Brace Cost
+    [88724] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', name = Abilities.Innate_Brace }, -- Brace Cost
     [45902] = { name = Abilities.Skill_Off_Balance, tooltip = "" }, -- Off-Balance
 
     -- Bash
@@ -6990,7 +6990,7 @@ Effects.EffectOverride = {
     -- Critter events
     [79544] = { hide = true }, -- Mischievous Dodge (Nixad)
     [79555] = { hide = true }, -- Mischievous Dodge (Nixad)
-    [40165] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', name = Abilities.Innate_Block, duration = 0, tooltip = Tooltips.Innate_Block }, -- Scene Choreo Brace (Monster Fight)
+    [40165] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', name = Abilities.Innate_Brace, duration = 0, tooltip = Tooltips.Skill_Block_NPC_Theater }, -- Scene Choreo Brace (Monster Fight)
 
     -- Friendly NPC Abilities
     [48330] = { hide = true }, -- Aspect of Terror (Abnur Tharn)
@@ -7033,7 +7033,7 @@ Effects.EffectOverride = {
     [29400] = { icon = 'esoui/art/icons/ability_1handed_005.dds' }, -- Power Bash (Guard)
     [29401] = { icon = 'esoui/art/icons/ability_1handed_005.dds', tooltip = Tooltips.Generic_Disorient }, -- Power Bash (Guard)
     [29402] = { icon = 'esoui/art/icons/ability_1handed_005.dds', hide = true, tooltip = Tooltips.Generic_Stagger }, -- Power Bash (Guard)
-    [29761] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', name = Abilities.Innate_Block, duration = 0, tooltip = Tooltips.Skill_Block_NPC }, -- Brace (Guard)
+    [29761] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', duration = 0, tooltip = Tooltips.Skill_Block_NPC }, -- Brace (Guard)
     [29762] = { hide = true }, -- Blocked Stack (Guard)
     [29757] = { hide = true }, -- Remove block (Guard)
     [84351] = { hide = true }, -- Remove block (Guard)
@@ -7287,7 +7287,7 @@ Effects.EffectOverride = {
     [1347] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = Abilities.Skill_Retaliation }, -- Off-Balance (Winterborn Warrior)
     [70070] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_heavy.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Strike (Winterborn Warrior)
     [64980] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_javelin.dds', hide = true }, -- Javelin (Winterborn Warrior)
-    [14883] = { icon = 'esoui/art/icons/achievement_030.dds', name = Abilities.Skill_Off_Balace_Immunity, tooltip = Tooltips.Generic_Off_Balance_Immunity }, -- Off-Balance (Winterborn Warrior)
+    [14883] = { hide = true }, -- Off-Balance (Winterborn Warrior)
     [69282] = { hide = true }, -- Roll Dodge Back (Winterborn Warrior)
     [54593] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds' }, -- Flare (Winterborn Mage)
     [55909] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_grasping_vines.dds' }, -- Grasping Vines (Winterborn Mage)
