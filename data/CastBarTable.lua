@@ -25,10 +25,11 @@ CastBarTable.CastBreakingStatus = {
 --------------------------------------------------------------------------------------------------------------------------------
 CastBarTable.CastBreakingActions = {
     [28549] = true, -- Roll Dodge
-    [14890] = true, -- Block
-    --[20309] = true, -- Hidden
-    [973] = true, -- Sprint
-    [33439] = true, -- Mount Sprint
+    [55146] = true, -- Interrupt Bonus (when player bashes it can interrupt a channel - note that it won't succesfully go off until after the cast if it can't be stopped by bashing so this is safe to apply to everything)
+    --[14890] = true, -- Block -- Replaced with function in Castbar update that checks IsBlockActive
+    --[20309] = true, -- Hidden -- Shouldn't break any casts or channels (or is unable to be using during one)
+    --[973] = true, -- Sprint -- TODO: No longer works
+    --[33439] = true, -- Mount Sprint -- TODO: No longer works
 }
 
 CastBarTable.BreakCastOnMove = {
@@ -128,6 +129,7 @@ CastBarTable.BreakCastOnMove = {
 }
 
 CastBarTable.IgnoreCastBreakingActions = {
+    [86792] = true, -- Eating (High Hrothgar Festival Mints)
     --[21112] = true, -- Q4220 PC Forced to L0
 }
 

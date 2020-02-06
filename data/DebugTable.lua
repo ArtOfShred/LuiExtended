@@ -802,7 +802,7 @@ LUIE.DebugAuras = {
     [42008] = true, -- Blessing of Root Sunder (Token of Root Sunder)
     [42053] = true, -- Yokudan Salute (Yokudan Totem)
     --[12478] = true, -- CON_Ground Rise on (Yokudan Totem)
-    --[42067] = true, -- Explosion (Yokudan Totem)
+    [42067] = true, -- Explosion (Yokudan Totem)
 
     [89550] = true, -- TROPHY Azura's Light (Twilight Shard)
     [79510] = true, -- TROPHY Blood Oath (Blade of the Blood Oath)
@@ -2367,7 +2367,7 @@ LUIE.DebugAuras = {
     [61660] = true, -- Resilient (The Steed 75 - Resilient)
     [61661] = true, -- Resilient (The Steed 75 - Resilient)
     [64067] = true, -- Reinforced (The Steed 120 - Reinforced)
-    [98314] = true, -- Reinforced (The Steed 120 - Reinforced)
+    --[98314] = true, -- Reinforced (The Steed 120 - Reinforced)
 
     -- The Lady
     [60502] = true, -- Light Armor Focus (The Lady)
@@ -2629,7 +2629,7 @@ LUIE.DebugAuras = {
     [61875] = true, -- Swap to Weapon Set 2
     [85701] = true, -- Dueling Flag
     --[2727] = true, -- Off-Balance
-    [102771] = true, -- Off Balance Immunity
+    [134599] = true, -- Off Balance Immunity
     [132831] = true, -- Major Vulnerability Invulnerability
     [21263] = true, -- Ayleid Health Bonus
     [100862] = true, -- Fortified Ayleid Health Bonus

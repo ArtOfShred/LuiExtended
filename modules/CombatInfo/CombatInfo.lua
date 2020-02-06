@@ -717,6 +717,14 @@ function CombatInfo.OnUpdate(currentTime)
             CombatInfo.StopCastBar()
         end
     end
+
+    -- Break castbar if player blocks.
+    if not Castbar.IgnoreCastBreakingActions[castbar.id] then
+        if IsBlockActive() then
+            CombatInfo.StopCastBar()
+        end
+    end
+
 end
 
 function CombatInfo.StopCastBar()

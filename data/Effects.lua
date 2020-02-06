@@ -381,7 +381,7 @@ Effects.DebuffDisplayOverrideId = {
     ----------------------------------------------------------------
 
     -- Basic (Shared)
-    [102771] = true, -- Off Balance Immunity
+    [134599] = true, -- Off Balance Immunity
     [132831] = true, -- Major Vulnerability Invulnerability
     [16593] = true, -- Melee Snare
     [2727] = true, -- Off-Balance
@@ -3314,8 +3314,8 @@ Effects.EffectOverride = {
     [76349] = { icon = 'LuiExtended/media/icons/abilities/ability_item_pardon_edict_high.dds', name = Abilities.Innate_Pardon_Edict_High }, -- Full Pardon
 
     -- Seasonal Mementos & Items
-    [86792] = { icon = 'LuiExtended/media/icons/consumables/abilities/ability_item_festival_mints.dds', name = Abilities.Consumable_Festival_Mints }, -- Eating (High Hrothgar Festival Mints)
-    [86794] = { icon = 'LuiExtended/media/icons/consumables/abilities/ability_item_festival_mints.dds', name = Abilities.Consumable_Festival_Mints, tooltip = Tooltips.Event_Festival_Mints, unbreakable = 1 }, -- Very Cold (High Hrothgar Festival Mints)
+    [86792] = { icon = 'LuiExtended/media/icons/abilities/ability_item_festival_mints.dds', name = Abilities.Consumable_Festival_Mints }, -- Eating (High Hrothgar Festival Mints)
+    [86794] = { icon = 'LuiExtended/media/icons/abilities/ability_item_festival_mints.dds', name = Abilities.Consumable_Festival_Mints, tooltip = Tooltips.Event_Festival_Mints, unbreakable = 1 }, -- Very Cold (High Hrothgar Festival Mints)
     [86739] = { icon = 'LuiExtended/media/icons/abilities/ability_item_festival_grog.dds', name = Abilities.Consumable_Sailors_Grog }, -- Drinking (Sailor's Warning Festival Grog)
     [86740] = { icon = 'LuiExtended/media/icons/abilities/ability_item_festival_grog.dds', name = Abilities.Consumable_Sailors_Grog, tooltip = Tooltips.Event_Festival_Grog, unbreakable = 1 }, -- Very Drunk (Sailor's Warning Festival Grog)
     [85355] = {icon = 'LuiExtended/media/icons/mementos/memento_fire_breathers_torches.dds', name = Abilities.Memento_Fire_Breathers_Torches, unbreakable = 1 }, -- Flame Juggling (Consumable Version)
@@ -3329,9 +3329,9 @@ Effects.EffectOverride = {
     [87963] = { icon = 'LuiExtended/media/icons/mementos/memento_cherry_blossom_branch.dds', name = Abilities.Memento_Cherry_Blossom_Branch }, -- Bestowed Cherry Blossoms (Cherry Blossom Branch)
     [116879] = { icon = 'esoui/art/icons/event_jestersday_pie1.dds', name = Abilities.Consumable_Revelry_Pie }, -- Alliance Pie (Revelry Pie)
     [116933] = { hide = true }, -- Covered in Pie (Revelry Pie)
-    [116942] = { tooltip = Tooltips.Event_Revelry_Pie, stack = 0 }, -- Covered in Pie (Revelry Pie)
-    [116944] = { tooltip = Tooltips.Event_Revelry_Pie, stack = 0 }, -- Covered in Pie (Revelry Pie)
-    [116943] = { tooltip = Tooltips.Event_Revelry_Pie, stack = 0 }, -- Covered in Pie (Revelry Pie)
+    [116942] = { tooltip = Tooltips.Event_Revelry_Pie, stack = 0, unbreakable = 1 }, -- Covered in Pie (Revelry Pie)
+    [116944] = { tooltip = Tooltips.Event_Revelry_Pie, stack = 0, unbreakable = 1 }, -- Covered in Pie (Revelry Pie)
+    [116943] = { tooltip = Tooltips.Event_Revelry_Pie, stack = 0, unbreakable = 1 }, -- Covered in Pie (Revelry Pie)
     [102077] = { icon = 'LuiExtended/media/icons/mementos/memento_jesters_scintillator.dds', name = Abilities.Memento_Jesters_Scintillator, unbreakable = 1 }, -- Jester's Festival Scintillator (Jester's Scintillator)
     [77027] = { hide = true }, -- Anniversary Cake - Forreals (Jubilee Cake)
     [87998] = { hide = true }, -- Anniversary Cake (2nd Annual Jubilee Cake)
@@ -4179,7 +4179,7 @@ Effects.EffectOverride = {
     [63601] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_eso_plus_member.dds', tooltip = Tooltips.Innate_ESO_Plus }, -- ESO Plus Member
     [47270] = { icon = 'esoui/art/icons/achievement_update11_dungeons_017.dds', hide = true }, -- Ritual of Mara
     [2727] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = "" }, -- Off-Balance
-    [102771] = { stack = 0, type = 1, tooltip = Tooltips.Generic_Off_Balance_Immunity }, -- Off Balance Immunity
+    [134599] = { type = 1, tooltip = Tooltips.Generic_Off_Balance_Immunity }, -- Off Balance Immunity
     [132831] = { type = 1, icon = 'esoui/art/icons/achievement_031.dds', name = Abilities.Skill_Major_Vulnerability_Immunity, tooltip = Tooltips.Generic_Major_Vulnerability_Immunity }, -- Major Vulnerability Invulnerability
     [85701] = { hide = true, tooltip = Tooltips.Innate_Battle_Spirit }, -- Dueling Flag
     [21263] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = Abilities.Innate_Ayleid_Well, tooltip = Tooltips.Innate_Ayleid_Well }, -- Ayleid Health Bonus
@@ -7881,8 +7881,8 @@ Effects.EffectOverride = {
     [89301] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', name = Abilities.Skill_Weakness, duration = -120, type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = Tooltips.Skill_Weakness_NPC_Summon }, -- Summon Spiderling (Spider Daedra)
     [89306] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds' }, -- Web (Spider Daedra - Spiderling)
     [89307] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 60 }, -- Web (Spider Daedra - Spiderling)
-    [8782] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_zap_pulse.dds' }, -- Lightning Storm (Spider Daedra)
-    [20530] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_zap_pulse.dds' }, -- Lightning Storm (Spider Daedra)
+    [8782] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_lightning_strike_daedra.dds' }, -- Lightning Storm (Spider Daedra)
+    [20530] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_lightning_strike_daedra.dds' }, -- Lightning Storm (Spider Daedra)
 
     -- Storm Atronach
     [4858] = { icon = 'LuiExtended/media/icons/abilities/ability_stormatronach_bash.dds' }, -- Bash (Storm Atronach)
@@ -8159,10 +8159,10 @@ Effects.EffectOverride = {
     [5308] = { icon = 'LuiExtended/media/icons/abilities/ability_thunderbug_thunder_bite.dds' }, -- Thunder Bite (Thunderbug)
     [8429] = { icon = 'LuiExtended/media/icons/abilities/ability_thunderbug_zap.dds', tooltip = Tooltips.Skill_Lightning_Rod }, -- Zap (Thunderbug)
     [65079] = { icon = 'LuiExtended/media/icons/abilities/ability_thunderbug_zap.dds' }, -- Zap (Thunderbug)
-    [26379] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_zap_pulse.dds' }, -- Zap (Thunderbug)
+    [26379] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_zap_pulse_thunderbug.dds' }, -- Zap (Thunderbug)
     [26382] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_shock.dds' }, -- Bolt (Thunderbug)
-    [26412] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sudden_storm.dds' }, -- Thunderstrikes (Thunderbug)
-    [34980] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sudden_storm.dds' }, -- Thunderstrikes (Thunderbug)
+    [26412] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_thunderstrikes.dds' }, -- Thunderstrikes (Thunderbug)
+    [34980] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_thunderstrikes.dds' }, -- Thunderstrikes (Thunderbug)
 
     -- Kotu Gava
     [73166] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_bite.dds', name = Abilities.Skill_Leeching_Bite }, -- Bite (Kotu Gava)
@@ -8317,9 +8317,9 @@ Effects.EffectOverride = {
     [5520] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_frost.dds', hide = true }, -- Frost Bolt (Nereid)
     [5559] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_water_geyser.dds' }, -- Icy Geyser (Nereid)
     [11024] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_water_geyser.dds' }, -- Icy Geyser (Nereid)
-    [5540] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hurricane.dds', hide = true }, -- Hurricane (Nereid)
-    [16040] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hurricane.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Frost, tooltipValue2 = 0.7, tooltipValue3 = 60 }, -- Hurricane (Nereid)
-    [33459] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hurricane.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Frost, tooltipValue2 = 0.7, tooltipValue3 = 60, hideGround = true  }, -- Hurricane (Nereid)
+    [5540] = { icon = 'esoui/art/icons/ability_wrothgar_chillingwind.dds', hide = true }, -- Hurricane (Nereid)
+    [16040] = { icon = 'esoui/art/icons/ability_wrothgar_chillingwind.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Frost, tooltipValue2 = 0.7, tooltipValue3 = 60 }, -- Hurricane (Nereid)
+    [33459] = { icon = 'esoui/art/icons/ability_wrothgar_chillingwind.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Frost, tooltipValue2 = 0.7, tooltipValue3 = 60, hideGround = true  }, -- Hurricane (Nereid)
 
     [5254] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_punch.dds' }, -- Punch (Ogre)
     [5257] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_backhand.dds' }, -- Backhand (Ogre)

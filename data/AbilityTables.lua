@@ -68,7 +68,7 @@ local AbilityTables = {
     Skill_Minor_Slayer                = 76618,
     Skill_Minor_Aegis                 = 76617,
     Skill_Off_Balance                 = 14062,
-    Skill_Off_Balace_Immunity         = 102771,
+    Skill_Off_Balace_Immunity         = 134599,
     Skill_Major_Vulnerability_Immunity = GetString(SI_LUIE_SKILL_GENERIC_MAJOR_VULNERABILITY_IMMUNITY),
 
     Skill_Empower                     = 61737,
