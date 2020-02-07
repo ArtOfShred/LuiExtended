@@ -4863,11 +4863,11 @@ Effects.EffectOverride = {
     [77418] = { tooltip = Abilities.Skill_Empowered_Ward }, -- Minor Intellect (Empowered Ward)
 
     -- Bound Armor / Bound Armaments / Bound Aegis
-    [24158] = { tooltip = Tooltips.Skill_Bound_Armor }, -- Bound Armor (Bound Armor)
+    [24158] = { tooltip = Tooltips.Skill_Bound_Armor, tooltipValue2 = 36 }, -- Bound Armor (Bound Armor)
     [24165] = { tooltip = Tooltips.Skill_Bound_Armaments_Skill }, -- Bound Armaments (Bound Armaments)
     [130293] = { icon = 'esoui/art/icons/ability_sorcerer_bound_armaments_proc.dds', tooltip = Tooltips.Skill_Bound_Armaments_Stack }, -- Bound Armaments (Bound Armaments)
     [108855] = { icon = 'esoui/art/icons/ability_buff_minor_resolve.dds', name = Abilities.Skill_Minor_Resolve, tooltip = Abilities.Skill_Bound_Aegis }, -- Bound Aegis (Bound Aegis)
-    [24163] = { tooltip = Tooltips.Skill_Bound_Armor }, -- Bound Aegis (Bound Aegis)
+    [24163] = { tooltip = Tooltips.Skill_Bound_Armor, tooltipValue2 = 40 }, -- Bound Aegis (Bound Aegis)
 
     [999008] = { icon = 'esoui/art/icons/ability_sorcerer_bound_aegis.dds', name = Abilities.Skill_Bound_Aegis, tooltip = Tooltips.Skill_Bound_Aegis }, -- Bound Aegis FAKE ID
 

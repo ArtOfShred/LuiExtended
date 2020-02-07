@@ -412,7 +412,7 @@ local strings = {
     SI_LUIE_SKILL_TWILIGHT_MATRIARCH_TP =                "A Twilight Matriarch fights at your side. The matriarch remains until killed or unsummoned.\n\nThe twilight matriarch's zaps deal Shock Damage and its kicks deal Shock Damage\n\nYou can activate the twilight matriarch's special ability, causing it to heal the matriarch and up to 2 other friendly tagets.",
     SI_LUIE_SKILL_TORMENTOR_DAMAGE_BOOST_SELF_TP =       "Increase Twilight Tormentor damage against enemies above |cFFFFFF50|r% Health by |cFFFFFF53|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_TORMENTOR_DAMAGE_BOOST_TP =            "Increase damage against enemies above |cFFFFFF50|r% Health by |cFFFFFF53|r% for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_BOUND_ARMOR_TP =                       "Increase block mitigation by |cFFFFFF36|r% for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_BOUND_ARMOR_TP =                       "Increase block mitigation by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_BOUND_ARMAMENTS_SKILL_TP =             "For |cFFFFFF<<1>>|r seconds, hitting an enemy with a Light of Heavy Attack summons a Bound weapon for |cFFFFFF10|r seconds, up to |cFFFFFF4|r times.\n\nYou can reactivate the ability for half cost to arm the weapons, causing them to strike your target for Physical Damage every |cFFFFFF0.3|r seconds.",
     SI_LUIE_SKILL_BOUND_ARMAMENTS_STACK_TP =             "For |cFFFFFF<<1>>|r seconds up to |cFFFFFF4|r Bound weapons will hover near you.\n\nReactivating Bound Armaments will arm the weapons, causing them to strike your target for Physical Damage every |cFFFFFF0.3|r seconds.",
     SI_LUIE_SKILL_ATRONACH_ZAP_TP =                      "Afflicted with Shock Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
@@ -695,7 +695,7 @@ local strings = {
 
     -- Psijic Order
     SI_LUIE_SKILL_SPELL_ORB_TP =                         "When you cast a Psijic Order ability while you are in combat, you generate a spell charge.\n\nWhen you reach |cFFFFFF5|r spell charges, you launch a spell orb at the closest enemy to you dealing Magic Damage or Physical Damage, whichever is higher.",
-    SI_LUIE_SKILL_CONCENTRATED_BARRIER_TP =              "Absorbing damage while blocking.\n\nThis damage shield recharges back to full strength after you spend |cFFFFFF10|r seconds not blocking.",
+    SI_LUIE_SKILL_CONCENTRATED_BARRIER_TP =              "Absorbing damage while Bracing.\n\nThis damage shield recharges back to full strength after you spend |cFFFFFF10|r seconds not Bracing.",
     SI_LUIE_SKILL_TIME_STOP_TP =                         "Gradually being slowed over time for |cFFFFFF2|r seconds.\n\nIf you are still in the area of effect at end of this duration you will be stunned for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_TIME_BORROWED_TIME_TP =                "Gradually being slowed over time for |cFFFFFF2|r seconds.\n\nIf you are still in the area of effect at end of this duration you will be stunned and have the next |cFFFFFF5000|r points of healing negated for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_TIME_BORROWED_TIME_STUN_TP =           "Negating the next |cFFFFFF5000|r points of healing for |cFFFFFF<<1>>|r seconds.\n\nStunned for |cFFFFFF<<1>>|r seconds.",
@@ -879,7 +879,7 @@ local strings = {
     SI_LUIE_SKILL_SET_THURVOKUN_GROUND_TP =              "Taking Disease Damage every |cffffff1|r second.\n\nEach time you take damage you are afflicted with Minor Maim and Minor Defile for |cffffff4|r seconds.",
     SI_LUIE_SKILL_SET_ZAAN_TP =                          "Afflicted with Flame Damage every |cffffff1|r second for |cffffff5|r seconds while the beam holds.\n\nDeals |cFFFFFF50|r% increased damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_SET_ENERGY_CHARGE =                    "Energy Charge",
-    SI_LUIE_SKILL_SET_ENERGY_CHARGE_TP =                 "Gain an Energy Charge for |cffffff<<1>>|r seconds when you block an attack.\n\nWhen you gain |cffffff6|r charges, release the energy, restoring |cFFFFFF5350|r Stamina and Magicka and healing.",
+    SI_LUIE_SKILL_SET_ENERGY_CHARGE_TP =                 "Gain an Energy Charge for |cffffff<<1>>|r seconds when you block an attack.\n\nWhen you gain |cffffff6|r Charges, release the energy, restoring |cFFFFFF5350|r Stamina and Magicka and healing.\n\nAfter releasing the Charges, you cannot regain new Charges for |cFFFFFF14|r seconds.",
     SI_LUIE_SKILL_SET_MERIDIAS_FAVOR_TP =                "Restoring |cffffff2325|r Magicka or Stamina, whichever maximum is higher, every |cffffff1|r second for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_AURORANS_THUNDER_TP =              "Enemies in a |cffffff10|r meter cone in front of you take Shock Damage every |cffffff0.5|r seconds for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_TZOGVINS_WARBAND_TP =              "Increase Weapon Critical by |cffffff129|r for |cffffff10|r seconds, stacking up to |cffffff10|r times when you deal Critical Damage.\n\nAt max stacks, you also gain Minor Force.",
