@@ -5602,19 +5602,19 @@ Effects.EffectOverride = {
     [60761] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_bow_restore.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (Bow)
 
     -- Destruction Staff (Frost)
-    [16277] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_frost.dds' }, -- Light Attack
+    [16277] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_frost_light.dds' }, -- Light Attack
     [18405] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_frost_medium.dds', name = Abilities.Skill_Medium_Attack }, -- Heavy Attack
     [18406] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_frost_heavy.dds' }, -- Heavy Attack
     [60762] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_restore.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (Frost)
 
     -- Destruction Staff (Flame)
-    [16165] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds' }, -- Light Attack
+    [16165] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_flame_light.dds' }, -- Light Attack
     [15385] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_flame_medium.dds', name = Abilities.Skill_Medium_Attack }, -- Heavy Attack
     [16321] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_flame_heavy.dds' }, -- Heavy Attack
     [60763] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_restore.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (Fire)
 
     -- Destruction Staff (Shock)
-    [18350] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_shock.dds' }, -- Light Attack
+    [18350] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_lightning_light.dds' }, -- Light Attack
     [18396] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_lightning_heavy.dds', name = Abilities.Skill_Heavy_Attack, tooltip = Tooltips.Skill_Heavy_Attack_Lightning }, -- Heavy Attack (Shock)
     [19277] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_lightning_heavy.dds', name = Abilities.Skill_Heavy_Attack, hide = true }, -- Shock Pulse
     [60764] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_restore.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (Shock)
