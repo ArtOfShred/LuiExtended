@@ -5654,7 +5654,7 @@ function ChatAnnouncements.HookFunction()
     -- DUEL ALERTS --------------
     -----------------------------
 
-    -- EVENT_DUEL_INVITE_RECEIVED - ALERT HANDLER
+    -- EVENT_DUEL_INVITE_RECEIVED (Alert Handler)
     local function DuelInviteReceivedAlert(inviterCharacterName, inviterDisplayName)
         -- Display CA
         if ChatAnnouncements.SV.Social.DuelCA then
@@ -5672,7 +5672,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_DUEL_INVITE_ACCEPTED - ALERT HANDLER
+    -- EVENT_DUEL_INVITE_ACCEPTED (Alert Handler)
     local function DuelInviteAcceptedAlert()
         -- Display CA
         if ChatAnnouncements.SV.Social.DuelCA then
@@ -5681,17 +5681,13 @@ function ChatAnnouncements.HookFunction()
 
         -- Display Alert
         if ChatAnnouncements.SV.Social.DuelAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, SOUNDS.DUEL_ACCEPTED, GetString(SI_LUIE_CA_DUEL_INVITE_ACCEPTED) )
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_DUEL_INVITE_ACCEPTED) )
         end
-
-        -- Play sound if we don't have the Alert turned on
-        if not ChatAnnouncements.SV.Social.DuelAlert then
-            PlaySound(SOUNDS.DUEL_ACCEPTED)
-        end
+        PlaySound(SOUNDS.DUEL_ACCEPTED)
         return true
     end
 
-    -- EVENT_DUEL_INVITE_SENT - ALERT HANDLER
+    -- EVENT_DUEL_INVITE_SENT (Alert Handler)
     local function DuelInviteSentAlert(inviteeCharacterName, inviteeDisplayName)
         -- Display CA
         if ChatAnnouncements.SV.Social.DuelCA then
@@ -5714,7 +5710,7 @@ function ChatAnnouncements.HookFunction()
     SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_DUEL, GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), 5)
     SafeAddString(SI_DUEL_INVITE_MESSAGE, GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), 5)
     SafeAddString(SI_PLAYER_TO_PLAYER_INVITE_DUEL, GetString(SI_LUIE_CA_DUEL_INVITE_PLAYER), 5)
-    -- TODO - These are likely a standard error response string for Duels
+    -- These are likely a standard error response string for Duels
     SafeAddString(SI_DUELSTATE1, GetString(SI_LUIE_CA_DUEL_STATE1), 5)
     SafeAddString(SI_DUELSTATE1, GetString(SI_LUIE_CA_DUEL_STATE2), 5)
     -- Group Player to Player notification replacement
@@ -5734,7 +5730,7 @@ function ChatAnnouncements.HookFunction()
     SafeAddString(SI_SENDMAILRESULT2, GetString(SI_LUIE_CA_MAIL_SENDMAILRESULT2), 5)
     SafeAddString(SI_SENDMAILRESULT3, GetString(SI_LUIE_CA_MAIL_SENDMAILRESULT3), 5)
 
-    -- EVENT_DUEL_INVITE_FAILED -- ALERT HANDLER
+    -- EVENT_DUEL_INVITE_FAILED (Alert Handler)
     local function DuelInviteFailedAlert(reason, targetCharacterName, targetDisplayName)
         local userFacingName = ZO_GetPrimaryPlayerNameWithSecondary(targetDisplayName, targetCharacterName)
         -- Display CA
@@ -5753,20 +5749,16 @@ function ChatAnnouncements.HookFunction()
             local finalAlertName = ChatAnnouncements.ResolveNameNoLink(targetDisplayName, targetCharacterName)
             local formattedString = zo_strformat(GetString("SI_LUIE_CA_DUEL_INVITE_FAILREASON", reason), finalAlertName)
             if userFacingName then
-                ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, formattedString)
+                ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, formattedString)
             else
-                ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, (GetString("SI_LUIE_CA_DUEL_INVITE_FAILREASON", reason)))
+                ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString("SI_LUIE_CA_DUEL_INVITE_FAILREASON", reason)))
             end
         end
-
-        -- Play sound if we don't have the Alert turned on
-        if not ChatAnnouncements.SV.Social.DuelAlert then
-            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return true
     end
 
-    -- EVENT_DUEL_INVITE_DECLINED -- ALERT HANDLER
+    -- EVENT_DUEL_INVITE_DECLINED (Alert Handler)
     local function DuelInviteDeclinedAlert()
         -- Display CA
         if ChatAnnouncements.SV.Social.DuelCA then
@@ -5775,17 +5767,13 @@ function ChatAnnouncements.HookFunction()
 
         -- Display Alert
         if ChatAnnouncements.SV.Social.DuelAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, GetString(SI_LUIE_CA_DUEL_INVITE_DECLINED))
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_CA_DUEL_INVITE_DECLINED))
         end
-
-        -- Play sound if we don't have the Alert turned on
-        if not ChatAnnouncements.SV.Social.DuelAlert then
-            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return true
     end
 
-    -- EVENT_DUEL_INVITE_CANCELED -- ALERT HANDLER
+    -- EVENT_DUEL_INVITE_CANCELED (Alert Handler)
     local function DuelInviteCanceledAlert()
         -- Display CA
         if ChatAnnouncements.SV.Social.DuelCA then
@@ -5794,23 +5782,19 @@ function ChatAnnouncements.HookFunction()
 
         -- Display Alert
         if ChatAnnouncements.SV.Social.DuelAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, GetString(SI_LUIE_CA_DUEL_INVITE_CANCELED))
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_CA_DUEL_INVITE_CANCELED))
         end
-
-        -- Play sound if we don't have the Alert turned on
-        if not ChatAnnouncements.SV.Social.DuelAlert then
-            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return true
     end
 
-    -- EVENT_PLEDGE_OF_MARA_RESULT -- ALERT HANDLER
+    -- EVENT_PLEDGE_OF_MARA_RESULT (Alert Handler)
     local function PledgeOfMaraResultAlert(result, characterName, displayName)
-        -- Replace everything here and move it all into the CSA handler event
+        -- Note: We replace everything here and move it all into the CSA handler event
         return true
     end
 
-    -- EVENT_GROUP_INVITE_RESPONSE -- ALERT HANDLER
+    -- EVENT_GROUP_INVITE_RESPONSE (Alert Handler)
     local function GroupInviteResponseAlert(characterName, response, displayName)
         local finalName
         local finalAlertName
@@ -5862,7 +5846,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_GROUP_INVITE_ACCEPT_RESPONSE_TIMEOUT -- ALERT HANDLER
+    -- EVENT_GROUP_INVITE_ACCEPT_RESPONSE_TIMEOUT (Alert Handler)
     local function GroupInviteTimeoutAlert()
         printToChat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_GENERIC_JOIN_FAILURE), true)
         if ChatAnnouncements.SV.Group.GroupAlert then
@@ -5872,7 +5856,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_GROUP_NOTIFICATION_MESSAGE -- ALERT HANDLER (NOTE: Updated for HARROWSTORM)
+    -- EVENT_GROUP_NOTIFICATION_MESSAGE (Alert Handler)
     local function GroupNotificationMessageAlert(groupMessageCode)
 
         local message = GetString("SI_GROUPNOTIFICATIONMESSAGE", groupMessageCode)
@@ -5886,7 +5870,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_GROUP_UPDATE -- ALERT HANDLER
+    -- EVENT_GROUP_UPDATE (Alert Handler)
     local function GroupUpdateAlert()
         currentGroupLeaderRawName = ""
         currentGroupLeaderDisplayName = ""
@@ -5897,7 +5881,7 @@ function ChatAnnouncements.HookFunction()
         g_groupJoinFudger = false
     end
 
-    -- EVENT_GROUP_MEMBER_LEFT -- ALERT HANDLER
+    -- EVENT_GROUP_MEMBER_LEFT (Alert Handler)
     local function GroupMemberLeftAlert(characterName, reason, isLocalPlayer, isLeader, displayName, actionRequiredVote)
         ChatAnnouncements.IndexGroupLoot()
 
@@ -6019,8 +6003,8 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_LEADER_UPDATE -- ALERT HANDLER
-    -- This event only fires if the characterId of the leader has changed (it's a new leader)
+    -- EVENT_LEADER_UPDATE (Alert Handler)
+    -- Note: This event only fires if the characterId of the leader has changed (it's a new leader)
     local function LeaderUpdateAlert(leaderTag)
         local leaderRawName = GetRawUnitName(leaderTag)
         local showAlert = leaderRawName ~= "" and currentGroupLeaderRawName ~= ""
@@ -6029,7 +6013,7 @@ function ChatAnnouncements.HookFunction()
 
         -- If for some reason we don't have a valid leader name, bail out now.
         if currentGroupLeaderRawName == "" or currentGroupLeaderRawName == nil or currentGroupLeaderDisplayName == "" or currentGroupLeaderDisplayName == nil then
-            return
+            return true
         end
 
         local displayString
@@ -6057,7 +6041,10 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_GROUPING_TOOLS_LFG_JOINED -- ALERT HANDLER
+    -- TODO: IMPORTANT
+    -- Move to a normal function, this hook was removed in some update
+    -- EVENT_GROUPING_TOOLS_LFG_JOINED (Alert Handler)
+    --[[
     local function GroupingToolsLFGJoinedAlert(locationName)
         if not g_LFGJoinAntiSpam then
             if ChatAnnouncements.SV.Group.GroupLFGCA then
@@ -6076,8 +6063,9 @@ function ChatAnnouncements.HookFunction()
 
         return true
     end
+    ]]--
 
-    -- EVENT_ACTIVITY_QUEUE_RESULT -- ALERT HANDLER
+    -- EVENT_ACTIVITY_QUEUE_RESULT (Alert Handler)
     local function ActivityQueueResultAlert(result)
         if result ~= ACTIVITY_QUEUE_RESULT_SUCCESS then
             if ChatAnnouncements.SV.Group.GroupLFGCA then
@@ -6093,7 +6081,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_GROUP_ELECTION_FAILED -- ALERT HANDLER
+    -- EVENT_GROUP_ELECTION_FAILED (Alert Handler)
     local function GroupElectionFailedAlert(failureType, descriptor)
         if failureType ~= GROUP_ELECTION_FAILURE_NONE then
             if ChatAnnouncements.SV.Group.GroupVoteCA then
@@ -6108,13 +6096,14 @@ function ChatAnnouncements.HookFunction()
     end
 
     -- Variables for EVENT_GROUP_ELECTION_RESULT
-    local GroupElectionResultToSoundId = {
+    local GroupElectionResultToSoundId =
+    {
         [GROUP_ELECTION_RESULT_ELECTION_WON] = SOUNDS.GROUP_ELECTION_RESULT_WON,
         [GROUP_ELECTION_RESULT_ELECTION_LOST] = SOUNDS.GROUP_ELECTION_RESULT_LOST,
         [GROUP_ELECTION_RESULT_ABANDONED] = SOUNDS.GROUP_ELECTION_RESULT_LOST,
     }
 
-    -- EVENT_GROUP_ELECTION_RESULT -- ALERT HANDLER
+    -- EVENT_GROUP_ELECTION_RESULT (Alert Handler)
     local function GroupElectionResultAlert(resultType, descriptor)
         if resultType ~= GROUP_ELECTION_RESULT_IN_PROGRESS and resultType ~= GROUP_ELECTION_RESULT_NOT_APPLICABLE then
             resultType = ZO_GetSimplifiedGroupElectionResultType(resultType)
@@ -6131,6 +6120,9 @@ function ChatAnnouncements.HookFunction()
             --No override found
             if not alertText then
                 local electionType, _, _, targetUnitTag = GetGroupElectionInfo()
+                if not targetUnitTag then
+                    return
+                end
                 if electionType == GROUP_ELECTION_TYPE_KICK_MEMBER then
                     if resultType == GROUP_ELECTION_RESULT_ELECTION_LOST then
                         local kickMemberName = GetUnitName(targetUnitTag)
@@ -6172,7 +6164,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_GROUP_ELECTION_REQUESTED -- ALERT HANDLER
+    -- EVENT_GROUP_ELECTION_REQUESTED (Alert Handler)
     local function GroupElectionRequestedAlert(descriptor)
         local alertText
         if descriptor then
@@ -6193,14 +6185,8 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_GROUPING_TOOLS_READY_CHECK_CANCELLED -- ALERT HANDLER
+    -- EVENT_GROUPING_TOOLS_READY_CHECK_CANCELLED (Alert Handler)
     local function GroupReadyCheckCancelAlert(reason)
-        --[[
-        if reason ~= LFG_READY_CHECK_CANCEL_REASON_NOT_IN_READY_CHECK then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString("SI_LFGREADYCHECKCANCELREASON", reason))
-            d(GetString("SI_LFGREADYCHECKCANCELREASON", reason))
-        end]]--
-
         if reason ~= LFG_READY_CHECK_CANCEL_REASON_NOT_IN_READY_CHECK and reason ~= LFG_READY_CHECK_CANCEL_REASON_GROUP_FORMED_SUCCESSFULLY then
             if ChatAnnouncements.SV.Group.GroupLFGCA then
                 printToChat(GetString("SI_LFGREADYCHECKCANCELREASON", reason), true)
@@ -6219,7 +6205,7 @@ function ChatAnnouncements.HookFunction()
         g_showRCUpdates = true
     end
 
-    -- EVENT_GROUP_VETERAN_DIFFICULTY_CHANGED -- ALERT HANDLER
+    -- EVENT_GROUP_VETERAN_DIFFICULTY_CHANGED (Alert Handler)
     local function GroupDifficultyChangeAlert(isVeteranDifficulty)
         local message
         local sound
@@ -6242,7 +6228,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_GUILD_SELF_LEFT_GUILD -- ALERT HANDLER
+    -- EVENT_GUILD_SELF_LEFT_GUILD (Alert Handler)
     local function GuildSelfLeftAlert(guildId, guildName)
         local GuildIndexData = LUIE.GuildIndexData
         for i = 1,5 do
@@ -6275,7 +6261,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_SAVE_GUILD_RANKS_RESPONSE -- ALERT HANDLER
+    -- EVENT_SAVE_GUILD_RANKS_RESPONSE (Alert Handler)
     local function GuildRanksResponseAlert(guildId, result)
         if result ~= SOCIAL_RESULT_NO_ERROR then
             if ChatAnnouncements.SV.Social.GuildCA then
@@ -6288,6 +6274,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
+    -- EVENT_LOCKPICK_FAILED (Alert Handler)
     local function LockpickFailedAlert(result)
         if ChatAnnouncements.SV.Notify.NotificationLockpickCA then
             local message = GetString(SI_LUIE_CA_LOCKPICK_FAILED)
@@ -6303,25 +6290,27 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    local function LockpickLockedAlert(interactableName)
-        printToChat(zo_strformat(SI_LOCKPICK_NO_KEY_AND_NO_LOCK_PICKS, interactableName))
-        if ChatAnnouncements.SV.Notify.NotificationLockpickAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, zo_strformat(SI_LOCKPICK_NO_KEY_AND_NO_LOCK_PICKS, interactableName))
+    ZO_ClientInteractResultSpecificSound =
+    {
+        [CLIENT_INTERACT_RESULT_LOCK_TOO_DIFFICULT] = SOUNDS.LOCKPICKING_NO_LOCKPICKS,
+        [CLIENT_INTERACT_RESULT_NO_LOCKPICKS] = SOUNDS.LOCKPICKING_NO_LOCKPICKS,
+    }
+
+    -- EVENT_CLIENT_INTERACT_RESULT (Alert Handler)
+    local function ClientInteractResult(result, interactTargetName)
+        local formatString = GetString("SI_CLIENTINTERACTRESULT", result)
+        if formatString ~= "" then
+            printToChat(zo_strformat(formatString, interactTargetName))
+            if ChatAnnouncements.SV.Notify.NotificationLockpickAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, zo_strformat(formatString, interactTargetName))
+            end
+        local sound = ZO_ClientInteractResultSpecificSound[result] or SOUNDS.GENERAL_ALERT_ERROR
+        PlaySound(sound)
         end
-        PlaySound(SOUNDS.LOCKPICKING_NO_LOCKPICKS)
         return true
     end
 
-    local function LockpickImpossibleAlert(interactableName)
-        printToChat(zo_strformat(SI_LOCKPICK_IMPOSSIBLE_LOCK, interactableName))
-        if ChatAnnouncements.SV.Notify.NotificationLockpickAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, zo_strformat(SI_LOCKPICK_IMPOSSIBLE_LOCK, interactableName))
-        end
-        PlaySound(SOUNDS.LOCKPICKING_NO_LOCKPICKS)
-        return true
-    end
-
-    -- EVENT_TRADE_INVITE_FAILED
+    -- EVENT_TRADE_INVITE_FAILED (Alert Handler)
     local function TradeInviteFailedAlert(errorReason, inviteeCharacterName, inviteeDisplayName)
         if ChatAnnouncements.SV.Notify.NotificationTradeCA or ChatAnnouncements.SV.Notify.NotificationTradeAlert then
             local finalName = ChatAnnouncements.ResolveNameLink(inviteeCharacterName, inviteeDisplayName)
@@ -6340,7 +6329,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_TRADE_INVITE_CONSIDERING
+    -- EVENT_TRADE_INVITE_CONSIDERING (Alert Handler)
     local function TradeInviteConsideringAlert(inviterCharacterName, inviterDisplayName)
         if ChatAnnouncements.SV.Notify.NotificationTradeCA or ChatAnnouncements.SV.Notify.NotificationTradeAlert then
             local finalName = ChatAnnouncements.ResolveNameLink(inviterCharacterName, inviterDisplayName)
@@ -6357,7 +6346,7 @@ function ChatAnnouncements.HookFunction()
        return true
     end
 
-    -- EVENT_TRADE_INVITE_WAITING
+    -- EVENT_TRADE_INVITE_WAITING (Alert Handler)
     local function TradeInviteWaitingAlert(inviteeCharacterName, inviteeDisplayName)
 
         if ChatAnnouncements.SV.Notify.NotificationTradeCA or ChatAnnouncements.SV.Notify.NotificationTradeAlert then
@@ -6376,7 +6365,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_TRADE_INVITE_DECLINED
+    -- EVENT_TRADE_INVITE_DECLINED (Alert Handler)
     local function TradeInviteDeclinedAlert()
         if ChatAnnouncements.SV.Notify.NotificationTradeCA then
             printToChat(GetString(SI_LUIE_CA_TRADE_INVITE_DECLINED), true)
@@ -6493,32 +6482,41 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
+    -- EVENT_DISCOVERY_EXPERIENCE (Alert Handler)
+    local function DiscoveryExperienceAlert(subzoneName, level, previousExperience, currentExperience, rank, previousPoints, currentPoints)
+        -- Note: We let the CSA Handler take care of this.
+        return true
+    end
+
+    -- EVENT_MAIL_SEND_FAILED (Alert Handler)
     local function MailSendFailedAlert(reason)
-        local function RestoreMailBackupValues()
-            g_postageAmount = GetQueuedMailPostage()
-            g_mailCOD = GetQueuedCOD()
-        end
-
-        -- Stop currency messages from printing here
-        if reason == 2 then
-            for i=1, #g_queuedMessages do
-                if g_queuedMessages[i].type == "CURRENCY" then
-                    g_queuedMessages[i].type = "GARBAGE"
-                end
+        if reason ~= MAIL_SEND_RESULT_CANCELED then
+            local function RestoreMailBackupValues()
+                g_postageAmount = GetQueuedMailPostage()
+                g_mailCOD = GetQueuedCOD()
             end
-            eventManager:UnregisterForEvent(moduleName, EVENT_CURRENCY_UPDATE)
-            zo_callLater(function() eventManager:RegisterForEvent(moduleName, EVENT_CURRENCY_UPDATE, ChatAnnouncements.OnCurrencyUpdate) end, 500)
-        end
 
-        if ChatAnnouncements.SV.Notify.NotificationMailCA then
-            printToChat(GetString("SI_SENDMAILRESULT", reason), true)
-        end
-        if ChatAnnouncements.SV.Notify.NotificationMailAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString("SI_SENDMAILRESULT", reason))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+            -- Stop currency messages from printing here
+            if reason == 2 then
+                for i=1, #g_queuedMessages do
+                    if g_queuedMessages[i].type == "CURRENCY" then
+                        g_queuedMessages[i].type = "GARBAGE"
+                    end
+                end
+                eventManager:UnregisterForEvent(moduleName, EVENT_CURRENCY_UPDATE)
+                zo_callLater(function() eventManager:RegisterForEvent(moduleName, EVENT_CURRENCY_UPDATE, ChatAnnouncements.OnCurrencyUpdate) end, 500)
+            end
 
-        zo_callLater(RestoreMailBackupValues, 50) -- Prevents values from being cleared by failed message (when inbox is full, the currency change fires first regardless and then is refunded)
+            if ChatAnnouncements.SV.Notify.NotificationMailCA then
+                printToChat(GetString("SI_SENDMAILRESULT", reason), true)
+            end
+            if ChatAnnouncements.SV.Notify.NotificationMailAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString("SI_SENDMAILRESULT", reason))
+            end
+            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+
+            zo_callLater(RestoreMailBackupValues, 50) -- Prevents values from being cleared by failed message (when inbox is full, the currency change fires first regardless and then is refunded)
+        end
         return true
     end
 
@@ -6538,7 +6536,6 @@ function ChatAnnouncements.HookFunction()
     ZO_PreHook(alertHandlers, EVENT_GROUP_UPDATE, GroupUpdateAlert)
     ZO_PreHook(alertHandlers, EVENT_GROUP_MEMBER_LEFT, GroupMemberLeftAlert)
     ZO_PreHook(alertHandlers, EVENT_LEADER_UPDATE, LeaderUpdateAlert)
-    ZO_PreHook(alertHandlers, EVENT_GROUPING_TOOLS_LFG_JOINED, GroupingToolsLFGJoinedAlert)
     ZO_PreHook(alertHandlers, EVENT_ACTIVITY_QUEUE_RESULT, ActivityQueueResultAlert)
     ZO_PreHook(alertHandlers, EVENT_GROUP_ELECTION_FAILED, GroupElectionFailedAlert)
     ZO_PreHook(alertHandlers, EVENT_GROUP_ELECTION_RESULT, GroupElectionResultAlert)
@@ -6558,8 +6555,7 @@ function ChatAnnouncements.HookFunction()
     ZO_PreHook(alertHandlers, EVENT_GUILD_SELF_LEFT_GUILD, GuildSelfLeftAlert)
     ZO_PreHook(alertHandlers, EVENT_SAVE_GUILD_RANKS_RESPONSE, GuildRanksResponseAlert)
     ZO_PreHook(alertHandlers, EVENT_LOCKPICK_FAILED, LockpickFailedAlert)
-    ZO_PreHook(alertHandlers, EVENT_INTERACTABLE_LOCKED, LockpickLockedAlert)
-    ZO_PreHook(alertHandlers, EVENT_INTERACTABLE_IMPOSSIBLE_TO_PICK, LockpickImpossibleAlert)
+    ZO_PreHook(alertHandlers, EVENT_CLIENT_INTERACT_RESULT, ClientInteractResult)
     ZO_PreHook(alertHandlers, EVENT_TRADE_INVITE_FAILED, TradeInviteFailedAlert)
     ZO_PreHook(alertHandlers, EVENT_TRADE_INVITE_CONSIDERING, TradeInviteConsideringAlert)
     ZO_PreHook(alertHandlers, EVENT_TRADE_INVITE_WAITING, TradeInviteWaitingAlert)
@@ -6568,11 +6564,11 @@ function ChatAnnouncements.HookFunction()
     ZO_PreHook(alertHandlers, EVENT_TRADE_CANCELED, TradeCanceledAlert)
     ZO_PreHook(alertHandlers, EVENT_TRADE_FAILED, TradeFailedAlert)
     ZO_PreHook(alertHandlers, EVENT_TRADE_SUCCEEDED, TradeSucceededAlert)
+    ZO_PreHook(alertHandlers, EVENT_DISCOVERY_EXPERIENCE, DiscoveryExperienceAlert)
     ZO_PreHook(alertHandlers, EVENT_MAIL_SEND_FAILED, MailSendFailedAlert)
 
     local csaHandlers = ZO_CenterScreenAnnounce_GetEventHandlers()
     local csaCallbackHandlers = ZO_CenterScreenAnnounce_GetCallbackHandlers()
-
     local chatHandlers = ZO_ChatSystem_GetEventHandlers()
 
     -- EVENT_LORE_BOOK_LEARNED_SKILL_EXPERIENCE (CSA Handler)
@@ -8846,13 +8842,13 @@ function ChatAnnouncements.HookFunction()
                 if result == PLEDGE_OF_MARA_RESULT_PLEDGED and not ChatAnnouncements.SV.Social.PledgeOfMaraAlertOnlyFail then
                     ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT3, finalAlertName))
                 elseif(result ~= PLEDGE_OF_MARA_RESULT_PLEDGED and result ~= PLEDGE_OF_MARA_RESULT_BEGIN_PLEDGE) then
-                    ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, zo_strformat(GetString("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT", result), finalAlertName))
+                    ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, zo_strformat(GetString("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT", result), finalAlertName))
                 end
             end
         end
 
-        -- Play alert sound if Alert is disabled (Note: A sound seems to be played from success regardless of the CSA being on/off here)
-        if not ChatAnnouncements.SV.Social.PledgeOfMaraAlert and (result ~= PLEDGE_OF_MARA_RESULT_PLEDGED and result ~= PLEDGE_OF_MARA_RESULT_BEGIN_PLEDGE) then
+        -- Play alert sound if error result
+        if result ~= PLEDGE_OF_MARA_RESULT_PLEDGED and result ~= PLEDGE_OF_MARA_RESULT_BEGIN_PLEDGE then
             PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         end
 
@@ -8915,36 +8911,47 @@ function ChatAnnouncements.HookFunction()
 
     eventManager:RegisterForEvent(moduleName, EVENT_PLEDGE_OF_MARA_OFFER, ChatAnnouncements.MaraOffer)
 
-    -- TODO: Allow these to use their default conditions if Saved Variable option for CA is not turned on
     -- EVENT_GROUP_TYPE_CHANGED (Chat Handler)
+    -- Note: This function get handled by the chat announcement settings now.
     local function GroupTypeChangedChatHook()
         return true
     end
 
+    -- EVENT_GROUP_INVITE_RESPONSE (Chat Handler)
+    -- Note: This function get handled by the chat announcement settings now.
     local function GroupInviteChatHook()
         return true
     end
 
+    -- EVENT_GROUP_MEMBER_LEFT (Chat Handler)
+    -- Note: This function get handled by the chat announcement settings now.
     local function GroupMemberLeftChatHook()
         return true
     end
 
+    -- EVENT_SOCIAL_ERROR (Chat Handler)
     -- TODO: Conditionals based off EVENT_SOCIAL_ERROR HOOK LATER
     local function SocialErrorHook(error)
-        if(not IsSocialErrorIgnoreResponse(error) and ShouldShowSocialErrorInChat(error)) then
-            printToChat(zo_strformat(GetString("SI_SOCIALACTIONRESULT", error)), true)
+        if not IsSocialErrorIgnoreResponse(error) and ShouldShowSocialErrorInChat(error) then
+            return zo_strformat(GetString("SI_SOCIALACTIONRESULT", error))
         end
         return true
     end
 
+    -- EVENT_FRIEND_PLAYER_STATUS_CHANGED (Chat Handler)
+    -- Note: This function get handled by the chat announcement settings now.
     local function FriendStatusHook()
         return true
     end
 
+    -- EVENT_IGNORE_ADDED (Chat Handler)
+    -- Note: This function get handled by the chat announcement settings now.
     local function IgnoreAddedHook()
         return true
     end
 
+    -- EVENT_IGNORE_REMOVED (Chat Handler)
+    -- Note: This function get handled by the chat announcement settings now.
     local function IgnoreRemovedHook()
         return true
     end
