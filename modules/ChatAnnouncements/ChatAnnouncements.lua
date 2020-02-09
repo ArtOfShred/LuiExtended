@@ -9643,7 +9643,7 @@ function ChatAnnouncements.HookFunction()
     EVENT_MANAGER:RegisterForEvent(EVENT_NAMESPACE, EVENT_GUILD_MEMBER_DEMOTE_SUCCESSFUL, ChatAnnouncements.GuildMemberDemoteSuccessful)
 
     -- Hook for Guild Invite function used from Guild Menu
-    ZO_TryGuildInvite = function(guildId, displayName, sentFromChat)
+    ZO_TryGuildInvite = function(guildId, displayName)
         -- TODO: Update when more alerts are added to CA
         if not DoesPlayerHaveGuildPermission(guildId, GUILD_PERMISSION_INVITE) then
             ZO_AlertEvent(EVENT_SOCIAL_ERROR, SOCIAL_RESULT_NO_INVITE_PERMISSION)
@@ -9677,8 +9677,8 @@ function ChatAnnouncements.HookFunction()
 
             ZO_ConsoleAttemptInteractOrError(GuildInviteCallback, displayName, ZO_PLAYER_CONSOLE_INFO_REQUEST_DONT_BLOCK, ZO_CONSOLE_CAN_COMMUNICATE_ERROR_ALERT, ZO_ID_REQUEST_TYPE_DISPLAY_NAME, displayName)
         else
-            -- We can't stop the player from inviting players to guild by Character Name if sent from chat so, might as well not block it. This also makes it consistent with group invites. Can't invite from the radial menu but can use the slash command.
-            if IsIgnored(displayName) and not sentFromChat then
+            -- TODO: This needs fixed in the API so that character names are also factored in here. This check here is just about pointless as it stands.
+            if IsIgnored(displayName) then
                 if ChatAnnouncements.SV.Social.GuildCA then
                     printToChat(GetString(SI_LUIE_IGNORE_ERROR_GUILD), true)
                 end

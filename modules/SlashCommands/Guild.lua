@@ -61,8 +61,7 @@ function SlashCommands.SlashGuildInvite(option)
         return
     end
 
-    --GuildInvite(guildnumber, name)
-    ZO_TryGuildInvite(guildnumber, name, true)
+    ZO_TryGuildInvite(guildnumber, name)
 end
 
 -- Slash Command to leave a guild
