@@ -3321,8 +3321,7 @@ function ChatAnnouncements.ResolveQuestItemChange()
             -- Lower
             if newValue < questItemIndex[itemId].stack then
                 -- Easy temporary debug for my accounts only
-                local displayName = GetDisplayName()
-                if displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
+                if LUIE.PlayerDisplayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
                     d(itemId .. " Removed")
                 end
                 --
@@ -3387,8 +3386,7 @@ function ChatAnnouncements.ResolveQuestItemChange()
             -- Higher
             if newValue > questItemIndex[itemId].stack then
                 -- Easy temporary debug for my accounts only
-                local displayName = GetDisplayName()
-                if displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
+                if LUIE.PlayerDisplayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
                     d(itemId .. " Added")
                 end
                 --
@@ -5421,48 +5419,72 @@ function LUIE.HandleClickEvent(rawLink, mouseButton, linkText, linkStyle, linkTy
   end
 end
 
--- Function needed to display XP bar updates
-local function GetRelevantBarParams(level, previousExperience, currentExperience, championPoints)
+-- Used by functions calling bar updates
+local function ValidateProgressBarParams(barParams)
+    local barType = barParams:GetParams()
+    if not (barType and PLAYER_PROGRESS_BAR:GetBarTypeInfoByBarType(barType)) then
+        local INVALID_VALUE = -1
+        internalassert(false, string.format("CSAH Bad Bar Params; barType: %d. Triggering Event: %d.", barType or INVALID_VALUE, barParams:GetTriggeringEvent() or INVALID_VALUE))
+    end
+end
+
+-- Used by functions calling bar updates
+local function GetRelevantBarParams(level, previousExperience, currentExperience, championPoints, triggeringEvent)
     local championXpToNextPoint
     if CanUnitGainChampionPoints("player") then
         championXpToNextPoint = GetNumChampionXPInChampionPoint(championPoints)
     end
     if(championXpToNextPoint ~= nil and currentExperience > previousExperience) then
-        return CENTER_SCREEN_ANNOUNCE:CreateBarParams(PPB_CP, championPoints, previousExperience, currentExperience)
+        local barParams = CENTER_SCREEN_ANNOUNCE:CreateBarParams(PPB_CP, championPoints, previousExperience, currentExperience)
+        barParams:SetTriggeringEvent(triggeringEvent)
+        return barParams
     else
-        local levelSize
-        if(level) then
-            levelSize = GetNumExperiencePointsInLevel(level)
-        end
+        local levelSize = GetNumExperiencePointsInLevel(level)
         if(levelSize ~= nil and currentExperience >  previousExperience) then
-            return CENTER_SCREEN_ANNOUNCE:CreateBarParams(PPB_XP, level, previousExperience, currentExperience)
+            local barParams = CENTER_SCREEN_ANNOUNCE:CreateBarParams(PPB_XP, level, previousExperience, currentExperience)
+            barParams:SetTriggeringEvent(triggeringEvent)
+            return barParams
         end
     end
 end
 
-local function GetCurrentChampionPointsBarParams()
+-- Used by functions calling bar updates
+local function GetCurrentChampionPointsBarParams(triggeringEvent)
     local championPoints = GetPlayerChampionPointsEarned()
     local currentChampionXP = GetPlayerChampionXP()
     local barParams = CENTER_SCREEN_ANNOUNCE:CreateBarParams(PPB_CP, championPoints, currentChampionXP, currentChampionXP)
     barParams:SetShowNoGain(true)
+    barParams:SetTriggeringEvent(triggeringEvent)
     return barParams
 end
 
 -- local vars for EVENT_SKILL_XP
-
-local GUILD_SKILL_SHOW_REASONS = {
+local GUILD_SKILL_SHOW_REASONS =
+{
     [PROGRESS_REASON_DARK_ANCHOR_CLOSED] = true,
     [PROGRESS_REASON_DARK_FISSURE_CLOSED] = true,
     [PROGRESS_REASON_BOSS_KILL] = true,
 }
 
-local GUILD_SKILL_SHOW_SOUNDS = {
+-- local vars for EVENT_SKILL_XP
+local GUILD_SKILL_SHOW_SOUNDS =
+{
     [PROGRESS_REASON_DARK_ANCHOR_CLOSED] = SOUNDS.SKILL_XP_DARK_ANCHOR_CLOSED,
     [PROGRESS_REASON_DARK_FISSURE_CLOSED] = SOUNDS.SKILL_XP_DARK_FISSURE_CLOSED,
     [PROGRESS_REASON_BOSS_KILL] = SOUNDS.SKILL_XP_BOSS_KILLED,
 }
 
-local GUILD_SKILL_ICONS = {
+-- Used by EVENT_SKILL_POINTS_CHANGED (CSA Handler) to ignore skill point updates in certain cases.
+local SUPPRESS_SKILL_POINT_CSA_REASONS =
+{
+    [SKILL_POINT_CHANGE_REASON_IGNORE] = true,
+    [SKILL_POINT_CHANGE_REASON_SKILL_RESPEC] = true,
+    [SKILL_POINT_CHANGE_REASON_SKILL_RESET] = true,
+}
+
+-- TODO: Check if there is an equivalency in one of the handlers for this
+local GUILD_SKILL_ICONS =
+{
     [45] = "esoui/art/icons/mapkey/mapkey_fightersguild.dds",
     [44] = "esoui/art/icons/mapkey/mapkey_magesguild.dds",
     [55] = "esoui/art/icons/mapkey/mapkey_undaunted.dds",
@@ -5471,7 +5493,7 @@ local GUILD_SKILL_ICONS = {
     [130] = "LuiExtended/media/unitframes/mapkey_psijicorder.dds",
 }
 
--- Alert Prehooks
+-- A:ERT & EVENT HANDLER PREHOOK FUNCTIONS
 function ChatAnnouncements.HookFunction()
     local alertHandlers = ZO_AlertText_GetHandlers()
 
@@ -5493,11 +5515,14 @@ function ChatAnnouncements.HookFunction()
     ZO_PreHook(alertHandlers, EVENT_STYLE_LEARNED, StyleLearnedHook)
     ]]--
 
-    -- Hide this alert because its really pretty much pointless. Only time I've ever seen it trigger is when the server lagged.
+    -- EVENT_LORE_BOOK_ALREADY_KNOWN (Alert Handler)
+    -- Note: We just hide this alert because it is pointless pretty much (only ever seen in trigger from server lag)
     local function AlreadyKnowBookHook(bookTitle)
         return true
     end
 
+    -- EVENT_RIDING_SKILL_IMPROVEMENT (Alert Handler)
+    -- Note: We allow the CSA handler to handle any changes made from skill books in order to properly throttle all messages, and use the alert handler for stables upgrades.
     local function RidingSkillImprovementAlertHook(ridingSkill, previous, current, source)
         if source == RIDING_TRAIN_SOURCE_STABLES then
             -- If we purchased from the stables, display a currency announcement if relevant
@@ -5529,6 +5554,11 @@ function ChatAnnouncements.HookFunction()
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
             end
 
+            if ChatAnnouncements.SV.Notify.StorageRidingAlert then
+                local text = zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current)
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
+            end
+
             if ChatAnnouncements.SV.Notify.StorageRidingCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
                 messageParams:SetText(GetString(SI_RIDING_SKILL_ANNOUCEMENT_BANNER), zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
@@ -5536,21 +5566,10 @@ function ChatAnnouncements.HookFunction()
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
         end
-
-        -- Display Alert (Detailed alert if purchased at the stables, simple alert if using skill upgrade books to avoid spam)
-        if ChatAnnouncements.SV.Notify.StorageRidingAlert then
-            local text
-            if source == RIDING_TRAIN_SOURCE_ITEM then
-                text = zo_strformat(SI_RIDING_SKILL_IMPROVEMENT_ALERT, GetString("SI_RIDINGTRAINTYPE", ridingSkill))
-            else
-                text = zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current)
-            end
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
-        end
-
         return true
     end
 
+    -- EVENT_LORE_BOOK_LEARNED (Alert Handler)
     local function LoreBookLearnedAlertHook(categoryIndex, collectionIndex, bookIndex, guildReputationIndex, isMaxRank)
         if guildReputationIndex == 0 or isMaxRank then
             -- We only want to fire this event if a player is not part of the guild or if they've reached max level in the guild.
@@ -5631,7 +5650,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-        -----------------------------
+    -----------------------------
     -- DUEL ALERTS --------------
     -----------------------------
 
@@ -5853,24 +5872,14 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_GROUP_NOTIFICATION_MESSAGE -- ALERT HANDLER
+    -- EVENT_GROUP_NOTIFICATION_MESSAGE -- ALERT HANDLER (NOTE: Updated for HARROWSTORM)
     local function GroupNotificationMessageAlert(groupMessageCode)
-        if groupMessageCode == GROUP_MSG_YOU_ARE_NOT_IN_A_GROUP then
-            printToChat(GetString(SI_GROUP_NOTIFICATION_YOU_ARE_NOT_IN_A_GROUP), true)
+
+        local message = GetString("SI_GROUPNOTIFICATIONMESSAGE", groupMessageCode)
+        if message ~= "" then
+            printToChat(message, true)
             if ChatAnnouncements.SV.Group.GroupAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_GROUP_NOTIFICATION_YOU_ARE_NOT_IN_A_GROUP))
-            end
-            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        elseif groupMessageCode == GROUP_MSG_YOU_ARE_NOT_THE_LEADER then
-            printToChat(GetString(SI_GROUP_NOTIFICATION_GROUP_MSG_INVALID_MEMBER), true)
-            if ChatAnnouncements.SV.Group.GroupAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_GROUP_NOTIFICATION_YOU_ARE_NOT_THE_LEADER))
-            end
-            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        elseif groupMessageCode == GROUP_MSG_INVALID_MEMBER then
-            printToChat(GetString(SI_GROUP_NOTIFICATION_GROUP_MSG_INVALID_MEMBER), true)
-            if ChatAnnouncements.SV.Group.GroupAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_GROUP_NOTIFICATION_GROUP_MSG_INVALID_MEMBER))
+                ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, message)
             end
             PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         end
@@ -6566,6 +6575,7 @@ function ChatAnnouncements.HookFunction()
 
     local chatHandlers = ZO_ChatSystem_GetEventHandlers()
 
+    -- EVENT_LORE_BOOK_LEARNED_SKILL_EXPERIENCE (CSA Handler)
     local function LoreBookXPHook(categoryIndex, collectionIndex, bookIndex, guildReputationIndex, skillType, skillIndex, rank, previousXP, currentXP)
         if guildReputationIndex > 0 then
             local collectionName, _, numKnownBooks, totalBooks, hidden = GetLoreCollectionInfo(categoryIndex, collectionIndex)
@@ -6626,7 +6636,10 @@ function ChatAnnouncements.HookFunction()
                 if not LUIE.SV.HideXPBar then
                     local barType = PLAYER_PROGRESS_BAR:GetBarType(PPB_CLASS_SKILL, skillType, skillIndex)
                     local rankStartXP, nextRankStartXP = GetSkillLineRankXPExtents(skillType, skillIndex, rank)
-                    messageParams:SetBarParams(CENTER_SCREEN_ANNOUNCE:CreateBarParams(barType, rank, previousXP - rankStartXP, currentXP - rankStartXP))
+                    local barParams = CENTER_SCREEN_ANNOUNCE:CreateBarParams(barType, rank, previousXP - rankStartXP, currentXP - rankStartXP)
+                    barParams:SetTriggeringEvent(EVENT_LORE_BOOK_LEARNED_SKILL_EXPERIENCE)
+                    ValidateProgressBarParams(barParams)
+                    messageParams:SetBarParams(barParams)
                 end
                 if collectionName ~= "" then
                     messageParams:SetText(csaPrefix, zo_strformat(SI_LUIE_CA_LOREBOOK_ADDED_CSA, title, collectionName))
@@ -6644,10 +6657,10 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
+    -- EVENT_LORE_COLLECTION_COMPLETED (CSA Handler)
     local function LoreCollectionHook(categoryIndex, collectionIndex, bookIndex, guildReputationIndex, isMaxRank)
         if guildReputationIndex == 0 or isMaxRank then
             -- Only fire this message if we're not part of the guild or at max level within the guild.
-            -- TODO: Fix, this condition doesn't work
             local collectionName, description, numKnownBooks, totalBooks, hidden , textureName = GetLoreCollectionInfo(categoryIndex, collectionIndex)
             local stringPrefix = ChatAnnouncements.SV.Lorebooks.LorebookCollectionPrefix
             local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_LORE_LIBRARY_COLLECTION_COMPLETED_LARGE)
@@ -6697,6 +6710,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
+    -- EVENT_LORE_COLLECTION_COMPLETED_SKILL_EXPERIENCE (CSA Handler)
     local function LoreCollectionXPHook(categoryIndex, collectionIndex, guildReputationIndex, skillType, skillIndex, rank, previousXP, currentXP)
         if guildReputationIndex > 0 then
             local collectionName, description, numKnownBooks, totalBooks, hidden, textureName = GetLoreCollectionInfo(categoryIndex, collectionIndex)
@@ -6731,9 +6745,12 @@ function ChatAnnouncements.HookFunction()
                 if ChatAnnouncements.SV.Lorebooks.LorebookCollectionCSA then
                     local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.BOOK_COLLECTION_COMPLETED)
                     if not LUIE.SV.HideXPBar then
-                        local barType = PLAYER_PROGRESS_BAR:GetBarType(PPB_CLASS_SKILL, skillType, skillIndex)
-                        local rankStartXP, nextRankStartXP = GetSkillLineRankXPExtents(skillType, skillIndex, rank)
-                        messageParams:SetBarParams(CENTER_SCREEN_ANNOUNCE:CreateBarParams(barType, rank, previousXP - rankStartXP, currentXP - rankStartXP))
+                        local barType = PLAYER_PROGRESS_BAR:GetBarType(PPB_CLASS_SKILL, skillType, skillLineIndex)
+                        local rankStartXP, nextRankStartXP = GetSkillLineRankXPExtents(skillType, skillLineIndex, rank)
+                        local barParams = CENTER_SCREEN_ANNOUNCE:CreateBarParams(barType, rank, previousXP - rankStartXP, currentXP - rankStartXP)
+                        barParams:SetTriggeringEvent(EVENT_LORE_COLLECTION_COMPLETED_SKILL_EXPERIENCE)
+                        ValidateProgressBarParams(barParams)
+                        messageParams:SetBarParams(barParams)
                     end
                     messageParams:SetText(csaPrefix, zo_strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
                     messageParams:SetIconData(textureName)
@@ -6753,6 +6770,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
+    -- EVENT_SKILL_POINTS_CHANGED (CSA Handler)
 	local function SkillPointsChangedHook(oldPoints, newPoints, oldPartialPoints, newPartialPoints, changeReason)
 		local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
 		local numSkillPointsGained = newPoints - oldPoints
@@ -6819,12 +6837,14 @@ function ChatAnnouncements.HookFunction()
 				finalMessage = zo_strformat("<<1>><<2>>.", stringPart1, stringPart2)
 			end
 		elseif numSkillPointsGained > 0 then
-			flagDisplay = true
-			sound = SOUNDS.SKILL_GAINED
-			messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_POINTS_GAINED)
-			messageParams:SetText(zo_strformat(SI_SKILL_POINT_GAINED, numSkillPointsGained))
-			finalMessage = SkillPointColorize2:Colorize(zo_strformat(SI_SKILL_POINT_GAINED, numSkillPointsGained) .. ".")
-			finalText = zo_strformat(SI_SKILL_POINT_GAINED, numSkillPointsGained) .. "."
+            if not SUPPRESS_SKILL_POINT_CSA_REASONS[changeReason] then
+    			flagDisplay = true
+    			sound = SOUNDS.SKILL_GAINED
+    			messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_POINTS_GAINED)
+    			messageParams:SetText(zo_strformat(SI_SKILL_POINT_GAINED, numSkillPointsGained))
+    			finalMessage = SkillPointColorize2:Colorize(zo_strformat(SI_SKILL_POINT_GAINED, numSkillPointsGained) .. ".")
+    			finalText = zo_strformat(SI_SKILL_POINT_GAINED, numSkillPointsGained) .. "."
+            end
 		end
 		if flagDisplay then
 				if ChatAnnouncements.SV.Skills.SkillPointCA then
@@ -6839,7 +6859,7 @@ function ChatAnnouncements.HookFunction()
 					CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
 				end
 				if ChatAnnouncements.SV.Skills.SkillPointAlert then
-					callAlert(UI_ALERT_CATEGORY_ALERT, nil, finalText)
+					ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, finalText)
 				end
 				if not ChatAnnouncements.SV.Skills.SkillPointCSA then
 					PlaySound(Sound)
@@ -6848,39 +6868,42 @@ function ChatAnnouncements.HookFunction()
 		return true
 	end
 
-    local function SkillLineAddedHook(skillType, lineIndex)
-        local lineName = GetSkillLineInfo(skillType, lineIndex)
-        local icon = select(4, ZO_Skills_GetIconsForSkillType(skillType))
+    -- EVENT_SKILL_LINE_ADDED (CSA Handler) -- Hooked via csaCallbackHandlers[2]
+    local function SkillLineAddedHook(skillLineData)
+        if skillLineData:IsAvailable() then
+            local skillTypeData = skillLineData:GetSkillTypeData()
+            local lineName = skillLineData:GetName()
+            local icon = skillTypeData:GetAnnounceIcon()
 
-        if ChatAnnouncements.SV.Skills.SkillLineUnlockCA then
-            local formattedIcon = ChatAnnouncements.SV.Skills.SkillLineIcon and zo_strformat("<<1>> ", zo_iconFormatInheritColor(icon, 16, 16)) or ""
-            local formattedString = SkillLineColorize:Colorize(zo_strformat(SI_LUIE_CA_SKILL_LINE_ADDED, formattedIcon, lineName))
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL GAIN" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
+            if ChatAnnouncements.SV.Skills.SkillLineUnlockCA then
+                local formattedIcon = ChatAnnouncements.SV.Skills.SkillLineIcon and zo_strformat("<<1>> ", zo_iconFormatInheritColor(icon, 16, 16)) or ""
+                local formattedString = SkillLineColorize:Colorize(zo_strformat(SI_LUIE_CA_SKILL_LINE_ADDED, formattedIcon, lineName))
+                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL GAIN" }
+                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
 
+            end
+            if ChatAnnouncements.SV.Skills.SkillLineUnlockCSA then
+                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.SKILL_LINE_ADDED)
+                local formattedIcon = zo_iconFormat(icon, 32, 32)
+                -- Note: We set the CSA type to SKILL_POINTS_PARTIAL_GAINED instead of SKILL_LINE_ADDED so this orders itself BEFORE some other events.
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_POINTS_PARTIAL_GAINED)
+                messageParams:SetText(zo_strformat(SI_SKILL_LINE_ADDED, formattedIcon, lineName))
+                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
+            if ChatAnnouncements.SV.Skills.SkillLineUnlockAlert then
+                local formattedIcon = ""
+                local text = zo_strformat(SI_SKILL_LINE_ADDED, formattedIcon, lineName)
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
+            end
+            if not ChatAnnouncements.SV.Skills.SkillLineUnlockCSA then
+                PlaySound(SOUNDS.SKILL_LINE_ADDED)
+            end
+            return true
         end
-
-        local discoverIcon = zo_iconFormat(icon, 32, 32)
-        if ChatAnnouncements.SV.Skills.SkillLineUnlockCSA then
-            local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.SKILL_LINE_ADDED)
-            local formattedIcon = zo_iconFormat(icon, 32, 32)
-            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_POINTS_PARTIAL_GAINED)
-            messageParams:SetText(zo_strformat(SI_SKILL_LINE_ADDED, formattedIcon, lineName))
-            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
-        end
-
-        if ChatAnnouncements.SV.Skills.SkillLineUnlockAlert then
-            local formattedIcon = zo_iconFormat(icon, "75%", "75%")
-            local text = zo_strformat(SI_SKILL_LINE_ADDED, formattedIcon, lineName)
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
-        end
-        if not ChatAnnouncements.SV.Skills.SkillLineUnlockCSA then
-            PlaySound(SOUNDS.SKILL_LINE_ADDED)
-        end
-        return true
     end
 
+    -- EVENT_ABILITY_PROGRESSION_RANK_UPDATE (CSA Handler)
     local function AbilityProgressionRankHook(progressionIndex, rank, maxRank, morph)
         local _, _, _, atMorph = GetAbilityProgressionXPInfo(progressionIndex)
         local name = GetAbilityProgressionAbilityInfo(progressionIndex, morph, rank)
@@ -6935,12 +6958,14 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    local function SkillRankUpdateHook(skillType, lineIndex, rank)
+    -- EVENT_SKILL_RANK_UPDATE (CSA Handler)
+    local function SkillRankUpdateHook(skillType, skillLineIndex, rank)
         -- crafting skill updates get deferred if they're increased while crafting animations are in progress
         -- ZO_Skills_TieSkillInfoHeaderToCraftingSkill handles triggering the deferred center screen announce in that case
         if skillType ~= SKILL_TYPE_RACIAL and (skillType ~= SKILL_TYPE_TRADESKILL or not ZO_CraftingUtils_IsPerformingCraftProcess()) then
-            local lineName, _, discovered = GetSkillLineInfo(skillType, lineIndex)
-            if discovered then
+            local skillLineData = SKILLS_DATA_MANAGER:GetSkillLineDataByIndices(skillType, skillLineIndex)
+            if skillLineData and skillLineData:IsAvailable() then
+                local lineName = skillLineData:GetName()
 
                 if ChatAnnouncements.SV.Skills.SkillLineCA then
                     local formattedString = SkillLineColorize:Colorize(zo_strformat(SI_SKILL_RANK_UP, lineName, rank) .. ".")
@@ -6969,21 +6994,30 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    local function SkillXPUpdateHook(skillType, skillIndex, reason, rank, previousXP, currentXP)
+    -- EVENT_SKILL_XP_UPDATE (CSA Handler)
+    local function SkillXPUpdateHook(skillType, skillLineIndex, reason, rank, previousXP, currentXP)
         if (skillType == SKILL_TYPE_GUILD and GUILD_SKILL_SHOW_REASONS[reason]) or reason == PROGRESS_REASON_JUSTICE_SKILL_EVENT then
             if not LUIE.SV.HideXPBar then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_NO_TEXT)
-                local barType = PLAYER_PROGRESS_BAR:GetBarType(PPB_CLASS_SKILL, skillType, skillIndex)
-                local rankStartXP, nextRankStartXP = GetSkillLineRankXPExtents(skillType, skillIndex, rank)
+                local barType = PLAYER_PROGRESS_BAR:GetBarType(PPB_CLASS_SKILL, skillType, skillLineIndex)
+                local rankStartXP, nextRankStartXP = GetSkillLineRankXPExtents(skillType, skillLineIndex, rank)
                 local sound = GUILD_SKILL_SHOW_SOUNDS[reason]
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_XP_UPDATE)
-                messageParams:SetBarParams(CENTER_SCREEN_ANNOUNCE:CreateBarParams(barType, rank, previousXP - rankStartXP, currentXP - rankStartXP, sound))
-                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+                if rankStartXP ~= nil then
+                    local barParams = CENTER_SCREEN_ANNOUNCE:CreateBarParams(barType, rank, previousXP - rankStartXP, currentXP - rankStartXP)
+                    barParams:SetTriggeringEvent(EVENT_SKILL_XP_UPDATE)
+                    ValidateProgressBarParams(barParams)
+                    messageParams:SetBarParams(barParams)
+                    CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+                else
+                    internalassert(false, string.format("No Rank Start XP %d %d %d %d %d %d", skillType, skillLineIndex, reason, rank, previousXP, currentXP))
+                end
             end
         end
         return true
     end
 
+    -- EVENT_COLLECTION_UPDATED (CSA Handler) -- Hooked via csaCallbackHandlers[1]
     local function CollectibleUnlockedHook(collectionUpdateType, collectiblesByUnlockState)
         if collectionUpdateType == ZO_COLLECTION_UPDATE_TYPE.UNLOCK_STATE_CHANGES then
             local nowOwnedCollectibles = collectiblesByUnlockState[COLLECTIBLE_UNLOCK_STATE_UNLOCKED_OWNED]
@@ -7008,6 +7042,7 @@ function ChatAnnouncements.HookFunction()
                     end
 
                     -- Set message params even if CSA is disabled, we just send a dummy event so the callback handler works correctly.
+                    -- Note: This also means we don't need to Play Sound if the CSA isn't enabled since a blank one is always sent if the CSA is disabled.
                     local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.COLLECTIBLE_UNLOCKED)
                     if ChatAnnouncements.SV.Collectibles.CollectibleCSA then
                         messageParams:SetText(csaPrefix, zo_strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, #nowOwnedCollectibles))
@@ -7055,6 +7090,7 @@ function ChatAnnouncements.HookFunction()
                         end
 
                         -- Set message params even if CSA is disabled, we just send a dummy event so the callback handler works correctly.
+                        -- Note: This also means we don't need to Play Sound if the CSA isn't enabled since a blank one is always sent if the CSA is disabled.
                         local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.COLLECTIBLE_UNLOCKED)
                         if ChatAnnouncements.SV.Collectibles.CollectibleCSA then
                             messageParams:SetText(csaPrefix, zo_strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, categoryName))
@@ -7082,6 +7118,7 @@ function ChatAnnouncements.HookFunction()
         g_itemReceivedIsQuestAbandon = false
     end
 
+    -- EVENT_QUEST_ADDED (CSA Handler)
     local function QuestAddedHook(journalIndex, questName, objectiveName)
         eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         ChatAnnouncements.PrintBufferedXP()
@@ -7151,6 +7188,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
+    -- EVENT_QUEST_COMPLETE (CSA Handler)
     local function QuestCompleteHook(questName, level, previousExperience, currentExperience, championPoints, questType, instanceDisplayType)
         eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         ChatAnnouncements.PrintBufferedXP()
@@ -7166,9 +7204,9 @@ function ChatAnnouncements.HookFunction()
                 messageParams:SetText(zo_strformat(SI_NOTIFYTEXT_QUEST_COMPLETE, questName))
             end
             if not LUIE.SV.HideXPBar then
-                messageParams:SetBarParams(GetRelevantBarParams(level, previousExperience, currentExperience, championPoints))
+                messageParams:SetBarParams(GetRelevantBarParams(level, previousExperience, currentExperience, championPoints, EVENT_QUEST_COMPLETE))
             end
-            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_COMPLETE)
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_COMPLETED)
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
 
@@ -7215,6 +7253,8 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
+    -- EVENT_OBJECTIVE_COMPLETED (CSA Handler)
+    -- Note we don't play a sound if the CSA is disabled here because the Quest complete message will already do this.
     local function ObjectiveCompletedHook(zoneIndex, poiIndex, level, previousExperience, currentExperience, championPoints)
         local name, _, _, finishedDescription = GetPOIInfo(zoneIndex, poiIndex)
         local nameFormatted
@@ -7234,7 +7274,7 @@ function ChatAnnouncements.HookFunction()
         if ChatAnnouncements.SV.Quests.QuestCompleteCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.OBJECTIVE_COMPLETED)
             if not LUIE.SV.HideXPBar then
-                messageParams:SetBarParams(GetRelevantBarParams(level, previousExperience, currentExperience, championPoints))
+                messageParams:SetBarParams(GetRelevantBarParams(level, previousExperience, currentExperience, championPoints, EVENT_OBJECTIVE_COMPLETED))
             end
             messageParams:SetText(zo_strformat(SI_NOTIFYTEXT_OBJECTIVE_COMPLETE, name), finishedDescription)
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_OBJECTIVE_COMPLETED)
@@ -7256,7 +7296,8 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- For failure and updates (gonna need to punch a bunch of stuff in here to divide it up)
+    -- EVENT_QUEST_CONDITION_COUNTER_CHANGED (CSA Handler)
+    -- Note: Used for quest failure and updates
     local function ConditionCounterHook(journalIndex, questName, conditionText, conditionType, currConditionVal, newConditionVal, conditionMax, isFailCondition, stepOverrideText, isPushed, isComplete, isConditionComplete, isStepHidden)
         if isStepHidden or (isPushed and isComplete) or (currConditionVal >= newConditionVal) then
             return true
@@ -7332,7 +7373,11 @@ function ChatAnnouncements.HookFunction()
             formattedMessage = Quests.QuestObjectiveCompleteOverride[formattedMessage]
         end
 
-        messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_CONDITION_COUNTER_CHANGED)
+        if isConditionComplete then
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_CONDITION_COMPLETED)
+        else
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_PROGRESSION_CHANGED)
+        end
 
         if type == 1 then
             if ChatAnnouncements.SV.Quests.QuestObjCompleteCA then
@@ -7383,6 +7428,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
+    -- EVENT_QUEST_OPTIONAL_STEP_ADVANCED (CSA Handler)
     local function OptionalStepHook(text)
         if text ~= "" then
 
@@ -7398,7 +7444,7 @@ function ChatAnnouncements.HookFunction()
             if ChatAnnouncements.SV.Quests.QuestObjCompleteCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.QUEST_OBJECTIVE_COMPLETE)
                 messageParams:SetText(zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, text))
-                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_OPTIONAL_STEP_ADVANCED)
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_PROGRESSION_CHANGED)
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
 
@@ -7412,6 +7458,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
+    -- EVENT_QUEST_REMOVED (Registered through CSA_MiscellaneousHandlers)
     local function OnQuestRemoved(eventId, isCompleted, journalIndex, questName, zoneIndex, poiIndex)
         if not isCompleted then
             if ChatAnnouncements.SV.Quests.QuestAbandonCA or ChatAnnouncements.SV.Quests.QuestAbandonCSA or ChatAnnouncements.SV.Quests.QuestAbandonAlert then
@@ -7477,7 +7524,8 @@ function ChatAnnouncements.HookFunction()
 
     end
 
-    -- Quest Advancement displays all the "appropriate" conditions that the player needs to do to advance the current step
+    -- EVENT_QUEST_ADVANCED (Registered through CSA_MiscellaneousHandlers)
+    -- Note: Quest Advancement displays all the "appropriate" conditions that the player needs to do to advance the current step
     local function OnQuestAdvanced(eventId, questIndex, questName, isPushed, isComplete, mainStepChanged, soundOverride)
         if(not mainStepChanged) then return end
 
@@ -7499,7 +7547,7 @@ function ChatAnnouncements.HookFunction()
                     if ChatAnnouncements.SV.Quests.QuestObjUpdateCSA then
                         local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, sound)
                         messageParams:SetText(stepOverrideText)
-                        messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_OPTIONAL_STEP_ADVANCED)
+                        messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_PROGRESSION_CHANGED)
                         CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
                         sound = nil -- no longer needed, we played it once
                     end
@@ -7519,7 +7567,7 @@ function ChatAnnouncements.HookFunction()
                             if ChatAnnouncements.SV.Quests.QuestObjUpdateCSA then
                                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, sound)
                                 messageParams:SetText(conditionText)
-                                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_OPTIONAL_STEP_ADVANCED)
+                                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_PROGRESSION_CHANGED)
                                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
                                 sound = nil -- no longer needed, we played it once
                             end
@@ -7537,10 +7585,12 @@ function ChatAnnouncements.HookFunction()
         end
     end
 
+    -- EVENT_QUEST_ADDED (Registered through CSA_MiscellaneousHandlers)
     local function OnQuestAdded(eventId, questIndex)
         OnQuestAdvanced(EVENT_QUEST_ADVANCED, questIndex, nil, nil, nil, true, true)
     end
 
+    -- EVENT_DISCOVERY_EXPERIENCE (CSA Handler)
     local function DiscoveryExperienceHook(subzoneName, level, previousExperience, currentExperience, championPoints)
         eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         ChatAnnouncements.PrintBufferedXP()
@@ -7557,7 +7607,7 @@ function ChatAnnouncements.HookFunction()
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.OBJECTIVE_DISCOVERED)
             if currentExperience > previousExperience then
                 if not LUIE.SV.HideXPBar then
-                    messageParams:SetBarParams(GetRelevantBarParams(level, previousExperience, currentExperience, championPoints))
+                    messageParams:SetBarParams(GetRelevantBarParams(level, previousExperience, currentExperience, championPoints, EVENT_DISCOVERY_EXPERIENCE))
                 end
             end
             messageParams:SetText(zo_strformat(SI_LUIE_CA_QUEST_DISCOVER, subzoneName))
@@ -7575,6 +7625,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
+    -- EVENT_POI_DISCOVERED (CSA HAndler)
     local function PoiDiscoveredHook(zoneIndex, poiIndex)
         eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         ChatAnnouncements.PrintBufferedXP()
@@ -7602,7 +7653,8 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    local XP_GAIN_SHOW_REASONS = {
+    local XP_GAIN_SHOW_REASONS =
+    {
         [PROGRESS_REASON_PVP_EMPEROR] = true,
         [PROGRESS_REASON_DUNGEON_CHALLENGE] = true,
         [PROGRESS_REASON_OVERLAND_BOSS_KILL] = true,
@@ -7611,12 +7663,14 @@ function ChatAnnouncements.HookFunction()
         [PROGRESS_REASON_LFG_REWARD] = true,
     }
 
-    local XP_GAIN_SHOW_SOUNDS = {
+    local XP_GAIN_SHOW_SOUNDS =
+    {
         [PROGRESS_REASON_OVERLAND_BOSS_KILL] = SOUNDS.OVERLAND_BOSS_KILL,
         [PROGRESS_REASON_LOCK_PICK] = SOUNDS.LOCKPICKING_SUCCESS_CELEBRATION,
     }
 
-    -- This function is prehooked in order to allow the XP bar popup to be hidden. In addition we shift the sound over
+    -- EVENT_EXPERIENCE_GAIN (CSA Handler)
+    -- Note: This function is prehooked in order to allow the XP bar popup to be hidden. In addition we shift the sound over
     local function ExperienceGainHook(reason, level, previousExperience, currentExperience, championPoints)
         local sound = XP_GAIN_SHOW_SOUNDS[reason]
 
@@ -7625,6 +7679,7 @@ function ChatAnnouncements.HookFunction()
             if barParams then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_NO_TEXT)
                 barParams:SetSound(sound)
+                ValidateProgressBarParams(barParams)
                 messageParams:SetBarParams(barParams)
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_EXPERIENCE_GAIN)
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
@@ -7685,6 +7740,8 @@ function ChatAnnouncements.HookFunction()
                 if not LUIE.SV.HideXPBar then
                     local barParams = CENTER_SCREEN_ANNOUNCE:CreateBarParams(PPB_XP, level + 1, currentExperience - levelSize, currentExperience - levelSize)
                     barParams:SetShowNoGain(true)
+                    barParams:SetTriggeringEvent(EVENT_EXPERIENCE_GAIN)
+                    ValidateProgressBarParams(barParams)
                     messageParams:SetBarParams(barParams)
                 end
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
@@ -7706,8 +7763,8 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    local function EnlightenGainHook()
-        if IsEnlightenedAvailableForCharacter() then
+    -- Called by EnlightenGainHook()
+    local function GetEnlightenedGainedAnnouncement(triggeringEvent)
             local formattedString = zo_strformat("<<1>>! <<2>>", GetString(SI_ENLIGHTENED_STATE_GAINED_HEADER), GetString(SI_ENLIGHTENED_STATE_GAINED_DESCRIPTION))
             if ChatAnnouncements.SV.XP.ExperienceEnlightenedCA then
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
@@ -7719,7 +7776,8 @@ function ChatAnnouncements.HookFunction()
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.ENLIGHTENED_STATE_GAINED)
                 messageParams:SetText(zo_strformat(SI_ENLIGHTENED_STATE_GAINED_HEADER), zo_strformat(SI_ENLIGHTENED_STATE_GAINED_DESCRIPTION))
                 if not LUIE.SV.HideXPBar then
-                    local barParams = GetCurrentChampionPointsBarParams()
+                    local barParams = GetCurrentChampionPointsBarParams(triggeringEvent)
+                    ValidateProgressBarParams(barParams)
                     messageParams:SetBarParams(barParams)
                 end
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_ENLIGHTENMENT_GAINED)
@@ -7733,12 +7791,19 @@ function ChatAnnouncements.HookFunction()
             if not ChatAnnouncements.SV.XP.ExperienceEnlightenedCSA then
                 PlaySound(SOUNDS.ENLIGHTENED_STATE_GAINED)
             end
-        end
 
         return true
     end
 
-    local function EnlightenLossHook()
+    -- EVENT_ENLIGHTENED_STATE_GAINED (CSA Handler)
+    local function EnlightenGainHook()
+        if IsEnlightenedAvailableForCharacter() then
+            return GetEnlightenedGainedAnnouncement(EVENT_ENLIGHTENED_STATE_GAINED)
+        end
+    end
+
+    -- EVENT_ENLIGHTENED_STATE_LOST (CSA Handler)
+    local function EnlightenLostHook()
         if IsEnlightenedAvailableForCharacter() then
             local formattedString = zo_strformat("<<1>>!", GetString(SI_ENLIGHTENED_STATE_LOST_HEADER))
 
@@ -7751,7 +7816,9 @@ function ChatAnnouncements.HookFunction()
             if ChatAnnouncements.SV.XP.ExperienceEnlightenedCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.ENLIGHTENED_STATE_LOST)
                 if not LUIE.SV.HideXPBar then
-                    messageParams:SetBarParams(GetCurrentChampionPointsBarParams())
+                    local barParams = GetCurrentChampionPointsBarParams(EVENT_ENLIGHTENED_STATE_LOST)
+                    ValidateProgressBarParams(barParams)
+                    messageParams:SetBarParams(barParams)
                 end
                 messageParams:SetText(zo_strformat(SI_ENLIGHTENED_STATE_LOST_HEADER))
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_ENLIGHTENMENT_LOST)
@@ -7772,18 +7839,21 @@ function ChatAnnouncements.HookFunction()
     end
 
     local firstActivation = true
+    -- EVENT_PLAYER_ACTIVATED (CSA Handler)
     local function PlayerActivatedHook()
         if firstActivation then
             firstActivation = false
 
             if IsEnlightenedAvailableForCharacter() and GetEnlightenedPool() > 0 then
-                EnlightenGainHook()
+                return GetEnlightenedGainedAnnouncement(EVENT_PLAYER_ACTIVATED)
             end
         end
         return true
     end
 
+    -- EVENT_RIDING_SKILL_IMPROVEMENT (CSA Handler)
     -- Note: This function is effected by a throttle in centerscreenannouncehandlers, we resolve any message that needs to be throttled in this function.
+    -- Note: We allow the CSA handler to handle any changes made from skill books in order to properly throttle all messages, and use the alert handler for stables upgrades.
     local function RidingSkillImprovementHook(ridingSkill, previous, current, source)
         if source == RIDING_TRAIN_SOURCE_ITEM then
             if ChatAnnouncements.SV.Notify.StorageRidingCA then
@@ -7835,6 +7905,11 @@ function ChatAnnouncements.HookFunction()
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
             end
 
+            if ChatAnnouncements.SV.Notify.StorageRidingAlert then
+                local text = zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current)
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
+            end
+
             if ChatAnnouncements.SV.Notify.StorageRidingCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
                 messageParams:SetText(GetString(SI_RIDING_SKILL_ANNOUCEMENT_BANNER), zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
@@ -7842,10 +7917,10 @@ function ChatAnnouncements.HookFunction()
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
         end
-
         return true
     end
 
+    -- EVENT_INVENTORY_BAG_CAPACITY_CHANGED (CSA Handler)
     local function InventoryBagCapacityHook(previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
         if previousCapacity > 0 and previousCapacity ~= currentCapacity and previousUpgrade ~= currentUpgrade then
             if ChatAnnouncements.SV.Notify.StorageBagCSA then
@@ -7858,6 +7933,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
+    -- EVENT_INVENTORY_BANK_CAPACITY_CHANGED (CSA Handler)
     local function InventoryBankCapacityHook(previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
         if previousCapacity > 0 and previousCapacity ~= currentCapacity and previousUpgrade ~= currentUpgrade then
             if ChatAnnouncements.SV.Notify.StorageBagCSA then
@@ -7870,6 +7946,8 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
+    local CHAMPION_UNLOCKED_LIFESPAN_MS = 12000
+    -- EVENT_CHAMPION_LEVEL_ACHIEVED (CSA Handler)
     local function ChampionLevelAchievedHook(wasChampionSystemUnlocked)
         local icon = GetChampionPointsIcon()
 
@@ -7891,7 +7969,9 @@ function ChatAnnouncements.HookFunction()
                     local currentChampionXP = GetPlayerChampionXP()
                     if not LUIE.SV.HideXPBar then
                         local barParams = CENTER_SCREEN_ANNOUNCE:CreateBarParams(PPB_CP, championPoints, currentChampionXP, currentChampionXP)
+                        barParams:SetTriggeringEvent(EVENT_CHAMPION_LEVEL_ACHIEVED)
                         barParams:SetShowNoGain(true)
+                        ValidateProgressBarParams(barParams)
                         messageParams:SetBarParams(barParams)
                     end
                 else
@@ -7901,9 +7981,12 @@ function ChatAnnouncements.HookFunction()
                         championXPGained = championXPGained + GetNumChampionXPInChampionPoint(i)
                     end
                     if not LUIE.SV.HideXPBar then
-                        messageParams:SetBarParams(CENTER_SCREEN_ANNOUNCE:CreateBarParams(PPB_CP, 0, 0, championXPGained))
+                        local barParams = CENTER_SCREEN_ANNOUNCE:CreateBarParams(PPB_CP, 0, 0, championXPGained)
+                        barParams:SetTriggeringEvent(EVENT_CHAMPION_LEVEL_ACHIEVED)
+                        ValidateProgressBarParams(barParams)
+                        messageParams:SetBarParams(barParams)
                     end
-                    messageParams:SetLifespanMS(12000)
+                    messageParams:SetLifespanMS(CHAMPION_UNLOCKED_LIFESPAN_MS)
                 end
             end
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_CHAMPION_LEVEL_ACHIEVED)
@@ -7992,6 +8075,7 @@ function ChatAnnouncements.HookFunction()
         eventManager:UnregisterForUpdate(moduleName .. "ChampionPointThrottle")
     end
 
+    -- EVENT_CHAMPION_POINT_GAINED (CSA Handler)
     local function ChampionPointGainedHook(pointDelta)
         -- Print throttled XP value
         eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
@@ -8006,7 +8090,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- Extra Functions for EVENT_DUEL_NEAR_BOUNDARY
+    -- Local variables and functions for DuelNearBoundaryHook()
     local DUEL_BOUNDARY_WARNING_LIFESPAN_MS = 2000
     local DUEL_BOUNDARY_WARNING_UPDATE_TIME_MS = 2100
     local lastEventTime = 0
@@ -8038,7 +8122,7 @@ function ChatAnnouncements.HookFunction()
         end
     end
 
-    -- EVENT_DUEL_NEAR_BOUNDARY -- CSA HANDLER
+    -- EVENT_DUEL_NEAR_BOUNDARY (CSA Handler)
     local function DuelNearBoundaryHook(isInWarningArea)
         if isInWarningArea then
             local nowEventTime = GetFrameTimeMilliseconds()
@@ -8053,14 +8137,14 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_DUEL_FINISHED -- CSA HANDLER
+    -- EVENT_DUEL_FINISHED (CSA HANDLER)
     local function DuelFinishedHook(result, wasLocalPlayersResult, opponentCharacterName, opponentDisplayName)
         -- Setup result format, name, and result sound
         local resultString = wasLocalPlayersResult and GetString("SI_LUIE_CA_DUEL_SELF_RESULT", result) or GetString("SI_LUIE_CA_DUEL_RESULT", result)
 
         local localPlayerWonDuel = (result == DUEL_RESULT_WON and wasLocalPlayersResult) or (result == DUEL_RESULT_FORFEIT and not wasLocalPlayersResult)
         local localPlayerForfeitDuel = (result == DUEL_RESULT_FORFEIT and wasLocalPlayersResult)
-        local resultSound = nil
+        local resultSound
         if localPlayerWonDuel then
             resultSound = SOUNDS.DUEL_WON
         elseif localPlayerForfeitDuel then
@@ -8112,7 +8196,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_DUEL_COUNTDOWN -- CSA HANDLER
+    -- EVENT_DUEL_COUNTDOWN (CSA Handler)
     local function DuelCountdownHook(startTimeMS)
         -- Display CSA
         if ChatAnnouncements.SV.Social.DuelStartCSA then
@@ -8126,7 +8210,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_RAID_TRIAL_STARTED -- CSA HANDLER
+    -- EVENT_RAID_TRIAL_STARTED (CSA Handler)
     local function RaidStartedHook(raidName, isWeekly)
         -- Display CA
         if ChatAnnouncements.SV.Group.GroupRaidCA then
@@ -8155,9 +8239,8 @@ function ChatAnnouncements.HookFunction()
     end
 
     local TRIAL_COMPLETE_LIFESPAN_MS = 10000
-    -- EVENT_RAID_TRIAL_COMPLETE -- CSA HANDLER
+    -- EVENT_RAID_TRIAL_COMPLETE (CSA Handler)
     local function RaidCompleteHook(raidName, score, totalTime)
-        local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_RAID_COMPLETE_TEXT, SOUNDS.RAID_TRIAL_COMPLETED)
         local wasUnderTargetTime = GetRaidDuration() <= GetRaidTargetTime()
         local formattedTime = ZO_FormatTimeMilliseconds(totalTime, TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_SECONDS)
         local vitalityBonus = GetCurrentRaidLifeScoreBonus()
@@ -8187,6 +8270,7 @@ function ChatAnnouncements.HookFunction()
 
         -- Display CSA
         if ChatAnnouncements.SV.Group.GroupRaidCSA then
+            local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_RAID_COMPLETE_TEXT, SOUNDS.RAID_TRIAL_COMPLETED)
             messageParams:SetEndOfRaidData({ score, formattedTime, wasUnderTargetTime, vitalityBonus, zo_strformat(SI_REVIVE_COUNTER_REVIVES_USED, currentCount, maxCount) })
             messageParams:SetText(zo_strformat(SI_TRIAL_COMPLETED_LARGE, raidName))
             messageParams:SetLifespanMS(TRIAL_COMPLETE_LIFESPAN_MS)
@@ -8206,11 +8290,11 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_RAID_TRIAL_FAILED -- CSA HANDLER
+    -- EVENT_RAID_TRIAL_FAILED (CSA Handler)
     local function RaidFailedHook(raidName, score)
         -- Display CA
         if ChatAnnouncements.SV.Group.GroupRaidCA then
-            local formattedName = zo_strformat("|cFEFEFE<<1>>|r", trialName)
+            local formattedName = zo_strformat("|cFEFEFE<<1>>|r", raidName)
             printToChat(zo_strformat(SI_LUIE_CA_GROUP_TRIAL_FAILED, formattedName), true)
         end
 
@@ -8234,7 +8318,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_RAID_TRIAL_NEW_BEST_SCORE -- CSA HANDLER
+    -- EVENT_RAID_TRIAL_NEW_BEST_SCORE (CSA Handler)
     local function RaidBestScoreHook(raidName, score, isWeekly)
         -- Display CA
         if ChatAnnouncements.SV.Group.GroupRaidBestScoreCA then
@@ -8263,7 +8347,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_RAID_REVIVE_COUNTER_UPDATE -- CSA HANDLER
+    -- EVENT_RAID_REVIVE_COUNTER_UPDATE (CSA Handler)
     local function RaidReviveCounterHook(currentCount, countDelta)
         if not IsRaidInProgress() then
             return
@@ -8295,12 +8379,15 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    local TRIAL_SCORE_REASON_TO_ASSETS = {
+    local TRIAL_SCORE_REASON_TO_ASSETS =
+    {
         [RAID_POINT_REASON_KILL_MINIBOSS]           = { icon = "EsoUI/Art/Trials/trialPoints_normal.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_NORMAL },
         [RAID_POINT_REASON_KILL_BOSS]               = { icon = "EsoUI/Art/Trials/trialPoints_veryHigh.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_VERY_HIGH },
+
         [RAID_POINT_REASON_BONUS_ACTIVITY_LOW]      = { icon = "EsoUI/Art/Trials/trialPoints_veryLow.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_VERY_LOW },
         [RAID_POINT_REASON_BONUS_ACTIVITY_MEDIUM]   = { icon = "EsoUI/Art/Trials/trialPoints_low.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_LOW },
         [RAID_POINT_REASON_BONUS_ACTIVITY_HIGH]     = { icon = "EsoUI/Art/Trials/trialPoints_high.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_HIGH },
+
         [RAID_POINT_REASON_SOLO_ARENA_PICKUP_ONE]   = { icon = "EsoUI/Art/Trials/trialPoints_veryLow.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_VERY_LOW },
         [RAID_POINT_REASON_SOLO_ARENA_PICKUP_TWO]   = { icon = "EsoUI/Art/Trials/trialPoints_low.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_LOW },
         [RAID_POINT_REASON_SOLO_ARENA_PICKUP_THREE] = { icon = "EsoUI/Art/Trials/trialPoints_normal.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_NORMAL },
@@ -8308,7 +8395,7 @@ function ChatAnnouncements.HookFunction()
         [RAID_POINT_REASON_SOLO_ARENA_COMPLETE]     = { icon = "EsoUI/Art/Trials/trialPoints_veryHigh.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_VERY_HIGH },
     }
 
-    -- EVENT_RAID_TRIAL_SCORE_UPDATE -- CSA HANDLER
+    -- EVENT_RAID_TRIAL_SCORE_UPDATE (CSA Handler)
     local function RaidScoreUpdateHook(scoreUpdateReason, scoreAmount, totalScore)
         local reasonAssets = TRIAL_SCORE_REASON_TO_ASSETS[scoreUpdateReason]
         if reasonAssets then
@@ -8341,7 +8428,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_ACTIVITY_FINDER_ACTIVITY_COMPLETE -- CSA HANDLER
+    -- EVENT_ACTIVITY_FINDER_ACTIVITY_COMPLETE (CSA Handler)
     local function ActivityFinderCompleteHook()
         local message = GetString(SI_ACTIVITY_FINDER_ACTIVITY_COMPLETE_ANNOUNCEMENT_TEXT)
         if ChatAnnouncements.SV.Group.GroupLFGCompleteCA then
@@ -8492,29 +8579,30 @@ function ChatAnnouncements.HookFunction()
         end
     end
 
-    -- EVENT_DISPLAY_ANNOUNCEMENT -- CSA HANDLER
-    local function DisplayAnnouncementHook(title, description)
-        if ( (title ~= "" and not overrideDisplayAnnouncementTitle[title]) or (description ~= "" and not overrideDisplayAnnouncementDescription[description]) ) and ChatAnnouncements.SV.DisplayAnnouncements.Debug then
+    -- EVENT_DISPLAY_ANNOUNCEMENT (CSA Handler)
+    -- TODO: This needs ALOT of work
+    local function DisplayAnnouncementHook(primaryText, secondaryText)
+        if ( (primaryText ~= "" and not overrideDisplayAnnouncementTitle[primaryText]) or (secondaryText ~= "" and not overrideDisplayAnnouncementDescription[secondaryText]) ) and ChatAnnouncements.SV.DisplayAnnouncements.Debug then
             d("EVENT_DISPLAY_ANNOUNCEMENT")
             d("If you see this message please post a screenshot and context for the event on the LUI Extended ESOUI page.")
-            d("title: " .. title)
-            d("description: " .. description)
+            d("Primary Text: " .. primaryText)
+            d("Secondary Text: " .. secondaryText)
         end
 
         -- Let unfiltered messages pass through the normal function
-        if (title ~= "" and not overrideDisplayAnnouncementTitle[title]) or (description ~= "" and not overrideDisplayAnnouncementDescription[description]) then
+        if (primaryText ~= "" and not overrideDisplayAnnouncementTitle[primaryText]) or (secondaryText ~= "" and not overrideDisplayAnnouncementDescription[secondaryText]) then
             -- Use default behavior if not in the override table
             local messageParams
-            if title ~= "" and description ~= "" then
+            if primaryText ~= "" and secondaryText ~= "" then
                 messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
-            elseif title ~= "" then
+            elseif primaryText ~= "" then
                 messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
-            elseif description ~= "" then
+            elseif secondaryText ~= "" then
                 messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
             end
 
             if messageParams then
-                messageParams:SetText(title, description)
+                messageParams:SetText(primaryText, secondaryText)
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_DISPLAY_ANNOUNCEMENT)
             end
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
@@ -8527,15 +8615,15 @@ function ChatAnnouncements.HookFunction()
 
         -- Resolve whether flags are true
         -- Temporary double conditional here until we resolve all Display Announcement types
-        if (title ~= "" and overrideDisplayAnnouncementTitle[title]) or (description ~= "" and overrideDisplayAnnouncementDescription[description]) then
+        if (primaryText ~= "" and overrideDisplayAnnouncementTitle[primaryText]) or (secondaryText ~= "" and overrideDisplayAnnouncementDescription[secondaryText]) then
             local reference
             -- If this is an IC announcement then pass it over to the IC Announcement handler to display
-            if (title ~= "" and overrideDisplayAnnouncementTitle[title] and overrideDisplayAnnouncementTitle[title].number) or (description ~= "" and overrideDisplayAnnouncementDescription[description] and overrideDisplayAnnouncementDescription[description].number) then
-                DisplayAnnouncementIC(overrideDisplayAnnouncementTitle[title].number)
+            if (primaryText ~= "" and overrideDisplayAnnouncementTitle[primaryText] and overrideDisplayAnnouncementTitle[primaryText].number) or (secondaryText ~= "" and overrideDisplayAnnouncementDescription[secondaryText] and overrideDisplayAnnouncementDescription[secondaryText].number) then
+                DisplayAnnouncementIC(overrideDisplayAnnouncementTitle[primaryText].number)
                 return
             end
-            if title ~= "" and overrideDisplayAnnouncementTitle[title] then reference = overrideDisplayAnnouncementTitle[title].announceType end
-            if description ~= "" and overrideDisplayAnnouncementDescription[description] then reference = overrideDisplayAnnouncementDescription[description].announceType end
+            if primaryText ~= "" and overrideDisplayAnnouncementTitle[primaryText] then reference = overrideDisplayAnnouncementTitle[primaryText].announceType end
+            if secondaryText ~= "" and overrideDisplayAnnouncementDescription[secondaryText] then reference = overrideDisplayAnnouncementDescription[secondaryText].announceType end
             if reference == "RESPEC" then
                 flagCA = ChatAnnouncements.SV.Notify.NotificationRespecCA and true or false
                 flagCSA = ChatAnnouncements.SV.Notify.NotificationRespecCSA and true or false
@@ -8565,38 +8653,38 @@ function ChatAnnouncements.HookFunction()
         local descriptionCSA
 
         -- Replace message text when needed
-        if title ~= "" and overrideDisplayAnnouncementTitle[title] then
-            titleCA = overrideDisplayAnnouncementTitle[title].ca
-            titleCSA = overrideDisplayAnnouncementTitle[title].csa
-        elseif title ~= "" then
+        if primaryText ~= "" and overrideDisplayAnnouncementTitle[primaryText] then
+            titleCA = overrideDisplayAnnouncementTitle[primaryText].ca
+            titleCSA = overrideDisplayAnnouncementTitle[primaryText].csa
+        elseif primaryText ~= "" then
             titleCA = title
             titleCSA = title
         end
 
-        if description ~= "" and overrideDisplayAnnouncementDescription[description] then
-            descriptionCA = overrideDisplayAnnouncementDescription[description].ca
-            descriptionCSA = overrideDisplayAnnouncementDescription[description].csa
-        elseif description ~= "" then
-            descriptionCA = title
-            descriptionCSA = title
+        if secondaryText ~= "" and overrideDisplayAnnouncementDescription[secondaryText] then
+            descriptionCA = overrideDisplayAnnouncementDescription[secondaryText].ca
+            descriptionCSA = overrideDisplayAnnouncementDescription[secondaryText].csa
+        elseif secondaryText ~= "" then
+            descriptionCA = primaryText
+            descriptionCSA = primaryText
         end
 
         local messageParams
         local message
-        if title ~= "" and description ~= "" then
+        if primaryText ~= "" and secondaryText ~= "" then
             messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
-        elseif title ~= "" then
+        elseif primaryText ~= "" then
             messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
-        elseif description ~= "" then
+        elseif secondaryText ~= "" then
             messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
         end
 
         if flagCA then
-            if title ~= "" and description ~= "" then
+            if primaryText ~= "" and secondaryText ~= "" then
                 printToChat(titleCA .. descriptionCA)
-            elseif title ~= "" then
+            elseif primaryText ~= "" then
                 printToChat(titleCA)
-            elseif description ~= "" then
+            elseif secondaryText ~= "" then
                 printToChat(descriptionCA)
             end
         end
@@ -8610,11 +8698,11 @@ function ChatAnnouncements.HookFunction()
         end
 
         if flagAlert then
-            if title ~= "" and description ~= "" then
+            if primaryText ~= "" and secondaryText ~= "" then
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, (titleCA .. descriptionCA) )
-            elseif title ~= "" then
+            elseif primaryText ~= "" then
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, titleCA)
-            elseif description ~= "" then
+            elseif secondaryText ~= "" then
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, descriptionCA)
             end
         end
@@ -8626,9 +8714,9 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT BROADCAST -- CSA HANDLER
+    -- EVENT_BROADCAST (CSA Handler)
     local function BroadcastHook(message)
-        d("EVENT_BROADCAST")
+        d("EVENT_BROADCAST DEBUG")
 
         -- CA
         printToChat(string.format("|cffff00%s|r", message), true)
@@ -8644,8 +8732,8 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_ACHIEVEMENT_AWARDED
-    local function AchievementAwardedHook(name, points, id, link)
+    -- EVENT_ACHIEVEMENT_AWARDED (CSA Handler)
+    local function AchievementAwardedHook(name, points, id)
         -- Display CSA
         if ChatAnnouncements.SV.Achievement.AchievementCompleteCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.ACHIEVEMENT_AWARDED)
@@ -8692,7 +8780,7 @@ function ChatAnnouncements.HookFunction()
         if topLevelIndex == 25 and not ChatAnnouncements.SV.Achievement.AchievementCategory26 then return true end
 
         if ChatAnnouncements.SV.Achievement.AchievementCompleteCA then
-            link = zo_strformat(GetAchievementLink(id, linkBrackets[ChatAnnouncements.SV.BracketOptionAchievement]))
+            local link = zo_strformat(GetAchievementLink(id, linkBrackets[ChatAnnouncements.SV.BracketOptionAchievement]))
             local catName = GetAchievementCategoryInfo(topLevelIndex)
             local subcatName = categoryIndex ~= nil and GetAchievementSubCategoryInfo(topLevelIndex, categoryIndex) or "General"
             local _, _, _, icon = GetAchievementInfo(id)
@@ -8731,6 +8819,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
+    -- EVENT_PLEDGE_OF_MARA_RESULT (CSA Handler)
     local function PledgeOfMaraHook(result, characterName, displayName)
         -- Display CA (Success or Failure)
         if ChatAnnouncements.SV.Social.PledgeOfMaraCA then
@@ -8782,10 +8871,11 @@ function ChatAnnouncements.HookFunction()
     ZO_PreHook(csaHandlers, EVENT_LORE_COLLECTION_COMPLETED, LoreCollectionHook)
     ZO_PreHook(csaHandlers, EVENT_LORE_COLLECTION_COMPLETED_SKILL_EXPERIENCE, LoreCollectionXPHook)
     ZO_PreHook(csaHandlers, EVENT_SKILL_POINTS_CHANGED, SkillPointsChangedHook)
-    ZO_PreHook(csaHandlers, EVENT_SKILL_LINE_ADDED, SkillLineAddedHook)
+    ZO_PreHook(csaCallbackHandlers[2], "callbackFunction", SkillLineAddedHook)
     ZO_PreHook(csaHandlers, EVENT_ABILITY_PROGRESSION_RANK_UPDATE, AbilityProgressionRankHook)
     ZO_PreHook(csaHandlers, EVENT_SKILL_RANK_UPDATE, SkillRankUpdateHook)
     ZO_PreHook(csaHandlers, EVENT_SKILL_XP_UPDATE, SkillXPUpdateHook)
+    ZO_PreHook(csaCallbackHandlers[1], "callbackFunction", CollectibleUnlockedHook)
     ZO_PreHook(csaHandlers, EVENT_QUEST_ADDED, QuestAddedHook)
     ZO_PreHook(csaHandlers, EVENT_QUEST_COMPLETE, QuestCompleteHook)
     ZO_PreHook(csaHandlers, EVENT_OBJECTIVE_COMPLETED, ObjectiveCompletedHook)
@@ -8800,7 +8890,6 @@ function ChatAnnouncements.HookFunction()
     ZO_PreHook(csaHandlers, EVENT_RIDING_SKILL_IMPROVEMENT, RidingSkillImprovementHook)
     ZO_PreHook(csaHandlers, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, InventoryBagCapacityHook)
     ZO_PreHook(csaHandlers, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, InventoryBankCapacityHook)
-    ZO_PreHook(csaCallbackHandlers[1], "callbackFunction", CollectibleUnlockedHook)
     ZO_PreHook(csaHandlers, EVENT_CHAMPION_LEVEL_ACHIEVED, ChampionLevelAchievedHook)
     ZO_PreHook(csaHandlers, EVENT_CHAMPION_POINT_GAINED, ChampionPointGainedHook)
     ZO_PreHook(csaHandlers, EVENT_DUEL_NEAR_BOUNDARY, DuelNearBoundaryHook)
@@ -8817,13 +8906,17 @@ function ChatAnnouncements.HookFunction()
     ZO_PreHook(csaHandlers, EVENT_RAID_TRIAL_SCORE_UPDATE, RaidScoreUpdateHook)
     ZO_PreHook(csaHandlers, EVENT_ACTIVITY_FINDER_ACTIVITY_COMPLETE, ActivityFinderCompleteHook)
     ZO_PreHook(csaHandlers, EVENT_DISPLAY_ANNOUNCEMENT, DisplayAnnouncementHook)
-    --ZO_PreHook(csaHandlers, EVENT_BROADCAST, BroadcastHook)
+    -- Temporary debug for EVENT_BROADCAST only for my accounts.
+    if LUIE.PlayerDisplayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
+        ZO_PreHook(csaHandlers, EVENT_BROADCAST, BroadcastHook)
+    end
     ZO_PreHook(csaHandlers, EVENT_ACHIEVEMENT_AWARDED, AchievementAwardedHook)
     ZO_PreHook(csaHandlers, EVENT_PLEDGE_OF_MARA_RESULT, PledgeOfMaraHook)
 
     eventManager:RegisterForEvent(moduleName, EVENT_PLEDGE_OF_MARA_OFFER, ChatAnnouncements.MaraOffer)
 
     -- TODO: Allow these to use their default conditions if Saved Variable option for CA is not turned on
+    -- EVENT_GROUP_TYPE_CHANGED (Chat Handler)
     local function GroupTypeChangedChatHook()
         return true
     end

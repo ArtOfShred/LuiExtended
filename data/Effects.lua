@@ -4138,7 +4138,7 @@ Effects.EffectOverride = {
     -- The Atronach
     [63106] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_retaliation.dds', tooltip = Tooltips.Champion_Retaliation }, -- Retaliation
     [60230] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_riposte.dds' }, -- Riposte
-    [63108] = { name = Abilities.Skill_Off_Balance, tooltip = Abilities.Champion_Tactician }, -- Off-Balance (Tactician)
+    [63108] = { name = Abilities.Skill_Off_Balance, tooltip = Abilities.Champion_Tactician, unbreakable = 1 }, -- Off-Balance (Tactician)
 
     -- The Ritual
     [98307] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_opportunist.dds', tooltip = Tooltips.Champion_Opportunist }, -- Opportunist
@@ -4178,7 +4178,7 @@ Effects.EffectOverride = {
     [32346] = { icon = 'esoui/art/icons/achievement_u24_smallzone_skyshard.dds', name = Abilities.Innate_Absorbing_Skyshard, unbreakable = 1}, -- Skyshard Collect
     [63601] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_eso_plus_member.dds', tooltip = Tooltips.Innate_ESO_Plus }, -- ESO Plus Member
     [47270] = { icon = 'esoui/art/icons/achievement_update11_dungeons_017.dds', hide = true }, -- Ritual of Mara
-    [2727] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = "" }, -- Off-Balance
+    [2727] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = "", unbreakable = 1 }, -- Off-Balance
     [134599] = { type = 1, tooltip = Tooltips.Generic_Off_Balance_Immunity }, -- Off Balance Immunity
     [132831] = { type = 1, icon = 'esoui/art/icons/achievement_031.dds', name = Abilities.Skill_Major_Vulnerability_Immunity, tooltip = Tooltips.Generic_Major_Vulnerability_Immunity }, -- Major Vulnerability Invulnerability
     [85701] = { hide = true, tooltip = Tooltips.Innate_Battle_Spirit }, -- Dueling Flag
@@ -4201,7 +4201,7 @@ Effects.EffectOverride = {
     [86312] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = Abilities.Innate_Block_Stun, tooltip = Tooltips.Generic_Stun }, -- Stun (Player blocks Ogrim Body Slam)
     [16270] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', name = Abilities.Innate_Brace }, -- Brace Cost
     [88724] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', name = Abilities.Innate_Brace }, -- Brace Cost
-    [45902] = { name = Abilities.Skill_Off_Balance, tooltip = "" }, -- Off-Balance
+    [45902] = { name = Abilities.Skill_Off_Balance, tooltip = "", unbreakable = 1 }, -- Off-Balance
 
     -- Bash
     [21970] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_bash.dds' }, -- Bash
@@ -4261,6 +4261,7 @@ Effects.EffectOverride = {
     [120026] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hircine.dds', tooltip = Tooltips.Set_Hircines_Veneer }, -- Hircine's Veneer (Target Iron Atronach, Trial)
     [120015] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds', name = Abilities.Skill_Major_Courage }, -- Spell Power Cure (Target Iron Atronach, Trial)
     [121572] = { hide = true }, -- Spear Shards (Target Iron Atronach, Trial)
+    [120014] = { unbreakable = 1 }, -- Off Balance (Target Iron Atronach, Trial)
 
     ----------------------------------------------------------------
     -- WORLD EVENTS  -----------------------------------------------
@@ -4327,10 +4328,10 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Lava Whip / Molten Whip / Flame Lash
-    [23808] =  { tooltip = Abilities.Skill_Lava_Whip }, -- Off Balance (Lava Whip)
-    [20806] = { tooltip = Abilities.Skill_Molten_Whip }, -- Off Balance (Molten Whip)
+    [23808] =  { tooltip = Abilities.Skill_Lava_Whip, unbreakable = 1 }, -- Off Balance (Lava Whip)
+    [20806] = { tooltip = Abilities.Skill_Molten_Whip, unbreakable = 1 }, -- Off Balance (Molten Whip)
     [122658] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_seething_fury.dds', tooltip = Tooltips.Skill_Seething_Fury }, -- Seething Fury (Molten Whip)
-    [34117] = { tooltip = Abilities.Skill_Flame_Lash }, -- Off Balance (Flame Lash)
+    [34117] = { tooltip = Abilities.Skill_Flame_Lash, unbreakable = 1 }, -- Off Balance (Flame Lash)
     [20824] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds' }, -- Power Lash (Flame Lash)
     [23105] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds', tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Power Lash (Flame Lash)
 
@@ -4590,12 +4591,12 @@ Effects.EffectOverride = {
     [36519] = { icon = 'esoui/art/icons/ability_nightblade_007_b.dds', name = Abilities.Skill_Soul_Harvest }, -- Rapid Stroke Passive (Soul Harvest)
 
     -- Veiled Strike / Surprised Attack / Concealed Weapon
-    [25256] = { tooltip = Abilities.Skill_Veiled_Strike }, -- Off Balance (Veiled Strike)
+    [25256] = { tooltip = Abilities.Skill_Veiled_Strike, unbreakable = 1 }, -- Off Balance (Veiled Strike)
     [33185] = { tooltip = Tooltips.Generic_Stun }, -- Veiled Strike (Veiled Strike)
-    [34733] = { tooltip = Abilities.Skill_Surprise_Attack }, -- Off Balance (Surprise Attack)
+    [34733] = { tooltip = Abilities.Skill_Surprise_Attack, unbreakable = 1 }, -- Off Balance (Surprise Attack)
     [34732] = { tooltip = Tooltips.Generic_Stun }, -- Surprise Attack (Surprise Attack)
     [34734] = { tooltip = Tooltips.Skill_Surprise_Attack }, -- Surprise Attack (Surprise Attack)
-    [34737] = { tooltip = Abilities.Skill_Concealed_Weapon }, -- Off Balance (Concealed Weapon)
+    [34737] = { tooltip = Abilities.Skill_Concealed_Weapon, unbreakable = 1 }, -- Off Balance (Concealed Weapon)
     [34736] = { tooltip = Tooltips.Generic_Stun }, -- Concealed Weapon (Concealed Weapon)
 
     -- Shadow Cloak / Shadowy Disguise / Dark Cloak
@@ -5177,9 +5178,9 @@ Effects.EffectOverride = {
     -- ANIMAL COMPANIONS
 
     -- Dive / Cutting Dive / Screaming Cliff Racer
-    [130129] = { name = Abilities.Skill_Off_Balance, tooltip = Abilities.Skill_Dive }, -- Off-Balance (Dive)
-    [130145] = { name = Abilities.Skill_Off_Balance, tooltip = Abilities.Skill_Screaming_Cliff_Racer }, -- Off-Balance (Screaming Cliff Racer)
-    [130139] = { name = Abilities.Skill_Off_Balance, tooltip = Abilities.Skill_Cutting_Dive }, -- Off-Balance (Cutting Dive)
+    [130129] = { name = Abilities.Skill_Off_Balance, tooltip = Abilities.Skill_Dive, unbreakable = 1 }, -- Off-Balance (Dive)
+    [130145] = { name = Abilities.Skill_Off_Balance, tooltip = Abilities.Skill_Screaming_Cliff_Racer, unbreakable = 1 }, -- Off-Balance (Screaming Cliff Racer)
+    [130139] = { name = Abilities.Skill_Off_Balance, tooltip = Abilities.Skill_Cutting_Dive, unbreakable = 1 }, -- Off-Balance (Cutting Dive)
     [130140] = { tooltip = Tooltips.Skill_Cutting_Dive }, -- Cutting Dive (Cutting Dive)
 
     -- Scorch / Subterranean Assault / Deep Fissure
@@ -5459,7 +5460,7 @@ Effects.EffectOverride = {
 
     -- Death Scythe / Ruinous Scythe / Hungry Scythe
     [125749] = { tooltip = Tooltips.Skill_Ruinous_Scythe, forcedContainer = 'short' }, -- Ruinous Scythe (Ruinous Scythe)
-    [125750] = { tooltip = Abilities.Skill_Ruinous_Scythe }, -- Off Balance (Ruinous Scythe)
+    [125750] = { tooltip = Abilities.Skill_Ruinous_Scythe, unbreakable = 1 }, -- Off Balance (Ruinous Scythe)
     [122625] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Hungry Scythe (Hungry Scythe)
 
     -- Bone Armor / Beckoning Armor / Summoner's Armor
@@ -5707,7 +5708,7 @@ Effects.EffectOverride = {
     -----------------------------------------
 
     -- Uppercut / Dizzying Swing / Wrecking Blow
-    [131562] = { tooltip = Abilities.Skill_Dizzying_Swing }, -- Off Balance (Dizzying Swing)
+    [131562] = { tooltip = Abilities.Skill_Dizzying_Swing, unbreakable = 1 }, -- Off Balance (Dizzying Swing)
 
     -- Critical Charge / Stampede / Critical Rush
     [38791] = { tooltip = Tooltips.Skill_Stampede }, -- Stampede (Stampede)
@@ -5873,17 +5874,17 @@ Effects.EffectOverride = {
     [68719] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_root_frost.dds', tooltip = Tooltips.Generic_Immobilize }, -- Frozen (Wall of Elements) -- Frost
     [28807] = { tooltip = Tooltips.Skill_Wall_of_Elements_Fire }, -- Wall of Fire (Wall of Fire)
     [28854] = { tooltip = Tooltips.Skill_Wall_of_Elements_Shock }, -- Wall of Storms (Wall of Storms)
-    [62968] = { tooltip = Abilities.Skill_Wall_of_Storms }, -- Off Balance (Wall of Storms)
+    [62968] = { tooltip = Abilities.Skill_Wall_of_Storms, unbreakable = 1 }, -- Off Balance (Wall of Storms)
     [28849] = { tooltip = Tooltips.Skill_Wall_of_Elements_Frost }, -- Wall of Frost (Wall of Frost)
     [62928] = { duration = 0, groundLabel = true, tooltip = Tooltips.Skill_Wall_of_Elements_Ground_Frost, hideGround = true }, -- Wall of Frost (Wall of Elements) -- Frost
     [39053] = { tooltip = Tooltips.Skill_U_Wall_of_Elements_Fire }, -- Unstable Wall of Fire (Unstable Wall of Fire)
     [39073] = { tooltip = Tooltips.Skill_U_Wall_of_Elements_Shock }, -- Unstable Wall of Storms (Unstable Wall of Storms)
-    [39077] = { tooltip = Abilities.Skill_Unstable_Wall_of_Storms }, -- Off Balance (Unstable Wall of Storms)
+    [39077] = { tooltip = Abilities.Skill_Unstable_Wall_of_Storms, unbreakable = 1 }, -- Off Balance (Unstable Wall of Storms)
     [39067] = { tooltip = Tooltips.Skill_U_Wall_of_Elements_Frost }, -- Unstable Wall of Frost (Unstable Wall of Frost)
     [39068] = { duration = 0, groundLabel = true, tooltip = Tooltips.Skill_U_Wall_of_Elements_Ground_Frost, hideGround = true }, -- Unstable Wall of Frost (Unstable Wall of Elements) -- Frost
     [39012] = { tooltip = Tooltips.Skill_Wall_of_Elements_Fire }, -- Blockade of Fire (Blockade of Fire)
     [39018] = { tooltip = Tooltips.Skill_Wall_of_Elements_Shock }, -- Blockade of Storms (Blockade of Storms)
-    [62988] = { tooltip = Abilities.Skill_Blockade_of_Storms }, -- Off Balance (Blockade of Storms)
+    [62988] = { tooltip = Abilities.Skill_Blockade_of_Storms, unbreakable = 1 }, -- Off Balance (Blockade of Storms)
     [39028] = { tooltip = Tooltips.Skill_Wall_of_Elements_Frost }, -- Blockade of Frost (Blockade of Frost)
     [62948] = { duration = 0, groundLabel = true, tooltip = Tooltips.Skill_Wall_of_Elements_Ground_Frost, hideGround = true }, -- Blockade of Frost (Elemental Blockade) -- Frost
 
@@ -6098,9 +6099,9 @@ Effects.EffectOverride = {
     [33177] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds' }, -- Feed
     [33175] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds', unbreakable = 1 }, -- Feed (Vampire - Feed)
     [33182] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = Abilities.Passive_Savage_Feeding, tooltip = Tooltips.Generic_Stun }, -- Uber Attack (Savage Feeding - Rank 1)
-    [33183] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = Abilities.Passive_Savage_Feeding }, -- Off-Balance Self (Savage Feeding - Rank 1)
+    [33183] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = Abilities.Passive_Savage_Feeding, unbreakable = 1 }, -- Off-Balance Self (Savage Feeding - Rank 1)
     [46047] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = Abilities.Passive_Savage_Feeding, tooltip = Tooltips.Generic_Stun }, -- Uber Attack (Savage Feeding - Rank 2)
-    [46046] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = Abilities.Passive_Savage_Feeding }, -- Off-Balance Self (Savage Feeding - Rank 2)
+    [46046] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = Abilities.Passive_Savage_Feeding, unbreakable = 1 }, -- Off-Balance Self (Savage Feeding - Rank 2)
     [40349] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, duration = .95, tooltip = Tooltips.Generic_Stun }, -- Feed (Blood Ritual - Rank 1)
     [40351] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds' }, -- Feed (Blood Ritual - Rank 1)
     [40350] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds', unbreakable = 1 }, -- Feed (Blood Ritual - Rank 1)
@@ -6180,7 +6181,7 @@ Effects.EffectOverride = {
     -- Roar / Ferocious Roar / Defeaning Roar
     [32633] = { tooltip = Tooltips.Generic_Fear }, -- Roar (Roar)
     [39113] = { tooltip = Tooltips.Generic_Fear }, -- Ferocious Roar (Ferocious Roar)
-    [45834] = { tooltip = Abilities.Skill_Ferocious_Roar }, -- Off Balance (Ferocious Roar)
+    [45834] = { tooltip = Abilities.Skill_Ferocious_Roar, unbreakable = 1 }, -- Off Balance (Ferocious Roar)
     [39114] = { tooltip = Tooltips.Generic_Fear }, -- Deafening Roar (Deafening Roar)
     [111788] = { tooltip = Abilities.Skill_Deafening_Roar }, -- Major Fracture (Deafening Roar)
 
@@ -7069,7 +7070,7 @@ Effects.EffectOverride = {
 
     -- Dragonknight (NPC)
     [34742] = { icon = 'esoui/art/icons/ability_dragonknight_004.dds' }, -- Fiery Breath (Dragonknight)
-    [34647] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = Abilities.Skill_Lava_Whip }, -- Lava Whip (Dragonknight)
+    [34647] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = Abilities.Skill_Lava_Whip, unbreakable = 1 }, -- Lava Whip (Dragonknight)
     [74472] = { icon = 'esoui/art/icons/ability_dragonknight_010.dds' }, -- Dark Talons (Dragonknight)
     [34706] = { tooltip = Tooltips.Generic_Immobilize }, -- Dark Talons (Dragonknight)
     [44227] = { icon = 'esoui/art/icons/ability_dragonknight_006.dds'}, -- Dragonknight Standard (Dragonknight - Elite)
@@ -7267,6 +7268,7 @@ Effects.EffectOverride = {
     [29520] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_aura_of_protection.dds', tooltip = Tooltips.Skill_Aura_of_Protection }, -- Aura of Protection (Shaman)
     [29521] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_aura_of_protection.dds', tooltip = Tooltips.Skill_Aura_of_Protection_Other }, -- Aura of Protection (Shaman)
     [29597] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = Tooltips.Generic_Stun }, -- Combustion (Shaman)
+    [29598] = { unbreakable = 1 }, -- Off Balance (Shaman)
     [65314] = { hide = true }, -- Aura of Protection (Shaman)
     [65432] = { hide = true }, -- Aura of Protection (Shaman)
     [83073] = { hide = true }, -- Summon Died (Shaman)
@@ -7284,7 +7286,7 @@ Effects.EffectOverride = {
     [67114] = { icon = 'esoui/art/icons/ability_warrior_014.dds' }, -- Retaliation (Winterborn Warrior)
     [69157] = { icon = 'esoui/art/icons/ability_warrior_014.dds', hide = true, tooltip = Tooltips.Generic_Stagger }, -- Retaliation (Winterborn Warrior)
     [69153] = { icon = 'esoui/art/icons/ability_warrior_014.dds', tooltip = Tooltips.Generic_Stun }, -- Retaliation (Winterborn Warrior)
-    [1347] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = Abilities.Skill_Retaliation }, -- Off-Balance (Winterborn Warrior)
+    [1347] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = Abilities.Skill_Retaliation, unbreakable = 1 }, -- Off-Balance (Winterborn Warrior)
     [70070] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_heavy.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Strike (Winterborn Warrior)
     [64980] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_javelin.dds', hide = true }, -- Javelin (Winterborn Warrior)
     [14883] = { hide = true }, -- Off-Balance (Winterborn Warrior)
@@ -8331,7 +8333,7 @@ Effects.EffectOverride = {
     [5256] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_shockwave.dds' }, -- Shockwave (Ogre)
     [34616] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_shockwave.dds' }, -- Shockwave (Ogre)
     [5349] = { hide = true, tooltip = Tooltips.Generic_Stagger }, -- Stagger (Ogre - Shockwave)
-    [6150] = { tooltip = Abilities.Skill_Shockwave }, -- Off Balance (Ogre)
+    [6150] = { tooltip = Abilities.Skill_Shockwave, unbreakable = 1 }, -- Off Balance (Ogre)
     [8069] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_intimidating_roar.dds', tooltip = Tooltips.Generic_Fear }, -- Intimidating Roar (Ogre)
     [24985] = { icon = 'esoui/art/icons/ability_warrior_025.dds', name = Abilities.Skill_Enrage, tooltip = Tooltips.Generic_Enrage, tooltipValue2 = 30 }, -- Intimidating Roar (Ogre)
 
@@ -10535,7 +10537,7 @@ Effects.EffectOverride = {
     [83157] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_smash.dds', tooltip = Tooltips.Generic_Knockdown }, -- Thunderous Smash (Thodundor of the Hill)
     [83160] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_shockwave.dds' }, -- Stone Crusher (Thodundor of the Hill)
     [83163] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_shockwave.dds' }, -- Stone Crusher (Thodundor of the Hill)
-    [83162] = { name = Abilities.Skill_Off_Balance, tooltip = Abilities.Skill_Stone_Crusher }, -- Stone Crusher (Thodundor of the Hill)
+    [83162] = { name = Abilities.Skill_Off_Balance, tooltip = Abilities.Skill_Stone_Crusher, unbreakable = 1 }, -- Stone Crusher (Thodundor of the Hill)
     [83161] = { name = Abilities.Innate_Stagger, hide = true, tooltip = Tooltips.Generic_Stagger }, -- Stone Crusher (Thodundor of the Hill)
     [83136] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shockwave.dds', hide = true }, -- Ground Shock (Thodundor of the Hill)
     [83140] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shockwave.dds' }, -- Ground Shock (Thodundor of the Hill)
@@ -11611,7 +11613,7 @@ Effects.EffectOverride = {
     [117289] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_backhand.dds' }, -- Backhand (Coldsnap Ogre)
     [117290] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_shockwave.dds' }, -- Shockwave (Coldsnap Ogre)
     [118491] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_shockwave.dds' }, -- Shockwave (Coldsnap Ogre)
-    [117292] = { tooltip = Abilities.Skill_Shockwave }, -- Off Balance (Coldsnap Ogre)
+    [117292] = { tooltip = Abilities.Skill_Shockwave, unbreakable = 1 }, -- Off Balance (Coldsnap Ogre)
     [117291] = { hide = true, tooltip = Tooltips.Generic_Stagger }, -- Stagger (Coldsnap Ogre)
     [117287] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_smash.dds' }, -- Crushing Blow (Coldsnap Ogre)
     [117288] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_smash.dds', tooltip = Tooltips.Generic_Knockdown }, -- Crushing Blow (Coldsnap Ogre)
