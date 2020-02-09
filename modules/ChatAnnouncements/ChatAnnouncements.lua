@@ -8911,58 +8911,49 @@ function ChatAnnouncements.HookFunction()
 
     eventManager:RegisterForEvent(moduleName, EVENT_PLEDGE_OF_MARA_OFFER, ChatAnnouncements.MaraOffer)
 
-    -- EVENT_GROUP_TYPE_CHANGED (Chat Handler)
-    -- Note: This function get handled by the chat announcement settings now.
-    local function GroupTypeChangedChatHook()
-        return true
-    end
+    -- Most of these functions are handled by chat announcements functions instead.
+    local ChatEventFormatters = {
 
-    -- EVENT_GROUP_INVITE_RESPONSE (Chat Handler)
-    -- Note: This function get handled by the chat announcement settings now.
-    local function GroupInviteChatHook()
-        return true
-    end
+    [EVENT_GROUP_TYPE_CHANGED] = function()
+        return nil
+    end,
 
-    -- EVENT_GROUP_MEMBER_LEFT (Chat Handler)
-    -- Note: This function get handled by the chat announcement settings now.
-    local function GroupMemberLeftChatHook()
-        return true
-    end
+    [EVENT_GROUP_INVITE_RESPONSE] = function()
+        return nil
+    end,
 
-    -- EVENT_SOCIAL_ERROR (Chat Handler)
-    -- TODO: Conditionals based off EVENT_SOCIAL_ERROR HOOK LATER
-    local function SocialErrorHook(error)
+    [EVENT_GROUP_MEMBER_LEFT] = function()
+        return nil
+    end,
+
+    -- TODO: Conditionals based off EVENT_SOCIAL_ERROR HOOK LATER OR MAKE SEPARATE FUNCTION
+    [EVENT_SOCIAL_ERROR] = function(error)
         if not IsSocialErrorIgnoreResponse(error) and ShouldShowSocialErrorInChat(error) then
             return zo_strformat(GetString("SI_SOCIALACTIONRESULT", error))
         end
-        return true
-    end
+    end,
 
-    -- EVENT_FRIEND_PLAYER_STATUS_CHANGED (Chat Handler)
-    -- Note: This function get handled by the chat announcement settings now.
-    local function FriendStatusHook()
-        return true
-    end
+    [EVENT_FRIEND_PLAYER_STATUS_CHANGED] = function()
+        return nil
+    end,
 
-    -- EVENT_IGNORE_ADDED (Chat Handler)
-    -- Note: This function get handled by the chat announcement settings now.
-    local function IgnoreAddedHook()
-        return true
-    end
+    [EVENT_IGNORE_ADDED] = function()
+        return nil
+    end,
 
-    -- EVENT_IGNORE_REMOVED (Chat Handler)
-    -- Note: This function get handled by the chat announcement settings now.
-    local function IgnoreRemovedHook()
-        return true
-    end
+    [EVENT_IGNORE_REMOVED] = function()
+        return nil
+    end,
+    }
 
-    ZO_PreHook(chatHandlers, EVENT_GROUP_TYPE_CHANGED, GroupTypeChangedChatHook)
-    ZO_PreHook(chatHandlers, EVENT_GROUP_INVITE_RESPONSE, GroupInviteChatHook)
-    ZO_PreHook(chatHandlers, EVENT_GROUP_MEMBER_LEFT, GroupMemberLeftChatHook)
-    ZO_PreHook(chatHandlers, EVENT_SOCIAL_ERROR, SocialErrorHook)
-    ZO_PreHook(chatHandlers, EVENT_FRIEND_PLAYER_STATUS_CHANGED, FriendStatusHook)
-    ZO_PreHook(chatHandlers, EVENT_IGNORE_ADDED, IgnoreAddedHook)
-    ZO_PreHook(chatHandlers, EVENT_IGNORE_REMOVED, IgnoreRemovedHook)
+    -- Unregister ZOS handlers for events we need to modify
+    for eventCode, eventFormatter in pairs (ChatEventFormatters) do
+        EVENT_MANAGER:UnregisterForEvent("ChatRouter", eventCode)
+    end
+    -- Register our handlers for events we need to modify
+    for eventCode, eventFormatter in pairs(ChatEventFormatters) do
+        CHAT_ROUTER:AddEventFormatter(eventCode, eventFormatter)
+    end
 
     -- HOOK PLAYER_TO_PLAYER Group Notifications to edit Ignore alert
     local KEYBOARD_INTERACT_ICONS = {
