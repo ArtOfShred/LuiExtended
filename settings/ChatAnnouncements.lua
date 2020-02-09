@@ -15,8 +15,8 @@ local bracketOptions4               = { "[]", "()", "-", "No Brackets" }
 local bracketOptions4Keys           = { ["[]"] = 1, ["()"] = 2, ["-"] = 3, ["No Brackets"] = 4 }
 local bracketOptions5               = { "[]", "()", "-", ":", "No Brackets" }
 local bracketOptions5Keys           = { ["[]"] = 1, ["()"] = 2, ["-"] = 3, [":"] = 4, ["No Brackets"] = 5 }
-local guildRankDisplayOptions       = { "Self Only", "Self + All w/ Permissions", "Display All Rank Changes" }
-local guildRankDisplayOptionsKeys   = { ["Self Only"] = 1, ["Self + All w/ Permissions"] = 2, ["Display All Rank Changes"] = 3 }
+local guildRankDisplayOptions       = { "Self Only", "All w/ Permissions", "All Rank Changes" }
+local guildRankDisplayOptionsKeys   = { ["Self Only"] = 1, ["All w/ Permissions"] = 2, ["All Rank Changes"] = 3 }
 local duelStartOptions              = { "Message + Icon", "Message Only", "Icon Only" }
 local duelStartOptionsKeys          = { ["Message + Icon"] = 1, ["Message Only"] = 2, ["Icon Only"] = 3 }
 

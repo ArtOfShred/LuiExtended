@@ -633,7 +633,7 @@ local g_rcUpdateDeclineOverride     = false         -- Variable set to true for 
 -- Guild
 local g_selectedGuild               = 1             -- Set selected guild to 1 by default, whenever the player reloads their first guild will always be selected
 local g_pendingHeraldryCost         = 0             -- Pending cost of heraldry change used to modify currency messages.
-local g_guildRankData               = {}            -- Variable to store local player guild ranks, for guild rank changes.
+local g_disableRankMessage          = false         -- Variable is toggled to true when the player modifies a guild memeber's rank, this prevents the normal rank change message from displaying.
 
 -- Achievements
 local g_achievementLastPercentage   = {}            -- Here we will store last displayed percentage for achievement
@@ -1009,20 +1009,12 @@ function ChatAnnouncements.RegisterGuildEvents()
     -- TODO: Possibly implement conditionals here again in the future
     eventManager:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD, ChatAnnouncements.GuildAddedSelf)
     eventManager:RegisterForEvent(moduleName, EVENT_GUILD_INVITE_ADDED, ChatAnnouncements.GuildInviteAdded)
-    eventManager:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_RANK_CHANGED, ChatAnnouncements.GuildRank)
+    eventManager:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_RANK_CHANGED, ChatAnnouncements.GuildRankChanged)
     eventManager:RegisterForEvent(moduleName, EVENT_HERALDRY_SAVED, ChatAnnouncements.GuildHeraldrySaved)
     eventManager:RegisterForEvent(moduleName, EVENT_GUILD_RANKS_CHANGED, ChatAnnouncements.GuildRanksSaved)
     eventManager:RegisterForEvent(moduleName, EVENT_GUILD_RANK_CHANGED, ChatAnnouncements.GuildRankSaved)
     eventManager:RegisterForEvent(moduleName, EVENT_GUILD_DESCRIPTION_CHANGED, ChatAnnouncements.GuildTextChanged)
     eventManager:RegisterForEvent(moduleName, EVENT_GUILD_MOTD_CHANGED, ChatAnnouncements.GuildTextChanged)
-    -- Index Guild Ranks
-    g_guildRankData = {}
-    for i = 1,5 do
-        local guildId = GetGuildId(i)
-        local memberIndex = GetPlayerGuildMemberIndex(guildId)
-        local _, _, rankIndex = GetGuildMemberInfo(guildId, memberIndex)
-        g_guildRankData[guildId] = rankIndex
-    end
 end
 
 function ChatAnnouncements.RegisterAchievementsEvent()
@@ -1364,33 +1356,34 @@ function ChatAnnouncements.GuildTextChanged(eventCode, guildId)
     end
 end
 
-function ChatAnnouncements.GuildRank(eventCode, guildId, DisplayName, newRank)
-    local currentRank = g_guildRankData[guildId]
-    local hasPermission1 = DoesGuildRankHavePermission(guildId, currentRank, GUILD_PERMISSION_PROMOTE)
-    local hasPermission2 = DoesGuildRankHavePermission(guildId, currentRank, GUILD_PERMISSION_DEMOTE)
+function ChatAnnouncements.GuildRankChanged(eventCode, guildId, displayName, newRank)
+    -- Don't show this for the player since EVENT_GUILD_PLAYER_RANK_CHANGED will handle that
+    if displayName == LUIE.PlayerDisplayName then return end
+    -- If the player just updated someones rank then we hide this generic message.
+    if g_disableRankMessage == true then
+        g_disableRankMessage = false
+        return
+    end
 
-    if ((hasPermission1 or hasPermission2) and DisplayName ~= LUIE.PlayerDisplayName and ChatAnnouncements.SV.Social.GuildRankDisplayOptions == 2) or (ChatAnnouncements.SV.Social.GuildRankDisplayOptions == 3 and DisplayName ~= LUIE.PlayerDisplayName) then
+    local memberIndex = GetPlayerGuildMemberIndex(guildId)
+    local rankIndex = select(3, GetGuildMemberInfo(guildId, memberIndex))
+
+    local hasPermission1 = DoesGuildRankHavePermission(guildId, rankIndex, GUILD_PERMISSION_PROMOTE)
+    local hasPermission2 = DoesGuildRankHavePermission(guildId, rankIndex, GUILD_PERMISSION_DEMOTE)
+
+    if ((hasPermission1 or hasPermission2) and ChatAnnouncements.SV.Social.GuildRankDisplayOptions == 2) or (ChatAnnouncements.SV.Social.GuildRankDisplayOptions == 3) then
         local displayNameLink
         if ChatAnnouncements.SV.BracketOptionCharacter == 1 then
-            displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(DisplayName, nil, DISPLAY_NAME_LINK_TYPE, DisplayName)
+            displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
         else
-            displayNameLink = ZO_LinkHandler_CreateLink(DisplayName, nil, DISPLAY_NAME_LINK_TYPE, DisplayName)
+            displayNameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
         end
-        local rankName
-        local rankNameDefault = GetDefaultGuildRankName(guildId, newRank)
-        local rankNameCustom = GetGuildRankCustomName(guildId, newRank)
+        local rankText = GetFinalGuildRankName(guildId, newRank)
 
-        if rankNameCustom == "" then
-            rankName = rankNameDefault
-        else
-            rankName = rankNameCustom
-        end
-
-        local icon = GetGuildRankIconIndex(guildId, newRank)
-        local icon = GetGuildRankLargeIcon(icon)
+        local icon = GetFinalGuildRankTextureSmall(guildId, newRank)
         local guildName = GetGuildName(guildId)
-        local guilds = GetNumGuilds()
 
+        local guilds = GetNumGuilds()
         for i = 1,guilds do
             local id = GetGuildId(i)
             local name = GetGuildName(id)
@@ -1399,69 +1392,112 @@ function ChatAnnouncements.GuildRank(eventCode, guildId, DisplayName, newRank)
             local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
             local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
             local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
-            local rankSyntax = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankName)) or (guildColor:Colorize(rankName))
-            local rankSyntaxAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", rankName) or rankName
+            local rankSyntax = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankText)) or (guildColor:Colorize(rankText))
+            local rankSyntaxAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", rankText) or rankText
 
             if guildName == name then
                 if ChatAnnouncements.SV.Social.GuildRankCA then
                     printToChat(zo_strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED), displayNameLink, guildNameAlliance, rankSyntax), true)
                 end
                 if ChatAnnouncements.SV.Social.GuildRankAlert then
-                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED), DisplayName, guildNameAllianceAlert, rankSyntaxAlert))
-                end
-                break
-            end
-        end
-    end
-
-    if DisplayName == LUIE.PlayerDisplayName then
-        local rankName
-        local rankNameDefault = GetDefaultGuildRankName(guildId, newRank)
-        local rankNameCustom = GetGuildRankCustomName(guildId, newRank)
-        if rankNameCustom == "" then
-            rankName = rankNameDefault
-        else
-            rankName = rankNameCustom
-        end
-
-        local icon = GetGuildRankIconIndex(guildId, newRank)
-        local icon = GetGuildRankLargeIcon(icon)
-
-        local guildName = GetGuildName(guildId)
-
-        if currentRank > newRank then
-            changestring = GetString(SI_LUIE_CA_GUILD_RANK_UP)
-        end
-        if currentRank < newRank then
-            changestring = GetString(SI_LUIE_CA_GUILD_RANK_DOWN)
-        end
-
-        g_guildRankData[guildId] = newRank
-
-        local guilds = GetNumGuilds()
-        for i = 1,guilds do
-            local id = GetGuildId(i)
-            local name = GetGuildName(id)
-
-            local guildAlliance = GetGuildAlliance(id)
-            local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-            local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
-            local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
-            local rankSyntax = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankName)) or (guildColor:Colorize(rankName))
-            local rankSyntaxAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", rankName) or rankName
-
-            if guildName == name then
-                if ChatAnnouncements.SV.Social.GuildRankCA then
-                    printToChat(zo_strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_SELF), changestring, rankSyntax, guildNameAlliance), true)
-                end
-                if ChatAnnouncements.SV.Social.GuildRankAlert then
-                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_SELF), changestring, rankSyntaxAlert, guildNameAllianceAlert))
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED), displayName, guildNameAllianceAlert, rankSyntaxAlert))
                 end
                 break
             end
         end
     end
 end
+
+function ChatAnnouncements.GuildPlayerRankChanged(eventId, guildId, rankIndex, guildRankChangeAction)
+    local rankText = GetFinalGuildRankName(guildId, rankIndex)
+    local icon = GetFinalGuildRankTextureSmall(guildId, rankIndex)
+    local guildName = GetGuildName(guildId)
+
+    local guildAlliance = GetGuildAlliance(guildId)
+    local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+    local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+    local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+    local rankSyntax = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankText)) or (guildColor:Colorize(rankText))
+    local rankSyntaxAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", rankText) or rankText
+
+    local syntax
+    if guildRankChangeAction == GUILD_RANK_CHANGE_ACTION_PROMOTE then
+        if ChatAnnouncements.SV.Social.GuildRankCA then
+            printToChat(zo_strformat(GetString(SI_LUIE_CA_GUILD_RANK_UP_SELF), rankSyntax, guildNameAlliance), true)
+        end
+        if ChatAnnouncements.SV.Social.GuildRankAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_CA_GUILD_RANK_UP_SELF), rankSyntaxAlert, guildNameAllianceAlert))
+        end
+    elseif guildRankChangeAction == GUILD_RANK_CHANGE_ACTION_DEMOTE then
+        if ChatAnnouncements.SV.Social.GuildRankCA then
+            printToChat(zo_strformat(GetString(SI_LUIE_CA_GUILD_RANK_DOWN_SELF), rankSyntax, guildNameAlliance), true)
+        end
+        if ChatAnnouncements.SV.Social.GuildRankAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_CA_GUILD_RANK_DOWN_SELF), rankSyntaxAlert, guildNameAllianceAlert))
+        end
+    end
+end
+
+function ChatAnnouncements.GuildMemberPromoteSuccessful(eventId, displayName, newRankIndex, guildId)
+    if newRankIndex > 0 then
+
+        local displayNameLink
+        if ChatAnnouncements.SV.BracketOptionCharacter == 1 then
+            displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+        else
+            displayNameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+        end
+        local rankText = GetFinalGuildRankName(guildId, newRankIndex)
+        local icon = GetFinalGuildRankTextureSmall(guildId, newRankIndex)
+        local guildName = GetGuildName(guildId)
+
+        local guildAlliance = GetGuildAlliance(guildId)
+        local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+        local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+        local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+        local rankSyntax = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankText)) or (guildColor:Colorize(rankText))
+        local rankSyntaxAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", rankText) or rankText
+
+        if ChatAnnouncements.SV.Social.GuildRankCA then
+            printToChat(zo_strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_PROMOTE), displayNameLink, rankSyntax, guildNameAlliance), true)
+        end
+        if ChatAnnouncements.SV.Social.GuildRankAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_PROMOTE), displayName, rankSyntaxAlert, guildNameAllianceAlert))
+        end
+    end
+    g_disableRankMessage = true
+end
+
+function ChatAnnouncements.GuildMemberDemoteSuccessful(eventId, displayName, newRankIndex, guildId)
+    if newRankIndex <= GetNumGuildRanks(guildId) then
+
+        local displayNameLink
+        if ChatAnnouncements.SV.BracketOptionCharacter == 1 then
+            displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+        else
+            displayNameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+        end
+        local rankText = GetFinalGuildRankName(guildId, newRankIndex)
+        local icon = GetFinalGuildRankTextureSmall(guildId, newRankIndex)
+        local guildName = GetGuildName(guildId)
+
+        local guildAlliance = GetGuildAlliance(guildId)
+        local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+        local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+        local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+        local rankSyntax = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankText)) or (guildColor:Colorize(rankText))
+        local rankSyntaxAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", rankText) or rankText
+
+        if ChatAnnouncements.SV.Social.GuildRankCA then
+            printToChat(zo_strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_DEMOTE), displayNameLink, rankSyntax, guildNameAlliance), true)
+        end
+        if ChatAnnouncements.SV.Social.GuildRankAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_DEMOTE), displayName, rankSyntaxAlert, guildNameAllianceAlert))
+        end
+    end
+    g_disableRankMessage = true
+end
+
 
 -- EVENT_GUILD_SELF_JOINED_GUILD
 function ChatAnnouncements.GuildAddedSelf(eventCode, guildId, guildName)
@@ -1484,15 +1520,6 @@ function ChatAnnouncements.GuildAddedSelf(eventCode, guildId, guildName)
             end
             break
         end
-    end
-
-    -- Reindex Guild Ranks
-    g_guildRankData = {}
-    for i = 1,5 do
-        local guildId = GetGuildId(i)
-        local memberIndex = GetPlayerGuildMemberIndex(guildId)
-        local _, _, rankIndex = GetGuildMemberInfo(guildId, memberIndex)
-        g_guildRankData[guildId] = rankIndex
     end
 end
 
@@ -6250,14 +6277,6 @@ function ChatAnnouncements.HookFunction()
             end
         end
 
-        -- Reindex Guild Ranks
-        g_guildRankData = {}
-        for i = 1,5 do
-            local guildId = GetGuildId(i)
-            local memberIndex = GetPlayerGuildMemberIndex(guildId)
-            local _, _, rankIndex = GetGuildMemberInfo(guildId, memberIndex)
-            g_guildRankData[guildId] = rankIndex
-        end
         return true
     end
 
@@ -8911,6 +8930,10 @@ function ChatAnnouncements.HookFunction()
 
     eventManager:RegisterForEvent(moduleName, EVENT_PLEDGE_OF_MARA_OFFER, ChatAnnouncements.MaraOffer)
 
+    local function ShouldShowSocialErrorInChat(error)
+        return not ShouldShowSocialErrorInAlert(error)
+    end
+
     -- Most of these functions are handled by chat announcements functions instead.
     local ChatEventFormatters = {
 
@@ -9453,6 +9476,7 @@ function ChatAnnouncements.HookFunction()
         if not inventory.slots[questIndex] then
             inventory.slots[questIndex] = {}
         end
+        questItem.slotIndex = questIndex
         table.insert(inventory.slots[questIndex], questItem)
 
         local index = #inventory.slots[questIndex]
@@ -9568,78 +9592,55 @@ function ChatAnnouncements.HookFunction()
     GUILD_ROSTER_MANAGER.OnGuildMemberAdded = function(self, guildId, displayName)
         self:RefreshData()
 
-        local displayNameLink
-        if ChatAnnouncements.SV.BracketOptionCharacter == 1 then
-            displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
-        else
-            displayNameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
-        end
+        local data = self:FindDataByDisplayName(displayName)
+        if data and data.rankId ~= DEFAULT_INVITED_RANK then
+            local hasCharacter, rawCharacterName, zone, class, alliance, level, championPoints = GetGuildMemberCharacterInfo(self.guildId, data.index)
+            local displayNameLink = ChatAnnouncements.ResolveNameLink(rawCharacterName, displayName)
+            local guildName = self.guildName
+            local guildAlliance = GetGuildAlliance(guildId)
+            local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+            local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+            local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
-        local guildName = GetGuildName(guildId)
-
-        local guilds = GetNumGuilds()
-        for i = 1,guilds do
-            local id = GetGuildId(i)
-            local name = GetGuildName(id)
-
-            if guildName == name then
-                local guildRoster = ZO_GuildRosterManager:New()
-                guildRoster:SetGuildId(id)
-                local playerData = guildRoster:FindDataByDisplayName(displayName)
-
-                if playerData ~= nil and playerData.inviteeIndex == nil then
-                    local guildAlliance = GetGuildAlliance(id)
-                    local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-                    local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
-                    local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
-
-                    if ChatAnnouncements.SV.Social.GuildCA then
-                        printToChat(zo_strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), displayNameLink, guildNameAlliance), true)
-                    end
-                    if ChatAnnouncements.SV.Social.GuildAlert then
-                        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), displayName, guildNameAllianceAlert))
-                    end
-                    PlaySound(SOUNDS.GUILD_ROSTER_ADDED)
-                    break
-                end
+            if ChatAnnouncements.SV.Social.GuildCA then
+                printToChat(zo_strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), displayNameLink, guildNameAlliance), true)
             end
+            if ChatAnnouncements.SV.Social.GuildAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), displayName, guildNameAllianceAlert))
+            end
+            PlaySound(SOUNDS.GUILD_ROSTER_ADDED)
         end
     end
 
     -- Hook for EVENT_GUILD_MEMBER_REMOVED
     GUILD_ROSTER_MANAGER.OnGuildMemberRemoved = function(self, guildId, rawCharacterName, displayName)
-        local displayNameLink
-        if ChatAnnouncements.SV.BracketOptionCharacter == 1 then
-            displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
-        else
-            displayNameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+
+        local displayNameLink = ChatAnnouncements.ResolveNameLink(rawCharacterName, displayName)
+        local guildName = self.guildName
+        local guildAlliance = GetGuildAlliance(guildId)
+        local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+        local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+        local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+
+        if ChatAnnouncements.SV.Social.GuildCA then
+            printToChat(zo_strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_LEFT), displayNameLink, guildNameAlliance), true)
         end
-
-        local guildName = GetGuildName(guildId)
-
-        local guilds = GetNumGuilds()
-        for i = 1,guilds do
-            local id = GetGuildId(i)
-            local name = GetGuildName(id)
-
-            if guildName == name then
-                local guildAlliance = GetGuildAlliance(id)
-                local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-                local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
-                local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
-
-                if ChatAnnouncements.SV.Social.GuildCA then
-                    printToChat(zo_strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_LEFT), displayNameLink, guildNameAlliance), true)
-                end
-                if ChatAnnouncements.SV.Social.GuildAlert then
-                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_LEFT), displayName, guildNameAllianceAlert))
-                end
-                PlaySound(SOUNDS.GUILD_ROSTER_REMOVED)
-                break
-            end
+        if ChatAnnouncements.SV.Social.GuildAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_LEFT), displayName, guildNameAllianceAlert))
         end
+        PlaySound(SOUNDS.GUILD_ROSTER_REMOVED)
+
         self:RefreshData()
     end
+
+    local EVENT_NAMESPACE = "GuildRoster"
+    -- Unregister ZOS Guild Roster events and replace with our own.
+    EVENT_MANAGER:UnregisterForEvent(EVENT_NAMESPACE, EVENT_GUILD_PLAYER_RANK_CHANGED)
+    EVENT_MANAGER:UnregisterForEvent(EVENT_NAMESPACE, EVENT_GUILD_MEMBER_PROMOTE_SUCCESSFUL)
+    EVENT_MANAGER:UnregisterForEvent(EVENT_NAMESPACE, EVENT_GUILD_MEMBER_DEMOTE_SUCCESSFUL)
+    EVENT_MANAGER:RegisterForEvent(EVENT_NAMESPACE, EVENT_GUILD_PLAYER_RANK_CHANGED, ChatAnnouncements.GuildPlayerRankChanged)
+    EVENT_MANAGER:RegisterForEvent(EVENT_NAMESPACE, EVENT_GUILD_MEMBER_PROMOTE_SUCCESSFUL, ChatAnnouncements.GuildMemberPromoteSuccessful)
+    EVENT_MANAGER:RegisterForEvent(EVENT_NAMESPACE, EVENT_GUILD_MEMBER_DEMOTE_SUCCESSFUL, ChatAnnouncements.GuildMemberDemoteSuccessful)
 
     -- Hook for Guild Invite function used from Guild Menu
     ZO_TryGuildInvite = function(guildId, displayName, sentFromChat)

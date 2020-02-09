@@ -154,8 +154,8 @@ function SlashCommands.SlashGuildKick(option)
         return
     end
 
-    if not DoesPlayerHaveGuildPermission (guildnumber, GUILD_PERMISSION_REMOVE) then
-        printToChat (GetString(SI_SOCIALACTIONRESULT18), true)
+    if not DoesPlayerHaveGuildPermission(guildnumber, GUILD_PERMISSION_REMOVE) then
+        printToChat(GetString(SI_SOCIALACTIONRESULT18), true)
         if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_SOCIALACTIONRESULT18)))
         end
