@@ -9254,9 +9254,10 @@ function ChatAnnouncements.HookFunction()
         self.isLastRadialMenuGamepad = IsInGamepadPreferredMode()
     end
 
-    --[[
+
     -- Since the Crown Store Gifting functionality was added, hooking these functions seems to cause an insecure code issue when receiving gifts via the Player to Player notification system.
-    -- Not sure how else I can alter these notifications so for the time being support will have to be dropped.
+    -- TODO: Try to securecall some of this when I have access to the gifting system.
+    --[[
 
     --local INTERACT_TYPE_TRADE_INVITE = 3
     local INTERACT_TYPE_GROUP_INVITE = 4
@@ -9387,7 +9388,6 @@ function ChatAnnouncements.HookFunction()
             NotificationDeclined(incomingEntryToRespondTo)
         end
     end
-
     ]]--
 
     -- Required when hooking ZO_MailSend_Gamepad:IsValid()

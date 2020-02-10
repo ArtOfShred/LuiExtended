@@ -705,6 +705,13 @@ function CombatInfo.OnUpdate(currentTime)
         end
     end
 
+    -- Break castbar when block is used for certain effects.
+    if not Castbar.IgnoreCastBreakingActions[castbar.id] then
+        if IsBlockActive() then
+            CombatInfo.StopCastBar()
+        end
+    end
+
     -- Break castbar when movement interrupt is detected for certain effects.
     savedPlayerX = playerX
     savedPlayerZ = playerZ
@@ -714,13 +721,6 @@ function CombatInfo.OnUpdate(currentTime)
         return
     else
         if Castbar.BreakCastOnMove[castbar.id] then
-            CombatInfo.StopCastBar()
-        end
-    end
-
-    -- Break castbar if player blocks.
-    if not Castbar.IgnoreCastBreakingActions[castbar.id] then
-        if IsBlockActive() then
             CombatInfo.StopCastBar()
         end
     end

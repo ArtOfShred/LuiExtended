@@ -269,7 +269,9 @@ CastBarTable.CastDurationFix = {
     [89645] = 5000, -- 68235 Stun (Create crafting station)
     [105217] = 5000, -- 68235 Stun (Create crafting station)
     [89654] = 5000, -- 68235 Stun (Create crafting station)
-    [113432] = 5000, -- 68235 Stun (Nascent Indrik)
+    [113432] = 8000, -- 68235 Stun (Nascent Indrik)
+    [130394] = 5000, -- 68235 Stun (Spectral Indrik)
+    [131536] = 5000, -- Generic Stun & Combine (Sovereign Sow)
 
     -- Seasonal Mementos and Items
     [86792] = 3000, -- Eating (High Hrothgar Festival Mints)
@@ -393,6 +395,8 @@ CastBarTable.IsCast = {
     [105217] = true, -- 68235 Stun (Create furniture station)
     [89654] = true, -- 68235 Stun (Create furniture station)
     [113432] = true, -- 68235 Stun (Nascent Indrik)
+    [130394] = true, -- 68235 Stun (Spectral Indrik)
+    [131536] = true, -- Generic Stun & Combine (Sovereign Sow)
     [63427] = true, -- Clean Fish (Filet Fish)
     [78052] = true, -- Minor Pardon (Counterfeit Pardon Edict)
     [76350] = true, -- Moderate Pardon (Leniency Edict)
@@ -755,6 +759,7 @@ CastBarTable.IgnoreCastBarStun = {
     [36434] = true, -- Mount Stun
     [74232] = true, -- Stun (Malacath's Wrathful Flame)
     [92863] = true, -- Stun (Dreamer's Chime)
+    [115046] = true, -- 68235 Stun (Nascent Indrik)
 
     -- Quests
 }

@@ -3306,7 +3306,9 @@ Effects.EffectOverride = {
     [85503] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_3.dds', name = Abilities.Experience_Crown_Crate_Scroll_3, tooltip = Tooltips.Experience_Grand_Gold_Coast }, -- Grand Gold Coast Experience Scroll
 
     -- Other
-    [113432] = { icon = 'esoui/art/icons/achievement_su_groupboss_2.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Summon, Abilities.Innate_Nascent_Indrik) }, -- 68235 Stun (Nascent Indrik)
+    [113432] = { icon = 'LuiExtended/media/icons/abilities/ability_item_indrik_nascent.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Summon, Abilities.Innate_Indrik_Nascent) }, -- 68235 Stun (Nascent Indrik)
+    [130394] = { icon = 'LuiExtended/media/icons/abilities/ability_item_indrik_spectral.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Summon, Abilities.Innate_Indrik_Spectral) }, -- 68235 Stun (Spectral Indrik)
+    [131536] = { icon = 'LuiExtended/media/icons/abilities/ability_item_pet_sovereign_sow.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Summon, Abilities.Innate_Sovereign_Sow) }, -- Generic Stun & Combine (Sovereign Sow)
     [70582] = { hide = true }, -- Roll 1d1000 (Merethic Restorative Resin)
     [63427] = { icon = 'LuiExtended/media/icons/abilities/ability_item_fillet_fish.dds', name = Abilities.Innate_Fillet_Fish }, -- Clean Fish
     [78052] = { icon = 'LuiExtended/media/icons/abilities/ability_item_pardon_edict_low.dds', name = Abilities.Innate_Pardon_Edict_Low }, -- Minor Pardon
@@ -3347,10 +3349,10 @@ Effects.EffectOverride = {
     [84367] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds' }, -- Witchmother's Brew (Witchmother's Whistle)
     [84368] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds' }, -- Witchmother's Brew (Witchmother's Whistle)
     [84369] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds' }, -- Witchmother's Brew (Witchmother's Whistle)
-    [91369] = { icon = 'LuiExtended/media/icons/abilities/memento_the_pie_of_misrule.dds', name = Abilities.Memento_The_Pie_of_Misrule, tooltip = Tooltips.Experience_Seasonal_Event }, -- Jester's Experience Boost Pie (The Pie of Misrule)
+    [91369] = { icon = 'LuiExtended/media/icons/mementos/memento_the_pie_of_misrule.dds', name = Abilities.Memento_The_Pie_of_Misrule, tooltip = Tooltips.Experience_Seasonal_Event }, -- Jester's Experience Boost Pie (The Pie of Misrule)
     [92232] = { icon = 'LuiExtended/media/icons/mementos/memento_pelinals_ferocity.dds', tooltip = Tooltips.Experience_Seasonal_Pelinal }, -- Pelinal's Ferocity (Scroll of Pelinal's Ferocity)
-    [91449] = { icon = 'LuiExtended/media/icons/abilities/memento_bredas_magnificent_mead.dds', tooltip = Tooltips.Experience_Seasonal_Event }, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)
-    [86075] = { icon = 'LuiExtended/media/icons/abilities/memento_bredas_magnificent_mead.dds', tooltip = Tooltips.Experience_Seasonal_Event }, -- Breda's Magnificent Mead (Breda's Magnificent Mead)
+    [91449] = { icon = 'LuiExtended/media/icons/mementos/memento_bredas_magnificent_mead.dds', tooltip = Tooltips.Experience_Seasonal_Event }, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)
+    [86075] = { icon = 'LuiExtended/media/icons/mementos/memento_bredas_magnificent_mead.dds', tooltip = Tooltips.Experience_Seasonal_Event }, -- Breda's Magnificent Mead (Breda's Magnificent Mead)
     [125820] = { icon = 'LuiExtended/media/icons/mementos/memento_skeletal_marionette.dds', name = Abilities.Memento_Skeletal_Marionette }, -- Witches Festival 2019 Marionette (Skeletal Marionette)
 
     -- Base Mementos
@@ -12312,9 +12314,9 @@ Effects.AddGroundDamageAura = {
     [117809] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Unnerving Boneyard (Unnerving Boneyard)
     [117854] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Avid Boneyard (Avid Boneyard)
 
-    --[116410] = { duration = 500, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Shocking Siphon (Shocking Siphon)
-    --[118766] = { duration = 500, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Detonating Siphon (Detonating Siphon)
-    --[118011] = { duration = 500, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Mystic Siphon (Mystic Siphon)
+    [116410] = { duration = 500, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Shocking Siphon (Shocking Siphon)
+    [118766] = { duration = 500, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Detonating Siphon (Detonating Siphon)
+    [118011] = { duration = 500, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Mystic Siphon (Mystic Siphon)
 
     [122178] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Frozen Colossus (Frozen Colossus)
     [122399] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF, merge = 2 }, -- Pestilent Colossus (Pestilent Colossus)

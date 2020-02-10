@@ -691,6 +691,8 @@ LUIE.DebugAuras = {
     -- Other
     [113432] = true, -- 68235 Stun (Nascent Indrik)
     [115046] = true, -- 68235 Stun (Nascent Indrik)
+    [130394] = true, -- 68235 Stun (Spectral Indrik)
+    [131536] = true, -- Generic Stun & Combine (Sovereign Sow)
     --[68259] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
     --[70582] = true, -- Roll 1d1000 (Merethic Resorative Resin)
     --[70584] = true, -- 68235 Stun (Merethic Restorative Resin)
