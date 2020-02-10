@@ -946,8 +946,8 @@ Effects.BarHighlightExtraId = {
     [61785] = 32685, -- Fossilize
     [108813] = 32678, -- Shattering Rocks
 
-    [130427] = 29034, -- Stonefist
-    [130442] = 31817, -- Stone Giant
+    [134009] = 29032, -- Stonefist
+    [134355] = 31816, -- Stonefist
 
     -- Nightblade
     [124806] = 35336, -- Minor Vulnerability --> Lotus Fan
@@ -1034,8 +1034,8 @@ Effects.BarHighlightCheckOnFade = {
     [108798] = { id1 = 21014, unitTag = "player" }, -- Reflective Plate --> Snare Removal
     [31898] = { id1 = 20253, id2 = 31898, unitTag = "reticleover" }, -- Burning Talons
     [31899] = { id1 = 20528, id2 = 31899, unitTag = "reticleover" }, -- Minor Maim --> Choking Talons / Minor Maim
-    [29034] = { id1 = 29034, unitTag = "reticleover" }, -- Stonefist
-    [31817] = { id1 = 31817, unitTag = "reticleover" }, -- Stone Giant
+    [29032] = { id1 = 29032, unitTag = "player" }, -- Stonefist
+    [31816] = { id1 = 31816, unitTag = "player" }, -- Stone Giant
 
     -- Nightblade
     [35336] = { id1 = 124806, id2 = 35336, unitTag = "reticleover" }, -- Lotus Fan --> Minor Vulnerability / Lotus Fan
@@ -1154,8 +1154,8 @@ Effects.BarHighlightOverride = {
     [32715] = { newId = 61814 }, -- Ferocious Leap
 
     -- Earthen Heart
-    [29032] = { newId = 29034}, -- Stonefist
-    [31816] = { newId = 31817}, -- Stone Giant
+    [133037] = { newId = 29032 }, -- Stonefist
+    [133027] = { newId = 31816 }, -- Stone Giant
     [29043] = { newId = 92507, noRemove = true }, -- Molten Weapons --> Major Sorcery
     [31874] = { newId = 92503, noRemove = true }, -- Igneous Weapons --> Major Sorcery
     [31888] = { newId = 76537 }, -- Molten Armaments
@@ -4439,11 +4439,15 @@ Effects.EffectOverride = {
     [118938] = { icon = 'esoui/art/icons/ability_dragonknight_009_a.dds', hide = true }, -- Ferocious Leap (Ferocious Leap)
 
     -- Stonefist / Obsidian Shard / Stone Giant
-    [130427] = { name = Abilities.Innate_Stagger, tooltip = Tooltips.Skill_Stonefist }, -- Stonefist (Stonefist)
-    [29034] = { tooltip = Tooltips.Generic_Stun }, -- Stonefist (Stonefist)
+    [29032] = { tooltip = Tooltips.Skill_Stonefist }, -- Stonefist (Stonefist)
+    [134009] = { tooltip = Tooltips.Generic_Knockdown }, -- Stonefist (Stonefist)
+
+
     [68763] = { icon = 'esoui/art/icons/ability_dragonknight_013_b.dds' }, -- Obsidian Shard (Obsidian Shard)
-    [130442] = { name = Abilities.Innate_Stagger, tooltip = Tooltips.Skill_Stone_Giant }, -- Stonefist (Stone Giant)
-    [31817] = { tooltip = Tooltips.Generic_Stun }, -- Stone Giant (Stone Giant)
+
+    [31816] = { tooltip = Tooltips.Skill_Stone_Giant }, -- Stone Giant (Stone Giant)
+    [134336] = { tooltip = Tooltips.Skill_Stagger }, -- Stagger (Stone Giant)
+    [134355] = { tooltip = Tooltips.Generic_Knockdown }, -- Stone Giant (Stone Giant)
 
     -- Molten Weapons / Igneous Weapons / Molten Armaments
     [131340] = { consolidate = true, tooltip = Abilities.Skill_Molten_Weapons }, -- Major Brutality (Molten Weapons)

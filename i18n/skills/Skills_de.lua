@@ -352,8 +352,9 @@ local strings = {
     SI_LUIE_SKILL_ERUPTION_TP =                          "Enemies in the ash cloud have their Movement Speed reduced by |cffffff70|r% and take Flame Damage every |cffffff1|r second.",
     SI_LUIE_SKILL_MAGMA_ARMOR_TP =                       "Incoming damage is limited to |cffffff3|r% of your Max Health and nearby enemies take Flame Damage every |cffffff1|r second for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_CORROSIVE_ARMOR_TP =                   "Incoming damage is limited to |cffffff3|r% of your Max Health and nearby enemies take Poison Damage every |cffffff1|r second for |cffffff<<1>>|r seconds.\n\nWhile active, this ability and your Direct Damage dealt ignores enemy Physical Resistance.",
-    SI_LUIE_SKILL_STONEFIST_TP =                         "If you reach |cffffff3|r stacks of Stagger within |cffffff<<1>>|r seconds then you will be stunned for |cffffff3|r seconds, and have all stacks of Stagger removed.",
-    SI_LUIE_SKILL_STONE_GIANT_TP =                       "Increase damage taken by |cffffff45|r per stack for |cffffff<<1>>|r seconds.\n\nIf you reach |cffffff3|r stacks of Stagger then you will be stunned for |cffffff3|r seconds, and have all stacks of Stagger removed.",
+    SI_LUIE_SKILL_STONEFIST_TP =                         "Debris is ripped from the ground and held around you for |cffffff12|r seconds.\n\nActivating Stonefist again allows you to launch part of the debris at an enemy, dealing Physical Damage, up to |cffffff3|r times. The final cast stuns for |cffffff3|r seconds.",
+    SI_LUIE_SKILL_STONE_GIANT_TP =                       "Debris is ripped from the ground and held around you for |cffffff12|r seconds.\n\nActivating Stone Giant again allows you to launch part of the debris at an enemy, dealing Physical Damage, up to |cffffff3|r times. The final cast stuns for |cffffff3|r seconds.\n\nEach hit applies Stagger, increasing damage taken by |cffffff65|r per stack for |cffffff6|r seconds.",
+    SI_LUIE_SKILL_STAGGER_TP =                           "Increase damage taken by |cffffff65|r per stack for |cffffff<<1>>|r seconds, stacking up to |cffffff3|r times when you are hit by Stone Giant.",
 
     -- Nightblade Skills
     SI_LUIE_SKILL_DEATH_STROKE_DEBUFF =                  "Increase damage taken from the Nightblade by |cFFFFFF20|r% for |cFFFFFF6|r seconds.",

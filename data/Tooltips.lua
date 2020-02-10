@@ -602,6 +602,7 @@ LUIE.Data.Tooltips = {
     Skill_Corrosive_Armor                           = GetString(SI_LUIE_SKILL_CORROSIVE_ARMOR_TP),
     Skill_Stonefist                                 = GetString(SI_LUIE_SKILL_STONEFIST_TP),
     Skill_Stone_Giant                               = GetString(SI_LUIE_SKILL_STONE_GIANT_TP),
+    Skill_Stagger                                   = GetString(SI_LUIE_SKILL_STAGGER_TP),
 
     -- Nightblade
     Skill_Death_Stroke_Debuff                       = GetString(SI_LUIE_SKILL_DEATH_STROKE_DEBUFF),

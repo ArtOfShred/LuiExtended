@@ -461,6 +461,10 @@ CastBarTable.IsCast = {
     [125817] = true, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
     [119107] = true, -- NAME ME Infect Brew (Winnowing Plague Decoction)
 
+    -- Dragonknight
+    [29032] = true, -- Stonefist (Stonefist)
+    [31816] = true, -- Stone Giant (Stone Giant)
+
     -- Nightblade
     [33398] = true, -- Death Stroke (Nightblade)
     [36508] = true, -- Incapacitating Strike (Nightblade)

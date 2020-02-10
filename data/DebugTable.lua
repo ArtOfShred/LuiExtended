@@ -3043,16 +3043,18 @@ LUIE.DebugAuras = {
     [118938] = true, -- Ferocious Leap (Ferocious Leap)
 
     [29032] = true, -- Stonefist (Stonefist)
-    [130427] = true, -- Stonefist (Stonefist)
-    [29034] = true, -- Stonefist (Stonefist)
+    [134310] = true, -- Stonefist (Stonefist)
+    [133037] = true, -- Stonefist (Stonefist)
+    [134009] = true, -- Stonefist (Stonefist)
 
     [31820] = true, -- Obsidian Shard (Obsidian Shard)
     [68763] = true, -- Obsidian Shard (Obsidian Shard)
 
     [31816] = true, -- Stone Giant (Stone Giant)
-    [130442] = true, -- Stonefist (Stone Giant)
-    [31817] = true, -- Stone Giant (Stone Giant)
-    [31818] = true, -- Stone Giant (Stone Giant)
+    [134340] = true, -- Stone Giant (Stone Giant)
+    [133027] = true, -- Stone Giant (Stone Giant)
+    [134336] = true, -- Stone Giant (Stone Giant)
+    [134355] = true, -- Stone Giant (Stone Giant)
 
     [29043] = true, -- Molten Weapons (Molten Weapons)
     [131340] = true, -- Major Brutality (Molten Weapons)
