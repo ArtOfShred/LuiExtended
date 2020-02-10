@@ -623,9 +623,9 @@ local strings = {
     SI_LUIE_SKILL_ELUDE =                                "When you take damage from a direct area of effect attack, you gain Major Expedition for |cFFFFFF1|r second per piece of Medium Armor worn.",
 
     -- Heavy Armor
-    SI_LUIE_SKILL_UNSTOPPABLE =                          "Immune to knockback and disabling effects for |cFFFFFF<<1>>|r seconds.\n\nMovement Speed reduced by |cFFFFFF65|r% for the duration.",
-    SI_LUIE_SKILL_UNSTOPPABLE_BRUTE =                    "Each piece of Heavy Armor worn decreases the cost of Break Free by |cFFFFFF5|r% for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_IMMOVABLE =                            "Immune to knockback and disabling effects for |cFFFFFF<<1>>|r seconds.\n\nMovement Speed reduced by |cFFFFFF65|r% for the duration.\n\nEach piece of Heavy Armor worn increases the amount of damage you block and the potency of the snare by |cFFFFFF5|r%.",
+    SI_LUIE_SKILL_UNSTOPPABLE =                          "Movement Speed reduced by |cFFFFFF65|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_UNSTOPPABLE_BRUTE =                    "Each piece of Heavy Armor worn decreases the cost of Break Free by |cFFFFFF5|r% for |cFFFFFF<<1>>|r seconds.\n\nMovement Speed reduced by |cFFFFFF65|r% for the duration.",
+    SI_LUIE_SKILL_IMMOVABLE =                            "Movement Speed reduced by |cFFFFFF65|r% for |cFFFFFF<<1>>|r seconds.\n\nEach piece of Heavy Armor worn increases the amount of damage you block and the potency of the snare by |cFFFFFF5|r%.",
 
     ----------------------------------------------------------------
     -- WORLD SKILLS ------------------------------------------------

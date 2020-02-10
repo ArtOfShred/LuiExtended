@@ -202,6 +202,9 @@ Quests.QuestItemMerge = {
 --LUIE_QUEST_MESSAGE_CONFISCATE = 6
 Quests.ItemRemovedMessage = {
 
+    -- Werewolf / Vampire
+    [5475] = LUIE_QUEST_MESSAGE_OFFER, -- Tribute (Hircine's Gift)
+
     -- Auridon (MSQ)
     [5434] = LUIE_QUEST_MESSAGE_CONFISCATE, -- Deployment Plans (A Hostile Situation)
     [5435] = LUIE_QUEST_MESSAGE_CONFISCATE, -- Poisoned Meat (A Hostile Situation)

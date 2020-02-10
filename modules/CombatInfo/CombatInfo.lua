@@ -708,7 +708,9 @@ function CombatInfo.OnUpdate(currentTime)
     -- Break castbar when block is used for certain effects.
     if not Castbar.IgnoreCastBreakingActions[castbar.id] then
         if IsBlockActive() then
-            CombatInfo.StopCastBar()
+            if not IsPlayerStunned() then -- Is Block Active returns true when the player is stunned currently.
+                CombatInfo.StopCastBar()
+            end
         end
     end
 

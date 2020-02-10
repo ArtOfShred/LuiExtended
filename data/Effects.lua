@@ -412,6 +412,7 @@ Effects.DebuffDisplayOverrideId = {
     [126631] = true, -- Blight Seed (Azureblight)
 
     -- Dragonknight
+    [134336] = true, -- Stagger (Stone Giant)
     [98447] = true, -- Shackle Snare (Dragonknight Standard Synergy)
 
     -- Templar
@@ -850,6 +851,7 @@ Effects.EffectCreateSkillAura = {
     [63015] = { consolidate = true, extendedDisplay = true, abilityId = 29556 }, -- Major Evasion --> Evasion
     [63019] = { consolidate = true, extendedDisplay = true, abilityId = 39195 }, -- Major Evasion --> Shuffle
     [63030] = { alwaysShow = true, abilityId = 39192 }, -- Major Evasion --> Elude
+    [63118] = { alwaysShow = true, abilityId = 28301 }, -- Immovable --> Crowd Control Immunity
 
     -- Fighters Guild
     [64509] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 999004 }, -- Major Savagery --> Expert Hunter
@@ -1014,9 +1016,6 @@ Effects.BarHighlightExtraId = {
     -- Werewolf
     [39113] = 45834, -- Ferocious Roar --> Off Balance
     [39114] = 111788, -- Deafening Roar --> Major Fracture
-
-    -- Vampire
-    [63558] = 81493, -- Minor Expedition --> Accelerating Drain
 
 }
 
@@ -1467,7 +1466,7 @@ Effects.BarHighlightOverride = {
     [39195] = { newId = 39196, ignoreMouseover = true }, -- Shuffle
     [39192] = { newId = 126958, showFakeAura = true }, -- Elude
     [29552] = { newId = 126581, ignoreMouseover = true }, -- Unstoppable
-    [39205] = { newId = 126582, ignoreMouseover = true }, -- Immovable Brute
+    [39205] = { newId = 126582, showFakeAura = true }, -- Immovable Brute
     [39197] = { newId = 63118, ignoreMouseover = true }, -- Immovable
 
     ---------------------------
@@ -1488,7 +1487,7 @@ Effects.BarHighlightOverride = {
 
     [32893] = { newId = 68883 }, -- Drain Essence
     [38949] = { newId = 68892 }, -- Invigorating Drain
-    [38956] = { newId = 81493, ignoreMouseover = true }, -- Accelerating Drain
+    [38956] = { newId = 63558 }, -- Accelerating Drain --> Minor Expedition
     [88158] = { newId = 38932 }, -- Materialize --> Clouding Swarm
 
     ---------------------------
@@ -6049,7 +6048,7 @@ Effects.EffectOverride = {
 
     [39205] = { hide = true }, -- Unstoppable Brute (Unstoppable Brute)
     [63134] = { tooltip = Abilities.Skill_Unstoppable_Brute }, -- Major Resolve (Unstoppable Brute)
-    [126582] = { icon = 'esoui/art/icons/ability_armor_001_a.dds', tooltip = Tooltips.Skill_Unstoppable }, -- Unstoppable Brute (Unstoppable Brute)
+    [126582] = { icon = 'esoui/art/icons/ability_armor_001_a.dds', tooltip = Tooltips.Skill_Unstoppable_Brute }, -- Unstoppable Brute (Unstoppable Brute)
 
     [39197] = { hide = true }, -- Immovable (Immovable)
     [63119] = { tooltip = Abilities.Skill_Immovable }, -- Major Resolve (Immovable)
@@ -12039,6 +12038,9 @@ Effects.FakePlayerBuffs = {
     [92068] = { duration = 6000 }, -- Crystalized Shield (Crystallized Shield)
     [92168] = { duration = "GET" }, -- Crystalized Slab (Crystallized Slab)
     [92170] = { duration = "GET" }, -- Shimmering Shield (Shimmering Shield)
+
+    -- Armor
+    [126582] = { duration = 6000 }, -- Unstoppable Brute (Unstoppable Brute)
 
     -- Vampire
     --[40350] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = Abilities.Skill_Feed, duration = 5300 }, -- Feed (Blood Ritual)
