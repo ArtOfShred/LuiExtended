@@ -1899,13 +1899,13 @@ local message = ""
 
     if updatedRoleName ~= LUIE.PlayerNameFormatted then
         if ChatAnnouncements.SV.ChatPlayerDisplayOptions == 1 then
-            printToChat(zo_strformat("|cFEFEFE<<1>>|r has updated their role: <<2>>", displayNameLink, message) )
+            printToChat(zo_strformat("|cFFFFFF<<1>>|r has updated their role: <<2>>", displayNameLink, message) )
         end
         if ChatAnnouncements.SV.ChatPlayerDisplayOptions == 2 then
-            printToChat(zo_strformat("|cFEFEFE<<1>>|r has updated their role: <<2>>", characterNameLink, message) )
+            printToChat(zo_strformat("|cFFFFFF<<1>>|r has updated their role: <<2>>", characterNameLink, message) )
         end
         if ChatAnnouncements.SV.ChatPlayerDisplayOptions == 3 then
-            printToChat(zo_strformat("|cFEFEFE<<1>>|r has updated their role: <<2>>", displayBoth, message) )
+            printToChat(zo_strformat("|cFFFFFF<<1>>|r has updated their role: <<2>>", displayBoth, message) )
         end
     else
         printToChat(zo_strformat("You have updated your role: <<1>>", message) )
@@ -1929,23 +1929,23 @@ function ChatAnnouncements.GMCS(eventCode, unitTag, isOnline)
 
     if not isOnline and onlineRoleName ~=LUIE.PlayerNameFormatted then
         if ChatAnnouncements.SV.ChatPlayerDisplayOptions == 1 then
-            printToChat(zo_strformat("|cFEFEFE<<1>>|r has disconnected.", displayNameLink) )
+            printToChat(zo_strformat("|cFFFFFF<<1>>|r has disconnected.", displayNameLink) )
         end
         if ChatAnnouncements.SV.ChatPlayerDisplayOptions == 2 then
-            printToChat(zo_strformat("|cFEFEFE<<1>>|r has disconnected.", characterNameLink) )
+            printToChat(zo_strformat("|cFFFFFF<<1>>|r has disconnected.", characterNameLink) )
         end
         if ChatAnnouncements.SV.ChatPlayerDisplayOptions == 3 then
-            printToChat(zo_strformat("|cFEFEFE<<1>>|r has disconnected.", displayBoth) )
+            printToChat(zo_strformat("|cFFFFFF<<1>>|r has disconnected.", displayBoth) )
         end
     elseif isOnline and onlineRoleName ~=LUIE.PlayerNameFormatted then
         if ChatAnnouncements.SV.ChatPlayerDisplayOptions == 1 then
-            printToChat(zo_strformat("|cFEFEFE<<1>>|r has reconnected.", displayNameLink) )
+            printToChat(zo_strformat("|cFFFFFF<<1>>|r has reconnected.", displayNameLink) )
         end
         if ChatAnnouncements.SV.ChatPlayerDisplayOptions == 2 then
-            printToChat(zo_strformat("|cFEFEFE<<1>>|r has reconnected.", characterNameLink) )
+            printToChat(zo_strformat("|cFFFFFF<<1>>|r has reconnected.", characterNameLink) )
         end
         if ChatAnnouncements.SV.ChatPlayerDisplayOptions == 3 then
-            printToChat(zo_strformat("|cFEFEFE<<1>>|r has reconnected.", displayBoth) )
+            printToChat(zo_strformat("|cFFFFFF<<1>>|r has reconnected.", displayBoth) )
         end
     end
 end
@@ -2616,7 +2616,7 @@ function ChatAnnouncements.OnBuybackItem(eventCode, itemName, quantity, money, i
         local total1, total2, total3 = GetItemLinkStacks(itemName)
         local total = total1 + total2 + total3
         if total > 1 then
-            carriedItemTotal = string.format(" |c%s%s|r %s|cFEFEFE%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+            carriedItemTotal = string.format(" |c%s%s|r %s|cFFFFFF%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
         end
     end
 
@@ -2670,7 +2670,7 @@ function ChatAnnouncements.OnBuyItem(eventCode, itemName, entryType, quantity, m
         local total1, total2, total3 = GetItemLinkStacks(itemName)
         local total = total1 + total2 + total3
         if total > 1 then
-            carriedItemTotal = string.format(" |c%s%s|r %s|cFEFEFE%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+            carriedItemTotal = string.format(" |c%s%s|r %s|cFFFFFF%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
         end
     end
 
@@ -2716,7 +2716,7 @@ function ChatAnnouncements.OnSellItem(eventCode, itemName, quantity, money)
         local total1, total2, total3 = GetItemLinkStacks(itemName)
         local total = total1 + total2 + total3
         if total > 1 then
-            carriedItemTotal = string.format(" |c%s%s|r %s|cFEFEFE%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+            carriedItemTotal = string.format(" |c%s%s|r %s|cFFFFFF%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
         end
     end
 
@@ -3418,7 +3418,7 @@ function ChatAnnouncements.ResolveQuestItemChange()
                         formattedMessageP2 = string.format(logPrefix, formattedMessageP1)
 
                         if ChatAnnouncements.SV.Inventory.LootTotal and total > 1 then
-                            totalString = string.format(" |c%s%s|r %s|cFEFEFE%s|r", color, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+                            totalString = string.format(" |c%s%s|r %s|cFFFFFF%s|r", color, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
                         else
                             totalString = ""
                         end
@@ -3507,7 +3507,7 @@ function ChatAnnouncements.ResolveQuestItemChange()
                         end
 
                         if ChatAnnouncements.SV.Inventory.LootTotal and total > 1 then
-                            totalString = string.format(" |c%s%s|r %s|cFEFEFE%s|r", color, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+                            totalString = string.format(" |c%s%s|r %s|cFFFFFF%s|r", color, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
                         else
                             totalString = ""
                         end
@@ -3706,7 +3706,7 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
         local total1, total2, total3 = GetItemLinkStacks(itemLink)
         local total = total1 + total2 + total3
         if total > 1 then
-            formattedTotal = string.format(" |c%s%s|r %s|cFEFEFE%s|r", color, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+            formattedTotal = string.format(" |c%s%s|r %s|cFFFFFF%s|r", color, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
         end
     end
 
@@ -5016,7 +5016,7 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
                         local total1, total2, total3 = GetItemLinkStacks(itemLink)
                         local total = total1 + total2 + total3
                         if total > 1 then
-                            carriedItemTotal = string.format(" |c%s%s|r %s|cFEFEFE%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+                            carriedItemTotal = string.format(" |c%s%s|r %s|cFFFFFF%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
                         end
                     end
 
@@ -5063,7 +5063,7 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
                         local total1, total2, total3 = GetItemLinkStacks(itemLink)
                         local total = total1 + total2 + total3
                         if total > 1 then
-                            carriedItemTotal = string.format(" |c%s%s|r %s|cFEFEFE%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+                            carriedItemTotal = string.format(" |c%s%s|r %s|cFFFFFF%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
                         end
                     end
 
@@ -5116,7 +5116,7 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
                 local total1, total2, total3 = GetItemLinkStacks(itemLink)
                 local total = total1 + total2 + total3
                 if total > 1 then
-                    carriedItemTotal = string.format(" |c%s%s|r %s|cFEFEFE%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+                    carriedItemTotal = string.format(" |c%s%s|r %s|cFFFFFF%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
                 end
             end
 
@@ -8238,7 +8238,7 @@ function ChatAnnouncements.HookFunction()
     local function RaidStartedHook(raidName, isWeekly)
         -- Display CA
         if ChatAnnouncements.SV.Group.GroupRaidCA then
-            local formattedName = zo_strformat("|cFEFEFE<<1>>|r", raidName)
+            local formattedName = zo_strformat("|cFFFFFF<<1>>|r", raidName)
             printToChat(zo_strformat(SI_LUIE_CA_GROUP_TRIAL_STARTED, formattedName), true)
         end
 
@@ -8273,7 +8273,7 @@ function ChatAnnouncements.HookFunction()
 
         -- Display CA
         if ChatAnnouncements.SV.Group.GroupRaidCA then
-            local formattedName = zo_strformat("|cFEFEFE<<1>>|r", raidName)
+            local formattedName = zo_strformat("|cFFFFFF<<1>>|r", raidName)
             local vitalityCounterString = zo_strformat("<<1>> <<2>>/<<3>>", zo_iconFormatInheritColor("esoui/art/trials/vitalitydepletion.dds", 16, 16), currentCount, maxCount )
             local finalScore = ZO_DEFAULT_ENABLED_COLOR:Colorize(score)
             vitalityBonus = ZO_DEFAULT_ENABLED_COLOR:Colorize(vitalityBonus)
@@ -8318,7 +8318,7 @@ function ChatAnnouncements.HookFunction()
     local function RaidFailedHook(raidName, score)
         -- Display CA
         if ChatAnnouncements.SV.Group.GroupRaidCA then
-            local formattedName = zo_strformat("|cFEFEFE<<1>>|r", raidName)
+            local formattedName = zo_strformat("|cFFFFFF<<1>>|r", raidName)
             printToChat(zo_strformat(SI_LUIE_CA_GROUP_TRIAL_FAILED, formattedName), true)
         end
 
@@ -8346,7 +8346,7 @@ function ChatAnnouncements.HookFunction()
     local function RaidBestScoreHook(raidName, score, isWeekly)
         -- Display CA
         if ChatAnnouncements.SV.Group.GroupRaidBestScoreCA then
-            local formattedName = zo_strformat("|cFEFEFE<<1>>|r", trialName)
+            local formattedName = zo_strformat("|cFFFFFF<<1>>|r", trialName)
             local formattedString = isWeekly and zo_strformat(SI_TRIAL_NEW_BEST_SCORE_WEEKLY, formattedName) or zo_strformat(SI_TRIAL_NEW_BEST_SCORE_LIFETIME, formattedName)
             printToChat(formattedString, true)
         end
