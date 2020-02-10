@@ -3012,6 +3012,10 @@ function SpellCastBuffs.updateBar(currentTime, sortedList, container)
         local buff = uiTlw[container].icons[index]
         local auraStarts = effect.starts or nil
         local auraEnds = effect.ends or nil
+        -- Modify abilities with forced maximum durations.
+        if effect.overrideDur then
+            auraStarts = auraEnds - effect.overrideDur
+        end
         local fakeDuration = effect.fakeDuration
 
         -- If this isn't a permanent duration buff then update the bar on every tick
