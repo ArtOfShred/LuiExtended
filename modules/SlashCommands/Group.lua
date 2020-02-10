@@ -303,7 +303,7 @@ function SlashCommands.SlashVoteKick(option)
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-    -- Check to make sure we're not in LFG
+    -- Check to make sure we're in LFG
     if not IsInLFGGroup() then
         printToChat(GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFGKICK), true)
         if LUIE.ChatAnnouncements.SV.Group.GroupLFGAlert then
