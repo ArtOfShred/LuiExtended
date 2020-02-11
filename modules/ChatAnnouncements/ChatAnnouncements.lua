@@ -614,20 +614,22 @@ local g_JusticeStacks               = {}            -- Justice Items Index (only
 local g_guildBankCarry              = nil           -- Saves item data when an item is removed/deposited into the guild bank.
 
 -- Group
-local currentGroupLeaderRawName     = nil           -- Tracks current Group Leader Name
-local currentGroupLeaderDisplayName = nil           -- Tracks current Group Leader Display Name
+local g_currentGroupLeaderRawName     = nil           -- Tracks current Group Leader Name
+local g_currentGroupLeaderDisplayName = nil           -- Tracks current Group Leader Display Name
 
 -- LFG
-local g_stopGroupLeaveQueue         = false         -- Stops group notification messages from printing for a short time an LFG group is formed - Implemented due to odd behavior on LFG group formation.
-local g_lfgDisableGroupEvents       = false         -- Stops group notification messages from printing for a short time an LFG group is formed - Implemented due to odd behavior on LFG group formation.
+local g_currentActivityId           = nil           -- current activity ID for LFG.
+local g_stopGroupLeaveQueue         = false         -- Stops group notification messages from printing for a short time an LFG group is formed - Called when a ready check has the possible result of success.
+local g_lfgDisableGroupEvents       = false         -- Stops group notification messages from printing for a short time an LFG group is formed - Called when succesfully joining a new LFG activity.
 local g_groupJoinFudger             = false         -- Toggled on when a group invite is accepted. Controls display of group join message.
 local g_joinLFGOverride             = false         -- Toggled on to stop display of standard group join message when joining an LFG group. Instead an alternate message with the LFG activity name will display.
 local g_leaveLFGOverride            = false         -- Toggled on to modify group leave message to display "You are no longer in an LFG group."
-local g_showActivityStatus          = true          -- Variable to control display of LFG quest
+local g_showActivityStatus          = true          -- Variable to control display of LFG status
+local g_lfgHideStatusCancel         = false         -- Hide the cancel message that can be triggered by someone dropping queue while in an existing group.
 local g_showRCUpdates               = true          -- Variable to control display of LFG Ready Check Announcements
+local g_weDeclinedTheQueue          = false         -- Flagged when we decline a ready check popup for LFG queue.
 local g_savedQueueValue             = 0             -- Saved LFG queue status
 local g_rcSpamPrevention            = false         -- Stops LFG failed ready checks from spamming the player
-local g_LFGJoinAntiSpam             = false         -- Stops LFG join messages from spamming the player when a group already in an activity is queueing
 
 -- Guild
 local g_selectedGuild               = 1             -- Set selected guild to 1 by default, whenever the player reloads their first guild will always be selected
@@ -882,13 +884,9 @@ function ChatAnnouncements.Initialize(enabled)
     ChatAnnouncements.Enabled = true
 
     -- Get current group leader
-    currentGroupLeaderRawName = GetRawUnitName(GetGroupLeaderUnitTag())
-    currentGroupLeaderDisplayName = GetUnitDisplayName(GetGroupLeaderUnitTag())
-
-    -- Setup group variables
-    if IsInLFGGroup() then
-        g_LFGJoinAntiSpam = true
-    end
+    g_currentGroupLeaderRawName = GetRawUnitName(GetGroupLeaderUnitTag())
+    g_currentGroupLeaderDisplayName = GetUnitDisplayName(GetGroupLeaderUnitTag())
+    g_currentActivityId = GetCurrentLFGActivityId()
 
     -- Posthook Crafting Interface (Keyboard)
     ChatAnnouncements.CraftModeOverrides()
@@ -1679,7 +1677,12 @@ end
 
 -- EVENT_GROUPING_TOOLS_LFG_JOINED
 function ChatAnnouncements.GroupingToolsLFGJoined(eventCode, locationName)
-    if not g_LFGJoinAntiSpam then
+    -- Get the name of the current activityId that is generated on initialization.
+    local currentActivityName = GetActivityName(g_currentActivityId)
+    -- Update the current activity id with the one we are in now.
+    g_currentActivityId = GetCurrentLFGActivityId()
+    -- If the locationName is different thant the saved currentActivityName we have entered a new LFG instance, so display this message.
+    if locationName ~= currentActivityName then
         if ChatAnnouncements.SV.Group.GroupLFGCA then
             printToChat(zo_strformat(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED, locationName), true)
         end
@@ -1687,72 +1690,64 @@ function ChatAnnouncements.GroupingToolsLFGJoined(eventCode, locationName)
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED, locationName))
         end
         g_lfgDisableGroupEvents = true
-        zo_callLater (function() g_lfgDisableGroupEvents = false end, 2500)
+        zo_callLater (function() g_lfgDisableGroupEvents = false end, 3000)
     end
     g_joinLFGOverride = true
-    g_LFGJoinAntiSpam = true
 end
 
 -- EVENT_ACTIVITY_FINDER_STATUS_UPDATE
 function ChatAnnouncements.ActivityStatusUpdate(eventCode, status)
-    d("status: " .. status)
+    --d("status: " .. status)
+    local message
     if g_showActivityStatus then
-        local message
-        -- If we are NOT queued and were formerly queued, forming group, or in a ready check, display left queue message.
-        if status == ACTIVITY_FINDER_STATUS_NONE and (g_savedQueueValue == ACTIVITY_FINDER_STATUS_QUEUED or g_savedQueueValue == ACTIVITY_FINDER_STATUS_READY_CHECK) then
+        if not g_weDeclinedTheQueue then
+            -- If we are NOT queued and were formerly queued, forming group, or in a ready check, display left queue message.
+            if status == ACTIVITY_FINDER_STATUS_NONE and (g_savedQueueValue == ACTIVITY_FINDER_STATUS_QUEUED or g_savedQueueValue == ACTIVITY_FINDER_STATUS_READY_CHECK) then
                 message = (GetString(SI_LUIE_CA_GROUPFINDER_QUEUE_END))
-        end
-        -- If we are queued and previously we were not queued then display a message.
-        if status == ACTIVITY_FINDER_STATUS_QUEUED and (g_savedQueueValue == ACTIVITY_FINDER_STATUS_NONE or g_savedQueueValue == ACTIVITY_FINDER_STATUS_IN_PROGRESS) then
-                message = (GetString(SI_LUIE_CA_GROUPFINDER_QUEUE_START))
-        end
-        -- If we were in the queue and are now in progress without a ready check triggered, we left the queue to find a replacement member so this should be displayed.
-        if status == ACTIVITY_FINDER_STATUS_IN_PROGRESS and (g_savedQueueValue == ACTIVITY_FINDER_STATUS_QUEUED) then
-                message = (GetString(SI_LUIE_CA_GROUPFINDER_QUEUE_END))
-        end
-        if g_savedQueueValue == ACTIVITY_FINDER_STATUS_FORMING_GROUP and status == ACTIVITY_FINDER_STATUS_QUEUED then status = ACTIVITY_FINDER_STATUS_FORMING_GROUP end -- Fixes an error that occurs when joining an LFG instance while already in an LFG group.
-
-        if message then
-            if ChatAnnouncements.SV.Group.GroupLFGQueueCA then
-                printToChat(message, true)
             end
-            if ChatAnnouncements.SV.Group.GroupLFGQueueAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
+            -- If we are queued and previously we were not queued then display a message.
+            if status == ACTIVITY_FINDER_STATUS_QUEUED and (g_savedQueueValue == ACTIVITY_FINDER_STATUS_NONE or g_savedQueueValue == ACTIVITY_FINDER_STATUS_IN_PROGRESS) then
+                message = (GetString(SI_LUIE_CA_GROUPFINDER_QUEUE_START))
+            end
+            -- If we were in the queue and are now in progress without a ready check triggered, we left the queue to find a replacement member so this should be displayed.
+            if status == ACTIVITY_FINDER_STATUS_IN_PROGRESS and (g_savedQueueValue == ACTIVITY_FINDER_STATUS_QUEUED) then
+                message = (GetString(SI_LUIE_CA_GROUPFINDER_QUEUE_END))
             end
         end
     end
 
-    if status == ACTIVITY_FINDER_STATUS_NONE then
+    -- If we queue as a group in a completed LFG activity then if someone drops the queue don't show that a group was succesfully formed.
+    -- This event handles everyone but the player that declined the check.
+    if (status == ACTIVITY_FINDER_STATUS_COMPLETE and g_savedQueueValue == ACTIVITY_FINDER_STATUS_QUEUED) or (status == ACTIVITY_FINDER_STATUS_QUEUED and g_savedQueueValue == ACTIVITY_FINDER_STATUS_READY_CHECK) then
+        -- Don't show if we already got a ready check cancel message.
+        if not g_lfgHideStatusCancel then
+            message = (GetString(SI_LFGREADYCHECKCANCELREASON3))
+        end
         g_showRCUpdates = true
-    end -- Should always trigger at the end result of a ready check failing.
+    end
+
+    if message then
+        if ChatAnnouncements.SV.Group.GroupLFGQueueCA then
+            printToChat(message, true)
+        end
+        if ChatAnnouncements.SV.Group.GroupLFGQueueAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
+        end
+    end
+
+    -- Should always trigger at the end result of a ready check failing (none when not in an activity already, complete when in a finished one).
+   if status == ACTIVITY_FINDER_STATUS_NONE then
+       g_showRCUpdates = true
+   end
     if status == ACTIVITY_FINDER_STATUS_READY_CHECK then
         g_showRCUpdates = false
     end
 
-    -- Prevents potential consecutive events from spamming
-    -- Doesn't seem like this triggers anymore, unless it only happens in an already active Group
-    -- TODO: Test this still
+    -- Debug
     if status == ACTIVITY_FINDER_STATUS_FORMING_GROUP and g_savedQueueValue ~= ACTIVITY_FINDER_STATUS_FORMING_GROUP then
         if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
             d("Old ACTIVITY_FINDER_STATUS_FORMING_GROUP event triggered")
         end
-        --[[
-        message = (GetString(SI_LFGREADYCHECKCANCELREASON4))
-        if message then
-            if ChatAnnouncements.SV.Group.GroupLFGCA then
-                printToChat(message, true)
-            end
-            if ChatAnnouncements.SV.Group.GroupLFGAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
-            end
-        end
-        g_stopGroupLeaveQueue = true
-        g_showRCUpdates = true
-        g_LFGJoinAntiSpam = false
-        g_showActivityStatus = false
-        zo_callLater(function() g_showActivityStatus = true end, 1000)
-        zo_callLater(function() g_stopGroupLeaveQueue = false end, 1000)
-        ]]--
     end
 
     g_savedQueueValue = status
@@ -1760,10 +1755,10 @@ end
 
 -- EVENT_GROUPING_TOOLS_READY_CHECK_UPDATED
 function ChatAnnouncements.ReadyCheckUpdate(eventCode)
-    d("ready check update")
+    --d("ready check update")
     local activityType, playerRole = GetLFGReadyCheckNotificationInfo()
     local tanksAccepted, tanksPending, healersAccepted, healersPending, dpsAccepted, dpsPending = GetLFGReadyCheckCounts()
-    d(tanksAccepted .. " " .. tanksPending .. " " .. healersAccepted .. " " .. healersPending .. " " .. dpsAccepted .." " .. dpsPending)
+    --d(tanksAccepted .. " " .. tanksPending .. " " .. healersAccepted .. " " .. healersPending .. " " .. dpsAccepted .." " .. dpsPending)
     if g_showRCUpdates then
         local activityName
 
@@ -1823,24 +1818,23 @@ function ChatAnnouncements.ReadyCheckUpdate(eventCode)
 
     g_showRCUpdates = false
 
-    -- This is also falsely triggered when a player cancels on the ready check - ONLY THE PLAYER THAT TRIGGERS THIS GETS THE MESSAGE, FIND A PATTERN TO FIX THIS OR JUST DISABLE THIS MESSAGE?
+    -- Triggers when a group is succesfully formed or when a player cancels on the ready check. We set any relevant variables here as if the group did succesfully join.
     if not g_showRCUpdates and (tanksAccepted == 0 and tanksPending == 0 and healersAccepted == 0 and healersPending == 0 and dpsAccepted == 0 and dpsPending == 0) then
         if g_rcSpamPrevention == false then
-            local message
+            --[[local message
             message = (GetString(SI_LFGREADYCHECKCANCELREASON4))
             if ChatAnnouncements.SV.Group.GroupLFGCA then
                 printToChat(message, true)
             end
             if ChatAnnouncements.SV.Group.GroupLFGAlert then
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
-            end
+            end]]--
             g_rcSpamPrevention = true
             zo_callLater(function() g_rcSpamPrevention = false end, 1000)
             g_showActivityStatus = false
             zo_callLater(function() g_showActivityStatus = true end, 1000)
             g_stopGroupLeaveQueue = true
             zo_callLater(function() g_stopGroupLeaveQueue = false end, 1000)
-            g_LFGJoinAntiSpam = false -- Added, test
             g_showRCUpdates = true
         end
     end
@@ -5925,8 +5919,8 @@ function ChatAnnouncements.HookFunction()
 
     -- EVENT_GROUP_UPDATE (Alert Handler)
     local function GroupUpdateAlert()
-        currentGroupLeaderRawName = ""
-        currentGroupLeaderDisplayName = ""
+        g_currentGroupLeaderRawName = GetRawUnitName(GetGroupLeaderUnitTag())
+        g_currentGroupLeaderDisplayName = GetUnitDisplayName(GetGroupLeaderUnitTag())
 
         if g_groupJoinFudger then
             zo_callLater(ChatAnnouncements.CheckLFGStatusJoin, 100)
@@ -5959,11 +5953,9 @@ function ChatAnnouncements.HookFunction()
             elseif isLeader and isLocalPlayer then
                 message = zo_strformat(SI_LUIE_GROUPDISBANDLEADER)
                 alert = zo_strformat(SI_LUIE_GROUPDISBANDLEADER)
-                g_LFGJoinAntiSpam = false
                 zo_callLater(function() ChatAnnouncements.CheckLFGStatusLeave(false) end , 100)
             elseif isLocalPlayer then
             --
-            g_LFGJoinAntiSpam = false
             zo_callLater(function() ChatAnnouncements.CheckLFGStatusLeave(false) end , 100)
             --
             end
@@ -5973,7 +5965,6 @@ function ChatAnnouncements.HookFunction()
             if actionRequiredVote then
                 if isLocalPlayer then
                     --
-                    g_LFGJoinAntiSpam = false
                     zo_callLater(function() ChatAnnouncements.CheckLFGStatusLeave(true) end , 100)
                     --
                     message = zo_strformat(SI_GROUP_ELECTION_KICK_PLAYER_PASSED)
@@ -5990,7 +5981,6 @@ function ChatAnnouncements.HookFunction()
             else
                 if isLocalPlayer then
                     --
-                    g_LFGJoinAntiSpam = false
                     zo_callLater(function() ChatAnnouncements.CheckLFGStatusLeave(true) end , 100)
                     --
                     message = zo_strformat(SI_GROUP_NOTIFICATION_GROUP_SELF_KICKED)
@@ -6012,7 +6002,6 @@ function ChatAnnouncements.HookFunction()
                 --
             else
                 --
-                g_LFGJoinAntiSpam = false
                 message = (zo_strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF), finalName))
                 alert = (zo_strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF), finalAlertName))
                 zo_callLater(function() ChatAnnouncements.CheckLFGStatusLeave(false) end , 100)
@@ -6030,12 +6019,14 @@ function ChatAnnouncements.HookFunction()
         end
 
         if isLocalPlayer then
-            currentGroupLeaderRawName = ""
-            currentGroupLeaderDisplayName = ""
+            g_currentGroupLeaderRawName = GetRawUnitName(GetGroupLeaderUnitTag())
+            g_currentGroupLeaderDisplayName = GetUnitDisplayName(GetGroupLeaderUnitTag())
         end
 
         -- Only print this out if we didn't JUST join an LFG group.
-        if not g_stopGroupLeaveQueue then
+        if g_stopGroupLeaveQueue or g_lfgDisableGroupEvents then
+            return true
+        else
             if message ~= nil then
                 if ChatAnnouncements.SV.Group.GroupCA then
                     printToChat(message, true)
@@ -6064,26 +6055,31 @@ function ChatAnnouncements.HookFunction()
     -- Note: This event only fires if the characterId of the leader has changed (it's a new leader)
     local function LeaderUpdateAlert(leaderTag)
         local leaderRawName = GetRawUnitName(leaderTag)
-        local showAlert = leaderRawName ~= "" and currentGroupLeaderRawName ~= ""
-        currentGroupLeaderRawName = leaderRawName
-        currentGroupLeaderDisplayName = GetUnitDisplayName(leaderTag)
+        local showAlert = leaderRawName ~= "" and (g_currentGroupLeaderRawName ~= "" and g_currentGroupLeaderRawName ~= nil)
+        g_currentGroupLeaderRawName = leaderRawName
+        g_currentGroupLeaderDisplayName = GetUnitDisplayName(leaderTag)
 
         -- If for some reason we don't have a valid leader name, bail out now.
-        if currentGroupLeaderRawName == "" or currentGroupLeaderRawName == nil or currentGroupLeaderDisplayName == "" or currentGroupLeaderDisplayName == nil then
+        if g_currentGroupLeaderRawName == "" or g_currentGroupLeaderRawName == nil or g_currentGroupLeaderDisplayName == "" or g_currentGroupLeaderDisplayName == nil then
             return true
         end
 
         local displayString
         local alertString
-        local finalName = ChatAnnouncements.ResolveNameLink(currentGroupLeaderRawName, currentGroupLeaderDisplayName)
-        local finalAlertName = ChatAnnouncements.ResolveNameNoLink(currentGroupLeaderRawName, currentGroupLeaderDisplayName)
+        local finalName = ChatAnnouncements.ResolveNameLink(g_currentGroupLeaderRawName, g_currentGroupLeaderDisplayName)
+        local finalAlertName = ChatAnnouncements.ResolveNameNoLink(g_currentGroupLeaderRawName, g_currentGroupLeaderDisplayName)
 
-        if LUIE.PlayerNameRaw ~= currentGroupLeaderRawName then -- If another player became the leader
+        if LUIE.PlayerNameRaw ~= g_currentGroupLeaderRawName then -- If another player became the leader
             displayString = (zo_strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), finalName))
             alertString = (zo_strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), finalAlertName))
-        elseif LUIE.PlayerNameRaw == currentGroupLeaderRawName then -- If the player character became the leader
+        elseif LUIE.PlayerNameRaw == g_currentGroupLeaderRawName then -- If the player character became the leader
             displayString = (GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED_SELF))
             alertString = (GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED_SELF))
+        end
+
+        -- Don't show leader updates when joining LFG.
+        if g_stopGroupLeaveQueue or g_lfgDisableGroupEvents then
+            return true
         end
 
         if showAlert then
@@ -6199,18 +6195,36 @@ function ChatAnnouncements.HookFunction()
 
     -- EVENT_GROUP_ELECTION_REQUESTED (Alert Handler)
     local function GroupElectionRequestedAlert(descriptor)
-        printToChat(descriptor, true)
         local alertText
+        local messageText
         if descriptor then
+            messageText = ZO_GroupElectionDescriptorToRequestAlertText[descriptor]
             alertText = ZO_GroupElectionDescriptorToRequestAlertText[descriptor]
         end
 
         if not alertText then
+            messageText = ZO_GroupElectionDescriptorToRequestAlertText[ZO_GROUP_ELECTION_DESCRIPTORS.NONE]
             alertText = ZO_GroupElectionDescriptorToRequestAlertText[ZO_GROUP_ELECTION_DESCRIPTORS.NONE]
         end
 
+        -- If this is a votekick then change the message.
+        -- TODO: GetGroupElectionInfo() doesn't update with EVENT_GROUP_ELECTION_REQUESTED
+        --[[
+        local electionType, _, _, targetUnitTag = GetGroupElectionInfo()
+        if electionType == GROUP_ELECTION_TYPE_KICK_MEMBER then -- Vote Kick
+            local kickMemberName = GetUnitName(targetUnitTag)
+            local kickMemberAccountName = GetUnitDisplayName(targetUnitTag)
+            if kickMemberName ~= nil and kickMemberName ~= "" and kickMemberAccountName ~= nil and kickMemberAccountName ~= "" then
+                local finalNameCA = ChatAnnouncements.ResolveNameLink(kickMemberName, kickMemberAccountName)
+                messageText = zo_strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START_SELF), finalNameCA)
+                local finalNameAlert = ChatAnnouncements.ResolveNameNoLink(kickMemberName, kickMemberAccountName)
+                alertText = zo_strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START_SELF), finalNameAlert)
+            end
+        end
+        ]]--
+
         if ChatAnnouncements.SV.Group.GroupVoteCA then
-            printToChat(alertText, true)
+            printToChat(messageText, true)
         end
         if ChatAnnouncements.SV.Group.GroupVoteAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertText)
@@ -6223,13 +6237,18 @@ function ChatAnnouncements.HookFunction()
     local function GroupReadyCheckCancelAlert(reason)
 
         if reason ~= LFG_READY_CHECK_CANCEL_REASON_NOT_IN_READY_CHECK and reason ~= LFG_READY_CHECK_CANCEL_REASON_GROUP_FORMED_SUCCESSFULLY then
+            message = GetString("SI_LFGREADYCHECKCANCELREASON", reason)
             if ChatAnnouncements.SV.Group.GroupLFGCA then
-                printToChat(GetString("SI_LFGREADYCHECKCANCELREASON", reason), true)
+                printToChat(message, true)
             end
             if ChatAnnouncements.SV.Group.GroupLFGAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString("SI_LFGREADYCHECKCANCELREASON", reason))
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
             end
         end
+
+        -- Stop the cancel message from status update from triggering when any other result here happens.
+        g_lfgHideStatusCancel = true
+        zo_callLater(function() g_lfgHideStatusCancel = false end, 1000)
 
         -- Sometimes if another player cancels slightly before a player in your group cancels, the "you have been placed in the front of the queue message displays. If this is the case, we want to show queue left for that event."
         if reason ~= LFG_READY_CHECK_CANCEL_REASON_GROUP_REPLACED_IN_QUEUE then
@@ -9771,6 +9790,25 @@ function ChatAnnouncements.HookFunction()
             self:ConfirmExit(showBaseScene)
         end
     end
+
+    -- Replace the default DeclineLFGReadyCheckNotification function to display the message that we are not in queue any longer + LFG activity join event.
+    local zos_DeclineLFGReadyCheckNotification = DeclineLFGReadyCheckNotification
+    DeclineLFGReadyCheckNotification = function(self)
+        zos_DeclineLFGReadyCheckNotification()
+
+        local message = (GetString(SI_LFGREADYCHECKCANCELREASON3))
+        g_showRCUpdates = true
+        g_weDeclinedTheQueue = true
+        zo_callLater(function() g_weDeclinedTheQueue = false end, 1000)
+
+        if ChatAnnouncements.SV.Group.GroupLFGQueueCA then
+            printToChat(message, true)
+        end
+        if ChatAnnouncements.SV.Group.GroupLFGQueueAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
+        end
+    end
+
 end
 
 function ChatAnnouncements.TradeInviteAccepted(eventCode)
@@ -9818,6 +9856,7 @@ end
 
 -- Called on player joining a group to determine if message syntax should show group or LFG group.
 function ChatAnnouncements.CheckLFGStatusJoin()
+
     if not g_stopGroupLeaveQueue then
         if not g_lfgDisableGroupEvents then
             if IsInLFGGroup() and not g_joinLFGOverride then
@@ -9838,39 +9877,49 @@ function ChatAnnouncements.CheckLFGStatusJoin()
         end
         g_joinLFGOverride = false
     end
+
 end
 
 -- Called when another player joins the group.
 function ChatAnnouncements.PrintJoinStatusNotSelf(SendMessage, SendAlert)
-    if not g_stopGroupLeaveQueue then
-        if ChatAnnouncements.SV.Group.GroupCA then
-            printToChat(SendMessage, true)
-        end
-        if ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, SendAlert)
-        end
+
+    -- Bail out if we're hiding events from LFG.
+    if g_stopGroupLeaveQueue or g_lfgDisableGroupEvents then
+        return
+    end
+
+    -- Otherwise print the message
+    if ChatAnnouncements.SV.Group.GroupCA then
+        printToChat(SendMessage, true)
+    end
+    if ChatAnnouncements.SV.Group.GroupAlert then
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, SendAlert)
     end
 end
 
 -- Called on player leaving a group to determine if message syntax should show group or LFG group.
 function ChatAnnouncements.CheckLFGStatusLeave(WasKicked)
-    if not (g_stopGroupLeaveQueue and g_lfgDisableGroupEvents) then
-        if not g_leaveLFGOverride then
-            if WasKicked then
-                if ChatAnnouncements.SV.Group.GroupCA then
-                    printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF), true)
-                end
-                if ChatAnnouncements.SV.Group.GroupAlert then
-                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF))
-                end
-            end
-        elseif g_leaveLFGOverride and GetGroupSize() == 0 then
+
+    -- Bail out if we joined an LFG group.
+    if g_stopGroupLeaveQueue or g_lfgDisableGroupEvents then
+        g_leaveLFGOverride = false
+        return
+    end
+    if not g_leaveLFGOverride then
+        if WasKicked then
             if ChatAnnouncements.SV.Group.GroupCA then
-                printToChat(GetString(SI_LUIE_CA_GROUP_QUIT_LFG), true)
+                printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF), true)
             end
             if ChatAnnouncements.SV.Group.GroupAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_GROUP_QUIT_LFG))
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF))
             end
+        end
+    elseif g_leaveLFGOverride and GetGroupSize() == 0 then
+        if ChatAnnouncements.SV.Group.GroupCA then
+            printToChat(GetString(SI_LUIE_CA_GROUP_QUIT_LFG), true)
+        end
+        if ChatAnnouncements.SV.Group.GroupAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_GROUP_QUIT_LFG))
         end
     end
     g_leaveLFGOverride = false
@@ -9971,7 +10020,7 @@ end
 -- EVENT_GROUP_ELECTION_NOTIFICATION_ADDED
 function ChatAnnouncements.VoteNotify(eventCode)
     local electionType, timeRemainingSeconds, electionDescriptor, targetUnitTag = GetGroupElectionInfo()
-    if electionType == 2 then -- Ready Check
+    if electionType == GROUP_ELECTION_TYPE_GENERIC_UNANIMOUS then -- Ready Check
         if ChatAnnouncements.SV.Group.GroupVoteCA then
             printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_MESSAGE), true)
         end
@@ -9980,7 +10029,7 @@ function ChatAnnouncements.VoteNotify(eventCode)
         end
     end
 
-    if electionType == 3 then -- Vote Kick
+    if electionType == GROUP_ELECTION_TYPE_KICK_MEMBER then -- Vote Kick
         local kickMemberName = GetUnitName(targetUnitTag)
         local kickMemberAccountName = GetUnitDisplayName(targetUnitTag)
 

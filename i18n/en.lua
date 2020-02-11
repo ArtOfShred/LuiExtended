@@ -227,6 +227,7 @@ local strings = {
     SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL =               "A vote to kick |cFFFFFF<<1>>|r from the group has failed.",
     SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED =             "A vote to kick |cFFFFFF<<1>>|r from the group has passed.",
     SI_LUIE_CA_GROUPFINDER_VOTEKICK_START =              "A vote to kick |cFFFFFF<<1>>|r from the group has started.",
+    SI_LUIE_CA_GROUPFINDER_VOTEKICK_START_SELF =         "You have initiated a vote to kick |cFFFFFF<<1>>|r from the group...",
     SI_LUIE_CA_GROUPFINDER_QUEUE_END =                   "You are no longer queued in the group finder.",
     SI_LUIE_CA_GROUPFINDER_QUEUE_START =                 "You are now queued in the group finder.",
     SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY =        "Your |cFFFFFF<<1>>|r is ready.",

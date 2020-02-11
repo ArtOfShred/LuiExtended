@@ -227,6 +227,7 @@ local strings = {
     SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL =               "Голосование за изгнание |cFFFFFF<<1>>|r из группы не состоялось.",
     SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED =             "Голосование за изгнание |cFFFFFF<<1>>|r из группы состоялось.",
     SI_LUIE_CA_GROUPFINDER_VOTEKICK_START =              "Голосование за изгнание |cFFFFFF<<1>>|r из группы началось.",
+    SI_LUIE_CA_GROUPFINDER_VOTEKICK_START_SELF =         "You have initiated a vote to kick |cFFFFFF<<1>>|r from the group...",
     SI_LUIE_CA_GROUPFINDER_QUEUE_END =                   "Вы больше не находитесь в очереди на поиск группы.",
     SI_LUIE_CA_GROUPFINDER_QUEUE_START =                 "Вы встали в очередь на поиск группы.",
     SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY =        "|cFFFFFF<<1>>|r готово.",

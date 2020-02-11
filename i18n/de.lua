@@ -212,6 +212,7 @@ local strings = {
     SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL =               "Eine Rauswurf-Abstimmung für |cFFFFFF<<1>>|r ist fehlgeschlagen.",
     SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED =             "Eine Rauswurf-Abstimmung für |cFFFFFF<<1>>|r war erfolgreich.",
     SI_LUIE_CA_GROUPFINDER_VOTEKICK_START =              "Eine Rauswurf-Abstimmung für |cFFFFFF<<1>>|r hat begonnen.",
+    SI_LUIE_CA_GROUPFINDER_VOTEKICK_START_SELF =         "You have initiated a vote to kick |cFFFFFF<<1>>|r from the group...",
     SI_LUIE_CA_GROUPFINDER_QUEUE_END =                   "Du bist nicht länger im Gruppenfinder eingeschrieben.",
     SI_LUIE_CA_GROUPFINDER_QUEUE_START =                 "Du bist jetzt im Gruppenfinder eingeschrieben.",
     SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY =        "Dein |cFFFFFF<<1>>|r ist bereit.",
