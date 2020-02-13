@@ -446,6 +446,7 @@ LUIE.Data.Tooltips = {
     Set_Shadowrend                                  = GetString(SI_LUIE_SKILL_SET_SHADOWREND_TP),
     Set_Spawn_of_Mephala                            = GetString(SI_LUIE_SKILL_SET_SPAWN_OF_MEPHALA_TP),
     Set_Stormfist                                   = GetString(SI_LUIE_SKILL_SET_STORMFIST_TP),
+    Skill_Stormfist_Ground                          = GetString(SI_LUIE_SKILL_STORMFIST_GROUND_TP),
     Set_Engine_Guardian_Stamina                     = zo_strformat(GetString(SI_LUIE_SKILL_SET_ENGINE_GUARDIAN), GetString(SI_COMBATMECHANICTYPE6)),
     Set_Engine_Guardian_Magicka                     = zo_strformat(GetString(SI_LUIE_SKILL_SET_ENGINE_GUARDIAN), GetString(SI_COMBATMECHANICTYPE0)),
     Set_The_Troll_King                              = GetString(SI_LUIE_SKILL_SET_THE_TROLL_KING_TP),
@@ -487,6 +488,7 @@ LUIE.Data.Tooltips = {
 
     -- Light / Medium / Heavy Sets
     Set_Bahrahas_Curse                              = GetString(SI_LUIE_SKILL_SET_BAHRAHAS_CURSE_TP),
+    Skill_Bahrahas_Curse_Ground                     = GetString(SI_LUIE_SKILL_BAHRAHAS_CURSE_GROUND_TP),
     Set_Briarheart                                  = GetString(SI_LUIE_SKILL_SET_BRIARHEART_TP),
     Set_Unfathomable_Darknesss                      = GetString(SI_LUIE_SKILL_SET_UNFATHOMABLE_DARKNESS_TP),
     Set_Storm_Knight                                = GetString(SI_LUIE_SKILL_SET_STORM_KNIGHT_TP),
@@ -506,7 +508,9 @@ LUIE.Data.Tooltips = {
     Set_Hagravens_Garden                            = GetString(SI_LUIE_SKILL_SET_HAGRAVENS_GARDEN),
     Set_Jolting_Arms                                = GetString(SI_LUIE_SKILL_SET_JOLTING_ARMS),
     Set_Leeching_Plate                              = GetString(SI_LUIE_SKILL_SET_LEECHING_PLATE_TP),
+    Skill_Leeching_Plate_Ground                     = GetString(SI_LUIE_SKILL_LEECHING_PLATE_GROUND_TP),
     Set_Hand_of_Mephala                             = GetString(SI_LUIE_SKILL_SET_HAND_OF_MEPHALA_TP),
+    Skill_Hand_of_Mephala_Ground                    = GetString(SI_LUIE_SKILL_HAND_OF_MEPHALA_GROUND_TP),
     Set_Hollowfang_Thirst                           = GetString(SI_LUIE_SKILL_HOLLOWFANG_THIRST_TP),
     Set_Touch_of_Zen                                = GetString(SI_LUIE_SKILL_TOUCH_OF_ZEN_TP),
     Set_Blight_Seed                                 = GetString(SI_LUIE_SKILL_SET_BLIGHT_SEED_TP),
@@ -631,6 +635,7 @@ LUIE.Data.Tooltips = {
     Skill_Siphoning_Attacks                         = GetString(SI_LUIE_SKILL_SIPHONING_ATTACKS_TP),
     Skill_Soul_Tether                               = GetString(SI_LUIE_SKILL_SOUL_TETHER_TP),
     Skill_Power_Extraction                          = GetString(SI_LUIE_SKILL_POWER_EXTRACTION_TP),
+    Skill_Refreshing_Path_Ground                    = GetString(SI_LUIE_SKILL_REFRESHING_PATH_GROUND),
 
     -- Sorcerer
     Skill_Persistence_Rank_1                        = zo_strformat(GetString(SI_LUIE_SKILL_PERSISTENCE), 7),
@@ -676,6 +681,8 @@ LUIE.Data.Tooltips = {
     Skill_Intercept                                 = GetString(SI_LUIE_SKILL_INTERCEPT_TP),
     Skill_Overload                                  = GetString(SI_LUIE_SKILL_OVERLOAD_TP),
     Skill_Energy_Overload                           = GetString(SI_LUIE_SKILL_ENERGY_OVERLOAD_TP),
+    Skill_Suppression_Field_Stun                    = GetString(SI_LUIE_SKILL_SUPPRESSION_FIELD_STUN),
+    Skill_Suppression_Field_Silence                 = GetString(SI_LUIE_SKILL_SUPPRESSION_FIELD_SILENCE),
 
     -- Templar
     Skill_Spear_Shards                              = GetString(SI_LUIE_SKILL_SPEAR_SHARDS_TP),
@@ -739,6 +746,7 @@ LUIE.Data.Tooltips = {
     Skill_Frozen_Retreat                            = GetString(SI_LUIE_SKILL_FROZEN_RETREAT_TP),
     Skill_Sleet_Storm                               = GetString(SI_LUIE_SKILL_SLEET_STORM_TP),
     Skill_Permafrost                                = GetString(SI_LUIE_SKILL_PERMAFROST_TP),
+    Skill_Permafrost_Ground                         = GetString(SI_LUIE_SKILL_PERMAFROST_GROUND_TP),
     Skill_Arctic_Wind                               = GetString(SI_LUIE_SKILL_ARCTIC_WIND_TP),
     Skill_Arctic_Blast                              = GetString(SI_LUIE_SKILL_ARCTIC_BLAST_TP),
     Skill_Arctic_Blast_Ground                       = GetString(SI_LUIE_SKILL_ARCTIC_BLAST_GROUND_TP),
@@ -746,7 +754,6 @@ LUIE.Data.Tooltips = {
     -- Necromancer
     Skill_Reusable_Parts_Rank_1                     = zo_strformat(GetString(SI_LUIE_SKILL_REUSABLE_PARTS_TP), 12),
     Skill_Reusable_Parts_Rank_2                     = zo_strformat(GetString(SI_LUIE_SKILL_REUSABLE_PARTS_TP), 25),
-
     Skill_Flame_Skull                               = GetString(SI_LUIE_SKILL_FLAME_SKULL_TP),
     Skill_Ricochet_Skull                            = GetString(SI_LUIE_SKILL_RICOCHET_SKULL_TP),
     Skill_Blastbones                                = GetString(SI_LUIE_SKILL_BLASTBONES_TP),
@@ -838,6 +845,12 @@ LUIE.Data.Tooltips = {
     Skill_U_Wall_of_Elements_Fire                   = GetString(SI_LUIE_SKILL_UWOE_FIRE_TP),
     Skill_U_Wall_of_Elements_Frost                  = GetString(SI_LUIE_SKILL_UWOE_FROST_TP),
     Skill_U_Wall_of_Elements_Shock                  = GetString(SI_LUIE_SKILL_UWOE_SHOCK_TP),
+    Skill_Wall_of_Elements_Ground_Fire              = GetString(SI_LUIE_SKILL_WALL_OF_ELEMENTS_GROUND_FIRE),
+    Skill_Wall_of_Elements_Ground_Shock             = GetString(SI_LUIE_SKILL_WALL_OF_ELEMENTS_GROUND_SHOCK),
+    Skill_Wall_of_Elements_Ground_Frost             = GetString(SI_LUIE_SKILL_WALL_OF_ELEMENTS_GROUND_FROST),
+    Skill_U_Wall_of_Elements_Ground_Fire            = GetString(SI_LUIE_SKILL_U_WALL_OF_ELEMENTS_GROUND_FIRE),
+    Skill_U_Wall_of_Elements_Ground_Shock           = GetString(SI_LUIE_SKILL_U_WALL_OF_ELEMENTS_GROUND_SHOCK),
+    Skill_U_Wall_of_Elements_Ground_Frost           = GetString(SI_LUIE_SKILL_U_WALL_OF_ELEMENTS_GROUND_FROST),
     Skill_Flame_Touch                               = GetString(SI_LUIE_SKILL_FLAME_TOUCH_TP),
     Skill_Flame_Touch_Alt                           = GetString(SI_LUIE_SKILL_FLAME_TOUCH_ALT_TP),
     Skill_Shock_Touch                               = GetString(SI_LUIE_SKILL_SHOCK_TOUCH_TP),
@@ -854,6 +867,7 @@ LUIE.Data.Tooltips = {
     Skill_Eye_of_Flame                              = zo_strformat(GetString(SI_LUIE_SKILL_EYE_OF_THE_STORM_TP), GetString(SI_DAMAGETYPE3)),
     Skill_Eye_of_Lightning                          = zo_strformat(GetString(SI_LUIE_SKILL_EYE_OF_THE_STORM_TP), GetString(SI_DAMAGETYPE4)),
     Skill_Eye_of_Frost                              = zo_strformat(GetString(SI_LUIE_SKILL_EYE_OF_THE_STORM_TP), GetString(SI_DAMAGETYPE6)),
+
 
     -- Restoration Staff
     Skill_Grand_Healing                             = GetString(SI_LUIE_SKILL_GRAND_HEALING),
@@ -904,6 +918,7 @@ LUIE.Data.Tooltips = {
     Skill_Bat_Swarm                                 = GetString(SI_LUIE_SKILL_BAT_SWARM_TP),
     Skill_Clouding_Swarm                            = GetString(SI_LUIE_SKILL_CLOUDING_SWARM_TP),
     Skill_Devouring_Swarm                           = GetString(SI_LUIE_SKILL_DEVOURING_SWARM_TP),
+    Skill_Devouring_Swarm_Ground                    = GetString(SI_LUIE_SKILL_DEVOURING_SWARM_GROUND_TP),
 
     -- Werewolf
     Skill_Sanies_Lupinus                            = GetString(SI_LUIE_SKILL_SANIES_LUPINUS_TP),
@@ -1028,9 +1043,11 @@ LUIE.Data.Tooltips = {
     Skill_AvA_Sanctuary                             = GetString(SI_LUIE_SKILL_AVA_SANCTUARY_TP),
     Skill_Lightning_Ballista_Bolt                   = GetString(SI_LUIE_SKILL_LIGHTNING_BALLISTA_BOLT_TP),
     Skill_Meatbag_Catapult                          = GetString(SI_LUIE_SKILL_MEATBAG_CATAPULT_TP),
+    Skill_Meatbag_Catapult_AOE                      = GetString(SI_LUIE_SKILL_MEATBAG_CATAPULT_AOE_TP),
     Skill_Meatbag_Catapult_Ground                   = GetString(SI_LUIE_SKILL_MEATBAG_CATAPULT_GROUND_TP),
     Skill_Oil_Catapult_Ground                       = GetString(SI_LUIE_SKILL_OIL_CATAPULT_GROUND_TP),
     Skill_Scattershot_Catapult                      = GetString(SI_LUIE_SKILL_SCATTERSHOT_CATAPULT_TP),
+    Skill_Scattershot_Catapult_AOE                  = GetString(SI_LUIE_SKILL_SCATTERSHOT_CATAPULT_AOE_TP),
     Skill_Scattershot_Catapult_Ground               = GetString(SI_LUIE_SKILL_SCATTERSHOT_CATAPULT_GROUND_TP),
     Skill_Guard_Detection                           = GetString(SI_LUIE_SKILL_GUARD_DETECTION_TP),
     Skill_Blessing_of_War                           = GetString(SI_LUIE_SKILL_BLESSING_OF_WAR_TP),
@@ -1041,6 +1058,7 @@ LUIE.Data.Tooltips = {
     Skill_Lethal_Arrow_Cyrodiil                     = GetString(SI_LUIE_SKILL_LETHAL_ARROW_CYRODIIL_TP),
     Skill_Siege_Shield_Cyrodiil                     = GetString(SI_LUIE_SKILL_SIEGE_SHIELD_CYRODIIL_TP),
     Skill_Power_Bash_Cyrodiil                       = GetString(SI_LUIE_SKILL_POWER_BASH_CYRODIIL_TP),
+    Skill_Rune_Focus_Cyrodiil                       = GetString(SI_LUIE_SKILL_RUNE_FOCUS_CYRODIIL_TP),
 
     Skill_Elder_Scroll_Altadoon                     = zo_strformat(GetString(SI_LUIE_SKILL_ELDER_SCROLL_TP), GetAbilityName(15177)),
     Skill_Elder_Scroll_Mnem                         = zo_strformat(GetString(SI_LUIE_SKILL_ELDER_SCROLL_TP), GetAbilityName(15178)),
@@ -1349,39 +1367,10 @@ LUIE.Data.Tooltips = {
     -- Frostvault
     Skill_Maim                                      = GetString(SI_LUIE_SKILL_MAIM_NPC_TP),
 
-    -- TODO: MOVE LATER
-
-    Skill_Bahrahas_Curse_Ground                     = GetString(SI_LUIE_SKILL_BAHRAHAS_CURSE_GROUND_TP),
-    Skill_Leeching_Plate_Ground                     = GetString(SI_LUIE_SKILL_LEECHING_PLATE_GROUND_TP),
-
-    Skill_Hand_of_Mephala_Ground                    = GetString(SI_LUIE_SKILL_HAND_OF_MEPHALA_GROUND_TP),
-
-    Skill_Stormfist_Ground                          = GetString(SI_LUIE_SKILL_STORMFIST_GROUND_TP),
-
-
-    Skill_Permafrost_Ground                         = GetString(SI_LUIE_SKILL_PERMAFROST_GROUND_TP),
-
-    Skill_Refreshing_Path_Ground                    = GetString(SI_LUIE_SKILL_REFRESHING_PATH_GROUND),
-
-    Skill_Suppression_Field_Stun                    = GetString(SI_LUIE_SKILL_SUPPRESSION_FIELD_STUN),
-    Skill_Suppression_Field_Silence                 = GetString(SI_LUIE_SKILL_SUPPRESSION_FIELD_SILENCE),
-
-    Skill_Wall_of_Elements_Ground_Fire              = GetString(SI_LUIE_SKILL_WALL_OF_ELEMENTS_GROUND_FIRE),
-    Skill_Wall_of_Elements_Ground_Shock             = GetString(SI_LUIE_SKILL_WALL_OF_ELEMENTS_GROUND_SHOCK),
-    Skill_Wall_of_Elements_Ground_Frost             = GetString(SI_LUIE_SKILL_WALL_OF_ELEMENTS_GROUND_FROST),
-
-    Skill_U_Wall_of_Elements_Ground_Fire            = GetString(SI_LUIE_SKILL_U_WALL_OF_ELEMENTS_GROUND_FIRE),
-    Skill_U_Wall_of_Elements_Ground_Shock           = GetString(SI_LUIE_SKILL_U_WALL_OF_ELEMENTS_GROUND_SHOCK),
-    Skill_U_Wall_of_Elements_Ground_Frost           = GetString(SI_LUIE_SKILL_U_WALL_OF_ELEMENTS_GROUND_FROST),
-
-    Skill_Devouring_Swarm_Ground                    = GetString(SI_LUIE_SKILL_DEVOURING_SWARM_GROUND_TP),
-
-    Skill_Meatbag_Catapult_AOE                      = GetString(SI_LUIE_SKILL_MEATBAG_CATAPULT_AOE_TP),
-    Skill_Scattershot_Catapult_AOE                  = GetString(SI_LUIE_SKILL_SCATTERSHOT_CATAPULT_AOE_TP),
-    Skill_Rune_Focus_Cyrodiil                       = GetString(SI_LUIE_SKILL_RUNE_FOCUS_CYRODIIL_TP),
 }
 
---[[ Possibly use these at some point
+--[[
+Possibly use these at some point
 
 function LUIE.ProcessTooltipType(input, tooltip)
     -- dummy func, maybe use
@@ -1404,25 +1393,13 @@ DT[20299]                                     = function()
                                                 return tooltip
                                     end
 
-
-
-
 if DT[abilityId] then
 DT[abilityId]()
-
-Q.QuestItemModifyOnAdd[itemId]()
-
 ]]--
 
 --[[
-function GLOBALSCRIPT()
-
     local itemLink           = '|H1:item:71252:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'
-
     local abilityDescription           = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71252:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-
     d(abilityDescription)
-
-en]]--
-
---zo_strformat(GetString(SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST), string.sub( GetAbilityDescription(75745):gsub("[^0-9]", ""), 0, -3) )
+    zo_strformat(GetString(SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST), string.sub( GetAbilityDescription(75745):gsub("[^0-9]", ""), 0, -3) )
+]]--

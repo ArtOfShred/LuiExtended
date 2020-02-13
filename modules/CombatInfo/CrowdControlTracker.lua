@@ -415,8 +415,6 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
             return
         end
 
-        -- TODO: This entire block needs updated with better criteria (once we separate aoes into the proper categories)
-
         -- PlaySoundAoe
         CrowdControlTracker.PlaySoundAoe(abilityId)
 
@@ -451,7 +449,7 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
 
     -- if result~=ACTION_RESULT_EFFECT_GAINED_DURATION and result~=ACTION_RESULT_STUNNED and result~=ACTION_RESULT_FEARED and result~=ACTION_RESULT_STAGGERED and result~=ACTION_RESULT_IMMUNE and result~=ACTION_RESULT_DISORIENTED then return end
 
-    if abilityName == "Hiding Spot" then -- TODO: Put ID here instead or add to blacklist instead
+    if abilityName == "Hiding Spot" then -- TODO 1B: Put ID here instead or add to blacklist instead
         return
     end
 

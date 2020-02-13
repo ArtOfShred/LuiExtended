@@ -11,7 +11,6 @@ end
 
 -- Return a formatted time
 -- Stolen from pChat, thanks @Ayantir
--- TODO: use ZOS functions instead
 function LUIE.CreateTimestamp(timeStr, formatStr)
     local formatStr = formatStr or LUIE.ChatAnnouncements.SV.TimeStampFormat
 

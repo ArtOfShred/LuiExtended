@@ -76,7 +76,6 @@ LUIE.Data.CombatTextConstants = {
         [ACTION_RESULT_INTERRUPT]           = true,
     },
     -- Crowd Control
-    -- TODO: WHAT IS ACTION RESULT FOR SNARE AND IMMOBILIZE?? ROOTED DOES NOT WORK
     isDisoriented = {
         [ACTION_RESULT_DISORIENTED]         = true,
     },

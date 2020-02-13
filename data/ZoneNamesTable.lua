@@ -4,7 +4,6 @@
 --]]
 
 LUIE.Data.ZoneNames = {
-    -- TODO: MAYBE in the future can localize these names, for the time being this table exists for that purpose.
 
     ----------------------------------------------------------------
     -- ALDMERI DOMINION --------------------------------------------

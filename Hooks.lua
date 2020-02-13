@@ -356,13 +356,6 @@ function LUIE.InitializeHooks()
                             tooltipText = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltip) and zo_strformat(LUIE.Data.Effects.EffectOverride[abilityId].tooltip, timer, value2, value3) or GetAbilityDescription(abilityId)
                         end
 
-                        -- Use default tooltip - temp if needed (TODO: Remove when all base ability/set tooltips are updated)
-                        if tooltipText == "" or tooltipText == nil then
-                            if GetAbilityEffectDescription(buffSlot) ~= "" then
-                                tooltipText = GetAbilityEffectDescription(buffSlot)
-                            end
-                        end
-
                         if LUIE.Data.Effects.TooltipUseDefault[abilityId] then
                             if GetAbilityEffectDescription(buffSlot) ~= "" then
                                 tooltipText = GetAbilityEffectDescription(buffSlot)

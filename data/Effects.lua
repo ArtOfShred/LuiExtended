@@ -12602,7 +12602,7 @@ Effects.MapDataOverride = {
     -- TUTORIAL AREAS
 
     [11338] = { -- In Lava
-        [608] = { name = Abilities.Skill_Flames, icon = 'LuiExtended/media/icons/abilities/ability_trap_fire.dds' }, -- Vvardenfell Tutorial Area -- TODO: GET ID FOR ZONE
+        [608] = { name = Abilities.Skill_Flames, icon = 'LuiExtended/media/icons/abilities/ability_trap_fire.dds' }, -- Vvardenfell Tutorial Area -- TODO 1A: GET ID FOR ZONE
     },
 
     -- ALDMERI DOMINION

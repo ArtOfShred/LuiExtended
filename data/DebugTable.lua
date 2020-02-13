@@ -647,7 +647,7 @@ LUIE.DebugAuras = {
     [61298] = true, -- Food: MS, SmBread
     [61301] = true, -- Food: H, Meal
     [61302] = true, -- Food: H, Soup
-    --[61303] = true, -- Food: H, Bread -- TODO: Probably unused
+    --[61303] = true, -- Food: H, Bread -- Probably Unused
     [61304] = true, -- Food: H, SmBread
     [61305] = true, -- Food: H, Meat
     [61307] = true, -- Food: M, Meal
@@ -665,15 +665,15 @@ LUIE.DebugAuras = {
     [65536] = true, -- Food: HSM, Pie
     [66550] = true, -- Food: H, Meal
     [66565] = true, -- Food: H, SmBread
-    --[66566] = true, -- Food: H, Meat -- TODO: Probably unused
+    --[66566] = true, -- Food: H, Meat -- Probably Unused
     [66569] = true, -- Food: M, Meal
     [66570] = true, -- Food: M, Soup
-    --[66572] = true, -- Food: M, SmBread -- TODO: Probably unused
+    --[66572] = true, -- Food: M, SmBread -- Probably Unused
     [66577] = true, -- Food: S, Meal
     [66578] = true, -- Food: S, Soup
-    --[66580] = true, -- Food: S, SmBread -- TODO: Probably unused
-    --[66584] = true, -- Food: M, Pie -- TODO: Probably unused
-    --[66585] = true, -- Food: H, Pie -- TODO: Probably unused
+    --[66580] = true, -- Food: S, SmBread -- Probably Unused
+    --[66584] = true, -- Food: M, Pie -- Probably Unused
+    --[66585] = true, -- Food: H, Pie -- Probably Unused
 
     -------------------------------------
     -- MISC CONSUMABLES -----------------

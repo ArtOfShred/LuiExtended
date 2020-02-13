@@ -51,7 +51,6 @@ LUIE.Data.AlertTable = {
 
     -- OTHER MODIFIERS
     -- refire = "x" -- refire duration
-    -- skipcheck = true -- display on any event fired rather than just event started -- TODO: DEPRICATE THIS
     -- ignoreRefresh = true -- gnores refresh event here
     -- neverShowInterrupt = true -- Never show an interrupt event here
     -- effectOnlyInterrupt = true -- Show an interrupt only when this effect fades early off a unit. Used for abilities that a target casts on another target.
@@ -131,7 +130,7 @@ LUIE.Data.AlertTable = {
     [44301] = { dodge = true, priority = 3, auradetect = true , ignoreRefresh = true, cc = SNARE }, -- Trap Beast (Pet Ranger)
 
     [15164] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Heat Wave (Fire Mage)
-    -- TODO: Possibly add event alert for this, and add all bosses below to 15164 as well as -- Unitnames.Boss_Akezel
+    -- Possibly add event alert for Heat Wave, and add all bosses below as well as -- Unitnames.Boss_Akezel
     [47095] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 2000, postCast = 4000, bossMatch = { Unitnames.Boss_Calixte_Darkblood, Unitnames.Boss_Angata_the_Clannfear_Handler, Unitnames.Boss_Keeper_Areldur } }, -- Fire Rune (Fire Mage)
 
     [29471] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1800 }, -- Thunder Thrall (Storm Mage)
@@ -702,7 +701,7 @@ LUIE.Data.AlertTable = {
     [28723] = { avoid = true, priority = 2, eventdetect = true, refire = 500 }, -- Gravity Well (Manifestation of Terror)
 
     -- MSQ 4 (Castle of the Worm)
-    [34484] = { block = true, avoid = true, priority = 2, skipcheck = true, refire = 500 }, -- Soul Cage (Mannimarco)
+    [34484] = { block = true, avoid = true, priority = 2,s refire = 500 }, -- Soul Cage (Mannimarco)
 
     -- MSQ 6 (Halls of Torment)
     [36858] = { interrupt = true, avoid = true, priority = 2, eventdetect = true, refire = 1500 }, -- Swordstorm (Tharn Doppleganger)
@@ -776,7 +775,7 @@ LUIE.Data.AlertTable = {
     [87038] = { block = true, dodge = true, priority = 2, bs = true}, -- Spinning Blades (Divine Restoration)
     [87047] = { block = true, dodge = true, priority = 2, refire = 1500 }, -- Lunge (Divine Restoration)
     [87090] = { block = true, dodge = true, priority = 2}, -- Barbs (Divine Restoration)
-    [90616] = { block = true, avoid = true, priority = 2, refire = 10000, skipcheck = true}, -- Divine Hijack (Divine Restoration)
+    [90616] = { block = true, avoid = true, priority = 2, refire = 10000 }, -- Divine Hijack (Divine Restoration)
 
     -- Sidequests
     [92720] = { block = true, avoid = true, priority = 2}, -- Necrotic Wave (Ancestral Adversity)

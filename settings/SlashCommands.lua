@@ -168,7 +168,7 @@ function SlashCommands.CreateSettings()
                 default = Defaults.SlashReport,
             },
             {
-                -- TODO
+                -- /Home Alert -- TODO
                 type = "checkbox",
                 name = "/Home Results - Show Alert (Temp Setting)",
                 tooltip = "Display an alert when the /home command is used.\nNote: This setting will be deprecated in the future when Social Errors Events are implemented in Chat Announcements.",
@@ -178,7 +178,7 @@ function SlashCommands.CreateSettings()
                 default = LUIE.Defaults.TempAlertHome,
             },
             {
-                -- TODO
+                -- /Campaign Results Alert -- TODO
                 type = "checkbox",
                 name = "/Campaign Results - Show Alert (Temp Setting)",
                 tooltip = "Display an alert when the /campaign command is used.\nNote: This setting will be deprecated in the future when Campaign Queue Events are implemented in Chat Announcements.",
@@ -188,7 +188,7 @@ function SlashCommands.CreateSettings()
                 default = LUIE.Defaults.TempAlertCampaign,
             },
             {
-                -- TODO
+                -- /Outfit Alert -- TODO
                 type = "checkbox",
                 name = "/Outfit - Show Alert (Temp Setting)",
                 tooltip = "Display an alert when the /outfit command is used.\nNote: This setting will be deprecated in the future when Outfit Alerts are implemented in Chat Announcements.",
