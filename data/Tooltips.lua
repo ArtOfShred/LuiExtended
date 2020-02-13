@@ -701,6 +701,7 @@ LUIE.Data.Tooltips = {
     Skill_Cleansing_Ritual                          = GetString(SI_LUIE_SKILL_CLEANSING_RITUAL_TP),
     Skill_Ritual_of_Retribution                     = GetString(SI_LUIE_SKILL_CLEANSING_RITUAL_RETRIBUTION_TP),
     Skill_Rite_of_Passage                           = GetString(SI_LUIE_SKILL_RITE_OF_PASSAGE_TP),
+    Skill_Sacred_Ground                             = GetString(SI_LUIE_SKILL_SACRED_GROUND_TP),
 
     -- Warden
     Skill_Cutting_Dive                              = GetString(SI_LUIE_SKILL_CUTTING_DIVE_TP),

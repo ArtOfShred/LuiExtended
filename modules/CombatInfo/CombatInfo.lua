@@ -248,6 +248,7 @@ local g_ultimateFont -- Font for Ultimate Percentage Label
 local g_castbarFont -- Font for Castbar Label & Timer
 local g_ProcSound -- Proc Sound
 local g_boundArmamentsPlayed  = false -- Specific variable to lockout Bound Armaments from playing a proc sound at 5 stacks to only once per 5 seconds.
+local g_disableProcSound      = {} -- When we play a proc sound from a bar ability changing (like power lash) we put a 3 sec ICD on it so it doesn't spam when mousing on/off a target, etc
 
 -- Quickslot
 local uiQuickSlot   = {
@@ -1738,9 +1739,12 @@ function CombatInfo.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
         if CombatInfo.SV.ShowTriggered then
             CombatInfo.PlayProcAnimations(slotNum)
             if CombatInfo.SV.ProcEnableSound then
-                if not wasfullUpdate then
+                if not wasfullUpdate and not g_disableProcSound[slotNum] then
                     PlaySound(g_procSound)
                     PlaySound(g_procSound)
+                    -- Only play a proc sound every 3 seconds (matches Power Lash cd)
+                    g_disableProcSound[slotNum] = true
+                    zo_callLater(function() g_disableProcSound[slotNum] = false end, 3000)
                 end
             end
         end

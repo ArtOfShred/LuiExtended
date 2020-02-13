@@ -2246,7 +2246,7 @@ LUIE.DebugAuras = {
     [47350] = true, -- Bastion of the Heartland (of the Heartland)
 
     [32737] = true, -- The Juggernaut (of the Juggernaut)
-    --[34512] = true, -- The Juggernaut (of the Juggernaut)
+    [34512] = true, -- The Juggernaut (of the Juggernaut)
 
     [129364] = true, -- Battle Hardened (of the Potentates)
     [47356] = true, -- Blessing of the Potentates (of the Potentates)
@@ -3882,6 +3882,7 @@ LUIE.DebugAuras = {
     [27787] = true, -- Controlled Fury Cost (Overload - Heavy Attack)
     [24798] = true, -- Overload Heavy Attack (Overload - Heavy Attack)
     [119624] = true, -- Remove Overload (Overload - Heavy Attack)
+    [132865] = true, -- Remove Overload (Overload - Heavy Attack)
 
     [24806] = true, -- Power Overload (Power Overload)
     [24808] = true, -- Overload End (Power Overload)
@@ -3891,6 +3892,7 @@ LUIE.DebugAuras = {
     [28433] = true, -- Controlled Fury Cost (Power Overload - Heavy Attack)
     [24811] = true, -- Power Overload Heavy Attack (Power Overload - Heavy Attack)
     [28434] = true, -- Remove Overload (Power Overload - Heavy Attack)
+    [132866] = true, -- Remove Overload (Power Overload - Heavy Attack)
 
     [24804] = true, -- Energy Overload (Energy Overload)
     [24805] = true, -- Overload End (Energy Overload)
@@ -3901,6 +3903,7 @@ LUIE.DebugAuras = {
     [114798] = true, -- Energy Overload Heavy Attack (Energy Overload - Heavy Attack)
     [29740] = true, -- Energy Overload (Energy Overload)
     [114800] = true, -- Remove Overload (Energy Overload - Heavy Attack)
+    [132867] = true, -- Remove Overload (Energy Overload - Heavy Attack)
 
     -------------------------------------
     -- TEMPLAR PASSIVES -----------------
@@ -3941,11 +3944,11 @@ LUIE.DebugAuras = {
     [45206] = true, -- Mending (Rank 2)
     [31757] = true, -- Sacred Ground (Rank 1)
     [45207] = true, -- Sacred Ground (Rank 2)
-    [31759] = true, -- Major Mending
-    [77082] = true, -- Major Mending
-    [80195] = true, -- Sacred Ground
-    [80230] = true, -- Sacred Ground
-    [80261] = true, -- Sacred Ground
+    [31759] = true, -- Sacred Ground
+    [77082] = true, -- Sacred Ground
+    [134626] = true, -- Minor Mending
+    [134627] = true, -- Minor Mending
+
     [31760] = true, -- Light Weaver (Rank 1)
     [45208] = true, -- Light Weaver (Rank 2)
     [52703] = true, -- Light Weaver Ultimate
@@ -5157,6 +5160,7 @@ LUIE.DebugAuras = {
 
     [38814] = true, -- Dizzying Swing (Dizzying Swing)
     [131562] = true, -- Off Balance (Dizzying Swing)
+    [137807] = true, -- Dizzying Swing (Dizzying Swing)
 
     [38807] = true, -- Wrecking Blow (Wrecking Blow)
 
@@ -7558,6 +7562,16 @@ LUIE.DebugAuras = {
     [82703] = true, -- Run Away! -- Humanoid NPC's
     [18386] = true, -- Run Away! -- NPC (Mostly Creatures)
     [14249] = true, -- Surround -- NPC (Mostly Animals)
+    [134998] = true, -- Surround -- NPC (Mostly Animals)
+    [135000] = true, -- Surround -- NPC (Mostly Animals)
+    [135001] = true, -- Surround -- NPC (Mostly Animals)
+    [135002] = true, -- Surround -- NPC (Mostly Animals)
+    [135003] = true, -- Surround -- NPC (Mostly Animals)
+    [135011] = true, -- Surround -- NPC (Mostly Animals)
+    [135012] = true, -- Surround -- NPC (Mostly Animals)
+    [135013] = true, -- Surround -- NPC (Mostly Animals)
+    [135014] = true, -- Surround -- NPC (Mostly Animals)
+    [135015] = true, -- Surround -- NPC (Mostly Animals)
 
     -- STANDARD NPC ABILITIES
     [2874] = true, -- Staggered
@@ -8883,12 +8897,16 @@ LUIE.DebugAuras = {
     [85656] = true, -- Harry -- Dire Wolf
     [76312] = true, -- Harry -- Dire Wolf
     [76313] = true, -- Harry -- Dire Wolf
+    [76317] = true, -- Harry -- Dire Wolf
     [80568] = true, -- Harry -- Dire Wolf
     [80569] = true, -- Harry -- Dire Wolf
     [80570] = true, -- Harry -- Dire Wolf
     [80571] = true, -- Harry -- Dire Wolf
-    [76317] = true, -- Harry -- Dire Wolf
-    [80576] = true, -- Harry Finder -- Dire Wolf
+    [134764] = true, -- Harry -- Dire Wolf
+    [134768] = true, -- Harry -- Dire Wolf
+    [134769] = true, -- Harry -- Dire Wolf
+    [134770] = true, -- Harry -- Dire Wolf
+    [134772] = true, -- Harry -- Dire Wolf
     [76324] = true, -- Baleful Call -- Dire Wolf
     [76322] = true, -- Baleful Call -- Dire Wolf
 

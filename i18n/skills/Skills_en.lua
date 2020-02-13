@@ -427,7 +427,7 @@ local strings = {
     SI_LUIE_SKILL_SURGE_TP =                             "Dealing a Critical Strike heals you. This effect can occur once every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_POWER_SURGE_TP =                       "Activating a Critical Heal causes the ability to heal you and allies within |cFFFFFF18|r meters. This effect can occur once every |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_BOLT_ESCAPE_FATIGUE_TP =               "Consecutive Bolt Escape casts cost |cFFFFFF33|r% more Magicka per stack for the next |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_INTERCEPT_TP =                         "Spell projectiles directed at you will be absorbed by the |cFFFFFFBall of Lightning|r.",
+    SI_LUIE_SKILL_INTERCEPT_TP =                         "A Ball of Lightning absorbs all projectiles directed at you for the next |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_OVERLOAD_TP =                          "Light Attacks are replaced by lightning bolts, dealing Shock Damage, and Heavy Attacks blast enemies in the target area for Shock Damage.\n\nAttacks deplete Ultimate until you run out or the ability is toggled off.",
     SI_LUIE_SKILL_ENERGY_OVERLOAD_TP =                   "Light Attacks are replaced by lightning bolts, dealing Shock Damage, and Heavy Attacks blast enemies in the target area for Shock Damage.\n\nLight and Heavy Attacks restore Magicka.\n\nAttacks deplete Ultimate until you run out or the ability is toggled off.",
     SI_LUIE_SKILL_SUPPRESSION_FIELD_STUN =               "Stunned and taking Magic Damage every |cFFFFFF0.5|r seconds.",
@@ -457,6 +457,7 @@ local strings = {
     SI_LUIE_SKILL_CLEANSING_RITUAL_TP =                  "You and allies in the |cFFFFFF12|r meter radius of sacred light are healed every |cFFFFFF2|r seconds.\n\nAllies in the area can activate the |cFFFFFFPurify|r synergy.",
     SI_LUIE_SKILL_CLEANSING_RITUAL_RETRIBUTION_TP =      "You and allies in the |cFFFFFF12|r meter radius of sacred light are healed every |cFFFFFF2|r seconds, while enemies take Magic Damage every |cFFFFFF2|r seconds.\n\nAllies in the area can activate the |cFFFFFFPurify|r synergy.",
     SI_LUIE_SKILL_RITE_OF_PASSAGE_TP =                   "Healing you and allies within |cFFFFFF20|r meters every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SACRED_GROUND_TP =                     "Increase block mitigation by |cFFFFFF10|r% while standing on Sacred Ground.",
 
     -- Warden
     SI_LUIE_SKILL_BOND_WITH_NATURE =                     "Bond with Nature",
@@ -884,7 +885,7 @@ local strings = {
     SI_LUIE_SKILL_SET_MERIDIAS_FAVOR_TP =                "Restoring |cFFFFFF2325|r Magicka or Stamina, whichever maximum is higher, every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_AURORANS_THUNDER_TP =              "Enemies in a |cFFFFFF10|r meter cone in front of you take Shock Damage every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_TZOGVINS_WARBAND_TP =              "Increase Weapon Critical by |cFFFFFF129|r for |cFFFFFF10|r seconds, stacking up to |cFFFFFF10|r times when you deal Critical Damage.\n\nAt max stacks, you also gain Minor Force.",
-    SI_LUIE_SKILL_SET_FROZEN_WATCHER_TP =                "Nearby enemies take Frost Damage every |cFFFFFF1|r second while you are blocking.\n\nYour blizzard has a |cFFFFFF15|r% chance of inflicting Chilled on enemies damaged.",
+    SI_LUIE_SKILL_SET_FROZEN_WATCHER_TP =                "Enemies within |cFFFFFF6|r meters of you take Frost Damage every |cFFFFFF1|r second while you are blocking.\n\nYour blizzard has a |cFFFFFF15|r% chance of inflicting Chilled on enemies damaged.",
     SI_LUIE_SKILL_MAARSELOK_TP =                         "Afflicted with Disease Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nDeals |cFFFFFF5|r% increased damage for each negative effect on you, up to |cFFFFFF150|r% additional damage.",
     SI_LUIE_SKILL_NERIENETH_TP =                         "After |cFFFFFF2|r seconds the Lich Crystal explodes, dealing Magic Damage to enemies within |cFFFFFF4|r meters of the crystal.",
     SI_LUIE_SKILL_SELLISTRIX_TP =                        "After |cFFFFFF1.5|r seconds the earthquake erupts, dealing Physical Damage to enemies in a |cFFFFFF4|r meter radius and stunning them for |cFFFFFF3|r seconds.",

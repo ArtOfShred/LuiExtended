@@ -572,6 +572,7 @@ local AbilityTables = {
     Skill_Critical_Surge              = 23678,
     Skill_Kick                        = 4125,
     Skill_Entropic_Touch              = 9743,
+    Skill_Intercept                   = 23284,
 
     -- Templar
     Skill_Spear_Wall                  = 31708,

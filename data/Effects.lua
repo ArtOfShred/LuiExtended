@@ -593,6 +593,7 @@ Effects.EffectGroundDisplay = {
     [23182] = { buff = false, debuff = false, ground = true }, -- Lightning Splash (Lightning Splash)
     [23200] = { buff = false, debuff = false, ground = true }, -- Liquid Lightning (Liquid Lightning)
     [23205] = { buff = false, debuff = false, ground = true }, -- Lightning Flood (Lightning Flood)
+    [23279] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_intercept.dds', name = Abilities.Skill_Intercept, buff = true, debuff = false, ground = false }, -- Ball of Lightning (Ball of Lightning)
 
     -- Templar
     [95933] = { icon = 'esoui/art/icons/ability_templar_sun_strike.dds', buff = false, debuff = false, ground = true }, -- Spear Shards (Spear Shards)
@@ -1125,7 +1126,7 @@ Effects.BarHighlightOverride = {
     [23806] = { newId = 23808, secondary = true }, -- Lava Whip --> Off Balance
     [20805] = { newId = 122658 }, -- Molten Whip --> Seething Fury
     [20816] = { newId = 34117, secondary = true }, -- Flame Lash --> Off Balance
-    [20824] = { newId = 34117, secondary = true }, -- Flame Lash --> Off Balance
+    [20824] = { newId = 34117 }, -- Flame Lash --> Off Balance
     [20657] = { newId = 44363 }, -- Searing Strike
     [20668] = { newId = 44369 }, -- Venomous Claw
     [20660] = { newId = 44373 }, -- Burning Embers
@@ -2489,6 +2490,10 @@ Effects.EffectHideSCT = {
     [47159] = true, -- Suppression Field
     [47168] = true, -- Absorption Field
     [47167] = true, -- Absorption Field
+
+    [24799] = true, -- Overload End
+    [24808] = true, -- Overload End
+    [24805] = true, -- Overload End
 
     ----------------------------
     -- Templar
@@ -3918,7 +3923,7 @@ Effects.EffectOverride = {
     [111445] = { icon = 'esoui/art/icons/achievement_u23_natureswrath_blue.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Ursus's Blessing (Haven of Ursus)
     [111221] = { tooltip = Abilities.Set_Jailers_Tenacity }, -- Major Vitality (Jailer's Tenacity)
     [116805] = { tooltip = Abilities.Set_Mighty_Glacier }, -- Major Resolve (Mighty Glacier)
-    [117082] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds', forcedContainer = 'short', tooltip = Tooltips.Set_Frozen_Watcher }, -- Frozen Watcher (Frozen Watcher)
+    [117082] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds', tooltip = Tooltips.Set_Frozen_Watcher }, -- Frozen Watcher (Frozen Watcher)
     [117060] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds' }, -- Frozen Watcher (Frozen Watcher)
 
     [126535] = { icon = 'esoui/art/icons/achievement_u23_dun1_killmonstersa.dds', tooltip = Tooltips.Set_Renalds_Resolve }, -- Resolve (Renald's)
@@ -4941,20 +4946,16 @@ Effects.EffectOverride = {
     [28482] = { tooltip = Tooltips.Generic_Stun }, -- Streak (Streak)
     [131383] = { icon = 'esoui/art/icons/ability_sorcerer_ball_of_lightning.dds', tooltip = Tooltips.Innate_Snare_Immobilize_Immunity }, -- Ball of Lightning (Ball of Lightning)
     [23283] = { hide = true }, -- Summoned Ball of Lightning (Ball of Lightning)
-    [23284] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_intercept.dds', duration = 0, forcedContainer = 'short', tooltip = Tooltips.Skill_Intercept, groundLabel = true }, -- Intercept (Ball of Lightning)
-    [23279] = { hide = true }, -- Ball of Lightning (Ball of Lightning)
+    [23279] = { hide = true, tooltip = Tooltips.Skill_Intercept }, -- Ball of Lightning (Ball of Lightning)
     [23278] = { tooltip = Tooltips.Generic_Stun }, -- Ball of Lightning (Ball of Lightning)
 
     -- Overload / Power Overload / Energy Overload
     [24785] = { tooltip = Tooltips.Skill_Overload }, -- Overload (Overload)
-    [119624] = { hide = true }, -- Remove Overload (Overload - Heavy Attack)
     [24806] = { tooltip = Tooltips.Skill_Overload }, -- Power Overload (Power Overload)
     [114769] = { icon = 'esoui/art/icons/ability_sorcerer_power_overload.dds' }, -- Power Overload Light Attack (Power Overload)
-    [28434] = { hide = true }, -- Remove Overload (Power Overload - Heavy Attack)
     [24804] = { tooltip = Tooltips.Skill_Energy_Overload }, -- Energy Overload (Energy Overload)
     [114773] = { icon = 'esoui/art/icons/ability_sorcerer_energy_overload.dds' }, -- Energy Overload Light Attack (Energy Overload)
     [29740] = { icon = 'esoui/art/icons/ability_sorcerer_energy_overload.dds' }, -- Energy Overload (Energy Overload)
-    [114800] = { hide = true }, -- Remove Overload (Energy Overload - Heavy Attack)
 
     ----------------------------------------------------------------
     -- TEMPLAR PASSIVES --------------------------------------------
@@ -4981,11 +4982,13 @@ Effects.EffectOverride = {
     -- Restoring Light
     [31757] = { icon = 'esoui/art/icons/ability_templar_032.dds' }, -- Sacred Ground
     [45207] = { icon = 'esoui/art/icons/ability_templar_032.dds' }, -- Sacred Ground
-    [31759] = { duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = Abilities.Skill_Sacred_Ground }, -- Minor Mending (Sacred Ground - Rank 1 & 2)
-    [77082] = { duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = Abilities.Skill_Sacred_Ground }, -- Minor Mending (Sacred Ground - Rank 1 & 2)
-    [80195] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 40 }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
-    [80230] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 40 }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
-    [80261] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 40 }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
+    [31759] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', forcedContainer = 'short', groundLabel = true, tooltip = Tooltips.Skill_Sacred_Ground }, -- Minor Mending (Sacred Ground - Rank 1 & 2)
+    [77082] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', forcedContainer = 'short', groundLabel = true, tooltip = Tooltips.Skill_Sacred_Ground }, -- Minor Mending (Sacred Ground - Rank 1 & 2)
+    [134626] = { forcedContainer = 'short', groundLabel = true, tooltip = Abilities.Skill_Sacred_Ground }, -- Minor Mending (Sacred Ground)
+    [134627] = { forcedContainer = 'short', groundLabel = true, tooltip = Abilities.Skill_Sacred_Ground }, -- Minor Mending (Sacred Ground)
+    --[80195] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 40 }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
+    --[80230] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 40 }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
+    --[80261] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 40 }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
     [31760] = { icon = 'esoui/art/icons/ability_templar_014.dds' }, -- Light Weaver
     [45208] = { icon = 'esoui/art/icons/ability_templar_014.dds' }, -- Light Weaver
     [52703] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_light_weaver.dds', name = Abilities.Passive_Light_Weaver }, -- Light Weaver Ultimate (Light Weaver - Rank 1 & 2)
@@ -5714,6 +5717,7 @@ Effects.EffectOverride = {
 
     -- Uppercut / Dizzying Swing / Wrecking Blow
     [131562] = { tooltip = Abilities.Skill_Dizzying_Swing, unbreakable = 1 }, -- Off Balance (Dizzying Swing)
+    [137807] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Dizzying Swing (Dizzying Swing)
 
     -- Critical Charge / Stampede / Critical Rush
     [38791] = { tooltip = Tooltips.Skill_Stampede }, -- Stampede (Stampede)
@@ -12005,6 +12009,7 @@ Effects.FakePlayerBuffs = {
     [83287] = { duration = 10000 }, -- Pirate Skeleton
     [97627] = { icon = 'esoui/art/icons/achievement_update11_dungeons_036.dds', name = Abilities.Set_Ironblood, duration = 10000, debuff = true, shiftId = 97626 }, -- Ironblood
     [124303] = { duration = 3000 }, -- Senche-Raht's Grit (Senche-Raht's)
+    [117082] = { duration = 0 }, -- Frozen Watcher (Frozen Watcher)
 
     -- Set ICD's
     [129477] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Immortal_Warrior, Abilities.Set_Cooldown), duration = 35000, shiftId = 999009, debuff = true }, -- Immortal Warrior
