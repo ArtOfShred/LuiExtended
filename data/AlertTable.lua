@@ -140,7 +140,7 @@ LUIE.Data.AlertTable = {
     [35151] = { interrupt = true, priority = 3, auradetect = true, duration = 8000, effectOnlyInterrupt = true, fakeName = "", bossMatch = { Unitnames.Boss_Shagura } }, -- Spell Absorption (Spirit Mage)
     [14472] = { summon = true, priority = 2, auradetect = true, fakeName = "", bossMatch = { Unitnames.Boss_Shagura } }, -- Burdening Eye (Spirit Mage)
 
-    [36985] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000 }, -- Void (Time Bomb Mage)
+    [36985] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, hiddenDuration = 3500 }, -- Void (Time Bomb Mage)
 
     [37087] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, eventdetect = true, postCast = 1250, bossMatch = { Unitnames.Boss_Thjormar_the_Drowned, Unitnames.Boss_Stroda_gra_Drom } }, -- Lightning Onslaught (Battlemage)
     [37129] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, cc = SNARE, eventdetect = true, bossMatch = { Unitnames.Boss_Thjormar_the_Drowned, Unitnames.Boss_Stroda_gra_Drom } }, -- Ice Cage (Battlemage)
@@ -645,7 +645,7 @@ LUIE.Data.AlertTable = {
 
     -- World Boss - Big Ozur's Valley
     [83180] = { destroy = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true }, -- Molten Pillar (Big Ozur)
-    [83206] = { block = true, avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 1000, bossName = true }, -- Molten Shackles (Ice Pillar)
+    [83206] = { block = true, avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 2000, bossName = true }, -- Molten Shackles (Ice Pillar)
     [83191] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true, cc = STUN, duration = 3800 }, -- Shaman Smash (Big Ozur)
 
     -- World Boss - The Wolf's Camp
@@ -701,7 +701,7 @@ LUIE.Data.AlertTable = {
     [28723] = { avoid = true, priority = 2, eventdetect = true, refire = 500 }, -- Gravity Well (Manifestation of Terror)
 
     -- MSQ 4 (Castle of the Worm)
-    [34484] = { block = true, avoid = true, priority = 2,s refire = 500 }, -- Soul Cage (Mannimarco)
+    [34484] = { block = true, avoid = true, priority = 2, refire = 500 }, -- Soul Cage (Mannimarco)
 
     -- MSQ 6 (Halls of Torment)
     [36858] = { interrupt = true, avoid = true, priority = 2, eventdetect = true, refire = 1500 }, -- Swordstorm (Tharn Doppleganger)

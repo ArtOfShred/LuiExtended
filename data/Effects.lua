@@ -2046,6 +2046,7 @@ Effects.EffectOverrideByName = {
     },
 
     [10618] = { -- Quick Strike (Shared)
+        [Unitnames.NPC_Xivilai] =                { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_xivilai_light.dds' }, -- Xivilai
         [Unitnames.Elite_Amuur] =                { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_cleaver_attack_light.dds' } -- Amuur (The First Patient)
     },
     [14096] = { -- Heavy Attack (Footsoldier)
@@ -6939,7 +6940,7 @@ Effects.EffectOverride = {
     [78743] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds' }, -- Revealed (Guard)
     [78789] = { hide = true }, -- Flare (Guard)
     [78750] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds' }, -- Revealed (Guard)
-    [78744] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_flare_trap.dds' }, -- Flare (Guard)
+    [78744] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_flare_blue.dds' }, -- Flare (Guard)
     [75613] = { hide = true }, -- Shadowcloak Immunity (Mage Guard)
     [77919] = { hide = true }, -- Clairvoyance Tutorial (Mage Guard)
     [77937] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_detection.dds', name = Abilities.Skill_Detection, tooltip = Tooltips.Generic_Detection_NPC }, -- Clairvoyance (Mage Guard)
@@ -6968,8 +6969,8 @@ Effects.EffectOverride = {
     [62408] = { hide = true }, -- Bound Weapon (Justice Mage)
     [62409] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flames.dds' }, -- Fiery Wind (Justice Mage)
     [62502] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flames.dds' }, -- Fiery Wind (Justice Mage)
-    [62407] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds', hide = true }, -- Fiery Touch (Justice Mage)
-    [63828] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds' }, -- Fiery Touch (Justice Mage)
+    [62407] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_alt.dds', hide = true }, -- Fiery Touch (Justice Mage)
+    [63828] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_alt.dds' }, -- Fiery Touch (Justice Mage)
     [61984] = { hide = true }, -- Invisibility Potion (Justice Mage)
     [78265] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_alarm.dds', hide = true }, -- Alarm (Estate Marshal - DB)
     [78266] = { hide = true }, -- Alarm (Estate Marshal - DB)
@@ -7016,8 +7017,8 @@ Effects.EffectOverride = {
     [18386] = { hide = true }, -- Run Away! (Used by various creatures)
     [10618] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds' }, -- Quick Strike (Shared Human NPC)
     [12437] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_shot.dds', hide = true }, -- Quick Shot (Shared Human NPC)
-    [12456] = { icon = 'esoui/art/icons/ability_mage_009.dds', hide = true }, -- Ice Arrow (Shared Human NPC)
-    [10639] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds', hide = true }, -- Flare (Shared Human NPC)
+    [12456] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_arrow.dds', hide = true }, -- Ice Arrow (Shared Human NPC)
+    [10639] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_large.dds', hide = true }, -- Flare (Shared Human NPC)
     [39058] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_bear_trap.dds' }, -- Bear Trap (Shared Human NPC)
     [39060] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_bear_trap.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Immobilize }, -- Bear Trap (Shared Human NPC)
     [39065] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_bear_trap.dds' }, -- Bear Trap (Shared Human NPC)
@@ -7085,9 +7086,9 @@ Effects.EffectOverride = {
     [44227] = { icon = 'esoui/art/icons/ability_dragonknight_006.dds'}, -- Dragonknight Standard (Dragonknight - Elite)
     [44228] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1 }, -- Dragonknight Standard (Dragonknight - Elite)
     [44229] = { icon = 'esoui/art/icons/ability_debuff_major_defile.dds', duration = 0, groundLabel = true, tooltip = Abilities.Skill_Dragonknight_Standard }, -- Major Defile (Dragonknight - Elite)
-    [52041] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_blink_strike.dds' }, -- Blink Strike (Dragonknight  - Elite)
-    [52045] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_blink_strike.dds' }, -- Blink Strike (Dragonknight  - Elite)
-    [52051] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_blink_strike.dds', tooltip = Tooltips.Generic_Knockdown }, -- Blink Strike (Dragonknight  - Elite)
+    [52041] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_blink_strike.dds' }, -- Blink Strike (Dragonknight  - Elite)
+    [52045] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_blink_strike.dds' }, -- Blink Strike (Dragonknight  - Elite)
+    [52051] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_blink_strike.dds', tooltip = Tooltips.Generic_Knockdown }, -- Blink Strike (Dragonknight  - Elite)
 
     -- Thundermaul
     [29510] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_thunder_hammer.dds' }, -- Thunder Hammer (Thundermaul)
@@ -7161,33 +7162,34 @@ Effects.EffectOverride = {
 
     -- Spirit Mage
     [35151] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_spell_absorption.dds', tooltip = Tooltips.Skill_Spell_Absorption }, -- Spell Absorption (Spirit Mage)
-    [14472] = { icon = 'esoui/art/icons/ability_mage_004.dds', tooltip = Tooltips.Skill_Burdening_Eye }, -- Burdening Eye (Spirit Mage)
-    [37200] = { icon = 'esoui/art/icons/ability_mage_004.dds' }, -- Burden (Spirit Mage)
-    [35142] = { icon = 'esoui/art/icons/ability_mage_004.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 80 }, -- Burden (Spirit Mage)
+    [14472] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_burdening_eye.dds', tooltip = Tooltips.Skill_Burdening_Eye }, -- Burdening Eye (Spirit Mage)
+    [37200] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_burdening_eye.dds' }, -- Burden (Spirit Mage)
+    [35142] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_burdening_eye.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 80 }, -- Burden (Spirit Mage)
     [89057] = { hide = true }, -- Burdening Eye (Spirit Mage)
     [89042] = { hide = true }, -- Burdening Eye (Spirit Mage)
     [14477] = { hide = true }, -- Burdening (Spirit Mage)
     [35149] = { hide = true }, -- Burdening Eye (Spirit Mage)
 
     -- Battlemage
-    [37150] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds' }, -- Flare (Battlemage)
+    [37150] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_large.dds' }, -- Flare (Battlemage)
     [37028] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_staff_strike.dds', name = Abilities.Skill_Staff_Strike }, -- Quick Strike (Battlemage)
     [37029] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_staff_strike.dds', name = Abilities.Skill_Staff_Strike }, -- Quick Strike (Battlemage)
     [37030] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_staff_strike.dds', name = Abilities.Skill_Staff_Strike }, -- Quick Strike (Battlemage)
     [37021] = { hide = true }, -- Empower Weapon: Flame (Battlemage)
     [37087] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_lightning_onslaught.dds' }, -- Lightning Onslaught (Battlemage)
     [37156] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_lightning_onslaught.dds' }, -- Lightning Onslaught (Battlemage)
-    [37129] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_ice_cage.dds' }, -- Ice Cage (Battlemage)
-    [37131] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_ice_cage.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Frost, tooltipValue2 = 0.7, tooltipValue3 = 60 }, -- Ice Cage (Battlemage)
-    [37132] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_ice_cage.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Frost, tooltipValue2 = 0.7, tooltipValue3 = 60, hideGround = true }, -- Ice Cage (Battlemage)
+    [37129] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_cage.dds' }, -- Ice Cage (Battlemage)
+    [37131] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_cage.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Frost, tooltipValue2 = 0.7, tooltipValue3 = 60 }, -- Ice Cage (Battlemage)
+    [37132] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_cage.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Frost, tooltipValue2 = 0.7, tooltipValue3 = 60, hideGround = true }, -- Ice Cage (Battlemage)
     [44216] = { icon = 'esoui/art/icons/ability_sorcerer_monsoon.dds' }, -- Negate Magic (Battlemage)
     [50108] = { icon = 'esoui/art/icons/ability_sorcerer_monsoon.dds', duration = 0, tooltip = Tooltips.Generic_Silence_No_Dur, groundLabel = true }, -- Negate Magic (Battlemage)
     [50107] = { icon = 'esoui/art/icons/ability_sorcerer_monsoon.dds', duration = 0, tooltip = Tooltips.Generic_Stun_No_Dur, groundLabel = true }, -- Negate Magic (Battlemage)
 
     -- Time Bomb Mage
     [37126] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_entropic_bolt.dds' }, -- Entropic Flare (Timb Bomb Mage)
-    [36985] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_void.dds' }, -- Void (Time Bomb Mage)
-    [36986] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_void.dds' }, -- Void (Time Bomb Mage)
+    [36985] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_void.dds', name = Abilities.Skill_Void_Burst }, -- Void (Time Bomb Mage)
+    [36987] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_void.dds', hide = true }, -- Void Burst (Time Bomb Mage)
+    [36986] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_void.dds', name = Abilities.Skill_Void_Burst, hide = true }, -- Void (Time Bomb Mage)
 
     -- Fear Mage
     [56828] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fright_force_purple.dds', hide = true }, -- Fright Force (Fear Mage)
@@ -7300,7 +7302,7 @@ Effects.EffectOverride = {
     [64980] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_javelin.dds', hide = true }, -- Javelin (Winterborn Warrior)
     [14883] = { hide = true }, -- Off-Balance (Winterborn Warrior)
     [69282] = { hide = true }, -- Roll Dodge Back (Winterborn Warrior)
-    [54593] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds' }, -- Flare (Winterborn Mage)
+    [54593] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_large.dds' }, -- Flare (Winterborn Mage)
     [55909] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_grasping_vines.dds' }, -- Grasping Vines (Winterborn Mage)
     [55911] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_grasping_vines.dds', hideReduce = true, tooltip = Tooltips.Skill_Grasping_Vines }, -- Grasping Vines (Winterborn Mage)
     [55918] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_grasping_vines.dds', tooltip = Tooltips.Skill_Grasping_Vines }, -- Grasping Vines (Winterborn Mage)
@@ -7340,7 +7342,7 @@ Effects.EffectOverride = {
     [72222] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_hidden.dds', name = Abilities.Skill_Hide_in_Shadows, tooltip = Tooltips.Generic_Invisibility }, -- Shadow Cloak (Archer) (TG DLC)
     [76089] = { icon = 'esoui/art/icons/ability_bow_001.dds', hide = true }, -- Snipe (Archer) (TG DLC)
     [72220] = { icon = 'esoui/art/icons/ability_bow_001.dds', hide = true }, -- Snipe (Archer) (TG DLC)
-    [74619] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_flare_trap.dds', hide = true }, -- Flare Trap (Archer) (TG DLC)
+    [74619] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_flare_blue.dds', hide = true }, -- Flare Trap (Archer) (TG DLC)
     [74621] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Abilities.Skill_Flare_Trap }, -- Revealed (Archer) (TG DLC)
     [74618] = { hide = true }, -- Flare Trap
     [74627] = { hide = true }, -- Flare Trap
@@ -7774,10 +7776,10 @@ Effects.EffectOverride = {
     [91938] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_fire_damage.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 0.5 }, -- Burst of Embers (Daedroth)
 
     -- Flame Atronach
-    [18471] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds' }, -- Flare (Flame Atronach)
-    [18472] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds' }, -- Flare (Flame Atronach)
-    [15157] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds' }, -- Flare (Flame Atronach)
-    [12254] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds' }, -- Flare (Flame Atronach)
+    [18471] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_large.dds' }, -- Flare (Flame Atronach)
+    [18472] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_large.dds' }, -- Flare (Flame Atronach)
+    [15157] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_large.dds' }, -- Flare (Flame Atronach)
+    [12254] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_large.dds' }, -- Flare (Flame Atronach)
     [26324] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flame_geyser.dds', name = Abilities.Skill_Flame_Geyser }, -- Lava Geyser (Flame Atronach)
     [26325] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flame_geyser.dds', name = Abilities.Skill_Flame_Geyser }, -- Lava Geyser (Flame Atronach)
     [4891] = { icon = 'LuiExtended/media/icons/abilities/ability_flameatronach_radiance.dds', tooltip = Tooltips.Skill_Radiance }, -- Radiance (Flame Atronach)
@@ -7794,7 +7796,7 @@ Effects.EffectOverride = {
     [65709] = { icon = 'LuiExtended/media/icons/abilities/ability_fleshcolossus_pin.dds' }, -- Pin (Flesh Colossus)
     [49820] = { icon = 'LuiExtended/media/icons/abilities/ability_fleshcolossus_pin.dds', name = Abilities.Skill_Pin, tooltip = Tooltips.Generic_Knockdown }, -- Stunned (Flesh Colossus)
     [65735] = { hide = true }, -- Miasma Channel (Flesh Colossus)
-    [53233] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_disease_damage.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Disease, tooltipValue2 = 0.5 }, -- Miasma Pool (Flesh Colossus)
+    [53233] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_disease_damage.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Disease, tooltipValue2 = 0.5, hide = true }, -- Miasma Pool (Flesh Colossus)
     [67872] = { icon = 'LuiExtended/media/icons/abilities/ability_fleshcolossus_sweep.dds', hide = true }, -- Sweep (Flesh Colossus)
     [68824] = { icon = 'LuiExtended/media/icons/abilities/ability_fleshcolossus_sweep.dds', tooltip = Tooltips.Generic_Knockback }, -- Sweep (Flesh Colossus)
     [68813] = { icon = 'LuiExtended/media/icons/abilities/ability_fleshcolossus_sweep.dds', name = Abilities.Skill_Sweep }, -- Sweep Knockback (Flesh Colossus)
@@ -7851,13 +7853,13 @@ Effects.EffectOverride = {
     [65891] = { icon = 'LuiExtended/media/icons/abilities/ability_grevioustwilight_shadow_strike.dds' }, -- Shadow Strike (Grevious Twilight)
 
     -- Harvester
-    [11076] = { icon = 'esoui/art/icons/ability_mage_029.dds', hide = true }, -- Chasten (Harvester)
-    [11079] = { icon = 'LuiExtended/media/icons/abilities/ability_harvester_black_winter.dds', hide = true }, -- Black Winter (Harvester)
-    [26008] = { icon = 'LuiExtended/media/icons/abilities/ability_harvester_black_winter.dds', hide = true }, -- Black Winter (Harvester)
+    [11076] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_chasten.dds', hide = true }, -- Chasten (Harvester)
+    [11079] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_black_winter.dds', hide = true }, -- Black Winter (Harvester)
+    [26008] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_black_winter.dds', hide = true }, -- Black Winter (Harvester)
     [74794] = { name = Abilities.Innate_Stagger, tooltip = Tooltips.Generic_Stagger }, -- Black Winter (Harvester)
     [11083] = { icon = 'LuiExtended/media/icons/abilities/ability_harvester_the_feast.dds' }, -- The Feast (Harvester)
     [26110] = { icon = 'LuiExtended/media/icons/abilities/ability_harvester_the_feast.dds', tooltip = Tooltips.Generic_Levitate }, -- The Feast (Harvester)
-    [26017] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_the_feast_heal.dds', name = Abilities.Skill_The_Feast, hide = true }, -- Creeping Doom (The Feast)
+    [26017] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_the_feast.dds', name = Abilities.Skill_The_Feast, hide = true }, -- Creeping Doom (The Feast)
     [26018] = { hide = true }, -- Creeping Doom (The Feast)
     [88070] = { hide = true }, -- Creeping Doom (The Feast)
 
@@ -7876,7 +7878,7 @@ Effects.EffectOverride = {
     [127630] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_boulder_toss.dds' }, -- Boulder Toss (Ogrim)
 
     -- Scamp
-    [6158] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds' }, -- Flare (Scamp)
+    [6158] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_alt.dds' }, -- Flare (Scamp)
     [6166] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heat_wave.dds' }, -- Heat Wave (Scamp)
     [6167] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heat_wave.dds' }, -- Heat Wave (Scamp)
     [6160] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_rain_of_fire.dds' }, -- Rain of Fire (Scamp)
@@ -7907,13 +7909,13 @@ Effects.EffectOverride = {
     [12286] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_storm_bound.dds' }, -- Storm Bound (Storm Atronach)
 
     -- Xivilai
-    [7095] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds' }, -- Heavy Attack (Xivilai)
-    [83072] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_freezing_edge.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Freezing Edge (Xivilai)
+    [7095] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_xivilai_heavy.dds' }, -- Heavy Attack (Xivilai)
+    [83072] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_xivilai_frost.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Freezing Edge (Xivilai)
     [49203] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_frost_root.dds', tooltip = Tooltips.Generic_Immobilize }, -- Frozen Weapon (Xivilai)
     [88947] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_lightning_grasp.dds' }, -- Lightning Grasp (Xivilai)
     [88949] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_lightning_grasp.dds' }, -- Lightning Grasp (Xivilai)
-    [7100] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_hand_of_flame.dds'}, -- Hand of Flame (Xivilai)
-    [25728] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_hand_of_flame.dds'}, -- Hand of Flame (Xivilai)
+    [7100] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hand_of_flame.dds'}, -- Hand of Flame (Xivilai)
+    [25728] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hand_of_flame.dds'}, -- Hand of Flame (Xivilai)
     [25726] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_clannfear.dds' }, -- Summon Daedra (Xivilai)
 
     -- Watcher
@@ -8016,7 +8018,7 @@ Effects.EffectOverride = {
     [13536] = { hide = true }, -- Detonation (Dwemer Spider)
 
     -- Dwemer Sentry
-    [64423] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_shock.dds', hide = true }, -- Sparks (Dwemer Sentry)
+    [64423] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sparks.dds', hide = true }, -- Sparks (Dwemer Sentry)
     [84312] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_static_shield.dds', tooltip = Tooltips.Skill_Static_Shield }, -- Static Shield (Dwemer Sentry)
     [70133] = { hide = true }, -- Static Shield
     [64556] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_static_shield.dds', name = Abilities.Skill_Static_Shield }, -- Static Eruption (Dwemer Sentry)
@@ -8247,12 +8249,12 @@ Effects.EffectOverride = {
     [32267] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_luring_snare.dds', name = Abilities.Skill_Luring_Snare, tooltip = Tooltips.Generic_Stun }, -- Grapple (Hag)
 
     -- Hagraven
-    [10611] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds' }, -- Flare (Hagraven)
+    [10611] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_alt.dds' }, -- Flare (Hagraven)
     [10615] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_raven_storm.dds' }, -- Raven Storm (Hagraven)
     [10616] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_raven_storm.dds' }, -- Raven Storm (Hagraven)
     [12426] = { name = Abilities.Innate_Stagger, tooltip = Tooltips.Generic_Stagger }, -- Raven Storm (Hagraven)
-    [10613] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fire_bomb.dds' }, -- Fire Bomb (Hagraven)
-    [10614] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fire_bomb.dds' }, -- Fire Bomb (Hagraven)
+    [10613] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_combustion.dds' }, -- Fire Bomb (Hagraven)
+    [10614] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_combustion.dds' }, -- Fire Bomb (Hagraven)
     [64806] = { hide = true }, -- Briarheart Resurrection (Hagraven)
     [64808] = { icon = 'esoui/art/icons/ability_healer_028.dds', duration = 2.5, tooltip = Tooltips.Skill_Briarheart_Resurrection }, -- Briarheart Resurrection (Hagraven)
     [65027] = { icon = 'esoui/art/icons/ability_healer_028.dds', tooltip = Tooltips.Skill_Briarheart_Resurrection }, -- Briarheart Resurrection (Hagraven)
@@ -8282,23 +8284,23 @@ Effects.EffectOverride = {
     [46563] = { icon = 'esoui/art/icons/ability_mage_020.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 70 }, -- Blood in the Water (Ice Wraith)
 
     -- Imp
-    [14801] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds', hide = true }, -- Flare (Imp - Fire)
-    [14802] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds', hide = true }, -- Fireball (Imp - Fire)
-    [17703] = { icon = 'LuiExtended/media/icons/abilities/ability_imp_flame_ray.dds', tooltip = Tooltips.Skill_Flame_Ray }, -- Flame Ray (Imp - Fire)
-    [65078] = { icon = 'LuiExtended/media/icons/abilities/ability_imp_flame_ray.dds' }, -- Flame Ray (Imp - Fire)
-    [17706] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_combustion.dds' }, -- Flame Ray (Imp - Fire)
+    [14801] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_small.dds', hide = true }, -- Flare (Imp - Fire)
+    [14802] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fireball.dds', hide = true }, -- Fireball (Imp - Fire)
+    [17703] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flame_ray.dds', tooltip = Tooltips.Skill_Flame_Ray }, -- Flame Ray (Imp - Fire)
+    [65078] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flame_ray.dds' }, -- Flame Ray (Imp - Fire)
+    [17706] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fire_bomb.dds' }, -- Flame Ray (Imp - Fire)
 
     [7732] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_shock.dds', hide = true }, -- Bolt (Imp - Lightning)
-    [13648] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_shock.dds', hide = true }, -- Spark (Imp - Lightning)
+    [13648] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_spark.dds', hide = true }, -- Spark (Imp - Lightning)
     [8884] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_zap_imp.dds', tooltip = Tooltips.Skill_Lightning_Rod }, -- Zap (Imp - Lightning)
     [65077] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_zap_imp.dds' }, -- Zap (Imp - Lightning)
     [14666] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_zap_pulse_imp.dds' }, -- Zap (Imp - Lightning)
 
-    [88906] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_frost.dds', hide = true }, -- Frost Bolt (Imp - Frost)
-    [88918] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_frost.dds', hide = true }, -- Frostball (Imp - Frost)
+    [88906] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_arrow_small.dds', hide = true }, -- Frost Bolt (Imp - Frost)
+    [88918] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_arrow.dds', hide = true }, -- Frostball (Imp - Frost)
 
-    [81794] = { icon = 'LuiExtended/media/icons/abilities/ability_imp_frost_ray.dds', tooltip = Tooltips.Skill_Frost_Ray }, -- Frost Ray (Imp - Frost)
-    [88907] = { icon = 'LuiExtended/media/icons/abilities/ability_imp_frost_ray.dds', hide = true }, -- Frost Ray (Imp - Frost)
+    [81794] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_frost_ray.dds', tooltip = Tooltips.Skill_Frost_Ray }, -- Frost Ray (Imp - Frost)
+    [88907] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_frost_ray.dds', hide = true }, -- Frost Ray (Imp - Frost)
     [88915] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_frost_snare.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, hide = true }, -- Frost Ray (Imp - Frost)
     [88908] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_pillar.dds' }, -- Frost Ray (Imp - Frost)
 
@@ -8325,7 +8327,7 @@ Effects.EffectOverride = {
     [3767] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen.dds', hide = true }, -- Choking Pollen (Lurcher)
     [4769] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Poison, tooltipValue2 = 0.5 }, -- Choking Pollen (Lurcher)
 
-    [5520] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_frost.dds', hide = true }, -- Frost Bolt (Nereid)
+    [5520] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_arrow.dds', hide = true }, -- Frost Bolt (Nereid)
     [5559] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_water_geyser.dds' }, -- Icy Geyser (Nereid)
     [11024] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_water_geyser.dds' }, -- Icy Geyser (Nereid)
     [5540] = { icon = 'esoui/art/icons/ability_wrothgar_chillingwind.dds', hide = true }, -- Hurricane (Nereid)
@@ -8346,17 +8348,17 @@ Effects.EffectOverride = {
     [8069] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_intimidating_roar.dds', tooltip = Tooltips.Generic_Fear }, -- Intimidating Roar (Ogre)
     [24985] = { icon = 'esoui/art/icons/ability_warrior_025.dds', name = Abilities.Skill_Enrage, tooltip = Tooltips.Generic_Enrage, tooltipValue2 = 30 }, -- Intimidating Roar (Ogre)
 
-    [53136] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_frost_bolt.dds' }, -- Frost Bolt (Ogre Shaman)
-    [65434] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_frost_bolt.dds' }, -- Frost Bolt (Ogre Shaman)
-    [53773] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_frost_bolt.dds' }, -- Frost Bolt (Ogre Shaman)
-    [53774] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_frost_bolt.dds' }, -- Frost Bolt (Ogre Shaman)
-    [65469] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_frost_bolt.dds' }, -- Frost Bolt (Ogre Shaman)
-    [65470] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_frost_bolt.dds' }, -- Frost Bolt (Ogre Shaman)
+    [53136] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_frostbolt.dds' }, -- Frost Bolt (Ogre Shaman)
+    [65434] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_frostbolt.dds' }, -- Frost Bolt (Ogre Shaman)
+    [53773] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_frostbolt.dds' }, -- Frost Bolt (Ogre Shaman)
+    [53774] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_frostbolt.dds' }, -- Frost Bolt (Ogre Shaman)
+    [65469] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_frostbolt.dds' }, -- Frost Bolt (Ogre Shaman)
+    [65470] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_frostbolt.dds' }, -- Frost Bolt (Ogre Shaman)
     [53142] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_pillar.dds', tooltip = Tooltips.Skill_Ice_Pillar }, -- Ice Pillar (Ogre Shaman)
     [74457] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_pillar.dds', tooltip = Tooltips.Skill_Ice_Pillar }, -- Ice Pillar (Ogre Shaman)
     [34385] = { hide = true }, -- Generic AOE (Ogre Shaman)
     [53966] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_pillar.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 60 }, -- Ice Pillar Chill (Ogre Shaman)
-    [54327] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_frost_root.dds', name = Abilities.Skill_Frozen, tooltip = Tooltips.Generic_Immobilize }, -- Winter's Reach (Ogre Shaman)
+    [54327] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_frost_root.dds', name = Abilities.Skill_Frozen, tooltip = Tooltips.Generic_Immobilize }, -- Winter's Reach (Ogre Shaman)
     [64540] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_freeze_wounds.dds' }, -- Freeze Wounds (Ogre Shaman)
     [53137] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_freeze_wounds.dds' }, -- Freeze Wounds (Ogre Shaman)
 
@@ -8463,10 +8465,10 @@ Effects.EffectOverride = {
 
     -- Minotaur Shaman
     [75949] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fiery_surge.dds', hide = true }, -- Fiery Surge (Minotaur Shaman)
-    [77989] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fiery_surge.dds', hide = true }, -- Flame Wave (Minotaur Shaman)
-    [75951] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_fire_snare.dds' }, -- Brimstone Hailfire (Minotaur Shaman)
-    [75953] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_fire_snare.dds', hide = true, groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Fire, tooltipValue2 = 0.7, tooltipValue3 = 60 }, -- Brimstone Hailfire (Minotaur Shaman)
-    [75954] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_fire_snare.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Fire, tooltipValue2 = 0.7, tooltipValue3 = 60, hideGround = true }, -- Brimstone Hailfire (Minotaur Shaman)
+    [77989] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fiery_surge.dds', name = Abilities.Skill_Fiery_Surge, hide = true }, -- Flame Wave (Minotaur Shaman)
+    [75951] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_brimstone_hailfire.dds' }, -- Brimstone Hailfire (Minotaur Shaman)
+    [75953] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_brimstone_hailfire.dds', hide = true, groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Fire, tooltipValue2 = 0.7, tooltipValue3 = 60 }, -- Brimstone Hailfire (Minotaur Shaman)
+    [75954] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_brimstone_hailfire.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Fire, tooltipValue2 = 0.7, tooltipValue3 = 60, hideGround = true }, -- Brimstone Hailfire (Minotaur Shaman)
     [75955] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_pillars_of_nirn.dds' }, -- Pillars of Nirn (Minotaur Shaman)
     [75980] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_pillars_of_nirn.dds', name = Abilities.Skill_Pillars_of_Nirn }, -- Pillars Eruption (Minotaur Shaman)
     [75976] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_pillars_of_nirn.dds', name = Abilities.Skill_Pillars_of_Nirn, hide = true, groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 0.7 }, -- Pillar of Nirn (Minotaur Shaman)
@@ -8510,13 +8512,13 @@ Effects.EffectOverride = {
     [103776] = { icon = 'LuiExtended/media/icons/abilities/ability_yaghra_slash.dds' }, -- Slash (Yaghra Spewer)
     [103775] = { icon = 'LuiExtended/media/icons/abilities/ability_yaghra_chop.dds' }, -- Chop (Yaghra Spewer)
     [103784] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_pin.dds', tooltip = Tooltips.Skill_Agonizing_Fury }, -- Dazed Snare (Yaghra Spewer)
-    [103786] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_death_bolt.dds' }, -- Purge (Yaghra Spewer)
+    [103786] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_spear.dds' }, -- Purge (Yaghra Spewer)
     [103804] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_frost_damage.dds', hide = true }, -- Deluge (Yaghra Spewer)
     [103862] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_frost_damage.dds', tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.7, groundLabel = true }, -- Deluge (Yaghra Spewer)
     [103864] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_frost_snare.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 50 }, -- Deluge (Yaghra Spewer)
-    [103931] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_spell_death_bolt.dds' }, -- Luminescent Mark (Yaghra Spewer)
-    [103958] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_death_bolt.dds', hide = true }, -- Luminescent Mark (Yaghra Spewer)
-    [103957] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_death_bolt.dds', tooltip = Tooltips.Generic_Knockback }, -- Luminescent Mark (Yaghra Spewer)
+    [103931] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_spear.dds' }, -- Luminescent Mark (Yaghra Spewer)
+    [103958] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_spear.dds', hide = true }, -- Luminescent Mark (Yaghra Spewer)
+    [103957] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_spear.dds', tooltip = Tooltips.Generic_Knockback }, -- Luminescent Mark (Yaghra Spewer)
     [103992] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_aoe_magic.dds', tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.7, groundLabel = true }, -- Luminescent Burn (Yaghra Spewer)
 
     -- Undead
@@ -8584,7 +8586,7 @@ Effects.EffectOverride = {
     [5785] = { icon = 'esoui/art/icons/mos_dagrund_upheavel.dds' }, -- Blood Scent (Werewolf)
 
     -- Wraith
-    [4323] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_frost.dds' }, -- Ice Bolt (Wraith)
+    [4323] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_arrow_small.dds' }, -- Ice Bolt (Wraith)
     [4337] = { icon = 'esoui/art/icons/ability_mage_037.dds' }, -- Winter's Reach (Wraith)
     [4346] = { icon = 'esoui/art/icons/ability_mage_037.dds' }, -- Winter's Reach (Wraith)
     [43146] = { icon = 'esoui/art/icons/ability_mage_037.dds', tooltip = Tooltips.Generic_Immobilize }, -- Winter's Reach (Wraith)
@@ -9146,7 +9148,7 @@ Effects.EffectOverride = {
     [39367] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_consecrate_shrine.dds', name = Abilities.Skill_Consecrate_Shrine }, -- Altar Use
     [37827] = { hide = true, icon = 'esoui/art/icons/achievement_housing_033.dds', name = Abilities.Skill_Remove_Ward }, -- Stendarr's Protection
     [46816] = { hide = true }, -- Shake
-    [38207] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_death_bolt.dds', hide = true }, -- Death Bolt (Mannimarco)
+    [38207] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_spear.dds', hide = true }, -- Death Bolt (Mannimarco)
     [41067] = { hide = true }, -- Dummy (Mannimarco)
     [40401] = { hide = true }, -- Daedric Step (Mannimarco)
     [40400] = { hide = true }, -- Daedric Step (Mannimarco)
@@ -9701,14 +9703,14 @@ Effects.EffectOverride = {
 
     -- Vvardenfell MQ -- Divine Intervention
     [91006] = { hide = true }, -- Chodala's Shield
-    [86815] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds' }, -- Daedric Bolt
+    [86815] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_large.dds' }, -- Daedric Bolt
     [90140] = { hide = true}, -- Sunder's Echo
     [90148] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_pillars_of_nirn.dds' }, -- Sunder's Echo
     [90146] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_pillars_of_nirn.dds', hide = true }, -- Sunder's Echo
     [90147] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_pillars_of_nirn.dds' }, -- Sunder's Echo
-    [90139] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_blink_strike.dds' }, -- Empowered Strike
-    [90141] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_blink_strike.dds' }, -- Empowered Strike
-    [90142] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_blink_strike.dds' }, -- Empowered Strike
+    [90139] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_blink_strike.dds' }, -- Empowered Strike
+    [90141] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_blink_strike.dds' }, -- Empowered Strike
+    [90142] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_blink_strike.dds' }, -- Empowered Strike
     [88963] = {hide = true}, -- Delay
 
     -- VVARDENFELL MQ - Divine Disaster
@@ -9725,7 +9727,7 @@ Effects.EffectOverride = {
     [91969] = { icon = 'esoui/art/icons/achievement_vvardenfel_047.dds', name = 'Spinning Blade Trap' }, -- Serrated Blade
     [89330] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shock_torrent.dds', hide = true }, -- Defensive Flare
     [89750] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_shock_damage.dds' }, -- Pulse
-    [92213] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_shock.dds', hide = true }, -- Sparks
+    [92213] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sparks.dds', hide = true }, -- Sparks
     [92229] = { hide = true }, -- Pulse
     [92227] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_shock_damage.dds' }, -- Pulse
     [92225] = { icon = 'esoui/art/icons/achievement_vvardenfel_013.dds' }, -- Repair
@@ -9739,8 +9741,8 @@ Effects.EffectOverride = {
     [87048] = {icon = 'LuiExtended/media/icons/abilities/ability_spell_lunge.dds'}, -- Lunge
     [87050] = {icon = 'LuiExtended/media/icons/abilities/ability_spell_lunge.dds', hide = true}, -- Lunge
     [87049] = {icon = 'LuiExtended/media/icons/abilities/ability_spell_lunge.dds'}, -- Lunge
-    [87090] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds', hide = true}, -- Barbs
-    [87096] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds'}, -- Barbs
+    [87090] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_large.dds', hide = true}, -- Barbs
+    [87096] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_large.dds'}, -- Barbs
     [90599] = { hide = true }, -- Daedric Vigor
     [92284] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_planar_shear.dds' }, -- Planar Shear
     [90627] = { hide = true }, -- targetable
@@ -10400,11 +10402,11 @@ Effects.EffectOverride = {
     [72013] = { hide = true }, -- Stagger (Iceberg)
     [72012] = { tooltip = Tooltips.Generic_Stagger }, -- Stagger (Iceberg)
 
-    [72703] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_frost.dds', name = Abilities.Skill_Cold_Snap, hide = true }, -- Cold Snap Bolt (Leimenid Oracle)
-    [72705] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_frost.dds', unbreakable = 1, tooltip = Tooltips.Skill_Cold_Snap, tooltipValue2 = 7, stackAdd = 1 }, -- Cold Snap (Leimenid Oracle)
+    [72703] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_arrow.dds', name = Abilities.Skill_Cold_Snap, hide = true }, -- Cold Snap Bolt (Leimenid Oracle)
+    [72705] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_arrow.dds', unbreakable = 1, tooltip = Tooltips.Skill_Cold_Snap, tooltipValue2 = 7, stackAdd = 1 }, -- Cold Snap (Leimenid Oracle)
 
-    [71994] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_frost.dds', name = Abilities.Skill_Cold_Snap, hide = true }, -- Cold Snap Bolt (Leimenid Oracle)
-    [71997] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_frost.dds', unbreakable = 1, tooltip = Tooltips.Skill_Cold_Snap, tooltipValue2 = 27, stackAdd = 1 }, -- Cold Snap (Leimenid Oracle)
+    [71994] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_arrow.dds', name = Abilities.Skill_Cold_Snap, hide = true }, -- Cold Snap Bolt (Leimenid Oracle)
+    [71997] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_arrow.dds', unbreakable = 1, tooltip = Tooltips.Skill_Cold_Snap, tooltipValue2 = 27, stackAdd = 1 }, -- Cold Snap (Leimenid Oracle)
 
     [71926] = { icon = 'esoui/art/icons/ability_warrior_022.dds' }, -- Frenzy of Blows (Angirgoth)
     [71930] = { icon = 'esoui/art/icons/ability_warrior_022.dds' }, -- Frenzy of Blows (Angirgoth)
@@ -10417,7 +10419,7 @@ Effects.EffectOverride = {
     [71935] = { hide = true }, -- Steel Tornado (Angirgoth)
     [71934] = { icon = 'esoui/art/icons/ability_dualwield_005_b.dds' }, -- Steel Tornado (Angirgoth)
 
-    [71897] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_frost.dds', hide = true }, -- Frost Bolt (Leimenid)
+    [71897] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_arrow.dds', hide = true }, -- Frost Bolt (Leimenid)
     [71915] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_ice_shards.dds' }, -- Uppercut (Frost Atronach)
 
     [72438] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_shatter.dds' }, -- Shatter (Giant)
@@ -10571,8 +10573,8 @@ Effects.EffectOverride = {
     [58966] = { hide = true }, -- RM-GB1 Flesh Atronach Boss (Varien)
 
     -- World Boss - Big Ozur's Valley
-    [85070] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fiery_surge.dds' }, -- Blazing Bolt (Big Ozur)
-    [85071] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fiery_surge.dds' }, -- Blazing Bolt (Big Ozur)
+    [85070] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_blazing_bolt.dds' }, -- Blazing Bolt (Big Ozur)
+    [85071] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_blazing_bolt.dds' }, -- Blazing Bolt (Big Ozur)
     [83180] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_molten_pillar.dds' }, -- Molten Pillar (Ice Pillar)
     [83182] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_molten_pillar.dds', tooltip = Tooltips.Skill_Molten_Pillar }, -- Molten Pillar (Ice Pillar)
     [83185] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_molten_pillar.dds', name = Abilities.Skill_Molten_Pillar_Incalescence, duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 60 }, -- Molten Shackles (Ice Pillar)
@@ -10682,9 +10684,9 @@ Effects.EffectOverride = {
     [33172] = { hide = true }, -- Oblivion Restoration (The Feast)
     [33165] = { hide = true }, -- Despawn Self (The Feast)
 
-    [18840] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_death_bolt.dds', hide = true }, -- Soul Blast (High Kinlord Rilis)
-    [18846] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_death_bolt.dds', hide = true }, -- Soul Blast (High Kinlord Rilis)
-    [18847] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_death_bolt.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Soul Blast (High Kinlord Rilis)
+    [18840] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_blast.dds', hide = true }, -- Soul Blast (High Kinlord Rilis)
+    [18846] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_blast.dds', hide = true }, -- Soul Blast (High Kinlord Rilis)
+    [18847] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_blast.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Soul Blast (High Kinlord Rilis)
 
     [18875] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_coldfire_damage.dds', hide = true }, -- Daedric Tempest (High Kinlord Rilis)
     [33437] = { hide = true }, -- Daedric Tempest (High Kinlord Rilis)
@@ -10747,7 +10749,7 @@ Effects.EffectOverride = {
     [46964] = { hide = true }, -- Daedric Step (High Kinlord Rilis)
     [46965] = { hide = true }, -- Daedric Step (High Kinlord Rilis)
     [48909] = { hide = true }, -- The Feast (High Kinlord Rilis)
-    [26070] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_the_feast_heal.dds' }, -- The Feast
+    [26070] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_the_feast.dds' }, -- The Feast
 
     [48799] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_coldfire_damage.dds' }, -- Daedric Tempest (High Kinlord Rilis)
     [48814] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_coldfire_damage.dds' }, -- Daedric Tempest (High Kinlord Rilis)
@@ -10926,7 +10928,7 @@ Effects.EffectOverride = {
     [34953] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_blazing_embers.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Blazing_Embers, duration = 20 }, -- Blazing Embers (Release Flame)
     [34951] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_blazing_embers.dds' }, -- Blazing Embers (Release Flame)
     [34623] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_flame_atronach_red.dds', hide = true }, -- Summon Flame Atronach (Razor Master Erthas)
-    [35379] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds' }, -- Flare (Flame Atronach)
+    [35379] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_large.dds' }, -- Flare (Flame Atronach)
     [34780] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_flame_atronach_red.dds', name = Abilities.Skill_Summon_Flame_Atronach, hide = true }, -- Summon Flame Atranach (Razor Master Erthas)
 
     [70113] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_headgrab.dds', name = Abilities.Skill_Wracking_Pain, tooltip = Tooltips.Generic_Stun, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Soul Scream (Scroll of Glorious Battle)
@@ -10961,7 +10963,7 @@ Effects.EffectOverride = {
 
     [55184] = { hide = true }, -- Urata Spawn In
 
-    [56419] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds' }, -- Flare (Urata the Legion)
+    [56419] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_large.dds' }, -- Flare (Urata the Legion)
     [56414] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fire_rune.dds', name = Abilities.Skill_Fire_Rune }, -- Fire Runes (Urata the Legion)
     [56415] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fire_rune.dds', name = Abilities.Skill_Fire_Rune, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1, groundLabel = true }, -- Fire Runes (Urata the Legion)
 
@@ -10981,8 +10983,8 @@ Effects.EffectOverride = {
     [61201] = { hide = true }, -- Melt Up
     [56178] = { hide = true }, -- Gaunt NPC Add Threat
     [56186] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_voice_to_wake_the_dead.dds' }, -- Voice to Wake the Dead (Flame Colossus)
-    [86753] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds', name = Abilities.Skill_Flare }, -- Bone Flare (Flame Colossus)
-    [55744] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds', name = Abilities.Skill_Flare }, -- Bone Flare (Flame Colossus)
+    [86753] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_large.dds', name = Abilities.Skill_Flare }, -- Bone Flare (Flame Colossus)
+    [55744] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_large.dds', name = Abilities.Skill_Flare }, -- Bone Flare (Flame Colossus)
 
     [56055] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_jagged_claw.dds' }, -- Jagged Claw (Horvantud the Fire Maw)
     [56054] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_jaws.dds' }, -- Fiery Jaws (Horvantud the Fire Maw)
@@ -11111,10 +11113,10 @@ Effects.EffectOverride = {
     [55793] = { hide = true }, -- Slag Geyser
     [56068] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_eruption.dds' }, -- Slag Geyser (Valkyn Skoria)
 
-    [55513] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fiery_surge.dds' }, -- Flame Bolt (Valkyn Skoria)
-    [55573] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fiery_surge.dds', name = Abilities.Skill_Flame_Bolt, hide = true }, -- Flame Bolt Knockdown (Valkyn Skoria)
-    [55574] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fiery_surge.dds', name = Abilities.Skill_Flame_Bolt, hide = true }, -- Meteor Strike (Valkyn Skoria)
-    [55575] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fiery_surge.dds', name = Abilities.Skill_Flame_Bolt, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Meteor Strike (Valkyn Skoria)
+    [55513] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flame_bolt.dds' }, -- Flame Bolt (Valkyn Skoria)
+    [55573] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flame_bolt.dds', name = Abilities.Skill_Flame_Bolt, hide = true }, -- Flame Bolt Knockdown (Valkyn Skoria)
+    [55574] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flame_bolt.dds', name = Abilities.Skill_Flame_Bolt, hide = true }, -- Meteor Strike (Valkyn Skoria)
+    [55575] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flame_bolt.dds', name = Abilities.Skill_Flame_Bolt, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Meteor Strike (Valkyn Skoria)
 
     [55387] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_meteor_strike.dds', name = Abilities.Skill_Meteoric_Strike }, -- Meteor Strike (Valkyn Skoria)
     [55758] = { hide = true }, -- Meteor Strike (Valkyn Skoria)
@@ -11163,7 +11165,7 @@ Effects.EffectOverride = {
 
     [55622] = { hide = true }, -- Rock Shield (Flame Atronach)
     [55499] = { hide = true }, -- Rock Shield (Valkyn Skoria)
-    [55498] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds' }, -- Flame Spit (Valkyn Skoria)
+    [55498] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_spell_fiery_surge.dds' }, -- Flame Spit (Valkyn Skoria)
 
     [55501] =  { hide = true }, -- Rock Shield (Valkyn Skoria)
     [56239] =  { hide = true }, -- Rock Shield (Valkyn Skoria)
@@ -11177,7 +11179,7 @@ Effects.EffectOverride = {
 
     -- Tempest Island
     [28012] = { hide = true }, -- Fireball
-    [43049] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds' }, -- Fireball (Lamia Curare)
+    [43049] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_large.dds' }, -- Fireball (Lamia Curare)
 
     [46732] = { icon = 'LuiExtended/media/icons/abilities/ability_lamia_sonic_scream.dds' }, -- Sonic Scream (Sonolia the Matriarch)
     [46738] = { icon = 'LuiExtended/media/icons/abilities/ability_lamia_sonic_scream.dds', name = Abilities.Skill_Sonic_Scream }, -- Piercing Shriek (Sonolia the Matriarch)
@@ -11233,7 +11235,7 @@ Effects.EffectOverride = {
 
     [27624] = { hide = true }, -- Wind Storm
 
-    [26534] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_shock.dds', hide = true }, -- Sparking Strike (Stormreeve Neider)
+    [26534] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sparks.dds', hide = true }, -- Sparking Strike (Stormreeve Neider)
     [27596] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_agonizing_strike.dds' }, -- Lightning Strike (Stormreeve Neider)
 
     [26741] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_wind_charge.dds', name = Abilities.Skill_Wind_Charge }, -- Swift Wind (Stormreeve Neider)
@@ -11466,9 +11468,9 @@ Effects.EffectOverride = {
 
     [11712] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_entropic_bolt.dds' }, -- Death's Embrace (Investigator Garron)
 
-    [9441] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_death_bolt.dds' }, -- Dark Lance (Investigator Garron)
-    [48933] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_death_bolt.dds', name = Abilities.Skill_Dark_Lance, hide = true }, -- Backlash (Investigator Garron)
-    [48932] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_death_bolt.dds', name = Abilities.Skill_Dark_Lance, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Backlash (Investigator Garron)
+    [9441] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_spear.dds' }, -- Dark Lance (Investigator Garron)
+    [48933] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_spear.dds', name = Abilities.Skill_Dark_Lance, hide = true }, -- Backlash (Investigator Garron)
+    [48932] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_spear.dds', name = Abilities.Skill_Dark_Lance, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Backlash (Investigator Garron)
 
     [25593] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_essence.dds' }, -- Necrotic Essence (Investigator Garron)
     [25586] = { hide = true }, -- Seeking Orb (Necrotic Orb)

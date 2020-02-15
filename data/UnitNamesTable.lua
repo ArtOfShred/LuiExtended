@@ -53,6 +53,7 @@ LUIE.Data.UnitNames = {
     NPC_Sainted_Archer                    = 'Sainted Archer',
     NPC_Sainted_Charger                   = 'Sainted Charger',
     NPC_Gargoyle                          = 'Gargoyle',
+    NPC_Xivilai                           = 'Xivilai',
 
     NPC_Aura_of_Protection                = 'Aura of Protection',
 

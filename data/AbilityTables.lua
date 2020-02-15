@@ -946,6 +946,7 @@ local AbilityTables = {
     Skill_Flare_Trap                  = 74628,
     Skill_Heated_Blades               = 44208,
     Skill_Bear_Trap                   = 39058,
+    Skill_Void_Burst                  = 36987,
 
     -- Justice
     Skill_Criminals_Bane              = 63145,
@@ -1036,6 +1037,7 @@ local AbilityTables = {
     Skill_Pillars_of_Nirn             = 75955,
     Skill_Claw                        = 27922,
     Skill_Obliterate                  = 127908,
+    Skill_Fiery_Surge                 = 75949,
 
     -- Dwemer
     Skill_Static_Shield               = 64463,
