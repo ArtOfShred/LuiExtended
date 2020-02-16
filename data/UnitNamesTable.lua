@@ -6,6 +6,30 @@
 LUIE.Data.UnitNames = {
 
     ----------------------------------------------------------------
+    -- CYORDIIL GUARD NAMES ----------------------------------------
+    ----------------------------------------------------------------
+
+    NPC_Guard_AD                          = 'Dominion Guard',
+    NPC_Honor_Guard_AD                    = 'Dominion Honor Guard',
+    NPC_Mender_AD                         = 'Dominion Mender',
+    NPC_Mage_Guard_AD                     = 'Dominion Mage Guard',
+    NPC_Skirmisher_AD                     = 'Dominion Skirmisher',
+    NPC_Archer_Guard_AD                   = 'Dominion Archer Guard',
+    NPC_Guard_DC                          = 'Covenant Guard',
+    NPC_Honor_Guard_DC                    = 'Covenant Honor Guard',
+    NPC_Mender_DC                         = 'Covenant Mender',
+    NPC_Mage_Guard_DC                     = 'Covenant Mage Guard',
+    NPC_Skirmisher_DC                     = 'Covenant Skirmisher',
+    NPC_Archer_Guard_DC                   = 'Covenant Archer Guard',
+    NPC_Guard_EP                          = 'Pact Guard',
+    NPC_Honor_Guard_EP                    = 'Pact Honor Guard',
+    NPC_Mender_EP                         = 'Pact Mender',
+    NPC_Mage_Guard_EP                     = 'Pact Mage Guard',
+    NPC_Skirmisher_EP                     = 'Pact Skirmisher',
+    NPC_Archer_Guard_EP                   = 'Pact Archer Guard',
+
+
+    ----------------------------------------------------------------
     -- NORMAL NPC NAMES --------------------------------------------
     ----------------------------------------------------------------
 

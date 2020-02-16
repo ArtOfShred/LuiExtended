@@ -510,9 +510,9 @@ Effects.EffectGroundDisplay = {
         --noRemove = true -- Do not end this aura on EFFECT_RESULT_FADED
 
     -- Cyrodiil
-    [88714] = { icon = 'esoui/art/icons/LuiExtended/media/icons/abilities/ability_ava_siege_meatbag_catapult.dds', name = Abilities.Skill_Meatbag_Catapult, buff = false, debuff = false, ground = true }, -- Meatbag (Meatbag Catapult)
+    [88714] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_meatbag_catapult.dds', name = Abilities.Skill_Meatbag_Catapult, buff = false, debuff = false, ground = true }, -- Meatbag (Meatbag Catapult)
     [104700] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_oil_snare.dds', name = Abilities.Skill_Oil_Catapult, buff = false, debuff = false, ground = true }, -- Twisting Path (Oil Catapult)
-    [104690] = { icon = 'esoui/art/icons/LuiExtended/media/icons/abilities/ability_ava_siege_scattershot_catapult.dds', name = Abilities.Skill_Scattershot_Catapult, buff = false, debuff = false, ground = true }, -- Twisting Path (Scattershot Catapult)
+    [104690] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_scattershot_catapult.dds', name = Abilities.Skill_Scattershot_Catapult, buff = false, debuff = false, ground = true }, -- Twisting Path (Scattershot Catapult)
 
     -- Monster Sets
     [59590] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_bogdan.dds', name = Abilities.Set_Bogdan_the_Nightflame, buff = true, debuff = false, ground = false }, -- Imperial Prison Item Set (Bogdan the Nightflame)
@@ -2263,6 +2263,37 @@ Effects.EffectOverrideByName = {
         [Unitnames.Boss_Limbscather] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Limbscather (Glenumbra)
     },
 
+    -- CYRODIIL
+    [64674] = { -- Cyrodiil Guard See Stealth
+        [Unitnames.NPC_Guard_AD]                            = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ad.dds' }, -- Dominion Guard
+        [Unitnames.NPC_Honor_Guard_AD]                      = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ad.dds' }, -- Dominion Honor Guard
+        [Unitnames.NPC_Mender_AD]                           = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ad.dds' }, -- Dominion Mender
+        [Unitnames.NPC_Mage_Guard_AD]                       = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ad.dds' }, -- Dominion Mage Guard
+        [Unitnames.NPC_Skirmisher_AD]                       = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ad.dds' }, -- Dominion Skirmisher
+        [Unitnames.NPC_Archer_Guard_AD]                     = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ad.dds' }, -- Dominion Archer Guard
+        [Unitnames.NPC_Guard_DC]                            = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_dc.dds' }, -- Covenant Guard
+        [Unitnames.NPC_Honor_Guard_DC]                      = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_dc.dds' }, -- Covenant Honor Guard
+        [Unitnames.NPC_Mender_DC]                           = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_dc.dds' }, -- Covenant Mender
+        [Unitnames.NPC_Mage_Guard_DC]                       = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_dc.dds' }, -- Covenant Mage Guard
+        [Unitnames.NPC_Skirmisher_DC]                       = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_dc.dds' }, -- Covenant Skirmisher
+        [Unitnames.NPC_Archer_Guard_DC]                     = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_dc.dds' }, -- Covenant Archer Guard
+        [Unitnames.NPC_Guard_EP]                            = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ep.dds' }, -- Pact Guard
+        [Unitnames.NPC_Honor_Guard_EP]                      = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ep.dds' }, -- Pact Honor Guard
+        [Unitnames.NPC_Mender_EP]                           = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ep.dds' }, -- Pact Mender
+        [Unitnames.NPC_Mage_Guard_EP]                       = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ep.dds' }, -- Pact Mage Guard
+        [Unitnames.NPC_Skirmisher_EP]                       = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ep.dds' }, -- Pact Skirmisher
+        [Unitnames.NPC_Archer_Guard_EP]                     = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ep.dds' }, -- Pact Archer Guard
+    },
+    [15780] = { -- Honor Guard Rage (Cyrodiil Honor Guard T1)
+         [Unitnames.NPC_Honor_Guard_AD]                     = { icon = 'LuiExtended/media/icons/abilities/ability_spell_honor_guard_rage_ad.dds' }, -- Dominion Honor Guard
+         [Unitnames.NPC_Honor_Guard_DC]                     = { icon = 'LuiExtended/media/icons/abilities/ability_spell_honor_guard_rage_dc.dds' }, -- Covenant Honor Guard
+         [Unitnames.NPC_Honor_Guard_EP]                     = { icon = 'LuiExtended/media/icons/abilities/ability_spell_honor_guard_rage_ep.dds' }, -- Pact Honor Guard
+    },
+    [46992] = { -- Crippling Rage (Cyrodiil Honor Guard T2)
+         [Unitnames.NPC_Honor_Guard_AD]                     = { icon = 'LuiExtended/media/icons/abilities/ability_spell_honor_guard_rage_ad.dds' }, -- Dominion Honor Guard
+         [Unitnames.NPC_Honor_Guard_DC]                     = { icon = 'LuiExtended/media/icons/abilities/ability_spell_honor_guard_rage_dc.dds' }, -- Covenant Honor Gaurd
+         [Unitnames.NPC_Honor_Guard_EP]                     = { icon = 'LuiExtended/media/icons/abilities/ability_spell_honor_guard_rage_ep.dds' }, -- Pact Honor Guard
+    },
     -- QUESTS
     [37028] = {
         [Unitnames.NPC_Auroran_Battlemage] =      { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds', name = Abilities.Skill_Quick_Strike }, -- Quick Strike (Auroran Battlemage)
@@ -3473,13 +3504,18 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     [18084] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_burning.dds', tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Burning (Fire Status Effect)
+    [130804] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_burning.dds', tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Burning (Fire Status Effect - Siege)
     [21925] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_diseased.dds' }, -- Diseased (Disease Status Effect)
     [21927] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_diseased.dds', tooltip = Abilities.Proc_Diseased }, -- Minor Defile (Disease Status Effect)
     [21481] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_chill.dds', name = Abilities.Proc_Chilled }, -- Chill (Frost Status Effect)
     [68368] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_chill.dds', tooltip = Abilities.Proc_Chilled }, -- Minor Maim (Frost Status Effect)
+    [130814] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_chill.dds', name = Abilities.Proc_Chilled }, -- Chill (Frost Status Effect)
+    [130815] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_chill.dds', tooltip = Abilities.Proc_Chilled }, -- Minor Maim (Frost Status Effect)
     [21929] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_poisoned.dds', tooltip = Tooltips.Generic_Poison, tooltipValue2 = 2 }, -- Poisoned (Poison Status Effect)
     [21487] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_concussion.dds' }, -- Concussion (Shock Status Effect)
     [68359] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_concussion.dds', tooltip = Abilities.Proc_Concussion }, -- Minor Vulnerability (Shock Status Effect)
+    [130808] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_concussion.dds' }, -- Concussion (Shock Status Effect - Siege)
+    [130809] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_concussion.dds', tooltip = Abilities.Proc_Concussion }, -- Minor Vulnerability (Shock Status Effect - Siege)
 
     ----------------------------------------------------------------
     -- MUNDUS STONE BOONS ------------------------------------------
@@ -4759,8 +4795,8 @@ Effects.EffectOverride = {
 
     -- Storm Calling
 
-    --[31419] = { icon = 'esoui/art/icons/ability_sorcerer_015.dds' }, -- Capacitor
-    --[45188] = { icon = 'esoui/art/icons/ability_sorcerer_015.dds' }, -- Capacitor
+    [31419] = { icon = 'LuiExtended/media/icons/abilities/passive_sorcerer_capacitor.dds' }, -- Capacitor
+    [45188] = { icon = 'LuiExtended/media/icons/abilities/passive_sorcerer_capacitor.dds' }, -- Capacitor
 
     [31421] = { icon = 'esoui/art/icons/ability_sorcerer_068.dds' }, -- Energized (Energized - Rank 1)
     [45190] = { icon = 'esoui/art/icons/ability_sorcerer_068.dds' }, -- Energized (Energized - Rank 2)
@@ -7265,11 +7301,11 @@ Effects.EffectOverride = {
     [88506] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_flesh_atronach.dds' }, -- Summon Abomination (Bonelord)
     [88507] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_flesh_atronach.dds' }, -- Summon Abomination (Bonelord)
     [44339] = { icon = 'esoui/art/icons/ability_undaunted_005a.dds' }, -- Bone Surge (Bonelord)
-    [10601] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_minor_wound.dds', hide = true }, -- Minor Wound (Healer)
-    [57534] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_focused_healing.dds', tooltip = Tooltips.Skill_Focused_Healing }, -- Focused Healing (Healer)
-    [57537] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_focused_healing.dds' }, -- Focused Healing (Healer)
-    [57538] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_focused_healing.dds' }, -- Focused Healing (Healer)
-    [50966] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_healer_immune.dds', name = Abilities.Skill_Defensive_Ward, tooltip = Tooltips.Skill_Defensive_Ward }, -- Healer Immune (Healer)
+    [10601] = { icon = 'esoui/art/icons/ability_templar_sun_fire.dds', name = Abilities.Skill_Sun_Fire, hide = true }, -- Minor Wound (Healer)
+    [57534] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_focused_healing.dds', tooltip = Tooltips.Skill_Focused_Healing }, -- Focused Healing (Healer)
+    [57537] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_focused_healing.dds' }, -- Focused Healing (Healer)
+    [57538] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_focused_healing.dds' }, -- Focused Healing (Healer)
+    [50966] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_defensive_ward.dds', name = Abilities.Skill_Defensive_Ward, tooltip = Tooltips.Skill_Defensive_Ward }, -- Healer Immune (Healer)
     [50931] = { hide = true }, -- Healer Immune (Healer)
     [50975] = { hide = true }, -- Healer Immune (Healer)
     [50998] = { hide = true }, -- Rite of Passage (Healer)
@@ -7388,34 +7424,37 @@ Effects.EffectOverride = {
     [36304] = { tooltip = Tooltips.Skill_Razor_Armor }, -- Razor Armor (Cyrodiil Guard T2)
     [36306] = { hide = true }, -- Razor Armor (Cyrodiil Guard T2)
     [36305] = { name = Abilities.Skill_Razor_Armor }, -- Spike Armor Damage Return (Cyrodiil Guard T2)
+
     [7880] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shock_torrent.dds', name = Abilities.Skill_Shock_Torrent, hide = true }, -- Light Attack (Cyrodiil Mage T1)
     [46336] = { name = Abilities.Skill_Crystal_Shard, tooltip = Tooltips.Generic_Stun }, -- Crystal Shard Stun (Cyrodiil Mage T1)
-    [7883] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Shock, tooltipValue2 = 1 }, -- Guardian Storm
-    [21629] = { icon = 'esoui/art/icons/ability_mage_008.dds' }, -- Mage's Lifesteal (Cyrodiil Mage T1)
+    [7883] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_guardian_storm.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Shock, tooltipValue2 = 1 }, -- Guardian Storm
+    [21629] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_essence_siphon.dds', name = Abilities.Skill_Essence_Siphon }, -- Mage's Lifesteal (Cyrodiil Mage T1)
     [46711] = { hide = true }, -- Bound Aegis (Cyrodiil Mage T2)
     [46726] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shock_torrent.dds', name = Abilities.Skill_Improved_Shock_Torrent, hide = true }, -- Shock Torrent (Cyrodiil Mage T2)
     [46730] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shock_torrent.dds', name = Abilities.Skill_Improved_Shock_Torrent, tooltip = Tooltips.Generic_Shock, tooltipValue2 = 1 }, -- Shock Torrent (Cyrodiil Mage T2)
-    [46819] = { icon = 'esoui/art/icons/ability_mage_068.dds', name = Abilities.Skill_Lasting_Storm, groundLabel = true, tooltip = Tooltips.Generic_AOE_Shock, tooltipValue2 = 1 }, -- Storm Damage (Cyrodiil Mage T2)
+    [46819] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_guardian_storm.dds', name = Abilities.Skill_Lasting_Storm, groundLabel = true, tooltip = Tooltips.Generic_AOE_Shock, tooltipValue2 = 1 }, -- Storm Damage (Cyrodiil Mage T2)
     [46704] = { icon = 'esoui/art/icons/ability_sorcerer_thunder_burst.dds' }, -- Crystal Blast (Cyrodiil Mage T2)
     [46705] = { icon = 'esoui/art/icons/ability_sorcerer_thunder_burst.dds' }, -- Crystal Blast (Cyrodiil Mage T2)
     [46706] = { icon = 'esoui/art/icons/ability_sorcerer_thunder_burst.dds', name = Abilities.Skill_Crystal_Blast, tooltip = Tooltips.Generic_Knockdown }, -- Crystal Shard Stun (Cyrodiil Mage T2)
-    [46716] = { icon = 'esoui/art/icons/ability_mage_008.dds', name = Abilities.Skill_Steal_Essence }, -- Stolen Essence (Cyrodiil Mage T2)
+    [46716] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_essence_siphon.dds', name = Abilities.Skill_Essence_Siphon }, -- Stolen Essence (Cyrodiil Mage T2)
     [46719] = { hide = true }, -- Stolen Essence (Cryodiil Mage T2) (Pointless aura)
     [52806] = { tooltip = Tooltips.Skill_Unstable_Core_Cyrodiil }, -- Unstable Core (Cyrodiil Mage T2)
     [75397] = { hide = true }, -- Unstable Core (Cryodiil Mage T2) (Pointless aura)
     [75395] = { hide = true }, -- Reflected FX (Cryodiil Mage T2) (Pointless aura)
-    [57962] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_minor_wound.dds', hide = true }, -- Minor Wound (Cyrodiil Mender T1)
+
+    [57962] = { icon = 'esoui/art/icons/ability_templar_sun_fire.dds', name = Abilities.Skill_Sun_Fire, hide = true }, -- Minor Wound (Cyrodiil Mender T1)
     [46272] = { duration = 0, groundLabel = true, tooltip = Tooltips.Skill_Rune_Focus_Cyrodiil }, -- Rune Focus (Cyrodiil Mender T1)
     [21638] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_telekinetic_disorient.dds', name = Abilities.Skill_Telekinetic_Prison, tooltip = Tooltips.Generic_Disorient }, -- Telekinetic Disorient (Cyrodiil Mender T1)
-    [46839] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_minor_wound.dds', hide = true }, -- Major Wound (Cyrodiil Mender T2)
+    [46839] = { icon = 'esoui/art/icons/ability_templar_sun_fire.dds', name = Abilities.Skill_Sun_Fire, hide = true }, -- Major Wound (Cyrodiil Mender T2)
     [46904] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Skill_Rune_Focus_Cyrodiil }, -- Rune Focus (Cyrodiil Mender T2)
     [46906] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_telekinetic_disorient.dds', name = Abilities.Skill_Shattering_Prison, tooltip = Tooltips.Skill_Shattering_Prison_Cyrodiil }, -- Telekinetic Disorient (Cyrodiil Mender T2)
     [46910] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_telekinetic_disorient.dds' }, -- Shattering Prison (Cyrodiil Mender T2)
     [52862] = { hide = true }, -- Health Boon (Cyrodiil Mender T2)
     [22469] = { hide = true }, -- Siege Shield (Cyrodiil Mender T1 + T2)
-    [22489] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_healer_immune.dds', name = Abilities.Skill_Siege_Barrier, tooltip = Tooltips.Skill_Siege_Shield_Cyrodiil }, -- Siege Bubble (Cyrodiil Mender T1 + T2)
+    [22489] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_siege_bubble.dds', name = Abilities.Skill_Siege_Barrier, tooltip = Tooltips.Skill_Siege_Shield_Cyrodiil }, -- Siege Bubble (Cyrodiil Mender T1 + T2)
     [51893] = { icon = 'esoui/art/icons/ability_sorcerer_monsoon.dds', duration = 0, tooltip = Tooltips.Generic_Stun_No_Dur, groundLabel = true }, -- Negate Magic (Cyrodiil Mender T1 + T2)
     [51894] = { duration = 0, tooltip = Tooltips.Generic_Silence_No_Dur, groundLabel = true }, -- Negate Magic (Cyrodiil Mender T1 + T2)
+
     [52864] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_shot.dds' }, -- Quick Shot (Cyrodiil Archer T1 + T2)
     [52866] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Physical, tooltipValue2 = 0.5 }, -- Volley (Cyrodiil Archer T1)
     [54258] = { name = Abilities.Skill_Improved_Volley, groundLabel = true, tooltip = Tooltips.Generic_AOE_Physical, tooltipValue2 = 0.5 }, -- Upgraded Volley (Cyrodiil Archer T2)
@@ -7424,19 +7463,20 @@ Effects.EffectOverride = {
     [54259] = { icon = 'esoui/art/icons/ability_bow_004_a.dds', hide = true }, -- Draining Shot (Cryodiil Archer T2)
     [54261] = { icon = 'esoui/art/icons/ability_bow_004_a.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 50 }, -- Draining Shot (Cryodiil Archer T2)
     [70414] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_fire_damage.dds', tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 0.5, groundLabel = true }, -- Ignite (Synergy - Fire Mage)
+
     [16510] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fire_torrent.dds', name = Abilities.Skill_Fire_Torrent, hide = true }, -- Fire Salvo (Cyrodiil Honor Guard T1)
-    [15780] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_shock_damage.dds' }, -- Honor Guard Rage (Cyrodiil Honor Guard T1)
+    [15780] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_honor_guard_rage.dds' }, -- Honor Guard Rage (Cyrodiil Honor Guard T1)
     [32446] = { icon = 'esoui/art/icons/ability_dragonknight_011.dds', name = Abilities.Skill_Dragon_Blood, tooltip = Tooltips.Generic_Health_Recovery }, -- Guardian Heal (Cyrodiil Honor Guard T1)
-    [35113] = { icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', hide = true }, -- Extended Chains (Cyrodiil Honor Guard T1)
-    [35115] = { icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', name = Abilities.Skill_Extended_Chains, hide = true, tooltip = Tooltips.Generic_Stun }, -- Pull (Cyrodiil Honor Guard T1)
-    [46992] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_shock_snare.dds' }, -- Crippling Rage (Cyrodiil Honor Guard T2)
+    [35113] = { name = Abilities.Skill_Fiery_Grip, hide = true }, -- Extended Chains (Cyrodiil Honor Guard T1)
+    [35115] = { name = Abilities.Skill_Fiery_Grip, hide = true, tooltip = Tooltips.Generic_Stun }, -- Pull (Cyrodiil Honor Guard T1)
+    [46992] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_honor_guard_rage.dds' }, -- Crippling Rage (Cyrodiil Honor Guard T2)
     [47001] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_shock_snare.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 50 }, -- Crippling Rage (Cyrodiil Honor Guard T2)
     [47004] = { icon = 'esoui/art/icons/ability_dragonknight_011.dds', name = Abilities.Skill_Dragon_Blood, tooltip = Tooltips.Generic_Health_Recovery }, -- Guardian Heal (Cyrodiil Honor Guard T2)
-    [47019] = { icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', hide = true }, -- Puncturing Chains (Cyrodiil Honor Guard T2)
-    [47023] = { icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', name = Abilities.Skill_Puncturing_Chains, tooltip = Tooltips.Generic_Increase_Damage_Taken, tooltipValue2 = 21.5 }, -- Puncture (Cyrodiil Honor Guard T2)
-    [47020] = { icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', name = Abilities.Skill_Puncturing_Chains, hide = true, tooltip = Tooltips.Generic_Stun }, -- Pull (Cyrodiil Honor Guard T2)
-    [15783] = { icon = 'esoui/art/icons/ability_warrior_022.dds' }, -- Triple Strike (Cyrodiil Honor Guard T1 + T2)
-    [15782] = { icon = 'esoui/art/icons/ability_warrior_022.dds' }, -- Triple Strike (Cyrodiil Honor Guard T1 + T2)
+    [47019] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_puncturing_chains.dds', hide = true }, -- Puncturing Chains (Cyrodiil Honor Guard T2)
+    [47023] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_puncturing_chains.dds', name = Abilities.Skill_Puncturing_Chains, tooltip = Tooltips.Generic_Increase_Damage_Taken, tooltipValue2 = 21.5 }, -- Puncture (Cyrodiil Honor Guard T2)
+    [47020] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_puncturing_chains.dds', name = Abilities.Skill_Puncturing_Chains, hide = true, tooltip = Tooltips.Generic_Stun }, -- Pull (Cyrodiil Honor Guard T2)
+    [15783] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_triple_strike.dds' }, -- Triple Strike (Cyrodiil Honor Guard T1 + T2)
+    [15782] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_triple_strike.dds' }, -- Triple Strike (Cyrodiil Honor Guard T1 + T2)
     [46990] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fire_torrent.dds', hide = true }, -- Improved Fire Torrent (Cyrodiil Honor Guard T2)
     [46991] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fire_torrent.dds', name = Abilities.Skill_Improved_Fire_Torrent, tooltip = Tooltips.Generic_Burn, tooltipValue2 = 1 }, -- Fire Torrent Burning (Cryodiil Honor Guard T2)
 
@@ -8359,8 +8399,8 @@ Effects.EffectOverride = {
     [34385] = { hide = true }, -- Generic AOE (Ogre Shaman)
     [53966] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_pillar.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 60 }, -- Ice Pillar Chill (Ogre Shaman)
     [54327] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_frost_root.dds', name = Abilities.Skill_Frozen, tooltip = Tooltips.Generic_Immobilize }, -- Winter's Reach (Ogre Shaman)
-    [64540] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_freeze_wounds.dds' }, -- Freeze Wounds (Ogre Shaman)
-    [53137] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_freeze_wounds.dds' }, -- Freeze Wounds (Ogre Shaman)
+    [64540] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_freeze_wounds.dds' }, -- Freeze Wounds (Ogre Shaman)
+    [53137] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_freeze_wounds.dds' }, -- Freeze Wounds (Ogre Shaman)
 
     [2986] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_lacerate.dds' }, -- Lacerate (Spriggan)
     [21582] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm.dds' }, -- Nature's Swarm (Spriggan)
@@ -8772,7 +8812,7 @@ Effects.EffectOverride = {
 
     [109862] = { hide = true }, -- Stronger Walls
     [109944] = { hide = true }, -- Stronger Doors
-    [64674] = { icon = 'esoui/art/icons/ava_siege_hookpoint_005.dds', name = Abilities.Skill_Guard_Detection, tooltip = Tooltips.Skill_Guard_Detection }, -- Cyrodiil Guard See Stealth
+    [64674] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance.dds', name = Abilities.Skill_Guard_Detection, tooltip = Tooltips.Skill_Guard_Detection }, -- Cyrodiil Guard See Stealth
     [8077] = { hide = true }, -- Increased Guard Health
     [8639] = { hide = true }, -- Increased Damage
     [43754] = { hide = true }, -- Heavily Resistant Guards
@@ -8794,9 +8834,9 @@ Effects.EffectOverride = {
     [29673] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Covenant, Abilities.Skill_Ballista) }, -- Create Ballista Bolt... (Ballista)
     [29672] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Pact, Abilities.Skill_Ballista) }, -- Create Ballista Bolt... (Ballista)
     [29671] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Dominion, Abilities.Skill_Ballista) }, -- Create Ballista Bolt... (Ballista)
-    [7468] = { icon = 'esoui/art/icons/LuiExtended/media/icons/abilities/ability_ava_siege_ballista_bolt.dds' }, -- Ballista Bolt (Ballista)
-    [7469] = { icon = 'esoui/art/icons/LuiExtended/media/icons/abilities/ability_ava_siege_ballista_bolt.dds' }, -- Ballista Bolt (Ballista)
-    [13043] = { icon = 'esoui/art/icons/LuiExtended/media/icons/abilities/ability_ava_siege_ballista_bolt.dds' }, -- Ballista Bolt (Ballista)
+    [7468] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_ballista_bolt.dds' }, -- Ballista Bolt (Ballista)
+    [7469] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_ballista_bolt.dds' }, -- Ballista Bolt (Ballista)
+    [13043] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_ballista_bolt.dds' }, -- Ballista Bolt (Ballista)
 
     [30611] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Covenant, Abilities.Skill_Fire_Ballista) }, -- Create Ballista Fire Bolt... (Fire Ballista)
     [30607] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Pact, Abilities.Skill_Fire_Ballista) }, -- Create Ballista Fire Bolt... (Fire Ballista)
@@ -8838,10 +8878,10 @@ Effects.EffectOverride = {
     [30609] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_catapult.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Pact, Abilities.Skill_Meatbag_Catapult) }, -- Create Catapult Meatbag (Meatbag Catapult)
     [16755] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_catapult.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Dominion, Abilities.Skill_Meatbag_Catapult) }, -- Create Catapult Meatbag (Meatbag Catapult)
     [88714] = { tooltip = Tooltips.Skill_Meatbag_Catapult_Ground }, -- Meatbag (Meatbag Catapult)
-    [14774] = { icon = 'esoui/art/icons/LuiExtended/media/icons/abilities/ability_ava_siege_meatbag_catapult.dds' }, -- Meatbag Catapult (Meatbag Catapult)
-    [104693] = { icon = 'esoui/art/icons/LuiExtended/media/icons/abilities/ability_ava_siege_meatbag_catapult.dds', tooltip = Tooltips.Skill_Meatbag_Catapult_AOE, groundLabel = true }, -- Meatbag Catapult (Meatbag Catapult)
-    [32036] = { icon = 'esoui/art/icons/LuiExtended/media/icons/abilities/ability_ava_siege_meatbag_catapult.dds', tooltip = Tooltips.Skill_Meatbag_Catapult }, -- Meatbag Catapult (Meatbag Catapult)
-    [36408] = { icon = 'esoui/art/icons/LuiExtended/media/icons/abilities/ability_ava_siege_meatbag_catapult.dds', type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = Tooltips.Generic_Disease, tooltipValue2 = 2 }, -- Meatbag Catapult (Meatbag Catapult)
+    [14774] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_meatbag_catapult.dds' }, -- Meatbag Catapult (Meatbag Catapult)
+    [104693] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_meatbag_catapult.dds', tooltip = Tooltips.Skill_Meatbag_Catapult_AOE, groundLabel = true }, -- Meatbag Catapult (Meatbag Catapult)
+    [32036] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_meatbag_catapult.dds', tooltip = Tooltips.Skill_Meatbag_Catapult }, -- Meatbag Catapult (Meatbag Catapult)
+    [36408] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_meatbag_catapult.dds', type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = Tooltips.Generic_Disease, tooltipValue2 = 2 }, -- Meatbag Catapult (Meatbag Catapult)
 
     [30614] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_catapult.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Covenant, Abilities.Skill_Oil_Catapult) }, -- Create Catapult Oil Jar... (Oil Catapult)
     [30610] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_catapult.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Pact, Abilities.Skill_Oil_Catapult) }, -- Create Catapult Oil Jar... (Oil Catapult)
@@ -8857,9 +8897,9 @@ Effects.EffectOverride = {
     [39918] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_catapult.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Pact, Abilities.Skill_Scattershot_Catapult) }, -- Create Catapult Oil Jar... (Scattershot Catapult)
     [39911] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_catapult.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Dominion, Abilities.Skill_Scattershot_Catapult) }, -- Create Trebuchet... (Scattershot Catapult)
     [104690] = { tooltip = Tooltips.Skill_Scattershot_Catapult_Ground }, -- Twisting Path (Scattershot Catapult)
-    [14611] = { icon = 'esoui/art/icons/LuiExtended/media/icons/abilities/ability_ava_siege_scattershot_catapult.dds' }, -- Scattershot Catapult (Scattershot Catapult)
-    [104695] = { icon = 'esoui/art/icons/LuiExtended/media/icons/abilities/ability_ava_siege_scattershot_catapult.dds', tooltip = Tooltips.Skill_Scattershot_Catapult_AOE, groundLabel = true }, -- Scattershot Catapult (Scattershot Catapult)
-    [104696] = { icon = 'esoui/art/icons/LuiExtended/media/icons/abilities/ability_ava_siege_scattershot_catapult.dds', tooltip = Tooltips.Skill_Scattershot_Catapult }, -- Scattershot Catapult (Scattershot Catapult)
+    [14611] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_scattershot_catapult.dds' }, -- Scattershot Catapult (Scattershot Catapult)
+    [104695] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_scattershot_catapult.dds', tooltip = Tooltips.Skill_Scattershot_Catapult_AOE, groundLabel = true }, -- Scattershot Catapult (Scattershot Catapult)
+    [104696] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_scattershot_catapult.dds', tooltip = Tooltips.Skill_Scattershot_Catapult }, -- Scattershot Catapult (Scattershot Catapult)
 
     [66438] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_cold_stone_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Covenant, Abilities.Skill_Cold_Stone_Trebuchet) }, -- Create Trebuchet... (Cold Stone Trebuchet)
     [66439] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_cold_stone_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Pact, Abilities.Skill_Cold_Stone_Trebuchet) }, -- Create Trebuchet... (Cold Stone Trebuchet)
@@ -8927,12 +8967,12 @@ Effects.EffectOverride = {
     -- Siege Warfare
     [35106] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_firepot_trebuchet.dds' , name = Abilities.Skill_Firepot_Trebuchet }, -- Fire (Firepot Trebuchet)
     [35099] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_iceball_trebuchet.dds', name = Abilities.Skill_Iceball_Trebuchet }, -- Ice Damage (Iceball Trebuchet)
-    [35112] = { icon = 'esoui/art/icons/LuiExtended/media/icons/abilities/ability_ava_siege_stone_trebuchet.dds', name = Abilities.Skill_Stone_Trebuchet }, -- Stoneball (Stone Trebuchet)
-    [35094] = { icon = 'esoui/art/icons/LuiExtended/media/icons/abilities/ability_ava_siege_ballista_bolt.dds', name = Abilities.Skill_Ballista_Bolt }, -- Bolt (Ballista)
+    [35112] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_stone_trebuchet.dds', name = Abilities.Skill_Stone_Trebuchet }, -- Stoneball (Stone Trebuchet)
+    [35094] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_ballista_bolt.dds', name = Abilities.Skill_Ballista_Bolt }, -- Bolt (Ballista)
     [35055] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_fire_ballista_bolt.dds', name = Abilities.Skill_Fire_Ballista_Bolt }, -- Fire (Firebolt Ballista)
     [35080] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_lightning_ballista_bolt.dds', name = Abilities.Skill_Lightning_Ballista_Bolt }, -- Bolt (Lightning Ballista)
-    [35121] = { icon = 'esoui/art/icons/LuiExtended/media/icons/abilities/ability_ava_siege_scattershot_catapult.dds', name = Abilities.Skill_Scattershot_Catapult }, -- Ice Damage (Scattershot Catapult)
-    [35136] = { icon = 'esoui/art/icons/LuiExtended/media/icons/abilities/ability_ava_siege_meatbag_catapult.dds' , name = Abilities.Skill_Meatbag_Catapult }, -- Meatbag (Meatbag Catapult)
+    [35121] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_scattershot_catapult.dds', name = Abilities.Skill_Scattershot_Catapult }, -- Ice Damage (Scattershot Catapult)
+    [35136] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_meatbag_catapult.dds' , name = Abilities.Skill_Meatbag_Catapult }, -- Meatbag (Meatbag Catapult)
     [35132] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_oil_catapult.dds', name = Abilities.Skill_Oil_Catapult }, -- Oil Pot (Oil Catapult)
     [33348] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_repair_kit_practice_siege.dds' }, -- Practice Siege Repair Kit (Practice Siege Repair Kit)
 
@@ -9062,7 +9102,7 @@ Effects.EffectOverride = {
     [63755] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heat_wave.dds' }, -- Heat Wave (Skeletal Pyromancer)
     [63756] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heat_wave.dds', hide = true }, -- Heat Wave - Used by Skeletal Pyromancer in Tutorial }, -- Heat Wave (Skeletal Pyromancer)
     [64072] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', type = BUFF_EFFECT_TYPE_DEBUFF, duration = 0, unbreakable = 1, tooltip = Tooltips.Generic_Stun_No_Dur, stack = 0 }, -- Eye of the Sentinel (CH Tutorial)
-    [48345] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_focused_healing.dds', tooltip = Tooltips.Generic_HoT_Channel, tooltipValue2 = 0.5 }, -- Focused Healing (The Prophet)
+    [48345] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_focused_healing.dds', tooltip = Tooltips.Generic_HoT_Channel, tooltipValue2 = 0.5 }, -- Focused Healing (The Prophet)
     [48346] = { hide = true }, -- Minor Wound (The Prophet)
     [63521] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_bone_saw_tutorial.dds', name = Abilities.Skill_Stomp }, -- Bone Crush (Child of Bones)
     [63522] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_bone_saw_tutorial.dds', name = Abilities.Skill_Stomp }, -- Bone Saw (Child of Bones)
@@ -10408,9 +10448,9 @@ Effects.EffectOverride = {
     [71994] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_arrow.dds', name = Abilities.Skill_Cold_Snap, hide = true }, -- Cold Snap Bolt (Leimenid Oracle)
     [71997] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_arrow.dds', unbreakable = 1, tooltip = Tooltips.Skill_Cold_Snap, tooltipValue2 = 27, stackAdd = 1 }, -- Cold Snap (Leimenid Oracle)
 
-    [71926] = { icon = 'esoui/art/icons/ability_warrior_022.dds' }, -- Frenzy of Blows (Angirgoth)
-    [71930] = { icon = 'esoui/art/icons/ability_warrior_022.dds' }, -- Frenzy of Blows (Angirgoth)
-    [71929] = { icon = 'esoui/art/icons/ability_warrior_022.dds' }, -- Frenzy of Blows (Angirgoth)
+    [71926] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_triple_strike.dds' }, -- Frenzy of Blows (Angirgoth)
+    [71930] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_triple_strike.dds' }, -- Frenzy of Blows (Angirgoth)
+    [71929] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_triple_strike.dds' }, -- Frenzy of Blows (Angirgoth)
 
     [71931] = { name = Abilities.Skill_Flurry, hide = true }, -- Rapid Strikes (Angirgoth)
     [71932] = { name = Abilities.Skill_Flurry }, -- Rapid Strikes (Angirgoth)
@@ -10713,7 +10753,7 @@ Effects.EffectOverride = {
     [27828] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds', tooltip = Tooltips.Generic_Knockback }, -- Crushing Blow (Keeper Voranil)
     [29018] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (Keeper Voranil)
     [29020] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (Keeper Voranil)
-    [28750] = { icon = 'esoui/art/icons/ability_mage_008.dds', hide = true }, -- Essence Siphon (Keeper Voranil)
+    [28750] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_essence_siphon.dds', hide = true }, -- Essence Siphon (Keeper Voranil)
 
     [64518] = { hide = true }, -- Shatter
 
@@ -10935,9 +10975,9 @@ Effects.EffectOverride = {
 
     -- City of Ash II
     [53999] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_flame_atronach_red.dds', name = Abilities.Skill_Summon_Flame_Atronach }, -- Summon (Flame Atronach)
-    [54126] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_minor_wound.dds', hide = true }, -- Minor Wound (Akezel)
+    [54126] = { icon = 'esoui/art/icons/ability_templar_sun_fire.dds', name = Abilities.Skill_Sun_Fire, hide = true }, -- Minor Wound (Akezel)
     [54025] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_spell_absorption.dds', tooltip = Tooltips.Skill_Spell_Absorption }, -- Spell Absorption (Akezel)
-    [53994] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_focused_healing.dds' }, -- Focused Healing (Akezel)
+    [53994] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_focused_healing.dds' }, -- Focused Healing (Akezel)
     [53996] = { hide = true }, -- Health Boon (Akezel)
     [53988] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_shot.dds', name = Abilities.Skill_Quick_Shot }, -- Quick Draw (Marruz)
     [54021] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_blazing_embers.dds', name = Abilities.Skill_Blazing_Embers }, -- Release Flame (Marruz)

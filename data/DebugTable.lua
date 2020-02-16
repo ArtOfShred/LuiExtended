@@ -917,15 +917,22 @@ LUIE.DebugAuras = {
     -------------------------------------
 
     [18084] = true, -- Burning (Fire Status Effect)
+    [130804] = true, -- Burning (Fire Status Effect - Siege)
     [21925] = true, -- Diseased (Disease Status Effect)
     [21927] = true, -- Major Defile (Disease Status Effect)
     [21481] = true, -- Chill (Frost Status Effect)
     [68368] = true, -- Minor Maim (Frost Status Effect)
     [95136] = true, -- Chill (Frost Status Effect)
+    [130814] = true, -- Chill (Frost Status Effect)
+    [130815] = true, -- Minor Maim (Frost Status Effect)
+    [130816] = true, -- Chill (Frost Status Effect)
     [21929] = true, -- Poisoned (Poison Status Effect)
     [21487] = true, -- Concussion (Shock Status Effect)
     [68359] = true, -- Minor Maim (Shock Status Effect)
     [95134] = true, -- Concussion (Shock Status Effect)
+    [130808] = true, -- Concussion (Shock Status Effect - Siege)
+    [130809] = true, -- Minor Maim (Shock Status Effect - Siege)
+    [130810] = true, -- Concussion (Shock Status Effect - Siege)
 
     -------------------------------------
     -- EQUIPMENT ------------------------

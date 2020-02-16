@@ -958,7 +958,6 @@ local AbilityTables = {
     -- Cyrodiil
     Skill_Shock_Torrent               = 46726,
     Skill_Improved_Shock_Torrent      = GetString(SI_LUIE_SKILL_IMPROVED_SHOCK_TORRENT),
-    Skill_Steal_Essence               = 2786,
     Skill_Lasting_Storm               = 46818,
     Skill_Bleeding_Strike             = 46830,
     Skill_Telekinetic_Prison          = 21636,
@@ -966,7 +965,6 @@ local AbilityTables = {
     Skill_Siege_Barrier               = GetString(SI_LUIE_SKILL_SIEGE_BARRIER),
     Skill_Fire_Torrent                = GetString(SI_LUIE_SKILL_FIRE_TORRENT),
     Skill_Improved_Fire_Torrent       = 46990,
-    Skill_Extended_Chains             = 35113,
     Skill_Puncturing_Chains           = GetString(SI_LUIE_SKILL_PUNCTURING_CHAINS),
     Skill_Improved_Volley             = GetString(SI_LUIE_SKILL_IMPROVED_VOLLEY),
 
@@ -1236,6 +1234,7 @@ local AbilityTables = {
     Skill_Pool_of_Fire                = GetString(SI_LUIE_SKILL_POOL_OF_FIRE),
     Skill_Sisters_Bond                = GetString(SI_LUIE_SKILL_SISTERS_BOND),
     Skill_Levitate                    = 28570,
+    Skill_Essence_Siphon              = 28750,
 
     -- Elden Hollow I
     Skill_Crushing_Blow               = 33189,
