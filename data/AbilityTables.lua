@@ -319,7 +319,6 @@ local AbilityTables = {
     Set_Way_of_Fire                   = 52710,
     Set_Plague_Slinger                = 102113,
     Set_Ice_Furnace                   = GetString(SI_LUIE_SKILL_SET_ICE_FURNACE),
-    Set_Jolting_Arms                  = 67077,
     Set_Hand_of_Mephala               = 84355,
     Set_Tormentor                     = 67280,
     Set_Destructive_Mage              = 51315,
@@ -346,7 +345,6 @@ local AbilityTables = {
     Set_Naga_Shaman                   = 113287,
     Set_Adept_Rider                   = 106775,
     Set_Sloads_Semblance              = 106797,
-    Set_Vykosa                        = 111352,
     Set_Mighty_Chudan                 = 80482,
     Set_Pirate_Skeleton               = 80501,
     Set_Slimecraw                     = GetString(SI_LUIE_SKILL_SET_SLIMECRAW),
@@ -414,6 +412,7 @@ local AbilityTables = {
     Set_Juggernaut                    = 34512,
     Set_Honors_Scorn                  = 121917,
     Set_Honors_Love                   = 121913,
+    Set_Lekis_Focus                   = 76944,
 
     Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE),
 

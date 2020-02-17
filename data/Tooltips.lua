@@ -145,6 +145,8 @@ LUIE.Data.Tooltips = {
     Generic_Reduce_Physical_Spell_Resist_No_Dur     = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_TP),
     Generic_Reduce_Physical_Spell_Resist_No_Dur_Value = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_VALUE_TP),
 
+    Generic_Reduce_Physical_Spell_Damage_Percentage = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_WEP_SPELL_DMG_PERCENTAGE_TP),
+
     Generic_Lower_Max_HP                            = GetString(SI_LUIE_SKILL_GENERIC_LOWER_MAX_HP_TP),
 
     Generic_Test                                    = GetString(SI_LUIE_SKILL_TEST_TP),
@@ -521,6 +523,7 @@ LUIE.Data.Tooltips = {
     Set_Trinimacs_Valor                             = GetString(SI_LUIE_SKILL_TRINIMACS_VALOR_TP),
     Set_Hatchlings_Shell                            = GetString(SI_LUIE_SKILL_SET_HATCHLINGS_SHELL_TP),
     Set_Undaunted_Unweaver                          = GetString(SI_LUIE_SKILL_SET_UNDAUNTED_UNWEAVER_TP),
+    Set_Dunerippers_Scales                          = GetString(SI_LUIE_SKILL_SET_DUNERIPPERS_SCALES_TP),
 
     -- Trial Sets
     Set_Berserking_Warrior                          = GetString(SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP),

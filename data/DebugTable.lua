@@ -923,9 +923,9 @@ LUIE.DebugAuras = {
     [21481] = true, -- Chill (Frost Status Effect)
     [68368] = true, -- Minor Maim (Frost Status Effect)
     [95136] = true, -- Chill (Frost Status Effect)
-    [130814] = true, -- Chill (Frost Status Effect)
-    [130815] = true, -- Minor Maim (Frost Status Effect)
-    [130816] = true, -- Chill (Frost Status Effect)
+    [130814] = true, -- Chill (Frost Status Effect - Siege)
+    [130815] = true, -- Minor Maim (Frost Status Effect - Siege)
+    [130816] = true, -- Chill (Frost Status Effect - Siege)
     [21929] = true, -- Poisoned (Poison Status Effect)
     [21487] = true, -- Concussion (Shock Status Effect)
     [68359] = true, -- Minor Maim (Shock Status Effect)
@@ -1216,7 +1216,7 @@ LUIE.DebugAuras = {
     [80866] = true, -- Tremorscale
 
     [59595] = true, -- Valkyn Skoria
-    [66612] = true, -- CoA Trigger Cooldown
+    [137979] = true, -- Valkyn Skoria
     [59596] = true, -- Valkyn Skoria
     [61273] = true, -- Valkyn Skoria
 
@@ -1871,6 +1871,7 @@ LUIE.DebugAuras = {
     [102023] = true, -- Curse of Doylemish
 
     [32825] = true, -- Duneripper's Scales (Duneripper)
+    [134930] = true, -- Duneripper's Scales (Duneripper)
 
     [32754] = true, -- Durok's Bane (of Durok's Bane)
     [34527] = true, -- Durok's Bane Major Defile (of Durok's Bane)
@@ -1900,7 +1901,6 @@ LUIE.DebugAuras = {
     [67077] = true, -- Jolting Arms (Jolting)
     [67079] = true, -- WGT Heavy Set 2 (Jolting)
     [67078] = true, -- Jolting Arms (Jolting)
-    [67080] = true, -- Shocking Bash (Jolting)
 
     [85619] = true, -- Knight-Errant's Mail (Knight-Errant's)
     [85620] = true, -- Knight-Errant's Mail (Knight-Errant's)
@@ -2140,7 +2140,7 @@ LUIE.DebugAuras = {
     [79419] = true, -- Galerion's Revenge (Galerion's)
     [79421] = true, -- Mark of Revenge (Galerion's)
     [79770] = true, -- U10 AVA MA/LA 1 (Galerion's)
-    [79771] = true, -- U10 AVA MA/LA 1 (Galerion's)
+    --[79771] = true, -- U10 AVA MA/LA 1 (Galerion's)
     [79420] = true, -- Galerion's Revenge (Galerion's)
 
     [79405] = true, -- Imperial Physique (Imperial Physique)
@@ -2233,7 +2233,6 @@ LUIE.DebugAuras = {
 
     [32824] = true, -- Affliction (Afflicted)
     [34787] = true, -- Affliction (Afflicted)
-    [121489] = true, -- Minor Defile (Afflicted)
 
     [117344] = true, -- Beckoning Steel (of Beckoning Steel)
     [29122] = true, -- Beckoning Steel (of Beckoning Steel)

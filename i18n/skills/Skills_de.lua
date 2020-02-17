@@ -236,6 +236,8 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_TP =    "Reduce Physical and Spell Resistance.",
     SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_VALUE_TP = "Reduce Physical and Spell Resistance by |cFFFFFF<<2>>|r.",
 
+    SI_LUIE_SKILL_GENERIC_REDUCE_WEP_SPELL_DMG_PERCENTAGE_TP =   "Reduce Weapon and Spell damage by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+
     SI_LUIE_SKILL_GENERIC_LOWER_MAX_HP_TP =              "Reduce Max Health by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     -- Resource Regeneration, Shields
@@ -866,7 +868,7 @@ local strings = {
     SI_LUIE_SKILL_SET_MALUBETH =                         "Draining Health every |cFFFFFF0.5|r seconds over |cFFFFFF4|r seconds while the beam holds.",
     SI_LUIE_SKILL_SET_MAW_OF_THE_INFERNAL =              "A fire breathing Daedroth fights at your side. The daedroth remains for |cFFFFFF<<1>>|r seconds or until killed.\n\nThe daedroth's basic attacks deal Flame Damage.",
     SI_LUIE_SKILL_SET_MOLAG_KENA_TP =                    "When you deal damage with |cFFFFFF2|r consecutive light attacks, you trigger |cFFFFFFOverkill|r for |cFFFFFF6|r seconds.",
-    SI_LUIE_SKILL_SET_MOLAG_KENA_OVERKILL_TP =           "Increase Weapon and Spell Damage by |cFFFFFF516|r but increase the cost of your abilities by |cFFFFFF20|r% for |cFFFFFF6|r seconds.",
+    SI_LUIE_SKILL_SET_MOLAG_KENA_OVERKILL_TP =           "Increase Weapon and Spell Damage by |cFFFFFF516|r but increase the cost of your abilities by |cFFFFFF8|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_PIRATE_SKELETON_TP =               "Gain Major Protection but become afflicted with Major Defile for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_SENTINEL_OF_REKUGAMZ_TP =          "After |cFFFFFF2|r seconds, you and allies within |cFFFFFF5|r meters of the Dwemer Spider are healed and restore |cFFFFFF115|r Magicka and Stamina every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_SET_SENTINEL_OF_REKUGAMZ_GROUND_TP =   "Healing and restoring |cFFFFFF115|r Magicka and Stamina every |cFFFFFF1|r second.",
@@ -910,7 +912,7 @@ local strings = {
     -- Light / Medium / Heavy Armor Sets
     SI_LUIE_SKILL_SET_BAHRAHAS_CURSE_TP =                "Enemies in the |cFFFFFF3.5|r meter radius of desecrated ground take Magic Damage every |cFFFFFF1|r second and have their Movement Speed reduced by |cFFFFFF70|r%.\n\nYou heal for |cFFFFFF100|r% of the damage done.",
     SI_LUIE_SKILL_BAHRAHAS_CURSE_GROUND_TP =             "Taking Magic Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF70|r%.\n\nYour attacker heals for |cFFFFFF100|r% of the damage done.",
-    SI_LUIE_SKILL_SET_BRIARHEART_TP =                    "Increase Weapon Damage by |cFFFFFF449|r for |cFFFFFF<<1>>|r seconds.\n\nWhile this effect is active your Critical Strikes heal you.",
+    SI_LUIE_SKILL_SET_BRIARHEART_TP =                    "Increase Weapon Damage by |cFFFFFF450|r for |cFFFFFF<<1>>|r seconds.\n\nWhile this effect is active your Critical Strikes heal you.",
     SI_LUIE_SKILL_SET_UNFATHOMABLE_DARKNESS_TP =         "Every |cFFFFFF3|r seconds a crow will be sent to peck the closest enemy within |cFFFFFF12|r meters, dealing Physical Damage.",
     SI_LUIE_SKILL_SET_SHALK_EXOSKELETON =                "Shalk Exoskeleton",
     SI_LUIE_SKILL_SET_ORDER_OF_DIAGNA =                  "Order of Diagna",
@@ -933,7 +935,7 @@ local strings = {
     SI_LUIE_SKILL_SET_EBON_ARMORY =                      "Increase Max Health by |cFFFFFF1000|r.",
     SI_LUIE_SKILL_SET_EMBERSHIELD =                      "Increase Physical and Spell Resistance by |cFFFFFF3440|r.\n\nEnemies within |cFFFFFF5|r meters take Flame Damage every |cFFFFFF1|r second for |cFFFFFF6|r seconds.",
     SI_LUIE_SKILL_SET_HAGRAVENS_GARDEN =                 "Any damage you take from enemies outside of the preservation is reduced by |cFFFFFF50|r%.\n\nThe first time an enemy tries to enter the preservation they are knocked back |cFFFFFF5|r meters.",
-    SI_LUIE_SKILL_SET_JOLTING_ARMS =                     "Increase Physical and Spell Resistance by |cFFFFFF6450|r for |cFFFFFF<<1>>|r seconds and your next Bash deals additional Shock Damage.",
+    SI_LUIE_SKILL_SET_JOLTING_ARMS =                     "Increase Physical and Spell Resistance by |cFFFFFF4620|r for |cFFFFFF<<1>>|r seconds and your next Bash deals additional damage.",
     SI_LUIE_SKILL_SET_LEECHING_PLATE_TP =                "Enemies in the |cFFFFFF5|r meter radius of the poison cloud take Poison Damage every |cFFFFFF1|r second.\n\nYou heal for |cFFFFFF100|r% of the damage done.",
     SI_LUIE_SKILL_SET_MEDUSA =                           "Medusa",
     SI_LUIE_SKILL_SET_HAND_OF_MEPHALA_TP =               "Enemies in the web have their Movement Speed reduced by |cFFFFFF50|r% for |cFFFFFF5|r seconds.\n\nAfter |cFFFFFF5|r seconds the webs burst into venom, dealing Poison Damage and applying Minor Fracture to any enemy hit for |cFFFFFF5|r seconds.",
@@ -953,10 +955,11 @@ local strings = {
     SI_LUIE_SKILL_SET_RAVAGER_TP =                       "Increase Weapon Damage by |cFFFFFF125|r for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF4|r times when you attempt to reduce a target's Physical or Spell Resistance.\n\nThis effect can occur once every second.\n\nUpon reaching |cFFFFFF4|r stacks, the duration is doubled but can no longer be refreshed.",
     SI_LUIE_SKILL_SET_HATCHLINGS_SHELL_TP =              "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThis shield replenishes to absorb |cFFFFFF20|r% of your Max Health in damage for |cFFFFFF15|r seconds every |cFFFFFF15|r seconds.",
     SI_LUIE_SKILL_SET_UNDAUNTED_UNWEAVER_TP =            "Your Light Attacks deal an additional |cFFFFFF774|r damage and Heavy Attacks deal an additional |cFFFFFF1161|r damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_SET_DUNERIPPERS_SCALES_TP =            "Increase Physical and Spell Resistance by |cFFFFFF5310|r while you are blocking.",
 
     -- Trial Sets
     SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP =            "Increase Weapon Critical by |cFFFFFF400|r for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF5|r times when you deal melee damage.\n\nThis effect can occur once every half second.",
-    SI_LUIE_SKILL_SET_DESTRUCTIVE_MAGE_TP =              "When a different attacker damages you with a fully-charged Heavy Attack they detonate the bomb, dealing Magic Damage to you and allies within |cFFFFFF8|r meters.",
+    SI_LUIE_SKILL_SET_DESTRUCTIVE_MAGE_TP =              "When an attacker damages you with a fully-charged Heavy Attack they detonate the bomb, dealing Magic Damage to you and allies within |cFFFFFF8|r meters.",
     SI_LUIE_SKILL_SET_HEALING_MAGE_TP =                  "Reduce Weapon Damage by |cFFFFFF430|r for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_SET_TWICE_FANGED_SERPENT_TP =          "Increase Physical Penetration by |cFFFFFF860|r for |cFFFFFF3|r seconds, stacking up to |cFFFFFF5|r times when you deal damage.",
     SI_LUIE_SKILL_SET_LUNAR_BASTION_TP =                 "You and allies within the |cFFFFFF8|r meter radius of the lunar blessing are granted a damage shield every |cFFFFFF2|r seconds.",
@@ -973,7 +976,7 @@ local strings = {
     SI_LUIE_SKILL_SET_VANGUARDS_CHALLENGE_TP =           "Deal |cFFFFFF100|r% more damage to the player that taunted you, but |cFFFFFF50|r% less damage to all other players for |cFFFFFF15|r seconds.",
 
     -- Imperial City Sets
-    SI_LUIE_SKILL_SET_GALERIONS_REVENGE_TP =             "Marked for |cFFFFFF15|r seconds, stacking up to |cFFFFFF6|r times when your attacker damages you with a Light or Heavy Attack.\n\nUpon reaching |cFFFFFF6|r Marks of Revenge, they detonate and deal Magic Damage.",
+    SI_LUIE_SKILL_SET_GALERIONS_REVENGE_TP =             "Marked for |cFFFFFF15|r seconds, stacking up to |cFFFFFF5|r times when your attacker damages you with a Light or Heavy Attack.\n\nAt |cFFFFFF5|r stacks, the Marks of Revenge detonate, dealing Magic Damage.\n\nYou can only receive a stack once per second.",
     SI_LUIE_SKILL_SET_MERITORIUS_SERVICE_TP =            "Increase Physical and Spell Resistance by |cFFFFFF3010|r for |cFFFFFF2|r minutes.",
     SI_LUIE_SKILL_SET_VICECANON_OF_VENOM_TP =            "Afflicted with Poison Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nYour attacker heals for |cFFFFFF100|r% of the damage done.",
 
