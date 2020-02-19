@@ -9809,6 +9809,38 @@ function ChatAnnouncements.HookFunction()
         end
     end
 
+    ZO_MapKeepUpgrade_Shared.RefreshLevels = function(self)
+        self.levelsGridList:ClearGridList()
+
+        for currentLevel = 0, GetKeepMaxUpgradeLevel(self.keepUpgradeObject:GetKeep()) do
+            local numUpgrades = self.keepUpgradeObject:GetNumLevelUpgrades(currentLevel)
+            if numUpgrades > 0 then
+                local levelHeaderText = zo_strformat(SI_KEEP_UPGRADE_LEVEL_SECTION_HEADER, currentLevel)
+                for i = 1, numUpgrades do
+                    local name, description, icon, atPercent, isActive = self.keepUpgradeObject:GetLevelUpgradeInfo(currentLevel, i)
+                    -- Override with custom icons here.
+                    --[[if LUIE.Effects.KeepUpgradeIcon(name) then
+                        icon = LUIE.Effects.KeepUpgradeIcon(name)
+                    end]]--
+                    local data = {
+                        index = i,
+                        gridHeaderName = levelHeaderText,
+                        level = currentLevel,
+                        name = name,
+                        description = description,
+                        icon = icon,
+                        atPercent = atPercent,
+                        isActive = isActive,
+                    }
+
+                    self.levelsGridList:AddEntry(ZO_GridSquareEntryData_Shared:New(data))
+                end
+            end
+        end
+
+        self.levelsGridList:CommitGridList()
+    end
+
 end
 
 function ChatAnnouncements.TradeInviteAccepted(eventCode)

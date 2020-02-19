@@ -3584,7 +3584,7 @@ Effects.EffectOverride = {
     [113653] = { tooltip = Abilities.Set_Blackrose_Resto_Staff }, -- Major Vitality (Blackrose Restoration Staff)
 
     -- Monster Sets
-    [111505] = { icon = 'esoui/art/icons/vmh_killhulks.dds', tooltip = Tooltips.Set_Balorgh }, -- Balorgh (Balorgh)
+    [111505] = { icon = 'LuiExtended/media/icons/abilities/ability_set_balorgh.dds', tooltip = Tooltips.Set_Balorgh }, -- Balorgh (Balorgh)
     [59517] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_blood_spawn.dds', tooltip = Tooltips.Generic_Physical_Spell_Resist_Value, tooltipValue2 = 6450 }, -- Blood Spawn (Blood Spawn)
     [61274] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_blood_spawn.dds' }, -- Blood Spawn (Blood Spawn)
     [59590] = { tooltip = Tooltips.Set_Bogdan_the_Nightflame }, -- Imperial Prison Item Set (Bogdan the Nightflame)
@@ -3671,7 +3671,7 @@ Effects.EffectOverride = {
     [80866] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 70 }, -- Tremorscale
     [59596] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_meteor.dds' }, -- Valkyn Skoria
     [61273] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_meteor.dds' }, -- Valkyn Skoria
-    [80490] = { icon = 'esoui/art/icons/achievement_update11_dungeons_035.dds' }, -- Velidreth
+    [80490] = { icon = 'LuiExtended/media/icons/abilities/ability_set_velidreth.dds' }, -- Velidreth
     [111354] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vykosa.dds', tooltip = Tooltips.Generic_Reduce_Physical_Spell_Damage_Percentage, tooltipValue2 = 20 }, -- Major Maim (Vykosa)
     [102136] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_zaan.dds', tooltip = Tooltips.Set_Zaan }, -- Zaan
     [102142] = { hide = true }, -- Zaan
@@ -3910,7 +3910,7 @@ Effects.EffectOverride = {
     [33691] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vipers_sting.dds', tooltip = Tooltips.Generic_Poison, tooltipValue2 = 1 }, -- Viper's Sting
     [85605] = { tooltip = Abilities.Set_Toothrow }, -- Major Savagery (Toothrow)
     [101970] = { icon = 'LuiExtended/media/icons/abilities/ability_set_invigoration.dds' }, -- Trappings of Invigoration
-    [84350] = { icon = 'esoui/art/icons/achievement_update11_dungeons_035.dds' }, -- Widowmaker
+    [84350] = { icon = 'LuiExtended/media/icons/abilities/ability_set_velidreth.dds' }, -- Widowmaker
     [111387] = { icon = 'esoui/art/icons/mos_dagrund_upheavel.dds', tooltip = Tooltips.Set_Blood_Moon_Scent }, -- Blood Scent (Blood Moon)
     [111386] = { icon = 'LuiExtended/media/icons/abilities/ability_set_frenzied.dds', tooltip = Tooltips.Set_Blood_Moon_Frenzied }, -- Frenzied (Blood Moon)
     [111216] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_bleed.dds', tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Savage Werewolf (Savage Werewolf)
