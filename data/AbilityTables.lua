@@ -858,9 +858,9 @@ local AbilityTables = {
 
     Skill_Battle_Spirit               = GetString(SI_LUIE_SKILL_BATTLE_SPIRIT),
     Skill_Imperial_City               = GetCollectibleName(154),
-    Skill_Edge_Keep_Bonus_1           = 111549,
-    Skill_Edge_Keep_Bonus_2           = 111552,
-    Skill_Edge_Keep_Bonus_3           = 111553,
+    Skill_Edge_Keep_Bonus_I           = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_SKILL_EDGE_KEEP_BONUS), "I"),
+    Skill_Edge_Keep_Bonus_II          = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_SKILL_EDGE_KEEP_BONUS), "II"),
+    Skill_Edge_Keep_Bonus_III         = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_SKILL_EDGE_KEEP_BONUS), "III"),
     Skill_Guard_Detection             = GetString(SI_LUIE_SKILL_GUARD_DETECTION),
 
     Skill_Stow_Siege_Weapon           = GetString(SI_LUIE_SKILL_STOW_SIEGE_WEAPON),
@@ -1367,7 +1367,6 @@ local AbilityTables = {
     Keep_Upgrade_Wood_Door_Regeneration   = GetString(SI_LUIE_KEEP_UPGRADE_WOOD_DOOR_REGENERATION),
     Keep_Upgrade_Wood_Siege_Cap           = GetString(SI_LUIE_KEEP_UPGRADE_WOOD_SIEGE_CAP),
     Keep_Upgrade_Wood_Stronger_Doors      = GetString(SI_LUIE_KEEP_UPGRADE_WOOD_STRONGER_DOORS),
-
     Keep_Upgrade_Food_Mender_Abilities      = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_MENDER_ABILITIES),
     Keep_Upgrade_Food_Honor_Guard_Abilities = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_HONOR_GUARD_ABILITIES),
     Keep_Upgrade_Food_Mage_Abilities        = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_MAGE_ABILITIES),

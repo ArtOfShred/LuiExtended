@@ -83,21 +83,21 @@ function SpellCastBuffs.LoadCyrodiilBuffs(unitTag)
         if edgeKeepCount == 1 then
             id = 111549
             icon = "LuiExtended/media/icons/abilities/ability_cryodiil_edge_keep_bonus_1.dds"
-            name = Abilities.Skill_Edge_Keep_Bonus_1
+            name = Abilities.Skill_Edge_Keep_Bonus_I
             stack = 1
         elseif edgeKeepCount == 2 then
             id = 111552
             icon = "LuiExtended/media/icons/abilities/ability_cryodiil_edge_keep_bonus_2.dds"
-            name = Abilities.Skill_Edge_Keep_Bonus_2
+            name = Abilities.Skill_Edge_Keep_Bonus_II
             stack = 2
         elseif edgeKeepCount == 3 then
             id = 111553
             icon = "LuiExtended/media/icons/abilities/ability_cryodiil_edge_keep_bonus_3.dds"
-            name = Abilities.Skill_Edge_Keep_Bonus_3
+            name = Abilities.Skill_Edge_Keep_Bonus_III
             stack = 3
         end
         if not (SpellCastBuffs.SV.BlacklistTable[id] or SpellCastBuffs.SV.BlacklistTable[name]) then
-            SpellCastBuffs.EffectsList[context][ Abilities.Skill_Edge_Keep_Bonus_1 ] = {
+            SpellCastBuffs.EffectsList[context][ Abilities.Skill_Edge_Keep_Bonus_I ] = {
                 target=unitTag, type=1,
                 id=id, name=name, icon = icon,
                 dur=0, starts=1, ends=nil,

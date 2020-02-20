@@ -9860,6 +9860,43 @@ function ChatAnnouncements.HookFunction()
         self.levelsGridList:CommitGridList()
     end
 
+
+
+    WORLD_MAP_KEEP_UPGRADE.Button_OnMouseEnter = function(self, control)
+        InitializeTooltip(KeepUpgradeTooltip, control, TOPLEFT, 5, 0)
+
+        local data = control.dataEntry.data:GetDataSource()
+        local level = zo_strformat("<<1>> <<2>>", GetString(SI_ITEM_FORMAT_STR_LEVEL), data.level)
+        local name = zo_strformat("<<1>>", data.name)
+        local description = data.description
+
+        KeepUpgradeTooltip:SetVerticalPadding(16)
+        KeepUpgradeTooltip:AddLine(name, "ZoFontHeader3",1,1,1, nil, MODIFY_TEXT_TYPE_UPPERCASE, TEXT_ALIGN_CENTER)
+        KeepUpgradeTooltip:SetVerticalPadding(0)
+        ZO_Tooltip_AddDivider(KeepUpgradeTooltip)
+        KeepUpgradeTooltip:SetVerticalPadding(11)
+        KeepUpgradeTooltip:AddLine(level, "$(BOLD_FONT)|$(KB_16)",1,1,1, nil, MODIFY_TEXT_TYPE_UPPERCASE, TEXT_ALIGN_CENTER, false, 344)
+        KeepUpgradeTooltip:SetVerticalPadding(2)
+        local r,b,g = ZO_NORMAL_TEXT:UnpackRGB()
+        KeepUpgradeTooltip:AddLine(description, "ZoFontTooltipSubtitle",r,b,g, nil, MODIFY_TEXT_TYPE_NONE, TEXT_ALIGN_CENTER)
+        KeepUpgradeTooltip:SetVerticalPadding(2)
+    end
+
+
+
+    --[[
+    ZO_KeepUpgrade_Shared.SetUpgradeTooltip = function(level, index)
+
+        local level = data.level
+        local name = data.name
+        local description = data.description
+
+        KeepUpgradeTooltip:AddLine(name, "ZoFontHeader2",1,1,1, nil)
+        KeepUpgradeTooltip:AddLine(level, "ZoFontHeader2",1,1,1, nil)
+        KeepUpgradeTooltip:AddLine(description, "", ZO_NORMAL_TEXT:UnpackRGB())
+
+    end]]--
+
 end
 
 function ChatAnnouncements.TradeInviteAccepted(eventCode)

@@ -792,6 +792,13 @@ local strings = {
     SI_LUIE_SKILL_GUARD_DETECTION =                      "Vigilance",
     SI_LUIE_SKILL_GUARD_DETECTION_TP =                   "Guards are particularly vigilant and can see nearby players that are hiding in stealth.",
     SI_LUIE_SKILL_BLESSING_OF_WAR_TP =                   "Increase Alliance Points earned by |cFFFFFF20|r% for |cFFFFFF1|r hour.\n\nOnly active while in Cyrodiil or Cyrodiil delves.",
+    SI_LUIE_SKILL_HOME_KEEP_BONUS_TP =                   "Increase Alliance Points, Experience Points, and Gold earned by |cFFFFFF5|r%.",
+    SI_LUIE_SKILL_ENEMY_KEEP_BONUS_TP =                  "Increase Alliance Points, Experience Points, and Gold earned by |cFFFFFF<<1>>|r%.\nIncrease Weapon and Spell Critical by |cFFFFFF<<2>>|r%.",
+    SI_LUIE_SKILL_EDGE_KEEP_BONUS =                      "Edge Keep Bonus",
+    SI_LUIE_SKILL_EDGE_KEEP_BONUS_TP =                   "Increase Alliance Points earned by |cFFFFFF<<1>>|r%.",
+    SI_LUIE_SKILL_DEFENSIVE_SCROLL_BONUS_TP =            "Increase Physical and Spell Resistance by |cFFFFFF<<1>>|r%.",
+    SI_LUIE_SKILL_OFFENSIVE_SCROLL_BONUS_TP =            "Increase Weapon and Spell Damage by |cFFFFFF<<1>>|r%.",
+    SI_LUIE_SKILL_EMPERORSHIP_ALLIANCE_BONUS_TP =        "Increase Max Health by |cFFFFFF35|r per character level.",
     SI_LUIE_SKILL_RAZOR_ARMOR_TP =                       "Reduce damage taken by |cFFFFFF30|r% for |cFFFFFF<<1>>|r seconds.\n\nWhile active the armor returns Physical Damage to attackers.",
     SI_LUIE_SKILL_UNSTABLE_CORE_CYRODIIL_TP =            "Your single target ranged abilities are reflected back on you for |cFFFFFF<<1>>|r seconds.\n\nThe core explodes when this effect ends, dealing Magic Damage.",
     SI_LUIE_SKILL_SHATTERING_PRISON_CYRODIIL_TP =        "Disoriented for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThe prison shatters when this effect ends, dealing Magic Damage.",
@@ -1337,7 +1344,6 @@ local strings = {
     SI_LUIE_KEEP_UPGRADE_WOOD_SIEGE_CAP_TP =             "Increase the number of Siege Weapons that can be placed in defense of this Keep.",
     SI_LUIE_KEEP_UPGRADE_WOOD_STRONGER_DOORS =           "Stronger Doors",
     SI_LUIE_KEEP_UPGRADE_WOOD_STRONGER_DOORS_TP =        "Increase the Maximum Health of Doors by |cFFFFFF45000|r.",
-
     SI_LUIE_KEEP_UPGRADE_FOOD_MENDER_ABILITIES =         "Upgrade Mender Abilities",
     SI_LUIE_KEEP_UPGRADE_FOOD_MENDER_ABILITIES_TP =      "Menders gain more powerful versions of some of their abilities.",
     SI_LUIE_KEEP_UPGRADE_FOOD_HONOR_GUARD_ABILITIES =    "Upgrade Honor Guard Abilities",
@@ -1347,7 +1353,6 @@ local strings = {
     SI_LUIE_KEEP_UPGRADE_FOOD_MAGE_ABILITIES_TP =        "Mage Guards gain more powerful versions of some of their abilities.",
     SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_ABILITIES =          "Upgrade Guard Abilities",
     SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_ABILITIES_TP =       "Guards gain more powerful versions of some of their abilities.",
-
 
 }
 

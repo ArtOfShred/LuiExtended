@@ -778,6 +778,40 @@ function LUIE.InitializeHooks()
             },
         }
 
+        ZO_CampaignBonuses_Shared.CreateDataTable = function(self)
+            self:BuildMasterList()
+
+            self.dataTable = {}
+            local nextItemIsHeader = false
+            local headerName = nil
+            for i = 1, #self.masterList do
+                local data = self.masterList[i]
+                if data.isHeader then
+                    nextItemIsHeader = true
+                    headerName = data.headerString
+                else
+                    self.dataTable[i] = ZO_GamepadEntryData:New(data.name, data.icon)
+
+                    if nextItemIsHeader then
+                        self.dataTable[i]:SetHeader(header)
+                    end
+
+                    self.dataTable[i].index = data.index
+                    self.dataTable[i].abilityId = data.abilityId
+                    self.dataTable[i].typeIcon = data.typeIcon
+                    self.dataTable[i].countText = data.countText
+                    self.dataTable[i].name = data.name
+                    self.dataTable[i].active = data.active
+                    self.dataTable[i].bonusType = data.bonusType
+                    self.dataTable[i].description = data.description
+
+                    nextItemIsHeader = false
+                end
+            end
+        end
+
+        -- CAMPAIGN_BONUSES
+
         ZO_CampaignBonuses_Shared.BuildMasterList = function(self)
             self.masterList = {}
 
@@ -813,6 +847,7 @@ function LUIE.InitializeHooks()
 
                     local data = {
                         index = i,
+                        abilityId = abilityId,
                         isHeader = false,
                         typeIcon = info.typeIcon,
                         typeIconGamepad = info.typeIconGamepad,
@@ -830,6 +865,79 @@ function LUIE.InitializeHooks()
 
             return self.masterList
         end
+
+        CAMPAIGN_BONUSES.SetupBonusesEntry = function(self, control, data)
+            ZO_SortFilterList.SetupRow(self, control, data)
+
+            control.typeIcon = GetControl(control, "TypeIcon")
+            control.count = GetControl(control, "Count")
+            control.ability = GetControl(control, "Ability")
+            control.icon = GetControl(control.ability, "Icon")
+            control.nameLabel = GetControl(control, "Name")
+            control.ability.index = data.index
+            control.ability.bonusType = data.bonusType
+            control.ability.abilityId = data.abilityId
+            control.ability.name = data.name
+            control.ability.description = data.description
+
+            control.ability:SetEnabled(data.active)
+            ZO_ActionSlot_SetUnusable(control.icon, not data.active)
+
+            control.typeIcon:SetTexture(data.typeIcon)
+            if data.countText then
+                control.count:SetText(zo_strformat(SI_CAMPAIGN_SCORING_HOLDING, data.countText))
+                control.count:SetHidden(false)
+            else
+                control.count:SetHidden(true)
+            end
+            control.nameLabel:SetText(data.name)
+            control.icon:SetTexture(data.icon)
+        end
+
+        function ZO_CampaignBonuses_AbilitySlot_OnMouseEnter(control)
+
+            local abilityId = control.abilityId
+            local name = control.name
+            local description = control.description
+
+            -- Replace tooltip
+            if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltip then
+                description = LUIE.Data.Effects.EffectOverride[abilityId].tooltip
+            end
+
+            InitializeTooltip(SkillTooltip, control, TOPLEFT, 5, -5, TOPRIGHT)
+            SkillTooltip:SetVerticalPadding(16) -- 15
+            SkillTooltip:AddLine(name, "ZoFontHeader3",1,1,1, nil, MODIFY_TEXT_TYPE_UPPERCASE, TEXT_ALIGN_CENTER)
+            SkillTooltip:SetVerticalPadding(0) -- 8
+            ZO_Tooltip_AddDivider(SkillTooltip)
+            SkillTooltip:SetVerticalPadding(11)
+            local r,b,g = ZO_NORMAL_TEXT:UnpackRGB()
+            SkillTooltip:AddLine(description, "ZoFontTooltipSubtitle",r,b,g, nil, MODIFY_TEXT_TYPE_NONE, TEXT_ALIGN_CENTER)
+            SkillTooltip:SetVerticalPadding(2)
+
+        end
+
+            --[[
+
+            InitializeTooltip(KeepUpgradeTooltip, control, TOPLEFT, 5, 0)
+
+            local data = control.dataEntry.data:GetDataSource()
+            local level = zo_strformat("<<1>> <<2>>", GetString(SI_ITEM_FORMAT_STR_LEVEL), data.level)
+            local name = zo_strformat("<<1>>", data.name)
+            local description = data.description
+
+            KeepUpgradeTooltip:SetVerticalPadding(15)
+            KeepUpgradeTooltip:AddLine(name, "ZoFontTooltipTitle",1,1,1, nil, MODIFY_TEXT_TYPE_UPPERCASE, TEXT_ALIGN_CENTER)
+            KeepUpgradeTooltip:SetVerticalPadding(8)
+            ZO_Tooltip_AddDivider(KeepUpgradeTooltip)
+            KeepUpgradeTooltip:SetVerticalPadding(10)
+            KeepUpgradeTooltip:AddLine(level, "$(BOLD_FONT)|$(KB_16)",1,1,1, nil, MODIFY_TEXT_TYPE_UPPERCASE, TEXT_ALIGN_CENTER, false, 344)
+            KeepUpgradeTooltip:SetVerticalPadding(1)
+            local r,b,g = ZO_NORMAL_TEXT:UnpackRGB()
+            KeepUpgradeTooltip:AddLine(description, "ZoFontTooltipSubtitle",r,b,g, nil, MODIFY_TEXT_TYPE_NONE, TEXT_ALIGN_CENTER)
+            KeepUpgradeTooltip:SetVerticalPadding(1)
+
+        ]]
 
         -- HOOK SKILLS
         local INCREASE_BUTTON_TEXTURES = {

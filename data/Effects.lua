@@ -8841,21 +8841,25 @@ Effects.EffectOverride = {
     -- CYRODIIL ----------------------------------------------------
     ----------------------------------------------------------------
 
-    [39671] = { icon = 'esoui/art/icons/achievement_ic_024.dds', passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_emperorship_alliance_bonus.dds' }, -- Emperorship Alliance Bonus
-    [11346] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_home_keep_bonus.dds', passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_home_keep_bonus.dds' }, -- Home Keep Bonus
-    [11341] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 1, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds' }, -- Enemy Keep Bonus I
-    [11343] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 2, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds' }, -- Enemy Keep Bonus II
-    [11345] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 3, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds' }, -- Enemy Keep Bonus III
-    [11347] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 4, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds' }, -- Enemy Keep Bonus IV
-    [11348] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 5, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds' }, -- Enemy Keep Bonus V
-    [11350] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 6, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds' }, -- Enemy Keep Bonus VI
-    [11352] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 7, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds' }, -- Enemy Keep Bonus VII
-    [11353] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 8, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds' }, -- Enemy Keep Bonus VIII
-    [11356] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 9, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds' }, -- Enemy Keep Bonus IX
-    [15060] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_defensive_scroll_bonus.dds', stack = 1, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_defensive_scroll_bonus.dds' }, -- Defensive Scroll Bonus I
-    [16350] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_defensive_scroll_bonus.dds', stack = 2, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_defensive_scroll_bonus.dds' }, -- Defensive Scroll Bonus II
-    [15058] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_offensive_scroll_bonus.dds', stack = 1, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_offensive_scroll_bonus.dds' }, -- Offensive Scroll Bonus I
-    [16348] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_offensive_scroll_bonus.dds', stack = 2, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_offensive_scroll_bonus.dds' }, -- Offensive Scroll Bonus II
+    [39671] = { icon = 'esoui/art/icons/achievement_ic_024.dds', passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_emperorship_alliance_bonus.dds', tooltip = Tooltips.Skill_Emperorship_Alliance_Bonus }, -- Emperorship Alliance Bonus
+    [11346] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_home_keep_bonus.dds', passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_home_keep_bonus.dds', tooltip = Tooltips.Skill_Home_Keep_Bonus }, -- Home Keep Bonus
+    [11341] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 1, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds', tooltip = Tooltips.Skill_Enemy_Keep_Bonus_I }, -- Enemy Keep Bonus I
+    [11343] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 2, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds', tooltip = Tooltips.Skill_Enemy_Keep_Bonus_II }, -- Enemy Keep Bonus II
+    [11345] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 3, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds', tooltip = Tooltips.Skill_Enemy_Keep_Bonus_III }, -- Enemy Keep Bonus III
+    [11347] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 4, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds', tooltip = Tooltips.Skill_Enemy_Keep_Bonus_IV }, -- Enemy Keep Bonus IV
+    [11348] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 5, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds', tooltip = Tooltips.Skill_Enemy_Keep_Bonus_V }, -- Enemy Keep Bonus V
+    [11350] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 6, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds', tooltip = Tooltips.Skill_Enemy_Keep_Bonus_VI }, -- Enemy Keep Bonus VI
+    [11352] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 7, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds', tooltip = Tooltips.Skill_Enemy_Keep_Bonus_VII }, -- Enemy Keep Bonus VII
+    [11353] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 8, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds', tooltip = Tooltips.Skill_Enemy_Keep_Bonus_VIII }, -- Enemy Keep Bonus VIII
+    [11356] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 9, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds', tooltip = Tooltips.Skill_Enemy_Keep_Bonus_IX }, -- Enemy Keep Bonus IX
+    [15060] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_defensive_scroll_bonus.dds', stack = 1, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_defensive_scroll_bonus.dds', tooltip = Tooltips.Skill_Defensive_Scroll_Bonus_I }, -- Defensive Scroll Bonus I
+    [16350] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_defensive_scroll_bonus.dds', stack = 2, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_defensive_scroll_bonus.dds', tooltip = Tooltips.Skill_Defensive_Scroll_Bonus_II }, -- Defensive Scroll Bonus II
+    [15058] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_offensive_scroll_bonus.dds', stack = 1, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_offensive_scroll_bonus.dds', tooltip = Tooltips.Skill_Offensive_Scroll_Bonus_I }, -- Offensive Scroll Bonus I
+    [16348] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_offensive_scroll_bonus.dds', stack = 2, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_offensive_scroll_bonus.dds', tooltip = Tooltips.Skill_Offensive_Scroll_Bonus_II }, -- Offensive Scroll Bonus II
+
+    [111549] = { name = Abilities.Skill_Edge_Keep_Bonus_I, tooltip = Tooltips.Skill_Edge_Keep_Bonus_I }, -- Edge Keep Bonus 1
+    [111552] = { name = Abilities.Skill_Edge_Keep_Bonus_II, tooltip = Tooltips.Skill_Edge_Keep_Bonus_II }, -- Edge Keep Bonus 2
+    [111553] = { name = Abilities.Skill_Edge_Keep_Bonus_III, tooltip = Tooltips.Skill_Edge_Keep_Bonus_III }, -- Edge Keep Bonus 3
 
     [66282] = { icon = 'esoui/art/icons/achievement_ic_007_c.dds', tooltip = Tooltips.Skill_Blessing_of_War }, -- Blessing of War
 
