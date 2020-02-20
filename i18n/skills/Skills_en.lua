@@ -1310,6 +1310,45 @@ local strings = {
     SI_LUIE_SKILL_ESCAPED_SOULS =                        "Escaped Souls",
     SI_LUIE_SKILL_CALL_CORRUPT_LURCHERS =                "Call Corrupt Lurchers",
 
+    -- Keep Upgrade
+    SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_RANGE =              "Longer Range on Ranged Guards",
+    SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_RANGE_TP =           "Increase the range of Mage and Archer Guards.",
+    SI_LUIE_KEEP_UPGRADE_FOOD_HEARTIER_GUARDS =          "Heartier Guards",
+    SI_LUIE_KEEP_UPGRADE_FOOD_HEARTIER_GUARDS_TP =       "Increase the Maximum Health of Guards.",
+    SI_LUIE_KEEP_UPGRADE_FOOD_RESISTANT_GUARDS =         "More Resistant Guards",
+    SI_LUIE_KEEP_UPGRADE_FOOD_RESISTANT_GUARDS_TP =      "Increase the Spell Resistance of Guards and reduce damage taken from Siege Weapons.",
+    SI_LUIE_KEEP_UPGRADE_FOOD_STRONGER_GUARDS =          "Stronger Guards",
+    SI_LUIE_KEEP_UPGRADE_FOOD_STRONGER_GUARDS_TP =       "Guards deal more damage.",
+    SI_LUIE_KEEP_UPGRADE_ORE_ARMORED_GUARDS =            "Heavily Armored Guards",
+    SI_LUIE_KEEP_UPGRADE_ORE_ARMORED_GUARDS_TP =         "Increase the Physical Resistance of Guards.",
+    SI_LUIE_KEEP_UPGRADE_ORE_CORNER_BUILD =              "Corner Build out Upgrade",
+    SI_LUIE_KEEP_UPGRADE_ORE_CORNER_BUILD_TP =           "Add an extra build out section to Keep Corners.",
+    SI_LUIE_KEEP_UPGRADE_ORE_SIEGE_PLATFORM =            "Wall Siege Platform",
+    SI_LUIE_KEEP_UPGRADE_ORE_SIEGE_PLATFORM_TP =         "Various Keep Wall sections have more protective locations.",
+    SI_LUIE_KEEP_UPGRADE_ORE_STRONGER_WALLS =            "Stronger Walls",
+    SI_LUIE_KEEP_UPGRADE_ORE_STRONGER_WALLS_TP =         "Increase the Maximum Health of Keep Walls by |cFFFFFF100500|r.",
+    SI_LUIE_KEEP_UPGRADE_ORE_WALL_REGENERATION =         "Enable Wall Regeneration",
+    SI_LUIE_KEEP_UPGRADE_ORE_WALL_REGENERATION_TP =      "Keep Walls regenerate health when not in combat.",
+    SI_LUIE_KEEP_UPGRADE_WOOD_ARCHER_GUARD =             "Upgrade Archer Guard Abilities",
+    SI_LUIE_KEEP_UPGRADE_WOOD_ARCHER_GUARD_TP =          "Archer Guards gain more powerful versions of some of their abilities.",
+    SI_LUIE_KEEP_UPGRADE_WOOD_DOOR_REGENERATION =        "Door Regeneration",
+    SI_LUIE_KEEP_UPGRADE_WOOD_DOOR_REGENERATION_TP =     "Doors regenerate health when not in combat.",
+    SI_LUIE_KEEP_UPGRADE_WOOD_SIEGE_CAP =                "Higher Defensive Siege Cap",
+    SI_LUIE_KEEP_UPGRADE_WOOD_SIEGE_CAP_TP =             "Increase the number of Siege Weapons that can be placed in defense of this Keep.",
+    SI_LUIE_KEEP_UPGRADE_WOOD_STRONGER_DOORS =           "Stronger Doors",
+    SI_LUIE_KEEP_UPGRADE_WOOD_STRONGER_DOORS_TP =        "Increase the Maximum Health of Doors by |cFFFFFF45000|r.",
+
+    SI_LUIE_KEEP_UPGRADE_FOOD_MENDER_ABILITIES =         "Upgrade Mender Abilities",
+    SI_LUIE_KEEP_UPGRADE_FOOD_MENDER_ABILITIES_TP =      "Menders gain more powerful versions of some of their abilities.",
+    SI_LUIE_KEEP_UPGRADE_FOOD_HONOR_GUARD_ABILITIES =    "Upgrade Honor Guard Abilities",
+    SI_LUIE_KEEP_UPGRADE_FOOD_HONOR_GUARD_ABILITIES_TP = "Honor Guards gain more powerful versions of some of their abilities.",
+    SI_LUIE_KEEP_UPGRADE_FOOD_MAGE_ABILITIES =           "Upgrade Mage Abilities",
+    SI_LUIE_KEEP_UPGRADE_FOOD_MAGE_ABILITIES_FIX =       "Upgrade Mage Guard Abilities",
+    SI_LUIE_KEEP_UPGRADE_FOOD_MAGE_ABILITIES_TP =        "Mage Guards gain more powerful versions of some of their abilities.",
+    SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_ABILITIES =          "Upgrade Guard Abilities",
+    SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_ABILITIES_TP =       "Guards gain more powerful versions of some of their abilities.",
+
+
 }
 
 for stringId, stringValue in pairs(strings) do

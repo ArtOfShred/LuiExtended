@@ -1370,6 +1370,30 @@ LUIE.Data.Tooltips = {
     -- Frostvault
     Skill_Maim                                      = GetString(SI_LUIE_SKILL_MAIM_NPC_TP),
 
+    -- ---------------------------------------------------
+    -- KEEP UPGRADE --------------------------------------
+    -- ---------------------------------------------------
+
+    Keep_Upgrade_Food_Guard_Range         = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_RANGE_TP),
+    Keep_Upgrade_Food_Heartier_Guards     = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_HEARTIER_GUARDS_TP),
+    Keep_Upgrade_Food_Resistant_Guards    = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_RESISTANT_GUARDS_TP),
+    Keep_Upgrade_Food_Stronger_Guards     = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_STRONGER_GUARDS_TP),
+    Keep_Upgrade_Ore_Armored_Guards       = GetString(SI_LUIE_KEEP_UPGRADE_ORE_ARMORED_GUARDS_TP),
+    Keep_Upgrade_Ore_Corner_Build         = GetString(SI_LUIE_KEEP_UPGRADE_ORE_CORNER_BUILD_TP),
+    Keep_Upgrade_Ore_Siege_Platform       = GetString(SI_LUIE_KEEP_UPGRADE_ORE_SIEGE_PLATFORM_TP),
+    Keep_Upgrade_Ore_Stronger_Walls       = GetString(SI_LUIE_KEEP_UPGRADE_ORE_STRONGER_WALLS_TP),
+    Keep_Upgrade_Ore_Wall_Regeneration    = GetString(SI_LUIE_KEEP_UPGRADE_ORE_WALL_REGENERATION_TP),
+    Keep_Upgrade_Wood_Archer_Guard        = GetString(SI_LUIE_KEEP_UPGRADE_WOOD_ARCHER_GUARD_TP),
+    Keep_Upgrade_Wood_Door_Regeneration   = GetString(SI_LUIE_KEEP_UPGRADE_WOOD_DOOR_REGENERATION_TP),
+    Keep_Upgrade_Wood_Siege_Cap           = GetString(SI_LUIE_KEEP_UPGRADE_WOOD_SIEGE_CAP_TP),
+    Keep_Upgrade_Wood_Stronger_Doors      = GetString(SI_LUIE_KEEP_UPGRADE_WOOD_STRONGER_DOORS_TP),
+
+    Keep_Upgrade_Food_Mender_Abilities      = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_MENDER_ABILITIES_TP),
+    Keep_Upgrade_Food_Honor_Guard_Abilities = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_HONOR_GUARD_ABILITIES_TP),
+    Keep_Upgrade_Food_Mage_Abilities        = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_MAGE_ABILITIES_TP),
+    Keep_Upgrade_Food_Guard_Abilities       = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_ABILITIES_TP),
+
+
 }
 
 --[[

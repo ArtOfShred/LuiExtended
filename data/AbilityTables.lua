@@ -1349,6 +1349,31 @@ local AbilityTables = {
     Effect_Grip_of_Lorkaj             = 57517,
     Effect_Unstable_Void              = 74488,
     Effect_Curse_Duration             = 25000,
+
+    -- ---------------------------------------------------
+    -- KEEP UPGRADE --------------------------------------
+    -- ---------------------------------------------------
+
+    Keep_Upgrade_Food_Guard_Range         = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_RANGE),
+    Keep_Upgrade_Food_Heartier_Guards     = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_HEARTIER_GUARDS),
+    Keep_Upgrade_Food_Resistant_Guards    = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_RESISTANT_GUARDS),
+    Keep_Upgrade_Food_Stronger_Guards     = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_STRONGER_GUARDS),
+    Keep_Upgrade_Ore_Armored_Guards       = GetString(SI_LUIE_KEEP_UPGRADE_ORE_ARMORED_GUARDS),
+    Keep_Upgrade_Ore_Corner_Build         = GetString(SI_LUIE_KEEP_UPGRADE_ORE_CORNER_BUILD),
+    Keep_Upgrade_Ore_Siege_Platform       = GetString(SI_LUIE_KEEP_UPGRADE_ORE_SIEGE_PLATFORM),
+    Keep_Upgrade_Ore_Stronger_Walls       = GetString(SI_LUIE_KEEP_UPGRADE_ORE_STRONGER_WALLS),
+    Keep_Upgrade_Ore_Wall_Regeneration    = GetString(SI_LUIE_KEEP_UPGRADE_ORE_WALL_REGENERATION),
+    Keep_Upgrade_Wood_Archer_Guard        = GetString(SI_LUIE_KEEP_UPGRADE_WOOD_ARCHER_GUARD),
+    Keep_Upgrade_Wood_Door_Regeneration   = GetString(SI_LUIE_KEEP_UPGRADE_WOOD_DOOR_REGENERATION),
+    Keep_Upgrade_Wood_Siege_Cap           = GetString(SI_LUIE_KEEP_UPGRADE_WOOD_SIEGE_CAP),
+    Keep_Upgrade_Wood_Stronger_Doors      = GetString(SI_LUIE_KEEP_UPGRADE_WOOD_STRONGER_DOORS),
+
+    Keep_Upgrade_Food_Mender_Abilities      = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_MENDER_ABILITIES),
+    Keep_Upgrade_Food_Honor_Guard_Abilities = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_HONOR_GUARD_ABILITIES),
+    Keep_Upgrade_Food_Mage_Abilities        = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_MAGE_ABILITIES),
+    Keep_Upgrade_Food_Mage_Abilities_Fix    = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_MAGE_ABILITIES_FIX),
+    Keep_Upgrade_Food_Guard_Abilities       = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_ABILITIES),
+
 }
 
 -- Replace ability IDs with names

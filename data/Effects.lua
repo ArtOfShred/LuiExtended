@@ -2267,19 +2267,19 @@ Effects.EffectOverrideByName = {
     -- CYRODIIL
     [64674] = { -- Cyrodiil Guard See Stealth
         [Unitnames.NPC_Guard_AD]                            = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ad.dds' }, -- Dominion Guard
-        [Unitnames.NPC_Honor_Guard_AD]                      = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ad.dds' }, -- Dominion Honor Guard
+        [Unitnames.NPC_Honor_Guard_AD]                      = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_honor_ad.dds' }, -- Dominion Honor Guard
         [Unitnames.NPC_Mender_AD]                           = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ad.dds' }, -- Dominion Mender
         [Unitnames.NPC_Mage_Guard_AD]                       = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ad.dds' }, -- Dominion Mage Guard
         [Unitnames.NPC_Skirmisher_AD]                       = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ad.dds' }, -- Dominion Skirmisher
         [Unitnames.NPC_Archer_Guard_AD]                     = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ad.dds' }, -- Dominion Archer Guard
         [Unitnames.NPC_Guard_DC]                            = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_dc.dds' }, -- Covenant Guard
-        [Unitnames.NPC_Honor_Guard_DC]                      = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_dc.dds' }, -- Covenant Honor Guard
+        [Unitnames.NPC_Honor_Guard_DC]                      = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_honor_dc.dds' }, -- Covenant Honor Guard
         [Unitnames.NPC_Mender_DC]                           = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_dc.dds' }, -- Covenant Mender
         [Unitnames.NPC_Mage_Guard_DC]                       = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_dc.dds' }, -- Covenant Mage Guard
         [Unitnames.NPC_Skirmisher_DC]                       = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_dc.dds' }, -- Covenant Skirmisher
         [Unitnames.NPC_Archer_Guard_DC]                     = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_dc.dds' }, -- Covenant Archer Guard
         [Unitnames.NPC_Guard_EP]                            = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ep.dds' }, -- Pact Guard
-        [Unitnames.NPC_Honor_Guard_EP]                      = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ep.dds' }, -- Pact Honor Guard
+        [Unitnames.NPC_Honor_Guard_EP]                      = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_honor_ep.dds' }, -- Pact Honor Guard
         [Unitnames.NPC_Mender_EP]                           = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ep.dds' }, -- Pact Mender
         [Unitnames.NPC_Mage_Guard_EP]                       = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ep.dds' }, -- Pact Mage Guard
         [Unitnames.NPC_Skirmisher_EP]                       = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ep.dds' }, -- Pact Skirmisher
@@ -2947,6 +2947,61 @@ function Effects.UpdateEffectOnSkillUpdate()
     Effects.EffectOverride[40465].tooltip = zo_strformat(GetString(SI_LUIE_SKILL_SCALDING_RUNE_TP), (GetAbilityDuration(40468) / 1000) + GetNumPassiveSkillRanks(GetSkillLineIndicesFromSkillLineId(44), select(2, GetSkillLineIndicesFromSkillLineId(44)), 8) )
 
 end
+
+Effects.KeepUpgradeOverride = {
+    [Abilities.Keep_Upgrade_Food_Guard_Range]           = "LuiExtended/media/icons/keepupgrade/upgrade_food_guard_range.dds",
+    [Abilities.Keep_Upgrade_Food_Heartier_Guards]       = "LuiExtended/media/icons/keepupgrade/upgrade_food_heartier_guards.dds",
+    [Abilities.Keep_Upgrade_Food_Resistant_Guards]      = "LuiExtended/media/icons/keepupgrade/upgrade_food_resistant_guards.dds",
+    [Abilities.Keep_Upgrade_Food_Stronger_Guards]       = "LuiExtended/media/icons/keepupgrade/upgrade_food_stronger_guards.dds",
+    [Abilities.Keep_Upgrade_Ore_Armored_Guards]         = "LuiExtended/media/icons/keepupgrade/upgrade_ore_armored_guards.dds",
+    [Abilities.Keep_Upgrade_Ore_Corner_Build]           = "LuiExtended/media/icons/keepupgrade/upgrade_ore_corner_build.dds",
+    [Abilities.Keep_Upgrade_Ore_Siege_Platform]         = "LuiExtended/media/icons/keepupgrade/upgrade_ore_siege_platform.dds",
+    [Abilities.Keep_Upgrade_Ore_Stronger_Walls]         = "LuiExtended/media/icons/keepupgrade/upgrade_ore_stronger_walls.dds",
+    [Abilities.Keep_Upgrade_Ore_Wall_Regeneration]      = "LuiExtended/media/icons/keepupgrade/upgrade_ore_wall_regeneration.dds",
+    [Abilities.Keep_Upgrade_Wood_Archer_Guard]          = "LuiExtended/media/icons/keepupgrade/upgrade_wood_archer_guard.dds",
+    [Abilities.Keep_Upgrade_Wood_Door_Regeneration]     = "LuiExtended/media/icons/keepupgrade/upgrade_wood_door_regeneration.dds",
+    [Abilities.Keep_Upgrade_Wood_Siege_Cap]             = "LuiExtended/media/icons/keepupgrade/upgrade_wood_siege_cap.dds",
+    [Abilities.Keep_Upgrade_Wood_Stronger_Doors]        = "LuiExtended/media/icons/keepupgrade/upgrade_wood_stronger_doors.dds",
+    [Abilities.Keep_Upgrade_Food_Mender_Abilities]      = "LuiExtended/media/icons/keepupgrade/upgrade_food_mender.dds",
+    [Abilities.Keep_Upgrade_Food_Mage_Abilities]        = "LuiExtended/media/icons/keepupgrade/upgrade_food_mage.dds",
+}
+
+Effects.KeepUpgradeNameFix = {
+    [Abilities.Keep_Upgrade_Food_Mage_Abilities]        = Abilities.Keep_Upgrade_Food_Mage_Abilities_Fix,
+}
+
+Effects.KeepUpgradeTooltip = {
+    [Abilities.Keep_Upgrade_Food_Guard_Range]           = Tooltips.Keep_Upgrade_Food_Guard_Range,
+    [Abilities.Keep_Upgrade_Food_Heartier_Guards]       = Tooltips.Keep_Upgrade_Food_Heartier_Guards,
+    [Abilities.Keep_Upgrade_Food_Resistant_Guards]      = Tooltips.Keep_Upgrade_Food_Resistant_Guards,
+    [Abilities.Keep_Upgrade_Food_Stronger_Guards]       = Tooltips.Keep_Upgrade_Food_Stronger_Guards,
+    [Abilities.Keep_Upgrade_Ore_Armored_Guards]         = Tooltips.Keep_Upgrade_Ore_Armored_Guards,
+    [Abilities.Keep_Upgrade_Ore_Corner_Build]           = Tooltips.Keep_Upgrade_Ore_Corner_Build,
+    [Abilities.Keep_Upgrade_Ore_Siege_Platform]         = Tooltips.Keep_Upgrade_Ore_Siege_Platform,
+    [Abilities.Keep_Upgrade_Ore_Stronger_Walls]         = Tooltips.Keep_Upgrade_Ore_Stronger_Walls,
+    [Abilities.Keep_Upgrade_Ore_Wall_Regeneration]      = Tooltips.Keep_Upgrade_Ore_Wall_Regeneration,
+    [Abilities.Keep_Upgrade_Wood_Archer_Guard]          = Tooltips.Keep_Upgrade_Wood_Archer_Guard,
+    [Abilities.Keep_Upgrade_Wood_Door_Regeneration]     = Tooltips.Keep_Upgrade_Wood_Door_Regeneration,
+    [Abilities.Keep_Upgrade_Wood_Siege_Cap]             = Tooltips.Keep_Upgrade_Wood_Siege_Cap,
+    [Abilities.Keep_Upgrade_Wood_Stronger_Doors]        = Tooltips.Keep_Upgrade_Wood_Stronger_Doors,
+    [Abilities.Keep_Upgrade_Food_Mender_Abilities]      = Tooltips.Keep_Upgrade_Food_Mender_Abilities,
+    [Abilities.Keep_Upgrade_Food_Mage_Abilities]        = Tooltips.Keep_Upgrade_Food_Mage_Abilities,
+    [Abilities.Keep_Upgrade_Food_Honor_Guard_Abilities] = Tooltips.Keep_Upgrade_Food_Honor_Guard_Abilities,
+    [Abilities.Keep_Upgrade_Food_Guard_Abilities]       = Tooltips.Keep_Upgrade_Food_Guard_Abilities,
+}
+
+Effects.KeepUpgradeAlliance = {
+    [Abilities.Keep_Upgrade_Food_Honor_Guard_Abilities] = {
+        [1] = "LuiExtended/media/icons/keepupgrade/upgrade_food_honor_guard_ad.dds",
+        [2] = "LuiExtended/media/icons/keepupgrade/upgrade_food_honor_guard_ep.dds",
+        [3] = "LuiExtended/media/icons/keepupgrade/upgrade_food_honor_guard_dc.dds",
+    },
+    [Abilities.Keep_Upgrade_Food_Guard_Abilities] = {
+        [1] = "LuiExtended/media/icons/keepupgrade/upgrade_food_guard_ad.dds",
+        [2] = "LuiExtended/media/icons/keepupgrade/upgrade_food_guard_ep.dds",
+        [3] = "LuiExtended/media/icons/keepupgrade/upgrade_food_guard_dc.dds",
+    },
+}
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- Override various information displayed for Effect auras

@@ -83,6 +83,7 @@ local function OnAddonOnLoaded(eventCode, addonName)
     LUIE.PlayerNameRaw = GetRawUnitName("player")
     LUIE.PlayerNameFormatted = zo_strformat(SI_UNIT_NAME, GetUnitName("player"))
     LUIE.PlayerDisplayName = zo_strformat(SI_UNIT_NAME, GetUnitDisplayName("player"))
+    LUIE.PlayerFaction = GetUnitAlliance("player")
 
     -- Initialize this addon modules according to user preferences
     LUIE.ChatAnnouncements.Initialize(LUIE.SV.ChatAnnouncements_Enable)

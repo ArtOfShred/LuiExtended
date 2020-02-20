@@ -9809,6 +9809,8 @@ function ChatAnnouncements.HookFunction()
         end
     end
 
+    local Abilities = LUIE.Data.Abilities
+
     ZO_MapKeepUpgrade_Shared.RefreshLevels = function(self)
         self.levelsGridList:ClearGridList()
 
@@ -9819,9 +9821,26 @@ function ChatAnnouncements.HookFunction()
                 for i = 1, numUpgrades do
                     local name, description, icon, atPercent, isActive = self.keepUpgradeObject:GetLevelUpgradeInfo(currentLevel, i)
                     -- Override with custom icons here.
-                    --[[if LUIE.Effects.KeepUpgradeIcon(name) then
-                        icon = LUIE.Effects.KeepUpgradeIcon(name)
-                    end]]--
+                    if LUIE.Data.Effects.KeepUpgradeOverride[name] then
+                        icon = LUIE.Data.Effects.KeepUpgradeOverride[name]
+                    end
+                    -- Override with custom faction icons here.
+                    if LUIE.Data.Effects.KeepUpgradeAlliance[name] then
+                        icon = LUIE.Data.Effects.KeepUpgradeAlliance[name][LUIE.PlayerFaction]
+                    end
+                    -- Special condition to display a unique icon for rank 2 of siege cap upgrade.
+                    if name == Abilities.Keep_Upgrade_Wood_Siege_Cap and currentLevel == 2 then
+                        icon = "LuiExtended/media/icons/keepupgrade/upgrade_wood_siege_cap_2.dds"
+                    end
+                    -- Update the tooltips.
+                    if LUIE.Data.Effects.KeepUpgradeTooltip[name] then
+                        description = LUIE.Data.Effects.KeepUpgradeTooltip[name]
+                    end
+                    -- Update the name (Note: We do this last since our other conditionals check by name).
+                    if LUIE.Data.Effects.KeepUpgradeNameFix[name] then
+                        name = LUIE.Data.Effects.KeepUpgradeNameFix[name]
+                    end
+
                     local data = {
                         index = i,
                         gridHeaderName = levelHeaderText,
