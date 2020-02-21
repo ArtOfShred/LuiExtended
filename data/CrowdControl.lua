@@ -422,6 +422,7 @@ CrowdControl.aoeNPCNormal = {
     [88330] = 0, -- Pool of Shadow (Skaafin Masquer)
     [88335] = 0, -- Pool of Shadow (Skaafin Masquer)
     [88334] = 0, -- Pool of Shadow (Skaafin Masquer)
+    [87902] = 1, -- Bombard (Arbalest)
     [84837] = 1, -- Broken Pact (Skaafin)
     [62502] = 1, -- Fiery Wind (Justice Mage)
     [46819] = 1, -- Storm Damage (Cyrodiil Mage)

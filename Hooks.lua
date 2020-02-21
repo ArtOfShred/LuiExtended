@@ -917,8 +917,57 @@ function LUIE.InitializeHooks()
 
         end
 
-            --[[
+        -- AVA KEEP UPGRADE HOOK
+        ZO_MapKeepUpgrade_Shared.RefreshLevels = function(self)
+            self.levelsGridList:ClearGridList()
 
+            for currentLevel = 0, GetKeepMaxUpgradeLevel(self.keepUpgradeObject:GetKeep()) do
+                local numUpgrades = self.keepUpgradeObject:GetNumLevelUpgrades(currentLevel)
+                if numUpgrades > 0 then
+                    local levelHeaderText = zo_strformat(SI_KEEP_UPGRADE_LEVEL_SECTION_HEADER, currentLevel)
+                    for i = 1, numUpgrades do
+                        local name, description, icon, atPercent, isActive = self.keepUpgradeObject:GetLevelUpgradeInfo(currentLevel, i)
+                        -- Override with custom icons here.
+                        if LUIE.Data.Effects.KeepUpgradeOverride[name] then
+                            icon = LUIE.Data.Effects.KeepUpgradeOverride[name]
+                        end
+                        -- Override with custom faction icons here.
+                        if LUIE.Data.Effects.KeepUpgradeAlliance[name] then
+                            icon = LUIE.Data.Effects.KeepUpgradeAlliance[name][LUIE.PlayerFaction]
+                        end
+                        -- Special condition to display a unique icon for rank 2 of siege cap upgrade.
+                        if name == LUIE.Data.Abilities.Keep_Upgrade_Wood_Siege_Cap and currentLevel == 2 then
+                            icon = "LuiExtended/media/icons/keepupgrade/upgrade_wood_siege_cap_2.dds"
+                        end
+                        -- Update the tooltips.
+                        if LUIE.Data.Effects.KeepUpgradeTooltip[name] then
+                            description = LUIE.Data.Effects.KeepUpgradeTooltip[name]
+                        end
+                        -- Update the name (Note: We do this last since our other conditionals check by name).
+                        if LUIE.Data.Effects.KeepUpgradeNameFix[name] then
+                            name = LUIE.Data.Effects.KeepUpgradeNameFix[name]
+                        end
+
+                        local data = {
+                            index = i,
+                            gridHeaderName = levelHeaderText,
+                            level = currentLevel,
+                            name = name,
+                            description = description,
+                            icon = icon,
+                            atPercent = atPercent,
+                            isActive = isActive,
+                        }
+
+                        self.levelsGridList:AddEntry(ZO_GridSquareEntryData_Shared:New(data))
+                    end
+                end
+            end
+
+            self.levelsGridList:CommitGridList()
+        end
+
+        WORLD_MAP_KEEP_UPGRADE.Button_OnMouseEnter = function(self, control)
             InitializeTooltip(KeepUpgradeTooltip, control, TOPLEFT, 5, 0)
 
             local data = control.dataEntry.data:GetDataSource()
@@ -926,18 +975,17 @@ function LUIE.InitializeHooks()
             local name = zo_strformat("<<1>>", data.name)
             local description = data.description
 
-            KeepUpgradeTooltip:SetVerticalPadding(15)
-            KeepUpgradeTooltip:AddLine(name, "ZoFontTooltipTitle",1,1,1, nil, MODIFY_TEXT_TYPE_UPPERCASE, TEXT_ALIGN_CENTER)
-            KeepUpgradeTooltip:SetVerticalPadding(8)
+            KeepUpgradeTooltip:SetVerticalPadding(16)
+            KeepUpgradeTooltip:AddLine(name, "ZoFontHeader3",1,1,1, nil, MODIFY_TEXT_TYPE_UPPERCASE, TEXT_ALIGN_CENTER)
+            KeepUpgradeTooltip:SetVerticalPadding(0)
             ZO_Tooltip_AddDivider(KeepUpgradeTooltip)
-            KeepUpgradeTooltip:SetVerticalPadding(10)
+            KeepUpgradeTooltip:SetVerticalPadding(11)
             KeepUpgradeTooltip:AddLine(level, "$(BOLD_FONT)|$(KB_16)",1,1,1, nil, MODIFY_TEXT_TYPE_UPPERCASE, TEXT_ALIGN_CENTER, false, 344)
-            KeepUpgradeTooltip:SetVerticalPadding(1)
+            KeepUpgradeTooltip:SetVerticalPadding(2)
             local r,b,g = ZO_NORMAL_TEXT:UnpackRGB()
             KeepUpgradeTooltip:AddLine(description, "ZoFontTooltipSubtitle",r,b,g, nil, MODIFY_TEXT_TYPE_NONE, TEXT_ALIGN_CENTER)
-            KeepUpgradeTooltip:SetVerticalPadding(1)
-
-        ]]
+            KeepUpgradeTooltip:SetVerticalPadding(2)
+        end
 
         -- HOOK SKILLS
         local INCREASE_BUTTON_TEXTURES = {

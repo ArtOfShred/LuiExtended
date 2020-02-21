@@ -43,6 +43,9 @@ CastBarTable.BreakCastOnMove = {
     -- Misc Items
     [63427] = true, -- Clean Fish (Filet Fish)
 
+    -- Werewolf
+    [40515] = true, -- Devour (Werewolf - Bite Player)
+
     ----------------------------------------------------------------
     -- CYRODIIL ----------------------------------------------------
     ----------------------------------------------------------------

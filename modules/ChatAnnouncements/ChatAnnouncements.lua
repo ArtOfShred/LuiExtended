@@ -68,6 +68,7 @@ ChatAnnouncements.Defaults = {
         AchievementCategory24         = true,
         AchievementCategory25         = true,
         AchievementCategory26         = true,
+        AchievementCategory27         = true,
         AchievementProgressMsg        = GetString(SI_LUIE_CA_ACHIEVEMENT_PROGRESS_MSG),
         AchievementCompleteMsg        = GetString(SI_ACHIEVEMENT_AWARDED_CENTER_SCREEN),
         AchievementColorProgress      = true,
@@ -2980,7 +2981,8 @@ function ChatAnnouncements.OnAchievementUpdated(eventCode, id)
     if topLevelIndex == 23 and not ChatAnnouncements.SV.Achievement.AchievementCategory23 then return end
     if topLevelIndex == 24 and not ChatAnnouncements.SV.Achievement.AchievementCategory24 then return end
     if topLevelIndex == 25 and not ChatAnnouncements.SV.Achievement.AchievementCategory25 then return end
-    if topLevelIndex == 25 and not ChatAnnouncements.SV.Achievement.AchievementCategory26 then return end
+    if topLevelIndex == 26 and not ChatAnnouncements.SV.Achievement.AchievementCategory26 then return end
+    if topLevelIndex == 27 and not ChatAnnouncements.SV.Achievement.AchievementCategory27 then return end
 
     if ChatAnnouncements.SV.Achievement.AchievementUpdateCA or ChatAnnouncements.SV.Achievement.AchievementUpdateAlert then
         local totalCmp = 0
@@ -7357,7 +7359,11 @@ function ChatAnnouncements.HookFunction()
             messageParams:SetSound(sound)
         end
 
-        d(conditionType)
+        -- Debug for my account - TODO: Remove
+        if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
+            d(conditionType)
+        end
+
         if isConditionComplete and conditionType == QUEST_CONDITION_TYPE_GIVE_ITEM or conditionType == QUEST_CONDITION_TYPE_TALK_TO then
             -- We set this variable to true in order to override the [Looted] message syntax that would be applied to a quest reward normally.
             if ChatAnnouncements.SV.Inventory.Loot then
@@ -8757,24 +8763,6 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_BROADCAST (CSA Handler)
-    local function BroadcastHook(message)
-        d("EVENT_BROADCAST DEBUG")
-
-        -- CA
-        printToChat(string.format("|cffff00%s|r", message), true)
-
-        -- CSA
-        local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.MESSAGE_BROADCAST)
-        messageParams:SetText(string.format("|cffff00%s|r", message))
-        messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SYSTEM_BROADCAST)
-        CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
-
-        -- Alert
-        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
-        return true
-    end
-
     -- EVENT_ACHIEVEMENT_AWARDED (CSA Handler)
     local function AchievementAwardedHook(name, points, id)
         -- Display CSA
@@ -8820,7 +8808,8 @@ function ChatAnnouncements.HookFunction()
         if topLevelIndex == 23 and not ChatAnnouncements.SV.Achievement.AchievementCategory23 then return true end
         if topLevelIndex == 24 and not ChatAnnouncements.SV.Achievement.AchievementCategory24 then return true end
         if topLevelIndex == 25 and not ChatAnnouncements.SV.Achievement.AchievementCategory25 then return true end
-        if topLevelIndex == 25 and not ChatAnnouncements.SV.Achievement.AchievementCategory26 then return true end
+        if topLevelIndex == 26 and not ChatAnnouncements.SV.Achievement.AchievementCategory26 then return true end
+        if topLevelIndex == 27 and not ChatAnnouncements.SV.Achievement.AchievementCategory27 then return true end
 
         if ChatAnnouncements.SV.Achievement.AchievementCompleteCA then
             local link = zo_strformat(GetAchievementLink(id, linkBrackets[ChatAnnouncements.SV.BracketOptionAchievement]))
@@ -8949,10 +8938,6 @@ function ChatAnnouncements.HookFunction()
     ZO_PreHook(csaHandlers, EVENT_RAID_TRIAL_SCORE_UPDATE, RaidScoreUpdateHook)
     ZO_PreHook(csaHandlers, EVENT_ACTIVITY_FINDER_ACTIVITY_COMPLETE, ActivityFinderCompleteHook)
     ZO_PreHook(csaHandlers, EVENT_DISPLAY_ANNOUNCEMENT, DisplayAnnouncementHook)
-    -- Temporary debug for EVENT_BROADCAST only for my accounts.
-    if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
-        ZO_PreHook(csaHandlers, EVENT_BROADCAST, BroadcastHook)
-    end
     ZO_PreHook(csaHandlers, EVENT_ACHIEVEMENT_AWARDED, AchievementAwardedHook)
     ZO_PreHook(csaHandlers, EVENT_PLEDGE_OF_MARA_RESULT, PledgeOfMaraHook)
 
@@ -9808,94 +9793,6 @@ function ChatAnnouncements.HookFunction()
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
         end
     end
-
-    local Abilities = LUIE.Data.Abilities
-
-    ZO_MapKeepUpgrade_Shared.RefreshLevels = function(self)
-        self.levelsGridList:ClearGridList()
-
-        for currentLevel = 0, GetKeepMaxUpgradeLevel(self.keepUpgradeObject:GetKeep()) do
-            local numUpgrades = self.keepUpgradeObject:GetNumLevelUpgrades(currentLevel)
-            if numUpgrades > 0 then
-                local levelHeaderText = zo_strformat(SI_KEEP_UPGRADE_LEVEL_SECTION_HEADER, currentLevel)
-                for i = 1, numUpgrades do
-                    local name, description, icon, atPercent, isActive = self.keepUpgradeObject:GetLevelUpgradeInfo(currentLevel, i)
-                    -- Override with custom icons here.
-                    if LUIE.Data.Effects.KeepUpgradeOverride[name] then
-                        icon = LUIE.Data.Effects.KeepUpgradeOverride[name]
-                    end
-                    -- Override with custom faction icons here.
-                    if LUIE.Data.Effects.KeepUpgradeAlliance[name] then
-                        icon = LUIE.Data.Effects.KeepUpgradeAlliance[name][LUIE.PlayerFaction]
-                    end
-                    -- Special condition to display a unique icon for rank 2 of siege cap upgrade.
-                    if name == Abilities.Keep_Upgrade_Wood_Siege_Cap and currentLevel == 2 then
-                        icon = "LuiExtended/media/icons/keepupgrade/upgrade_wood_siege_cap_2.dds"
-                    end
-                    -- Update the tooltips.
-                    if LUIE.Data.Effects.KeepUpgradeTooltip[name] then
-                        description = LUIE.Data.Effects.KeepUpgradeTooltip[name]
-                    end
-                    -- Update the name (Note: We do this last since our other conditionals check by name).
-                    if LUIE.Data.Effects.KeepUpgradeNameFix[name] then
-                        name = LUIE.Data.Effects.KeepUpgradeNameFix[name]
-                    end
-
-                    local data = {
-                        index = i,
-                        gridHeaderName = levelHeaderText,
-                        level = currentLevel,
-                        name = name,
-                        description = description,
-                        icon = icon,
-                        atPercent = atPercent,
-                        isActive = isActive,
-                    }
-
-                    self.levelsGridList:AddEntry(ZO_GridSquareEntryData_Shared:New(data))
-                end
-            end
-        end
-
-        self.levelsGridList:CommitGridList()
-    end
-
-
-
-    WORLD_MAP_KEEP_UPGRADE.Button_OnMouseEnter = function(self, control)
-        InitializeTooltip(KeepUpgradeTooltip, control, TOPLEFT, 5, 0)
-
-        local data = control.dataEntry.data:GetDataSource()
-        local level = zo_strformat("<<1>> <<2>>", GetString(SI_ITEM_FORMAT_STR_LEVEL), data.level)
-        local name = zo_strformat("<<1>>", data.name)
-        local description = data.description
-
-        KeepUpgradeTooltip:SetVerticalPadding(16)
-        KeepUpgradeTooltip:AddLine(name, "ZoFontHeader3",1,1,1, nil, MODIFY_TEXT_TYPE_UPPERCASE, TEXT_ALIGN_CENTER)
-        KeepUpgradeTooltip:SetVerticalPadding(0)
-        ZO_Tooltip_AddDivider(KeepUpgradeTooltip)
-        KeepUpgradeTooltip:SetVerticalPadding(11)
-        KeepUpgradeTooltip:AddLine(level, "$(BOLD_FONT)|$(KB_16)",1,1,1, nil, MODIFY_TEXT_TYPE_UPPERCASE, TEXT_ALIGN_CENTER, false, 344)
-        KeepUpgradeTooltip:SetVerticalPadding(2)
-        local r,b,g = ZO_NORMAL_TEXT:UnpackRGB()
-        KeepUpgradeTooltip:AddLine(description, "ZoFontTooltipSubtitle",r,b,g, nil, MODIFY_TEXT_TYPE_NONE, TEXT_ALIGN_CENTER)
-        KeepUpgradeTooltip:SetVerticalPadding(2)
-    end
-
-
-
-    --[[
-    ZO_KeepUpgrade_Shared.SetUpgradeTooltip = function(level, index)
-
-        local level = data.level
-        local name = data.name
-        local description = data.description
-
-        KeepUpgradeTooltip:AddLine(name, "ZoFontHeader2",1,1,1, nil)
-        KeepUpgradeTooltip:AddLine(level, "ZoFontHeader2",1,1,1, nil)
-        KeepUpgradeTooltip:AddLine(description, "", ZO_NORMAL_TEXT:UnpackRGB())
-
-    end]]--
 
 end
 
