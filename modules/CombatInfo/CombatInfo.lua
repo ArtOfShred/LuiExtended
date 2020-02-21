@@ -159,7 +159,7 @@ CombatInfo.Defaults = {
         },
     },
     cct = {
-        enabled                      = true,
+        enabled                      = false,
         enabledOnlyInCyro            = false,
         unlock                       = false,
         controlScale                 = 1.0,
