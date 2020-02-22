@@ -423,6 +423,101 @@ function LUIE.InitializeHooks()
             container:SetHandler("OnEffectivelyShown", UpdateEffects)
         end
 
+        -- Hook GAMEPAD Stats
+        GAMEPAD_STATS.RefreshCharacterEffects = function(self)
+            local selectedData = self.mainList:GetTargetData()
+
+            local contentTitle, contentDescription, contentStartTime, contentEndTime, _
+
+            if selectedData.isArtificial then
+                contentTitle, _, _, _, contentStartTime, contentEndTime = GetArtificialEffectInfo(selectedData.artificialEffectId)
+                contentDescription = GetArtificialEffectTooltipText(selectedData.artificialEffectId)
+            else
+                local buffSlot, abilityId
+                contentTitle, contentStartTime, contentEndTime, buffSlot, _, _, _, _, _, _, abilityId = GetUnitBuffInfo("player", selectedData.buffIndex)
+
+                if DoesAbilityExist(abilityId) then
+                    contentDescription = GetAbilityEffectDescription(buffSlot)
+
+                    local timer = contentEndTime - contentStartTime
+                    local value2
+                    local value3
+                    if LUIE.Data.Effects.EffectOverride[abilityId] then
+                        if LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2 then
+                            value2 = LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2
+                        elseif LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Mod then
+                            value2 = math.floor( timer + E.EffectOverride[abilityId].tooltipValue2Mod + 0.5 )
+                        elseif LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id then
+                            value2 =  math.floor(GetAbilityDuration(LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id) + 0.5) / 1000
+                        else
+                            value2 = 0
+                        end
+                    else
+                        value2 = 0
+                    end
+                    if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue3 then
+                        value3 = LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue3
+                    else
+                        value3 = 0
+                    end
+                    timer = math.floor((timer * 10) + 0.5) / 10
+
+                    local tooltipText
+                    if LUIE.ResolveVeteranDifficulty() == true and LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltipVet then
+                        tooltipText = zo_strformat(LUIE.Data.Effects.EffectOverride[abilityId].tooltipVet, timer, value2, value3)
+                    else
+                        tooltipText = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltip) and zo_strformat(LUIE.Data.Effects.EffectOverride[abilityId].tooltip, timer, value2, value3) or GetAbilityDescription(abilityId)
+                    end
+
+                    if LUIE.Data.Effects.TooltipUseDefault[abilityId] then
+                        if GetAbilityEffectDescription(buffSlot) ~= "" then
+                            tooltipText = GetAbilityEffectDescription(buffSlot)
+                        end
+                    end
+
+                    if tooltipText ~= "" then
+                        tooltipText = string.match(tooltipText, ".*%S")
+                    end
+                    local thirdLine
+                    local timer2 = (contentEndTime - contentStartTime)
+                    if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltipDurFix then
+                        timer2 = timer2 + LUIE.Data.Effects.EffectOverride[abilityId].tooltipDurFix
+                    end
+                    if LUIE.Data.Effects.TooltipNameOverride[contentTitle] then
+                        thirdLine = zo_strformat(LUIE.Data.Effects.TooltipNameOverride[contentTitle], timer2)
+                    end
+                    if LUIE.Data.Effects.TooltipNameOverride[abilityId] then
+                        thirdLine = zo_strformat(LUIE.Data.Effects.TooltipNameOverride[abilityId], timer2)
+                    end
+
+                    contentDescription = tooltipText
+                    if thirdLine ~= "" and thirdLine ~= nil then
+                        contentDescription = thirdLine
+                    end
+
+
+                end
+            end
+
+            local contentDuration = contentEndTime - contentStartTime
+            if contentDuration > 0 then
+                local function OnTimerUpdate()
+                    local timeLeft = contentEndTime - (GetFrameTimeMilliseconds() / 1000.0)
+
+                    local timeLeftText = ZO_FormatTime(timeLeft, TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_TWELVE_HOUR)
+
+                    self:RefreshContentHeader(contentTitle, GetString(SI_STAT_GAMEPAD_TIME_REMAINING), timeLeftText)
+                end
+
+                self.effectDesc:SetHandler("OnUpdate", OnTimerUpdate)
+            else
+                self.effectDesc:SetHandler("OnUpdate", nil)
+            end
+
+            self.effectDesc:SetText(contentDescription)
+            self:RefreshContentHeader(contentTitle)
+        end
+
         -- Hook for request friend so menu option also displays invite message
         -- Menu is true if this request is sent from the Player to Player interaction menu
         local zos_RequestFriend = RequestFriend
@@ -926,6 +1021,28 @@ function LUIE.InitializeHooks()
             end
 
             return self.masterList
+        end
+
+        CAMPAIGN_BONUSES_GAMEPAD.UpdateToolTip = function(self)
+            GAMEPAD_TOOLTIPS:ClearLines(GAMEPAD_RIGHT_TOOLTIP)
+            if self.abilityList:IsActive() then
+                local targetData = self.abilityList:GetTargetData()
+                if targetData and targetData.isHeader == false then
+
+                    -- Replace description
+                    if targetData.abilityId then
+                        local abilityId = targetData.abilityId
+                        if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltip then
+                            targetData.description = LUIE.Data.Effects.EffectOverride[abilityId].tooltip
+                        end
+                    end
+                    GAMEPAD_TOOLTIPS:LayoutAvABonus(GAMEPAD_RIGHT_TOOLTIP, targetData)
+        			self:SetTooltipHidden(false)
+                    return
+                end
+            end
+
+            self:SetTooltipHidden(true)
         end
 
         CAMPAIGN_BONUSES.SetupBonusesEntry = function(self, control, data)
