@@ -414,9 +414,31 @@ function SpellCastBuffs.CreateSettings()
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
             {
+                -- Tooltip Ability Id
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_ABILITY_ID),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_ABILITY_ID_TP),
+                getFunc = function() return Settings.TooltipAbilityId end,
+                setFunc = function(value) Settings.TooltipAbilityId = value end,
+                width = "full",
+                default = Defaults.TooltipAbilityId,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
+                -- Tooltip Buff Type
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_BUFF_TYPE),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_BUFF_TYPE_TP),
+                getFunc = function() return Settings.TooltipBuffType end,
+                setFunc = function(value) Settings.TooltipBuffType = value end,
+                width = "full",
+                default = Defaults.TooltipBuffType,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
                 -- Sticky Tooltip Slider
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_TOOLTIP_STICKY)),
+                name = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_STICKY),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_STICKY_TP),
                 min = 0, max = 5000, step = 100,
                 getFunc = function() return Settings.TooltipSticky end,
@@ -425,7 +447,6 @@ function SpellCastBuffs.CreateSettings()
                 default = Defaults.TooltipSticky,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
-
         },
     }
 

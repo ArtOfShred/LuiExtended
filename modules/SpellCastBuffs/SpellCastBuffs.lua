@@ -143,6 +143,8 @@ SpellCastBuffs.Defaults = {
     BlacklistTable                      = {},
     TooltipEnable                       = true,
     TooltipSticky                       = 0,
+    TooltipAbilityId                    = false,
+    TooltipBuffType                     = false,
 }
 SpellCastBuffs.SV = nil
 
@@ -1116,8 +1118,44 @@ local buffTypes = {
     [2] = "Debuff",
     [3] = "Unbreakable Buff",
     [4] = "Unbreakable Debuff",
+    [5] = "None",
 
 }
+
+function SpellCastBuffs.TooltipBottomLine(control, detailsLine, artificial)
+
+    -- Add bottom divider and info if present:
+    if SpellCastBuffs.SV.TooltipAbilityId or SpellCastBuffs.SV.TooltipBuffType then
+        ZO_Tooltip_AddDivider(GameTooltip)
+        GameTooltip:SetVerticalPadding(4)
+        GameTooltip:AddLine("", "", ZO_NORMAL_TEXT:UnpackRGB())
+        -- Add Ability ID Line
+        if SpellCastBuffs.SV.TooltipAbilityId then
+            local labelAbilityId = control.effectId and control.effectId or "None"
+            if labelAbilityId == "Fake" then
+                artificial = true
+            end
+            if artificial then
+                labelAbilityId = "Artificial"
+            end
+            GameTooltip:AddHeaderLine("Ability ID", "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_LEFT, ZO_NORMAL_TEXT:UnpackRGB())
+            GameTooltip:AddHeaderLine(labelAbilityId, "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_RIGHT, 1, 1, 1)
+            detailsLine = detailsLine + 1
+        end
+
+        -- Add Buff Type Line
+        if SpellCastBuffs.SV.TooltipBuffType then
+            local buffType = control.buffType and control.buffType or 5
+            if control.effectId and Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].unbreakable then
+                buffType = buffType + 2
+            end
+            GameTooltip:AddHeaderLine("Type", "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_LEFT, ZO_NORMAL_TEXT:UnpackRGB())
+            GameTooltip:AddHeaderLine(buffTypes[buffType], "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_RIGHT, 1, 1, 1)
+            detailsLine = detailsLine + 1
+        end
+    end
+
+end
 
 -- OnMouseEnter for Buff Tooltips
 function SpellCastBuffs.Buff_OnMouseEnter(control)
@@ -1126,146 +1164,82 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
     InitializeTooltip(GameTooltip, control, BOTTOM, 0, -5, TOP)
     -- Setup Text
     local tooltipText = ""
+    local detailsLine
     local colorText = ZO_NORMAL_TEXT
     local tooltipTitle = zo_strformat(SI_ABILITY_TOOLTIP_NAME, control.effectName)
     if control.isArtificial then
         tooltipText = GetArtificialEffectTooltipText(control.effectId)
         GameTooltip:AddLine(tooltipTitle, "ZoFontHeader2",1,1,1, nil)
+        detailsLine = 3
         if SpellCastBuffs.SV.TooltipEnable then
+            GameTooltip:SetVerticalPadding(1)
+            ZO_Tooltip_AddDivider(GameTooltip)
+            GameTooltip:SetVerticalPadding(5)
             GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
+            detailsLine = 5
         end
+        SpellCastBuffs.TooltipBottomLine(control, detailsLine, true)
     else
         if not SpellCastBuffs.SV.TooltipEnable then
             GameTooltip:AddLine(tooltipTitle, "ZoFontHeader2",1,1,1, nil)
+            detailsLine = 3
+            SpellCastBuffs.TooltipBottomLine(control, detailsLine)
             return
         end
 
-        -- BEGIN TEMPORARY DEBUF FUNCTION HERE
-        -- MY ACCOUNT DEBUG: Temporary conditional to check for my Display Name and do some debug stuff, otherwise use normal function
-        local displayName = GetDisplayName()
-        if displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
-
-            -- Add original TP if present
-            if control.buffSlot then
-                if GetAbilityEffectDescription(control.buffSlot) ~= "" then
-                    tooltipText = "|cFFFF00Original Tool:|r " .. GetAbilityEffectDescription(control.buffSlot) .. "\n"
-                end
-            end
-
+        if control.tooltip then
+            tooltipText = control.tooltip
+        else
             local duration
             if type(control.effectId) == "number" then
-                -- Add original description if present
-                if GetAbilityDescription(control.effectId) ~= "" then
-                    tooltipText = tooltipText .. "|c3A92FFOriginal Desc:|r " .. GetAbilityDescription(control.effectId) .. "\n\n"
-                end
-
                 duration = control.duration / 1000
-            else
-                duration = 0
-            end
-
-            local value2
-            local value3
-            if Effects.EffectOverride[control.effectId] then
-                if Effects.EffectOverride[control.effectId].tooltipValue2 then
-                    value2 = Effects.EffectOverride[control.effectId].tooltipValue2
-                elseif Effects.EffectOverride[control.effectId].tooltipValue2Mod then
-                    value2 = math.floor( duration + Effects.EffectOverride[control.effectId].tooltipValue2Mod + 0.5 )
-                elseif Effects.EffectOverride[control.effectId].tooltipValue2Id then
-                    value2 = math.floor(GetAbilityDuration(Effects.EffectOverride[control.effectId].tooltipValue2Id) + 0.5) / 1000
-                else
-                    value2 = 0
-                end
-            else
-                value2 = 0
-            end
-            if Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltipValue3 then
-                value3 = Effects.EffectOverride[control.effectId].tooltipValue3
-            else
-                value3 = 0
-            end
-            duration = math.floor((duration * 10) + 0.5) / 10
-
-            local tooltipText2
-            if LUIE.ResolveVeteranDifficulty() == true and Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltipVet then
-                tooltipText2 = zo_strformat(Effects.EffectOverride[control.effectId].tooltipVet, duration, value2, value3)
-            else
-                 tooltipText2 = (Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltip) and zo_strformat(Effects.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
-            end
-            if tooltipText2 ~= "" then
-                tooltipText2 = "|cEE992AOverride TP:|r " .. tooltipText2
-            end
-            tooltipText = tooltipText .. tooltipText2
-
-            if control.tooltip then tooltipText = control.tooltip end
-
-            if Effects.TooltipUseDefault[control.effectId] then
-                if GetAbilityEffectDescription(control.buffSlot) ~= "" then
-                    tooltipText = tooltipText .. "\n\n|c00FFFFFlagged to show original Tooltip|r"
-                end
-            end
-
-        --Debug
-        --GameTooltip:SetAbilityId(117060)
-
-        -- END TEMPORARY DEBUG FUNCTION HERE
-        -- NORMAL BEHAVIOR:
-        else
-            if control.tooltip then
-                tooltipText = control.tooltip
-            else
-                local duration
-                if type(control.effectId) == "number" then
-                    duration = control.duration / 1000
-                    local value2
-                    local value3
-                    if Effects.EffectOverride[control.effectId] then
-                        if Effects.EffectOverride[control.effectId].tooltipValue2 then
-                            value2 = Effects.EffectOverride[control.effectId].tooltipValue2
-                        elseif Effects.EffectOverride[control.effectId].tooltipValue2Mod then
-                            value2 = math.floor( duration + Effects.EffectOverride[control.effectId].tooltipValue2Mod + 0.5 )
-                        elseif Effects.EffectOverride[control.effectId].tooltipValue2Id then
-                            value2 = math.floor(GetAbilityDuration(Effects.EffectOverride[control.effectId].tooltipValue2Id) + 0.5) / 1000
-                        else
-                            value2 = 0
-                        end
+                local value2
+                local value3
+                if Effects.EffectOverride[control.effectId] then
+                    if Effects.EffectOverride[control.effectId].tooltipValue2 then
+                        value2 = Effects.EffectOverride[control.effectId].tooltipValue2
+                    elseif Effects.EffectOverride[control.effectId].tooltipValue2Mod then
+                        value2 = math.floor( duration + Effects.EffectOverride[control.effectId].tooltipValue2Mod + 0.5 )
+                    elseif Effects.EffectOverride[control.effectId].tooltipValue2Id then
+                        value2 = math.floor(GetAbilityDuration(Effects.EffectOverride[control.effectId].tooltipValue2Id) + 0.5) / 1000
                     else
                         value2 = 0
                     end
-                    if Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltipValue3 then
-                        value3 = Effects.EffectOverride[control.effectId].tooltipValue3
-                    else
-                        value3 = 0
-                    end
-                    duration = math.floor((duration * 10) + 0.5) / 10
-
-                    if control.buffSlot then
-                        tooltipText = (Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltip) and zo_strformat(Effects.EffectOverride[control.effectId].tooltip, duration, value2, value3) or GetAbilityDescription(abilityId)
-                    else
-                        tooltipText = (Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltip) and zo_strformat(Effects.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
-                    end
-                    if LUIE.ResolveVeteranDifficulty() == true and Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltipVet then
-                        tooltipText = zo_strformat(Effects.EffectOverride[control.effectId].tooltipVet, duration, value2, value3)
-                    end
-
-                    -- Display Default Tooltip Description if no custom tooltip is present
-                    if tooltipText == "" or tooltipText == nil then
-                        if GetAbilityEffectDescription(control.buffSlot) ~= "" then
-                            tooltipText = GetAbilityEffectDescription(control.buffSlot)
-                        end
-                    end
-
                 else
-                    duration = 0
+                    value2 = 0
                 end
-            end
-
-            if Effects.TooltipUseDefault[control.effectId] then
-                if GetAbilityEffectDescription(control.buffSlot) ~= "" then
-                    tooltipText = GetAbilityEffectDescription(control.buffSlot)
+                if Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltipValue3 then
+                    value3 = Effects.EffectOverride[control.effectId].tooltipValue3
+                else
+                    value3 = 0
                 end
-            end
+                duration = math.floor((duration * 10) + 0.5) / 10
 
+                if control.buffSlot then
+                    tooltipText = (Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltip) and zo_strformat(Effects.EffectOverride[control.effectId].tooltip, duration, value2, value3) or GetAbilityDescription(abilityId)
+                else
+                    tooltipText = (Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltip) and zo_strformat(Effects.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
+                end
+                if LUIE.ResolveVeteranDifficulty() == true and Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltipVet then
+                    tooltipText = zo_strformat(Effects.EffectOverride[control.effectId].tooltipVet, duration, value2, value3)
+                end
+
+                -- Display Default Tooltip Description if no custom tooltip is present
+                if tooltipText == "" or tooltipText == nil then
+                    if GetAbilityEffectDescription(control.buffSlot) ~= "" then
+                        tooltipText = GetAbilityEffectDescription(control.buffSlot)
+                    end
+                end
+
+            else
+                duration = 0
+            end
+        end
+
+        if Effects.TooltipUseDefault[control.effectId] then
+            if GetAbilityEffectDescription(control.buffSlot) ~= "" then
+                tooltipText = GetAbilityEffectDescription(control.buffSlot)
+            end
         end
 
         local thirdLine
@@ -1287,40 +1261,26 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
             colorText = control.buffType == BUFF_EFFECT_TYPE_DEBUFF and ZO_ERROR_COLOR or ZO_SUCCEEDED_TEXT
         end
 
-        local detailsLine = 3
+        detailsLine = 5
 
         GameTooltip:AddLine(tooltipTitle, "ZoFontHeader2",1,1,1, nil)
         if tooltipText ~= "" and tooltipText ~= nil then
+            GameTooltip:SetVerticalPadding(1)
+            ZO_Tooltip_AddDivider(GameTooltip)
+            GameTooltip:SetVerticalPadding(5)
             GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
         end
         if thirdLine ~="" and thirdLine ~= nil then
-            detailsLine = 5
+            if tooltipText == "" or tooltipText == nil then
+                GameTooltip:SetVerticalPadding(1)
+                ZO_Tooltip_AddDivider(GameTooltip)
+                GameTooltip:SetVerticalPadding(5)
+            end
+            detailsLine = 7
             GameTooltip:AddLine(thirdLine, "", ZO_NORMAL_TEXT:UnpackRGB())
         end
 
-        --GameTooltip:AddLine("|t325:8:/EsoUI/Art/Miscellaneous/horizontalDivider.dds|t")
-
-        -- TODO: Add option to enable this
-        --[[
-        -- Add Ability ID Line
-        if control.effectId then
-            GameTooltip:AddHeaderLine("Ability ID", "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_LEFT, ZO_NORMAL_TEXT:UnpackRGB())
-            GameTooltip:AddHeaderLine(control.effectId, "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_RIGHT, 1, 1, 1)
-            detailsLine = detailsLine + 1
-        end
-
-        -- Add Buff Type Line
-        local buffType
-        if control.buffType then
-            buffType = control.buffType
-            if control.effectId and Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].unbreakable then
-                buffType = buffType + 2
-            end
-            GameTooltip:AddHeaderLine("Type", "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_LEFT, ZO_NORMAL_TEXT:UnpackRGB())
-            GameTooltip:AddHeaderLine(buffTypes[buffType], "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_RIGHT, 1, 1, 1)
-            detailsLine = detailsLine + 1
-        end
-        ]]--
+        SpellCastBuffs.TooltipBottomLine(control, detailsLine)
 
     end
 end

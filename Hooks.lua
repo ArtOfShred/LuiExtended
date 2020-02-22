@@ -394,6 +394,7 @@ function LUIE.InitializeHooks()
                                 effectsRow.effectType = effectType
                                 effectsRow.buffSlot = buffSlot
                                 effectsRow.isArtificial = false
+                                effectsRow.effectId = abilityId
 
                                 table.insert(effectsRows, effectsRow)
                             end
@@ -451,10 +452,54 @@ function LUIE.InitializeHooks()
             end
         end
 
+        local buffTypes = {
+            [1] = "Buff",
+            [2] = "Debuff",
+            [3] = "Unbreakable Buff",
+            [4] = "Unbreakable Debuff",
+            [5] = "None",
+        }
+
+        local function TooltipBottomLine(control, detailsLine)
+
+            -- Add bottom divider and info if present:
+            if LUIE.SpellCastBuffs.SV.TooltipAbilityId or LUIE.SpellCastBuffs.SV.TooltipBuffType then
+                ZO_Tooltip_AddDivider(GameTooltip)
+                GameTooltip:SetVerticalPadding(4)
+                GameTooltip:AddLine("", "", ZO_NORMAL_TEXT:UnpackRGB())
+                -- Add Ability ID Line
+                if LUIE.SpellCastBuffs.SV.TooltipAbilityId then
+                    local labelAbilityId = control.effectId and control.effectId or "None"
+                    if labelAbilityId == "Fake" then
+                        artificial = true
+                    end
+                    if control.isArtificial then
+                        labelAbilityId = "Artificial"
+                    end
+                    GameTooltip:AddHeaderLine("Ability ID", "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_LEFT, ZO_NORMAL_TEXT:UnpackRGB())
+                    GameTooltip:AddHeaderLine(labelAbilityId, "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_RIGHT, 1, 1, 1)
+                    detailsLine = detailsLine + 1
+                end
+
+                -- Add Buff Type Line
+                if LUIE.SpellCastBuffs.SV.TooltipBuffType then
+                    local buffType = control.effectType and control.effectType or 5
+                    if control.effectId and LUIE.Data.Effects.EffectOverride[control.effectId] and LUIE.Data.Effects.EffectOverride[control.effectId].unbreakable then
+                        buffType = buffType + 2
+                    end
+                    GameTooltip:AddHeaderLine("Type", "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_LEFT, ZO_NORMAL_TEXT:UnpackRGB())
+                    GameTooltip:AddHeaderLine(buffTypes[buffType], "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_RIGHT, 1, 1, 1)
+                    detailsLine = detailsLine + 1
+                end
+            end
+
+        end
+
         -- Hook Tooltip Generation for STATS Screen Buffs & Debuffs
         ZO_StatsActiveEffect_OnMouseEnter = function(control)
             InitializeTooltip(GameTooltip, control, RIGHT, -15)
 
+            local detailsLine
             local colorText = ZO_NORMAL_TEXT
             if control.thirdLine ~= "" and control.thirdLine ~= nil then
                 colorText = control.effectType == BUFF_EFFECT_TYPE_DEBUFF and ZO_ERROR_COLOR or ZO_SUCCEEDED_TEXT
@@ -462,17 +507,34 @@ function LUIE.InitializeHooks()
 
             if control.isArtificialTooltip then
                 local tooltipText = GetArtificialEffectTooltipText(control.effectId)
-                GameTooltip:AddLine(control.tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
+                GameTooltip:AddLine(control.tooltipTitle, "ZoFontHeader2",1,1,1, nil)
+                GameTooltip:SetVerticalPadding(1)
+                ZO_Tooltip_AddDivider(GameTooltip)
+                GameTooltip:SetVerticalPadding(5)
                 GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
+                detailsLine = 5
             else
-                GameTooltip:AddLine(control.tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
+                detailsLine = 3
+                GameTooltip:AddLine(control.tooltipTitle, "ZoFontHeader2",1,1,1, nil)
                 if control.tooltipText ~= "" and control.tooltipText ~= nil then
+                    GameTooltip:SetVerticalPadding(1)
+                    ZO_Tooltip_AddDivider(GameTooltip)
+                    GameTooltip:SetVerticalPadding(5)
                     GameTooltip:AddLine(control.tooltipText, "", colorText:UnpackRGBA())
+                    detailsLine = 5
                 end
-                if control.thirdLine ~="" and control.thirdLine ~= nil then
+                if control.thirdLine ~= "" and control.thirdLine ~= nil then
+                    if control.tooltipText == "" or control.tooltipText == nil then
+                        GameTooltip:SetVerticalPadding(1)
+                        ZO_Tooltip_AddDivider(GameTooltip)
+                        GameTooltip:SetVerticalPadding(5)
+                    end
+                    detailsLine = 7
                     GameTooltip:AddLine(control.thirdLine, "", ZO_NORMAL_TEXT:UnpackRGB())
                 end
             end
+
+            TooltipBottomLine(control, detailsLine)
 
             if not control.animation then
                 control.animation = ANIMATION_MANAGER:CreateTimelineFromVirtual("ShowOnMouseOverLabelAnimation", control:GetNamedChild("Highlight"))
@@ -906,14 +968,13 @@ function LUIE.InitializeHooks()
             end
 
             InitializeTooltip(SkillTooltip, control, TOPLEFT, 5, -5, TOPRIGHT)
-            SkillTooltip:SetVerticalPadding(16) -- 15
+            SkillTooltip:SetVerticalPadding(16)
             SkillTooltip:AddLine(name, "ZoFontHeader3",1,1,1, nil, MODIFY_TEXT_TYPE_UPPERCASE, TEXT_ALIGN_CENTER)
-            SkillTooltip:SetVerticalPadding(0) -- 8
+            SkillTooltip:SetVerticalPadding(0)
             ZO_Tooltip_AddDivider(SkillTooltip)
-            SkillTooltip:SetVerticalPadding(11)
+            SkillTooltip:SetVerticalPadding(8)
             local r,b,g = ZO_NORMAL_TEXT:UnpackRGB()
-            SkillTooltip:AddLine(description, "ZoFontTooltipSubtitle",r,b,g, nil, MODIFY_TEXT_TYPE_NONE, TEXT_ALIGN_CENTER)
-            SkillTooltip:SetVerticalPadding(2)
+            SkillTooltip:AddLine(description, "",r,b,g, nil, MODIFY_TEXT_TYPE_NONE, TEXT_ALIGN_CENTER)
 
         end
 
@@ -979,12 +1040,12 @@ function LUIE.InitializeHooks()
             KeepUpgradeTooltip:AddLine(name, "ZoFontHeader3",1,1,1, nil, MODIFY_TEXT_TYPE_UPPERCASE, TEXT_ALIGN_CENTER)
             KeepUpgradeTooltip:SetVerticalPadding(0)
             ZO_Tooltip_AddDivider(KeepUpgradeTooltip)
-            KeepUpgradeTooltip:SetVerticalPadding(11)
-            KeepUpgradeTooltip:AddLine(level, "$(BOLD_FONT)|$(KB_16)",1,1,1, nil, MODIFY_TEXT_TYPE_UPPERCASE, TEXT_ALIGN_CENTER, false, 344)
-            KeepUpgradeTooltip:SetVerticalPadding(2)
+            KeepUpgradeTooltip:SetVerticalPadding(7)
+            KeepUpgradeTooltip:AddLine(level, "ZoFontWinT1",1,1,1, nil, MODIFY_TEXT_TYPE_UPPERCASE, TEXT_ALIGN_CENTER, false, 344)
+            KeepUpgradeTooltip:SetVerticalPadding(0)
             local r,b,g = ZO_NORMAL_TEXT:UnpackRGB()
-            KeepUpgradeTooltip:AddLine(description, "ZoFontTooltipSubtitle",r,b,g, nil, MODIFY_TEXT_TYPE_NONE, TEXT_ALIGN_CENTER)
-            KeepUpgradeTooltip:SetVerticalPadding(2)
+            KeepUpgradeTooltip:AddLine(description, "",r,b,g, nil, MODIFY_TEXT_TYPE_NONE, TEXT_ALIGN_CENTER)
+            KeepUpgradeTooltip:SetVerticalPadding(0)
         end
 
         -- HOOK SKILLS

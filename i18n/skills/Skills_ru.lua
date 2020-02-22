@@ -88,7 +88,7 @@ local strings = {
     SI_LUIE_SKILL_REMOVE_TOOLTIP_PACK_LEADERS_BROTH =    "If you are a werewolf, the rich marrow will also slightly ease your transformation.\nThese effects are scaled based on your level.", -- Must be exact match in each localization
     SI_LUIE_SKILL_ADD_TOOLTIP_PACK_LEADERS_BROTH =       "\nIf you are a werewolf, the rich marrow will also slightly ease your transformation.",
     SI_LUIE_SKILL_REMOVE_TOOLTIP_DISASTROUSLY_BLOODY =   "If you are a vampire, the tainted blood in this drink will also spark a fierce hunger in you.\nThese effects are scaled based on your level.", -- Must be exact match in each localization
-    SI_LUIE_SKILL_ESO_PLUS_TP =                          "Увеличивает получаемые Опыт, Золото и Вдохновение на |cFFFFFF10|r%. Увеличивает скорость исследования особенностей на |cFFFFFF10|r%.",
+    SI_LUIE_SKILL_ESO_PLUS_TP =                          "Увеличивает получаемые Опыт, Золото и Вдохновение на |cFFFFFF10|r%.\nУвеличивает скорость исследования особенностей на |cFFFFFF10|r%.",
 
     -- Collectible
     SI_LUIE_SKILL_COLLECTIBLE_MYSTERY_MEAT =             "Mystery Meat",
