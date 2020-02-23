@@ -10,22 +10,21 @@ local Effects = LUIE.Data.Effects
 local zo_strformat = zo_strformat
 
 local function MillisecondTimestampDebug(message)
-    local currentTime = GetGameTimeMilliseconds()
-    local timestamp = FormatTimeMilliseconds(currentTime, TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_MILLISECONDS_NO_HOURS_OR_DAYS, TIME_FORMAT_DIRECTION_NONE)
-
-    timestamp = timestamp:gsub("HH", "")
-    timestamp = timestamp:gsub("H ", ":")
-    timestamp = timestamp:gsub("hh", "")
-    timestamp = timestamp:gsub("h ", ":")
-    timestamp = timestamp:gsub("m ", ":")
-    timestamp = timestamp:gsub("s ", ":")
-    timestamp = timestamp:gsub("A", "")
-    timestamp = timestamp:gsub("a", "")
-    timestamp = timestamp:gsub("ms", "")
-
-    timestamp = string.format("|c%s[%s]|r %s", LUIE.TimeStampColorize, timestamp, message)
-
-    return timestamp
+    if LUIE.ChatAnnouncements.SV.TimeStamp then
+        local currentTime = GetGameTimeMilliseconds()
+        local timestamp = FormatTimeMilliseconds(currentTime, TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_MILLISECONDS_NO_HOURS_OR_DAYS, TIME_FORMAT_DIRECTION_NONE)
+        timestamp = timestamp:gsub("HH", "")
+        timestamp = timestamp:gsub("H ", ":")
+        timestamp = timestamp:gsub("hh", "")
+        timestamp = timestamp:gsub("h ", ":")
+        timestamp = timestamp:gsub("m ", ":")
+        timestamp = timestamp:gsub("s ", ":")
+        timestamp = timestamp:gsub("A", "")
+        timestamp = timestamp:gsub("a", "")
+        timestamp = timestamp:gsub("ms", "")
+        message = string.format("|c%s[%s]|r %s", LUIE.TimeStampColorize, timestamp, message)
+    end
+    return message
 end
 
 -- Debug Display for Combat Events
@@ -63,9 +62,7 @@ function SpellCastBuffs.EventCombatDebug(eventCode, result, isError, abilityName
     local formattedResult = LUIE.Data.DebugResults[result]
 
     local finalString = (iconFormatted .. " ["..abilityId.."] "..ability..": [S] "..source.." --> [T] "..target .. " [D] " .. duration .. showachantime .. showacasttime .. " [R] " .. formattedResult)
-    if LUIE.ChatAnnouncements.SV.TimeStamp then
-        finalString = MillisecondTimestampDebug(finalString)
-    end
+    finalString = MillisecondTimestampDebug(finalString)
     d(finalString)
 end
 
@@ -111,9 +108,7 @@ function SpellCastBuffs.EventEffectDebug(eventCode, changeType, effectSlot, effe
     else
         finalString = ("|c00E200Refreshed:|r " .. iconFormatted .. " (" .. changeType .. ") [" .. abilityId .. "] " ..nameFormatted .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
     end
-    if LUIE.ChatAnnouncements.SV.TimeStamp then
-        finalString = MillisecondTimestampDebug(finalString)
-    end
+    finalString = MillisecondTimestampDebug(finalString)
     d(finalString)
 
 end
