@@ -23,10 +23,10 @@ LuiExtended wouldn't be where it was without the contributions of other users an
 - AchievementInfo: Formatting for Achievement Tracking in Chat Announcements borrows some ideas from Asto's AchievementInfo.
 
 ## Custom Art Assets
-- Custom Ability Icons by and modified from eleazzaar licensed under the [CC BY 3.0 license][1].
-- Custom Ability Icons by and modified from AKiZA, Angelina Avgustova, Dayed, Digital Worlds JSC, Ever Probe, HOSE, Jon Snow, Josch, Kalle Olli, Moon Tribe, N-hance Studio, PONETI, REXARD, Sky Painter, The 7 Heaven, TiGame, and TonityEden licensed under the [Unity Store single entity license][2].
-- Custom Ability Icons by and modified from a-ravlik & micart licensed under the [GraphicRiver regular license][3].
-- Custom Ability Icons by and modified from Forrest Imel, Frostwindz and Mizuko licensed under the [GameDevMarket.net pro license][4].
+- Custom ability icons by and modified from eleazzaar licensed under the [CC BY 3.0 license][1].
+- Custom ability icons by and modified from AKiZA, Angelina Avgustova, Dayed, Digital Worlds JSC, Ever Probe, HOSE, Jon Snow, Josch, Kalle Olli, Moon Tribe, N-hance Studio, PONETI, REXARD, Sky Painter, The 7 Heaven, TiGame, and TonityEden licensed under the [Unity Store single entity license][2].
+- Custom ability icons by and modified from a-ravlik & micart licensed under the [GraphicRiver regular license][3].
+- Custom ability icons by and modified from Forrest Imel, Frostwindz and Mizuko licensed under the [GameDevMarket.net pro license][4].
 
 ## Bug Testing
 - scorpius2k1 <esoui.com>
