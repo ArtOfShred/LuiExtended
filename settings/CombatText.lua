@@ -2012,12 +2012,7 @@ function CombatText.CreateSettings()
                 choices = FontsList,
                 sort = "name-up",
                 getFunc = function() return Settings.fontFace end,
-                setFunc = function(face)
-                    Settings.fontFace = face
-                    for k, _ in pairs (Settings.panels) do
-                        _G[k .. "_Label"]:SetFont(LMP:Fetch(LMP.MediaType.FONT, Settings.fontFace) .. "|26|" .. Settings.fontOutline)
-                    end
-                end,
+                setFunc = function(var) Settings.fontFace = var CombatText.ApplyFont() end,
                 default = Defaults.fontFace
             },
             {
@@ -2027,12 +2022,7 @@ function CombatText.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CT_FONT_OUTLINE_TP),
                 choices = CombatTextConstants.outlineType,
                 getFunc = function() return Settings.fontOutline end,
-                setFunc = function(outline)
-                    Settings.fontOutline = outline
-                    for k, _ in pairs (Settings.panels) do
-                        _G[k .. "_Label"]:SetFont(LMP:Fetch(LMP.MediaType.FONT, Settings.fontFace) .. "|26|" .. Settings.fontOutline)
-                    end
-                end,
+                setFunc = function(var) Settings.fontOutline = var CombatText.ApplyFont() end,
                 default = Defaults.fontOutline
             },
             {

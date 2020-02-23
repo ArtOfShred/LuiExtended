@@ -395,6 +395,15 @@ function CombatText.RemoveFromCustomList(list, input)
     end
 end
 
+function CombatText.ApplyFont()
+    local fontName = LUIE.Fonts[LUIE.CombatText.SV.fontFace]
+    LUIE.CombatText.SV.fontFaceApplied = fontName
+    if not fontName or fontName == "" then
+        printToChat(GetString(SI_LUIE_ERROR_FONT), true)
+        LUIE.CombatText.SV.fontFaceApplied = "$(MEDIUM_FONT)"
+    end
+end
+
 -- Module initialization
 function CombatText.Initialize(enabled)
     -- Load settings
@@ -411,6 +420,9 @@ function CombatText.Initialize(enabled)
     end
     CombatText.Enabled = true
 
+    -- Apply Font
+    CombatText.ApplyFont()
+
     -- Set panels to player configured settings
     for k, s in pairs(LUIE.CombatText.SV.panels) do
         if _G[k] ~= nil then
@@ -418,7 +430,7 @@ function CombatText.Initialize(enabled)
             _G[k]:SetAnchor(s.point, Combattext, s.relativePoint, s.offsetX, s.offsetY)
             _G[k]:SetDimensions(unpack(s.dimensions))
             _G[k]:SetHandler('OnMouseUp', SavePosition)
-            _G[k .. '_Label']:SetFont(LMP:Fetch('font', LUIE.CombatText.SV.fontFace) .. '|26|' .. LUIE.CombatText.SV.fontOutline)
+            _G[k .. '_Label']:SetFont(LUIE.CombatText.SV.fontFaceApplied .. '|26|' .. LUIE.CombatText.SV.fontOutline)
             _G[k .. '_Label']:SetText(panelTitles[k])
         else
             LUIE.CombatText.SV.panels[k] = nil
