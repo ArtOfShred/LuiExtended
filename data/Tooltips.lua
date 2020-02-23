@@ -13,7 +13,7 @@ local FrostDamage    = GetString(SI_DAMAGETYPE6) .. " Damage" -- TODO: Localize
 local MagicDamage    = GetString(SI_DAMAGETYPE8) .. " Damage" -- TODO: Localize
 local DiseaseDamage  = GetString(SI_DAMAGETYPE10) .. " Damage" -- TODO: Localize
 local PoisonDamage   = GetString(SI_DAMAGETYPE11) .. " Damage" -- TODO: Localize
-local BleedDamage    = "Bleeding Damage" -- TODO: Localize
+local BleedDamage    = "Bleed Damage" -- TODO: Localize
 local OblivionDamage = "Oblivion Damage" -- TODO: Localize
 
 LUIE.Data.Tooltips = {

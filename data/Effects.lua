@@ -8729,7 +8729,7 @@ Effects.EffectOverride = {
     [72996] = { icon = 'LuiExtended/media/icons/abilities/ability_defiledaegis_symphony_of_blades.dds', hide = true }, -- Symphony of Blades (Defiled Aegis)
     [73020] = { hide = true }, -- Shattered Harmoney (Defiled Aegis)
     [73021] = { hide = true }, -- Shattered Harmony (Defiled Aegis)
-    [76180] = { hide = true, icon = 'esoui/art/icons/achievement_thievesguild_029.dds' }, -- Shattered Harmony (Defiled Aegis)
+    [76180] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_summon_defiled_aegis.dds' }, -- Shattered Harmony (Defiled Aegis)
     [73025] = { hide = true }, -- Tomb Guardian (Defiled Aegis)
     [73322] = { hide = true }, -- Shattered Harmony (Defiled Aegis)
     [74993] = { hide = true }, -- Shattered Harmony (Defiled Aegis)
