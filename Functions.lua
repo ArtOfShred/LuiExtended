@@ -65,6 +65,12 @@ end
 
 -- Easy Print to Chat
 function LUIE.PrintToChat(msg, isSystem)
+
+    local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
+    CHAT_SYSTEM:AddMessage(msg)
+
+    -- TODO: Fix in the future
+    --[[
     if LUIE.ChatAnnouncements.SV.ChatMethod == "Print to All Tabs" then
         if not LUIE.ChatAnnouncements.SV.ChatBypass and CHAT_SYSTEM.primaryContainer then
             local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
@@ -93,6 +99,7 @@ function LUIE.PrintToChat(msg, isSystem)
             end
         end
     end
+    ]]--
 end
 
 -- Returns a formatted number with commas

@@ -63,7 +63,7 @@ function SpellCastBuffs.EventCombatDebug(eventCode, result, isError, abilityName
     local formattedResult = LUIE.Data.DebugResults[result]
 
     local finalString = (iconFormatted .. " ["..abilityId.."] "..ability..": [S] "..source.." --> [T] "..target .. " [D] " .. duration .. showachantime .. showacasttime .. " [R] " .. formattedResult)
-    if not LUIE.ChatAnnouncements.SV.ChatBypass then
+    if LUIE.ChatAnnouncements.SV.TimeStamp then
         finalString = MillisecondTimestampDebug(finalString)
     end
     d(finalString)
@@ -111,7 +111,7 @@ function SpellCastBuffs.EventEffectDebug(eventCode, changeType, effectSlot, effe
     else
         finalString = ("|c00E200Refreshed:|r " .. iconFormatted .. " (" .. changeType .. ") [" .. abilityId .. "] " ..nameFormatted .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
     end
-    if not LUIE.ChatAnnouncements.SV.ChatBypass then
+    if LUIE.ChatAnnouncements.SV.TimeStamp then
         finalString = MillisecondTimestampDebug(finalString)
     end
     d(finalString)
