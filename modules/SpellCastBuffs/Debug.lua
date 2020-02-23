@@ -9,6 +9,25 @@ local Effects = LUIE.Data.Effects
 
 local zo_strformat = zo_strformat
 
+local function MillisecondTimestampDebug(message)
+    local currentTime = GetGameTimeMilliseconds()
+    local timestamp = FormatTimeMilliseconds(currentTime, TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_MILLISECONDS_NO_HOURS_OR_DAYS, TIME_FORMAT_DIRECTION_NONE)
+
+    timestamp = timestamp:gsub("HH", "")
+    timestamp = timestamp:gsub("H ", ":")
+    timestamp = timestamp:gsub("hh", "")
+    timestamp = timestamp:gsub("h ", ":")
+    timestamp = timestamp:gsub("m ", ":")
+    timestamp = timestamp:gsub("s ", ":")
+    timestamp = timestamp:gsub("A", "")
+    timestamp = timestamp:gsub("a", "")
+    timestamp = timestamp:gsub("ms", "")
+
+    timestamp = string.format("|c%s[%s]|r %s", LUIE.TimeStampColorize, timestamp, message)
+
+    return timestamp
+end
+
 -- Debug Display for Combat Events
 function SpellCastBuffs.EventCombatDebug(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
     -- Don't display if this aura is already added to the filter
@@ -43,7 +62,11 @@ function SpellCastBuffs.EventCombatDebug(eventCode, result, isError, abilityName
 
     local formattedResult = LUIE.Data.DebugResults[result]
 
-    d(iconFormatted .. " ["..abilityId.."] "..ability..": [S] "..source.." --> [T] "..target .. " [D] " .. duration .. showachantime .. showacasttime .. " [R] " .. formattedResult)
+    local finalString = (iconFormatted .. " ["..abilityId.."] "..ability..": [S] "..source.." --> [T] "..target .. " [D] " .. duration .. showachantime .. showacasttime .. " [R] " .. formattedResult)
+    if not LUIE.ChatAnnouncements.SV.ChatBypass then
+        finalString = MillisecondTimestampDebug(finalString)
+    end
+    d(finalString)
 end
 
 -- Debug Display for Effect Events
@@ -80,13 +103,19 @@ function SpellCastBuffs.EventEffectDebug(eventCode, changeType, effectSlot, effe
         refreshOnly = " |c00E200(Hidden)|r "
     end
 
+    local finalString
     if changeType == 1 then
-        d("|c00E200Gained:|r " .. refreshOnly .. iconFormatted .. " [" .. abilityId .. "] " ..nameFormatted .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
+        finalString = ("|c00E200Gained:|r " .. refreshOnly .. iconFormatted .. " [" .. abilityId .. "] " ..nameFormatted .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
     elseif changeType == 2 then
-        d("|c00E200Faded:|r " .. iconFormatted .. " [" .. abilityId .. "] " .. nameFormatted .. ": [Tag] " .. unitName)
+        finalString = ("|c00E200Faded:|r " .. iconFormatted .. " [" .. abilityId .. "] " .. nameFormatted .. ": [Tag] " .. unitName)
     else
-        d("|c00E200Refreshed:|r " .. iconFormatted .. " (" .. changeType .. ") [" .. abilityId .. "] " ..nameFormatted .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
+        finalString = ("|c00E200Refreshed:|r " .. iconFormatted .. " (" .. changeType .. ") [" .. abilityId .. "] " ..nameFormatted .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
     end
+    if not LUIE.ChatAnnouncements.SV.ChatBypass then
+        finalString = MillisecondTimestampDebug(finalString)
+    end
+    d(finalString)
+
 end
 
 function SpellCastBuffs.TempSlashFilter()

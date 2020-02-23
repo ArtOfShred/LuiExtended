@@ -1,7 +1,7 @@
 ﻿## Title: |cE12000L|cFFFFB0ui E|rxtended|
 ## Author: ArtOfShred, psypanda, SpellBuilder
-## Version: 5.9.4
-## APIVersion: 100027
+## Version: 6.0.0
+## APIVersion: 100030
 ## AddOnVersion: 594
 ## Description: Provides UnitFrames, InfoPanel, Combat Text & Info, Buffs & Debuff Tracking, Chat Announcements and Slash Commands.
 ## DependsOn: LibAddonMenu-2.0 LibMediaProvider-1.0

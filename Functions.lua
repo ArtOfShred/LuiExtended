@@ -4,9 +4,9 @@
 --]]
 
 -- Called from the menu and on initialization to update timestamp color when changed.
-local TimeStampColorize
+LUIE.TimeStampColorize = nil
 function LUIE.UpdateTimeStampColor()
-    TimeStampColorize = ZO_ColorDef:New(unpack(LUIE.ChatAnnouncements.SV.TimeStampColor)):ToHex()
+    LUIE.TimeStampColorize = ZO_ColorDef:New(unpack(LUIE.ChatAnnouncements.SV.TimeStampColor)):ToHex()
 end
 
 -- Return a formatted time
@@ -51,7 +51,7 @@ local function FormatMessage(msg, doTimestamp)
     if doTimestamp then
         local timestring = GetTimeString()
         -- Color Code to match pChat default
-        msg = string.format("|c%s[%s]|r %s", TimeStampColorize, LUIE.CreateTimestamp(timestring), msg)
+        msg = string.format("|c%s[%s]|r %s", LUIE.TimeStampColorize, LUIE.CreateTimestamp(timestring), msg)
     end
     return msg
 end
