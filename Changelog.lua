@@ -56,7 +56,7 @@ local changelogMessages = {
 	"      - Display a different border color based on the type of CC applied (including unbreakable cc).",
 	"      - Choose a custom sound to play when effected by CC.",
 	"      - Display an alert when standing in hostile AOE effects with various toggleable categories and different sounds options for each. This list requires manual input but I have player skills added, most overland mobs and have at least made some progress adding dungeon/arena abilities.",
-    "[*] Updated many abilities in Combat Alerts with better duration tracking and proper CC types."
+    "[*] Updated many abilities in Combat Alerts with better duration tracking and proper CC types.",
     "[*] Bar Highlight tracking now supports tracking multiple ability id's, resulting in the ability to track ground mine durations & their effects individually and to track both the physical & magical dot from Soul Trap and so on.",
     "[*] Updated Bar Highlight tracking to handle API changes made in Scalebreaker. The bar highlights were being refreshed too quickly which could lead to performance issues and resulted in a stuttering effect occuring on the \"proc\" animation highlight.",
     "[*] Added a few checks into bar highlight tracking to potentially stop errors from being thrown occasionally.",
