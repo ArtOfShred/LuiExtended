@@ -3695,7 +3695,7 @@ Effects.EffectOverride = {
     [83287] = { icon = 'esoui/art/icons/achievement_housing_038.dds', tooltip = Tooltips.Set_Pirate_Skeleton }, -- Pirate Skeleton
     [80853] = { tooltip = Abilities.Set_Pirate_Skeleton }, -- Major Protection (Pirate Skeleton)
     [85637] = { icon = 'esoui/art/icons/ability_debuff_major_defile.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Abilities.Set_Pirate_Skeleton }, -- Major Defile (Pirate Skeleton)
-    [80606] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_selene.dds' }, -- Selene (Selene)
+    [80606] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_primal_maul.dds' }, -- Selene (Selene)
     [80607] = { hide = true }, -- Dummy (Selene)
     [80609] = { hide = true }, -- Dummy (Selene)
     [80545] = { tooltip = Tooltips.Set_Sellistrix }, -- Sellistrix (Sellistrix)
@@ -3865,7 +3865,7 @@ Effects.EffectOverride = {
     [127192] = { icon = 'LuiExtended/media/icons/abilities/ability_set_senches_bite.dds', tooltip = Tooltips.Generic_Critical_Damage, tooltipValue2 = 12 }, -- Senche's Bite (Senche's)
     [76344] = { icon = 'LuiExtended/media/icons/abilities/ability_set_syvarras_scales.dds', name = Abilities.Set_Syvarras_Scales, hide = true }, -- Serpent's Spirit (Syvarra's Scales)
     [75718] = { icon = 'LuiExtended/media/icons/abilities/ability_set_syvarras_scales.dds', name = Abilities.Set_Syvarras_Scales, tooltip = Tooltips.Generic_Poison, tooltipValue2 = 1 }, -- Serpent's Spirit (Syvarra's Scales)
-    [52709] = { icon = 'LuiExtended/media/icons/abilities/ability_set_way_of_air.dds', tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration_Value, tooltipValue2 = 344 }, -- Way of Air (of the Air)
+    [52709] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_razor_flourish.dds', tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration_Value, tooltipValue2 = 344 }, -- Way of Air (of the Air)
     [34383] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava_trap.dds' }, -- Shadow of the Red Mountain (of the Red Mountain)
     [34817] = { icon = 'LuiExtended/media/icons/abilities/ability_set_twin_sisters.dds', name = Abilities.Set_Twin_Sisters, tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 2 }, -- Twin Sisters Bleed
     [34870] = { icon = 'LuiExtended/media/icons/abilities/ability_set_wilderqueen.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 30 }, -- Wilderqueen's Arch (of the Wilderqueen)
@@ -4208,8 +4208,8 @@ Effects.EffectOverride = {
     [73296] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_pillar.dds', name = Abilities.Set_Winterborn, duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 60 }, -- Winterborn Snare (Winterborn)
     [71646] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_pillar.dds' }, -- Winterborn (Winterborn)
     [71188] = { icon = 'esoui/art/icons/ability_rogue_019.dds', name = Abilities.Set_Glorious_Defender, tooltip = Tooltips.Set_Glorious_Defender }, -- Glorious Defense (of Glory)
-    [71605] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hunt_leader.dds' }, -- Hunt Leader (of the Hunt)
-    [74106] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hunt_leader.dds' }, -- Hunt Leader (of the Hunt)
+    [71605] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_beast_bear.dds' }, -- Hunt Leader (of the Hunt)
+    [74106] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_beast_bear.dds' }, -- Hunt Leader (of the Hunt)
     [71193] = { icon = 'LuiExtended/media/icons/abilities/ability_set_para_bellum.dds', name = Abilities.Set_Para_Bellum, duration = 0, forcedContainer = 'short', tooltip = Tooltips.Set_Para_Bellum }, -- Para Bellum Shield (Para Bellum)
 
     -- Dragonstar Arena Sets
@@ -8987,7 +8987,7 @@ Effects.EffectOverride = {
     [104690] = { tooltip = Tooltips.Skill_Scattershot_Catapult_Ground }, -- Twisting Path (Scattershot Catapult)
     [14611] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_scattershot_catapult.dds' }, -- Scattershot Catapult (Scattershot Catapult)
     [104695] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_scattershot_catapult.dds', tooltip = Tooltips.Skill_Scattershot_Catapult_AOE, groundLabel = true }, -- Scattershot Catapult (Scattershot Catapult)
-    [104696] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_scattershot_catapult.dds', tooltip = Tooltips.Skill_Scattershot_Catapult }, -- Scattershot Catapult (Scattershot Catapult)
+    [104696] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_scattershot_catapult.dds', tooltip = Tooltips.Generic_Increase_Damage_Taken, tooltipValue2 = 20 }, -- Scattershot Catapult (Scattershot Catapult)
 
     [66438] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_cold_stone_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Covenant, Abilities.Skill_Cold_Stone_Trebuchet) }, -- Create Trebuchet... (Cold Stone Trebuchet)
     [66439] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_cold_stone_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Pact, Abilities.Skill_Cold_Stone_Trebuchet) }, -- Create Trebuchet... (Cold Stone Trebuchet)
@@ -10099,7 +10099,7 @@ Effects.EffectOverride = {
     [8244] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_pound.dds' }, -- Devastate (Corprus Husk)
     [8247] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_vomit.dds' }, -- Vomit (Corprus Husk)
     [30616] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_vomit.dds' }, -- Vomit (Corprus Husk)
-    [30615] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_wither.dds', tooltip = Tooltips.Skill_Wither }, -- Wither (Corprus Husk)
+    [30615] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_wither.dds', tooltip = Tooltips.Generic_Increase_Damage_Taken, tooltipValue2 = 15 }, -- Wither (Corprus Husk)
     [22109] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds' }, -- Contaminate (Corprus Husk)
     [22108] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds' }, -- Contaminate (Corprus Husk)
 
