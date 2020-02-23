@@ -413,6 +413,12 @@ local AbilityTables = {
     Set_Honors_Scorn                  = 121917,
     Set_Honors_Love                   = 121913,
     Set_Lekis_Focus                   = 76944,
+    Set_Dauntless_Combatant           = 134103,
+    Set_Unchained_Aggressor           = 134090,
+    Set_Critical_Riposte              = 134017,
+    Set_Warming_Aura                  = 133210,
+    Set_Aegis_Caller                  = 133490,
+    Set_Banis_Torment                 = 133290,
 
     Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE),
 

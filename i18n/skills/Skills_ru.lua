@@ -964,6 +964,13 @@ local strings = {
     SI_LUIE_SKILL_SET_UNDAUNTED_UNWEAVER_TP =            "Your Light Attacks deal an additional |cFFFFFF774|r damage and Heavy Attacks deal an additional |cFFFFFF1161|r damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_SET_DUNERIPPERS_SCALES_TP =            "Increase Physical and Spell Resistance by |cFFFFFF5310|r while you are blocking.",
 
+    SI_LUIE_SKILL_KJALNARS_NIGHTMARE_TP =                "Marked for |cFFFFFF5|r seconds, stacking up to |cFFFFFF5|r times when your attacker damages you with a Light Attack.\n\nAt |cFFFFFF5|r stacks, an undodgeable skeletal hand attacks you after |cFFFFFF1|r second, knocking you into the air and stunning you for |cFFFFFF3|r seconds or dealing Magic Damage if you cannot be stunned.\n\nYou can only receive a stack once per second.",
+    SI_LUIE_SET_HITIS_HEARTH_TP =                        "You and group members within |cFFFFFF10|r meters heal every |cFFFFFF1|r second and have the cost of Sprint, Block, and Roll Dodge reduced by |cFFFFFF5|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SET_HITIS_HEARTH_GROUND_TP =                 "Healing every |cFFFFFF1|r second and reduces the cost of Sprint, Block, and Roll Dodge by |cFFFFFF5|r%.",
+    SI_LUIE_SET_DRAUGRKIN_TP =                           "Increase damage taken from your attacker by |cFFFFFF617|r for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SET_AEGIS_CALLER_TP =                        "After |cFFFFFF2.5|r seconds, the Lesser Aegis spins its blades, dealing Bleed Damage every |cFFFFFF1|r second to enemies within a |cFFFFFF6|r meter radius.",
+    SI_LUIE_SET_GRAVE_GUARDIAN_TP =                      "While you are blocking, you and group members within |cFFFFFF8|r meters gain |cFFFFFF4430|r Physical and Spell Resistance.",
+
     -- Trial Sets
     SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP =            "Increase Weapon Critical by |cFFFFFF400|r for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF5|r times when you deal melee damage.\n\nThis effect can occur once every half second.",
     SI_LUIE_SKILL_SET_DESTRUCTIVE_MAGE_TP =              "When an attacker damages you with a fully-charged Heavy Attack they detonate the bomb, dealing Magic Damage to you and allies within |cFFFFFF8|r meters.",

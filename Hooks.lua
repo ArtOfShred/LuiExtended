@@ -495,7 +495,6 @@ function LUIE.InitializeHooks()
                         contentDescription = thirdLine
                     end
 
-
                 end
             end
 

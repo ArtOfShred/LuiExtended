@@ -171,6 +171,7 @@ CrowdControl.aoePlayerSet = {
     [67204] = 1, -- Leeching Plate (of Leeching)
     [102094] = 1, -- Thurvokun (Thurvokun)
     [116920] = 1, -- Auroran's Thunder (Auroran's Thunder)
+    [133494] = 1, -- Aegis Caller (Aegis Caller's)
 
     -- Siege
     [104693] = 1, -- Meatbag Catapult

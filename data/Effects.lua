@@ -42,6 +42,7 @@ Effects.IsToggle = {
     [117082] = true, -- Frozen Watcher (Frozen Watcher)
     [134930] = true, -- Duneripper's Scales (Duneripper)
     [86555] = true, -- Major Evasion (Hist Bark)
+    [135554] = true, -- Grave Guardian (Grave Guardian's)
 
     -- Sorcerer
     [23304] = true, -- Summon Unstable Familiar
@@ -553,6 +554,7 @@ Effects.EffectGroundDisplay = {
     [67205] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_aoe_poison.dds', buff = false, debuff = false, ground = true }, -- Leeching Plate (of Leeching)
     [84354] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', buff = false, debuff = false, ground = true }, -- Hand of Mephala (of Mephala's Hand)
     [126924] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hollowfang.dds', buff = true, debuff = false, ground = false }, -- Hollowfang Thirst (Hollowfang Thirst)
+    [133493] = { icon = 'LuiExtended/media/icons/abilities/ability_set_aegis_caller.dds', name = Abilities.Set_Aegis_Caller, buff = false, debuff = false, ground = true }, -- Aegis Caller (Aegis Caller's)
 
     -- Trial Sets
     [107141] = { icon = 'LuiExtended/media/icons/abilities/ability_set_olorime.dds', name = Abilities.Set_Vestment_of_Olorime, buff = true, debuff = false, ground = false }, -- Vestment of Olirime (Olirime's)
@@ -2964,6 +2966,15 @@ Effects.KeepUpgradeOverride = {
     [Abilities.Keep_Upgrade_Wood_Stronger_Doors]        = "LuiExtended/media/icons/keepupgrade/upgrade_wood_stronger_doors.dds",
     [Abilities.Keep_Upgrade_Food_Mender_Abilities]      = "LuiExtended/media/icons/keepupgrade/upgrade_food_mender.dds",
     [Abilities.Keep_Upgrade_Food_Mage_Abilities]        = "LuiExtended/media/icons/keepupgrade/upgrade_food_mage.dds",
+    [Abilities.Keep_Upgrade_Food_Guard_Abilities]       = "LuiExtended/media/icons/keepupgrade/upgrade_food_guard.dds",
+}
+
+Effects.KeepUpgradeAlliance = {
+    [Abilities.Keep_Upgrade_Food_Honor_Guard_Abilities] = {
+        [1] = "LuiExtended/media/icons/keepupgrade/upgrade_food_honor_guard_ad.dds",
+        [2] = "LuiExtended/media/icons/keepupgrade/upgrade_food_honor_guard_ep.dds",
+        [3] = "LuiExtended/media/icons/keepupgrade/upgrade_food_honor_guard_dc.dds",
+    },
 }
 
 Effects.KeepUpgradeNameFix = {
@@ -2988,19 +2999,6 @@ Effects.KeepUpgradeTooltip = {
     [Abilities.Keep_Upgrade_Food_Mage_Abilities]        = Tooltips.Keep_Upgrade_Food_Mage_Abilities,
     [Abilities.Keep_Upgrade_Food_Honor_Guard_Abilities] = Tooltips.Keep_Upgrade_Food_Honor_Guard_Abilities,
     [Abilities.Keep_Upgrade_Food_Guard_Abilities]       = Tooltips.Keep_Upgrade_Food_Guard_Abilities,
-}
-
-Effects.KeepUpgradeAlliance = {
-    [Abilities.Keep_Upgrade_Food_Honor_Guard_Abilities] = {
-        [1] = "LuiExtended/media/icons/keepupgrade/upgrade_food_honor_guard_ad.dds",
-        [2] = "LuiExtended/media/icons/keepupgrade/upgrade_food_honor_guard_ep.dds",
-        [3] = "LuiExtended/media/icons/keepupgrade/upgrade_food_honor_guard_dc.dds",
-    },
-    [Abilities.Keep_Upgrade_Food_Guard_Abilities] = {
-        [1] = "LuiExtended/media/icons/keepupgrade/upgrade_food_guard_ad.dds",
-        [2] = "LuiExtended/media/icons/keepupgrade/upgrade_food_guard_ep.dds",
-        [3] = "LuiExtended/media/icons/keepupgrade/upgrade_food_guard_dc.dds",
-    },
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -3664,6 +3662,12 @@ Effects.EffectOverride = {
     [80525] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris_fire.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1 }, -- Ilambris (Ilambris)
     [83405] = { hide = true }, -- Infernal Guardian (Infernal Guardian)
     [83409] = { icon = 'LuiExtended/media/icons/abilities/ability_set_infernal_guardian.dds' }, -- Infernal Guardian (Infernal Guardian)
+
+    [133505] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kjalnars_nightmare_bone.dds', tooltip = Tooltips.Set_Kjalnars_Nightmare }, -- Bone (Kjalnar's Nightmare)
+    [133538] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kjalnars_nightmare.dds' }, -- Kjalnar's Nightmare (Kjalnar's Nightmare)
+    [134908] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kjalnars_nightmare.dds' }, -- Kjalnar's Nightmare (Kjalnar's Nightmare)
+    [133506] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kjalnars_nightmare.dds', tooltip = Tooltips.Generic_Knockdown }, -- Kjalnar's Nightmare (Kjalnar's Nightmare)
+
     [80566] = { hide = true }, -- Kra'gh (Kra'gh)
     [80565] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_kragh.dds' }, -- Kra'gh (Kra'gh)
     [59586] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_lord_warden.dds', name = Abilities.Set_Lord_Warden_Dusk, duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 3870 }, -- Lord Warden (Lord Warden)
@@ -3678,6 +3682,9 @@ Effects.EffectOverride = {
     [130633] = { tooltip = Abilities.Set_Mighty_Chudan }, -- Major Resolve (Mighty Chudan)
     [66808] = { icon = 'LuiExtended/media/icons/abilities/ability_set_molag_kena.dds', tooltip = Tooltips.Set_Molag_Kena }, -- Molag Kena (Molag Kena)
     [66812] = { icon = 'LuiExtended/media/icons/abilities/ability_set_molag_kena.dds', tooltip = Tooltips.Set_Molag_Kena_Overkill }, -- Overkill (Molag Kena)
+
+    [133381] = { icon = 'LuiExtended/media/icons/abilities/ability_set_mother_ciannait.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Mother Ciannait (Mother Ciannait)
+
     [59594] = { tooltip = Tooltips.Set_Nerieneth }, -- Crypt of Hearts Item Set (Nerien'eth)
     [59593] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_nerieneth.dds', name = Abilities.Set_Nerieneth }, -- Lich Crystal (Nerien'eth)
     [98421] = { icon = 'esoui/art/icons/achievement_housing_038.dds', tooltip = Tooltips.Set_Pirate_Skeleton }, -- Pirate Skeleton
@@ -3812,6 +3819,12 @@ Effects.EffectOverride = {
     [129536] = { tooltip = Abilities.Set_Daring_Corsair }, -- Minor Heroism (Daring Corsair's)
     [130840] = { icon = 'esoui/art/icons/ability_buff_minor_heroism.dds', name = Abilities.Skill_Minor_Heroism }, -- Daring Corsair (Daring Corsair's)
 
+    [134254] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dauntless_combatant_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Dauntless_Combatant, Abilities.Set_Cooldown), tooltip = Tooltips.Generic_Set_ICD, tooltipValue2 = Abilities.Set_Dauntless_Combatant, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Winded (Dauntless Combatant's)
+    [134094] = { tooltip = Abilities.Set_Unchained_Aggressor }, -- Major Berserk (Unchained Aggressor's)
+
+    [134034] = { tooltip = Abilities.Set_Critical_Riposte }, -- Minor Uncertainty (of Critical Riposte)
+    [134040] = { tooltip = Abilities.Set_Critical_Riposte }, -- Minor Eneveration (of Critical Riposte)
+
     -- Overland Sets (Light)
     [75691] = { tooltip = Tooltips.Set_Bahrahas_Curse }, -- Bahraha's Curse
     [75707] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_snare.dds' }, -- Bahraha's Curse
@@ -3938,6 +3951,12 @@ Effects.EffectOverride = {
     [126938] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hollowfang.dds' }, -- Hollowfang Thirst (Hollowfang Thirst)
     [126597] = { icon = 'LuiExtended/media/icons/abilities/ability_set_touch_of_zen.dds', tooltip = Tooltips.Set_Touch_of_Zen }, -- Touch of Z'en (Z'en's)
 
+    [133210] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hiti.dds', tooltip = Tooltips.Set_Hitis_Hearth }, -- Warming Aura (Hiti's)
+    [133211] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hiti.dds', name = Abilities.Set_Warming_Aura }, -- Hiti's Hearth (Hiti's)
+    [135130] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hiti.dds', name = Abilities.Set_Warming_Aura, forcedContainer = 'short', groundLabel = true, tooltip = Tooltips.Set_Hitis_Hearth_Ground }, -- Hiti's Hearth (Hiti's)
+
+    [133406] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrkins_grip.dds', tooltip = Tooltips.Set_Draugrkin }, -- Draugrkin's Grip (Draugrkin)
+
     -- Dungeon Sets (Medium)
     [85977] = { icon = 'LuiExtended/media/icons/abilities/ability_set_barkskin.dds' }, -- Barkskin
     [85978] = { icon = 'LuiExtended/media/icons/abilities/ability_set_barkskin.dds' }, -- Barkskin
@@ -3977,6 +3996,9 @@ Effects.EffectOverride = {
 
     [126631] = { icon = 'LuiExtended/media/icons/abilities/ability_set_blight_seed.dds', tooltip = Tooltips.Set_Blight_Seed, unbreakable = 1 }, -- Blight Seed (Azureblight)
     [126633] = { icon = 'LuiExtended/media/icons/abilities/ability_set_blight_seed.dds', tooltip = Tooltips.Set_Blight_Seed }, -- Blight Seed (Azureblight)
+
+    [133493] = { tooltip = Tooltips.Set_Aegis_Caller }, -- Lesser Aegis (Aegis Caller's)
+    [133494] = { icon = 'LuiExtended/media/icons/abilities/ability_defiledaegis_symphony_of_blades.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Bleed, tooltipValue2 = 1 }, -- Aegis Caller (Aegis Caller's)
 
     -- Dungeon Sets (Heavy)
     [102023] = { icon = 'LuiExtended/media/icons/abilities/ability_set_curse_of_doylemish.dds' }, -- Curse of Doylemish
@@ -4024,6 +4046,12 @@ Effects.EffectOverride = {
     [126682] = { icon = 'esoui/art/icons/achievement_u24_capperquest_1.dds', tooltip = Tooltips.Set_Dragons_Defilement }, -- Dragon's Defilement (Defiled Dragon's)
     [126684] = { tooltip = Abilities.Set_Dragons_Defilement, groundLabel = true }, -- Minor Fracture (Defiled Dragon's)
     [126685] = { tooltip = Abilities.Set_Dragons_Defilement, groundLabel = true }, -- Minor Breach (Defiled Dragon's)
+
+    [133292] = { tooltip = Abilities.Set_Banis_Torment }, -- Major Maim (Bani's)
+    [133218] = { tooltip = Abilities.Set_Banis_Torment }, -- Major Vitality (Bani's)
+
+    [135554] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grave_guardian.dds', tooltip = Tooltips.Set_Grave_Guardian }, -- Grave Guardian (Grave Guardian's)
+    [133451] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grave_guardian.dds', groundLabel = true, tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 4430, forcedContainer = 'short' }, -- Grave Guardian (Grave Guardian's)
 
     -- Trial Sets (Hel Ra Citadel)
     [50978] = { icon = 'esoui/art/icons/achievement_update11_dungeons_001.dds', tooltip = Tooltips.Set_Berserking_Warrior }, -- Berserking Warrior (Advancing Yokeda)
@@ -12113,6 +12141,7 @@ Effects.FakePlayerBuffs = {
     [124303] = { duration = 3000 }, -- Senche-Raht's Grit (Senche-Raht's)
     [117082] = { duration = 0 }, -- Frozen Watcher (Frozen Watcher)
     [134930] = { duration = 0 }, -- Duneripper's Scales
+    [135554] = { duration = 0 }, -- Grave Guardian (Grave Guardian's)
 
     -- Set ICD's
     [129477] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Immortal_Warrior, Abilities.Set_Cooldown), duration = 35000, shiftId = 999009, debuff = true }, -- Immortal Warrior
@@ -12364,6 +12393,7 @@ Effects.AddGroundDamageAura = {
     [75692] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Bahraha's Curse
     [97539] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Draugr's Rest
     [67204] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Leeching Plate (of Leeching)
+    [133494] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Aegis Caller (Aegis Caller's)
 
     -- Dragonknight
     [28995] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Dragonknight Standard

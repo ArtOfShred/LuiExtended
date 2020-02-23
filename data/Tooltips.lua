@@ -166,6 +166,7 @@ LUIE.Data.Tooltips = {
     Generic_HoT_Channel                             = GetString(SI_LUIE_SKILL_GENERIC_HOT_CHANNEL_TP),
 
     Generic_AOE_Physical                            = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "SUBSTRING", PhysicalDamage),
+    Generic_AOE_Bleed                               = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "SUBSTRING", BleedDamage),
     Generic_AOE_Poison                              = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "SUBSTRING", PoisonDamage),
     Generic_AOE_Disease                             = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "SUBSTRING", DiseaseDamage),
     Generic_AOE_Fire                                = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "SUBSTRING", FlameDamage),
@@ -463,6 +464,7 @@ LUIE.Data.Tooltips = {
     Set_Maarselok                                   = GetString(SI_LUIE_SKILL_MAARSELOK_TP),
     Set_Nerieneth                                   = GetString(SI_LUIE_SKILL_NERIENETH_TP),
     Set_Sellistrix                                  = GetString(SI_LUIE_SKILL_SELLISTRIX_TP),
+    Set_Kjalnars_Nightmare                          = GetString(SI_LUIE_SKILL_KJALNARS_NIGHTMARE_TP),
 
     -- Crafted Sets
     Set_Alessias_Bulwark                            = GetString(SI_LUIE_SKILL_SET_ALESSIAS_BULWARK),
@@ -524,6 +526,11 @@ LUIE.Data.Tooltips = {
     Set_Hatchlings_Shell                            = GetString(SI_LUIE_SKILL_SET_HATCHLINGS_SHELL_TP),
     Set_Undaunted_Unweaver                          = GetString(SI_LUIE_SKILL_SET_UNDAUNTED_UNWEAVER_TP),
     Set_Dunerippers_Scales                          = GetString(SI_LUIE_SKILL_SET_DUNERIPPERS_SCALES_TP),
+    Set_Hitis_Hearth                                = GetString(SI_LUIE_SET_HITIS_HEARTH_TP),
+    Set_Hitis_Hearth_Ground                         = GetString(SI_LUIE_SET_HITIS_HEARTH_GROUND_TP),
+    Set_Draugrkin                                   = GetString(SI_LUIE_SET_DRAUGRKIN_TP),
+    Set_Aegis_Caller                                = GetString(SI_LUIE_SET_AEGIS_CALLER_TP),
+    Set_Grave_Guardian                              = GetString(SI_LUIE_SET_GRAVE_GUARDIAN_TP),
 
     -- Trial Sets
     Set_Berserking_Warrior                          = GetString(SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP),

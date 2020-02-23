@@ -1085,6 +1085,15 @@ LUIE.DebugAuras = {
     [83391] = true, -- Infernal Guardian
     [83409] = true, -- Infernal Guardian
 
+    [133499] = true, -- Kjalnar's Nightmare (Kjalnar's Nightmare)
+    [133505] = true, -- Bone (Kjalnar's Nightmare)
+    [135094] = true, -- Warning (Kjalnar's Nightmare)
+    [135088] = true, -- Kjalnar's Nightmare (Kjalnar's Nightmare)
+    [133538] = true, -- Kjalnar's Nightmare
+    [134908] = true, -- Kjalnar's Nightmare
+    [133506] = true, -- Kjalnar's Nightmare
+    [133542] = true, -- Bone Colossus
+
     [80564] = true, -- Kra'gh
     [80566] = true, -- Kra'gh
     [80565] = true, -- Kra'gh
@@ -1116,6 +1125,9 @@ LUIE.DebugAuras = {
     [66792] = true, -- Molag Kena (Molag Kena)
     [66808] = true, -- Molag Kena (Molag Kena)
     [66812] = true, -- Overkill (Molag Kena)
+
+    [133378] = true, -- Mother Ciannait (Mother Ciannait)
+    [133381] = true, -- Mother Ciannait (Mother Ciannait)
 
     [59592] = true, -- Nerien'eth
     [59594] = true, -- Crpyt of Hearts Item Set
@@ -1406,6 +1418,19 @@ LUIE.DebugAuras = {
     [129534] = true, -- Daring Corsair (Daring Corsair's)
     [129536] = true, -- Minor Heroism (Daring Corsair's)
     [130840] = true, -- Daring Corsair (Daring Corsair's)
+
+    [134103] = true, -- Dauntless Combatant (Dauntless Combatant's)
+    [134104] = true, -- Dauntless Combatant (Dauntless Combatant's)
+    [134119] = true, -- Dauntless Combatant (Dauntless Combatant's)
+    [134254] = true, -- Winded (Dauntless Combatant's)
+
+    [134090] = true, -- Unchained Aggressor (Unchained Aggressor's)
+    [134094] = true, -- Major Berserk (Unchained Aggressor's)
+
+    [134017] = true, -- Critical Riposte (of Critical Riposte)
+    [134034] = true, -- Minor Uncertainty (of Critical Riposte)
+    [134040] = true, -- Minor Enervation (of Critical Riposte)
+    [134280] = true, -- Critical Riposte Immunity (of Critical Riposte)
 
     -- Overland Sets (All Types)
     [85541] = true, -- Armor of the Trainee (of the Trainee)
@@ -1758,6 +1783,16 @@ LUIE.DebugAuras = {
     [126593] = true, -- Z'en's Redress (Z'en's)
     [126597] = true, -- Touch of Z'en (Z'en's)
 
+    [133209] = true, -- Hiti's Hearth (Hiti)
+    [133210] = true, -- Warming Aura (Hiti)
+    [133211] = true, -- Hiti's Hearth (Hiti)
+    [133212] = true, -- Hiti's Hearth (Hiti)
+    [133217] = true, -- Hiti's Hearth (Hiti)
+    [135130] = true, -- Hiti's Hearth (Hiti)
+
+    [133387] = true, -- Draugrkin's Grip (Draugrkin)
+    [133406] = true, -- Draugrkin's Grip (Draugrkin)
+
     -- Dungeon Sets (Medium)
 
     [85607] = true, -- Strength of the Automaton (Automaton's)
@@ -1864,6 +1899,12 @@ LUIE.DebugAuras = {
     [126631] = true, -- Blight Seed (Azureblight)
     [126633] = true, -- Blight Seed (Azureblight)
     [126638] = true, -- Azureblight Reaper Cooldown (Azureblight)
+
+    [133490] = true, -- Aegis Caller (Aegis Caller's)
+    [133493] = true, -- Lesser Aegis (Aegis Caller's)
+    [133494] = true, -- Aegis Caller (Aegis Caller's)
+
+    [133281] = true, -- Titanborn Strength (Titanborn's)
 
     -- Dungeon Sets (Heavy)
 
@@ -1977,6 +2018,14 @@ LUIE.DebugAuras = {
     [126682] = true, -- Dragon's Defilement (Defiled Dragon's)
     [126684] = true, -- Minor Fracture (Defiled Dragon's)
     [126685] = true, -- Minor Breach (Defiled Dragon's)
+
+    [133290] = true, -- Bani's Torment (Bani's)
+    [133292] = true, -- Major Maim (Bani's)
+    [133218] = true, -- Major Vitality (Bani's)
+
+    [133430] = true, -- Grave Guardian (Grave Guardian's)
+    [135554] = true, -- Grave Guardian (Grave Guardian's)
+    [133451] = true, -- Grave Guardian (Grave Guardian's)
 
     -- Trial Sets (Hel Ra Citadel)
 
