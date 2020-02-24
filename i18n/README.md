@@ -44,4 +44,4 @@ This is the translation for the AddOn Settings Menu
 
 [1]: https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request
 [2]: https://github.com/ArtOfShred/LuiExtended/tree/develop
-[3]: artofshred@artofshred.net
+[3]: mailto:artofshred@artofshred.net
