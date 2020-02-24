@@ -143,7 +143,7 @@ function CrowdControlTracker.UpdateAOEList()
         priority = priority + 1
     end
 
-    if CombatInfo.SV.cct.aoePlayerUltimate then
+    if CombatInfo.SV.cct.aoePlayerSet then
         for k, v in pairs(CrowdControl.aoePlayerSet) do
             priority = priority + v
             CrowdControlTracker.aoeTypesId[k] = priority
