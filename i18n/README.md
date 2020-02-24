@@ -4,7 +4,7 @@ If you'd like to help with LuiExtended localization, the easiest way to contribu
 
 Please always work with the "develop" branch on the [LuiExtended GitHub project page][2].
 
-If you are unfamiliar with GitHub, feel free to reach out to me via email at [artofshred@artofshred.net][3]. Or you can directly send me your modified .lua file or specific strings through a file upload service or pastebin.
+If you are unfamiliar with GitHub, feel free to reach out to me via email at [artofshred@artofshred.net][3], or you can directly send me your modified .lua file or specific strings through a file upload service or pastebin.
 
 Status
 ------
@@ -17,7 +17,7 @@ Main addon translation idk what to write
 | `en.lua`   | 100% done  |
 | `ru.lua`   | 95%  done  |
 | `fr.lua`   | 0% done    |
-| `de.lua`   | 100% done    |
+| `de.lua`   | 100% done  |
 | `jp.lua`   | 0% done    |
 
 ### Skills
@@ -39,7 +39,7 @@ This is the translation for the AddOn Settings Menu
 | `Settings_en.lua`   | 100% done  |
 | `Settings_ru.lua`   | 95%  done  |
 | `Settings_fr.lua`   | 0% done    |
-| `Settings_de.lua`   | 10% done    |
+| `Settings_de.lua`   | 10% done   |
 | `Settings_jp.lua`   | 0% done    |
 
 [1]: https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request
