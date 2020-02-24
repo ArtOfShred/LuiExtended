@@ -3,17 +3,14 @@
     License: The MIT License (MIT)
 --]]
 
-local strfmt = string.format
-
 -- Called from the menu and on initialization to update timestamp color when changed.
-local TimeStampColorize
+LUIE.TimeStampColorize = nil
 function LUIE.UpdateTimeStampColor()
-    TimeStampColorize = ZO_ColorDef:New(unpack(LUIE.ChatAnnouncements.SV.TimeStampColor)):ToHex()
+    LUIE.TimeStampColorize = ZO_ColorDef:New(unpack(LUIE.ChatAnnouncements.SV.TimeStampColor)):ToHex()
 end
 
 -- Return a formatted time
 -- Stolen from pChat, thanks @Ayantir
--- TODO: use ZOS functions instead
 function LUIE.CreateTimestamp(timeStr, formatStr)
     local formatStr = formatStr or LUIE.ChatAnnouncements.SV.TimeStampFormat
 
@@ -54,13 +51,26 @@ local function FormatMessage(msg, doTimestamp)
     if doTimestamp then
         local timestring = GetTimeString()
         -- Color Code to match pChat default
-        msg = strfmt("|c%s[%s]|r %s", TimeStampColorize, LUIE.CreateTimestamp(timestring), msg)
+        msg = string.format("|c%s[%s]|r %s", LUIE.TimeStampColorize, LUIE.CreateTimestamp(timestring), msg)
     end
     return msg
 end
 
+-- Hide all controls if needed
+function LUIE.ToggleVisibility(hidden)
+	for _, control in pairs( LUIE.Components ) do
+		control:SetHidden( hidden )
+	end
+end
+
 -- Easy Print to Chat
 function LUIE.PrintToChat(msg, isSystem)
+
+    local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
+    CHAT_SYSTEM:AddMessage(msg)
+
+    -- TODO: Fix in the future
+    --[[
     if LUIE.ChatAnnouncements.SV.ChatMethod == "Print to All Tabs" then
         if not LUIE.ChatAnnouncements.SV.ChatBypass and CHAT_SYSTEM.primaryContainer then
             local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
@@ -89,6 +99,7 @@ function LUIE.PrintToChat(msg, isSystem)
             end
         end
     end
+    ]]--
 end
 
 -- Returns a formatted number with commas
@@ -120,9 +131,9 @@ function LUIE.AbbreviateNumber(number, shorten, comma)
                 return number
             end
         elseif value >= 100 or suffix == nil then
-            value = strfmt("%d", value)
+            value = string.format("%d", value)
         else
-            value = strfmt("%.1f", value)
+            value = string.format("%.1f", value)
         end
 
         if suffix ~= nil then
@@ -163,11 +174,32 @@ function LUIE.ResolveVeteranDifficulty()
     end
 end
 
--- Simple function that checks for AvA / IC / BG Status and returns true if the player is in any of these
+-- Simple function that checks if player is in a PVP zone.
 function LUIE.ResolvePVPZone()
-    if IsPlayerInAvAWorld() == true or IsActiveWorldBattleground() == true or IsInImperialCity() == true then
+    if IsUnitPvPFlagged('player') then
         return true
     else
         return false
     end
+end
+
+-- Pull the name for the current morph of a skill
+function LUIE.GetSkillMorphName(abilityId)
+    local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
+    local abilityName = GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
+    return abilityName
+end
+
+-- Pull the icon for the current morph of a skill
+function LUIE.GetSkillMorphIcon(abilityId)
+        local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
+        local abilityIcon = select(2, GetSkillAbilityInfo(skillType, skillIndex, abilityIndex))
+        return abilityIcon
+end
+
+-- Pull the AbilityId for the current morph of a skill
+function LUIE.GetSkillMorphAbilityId(abilityId)
+    local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
+    local abilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex, false)
+    return abilityId
 end

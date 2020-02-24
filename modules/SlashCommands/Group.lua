@@ -3,16 +3,15 @@
     License: The MIT License (MIT)
 --]]
 
-local SC = LUIE.SlashCommands
+local SlashCommands = LUIE.SlashCommands
 
 local printToChat = LUIE.PrintToChat
-local strformat = zo_strformat
-local callLater = zo_callLater
+local zo_strformat = zo_strformat
 
 -- Slash Command to perform a group regroup
 local g_regroupStacks = {} -- Character stack for Regroup reinvites
 local g_pendingRegroup = false -- Toggled when a regroup is in progress to prevent additional regroup attempts from firing
-function SC.SlashRegroup()
+function SlashCommands.SlashRegroup()
     local function RegroupInvite()
         printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG), true)
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
@@ -23,9 +22,9 @@ function SC.SlashRegroup()
             -- Don't invite self and offline members
             if member.memberName ~= LUIE.PlayerNameFormatted then
                 GroupInviteByName(member.memberName)
-                printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberLink), true)
+                printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberLink), true)
                 if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberNoLink))
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberNoLink))
                 end
             end
         end
@@ -106,12 +105,12 @@ function SC.SlashRegroup()
     -- If the stack counter was less than 1 (just the player eligible for reinvite then regroup won't invite any members.)
     if flagOffline > 0 then
         if #g_regroupStacks > 1 then
-            printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG), flagOffline, flagOffline, flagOffline), true)
+            printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG), flagOffline, flagOffline, flagOffline), true)
             if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG), flagOffline, flagOffline, flagOffline))
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG), flagOffline, flagOffline, flagOffline))
             end
             GroupDisband()
-            callLater(RegroupInvite, 5000)
+            zo_callLater(RegroupInvite, 5000)
         else
             printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_ALL_OFF_MSG), true)
             if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
@@ -126,12 +125,12 @@ function SC.SlashRegroup()
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG))
         end
         GroupDisband()
-        callLater(RegroupInvite, 5000)
+        zo_callLater(RegroupInvite, 5000)
     end
 end
 
 -- Slash Command to disband the current group
-function SC.SlashDisband()
+function SlashCommands.SlashDisband()
     local groupSize = GetGroupSize()
     -- Check to make sure player is in a group
     if groupSize <= 1 then
@@ -174,13 +173,13 @@ function SC.SlashDisband()
 end
 
 -- Slash Command to leave a group
-function SC.SlashGroupLeave()
+function SlashCommands.SlashGroupLeave()
     -- EVENT_GROUP_NOTIFICATION_MESSAGE hook handles response to this.
     GroupLeave()
 end
 
 -- Slash Command to kick someone from a group
-function SC.SlashGroupKick(option)
+function SlashCommands.SlashGroupKick(option)
     local groupSize = GetGroupSize()
     -- Rather then error out, let the player use /kick and /remove as a substitute for /votekick and /voteremove in LFG
     if IsInLFGGroup() then
@@ -192,8 +191,8 @@ function SC.SlashGroupKick(option)
             PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
             return
         else
-            if SC.SV.SlashVoteKick then
-                SC.SlashVoteKick(option)
+            if SlashCommands.SV.SlashVoteKick then
+                SlashCommands.SlashVoteKick(option)
             else
                 printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_LFG), true)
                 if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
@@ -274,16 +273,16 @@ function SC.SlashGroupKick(option)
 end
 
 -- If the player uses /kick with no option then we need to play the kick emote, otherwise handle everything with the SlashGroupKick function.
-function SC.SlashKick(option)
-    if option == "" or not SC.SV.SlashGroupKick then
+function SlashCommands.SlashKick(option)
+    if option == "" or not SlashCommands.SV.SlashGroupKick then
         PlayEmoteByIndex(109)
     else
-        SC.SlashGroupKick(option)
+        SlashCommands.SlashGroupKick(option)
     end
 end
 
 -- Slash Command to initiate a votekick
-function SC.SlashVoteKick(option)
+function SlashCommands.SlashVoteKick(option)
     local groupSize = GetGroupSize()
     -- Check to make sure player is in a group
     if groupSize <= 1 then
@@ -304,7 +303,7 @@ function SC.SlashVoteKick(option)
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-    -- Check to make sure we're not in LFG
+    -- Check to make sure we're in LFG
     if not IsInLFGGroup() then
         printToChat(GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFGKICK), true)
         if LUIE.ChatAnnouncements.SV.Group.GroupLFGAlert then
@@ -371,7 +370,7 @@ function SC.SlashVoteKick(option)
 end
 
 -- Slash Command to initiate a group ready check
-function SC.SlashReadyCheck()
+function SlashCommands.SlashReadyCheck()
     local groupSize = GetGroupSize()
     -- Check to make sure player is in a group
     if groupSize <= 1 then
@@ -387,13 +386,13 @@ function SC.SlashReadyCheck()
 end
 
 -- Slash Command to send a group invite to a player
-function SC.SlashInvite(option)
+function SlashCommands.SlashInvite(option)
     local groupSize = GetGroupSize()
 
     if groupSize > 1 and not IsUnitGroupLeader("player") then
-        printToChat(strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE)), true)
+        printToChat(zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE)), true)
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE)))
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -409,8 +408,8 @@ function SC.SlashInvite(option)
     end
 
     GroupInviteByName(option)
-    printToChat(strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), option), true)
+    printToChat(zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), option), true)
     if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), option))
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), option))
     end
 end

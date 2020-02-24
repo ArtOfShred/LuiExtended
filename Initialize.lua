@@ -3,22 +3,24 @@
     License: The MIT License (MIT)
 --]]
 
-local strformat = zo_strformat
+local zo_strformat = zo_strformat
+
 local eventManager = EVENT_MANAGER
 
 -- Load saved settings
 local function LoadSavedVars()
     -- Addon options
-    LUIE.SV = ZO_SavedVars:NewAccountWide(LUIE.SVName, LUIE.SVVer, nil, LUIE.D)
+    LUIE.SV = ZO_SavedVars:NewAccountWide(LUIE.SVName, LUIE.SVVer, nil, LUIE.Defaults)
 
     if LUIE.SV.CharacterSpecificSV then
-        LUIE.SV = ZO_SavedVars:New(LUIE.SVName, LUIE.SVVer, nil, LUIE.D)
+        LUIE.SV = ZO_SavedVars:New(LUIE.SVName, LUIE.SVVer, nil, LUIE.Defaults)
     end
 end
 
 -- Load additional fonts and status bar textures from LMP
 local function LoadMedia()
-    local LMP = LibStub("LibMediaProvider-1.0")
+    local LMP = LibMediaProvider
+    if LMP == nil then return end
 
     -- Update Fonts
     for _, f in pairs(LMP:List(LMP.MediaType.FONT)) do
@@ -46,7 +48,7 @@ local function LoadScreen()
     eventManager:UnregisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED)
 
     if not LUIE.SV.StartupInfo then
-        LUIE.PrintToChat(strformat("|cFEFEFE<<1>> by|r |c00C000<<2>>|r |cFEFEFEv<<3>>|r", LUIE.name, LUIE.author, LUIE.version), true)
+        LUIE.PrintToChat(zo_strformat("|cFFFFFF<<1>> by|r |c00C000<<2>>|r |cFFFFFFv<<3>>|r", LUIE.name, LUIE.author, LUIE.version), true)
     end
 end
 
@@ -79,8 +81,9 @@ local function OnAddonOnLoaded(eventCode, addonName)
     LUIE.InitializeHooks()
 
     LUIE.PlayerNameRaw = GetRawUnitName("player")
-    LUIE.PlayerNameFormatted = strformat(SI_UNIT_NAME, GetUnitName("player"))
-    LUIE.PlayerDisplayName = strformat(SI_UNIT_NAME, GetUnitDisplayName("player"))
+    LUIE.PlayerNameFormatted = zo_strformat(SI_UNIT_NAME, GetUnitName("player"))
+    LUIE.PlayerDisplayName = zo_strformat(SI_UNIT_NAME, GetUnitDisplayName("player"))
+    LUIE.PlayerFaction = GetUnitAlliance("player")
 
     -- Initialize this addon modules according to user preferences
     LUIE.ChatAnnouncements.Initialize(LUIE.SV.ChatAnnouncements_Enable)

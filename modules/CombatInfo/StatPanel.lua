@@ -9,7 +9,7 @@ local StatPanel = LUIE.CombatInfo.StatPanel
 
 local UI = LUIE.UI --prob we draw the labels with lua
 
-local strformat = zo_strformat
+local zo_strformat = zo_strformat
 
 local moduleName = LUIE.name .. "_StatPanel"
 
@@ -58,10 +58,10 @@ function StatPanel.CriticalDamage()
 
     if weaponCrit > spellCrit then
         critPercent = string.format("%0.1f", GetCriticalStrikeChance(weaponCrit))
-        LUIE_StatPanel_Critical:SetText(strformat("<<1>>%", critPercent))
+        LUIE_StatPanel_Critical:SetText(zo_strformat("<<1>>%", critPercent))
     else
         critPercent = string.format("%0.1f", GetCriticalStrikeChance(spellCrit))
-        LUIE_StatPanel_Critical:SetText(strformat("<<1>>%", critPercent))
+        LUIE_StatPanel_Critical:SetText(zo_strformat("<<1>>%", critPercent))
     end
 end
 

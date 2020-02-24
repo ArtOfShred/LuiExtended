@@ -3,12 +3,16 @@
     License: The MIT License (MIT)
 --]]
 
-local strformat = zo_strformat
+local zo_strformat = zo_strformat
 
 -- Create Settings Menu
 function LUIE.CreateSettings()
     -- Load LibAddonMenu
-    local LAM = _G["LibAddonMenu2"]
+    local LAM = LibAddonMenu2
+    if LAM == nil then return end
+
+    local Defaults = LUIE.Defaults
+    local Settings = LUIE.SV
 
     local optionsData = {}
 
@@ -212,11 +216,11 @@ function LUIE.CreateSettings()
     optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_UF_ENABLE),
-        getFunc = function() return LUIE.SV.UnitFrames_Enabled end,
-        setFunc = function(value) LUIE.SV.UnitFrames_Enabled = value end,
+        getFunc = function() return Settings.UnitFrames_Enabled end,
+        setFunc = function(value) Settings.UnitFrames_Enabled = value end,
         width = "half",
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-        default = LUIE.D.UnitFrames_Enabled,
+        default = Defaults.UnitFrames_Enabled,
     }
 
     -- Unit Frames module description
@@ -230,11 +234,11 @@ function LUIE.CreateSettings()
     optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_CI_SHOWCOMBATINFO),
-        getFunc = function() return LUIE.SV.CombatInfo_Enabled end,
-        setFunc = function(value) LUIE.SV.CombatInfo_Enabled = value end,
+        getFunc = function() return Settings.CombatInfo_Enabled end,
+        setFunc = function(value) Settings.CombatInfo_Enabled = value end,
         width = "half",
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-        default = LUIE.D.CombatInfo_Enabled,
+        default = Defaults.CombatInfo_Enabled,
     }
 
     -- Combat Info Description
@@ -248,11 +252,11 @@ function LUIE.CreateSettings()
     optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_CT_SHOWCOMBATTEXT),
-        getFunc = function() return LUIE.SV.CombatText_Enabled end,
-        setFunc = function(value) LUIE.SV.CombatText_Enabled = value end,
+        getFunc = function() return Settings.CombatText_Enabled end,
+        setFunc = function(value) Settings.CombatText_Enabled = value end,
         width = "half",
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-        default = LUIE.D.CombatText_Enabled,
+        default = Defaults.CombatText_Enabled,
     }
 
     -- Combat Text Description
@@ -266,11 +270,11 @@ function LUIE.CreateSettings()
     optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_BUFF_ENABLEEFFECTSTRACK),
-        getFunc = function() return LUIE.SV.SpellCastBuff_Enable end,
-        setFunc = function(value) LUIE.SV.SpellCastBuff_Enable = value end,
+        getFunc = function() return Settings.SpellCastBuff_Enable end,
+        setFunc = function(value) Settings.SpellCastBuff_Enable = value end,
         width = "half",
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-        default = LUIE.D.SpellCastBuff_Enable,
+        default = Defaults.SpellCastBuff_Enable,
     }
 
     -- Buffs & Debuffs Description
@@ -284,11 +288,11 @@ function LUIE.CreateSettings()
     optionsData[#optionsData +1] = {
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_CA_ENABLE),
-        getFunc = function() return LUIE.SV.ChatAnnouncements_Enable end,
-        setFunc = function(value) LUIE.SV.ChatAnnouncements_Enable = value end,
+        getFunc = function() return Settings.ChatAnnouncements_Enable end,
+        setFunc = function(value) Settings.ChatAnnouncements_Enable = value end,
         width = "half",
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-        default = LUIE.D.ChatAnnouncements_Enable,
+        default = Defaults.ChatAnnouncements_Enable,
     }
 
     -- Chat Announcements Module Description
@@ -302,11 +306,11 @@ function LUIE.CreateSettings()
     optionsData[#optionsData +1] = {
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_SLASHCMDS_ENABLE),
-        getFunc = function() return LUIE.SV.SlashCommands_Enable end,
-        setFunc = function(value) LUIE.SV.SlashCommands_Enable = value end,
+        getFunc = function() return Settings.SlashCommands_Enable end,
+        setFunc = function(value) Settings.SlashCommands_Enable = value end,
         width = "half",
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-        default = LUIE.D.SlashCommands_Enable,
+        default = Defaults.SlashCommands_Enable,
     }
 
     -- Slash Commands Module Description
@@ -320,11 +324,11 @@ function LUIE.CreateSettings()
     optionsData[#optionsData +1] = {
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_PNL_ENABLE),
-        getFunc = function() return LUIE.SV.InfoPanel_Enabled end,
-        setFunc = function(value) LUIE.SV.InfoPanel_Enabled = value end,
+        getFunc = function() return Settings.InfoPanel_Enabled end,
+        setFunc = function(value) Settings.InfoPanel_Enabled = value end,
         width = "half",
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-        default = LUIE.D.SlashCommands_Enable,
+        default = Defaults.SlashCommands_Enable,
     }
 
     -- InfoPanel Module Description
@@ -346,10 +350,10 @@ function LUIE.CreateSettings()
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_HIDE_EXPERIENCE_BAR),
         tooltip = GetString(SI_LUIE_LAM_HIDE_EXPERIENCE_BAR_TP),
-        getFunc = function() return LUIE.SV.HideXPBar end,
-        setFunc = function(value) LUIE.SV.HideXPBar = value end,
+        getFunc = function() return Settings.HideXPBar end,
+        setFunc = function(value) Settings.HideXPBar = value end,
         width = "full",
-        default = LUIE.D.HideXPBar,
+        default = Defaults.HideXPBar,
     }
 
     -- Startup Message Options
@@ -357,12 +361,12 @@ function LUIE.CreateSettings()
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_STARTUPMSG),
         tooltip = GetString(SI_LUIE_LAM_STARTUPMSG_TP),
-        getFunc = function() return LUIE.SV.StartupInfo end,
-        setFunc = function(value) LUIE.SV.StartupInfo = value end,
+        getFunc = function() return Settings.StartupInfo end,
+        setFunc = function(value) Settings.StartupInfo = value end,
         width = "full",
-        default = LUIE.D.StartupInfo,
+        default = Defaults.StartupInfo,
     }
 
-    LAM:RegisterAddonPanel('LUIEAddonOptions', panelData)
-    LAM:RegisterOptionControls('LUIEAddonOptions', optionsData)
+    LAM:RegisterAddonPanel(LUIE.name .. 'AddonOptions', panelData)
+    LAM:RegisterOptionControls(LUIE.name .. 'AddonOptions', optionsData)
 end

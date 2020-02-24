@@ -5,16 +5,14 @@
 
 -- InfoPanel namespace
 LUIE.InfoPanel = {}
+local InfoPanel = LUIE.InfoPanel
 
--- Performance Enhancement
-local PNL           = LUIE.InfoPanel
-local UI            = LUIE.UI
-local strfmt        = string.format
+local UI = LUIE.UI
 
-local eventManager  = EVENT_MANAGER
-local sceneManager  = SCENE_MANAGER
+local eventManager = EVENT_MANAGER
+local sceneManager = SCENE_MANAGER
 
-local moduleName    = LUIE.name .. "_InfoPanel"
+local moduleName = LUIE.name .. "InfoPanel"
 
 local colors = {
     RED         = { r = 1    , g = 0    , b = 0    },
@@ -28,21 +26,24 @@ local colors = {
 
 --local fakeControl   = {}
 
-PNL.Enabled       = false
-PNL.SV            = nil
-PNL.panelUnlocked = false
+InfoPanel.Enabled = false
+InfoPanel.SV = nil
+InfoPanel.panelUnlocked = false
 
 -- UI elements
 local infoPanelFontFace = "/EsoUI/Common/Fonts/Univers67.otf"
 local infoPanelFontSize = 16
 local infoPanelFontStyle = "soft-shadow-thin"
-local g_infoPanelFont = strfmt( "%s|%d|%s", infoPanelFontFace, infoPanelFontSize, infoPanelFontStyle )
+local g_infoPanelFont = string.format( "%s|%d|%s", infoPanelFontFace, infoPanelFontSize, infoPanelFontStyle )
 
-local uiPanel  = nil
+local uiPanel = nil
 local uiTopRow = nil
 local uiBotRow = nil
 local uiClock  = {}
 local uiGems   = {}
+
+-- Add info panel into LUIE namespace
+InfoPanel.Panel = uiPanel
 
 local uiLatency = {
     color = {
@@ -111,8 +112,8 @@ end
 
 local panelFragment
 
-function PNL.SetDisplayOnMap()
-    if PNL.SV.DisplayOnWorldMap then
+function InfoPanel.SetDisplayOnMap()
+    if InfoPanel.SV.DisplayOnWorldMap then
         sceneManager:GetScene("worldMap"):AddFragment( panelFragment )
     else
         sceneManager:GetScene("worldMap"):RemoveFragment( panelFragment )
@@ -133,7 +134,7 @@ local function CreateUIControls()
     sceneManager:GetScene("siegeBar"):AddFragment( panelFragment )
     sceneManager:GetScene("siegeBarUI"):AddFragment( panelFragment )
 
-    PNL.SetDisplayOnMap() -- Add to map scene if the option is enabled.
+    InfoPanel.SetDisplayOnMap() -- Add to map scene if the option is enabled.
 
     uiPanel.div = UI.Texture( uiPanel, nil, nil, "/esoui/art/miscellaneous/horizontaldivider.dds", DL_BACKGROUND, false )
     uiPanel.div:SetAnchor( LEFT, uiPanel, LEFT, -60, 0 )
@@ -188,8 +189,8 @@ local function CreateUIControls()
 end
 
 -- Rearranges panel elements. Called from Initialize and settings menu.
-function PNL.RearrangePanel()
-    if not PNL.Enabled then return end
+function InfoPanel.RearrangePanel()
+    if not InfoPanel.Enabled then return end
 
     -- Reset scale of panel
     uiPanel:SetScale(1)
@@ -199,7 +200,7 @@ function PNL.RearrangePanel()
     local size = 0
 
     -- Latency
-    if PNL.SV.HideLatency then
+    if InfoPanel.SV.HideLatency then
         uiLatency.control:SetHidden(true)
     else
         uiLatency.control:ClearAnchors()
@@ -210,7 +211,7 @@ function PNL.RearrangePanel()
     end
 
     -- FPS
-    if PNL.SV.HideFPS then
+    if InfoPanel.SV.HideFPS then
         uiFps.control:SetHidden(true)
     else
         uiFps.control:ClearAnchors()
@@ -221,7 +222,7 @@ function PNL.RearrangePanel()
     end
 
     -- Time
-    if PNL.SV.HideClock then
+    if InfoPanel.SV.HideClock then
         uiClock.control:SetHidden(true)
     else
         uiClock.control:ClearAnchors()
@@ -232,7 +233,7 @@ function PNL.RearrangePanel()
     end
 
     -- Soulgems
-    if PNL.SV.HideGems then
+    if InfoPanel.SV.HideGems then
         uiGems.control:SetHidden(true)
     else
         uiGems.control:ClearAnchors()
@@ -250,7 +251,7 @@ function PNL.RearrangePanel()
     local size = 0
 
     -- Feed timer
-    if PNL.SV.HideMountFeed or uiFeedTimer.hideLocally then
+    if InfoPanel.SV.HideMountFeed or uiFeedTimer.hideLocally then
         uiFeedTimer.control:SetHidden(true)
         size = size - (uiFeedTimer.control:GetWidth() * .15)
     else
@@ -262,7 +263,7 @@ function PNL.RearrangePanel()
     end
 
     -- Durability
-    if PNL.SV.HideArmour then
+    if InfoPanel.SV.HideArmour then
         uiArmour.control:SetHidden(true)
     else
         uiArmour.control:ClearAnchors()
@@ -273,7 +274,7 @@ function PNL.RearrangePanel()
     end
 
     -- Charges
-    if PNL.SV.HideWeapons then
+    if InfoPanel.SV.HideWeapons then
         uiWeapons.control:SetHidden(true)
     else
         uiWeapons.control:ClearAnchors()
@@ -284,7 +285,7 @@ function PNL.RearrangePanel()
     end
 
     -- Bags
-    if PNL.SV.HideBags then
+    if InfoPanel.SV.HideBags then
         uiBags.control:SetHidden(true)
     else
         uiBags.control:ClearAnchors()
@@ -301,57 +302,59 @@ function PNL.RearrangePanel()
     uiPanel:SetWidth( math.max( uiTopRow:GetWidth(), uiBotRow:GetWidth(), 39*6 ) )
 
     -- Set scale of panel again
-    PNL.SetScale()
+    InfoPanel.SetScale()
     uiPanel:SetHidden(false)
 end
 
-function PNL.Initialize( enabled )
+function InfoPanel.Initialize(enabled)
     -- Load settings
     local isCharacterSpecific = LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV
     if isCharacterSpecific then
-        PNL.SV = ZO_SavedVars:New( LUIE.SVName, LUIE.SVVer, "InfoPanel", PNL.D )
+        InfoPanel.SV = ZO_SavedVars:New(LUIE.SVName, LUIE.SVVer, "InfoPanel", InfoPanel.Defaults)
     else
-        PNL.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "InfoPanel", PNL.D )
+        InfoPanel.SV = ZO_SavedVars:NewAccountWide(LUIE.SVName, LUIE.SVVer, "InfoPanel", InfoPanel.Defaults)
     end
 
-    -- If User does not want the InfoPanel then exit right here
+    -- Disable module if setting not toggled on
     if not enabled then
         return
     end
-
-    PNL.Enabled = true
+    InfoPanel.Enabled = true
 
     CreateUIControls()
-    PNL.RearrangePanel()
+    InfoPanel.RearrangePanel()
+
+    -- add control to global list so it can be hidden
+    LUIE.Components[ moduleName ] = uiPanel
 
     -- Panel position
-    if PNL.SV.position ~= nil and #PNL.SV.position == 2 then
-        uiPanel:SetAnchor( CENTER, GuiRoot, TOPLEFT, PNL.SV.position[1], PNL.SV.position[2] )
+    if InfoPanel.SV.position ~= nil and #InfoPanel.SV.position == 2 then
+        uiPanel:SetAnchor( CENTER, GuiRoot, TOPLEFT, InfoPanel.SV.position[1], InfoPanel.SV.position[2] )
     else
         uiPanel:SetAnchor(TOPRIGHT, GuiRoot, TOPRIGHT, -24, 20)
     end
 
     -- Dragging
-    uiPanel.OnMoveStop = function(self) PNL.SV.position = { self:GetCenter() } end
+    uiPanel.OnMoveStop = function(self) InfoPanel.SV.position = { self:GetCenter() } end
     uiPanel:SetHandler( "OnMoveStop",  uiPanel.OnMoveStop )
 
     -- Set init values
     -- uiWorld.label:SetText( GetWorldName() )
-    PNL.OnUpdate01()
-    PNL.OnUpdate10()
-    PNL.OnUpdate60()
+    InfoPanel.OnUpdate01()
+    InfoPanel.OnUpdate10()
+    InfoPanel.OnUpdate60()
 
     -- Set event handlers
-    eventManager:RegisterForEvent( moduleName, EVENT_LOOT_RECEIVED,                PNL.OnBagUpdate )
-    eventManager:RegisterForEvent( moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, PNL.OnBagUpdate )
-    eventManager:RegisterForUpdate( moduleName .. "01" , 1000,  PNL.OnUpdate01 )
-    eventManager:RegisterForUpdate( moduleName .. "10" , 10000, PNL.OnUpdate10 )
-    eventManager:RegisterForUpdate( moduleName .. "60" , 60000, PNL.OnUpdate60 )
+    eventManager:RegisterForEvent( moduleName, EVENT_LOOT_RECEIVED,                InfoPanel.OnBagUpdate )
+    eventManager:RegisterForEvent( moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, InfoPanel.OnBagUpdate )
+    eventManager:RegisterForUpdate( moduleName .. "01" , 1000,  InfoPanel.OnUpdate01 )
+    eventManager:RegisterForUpdate( moduleName .. "10" , 10000, InfoPanel.OnUpdate10 )
+    eventManager:RegisterForUpdate( moduleName .. "60" , 60000, InfoPanel.OnUpdate60 )
 end
 
-function PNL.ResetPosition()
-    PNL.SV.position = nil
-    if not PNL.Enabled then
+function InfoPanel.ResetPosition()
+    InfoPanel.SV.position = nil
+    if not InfoPanel.Enabled then
         return
     end
     uiPanel:ClearAnchors()
@@ -359,22 +362,22 @@ function PNL.ResetPosition()
 end
 
 -- Unlock panel for moving. Called from Settings Menu.
-function PNL.SetMovingState( state )
-    if not PNL.Enabled then
+function InfoPanel.SetMovingState( state )
+    if not InfoPanel.Enabled then
         return
     end
-    PNL.panelUnlocked = state
+    InfoPanel.panelUnlocked = state
     uiPanel:SetMouseEnabled( state )
     uiPanel:SetMovable( state )
     uiPanel:SetHidden ( false )
 end
 
 -- Set scale of Info Panel. Called from Settings Menu.
-function PNL.SetScale()
-    if not PNL.Enabled then
+function InfoPanel.SetScale()
+    if not InfoPanel.Enabled then
         return
     end
-    uiPanel:SetScale( PNL.SV.panelScale and PNL.SV.panelScale/100 or 1 )
+    uiPanel:SetScale( InfoPanel.SV.panelScale and InfoPanel.SV.panelScale/100 or 1 )
     uiPanel:SetHidden(false)
 end
 
@@ -382,23 +385,23 @@ end
 --[[function fakeControl.SetHidden(self, hidden)
     -- update not more then once every 5 second
     if not hidden and DelayBuffer( "InfoPanelFakeControl", 5000 ) then
-        PNL.OnUpdate60()
+        InfoPanel.OnUpdate60()
     end
 end]]--
 
 -- Listens to EVENT_INVENTORY_SINGLE_SLOT_UPDATE and EVENT_LOOT_RECEIVED
-function PNL.OnBagUpdate()
+function InfoPanel.OnBagUpdate()
     -- We shall not execute bags size calculation immediately, but rather set a flag with delay function
     -- This is needed to avoid lockups when the game start flooding us with same event for every bag slot used
     -- While we do not need any good latency, we can afford to update info-panel label with 250ms delay
-    eventManager:RegisterForUpdate(moduleName .. "_PendingBagsUpdate", 250, PNL.DoBagUpdate )
+    eventManager:RegisterForUpdate(moduleName .. "PendingBagsUpdate", 250, InfoPanel.DoBagUpdate )
 end
 
 -- Performs calculation of empty space in bags
 -- Called with delay by corresponding event listener
-function PNL.DoBagUpdate()
+function InfoPanel.DoBagUpdate()
     -- Clear pending event
-    eventManager:UnregisterForUpdate(moduleName .. "_PendingBagsUpdate")
+    eventManager:UnregisterForUpdate(moduleName .. "PendingBagsUpdate")
 
     -- Update bags
     local bagSize = GetBagSize( BAG_BACKPACK )
@@ -414,7 +417,7 @@ function PNL.DoBagUpdate()
             end
         end
     end
-    uiBags.label:SetText( strfmt( "%d/%d", bagUsed, bagSize ) )
+    uiBags.label:SetText( string.format( "%d/%d", bagUsed, bagSize ) )
     uiBags.label:SetColor( color.r, color.g, color.b, 1 )
 
     -- Update soulgems
@@ -430,14 +433,14 @@ function PNL.DoBagUpdate()
     uiGems.label:SetText( ( fullCount > 9 ) and fullText or ( fullText .. "/" .. emptyCount ) )
 end
 
-function PNL.OnUpdate01()
+function InfoPanel.OnUpdate01()
     -- Update time
     uiClock.label:SetText( GetTimeString() )
 
     -- Update fps
     local fps = GetFramerate()
     local color = colors.WHITE
-    if not PNL.SV.DisableInfoColours then
+    if not InfoPanel.SV.DisableInfoColours then
         color = uiFps.color[#uiFps.color].color
         for i = 1, #uiFps.color-1 do
             if fps < uiFps.color[i].fps then
@@ -446,15 +449,15 @@ function PNL.OnUpdate01()
             end
         end
     end
-    uiFps.label:SetText( strfmt( "%d fps", fps ) )
+    uiFps.label:SetText( string.format( "%d fps", fps ) )
     uiFps.label:SetColor( color.r, color.g, color.b, 1 )
 end
 
-function PNL.OnUpdate10()
+function InfoPanel.OnUpdate10()
     -- Update latency
     local lat = GetLatency()
     local color = colors.WHITE
-    if not PNL.SV.DisableInfoColours then
+    if not InfoPanel.SV.DisableInfoColours then
         color = uiLatency.color[#uiLatency.color].color
         for i = 1, #uiLatency.color-1 do
             if lat < uiLatency.color[i].ping then
@@ -463,13 +466,13 @@ function PNL.OnUpdate10()
             end
         end
     end
-    uiLatency.label:SetText( strfmt( "%d ms", lat ) )
+    uiLatency.label:SetText( string.format( "%d ms", lat ) )
     uiLatency.label:SetColor( color.r, color.g, color.b, 1 )
 end
 
-function PNL.OnUpdate60()
+function InfoPanel.OnUpdate60()
     -- Update mountfeedtimer
-    if not PNL.SV.HideMountFeed and not uiFeedTimer.hideLocally then
+    if not InfoPanel.SV.HideMountFeed and not uiFeedTimer.hideLocally then
         local mountFeedTimer, mountFeedTotalTime = GetTimeUntilCanBeTrained()
         local mountFeedMessage = GetString(SI_LUIE_PNL_MAXED)
         if ( mountFeedTimer ~= nil ) then
@@ -479,19 +482,19 @@ function PNL.OnUpdate60()
                     mountFeedMessage = GetString(SI_LUIE_PNL_TRAINNOW)
                 else
                     uiFeedTimer.hideLocally = true
-                    PNL.RearrangePanel()
+                    InfoPanel.RearrangePanel()
                 end
             elseif ( mountFeedTimer > 0 ) then
                 local hours   = math.floor( mountFeedTimer / 3600000 )
                 local minutes = math.floor( ( mountFeedTimer - ( hours * 3600000 ) ) / 60000 )
-                mountFeedMessage = strfmt( "%dh %dm", hours, minutes )
+                mountFeedMessage = string.format( "%dh %dm", hours, minutes )
             end
         end
         uiFeedTimer.label:SetText( mountFeedMessage )
     end
 
     -- Update item durability
-    if not PNL.SV.HideArmour then
+    if not InfoPanel.SV.HideArmour then
         local slotCount    = 0
         local duraSum      = 0
         local totalSlots = GetBagSize( BAG_WORN )
@@ -511,13 +514,13 @@ function PNL.OnUpdate60()
                 break
             end
         end
-        uiArmour.label:SetText( strfmt( "%d%%", duraPercentage ) )
+        uiArmour.label:SetText( string.format( "%d%%", duraPercentage ) )
         uiArmour.label:SetColor( color.r, color.g, color.b, 1 )
         uiArmour.icon:SetColor( iconcolour.r, iconcolour.g, iconcolour.b, 1 )
     end
 
     -- Get charges information
-    if not PNL.SV.HideWeapons then
+    if not InfoPanel.SV.HideWeapons then
         for _, icon in pairs( { uiWeapons.main, uiWeapons.swap } ) do
             local charges, maxCharges = GetChargeInfoForItem( BAG_WORN, icon.slotIndex)
             local color = colors.GRAY
@@ -536,5 +539,5 @@ function PNL.OnUpdate60()
     end
 
     -- Update bag slot count
-    PNL.DoBagUpdate()
+    InfoPanel.DoBagUpdate()
 end

@@ -4,13 +4,14 @@
 --]]
 
 -- Cast Bar Table namespace
-LUIE.CastBarTable = {}
-local CBT = LUIE.CastBarTable
+LUIE.Data.CastBarTable = {}
+local CastBarTable = LUIE.Data.CastBarTable
+local Abilities = LUIE.Data.Abilities
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- When a hard CC effect is successfully applied to the player, instantly stop any in progress Casts
 --------------------------------------------------------------------------------------------------------------------------------
-CBT.CastBreakingStatus = {
+CastBarTable.CastBreakingStatus = {
     [ACTION_RESULT_STAGGERED] = true,
     [ACTION_RESULT_STUNNED] = true,
     [ACTION_RESULT_KNOCKBACK] = true,
@@ -22,21 +23,28 @@ CBT.CastBreakingStatus = {
 --------------------------------------------------------------------------------------------------------------------------------
 -- List of abilityId's that should immediately cancel the Cast Bar if detected
 --------------------------------------------------------------------------------------------------------------------------------
-CBT.CastBreakingActions = {
+CastBarTable.CastBreakingActions = {
     [28549] = true, -- Roll Dodge
-    [14890] = true, -- Block
-    --[20309] = true, -- Hidden
-    [973] = true, -- Sprint
-    [33439] = true, -- Mount Sprint
+    [55146] = true, -- Interrupt Bonus (when player bashes it can interrupt a channel - note that it won't succesfully go off until after the cast if it can't be stopped by bashing so this is safe to apply to everything)
+    --[14890] = true, -- Block -- Replaced with function in Castbar update that checks IsBlockActive
+    --[20309] = true, -- Hidden -- Shouldn't break any casts or channels (or is unable to be using during one)
+    --[973] = true, -- Sprint -- TODO: No longer works
+    --[33439] = true, -- Mount Sprint -- TODO: No longer works
 }
 
-CBT.BreakCastOnMove = {
+CastBarTable.BreakCastOnMove = {
+    -- Fake
+    --[999999] = true, -- Used for any interact based casts
+
     -- Innate
     [6811] = true, -- Recall
     [69293] = true, -- Sigil of Imperial Retreat
 
     -- Misc Items
     [63427] = true, -- Clean Fish (Filet Fish)
+
+    -- Werewolf
+    [40515] = true, -- Devour (Werewolf - Bite Player)
 
     ----------------------------------------------------------------
     -- CYRODIIL ----------------------------------------------------
@@ -120,16 +128,18 @@ CBT.BreakCastOnMove = {
     [21409] = true, -- Reading... (The Serpent's Beacon)
     [21393] = true, -- Q4220 PC Chooses to Rescue
     [22931] = true, -- Freeing Spirit... (An Act of Kindness)
+    [21968] = true, -- Binding Bear... (Silent Village)
 }
 
-CBT.IgnoreCastBreakingActions = {
+CastBarTable.IgnoreCastBreakingActions = {
+    [86792] = true, -- Eating (High Hrothgar Festival Mints)
     --[21112] = true, -- Q4220 PC Forced to L0
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
 --  List of abilities flagged for CombatInfo to show as a Channel on the Cast Bar
 --------------------------------------------------------------------------------------------------------------------------------
-CBT.CastChannelOverride = {
+CastBarTable.CastChannelOverride = {
     ----------------------------------------------------------------
     -- PLAYER ABILITIES --------------------------------------------
     ----------------------------------------------------------------
@@ -147,6 +157,7 @@ CBT.CastChannelOverride = {
     [85354] = true, -- Dagger Juggling (Consumable Verison)
     [85353] = true, -- Sword Swallowing (Consumable Version)
     [102077] = true, -- Jester's Festival Scintillator (Jester's Scintillator)
+    [125820] = true, -- Witches Festival 2019 Marionette (Skeletal Marionette)
 
     -- Memento (Crown)
     [85347] = true, -- Storm Orb Juggle (Atronach Juggling)
@@ -174,17 +185,16 @@ CBT.CastChannelOverride = {
     -- Memento (DLC)
     [89550] = true, -- TROPHY Azura's Light (Twilight Shard)
     [79510] = true, -- TROPHY Blood Oath (Blade of the Blood Oath)
-
-    -- Sets
-    [90940] = true, -- Eternal Warrior
-    [90937] = true, -- Immortal Warrior
-    [90935] = true, -- Phoenix
+    [119099] = true, -- Brittle Burial Urn (Brittle Burial Urn)
+    [125816] = true, -- Maarselok Corruption Memento (Corruption of Maarselok)
+    [125817] = true, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
 
     -- Vampire
     [33175] = true, -- Feed (Vampire)
     [40350] = true, -- Feed (Vampire - Bite Player)
 
     ----------------------------------------------------------------
+    -- QUEST ABILITIES ---------------------------------------------
     -- QUEST ABILITIES ---------------------------------------------
     ----------------------------------------------------------------
 
@@ -194,9 +204,13 @@ CBT.CastChannelOverride = {
     -- MSQ
     [39367] = true, -- Altar Use (Shadow of Sancre Tor)
     [36421] = true, -- Drink with Lyris (Council of the Five Companions)
+
+    -- Aldemeri Dominion
     [35192] = true, -- Q4620 Use Lodestone (Cast Adrift)
     [34567] = true, -- Q4621 PC Storm Drain (The Tempest Unleashed)
     [34701] = true, -- Q4621 Destory Horn (The Tempest Unleashed)
+    [23540] = true, -- Teleport (Lifting the Veil)
+    [46762] = true, -- Drinking Contest (The Great Tree)
     [21364] = true, -- Casting... (The Serpent's Beacon)
     [22889] = true, -- Purifying... (Corruption Stones)
     [21968] = true, -- Binding Bear... (Silent Village)
@@ -211,6 +225,7 @@ CBT.CastChannelOverride = {
     [37205] = true, -- Animus Geode (Eyes of Azura)
     [37211] = true, -- Q4854 Empower Heart (Eyes of Azura)
     [38246] = true, -- Animus Geode (Eyes of Azura)
+    [34499] = true, -- Corruption Beam (The Blight of the Bosmer)
 
     ----------------------------------------------------------------
     -- SEASONAL QUEST ----------------------------------------------
@@ -228,12 +243,13 @@ CBT.CastChannelOverride = {
     [84528] = true, -- Flame Juggling (Castle Charm Challenge)
     [84506] = true, -- Dagger Juggling (Castle Charm Challenge)
     [84533] = true, -- Sword Swallowing (Castle Charm Challenge)
+
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
 --  Duration update for any effects that are converted to casts (A lot of stun effects in PVE Quests with casting animations)
 --------------------------------------------------------------------------------------------------------------------------------
-CBT.CastDurationFix = {
+CastBarTable.CastDurationFix = {
     ----------------------------------------------------------------
     -- PLAYER ABILITIES --------------------------------------------
     ----------------------------------------------------------------
@@ -256,7 +272,9 @@ CBT.CastDurationFix = {
     [89645] = 5000, -- 68235 Stun (Create crafting station)
     [105217] = 5000, -- 68235 Stun (Create crafting station)
     [89654] = 5000, -- 68235 Stun (Create crafting station)
-    [113432] = 5000, -- 68235 Stun (Nascent Indrik)
+    [113432] = 8000, -- 68235 Stun (Nascent Indrik)
+    [130394] = 5000, -- 68235 Stun (Spectral Indrik)
+    [131536] = 5000, -- Generic Stun & Combine (Sovereign Sow)
 
     -- Seasonal Mementos and Items
     [86792] = 3000, -- Eating (High Hrothgar Festival Mints)
@@ -266,6 +284,7 @@ CBT.CastDurationFix = {
     [85353] = 12000, -- Sword Swallowing (Consumable Version)
     [102077] = 2000, -- Jester's Festival Scintillator (Jester's Scintillator)
     [81575] = 2000, -- Event - WitchFest Cauldron (Witchmother's Whistle)
+    [125820] = 7500, -- Witches Festival 2019 Marionette (Skeletal Marionette)
 
     -- Memento (Crown)
     [85347] = 12000, -- Storm Orb Juggle (Atronach Juggling)
@@ -294,18 +313,17 @@ CBT.CastDurationFix = {
     [79510] = 6500, -- TROPHY Blood Oath (Blade of the Blood Oath)
     [74151] = 2500, -- Stun (Hidden Pressure Vent)
     [92862] = 4500, -- Ringing Bell (Dreamer's Chime)
+    [119099] = 4000, -- Brittle Burial Urn (Brittle Burial Urn)
+    [125816] = 10000, -- Maarselok Corruption Memento (Corruption of Maarselok)
+    [125817] = 5000, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
 
+    -- Vampire / Werewolf
     [33175] = 6300, -- Feed (Vampire)
     [40350] = 5300, -- Feed (Vampire - Bite Player)
     [33208] = 3000, -- Devour (Werewolf)
     [39033] = 1100, -- Werewolf Transform Setup (Werewolf)
     [39477] = 1500, -- De-Werewolf (Werewolf)
     [75008] = 6500, -- Werewolf Transformation (Werewolf - Quest Transformation)
-
-    -- Sets
-    [90940] = 3000, -- Eternal Warrior
-    [90937] = 3000, -- Immortal Warrior
-    [90935] = 3000, -- Phoenix
 
     ----------------------------------------------------------------
     -- QUEST ABILITIES ---------------------------------------------
@@ -319,7 +337,10 @@ CBT.CastDurationFix = {
     [36421] = 3000, -- Drink with Lyris (Council of the Five Companions)
 
     -- Aldmeri Quests
+    [33233] = 2000, -- 4625 Stun for Beckon 1.5s (Tears of the Two Moons)
     [34701] = 1950, -- Q4621 Destory Horn (The Tempest Unleashed)
+    [23540] = 3000, -- Teleport (Lifting the Veil)
+    [46762] = 4500, -- Drinking Contest (The Great Tree)
     [22448] = 3000, -- Q4266 Tie up Hendil (The First Patient)
     [21393] = 2500, -- Q4220 PC Chooses to Rescue (The Mallari-Mora)
     --[21112] = 1500, -- Q4220 PC Forced to L0
@@ -332,6 +353,8 @@ CBT.CastDurationFix = {
     [36841] = 4000, -- Q4833 Apply Wolf Buff (Bosmer Insight)
     [36824] = 4000, -- Q4833 Apply Tiger Buff (Bosmer Insight)
     [33701] = 1000, -- BurrowEND (Throne of the Wilderking)
+    [33727] = 500, -- BurrowEND (Throne of the Wilderking)
+    [34499] = 3000, -- Corruption Beam (The Blight of the Bosmer)
 
     ----------------------------------------------------------------
     -- SEASONAL QUEST ----------------------------------------------
@@ -355,7 +378,7 @@ CBT.CastDurationFix = {
 --------------------------------------------------------------------------------------------------------------------------------
 --  List of abilities flagged for CombatInfo to show on the Cast Bar
 --------------------------------------------------------------------------------------------------------------------------------
-CBT.IsCast = {
+CastBarTable.IsCast = {
     ----------------------------------------------------------------
     -- PLAYER ABILITIES --------------------------------------------
     ----------------------------------------------------------------
@@ -375,6 +398,8 @@ CBT.IsCast = {
     [105217] = true, -- 68235 Stun (Create furniture station)
     [89654] = true, -- 68235 Stun (Create furniture station)
     [113432] = true, -- 68235 Stun (Nascent Indrik)
+    [130394] = true, -- 68235 Stun (Spectral Indrik)
+    [131536] = true, -- Generic Stun & Combine (Sovereign Sow)
     [63427] = true, -- Clean Fish (Filet Fish)
     [78052] = true, -- Minor Pardon (Counterfeit Pardon Edict)
     [76350] = true, -- Moderate Pardon (Leniency Edict)
@@ -403,6 +428,7 @@ CBT.IsCast = {
     [110481] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [113288] = true, -- U20 Crown Memento 1 (Mire Drum)
     [113291] = true, --  U20 Crown Memento 2 (Vossa-satl)
+    [125820] = true, -- Witches Festival 2019 Marionette (Skeletal Marionette)
 
     -- Memento (Crown)
     [85347] = true, -- Storm Orb Juggle (Atronach Juggling)
@@ -433,6 +459,20 @@ CBT.IsCast = {
     [73686] = true, -- Old Orsinium Trophy (Malacath's Wrathful Flame)
     [74151] = true, -- Stun (Hidden Pressure Vent)
     [92862] = true, -- Ringing Bell (Dreamer's Chime)
+    [119099] = true, -- Brittle Burial Urn (Brittle Burial Urn)
+    [125816] = true, -- Maarselok Corruption Memento (Corruption of Maarselok)
+    [125817] = true, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
+    [119107] = true, -- NAME ME Infect Brew (Winnowing Plague Decoction)
+
+    -- Dragonknight
+    [29032] = true, -- Stonefist (Stonefist)
+    [31816] = true, -- Stone Giant (Stone Giant)
+
+    -- Nightblade
+    [33398] = true, -- Death Stroke (Nightblade)
+    [36508] = true, -- Incapacitating Strike (Nightblade)
+    [113105] = true, -- Incapacitating Strike (Nightblade)
+    [36514] = true, -- Soul Harvest (Nightblade)
 
     -- Sorcerer
     [43714] = true, -- Crystal Shard (Sorcerer)
@@ -476,6 +516,10 @@ CBT.IsCast = {
     [38814] = true, -- Dizzying Swing (Two Handed)
     [38807] = true, -- Wrecking Blow (Two Handed)
 
+    [83216] = true, -- Berserker Strike (Two Handed)
+    [83229] = true, -- Onslaught (Two Handed)
+    [83238] = true, -- Berserker Rage (Two Handed)
+
     -- Dual Wield
     [28607] = true, -- Flurry (Dual Wield)
     [38857] = true, -- Rapid Strikes (Dual Wield)
@@ -487,10 +531,6 @@ CBT.IsCast = {
     [38687] = true, -- Focused Aim (Bow)
     [83465] = true, -- Rapid Fire (Bow)
     [85257] = true, -- Toxic Barrage (Bow)
-
-    -- Restoration Staff
-    [31531] = true, -- Force Siphon (Restoration Staff)
-    [40109] = true, -- Siphon Spirit (Restoration Staff)
 
     -- Soul Magic
     [39270] = true, -- Soul Strike (Soul Magic)
@@ -517,21 +557,16 @@ CBT.IsCast = {
     [40124] = true, -- Devour (Werewolf - Quest)
 
     -- Guild
+    [35713] = true, -- Dawnbreaker (Fighter's Guild)
+    [40161] = true, -- Flawless Dawnbreaker (Fighter's Guild)
+    [40158] = true, -- Dawnbreaker of Smiting (Fighter's Guild)
     [103488] = true, -- Time Stop (Psijic Order)
     [104059] = true, -- Borrowed Time (Psijic Order)
     [103706] = true, -- Channeled Acceleration (Psijic Order)
-    [39489] = true, -- Blood Altar (Undaunted)
-    [41967] = true, -- Sanguine Altar (Undaunted)
-    [41958] = true, -- Overflowing Altar (Undaunted)
 
     -- Alliance War
     [61487] = true, -- Magicka Detonation (Assault)
     [61491] = true, -- Inevitable Detonation (Assault)
-
-    -- Sets
-    [90940] = true, -- Eternal Warrior
-    [90937] = true, -- Immortal Warrior
-    [90935] = true, -- Phoenix
 
     ----------------------------------------------------------------
     -- NPC ABILITIES -----------------------------------------------
@@ -625,9 +660,14 @@ CBT.IsCast = {
     [37827] = true, -- Stendarr's Protection (Shadow of Sancre Tor)
     [36421] = true, -- Drink with Lyris (Council of the Five Companions)
     [47186] = true, -- CHT Portal Killer (The Weight of Three Crown)
+
+    -- Aldmeri Dominion
     [35192] = true, -- Q4620 Use Lodestone (Cast Adrift)
+    [33233] = true, -- 4625 Stun for Beckon 1.5s (Tears of the Two Moons)
     [34567] = true, -- Q4621 PC Storm Drain (The Tempest Unleashed)
     [34701] = true, -- Q4621 Destory Horn (The Tempest Unleashed)
+    [23540] = true, -- Teleport (Lifting the Veil)
+    [46762] = true, -- Drinking Contest (The Great Tree)
     [21364] = true, -- Casting... (The Serpent's Beacon)
     [21409] = true, -- Reading... (The Serpent's Beacon)
     [22889] = true, -- Purifying... (Corruption Stones)
@@ -641,6 +681,7 @@ CBT.IsCast = {
     [47301] = true, -- Stunned (Passage Denied)
     [37463] = true, -- The Grips of Madness
     [37583] = true, -- Q4868 Unlock Chapel
+    [39956] = true, -- Heart of Anumaril
     [40504] = true, -- Q4922 Use Mantle on Device (The Orrery of Elden Root)
     [40557] = true, -- (12127) CFX_4922 Mantle Cast S (The Orrery of Elden Root)
     [35984] = true, -- Q4436 Summon Pirate (Luck of the Albatross)
@@ -655,7 +696,10 @@ CBT.IsCast = {
     [38246] = true, -- Animus Geode (Eyes of Azura)
     [41325] = true, -- Blacksap's Brew (The Blacksap's Hold)
     [33066] = true, -- Q4586_ChangeClothes (The Witcher of Silatar)
+    [34842] = true, -- Q4586_ChangeClothesFEMALE (The Witcher of Silatar)
     [33701] = true, -- BurrowEND (Throne of the Wilderking)
+    [33727] = true, -- BurrowEND (Throne of the Wilderking)
+    [34499] = true, -- Corruption Beam (The Blight of the Bosmer)
 
     ----------------------------------------------------------------
     -- SEASONAL QUEST ----------------------------------------------
@@ -684,22 +728,32 @@ CBT.IsCast = {
     [83775] = true, -- Event - Q5742 WitchFest Intro (The Witchmother's Bargain)
 
     ----------------------------------------------------------------
+    -- WORLD BOSSES ------------------------------------------------
+    ----------------------------------------------------------------
+
+    [25763] = true, -- Remove Bolt (Trapjaw)
+
+    ----------------------------------------------------------------
     -- DUNGEONS ----------------------------------------------------
     ----------------------------------------------------------------
+
+    [31180] = true, -- Free Ally (Selene)
+
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- Fix for a few goofy events that channel onto the player (or just where we need it)
 --------------------------------------------------------------------------------------------------------------------------------
-CBT.CastOverride = {
+CastBarTable.CastOverride = {
     [4197] = true, -- Recovering (NPC Duel)
     [47186] = true, -- CHT Portal Killer (The Weight of Three Crown)
+    [34499] = true, -- Corruption Beam (The Blight of the Bosmer)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- Some abilities cast into a channeled stun effect - we want these abilities to display the cast and channel if flagged.
 --------------------------------------------------------------------------------------------------------------------------------
-CBT.MultiCast = {
+CastBarTable.MultiCast = {
     [42076] = true, -- Tear (Mezha-dro's Sealing Amulet)
     [42053] = true, -- Yokudan Salute (Yokudan Totem)
 }
@@ -707,14 +761,12 @@ CBT.MultiCast = {
 --------------------------------------------------------------------------------------------------------------------------------
 -- If one of these abilities stuns the player - we ignore the standard effect of breaking the cast bar. In some cases a cast event is also applied with a stun for certain quest events, etc.
 --------------------------------------------------------------------------------------------------------------------------------
-CBT.IgnoreCastBarStun = {
+CastBarTable.IgnoreCastBarStun = {
     -- Player
     [36434] = true, -- Mount Stun
     [74232] = true, -- Stun (Malacath's Wrathful Flame)
     [92863] = true, -- Stun (Dreamer's Chime)
-    [51401] = true, -- Immortal Warrior (Immortal Yokeda)
-    [81529] = true, -- Eternal Warrior (Eternal Yokeda)
-    [68938] = true, -- Phoenix (of the Phoenix)
+    [115046] = true, -- 68235 Stun (Nascent Indrik)
 
     -- Quests
 }
@@ -722,7 +774,7 @@ CBT.IgnoreCastBarStun = {
 --------------------------------------------------------------------------------------------------------------------------------
 -- Abilities flagged to break when EFFECT_RESULT_FADED is detected with the source as the player
 --------------------------------------------------------------------------------------------------------------------------------
-CBT.CastBreakOnRemoveEffect = {
+CastBarTable.CastBreakOnRemoveEffect = {
     -- Werewolf
     [33208] = true, -- Devour (Werewolf)
 
@@ -741,14 +793,14 @@ CBT.CastBreakOnRemoveEffect = {
 
 --[[
 -- Possibly use later if any cast removal events need to rely on EVENT_COMBAT_EVENT
-CBT.CastBreakOnRemoveEvent = {
+CastBarTable.CastBreakOnRemoveEvent = {
 }
 ]]--
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- Convert a cast time ability to channeled, since our function detects Casts/Channels automatically and tries to sort them, we need to add a forced override for certain things we want to show as a channel when it makes sense
 --------------------------------------------------------------------------------------------------------------------------------
-CBT.CastChannelConvert = {
+CastBarTable.CastChannelConvert = {
     -- Cyrodiil
     [12256] = true, -- Pack Siege (Siege Weapons)
 
@@ -756,3 +808,13 @@ CBT.CastChannelConvert = {
     [73686] = true, -- Old Orsinium Trophy (Malacath's Wrathful Flame)
     [92862] = true, -- Ringing Bell (Dreamer's Chime)
 }
+
+--[[
+CastBarTable.InteractCast = {
+
+    ['Aetherial Gateway'] = {
+        [394] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_atherial_shift.dds', name = Abilities.Skill_Aetherial_Shift, duration = 2000, delay = 750 }, -- Ezduiin Undercroft
+    }
+
+}
+]]--

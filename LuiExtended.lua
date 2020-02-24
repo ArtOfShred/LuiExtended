@@ -4,10 +4,12 @@
 --]]
 
 -- LUIE namespace
-LUIE             = {}
+if LUIE == nil then LUIE = {} end
+
+LUIE.tag         = "LUIE"
 LUIE.name        = "LuiExtended"
+LUIE.version     = "6.0.0"
 LUIE.author      = "ArtOfShred, psypanda & SpellBuilder"
-LUIE.version     = "5.9.4"
 LUIE.website     = "https://www.esoui.com/downloads/info818-LuiExtended.html"
 LUIE.github      = "https://github.com/ArtOfShred/LuiExtended"
 LUIE.feedback    = "https://github.com/ArtOfShred/LuiExtended/issues"
@@ -19,8 +21,11 @@ LUIE.SV          = nil
 LUIE.SVVer       = 2
 LUIE.SVName      = "LUIESV"
 
+LUIE.Data        = {}
+LUIE.Components  = {}
+
 -- Default Settings
-LUIE.D = {
+LUIE.Defaults = {
     CharacterSpecificSV         = false,
     StartupInfo                 = false,
     HideXPBar                   = false,
@@ -72,6 +77,7 @@ LUIE.Fonts = {
     ["Transformers"]            = "/LuiExtended/media/fonts/Transformers/transformers.ttf",
     ["Yellowjacket"]            = "/LuiExtended/media/fonts/Yellowjacket/yellowjacket.ttf",
     ["ProFontWindows"]          = "/LuiExtended/media/fonts/ProFontWindows/ProFontWindows.ttf",
+    ["FORCED SQUARE"]           = "/LuiExtended/media/fonts/ForcedSquare/FORCED_SQUARE.ttf",
 }
 
 LUIE.Sounds = {

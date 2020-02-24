@@ -12,8 +12,6 @@ local AbilityTables = {
     -- Major/Minor Buffs
     Skill_Minor_Resolve               = 61693,
     Skill_Major_Resolve               = 22236,
-    Skill_Minor_Ward                  = 61695,
-    Skill_Major_Ward                  = 18868,
     Skill_Minor_Fortitude             = 26213,
     Skill_Major_Fortitude             = 29011,
     Skill_Minor_Endurance             = 26215,
@@ -31,11 +29,11 @@ local AbilityTables = {
     Skill_Minor_Berserk               = 62636,
     Skill_Major_Berserk               = 36973,
     Skill_Minor_Force                 = 68595,
-    Skill_Major_Force                 = 46533,
+    Skill_Major_Force                 = 85154,
     Skill_Minor_Vitality              = 34837,
     Skill_Major_Vitality              = 42197,
     Skill_Minor_Mending               = 29096,
-    Skill_Major_Mending               = 61758,
+    Skill_Major_Mending               = 55033,
     Skill_Minor_Protection            = 40171,
     Skill_Major_Protection            = 22233,
     Skill_Minor_Evasion               = 61715,
@@ -44,9 +42,9 @@ local AbilityTables = {
     Skill_Major_Expedition            = 23216,
     --Skill_Minor_Gallop              =
     Skill_Major_Gallop                = 57472,
-    Skill_Minor_Heroism               = 38746,
+    Skill_Minor_Heroism               = 62505,
     Skill_Major_Heroism               = 61709,
-    Skill_Minor_Toughness             = 46542,
+    Skill_Minor_Toughness             = 88492,
     Skill_Minor_Courage               = 121878,
     Skill_Major_Courage               = 66902,
 
@@ -57,7 +55,7 @@ local AbilityTables = {
     Skill_Major_Fracture              = 28307,
     Skill_Minor_Vulnerability         = 51434,
     Skill_Major_Vulnerability         = 106754,
-    Skill_Minor_Maim                  = 61856,
+    Skill_Minor_Maim                  = 29308,
     Skill_Major_Maim                  = 92041,
     Skill_Minor_Defile                = 61726,
     Skill_Major_Defile                = 85944,
@@ -70,11 +68,13 @@ local AbilityTables = {
     Skill_Minor_Slayer                = 76618,
     Skill_Minor_Aegis                 = 76617,
     Skill_Off_Balance                 = 14062,
-    Skill_Off_Balace_Immunity         = 102771,
+    Skill_Off_Balace_Immunity         = 134599,
+    Skill_Major_Vulnerability_Immunity = GetString(SI_LUIE_SKILL_GENERIC_MAJOR_VULNERABILITY_IMMUNITY),
 
     Skill_Empower                     = 61737,
     Skill_Hindrance                   = 46210,
     Skill_Stun                        = 68565,
+    Skill_Trauma                      = 125203,
 
     -- ---------------------------------------------------
     -- INNATE ABILITIES ----------------------------------
@@ -93,12 +93,11 @@ local AbilityTables = {
     Innate_Disguised                  = 23553, -- Disguised
     Innate_Hidden                     = 20309, -- Hidden
     Innate_Sprint                     = 973,   -- Sprint
-    Innate_Block                      = 14890, -- Block
     Innate_Block_Stun                 = GetString(SI_LUIE_SKILL_BLOCK_STUN), -- Block Stun
+    Innate_Brace                      = 29761, -- Brace
     Innate_Bash                       = 21970, -- Bash
     Innate_Bash_Stun                  = 21971, -- Bash Stun
     Innate_Gallop                     = GetString(SI_LUIE_SKILL_MOUNT_SPRINT), -- Gallop
-    Innate_Hard_Dismount              = 42514,
     Innate_Fall_Damage                = GetString(SI_LUIE_SKILL_FALL_DAMAGE), -- Fall Damage
     Innate_Absorbing_Skyshard         = GetString(SI_LUIE_SKILL_ABSORBING_SKYSHARD), -- Absorbing Skyshard
     Innate_Receiving_Boon             = GetString(SI_LUIE_SKILL_RECEIVING_BOON), -- Receiving Boon
@@ -113,7 +112,9 @@ local AbilityTables = {
     Innate_Create_Station_Clothing    = GetString(SI_LUIE_SKILL_CRAFTING_STATION_CLOTHING),
     Innate_Create_Station_Woodwork    = GetString(SI_LUIE_SKILL_CRAFTING_STATION_WOODWORK),
     Innate_Summon                     = 29585,
-    Innate_Nascent_Indrik             = GetCollectibleName(5710),
+    Innate_Indrik_Nascent             = GetCollectibleName(5710),
+    Innate_Indrik_Spectral            = GetCollectibleName(6942),
+    Innate_Sovereign_Sow              = GetCollectibleName(7270),
     Innate_Fillet_Fish                = GetString(SI_LUIE_SKILL_FILLET_FISH),
     Innate_Pardon_Edict_Low           = GetString(SI_LUIE_SKILL_COUNTERFEIT_PARDON_EDICT),
     Innate_Pardon_Edict_Medium        = GetString(SI_LUIE_SKILL_LENIENCY_EDICT),
@@ -284,12 +285,20 @@ local AbilityTables = {
     Memento_Ghost_Lantern             = GetCollectibleName(5212),
     Memento_Mire_Drum                 = GetCollectibleName(5734),
     Memento_Vossa_Satl                = GetCollectibleName(5735),
+    Memento_Corruption_of_Maarselok   = GetCollectibleName(6642),
+    Memento_Dragonhorn_Curio          = GetCollectibleName(6641),
+    Memento_Winnowing_Plague_Decoction = GetCollectibleName(6368),
+    Memento_Skeletal_Marionette       = GetCollectibleName(6643),
 
     -- ---------------------------------------------------
     -- ITEM SETS -----------------------------------------
     -- ---------------------------------------------------
 
-    Set_Asylum_Destruction_Staff      = 99596, -- Concentrated Force (Perfected)
+    Set_Piercing_Spray                = 100302, -- Piercing Spray (Asylum Bow)
+    Set_Disciplined_Slash             = 100294, -- Disciplined Slash (Asylum 2H)
+    Set_Defensive_Position            = 100462, -- Defensive Position (Asylum 1H + Shield)
+    Set_Concentrated_Force            = 100306, -- Concentrated Force (Asylum Destruction Staff)
+    Set_Timeless_Blessing             = 100308, -- Timeless Blessing (Asylum Restoration Staff)
     Set_Bogdan_the_Nightflame         = GetString(SI_LUIE_SKILL_SET_BOGDAN_THE_NIGHTFLAME),
     Set_Lord_Warden_Dusk              = GetString(SI_LUIE_SKILL_SET_LORD_WARDEN_DUSK),
     Set_Malubeth_the_Scourger         = GetString(SI_LUIE_SKILL_SET_MALUBETH_THE_SCOURGER),
@@ -304,22 +313,17 @@ local AbilityTables = {
     Set_Tzogvins_Warband              = 116734,
     Set_Scavenging_Demise             = 116947,
     Set_Mighty_Glacier                = 116798,
-    Set_Redistribution                = GetString(SI_LUIE_SKILL_SET_REDISTRIBUTION),
     Set_Varens_Legacy                 = 79029,
     Set_Syvarras_Scales               = 75717,
     Set_Twin_Sisters                  = 32828,
     Set_Way_of_Fire                   = 52710,
     Set_Plague_Slinger                = 102113,
     Set_Ice_Furnace                   = GetString(SI_LUIE_SKILL_SET_ICE_FURNACE),
-    Set_Jolting_Arms                  = 67077,
     Set_Hand_of_Mephala               = 84355,
-    Set_Tormentor                     = 67282,
-    Set_Immortal_Warrior              = 90938,
-    Set_Eternal_Warrior               = 90939,
+    Set_Tormentor                     = 67280,
     Set_Destructive_Mage              = 51315,
     Set_Healing_Mage                  = 51442,
     Set_Vicious_Serpent               = 61440,
-    Set_Phoenix                       = 90935,
     Set_Vicecannon_of_Venom           = 79464,
     Set_Ironblood                     = 97626,
     Set_Cooldown                      = GetString(SI_LUIE_SKILL_SET_COOLDOWN),
@@ -331,7 +335,7 @@ local AbilityTables = {
     Set_Nocturnals_Favor              = 106803,
     Set_Vestment_of_Olorime           = 107117,
     Set_Mantle_of_Siroria             = 107093,
-    Set_Arms_of_Relequen              = 107202,
+    Set_Harmful_Winds                 = GetString(SI_LUIE_SKILL_SET_HARMFUL_WINDS),
     Set_Aegis_of_Galenwe              = 107268,
     Set_Hist_Bark                     = 32781,
     Skill_Night_Mothers_Gaze          = 29113,
@@ -341,8 +345,7 @@ local AbilityTables = {
     Set_Naga_Shaman                   = 113287,
     Set_Adept_Rider                   = 106775,
     Set_Sloads_Semblance              = 106797,
-    Set_Vykosa                        = 111352,
-    Set_Mighy_Chudan                  = GetString(SI_LUIE_SKILL_SET_MIGHTY_CHUDAN),
+    Set_Mighty_Chudan                 = 80482,
     Set_Pirate_Skeleton               = 80501,
     Set_Slimecraw                     = GetString(SI_LUIE_SKILL_SET_SLIMECRAW),
     Set_Thurvokun                     = 102089,
@@ -397,6 +400,25 @@ local AbilityTables = {
     Set_Call_of_the_Undertaker        = 121633,
     Set_False_Gods_Devotion           = 121823,
     Set_Claw_of_Yolnakhriin           = 121875,
+    Set_Hollowfang_Thirst             = 126921,
+    Set_Dragons_Defilement            = 126682,
+    Set_Morkuldin                     = 71670,
+    Set_Senchals_Duty                 = 129442,
+    Set_Daring_Corsair                = 129534,
+    Set_Phoenix                       = 68933,
+    Set_Immortal_Warrior              = 51300,
+    Set_Eternal_Warrior               = 61436,
+    Set_Spectres_Eye                  = 32757,
+    Set_Juggernaut                    = 34512,
+    Set_Honors_Scorn                  = 121917,
+    Set_Honors_Love                   = 121913,
+    Set_Lekis_Focus                   = 76944,
+    Set_Dauntless_Combatant           = 134103,
+    Set_Unchained_Aggressor           = 134090,
+    Set_Critical_Riposte              = 134017,
+    Set_Warming_Aura                  = 133210,
+    Set_Aegis_Caller                  = 133490,
+    Set_Banis_Torment                 = 133290,
 
     Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE),
 
@@ -479,7 +501,6 @@ local AbilityTables = {
     Skill_Take_Flight                 = 32719,
     Skill_Ferocious_Leap              = 32715,
     Skill_Stonefist                   = 29032,
-    Skill_Stone_Giant                 = 31816,
     Skill_Molten_Weapons              = 29043,
     Skill_Igneous_Weapons             = 31874,
     Skill_Molten_Armaments            = 31888,
@@ -499,13 +520,11 @@ local AbilityTables = {
     Skill_Mark_Target                 = 33357,
     Skill_Piercing_Mark               = 36968,
     Skill_Reapers_Mark                = 36967,
-    Skill_Assassins_Will              = 61907,
     Skill_Assassins_Scourge           = 61932,
     Skill_Death_Stroke                = 33398,
     Skill_Incapacitating_Strike       = 36508,
     Skill_Soul_Harvest                = 36514,
     Skill_Veiled_Strike               = 25255,
-    Skill_Surprise_Attack             = 25260,
     Skill_Concealed_Weapon            = 34739,
     Skill_Dark_Cloak                  = 25377,
     Skill_Path_of_Darkness            = 33195,
@@ -515,6 +534,8 @@ local AbilityTables = {
     Skill_Corrosive_Spin              = GetString(SI_LUIE_SKILL_CORROSIVE_SPIN_TP),
     Skill_Corrosive_Arrow             = 51556,
     Skill_Summon_Shade                = 33211,
+    Skill_Shade                       = 38508,
+    Skill_Dark_Shade                  = 35434,
     Skill_Shadow_Image                = 35441,
     Skill_Shadow_Image_Teleport       = 35445,
     Skill_Consuming_Darkness          = 25411,
@@ -546,6 +567,7 @@ local AbilityTables = {
     Skill_Summon_Charged_Atronach     = 23495,
     Skill_Charged_Lightning           = 102310,
     Skill_Atronach_Zap                = 23428,
+    Skill_Bound_Armaments             = 24165,
     Skill_Bound_Aegis                 = 24163,
     Skill_Lightning_Form              = 23210,
     Skill_Hurricane                   = 23231,
@@ -555,6 +577,7 @@ local AbilityTables = {
     Skill_Critical_Surge              = 23678,
     Skill_Kick                        = 4125,
     Skill_Entropic_Touch              = 9743,
+    Skill_Intercept                   = 23284,
 
     -- Templar
     Skill_Spear_Wall                  = 31708,
@@ -586,6 +609,12 @@ local AbilityTables = {
     Skill_Remembrance                 = 22229,
 
     -- Warden
+    Skill_Dive                        = 85995,
+    Skill_Cutting_Dive                = 85999,
+    Skill_Screaming_Cliff_Racer       = 86003,
+    Skill_Swarm                       = 86023,
+    Skill_Fetcher_Infection           = 86027,
+    Skill_Growing_Swarm               = 86031,
     Skill_Accelerated_Growth          = 85882,
     Skill_Maturation                  = 85880,
     Skill_Subterranean_Assault        = 86019,
@@ -610,7 +639,6 @@ local AbilityTables = {
     Skill_Frost_Cloak                 = 86122,
     Skill_Expansive_Frost_Cloak       = 86126,
     Skill_Ice_Fortress                = 86130,
-    Skill_Arctic_Blast                = 86156,
     Skill_Crystallized_Shield         = 86135,
     Skill_Crystallized_Slab           = 86139,
     Skill_Shimmering_Shield           = 86143,
@@ -669,13 +697,9 @@ local AbilityTables = {
     Skill_Unstable_Wall_of_Storms     = 39073,
     Skill_Blockade_of_Storms          = 39018,
     Skill_Flame_Touch                 = 29073,
-    Skill_Frost_Touch                 = 29078,
     Skill_Flame_Clench                = 38985,
     Skill_Shock_Clench                = 38993,
     Skill_Frost_Clench                = 38989,
-    Skill_Flame_Reach                 = 38944,
-    Skill_Shock_Reach                 = 38978,
-    Skill_Frost_Reach                 = 38970,
     Skill_Weakness_to_Elements        = 29173,
     Skill_Elemental_Susceptibility    = 39089,
     Skill_Elemental_Drain             = 39095,
@@ -684,10 +708,10 @@ local AbilityTables = {
     Skill_Frost_Pulsar                = 39163,
 
     -- Two-Handed
+    Skill_Uppercut                    = 28279,
     Skill_Dizzying_Swing              = 38814,
     Skill_Stampede                    = 38788,
     Skill_Cleave                      = 20919,
-    Skill_Carve                       = 38745,
     Skill_Momentum                    = 28297,
     Skill_Forward_Momentum            = 38794,
     Skill_Rally                       = 38802,
@@ -702,12 +726,9 @@ local AbilityTables = {
     Skill_Shield_Charge               = 28719,
     Skill_Invasion                    = 38405,
     Skill_Power_Bash                  = 28365,
-    Skill_Reverberating_Bash          = 38455,
 
     -- Dual Wield
     Skill_Twin_Slashes                = 28379,
-    Skill_Rending_Slashes             = 38839,
-    Skill_Blood_Craze                 = 38845,
     Skill_Blade_Cloak                 = 28613,
     Skill_Quick_Cloak                 = 38901,
     Skill_Deadly_Cloak                = 38906,
@@ -719,7 +740,6 @@ local AbilityTables = {
     Skill_Hasty_Retreat               = 30923,
     Skill_Lethal_Arrow                = 38685,
     Skill_Focused_Aim                 = 38687,
-    Skill_Magnum_Shot                 = 38672,
     Skill_Draining_Shot               = 38669,
     Skill_Bombard                     = 38705,
     Skill_Venom_Arrow                 = 38645,
@@ -734,9 +754,15 @@ local AbilityTables = {
     Skill_Elude                       = 39192,
 
     -- Heavy Armor
-    Skill_Immovable                   = 29553,
-    Skill_Immovable_Brute             = 39205,
-    Skill_Unstoppable                 = 63118,
+    Skill_Unstoppable                 = 29553,
+    Skill_Unstoppable_Brute           = 39205,
+    Skill_Immovable                   = 63118,
+
+    -- ---------------------------------------------------
+    -- SOUL MAGIC SKILLS ---------------------------------
+    -- ---------------------------------------------------
+
+    Skill_Consuming_Trap              = 40317,
 
     -- ---------------------------------------------------
     -- VAMPIRE SKILLS ------------------------------------
@@ -752,13 +778,15 @@ local AbilityTables = {
     -- WEREWOLF SKILLS -----------------------------------
     -- ---------------------------------------------------
 
+    Skill_Werewolf_Transformation     = 32455,
+    Skill_Werewolf_Blood              = 59200,
     Skill_Devour                      = 32634,
     Skill_Hircines_Rage               = 58317,
     Skill_Ferocious_Roar              = 39113,
     Skill_Deafening_Roar              = 39114,
-
     Skill_Werewolf_Fear               = 39045,
     Skill_Remove                      = 31262,
+    Skill_Gnash                       = 80189,
 
     -- ---------------------------------------------------
     -- GUILD SKILLS --------------------------------------
@@ -778,8 +806,9 @@ local AbilityTables = {
     Skill_Revealed                    = 11717,
     Skill_Marked                      = 103943,
     Skill_Trap_Beast                  = 35750,
-    Skill_Rearming_Trap               = 40382,
+    Skill_Barbed_Trap                 = 40382,
     Skill_Lightweight_Beast_Trap      = 40372,
+    Skill_Flawless_Dawnbreaker        = 40161,
 
     -- Mages Guild
     Skill_Might_of_the_Guild          = 43561,
@@ -788,7 +817,6 @@ local AbilityTables = {
     Skill_Radiant_Magelight           = 77960,
     Skill_Entropy                     = 28567,
     Skill_Degeneration                = 40457,
-    Skill_Structured_Entropy          = 40452,
     Skill_Balance                     = 40441,
     Skill_Meteor                      = 16536,
     Skill_Ice_Comet                   = 40489,
@@ -806,9 +834,8 @@ local AbilityTables = {
 
     -- Undaunted
     Skill_Blood_Altar                 = 39489,
-    Skill_Black_Widows                = 41994,
+    Skill_Black_Widow                 = 41994,
     Skill_Arachnophobia               = 42016,
-    Skill_Healing_Combustion          = 63507,
     Skill_Spinal_Surge                = 42198,
 
     -- ---------------------------------------------------
@@ -822,13 +849,13 @@ local AbilityTables = {
     Skill_Caltrops                    = 33376,
     Skill_Razor_Caltrops              = 40242,
     Skill_Aggressive_Horn             = 40223,
-    Skill_Sturdy_Horn                 = 40220,
 
     -- Support
     Skill_Mystic_Guard                = 61536,
     Skill_Stalwart_Guard              = 61529,
+    Skill_Revealing_Flare             = 61489,
     Skill_Lingering_Flare             = 61519,
-    Skill_Scorching_Flare             = 61524,
+    Skill_Blinding_Flare              = 61524,
     Skill_Reviving_Barrier            = 40237,
 
     -- ---------------------------------------------------
@@ -837,9 +864,9 @@ local AbilityTables = {
 
     Skill_Battle_Spirit               = GetString(SI_LUIE_SKILL_BATTLE_SPIRIT),
     Skill_Imperial_City               = GetCollectibleName(154),
-    Skill_Edge_Keep_Bonus_1           = 111549,
-    Skill_Edge_Keep_Bonus_2           = 111552,
-    Skill_Edge_Keep_Bonus_3           = 111553,
+    Skill_Edge_Keep_Bonus_I           = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_SKILL_EDGE_KEEP_BONUS), "I"),
+    Skill_Edge_Keep_Bonus_II          = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_SKILL_EDGE_KEEP_BONUS), "II"),
+    Skill_Edge_Keep_Bonus_III         = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_SKILL_EDGE_KEEP_BONUS), "III"),
     Skill_Guard_Detection             = GetString(SI_LUIE_SKILL_GUARD_DETECTION),
 
     Skill_Stow_Siege_Weapon           = GetString(SI_LUIE_SKILL_STOW_SIEGE_WEAPON),
@@ -924,6 +951,7 @@ local AbilityTables = {
     Skill_Flare_Trap                  = 74628,
     Skill_Heated_Blades               = 44208,
     Skill_Bear_Trap                   = 39058,
+    Skill_Void_Burst                  = 36987,
 
     -- Justice
     Skill_Criminals_Bane              = 63145,
@@ -935,7 +963,6 @@ local AbilityTables = {
     -- Cyrodiil
     Skill_Shock_Torrent               = 46726,
     Skill_Improved_Shock_Torrent      = GetString(SI_LUIE_SKILL_IMPROVED_SHOCK_TORRENT),
-    Skill_Steal_Essence               = 2786,
     Skill_Lasting_Storm               = 46818,
     Skill_Bleeding_Strike             = 46830,
     Skill_Telekinetic_Prison          = 21636,
@@ -943,7 +970,6 @@ local AbilityTables = {
     Skill_Siege_Barrier               = GetString(SI_LUIE_SKILL_SIEGE_BARRIER),
     Skill_Fire_Torrent                = GetString(SI_LUIE_SKILL_FIRE_TORRENT),
     Skill_Improved_Fire_Torrent       = 46990,
-    Skill_Extended_Chains             = 35113,
     Skill_Puncturing_Chains           = GetString(SI_LUIE_SKILL_PUNCTURING_CHAINS),
     Skill_Improved_Volley             = GetString(SI_LUIE_SKILL_IMPROVED_VOLLEY),
 
@@ -978,6 +1004,7 @@ local AbilityTables = {
     Skill_Leeching_Bite               = GetString(SI_LUIE_SKILL_LEECHING_BITE),
     Skill_Fetcherfly_Colony           = GetString(SI_LUIE_SKILL_FETCHERFLY_COLONY),
     Skill_Fetcherfly_Swarm            = GetString(SI_LUIE_SKILL_FETCHERFLY_SWARM),
+    Skill_Call_Scribs                 = 38545,
 
     -- Daedra
     Skill_Summon_Daedric_Arch         = 65404,
@@ -998,6 +1025,7 @@ local AbilityTables = {
     Skill_Shockwave                   = 4653,
     Skill_Doom_Truths_Gaze            = 9219,
     Skill_The_Feast                   = 11083,
+    Skill_Flame_Geyser                = 34376,
 
     -- Undead
     Skill_Desecrated_Ground           = 38828,
@@ -1011,6 +1039,8 @@ local AbilityTables = {
     Skill_Crushing_Limbs              = 3855,
     Skill_Pillars_of_Nirn             = 75955,
     Skill_Claw                        = 27922,
+    Skill_Obliterate                  = 127908,
+    Skill_Fiery_Surge                 = 75949,
 
     -- Dwemer
     Skill_Static_Shield               = 64463,
@@ -1035,6 +1065,19 @@ local AbilityTables = {
 
     Trap_Slaughterfish                = zo_strformat("<<C:1>>", GetItemLinkName("|H0:item:42861:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")),
     Trap_Lava                         = 5139,
+
+    -- ---------------------------------------------------
+    -- WORLD BOSSES --------------------------------------
+    -- ---------------------------------------------------
+
+    Skill_Ferocious_Charge            = 83033,
+    Skill_Stone_Crusher               = 83160,
+    Skill_Molten_Impact               = 83203,
+    Skill_Molten_Pillar_Incalescence  = GetString(SI_LUIE_SKILL_MOLTEN_PILLAR_INCALESCENCE),
+    Skill_Trapping_Bolt               = 83925,
+    Skill_Remove_Bolt                 = 25763,
+    Skill_Poison_Spit                 = 21708,
+    Skill_Graven_Slash                = 84292,
 
     -- ---------------------------------------------------
     -- QUEST ABILITIES -----------------------------------
@@ -1088,15 +1131,18 @@ local AbilityTables = {
     -- Aldmeri Dominion
     Skill_Drain_Energy                = GetString(SI_LUIE_SKILL_DRAIN_ENERGY),
     Skill_Blessing                    = 33029,
+    Skill_Beckon_Gathwen              = GetString(SI_LUIE_SKILL_BECKON_GATHWEN),
+    Skill_Summon                      = 29585,
+    Skill_Ancestral_Spirit            = 48921,
+    Skill_Drinking                    = 23527,
     Skill_Disruption                  = 31321,
+    Skill_Voice_to_Wake_the_Dead      = 5030,
     Skill_Barrier_Rebuke              = GetString(SI_LUIE_SKILL_BARRIER_REBUKE),
     Skill_Dispel                      = 8490,
     Skill_Teleport_Scroll             = GetString(SI_LUIE_SKILL_TELEPORT_SCROLL),
     Skill_Purify                      = 22260,
     Skill_Bind_Hands                  = GetString(SI_LUIE_SKILL_BIND_HANDS),
     Skill_Bind_Bear                   = GetString(SI_LUIE_SKILL_BIND_BEAR),
-    Skill_Ferocious_Charge            = 83033,
-    Skill_Daedric_Explosion           = 83017,
     Skill_Aetherial_Shift             = GetString(SI_LUIE_SKILL_AETHERIAL_SHIFT),
     Skill_Free_Spirit                 = GetString(SI_LUIE_SKILL_FREE_SPIRIT),
     Skill_Unbind                      = GetString(SI_LUIE_SKILL_UNBIND),
@@ -1105,6 +1151,8 @@ local AbilityTables = {
     Skill_Close_Portal                = 23370,
     Skill_Lightning_Strike            = 27596,
     Skill_Push                        = 8692,
+    Skill_Absorb                      = 30869,
+    Skill_Essence                     = 25337,
     Skill_Mantles_Shadow              = GetString(SI_LUIE_SKILL_MANTLES_SHADOW),
     Skill_Quaking_Stomp               = 43820,
     Skill_Projectile_Vomit            = 43827,
@@ -1119,10 +1167,14 @@ local AbilityTables = {
     Skill_Restricting_Vines           = GetString(SI_LUIE_SKILL_RESTRICTING_VINES),
     Skill_Change_Clothes              = GetString(SI_LUIE_SKILL_CHANGE_CLOTHES),
     Skill_Fancy_Clothing              = GetString(SI_LUIE_SKILL_FANCY_CLOTHING),
-    Skill_Fire                        = 33594,
+    Skill_Flames                      = 64704,
     Skill_Burrow                      = 8974,
+    Skill_Emerge                      = 20746,
     Skill_Serpent_Spit                = GetString(SI_LUIE_SKILL_SERPENT_SPIT),
     Skill_Shadow_Wood                 = GetString(SI_LUIE_SKILL_SHADOW_WOOD),
+    Skill_Disperse_Corruption         = GetString(SI_LUIE_SKILL_DISPERSE_CORRUPTION),
+    Skill_Undead_Legion               = 35809,
+    Skill_Call_Corrupt_Lurchers       = GetString(SI_LUIE_SKILL_CALL_CORRUPT_LURCHERS),
 
     -- Summerset
     Skill_Pustulant_Eruption          = 105867,
@@ -1184,10 +1236,10 @@ local AbilityTables = {
     Skill_Shadow_Proxy                = 114655,
 
     -- Banished Cells II
-    Skill_Breath_of_Flame             = 49149,
     Skill_Pool_of_Fire                = GetString(SI_LUIE_SKILL_POOL_OF_FIRE),
     Skill_Sisters_Bond                = GetString(SI_LUIE_SKILL_SISTERS_BOND),
     Skill_Levitate                    = 28570,
+    Skill_Essence_Siphon              = 28750,
 
     -- Elden Hollow I
     Skill_Crushing_Blow               = 33189,
@@ -1276,6 +1328,12 @@ local AbilityTables = {
     Skill_Summon_Restless_Souls       = 9463,
     Skill_Hallucinogenic_Fumes        = 35006,
 
+    -- Wayrest Sewers II
+    Skill_Scourging_Spark             = 36613,
+    Skill_Necromantic_Implosion       = 17207,
+    Skill_Escaped_Souls               = GetString(SI_LUIE_SKILL_ESCAPED_SOULS),
+    Skill_Overhead_Smash              = 20915,
+
     -- Frostvault
     Skill_Rending_Bleed               = 117286,
     Skill_Leaping_Crush               = 109801,
@@ -1297,9 +1355,34 @@ local AbilityTables = {
     Effect_Grip_of_Lorkaj             = 57517,
     Effect_Unstable_Void              = 74488,
     Effect_Curse_Duration             = 25000,
+
+    -- ---------------------------------------------------
+    -- KEEP UPGRADE --------------------------------------
+    -- ---------------------------------------------------
+
+    Keep_Upgrade_Food_Guard_Range         = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_RANGE),
+    Keep_Upgrade_Food_Heartier_Guards     = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_HEARTIER_GUARDS),
+    Keep_Upgrade_Food_Resistant_Guards    = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_RESISTANT_GUARDS),
+    Keep_Upgrade_Food_Stronger_Guards     = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_STRONGER_GUARDS),
+    Keep_Upgrade_Ore_Armored_Guards       = GetString(SI_LUIE_KEEP_UPGRADE_ORE_ARMORED_GUARDS),
+    Keep_Upgrade_Ore_Corner_Build         = GetString(SI_LUIE_KEEP_UPGRADE_ORE_CORNER_BUILD),
+    Keep_Upgrade_Ore_Siege_Platform       = GetString(SI_LUIE_KEEP_UPGRADE_ORE_SIEGE_PLATFORM),
+    Keep_Upgrade_Ore_Stronger_Walls       = GetString(SI_LUIE_KEEP_UPGRADE_ORE_STRONGER_WALLS),
+    Keep_Upgrade_Ore_Wall_Regeneration    = GetString(SI_LUIE_KEEP_UPGRADE_ORE_WALL_REGENERATION),
+    Keep_Upgrade_Wood_Archer_Guard        = GetString(SI_LUIE_KEEP_UPGRADE_WOOD_ARCHER_GUARD),
+    Keep_Upgrade_Wood_Door_Regeneration   = GetString(SI_LUIE_KEEP_UPGRADE_WOOD_DOOR_REGENERATION),
+    Keep_Upgrade_Wood_Siege_Cap           = GetString(SI_LUIE_KEEP_UPGRADE_WOOD_SIEGE_CAP),
+    Keep_Upgrade_Wood_Stronger_Doors      = GetString(SI_LUIE_KEEP_UPGRADE_WOOD_STRONGER_DOORS),
+    Keep_Upgrade_Food_Mender_Abilities      = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_MENDER_ABILITIES),
+    Keep_Upgrade_Food_Honor_Guard_Abilities = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_HONOR_GUARD_ABILITIES),
+    Keep_Upgrade_Food_Mage_Abilities        = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_MAGE_ABILITIES),
+    Keep_Upgrade_Food_Mage_Abilities_Fix    = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_MAGE_ABILITIES_FIX),
+    Keep_Upgrade_Food_Guard_Abilities       = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_ABILITIES),
+
 }
 
 -- Replace ability IDs with names
+local k, v
 for k, v in pairs(AbilityTables) do
     if type(v) == "number" then
         AbilityTables[k] = zo_strformat("<<C:1>>", GetAbilityName(v))
@@ -1307,4 +1390,4 @@ for k, v in pairs(AbilityTables) do
 end
 
 -- Export string data to global namespace
-LUIE.GetAbility = function() return AbilityTables end
+LUIE.Data.Abilities = AbilityTables

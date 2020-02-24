@@ -3,13 +3,13 @@
     License: The MIT License (MIT)
 --]]
 
-local SC = LUIE.SlashCommands
+local SlashCommands = LUIE.SlashCommands
 
 local printToChat = LUIE.PrintToChat
-local strformat = zo_strformat
+local zo_strformat = zo_strformat
 
 -- Slash Command to invite someone to a guild
-function SC.SlashGuildInvite(option)
+function SlashCommands.SlashGuildInvite(option)
     -- If no input was entered, display an error and end.
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV), true)
@@ -61,12 +61,11 @@ function SC.SlashGuildInvite(option)
         return
     end
 
-    --GuildInvite(guildnumber, name)
-    ZO_TryGuildInvite(guildnumber, name, true)
+    ZO_TryGuildInvite(guildnumber, name)
 end
 
 -- Slash Command to leave a guild
-function SC.SlashGuildQuit(guildnumber)
+function SlashCommands.SlashGuildQuit(guildnumber)
     if guildnumber == "1" and LUIE.GuildIndexData[1] then
         guildnumber = LUIE.GuildIndexData[1].id
     elseif guildnumber == "2" and LUIE.GuildIndexData[2] then
@@ -101,7 +100,7 @@ function SC.SlashGuildQuit(guildnumber)
 end
 
 -- Slash Command to kick someone from a guild
-function SC.SlashGuildKick(option)
+function SlashCommands.SlashGuildKick(option)
     -- If no input was entered, display an error and end.
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK), true)
@@ -154,8 +153,8 @@ function SC.SlashGuildKick(option)
         return
     end
 
-    if not DoesPlayerHaveGuildPermission (guildnumber, GUILD_PERMISSION_REMOVE) then
-        printToChat (GetString(SI_SOCIALACTIONRESULT18), true)
+    if not DoesPlayerHaveGuildPermission(guildnumber, GUILD_PERMISSION_REMOVE) then
+        printToChat(GetString(SI_SOCIALACTIONRESULT18), true)
         if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_SOCIALACTIONRESULT18)))
         end

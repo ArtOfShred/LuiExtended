@@ -4,25 +4,24 @@
 --]]
 
 LUIE.CombatTextEventViewer = ZO_Object:Subclass()
-local CTV = LUIE.CombatTextEventViewer
+local CombatTextEventViewer = LUIE.CombatTextEventViewer
 
-local C = LUIE.CombatTextConstants
-local E = LUIE.Effects
+local Effects = LUIE.Data.Effects
+local CombatTextConstants = LUIE.Data.CombatTextConstants
 
 local callbackManager = CALLBACK_MANAGER
-local strfmt = string.format
 
-CTV.resourceNames = setmetatable({}, {__index = function(t, k) t[k] = GetString('SI_COMBATMECHANICTYPE', k); return t[k] end})
-CTV.damageTypes = setmetatable({}, {__index = function(t, k) t[k] = GetString('SI_DAMAGETYPE', k); return t[k] end})
+CombatTextEventViewer.resourceNames = setmetatable({}, {__index = function(t, k) t[k] = GetString('SI_COMBATMECHANICTYPE', k); return t[k] end})
+CombatTextEventViewer.damageTypes = setmetatable({}, {__index = function(t, k) t[k] = GetString('SI_DAMAGETYPE', k); return t[k] end})
 
-function CTV:New(poolManager, LMP)
+function CombatTextEventViewer:New(poolManager, LMP)
     local obj = ZO_Object:New(self)
     self.poolManager = poolManager
     self.LMP = LMP
     return obj
 end
 
-function CTV:FormatString(inputFormat, params)
+function CombatTextEventViewer:FormatString(inputFormat, params)
     return string.gsub(inputFormat, '%%.', function(x)
         if (x == '%t') then
             return params.text or ''
@@ -38,7 +37,7 @@ function CTV:FormatString(inputFormat, params)
     end)
 end
 
-function CTV:FormatAlertString(inputFormat, params)
+function CombatTextEventViewer:FormatAlertString(inputFormat, params)
     return string.gsub(inputFormat, '%%.', function(x)
         if (x == '%n') then
             return params.source or ''
@@ -52,128 +51,135 @@ function CTV:FormatAlertString(inputFormat, params)
     end)
 end
 
-function CTV:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
-    local S = LUIE.CombatText.SV
+function CombatTextEventViewer:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
+    local Settings = LUIE.CombatText.SV
 
-    local textFormat = S.formats.damage
-    local fontSize = S.fontSizes.damage
-    local textColor = S.colors.damage[damageType]
+    local textFormat = Settings.formats.damage
+    local fontSize = Settings.fontSizes.damage
+    local textColor = Settings.colors.damage[damageType]
 
     if (isDodged) then
-        textFormat = S.formats.dodged
-        fontSize = S.fontSizes.mitigation
-        textColor = S.colors.dodged
+        textFormat = Settings.formats.dodged
+        fontSize = Settings.fontSizes.mitigation
+        textColor = Settings.colors.dodged
     elseif (isMiss) then
-        textFormat = S.formats.miss
-        fontSize = S.fontSizes.mitigation
-        textColor = S.colors.miss
+        textFormat = Settings.formats.miss
+        fontSize = Settings.fontSizes.mitigation
+        textColor = Settings.colors.miss
     elseif (isImmune) then
-        textFormat = S.formats.immune
-        fontSize = S.fontSizes.mitigation
-        textColor = S.colors.immune
+        textFormat = Settings.formats.immune
+        fontSize = Settings.fontSizes.mitigation
+        textColor = Settings.colors.immune
     elseif (isReflected) then
-        textFormat = S.formats.reflected
-        fontSize = S.fontSizes.mitigation
-        textColor = S.colors.reflected
+        textFormat = Settings.formats.reflected
+        fontSize = Settings.fontSizes.mitigation
+        textColor = Settings.colors.reflected
     elseif (isDamageShield) then
-        textFormat = S.formats.damageShield
-        fontSize = S.fontSizes.mitigation
-        textColor = S.colors.damageShield
+        textFormat = Settings.formats.damageShield
+        fontSize = Settings.fontSizes.mitigation
+        textColor = Settings.colors.damageShield
     elseif (isParried) then
-        textFormat = S.formats.parried
-        fontSize = S.fontSizes.mitigation
-        textColor = S.colors.parried
+        textFormat = Settings.formats.parried
+        fontSize = Settings.fontSizes.mitigation
+        textColor = Settings.colors.parried
     elseif (isBlocked) then
-        textFormat = S.formats.blocked
-        fontSize = S.fontSizes.mitigation
-        textColor = S.colors.blocked
+        textFormat = Settings.formats.blocked
+        fontSize = Settings.fontSizes.mitigation
+        textColor = Settings.colors.blocked
     elseif (isInterrupted) then
-        textFormat = S.formats.interrupted
-        fontSize = S.fontSizes.mitigation
-        textColor = S.colors.interrupted
+        textFormat = Settings.formats.interrupted
+        fontSize = Settings.fontSizes.mitigation
+        textColor = Settings.colors.interrupted
     elseif (isDamageCritical) then
-        textFormat = S.formats.damagecritical
-        fontSize = S.fontSizes.damagecritical
-        if S.toggles.criticalDamageOverride then
-            textColor = S.colors.criticalDamageOverride
+        textFormat = Settings.formats.damagecritical
+        fontSize = Settings.fontSizes.damagecritical
+        if Settings.toggles.criticalDamageOverride then
+            textColor = Settings.colors.criticalDamageOverride
         end
     elseif (isHealing) then
-        textFormat = S.formats.healing
-        fontSize = S.fontSizes.healing
-        textColor = S.colors.healing
+        textFormat = Settings.formats.healing
+        fontSize = Settings.fontSizes.healing
+        textColor = Settings.colors.healing
     elseif (isHealingCritical) then
-        textFormat = S.formats.healingcritical
-        fontSize = S.fontSizes.healingcritical
-        if S.toggles.criticalHealingOverride then
-            textColor = S.colors.criticalHealingOverride
+        textFormat = Settings.formats.healingcritical
+        fontSize = Settings.fontSizes.healingcritical
+        if Settings.toggles.criticalHealingOverride then
+            textColor = Settings.colors.criticalHealingOverride
         else
-            textColor = S.colors.healing
+            textColor = Settings.colors.healing
         end
     elseif (isEnergize) then
-        fontSize = S.fontSizes.gainLoss
+        fontSize = Settings.fontSizes.gainLoss
         if (powerType == POWERTYPE_ULTIMATE) then
-            textFormat = S.formats.ultimateEnergize
-            textColor = S.colors.energizeUltimate
+            textFormat = Settings.formats.ultimateEnergize
+            textColor = Settings.colors.energizeUltimate
         else
-            textFormat = S.formats.energize
+            textFormat = Settings.formats.energize
             if (powerType == POWERTYPE_MAGICKA) then
-                textColor = S.colors.energizeMagicka
+                textColor = Settings.colors.energizeMagicka
             elseif (powerType == POWERTYPE_STAMINA) then
-                textColor = S.colors.energizeStamina
+                textColor = Settings.colors.energizeStamina
             end
         end
     elseif (isDrain) then
-        textFormat = S.formats.drain
-        fontSize = S.fontSizes.gainLoss
+        textFormat = Settings.formats.drain
+        fontSize = Settings.fontSizes.gainLoss
         if (powerType == POWERTYPE_MAGICKA) then
-            textColor = S.colors.energizeMagicka
+            textColor = Settings.colors.energizeMagicka
         elseif (powerType == POWERTYPE_STAMINA) then
-            textColor = S.colors.energizeStamina
+            textColor = Settings.colors.energizeStamina
         end
     elseif (isDot) then
-        textFormat = S.formats.dot
-        fontSize = S.fontSizes.dot
+        textFormat = Settings.formats.dot
+        fontSize = Settings.fontSizes.dot
     elseif (isDotCritical) then
-        textFormat = S.formats.dotcritical
-        fontSize = S.fontSizes.dotcritical
-        if S.toggles.criticalDamageOverride then
-            textColor = S.colors.criticalDamageOverride
+        textFormat = Settings.formats.dotcritical
+        fontSize = Settings.fontSizes.dotcritical
+        if Settings.toggles.criticalDamageOverride then
+            textColor = Settings.colors.criticalDamageOverride
         end
     elseif (isHot) then
-        textFormat = S.formats.hot
-        fontSize = S.fontSizes.hot
-        textColor = S.colors.healing
+        textFormat = Settings.formats.hot
+        fontSize = Settings.fontSizes.hot
+        textColor = Settings.colors.healing
     elseif (isHotCritical) then
-        textFormat = S.formats.hotcritical
-        fontSize = S.fontSizes.hotcritical
-        if S.toggles.criticalHealingOverride then
-            textColor = S.colors.criticalHealingOverride
+        textFormat = Settings.formats.hotcritical
+        fontSize = Settings.fontSizes.hotcritical
+        if Settings.toggles.criticalHealingOverride then
+            textColor = Settings.colors.criticalHealingOverride
         else
-            textColor = S.colors.healing
+            textColor = Settings.colors.healing
         end
     end
 
     return textFormat, fontSize, textColor
 end
 
-function CTV:ControlLayout(control, abilityId, combatType, sourceName)
+function CombatTextEventViewer:ControlLayout(control, abilityId, combatType, sourceName)
+    local Settings = LUIE.CombatText.SV
     local width, height = control.label:GetTextDimensions()
 
     if abilityId then
-        local iconPath = E.EffectOverride[abilityId] and E.EffectOverride[abilityId].icon or GetAbilityIcon(abilityId)
+        local iconPath = Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].icon or GetAbilityIcon(abilityId)
 
-        if E.EffectOverrideByName[abilityId] then
+        if Effects.EffectOverrideByName[abilityId] then
             sourceName = zo_strformat("<<t:1>>", sourceName)
-            if E.EffectOverrideByName[abilityId][sourceName] and E.EffectOverrideByName[abilityId][sourceName].icon then
-                iconPath = E.EffectOverrideByName[abilityId][sourceName].icon
+            if Effects.EffectOverrideByName[abilityId][sourceName] and Effects.EffectOverrideByName[abilityId][sourceName].icon then
+                iconPath = Effects.EffectOverrideByName[abilityId][sourceName].icon
             end
         end
 
-        if E.MapDataOverride[abilityId] then
-            local index = GetCurrentMapZoneIndex()
-            if E.MapDataOverride[abilityId][index] then
-                if E.MapDataOverride[abilityId][index].icon then
-                    iconPath = E.MapDataOverride[abilityId][index].icon
+        if Effects.MapDataOverride[abilityId] then
+            local index = GetZoneId(GetCurrentMapZoneIndex())
+            local zoneName = GetPlayerLocationName()
+            if Effects.MapDataOverride[abilityId][index] then
+                if Effects.MapDataOverride[abilityId][index].icon then
+                    iconPath = Effects.MapDataOverride[abilityId][index].icon
+                end
+            end
+            if Effects.MapDataOverride[abilityId][zoneName] then
+                if Effects.MapDataOverride[abilityId][zoneName].icon then
+                    iconPath = Effects.MapDataOverride[abilityId][zoneName].icon
                 end
             end
         end
@@ -181,10 +187,10 @@ function CTV:ControlLayout(control, abilityId, combatType, sourceName)
         if iconPath and iconPath ~= '' then
             local S = LUIE.CombatText.SV
             local iconSide
-            if combatType == C.combatType.INCOMING then
-                iconSide = S.animation.incomingIcon
-            elseif combatType == C.combatType.OUTGOING then
-                iconSide = S.animation.outgoingIcon
+            if combatType == CombatTextConstants.combatType.INCOMING then
+                iconSide = Settings.animation.incomingIcon
+            elseif combatType == CombatTextConstants.combatType.OUTGOING then
+                iconSide = Settings.animation.outgoingIcon
             else
                 iconSide = 'none'
             end
@@ -216,21 +222,22 @@ function CTV:ControlLayout(control, abilityId, combatType, sourceName)
         control.label:SetAnchor(CENTER, control.icon, CENTER, 0, 0)
         control:SetDimensions(width, height)
     end
-    control.icon:SetAlpha(LUIE.CombatText.SV.common.transparencyValue/100)
+    control.icon:SetAlpha(Settings.common.transparencyValue/100)
 end
 
-function CTV:RegisterCallback(eventType, func)
+function CombatTextEventViewer:RegisterCallback(eventType, func)
     callbackManager:RegisterCallback(eventType, function(...) func(...) end)
 end
 
-function CTV:PrepareLabel(label, fontSize, color, text)
+function CombatTextEventViewer:PrepareLabel(label, fontSize, color, text)
+    local Settings = LUIE.CombatText.SV
     label:SetText(text)
     label:SetColor(unpack(color))
-    label:SetFont(strfmt('%s|%d|%s', self.LMP:Fetch('font', LUIE.CombatText.SV.fontFace), fontSize, LUIE.CombatText.SV.fontOutline))
-    label:SetAlpha(LUIE.CombatText.SV.common.transparencyValue/100)
+    label:SetFont(string.format('%s|%d|%s', Settings.fontFaceApplied, fontSize, Settings.fontOutline))
+    label:SetAlpha(Settings.common.transparencyValue/100)
 end
 
-function CTV:IsOverlapping(control, activeControls)
+function CombatTextEventViewer:IsOverlapping(control, activeControls)
     local p = 5 -- Substract some padding
 
     local left, top, right, bottom = control:GetScreenRect()

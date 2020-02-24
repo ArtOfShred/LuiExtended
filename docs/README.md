@@ -3,7 +3,7 @@
 LuiExtended is an AddOn that adds multiple custom components including
 - **Buff & Debuff Tracking** Track buffs and debuffs with new custom icons and significant enhancements to auras done by using a manual override table.
 - **Chat Announcements** Display messages in chat when spending or receiving currency, track loot, achievements, experience gain, social events, guild invites, quests, and much more.
-- **Combat Info** Track your GCD, Ultimate Value, Quickslot Cooldown and Highlight Active Abilities on your bar.
+- **Combat Info** Track your GCD, Ultimate Value, Quickslot Cooldown, Highlight Active Abilities on your bar, display a Castbar, show alerts for incoming enemy abilities, and track when you are effected by Crowd Control or standing in the radius of a damaging area of effect ability.
 - **Combat Text** Display your outgoing and incoming damage/healing, track crowd control, track incoming damaging abilities with a new warning system, and monitor your resource gain.
 - **Slash Commands** Adds useful commands to the game such as porting to your primary home, regrouping and more.
 - **Unit Frames** Custom Unitframes for Player/Target, Group, Raid, and Bosses. Color group and raid frames by Class or Role, track power changes, armor changes, and dots with animations on the frame.
@@ -11,7 +11,7 @@ LuiExtended is an AddOn that adds multiple custom components including
 Initially this [Elder Scrolls Online][1] AddOn was based partially on the [LUI][2] AddOn by LoPony and some features of [Foundry Tactical Combat][3] AddOn.
 
 ## Information
-Massive spreadsheet tracking for Buff/Debuff issues present [here][4].  
+Spreadsheet tracking for Buff/Debuff issues present [here][4].  
 Goal is for this spreadsheet to also serve as a modders resource, and a bug tracker for inconsistencies with abilities in the game to report to Zenimax.
 
 ## Contribute

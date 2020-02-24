@@ -4,11 +4,22 @@
 --]]
 
 -- Quests namespace
-LUIE.Quests = {}
-local Q = LUIE.Quests
+LUIE.Data.Quests = {}
+local Quests = LUIE.Data.Quests
+
+LUIE_QUEST_MESSAGE_TURNIN = 1
+LUIE_QUEST_MESSAGE_USE = 2
+LUIE_QUEST_MESSAGE_EXHAUST = 3
+LUIE_QUEST_MESSAGE_OFFER = 4
+LUIE_QUEST_MESSAGE_DISCARD = 5
+LUIE_QUEST_MESSAGE_CONFISCATE = 6
+LUIE_QUEST_MESSAGE_COMBINE = 7
+LUIE_QUEST_MESSAGE_MIX = 8
+LUIE_QUEST_MESSAGE_BUNDLE = 9
+LUIE_QUEST_MESSAGE_LOOT = 10
 
 -- List of Quest Items to ignore when Looted (Alot of quest items swap out for different id's mid quest and it looks silly having a ton of messages print)
-Q.QuestItemHideLoot = {
+Quests.QuestItemHideLoot = {
      -- Seasonal Quests
     [6013] = true, -- Soiled Napkin (Stonetooth Bash)
     [5918] = true, -- Crow Caller (The Witchmother's Bargain)
@@ -66,7 +77,7 @@ Q.QuestItemHideLoot = {
 }
 
 -- List of Quest Items to ignore when Removed (Alot of quest items swap out for different id's mid quest and it looks silly having a ton of messages print)
-Q.QuestItemHideRemove = {
+Quests.QuestItemHideRemove = {
     -- Seasonal Quests
     [6012] = true, -- Soiled Napkin (Stonetooth Bash)
 
@@ -82,10 +93,15 @@ Q.QuestItemHideRemove = {
     [3555] = true, -- Earring of the Altmer Nobility (Wearing the Veil)
     [3356] = true, -- Runed Talisman (Breaking the Barrier)
     [3325] = true, -- Teleport Scroll (The Serpent's Beacon)
+    [3368] = true, -- Kindlepitch (The Serpent's Beacon)
+    [3369] = true, -- Fire Salts (The Serpent's Beacon)
     [3415] = true, -- Teleport Scroll (Depths of Madness)
     [3769] = true, -- Teleport Scroll (Depths of Madness)
     [3770] = true, -- Teleport Scroll (Depths of Madness)
     [3771] = true, -- Teleport Scroll (Depths of Madness)
+    [3403] = true, -- Bloodcrown Spores  (Depths of Madness)
+    [3404] = true, -- Lavendercap Mushrooms (Depths of Madness)
+    [3405] = true, -- Gleamcap Spores (Depths of Madness)
     [3395] = true, -- Binding Gem (Silent Village)
     [3291] = true, -- Micro Etched Crystal (An Act of Kindness)
     [3524] = true, -- Welyknd Stone (Eye of the Ancients)
@@ -94,6 +110,16 @@ Q.QuestItemHideRemove = {
     [3279] = true, -- Rune of Magnus (The Mallari-Mora)
     [3532] = true, -- Crystal (Preventative Measure)
     [3491] = true, -- Crystal (Preventative Measure)
+
+    [3458] = true, -- Relic Rescue
+    [3459] = true, -- Relic Rescue
+    [3460] = true, -- Relic Rescue
+    [3461] = true, -- Relic Rescue
+    [3462] = true, -- Relic Rescue
+    [3463] = true, -- Relic Rescue
+    [3464] = true, -- Relic Rescue
+    [3465] = true, -- Relic Rescue
+
     [4492] = true, -- Rajhin's Mantle (A Lasting Winter)
     [3609] = true, -- Heart of Anumaril (Heart of the Matter)
     [4610] = true, -- Rahjin's Mantle (The Orrery of Elden Root)
@@ -133,34 +159,90 @@ Q.QuestItemHideRemove = {
 }
 
 -- Limit the maximum number of quantity of a quest item that can be added.
-Q.QuestItemMaxQuantityAdd = {
+Quests.QuestItemMaxQuantityAdd = {
     [3518] = 1, -- Welkynd Stone (Eye of the Ancients)
 }
 
 -- Call specific functions to add/remove table entries for funky quest items. This will trigger when a certain quest item is added.
-Q.QuestItemModifyOnAdd = {
-    [3278] = function() Q.QuestItemHideLoot[3280] = true end, -- Rune of Xarxes (The Mallari-Mora)
-    [3279] = function() Q.QuestItemHideLoot[3281] = true end, -- Rune of Magnus (The Mallari-Mora)
-    [3532] = function() Q.QuestItemHideLoot[3491] = true end, -- Crystal (Preventative Measure)
-    [3769] = function() Q.QuestItemHideLoot[3415] = true end, -- Teleport Scroll (Depths of Madness)
-    [4485] = function() Q.QuestItemHideRemove[4485] = true end, -- Rajhin's Mantle (A Lasting Winter)
-    [4492] = function() Q.QuestItemHideLoot[4485] = true end, -- Rajhin's Mantle (A Lasting Winter)
-    [3597] = function() Q.QuestItemHideLoot[3596] = true end, -- Rahkaz's Blade (The Enemy Within)
+Quests.QuestItemModifyOnAdd = {
+    [3278] = function() Quests.QuestItemHideLoot[3280] = true end, -- Rune of Xarxes (The Mallari-Mora)
+    [3279] = function() Quests.QuestItemHideLoot[3281] = true end, -- Rune of Magnus (The Mallari-Mora)
+    [3532] = function() Quests.QuestItemHideLoot[3491] = true end, -- Crystal (Preventative Measure)
+    [3769] = function() Quests.QuestItemHideLoot[3415] = true end, -- Teleport Scroll (Depths of Madness)
+    [4485] = function() Quests.QuestItemHideRemove[4485] = true end, -- Rajhin's Mantle (A Lasting Winter)
+    [4492] = function() Quests.QuestItemHideLoot[4485] = true end, -- Rajhin's Mantle (A Lasting Winter)
+    [3597] = function() Quests.QuestItemHideLoot[3596] = true end, -- Rahkaz's Blade (The Enemy Within)
 }
 
 -- Call specific functions to add/remove table entries for funky quest items. This will trigger when a certain quest item is removed.
-Q.QuestItemModifyOnRemove = {
-    [3532] = function() Q.QuestItemHideRemove[3491] = nil end, -- Crystal (Preventative Measure)
-    [4492] = function() zo_callLater(function() Q.QuestItemHideRemove[4485] = nil end, 2000) end, -- Rajhin's Mantle (A Lasting Winter)
-    [4645] = function() zo_callLater(function() Q.QuestItemHideRemove[4596] = nil end, 2000) end, -- Rahjin's Mantle (The Orrery of Elden Root)
-    [4411] = function() Q.QuestItemHideRemove[4411] = nil end, -- Bone Scepter (The Unquiet Dead)
-    [4479] = function() Q.QuestItemHideLoot[4479] = true Q.QuestItemHideRemove[4479] = false end, -- Loriasel Tablet Notes (Eyes of Azura)
-    [4442] = function() Q.QuestItemHideRemove[4433] = nil end, -- Sigil Geode (Eyes of Azura)
-    [3597] = function() Q.QuestItemHideRemove[3596] = nil end, -- Rahkaz's Blade (The Enemy Within)
+Quests.QuestItemModifyOnRemove = {
+    [3532] = function() Quests.QuestItemHideRemove[3491] = nil end, -- Crystal (Preventative Measure)
+    [4492] = function() zo_callLater(function() Quests.QuestItemHideRemove[4485] = nil end, 2000) end, -- Rajhin's Mantle (A Lasting Winter)
+    [4645] = function() zo_callLater(function() Quests.QuestItemHideRemove[4596] = nil end, 2000) end, -- Rahjin's Mantle (The Orrery of Elden Root)
+    [4411] = function() Quests.QuestItemHideRemove[4411] = nil end, -- Bone Scepter (The Unquiet Dead)
+    [4479] = function() Quests.QuestItemHideLoot[4479] = true Quests.QuestItemHideRemove[4479] = false end, -- Loriasel Tablet Notes (Eyes of Azura)
+    [4442] = function() Quests.QuestItemHideRemove[4433] = nil end, -- Sigil Geode (Eyes of Azura)
+    [3597] = function() Quests.QuestItemHideRemove[3596] = nil end, -- Rahkaz's Blade (The Enemy Within)
+}
+
+-- When this item is gained display the "material" quest items used to make it.
+Quests.QuestItemMerge = {
+
+    [3360] = { 3368, 3369 }, -- Volatile Fire Mixture (The Serpent's Beacon) -- Kindlepitch, Fire Salts
+    [3402] = { 3403, 3404, 3405 }, -- Spore Potion (The Depths of Madness) -- Bloodcrown Spores, Lavendercap Mushrooms, Gleamcap Spores
+
+}
+
+-- Message to override when an item is removed.
+--LUIE_QUEST_MESSAGE_TURNIN = 1
+--LUIE_QUEST_MESSAGE_USE = 2
+--LUIE_QUEST_MESSAGE_EXHAUST = 3
+--LUIE_QUEST_MESSAGE_OFFER = 4
+--LUIE_QUEST_MESSAGE_DISCARD = 5
+--LUIE_QUEST_MESSAGE_CONFISCATE = 6
+Quests.ItemRemovedMessage = {
+
+    -- Werewolf / Vampire
+    [5475] = LUIE_QUEST_MESSAGE_OFFER, -- Tribute (Hircine's Gift)
+
+    -- Auridon (MSQ)
+    [5434] = LUIE_QUEST_MESSAGE_CONFISCATE, -- Deployment Plans (A Hostile Situation)
+    [5435] = LUIE_QUEST_MESSAGE_CONFISCATE, -- Poisoned Meat (A Hostile Situation)
+    [3470] = LUIE_QUEST_MESSAGE_TURNIN, -- Fistalle's Note (Putting the Pieces Together) -- TODO: Not sure if needed anymore
+    [3434] = LUIE_QUEST_MESSAGE_TURNIN, -- Armament Inventory (Putting the Pieces Together) -- TODO: Not sure if needed anymore
+    [3435] = LUIE_QUEST_MESSAGE_TURNIN, -- Heritance Officer's Uniform (Putting the Pieces Together) -- TODO: Not sure if needed anymore
+    [3534] = LUIE_QUEST_MESSAGE_TURNIN, -- Royal Blade (Lifting the Veil)
+    [3556] = LUIE_QUEST_MESSAGE_EXHAUST, -- Earring of Altmer Nobility (The Veil Falls)
+
+    [3544] = LUIE_QUEST_MESSAGE_TURNIN, -- Wedding Ring (Through the Ashes)
+    [3548] = LUIE_QUEST_MESSAGE_DISCARD, -- Missing Citizens (Through the Ashes)
+    [3543] = LUIE_QUEST_MESSAGE_DISCARD, -- Pendant (Through the Ashes)
+
+}
+
+-- Message to override when an item is received.
+--LUIE_QUEST_MESSAGE_COMBINE = 7
+--LUIE_QUEST_MESSAGE_MIX = 8
+--LUIE_QUEST_MESSAGE_BUNDLE = 9
+--LUIE_QUEST_MESSAGE_LOOT = 10
+Quests.ItemReceivedMessage = {
+
+    -- Auridon (MSQ)
+    [3429] = LUIE_QUEST_MESSAGE_LOOT, -- Deployment Plans (Ensuring Security)
+    [3470] = LUIE_QUEST_MESSAGE_LOOT, -- Fistalle's Note (Putting the Pieces Together)
+    [3434] = LUIE_QUEST_MESSAGE_LOOT, -- Armament Inventory (Putting the Pieces Together)
+
+    [3543] = LUIE_QUEST_MESSAGE_LOOT, -- Pendant (Through the Ashes)
+
 }
 
 -- TODO: Find a way to extend this to the quest log text
 -- Replace the objective update text of a certain quest. Used to fix capitalization/punctuation errors. Matches string. Only works for EN.
-Q.QuestAdvancedOverride = {
+Quests.QuestAdvancedOverride = {
     ['Tell Chief Dushkul that Gargak is dead'] = 'Tell Chief Dushkul that Gargak is Dead',
+}
+
+Quests.QuestObjectiveCompleteOverride = {
+    ['Completed: Run to Next Checkpoint'] = 'Completed: Reach the Next Marker',
+    ['Completed: Reach Next Marker'] = 'Completed: Reach the Next Marker',
 }

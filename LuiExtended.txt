@@ -1,8 +1,8 @@
 ﻿## Title: |cE12000L|cFFFFB0ui E|rxtended|
 ## Author: ArtOfShred, psypanda, SpellBuilder
-## Version: 5.9.4
-## APIVersion: 100027
-## AddOnVersion: 594
+## Version: 6.0.0
+## APIVersion: 100030
+## AddOnVersion: 600
 ## Description: Provides UnitFrames, InfoPanel, Combat Text & Info, Buffs & Debuff Tracking, Chat Announcements and Slash Commands.
 ## DependsOn: LibAddonMenu-2.0 LibMediaProvider-1.0
 ## OptionalDependsOn: LibStub
@@ -19,6 +19,7 @@
 #
 # Copyright (c) 2017-2019 - LuiExtended - ArtOfShred <esoui.com>
 # Copyright (c) 2015-2016 - LuiExtended - SpellBuilder and Upularity <esoui.com>
+# Copyright (c) 2016-2018 - Miat's CC Tracker - dorrino <esoui.com>
 # Copyright (c) 2014 - CombatCloud - Samantha James
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -49,6 +50,7 @@ Bindings.xml
 
 frontend/Changelog.xml
 frontend/CombatText.xml
+frontend/CrowdControlTracker.xml
 # frontend/StatPanel.xml
 
 i18n/en.lua
@@ -61,10 +63,12 @@ i18n/skills/Skills_$(language).lua
 data/AbilityTables.lua
 data/Tooltips.lua
 data/UnitNamesTable.lua
+data/ZoneNamesTable.lua
 data/Effects.lua
 data/CastBarTable.lua
 data/CombatTextConstants.lua
 data/AlertTable.lua
+data/CrowdControl.lua
 data/DebugTable.lua
 data/Quests.lua
 
@@ -95,6 +99,7 @@ modules/CombatText/EventViewers/Resources.lua
 
 modules/CombatInfo/CombatInfo.lua
 modules/CombatInfo/AbilityAlerts.lua
+modules/CombatInfo/CrowdControlTracker.lua
 # modules/CombatInfo/StatPanel.lua
 
 modules/InfoPanel/InfoPanel.lua

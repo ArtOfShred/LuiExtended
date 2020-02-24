@@ -4,25 +4,23 @@
 --]]
 
 LUIE.CombatTextCrowdControlEventViewer = LUIE.CombatTextEventViewer:Subclass()
-local CTV = LUIE.CombatTextCrowdControlEventViewer
+local CombatTextCrowdControlEventViewer = LUIE.CombatTextCrowdControlEventViewer
 
-local C = LUIE.CombatTextConstants
+local poolTypes = LUIE.Data.CombatTextConstants.poolType
+local eventType = LUIE.Data.CombatTextConstants.eventType
+local combatType = LUIE.Data.CombatTextConstants.combatType
+local crowdControlTypes = LUIE.Data.CombatTextConstants.crowdControlType
 
-local callLater = zo_callLater
-
-local poolTypes = LUIE.CombatTextConstants.poolType
-local crowdControlTypes = LUIE.CombatTextConstants.crowdControlType
-
-function CTV:New(...)
+function CombatTextCrowdControlEventViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
-    obj:RegisterCallback(LUIE.CombatTextConstants.eventType.CROWDCONTROL, function(...) self:OnEvent(...) end)
-    self.locationOffset = { [C.combatType.OUTGOING] = 0, [C.combatType.INCOMING] = 0 }
-    self.activeCrowdControls = { [C.combatType.OUTGOING] = 0, [C.combatType.INCOMING] = 0 }
+    obj:RegisterCallback(eventType.CROWDCONTROL, function(...) self:OnEvent(...) end)
+    self.locationOffset = { [combatType.OUTGOING] = 0, [combatType.INCOMING] = 0 }
+    self.activeCrowdControls = { [combatType.OUTGOING] = 0, [combatType.INCOMING] = 0 }
     return obj
 end
 
-function CTV:OnEvent(crowdControlType, combatType)
-    local S = LUIE.CombatText.SV
+function CombatTextCrowdControlEventViewer:OnEvent(crowdControlType, combatType)
+    local Settings = LUIE.CombatText.SV
 
     --Label setup
     local control, controlPoolKey = self.poolManager:GetPoolObject(poolTypes.CONTROL)
@@ -30,29 +28,29 @@ function CTV:OnEvent(crowdControlType, combatType)
     local size, color, text
     --Disoriented
     if (crowdControlType == crowdControlTypes.DISORIENTED) then
-        color = S.colors.disoriented
-        size = S.fontSizes.crowdControl
-        text = self:FormatString(S.formats.disoriented, { text = GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED) })
+        color = Settings.colors.disoriented
+        size = Settings.fontSizes.crowdControl
+        text = self:FormatString(Settings.formats.disoriented, { text = GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED) })
     --Feared
     elseif (crowdControlType == crowdControlTypes.FEARED) then
-        color = S.colors.feared
-        size = S.fontSizes.crowdControl
-        text = self:FormatString(S.formats.feared, { text = GetString(SI_LUIE_LAM_CT_SHARED_FEARED) })
+        color = Settings.colors.feared
+        size = Settings.fontSizes.crowdControl
+        text = self:FormatString(Settings.formats.feared, { text = GetString(SI_LUIE_LAM_CT_SHARED_FEARED) })
     --Off Balanced
     elseif (crowdControlType == crowdControlTypes.OFFBALANCED) then
-        color = S.colors.offBalanced
-        size = S.fontSizes.crowdControl
-        text = self:FormatString(S.formats.offBalanced, { text = GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE) })
+        color = Settings.colors.offBalanced
+        size = Settings.fontSizes.crowdControl
+        text = self:FormatString(Settings.formats.offBalanced, { text = GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE) })
     --Silenced
     elseif (crowdControlType == crowdControlTypes.SILENCED) then
-        color = S.colors.silenced
-        size = S.fontSizes.crowdControl
-        text = self:FormatString(S.formats.silenced, { text = GetString(SI_LUIE_LAM_CT_SHARED_SILENCED) })
+        color = Settings.colors.silenced
+        size = Settings.fontSizes.crowdControl
+        text = self:FormatString(Settings.formats.silenced, { text = GetString(SI_LUIE_LAM_CT_SHARED_SILENCED) })
     --Stunned
     elseif (crowdControlType == crowdControlTypes.STUNNED) then
-        color = S.colors.stunned
-        size = S.fontSizes.crowdControl
-        text = self:FormatString(S.formats.stunned, { text = GetString(SI_LUIE_LAM_CT_SHARED_STUNNED) })
+        color = Settings.colors.stunned
+        size = Settings.fontSizes.crowdControl
+        text = self:FormatString(Settings.formats.stunned, { text = GetString(SI_LUIE_LAM_CT_SHARED_STUNNED) })
     end
 
     self:PrepareLabel(control.label, size, color, text)
@@ -60,21 +58,21 @@ function CTV:OnEvent(crowdControlType, combatType)
 
     --Control setup
     local panel, point, relativePoint = LUIE_CombatText_Outgoing, TOP, BOTTOM
-    if (combatType == C.combatType.INCOMING) then
+    if (combatType == combatType.INCOMING) then
         panel = LUIE_CombatText_Incoming
-        if (S.animation.incoming.directionType == 'down') then
+        if (Settings.animation.incoming.directionType == 'down') then
             point, relativePoint = BOTTOM, TOP
         end
     else
-        if (S.animation.outgoing.directionType == 'down') then
+        if (Settings.animation.outgoing.directionType == 'down') then
             point, relativePoint = BOTTOM, TOP
         end
     end
 
     if (point == TOP) then
-        control:SetAnchor(point, panel, relativePoint, 0, -(self.locationOffset[combatType] * (S.fontSizes.crowdControl + 5)))
+        control:SetAnchor(point, panel, relativePoint, 0, -(self.locationOffset[combatType] * (Settings.fontSizes.crowdControl + 5)))
     else
-        control:SetAnchor(point, panel, relativePoint, 0, self.locationOffset[combatType] * (S.fontSizes.crowdControl + 5))
+        control:SetAnchor(point, panel, relativePoint, 0, self.locationOffset[combatType] * (Settings.fontSizes.crowdControl + 5))
     end
 
     self.locationOffset[combatType] = self.locationOffset[combatType] + 1
@@ -87,7 +85,7 @@ function CTV:OnEvent(crowdControlType, combatType)
     animation:Play()
 
     --Add items back into pool after animation
-    callLater(function()
+    zo_callLater(function()
         self.poolManager:ReleasePoolObject(poolTypes.CONTROL, controlPoolKey)
         self.poolManager:ReleasePoolObject(animationPoolType, animationPoolKey)
         self.activeCrowdControls[combatType] = self.activeCrowdControls[combatType] - 1

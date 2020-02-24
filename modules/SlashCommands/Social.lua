@@ -3,13 +3,13 @@
     License: The MIT License (MIT)
 --]]
 
-local SC = LUIE.SlashCommands
+local SlashCommands = LUIE.SlashCommands
 
 local printToChat = LUIE.PrintToChat
-local strformat = zo_strformat
+local zo_strformat = zo_strformat
 
 -- Slash Command to add someone to the friendslist
-function SC.SlashFriend(option)
+function SlashCommands.SlashFriend(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_FRIEND_FAILED_NONAME), true)
         if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
@@ -22,7 +22,7 @@ function SC.SlashFriend(option)
 end
 
 -- Slash Command to add someone to ignore list
-function SC.SlashIgnore(option)
+function SlashCommands.SlashIgnore(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME), true)
         if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
@@ -35,7 +35,7 @@ function SC.SlashIgnore(option)
 end
 
 -- Slash Command to remove someone from friends list
-function SC.SlashRemoveFriend(option)
+function SlashCommands.SlashRemoveFriend(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME), true)
         if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
@@ -79,7 +79,7 @@ function SC.SlashRemoveFriend(option)
 end
 
 -- Slash Command to remove a given name from the ignore list
-function SC.SlashRemoveIgnore(option)
+function SlashCommands.SlashRemoveIgnore(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE), true)
         if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
