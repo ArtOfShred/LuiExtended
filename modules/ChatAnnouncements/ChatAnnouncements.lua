@@ -8988,9 +8988,10 @@ function ChatAnnouncements.HookFunction()
     end
 
     -- Slay these events in case LibChatMessage hooks them
-    local ChatEventFormatters = ZO_ChatSystem_GetEventHandlers()
+    -- Note we're only removing the events above so this shouldn't interfere with normal chat.
+    local fullChatEventFormatters = ZO_ChatSystem_GetEventHandlers()
     for eventType, _ in pairs (ChatEventFormatters) do
-        ChatEventFormatters[eventType] = nil
+        fullChatEventFormatters[eventType] = nil
     end
 
     --[[
@@ -8998,6 +8999,8 @@ function ChatAnnouncements.HookFunction()
     for eventCode, eventFormatter in pairs(ChatEventFormatters) do
         CHAT_ROUTER:AddEventFormatter(eventCode, eventFormatter)
     end]]--
+
+    -- TODO: We need to re-add SOCIAL_ERROR here or at a menu setting and event handler for it separately.
 
     -- HOOK PLAYER_TO_PLAYER Group Notifications to edit Ignore alert
     local KEYBOARD_INTERACT_ICONS = {
