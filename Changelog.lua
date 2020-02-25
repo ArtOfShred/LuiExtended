@@ -6,6 +6,15 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
+    "|cFFA500LuiExtended Version 6.0.1|r",
+    "",
+    "|cFFFF00General:|r",
+    "[*] Fixed an issue with the Crowd Control Tracker where \"Player Set AOE\" was using the setting for \"Player Ultimate AOE.\"",
+    "[*] Fixed an issue where the keybinding options for Summon Banker/Merchant were reversed (Banker key summoned Merchant and vice versa).",
+    "[*] Fixed a few strings missing from the German translation.",
+    "",
+    "|cFFA500LuiExtended Version 6.0.0|r",
+    "",
     "|cFFFF00General:|r",
     "[*] DE translation has been started and populated thoroughly thanks to AmonFlorian!",
     "[*] Added keybindings to summon the new Cat Banker/Merchant from the crown store.",

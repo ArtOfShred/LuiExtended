@@ -1,3 +1,12 @@
+### Version 6.0.1
+
+General
+- Fixed an issue with the Crowd Control Tracker where "Player Set AOE" was using the setting for "Player Ultimate AOE."
+- Fixed an issue where the keybinding options for Summon Banker/Merchant were reversed (Banker key summoned Merchant and vice versa).
+- Fixed a few strings missing from the German translation.
+
+---
+
 ### Version 6.0.0
 
 General
