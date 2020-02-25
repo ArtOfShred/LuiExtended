@@ -112,13 +112,6 @@ function ChatAnnouncements.CreateSettings()
                 sort = "name-up",
                 default = Defaults.ChatMethod,
             },
-
-            {
-                -- TODO: REMOVE LATER - CHAT NOTE
-                type = "description",
-                text = "Note: The Harrowstorm update significantly modified the way the Chat System works. I'm not sure if its possible to print to individual chat tabs any longer.\n\nFor the time being none of these settings work except the Timestamp options. The rest of the settings will hopefully be re-enabled in the future.",
-            },
-
             {
                 -- Bypass LUIE to use other chat addons
                 type = "checkbox",
@@ -127,8 +120,7 @@ function ChatAnnouncements.CreateSettings()
                 getFunc = function() return Settings.ChatBypass end,
                 setFunc = function(value) Settings.ChatBypass = value end,
                 width = "full",
-                --disabled = function() return Settings.ChatMethod == "Print to Specific Tabs" end,
-                disabled = true,
+                disabled = function() return Settings.ChatMethod == "Print to Specific Tabs" end,
                 default = Defaults.ChatBypass,
             },
             {
@@ -139,8 +131,7 @@ function ChatAnnouncements.CreateSettings()
                 getFunc = function() return Settings.ChatTab[1] end,
                 setFunc = function(value) Settings.ChatTab[1] = value end,
                 width = "full",
-                --disabled = function() return Settings.ChatMethod == "Print to All Tabs" end,
-                disabled = true,
+                disabled = function() return Settings.ChatMethod == "Print to All Tabs" end,
                 default = Defaults.ChatTab[1],
             },
             {
@@ -151,8 +142,7 @@ function ChatAnnouncements.CreateSettings()
                 getFunc = function() return Settings.ChatTab[2] end,
                 setFunc = function(value) Settings.ChatTab[2] = value end,
                 width = "full",
-                --disabled = function() return Settings.ChatMethod == "Print to All Tabs" end,
-                disabled = true,
+                disabled = function() return Settings.ChatMethod == "Print to All Tabs" end,
                 default = Defaults.ChatTab[2],
             },
             {
@@ -163,8 +153,7 @@ function ChatAnnouncements.CreateSettings()
                 getFunc = function() return Settings.ChatTab[3] end,
                 setFunc = function(value) Settings.ChatTab[3] = value end,
                 width = "full",
-                --disabled = function() return Settings.ChatMethod == "Print to All Tabs" end,
-                disabled = true,
+                disabled = function() return Settings.ChatMethod == "Print to All Tabs" end,
                 default = Defaults.ChatTab[3],
             },
             {
@@ -175,8 +164,7 @@ function ChatAnnouncements.CreateSettings()
                 getFunc = function() return Settings.ChatTab[4] end,
                 setFunc = function(value) Settings.ChatTab[4] = value end,
                 width = "full",
-                --disabled = function() return Settings.ChatMethod == "Print to All Tabs" end,
-                disabled = true,
+                disabled = function() return Settings.ChatMethod == "Print to All Tabs" end,
                 default = Defaults.ChatTab[4],
             },
             {
@@ -187,8 +175,7 @@ function ChatAnnouncements.CreateSettings()
                 getFunc = function() return Settings.ChatTab[5] end,
                 setFunc = function(value) Settings.ChatTab[5] = value end,
                 width = "full",
-                --disabled = function() return Settings.ChatMethod == "Print to All Tabs" end,
-                disabled = true,
+                disabled = function() return Settings.ChatMethod == "Print to All Tabs" end,
                 default = Defaults.ChatTab[5],
             },
             {
@@ -199,8 +186,7 @@ function ChatAnnouncements.CreateSettings()
                 getFunc = function() return Settings.ChatSystemAll end,
                 setFunc = function(value) Settings.ChatSystemAll = value end,
                 width = "full",
-                --disabled = function() return Settings.ChatMethod == "Print to All Tabs" end,
-                disabled = true,
+                disabled = function() return Settings.ChatMethod == "Print to All Tabs" end,
                 default = Defaults.ChatSystemAll,
             },
             {

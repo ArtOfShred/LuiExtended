@@ -8986,10 +8986,18 @@ function ChatAnnouncements.HookFunction()
     for eventCode, eventFormatter in pairs (ChatEventFormatters) do
         EVENT_MANAGER:UnregisterForEvent("ChatRouter", eventCode)
     end
+
+    -- Slay these events in case LibChatMessage hooks them
+    local ChatEventFormatters = ZO_ChatSystem_GetEventHandlers()
+    for eventType, _ in pairs (ChatEventFormatters) do
+        ChatEventFormatters[eventType] = nil
+    end
+
+    --[[
     -- Register our handlers for events we need to modify
     for eventCode, eventFormatter in pairs(ChatEventFormatters) do
         CHAT_ROUTER:AddEventFormatter(eventCode, eventFormatter)
-    end
+    end]]--
 
     -- HOOK PLAYER_TO_PLAYER Group Notifications to edit Ignore alert
     local KEYBOARD_INTERACT_ICONS = {

@@ -65,17 +65,11 @@ end
 
 -- Easy Print to Chat
 function LUIE.PrintToChat(msg, isSystem)
-
-    local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
-    CHAT_SYSTEM:AddMessage(msg)
-
-    -- TODO: Fix in the future
-    --[[
     if LUIE.ChatAnnouncements.SV.ChatMethod == "Print to All Tabs" then
         if not LUIE.ChatAnnouncements.SV.ChatBypass and CHAT_SYSTEM.primaryContainer then
-            local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
             -- Add timestamps if bypass is not enabled
-            CHAT_SYSTEM.primaryContainer:OnChatEvent(nil, msg, CHAT_CATEGORY_SYSTEM)
+            local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
+            CHAT_SYSTEM:AddMessage(msg)
         else
             -- Otherwise send as a normal message and let other addons handle this.
             CHAT_SYSTEM:AddMessage(msg)
@@ -86,20 +80,23 @@ function LUIE.PrintToChat(msg, isSystem)
             if isSystem and LUIE.ChatAnnouncements.SV.ChatSystemAll then
                 local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
                 -- Post as a System message so that it can appear in multiple tabs.
-                CHAT_SYSTEM.primaryContainer:OnChatEvent(nil, msg, CHAT_CATEGORY_SYSTEM)
+                CHAT_SYSTEM:AddMessage(msg)
             else
-                local chatContainer = CHAT_SYSTEM.primaryContainer
-                for i = 1, #chatContainer.windows do
-                    if LUIE.ChatAnnouncements.SV.ChatTab[i] == true then
-                        local chatWindow = CHAT_SYSTEM.primaryContainer["windows"][i]
-                        local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
-                        chatContainer:AddEventMessageToWindow(chatWindow, msg, CHAT_CATEGORY_SYSTEM)
+                for k, cc in ipairs(CHAT_SYSTEM.containers) do
+                    for i = 1, #cc.windows do
+                        if LUIE.ChatAnnouncements.SV.ChatTab[i] == true then
+                            local chatContainer = cc
+                            local chatWindow = cc.windows[i]
+                            local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
+                            local r,g,b = 1, 1, 1
+                            if chatContainer then chatContainer:AddEventMessageToWindow(chatWindow, msg, CHAT_CATEGORY_SYSTEM) end
+                        end
                     end
                 end
             end
         end
     end
-    ]]--
+
 end
 
 -- Returns a formatted number with commas

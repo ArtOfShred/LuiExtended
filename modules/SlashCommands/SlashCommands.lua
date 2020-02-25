@@ -116,7 +116,7 @@ function SlashCommands.RegisterSlashCommands()
     SLASH_COMMANDS["/witch"]        = nil
     SLASH_COMMANDS["/witchfest"]    = nil
     SLASH_COMMANDS["/report"]       = nil
-    SlashCommandAutoComplete:InvalidateSlashCommandCache() -- TODO: Replace with a function that does something similar.
+    CHAT_SYSTEM.textEntry.slashCommandAutoComplete:InvalidateSlashCommandCache()
 
     -- Add commands based off menu options
     if SlashCommands.SV.SlashHome then
