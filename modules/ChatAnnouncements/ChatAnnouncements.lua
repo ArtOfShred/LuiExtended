@@ -907,8 +907,10 @@ function ChatAnnouncements.Initialize(enabled)
 
     -- TODO: also move this
     eventManager:RegisterForEvent(moduleName, EVENT_SKILL_XP_UPDATE, ChatAnnouncements.SkillXPUpdate)
-
     eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, ChatAnnouncements.OnPlayerActivated)
+
+    -- TEMP: Social Error Register
+    eventManager:RegisterForEvent(moduleName, EVENT_SOCIAL_ERROR, ChatAnnouncements.OnErrorSocialChat)
 
     ChatAnnouncements.RegisterGuildEvents()
     ChatAnnouncements.RegisterSocialEvents()
@@ -1246,6 +1248,18 @@ function ChatAnnouncements.ResolveNameNoLink(characterName, displayName)
     end
 
     return nameLink
+end
+
+local function ShouldShowSocialErrorInChat(error)
+    return not ShouldShowSocialErrorInAlert(error)
+end
+
+-- TODO: Better function later when we implement more error handlers
+-- EVENT_SOCIAL_ERROR - New handler to replace the chat handler
+function ChatAnnouncements.OnErrorSocialChat(eventCode, error)
+    if not IsSocialErrorIgnoreResponse(error) and ShouldShowSocialErrorInChat(error) then
+        printToChat(zo_strformat(GetString("SI_SOCIALACTIONRESULT", error)))
+    end
 end
 
 function ChatAnnouncements.GuildHeraldrySaved()
@@ -8942,58 +8956,26 @@ function ChatAnnouncements.HookFunction()
 
     eventManager:RegisterForEvent(moduleName, EVENT_PLEDGE_OF_MARA_OFFER, ChatAnnouncements.MaraOffer)
 
-    local function ShouldShowSocialErrorInChat(error)
-        return not ShouldShowSocialErrorInAlert(error)
-    end
-
-    -- Most of these functions are handled by chat announcements functions instead.
-    local ChatEventFormatters = {
-
-    [EVENT_GROUP_TYPE_CHANGED] = function()
-        return nil
-    end,
-
-    [EVENT_GROUP_INVITE_RESPONSE] = function()
-        return nil
-    end,
-
-    [EVENT_GROUP_MEMBER_LEFT] = function()
-        return nil
-    end,
-
-    -- TODO: Conditionals based off EVENT_SOCIAL_ERROR HOOK LATER OR MAKE SEPARATE FUNCTION
-    [EVENT_SOCIAL_ERROR] = function(error)
-        if not IsSocialErrorIgnoreResponse(error) and ShouldShowSocialErrorInChat(error) then
-            return zo_strformat(GetString("SI_SOCIALACTIONRESULT", error))
-        end
-    end,
-
-    [EVENT_FRIEND_PLAYER_STATUS_CHANGED] = function()
-        return nil
-    end,
-
-    [EVENT_IGNORE_ADDED] = function()
-        return nil
-    end,
-
-    [EVENT_IGNORE_REMOVED] = function()
-        return nil
-    end,
+    local ChatEventFormattersDelete = {
+        [EVENT_GROUP_TYPE_CHANGED] = true,
+        [EVENT_GROUP_INVITE_RESPONSE] = true,
+        [EVENT_GROUP_MEMBER_LEFT] = true,
+        [EVENT_SOCIAL_ERROR] = true,
+        [EVENT_FRIEND_PLAYER_STATUS_CHANGED] = true,
+        [EVENT_IGNORE_ADDED] = true,
+        [EVENT_IGNORE_REMOVED] = true,
     }
 
     -- Unregister ZOS handlers for events we need to modify
-    for eventCode, eventFormatter in pairs (ChatEventFormatters) do
+    for eventCode, _ in pairs (ChatEventFormattersDelete) do
         EVENT_MANAGER:UnregisterForEvent("ChatRouter", eventCode)
     end
 
-    -- Slay these events in case LibChatMessage hooks them
-    -- Note we're only removing the events above so this shouldn't interfere with normal chat.
-    local fullChatEventFormatters = ZO_ChatSystem_GetEventHandlers()
-    for eventType, _ in pairs (ChatEventFormatters) do
-        fullChatEventFormatters[eventType] = nil
+    -- Slay these events in case LibChatMessage is active and hooks them
+    local ChatEventFormatters = ZO_ChatSystem_GetEventHandlers()
+    for eventType, _ in pairs (ChatEventFormattersDelete) do
+        ChatEventFormatters[eventType] = nil
     end
-
-    -- TODO: We need to re-add SOCIAL_ERROR here or at a menu setting and event handler for it separately.
 
     -- HOOK PLAYER_TO_PLAYER Group Notifications to edit Ignore alert
     local KEYBOARD_INTERACT_ICONS = {
