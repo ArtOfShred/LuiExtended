@@ -9,21 +9,20 @@ local Effects = LUIE.Data.Effects
 
 local zo_strformat = zo_strformat
 
+-- Add millisecond timestamp to ability debug
 local function MillisecondTimestampDebug(message)
-    if LUIE.ChatAnnouncements.SV.TimeStamp then
-        local currentTime = GetGameTimeMilliseconds()
-        local timestamp = FormatTimeMilliseconds(currentTime, TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_MILLISECONDS_NO_HOURS_OR_DAYS, TIME_FORMAT_DIRECTION_NONE)
-        timestamp = timestamp:gsub("HH", "")
-        timestamp = timestamp:gsub("H ", ":")
-        timestamp = timestamp:gsub("hh", "")
-        timestamp = timestamp:gsub("h ", ":")
-        timestamp = timestamp:gsub("m ", ":")
-        timestamp = timestamp:gsub("s ", ":")
-        timestamp = timestamp:gsub("A", "")
-        timestamp = timestamp:gsub("a", "")
-        timestamp = timestamp:gsub("ms", "")
-        message = string.format("|c%s[%s]|r %s", LUIE.TimeStampColorize, timestamp, message)
-    end
+    local currentTime = GetGameTimeMilliseconds()
+    local timestamp = FormatTimeMilliseconds(currentTime, TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_MILLISECONDS_NO_HOURS_OR_DAYS, TIME_FORMAT_DIRECTION_NONE)
+    timestamp = timestamp:gsub("HH", "")
+    timestamp = timestamp:gsub("H ", ":")
+    timestamp = timestamp:gsub("hh", "")
+    timestamp = timestamp:gsub("h ", ":")
+    timestamp = timestamp:gsub("m ", ":")
+    timestamp = timestamp:gsub("s ", ":")
+    timestamp = timestamp:gsub("A", "")
+    timestamp = timestamp:gsub("a", "")
+    timestamp = timestamp:gsub("ms", "")
+    message = string.format("|c%s[%s]|r %s", LUIE.TimeStampColorize, timestamp, message)
     return message
 end
 
@@ -63,7 +62,8 @@ function SpellCastBuffs.EventCombatDebug(eventCode, result, isError, abilityName
 
     local finalString = (iconFormatted .. " ["..abilityId.."] "..ability..": [S] "..source.." --> [T] "..target .. " [D] " .. duration .. showachantime .. showacasttime .. " [R] " .. formattedResult)
     finalString = MillisecondTimestampDebug(finalString)
-    d(finalString)
+    -- Use CHAT_ROUTER to bypass some other addons modifying this string
+    CHAT_ROUTER:AddSystemMessage(finalString)
 end
 
 -- Debug Display for Effect Events
@@ -109,7 +109,8 @@ function SpellCastBuffs.EventEffectDebug(eventCode, changeType, effectSlot, effe
         finalString = ("|c00E200Refreshed:|r " .. iconFormatted .. " (" .. changeType .. ") [" .. abilityId .. "] " ..nameFormatted .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
     end
     finalString = MillisecondTimestampDebug(finalString)
-    d(finalString)
+    -- Use CHAT_ROUTER to bypass some other addons modifying this string
+    CHAT_ROUTER:AddSystemMessage(finalString)
 
 end
 

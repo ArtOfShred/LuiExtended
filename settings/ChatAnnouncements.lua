@@ -101,6 +101,22 @@ function ChatAnnouncements.CreateSettings()
                 default = {r=Defaults.Notify.NotificationColor[1], g=Defaults.Notify.NotificationColor[2], b=Defaults.Notify.NotificationColor[3]}
             },]]--
             {
+                -- TODO: Temporary
+                type = "description",
+                text = "NOTE: A significant amount of changes were made to the API for chat in the Harrowstorm Update, chat addons may be in limbo for a bit. It's possible some of the functionality here in relation to other addons may encounter issues in the future and it's likely I will end up adopting LibChatMessage.",
+            },
+            {
+                -- Bypass LUIE to use other chat addons
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CA_CHATBYPASS),
+                tooltip = GetString(SI_LUIE_LAM_CA_CHATBYPASS_TP),
+                getFunc = function() return Settings.ChatBypassFormat end,
+                setFunc = function(value) Settings.ChatBypassFormat = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.ChatBypassFormat,
+            },
+            {
                 -- Choose Chat Print Method
                 type = "dropdown",
                 name = GetString(SI_LUIE_LAM_CA_CHATMETHOD),
@@ -111,17 +127,6 @@ function ChatAnnouncements.CreateSettings()
                 width = "full",
                 sort = "name-up",
                 default = Defaults.ChatMethod,
-            },
-            {
-                -- Bypass LUIE to use other chat addons
-                type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CHATBYPASS)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CHATBYPASS_TP),
-                getFunc = function() return Settings.ChatBypass end,
-                setFunc = function(value) Settings.ChatBypass = value end,
-                width = "full",
-                disabled = function() return Settings.ChatMethod == "Print to Specific Tabs" end,
-                default = Defaults.ChatBypass,
             },
             {
                 -- Print Chat Announcements & Messages to Tab 1

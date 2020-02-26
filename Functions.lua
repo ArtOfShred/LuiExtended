@@ -65,22 +65,29 @@ end
 
 -- Easy Print to Chat
 function LUIE.PrintToChat(msg, isSystem)
-    if LUIE.ChatAnnouncements.SV.ChatMethod == "Print to All Tabs" then
-        if not LUIE.ChatAnnouncements.SV.ChatBypass and CHAT_SYSTEM.primaryContainer then
-            -- Add timestamps if bypass is not enabled
-            local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
-            CHAT_SYSTEM:AddMessage(msg)
-        else
-            -- Otherwise send as a normal message and let other addons handle this.
-            CHAT_SYSTEM:AddMessage(msg)
-        end
-    else
-        -- If we have system messages sent to display in all windows then just print to all windows at once, otherwise send messages to individual tabs.
-        if CHAT_SYSTEM.primaryContainer then
-            if isSystem and LUIE.ChatAnnouncements.SV.ChatSystemAll then
+    if CHAT_SYSTEM.primaryContainer then
+        if LUIE.ChatAnnouncements.SV.ChatMethod == "Print to All Tabs" then
+            if not LUIE.ChatAnnouncements.SV.ChatBypassFormat and CHAT_SYSTEM.primaryContainer then
+                -- Add timestamps if bypass is not enabled
                 local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
-                -- Post as a System message so that it can appear in multiple tabs.
-                CHAT_SYSTEM:AddMessage(msg)
+                -- Use CHAT ROUTER here to ignore other addons (at least until a chat addon hooks into this)
+                CHAT_ROUTER:AddSystemMessage(msg)
+            else
+                -- We're just using debug here for now, with all the chat changes at least currently pChat and rChat pick up these strings.
+                d(msg)
+            end
+        else
+            -- If we have system messages sent to display in all windows then just print to all windows at once, otherwise send messages to individual tabs.
+            if isSystem and LUIE.ChatAnnouncements.SV.ChatSystemAll then
+                if not LUIE.ChatAnnouncements.SV.ChatBypassFormat then
+                    -- Add timestamps if bypass is not enabled
+                    local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
+                    -- Use CHAT ROUTER here to ignore other addons (at least until a chat addon hooks into this)
+                    CHAT_ROUTER:AddSystemMessage(msg)
+                else
+                    -- We're just using debug here for now, with all the chat changes at least currently pChat and rChat pick up these strings.
+                    d(msg)
+                end
             else
                 for k, cc in ipairs(CHAT_SYSTEM.containers) do
                     for i = 1, #cc.windows do

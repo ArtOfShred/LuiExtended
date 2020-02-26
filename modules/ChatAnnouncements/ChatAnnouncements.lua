@@ -33,7 +33,7 @@ ChatAnnouncements.Defaults = {
     BracketOptionCollectibleUse   = 2,
     BracketOptionAchievement      = 2,
     ChatMethod                    = "Print to All Tabs",
-    ChatBypass                    = true,
+    ChatBypassFormat              = false,
     ChatTab                       = { [1] = true, [2] = true, [3] = true, [4] = true, [5] = true },
     ChatSystemAll                 = true,
     TimeStamp                     = false,
@@ -6618,7 +6618,6 @@ function ChatAnnouncements.HookFunction()
 
     local csaHandlers = ZO_CenterScreenAnnounce_GetEventHandlers()
     local csaCallbackHandlers = ZO_CenterScreenAnnounce_GetCallbackHandlers()
-    local chatHandlers = ZO_ChatSystem_GetEventHandlers()
 
     -- EVENT_LORE_BOOK_LEARNED_SKILL_EXPERIENCE (CSA Handler)
     local function LoreBookXPHook(categoryIndex, collectionIndex, bookIndex, guildReputationIndex, skillType, skillIndex, rank, previousXP, currentXP)
@@ -8993,12 +8992,6 @@ function ChatAnnouncements.HookFunction()
     for eventType, _ in pairs (ChatEventFormatters) do
         fullChatEventFormatters[eventType] = nil
     end
-
-    --[[
-    -- Register our handlers for events we need to modify
-    for eventCode, eventFormatter in pairs(ChatEventFormatters) do
-        CHAT_ROUTER:AddEventFormatter(eventCode, eventFormatter)
-    end]]--
 
     -- TODO: We need to re-add SOCIAL_ERROR here or at a menu setting and event handler for it separately.
 
