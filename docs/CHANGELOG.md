@@ -1,3 +1,16 @@
+### Version 6.0.2
+
+General
+- Added a keybinding option for "Leave Group."
+
+Chat Announcements
+- Restored the ability to print chat messages to specific chat tabs.
+- Removed the "Enable pChat Message Saving" setting and replaced it with an "Allow Addons to Modify LUIE Messages." It has the same functionality but is disabled by default. This setting can always be enabled now instead of toggling off when selecting the option to print to specific chat tabs (it still won't effect messages printed to specific tabs but will handle system messages if you choose to print those in all tabs).
+- Fixed an issue where having LibChatMessage enabled would bypass some Chat Announcements toggle settings, the most common being friends logging on & off. Now if you choose to disable these messages, they will cease to display properly.
+- Fixed an issue where promoting a player to group leader or being promoted to group leader sometimes wouldn't properly show the promotion chat message/alert.
+
+---
+
 ### Version 6.0.1
 
 General
