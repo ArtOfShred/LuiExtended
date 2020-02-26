@@ -29,6 +29,7 @@ local strings = {
     SI_BINDING_NAME_LUIE_COMMAND_FENCE =                 "Summon Fence",
     SI_BINDING_NAME_LUIE_COMMAND_READY_CHECK =           "Initiate Ready Check",
     SI_BINDING_NAME_LUIE_COMMAND_HOME =                  "Teleport to Primary Home",
+    SI_BINDING_NAME_LUIE_COMMAND_LEAVE_GROUP =           "Leave Group",
     SI_BINDING_NAME_LUIE_COMMAND_REGROUP =               "Regroup (Disband & Reform)",
     SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_1 =              "Equip Outfit in Slot 1",
     SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_2 =              "Equip Outfit in Slot 2",

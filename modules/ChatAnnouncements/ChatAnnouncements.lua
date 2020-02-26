@@ -9930,6 +9930,8 @@ end
 function ChatAnnouncements.OnGroupMemberJoined(eventCode, memberName)
     -- Update index for Group Loot
     ChatAnnouncements.IndexGroupLoot()
+    g_currentGroupLeaderRawName = GetRawUnitName(GetGroupLeaderUnitTag())
+    g_currentGroupLeaderDisplayName = GetUnitDisplayName(GetGroupLeaderUnitTag())
 
     g_groupJoinFudger = false
     local g_partyStack = { }

@@ -29,6 +29,7 @@ local strings = {
     SI_BINDING_NAME_LUIE_COMMAND_FENCE =                 "Hehler beschwören",
     SI_BINDING_NAME_LUIE_COMMAND_READY_CHECK =           "Initiiere Ready-Check",
     SI_BINDING_NAME_LUIE_COMMAND_HOME =                  "Nach Hause teleportieren",
+    SI_BINDING_NAME_LUIE_COMMAND_LEAVE_GROUP =           "Leave Group",
     SI_BINDING_NAME_LUIE_COMMAND_REGROUP =               "Neugruppieren (Auflösen & Neubilden)",
     SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_1 =              "Montur in Slot 1 ausrüsten",
     SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_2 =              "Montur in Slot 2 ausrüsten",
