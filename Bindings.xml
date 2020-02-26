@@ -6,11 +6,11 @@
 <Bindings>
     <Layer name="SI_KEYBINDINGS_LAYER_GENERAL">
         <Category name="|cE12000L|cFFFFB0ui E|rxtended|r">
-            <Action name="LUIE_COMMAND_FENCE"><Down>LUIE.SlashCommands.SlashCollectible(300)</Down></Action>
-            <Action name="LUIE_COMMAND_MERCHANT"><Down>LUIE.SlashCommands.SlashCollectible(301)</Down></Action>
-            <Action name="LUIE_COMMAND_MERCHANT_CAT"><Down>LUIE.SlashCommands.SlashCollectible(6378)</Down></Action>
-            <Action name="LUIE_COMMAND_BANKER"><Down>LUIE.SlashCommands.SlashCollectible(267)</Down></Action>
-            <Action name="LUIE_COMMAND_BANKER_CAT"><Down>LUIE.SlashCommands.SlashCollectible(6376)</Down></Action>
+            <Action name="LUIE_COMMAND_FENCE"><Down>LUIE.SlashCommands.SlashCollectible(300, true)</Down></Action>
+            <Action name="LUIE_COMMAND_MERCHANT"><Down>LUIE.SlashCommands.SlashCollectible(301, true)</Down></Action>
+            <Action name="LUIE_COMMAND_MERCHANT_CAT"><Down>LUIE.SlashCommands.SlashCollectible(6378, true)</Down></Action>
+            <Action name="LUIE_COMMAND_BANKER"><Down>LUIE.SlashCommands.SlashCollectible(267, true)</Down></Action>
+            <Action name="LUIE_COMMAND_BANKER_CAT"><Down>LUIE.SlashCommands.SlashCollectible(6376, true)</Down></Action>
             <Action name="LUIE_COMMAND_HOME"><Down>LUIE.SlashCommands.SlashHome()</Down></Action>
             <Action name="LUIE_COMMAND_READY_CHECK"><Down>LUIE.SlashCommands.SlashReadyCheck()</Down></Action>
             <Action name="LUIE_COMMAND_LEAVE_GROUP"><Down>LUIE.SlashCommands.SlashGroupLeave()</Down></Action>

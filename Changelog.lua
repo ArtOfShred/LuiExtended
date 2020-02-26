@@ -6,6 +6,12 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
+    "|cFFA500LuiExtended Version 6.0.3|r",
+    "",
+    "|cFFFF00Slash Commands:|r",
+    "[*] Fixed an issue where using the /fence Slash Command or Keybinding would throw an error.",
+    "[*] When summoning a banker, fence, or merchant with the keybinding, your Chat Announcement setting will now determine if a feedback chat message is displayed. Note that using the slash command will still always return feedback into chat.",
+    "",
     "|cFFA500LuiExtended Version 6.0.2|r",
     "",
     "|cFFFF00General:|r",

@@ -10335,15 +10335,18 @@ function ChatAnnouncements.CollectibleResult()
             LUIE.LastMementoUsed == 1168 and GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_MEAD) or
             LUIE.LastMementoUsed == 479 and GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_WITCH)
 
-        local message = zo_strformat(string, link, formattedIcon)
-        local alert = zo_strformat(string, name, "")
+        -- Just in case string is nil then don't do anything here.
+        if string ~= nil then
+            local message = zo_strformat(string, link, formattedIcon)
+            local alert = zo_strformat(string, name, "")
 
-        if message and ChatAnnouncements.SV.Collectibles.CollectibleUseCA or LUIE.LastMementoUsed > 0 then
-            message = CollectibleUseColorize:Colorize(message)
-            printToChat(message)
-        end
-        if alert and ChatAnnouncements.SV.Collectibles.CollectibleUseAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alert)
+            if message and ChatAnnouncements.SV.Collectibles.CollectibleUseCA or LUIE.LastMementoUsed > 0 then
+                message = CollectibleUseColorize:Colorize(message)
+                printToChat(message)
+            end
+            if alert and ChatAnnouncements.SV.Collectibles.CollectibleUseAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alert)
+            end
         end
 
         LUIE.LastMementoUsed = 0

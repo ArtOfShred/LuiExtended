@@ -1,3 +1,9 @@
+### Version 6.0.3
+
+Slash Commands
+- Fixed an issue where using the /fence Slash Command or Keybinding would throw an error.
+- When summoning a banker, fence, or merchant with the keybinding, your Chat Announcement setting will now determine if a feedback chat message is displayed. Note that using the slash command will still always return feedback into chat.
+
 ### Version 6.0.2
 
 General
