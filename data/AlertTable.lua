@@ -26,6 +26,7 @@ LUIE.Data.AlertTable = {
     -- dodge = true -- Show a Dodge Alert
     -- avoid = true -- Show an Avoid Alert
     -- interrupt = true -- Show an Interrupt Alert
+    -- reflect = true -- Show a Reflect Alert (not implemented) TODO: Implement
     -- unmit = true -- Show an unmitigable alert
 
     -- MISC ALERTS
@@ -65,7 +66,7 @@ LUIE.Data.AlertTable = {
 
     [63157] = { block = true, dodge = true, priority = 2, bs = true, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STUN }, -- Heavy Blow (Justice Guard 1H)
     [63261] = { block = true, dodge = true, priority = 2, bs = true, result = ACTION_RESULT_BEGIN, duration = 1250, cc = STUN }, -- Heavy Blow (Justice Guard 2H)
-    [63179] = { block = true, dodge = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1000, cc = STUN }, -- Flame Shard (Justice Guard 2H)
+    [63179] = { block = true, dodge = true, interrupt = true, reflect = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1000, cc = STUN }, -- Flame Shard (Justice Guard 2H)
     [78743] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Flare (Justice Guard - Any)
 
     [74862] = { block = true, avoid = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Teleport Trap (Mage Guard)
@@ -97,10 +98,10 @@ LUIE.Data.AlertTable = {
 
     [37108] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000, cc = SNARE, eventdetect = true }, -- Arrow Spray (Archer)
     [28628] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 6800, eventdetect = true, refire = 2000 }, -- Volley (Archer)
-    [74978] = { block = true, dodge = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 9000, cc = STUN }, -- Taking Aim (Archer)
+    [74978] = { block = true, dodge = true, interrupt = true, reflect = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 9000, cc = STUN }, -- Taking Aim (Archer)
 
     [14096] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1250 }, -- Heavy Attack (Footsoldier)
-    [28499] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = SNARE, refire = 1000 }, -- Throw Dagger (Footsoldier)
+    [28499] = { block = true, dodge = true, interrupt = true, reflect = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = SNARE, refire = 1000 }, -- Throw Dagger (Footsoldier)
 
     [29400] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1400, cc = STUN }, -- Power Bash (Guard)
     [29761] = { power = true, priority = 3, auradetect = true, effectOnlyInterrupt = true }, -- Brace (Guard)
@@ -173,7 +174,7 @@ LUIE.Data.AlertTable = {
     [43646] = { avoid = true, priority = 3, auradetect = true }, -- Barrier [monster synergy]  (Faction NPCs)
 
     [70070] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1250 }, -- Heavy Strike (Winterborn Warrior)
-    [64980] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = STAGGER }, -- Javelin (Winterborn Warrior)
+    [64980] = { block = true, dodge = true, interrupt = true, reflect = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = STAGGER }, -- Javelin (Winterborn Warrior)
     [65033] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_EFFECT_GAINED, duration = 1000, cc = STAGGER }, -- Retaliation (Winterborn Warrior)
 
     [55909] = { dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = SNARE }, -- Grasping Vines (Winterborn Mage)
@@ -187,8 +188,8 @@ LUIE.Data.AlertTable = {
 
     [72725] = { power = true, auradetect = true, priority = 2 }, -- Fool Me Once (Sentinel) (TG DLC)
 
-    [76089] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000 }, -- Snipe (Archer) (TG DLC)
-    --[72220] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000 }, -- Snipe (Archer) (TG DLC) -- This is cast from stealth - so for the time being, maybe hide.
+    [76089] = { block = true, dodge = true, interrupt = true, reflect = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000 }, -- Snipe (Archer) (TG DLC)
+    --[72220] = { block = true, dodge = true, reflect = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000 }, -- Snipe (Archer) (TG DLC) -- This is cast from stealth - so for the time being, maybe hide.
     [72222] = { power = true, auradetect = true, priority = 2 }, -- Shadow Cloak (Archer) (TG DLC)
 
     [77472] = { power = true, auradetect = true, priority = 2 }, -- Til Death (Bodyguard) (DB DLC)
@@ -196,8 +197,8 @@ LUIE.Data.AlertTable = {
     [77473] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1000, cc = STAGGER }, -- Shield Charge (Bodyguard) (DB DLC)
 
     [77089] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1250, cc = STUN }, -- Basilisk Powder (Tracker) (Morrowind)
-    [77087] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STUN }, -- Basilisk Powder (Tracker) (Morrowind)
-    [77019] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 766, cc = SNARE }, -- Pin (Tracker) (Morrowind)
+    [77087] = { block = true, dodge = true, interrupt = true, reflect = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STUN }, -- Basilisk Powder (Tracker) (Morrowind)
+    [77019] = { block = true, dodge = true, reflect = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 766, cc = SNARE }, -- Pin (Tracker) (Morrowind)
     [78432] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, cc = STUN }, -- Lunge (Tracker) (Morrowind)
 
     [88371] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1000 }, -- Dive (Beastcaller) (Morrowind)
@@ -240,7 +241,7 @@ LUIE.Data.AlertTable = {
 
     [7227] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1100 }, -- Rotbone (Durzog)
 
-    [6308] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 2500, cc = STAGGER }, -- Shocking Touch (Dreugh)
+    [6308] = { block = true, dodge = true, reflect = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 2500, cc = STAGGER }, -- Shocking Touch (Dreugh)
     [6328] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 2000, duration = 3600 }, -- Shocking Rake (Dreugh)
 
     [54375] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1300, cc = STAGGER, eventdetect = true }, -- Shockwave (Echatere)
@@ -294,7 +295,7 @@ LUIE.Data.AlertTable = {
     [14272] = { summon = true, auradetect = true, priority = 2, fakeName = "" }, -- Call of the Pack (Wolf)
     [26658] = { summon = true, auradetect = true, priority = 2, fakeName = "" }, -- Call of the Pack (Jackal)
 
-    [72793] = { dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1767, cc = SNARE }, -- Toxic Mucus (Haj Mota)
+    [72793] = { dodge = true, reflect = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1767, cc = SNARE }, -- Toxic Mucus (Haj Mota)
     [72796] = { block = true, dodge = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = STUN }, -- Bog Burst (Haj Mota)
     [72789] = { avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1667, cc = STAGGER }, -- Shockwave (Haj Mota)
 
@@ -655,7 +656,7 @@ LUIE.Data.AlertTable = {
     [83945] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1200, cc = STUN, bossName = true }, -- Tail Sweep (Trapjaw)
     [84028] = { interrupt = true, avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000, bossName = true, postCast = 4000 }, -- Impending Storm (Trapjaw)
     [84169] = { block = true, bs = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = STUN, bossName = true }, -- Rolling Thunder (Trapjaw)
-    [83925] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, cc = STUN, duration = 1700 }, -- Trapping Bolt (Trapjaw)
+    [83925] = { block = true, dodge = true, reflect = true, priority = 1, result = ACTION_RESULT_BEGIN, cc = STUN, duration = 1700 }, -- Trapping Bolt (Trapjaw)
     [83930] = { power = true, priority = 1, auradetect = true, noSelf = true }, -- Trapping Bolt (Trapjaw)
 
     -- World Boss - Spider Nest
@@ -820,7 +821,7 @@ LUIE.Data.AlertTable = {
     [53264] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true }, -- Rally (Sovngarde Slayer)
     [53313] = { avoid = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1500 }, -- Volley (Sovngarde Slayer)
 
-    [53286] = { interrupt = true, block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Crushing Shock (Sovngarde Icemage)
+    [53286] = { interrupt = true, block = true, dodge = true, reflect = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Crushing Shock (Sovngarde Icemage)
     [53274] = { avoid = true, priority = 1, auradetect = true, bossMatch = { Unitnames.Boss_Katti_Ice_Turner } }, -- Unstable Wall of Frost (Sovngarde Icemage)
 
     [53250] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Wrecking Blow (Yavni Frost-Skin)
@@ -846,7 +847,7 @@ LUIE.Data.AlertTable = {
     [54056] = { power = true, priority = 1, auradetect = true, refire = 500 }, -- Molten Armaments (Earthen Heart Knight)
     [54065] = { power = true, priority = 1, auradetect = true, ignoreRefresh = true }, -- Igneous Shield (Earthen Heart Knight)
     [54077] = { avoid = true, priority = 1, auradetect = true, bossMatch = { Unitnames.Boss_Earthen_Heart_Knight } }, -- Cinder Storm (Earthen Heart Knight)
-    [54053] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Stone Giant (Earthen Heart Knight)
+    [54053] = { block = true, dodge = true, reflect = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Stone Giant (Earthen Heart Knight)
     [54083] = { power = true, priority = 1, auradetect = true }, -- Corrosive Armor (Earthen Heart Knight)
     [54067] = { block = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Fossilize (Earth Heart Knight)
 
@@ -861,7 +862,7 @@ LUIE.Data.AlertTable = {
     [54608] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Drain Resource (Pacthunter Ranger)
     --[54512] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true }, -- Regeneration Aura (Nature's Blessing)
     [52820] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Acid Spray (Pishna Longshot)
-    [52825] = { block = true, dodge = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Lethal Arrow (Pishna Longshot)
+    [52825] = { block = true, dodge = true, interrupt = true, reflect = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Lethal Arrow (Pishna Longshot)
 
     -- Stage 7 - Circle of Rituals
     [56946] = { power = true, priority = 1, auradetect = true }, -- Dragon Fire Scale (Bloodwraith Kynval)
@@ -873,7 +874,7 @@ LUIE.Data.AlertTable = {
     [52912] = { interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Purifying Light (Shadow Knight)
     [52927] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = Unitnames.Boss_Shadow_Knight, bossMatch = { Unitnames.Boss_Hiath_the_Battlemaster } }, -- Solar Disturbance (Shadow Knight)
 
-    [54792] = { block = true, dodge = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Crystal Blast (Dark Mage)
+    [54792] = { block = true, dodge = true, interrupt = true, reflect = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Crystal Blast (Dark Mage)
     [54819] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, bossMatch = { Unitnames.Boss_Dark_Mage } }, -- Daedric Minefield (Dark Mage)
     [54829] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = Unitnames.Boss_Dark_Mage, bossMatch = { Unitnames.Boss_Hiath_the_Battlemaster } }, -- Suppression Field (Dark Mage)
     [54809] = { interrupt = true, priority = 1, auradetect = true }, -- Dark Deal (Dark Mage)

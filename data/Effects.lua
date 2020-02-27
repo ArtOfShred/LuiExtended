@@ -3001,6 +3001,184 @@ Effects.KeepUpgradeTooltip = {
     [Abilities.Keep_Upgrade_Food_Guard_Abilities]       = Tooltips.Keep_Upgrade_Food_Guard_Abilities,
 }
 
+-- TODO; Fill in this table with icons for normalizaton
+Effects.PotionIconTable = {
+
+    -- Crafted Potions (2 Traits)
+    [64564] = { icon = 'LuiExtended/media/icons/potions/potion_007.dds', normalize = 'esoui/art/icons/' }, -- of Armor (Major Resolve)
+    [79857] = { icon = 'LuiExtended/media/icons/potions/potion_007r.dds', normalize = 'esoui/art/icons/' }, -- of Defile (Minor Defile)
+    [45236] = { icon = 'LuiExtended/media/icons/potions/potion_009.dds', normalize = 'esoui/art/icons/' }, -- of Detection (Increase Detection)
+    [45222] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds', normalize = 'esoui/art/icons/' }, -- of Health (Major Fortitude)
+    [45239] = { icon = 'LuiExtended/media/icons/potions/potion_008.dds', normalize = 'esoui/art/icons/' }, -- of Immovability (Unstoppable)
+    [45224] = { icon = 'LuiExtended/media/icons/potions/potion_002.dds',  normalize = 'esoui/art/icons/' }, -- of Magicka (Major Intellect)
+    [79712] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds',  normalize = 'esoui/art/icons/' }, -- of Protection (Minor Protection)
+    [46208] = { icon = 'LuiExtended/media/icons/potions/potion_021.dds',  normalize = 'esoui/art/icons/' }, -- of Ravage Armor (Minor Fracture)
+    [47204] = { icon = 'LuiExtended/media/icons/potions/potion_020.dds',  normalize = 'esoui/art/icons/' }, -- of Ravage Spell Critical (Minor Uncertainty)
+    [46202] = { icon = 'LuiExtended/media/icons/potions/potion_020.dds',  normalize = 'esoui/art/icons/' }, -- of Ravage Spell Power (Minor Cowardice)
+    [46206] = { icon = 'LuiExtended/media/icons/potions/potion_018.dds',  normalize = 'esoui/art/icons/' }, -- of Ravage Spell Protection (Minor Breach)
+    [47203] = { icon = 'LuiExtended/media/icons/potions/potion_019.dds',  normalize = 'esoui/art/icons/' }, -- of Ravage Weapon Critical (Minor Enervation)
+    [46204] = { icon = 'LuiExtended/media/icons/potions/potion_019.dds',  normalize = 'esoui/art/icons/' }, -- of Ravage Weapon Power (Minor Maim)
+    [46210] = { icon = 'LuiExtended/media/icons/potions/potion_017.dds',  normalize = 'esoui/art/icons/' }, -- of Slow (Hindrance)
+    [64566] = { icon = 'LuiExtended/media/icons/potions/potion_010.dds',  normalize = 'esoui/art/icons/' }, -- of Speed (Major Expedition)
+    [64570] = { icon = 'LuiExtended/media/icons/potions/potion_013.dds',  normalize = 'esoui/art/icons/' }, -- of Spell Critical (Major Prophecy)
+    [64558] = { icon = 'LuiExtended/media/icons/potions/potion_006.dds',  normalize = 'esoui/art/icons/' }, -- of Spell Power (Major Sorcery)
+    [64562] = { icon = 'LuiExtended/media/icons/potions/potion_004.dds',  normalize = 'esoui/art/icons/' }, -- of Spell Protection (Major Ward)
+    [45226] = { icon = 'LuiExtended/media/icons/potions/potion_003.dds',  normalize = 'esoui/art/icons/' }, -- of Stamina (Major Endurance)
+    [79848] = { icon = 'LuiExtended/media/icons/potions/potion_014.dds',  normalize = 'esoui/art/icons/' }, -- of Vitality (Major Vitality)
+    [79844] = { icon = 'LuiExtended/media/icons/potions/potion_001r.dds',  normalize = 'esoui/art/icons/' }, -- of Vulnerability (Minor Vulnerability)
+    [64568] = { icon = 'LuiExtended/media/icons/potions/potion_012.dds',  normalize = 'esoui/art/icons/' }, -- of Weapon Critical (Major Savagery)
+    [64555] = { icon = 'LuiExtended/media/icons/potions/potion_005.dds',  normalize = 'esoui/art/icons/' }, -- of Weapon Power (Major Brutality)
+    [125027] = { icon = 'LuiExtended/media/icons/potions/potion_011.dds',  normalize = 'esoui/art/icons/' }, -- of Heroism (Minor Heroism)
+
+    -- Crafted Potions (3 Traits)
+    [64565] = { icon = 'LuiExtended/media/icons/potions/potion_007.dds',  normalize = 'esoui/art/icons/' }, -- of Armor (Major Resolve)
+    -- No ... of Creeping Ravage Health
+    [79860] = { icon = 'LuiExtended/media/icons/potions/potion_007r.dds',  normalize = 'esoui/art/icons/' }, -- of Defile (Minor Defile)
+    [45458] = { icon = 'LuiExtended/media/icons/potions/potion_009.dds',  normalize = 'esoui/art/icons/' }, -- of Detection (Increase Detection)
+    [63670] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds',  normalize = 'esoui/art/icons/' }, -- of Health (Major Fortitude)
+    [45463] = { icon = 'LuiExtended/media/icons/potions/potion_008.dds',  normalize = 'esoui/art/icons/' }, -- of Immovability (Unstoppable)
+    [63676] = { icon = 'LuiExtended/media/icons/potions/potion_002.dds',  normalize = 'esoui/art/icons/' }, -- of Magicka (Major Intellect)
+    [79714] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds',  normalize = 'esoui/art/icons/' }, -- of Protection (Minor Protection)
+    [46250] = { icon = 'LuiExtended/media/icons/potions/potion_021.dds',  normalize = 'esoui/art/icons/' }, -- of Ravage Armor (Minor Fracture)
+    -- No ... of Ravage Spell Critical
+    [46244] = { icon = 'LuiExtended/media/icons/potions/potion_020.dds',  normalize = 'esoui/art/icons/' }, -- of Ravage Spell Power (Minor Cowardice)
+    [46248] = { icon = 'LuiExtended/media/icons/potions/potion_018.dds',  normalize = 'esoui/art/icons/' }, -- of Ravage Spell Protection (Reduce Spell Resistance) (Should be Minor Breach)
+    [47202] = { icon = 'LuiExtended/media/icons/potions/potion_019.dds',  normalize = 'esoui/art/icons/' }, -- of Ravage Weapon Critical (Reduce Weapon Critical) (Should be Minor Enervation)
+    [46246] = { icon = 'LuiExtended/media/icons/potions/potion_019.dds',  normalize = 'esoui/art/icons/' }, -- of Ravage Weapon Power (Minor Maim)
+    [46252] = { icon = 'LuiExtended/media/icons/potions/potion_017.dds',  normalize = 'esoui/art/icons/' }, -- of Slow (Hindrance)
+    [64567] = { icon = 'LuiExtended/media/icons/potions/potion_010.dds',  normalize = 'esoui/art/icons/' }, -- of Speed (Major Expedition)
+    [64572] = { icon = 'LuiExtended/media/icons/potions/potion_013.dds',  normalize = 'esoui/art/icons/' }, -- of Spell Critical (Major Prophecy)
+    [64561] = { icon = 'LuiExtended/media/icons/potions/potion_006.dds',  normalize = 'esoui/art/icons/' }, -- of Spell Power (Major Sorcery)
+    [64563] = { icon = 'LuiExtended/media/icons/potions/potion_004.dds',  normalize = 'esoui/art/icons/' }, -- of Spell Protection (Major Ward)
+    [63681] = { icon = 'LuiExtended/media/icons/potions/potion_003.dds',  normalize = 'esoui/art/icons/' }, -- of Stamina (Major Endurance)
+    -- No ... of Stun
+    [79850] = { icon = 'LuiExtended/media/icons/potions/potion_014.dds',  normalize = 'esoui/art/icons/' }, -- of Vitality (Major Vitality)
+    [79846] = { icon = 'LuiExtended/media/icons/potions/potion_001r.dds',  normalize = 'esoui/art/icons/' }, -- of Vulnerability (Minor Vulnerability)
+    [64569] = { icon = 'LuiExtended/media/icons/potions/potion_012.dds',  normalize = 'esoui/art/icons/' }, -- of Weapon Critical (Major Savagery)
+    [64554] = { icon = 'LuiExtended/media/icons/potions/potion_005.dds',  normalize = 'esoui/art/icons/' }, -- of Weapon Power (Major Brutality)
+    [125041] = { icon = 'LuiExtended/media/icons/potions/potion_011.dds',  normalize = 'esoui/art/icons/' }, -- of Heroism (Minor Heroism)
+
+    -- Vendor Potions + AVA Potions + Roguish Draughts
+    [63672] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds',  normalize = 'esoui/art/icons/'  }, -- of Health (Major Fortitude)
+    [63678] = { icon = 'LuiExtended/media/icons/potions/potion_002.dds',  normalize = 'esoui/art/icons/' }, -- of Magicka (Major Intellect)
+    [63683] = { icon = 'LuiExtended/media/icons/potions/potion_003.dds',  normalize = 'esoui/art/icons/' }, -- of Stamina (Major Endurance)
+    [72935] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds',  normalize = 'esoui/art/icons/' }, -- Alliance Battle Draught (Major Endurance)
+    [72936] = { icon = 'LuiExtended/media/icons/potions/potion_ava_yellow.dds',  normalize = 'esoui/art/icons/' }, -- Alliance Battle Draught (Major Brutality)
+    [72930] = { icon = 'LuiExtended/media/icons/potions/potion_ava_red.dds',  normalize = 'esoui/art/icons/' }, -- Alliance Health Draught (Unstoppable )
+    [72928] = { icon = 'LuiExtended/media/icons/potions/potion_ava_red.dds',  normalize = 'esoui/art/icons/' }, -- Alliance Health Draught (Major Fortitude)
+    [72933] = { icon = 'LuiExtended/media/icons/potions/potion_ava_teal.dds',  normalize = 'esoui/art/icons/' }, -- Alliance Spell Draught (Major Sorcery)
+    [72932] = { icon = 'LuiExtended/media/icons/potions/potion_ava_blue.dds',  normalize = 'esoui/art/icons/' }, -- Alliance Spell Draught (Major Intellect)
+    [78054] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds',  normalize = 'esoui/art/icons/' }, -- Roguish Stealth Draught (Major Endurance)
+    [78081] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds',  normalize = 'esoui/art/icons/' }, -- Roguish Escape Draught (Major Expedition)
+    [78080] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds',  normalize = 'esoui/art/icons/' }, -- Roguish Escape Draught (Major Endurance)
+
+    -- Crown Store Potions
+    [68405] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds',  normalize = 'esoui/art/icons/' }, -- Crown Tri-Restoration Potion (Major Fortitude)
+    [68406] = { icon = 'LuiExtended/media/icons/potions/potion_crown_blue.dds',  normalize = 'esoui/art/icons/' }, -- Crown Tri-Restoration Potion (Major Intellect)
+    [68408] = { icon = 'LuiExtended/media/icons/potions/potion_crown_green.dds',  normalize = 'esoui/art/icons/' }, -- Crown Tri-Restoration Potion (Major Endurance)
+    [86683] = { icon = 'LuiExtended/media/icons/potions/potion_crown_blue.dds',  normalize = 'esoui/art/icons/' }, -- Crown Spellcaster's Elixir (Major Intellect)
+    [86684] = { icon = 'LuiExtended/media/icons/potions/potion_crown_teal.dds',  normalize = 'esoui/art/icons/' }, -- Crown Spellcaster's Elixir (Major Prophecy)
+    [86685] = { icon = 'LuiExtended/media/icons/potions/potion_crown_teal.dds',  normalize = 'esoui/art/icons/' }, -- Crown Spellcaster's Elixir (Major Sorcery)
+    [86697] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds',  normalize = 'esoui/art/icons/' }, -- Crown Survivor's Elixir (Major Fortitude)
+    [86698] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds',  normalize = 'esoui/art/icons/' }, -- Crown Survivor's Elixir (Unstoppable)
+    [86693] = { icon = 'LuiExtended/media/icons/potions/potion_crown_green.dds',  normalize = 'esoui/art/icons/' }, -- Crown Warrior's Elixir (Major Endurance)
+    [86694] = { icon = 'LuiExtended/media/icons/potions/potion_crown_yellow.dds',  normalize = 'esoui/art/icons/' }, -- Crown Warrior's Elixir (Major Savagery)
+    [86695] = { icon = 'LuiExtended/media/icons/potions/potion_crown_yellow.dds',  normalize = 'esoui/art/icons/' }, -- Crown Warrior's Elixir (Major Brutality)
+    [92415] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds',  normalize = 'esoui/art/icons/' }, -- Major Fortitude (Gold Coast Swift Survivor Elixir)
+    [92418] = { icon = 'LuiExtended/media/icons/potions/potion_crown_green.dds',  normalize = 'esoui/art/icons/' }, -- Major Expedition (Gold Coast Swift Survivor Elixir)
+    [92416] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds',  normalize = 'esoui/art/icons/' }, -- Unstoppable (Gold Coast Swift Survivor Elixir)
+
+}
+
+-- TODO: Fill in this table with icons for normalizations
+Effects.PoisonIconTable = {
+
+    -- Crafted Poisons (2 Traits)
+
+    [79284] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Drain Spell Resist (Ward-Draining Poison) DEBUFF
+    [79285] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Ward (Ward-Draining Poison) BUFF
+    [79087] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Breach (Breaching Poison) DEBUFF
+    [79309] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_r.dds', normalize = 'esoui/art/icons/' }, -- Drain Physical Resist (Resolve-Draining Poison) DEBUFF
+    [79310] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Resolve (Resolve-Draining Poison) BUFF
+    [79090] = { icon = 'LuiExtended/media/icons/poisons/poison_1_orange_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Fracture (Fracturing Poison) DEBUFF
+    [79193] = { icon = 'LuiExtended/media/icons/poisons/poison_2_cyan_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Cowardice (Sorcery-Draining Poison) DEBUFF
+    [79221] = { icon = 'LuiExtended/media/icons/poisons/poison_2_cyan_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Sorcery (Sorcery-Draining Poison) BUFF
+    [79069] = { icon = 'LuiExtended/media/icons/poisons/poison_1_cyan_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Cowardice (Cowardice Poison) DEBUFF
+    [79280] = { icon = 'LuiExtended/media/icons/poisons/poison_2_yellow_r.dds', normalize = 'esoui/art/icons/' }, -- Drain Weapon Power (Brutality-Draining Poison) DEBUFF
+    [79281] = { icon = 'LuiExtended/media/icons/poisons/poison_2_yellow_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Brutality (Brutality-Draining Poison) BUFF
+    [79083] = { icon = 'LuiExtended/media/icons/poisons/poison_1_yellow_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Maim (Maiming Poison) DEBUFF
+    [79446] = { icon = 'LuiExtended/media/icons/poisons/poison_1_cyan_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Uncertainty (Prophecy-Draining Poison) DEBUFF
+    [79447] = { icon = 'LuiExtended/media/icons/poisons/poison_1_cyan_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Prophecy (Prophecy-Draining Poison) BUFF
+    [79117] = { icon = 'LuiExtended/media/icons/poisons/poison_1_cyan_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Uncertainty (Uncertainty Poison) DEBUFF
+    [79450] = { icon = 'LuiExtended/media/icons/poisons/poison_1_yellow_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Enervation (Savagery-Draining Poison) DEBUFF
+    [79453] = { icon = 'LuiExtended/media/icons/poisons/poison_1_yellow_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Savagery (Savagery-Draining Poison) BUFF
+    [79113] = { icon = 'LuiExtended/media/icons/poisons/poison_1_yellow_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Enervation (Enervating Poison) DEBUFF
+    [79457] = { icon = 'LuiExtended/media/icons/poisons/poison_2_red_r.dds', normalize = 'esoui/art/icons/' }, -- Immobilize (Escapist's Poison) DEBUFF
+    [79458] = { icon = 'LuiExtended/media/icons/poisons/poison_2_red_g.dds', normalize = 'esoui/art/icons/' }, -- Unstoppable (Escapist's Poison) BUFF
+    [79122] = { icon = 'LuiExtended/media/icons/poisons/poison_1_red_r.dds', normalize = 'esoui/art/icons/' }, -- Immobilize (Entrapping Poison) DEBUFF
+    [79996] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Revealing Poison (Stealth-Draining Poison) DEBUFF
+    [80003] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Marking Poison (Conspicuous Poison) DEBUFF
+    [79367] = { icon = 'LuiExtended/media/icons/poisons/poison_2_green_r.dds', normalize = 'esoui/art/icons/' }, -- Hindrance (Speed-Draining Poison) DEBUFF
+    [79368] = { icon = 'LuiExtended/media/icons/poisons/poison_2_green_g.dds', normalize = 'esoui/art/icons/' }, -- Major Expedition (Speed-Draining Poison) BUFF
+    [79094] = { icon = 'LuiExtended/media/icons/poisons/poison_1_green_r.dds', normalize = 'esoui/art/icons/' }, -- Hindrance (Hindering Poison) DEBUFF
+    [79723] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Vulnerability (Protection-Reversing Poison) DEBUFF
+    [79725] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Protection (Protection-Reversing Poison) BUFF
+    [79715] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Vulnerability (Vulnerability Poison) DEBUFF
+    [79851] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Defile (Vitality-Draining Poison) DEBUFF
+    [79852] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Vitality (Vitality-Draining Poison) BUFF
+    [79861] = { icon = 'LuiExtended/media/icons/poisons/poison_1_orange_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Defile (Defiling Poison) DEBUFF
+    [125203] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Trauma (Traumatic Poison) DEBUFF
+    [125204] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Heroism (Traumatic Poison) BUFF
+
+    -- Crafted Poisons (3 Traits)
+    [79306] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Drain Spell Resist (Ward-Draining Poison) DEBUFF
+    [79307] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Ward (Ward-Draining Poison) BUFF
+    [79086] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Breach (Breaching Poison) DEBUFF
+    [79311] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_r.dds', normalize = 'esoui/art/icons/' }, -- Drain Physical Resist (Resolve-Draining Poison) DEBUFF
+    [79312] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Resolve (Resolve-Draining Poison) BUFF
+    [79091] = { icon = 'LuiExtended/media/icons/poisons/poison_1_orange_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Fracture (Fracturing Poison) DEBUFF
+    [79278] = { icon = 'LuiExtended/media/icons/poisons/poison_2_cyan_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Cowardice (Sorcery-Draining Poison) DEBUFF
+    [79279] = { icon = 'LuiExtended/media/icons/poisons/poison_2_cyan_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Sorcery (Sorcery-Draining Poison) BUFF
+    [79082] = { icon = 'LuiExtended/media/icons/poisons/poison_1_cyan_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Cowardice (Cowardice Poison) DEBUFF
+    [79282] = { icon = 'LuiExtended/media/icons/poisons/poison_2_yellow_r.dds', normalize = 'esoui/art/icons/' }, -- Drain Weapon Power (Brutality-Draining Poison) DEBUFF
+    [79283] = { icon = 'LuiExtended/media/icons/poisons/poison_2_yellow_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Brutality (Brutality-Draining Poison) BUFF
+    [79085] = { icon = 'LuiExtended/media/icons/poisons/poison_1_yellow_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Maim (Maiming Poison) DEBUFF
+    [79448] = { icon = 'LuiExtended/media/icons/poisons/poison_1_cyan_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Uncertainty (Prophecy-Draining Poison) DEBUFF
+    [79449] = { icon = 'LuiExtended/media/icons/poisons/poison_1_cyan_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Prophecy (Prophecy-Draining Poison) BUFF
+    -- No Uncertainty
+    [79454] = { icon = 'LuiExtended/media/icons/poisons/poison_1_yellow_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Enervation (Savagery-Draining Poison) DEBUFF
+    [79455] = { icon = 'LuiExtended/media/icons/poisons/poison_1_yellow_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Savagery (Savagery-Draining Poison) BUFF
+    [79116] = { icon = 'LuiExtended/media/icons/poisons/poison_1_yellow_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Enervation (Enervating Poison) DEBUFF
+    [79459] = { icon = 'LuiExtended/media/icons/poisons/poison_2_red_r.dds', normalize = 'esoui/art/icons/' }, -- Immobilize (Escapist's Poison) DEBUFF
+    [79460] = { icon = 'LuiExtended/media/icons/poisons/poison_2_red_g.dds', normalize = 'esoui/art/icons/' }, -- Unstoppable (Escapist's Poison) BUFF
+    -- No Entrapping
+    [80002] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Revealing Poison (Stealth-Draining Poison) DEBUFF
+    [80004] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Marking Poison (Conspicuous Poison) DEBUFF
+    [79369] = { icon = 'LuiExtended/media/icons/poisons/poison_2_green_r.dds', normalize = 'esoui/art/icons/' }, -- Hindrance (Speed-Draining Poison) DEBUFF
+    [79370] = { icon = 'LuiExtended/media/icons/poisons/poison_2_green_g.dds', normalize = 'esoui/art/icons/' }, -- Major Expedition (Speed-Draining Poison) BUFF
+    [79102] = { icon = 'LuiExtended/media/icons/poisons/poison_1_green_r.dds', normalize = 'esoui/art/icons/' }, -- Hindrance (Hindering Poison) DEBUFF
+    -- No Gradual Ravage Health
+    [79726] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Vulnerability (Protection-Reversing Poison) DEBUFF
+    [79727] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Protection (Protection-Reversing Poison) BUFF
+    [79720] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Vulnerability (Vulnerability Poison) DEBUFF
+    [79854] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Defile (Vitality-Draining Poison) DEBUFF
+    [79855] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Vitality (Vitality-Draining Poison) BUFF
+    [79862] = { icon = 'LuiExtended/media/icons/poisons/poison_1_orange_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Defile (Defiling Poison) DEBUFF
+    [125205] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Traumatized (Traumatic Poison) DEBUFF
+    [125206] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Heroism (Traumatic Poison) BUFF
+
+    -- Vendor Poisons
+    [81554] = { icon = 'LuiExtended/media/icons/poisons/poison_1_green_r.dds', normalize = 'esoui/art/icons/' }, -- Hindrance (Cloudy Hindering Poison) DEBUFF
+
+    -- Crown Poisons
+    [88477] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_green_r.dds', normalize = 'esoui/art/icons/' }, -- Hindrance (Crown Debilitating Poison)
+    [88469] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_yellow_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Maim (Crown Enfeebling Poison)
+    [88470] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_orange_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Defile (Crown Enfeebling Poison)
+    [88462] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_red_r.dds', normalize = 'esoui/art/icons/' }, -- Immobilize (Crown Trapping Poison)
+    [88463] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_green_r.dds', normalize = 'esoui/art/icons/' }, -- Hindrance (Crown Trapping Poison)
+
+}
+
 --------------------------------------------------------------------------------------------------------------------------------
 -- Override various information displayed for Effect auras
 --------------------------------------------------------------------------------------------------------------------------------
