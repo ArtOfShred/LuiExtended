@@ -3087,7 +3087,6 @@ Effects.PotionIconTable = {
     [92415] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds',  normalize = 'esoui/art/icons/' }, -- Major Fortitude (Gold Coast Swift Survivor Elixir)
     [92418] = { icon = 'LuiExtended/media/icons/potions/potion_crown_green.dds',  normalize = 'esoui/art/icons/' }, -- Major Expedition (Gold Coast Swift Survivor Elixir)
     [92416] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds',  normalize = 'esoui/art/icons/' }, -- Unstoppable (Gold Coast Swift Survivor Elixir)
-
 }
 
 -- TODO: Fill in this table with icons for normalizations
@@ -3176,7 +3175,15 @@ Effects.PoisonIconTable = {
     [88470] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_orange_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Defile (Crown Enfeebling Poison)
     [88462] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_red_r.dds', normalize = 'esoui/art/icons/' }, -- Immobilize (Crown Trapping Poison)
     [88463] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_green_r.dds', normalize = 'esoui/art/icons/' }, -- Hindrance (Crown Trapping Poison)
+}
 
+-- TODO: Fill in this table with icons for normalizations
+Effects.StatusEffectIconTable = {
+    [21927] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_diseased.dds', normalize = 'esoui/art/icons/' }, -- Minor Defile (Disease Status Effect)
+    [68368] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_chill.dds', normalize = 'esoui/art/icons/' }, -- Minor Maim (Frost Status Effect)
+    [130815] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_chill.dds', normalize = 'esoui/art/icons/' }, -- Minor Maim (Frost Status Effect)s
+    [68359] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_concussion.dds', normalize = 'esoui/art/icons/' }, -- Minor Vulnerability (Shock Status Effect)
+    [130809] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_concussion.dds', normalize = 'esoui/art/icons/' }, -- Minor Vulnerability (Shock Status Effect - Siege)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------

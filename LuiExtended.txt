@@ -71,6 +71,7 @@ data/AlertTable.lua
 data/CrowdControl.lua
 data/DebugTable.lua
 data/Quests.lua
+data/Globals.lua
 
 modules/ChatAnnouncements/ChatAnnouncements.lua
 

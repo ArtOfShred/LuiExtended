@@ -33,16 +33,6 @@ local alertTypes = {
     SHARED   = "LUIE_ALERT_TYPE_SHARED",
 }
 
-local ccTypes = {
-    STUN = 1,
-    DISORIENT = 2,
-    FEAR = 3,
-    STAGGER = 4,
-    SILENCE = 5,
-    SNARE = 6,
-    UNBREAKABLE = 7,
-}
-
 -- Quadratic easing out - decelerating to zero velocity (For buff fade)
 local function EaseOutQuad(t, b, c, d)
     t = t / d
@@ -405,19 +395,19 @@ end
 
 function AbilityAlerts.CrowdControlColorSetup(crowdControl)
     if CombatInfo.SV.alerts.toggles.showCrowdControlBorder then
-        if crowdControl == ccTypes.STUN then
+        if crowdControl == LUIE_CC_TYPE_STUN then
             return CombatInfo.SV.alerts.colors.stunColor
-        elseif crowdControl == ccTypes.DISORIENT then
+        elseif crowdControl == LUIE_CC_TYPE_DISORIENT then
             return CombatInfo.SV.alerts.colors.disorientColor
-        elseif crowdControl == ccTypes.FEAR then
+        elseif crowdControl == LUIE_CC_TYPE_FEAR then
             return CombatInfo.SV.alerts.colors.fearColor
-        elseif crowdControl == ccTypes.SILENCE then
+        elseif crowdControl == LUIE_CC_TYPE_SILENCE then
             return CombatInfo.SV.alerts.colors.silenceColor
-        elseif crowdControl == ccTypes.STAGGER then
+        elseif crowdControl == LUIE_CC_TYPE_STAGGER then
             return CombatInfo.SV.alerts.colors.staggerColor
-        elseif crowdControl == ccTypes.UNBREAKABLE then
+        elseif crowdControl == LUIE_CC_TYPE_UNBREAKABLE then
             return CombatInfo.SV.alerts.colors.unbreakableColor
-        elseif crowdControl == ccTypes.SNARE then
+        elseif crowdControl == LUIE_CC_TYPE_SNARE then
             return CombatInfo.SV.alerts.colors.snareColor
         else
             return { 0, 0, 0, 0 }
@@ -439,9 +429,9 @@ function AbilityAlerts.PlayAlertSound(abilityId, alertType, crowdControl)
     local isPlay
     if alertType == alertTypes.SHARED then
         local priority = Alerts[abilityId].priority
-        if crowdControl == ccTypes.STUN or crowdControl == ccTypes.DISORIENT or crowdControl == ccTypes.FEAR or crowdControl == ccTypes.STAGGER then
+        if crowdControl == LUIE_CC_TYPE_STUN or crowdControl == LUIE_CC_TYPE_DISORIENT or crowdControl == LUIE_CC_TYPE_FEAR or crowdControl == LUIE_CC_TYPE_STAGGER then
             isPlay = (priority == 1 and Settings.toggles.soundEnable1CC) and Settings.sounds.sound1CC or (priority == 2 and Settings.toggles.soundEnable2CC) and Settings.sounds.sound2CC or (priority == 3 and Settings.toggles.soundEnable3CC) and Settings.sounds.sound3CC
-        elseif crowdControl == ccTypes.UNBREAKABLE then
+        elseif crowdControl == LUIE_CC_TYPE_UNBREAKABLE then
             isPlay = (priority == 1 and Settings.toggles.soundEnable1UB) and Settings.sounds.sound1UB or (priority == 2 and Settings.toggles.soundEnable2UB) and Settings.sounds.sound2UB or (priority == 3 and Settings.toggles.soundEnable3UB) and Settings.sounds.sound3UB
         else
             isPlay = (priority == 1 and Settings.toggles.soundEnable1) and Settings.sounds.sound1 or (priority == 2 and Settings.toggles.soundEnable2) and Settings.sounds.sound2 or (priority == 3 and Settings.toggles.soundEnable3) and Settings.sounds.sound3
@@ -551,11 +541,11 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     -- Get menu setting for filtering and bail out here depending on that setting
     local option = Settings.toggles.alertOptions
     -- Bail out if we only have CC selected and this is not CC
-    if option == 2 and crowdControl ~= ccTypes.STUN and crowdControl ~= ccTypes.DISORIENT and crowdControl ~= ccTypes.FEAR and crowdControl ~= ccTypes.STAGGER and crowdControl ~= ccTypes.UNBREAKABLE then
+    if option == 2 and crowdControl ~= LUIE_CC_TYPE_STUN and crowdControl ~= LUIE_CC_TYPE_DISORIENT and crowdControl ~= LUIE_CC_TYPE_FEAR and crowdControl ~= LUIE_CC_TYPE_STAGGER and crowdControl ~= LUIE_CC_TYPE_UNBREAKABLE then
         return
     end
     -- Bail out if we only have unbreakable selected and this is not unbreakable
-    if option == 3 and crowdControl ~= ccTypes.UNBREAKABLE then
+    if option == 3 and crowdControl ~= LUIE_CC_TYPE_UNBREAKABLE then
         return
     end
 
