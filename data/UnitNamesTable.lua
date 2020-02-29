@@ -68,7 +68,9 @@ LUIE.Data.UnitNames = {
     NPC_Dremora_Kyngald                   = 'Dremora Kyngald',
     NPC_Flame_Atronach                    = 'Flame Atronach',
     NPC_Skeletal_Infernal                 = 'Skeletal Infernal',
-    NPC_Skeletal_Archer                   = 'Skeletal Archer',
+    NPC_Skeletal_Archer                   = 'Skeletal Archer', -- VERIFIED - DUNGEON - CRYPT OF HEARTS I
+    NPC_Skeletal_Pyromancer               = 'Skeletal Pyromancer', -- VERIFIED - DUNGEON - CRYPT OF HEARTS I
+    NPC_Skeletal_Runecaster               = 'Skeletal Runecaster', -- VERIFIED - DUNGEON - CRYPT OF HEARTS I
     NPC_Skeletal_Tempest                  = 'Skeletal Tempest',
     NPC_Skeletal_Striker                  = 'Skeletal Striker',
     NPC_Skeletal_Slayer                   = 'Skeletal Slayer',
@@ -441,6 +443,15 @@ LUIE.Data.UnitNames = {
     Boss_Uulgarg_the_Risen                = 'Uulgarg the Risen',
     Boss_Garron_the_Returned              = 'Garron the Returned',
     Boss_The_Forgotten_One                = 'The Forgotten One',
+
+    -- Crypt of Hearts I
+    Boss_The_Mage_Master                  = 'The Mage Master',
+    Boss_Archmaster_Siniel                = 'Archmaster Siniel',
+    Boss_Deaths_Leviathan                 = 'Death\'s Leviathan',
+    Boss_Uulkar_Bonehand                  = 'Uulkar Bonehand',
+    Boss_Dogas_the_Berserker              = 'Dogas the Berserker',
+    Boss_Ilambris_Athor                   = 'Ilambris-Athor',
+    Boss_Ilambris_Zaven                   = 'Ilambris-Zaven',
 
     -- Frostvault
     NPC_Coldsnap_Ogre                     = 'Coldsnap Ogre',

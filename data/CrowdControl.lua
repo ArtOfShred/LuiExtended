@@ -361,6 +361,15 @@ CrowdControl.aoeNPCBoss = {
     [36869] = 1, -- Scorching Flames (Uulgarg the Risen)
     [36944] = 1, -- Necrotic Barrage (Garron the Returned)
 
+    -- Crypt of Hearts I
+    [22716] = 1, -- Necrotic Ritual (Archmaster Siniel)
+    [46950] = 1, -- Fire Trail (Death's Leviathan)
+    [22432] = 1, -- Electric Prison (Lightning Rod)
+    [22388] = 1, -- Rain Fire (Ilambris-Zaven)
+    [22398] = 1, -- Call Lightning (Ilambris-Athor)
+    [22401] = 0, -- Call Lightning (Ilambris-Athor)
+    [22403] = 0, -- Call Lightning (Ilambris-Athor)
+
 }
 
 CrowdControl.aoeNPCElite = {

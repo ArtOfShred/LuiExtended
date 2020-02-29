@@ -643,11 +643,15 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
         local zoneName = GetPlayerLocationName()
         if AlertsZone[abilityId][index] then
             unitName = AlertsZone[abilityId][index]
-            d(index .. ": " .. unitName)
+            if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
+                d(index .. ": " .. unitName)
+            end
         end
         if AlertsZone[abilityId][zoneName] then
             unitName = AlertsZone[abilityId][zoneName]
-            d(zoneName .. ": " .. unitName)
+            if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
+                d(zoneName .. ": " .. unitName)
+            end
         end
     end
 

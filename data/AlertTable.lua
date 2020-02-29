@@ -44,7 +44,7 @@ LUIE.Data.AlertTable = {
 
     -- OTHER MODIFIERS
     -- refire = "x" -- refire duration
-    -- ignoreRefresh = true -- gnores refresh event here
+    -- ignoreRefresh = true -- Ignores refresh event here
     -- neverShowInterrupt = true -- Never show an interrupt event here
     -- effectOnlyInterrupt = true -- Show an interrupt only when this effect fades early off a unit. Used for abilities that a target casts on another target.
     -- alwaysShowInterrupt = true -- Show an interrupt even if this effect doesn't display a duration.
@@ -80,8 +80,8 @@ LUIE.Data.AlertTable = {
     [39058] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = LUIE_CC_TYPE_UNBREAKABLE }, -- Bear Trap (Bear Trap)
 
     -- Synergy
-    [12439] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 2500 }, -- Burning Arrow (Synergy)
-    [10805] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1500, refire = 2500, bossMatch = { Unitnames.Boss_Calixte_Darkblood } }, -- Ignite (Synergy)
+    [12439] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 2500, duration = 1800, postCast = 4000 }, -- Burning Arrow (Synergy)
+    [10805] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1500, postCast = 4000, refire = 2500, bossMatch = { Unitnames.Boss_Calixte_Darkblood } }, -- Ignite (Synergy)
 
     -- Abilities
     [29378] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1600, cc = LUIE_CC_TYPE_STUN }, -- Uppercut (Ravager)
@@ -110,7 +110,7 @@ LUIE.Data.AlertTable = {
     [81217] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 1533, bossMatch = { Unitnames.Boss_Captain_Blanchete } }, -- Thunder Hammer (Thundermaul - Boss)
 
     [36470] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 2500, cc = LUIE_CC_TYPE_STUN }, -- Veiled Strike (Nightblade)
-    [44345] = { block = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = LUIE_CC_TYPE_STUN, duration = 600 }, -- Soul Tether (Nightblade)
+    [44345] = { block = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = LUIE_CC_TYPE_STUN, duration = 600, bossMatch = { Unitnames.Boss_Dogas_the_Berserker } }, -- Soul Tether (Nightblade)
 
     [34742] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Fiery Breath (Dragonknight)
     [34646] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1800 }, -- Lava Whip (Dragonknight)
@@ -1214,6 +1214,26 @@ LUIE.Data.AlertTable = {
     [36537] = { power = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Shield Sibling (Allene & Varaine Pellingare)
     [49053] = { power = true, priority = 1, auradetect = true, refire = 5000 }, -- Toxic Fumes (Allene Pellingare)
 
+    -- Crypt of Hearts I
+    [22714] = { avoid = true, priority = 1, auradetect = true, bossName = true }, -- Necrotic Ritual (Archmaster Siniel)
+    [22768] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true, cc = LUIE_CC_TYPE_FEAR }, -- Induce Horror (Archmaster Siniel)
+    [22808] = { power = true, priority = 1, auradetect = true, ignoreRefresh = true }, -- Corpse Shield (Archmaster Siniel)
+    [22787] = { unmit = true, priority = 1, auradetect = true }, -- Corpse Explosion (Archmaster Siniel)
+
+    [111957] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true, cc = LUIE_CC_TYPE_STUN, duration = 1500, postCast = 1500 }, -- Trample (Death's Leviathan)
+    [22527] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true, duration = 2000 }, -- Paralyzing Slam (Death's Leviathan)
+    [46680] = { power = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, bossName = true, refire = 1000 }, -- Immolate Colossus (Death's Leviathan)
+
+    [22338] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1500, cc = LUIE_CC_TYPE_UNBREAKABLE }, -- Axe Strike (Ilambris-Athor)
+    [32425] = { power = true, priority = 1, auradetect = true }, -- Lightning Empowerment (Ilambris-Athor)
+    [22456] = { power = true, priority = 1, auradetect = true }, -- Lightning Omnipotence (Ilambris-Athor)
+    [22397] = { avoid = true, priority = 1, auradetect = true, duration = 11000, neverShowInterrupt = true }, -- Call Lightning (Ilambris-Athor)
+    [22342] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 1000, postCast = 1500, bossMatch = { Unitnames.Boss_Ilambris_Zaven } }, -- Rolling Fire (Ilambris-Zaven)
+    [32424] = { power = true, priority = 1, auradetect = true }, -- Incensed (Ilambris-Zaven)
+    [22390] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 2500, bossMatch = { Unitnames.Boss_Ilambris_Zaven }, cc = LUIE_CC_TYPE_STUN }, -- Pyrocasm (Ilambris-Zaven)
+    [22457] = { power = true, priority = 1, auradetect = true }, -- Emit Flames (Ilambris-Zaven)
+    [22383] = { avoid = true, priority = 1, auradetect = true, duration = 6100, neverShowInterrupt = true }, -- Rain Fire (Ilambris-Zaven)
+
     -- Frostvault
     [109574] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 3250 }, -- Fire Power (Coldsnap Harrier)
     [117352] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Whirlwind (Coldsnap Snowstalker)
@@ -1237,6 +1257,9 @@ LUIE.Data.AlertZoneOverride = {
 
     [36985] = { -- Void (Time Bomb Mage)
         [555] = Unitnames.Boss_Vicereeve_Pelidil, -- Abecean Sea
+
+        -- DUNGEONS
+        [130] = Unitnames.NPC_Skeletal_Runecaster, -- Crypt of Hearts I
     },
 
     [29471] = { -- Thunder Thrall (Storm Mage)
@@ -1304,6 +1327,9 @@ LUIE.Data.AlertZoneOverride = {
         [Zonenames.Zone_Heritance_Proving_Ground] = Unitnames.NPC_Heritance_Deadeye, -- Heritance Proving Ground (Auridon)
 
         [435] = Unitnames.NPC_Sainted_Archer, -- Cathedral of the Golden Path
+
+        -- DUNGEONS
+        [130] = Unitnames.NPC_Skeletal_Archer, -- Crypt of Hearts I
     },
     [28628] = { -- Volley (Archer)
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- Maormer Invasion Camp (Auridon)
@@ -1323,6 +1349,9 @@ LUIE.Data.AlertZoneOverride = {
         [Zonenames.Zone_Heritance_Proving_Ground] = Unitnames.NPC_Heritance_Deadeye, -- Heritance Proving Ground (Auridon)
 
         [435] = Unitnames.NPC_Sainted_Archer, -- Cathedral of the Golden Path
+
+        -- DUNGEONS
+        [130] = Unitnames.NPC_Skeletal_Archer, -- Crypt of Hearts I
     },
     [12439] = { -- Burning Arrow (Synergy)
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- South Beacon (Auridon)
@@ -1342,6 +1371,9 @@ LUIE.Data.AlertZoneOverride = {
         [Zonenames.Zone_Heritance_Proving_Ground] = Unitnames.NPC_Heritance_Deadeye, -- Heritance Proving Ground (Auridon)
 
         [435] = Unitnames.NPC_Sainted_Archer, -- Cathedral of the Golden Path
+
+        -- DUNGEONS
+        [130] = Unitnames.NPC_Skeletal_Archer, -- Crypt of Hearts I
     },
 
     --[88554] = { -- Summon the Dead (Necromancer)
@@ -1375,6 +1407,9 @@ LUIE.Data.AlertZoneOverride = {
         [Zonenames.Zone_Hectahame_Armory] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Ritual Chamber
+
+        -- DUNGEONS
+        -- [130] = Unitnames.NPC_Skeletal_Pyromancer, -- Crypt of Hearts I -- Can't use because The Mage Master's Slave(s) also use these spells
     },
     [47095] = { -- Fire Rune (Fire Mage)
         [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Incendiary, -- Silsailen (Auridon)
@@ -1389,6 +1424,9 @@ LUIE.Data.AlertZoneOverride = {
         [Zonenames.Zone_Hectahame_Armory] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Ritual Chamber
+
+        -- DUNGEONS
+        -- [130] = Unitnames.NPC_Skeletal_Pyromancer, -- Crypt of Hearts I -- Can't use because The Mage Master's Slave(s) also use these spells
     },
 
     [8779] = { -- Lightning Onslaught (Spider Daedra)
@@ -1434,9 +1472,15 @@ LUIE.Data.AlertZoneOverride = {
     },
     [37129] = { -- Ice Cage (Battlemage)
         [548] = Unitnames.Elite_Baham, -- Silatar
+
+        -- DUNGEONS
+        [130] = Unitnames.Boss_The_Mage_Master -- Crypt of Hearts I
     },
     [44216] = { -- Negate Magic (Battlemage - Elite)
         [548] = Unitnames.Elite_Baham, -- Silatar
+
+        -- DUNGEONS
+        [130] = Unitnames.Boss_The_Mage_Master -- Crypt of Hearts I
     },
 
     [3767] = { -- Choking Pollen (Lurcher)
@@ -1481,16 +1525,29 @@ LUIE.Data.AlertZoneOverride = {
         [Zonenames.Zone_Hectahame_Armory] = Unitnames.NPC_Bone_Colossus, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = Unitnames.NPC_Bone_Colossus, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Bone_Colossus, -- Hectahame Ritual Chamber
+
+        -- DUNGEONS
+        [130] = Unitnames.NPC_Bone_Colossus, -- Crypt of Hearts I
     },
     [5030] = { -- Voice to Wake the Dead (Bone Colossus)
         [Zonenames.Zone_Hightide_Keep] = Unitnames.Elite_Garggeel, -- Hightide Keep (Auridon)
+        [399] = Unitnames.NPC_Bone_Colossus, -- Wansalen (Auridon - Delve) -- TODO: Is this needed?
+
+        -- DUNGEONS
+        [130] = Unitnames.NPC_Bone_Colossus, -- Crypt of Hearts I
     },
 
     [22521] = { -- Defiled Ground (Lich)
         [559] = Unitnames.Boss_Shade_of_Naemon, -- Valenheart
+
+        -- DUNGEONS
+        [130] = Unitnames.Boss_Uulkar_Bonehand, -- Crypt of Hearts I
     },
     [73925] = { -- Soul Cage (Lich)
         [559] = Unitnames.Boss_Shade_of_Naemon, -- Valenheart
+
+        -- DUNGEONS
+        [130] = Unitnames.Boss_Uulkar_Bonehand, -- Crypt of Hearts I
     },
 
     [44736] = { -- Swinging Cleave (Troll)

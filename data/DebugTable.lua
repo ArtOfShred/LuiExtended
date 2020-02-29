@@ -8090,6 +8090,7 @@ LUIE.DebugAuras = {
     [44352] = true, -- Soul Tether -- Nightblade
     [44350] = true, -- Soul Tether -- Nightblade
     [44346] = true, -- Soul Tether -- Nightblade
+    [137661] = true, -- Soul Tether -- Nightblade
     [53462] = true, -- Siphoning Strikes
     [53469] = true, -- Leeching Strikes
 
@@ -14970,7 +14971,118 @@ LUIE.DebugAuras = {
     [43511] = true, -- Remove Buffs (Player)
     [36876] = true, -- DUN_WSH Kill Pel (Gedric Serre - Theater)
 
+    -- Crypt of Hearts I
+    [85749] = true, -- Teleport (Crypt of Hearts I)
+    [39126] = true, -- Soul Prison (Shard of Alanwe)
 
+    [22341] = true, -- Frenzy (Zombie Stalker)
+
+    [22666] = true, -- Dead (Zombie)
+    [22713] = true, -- Phantasmal Bolt (Archmaster Siniel)
+    [22714] = true, -- Necrotic Ritual (Archmaster Siniel)
+    [22715] = true, -- Necrotic Ritual (Archmaster Siniel)
+    [22716] = true, -- Necrotic Ritual (Archmaster Siniel)
+    [22768] = true, -- Induce Horror (Archmaster Siniel)
+    [22770] = true, -- Induce Horror (Archmaster Siniel)
+    [32096] = true, -- Induce Horror (Archmaster Siniel)
+    [35979] = true, -- Induce Horror (Archmaster Siniel)
+
+    [46578] = true, -- Teleport (Archmaster Siniel)
+    [46581] = true, -- Daedric Step (Archmaster Siniel)
+    [46580] = true, -- Daedric Step (Archmaster Siniel)
+    [46579] = true, -- Daedric Step (Archmaster Siniel)
+    [22668] = true, -- Awaken Dead (Archmaster Siniel)
+    [46585] = true, -- Wall of Souls (Archmaster Siniel)
+    [22779] = true, -- Corpse Shield (Archmaster Siniel)
+    [22808] = true, -- Corpse Shield (Archmaster Siniel)
+    [32255] = true, -- Corpse Shield (Archmaster Siniel)
+
+    [32256] = true, -- 5 (Archmaster Siniel)
+    [32257] = true, -- 5 (Archmaster Siniel)
+    [32258] = true, -- 5 (Archmaster Siniel)
+    [32259] = true, -- 5 (Archmaster Siniel)
+    [22787] = true, -- Corpse Explosion (Archmaster Siniel)
+    [22807] = true, -- Corpse Explosion (Archmaster Siniel)
+    [22806] = true, -- Corpse Explosion (Archmaster Siniel)
+    [22702] = true, -- Get Up (Zombie)
+    [22704] = true, -- Swipe (Zombie)
+
+    [22588] = true, -- Ground Rise (Death's Leviathan)
+    [22488] = true, -- Backhand (Death's Leviathan)
+    [46947] = true, -- Trample (Death's Leviathan)
+    [111957] = true, -- Trample (Death's Leviathan)
+    [46957] = true, -- Trample (Death's Leviathan)
+    [46953] = true, -- Trample (Death's Leviathan)
+    [46949] = true, -- Damage Disabler (Death's Leviathan)
+    [46952] = true, -- Knocked Down (Death's Leviathan)
+    [22527] = true, -- Paralyzing Slam (Death's Leviathan)
+    [22535] = true, -- Paralyzing Slam (Death's Leviathan)
+    [22476] = true, -- Run to Fire Pile (Death's Leviathan)
+    [46679] = true, -- Immolate (Death's Leviathan)
+    [46680] = true, -- Immolate Colossus (Death's Leviathan)
+    [46954] = true, -- Fire Trail (Death's Leviathan)
+    [46951] = true, -- Fire Trail (Death's Leviathan)
+    [46950] = true, -- Fire Trail (Death's Leviathan)
+    [46948] = true, -- Fire Trail (Death's Leviathan)
+    [23693] = true, -- Paralyzing Slam (Death's Leviathan)
+    [23685] = true, -- Paralyzing Slam (Death's Leviathan)
+    [22576] = true, -- Paralyzing Slam (Death's Leviathan)
+    [46674] = true, -- Paralyzing Slam (Death's Leviathan)
+    [46673] = true, -- Paralyzing Slam (Death's Leviathan)
+    [46677] = true, -- Paralyzing Slam (Death's Leviathan)
+    [46675] = true, -- Paralyzing Slam (Death's Leviathan)
+    [22491] = true, -- Ignited (Death's Leviathan)
+    [111923] = true, -- Ignited (Death's Leviathan)
+
+    [39286] = true, -- Tormenting Blade (Rulanir)
+    [25345] = true, -- Q4379-Anguish Snare (Faindor)
+    [25346] = true, -- Fireball (Faindor)
+    [59615] = true, -- Alanwe's Prison (Alanwe)
+
+    [22301] = true, -- Cleaving Swing (Ilambris-Athor)
+    [32425] = true, -- Lightning Empowerment (Ilambris-Athor)
+    [22450] = true, -- Summon Lightning Rod (Ilambris-Athor)
+    [22431] = true, -- Lightning Rod (Ilambris-Athor)
+    [22432] = true, -- Electric Prison (Ilambris-Athor)
+    [22338] = true, -- Axe Strike (Ilambris-Athor)
+    [46691] = true, -- Fire Backlash (Ilambris-Athor)
+    [46692] = true, -- CON_Knockback&Knockdown (Ilambris-Athor)
+
+    [22456] = true, -- Lightning Omnipotence (Ilambris-Zaven)
+    [33299] = true, -- Center Picker (Ilambris-Zaven)
+    [33297] = true, -- Center of Room (Generic Invisible Target)
+    [33300] = true, -- Pillar Picker (Ilambris-Athor)
+    [33298] = true, -- Lightning Pillars (Ilambris-Athor)
+    [52598] = true, -- Pillar Picker (Ilambris-Athor)
+
+    [22397] = true, -- Call Lightning (Ilambris-Athor)
+    [33295] = true, -- Lightning (Ilambris Athor)
+    [22399] = true, -- Call Lightning (Ilambris-Athor)
+    [22402] = true, -- Call Lightning (Ilambris-Athor)
+    [22404] = true, -- Call Lightning (Ilambris-Athor)
+    [22398] = true, -- Call Lightning (Ilambris-Athor)
+    [22401] = true, -- Call Lightning (Ilambris-Athor)
+    [22403] = true, -- Call Lightning (Ilambris-Athor)
+
+    [22302] = true, -- Fire Bolt (Ilambris-Zaven)
+    [22342] = true, -- Rolling Fire (Ilambris-Zaven)
+    [22344] = true, -- Rolling Fire (Ilambris-Zaven)
+    [32424] = true, -- Incensed (Ilambris-Zaven)
+    [32436] = true, -- Incensed (Ilambris-Zaven)
+    [32481] = true, -- Incensed (Ilambris-Zaven)
+    [22390] = true, -- Pyrocasm (Ilambris-Zaven)
+    [44087] = true, -- Fire Backlash (Ilambris-Zaven)
+    [44088] = true, -- CON_Knockback&Knockdown (Ilambris-Zaven)
+    [22457] = true, -- Emit Flames (Ilambris-Zaven)
+    [32444] = true, -- Emit Flames (Ilambris-Zaven)
+    [32482] = true, -- Emit Flames (Ilambris-Zaven)
+    [32443] = true, -- Emit Flames (Ilambris-Zaven)
+    [52604] = true, -- Emit Flames (Ilambris-Zaven)
+    [22383] = true, -- Rain Fire (Ilambris-Zaven)
+    [22386] = true, -- Rain Fire (Ilambris-Zaven)
+    [22388] = true, -- Rain Fire (Ilambris-Zaven)
+
+    [25662] = true, -- Merging of the Shards (Alanwe)
 
 
     -- Frostvault

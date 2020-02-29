@@ -1389,6 +1389,13 @@ LUIE.Data.Tooltips = {
     Skill_Rend_Soul                                 = GetString(SI_LUIE_SKILL_REND_SOUL_TP),
     Skill_Scorching_Flames                          = GetString(SI_LUIE_SKILL_SCORCHING_FLAMES_TP),
 
+    -- Crypt of Hearts I
+    Skill_Immolate_Colossus                         = GetString(SI_LUIE_SKILL_IMMOLATE_COLOSSUS_TP),
+    Skill_Lightning_Empowerment                     = GetString(SI_LUIE_SKILL_LIGHTNING_EMPOWERMENT_TP),
+    Skill_Lightning_Empowerment_Enrage              = GetString(SI_LUIE_SKILL_LIGHTNING_EMPOWERMENT_ENRAGE_TP),
+    Skill_Incensed                                  = GetString(SI_LUIE_SKILL_INCENSED_TP),
+    Skill_Incensed_Enrage                           = GetString(SI_LUIE_SKILL_INCENSED_ENRAGE_TP),
+
     -- Frostvault
     Skill_Maim                                      = GetString(SI_LUIE_SKILL_MAIM_NPC_TP),
 

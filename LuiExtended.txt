@@ -60,6 +60,7 @@ i18n/settings/Settings_$(language).lua
 i18n/skills/Skills_en.lua
 i18n/skills/Skills_$(language).lua
 
+data/Globals.lua
 data/AbilityTables.lua
 data/Tooltips.lua
 data/UnitNamesTable.lua
@@ -71,7 +72,6 @@ data/AlertTable.lua
 data/CrowdControl.lua
 data/DebugTable.lua
 data/Quests.lua
-data/Globals.lua
 
 modules/ChatAnnouncements/ChatAnnouncements.lua
 

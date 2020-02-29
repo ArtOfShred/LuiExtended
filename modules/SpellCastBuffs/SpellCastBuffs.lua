@@ -405,6 +405,10 @@ function SpellCastBuffs.Initialize(enabled)
     eventManager:AddFilterForEvent(moduleName .. "Event1", EVENT_COMBAT_EVENT, REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false) -- Target -> Player
     eventManager:AddFilterForEvent(moduleName .. "Event2", EVENT_COMBAT_EVENT, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false) -- Player -> Target
     eventManager:AddFilterForEvent(moduleName .. "Event3", EVENT_COMBAT_EVENT, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER_PET, REGISTER_FILTER_IS_ERROR, false) -- Player Pet -> Target
+    for k, v in pairs(Effects.AddNameOnEvent) do
+        eventManager:RegisterForEvent(moduleName .. "Event4" .. k, EVENT_COMBAT_EVENT, SpellCastBuffs.OnCombatAddNameEvent )
+        eventManager:AddFilterForEvent(moduleName .. "Event4" .. k, EVENT_COMBAT_EVENT, REGISTER_FILTER_ABILITY_ID, k )
+    end
 
     -- Stealth Events
     eventManager:RegisterForEvent(moduleName .. "Player",          EVENT_STEALTH_STATE_CHANGED, SpellCastBuffs.StealthStateChanged )
@@ -1947,6 +1951,50 @@ end
 -- Counter variable for ACTION_RESULT_EFFECT_GAINED / ACTION_RESULT_EFFECT_FADED tracking for some buffs that are broken
 -- Handles buffs that rather than refreshing on reapplication create an individual instance and therefore have GAINED/FADED events every single time the effect ticks.
 local InternalStackCounter = { }
+
+-- Combat Event - Add Name Aura to Target
+function SpellCastBuffs.OnCombatAddNameEvent( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
+
+    -- DEBUG
+    --[[
+    LUIE.PrintToChat(abilityId)
+    LUIE.PrintToChat(name)
+    ]]--
+
+    -- Get the name of the target to apply the buff to
+    local name = Effects.AddNameOnEvent[abilityId]
+    -- Bail out if we have no name
+    if not name then return end
+
+    -- NOTE We may eventually need to iterate here, for the time being though we can just relatively reliably put this in slot 2 since slot 1 should be CC Immunity.
+    -- NOTE: We may eventually add a function handler to do other things, like make certain abilities change their CC types etc like the example below.
+    if Effects.AddNameAura[name] then
+        if result == ACTION_RESULT_EFFECT_GAINED then
+            Effects.AddNameAura[name][2] = {}
+            Effects.AddNameAura[name][2].id = abilityId
+            -- Specific to Crypt of Hearts I (Ignite Colossus)
+            if abilityId == 46680 then
+                LUIE.Data.AlertTable[22527].cc = LUIE_CC_TYPE_UNBREAKABLE
+                LUIE.Data.AlertTable[22527].block = nil
+                LUIE.Data.AlertTable[22527].dodge = nil
+                LUIE.Data.AlertTable[22527].avoid = true
+            end
+        elseif result == ACTION_RESULT_EFFECT_FADED then
+            Effects.AddNameAura[name][2] = nil
+            -- Specific to Crypt of Hearts I (Ignite Colossus)
+            if abilityId == 46680 then
+                LUIE.Data.AlertTable[22527].cc = nil
+                LUIE.Data.AlertTable[22527].block = true
+                LUIE.Data.AlertTable[22527].dodge = true
+                LUIE.Data.AlertTable[22527].avoid = false
+            end
+        end
+
+        -- Reload Effects on current target
+        SpellCastBuffs.AddNameAura()
+    end
+
+end
 
  -- Combat Event (Target = Player)
 function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )

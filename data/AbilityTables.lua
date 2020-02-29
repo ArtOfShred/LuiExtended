@@ -1334,6 +1334,11 @@ local AbilityTables = {
     Skill_Escaped_Souls               = GetString(SI_LUIE_SKILL_ESCAPED_SOULS),
     Skill_Overhead_Smash              = 20915,
 
+    -- Crypt of Hearts I
+    Skill_Trample                     = 46947,
+    Skill_Immolate                    = 46679,
+    Skill_Overwhelming_Blow           = GetString(SI_LUIE_SKILL_OVERWHELMING_BLOW),
+
     -- Frostvault
     Skill_Rending_Bleed               = 117286,
     Skill_Leaping_Crush               = 109801,

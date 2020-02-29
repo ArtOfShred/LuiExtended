@@ -777,7 +777,7 @@ function CombatInfo.ApplyFont()
     local barFontName = LUIE.Fonts[CombatInfo.SV.BarFontFace]
     if not barFontName or barFontName == "" then
         printToChat(GetString(SI_LUIE_ERROR_FONT), true)
-        barfontName = "$(MEDIUM_FONT)"
+        barFontName = "$(MEDIUM_FONT)"
     end
 
     local barFontStyle = (CombatInfo.SV.BarFontStyle and CombatInfo.SV.BarFontStyle ~= "") and CombatInfo.SV.BarFontStyle or "outline"

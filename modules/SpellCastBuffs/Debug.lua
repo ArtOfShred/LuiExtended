@@ -88,8 +88,12 @@ function SpellCastBuffs.EventEffectDebug(eventCode, changeType, effectSlot, effe
         cmxHIDE = ""
     end
 
+    local finalString
     if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].hide then
-        d(iconFormatted .. "|c00E200 [" ..abilityId .. "] " .. nameFormatted.. ": HIDDEN LUI" .. cmxHIDE .. ": [Tag] ".. unitName .. "|r")
+        finalString = (iconFormatted .. "|c00E200 [" ..abilityId .. "] " .. nameFormatted.. ": HIDDEN LUI" .. cmxHIDE .. ": [Tag] ".. unitName .. "|r")
+        finalString = MillisecondTimestampDebug(finalString)
+        -- Use CHAT_ROUTER to bypass some other addons modifying this string
+        CHAT_ROUTER:AddSystemMessage(finalString)
         return
     end
 
@@ -100,7 +104,6 @@ function SpellCastBuffs.EventEffectDebug(eventCode, changeType, effectSlot, effe
         refreshOnly = " |c00E200(Hidden)|r "
     end
 
-    local finalString
     if changeType == 1 then
         finalString = ("|c00E200Gained:|r " .. refreshOnly .. iconFormatted .. " [" .. abilityId .. "] " ..nameFormatted .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
     elseif changeType == 2 then
