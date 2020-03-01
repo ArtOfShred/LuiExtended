@@ -24,7 +24,7 @@ LuiExtended wouldn't be where it was without the contributions of other users an
 
 ## Custom Art Assets
 - Custom ability icons by and modified from eleazzaar licensed under the [CC BY 3.0 license][1].
-- Custom ability icons by and modified from AKiZA, Angelina Avgustova, Dayed, Digital Worlds JSC, Ever Probe, HOSE, Jon Snow, Josch, Kalle Olli, Moon Tribe, N-hance Studio, PONETI, REXARD, Sky Painter, The 7 Heaven, TiGame, and TonityEden licensed under the [Unity Store single entity license][2].
+- Custom ability icons by and modified from AKiZA, Angelina Avgustova, Blade Dancer, ClayManStudio, Dayed, Digital Worlds JSC, Ever Probe, HOSE, Jon Snow, Josch, Kalle Olli, Moon Tribe, N-hance Studio, PONETI, REXARD, Sky Painter, The 7 Heaven, TiGame, and TonityEden licensed under the [Unity Store single entity license][2].
 - Custom ability icons by and modified from a-ravlik & micart licensed under the [GraphicRiver regular license][3].
 - Custom ability icons by and modified from Forrest Imel, Frostwindz and Mizuko licensed under the [GameDevMarket.net pro license][4].
 

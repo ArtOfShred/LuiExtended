@@ -14976,6 +14976,7 @@ LUIE.DebugAuras = {
     [39126] = true, -- Soul Prison (Shard of Alanwe)
 
     [22341] = true, -- Frenzy (Zombie Stalker)
+    [39827] = true, -- Capture (Zombie)
 
     [22666] = true, -- Dead (Zombie)
     [22713] = true, -- Phantasmal Bolt (Archmaster Siniel)
@@ -14998,9 +14999,9 @@ LUIE.DebugAuras = {
     [32255] = true, -- Corpse Shield (Archmaster Siniel)
 
     [32256] = true, -- 5 (Archmaster Siniel)
-    [32257] = true, -- 5 (Archmaster Siniel)
-    [32258] = true, -- 5 (Archmaster Siniel)
-    [32259] = true, -- 5 (Archmaster Siniel)
+    [32257] = true, -- 4 (Archmaster Siniel)
+    [32258] = true, -- 3 (Archmaster Siniel)
+    [32259] = true, -- 2 (Archmaster Siniel)
     [22787] = true, -- Corpse Explosion (Archmaster Siniel)
     [22807] = true, -- Corpse Explosion (Archmaster Siniel)
     [22806] = true, -- Corpse Explosion (Archmaster Siniel)

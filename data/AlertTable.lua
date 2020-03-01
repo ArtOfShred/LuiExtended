@@ -81,7 +81,7 @@ LUIE.Data.AlertTable = {
 
     -- Synergy
     [12439] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 2500, duration = 1800, postCast = 4000 }, -- Burning Arrow (Synergy)
-    [10805] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1500, postCast = 4000, refire = 2500, bossMatch = { Unitnames.Boss_Calixte_Darkblood } }, -- Ignite (Synergy)
+    [10805] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1500, postCast = 4000, refire = 2500, bossMatch = { Unitnames.Boss_Calixte_Darkblood, Unitnames.Boss_Angata_the_Clannfear_Handler } }, -- Ignite (Synergy)
 
     -- Abilities
     [29378] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1600, cc = LUIE_CC_TYPE_STUN }, -- Uppercut (Ravager)
@@ -124,11 +124,11 @@ LUIE.Data.AlertTable = {
 
     [15164] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Heat Wave (Fire Mage)
     -- Possibly add event alert for Heat Wave, and add all bosses below as well as -- Unitnames.Boss_Akezel
-    [47095] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 2000, postCast = 4000, bossMatch = { Unitnames.Boss_Calixte_Darkblood, Unitnames.Boss_Angata_the_Clannfear_Handler, Unitnames.Boss_Keeper_Areldur } }, -- Fire Rune (Fire Mage)
+    [47095] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 2000, postCast = 4000, bossMatch = { Unitnames.Boss_Calixte_Darkblood, Unitnames.Boss_Keeper_Areldur } }, -- Fire Rune (Fire Mage)
 
     [29471] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1800 }, -- Thunder Thrall (Storm Mage)
 
-    [12459] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = LUIE_CC_TYPE_SNARE }, -- Winter's Reach (Frost Mage)
+    [12459] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 1500, cc = LUIE_CC_TYPE_SNARE }, -- Winter's Reach (Frost Mage)
 
     [35151] = { interrupt = true, priority = 3, auradetect = true, duration = 8000, effectOnlyInterrupt = true, fakeName = "", bossMatch = { Unitnames.Boss_Shagura } }, -- Spell Absorption (Spirit Mage)
     [14472] = { summon = true, priority = 2, auradetect = true, fakeName = "", bossMatch = { Unitnames.Boss_Shagura } }, -- Burdening Eye (Spirit Mage)
@@ -445,13 +445,14 @@ LUIE.Data.AlertTable = {
 
     -- UNDEAD
     [8569] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1300, cc = LUIE_CC_TYPE_STAGGER }, -- Devastating Leap (Bloodfiend)
+    [8554] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2400, hideIfNoSource = true }, -- Flurry (Bloodfiend)
 
     [5050] = { block = true, dodge = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1500, cc = LUIE_CC_TYPE_STAGGER, bossMatch = { Unitnames.Boss_Griviers_Monstrosity, Unitnames.Boss_Skeletal_Destroyer } }, -- Bone Saw (Bone Colossus)
     [5030] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = "", bossMatch = { Unitnames.Boss_Griviers_Monstrosity, Unitnames.Boss_Oskana, Unitnames.Boss_Skeletal_Destroyer } }, -- Voice to Wake the Dead (Bone Colossus)
     [17207] = { block = true, dodge = true, priority = 3, auradetect = true, duration = 2500, neverShowInterrupt = true }, -- Necromantic Implosion (Risen Dead)
 
     [18514] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = LUIE_CC_TYPE_SNARE }, -- Chill Touch (Ghost)
-    [19137] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, cc = LUIE_CC_TYPE_FEAR }, -- Haunting Spectre (Ghost)
+    [19137] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true, cc = LUIE_CC_TYPE_FEAR }, -- Haunting Spectre (Ghost)
 
     [22521] = { avoid = true, priority = 2, auradetect = true, cc = LUIE_CC_TYPE_SNARE, neverShowInterrupt = true, bossMatch = { Unitnames.Boss_Valanir_the_Restless } }, -- Defiled Ground (Lich)
     [73925] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true, cc = LUIE_CC_TYPE_STUN, duration = 7450, refire = 2000, neverShowInterrupt = true, bossMatch = { Unitnames.Boss_Valanir_the_Restless } }, -- Soul Cage (Lich)
@@ -465,7 +466,7 @@ LUIE.Data.AlertTable = {
     [44055] = { interrupt = true, priority = 3, auradetect = true, duration = 4000 }, -- Devour (Werewolf)
     [5785] = { power = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Blood Scent (Werewolf)
 
-    [4337] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = LUIE_CC_TYPE_SNARE }, -- Winter's Reach (Wraith)
+    [4337] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 1500, cc = LUIE_CC_TYPE_SNARE }, -- Winter's Reach (Wraith)
 
     [2969] = { block = true, dodge = true, bs = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = LUIE_CC_TYPE_STAGGER }, -- Pound (Zombie)
     [2960] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2100 }, -- Vomit (Zombie)
@@ -822,7 +823,7 @@ LUIE.Data.AlertTable = {
     -- Stage 3 - The Marsh
     [8244] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Devastate (Corprus Husk)
     [8247] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 1750 }, -- Vomit (Corprus Husk)
-    [22109] = { avoid = true, priority = 3, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, refire = 250 }, -- Contaminate (Corprus Husk)
+    --[22109] = { avoid = true, priority = 3, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, refire = 250 }, -- Contaminate (Corprus Husk)
 
     [83493] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1000 }, -- CLST - Poison Cloud (Poison Cloud)
 
@@ -965,12 +966,17 @@ LUIE.Data.AlertTable = {
     [33189] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, cc = LUIE_CC_TYPE_UNBREAKABLE, duration = 2000 }, -- Crushing Blow (High Kinlord Rilis)
     [18840] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, cc = LUIE_CC_TYPE_UNBREAKABLE, hiddenDuration = 750 }, -- Soul Blast (High Kinlord Rilis)
     [18875] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, refire = 1500, eventdetect = true, bossName = true, duration = 2600, postCast = 5000 }, -- Daedric Tempest (High Kinlord Rilis)
+    [18795] = { destroy = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, bossName = true, refire = 1000 }, -- CON_Invisible_30%_Speed_Debuff (The Feast)
 
     -- Banished Cells II
     [48271] = { block = true, avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 2500, bossName = true, duration = 4000 }, -- Breath of Flame (Maw of the Infernal)
     [27826] = { block = true, bs = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 2000, cc = LUIE_CC_TYPE_STUN }, -- Crushing Blow (Keeper Voranil)
     [29018] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, refire = 750, eventdetect = true, bossName = true, duration = 3550 }, -- Berserker Frenzy (Keeper Voranil)
     [28750] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1750 }, -- Essence Siphon (Keeper Voranil)
+
+    [32038] = { power = true, priority = 1, auradetect = true, hiddenDuration = 2500 }, -- Into Portal
+    [36631] = { power = true, priority = 1, auradetect = true, bossName = true, hiddenDuration = 2500 }, -- ExitPortal
+
     [29143] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 2000 }, -- Daedric Blast (Keeper Imiril)
     [28962] = { power = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Sister's Love (Sister Sihna / Sister Vera)
     [48799] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1500, bossName = true, duration = 1000, postCast = 5000 }, -- Daedric Tempest (High Kinlord Rilis)
@@ -1202,7 +1208,7 @@ LUIE.Data.AlertTable = {
     [36904] = { block = true, avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = Unitnames.Boss_Garron_the_Returned, duration = 5300 }, -- Necrotic Barrage (Garron the Returned)
     [36761] = { block = true, avoid = true , priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = Unitnames.Boss_Garron_the_Returned, cc = LUIE_CC_TYPE_STAGGER, duration = 2700 }, -- Necrotic Barrage (Garron the Returned)
     [36780] = { summon = true, priority = 1, auradetect = true, fakeName = Unitnames.Boss_Garron_the_Returned, refire = 2000 }, -- Summon Minion (Garron the Returned)
-    [36838] = { power = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = Unitnames.Boss_Garron_the_Returned }, -- Deceptive Teleport (Garron the Returned)
+    [36838] = { power = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = Unitnames.Boss_Garron_the_Returned, hiddenDuration = 2500 }, -- Deceptive Teleport (Garron the Returned)
     [36873] = { block = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = Unitnames.Boss_Garron_the_Returned, duration = 9000, refire = 10000 }, -- Consume Life (Garron the Returned)
 
     [36895] = { dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = Unitnames.Boss_The_Forgotten_One, duration = 1000, postCast = 3500 }, -- Haunting Spectre (The Forgotten One)
@@ -1217,6 +1223,7 @@ LUIE.Data.AlertTable = {
     -- Crypt of Hearts I
     [22714] = { avoid = true, priority = 1, auradetect = true, bossName = true }, -- Necrotic Ritual (Archmaster Siniel)
     [22768] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true, cc = LUIE_CC_TYPE_FEAR }, -- Induce Horror (Archmaster Siniel)
+    [46581] = { power = true, priority = 1, auradetect = true, hiddenDuration = 2500 }, -- Daedric Step (Archmaster Siniel)
     [22808] = { power = true, priority = 1, auradetect = true, ignoreRefresh = true }, -- Corpse Shield (Archmaster Siniel)
     [22787] = { unmit = true, priority = 1, auradetect = true }, -- Corpse Explosion (Archmaster Siniel)
 
@@ -1224,6 +1231,7 @@ LUIE.Data.AlertTable = {
     [22527] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true, duration = 2000 }, -- Paralyzing Slam (Death's Leviathan)
     [46680] = { power = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, bossName = true, refire = 1000 }, -- Immolate Colossus (Death's Leviathan)
 
+    [22450] = { avoid = true, priority = 1, auradetect = true, bossMatch = { Unitnames.Boss_Ilambris_Athor }, neverShowInterrupt = true }, -- Summon Lightning Rod (Ilambris-Athor)
     [22338] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1500, cc = LUIE_CC_TYPE_UNBREAKABLE }, -- Axe Strike (Ilambris-Athor)
     [32425] = { power = true, priority = 1, auradetect = true }, -- Lightning Empowerment (Ilambris-Athor)
     [22456] = { power = true, priority = 1, auradetect = true }, -- Lightning Omnipotence (Ilambris-Athor)
@@ -1252,8 +1260,14 @@ LUIE.Data.AlertTable = {
 
 LUIE.Data.AlertZoneOverride = {
 
-    --[12459] = { -- Winter's Reach (Frost Mage)
-    --},
+    [12459] = { -- Winter's Reach (Frost Mage)
+        -- DUNGEONS
+        [380] = Unitnames.NPC_Banished_Mage, -- Banished Cells I
+    },
+    [4337] = { -- Winter's Reach (Wraith)
+        -- DUNGEONS
+        [380] = Unitnames.Boss_Cell_Haunter, -- Banished Cells I
+    },
 
     [36985] = { -- Void (Time Bomb Mage)
         [555] = Unitnames.Boss_Vicereeve_Pelidil, -- Abecean Sea
@@ -1330,6 +1344,7 @@ LUIE.Data.AlertZoneOverride = {
 
         -- DUNGEONS
         [130] = Unitnames.NPC_Skeletal_Archer, -- Crypt of Hearts I
+        [380] = Unitnames.NPC_Banished_Archer, -- Banished Cells I
     },
     [28628] = { -- Volley (Archer)
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- Maormer Invasion Camp (Auridon)
@@ -1352,6 +1367,8 @@ LUIE.Data.AlertZoneOverride = {
 
         -- DUNGEONS
         [130] = Unitnames.NPC_Skeletal_Archer, -- Crypt of Hearts I
+        [380] = Unitnames.NPC_Banished_Archer, -- Banished Cells I
+
     },
     [12439] = { -- Burning Arrow (Synergy)
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- South Beacon (Auridon)
@@ -1374,6 +1391,7 @@ LUIE.Data.AlertZoneOverride = {
 
         -- DUNGEONS
         [130] = Unitnames.NPC_Skeletal_Archer, -- Crypt of Hearts I
+        [380] = Unitnames.NPC_Banished_Archer, -- Banished Cells I
     },
 
     --[88554] = { -- Summon the Dead (Necromancer)
@@ -1410,6 +1428,7 @@ LUIE.Data.AlertZoneOverride = {
 
         -- DUNGEONS
         -- [130] = Unitnames.NPC_Skeletal_Pyromancer, -- Crypt of Hearts I -- Can't use because The Mage Master's Slave(s) also use these spells
+        [380] = Unitnames.NPC_Scamp, -- Banished Cells I
     },
     [47095] = { -- Fire Rune (Fire Mage)
         [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Incendiary, -- Silsailen (Auridon)
@@ -1427,6 +1446,7 @@ LUIE.Data.AlertZoneOverride = {
 
         -- DUNGEONS
         -- [130] = Unitnames.NPC_Skeletal_Pyromancer, -- Crypt of Hearts I -- Can't use because The Mage Master's Slave(s) also use these spells
+        [380] = Unitnames.Boss_Angata_the_Clannfear_Handler, -- Banished Cells I
     },
 
     [8779] = { -- Lightning Onslaught (Spider Daedra)
@@ -1440,7 +1460,10 @@ LUIE.Data.AlertZoneOverride = {
     },
     [4799] = { -- Tail Spike (Clannfear)
         [395] = Unitnames.Elite_Marrow, -- The Refuge of Dread
-        [Zonenames.Zone_Torinaan] = Unitnames.NPC_Clannfear -- Torinaan (Auridon)
+        [Zonenames.Zone_Torinaan] = Unitnames.NPC_Clannfear, -- Torinaan (Auridon)
+
+        -- DUNGEONS
+        [380] = Unitnames.NPC_Clannfear, -- Banished Cells I
     },
 
     [4653] = { -- Shockwave (Watcher)
@@ -1528,6 +1551,7 @@ LUIE.Data.AlertZoneOverride = {
 
         -- DUNGEONS
         [130] = Unitnames.NPC_Bone_Colossus, -- Crypt of Hearts I
+        [380] = Unitnames.Boss_Skeletal_Destroyer, -- Banished Cells I
     },
     [5030] = { -- Voice to Wake the Dead (Bone Colossus)
         [Zonenames.Zone_Hightide_Keep] = Unitnames.Elite_Garggeel, -- Hightide Keep (Auridon)
@@ -1535,6 +1559,7 @@ LUIE.Data.AlertZoneOverride = {
 
         -- DUNGEONS
         [130] = Unitnames.NPC_Bone_Colossus, -- Crypt of Hearts I
+        [380] = Unitnames.Boss_Skeletal_Destroyer, -- Banished Cells I
     },
 
     [22521] = { -- Defiled Ground (Lich)
@@ -1542,6 +1567,11 @@ LUIE.Data.AlertZoneOverride = {
 
         -- DUNGEONS
         [130] = Unitnames.Boss_Uulkar_Bonehand, -- Crypt of Hearts I
+    },
+    [19137] = { -- Haunting Spectre (Ghost)
+
+        -- DUNGEONS
+        [130] = Unitnames.NPC_Ghost, -- Crypt of Hearts I
     },
     [73925] = { -- Soul Cage (Lich)
         [559] = Unitnames.Boss_Shade_of_Naemon, -- Valenheart
@@ -1581,5 +1611,8 @@ LUIE.Data.AlertZoneOverride = {
 
     [6160] = { -- Rain of Fire (Scamp)
         [381] = Unitnames.NPC_Scamp, -- Auridon
+
+        -- DUNGEONS
+        [380] = Unitnames.NPC_Scamp, -- Banished Cells I
     },
 }

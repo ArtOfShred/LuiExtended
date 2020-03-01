@@ -34,14 +34,16 @@ LUIE.Data.UnitNames = {
     ----------------------------------------------------------------
 
     NPC_Target_Iron_Atronach              = 'Target Iron Atronach, Trial',
+
+    NPC_The_Feast                         = 'The Feast', -- GENERIC NPC
     NPC_Ice_Barrier                       = 'Ice Barrier',
-    NPC_Clannfear                         = 'Clannfear',
-    NPC_Lion                              = 'Lion',
-    NPC_Lioness                           = 'Lioness',
-    NPC_Sabre_Cat                         = 'Sabre Cat',
-    NPC_Senche_Tiger                      = 'Senche-Tiger',
+    NPC_Clannfear                         = 'Clannfear', -- GENERIC NPC
+    NPC_Lion                              = 'Lion', -- GENERIC NPC
+    NPC_Lioness                           = 'Lioness', -- GENERIC NPC
+    NPC_Sabre_Cat                         = 'Sabre Cat', -- GENERIC NPC
+    NPC_Senche_Tiger                      = 'Senche-Tiger', -- GENERIC NPC
     NPC_Spectral_Senche_Tiger             = 'Spectral Senche-Tiger',
-    NPC_Senche_Panther                    = 'Senche-Panther',
+    NPC_Senche_Panther                    = 'Senche-Panther', -- GENERIC NPC
     NPC_Spider                            = 'Spider',
     NPC_Venomspit_Spider                  = 'Venomspit Spide',
     NPC_Websnare_Spider                   = 'Websnare Spider',
@@ -71,6 +73,7 @@ LUIE.Data.UnitNames = {
     NPC_Skeletal_Archer                   = 'Skeletal Archer', -- VERIFIED - DUNGEON - CRYPT OF HEARTS I
     NPC_Skeletal_Pyromancer               = 'Skeletal Pyromancer', -- VERIFIED - DUNGEON - CRYPT OF HEARTS I
     NPC_Skeletal_Runecaster               = 'Skeletal Runecaster', -- VERIFIED - DUNGEON - CRYPT OF HEARTS I
+    NPC_Ghost                             = 'Ghost', -- GENERIC NPC
     NPC_Skeletal_Tempest                  = 'Skeletal Tempest',
     NPC_Skeletal_Striker                  = 'Skeletal Striker',
     NPC_Skeletal_Slayer                   = 'Skeletal Slayer',
@@ -78,8 +81,8 @@ LUIE.Data.UnitNames = {
     NPC_Spectral_Storm_Mage               = 'Spectral Storm Mage',
     NPC_Sainted_Archer                    = 'Sainted Archer',
     NPC_Sainted_Charger                   = 'Sainted Charger',
-    NPC_Gargoyle                          = 'Gargoyle',
-    NPC_Xivilai                           = 'Xivilai',
+    NPC_Gargoyle                          = 'Gargoyle', -- GENERIC NPC
+    NPC_Xivilai                           = 'Xivilai', -- GENERIC NPC
 
     NPC_Aura_of_Protection                = 'Aura of Protection',
 
@@ -111,7 +114,7 @@ LUIE.Data.UnitNames = {
     NPC_Thundermaul                       = 'Thundermaul',
     NPC_Pact_Pyromancer                   = 'Pact Pyromancer',
     NPC_Pact_Necromancer                  = 'Pact Necromancer',
-    NPC_Scamp                             = 'Scamp',
+    NPC_Scamp                             = 'Scamp', -- GENERIC NPC
 
     ----------------------------------------------------------------
     -- QUESTS ------------------------------------------------------
@@ -337,7 +340,8 @@ LUIE.Data.UnitNames = {
     Boss_Angata_the_Clannfear_Handler     = 'Angata the Clannfear Handler',
     Boss_Skeletal_Destroyer               = 'Skeletal Destroyer',
     Boss_High_Kinlord_Rilis               = 'High Kinlord Rilis',
-    NPC_The_Feast                         = 'The Feast',
+    NPC_Banished_Archer                   = 'Banished Archer',
+    NPC_Banished_Mage                     = 'Banished Mage',
 
     -- Banished Cells II
     Boss_Keeper_Areldur                   = 'Keeper Areldur',
