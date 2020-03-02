@@ -662,7 +662,7 @@ local g_stopDisplaySpam             = false         -- Toggled on to stop spam d
 local g_questIndex                  = { }           -- Index of all current quests. Allows us to read the index so that all quest notifications can use the difficulty icon.
 local g_questItemAdded              = { }           -- Hold index of Quest items that are added - Prevents pointless and annoying messages from appearing when the same quest item is immediately added and removed when quest updates.
 local g_questItemRemoved            = { }           -- Hold index of Quest items that are removed - Prevents pointless and annoying messages from appearing when the same quest item is immediately added and removed when quest updates.
-local g_loginHideQuestLoot          = true          -- Set to true onPlayerActivated and toggled after 1 sec
+local g_loginHideQuestLoot          = true          -- Set to true onPlayerActivated and toggled after 3 sec
 
 -- Trade
 local g_tradeTarget                 = ""            -- Saves name of target player being traded with.
@@ -864,6 +864,32 @@ local guildAllianceColors = {
     [3] = ZO_ColorDef:New(GetInterfaceColor(INTERFACE_COLOR_TYPE_ALLIANCE, ALLIANCE_EBONHEART_PACT)),
 }
 
+local g_firstLoad = true
+
+local ChatEventFormattersDelete =
+{
+    [EVENT_GROUP_TYPE_CHANGED] = true,
+    [EVENT_GROUP_INVITE_RESPONSE] = true,
+    [EVENT_GROUP_MEMBER_LEFT] = true,
+    [EVENT_SOCIAL_ERROR] = true,
+    [EVENT_FRIEND_PLAYER_STATUS_CHANGED] = true,
+    [EVENT_IGNORE_ADDED] = true,
+    [EVENT_IGNORE_REMOVED] = true,
+}
+
+function ChatAnnouncements.SlayChatHandlers()
+    -- Unregister ZOS handlers for events we need to modify
+    for eventCode, _ in pairs (ChatEventFormattersDelete) do
+        EVENT_MANAGER:UnregisterForEvent("ChatRouter", eventCode)
+    end
+
+    -- Slay these events in case LibChatMessage is active and hooks them
+    local ChatEventFormatters = ZO_ChatSystem_GetEventHandlers()
+    for eventType, _ in pairs (ChatEventFormattersDelete) do
+        ChatEventFormatters[eventType] = nil
+    end
+end
+
 function ChatAnnouncements.Initialize(enabled)
     -- Load settings
     local isCharacterSpecific = LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV
@@ -921,6 +947,12 @@ function ChatAnnouncements.Initialize(enabled)
 
      -- Index members for Group Loot
     ChatAnnouncements.IndexGroupLoot()
+
+    -- Stop other chat handlers from registering, then stop them again a few more times just in case.
+    ChatAnnouncements.SlayChatHandlers()
+    -- Call this again a few times shortly after load just in case.
+    zo_callLater(ChatAnnouncements.SlayChatHandlers, 1000)
+    zo_callLater(ChatAnnouncements.SlayChatHandlers, 5000)
 end
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -5363,13 +5395,18 @@ function ChatAnnouncements.DisguiseState(eventCode, unitTag, disguiseState)
     end
 end
 
-function ChatAnnouncements.OnPlayerActivated(eventCode, initial)
+function ChatAnnouncements.OnPlayerActivated(eventCode)
     -- Get current trades if UI is reloaded
     local characterName, _, displayName = GetTradeInviteInfo()
 
     if characterName ~= "" and displayName ~= "" then
         local tradeName = ChatAnnouncements.ResolveNameLink(characterName, displayName)
         g_tradeTarget = ZO_SELECTED_TEXT:Colorize(zo_strformat(SI_UNIT_NAME, tradeName))
+    end
+
+    if g_firstLoad then
+        ChatAnnouncements.SlayChatHandlers()
+        g_firstLoad = false
     end
 
     zo_callLater(function() g_loginHideQuestLoot = false end, 3000)
@@ -8955,34 +8992,6 @@ function ChatAnnouncements.HookFunction()
     ZO_PreHook(csaHandlers, EVENT_PLEDGE_OF_MARA_RESULT, PledgeOfMaraHook)
 
     eventManager:RegisterForEvent(moduleName, EVENT_PLEDGE_OF_MARA_OFFER, ChatAnnouncements.MaraOffer)
-
-    local ChatEventFormattersDelete = {
-        [EVENT_GROUP_TYPE_CHANGED] = true,
-        [EVENT_GROUP_INVITE_RESPONSE] = true,
-        [EVENT_GROUP_MEMBER_LEFT] = true,
-        [EVENT_SOCIAL_ERROR] = true,
-        [EVENT_FRIEND_PLAYER_STATUS_CHANGED] = true,
-        [EVENT_IGNORE_ADDED] = true,
-        [EVENT_IGNORE_REMOVED] = true,
-    }
-
-    local function SlayChatHandlers()
-        -- Unregister ZOS handlers for events we need to modify
-        for eventCode, _ in pairs (ChatEventFormattersDelete) do
-            EVENT_MANAGER:UnregisterForEvent("ChatRouter", eventCode)
-        end
-
-        -- Slay these events in case LibChatMessage is active and hooks them
-        local ChatEventFormatters = ZO_ChatSystem_GetEventHandlers()
-        for eventType, _ in pairs (ChatEventFormattersDelete) do
-            ChatEventFormatters[eventType] = nil
-        end
-    end
-
-    -- Stop other chat handlers from registering, then stop them again a few more times just in case.
-    SlayChatHandlers()
-    zo_callLater(SlayChatHandlers, 2500)
-    zo_callLater(SlayChatHandlers, 5000)
 
     -- HOOK PLAYER_TO_PLAYER Group Notifications to edit Ignore alert
     local KEYBOARD_INTERACT_ICONS = {
