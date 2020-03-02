@@ -1,3 +1,19 @@
+### Version 6.0.4
+
+General
+- Updated icons, tooltips, alerts, and cc tracker for Crypt of Hearts I.
+- Updated and added a good chunk of improved custom icons.
+
+Chat Announcements
+- Fixed an issue where Friend logon/logoff messages would duplicate when using pChat, now my tatsumaki is more powerful.
+- Fixed an issue where the Center Screen Announcement for completing a lore collection for a zone that resulted in Mages Guild reputation gain would throw a UI error & fixed an issue where the Chat Announcement for this event had an icon that was colored by the default system text color.
+
+Combat Info
+- Fixed an issue where the fallback font variable was misnamed. This could cause the addon to fail to load if for some reason the selected font wasn't found.
+- Removed a debug line from Ability Alerts that could display when enemies used abilities.
+
+---
+
 ### Version 6.0.3
 
 Slash Commands
