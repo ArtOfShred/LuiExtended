@@ -1253,6 +1253,7 @@ local AbilityTables = {
     Skill_Measured_Uppercut           = 34607,
     Skill_Heal_Spores                 = GetString(SI_LUIE_SKILL_HEAL_SPORES),
     Skill_Summon_Saplings             = GetString(SI_LUIE_SKILL_SUMMON_STRANGLER_SAPLINGS),
+    Skill_Reanimate_Skeletons         = GetString(SI_LUIE_SKILL_REANIMATE_SKELETONS),
 
     -- Elden Hollow II
     Skill_Fortified_Ground            = 32648,

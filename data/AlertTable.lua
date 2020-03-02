@@ -1000,6 +1000,7 @@ LUIE.Data.AlertTable = {
     [16262] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, cc = LUIE_CC_TYPE_STUN, duration = 2000, postCast = 6000 }, -- Necrotic Circle (Canonreeve Oraneth)
     [9944] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 3000, cc = LUIE_CC_TYPE_STUN }, -- Necrotic Burst (Canonreeve Oraneth)
     [9839] = { power = true, priority = 1, auradetect = true, ignoreRefresh = true }, -- Bone Hurricane (Canonreeve Oraneth)
+    [12478] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, bossName = true, refire = 5000 }, -- CON_Ground Rise ON (Canonreeve Oraneth)
 
     -- Elden Hollow II
     [34376] = { avoid = true, priority = 1, eventdetect = true, refire = 2000, result = ACTION_RESULT_BEGIN, duration = 3300, bossName = true, cc = LUIE_CC_TYPE_FEAR }, -- Flame Geyser (Dubroze the Infestor)
@@ -1268,7 +1269,7 @@ LUIE.Data.AlertZoneOverride = {
     [4337] = { -- Winter's Reach (Wraith)
         -- DUNGEONS
         [380] = Unitnames.Boss_Cell_Haunter, -- Banished Cells I
-        [935] = Unitnames.NPC_Wraith, -- Banished Cells II
+        [935] = Unitnames.NPC_Wraith, -- Banished Cells II (Summon Only)
     },
 
     [36985] = { -- Void (Time Bomb Mage)
@@ -1304,6 +1305,9 @@ LUIE.Data.AlertZoneOverride = {
 
         [435] = Unitnames.NPC_Sainted_Charger, -- Cathedral of the Golden Path
         [555] = Unitnames.NPC_Sea_Viper_Charger, -- Abecean Sea
+
+        -- DUNGEONS
+        [126] = Unitnames.Boss_Nenesh_gro_Mal, -- Elden Hollow I
     },
     [29520] = { -- Aura of Protection (Shaman)
         [176] = Unitnames.NPC_Dremora_Hauzkyn, -- City of Ash
@@ -1324,6 +1328,9 @@ LUIE.Data.AlertZoneOverride = {
         [Zonenames.Zone_Isle_of_Contemplation] = Unitnames.Elite_Karulae, -- Isle of Contemplation (Auridon)
 
         [548] = Unitnames.NPC_Bandit_Rogue, -- Silatar
+
+        -- DUNGEONS
+        [126] = Unitnames.NPC_Darkfern_Stalker, -- Elden Hollow I
     },
     [37108] = { -- Arrow Spray (Archer)
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- Maormer Invasion Camp (Auridon)
@@ -1348,6 +1355,7 @@ LUIE.Data.AlertZoneOverride = {
         [130] = Unitnames.NPC_Skeletal_Archer, -- Crypt of Hearts I
         [380] = Unitnames.NPC_Banished_Archer, -- Banished Cells I
         [935] = Unitnames.NPC_Banished_Archer, -- Banished Cells II
+        [126] = Unitnames.NPC_Darkfern_Archer, -- Elden Hollow I
     },
     [28628] = { -- Volley (Archer)
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- Maormer Invasion Camp (Auridon)
@@ -1372,7 +1380,7 @@ LUIE.Data.AlertZoneOverride = {
         [130] = Unitnames.NPC_Skeletal_Archer, -- Crypt of Hearts I
         [380] = Unitnames.NPC_Banished_Archer, -- Banished Cells I
         [935] = Unitnames.NPC_Banished_Archer, -- Banished Cells II
-
+        [126] = Unitnames.NPC_Darkfern_Archer, -- Elden Hollow I
     },
     [12439] = { -- Burning Arrow (Synergy)
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- South Beacon (Auridon)
@@ -1397,6 +1405,7 @@ LUIE.Data.AlertZoneOverride = {
         [130] = Unitnames.NPC_Skeletal_Archer, -- Crypt of Hearts I
         [380] = Unitnames.NPC_Banished_Archer, -- Banished Cells I
         [935] = Unitnames.NPC_Banished_Archer, -- Banished Cells II
+        [126] = Unitnames.NPC_Darkfern_Archer, -- Elden Hollow I
     },
 
     --[88554] = { -- Summon the Dead (Necromancer)
@@ -1435,6 +1444,7 @@ LUIE.Data.AlertZoneOverride = {
         -- [130] = Unitnames.NPC_Skeletal_Pyromancer, -- Crypt of Hearts I -- Can't use because The Mage Master's Slave(s) also use these spells
         [380] = Unitnames.NPC_Scamp, -- Banished Cells I
         [935] = Unitnames.NPC_Dremora_Kyngald, -- Banished Cells II
+        [126] = Unitnames.NPC_Darkfern_Flamerender, -- Elden Hollow I
     },
     [15164] = { -- Heat Wave (Fire Mage)
         [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Incendiary, -- Silsailen (Auridon)
@@ -1454,6 +1464,7 @@ LUIE.Data.AlertZoneOverride = {
         -- [130] = Unitnames.NPC_Skeletal_Pyromancer, -- Crypt of Hearts I -- Can't use because The Mage Master's Slave(s) also use these spells
         [380] = Unitnames.Boss_Angata_the_Clannfear_Handler, -- Banished Cells I
         [935] = Unitnames.NPC_Dremora_Kyngald, -- Banished Cells II
+        [126] = Unitnames.NPC_Darkfern_Flamerender, -- Elden Hollow I
     },
     [47095] = { -- Fire Rune (Fire Mage)
         [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Incendiary, -- Silsailen (Auridon)
@@ -1473,6 +1484,7 @@ LUIE.Data.AlertZoneOverride = {
         -- [130] = Unitnames.NPC_Skeletal_Pyromancer, -- Crypt of Hearts I -- Can't use because The Mage Master's Slave(s) also use these spells
         [380] = Unitnames.Boss_Angata_the_Clannfear_Handler, -- Banished Cells I
         [935] = Unitnames.NPC_Dremora_Kyngald, -- Banished Cells II
+        [126] = Unitnames.NPC_Darkfern_Flamerender, -- Elden Hollow I
     },
 
     [8779] = { -- Lightning Onslaught (Spider Daedra)
@@ -1604,7 +1616,7 @@ LUIE.Data.AlertZoneOverride = {
         -- DUNGEONS
         [130] = Unitnames.NPC_Bone_Colossus, -- Crypt of Hearts I
         [380] = Unitnames.Boss_Skeletal_Destroyer, -- Banished Cells I
-        [935] = Unitnames.NPC_Bone_Colossus, -- Banished Cells II (Summoned Only)
+        [935] = Unitnames.NPC_Bone_Colossus, -- Banished Cells II (Summon Only)
     },
     [5030] = { -- Voice to Wake the Dead (Bone Colossus)
         [Zonenames.Zone_Hightide_Keep] = Unitnames.Elite_Garggeel, -- Hightide Keep (Auridon)
@@ -1625,7 +1637,7 @@ LUIE.Data.AlertZoneOverride = {
 
         -- DUNGEONS
         [130] = Unitnames.NPC_Ghost, -- Crypt of Hearts I
-        [935] = Unitnames.NPC_Ghost, -- Banished Cells II
+        [935] = Unitnames.NPC_Ghost, -- Banished Cells II (Summon Only)
     },
     [73925] = { -- Soul Cage (Lich)
         [559] = Unitnames.Boss_Shade_of_Naemon, -- Valenheart
@@ -1668,14 +1680,14 @@ LUIE.Data.AlertZoneOverride = {
 
         -- DUNGEONS
         [380] = Unitnames.NPC_Scamp, -- Banished Cells I
-        [935] = Unitnames.NPC_Scamp, -- Banished Cells II
+        [935] = Unitnames.NPC_Scamp, -- Banished Cells II (Summon Only)
     },
     [6160] = { -- Rain of Fire (Scamp)
         [381] = Unitnames.NPC_Scamp, -- Auridon
 
         -- DUNGEONS
         [380] = Unitnames.NPC_Scamp, -- Banished Cells I
-        [935] = Unitnames.NPC_Scamp, -- Banished Cells II
+        [935] = Unitnames.NPC_Scamp, -- Banished Cells II (Summon Only)
     },
 
     [88947] = { -- Lightning Grasp (Xivilai)
@@ -1696,7 +1708,7 @@ LUIE.Data.AlertZoneOverride = {
     [4829] = { -- Fire Brand (Flesh Atronach)
 
         -- DUNGEONS
-        [935] = Unitnames.NPC_Flesh_Atronach, -- Banished Cells I
+        [935] = Unitnames.NPC_Flesh_Atronach, -- Banished Cells I (Summon Only)
     },
     [6412] = { -- Dusk's Howl (Winged Twilight)
 
@@ -1707,17 +1719,28 @@ LUIE.Data.AlertZoneOverride = {
     [24690] = { -- Focused Charge (Ogrim)
 
         -- DUNGEONS
-        [935] = Unitnames.NPC_Flame_Ogrim, -- Banished Cells II
+        [935] = Unitnames.NPC_Flame_Ogrim, -- Banished Cells II (Summon Only)
     },
     [91848] = { -- Stomp (Ogrim)
 
         -- DUNGEONS
-        [935] = Unitnames.NPC_Flame_Ogrim, -- Banished Cells II
+        [935] = Unitnames.NPC_Flame_Ogrim, -- Banished Cells II (Summon Only)
     },
 
     [28939] = { -- Heat Wave (Sees-All-Colors)
 
         -- DUNGEONS
         [935] = Unitnames.Boss_Keeper_Areldur, -- Banished Cells II
+    },
+
+    [5452] = { -- Lacerate (Alit)
+        -- [126] = Unitnames.NPC_Alit, -- Elden Hollow I (Can't use because Alit's are right next to Leafseether and can easily also be casting this)
+    },
+
+    [26412] = { -- Thunderstrikes (Thunderbug)
+        [126] = Unitnames.NPC_Thunderbug_Lord, -- Elden Hollow I
+    },
+    [9322] = { -- Poisoned Ground (Strangler)
+        [126] = Unitnames.NPC_Strangler, -- Elden Hollow I
     },
 }

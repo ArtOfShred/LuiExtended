@@ -10514,8 +10514,8 @@ Effects.EffectOverride = {
     [55311] = { hide = true }, -- Sucked Under (CLDA - Sucked Under)
     [58426] = { hide = true }, -- CLDA - Drop Hate (CLDA - Sucked Under)
 
-    [56985] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_bone_hurricane.dds', hide = true }, -- Spirit Shield (Zackael/Rubyn Jonnicent)
-    [56990] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_bone_hurricane.dds', name = Abilities.Skill_Spirit_Shield }, -- Spirit Shield (Zackael/Rubyn Jonnicent)
+    [56985] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_bone_hurricane.dds', hide = true }, -- Spirit Shield (Zackael/Rubyn Jonnicent)
+    [56990] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_bone_hurricane.dds', name = Abilities.Skill_Spirit_Shield }, -- Spirit Shield (Zackael/Rubyn Jonnicent)
 
     [55085] = { hide = true }, -- Poison Mist (Vampire Lord Thisa)
     [55089] = { tooltip = Tooltips.Skill_Poison_Mist }, -- Poison Mist (Vampire Lord Thisa)
@@ -11138,24 +11138,26 @@ Effects.EffectOverride = {
     [44225] = { icon = 'LuiExtended/media/icons/abilities/ability_alit_inhale.dds', hide = true }, -- Inhale (Leafseether)
 
     [15120] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_entropic_bolt.dds' }, -- Phantasmal Bolt (Canonreeve Oraneth)
-    [9845] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_poison.dds', hide = true }, -- Rotting Bolt (Canonreeve Oraneth)
-    [9852] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_poison.dds', tooltip = Tooltips.Generic_Poison, tooltipValue2 = 2 }, -- Rotting Bolt (Canonreeve Oraneth)
+    [9845] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_rotting_bolt.dds', hide = true }, -- Rotting Bolt (Canonreeve Oraneth)
+    [9852] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_rotting_bolt.dds', tooltip = Tooltips.Generic_Poison, tooltipValue2 = 2 }, -- Rotting Bolt (Canonreeve Oraneth)
 
-    [16262] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_damage.dds' }, -- Necrotic Circle (Canonreeve Oraneth)
-    [25348] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_stun.dds', tooltip = Tooltips.Skill_Necrotic_Circle_Stun }, -- Necrotic Circle (Canonreeve Oraneth)
-    [42601] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_damage.dds', tooltip = Tooltips.Generic_AOE_Frost, tooltipValue2 = 0.5, groundLabel = true }, -- Necrotic Circle (Canonreeve Oraneth)
-    [25370] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_stun.dds' }, -- Necrotic Circle (Canonreeve Oraneth)
-    [46800] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_stun.dds', tooltip = Tooltips.Generic_Stun, unbreakable = 1 }, -- Necrotic Circle (Canonreeve Oraneth)
+    [16262] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_circle.dds' }, -- Necrotic Circle (Canonreeve Oraneth)
+    [25348] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_circle_stun.dds', tooltip = Tooltips.Skill_Necrotic_Circle_Stun }, -- Necrotic Circle (Canonreeve Oraneth)
+    [42601] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_circle.dds', tooltip = Tooltips.Generic_AOE_Frost, tooltipValue2 = 0.5, groundLabel = true }, -- Necrotic Circle (Canonreeve Oraneth)
+    [25370] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_circle_stun.dds' }, -- Necrotic Circle (Canonreeve Oraneth)
+    [46800] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_circle_stun.dds', tooltip = Tooltips.Generic_Stun, unbreakable = 1 }, -- Necrotic Circle (Canonreeve Oraneth)
 
-    [9944] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_necrotic_burst.dds' }, -- Necrotic Burst (Canonreeve Oraneth)
-    [15682] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_necrotic_burst.dds', tooltip = Tooltips.Generic_Knockback }, -- Necrotic Burst (Canonreeve Oraneth)
-    [15681] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_necrotic_burst.dds' }, -- Necrotic Burst (Canonreeve Oraneth)
+    [12478] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_skeleton_warrior.dds', name = Abilities.Skill_Reanimate_Skeletons }, -- CON_Ground Rise ON (Canonreeve Oraneth)
 
-    [9839] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_bone_hurricane.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Bone Hurricane (Canonreeve Oraneth)
+    [9944] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_explosion.dds' }, -- Necrotic Burst (Canonreeve Oraneth)
+    [15682] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_explosion.dds', tooltip = Tooltips.Generic_Knockback }, -- Necrotic Burst (Canonreeve Oraneth)
+    [15681] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_explosion.dds' }, -- Necrotic Burst (Canonreeve Oraneth)
 
-    [27891] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_darkness_below.dds', tooltip = Tooltips.Skill_Necrotic_Circle_Stun }, -- Darkness Below (Elden Hollow)
-    [27892] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_darkness_below.dds' }, -- Darkness Below (Elden Hollow)
-    [27890] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_darkness_below.dds', tooltip = Tooltips.Generic_Stun, unbreakable = 1, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Darkness Below (Elden Hollow)
+    [9839] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_bone_hurricane.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Bone Hurricane (Canonreeve Oraneth)
+
+    [27891] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_circle_stun.dds', tooltip = Tooltips.Skill_Necrotic_Circle_Stun }, -- Darkness Below (Elden Hollow)
+    [27892] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_circle_stun.dds' }, -- Darkness Below (Elden Hollow)
+    [27890] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_circle_stun.dds', tooltip = Tooltips.Generic_Stun, unbreakable = 1, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Darkness Below (Elden Hollow)
     [28886] = { hide = true }, -- Darkness Below
 
     -- Elden Hollow II

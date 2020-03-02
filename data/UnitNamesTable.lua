@@ -62,7 +62,7 @@ LUIE.Data.UnitNames = {
     NPC_Spectral_Lamia                    = 'Spectral Lamia',
     NPC_Dire_Wolf                         = 'Dire Wolf',
     NPC_Thunderbug                        = 'Thunderbug',
-    NPC_Thunderbug_Lord                   = 'Thunderbug Lord',
+    NPC_Thunderbug_Lord                   = 'Thunderbug Lord', -- VERIFIED - SPRIGGAN SUMMON
     NPC_Hoarvor                           = 'Hoarvor',
     NPC_Auroran_Battlemage                = 'Auroran Battlemage',
     NPC_Watcher                           = 'Watcher',
@@ -88,6 +88,8 @@ LUIE.Data.UnitNames = {
     NPC_Spider_Daedra                     = 'Spider Daedra', -- GENERIC NPC
     NPC_Spiderling                        = 'Spiderling', -- GENERIC NPC
     NPC_Flame_Ogrim                       = 'Flame Ogrim', -- GENERIC NPC (SUMMON)
+    NPC_Alit                              = 'Alit', -- GENERIC NPC
+    NPC_Strangler                         = 'Strangler', -- GENERIC NPC
 
     NPC_Aura_of_Protection                = 'Aura of Protection',
 
@@ -364,6 +366,9 @@ LUIE.Data.UnitNames = {
     Boss_Nenesh_gro_Mal                   = 'Nenesh gro-Mal',
     Boss_Leafseether                      = 'Leafseether',
     Boss_Canonreeve_Oraneth               = 'Canonreeve Oraneth',
+    NPC_Darkfern_Archer                   = 'Darkfern Archer',
+    NPC_Darkfern_Flamerender              = 'Darkfern Flamerender',
+    NPC_Darkfern_Stalker                  = 'Darkfern Stalker',
 
     -- Elden Hollow II
     Boss_Dubroze_the_Infestor             = 'Dubroze the Infestor',

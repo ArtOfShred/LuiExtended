@@ -1333,6 +1333,7 @@ local strings = {
     SI_LUIE_SKILL_RESILIENCE =                           "Resilience",
     SI_LUIE_SKILL_RESILIENCE_TP =                        "Reduce damage taken from area of effect and damage over time abilities by |cFFFFFF85|r%.",
     SI_LUIE_SKILL_WHIRLING_AXE =                         "Whirling Axe",
+    SI_LUIE_SKILL_REANIMATE_SKELETONS =                  "Reanimate Skeletons",
 
     -- Keep Upgrade
     SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_RANGE =              "Longer Range on Ranged Guards",
