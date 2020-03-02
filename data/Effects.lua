@@ -1664,6 +1664,9 @@ Effects.AddNameAuraAlways = {
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.AddNameAura = {
 
+    -- Various Mobs
+    [Unitnames.NPC_Daedroth] = { [1] = { id = 999013, zone = 935 } }, -- Daedroth
+
     -- World Bosses
 
     -- Auridon
@@ -8200,7 +8203,7 @@ Effects.EffectOverride = {
     [26110] = { icon = 'LuiExtended/media/icons/abilities/ability_harvester_the_feast.dds', tooltip = Tooltips.Generic_Levitate }, -- The Feast (Harvester)
     [26017] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_the_feast.dds', name = Abilities.Skill_The_Feast, hide = true }, -- Creeping Doom (The Feast)
     [26018] = { hide = true }, -- Creeping Doom (The Feast)
-    [88070] = { hide = true }, -- Creeping Doom (The Feast)
+    [88070] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_summon_daedroth.dds', name = Abilities.Skill_Summon_Daedroth, hide = true }, -- Creeping Doom (The Feast)
 
     -- Ogrim
     [8204] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_strike.dds' }, -- Strike (Ogrim)
@@ -8250,7 +8253,7 @@ Effects.EffectOverride = {
     -- Xivilai
     [7095] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_xivilai_heavy.dds' }, -- Heavy Attack (Xivilai)
     [83072] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_xivilai_frost.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Freezing Edge (Xivilai)
-    [49203] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_frost_root.dds', tooltip = Tooltips.Generic_Immobilize }, -- Frozen Weapon (Xivilai)
+    [49203] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_frost_root.dds', tooltip = Tooltips.Generic_Immobilize }, -- Frozen Weapon (Xivilai)
     [88947] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_lightning_grasp.dds' }, -- Lightning Grasp (Xivilai)
     [88949] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_lightning_grasp.dds' }, -- Lightning Grasp (Xivilai)
     [7100] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hand_of_flame.dds'}, -- Hand of Flame (Xivilai)
@@ -11075,22 +11078,23 @@ Effects.EffectOverride = {
 
     [64526] = { hide = true }, -- Shatter
 
-    [28962] = { icon = 'esoui/art/icons/ability_mage_030.dds', name = Abilities.Skill_Sisters_Bond }, -- Sister's Love (Sister Sihna / Sister Vera)
+    [28962] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sisters_bond.dds', name = Abilities.Skill_Sisters_Bond }, -- Sister's Love (Sister Sihna / Sister Vera)
 
-    [35847] = { hide = true }, -- Shatter
+    [35847] = { hide = true }, -- Dummy
 
+    [999013] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_enraged_fortitude.dds', name = Abilities.Skill_Resilience, tooltip = Tooltips.Skill_Resilience }, -- FAKE AURA FOR DAEDROTH DAMAGE REDUCTION TO AOE
     [28570] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_levitate_blue.dds' }, -- Levitate (High Kinlord Rilis)
     [28462] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_levitate_red.dds' }, -- Levitate (High Kinlord Rilis)
 
     [28715] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_shock.dds' }, -- Daedric Bolt (High Kinlord Rilis)
     [28772] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_levitate_blue.dds', name = Abilities.Skill_Levitate, unbreakable = 1, tooltip = Tooltips.Generic_Levitate }, -- Stun (High Kinlord Rilis)
     [28774] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_levitate_red.dds', name = Abilities.Skill_Levitate, unbreakable = 1, tooltip = Tooltips.Generic_Levitate }, -- Stun (High Kinlord Rilis)
-    [28475] = { tooltip = Tooltips.Skill_Curse_of_Suffering, unbreakable = 1, duration = 0 }, -- Curse of Suffering (High Kinlord Rilis)
-    [48308] = { icon = 'esoui/art/icons/ability_mage_023.dds' }, -- Curse of Suffering (High Kinlord Rilis)
-    [28571] = { icon = 'esoui/art/icons/ability_mage_001.dds', tooltip = Tooltips.Skill_Curse_of_Dominance, unbreakable = 1, duration = 0 }, -- Curse of Dominance (High Kinlord Rilis)
-    [48507] = { icon = 'esoui/art/icons/ability_mage_001.dds' }, -- Curse of Dominance (High Kinlord Rilis)
+    [28475] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_curse_of_suffering.dds', tooltip = Tooltips.Skill_Curse_of_Suffering, unbreakable = 1, duration = 0 }, -- Curse of Suffering (High Kinlord Rilis)
+    [48308] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_curse_of_suffering.dds' }, -- Curse of Suffering (High Kinlord Rilis)
+    [28571] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_curse_of_dominance.dds', tooltip = Tooltips.Skill_Curse_of_Dominance, unbreakable = 1, duration = 0 }, -- Curse of Dominance (High Kinlord Rilis)
+    [48507] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_curse_of_dominance.dds' }, -- Curse of Dominance (High Kinlord Rilis)
 
-    [46967] = { hide = true }, -- Daedric Step (High Kinlord Rilis)
+    [46967] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_daedric_step.dds', hide = true }, -- Daedric Step (High Kinlord Rilis)
     [46964] = { hide = true }, -- Daedric Step (High Kinlord Rilis)
     [46965] = { hide = true }, -- Daedric Step (High Kinlord Rilis)
     [48909] = { hide = true }, -- The Feast (High Kinlord Rilis)
@@ -11107,18 +11111,19 @@ Effects.EffectOverride = {
     [36030] = { hide = true }, -- Red Sigil (High Kinlord Rilis)
 
     -- Elden Hollow I
-    [14905] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds', name = Abilities.Skill_Quick_Strike }, -- Hacking Strike (Akash gra-Mal)
-    [16834] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds', name = Abilities.Skill_Crushing_Blow }, -- Executioner's Strike (Akash gra-Mal)
-    [25309] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds', name = Abilities.Skill_Crushing_Blow, hide = true }, -- Fire Backlash (Akash gra-Mal)
-    [25310] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds', name = Abilities.Skill_Crushing_Blow, tooltip = Tooltips.Generic_Knockback }, -- CON_Knockback&Knockdown (Akash gra-Mal)
-    [16003] = { icon = 'esoui/art/icons/ability_warrior_004.dds' }, -- Leaping Strike (Akash gra-Mal)
-    [9936] = { icon = 'esoui/art/icons/ability_warrior_031.dds' }, -- Battlecry (Akash gra-Mal)
+    [14905] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hacking_strike.dds', name = Abilities.Skill_Quick_Strike }, -- Hacking Strike (Akash gra-Mal)
+    [16834] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_executioners_strike.dds' }, -- Executioner's Strike (Akash gra-Mal)
+    [25309] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_executioners_strike.dds', name = Abilities.Skill_Executioners_Strike, hide = true }, -- Fire Backlash (Akash gra-Mal)
+    [25310] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_executioners_strike.dds', name = Abilities.Skill_Executioners_Strike, tooltip = Tooltips.Generic_Knockback }, -- CON_Knockback&Knockdown (Akash gra-Mal)
+    [15999] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_leaping_strike.dds' }, -- Leaping Strike (Akash gra-Mal)
+    [16003] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_leaping_strike.dds' }, -- Leaping Strike (Akash gra-Mal)
+    [9936] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_battlecry.dds' }, -- Battlecry (Akash gra-Mal)
     [44093] = { name = Abilities.Innate_Stagger, tooltip = Tooltips.Generic_Stagger }, -- Battlecry (Akash gra-Mal)
-    [16016] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (Akash gra-Mal)
-    [16017] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (Akash gra-Mal)
-    [25300] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (Akash gra-Mal)
-    [25301] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (Akash gra-Mal)
-    [25302] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (Akash gra-Mal)
+    [16016] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_whirling_axe.dds', name = Abilities.Skill_Whirling_Axe }, -- Berserker Frenzy (Akash gra-Mal)
+    [16017] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_whirling_axe.dds', name = Abilities.Skill_Whirling_Axe }, -- Berserker Frenzy (Akash gra-Mal)
+    [25300] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_whirling_axe.dds', name = Abilities.Skill_Whirling_Axe }, -- Berserker Frenzy (Akash gra-Mal)
+    [25301] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_whirling_axe.dds', name = Abilities.Skill_Whirling_Axe }, -- Berserker Frenzy (Akash gra-Mal)
+    [25302] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_whirling_axe.dds', name = Abilities.Skill_Whirling_Axe }, -- Berserker Frenzy (Akash gra-Mal)
 
     [15116] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_strike.dds' }, -- Piercing Strike (Chokethorn)
     [15114] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_grapple.dds', tooltip = Tooltips.Generic_Stun }, -- Pulling Grasp (Chokethorn)
@@ -12311,7 +12316,7 @@ Effects.FakeExternalDebuffs = {
     [28774] = { duration = 5000 }, -- Stun (High Kinlord Rilis)
 
     -- Elden Hollow I
-    [25310] = { name = Abilities.Skill_Crushing_Blow, duration = 2500 }, -- Executioners Strike (Akash gra-Mal)
+    [25310] = { duration = 2500 }, -- Executioners Strike (Akash gra-Mal)
     [25348] = { duration = 6000, refreshOnly = true }, -- Necrotic Circle (Canonreeve Oraneth)
     [46800] = { duration = 1200 }, -- Necrotic Circle (Canonreeve Oraneth)
 

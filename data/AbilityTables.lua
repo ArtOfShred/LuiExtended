@@ -1243,9 +1243,13 @@ local AbilityTables = {
     Skill_Daedric_Chaos               = GetString(SI_LUIE_SKILL_DAEDRIC_CHAOS),
     Skill_Chaotic_Dispersion          = GetString(SI_LUIE_SKILL_CHAOTIC_DISPERSION),
     Skill_Chaotic_Return              = GetString(SI_LUIE_SKILL_CHAOTIC_RETURN),
+    Skill_Summon_Daedroth             = 69356,
+    Skill_Resilience                  = GetString(SI_LUIE_SKILL_RESILIENCE),
 
     -- Elden Hollow I
-    Skill_Crushing_Blow               = 33189,
+    Skill_Executioners_Strike         = 16834,
+    Skill_Whirling_Axe                = GetString(SI_LUIE_SKILL_WHIRLING_AXE),
+    Skill_Crushing_Blow               = 33189, -- TODO: Move to the first instance of this rename being neccesary
     Skill_Measured_Uppercut           = 34607,
     Skill_Heal_Spores                 = GetString(SI_LUIE_SKILL_HEAL_SPORES),
     Skill_Summon_Saplings             = GetString(SI_LUIE_SKILL_SUMMON_STRANGLER_SAPLINGS),

@@ -1327,6 +1327,12 @@ local strings = {
     SI_LUIE_SKILL_LIGHTNING_EMPOWERMENT_ENRAGE_TP =      "Enraged and empowered by storm, granting the use of |cFFFFFFElectric Prison|r and |cFFFFFFCall Lightning|r.",
     SI_LUIE_SKILL_INCENSED_TP =                          "Empowered by flame, granting the use of |cFFFFFFPyroclasm|r.",
     SI_LUIE_SKILL_INCENSED_ENRAGE_TP =                   "Enraged and empowered by flame, granting the use of |cFFFFFFPyroclasm|r and |cFFFFFFRain Fire|r.",
+    SI_LUIE_SKILL_DAEDRIC_CHAOS =                        "Daedric Chaos",
+    SI_LUIE_SKILL_CHAOTIC_DISPERSION =                   "Chaotic Dispersion",
+    SI_LUIE_SKILL_CHAOTIC_RETURN =                       "Chaotic Return",
+    SI_LUIE_SKILL_RESILIENCE =                           "Resilience",
+    SI_LUIE_SKILL_RESILIENCE_TP =                        "Reduce damage taken from area of effect and damage over time abilities by |cFFFFFF85|r%.",
+    SI_LUIE_SKILL_WHIRLING_AXE =                         "Whirling Axe",
 
     -- Keep Upgrade
     SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_RANGE =              "Longer Range on Ranged Guards",

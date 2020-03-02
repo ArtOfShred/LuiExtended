@@ -1343,6 +1343,7 @@ LUIE.Data.Tooltips = {
     -- Banished Cells II
     Skill_Curse_of_Suffering                        = GetString(SI_LUIE_SKILL_CURSE_OF_SUFFERING_TP),
     Skill_Curse_of_Dominance                        = GetString(SI_LUIE_SKILL_CURSE_OF_DOMINANCE_TP),
+    Skill_Resilience                                = GetString(SI_LUIE_SKILL_RESILIENCE_TP),
 
     -- Elden Hollow II
     Skill_Siphon_Magicka                            = GetString(SI_LUIE_SKILL_SIPHON_MAGICKA_TP),

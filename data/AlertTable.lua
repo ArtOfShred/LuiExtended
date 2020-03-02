@@ -122,8 +122,7 @@ LUIE.Data.AlertTable = {
     [89425] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Call Ally (Pet Ranger)
     [44301] = { dodge = true, priority = 3, auradetect = true , ignoreRefresh = true, cc = LUIE_CC_TYPE_SNARE }, -- Trap Beast (Pet Ranger)
 
-    [15164] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Heat Wave (Fire Mage)
-    -- Possibly add event alert for Heat Wave, and add all bosses below as well as -- Unitnames.Boss_Akezel
+    [15164] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, bossMatch = { Unitnames.Boss_Akezel, Unitnames.Boss_Calixte_Darkblood } }, -- Heat Wave (Fire Mage)
     [47095] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 2000, postCast = 4000, bossMatch = { Unitnames.Boss_Calixte_Darkblood, Unitnames.Boss_Keeper_Areldur } }, -- Fire Rune (Fire Mage)
 
     [29471] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1800 }, -- Thunder Thrall (Storm Mage)
@@ -151,7 +150,7 @@ LUIE.Data.AlertTable = {
     [44323] = { power = true, priority = 3, auradetect = true }, -- Dampen Magic (Soulbrander)
     [44258] = { power = true, priority = 3, auradetect = true }, -- Radiant Magelight (Soulbrander)
 
-    [35387] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, cc = LUIE_CC_TYPE_SNARE, duration = 1000, postCast = 4000 }, -- Defiled Grave (Bonelord)
+    [35387] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true, cc = LUIE_CC_TYPE_SNARE, duration = 1000, postCast = 4000, bossMatch = { Unitnames.Boss_Overlord_Nur_dro } }, -- Defiled Grave (Bonelord)
     [88506] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = "" }, -- Summon Abomination (Bonelord)
     [88507] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = "", bossMatch = { Unitnames.Boss_Overlord_Nur_dro } }, -- Summon Abomination (Bonelord)
 
@@ -380,7 +379,7 @@ LUIE.Data.AlertTable = {
 
     [4771] = { avoid = true, priority = 2, eventdetect = true, refire = 1250, result = ACTION_RESULT_BEGIN, duration = 3100, bossMatch = { Unitnames.Boss_Ysolmarr_the_Roving_Pyre, Unitnames.Boss_Gar_Xuu_Gar } },-- Fiery Breath (Daedroth)
     [91946] = { avoid = true, interrupt = true, eventdetect = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1000, cc = LUIE_CC_TYPE_STAGGER, postCast = 750, bossMatch = { Unitnames.Boss_Ysolmarr_the_Roving_Pyre, Unitnames.Boss_Gar_Xuu_Gar } }, -- Ground Tremor (Daedroth)
-    [91937] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1767, cc = LUIE_CC_TYPE_STUN }, -- Burst of Embers (Daedroth)
+    [91937] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1767, cc = LUIE_CC_TYPE_STUN, postCast = 500 }, -- Burst of Embers (Daedroth)
 
     [26324] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1300 }, -- Lava Geyser (Flame Atronach)
     --[50216] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250, duration = 2000, neverShowInterrupt = true }, -- Combustion (Flame Atronach)
@@ -391,7 +390,7 @@ LUIE.Data.AlertTable = {
     [50626] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 2750 }, -- Shadow Strike (Grevious Twilight)
     [65889] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 2750 }, -- Shadow Strike (Grevious Twilight)
 
-    [4829] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000 }, -- Fire Brand (Flesh Atronach)
+    [4829] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 2000 }, -- Fire Brand (Flesh Atronach)
     [4817] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1500, cc = LUIE_CC_TYPE_STUN }, -- Unyielding Mace (Flesh Atronach)
 
     [67870] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1700, cc = LUIE_CC_TYPE_STAGGER }, -- Tremor AOE (Flesh Colossus)
@@ -410,11 +409,11 @@ LUIE.Data.AlertTable = {
     [91848] = { dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1970, cc = LUIE_CC_TYPE_SNARE }, -- Stomp (Ogrim)
     [91855] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000, cc = LUIE_CC_TYPE_STAGGER }, -- Boulder Toss (Ogrim)
 
-    [6166] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Heat Wave (Scamp)
+    [6166] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Heat Wave (Scamp)
     [6160] = { avoid = true, interrupt = true, priority = 3, auradetect = true, duration = 5000 }, -- Rain of Fire (Scamp)
 
-    [8779] = { block = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000, postCast = 2000 }, -- Lightning Onslaught (Spider Daedra)
-    [89306] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, cc = LUIE_CC_TYPE_SNARE, duration = 1000, postCast = 4000 }, -- Web (Spiderling)
+    [8779] = { block = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000, postCast = 1750 }, -- Lightning Onslaught (Spider Daedra)
+    [89306] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = Unitnames.NPC_Spiderling, cc = LUIE_CC_TYPE_SNARE, duration = 1000, postCast = 4000 }, -- Web (Spiderling)
     [8782] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000, eventdetect = true, postCast = 1000 }, -- Lightning Storm (Spider Daedra)
     [8773] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon Spiderling (Spider Daedra)
 
@@ -422,8 +421,8 @@ LUIE.Data.AlertTable = {
     [4864] = { dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, cc = LUIE_CC_TYPE_SNARE, duration = 633 }, -- Storm Bound (Storm Atronach)
 
     [7095] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1400 }, -- Heavy Attack (Xivilai)
-    [88947] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Lightning Grasp (Xivilai)
-    [7100] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1333 }, -- Hand of Flame (Xivilai)
+    [88947] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, hiddenDuration = 3000 }, -- Lightning Grasp (Xivilai)
+    [7100] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1333, postCast = 3000 }, -- Hand of Flame (Xivilai)
     [25726] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = "" }, -- Summon Daedra (Xivilai)
 
     [4653] = { block = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = LUIE_CC_TYPE_STUN, duration = 1000 }, -- Shockwave (Watcher)
@@ -431,7 +430,7 @@ LUIE.Data.AlertTable = {
     [14425] = { block = true, avoid = true, priority = 2, eventdetect = true, refire = 1750, result = ACTION_RESULT_BEGIN, cc = LUIE_CC_TYPE_STUN, duration = 3500 }, -- Doom-Truth's Gaze (Watcher)
 
     [6410] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1700 }, -- Tail Clip (Winged Twilight)
-    [6412] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = LUIE_CC_TYPE_STUN }, -- Dusk's Howl (Winged Twilight)
+    [6412] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 1200, cc = LUIE_CC_TYPE_STUN }, -- Dusk's Howl (Winged Twilight)
 
     [94903] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 1200, cc = LUIE_CC_TYPE_STAGGER }, -- Spring (Hunger)
     [87237] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 667, cc = LUIE_CC_TYPE_STAGGER }, -- Spring (Hunger)
@@ -718,7 +717,7 @@ LUIE.Data.AlertTable = {
     [39577] = { block = true, interrupt = true, priority = 2 }, -- Palolel's Rage (Queen Palolel)
 
     -- Will of the Council
-    [28939] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 2200, bossName = true, duration = 6500, postCast = 2000 }, -- Heat Wave (Sees-All-Colors)
+    [28939] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 2200, duration = 6500, postCast = 2000 }, -- Heat Wave (Sees-All-Colors)
 
     -- The Mad God's Bargain
     [39555] = { interrupt = true, priority = 2, eventdetect = true, refire = 1500 }, -- Summon Scamp (Haskill)
@@ -983,6 +982,8 @@ LUIE.Data.AlertTable = {
     [48814] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1500, bossName = true, duration = 1000, postCast = 5000 }, -- Daedric Tempest (High Kinlord Rilis)
     [28570] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1000 }, -- Levitate (High Kinlord Rilis)
     [28462] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1000 }, -- Levitate (High Kinlord Rilis)
+    [46967] = { power = true, priority = 1, auradetect = true, hiddenDuration = 2500 }, -- Daedric Step (High Kinlord Rilis)
+    [88070] = { summon = true, priority = 1, auradetect = true, fakeName = "", refire = 5000, bossMatch = { Unitnames.Boss_High_Kinlord_Rilis }, hideIfNoSource = true }, -- Creeping Doom (Harvester)
 
     -- Elden Hollow I
     [16834] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 2000, cc = LUIE_CC_TYPE_STUN }, -- Executioner's Strike (Akash gra-Mal)
@@ -1267,6 +1268,7 @@ LUIE.Data.AlertZoneOverride = {
     [4337] = { -- Winter's Reach (Wraith)
         -- DUNGEONS
         [380] = Unitnames.Boss_Cell_Haunter, -- Banished Cells I
+        [935] = Unitnames.NPC_Wraith, -- Banished Cells II
     },
 
     [36985] = { -- Void (Time Bomb Mage)
@@ -1345,6 +1347,7 @@ LUIE.Data.AlertZoneOverride = {
         -- DUNGEONS
         [130] = Unitnames.NPC_Skeletal_Archer, -- Crypt of Hearts I
         [380] = Unitnames.NPC_Banished_Archer, -- Banished Cells I
+        [935] = Unitnames.NPC_Banished_Archer, -- Banished Cells II
     },
     [28628] = { -- Volley (Archer)
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- Maormer Invasion Camp (Auridon)
@@ -1368,6 +1371,7 @@ LUIE.Data.AlertZoneOverride = {
         -- DUNGEONS
         [130] = Unitnames.NPC_Skeletal_Archer, -- Crypt of Hearts I
         [380] = Unitnames.NPC_Banished_Archer, -- Banished Cells I
+        [935] = Unitnames.NPC_Banished_Archer, -- Banished Cells II
 
     },
     [12439] = { -- Burning Arrow (Synergy)
@@ -1392,6 +1396,7 @@ LUIE.Data.AlertZoneOverride = {
         -- DUNGEONS
         [130] = Unitnames.NPC_Skeletal_Archer, -- Crypt of Hearts I
         [380] = Unitnames.NPC_Banished_Archer, -- Banished Cells I
+        [935] = Unitnames.NPC_Banished_Archer, -- Banished Cells II
     },
 
     --[88554] = { -- Summon the Dead (Necromancer)
@@ -1429,6 +1434,26 @@ LUIE.Data.AlertZoneOverride = {
         -- DUNGEONS
         -- [130] = Unitnames.NPC_Skeletal_Pyromancer, -- Crypt of Hearts I -- Can't use because The Mage Master's Slave(s) also use these spells
         [380] = Unitnames.NPC_Scamp, -- Banished Cells I
+        [935] = Unitnames.NPC_Dremora_Kyngald, -- Banished Cells II
+    },
+    [15164] = { -- Heat Wave (Fire Mage)
+        [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Incendiary, -- Silsailen (Auridon)
+        [Zonenames.Zone_Tower_of_the_Vale] = Unitnames.Elite_Minantilles_Rage, -- Tower of the Vale (Auridon)
+        [Zonenames.Zone_Quendeluun] = Unitnames.NPC_Pact_Pyromancer, -- Quendeluun (Auridon)
+        [Zonenames.Zone_Wansalen] = Unitnames.NPC_Pact_Pyromancer, -- Quendeluun (Auridon) - For a little section with npcs outside of the delv near Quendeluun.
+
+        [389] = Unitnames.NPC_Skeletal_Infernal, -- Reliquary Ruins
+        [548] = Unitnames.NPC_Bandit_Incendiary, -- Silitar
+        [555] = Unitnames.Boss_Vicereeve_Pelidil, -- Abecean Sea
+        [Zonenames.Zone_Hectahame] = Unitnames.NPC_Veiled_Infernal, -- Hectahame
+        [Zonenames.Zone_Hectahame_Armory] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Armory
+        [Zonenames.Zone_Hectahame_Arboretum] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Arboretum
+        [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Ritual Chamber
+
+        -- DUNGEONS
+        -- [130] = Unitnames.NPC_Skeletal_Pyromancer, -- Crypt of Hearts I -- Can't use because The Mage Master's Slave(s) also use these spells
+        [380] = Unitnames.Boss_Angata_the_Clannfear_Handler, -- Banished Cells I
+        [935] = Unitnames.NPC_Dremora_Kyngald, -- Banished Cells II
     },
     [47095] = { -- Fire Rune (Fire Mage)
         [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Incendiary, -- Silsailen (Auridon)
@@ -1447,13 +1472,20 @@ LUIE.Data.AlertZoneOverride = {
         -- DUNGEONS
         -- [130] = Unitnames.NPC_Skeletal_Pyromancer, -- Crypt of Hearts I -- Can't use because The Mage Master's Slave(s) also use these spells
         [380] = Unitnames.Boss_Angata_the_Clannfear_Handler, -- Banished Cells I
+        [935] = Unitnames.NPC_Dremora_Kyngald, -- Banished Cells II
     },
 
     [8779] = { -- Lightning Onslaught (Spider Daedra)
         [395] = Unitnames.Elite_Mezelukhebruz, -- The Refuge of Dread
+
+        -- DUNGEONS
+        [935] = Unitnames.NPC_Spider_Daedra, -- Banished Cells II (Summon Only)
     },
     [8782] = { -- Lightning Storm (Spider Daedra)
         [395] = Unitnames.Elite_Mezelukhebruz, -- The Refuge of Dread
+
+        -- DUNGEONS
+        [935] = Unitnames.NPC_Spider_Daedra, -- Banished Cells II (Summon Only)
     },
     [8773] = { -- Summon Spiderling (Spider Daedra)
         [395] = Unitnames.Elite_Mezelukhebruz, -- The Refuge of Dread
@@ -1478,9 +1510,11 @@ LUIE.Data.AlertZoneOverride = {
 
     [4771] = { -- Fiery Breath (Daedroth)
         [435] = Unitnames.Elite_Free_Will, -- Cathedral of the Golden Path
+        [935] = Unitnames.NPC_Daedroth, -- Banished Cells II
     },
     [91946] = { -- Ground Tremor (Daedroth)
         [435] = Unitnames.Elite_Free_Will, -- Cathedral of the Golden Path
+        [935] = Unitnames.NPC_Daedroth, -- Banished Cells II
     },
 
     [10270] = { -- Quake (Gargoyle)
@@ -1492,18 +1526,22 @@ LUIE.Data.AlertZoneOverride = {
 
     [37087] = { -- Lightning Onslaught (Battlemage)
         [548] = Unitnames.Elite_Baham, -- Silatar
+
+        -- DUNGEONS
+        [935] = Unitnames.NPC_Dremora_Clasher, -- Banished Cells II
     },
     [37129] = { -- Ice Cage (Battlemage)
         [548] = Unitnames.Elite_Baham, -- Silatar
 
         -- DUNGEONS
-        [130] = Unitnames.Boss_The_Mage_Master -- Crypt of Hearts I
+        [130] = Unitnames.Boss_The_Mage_Master, -- Crypt of Hearts I
+        [935] = Unitnames.NPC_Dremora_Clasher, -- Banished Cells II
     },
     [44216] = { -- Negate Magic (Battlemage - Elite)
         [548] = Unitnames.Elite_Baham, -- Silatar
 
         -- DUNGEONS
-        [130] = Unitnames.Boss_The_Mage_Master -- Crypt of Hearts I
+        [130] = Unitnames.Boss_The_Mage_Master, -- Crypt of Hearts I
     },
 
     [3767] = { -- Choking Pollen (Lurcher)
@@ -1532,6 +1570,17 @@ LUIE.Data.AlertZoneOverride = {
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Corrupt_Lurcher, -- Hectahame Ritual Chamber
     },
 
+    [35387] = { -- Defiled Grave (Bonelord)
+        [399] = Unitnames.Elite_Nolonir, -- Wansalen (Auridon - Delve)
+
+        [Zonenames.Zone_Hectahame] = Unitnames.NPC_Veiled_Bonelord, -- Hectahame
+        [Zonenames.Zone_Hectahame_Armory] = Unitnames.NPC_Veiled_Bonelord, -- Hectahame Armory
+        [Zonenames.Zone_Hectahame_Arboretum] = Unitnames.NPC_Veiled_Bonelord, -- Hectahame Arboretum
+        [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Veiled_Bonelord, -- Hectahame Ritual Chamber
+
+        -- DUNGEONS
+        [935] = Unitnames.NPC_Dremora_Hauzkyn, -- Banished Cells II
+    },
     [88507] = { -- Summon Abomination (Bonelord)
         [399] = Unitnames.Elite_Nolonir, -- Wansalen (Auridon - Delve)
 
@@ -1539,6 +1588,9 @@ LUIE.Data.AlertZoneOverride = {
         [Zonenames.Zone_Hectahame_Armory] = Unitnames.NPC_Veiled_Bonelord, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = Unitnames.NPC_Veiled_Bonelord, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Veiled_Bonelord, -- Hectahame Ritual Chamber
+
+        -- DUNGEONS
+        [935] = Unitnames.NPC_Dremora_Hauzkyn, -- Banished Cells II
     },
     [5050] = { -- Bone Saw (Bone Colossus)
         [Zonenames.Zone_Hightide_Keep] = Unitnames.Elite_Garggeel, -- Hightide Keep (Auridon)
@@ -1552,6 +1604,7 @@ LUIE.Data.AlertZoneOverride = {
         -- DUNGEONS
         [130] = Unitnames.NPC_Bone_Colossus, -- Crypt of Hearts I
         [380] = Unitnames.Boss_Skeletal_Destroyer, -- Banished Cells I
+        [935] = Unitnames.NPC_Bone_Colossus, -- Banished Cells II (Summoned Only)
     },
     [5030] = { -- Voice to Wake the Dead (Bone Colossus)
         [Zonenames.Zone_Hightide_Keep] = Unitnames.Elite_Garggeel, -- Hightide Keep (Auridon)
@@ -1572,6 +1625,7 @@ LUIE.Data.AlertZoneOverride = {
 
         -- DUNGEONS
         [130] = Unitnames.NPC_Ghost, -- Crypt of Hearts I
+        [935] = Unitnames.NPC_Ghost, -- Banished Cells II
     },
     [73925] = { -- Soul Cage (Lich)
         [559] = Unitnames.Boss_Shade_of_Naemon, -- Valenheart
@@ -1609,10 +1663,61 @@ LUIE.Data.AlertZoneOverride = {
         [393] = Unitnames.NPC_Spider, -- Saltspray Cave (Auridon)
     },
 
+    [6166] = { -- Heat Wave (Scamp)
+        [381] = Unitnames.NPC_Scamp, -- Auridon
+
+        -- DUNGEONS
+        [380] = Unitnames.NPC_Scamp, -- Banished Cells I
+        [935] = Unitnames.NPC_Scamp, -- Banished Cells II
+    },
     [6160] = { -- Rain of Fire (Scamp)
         [381] = Unitnames.NPC_Scamp, -- Auridon
 
         -- DUNGEONS
         [380] = Unitnames.NPC_Scamp, -- Banished Cells I
+        [935] = Unitnames.NPC_Scamp, -- Banished Cells II
+    },
+
+    [88947] = { -- Lightning Grasp (Xivilai)
+
+        -- DUNGEONS
+        [935] = Unitnames.NPC_Xivilai, -- Banished Cells I
+    },
+    [7100] = { -- Hand of Flame (Xivilai)
+
+        -- DUNGEONS
+        [935] = Unitnames.NPC_Xivilai, -- Banished Cells I
+    },
+    [25726] = { -- Summon Daedra (Xivilai)
+
+        -- DUNGEONS
+        [935] = Unitnames.NPC_Xivilai, -- Banished Cells I
+    },
+    [4829] = { -- Fire Brand (Flesh Atronach)
+
+        -- DUNGEONS
+        [935] = Unitnames.NPC_Flesh_Atronach, -- Banished Cells I
+    },
+    [6412] = { -- Dusk's Howl (Winged Twilight)
+
+        -- DUNGEONS
+        --[935] = Unitnames.NPC_Dark_Twilight, -- Banished Cells I (Can't use because Xivilai can summon Winged Twilight)
+    },
+
+    [24690] = { -- Focused Charge (Ogrim)
+
+        -- DUNGEONS
+        [935] = Unitnames.NPC_Flame_Ogrim, -- Banished Cells II
+    },
+    [91848] = { -- Stomp (Ogrim)
+
+        -- DUNGEONS
+        [935] = Unitnames.NPC_Flame_Ogrim, -- Banished Cells II
+    },
+
+    [28939] = { -- Heat Wave (Sees-All-Colors)
+
+        -- DUNGEONS
+        [935] = Unitnames.Boss_Keeper_Areldur, -- Banished Cells II
     },
 }

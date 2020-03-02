@@ -67,7 +67,7 @@ LUIE.Data.UnitNames = {
     NPC_Auroran_Battlemage                = 'Auroran Battlemage',
     NPC_Watcher                           = 'Watcher',
     NPC_Dremora_Narkynaz                  = 'Dremora Narkynaz',
-    NPC_Dremora_Kyngald                   = 'Dremora Kyngald',
+    NPC_Dremora_Kyngald                   = 'Dremora Kyngald', -- VERIFIED - BANISHED CELLS I
     NPC_Flame_Atronach                    = 'Flame Atronach',
     NPC_Skeletal_Infernal                 = 'Skeletal Infernal',
     NPC_Skeletal_Archer                   = 'Skeletal Archer', -- VERIFIED - DUNGEON - CRYPT OF HEARTS I
@@ -83,6 +83,11 @@ LUIE.Data.UnitNames = {
     NPC_Sainted_Charger                   = 'Sainted Charger',
     NPC_Gargoyle                          = 'Gargoyle', -- GENERIC NPC
     NPC_Xivilai                           = 'Xivilai', -- GENERIC NPC
+    NPC_Wraith                            = 'Wraith', -- GENERIC NPC
+    NPC_Daedroth                          = 'Daedroth', -- GENERIC NPC
+    NPC_Spider_Daedra                     = 'Spider Daedra', -- GENERIC NPC
+    NPC_Spiderling                        = 'Spiderling', -- GENERIC NPC
+    NPC_Flame_Ogrim                       = 'Flame Ogrim', -- GENERIC NPC (SUMMON)
 
     NPC_Aura_of_Protection                = 'Aura of Protection',
 
@@ -348,6 +353,8 @@ LUIE.Data.UnitNames = {
     Boss_Maw_of_the_Infernal              = 'Maw of the Infernal',
     Boss_Keeper_Voranil                   = 'Keeper Voranil',
     Boss_Keeper_Imiril                    = 'Keeper Imiril',
+    NPC_Dremora_Clasher                   = 'Dremora Clasher',
+    --NPC_Dark_Twilight                     = 'Dark Twilight', -- (Can't use because Xivilai can summon Winged Twilight)
 
     -- Elden Hollow I
     Boss_Ancient_Spriggan                 = 'Ancient Spriggan',
@@ -429,7 +436,7 @@ LUIE.Data.UnitNames = {
     Boss_Mad_Mortine                      = 'Mad Mortine',
     Boss_Blood_Spawn                      = 'Blood Spawn',
     NPC_The_Whisperer_Nightmare           = 'The Whisperer Nightmare',
-    NPC_Flesh_Atronach                    = 'Flesh Atronach',
+    NPC_Flesh_Atronach                    = 'Flesh Atronach', -- Generic NPC
     Boss_Urvan_Veleth                     = 'Urvan Veleth',
     Boss_Vorenor_Winterbourne             = 'Vorenor Winterbourne',
 

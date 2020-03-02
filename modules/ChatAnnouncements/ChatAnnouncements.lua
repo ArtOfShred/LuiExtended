@@ -8966,16 +8966,23 @@ function ChatAnnouncements.HookFunction()
         [EVENT_IGNORE_REMOVED] = true,
     }
 
-    -- Unregister ZOS handlers for events we need to modify
-    for eventCode, _ in pairs (ChatEventFormattersDelete) do
-        EVENT_MANAGER:UnregisterForEvent("ChatRouter", eventCode)
+    local function SlayChatHandlers()
+        -- Unregister ZOS handlers for events we need to modify
+        for eventCode, _ in pairs (ChatEventFormattersDelete) do
+            EVENT_MANAGER:UnregisterForEvent("ChatRouter", eventCode)
+        end
+
+        -- Slay these events in case LibChatMessage is active and hooks them
+        local ChatEventFormatters = ZO_ChatSystem_GetEventHandlers()
+        for eventType, _ in pairs (ChatEventFormattersDelete) do
+            ChatEventFormatters[eventType] = nil
+        end
     end
 
-    -- Slay these events in case LibChatMessage is active and hooks them
-    local ChatEventFormatters = ZO_ChatSystem_GetEventHandlers()
-    for eventType, _ in pairs (ChatEventFormattersDelete) do
-        ChatEventFormatters[eventType] = nil
-    end
+    -- Stop other chat handlers from registering, then stop them again a few more times just in case.
+    SlayChatHandlers()
+    zo_callLater(SlayChatHandlers, 2500)
+    zo_callLater(SlayChatHandlers, 5000)
 
     -- HOOK PLAYER_TO_PLAYER Group Notifications to edit Ignore alert
     local KEYBOARD_INTERACT_ICONS = {
