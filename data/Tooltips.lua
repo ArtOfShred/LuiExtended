@@ -1343,6 +1343,7 @@ LUIE.Data.Tooltips = {
     -- Banished Cells II
     Skill_Curse_of_Suffering                        = GetString(SI_LUIE_SKILL_CURSE_OF_SUFFERING_TP),
     Skill_Curse_of_Dominance                        = GetString(SI_LUIE_SKILL_CURSE_OF_DOMINANCE_TP),
+    Skill_Resilience                                = GetString(SI_LUIE_SKILL_RESILIENCE_TP),
 
     -- Elden Hollow II
     Skill_Siphon_Magicka                            = GetString(SI_LUIE_SKILL_SIPHON_MAGICKA_TP),
@@ -1388,6 +1389,13 @@ LUIE.Data.Tooltips = {
     -- Wayrest Sewers II
     Skill_Rend_Soul                                 = GetString(SI_LUIE_SKILL_REND_SOUL_TP),
     Skill_Scorching_Flames                          = GetString(SI_LUIE_SKILL_SCORCHING_FLAMES_TP),
+
+    -- Crypt of Hearts I
+    Skill_Immolate_Colossus                         = GetString(SI_LUIE_SKILL_IMMOLATE_COLOSSUS_TP),
+    Skill_Lightning_Empowerment                     = GetString(SI_LUIE_SKILL_LIGHTNING_EMPOWERMENT_TP),
+    Skill_Lightning_Empowerment_Enrage              = GetString(SI_LUIE_SKILL_LIGHTNING_EMPOWERMENT_ENRAGE_TP),
+    Skill_Incensed                                  = GetString(SI_LUIE_SKILL_INCENSED_TP),
+    Skill_Incensed_Enrage                           = GetString(SI_LUIE_SKILL_INCENSED_ENRAGE_TP),
 
     -- Frostvault
     Skill_Maim                                      = GetString(SI_LUIE_SKILL_MAIM_NPC_TP),

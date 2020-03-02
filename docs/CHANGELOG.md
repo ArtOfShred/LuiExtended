@@ -1,3 +1,19 @@
+### Version 6.0.4
+
+General
+- Updated icons, tooltips, alerts, and cc tracker for Crypt of Hearts I.
+- Updated and added a good chunk of improved custom icons.
+
+Chat Announcements
+- Fixed an issue where Friend logon/logoff messages would duplicate when using pChat, now my tatsumaki is more powerful.
+- Fixed an issue where the Center Screen Announcement for completing a lore collection for a zone that resulted in Mages Guild reputation gain would throw a UI error & fixed an issue where the Chat Announcement for this event had an icon that was colored by the default system text color.
+
+Combat Info
+- Fixed an issue where the fallback font variable was misnamed. This could cause the addon to fail to load if for some reason the selected font wasn't found.
+- Removed a debug line from Ability Alerts that could display when enemies used abilities.
+
+---
+
 ### Version 6.0.3
 
 Slash Commands
@@ -108,7 +124,7 @@ Unit Frames
 
 Art Assets
 - Custom ability icons by and modified from eleazzaar licensed under the CC-3 License (https://creativecommons.org/licenses/by/3.0/)
-- Custom ability icons by and modified from AKiZA, Angelina Avgustova, Dayed, Digital Worlds JSC, Ever Probe, HOSE, Jon Snow, Josch, Kalle Olli, Moon Tribe, N-hance Studio, PONETI, REXARD, Sky Painter, The 7 Heaven, TiGame, and TonityEden licensed under the Unity Store single entity license. (https://unity3d.com/legal/as_terms)
+- Custom ability icons by and modified from AKiZA, Angelina Avgustova, Blade Dancer, ClayManStudio, Dayed, Digital Worlds JSC, Ever Probe, HOSE, Jon Snow, Josch, Kalle Olli, Moon Tribe, N-hance Studio, PONETI, REXARD, Sky Painter, The 7 Heaven, TiGame, and TonityEden licensed under the Unity Store single entity license. (https://unity3d.com/legal/as_terms)
 - Custom ability icons by and modified from a-ravlik & micart licensed under the GraphicRiver regular license. (https://graphicriver.net/licenses/terms/regular)
 - Custom ability icons by and modified from Forrest Imel, Frostwindz and Mizuko licensed under the GameDevMarket.net pro license. (https://www.gamedevmarket.net/terms-conditions/#pro-licence)
 

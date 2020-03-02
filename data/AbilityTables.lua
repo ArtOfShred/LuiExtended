@@ -1240,9 +1240,16 @@ local AbilityTables = {
     Skill_Sisters_Bond                = GetString(SI_LUIE_SKILL_SISTERS_BOND),
     Skill_Levitate                    = 28570,
     Skill_Essence_Siphon              = 28750,
+    Skill_Daedric_Chaos               = GetString(SI_LUIE_SKILL_DAEDRIC_CHAOS),
+    Skill_Chaotic_Dispersion          = GetString(SI_LUIE_SKILL_CHAOTIC_DISPERSION),
+    Skill_Chaotic_Return              = GetString(SI_LUIE_SKILL_CHAOTIC_RETURN),
+    Skill_Summon_Daedroth             = 69356,
+    Skill_Resilience                  = GetString(SI_LUIE_SKILL_RESILIENCE),
 
     -- Elden Hollow I
-    Skill_Crushing_Blow               = 33189,
+    Skill_Executioners_Strike         = 16834,
+    Skill_Whirling_Axe                = GetString(SI_LUIE_SKILL_WHIRLING_AXE),
+    Skill_Crushing_Blow               = 33189, -- TODO: Move to the first instance of this rename being neccesary
     Skill_Measured_Uppercut           = 34607,
     Skill_Heal_Spores                 = GetString(SI_LUIE_SKILL_HEAL_SPORES),
     Skill_Summon_Saplings             = GetString(SI_LUIE_SKILL_SUMMON_STRANGLER_SAPLINGS),
@@ -1333,6 +1340,12 @@ local AbilityTables = {
     Skill_Necromantic_Implosion       = 17207,
     Skill_Escaped_Souls               = GetString(SI_LUIE_SKILL_ESCAPED_SOULS),
     Skill_Overhead_Smash              = 20915,
+
+    -- Crypt of Hearts I
+    Skill_Trample                     = 46947,
+    Skill_Immolate                    = 46679,
+    Skill_Electric_Prison             = 22432,
+    Skill_Overwhelming_Blow           = GetString(SI_LUIE_SKILL_OVERWHELMING_BLOW),
 
     -- Frostvault
     Skill_Rending_Bleed               = 117286,

@@ -531,7 +531,7 @@ Effects.EffectGroundDisplay = {
     [59497] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', buff = false, debuff = false, ground = true }, -- Spawn of Mephala (Spawn of Mephala)
     [80523] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_stormfist.dds', buff = false, debuff = false, ground = true }, -- Stormfist (Stormfist)
     [102093] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds', buff = false, debuff = false, ground = true }, -- Thurvokun
-    [59594] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_nerieneth.dds', name = Abilities.Set_Nerieneth, buff = false, debuff = false, ground = true }, -- Crypt of Hearts Item Set (Nerien'eth)
+    [59594] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_rupture.dds', name = Abilities.Set_Nerieneth, buff = false, debuff = false, ground = true }, -- Crypt of Hearts Item Set (Nerien'eth)
     [80545] = { icon = 'esoui/art/icons/achievement_thievesguild_021.dds', buff = false, debuff = false, ground = true }, -- Sellistrix (Sellistrix)
     --[102136] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_zaan.dds', buff = true, debuff = false, ground = false }, -- Zaan -- Buff icon for Zaan, may reimplement if I add a way to override tooltips for these.
 
@@ -1664,6 +1664,9 @@ Effects.AddNameAuraAlways = {
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.AddNameAura = {
 
+    -- Various Mobs
+    [Unitnames.NPC_Daedroth] = { [1] = { id = 999013, zone = 935 } }, -- Daedroth
+
     -- World Bosses
 
     -- Auridon
@@ -1977,9 +1980,26 @@ Effects.AddNameAura = {
     [Unitnames.Boss_Garron_the_Returned] = { [1] = { id = 33097 } }, -- Garron the Returned
     [Unitnames.Boss_The_Forgotten_One] = { [1] = { id = 33097 } }, -- The Forgotten One
 
+    -- Crypt of Hearts I
+    [Unitnames.Boss_The_Mage_Master] = { [1] = { id = 33097 } }, -- The Mage Master
+    [Unitnames.Boss_Archmaster_Siniel] = { [1] = { id = 33097 } }, -- Archmaster Siniel
+    [Unitnames.Boss_Deaths_Leviathan] = { [1] = { id = 33097 } }, -- Death's Leviathan
+    [Unitnames.Boss_Dogas_the_Berserker] = { [1] = { id = 33097 } }, -- Dogas the Berserker
+    [Unitnames.Boss_Ilambris_Athor] = { [1] = { id = 33097 } }, -- Ilambris-Athor
+    [Unitnames.Boss_Ilambris_Zaven] = { [1] = { id = 33097 } }, -- Ilambris-Zaven
+
     -- Frostvault
     [Unitnames.NPC_Coldsnap_Ogre] = { [1] = { id = 33097 } }, -- Coldsnap Ogre
     [Unitnames.Boss_Icestalker] = { [1] = { id = 33097 } }, -- Icestalker
+}
+
+--------------------------------------------------------------------------------------------------------------------------------
+-- When a gain event or faded event fires for this id in the world, we add a buff aura to a specific unit name. Only usable for unique boss effects.
+--------------------------------------------------------------------------------------------------------------------------------
+Effects.AddNameOnEvent = {
+
+    [46680] = Unitnames.Boss_Deaths_Leviathan -- Immolate Colossus -- Death's Leviathan (Crypt of Hearts I)
+
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -2218,6 +2238,15 @@ Effects.EffectOverrideByName = {
         [Unitnames.NPC_Skaafin_Wretch] =          { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_rending_slash.dds' }, -- Rending Slash (Skaafin Wretch)
         [Unitnames.NPC_Skaafin_Miscreal] =        { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_rending_slash.dds' }, -- Rending Slash (Skaafin Miscreal)
     },
+    [8554] = { -- Flurry (Bloodfiend)
+        [Unitnames.NPC_Skeleton] =                { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_flurry.dds' }, -- Flurry (Skeleton)
+        [Unitnames.NPC_Bone_Flayer] =             { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_flurry.dds' }, -- Flurry (Bone Flayer)
+        [Unitnames.NPC_Bone_Reaver] =             { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_flurry.dds' }, -- Flurry (Bone Flayer)
+        [Unitnames.NPC_Risen_Dead] =             { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_flurry.dds' }, -- Flurry (Bone Flayer)
+        [Unitnames.NPC_Graveoath_Ravener] =   { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_flurry.dds' }, -- Flurry (Graveoath Ravener)
+        [Unitnames.NPC_Skaafin_Wretch] =          { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_flurry.dds' }, -- Flurry (Skaafin Wretch)
+        [Unitnames.NPC_Skaafin_Miscreal] =        { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_flurry.dds' }, -- Flurry (Skaafin Miscreal)
+    },
     [9194] = { -- Flurry (Bloodfiend)
         [Unitnames.NPC_Skeleton] =                { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_flurry.dds' }, -- Flurry (Skeleton)
         [Unitnames.NPC_Bone_Flayer] =             { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_flurry.dds' }, -- Flurry (Bone Flayer)
@@ -2310,10 +2339,10 @@ Effects.EffectOverrideByName = {
 
     -- GENERIC
     [44176] = { -- Flying Immunities
-       [Unitnames.Boss_Cell_Haunter] = { hide = true }, -- Cell Haunter
+       [Unitnames.Boss_Cell_Haunter] = { hide = true }, -- Cell Haunter (Banished Cells I)
        [Unitnames.NPC_The_Feast] = { hide = true }, -- The Feast
-       [Unitnames.Boss_Azara_the_Frightener] = { hide = true }, -- Azara the Frightener
-       [Unitnames.Boss_Dark_Ember] = { hide = true }, -- Azara the Frightener
+       [Unitnames.Boss_Azara_the_Frightener] = { hide = true }, -- Azara the Frightener (Elden Hollow II)
+       [Unitnames.Boss_Dark_Ember] = { hide = true }, -- Dark Ember (City of Ash I)
        [Unitnames.Boss_Lady_Solace] = { hide = true}, -- Grahtwood (Lady Solace's Fen)
        [Unitnames.Boss_Valanir_the_Restless] = { hide = true }, -- Grahtwood (Valanir's Rest)
        [Unitnames.Boss_Shade_of_Naemon] = { hide = true }, -- Greenshade (Striking at the Heart)
@@ -2322,6 +2351,7 @@ Effects.EffectOverrideByName = {
        [Unitnames.NPC_Watcher] = { hide = true }, -- Watcher
        [Unitnames.Boss_Magdelena] = { hide = true }, -- Magdelena (Magdelena's Haunt)
        [Unitnames.Boss_Desuuga_the_Siren] = { hide = true }, -- Desuuga the Siren (Siren's Cove)
+       [Unitnames.Boss_Uulkar_Bonehand] = { hide = true }, -- Uulkar Bonehand (Crypt of Hearts I)
     },
 }
 
@@ -2436,6 +2466,9 @@ Effects.EffectSourceOverride = {
     [87373] = { source = Abilities.Skill_Cave_In }, -- Cave-In (Collapsed Ceiling)
     [86418] = { source = Unitnames.Boss_Praxin_Douare, pet = '', removePlayer = true }, -- Harrowing Ring (Blood Essence)
     [27655] = { source = Unitnames.Boss_Praxin_Douare, pet = '', removePlayer = true }, -- Harrowing Ring (Blood Essence)
+
+    -- Crypt of Hearts I
+    [22432] = { pet = '' }, -- Electric Prison (Lightning Rod)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -2999,6 +3032,191 @@ Effects.KeepUpgradeTooltip = {
     [Abilities.Keep_Upgrade_Food_Mage_Abilities]        = Tooltips.Keep_Upgrade_Food_Mage_Abilities,
     [Abilities.Keep_Upgrade_Food_Honor_Guard_Abilities] = Tooltips.Keep_Upgrade_Food_Honor_Guard_Abilities,
     [Abilities.Keep_Upgrade_Food_Guard_Abilities]       = Tooltips.Keep_Upgrade_Food_Guard_Abilities,
+}
+
+-- TODO; Fill in this table with icons for normalizaton
+Effects.PotionIconTable = {
+
+    -- Crafted Potions (2 Traits)
+    [64564] = { icon = 'LuiExtended/media/icons/potions/potion_007.dds', normalize = 'esoui/art/icons/' }, -- of Armor (Major Resolve)
+    [79857] = { icon = 'LuiExtended/media/icons/potions/potion_007r.dds', normalize = 'esoui/art/icons/' }, -- of Defile (Minor Defile)
+    [45236] = { icon = 'LuiExtended/media/icons/potions/potion_009.dds', normalize = 'esoui/art/icons/' }, -- of Detection (Increase Detection)
+    [45222] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds', normalize = 'esoui/art/icons/' }, -- of Health (Major Fortitude)
+    [45239] = { icon = 'LuiExtended/media/icons/potions/potion_008.dds', normalize = 'esoui/art/icons/' }, -- of Immovability (Unstoppable)
+    [45224] = { icon = 'LuiExtended/media/icons/potions/potion_002.dds',  normalize = 'esoui/art/icons/' }, -- of Magicka (Major Intellect)
+    [79712] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds',  normalize = 'esoui/art/icons/' }, -- of Protection (Minor Protection)
+    [46208] = { icon = 'LuiExtended/media/icons/potions/potion_021.dds',  normalize = 'esoui/art/icons/' }, -- of Ravage Armor (Minor Fracture)
+    [47204] = { icon = 'LuiExtended/media/icons/potions/potion_020.dds',  normalize = 'esoui/art/icons/' }, -- of Ravage Spell Critical (Minor Uncertainty)
+    [46202] = { icon = 'LuiExtended/media/icons/potions/potion_020.dds',  normalize = 'esoui/art/icons/' }, -- of Ravage Spell Power (Minor Cowardice)
+    [46206] = { icon = 'LuiExtended/media/icons/potions/potion_018.dds',  normalize = 'esoui/art/icons/' }, -- of Ravage Spell Protection (Minor Breach)
+    [47203] = { icon = 'LuiExtended/media/icons/potions/potion_019.dds',  normalize = 'esoui/art/icons/' }, -- of Ravage Weapon Critical (Minor Enervation)
+    [46204] = { icon = 'LuiExtended/media/icons/potions/potion_019.dds',  normalize = 'esoui/art/icons/' }, -- of Ravage Weapon Power (Minor Maim)
+    [46210] = { icon = 'LuiExtended/media/icons/potions/potion_017.dds',  normalize = 'esoui/art/icons/' }, -- of Slow (Hindrance)
+    [64566] = { icon = 'LuiExtended/media/icons/potions/potion_010.dds',  normalize = 'esoui/art/icons/' }, -- of Speed (Major Expedition)
+    [64570] = { icon = 'LuiExtended/media/icons/potions/potion_013.dds',  normalize = 'esoui/art/icons/' }, -- of Spell Critical (Major Prophecy)
+    [64558] = { icon = 'LuiExtended/media/icons/potions/potion_006.dds',  normalize = 'esoui/art/icons/' }, -- of Spell Power (Major Sorcery)
+    [64562] = { icon = 'LuiExtended/media/icons/potions/potion_004.dds',  normalize = 'esoui/art/icons/' }, -- of Spell Protection (Major Ward)
+    [45226] = { icon = 'LuiExtended/media/icons/potions/potion_003.dds',  normalize = 'esoui/art/icons/' }, -- of Stamina (Major Endurance)
+    [79848] = { icon = 'LuiExtended/media/icons/potions/potion_014.dds',  normalize = 'esoui/art/icons/' }, -- of Vitality (Major Vitality)
+    [79844] = { icon = 'LuiExtended/media/icons/potions/potion_001r.dds',  normalize = 'esoui/art/icons/' }, -- of Vulnerability (Minor Vulnerability)
+    [64568] = { icon = 'LuiExtended/media/icons/potions/potion_012.dds',  normalize = 'esoui/art/icons/' }, -- of Weapon Critical (Major Savagery)
+    [64555] = { icon = 'LuiExtended/media/icons/potions/potion_005.dds',  normalize = 'esoui/art/icons/' }, -- of Weapon Power (Major Brutality)
+    [125027] = { icon = 'LuiExtended/media/icons/potions/potion_011.dds',  normalize = 'esoui/art/icons/' }, -- of Heroism (Minor Heroism)
+
+    -- Crafted Potions (3 Traits)
+    [64565] = { icon = 'LuiExtended/media/icons/potions/potion_007.dds',  normalize = 'esoui/art/icons/' }, -- of Armor (Major Resolve)
+    -- No ... of Creeping Ravage Health
+    [79860] = { icon = 'LuiExtended/media/icons/potions/potion_007r.dds',  normalize = 'esoui/art/icons/' }, -- of Defile (Minor Defile)
+    [45458] = { icon = 'LuiExtended/media/icons/potions/potion_009.dds',  normalize = 'esoui/art/icons/' }, -- of Detection (Increase Detection)
+    [63670] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds',  normalize = 'esoui/art/icons/' }, -- of Health (Major Fortitude)
+    [45463] = { icon = 'LuiExtended/media/icons/potions/potion_008.dds',  normalize = 'esoui/art/icons/' }, -- of Immovability (Unstoppable)
+    [63676] = { icon = 'LuiExtended/media/icons/potions/potion_002.dds',  normalize = 'esoui/art/icons/' }, -- of Magicka (Major Intellect)
+    [79714] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds',  normalize = 'esoui/art/icons/' }, -- of Protection (Minor Protection)
+    [46250] = { icon = 'LuiExtended/media/icons/potions/potion_021.dds',  normalize = 'esoui/art/icons/' }, -- of Ravage Armor (Minor Fracture)
+    -- No ... of Ravage Spell Critical
+    [46244] = { icon = 'LuiExtended/media/icons/potions/potion_020.dds',  normalize = 'esoui/art/icons/' }, -- of Ravage Spell Power (Minor Cowardice)
+    [46248] = { icon = 'LuiExtended/media/icons/potions/potion_018.dds',  normalize = 'esoui/art/icons/' }, -- of Ravage Spell Protection (Reduce Spell Resistance) (Should be Minor Breach)
+    [47202] = { icon = 'LuiExtended/media/icons/potions/potion_019.dds',  normalize = 'esoui/art/icons/' }, -- of Ravage Weapon Critical (Reduce Weapon Critical) (Should be Minor Enervation)
+    [46246] = { icon = 'LuiExtended/media/icons/potions/potion_019.dds',  normalize = 'esoui/art/icons/' }, -- of Ravage Weapon Power (Minor Maim)
+    [46252] = { icon = 'LuiExtended/media/icons/potions/potion_017.dds',  normalize = 'esoui/art/icons/' }, -- of Slow (Hindrance)
+    [64567] = { icon = 'LuiExtended/media/icons/potions/potion_010.dds',  normalize = 'esoui/art/icons/' }, -- of Speed (Major Expedition)
+    [64572] = { icon = 'LuiExtended/media/icons/potions/potion_013.dds',  normalize = 'esoui/art/icons/' }, -- of Spell Critical (Major Prophecy)
+    [64561] = { icon = 'LuiExtended/media/icons/potions/potion_006.dds',  normalize = 'esoui/art/icons/' }, -- of Spell Power (Major Sorcery)
+    [64563] = { icon = 'LuiExtended/media/icons/potions/potion_004.dds',  normalize = 'esoui/art/icons/' }, -- of Spell Protection (Major Ward)
+    [63681] = { icon = 'LuiExtended/media/icons/potions/potion_003.dds',  normalize = 'esoui/art/icons/' }, -- of Stamina (Major Endurance)
+    -- No ... of Stun
+    [79850] = { icon = 'LuiExtended/media/icons/potions/potion_014.dds',  normalize = 'esoui/art/icons/' }, -- of Vitality (Major Vitality)
+    [79846] = { icon = 'LuiExtended/media/icons/potions/potion_001r.dds',  normalize = 'esoui/art/icons/' }, -- of Vulnerability (Minor Vulnerability)
+    [64569] = { icon = 'LuiExtended/media/icons/potions/potion_012.dds',  normalize = 'esoui/art/icons/' }, -- of Weapon Critical (Major Savagery)
+    [64554] = { icon = 'LuiExtended/media/icons/potions/potion_005.dds',  normalize = 'esoui/art/icons/' }, -- of Weapon Power (Major Brutality)
+    [125041] = { icon = 'LuiExtended/media/icons/potions/potion_011.dds',  normalize = 'esoui/art/icons/' }, -- of Heroism (Minor Heroism)
+
+    -- Vendor Potions + AVA Potions + Roguish Draughts
+    [63672] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds',  normalize = 'esoui/art/icons/'  }, -- of Health (Major Fortitude)
+    [63678] = { icon = 'LuiExtended/media/icons/potions/potion_002.dds',  normalize = 'esoui/art/icons/' }, -- of Magicka (Major Intellect)
+    [63683] = { icon = 'LuiExtended/media/icons/potions/potion_003.dds',  normalize = 'esoui/art/icons/' }, -- of Stamina (Major Endurance)
+    [72935] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds',  normalize = 'esoui/art/icons/' }, -- Alliance Battle Draught (Major Endurance)
+    [72936] = { icon = 'LuiExtended/media/icons/potions/potion_ava_yellow.dds',  normalize = 'esoui/art/icons/' }, -- Alliance Battle Draught (Major Brutality)
+    [72930] = { icon = 'LuiExtended/media/icons/potions/potion_ava_red.dds',  normalize = 'esoui/art/icons/' }, -- Alliance Health Draught (Unstoppable )
+    [72928] = { icon = 'LuiExtended/media/icons/potions/potion_ava_red.dds',  normalize = 'esoui/art/icons/' }, -- Alliance Health Draught (Major Fortitude)
+    [72933] = { icon = 'LuiExtended/media/icons/potions/potion_ava_teal.dds',  normalize = 'esoui/art/icons/' }, -- Alliance Spell Draught (Major Sorcery)
+    [72932] = { icon = 'LuiExtended/media/icons/potions/potion_ava_blue.dds',  normalize = 'esoui/art/icons/' }, -- Alliance Spell Draught (Major Intellect)
+    [78054] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds',  normalize = 'esoui/art/icons/' }, -- Roguish Stealth Draught (Major Endurance)
+    [78081] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds',  normalize = 'esoui/art/icons/' }, -- Roguish Escape Draught (Major Expedition)
+    [78080] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds',  normalize = 'esoui/art/icons/' }, -- Roguish Escape Draught (Major Endurance)
+
+    -- Crown Store Potions
+    [68405] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds',  normalize = 'esoui/art/icons/' }, -- Crown Tri-Restoration Potion (Major Fortitude)
+    [68406] = { icon = 'LuiExtended/media/icons/potions/potion_crown_blue.dds',  normalize = 'esoui/art/icons/' }, -- Crown Tri-Restoration Potion (Major Intellect)
+    [68408] = { icon = 'LuiExtended/media/icons/potions/potion_crown_green.dds',  normalize = 'esoui/art/icons/' }, -- Crown Tri-Restoration Potion (Major Endurance)
+    [86683] = { icon = 'LuiExtended/media/icons/potions/potion_crown_blue.dds',  normalize = 'esoui/art/icons/' }, -- Crown Spellcaster's Elixir (Major Intellect)
+    [86684] = { icon = 'LuiExtended/media/icons/potions/potion_crown_teal.dds',  normalize = 'esoui/art/icons/' }, -- Crown Spellcaster's Elixir (Major Prophecy)
+    [86685] = { icon = 'LuiExtended/media/icons/potions/potion_crown_teal.dds',  normalize = 'esoui/art/icons/' }, -- Crown Spellcaster's Elixir (Major Sorcery)
+    [86697] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds',  normalize = 'esoui/art/icons/' }, -- Crown Survivor's Elixir (Major Fortitude)
+    [86698] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds',  normalize = 'esoui/art/icons/' }, -- Crown Survivor's Elixir (Unstoppable)
+    [86693] = { icon = 'LuiExtended/media/icons/potions/potion_crown_green.dds',  normalize = 'esoui/art/icons/' }, -- Crown Warrior's Elixir (Major Endurance)
+    [86694] = { icon = 'LuiExtended/media/icons/potions/potion_crown_yellow.dds',  normalize = 'esoui/art/icons/' }, -- Crown Warrior's Elixir (Major Savagery)
+    [86695] = { icon = 'LuiExtended/media/icons/potions/potion_crown_yellow.dds',  normalize = 'esoui/art/icons/' }, -- Crown Warrior's Elixir (Major Brutality)
+    [92415] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds',  normalize = 'esoui/art/icons/' }, -- Major Fortitude (Gold Coast Swift Survivor Elixir)
+    [92418] = { icon = 'LuiExtended/media/icons/potions/potion_crown_green.dds',  normalize = 'esoui/art/icons/' }, -- Major Expedition (Gold Coast Swift Survivor Elixir)
+    [92416] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds',  normalize = 'esoui/art/icons/' }, -- Unstoppable (Gold Coast Swift Survivor Elixir)
+}
+
+-- TODO: Fill in this table with icons for normalizations
+Effects.PoisonIconTable = {
+
+    -- Crafted Poisons (2 Traits)
+
+    [79284] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Drain Spell Resist (Ward-Draining Poison) DEBUFF
+    [79285] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Ward (Ward-Draining Poison) BUFF
+    [79087] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Breach (Breaching Poison) DEBUFF
+    [79309] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_r.dds', normalize = 'esoui/art/icons/' }, -- Drain Physical Resist (Resolve-Draining Poison) DEBUFF
+    [79310] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Resolve (Resolve-Draining Poison) BUFF
+    [79090] = { icon = 'LuiExtended/media/icons/poisons/poison_1_orange_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Fracture (Fracturing Poison) DEBUFF
+    [79193] = { icon = 'LuiExtended/media/icons/poisons/poison_2_cyan_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Cowardice (Sorcery-Draining Poison) DEBUFF
+    [79221] = { icon = 'LuiExtended/media/icons/poisons/poison_2_cyan_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Sorcery (Sorcery-Draining Poison) BUFF
+    [79069] = { icon = 'LuiExtended/media/icons/poisons/poison_1_cyan_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Cowardice (Cowardice Poison) DEBUFF
+    [79280] = { icon = 'LuiExtended/media/icons/poisons/poison_2_yellow_r.dds', normalize = 'esoui/art/icons/' }, -- Drain Weapon Power (Brutality-Draining Poison) DEBUFF
+    [79281] = { icon = 'LuiExtended/media/icons/poisons/poison_2_yellow_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Brutality (Brutality-Draining Poison) BUFF
+    [79083] = { icon = 'LuiExtended/media/icons/poisons/poison_1_yellow_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Maim (Maiming Poison) DEBUFF
+    [79446] = { icon = 'LuiExtended/media/icons/poisons/poison_1_cyan_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Uncertainty (Prophecy-Draining Poison) DEBUFF
+    [79447] = { icon = 'LuiExtended/media/icons/poisons/poison_1_cyan_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Prophecy (Prophecy-Draining Poison) BUFF
+    [79117] = { icon = 'LuiExtended/media/icons/poisons/poison_1_cyan_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Uncertainty (Uncertainty Poison) DEBUFF
+    [79450] = { icon = 'LuiExtended/media/icons/poisons/poison_1_yellow_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Enervation (Savagery-Draining Poison) DEBUFF
+    [79453] = { icon = 'LuiExtended/media/icons/poisons/poison_1_yellow_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Savagery (Savagery-Draining Poison) BUFF
+    [79113] = { icon = 'LuiExtended/media/icons/poisons/poison_1_yellow_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Enervation (Enervating Poison) DEBUFF
+    [79457] = { icon = 'LuiExtended/media/icons/poisons/poison_2_red_r.dds', normalize = 'esoui/art/icons/' }, -- Immobilize (Escapist's Poison) DEBUFF
+    [79458] = { icon = 'LuiExtended/media/icons/poisons/poison_2_red_g.dds', normalize = 'esoui/art/icons/' }, -- Unstoppable (Escapist's Poison) BUFF
+    [79122] = { icon = 'LuiExtended/media/icons/poisons/poison_1_red_r.dds', normalize = 'esoui/art/icons/' }, -- Immobilize (Entrapping Poison) DEBUFF
+    [79996] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Revealing Poison (Stealth-Draining Poison) DEBUFF
+    [80003] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Marking Poison (Conspicuous Poison) DEBUFF
+    [79367] = { icon = 'LuiExtended/media/icons/poisons/poison_2_green_r.dds', normalize = 'esoui/art/icons/' }, -- Hindrance (Speed-Draining Poison) DEBUFF
+    [79368] = { icon = 'LuiExtended/media/icons/poisons/poison_2_green_g.dds', normalize = 'esoui/art/icons/' }, -- Major Expedition (Speed-Draining Poison) BUFF
+    [79094] = { icon = 'LuiExtended/media/icons/poisons/poison_1_green_r.dds', normalize = 'esoui/art/icons/' }, -- Hindrance (Hindering Poison) DEBUFF
+    [79723] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Vulnerability (Protection-Reversing Poison) DEBUFF
+    [79725] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Protection (Protection-Reversing Poison) BUFF
+    [79715] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Vulnerability (Vulnerability Poison) DEBUFF
+    [79851] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Defile (Vitality-Draining Poison) DEBUFF
+    [79852] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Vitality (Vitality-Draining Poison) BUFF
+    [79861] = { icon = 'LuiExtended/media/icons/poisons/poison_1_orange_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Defile (Defiling Poison) DEBUFF
+    [125203] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Trauma (Traumatic Poison) DEBUFF
+    [125204] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Heroism (Traumatic Poison) BUFF
+
+    -- Crafted Poisons (3 Traits)
+    [79306] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Drain Spell Resist (Ward-Draining Poison) DEBUFF
+    [79307] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Ward (Ward-Draining Poison) BUFF
+    [79086] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Breach (Breaching Poison) DEBUFF
+    [79311] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_r.dds', normalize = 'esoui/art/icons/' }, -- Drain Physical Resist (Resolve-Draining Poison) DEBUFF
+    [79312] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Resolve (Resolve-Draining Poison) BUFF
+    [79091] = { icon = 'LuiExtended/media/icons/poisons/poison_1_orange_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Fracture (Fracturing Poison) DEBUFF
+    [79278] = { icon = 'LuiExtended/media/icons/poisons/poison_2_cyan_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Cowardice (Sorcery-Draining Poison) DEBUFF
+    [79279] = { icon = 'LuiExtended/media/icons/poisons/poison_2_cyan_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Sorcery (Sorcery-Draining Poison) BUFF
+    [79082] = { icon = 'LuiExtended/media/icons/poisons/poison_1_cyan_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Cowardice (Cowardice Poison) DEBUFF
+    [79282] = { icon = 'LuiExtended/media/icons/poisons/poison_2_yellow_r.dds', normalize = 'esoui/art/icons/' }, -- Drain Weapon Power (Brutality-Draining Poison) DEBUFF
+    [79283] = { icon = 'LuiExtended/media/icons/poisons/poison_2_yellow_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Brutality (Brutality-Draining Poison) BUFF
+    [79085] = { icon = 'LuiExtended/media/icons/poisons/poison_1_yellow_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Maim (Maiming Poison) DEBUFF
+    [79448] = { icon = 'LuiExtended/media/icons/poisons/poison_1_cyan_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Uncertainty (Prophecy-Draining Poison) DEBUFF
+    [79449] = { icon = 'LuiExtended/media/icons/poisons/poison_1_cyan_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Prophecy (Prophecy-Draining Poison) BUFF
+    -- No Uncertainty
+    [79454] = { icon = 'LuiExtended/media/icons/poisons/poison_1_yellow_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Enervation (Savagery-Draining Poison) DEBUFF
+    [79455] = { icon = 'LuiExtended/media/icons/poisons/poison_1_yellow_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Savagery (Savagery-Draining Poison) BUFF
+    [79116] = { icon = 'LuiExtended/media/icons/poisons/poison_1_yellow_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Enervation (Enervating Poison) DEBUFF
+    [79459] = { icon = 'LuiExtended/media/icons/poisons/poison_2_red_r.dds', normalize = 'esoui/art/icons/' }, -- Immobilize (Escapist's Poison) DEBUFF
+    [79460] = { icon = 'LuiExtended/media/icons/poisons/poison_2_red_g.dds', normalize = 'esoui/art/icons/' }, -- Unstoppable (Escapist's Poison) BUFF
+    -- No Entrapping
+    [80002] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Revealing Poison (Stealth-Draining Poison) DEBUFF
+    [80004] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Marking Poison (Conspicuous Poison) DEBUFF
+    [79369] = { icon = 'LuiExtended/media/icons/poisons/poison_2_green_r.dds', normalize = 'esoui/art/icons/' }, -- Hindrance (Speed-Draining Poison) DEBUFF
+    [79370] = { icon = 'LuiExtended/media/icons/poisons/poison_2_green_g.dds', normalize = 'esoui/art/icons/' }, -- Major Expedition (Speed-Draining Poison) BUFF
+    [79102] = { icon = 'LuiExtended/media/icons/poisons/poison_1_green_r.dds', normalize = 'esoui/art/icons/' }, -- Hindrance (Hindering Poison) DEBUFF
+    -- No Gradual Ravage Health
+    [79726] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Vulnerability (Protection-Reversing Poison) DEBUFF
+    [79727] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Protection (Protection-Reversing Poison) BUFF
+    [79720] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Vulnerability (Vulnerability Poison) DEBUFF
+    [79854] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Defile (Vitality-Draining Poison) DEBUFF
+    [79855] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Vitality (Vitality-Draining Poison) BUFF
+    [79862] = { icon = 'LuiExtended/media/icons/poisons/poison_1_orange_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Defile (Defiling Poison) DEBUFF
+    [125205] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Traumatized (Traumatic Poison) DEBUFF
+    [125206] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_g.dds', normalize = 'esoui/art/icons/' }, -- Minor Heroism (Traumatic Poison) BUFF
+
+    -- Vendor Poisons
+    [81554] = { icon = 'LuiExtended/media/icons/poisons/poison_1_green_r.dds', normalize = 'esoui/art/icons/' }, -- Hindrance (Cloudy Hindering Poison) DEBUFF
+
+    -- Crown Poisons
+    [88477] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_green_r.dds', normalize = 'esoui/art/icons/' }, -- Hindrance (Crown Debilitating Poison)
+    [88469] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_yellow_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Maim (Crown Enfeebling Poison)
+    [88470] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_orange_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Defile (Crown Enfeebling Poison)
+    [88462] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_red_r.dds', normalize = 'esoui/art/icons/' }, -- Immobilize (Crown Trapping Poison)
+    [88463] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_green_r.dds', normalize = 'esoui/art/icons/' }, -- Hindrance (Crown Trapping Poison)
+}
+
+-- TODO: Fill in this table with icons for normalizations
+Effects.StatusEffectIconTable = {
+    [21927] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_diseased.dds', normalize = 'esoui/art/icons/' }, -- Minor Defile (Disease Status Effect)
+    [68368] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_chill.dds', normalize = 'esoui/art/icons/' }, -- Minor Maim (Frost Status Effect)
+    [130815] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_chill.dds', normalize = 'esoui/art/icons/' }, -- Minor Maim (Frost Status Effect)s
+    [68359] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_concussion.dds', normalize = 'esoui/art/icons/' }, -- Minor Vulnerability (Shock Status Effect)
+    [130809] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_concussion.dds', normalize = 'esoui/art/icons/' }, -- Minor Vulnerability (Shock Status Effect - Siege)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -3686,7 +3904,7 @@ Effects.EffectOverride = {
     [133381] = { icon = 'LuiExtended/media/icons/abilities/ability_set_mother_ciannait.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Mother Ciannait (Mother Ciannait)
 
     [59594] = { tooltip = Tooltips.Set_Nerieneth }, -- Crypt of Hearts Item Set (Nerien'eth)
-    [59593] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_nerieneth.dds', name = Abilities.Set_Nerieneth }, -- Lich Crystal (Nerien'eth)
+    [59593] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_rupture.dds', name = Abilities.Set_Nerieneth }, -- Lich Crystal (Nerien'eth)
     [98421] = { icon = 'esoui/art/icons/achievement_housing_038.dds', tooltip = Tooltips.Set_Pirate_Skeleton }, -- Pirate Skeleton
     [98419] = { icon = 'esoui/art/icons/achievement_housing_038.dds', tooltip = Tooltips.Set_Pirate_Skeleton }, -- Pirate Skeleton
     [98420] = { icon = 'esoui/art/icons/achievement_housing_038.dds', tooltip = Tooltips.Set_Pirate_Skeleton }, -- Pirate Skeleton
@@ -3707,9 +3925,9 @@ Effects.EffectOverride = {
     [133239] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_heal.dds' }, -- Sentinel of Rkugamz
     [80955] = { hide = true }, -- Shadowrend (Shadowrend)
     [80954] = { hide = true, tooltip = Tooltips.Set_Shadowrend }, -- Shadowrend Summon (Shadowrend)
-    [80980] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_shadowrend_headbutt.dds', name = Abilities.Skill_Headbutt }, -- Shadowrend (Shadowrend)
+    [80980] = { icon = 'LuiExtended/media/icons/abilities/ability_clannfear_headbutt_shadowrend.dds', name = Abilities.Skill_Headbutt }, -- Shadowrend (Shadowrend)
     [80990] = { icon = 'esoui/art/icons/ability_debuff_minor_maim.dds', tooltip = Abilities.Set_Shadowrend }, -- Minor Maim (Shadowrend)
-    [80989] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_shadowrend_tail_spike.dds', name = Abilities.Skill_Tail_Spike }, -- Shadowrend (Shadowrend)
+    [80989] = { icon = 'LuiExtended/media/icons/abilities/ability_clannfear_tail_spike_shadowrend.dds', name = Abilities.Skill_Tail_Spike }, -- Shadowrend (Shadowrend)
     [81034] = { tooltip = Abilities.Set_Shadowrend }, -- Minor Maim (Shadowrend)
     [80481] = { tooltip = Abilities.Set_Slimecraw }, -- Minor Berserk (Slimecraw)
     [59497] = { tooltip = Tooltips.Set_Spawn_of_Mephala }, -- Spawn of Mephala (Spawn of Mephala)
@@ -4949,7 +5167,7 @@ Effects.EffectOverride = {
     [108843] = { name = Abilities.Skill_Unstable_Pulse, tooltip = Tooltips.Skill_Familiar_Damage_Pulse_Self, icon = 'esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds'  }, -- Volatile Familiar (Summon Unstable Familiar)
     [108844] = { name = Abilities.Skill_Unstable_Pulse, icon = 'esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds' }, -- Familiar Damage Pulse (Summon Unstable Familiar)
     [23319] = { tooltip = Tooltips.Skill_Unstable_Clannfear }, -- Summon Unstable Clannfear (Summon Unstable Clannfear)
-    [29528] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_claw.dds', name = Abilities.Skill_Headbutt }, -- Claw (Summon Unstable Clannfear)
+    [29528] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_headbutt.dds', name = Abilities.Skill_Headbutt }, -- Claw (Summon Unstable Clannfear)
     [29529] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_tail_spike.dds' }, -- Tail Spike (Summon Unstable Clannfear)
     [23316] = { tooltip = Tooltips.Skill_Volatile_Familiar }, -- Summon Volatile Familiar (Summon Volatile Familiar)
     [77187] = { name = Abilities.Skill_Volatile_Pulse, tooltip = Tooltips.Skill_Familiar_Stun_Pulse }, -- Volatile Familiar Damage Pulsi (Summon Volatile Familiar)
@@ -7143,10 +7361,10 @@ Effects.EffectOverride = {
     [39060] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_bear_trap.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Immobilize }, -- Bear Trap (Shared Human NPC)
     [39065] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_bear_trap.dds' }, -- Bear Trap (Shared Human NPC)
     [11039] = { hide = true }, -- Spread Out Sound (Synergy)
-    [10650] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_oil_drenched.dds', tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 50, groundLabel = true }, -- Oil Drenched (Synergy)
-    [12439] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_fire_damage.dds', name = Abilities.Skill_Ignite }, -- Burning Arrow (Synergy - Archer)
+    [10650] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_oil_snare.dds', tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 50, groundLabel = true }, -- Oil Drenched (Synergy)
+    [12439] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_blazing_arrow.dds', name = Abilities.Skill_Ignite }, -- Burning Arrow (Synergy - Archer)
     [14068] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_fire_damage.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1 }, -- Ignite (Synergy - Archer)
-    [10805] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_fire_damage.dds' }, -- Ignite (Synergy - Fire Mage)
+    [10805] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heat_wave.dds' }, -- Ignite (Synergy - Fire Mage)
     [10813] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_fire_damage.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 0.5 }, -- Ignite (Synergy - Fire Mage)
     [38260] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_fire_damage.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1 }, -- Ignite (Synergy - Fire Mage)
     [31385] = { hide = true }, -- Necromancer Synergy Move Back
@@ -7274,9 +7492,9 @@ Effects.EffectOverride = {
     [29472] = { hide = true }, -- Thunder Thrall (Storm Mage) (self snare shows as buff)
 
     -- Frost Mage
-    [12459] = { icon = 'esoui/art/icons/ability_mage_037.dds' }, -- Winter's Reach (Frost Mage)
-    [12460] = { icon = 'esoui/art/icons/ability_mage_037.dds' }, -- Winter's Reach (Frost Mage)
-    [14550] = { icon = 'esoui/art/icons/ability_mage_037.dds', tooltip = Tooltips.Generic_Immobilize }, -- Winter's Reach (Frost Mage)
+    [12459] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_winters_reach.dds' }, -- Winter's Reach (Frost Mage)
+    [12460] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_winters_reach.dds' }, -- Winter's Reach (Frost Mage)
+    [14550] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_winters_reach.dds', tooltip = Tooltips.Generic_Immobilize }, -- Winter's Reach (Frost Mage)
     [14194] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_ice_barrier.dds', tooltip = Tooltips.Skill_Ice_Barrier }, -- Ice Barrier (Frost Mage)
     [7145] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_ice_barrier.dds', name = Abilities.Proc_Chill, stack = 0, tooltip = Tooltips.Generic_Snare, tooltipValue2 = 20 }, -- Ice Barrier (Frost Mage)
 
@@ -7985,7 +8203,7 @@ Effects.EffectOverride = {
     [26110] = { icon = 'LuiExtended/media/icons/abilities/ability_harvester_the_feast.dds', tooltip = Tooltips.Generic_Levitate }, -- The Feast (Harvester)
     [26017] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_the_feast.dds', name = Abilities.Skill_The_Feast, hide = true }, -- Creeping Doom (The Feast)
     [26018] = { hide = true }, -- Creeping Doom (The Feast)
-    [88070] = { hide = true }, -- Creeping Doom (The Feast)
+    [88070] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_summon_daedroth.dds', name = Abilities.Skill_Summon_Daedroth, hide = true }, -- Creeping Doom (The Feast)
 
     -- Ogrim
     [8204] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_strike.dds' }, -- Strike (Ogrim)
@@ -8035,7 +8253,7 @@ Effects.EffectOverride = {
     -- Xivilai
     [7095] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_xivilai_heavy.dds' }, -- Heavy Attack (Xivilai)
     [83072] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_xivilai_frost.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Freezing Edge (Xivilai)
-    [49203] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_frost_root.dds', tooltip = Tooltips.Generic_Immobilize }, -- Frozen Weapon (Xivilai)
+    [49203] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_frost_root.dds', tooltip = Tooltips.Generic_Immobilize }, -- Frozen Weapon (Xivilai)
     [88947] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_lightning_grasp.dds' }, -- Lightning Grasp (Xivilai)
     [88949] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_lightning_grasp.dds' }, -- Lightning Grasp (Xivilai)
     [7100] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hand_of_flame.dds'}, -- Hand of Flame (Xivilai)
@@ -8652,6 +8870,7 @@ Effects.EffectOverride = {
     [8550] = { icon = 'LuiExtended/media/icons/abilities/ability_bloodfiend_slash.dds' }, -- Slash (Bloodfiend)
     [8551] = { icon = 'LuiExtended/media/icons/abilities/ability_bloodfiend_slash.dds' }, -- Slash (Bloodfiend)
     [8564] = { icon = 'LuiExtended/media/icons/abilities/ability_bloodfiend_rending_slash.dds' }, -- Rending Slash (Bloodfiend)
+    [8554] = { icon = 'LuiExtended/media/icons/abilities/ability_bloodfiend_flurry.dds' }, -- Flurry (Bloodfiend)
     [9194] = { icon = 'LuiExtended/media/icons/abilities/ability_bloodfiend_flurry.dds' }, -- Flurry (Bloodfiend)
     [8569] = { icon = 'LuiExtended/media/icons/abilities/ability_bloodfiend_devastating_leap.dds' }, -- Devastating Leap (Bloodfiend)
     [32023] = { name = Abilities.Innate_Stagger, tooltip = Tooltips.Generic_Stagger }, -- Generic Stagger Enemy (Bloodfiend)
@@ -8671,8 +8890,8 @@ Effects.EffectOverride = {
     -- Ghost
     [8812] = { icon = 'LuiExtended/media/icons/abilities/ability_ghost_double_strike.dds' }, -- Double Strike (Ghost)
     [8813] = { icon = 'LuiExtended/media/icons/abilities/ability_ghost_double_strike.dds' }, -- Double Strike (Ghost)
-    [18514] = { icon = 'esoui/art/icons/ability_mage_052.dds' }, -- Chill Touch (Ghost)
-    [18515] = { icon = 'esoui/art/icons/ability_mage_052.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Chill Touch (Ghost)
+    [18514] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_chill_touch.dds' }, -- Chill Touch (Ghost)
+    [18515] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_chill_touch.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Chill Touch (Ghost)
     [19137] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_haunting_spectre.dds' }, -- Haunting Spectre (Ghost)
     [19138] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_haunting_spectre.dds' }, -- Haunting Spectre (Ghost)
     [19140] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_haunting_spectre.dds', tooltip = Tooltips.Generic_Fear }, -- Haunting Spectre (Ghost)
@@ -8680,13 +8899,13 @@ Effects.EffectOverride = {
     [22521] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_snare.dds' }, -- Defiled Ground (Lich)
     [20812] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_snare.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Magic, tooltipValue2 = 1, tooltipValue3 = 70 }, -- Defiled Ground (Lich)
     [22525] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_snare.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Magic, tooltipValue2 = 1, tooltipValue3 = 70, hideGround = true }, -- Defiled Ground (Lich)
-    [73925] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_cage.dds', hide = true }, -- Soul Cage (Lich)
-    [73929] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_cage.dds', hide = true, groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.5 }, -- Soul Cage (Lich)
-    [73931] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_rupture.dds' }, -- Soul Rupture (Lich)
-    [73926] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_rupture.dds', name = Abilities.Skill_Soul_Rupture, tooltip = Tooltips.Generic_Stun }, -- Soul Cage (Lich)
-    [73937] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_cage.dds', hide = true, groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.5 }, -- Soul Cage (Lich)
-    [73939] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_rupture.dds' }, -- Soul Rupture (Lich)
-    [73934] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_rupture.dds', name = Abilities.Skill_Soul_Rupture, tooltip = Tooltips.Generic_Stun }, -- Soul Cage (Lich)
+    [73925] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_cage.dds', hide = true }, -- Soul Cage (Lich)
+    [73929] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_cage.dds', hide = true, groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.5 }, -- Soul Cage (Lich)
+    [73931] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_rupture.dds' }, -- Soul Rupture (Lich)
+    [73926] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_rupture.dds', name = Abilities.Skill_Soul_Rupture, tooltip = Tooltips.Generic_Stun }, -- Soul Cage (Lich)
+    [73937] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_cage.dds', hide = true, groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.5 }, -- Soul Cage (Lich)
+    [73939] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_rupture.dds' }, -- Soul Rupture (Lich)
+    [73934] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_rupture.dds', name = Abilities.Skill_Soul_Rupture, tooltip = Tooltips.Generic_Stun }, -- Soul Cage (Lich)
     [49702] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_entropic_flare.dds' }, -- Entropic Flare (Spellfiend)
     [50456] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_entropic_flare.dds' }, -- Entropic Flare (Spellfiend)
     [50182] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_consuming_energy.dds' }, -- Consuming Energy (Spellfiend)
@@ -8711,9 +8930,9 @@ Effects.EffectOverride = {
 
     -- Wraith
     [4323] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_arrow_small.dds' }, -- Ice Bolt (Wraith)
-    [4337] = { icon = 'esoui/art/icons/ability_mage_037.dds' }, -- Winter's Reach (Wraith)
-    [4346] = { icon = 'esoui/art/icons/ability_mage_037.dds' }, -- Winter's Reach (Wraith)
-    [43146] = { icon = 'esoui/art/icons/ability_mage_037.dds', tooltip = Tooltips.Generic_Immobilize }, -- Winter's Reach (Wraith)
+    [4337] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_winters_reach.dds' }, -- Winter's Reach (Wraith)
+    [4346] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_winters_reach.dds' }, -- Winter's Reach (Wraith)
+    [43146] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_winters_reach.dds', tooltip = Tooltips.Generic_Immobilize }, -- Winter's Reach (Wraith)
 
     -- Zombie
     [2954] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_swipe.dds' }, -- Swipe (Zombie)
@@ -9243,11 +9462,11 @@ Effects.EffectOverride = {
     [32562] = { hide = true }, -- Ravager Weapons
     [32553] = { hide = true }, -- Ravager Weapons
     [32556] = { hide = true }, -- Fire Mage Weapons
-    [34484] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_cage.dds' }, -- Soul Cage (Mannimarco)
-    [34470] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_rupture.dds', name = Abilities.Skill_Soul_Rupture }, -- Soul Cage (Mannimarco)
-    [34463] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_rupture.dds', name = Abilities.Skill_Soul_Rupture }, -- Soul Cage (Mannimarco)
-    [34458] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_cage.dds' }, -- Soul Cage (Mannimarco)
-    [34460] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_cage.dds' }, -- Soul Cage (Mannimarco)
+    [34484] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_cage.dds' }, -- Soul Cage (Mannimarco)
+    [34470] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_rupture.dds', name = Abilities.Skill_Soul_Rupture }, -- Soul Cage (Mannimarco)
+    [34463] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_rupture.dds', name = Abilities.Skill_Soul_Rupture }, -- Soul Cage (Mannimarco)
+    [34458] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_cage.dds' }, -- Soul Cage (Mannimarco)
+    [34460] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_cage.dds' }, -- Soul Cage (Mannimarco)
     [70409] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_oblivion_purple.dds' }, -- Necromantic Barrier
     [31321] = { hide = true }, -- Disruption
     [31334] = { hide = true }, -- Oblivion
@@ -10099,7 +10318,7 @@ Effects.EffectOverride = {
     [8244] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_pound.dds' }, -- Devastate (Corprus Husk)
     [8247] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_vomit.dds' }, -- Vomit (Corprus Husk)
     [30616] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_vomit.dds' }, -- Vomit (Corprus Husk)
-    [30615] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_wither.dds', tooltip = Tooltips.Generic_Increase_Damage_Taken, tooltipValue2 = 15 }, -- Wither (Corprus Husk)
+    [30615] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_wither.dds', tooltip = Tooltips.Generic_Increase_Damage_Taken, tooltipValue2 = 10 }, -- Wither (Corprus Husk)
     [22109] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds' }, -- Contaminate (Corprus Husk)
     [22108] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds' }, -- Contaminate (Corprus Husk)
 
@@ -10786,12 +11005,12 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Banished Cells I
-    [19028] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_drain_essence.dds', hide = true }, -- Drain Essence (Cell Haunter)
+    [19028] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_drain_essence.dds', hide = true }, -- Drain Essence (Cell Haunter)
 
     [46258] = { hide = true }, -- Clannfear Arrives (Shadowrend)
-    [18725] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_shadowrend_headbutt.dds' }, -- Spiked Headbutt (Shadowrend)
-    [47587] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_shadowrend_tail_spike.dds' }, -- Tail Smite (Shadowrend)
-    [47608] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_shadowrend_tail_spike.dds', name = Abilities.Skill_Tail_Smite, tooltip = Tooltips.Generic_Knockdown }, -- Knocked Down (Shadowrend)
+    [18725] = { icon = 'LuiExtended/media/icons/abilities/ability_clannfear_headbutt_shadowrend.dds' }, -- Spiked Headbutt (Shadowrend)
+    [47587] = { icon = 'LuiExtended/media/icons/abilities/ability_clannfear_tail_spike_shadowrend.dds' }, -- Tail Smite (Shadowrend)
+    [47608] = { icon = 'LuiExtended/media/icons/abilities/ability_clannfear_tail_spike_shadowrend.dds', name = Abilities.Skill_Tail_Smite, tooltip = Tooltips.Generic_Knockdown }, -- Knocked Down (Shadowrend)
     [21886] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_shadow_proxy.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Summon, Abilities.Skill_Shadow_Proxy), tooltip = Tooltips.Skill_Summon_Dark_Proxy }, -- Summon Dark Proxy (Shadowrend)
     [21887] = { hide = true }, -- Forward Charge (Dark Proxy)
     [35625] = { icon = 'LuiExtended/media/icons/abilities/ability_clannfear_rending_leap_shadowrend.dds' }, -- Pounce (Shadowrend)
@@ -10805,10 +11024,11 @@ Effects.EffectOverride = {
     [19027] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_dead_zone.dds', tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1.5, groundLabel = true }, -- Dead Zone (Skeletal Destroyer)
 
     [18961] = { hide = true }, -- Ghostly Summon (Generic Invisible Target)
-    [18798] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds', name = Abilities.Skill_Quick_Strike }, -- Slash (High Kinlord Rilis)
-    [33189] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds' }, -- Crushing Blow (High Kinlord Rilis)
-    [33190] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds', hide = true }, -- Crushing Blow (High Kinlord Rilis)
-    [33191] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Crushing Blow (High Kinlord Rilis)
+    [18798] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword2h_quick_strike.dds', name = Abilities.Skill_Quick_Strike }, -- Slash (High Kinlord Rilis)
+    [33189] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword2h_crushing_blow.dds' }, -- Crushing Blow (High Kinlord Rilis)
+    [33190] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword2h_crushing_blow.dds', hide = true }, -- Crushing Blow (High Kinlord Rilis)
+    [33191] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword2h_crushing_blow.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Crushing Blow (High Kinlord Rilis)
+    [18795] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_the_feast.dds', name = Abilities.Skill_The_Feast }, -- CON_Invisible_30%_Speed_Debuff (The Feast)
     [33172] = { hide = true }, -- Oblivion Restoration (The Feast)
     [33165] = { hide = true }, -- Despawn Self (The Feast)
 
@@ -10816,10 +11036,10 @@ Effects.EffectOverride = {
     [18846] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_blast.dds', hide = true }, -- Soul Blast (High Kinlord Rilis)
     [18847] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_blast.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Soul Blast (High Kinlord Rilis)
 
-    [18875] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_coldfire_damage.dds', hide = true }, -- Daedric Tempest (High Kinlord Rilis)
+    [18875] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_daedric_tempest.dds', hide = true }, -- Daedric Tempest (High Kinlord Rilis)
     [33437] = { hide = true }, -- Daedric Tempest (High Kinlord Rilis)
     [33174] = { hide = true }, -- Daedric Tempest (High Kinlord Rilis)
-    [33188] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_coldfire_damage.dds', tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1.5, groundLabel = true }, -- Daedric Tempest (High Kinlord Rilis)
+    [33188] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_daedric_tempest.dds', tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1.5, groundLabel = true }, -- Daedric Tempest (High Kinlord Rilis)
 
     [36522] = { hide = true }, -- Daedric Flames (High Kinlord Rilis)
     [46296] = { hide = true }, -- Crystals (Binding Stones)
@@ -10835,12 +11055,12 @@ Effects.EffectOverride = {
     [28904] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_fire_damage.dds', name = Abilities.Skill_Pool_of_Fire, groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire_Stacking, tooltipValue2 = 1.5, tooltipValue3 = 10, stack = 1, stackAdd = 1 }, -- Immolating Bite (Maw of the Infernal)
     [47127] = { hide = true }, -- Nocom
 
-    [48281] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds', name = Abilities.Skill_Quick_Strike }, -- Slash (Keeper Voranil)
-    [27826] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds' }, -- Crushing Blow (Keeper Voranil)
-    [27827] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds', hide = true }, -- Crushing Blow (Keeper Voranil)
-    [27828] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds', tooltip = Tooltips.Generic_Knockback }, -- Crushing Blow (Keeper Voranil)
-    [29018] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (Keeper Voranil)
-    [29020] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (Keeper Voranil)
+    [48281] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_light.dds', name = Abilities.Skill_Quick_Strike }, -- Slash (Keeper Voranil)
+    [27826] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_heavy.dds', name = Abilities.Skill_Slam }, -- Crushing Blow (Keeper Voranil)
+    [27827] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_heavy.dds', name = Abilities.Skill_Slam, hide = true }, -- Crushing Blow (Keeper Voranil)
+    [27828] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_heavy.dds', name = Abilities.Skill_Slam, tooltip = Tooltips.Generic_Knockback }, -- Crushing Blow (Keeper Voranil)
+    [29018] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_berserker_frenzy.dds' }, -- Berserker Frenzy (Keeper Voranil)
+    [29020] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_berserker_frenzy.dds' }, -- Berserker Frenzy (Keeper Voranil)
     [28750] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_essence_siphon.dds', hide = true }, -- Essence Siphon (Keeper Voranil)
 
     [64518] = { hide = true }, -- Shatter
@@ -10849,40 +11069,41 @@ Effects.EffectOverride = {
     [31713] = { hide = true }, -- Root (Daedric Chaos)
     [31726] = { hide = true }, -- Corruption (Daedric Chaos)
     [32054] = { hide = true }, -- SpawnRun (Banekin)
-    [32038] = { hide = true }, -- Into Portal (Keeper Imiril)
-    [36631] = { hide = true }, -- ExitPortal (Keeper Imiril)
+    [32038] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_chaotic_dispersion.dds', name = Abilities.Skill_Chaotic_Dispersion, hide = true }, -- Into Portal (Keeper Imiril)
+    [36631] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_chaotic_dispersion.dds', name = Abilities.Skill_Chaotic_Return, hide = true }, -- ExitPortal (Keeper Imiril)
 
-    [31727] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_daedric_chaos.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1 }, -- Corruption (Daedric Chaos)
+    [31727] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_daedric_chaos.dds', groundLabel = true, name = Abilities.Skill_Daedric_Chaos, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1 }, -- Corruption (Daedric Chaos)
     [28916] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds', name = Abilities.Skill_Quick_Strike }, -- Slash (Keeper Imiril)
-    [29143] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_aoe_magic.dds' }, -- Daedric Blast (Keeper Imiril)
+    [29143] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_daedric_blast.dds' }, -- Daedric Blast (Keeper Imiril)
 
     [64526] = { hide = true }, -- Shatter
 
-    [28962] = { icon = 'esoui/art/icons/ability_mage_030.dds', name = Abilities.Skill_Sisters_Bond }, -- Sister's Love (Sister Sihna / Sister Vera)
+    [28962] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sisters_bond.dds', name = Abilities.Skill_Sisters_Bond }, -- Sister's Love (Sister Sihna / Sister Vera)
 
-    [35847] = { hide = true }, -- Shatter
+    [35847] = { hide = true }, -- Dummy
 
-    [28570] = { icon = 'esoui/art/icons/ability_debuff_levitate.dds' }, -- Levitate (High Kinlord Rilis)
-    [28462] = { icon = 'esoui/art/icons/ability_debuff_levitate.dds' }, -- Levitate (High Kinlord Rilis)
+    [999013] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_enraged_fortitude.dds', name = Abilities.Skill_Resilience, tooltip = Tooltips.Skill_Resilience }, -- FAKE AURA FOR DAEDROTH DAMAGE REDUCTION TO AOE
+    [28570] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_levitate_blue.dds' }, -- Levitate (High Kinlord Rilis)
+    [28462] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_levitate_red.dds' }, -- Levitate (High Kinlord Rilis)
 
     [28715] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_shock.dds' }, -- Daedric Bolt (High Kinlord Rilis)
-    [28772] = { icon = 'esoui/art/icons/ability_debuff_levitate.dds', name = Abilities.Skill_Levitate, unbreakable = 1, tooltip = Tooltips.Generic_Levitate }, -- Stun (High Kinlord Rilis)
-    [28774] = { icon = 'esoui/art/icons/ability_debuff_levitate.dds', name = Abilities.Skill_Levitate, unbreakable = 1, tooltip = Tooltips.Generic_Levitate }, -- Stun (High Kinlord Rilis)
-    [28475] = { tooltip = Tooltips.Skill_Curse_of_Suffering, unbreakable = 1, duration = 0 }, -- Curse of Suffering (High Kinlord Rilis)
-    [48308] = { icon = 'esoui/art/icons/ability_mage_023.dds' }, -- Curse of Suffering (High Kinlord Rilis)
-    [28571] = { icon = 'esoui/art/icons/ability_mage_001.dds', tooltip = Tooltips.Skill_Curse_of_Dominance, unbreakable = 1, duration = 0 }, -- Curse of Dominance (High Kinlord Rilis)
-    [48507] = { icon = 'esoui/art/icons/ability_mage_001.dds' }, -- Curse of Dominance (High Kinlord Rilis)
+    [28772] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_levitate_blue.dds', name = Abilities.Skill_Levitate, unbreakable = 1, tooltip = Tooltips.Generic_Levitate }, -- Stun (High Kinlord Rilis)
+    [28774] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_levitate_red.dds', name = Abilities.Skill_Levitate, unbreakable = 1, tooltip = Tooltips.Generic_Levitate }, -- Stun (High Kinlord Rilis)
+    [28475] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_curse_of_suffering.dds', tooltip = Tooltips.Skill_Curse_of_Suffering, unbreakable = 1, duration = 0 }, -- Curse of Suffering (High Kinlord Rilis)
+    [48308] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_curse_of_suffering.dds' }, -- Curse of Suffering (High Kinlord Rilis)
+    [28571] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_curse_of_dominance.dds', tooltip = Tooltips.Skill_Curse_of_Dominance, unbreakable = 1, duration = 0 }, -- Curse of Dominance (High Kinlord Rilis)
+    [48507] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_curse_of_dominance.dds' }, -- Curse of Dominance (High Kinlord Rilis)
 
-    [46967] = { hide = true }, -- Daedric Step (High Kinlord Rilis)
+    [46967] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_daedric_step.dds', hide = true }, -- Daedric Step (High Kinlord Rilis)
     [46964] = { hide = true }, -- Daedric Step (High Kinlord Rilis)
     [46965] = { hide = true }, -- Daedric Step (High Kinlord Rilis)
     [48909] = { hide = true }, -- The Feast (High Kinlord Rilis)
     [26070] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_the_feast.dds' }, -- The Feast
 
-    [48799] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_coldfire_damage.dds' }, -- Daedric Tempest (High Kinlord Rilis)
-    [48814] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_coldfire_damage.dds' }, -- Daedric Tempest (High Kinlord Rilis)
-    [48800] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_coldfire_damage.dds', tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1.5, groundLabel = true }, -- Daedric Tempest (High Kinlord Rilis)
-    [48815] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_coldfire_damage.dds', tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1.5, groundLabel = true }, -- Daedric Tempest (High Kinlord Rilis)
+    [48799] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_daedric_tempest.dds' }, -- Daedric Tempest (High Kinlord Rilis)
+    [48814] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_daedric_tempest.dds' }, -- Daedric Tempest (High Kinlord Rilis)
+    [48800] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_daedric_tempest.dds', tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1.5, groundLabel = true }, -- Daedric Tempest (High Kinlord Rilis)
+    [48815] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_daedric_tempest.dds', tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1.5, groundLabel = true }, -- Daedric Tempest (High Kinlord Rilis)
 
     [28362] = { hide = true }, -- Black Sigil (High Kinlord Rilis)
     [36020] = { hide = true }, -- Black Sigil (High Kinlord Rilis)
@@ -10890,18 +11111,19 @@ Effects.EffectOverride = {
     [36030] = { hide = true }, -- Red Sigil (High Kinlord Rilis)
 
     -- Elden Hollow I
-    [14905] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds', name = Abilities.Skill_Quick_Strike }, -- Hacking Strike (Akash gra-Mal)
-    [16834] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds', name = Abilities.Skill_Crushing_Blow }, -- Executioner's Strike (Akash gra-Mal)
-    [25309] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds', name = Abilities.Skill_Crushing_Blow, hide = true }, -- Fire Backlash (Akash gra-Mal)
-    [25310] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds', name = Abilities.Skill_Crushing_Blow, tooltip = Tooltips.Generic_Knockback }, -- CON_Knockback&Knockdown (Akash gra-Mal)
-    [16003] = { icon = 'esoui/art/icons/ability_warrior_004.dds' }, -- Leaping Strike (Akash gra-Mal)
-    [9936] = { icon = 'esoui/art/icons/ability_warrior_031.dds' }, -- Battlecry (Akash gra-Mal)
+    [14905] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hacking_strike.dds', name = Abilities.Skill_Quick_Strike }, -- Hacking Strike (Akash gra-Mal)
+    [16834] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_executioners_strike.dds' }, -- Executioner's Strike (Akash gra-Mal)
+    [25309] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_executioners_strike.dds', name = Abilities.Skill_Executioners_Strike, hide = true }, -- Fire Backlash (Akash gra-Mal)
+    [25310] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_executioners_strike.dds', name = Abilities.Skill_Executioners_Strike, tooltip = Tooltips.Generic_Knockback }, -- CON_Knockback&Knockdown (Akash gra-Mal)
+    [15999] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_leaping_strike.dds' }, -- Leaping Strike (Akash gra-Mal)
+    [16003] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_leaping_strike.dds' }, -- Leaping Strike (Akash gra-Mal)
+    [9936] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_battlecry.dds' }, -- Battlecry (Akash gra-Mal)
     [44093] = { name = Abilities.Innate_Stagger, tooltip = Tooltips.Generic_Stagger }, -- Battlecry (Akash gra-Mal)
-    [16016] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (Akash gra-Mal)
-    [16017] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (Akash gra-Mal)
-    [25300] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (Akash gra-Mal)
-    [25301] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (Akash gra-Mal)
-    [25302] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (Akash gra-Mal)
+    [16016] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_whirling_axe.dds', name = Abilities.Skill_Whirling_Axe }, -- Berserker Frenzy (Akash gra-Mal)
+    [16017] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_whirling_axe.dds', name = Abilities.Skill_Whirling_Axe }, -- Berserker Frenzy (Akash gra-Mal)
+    [25300] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_whirling_axe.dds', name = Abilities.Skill_Whirling_Axe }, -- Berserker Frenzy (Akash gra-Mal)
+    [25301] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_whirling_axe.dds', name = Abilities.Skill_Whirling_Axe }, -- Berserker Frenzy (Akash gra-Mal)
+    [25302] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_whirling_axe.dds', name = Abilities.Skill_Whirling_Axe }, -- Berserker Frenzy (Akash gra-Mal)
 
     [15116] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_strike.dds' }, -- Piercing Strike (Chokethorn)
     [15114] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_grapple.dds', tooltip = Tooltips.Generic_Stun }, -- Pulling Grasp (Chokethorn)
@@ -11686,9 +11908,9 @@ Effects.EffectOverride = {
     [36904] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_necrotic_barrage.dds' }, -- Necrotic Barrage (Garron the Returned)
     [36944] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_necrotic_barrage.dds' }, -- Necrotic Barrage (Garron the Returned)
 
-    [36761] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_rupture.dds', name = Abilities.Skill_Soul_Rupture, hide = true }, -- Summon Minion (Garron the Returned)
-    [36776] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_cage.dds' }, -- Necrotic Spike (Garron the Returned)
-    [36779] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_rupture.dds' , name = Abilities.Skill_Soul_Rupture}, -- Necrotic Burst (Garron the Returned)
+    [36761] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_rupture.dds', name = Abilities.Skill_Soul_Rupture, hide = true }, -- Summon Minion (Garron the Returned)
+    [36776] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_cage.dds' }, -- Necrotic Spike (Garron the Returned)
+    [36779] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_rupture.dds' , name = Abilities.Skill_Soul_Rupture}, -- Necrotic Burst (Garron the Returned)
     [36782] = { hide = true }, -- Transform (Escaped Soul)
     [36780] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_restless_souls.dds', name = Abilities.Skill_Escaped_Souls, hide = true }, -- Summon Minion (Escaped Soul)
 
@@ -11727,6 +11949,79 @@ Effects.EffectOverride = {
     [49052] = { icon = 'LuiExtended/media/icons/abilities/ability_rogue_pellingare_prison.dds', tooltip = Tooltips.Generic_Stun, unbreakable = 1, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Pellingare Prison (Allene Pellingare)
     [49053] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_spell_hallucinogenic_fumes.dds', name = Abilities.Skill_Hallucinogenic_Fumes }, -- Toxic Fumes (Allene Pellingare)
 
+    -- Crypt of Hearts I
+    [39126] = { hide = true }, -- Soul Prison (Shard of Alanwe)
+    [22341] = { icon = 'esoui/art/icons/ability_warrior_025.dds', tooltip = Tooltips.Generic_Enrage, tooltipValue2 = 5 }, -- Frenzy (Zombie Stalker)
+    [39827] = { hide = true }, -- Capture (Zombie)
+
+    [22666] = { hide = true }, -- Dead (Zombie)
+    [22713] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_entropic_bolt.dds' }, -- Phantasmal Bolt (Archmaster Siniel)
+    [22714] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_ritual.dds' }, -- Necrotic Ritual (Archmaster Siniel) -- TODO: BETTER ICON
+    [22716] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_ritual.dds', tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1.5, groundLabel = true }, -- Necrotic Ritual (Archmaster Siniel) -- TODO: BETTER ICON
+    [22768] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_haunting_spectre.dds' }, -- Induce Horror (Archmaster Siniel)
+    [22770] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_haunting_spectre.dds', tooltip = Tooltips.Generic_Fear }, -- Induce Horror (Archmaster Siniel)
+    [35979] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_haunting_spectre.dds' }, -- Induce Horror (Archmaster Siniel)
+
+    [46581] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_daedric_step.dds', hide = true }, -- Daedric Step (Archmaster Siniel)
+    [46580] = { hide = true }, -- Daedric Step (Archmaster Siniel)
+    [46579] = { hide = true }, -- Daedric Step (Archmaster Siniel)
+    [46585] = { hide = true }, -- Wall of Souls (Archmaster Siniel)
+    [22668] = { hide = true }, -- Awaken Dead (Archmaster Siniel)
+    [22779] = { hide = true }, -- Corpse Shield (Archmaster Siniel)
+    [22808] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_corpse_shield.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Corpse Shield (Archmaster Siniel)
+    [22787] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_explosion_beam.dds', hide = true }, -- Corpse Explosion (Archmaster Siniel)
+    [22806] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_explosion_beam.dds' }, -- Corpse Explosion (Archmaster Siniel)
+    [22807] = { hide = true }, -- Corpse Explosion (Archmaster Siniel)
+    [22702] = { hide = true }, -- Get Up (Zombie)
+    [22704] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_swipe.dds' }, -- Swipe (Zombie)
+
+    [22488] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_strike.dds' }, -- Backhand (Death's Leviathan)
+    [111957] = { icon = 'LuiExtended/media/icons/abilities/ability_bone_colossus_trample.dds' }, -- Trample (Death's Leviathan)
+    [46953] = { icon = 'LuiExtended/media/icons/abilities/ability_bone_colossus_trample.dds' }, -- Trample (Death's Leviathan)
+    [46952] = { icon = 'LuiExtended/media/icons/abilities/ability_bone_colossus_trample.dds', name = Abilities.Skill_Trample, tooltip = Tooltips.Generic_Knockdown }, -- Trample (Death's Leviathan)
+    [22527] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_paralyzing_slam.dds' }, -- Paralyzing Slam (Death's Leviathan)
+    [22535] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_paralyzing_slam.dds' }, -- Paralyzing Slam (Death's Leviathan)
+
+    [46680] = { icon = 'LuiExtended/media/icons/abilities/ability_bone_colossus_immolate.dds', name = Abilities.Skill_Immolate, tooltip = Tooltips.Skill_Immolate_Colossus }, -- Immolate Colossus (Death's Leviathan)
+    [46950] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_fire.dds', tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 0.5, groundLabel = true }, -- Fire Trail (Death's Leviathan)
+    [22576] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_paralyzing_slam_fire.dds' }, -- Paralyzing Slam (Death's Leviathan)
+    [23685] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_paralyzing_slam_fire.dds' }, -- Paralyzing Slam (Death's Leviathan)
+    [46674] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_paralyzing_slam_fire.dds', hide = true }, -- Paralyzing Slam (Death's Leviathan)
+    [46673] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_paralyzing_slam_fire.dds', tooltip = Tooltips.Generic_Knockback, unbreakable = 1, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Paralyzing Slam (Death's Leviathan)
+    [46677] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_paralyzing_slam_fire.dds', hide = true }, -- Paralyzing Slam (Death's Leviathan)
+    [46675] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_paralyzing_slam_fire.dds', tooltip = Tooltips.Generic_Knockback, unbreakable = 1, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Paralyzing Slam (Death's Leviathan)
+    [22491] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_strike_fire.dds', tooltip = Tooltips.Generic_Burn, tooltipValue2 = 1 }, -- Ignited (Death's Leviathan)
+
+    [39286] = { hide = true }, -- Tormenting Blade (Rulanir)
+
+    -- Ilambris-Athor
+    [22301] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_xivilai_shock.dds' }, -- Cleaving Swing (Ilambris-Athor)
+    [22450] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_electric_prison.dds', name = Abilities.Skill_Electric_Prison, hide = true }, -- Summon Lightning Rod (Ilambris-Athor)
+    [22431] = { hide = true }, -- Lightning Rod (Lightning Rod)
+    [22432] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_electric_prison.dds', tooltip = Tooltips.Generic_AOE_Shock, tooltipValue2 = 1.5, groundLabel = true }, -- Electric Prison (Ilambris-Athor)
+    [22338] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_xivilai_heavy.dds', name = Abilities.Skill_Overwhelming_Blow }, -- Axe Strike (Ilambris-Athor)
+    [46691] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_xivilai_heavy.dds', name = Abilities.Skill_Overwhelming_Blow }, -- Fire Backlash (Ilambris-Athor)
+    [46692] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_xivilai_heavy.dds', name = Abilities.Skill_Overwhelming_Blow, tooltip = Tooltips.Generic_Knockback, unbreakable = 1 }, -- CON_Knockback&Knockdown (Ilambris-Athor)
+    [32425] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_lightning_empowerment.dds', tooltip = Tooltips.Skill_Lightning_Empowerment }, -- Lightning Empowerment (Ilambris-Athor)
+    [22456] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_lightning_empowerment.dds', tooltip = Tooltips.Skill_Lightning_Empowerment_Enrage }, -- Lightning Omnipotence (Ilambris-Athor)
+    [33299] = { hide = true }, -- Center Picker (Generic Invisible Target)
+    [33297] = { hide = true }, -- Center of Room (Generic Invisible Target)
+    [22397] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris_shock.dds', hide = true }, -- Call Lightning (Ilambris-Athor)
+    [22398] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris_shock.dds' }, -- Call Lightning (Ilambris-Athor)
+    [22401] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris_shock.dds' }, -- Call Lightning (Ilambris-Athor)
+    [22403] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris_shock.dds' }, -- Call Lightning (Ilambris-Athor)
+
+    -- Ilambris-Zaven
+    [22302] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fiery_surge.dds', hide = true }, -- Fire Bolt (Ilambris-Zaven)
+    [22342] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heat_wave.dds' }, -- Rolling Fire (Ilambris-Zaven)
+    [22344] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heat_wave.dds' }, -- Rolling Fire (Ilambris-Zaven)
+    [22390] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_pyroclasm.dds', name = Abilities.Skill_Pyroclasm }, -- Pyrocasm (Ilambris-Zaven)
+    [44087] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_pyroclasm.dds', name = Abilities.Skill_Pyroclasm }, -- Fire Backlash (Ilambris-Zaven)
+    [44088] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_pyroclasm.dds', name = Abilities.Skill_Pyroclasm, tooltip = Tooltips.Generic_Knockback }, -- CON_Knockback&Knockdown (Ilambris-Zaven)
+    [32424] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_incensed.dds', tooltip = Tooltips.Skill_Incensed }, -- Incensed (Ilambris-Zaven)
+    [22457] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_incensed.dds', tooltip = Tooltips.Skill_Incensed_Enrage }, -- Emit Flames (Ilambris-Zaven)
+    [22383] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris_fire.dds', hide = true }, -- Rain Fire (Ilambris-Zaven)
+    [22388] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris_fire.dds', tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1.5, groundLabel = true }, -- Rain Fire (Ilambris-Zaven)
 
     -- temporary gap here just for ease of editing
     -- temporary gap here just for ease of editing
@@ -12021,7 +12316,7 @@ Effects.FakeExternalDebuffs = {
     [28774] = { duration = 5000 }, -- Stun (High Kinlord Rilis)
 
     -- Elden Hollow I
-    [25310] = { name = Abilities.Skill_Crushing_Blow, duration = 2500 }, -- Executioners Strike (Akash gra-Mal)
+    [25310] = { duration = 2500 }, -- Executioners Strike (Akash gra-Mal)
     [25348] = { duration = 6000, refreshOnly = true }, -- Necrotic Circle (Canonreeve Oraneth)
     [46800] = { duration = 1200 }, -- Necrotic Circle (Canonreeve Oraneth)
 
@@ -12080,10 +12375,13 @@ Effects.FakeExternalDebuffs = {
     [36431] = { duration = 10000 }, -- Rend Soul (Malubeth the Scourger)
     [36870] = { duration = 5000 }, -- Scorching Flames (Uulgarg the Risen)
     [36900] = { duration = 35000 }, -- Haunting Spectre (The Forgotten One)
-
     [36535] = { duration = 2000 }, -- Spinning Cleave (Varaine Pellingare)
     [36398] = { duration = 2500 }, -- Bludgeon (Varaine Pellingare)
     [35839] = { duration = 12000 }, -- Necrotic Arrow (Allene Pellingare)
+
+    -- Crypt of Hearts I
+    [46692] = { duration = 2500 }, -- CON_Knockback&Knockdown (Ilambris-Athor)
+    [44088] = { duration = 2000 }, -- CON_Knockback&Knockdown (Ilambris-Zaven)
 
     -- Frostvault
     [117486] = { duration = 18000 }, -- Bleed (Coldsnap Goblin - Shared)
@@ -12725,6 +13023,12 @@ Effects.AddGroundDamageAura = {
     -- Wayrest Sewers II
     [36625] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Scourging Spark (Malubeth the Scourger)
     [36869] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Scorching Flames (Uulgarg the Risen)
+
+    -- Crypt of Hearts I
+    [22716] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Necrotic Ritual (Archmaster Siniel)
+    [46950] = { duration = 900, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Fire Trail (Death's Leviathan)
+    [22432] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Electric Prison (Ilambris-Athor)
+    [22388] = { duration = 2000, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Rain Fire (Ilambris-Zaven)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------

@@ -1321,6 +1321,18 @@ local strings = {
     SI_LUIE_SKILL_SCORCHING_FLAMES_TP =                  "Feared and ignited for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nEvery |cFFFFFF1|r second, a |cFFFFFF4|r meter pool of flame drops at your feet for |cFFFFFF30|r seconds.",
     SI_LUIE_SKILL_ESCAPED_SOULS =                        "Escaped Souls",
     SI_LUIE_SKILL_CALL_CORRUPT_LURCHERS =                "Call Corrupt Lurchers",
+    SI_LUIE_SKILL_IMMOLATE_COLOSSUS_TP =                 "Augments Backhand, Paralyzing Slam, and Trample.\n\nBackhand ignites the target, dealing Flame Damage every |cFFFFFF1|r second for |cFFFFFF4|r seconds.\n\nParalyzing Slam deals additional Flame Damage and knocks the target back for |cFFFFFF2.5|r seconds.\n\nTrample leaves behind a Fire Trail that deals Flame Damage every |cFFFFFF0.5|r seconds.",
+    SI_LUIE_SKILL_OVERWHELMING_BLOW =                    "Overwhelming Blow",
+    SI_LUIE_SKILL_LIGHTNING_EMPOWERMENT_TP =             "Empowered by storm, granting the use of |cFFFFFFElectric Prison|r.",
+    SI_LUIE_SKILL_LIGHTNING_EMPOWERMENT_ENRAGE_TP =      "Enraged and empowered by storm, granting the use of |cFFFFFFElectric Prison|r and |cFFFFFFCall Lightning|r.",
+    SI_LUIE_SKILL_INCENSED_TP =                          "Empowered by flame, granting the use of |cFFFFFFPyroclasm|r.",
+    SI_LUIE_SKILL_INCENSED_ENRAGE_TP =                   "Enraged and empowered by flame, granting the use of |cFFFFFFPyroclasm|r and |cFFFFFFRain Fire|r.",
+    SI_LUIE_SKILL_DAEDRIC_CHAOS =                        "Daedric Chaos",
+    SI_LUIE_SKILL_CHAOTIC_DISPERSION =                   "Chaotic Dispersion",
+    SI_LUIE_SKILL_CHAOTIC_RETURN =                       "Chaotic Return",
+    SI_LUIE_SKILL_RESILIENCE =                           "Resilience",
+    SI_LUIE_SKILL_RESILIENCE_TP =                        "Reduce damage taken from area of effect and damage over time abilities by |cFFFFFF85|r%.",
+    SI_LUIE_SKILL_WHIRLING_AXE =                         "Whirling Axe",
 
     -- Keep Upgrade
     SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_RANGE =              "Longer Range on Ranged Guards",

@@ -1,11 +1,11 @@
 ﻿## Title: |cE12000L|cFFFFB0ui E|rxtended|
 ## Author: ArtOfShred, psypanda, SpellBuilder
-## Version: 6.0.3
+## Version: 6.0.4
 ## APIVersion: 100030
-## AddOnVersion: 603
+## AddOnVersion: 604
 ## Description: Provides UnitFrames, InfoPanel, Combat Text & Info, Buffs & Debuff Tracking, Chat Announcements and Slash Commands.
 ## DependsOn: LibAddonMenu-2.0 LibMediaProvider-1.0
-## OptionalDependsOn: LibStub LibChatMessage
+## OptionalDependsOn: LibStub LibChatMessage pChat
 ## IsLibrary: false
 ## SavedVariables: LUIESV
 
@@ -60,6 +60,7 @@ i18n/settings/Settings_$(language).lua
 i18n/skills/Skills_en.lua
 i18n/skills/Skills_$(language).lua
 
+data/Globals.lua
 data/AbilityTables.lua
 data/Tooltips.lua
 data/UnitNamesTable.lua

@@ -34,14 +34,16 @@ LUIE.Data.UnitNames = {
     ----------------------------------------------------------------
 
     NPC_Target_Iron_Atronach              = 'Target Iron Atronach, Trial',
+
+    NPC_The_Feast                         = 'The Feast', -- GENERIC NPC
     NPC_Ice_Barrier                       = 'Ice Barrier',
-    NPC_Clannfear                         = 'Clannfear',
-    NPC_Lion                              = 'Lion',
-    NPC_Lioness                           = 'Lioness',
-    NPC_Sabre_Cat                         = 'Sabre Cat',
-    NPC_Senche_Tiger                      = 'Senche-Tiger',
+    NPC_Clannfear                         = 'Clannfear', -- GENERIC NPC
+    NPC_Lion                              = 'Lion', -- GENERIC NPC
+    NPC_Lioness                           = 'Lioness', -- GENERIC NPC
+    NPC_Sabre_Cat                         = 'Sabre Cat', -- GENERIC NPC
+    NPC_Senche_Tiger                      = 'Senche-Tiger', -- GENERIC NPC
     NPC_Spectral_Senche_Tiger             = 'Spectral Senche-Tiger',
-    NPC_Senche_Panther                    = 'Senche-Panther',
+    NPC_Senche_Panther                    = 'Senche-Panther', -- GENERIC NPC
     NPC_Spider                            = 'Spider',
     NPC_Venomspit_Spider                  = 'Venomspit Spide',
     NPC_Websnare_Spider                   = 'Websnare Spider',
@@ -65,10 +67,13 @@ LUIE.Data.UnitNames = {
     NPC_Auroran_Battlemage                = 'Auroran Battlemage',
     NPC_Watcher                           = 'Watcher',
     NPC_Dremora_Narkynaz                  = 'Dremora Narkynaz',
-    NPC_Dremora_Kyngald                   = 'Dremora Kyngald',
+    NPC_Dremora_Kyngald                   = 'Dremora Kyngald', -- VERIFIED - BANISHED CELLS I
     NPC_Flame_Atronach                    = 'Flame Atronach',
     NPC_Skeletal_Infernal                 = 'Skeletal Infernal',
-    NPC_Skeletal_Archer                   = 'Skeletal Archer',
+    NPC_Skeletal_Archer                   = 'Skeletal Archer', -- VERIFIED - DUNGEON - CRYPT OF HEARTS I
+    NPC_Skeletal_Pyromancer               = 'Skeletal Pyromancer', -- VERIFIED - DUNGEON - CRYPT OF HEARTS I
+    NPC_Skeletal_Runecaster               = 'Skeletal Runecaster', -- VERIFIED - DUNGEON - CRYPT OF HEARTS I
+    NPC_Ghost                             = 'Ghost', -- GENERIC NPC
     NPC_Skeletal_Tempest                  = 'Skeletal Tempest',
     NPC_Skeletal_Striker                  = 'Skeletal Striker',
     NPC_Skeletal_Slayer                   = 'Skeletal Slayer',
@@ -76,8 +81,13 @@ LUIE.Data.UnitNames = {
     NPC_Spectral_Storm_Mage               = 'Spectral Storm Mage',
     NPC_Sainted_Archer                    = 'Sainted Archer',
     NPC_Sainted_Charger                   = 'Sainted Charger',
-    NPC_Gargoyle                          = 'Gargoyle',
-    NPC_Xivilai                           = 'Xivilai',
+    NPC_Gargoyle                          = 'Gargoyle', -- GENERIC NPC
+    NPC_Xivilai                           = 'Xivilai', -- GENERIC NPC
+    NPC_Wraith                            = 'Wraith', -- GENERIC NPC
+    NPC_Daedroth                          = 'Daedroth', -- GENERIC NPC
+    NPC_Spider_Daedra                     = 'Spider Daedra', -- GENERIC NPC
+    NPC_Spiderling                        = 'Spiderling', -- GENERIC NPC
+    NPC_Flame_Ogrim                       = 'Flame Ogrim', -- GENERIC NPC (SUMMON)
 
     NPC_Aura_of_Protection                = 'Aura of Protection',
 
@@ -109,7 +119,7 @@ LUIE.Data.UnitNames = {
     NPC_Thundermaul                       = 'Thundermaul',
     NPC_Pact_Pyromancer                   = 'Pact Pyromancer',
     NPC_Pact_Necromancer                  = 'Pact Necromancer',
-    NPC_Scamp                             = 'Scamp',
+    NPC_Scamp                             = 'Scamp', -- GENERIC NPC
 
     ----------------------------------------------------------------
     -- QUESTS ------------------------------------------------------
@@ -335,13 +345,16 @@ LUIE.Data.UnitNames = {
     Boss_Angata_the_Clannfear_Handler     = 'Angata the Clannfear Handler',
     Boss_Skeletal_Destroyer               = 'Skeletal Destroyer',
     Boss_High_Kinlord_Rilis               = 'High Kinlord Rilis',
-    NPC_The_Feast                         = 'The Feast',
+    NPC_Banished_Archer                   = 'Banished Archer',
+    NPC_Banished_Mage                     = 'Banished Mage',
 
     -- Banished Cells II
     Boss_Keeper_Areldur                   = 'Keeper Areldur',
     Boss_Maw_of_the_Infernal              = 'Maw of the Infernal',
     Boss_Keeper_Voranil                   = 'Keeper Voranil',
     Boss_Keeper_Imiril                    = 'Keeper Imiril',
+    NPC_Dremora_Clasher                   = 'Dremora Clasher',
+    --NPC_Dark_Twilight                     = 'Dark Twilight', -- (Can't use because Xivilai can summon Winged Twilight)
 
     -- Elden Hollow I
     Boss_Ancient_Spriggan                 = 'Ancient Spriggan',
@@ -423,7 +436,7 @@ LUIE.Data.UnitNames = {
     Boss_Mad_Mortine                      = 'Mad Mortine',
     Boss_Blood_Spawn                      = 'Blood Spawn',
     NPC_The_Whisperer_Nightmare           = 'The Whisperer Nightmare',
-    NPC_Flesh_Atronach                    = 'Flesh Atronach',
+    NPC_Flesh_Atronach                    = 'Flesh Atronach', -- Generic NPC
     Boss_Urvan_Veleth                     = 'Urvan Veleth',
     Boss_Vorenor_Winterbourne             = 'Vorenor Winterbourne',
 
@@ -441,6 +454,15 @@ LUIE.Data.UnitNames = {
     Boss_Uulgarg_the_Risen                = 'Uulgarg the Risen',
     Boss_Garron_the_Returned              = 'Garron the Returned',
     Boss_The_Forgotten_One                = 'The Forgotten One',
+
+    -- Crypt of Hearts I
+    Boss_The_Mage_Master                  = 'The Mage Master',
+    Boss_Archmaster_Siniel                = 'Archmaster Siniel',
+    Boss_Deaths_Leviathan                 = 'Death\'s Leviathan',
+    Boss_Uulkar_Bonehand                  = 'Uulkar Bonehand',
+    Boss_Dogas_the_Berserker              = 'Dogas the Berserker',
+    Boss_Ilambris_Athor                   = 'Ilambris-Athor',
+    Boss_Ilambris_Zaven                   = 'Ilambris-Zaven',
 
     -- Frostvault
     NPC_Coldsnap_Ogre                     = 'Coldsnap Ogre',
