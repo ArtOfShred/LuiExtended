@@ -2067,13 +2067,15 @@ Effects.EffectOverrideByName = {
     [1718] = { -- Attack (CH + Vvardenfell Tutorial)
         [Unitnames.NPC_Naryu_Virian] =            { icon = 'LuiExtended/media/icons/abilities/ability_attack_unarmed_light.dds' } -- Attack (Tutorial)
     },
-
     [10618] = { -- Quick Strike (Shared)
         [Unitnames.NPC_Xivilai] =                { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_xivilai_light.dds' }, -- Xivilai
-        [Unitnames.Elite_Amuur] =                { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_cleaver_attack_light.dds' } -- Amuur (The First Patient)
+        [Unitnames.Elite_Amuur] =                { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_cleaver_attack_light.dds' }, -- Amuur (The First Patient)
+
+        -- DUNGEONS
+        [Unitnames.Boss_Nenesh_gro_Mal] =        { icon = 'LuiExtended/media/icons/abilities/ability_spell_club2h_light_attack.dds' }, -- Nenesh gro Mal (Elden Hollow I)
     },
     [14096] = { -- Heavy Attack (Footsoldier)
-        [Unitnames.Elite_Amuur] =                { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_cleaver_attack_heavy.dds' } -- Amuur (The First Patient)
+        [Unitnames.Elite_Amuur] =                { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_cleaver_attack_heavy.dds' }, -- Amuur (The First Patient)
     },
 
     -- HUMAN NPCS
@@ -3894,7 +3896,7 @@ Effects.EffectOverride = {
     [61275] = { tooltip = Abilities.Set_Malubeth_the_Scourger, forcedContainer = 'short' }, -- Major Vitality (Malubeth)
     [59573] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds', name = Abilities.Set_Malubeth_the_Scourger }, -- Scourge Harvest (Malubeth)
     [59508] = { icon = 'esoui/art/icons/achievement_ic_020.dds', name = Abilities.Set_Maw_of_the_Infernal, tooltip = Tooltips.Set_Maw_of_the_Infernal }, -- Banished Cells Item Set (Maw of the Infernal)
-    [60974] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_maw_of_the_infernal.dds'}, -- Jagged Claw (Maw of the Infernal)
+    [60974] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_jagged_claw_fire.dds'}, -- Jagged Claw (Maw of the Infernal)
     [60972] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_breath.dds'}, -- Fiery Breath (Maw of the Infernal)
     [60973] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_jaws.dds'}, -- Fiery Jaws (Maw of the Infernal)
     [130633] = { tooltip = Abilities.Set_Mighty_Chudan }, -- Major Resolve (Mighty Chudan)
@@ -11173,18 +11175,18 @@ Effects.EffectOverride = {
     [32583] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hammering_light.dds', hide = true }, -- Hammering Light (Dark Root)
     [32587] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hammering_light.dds', hide = true }, -- Hammering Light (Dark Root)
     [32591] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hammering_light.dds', hide = true }, -- Hammering Light (Dark Root)
-    [32707] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_beast_hoarvor.dds' }, -- Summon Guardians (Dark Root)
+    [32707] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_guardians.dds' }, -- Summon Guardians (Dark Root)
     [33334] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_latch_on_stamina.dds', name = Abilities.Skill_Siphon_Stamina, tooltip = Tooltips.Skill_Siphon_Stamina }, -- Latch On Stamina (Frenzied Guardian)
     [33335] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_latch_on_stamina.dds', name = Abilities.Skill_Siphon_Stamina }, -- Latch On Stamina (Frenzied Guardian)
     [33337] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_latch_on_magicka.dds', name = Abilities.Skill_Siphon_Magicka, tooltip = Tooltips.Skill_Siphon_Magicka }, -- Latch On Magicka (Mystic Guardian)
     [33338] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_latch_on_magicka.dds', name = Abilities.Skill_Siphon_Magicka }, -- Latch On MAgicka (Mystic Guardian)
-    [32655] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_fortified_ground.dds', name = Abilities.Skill_Fortified_Ground, groundLabel = true, tooltip = Tooltips.Skill_Dark_Root_Stamina }, -- Fortification (Fortified Guardian)
-    [32614] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_empowered_ground.dds', name = Abilities.Skill_Empowered_Ground, groundLabel = true, tooltip = Tooltips.Skill_Dark_Root_Magicka }, -- Empowered (Mystic Guardian)
+    [32655] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fortified_ground.dds', name = Abilities.Skill_Fortified_Ground, groundLabel = true, tooltip = Tooltips.Skill_Dark_Root_Stamina }, -- Fortification (Fortified Guardian)
+    [32614] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_empowered_ground.dds', name = Abilities.Skill_Empowered_Ground, groundLabel = true, tooltip = Tooltips.Skill_Dark_Root_Magicka }, -- Empowered (Mystic Guardian)
     [32890] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_gleaming_light.dds', hide = true }, -- Gleaming Light (Dark Root)
     [33533] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_gleaming_light.dds', hide = true }, -- Glaring Light (Dark Root)
     [33535] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_gleaming_light.dds' }, -- Brightening Light (Dark Root)
 
-    [33170] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_dungeon_shadow_tendril.dds', name = Abilities.Skill_Shadow_Tendril }, -- Hate (Shadow Tendril)
+    [33170] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_spell_shadow_tendril.dds', name = Abilities.Skill_Shadow_Tendril }, -- Hate (Shadow Tendril)
     [33164] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds', tooltip = Tooltips.Generic_Fear }, -- Incite Fear (Shadow Tendril)
     [47087] = { hide = true }, -- Incite Fear (Shadow Tendril)
 
@@ -11196,8 +11198,8 @@ Effects.EffectOverride = {
     [32832] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_shadow_damage.dds' }, -- Consuming Shadow (Murklight)
     [32972] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_shadow_damage.dds', tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.5, groundLabel = true }, -- Consuming Shadow (Murklight)
     [33049] = { hide = true }, -- Eclipse (Murklight)
-    [32975] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_eclipse.dds' }, -- Eclipse (Murklight)
-    [33050] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_eclipse.dds', tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.5 }, -- Eclipse (Murklight)
+    [32975] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_eclipse.dds' }, -- Eclipse (Murklight)
+    [33050] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_eclipse.dds', tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.5 }, -- Eclipse (Murklight)
 
     [33102] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_shadow_damage.dds', hide = true }, -- Spout Shadow (The Shadow Guard)
     [33104] = { hide = true }, -- Spout Shadow (The Shadow Guard)
@@ -11213,7 +11215,7 @@ Effects.EffectOverride = {
     [33480] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_pulverize_bogdan.dds' }, -- Pulverize (Bogdan the Nightflame)
     [33492] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_pulverize_bogdan.dds' }, -- Pulverize (Bogdan the Nightflame)
     [33494] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_pulverize_bogdan.dds' }, -- Pulverize (Bogdan the Nightflame)
-    [34260] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_nova_tendril.dds', name = Abilities.Skill_Nova_Tendril }, -- Shadow (Nova Tendril)
+    [34260] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_nova_tendril.dds', name = Abilities.Skill_Nova_Tendril }, -- Shadow (Nova Tendril)
 
     [34348] = { hide = true }, -- Dummy (The Opus of Torment)
     [30455] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_headgrab.dds', name = Abilities.Skill_Wracking_Pain, tooltip = Tooltips.Generic_Stun, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Arachnophobia (The Opus of Torment)
@@ -13054,6 +13056,11 @@ Effects.MapDataOverride = {
     },
 
     -- DUNGEONS
+
+    [10618] = { -- Quick Strike (Shared)
+        -- DUNGEONS
+        [931] =        { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword2h_quick_strike.dds' }, -- Elden Hollow II
+    },
 
     [60920] = { -- Scrape (Giant Bat)
         [146] = { icon = 'LuiExtended/media/icons/abilities/ability_bat_scrape_dark.dds' }, -- Wayrest Sewers

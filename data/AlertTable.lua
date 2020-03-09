@@ -1262,6 +1262,17 @@ LUIE.Data.AlertTable = {
 
 LUIE.Data.AlertZoneOverride = {
 
+    [35151] = { -- Spell Absorption (Spirit Mage)
+
+        -- DUNGEONS
+        [931] = Unitnames.NPC_Dremora_Invoker, -- Elden Hollow II
+    },
+    [14472] = { -- Burdening Eye (Spirit Mage)
+
+        -- DUNGEONS
+        [931] = Unitnames.NPC_Dremora_Invoker, -- Elden Hollow II
+    },
+
     [12459] = { -- Winter's Reach (Frost Mage)
         -- DUNGEONS
         [380] = Unitnames.NPC_Banished_Mage, -- Banished Cells I
@@ -1562,6 +1573,9 @@ LUIE.Data.AlertZoneOverride = {
         [Zonenames.Zone_Hectahame_Arboretum] = Unitnames.NPC_Corrupt_Lurcher, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Corrupt_Lurcher, -- Hectahame Ritual Chamber
         [559] = Unitnames.NPC_Corrupt_Lurcher, -- Valenheart
+
+        -- DUNGEONS
+        [931] = Unitnames.NPC_Daedric_Lurcher, -- Elden Hollow II
     },
     [21582] = { -- Nature's Swarm (Spriggan)
         [Zonenames.Zone_Hectahame] = Unitnames.NPC_Corrupt_Spriggan, -- Hectahame
@@ -1681,6 +1695,7 @@ LUIE.Data.AlertZoneOverride = {
         -- DUNGEONS
         [380] = Unitnames.NPC_Scamp, -- Banished Cells I
         [935] = Unitnames.NPC_Scamp, -- Banished Cells II (Summon Only)
+        [931] = Unitnames.NPC_Scamp, -- Elden Hollow II
     },
     [6160] = { -- Rain of Fire (Scamp)
         [381] = Unitnames.NPC_Scamp, -- Auridon
@@ -1688,6 +1703,7 @@ LUIE.Data.AlertZoneOverride = {
         -- DUNGEONS
         [380] = Unitnames.NPC_Scamp, -- Banished Cells I
         [935] = Unitnames.NPC_Scamp, -- Banished Cells II (Summon Only)
+        [931] = Unitnames.NPC_Scamp, -- Elden Hollow II
     },
 
     [88947] = { -- Lightning Grasp (Xivilai)
@@ -1714,6 +1730,7 @@ LUIE.Data.AlertZoneOverride = {
 
         -- DUNGEONS
         --[935] = Unitnames.NPC_Dark_Twilight, -- Banished Cells I (Can't use because Xivilai can summon Winged Twilight)
+        [931] = Unitnames.Boss_Azara_the_Frightener, -- Elden Hollow II
     },
 
     [24690] = { -- Focused Charge (Ogrim)
