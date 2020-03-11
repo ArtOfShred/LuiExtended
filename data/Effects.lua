@@ -11187,7 +11187,7 @@ Effects.EffectOverride = {
     [33535] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_gleaming_light.dds' }, -- Brightening Light (Dark Root)
 
     [33170] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_spell_shadow_tendril.dds', name = Abilities.Skill_Shadow_Tendril }, -- Hate (Shadow Tendril)
-    [33164] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds', tooltip = Tooltips.Generic_Fear }, -- Incite Fear (Shadow Tendril)
+    [33164] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_incite_fear.dds', tooltip = Tooltips.Generic_Fear }, -- Incite Fear (Shadow Tendril)
     [47087] = { hide = true }, -- Incite Fear (Shadow Tendril)
 
     [33499] = { hide = true }, -- EHH_Boss_02_Shadow_Effect

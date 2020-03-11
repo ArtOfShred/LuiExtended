@@ -157,7 +157,7 @@ LUIE.Data.AlertTable = {
     [50966] = { power = true, auradetect = true, priority = 2, alwaysShowInterrupt = true, duration = 5000 }, -- Healer Immune (Healer - Craglorn/DLC)
     [44328] = { interrupt = true, priority = 2, auradetect = true, duration = 4500 }, -- Rite of Passage (Healer)
 
-    [29520] = { destroy = true, auradetect = true, priority = 2, fakeName = "", bossMatch = { Unitnames.Boss_Bagul, Unitnames.Boss_The_Shadow_Guard } }, -- Aura of Protection (Shaman)
+    [29520] = { destroy = true, auradetect = true, priority = 2, fakeName = "", bossMatch = { Unitnames.Boss_Bagul } }, -- Aura of Protection (Shaman)
 
     [68866] = { power = true, auradetect = true, refire = 1000, priority = 2 }, -- War Horn (Faction NPC)
     [43644] = { avoid = true, priority = 3, auradetect = true }, -- Barrier [monster synergy]  (Faction NPCs)
@@ -1005,8 +1005,8 @@ LUIE.Data.AlertTable = {
     -- Elden Hollow II
     [34376] = { avoid = true, priority = 1, eventdetect = true, refire = 2000, result = ACTION_RESULT_BEGIN, duration = 3300, bossName = true, cc = LUIE_CC_TYPE_FEAR }, -- Flame Geyser (Dubroze the Infestor)
     [32707] = { summon = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, bossName = true }, -- Summon Guardians (Dark Root)
-    [33334] = { interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = Unitnames.NPC_Frenzied_Guardian, duration = 7850, durationOnlyIfTarget = true }, -- Latch On Stamina (Frenzied Guardian)
-    [33337] = { interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = Unitnames.NPC_Mystic_Guardian, duration = 7850, durationOnlyIfTarget = true }, -- Latch On Magicka (Mystic Guardian)
+    [33334] = { interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = Unitnames.NPC_Frenzied_Guardian, hiddenDuration = 1800, alwaysShowInterrupt = true }, -- Latch On Stamina (Frenzied Guardian)
+    [33337] = { interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = Unitnames.NPC_Mystic_Guardian, hiddenDuration = 1800, alwaysShowInterrupt = true }, -- Latch On Magicka (Mystic Guardian)
     [32890] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, bossName = true }, -- Gleaming Light (Dark Root)
     [33533] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, bossName = true }, -- Glaring Light (Dark Root)
     [33535] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, bossName = true }, -- Brightening Light (Dark Root)
@@ -1014,8 +1014,8 @@ LUIE.Data.AlertTable = {
     [33170] = { destroy = true, priority = 1, auradetect = true, bossName = true }, -- Hate (Shadow Tendril)
 
     [33052] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 900 }, -- Shadow Stomp (Murklight)
-    [32832] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1750, bossName = true, duration = 3000, postCast = 4000 }, -- Consuming Shadow (Murklight)
-    [32975] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Eclipse (Murklight)
+    [32832] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1750, bossName = true, duration = 4700, postCast = 4000, neverShowInterrupt = true }, -- Consuming Shadow (Murklight)
+    [32975] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 2000, postCast = 4000, neverShowInterrupt = true }, -- Eclipse (Murklight)
 
     [33102] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1250, bossName = true, duration = 5000, postCast = 4000 }, -- Spout Shadow (The Shadow Guard)
 
@@ -1265,12 +1265,12 @@ LUIE.Data.AlertZoneOverride = {
     [35151] = { -- Spell Absorption (Spirit Mage)
 
         -- DUNGEONS
-        [931] = Unitnames.NPC_Dremora_Invoker, -- Elden Hollow II
+        --[931] = Unitnames.NPC_Dremora_Invoker, -- Elden Hollow II -- Can't use because of Infested Invokers
     },
     [14472] = { -- Burdening Eye (Spirit Mage)
 
         -- DUNGEONS
-        [931] = Unitnames.NPC_Dremora_Invoker, -- Elden Hollow II
+        --[931] = Unitnames.NPC_Dremora_Invoker, -- Elden Hollow II -- Can't use because of Infested Invokers
     },
 
     [12459] = { -- Winter's Reach (Frost Mage)
@@ -1321,7 +1321,10 @@ LUIE.Data.AlertZoneOverride = {
         [126] = Unitnames.Boss_Nenesh_gro_Mal, -- Elden Hollow I
     },
     [29520] = { -- Aura of Protection (Shaman)
-        [176] = Unitnames.NPC_Dremora_Hauzkyn, -- City of Ash
+
+        -- DUNGEONS
+        [176] = Unitnames.NPC_Dremora_Hauzkyn, -- City of Ash I
+        [931] = Unitnames.Boss_The_Shadow_Guard, -- Elden Hollow II
     },
     [28408] = { -- Whirlwind (Skirmisher)
         [Zonenames.Zone_Mathiisen] = Unitnames.NPC_Heritance_Cutthroat, -- Mathiisen (Auridon)

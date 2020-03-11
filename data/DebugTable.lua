@@ -8191,6 +8191,7 @@ LUIE.DebugAuras = {
     [35849] = true, -- Shadow Cloak -- Fear Mage
     [35865] = true, -- Shadow Cloak -- Fear Mage
     [35850] = true, -- Shadow Cloak -- Fear Mage
+    [89020] = true, -- Shadow Cloak -- Fear Mage
 
     [44247] = true, -- Dark Shade -- Dreadweaver
     [89005] = true, -- Dark Shade -- Dreadweaver
