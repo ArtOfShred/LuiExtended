@@ -378,6 +378,7 @@ LUIE.Data.UnitNames = {
     NPC_Dremora_Kynval                    = 'Dremora Kynval',
     NPC_Dremora_Invoker                   = 'Dremora Invoker',
     NPC_Daedric_Lurcher                   = 'Daedric Lurcher',
+    NPC_Infested_Invoker                  = 'Infested Invoker',
     Boss_Azara_the_Frightener             = 'Azara the Frightener',
     Boss_Shadow_Tendril                   = 'Shadow Tendril',
     Boss_Murklight                        = 'Murklight',

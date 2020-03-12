@@ -11,6 +11,7 @@ local UI = LUIE.UI
 local Effects = LUIE.Data.Effects
 local Alerts = LUIE.Data.AlertTable
 local AlertsZone = LUIE.Data.AlertZoneOverride
+local AlertsConvert = LUIE.Data.AlertBossNameConvert
 
 local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
@@ -657,6 +658,18 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
                     if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
                         d("Boss Match: " .. unitName)
                     end
+                end
+            end
+        end
+    end
+
+    if AlertsConvert[abilityId] then
+        for i = 1, 4 do
+            local bossName = DoesUnitExist('boss' .. i) and zo_strformat("<<t:1>>", GetUnitName('boss' .. i)) or ""
+            if AlertsConvert[abilityId][bossName] then
+                unitName = AlertsConvert[abilityId][bossName]
+                if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
+                    d("Boss Enemy with adds detected, converting name of NPC source to: " .. unitName)
                 end
             end
         end

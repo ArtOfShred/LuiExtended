@@ -1260,17 +1260,33 @@ LUIE.Data.AlertTable = {
     [83430] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Skeletal Smash (Ice Wraith)
 }
 
+-- When a certain boss in in range if this id is cast, use the specified name as the source (There are some cases where bosses have uniquely named abilities as other enemies in the dungeon so this is a way to have both show properly).
+LUIE.Data.AlertBossNameConvert = {
+
+    [35151] = { -- Spell Absorption (Spirit Mage)
+
+        -- DUNGEONS
+        [Unitnames.Boss_Dubroze_the_Infestor] = Unitnames.NPC_Infested_Invoker, -- Elden Hollow II (other mobs in dungeon are NPC_Dremora_Invoker)
+    },
+    [14472] = { -- Burdening Eye (Spirit Mage)
+
+        -- DUNGEONS
+        [Unitnames.Boss_Dubroze_the_Infestor] = Unitnames.NPC_Infested_Invoker, -- Elden Hollow II (other mobs in dungeon are NPC_Dremora_Invoker)
+    },
+
+}
+
 LUIE.Data.AlertZoneOverride = {
 
     [35151] = { -- Spell Absorption (Spirit Mage)
 
         -- DUNGEONS
-        --[931] = Unitnames.NPC_Dremora_Invoker, -- Elden Hollow II -- Can't use because of Infested Invokers
+        [931] = Unitnames.NPC_Dremora_Invoker, -- Elden Hollow II
     },
     [14472] = { -- Burdening Eye (Spirit Mage)
 
         -- DUNGEONS
-        --[931] = Unitnames.NPC_Dremora_Invoker, -- Elden Hollow II -- Can't use because of Infested Invokers
+        [931] = Unitnames.NPC_Dremora_Invoker, -- Elden Hollow II
     },
 
     [12459] = { -- Winter's Reach (Frost Mage)
@@ -1281,6 +1297,7 @@ LUIE.Data.AlertZoneOverride = {
         -- DUNGEONS
         [380] = Unitnames.Boss_Cell_Haunter, -- Banished Cells I
         [935] = Unitnames.NPC_Wraith, -- Banished Cells II (Summon Only)
+        [130] = Unitnames.NPC_Wraith, -- Crypt of Hearts I
     },
 
     [36985] = { -- Void (Time Bomb Mage)
