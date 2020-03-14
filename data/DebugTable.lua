@@ -13910,6 +13910,7 @@ LUIE.DebugAuras = {
     [56082] = true, -- Body of Flame
     [53999] = true, -- Summon
     [56081] = true, -- Body of Flame
+    [56084] = true, -- Body of Flame
     [54126] = true, -- Minor Wound (Akezel)
     [54025] = true, -- Spell Absorption (Akezel)
     [53994] = true, -- Focused Healing (Akezel)

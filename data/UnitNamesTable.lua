@@ -68,7 +68,7 @@ LUIE.Data.UnitNames = {
     NPC_Watcher                           = 'Watcher',
     NPC_Dremora_Narkynaz                  = 'Dremora Narkynaz',
     NPC_Dremora_Kyngald                   = 'Dremora Kyngald', -- VERIFIED - BANISHED CELLS I
-    NPC_Flame_Atronach                    = 'Flame Atronach',
+    NPC_Flame_Atronach                    = 'Flame Atronach', -- GENERIC NPC
     NPC_Skeletal_Infernal                 = 'Skeletal Infernal',
     NPC_Skeletal_Archer                   = 'Skeletal Archer', -- VERIFIED - DUNGEON - CRYPT OF HEARTS I
     NPC_Skeletal_Pyromancer               = 'Skeletal Pyromancer', -- VERIFIED - DUNGEON - CRYPT OF HEARTS I
@@ -88,8 +88,10 @@ LUIE.Data.UnitNames = {
     NPC_Spider_Daedra                     = 'Spider Daedra', -- GENERIC NPC
     NPC_Spiderling                        = 'Spiderling', -- GENERIC NPC
     NPC_Flame_Ogrim                       = 'Flame Ogrim', -- GENERIC NPC (SUMMON)
+    NPC_Winged_Twilight                   = 'Winged Twilight', -- GENERIC NPC
     NPC_Alit                              = 'Alit', -- GENERIC NPC
     NPC_Strangler                         = 'Strangler', -- GENERIC NPC
+    NPC_Crocodile                         = 'Crocodile', -- GENERIC NPC
 
     NPC_Aura_of_Protection                = 'Aura of Protection',
 
@@ -122,6 +124,10 @@ LUIE.Data.UnitNames = {
     NPC_Pact_Pyromancer                   = 'Pact Pyromancer',
     NPC_Pact_Necromancer                  = 'Pact Necromancer',
     NPC_Scamp                             = 'Scamp', -- GENERIC NPC
+    NPC_Dremora_Kynval                    = 'Dremora Kynval', -- GENERIC NPC
+    NPC_Dremora_Hauzkyn                   = 'Dremora Hauzkyn', -- GENERIC NPC
+    NPC_Dremora_Gandrakyn                 = 'Dremora Gandrakyn', -- GENERIC NPC
+    NPC_Storm_Atronach                    = 'Storm Atronach', -- GENERIC NPC
 
     ----------------------------------------------------------------
     -- QUESTS ------------------------------------------------------
@@ -356,7 +362,8 @@ LUIE.Data.UnitNames = {
     Boss_Keeper_Voranil                   = 'Keeper Voranil',
     Boss_Keeper_Imiril                    = 'Keeper Imiril',
     NPC_Dremora_Clasher                   = 'Dremora Clasher',
-    --NPC_Dark_Twilight                     = 'Dark Twilight', -- (Can't use because Xivilai can summon Winged Twilight)
+    NPC_Dark_Twilight                     = 'Dark Twilight',
+    NPC_Dark_Clannfear                    = 'Dark Clannfear',
 
     -- Elden Hollow I
     Boss_Ancient_Spriggan                 = 'Ancient Spriggan',
@@ -369,13 +376,13 @@ LUIE.Data.UnitNames = {
     NPC_Darkfern_Archer                   = 'Darkfern Archer',
     NPC_Darkfern_Flamerender              = 'Darkfern Flamerender',
     NPC_Darkfern_Stalker                  = 'Darkfern Stalker',
+    NPC_Darkfern_Mauler                   = 'Darkfern Mauler',
 
     -- Elden Hollow II
     Boss_Dubroze_the_Infestor             = 'Dubroze the Infestor',
     Boss_Dark_Root                        = 'Dark Root',
     NPC_Frenzied_Guardian                 = 'Frenzied Guardian',
     NPC_Mystic_Guardian                   = 'Mystic Guardian',
-    NPC_Dremora_Kynval                    = 'Dremora Kynval',
     NPC_Dremora_Invoker                   = 'Dremora Invoker',
     NPC_Daedric_Lurcher                   = 'Daedric Lurcher',
     NPC_Infested_Invoker                  = 'Infested Invoker',
@@ -393,6 +400,9 @@ LUIE.Data.UnitNames = {
     Boss_Dark_Ember                       = 'Dark Ember',
     Boss_Rothariel_Flameheart             = 'Rothariel Flameheart',
     Boss_Razor_Master_Erthas              = 'Razor Master Erthas',
+    NPC_Dagonite_Archer                   = 'Dagonite Archer',
+    NPC_Dagonite_Assassin                 = 'Dagonite Assassin',
+    NPC_Dremora_Berserker                 = 'Dremora Berserker',
 
     -- City of Ash II
     Boss_Akezel                           = 'Akezel',
@@ -406,11 +416,12 @@ LUIE.Data.UnitNames = {
     Boss_Horvantud_the_Fire_Maw           = 'Horvantud the Fire Maw',
     Boss_Ash_Titan                        = 'Ash Titan',
     NPC_Air_Atronach                      = 'Air Atronach',
-    NPC_Dremora_Hauzkyn                   = 'Dremora Hauzkyn',
     NPC_Fire_Ravager                      = 'Fire Ravager',
     NPC_Xivilai_Fulminator                = 'Xivilai Fulminator',
     NPC_Xivilai_Boltaic                   = 'Xivilai Boltaic',
     Boss_Valkyn_Skoria                    = 'Valkyn Skoria',
+    NPC_Urata_Militant                    = 'Urata Militant',
+    NPC_Urata_Elementalist                = 'Urara Elementalist',
 
     -- Tempest Island
     Boss_Sonolia_the_Matriarch            = 'Sonolia the Matriarch',
