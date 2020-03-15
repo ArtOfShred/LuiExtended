@@ -8685,9 +8685,9 @@ Effects.EffectOverride = {
     [9680] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_spectral_lamia.dds', tooltip = Tooltips.Skill_Summon_Spectral_Lamia }, -- Summon Spectral Lamia (Lamia)
     [89399] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', name = Abilities.Skill_Weakness, duration = -120, type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = Tooltips.Skill_Weakness_NPC_Summon }, -- Summon Spectral Lamia (Lamia)
     [7835] = { icon = 'esoui/art/icons/ability_healer_033.dds', hide = true }, -- Convalescence (Lamia)
-    [7831] = { icon = 'LuiExtended/media/icons/abilities/ability_lamia_harmony.dds' }, -- Harmony (Lamia)
+    [7831] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_harmony.dds' }, -- Harmony (Lamia)
     [24745] = { hide = true }, -- Harmony (Lamia)
-    [23358] = { icon = 'LuiExtended/media/icons/abilities/ability_lamia_harmony.dds', tooltip = Tooltips.Skill_Harmony }, -- Harmony (Lamia)
+    [23358] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_harmony.dds', tooltip = Tooltips.Skill_Harmony }, -- Harmony (Lamia)
     [24814] = { hide = true }, -- Harmony (Lamia)
 
     [3757] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw.dds' }, -- Claw (Lurcher)

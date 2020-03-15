@@ -1063,9 +1063,9 @@ LUIE.Data.AlertTable = {
     [56811] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 2500, cc = LUIE_CC_TYPE_STUN }, -- Pyrocasm (Xivilai Ravager)
 
     [56414] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, duration = 1000, postCast = 3000, bossName = true }, -- Fire Runes (Urata the Legion)
-    [54225] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 3500 }, -- Multiply (Urata the Legion)
-    [56098] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 3500 }, -- Multiply (Urata the Legion)
-    [56104] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 3500 }, -- Multiply (Urata the Legion)
+    [54225] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Multiply (Urata the Legion)
+    [56098] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Multiply (Urata the Legion)
+    [56104] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Multiply (Urata the Legion)
     [56131] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 8000 }, -- Reunite (Urata the Legion)
 
     [56186] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = Unitnames.NPC_Flame_Colossus }, -- Voice to Wake the Dead (Bone Colossus)
@@ -1755,8 +1755,8 @@ LUIE.Data.AlertZoneOverride = {
     [19137] = { -- Haunting Spectre (Ghost)
 
         -- DUNGEONS
-        [130] = Unitnames.NPC_Ghost, -- Crypt of Hearts I
         [935] = Unitnames.NPC_Ghost, -- Banished Cells II (Summon Only)
+        [130] = Unitnames.NPC_Ghost, -- Crypt of Hearts I
     },
     [73925] = { -- Soul Cage (Lich)
         [559] = Unitnames.Boss_Shade_of_Naemon, -- Valenheart
