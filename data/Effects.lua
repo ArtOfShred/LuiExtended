@@ -529,7 +529,7 @@ Effects.EffectGroundDisplay = {
     [81036] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_heal.dds', buff = true, debuff = false, ground = false }, -- Sentinel of Rkugamz
     [80954] = { icon = 'esoui/art/icons/achievement_ic_017.dds', name = Abilities.Set_Shadowrend, buff = true, debuff = false, ground = false }, -- Shadowrend Summon (Shadowrend)
     [59497] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', buff = false, debuff = false, ground = true }, -- Spawn of Mephala (Spawn of Mephala)
-    [80523] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_stormfist.dds', buff = false, debuff = false, ground = true }, -- Stormfist (Stormfist)
+    [80523] = { icon = 'LuiExtended/media/icons/abilities/ability_stormatronach_enervating_stone.dds', buff = false, debuff = false, ground = true }, -- Stormfist (Stormfist)
     [102093] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds', buff = false, debuff = false, ground = true }, -- Thurvokun
     [59594] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_rupture.dds', name = Abilities.Set_Nerieneth, buff = false, debuff = false, ground = true }, -- Crypt of Hearts Item Set (Nerien'eth)
     [80545] = { icon = 'esoui/art/icons/achievement_thievesguild_021.dds', buff = false, debuff = false, ground = true }, -- Sellistrix (Sellistrix)
@@ -2093,7 +2093,7 @@ Effects.EffectOverrideByName = {
         [Unitnames.NPC_Darkfern_Mauler] =        { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe1h_quick_strike_reach.dds' }, -- Darkfern Mauler (Elden Hollow I)
         [Unitnames.Boss_Nenesh_gro_Mal] =        { icon = 'LuiExtended/media/icons/abilities/ability_spell_club2h_light_attack.dds' }, -- Nenesh gro Mal (Elden Hollow I)
         [Unitnames.NPC_Dremora_Berserker] =      { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe1h_quick_strike.dds' }, -- Dremora Berserker (City of Ash I)
-        [Unitnames.Boss_The_Mage_Master] =       { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword2h_quick_strike.dds' }, -- The Mage Master (Crypt of Hearts I)
+        [Unitnames.Boss_The_Mage_Master] =       { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_light.dds' }, -- The Mage Master (Crypt of Hearts I)
         [Unitnames.Boss_Dogas_the_Berserker] =   { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe1h_quick_strike.dds' }, -- Dogas the Berserker (Crypt of Hearts I)
         [Unitnames.NPC_Dremora_Kynval] =         { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace1h_quick_strike.dds' }, -- Dremora Kynval (City of Ash I)
         [Unitnames.Boss_Rukhan] =                { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace2hdaedric_quick_strike.dds' }, -- Rukhan (City of Ash I))
@@ -2357,13 +2357,13 @@ Effects.EffectOverrideByName = {
     },
     -- QUESTS
     [37028] = {
-        [Unitnames.NPC_Auroran_Battlemage] =      { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds', name = Abilities.Skill_Quick_Strike }, -- Quick Strike (Auroran Battlemage)
+        [Unitnames.NPC_Auroran_Battlemage] =      { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds', name = Abilities.Skill_Quick_Strike }, -- Quick Strike (Auroran Battlemage)
     },
     [37029] = {
-        [Unitnames.NPC_Auroran_Battlemage] =      { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds', name = Abilities.Skill_Quick_Strike }, -- Quick Strike (Auroran Battlemage)
+        [Unitnames.NPC_Auroran_Battlemage] =      { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds', name = Abilities.Skill_Quick_Strike }, -- Quick Strike (Auroran Battlemage)
     },
     [37030] = {
-        [Unitnames.NPC_Auroran_Battlemage] =      { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds', name = Abilities.Skill_Quick_Strike }, -- Quick Strike (Auroran Battlemage)
+        [Unitnames.NPC_Auroran_Battlemage] =      { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds', name = Abilities.Skill_Quick_Strike }, -- Quick Strike (Auroran Battlemage)
     },
 
     -- GENERIC
@@ -3963,8 +3963,8 @@ Effects.EffectOverride = {
     [59498] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', name = Abilities.Set_Spawn_of_Mephala, groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Poison, tooltipValue2 = 1, tooltipValue3 = 50 }, -- Mephala's Web (Spawn of Mephala)
     [59499] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', name = Abilities.Set_Spawn_of_Mephala, duration = 0, groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Poison, tooltipValue2 = 1, tooltipValue3 = 50, hideGround = true }, -- Mephala's Web (Spawn of Mephala)
     [80523] = { tooltip = Tooltips.Set_Stormfist }, -- Stormfist (Stormfist)
-    [80522] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_stormfist.dds', groundLabel = true, tooltip = Tooltips.Skill_Stormfist_Ground }, -- Stormfist (Stormfist)
-    [80521] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_stormfist.dds' }, -- Stormfist (Stormfist)
+    [80522] = { icon = 'LuiExtended/media/icons/abilities/ability_stormatronach_enervating_stone.dds', groundLabel = true, tooltip = Tooltips.Skill_Stormfist_Ground }, -- Stormfist (Stormfist)
+    [80521] = { icon = 'LuiExtended/media/icons/abilities/ability_stormatronach_enervating_stone.dds' }, -- Stormfist (Stormfist)
     [84419] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', name = Abilities.Set_Swarm_Mother },
     [80593] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', name = Abilities.Set_Swarm_Mother },
     [59522] = { hide = true }, -- Engine Guardian
@@ -6524,7 +6524,7 @@ Effects.EffectOverride = {
     [39728] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds', name = Abilities.Skill_Feed }, -- VampInit_TheaterFeed
     [39509] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_4.dds', name = Abilities.Skill_Vampirism }, -- VampInit_PC Becomes a Vampire
     [39422] = { hide = true }, -- Mist Form
-    [56684] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds' }, -- Quick Strike
+    [56684] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds' }, -- Quick Strike
     [39692] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds', type = BUFF_EFFECT_TYPE_DEBUFF, duration = -5.2, tooltip = Tooltips.Skill_Feed_Quest }, -- Feed
     [39698] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds' }, -- Feed
     [39693] = { hide = true }, -- Feed
@@ -7274,7 +7274,7 @@ Effects.EffectOverride = {
     [63174] = { hide = true }, -- Guard Speed Boost (Justice Guard)
     [63148] = { icon = 'esoui/art/icons/ability_debuff_major_defile.dds', tooltip = Abilities.Skill_Criminals_Bane }, -- Major Defile (Justice Guard)
     [63168] = { tooltip = Tooltips.Generic_Immobilize }, -- Cage Talons (Justice Guard 1H + 2H)
-    [63095] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_focused_strike.dds' }, -- Focused Strike (Justice Guard)
+    [63095] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_focused_strike.dds' }, -- Focused Strike (Justice Guard)
     [63157] = { icon = 'esoui/art/icons/ability_1handed_005.dds', name = Abilities.Skill_Power_Bash }, -- Heavy Blow (Justice Guard)
     [63268] = { icon = 'esoui/art/icons/ability_1handed_005.dds', name = Abilities.Skill_Power_Bash }, -- Uppercut (Justice Guard)
     [63160] = { icon = 'esoui/art/icons/ability_1handed_005.dds', name = Abilities.Skill_Power_Bash, tooltip = Tooltips.Generic_Knockback }, -- Heavy Blow Knockdown (Justice Guard)
@@ -7313,9 +7313,9 @@ Effects.EffectOverride = {
     [77937] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_detection.dds', name = Abilities.Skill_Detection, tooltip = Tooltips.Generic_Detection_NPC }, -- Clairvoyance (Mage Guard)
     [77941] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', type = BUFF_EFFECT_TYPE_DEBUFF, duration = 0, unbreakable = 1, groundLabel = true, tooltip = Abilities.Skill_Detection }, -- Revealed (Mage Guard)
     [77917] = { hide = true }, -- Empower Weapon: Flame (Mage Guard)
-    [74502] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_focused_strike_staff.dds' }, -- Focused Strike (Mage Guard)
-    [74503] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_focused_strike_staff.dds' }, -- Focused Strike (Mage Guard)
-    [74504] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_focused_strike_staff.dds' }, -- Focused Strike (Mage Guard)
+    [74502] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_staff_focused_strike.dds' }, -- Focused Strike (Mage Guard)
+    [74503] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_staff_focused_strike.dds' }, -- Focused Strike (Mage Guard)
+    [74504] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_staff_focused_strike.dds' }, -- Focused Strike (Mage Guard)
     [74862] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_teleport_trap.dds' }, -- Teleport Trap (Mage Guard)
     [74870] = { hide = true }, -- Teleport Trap (Mage Guard)
     [74864] = { hide = true }, -- Teleport Trap (Mage Guard)
@@ -7329,7 +7329,7 @@ Effects.EffectOverride = {
     [64647] = { hide = true }, -- Remove Effects (Guard)
     [73226] = { hide = true }, -- Hurried Ward (DB Guard)
     [77452] = { hide = true }, -- Shadow Cloak Immunity (Basic Justice NPC)
-    [78012] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds' }, -- Quick Strike (Basic Justice NPC)
+    [78012] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds' }, -- Quick Strike (Basic Justice NPC)
     [62472] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_stab.dds' }, -- Stab (Justice Rogue)
     [62506] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_throw_dagger.dds', name = Abilities.Skill_Throw_Dagger, hide = true }, -- Thrown Dagger (Justice Rogue)
     [78013] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_shot.dds', hide = true }, -- Quick Shot (Justice Archer)
@@ -7382,7 +7382,7 @@ Effects.EffectOverride = {
 
     -- Human NPC Abilities
     [18386] = { hide = true }, -- Run Away! (Used by various creatures)
-    [10618] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds' }, -- Quick Strike (Shared Human NPC)
+    [10618] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds' }, -- Quick Strike (Shared Human NPC)
     [12437] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_shot.dds', hide = true }, -- Quick Shot (Shared Human NPC)
     [12456] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_arrow.dds', hide = true }, -- Ice Arrow (Shared Human NPC)
     [10639] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_large.dds', hide = true }, -- Flare (Shared Human NPC)
@@ -7402,7 +7402,7 @@ Effects.EffectOverride = {
     [43757] = { hide = true }, -- Cultist Synergy Cast
 
     -- Footsoldier (1H)
-    [14096] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds' }, -- Heavy Attack (Footsoldier)
+    [14096] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_heavy.dds' }, -- Heavy Attack (Footsoldier)
     [28499] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_throw_dagger.dds', hide = true }, -- Throw Dagger (Footsoldier)
     [28502] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_throw_dagger.dds', tooltip = Tooltips.Skill_Throw_Dagger }, -- Throw Dagger (Footsoldier)
     [28504] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_throw_dagger.dds', hideReduce = true, tooltip = Tooltips.Skill_Throw_Dagger }, -- Throw Dagger (Footsoldier)
@@ -7431,7 +7431,7 @@ Effects.EffectOverride = {
     -- Ravager (2H)
     [29379] = { icon = 'esoui/art/icons/ability_2handed_001.dds', tooltip = Tooltips.Generic_Knockback }, -- Uppercut (Ravager)
     [29380] = { icon = 'esoui/art/icons/ability_2handed_001.dds', hide = true }, -- Uppercut (Ravager)
-    [29035] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds' }, -- Quick Strike (Rogue/Skirmisher)
+    [29035] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds' }, -- Quick Strike (Rogue/Skirmisher)
     [28408] = { icon = 'esoui/art/icons/ability_dualwield_005.dds' }, -- Whirlwind (Rogue/Skirmisher)
     [12381] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_assassinate.dds' }, -- Assassinate (Rogue/Skirmisher)
     [35164] = { hide = true }, -- Agony (Pointless projectile travel time aura)
@@ -7458,20 +7458,20 @@ Effects.EffectOverride = {
     [52051] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_blink_strike.dds', tooltip = Tooltips.Generic_Knockdown }, -- Blink Strike (Dragonknight  - Elite)
 
     -- Thundermaul
-    [29510] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_thunder_hammer.dds' }, -- Thunder Hammer (Thundermaul)
-    [29511] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_thunder_hammer.dds' }, -- Thunder Hammer (Thundermaul)
-    [17867] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shock_aura.dds' }, -- Shock Aura (Thundermaul)
+    [29510] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hammer_2h_thunder_hammer.dds' }, -- Thunder Hammer (Thundermaul)
+    [29511] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hammer_2h_thunder_hammer.dds' }, -- Thunder Hammer (Thundermaul)
+    [17867] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hammer_2h_shock_aura.dds' }, -- Shock Aura (Thundermaul)
     [44407] = { tooltip = Tooltips.Skill_Lightning_Form }, -- Lightning Form (Thundermaul)
     [44408] = { icon = 'esoui/art/icons/ability_sorcerer_lightning_form.dds' }, -- Lightning Form (Thundermaul -- Boss)
     [81219] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_shock.dds', hide = true }, -- Shock (Thundermaul -- Boss)
-    [81215] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shock_aura.dds', name = Abilities.Skill_Shock_Blast }, -- Shock Aura (Thundermaul -- Boss)
+    [81215] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hammer_2h_shock_aura.dds', name = Abilities.Skill_Shock_Blast }, -- Shock Aura (Thundermaul -- Boss)
     [77906] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = Abilities.Skill_Knockback, tooltip = Tooltips.Generic_Knockback }, -- Stun (Thundermaul -- Boss)
     [81193] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_agonizing_strike.dds', hide = true }, -- Agonizing Strike (Thundermaul -- Boss)
     [81195] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_shock_snare.dds'}, -- Agonizing Fury (Thundermaul -- Boss)
     [81196] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_shock_snare.dds', displayStacks = true, maxStacks = 5, stack = 1, tooltip = Tooltips.Skill_Agonizing_Fury }, -- Agonizing Fury (Thundermaul -- Boss)
     [81197] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_shock_snare.dds'}, -- Agonizing Fury (Thundermaul -- Boss)
-    [81217] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_thunder_hammer.dds' }, -- Thunder Hammer (Thundermaul -- Boss)
-    [81218] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_thunder_hammer.dds' }, -- Thunder Hammer (Thundermaul -- Boss)
+    [81217] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hammer_2h_thunder_hammer.dds' }, -- Thunder Hammer (Thundermaul -- Boss)
+    [81218] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hammer_2h_thunder_hammer.dds' }, -- Thunder Hammer (Thundermaul -- Boss)
 
     -- Nightblade (NPC)
     [73712] = { hide = true }, -- Shadow Cloak (Nightblade NPC) (Pointless .5 second aura applied on player)
@@ -7665,7 +7665,7 @@ Effects.EffectOverride = {
     [69157] = { icon = 'esoui/art/icons/ability_warrior_014.dds', hide = true, tooltip = Tooltips.Generic_Stagger }, -- Retaliation (Winterborn Warrior)
     [69153] = { icon = 'esoui/art/icons/ability_warrior_014.dds', tooltip = Tooltips.Generic_Stun }, -- Retaliation (Winterborn Warrior)
     [1347] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = Abilities.Skill_Retaliation, unbreakable = 1 }, -- Off-Balance (Winterborn Warrior)
-    [70070] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Strike (Winterborn Warrior)
+    [70070] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_heavy.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Strike (Winterborn Warrior)
     [64980] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_javelin.dds', hide = true }, -- Javelin (Winterborn Warrior)
     [14883] = { hide = true }, -- Off-Balance (Winterborn Warrior)
     [69282] = { hide = true }, -- Roll Dodge Back (Winterborn Warrior)
@@ -7743,11 +7743,11 @@ Effects.EffectOverride = {
     [77742] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recover.dds', name = Abilities.Skill_Recover, tooltip = Tooltips.Generic_Immunity }, -- 'Til Death (Bodyguard) (DB DLC)
 
     -- Cyrodiil
-    [47717] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds' }, -- Quick Strike (Cyrodiil Guard T1)
+    [47717] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds' }, -- Quick Strike (Cyrodiil Guard T1)
     [46221] = { tooltip = Tooltips.Generic_Increase_Damage_Taken, tooltipValue2 = 30 }, -- Puncture (Cyrodiil Guard T1 & T2)
-    [46830] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_bleeding_strike.dds' }, -- Bleeding Strike (Cyrodiil Guard T2)
-    [46832] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_bleeding_strike.dds', name = Abilities.Skill_Bleeding_Strike, tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Bleeding (Cyrodiil Guard T2)
-    [46831] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_bleeding_strike.dds', name = Abilities.Skill_Bleeding_Strike }, -- Bleeding (Cyrodiil Guard T2)
+    [46830] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_bleed.dds' }, -- Bleeding Strike (Cyrodiil Guard T2)
+    [46832] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_bleed.dds', name = Abilities.Skill_Bleeding_Strike, tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Bleeding (Cyrodiil Guard T2)
+    [46831] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_bleed.dds', name = Abilities.Skill_Bleeding_Strike }, -- Bleeding (Cyrodiil Guard T2)
     [46834] = { icon = 'esoui/art/icons/ability_1handed_005.dds' }, -- Power Bash (Cyrodiil Guard T2)
     [72639] = { icon = 'esoui/art/icons/ability_1handed_005.dds', hide = true, tooltip = Tooltips.Generic_Stagger }, -- Power Bash (Cyrodiil Guard T2)
     [72641] = { icon = 'esoui/art/icons/ability_1handed_005.dds', tooltip = Tooltips.Skill_Power_Bash_Cyrodiil }, -- Power Bash (Cyrodiil Guard T2)
@@ -9426,10 +9426,10 @@ Effects.EffectOverride = {
     -- Tutorial - Soul Shriven in Coldharbour
     [75527] = { hide = true }, -- Ultimate Protection (Tutorial)
     [64091] = { hide = true }, -- Power Bash (Tutorial - Used on Lyris)
-    [61748] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds' }, -- Heavy Attack (Tutorial)
+    [61748] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_heavy.dds' }, -- Heavy Attack (Tutorial)
     [63269] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heat_wave.dds' }, -- Heat Wave
     [63270] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heat_wave.dds', hide = true }, -- Heat Wave
-    [63737] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds' }, -- Heavy Attack (Dremora Churl)
+    [63737] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_heavy.dds' }, -- Heavy Attack (Dremora Churl)
     [63685] = { icon = 'esoui/art/icons/ability_2handed_001.dds', name = Abilities.Skill_Uppercut, tooltip = Tooltips.Generic_Knockback }, -- Uppercut Stun (Dremora Caitiff)
     [63686] = { icon = 'esoui/art/icons/ability_2handed_001.dds' }, -- Uppercut (Dremora Caitiff)
     [63761] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_pound.dds' }, -- Pound (Feral Soul Shriven)
@@ -9445,7 +9445,7 @@ Effects.EffectOverride = {
     [61646] = { icon = 'LuiExtended/media/icons/abilities/ability_bone_colossus_incapacitating_terror.dds', duration = 0, tooltip = Tooltips.Skill_Incapacitating_Terror }, -- Incapacitating Terror
     [64074] = { icon = 'LuiExtended/media/icons/abilities/ability_bone_colossus_incapacitating_terror.dds'}, -- Incapacitating Terror
     [75514] = { hide = true }, -- Greater Protection - CH Tutorial pointless aura
-    [1718] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds', name = Abilities.Skill_Light_Attack }, -- Attack
+    [1718] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds', name = Abilities.Skill_Light_Attack }, -- Attack
     [64772] = { hide = true }, -- MQ1 Input Lock LAtk - CH Tutorial pointless aura
     [63883] = { hide = true }, -- Major Protection - CH Tutorial pointless aura
     [64784] = { hide = true }, -- MQ1 Tutorial Block Heavy - CH Tutorial pointless aura
@@ -10241,7 +10241,7 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     [100678] = { hide = true }, -- Major Protection (The Mind Trap)
-    [100671] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds' }, -- Heavy Attack (The Mind Trap)
+    [100671] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_heavy.dds' }, -- Heavy Attack (The Mind Trap)
     [100683] = { hide = true }, -- Block Me (The Mind Trap)
     [100677] = { hide = true }, -- Block Me (The Mind Trap)
     [100687] = { hide = true }, -- Off-Balance (The Mind Trap)
@@ -10387,7 +10387,7 @@ Effects.EffectOverride = {
     [56827] = { icon = 'esoui/art/icons/ability_templar_reckless_attacks.dds' }, -- Puncturing Sweep (House Dres Templar)
     [27920] = { icon = 'esoui/art/icons/ability_templar_reckless_attacks.dds', name = Abilities.Skill_Puncturing_Sweep, tooltip = Tooltips.Generic_Knockback }, -- Generic Knockback Stun (House Dres Templar)
 
-    [54156] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds' }, -- Quick Strike (House Dres Slaver)
+    [54156] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds' }, -- Quick Strike (House Dres Slaver)
     [54160] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (House Dres Slaver)
     [54161] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (House Dres Slaver)
 
@@ -10744,9 +10744,9 @@ Effects.EffectOverride = {
     [68558] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_overheated_volley.dds' }, -- Overheated Volley
     [68543] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_overheated_volley.dds' }, -- Overheated Volley
 
-    [72197] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds' }, -- Quick Strike (Scavenger Thunder-Smith)
-    [72195] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_thunder_hammer.dds' }, -- Thunder Hammer (Scavenger Thunder-Smith)
-    [72196] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_thunder_hammer.dds' }, -- Thunder Hammer (Scavenger Thunder-Smith)
+    [72197] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds' }, -- Quick Strike (Scavenger Thunder-Smith)
+    [72195] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hammer_2h_thunder_hammer.dds' }, -- Thunder Hammer (Scavenger Thunder-Smith)
+    [72196] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hammer_2h_thunder_hammer.dds' }, -- Thunder Hammer (Scavenger Thunder-Smith)
 
     [72198] = { icon = 'esoui/art/icons/ability_2handed_001_b.dds' }, -- Wrecking Blow (Scavenger Thunder-Smith)
     [72200] = { icon = 'esoui/art/icons/ability_2handed_001_b.dds' }, -- Wrecking Blow (Scavenger Thunder-Smith)
@@ -11053,10 +11053,10 @@ Effects.EffectOverride = {
     [19027] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_dead_zone.dds', tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1.5, groundLabel = true }, -- Dead Zone (Skeletal Destroyer)
 
     [18961] = { hide = true }, -- Ghostly Summon (Generic Invisible Target)
-    [18798] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword2h_quick_strike.dds', name = Abilities.Skill_Quick_Strike }, -- Slash (High Kinlord Rilis)
-    [33189] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword2h_crushing_blow.dds' }, -- Crushing Blow (High Kinlord Rilis)
-    [33190] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword2h_crushing_blow.dds', hide = true }, -- Crushing Blow (High Kinlord Rilis)
-    [33191] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword2h_crushing_blow.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Crushing Blow (High Kinlord Rilis)
+    [18798] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_light.dds', name = Abilities.Skill_Quick_Strike }, -- Slash (High Kinlord Rilis)
+    [33189] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_crushing_blow.dds' }, -- Crushing Blow (High Kinlord Rilis)
+    [33190] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_crushing_blow.dds', hide = true }, -- Crushing Blow (High Kinlord Rilis)
+    [33191] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_crushing_blow.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Crushing Blow (High Kinlord Rilis)
     [18795] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_the_feast.dds', name = Abilities.Skill_The_Feast }, -- CON_Invisible_30%_Speed_Debuff (The Feast)
     [33172] = { hide = true }, -- Oblivion Restoration (The Feast)
     [33165] = { hide = true }, -- Despawn Self (The Feast)
@@ -11084,10 +11084,10 @@ Effects.EffectOverride = {
     [28904] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_fire_damage.dds', name = Abilities.Skill_Pool_of_Fire, groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire_Stacking, tooltipValue2 = 1.5, tooltipValue3 = 10, stack = 1, stackAdd = 1 }, -- Immolating Bite (Maw of the Infernal)
     [47127] = { hide = true }, -- Nocom
 
-    [48281] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword2h_quick_strike.dds', name = Abilities.Skill_Quick_Strike }, -- Slash (Keeper Voranil)
-    [27826] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword2h_crushing_blow.dds' }, -- Crushing Blow (Keeper Voranil)
-    [27827] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword2h_crushing_blow.dds', hide = true }, -- Crushing Blow (Keeper Voranil)
-    [27828] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword2h_crushing_blow.dds', tooltip = Tooltips.Generic_Knockback }, -- Crushing Blow (Keeper Voranil)
+    [48281] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_light.dds', name = Abilities.Skill_Quick_Strike }, -- Slash (Keeper Voranil)
+    [27826] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_crushing_blow.dds' }, -- Crushing Blow (Keeper Voranil)
+    [27827] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_crushing_blow.dds', hide = true }, -- Crushing Blow (Keeper Voranil)
+    [27828] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_crushing_blow.dds', tooltip = Tooltips.Generic_Knockback }, -- Crushing Blow (Keeper Voranil)
     [29018] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_berserker_frenzy.dds' }, -- Berserker Frenzy (Keeper Voranil)
     [29020] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_berserker_frenzy.dds' }, -- Berserker Frenzy (Keeper Voranil)
     [28750] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_essence_siphon.dds', hide = true }, -- Essence Siphon (Keeper Voranil)
@@ -11103,7 +11103,7 @@ Effects.EffectOverride = {
     [36631] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_chaotic_dispersion.dds', name = Abilities.Skill_Chaotic_Return, hide = true }, -- ExitPortal (Keeper Imiril)
 
     [31727] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_daedric_chaos.dds', groundLabel = true, name = Abilities.Skill_Daedric_Chaos, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1 }, -- Corruption (Daedric Chaos)
-    [28916] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds', name = Abilities.Skill_Quick_Strike }, -- Slash (Keeper Imiril)
+    [28916] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds', name = Abilities.Skill_Quick_Strike }, -- Slash (Keeper Imiril)
     [29143] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_daedric_blast.dds' }, -- Daedric Blast (Keeper Imiril)
 
     [64526] = { hide = true }, -- Shatter
@@ -11141,19 +11141,19 @@ Effects.EffectOverride = {
     [36030] = { hide = true }, -- Red Sigil (High Kinlord Rilis)
 
     -- Elden Hollow I
-    [14905] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hacking_strike.dds', name = Abilities.Skill_Quick_Strike }, -- Hacking Strike (Akash gra-Mal)
-    [16834] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_executioners_strike.dds' }, -- Executioner's Strike (Akash gra-Mal)
-    [25309] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_executioners_strike.dds', name = Abilities.Skill_Executioners_Strike, hide = true }, -- Fire Backlash (Akash gra-Mal)
-    [25310] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_executioners_strike.dds', name = Abilities.Skill_Executioners_Strike, tooltip = Tooltips.Generic_Knockback }, -- CON_Knockback&Knockdown (Akash gra-Mal)
-    [15999] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_leaping_strike.dds' }, -- Leaping Strike (Akash gra-Mal)
-    [16003] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_leaping_strike.dds' }, -- Leaping Strike (Akash gra-Mal)
+    [14905] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_2h_hacking_strike.dds', name = Abilities.Skill_Quick_Strike }, -- Hacking Strike (Akash gra-Mal)
+    [16834] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_2h_executioners_strike.dds' }, -- Executioner's Strike (Akash gra-Mal)
+    [25309] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_2h_executioners_strike.dds', name = Abilities.Skill_Executioners_Strike, hide = true }, -- Fire Backlash (Akash gra-Mal)
+    [25310] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_2h_executioners_strike.dds', name = Abilities.Skill_Executioners_Strike, tooltip = Tooltips.Generic_Knockback }, -- CON_Knockback&Knockdown (Akash gra-Mal)
+    [15999] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_2h_leaping_strike.dds' }, -- Leaping Strike (Akash gra-Mal)
+    [16003] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_2h_leaping_strike.dds' }, -- Leaping Strike (Akash gra-Mal)
     [9936] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_battlecry.dds' }, -- Battlecry (Akash gra-Mal)
     [44093] = { name = Abilities.Innate_Stagger, tooltip = Tooltips.Generic_Stagger }, -- Battlecry (Akash gra-Mal)
-    [16016] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_whirling_axe.dds', name = Abilities.Skill_Whirling_Axe }, -- Berserker Frenzy (Akash gra-Mal)
-    [16017] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_whirling_axe.dds', name = Abilities.Skill_Whirling_Axe }, -- Berserker Frenzy (Akash gra-Mal)
-    [25300] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_whirling_axe.dds', name = Abilities.Skill_Whirling_Axe }, -- Berserker Frenzy (Akash gra-Mal)
-    [25301] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_whirling_axe.dds', name = Abilities.Skill_Whirling_Axe }, -- Berserker Frenzy (Akash gra-Mal)
-    [25302] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_whirling_axe.dds', name = Abilities.Skill_Whirling_Axe }, -- Berserker Frenzy (Akash gra-Mal)
+    [16016] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_2h_whirling_axe.dds', name = Abilities.Skill_Whirling_Axe }, -- Berserker Frenzy (Akash gra-Mal)
+    [16017] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_2h_whirling_axe.dds', name = Abilities.Skill_Whirling_Axe }, -- Berserker Frenzy (Akash gra-Mal)
+    [25300] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_2h_whirling_axe.dds', name = Abilities.Skill_Whirling_Axe }, -- Berserker Frenzy (Akash gra-Mal)
+    [25301] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_2h_whirling_axe.dds', name = Abilities.Skill_Whirling_Axe }, -- Berserker Frenzy (Akash gra-Mal)
+    [25302] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_2h_whirling_axe.dds', name = Abilities.Skill_Whirling_Axe }, -- Berserker Frenzy (Akash gra-Mal)
 
     [15116] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_strike.dds' }, -- Piercing Strike (Chokethorn)
     [15114] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_grapple.dds', tooltip = Tooltips.Generic_Stun }, -- Pulling Grasp (Chokethorn)
@@ -11576,10 +11576,10 @@ Effects.EffectOverride = {
     [26604] = { hide = true }, -- Storm (Sudden Storm)
     [26619] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sudden_storm.dds', name = Abilities.Skill_Sudden_Storm, groundLabel = true, tooltip = Tooltips.Generic_AOE_Shock, tooltipValue2 = 1 }, -- Shock (Sudden Storm)
 
-    [26332] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds', name = Abilities.Skill_Quick_Strike }, -- Slash (Valaran Stormcaller)
-    [26370] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds' }, -- Crushing Blow (Valaran Stormcaller)
-    [26371] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds', hide = true }, -- Crushing Blow (Valaran Stormcaller)
-    [26372] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Crushing Blow (Valaran Stormcaller)
+    [26332] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds', name = Abilities.Skill_Quick_Strike }, -- Slash (Valaran Stormcaller)
+    [26370] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_heavy.dds' }, -- Crushing Blow (Valaran Stormcaller)
+    [26371] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_heavy.dds', hide = true }, -- Crushing Blow (Valaran Stormcaller)
+    [26372] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_heavy.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Crushing Blow (Valaran Stormcaller)
     [26628] = { icon = 'esoui/art/icons/ability_mage_043.dds', tooltip = Tooltips.Generic_Stun }, -- Enervating Bolt
     [26631] = { icon = 'esoui/art/icons/ability_mage_043.dds' }, -- Enervating Bolt
     [26592] = { icon = 'esoui/art/icons/ability_mage_066.dds' }, -- Lightning Avatar (Valaran Stormcaller)
@@ -11603,10 +11603,10 @@ Effects.EffectOverride = {
     [26715] = { icon = 'LuiExtended/media/icons/abilities/ability_stormatronach_skyward_slam.dds' }, -- Skyward Slam (Stormfist)
     [27263] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_thunderbolt.dds', hide = true }, -- Skyward Slam (Stormfist)
 
-    [26748] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_stormfist.dds' }, -- Enervating Stone (Stormfist)
+    [26748] = { icon = 'LuiExtended/media/icons/abilities/ability_stormatronach_enervating_stone.dds' }, -- Enervating Stone (Stormfist)
     [46122] = { hide = true }, -- Enervating Stone (Stormfist)
-    [26752] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_stormfist.dds', groundLabel = true, tooltip = Tooltips.Skill_Enervating_Stone }, -- Enervating Stone (Stormfist)
-    [26938] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_stormfist.dds', tooltip = Tooltips.Generic_Stun_No_Dur, hideGround = true, groundLabel = true }, -- Enervating Stone (Stormfist)
+    [26752] = { icon = 'LuiExtended/media/icons/abilities/ability_stormatronach_enervating_stone.dds', groundLabel = true, tooltip = Tooltips.Skill_Enervating_Stone }, -- Enervating Stone (Stormfist)
+    [26938] = { icon = 'LuiExtended/media/icons/abilities/ability_stormatronach_enervating_stone.dds', tooltip = Tooltips.Generic_Stun_No_Dur, hideGround = true, groundLabel = true }, -- Enervating Stone (Stormfist)
 
     [26833] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_call_storm_atronach.dds', name = Abilities.Skill_Call_Storm_Atronachs }, -- Summon Storm Atronach (Stormfist)
     [26851] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_call_storm_atronach.dds', name = Abilities.Skill_Call_Storm_Atronachs, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Stun }, -- Summon Storm Atronach (Stormfist)
@@ -11638,10 +11638,10 @@ Effects.EffectOverride = {
     -- Selene's Web
     [32428] = { hide = true }, -- Climb Away
 
-    [30909] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ensnare.dds', tooltip = Tooltips.Skill_Ensnare, unbreakable = 1, hideReduce = true }, -- Ensnare
-    [31247] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ensnare.dds', tooltip = Tooltips.Skill_Ensnare, unbreakable = 1, hideReduce = true }, -- Ensnare
+    [30909] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_2h_ensnare.dds', tooltip = Tooltips.Skill_Ensnare, unbreakable = 1, hideReduce = true }, -- Ensnare
+    [31247] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_2h_ensnare.dds', tooltip = Tooltips.Skill_Ensnare, unbreakable = 1, hideReduce = true }, -- Ensnare
     [49275] = { hide = true }, -- Ensnare (Treethane Kerninn)
-    [31248] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ensnare.dds', tooltip = Tooltips.Skill_Ensnare, unbreakable = 1 }, -- Ensnare
+    [31248] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_2h_ensnare.dds', tooltip = Tooltips.Skill_Ensnare, unbreakable = 1 }, -- Ensnare
     [64171] = { hide = true }, -- SW_Boss3_WebGrip (Treethane Kerninn)
     [30907] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_summon_primal_swarm.dds', name = Abilities.Skill_Primal_Swarm, hide = true }, -- Summon Primal Swarm (Treethane Kerninn)
     [30908] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_summon_primal_swarm.dds', name = Abilities.Skill_Primal_Swarm, groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1 }, -- Summon Primal Swarm (Treethane Kerninn)
@@ -11721,7 +11721,7 @@ Effects.EffectOverride = {
     [30970] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_primal_maul.dds', name = Abilities.Skill_Primal_Maul, hide = true }, -- Summon Primal Spirit (Selene)
     [30969] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_primal_maul.dds', name = Abilities.Skill_Primal_Maul, tooltip = Tooltips.Generic_Knockback, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Summon Primal Spirit (Selene)
 
-    [30968] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds', name = Abilities.Skill_Quick_Strike }, -- Bash (Selene)
+    [30968] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds', name = Abilities.Skill_Quick_Strike }, -- Bash (Selene)
 
     [30896] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_primal_leap.dds', name = Abilities.Skill_Primal_Leap, hide = true }, -- Summon Senche Spirit (Selene)
 
@@ -11868,11 +11868,11 @@ Effects.EffectOverride = {
     [12247] = { hide = true }, -- Terrifying Roar (Uulgarg the Hungry)
     [58528] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_intimidating_roar.dds', tooltip = Tooltips.Generic_Fear }, -- Terrifying Roar (Uulgarg the Hungry)
 
-    [14969] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds', name = Abilities.Skill_Quick_Strike }, -- Slash (Varaine Pellingare)
+    [14969] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds', name = Abilities.Skill_Quick_Strike }, -- Slash (Varaine Pellingare)
 
-    [25548] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds', name = Abilities.Skill_Crushing_Blow }, -- Smite (Varaine Pellingare)
-    [25550] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds', name = Abilities.Skill_Crushing_Blow, tooltip = Tooltips.Generic_Knockback }, -- CON_Knockback&Knockdown (Varaine Pellingare)
-    [25549] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds', name = Abilities.Skill_Crushing_Blow, hide = true }, -- Fire Backlash (Varaine Pellingare)
+    [25548] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_heavy.dds', name = Abilities.Skill_Crushing_Blow }, -- Smite (Varaine Pellingare)
+    [25550] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_heavy.dds', name = Abilities.Skill_Crushing_Blow, tooltip = Tooltips.Generic_Knockback }, -- CON_Knockback&Knockdown (Varaine Pellingare)
+    [25549] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_heavy.dds', name = Abilities.Skill_Crushing_Blow, hide = true }, -- Fire Backlash (Varaine Pellingare)
 
     [9648] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_brands_cleave.dds' }, -- Spinning Cleave (Varaine Pellingare)
     [9651] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_brands_cleave.dds', tooltip = Tooltips.Generic_Knockdown }, -- Spinning Cleave (Varaine Pellingare)
@@ -11885,7 +11885,7 @@ Effects.EffectOverride = {
 
     [9656] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_poisoned_blade.dds', hide = true }, -- Poisoned Blade (Varaine Pellingare)
 
-    [11739] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds', name = Abilities.Skill_Quick_Strike }, -- Strike (Allene Pellingare)
+    [11739] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds', name = Abilities.Skill_Quick_Strike }, -- Strike (Allene Pellingare)
 
     [11752] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_measured_uppercut.dds', name = Abilities.Skill_Measured_Uppercut }, -- Penetrating Daggers (Allene Pellingare)
     [35051] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_measured_uppercut.dds', name = Abilities.Skill_Measured_Uppercut, tooltip = Tooltips.Generic_Knockback, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Penetrating Daggers (Allene Pellingare)
@@ -11959,7 +11959,7 @@ Effects.EffectOverride = {
 
     [47007] = { hide = true }, -- Nocom (Allene & Varaine Pellingare)
 
-    [36413] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds' }, -- Quick Strike (Varaine Pellingare)
+    [36413] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds' }, -- Quick Strike (Varaine Pellingare)
 
     [49159] = { icon = 'esoui/art/icons/ability_warrior_004.dds', name = Abilities.Skill_Overhead_Smash }, -- Cone of Rot (Varaine Pellingare)
     [49160] = { icon = 'esoui/art/icons/ability_warrior_004.dds', name = Abilities.Skill_Overhead_Smash }, -- Cone of Rot (Varaine Pellingare)
@@ -11967,9 +11967,9 @@ Effects.EffectOverride = {
     [36534] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_brands_cleave.dds' }, -- Spinning Cleave (Varaine Pellingare)
     [36535] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_brands_cleave.dds', tooltip = Tooltips.Generic_Knockdown }, -- Spinning Cleave (Varaine Pellingare)
 
-    [36396] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds', name = Abilities.Skill_Crushing_Blow }, -- Bludgeon (Varaine Pellingare)
-    [36397] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds', name = Abilities.Skill_Crushing_Blow }, -- Bludgeon (Varaine Pellingare)
-    [36398] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heavy_attack.dds', name = Abilities.Skill_Crushing_Blow, tooltip = Tooltips.Generic_Knockback, unbreakable = 1 }, -- Bludgeon (Varaine Pellingare)
+    [36396] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_heavy.dds', name = Abilities.Skill_Crushing_Blow }, -- Bludgeon (Varaine Pellingare)
+    [36397] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_heavy.dds', name = Abilities.Skill_Crushing_Blow }, -- Bludgeon (Varaine Pellingare)
+    [36398] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_heavy.dds', name = Abilities.Skill_Crushing_Blow, tooltip = Tooltips.Generic_Knockback, unbreakable = 1 }, -- Bludgeon (Varaine Pellingare)
 
 
     [36378] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_shot.dds', name = Abilities.Skill_Quick_Shot }, -- Quick Draw (Allene Pellingare)
@@ -12067,13 +12067,13 @@ Effects.EffectOverride = {
 
 
     -- Frostvault
-    [117286] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_bleeding_strike.dds', hide = true }, -- Rending Bleed (Coldsnap Goblin - Shared)
-    [117486] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_bleeding_strike.dds', name = Abilities.Skill_Rending_Bleed, unbreakable = 1, tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 2 }, -- Bleed (Coldsnap Goblin - Shared)
+    [117286] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_bleed.dds', hide = true }, -- Rending Bleed (Coldsnap Goblin - Shared)
+    [117486] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_bleed.dds', name = Abilities.Skill_Rending_Bleed, unbreakable = 1, tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 2 }, -- Bleed (Coldsnap Goblin - Shared)
 
     [109574] = { name = Abilities.Skill_Rapid_Fire }, -- Fire Power (Coldsnap Harrier)
     [102945] = { icon = 'esoui/art/icons/ability_bow_006.dds', name = Abilities.Skill_Rapid_Fire }, -- Firepower (Coldsnap Harrier)
 
-    [117298] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_quick_strike.dds' }, -- Quick Strike (Coldsnap Snowstalker)
+    [117298] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds' }, -- Quick Strike (Coldsnap Snowstalker)
     [117352] = { icon = 'esoui/art/icons/ability_dualwield_005.dds' }, -- Whirlwind (Coldsnap Snowstalker)
 
     [117295] = { icon = 'LuiExtended/media/icons/abilities/ability_durzog_bite.dds' }, -- Bite (Coldsnap Durzog)
@@ -13080,17 +13080,17 @@ Effects.MapDataOverride = {
     -- ALDMERI DOMINION
 
     [77905] = { -- Knockback (Giant)
-        [381] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shock_aura.dds', name = Abilities.Skill_Shock_Blast }, -- Auridon - Captain Blanchete
+        [381] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hammer_2h_shock_aura.dds', name = Abilities.Skill_Shock_Blast }, -- Auridon - Captain Blanchete
     },
     [77906] = { -- Stun (Giant)
-        [381] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shock_aura.dds', name = Abilities.Skill_Shock_Blast }, -- Auridon - Captain Blanchete
+        [381] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hammer_2h_shock_aura.dds', name = Abilities.Skill_Shock_Blast }, -- Auridon - Captain Blanchete
     },
 
     -- DUNGEONS
 
     [10618] = { -- Quick Strike (Shared)
         -- DUNGEONS
-        [931] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword2h_quick_strike.dds' }, -- Elden Hollow II
+        [931] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_light.dds' }, -- Elden Hollow II
     },
 
     [60920] = { -- Scrape (Giant Bat)
@@ -13203,18 +13203,18 @@ Effects.MapDataOverride = {
         [936] = { hide = true }, -- Spindleclutch II
     },
     [48281] = { -- Slash (Keeper Voranil)
-        [935] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_light.dds' }, -- Banished Cells II
+        [935] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_2h_light.dds' }, -- Banished Cells II
     },
     [27826] = { -- Crushing Blow (Yalorasse the Speaker)
         [131] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_measured_uppercut.dds', name = Abilities.Skill_Measured_Uppercut }, -- Tempest Island
-        [935] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace2h_slam.dds', name = Abilities.Skill_Slam }, -- Banished Cells II
+        [935] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_2h_slam.dds', name = Abilities.Skill_Slam }, -- Banished Cells II
     },
     [27827] = { -- Crushing Blow (Yalorasse the Speaker)
         [131] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_measured_uppercut.dds', name = Abilities.Skill_Measured_Uppercut }, -- Tempest Island
-        [935] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace2h_slam.dds', name = Abilities.Skill_Slam }, -- Banished Cells II
+        [935] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_2h_slam.dds', name = Abilities.Skill_Slam }, -- Banished Cells II
     },
     [27828] = { -- Crushing Blow  (Yalorasse the Speaker)
         [131] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_measured_uppercut.dds', name = Abilities.Skill_Measured_Uppercut }, -- Tempest Island
-        [935] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace2h_slam.dds', name = Abilities.Skill_Slam }, -- Banished Cells II
+        [935] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_2h_slam.dds', name = Abilities.Skill_Slam }, -- Banished Cells II
     },
 }
