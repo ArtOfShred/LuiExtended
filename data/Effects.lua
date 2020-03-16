@@ -2090,16 +2090,20 @@ Effects.EffectOverrideByName = {
         [Unitnames.Elite_Amuur] =                { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_cleaver_attack_light.dds' }, -- Amuur (The First Patient)
 
         -- DUNGEONS
-        [Unitnames.NPC_Darkfern_Mauler] =        { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe1h_quick_strike_reach.dds' }, -- Darkfern Mauler (Elden Hollow I)
+        [Unitnames.NPC_Darkfern_Mauler] =        { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_1h_light_reach.dds' }, -- Darkfern Mauler (Elden Hollow I)
         [Unitnames.Boss_Nenesh_gro_Mal] =        { icon = 'LuiExtended/media/icons/abilities/ability_spell_club2h_light_attack.dds' }, -- Nenesh gro Mal (Elden Hollow I)
-        [Unitnames.NPC_Dremora_Berserker] =      { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe1h_quick_strike.dds' }, -- Dremora Berserker (City of Ash I)
+        [Unitnames.NPC_Dremora_Berserker] =      { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_1h_light.dds' }, -- Dremora Berserker (City of Ash I)
         [Unitnames.Boss_The_Mage_Master] =       { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_light.dds' }, -- The Mage Master (Crypt of Hearts I)
-        [Unitnames.Boss_Dogas_the_Berserker] =   { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe1h_quick_strike.dds' }, -- Dogas the Berserker (Crypt of Hearts I)
+        [Unitnames.Boss_Dogas_the_Berserker] =   { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_1h_light.dds' }, -- Dogas the Berserker (Crypt of Hearts I)
         [Unitnames.NPC_Dremora_Kynval] =         { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace1h_quick_strike.dds' }, -- Dremora Kynval (City of Ash I)
-        [Unitnames.Boss_Rukhan] =                { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace2hdaedric_quick_strike.dds' }, -- Rukhan (City of Ash I))
-        [Unitnames.NPC_Xivilai_Ravager] =        { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace2hdaedric_quick_strike.dds' }, -- Xivilai Ravager (City of Ash I))
-        [Unitnames.NPC_Fire_Ravager] =           { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace2hdaedric_quick_strike.dds' }, -- Fire Ravager (City of Ash I))
-        [Unitnames.NPC_Xivilai_Boltaic] =        { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace2hdaedric_quick_strike.dds' }, -- Fire Ravager (City of Ash I))
+        [Unitnames.Boss_Rukhan] =                { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace2hdaedric_quick_strike.dds' }, -- Rukhan (City of Ash I)
+        [Unitnames.NPC_Xivilai_Ravager] =        { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace2hdaedric_quick_strike.dds' }, -- Xivilai Ravager (City of Ash I)
+        [Unitnames.NPC_Fire_Ravager] =           { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace2hdaedric_quick_strike.dds' }, -- Fire Ravager (City of Ash I)
+        [Unitnames.NPC_Xivilai_Boltaic] =        { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace2hdaedric_quick_strike.dds' }, -- Fire Ravager (City of Ash I)
+        [Unitnames.NPC_Sea_Viper_Strongarm] =    { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_1h_light.dds' }, -- Sea Viper Strongarm (Tempest Island)
+        [Unitnames.NPC_Sea_Viper_Berserker] =    { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_1h_light.dds' }, -- Sea Viper Berserker (Tempest Island)
+        [Unitnames.NPC_Sea_Viper_Charger] =      { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_2h_light.dds' }, -- Sea Viper Charger (Tempest Island)
+        [Unitnames.Boss_Commodore_Ohmanil] =     { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_2h_light.dds' }, -- CommodoreOhmanil (Tempest Island)
     },
     [14096] = { -- Heavy Attack (Footsoldier)
         [Unitnames.Elite_Amuur] =                { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_cleaver_attack_heavy.dds' }, -- Amuur (The First Patient)
@@ -8684,7 +8688,7 @@ Effects.EffectOverride = {
     [12074] = { hide = true }, -- Summon Spectral Lamia (Lamia)
     [9680] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_spectral_lamia.dds', tooltip = Tooltips.Skill_Summon_Spectral_Lamia }, -- Summon Spectral Lamia (Lamia)
     [89399] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', name = Abilities.Skill_Weakness, duration = -120, type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = Tooltips.Skill_Weakness_NPC_Summon }, -- Summon Spectral Lamia (Lamia)
-    [7835] = { icon = 'esoui/art/icons/ability_healer_033.dds', hide = true }, -- Convalescence (Lamia)
+    [7835] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_convalescence.dds', hide = true }, -- Convalescence (Lamia)
     [7831] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_harmony.dds' }, -- Harmony (Lamia)
     [24745] = { hide = true }, -- Harmony (Lamia)
     [23358] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_harmony.dds', tooltip = Tooltips.Skill_Harmony }, -- Harmony (Lamia)
@@ -9691,7 +9695,7 @@ Effects.EffectOverride = {
 
     -- Sever All Ties
     [22395] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_stun_generic.dds', name = Abilities.Skill_Barrier_Rebuke, tooltip = Tooltips.Generic_Stun, unbreakable = 1 }, -- Q4261 ROD Barrier Teleport
-    [44138] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shockwave.dds', name = Abilities.Skill_Shockwave }, -- Q4261 Estre Knockback
+    [44138] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shockwave_radial.dds', name = Abilities.Skill_Shockwave }, -- Q4261 Estre Knockback
     [49224] = { hide = true }, -- Q4868 Aulus Knockback
     [44136] = { hide = true }, -- RobS Stun Perm
 
@@ -9779,9 +9783,9 @@ Effects.EffectOverride = {
     [47710] = { hide = true }, -- Lightning Fury
     [38748] = { icon = 'esoui/art/icons/ability_mage_036.dds', hide = true }, -- Aulus's Tongue
     [63710] = { icon = 'esoui/art/icons/ability_mage_036.dds', tooltip = Tooltips.Generic_Stun }, -- Aulus's Tongue
-    [40702] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shockwave.dds', name = Abilities.Skill_Shockwave }, -- Q4868 Aulus Knockback
+    [40702] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shockwave_radial.dds', name = Abilities.Skill_Shockwave }, -- Q4868 Aulus Knockback
     [44100] = { hide = true }, -- Q4868 Aulus Knockback
-    [47709] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shockwave.dds', name = Abilities.Skill_Shockwave }, -- Q4868 Aulus Knockback
+    [47709] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shockwave_radial.dds', name = Abilities.Skill_Shockwave }, -- Q4868 Aulus Knockback
 
     -- A Lasting Winter
     [38394] = { hide = true }, -- Shatter
@@ -11577,19 +11581,19 @@ Effects.EffectOverride = {
     [26619] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sudden_storm.dds', name = Abilities.Skill_Sudden_Storm, groundLabel = true, tooltip = Tooltips.Generic_AOE_Shock, tooltipValue2 = 1 }, -- Shock (Sudden Storm)
 
     [26332] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds', name = Abilities.Skill_Quick_Strike }, -- Slash (Valaran Stormcaller)
-    [26370] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_heavy.dds' }, -- Crushing Blow (Valaran Stormcaller)
-    [26371] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_heavy.dds', hide = true }, -- Crushing Blow (Valaran Stormcaller)
-    [26372] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_heavy.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Crushing Blow (Valaran Stormcaller)
-    [26628] = { icon = 'esoui/art/icons/ability_mage_043.dds', tooltip = Tooltips.Generic_Stun }, -- Enervating Bolt
-    [26631] = { icon = 'esoui/art/icons/ability_mage_043.dds' }, -- Enervating Bolt
-    [26592] = { icon = 'esoui/art/icons/ability_mage_066.dds' }, -- Lightning Avatar (Valaran Stormcaller)
+    [26370] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_crushing_blow.dds' }, -- Crushing Blow (Valaran Stormcaller)
+    [26371] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_crushing_blow.dds', hide = true }, -- Crushing Blow (Valaran Stormcaller)
+    [26372] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_crushing_blow.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Crushing Blow (Valaran Stormcaller)
+    [26628] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_enervating_bolt.dds', tooltip = Tooltips.Generic_Stun }, -- Enervating Bolt
+    [26631] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_enervating_bolt.dds' }, -- Enervating Bolt
+    [26592] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_lightning_avatar.dds' }, -- Lightning Avatar (Valaran Stormcaller)
 
     [28391] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_feedback.dds', name = Abilities.Skill_Feedback, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Q4538 Stoen Explosion (Conduit Stone)
     [32451] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_feedback.dds', name = Abilities.Skill_Feedback }, -- Fire Backlash (Conduit Stone)
 
-    [5699] = { icon = 'esoui/art/icons/ability_rogue_038.dds', name = Abilities.Skill_Shadowstep }, -- Backstab (Yalorasse the Speaker)
-    [5698] = { icon = 'esoui/art/icons/ability_rogue_038.dds', name = Abilities.Skill_Shadowstep, tooltip = Tooltips.Skill_Backstab }, -- Backstab (Yalorasse the Speaker)
-    [5697] = { icon = 'esoui/art/icons/ability_rogue_038.dds', name = Abilities.Skill_Shadowstep }, -- Backstab (Yalorasse the Speaker)
+    [5699] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shadowstep.dds', name = Abilities.Skill_Shadowstep }, -- Backstab (Yalorasse the Speaker)
+    [5698] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shadowstep.dds', name = Abilities.Skill_Shadowstep, tooltip = Tooltips.Skill_Backstab }, -- Backstab (Yalorasse the Speaker)
+    [5697] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shadowstep.dds', name = Abilities.Skill_Shadowstep }, -- Backstab (Yalorasse the Speaker)
     [6106] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_lightning_storm.dds' }, -- Lightning Storm (Yalorasse the Speaker)
     [6108] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_lightning_storm.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Shock, tooltipValue2 = 1 }, -- Lightning Storm (Yalorasse the Speaker)
     [6107] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_shock_snare.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 25 }, -- Lightning Storm (Yalorasse the Speaker)
@@ -11615,8 +11619,8 @@ Effects.EffectOverride = {
 
     [26790] = { icon = 'LuiExtended/media/icons/abilities/ability_stormatronach_unstable_explosion.dds' }, -- Unstable Explosion (Stormfist)
 
-    [27039] = { icon = 'esoui/art/icons/ability_debuff_levitate.dds', tooltip = Tooltips.Skill_Ethereal_Chain }, -- Ethereal Chain (Commodore Ohmanil)
-    [27058] = { icon = 'esoui/art/icons/ability_debuff_levitate.dds' }, -- Ethereal Chain (Commodore Ohmanil)
+    [27039] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ethereal_chain.dds', tooltip = Tooltips.Skill_Ethereal_Chain }, -- Ethereal Chain (Commodore Ohmanil)
+    [27058] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ethereal_chain.dds' }, -- Ethereal Chain (Commodore Ohmanil)
 
     [27624] = { hide = true }, -- Wind Storm
 
@@ -11627,12 +11631,12 @@ Effects.EffectOverride = {
     [26746] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_wind_charge.dds', name = Abilities.Skill_Wind_Charge, hide = true }, -- Wind Charge (Stormreeve Neider)
     [26759] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_wind_charge.dds', name = Abilities.Skill_Wind_Charge }, -- Swift Wind (Stormreeve Neider)
 
-    [26712] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shockwave.dds' }, -- Gust of Wind (Stormreeve Neider)
-    [46810] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shockwave.dds', hide = true }, -- Gust of Wind (Stormreeve Neider)
-    [46809] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shockwave.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Gust of Wind (Stormreeve Neider)
+    [26712] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shockwave_radial.dds', name = Abilities.Skill_Shockwave }, -- Gust of Wind (Stormreeve Neider)
+    [46810] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shockwave_radial.dds', name = Abilities.Skill_Shockwave, hide = true }, -- Gust of Wind (Stormreeve Neider)
+    [46809] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shockwave_radial.dds', name = Abilities.Skill_Shockwave, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Gust of Wind (Stormreeve Neider)
 
     [26514] = { hide = true }, -- Twister (Twister)
-    [26517] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds', name = Abilities.Skill_Twister }, -- Twister (Twister)
+    [26517] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_twister.dds', name = Abilities.Skill_Twister }, -- Twister (Twister)
     [46808] = { hide = true, tooltip = Tooltips.Generic_Stagger }, -- Stagger (Twister)
 
     -- Selene's Web
@@ -13206,15 +13210,15 @@ Effects.MapDataOverride = {
         [935] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_2h_light.dds' }, -- Banished Cells II
     },
     [27826] = { -- Crushing Blow (Yalorasse the Speaker)
-        [131] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_measured_uppercut.dds', name = Abilities.Skill_Measured_Uppercut }, -- Tempest Island
+        [58] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_dw_crushing_blow.dds', name = Abilities.Skill_Measured_Uppercut }, -- Tempest Island
         [935] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_2h_slam.dds', name = Abilities.Skill_Slam }, -- Banished Cells II
     },
     [27827] = { -- Crushing Blow (Yalorasse the Speaker)
-        [131] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_measured_uppercut.dds', name = Abilities.Skill_Measured_Uppercut }, -- Tempest Island
+        [58] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_dw_crushing_blow.dds', name = Abilities.Skill_Measured_Uppercut }, -- Tempest Island
         [935] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_2h_slam.dds', name = Abilities.Skill_Slam }, -- Banished Cells II
     },
     [27828] = { -- Crushing Blow  (Yalorasse the Speaker)
-        [131] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_measured_uppercut.dds', name = Abilities.Skill_Measured_Uppercut }, -- Tempest Island
+        [58] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_dw_crushing_blow.dds', name = Abilities.Skill_Measured_Uppercut }, -- Tempest Island
         [935] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_2h_slam.dds', name = Abilities.Skill_Slam }, -- Banished Cells II
     },
 }

@@ -104,8 +104,6 @@ LUIE.Data.UnitNames = {
     NPC_Bandit_Rogue                      = 'Bandit Rogue',
     NPC_Bandit_Savage                     = 'Bandit Savage',
     NPC_Sea_Viper_Tempest                 = 'Sea Viper Tempest',
-    NPC_Sea_Viper_Charger                 = 'Sea Viper Charger',
-    NPC_Sea_Viper_Deadeye                 = 'Sea Viper Deadeye',
     NPC_Corrupt_Spriggan                  = 'Corrupt Spriggan',
     NPC_Corrupt_Lurcher                   = 'Corrupt Lurcher',
 
@@ -128,6 +126,13 @@ LUIE.Data.UnitNames = {
     NPC_Dremora_Hauzkyn                   = 'Dremora Hauzkyn', -- GENERIC NPC
     NPC_Dremora_Gandrakyn                 = 'Dremora Gandrakyn', -- GENERIC NPC
     NPC_Storm_Atronach                    = 'Storm Atronach', -- GENERIC NPC
+    NPC_Lamia_Curare                      = 'Lamia Curare', -- GENERIC NPC
+
+    NPC_Sea_Viper_Strongarm               = 'Sea Viper Strongarm', -- GENERIC NPC
+    NPC_Sea_Viper_Berserker               = 'Sea Viper Berserker', -- GENERIC NPC
+    NPC_Sea_Viper_Charger                 = 'Sea Viper Charger', -- GENERIC NPC
+    NPC_Sea_Viper_Deadeye                 = 'Sea Viper Deadeye', -- GENERIC NPC
+    NPC_Sea_Viper_Healer                  = 'Sea Viper Healer', -- GENERIC NPC
 
     ----------------------------------------------------------------
     -- QUESTS ------------------------------------------------------

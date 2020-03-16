@@ -155,7 +155,7 @@ LUIE.Data.AlertTable = {
     [88506] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = "" }, -- Summon Abomination (Bonelord)
     [88507] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = "", bossMatch = { Unitnames.Boss_Overlord_Nur_dro } }, -- Summon Abomination (Bonelord)
 
-    [57534] = { interrupt = true, priority = 3, duration = 4000, auradetect = true, effectOnlyInterrupt = true, fakeName = "", hideIfNoSource = true }, -- Focused Healing (Healer)
+    [57534] = { interrupt = true, priority = 3, duration = 4000, auradetect = true, effectOnlyInterrupt = true, fakeName = "", hideIfNoSource = true, noSelf = true }, -- Focused Healing (Healer)
     [50966] = { power = true, auradetect = true, priority = 2, alwaysShowInterrupt = true, duration = 5000 }, -- Healer Immune (Healer - Craglorn/DLC)
     [44328] = { interrupt = true, priority = 2, auradetect = true, duration = 4500 }, -- Rite of Passage (Healer)
 
@@ -1301,11 +1301,22 @@ LUIE.Data.AlertBossNameConvert = {
 
 LUIE.Data.AlertZoneOverride = {
 
+    [7835] = { -- Convalescence (Lamia)
+        [131] = Unitnames.NPC_Lamia_Curare, -- Tempest Island
+        [58] = Unitnames.NPC_Lamia_Curare, -- Tempest Island
+    },
+    [9680] = { -- Summon Spectral Lamia
+        [131] = Unitnames.NPC_Lamia_Curare, -- Tempest Island
+        [58] = Unitnames.NPC_Lamia_Curare, -- Tempest Island
+    },
+
     [35220] = { -- Impending Storm (Storm Atronach)
 
-            -- DUNGEONS
-            [681] = Unitnames.NPC_Storm_Atronach, -- City of Ash II
-        },
+        -- DUNGEONS
+        [681] = Unitnames.NPC_Storm_Atronach, -- City of Ash II
+        [131] = Unitnames.NPC_Storm_Atronach, -- Tempest Island
+        [58] = Unitnames.NPC_Storm_Atronach, -- Tempest Island
+    },
 
     [54021] = { -- Release Flame (Marruz)
 
@@ -1333,6 +1344,8 @@ LUIE.Data.AlertZoneOverride = {
         -- [126] = Unitnames.NPC_Darkfern_Healer, -- Elden Hollow I -- Can't add because of Thalmor healers at the beginning of the dungeon.
         [931] = Unitnames.NPC_Dremora_Invoker, -- Elden Hollow II
         [681] = Unitnames.NPC_Dremora_Gandrakyn, -- City of Ash II
+        [131] = Unitnames.NPC_Sea_Viper_Healer, -- Tempest Island
+        [58] = Unitnames.NPC_Sea_Viper_Healer, -- Tempest Island
     },
 
     [35151] = { -- Spell Absorption (Spirit Mage)
@@ -1391,6 +1404,10 @@ LUIE.Data.AlertZoneOverride = {
 
         [435] = Unitnames.NPC_Sainted_Charger, -- Cathedral of the Golden Path
         [555] = Unitnames.NPC_Sea_Viper_Charger, -- Abecean Sea
+
+        -- DUNGEONS
+        [131] = Unitnames.NPC_Sea_Viper_Charger, -- Tempest Island
+        [58] = Unitnames.NPC_Sea_Viper_Charger, -- Tempest Island
     },
     [17867] = { -- Shock Aura (Thundermaul)
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.Elite_Arstul, -- Maormer Invasion Camp (Auridon)
@@ -1402,6 +1419,8 @@ LUIE.Data.AlertZoneOverride = {
 
         -- DUNGEONS
         [126] = Unitnames.Boss_Nenesh_gro_Mal, -- Elden Hollow I
+        [131] = Unitnames.NPC_Sea_Viper_Charger, -- Tempest Island
+        [58] = Unitnames.NPC_Sea_Viper_Charger, -- Tempest Island
     },
     [29520] = { -- Aura of Protection (Shaman)
 
@@ -1430,6 +1449,7 @@ LUIE.Data.AlertZoneOverride = {
         [126] = Unitnames.NPC_Darkfern_Stalker, -- Elden Hollow I
         -- [176] = Unitnames.NPC_Dagonite_Assassin, -- City of Ash I -- Can't use due to Assassin Exemplar
         [681] = Unitnames.NPC_Urata_Militant, -- City of Ash II
+        [58] = Unitnames.Boss_Yalorasse_the_Speaker, -- Tempest Island
     },
     [37108] = { -- Arrow Spray (Archer)
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- Maormer Invasion Camp (Auridon)
@@ -1456,6 +1476,8 @@ LUIE.Data.AlertZoneOverride = {
         [935] = Unitnames.NPC_Banished_Archer, -- Banished Cells II
         [126] = Unitnames.NPC_Darkfern_Archer, -- Elden Hollow I
         [681] = Unitnames.NPC_Xivilai_Immolator, -- City of Ash II
+        [131] = Unitnames.NPC_Sea_Viper_Deadeye, -- Tempest Island
+        [58] = Unitnames.NPC_Sea_Viper_Deadeye, -- Tempest Island
     },
     [28628] = { -- Volley (Archer)
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- Maormer Invasion Camp (Auridon)
@@ -1482,6 +1504,8 @@ LUIE.Data.AlertZoneOverride = {
         [935] = Unitnames.NPC_Banished_Archer, -- Banished Cells II
         [126] = Unitnames.NPC_Darkfern_Archer, -- Elden Hollow I
         [681] = Unitnames.NPC_Xivilai_Immolator, -- City of Ash II
+        [131] = Unitnames.NPC_Sea_Viper_Deadeye, -- Tempest Island
+        [58] = Unitnames.NPC_Sea_Viper_Deadeye, -- Tempest Island
     },
     [12439] = { -- Burning Arrow (Synergy)
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- South Beacon (Auridon)
@@ -1649,6 +1673,10 @@ LUIE.Data.AlertZoneOverride = {
     },
     [13701] = { -- Focused Charge (Brute)
         [548] = Unitnames.NPC_Bandit_Savage, -- Silatar
+
+        -- DUNGEONS
+        [131] = Unitnames.NPC_Sea_Viper_Strongarm, -- Tempest Island
+        [58] = Unitnames.NPC_Sea_Viper_Strongarm, -- Tempest Island
     },
 
     [37087] = { -- Lightning Onslaught (Battlemage)

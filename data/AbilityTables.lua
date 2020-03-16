@@ -1298,7 +1298,7 @@ local AbilityTables = {
     -- Tempest Island
     Skill_Sonic_Scream                = 46732,
     Skill_Sudden_Storm                = GetString(SI_LUIE_SKILL_SUDDEN_STORM),
-    Skill_Shadowstep                  = 18190,
+    --Skill_Shadowstep                  = 18190,
     Skill_Poisoned_Blade              = 29063,
     Skill_Stormfist                   = 80520,
     Skill_Wind_Charge                 = 26746,
