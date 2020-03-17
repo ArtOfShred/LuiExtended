@@ -869,6 +869,7 @@ LUIE.DebugAuras = {
     --[81301] = true, -- _CRWN_Badger_EatCritter
     [72955] = true, -- _CROWN Pet Goat,Black
     [81352] = true, -- _CRWN_12.5s (Spotted Snow Senche-Leopard)
+    [127179] = true, -- _Crwn Pet Doom Spawn (Mudcrab of Eternal Doom)
     [60665] = true, -- Vanity Pet Sphere Stun
 
     -------------------------------------
@@ -2559,6 +2560,7 @@ LUIE.DebugAuras = {
     [29177] = true, -- Flee
     [64420] = true, -- Remove Pet Stealth
     [26245] = true, -- Slam Stun
+    [72902] = true, -- Hidden
 
     -- MISC
     [15594] = true, -- Bonus vs off Balance

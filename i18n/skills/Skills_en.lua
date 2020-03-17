@@ -1340,6 +1340,7 @@ local strings = {
     SI_LUIE_SKILL_LEVITATE_DOMINANCE_TP =                "Levitated for |cFFFFFF<<1>>|r seconds.\n\nWhen this effect ends, you will be afflicted with |cFFFFFFCurse of Dominance|r.",
     SI_LUIE_SKILL_SUMMON_FLAME_ATRONACHS =               "Summon Flame Atronachs",
     SI_LUIE_SKILL_FLAME_BARRIER =                        "Flame Barrier",
+    SI_LUIE_SKILL_PRECISION_STRIKE =                     "Precision Strike",
 
     -- Keep Upgrade
     SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_RANGE =              "Longer Range on Ranged Guards",

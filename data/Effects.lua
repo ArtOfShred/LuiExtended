@@ -2103,7 +2103,11 @@ Effects.EffectOverrideByName = {
         [Unitnames.NPC_Sea_Viper_Strongarm] =    { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_1h_light.dds' }, -- Sea Viper Strongarm (Tempest Island)
         [Unitnames.NPC_Sea_Viper_Berserker] =    { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_1h_light.dds' }, -- Sea Viper Berserker (Tempest Island)
         [Unitnames.NPC_Sea_Viper_Charger] =      { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_2h_light.dds' }, -- Sea Viper Charger (Tempest Island)
-        [Unitnames.Boss_Commodore_Ohmanil] =     { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_2h_light.dds' }, -- CommodoreOhmanil (Tempest Island)
+        [Unitnames.Boss_Commodore_Ohmanil] =     { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_2h_light.dds' }, -- Commodore Ohmanil (Tempest Island)
+    },
+
+    [26332] = { -- Slash (Valaran Stormcaller)
+        [Unitnames.NPC_Lightning_Avatar] =       { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light_ethereal.dds' }, -- Lightning Avatar (Tempest Island)
     },
     [14096] = { -- Heavy Attack (Footsoldier)
         [Unitnames.Elite_Amuur] =                { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_cleaver_attack_heavy.dds' }, -- Amuur (The First Patient)
@@ -3776,6 +3780,7 @@ Effects.EffectOverride = {
 
     [72955] = { hide = true }, -- _CRWN Pet Goat,Black (Sanguine's Black Goat)
     [81352] = { hide = true }, -- _CRWN_12.5s (Spotted Snow Senche-Leopard)
+    [127179] = { hide = true }, -- _Crwn Pet Doom Spawn (Mudcrab of Eternal Doom)
 
     -- Assistants
     [77645] = { hide = true }, -- Stealth (Pirharri the Smuggler)
@@ -4538,9 +4543,9 @@ Effects.EffectOverride = {
     -- Crouch
     [20299] = { tooltip = Tooltips.Innate_Hidden }, -- Sneak
     [20309] = { tooltip = Tooltips.Innate_Invisible }, -- Crouch
-
     [20301] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_hidden.dds', name = Abilities.Innate_Crouch }, -- Crouch Drain
     [26245] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = Abilities.Innate_Stealth_Stun, tooltip = Tooltips.Generic_Stun }, -- Slam Stun (Stun from crouch attack)
+    [72902] = { hide = true }, -- Hidden
 
     -- Sprint
     [973] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_sprint.dds', tooltip = Tooltips.Innate_Sprint }, -- Sprint
@@ -8682,8 +8687,8 @@ Effects.EffectOverride = {
     [9670] = { icon = 'LuiExtended/media/icons/abilities/ability_lamia_strike.dds' }, -- Strike (Lamia)
     [9671] = { icon = 'LuiExtended/media/icons/abilities/ability_lamia_howling_strike.dds' }, -- Howling Strike (Lamia)
     [89382] = { icon = 'LuiExtended/media/icons/abilities/ability_lamia_howling_strike.dds' }, -- Howling Strike (Lamia)
-    [9674] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shockwave.dds' }, -- Resonate (Lamia)
-    [23281] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shockwave.dds' }, -- Resonate (Lamia)
+    [9674] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_resonate.dds' }, -- Resonate (Lamia)
+    [23281] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_resonate.dds' }, -- Resonate (Lamia)
     [7830] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_shockwave.dds', hide = true }, -- Shockwave (Lamia)
     [12074] = { hide = true }, -- Summon Spectral Lamia (Lamia)
     [9680] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_spectral_lamia.dds', tooltip = Tooltips.Skill_Summon_Spectral_Lamia }, -- Summon Spectral Lamia (Lamia)
@@ -11058,9 +11063,9 @@ Effects.EffectOverride = {
 
     [18961] = { hide = true }, -- Ghostly Summon (Generic Invisible Target)
     [18798] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_light.dds', name = Abilities.Skill_Quick_Strike }, -- Slash (High Kinlord Rilis)
-    [33189] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_crushing_blow.dds' }, -- Crushing Blow (High Kinlord Rilis)
-    [33190] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_crushing_blow.dds', hide = true }, -- Crushing Blow (High Kinlord Rilis)
-    [33191] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_crushing_blow.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Crushing Blow (High Kinlord Rilis)
+    [33189] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_crushing_blow.dds', name = Abilities.Skill_Overpower }, -- Crushing Blow (High Kinlord Rilis)
+    [33190] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_crushing_blow.dds', name = Abilities.Skill_Overpower, hide = true }, -- Crushing Blow (High Kinlord Rilis)
+    [33191] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_crushing_blow.dds', name = Abilities.Skill_Overpower, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Crushing Blow (High Kinlord Rilis)
     [18795] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_the_feast.dds', name = Abilities.Skill_The_Feast }, -- CON_Invisible_30%_Speed_Debuff (The Feast)
     [33172] = { hide = true }, -- Oblivion Restoration (The Feast)
     [33165] = { hide = true }, -- Despawn Self (The Feast)
@@ -11089,9 +11094,9 @@ Effects.EffectOverride = {
     [47127] = { hide = true }, -- Nocom
 
     [48281] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_light.dds', name = Abilities.Skill_Quick_Strike }, -- Slash (Keeper Voranil)
-    [27826] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_crushing_blow.dds' }, -- Crushing Blow (Keeper Voranil)
-    [27827] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_crushing_blow.dds', hide = true }, -- Crushing Blow (Keeper Voranil)
-    [27828] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_crushing_blow.dds', tooltip = Tooltips.Generic_Knockback }, -- Crushing Blow (Keeper Voranil)
+    [27826] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_crushing_blow.dds', name = Abilities.Skill_Overpower }, -- Crushing Blow (Keeper Voranil)
+    [27827] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_crushing_blow.dds', name = Abilities.Skill_Overpower, hide = true }, -- Crushing Blow (Keeper Voranil)
+    [27828] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_crushing_blow.dds', name = Abilities.Skill_Overpower, tooltip = Tooltips.Generic_Knockback }, -- Crushing Blow (Keeper Voranil)
     [29018] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_berserker_frenzy.dds' }, -- Berserker Frenzy (Keeper Voranil)
     [29020] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_berserker_frenzy.dds' }, -- Berserker Frenzy (Keeper Voranil)
     [28750] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_essence_siphon.dds', hide = true }, -- Essence Siphon (Keeper Voranil)
@@ -11581,9 +11586,9 @@ Effects.EffectOverride = {
     [26619] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sudden_storm.dds', name = Abilities.Skill_Sudden_Storm, groundLabel = true, tooltip = Tooltips.Generic_AOE_Shock, tooltipValue2 = 1 }, -- Shock (Sudden Storm)
 
     [26332] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds', name = Abilities.Skill_Quick_Strike }, -- Slash (Valaran Stormcaller)
-    [26370] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_crushing_blow.dds' }, -- Crushing Blow (Valaran Stormcaller)
-    [26371] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_crushing_blow.dds', hide = true }, -- Crushing Blow (Valaran Stormcaller)
-    [26372] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_crushing_blow.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Crushing Blow (Valaran Stormcaller)
+    [26370] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_crushing_blow.dds', name = Abilities.Skill_Heavy_Slash }, -- Crushing Blow (Valaran Stormcaller)
+    [26371] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_crushing_blow.dds', name = Abilities.Skill_Heavy_Slash, hide = true }, -- Crushing Blow (Valaran Stormcaller)
+    [26372] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_crushing_blow.dds', name = Abilities.Skill_Heavy_Slash, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Crushing Blow (Valaran Stormcaller)
     [26628] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_enervating_bolt.dds', tooltip = Tooltips.Generic_Stun }, -- Enervating Bolt
     [26631] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_enervating_bolt.dds' }, -- Enervating Bolt
     [26592] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_lightning_avatar.dds' }, -- Lightning Avatar (Valaran Stormcaller)
@@ -13210,15 +13215,15 @@ Effects.MapDataOverride = {
         [935] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_2h_light.dds' }, -- Banished Cells II
     },
     [27826] = { -- Crushing Blow (Yalorasse the Speaker)
-        [58] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_dw_crushing_blow.dds', name = Abilities.Skill_Measured_Uppercut }, -- Tempest Island
-        [935] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_2h_slam.dds', name = Abilities.Skill_Slam }, -- Banished Cells II
+        [58] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_dw_crushing_blow.dds', name = Abilities.Skill_Precision_Strike }, -- Tempest Island
+        [935] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_2h_slam.dds', name = Abilities.Skill_Crushing_Blow }, -- Banished Cells II
     },
     [27827] = { -- Crushing Blow (Yalorasse the Speaker)
-        [58] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_dw_crushing_blow.dds', name = Abilities.Skill_Measured_Uppercut }, -- Tempest Island
-        [935] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_2h_slam.dds', name = Abilities.Skill_Slam }, -- Banished Cells II
+        [58] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_dw_crushing_blow.dds', name = Abilities.Skill_Precision_Strike }, -- Tempest Island
+        [935] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_2h_slam.dds', name = Abilities.Skill_Crushing_Blow }, -- Banished Cells II
     },
     [27828] = { -- Crushing Blow  (Yalorasse the Speaker)
-        [58] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_dw_crushing_blow.dds', name = Abilities.Skill_Measured_Uppercut }, -- Tempest Island
-        [935] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_2h_slam.dds', name = Abilities.Skill_Slam }, -- Banished Cells II
+        [58] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_dw_crushing_blow.dds', name = Abilities.Skill_Precision_Strike }, -- Tempest Island
+        [935] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_2h_slam.dds', name = Abilities.Skill_Crushing_Blow }, -- Banished Cells II
     },
 }

@@ -1235,6 +1235,7 @@ local AbilityTables = {
     -- Banished Cells I
     Skill_Tail_Smite                  = 47587,
     Skill_Shadow_Proxy                = 114655,
+    Skill_Overpower                   = 52997,
 
     -- Banished Cells II
     Skill_Pool_of_Fire                = GetString(SI_LUIE_SKILL_POOL_OF_FIRE),
@@ -1298,11 +1299,13 @@ local AbilityTables = {
     -- Tempest Island
     Skill_Sonic_Scream                = 46732,
     Skill_Sudden_Storm                = GetString(SI_LUIE_SKILL_SUDDEN_STORM),
-    --Skill_Shadowstep                  = 18190,
+    Skill_Shadowstep                  = 18190,
     Skill_Poisoned_Blade              = 29063,
     Skill_Stormfist                   = 80520,
     Skill_Wind_Charge                 = 26746,
     Skill_Twister                     = 26514,
+    Skill_Heavy_Slash                 = 51993,
+    Skill_Precision_Strike            = GetString(SI_LUIE_SKILL_PRECISION_STRIKE),
 
     -- Selene's Web
     Skill_Primal_Swarm                = GetString(SI_LUIE_SKILL_PRIMAL_SWARM),
