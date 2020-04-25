@@ -200,8 +200,8 @@ function SlashCommands.RegisterSlashCommands()
         SLASH_COMMANDS["/fence"]        = function(...) SlashCommands.SlashCollectible(300) end
     end
     if SlashCommands.SV.SlashCake then
-        SLASH_COMMANDS["/cake"]         = function(...) SlashCommands.SlashCollectible(5886) end
-        SLASH_COMMANDS["/anniversary"]  = function(...) SlashCommands.SlashCollectible(5886) end
+        SLASH_COMMANDS["/cake"]         = function(...) SlashCommands.SlashCollectible(7619) end
+        SLASH_COMMANDS["/anniversary"]  = function(...) SlashCommands.SlashCollectible(7619) end
     end
     if SlashCommands.SV.SlashPie then
         SLASH_COMMANDS["/pie"]          = function(...) SlashCommands.SlashCollectible(1167) end
