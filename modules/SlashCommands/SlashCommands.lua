@@ -66,56 +66,59 @@ function SlashCommands.Initialize(enabled)
 end
 
 function SlashCommands.RegisterSlashCommands()
-    -- Clear commands list
-    SLASH_COMMANDS["/home"]         = nil
-    SLASH_COMMANDS["/regroup"]      = nil
-    SLASH_COMMANDS["/disband"]      = nil
-    SLASH_COMMANDS["/leave"]        = nil
-    SLASH_COMMANDS["/leavegroup"]   = nil
+
+    -- Register commands that replace default functions
     SLASH_COMMANDS["/kick"]         = SlashCommands.SlashKick -- This command is always registered since it is also a default emote
-    SLASH_COMMANDS["/remove"]       = nil
-    SLASH_COMMANDS["/groupkick"]    = nil
-    SLASH_COMMANDS["/groupremove"]  = nil
-    SLASH_COMMANDS["/trade"]        = nil
-    SLASH_COMMANDS["/votekick"]     = nil
-    SLASH_COMMANDS["/voteremove"]   = nil
-    SLASH_COMMANDS["/guildinvite"]  = nil
-    SLASH_COMMANDS["/ginvite"]      = nil
-    SLASH_COMMANDS["/guildkick"]    = nil
-    SLASH_COMMANDS["/gkick"]        = nil
-    SLASH_COMMANDS["/guildquit"]    = nil
-    SLASH_COMMANDS["/gquit"]        = nil
-    SLASH_COMMANDS["/guildleave"]   = nil
-    SLASH_COMMANDS["/gleave"]       = nil
-    SLASH_COMMANDS["/addfriend"]    = nil
-    SLASH_COMMANDS["/friend"]       = nil
-    SLASH_COMMANDS["/addignore"]    = nil
-    SLASH_COMMANDS["/ignore"]       = nil
-    SLASH_COMMANDS["/unfriend"]     = nil
-    SLASH_COMMANDS["/removefriend"] = nil
-    SLASH_COMMANDS["/unignore"]     = nil
-    SLASH_COMMANDS["/removeignore"] = nil
-    SLASH_COMMANDS["/campaign"]     = nil
     SLASH_COMMANDS["/invite"]       = SlashCommands.SlashInvite -- This command is always registered since it is also a default command
-    SLASH_COMMANDS["/bank"]         = nil
-    SLASH_COMMANDS["/banker"]       = nil
-    SLASH_COMMANDS["/sell"]         = nil
-    SLASH_COMMANDS["/merchant"]     = nil
-    SLASH_COMMANDS["/vendor"]       = nil
-    SLASH_COMMANDS["/smuggler"]     = nil
-    SLASH_COMMANDS["/fence"]        = nil
-    SLASH_COMMANDS["/ready"]        = nil
     SLASH_COMMANDS["/readycheck"]   = SlashCommands.SlashReadyCheck -- This command is always registered since it is also a default command
-    SLASH_COMMANDS["/outfit"]       = nil
-    SLASH_COMMANDS["/cake"]         = nil
-    SLASH_COMMANDS["/anniversary"]  = nil
-    SLASH_COMMANDS["/pie"]          = nil
-    SLASH_COMMANDS["/jester"]       = nil
-    SLASH_COMMANDS["/mead"]         = nil
-    SLASH_COMMANDS["/newlife"]      = nil
-    SLASH_COMMANDS["/witch"]        = nil
-    SLASH_COMMANDS["/witchfest"]    = nil
-    SLASH_COMMANDS["/report"]       = nil
+
+    -- Slash Commands are no longer set to nil when disabled to prevent interference with other addons that may add the same functionality. This list is preserved as an easy reference for all functions added.
+    --SLASH_COMMANDS["/home"]         = nil
+    --SLASH_COMMANDS["/regroup"]      = nil
+    --SLASH_COMMANDS["/disband"]      = nil
+    --SLASH_COMMANDS["/leave"]        = nil
+    --SLASH_COMMANDS["/leavegroup"]   = nil
+    --SLASH_COMMANDS["/remove"]       = nil
+    --SLASH_COMMANDS["/groupkick"]    = nil
+    --SLASH_COMMANDS["/groupremove"]  = nil
+    --SLASH_COMMANDS["/trade"]        = nil
+    --SLASH_COMMANDS["/votekick"]     = nil
+    --SLASH_COMMANDS["/voteremove"]   = nil
+    --SLASH_COMMANDS["/guildinvite"]  = nil
+    --SLASH_COMMANDS["/ginvite"]      = nil
+    --SLASH_COMMANDS["/guildkick"]    = nil
+    --SLASH_COMMANDS["/gkick"]        = nil
+    --SLASH_COMMANDS["/guildquit"]    = nil
+    --SLASH_COMMANDS["/gquit"]        = nil
+    --SLASH_COMMANDS["/guildleave"]   = nil
+    --SLASH_COMMANDS["/gleave"]       = nil
+    --SLASH_COMMANDS["/addfriend"]    = nil
+    --SLASH_COMMANDS["/friend"]       = nil
+    --SLASH_COMMANDS["/addignore"]    = nil
+    --SLASH_COMMANDS["/ignore"]       = nil
+    --SLASH_COMMANDS["/unfriend"]     = nil
+    --SLASH_COMMANDS["/removefriend"] = nil
+    --SLASH_COMMANDS["/unignore"]     = nil
+    --SLASH_COMMANDS["/removeignore"] = nil
+    --SLASH_COMMANDS["/campaign"]     = nil
+    --SLASH_COMMANDS["/bank"]         = nil
+    --SLASH_COMMANDS["/banker"]       = nil
+    --SLASH_COMMANDS["/sell"]         = nil
+    --SLASH_COMMANDS["/merchant"]     = nil
+    --SLASH_COMMANDS["/vendor"]       = nil
+    --SLASH_COMMANDS["/smuggler"]     = nil
+    --SLASH_COMMANDS["/fence"]        = nil
+    --SLASH_COMMANDS["/ready"]        = nil
+    --SLASH_COMMANDS["/outfit"]       = nil
+    --SLASH_COMMANDS["/cake"]         = nil
+    --SLASH_COMMANDS["/anniversary"]  = nil
+    --SLASH_COMMANDS["/pie"]          = nil
+    --SLASH_COMMANDS["/jester"]       = nil
+    --SLASH_COMMANDS["/mead"]         = nil
+    --SLASH_COMMANDS["/newlife"]      = nil
+    --SLASH_COMMANDS["/witch"]        = nil
+    --SLASH_COMMANDS["/witchfest"]    = nil
+    --SLASH_COMMANDS["/report"]       = nil
     CHAT_SYSTEM.textEntry.slashCommandAutoComplete:InvalidateSlashCommandCache()
 
     -- Add commands based off menu options

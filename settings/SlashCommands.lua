@@ -72,6 +72,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashTrade = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashTrade,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashHome
@@ -82,6 +83,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashHome = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashHome,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashCampaignQ
@@ -92,6 +94,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashCampaignQ = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashCampaignQ,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashBanker
@@ -102,6 +105,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashBanker = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashBanker,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- Choose Banker
@@ -124,6 +128,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashMerchant = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashMerchant,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- Choose Merchant
@@ -146,6 +151,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashFence = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashFence,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashOutfit
@@ -156,6 +162,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashOutfit = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashOutfit,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashReport
@@ -166,6 +173,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashReport = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashReport,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- /Home Alert -- TODO
@@ -214,6 +222,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashReadyCheck = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashReadyCheck,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashRegroup
@@ -224,6 +233,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashRegroup = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashRegroup,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashDisband
@@ -234,6 +244,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashDisband = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashDisband,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashGroupLeave
@@ -244,6 +255,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashGroupLeave = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashGroupLeave,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashGroupKick
@@ -254,6 +266,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashGroupKick = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashGroupKick,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashVoteKick
@@ -264,6 +277,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashVoteKick = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashVoteKick,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
         },
     }
@@ -282,6 +296,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashGuildInvite = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashGuildInvite,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashGuildQuit
@@ -292,6 +307,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashGuildQuit = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashGuildQuit,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashGuildKick
@@ -302,6 +318,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashGuildKick = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashGuildKick,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
         },
     }
@@ -320,6 +337,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashFriend = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashFriend,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashIgnore
@@ -330,6 +348,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashIgnore = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashIgnore,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashRemoveFriend
@@ -340,6 +359,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashRemoveFriend = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashRemoveFriend,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashRemoveIgnore
@@ -350,6 +370,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashRemoveIgnore = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashRemoveIgnore,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
         },
     }
@@ -368,6 +389,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashCake = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashCake,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashPie
@@ -378,6 +400,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashPie = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashPie,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashMead
@@ -388,6 +411,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashMead = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashMead,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashWitch
@@ -398,6 +422,7 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashWitch = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashWitch,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
         },
     }

@@ -15,6 +15,7 @@ local strings = {
     SI_LUIE_LAM_RELOADUI =                               "UI neu laden",
     SI_LUIE_LAM_RELOADUI_BUTTON =                        "Lädt das UI neu.",
     SI_LUIE_LAM_RELOADUI_WARNING =                       "Erfordert ein erneutes Laden des UI.",
+    SI_LUIE_LAM_RELOADUI_SLASH_WARNING =                 "When disabling a slash command you will need to reload the UI.",
     SI_LUIE_LAM_RESETPOSITION =                          "Position zurücksetzen",
     SI_LUIE_LAM_HIDE_EXPERIENCE_BAR =                    "Verstecke das Erfahrungs-/Fertigkeitsfortschrittsanzeigen-Pop-up",
     SI_LUIE_LAM_HIDE_EXPERIENCE_BAR_TP =                 "Beim Erhalt von Erfahrung durch Quests, Gebietserkundungen, Boss-Tötungen oder Fertigkeitslinien-Updates wird die Erfahrungsleiste nicht mehr auftauchen. Nützlich, wenn ein anderes UI-Element in dieser Ecke des Bildschirms ist und nicht überlappt werden soll.",
