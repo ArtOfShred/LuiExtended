@@ -356,6 +356,14 @@ function LUIE.InitializeHooks()
                             tooltipText = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltip) and zo_strformat(LUIE.Data.Effects.EffectOverride[abilityId].tooltip, timer, value2, value3) or GetAbilityDescription(abilityId)
                         end
 
+                        -- Display Default Tooltip Description if no custom tooltip is present
+                        if tooltipText == "" or tooltipText == nil then
+                            if GetAbilityEffectDescription(buffSlot) ~= "" then
+                                tooltipText = GetAbilityEffectDescription(buffSlot)
+                            end
+                        end
+
+                        -- Override custom tooltip with default tooltip if this ability is flagged to do so (scaling buffs like Mundus Stones)
                         if LUIE.Data.Effects.TooltipUseDefault[abilityId] then
                             if GetAbilityEffectDescription(buffSlot) ~= "" then
                                 tooltipText = GetAbilityEffectDescription(buffSlot)
@@ -469,6 +477,14 @@ function LUIE.InitializeHooks()
                         tooltipText = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltip) and zo_strformat(LUIE.Data.Effects.EffectOverride[abilityId].tooltip, timer, value2, value3) or GetAbilityDescription(abilityId)
                     end
 
+                    -- Display Default Tooltip Description if no custom tooltip is present
+                    if tooltipText == "" or tooltipText == nil then
+                        if GetAbilityEffectDescription(buffSlot) ~= "" then
+                            tooltipText = GetAbilityEffectDescription(buffSlot)
+                        end
+                    end
+
+                    -- Override custom tooltip with default tooltip if this ability is flagged to do so (scaling buffs like Mundus Stones)
                     if LUIE.Data.Effects.TooltipUseDefault[abilityId] then
                         if GetAbilityEffectDescription(buffSlot) ~= "" then
                             tooltipText = GetAbilityEffectDescription(buffSlot)

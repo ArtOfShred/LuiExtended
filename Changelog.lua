@@ -6,6 +6,15 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
+    "|cFFA500LuiExtended Version 6.0.5|r",
+    "",
+    "|cFFFF00General:|r",
+    "[*] Updated icons, tooltips, alerts, and cc tracker for several dungeons (EH I & EH II, COA I & COA II, and Tempest Island) as well as a multitude of monster attacks.",
+
+
+
+
+
     "|cFFA500LuiExtended Version 6.0.4|r",
     "",
     "|cFFFF00General:|r",
