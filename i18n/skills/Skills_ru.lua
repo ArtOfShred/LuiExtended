@@ -314,6 +314,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_ENRAGE_NO_DUR =                "Increase damage done by |cFFFFFF<<2>>|r%.",
     SI_LUIE_SKILL_GENERIC_ENRAGE_DAMAGE_TAKEN_NO_DUR =   "Increase damage done by |cFFFFFF<<2>>|r% and increase damage taken by |cFFFFFF<<3>>|r%.",
     SI_LUIE_SKILL_GENERIC_ENRAGE_DAMAGE_REDUCE_NO_DUR =  "Increase damage done by |cFFFFFF<<2>>|r% and reduce damage taken by |cFFFFFF<<3>>|r%.",
+    SI_LUIE_SKILL_GENERIC_ENRAGE_STACK_PERMANENT_TP    = "Increase damage done by |cFFFFFF<<2>>|r% per stack.",
 
     SI_LUIE_SKILL_GENERIC_MOVEMENT_SPEED_TP =            "Increase Movement Speed by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
@@ -1211,7 +1212,8 @@ local strings = {
     SI_LUIE_SKILL_DEFILED_GRAVE_TP =                     "Immobilized and taking Magic Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_SUDDEN_STORM =                         "Sudden Storm",
     SI_LUIE_SKILL_BACKSTAB_TP =                          "Afflicted with Bleed Damage every |cFFFFFF2|r seconds and Movement Speed reduced by |cFFFFFF60|r% for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_CALL_STORM_ATRONACH =                  "Call Storm Atronachs",
+    SI_LUIE_SKILL_CALL_STORM_ATRONACH =                  "Call Storm Atronach",
+    SI_LUIE_SKILL_CALL_STORM_ATRONACHS =                 "Call Storm Atronachs",
     SI_LUIE_SKILL_ENERVATING_STONE_TP =                  "Stunned and taking Shock Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_ETHEREAL_CHAIN_TP =                    "Levitated and afflicted with Magic Damage every |cFFFFFF1.5|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_PRIMAL_SWARM =                         "Primal Swarm",
@@ -1333,6 +1335,12 @@ local strings = {
     SI_LUIE_SKILL_RESILIENCE =                           "Resilience",
     SI_LUIE_SKILL_RESILIENCE_TP =                        "Reduce damage taken from area of effect and damage over time abilities by |cFFFFFF85|r%.",
     SI_LUIE_SKILL_WHIRLING_AXE =                         "Whirling Axe",
+    SI_LUIE_SKILL_REANIMATE_SKELETONS =                  "Reanimate Skeletons",
+    SI_LUIE_SKILL_LEVITATE_SUFFERING_TP =                "Levitated for |cFFFFFF<<1>>|r seconds.\n\nWhen this effect ends, you will be afflicted with |cFFFFFFCurse of Suffering|r.",
+    SI_LUIE_SKILL_LEVITATE_DOMINANCE_TP =                "Levitated for |cFFFFFF<<1>>|r seconds.\n\nWhen this effect ends, you will be afflicted with |cFFFFFFCurse of Dominance|r.",
+    SI_LUIE_SKILL_SUMMON_FLAME_ATRONACHS =               "Summon Flame Atronachs",
+    SI_LUIE_SKILL_FLAME_BARRIER =                        "Flame Barrier",
+    SI_LUIE_SKILL_PRECISION_STRIKE =                     "Precision Strike",
 
     -- Keep Upgrade
     SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_RANGE =              "Longer Range on Ranged Guards",

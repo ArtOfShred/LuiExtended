@@ -6,6 +6,21 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
+    "|cFFA500LuiExtended Version 6.0.5|r",
+    "",
+    "|cFFFF00General:|r",
+    "[*] Updated icons, tooltips, alerts, and cc tracker for several dungeons (EH I & EH II, COA I & COA II, and Tempest Island) as well as a multitude of monster attacks.",
+    "",
+    "|cFFFF00Buffs & Debuffs:|r",
+    "[*] Fixed an issue where the default tooltips for abilities weren't displaying in the Active Effects Window on both the keyboard and gamepad UI.",
+    "",
+    "|cFFFF00Chat Announcements:|r",
+    "[*] Added a workaround for duplicate Quest Accepted messages displayed in chat if enabled when using Dolgubon's Lazy Writ Crafter.",
+    "",
+    "|cFFFF00Slash Commands:|r",
+    "[*] Updated the /cake command to summon the 2020 anniversary cake and updated the icon. Too little too late at this point.",
+    "[*] Slash Commands are no longer set to nil when disabled in the options menu, this means you will need to reload the UI when disabling slash commands you don't want to use. This is to stop LUIE from removing commands if another addon also adds the same slash command with similar functionality.",
+    "",
     "|cFFA500LuiExtended Version 6.0.4|r",
     "",
     "|cFFFF00General:|r",

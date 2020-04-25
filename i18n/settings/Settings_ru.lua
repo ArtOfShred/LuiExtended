@@ -15,6 +15,7 @@ local strings = {
     SI_LUIE_LAM_RELOADUI =                               "Перезагрузить UI",
     SI_LUIE_LAM_RELOADUI_BUTTON =                        "Это перезагрузит интерфейс (UI).",
     SI_LUIE_LAM_RELOADUI_WARNING =                       "Потребуется перезагрузка UI.",
+    SI_LUIE_LAM_RELOADUI_SLASH_WARNING =                 "When disabling a slash command you will need to reload the UI.",
     SI_LUIE_LAM_RESETPOSITION =                          "Сбросить положение",
     SI_LUIE_LAM_HIDE_EXPERIENCE_BAR =                    "Скрыть появление полоски Опыта/Навыков",
     SI_LUIE_LAM_HIDE_EXPERIENCE_BAR_TP =                 "При получении опыта за выполнение заданий, открытие POI, убийство боссов или при прокачке линейки навыков, полоска заполнения больше не будет появляться. Полезно, если у вас в этом углу экрана (верхний левый) есть какие-то элементы аддонов и вы не хотите, чтобы они перекрывались этой полоской.",

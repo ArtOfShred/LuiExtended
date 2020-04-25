@@ -15,6 +15,7 @@ local strings = {
     SI_LUIE_LAM_RELOADUI =                               "Reload UI",
     SI_LUIE_LAM_RELOADUI_BUTTON =                        "This will reload the UI.",
     SI_LUIE_LAM_RELOADUI_WARNING =                       "Will need to reload the UI.",
+    SI_LUIE_LAM_RELOADUI_SLASH_WARNING =                 "When disabling a slash command you will need to reload the UI.",
     SI_LUIE_LAM_RESETPOSITION =                          "Reset Position",
     SI_LUIE_LAM_HIDE_EXPERIENCE_BAR =                    "Hide Experience/Skill Progress Bar Pop-up",
     SI_LUIE_LAM_HIDE_EXPERIENCE_BAR_TP =                 "When gaining experience from Quests, POI Discovery, Boss Kills, or Skill Line updates, the XP bar will no longer popup. Useful if you have a custom UI element in that corner of the screen and don't want it to be overlapped.",

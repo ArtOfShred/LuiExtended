@@ -563,6 +563,7 @@ local AbilityTables = {
     Skill_Volatile_Pulse              = GetString(SI_LUIE_SKILL_VOLATILE_PULSE),
     Skill_Empowered_Ward              = 29482,
     Skill_Summon_Storm_Atronach       = 23634,
+    Skill_Summon_Storm_Atronachs      = GetString(SI_LUIE_SKILL_SUMMON_STORM_ATRONACHS),
     Skill_Greater_Storm_Atronach      = 23492,
     Skill_Summon_Charged_Atronach     = 23495,
     Skill_Charged_Lightning           = 102310,
@@ -1234,6 +1235,7 @@ local AbilityTables = {
     -- Banished Cells I
     Skill_Tail_Smite                  = 47587,
     Skill_Shadow_Proxy                = 114655,
+    Skill_Overpower                   = 52997,
 
     -- Banished Cells II
     Skill_Pool_of_Fire                = GetString(SI_LUIE_SKILL_POOL_OF_FIRE),
@@ -1253,6 +1255,7 @@ local AbilityTables = {
     Skill_Measured_Uppercut           = 34607,
     Skill_Heal_Spores                 = GetString(SI_LUIE_SKILL_HEAL_SPORES),
     Skill_Summon_Saplings             = GetString(SI_LUIE_SKILL_SUMMON_STRANGLER_SAPLINGS),
+    Skill_Reanimate_Skeletons         = GetString(SI_LUIE_SKILL_REANIMATE_SKELETONS),
 
     -- Elden Hollow II
     Skill_Fortified_Ground            = 32648,
@@ -1270,6 +1273,7 @@ local AbilityTables = {
     Skill_Blazing_Arrow               = 34901,
     Skill_Blazing_Embers              = 34953,
     Skill_Summon_Flame_Atronach       = 34623,
+    Skill_Summon_Flame_Atronachs      = GetString(SI_LUIE_SKILL_SUMMON_FLAME_ATRONACHS),
     Skill_Oblivion_Gate               = GetString(SI_LUIE_SKILL_OBLIVION_GATE),
 
     -- City of Ash II
@@ -1288,16 +1292,20 @@ local AbilityTables = {
     Skill_Platform_Detonation         = 56548,
     Skill_Volcanic_Shield             = GetString(SI_LUIE_SKILL_VOLCANIC_SHIELD),
     Skill_Meteoric_Strike             = GetString(SI_LUIE_SKILL_METEORIC_STRIKE),
+    Skill_Flame_Barrier               = GetString(SI_LUIE_SKILL_FLAME_BARRIER),
+    Skill_Call_Storm_Atronach         = GetString(SI_LUIE_SKILL_CALL_STORM_ATRONACH),
+    Skill_Call_Storm_Atronachs        = GetString(SI_LUIE_SKILL_CALL_STORM_ATRONACHS),
 
     -- Tempest Island
     Skill_Sonic_Scream                = 46732,
     Skill_Sudden_Storm                = GetString(SI_LUIE_SKILL_SUDDEN_STORM),
     Skill_Shadowstep                  = 18190,
     Skill_Poisoned_Blade              = 29063,
-    Skill_Call_Storm_Atronach         = GetString(SI_LUIE_SKILL_CALL_STORM_ATRONACH),
     Skill_Stormfist                   = 80520,
     Skill_Wind_Charge                 = 26746,
     Skill_Twister                     = 26514,
+    Skill_Heavy_Slash                 = 51993,
+    Skill_Precision_Strike            = GetString(SI_LUIE_SKILL_PRECISION_STRIKE),
 
     -- Selene's Web
     Skill_Primal_Swarm                = GetString(SI_LUIE_SKILL_PRIMAL_SWARM),

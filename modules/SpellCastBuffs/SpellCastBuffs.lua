@@ -409,6 +409,7 @@ function SpellCastBuffs.Initialize(enabled)
         eventManager:RegisterForEvent(moduleName .. "Event4" .. k, EVENT_COMBAT_EVENT, SpellCastBuffs.OnCombatAddNameEvent )
         eventManager:AddFilterForEvent(moduleName .. "Event4" .. k, EVENT_COMBAT_EVENT, REGISTER_FILTER_ABILITY_ID, k )
     end
+    eventManager:RegisterForEvent(moduleName, EVENT_BOSSES_CHANGED, SpellCastBuffs.AddNameOnBossEngaged )
 
     -- Stealth Events
     eventManager:RegisterForEvent(moduleName .. "Player",          EVENT_STEALTH_STATE_CHANGED, SpellCastBuffs.StealthStateChanged )
@@ -1954,24 +1955,26 @@ local InternalStackCounter = { }
 
 -- Combat Event - Add Name Aura to Target
 function SpellCastBuffs.OnCombatAddNameEvent( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
-
-    -- DEBUG
-    --[[
-    LUIE.PrintToChat(abilityId)
-    LUIE.PrintToChat(name)
-    ]]--
-
     -- Get the name of the target to apply the buff to
     local name = Effects.AddNameOnEvent[abilityId]
     -- Bail out if we have no name
     if not name then return end
 
-    -- NOTE We may eventually need to iterate here, for the time being though we can just relatively reliably put this in slot 2 since slot 1 should be CC Immunity.
+    -- NOTE: We may eventually need to iterate here, for the time being though we can just relatively reliably put this in slot 2 since slot 1 should be CC Immunity.
     -- NOTE: We may eventually add a function handler to do other things, like make certain abilities change their CC types etc like the example below.
     if Effects.AddNameAura[name] then
         if result == ACTION_RESULT_EFFECT_GAINED then
+            -- Get stack value if its saved.
+            local stack = Effects.AddNameAura[name][2] and Effects.AddNameAura[name][2].stack
             Effects.AddNameAura[name][2] = {}
             Effects.AddNameAura[name][2].id = abilityId
+            if Effects.AddStackOnEvent[abilityId] then
+                if stack then
+                    Effects.AddNameAura[name][2].stack = stack + 1
+                else
+                    Effects.AddNameAura[name][2].stack = Effects.AddStackOnEvent[abilityId]
+                end
+            end
             -- Specific to Crypt of Hearts I (Ignite Colossus)
             if abilityId == 46680 then
                 LUIE.Data.AlertTable[22527].cc = LUIE_CC_TYPE_UNBREAKABLE
@@ -1993,7 +1996,34 @@ function SpellCastBuffs.OnCombatAddNameEvent( eventCode, result, isError, abilit
         -- Reload Effects on current target
         SpellCastBuffs.AddNameAura()
     end
+end
 
+-- EVENT_BOSSES_CHANGED handler
+function SpellCastBuffs.AddNameOnBossEngaged(eventCode)
+
+    -- Clear any names we've added this way
+    for k, _ in pairs(Effects.AddNameOnBossEngaged) do
+        for name, _ in pairs(Effects.AddNameOnBossEngaged[k]) do
+            if Effects.AddNameAura[name] then
+                Effects.AddNameAura[name] = nil
+            end
+        end
+    end
+
+    -- Check for bosses and add name auras when engaged.
+    for i = 1, 4 do
+        local bossName = DoesUnitExist('boss' .. i) and zo_strformat("<<t:1>>", GetUnitName('boss' .. i)) or ""
+        if Effects.AddNameOnBossEngaged[bossName] then
+            for k, v in pairs(Effects.AddNameOnBossEngaged[bossName]) do
+                Effects.AddNameAura[k] = {}
+                Effects.AddNameAura[k][1] = {}
+                Effects.AddNameAura[k][1].id = v
+            end
+        end
+    end
+
+    -- Reload Effects on current target
+    SpellCastBuffs.AddNameAura()
 end
 
  -- Combat Event (Target = Player)
@@ -2845,6 +2875,7 @@ function SpellCastBuffs.AddNameAura()
         for k, v in ipairs(Effects.AddNameAura[unitName]) do
             local abilityName = GetAbilityName(v.id)
             local abilityIcon = GetAbilityIcon(v.id)
+            stack = v.stack or 0
             local zone = v.zone
             if zone and GetZoneId(GetCurrentMapZoneIndex()) ~= zone then
                 return
@@ -2854,7 +2885,8 @@ function SpellCastBuffs.AddNameAura()
                 id= v.id, name= abilityName, icon= abilityIcon,
                 dur=0, starts=1, ends=nil,
                 forced = "short",
-                restart=true, iconNum=0
+                restart=true, iconNum=0,
+                stack = stack
             }
         end
     end
@@ -3241,6 +3273,7 @@ function SpellCastBuffs.OnPlayerActivated(eventCode)
 
     -- Reload Effects
     SpellCastBuffs.ReloadEffects("player")
+    SpellCastBuffs.AddNameOnBossEngaged()
 
     -- Resolve Duel Target
     SpellCastBuffs.DuelStart()

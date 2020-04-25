@@ -869,6 +869,7 @@ LUIE.DebugAuras = {
     --[81301] = true, -- _CRWN_Badger_EatCritter
     [72955] = true, -- _CROWN Pet Goat,Black
     [81352] = true, -- _CRWN_12.5s (Spotted Snow Senche-Leopard)
+    [127179] = true, -- _Crwn Pet Doom Spawn (Mudcrab of Eternal Doom)
     [60665] = true, -- Vanity Pet Sphere Stun
 
     -------------------------------------
@@ -2559,6 +2560,7 @@ LUIE.DebugAuras = {
     [29177] = true, -- Flee
     [64420] = true, -- Remove Pet Stealth
     [26245] = true, -- Slam Stun
+    [72902] = true, -- Hidden
 
     -- MISC
     [15594] = true, -- Bonus vs off Balance
@@ -8191,6 +8193,7 @@ LUIE.DebugAuras = {
     [35849] = true, -- Shadow Cloak -- Fear Mage
     [35865] = true, -- Shadow Cloak -- Fear Mage
     [35850] = true, -- Shadow Cloak -- Fear Mage
+    [89020] = true, -- Shadow Cloak -- Fear Mage
 
     [44247] = true, -- Dark Shade -- Dreadweaver
     [89005] = true, -- Dark Shade -- Dreadweaver
@@ -13909,6 +13912,7 @@ LUIE.DebugAuras = {
     [56082] = true, -- Body of Flame
     [53999] = true, -- Summon
     [56081] = true, -- Body of Flame
+    [56084] = true, -- Body of Flame
     [54126] = true, -- Minor Wound (Akezel)
     [54025] = true, -- Spell Absorption (Akezel)
     [53994] = true, -- Focused Healing (Akezel)

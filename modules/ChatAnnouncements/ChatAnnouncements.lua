@@ -7234,27 +7234,6 @@ function ChatAnnouncements.HookFunction()
             instanceDisplayType = instanceDisplayType
         }
 
-        if ChatAnnouncements.SV.Quests.QuestAcceptCA then
-            local questNameFormatted
-            local stepText = GetJournalQuestStepInfo(journalIndex, 1)
-            local formattedString
-
-            if ChatAnnouncements.SV.Quests.QuestLong then
-                questNameFormatted = (zo_strformat("|c<<1>><<2>>:|r |c<<3>><<4>>|r", QuestColorQuestNameColorize:ToHex(), questName, QuestColorQuestDescriptionColorize, stepText))
-            else
-                questNameFormatted = (zo_strformat("|c<<1>><<2>>|r", QuestColorQuestNameColorize:ToHex(), questName))
-            end
-            if iconTexture and ChatAnnouncements.SV.Quests.QuestIcon then
-                formattedString = string.format(GetString(SI_LUIE_CA_QUEST_ACCEPT) .. zo_iconFormat(iconTexture, 16, 16) .. " " .. questNameFormatted)
-            else
-                formattedString = string.format("%s%s", GetString(SI_LUIE_CA_QUEST_ACCEPT), questNameFormatted)
-            end
-
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
-        end
-
         if ChatAnnouncements.SV.Quests.QuestAcceptCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.QUEST_ACCEPTED)
             if iconTexture then
@@ -7280,6 +7259,34 @@ function ChatAnnouncements.HookFunction()
         if not ChatAnnouncements.SV.Quests.QuestAcceptCSA then
             PlaySound(SOUNDS.QUEST_ACCEPTED)
         end
+
+        if ChatAnnouncements.SV.Quests.QuestAcceptCA then
+            local questNameFormatted
+            local stepText = GetJournalQuestStepInfo(journalIndex, 1)
+            local formattedString
+
+            if ChatAnnouncements.SV.Quests.QuestLong then
+                questNameFormatted = (zo_strformat("|c<<1>><<2>>:|r |c<<3>><<4>>|r", QuestColorQuestNameColorize:ToHex(), questName, QuestColorQuestDescriptionColorize, stepText))
+            else
+                questNameFormatted = (zo_strformat("|c<<1>><<2>>|r", QuestColorQuestNameColorize:ToHex(), questName))
+            end
+            if iconTexture and ChatAnnouncements.SV.Quests.QuestIcon then
+                formattedString = string.format(GetString(SI_LUIE_CA_QUEST_ACCEPT) .. zo_iconFormat(iconTexture, 16, 16) .. " " .. questNameFormatted)
+            else
+                formattedString = string.format("%s%s", GetString(SI_LUIE_CA_QUEST_ACCEPT), questNameFormatted)
+            end
+
+            -- If this message is duplicated by another addon then don't display twice.
+            for i = 1, #g_queuedMessages do
+                if g_queuedMessages[i].message == formattedString then
+                    return true
+                end
+            end
+            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
+        end
+
         return true
     end
 
@@ -10346,7 +10353,7 @@ function ChatAnnouncements.CollectibleResult()
         local icon = GetCollectibleIcon(LUIE.LastMementoUsed)
         local formattedIcon = ChatAnnouncements.SV.Collectibles.CollectibleUseIcon and ("|t16:16:" .. icon .. "|t ") or ""
         local string =
-            LUIE.LastMementoUsed == 5886 and GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_CAKE) or
+            LUIE.LastMementoUsed == 7619 and GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_CAKE) or
             LUIE.LastMementoUsed == 1167 and GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_PIE) or
             LUIE.LastMementoUsed == 1168 and GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_MEAD) or
             LUIE.LastMementoUsed == 479 and GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_WITCH)

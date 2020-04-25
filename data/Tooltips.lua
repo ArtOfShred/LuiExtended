@@ -123,6 +123,7 @@ LUIE.Data.Tooltips = {
     Generic_Enrage_No_Dur                           = GetString(SI_LUIE_SKILL_GENERIC_ENRAGE_NO_DUR),
     Generic_Enrage_Damage_Taken_No_Dur              = GetString(SI_LUIE_SKILL_GENERIC_ENRAGE_DAMAGE_TAKEN_NO_DUR),
     Generic_Enrage_Damage_Reduce_No_Dur             = GetString(SI_LUIE_SKILL_GENERIC_ENRAGE_DAMAGE_REDUCE_NO_DUR),
+    Generic_Enrage_Stack_Permanent                  = GetString(SI_LUIE_SKILL_GENERIC_ENRAGE_STACK_PERMANENT_TP),
 
     Generic_Increase_Damage_Taken                   = GetString(SI_LUIE_SKILL_GENERIC_INCREASE_DAMAGE_TAKEN_TP),
     Generic_Critical_Damage                         = GetString(SI_LUIE_SKILL_SET_GENERIC_CRITICAL_DAMAGE_TP),
@@ -1344,6 +1345,8 @@ LUIE.Data.Tooltips = {
     Skill_Curse_of_Suffering                        = GetString(SI_LUIE_SKILL_CURSE_OF_SUFFERING_TP),
     Skill_Curse_of_Dominance                        = GetString(SI_LUIE_SKILL_CURSE_OF_DOMINANCE_TP),
     Skill_Resilience                                = GetString(SI_LUIE_SKILL_RESILIENCE_TP),
+    Skill_Levitate_Suffering                        = GetString(SI_LUIE_SKILL_LEVITATE_SUFFERING_TP),
+    Skill_Levitating_Dominance                      = GetString(SI_LUIE_SKILL_LEVITATE_DOMINANCE_TP),
 
     -- Elden Hollow II
     Skill_Siphon_Magicka                            = GetString(SI_LUIE_SKILL_SIPHON_MAGICKA_TP),

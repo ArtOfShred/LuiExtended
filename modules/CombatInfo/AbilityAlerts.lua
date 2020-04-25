@@ -11,6 +11,7 @@ local UI = LUIE.UI
 local Effects = LUIE.Data.Effects
 local Alerts = LUIE.Data.AlertTable
 local AlertsZone = LUIE.Data.AlertZoneOverride
+local AlertsConvert = LUIE.Data.AlertBossNameConvert
 
 local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
@@ -374,6 +375,7 @@ function AbilityAlerts.AlertInterrupt(eventCode, resultType, isError, abilityNam
             if (alert.data.sourceUnitId == targetUnitId or alert.data.sourceUnitId == targetName) and (not alert.data.showDuration == false or alert.data.alwaysShowInterrupt) and remain > 0 and (not alert.data.neverShowInterrupt or deathResults[resultType]) and not alert.data.effectOnlyInterrupt then
                 alert.data = { }
                 alert.data.available = true
+                alert.data.id = ""
                 alert.data.textMitigation =  ""
                 alert.data.textName = "INTERRUPTED!"
                 alert.data.sourceUnitId = ""
@@ -452,12 +454,13 @@ function AbilityAlerts.PlayAlertSound(abilityId, alertType, crowdControl)
 end
 
 local drawLocation = 1
-function AbilityAlerts.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, currentTime, endTime, showDuration, crowdControl, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt)
+function AbilityAlerts.SetupSingleAlertFrame(abilityId, textName, textMitigation, abilityIcon, currentTime, endTime, showDuration, crowdControl, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt)
     local color = AbilityAlerts.CrowdControlColorSetup(crowdControl)
 
     for i = 1, 3 do
         local alert = _G["LUIE_Alert" .. i]
         if alert.data.available then
+            alert.data.id = abilityId
             alert.data.textMitigation =  textMitigation
             alert.data.textName =  textName
             alert.data.sourceUnitId = sourceUnitId
@@ -488,6 +491,7 @@ function AbilityAlerts.SetupSingleAlertFrame(textName, textMitigation, abilityIc
     end
     -- If no alert frame is available, then draw over in the first spot
     local alert = _G["LUIE_Alert" .. drawLocation]
+    alert.data.id = abilityId
     alert.data.textMitigation = textMitigation
     alert.data.textName = textName
     alert.data.sourceUnitId = sourceUnitId
@@ -662,6 +666,18 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
         end
     end
 
+    if AlertsConvert[abilityId] then
+        for i = 1, 4 do
+            local bossName = DoesUnitExist('boss' .. i) and zo_strformat("<<t:1>>", GetUnitName('boss' .. i)) or ""
+            if AlertsConvert[abilityId][bossName] then
+                unitName = AlertsConvert[abilityId][bossName]
+                if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
+                    d("Boss Enemy with adds detected, converting name of NPC source to: " .. unitName)
+                end
+            end
+        end
+    end
+
     if Alerts[abilityId].hideIfNoSource then
         if unitName == "" or unitName == nil then
             return
@@ -764,35 +780,37 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     end
 end
 
-local function CheckInterruptEvent(unitId)
+local function CheckInterruptEvent(unitId, abilityId)
     for i = 1, 3 do
         local alert = _G["LUIE_Alert" .. i]
         if alert.data.sourceUnitId then
+            if alert.data.id == abilityId then
+                local currentTime = GetGameTimeMilliseconds()
+                local remain = alert.data.duration - currentTime
 
-            local currentTime = GetGameTimeMilliseconds()
-            local remain = alert.data.duration - currentTime
+                -- DEBUG
+                --d("EFFECT INTERRUPTED")
+                --d("Current Duration: " .. remain)
 
-            -- DEBUG
-            --d("EFFECT INTERRUPTED")
-            --d("Current Duration: " .. remain)
+                if (alert.data.sourceUnitId == unitId and (not alert.data.showDuration == false or alert.data.alwaysShowInterrupt)) and remain > 0 and (not alert.data.neverShowInterrupt or deathResults[resultType]) then
+                    alert.data = { }
+                    alert.data.available = true
+                    alert.data.id = ""
+                    alert.data.textMitigation = ""
+                    alert.data.textName = "INTERRUPTED!"
+                    alert.data.sourceUnitId = ""
+                    alert.icon:SetHidden(true)
+                    alert.data.duration = currentTime + 1500
+                    alert.data.postCast = 0
+                    alert.data.showDuration = false
+                    alert.name:SetText(alert.data.textName)
+                    alert.name:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
+                    alert.mitigation:SetText("")
+                    alert.timer:SetText("")
+                    alert:SetHidden(false)
 
-            if (alert.data.sourceUnitId == unitId and (not alert.data.showDuration == false or alert.data.alwaysShowInterrupt)) and remain > 0 and (not alert.data.neverShowInterrupt or deathResults[resultType]) then
-                alert.data = { }
-                alert.data.available = true
-                alert.data.textMitigation =  ""
-                alert.data.textName = "INTERRUPTED!"
-                alert.data.sourceUnitId = ""
-                alert.icon:SetHidden(true)
-                alert.data.duration = currentTime + 1500
-                alert.data.postCast = 0
-                alert.data.showDuration = false
-                alert.name:SetText(alert.data.textName)
-                alert.name:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
-                alert.mitigation:SetText("")
-                alert.timer:SetText("")
-                alert:SetHidden(false)
-
-                AbilityAlerts.RealignAlerts(i)
+                    AbilityAlerts.RealignAlerts(i)
+                end
             end
         end
     end
@@ -809,7 +827,7 @@ function AbilityAlerts.AlertEffectChanged(eventCode, changeType, effectSlot, eff
 
     if Settings.toggles.alertEnable and (Settings.toggles.mitigationAura or IsUnitInDungeon("player")) and Alerts[abilityId] and Alerts[abilityId].auradetect then
         if changeType == EFFECT_RESULT_FADED then
-            zo_callLater(function() CheckInterruptEvent(unitId) end, 100)
+            zo_callLater(function() CheckInterruptEvent(unitId, abilityId) end, 100)
             return
         end
 
@@ -868,6 +886,12 @@ function AbilityAlerts.OnCombatIn(eventCode, resultType, isError, abilityName, a
     -- NEW ALERTS
     if Settings.toggles.alertEnable then
         if sourceName ~= nil and sourceName ~= "" then
+
+            -- Filter when only a certain event type should fire this
+            if Alerts[abilityId].result and resultType ~= Alerts[abilityId].result then return end
+            if Alerts[abilityId].eventdetect or Alerts[abilityId].auradetect then return end -- Don't create a duplicate warning if event/aura detection already handles this.
+            if Alerts[abilityId].noSelf and targetName == LUIE.PlayerNameRaw then return end -- Don't create alert for self in cases where this is true.
+
             -- Return if any results occur which we absolutely don't want to display alerts for & stop spam when enemy is out of line of sight, etc and trying to cast
             if resultType == ACTION_RESULT_EFFECT_FADED
                or resultType == ACTION_RESULT_ABILITY_ON_COOLDOWN
@@ -885,11 +909,6 @@ function AbilityAlerts.OnCombatIn(eventCode, resultType, isError, abilityName, a
                 zo_callLater(function() refireDelay[abilityId] = nil end, 1000) --buffer by X time
                 return
             end
-
-            -- Filter when only a certain event type should fire this
-            if Alerts[abilityId].result and resultType ~= Alerts[abilityId].result then return end
-            if Alerts[abilityId].eventdetect or Alerts[abilityId].auradetect then return end -- Don't create a duplicate warning if event/aura detection already handles this.
-            if Alerts[abilityId].noSelf and targetName == LUIE.PlayerNameRaw then return end -- Don't create alert for self in cases where this is true.
 
             if Alerts[abilityId].block or Alerts[abilityId].dodge or Alerts[abilityId].avoid or Alerts[abilityId].interrupt or Alerts[abilityId].unmit or Alerts[abilityId].power or Alerts[abilityId].destroy or Alerts[abilityId].summon then
                 -- Filter by priority
@@ -916,6 +935,12 @@ function AbilityAlerts.OnCombatAlert(eventCode, resultType, isError, abilityName
     -- NEW ALERTS
     if Settings.toggles.alertEnable and (Settings.toggles.mitigationAura or IsUnitInDungeon("player")) then
         if not refireDelay[abilityId] then
+
+            -- Filter when only a certain event type should fire this
+            if Alerts[abilityId].result and resultType ~= Alerts[abilityId].result then return end
+            if Alerts[abilityId].auradetect then return end -- Don't create a duplicate warning if aura detection already handles this.
+            if Alerts[abilityId].noSelf and targetName == LUIE.PlayerNameRaw then return end -- Don't create alert for self in cases where this is true.
+
             -- Return if any results occur which we absolutely don't want to display alerts for & stop spam when enemy is out of line of sight, etc and trying to cast
             if resultType == ACTION_RESULT_EFFECT_FADED
                or resultType == ACTION_RESULT_ABILITY_ON_COOLDOWN
@@ -933,11 +958,6 @@ function AbilityAlerts.OnCombatAlert(eventCode, resultType, isError, abilityName
                 zo_callLater(function() refireDelay[abilityId] = nil end, 1000) --buffer by X time
                 return
             end
-
-            -- Filter when only a certain event type should fire this
-            if Alerts[abilityId].result and resultType ~= Alerts[abilityId].result then return end
-            if Alerts[abilityId].auradetect then return end -- Don't create a duplicate warning if aura detection already handles this.
-            if Alerts[abilityId].noSelf and targetName == LUIE.PlayerNameRaw then return end -- Don't create alert for self in cases where this is true.
 
             if Alerts[abilityId].block or Alerts[abilityId].dodge or Alerts[abilityId].avoid or Alerts[abilityId].interrupt or Alerts[abilityId].unmit or Alerts[abilityId].power or Alerts[abilityId].destroy or Alerts[abilityId].summon then
                 -- Filter by priority
@@ -1067,7 +1087,7 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
     local currentTime = GetGameTimeMilliseconds()
     local endTime = currentTime + duration
 
-    AbilityAlerts.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, currentTime, endTime, showDuration, crowdControl, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt)
+    AbilityAlerts.SetupSingleAlertFrame(abilityId, textName, textMitigation, abilityIcon, currentTime, endTime, showDuration, crowdControl, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt)
     AbilityAlerts.PlayAlertSound(abilityId, alertType, crowdControl)
 end
 
