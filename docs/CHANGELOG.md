@@ -1,3 +1,20 @@
+### Version 6.0.5
+
+General
+- Updated icons, tooltips, alerts, and cc tracker for several dungeons (EH I & EH II, COA I & COA II, and Tempest Island) as well as a multitude of monster attacks.
+
+Buffs & Debuffs
+- Fixed an issue where the default tooltips for abilities weren't displaying in the Active Effects Window on both the keyboard and gamepad UI.
+
+Chat Announcements
+- Added a workaround for duplicate Quest Accepted messages displayed in chat if enabled when using Dolgubon's Lazy Writ Crafter.
+
+Slash Commands
+- Updated the /cake command to summon the 2020 anniversary cake and updated the icon. Too little too late at this point.
+- Slash Commands are no longer set to nil when disabled in the options menu, this means you will need to reload the UI when disabling slash commands you don't want to use. This is to stop LUIE from removing commands if another addon also adds the same slash command with similar functionality.
+
+---
+
 ### Version 6.0.4
 
 General
