@@ -910,7 +910,6 @@ local AbilityTables = {
     Skill_Razor_Armor                 = 36304,
 
     Skill_Pariahs_Resolve             = 116095,
-    Skill_Ruinous_Cyclone             = 116096,
     Skill_Consume_Lifeforce           = GetString(SI_LUIE_SKILL_CONSUME_LIFEFORCE),
 
     -- ---------------------------------------------------

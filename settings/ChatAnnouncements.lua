@@ -1042,6 +1042,17 @@ function ChatAnnouncements.CreateSettings()
                 default = Defaults.Inventory.LootConfiscate,
             },
             {
+                -- Show Container Items Removed
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWCONTAINER)),
+                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWCONTAINER_TP),
+                getFunc = function() return Settings.Inventory.LootShowContainer end,
+                setFunc = function(value) Settings.Inventory.LootShowContainer = value ChatAnnouncements.RegisterLootEvents() end,
+                width = "full",
+                disabled = function() return not (Settings.Inventory.Loot and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = Defaults.Inventory.LootShowContainer,
+            },
+            {
                 -- Show Destroyed Items
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWDESTROYED)),
@@ -1865,6 +1876,17 @@ function ChatAnnouncements.CreateSettings()
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = Defaults.ContextMessages.CurrencyMessageDestroy,
+            },
+            {
+                -- Loot Message (Container)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CONTAINER),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CONTAINER_TP),
+                getFunc = function() return Settings.ContextMessages.CurrencyMessageContainer end,
+                setFunc = function(value) Settings.ContextMessages.CurrencyMessageContainer = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.ContextMessages.CurrencyMessageContainer,
             },
             {
                 -- Loot Message (Lockpick)

@@ -592,6 +592,7 @@ local strings = {
 
     -- Destruction Staff
     SI_LUIE_HEAVY_ATTACK_LIGHTNING_STAFF_TP =            "Afflicted with Shock Damage over time for |cFFFFFF<<1>>|r seconds.\n\nDeals additional Shock Damage if the channel is finished.",
+    SI_LUIE_HEAVY_ATTACK_RESTORATION_STAFF_TP =          "Afflicted with Magic Damage over time for |cFFFFFF<<1>>|r seconds.\n\nDeals additional Magic Damage if the channel is finished.",
     SI_LUIE_SKILL_WOE_FIRE_TP =                          "Enemies standing in the elemental barrier take Flame Damage every |cFFFFFF1|r second.\n\nBurning enemies take |cFFFFFF20|r% more damage from this ability.",
     SI_LUIE_SKILL_WOE_FROST_TP =                         "Enemies standing in the elemental barrier take Frost Damage and have their Movement Speed reduced by |cFFFFFF40|r% every |cFFFFFF1|r second.\n\nChilled enemies become frozen and are immobilized for |cFFFFFF4|r seconds.",
     SI_LUIE_SKILL_WOE_SHOCK_TP =                         "Enemies standing in the elemental barrier take Shock Damage every |cFFFFFF1|r second.\n\nConcussed enemies are set Off Balance for |cFFFFFF7|r seconds.",
@@ -811,7 +812,7 @@ local strings = {
     SI_LUIE_SKILL_RUNE_FOCUS_CYRODIIL_TP =               "Absorbing damage every |cFFFFFF0.5|r seconds while standing in the rune focus.",
 
     SI_LUIE_SKILL_CONSUME_LIFEFORCE =                    "Consume Lifeforce",
-    SI_LUIE_SKILL_RUINOUS_CYCLONE =                      "After |cFFFFFF2|r seconds, enemies within |cFFFFFF8|r meters take Physical Damage every |cFFFFFF0.5|r seconds for |cFFFFFF7|r seconds as long as the channel is maintained.\n\nEnemies within |cFFFFFF15|r meters are pulled closer to you while channeling.",
+    SI_LUIE_SKILL_RUINOUS_CYCLONE =                      "Enemies within |cFFFFFF8|r meters take Physical Damage every |cFFFFFF0.5|r seconds for |cFFFFFF7|r seconds as long as the channel is maintained.\n\nEnemies within |cFFFFFF15|r meters are pulled closer to you while channeling.",
 
     ----------------------------------------------------------------
     -- BATTLEGROUNDS -----------------------------------------------

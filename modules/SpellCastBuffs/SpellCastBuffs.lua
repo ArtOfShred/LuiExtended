@@ -484,6 +484,13 @@ function SpellCastBuffs.RegisterDebugEvents()
     if SpellCastBuffs.SV.ShowDebugEffect then
         eventManager:RegisterForEvent(moduleName .. "DebugEffect", EVENT_EFFECT_CHANGED, SpellCastBuffs.EventEffectDebug)
     end
+
+    -- Debugs only enabled for my accounts
+    if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
+        eventManager:RegisterForEvent(moduleName .. "AuthorDebugCombat", EVENT_COMBAT_EVENT, SpellCastBuffs.AuthorCombatDebug)
+        eventManager:RegisterForEvent(moduleName .. "AuthorDebugEffect", EVENT_EFFECT_CHANGED, SpellCastBuffs.AuthorEffectDebug)
+    end
+
 end
 
 -- List Handling (Add) for Prominent Auras & Blacklist
@@ -1235,6 +1242,16 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
                         tooltipText = GetAbilityEffectDescription(control.buffSlot)
                     end
                 end
+
+                -- TODO: Implement this functionality but it needs to have a filter for ONLY specific ids.
+                --[[
+                -- Display Default Description if no internal effect description is present
+                if tooltipText == "" or tooltipText == nil then
+                    if GetAbilityDescription(control.effectId) ~= "" then
+                        tooltipText = GetAbilityDescription(control.effectId)
+                    end
+                end
+                ]]--
 
             else
                 duration = 0

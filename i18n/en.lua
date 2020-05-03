@@ -347,6 +347,7 @@ local strings = {
     SI_LUIE_CA_CURRENCY_MESSAGE_DECONSTRUCT =            "You deconstruct %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_RESEARCH =               "You research %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_DESTROY =                "You destroy %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_CONTAINER =              "You empty %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_LOCKPICK =               "Your %s breaks.",
     SI_LUIE_CA_CURRENCY_MESSAGE_REMOVE =                 "Removed %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_TURNIN =                 "You turn in %s.",

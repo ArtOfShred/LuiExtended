@@ -850,6 +850,7 @@ LUIE.Data.Tooltips = {
 
     -- Destruction Staff
     Skill_Heavy_Attack_Lightning                    = GetString(SI_LUIE_HEAVY_ATTACK_LIGHTNING_STAFF_TP),
+    Skill_Heavy_Attack_Restoration                  = GetString(SI_LUIE_HEAVY_ATTACK_RESTORATION_STAFF_TP),
     Skill_Wall_of_Elements_Fire                     = GetString(SI_LUIE_SKILL_WOE_FIRE_TP),
     Skill_Wall_of_Elements_Frost                    = GetString(SI_LUIE_SKILL_WOE_FROST_TP),
     Skill_Wall_of_Elements_Shock                    = GetString(SI_LUIE_SKILL_WOE_SHOCK_TP),

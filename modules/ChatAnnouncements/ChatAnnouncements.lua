@@ -452,6 +452,7 @@ ChatAnnouncements.Defaults = {
         LootShowCraftUse                = false,
         LootShowDestroy                 = true,
         LootShowRemove                  = true,
+        LootShowContainer               = true,
         LootShowDisguise                = true,
         LootShowLockpick                = true,
         LootQuestAdd                    = true,
@@ -465,6 +466,7 @@ ChatAnnouncements.Defaults = {
         CurrencyMessageDepositGuild     = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSITGUILD),
         CurrencyMessageEarn             = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_EARN),
         CurrencyMessageLoot             = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LOOT),
+        CurrencyMessageContainer        = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_CONTAINER),
         CurrencyMessageSteal            = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_STEAL),
         CurrencyMessageLost             = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LOST),
         CurrencyMessagePickpocket       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_PICKPOCKET),
@@ -557,6 +559,7 @@ local g_savedLaunder                = { }
 local g_isLooted                    = false         -- Toggled on to modify loot notification to "looted."
 local g_isPickpocketed              = false         -- Toggled on to modify loot notification to "pickpocketed."
 local g_isStolen                    = false         -- Toggled on to modify loot notification to "stolen."
+local g_containerRecentlyOpened     = false         -- Toggled on when a container has been recently opened.
 local g_itemReceivedIsQuestReward   = false         -- Toggled on to modify loot notification to "received." This overrides the "looted" tag applied to quest item rewards.
 local g_itemReceivedIsQuestAbandon  = false         -- Toggled on to modify remove notification to "removed" when a quest is abandoned.
 local g_itemsConfiscated            = false         -- Toggled on when items are confiscated to modify the notification message.
@@ -1074,6 +1077,7 @@ function ChatAnnouncements.RegisterGoldEvents()
     eventManager:UnregisterForEvent(moduleName, EVENT_MAIL_REMOVED)
 
     eventManager:RegisterForEvent(moduleName, EVENT_CURRENCY_UPDATE, ChatAnnouncements.OnCurrencyUpdate)
+    eventManager:RegisterForEvent(moduleName, EVENT_LOOT_UPDATED, ChatAnnouncements.OnLootUpdated)
     eventManager:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED, ChatAnnouncements.OnMailAttach)
     eventManager:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED, ChatAnnouncements.OnMailAttachRemove)
     eventManager:RegisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX, ChatAnnouncements.OnMailCloseBox)
@@ -2025,6 +2029,16 @@ function ChatAnnouncements.PointRespecDisplay(respecType)
     end
 end
 
+function ChatAnnouncements.OnLootUpdated(eventCode)
+    g_containerRecentlyOpened = true
+    local function ResetContainerRecentlyOpened()
+        g_containerRecentlyOpened = false
+        eventManager:UnregisterForUpdate(moduleName .. "ResetContainer")
+    end
+    eventManager:UnregisterForUpdate(moduleName .. "ResetContainer")
+    eventManager:RegisterForUpdate(moduleName .. "ResetContainer", 150, ResetContainerRecentlyOpened )
+end
+
 function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, oldValue, reason)
     if (currencyLocation ~= CURRENCY_LOCATION_CHARACTER and currencyLocation ~= CURRENCY_LOCATION_ACCOUNT) then
         return
@@ -2112,7 +2126,8 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
     elseif currency == CURT_TELVAR_STONES then -- TelVar Stones
         if not ChatAnnouncements.SV.Currency.CurrencyTVChange then return end
         -- Send change info to the throttle printer and end function now if we throttle Tel Var Gained
-        if ChatAnnouncements.SV.Currency.CurrencyTVThrottle > 0 and (reason == 0 or reason == 65) then
+        -- If a container was recently opened then don't throttle the currency change.
+        if ChatAnnouncements.SV.Currency.CurrencyTVThrottle > 0 and (reason == 0 or reason == 65) and not g_containerRecentlyOpened then
             eventManager:UnregisterForUpdate(moduleName .. "BufferedTV")
             eventManager:RegisterForUpdate(moduleName .. "BufferedTV", ChatAnnouncements.SV.Currency.CurrencyTVThrottle, ChatAnnouncements.CurrencyTVThrottlePrinter )
             g_currencyTVThrottleValue = g_currencyTVThrottleValue + UpOrDown
@@ -2137,7 +2152,6 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyTVName, UpOrDown)
         currencyTotal = ChatAnnouncements.SV.Currency.CurrencyTVShowTotal
         messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalTV
-
     elseif currency == CURT_WRIT_VOUCHERS then -- Writ Vouchers
         if not ChatAnnouncements.SV.Currency.CurrencyWVChange then return end
         currencyTypeColor = CurrencyWVColorize:ToHex()
@@ -2429,7 +2443,7 @@ elseif reason == 14 or reason == 40 or reason == 41 or reason == 75 then
     elseif reason == 66 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     -- END DEBUG EVENTS
     -- ==============================================================================
-    -- If none of these returned true, then we must have just looted the gold (Potentially a few currency change events I missed too may have to adjust later)
+    -- If none of these returned true, then we must have just looted the currency (Potentially a few currency change events I missed too may have to adjust later)
     else messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageLoot end
 
     -- Send relevant values over to the currency printer
@@ -3467,6 +3481,7 @@ function ChatAnnouncements.ResolveQuestItemChange()
 
                         finalMessage = string.format("|c%s%s|r%s", color, formattedMessageP2, totalString)
 
+                        eventManager:UnregisterForUpdate(moduleName .. "Printer")
                         g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "QUEST LOOT REMOVE", itemId = itemId }
                         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                         eventManager:RegisterForUpdate(moduleName .. "Printer", 25, ChatAnnouncements.PrintQueuedMessages )
@@ -3556,6 +3571,7 @@ function ChatAnnouncements.ResolveQuestItemChange()
 
                         finalMessage = string.format("|c%s%s|r%s", color, formattedMessageP2, totalString)
 
+                        eventManager:UnregisterForUpdate(moduleName .. "Printer")
                         g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "QUEST LOOT ADD", itemId = itemId }
                         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                         eventManager:RegisterForUpdate(moduleName .. "Printer", 25, ChatAnnouncements.PrintQueuedMessages )
@@ -3688,7 +3704,7 @@ function ChatAnnouncements.ItemFilter(itemType, itemId, itemLink, groupLoot)
     end
 end
 
-function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter, groupLoot, delayValue)
+function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter, groupLoot, alwaysFirst, delay)
     if filter then
         -- If filter returns false then bail out right now, we're not displaying this item.
         if not ChatAnnouncements.ItemFilter(itemType, itemId, itemLink, false) then return end
@@ -3754,9 +3770,7 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
 
     local itemString = string.format("%s%s%s%s%s%s", formattedIcon, itemLink, formattedQuantity, formattedArmorType, formattedTrait, formattedStyle)
 
-    -- Set delay to 25 or 50 ms depending on source
-    local callDelay
-    callDelay = delayValue == 25 and 25 or 50
+    local delayTimer = 50
 
     -- Printer function, seperate handling for listed entires (from crafting) or simple function that sends a message over to the printer.
     if receivedBy == "LUIE_RECEIVE_CRAFT" and (gainOrLoss == 1 or gainOrLoss == 3) and logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgradeFail then
@@ -3773,7 +3787,7 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
         if g_queuedMessagesCounter -1 == g_itemCounterGain then g_queuedMessagesCounter = g_itemCounterGain end
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
         g_queuedMessages[g_itemCounterGain] = { message=g_itemStringGain, type = "LOOT", formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString= "", groupLoot=groupLoot }
-        eventManager:RegisterForUpdate(moduleName .. "Printer", delayValue, ChatAnnouncements.PrintQueuedMessages )
+        eventManager:RegisterForUpdate(moduleName .. "Printer", delayTimer, ChatAnnouncements.PrintQueuedMessages )
     elseif receivedBy == "LUIE_RECEIVE_CRAFT" and (gainOrLoss == 2 or gainOrLoss == 4) and logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgradeFail then
         local itemString2 = itemString
         if g_itemStringLoss ~= "" then
@@ -3786,12 +3800,17 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
         if g_queuedMessagesCounter -1 == g_itemCounterLoss then g_queuedMessagesCounter = g_itemCounterLoss end
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
         g_queuedMessages[g_itemCounterLoss] = { message=g_itemStringLoss, type = "LOOT", formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString= "", groupLoot=groupLoot }
-        eventManager:RegisterForUpdate(moduleName .. "Printer", delayValue, ChatAnnouncements.PrintQueuedMessages )
+        eventManager:RegisterForUpdate(moduleName .. "Printer", delayTimer, ChatAnnouncements.PrintQueuedMessages )
     else
         local totalString = formattedTotal
-        g_queuedMessages[g_queuedMessagesCounter] = { message=itemString, type = "LOOT", formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString=totalString, groupLoot=groupLoot }
+        local messageType = alwaysFirst and "CONTAINER" or "LOOT"
+        g_queuedMessages[g_queuedMessagesCounter] = { message=itemString, type = messageType, formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString=totalString, groupLoot=groupLoot }
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-        eventManager:RegisterForUpdate(moduleName .. "Printer", delayValue, ChatAnnouncements.PrintQueuedMessages )
+        if delay then
+            delayTimer = 25
+            eventManager:UnregisterForUpdate(moduleName .. "Printer")
+        end
+        eventManager:RegisterForUpdate(moduleName .. "Printer", delayTimer, ChatAnnouncements.PrintQueuedMessages )
     end
 end
 
@@ -3919,7 +3938,7 @@ end
 function ChatAnnouncements.SendDelayedItems()
     for id, data in pairs(delayedItemPool) do
         if id then
-            ChatAnnouncements.ItemPrinter(data.icon, data.stack, data.itemType, id, data.itemLink, "", "", ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3, true, nil, 25)
+            ChatAnnouncements.ItemPrinter(data.icon, data.stack, data.itemType, id, data.itemLink, "", "", ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3, true, nil, false, true)
         end
     end
     delayedItemPool = { }
@@ -4105,6 +4124,11 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageLockpick
                     gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                     ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
+                if ChatAnnouncements.SV.Inventory.LootShowContainer and (itemType == ITEMTYPE_CONTAINER or itemType == ITEMTYPE_CONTAINER_CURRENCY) then
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageContainer
+                    gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                    ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, true)
                 end
             end
 
@@ -8128,6 +8152,7 @@ function ChatAnnouncements.HookFunction()
 
         if ChatAnnouncements.SV.XP.ExperienceLevelUpCA then
             local formattedString = ExperienceLevelUpColorize:Colorize(zo_strformat(SI_CHAMPION_POINT_EARNED, savedPointDelta) .. ": ")
+            eventManager:UnregisterForUpdate(moduleName .. "Printer")
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 25, ChatAnnouncements.PrintQueuedMessages )
@@ -8147,6 +8172,7 @@ function ChatAnnouncements.HookFunction()
                         formattedString = ExperienceLevelUpColorize:Colorize(zo_strformat(SI_LUIE_CHAMPION_POINT_TYPE, amount, formattedIcon, constellationGroupName))
                     end
                     if ChatAnnouncements.SV.XP.ExperienceLevelUpCA then
+                        eventManager:UnregisterForUpdate(moduleName .. "Printer")
                         g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
                         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                         eventManager:RegisterForUpdate(moduleName .. "Printer", 25, ChatAnnouncements.PrintQueuedMessages )
@@ -10281,6 +10307,13 @@ function ChatAnnouncements.PrintQueuedMessages()
             if not g_questItemAdded[itemId] == true then
                 printToChat(g_queuedMessages[i].message)
             end
+        end
+    end
+
+    -- Loot (Container)
+    for i=1, #g_queuedMessages do
+        if g_queuedMessages[i].type == "CONTAINER" then
+            ChatAnnouncements.ResolveItemMessage(g_queuedMessages[i].message, g_queuedMessages[i].formattedRecipient, g_queuedMessages[i].color, g_queuedMessages[i].logPrefix, g_queuedMessages[i].totalString, g_queuedMessages[i].groupLoot )
         end
     end
 

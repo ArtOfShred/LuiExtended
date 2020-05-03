@@ -5852,7 +5852,8 @@ LUIE.DebugAuras = {
     -------------------------------------
 
     [16145] = true, -- Light Attack
-    [16212] = true, -- Heavy Attack
+    [16212] = true, -- Restoration Staff Channel
+    [67022] = true, -- Restoration Staff Heavy Attack
     [32760] = true, -- Heavy Attack (Restoration)
     [67106] = true, -- Partial Heavy Attack (Resto)
 
@@ -15398,8 +15399,9 @@ LUIE.DebugAuras = {
     [116366] = true, -- Pariah's Resolve (Pariah's Resolve)
 
     [116096] = true, -- Ruinous Cyclone (Ruinous Cyclone)
-    [116669] = true, -- Ebony Cyclone (Ruinous Cyclone)
-    [116680] = true, -- Ebony Cyclone (Ruinous Cyclone)
+    [116669] = true, -- Ruinous Cyclone (Ruinous Cyclone)
+    [116680] = true, -- Ruinous Cyclone (Ruinous Cyclone)
+    [116678] = true, -- Ruinous Cyclone (Ruinous Cyclone)
 
     -- Siege Warfare
     [35106] = true, -- Fire (Firepot Trebuchet)
