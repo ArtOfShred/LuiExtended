@@ -910,7 +910,7 @@ local strings = {
     SI_LUIE_SKILL_SET_MECHANICAL_ACUITY =                "Повышает шанс критического удара Заклинанием и Оружием до |cFFFFFF100|r% в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_SET_ADEPT_RIDER =                      "Enemies in the dust cloud take Physical Damage every |cFFFFFF1|r second, while you and group members gain Major Evasion.",
     SI_LUIE_SKILL_SET_SENCHE_RAHTS_GRIT =                "Increase healing received by |cFFFFFF6|r% and Physical and Spell Resistance by |cFFFFFF2585|r for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_SET_VASTARIES_TUTELAGE =               "Increase Weapon and Spell Damage by |cFFFFFF258|r and reduce the Magicka, Stamina, and Health cost of abilities by |cFFFFFF10|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SET_VASTARIES_TUTELAGE =               "Increase Weapon and Spell Damage by |cFFFFFF258|r and reduce the cost of non-Ultimate abilities by |cFFFFFF10|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_SLOADS_TP =                        "Taking |cFFFFFF3|r% of your Max Health as Oblivion Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nThis effect can deal a maximum of |cFFFFFF3000|r Oblivion Damage per tick.",
     SI_LUIE_SKILL_SET_GRAVE_STAKE_COLLECTOR_TP =         "When you touch the grave-stake, restore |cFFFFFF6500|r Stamina and Magicka.\n\nOnly one grave-stake can appear at a time.",
     SI_LUIE_SKILL_SET_MIGHT_OF_THE_LOST_LEGION_TP =      "Gain the effects of |cFFFFFFEmpower|r for |cFFFFFF<<1>>|r seconds.",
@@ -982,7 +982,7 @@ local strings = {
     SI_LUIE_SKILL_SET_VESTMENT_OF_OLORIME_TP =           "You and allies standing in the circle of might gain Major Courage for |cFFFFFF30|r seconds.",
     SI_LUIE_SKILL_SET_MANTLE_OF_SIRORIA_TP =             "Standing in the ring grants you a stack of Siroria's Boon every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_SET_SIRORIAS_BOON_TP =                 "Increase Spell Damage by |cFFFFFF30|r for |cFFFFFF5|r seconds, stacking up to |cFFFFFF20|r times when standing in the ring of fire.",
-    SI_LUIE_SKILL_SET_EYE_OF_NAHVIINTAAS =               "Reduce the Magicka, Stamina, and Health cost of abilities by |cFFFFFF12|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SET_EYE_OF_NAHVIINTAAS =               "Reduce the cost of non-Ultimate abilities by |cFFFFFF12|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_HARMFUL_WINDS =                    "Harmful Winds",
     SI_LUIE_SKILL_SET_RELEQUEN_TP =                      "Afflicted with Physical Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF20|r times when your attacker damages you with a Light or Heavy Attack.",
 

@@ -4374,8 +4374,8 @@ Effects.EffectOverride = {
     [121829] = { icon = 'esoui/art/icons/achievement_els_sunspire_veteran.dds' }, -- False God's Devotion (False God's Devotion)
     [124801] = { tooltip = Abilities.Set_False_Gods_Devotion }, -- Major Expedition (Perfected False God's Devotion)
     [124800] = { icon = 'esoui/art/icons/achievement_els_sunspire_veteran.dds', name = Abilities.Set_False_Gods_Devotion }, -- False God's Devotion (Perfected False God's Devotion)
-    [121898] = { icon = 'esoui/art/icons/achievement_els_sunspire_flavor_3.dds', tooltip = Tooltips.Set_Eye_of_Nahviintaas }, -- Eye of Nahviintaas (Nahviintaas')
-    [122812] = { icon = 'esoui/art/icons/achievement_els_sunspire_flavor_3.dds', tooltip = Tooltips.Set_Eye_of_Nahviintaas }, -- Eye of Nahviintaas (Nahviintaas')
+    [121898] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eye_of_nahviintaas.dds', tooltip = Tooltips.Set_Eye_of_Nahviintaas }, -- Eye of Nahviintaas (Nahviintaas')
+    [122812] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eye_of_nahviintaas.dds', tooltip = Tooltips.Set_Eye_of_Nahviintaas }, -- Eye of Nahviintaas (Nahviintaas')
     [121871] = { icon = 'esoui/art/icons/achievement_vvardenfel_061.dds', tooltip = Tooltips.Skill_Major_Slayer }, -- Major Slayer (Lokkestiiz's)
     [121878] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_courage.dds', tooltip = Abilities.Set_Claw_of_Yolnakhriin }, -- Minor Courage (Yolnakriin's)
 

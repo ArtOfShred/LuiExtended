@@ -891,6 +891,7 @@ LUIE.DebugAuras = {
     [46733] = true, -- Reduce Stamina Cost (Glyph of Reduce Feat Cost)
     [26750] = true, -- Reduce Magicka Cost (Glyph of Reduce Spell Cost)
     [46739] = true, -- Reduce Block and Bash Cost (Glyph of Shielding)
+    [140300] = true, -- Prismatic Reduced Cost (Glyph of Reduced Skill Cost)
 
     -- Weapon Enchants
     [28919] = true, -- Life Drain (Glyph of Absorb Health)
