@@ -3318,6 +3318,17 @@ function ChatAnnouncements.CreateSettings()
                 default = Defaults.Achievement.AchievementCompleteCSA,
             },
             {
+                -- Enable Achievement Complete Always Show CSA
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE_CSA_ALWAYS)),
+                tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE_CSA_ALWAYS_TP),
+                getFunc = function() return Settings.Achievement.AchievementCompleteAlwaysCSA end,
+                setFunc = function(value) Settings.Achievement.AchievementCompleteAlwaysCSA = value ChatAnnouncements.RegisterAchievementsEvent() end,
+                width = "full",
+                disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and Settings.Achievement.AchievementCompleteCSA) end,
+                default = Defaults.Achievement.AchievementCompleteAlwaysCSA,
+            },
+            {
                 -- Enable Achievement Complete Alert
                 type = "checkbox",
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
@@ -3331,7 +3342,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show 100% Completion on complete event
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETEPERCENT)),
+                name = GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETEPERCENT),
                 tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETEPERCENT_TP),
                 getFunc = function() return Settings.Achievement.AchievementCompPercentage end,
                 setFunc = function(value) Settings.Achievement.AchievementCompPercentage = value end,
@@ -3466,305 +3477,25 @@ function ChatAnnouncements.CreateSettings()
                 name = GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_HEADER),
                 width = "full",
             },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(1)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(1)),
-                getFunc = function() return Settings.Achievement.AchievementCategory1 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory1 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory1,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(2)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(2)),
-                getFunc = function() return Settings.Achievement.AchievementCategory2 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory2 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory2,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(3)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(3)),
-                getFunc = function() return Settings.Achievement.AchievementCategory3 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory3 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory3,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(4)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(4)),
-                getFunc = function() return Settings.Achievement.AchievementCategory4 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory4 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory4,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(5)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(5)),
-                getFunc = function() return Settings.Achievement.AchievementCategory5 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory5 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory5,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(6)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(6)),
-                getFunc = function() return Settings.Achievement.AchievementCategory6 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory6 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory6,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(7)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(7)),
-                getFunc = function() return Settings.Achievement.AchievementCategory7 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory7 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory7,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(8)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(8)),
-                getFunc = function() return Settings.Achievement.AchievementCategory8 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory8 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory8,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(9)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(9)),
-                getFunc = function() return Settings.Achievement.AchievementCategory9 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory9 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory9,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(10)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(10)),
-                getFunc = function() return Settings.Achievement.AchievementCategory10 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory10 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory10,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(11)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(11)),
-                getFunc = function() return Settings.Achievement.AchievementCategory11 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory11 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory11,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(12)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(12)),
-                getFunc = function() return Settings.Achievement.AchievementCategory12 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory12 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory12,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(13)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(13)),
-                getFunc = function() return Settings.Achievement.AchievementCategory13 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory13 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory13,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(14)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(14)),
-                getFunc = function() return Settings.Achievement.AchievementCategory14 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory14 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory14,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(15)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(15)),
-                getFunc = function() return Settings.Achievement.AchievementCategory15 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory15 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory15,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(16)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(16)),
-                getFunc = function() return Settings.Achievement.AchievementCategory16 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory16 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory16,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(17)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(17)),
-                getFunc = function() return Settings.Achievement.AchievementCategory17 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory17 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory17,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(18)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(18)),
-                getFunc = function() return Settings.Achievement.AchievementCategory18 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory18 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory18,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(19)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(19)),
-                getFunc = function() return Settings.Achievement.AchievementCategory19 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory19 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory19,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(20)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(20)),
-                getFunc = function() return Settings.Achievement.AchievementCategory20 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory20 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory20,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(21)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(21)),
-                getFunc = function() return Settings.Achievement.AchievementCategory21 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory21 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory21,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(22)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(22)),
-                getFunc = function() return Settings.Achievement.AchievementCategory22 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory22 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory22,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(23)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(23)),
-                getFunc = function() return Settings.Achievement.AchievementCategory23 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory23 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory23,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(24)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(24)),
-                getFunc = function() return Settings.Achievement.AchievementCategory24 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory24 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory24,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(25)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(25)),
-                getFunc = function() return Settings.Achievement.AchievementCategory25 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory25 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory25,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(26)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(26)),
-                getFunc = function() return Settings.Achievement.AchievementCategory26 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory26 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory26,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
-            {
-                -- Enables achievements tracking in %s category
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(27)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(27)),
-                getFunc = function() return Settings.Achievement.AchievementCategory27 end,
-                setFunc = function(value) Settings.Achievement.AchievementCategory27 = value end,
-                width = "full",
-                default = Defaults.Achievement.AchievementCategory27,
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            },
         },
     }
+
+    for i = 1, GetNumAchievementCategories() do
+        local name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(i))
+        local tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(i))
+        local checkbox = {
+                    type = "checkbox",
+                    name = name,
+                    tooltip = tooltip,
+                    getFunc = function() return not Settings.Achievement.AchievementCategoryIgnore[i] end,
+                    setFunc = function(value) if value then Settings.Achievement.AchievementCategoryIgnore[i] = nil else Settings.Achievement.AchievementCategoryIgnore[i] = true end end,
+                    width = "full",
+                    default = not Defaults.Achievement.AchievementCategoryIgnore[i],
+                    disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                }
+        -- Add a hardcoded panel for achievement tracking options
+        table.insert(optionsDataChatAnnouncements[#optionsDataChatAnnouncements].controls, checkbox)
+    end
 
     -- Chat Announcements - Quest Announcements Options Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {

@@ -4555,7 +4555,7 @@ Effects.EffectOverride = {
     [15594] = { hide = true }, -- Bonus vs off Balance
     [10950] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fall_snare.dds', name = Abilities.Innate_Fall_Damage }, -- Fall Snare
     [6811] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recall.dds', tooltip = Tooltips.Innate_Recall_Penalty }, -- Recall
-    [69293] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recall.dds', name = Abilities.Innate_Recall }, -- Recall
+    [69293] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recall.dds', name = Abilities.Innate_Recall }, -- Sigil of Imperial Retreat
     [14644] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds', name = Abilities.Innate_Revive }, -- Revive (Death Dialogue)
     [31221] = { hide = true }, -- Skyshard Collect (Aura on Skyshard when player collects it)
     [32346] = { icon = 'esoui/art/icons/achievement_u24_smallzone_skyshard.dds', name = Abilities.Innate_Absorbing_Skyshard, unbreakable = 1}, -- Skyshard Collect

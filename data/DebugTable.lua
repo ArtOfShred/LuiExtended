@@ -2492,6 +2492,7 @@ LUIE.DebugAuras = {
     [61426] = true, -- Shadowstrike (The Shadow 120 - Shadowstrike)
     [64244] = true, -- Shadowstrike (The Shadow 120 - Shadowstrike)
     [64245] = true, -- Shadowstrike (The Shadow 120 - Shadowstrike)
+    [140520] = true, -- Shadowstrike (The Shadow 120 - Shadowstrike)
     [77773] = true, -- Clairvoyance Fx (The Shadow 120 - Shadowstrike)
 
     -- The Apprentice
@@ -5269,6 +5270,7 @@ LUIE.DebugAuras = {
     [126537] = true, -- Minor Endurance (Rally)
     [60894] = true, -- Heal Buffer (Rally)
     [60895] = true, -- Heal Buff (Rally)
+    [60996] = true, -- Buff Remover (Rally)
     [38805] = true, -- Rally (Rally)
 
     [83216] = true, -- Berserker Strike (Berserker Strike)

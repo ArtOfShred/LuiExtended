@@ -42,33 +42,7 @@ ChatAnnouncements.Defaults = {
 
     -- Achievements
     Achievement = {
-        AchievementCategory1          = true,
-        AchievementCategory2          = true,
-        AchievementCategory3          = true,
-        AchievementCategory4          = true,
-        AchievementCategory5          = true,
-        AchievementCategory6          = true,
-        AchievementCategory7          = true,
-        AchievementCategory8          = true,
-        AchievementCategory9          = true,
-        AchievementCategory10         = true,
-        AchievementCategory11         = true,
-        AchievementCategory12         = true,
-        AchievementCategory13         = true,
-        AchievementCategory14         = true,
-        AchievementCategory15         = true,
-        AchievementCategory16         = true,
-        AchievementCategory17         = true,
-        AchievementCategory18         = true,
-        AchievementCategory19         = true,
-        AchievementCategory20         = true,
-        AchievementCategory21         = true,
-        AchievementCategory22         = true,
-        AchievementCategory23         = true,
-        AchievementCategory24         = true,
-        AchievementCategory25         = true,
-        AchievementCategory26         = true,
-        AchievementCategory27         = true,
+        AchievementCategoryIgnore     = {}, -- Inverted list of achievements to be tracked
         AchievementProgressMsg        = GetString(SI_LUIE_CA_ACHIEVEMENT_PROGRESS_MSG),
         AchievementCompleteMsg        = GetString(SI_ACHIEVEMENT_AWARDED_CENTER_SCREEN),
         AchievementColorProgress      = true,
@@ -79,6 +53,7 @@ ChatAnnouncements.Defaults = {
         AchievementUpdateAlert        = false,
         AchievementCompleteCA         = true,
         AchievementCompleteCSA        = true,
+        AchievementCompleteAlwaysCSA  = true,
         AchievementCompleteAlert      = false,
         AchievementIcon               = true,
         AchievementCategory           = true,
@@ -3013,36 +2988,8 @@ end
 
 function ChatAnnouncements.OnAchievementUpdated(eventCode, id)
     local topLevelIndex, categoryIndex, achievementIndex = GetCategoryInfoFromAchievementId(id)
-
     -- Bail out if this achievement comes from unwanted category
-    -- TODO: Make this less shit in the future
-    if topLevelIndex == 1 and not ChatAnnouncements.SV.Achievement.AchievementCategory1 then return end
-    if topLevelIndex == 2 and not ChatAnnouncements.SV.Achievement.AchievementCategory2 then return end
-    if topLevelIndex == 3 and not ChatAnnouncements.SV.Achievement.AchievementCategory3 then return end
-    if topLevelIndex == 4 and not ChatAnnouncements.SV.Achievement.AchievementCategory4 then return end
-    if topLevelIndex == 5 and not ChatAnnouncements.SV.Achievement.AchievementCategory5 then return end
-    if topLevelIndex == 6 and not ChatAnnouncements.SV.Achievement.AchievementCategory6 then return end
-    if topLevelIndex == 7 and not ChatAnnouncements.SV.Achievement.AchievementCategory7 then return end
-    if topLevelIndex == 8 and not ChatAnnouncements.SV.Achievement.AchievementCategory8 then return end
-    if topLevelIndex == 9 and not ChatAnnouncements.SV.Achievement.AchievementCategory9 then return end
-    if topLevelIndex == 10 and not ChatAnnouncements.SV.Achievement.AchievementCategory10 then return end
-    if topLevelIndex == 11 and not ChatAnnouncements.SV.Achievement.AchievementCategory11 then return end
-    if topLevelIndex == 12 and not ChatAnnouncements.SV.Achievement.AchievementCategory12 then return end
-    if topLevelIndex == 13 and not ChatAnnouncements.SV.Achievement.AchievementCategory13 then return end
-    if topLevelIndex == 14 and not ChatAnnouncements.SV.Achievement.AchievementCategory14 then return end
-    if topLevelIndex == 15 and not ChatAnnouncements.SV.Achievement.AchievementCategory15 then return end
-    if topLevelIndex == 16 and not ChatAnnouncements.SV.Achievement.AchievementCategory16 then return end
-    if topLevelIndex == 17 and not ChatAnnouncements.SV.Achievement.AchievementCategory17 then return end
-    if topLevelIndex == 18 and not ChatAnnouncements.SV.Achievement.AchievementCategory18 then return end
-    if topLevelIndex == 19 and not ChatAnnouncements.SV.Achievement.AchievementCategory19 then return end
-    if topLevelIndex == 20 and not ChatAnnouncements.SV.Achievement.AchievementCategory20 then return end
-    if topLevelIndex == 21 and not ChatAnnouncements.SV.Achievement.AchievementCategory21 then return end
-    if topLevelIndex == 22 and not ChatAnnouncements.SV.Achievement.AchievementCategory22 then return end
-    if topLevelIndex == 23 and not ChatAnnouncements.SV.Achievement.AchievementCategory23 then return end
-    if topLevelIndex == 24 and not ChatAnnouncements.SV.Achievement.AchievementCategory24 then return end
-    if topLevelIndex == 25 and not ChatAnnouncements.SV.Achievement.AchievementCategory25 then return end
-    if topLevelIndex == 26 and not ChatAnnouncements.SV.Achievement.AchievementCategory26 then return end
-    if topLevelIndex == 27 and not ChatAnnouncements.SV.Achievement.AchievementCategory27 then return end
+    if ChatAnnouncements.SV.Achievement.AchievementCategoryIgnore[topLevelIndex] then return end
 
     if ChatAnnouncements.SV.Achievement.AchievementUpdateCA or ChatAnnouncements.SV.Achievement.AchievementUpdateAlert then
         local totalCmp = 0
@@ -8848,6 +8795,14 @@ function ChatAnnouncements.HookFunction()
 
     -- EVENT_ACHIEVEMENT_AWARDED (CSA Handler)
     local function AchievementAwardedHook(name, points, id)
+
+        local topLevelIndex, categoryIndex, achievementIndex = GetCategoryInfoFromAchievementId(id)
+
+        -- Bail out if this achievement comes from unwanted category & we don't always show CSA
+        if ChatAnnouncements.SV.Achievement.AchievementCategoryIgnore[topLevelIndex] and not ChatAnnouncements.SV.Achievement.AchievementCompleteAlwaysCSA then
+            return true
+        end
+
         -- Display CSA
         if ChatAnnouncements.SV.Achievement.AchievementCompleteCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.ACHIEVEMENT_AWARDED)
@@ -8858,41 +8813,10 @@ function ChatAnnouncements.HookFunction()
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
 
-        -- Play sound if CSA is disabled
-        if not ChatAnnouncements.SV.Achievement.AchievementCompleteCSA then
-            PlaySound(SOUNDS.ACHIEVEMENT_AWARDED)
-        end
-
-        local topLevelIndex, categoryIndex, achievementIndex = GetCategoryInfoFromAchievementId(id)
         -- Bail out if this achievement comes from unwanted category
-        -- TODO: Make this less shit in the future
-        if topLevelIndex == 1 and not ChatAnnouncements.SV.Achievement.AchievementCategory1 then return true end
-        if topLevelIndex == 2 and not ChatAnnouncements.SV.Achievement.AchievementCategory2 then return true end
-        if topLevelIndex == 3 and not ChatAnnouncements.SV.Achievement.AchievementCategory3 then return true end
-        if topLevelIndex == 4 and not ChatAnnouncements.SV.Achievement.AchievementCategory4 then return true end
-        if topLevelIndex == 5 and not ChatAnnouncements.SV.Achievement.AchievementCategory5 then return true end
-        if topLevelIndex == 6 and not ChatAnnouncements.SV.Achievement.AchievementCategory6 then return true end
-        if topLevelIndex == 7 and not ChatAnnouncements.SV.Achievement.AchievementCategory7 then return true end
-        if topLevelIndex == 8 and not ChatAnnouncements.SV.Achievement.AchievementCategory8 then return true end
-        if topLevelIndex == 9 and not ChatAnnouncements.SV.Achievement.AchievementCategory9 then return true end
-        if topLevelIndex == 10 and not ChatAnnouncements.SV.Achievement.AchievementCategory10 then return true end
-        if topLevelIndex == 11 and not ChatAnnouncements.SV.Achievement.AchievementCategory11 then return true end
-        if topLevelIndex == 12 and not ChatAnnouncements.SV.Achievement.AchievementCategory12 then return true end
-        if topLevelIndex == 13 and not ChatAnnouncements.SV.Achievement.AchievementCategory13 then return true end
-        if topLevelIndex == 14 and not ChatAnnouncements.SV.Achievement.AchievementCategory14 then return true end
-        if topLevelIndex == 15 and not ChatAnnouncements.SV.Achievement.AchievementCategory15 then return true end
-        if topLevelIndex == 16 and not ChatAnnouncements.SV.Achievement.AchievementCategory16 then return true end
-        if topLevelIndex == 17 and not ChatAnnouncements.SV.Achievement.AchievementCategory17 then return true end
-        if topLevelIndex == 18 and not ChatAnnouncements.SV.Achievement.AchievementCategory18 then return true end
-        if topLevelIndex == 19 and not ChatAnnouncements.SV.Achievement.AchievementCategory19 then return true end
-        if topLevelIndex == 20 and not ChatAnnouncements.SV.Achievement.AchievementCategory20 then return true end
-        if topLevelIndex == 21 and not ChatAnnouncements.SV.Achievement.AchievementCategory21 then return true end
-        if topLevelIndex == 22 and not ChatAnnouncements.SV.Achievement.AchievementCategory22 then return true end
-        if topLevelIndex == 23 and not ChatAnnouncements.SV.Achievement.AchievementCategory23 then return true end
-        if topLevelIndex == 24 and not ChatAnnouncements.SV.Achievement.AchievementCategory24 then return true end
-        if topLevelIndex == 25 and not ChatAnnouncements.SV.Achievement.AchievementCategory25 then return true end
-        if topLevelIndex == 26 and not ChatAnnouncements.SV.Achievement.AchievementCategory26 then return true end
-        if topLevelIndex == 27 and not ChatAnnouncements.SV.Achievement.AchievementCategory27 then return true end
+        if ChatAnnouncements.SV.Achievement.AchievementCategoryIgnore[topLevelIndex] then
+            return true
+        end
 
         if ChatAnnouncements.SV.Achievement.AchievementCompleteCA then
             local link = zo_strformat(GetAchievementLink(id, linkBrackets[ChatAnnouncements.SV.BracketOptionAchievement]))
@@ -8929,6 +8853,11 @@ function ChatAnnouncements.HookFunction()
         if ChatAnnouncements.SV.Achievement.AchievementCompleteAlert then
             local alertMessage = zo_strformat("<<1>>: <<2>>", ChatAnnouncements.SV.Achievement.AchievementCompleteMsg, name)
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertMessage)
+        end
+
+        -- Play sound if CSA is disabled
+        if not ChatAnnouncements.SV.Achievement.AchievementCompleteCSA then
+            PlaySound(SOUNDS.ACHIEVEMENT_AWARDED)
         end
 
         return true
