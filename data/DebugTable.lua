@@ -10411,6 +10411,18 @@ LUIE.DebugAuras = {
     [83883] = true, -- Shadow Flare (Magdelena)
 
     -------------------------------------
+    -- QUESTS - SHARED ------------------
+    -------------------------------------
+
+    [55831] = true, -- Found Recommended Ore (Blacksmith Certification)
+	[56061]	= true, -- Found Recommended Jute (Clothier Certification)
+	[55965]	= true, -- Found Recommended Maple (Woodworker Certification)
+	[56266]	= true, -- Found Recommended Solvent and (Alchemist Certification)
+	[56256]	= true, -- Found Recommended Runestones (Enchanter Certification)
+	[55983]	= true, -- Found Recommended Ingredients (Provisioner Certification)
+	[103376] = true, -- Found Recommended Dust (Jewelry Crafting Certification)
+
+    -------------------------------------
     -- MAIN QUEST -----------------------
     -------------------------------------
 

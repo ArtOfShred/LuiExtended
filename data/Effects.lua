@@ -4323,13 +4323,13 @@ Effects.EffectOverride = {
     [51320] = { icon = 'LuiExtended/media/icons/abilities/ability_set_destructive_mage.dds', name = Abilities.Set_Destructive_Mage }, -- Mage Destruction Bomb (Aether... of Destruction)
     [51443] = { icon = 'LuiExtended/media/icons/abilities/ability_set_healing_mage.dds', name = Abilities.Set_Healing_Mage, tooltip = Tooltips.Set_Healing_Mage }, -- Healing Bane (of Mending)
     [51434] = { tooltip = Abilities.Set_Wise_Mage }, -- Minor Vulnerability (Aether ... of Strategy)
-    [76617] = { icon = 'esoui/art/icons/achievement_vvardenfel_060.dds', tooltip = Tooltips.Skill_Minor_Slayer }, -- Minor Slayer (of the Infallible Aether)
+    [76617] = { icon = 'esoui/art/icons/ability_buff_minor_erosion.dds', tooltip = Tooltips.Skill_Minor_Slayer }, -- Minor Slayer (of the Infallible Aether)
     [81519] = { tooltip = Abilities.Set_Infallible_Mage }, -- Minor Vulnerability (of the Infallible Aether)
 
     -- Trial Sets (Sanctum Ophidia)
     [51241] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vipers_sting.dds' }, -- Poisonous Serpent (Ophidian ... of Venom)
     [51176] = { icon = 'esoui/art/icons/achievement_darkbrotherhood_010.dds', tooltip = Tooltips.Set_Twice_Fanged_Serpent }, -- Twice-Fanged Serpent (of the Two-Fanged Snake)
-    [98103] = { icon = 'esoui/art/icons/achievement_vvardenfel_060.dds', tooltip = Tooltips.Skill_Minor_Slayer }, -- Minor Slayer (of the Vicious Ophidian)
+    [98103] = { icon = 'esoui/art/icons/ability_buff_minor_erosion.dds', tooltip = Tooltips.Skill_Minor_Slayer }, -- Minor Slayer (of the Vicious Ophidian)
     [50997] = { tooltip = Abilities.Set_Quick_Serpent }, -- Major Expedition (Ophidian.. of Celerity)
     [57159] = { icon = 'LuiExtended/media/icons/abilities/ability_set_quick_serpent.dds' }, -- Quick Serpent (Ophidian.. of Celerity)
     [81524] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds', name = Abilities.Skill_Major_Expedition, tooltip = Abilities.Set_Vicious_Serpent }, -- Quick Serpent (of the Vicious Ophidian)
@@ -4338,7 +4338,7 @@ Effects.EffectOverride = {
     -- Trial Sets (Maw of Lorkhaj)
     [75801] = { icon = 'LuiExtended/media/icons/abilities/ability_set_moondancer_lunar.dds', tooltip = Tooltips.Generic_Magicka_Recovery_Duration_Value, tooltipValue2 = 448 }, -- Lunar Blessing (Moondancer)
     [75804] = { icon = 'LuiExtended/media/icons/abilities/ability_set_moondancer_shadow.dds', tooltip = Tooltips.Generic_Spell_Damage_Duration_Value, tooltipValue2 = 448 }, -- Shadow Blessing (Moondancer)
-    [98102] = { icon = 'esoui/art/icons/achievement_vvardenfel_060.dds', tooltip = Tooltips.Skill_Minor_Slayer }, -- Minor Slayer (of Alkosh)
+    [98102] = { icon = 'esoui/art/icons/ability_buff_minor_erosion.dds', tooltip = Tooltips.Skill_Minor_Slayer }, -- Minor Slayer (of Alkosh)
     [75752] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds' }, -- Roar of Alkosh (of Alkosh)
     [75753] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds', tooltip = Tooltips.Generic_Reduce_Physical_Spell_Resist_Value, tooltipValue2 = 3010 }, -- Line Breaker (of Alkosh)
     [76667] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds', tooltip = Tooltips.Generic_Physical, tooltipValue2 = 1 }, -- Roar of Alkosh (of Alkosh)
@@ -4350,8 +4350,8 @@ Effects.EffectOverride = {
     -- Trial Sets (Halls of Fabrication)
     [93444] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_aegis.dds', tooltip = Tooltips.Skill_Major_Aegis }, -- Major Aegis (Automated Defense)
     [93125] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_aegis.dds', tooltip = Tooltips.Skill_Major_Aegis }, -- Major Aegis (Inventor's Guard)
-    [93120] = { icon = 'esoui/art/icons/achievement_vvardenfel_061.dds', tooltip = Tooltips.Skill_Major_Slayer }, -- Major Slayer (Master Architect)
-    [93442] = { icon = 'esoui/art/icons/achievement_vvardenfel_061.dds', tooltip = Tooltips.Skill_Major_Slayer }, -- Major Slayer (War Machine)
+    [93120] = { icon = 'esoui/art/icons/ability_buff_major_erosion.dds', tooltip = Tooltips.Skill_Major_Slayer }, -- Major Slayer (Master Architect)
+    [93442] = { icon = 'esoui/art/icons/ability_buff_major_erosion.dds', tooltip = Tooltips.Skill_Major_Slayer }, -- Major Slayer (War Machine)
 
     -- Trial Sets (Cloudrest)
     [107141] = { tooltip = Tooltips.Set_Vestment_of_Olorime }, -- Vestment of Olirime (Olirime's)
@@ -4376,7 +4376,7 @@ Effects.EffectOverride = {
     [124800] = { icon = 'esoui/art/icons/achievement_els_sunspire_veteran.dds', name = Abilities.Set_False_Gods_Devotion }, -- False God's Devotion (Perfected False God's Devotion)
     [121898] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eye_of_nahviintaas.dds', tooltip = Tooltips.Set_Eye_of_Nahviintaas }, -- Eye of Nahviintaas (Nahviintaas')
     [122812] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eye_of_nahviintaas.dds', tooltip = Tooltips.Set_Eye_of_Nahviintaas }, -- Eye of Nahviintaas (Nahviintaas')
-    [121871] = { icon = 'esoui/art/icons/achievement_vvardenfel_061.dds', tooltip = Tooltips.Skill_Major_Slayer }, -- Major Slayer (Lokkestiiz's)
+    [121871] = { icon = 'esoui/art/icons/ability_buff_major_erosion.dds', tooltip = Tooltips.Skill_Major_Slayer }, -- Major Slayer (Lokkestiiz's)
     [121878] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_courage.dds', tooltip = Abilities.Set_Claw_of_Yolnakhriin }, -- Minor Courage (Yolnakriin's)
 
     -- Set ICD's (Fake Id's)
@@ -4562,8 +4562,8 @@ Effects.EffectOverride = {
     [63601] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_eso_plus_member.dds', tooltip = Tooltips.Innate_ESO_Plus }, -- ESO Plus Member
     [47270] = { icon = 'esoui/art/icons/achievement_update11_dungeons_017.dds', hide = true }, -- Ritual of Mara
     [2727] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = "", unbreakable = 1 }, -- Off-Balance
-    [134599] = { type = 1, tooltip = Tooltips.Generic_Off_Balance_Immunity }, -- Off Balance Immunity
-    [132831] = { type = 1, icon = 'esoui/art/icons/achievement_031.dds', name = Abilities.Skill_Major_Vulnerability_Immunity, tooltip = Tooltips.Generic_Major_Vulnerability_Immunity }, -- Major Vulnerability Invulnerability
+    [134599] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_off_balance_immunity.dds', type = 1, tooltip = Tooltips.Generic_Off_Balance_Immunity }, -- Off Balance Immunity
+    [132831] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_vulnerability_immunity.dds', name = Abilities.Skill_Major_Vulnerability_Immunity, type = 1, tooltip = Tooltips.Generic_Major_Vulnerability_Immunity }, -- Major Vulnerability Invulnerability
     [85701] = { hide = true, tooltip = Tooltips.Innate_Battle_Spirit }, -- Dueling Flag
     [21263] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = Abilities.Innate_Ayleid_Well, tooltip = Tooltips.Innate_Ayleid_Well }, -- Ayleid Health Bonus
     [100862] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = Abilities.Innate_Ayleid_Well_Fortified, tooltip = Tooltips.Innate_Ayleid_Well_Fortified }, -- Ayleid Health Bonus
@@ -5519,10 +5519,10 @@ Effects.EffectOverride = {
     [22236] = { consolidateExtra = true, tooltip = Abilities.Skill_Rune_Focus }, -- Major Resolve (Rune Focus)
     [112145] = { name = Abilities.Skill_Rune_Focus, tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 2640, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Rune Focus)
     [44828] = { consolidateExtra = true, tooltip = Abilities.Skill_Channeled_Focus }, -- Major Resolve (Channeled Focus)
-    [37009] = { tooltip = Tooltips.Generic_Magicka_Regen, tooltipValue2 = 1 },  -- Channeled Focus (Channeled Focus)
+    [37009] = { tooltip = Tooltips.Generic_Magicka_Regen_Value, tooltipValue2 = 1, tooltipValue3 = 240 },  -- Channeled Focus (Channeled Focus)
     [112166] = { name = Abilities.Skill_Channeled_Focus, tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 2640, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Channeled Focus)
     [44836] = { consolidateExtra = true, tooltip = Abilities.Skill_Restoring_Focus }, -- Major Resolve (Restoring Focus)
-    [114842] = { tooltip = Tooltips.Generic_Stamina_Regen, tooltipValue2 = 1 },  -- Restoring Focus (Restoring Focus)
+    [114842] = { tooltip = Tooltips.Generic_Stamina_Regen_Value, tooltipValue2 = 1, tooltipValue3 = 240 },  -- Restoring Focus (Restoring Focus)
     [112167] = { name = Abilities.Skill_Restoring_Focus, tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 2640, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Restoring Focus)
 
     -- Rite of Passage / Remembrance / Practiced Incantation
@@ -7369,7 +7369,7 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Shared NPC Passives
-    [33097] = { icon = 'esoui/art/icons/achievement_wrothgar_007.dds', name = Abilities.Skill_Boss_CC_Immunity, tooltip = Tooltips.Generic_Scary_Immunities }, -- Scary Immunities
+    [33097] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_boss_immunities.dds', name = Abilities.Skill_Boss_CC_Immunity, tooltip = Tooltips.Generic_Scary_Immunities }, -- Scary Immunities
     [44176] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_flying_immunities.dds', tooltip = Tooltips.Generic_Flying_Immunities }, -- Flying Immunities
     [13739] = { icon = 'esoui/art/icons/achievement_016.dds', tooltip = Tooltips.Skill_Backstabber }, -- Backstabber
     [73768] = { hide = true }, -- GEN 5 Hits
@@ -7480,7 +7480,7 @@ Effects.EffectOverride = {
     [17867] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hammer_2h_shock_aura.dds' }, -- Shock Aura (Thundermaul)
     [44407] = { tooltip = Tooltips.Skill_Lightning_Form }, -- Lightning Form (Thundermaul)
     [44408] = { icon = 'esoui/art/icons/ability_sorcerer_lightning_form.dds' }, -- Lightning Form (Thundermaul -- Boss)
-    [81219] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_shock.dds', hide = true }, -- Shock (Thundermaul -- Boss)
+    [81219] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shock_large.dds', hide = true }, -- Shock (Thundermaul -- Boss)
     [81215] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hammer_2h_shock_aura.dds', name = Abilities.Skill_Shock_Blast }, -- Shock Aura (Thundermaul -- Boss)
     [77906] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = Abilities.Skill_Knockback, tooltip = Tooltips.Generic_Knockback }, -- Stun (Thundermaul -- Boss)
     [81193] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_agonizing_strike.dds', hide = true }, -- Agonizing Strike (Thundermaul -- Boss)
@@ -7532,7 +7532,7 @@ Effects.EffectOverride = {
     [47102] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fire_rune.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 0.9 }, -- Fire Rune (Fire Mage)
 
     -- Storm Mage
-    [14524] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_shock.dds', hide = true }, -- Shock (Storm Mage)
+    [14524] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shock_large.dds', hide = true }, -- Shock (Storm Mage)
     [29471] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_thunder_thrall.dds' }, -- Thunder Thrall (Storm Mage)
     [29470] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_thunder_thrall.dds' }, -- Thunder Thrall (Storm Mage)
     [29472] = { hide = true }, -- Thunder Thrall (Storm Mage) (self snare shows as buff)
@@ -8093,7 +8093,7 @@ Effects.EffectOverride = {
     -- Daedra
     [51256] = { hide = true }, -- Siphon (Atronach Passive)
     [31115] = { icon = 'esoui/art/icons/achievement_089.dds', name = Abilities.Skill_Summon_Daedric_Arch, hide = true }, -- Summon Dark Anchor (Daedric Synergy)
-    [59129] = { icon = 'esoui/art/icons/achievement_wrothgar_007.dds', name = Abilities.Skill_Boss_CC_Immunity, tooltip = Tooltips.Generic_Scary_Immunities }, -- Generic Status Immune (Daedric Synergy)
+    [59129] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_boss_immunities.dds', name = Abilities.Skill_Boss_CC_Immunity, tooltip = Tooltips.Generic_Scary_Immunities }, -- Generic Status Immune (Daedric Synergy)
     [94481] = { hide = true }, -- Summon Dark Anchor (Daedric Synergy)
     [68453] = { hide = true }, -- Explosive Charge (Daedric Synergy)
     [68449] = { icon = 'LuiExtended/media/icons/abilities/ability_banekin_envelop.dds' }, -- Explosive Charge (Daedric Synergy)
@@ -8561,7 +8561,7 @@ Effects.EffectOverride = {
     [8429] = { icon = 'LuiExtended/media/icons/abilities/ability_thunderbug_zap.dds', tooltip = Tooltips.Skill_Lightning_Rod }, -- Zap (Thunderbug)
     [65079] = { icon = 'LuiExtended/media/icons/abilities/ability_thunderbug_zap.dds' }, -- Zap (Thunderbug)
     [26379] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_zap_pulse_thunderbug.dds' }, -- Zap (Thunderbug)
-    [26382] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_shock.dds' }, -- Bolt (Thunderbug)
+    [26382] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shock_small.dds' }, -- Bolt (Thunderbug)
     [26412] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_thunderstrikes.dds' }, -- Thunderstrikes (Thunderbug)
     [34980] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_thunderstrikes.dds' }, -- Thunderstrikes (Thunderbug)
 
@@ -8678,7 +8678,7 @@ Effects.EffectOverride = {
     [65078] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flame_ray.dds' }, -- Flame Ray (Imp - Fire)
     [17706] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fire_bomb.dds' }, -- Flame Ray (Imp - Fire)
 
-    [7732] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_shock.dds', hide = true }, -- Bolt (Imp - Lightning)
+    [7732] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shock_small.dds', hide = true }, -- Bolt (Imp - Lightning)
     [13648] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_spark.dds', hide = true }, -- Spark (Imp - Lightning)
     [8884] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_zap_imp.dds', tooltip = Tooltips.Skill_Lightning_Rod }, -- Zap (Imp - Lightning)
     [65077] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_zap_imp.dds' }, -- Zap (Imp - Lightning)
@@ -9804,8 +9804,8 @@ Effects.EffectOverride = {
     -- A Lasting Winter
     [38394] = { hide = true }, -- Shatter
     [38413] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_mantles_shadow.dds', name = Abilities.Skill_Mantles_Shadow }, -- Spawn Clone (General Endare)
-    [47762] = { icon = 'esoui/art/icons/achievement_wrothgar_007.dds', name = Abilities.Skill_Boss_CC_Immunity, tooltip = Tooltips.Generic_Scary_Immunities_Duration, duration = 3 }, -- Spawn Clone (General Endare)
-    [47768] = { icon = 'esoui/art/icons/achievement_wrothgar_007.dds', name = Abilities.Skill_Boss_CC_Immunity, tooltip = Tooltips.Generic_Scary_Immunities_Duration }, -- RobS Immunities 6 Sec (General Endare)
+    [47762] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_boss_immunities.dds', name = Abilities.Skill_Boss_CC_Immunity, tooltip = Tooltips.Generic_Scary_Immunities_Duration, duration = 3 }, -- Spawn Clone (General Endare)
+    [47768] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_boss_immunities.dds', name = Abilities.Skill_Boss_CC_Immunity, tooltip = Tooltips.Generic_Scary_Immunities_Duration }, -- RobS Immunities 6 Sec (General Endare)
     [38441] = { hide = true }, -- Become
     [47783] = { hide = true }, -- Become
 
