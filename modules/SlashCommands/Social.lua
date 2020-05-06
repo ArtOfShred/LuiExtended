@@ -18,7 +18,7 @@ function SlashCommands.SlashFriend(option)
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-    RequestFriend(option)
+    ZO_Dialogs_ShowDialog("REQUEST_FRIEND", { name = option })
 end
 
 -- Slash Command to add someone to ignore list

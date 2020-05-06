@@ -370,6 +370,10 @@ function UnitFrames.GroupFrames_OnMouseUp(self, button, upInside)
             AddMenuItem(GetString(SI_SOCIAL_MENU_JUMP_TO_PLAYER), function() JumpToGroupMember(accountName) end)
         end
 
+        if not isPlayer and not IsFriend(accountName) and not IsIgnored(accountName) then
+            AddMenuItem(GetString(SI_SOCIAL_MENU_ADD_FRIEND), function() ZO_Dialogs_ShowDialog("REQUEST_FRIEND", { name = accountName }) end)
+        end
+
         if IsGroupModificationAvailable() then
             if IsUnitGroupLeader("player") then
                 if isPlayer then
