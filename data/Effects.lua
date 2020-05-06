@@ -1664,6 +1664,29 @@ Effects.AddNameAuraAlways = {
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.AddNameAura = {
 
+    -- Target Dummy
+    [Unitnames.Dummy_Robust_Target_Dromathra] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Robust_Target_Minotaur_Handler] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Bone_Goliath_Reanimated] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Target_Centurion_Dwarf_Brass] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Target_Centurion_Lambent] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Target_Centurion_Robust_Lambent] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Target_Centurion_Robust_Refabricated] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Target_Frost_Atronach] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Target_Iron_Atronach] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Target_Atronach_Trial] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Target_Mournful_Aegis] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Target_Skeleton_Humanoid] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Target_Skeleton_Khajiit] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Target_Skeleton_Argonian] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Target_Skeleton_Robust_Humanoid] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Target_Skeleton_Robust_Khajiit] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Target_Skeleton_Robust_Argonian] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Target_Stone_Atronach] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Target_Voriplasm] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Target_Wraith_of_Crows] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Target_The_Precursor] = { [1] = { id = 33097 } },
+
     -- Various Mobs
     [Unitnames.NPC_Daedroth] = { [1] = { id = 999013, zone = 935 } }, -- Daedroth
 
@@ -4562,8 +4585,8 @@ Effects.EffectOverride = {
     [63601] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_eso_plus_member.dds', tooltip = Tooltips.Innate_ESO_Plus }, -- ESO Plus Member
     [47270] = { icon = 'esoui/art/icons/achievement_update11_dungeons_017.dds', hide = true }, -- Ritual of Mara
     [2727] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = "", unbreakable = 1 }, -- Off-Balance
-    [134599] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_off_balance_immunity.dds', type = 1, tooltip = Tooltips.Generic_Off_Balance_Immunity }, -- Off Balance Immunity
-    [132831] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_vulnerability_immunity.dds', name = Abilities.Skill_Major_Vulnerability_Immunity, type = 1, tooltip = Tooltips.Generic_Major_Vulnerability_Immunity }, -- Major Vulnerability Invulnerability
+    [134599] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_off_balance_immunity.dds', type = 1, tooltip = Tooltips.Generic_Off_Balance_Immunity }, -- Off Balance Immunity
+    [132831] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_major_vulnerability_immunity.dds', name = Abilities.Skill_Major_Vulnerability_Immunity, type = 1, tooltip = Tooltips.Generic_Major_Vulnerability_Immunity }, -- Major Vulnerability Invulnerability
     [85701] = { hide = true, tooltip = Tooltips.Innate_Battle_Spirit }, -- Dueling Flag
     [21263] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = Abilities.Innate_Ayleid_Well, tooltip = Tooltips.Innate_Ayleid_Well }, -- Ayleid Health Bonus
     [100862] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = Abilities.Innate_Ayleid_Well_Fortified, tooltip = Tooltips.Innate_Ayleid_Well_Fortified }, -- Ayleid Health Bonus

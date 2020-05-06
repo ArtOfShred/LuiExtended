@@ -379,8 +379,10 @@ function SpellCastBuffs.Initialize(enabled)
     eventManager:RegisterForUpdate(moduleName, 100, SpellCastBuffs.OnUpdate )
 
     -- Target Events
-    eventManager:RegisterForEvent(moduleName, EVENT_TARGET_CHANGE,             SpellCastBuffs.OnTargetChange )
-    eventManager:RegisterForEvent(moduleName, EVENT_RETICLE_TARGET_CHANGED,    SpellCastBuffs.OnReticleTargetChanged )
+    eventManager:RegisterForEvent(moduleName, EVENT_TARGET_CHANGE, SpellCastBuffs.OnTargetChange )
+    eventManager:RegisterForEvent(moduleName, EVENT_RETICLE_TARGET_CHANGED, SpellCastBuffs.OnReticleTargetChanged )
+    eventManager:RegisterForEvent(moduleName .. "Disposition", EVENT_DISPOSITION_UPDATE, SpellCastBuffs.OnDispositionUpdate )
+    eventManager:AddFilterForEvent(moduleName .. "Disposition", EVENT_DISPOSITION_UPDATE, REGISTER_FILTER_UNIT_TAG, "reticleover" )
 
     -- Buff Events
     eventManager:RegisterForEvent(moduleName .. "Player", EVENT_EFFECT_CHANGED, SpellCastBuffs.OnEffectChanged )
@@ -2752,6 +2754,12 @@ function SpellCastBuffs.OnDeath(eventCode, unitTag, isDead)
             end
         end
     end
+end
+
+-- Runs on the EVENT_DISPOSITION_UPDATE listener.
+-- This handler fires when the disposition of a reticleover unitTag changes. We filter for only this case.
+function SpellCastBuffs.OnDispositionUpdate(eventCode, unitTag)
+    SpellCastBuffs.AddNameAura()
 end
 
 -- Runs on the EVENT_TARGET_CHANGE listener.
