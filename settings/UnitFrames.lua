@@ -7,6 +7,8 @@ local UnitFrames = LUIE.UnitFrames
 
 local zo_strformat = zo_strformat
 
+local g_FramesMovingEnabled = false -- Helper local flag
+
 local nameDisplayOptions     = { "@UserID", "Character Name", "Character Name @UserID" }
 local nameDisplayOptionsKeys = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
 local raidIconOptions        = { "No Icons", "Class Icons Only", "Role Icons Only", "Class Icon in PVP, Role in PVE", "Class Icon in PVE, Role in PVP" }
@@ -101,11 +103,13 @@ function UnitFrames.CreateSettings()
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_UF_CFRAMES_UNLOCK),
         tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_UNLOCK_TP),
-        getFunc = function() return LUIE.CombatInfo.CastBarUnlocked end,
-        setFunc = UnitFrames.CustomFramesSetMovingState,
+        getFunc = function() return g_FramesMovingEnabled end,
+        setFunc = function(value)
+            g_FramesMovingEnabled = value
+            UnitFrames.CustomFramesSetMovingState(value)
+            end,
         width = "half",
         default = false,
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         resetFunc = function() UnitFrames.CustomFramesResetPosition(false) end,
     }
 
@@ -644,6 +648,16 @@ function UnitFrames.CreateSettings()
                 setFunc = function(r,g,b,a) Settings.CustomColourGuard={r,g,b} UnitFrames.CustomFramesApplyColours(true) end,
                 width = "full",
                 default = { r=Defaults.CustomColourGuard[1], g=Defaults.CustomColourGuard[2], b=Defaults.CustomColourGuard[3] },
+                disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+            },
+            {
+                -- Custom Unit Frames Pet Bar Color
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMESPET_COLOR),
+                getFunc = function() return unpack(Settings.CustomColourPet) end,
+                setFunc = function(r,g,b,a) Settings.CustomColourPet={r,g,b} UnitFrames.CustomFramesApplyColours(true) end,
+                width = "full",
+                default = { r=Defaults.CustomColourPet[1], g=Defaults.CustomColourPet[2], b=Defaults.CustomColourPet[3] },
                 disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
             },
         },
@@ -1595,6 +1609,95 @@ function UnitFrames.CreateSettings()
                 default = Defaults.RaidEnableRegen,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesRaid ) end,
+            },
+        },
+    }
+
+    -- Unit Frames - Custom Unit Frames (Pet) Options Submenu
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "submenu",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPET_HEADER),
+        controls = {
+            {
+                -- Enable Pet Frames
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMESPET_ENABLE),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPET_ENABLE_TP),
+                getFunc = function() return Settings.CustomFramesPet end,
+                setFunc = function(value) Settings.CustomFramesPet = value end,
+                width = "full",
+                default = Defaults.CustomFramesPet,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+            },
+            {
+                -- Pet HP Bar Format
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_UF_SHARED_LABEL),
+                tooltip = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_TP),
+                choices = formatOptions,
+                getFunc = function() return Settings.CustomFormatPet end,
+                setFunc = function(var) Settings.CustomFormatPet = var UnitFrames.CustomFramesFormatLabels(true) UnitFrames.CustomFramesApplyLayoutPet(true) end,
+                width = "full",
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesRaid ) end,
+                default = Defaults.CustomFormatPet,
+            },
+            {
+                -- Pet Bars Width
+                type = "slider",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMESPET_WIDTH),
+                min = 100, max = 500, step = 5,
+                getFunc = function() return Settings.PetWidth end,
+                setFunc = function(value) Settings.PetWidth = value UnitFrames.CustomFramesApplyLayoutPet(true) end,
+                width = "full",
+                default = Defaults.PetWidth,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesRaid ) end,
+            },
+            {
+                -- Pet Bars Height
+                type = "slider",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMESPET_HEIGHT),
+                min = 20, max = 70, step = 1,
+                getFunc = function() return Settings.PetHeight end,
+                setFunc = function(value) Settings.PetHeight = value UnitFrames.CustomFramesApplyLayoutPet(true) end,
+                width = "full",
+                default = Defaults.PetHeight,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesRaid ) end,
+            },
+            {
+                -- Pet - Out-of-Combat frame opacity
+                type = "slider",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMESPET_OOCPACITY),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPET_OOCPACITY_TP),
+                min = 0, max = 100, step = 5,
+                getFunc = function() return Settings.PetOocAlpha end,
+                setFunc = function(value) Settings.PetOocAlpha = value UnitFrames.CustomFramesApplyInCombat() UnitFrames.CustomFramesApplyLayoutPet(true) end,
+                width = "full",
+                default = Defaults.PetOocAlpha,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( Settings.CustomFramesPlayer or Settings.CustomFramesTarget ) ) end,
+            },
+            {
+                -- Pet - In-Combat frame opacity
+                type = "slider",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMESPET_ICPACITY),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPET_ICPACITY_TP),
+                min = 0, max = 100, step = 5,
+                getFunc = function() return Settings.PetIncAlpha end,
+                setFunc = function(value) Settings.PetIncAlpha = value UnitFrames.CustomFramesApplyInCombat() UnitFrames.CustomFramesApplyLayoutPet(true) end,
+                width = "full",
+                default = Defaults.PetIncAlpha,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( Settings.CustomFramesPlayer or Settings.CustomFramesTarget ) ) end,
+            },
+            {
+                -- Pet - Color Target by Class
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMESPET_USE_CLASS_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPET_USE_CLASS_COLOR_TP),
+                getFunc = function() return Settings.PetUseClassColor end,
+                setFunc = function(value) Settings.PetUseClassColor = value UnitFrames.CustomFramesApplyColours(true) end,
+                width = "full",
+                default = Defaults.PetUseClassColor,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesTarget ) end,
             },
         },
     }
