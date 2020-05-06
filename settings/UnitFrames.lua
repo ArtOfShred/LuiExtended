@@ -33,6 +33,20 @@ local formatOptions = {
     "Current + Shield (Percentage%)"
 }
 
+local Blacklist, BlackListValues = {}
+
+-- Create a list of Unitnames to use for Summon Blacklist
+local function GenerateCustomList(input)
+    local options, values = {}, {}
+    local counter = 0
+    for name in pairs(input) do
+        counter = counter + 1
+        options[counter] = name
+        values[counter] = name
+    end
+    return options, values
+end
+
 function UnitFrames.CreateSettings()
     -- Load LibAddonMenu
     local LAM = LibAddonMenu2
@@ -1699,6 +1713,38 @@ function UnitFrames.CreateSettings()
                 default = Defaults.PetUseClassColor,
                 disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesTarget ) end,
             },
+
+            {
+                type = "header",
+                text = GetString(SI_LUIE_LAM_UF_BLACKLIST_HEADER),
+            },
+            {
+                -- Unit Frames Pet Blacklist Description
+                type = "description",
+                text = GetString(SI_LUIE_LAM_UF_BLACKLIST_DESCRIPT),
+            },
+            {
+                -- Unit Frames Pet Blacklist (Add)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_UF_BLACKLIST_ADDLIST),
+                tooltip = GetString(SI_LUIE_LAM_UF_BLACKLIST_ADDLIST_TP),
+                getFunc = function() end,
+                setFunc = function(value) UnitFrames.AddToCustomList(Settings.blacklist, value) LUIE_BlacklistUF:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,
+            },
+            {
+                -- Unit Frames Pet (Remove)
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_UF_BLACKLIST_REMLIST),
+                tooltip = GetString(SI_LUIE_LAM_UF_BLACKLIST_REMLIST_TP),
+                choices = Blacklist,
+                choicesValues = BlacklistValues,
+                scrollable = true,
+                sort = "name-up",
+                getFunc = function() LUIE_BlacklistUF:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,
+                setFunc = function(value) UnitFrames.RemoveFromCustomList(Settings.blacklist, value) LUIE_BlacklistUF:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,
+                reference = "LUIE_BlacklistUF"
+            },
+
         },
     }
 

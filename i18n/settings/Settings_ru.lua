@@ -1370,6 +1370,12 @@ local strings = {
     SI_LUIE_LAM_UF_CFRAMESPET_OOCPACITY_TP =             "Change the transparency of custom pet frames when out of combat.",
     SI_LUIE_LAM_UF_CFRAMESPET_ICPACITY =                 "Pet - Transparency - In-Combat",
     SI_LUIE_LAM_UF_CFRAMESPET_ICPACITY_TP =              "Change the transparency of custom pet frames when engaged in combat.",
+    SI_LUIE_LAM_UF_BLACKLIST_HEADER =                    "Pet Name Blacklisting",
+    SI_LUIE_LAM_UF_BLACKLIST_DESCRIPT =                  "Add pet names to Blacklist by entering the name into the input field and pressing enter. Remove pet names from the Blacklist by clicking the pet name from the dropdown list.\nNote: Names are not case-sensitive.",
+    SI_LUIE_LAM_UF_BLACKLIST_ADDLIST =                   "Add Pet Name to Blacklist",
+    SI_LUIE_LAM_UF_BLACKLIST_ADDLIST_TP =                "Add a pet name to the blacklist.",
+    SI_LUIE_LAM_UF_BLACKLIST_REMLIST =                   "Remove Pet Name from Blacklist",
+    SI_LUIE_LAM_UF_BLACKLIST_REMLIST_TP =                "Remove a pet name blacklist.",
 
     -- Module: Combat Text
     SI_LUIE_LAM_CT =                                     "Текст боя",

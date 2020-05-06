@@ -195,6 +195,7 @@ UnitFrames.Defaults = {
     PetUseClassColor                 = false,
     PetIncAlpha                      = 85,
     PetOocAlpha                      = 85,
+    blacklist                        = {}, -- Blacklist for pet names
 
 }
 UnitFrames.SV = nil
@@ -328,6 +329,26 @@ local function CreateDecreasedArmorOverlay( parent, small )
     end
 
     return control
+end
+
+-- List Handling (Add) for Prominent Auras & Blacklist
+function UnitFrames.AddToCustomList(list, input)
+    local listRef = list == UnitFrames.SV.blacklist and GetString(SI_LUIE_CUSTOM_LIST_UF_BLACKLIST) or ""
+    if input ~= "" then
+        list[input] = true
+        CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+        printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_NAME), input, listRef), true)
+    end
+end
+
+-- List Handling (Remove) for Prominent Auras & Blacklist
+function UnitFrames.RemoveFromCustomList(list, input)
+    local listRef = list == UnitFrames.SV.blacklist and GetString(SI_LUIE_CUSTOM_LIST_UF_BLACKLIST) or ""
+    if input ~= "" then
+        list[input] = nil
+        CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+        printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_NAME), input, listRef), true)
+    end
 end
 
 function UnitFrames.GetDefaultFramesOptions(frame)
@@ -1777,10 +1798,21 @@ function UnitFrames.CustomPetUpdate()
     for i = 1, 7 do
         local unitTag = "playerpet" .. i
         if DoesUnitExist(unitTag) then
-            -- Save this pet for later sorting
-            table.insert(petList, { ["unitTag"] = unitTag, ["unitName"] = GetUnitName(unitTag) } )
-            -- CustomFrames
-            n = n + 1
+            -- Compare blacklist entries and don't add this pet to the list if it is blacklisted.
+            local unitName = GetUnitName(unitTag)
+            local compareBlacklist = string.lower(unitName)
+            local bail
+            for k, _ in pairs(UnitFrames.SV.blacklist) do
+                k = string.lower(k)
+                if compareBlacklist == k then
+                    bail = true
+                end
+            end
+            if not bail then
+                table.insert(petList, { ["unitTag"] = unitTag, ["unitName"] = unitName } )
+                -- CustomFrames
+                n = n + 1
+            end
         else
             -- For non-existing unitTags we will remove reference from CustomFrames table
             UnitFrames.CustomFrames[unitTag] = nil

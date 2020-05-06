@@ -14,6 +14,7 @@ local strings = {
     -- Shared
     SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST =                 "Aura Blacklist",
     SI_LUIE_CUSTOM_LIST_CT_BLACKLIST =                   "Combat Text Blacklist",
+    SI_LUIE_CUSTOM_LIST_UF_BLACKLIST =                   "Pet Blacklist",
     SI_LUIE_CUSTOM_LIST_ADDED_ID =                       "<<1>> [<<2>>] <<3>> zu <<4>> hinzugefügt.",
     SI_LUIE_CUSTOM_LIST_ADDED_FAILED =                   "Konnte [<<1>>] nicht zu <<2>> hinzufügen. Diese abiilityId existiert nicht.",
     SI_LUIE_CUSTOM_LIST_ADDED_NAME =                     "<<1>> zu <<2>> hinzugefügt.",
