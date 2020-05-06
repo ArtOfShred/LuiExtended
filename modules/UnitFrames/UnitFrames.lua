@@ -141,7 +141,7 @@ UnitFrames.Defaults = {
     GroupBarSpacing                  = 40,
     CustomFramesRaid                 = true,
     RaidNameClip                     = 94,
-    RaidBarWidth                     = 210,
+    RaidBarWidth                     = 220,
     RaidBarHeight                    = 30,
     RaidLayout                       = "2 x 12",
     RoleIconSmallGroup               = true,
@@ -191,11 +191,12 @@ UnitFrames.Defaults = {
     CustomFormatPet                  = "Current (Percentage%)",
     CustomColourPet                  = { 202/255,  20/255, 0 },
     PetHeight                        = 30,
-    PetWidth                         = 200,
+    PetWidth                         = 220,
     PetUseClassColor                 = false,
     PetIncAlpha                      = 85,
     PetOocAlpha                      = 85,
     blacklist                        = {}, -- Blacklist for pet names
+    PetNameClip                      = 88,
 
 }
 UnitFrames.SV = nil
@@ -967,7 +968,7 @@ local function CreateCustomFrames()
                 ["name"]        = UI.Label( shb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, unitTag, false ),
 
             }
-
+            UnitFrames.CustomFrames[unitTag].name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
             UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].label.fmt = "Current (Percentage%)"
         end
     end
@@ -3593,6 +3594,9 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
                 shb.backdrop:SetCenterColor( unpack(petcolor_bg) )
             end
             shb.shield:SetColor( unpack(shield) )
+            if shb.shieldbackdrop then
+                shb.shieldbackdrop:SetCenterColor( unpack(shield_bg) )
+            end
             if isMenu then
                 unitFrame.tlw:SetHidden ( false )
             end
@@ -4712,7 +4716,7 @@ function UnitFrames.CustomFramesApplyLayoutPet(unhide)
         unitFrame.control:SetAnchor( TOPLEFT, pet, TOPLEFT, 0, (petBarHeight + 3)*(i-1) )
         unitFrame.control:SetDimensions(UnitFrames.SV.PetWidth, petBarHeight)
 
-        unitFrame.name:SetDimensions( UnitFrames.SV.PetWidth - 10, UnitFrames.SV.PetHeight-2 )
+        unitFrame.name:SetDimensions( UnitFrames.SV.PetWidth - UnitFrames.SV.PetNameClip - 10, UnitFrames.SV.PetHeight-2 )
         unitFrame.name:SetAnchor(LEFT, shb, LEFT, 5, 0 )
 
         unitFrame[POWERTYPE_HEALTH].label:SetDimensions(UnitFrames.SV.PetWidth-50, UnitFrames.SV.PetHeight - 2)
@@ -4768,6 +4772,9 @@ function UnitFrames.CustomFramesApplyInCombat()
     local oocAlphaBoss = 0.01 * UnitFrames.SV.BossOocAlpha
     local incAlphaBoss = 0.01 * UnitFrames.SV.BossIncAlpha
 
+    local oocAlphaPet = 0.01 * UnitFrames.SV.PetOocAlpha
+    local incAlphaPet = 0.01 * UnitFrames.SV.PetIncAlpha
+
     -- Apply to all frames
     if UnitFrames.CustomFrames.player then
         UnitFrames.CustomFrames.player.control:SetAlpha( idle and oocAlphaPlayer or incAlphaPlayer )
@@ -4793,12 +4800,22 @@ function UnitFrames.CustomFramesApplyInCombat()
         end
     end
 
+    -- Set boss transparency
     for i = 1, 6 do
         local unitTag = "boss" .. i
         if UnitFrames.CustomFrames[unitTag] then
             UnitFrames.CustomFrames[unitTag].control:SetAlpha ( idle and oocAlphaBoss or incAlphaBoss )
         end
     end
+
+    -- Set pet transparency
+    for i = 1, 7 do
+        local unitTag = "PetGroup" .. i
+        if UnitFrames.CustomFrames[unitTag] then
+            UnitFrames.CustomFrames[unitTag].control:SetAlpha ( idle and oocAlphaPet or incAlphaPet)
+        end
+    end
+
 end
 
 function UnitFrames.CustomFramesGroupAlpha()
