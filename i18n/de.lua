@@ -537,6 +537,10 @@ local strings = {
     SI_LUIE_UF_WEREWOLF_TP =                             "Du verbleibst in der Werwolf-Form für |cFFFFFF<<1>>|r Sekunden.",
     SI_LUIE_UF_MOUNT_POWER =                             "<<1>>/<<2>> Reitausdauer (<<3>>%)",
     SI_LUIE_UF_SIEGE_POWER =                             "<<1>>/<<2>> Ausdauer (<<3>>%)",
+    SI_LUIE_UF_DEAD_STATUS_REVIVING =                    "Reviving...",
+    SI_LUIE_UF_DEAD_STATUS_RES_SHORTHAND =               "Ressing...",
+    SI_LUIE_UF_DEAD_STATUS_RES_PENDING_SHORTHAND =       "Pending..."
+
 }
 
 for stringId, stringValue in pairs(strings) do

@@ -136,12 +136,12 @@ UnitFrames.Defaults = {
     TargetEnableSkull                = true,
     CustomFramesGroup                = true,
     GroupExcludePlayer               = false,
-    GroupBarWidth                    = 250,
+    GroupBarWidth                    = 260,
     GroupBarHeight                   = 36,
     GroupBarSpacing                  = 40,
     CustomFramesRaid                 = true,
     RaidNameClip                     = 94,
-    RaidBarWidth                     = 200,
+    RaidBarWidth                     = 210,
     RaidBarHeight                    = 30,
     RaidLayout                       = "2 x 12",
     RoleIconSmallGroup               = true,
@@ -198,6 +198,7 @@ local g_DefaultFrames       = {} -- Default Unit Frames are not referenced by ex
 local g_MaxChampionPoint    = GetChampionPointsPlayerProgressionCap() -- Keet this value in local constant
 local g_defaultTargetNameLabel   -- Reference to default UI target name label
 local g_defaultThreshold    = 25
+local g_isRaid              = false -- Used by resurrection tracking function to determine if we should use abbreviated or unabbreviated text for resurrection.
 local g_powerError          = {}
 local g_savedHealth         = {}
 local g_statFull            = {}
@@ -218,9 +219,14 @@ local g_PendingUpdate = {
 -- Font to be used on default UI overlay labels
 local defaultLabelFont = "/LuiExtended/media/fonts/Fontin/fontin_sans_sc.otf|15|outline"
 
--- Very simple and crude translation support of common labels
-local strDead       = GetString(SI_UNIT_FRAME_STATUS_DEAD)
-local strOffline    = GetString(SI_UNIT_FRAME_STATUS_OFFLINE)
+-- Labels for Offline/Dead/Resurrection Status
+local strDead           = GetString(SI_UNIT_FRAME_STATUS_DEAD)
+local strOffline        = GetString(SI_UNIT_FRAME_STATUS_OFFLINE)
+local strResCast        = GetString(SI_PLAYER_TO_PLAYER_RESURRECT_BEING_RESURRECTED)
+local strResSelf        = GetString(SI_LUIE_UF_DEAD_STATUS_REVIVING)
+local strResPending     = GetString(SI_PLAYER_TO_PLAYER_RESURRECT_HAS_RESURRECT_PENDING)
+local strResCastRaid    = GetString(SI_LUIE_UF_DEAD_STATUS_RES_SHORTHAND)
+local strResPendingRaid = GetString(SI_LUIE_UF_DEAD_STATUS_RES_PENDING_SHORTHAND)
 
 -- Following settings will be used in options menu to define DefaultFrames behaviour
 -- TODO: localization
@@ -826,6 +832,7 @@ local function CreateCustomFrames()
                 ["leader"]      = UI.Texture( topInfo, {LEFT,LEFT, -7,0}, {32,32}, nil, 2, false ),
             }
 
+            UnitFrames.CustomFrames[unitTag].name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
             control.defaultUnitTag = GetGroupUnitTagByIndex(i)
             control:SetMouseEnabled(true)
             control:SetHandler("OnMouseUp", UnitFrames.GroupFrames_OnMouseUp)
@@ -878,6 +885,7 @@ local function CreateCustomFrames()
                 ["leader"]      = UI.Texture( rhb, {LEFT,LEFT, -2,0}, {28,28}, nil, 2, false ),
 
             }
+            UnitFrames.CustomFrames[unitTag].name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
 
             control.defaultUnitTag = GetGroupUnitTagByIndex(i)
             control:SetMouseEnabled(true)
@@ -2594,7 +2602,7 @@ end
 function UnitFrames.OnDeath(eventCode, unitTag, isDead)
     --d( string.format("%s - %s", unitTag, isDead and "Dead" or "Alive" ) )
     if UnitFrames.CustomFrames[unitTag] and UnitFrames.CustomFrames[unitTag].dead then
-        UnitFrames.CustomFramesSetDeadLabel( UnitFrames.CustomFrames[unitTag], isDead and strDead or nil )
+        UnitFrames.ResurrectionMonitor(unitTag)
     end
 
     -- Manually hide regen/degen animation as well as stat-changing icons, because game does not always issue corresponding event before unit is dead
@@ -2617,6 +2625,32 @@ function UnitFrames.OnDeath(eventCode, unitTag, isDead)
             end
         end
     end
+end
+
+function UnitFrames.ResurrectionMonitor(unitTag)
+    eventManager:UnregisterForUpdate(moduleName .. "Res" .. unitTag)
+
+    -- Check to make sure this unit exists & the custom frame exists
+    if not DoesUnitExist(unitTag) then return end
+    if not ZO_Group_IsGroupUnitTag(unitTag) then return end
+    if not UnitFrames.CustomFrames[unitTag] then return end
+
+    if IsUnitDead(unitTag) then
+        if IsUnitBeingResurrected(unitTag) then
+            UnitFrames.CustomFramesSetDeadLabel( UnitFrames.CustomFrames[unitTag], g_isRaid and strResCastRaid or strResCast )
+        elseif DoesUnitHaveResurrectPending(unitTag) then
+            UnitFrames.CustomFramesSetDeadLabel( UnitFrames.CustomFrames[unitTag], g_isRaid and strResPendingRaid or strResPending )
+        else
+            UnitFrames.CustomFramesSetDeadLabel( UnitFrames.CustomFrames[unitTag], strDead )
+        end
+        eventManager:RegisterForUpdate(moduleName .. "Res" .. unitTag, 100, function() UnitFrames.ResurrectionMonitor(unitTag) end)
+    elseif IsUnitReincarnating(unitTag) then
+        UnitFrames.CustomFramesSetDeadLabel( UnitFrames.CustomFrames[unitTag], strResSelf )
+        eventManager:RegisterForUpdate(moduleName .. "Res" .. unitTag, 100, function() UnitFrames.ResurrectionMonitor(unitTag) end)
+    else
+        UnitFrames.CustomFramesSetDeadLabel( UnitFrames.CustomFrames[unitTag], nil )
+    end
+
 end
 
 -- Runs on the EVENT_LEADER_UPDATE listener.
@@ -3053,6 +3087,11 @@ function UnitFrames.CustomFramesGroupUpdate()
             UnitFrames.CustomFramesUnreferenceGroupControl("RaidGroup", n+1)
             raid = true
         end
+    end
+
+    -- Set raid variable for resurrection monitor.
+    if raid ~= nil then
+        g_isRaid = raid
     end
 
     -- Here we can check unlikely situation when neither custom frames were selected
@@ -4335,14 +4374,14 @@ function UnitFrames.CustomFramesApplyLayoutRaid(unhide)
         -- If we have icons set to display
         if UnitFrames.SV.RaidIconOptions > 1 then
             if UnitFrames.SV.RaidIconOptions == 2 then -- Class Icon Only
-                unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-17, UnitFrames.SV.RaidBarHeight-2 )
+                unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-27, UnitFrames.SV.RaidBarHeight-2 )
                 unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
                 unitFrame.roleIcon:SetHidden (true)
                 unitFrame.classIcon:SetHidden (false)
             end
             if UnitFrames.SV.RaidIconOptions == 3 then -- Role Icon Only
                 if role then
-                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-17, UnitFrames.SV.RaidBarHeight-2 )
+                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-27, UnitFrames.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
                     unitFrame.roleIcon:SetHidden (false)
                     unitFrame.classIcon:SetHidden (true)
@@ -4350,18 +4389,18 @@ function UnitFrames.CustomFramesApplyLayoutRaid(unhide)
             end
             if UnitFrames.SV.RaidIconOptions == 4 then -- Class PVP, Role PVE
                 if LUIE.ResolvePVPZone() then
-                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-17, UnitFrames.SV.RaidBarHeight-2 )
+                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-27, UnitFrames.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
                     unitFrame.roleIcon:SetHidden (true)
                     unitFrame.classIcon:SetHidden (false)
                 elseif not LUIE.ResolvePVPZone() and role then
-                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-17, UnitFrames.SV.RaidBarHeight-2 )
+                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-27, UnitFrames.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
                     unitFrame.roleIcon:SetHidden (false)
                     unitFrame.classIcon:SetHidden (true)
                 else
                     -- Fallback if neither condition is true then we clear the frame
-                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip, UnitFrames.SV.RaidBarHeight-2 )
+                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-10, UnitFrames.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 5, 0 )
                     unitFrame.roleIcon:SetHidden (true)
                     unitFrame.classIcon:SetHidden (true)
@@ -4369,32 +4408,32 @@ function UnitFrames.CustomFramesApplyLayoutRaid(unhide)
             end
             if UnitFrames.SV.RaidIconOptions == 5 then -- Class PVE, Role PVP
                 if LUIE.ResolvePVPZone() and role then
-                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-17, UnitFrames.SV.RaidBarHeight-2 )
+                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-27, UnitFrames.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
                     unitFrame.roleIcon:SetHidden (false)
                     unitFrame.classIcon:SetHidden (true)
                 elseif not LUIE.ResolvePVPZone() then
-                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-17, UnitFrames.SV.RaidBarHeight-2 )
+                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-27, UnitFrames.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
                     unitFrame.roleIcon:SetHidden (true)
                     unitFrame.classIcon:SetHidden (false)
                 else
                     -- Fallback if neither condition is true then we clear the frame
-                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip, UnitFrames.SV.RaidBarHeight-2 )
+                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-10, UnitFrames.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 5, 0 )
                     unitFrame.roleIcon:SetHidden (true)
                     unitFrame.classIcon:SetHidden (true)
                 end
             end
         else
-            unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip, UnitFrames.SV.RaidBarHeight-2 )
+            unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-10, UnitFrames.SV.RaidBarHeight-2 )
             unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 5, 0 )
             unitFrame.roleIcon:SetHidden (true)
             unitFrame.classIcon:SetHidden (true)
         end
 
         if IsUnitGroupLeader(unitTag) then
-            unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-17, UnitFrames.SV.RaidBarHeight-2 )
+            unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-27, UnitFrames.SV.RaidBarHeight-2 )
             unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
             unitFrame.roleIcon:SetHidden (true)
             unitFrame.classIcon:SetHidden (true)
