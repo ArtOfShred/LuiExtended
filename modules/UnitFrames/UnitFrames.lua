@@ -666,6 +666,8 @@ local function CreateCustomFrames()
             ["debuffs"]     = UI.Control( playerTlw, {BOTTOM,TOP,0,-2,topInfo}, nil, false ),
         }
 
+        UnitFrames.CustomFrames.player.name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
+
         -- If Stamina Label is hidden in menu options, hide the stamina bar labels
         if UnitFrames.SV.HideLabelStamina then
             UnitFrames.CustomFrames.player[POWERTYPE_STAMINA].labelOne:SetHidden(true)
@@ -752,6 +754,7 @@ local function CreateCustomFrames()
             ["buffs"]       = buffs,
             ["debuffs"]     = debuffs,
         }
+        UnitFrames.CustomFrames.reticleover.name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
         UnitFrames.CustomFrames.reticleover.className:SetDrawLayer( DL_BACKGROUND )
     end
 
@@ -810,6 +813,7 @@ local function CreateCustomFrames()
             ["dead"]        = UI.Label( thb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "Status", true ),
         }
 
+        UnitFrames.CustomFrames.AvaPlayerTarget.name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
         UnitFrames.CustomFrames.AvaPlayerTarget[POWERTYPE_HEALTH].label.fmt = "Percentage%"
         UnitFrames.CustomFrames.AvaPlayerTarget[POWERTYPE_HEALTH].labelOne.fmt = "Current + Shield"
         UnitFrames.CustomFrames.AvaPlayerTarget[POWERTYPE_HEALTH].labelTwo.fmt = "Max"
@@ -1012,6 +1016,7 @@ local function CreateCustomFrames()
                 },
                 ["name"]        = UI.Label( bhb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, unitTag, false ),
             }
+            UnitFrames.CustomFrames[unitTag].name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
             UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].label.fmt = "Percentage%"
         end
     end

@@ -1378,6 +1378,13 @@ local strings = {
     SI_LUIE_LAM_UF_BLACKLIST_ADDLIST_TP =                "Add a pet name to the blacklist.",
     SI_LUIE_LAM_UF_BLACKLIST_REMLIST =                   "Remove Pet Name from Blacklist",
     SI_LUIE_LAM_UF_BLACKLIST_REMLIST_TP =                "Remove a pet name blacklist.",
+    SI_LUIE_LAM_BUFF_NORMALIZE_HEADER =                  "Custom Icon & Normalization Options",
+    SI_LUIE_LAM_GENERIC_POTION =                         "Potion - Use Major/Minor Icons",
+    SI_LUIE_LAM_GENERIC_POTION_TP =                      "Where applicable potions will use their respective Major/Minor effect icon instead of using a custom icon.",
+    SI_LUIE_LAM_GENERIC_POISON =                         "Poison - Use Major/Minor Icons",
+    SI_LUIE_LAM_GENERIC_POISON_TP =                      "Where applicable poisons will use their respective Major/Minor effect icon instead of using a custom icon.",
+    SI_LUIE_LAM_GENERIC_STATUS =                         "Status Effects - Use Major/Minor Icons",
+    SI_LUIE_LAM_GENERIC_STATUS_TP =                      "Where applicable status effects will use their respective Major/Minor effect icon instead of using a custom icon.",
 
     -- Module: Combat Text
     SI_LUIE_LAM_CT =                                     "Текст боя",

@@ -145,6 +145,9 @@ SpellCastBuffs.Defaults = {
     TooltipSticky                       = 0,
     TooltipAbilityId                    = false,
     TooltipBuffType                     = false,
+    GenericPotion                       = false,
+    GenericPoison                       = true,
+    GenericStatusEffect                 = false,
 }
 SpellCastBuffs.SV = nil
 
@@ -374,6 +377,9 @@ function SpellCastBuffs.Initialize(enabled)
 
     SpellCastBuffs.Reset()
     SpellCastBuffs.UpdateContextHideList()
+    SpellCastBuffs.UpdatePotionList()
+    SpellCastBuffs.UpdatePoisonList()
+    SpellCastBuffs.UpdateStatusEffectList()
 
     -- Register events
     eventManager:RegisterForUpdate(moduleName, 100, SpellCastBuffs.OnUpdate )
@@ -3510,6 +3516,60 @@ function SpellCastBuffs.UpdateContextHideList()
     if not SpellCastBuffs.SV.ShowBlockTarget then
         for k, v in pairs(Effects.IsBlock) do
             hideTargetEffects[k] = v
+        end
+    end
+end
+
+-- Called from the menu and on initialize to build potion effect generic icon overrides.
+function SpellCastBuffs.UpdatePotionList(menu)
+    if LUIE.SpellCastBuffs.SV.GenericPotion then
+        for k, v in pairs(Effects.PotionIconTable) do
+            if v.normalize then
+                Effects.EffectOverride[k].icon = v.normalize
+            end
+        end
+    -- Minimize the amount of iterating we need to do, we only need to toggle back if we're disabling the setting from the menu.
+    elseif menu and not LUIE.SpellCastBuffs.SV.GenericPotion then
+        for k, v in pairs(Effects.PotionIconTable) do
+            if v.icon then
+                Effects.EffectOverride[k].icon = v.icon
+            end
+        end
+    end
+end
+
+-- Called from the menu and on initialize to build poison effect generic icon overrides.
+function SpellCastBuffs.UpdatePoisonList(menu)
+    if LUIE.SpellCastBuffs.SV.GenericPoison then
+        for k, v in pairs(Effects.PoisonIconTable) do
+            if v.normalize then
+                Effects.EffectOverride[k].icon = v.normalize
+            end
+        end
+    -- Minimize the amount of iterating we need to do, we only need to toggle back if we're disabling the setting from the menu.
+    elseif menu and not LUIE.SpellCastBuffs.SV.GenericPoison then
+        for k, v in pairs(Effects.PoisonIconTable) do
+            if v.icon then
+                Effects.EffectOverride[k].icon = v.icon
+            end
+        end
+    end
+end
+
+-- Called from the menu and on initialize to build status effect generic icon overrides.
+function SpellCastBuffs.UpdateStatusEffectList(menu)
+    if LUIE.SpellCastBuffs.SV.GenericStatusEffect then
+        for k, v in pairs(Effects.StatusEffectIconTable) do
+            if v.normalize then
+                Effects.EffectOverride[k].icon = v.normalize
+            end
+        end
+    -- Minimize the amount of iterating we need to do, we only need to toggle back if we're disabling the setting from the menu.
+    elseif menu and not LUIE.SpellCastBuffs.SV.GenericStatusEffect then
+        for k, v in pairs(Effects.StatusEffectIconTable) do
+            if v.icon then
+                Effects.EffectOverride[k].icon = v.icon
+            end
         end
     end
 end
