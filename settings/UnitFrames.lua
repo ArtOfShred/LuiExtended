@@ -4,6 +4,7 @@
 --]]
 
 local UnitFrames = LUIE.UnitFrames
+local PetNames = LUIE.Data.PetNames
 
 local zo_strformat = zo_strformat
 
@@ -33,9 +34,9 @@ local formatOptions = {
     "Current + Shield (Percentage%)"
 }
 
-local Blacklist, BlackListValues = {}
+local Whitelist, WhitelistValues = {}
 
--- Create a list of Unitnames to use for Summon Blacklist
+-- Create a list of Unitnames to use for Summon Whitelist
 local function GenerateCustomList(input)
     local options, values = {}, {}
     local counter = 0
@@ -1725,39 +1726,86 @@ function UnitFrames.CreateSettings()
                 default = Defaults.PetUseClassColor,
                 disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPet ) end,
             },
-
             {
-                -- Unit Frames Pet Blacklist Header
+                -- Unit Frames Pet Whitelist Header
                 type = "header",
                 name = GetString(SI_LUIE_LAM_UF_BLACKLIST_HEADER),
             },
             {
-                -- Unit Frames Pet Blacklist Description
+                -- Unit Frames Pet Whitelist Description
                 type = "description",
                 text = GetString(SI_LUIE_LAM_UF_BLACKLIST_DESCRIPT),
             },
+            -- Add Pet Names - Necromancer
             {
-                -- Unit Frames Pet Blacklist (Add)
+                type = "button",
+                name = GetString(SI_LUIE_LAM_UF_WHITELIST_ADD_NECROMANCER),
+                tooltip = GetString(SI_LUIE_LAM_UF_WHITELIST_ADD_NECROMANCER_TP),
+                func = function() UnitFrames.AddBulkToCustomList(Settings.whitelist, PetNames.Necromancer) LUIE_WhitelistUF:UpdateChoices(GenerateCustomList(Settings.whitelist)) UnitFrames.CustomPetUpdate() end,
+                width = "half",
+            },
+            -- Add Pet Names - Sorcerer
+            {
+                type = "button",
+                name = GetString(SI_LUIE_LAM_UF_WHITELIST_ADD_SORCERER),
+                tooltip = GetString(SI_LUIE_LAM_UF_WHITELIST_ADD_SORCERER_TP),
+                func = function() UnitFrames.AddBulkToCustomList(Settings.whitelist, PetNames.Sorcerer) LUIE_WhitelistUF:UpdateChoices(GenerateCustomList(Settings.whitelist)) UnitFrames.CustomPetUpdate() end,
+                width = "half",
+            },
+            -- Add Pet Names - Warden
+            {
+                type = "button",
+                name = GetString(SI_LUIE_LAM_UF_WHITELIST_ADD_WARDEN),
+                tooltip = GetString(SI_LUIE_LAM_UF_WHITELIST_ADD_WARDEN_TP),
+                func = function() UnitFrames.AddBulkToCustomList(Settings.whitelist, PetNames.Warden) LUIE_WhitelistUF:UpdateChoices(GenerateCustomList(Settings.whitelist)) UnitFrames.CustomPetUpdate() end,
+                width = "half",
+            },
+            -- Add Pet Names - Sets
+            {
+                type = "button",
+                name = GetString(SI_LUIE_LAM_UF_WHITELIST_ADD_SETS),
+                tooltip = GetString(SI_LUIE_LAM_UF_WHITELIST_ADD_SETS_TP),
+                func = function() UnitFrames.AddBulkToCustomList(Settings.whitelist, PetNames.Sets) LUIE_WhitelistUF:UpdateChoices(GenerateCustomList(Settings.whitelist)) UnitFrames.CustomPetUpdate() end,
+                width = "half",
+            },
+            -- Add Pet Names - Assistants
+            {
+                type = "button",
+                name = GetString(SI_LUIE_LAM_UF_WHITELIST_ADD_ASSISTANTS),
+                tooltip = GetString(SI_LUIE_LAM_UF_WHITELIST_ADD_ASSISTANTS_TP),
+                func = function() UnitFrames.AddBulkToCustomList(Settings.whitelist, PetNames.Assistants) LUIE_WhitelistUF:UpdateChoices(GenerateCustomList(Settings.whitelist)) UnitFrames.CustomPetUpdate() end,
+                width = "half",
+            },
+            -- Clear Whitelist
+            {
+                type = "button",
+                name = GetString(SI_LUIE_LAM_UF_WHITELIST_CLEAR),
+                tooltip = GetString(SI_LUIE_LAM_UF_WHITELIST_CLEAR_TP),
+                func = function() UnitFrames.ClearCustomList(Settings.whitelist) LUIE_WhitelistUF:UpdateChoices(GenerateCustomList(Settings.whitelist)) UnitFrames.CustomPetUpdate() end,
+                width = "half",
+            },
+
+            {
+                -- Unit Frames Pet Whitelist (Add)
                 type = "editbox",
                 name = GetString(SI_LUIE_LAM_UF_BLACKLIST_ADDLIST),
                 tooltip = GetString(SI_LUIE_LAM_UF_BLACKLIST_ADDLIST_TP),
                 getFunc = function() end,
-                setFunc = function(value) UnitFrames.AddToCustomList(Settings.blacklist, value) LUIE_BlacklistUF:UpdateChoices(GenerateCustomList(Settings.blacklist)) UnitFrames.CustomPetUpdate() end,
+                setFunc = function(value) UnitFrames.AddToCustomList(Settings.whitelist, value) LUIE_WhitelistUF:UpdateChoices(GenerateCustomList(Settings.whitelist)) UnitFrames.CustomPetUpdate() end,
             },
             {
                 -- Unit Frames Pet (Remove)
                 type = "dropdown",
                 name = GetString(SI_LUIE_LAM_UF_BLACKLIST_REMLIST),
                 tooltip = GetString(SI_LUIE_LAM_UF_BLACKLIST_REMLIST_TP),
-                choices = Blacklist,
-                choicesValues = BlacklistValues,
+                choices = Whitelist,
+                choicesValues = WhitelistValues,
                 scrollable = true,
                 sort = "name-up",
-                getFunc = function() LUIE_BlacklistUF:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,
-                setFunc = function(value) UnitFrames.RemoveFromCustomList(Settings.blacklist, value) LUIE_BlacklistUF:UpdateChoices(GenerateCustomList(Settings.blacklist)) UnitFrames.CustomPetUpdate() end,
-                reference = "LUIE_BlacklistUF"
+                getFunc = function() LUIE_WhitelistUF:UpdateChoices(GenerateCustomList(Settings.whitelist)) end,
+                setFunc = function(value) UnitFrames.RemoveFromCustomList(Settings.whitelist, value) LUIE_WhitelistUF:UpdateChoices(GenerateCustomList(Settings.whitelist)) UnitFrames.CustomPetUpdate() end,
+                reference = "LUIE_WhitelistUF"
             },
-
         },
     }
 

@@ -195,7 +195,7 @@ UnitFrames.Defaults = {
     PetUseClassColor                 = false,
     PetIncAlpha                      = 85,
     PetOocAlpha                      = 85,
-    blacklist                        = {}, -- Blacklist for pet names
+    whitelist                        = {}, -- whitelist for pet names
     PetNameClip                      = 88,
 
 }
@@ -332,9 +332,27 @@ local function CreateDecreasedArmorOverlay( parent, small )
     return control
 end
 
--- List Handling (Add) for Prominent Auras & Blacklist
+-- Bulk list add from menu buttons
+function UnitFrames.AddBulkToCustomList(list, table)
+    if table ~= nil then
+        for k, v in pairs(table) do
+            UnitFrames.AddToCustomList(list, k)
+        end
+    end
+end
+
+function UnitFrames.ClearCustomList(list)
+    local listRef = list == UnitFrames.SV.whitelist and GetString(SI_LUIE_CUSTOM_LIST_UF_BLACKLIST) or ""
+    for k, v in pairs(list) do
+        list[k] = nil
+    end
+    CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+    printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_CLEARED), listRef), true)
+end
+
+-- List Handling (Add) Pet Whitelist
 function UnitFrames.AddToCustomList(list, input)
-    local listRef = list == UnitFrames.SV.blacklist and GetString(SI_LUIE_CUSTOM_LIST_UF_BLACKLIST) or ""
+    local listRef = list == UnitFrames.SV.whitelist and GetString(SI_LUIE_CUSTOM_LIST_UF_BLACKLIST) or ""
     if input ~= "" then
         list[input] = true
         CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
@@ -342,9 +360,9 @@ function UnitFrames.AddToCustomList(list, input)
     end
 end
 
--- List Handling (Remove) for Prominent Auras & Blacklist
+-- List Handling (Remove) Pet Whitelist
 function UnitFrames.RemoveFromCustomList(list, input)
-    local listRef = list == UnitFrames.SV.blacklist and GetString(SI_LUIE_CUSTOM_LIST_UF_BLACKLIST) or ""
+    local listRef = list == UnitFrames.SV.whitelist and GetString(SI_LUIE_CUSTOM_LIST_UF_BLACKLIST) or ""
     if input ~= "" then
         list[input] = nil
         CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
@@ -1804,17 +1822,17 @@ function UnitFrames.CustomPetUpdate()
     for i = 1, 7 do
         local unitTag = "playerpet" .. i
         if DoesUnitExist(unitTag) then
-            -- Compare blacklist entries and don't add this pet to the list if it is blacklisted.
+            -- Compare whitelist entries and only add this pet to the list if it is whitelisted.
             local unitName = GetUnitName(unitTag)
-            local compareBlacklist = string.lower(unitName)
-            local bail
-            for k, _ in pairs(UnitFrames.SV.blacklist) do
+            local compareWhitelist = string.lower(unitName)
+            local addPet
+            for k, _ in pairs(UnitFrames.SV.whitelist) do
                 k = string.lower(k)
-                if compareBlacklist == k then
-                    bail = true
+                if compareWhitelist == k then
+                    addPet = true
                 end
             end
-            if not bail then
+            if addPet then
                 table.insert(petList, { ["unitTag"] = unitTag, ["unitName"] = unitName } )
                 -- CustomFrames
                 n = n + 1
