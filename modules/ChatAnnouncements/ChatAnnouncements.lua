@@ -1771,7 +1771,7 @@ function ChatAnnouncements.ActivityStatusUpdate(eventCode, status)
 
     -- Debug
     if status == ACTIVITY_FINDER_STATUS_FORMING_GROUP and g_savedQueueValue ~= ACTIVITY_FINDER_STATUS_FORMING_GROUP then
-        if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
+        if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
             d("Old ACTIVITY_FINDER_STATUS_FORMING_GROUP event triggered")
         end
     end
@@ -3377,7 +3377,7 @@ function ChatAnnouncements.ResolveQuestItemChange()
             -- Lower
             if newValue < questItemIndex[itemId].stack then
                 -- Easy temporary debug for my accounts only
-                if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
+                if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
                     d(itemId .. " Removed")
                 end
                 --
@@ -3443,7 +3443,7 @@ function ChatAnnouncements.ResolveQuestItemChange()
             -- Higher
             if newValue > questItemIndex[itemId].stack then
                 -- Easy temporary debug for my accounts only
-                if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
+                if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
                     d(itemId .. " Added")
                 end
                 --
@@ -7388,7 +7388,7 @@ function ChatAnnouncements.HookFunction()
         end
 
         -- Debug for my account - TODO: Remove
-        if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
+        if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
             d(conditionType)
         end
 
@@ -10230,9 +10230,9 @@ function ChatAnnouncements.PrintQueuedMessages()
     -- Quest Items (Remove)
     for i=1, #g_queuedMessages do
         if g_queuedMessages[i].type == "QUEST LOOT REMOVE" then
-            --if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_queuedMessages[i].itemId) end -- TODO: Remove debug later
+            --if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_queuedMessages[i].itemId) end -- TODO: Remove debug later
             local itemId = g_queuedMessages[i].itemId
-            --if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_questItemAdded[itemId]) end -- TODO: Remove debug later
+            --if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_questItemAdded[itemId]) end -- TODO: Remove debug later
             if not g_questItemAdded[itemId] == true then
                 printToChat(g_queuedMessages[i].message)
             end
@@ -10256,9 +10256,9 @@ function ChatAnnouncements.PrintQueuedMessages()
     -- Quest Items (ADD)
     for i=1, #g_queuedMessages do
         if g_queuedMessages[i].type == "QUEST LOOT ADD" then
-            --if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_queuedMessages[i].itemId) end -- TODO: Remove debug later
+            --if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_queuedMessages[i].itemId) end -- TODO: Remove debug later
             local itemId = g_queuedMessages[i].itemId
-            --if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_questItemRemoved[itemId]) end -- TODO: Remove debug later
+            --if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_questItemRemoved[itemId]) end -- TODO: Remove debug later
             if not g_questItemRemoved[itemId] == true then
                 printToChat(g_queuedMessages[i].message)
             end

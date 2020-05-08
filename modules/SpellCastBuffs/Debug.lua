@@ -250,7 +250,7 @@ function SpellCastBuffs.TempSlashConsolidate()
 end
 
 local displayName = GetDisplayName()
-if displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
+if displayName == "@ArtOfShredPTS" or displayName == "@ArtOfShredLegacy" then
     SLASH_COMMANDS["/filter"] = SpellCastBuffs.TempSlashFilter
     SLASH_COMMANDS["/ground"] = SpellCastBuffs.TempSlashGround
     SLASH_COMMANDS["/consolidate"] = SpellCastBuffs.TempSlashConsolidate
