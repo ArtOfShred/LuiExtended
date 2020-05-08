@@ -14,12 +14,17 @@ local strings = {
     -- Shared
     SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST =                 "аура в черный список",
     SI_LUIE_CUSTOM_LIST_CT_BLACKLIST =                   "Combat Text Blacklist",
+    SI_LUIE_CUSTOM_LIST_UF_BLACKLIST =                   "Pet Blacklist",
     SI_LUIE_CUSTOM_LIST_ADDED_ID =                       "<<1>> [<<2>>] <<3>> добавлены к <<4>>.",
     SI_LUIE_CUSTOM_LIST_ADDED_FAILED =                   "не возможно добавить [<<1>>] к <<2>>. Этот abilityID не существует.",
     SI_LUIE_CUSTOM_LIST_ADDED_NAME =                     "<<1>> добавлен к <<2>>.",
     SI_LUIE_CUSTOM_LIST_REMOVED_ID =                     "<<1>> [<<2>>] <<3>> убраны из <<4>>.",
     SI_LUIE_CUSTOM_LIST_REMOVED_FAILED =                 "Не возможно убрать [<<1>>] до <<2>>. Этот abilityID не существует.",
     SI_LUIE_CUSTOM_LIST_REMOVED_NAME =                   "<<1>> убран из <<2>>.",
+    SI_LUIE_DEFAULT_FRAME_QUEST_LOG =                    "Quest Log",
+    SI_LUIE_DEFAULT_FRAME_BATTLEGROUND_SCORE =           "Battleground Score",
+    SI_LUIE_DEFAULT_FRAME_LOOT_HISTORY =                 "Loot History",
+    SI_LUIE_DEFAULT_FRAME_EQUIPMENT_STATUS =             "Equipment Status",
 
     -- Bindings
     SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Призвать Банкира (Tythis)",
@@ -347,6 +352,7 @@ local strings = {
     SI_LUIE_CA_CURRENCY_MESSAGE_DECONSTRUCT =            "Вы разобрали %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_RESEARCH =               "Вы исследовали %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_DESTROY =                "Вы уничтожили %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_CONTAINER =              "You empty %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_LOCKPICK =               "Ваша %s ломается.",
     SI_LUIE_CA_CURRENCY_MESSAGE_REMOVE =                 "Убрано %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_TURNIN =                 "You turn in %s.",
@@ -536,6 +542,10 @@ local strings = {
     SI_LUIE_UF_WEREWOLF_TP =                             "Вы останетесь в форме оборотня в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_UF_MOUNT_POWER =                             "<<1>>/<<2>> Запас сил езд. животного (<<3>>%)",
     SI_LUIE_UF_SIEGE_POWER =                             "<<1>>/<<2>> Состояние (<<3>>%)",
+    SI_LUIE_UF_DEAD_STATUS_REVIVING =                    "Reviving...",
+    SI_LUIE_UF_DEAD_STATUS_RES_SHORTHAND =               "Ressing...",
+    SI_LUIE_UF_DEAD_STATUS_RES_PENDING_SHORTHAND =       "Pending..."
+
 }
 
 for stringId, stringValue in pairs(strings) do

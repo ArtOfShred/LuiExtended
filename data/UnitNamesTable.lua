@@ -6,6 +6,32 @@
 LUIE.Data.UnitNames = {
 
     ----------------------------------------------------------------
+    -- TARGET DUMMY NAMES ------------------------------------------
+    ----------------------------------------------------------------
+
+    Dummy_Robust_Target_Dromathra               = GetItemLinkName("|H0:item:151906:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Dummy_Robust_Target_Minotaur_Handler        = GetItemLinkName("|H0:item:130193:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Dummy_Bone_Goliath_Reanimated               = GetItemLinkName("|H0:item:153563:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Dummy_Target_Centurion_Dwarf_Brass          = GetItemLinkName("|H0:item:126035:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Dummy_Target_Centurion_Lambent              = GetItemLinkName("|H0:item:126037:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Dummy_Target_Centurion_Robust_Lambent       = GetItemLinkName("|H0:item:126038:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Dummy_Target_Centurion_Robust_Refabricated  = GetItemLinkName("|H0:item:126036:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Dummy_Target_Frost_Atronach                 = GetItemLinkName("|H0:item:156669:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Dummy_Target_Iron_Atronach                  = GetItemLinkName("|H0:item:130195:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Dummy_Target_Atronach_Trial                 = GetItemLinkName("|H0:item:147926:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Dummy_Target_Mournful_Aegis                 = GetItemLinkName("|H0:item:134823:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Dummy_Target_Skeleton_Humanoid              = GetItemLinkName("|H0:item:118553:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Dummy_Target_Skeleton_Khajiit               = GetItemLinkName("|H0:item:120426:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Dummy_Target_Skeleton_Argonian              = GetItemLinkName("|H0:item:120427:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Dummy_Target_Skeleton_Robust_Humanoid       = GetItemLinkName("|H0:item:121314:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Dummy_Target_Skeleton_Robust_Khajiit        = GetItemLinkName("|H0:item:121399:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Dummy_Target_Skeleton_Robust_Argonian       = GetItemLinkName("|H0:item:121400:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Dummy_Target_Stone_Atronach                 = GetItemLinkName("|H0:item:130194:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Dummy_Target_Voriplasm                      = GetItemLinkName("|H0:item:146069:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Dummy_Target_Wraith_of_Crows                = GetItemLinkName("|H0:item:141778:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Dummy_Target_The_Precursor                  = GetItemLinkName("|H0:item:132348:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+
+    ----------------------------------------------------------------
     -- CYORDIIL GUARD NAMES ----------------------------------------
     ----------------------------------------------------------------
 

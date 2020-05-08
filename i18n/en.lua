@@ -14,12 +14,17 @@ local strings = {
     -- Shared
     SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST =                 "Aura Blacklist",
     SI_LUIE_CUSTOM_LIST_CT_BLACKLIST =                   "Combat Text Blacklist",
+    SI_LUIE_CUSTOM_LIST_UF_BLACKLIST =                   "Pet Blacklist",
     SI_LUIE_CUSTOM_LIST_ADDED_ID =                       "<<1>> [<<2>>] <<3>> added to <<4>>.",
     SI_LUIE_CUSTOM_LIST_ADDED_FAILED =                   "Could not add [<<1>>] to <<2>>. That abiilityId does not exist.",
     SI_LUIE_CUSTOM_LIST_ADDED_NAME =                     "<<1>> added to <<2>>.",
     SI_LUIE_CUSTOM_LIST_REMOVED_ID =                     "<<1>> [<<2>>] <<3>> removed from <<4>>.",
     SI_LUIE_CUSTOM_LIST_REMOVED_FAILED =                 "Could not remove [<<1>>] to <<2>>. That abilityId does not exist.",
     SI_LUIE_CUSTOM_LIST_REMOVED_NAME =                   "<<1>> removed from <<2>>.",
+    SI_LUIE_DEFAULT_FRAME_QUEST_LOG =                    "Quest Log",
+    SI_LUIE_DEFAULT_FRAME_BATTLEGROUND_SCORE =           "Battleground Score",
+    SI_LUIE_DEFAULT_FRAME_LOOT_HISTORY =                 "Loot History",
+    SI_LUIE_DEFAULT_FRAME_EQUIPMENT_STATUS =             "Equipment Status",
 
     -- Bindings
     SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Summon Banker (Tythis)",
@@ -347,6 +352,7 @@ local strings = {
     SI_LUIE_CA_CURRENCY_MESSAGE_DECONSTRUCT =            "You deconstruct %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_RESEARCH =               "You research %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_DESTROY =                "You destroy %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_CONTAINER =              "You empty %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_LOCKPICK =               "Your %s breaks.",
     SI_LUIE_CA_CURRENCY_MESSAGE_REMOVE =                 "Removed %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_TURNIN =                 "You turn in %s.",
@@ -536,6 +542,10 @@ local strings = {
     SI_LUIE_UF_WEREWOLF_TP =                             "You will remain in Werewolf Form for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_UF_MOUNT_POWER =                             "<<1>>/<<2>> Mount Stamina (<<3>>%)",
     SI_LUIE_UF_SIEGE_POWER =                             "<<1>>/<<2>> Condition (<<3>>%)",
+    SI_LUIE_UF_DEAD_STATUS_REVIVING =                    "Reviving...",
+    SI_LUIE_UF_DEAD_STATUS_RES_SHORTHAND =               "Ressing...",
+    SI_LUIE_UF_DEAD_STATUS_RES_PENDING_SHORTHAND =       "Pending..."
+
 }
 
 for stringId, stringValue in pairs(strings) do

@@ -42,33 +42,7 @@ ChatAnnouncements.Defaults = {
 
     -- Achievements
     Achievement = {
-        AchievementCategory1          = true,
-        AchievementCategory2          = true,
-        AchievementCategory3          = true,
-        AchievementCategory4          = true,
-        AchievementCategory5          = true,
-        AchievementCategory6          = true,
-        AchievementCategory7          = true,
-        AchievementCategory8          = true,
-        AchievementCategory9          = true,
-        AchievementCategory10         = true,
-        AchievementCategory11         = true,
-        AchievementCategory12         = true,
-        AchievementCategory13         = true,
-        AchievementCategory14         = true,
-        AchievementCategory15         = true,
-        AchievementCategory16         = true,
-        AchievementCategory17         = true,
-        AchievementCategory18         = true,
-        AchievementCategory19         = true,
-        AchievementCategory20         = true,
-        AchievementCategory21         = true,
-        AchievementCategory22         = true,
-        AchievementCategory23         = true,
-        AchievementCategory24         = true,
-        AchievementCategory25         = true,
-        AchievementCategory26         = true,
-        AchievementCategory27         = true,
+        AchievementCategoryIgnore     = {}, -- Inverted list of achievements to be tracked
         AchievementProgressMsg        = GetString(SI_LUIE_CA_ACHIEVEMENT_PROGRESS_MSG),
         AchievementCompleteMsg        = GetString(SI_ACHIEVEMENT_AWARDED_CENTER_SCREEN),
         AchievementColorProgress      = true,
@@ -79,6 +53,7 @@ ChatAnnouncements.Defaults = {
         AchievementUpdateAlert        = false,
         AchievementCompleteCA         = true,
         AchievementCompleteCSA        = true,
+        AchievementCompleteAlwaysCSA  = true,
         AchievementCompleteAlert      = false,
         AchievementIcon               = true,
         AchievementCategory           = true,
@@ -452,6 +427,7 @@ ChatAnnouncements.Defaults = {
         LootShowCraftUse                = false,
         LootShowDestroy                 = true,
         LootShowRemove                  = true,
+        LootShowContainer               = true,
         LootShowDisguise                = true,
         LootShowLockpick                = true,
         LootQuestAdd                    = true,
@@ -465,6 +441,7 @@ ChatAnnouncements.Defaults = {
         CurrencyMessageDepositGuild     = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSITGUILD),
         CurrencyMessageEarn             = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_EARN),
         CurrencyMessageLoot             = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LOOT),
+        CurrencyMessageContainer        = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_CONTAINER),
         CurrencyMessageSteal            = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_STEAL),
         CurrencyMessageLost             = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LOST),
         CurrencyMessagePickpocket       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_PICKPOCKET),
@@ -557,6 +534,7 @@ local g_savedLaunder                = { }
 local g_isLooted                    = false         -- Toggled on to modify loot notification to "looted."
 local g_isPickpocketed              = false         -- Toggled on to modify loot notification to "pickpocketed."
 local g_isStolen                    = false         -- Toggled on to modify loot notification to "stolen."
+local g_containerRecentlyOpened     = false         -- Toggled on when a container has been recently opened.
 local g_itemReceivedIsQuestReward   = false         -- Toggled on to modify loot notification to "received." This overrides the "looted" tag applied to quest item rewards.
 local g_itemReceivedIsQuestAbandon  = false         -- Toggled on to modify remove notification to "removed" when a quest is abandoned.
 local g_itemsConfiscated            = false         -- Toggled on when items are confiscated to modify the notification message.
@@ -1074,6 +1052,7 @@ function ChatAnnouncements.RegisterGoldEvents()
     eventManager:UnregisterForEvent(moduleName, EVENT_MAIL_REMOVED)
 
     eventManager:RegisterForEvent(moduleName, EVENT_CURRENCY_UPDATE, ChatAnnouncements.OnCurrencyUpdate)
+    eventManager:RegisterForEvent(moduleName, EVENT_LOOT_UPDATED, ChatAnnouncements.OnLootUpdated)
     eventManager:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED, ChatAnnouncements.OnMailAttach)
     eventManager:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED, ChatAnnouncements.OnMailAttachRemove)
     eventManager:RegisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX, ChatAnnouncements.OnMailCloseBox)
@@ -2025,6 +2004,16 @@ function ChatAnnouncements.PointRespecDisplay(respecType)
     end
 end
 
+function ChatAnnouncements.OnLootUpdated(eventCode)
+    g_containerRecentlyOpened = true
+    local function ResetContainerRecentlyOpened()
+        g_containerRecentlyOpened = false
+        eventManager:UnregisterForUpdate(moduleName .. "ResetContainer")
+    end
+    eventManager:UnregisterForUpdate(moduleName .. "ResetContainer")
+    eventManager:RegisterForUpdate(moduleName .. "ResetContainer", 150, ResetContainerRecentlyOpened )
+end
+
 function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, oldValue, reason)
     if (currencyLocation ~= CURRENCY_LOCATION_CHARACTER and currencyLocation ~= CURRENCY_LOCATION_ACCOUNT) then
         return
@@ -2112,7 +2101,8 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
     elseif currency == CURT_TELVAR_STONES then -- TelVar Stones
         if not ChatAnnouncements.SV.Currency.CurrencyTVChange then return end
         -- Send change info to the throttle printer and end function now if we throttle Tel Var Gained
-        if ChatAnnouncements.SV.Currency.CurrencyTVThrottle > 0 and (reason == 0 or reason == 65) then
+        -- If a container was recently opened then don't throttle the currency change.
+        if ChatAnnouncements.SV.Currency.CurrencyTVThrottle > 0 and (reason == 0 or reason == 65) and not g_containerRecentlyOpened then
             eventManager:UnregisterForUpdate(moduleName .. "BufferedTV")
             eventManager:RegisterForUpdate(moduleName .. "BufferedTV", ChatAnnouncements.SV.Currency.CurrencyTVThrottle, ChatAnnouncements.CurrencyTVThrottlePrinter )
             g_currencyTVThrottleValue = g_currencyTVThrottleValue + UpOrDown
@@ -2137,7 +2127,6 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyTVName, UpOrDown)
         currencyTotal = ChatAnnouncements.SV.Currency.CurrencyTVShowTotal
         messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalTV
-
     elseif currency == CURT_WRIT_VOUCHERS then -- Writ Vouchers
         if not ChatAnnouncements.SV.Currency.CurrencyWVChange then return end
         currencyTypeColor = CurrencyWVColorize:ToHex()
@@ -2429,7 +2418,7 @@ elseif reason == 14 or reason == 40 or reason == 41 or reason == 75 then
     elseif reason == 66 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     -- END DEBUG EVENTS
     -- ==============================================================================
-    -- If none of these returned true, then we must have just looted the gold (Potentially a few currency change events I missed too may have to adjust later)
+    -- If none of these returned true, then we must have just looted the currency (Potentially a few currency change events I missed too may have to adjust later)
     else messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageLoot end
 
     -- Send relevant values over to the currency printer
@@ -2999,36 +2988,8 @@ end
 
 function ChatAnnouncements.OnAchievementUpdated(eventCode, id)
     local topLevelIndex, categoryIndex, achievementIndex = GetCategoryInfoFromAchievementId(id)
-
     -- Bail out if this achievement comes from unwanted category
-    -- TODO: Make this less shit in the future
-    if topLevelIndex == 1 and not ChatAnnouncements.SV.Achievement.AchievementCategory1 then return end
-    if topLevelIndex == 2 and not ChatAnnouncements.SV.Achievement.AchievementCategory2 then return end
-    if topLevelIndex == 3 and not ChatAnnouncements.SV.Achievement.AchievementCategory3 then return end
-    if topLevelIndex == 4 and not ChatAnnouncements.SV.Achievement.AchievementCategory4 then return end
-    if topLevelIndex == 5 and not ChatAnnouncements.SV.Achievement.AchievementCategory5 then return end
-    if topLevelIndex == 6 and not ChatAnnouncements.SV.Achievement.AchievementCategory6 then return end
-    if topLevelIndex == 7 and not ChatAnnouncements.SV.Achievement.AchievementCategory7 then return end
-    if topLevelIndex == 8 and not ChatAnnouncements.SV.Achievement.AchievementCategory8 then return end
-    if topLevelIndex == 9 and not ChatAnnouncements.SV.Achievement.AchievementCategory9 then return end
-    if topLevelIndex == 10 and not ChatAnnouncements.SV.Achievement.AchievementCategory10 then return end
-    if topLevelIndex == 11 and not ChatAnnouncements.SV.Achievement.AchievementCategory11 then return end
-    if topLevelIndex == 12 and not ChatAnnouncements.SV.Achievement.AchievementCategory12 then return end
-    if topLevelIndex == 13 and not ChatAnnouncements.SV.Achievement.AchievementCategory13 then return end
-    if topLevelIndex == 14 and not ChatAnnouncements.SV.Achievement.AchievementCategory14 then return end
-    if topLevelIndex == 15 and not ChatAnnouncements.SV.Achievement.AchievementCategory15 then return end
-    if topLevelIndex == 16 and not ChatAnnouncements.SV.Achievement.AchievementCategory16 then return end
-    if topLevelIndex == 17 and not ChatAnnouncements.SV.Achievement.AchievementCategory17 then return end
-    if topLevelIndex == 18 and not ChatAnnouncements.SV.Achievement.AchievementCategory18 then return end
-    if topLevelIndex == 19 and not ChatAnnouncements.SV.Achievement.AchievementCategory19 then return end
-    if topLevelIndex == 20 and not ChatAnnouncements.SV.Achievement.AchievementCategory20 then return end
-    if topLevelIndex == 21 and not ChatAnnouncements.SV.Achievement.AchievementCategory21 then return end
-    if topLevelIndex == 22 and not ChatAnnouncements.SV.Achievement.AchievementCategory22 then return end
-    if topLevelIndex == 23 and not ChatAnnouncements.SV.Achievement.AchievementCategory23 then return end
-    if topLevelIndex == 24 and not ChatAnnouncements.SV.Achievement.AchievementCategory24 then return end
-    if topLevelIndex == 25 and not ChatAnnouncements.SV.Achievement.AchievementCategory25 then return end
-    if topLevelIndex == 26 and not ChatAnnouncements.SV.Achievement.AchievementCategory26 then return end
-    if topLevelIndex == 27 and not ChatAnnouncements.SV.Achievement.AchievementCategory27 then return end
+    if ChatAnnouncements.SV.Achievement.AchievementCategoryIgnore[topLevelIndex] then return end
 
     if ChatAnnouncements.SV.Achievement.AchievementUpdateCA or ChatAnnouncements.SV.Achievement.AchievementUpdateAlert then
         local totalCmp = 0
@@ -3467,6 +3428,7 @@ function ChatAnnouncements.ResolveQuestItemChange()
 
                         finalMessage = string.format("|c%s%s|r%s", color, formattedMessageP2, totalString)
 
+                        eventManager:UnregisterForUpdate(moduleName .. "Printer")
                         g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "QUEST LOOT REMOVE", itemId = itemId }
                         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                         eventManager:RegisterForUpdate(moduleName .. "Printer", 25, ChatAnnouncements.PrintQueuedMessages )
@@ -3556,6 +3518,7 @@ function ChatAnnouncements.ResolveQuestItemChange()
 
                         finalMessage = string.format("|c%s%s|r%s", color, formattedMessageP2, totalString)
 
+                        eventManager:UnregisterForUpdate(moduleName .. "Printer")
                         g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "QUEST LOOT ADD", itemId = itemId }
                         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                         eventManager:RegisterForUpdate(moduleName .. "Printer", 25, ChatAnnouncements.PrintQueuedMessages )
@@ -3688,7 +3651,7 @@ function ChatAnnouncements.ItemFilter(itemType, itemId, itemLink, groupLoot)
     end
 end
 
-function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter, groupLoot, delayValue)
+function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter, groupLoot, alwaysFirst, delay)
     if filter then
         -- If filter returns false then bail out right now, we're not displaying this item.
         if not ChatAnnouncements.ItemFilter(itemType, itemId, itemLink, false) then return end
@@ -3754,9 +3717,7 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
 
     local itemString = string.format("%s%s%s%s%s%s", formattedIcon, itemLink, formattedQuantity, formattedArmorType, formattedTrait, formattedStyle)
 
-    -- Set delay to 25 or 50 ms depending on source
-    local callDelay
-    callDelay = delayValue == 25 and 25 or 50
+    local delayTimer = 50
 
     -- Printer function, seperate handling for listed entires (from crafting) or simple function that sends a message over to the printer.
     if receivedBy == "LUIE_RECEIVE_CRAFT" and (gainOrLoss == 1 or gainOrLoss == 3) and logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgradeFail then
@@ -3773,7 +3734,7 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
         if g_queuedMessagesCounter -1 == g_itemCounterGain then g_queuedMessagesCounter = g_itemCounterGain end
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
         g_queuedMessages[g_itemCounterGain] = { message=g_itemStringGain, type = "LOOT", formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString= "", groupLoot=groupLoot }
-        eventManager:RegisterForUpdate(moduleName .. "Printer", delayValue, ChatAnnouncements.PrintQueuedMessages )
+        eventManager:RegisterForUpdate(moduleName .. "Printer", delayTimer, ChatAnnouncements.PrintQueuedMessages )
     elseif receivedBy == "LUIE_RECEIVE_CRAFT" and (gainOrLoss == 2 or gainOrLoss == 4) and logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgradeFail then
         local itemString2 = itemString
         if g_itemStringLoss ~= "" then
@@ -3786,12 +3747,17 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
         if g_queuedMessagesCounter -1 == g_itemCounterLoss then g_queuedMessagesCounter = g_itemCounterLoss end
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
         g_queuedMessages[g_itemCounterLoss] = { message=g_itemStringLoss, type = "LOOT", formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString= "", groupLoot=groupLoot }
-        eventManager:RegisterForUpdate(moduleName .. "Printer", delayValue, ChatAnnouncements.PrintQueuedMessages )
+        eventManager:RegisterForUpdate(moduleName .. "Printer", delayTimer, ChatAnnouncements.PrintQueuedMessages )
     else
         local totalString = formattedTotal
-        g_queuedMessages[g_queuedMessagesCounter] = { message=itemString, type = "LOOT", formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString=totalString, groupLoot=groupLoot }
+        local messageType = alwaysFirst and "CONTAINER" or "LOOT"
+        g_queuedMessages[g_queuedMessagesCounter] = { message=itemString, type = messageType, formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString=totalString, groupLoot=groupLoot }
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-        eventManager:RegisterForUpdate(moduleName .. "Printer", delayValue, ChatAnnouncements.PrintQueuedMessages )
+        if delay then
+            delayTimer = 25
+            eventManager:UnregisterForUpdate(moduleName .. "Printer")
+        end
+        eventManager:RegisterForUpdate(moduleName .. "Printer", delayTimer, ChatAnnouncements.PrintQueuedMessages )
     end
 end
 
@@ -3919,7 +3885,7 @@ end
 function ChatAnnouncements.SendDelayedItems()
     for id, data in pairs(delayedItemPool) do
         if id then
-            ChatAnnouncements.ItemPrinter(data.icon, data.stack, data.itemType, id, data.itemLink, "", "", ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3, true, nil, 25)
+            ChatAnnouncements.ItemPrinter(data.icon, data.stack, data.itemType, id, data.itemLink, "", "", ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3, true, nil, false, true)
         end
     end
     delayedItemPool = { }
@@ -4105,6 +4071,11 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageLockpick
                     gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                     ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
+                if ChatAnnouncements.SV.Inventory.LootShowContainer and (itemType == ITEMTYPE_CONTAINER or itemType == ITEMTYPE_CONTAINER_CURRENCY) then
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageContainer
+                    gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                    ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, true)
                 end
             end
 
@@ -8128,6 +8099,7 @@ function ChatAnnouncements.HookFunction()
 
         if ChatAnnouncements.SV.XP.ExperienceLevelUpCA then
             local formattedString = ExperienceLevelUpColorize:Colorize(zo_strformat(SI_CHAMPION_POINT_EARNED, savedPointDelta) .. ": ")
+            eventManager:UnregisterForUpdate(moduleName .. "Printer")
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 25, ChatAnnouncements.PrintQueuedMessages )
@@ -8147,6 +8119,7 @@ function ChatAnnouncements.HookFunction()
                         formattedString = ExperienceLevelUpColorize:Colorize(zo_strformat(SI_LUIE_CHAMPION_POINT_TYPE, amount, formattedIcon, constellationGroupName))
                     end
                     if ChatAnnouncements.SV.XP.ExperienceLevelUpCA then
+                        eventManager:UnregisterForUpdate(moduleName .. "Printer")
                         g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
                         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                         eventManager:RegisterForUpdate(moduleName .. "Printer", 25, ChatAnnouncements.PrintQueuedMessages )
@@ -8822,6 +8795,14 @@ function ChatAnnouncements.HookFunction()
 
     -- EVENT_ACHIEVEMENT_AWARDED (CSA Handler)
     local function AchievementAwardedHook(name, points, id)
+
+        local topLevelIndex, categoryIndex, achievementIndex = GetCategoryInfoFromAchievementId(id)
+
+        -- Bail out if this achievement comes from unwanted category & we don't always show CSA
+        if ChatAnnouncements.SV.Achievement.AchievementCategoryIgnore[topLevelIndex] and not ChatAnnouncements.SV.Achievement.AchievementCompleteAlwaysCSA then
+            return true
+        end
+
         -- Display CSA
         if ChatAnnouncements.SV.Achievement.AchievementCompleteCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.ACHIEVEMENT_AWARDED)
@@ -8832,41 +8813,10 @@ function ChatAnnouncements.HookFunction()
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
 
-        -- Play sound if CSA is disabled
-        if not ChatAnnouncements.SV.Achievement.AchievementCompleteCSA then
-            PlaySound(SOUNDS.ACHIEVEMENT_AWARDED)
-        end
-
-        local topLevelIndex, categoryIndex, achievementIndex = GetCategoryInfoFromAchievementId(id)
         -- Bail out if this achievement comes from unwanted category
-        -- TODO: Make this less shit in the future
-        if topLevelIndex == 1 and not ChatAnnouncements.SV.Achievement.AchievementCategory1 then return true end
-        if topLevelIndex == 2 and not ChatAnnouncements.SV.Achievement.AchievementCategory2 then return true end
-        if topLevelIndex == 3 and not ChatAnnouncements.SV.Achievement.AchievementCategory3 then return true end
-        if topLevelIndex == 4 and not ChatAnnouncements.SV.Achievement.AchievementCategory4 then return true end
-        if topLevelIndex == 5 and not ChatAnnouncements.SV.Achievement.AchievementCategory5 then return true end
-        if topLevelIndex == 6 and not ChatAnnouncements.SV.Achievement.AchievementCategory6 then return true end
-        if topLevelIndex == 7 and not ChatAnnouncements.SV.Achievement.AchievementCategory7 then return true end
-        if topLevelIndex == 8 and not ChatAnnouncements.SV.Achievement.AchievementCategory8 then return true end
-        if topLevelIndex == 9 and not ChatAnnouncements.SV.Achievement.AchievementCategory9 then return true end
-        if topLevelIndex == 10 and not ChatAnnouncements.SV.Achievement.AchievementCategory10 then return true end
-        if topLevelIndex == 11 and not ChatAnnouncements.SV.Achievement.AchievementCategory11 then return true end
-        if topLevelIndex == 12 and not ChatAnnouncements.SV.Achievement.AchievementCategory12 then return true end
-        if topLevelIndex == 13 and not ChatAnnouncements.SV.Achievement.AchievementCategory13 then return true end
-        if topLevelIndex == 14 and not ChatAnnouncements.SV.Achievement.AchievementCategory14 then return true end
-        if topLevelIndex == 15 and not ChatAnnouncements.SV.Achievement.AchievementCategory15 then return true end
-        if topLevelIndex == 16 and not ChatAnnouncements.SV.Achievement.AchievementCategory16 then return true end
-        if topLevelIndex == 17 and not ChatAnnouncements.SV.Achievement.AchievementCategory17 then return true end
-        if topLevelIndex == 18 and not ChatAnnouncements.SV.Achievement.AchievementCategory18 then return true end
-        if topLevelIndex == 19 and not ChatAnnouncements.SV.Achievement.AchievementCategory19 then return true end
-        if topLevelIndex == 20 and not ChatAnnouncements.SV.Achievement.AchievementCategory20 then return true end
-        if topLevelIndex == 21 and not ChatAnnouncements.SV.Achievement.AchievementCategory21 then return true end
-        if topLevelIndex == 22 and not ChatAnnouncements.SV.Achievement.AchievementCategory22 then return true end
-        if topLevelIndex == 23 and not ChatAnnouncements.SV.Achievement.AchievementCategory23 then return true end
-        if topLevelIndex == 24 and not ChatAnnouncements.SV.Achievement.AchievementCategory24 then return true end
-        if topLevelIndex == 25 and not ChatAnnouncements.SV.Achievement.AchievementCategory25 then return true end
-        if topLevelIndex == 26 and not ChatAnnouncements.SV.Achievement.AchievementCategory26 then return true end
-        if topLevelIndex == 27 and not ChatAnnouncements.SV.Achievement.AchievementCategory27 then return true end
+        if ChatAnnouncements.SV.Achievement.AchievementCategoryIgnore[topLevelIndex] then
+            return true
+        end
 
         if ChatAnnouncements.SV.Achievement.AchievementCompleteCA then
             local link = zo_strformat(GetAchievementLink(id, linkBrackets[ChatAnnouncements.SV.BracketOptionAchievement]))
@@ -8903,6 +8853,11 @@ function ChatAnnouncements.HookFunction()
         if ChatAnnouncements.SV.Achievement.AchievementCompleteAlert then
             local alertMessage = zo_strformat("<<1>>: <<2>>", ChatAnnouncements.SV.Achievement.AchievementCompleteMsg, name)
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertMessage)
+        end
+
+        -- Play sound if CSA is disabled
+        if not ChatAnnouncements.SV.Achievement.AchievementCompleteCSA then
+            PlaySound(SOUNDS.ACHIEVEMENT_AWARDED)
         end
 
         return true
@@ -10281,6 +10236,13 @@ function ChatAnnouncements.PrintQueuedMessages()
             if not g_questItemAdded[itemId] == true then
                 printToChat(g_queuedMessages[i].message)
             end
+        end
+    end
+
+    -- Loot (Container)
+    for i=1, #g_queuedMessages do
+        if g_queuedMessages[i].type == "CONTAINER" then
+            ChatAnnouncements.ResolveItemMessage(g_queuedMessages[i].message, g_queuedMessages[i].formattedRecipient, g_queuedMessages[i].color, g_queuedMessages[i].logPrefix, g_queuedMessages[i].totalString, g_queuedMessages[i].groupLoot )
         end
     end
 

@@ -62,8 +62,13 @@ function SpellCastBuffs.EventCombatDebug(eventCode, result, isError, abilityName
 
     local finalString = (iconFormatted .. " ["..abilityId.."] "..ability..": [S] "..source.." --> [T] "..target .. " [D] " .. duration .. showachantime .. showacasttime .. " [R] " .. formattedResult)
     finalString = MillisecondTimestampDebug(finalString)
-    -- Use CHAT_ROUTER to bypass some other addons modifying this string
-    CHAT_ROUTER:AddSystemMessage(finalString)
+    if CHAT_SYSTEM.primaryContainer then
+        for k, cc in ipairs(CHAT_SYSTEM.containers) do
+            local chatContainer = cc
+            local chatWindow = cc.windows[1]
+            if chatContainer then chatContainer:AddEventMessageToWindow(chatWindow, finalString, CHAT_CATEGORY_SYSTEM) end
+        end
+    end
 end
 
 -- Debug Display for Effect Events
@@ -112,10 +117,97 @@ function SpellCastBuffs.EventEffectDebug(eventCode, changeType, effectSlot, effe
         finalString = ("|c00E200Refreshed:|r " .. iconFormatted .. " (" .. changeType .. ") [" .. abilityId .. "] " ..nameFormatted .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
     end
     finalString = MillisecondTimestampDebug(finalString)
-    -- Use CHAT_ROUTER to bypass some other addons modifying this string
-    CHAT_ROUTER:AddSystemMessage(finalString)
-
+    if CHAT_SYSTEM.primaryContainer then
+        for k, cc in ipairs(CHAT_SYSTEM.containers) do
+            local chatContainer = cc
+            local chatWindow = cc.windows[1]
+            if chatContainer then chatContainer:AddEventMessageToWindow(chatWindow, finalString, CHAT_CATEGORY_SYSTEM) end
+        end
+    end
 end
+
+-- Account specific DEBUG for ArtOfShred (These are only registered to give me some additional debug options)
+function SpellCastBuffs.AuthorCombatDebug(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
+
+    local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
+    local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
+
+    local source = zo_strformat("<<t:1>>", sourceName)
+    local target = zo_strformat("<<t:1>>", targetName)
+    local ability = zo_strformat("<<t:1>>", nameFormatted)
+    if source == LUIE.PlayerNameFormatted then
+        source = "Player"
+    end
+    if target == LUIE.PlayerNameFormatted then
+        target = "Player"
+    end
+    if source == "" and target == "" then
+        source = "NIL"
+        target = "NIL"
+    end
+
+    local cmxHIDE
+    if CMX and CMX.CustomAbilityHide and CMX.CustomAbilityHide[abilityId] then
+        cmxHIDE = " + HIDDEN CMX"
+    else
+        cmxHIDE = ""
+    end
+
+    local formattedResult = LUIE.Data.DebugResults[result]
+
+    if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].hide then
+        finalString = (iconFormatted .. "[" ..abilityId .. "] " .. nameFormatted.. ": HIDDEN LUI" .. cmxHIDE .. ": [S] "..source.." --> [T] "..target .. " [R] " .. formattedResult)
+        finalString = MillisecondTimestampDebug(finalString)
+        if CHAT_SYSTEM.primaryContainer then
+            for k, cc in ipairs(CHAT_SYSTEM.containers) do
+                local chatContainer = cc
+                local chatWindow = cc.windows[2]
+                if chatContainer then chatContainer:AddEventMessageToWindow(chatWindow, finalString, CHAT_CATEGORY_SYSTEM) end
+            end
+        end
+    end
+end
+
+-- Account specific DEBUG for ArtOfShred (These are only registered to give me some additional debug options)
+function SpellCastBuffs.AuthorEffectDebug(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
+
+    local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
+    local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
+
+    unitName = zo_strformat("<<t:1>>", unitName)
+    if unitName == LUIE.PlayerNameFormatted then
+        unitName = "Player"
+    end
+    unitName = unitName .. " (" .. unitTag .. ")"
+
+    local cmxHIDE
+    if CMX and CMX.CustomAbilityHide and CMX.CustomAbilityHide[abilityId] then
+        cmxHIDE = " + HIDDEN CMX"
+    else
+        cmxHIDE = ""
+    end
+
+    local refreshOnly = ""
+    if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].refreshOnly then
+        refreshOnly = " |c00E200(Refresh Only - Hidden)|r "
+    end
+
+    if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].hide then
+        local finalString = (iconFormatted .. refreshOnly .. "|c00E200 [" ..abilityId .. "] " .. nameFormatted.. ": HIDDEN LUI" .. cmxHIDE .. ": [Tag] ".. unitName .. "|r")
+        finalString = MillisecondTimestampDebug(finalString)
+        if CHAT_SYSTEM.primaryContainer then
+            for k, cc in ipairs(CHAT_SYSTEM.containers) do
+                local chatContainer = cc
+                local chatWindow = cc.windows[2]
+                if chatContainer then chatContainer:AddEventMessageToWindow(chatWindow, finalString, CHAT_CATEGORY_SYSTEM) end
+            end
+        end
+    end
+end
+
+
+
+
 
 function SpellCastBuffs.TempSlashFilter()
     local filter = LUIE.SpellCastBuffs.SV.ShowDebugFilter

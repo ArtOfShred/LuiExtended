@@ -14,12 +14,17 @@ local strings = {
     -- Shared
     SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST =                 "Aura Blacklist",
     SI_LUIE_CUSTOM_LIST_CT_BLACKLIST =                   "Combat Text Blacklist",
+    SI_LUIE_CUSTOM_LIST_UF_BLACKLIST =                   "Pet Blacklist",
     SI_LUIE_CUSTOM_LIST_ADDED_ID =                       "<<1>> [<<2>>] <<3>> zu <<4>> hinzugefügt.",
     SI_LUIE_CUSTOM_LIST_ADDED_FAILED =                   "Konnte [<<1>>] nicht zu <<2>> hinzufügen. Diese abiilityId existiert nicht.",
     SI_LUIE_CUSTOM_LIST_ADDED_NAME =                     "<<1>> zu <<2>> hinzugefügt.",
     SI_LUIE_CUSTOM_LIST_REMOVED_ID =                     "<<1>> [<<2>>] <<3>> aus <<4>> entfernt.",
     SI_LUIE_CUSTOM_LIST_REMOVED_FAILED =                 "Konnte [<<1>>] nicht aus <<2>> entfernen. Diese abilityId existiert nicht.",
     SI_LUIE_CUSTOM_LIST_REMOVED_NAME =                   "<<1>> aus <<2>> entfernt.",
+    SI_LUIE_DEFAULT_FRAME_QUEST_LOG =                    "Quest Log",
+    SI_LUIE_DEFAULT_FRAME_BATTLEGROUND_SCORE =           "Battleground Score",
+    SI_LUIE_DEFAULT_FRAME_LOOT_HISTORY =                 "Loot History",
+    SI_LUIE_DEFAULT_FRAME_EQUIPMENT_STATUS =             "Equipment Status",
 
     -- Bindings
     SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Bankier beschwören",
@@ -347,6 +352,7 @@ local strings = {
     SI_LUIE_CA_CURRENCY_MESSAGE_DECONSTRUCT =            "Du verwertest %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_RESEARCH =               "Du analysierst %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_DESTROY =                "Du zerstörst %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_CONTAINER =              "You empty %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_LOCKPICK =               "Dein %s bricht.",
     SI_LUIE_CA_CURRENCY_MESSAGE_REMOVE =                 "%s entfernt.",
     SI_LUIE_CA_CURRENCY_MESSAGE_TURNIN =                 "You turn in %s.",
@@ -536,6 +542,10 @@ local strings = {
     SI_LUIE_UF_WEREWOLF_TP =                             "Du verbleibst in der Werwolf-Form für |cFFFFFF<<1>>|r Sekunden.",
     SI_LUIE_UF_MOUNT_POWER =                             "<<1>>/<<2>> Reitausdauer (<<3>>%)",
     SI_LUIE_UF_SIEGE_POWER =                             "<<1>>/<<2>> Ausdauer (<<3>>%)",
+    SI_LUIE_UF_DEAD_STATUS_REVIVING =                    "Reviving...",
+    SI_LUIE_UF_DEAD_STATUS_RES_SHORTHAND =               "Ressing...",
+    SI_LUIE_UF_DEAD_STATUS_RES_PENDING_SHORTHAND =       "Pending..."
+
 }
 
 for stringId, stringValue in pairs(strings) do

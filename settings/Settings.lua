@@ -4,6 +4,7 @@
 --]]
 
 local zo_strformat = zo_strformat
+local g_ElementMovingEnabled
 
 -- Create Settings Menu
 function LUIE.CreateSettings()
@@ -138,6 +139,31 @@ function LUIE.CreateSettings()
         name = GetString(SI_LUIE_LAM_RELOADUI),
         tooltip = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
         func = function() ReloadUI("ingame") end,
+        width = "half",
+    }
+
+    -- Default UI Elements Position Unlock
+    optionsData[#optionsData + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_UNLOCK_DEFAULT_UI),
+        tooltip = GetString(SI_LUIE_LAM_UNLOCK_DEFAULT_UI_TP),
+        getFunc = function() return g_ElementMovingEnabled end,
+        setFunc = function(value)
+            g_ElementMovingEnabled = value
+            LUIE.SetupElementMover(value)
+            end,
+        width = "half",
+        default = false,
+        resetFunc = LUIE.ResetElementPosition,
+    }
+
+    -- Default UI Elements Position Reset
+    optionsData[#optionsData + 1] = {
+        type = "button",
+        name = GetString(SI_LUIE_LAM_RESETPOSITION),
+        tooltip = GetString(SI_LUIE_LAM_RESET_DEFAULT_UI_TP),
+        func = LUIE.ResetElementPosition,
+        warning = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
         width = "half",
     }
 

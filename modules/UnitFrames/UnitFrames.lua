@@ -136,12 +136,12 @@ UnitFrames.Defaults = {
     TargetEnableSkull                = true,
     CustomFramesGroup                = true,
     GroupExcludePlayer               = false,
-    GroupBarWidth                    = 250,
+    GroupBarWidth                    = 260,
     GroupBarHeight                   = 36,
     GroupBarSpacing                  = 40,
     CustomFramesRaid                 = true,
     RaidNameClip                     = 94,
-    RaidBarWidth                     = 200,
+    RaidBarWidth                     = 220,
     RaidBarHeight                    = 30,
     RaidLayout                       = "2 x 12",
     RoleIconSmallGroup               = true,
@@ -187,6 +187,17 @@ UnitFrames.Defaults = {
     ShieldAlpha                      = 50,
     ResolutionOptions                = 1,
     ReverseResourceBars              = false,
+    CustomFramesPet                  = true,
+    CustomFormatPet                  = "Current (Percentage%)",
+    CustomColourPet                  = { 202/255,  20/255, 0 },
+    PetHeight                        = 30,
+    PetWidth                         = 220,
+    PetUseClassColor                 = false,
+    PetIncAlpha                      = 85,
+    PetOocAlpha                      = 85,
+    blacklist                        = {}, -- Blacklist for pet names
+    PetNameClip                      = 88,
+
 }
 UnitFrames.SV = nil
 
@@ -198,6 +209,7 @@ local g_DefaultFrames       = {} -- Default Unit Frames are not referenced by ex
 local g_MaxChampionPoint    = GetChampionPointsPlayerProgressionCap() -- Keet this value in local constant
 local g_defaultTargetNameLabel   -- Reference to default UI target name label
 local g_defaultThreshold    = 25
+local g_isRaid              = false -- Used by resurrection tracking function to determine if we should use abbreviated or unabbreviated text for resurrection.
 local g_powerError          = {}
 local g_savedHealth         = {}
 local g_statFull            = {}
@@ -218,9 +230,14 @@ local g_PendingUpdate = {
 -- Font to be used on default UI overlay labels
 local defaultLabelFont = "/LuiExtended/media/fonts/Fontin/fontin_sans_sc.otf|15|outline"
 
--- Very simple and crude translation support of common labels
-local strDead       = GetString(SI_UNIT_FRAME_STATUS_DEAD)
-local strOffline    = GetString(SI_UNIT_FRAME_STATUS_OFFLINE)
+-- Labels for Offline/Dead/Resurrection Status
+local strDead           = GetString(SI_UNIT_FRAME_STATUS_DEAD)
+local strOffline        = GetString(SI_UNIT_FRAME_STATUS_OFFLINE)
+local strResCast        = GetString(SI_PLAYER_TO_PLAYER_RESURRECT_BEING_RESURRECTED)
+local strResSelf        = GetString(SI_LUIE_UF_DEAD_STATUS_REVIVING)
+local strResPending     = GetString(SI_PLAYER_TO_PLAYER_RESURRECT_HAS_RESURRECT_PENDING)
+local strResCastRaid    = GetString(SI_LUIE_UF_DEAD_STATUS_RES_SHORTHAND)
+local strResPendingRaid = GetString(SI_LUIE_UF_DEAD_STATUS_RES_PENDING_SHORTHAND)
 
 -- Following settings will be used in options menu to define DefaultFrames behaviour
 -- TODO: localization
@@ -315,6 +332,26 @@ local function CreateDecreasedArmorOverlay( parent, small )
     return control
 end
 
+-- List Handling (Add) for Prominent Auras & Blacklist
+function UnitFrames.AddToCustomList(list, input)
+    local listRef = list == UnitFrames.SV.blacklist and GetString(SI_LUIE_CUSTOM_LIST_UF_BLACKLIST) or ""
+    if input ~= "" then
+        list[input] = true
+        CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+        printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_NAME), input, listRef), true)
+    end
+end
+
+-- List Handling (Remove) for Prominent Auras & Blacklist
+function UnitFrames.RemoveFromCustomList(list, input)
+    local listRef = list == UnitFrames.SV.blacklist and GetString(SI_LUIE_CUSTOM_LIST_UF_BLACKLIST) or ""
+    if input ~= "" then
+        list[input] = nil
+        CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+        printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_NAME), input, listRef), true)
+    end
+end
+
 function UnitFrames.GetDefaultFramesOptions(frame)
     local retval = {}
     for k,v in pairs(g_DefaultFramesOptions) do
@@ -362,6 +399,10 @@ function UnitFrames.GroupFrames_OnMouseUp(self, button, upInside)
             end
             AddMenuItem(GetString(SI_SOCIAL_MENU_VISIT_HOUSE), function() JumpToHouse(accountName) end)
             AddMenuItem(GetString(SI_SOCIAL_MENU_JUMP_TO_PLAYER), function() JumpToGroupMember(accountName) end)
+        end
+
+        if not isPlayer and not IsFriend(accountName) and not IsIgnored(accountName) then
+            AddMenuItem(GetString(SI_SOCIAL_MENU_ADD_FRIEND), function() ZO_Dialogs_ShowDialog("REQUEST_FRIEND", { name = accountName }) end)
         end
 
         if IsGroupModificationAvailable() then
@@ -625,6 +666,8 @@ local function CreateCustomFrames()
             ["debuffs"]     = UI.Control( playerTlw, {BOTTOM,TOP,0,-2,topInfo}, nil, false ),
         }
 
+        UnitFrames.CustomFrames.player.name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
+
         -- If Stamina Label is hidden in menu options, hide the stamina bar labels
         if UnitFrames.SV.HideLabelStamina then
             UnitFrames.CustomFrames.player[POWERTYPE_STAMINA].labelOne:SetHidden(true)
@@ -711,6 +754,7 @@ local function CreateCustomFrames()
             ["buffs"]       = buffs,
             ["debuffs"]     = debuffs,
         }
+        UnitFrames.CustomFrames.reticleover.name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
         UnitFrames.CustomFrames.reticleover.className:SetDrawLayer( DL_BACKGROUND )
     end
 
@@ -769,6 +813,7 @@ local function CreateCustomFrames()
             ["dead"]        = UI.Label( thb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "Status", true ),
         }
 
+        UnitFrames.CustomFrames.AvaPlayerTarget.name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
         UnitFrames.CustomFrames.AvaPlayerTarget[POWERTYPE_HEALTH].label.fmt = "Percentage%"
         UnitFrames.CustomFrames.AvaPlayerTarget[POWERTYPE_HEALTH].labelOne.fmt = "Current + Shield"
         UnitFrames.CustomFrames.AvaPlayerTarget[POWERTYPE_HEALTH].labelTwo.fmt = "Max"
@@ -826,6 +871,7 @@ local function CreateCustomFrames()
                 ["leader"]      = UI.Texture( topInfo, {LEFT,LEFT, -7,0}, {32,32}, nil, 2, false ),
             }
 
+            UnitFrames.CustomFrames[unitTag].name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
             control.defaultUnitTag = GetGroupUnitTagByIndex(i)
             control:SetMouseEnabled(true)
             control:SetHandler("OnMouseUp", UnitFrames.GroupFrames_OnMouseUp)
@@ -878,11 +924,55 @@ local function CreateCustomFrames()
                 ["leader"]      = UI.Texture( rhb, {LEFT,LEFT, -2,0}, {28,28}, nil, 2, false ),
 
             }
+            UnitFrames.CustomFrames[unitTag].name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
 
             control.defaultUnitTag = GetGroupUnitTagByIndex(i)
             control:SetMouseEnabled(true)
             control:SetHandler("OnMouseUp", UnitFrames.GroupFrames_OnMouseUp)
 
+            UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].label.fmt = "Current (Percentage%)"
+        end
+    end
+
+    if UnitFrames.SV.CustomFramesPet then
+        -- Pet Frame
+        local pet = UI.TopLevel( nil, nil )
+        pet:SetDrawLayer(DL_BACKDROP)
+        pet:SetDrawTier(DT_LOW)
+        pet:SetDrawLevel(1)
+        pet.customPositionAttr = "CustomFramesPetFramePos"
+        pet.preview = UI.Backdrop( pet, "fill", nil, nil, nil, true )
+        pet.previewLabel = UI.Label( pet.preview, {BOTTOM,TOP,0,-1,group}, nil, nil, "ZoFontGameMedium", "Player Pets", false )
+
+        local fragment = ZO_HUDFadeSceneFragment:New(pet, 0, 0)
+
+        sceneManager:GetScene("hud"):AddFragment( fragment )
+        sceneManager:GetScene("hudui"):AddFragment( fragment )
+        sceneManager:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("siegeBarUI"):AddFragment( fragment )
+        sceneManager:GetScene("loot"):AddFragment( fragment )
+
+        for i = 1, 7 do
+            local unitTag = "PetGroup" .. i
+            local control = UI.Control( pet, nil, nil, false )
+            local shb = UI.Backdrop( control, "fill", nil, nil, nil, false )
+
+            shb:SetDrawLayer(DL_BACKDROP)
+            shb:SetDrawLevel(1)
+
+            UnitFrames.CustomFrames[unitTag] = {
+                ["tlw"]         = pet,
+                ["control"]     = control,
+                [POWERTYPE_HEALTH] = {
+                    ["backdrop"]= shb,
+                    ["label"]   = UI.Label( shb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
+                    ["bar"]     = UI.StatusBar( shb, nil, nil, nil, false ),
+                    ["shield"]  = UI.StatusBar( shb, nil, nil, nil, true ),
+                },
+                ["name"]        = UI.Label( shb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, unitTag, false ),
+
+            }
+            UnitFrames.CustomFrames[unitTag].name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
             UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].label.fmt = "Current (Percentage%)"
         end
     end
@@ -926,6 +1016,7 @@ local function CreateCustomFrames()
                 },
                 ["name"]        = UI.Label( bhb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, unitTag, false ),
             }
+            UnitFrames.CustomFrames[unitTag].name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
             UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].label.fmt = "Percentage%"
         end
     end
@@ -943,7 +1034,7 @@ local function CreateCustomFrames()
     end
 
     -- Common actions for all created frames:
-    for _, baseName in pairs( { "player", "reticleover", "SmallGroup", "RaidGroup", "boss", "AvaPlayerTarget" } ) do
+    for _, baseName in pairs( { "player", "reticleover", "SmallGroup", "RaidGroup", "boss", "AvaPlayerTarget", "PetGroup" } ) do
         -- set mouse handlers for all created tlws and create anchor coords preview labels
         local unitFrame = UnitFrames.CustomFrames[baseName] or UnitFrames.CustomFrames[baseName .. "1"] or nil
         if unitFrame ~= nil then
@@ -1284,6 +1375,8 @@ local function CreateCustomFrames()
     UnitFrames.CustomFramesApplyLayoutPlayer(true)
     UnitFrames.CustomFramesApplyLayoutGroup(true)
     UnitFrames.CustomFramesApplyLayoutRaid(true)
+    UnitFrames.CustomFramesApplyLayoutPet(true)
+    UnitFrames.CustomPetUpdate()
     UnitFrames.CustomFramesApplyLayoutBosses()
     -- Set positions of tlws using saved values or default ones
     UnitFrames.CustomFramesSetPositions()
@@ -1295,7 +1388,7 @@ local function CreateCustomFrames()
     UnitFrames.CustomFramesApplyFont()
 
         -- Add this top level window to global controls list, so it can be hidden
-    for _, unitTag in pairs( { 'player', 'reticleover', 'SmallGroup1', 'RaidGroup1', 'boss1', 'AvaPlayerTarget' } ) do
+    for _, unitTag in pairs( { 'player', 'reticleover', 'SmallGroup1', 'RaidGroup1', 'boss1', 'AvaPlayerTarget', "PetGroup1" } ) do
         if UnitFrames.CustomFrames[unitTag] then
             LUIE.Components[ moduleName .. '_CustomFrame_' .. unitTag ] = UnitFrames.CustomFrames[unitTag].tlw
         end
@@ -1335,6 +1428,9 @@ function UnitFrames.Initialize(enabled)
     end
     for i = 1, 6 do
         g_savedHealth["boss" .. i] = {1,1,1,0}
+    end
+    for i = 1, 6 do
+        g_savedHealth["playerpet" .. i] = {1,1,1,0}
     end
 
     -- Get execute threshold percentage
@@ -1406,7 +1502,7 @@ function UnitFrames.Initialize(enabled)
     eventManager:RegisterForEvent(moduleName, EVENT_RANK_POINT_UPDATE,  UnitFrames.TitleUpdate )
 
     -- Next events make sense only for CustomFrames
-    if UnitFrames.CustomFrames.player or UnitFrames.CustomFrames.reticleover or UnitFrames.CustomFrames.SmallGroup1 or UnitFrames.CustomFrames.RaidGroup1 or UnitFrames.CustomFrames.boss1 then
+    if UnitFrames.CustomFrames.player or UnitFrames.CustomFrames.reticleover or UnitFrames.CustomFrames.SmallGroup1 or UnitFrames.CustomFrames.RaidGroup1 or UnitFrames.CustomFrames.boss1 or UnitFrames.PetGroup1 then
         eventManager:RegisterForEvent(moduleName, EVENT_COMBAT_EVENT,          UnitFrames.OnCombatEvent )
         eventManager:AddFilterForEvent(moduleName, EVENT_COMBAT_EVENT, REGISTER_FILTER_IS_ERROR, true )
 
@@ -1569,6 +1665,22 @@ function UnitFrames.CustomFramesFormatLabels(menu)
             UnitFrames.ReloadValues(unitTag)
         end
     end
+
+    for i = 1, 7 do
+        local unitTag = "PetGroup" .. i
+        if UnitFrames.CustomFrames[unitTag] then
+            if UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH] then
+                if UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].label then
+                    UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].label.fmt = UnitFrames.SV.CustomFormatPet
+                end
+            end
+        end
+        local baseTag = "playerpet" .. i
+        if menu and DoesUnitExist(baseTag) then
+            UnitFrames.ReloadValues(baseTag)
+        end
+    end
+
 end
 
 -- Runs on the EVENT_PLAYER_ACTIVATED listener.
@@ -1670,6 +1782,67 @@ function UnitFrames.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, pow
     end
 end
 
+function UnitFrames.CustomFramesUnreferencePetControl(first)
+    local last = 7
+    for i = first, last do
+        local unitTag =  "PetGroup" .. i
+        UnitFrames.CustomFrames[unitTag].unitTag = nil
+        UnitFrames.CustomFrames[unitTag].control:SetHidden( true )
+    end
+end
+
+function UnitFrames.CustomPetUpdate()
+    if UnitFrames.CustomFrames.PetGroup1 == nil then
+        return
+    end
+
+    local petList = {}
+
+    -- First we query all pet unitTag for existence and save them to local list
+    -- At the same time we will calculate how many group members we have and then will hide rest of custom control elements
+    local n = 1 -- counter used to reference custom frames. it always continuous while games unitTag could have gaps
+    for i = 1, 7 do
+        local unitTag = "playerpet" .. i
+        if DoesUnitExist(unitTag) then
+            -- Compare blacklist entries and don't add this pet to the list if it is blacklisted.
+            local unitName = GetUnitName(unitTag)
+            local compareBlacklist = string.lower(unitName)
+            local bail
+            for k, _ in pairs(UnitFrames.SV.blacklist) do
+                k = string.lower(k)
+                if compareBlacklist == k then
+                    bail = true
+                end
+            end
+            if not bail then
+                table.insert(petList, { ["unitTag"] = unitTag, ["unitName"] = unitName } )
+                -- CustomFrames
+                n = n + 1
+            end
+        else
+            -- For non-existing unitTags we will remove reference from CustomFrames table
+            UnitFrames.CustomFrames[unitTag] = nil
+        end
+    end
+
+    UnitFrames.CustomFramesUnreferencePetControl(n)
+
+    table.sort ( petList, function(x,y) return x.unitName < y.unitName end )
+
+    local n = 0
+    for _, v in ipairs(petList) do
+        n = n + 1
+        UnitFrames.CustomFrames[v.unitTag] = UnitFrames.CustomFrames[ "PetGroup" .. n]
+        if UnitFrames.CustomFrames[v.unitTag] then
+            UnitFrames.CustomFrames[v.unitTag].control:SetHidden ( false )
+            UnitFrames.CustomFrames[v.unitTag].unitTag = v.unitTag
+            UnitFrames.ReloadValues(v.unitTag)
+        end
+    end
+end
+
+
+
 -- Runs on the EVENT_UNIT_CREATED listener.
 -- Used to create DefaultFrames UI controls and request delayed CustomFrames group frame update
 function UnitFrames.OnUnitCreated(eventCode, unitTag)
@@ -1693,6 +1866,13 @@ function UnitFrames.OnUnitCreated(eventCode, unitTag)
     elseif g_DefaultFrames.SmallGroup then
         UnitFrames.ReloadValues(unitTag)
     end
+
+    if UnitFrames.CustomFrames.PetGroup1 ~= nil then
+        if "playerpet" == string.sub(unitTag, 0, 9) then
+            UnitFrames.CustomFrames[unitTag] = nil
+        end
+        UnitFrames.CustomPetUpdate()
+    end
 end
 
 -- Runs on the EVENT_UNIT_DESTROYED listener.
@@ -1707,6 +1887,14 @@ function UnitFrames.OnUnitDestroyed(eventCode, unitTag)
     if not g_PendingUpdate.Group.flag then
         g_PendingUpdate.Group.flag = true
         eventManager:RegisterForUpdate(g_PendingUpdate.Group.name, g_PendingUpdate.Group.delay, UnitFrames.CustomFramesGroupUpdate )
+    end
+
+    if "playerpet" == string.sub(unitTag, 0, 9) then
+        UnitFrames.CustomFrames[unitTag] = nil
+    end
+
+    if UnitFrames.CustomFrames.PetGroup1 ~= nil then
+        UnitFrames.CustomPetUpdate()
     end
 end
 
@@ -2594,7 +2782,7 @@ end
 function UnitFrames.OnDeath(eventCode, unitTag, isDead)
     --d( string.format("%s - %s", unitTag, isDead and "Dead" or "Alive" ) )
     if UnitFrames.CustomFrames[unitTag] and UnitFrames.CustomFrames[unitTag].dead then
-        UnitFrames.CustomFramesSetDeadLabel( UnitFrames.CustomFrames[unitTag], isDead and strDead or nil )
+        UnitFrames.ResurrectionMonitor(unitTag)
     end
 
     -- Manually hide regen/degen animation as well as stat-changing icons, because game does not always issue corresponding event before unit is dead
@@ -2617,6 +2805,32 @@ function UnitFrames.OnDeath(eventCode, unitTag, isDead)
             end
         end
     end
+end
+
+function UnitFrames.ResurrectionMonitor(unitTag)
+    eventManager:UnregisterForUpdate(moduleName .. "Res" .. unitTag)
+
+    -- Check to make sure this unit exists & the custom frame exists
+    if not DoesUnitExist(unitTag) then return end
+    if not ZO_Group_IsGroupUnitTag(unitTag) then return end
+    if not UnitFrames.CustomFrames[unitTag] then return end
+
+    if IsUnitDead(unitTag) then
+        if IsUnitBeingResurrected(unitTag) then
+            UnitFrames.CustomFramesSetDeadLabel( UnitFrames.CustomFrames[unitTag], g_isRaid and strResCastRaid or strResCast )
+        elseif DoesUnitHaveResurrectPending(unitTag) then
+            UnitFrames.CustomFramesSetDeadLabel( UnitFrames.CustomFrames[unitTag], g_isRaid and strResPendingRaid or strResPending )
+        else
+            UnitFrames.CustomFramesSetDeadLabel( UnitFrames.CustomFrames[unitTag], strDead )
+        end
+        eventManager:RegisterForUpdate(moduleName .. "Res" .. unitTag, 100, function() UnitFrames.ResurrectionMonitor(unitTag) end)
+    elseif IsUnitReincarnating(unitTag) then
+        UnitFrames.CustomFramesSetDeadLabel( UnitFrames.CustomFrames[unitTag], strResSelf )
+        eventManager:RegisterForUpdate(moduleName .. "Res" .. unitTag, 100, function() UnitFrames.ResurrectionMonitor(unitTag) end)
+    else
+        UnitFrames.CustomFramesSetDeadLabel( UnitFrames.CustomFrames[unitTag], nil )
+    end
+
 end
 
 -- Runs on the EVENT_LEADER_UPDATE listener.
@@ -3055,6 +3269,11 @@ function UnitFrames.CustomFramesGroupUpdate()
         end
     end
 
+    -- Set raid variable for resurrection monitor.
+    if raid ~= nil then
+        g_isRaid = raid
+    end
+
     -- Here we can check unlikely situation when neither custom frames were selected
     if raid == nil then
         return
@@ -3163,6 +3382,7 @@ function UnitFrames.CustomFramesSetPositions()
     local reticleoverCenter
     local SmallGroup1
     local RaidGroup1
+    local PetGroup1
     local boss1
     local AvaPlayerTarget
     -- 1 = 1080, 2 = 1440, 3 = 4k
@@ -3172,6 +3392,7 @@ function UnitFrames.CustomFramesSetPositions()
         reticleover = { 192, 205 }
         reticleoverCenter = { 0, -334 }
         SmallGroup1 = { -954, -332 }
+        PetGroup1 = { -954, 160 }
         RaidGroup1 = { -954, -210 }
         boss1 = { 306, -312 }
         AvaPlayerTarget = { 0, -200 }
@@ -3181,6 +3402,7 @@ function UnitFrames.CustomFramesSetPositions()
         reticleover = { 270, 272 }
         reticleoverCenter = { 0, -445 }
         SmallGroup1 = { -1271, -385 }
+        PetGroup1 = { -1271, 260 }
         RaidGroup1 = { -1271, -243 }
         boss1 = { 354, -365 }
         AvaPlayerTarget = { 0, -266 }
@@ -3190,6 +3412,7 @@ function UnitFrames.CustomFramesSetPositions()
         reticleover = { 438, 410 }
         reticleoverCenter = { 0, -668 }
         SmallGroup1 = { -2036, -498 }
+        PetGroup1 = { -2036, 360 }
         RaidGroup1 = { -2036, -315 }
         boss1 = { 459, -478 }
         AvaPlayerTarget = { 0, -400 }
@@ -3204,10 +3427,11 @@ function UnitFrames.CustomFramesSetPositions()
     end
     default_anchors["SmallGroup1"] = {TOPLEFT,CENTER,SmallGroup1[1],SmallGroup1[2]}
     default_anchors["RaidGroup1"]  = {TOPLEFT,CENTER,RaidGroup1[1],RaidGroup1[2]}
+    default_anchors["PetGroup1"]   = {TOPLEFT,CENTER,PetGroup1[1],PetGroup1[2]}
     default_anchors["boss1"]       = {TOPLEFT,CENTER,boss1[1],boss1[2]}
     default_anchors["AvaPlayerTarget"] = {CENTER,CENTER,AvaPlayerTarget[1],AvaPlayerTarget[2]}
 
-    for _, unitTag in pairs( { "player", "reticleover", "SmallGroup1", "RaidGroup1", "boss1", "AvaPlayerTarget" } ) do
+    for _, unitTag in pairs( { "player", "reticleover", "SmallGroup1", "RaidGroup1", "boss1", "AvaPlayerTarget", "PetGroup1" } ) do
         if UnitFrames.CustomFrames[unitTag] then
             local savedPos = UnitFrames.SV[UnitFrames.CustomFrames[unitTag].tlw.customPositionAttr]
             local anchors = ( savedPos ~= nil and #savedPos == 2 ) and { TOPLEFT, TOPLEFT, savedPos[1], savedPos[2] } or default_anchors[unitTag]
@@ -3226,7 +3450,7 @@ function UnitFrames.CustomFramesResetPosition(playerOnly)
         end
     end
     if playerOnly == false then
-        for _, unitTag in pairs( { "SmallGroup1", "RaidGroup1", "boss1", "AvaPlayerTarget" } ) do
+        for _, unitTag in pairs( { "SmallGroup1", "RaidGroup1", "boss1", "AvaPlayerTarget", "PetGroup1" } ) do
             if UnitFrames.CustomFrames[unitTag] then
                 UnitFrames.SV[UnitFrames.CustomFrames[unitTag].tlw.customPositionAttr] = nil
             end
@@ -3240,7 +3464,7 @@ function UnitFrames.CustomFramesSetMovingState( state )
     UnitFrames.CustomFramesMovingState = state
 
     -- Unlock individual frames
-    for _, unitTag in pairs( { "player", "reticleover", "SmallGroup1", "RaidGroup1", "boss1", "AvaPlayerTarget" } ) do
+    for _, unitTag in pairs( { "player", "reticleover", "SmallGroup1", "RaidGroup1", "boss1", "AvaPlayerTarget", "PetGroup1" } ) do
         if UnitFrames.CustomFrames[unitTag] then
             local tlw = UnitFrames.CustomFrames[unitTag].tlw
             if tlw.preview then
@@ -3294,6 +3518,8 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
     local class5  = { UnitFrames.SV.CustomColourNecromancer[1], UnitFrames.SV.CustomColourNecromancer[2], UnitFrames.SV.CustomColourNecromancer[3], 0.9} -- Necromancer
     local class6  = { UnitFrames.SV.CustomColourTemplar[1], UnitFrames.SV.CustomColourTemplar[2], UnitFrames.SV.CustomColourTemplar[3], 0.9} -- Templar
 
+    local petcolor = { UnitFrames.SV.CustomColourPet[1], UnitFrames.SV.CustomColourPet[2], UnitFrames.SV.CustomColourPet[3], 0.9} -- Player Pet
+
     local health_bg  = { 0.1*UnitFrames.SV.CustomColourHealth[1],  0.1*UnitFrames.SV.CustomColourHealth[2],  0.1*UnitFrames.SV.CustomColourHealth[3], 0.9 }
     local shield_bg  = { 0.1*UnitFrames.SV.CustomColourShield[1],  0.1*UnitFrames.SV.CustomColourShield[2],  0.1*UnitFrames.SV.CustomColourShield[3], 0.9 }
     local magicka_bg = { 0.1*UnitFrames.SV.CustomColourMagicka[1], 0.1*UnitFrames.SV.CustomColourMagicka[2], 0.1*UnitFrames.SV.CustomColourMagicka[3], 0.9 }
@@ -3309,6 +3535,8 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
     local class4_bg  = { 0.1*UnitFrames.SV.CustomColourWarden[1], 0.1*UnitFrames.SV.CustomColourWarden[2], 0.1*UnitFrames.SV.CustomColourWarden[3], 0.9} -- Warden
     local class5_bg  = { 0.1*UnitFrames.SV.CustomColourNecromancer[1], 0.1*UnitFrames.SV.CustomColourNecromancer[2], 0.1*UnitFrames.SV.CustomColourNecromancer[3], 0.9} -- Necromancer
     local class6_bg  = { 0.1*UnitFrames.SV.CustomColourTemplar[1], 0.1*UnitFrames.SV.CustomColourTemplar[2], 0.1*UnitFrames.SV.CustomColourTemplar[3], 0.9} -- Templar
+
+    local petcolor_bg = { 0.1*UnitFrames.SV.CustomColourPet[1], 0.1*UnitFrames.SV.CustomColourPet[2], 0.1*UnitFrames.SV.CustomColourPet[3], 0.9} -- Player Pet
 
     -- After colour is applied unhide frames, so player can see changes even from menu
     for _, baseName in pairs( { "player", "reticleover", "boss", "AvaPlayerTarget" } ) do
@@ -3327,6 +3555,55 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
                 if isMenu then
                     unitFrame.tlw:SetHidden( false )
                 end
+            end
+        end
+    end
+
+    local petClass = GetUnitClassId("player")
+
+    -- Player Pet Frame Color
+    for i = 1, 7 do
+        local unitTag = "PetGroup" .. i
+        if UnitFrames.CustomFrames[unitTag] then
+            local unitFrame = UnitFrames.CustomFrames[unitTag]
+            local shb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
+            if UnitFrames.SV.PetUseClassColor then
+                local class_color
+                local class_bg
+                if petClass == 1 then
+                    class_color = class1
+                    class_bg = class1_bg
+                elseif petClass == 2 then
+                    class_color = class2
+                    class_bg = class2_bg
+                elseif petClass == 3 then
+                    class_color = class3
+                    class_bg = class3_bg
+                elseif petClass == 4 then
+                    class_color = class4
+                    class_bg = class4_bg
+                elseif petClass == 5 then
+                    class_color = class5
+                    class_bg = class5_bg
+                elseif petClass == 6 then
+                    class_color = class6
+                    class_bg = class6_bg
+                else -- Fallback option just in case
+                    class_color = petcolor
+                    class_bg = petcolor_bg
+                end
+                shb.bar:SetColor( unpack(class_color) )
+                shb.backdrop:SetCenterColor( unpack(class_bg) )
+            else
+                shb.bar:SetColor( unpack(petcolor) )
+                shb.backdrop:SetCenterColor( unpack(petcolor_bg) )
+            end
+            shb.shield:SetColor( unpack(shield) )
+            if shb.shieldbackdrop then
+                shb.shieldbackdrop:SetCenterColor( unpack(shield_bg) )
+            end
+            if isMenu then
+                unitFrame.tlw:SetHidden ( false )
             end
         end
     end
@@ -3638,6 +3915,15 @@ function UnitFrames.CustomFramesApplyTexture()
         end
         UnitFrames.CustomFrames.RaidGroup1.tlw:SetHidden( false )
     end
+    if UnitFrames.CustomFrames.PetGroup1 then
+        for i = 1, 7 do
+            local unitTag = "PetGroup" .. i
+            UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop:SetCenterTexture(texture)
+            UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].bar:SetTexture(texture)
+            UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].shield:SetTexture(texture)
+        end
+        UnitFrames.CustomFrames.PetGroup1.tlw:SetHidden ( false)
+    end
     if UnitFrames.CustomFrames.boss1 then
         for i = 1, 6 do
             local unitTag = "boss" .. i
@@ -3725,7 +4011,7 @@ function UnitFrames.CustomFramesApplyFont()
     local __mkFont = function(size) return zo_strformat( "<<1>>|<<2>>|<<3>>", fontName, size, fontStyle ) end
 
     -- After fonts is applied unhide frames, so player can see changes even from menu
-    for _, baseName in pairs( { "player", "reticleover", "SmallGroup", "RaidGroup", "boss", "AvaPlayerTarget" } ) do
+    for _, baseName in pairs( { "player", "reticleover", "SmallGroup", "RaidGroup", "boss", "AvaPlayerTarget", "PetGroup" } ) do
         for i = 0, 24 do
             local unitTag = (i==0) and baseName or ( baseName .. i )
             if UnitFrames.CustomFrames[unitTag] then
@@ -4335,14 +4621,14 @@ function UnitFrames.CustomFramesApplyLayoutRaid(unhide)
         -- If we have icons set to display
         if UnitFrames.SV.RaidIconOptions > 1 then
             if UnitFrames.SV.RaidIconOptions == 2 then -- Class Icon Only
-                unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-17, UnitFrames.SV.RaidBarHeight-2 )
+                unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-27, UnitFrames.SV.RaidBarHeight-2 )
                 unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
                 unitFrame.roleIcon:SetHidden (true)
                 unitFrame.classIcon:SetHidden (false)
             end
             if UnitFrames.SV.RaidIconOptions == 3 then -- Role Icon Only
                 if role then
-                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-17, UnitFrames.SV.RaidBarHeight-2 )
+                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-27, UnitFrames.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
                     unitFrame.roleIcon:SetHidden (false)
                     unitFrame.classIcon:SetHidden (true)
@@ -4350,18 +4636,18 @@ function UnitFrames.CustomFramesApplyLayoutRaid(unhide)
             end
             if UnitFrames.SV.RaidIconOptions == 4 then -- Class PVP, Role PVE
                 if LUIE.ResolvePVPZone() then
-                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-17, UnitFrames.SV.RaidBarHeight-2 )
+                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-27, UnitFrames.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
                     unitFrame.roleIcon:SetHidden (true)
                     unitFrame.classIcon:SetHidden (false)
                 elseif not LUIE.ResolvePVPZone() and role then
-                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-17, UnitFrames.SV.RaidBarHeight-2 )
+                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-27, UnitFrames.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
                     unitFrame.roleIcon:SetHidden (false)
                     unitFrame.classIcon:SetHidden (true)
                 else
                     -- Fallback if neither condition is true then we clear the frame
-                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip, UnitFrames.SV.RaidBarHeight-2 )
+                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-10, UnitFrames.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 5, 0 )
                     unitFrame.roleIcon:SetHidden (true)
                     unitFrame.classIcon:SetHidden (true)
@@ -4369,32 +4655,32 @@ function UnitFrames.CustomFramesApplyLayoutRaid(unhide)
             end
             if UnitFrames.SV.RaidIconOptions == 5 then -- Class PVE, Role PVP
                 if LUIE.ResolvePVPZone() and role then
-                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-17, UnitFrames.SV.RaidBarHeight-2 )
+                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-27, UnitFrames.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
                     unitFrame.roleIcon:SetHidden (false)
                     unitFrame.classIcon:SetHidden (true)
                 elseif not LUIE.ResolvePVPZone() then
-                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-17, UnitFrames.SV.RaidBarHeight-2 )
+                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-27, UnitFrames.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
                     unitFrame.roleIcon:SetHidden (true)
                     unitFrame.classIcon:SetHidden (false)
                 else
                     -- Fallback if neither condition is true then we clear the frame
-                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip, UnitFrames.SV.RaidBarHeight-2 )
+                    unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-10, UnitFrames.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 5, 0 )
                     unitFrame.roleIcon:SetHidden (true)
                     unitFrame.classIcon:SetHidden (true)
                 end
             end
         else
-            unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip, UnitFrames.SV.RaidBarHeight-2 )
+            unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-10, UnitFrames.SV.RaidBarHeight-2 )
             unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 5, 0 )
             unitFrame.roleIcon:SetHidden (true)
             unitFrame.classIcon:SetHidden (true)
         end
 
         if IsUnitGroupLeader(unitTag) then
-            unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-17, UnitFrames.SV.RaidBarHeight-2 )
+            unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip-27, UnitFrames.SV.RaidBarHeight-2 )
             unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
             unitFrame.roleIcon:SetHidden (true)
             unitFrame.classIcon:SetHidden (true)
@@ -4415,6 +4701,35 @@ function UnitFrames.CustomFramesApplyLayoutRaid(unhide)
     if unhide then
         raid:SetHidden( false )
     end
+end
+
+-- Set dimensions of custom pet frame and anchors
+function UnitFrames.CustomFramesApplyLayoutPet(unhide)
+    if not UnitFrames.CustomFrames.PetGroup1 then
+        return
+    end
+
+    local petBarHeight = UnitFrames.SV.PetHeight
+
+    local pet = UnitFrames.CustomFrames.PetGroup1.tlw
+    pet:SetDimensions ( UnitFrames.SV.PetWidth, petBarHeight*7 + 21 )
+
+    for i = 1, 7 do
+        local unitFrame = UnitFrames.CustomFrames["PetGroup" .. i]
+
+        unitFrame.control:ClearAnchors()
+        unitFrame.control:SetAnchor( TOPLEFT, pet, TOPLEFT, 0, (petBarHeight + 3)*(i-1) )
+        unitFrame.control:SetDimensions(UnitFrames.SV.PetWidth, petBarHeight)
+
+        unitFrame.name:SetDimensions( UnitFrames.SV.PetWidth - UnitFrames.SV.PetNameClip - 10, UnitFrames.SV.PetHeight-2 )
+        unitFrame.name:SetAnchor(LEFT, shb, LEFT, 5, 0 )
+
+        unitFrame[POWERTYPE_HEALTH].label:SetDimensions(UnitFrames.SV.PetWidth-50, UnitFrames.SV.PetHeight - 2)
+    end
+    if unhide then
+        pet:SetHidden (false )
+    end
+
 end
 
 -- Set dimensions of custom raid frame and anchors or raid group members
@@ -4462,6 +4777,9 @@ function UnitFrames.CustomFramesApplyInCombat()
     local oocAlphaBoss = 0.01 * UnitFrames.SV.BossOocAlpha
     local incAlphaBoss = 0.01 * UnitFrames.SV.BossIncAlpha
 
+    local oocAlphaPet = 0.01 * UnitFrames.SV.PetOocAlpha
+    local incAlphaPet = 0.01 * UnitFrames.SV.PetIncAlpha
+
     -- Apply to all frames
     if UnitFrames.CustomFrames.player then
         UnitFrames.CustomFrames.player.control:SetAlpha( idle and oocAlphaPlayer or incAlphaPlayer )
@@ -4487,12 +4805,22 @@ function UnitFrames.CustomFramesApplyInCombat()
         end
     end
 
+    -- Set boss transparency
     for i = 1, 6 do
         local unitTag = "boss" .. i
         if UnitFrames.CustomFrames[unitTag] then
             UnitFrames.CustomFrames[unitTag].control:SetAlpha ( idle and oocAlphaBoss or incAlphaBoss )
         end
     end
+
+    -- Set pet transparency
+    for i = 1, 7 do
+        local unitTag = "PetGroup" .. i
+        if UnitFrames.CustomFrames[unitTag] then
+            UnitFrames.CustomFrames[unitTag].control:SetAlpha ( idle and oocAlphaPet or incAlphaPet)
+        end
+    end
+
 end
 
 function UnitFrames.CustomFramesGroupAlpha()

@@ -145,6 +145,9 @@ SpellCastBuffs.Defaults = {
     TooltipSticky                       = 0,
     TooltipAbilityId                    = false,
     TooltipBuffType                     = false,
+    GenericPotion                       = false,
+    GenericPoison                       = true,
+    GenericStatusEffect                 = false,
 }
 SpellCastBuffs.SV = nil
 
@@ -374,13 +377,18 @@ function SpellCastBuffs.Initialize(enabled)
 
     SpellCastBuffs.Reset()
     SpellCastBuffs.UpdateContextHideList()
+    SpellCastBuffs.UpdatePotionList()
+    SpellCastBuffs.UpdatePoisonList()
+    SpellCastBuffs.UpdateStatusEffectList()
 
     -- Register events
     eventManager:RegisterForUpdate(moduleName, 100, SpellCastBuffs.OnUpdate )
 
     -- Target Events
-    eventManager:RegisterForEvent(moduleName, EVENT_TARGET_CHANGE,             SpellCastBuffs.OnTargetChange )
-    eventManager:RegisterForEvent(moduleName, EVENT_RETICLE_TARGET_CHANGED,    SpellCastBuffs.OnReticleTargetChanged )
+    eventManager:RegisterForEvent(moduleName, EVENT_TARGET_CHANGE, SpellCastBuffs.OnTargetChange )
+    eventManager:RegisterForEvent(moduleName, EVENT_RETICLE_TARGET_CHANGED, SpellCastBuffs.OnReticleTargetChanged )
+    eventManager:RegisterForEvent(moduleName .. "Disposition", EVENT_DISPOSITION_UPDATE, SpellCastBuffs.OnDispositionUpdate )
+    eventManager:AddFilterForEvent(moduleName .. "Disposition", EVENT_DISPOSITION_UPDATE, REGISTER_FILTER_UNIT_TAG, "reticleover" )
 
     -- Buff Events
     eventManager:RegisterForEvent(moduleName .. "Player", EVENT_EFFECT_CHANGED, SpellCastBuffs.OnEffectChanged )
@@ -484,6 +492,13 @@ function SpellCastBuffs.RegisterDebugEvents()
     if SpellCastBuffs.SV.ShowDebugEffect then
         eventManager:RegisterForEvent(moduleName .. "DebugEffect", EVENT_EFFECT_CHANGED, SpellCastBuffs.EventEffectDebug)
     end
+
+    -- Debugs only enabled for my accounts
+    if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
+        eventManager:RegisterForEvent(moduleName .. "AuthorDebugCombat", EVENT_COMBAT_EVENT, SpellCastBuffs.AuthorCombatDebug)
+        eventManager:RegisterForEvent(moduleName .. "AuthorDebugEffect", EVENT_EFFECT_CHANGED, SpellCastBuffs.AuthorEffectDebug)
+    end
+
 end
 
 -- List Handling (Add) for Prominent Auras & Blacklist
@@ -1235,6 +1250,16 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
                         tooltipText = GetAbilityEffectDescription(control.buffSlot)
                     end
                 end
+
+                -- TODO: Implement this functionality but it needs to have a filter for ONLY specific ids.
+                --[[
+                -- Display Default Description if no internal effect description is present
+                if tooltipText == "" or tooltipText == nil then
+                    if GetAbilityDescription(control.effectId) ~= "" then
+                        tooltipText = GetAbilityDescription(control.effectId)
+                    end
+                end
+                ]]--
 
             else
                 duration = 0
@@ -2737,6 +2762,12 @@ function SpellCastBuffs.OnDeath(eventCode, unitTag, isDead)
     end
 end
 
+-- Runs on the EVENT_DISPOSITION_UPDATE listener.
+-- This handler fires when the disposition of a reticleover unitTag changes. We filter for only this case.
+function SpellCastBuffs.OnDispositionUpdate(eventCode, unitTag)
+    SpellCastBuffs.AddNameAura()
+end
+
 -- Runs on the EVENT_TARGET_CHANGE listener.
 -- This handler fires every time someone target changes.
 -- This function is needed in case the player teleports via Way Shrine
@@ -3485,6 +3516,60 @@ function SpellCastBuffs.UpdateContextHideList()
     if not SpellCastBuffs.SV.ShowBlockTarget then
         for k, v in pairs(Effects.IsBlock) do
             hideTargetEffects[k] = v
+        end
+    end
+end
+
+-- Called from the menu and on initialize to build potion effect generic icon overrides.
+function SpellCastBuffs.UpdatePotionList(menu)
+    if LUIE.SpellCastBuffs.SV.GenericPotion then
+        for k, v in pairs(Effects.PotionIconTable) do
+            if v.normalize then
+                Effects.EffectOverride[k].icon = v.normalize
+            end
+        end
+    -- Minimize the amount of iterating we need to do, we only need to toggle back if we're disabling the setting from the menu.
+    elseif menu and not LUIE.SpellCastBuffs.SV.GenericPotion then
+        for k, v in pairs(Effects.PotionIconTable) do
+            if v.icon then
+                Effects.EffectOverride[k].icon = v.icon
+            end
+        end
+    end
+end
+
+-- Called from the menu and on initialize to build poison effect generic icon overrides.
+function SpellCastBuffs.UpdatePoisonList(menu)
+    if LUIE.SpellCastBuffs.SV.GenericPoison then
+        for k, v in pairs(Effects.PoisonIconTable) do
+            if v.normalize then
+                Effects.EffectOverride[k].icon = v.normalize
+            end
+        end
+    -- Minimize the amount of iterating we need to do, we only need to toggle back if we're disabling the setting from the menu.
+    elseif menu and not LUIE.SpellCastBuffs.SV.GenericPoison then
+        for k, v in pairs(Effects.PoisonIconTable) do
+            if v.icon then
+                Effects.EffectOverride[k].icon = v.icon
+            end
+        end
+    end
+end
+
+-- Called from the menu and on initialize to build status effect generic icon overrides.
+function SpellCastBuffs.UpdateStatusEffectList(menu)
+    if LUIE.SpellCastBuffs.SV.GenericStatusEffect then
+        for k, v in pairs(Effects.StatusEffectIconTable) do
+            if v.normalize then
+                Effects.EffectOverride[k].icon = v.normalize
+            end
+        end
+    -- Minimize the amount of iterating we need to do, we only need to toggle back if we're disabling the setting from the menu.
+    elseif menu and not LUIE.SpellCastBuffs.SV.GenericStatusEffect then
+        for k, v in pairs(Effects.StatusEffectIconTable) do
+            if v.icon then
+                Effects.EffectOverride[k].icon = v.icon
+            end
         end
     end
 end

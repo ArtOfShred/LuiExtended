@@ -484,6 +484,16 @@ function LUIE.InitializeHooks()
                         end
                     end
 
+                    -- TODO: Implement this functionality but it needs to have a filter for ONLY specific ids.
+                    --[[
+                    -- Display Default Description if no internal effect description is present
+                    if tooltipText == "" or tooltipText == nil then
+                        if GetAbilityDescription(abilityId) ~= "" then
+                            tooltipText = GetAbilityDescription(abilityId)
+                        end
+                    end
+                    ]]--
+
                     -- Override custom tooltip with default tooltip if this ability is flagged to do so (scaling buffs like Mundus Stones)
                     if LUIE.Data.Effects.TooltipUseDefault[abilityId] then
                         if GetAbilityEffectDescription(buffSlot) ~= "" then

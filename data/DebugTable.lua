@@ -891,6 +891,7 @@ LUIE.DebugAuras = {
     [46733] = true, -- Reduce Stamina Cost (Glyph of Reduce Feat Cost)
     [26750] = true, -- Reduce Magicka Cost (Glyph of Reduce Spell Cost)
     [46739] = true, -- Reduce Block and Bash Cost (Glyph of Shielding)
+    [140300] = true, -- Prismatic Reduced Cost (Glyph of Reduced Skill Cost)
 
     -- Weapon Enchants
     [28919] = true, -- Life Drain (Glyph of Absorb Health)
@@ -2492,6 +2493,7 @@ LUIE.DebugAuras = {
     [61426] = true, -- Shadowstrike (The Shadow 120 - Shadowstrike)
     [64244] = true, -- Shadowstrike (The Shadow 120 - Shadowstrike)
     [64245] = true, -- Shadowstrike (The Shadow 120 - Shadowstrike)
+    [140520] = true, -- Shadowstrike (The Shadow 120 - Shadowstrike)
     [77773] = true, -- Clairvoyance Fx (The Shadow 120 - Shadowstrike)
 
     -- The Apprentice
@@ -5269,6 +5271,7 @@ LUIE.DebugAuras = {
     [126537] = true, -- Minor Endurance (Rally)
     [60894] = true, -- Heal Buffer (Rally)
     [60895] = true, -- Heal Buff (Rally)
+    [60996] = true, -- Buff Remover (Rally)
     [38805] = true, -- Rally (Rally)
 
     [83216] = true, -- Berserker Strike (Berserker Strike)
@@ -5852,7 +5855,8 @@ LUIE.DebugAuras = {
     -------------------------------------
 
     [16145] = true, -- Light Attack
-    [16212] = true, -- Heavy Attack
+    [16212] = true, -- Restoration Staff Channel
+    [67022] = true, -- Restoration Staff Heavy Attack
     [32760] = true, -- Heavy Attack (Restoration)
     [67106] = true, -- Partial Heavy Attack (Resto)
 
@@ -10405,6 +10409,18 @@ LUIE.DebugAuras = {
     [83884] = true, -- Steal Essence (Magdelena)
     [83886] = true, -- Shadow Flare (Magdelena)
     [83883] = true, -- Shadow Flare (Magdelena)
+
+    -------------------------------------
+    -- QUESTS - SHARED ------------------
+    -------------------------------------
+
+    [55831] = true, -- Found Recommended Ore (Blacksmith Certification)
+	[56061]	= true, -- Found Recommended Jute (Clothier Certification)
+	[55965]	= true, -- Found Recommended Maple (Woodworker Certification)
+	[56266]	= true, -- Found Recommended Solvent and (Alchemist Certification)
+	[56256]	= true, -- Found Recommended Runestones (Enchanter Certification)
+	[55983]	= true, -- Found Recommended Ingredients (Provisioner Certification)
+	[103376] = true, -- Found Recommended Dust (Jewelry Crafting Certification)
 
     -------------------------------------
     -- MAIN QUEST -----------------------
@@ -15398,8 +15414,9 @@ LUIE.DebugAuras = {
     [116366] = true, -- Pariah's Resolve (Pariah's Resolve)
 
     [116096] = true, -- Ruinous Cyclone (Ruinous Cyclone)
-    [116669] = true, -- Ebony Cyclone (Ruinous Cyclone)
-    [116680] = true, -- Ebony Cyclone (Ruinous Cyclone)
+    [116669] = true, -- Ruinous Cyclone (Ruinous Cyclone)
+    [116680] = true, -- Ruinous Cyclone (Ruinous Cyclone)
+    [116678] = true, -- Ruinous Cyclone (Ruinous Cyclone)
 
     -- Siege Warfare
     [35106] = true, -- Fire (Firepot Trebuchet)
