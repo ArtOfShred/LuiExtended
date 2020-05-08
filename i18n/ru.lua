@@ -18,6 +18,7 @@ local strings = {
     SI_LUIE_CUSTOM_LIST_ADDED_ID =                       "<<1>> [<<2>>] <<3>> добавлены к <<4>>.",
     SI_LUIE_CUSTOM_LIST_ADDED_FAILED =                   "не возможно добавить [<<1>>] к <<2>>. Этот abilityID не существует.",
     SI_LUIE_CUSTOM_LIST_ADDED_NAME =                     "<<1>> добавлен к <<2>>.",
+    SI_LUIE_CUSTOM_LIST_CLEARED =                        "Cleared all entries from <<1>>.",
     SI_LUIE_CUSTOM_LIST_REMOVED_ID =                     "<<1>> [<<2>>] <<3>> убраны из <<4>>.",
     SI_LUIE_CUSTOM_LIST_REMOVED_FAILED =                 "Не возможно убрать [<<1>>] до <<2>>. Этот abilityID не существует.",
     SI_LUIE_CUSTOM_LIST_REMOVED_NAME =                   "<<1>> убран из <<2>>.",
