@@ -1,3 +1,34 @@
+### Version 6.0.6
+
+General
+- Updated the icons for Flying Immunites, Boss Immunites, Major Vulnerability Immunity, Off-Balance Immunity, Minor Toughness, as well as the icons for Major and Minor Aegis, Slayer, and Courage.
+- Added an option to the base LuiExtended menu to unlock several default UI elements - Quest Tracker, Battleground Score, Loot History, and Equipment Status.
+
+
+Buffs & Debuffs
+- Housing Target dummies will now display a "Boss Immunities" buff.
+- Added a "Custom Icon & Normalization Options" menu to Buffs & Debuffs. Added 3 individual options in this menu that allow you to toggle the custom icons for potion/poison/status effects that have a major/minor effect with the major/minor effect icon. The option for poisons is enabled by default.
+
+Chat Announcements
+- Added an option to display "Container" loot messages in Chat Announcements when you empty a container item in your inventory and it is removed.
+- Fixed some minor timing issues with the Chat Printer (the chat printer operates on a 50ms throttle to allow any event messages to be properly ordered - some events don't properly line up so they now delay the printer slightly so all queued messages display simultaneously.
+- The throttle settings for Tel Var Stones no longer apply to stones when looting them from a chest/container.
+- Achievement Tracking Categories are now hardcoded into the menu so I don't have to update the categories with each game update. This will cause these settings to reset for anyone who modified them.
+- Added an option to always show the Center Screen Announcement for Achievement Completion even if you have the category filtered out. This is how Achievement Tracking worked before this option was implemented - so it is enabled by default.
+
+Slash Commands
+- Using the /friend Slash Command now displays a prompt confirming the name entry & allows you to type a note to that person.
+
+Unit Frames
+- Unit Frame names will no longer abbreviate to "..." when cut off and will now truncate instead. This allows for better use of the frame space.
+- Added resurrection monitoring status to Group & Raid Unit Frames - now you will be able to see when a target is being resurrected, has a pending resurrection, or is self-reviving. This label updates dynamically and replaces the "Dead" label when one of these conditions is met.
+- Updated the right click handler for custom Group Unit Frames to allow you to request to add the player as a friend.
+- Increased the default Raid Frame width by 20 units. This won't modify your current settings.
+- Added Unit Frames for pets - with a new color option for the pet bar and the option to color the bar by your Class color.
+- Added a name blacklist for the new pet frames. Entering a pet name (not case-sensitive) will hide it from displaying on your UI.
+
+---
+
 ### Version 6.0.5
 
 General
