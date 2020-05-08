@@ -60,6 +60,8 @@ i18n/settings/Settings_$(language).lua
 i18n/skills/Skills_en.lua
 i18n/skills/Skills_$(language).lua
 
+Unlock.lua
+
 data/Globals.lua
 data/AbilityTables.lua
 data/Tooltips.lua

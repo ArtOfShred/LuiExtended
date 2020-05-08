@@ -35,6 +35,9 @@ local strings = {
     SI_LUIE_LAM_SVPROFILE_RESETCHAR_TP =                 "Сбросить настройки профиля текущего персонажа.",
     SI_LUIE_LAM_SVPROFILE_RESETACCOUNT =                 "Сбросить общие настройки",
     SI_LUIE_LAM_SVPROFILE_RESETACCOUNT_TP =              "Сбрасывает общие настройки аккаунта. Помните, что это никак не затронет индивидуальные настройки персонажа.",
+    SI_LUIE_LAM_UNLOCK_DEFAULT_UI =                      "Unlock Default UI Elements",
+    SI_LUIE_LAM_UNLOCK_DEFAULT_UI_TP =                   "This will unlock and allow you to move the default UI Quest Log, Battleground Score, Loot History, and Equipment Status Windows.",
+    SI_LUIE_LAM_RESET_DEFAULT_UI_TP =                    "Reset Default UI Elements back to their normal positions.",
 
     -- Modules
     SI_LUIE_LAM_UF =                                     "Фреймы",

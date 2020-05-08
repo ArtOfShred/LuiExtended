@@ -21,6 +21,10 @@ local strings = {
     SI_LUIE_CUSTOM_LIST_REMOVED_ID =                     "<<1>> [<<2>>] <<3>> убраны из <<4>>.",
     SI_LUIE_CUSTOM_LIST_REMOVED_FAILED =                 "Не возможно убрать [<<1>>] до <<2>>. Этот abilityID не существует.",
     SI_LUIE_CUSTOM_LIST_REMOVED_NAME =                   "<<1>> убран из <<2>>.",
+    SI_LUIE_DEFAULT_FRAME_QUEST_LOG =                    "Quest Log",
+    SI_LUIE_DEFAULT_FRAME_BATTLEGROUND_SCORE =           "Battleground Score",
+    SI_LUIE_DEFAULT_FRAME_LOOT_HISTORY =                 "Loot History",
+    SI_LUIE_DEFAULT_FRAME_EQUIPMENT_STATUS =             "Equipment Status",
 
     -- Bindings
     SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Призвать Банкира (Tythis)",

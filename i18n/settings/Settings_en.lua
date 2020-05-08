@@ -35,6 +35,9 @@ local strings = {
     SI_LUIE_LAM_SVPROFILE_RESETCHAR_TP =                 "Reset current character profile settings.",
     SI_LUIE_LAM_SVPROFILE_RESETACCOUNT =                 "Reset Account Wide",
     SI_LUIE_LAM_SVPROFILE_RESETACCOUNT_TP =              "Reset account wide profile settings. Note that this will not delete or modify individual character settings.",
+    SI_LUIE_LAM_UNLOCK_DEFAULT_UI =                      "Unlock Default UI Elements",
+    SI_LUIE_LAM_UNLOCK_DEFAULT_UI_TP =                   "This will unlock and allow you to move the default UI Quest Log, Battleground Score, Loot History, and Equipment Status Windows.",
+    SI_LUIE_LAM_RESET_DEFAULT_UI_TP =                    "Reset Default UI Elements back to their normal positions.",
 
     -- Modules
     SI_LUIE_LAM_UF =                                     "Unit Frames",

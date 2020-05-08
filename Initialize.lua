@@ -79,6 +79,8 @@ local function OnAddonOnLoaded(eventCode, addonName)
 
     -- Initialize Hooks
     LUIE.InitializeHooks()
+    -- Set Positions for moved Default UI elements
+    LUIE.SetElementPosition()
 
     LUIE.PlayerNameRaw = GetRawUnitName("player")
     LUIE.PlayerNameFormatted = zo_strformat(SI_UNIT_NAME, GetUnitName("player"))

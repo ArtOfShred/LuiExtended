@@ -21,6 +21,10 @@ local strings = {
     SI_LUIE_CUSTOM_LIST_REMOVED_ID =                     "<<1>> [<<2>>] <<3>> aus <<4>> entfernt.",
     SI_LUIE_CUSTOM_LIST_REMOVED_FAILED =                 "Konnte [<<1>>] nicht aus <<2>> entfernen. Diese abilityId existiert nicht.",
     SI_LUIE_CUSTOM_LIST_REMOVED_NAME =                   "<<1>> aus <<2>> entfernt.",
+    SI_LUIE_DEFAULT_FRAME_QUEST_LOG =                    "Quest Log",
+    SI_LUIE_DEFAULT_FRAME_BATTLEGROUND_SCORE =           "Battleground Score",
+    SI_LUIE_DEFAULT_FRAME_LOOT_HISTORY =                 "Loot History",
+    SI_LUIE_DEFAULT_FRAME_EQUIPMENT_STATUS =             "Equipment Status",
 
     -- Bindings
     SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Bankier beschwören",
