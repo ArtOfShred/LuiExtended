@@ -6,6 +6,13 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
+    "|cFFA500LuiExtended Version 6.0.7|r",
+    "",
+    "|cFFFF00Unit Frames:|r",
+    "[*] Switched Pet Unit Frames to use a whitelist instead of blacklist. You must add pets to the whitelist in order for them to show up. By default no entries are added here.",
+    "[*] Added five buttons to add specific pets to the whitelist - Necromancer, Sorcerer, Warden, and Item Set Pets, as well as Assistants.",
+    "[*] Added a button to clear the entire whitelist.",
+    "",
     "|cFFA500LuiExtended Version 6.0.6|r",
     "",
     "|cFFFF00General:|r",
