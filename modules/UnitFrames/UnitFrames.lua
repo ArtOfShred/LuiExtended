@@ -342,7 +342,7 @@ function UnitFrames.AddBulkToCustomList(list, table)
 end
 
 function UnitFrames.ClearCustomList(list)
-    local listRef = list == UnitFrames.SV.whitelist and GetString(SI_LUIE_CUSTOM_LIST_UF_BLACKLIST) or ""
+    local listRef = list == UnitFrames.SV.whitelist and GetString(SI_LUIE_CUSTOM_LIST_UF_WHITELIST) or ""
     for k, v in pairs(list) do
         list[k] = nil
     end
@@ -352,7 +352,7 @@ end
 
 -- List Handling (Add) Pet Whitelist
 function UnitFrames.AddToCustomList(list, input)
-    local listRef = list == UnitFrames.SV.whitelist and GetString(SI_LUIE_CUSTOM_LIST_UF_BLACKLIST) or ""
+    local listRef = list == UnitFrames.SV.whitelist and GetString(SI_LUIE_CUSTOM_LIST_UF_WHITELIST) or ""
     if input ~= "" then
         list[input] = true
         CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
@@ -362,7 +362,7 @@ end
 
 -- List Handling (Remove) Pet Whitelist
 function UnitFrames.RemoveFromCustomList(list, input)
-    local listRef = list == UnitFrames.SV.whitelist and GetString(SI_LUIE_CUSTOM_LIST_UF_BLACKLIST) or ""
+    local listRef = list == UnitFrames.SV.whitelist and GetString(SI_LUIE_CUSTOM_LIST_UF_WHITELIST) or ""
     if input ~= "" then
         list[input] = nil
         CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()

@@ -1382,7 +1382,6 @@ local strings = {
     SI_LUIE_LAM_UF_CFRAMESPET_ICPACITY_TP =              "Change the transparency of custom pet frames when engaged in combat.",
     SI_LUIE_LAM_UF_CFRAMESPET_NAMECLIP =                 "Pet Name Clip Location",
     SI_LUIE_LAM_UF_CFRAMESPET_NAMECLIP_TP =              "Due to the inability to detect the length of the hit point value, you can use this setting to manually change where the name is clipped on pet frames in order to prevent overlap.",
-    SI_LUIE_LAM_UF_BLACKLIST_HEADER =                    "Pet Name Whitelist",
     SI_LUIE_LAM_UF_BLACKLIST_DESCRIPT =                  "Add pet names to the whitelist by entering the name into the input field and pressing enter. Remove pet names from the whitelist by clicking the pet name from the dropdown list.\nNote: Names are not case-sensitive.\n\nA few references:\nYou can add Assistants here as well if you want an easy way to monitor whether they are out.\nDark Shade & its morphs = \"Gloom Wraith\"\nEngine Guardian = \"Dwarven Sphere\"\nMaw of the Infernal = \"Daedroth\"\nMorkuldin = \"Morkuldin Sword\"\nSentinel of Rkugamz = \"Dwemer Spider\"\nShadowrend = \"Shadowrend\"",
     SI_LUIE_LAM_UF_BLACKLIST_ADDLIST =                   "Add Pet Name to Whitelist",
     SI_LUIE_LAM_UF_BLACKLIST_ADDLIST_TP =                "Add a pet name to the whitelist.",

@@ -1729,7 +1729,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Unit Frames Pet Whitelist Header
                 type = "header",
-                name = GetString(SI_LUIE_LAM_UF_BLACKLIST_HEADER),
+                name = GetString(SI_LUIE_CUSTOM_LIST_UF_WHITELIST),
             },
             {
                 -- Unit Frames Pet Whitelist Description
