@@ -148,7 +148,7 @@ LUIE.Data.AlertTable = {
 
     [44250] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Dark Shade (Dreadweaver)
 
-    [44323] = { power = true, priority = 3, auradetect = true }, -- Dampen Magic (Soulbrander)
+    [44323] = { power = true, priority = 3, auradetect = true, ignoreRefresh = true }, -- Dampen Magic (Soulbrander)
     [44258] = { power = true, priority = 3, auradetect = true }, -- Radiant Magelight (Soulbrander)
 
     [35387] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true, cc = LUIE_CC_TYPE_SNARE, duration = 1000, postCast = 4000, bossMatch = { Unitnames.Boss_Overlord_Nur_dro } }, -- Defiled Grave (Bonelord)
@@ -797,6 +797,19 @@ LUIE.Data.AlertTable = {
 
     [107282] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Impale (Yaghra Nightmare)
     [105867] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Pustulant Explosion (Yaghra Nightmare)
+
+    --------------------------------------------------
+    -- ELSWEYR ---------------------------------------
+    --------------------------------------------------
+
+    [121475] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1300, cc = LUIE_CC_TYPE_STAGGER }, -- Devastating Leap (Bone Flayer)
+    [121473] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2400 }, -- Flurry (Bone Flayer)
+
+    [121643] = { interrupt = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2800, cc = LUIE_CC_TYPE_STUN }, -- Defiled Ground (Euraxian Necromancer)
+
+    [125281] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 4400, fakeName = Unitnames.Boss_Bahlokdaan, refire = 2000 }, -- Sweeping Breath (Bahlokdaan)
+    [125244] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1567, fakeName = Unitnames.Boss_Bahlokdaan, cc = LUIE_CC_TYPE_STUN }, -- Head Strike (Bahlokdaan)
+    [125570] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1400, cc = LUIE_CC_TYPE_STUN }, -- Chomp (Bahlokdaan)
 
     --------------------------------------------------
     -- ARENAS ----------------------------------------

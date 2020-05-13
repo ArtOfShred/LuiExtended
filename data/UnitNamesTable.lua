@@ -205,6 +205,10 @@ LUIE.Data.UnitNames = {
     Boss_Vicereeve_Pelidil = 'Vicereeve Pelidil',
     Boss_Shade_of_Naemon = 'Shade of Naemon',
 
+    -- Elsweyr Quests
+    Elite_Captain_Carvain = 'Captain Carvain',
+    Boss_Bahlokdaan = 'Bahlokdaan',
+
     ----------------------------------------------------------------
     -- WORLD BOSSES ------------------------------------------------
     ----------------------------------------------------------------

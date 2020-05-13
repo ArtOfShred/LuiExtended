@@ -190,6 +190,7 @@ LUIE.Data.Tooltips = {
 
 
     Generic_Off_Balance                             = GetString(SI_LUIE_SKILL_GENERIC_OFF_BALANCE_TP),
+    --Generic_Off_Balance_No_Dur                      = GetString(SI_LUIE_SKILL_GENERIC_OFF_BALANCE_NO_DUR_TP),
     Generic_Off_Balance_Immunity                    = GetString(SI_LUIE_SKILL_GENERIC_OFF_BALANCE_IMMUNITY_TP),
     Generic_Major_Vulnerability_Immunity            = GetString(SI_LUIE_SKILL_GENERIC_MAJOR_VULNERABILITY_IMMUNITY_TP),
     Generic_Immobilize                              = GetString(SI_LUIE_SKILL_GENERIC_IMMOBILIZE_TP),
@@ -200,11 +201,13 @@ LUIE.Data.Tooltips = {
     Generic_Levitate                                = GetString(SI_LUIE_SKILL_GENERIC_LEVITATE_TP),
     Generic_Knockback                               = GetString(SI_LUIE_SKILL_GENERIC_KNOCKBACK_TP),
     Generic_Knockdown                               = GetString(SI_LUIE_SKILL_GENERIC_KNOCKDOWN_TP),
+    Generic_Knockdown_No_Dur                        = GetString(SI_LUIE_SKILL_GENERIC_KNOCKDOWN_NO_DUR_TP),
     Generic_Fear                                    = GetString(SI_LUIE_SKILL_GENERIC_FEAR_TP),
     Generic_Fear_No_Dur                             = GetString(SI_LUIE_SKILL_GENERIC_FEAR_NO_DUR_TP),
     Generic_Silence                                 = GetString(SI_LUIE_SKILL_GENERIC_SILENCE_TP),
     Generic_Silence_No_Dur                          = GetString(SI_LUIE_SKILL_GENERIC_SILENCE_NO_DUR_TP),
     Generic_Disorient                               = GetString(SI_LUIE_SKILL_GENERIC_DISORIENT_TP),
+    --Generic_Disorient_No_Dur                        = GetString(SI_LUIE_SKILL_GENERIC_DISORIENT_NO_DUR_TP),
 
     Generic_CC_Immunity                             = GetString(SI_LUIE_SKILL_GENERIC_CC_IMMUNITY_TP),
     Generic_Scary_Immunities                        = GetString(SI_LUIE_SKILL_GENERIC_SCARY_IMMUNITIES_TP),
@@ -1265,6 +1268,9 @@ LUIE.Data.Tooltips = {
     Skill_Shadow_Wood                               = GetString(SI_LUIE_SKILL_SHADOW_WOOD_TP),
     Skill_Ancient_Wrath                             = GetString(SI_LUIE_SKILL_ANCIENT_WRATH_TP),
     Skill_Necrotic_Circle_Stun                      = GetString(SI_LUIE_SKILL_NECROTIC_CIRCLE_STUN_TP),
+
+    -- Elsweyr Quests
+    Skill_Flame_Aura                                = GetString(SI_LUIE_SKILL_FLAME_AURA),
 
     ----------------------------------------------------------------
     -- ARENAS ------------------------------------------------------

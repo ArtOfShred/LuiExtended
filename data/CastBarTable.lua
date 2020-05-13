@@ -356,6 +356,9 @@ CastBarTable.CastDurationFix = {
     [33727] = 500, -- BurrowEND (Throne of the Wilderking)
     [34499] = 3000, -- Corruption Beam (The Blight of the Bosmer)
 
+    -- Elsweyr
+    [119292] = 2000, -- Stun (Bright Moons, Warm Sands)
+
     ----------------------------------------------------------------
     -- SEASONAL QUEST ----------------------------------------------
     ----------------------------------------------------------------
@@ -700,6 +703,9 @@ CastBarTable.IsCast = {
     [33701] = true, -- BurrowEND (Throne of the Wilderking)
     [33727] = true, -- BurrowEND (Throne of the Wilderking)
     [34499] = true, -- Corruption Beam (The Blight of the Bosmer)
+
+    -- Elsweyr
+    [119292] = 2000, -- Stun (Bright Moons, Warm Sands)
 
     ----------------------------------------------------------------
     -- SEASONAL QUEST ----------------------------------------------

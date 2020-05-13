@@ -266,6 +266,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_MAJOR_VULNERABILITY_IMMUNITY = "Major Vulnerability Immunity",
     SI_LUIE_SKILL_GENERIC_MAJOR_VULNERABILITY_IMMUNITY_TP = "Immune to effects that apply Major Vulnerability for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_OFF_BALANCE_TP =               "Off Balance for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_OFF_BALANCE_NO_DUR_TP =        "Off Balance.",
     SI_LUIE_SKILL_GENERIC_SNARE_TP =                     "Movement Speed reduced by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_SNARE_NO_DUR_TP =              "Movement Speed reduced by |cFFFFFF<<2>>|r%.",
     SI_LUIE_SKILL_GENERIC_IMMOBILIZE_TP =                "Immobilized for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
@@ -276,6 +277,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_LEVITATE_TP =                  "Levitated for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_KNOCKBACK_TP =                 "Knocked back for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_KNOCKDOWN_TP =                 "Knocked down for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_KNOCKDOWN_NO_DUR_TP =          "Knocked down.",
     SI_LUIE_SKILL_GENERIC_FEAR_TP =                      "Feared for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_FEAR_NO_DUR_TP =               "Feared.",
     SI_LUIE_SKILL_GENERIC_SILENCE_TP =                   "Silenced for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
@@ -287,6 +289,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_FLYING_IMMUNITIES_TP =         "Immune to movement imparing effects.",
     SI_LUIE_SKILL_SET_GENERIC_IMMUNITY_TP =              "Immune to damage and all negative effects for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_DISORIENT_TP =                 "Disoriented for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_DISORIENT_NO_DUR_TP =          "Disoriented.",
 
     -- Ravage Potions / Poisons
     SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POTION_TP =     "Increase the cost of Magicka abilities by |cFFFFFF60|r%.",
@@ -1342,6 +1345,8 @@ local strings = {
     SI_LUIE_SKILL_SUMMON_FLAME_ATRONACHS =               "Summon Flame Atronachs",
     SI_LUIE_SKILL_FLAME_BARRIER =                        "Flame Barrier",
     SI_LUIE_SKILL_PRECISION_STRIKE =                     "Precision Strike",
+    SI_LUIE_SKILL_FLAME_AURA =                           "Enemies within |cFFFFFF11.5|r meters take Flame Damage every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_STAR_HAVEN_DRAGONHORN =                "Star Haven Dragonhorn",
 
     -- Keep Upgrade
     SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_RANGE =              "Longer Range on Ranged Guards",

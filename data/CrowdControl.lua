@@ -254,6 +254,9 @@ CrowdControl.aoeNPCBoss = {
     [69284] = 1, -- Whirlwind Function (Guardian of Bthark -- Nchuleftingth)
     [86607] = 1, -- Steam Breath (Guardian of Bthark -- Nchuleftingth)
 
+    -- Elsweyr
+    [124352] = 1, -- Flame Aura (Bahlokdaan)
+
     -- World Bosses
     [84045] = 1, -- Seal of Defilement (Quenyas) - World Boss - Seaside Scarp Camp
     [84206] = 1, -- Stinging Sputum (Gathongor the Mauler) - World Boss - Gathongor's Mine
@@ -471,6 +474,7 @@ CrowdControl.aoeNPCNormal = {
     [91096] = 0, -- Split Bolt (Dwemer Arquebus)
     [103862] = 1, -- Deluge (Yaghra Spewer)
     [103992] = 1, -- Luminescent Burn (Yaghra Spewer)
+    [121644] = 1, -- Defiled Ground (Euraxian Necromancer)
 
     [90182] = 1, -- Oily Smoke (Vvardenfell -- Divine Restoration) -- TODO: Check, maybe is elite?
 
@@ -559,6 +563,11 @@ CrowdControl.IgnoreList ={
     [32060] = true, -- Shocked (Tears of the Two Moons)
     [38108] = true, -- Q4868 Sheo Teleports Player (The Grips of Madness)
     [35645] = true, -- Q4768 PC Tribunal Layer 2 Stun (Scars Never Fade)
+
+    -- Elsweyr
+    [121032] = true, -- Bash (Grand Adept Ma'hja-dro) (Bright Moons, Warm Sands)
+    [121035] = true, -- Staggered (Grand Adept Ma'hja-dro) (Bright Moons, Warm Sands)
+    [125269] = true, -- Headbutt (Bahlokdaan) (Bright Moons, Warm Sands)
 
     ----------------
     -- Arenas

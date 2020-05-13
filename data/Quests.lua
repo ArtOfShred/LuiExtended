@@ -218,6 +218,10 @@ Quests.ItemRemovedMessage = {
     [3548] = LUIE_QUEST_MESSAGE_DISCARD, -- Missing Citizens (Through the Ashes)
     [3543] = LUIE_QUEST_MESSAGE_DISCARD, -- Pendant (Through the Ashes)
 
+    -- Elsweyr
+    [7032] = LUIE_QUEST_MESSAGE_DISCARD, -- Letter from Abnur Tharn (Bright Moons, Warm Sands)
+    [6929] = LUIE_QUEST_MESSAGE_USE, -- Room Key (Bright Moons, Warm Sands)
+
 }
 
 -- Message to override when an item is received.
@@ -234,6 +238,13 @@ Quests.ItemReceivedMessage = {
 
     [3543] = LUIE_QUEST_MESSAGE_LOOT, -- Pendant (Through the Ashes)
 
+    -- Elsweyr
+    [7032] = LUIE_QUEST_MESSAGE_LOOT, -- Letter from Abnur Tharn (Bright Moons, Warm Sands)
+
+}
+
+-- When turning a quest item in the prefix used is set to "Turn in" unless the "removed" message is changed. In which case it overrides that behavior. Items in this list will ignore their override message and ALWAYS display as turnin when turning in a quest.
+Quests.ItemIgnoreTurnIn = {
 }
 
 -- TODO: Find a way to extend this to the quest log text

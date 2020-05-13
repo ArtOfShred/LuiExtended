@@ -3396,18 +3396,18 @@ function ChatAnnouncements.ResolveQuestItemChange()
 
                         logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageRemove
 
-                        if Quests.ItemRemovedMessage[itemId] then
+                        -- Any items that are removed at the same time a quest is turned or advanced in will be flagged to display as "Turned In."
+                        if g_itemReceivedIsQuestReward then
+                            logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestTurnIn
+                        end
+
+                        if Quests.ItemRemovedMessage[itemId] and not Quests.ItemIgnoreTurnIn[itemId] then
                             logPrefix = Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_TURNIN and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestTurnIn or
                             Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_USE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestUse or
                             Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_EXHAUST and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestExhaust or
                             Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_OFFER and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestOffer or
                             Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_DISCARD and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestDiscard or
                             Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_CONFISCATE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestConfiscate
-                        end
-
-                        -- Any items that are removed at the same time a quest is turned or advanced in will be flagged to display as "Turned In."
-                        if g_itemReceivedIsQuestReward then
-                            logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestTurnIn
                         end
 
                         -- Any items that are removed at the same time a quest is abandoned will be flagged to display as "Removed."

@@ -1176,8 +1176,14 @@ local AbilityTables = {
     Skill_Undead_Legion               = 35809,
     Skill_Call_Corrupt_Lurchers       = GetString(SI_LUIE_SKILL_CALL_CORRUPT_LURCHERS),
 
-    -- Summerset
+    -- Summerset Quests
     Skill_Pustulant_Eruption          = 105867,
+
+    -- Elsweyr Quests
+    Skill_Flame_Aura                  = 124352,
+    Skill_Headbutt                    = 125270,
+    Skill_Star_Haven_Dragonhorn       = GetString(SI_LUIE_SKILL_STAR_HAVEN_DRAGONHORN),
+    Skill_Steadfast_Ward              = 37232,
 
     -- ---------------------------------------------------
     -- ARENA EFFECTS -----------------------------------

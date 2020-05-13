@@ -12479,6 +12479,105 @@ LUIE.DebugAuras = {
     [105893] = true, -- Pustulant Film (Yaghra Nightmare)
 
     -------------------------------------
+    -- ELSWEYR QUESTS/EVENTS ------------
+    -------------------------------------
+
+    -- Main Quest - Tutorial - Bright Moons, Warm Sands
+    [115184] = true, -- Regaining Consciousness
+    [124493] = true, -- Sparring Stamina
+    [116997] = true, -- MQ1 Input Lock Visual
+    [120997] = true, -- Come at Me (Grand Adept Ma'hja-dro - Tutorial)
+    [120999] = true, -- You Came At Me (Grand Adept Ma'hja-dro - Tutorial)
+    [121000] = true, -- You Came At Me (Grand Adept Ma'hja-dro - Tutorial)
+    [121005] = true, -- Heavy Attack (Grand Adept Ma'hja-dro - Tutorial)
+    [121018] = true, -- Block Me (Grand Adept Ma'hja-dro - Tutorial)
+    [121026] = true, -- Off-Balance (Grand Adept Ma'hja-dro - Tutorial)
+    [121024] = true, -- Off-Balance (Grand Adept Ma'hja-dro - Tutorial)
+    [126526] = true, -- Off-Balance (Grand Adept Ma'hja-dro - Tutorial)
+    [126569] = true, -- Off-Balance Exploit (Grand Adept Ma'hja-dro - Tutorial)
+    [126568] = true, -- Off-Balance Exploit (Grand Adept Ma'hja-dro - Tutorial)
+    [126567] = true, -- Off-Balance Exploit (Grand Adept Ma'hja-dro - Tutorial)
+    [121025] = true, -- Block Exploited (Grand Adept Ma'hja-dro - Tutorial)
+    [121032] = true, -- Bash (Grand Adept Ma'hja-dro - Tutorial)
+    [121035] = true, -- Staggered (Grand Adept Ma'hja-dro - Tutorial)
+    [126501] = true, -- Bash (Grand Adept Ma'hja-dro - Tutorial)
+    [121034] = true, -- Break Free ENd (Grand Adept Ma'hja-dro - Tutorial)
+    [121036] = true, -- Heavy Strike (Grand Adept Ma'hja-dro - Tutorial)
+    [121039] = true, -- Dagger Toss (Grand Adept Ma'hja-dro - Tutorial)
+    [121042] = true, -- Off-Balance (Grand Adept Ma'hja-dro - Tutorial)
+    [121040] = true, -- Off-Balance (Grand Adept Ma'hja-dro - Tutorial)
+    [126573] = true, -- Off-Balance (Grand Adept Ma'hja-dro - Tutorial)
+    [126572] = true, -- Off-Balance Exploit (Grand Adept Ma'hja-dro - Tutorial)
+    [126571] = true, -- Off-Balance Exploit (Grand Adept Ma'hja-dro - Tutorial)
+    [126570] = true, -- Off-Balance Exploit (Grand Adept Ma'hja-dro - Tutorial)
+    [121041] = true, -- Block Exploited (Grand Adept Ma'hja-dro - Tutorial)
+    [121183] = true, -- 420 (Grand Adept Ma'hja-dro - Tutorial)
+    [121176] = true, -- 411 (Grand Adept Ma'hja-dro - Tutorial)
+
+    [121475] = true, -- Devastating Leap (Bone Flayer)
+    [121476] = true, -- Generic Stagger Enemy (Bone Flayer)
+    [121473] = true, -- Flurry (Bone Flayer)
+    [121474] = true, -- Flurry (Bone Flayer)
+
+    [121456] = true, -- Necrotic Spear (Euraxian Necromancer)
+    [121643] = true, -- Defiled Ground (Euraxian Necromancer)
+    [121644] = true, -- Defiled Ground (Euraxian Necromancer)
+    [121645] = true, -- Defiled Ground (Euraxian Necromancer)
+    [121405] = true, -- Bone Surge II (Euraxian Necromancer)
+    [121402] = true, -- Sum Necro Skeleton (Euraxian Necromancer)
+    [121458] = true, -- Sum Necro Skeleton (Euraxian Necromancer)
+    [114902] = true, -- Blastbones Leap (Blastbones)
+
+    [119292] = true, -- Stun (Player - Star Haven Dragonhorn)
+
+    [124281] = true, -- Set Area (Grand Adept Ma'hja-dro)
+    [124286] = true, -- Set Area (Grand Adept Ma'hja-dro)
+    [124304] = true, -- Set Area (Grand Adept Ma'hja-dro)
+    [124283] = true, -- Roll Dodge (Grand Adept Ma'hja-dro)
+    [124272] = true, -- Focused Healing (Grand Adept Ma'hja-dro)
+    [124310] = true, -- Master's Shield (Grand Adept Ma'hja-dro)
+
+    [121352] = true, -- Boss (Bahlokdaan)
+    [121354] = true, -- Boss (Bahlokdaan)
+    [121294] = true, -- Unrelenting Force (Bahlokdaan)
+    [121349] = true, -- Unrelenting Force (Bahlokdaan)
+    [124290] = true, -- Eat (Bahlokdaan)
+    [124297] = true, -- Eat (Bahlokdaan)
+    [121296] = true, -- Unrelenting Force (Bahlokdaan)
+    [121350] = true, -- Unrelenting Force (Bahlokdaan)
+    [121351] = true, -- Unrelenting Force (Bahlokdaan)
+    [124337] = true, -- Unrelenting Force (Bahlokdaan)
+
+    [124351] = true, -- Dragon Aura (Bahlokdaan)
+    [124352] = true, -- Flame Aura (Bahlokdaan)
+    [124312] = true, -- Burn, Fools! (Bahlokdaan)
+    [125281] = true, -- Sweeping Breath (Bahlokdaan)
+    [125286] = true, -- Sweeping Breath (Bahlokdaan)
+    [125287] = true, -- Sweeping Breath (Bahlokdaan)
+    [125285] = true, -- Sweeping Breath (Bahlokdaan)
+
+    [125569] = true, -- Bite (Bahlokdaan)
+    [122194] = true, -- Bite (Bahlokdaan)
+
+    [125244] = true, -- Head Strike (Bahlokdaan)
+    [125270] = true, -- Headbutt (Bahlokdaan)
+    [125271] = true, -- Headbutt (Bahlokdaan)
+    [125268] = true, -- Headbutt (Bahlokdaan)
+    [125272] = true, -- Headbutt (Bahlokdaan)
+    [125269] = true, -- Headbutt (Bahlokdaan)
+
+    [125570] = true, -- Chomp (Bahlokdaan)
+    [122199] = true, -- Chomp (Bahlokdaan)
+    [117192] = true, -- Chomp (Bahlokdaan)
+
+    [123812] = true, -- Summon Bahlokdaan (Bahlokdaan)
+    [125607] = true, -- Receive Call (Bahlokdaan)
+    [125606] = true, -- Receive Call (Bahlokdaan)
+    [123118] = true, -- Takeoff (Bahlokdaan)
+    [123119] = true, -- Takeoff (Bahlokdaan)
+    [122675] = true, -- Ground Snare Exception (Bahlokdaan)
+
+    -------------------------------------
     -- ARENAS ---------------------------
     -------------------------------------
 

@@ -1806,6 +1806,9 @@ Effects.AddNameAura = {
     [Unitnames.Boss_Prince_Naemon] = { [1] = { id = 33097 } },
     [Unitnames.Boss_Vicereeve_Pelidil] = { [1] = { id = 33097 } },
 
+    -- Elsweyr Quests
+    [Unitnames.Boss_Bahlokdaan] = { [1] = { id = 33097 } },
+
     -- Dolmen Bosses
     [Unitnames.NPC_Dread_Xivkyn_Cauterizer] = { [1] = { id = 33097 } },
     [Unitnames.NPC_Dread_Xivkyn_Dreadweaver] = { [1] = { id = 33097 } },
@@ -2110,7 +2113,10 @@ Effects.EffectOverrideByName = {
     },
     [10618] = { -- Quick Strike (Shared)
         [Unitnames.NPC_Xivilai] =                { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_xivilai_light.dds' }, -- Xivilai
-        [Unitnames.Elite_Amuur] =                { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_cleaver_attack_light.dds' }, -- Amuur (The First Patient)
+
+        -- QUESTS
+        [Unitnames.Elite_Amuur] =                { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_cleaver_attack_light.dds' }, -- Amuur (Auridon - The First Patient)
+        [Unitnames.Elite_Captain_Carvain] =      { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace1h_quick_strike.dds' }, -- Captain Carvain (Elsweyr - Bright Moons, Warm Sands)
 
         -- DUNGEONS
         [Unitnames.NPC_Darkfern_Mauler] =        { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_1h_light_reach.dds' }, -- Darkfern Mauler (Elden Hollow I)
@@ -10043,6 +10049,71 @@ Effects.EffectOverride = {
     ]]--
 
     ----------------------------------------------------------------
+    -- ELSWEYR     -------------------------------------------------
+    ----------------------------------------------------------------
+
+    -- Main Quest - Tutorial - Bright Moons, Warm Sands
+    [124493] = { hide = true }, -- Sparring Stamina
+    [121005] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_heavy.dds' }, -- Heavy Attack (Grand Adept Ma'hja-dro)
+    [121018] = { hide = true }, -- Block Me (Grand Adept Ma'hja-dro)
+    [121024] = { hide = true }, -- Off-Balance (Grand Adept Ma'hja-dro)
+    [126526] = { hide = true }, -- Off-Balance (Grand Adept Ma'hja-dro)
+    [126569] = { hide = true }, -- Off-Balance Exploit (Grand Adept Ma'hja-dro)
+    [121032] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', tooltip = Tooltips.Generic_Stun_No_Dur, cc = LUIE_CC_TYPE_STUN }, -- Bash (Grand Adept Ma'hja-dro)
+    [126501] = { hide = true }, -- Bash (Grand Adept Ma'hja-dro)
+    [121039] = { hide = true }, -- Dagger Toss (Grand Adept Ma'hja-dro)
+    [121040] = { hide = true }, -- Off-Balance (Grand Adept Ma'hja-dro)
+    [126573] = { hide = true }, -- Off-Balance (Grand Adept Ma'hja-dro)
+    [126572] = { hide = true }, -- Off-Balance Exploit (Grand Adept Ma'hja-dro)
+
+    [121475] = { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_devastating_leap.dds' }, -- Devastating Leap (Bone Flayer)
+    [121476] = { name = Abilities.Innate_Stagger, tooltip = Tooltips.Generic_Stagger, cc = LUIE_CC_TYPE_STAGGER }, -- Devastating Leap (Bone Flayer)
+    [121473] = { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_flurry.dds' }, -- Flurry (Bone Flayer)
+    [121474] = { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_flurry.dds' }, -- Flurry (Bone Flayer)
+
+    [121456] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_spear_euraxian.dds', hide = true }, -- Necrotic Spear (Euraxian Necromancer)
+    [121643] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_damage.dds' }, -- Defiled Ground (Euraxian Necromancer)
+    [121644] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_damage.dds', tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.7 }, -- Defiled Ground (Euraxian Necromancer)
+    [121645] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_stun.dds', tooltip = Tooltips.Generic_Stun, cc = LUIE_CC_TYPE_STUN }, -- Defiled Ground (Euraxian Necromancer)
+    [121402] = { hide = true }, -- Sum Necro Skeleton (Euraxian Necromancer)
+    [121458] = { hide = true }, -- Sum Necro Skeleton (Euraxian Necromancer)
+
+    [119292] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_dragonhorn.dds', name = Abilities.Skill_Star_Haven_Dragonhorn, hide = true }, -- Stun (Player)
+
+    [121354] = { hide = true }, -- Boss (Bahlokdaan)
+    [121294] = { tooltip = Tooltips.Generic_Knockdown_No_Dur, cc = LUIE_CC_TYPE_STUN }, -- Unrelenting Force (Bahlokdaan)
+    [121349] = { hide = true }, -- Unrelenting Force (Bahlokdaan)
+    [121351] = { hide = true }, -- Unrelenting Force (Bahlokdaan)
+    [124337] = { hide = true }, -- Unrelenting Force (Bahlokdaan)
+
+    [124351] = { icon = 'LuiExtended/media/icons/abilities/ability_dragon_flame_aura.dds', name = Abilities.Skill_Flame_Aura, tooltip = Tooltips.Skill_Flame_Aura }, -- Dragon Aura (Bahlokdaan)
+    [124352] = { icon = 'LuiExtended/media/icons/abilities/ability_dragon_flame_aura.dds' }, -- Dragon Aura (Bahlokdaan)
+
+    [125281] = { icon = 'esoui/art/icons/ability_u24_drg_breath_flame.dds' }, -- Sweeping Breath (Bahlokdaan)
+    [125287] = { hide = true }, -- Sweeping Breath (Bahlokdaan)
+    [125285] = { hide = true }, -- Sweeping Breath (Bahlokdaan)
+
+    [122194] = { icon = 'LuiExtended/media/icons/abilities/ability_dragon_bite.dds' }, -- Bite (Bahlokdaan)
+
+    [125244] = { icon = 'LuiExtended/media/icons/abilities/ability_dragon_headbutt.dds', name = Abilities.Skill_Headbutt }, -- Head Strike (Bahlokdaan)
+    [125270] = { icon = 'LuiExtended/media/icons/abilities/ability_dragon_headbutt.dds' }, -- Headbutt (Bahlokdaan)
+    [125271] = { icon = 'LuiExtended/media/icons/abilities/ability_dragon_headbutt.dds' }, -- Headbutt (Bahlokdaan)
+    [125268] = { icon = 'LuiExtended/media/icons/abilities/ability_dragon_headbutt.dds', tooltip = Tooltips.Generic_Knockback, cc = LUIE_CC_TYPE_KNOCKBACK }, -- Headbutt (Bahlokdaan)
+    [125272] = { name = Abilities.Innate_Stagger, tooltip = Tooltips.Generic_Stagger, cc = LUIE_CC_TYPE_STAGGER }, -- Headbutt (Bahlokdaan)
+    [125269] = { hide = true }, -- Headbutt (Bahlokdaan)
+
+    [125570] = { icon = 'LuiExtended/media/icons/abilities/ability_dragon_chomp.dds' }, -- Chomp (Bahlokdaan)
+    [122199] = { icon = 'LuiExtended/media/icons/abilities/ability_dragon_chomp.dds' }, -- Chomp (Bahlokdaan)
+    [117192] = { icon = 'LuiExtended/media/icons/abilities/ability_dragon_chomp.dds', tooltip = Tooltips.Generic_Stun, cc = LUIE_CC_TYPE_STUN }, -- Chomp (Bahlokdaan)
+
+    [123118] = { hide = true }, -- Takeoff (Bahlokdaan)
+
+    [124286] = { hide = true }, -- Set Area (grand Adept Ma'hja-dro)
+    [124283] = { hide = true }, -- Roll Dodge (grand Adept Ma'hja-dro)
+    [124272] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_focused_healing.dds', tooltip = Tooltips.Generic_HoT_Channel, tooltipValue2 = 0.5 }, -- Focused Healing (Grand Adept Ma'hja-dro)
+    [124310] = { icon = 'esoui/art/icons/ability_restorationstaff_001.dds', name = Abilities.Skill_Steadfast_Ward, tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Master's Shield (Grand Adept Ma'hja-dro)
+
+    ----------------------------------------------------------------
     -- VVARDENFELL     ---------------------------------------------
     ----------------------------------------------------------------
 
@@ -12200,6 +12271,10 @@ Effects.FakeExternalBuffs = {
     -- Quests
     [21403] = { duration = 60000, ignoreFade = true }, -- Spiritual Cloak (The Mallari-Mora)
 
+    -- Elsweyr Quests
+    [124272] = { duration = 4000 }, -- Focused Healing (Grand Adept Ma'hja-dro)
+    [124310] = { duration = 10000 }, -- Master's Shield (Grand Adept Ma'hja-dro)
+
     ----------------
     -- Dungeons ----
     ----------------
@@ -12323,6 +12398,10 @@ Effects.FakeExternalDebuffs = {
     [43823] = { duration = 2150 }, -- IntroKB (Prince Naemon)
     [36766] = { duration = 5000 }, -- Q4842 Stun Headgrab Knockback (The Unquiet Dead)
     [33384] = { duration = 4000 }, -- Q4586 Aranias Vine Stun
+
+    -- Elsweyr
+    [121645] = { duration = 8000 }, -- Defiled Ground (Euraxian Necromancer) (Bright Moons, Warm Sands)
+    [125268] = { duration = 2500 }, -- Headbutt (Bahlokdaan)
 
     ----------------------------------------------------------------
     -- ORSINIUM EVENTS ---------------------------------------------
@@ -12688,6 +12767,10 @@ Effects.FakeStagger = {
     [86576] = { duration = 433 }, -- Renduril the Hammer (Nchuleftingth)
     [88510] = { duration = 433 }, -- Staggered (Vvardenfell -- Ancestral Adversity)
 
+    -- Elsweyr
+    [121476] = { duration = 433 }, -- Devastating Leap (Bone Flayer) (Bright Moons, Warm Sands)
+    [125272] = { duration = 750 }, -- Headbutt (Bahlokdaan) (Bright Moons, Warm Sands)
+
     -- On Target
     [86310] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = Abilities.Innate_Stagger, duration = 500 }, -- Stagger (Player Blocks charged NPC attack)
     [21972] = { duration = 500 }, -- Stagger (Player interrupts NPC cast)
@@ -12997,6 +13080,9 @@ Effects.AddGroundDamageAura = {
     ------------------
     -- QUESTS --------
     ------------------
+
+    -- Elsweyr
+    [121644] = { duration = 800, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Defiled Ground (Euraxian Necromancer) (Bright Moons, Warm Sands)
 
     ------------------
     -- ARENAS --------
