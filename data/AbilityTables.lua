@@ -1066,6 +1066,9 @@ local AbilityTables = {
     Trap_Slaughterfish                = zo_strformat("<<C:1>>", GetItemLinkName("|H0:item:42861:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")),
     Trap_Lava                         = 5139,
 
+    Trap_Charge_Wire                 = GetString(SI_LUIE_SKILL_CHARGE_WIRE),
+    Trap_Steam_Vent                  = GetString(SI_LUIE_SKILL_STEAM_VENT),
+
     -- ---------------------------------------------------
     -- WORLD BOSSES --------------------------------------
     -- ---------------------------------------------------
@@ -1175,6 +1178,9 @@ local AbilityTables = {
     Skill_Disperse_Corruption         = GetString(SI_LUIE_SKILL_DISPERSE_CORRUPTION),
     Skill_Undead_Legion               = 35809,
     Skill_Call_Corrupt_Lurchers       = GetString(SI_LUIE_SKILL_CALL_CORRUPT_LURCHERS),
+
+    -- Daggerfall Covenant
+    Skill_Neramos_Control_Rod         = GetQuestItemName(3703),
 
     -- Summerset Quests
     Skill_Pustulant_Eruption          = 105867,

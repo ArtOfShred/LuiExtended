@@ -201,6 +201,9 @@ CrowdControl.aoeTraps = {
     [72888] = 0, -- Fire Attack 1 (Fire) -- Banished Cells II
     [72889] = 0, -- Fire Attack 2 (Fire) -- Banished Cells II
 
+    [27940] = 0, -- Laser Damage (Generic Flame Wave Shooter) -- Stros M'Kai
+    [32245] = 0, -- Searing Steam (Steam Trap) -- Stros M'Kai
+
     [92757] = 0, -- Spinning Blade (Ald Carac)
 
     [117508] = 0, -- Shock Wall (Lightning Trap - Elinhir Private Arena)

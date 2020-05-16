@@ -759,7 +759,8 @@ function CrowdControlTracker:OnDraw(abilityId, abilityIcon, ccDuration, result, 
     else
         ccText = self.controlText[result]
     end
-    if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].unbreakable then
+    -- If the effect is flagged as unbreakable in the Effect Override table then switch the effect to color as unbreakable (unless its an AOE).
+    if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].unbreakable and not CrowdControlTracker.aoeTypesId[abilityId] then
         self:SetupInfo(ccText, CombatInfo.SV.cct.colors.unbreakable, abilityIcon, wasDefault)
     else
         self:SetupInfo(ccText, CombatInfo.SV.cct.colors[result], abilityIcon, wasDefault)

@@ -195,7 +195,6 @@ CastBarTable.CastChannelOverride = {
 
     ----------------------------------------------------------------
     -- QUEST ABILITIES ---------------------------------------------
-    -- QUEST ABILITIES ---------------------------------------------
     ----------------------------------------------------------------
 
     -- Vampire Quest
@@ -205,7 +204,7 @@ CastBarTable.CastChannelOverride = {
     [39367] = true, -- Altar Use (Shadow of Sancre Tor)
     [36421] = true, -- Drink with Lyris (Council of the Five Companions)
 
-    -- Aldemeri Dominion
+    -- Aldmeri Dominion Quests
     [35192] = true, -- Q4620 Use Lodestone (Cast Adrift)
     [34567] = true, -- Q4621 PC Storm Drain (The Tempest Unleashed)
     [34701] = true, -- Q4621 Destory Horn (The Tempest Unleashed)
@@ -226,6 +225,9 @@ CastBarTable.CastChannelOverride = {
     [37211] = true, -- Q4854 Empower Heart (Eyes of Azura)
     [38246] = true, -- Animus Geode (Eyes of Azura)
     [34499] = true, -- Corruption Beam (The Blight of the Bosmer)
+
+    -- Daggerfall Covenant Quests
+    [79989] = true, -- Mercy Kill (Like Moths to a Candle)
 
     ----------------------------------------------------------------
     -- SEASONAL QUEST ----------------------------------------------
@@ -336,7 +338,7 @@ CastBarTable.CastDurationFix = {
     [39367] = 10000, -- Altar Use (Shadow of Sancre Tor)
     [36421] = 3000, -- Drink with Lyris (Council of the Five Companions)
 
-    -- Aldmeri Quests
+    -- Aldmeri Dominion Quests
     [33233] = 2000, -- 4625 Stun for Beckon 1.5s (Tears of the Two Moons)
     [34701] = 1950, -- Q4621 Destory Horn (The Tempest Unleashed)
     [23540] = 3000, -- Teleport (Lifting the Veil)
@@ -356,7 +358,10 @@ CastBarTable.CastDurationFix = {
     [33727] = 500, -- BurrowEND (Throne of the Wilderking)
     [34499] = 3000, -- Corruption Beam (The Blight of the Bosmer)
 
-    -- Elsweyr
+    -- Daggerfall Covenant Quests
+    [79989] = 3000, -- Mercy Kill (Like Moths to a Candle)
+
+    -- Elsweyr Quests
     [119292] = 2000, -- Stun (Bright Moons, Warm Sands)
 
     ----------------------------------------------------------------
@@ -664,7 +669,7 @@ CastBarTable.IsCast = {
     [36421] = true, -- Drink with Lyris (Council of the Five Companions)
     [47186] = true, -- CHT Portal Killer (The Weight of Three Crown)
 
-    -- Aldmeri Dominion
+    -- Aldmeri Dominion Quests
     [35192] = true, -- Q4620 Use Lodestone (Cast Adrift)
     [33233] = true, -- 4625 Stun for Beckon 1.5s (Tears of the Two Moons)
     [34567] = true, -- Q4621 PC Storm Drain (The Tempest Unleashed)
@@ -704,8 +709,12 @@ CastBarTable.IsCast = {
     [33727] = true, -- BurrowEND (Throne of the Wilderking)
     [34499] = true, -- Corruption Beam (The Blight of the Bosmer)
 
-    -- Elsweyr
-    [119292] = 2000, -- Stun (Bright Moons, Warm Sands)
+    -- Daggerfall Covenant Quests
+    [26535] = true, -- Control Rod (Buried Secrets)
+    [79989] = true, -- Mercy Kill (Like Moths to a Candle)
+
+    -- Elsweyr Quests
+    [119292] = true, -- Stun (Bright Moons, Warm Sands)
 
     ----------------------------------------------------------------
     -- SEASONAL QUEST ----------------------------------------------

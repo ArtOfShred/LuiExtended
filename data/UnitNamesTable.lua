@@ -54,6 +54,9 @@ LUIE.Data.UnitNames = {
     NPC_Skirmisher_EP                     = 'Pact Skirmisher',
     NPC_Archer_Guard_EP                   = 'Pact Archer Guard',
 
+    ----------------------------------------------------------------
+    -- TRAPS -------------------------------------------------------
+    ----------------------------------------------------------------
 
     ----------------------------------------------------------------
     -- NORMAL NPC NAMES --------------------------------------------
@@ -160,6 +163,13 @@ LUIE.Data.UnitNames = {
     NPC_Sea_Viper_Deadeye                 = 'Sea Viper Deadeye', -- GENERIC NPC
     NPC_Sea_Viper_Healer                  = 'Sea Viper Healer', -- GENERIC NPC
 
+    NPC_Wolf                              = 'Wolf', -- GENERIC NPC
+
+    NPC_Grave_Archer                      = 'Grave Archer', -- GENERIC NPC (Stros M'Kai)
+    NPC_Dogeater_Skirmisher               = 'Dogeater Skirmisher', -- GENERIC NPC (Stros M'Kai)
+    NPC_Dogeater_Witch                    = 'Dogeater Witch', -- GENERIC NPC (Stros M'Kai)
+    NPC_Drake_Cutthroat                   = 'Drake Cutthroat', -- GENERIC NPC (Stros M'Kai)
+
     ----------------------------------------------------------------
     -- QUESTS ------------------------------------------------------
     ----------------------------------------------------------------
@@ -204,6 +214,11 @@ LUIE.Data.UnitNames = {
     Elite_Baham = 'Baham',
     Boss_Vicereeve_Pelidil = 'Vicereeve Pelidil',
     Boss_Shade_of_Naemon = 'Shade of Naemon',
+
+    -- DC Quests
+    Elite_King_Demog = 'King Demog',
+    Elite_Gornog = 'Gornog',
+    Elite_Tempered_Sphere = 'Tempered Sphere',
 
     -- Elsweyr Quests
     Elite_Captain_Carvain = 'Captain Carvain',

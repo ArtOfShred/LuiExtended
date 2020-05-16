@@ -35,4 +35,11 @@ LUIE.Data.ZoneNames = {
     Zone_Hectahame_Arboretum              = 'Hectahame Arboretum',
     Zone_Hectahame_Ritual_Chamber         = 'Hectahame Ritual Chamber',
 
+    ----------------------------------------------------------------
+    -- DAGGERFALL COVENANT -----------------------------------------
+    ----------------------------------------------------------------
+
+    -- Stros M'Kai
+    Zone_The_Grave                        = 'The Grave',
+
 }

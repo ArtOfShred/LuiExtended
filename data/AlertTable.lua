@@ -574,7 +574,7 @@ LUIE.Data.AlertTable = {
 
     -- DWEMER
     [16031] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1000 }, -- Ricochet Wave (Dwemer Sphere)
-    [7520] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1267 }, -- Steam Wall (Dwemer Sphere)
+    [7520] = { block = true, bs = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1267 }, -- Steam Wall (Dwemer Sphere)
     [7544] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1000 }, -- Quake (Dwemer Sphere)
 
     [11247] = { block = true, dodge = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000, cc = LUIE_CC_TYPE_STUN }, -- Sweeping Spin (Dwemer Centurion)
@@ -1404,6 +1404,9 @@ LUIE.Data.AlertZoneOverride = {
         [392] = Unitnames.NPC_Skeletal_Tempest, -- The Vault of Exile (Auridon)
         [394] = Unitnames.Elite_Uricantar, -- Ezduiin Undercroft (Auridon)
 
+        -- DC Zones
+        [534] = Unitnames.Elite_King_Demog, -- King Demog (Stros M'Kai)
+
         [389] = Unitnames.NPC_Spectral_Storm_Mage, -- Reliquary Ruins
         [555] = Unitnames.NPC_Sea_Viper_Tempest, -- Abecean Sea
 
@@ -1481,6 +1484,10 @@ LUIE.Data.AlertZoneOverride = {
         [390] = Unitnames.NPC_Heritance_Deadeye, -- The Veiled Keep
         [Zonenames.Zone_Heritance_Proving_Ground] = Unitnames.NPC_Heritance_Deadeye, -- Heritance Proving Ground (Auridon)
 
+        -- Daggerfall Covenant
+        [Zonenames.Zone_The_Grave] = Unitnames.NPC_Grave_Archer, -- Stros M'Kai
+
+        --
         [435] = Unitnames.NPC_Sainted_Archer, -- Cathedral of the Golden Path
 
         -- DUNGEONS
@@ -1509,6 +1516,10 @@ LUIE.Data.AlertZoneOverride = {
         [390] = Unitnames.NPC_Heritance_Deadeye, -- The Veiled Keep
         [Zonenames.Zone_Heritance_Proving_Ground] = Unitnames.NPC_Heritance_Deadeye, -- Heritance Proving Ground (Auridon)
 
+        -- Daggerfall Covenant
+        [Zonenames.Zone_The_Grave] = Unitnames.NPC_Grave_Archer, -- Stros M'Kai
+
+        --
         [435] = Unitnames.NPC_Sainted_Archer, -- Cathedral of the Golden Path
 
         -- DUNGEONS
@@ -1537,6 +1548,10 @@ LUIE.Data.AlertZoneOverride = {
         [390] = Unitnames.NPC_Heritance_Deadeye, -- The Veiled Keep
         [Zonenames.Zone_Heritance_Proving_Ground] = Unitnames.NPC_Heritance_Deadeye, -- Heritance Proving Ground (Auridon)
 
+        -- Daggerfall Covenant
+        [534] = Unitnames.NPC_Grave_Archer, -- Stros M'Kai
+
+        --
         [435] = Unitnames.NPC_Sainted_Archer, -- Cathedral of the Golden Path
 
         -- DUNGEONS
@@ -1574,11 +1589,13 @@ LUIE.Data.AlertZoneOverride = {
     --
     --},
     [10805] = { -- Ignite (Synergy)
+        -- Auridon
         [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Incendiary, -- Silsailen (Auridon)
         [Zonenames.Zone_Tower_of_the_Vale] = Unitnames.Elite_Minantilles_Rage, -- Tower of the Vale (Auridon)
         [Zonenames.Zone_Quendeluun] = Unitnames.NPC_Pact_Pyromancer, -- Quendeluun (Auridon)
         [Zonenames.Zone_Wansalen] = Unitnames.NPC_Pact_Pyromancer, -- Quendeluun (Auridon) - For a little section with npcs outside of the delv near Quendeluun.
 
+        --
         [389] = Unitnames.NPC_Skeletal_Infernal, -- Reliquary Ruins
         [548] = Unitnames.NPC_Bandit_Incendiary, -- Silitar
         [555] = Unitnames.Boss_Vicereeve_Pelidil, -- Abecean Sea
@@ -1586,6 +1603,9 @@ LUIE.Data.AlertZoneOverride = {
         [Zonenames.Zone_Hectahame_Armory] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Ritual Chamber
+
+        -- Daggerfall Covenant
+        [534] = Unitnames.NPC_Dogeater_Witch, -- Stros M'Kai
 
         -- DUNGEONS
         -- [130] = Unitnames.NPC_Skeletal_Pyromancer, -- Crypt of Hearts I -- Can't use because The Mage Master's Slave(s) also use these spells
@@ -1595,11 +1615,14 @@ LUIE.Data.AlertZoneOverride = {
         [176] = Unitnames.NPC_Scamp, -- City of Ash I
     },
     [15164] = { -- Heat Wave (Fire Mage)
+
+        -- Auridon
         [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Incendiary, -- Silsailen (Auridon)
         [Zonenames.Zone_Tower_of_the_Vale] = Unitnames.Elite_Minantilles_Rage, -- Tower of the Vale (Auridon)
         [Zonenames.Zone_Quendeluun] = Unitnames.NPC_Pact_Pyromancer, -- Quendeluun (Auridon)
         [Zonenames.Zone_Wansalen] = Unitnames.NPC_Pact_Pyromancer, -- Quendeluun (Auridon) - For a little section with npcs outside of the delv near Quendeluun.
 
+        --
         [389] = Unitnames.NPC_Skeletal_Infernal, -- Reliquary Ruins
         [548] = Unitnames.NPC_Bandit_Incendiary, -- Silitar
         [555] = Unitnames.Boss_Vicereeve_Pelidil, -- Abecean Sea
@@ -1607,6 +1630,9 @@ LUIE.Data.AlertZoneOverride = {
         [Zonenames.Zone_Hectahame_Armory] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Ritual Chamber
+
+        -- Daggerfall Covenant
+        [534] = Unitnames.NPC_Dogeater_Witch, -- Stros M'Kai
 
         -- DUNGEONS
         -- [130] = Unitnames.NPC_Skeletal_Pyromancer, -- Crypt of Hearts I -- Can't use because The Mage Master's Slave(s) also use these spells
@@ -1616,11 +1642,14 @@ LUIE.Data.AlertZoneOverride = {
         [681] = Unitnames.NPC_Dremora_Kyngald, -- City of Ash II
     },
     [47095] = { -- Fire Rune (Fire Mage)
+
+        -- Auridon
         [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Incendiary, -- Silsailen (Auridon)
         [Zonenames.Zone_Tower_of_the_Vale] = Unitnames.Elite_Minantilles_Rage, -- Tower of the Vale (Auridon)
         [Zonenames.Zone_Quendeluun] = Unitnames.NPC_Pact_Pyromancer, -- Quendeluun (Auridon)
         [Zonenames.Zone_Wansalen] = Unitnames.NPC_Pact_Pyromancer, -- Quendeluun (Auridon) - For a little section with npcs outside of the delv near Quendeluun.
 
+        --
         [389] = Unitnames.NPC_Skeletal_Infernal, -- Reliquary Ruins
         [548] = Unitnames.NPC_Bandit_Incendiary, -- Silitar
         [555] = Unitnames.Boss_Vicereeve_Pelidil, -- Abecean Sea
@@ -1628,6 +1657,9 @@ LUIE.Data.AlertZoneOverride = {
         [Zonenames.Zone_Hectahame_Armory] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Armory
         [Zonenames.Zone_Hectahame_Arboretum] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Veiled_Infernal, -- Hectahame Ritual Chamber
+
+        -- Daggerfall Covenant
+        [534] = Unitnames.NPC_Dogeater_Witch, -- Stros M'Kai
 
         -- DUNGEONS
         -- [130] = Unitnames.NPC_Skeletal_Pyromancer, -- Crypt of Hearts I -- Can't use because The Mage Master's Slave(s) also use these spells
@@ -1910,5 +1942,15 @@ LUIE.Data.AlertZoneOverride = {
     [9322] = { -- Poisoned Ground (Strangler)
         [126] = Unitnames.NPC_Strangler, -- Elden Hollow I
         [681] = Unitnames.NPC_Strangler, -- City of Ash II
+    },
+    [14272] = { -- Call of the Pack (Wolf)
+        [534] = Unitnames.NPC_Wolf, -- Stros M'Kai
+    },
+
+    [7520] = {-- Steam Wall (Dwemer Sphere)
+        [534] = Unitnames.Elite_Tempered_Sphere, -- Stros M'Kai
+    },
+    [7544] = { -- Quake (Dwemer Sphere)
+        [534] = Unitnames.Elite_Tempered_Sphere, -- Stros M'Kai
     },
 }

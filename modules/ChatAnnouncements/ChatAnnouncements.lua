@@ -503,6 +503,9 @@ ChatAnnouncements.Defaults = {
         CurrencyMessageQuestOffer       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_OFFER),
         CurrencyMessageQuestDiscard     = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DISCARD),
         CurrencyMessageQuestConfiscate  = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_QUESTCONFISCATE),
+        CurrencyMessageQuestOpen        = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_QUESTOPEN),
+        CurrencyMessageQuestAdminister  = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_QUESTADMINISTER),
+        CurrencyMessageQuestPlace       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_QUESTPLACE),
         CurrencyMessageQuestCombine     = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_COMBINE),
         CurrencyMessageQuestMix         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_MIX),
         CurrencyMessageQuestBundle      = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_BUNDLE),
@@ -641,6 +644,7 @@ local g_questIndex                  = { }           -- Index of all current ques
 local g_questItemAdded              = { }           -- Hold index of Quest items that are added - Prevents pointless and annoying messages from appearing when the same quest item is immediately added and removed when quest updates.
 local g_questItemRemoved            = { }           -- Hold index of Quest items that are removed - Prevents pointless and annoying messages from appearing when the same quest item is immediately added and removed when quest updates.
 local g_loginHideQuestLoot          = true          -- Set to true onPlayerActivated and toggled after 3 sec
+local g_talkingToNPC                = false         -- Toggled when we're in dialogue with an NPC (EVENT_CHATTER_BEGIN & EVENT_CHATTER_END)
 
 -- Trade
 local g_tradeTarget                 = ""            -- Saves name of target player being traded with.
@@ -1013,6 +1017,8 @@ function ChatAnnouncements.RegisterQuestEvents()
             }
         end
     end
+    eventManager:RegisterForEvent(moduleName, EVENT_CHATTER_BEGIN, ChatAnnouncements.OnChatterBegin)
+    eventManager:RegisterForEvent(moduleName, EVENT_CHATTER_END, ChatAnnouncements.OnChatterEnd)
 end
 
 function ChatAnnouncements.RegisterGuildEvents()
@@ -1699,6 +1705,16 @@ function ChatAnnouncements.QuestShared(eventCode, questId)
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertMessage)
         end
     end
+end
+
+-- EVENT_CHATTER_BEGIN
+function ChatAnnouncements.OnChatterBegin()
+    g_talkingToNPC = true
+end
+
+-- EVENT_CHATTER_END
+function ChatAnnouncements.OnChatterEnd()
+    g_talkingToNPC = false
 end
 
 -- EVENT_GROUPING_TOOLS_LFG_JOINED
@@ -3407,7 +3423,22 @@ function ChatAnnouncements.ResolveQuestItemChange()
                             Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_EXHAUST and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestExhaust or
                             Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_OFFER and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestOffer or
                             Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_DISCARD and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestDiscard or
-                            Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_CONFISCATE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestConfiscate
+                            Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_CONFISCATE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestConfiscate or
+                            Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_OPEN and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestOpen or
+                            Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_ADMINISTER and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestAdminister or
+                            Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_PLACE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestPlace
+                        end
+
+                        if Quests.ItemRemovedInDialogueMessage[itemId] and g_talkingToNPC then
+                            logPrefix = Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_TURNIN and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestTurnIn or
+                            Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_USE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestUse or
+                            Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_EXHAUST and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestExhaust or
+                            Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_OFFER and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestOffer or
+                            Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_DISCARD and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestDiscard or
+                            Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_CONFISCATE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestConfiscate or
+                            Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_OPEN and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestOpen or
+                            Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_ADMINISTER and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestAdminister or
+                            Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_PLACE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestPlace
                         end
 
                         -- Any items that are removed at the same time a quest is abandoned will be flagged to display as "Removed."
@@ -7617,6 +7648,13 @@ function ChatAnnouncements.HookFunction()
             if visibility == nil or visibility == QUEST_STEP_VISIBILITY_OPTIONAL then
                 if stepOverrideText ~= "" then
                     if ChatAnnouncements.SV.Quests.QuestObjUpdateCA then
+                        -- This event sometimes results in duplicate messages - if an equivalent message is already detected in queue, then abort!
+                        for i = 1, #g_queuedMessages do
+                            if g_queuedMessages[i].message == stepOverrideText then
+                                -- Set the old message to blank so it gets skipped by the printer
+                                g_queuedMessages[i].message = ""
+                            end
+                        end
                         g_queuedMessages[g_queuedMessagesCounter] = { message = stepOverrideText, type = "MESSAGE" }
                         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
@@ -7637,6 +7675,13 @@ function ChatAnnouncements.HookFunction()
 
                         if not (isFailCondition or isConditionComplete) and isVisible then
                             if ChatAnnouncements.SV.Quests.QuestObjUpdateCA then
+                                -- This event sometimes results in duplicate messages - if an equivalent message is already detected in queue, then abort!
+                                for i = 1, #g_queuedMessages do
+                                    if g_queuedMessages[i].message == conditionText then
+                                        -- Set the old message to blank so it gets skipped by the printer
+                                        g_queuedMessages[i].message = ""
+                                    end
+                                end
                                 g_queuedMessages[g_queuedMessagesCounter] = { message = conditionText, type = "MESSAGE" }
                                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
@@ -10160,7 +10205,7 @@ end
 function ChatAnnouncements.PrintQueuedMessages()
     -- Resolve notification messages first
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type == "NOTIFICATION" then
+        if g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "NOTIFICATION" then
             local isSystem
             if g_queuedMessages[i].isSystem then
                 isSystem = true
@@ -10173,14 +10218,14 @@ function ChatAnnouncements.PrintQueuedMessages()
 
     -- Resolve quest POI added
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type == "QUEST_POI" then
+        if g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "QUEST_POI" then
             printToChat(g_queuedMessages[i].message)
         end
     end
 
     -- Next display Quest/Objective Completion and Experience
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type == "QUEST" or g_queuedMessages[i].type == "EXPERIENCE" then
+        if g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "QUEST" or g_queuedMessages[i].type == "EXPERIENCE" then
             printToChat(g_queuedMessages[i].message)
         end
     end
@@ -10288,7 +10333,7 @@ function ChatAnnouncements.PrintQueuedMessages()
 
     -- Display the rest
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i].type == "MESSAGE" then
+        if g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "MESSAGE" then
             printToChat(g_queuedMessages[i].message)
         end
     end

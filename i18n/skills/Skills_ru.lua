@@ -851,6 +851,8 @@ local strings = {
     SI_LUIE_SKILL_DISGUISE_VULKHEL_GUARD_TP =            "Disguised as a First Auridon Marine.",
     SI_LUIE_SKILL_DISGUISE_PHAER_MERCENARY_TP =          "Disguised as a Phaer Mercenary.",
     SI_LUIE_SKILL_DISGUISE_QUENDELUUN_TP =               "Disguised as a member of the invading Ebonheart Pact forces.",
+    SI_LUIE_SKILL_DISGUISE_SEADRAKE_TP =                 "Disguised as a Seadrake pirate.",
+    SI_LUIE_SKILL_DISGUISE_SERVANTS_ROBES_TP =           "Disguised as a servant of Headman Bhosek.",
 
     -- Weapon Sets
     SI_LUIE_SKILL_SET_ASYLUM_BOW =                       "The next Snipe, Scatter Shot, or Poison Arrow cast within |cFFFFFF6|r seconds by your attacker deals |cFFFFFF<<1>>|r% additional damage.",
@@ -1347,6 +1349,8 @@ local strings = {
     SI_LUIE_SKILL_PRECISION_STRIKE =                     "Precision Strike",
     SI_LUIE_SKILL_FLAME_AURA =                           "Enemies within |cFFFFFF11.5|r meters take Flame Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_STAR_HAVEN_DRAGONHORN =                "Star Haven Dragonhorn",
+    SI_LUIE_SKILL_CHARGE_WIRE =                          "Charge-Wire",
+    SI_LUIE_SKILL_STEAM_VENT =                           "Steam Vent",
 
     -- Keep Upgrade
     SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_RANGE =              "Longer Range on Ranged Guards",

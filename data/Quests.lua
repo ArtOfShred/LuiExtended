@@ -7,17 +7,6 @@
 LUIE.Data.Quests = {}
 local Quests = LUIE.Data.Quests
 
-LUIE_QUEST_MESSAGE_TURNIN = 1
-LUIE_QUEST_MESSAGE_USE = 2
-LUIE_QUEST_MESSAGE_EXHAUST = 3
-LUIE_QUEST_MESSAGE_OFFER = 4
-LUIE_QUEST_MESSAGE_DISCARD = 5
-LUIE_QUEST_MESSAGE_CONFISCATE = 6
-LUIE_QUEST_MESSAGE_COMBINE = 7
-LUIE_QUEST_MESSAGE_MIX = 8
-LUIE_QUEST_MESSAGE_BUNDLE = 9
-LUIE_QUEST_MESSAGE_LOOT = 10
-
 -- List of Quest Items to ignore when Looted (Alot of quest items swap out for different id's mid quest and it looks silly having a ton of messages print)
 Quests.QuestItemHideLoot = {
      -- Seasonal Quests
@@ -172,6 +161,9 @@ Quests.QuestItemModifyOnAdd = {
     [4485] = function() Quests.QuestItemHideRemove[4485] = true end, -- Rajhin's Mantle (A Lasting Winter)
     [4492] = function() Quests.QuestItemHideLoot[4485] = true end, -- Rajhin's Mantle (A Lasting Winter)
     [3597] = function() Quests.QuestItemHideLoot[3596] = true end, -- Rahkaz's Blade (The Enemy Within)
+
+    -- Daggerfall Covenant
+    [3818] = function() Quests.QuestItemHideLoot[3818] = true end, -- Dwemer Device (Tip of the Spearhead)
 }
 
 -- Call specific functions to add/remove table entries for funky quest items. This will trigger when a certain quest item is removed.
@@ -183,6 +175,9 @@ Quests.QuestItemModifyOnRemove = {
     [4479] = function() Quests.QuestItemHideLoot[4479] = true Quests.QuestItemHideRemove[4479] = false end, -- Loriasel Tablet Notes (Eyes of Azura)
     [4442] = function() Quests.QuestItemHideRemove[4433] = nil end, -- Sigil Geode (Eyes of Azura)
     [3597] = function() Quests.QuestItemHideRemove[3596] = nil end, -- Rahkaz's Blade (The Enemy Within)
+
+    -- Daggerfall Covenant
+    [3818] = function() Quests.QuestItemHideRemove[3818] = true end, -- Dwemer Device (Tip of the Spearhead)
 }
 
 -- When this item is gained display the "material" quest items used to make it.
@@ -218,9 +213,29 @@ Quests.ItemRemovedMessage = {
     [3548] = LUIE_QUEST_MESSAGE_DISCARD, -- Missing Citizens (Through the Ashes)
     [3543] = LUIE_QUEST_MESSAGE_DISCARD, -- Pendant (Through the Ashes)
 
+    -- Stros M'Kai
+    [3782] = LUIE_QUEST_MESSAGE_CONFISCATE, -- Giant Red Gemstone (Innocent Scoundrel)
+    [3703] = LUIE_QUEST_MESSAGE_EXHAUST, -- Neramo's Control Rod (Buried Secrets)
+    [3888] = LUIE_QUEST_MESSAGE_EXHAUST, -- Sea Drake Clothing Bundle (Like Moths to a Candle)
+    [3780] = LUIE_QUEST_MESSAGE_DISCARD, -- Storeroom Key (Like Moths to a Candle)
+    [3781] = LUIE_QUEST_MESSAGE_DISCARD, -- Antidote (Like Moths to a Candle)
+    [3816] = LUIE_QUEST_MESSAGE_USE, -- Headman Bhosek's Key (Tip of the Spearhead)
+    [3818] = LUIE_QUEST_MESSAGE_USE, -- Dwemer Device (Tip of the Spearhead)
+    [3800] = LUIE_QUEST_MESSAGE_DISCARD, -- Shovel (Izad's Treasure)
+    [3803] = LUIE_QUEST_MESSAGE_OPEN, -- The Clues, Damn Your Eyes (Izad's Treasure)
+    [3819] = LUIE_QUEST_MESSAGE_DISCARD, -- Captain Izad's Letter (Izad's Treasure)
+
     -- Elsweyr
     [7032] = LUIE_QUEST_MESSAGE_DISCARD, -- Letter from Abnur Tharn (Bright Moons, Warm Sands)
     [6929] = LUIE_QUEST_MESSAGE_USE, -- Room Key (Bright Moons, Warm Sands)
+
+}
+
+-- Message to override when an item is removed while we are in dialogue with an NPC.
+Quests.ItemRemovedInDialogueMessage = {
+
+    -- Stros M'Kai
+    [3781] = LUIE_QUEST_MESSAGE_ADMINISTER, -- Antidote (Like Moths to a Candle)
 
 }
 
@@ -229,6 +244,9 @@ Quests.ItemRemovedMessage = {
 --LUIE_QUEST_MESSAGE_MIX = 8
 --LUIE_QUEST_MESSAGE_BUNDLE = 9
 --LUIE_QUEST_MESSAGE_LOOT = 10
+--LUIE_QUEST_MESSAGE_OPEN = 11
+--LUIE_QUEST_MESSAGE_ADMINISTER = 12
+--LUIE_QUEST_MESSAGE_PLACE = 13
 Quests.ItemReceivedMessage = {
 
     -- Auridon (MSQ)
@@ -237,6 +255,18 @@ Quests.ItemReceivedMessage = {
     [3434] = LUIE_QUEST_MESSAGE_LOOT, -- Armament Inventory (Putting the Pieces Together)
 
     [3543] = LUIE_QUEST_MESSAGE_LOOT, -- Pendant (Through the Ashes)
+
+    -- Stros M'Kai
+    [3666] = LUIE_QUEST_MESSAGE_LOOT, -- Dwarven Part (Sphere Assembly)
+    [3667] = LUIE_QUEST_MESSAGE_LOOT, -- Dwarven Part (Sphere Assembly)
+    [3668] = LUIE_QUEST_MESSAGE_LOOT, -- Dwarven Part (Sphere Assembly)
+    [3669] = LUIE_QUEST_MESSAGE_LOOT, -- Dwarven Part (Sphere Assembly)
+    [3853] = LUIE_QUEST_MESSAGE_LOOT, -- Steel Bracelet (Dead Man's Wrist)
+    [3854] = LUIE_QUEST_MESSAGE_LOOT, -- Crumpled Letter (Dead Man's Wrist)
+    [3800] = LUIE_QUEST_MESSAGE_LOOT, -- Shovel (Izad's Treasure)
+    [3803] = LUIE_QUEST_MESSAGE_LOOT, -- The Clues, Damn Your Eyes (Izad's Treasure)
+    [3819] = LUIE_QUEST_MESSAGE_LOOT, -- Captain Izad's Letter (Izad's Treasure)
+    [3858] = LUIE_QUEST_MESSAGE_LOOT, -- Shazeem's Blade (Washed Ashore)
 
     -- Elsweyr
     [7032] = LUIE_QUEST_MESSAGE_LOOT, -- Letter from Abnur Tharn (Bright Moons, Warm Sands)

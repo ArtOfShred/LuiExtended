@@ -7880,6 +7880,15 @@ LUIE.DebugAuras = {
     [33594] = true, -- Fire (Fire)
     [49897] = true, -- Fire (Fire)
 
+    [27939] = true, -- Bthzark Laser Beam (Generic Flame Wave Target)
+    [27940] = true, -- Laser Damage (Generic Flame Wave Shooter)
+    [27943] = true, -- Laser Snare (Generic Flame Wave Shooter)
+
+    [28398] = true, -- Generic Steam Warning (Steam Trap)
+    [32244] = true, -- Searing Steam (Steam Trap)
+    [32245] = true, -- Searing Steam (Steam Trap)
+    [32246] = true, -- Searing Steam (Steam Trap)
+
     -- Elinhir Private Arena
     [117429] = true, -- Lava Eruption (Lava Trap)
     [117430] = true, -- Projectile (Lava Trap)
@@ -11959,6 +11968,87 @@ LUIE.DebugAuras = {
     [34455] = true, -- Purify
     [34493] = true, -- Q4690
     [48486] = true, -- Q4960 Inda Revived
+
+    --------------------------------------
+    -- QUEST / ZONES - DAGGERFALL COVENANT --
+    --------------------------------------
+
+    --------------------
+    -- Stros M'Kai
+    --------------------
+
+    -- Misc World Events
+    [9694] = true, -- EB Generic 5 Min Counter 04
+    [9695] = true, -- EB Generic 5 Min Counter 05
+
+    -- Main Quest - Innocent Scoundrel
+    [28098] = true, -- Despawn Self 3 Sec Delay
+    [28099] = true, -- Despawn Self
+    [27525] = true, -- Backstab
+    [27633] = true, -- Q4454 SpawnFlavor GobboFighter
+
+    -- Main Quest - Buried Secrets
+    [28410] = true, -- Q4431 HackedSpiderFX (Neramo's Spider)
+    [26535] = true, -- Control Rod (Neramo's Spider)
+
+    -- Main Quest - Like Moths to a Candle
+    [26887] = true, -- GenericCombatTheaterSnare 100 (Howler)
+    [27755] = true, -- Sea Drake Disguise (Crafty Lerisa)
+    [26892] = true, -- Donning Uniform... (Crafty Lerisa)
+    [26895] = true, -- Sea Drake Uniform (Crafty Lerisa)
+    --[26925] = true, -- Freeing Prisoner... (Player)
+    [28245] = true, -- Donning Uniform... (Mekag gro-Bug)
+    [28246] = true, -- Sea Drake Uniform (Mekag gro-Bug)
+    [28243] = true, -- Donning Uniform... (Haerdon)
+    [28244] = true, -- Sea Drake Uniform (Haerdon)
+    [28241] = true, -- Donning Uniform... (Crenard Dortene)
+    [28242] = true, -- Sea Drake Uniform (Crenard Dortene)
+    [26913] = true, -- Cabin Girl Disguise (Crafty Lerisa)
+    [79985] = true, -- Mercy Kill (Player)
+    [79989] = true, -- Mercy Kill (Player)
+
+    -- Main Quest - The Spearhead's Crew
+    [46482] = true, -- GMR Q4476 Gate NPC CV Post Que (Player)
+
+    -- Main Quest - Tip of the Spearhead
+    [27649] = true, -- Servant Disguise (Crafty Lerisa)
+    [31209] = true, -- Q4476EntertainerLine01_01 (Player)
+    [31210] = true, -- Q4476EntertainerLine01_02 (Player)
+    [31207] = true, -- Q4476EntertainerLine02_01 (Player)
+    [31208] = true, -- Q4476EntertainerLine02_02 (Player)
+    [27702] = true, -- Charging Rod (Player)
+    [31012] = true, -- Q4476 Knockdown (Player)
+    [30770] = true, -- Q4476 SailToBet01 (Player)
+    [30771] = true, -- Q4476 SailToBet02 (Player)
+
+    -- Side Quest - Sphere Assembly
+    [43976] = true, -- Q4381-SphereStartReplacement
+
+    -- Side Quest - Izad's Treasure
+    [27268] = true, -- Unearthed Chest
+
+    -- Side Quest - Moment of Truth
+    [26198] = true, -- Q4382 Dugroth W Sword
+    [32263] = true, -- Q4382 SeeBaitCV
+
+    -- Side Quest - Washed Ashore
+    [45950] = true, -- Dirt Clods
+
+    -- Side Quest - Last Night
+    [26001] = true, -- Q4380 02
+    [26002] = true, -- Q4380 05 Trelan Meets
+    [26003] = true, -- Q4380 05 Trelan Meets
+    [26004] = true, -- Q4380 05 Trelan Meets
+    [29488] = true, -- Q4380 02
+    [29487] = true, -- Q4380 02
+    [29495] = true, -- Q4380 02
+    [29497] = true, -- Q4380 02
+    [29498] = true, -- Q4380 02
+    [29499] = true, -- Q4380 02
+    [29500] = true, -- Q4380 02
+    [29496] = true, -- Q4380 02
+    [46191] = true, -- Q4380 02
+
 
     -------------------------------------
     -- VVARDENFELL QUESTS/EVENTS --------

@@ -2116,6 +2116,11 @@ Effects.EffectOverrideByName = {
 
         -- QUESTS
         [Unitnames.Elite_Amuur] =                { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_cleaver_attack_light.dds' }, -- Amuur (Auridon - The First Patient)
+
+        -- Daggerfall Covenant
+        [Unitnames.Elite_Gornog] =               { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_light.dds' }, -- Gornog (Stros M'Kai - Innocent Scoundrel)
+
+        -- Elsweyr
         [Unitnames.Elite_Captain_Carvain] =      { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace1h_quick_strike.dds' }, -- Captain Carvain (Elsweyr - Bright Moons, Warm Sands)
 
         -- DUNGEONS
@@ -2133,6 +2138,12 @@ Effects.EffectOverrideByName = {
         [Unitnames.NPC_Sea_Viper_Berserker] =    { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_1h_light.dds' }, -- Sea Viper Berserker (Tempest Island)
         [Unitnames.NPC_Sea_Viper_Charger] =      { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_2h_light.dds' }, -- Sea Viper Charger (Tempest Island)
         [Unitnames.Boss_Commodore_Ohmanil] =     { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_2h_light.dds' }, -- Commodore Ohmanil (Tempest Island)
+    },
+
+    [29035] = { -- Quick Strike (Rogue/Skirmisher)
+        -- Daggerfall Covenant
+        [Unitnames.NPC_Dogeater_Skirmisher] =    { icon = 'LuiExtended/media/icons/abilities/ability_spell_dagger_1h_light.dds' }, -- Dogeater Skirmisher (Stros M'Kai)
+        [Unitnames.NPC_Drake_Cutthroat] =    { icon = 'LuiExtended/media/icons/abilities/ability_spell_dagger_1h_light.dds' }, -- Dogeater Skirmisher (Stros M'Kai)
     },
 
     [26332] = { -- Slash (Valaran Stormcaller)
@@ -2446,12 +2457,17 @@ Effects.EffectSourceOverride = {
     [62770] = { source = Abilities.Trap_Cold_Fire_Trap }, -- Coldharbour Flames (MQ Tutorial)
     [17314] = { source = Abilities.Trap_Fire_Trap, addSource = true }, -- Fire Trap (Fire Trap)
 
+    [21943] = { source = Abilities.Trap_Spike_Trap }, -- Spike Trap (Corpse Masher) -- Stros M'Kai
+
     [72888] = { source = Abilities.Trap_Fire_Trap }, -- Fire Attack 1 (Fire) -- Banished Cells II
     [72889] = { source = Abilities.Trap_Fire_Trap }, -- Fire Attack 2 (Fire) -- Banished Cells II
 
     [33594] = { source = Abilities.Skill_Flames }, -- Fire (Fire) -- Throne of the Wilderking
 
     [20483] = { source = Abilities.Trap_Falling_Rocks }, -- Falling Rocks
+
+    [27940] = { source = Abilities.Trap_Charge_Wire }, -- Laser Damage (Generic Flame Wave Shooter) -- Stros M'Kai
+    [32245] = { source = Abilities.Trap_Steam_Vent }, -- Searing Steam (Steam Trap) -- Stros M'Kai
 
     -- ENVIRONMENTAL
     [44034] = { source = Abilities.Trap_Slaughterfish, addSource = true }, -- Slaughterfish Attack
@@ -4496,6 +4512,8 @@ Effects.EffectOverride = {
     [43722] = { tooltip = Tooltips.Disguise_Vulkhel_Guard }, -- First Auridon Marine Disguise (Vulkhel Guard Marcine Disguise)
     [43716] = { tooltip = Tooltips.Disguise_Phaer_Mercenary }, -- Phaer Mercenary Disguise (Phaer Mercenary Disguise)
     [43719] = { tooltip = Tooltips.Disguise_Quendeluun }, -- Quendeluun Pact Disguise (Quendeluun Veiled Heritance Disguise)
+    [27457] = { tooltip = Tooltips.Disguise_Seadrake }, -- Seadrake Disguise (Seadrake Disguise)
+    [32045] = { tooltip = Tooltips.Disguise_Servants_Robes }, -- Servant Costume (Servant's Robes)
     [82631] = { icon = 'LuiExtended/media/icons/disguises/disguise_monks_disguise.dds', name = Abilities.Disguise_Monks_Disguise }, -- Monk Disguise Timer (Monk's Disguise)
 
     ----------------------------------------------------------------
@@ -7467,6 +7485,8 @@ Effects.EffectOverride = {
     -- Ravager (2H)
     [29379] = { icon = 'esoui/art/icons/ability_2handed_001.dds', tooltip = Tooltips.Generic_Knockback }, -- Uppercut (Ravager)
     [29380] = { icon = 'esoui/art/icons/ability_2handed_001.dds', hide = true }, -- Uppercut (Ravager)
+
+    -- Skirmisher (DW)
     [29035] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds' }, -- Quick Strike (Rogue/Skirmisher)
     [28408] = { icon = 'esoui/art/icons/ability_dualwield_005.dds' }, -- Whirlwind (Rogue/Skirmisher)
     [12381] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_assassinate.dds' }, -- Assassinate (Rogue/Skirmisher)
@@ -9415,6 +9435,15 @@ Effects.EffectOverride = {
     [33594] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_fire_trap.dds', name = Abilities.Skill_Flames, unbreakable = 1, hide = true, groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Fire, tooltipValue2 = 0.66, tooltipValue3 = 50 }, -- Fire (Fire) -- Throne of the Wilderking
     [49897] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_fire_trap.dds', name = Abilities.Skill_Flames, unbreakable = 1, groundLabel = true, hideGround = true, tooltip = Tooltips.Generic_AOE_Snare_Fire, tooltipValue2 = 0.66, tooltipValue3 = 50 }, -- Fire (Fire) -- Throne of the Wilderking
 
+    -- Laser Trap (Stros M'Kai - Buried Secrets)
+    [27939] = { hide = true }, -- Bthzark Laser Beam (Generic Flame Wave Target) -- Stros M'Kai
+    [27940] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_charge_wire_crystal.dds', name = Abilities.Trap_Charge_Wire, tooltip = Tooltips.Generic_AOE_Shock, tooltipValue2 = 0.25, groundLabel = true }, -- Laser Damage (Generic Flame Wave Shooter) -- Stros M'Kai
+    [27943] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_shock_snare.dds', name = Abilities.Trap_Charge_Wire, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Snare, tooltipValue2 = 70 }, -- Laser Snare (Generic Flame Wave Shooter) -- Stros M'Kai
+
+    -- Steam Trap (Stroks M'Kai - Buried Secrets)
+    [32245] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_steam.dds', name = Abilities.Trap_Steam_Vent, groundLabel = true, unbreakable = 1, tooltip = Tooltips.Generic_AOE_Snare_Fire, tooltipValue2 = 0.75, tooltipValue3 = 50 }, -- Searing Steam (Steam Trap) -- Stros M'Kai
+    [32246] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_steam.dds', name = Abilities.Trap_Steam_Vent, tooltip = Tooltips.Generic_AOE_Snare_Fire, tooltipValue2 = 0.75, tooltipValue3 = 50, groundLabel = true, unbreakable = 1, hideGround = true }, -- Searing Steam (Steam Trap) -- Stros M'Kai
+
     -- Elinhir Private Arena
     [117428] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava_trap.dds', name = Abilities.Trap_Lava_Trap }, -- Lava Eruption (Lava Trap)
     [118437] = { tooltip = Abilities.Trap_Lava_Trap }, -- Lava Eruption (Lava Trap)
@@ -9954,6 +9983,31 @@ Effects.EffectOverride = {
     -- Striking at the Heart
     [48491] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_call_corrupt_lurchers.dds', name = Abilities.Skill_Call_Corrupt_Lurchers }, -- Q4960 Naemon Shield Shade (Shade of Naemon)
     [48498] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_skeleton.dds', name = Abilities.Skill_Undead_Legion }, -- Q4960 Necor Skele Rise ((Shade of Naemon)
+
+    --------------------------------------
+    -- QUEST / ZONES - DAGGERFALL COVENANT --
+    --------------------------------------
+
+    --------------------
+    -- Stros M'Kai
+    --------------------
+
+    -- Main Quest - Buried Secrets
+    [26535] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_control_rod.dds', name = Abilities.Skill_Neramos_Control_Rod }, -- Control Rod (Neramo's Spider)
+
+    -- Main Quest - Like Moths to a Candle
+    [27755] = { hide = true }, -- Sea Drake Disguise (Crafty Lerisa)
+    [26895] = { hide = true }, -- Sea Drake Uniform (Crafty Leris)
+    [28246] = { hide = true }, -- Sea Drake Uniform (Mekag gro-Bug)
+    [28244] = { hide = true }, -- Sea Drake Uniform (Haerdon)
+    [28242] = { hide = true }, -- Sea Drake Uniform (Crenard Doretene)
+    [79989] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_mercy_kill.dds' }, -- Mercy Kill
+
+    -- Main Quest - Tip of the Spearhead
+    [27649] = { hide = true }, -- Servant Disguise (Crafty Lerisa)
+
+    -- Side Quest - Washed Ashore
+    [45950] = { hide = true }, -- Dirt Clods (Sand-Covered Blade)
 
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------
@@ -12308,6 +12362,8 @@ Effects.FakeExternalDebuffs = {
     [31606] = { duration = 0 }, -- Fire Trap (Player)
     [72890] = { duration = 0 }, -- Laser Snare (Fire)
 
+    [32246] = { duration = 0 }, -- Searing Steam (Steam Trap) -- Stros M'Kai
+
     --[66153] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Trial of Flame', duration = 1500}, -- Trial of Flame (Wrothgar - Old Orsinium)
     --[32246] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Steam Trap', duration = 2000}, -- Laser Snare (Steam Trap)
 
@@ -12991,6 +13047,9 @@ Effects.AddGroundDamageAura = {
     [72889] = { duration = 2000, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Fire Attack 2 (Fire) -- Banished Cells II
 
     [33594] = { duration = 2000, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Fire (Fire) -- Throne of the Wilderking
+
+    [27940] = { duration = 350, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Laser Damage (Generic Flame Wave Shooter) -- Stros M'Kai
+    [32245] = { duration = 2000, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Searing Steam (Steam Trap) -- Stros M'Kai
 
     --------------------
     -- NPC
