@@ -582,6 +582,7 @@ LUIE.Data.Tooltips = {
     Disguise_Quendeluun                             = GetString(SI_LUIE_SKILL_DISGUISE_QUENDELUUN_TP),
     Disguise_Seadrake                               = GetString(SI_LUIE_SKILL_DISGUISE_SEADRAKE_TP),
     Disguise_Servants_Robes                         = GetString(SI_LUIE_SKILL_DISGUISE_SERVANTS_ROBES_TP),
+    Disguise_Bloodthorn                             = GetString(SI_LUIE_SKILL_DISGUISE_BLOODTHORN_DISGUISE_TP),
 
     ----------------------------------------------------------------
     -- CLASS SKILLS ------------------------------------------------
@@ -1270,6 +1271,9 @@ LUIE.Data.Tooltips = {
     Skill_Shadow_Wood                               = GetString(SI_LUIE_SKILL_SHADOW_WOOD_TP),
     Skill_Ancient_Wrath                             = GetString(SI_LUIE_SKILL_ANCIENT_WRATH_TP),
     Skill_Necrotic_Circle_Stun                      = GetString(SI_LUIE_SKILL_NECROTIC_CIRCLE_STUN_TP),
+
+    -- Daggerfall Covenant Quests
+    Skill_Vision_of_the_Past                        = GetString(SI_LUIE_SKILL_VISION_OF_THE_PAST_TP),
 
     -- Elsweyr Quests
     Skill_Flame_Aura                                = GetString(SI_LUIE_SKILL_FLAME_AURA),

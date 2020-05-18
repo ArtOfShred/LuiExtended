@@ -26,6 +26,14 @@ function LUIE.SetElementPosition()
     for k,v in pairs(defaultPanels) do
         local frameName = k:GetName()
         if LUIE.SV[frameName] then
+            k:SetClampedToScreen ( true )
+            -- Adjust constraints so we can move elements.
+            if v[2] then
+                k:SetWidth(v[2])
+            end
+            if v[3] then
+                k:SetHeight(v[3])
+            end
             local x = LUIE.SV[frameName][1]
             local y = LUIE.SV[frameName][2]
             if x ~= nil and y ~= nil then
@@ -79,7 +87,8 @@ end
 -- Reset position of windows. Called from Settings Menu.
 function LUIE.ResetElementPosition()
     for k,v in pairs(defaultPanels) do
-        LUIE.SV[k.customPositionAttr] = nil
+        local frameName = k:GetName()
+        LUIE.SV[frameName] = nil
     end
     ReloadUI()
 end

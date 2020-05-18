@@ -12049,6 +12049,45 @@ LUIE.DebugAuras = {
     [29496] = true, -- Q4380 02
     [46191] = true, -- Q4380 02
 
+    --------------------
+    -- Betnikh
+    --------------------
+
+    [26948] = true, -- Bloodthorn Uniform (Crafty Lerisa)
+    [26939] = true, -- Q4468 EnergyMoteFX (Energy Mote)
+    [25313] = true, -- Generic (Player)
+    [44189] = true, -- RobS Stun 2.25 Sec (Abomination of Wrath/Fear/Hate)
+    [44288] = true, -- Generic UFX Give (Abomination of Wrath/Fear/Hate)
+    [26944] = true, -- Q4468 Staff of Arkay Flavor (Abomination of Wrath/Fear/Hate)
+    [28358] = true, -- Q4468 Orc Raider Diguise (PlayeR)
+    [31379] = true, -- Q4468 NureseExecution (Player)
+    [31381] = true, -- Q4468 NureseExecution (Player)
+    [31382] = true, -- Q4468 NureseExecution (Player)
+    [31380] = true, -- Q4468SeeNureseGhost (Player)
+    [31439] = true, -- Q4468 NureseExecution (Player)
+
+    [31365] = true, -- Q4468 DragoExecution (Player)
+    [31370] = true, -- Q4468 DragoExecution (Player)
+    [31369] = true, -- Q4468 DragoExecution (Player)
+    [31372] = true, -- Q4468SeeDragoGhost (Player)
+    [31440] = true, -- Q4468 DragoExecution (Player)
+
+    [31391] = true, -- Q4468 FredExecution (Player)
+    [31393] = true, -- Q4468 NureseExecution (Player)
+    [31394] = true, -- Q4468 NureseExecution (Player)
+    [31392] = true, -- Q4468SeeNureseGhost (Player)
+
+    [31402] = true, -- Q4468 VisanneExecution (Player)
+    [31404] = true, -- Q4468 VisanneExecution (Player)
+    [31405] = true, -- Q4468 VisanneExecution (Player)
+    [31403] = true, -- Q4468SeeVisanneGhost (Player)
+
+    [31427] = true, -- Q4468 AskedWrongQuestion01 (Player)
+    [31428] = true, -- Q4468 AskedWrongQuestion01 (Player)
+
+    [28489] = true, -- Q4468 RenwicHoldArtifact (King Renwic)
+    [28487] = true, -- Q4468 RenwicCast (King Renwic)
+    [28488] = true, -- Q4468 RenwicCastPop (King Renwic)
 
     -------------------------------------
     -- VVARDENFELL QUESTS/EVENTS --------

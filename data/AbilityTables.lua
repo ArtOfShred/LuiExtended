@@ -1181,6 +1181,7 @@ local AbilityTables = {
 
     -- Daggerfall Covenant
     Skill_Neramos_Control_Rod         = GetQuestItemName(3703),
+    Skill_Vision_of_the_Past          = 36834,
 
     -- Summerset Quests
     Skill_Pustulant_Eruption          = 105867,

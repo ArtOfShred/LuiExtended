@@ -853,6 +853,7 @@ local strings = {
     SI_LUIE_SKILL_DISGUISE_QUENDELUUN_TP =               "Disguised as a member of the invading Ebonheart Pact forces.",
     SI_LUIE_SKILL_DISGUISE_SEADRAKE_TP =                 "Disguised as a Seadrake pirate.",
     SI_LUIE_SKILL_DISGUISE_SERVANTS_ROBES_TP =           "Disguised as a servant of Headman Bhosek.",
+    SI_LUIE_SKILL_DISGUISE_BLOODTHORN_DISGUISE_TP =      "Disguised as a Bloodthorn Cultist.",
 
     -- Weapon Sets
     SI_LUIE_SKILL_SET_ASYLUM_BOW =                       "The next Snipe, Scatter Shot, or Poison Arrow cast within |cFFFFFF6|r seconds by your attacker deals |cFFFFFF<<1>>|r% additional damage.",
@@ -1351,6 +1352,7 @@ local strings = {
     SI_LUIE_SKILL_STAR_HAVEN_DRAGONHORN =                "Star Haven Dragonhorn",
     SI_LUIE_SKILL_CHARGE_WIRE =                          "Charge-Wire",
     SI_LUIE_SKILL_STEAM_VENT =                           "Steam Vent",
+    SI_LUIE_SKILL_VISION_OF_THE_PAST_TP =                "You are currently experiencing a vision of the past through the eyes of Targoth.",
 
     -- Keep Upgrade
     SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_RANGE =              "Longer Range on Ranged Guards",

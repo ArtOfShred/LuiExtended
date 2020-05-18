@@ -2051,6 +2051,31 @@ function SpellCastBuffs.AddNameOnBossEngaged(eventCode)
     SpellCastBuffs.AddNameAura()
 end
 
+-- Called from EVENT_PLAYER_ACTIVATED
+function SpellCastBuffs.AddZoneBuffs()
+
+    local zoneId = GetZoneId(GetCurrentMapZoneIndex())
+    if Effects.ZoneBuffs[zoneId] then
+        local abilityId = Effects.ZoneBuffs[zoneId]
+        local abilityName = GetAbilityName(abilityId)
+        local abilityIcon = GetAbilityIcon(abilityId)
+        local beginTime = GetGameTimeMilliseconds()
+
+        SpellCastBuffs.EffectsList["player1"][ abilityId ] = {
+            target="player", type=1,
+            id=abilityId, name=abilityName, icon=abilityIcon,
+            dur=0, starts=beginTime, ends=nil,
+            forced = "long",
+            restart=true, iconNum=0,
+            unbreakable=0,
+            stack = stack,
+            groundLabel = groundLabel,
+            toggle = toggle,
+        }
+    end
+
+end
+
  -- Combat Event (Target = Player)
 function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
     if not (Effects.FakeExternalBuffs[abilityId] or Effects.FakeExternalDebuffs[abilityId] or Effects.FakePlayerBuffs[abilityId] or Effects.FakeStagger[abilityId] or Effects.AddGroundDamageAura[abilityId]) then
@@ -3305,6 +3330,9 @@ function SpellCastBuffs.OnPlayerActivated(eventCode)
     -- Reload Effects
     SpellCastBuffs.ReloadEffects("player")
     SpellCastBuffs.AddNameOnBossEngaged()
+
+    -- Load Zone Specific Buffs
+    SpellCastBuffs.AddZoneBuffs()
 
     -- Resolve Duel Target
     SpellCastBuffs.DuelStart()

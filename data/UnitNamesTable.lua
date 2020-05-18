@@ -169,6 +169,7 @@ LUIE.Data.UnitNames = {
     NPC_Dogeater_Skirmisher               = 'Dogeater Skirmisher', -- GENERIC NPC (Stros M'Kai)
     NPC_Dogeater_Witch                    = 'Dogeater Witch', -- GENERIC NPC (Stros M'Kai)
     NPC_Drake_Cutthroat                   = 'Drake Cutthroat', -- GENERIC NPC (Stros M'Kai)
+    NPC_Drake_Brigand                     = 'Drake Brigand', -- GENERIC NPC (Stros M'Kai)
 
     ----------------------------------------------------------------
     -- QUESTS ------------------------------------------------------

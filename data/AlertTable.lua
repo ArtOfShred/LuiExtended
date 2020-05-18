@@ -453,7 +453,7 @@ LUIE.Data.AlertTable = {
     [17207] = { block = true, dodge = true, priority = 3, auradetect = true, duration = 2500, neverShowInterrupt = true }, -- Necromantic Implosion (Risen Dead)
 
     [18514] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = LUIE_CC_TYPE_SNARE }, -- Chill Touch (Ghost)
-    [19137] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true, cc = LUIE_CC_TYPE_FEAR }, -- Haunting Spectre (Ghost)
+    [19137] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true, cc = LUIE_CC_TYPE_FEAR, duration = 2000, postCast = 2000 }, -- Haunting Spectre (Ghost)
 
     [22521] = { avoid = true, priority = 2, auradetect = true, cc = LUIE_CC_TYPE_SNARE, neverShowInterrupt = true, bossMatch = { Unitnames.Boss_Valanir_the_Restless } }, -- Defiled Ground (Lich)
     [73925] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true, cc = LUIE_CC_TYPE_STUN, duration = 7450, refire = 2000, neverShowInterrupt = true, bossMatch = { Unitnames.Boss_Valanir_the_Restless } }, -- Soul Cage (Lich)

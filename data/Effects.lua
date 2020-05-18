@@ -2047,6 +2047,16 @@ Effects.AddStackOnEvent = {
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
+-- When the player loads into the ZoneId listed below, add an unlimited duration long aura for the abilityId.
+--------------------------------------------------------------------------------------------------------------------------------
+Effects.ZoneBuffs = {
+    -- Daggerfall Covenant Quests
+    [811] = 28358, -- Zone: Ancient Carzog's Demise (Base Zone: Betnikh) (Quest: Unearthing the Past) - Q4468 Orc Raider Disguise
+
+
+}
+
+--------------------------------------------------------------------------------------------------------------------------------
 -- Synergy Icon Overrides - When a synergy with a matching ability name appears, change the icon or name.
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.SynergyNameOverride = {
@@ -2119,6 +2129,7 @@ Effects.EffectOverrideByName = {
 
         -- Daggerfall Covenant
         [Unitnames.Elite_Gornog] =               { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_light.dds' }, -- Gornog (Stros M'Kai - Innocent Scoundrel)
+        [Unitnames.NPC_Drake_Brigand] =          { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_2h_light.dds' }, -- Drake Brigand (Stros M'Kai)
 
         -- Elsweyr
         [Unitnames.Elite_Captain_Carvain] =      { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace1h_quick_strike.dds' }, -- Captain Carvain (Elsweyr - Bright Moons, Warm Sands)
@@ -4514,6 +4525,7 @@ Effects.EffectOverride = {
     [43719] = { tooltip = Tooltips.Disguise_Quendeluun }, -- Quendeluun Pact Disguise (Quendeluun Veiled Heritance Disguise)
     [27457] = { tooltip = Tooltips.Disguise_Seadrake }, -- Seadrake Disguise (Seadrake Disguise)
     [32045] = { tooltip = Tooltips.Disguise_Servants_Robes }, -- Servant Costume (Servant's Robes)
+    [46281] = { tooltip = Tooltips.Disguise_Bloodthorn }, -- Necromancer Disguise (Bloodthorn Disguise)
     [82631] = { icon = 'LuiExtended/media/icons/disguises/disguise_monks_disguise.dds', name = Abilities.Disguise_Monks_Disguise }, -- Monk Disguise Timer (Monk's Disguise)
 
     ----------------------------------------------------------------
@@ -4595,7 +4607,7 @@ Effects.EffectOverride = {
     [69293] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recall.dds', name = Abilities.Innate_Recall }, -- Sigil of Imperial Retreat
     [14644] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds', name = Abilities.Innate_Revive }, -- Revive (Death Dialogue)
     [31221] = { hide = true }, -- Skyshard Collect (Aura on Skyshard when player collects it)
-    [32346] = { icon = 'esoui/art/icons/achievement_u24_smallzone_skyshard.dds', name = Abilities.Innate_Absorbing_Skyshard, unbreakable = 1}, -- Skyshard Collect
+    [32346] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_absorbing_skyshard.dds', name = Abilities.Innate_Absorbing_Skyshard, unbreakable = 1}, -- Skyshard Collect
     [63601] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_eso_plus_member.dds', tooltip = Tooltips.Innate_ESO_Plus }, -- ESO Plus Member
     [47270] = { icon = 'esoui/art/icons/achievement_update11_dungeons_017.dds', hide = true }, -- Ritual of Mara
     [2727] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = "", unbreakable = 1 }, -- Off-Balance
@@ -7408,7 +7420,7 @@ Effects.EffectOverride = {
     -- Shared NPC Passives
     [33097] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_boss_immunities.dds', name = Abilities.Skill_Boss_CC_Immunity, tooltip = Tooltips.Generic_Scary_Immunities }, -- Scary Immunities
     [44176] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_flying_immunities.dds', tooltip = Tooltips.Generic_Flying_Immunities }, -- Flying Immunities
-    [13739] = { icon = 'esoui/art/icons/achievement_016.dds', tooltip = Tooltips.Skill_Backstabber }, -- Backstabber
+    [13739] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_backstabber.dds', tooltip = Tooltips.Skill_Backstabber }, -- Backstabber
     [73768] = { hide = true }, -- GEN 5 Hits
     [79147] = { hide = true }, -- GEN 3 Hits
     [73916] = { hide = true }, -- GEN 2 Hits
@@ -8074,7 +8086,7 @@ Effects.EffectOverride = {
     [76184] = { hide = true }, -- Bog Burst (Haj Mota)
     [72789] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shockwave.dds' }, -- Shockwave (Haj Mota)
     [73494] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shockwave.dds', hide = true }, -- Shockwave (Haj Mota)
-    [76319] = { icon = 'esoui/art/icons/achievement_016.dds', name = Abilities.Skill_Backstabber, tooltip = Tooltips.Skill_Backstabber }, -- Backstabber (Dire Wolf)
+    [76319] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_backstabber.dds', name = Abilities.Skill_Backstabber, tooltip = Tooltips.Skill_Backstabber }, -- Backstabber (Dire Wolf)
     [80382] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_bite.dds' }, -- Bite (Dire Wolf)
     [80383] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_bite.dds' }, -- Bite (Dire Wolf)
     [76307] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_lunge.dds' }, -- Lunge (Dire Wolf)
@@ -10008,6 +10020,18 @@ Effects.EffectOverride = {
 
     -- Side Quest - Washed Ashore
     [45950] = { hide = true }, -- Dirt Clods (Sand-Covered Blade)
+
+    --------------------
+    -- Betnikh
+    --------------------
+
+    -- Main Quest - Unearthing the Past
+    [26948] = { hide = true }, -- Bloodthorn Uniform (Crafty Lerisa)
+    [44189] = { hide = true }, -- RobS Stun 2.25 Sec (Abomination of Wrath/Fear/Hate)
+    [28358] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_time.dds', name = Abilities.Skill_Vision_of_the_Past, tooltip = Tooltips.Skill_Vision_of_the_Past }, -- Q4468 Orc Raider Disguise
+
+    -- Main Quest - Tormented Souls
+    [30929] = { hide = true }, -- Magicka (Neramo)
 
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------
@@ -12710,7 +12734,7 @@ Effects.FakePlayerBuffs = {
     [26634] = { duration = 0 }, -- MG2 Captured Sahdina Essence
     [26581] = { duration = 0 }, -- MG2 Captured Rashomta Essence
 
-    -- Aldmeri Dominion
+    -- Aldmeri Dominion Quests
     [33066] = { icon = 'LuiExtended/media/icons/disguises/disguise_fancy_clothing.dds', name = Abilities.Skill_Fancy_Clothing, duration = 0, long = true, ignoreBegin = true }, -- Q4586_ChangeClothes
     [34842] = { icon = 'LuiExtended/media/icons/disguises/disguise_fancy_clothing_female.dds', name = Abilities.Skill_Fancy_Clothing, duration = 0, long = true, ignoreBegin = true }, -- Q4586_ChangeClothesFEMALE
     --[29504] = { duration = 0, long = true }, -- Q4546 Shade Layer
