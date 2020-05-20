@@ -810,6 +810,9 @@ LUIE.Data.AlertTable = {
     [125281] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 4400, fakeName = Unitnames.Boss_Bahlokdaan, refire = 2000 }, -- Sweeping Breath (Bahlokdaan)
     [125244] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1567, fakeName = Unitnames.Boss_Bahlokdaan, cc = LUIE_CC_TYPE_STUN }, -- Head Strike (Bahlokdaan)
     [125570] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1400, cc = LUIE_CC_TYPE_STUN }, -- Chomp (Bahlokdaan)
+    [125241] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1567, fakeName = Unitnames.Boss_Bahlokdaan, cc = LUIE_CC_TYPE_STUN  }, -- Tail Whip (Bahlokdaan)
+    [125242] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1533, fakeName = Unitnames.Boss_Bahlokdaan, cc = LUIE_CC_TYPE_STUN  }, -- Wing Thrash (Bahlokdaan)
+    [125243] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1533, fakeName = Unitnames.Boss_Bahlokdaan, cc = LUIE_CC_TYPE_STUN  }, -- Wing Thrash (Bahlokdaan)
 
     --------------------------------------------------
     -- ARENAS ----------------------------------------

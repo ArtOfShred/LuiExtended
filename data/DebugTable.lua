@@ -12699,6 +12699,27 @@ LUIE.DebugAuras = {
     [122199] = true, -- Chomp (Bahlokdaan)
     [117192] = true, -- Chomp (Bahlokdaan)
 
+    [125241] = true, -- Tail Whip (Bahlokdaan)
+    [125576] = true, -- Tail Swipe (Bahlokdaan)
+    [125575] = true, -- Tail Swipe (Bahlokdaan)
+    [125265] = true, -- Tail Whip (Bahlokdaan)
+    [125266] = true, -- Tail Whip (Bahlokdaan)
+    [125263] = true, -- Tail Whip (Bahlokdaan)
+
+    [125242] = true, -- Wing Thrash (Bahlokdaan)
+    [125278] = true, -- Wing Swipe (Bahlokdaan)
+    [125277] = true, -- Wing Swipe (Bahlokdaan)
+    [125247] = true, -- Wing Thrash (Bahlokdaan)
+    [125250] = true, -- Wing Thrash (Bahlokdaan)
+    [125245] = true, -- Wing Thrash (Bahlokdaan)
+
+    --[125243] = true, -- Wing Thrash (Bahlokdaan)
+    --[125275] = true, -- Wing Swipe (Bahlokdaan)
+    --[125274] = true, -- Wing Swipe (Bahlokdaan)
+    --[125255] = true, -- Wing Thrash (Bahlokdaan)
+    --[125256] = true, -- Wing Thrash (Bahlokdaan)
+    --[125253] = true, -- Wing Thrash (Bahlokdaan)
+
     [123812] = true, -- Summon Bahlokdaan (Bahlokdaan)
     [125607] = true, -- Receive Call (Bahlokdaan)
     [125606] = true, -- Receive Call (Bahlokdaan)

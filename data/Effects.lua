@@ -6102,8 +6102,8 @@ Effects.EffectOverride = {
     -- Dual Wield
     [30872] = { icon = 'esoui/art/icons/ability_weapon_020.dds' }, -- Controlled Fury (Controlled Fury - Rank 1)
     [45478] = { icon = 'esoui/art/icons/ability_weapon_020.dds' }, -- Controlled Fury (Controlled Fury - Rank 2)
-    --[21114] = { icon = 'esoui/art/icons/ability_weapon_012.dds' }, -- Ruffian (Ruffian - Rank 1)
-    --[45481] = { icon = 'esoui/art/icons/ability_weapon_012.dds' }, -- Ruffian (Ruffian - Rank 2)
+    [21114] = { icon = 'esoui/art/icons/ability_weapon_012.dds' }, -- Ruffian (Ruffian - Rank 1)
+    [45481] = { icon = 'esoui/art/icons/ability_weapon_012.dds' }, -- Ruffian (Ruffian - Rank 2)
     [30894] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleed.dds', name = Abilities.Passive_Twin_Blade_and_Blunt, tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Twin Blade and Blunt Bleed (Rank 1)
     [45483] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleed.dds', name = Abilities.Passive_Twin_Blade_and_Blunt, tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Twin Blade and Blunt Bleed (Rank 2)
 
@@ -10183,6 +10183,21 @@ Effects.EffectOverride = {
     [125570] = { icon = 'LuiExtended/media/icons/abilities/ability_dragon_chomp.dds' }, -- Chomp (Bahlokdaan)
     [122199] = { icon = 'LuiExtended/media/icons/abilities/ability_dragon_chomp.dds' }, -- Chomp (Bahlokdaan)
     [117192] = { icon = 'LuiExtended/media/icons/abilities/ability_dragon_chomp.dds', tooltip = Tooltips.Generic_Stun, cc = LUIE_CC_TYPE_STUN }, -- Chomp (Bahlokdaan)
+
+    [125241] = { icon = 'esoui/art/icons/ability_u24_drg_tailswipe.dds' }, -- Tail Whip (Bahlokdaan)
+    [125575] = { hide = true }, -- Tail Swipe (Bahlokdaan)
+    [125266] = { icon = 'esoui/art/icons/ability_u24_drg_tailswipe.dds' }, -- Tail Whip (Bahlokdaan)
+    [125263] = { tooltip = Tooltips.Generic_Knockback, cc = LUIE_CC_TYPE_KNOCKBACK }, -- Tail Whip (Bahlokdaan)
+
+    [125242] = { icon = 'esoui/art/icons/ability_u24_drg_wingthrash.dds' }, -- Wing Thrash (Bahlokdaan)
+    [125277] = { hide = true }, -- Wing Swipe (Bahlokdaan)
+    [125250] = { icon = 'esoui/art/icons/ability_u24_drg_wingthrash.dds' }, -- Wing Thrash (Bahlokdaan)
+    [125245] = { tooltip = Tooltips.Generic_Knockback, cc = LUIE_CC_TYPE_KNOCKBACK }, -- Wing Thrash (Bahlokdaan)
+
+    [125243] = { icon = 'esoui/art/icons/ability_u24_drg_wingthrash.dds' }, -- Wing Thrash (Bahlokdaan)
+    [125274] = { hide = true }, -- Wing Swipe (Bahlokdaan)
+    [125256] = { icon = 'esoui/art/icons/ability_u24_drg_wingthrash.dds' }, -- Wing Thrash (Bahlokdaan)
+    [125243] = { tooltip = Tooltips.Generic_Knockback, cc = LUIE_CC_TYPE_KNOCKBACK }, -- Wing Thrash (Bahlokdaan)
 
     [123118] = { hide = true }, -- Takeoff (Bahlokdaan)
 
