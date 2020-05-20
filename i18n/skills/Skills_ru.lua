@@ -175,6 +175,7 @@ local strings = {
     SI_LUIE_SKILL_MINOR_COWARDICE_TP =                   "Увеличивает стоимость абсолютной способности на |cFFFFFF60|r%.",
     SI_LUIE_SKILL_MINOR_MANGLE_TP =                      "Снижает макс. здоровье на |cFFFFFF10|r%.",
     SI_LUIE_SKILL_HINDRANCE_TP =                         "Снижает скорость передвижения на |cFFFFFF40|r%.",
+    SI_LUIE_SKILL_MINOR_TIMIDITY_TP =                    "Consume |cFFFFFF1|r Ultimate every |cFFFFFF1.5|r seconds while in combat.",
 
     -- Slayer / Aegis
     SI_LUIE_SKILL_MINOR_SLAYER_TP =                      "Ваши атаки наносят на |cFFFFFF5|r% больше урона по противникам в Подземельях, Испытаниях и на Аренах.",
@@ -292,8 +293,10 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_DISORIENT_NO_DUR_TP =          "Disoriented.",
 
     -- Ravage Potions / Poisons
+    SI_LUIE_SKILL_GENERIC_RAVAGE_HEALTH_POTION_TP =      "Afflicted with Bleed Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POTION_TP =     "Увеличивает стоимость способностей, расходующих Магию на |cFFFFFF60|r%.",
     SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POTION_TP =     "Увеличивает стоимость способностей, расходующих Запас сил на |cFFFFFF60|r%.",
+    SI_LUIE_SKILL_GENERIC_RAVAGE_HEALTH_POISON_TP =      "Afflicted with Poison Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POISON_TP =     "Увеличивает стоимость способностей, расходующих Магию на |cFFFFFF10|r%.",
     SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POISON_TP =     "Увеличивает стоимость способностей, расходующих Запас сил на |cFFFFFF10|r.%",
 
@@ -710,9 +713,9 @@ local strings = {
     SI_LUIE_SKILL_TIME_BORROWED_TIME_STUN_TP =           "Negating the next |cFFFFFF5000|r points of healing for |cFFFFFF<<1>>|r seconds.\n\nStunned for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_TIME_FREEZE_TP =                       "Gradually being slowed over time for |cFFFFFF4|r seconds.\n\nIf you are still in the area of effect at end of this duration you will be stunned for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_TIME_FREEZE_GROUND_TP =                "Gradually reducing the Movement Speed of enemies within the |cFFFFFF8|r meter radius of the target location.\n\nAt the end of the duration, enemies are stunned for |cFFFFFF3|r seconds.",
-    SI_LUIE_SKILL_IMBUE_WEAPON_TP =                      "Your next Light Attack used within |cFFFFFF2|r seconds deals additional Physical Damage.\n\nIf the power is not consumed in time, regain a portion of the resources spent.",
-    SI_LUIE_SKILL_ELEMENTAL_WEAPON_TP =                  "Your next Light Attack used within |cFFFFFF2|r seconds deals additional Magic Damage and applies the Burning, Concussion, or Chill status effect.\n\nIf the power is not consumed in time, regain a portion of the resources spent.",
-    SI_LUIE_SKILL_CRUSHING_WEAPON_TP =                   "Your next Light Attack used within |cFFFFFF2|r seconds deals additional Physical Damage and heals you for |cFFFFFF25|r% of the damage done.\n\nIf the power is not consumed in time, regain a portion of the resources spent.",
+    SI_LUIE_SKILL_IMBUE_WEAPON_TP =                      "Your next Light Attack used within |cFFFFFF2|r seconds deals additional Physical Damage.\n\nIf the power is not consumed in time, you restore |cFFFFFF60|r% of the cost in Stamina.",
+    SI_LUIE_SKILL_ELEMENTAL_WEAPON_TP =                  "Your next Light Attack used within |cFFFFFF2|r seconds deals additional Magic Damage and applies the Burning, Concussion, or Chill elemental status effect.\n\nIf the power is not consumed in time, you restore |cFFFFFF60|r% of the cost in Magicka.",
+    SI_LUIE_SKILL_CRUSHING_WEAPON_TP =                   "Your next Light Attack used within |cFFFFFF2|r seconds deals additional Physical Damage and heals you for |cFFFFFF28|r% of the damage done.\n\nIf the power is not consumed in time, you restore |cFFFFFF60|r% of the cost in Stamina.",
     SI_LUIE_SKILL_MEND_WOUNDS_TP =                       "Your Light and Heavy attacks are replaced with healing abilities that can only be used on allies.\n\nYour Light Attack launches a restorative sphere at your ally, instantly healing them.\n\nYour Heavy Attack heals every |cFFFFFF1|r second and restores Magicka to you while channeling.",
     SI_LUIE_SKILL_MEND_SPIRIT_TP =                       "Your Light and Heavy attacks are replaced with healing abilities that can only be used on allies.\n\nYour Light Attack launches a restorative sphere at your ally, instantly healing them.\n\nYour Heavy Attack heals every |cFFFFFF1|r second and restores Magicka to you while channeling.\n\nAfter you heal an ally you grant them Major Resolve for |cFFFFFF5|r seconds.",
     SI_LUIE_SKILL_SYMBIOSIS_TP =                         "Your Light and Heavy attacks are replaced with healing abilities that can only be used on allies.\n\nYour Light Attack launches a restorative sphere at your ally, instantly healing them.\n\nYour Heavy Attack heals every |cFFFFFF1|r second and restores Magicka to you while channeling.\n\nYou heal yourself for |cFFFFFF50|r% of the amount of healing done to the ally.",
@@ -725,11 +728,11 @@ local strings = {
     SI_LUIE_SKILL_TRAPPING_WEBS_TP =                     "Enemies caught in the |cFFFFFF4|r meter radius of webs are snared, reducing their Movement Speed by |cFFFFFF50|r%.\n\nAfter |cFFFFFF10|r seconds the webs explode, dealing Poison Damage to enemies within.\n\nA ranged ally targeting an enemy in the webs can activate the |cFFFFFFSpawn Broodling|r synergy.",
     SI_LUIE_SKILL_SHADOW_SILK_TP =                       "Enemies caught in the |cFFFFFF4|r meter radius of webs are snared, reducing their Movement Speed by |cFFFFFF50|r%.\n\nAfter |cFFFFFF10|r seconds the webs explode, dealing Poison Damage to enemies within.\n\nA ranged ally targeting an enemy in the webs can activate the |cFFFFFFBlack Widow|r synergy.",
     SI_LUIE_SKILL_TANGLING_WEBS_TP =                     "Enemies caught in the |cFFFFFF4|r meter radius of webs are snared, reducing their Movement Speed by |cFFFFFF50|r%.\n\nAfter |cFFFFFF10|r seconds the webs explode, dealing Poison Damage to enemies within.\n\nA ranged ally targeting an enemy in the webs can activate the |cFFFFFFArachnophobia|r synergy.",
-    SI_LUIE_SKILL_TRAPPING_WEBS_SNARE_TP =               "Movement Speed reduced by |cFFFFFF50|r%.\n\nAfter |cFFFFFF5|r seconds the webs explode, dealing Poison damage.",
+    SI_LUIE_SKILL_TRAPPING_WEBS_SNARE_TP =               "Movement Speed reduced by |cFFFFFF50|r%.\n\nAfter |cFFFFFF10|r seconds the webs explode, dealing Poison damage.",
     SI_LUIE_SKILL_RADIATE_TP =                           "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nWhen this effect ends, you and nearby allies take additional Magic Damage.",
     SI_LUIE_SKILL_SPAWN_BROODLING_TP =                   "Attacking nearby enemies. The spider remains for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_BONE_SHIELD_TP =                       "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nAn ally near you can activate the |cFFFFFFBone Wall|r synergy.",
-    SI_LUIE_SKILL_SPIKED_BONE_SHIELD_TP =                "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>> and returning |cFFFFFF78|r% of any direct damage absorbed back to the enemy.\n\nAn ally near you can activate the |cFFFFFFBone Wall|r synergy.",
+    SI_LUIE_SKILL_SPIKED_BONE_SHIELD_TP =                "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>> and returning |cFFFFFF138|r% of direct damage absorbed back to the enemy.\n\nAn ally near you can activate the |cFFFFFFBone Wall|r synergy.",
     SI_LUIE_SKILL_BONE_SURGE_TP =                        "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nAn ally near you can activate the |cFFFFFFSpinal Surge|r synergy.",
     SI_LUIE_SKILL_INNER_BEAST_TP =                       "Your attacker deals |cFFFFFF5|r% more damage to you for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_NECROTIC_ORB_TP =                      "A globe of annihilation slowly floats forward, dealing Magic Damage to enemies within |cFFFFFF8|r meters every |cFFFFFF0.5|r seconds.\n\nAn ally near the globe can activate the |cFFFFFFCombustion|r synergy.",

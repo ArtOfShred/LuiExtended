@@ -494,6 +494,7 @@ Effects.DebuffDisplayOverrideName = {
     [Abilities.Skill_Minor_Uncertainty]         = true,
     [Abilities.Skill_Minor_Magickasteal]        = true,
     [Abilities.Skill_Minor_Lifesteal]           = true,
+    [Abilities.Skill_Minor_Timidity]            = true,
     [Abilities.Skill_Off_Balance]               = true,
 }
 
@@ -2946,6 +2947,7 @@ Effects.TooltipNameOverride = {
     [Abilities.Skill_Minor_Uncertainty]     = Tooltips.Skill_Minor_Uncertainty,
     [Abilities.Skill_Minor_Cowardice]       = Tooltips.Skill_Minor_Cowardice,
     [Abilities.Skill_Minor_Mangle]          = Tooltips.Skill_Minor_Mangle,
+    [Abilities.Skill_Minor_Timidity]        = Tooltips.Skill_Minor_Timidity,
 
     -- Misc Buffs & Debuffs
     [Abilities.Skill_Empower]               = Tooltips.Skill_Empower,
@@ -2971,9 +2973,10 @@ Effects.TooltipNameOverride = {
     [86780]                         = Tooltips.Generic_Invisibility, -- Crown Invisibility Potion
     [86699]                         = Tooltips.Generic_Invisibility, -- Gold Coast Survivor Elixir
     [78058]                         = Tooltips.Generic_Invisibility, -- Roguish Escape Draught
-    [79709]                         = Tooltips.Generic_Bleed, -- ... of Creeping Ravage Health (2 Traits)
-    [46113]                         = Tooltips.Generic_Bleed, -- ... of Ravage Health (2 Traits)
-    [46217]                         = Tooltips.Generic_Bleed, -- ... of Ravage Health (3 Traits)
+    [79709]                         = Tooltips.Generic_Ravage_Health_Potion, -- ... of Creeping Ravage Health (2 Traits)
+    [79710]                         = Tooltips.Generic_Ravage_Health_Potion, -- ... of Creeping Ravage Health (3 Traits)
+    [46113]                         = Tooltips.Generic_Ravage_Health_Potion, -- ... of Ravage Health (2 Traits)
+    [46217]                         = Tooltips.Generic_Ravage_Health_Potion, -- ... of Ravage Health (3 Traits)
     [45236]                         = Tooltips.Generic_Detection_Potion, -- ... of Detection (2 Traits)
     [45458]                         = Tooltips.Generic_Detection_Potion, -- ... of Detection (3 Traits)
     [79705]                         = Tooltips.Generic_HoT_Potion, -- ... of Lingering Restore Health (2 Traits)
@@ -2984,12 +2987,12 @@ Effects.TooltipNameOverride = {
     [46240]                         = Tooltips.Generic_Ravage_Stamina_Potion, -- ... of Ravage Stamina (3 Traits)
 
     -- Poisons
-    [79133]                         = Tooltips.Generic_Poison, -- ... of Drain Health (2 Traits)
+    [79133]                         = Tooltips.Generic_Ravage_Health_Poison, -- ... of Drain Health (2 Traits)
     [79134]                         = Tooltips.Generic_HoT_Potion, -- ... of Drain Health (2 Traits)
-    [79135]                         = Tooltips.Generic_Poison, -- ... of Drain Health (3 Traits)
+    [79135]                         = Tooltips.Generic_Ravage_Health_Poison, -- ... of Drain Health (3 Traits)
     [79136]                         = Tooltips.Generic_HoT_Potion, -- ... of Drain Health (3 Traits)
-    [79025]                         = Tooltips.Generic_Poison, -- ... of Ravage Health (2 Traits)
-    [78922]                         = Tooltips.Generic_Poison, -- ... of Ravage Health (3 Traits)
+    [79025]                         = Tooltips.Generic_Ravage_Health_Poison, -- ... of Ravage Health (2 Traits)
+    [78922]                         = Tooltips.Generic_Ravage_Health_Poison, -- ... of Ravage Health (3 Traits)
     [79137]                         = Tooltips.Generic_Ravage_Magicka_Poison, -- of Drain Magicka (2 Traits)
     [79138]                         = Tooltips.Generic_Magicka_Regen_Potion, -- of Drain Magicka (2 Traits)
     [79037]                         = Tooltips.Generic_Ravage_Magicka_Poison, -- of Damage Magicka (2 Traits)
@@ -3011,21 +3014,22 @@ Effects.TooltipNameOverride = {
     [80003]                         = Tooltips.Generic_Marked, -- Conspicuous Posion (2 Traits)
     [80002]                         = Tooltips.Generic_Reveal, -- Stealth-Draining Poison (2 Traits)
     [80004]                         = Tooltips.Generic_Marked, -- Conspicuous Posion (2 Traits)
-    [79699]                         = Tooltips.Generic_Poison, -- ... of Gradual Drain Health (2 Traits)
+    [79699]                         = Tooltips.Generic_Ravage_Health_Poison, -- ... of Gradual Drain Health (2 Traits)
     [79700]                         = Tooltips.Generic_HoT_Potion, -- ... of Gradual Drain Health (2 Traits)
-    [79701]                         = Tooltips.Generic_Poison, -- ... of Gradual Drain Health (3 Traits)
+    [79701]                         = Tooltips.Generic_Ravage_Health_Poison, -- ... of Gradual Drain Health (3 Traits)
     [79702]                         = Tooltips.Generic_HoT_Potion, -- ... of Gradual Drain Health (3 Traits)
-    [79707]                         = Tooltips.Generic_Poison, -- ... of Gradual Ravage Health (2 Traits)
-    [81553]                         = Tooltips.Generic_Poison, -- Cloudy Damage Health Poison
-    [81551]                         = Tooltips.Generic_Poison, -- Cloudy Gradual Ravage Health Poison
-    [88476]                         = Tooltips.Generic_Poison, -- Crown Debilitating Poison
+    [79707]                         = Tooltips.Generic_Ravage_Health_Poison, -- ... of Gradual Ravage Health (2 Traits)
+    [79708]                         = Tooltips.Generic_Ravage_Health_Poison, -- ... of Gradual Ravage Health (3 Traits)
+    [81553]                         = Tooltips.Generic_Ravage_Health_Poison, -- Cloudy Damage Health Poison
+    [81551]                         = Tooltips.Generic_Ravage_Health_Poison, -- Cloudy Gradual Ravage Health Poison
+    [88476]                         = Tooltips.Generic_Ravage_Health_Poison, -- Crown Debilitating Poison
     [88471]                         = Tooltips.Generic_Ravage_Magicka_Poison, -- Crown Draining Poison
     [88475]                         = Tooltips.Generic_Ravage_Stamina_Poison, -- Crown Draining Poison
     [88473]                         = Tooltips.Generic_Magicka_Regen_Potion, -- Crown Draining Poison
     [88474]                         = Tooltips.Generic_Stamina_Regen_Potion, -- Crown Draining Poison
     [88462]                         = Tooltips.Generic_Immobilize, -- Crown Trapping Poison
-    [81274]                         = Tooltips.Generic_Poison, -- Crown Lethal Poison
-    [81275]                         = Tooltips.Generic_Poison, -- Crown Lethal Poison
+    [81274]                         = Tooltips.Generic_Ravage_Health_Poison, -- Crown Lethal Poison
+    [81275]                         = Tooltips.Generic_Ravage_Health_Poison, -- Crown Lethal Poison
 
     -- Justice NPC's
     [77941]                         = Tooltips.Generic_Reveal_No_Dur, -- Revealed
@@ -3153,6 +3157,7 @@ Effects.PotionIconTable = {
     [64568] = { icon = 'LuiExtended/media/icons/potions/potion_012.dds',  normalize = 'esoui/art/icons/ability_buff_major_savagery.dds' }, -- of Weapon Critical (Major Savagery)
     [64555] = { icon = 'LuiExtended/media/icons/potions/potion_005.dds',  normalize = 'esoui/art/icons/ability_buff_major_brutality.dds' }, -- of Weapon Power (Major Brutality)
     [125027] = { icon = 'LuiExtended/media/icons/potions/potion_011.dds',  normalize = 'esoui/art/icons/ability_buff_minor_heroism.dds' }, -- of Heroism (Minor Heroism)
+    [140700] = { icon = 'LuiExtended/media/icons/potions/potion_018.dds', normalize = 'esoui/art/icons/ability_debuff_major_timid.dds' }, -- of Timidity (Minor Timidity)
 
     -- Crafted Potions (3 Traits)
     [64565] = { icon = 'LuiExtended/media/icons/potions/potion_007.dds',  normalize = 'esoui/art/icons/ability_buff_major_resolve.dds' }, -- of Armor (Major Resolve)
@@ -3180,6 +3185,7 @@ Effects.PotionIconTable = {
     [64569] = { icon = 'LuiExtended/media/icons/potions/potion_012.dds',  normalize = 'esoui/art/icons/ability_buff_major_savagery.dds' }, -- of Weapon Critical (Major Savagery)
     [64554] = { icon = 'LuiExtended/media/icons/potions/potion_005.dds',  normalize = 'esoui/art/icons/ability_buff_major_brutality.dds' }, -- of Weapon Power (Major Brutality)
     [125041] = { icon = 'LuiExtended/media/icons/potions/potion_011.dds',  normalize = 'esoui/art/icons/ability_buff_minor_heroism.dds' }, -- of Heroism (Minor Heroism)
+    [140701] = { icon = 'LuiExtended/media/icons/potions/potion_018.dds', normalize = 'esoui/art/icons/ability_debuff_major_timid.dds' }, -- of Timidity (Minor Timidity)
 
     -- Vendor Potions + AVA Potions + Roguish Draughts
     [63672] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds',  normalize = 'esoui/art/icons/ability_buff_major_fortitude.dds'  }, -- of Health (Major Fortitude)
@@ -3247,6 +3253,7 @@ Effects.PoisonIconTable = {
     [79861] = { icon = 'LuiExtended/media/icons/poisons/poison_1_orange_r.dds', normalize = 'esoui/art/icons/ability_debuff_minor_defile.dds' }, -- Minor Defile (Defiling Poison) DEBUFF
     --[125203] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Trauma (Traumatic Poison) DEBUFF
     [125204] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_g.dds', normalize = 'esoui/art/icons/ability_buff_minor_heroism.dds' }, -- Minor Heroism (Traumatic Poison) BUFF
+    [134149] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', normalize = 'esoui/art/icons/ability_debuff_major_timid.dds' }, -- Minor Timidity (Timidity Poison) DEBUFF
 
     -- Crafted Poisons (3 Traits)
     [79306] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_r.dds', normalize = 'esoui/art/icons/ability_debuff_minor_breach.dds' }, -- Drain Spell Resist (Ward-Draining Poison) DEBUFF
@@ -3282,6 +3289,7 @@ Effects.PoisonIconTable = {
     [79862] = { icon = 'LuiExtended/media/icons/poisons/poison_1_orange_r.dds', normalize = 'esoui/art/icons/ability_debuff_minor_defile.dds' }, -- Minor Defile (Defiling Poison) DEBUFF
     --[125205] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', normalize = 'esoui/art/icons/' }, -- Minor Traumatized (Traumatic Poison) DEBUFF
     [125206] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_g.dds', normalize = 'esoui/art/icons/ability_buff_minor_heroism.dds' }, -- Minor Heroism (Traumatic Poison) BUFF
+    [134150] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', normalize = 'esoui/art/icons/ability_debuff_major_timid.dds' }, -- Minor Timidity (Timidity Poison) DEBUFF
 
     -- Vendor Poisons
     [81554] = { icon = 'LuiExtended/media/icons/poisons/poison_1_green_r.dds', normalize = 'esoui/art/icons/ability_debuff_minor_hindrance.dds' }, -- Hindrance (Cloudy Hindering Poison) DEBUFF
@@ -3368,10 +3376,11 @@ Effects.EffectOverride = {
     [64568] = { icon = 'LuiExtended/media/icons/potions/potion_012.dds', tooltip = Abilities.Potion }, -- of Weapon Critical (Major Savagery)
     [64555] = { icon = 'LuiExtended/media/icons/potions/potion_005.dds', tooltip = Abilities.Potion }, -- of Weapon Power (Major Brutality)
     [125027] = { icon = 'LuiExtended/media/icons/potions/potion_011.dds', tooltip = Abilities.Potion }, -- of Heroism (Minor Heroism)
+    [140700] = { icon = 'LuiExtended/media/icons/potions/potion_018.dds', tooltip = Abilities.Potion }, -- of Timidity (Minor Timidity)
 
     -- Crafted Potions (3 Traits)
     [64565] = { icon = 'LuiExtended/media/icons/potions/potion_007.dds', tooltip = Abilities.Potion }, -- of Armor (Major Resolve)
-    -- No ... of Creeping Ravage Health
+    [79710] = { icon = 'LuiExtended/media/icons/potions/potion_014r.dds', tooltip = Abilities.Potion }, -- of Creeping Ravage Health (Creeping Ravage Health)
     [79860] = { icon = 'LuiExtended/media/icons/potions/potion_007r.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Abilities.Potion }, -- of Defile (Minor Defile)
     [45458] = { icon = 'LuiExtended/media/icons/potions/potion_009.dds', tooltip = Abilities.Potion }, -- of Detection (Increase Detection)
     [63670] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds', tooltip = Abilities.Potion }, -- of Health (Major Fortitude)
@@ -3401,6 +3410,7 @@ Effects.EffectOverride = {
     [64569] = { icon = 'LuiExtended/media/icons/potions/potion_012.dds', tooltip = Abilities.Potion }, -- of Weapon Critical (Major Savagery)
     [64554] = { icon = 'LuiExtended/media/icons/potions/potion_005.dds', tooltip = Abilities.Potion }, -- of Weapon Power (Major Brutality)
     [125041] = { icon = 'LuiExtended/media/icons/potions/potion_011.dds', tooltip = Abilities.Potion }, -- of Heroism (Minor Heroism)
+    [140701] = { icon = 'LuiExtended/media/icons/potions/potion_018.dds', tooltip = Abilities.Potion }, -- of Timidity (Minor Timidity)
 
     -- Vendor Potions + AVA Potions + Roguish Draughts
     [63672] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds', tooltip = Abilities.Potion  }, -- of Health (Major Fortitude)
@@ -3521,6 +3531,7 @@ Effects.EffectOverride = {
     [79861] = { icon = 'LuiExtended/media/icons/poisons/poison_1_orange_r.dds', tooltip = Abilities.Poison }, -- Minor Defile (Defiling Poison) DEBUFF
     [125203] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', tooltip = Abilities.Poison }, -- Trauma (Traumatic Poison) DEBUFF
     [125204] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_g.dds', tooltip = Abilities.Poison }, -- Minor Heroism (Traumatic Poison) BUFF
+    [134149] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', tooltip = Abilities.Poison }, -- Minor Timidity (Timidity Poison) DEBUFF
 
     -- Crafted Poisons (3 Traits)
     [79135] = { icon = 'LuiExtended/media/icons/poisons/poison_2_red_r.dds', tooltip = Abilities.Poison }, -- Drain Health (Drain Health Poison) DEBUFF
@@ -3561,7 +3572,7 @@ Effects.EffectOverride = {
     [79701] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_r.dds', tooltip = Abilities.Poison }, -- Drain Health (Gradual Health Drain Poison) DEBUFF
     [81348] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_r.dds', tooltip = Abilities.Poison }, -- Drain Health (Gradual Health Drain Poison) DEBUFF
     [79702] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_g.dds', tooltip = Abilities.Poison }, -- Restore Health (Gradual Health Drain Poison) BUFF
-    -- No Gradual Ravage Health
+    [79708] = { icon = 'LuiExtended/media/icons/poisons/poison_1_orange_r.dds', tooltip = Abilities.Poison }, -- Creeping Ravage Health (Gradual Ravage Health Poison) DEBUFF
     [79726] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_r.dds', tooltip = Abilities.Poison }, -- Minor Vulnerability (Protection-Reversing Poison) DEBUFF
     [79727] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_g.dds', tooltip = Abilities.Poison }, -- Minor Protection (Protection-Reversing Poison) BUFF
     [79720] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', tooltip = Abilities.Poison }, -- Minor Vulnerability (Vulnerability Poison) DEBUFF
@@ -3570,6 +3581,7 @@ Effects.EffectOverride = {
     [79862] = { icon = 'LuiExtended/media/icons/poisons/poison_1_orange_r.dds', tooltip = Abilities.Poison }, -- Minor Defile (Defiling Poison) DEBUFF
     [125205] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', name = Abilities.Skill_Trauma, tooltip = Abilities.Poison }, -- Minor Traumatized (Traumatic Poison) DEBUFF
     [125206] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_g.dds', tooltip = Abilities.Poison }, -- Minor Heroism (Traumatic Poison) BUFF
+    [134150] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', tooltip = Abilities.Poison }, -- Minor Timidity (Timidity Poison) DEBUFF
 
     -- Vendor Poisons
     [81553] = { icon = 'LuiExtended/media/icons/poisons/poison_1_red_r.dds', tooltip = Abilities.Poison }, -- Ravage Health (Cloudy Damage Health Poison) DEBUFF
@@ -4673,6 +4685,7 @@ Effects.EffectOverride = {
 
     -- Pet Effects
     [63794] = { hide = true }, -- Taunt
+    [43963] = { hide = true }, -- Player Pet Threat
     [112170] = { hide = true }, -- CC Immunity
 
     -- Housing
@@ -5179,9 +5192,6 @@ Effects.EffectOverride = {
     [31412] = { icon = 'esoui/art/icons/ability_sorcerer_044.dds' }, -- Expert Summoner (Expert Summoner - Rank 1)
     [45199] = { icon = 'esoui/art/icons/ability_sorcerer_044.dds' }, -- Expert Summoner (Expert Summoner - Rank 2)
 
-    [31415] = { hide = true }, -- Expert Summoner (Expert Summoner - Rank 1)
-    [46198] = { hide = true }, -- Expert Summoner (Expert Summoner - Rank 2)
-
     -- Storm Calling
 
     [31419] = { icon = 'LuiExtended/media/icons/abilities/passive_sorcerer_capacitor.dds' }, -- Capacitor
@@ -5247,7 +5257,6 @@ Effects.EffectOverride = {
 
     -- Summon Unstable Familiar / Summon Unstable Clannfear / Summon Volatile Familiar
     [27287] = { hide = true }, -- Birth Unstable Familiar (Summon Unstable Familiar - All Morphs)
-    [43963] = { hide = true }, -- Pet Bonus Threat (Summon Unstable Familiar - All Morphs)
     [23304] = { tooltip = Tooltips.Skill_Unstable_Familiar }, -- Summon Unstable Familiar (Summon Unstable Familiar)
     [27850] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_familiar_melee.dds', name = Abilities.Skill_Entropic_Touch }, -- Familiar Melee (Summon Unstable Familiar + Summon Volatile Familiar)
     [108842] = { name = Abilities.Skill_Unstable_Pulse, tooltip = Tooltips.Skill_Familiar_Damage_Pulse, icon = 'esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds'  }, -- Volatile Familiar Damage Pulsi (Summon Unstable Familiar)

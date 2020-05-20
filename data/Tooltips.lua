@@ -77,6 +77,7 @@ LUIE.Data.Tooltips = {
     Skill_Minor_Uncertainty                         = GetString(SI_LUIE_SKILL_MINOR_UNCERTAINTY_TP),
     Skill_Minor_Cowardice                           = GetString(SI_LUIE_SKILL_MINOR_COWARDICE_TP),
     Skill_Minor_Mangle                              = GetString(SI_LUIE_SKILL_MINOR_MANGLE_TP),
+    Skill_Minor_Timidity                            = GetString(SI_LUIE_SKILL_MINOR_TIMIDITY_TP),
 
     -- Aegis/Slayer
     Skill_Minor_Aegis                               = GetString(SI_LUIE_SKILL_MINOR_AEGIS_TP),
@@ -216,9 +217,11 @@ LUIE.Data.Tooltips = {
     Generic_Invisibility                            = GetString(SI_LUIE_SKILL_GENERIC_INVISIBILITY_TP),
     Generic_Detection_Potion                        = GetString(SI_LUIE_SKILL_GENERIC_DETECTION_POTION_TP),
     Generic_Detection_NPC                           = GetString(SI_LUIE_SKILL_GENERIC_DETECTION_NPC_TP),
+
+    Generic_Ravage_Health_Potion                    = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_HEALTH_POTION_TP),
     Generic_Ravage_Magicka_Potion                   = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POTION_TP),
     Generic_Ravage_Stamina_Potion                   = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POTION_TP),
-
+    Generic_Ravage_Health_Poison                    = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_HEALTH_POISON_TP),
     Generic_Ravage_Magicka_Poison                   = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POISON_TP),
     Generic_Ravage_Stamina_Poison                   = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POISON_TP),
 

@@ -164,10 +164,11 @@ LUIE.DebugAuras = {
     [64568] = true, -- Major Savagery (... of Weapon Critical)
     [64555] = true, -- Major Brutality (... of Weapon Power)
     [125027] = true, -- Minor Heroism (... of Heroism)
+    [140700] = true, -- of Timidity (Minor Timidity)
 
     -- Crafted Potions (3 Traits)
     [64565] = true, -- Major Resolve (... of Armor)
-    -- (no ... of Creeping Ravage Health)
+    [79710] = true, -- Creeping Ravage Health (... of Creeping Ravage Health)
     [79860] = true, -- Minor Defile (... of Defile)
     [45458] = true, -- Increase Detection (... of Detection)
     [63670] = true, -- Major Fortitude (... of Health)
@@ -198,6 +199,7 @@ LUIE.DebugAuras = {
     [64569] = true, -- Major Savagery (... of Weapon Critical)
     [64554] = true, -- Major Brutality (... of Weapon Power)
     [125041] = true, -- Minor Heroism (... of Heroism)
+    [140701] = true, -- of Timidity (Minor Timidity)
 
     -- Vendor Potions + AVA Potions + Roguish Draughts
     [63672] = true, -- Major Fortitude (... of Health)
@@ -321,6 +323,7 @@ LUIE.DebugAuras = {
     [79861] = true, -- Minor Defile (Defiling Poison)
     [125203] = true, -- Trauma (Traumatic Poison)
     [125204] = true, -- Minor Heroism (Traumatic Poison)
+    [134149] = true, -- Minor Timidity (Timidity Poison) DEBUFF
 
     -- Crafted Poisons (3 Traits)
     [79135] = true, -- Drain Health (Drain Health Poison)
@@ -362,8 +365,7 @@ LUIE.DebugAuras = {
     [79701] = true, --  Creeping Drain Health (Gradual Health Drain Poison)
     [81348] = true, -- Creeping Drain Helath (Gradual Health Drain Poison)
     [79702] = true, -- Lingering Restore Health (Gradual Health Drain Poison)
-    -- (no Gradual Ravage Health Poison)
-    -- (no Gradual Ravage Health Poison)
+    [79708] = true, -- Creeping Ravage Health (Gradual Ravage Health Poison)
     [79726] = true, -- Minor Vulnerability (Protection-Reversing Poison)
     [79727] = true, -- Minor Protection (Protection-Reversing Poison)
     [79720] = true, -- Minor Vulnerability (Vulnerability Poison)
@@ -372,6 +374,7 @@ LUIE.DebugAuras = {
     [79862] = true, -- Minor Defile (Defiling Poison)
     [125205] = true, -- Minor Traumatizing (Traumatic Poison)
     [125206] = true, -- Minor Heroism (Traumatic Poison)
+    [134150] = true, -- Minor Timidity (Timidity Poison) DEBUFF
 
     -- Vendor Poisons
     [81553] = true, -- Ravage Health (Cloudy Damage Health Poison)
@@ -2705,9 +2708,11 @@ LUIE.DebugAuras = {
 
     -- PET EFFECTS
     [28609] = true, -- Dummy Target Setter
-    [43958] = true, -- Pet AoE Resistance
-    [70116] = true, -- Pet PvP Damage Reduction
-    [62197] = true, -- Pet Crit Chance
+    [43958] = true, -- Player Pet Defenses
+    [70116] = true, -- Player Pet Battle Spirit
+    [71904] = true, -- Player Pet Speed
+    [62197] = true, -- Player Pet Critical Chance
+    [43963] = true, -- Player Pet Threat
     [62201] = true, -- Taunt
     [63795] = true, -- Taunt
     [63794] = true, -- Taunt
@@ -3385,8 +3390,6 @@ LUIE.DebugAuras = {
     [76632] = true, -- Manifestation of Terror (Manifestation of Terror)
 
     [65269] = true, -- Shade Initialize (Summon Shade - All Morphs)
-    [71904] = true, -- Player Pet Speed
-    [62197] = true, -- Pet Crit Chance (Summon Shade - All Morphs)
     --[85086] = true, -- Boss (Summon Shade - All Morphs)
     --[85087] = true, -- Boss (Summon Shade - All Morphs)
 
@@ -3691,7 +3694,6 @@ LUIE.DebugAuras = {
 
     [27287] = true, -- Birth Unstable Familiar (Summon Unstable Familiar - All Ranks)
     [29536] = true, -- Familiar Set Target (Summon Unstable Familiar - All Ranks)
-    [43963] = true, -- Pet Bonus Threat (Summon Unstable Familiar - All Ranks)
     [27850] = true, -- Familiar Melee (Summon Unstable Familiar + Summon Volatile Familiar)
 
     [23304] = true, -- Summon Unstable Familiar (Summon Unstable Familiar)

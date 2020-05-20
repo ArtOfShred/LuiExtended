@@ -65,6 +65,7 @@ local AbilityTables = {
     Skill_Minor_Uncertainty           = 47204,
     Skill_Minor_Cowardice             = 46202,
     Skill_Minor_Mangle                = 39168,
+    Skill_Minor_Timidity              = 140700,
     Skill_Minor_Slayer                = 76618,
     Skill_Minor_Aegis                 = 76617,
     Skill_Off_Balance                 = 14062,
