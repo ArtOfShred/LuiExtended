@@ -1,3 +1,23 @@
+### Version 6.0.8
+
+General
+- Updated icons/tooltips/alerts/cc tracker/etc for Elsweyr Tutorial, Stros M'Kai and most of Betnikh.
+- Fixed an issue with the Loot History window displacing when you unlocked and moved its position.
+- Fixed the UI error thrown when trying to reset movable base game UI elements to their default position.
+- Fixed an issue where when learning skills with a non-english localization the names would not properly format and show ^f and ^m tags.
+
+Chat Announcements
+- Tweaked a few minor ordering issues with quest update message chat announcements.
+- Added some additional conditional messages for quest item acquisition/usage.
+
+Combat Info
+- Fixed an issue with the Dampen Magic ability used by some NPC casters throwing alerts every time the shield refreshed (whenever the shield took damage). It will now only display an alert on cast.
+
+Unit Frames
+- Fixed an issue where the confirmation messages for adding/removing pets to the Whitelist referred to it incorrectly as the "Pet Blacklist."
+
+---
+
 ### Version 6.0.7
 
 Unit Frames
