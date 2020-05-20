@@ -844,7 +844,7 @@ function AbilityAlerts.OnCombatIn(eventCode, resultType, isError, abilityName, a
     if not Alerts[abilityId] then return end
 
     local Settings = CombatInfo.SV.alerts
-    abilityName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
+    abilityName = zo_strformat(SI_UNIT_NAME, GetAbilityName(abilityId))
     local abilityIcon = GetAbilityIcon(abilityId)
 
     local sourceNameCheck = zo_strformat("<<t:1>>", sourceName)

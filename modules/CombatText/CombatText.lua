@@ -352,7 +352,7 @@ function CombatText.AddToCustomList(list, input)
     local id = tonumber(input)
     local listRef = list == CombatText.SV.blacklist and GetString(SI_LUIE_CUSTOM_LIST_CT_BLACKLIST) or ""
     if id and id > 0 then
-        local name = zo_strformat("<<C:1>>", GetAbilityName(id))
+        local name = zo_strformat(SI_UNIT_NAME, GetAbilityName(id))
         if name ~= nil and name ~= "" then
             local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = true
@@ -376,7 +376,7 @@ function CombatText.RemoveFromCustomList(list, input)
     local id = tonumber(input)
     local listRef = list == CombatText.SV.blacklist and GetString(SI_LUIE_CUSTOM_LIST_CT_BLACKLIST) or ""
     if id and id > 0 then
-        local name = zo_strformat("<<C:1>>", GetAbilityName(id))
+        local name = zo_strformat(SI_UNIT_NAME, GetAbilityName(id))
         if name ~= nil and name ~= "" then
             local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = nil

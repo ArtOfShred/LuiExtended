@@ -1265,7 +1265,7 @@ function LUIE.InitializeHooks()
                 if skillProgressionData:GetSkillData():GetPointAllocator():CanPurchase() then
                     local dialogAbility = dialog.ability
                     local id = skillProgressionData:GetAbilityId()
-                    dialog.abilityName:SetText(GetAbilityName(id))
+                    dialog.abilityName:SetText(zo_strformat(SI_UNIT_NAME, GetAbilityName(id)))
 
                     dialogAbility.skillProgressionData = skillProgressionData
                     dialogAbility.icon:SetTexture(GetAbilityIcon(id))

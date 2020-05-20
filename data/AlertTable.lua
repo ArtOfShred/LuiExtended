@@ -477,7 +477,7 @@ LUIE.Data.AlertTable = {
     [76180] = { summon = true, auradetect = true, priority = 2, fakeName = "" }, -- Shattered Harmony (Defiled Aegis)
 
     -- MONSTERS
-    [10270] = { block = true, avoid = true, priority = 2, eventdetect = true, refire = 1000, result = ACTION_RESULT_BEGIN, duration = 2550 }, -- Quake (Gargoyle)
+    [10270] = { block = true, avoid = true, priority = 2, eventdetect = true, refire = 1250, result = ACTION_RESULT_BEGIN, duration = 2550 }, -- Quake (Gargoyle)
     [10256] = { block = true, bs = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1500, cc = LUIE_CC_TYPE_STUN }, -- Lacerate (Gargoyle)
 
     [26124] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1800, eventdetect = true }, -- Shatter (Giant)

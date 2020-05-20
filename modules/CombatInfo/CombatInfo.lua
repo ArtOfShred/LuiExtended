@@ -1522,7 +1522,7 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
     end
 
     local icon = GetAbilityIcon(abilityId)
-    local name = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
+    local name = zo_strformat(SI_UNIT_NAME, GetAbilityName(abilityId))
 
     local duration
     local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId)

@@ -506,7 +506,7 @@ function SpellCastBuffs.AddToCustomList(list, input)
     local id = tonumber(input)
     local listRef = list == SpellCastBuffs.SV.PromBuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS) or list == SpellCastBuffs.SV.PromDebuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS) or list == SpellCastBuffs.SV.BlacklistTable and GetString(SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST) or ""
     if id and id > 0 then
-        local name = zo_strformat("<<C:1>>", GetAbilityName(id))
+        local name = zo_strformat(SI_UNIT_NAME, GetAbilityName(id))
         if name ~= nil and name ~= "" then
             local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = true
@@ -531,7 +531,7 @@ function SpellCastBuffs.RemoveFromCustomList(list, input)
     local id = tonumber(input)
     local listRef = list == SpellCastBuffs.SV.PromBuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS) or list == SpellCastBuffs.SV.PromDebuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS) or list == SpellCastBuffs.SV.BlacklistTable and GetString(SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST) or ""
     if id and id > 0 then
-        local name = zo_strformat("<<C:1>>", GetAbilityName(id))
+        local name = zo_strformat(SI_UNIT_NAME, GetAbilityName(id))
         if name ~= nil and name ~= "" then
             local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = nil
@@ -1791,7 +1791,7 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
     if changeType == EFFECT_RESULT_FADED then -- delete Effect
         SpellCastBuffs.EffectsList[context][effectSlot] = nil
         if Effects.EffectCreateSkillAura[ abilityId ] and Effects.EffectCreateSkillAura [ abilityId ].removeOnEnd then
-            local name = zo_strformat("<<C:1>>", GetAbilityName(Effects.EffectCreateSkillAura[abilityId].abilityId))
+            local name = zo_strformat(SI_UNIT_NAME, GetAbilityName(Effects.EffectCreateSkillAura[abilityId].abilityId))
             local id = Effects.EffectCreateSkillAura[abilityId].abilityId
             if not (SpellCastBuffs.SV.BlacklistTable[name] or SpellCastBuffs.SV.BlacklistTable[id]) then
                 local simulatedContext = unitTag .. effectType
@@ -1847,7 +1847,7 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
         --EffectCreateSkillAura
         if Effects.EffectCreateSkillAura[abilityId] then
             if (not Effects.EffectCreateSkillAura[abilityId].requiredStack) or (Effects.EffectCreateSkillAura[abilityId].requiredStack and stackCount == Effects.EffectCreateSkillAura[abilityId].requiredStack) then
-                local name = zo_strformat("<<C:1>>", GetAbilityName(Effects.EffectCreateSkillAura[abilityId].abilityId))
+                local name = zo_strformat(SI_UNIT_NAME, GetAbilityName(Effects.EffectCreateSkillAura[abilityId].abilityId))
                 local id = Effects.EffectCreateSkillAura[abilityId].abilityId
                 if not (SpellCastBuffs.SV.BlacklistTable[name] or SpellCastBuffs.SV.BlacklistTable[id]) then
                     local simulatedContext = unitTag .. effectType
@@ -3265,7 +3265,7 @@ function SpellCastBuffs.updateIcons(currentTime, sortedList, container)
             end
 
             if buff.name then
-                buff.name:SetText(zo_strformat("<<C:1>>", effect.name))
+                buff.name:SetText(zo_strformat(SI_UNIT_NAME, effect.name))
             end
 
         end

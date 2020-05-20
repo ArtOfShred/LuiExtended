@@ -40,7 +40,7 @@ function CombatTextCombatEventListener:OnCombatIn(...)
 
     local Settings = LUIE.CombatText.SV
     local combatType, togglesInOut = CombatTextConstants.combatType.INCOMING, Settings.toggles.incoming
-    abilityName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
+    abilityName = zo_strformat(SI_UNIT_NAME, GetAbilityName(abilityId))
 
     local sourceNameCheck = zo_strformat("<<t:1>>", sourceName)
 
@@ -187,7 +187,7 @@ function CombatTextCombatEventListener:OnCombatOut(...)
 
     local Settings = LUIE.CombatText.SV
     local combatType, togglesInOut = CombatTextConstants.combatType.OUTGOING, Settings.toggles.outgoing
-    abilityName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
+    abilityName = zo_strformat(SI_UNIT_NAME, GetAbilityName(abilityId))
 
     -- Bail out if the abilityId is on the Blacklist Table
     if Settings.blacklist[abilityId] or Settings.blacklist[abilityName] then
