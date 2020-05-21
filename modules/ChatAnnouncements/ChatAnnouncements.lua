@@ -800,17 +800,13 @@ local g_notableIDs = {
     [68342]  = true,    -- Hakeijo
 }
 
+-- List of items that can be removed from the players equipped item slots.
 local g_removeableIDs = {
     [44486] = true, -- Prismatic Blade (Fighters Guild Quests)
     [44487] = true, -- Prismatic Greatblade (Fighters Guild Quests)
     [44488] = true, -- Prismatic Long Bow (Fighters Guild Quests)
     [44489] = true, -- Prismatic Flamestaff (Fighters Guild Quests)
     [33235] = true, -- Wabbajack (Mages Guild Quests)
-
-    -- New Life Festival
-    [100393] = true, -- Histmuck Blobfin (Fish Boon Feast)
-    [100394] = true, -- Shadowfen Creeping Leech (Fish Boon Feast)
-    [100395] = true, -- Black Marsh Cucumber (Fish Boon Feast)
 }
 
 -- List of items to blacklist as annyoing loot
