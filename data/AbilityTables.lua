@@ -865,7 +865,6 @@ local AbilityTables = {
     -- ---------------------------------------------------
 
     Skill_Battle_Spirit               = GetString(SI_LUIE_SKILL_BATTLE_SPIRIT),
-    Skill_Imperial_City               = GetCollectibleName(154),
     Skill_Edge_Keep_Bonus_I           = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_SKILL_EDGE_KEEP_BONUS), "I"),
     Skill_Edge_Keep_Bonus_II          = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_SKILL_EDGE_KEEP_BONUS), "II"),
     Skill_Edge_Keep_Bonus_III         = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_SKILL_EDGE_KEEP_BONUS), "III"),
@@ -889,6 +888,10 @@ local AbilityTables = {
     Skill_Meatbag_Catapult            = 14774,
     Skill_Oil_Catapult                = 16789,
     Skill_Scattershot_Catapult        = 14611,
+
+    Skill_Shock_Lancer                = 138555,
+    Skill_Fire_Lancer                 = 138426,
+    Skill_Frost_Lancer                = 138551,
 
     Skill_Cold_Stone_Trebuchet        = GetString(SI_LUIE_SKILL_COLD_STONE_TREBUCHET),
     Skill_Cold_Fire_Trebuchet         = GetString(SI_LUIE_SKILL_COLD_FIRE_TREBUCHET),

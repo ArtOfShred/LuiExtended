@@ -100,6 +100,12 @@ CastBarTable.BreakCastOnMove = {
     [66436] = true, -- Create Ballista... (Cold Fire Ballista)
     [66435] = true, -- Create Ballista... (Cold Fire Ballista)
 
+    [135861] = true, -- Create Lance Cannon... (Shock Lancer)
+
+    [135858] = true, -- Create Lance Cannon... (Fire Lancer)
+
+    [135867] = true, -- Create Lance Cannon... (Frost Lancer)
+
     [22570] = true, -- Create Boiling Oil... (Flaming Oil)
     [15876] = true, -- Create Large Ram... (Battering Ram)
     [16171] = true, -- Create Large Ram... (Battering Ram)
@@ -636,6 +642,12 @@ CastBarTable.IsCast = {
     [66437] = true, -- Create Ballista... (Cold Fire Ballista)
     [66436] = true, -- Create Ballista... (Cold Fire Ballista)
     [66435] = true, -- Create Ballista... (Cold Fire Ballista)
+
+    [135861] = true, -- Create Lance Cannon... (Shock Lancer)
+
+    [135858] = true, -- Create Lance Cannon... (Fire Lancer)
+
+    [135867] = true, -- Create Lance Cannon... (Frost Lancer)
 
     [22570] = true, -- Create Boiling Oil... (Flaming Oil)
     [15876] = true, -- Create Large Ram... (Battering Ram)

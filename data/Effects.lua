@@ -2883,8 +2883,8 @@ Effects.EffectHideSCT = {
 -- Using a separate chart for ZOS Artificial Effects just in case this is significantly expanded at any point -- Overrides Artificial Effect id name or icon.
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.ArtificialEffectOverride = {
-    --[0] = { icon = 'esoui/art/icons/artificialeffect_battle-spirit.dds' }, -- Battle Spirit (Cyrodiil, Duel)
-    [2] = { name = zo_strformat("<<1>> (<<2>>)", Abilities.Skill_Battle_Spirit, Abilities.Skill_Imperial_City) }, -- Battle Spirit Imperial City
+    [0] = { tooltip = Tooltips.Innate_Battle_Spirit }, -- Battle Spirit (Cyrodiil, Duel, Battleground)
+    [2] = { name = Abilities.Skill_Battle_Spirit, tooltip = Tooltips.Innate_Battle_Spirit_Imperial_City }, -- Battle Spirit Imperial City
     [3] = { tooltip = Tooltips.Innate_Battleground_Deserter }, -- Battleground Deserter Penalty
 }
 
@@ -2972,6 +2972,7 @@ Effects.TooltipNameOverride = {
     [45460]                         = Tooltips.Generic_Invisibility, -- ... of Invisibility (3 Traits)
     [86780]                         = Tooltips.Generic_Invisibility, -- Crown Invisibility Potion
     [86699]                         = Tooltips.Generic_Invisibility, -- Gold Coast Survivor Elixir
+    [137002]                        = Tooltips.Generic_Invisibility, -- Alliance Health Draught
     [78058]                         = Tooltips.Generic_Invisibility, -- Roguish Escape Draught
     [79709]                         = Tooltips.Generic_Ravage_Health_Potion, -- ... of Creeping Ravage Health (2 Traits)
     [79710]                         = Tooltips.Generic_Ravage_Health_Potion, -- ... of Creeping Ravage Health (3 Traits)
@@ -3139,83 +3140,85 @@ Effects.PotionIconTable = {
     [45236] = { icon = 'LuiExtended/media/icons/potions/potion_009.dds', normalize = 'LuiExtended/media/icons/abilities/ability_buff_detection.dds' }, -- of Detection (Increase Detection)
     [45222] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds', normalize = 'esoui/art/icons/ability_buff_major_fortitude.dds' }, -- of Health (Major Fortitude)
     --[45239] = { icon = 'LuiExtended/media/icons/potions/potion_008.dds', normalize = 'esoui/art/icons/' }, -- of Immovability (Unstoppable)
-    [45224] = { icon = 'LuiExtended/media/icons/potions/potion_002.dds',  normalize = 'esoui/art/icons/ability_buff_major_intellect.dds' }, -- of Magicka (Major Intellect)
-    [79712] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds',  normalize = 'esoui/art/icons/ability_buff_minor_protection.dds' }, -- of Protection (Minor Protection)
-    [46208] = { icon = 'LuiExtended/media/icons/potions/potion_021.dds',  normalize = 'esoui/art/icons/ability_debuff_minor_fracture.dds' }, -- of Ravage Armor (Minor Fracture)
-    [47204] = { icon = 'LuiExtended/media/icons/potions/potion_020.dds',  normalize = 'esoui/art/icons/ability_debuff_minor_uncertainty.dds' }, -- of Ravage Spell Critical (Minor Uncertainty)
-    [46202] = { icon = 'LuiExtended/media/icons/potions/potion_020.dds',  normalize = 'esoui/art/icons/ability_debuff_minor_cowardice.dds' }, -- of Ravage Spell Power (Minor Cowardice)
-    [46206] = { icon = 'LuiExtended/media/icons/potions/potion_018.dds',  normalize = 'esoui/art/icons/ability_debuff_minor_breach.dds' }, -- of Ravage Spell Protection (Minor Breach)
-    [47203] = { icon = 'LuiExtended/media/icons/potions/potion_019.dds',  normalize = 'esoui/art/icons/ability_debuff_minor_enervation.dds' }, -- of Ravage Weapon Critical (Minor Enervation)
-    [46204] = { icon = 'LuiExtended/media/icons/potions/potion_019.dds',  normalize = 'esoui/art/icons/ability_debuff_minor_maim.dds' }, -- of Ravage Weapon Power (Minor Maim)
-    [46210] = { icon = 'LuiExtended/media/icons/potions/potion_017.dds',  normalize = 'esoui/art/icons/ability_debuff_minor_hindrance.dds' }, -- of Slow (Hindrance)
-    [64566] = { icon = 'LuiExtended/media/icons/potions/potion_010.dds',  normalize = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- of Speed (Major Expedition)
-    [64570] = { icon = 'LuiExtended/media/icons/potions/potion_013.dds',  normalize = 'esoui/art/icons/ability_buff_major_prophecy.dds' }, -- of Spell Critical (Major Prophecy)
-    [64558] = { icon = 'LuiExtended/media/icons/potions/potion_006.dds',  normalize = 'esoui/art/icons/ability_buff_major_sorcery.dds' }, -- of Spell Power (Major Sorcery)
-    [45226] = { icon = 'LuiExtended/media/icons/potions/potion_003.dds',  normalize = 'esoui/art/icons/ability_buff_major_endurance.dds' }, -- of Stamina (Major Endurance)
-    [79848] = { icon = 'LuiExtended/media/icons/potions/potion_014.dds',  normalize = 'esoui/art/icons/ability_buff_major_vitality.dds' }, -- of Vitality (Major Vitality)
-    [79844] = { icon = 'LuiExtended/media/icons/potions/potion_001r.dds',  normalize = 'esoui/art/icons/ability_debuff_minor_vulnerability.dds' }, -- of Vulnerability (Minor Vulnerability)
-    [64568] = { icon = 'LuiExtended/media/icons/potions/potion_012.dds',  normalize = 'esoui/art/icons/ability_buff_major_savagery.dds' }, -- of Weapon Critical (Major Savagery)
-    [64555] = { icon = 'LuiExtended/media/icons/potions/potion_005.dds',  normalize = 'esoui/art/icons/ability_buff_major_brutality.dds' }, -- of Weapon Power (Major Brutality)
-    [125027] = { icon = 'LuiExtended/media/icons/potions/potion_011.dds',  normalize = 'esoui/art/icons/ability_buff_minor_heroism.dds' }, -- of Heroism (Minor Heroism)
+    [45224] = { icon = 'LuiExtended/media/icons/potions/potion_002.dds', normalize = 'esoui/art/icons/ability_buff_major_intellect.dds' }, -- of Magicka (Major Intellect)
+    [79712] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds', normalize = 'esoui/art/icons/ability_buff_minor_protection.dds' }, -- of Protection (Minor Protection)
+    [46208] = { icon = 'LuiExtended/media/icons/potions/potion_021.dds', normalize = 'esoui/art/icons/ability_debuff_minor_fracture.dds' }, -- of Ravage Armor (Minor Fracture)
+    [47204] = { icon = 'LuiExtended/media/icons/potions/potion_020.dds', normalize = 'esoui/art/icons/ability_debuff_minor_uncertainty.dds' }, -- of Ravage Spell Critical (Minor Uncertainty)
+    [46202] = { icon = 'LuiExtended/media/icons/potions/potion_020.dds', normalize = 'esoui/art/icons/ability_debuff_minor_cowardice.dds' }, -- of Ravage Spell Power (Minor Cowardice)
+    [46206] = { icon = 'LuiExtended/media/icons/potions/potion_018.dds', normalize = 'esoui/art/icons/ability_debuff_minor_breach.dds' }, -- of Ravage Spell Protection (Minor Breach)
+    [47203] = { icon = 'LuiExtended/media/icons/potions/potion_019.dds', normalize = 'esoui/art/icons/ability_debuff_minor_enervation.dds' }, -- of Ravage Weapon Critical (Minor Enervation)
+    [46204] = { icon = 'LuiExtended/media/icons/potions/potion_019.dds', normalize = 'esoui/art/icons/ability_debuff_minor_maim.dds' }, -- of Ravage Weapon Power (Minor Maim)
+    [46210] = { icon = 'LuiExtended/media/icons/potions/potion_017.dds', normalize = 'esoui/art/icons/ability_debuff_minor_hindrance.dds' }, -- of Slow (Hindrance)
+    [64566] = { icon = 'LuiExtended/media/icons/potions/potion_010.dds', normalize = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- of Speed (Major Expedition)
+    [64570] = { icon = 'LuiExtended/media/icons/potions/potion_013.dds', normalize = 'esoui/art/icons/ability_buff_major_prophecy.dds' }, -- of Spell Critical (Major Prophecy)
+    [64558] = { icon = 'LuiExtended/media/icons/potions/potion_006.dds', normalize = 'esoui/art/icons/ability_buff_major_sorcery.dds' }, -- of Spell Power (Major Sorcery)
+    [45226] = { icon = 'LuiExtended/media/icons/potions/potion_003.dds', normalize = 'esoui/art/icons/ability_buff_major_endurance.dds' }, -- of Stamina (Major Endurance)
+    [79848] = { icon = 'LuiExtended/media/icons/potions/potion_014.dds', normalize = 'esoui/art/icons/ability_buff_major_vitality.dds' }, -- of Vitality (Major Vitality)
+    [79844] = { icon = 'LuiExtended/media/icons/potions/potion_001r.dds', normalize = 'esoui/art/icons/ability_debuff_minor_vulnerability.dds' }, -- of Vulnerability (Minor Vulnerability)
+    [64568] = { icon = 'LuiExtended/media/icons/potions/potion_012.dds', normalize = 'esoui/art/icons/ability_buff_major_savagery.dds' }, -- of Weapon Critical (Major Savagery)
+    [64555] = { icon = 'LuiExtended/media/icons/potions/potion_005.dds', normalize = 'esoui/art/icons/ability_buff_major_brutality.dds' }, -- of Weapon Power (Major Brutality)
+    [125027] = { icon = 'LuiExtended/media/icons/potions/potion_011.dds', normalize = 'esoui/art/icons/ability_buff_minor_heroism.dds' }, -- of Heroism (Minor Heroism)
     [140700] = { icon = 'LuiExtended/media/icons/potions/potion_018.dds', normalize = 'esoui/art/icons/ability_debuff_major_timid.dds' }, -- of Timidity (Minor Timidity)
 
     -- Crafted Potions (3 Traits)
-    [64565] = { icon = 'LuiExtended/media/icons/potions/potion_007.dds',  normalize = 'esoui/art/icons/ability_buff_major_resolve.dds' }, -- of Armor (Major Resolve)
+    [64565] = { icon = 'LuiExtended/media/icons/potions/potion_007.dds', normalize = 'esoui/art/icons/ability_buff_major_resolve.dds' }, -- of Armor (Major Resolve)
     -- No ... of Creeping Ravage Health
-    [79860] = { icon = 'LuiExtended/media/icons/potions/potion_007r.dds',  normalize = 'esoui/art/icons/ability_debuff_minor_defile.dds' }, -- of Defile (Minor Defile)
-    [45458] = { icon = 'LuiExtended/media/icons/potions/potion_009.dds',  normalize = 'LuiExtended/media/icons/abilities/ability_buff_detection.dds' }, -- of Detection (Increase Detection)
-    [63670] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds',  normalize = 'esoui/art/icons/ability_buff_major_fortitude.dds' }, -- of Health (Major Fortitude)
-    --[45463] = { icon = 'LuiExtended/media/icons/potions/potion_008.dds',  normalize = 'esoui/art/icons/' }, -- of Immovability (Unstoppable)
-    [63676] = { icon = 'LuiExtended/media/icons/potions/potion_002.dds',  normalize = 'esoui/art/icons/ability_buff_major_intellect.dds' }, -- of Magicka (Major Intellect)
-    [79714] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds',  normalize = 'esoui/art/icons/ability_buff_minor_protection.dds' }, -- of Protection (Minor Protection)
-    [46250] = { icon = 'LuiExtended/media/icons/potions/potion_021.dds',  normalize = 'esoui/art/icons/ability_debuff_minor_fracture.dds' }, -- of Ravage Armor (Minor Fracture)
+    [79860] = { icon = 'LuiExtended/media/icons/potions/potion_007r.dds', normalize = 'esoui/art/icons/ability_debuff_minor_defile.dds' }, -- of Defile (Minor Defile)
+    [45458] = { icon = 'LuiExtended/media/icons/potions/potion_009.dds', normalize = 'LuiExtended/media/icons/abilities/ability_buff_detection.dds' }, -- of Detection (Increase Detection)
+    [63670] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds', normalize = 'esoui/art/icons/ability_buff_major_fortitude.dds' }, -- of Health (Major Fortitude)
+    --[45463] = { icon = 'LuiExtended/media/icons/potions/potion_008.dds', normalize = 'esoui/art/icons/' }, -- of Immovability (Unstoppable)
+    [63676] = { icon = 'LuiExtended/media/icons/potions/potion_002.dds', normalize = 'esoui/art/icons/ability_buff_major_intellect.dds' }, -- of Magicka (Major Intellect)
+    [79714] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds', normalize = 'esoui/art/icons/ability_buff_minor_protection.dds' }, -- of Protection (Minor Protection)
+    [46250] = { icon = 'LuiExtended/media/icons/potions/potion_021.dds', normalize = 'esoui/art/icons/ability_debuff_minor_fracture.dds' }, -- of Ravage Armor (Minor Fracture)
     -- No ... of Ravage Spell Critical
-    [46244] = { icon = 'LuiExtended/media/icons/potions/potion_020.dds',  normalize = 'esoui/art/icons/ability_debuff_minor_cowardice.dds' }, -- of Ravage Spell Power (Minor Cowardice)
-    [46248] = { icon = 'LuiExtended/media/icons/potions/potion_018.dds',  normalize = 'esoui/art/icons/ability_debuff_minor_breach.dds' }, -- of Ravage Spell Protection (Reduce Spell Resistance) (Should be Minor Breach)
-    [47202] = { icon = 'LuiExtended/media/icons/potions/potion_019.dds',  normalize = 'esoui/art/icons/ability_debuff_minor_enervation.dds' }, -- of Ravage Weapon Critical (Reduce Weapon Critical) (Should be Minor Enervation)
-    [46246] = { icon = 'LuiExtended/media/icons/potions/potion_019.dds',  normalize = 'esoui/art/icons/ability_debuff_minor_maim.dds' }, -- of Ravage Weapon Power (Minor Maim)
-    [46252] = { icon = 'LuiExtended/media/icons/potions/potion_017.dds',  normalize = 'esoui/art/icons/ability_debuff_minor_hindrance.dds' }, -- of Slow (Hindrance)
-    [64567] = { icon = 'LuiExtended/media/icons/potions/potion_010.dds',  normalize = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- of Speed (Major Expedition)
-    [64572] = { icon = 'LuiExtended/media/icons/potions/potion_013.dds',  normalize = 'esoui/art/icons/ability_buff_major_prophecy.dds' }, -- of Spell Critical (Major Prophecy)
-    [64561] = { icon = 'LuiExtended/media/icons/potions/potion_006.dds',  normalize = 'esoui/art/icons/ability_buff_major_sorcery.dds' }, -- of Spell Power (Major Sorcery)
-    [63681] = { icon = 'LuiExtended/media/icons/potions/potion_003.dds',  normalize = 'esoui/art/icons/ability_buff_major_endurance.dds' }, -- of Stamina (Major Endurance)
+    [46244] = { icon = 'LuiExtended/media/icons/potions/potion_020.dds', normalize = 'esoui/art/icons/ability_debuff_minor_cowardice.dds' }, -- of Ravage Spell Power (Minor Cowardice)
+    [46248] = { icon = 'LuiExtended/media/icons/potions/potion_018.dds', normalize = 'esoui/art/icons/ability_debuff_minor_breach.dds' }, -- of Ravage Spell Protection (Reduce Spell Resistance) (Should be Minor Breach)
+    [47202] = { icon = 'LuiExtended/media/icons/potions/potion_019.dds', normalize = 'esoui/art/icons/ability_debuff_minor_enervation.dds' }, -- of Ravage Weapon Critical (Reduce Weapon Critical) (Should be Minor Enervation)
+    [46246] = { icon = 'LuiExtended/media/icons/potions/potion_019.dds', normalize = 'esoui/art/icons/ability_debuff_minor_maim.dds' }, -- of Ravage Weapon Power (Minor Maim)
+    [46252] = { icon = 'LuiExtended/media/icons/potions/potion_017.dds', normalize = 'esoui/art/icons/ability_debuff_minor_hindrance.dds' }, -- of Slow (Hindrance)
+    [64567] = { icon = 'LuiExtended/media/icons/potions/potion_010.dds', normalize = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- of Speed (Major Expedition)
+    [64572] = { icon = 'LuiExtended/media/icons/potions/potion_013.dds', normalize = 'esoui/art/icons/ability_buff_major_prophecy.dds' }, -- of Spell Critical (Major Prophecy)
+    [64561] = { icon = 'LuiExtended/media/icons/potions/potion_006.dds', normalize = 'esoui/art/icons/ability_buff_major_sorcery.dds' }, -- of Spell Power (Major Sorcery)
+    [63681] = { icon = 'LuiExtended/media/icons/potions/potion_003.dds', normalize = 'esoui/art/icons/ability_buff_major_endurance.dds' }, -- of Stamina (Major Endurance)
     -- No ... of Stun
-    [79850] = { icon = 'LuiExtended/media/icons/potions/potion_014.dds',  normalize = 'esoui/art/icons/ability_buff_major_vitality.dds' }, -- of Vitality (Major Vitality)
-    [79846] = { icon = 'LuiExtended/media/icons/potions/potion_001r.dds',  normalize = 'esoui/art/icons/ability_debuff_minor_vulnerability.dds' }, -- of Vulnerability (Minor Vulnerability)
-    [64569] = { icon = 'LuiExtended/media/icons/potions/potion_012.dds',  normalize = 'esoui/art/icons/ability_buff_major_savagery.dds' }, -- of Weapon Critical (Major Savagery)
-    [64554] = { icon = 'LuiExtended/media/icons/potions/potion_005.dds',  normalize = 'esoui/art/icons/ability_buff_major_brutality.dds' }, -- of Weapon Power (Major Brutality)
-    [125041] = { icon = 'LuiExtended/media/icons/potions/potion_011.dds',  normalize = 'esoui/art/icons/ability_buff_minor_heroism.dds' }, -- of Heroism (Minor Heroism)
+    [79850] = { icon = 'LuiExtended/media/icons/potions/potion_014.dds', normalize = 'esoui/art/icons/ability_buff_major_vitality.dds' }, -- of Vitality (Major Vitality)
+    [79846] = { icon = 'LuiExtended/media/icons/potions/potion_001r.dds', normalize = 'esoui/art/icons/ability_debuff_minor_vulnerability.dds' }, -- of Vulnerability (Minor Vulnerability)
+    [64569] = { icon = 'LuiExtended/media/icons/potions/potion_012.dds', normalize = 'esoui/art/icons/ability_buff_major_savagery.dds' }, -- of Weapon Critical (Major Savagery)
+    [64554] = { icon = 'LuiExtended/media/icons/potions/potion_005.dds', normalize = 'esoui/art/icons/ability_buff_major_brutality.dds' }, -- of Weapon Power (Major Brutality)
+    [125041] = { icon = 'LuiExtended/media/icons/potions/potion_011.dds', normalize = 'esoui/art/icons/ability_buff_minor_heroism.dds' }, -- of Heroism (Minor Heroism)
     [140701] = { icon = 'LuiExtended/media/icons/potions/potion_018.dds', normalize = 'esoui/art/icons/ability_debuff_major_timid.dds' }, -- of Timidity (Minor Timidity)
 
     -- Vendor Potions + AVA Potions + Roguish Draughts
-    [63672] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds',  normalize = 'esoui/art/icons/ability_buff_major_fortitude.dds'  }, -- of Health (Major Fortitude)
-    [63678] = { icon = 'LuiExtended/media/icons/potions/potion_002.dds',  normalize = 'esoui/art/icons/ability_buff_major_intellect.dds' }, -- of Magicka (Major Intellect)
-    [63683] = { icon = 'LuiExtended/media/icons/potions/potion_003.dds',  normalize = 'esoui/art/icons/ability_buff_major_endurance.dds' }, -- of Stamina (Major Endurance)
-    [72935] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds',  normalize = 'esoui/art/icons/ability_buff_major_endurance.dds' }, -- Alliance Battle Draught (Major Endurance)
-    [72936] = { icon = 'LuiExtended/media/icons/potions/potion_ava_yellow.dds',  normalize = 'esoui/art/icons/ability_buff_major_brutality.dds' }, -- Alliance Battle Draught (Major Brutality)
-    --[72930] = { icon = 'LuiExtended/media/icons/potions/potion_ava_red.dds',  normalize = 'esoui/art/icons/' }, -- Alliance Health Draught (Unstoppable )
-    [72928] = { icon = 'LuiExtended/media/icons/potions/potion_ava_red.dds',  normalize = 'esoui/art/icons/ability_buff_major_fortitude.dds' }, -- Alliance Health Draught (Major Fortitude)
-    [72933] = { icon = 'LuiExtended/media/icons/potions/potion_ava_teal.dds',  normalize = 'esoui/art/icons/ability_buff_major_sorcery.dds' }, -- Alliance Spell Draught (Major Sorcery)
-    [72932] = { icon = 'LuiExtended/media/icons/potions/potion_ava_blue.dds',  normalize = 'esoui/art/icons/ability_buff_major_intellect.dds' }, -- Alliance Spell Draught (Major Intellect)
-    [78054] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds',  normalize = 'esoui/art/icons/ability_buff_major_endurance.dds' }, -- Roguish Stealth Draught (Major Endurance)
-    [78081] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds',  normalize = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Roguish Escape Draught (Major Expedition)
-    [78080] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds',  normalize = 'esoui/art/icons/ability_buff_major_endurance.dds' }, -- Roguish Escape Draught (Major Endurance)
+    [63672] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds', normalize = 'esoui/art/icons/ability_buff_major_fortitude.dds'  }, -- of Health (Major Fortitude)
+    [63678] = { icon = 'LuiExtended/media/icons/potions/potion_002.dds', normalize = 'esoui/art/icons/ability_buff_major_intellect.dds' }, -- of Magicka (Major Intellect)
+    [63683] = { icon = 'LuiExtended/media/icons/potions/potion_003.dds', normalize = 'esoui/art/icons/ability_buff_major_endurance.dds' }, -- of Stamina (Major Endurance)
+    [72935] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds', normalize = 'esoui/art/icons/ability_buff_major_endurance.dds' }, -- Alliance Battle Draught (Major Endurance)
+    [72936] = { icon = 'LuiExtended/media/icons/potions/potion_ava_yellow.dds', normalize = 'esoui/art/icons/ability_buff_major_brutality.dds' }, -- Alliance Battle Draught (Major Brutality)
+    [137007] = { icon = 'LuiExtended/media/icons/potions/potion_ava_yellow.dds', normalize = 'esoui/art/icons/ability_buff_major_savagery.dds' }, -- Alliance Battle Draught (Major Savagery)
+    --[72930] = { icon = 'LuiExtended/media/icons/potions/potion_ava_red.dds', normalize = 'esoui/art/icons/' }, -- Alliance Health Draught (Unstoppable )
+    [72928] = { icon = 'LuiExtended/media/icons/potions/potion_ava_red.dds', normalize = 'esoui/art/icons/ability_buff_major_fortitude.dds' }, -- Alliance Health Draught (Major Fortitude)
+    [72933] = { icon = 'LuiExtended/media/icons/potions/potion_ava_teal.dds', normalize = 'esoui/art/icons/ability_buff_major_sorcery.dds' }, -- Alliance Spell Draught (Major Sorcery)
+    [72932] = { icon = 'LuiExtended/media/icons/potions/potion_ava_blue.dds', normalize = 'esoui/art/icons/ability_buff_major_intellect.dds' }, -- Alliance Spell Draught (Major Intellect)
+    [137006] = { icon = 'LuiExtended/media/icons/potions/potion_ava_teal.dds', normalize = 'esoui/art/icons/ability_buff_major_prophecy.dds' }, -- Alliance Spell Draught (Major Prophecy)
+    [78054] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds', normalize = 'esoui/art/icons/ability_buff_major_endurance.dds' }, -- Roguish Stealth Draught (Major Endurance)
+    [78081] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds', normalize = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Roguish Escape Draught (Major Expedition)
+    [78080] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds', normalize = 'esoui/art/icons/ability_buff_major_endurance.dds' }, -- Roguish Escape Draught (Major Endurance)
 
     -- Crown Store Potions
-    [68405] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds',  normalize = 'esoui/art/icons/ability_buff_major_fortitude.dds' }, -- Crown Tri-Restoration Potion (Major Fortitude)
-    [68406] = { icon = 'LuiExtended/media/icons/potions/potion_crown_blue.dds',  normalize = 'esoui/art/icons/ability_buff_major_intellect.dds' }, -- Crown Tri-Restoration Potion (Major Intellect)
-    [68408] = { icon = 'LuiExtended/media/icons/potions/potion_crown_green.dds',  normalize = 'esoui/art/icons/ability_buff_major_endurance.dds' }, -- Crown Tri-Restoration Potion (Major Endurance)
-    [86683] = { icon = 'LuiExtended/media/icons/potions/potion_crown_blue.dds',  normalize = 'esoui/art/icons/ability_buff_major_intellect.dds' }, -- Crown Spellcaster's Elixir (Major Intellect)
-    [86684] = { icon = 'LuiExtended/media/icons/potions/potion_crown_teal.dds',  normalize = 'esoui/art/icons/ability_buff_major_prophecy.dds' }, -- Crown Spellcaster's Elixir (Major Prophecy)
-    [86685] = { icon = 'LuiExtended/media/icons/potions/potion_crown_teal.dds',  normalize = 'esoui/art/icons/ability_buff_major_sorcery.dds' }, -- Crown Spellcaster's Elixir (Major Sorcery)
-    [86697] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds',  normalize = 'esoui/art/icons/ability_buff_major_fortitude.dds' }, -- Crown Survivor's Elixir (Major Fortitude)
-    --[86698] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds',  normalize = 'esoui/art/icons/' }, -- Crown Survivor's Elixir (Unstoppable)
-    [86693] = { icon = 'LuiExtended/media/icons/potions/potion_crown_green.dds',  normalize = 'esoui/art/icons/ability_buff_major_endurance.dds' }, -- Crown Warrior's Elixir (Major Endurance)
-    [86694] = { icon = 'LuiExtended/media/icons/potions/potion_crown_yellow.dds',  normalize = 'esoui/art/icons/ability_buff_major_savagery.dds' }, -- Crown Warrior's Elixir (Major Savagery)
-    [86695] = { icon = 'LuiExtended/media/icons/potions/potion_crown_yellow.dds',  normalize = 'esoui/art/icons/ability_buff_major_brutality.dds' }, -- Crown Warrior's Elixir (Major Brutality)
-    [92415] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds',  normalize = 'esoui/art/icons/ability_buff_major_fortitude.dds' }, -- Major Fortitude (Gold Coast Swift Survivor Elixir)
-    [92418] = { icon = 'LuiExtended/media/icons/potions/potion_crown_green.dds',  normalize = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Gold Coast Swift Survivor Elixir)
-    --[92416] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds',  normalize = 'esoui/art/icons/' }, -- Unstoppable (Gold Coast Swift Survivor Elixir)
+    [68405] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds', normalize = 'esoui/art/icons/ability_buff_major_fortitude.dds' }, -- Crown Tri-Restoration Potion (Major Fortitude)
+    [68406] = { icon = 'LuiExtended/media/icons/potions/potion_crown_blue.dds', normalize = 'esoui/art/icons/ability_buff_major_intellect.dds' }, -- Crown Tri-Restoration Potion (Major Intellect)
+    [68408] = { icon = 'LuiExtended/media/icons/potions/potion_crown_green.dds', normalize = 'esoui/art/icons/ability_buff_major_endurance.dds' }, -- Crown Tri-Restoration Potion (Major Endurance)
+    [86683] = { icon = 'LuiExtended/media/icons/potions/potion_crown_blue.dds', normalize = 'esoui/art/icons/ability_buff_major_intellect.dds' }, -- Crown Spellcaster's Elixir (Major Intellect)
+    [86684] = { icon = 'LuiExtended/media/icons/potions/potion_crown_teal.dds', normalize = 'esoui/art/icons/ability_buff_major_prophecy.dds' }, -- Crown Spellcaster's Elixir (Major Prophecy)
+    [86685] = { icon = 'LuiExtended/media/icons/potions/potion_crown_teal.dds', normalize = 'esoui/art/icons/ability_buff_major_sorcery.dds' }, -- Crown Spellcaster's Elixir (Major Sorcery)
+    [86697] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds', normalize = 'esoui/art/icons/ability_buff_major_fortitude.dds' }, -- Crown Survivor's Elixir (Major Fortitude)
+    --[86698] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds', normalize = 'esoui/art/icons/' }, -- Crown Survivor's Elixir (Unstoppable)
+    [86693] = { icon = 'LuiExtended/media/icons/potions/potion_crown_green.dds', normalize = 'esoui/art/icons/ability_buff_major_endurance.dds' }, -- Crown Warrior's Elixir (Major Endurance)
+    [86694] = { icon = 'LuiExtended/media/icons/potions/potion_crown_yellow.dds', normalize = 'esoui/art/icons/ability_buff_major_savagery.dds' }, -- Crown Warrior's Elixir (Major Savagery)
+    [86695] = { icon = 'LuiExtended/media/icons/potions/potion_crown_yellow.dds', normalize = 'esoui/art/icons/ability_buff_major_brutality.dds' }, -- Crown Warrior's Elixir (Major Brutality)
+    [92415] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds', normalize = 'esoui/art/icons/ability_buff_major_fortitude.dds' }, -- Major Fortitude (Gold Coast Swift Survivor Elixir)
+    [92418] = { icon = 'LuiExtended/media/icons/potions/potion_crown_green.dds', normalize = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Gold Coast Swift Survivor Elixir)
+    --[92416] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds', normalize = 'esoui/art/icons/' }, -- Unstoppable (Gold Coast Swift Survivor Elixir)
 }
 
 Effects.PoisonIconTable = {
@@ -3418,10 +3421,13 @@ Effects.EffectOverride = {
     [63683] = { icon = 'LuiExtended/media/icons/potions/potion_003.dds', tooltip = Abilities.Potion }, -- of Stamina (Major Endurance)
     [72935] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds', tooltip = Abilities.Potion }, -- Alliance Battle Draught (Major Endurance)
     [72936] = { icon = 'LuiExtended/media/icons/potions/potion_ava_yellow.dds', tooltip = Abilities.Potion }, -- Alliance Battle Draught (Major Brutality)
+    [137007] = { icon = 'LuiExtended/media/icons/potions/potion_ava_yellow.dds', tooltip = Abilities.Potion }, -- Alliance Battle Draught (Major Savagery)
     [72930] = { icon = 'LuiExtended/media/icons/potions/potion_ava_red.dds', tooltip = Abilities.Potion }, -- Alliance Health Draught (Unstoppable )
     [72928] = { icon = 'LuiExtended/media/icons/potions/potion_ava_red.dds', tooltip = Abilities.Potion }, -- Alliance Health Draught (Major Fortitude)
+    [137002] = { icon = 'LuiExtended/media/icons/potions/potion_ava_purple.dds', tooltip = Abilities.Potion }, -- Alliance Health Draught (Invisibility)
     [72933] = { icon = 'LuiExtended/media/icons/potions/potion_ava_teal.dds', tooltip = Abilities.Potion }, -- Alliance Spell Draught (Major Sorcery)
     [72932] = { icon = 'LuiExtended/media/icons/potions/potion_ava_blue.dds', tooltip = Abilities.Potion }, -- Alliance Spell Draught (Major Intellect)
+    [137006] = { icon = 'LuiExtended/media/icons/potions/potion_ava_teal.dds', tooltip = Abilities.Potion }, -- Alliance Spell Draught (Major Prophecy)
     [78058] = { icon = 'LuiExtended/media/icons/potions/potion_ava_purple.dds', name = Abilities.Potion_Invisiblity, tooltip = Abilities.Potion }, -- Roguish Stealth Draught (Vanish)
     [78054] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds', tooltip = Abilities.Potion }, -- Roguish Stealth Draught (Major Endurance)
     [78081] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds', tooltip = Abilities.Potion }, -- Roguish Escape Draught (Major Expedition)
@@ -4625,7 +4631,9 @@ Effects.EffectOverride = {
     [2727] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = "", unbreakable = 1 }, -- Off-Balance
     [134599] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_off_balance_immunity.dds', type = 1, tooltip = Tooltips.Generic_Off_Balance_Immunity }, -- Off Balance Immunity
     [132831] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_major_vulnerability_immunity.dds', name = Abilities.Skill_Major_Vulnerability_Immunity, type = 1, tooltip = Tooltips.Generic_Major_Vulnerability_Immunity }, -- Major Vulnerability Invulnerability
-    [85701] = { hide = true, tooltip = Tooltips.Innate_Battle_Spirit }, -- Dueling Flag
+    [85701] = { hide = true }, -- Dueling Flag
+    [999014] = { tooltip = Tooltips.Innate_Battle_Spirit }, -- Battle Spirit FAKE
+    [999015] = { tooltip = Tooltips.Innate_Battle_Spirit_Imperial_City }, -- Battle Spirit Imperial City FAKE
     [21263] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = Abilities.Innate_Ayleid_Well, tooltip = Tooltips.Innate_Ayleid_Well }, -- Ayleid Health Bonus
     [100862] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = Abilities.Innate_Ayleid_Well_Fortified, tooltip = Tooltips.Innate_Ayleid_Well_Fortified }, -- Ayleid Health Bonus
     [105188] = { hide = true }, -- Grim Focus Combat Trigger
@@ -9335,6 +9343,29 @@ Effects.EffectOverride = {
     [66242] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_cold_fire_ballista_bolt.dds', name = Abilities.Skill_Cold_Fire_Ballista_Bolt }, -- Fire Ballista Bolt (Cold Fire Ballista)
     [66244] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_cold_fire_ballista_bolt.dds', name = Abilities.Skill_Cold_Fire_Ballista_Bolt }, -- Fire Ballista Bolt (Cold Fire Ballista)
     [66243] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_cold_fire_ballista_bolt.dds', name = Abilities.Skill_Cold_Fire_Ballista_Bolt, tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Cold Harbor Ballista Bolt (Cold Fire Ballista)
+
+    -- NEW SIEGE HERE
+    -- DC
+    [135861] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_shock_lancer.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Pact, Abilities.Skill_Shock_Lancer) }, -- Create Lance Cannon... (Shock Lancer)
+    -- AD
+    [138556] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_shock_lancer.dds' }, -- Shock Lancer (Shock Lancer)
+    [138558] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_shock_lancer.dds' }, -- Shock Lancer (Shock Lancer)
+
+    -- DC
+    [135858] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_fire_lancer.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Pact, Abilities.Skill_Fire_Lancer) }, -- Create Lance Cannon... (Fire Lancer)
+    -- AD
+    [138434] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_fire_lancer.dds' }, -- Shock Lancer (Fire Lancer)
+    [138436] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_fire_lancer.dds' }, -- Shock Lancer (Fire Lancer)
+
+    -- DC
+    [135867] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_frost_lancer.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Pact, Abilities.Skill_Frost_Lancer) }, -- Create Lance Cannon... (Frost Lancer)
+    -- AD
+    [138552] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_frost_lancer.dds' }, -- Frost Lancer (Fire Lancer)
+    [138554] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_frost_lancer.dds' }, -- Frost Lancer (Fire Lancer)
+
+
+    -- END NEW SIEGE
+
 
     [22570] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_flaming_oil.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Skill_Deploy, Abilities.Skill_Flaming_Oil) }, -- Create Boiling Oil... (Flaming Oil)
     [15775] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_burning_oil.dds', tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Flaming oil (Flaming Oil)

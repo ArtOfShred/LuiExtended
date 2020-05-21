@@ -207,10 +207,14 @@ LUIE.DebugAuras = {
     [63683] = true, -- Major Endurance (... of Stamina)
     [72935] = true, -- Major Endurance (Alliance Battle Draught)
     [72936] = true, -- Major Brutality (Alliance Battle Draught)
+    [137007] = true, -- Major Savagery (Alliance Battle Draugh)
     [72928] = true, -- Major Fortitude (Alliance Health Draught)
     [72930] = true, -- Unstoppable (Alliance Health Draught)
+    [137002] = true, -- Invisibility (Alliance Health Draught)
+    [137000] = true, -- Clairvoyance Fx (Alliance Health Draught)
     [72932] = true, -- Major Intellect (Alliance Spell Draught)
     [72933] = true, -- Major Sorcery (Alliance Spell Draught)
+    [137006] = true, -- Major Prophecy (Alliance Spell Draught)
     [78054] = true, -- Major Endurance (Roguish Stealth Draught)
     [78058] = true, -- Vanish (Roguish Stealth Draught)
     [78057] = true, -- Clairvoyance Fx (Roguish Escape Draught)
@@ -6808,6 +6812,7 @@ LUIE.DebugAuras = {
 
     [103478] = true, -- Undo (Undo)
     [108609] = true, -- Undo (Undo)
+    [108615] = true, -- Undo (Undo)
 
     [103557] = true, -- Precognition (Precognition)
     [108621] = true, -- Precognition (Precognition)
@@ -6817,6 +6822,7 @@ LUIE.DebugAuras = {
     [103570] = true, -- Minor Protection (Temporal Guard)
     [103564] = true, -- Temporal Guard (Temporal Guard)
     [108641] = true, -- Temporal Guard (Temporal Guard)
+    [108643] = true, -- Temporal Guard (Temporal Guard)
 
     -------------------------------------
     -- THIEVES GUILD PASSIVES -----------
@@ -15615,6 +15621,27 @@ LUIE.DebugAuras = {
     [66242] = true, -- Fire Ballista Bolt (Cold Fire Ballista)
     [66244] = true, -- Fire Ballista Bolt (Cold Fire Ballista)
     [66243] = true, -- Cold Harbor Ballista Bolt (Cold Fire Ballista)
+
+    --
+    [135861] = true, -- Create Lance Cannon... (Shock Lancer)
+    --
+    [138555] = true, -- Shock Lancer (Shock Lancer)
+    [138556] = true, -- Shock Lancer (Shock Lancer)
+    [138558] = true, -- Shock Lancer (Shock Lancer)
+
+    --
+    [135858] = true, -- Create Lance Cannon... (Fire Lancer)
+    --
+    [138426] = true, -- Fire Lancer (Fire Lancer)
+    [138434] = true, -- Fire Lancer (Fire Lancer)
+    [138436] = true, -- Fire Lancer (Fire Lancer)
+
+    --
+    [135867] = true, -- Create Lance Cannon... (Frost Lancer)
+    --
+    [138551] = true, -- Frost Lancer (Frost Lancer)
+    [138552] = true, -- Frost Lancer (Frost Lancer)
+    [138554] = true, -- Frost Lancer (Frost Lancer)
 
     [22570] = true, -- Create Boiling Oil... (Flaming Oil)
     [15775] = true, -- Flaming oil (Flaming Oil)
