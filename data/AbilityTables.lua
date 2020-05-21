@@ -121,6 +121,16 @@ local AbilityTables = {
     Innate_Pardon_Edict_Medium        = GetString(SI_LUIE_SKILL_LENIENCY_EDICT),
     Innate_Pardon_Edict_High          = GetString(SI_LUIE_SKILL_GRAND_AMNESTY_EDICT),
 
+    Innate_Arena_Gladiators_Exultation      = GetItemLinkName("|H0:item:141751:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Arena_Gladiators_Mockery         = GetItemLinkName("|H0:item:146042:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Arena_Gladiators_Recognition     = GetItemLinkName("|H0:item:138785:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Arena_Gladiators_Roar            = GetItemLinkName("|H0:item:147285:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Knights_Rebuke                   = GetItemLinkName("|H0:item:159544:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Knights_Resolve                  = GetItemLinkName("|H0:item:159535:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Reach_Mages_Ferocity             = GetItemLinkName("|H0:item:166469:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Siege_of_Cyrodiil_Recognition    = GetItemLinkName("|H0:item:151938:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Siege_of_Cyrodiil_Recommendation = GetItemLinkName("|H0:item:153536:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+
     -- Champion
     Champion_Last_Stand               = 60413,
     Champion_Tactician                = 60486,

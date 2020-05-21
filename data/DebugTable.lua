@@ -719,6 +719,25 @@ LUIE.DebugAuras = {
     [69293] = true, -- Sigil of Imperial Retreat (Sigil of Imperial Retreat)
     [59581] = true, -- Clickable Eat Food (Spoiled Food)
 
+    [111188] = true, -- Arena Gladiator Costume (Arena Gladiator's Exultation)
+    [111190] = true, -- 68235 Stun (Arena Gladiator's Exultation)
+    [115062] = true, -- Arena Gladiator Emote (Arena Gladiator's Mockery)
+    [115064] = true, -- 68235 Stun (Arena Gladiator's Mockery)
+    [106173] = true, -- Arena Gladiator Helm (Arena Gladiator's Recognition)
+    [106174] = true, -- 68235 Stun (Arena Gladiator's Recognition)
+    [116414] = true, -- Arena Gladiator Pet (Arena Gladiator's Roar)
+    [116416] = true, -- 68235 Stun (Arena Gladiator's Roar)
+    [134882] = true, -- Knights of the Circle Weapon Style Page (Knight's Rebuke)
+    [134883] = true, -- 68235 Stun (Knight's Rebuke)
+    [134850] = true, -- Knights of the Circle Armor Style Page (Knight's Resolve)
+    [134851] = true, -- 68235 Stun (Knight's Resolve)
+    [140620] = true, -- Reach-Mage Ceremonial Skullcap (Reach-Mage's Ferocity)
+    [140622] = true, -- 68235 Stun (Reach-Mage's Ferocity)
+    --[124788] = true, -- Arena Gladiator Helm (Siege of Cyrodiil Recognition)
+    --[124789] = true, -- 68235 Stun (Siege of Cyrodiil Recognition)
+    --[126708] = true, -- Siegemaster Costume (Siege of Cyrodiil Recommendation)
+    --[126710] = true, -- 68235 Stun (Siege of Cyrodiil Recommendation)
+
     -------------------------------------
     -- MEMENTOS -------------------------
     -------------------------------------

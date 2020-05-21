@@ -3718,6 +3718,30 @@ Effects.EffectOverride = {
     [85503] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_3.dds', name = Abilities.Experience_Crown_Crate_Scroll_3, tooltip = Tooltips.Experience_Grand_Gold_Coast }, -- Grand Gold Coast Experience Scroll
 
     -- Other
+    [111188] = { hide = true }, -- Arena Gladiator Costume (Arena Gladiator's Exultation)
+    [111190] = { icon = 'LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds', name = Abilities.Innate_Arena_Gladiators_Exultation }, -- 68235 Stun (Arena Gladiator's Exultation)
+    [115062] = { hide = true }, -- Arena Gladiator Emote (Arena Gladiator's Mockery)
+    [115064] = { icon = 'LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds', name = Abilities.Innate_Arena_Gladiators_Mockery }, -- 68235 Stun (Arena Gladiator's Mockery)
+    [106173] = { hide = true }, -- Arena Gladiator Helm (Arena Gladiator's Recognition)
+    [106174] = { icon = 'LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds', name = Abilities.Innate_Arena_Gladiators_Recognition }, -- 68235 Stun (Arena Gladiator's Recognition)
+    [116414] = { hide = true }, -- Arena Gladiator Pet (Arena Gladiator's Roar)
+    [116416] = { icon = 'LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds', name = Abilities.Innate_Arena_Gladiators_Roar }, -- 68235 Stun (Arena Gladiator's Roar)
+    [134882] = { hide = true }, -- Knights of the Circle Weapon Style Page (Knight's Rebuke)
+    [134883] = { icon = 'LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds', name = Abilities.Innate_Knights_Rebuke }, -- 68235 Stun (Knight's Rebuke)
+    [134850] = { hide = true }, -- Knights of the Circle Armor Style Page (Knight's Resolve)
+    [134851] = { icon = 'LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds', name = Abilities.Innate_Knights_Resolve }, -- 68235 Stun (Knight's Resolve)
+    [140620] = { hide = true }, -- Reach-Mage Ceremonial Skullcap (Reach-Mage's Ferocity)
+    [140622] = { icon = 'LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds', name = Abilities.Innate_Reach_Mages_Ferocity }, -- 68235 Stun (Reach-Mage's Ferocity)
+    [124788] = { hide = true }, -- Arena Gladiator Helm (Siege of Cyrodiil Recognition)
+    [124789] = { icon = 'LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds', name = Abilities.Innate_Siege_of_Cyrodiil_Recognition }, -- 68235 Stun (Siege of Cyrodiil Recognition)
+    [126708] = { hide = true }, -- Siegemaster Costume (Siege of Cyrodiil Recommendation)
+    [126710] = { icon = 'LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds', name = Abilities.Innate_Siege_of_Cyrodiil_Recommendation }, -- 68235 Stun (Siege of Cyrodiil Recommendation)
+
+
+
+
+
+
     [113432] = { icon = 'LuiExtended/media/icons/abilities/ability_item_indrik_nascent.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Summon, Abilities.Innate_Indrik_Nascent) }, -- 68235 Stun (Nascent Indrik)
     [130394] = { icon = 'LuiExtended/media/icons/abilities/ability_item_indrik_spectral.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Summon, Abilities.Innate_Indrik_Spectral) }, -- 68235 Stun (Spectral Indrik)
     [131536] = { icon = 'LuiExtended/media/icons/abilities/ability_item_pet_sovereign_sow.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Summon, Abilities.Innate_Sovereign_Sow) }, -- Generic Stun & Combine (Sovereign Sow)

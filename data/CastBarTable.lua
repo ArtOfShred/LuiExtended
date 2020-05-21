@@ -364,6 +364,16 @@ CastBarTable.CastDurationFix = {
     [130394] = 5000, -- 68235 Stun (Spectral Indrik)
     [131536] = 5000, -- Generic Stun & Combine (Sovereign Sow)
 
+    [111190] = 5000, -- 68235 Stun (Arena Gladiator's Exultation)
+    [115064] = 5000, -- 68235 Stun (Arena Gladiator's Mockery)
+    [106174] = 5000, -- 68235 Stun (Arena Gladiator's Recognition)
+    [116416] = 5000, -- 68235 Stun (Arena Gladiator's Roar)
+    [134883] = 5000, -- 68235 Stun (Knight's Rebuke)
+    [134851] = 5000, -- 68235 Stun (Knight's Resolve)
+    [140622] = 5000, -- 68235 Stun (Reach-Mage's Ferocity)
+    [124789] = 5000, -- 68235 Stun (Siege of Cyrodiil Recognition)
+    [126710] = 5000, -- 68235 Stun (Siege of Cyrodiil Recommendation)
+
     -- Seasonal Mementos and Items
     [86792] = 3000, -- Eating (High Hrothgar Festival Mints)
     [86739] = 3000, -- Drinking (Sailor's Warning Festival Grog)
@@ -498,6 +508,16 @@ CastBarTable.IsCast = {
     [78052] = true, -- Minor Pardon (Counterfeit Pardon Edict)
     [76350] = true, -- Moderate Pardon (Leniency Edict)
     [76349] = true, -- Full Pardon (Grand Amnesty Edict)
+
+    [111190] = true, -- 68235 Stun (Arena Gladiator's Exultation)
+    [115064] = true, -- 68235 Stun (Arena Gladiator's Mockery)
+    [106174] = true, -- 68235 Stun (Arena Gladiator's Recognition)
+    [116416] = true, -- 68235 Stun (Arena Gladiator's Roar)
+    [134883] = true, -- 68235 Stun (Knight's Rebuke)
+    [134851] = true, -- 68235 Stun (Knight's Resolve)
+    [140622] = true, -- 68235 Stun (Reach-Mage's Ferocity)
+    [124789] = true, -- 68235 Stun (Siege of Cyrodiil Recognition)
+    [126710] = true, -- 68235 Stun (Siege of Cyrodiil Recommendation)
 
     -- Seasonal Mementos and Items
     [86792] = true, -- Eating (High Hrothgar Festival Mints)
