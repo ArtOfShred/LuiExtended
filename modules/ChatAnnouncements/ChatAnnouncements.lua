@@ -427,6 +427,13 @@ ChatAnnouncements.Defaults = {
         LootShowCraftUse                = false,
         LootShowDestroy                 = true,
         LootShowRemove                  = true,
+        LootShowTurnIn                  = true,
+        LootShowUsePotion               = false,
+        LootShowUseFoodDrink            = false,
+        LootShowUseRepairKit            = true,
+        LootShowUseSoulGem              = false,
+        LootShowUseSiege                = true,
+        LootShowUseMisc                 = false,
         LootShowContainer               = true,
         LootShowDisguise                = true,
         LootShowLockpick                = true,
@@ -448,6 +455,9 @@ ChatAnnouncements.Defaults = {
         CurrencyMessageReceive          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_RECEIVE),
         CurrencyMessageSpend            = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_SPEND),
         CurrencyMessagePay              = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_PAY),
+        CurrencyMessageUseKit           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_USEKIT),
+        CurrencyMessageConsume          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_CONSUME),
+        CurrencyMessageDeploy           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DEPLOY),
         CurrencyMessageTradeIn          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEIN),
         CurrencyMessageTradeInNoName    = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEIN_NO_NAME),
         CurrencyMessageTradeOut         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEOUT),
@@ -546,6 +556,7 @@ local g_weAreInAFence               = false         -- Toggled on when the playe
 local g_itemWasDestroyed            = false         -- Tracker for item being destroyed
 local g_lockpickBroken              = false         -- Tracker for lockpick being broken
 local g_groupLootIndex              = {}            -- Table to hold group member names for group loot display.
+local g_stackSplit                  = false         -- Determines if we just split an inventory item stack
 
 -- Currency Throttle
 local g_currencyGoldThrottleValue   = 0             -- Held value for gold throttle (counter)
@@ -917,6 +928,10 @@ function ChatAnnouncements.Initialize(enabled)
     eventManager:RegisterForEvent(moduleName, EVENT_SKILL_XP_UPDATE, ChatAnnouncements.SkillXPUpdate)
     eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, ChatAnnouncements.OnPlayerActivated)
 
+    -- TODO: Maybe move this, is needed for ALL INVENTORY & QUEST
+    eventManager:RegisterForEvent(moduleName, EVENT_CHATTER_BEGIN, ChatAnnouncements.OnChatterBegin)
+    eventManager:RegisterForEvent(moduleName, EVENT_CHATTER_END, ChatAnnouncements.OnChatterEnd)
+
     -- TEMP: Social Error Register
     eventManager:RegisterForEvent(moduleName, EVENT_SOCIAL_ERROR, ChatAnnouncements.OnErrorSocialChat)
 
@@ -1017,8 +1032,6 @@ function ChatAnnouncements.RegisterQuestEvents()
             }
         end
     end
-    eventManager:RegisterForEvent(moduleName, EVENT_CHATTER_BEGIN, ChatAnnouncements.OnChatterBegin)
-    eventManager:RegisterForEvent(moduleName, EVENT_CHATTER_END, ChatAnnouncements.OnChatterEnd)
 end
 
 function ChatAnnouncements.RegisterGuildEvents()
@@ -1128,9 +1141,8 @@ function ChatAnnouncements.RegisterLootEvents()
     -- TRADE
     eventManager:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_ADDED)
     eventManager:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_REMOVED)
-    -- JUSTICE/DESTROY
+    -- JUSTICE
     eventManager:UnregisterForEvent(moduleName, EVENT_JUSTICE_STOLEN_ITEMS_REMOVED)
-    eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_DESTROYED)
     -- LOOT FAILED
     eventManager:UnregisterForEvent(moduleName, EVENT_QUEST_COMPLETE_ATTEMPT_FAILED_INVENTORY_FULL)
     eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_IS_FULL)
@@ -1186,10 +1198,9 @@ function ChatAnnouncements.RegisterLootEvents()
         eventManager:RegisterForEvent(moduleName, EVENT_CRAFTING_STATION_INTERACT, ChatAnnouncements.CraftingOpen)
         eventManager:RegisterForEvent(moduleName, EVENT_END_CRAFTING_STATION_INTERACT, ChatAnnouncements.CraftingClose)
     end
-    -- JUSTICE/DESTROY
-    if ChatAnnouncements.SV.Inventory.LootShowDestroy then
-        eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_DESTROYED, ChatAnnouncements.DestroyItem)
-    end
+    -- DESTROY
+    eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_DESTROYED, ChatAnnouncements.DestroyItem)
+    -- JUSTICE
     if ChatAnnouncements.SV.Inventory.Loot or ChatAnnouncements.SV.Notify.NotificationConfiscateCA or ChatAnnouncements.SV.Notify.NotificationConfiscateAlert or ChatAnnouncements.SV.Inventory.LootShowDisguise then
         eventManager:RegisterForEvent(moduleName, EVENT_JUSTICE_STOLEN_ITEMS_REMOVED, ChatAnnouncements.JusticeStealRemove)
     end
@@ -3995,22 +4006,23 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDestroy
                     ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
-                if g_removeableIDs[itemId] and not g_itemWasDestroyed and ChatAnnouncements.SV.Inventory.LootShowRemove and ChatAnnouncements.SV.Inventory.LootShowDestroy then
-                    gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
-                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageRemove
-                    ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
-                end
-                if ChatAnnouncements.SV.Inventory.LootShowDisguise and not g_itemWasDestroyed and slotId == 10 and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then
-                    if IsUnitInCombat("player") then
-                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDisguiseDestroy
-                        receivedBy = "LUIE_INVENTORY_UPDATE_DISGUISE"
+                if not g_itemWasDestroyed then
+                    if ChatAnnouncements.SV.Inventory.LootShowDisguise and slotId == 10 and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then
+                        if IsUnitInCombat("player") then
+                            logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDisguiseDestroy
+                            receivedBy = "LUIE_INVENTORY_UPDATE_DISGUISE"
+                            gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                        else
+                            logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDisguiseRemove
+                            receivedBy = "LUIE_INVENTORY_UPDATE_DISGUISE"
+                            gainOrLoss = 3
+                        end
+                        ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                    elseif g_removeableIDs[itemId] and ChatAnnouncements.SV.Inventory.LootShowRemove then
                         gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
-                    else
-                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDisguiseRemove
-                        receivedBy = "LUIE_INVENTORY_UPDATE_DISGUISE"
-                        gainOrLoss = 3
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageRemove
+                        ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                     end
-                    ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
             end
 
@@ -4035,6 +4047,11 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
         local removed
         -- NEW ITEM
         if not g_inventoryStacks[slotId] then
+            -- Flag stack split as true - this will occur when a stack of items is split into multiple stacks.
+            if not isNewItem then
+                g_stackSplit = true
+                eventManager:RegisterForUpdate(moduleName .. "StackTracker", 50, ChatAnnouncements.ResetStackSplit)
+            end
             icon, stack = GetItemInfo(bagId, slotId)
             itemType = GetItemType(bagId, slotId)
             itemId = GetItemId(bagId, slotId)
@@ -4073,6 +4090,12 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
 
             -- STACK COUNT INCREMENTED UP
             if stackCountChange > 0 then
+                -- Flag stack split as true - this will occur when two items are stacked together (dragged over each other)
+                if not isNewItem then
+                    g_stackSplit = true
+                    eventManager:RegisterForUpdate(moduleName .. "StackTracker", 50, ChatAnnouncements.ResetStackSplit)
+                end
+
                 gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
                 if g_inMail then
                     logPrefix = g_mailTarget ~= "" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailIn or ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailInNoName
@@ -4088,25 +4111,76 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
             -- STACK COUNT INCREMENTED DOWN
             elseif stackCountChange < 0 then
                 local change = stackCountChange * -1
+                -- Check Destroyed first
                 if g_itemWasDestroyed and ChatAnnouncements.SV.Inventory.LootShowDestroy then
                     gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDestroy
                     ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
-                end
-                if g_removeableIDs[itemId] and not g_itemWasDestroyed and ChatAnnouncements.SV.Inventory.LootShowRemove and ChatAnnouncements.SV.Inventory.LootShowDestroy then
-                    gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
-                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageRemove
-                    ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
-                end
-                if ChatAnnouncements.SV.Inventory.LootShowLockpick and g_lockpickBroken then
+                -- Check Lockpick next
+                elseif ChatAnnouncements.SV.Inventory.LootShowLockpick and g_lockpickBroken then
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageLockpick
                     gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                     ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
-                end
-                if ChatAnnouncements.SV.Inventory.LootShowContainer and (itemType == ITEMTYPE_CONTAINER or itemType == ITEMTYPE_CONTAINER_CURRENCY) then
+                -- Check container is emptied next
+                elseif ChatAnnouncements.SV.Inventory.LootShowContainer and (itemType == ITEMTYPE_CONTAINER or itemType == ITEMTYPE_CONTAINER_CURRENCY) then
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageContainer
                     gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                     ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, true)
+                -- Check to see if the item was removed in dialogue and Quest Item turnin is on.
+                elseif g_talkingToNPC and ChatAnnouncements.SV.Inventory.LootShowTurnIn then
+                    gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestTurnIn
+                    zo_callLater(function()
+                        if g_stackSplit == false then
+                            ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                        end
+                    end, 25)
+                -- Check to see if the item was used
+                elseif not g_itemWasDestroyed and not g_talkingToNPC then
+                    local flag -- When set to true we deliver a message on a zo_callLater
+                    if ChatAnnouncements.SV.Inventory.LootShowUsePotion and itemType == ITEMTYPE_POTION then
+                        gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageConsume
+                        flag = true
+                    end
+                    if ChatAnnouncements.SV.Inventory.LootShowUseFoodDrink and (itemType == ITEMTYPE_FOOD or itemType == ITEMTYPE_DRINK) then
+                        gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageConsume
+                        flag = true
+                    end
+                    if ChatAnnouncements.SV.Inventory.LootShowUseRepairKit and (itemType == ITEMTYPE_TOOL or itemType == ITEMTYPE_CROWN_REPAIR or itemType == ITEMTYPE_AVA_REPAIR) then
+                        gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse
+                        flag = true
+                    end
+                    if ChatAnnouncements.SV.Inventory.LootShowUseSoulGem and itemType == ITEMTYPE_SOUL_GEM then
+                        gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse
+                        flag = true
+                    end
+                    if ChatAnnouncements.SV.Inventory.LootShowUseSiege and itemType == ITEMTYPE_SIEGE then
+                        gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeploy
+                        flag = true
+                    end
+                    if ChatAnnouncements.SV.Inventory.LootShowUseMisc and (itemType == ITEMTYPE_RECALL_STONE or itemType == ITEMTYPE_TROPHY) then
+                        gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse
+                        flag = true
+                    end
+                    -- If any of these options were flagged, run a callLater on a 50ms delay to make sure we didn't just split stacks.
+                    if flag then
+                        zo_callLater(function()
+                            if g_stackSplit == false then
+                                ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                            end
+                        end, 25)
+                    end
+                -- For any leftover cases for items removed.
+                elseif not g_itemWasDestroyed and ChatAnnouncements.SV.Inventory.LootShowRemove then
+                    gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageRemove
+                    ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
             end
 
@@ -9802,7 +9876,6 @@ function ChatAnnouncements.HookFunction()
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
         end
     end
-
 end
 
 function ChatAnnouncements.TradeInviteAccepted(eventCode)
@@ -10200,6 +10273,11 @@ function ChatAnnouncements.PrintBufferedGuildRep()
     eventManager:UnregisterForUpdate(moduleName .. "BufferedRep")
     g_guildSkillThrottle = 0
     g_guildSkillThrottleLine = ""
+end
+
+function ChatAnnouncements.ResetStackSplit()
+    g_stackSplit = false
+    eventManager:UnregisterForUpdate(moduleName .. "StackTracker")
 end
 
 function ChatAnnouncements.PrintQueuedMessages()

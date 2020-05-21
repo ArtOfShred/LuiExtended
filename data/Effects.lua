@@ -475,7 +475,7 @@ Effects.DebuffDisplayOverrideId = {
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
--- Filter out Debuffs to always display regardless of whether they are sourced from the player - BY NAME -- Used for all Major / Minor Debuffs
+-- Filter out Debuffs to always display regardless of whether they are sourced from the player - BY name =- Used for all Major / Minor Debuffs
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.DebuffDisplayOverrideName = {
     [Abilities.Skill_Minor_Breach]              = true,
@@ -2388,18 +2388,21 @@ Effects.EffectOverrideByName = {
     [64674] = { -- Cyrodiil Guard See Stealth
         [Unitnames.NPC_Guard_AD]                            = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ad.dds' }, -- Dominion Guard
         [Unitnames.NPC_Honor_Guard_AD]                      = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_honor_ad.dds' }, -- Dominion Honor Guard
+        [Unitnames.NPC_Temple_Guard_AD]                     = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ad.dds' }, -- Dominion Temple Guard
         [Unitnames.NPC_Mender_AD]                           = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ad.dds' }, -- Dominion Mender
         [Unitnames.NPC_Mage_Guard_AD]                       = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ad.dds' }, -- Dominion Mage Guard
         [Unitnames.NPC_Skirmisher_AD]                       = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ad.dds' }, -- Dominion Skirmisher
         [Unitnames.NPC_Archer_Guard_AD]                     = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ad.dds' }, -- Dominion Archer Guard
         [Unitnames.NPC_Guard_DC]                            = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_dc.dds' }, -- Covenant Guard
         [Unitnames.NPC_Honor_Guard_DC]                      = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_honor_dc.dds' }, -- Covenant Honor Guard
+        [Unitnames.NPC_Temple_Guard_DC]                     = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_dc.dds' }, -- Covenant Temple Guard
         [Unitnames.NPC_Mender_DC]                           = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_dc.dds' }, -- Covenant Mender
         [Unitnames.NPC_Mage_Guard_DC]                       = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_dc.dds' }, -- Covenant Mage Guard
         [Unitnames.NPC_Skirmisher_DC]                       = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_dc.dds' }, -- Covenant Skirmisher
         [Unitnames.NPC_Archer_Guard_DC]                     = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_dc.dds' }, -- Covenant Archer Guard
         [Unitnames.NPC_Guard_EP]                            = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ep.dds' }, -- Pact Guard
         [Unitnames.NPC_Honor_Guard_EP]                      = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_honor_ep.dds' }, -- Pact Honor Guard
+        [Unitnames.NPC_Temple_Guard_EP]                     = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ep.dds' }, -- Pact Temple Guard
         [Unitnames.NPC_Mender_EP]                           = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ep.dds' }, -- Pact Mender
         [Unitnames.NPC_Mage_Guard_EP]                       = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ep.dds' }, -- Pact Mage Guard
         [Unitnames.NPC_Skirmisher_EP]                       = { icon = 'LuiExtended/media/icons/abilities/ability_spell_vigilance_ep.dds' }, -- Pact Skirmisher
@@ -2445,7 +2448,7 @@ Effects.EffectOverrideByName = {
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
--- Override source name - when one of these abilities hits change the source to match this name. Used for death recap to rename odd trap or source names for damage.
+-- Override source name = when one of these abilities hits change the source to match this name. Used for death recap to rename odd trap or source names for damage.
 -- source = '' -- Change source name
 -- pet = '' -- Change or remove pet name
 -- removePlayer = true -- If for some reason a damage effect is sourced from the player, set it to not be flagged as isPlayer == true in order to stop AVA rank, etc from showing.
@@ -9255,29 +9258,32 @@ Effects.EffectOverride = {
     [29673] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Covenant, Abilities.Skill_Ballista) }, -- Create Ballista Bolt... (Ballista)
     [29672] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Pact, Abilities.Skill_Ballista) }, -- Create Ballista Bolt... (Ballista)
     [29671] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Dominion, Abilities.Skill_Ballista) }, -- Create Ballista Bolt... (Ballista)
-    [7468] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_ballista_bolt.dds' }, -- Ballista Bolt (Ballista)
-    [7469] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_ballista_bolt.dds' }, -- Ballista Bolt (Ballista)
-    [13043] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_ballista_bolt.dds' }, -- Ballista Bolt (Ballista)
+    [7468] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_ballista_bolt.dds', name = Abilities.Skill_Ballista }, -- Ballista Bolt (Ballista)
+    [7469] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_ballista_bolt.dds', name = Abilities.Skill_Ballista }, -- Ballista Bolt (Ballista)
+    [13043] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_ballista_bolt.dds', name = Abilities.Skill_Ballista }, -- Ballista Bolt (Ballista)
 
     [30611] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Covenant, Abilities.Skill_Fire_Ballista) }, -- Create Ballista Fire Bolt... (Fire Ballista)
     [30607] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Pact, Abilities.Skill_Fire_Ballista) }, -- Create Ballista Fire Bolt... (Fire Ballista)
     [16751] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Dominion, Abilities.Skill_Fire_Ballista) }, -- Create Ballista Fire Bolt... (Fire Ballista)
-    [16775] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_fire_ballista_bolt.dds' }, -- Fire Ballista Bolt (Fire Ballista)
-    [28480] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_fire_ballista_bolt.dds', tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Fire Ballista Bolt (Fire Ballista)
-    [14367] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_fire_ballista_bolt.dds' }, -- Fire Ballista Bolt (Fire Ballista)
+    [16775] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_fire_ballista_bolt.dds', name = Abilities.Skill_Fire_Ballista }, -- Fire Ballista Bolt (Fire Ballista)
+    [28480] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_fire_ballista_bolt.dds', name = Abilities.Skill_Fire_Ballista, tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Fire Ballista Bolt (Fire Ballista)
+    [14367] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_fire_ballista_bolt.dds', name = Abilities.Skill_Fire_Ballista }, -- Fire Ballista Bolt (Fire Ballista)
 
     [30612] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Covenant, Abilities.Skill_Lightning_Ballista) }, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
     [30608] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Pact, Abilities.Skill_Lightning_Ballista) }, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
     [16752] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Dominion, Abilities.Skill_Lightning_Ballista) }, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
-    [14363] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_lightning_ballista_bolt.dds' }, -- Lightning Ballista Bolt (Lightning Ballista)
-    [14364] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_lightning_ballista_bolt.dds', tooltip = Tooltips.Skill_Lightning_Ballista_Bolt }, -- Lightning Ballista Bolt (Lightning Ballista)
-    [16776] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_lightning_ballista_bolt.dds' }, -- Lightning Ballista Bolt (Lightning Ballista)
-    [76103] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_lightning_ballista_bolt.dds', name = Abilities.Skill_Lightning_Ballista_Bolt }, -- Magicka Hit (Lightning Ballista)
-    [30454] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_lightning_ballista_bolt.dds' }, -- Lightning Ballista Bolt (Lightning Ballista)
+    [14363] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_lightning_ballista_bolt.dds', name = Abilities.Skill_Lightning_Ballista  }, -- Lightning Ballista Bolt (Lightning Ballista)
+    [14364] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_lightning_ballista_bolt.dds', name = Abilities.Skill_Lightning_Ballista, tooltip = Tooltips.Skill_Lightning_Ballista_Bolt }, -- Lightning Ballista Bolt (Lightning Ballista)
+    [16776] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_lightning_ballista_bolt.dds', name = Abilities.Skill_Lightning_Ballista }, -- Lightning Ballista Bolt (Lightning Ballista)
+    [76103] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_lightning_ballista_bolt.dds', name = Abilities.Skill_Lightning_Ballista }, -- Magicka Hit (Lightning Ballista)
+    [30454] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_lightning_ballista_bolt.dds', name = Abilities.Skill_Lightning_Ballista }, -- Lightning Ballista Bolt (Lightning Ballista)
 
     [39914] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Covenant, Abilities.Skill_Stone_Trebuchet) }, -- Create Trebuchet... (Stone Trebuchet)
     [39917] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Pact, Abilities.Skill_Stone_Trebuchet) }, -- Create Trebuchet... (Stone Trebuchet)
     [39910] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Dominion, Abilities.Skill_Stone_Trebuchet) }, -- Create Trebuchet... (Stone Trebuchet)
+    [14159] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_stone_trebuchet.dds' }, -- Stone Trebuchet (Stone Trebuchet)
+    [64109] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_stone_trebuchet.dds' }, -- Stone Trebuchet (Stone Trebuchet)
+    [14160] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_stone_trebuchet.dds' }, -- Stone Trebuchet (Stone Trebuchet)
 
     [39913] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Covenant, Abilities.Skill_Iceball_Trebuchet) }, -- Create Trebuchet... (Iceball Trebuchet)
     [39916] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Pact, Abilities.Skill_Iceball_Trebuchet) }, -- Create Trebuchet... (Iceball Trebuchet)
@@ -9340,32 +9346,30 @@ Effects.EffectOverride = {
     [66437] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_cold_fire_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Covenant, Abilities.Skill_Cold_Fire_Ballista) }, -- Create Ballista... (Cold Fire Ballista)
     [66436] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_cold_fire_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Pact, Abilities.Skill_Cold_Fire_Ballista) }, -- Create Ballista... (Cold Fire Ballista)
     [66435] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_cold_fire_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Dominion, Abilities.Skill_Cold_Fire_Ballista) }, -- Create Ballista... (Cold Fire Ballista)
-    [66242] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_cold_fire_ballista_bolt.dds', name = Abilities.Skill_Cold_Fire_Ballista_Bolt }, -- Fire Ballista Bolt (Cold Fire Ballista)
-    [66244] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_cold_fire_ballista_bolt.dds', name = Abilities.Skill_Cold_Fire_Ballista_Bolt }, -- Fire Ballista Bolt (Cold Fire Ballista)
-    [66243] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_cold_fire_ballista_bolt.dds', name = Abilities.Skill_Cold_Fire_Ballista_Bolt, tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Cold Harbor Ballista Bolt (Cold Fire Ballista)
+    [66242] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_cold_fire_ballista_bolt.dds', name = Abilities.Skill_Cold_Fire_Ballista }, -- Fire Ballista Bolt (Cold Fire Ballista)
+    [66244] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_cold_fire_ballista_bolt.dds', name = Abilities.Skill_Cold_Fire_Ballista }, -- Fire Ballista Bolt (Cold Fire Ballista)
+    [66243] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_cold_fire_ballista_bolt.dds', name = Abilities.Skill_Cold_Fire_Ballista, tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Cold Harbor Ballista Bolt (Cold Fire Ballista)
 
-    -- NEW SIEGE HERE
-    -- DC
+    [135862] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_shock_lancer.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Covenant, Abilities.Skill_Shock_Lancer) }, -- Create Lance Cannon... (Shock Lancer)
     [135861] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_shock_lancer.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Pact, Abilities.Skill_Shock_Lancer) }, -- Create Lance Cannon... (Shock Lancer)
-    -- AD
+    [135860] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_shock_lancer.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Dominion, Abilities.Skill_Shock_Lancer) }, -- Create Lance Cannon... (Shock Lancer)
     [138556] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_shock_lancer.dds' }, -- Shock Lancer (Shock Lancer)
     [138558] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_shock_lancer.dds' }, -- Shock Lancer (Shock Lancer)
+    [138557] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_shock_lancer.dds' }, -- Shock Lancer (Shock Lancer)
 
-    -- DC
+    [135859] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_fire_lancer.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Covenant, Abilities.Skill_Fire_Lancer) }, -- Create Lance Cannon... (Fire Lancer)
     [135858] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_fire_lancer.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Pact, Abilities.Skill_Fire_Lancer) }, -- Create Lance Cannon... (Fire Lancer)
-    -- AD
+    [135836] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_fire_lancer.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Dominion, Abilities.Skill_Fire_Lancer) }, -- Create Lance Cannon... (Fire Lancer)
     [138434] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_fire_lancer.dds' }, -- Shock Lancer (Fire Lancer)
     [138436] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_fire_lancer.dds' }, -- Shock Lancer (Fire Lancer)
+    [138435] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_fire_lancer.dds' }, -- Shock Lancer (Fire Lancer)
 
-    -- DC
+    [135868] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_frost_lancer.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Covenant, Abilities.Skill_Frost_Lancer) }, -- Create Lance Cannon... (Frost Lancer)
     [135867] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_frost_lancer.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Pact, Abilities.Skill_Frost_Lancer) }, -- Create Lance Cannon... (Frost Lancer)
-    -- AD
+    [135866] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_frost_lancer.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Dominion, Abilities.Skill_Frost_Lancer) }, -- Create Lance Cannon... (Frost Lancer)
     [138552] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_frost_lancer.dds' }, -- Frost Lancer (Fire Lancer)
     [138554] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_frost_lancer.dds' }, -- Frost Lancer (Fire Lancer)
-
-
-    -- END NEW SIEGE
-
+    [138553] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_frost_lancer.dds' }, -- Frost Lancer (Fire Lancer)
 
     [22570] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_flaming_oil.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Skill_Deploy, Abilities.Skill_Flaming_Oil) }, -- Create Boiling Oil... (Flaming Oil)
     [15775] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_burning_oil.dds', tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Flaming oil (Flaming Oil)
@@ -9413,9 +9417,9 @@ Effects.EffectOverride = {
     [35106] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_firepot_trebuchet.dds' , name = Abilities.Skill_Firepot_Trebuchet }, -- Fire (Firepot Trebuchet)
     [35099] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_iceball_trebuchet.dds', name = Abilities.Skill_Iceball_Trebuchet }, -- Ice Damage (Iceball Trebuchet)
     [35112] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_stone_trebuchet.dds', name = Abilities.Skill_Stone_Trebuchet }, -- Stoneball (Stone Trebuchet)
-    [35094] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_ballista_bolt.dds', name = Abilities.Skill_Ballista_Bolt }, -- Bolt (Ballista)
-    [35055] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_fire_ballista_bolt.dds', name = Abilities.Skill_Fire_Ballista_Bolt }, -- Fire (Firebolt Ballista)
-    [35080] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_lightning_ballista_bolt.dds', name = Abilities.Skill_Lightning_Ballista_Bolt }, -- Bolt (Lightning Ballista)
+    [35094] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_ballista_bolt.dds', name = Abilities.Skill_Ballista }, -- Bolt (Ballista)
+    [35055] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_fire_ballista_bolt.dds', name = Abilities.Skill_Fire_Ballista }, -- Fire (Firebolt Ballista)
+    [35080] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_lightning_ballista_bolt.dds', name = Abilities.Skill_Lightning_Ballista }, -- Bolt (Lightning Ballista)
     [35121] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_scattershot_catapult.dds', name = Abilities.Skill_Scattershot_Catapult }, -- Ice Damage (Scattershot Catapult)
     [35136] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_meatbag_catapult.dds' , name = Abilities.Skill_Meatbag_Catapult }, -- Meatbag (Meatbag Catapult)
     [35132] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_oil_catapult.dds', name = Abilities.Skill_Oil_Catapult }, -- Oil Pot (Oil Catapult)

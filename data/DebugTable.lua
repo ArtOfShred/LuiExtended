@@ -15622,26 +15622,29 @@ LUIE.DebugAuras = {
     [66244] = true, -- Fire Ballista Bolt (Cold Fire Ballista)
     [66243] = true, -- Cold Harbor Ballista Bolt (Cold Fire Ballista)
 
-    --
+    [135862] = true, -- Create Lance Cannon... (Shock Lancer)
     [135861] = true, -- Create Lance Cannon... (Shock Lancer)
-    --
+    [135860] = true, -- Create Lance Cannon... (Shock Lancer)
     [138555] = true, -- Shock Lancer (Shock Lancer)
     [138556] = true, -- Shock Lancer (Shock Lancer)
     [138558] = true, -- Shock Lancer (Shock Lancer)
+    [138557] = true, -- Shock Lancer (Shock Lancer)
 
-    --
+    [135859] = true, -- Create Lance Cannon... (Fire Lancer)
     [135858] = true, -- Create Lance Cannon... (Fire Lancer)
-    --
+    [135836] = true, -- Create Lance Cannon... (Fire Lancer)
     [138426] = true, -- Fire Lancer (Fire Lancer)
     [138434] = true, -- Fire Lancer (Fire Lancer)
     [138436] = true, -- Fire Lancer (Fire Lancer)
+    [138435] = true, -- Fire Lancer (Fire Lancer)
 
-    --
+    [135868] = true, -- Create Lance Cannon... (Frost Lancer)
     [135867] = true, -- Create Lance Cannon... (Frost Lancer)
-    --
+    [135866] = true, -- Create Lance Cannon... (Frost Lancer)
     [138551] = true, -- Frost Lancer (Frost Lancer)
     [138552] = true, -- Frost Lancer (Frost Lancer)
     [138554] = true, -- Frost Lancer (Frost Lancer)
+    [138553] = true, -- Frost Lancer (Frost Lancer)
 
     [22570] = true, -- Create Boiling Oil... (Flaming Oil)
     [15775] = true, -- Flaming oil (Flaming Oil)

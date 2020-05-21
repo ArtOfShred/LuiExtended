@@ -876,11 +876,8 @@ local AbilityTables = {
     Skill_Covenant                    = GetString(SI_LUIE_SKILL_COVENANT),
     Skill_Dominion                    = GetString(SI_LUIE_SKILL_DOMINION),
     Skill_Ballista                    = 68205,
-    Skill_Ballista_Bolt               = 7468,
     Skill_Fire_Ballista               = 35049,
-    Skill_Fire_Ballista_Bolt          = 28480,
     Skill_Lightning_Ballista          = GetString(SI_LUIE_SKILL_LIGHTNING_BALLISTA),
-    Skill_Lightning_Ballista_Bolt     = 14364,
 
     Skill_Stone_Trebuchet             = 14159,
     Skill_Iceball_Trebuchet           = 13551,
@@ -896,7 +893,6 @@ local AbilityTables = {
     Skill_Cold_Stone_Trebuchet        = GetString(SI_LUIE_SKILL_COLD_STONE_TREBUCHET),
     Skill_Cold_Fire_Trebuchet         = GetString(SI_LUIE_SKILL_COLD_FIRE_TREBUCHET),
     Skill_Cold_Fire_Ballista          = GetString(SI_LUIE_SKILL_COLD_FIRE_BALLISTA),
-    Skill_Cold_Fire_Ballista_Bolt     = 66239,
 
     Skill_Flaming_Oil                 = 15774,
     Skill_Battering_Ram               = 15197,

@@ -32,6 +32,80 @@ CastBarTable.CastBreakingActions = {
     --[33439] = true, -- Mount Sprint -- TODO: No longer works
 }
 
+-- Used to break Siege Weapon deployment/stoy when the player opens their inventory or another window or tabs out of the game.
+CastBarTable.BreakSiegeOnWindowOpen = {
+
+    [29673] = true, -- Create Ballista Bolt... (Ballista)
+    [29672] = true, -- Create Ballista Bolt... (Ballista)
+    [29671] = true, -- Create Ballista Bolt... (Ballista)
+
+    [30611] = true, -- Create Ballista Fire Bolt... (Fire Ballista)
+    [30607] = true, -- Create Ballista Fire Bolt... (Fire Ballista)
+    [16751] = true, -- Create Ballista Fire Bolt... (Fire Ballista)
+
+    [30612] = true, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
+    [30608] = true, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
+    [16752] = true, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
+
+    [39914] = true, -- Create Trebuchet... (Stone Trebuchet)
+    [39917] = true, -- Create Trebuchet... (Stone Trebuchet)
+    [39910] = true, -- Create Trebuchet... (Stone Trebuchet)
+
+    [39913] = true, -- Create Trebuchet... (Iceball Trebuchet)
+    [39916] = true, -- Create Trebuchet... (Iceball Trebuchet)
+    [39909] = true, -- Create Trebuchet... (Iceball Trebuchet)
+
+    [13665] = true, -- Create Trebuchet... (Firepot Trebuchet)
+    [13664] = true, -- Create Trebuchet... (Firepot Trebuchet)
+    [13663] = true, -- Create Trebuchet... (Firepot Trebuchet)
+
+    [30613] = true, -- Create Catapult Meatbag (Meatbag Catapult)
+    [30609] = true, -- Create Catapult Meatbag (Meatbag Catapult)
+    [16755] = true, -- Create Catapult Meatbag (Meatbag Catapult)
+
+    [30614] = true, -- Create Catapult Oil Jar... (Oil Catapult)
+    [30610] = true, -- Create Catapult Oil Jar... (Oil Catapult)
+    [16754] = true, -- Create Catapult Oil Jar... (Oil Catapult)
+
+    [39915] = true, -- Create Catapult Meatbag (Scattershot Catapult)
+    [39918] = true, -- Create Catapult Oil Jar... (Scattershot Catapult)
+    [39911] = true, -- Create Trebuchet... (Scattershot Catapult)
+
+    [66438] = true, -- Create Trebuchet... (Cold Stone Trebuchet)
+    [66439] = true, -- Create Trebuchet... (Cold Stone Trebuchet)
+    [66440] = true, -- Create Trebuchet... (Cold Stone Trebuchet)
+
+    [66434] = true, -- Create Trebuchet... (Cold Fire Trebuchet)
+    [66388] = true, -- Create Trebuchet... (Cold Fire Trebuchet)
+    [66387] = true, -- Create Trebuchet... (Cold Fire Trebuchet)
+
+    [66437] = true, -- Create Ballista... (Cold Fire Ballista)
+    [66436] = true, -- Create Ballista... (Cold Fire Ballista)
+    [66435] = true, -- Create Ballista... (Cold Fire Ballista)
+
+    [135862] = true, -- Create Lance Cannon... (Shock Lancer)
+    [135861] = true, -- Create Lance Cannon... (Shock Lancer)
+    [135860] = true, -- Create Lance Cannon... (Shock Lancer)
+
+    [135859] = true, -- Create Lance Cannon... (Fire Lancer)
+    [135858] = true, -- Create Lance Cannon... (Fire Lancer)
+    [135836] = true, -- Create Lance Cannon... (Fire Lancer)
+
+    [135868] = true, -- Create Lance Cannon... (Frost Lancer)
+    [135867] = true, -- Create Lance Cannon... (Frost Lancer)
+    [135866] = true, -- Create Lance Cannon... (Frost Lancer)
+
+    [22570] = true, -- Create Boiling Oil... (Flaming Oil)
+    [15876] = true, -- Create Large Ram... (Battering Ram)
+    [16171] = true, -- Create Large Ram... (Battering Ram)
+    [16170] = true, -- Create Large Ram... (Battering Ram)
+
+    [19039] = true, -- Ebonheart Forward Camp
+    [19040] = true, -- Aldmeri Forward Camp
+    [19041] = true, -- Daggerfall Forward Camp
+
+}
+
 CastBarTable.BreakCastOnMove = {
     -- Fake
     --[999999] = true, -- Used for any interact based casts
@@ -100,11 +174,17 @@ CastBarTable.BreakCastOnMove = {
     [66436] = true, -- Create Ballista... (Cold Fire Ballista)
     [66435] = true, -- Create Ballista... (Cold Fire Ballista)
 
+    [135862] = true, -- Create Lance Cannon... (Shock Lancer)
     [135861] = true, -- Create Lance Cannon... (Shock Lancer)
+    [135860] = true, -- Create Lance Cannon... (Shock Lancer)
 
+    [135859] = true, -- Create Lance Cannon... (Fire Lancer)
     [135858] = true, -- Create Lance Cannon... (Fire Lancer)
+    [135836] = true, -- Create Lance Cannon... (Fire Lancer)
 
+    [135868] = true, -- Create Lance Cannon... (Frost Lancer)
     [135867] = true, -- Create Lance Cannon... (Frost Lancer)
+    [135866] = true, -- Create Lance Cannon... (Frost Lancer)
 
     [22570] = true, -- Create Boiling Oil... (Flaming Oil)
     [15876] = true, -- Create Large Ram... (Battering Ram)
@@ -643,11 +723,17 @@ CastBarTable.IsCast = {
     [66436] = true, -- Create Ballista... (Cold Fire Ballista)
     [66435] = true, -- Create Ballista... (Cold Fire Ballista)
 
+    [135862] = true, -- Create Lance Cannon... (Shock Lancer)
     [135861] = true, -- Create Lance Cannon... (Shock Lancer)
+    [135860] = true, -- Create Lance Cannon... (Shock Lancer)
 
+    [135859] = true, -- Create Lance Cannon... (Fire Lancer)
     [135858] = true, -- Create Lance Cannon... (Fire Lancer)
+    [135836] = true, -- Create Lance Cannon... (Fire Lancer)
 
+    [135868] = true, -- Create Lance Cannon... (Frost Lancer)
     [135867] = true, -- Create Lance Cannon... (Frost Lancer)
+    [135866] = true, -- Create Lance Cannon... (Frost Lancer)
 
     [22570] = true, -- Create Boiling Oil... (Flaming Oil)
     [15876] = true, -- Create Large Ram... (Battering Ram)
