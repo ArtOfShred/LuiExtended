@@ -719,6 +719,14 @@ LUIE.DebugAuras = {
     [69293] = true, -- Sigil of Imperial Retreat (Sigil of Imperial Retreat)
     [59581] = true, -- Clickable Eat Food (Spoiled Food)
 
+    -- PTS Items
+    [81736] = true, -- Donolon's Blue Recipe Book (Recipe: Donolon's Blue Recipe Book)
+    [81735] = true, -- Donolon's Green Recipe Book (Recipe: Donolon's Green Recipe Book)
+    [95397] = true, -- Donolon's Holiday Recipe Book (Recipe: Donolon's Holiday Recipe Book)
+    [81737] = true, -- Donolon's Rare Recipe Book (Recipe: Donolon's Rare Recipe Book)
+    [89338] = true, -- Exquisite Furniture Tome (ALL Furniture Plan Book)
+    [115175] = true, -- Murkmire Furniture Tome (Murkmire Furniture Plan Book)
+
     [111188] = true, -- Arena Gladiator Costume (Arena Gladiator's Exultation)
     [111190] = true, -- 68235 Stun (Arena Gladiator's Exultation)
     [115062] = true, -- Arena Gladiator Emote (Arena Gladiator's Mockery)
@@ -799,6 +807,7 @@ LUIE.DebugAuras = {
     [91453] = true, -- Breda's Magnificent Mead -- Breda's Bottomless Mead Mug
     [91449] = true, -- Breda's Magnificent Mead -- Breda's Bottomless Mead Mug
     [86075] = true, -- Breda's Magnificent Mead -- Breda's Magnificent Mead
+    [126689] = true, -- Grant Ach Progress: Skel Merionette (Skeletal Marionette)
     [125820] = true, -- Witches Festival 2019 Marionette (Skeletal Marionette)
     [125832] = true, -- Marionette Summon (Skeletal Marionette)
 
@@ -2755,7 +2764,6 @@ LUIE.DebugAuras = {
     [105217] = true, -- 68235 Stun (Attunable Jewelry Crafting Station)
     [89652] = true, -- Create Woodworking Set Stati (Attunable Woodworking Station)
     [89654] = true, -- 68235 Stun (Attunable Woodworking Station)
-    [89338] = true, -- ALL Furniture Plan Book (Crafting Book - PTS Only)
 
     -- HOUSING TARGET DUMMY
     [120010] = true, -- Major Breach (Target Iron Atronach, Trial)

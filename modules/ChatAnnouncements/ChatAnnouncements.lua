@@ -3909,11 +3909,11 @@ end
 
 local delayedItemPool = { } -- Store items we are counting up when the player loots multiple bodies at once to print combined counts for any duplicate items
 
-function ChatAnnouncements.ItemCounterDelay(icon, stack, itemType, itemId, itemLink)
+function ChatAnnouncements.ItemCounterDelay(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter, groupLoot, alwaysFirst, delay)
     if delayedItemPool[itemId] then
         stack = delayedItemPool[itemId].stack + stack -- Add stack count first, only if item already exists.
     end
-    delayedItemPool[itemId] = { icon = icon, itemType = itemType, itemLink = itemLink, stack = stack } -- Save relevant parameters
+    delayedItemPool[itemId] = { icon = icon, itemType = itemType, itemLink = itemLink, stack = stack, receivedBy=receivedBy, logPrefix=logPrefix, gainOrLoss=gainOrLoss, filter=filter, groupLoot=groupLoot, alwaysFirst=alwaysFirst, delay=delay } -- Save relevant parameters
 
     -- Pass along all values to SendDelayedItems()
     eventManager:UnregisterForUpdate(moduleName .. "SendDelayedItems")
@@ -3923,7 +3923,7 @@ end
 function ChatAnnouncements.SendDelayedItems()
     for id, data in pairs(delayedItemPool) do
         if id then
-            ChatAnnouncements.ItemPrinter(data.icon, data.stack, data.itemType, id, data.itemLink, "", "", ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3, true, nil, false, true)
+            ChatAnnouncements.ItemPrinter(data.icon, data.stack, data.itemType, id, data.itemLink, data.receivedBy, data.logPrefix, data.gainOrLoss, data.filter, data.groupLoot, data.alwaysFirst, data.delay)
         end
     end
     delayedItemPool = { }
@@ -4060,7 +4060,7 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                 logPrefix = ""
             end
             if not g_weAreInAStore and ChatAnnouncements.SV.Inventory.Loot and isNewItem and not g_inTrade and not g_inMail then
-                ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink)
+                ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true, nil, false, true)
             end
             if g_inMail and isNewItem then
                 ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
@@ -4068,6 +4068,11 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
         -- EXISTING ITEM
         elseif g_inventoryStacks[slotId] then
             itemLink = GetItemLink(bagId, slotId, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+            -- For item removal, we save whatever the currently indexed item is here.
+            local removedIcon = g_inventoryStacks[slotId].icon
+            local removedItemType = g_inventoryStacks[slotId].itemType
+            local removedItemId = g_inventoryStacks[slotId].itemId
+            local removedItemLink = g_inventoryStacks[slotId].itemLink
             if itemLink == nil or itemLink == "" then
                 -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
                 icon = g_inventoryStacks[slotId].icon
@@ -4099,7 +4104,7 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                     logPrefix = ""
                 end
                 if not g_weAreInAStore and ChatAnnouncements.SV.Inventory.Loot and isNewItem and not g_inTrade and not g_inMail then
-                    ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink)
+                    ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true, nil, false, true)
                 end
                 if g_inMail and isNewItem then
                     ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
@@ -4111,20 +4116,20 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                 if g_itemWasDestroyed and ChatAnnouncements.SV.Inventory.LootShowDestroy then
                     gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDestroy
-                    ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                    ChatAnnouncements.ItemPrinter(removedIcon, change, removedItemType, removedItemId, removedItemLink, receivedBy, logPrefix, gainOrLoss, false)
                 -- Check Lockpick next
                 elseif ChatAnnouncements.SV.Inventory.LootShowLockpick and g_lockpickBroken then
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageLockpick
                     gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
-                    ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                    ChatAnnouncements.ItemPrinter(removedIcon, change, removedItemType, removedItemId, removedItemLink, receivedBy, logPrefix, gainOrLoss, false)
                 -- Check container is emptied next
-                elseif ChatAnnouncements.SV.Inventory.LootShowContainer and (itemType == ITEMTYPE_CONTAINER or itemType == ITEMTYPE_CONTAINER_CURRENCY) then
+                elseif ChatAnnouncements.SV.Inventory.LootShowContainer and (removedItemType == ITEMTYPE_CONTAINER or removedItemType == ITEMTYPE_CONTAINER_CURRENCY) then
                     -- Don't display a message if the specialized item type is a "Container Style Page"
                     local _, specializedType = GetItemLinkItemType(itemLink)
                     if specializedType ~= SPECIALIZED_ITEMTYPE_CONTAINER_STYLE_PAGE then
                         logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageContainer
                         gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
-                        ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, true)
+                        ChatAnnouncements.ItemPrinter(removedIcon, change, removedItemType, removedItemId, removedItemLink, receivedBy, logPrefix, gainOrLoss, false, nil, true)
                     end
                 -- Check to see if the item was removed in dialogue and Quest Item turnin is on.
                 elseif g_talkingToNPC and ChatAnnouncements.SV.Inventory.LootShowTurnIn then
@@ -4132,38 +4137,38 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestTurnIn
                     zo_callLater(function()
                         if g_stackSplit == false then
-                            ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                        ChatAnnouncements.ItemCounterDelay(removedIcon, change, removedItemType, removedItemId, removedItemLink, receivedBy, logPrefix, gainOrLoss, false, false, true, false)
                         end
                     end, 25)
                 -- Check to see if the item was used
                 elseif not g_itemWasDestroyed and not g_talkingToNPC then
                     local flag -- When set to true we deliver a message on a zo_callLater
-                    if ChatAnnouncements.SV.Inventory.LootShowUsePotion and itemType == ITEMTYPE_POTION then
+                    if ChatAnnouncements.SV.Inventory.LootShowUsePotion and removedItemType == ITEMTYPE_POTION then
                         gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                         logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageConsume
                         flag = true
                     end
-                    if ChatAnnouncements.SV.Inventory.LootShowUseFoodDrink and (itemType == ITEMTYPE_FOOD or itemType == ITEMTYPE_DRINK) then
+                    if ChatAnnouncements.SV.Inventory.LootShowUseFoodDrink and (removedItemType == ITEMTYPE_FOOD or removedItemType == ITEMTYPE_DRINK) then
                         gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                         logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageConsume
                         flag = true
                     end
-                    if ChatAnnouncements.SV.Inventory.LootShowUseRepairKit and (itemType == ITEMTYPE_TOOL or itemType == ITEMTYPE_CROWN_REPAIR or itemType == ITEMTYPE_AVA_REPAIR) then
+                    if ChatAnnouncements.SV.Inventory.LootShowUseRepairKit and (removedItemType == ITEMTYPE_TOOL or removedItemType == ITEMTYPE_CROWN_REPAIR or removedItemType == ITEMTYPE_AVA_REPAIR or removedItemType == ITEMTYPE_GROUP_REPAIR) then
                         gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                         logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse
                         flag = true
                     end
-                    if ChatAnnouncements.SV.Inventory.LootShowUseSoulGem and itemType == ITEMTYPE_SOUL_GEM then
+                    if ChatAnnouncements.SV.Inventory.LootShowUseSoulGem and removedItemType == ITEMTYPE_SOUL_GEM then
                         gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                         logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse
                         flag = true
                     end
-                    if ChatAnnouncements.SV.Inventory.LootShowUseSiege and itemType == ITEMTYPE_SIEGE then
+                    if ChatAnnouncements.SV.Inventory.LootShowUseSiege and removedItemType == ITEMTYPE_SIEGE then
                         gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                         logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeploy
                         flag = true
                     end
-                    if ChatAnnouncements.SV.Inventory.LootShowUseMisc and (itemType == ITEMTYPE_RECALL_STONE or itemType == ITEMTYPE_TROPHY) then
+                    if ChatAnnouncements.SV.Inventory.LootShowUseMisc and (removedItemType == ITEMTYPE_RECALL_STONE or removedItemType == ITEMTYPE_TROPHY or removedItemType == ITEMTYPE_MASTER_WRIT) then
                         gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                         logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse
                         flag = true
@@ -4172,7 +4177,7 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                     if flag then
                         zo_callLater(function()
                             if g_stackSplit == false then
-                                ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                            ChatAnnouncements.ItemCounterDelay(removedIcon, change, removedItemType, removedItemId, removedItemLink, receivedBy, logPrefix, gainOrLoss, false, false, true, false)
                             end
                         end, 25)
                     end
@@ -4180,7 +4185,7 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                 elseif not g_itemWasDestroyed and ChatAnnouncements.SV.Inventory.LootShowRemove then
                     gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageRemove
-                    ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                    ChatAnnouncements.ItemPrinter(removedIcon, change, removedItemType, removedItemId, removedItemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
             end
 
@@ -4209,7 +4214,7 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
         local itemQuality = GetItemLinkQuality(itemLink)
 
         if not g_weAreInAStore and ChatAnnouncements.SV.Inventory.Loot and isNewItem and not g_inTrade and not g_inMail then
-            ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink)
+            ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true, nil, false, true)
         end
         if g_inMail and isNewItem then
             ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
@@ -4362,10 +4367,16 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
             gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
             logPrefix = logPrefixPos
-            ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+            --ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+            ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, false, true)
         -- EXISTING ITEM
         elseif g_inventoryStacks[slotId] then
             itemLink = GetItemLink(bagId, slotId, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+            -- For item removal, we save whatever the currently indexed item is here.
+            local removedIcon = g_inventoryStacks[slotId].icon
+            local removedItemType = g_inventoryStacks[slotId].itemType
+            local removedItemId = g_inventoryStacks[slotId].itemId
+            local removedItemLink = g_inventoryStacks[slotId].itemLink
             if itemLink == nil or itemLink == "" then
                 -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
                 icon = g_inventoryStacks[slotId].icon
@@ -4392,14 +4403,16 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
             elseif stackCountChange > 0 then
                 gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
                 logPrefix = logPrefixPos
-                ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                --ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, false, true)
             -- STACK COUNT INCREMENTED DOWN
             elseif stackCountChange < 0 then
                 local change = stackCountChange * -1
                 gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
-                logPrefix = ResolveCraftingUsed(itemType) and ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or logPrefixNeg
+                logPrefix = ResolveCraftingUsed(removedItemType) and ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or logPrefixNeg
                 if logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or ChatAnnouncements.SV.Inventory.LootShowCraftUse then -- If the logprefix isn't (used) then this is a deconstructed message, otherwise only display if used item display is enabled.
-                    ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                    --ChatAnnouncements.ItemPrinter(removedIcon, change, removedItemType, removedItemId, removedItemLink, receivedBy, logPrefix, gainOrLoss, false)
+                    ChatAnnouncements.ItemCounterDelay(removedIcon, change, removedItemType, removedItemId, removedItemLink, receivedBy, logPrefix, gainOrLoss, false, nil, true, true)
                 end
             end
 
@@ -4461,14 +4474,16 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
             elseif stackCountChange > 0 then
                 gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
                 logPrefix = logPrefixPos
-                ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                --ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, false, true)
             -- STACK COUNT INCREMENTED DOWN
             elseif stackCountChange < 0 then
                 local change = stackCountChange * -1
                 gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                 logPrefix = ResolveCraftingUsed(itemType) and ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or logPrefixNeg
                 if logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or ChatAnnouncements.SV.Inventory.LootShowCraftUse then -- If the logprefix isn't (used) then this is a deconstructed message, otherwise only display if used item display is enabled.
-                    ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                    --ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                    ChatAnnouncements.ItemCounterDelay(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, true, true)
                 end
             end
 
@@ -4530,14 +4545,15 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
             elseif stackCountChange > 0 then
                 gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
                 logPrefix = logPrefixPos
-                ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                --ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, false, true)
             -- STACK COUNT INCREMENTED DOWN
             elseif stackCountChange < 0 then
                 local change = stackCountChange * -1
                 gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                 logPrefix = ResolveCraftingUsed(itemType) and ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or logPrefixNeg
                 if logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or ChatAnnouncements.SV.Inventory.LootShowCraftUse then -- If the logprefix isn't (used) then this is a deconstructed message, otherwise only display if used item display is enabled.
-                    ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                    ChatAnnouncements.ItemCounterDelay(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, true, true)
                 end
             end
 
@@ -4560,21 +4576,24 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
         local itemId = slotId
         local itemQuality = GetItemLinkQuality(itemLink)
         local change
+        local alwaysFirst
 
         if stackCountChange > 0 then
             gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
             logPrefix = ResolveCraftingUsed(itemType) and ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive or logPrefixPos
             change = stackCountChange
+            alwaysFirst = false
         end
 
         if stackCountChange < 0 then
             gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
             logPrefix = ResolveCraftingUsed(itemType) and ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or logPrefixNeg
             change = stackCountChange * -1
+            alwaysFirst = true
         end
 
         if logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or ChatAnnouncements.SV.Inventory.LootShowCraftUse then
-            ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+            ChatAnnouncements.ItemCounterDelay(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, alwaysFirst, true)
         end
     end
 

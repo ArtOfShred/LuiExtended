@@ -3717,7 +3717,11 @@ Effects.EffectOverride = {
     [85502] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_2.dds', name = Abilities.Experience_Crown_Crate_Scroll_2, tooltip = Tooltips.Experience_Major_Gold_Coast }, -- Major Gold Coast Experience Scroll
     [85503] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_3.dds', name = Abilities.Experience_Crown_Crate_Scroll_3, tooltip = Tooltips.Experience_Grand_Gold_Coast }, -- Grand Gold Coast Experience Scroll
 
-    -- Other
+    -- PTS Items
+    [89338] = { hide = true }, -- Exquisite Furniture Tome (ALL Furniture Plan Book)
+    [115175] = { hide = true }, -- Murkmire Furniture Tome (Murkmire Furniture Plan Book)
+
+    -- Arena Gladiator's Proofs Items
     [111188] = { hide = true }, -- Arena Gladiator Costume (Arena Gladiator's Exultation)
     [111190] = { icon = 'LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds', name = Abilities.Innate_Arena_Gladiators_Exultation }, -- 68235 Stun (Arena Gladiator's Exultation)
     [115062] = { hide = true }, -- Arena Gladiator Emote (Arena Gladiator's Mockery)
