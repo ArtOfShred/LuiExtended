@@ -3689,6 +3689,17 @@ function ChatAnnouncements.ItemFilter(itemType, itemId, itemLink, groupLoot)
     end
 end
 
+local function CheckLibLazyCraftingActive()
+    -- If an addon is installed that uses LibLazyCrafting, we need to replace the messages with used and crafted.
+    if LibLazyCrafting then
+        if LibLazyCrafting:IsPerformingCraftProcess() then
+            return true
+        end
+    else
+        return false
+    end
+end
+
 function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter, groupLoot, alwaysFirst, delay)
     if filter then
         -- If filter returns false then bail out right now, we're not displaying this item.
@@ -3756,6 +3767,7 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
     local itemString = string.format("%s%s%s%s%s%s", formattedIcon, itemLink, formattedQuantity, formattedArmorType, formattedTrait, formattedStyle)
 
     local delayTimer = 50
+    local messageType = alwaysFirst and "CONTAINER" or "LOOT"
 
     -- Printer function, seperate handling for listed entires (from crafting) or simple function that sends a message over to the printer.
     if receivedBy == "LUIE_RECEIVE_CRAFT" and (gainOrLoss == 1 or gainOrLoss == 3) and logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgradeFail then
@@ -3771,7 +3783,7 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
         if g_itemCounterGain == 0 then g_itemCounterGain = g_queuedMessagesCounter end
         if g_queuedMessagesCounter -1 == g_itemCounterGain then g_queuedMessagesCounter = g_itemCounterGain end
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-        g_queuedMessages[g_itemCounterGain] = { message=g_itemStringGain, type = "LOOT", formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString= "", groupLoot=groupLoot }
+        g_queuedMessages[g_itemCounterGain] = { message=g_itemStringGain, type = messageType, formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString= "", groupLoot=groupLoot }
         eventManager:RegisterForUpdate(moduleName .. "Printer", delayTimer, ChatAnnouncements.PrintQueuedMessages )
     elseif receivedBy == "LUIE_RECEIVE_CRAFT" and (gainOrLoss == 2 or gainOrLoss == 4) and logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgradeFail then
         local itemString2 = itemString
@@ -3784,11 +3796,10 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
         if g_itemCounterLoss == 0 then g_itemCounterLoss = g_queuedMessagesCounter end
         if g_queuedMessagesCounter -1 == g_itemCounterLoss then g_queuedMessagesCounter = g_itemCounterLoss end
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-        g_queuedMessages[g_itemCounterLoss] = { message=g_itemStringLoss, type = "LOOT", formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString= "", groupLoot=groupLoot }
+        g_queuedMessages[g_itemCounterLoss] = { message=g_itemStringLoss, type = messageType, formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString= "", groupLoot=groupLoot }
         eventManager:RegisterForUpdate(moduleName .. "Printer", delayTimer, ChatAnnouncements.PrintQueuedMessages )
     else
         local totalString = formattedTotal
-        local messageType = alwaysFirst and "CONTAINER" or "LOOT"
         g_queuedMessages[g_queuedMessagesCounter] = { message=itemString, type = messageType, formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString=totalString, groupLoot=groupLoot }
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
         if delay then
@@ -4279,6 +4290,11 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
     -- If the hook function didn't return a string value (for example because the player was in Gamepad mode), then we use a default override.
     if logPrefixPos == nil then logPrefixPos = ChatAnnouncements.SV.ContextMessages.CurrencyMessageCraft end
     if logPrefixNeg == nil then logPrefixNeg = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeconstruct end
+
+    if CheckLibLazyCraftingActive() then
+        logPrefixPos = ChatAnnouncements.SV.ContextMessages.CurrencyMessageCraft
+        logPrefixNeg = ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse
+    end
 
     if bagId == BAG_WORN then
         local gainOrLoss
