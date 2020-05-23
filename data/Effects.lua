@@ -3721,7 +3721,7 @@ Effects.EffectOverride = {
     [89338] = { hide = true }, -- Exquisite Furniture Tome (ALL Furniture Plan Book)
     [115175] = { hide = true }, -- Murkmire Furniture Tome (Murkmire Furniture Plan Book)
 
-    -- Arena Gladiator's Proofs Items
+    -- Arena Gladiator's Proof Items
     [111188] = { hide = true }, -- Arena Gladiator Costume (Arena Gladiator's Exultation)
     [111190] = { icon = 'LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds', name = Abilities.Innate_Arena_Gladiators_Exultation }, -- 68235 Stun (Arena Gladiator's Exultation)
     [115062] = { hide = true }, -- Arena Gladiator Emote (Arena Gladiator's Mockery)

@@ -719,6 +719,18 @@ LUIE.DebugAuras = {
     [69293] = true, -- Sigil of Imperial Retreat (Sigil of Imperial Retreat)
     [59581] = true, -- Clickable Eat Food (Spoiled Food)
 
+    -- Glenmoril Wyrd Treasure Maps
+    [128186] = true, -- Glenmoril Wyrd Treasure Map: Alik'r
+    [128258] = true, -- Glenmoril Wyrd Treasure Map: Auridon
+    [128264] = true, -- Glenmoril Wyrd Treasure Map: Bangkorai
+    [128274] = true, -- Glenmoril Wyrd Treasure Map: Eastmarch
+    [128266] = true, -- Glenmoril Wyrd Treasure Map: Glenumbra
+    [128351] = true, -- Glenmoril Wyrd Treasure Map: Malabal Tor
+    [128356] = true, -- Glenmoril Wyrd Treasure Map: Reaper's March
+    [128362] = true, -- Glenmoril Wyrd Treasure Map: Rivenspire
+    [128367] = true, -- Glenmoril Wyrd Treasure Map: Shadowfen
+    [128373] = true, -- Glenmoril Wyrd Treasure Map: Stonefalls
+
     -- PTS Items
     [81736] = true, -- Donolon's Blue Recipe Book (Recipe: Donolon's Blue Recipe Book)
     [81735] = true, -- Donolon's Green Recipe Book (Recipe: Donolon's Green Recipe Book)
@@ -726,7 +738,13 @@ LUIE.DebugAuras = {
     [81737] = true, -- Donolon's Rare Recipe Book (Recipe: Donolon's Rare Recipe Book)
     [89338] = true, -- Exquisite Furniture Tome (ALL Furniture Plan Book)
     [115175] = true, -- Murkmire Furniture Tome (Murkmire Furniture Plan Book)
+    [87282] = true, -- Vampire Maxer (Vampire Maxer)
+    [87286] = true, -- Werewolf Maxer (Werewolf Maxer)
+    [66704] = true, -- _CRWN Remove Vamp/Werewolf (Cleansing Ritual)
+    [66705] = true, -- _CRWN Remove Vamp/Werewolf (Cleansing Ritual)
+    [66706] = true, -- _CRWN Remove Vamp/Werewolf (Cleansing Ritual)
 
+    -- Arena Gladiator's Proof Items
     [111188] = true, -- Arena Gladiator Costume (Arena Gladiator's Exultation)
     [111190] = true, -- 68235 Stun (Arena Gladiator's Exultation)
     [115062] = true, -- Arena Gladiator Emote (Arena Gladiator's Mockery)

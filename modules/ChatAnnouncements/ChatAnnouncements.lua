@@ -4143,7 +4143,7 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                         ChatAnnouncements.ItemPrinter(removedIcon, change, removedItemType, removedItemId, removedItemLink, receivedBy, logPrefix, gainOrLoss, false, nil, true)
                     end
                 -- Check to see if the item was removed in dialogue and Quest Item turnin is on.
-                elseif g_talkingToNPC and ChatAnnouncements.SV.Inventory.LootShowTurnIn then
+            elseif g_talkingToNPC and not g_weAreInAStore and ChatAnnouncements.SV.Inventory.LootShowTurnIn then
                     gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestTurnIn
                     zo_callLater(function()
@@ -4193,7 +4193,7 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                         end, 25)
                     end
                 -- For any leftover cases for items removed.
-                elseif not g_itemWasDestroyed and ChatAnnouncements.SV.Inventory.LootShowRemove then
+            elseif not g_itemWasDestroyed and g_removeableIDs[itemId] and ChatAnnouncements.SV.Inventory.LootShowRemove then
                     gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageRemove
                     ChatAnnouncements.ItemPrinter(removedIcon, change, removedItemType, removedItemId, removedItemLink, receivedBy, logPrefix, gainOrLoss, false)
