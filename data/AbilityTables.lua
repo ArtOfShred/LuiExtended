@@ -318,7 +318,6 @@ local AbilityTables = {
     Set_Shadowrend                    = 80989,
     Set_Spawn_of_Mephala              = 59497,
     Set_Swarm_Mother                  = 80592,
-    Set_Engine_Guardian               = 59521,
     Set_The_Troll_King                = GetString(SI_LUIE_SKILL_SET_TROLL_KING),
     Set_Energy_Charge                 = GetString(SI_LUIE_SKILL_SET_ENERGY_CHARGE),
     Set_Tzogvins_Warband              = 116734,

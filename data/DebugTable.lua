@@ -1091,10 +1091,10 @@ LUIE.DebugAuras = {
     [59517] = true, -- Blood Spawn
     [61274] = true, -- Blood Spawn
 
-    [59589] = true, -- Nightflame
-    [59590] = true, -- Imperial Prison Item Set
-    [59591] = true, -- Bogdan Totem
-    [61381] = true, -- Imperial Prison Item Set
+    --[59589] = true, -- Nightflame
+    --[59590] = true, -- Imperial Prison Item Set
+    --[59591] = true, -- Bogdan Totem
+    --[61381] = true, -- Imperial Prison Item Set
 
     [81068] = true, -- Chokethorn
     [81069] = true, -- Chokethorn
@@ -1112,198 +1112,198 @@ LUIE.DebugAuras = {
     [97855] = true, -- Earthgore
     [97857] = true, -- Earthgore
 
-    [84492] = true, -- Grothdarr
-    [84504] = true, -- Grothdarr
-    [84502] = true, -- Grothdarr
+    --[84492] = true, -- Grothdarr
+    --[84504] = true, -- Grothdarr
+    --[84502] = true, -- Grothdarr
 
-    [126513] = true, -- Grundwulf
-    [126529] = true, -- Grundwulf
-    [126687] = true, -- Grundwulf
-    [126688] = true, -- Grundwulf
-    [126528] = true, -- Grundwulf
+    --[126513] = true, -- Grundwulf
+    --[126529] = true, -- Grundwulf
+    --[126687] = true, -- Grundwulf
+    --[126688] = true, -- Grundwulf
+    --[126528] = true, -- Grundwulf
 
-    [80560] = true, -- Iceheart
-    [80561] = true, -- Iceheart
-    [80562] = true, -- Iceheart
-    [80563] = true, -- Iceheart
+    --[80560] = true, -- Iceheart
+    --[80561] = true, -- Iceheart
+    --[80562] = true, -- Iceheart
+    --[80563] = true, -- Iceheart
 
-    [80524] = true, -- Ilambris
-    [80529] = true, -- Ilambris
-    [80526] = true, -- Ilambris
-    [80527] = true, -- Ilambris
-    [80525] = true, -- Ilambris
+    --[80524] = true, -- Ilambris
+    --[80529] = true, -- Ilambris
+    --[80526] = true, -- Ilambris
+    --[80527] = true, -- Ilambris
+    --[80525] = true, -- Ilambris
 
-    [81687] = true, -- Infernal Guardian
-    [83405] = true, -- Infernal Guardian
-    [83390] = true, -- Infernal Guardian
-    [83393] = true, -- Infernal Guardian
-    [83391] = true, -- Infernal Guardian
-    [83409] = true, -- Infernal Guardian
+    --[81687] = true, -- Infernal Guardian
+    --[83405] = true, -- Infernal Guardian
+    --[83390] = true, -- Infernal Guardian
+    --[83393] = true, -- Infernal Guardian
+    --[83391] = true, -- Infernal Guardian
+    --[83409] = true, -- Infernal Guardian
 
-    [133499] = true, -- Kjalnar's Nightmare (Kjalnar's Nightmare)
-    [133505] = true, -- Bone (Kjalnar's Nightmare)
-    [135094] = true, -- Warning (Kjalnar's Nightmare)
-    [135088] = true, -- Kjalnar's Nightmare (Kjalnar's Nightmare)
-    [133538] = true, -- Kjalnar's Nightmare
-    [134908] = true, -- Kjalnar's Nightmare
-    [133506] = true, -- Kjalnar's Nightmare
-    [133542] = true, -- Bone Colossus
+    --[133499] = true, -- Kjalnar's Nightmare (Kjalnar's Nightmare)
+    --[133505] = true, -- Bone (Kjalnar's Nightmare)
+    --[135094] = true, -- Warning (Kjalnar's Nightmare)
+    --[135088] = true, -- Kjalnar's Nightmare (Kjalnar's Nightmare)
+    --[133538] = true, -- Kjalnar's Nightmare
+    --[134908] = true, -- Kjalnar's Nightmare
+    --[133506] = true, -- Kjalnar's Nightmare
+    --[133542] = true, -- Bone Colossus
 
-    [80564] = true, -- Kra'gh
-    [80566] = true, -- Kra'gh
-    [80565] = true, -- Kra'gh
+    --[80564] = true, -- Kra'gh
+    --[80566] = true, -- Kra'gh
+    --[80565] = true, -- Kra'gh
 
-    [59585] = true, -- Lord Warden
-    [59586] = true, -- Lord Warden
-    [59587] = true, -- Lord Warden
+    --[59585] = true, -- Lord Warden
+    --[59586] = true, -- Lord Warden
+    --[59587] = true, -- Lord Warden
 
-    [59564] = true, -- Scourge Harvester (Malubeth)
-    [85658] = true, -- Scourge Harvest (Malubeth)
-    [59568] = true, -- Scourge Harvest (Malubeth)
-    [61275] = true, -- Major Vitality (Malubeth)
-    [59573] = true, -- Scourge Harvest (Malubeth)
+    --[59564] = true, -- Scourge Harvester (Malubeth)
+    --[85658] = true, -- Scourge Harvest (Malubeth)
+    --[59568] = true, -- Scourge Harvest (Malubeth)
+    --[61275] = true, -- Major Vitality (Malubeth)
+    --[59573] = true, -- Scourge Harvest (Malubeth)
 
-    [59507] = true, -- Maw of the Infernal (Maw of the Infernal)
-    [48796] = true, -- DUMMY (Maw of the Infernal)
-    [59508] = true, -- Banished Cells Item Set (Maw of the Infernal)
-    [60974] = true, -- Jagged Claw (Maw of the Infernal)
-    [60971] = true, -- Fiery Breath (Maw of the Infernal)
-    [60972] = true, -- Fiery Breath (Maw of the Infernal)
-    [60973] = true, -- Fiery Jaws (Maw of the Infernal)
+    --[59507] = true, -- Maw of the Infernal (Maw of the Infernal)
+    --[48796] = true, -- DUMMY (Maw of the Infernal)
+    --[59508] = true, -- Banished Cells Item Set (Maw of the Infernal)
+    --[60974] = true, -- Jagged Claw (Maw of the Infernal)
+    --[60971] = true, -- Fiery Breath (Maw of the Infernal)
+    --[60972] = true, -- Fiery Breath (Maw of the Infernal)
+    --[60973] = true, -- Fiery Jaws (Maw of the Infernal)
 
-    [126940] = true, -- Maarselok (Maarselok)
-    [126941] = true, -- Maarselok (Maarselok)
+    --[126940] = true, -- Maarselok (Maarselok)
+    --[126941] = true, -- Maarselok (Maarselok)
 
-    [80482] = true, -- Mighty Chudan (Mighty Chudan)
-    [130633] = true, -- Major Resolve (Mighty Chudan)
+    --[80482] = true, -- Mighty Chudan (Mighty Chudan)
+    --[130633] = true, -- Major Resolve (Mighty Chudan)
 
-    [66792] = true, -- Molag Kena (Molag Kena)
-    [66808] = true, -- Molag Kena (Molag Kena)
-    [66812] = true, -- Overkill (Molag Kena)
+    --[66792] = true, -- Molag Kena (Molag Kena)
+    --[66808] = true, -- Molag Kena (Molag Kena)
+    --[66812] = true, -- Overkill (Molag Kena)
 
-    [133378] = true, -- Mother Ciannait (Mother Ciannait)
-    [133381] = true, -- Mother Ciannait (Mother Ciannait)
+    --[133378] = true, -- Mother Ciannait (Mother Ciannait)
+    --[133381] = true, -- Mother Ciannait (Mother Ciannait)
 
-    [59592] = true, -- Nerien'eth
-    [59594] = true, -- Crpyt of Hearts Item Set
-    [59593] = true, -- Lich Crystal
+    --[59592] = true, -- Nerien'eth
+    --[59594] = true, -- Crpyt of Hearts Item Set
+    --[59593] = true, -- Lich Crystal
 
-    [80501] = true, -- Pirate Skeleton
-    [98421] = true, -- Pirate Skeleton
-    [98419] = true, -- Pirate Skeleton
-    [98420] = true, -- Pirate Skeleton
-    [81675] = true, -- Pirate Skeleton
-    [83288] = true, -- Pirate Skeleton
-    [83287] = true, -- Pirate Skeleton
-    [80853] = true, -- Major Protection (Pirate Skeleton)
-    [85637] = true, -- Major Defile (Pirate Skeleton)
+    --[80501] = true, -- Pirate Skeleton
+    --[98421] = true, -- Pirate Skeleton
+    --[98419] = true, -- Pirate Skeleton
+    --[98420] = true, -- Pirate Skeleton
+    --[81675] = true, -- Pirate Skeleton
+    --[83288] = true, -- Pirate Skeleton
+    --[83287] = true, -- Pirate Skeleton
+    --[80853] = true, -- Major Protection (Pirate Skeleton)
+    --[85637] = true, -- Major Defile (Pirate Skeleton)
 
-    [80599] = true, -- Selene
-    [11317] = true, -- Generic Self PermaStun
-    [80607] = true, -- Dummy
-    [80600] = true, -- Selene
-    [80604] = true, -- Selene
-    [80609] = true, -- Dummy
-    [80606] = true, -- Selene
+    --[80599] = true, -- Selene
+    --[11317] = true, -- Generic Self PermaStun
+    --[80607] = true, -- Dummy
+    --[80600] = true, -- Selene
+    --[80604] = true, -- Selene
+    --[80609] = true, -- Dummy
+    --[80606] = true, -- Selene
 
-    [80542] = true, -- Sellistrix
-    [80545] = true, -- Sellistrix
-    [80544] = true, -- Sellistrix
-    [80549] = true, -- Sellistrix
+    --[80542] = true, -- Sellistrix
+    --[80545] = true, -- Sellistrix
+    --[80544] = true, -- Sellistrix
+    --[80549] = true, -- Sellistrix
 
-    [81035] = true, -- Sentinel of Rkugamz
-    [81036] = true, -- Sentinel of Rkugamz
-    [81037] = true, -- Sentinel of Rkugamz
-    [81038] = true, -- Sentinel of Rkugamz
-    [81041] = true, -- Sentinel of Rkugamz
-    [133239] = true, -- Sentinel of Rkugamz
+    --[81035] = true, -- Sentinel of Rkugamz
+    --[81036] = true, -- Sentinel of Rkugamz
+    --[81037] = true, -- Sentinel of Rkugamz
+    --[81038] = true, -- Sentinel of Rkugamz
+    --[81041] = true, -- Sentinel of Rkugamz
+    --[133239] = true, -- Sentinel of Rkugamz
 
-    [80951] = true, -- Shadowrend
-    [80955] = true, -- Forward Charge
-    [80954] = true, -- Shadowrend Summon
-    [80980] = true, -- Shadowrend
-    [80990] = true, -- Minor Maim
-    [80989] = true, -- Shadowrend
-    [81034] = true, -- Minor Maim
+    --[80951] = true, -- Shadowrend
+    --[80955] = true, -- Forward Charge
+    --[80954] = true, -- Shadowrend Summon
+    --[80980] = true, -- Shadowrend
+    --[80990] = true, -- Minor Maim
+    --[80989] = true, -- Shadowrend
+    --[81034] = true, -- Minor Maim
 
-    [80481] = true, -- Minor Berserk (Slimecraw)
+    --[80481] = true, -- Minor Berserk (Slimecraw)
 
-    [59489] = true, -- Spawn of Mephala
-    [59497] = true, -- Spawn of Mephala
-    [59498] = true, -- Mephala's Web
-    [59499] = true, -- Mephala's Web
+    --[59489] = true, -- Spawn of Mephala
+    --[59497] = true, -- Spawn of Mephala
+    --[59498] = true, -- Mephala's Web
+    --[59499] = true, -- Mephala's Web
 
-    [116838] = true, -- Stonekeeper (Stonekeeper)
-    [116839] = true, -- Charging (Stonekeeper)
-    [116846] = true, -- Stonekeeper (Stonekeeper)
-    [116847] = true, -- Stonekeeper (Stonekeeper)
-    [116877] = true, -- Stonekeeper (Stonekeeper)
-    [116878] = true, -- Stonekeeper (Stonekeeper)
-    [116876] = true, -- Stonekeeper (Stonekeeper)
-    [116880] = true, -- Stonekeeper (Stonekeeper)
-    [116881] = true, -- Stonekeeper (Stonekeeper)
+    --[116838] = true, -- Stonekeeper (Stonekeeper)
+    --[116839] = true, -- Charging (Stonekeeper)
+    --[116846] = true, -- Stonekeeper (Stonekeeper)
+    --[116847] = true, -- Stonekeeper (Stonekeeper)
+    --[116877] = true, -- Stonekeeper (Stonekeeper)
+    --[116878] = true, -- Stonekeeper (Stonekeeper)
+    --[116876] = true, -- Stonekeeper (Stonekeeper)
+    --[116880] = true, -- Stonekeeper (Stonekeeper)
+    --[116881] = true, -- Stonekeeper (Stonekeeper)
 
-    [80520] = true, -- Stormfist
-    [80523] = true, -- Stormfist
-    [80522] = true, -- Stormfist
-    [80521] = true, -- Stormfist
+    --[80520] = true, -- Stormfist
+    --[80523] = true, -- Stormfist
+    --[80522] = true, -- Stormfist
+    --[80521] = true, -- Stormfist
 
-    [80592] = true, -- Swarm Mother
-    [84419] = true, -- Swarm Mother Mask
-    [80593] = true, -- Swarm Mother Mask
+    --[80592] = true, -- Swarm Mother
+    --[84419] = true, -- Swarm Mother Mask
+    --[80593] = true, -- Swarm Mother Mask
 
-    [117110] = true, -- Symphony of Blades (Symphony of Blades)
-    [117111] = true, -- Meridia's Favor (Symphony of Blades)
-    [117118] = true, -- Meridia's Favor (Symphony of Blades)
-    [117119] = true, -- Meridia's Favor (Symphony of Blades)
+    --[117110] = true, -- Symphony of Blades (Symphony of Blades)
+    --[117111] = true, -- Meridia's Favor (Symphony of Blades)
+    --[117118] = true, -- Meridia's Favor (Symphony of Blades)
+    --[117119] = true, -- Meridia's Favor (Symphony of Blades)
 
     [59521] = true, -- Engine Guardian
     [60484] = true, -- Sphere Groundrise
     [59522] = true, -- Engine Guardian
-    [59539] = true, -- Engine Guardian
-    [59540] = true, -- Engine Guardian Stamina
-    [59525] = true, -- Engine Guardian
-    [59533] = true, -- Engine Guardian Magicka
-    [59541] = true, -- Engine Guardian
-    [59543] = true, -- Engine Guardian Health
+    [59539] = true, -- Robust Engine Guardian
+    [59540] = true, -- Robust Engine Guardian
+    [59525] = true, -- Arcane Engine Guardian
+    [59533] = true, -- Arcane Engine Guardian
+    [59541] = true, -- Healthy Engine Guardian
+    [59543] = true, -- Healthy Engine Guardian
 
-    [80503] = true, -- The Troll King
-    [80504] = true, -- The Troll King
+    --[80503] = true, -- The Troll King
+    --[80504] = true, -- The Troll King
 
-    [102089] = true, -- Thurvokun
-    [102094] = true, -- Thurvokun
-    [102097] = true, -- Thurvokun
-    [102100] = true, -- Thurvokun
-    [102093] = true, -- Thurvokun
-    [102095] = true, -- Thurvokun
+    --[102089] = true, -- Thurvokun
+    --[102094] = true, -- Thurvokun
+    --[102097] = true, -- Thurvokun
+    --[102100] = true, -- Thurvokun
+    --[102093] = true, -- Thurvokun
+    --[102095] = true, -- Thurvokun
 
-    [80513] = true, -- Tremorscale
-    [80517] = true, -- Tremorscale
-    [80865] = true, -- Tremorscale
-    [80866] = true, -- Tremorscale
+    --[80513] = true, -- Tremorscale
+    --[80517] = true, -- Tremorscale
+    --[80865] = true, -- Tremorscale
+    --[80866] = true, -- Tremorscale
 
-    [59595] = true, -- Valkyn Skoria
-    [137979] = true, -- Valkyn Skoria
-    [59596] = true, -- Valkyn Skoria
-    [61273] = true, -- Valkyn Skoria
+    --[59595] = true, -- Valkyn Skoria
+    --[137979] = true, -- Valkyn Skoria
+    --[59596] = true, -- Valkyn Skoria
+    --[61273] = true, -- Valkyn Skoria
 
-    [80483] = true, -- Velidreth
-    [80487] = true, -- Hoarvor Mask
-    [80488] = true, -- Hoarvor Mask
-    [80856] = true, -- Hoarvor Mask
-    [80864] = true, -- Hoarvor Mask
-    [80489] = true, -- Hoarvor Mask
-    [80490] = true, -- Velidreth
-    [80859] = true, -- Hoarvor Mask
-    [80863] = true, -- Hoarvor Mask
+    --[80483] = true, -- Velidreth
+    --[80487] = true, -- Hoarvor Mask
+    --[80488] = true, -- Hoarvor Mask
+    --[80856] = true, -- Hoarvor Mask
+    --[80864] = true, -- Hoarvor Mask
+    --[80489] = true, -- Hoarvor Mask
+    --[80490] = true, -- Velidreth
+    --[80859] = true, -- Hoarvor Mask
+    --[80863] = true, -- Hoarvor Mask
 
-    [111352] = true, -- Vykosa
-    [111354] = true, -- Major Maim
+    --[111352] = true, -- Vykosa
+    --[111354] = true, -- Major Maim
 
-    [102125] = true, -- Zaan
-    [102136] = true, -- Zaan
-    [102142] = true, -- Zaan
-    [110997] = true, -- Zaan Buffer
+    --[102125] = true, -- Zaan
+    --[102136] = true, -- Zaan
+    --[102142] = true, -- Zaan
+    --[110997] = true, -- Zaan Buffer
 
     -- Crafted Sets
     [29124] = true, -- Ashen Grip

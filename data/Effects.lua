@@ -3989,12 +3989,12 @@ Effects.EffectOverride = {
 
     -- Monster Sets
     [111505] = { icon = 'LuiExtended/media/icons/abilities/ability_set_balorgh.dds', tooltip = Tooltips.Set_Balorgh }, -- Balorgh (Balorgh)
-    [59517] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_blood_spawn.dds', tooltip = Tooltips.Generic_Physical_Spell_Resist_Value, tooltipValue2 = 6450 }, -- Blood Spawn (Blood Spawn)
+    [59517] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_blood_spawn.dds', tooltip = Tooltips.Generic_Physical_Spell_Resist_Value, tooltipValue2 = 3300 }, -- Blood Spawn (Blood Spawn)
     [61274] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_blood_spawn.dds' }, -- Blood Spawn (Blood Spawn)
     [59590] = { tooltip = Tooltips.Set_Bogdan_the_Nightflame }, -- Imperial Prison Item Set (Bogdan the Nightflame)
     [59591] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_bogdan.dds', name = Abilities.Set_Bogdan_the_Nightflame, groundLabel = true, tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Bogdan Totem (Bogdan the Nightflame)
     [81069] = { hide = true }, -- Chokethorn (Chokethorn)
-    [81077] = { icon = 'esoui/art/icons/mh_hedgeguardian_strang.dds', tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Chokethorn (Chokethorn)
+    [81077] = { icon = 'esoui/art/icons/mh_hedgeguardian_strang.dds', tooltip = Tooltips.Generic_HoT_Channel, tooltipValue2 = 1 }, -- Chokethorn (Chokethorn)
     [97901] = { tooltip = Tooltips.Set_Domihaus_Stamina_Damage }, -- Domihaus (Domihaus)
     [97900] = { icon = 'LuiExtended/media/icons/abilities/ability_set_domihaus_stone.dds', forcedContainer = 'short', groundLabel = true, tooltip = Tooltips.Set_Domihaus_Stamina_Buff }, -- Domihaus (Domihaus)
     [97899] = { icon = 'LuiExtended/media/icons/abilities/ability_set_domihaus_stone.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Physical, tooltipValue2 = 1 }, -- Domihaus (Domihaus)
@@ -4072,9 +4072,9 @@ Effects.EffectOverride = {
     [84419] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', name = Abilities.Set_Swarm_Mother },
     [80593] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', name = Abilities.Set_Swarm_Mother },
     [59522] = { hide = true }, -- Engine Guardian
-    [59540] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_stamina.dds', name = Abilities.Set_Engine_Guardian, tooltip = Tooltips.Set_Engine_Guardian_Stamina, duration = 0.5 }, -- Engine Guardian Stamina
-    [59533] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_magicka.dds', name = Abilities.Set_Engine_Guardian, tooltip = Tooltips.Set_Engine_Guardian_Magicka, duration = 0.5 }, -- Engine Guardian Magicka
-    [59543] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_health.dds', name = Abilities.Set_Engine_Guardian, tooltip = Tooltips.Generic_HoT, tooltipValue2 = 0.5, duration = 0.5 }, -- Engine Guardian Health
+    [59540] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_stamina.dds', tooltip = Tooltips.Set_Engine_Guardian_Stamina }, -- Robust Engine Guardian
+    [59533] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_magicka.dds', tooltip = Tooltips.Set_Engine_Guardian_Magicka }, -- Arcane Engine Guardian
+    [59543] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_health.dds', tooltip = Tooltips.Generic_HoT, tooltipValue2 = 0.5 }, -- Healthy Engine Guardian
     [80504] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_regeneration.dds', name = Abilities.Set_The_Troll_King, tooltip = Tooltips.Set_The_Troll_King }, -- The Troll King
     [102094] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds', groundLabel = true, tooltip = Tooltips.Set_Thurvokun_Ground }, -- Thurvokun
     [102097] = { tooltip = Abilities.Set_Thurvokun }, -- Minor Maim (Thurvokun)
