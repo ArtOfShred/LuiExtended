@@ -526,7 +526,7 @@ Effects.EffectGroundDisplay = {
     [80527] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris_fire.dds', buff = false, debuff = false, ground = true }, -- Ilambris (Ilambris)
     [59587] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_lord_warden.dds', name = Abilities.Set_Lord_Warden_Dusk, buff = true, debuff = false, ground = false }, -- Lord Warden (Lord Warden)
     [59568] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds', name = Abilities.Set_Malubeth_the_Scourger, buff = true, debuff = false, ground = false }, -- Scourge Harvest (Malubeth)
-    [59508] = { icon = 'esoui/art/icons/achievement_ic_020.dds', name = Abilities.Set_Maw_of_the_Infernal, buff = true, debuff = false, ground = false }, -- Banished Cells Item Set (Maw of the Infernal)
+    [59508] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maw_of_the_infernal.dds', name = Abilities.Set_Maw_of_the_Infernal, buff = true, debuff = false, ground = false }, -- Banished Cells Item Set (Maw of the Infernal)
     [81036] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_heal.dds', buff = true, debuff = false, ground = false }, -- Sentinel of Rkugamz
     [80954] = { icon = 'esoui/art/icons/achievement_ic_017.dds', name = Abilities.Set_Shadowrend, buff = true, debuff = false, ground = false }, -- Shadowrend Summon (Shadowrend)
     [59497] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', buff = false, debuff = false, ground = true }, -- Spawn of Mephala (Spawn of Mephala)
@@ -4008,10 +4008,10 @@ Effects.EffectOverride = {
     [80562] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_iceheart.dds', tooltip = Tooltips.Set_Iceheart }, -- Iceheart (Iceheart)
     [80561] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_iceheart.dds' }, -- Iceheart (Iceheart)
     [80529] = { tooltip = Tooltips.Set_Ilambris_Shock }, -- Ilambris (Ilambris)
-    [80526] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_ilambris_shock.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Shock, tooltipValue2 = 1 }, -- Ilambris (Ilambris)
+    [80526] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris_shock.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Shock, tooltipValue2 = 1 }, -- Ilambris (Ilambris)
     [80527] = { tooltip = Tooltips.Set_Ilambris_Fire }, -- Ilambris (Ilambris)
     [80525] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris_fire.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1 }, -- Ilambris (Ilambris)
-    [83405] = { hide = true }, -- Infernal Guardian (Infernal Guardian)
+    [83405] = { icon = 'LuiExtended/media/icons/abilities/ability_set_infernal_guardian.dds', hide = true }, -- Infernal Guardian (Infernal Guardian)
     [83409] = { icon = 'LuiExtended/media/icons/abilities/ability_set_infernal_guardian.dds' }, -- Infernal Guardian (Infernal Guardian)
 
     [133505] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kjalnars_nightmare_bone.dds', tooltip = Tooltips.Set_Kjalnars_Nightmare }, -- Bone (Kjalnar's Nightmare)
@@ -4019,14 +4019,14 @@ Effects.EffectOverride = {
     [134908] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kjalnars_nightmare.dds' }, -- Kjalnar's Nightmare (Kjalnar's Nightmare)
     [133506] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kjalnars_nightmare.dds', tooltip = Tooltips.Generic_Knockdown }, -- Kjalnar's Nightmare (Kjalnar's Nightmare)
 
-    [80566] = { hide = true }, -- Kra'gh (Kra'gh)
+    [80566] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_kragh.dds', hide = true }, -- Kra'gh (Kra'gh)
     [80565] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_kragh.dds' }, -- Kra'gh (Kra'gh)
-    [59586] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_lord_warden.dds', name = Abilities.Set_Lord_Warden_Dusk, duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 3870 }, -- Lord Warden (Lord Warden)
-    [59587] = { tooltip = Tooltips.Set_Lord_Warden_Buff }, -- Lord Warden (Lord Warden)
+    [59586] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_lord_warden.dds', name = Abilities.Set_Lord_Warden_Dusk, duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 3180 }, -- Lord Warden (Lord Warden)
+    [59587] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_lord_warden.dds', name = Abilities.Set_Lord_Warden_Dusk, tooltip = Tooltips.Set_Lord_Warden_Buff }, -- Lord Warden (Lord Warden)
     [59568] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds', name = Abilities.Set_Malubeth_the_Scourger, tooltip = Tooltips.Set_Malubeth }, -- Scourge Harvest (Malubeth)
     [61275] = { tooltip = Abilities.Set_Malubeth_the_Scourger, forcedContainer = 'short' }, -- Major Vitality (Malubeth)
     [59573] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds', name = Abilities.Set_Malubeth_the_Scourger }, -- Scourge Harvest (Malubeth)
-    [59508] = { icon = 'esoui/art/icons/achievement_ic_020.dds', name = Abilities.Set_Maw_of_the_Infernal, tooltip = Tooltips.Set_Maw_of_the_Infernal }, -- Banished Cells Item Set (Maw of the Infernal)
+    [59508] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maw_of_the_infernal.dds', name = Abilities.Set_Maw_of_the_Infernal, tooltip = Tooltips.Set_Maw_of_the_Infernal }, -- Banished Cells Item Set (Maw of the Infernal)
     [60974] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_jagged_claw_fire.dds'}, -- Jagged Claw (Maw of the Infernal)
     [60972] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_breath.dds'}, -- Fiery Breath (Maw of the Infernal)
     [60973] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_jaws.dds'}, -- Fiery Jaws (Maw of the Infernal)
@@ -4035,8 +4035,9 @@ Effects.EffectOverride = {
     [66812] = { icon = 'LuiExtended/media/icons/abilities/ability_set_molag_kena.dds', tooltip = Tooltips.Set_Molag_Kena_Overkill }, -- Overkill (Molag Kena)
 
     [133381] = { icon = 'LuiExtended/media/icons/abilities/ability_set_mother_ciannait.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Mother Ciannait (Mother Ciannait)
+    [137313] = { icon = 'LuiExtended/media/icons/abilities/ability_set_mother_ciannait.dds' }, -- Mother Ciannait (Mother Ciannait)
 
-    [59594] = { tooltip = Tooltips.Set_Nerieneth }, -- Crypt of Hearts Item Set (Nerien'eth)
+    [59594] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_rupture.dds', name = Abilities.Set_Nerieneth, tooltip = Tooltips.Set_Nerieneth }, -- Crypt of Hearts Item Set (Nerien'eth)
     [59593] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_rupture.dds', name = Abilities.Set_Nerieneth }, -- Lich Crystal (Nerien'eth)
     [98421] = { icon = 'esoui/art/icons/achievement_housing_038.dds', tooltip = Tooltips.Set_Pirate_Skeleton }, -- Pirate Skeleton
     [98419] = { icon = 'esoui/art/icons/achievement_housing_038.dds', tooltip = Tooltips.Set_Pirate_Skeleton }, -- Pirate Skeleton
@@ -4099,10 +4100,10 @@ Effects.EffectOverride = {
     [117118] = { icon = 'esoui/art/icons/achievement_depthsofmalatar_killmonstersb.dds' }, -- Meridia's Favor (Symphony of Blades)
     [117119] = { icon = 'esoui/art/icons/achievement_depthsofmalatar_killmonstersb.dds' }, -- Meridia's Favor (Symphony of Blades)
 
-    [126529] = { icon = 'esoui/art/icons/achievement_u23_dun1_hard_mode.dds' }, -- Grundwulf (Grundwulf)
-    [126687] = { icon = 'esoui/art/icons/achievement_u23_dun1_hard_mode.dds' }, -- Grundwulf (Grundwulf)
-    [126688] = { icon = 'esoui/art/icons/achievement_u23_dun1_hard_mode.dds' }, -- Grundwulf (Grundwulf)
-    [126528] = { icon = 'esoui/art/icons/achievement_u23_dun1_hard_mode.dds' }, -- Grundwulf (Grundwulf)
+    [126529] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grundwulf_stamina.dds' }, -- Grundwulf (Grundwulf)
+    [126687] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grundwulf_magicka.dds' }, -- Grundwulf (Grundwulf)
+    [126688] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grundwulf_stamina.dds' }, -- Grundwulf (Grundwulf)
+    [126528] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grundwulf_magicka.dds' }, -- Grundwulf (Grundwulf)
 
     [126941] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_maarselok.dds', tooltip = Tooltips.Set_Maarselok }, -- Maarselok (Maarselok)
 

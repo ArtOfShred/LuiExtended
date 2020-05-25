@@ -1116,46 +1116,47 @@ LUIE.DebugAuras = {
     --[84504] = true, -- Grothdarr
     --[84502] = true, -- Grothdarr
 
-    --[126513] = true, -- Grundwulf
-    --[126529] = true, -- Grundwulf
-    --[126687] = true, -- Grundwulf
-    --[126688] = true, -- Grundwulf
-    --[126528] = true, -- Grundwulf
+    [126513] = true, -- Grundwulf
+    [126529] = true, -- Grundwulf
+    [126687] = true, -- Grundwulf
+    [126688] = true, -- Grundwulf
+    [126528] = true, -- Grundwulf
 
     --[80560] = true, -- Iceheart
     --[80561] = true, -- Iceheart
     --[80562] = true, -- Iceheart
     --[80563] = true, -- Iceheart
 
-    --[80524] = true, -- Ilambris
-    --[80529] = true, -- Ilambris
-    --[80526] = true, -- Ilambris
-    --[80527] = true, -- Ilambris
-    --[80525] = true, -- Ilambris
+    [80524] = true, -- Ilambris
+    [140516] = true, -- Ilambris
+    [80529] = true, -- Ilambris
+    [80526] = true, -- Ilambris
+    [80527] = true, -- Ilambris
+    [80525] = true, -- Ilambris
 
-    --[81687] = true, -- Infernal Guardian
-    --[83405] = true, -- Infernal Guardian
-    --[83390] = true, -- Infernal Guardian
-    --[83393] = true, -- Infernal Guardian
-    --[83391] = true, -- Infernal Guardian
-    --[83409] = true, -- Infernal Guardian
+    [81687] = true, -- Infernal Guardian
+    [83405] = true, -- Infernal Guardian
+    [83390] = true, -- Infernal Guardian
+    [83393] = true, -- Infernal Guardian
+    [83391] = true, -- Infernal Guardian
+    [83409] = true, -- Infernal Guardian
 
-    --[133499] = true, -- Kjalnar's Nightmare (Kjalnar's Nightmare)
-    --[133505] = true, -- Bone (Kjalnar's Nightmare)
-    --[135094] = true, -- Warning (Kjalnar's Nightmare)
-    --[135088] = true, -- Kjalnar's Nightmare (Kjalnar's Nightmare)
-    --[133538] = true, -- Kjalnar's Nightmare
-    --[134908] = true, -- Kjalnar's Nightmare
-    --[133506] = true, -- Kjalnar's Nightmare
-    --[133542] = true, -- Bone Colossus
+    [133499] = true, -- Kjalnar's Nightmare (Kjalnar's Nightmare)
+    [133505] = true, -- Bone (Kjalnar's Nightmare)
+    [135094] = true, -- Warning (Kjalnar's Nightmare)
+    [135088] = true, -- Kjalnar's Nightmare (Kjalnar's Nightmare)
+    [133538] = true, -- Kjalnar's Nightmare
+    [134908] = true, -- Kjalnar's Nightmare
+    [133506] = true, -- Kjalnar's Nightmare
+    [133542] = true, -- Bone Colossus
 
-    --[80564] = true, -- Kra'gh
-    --[80566] = true, -- Kra'gh
-    --[80565] = true, -- Kra'gh
+    [80564] = true, -- Kra'gh
+    [80566] = true, -- Kra'gh
+    [80565] = true, -- Kra'gh
 
-    --[59585] = true, -- Lord Warden
-    --[59586] = true, -- Lord Warden
-    --[59587] = true, -- Lord Warden
+    [59585] = true, -- Lord Warden
+    [59586] = true, -- Lord Warden
+    [59587] = true, -- Lord Warden
 
     --[59564] = true, -- Scourge Harvester (Malubeth)
     --[85658] = true, -- Scourge Harvest (Malubeth)
@@ -1163,30 +1164,31 @@ LUIE.DebugAuras = {
     --[61275] = true, -- Major Vitality (Malubeth)
     --[59573] = true, -- Scourge Harvest (Malubeth)
 
-    --[59507] = true, -- Maw of the Infernal (Maw of the Infernal)
-    --[48796] = true, -- DUMMY (Maw of the Infernal)
-    --[59508] = true, -- Banished Cells Item Set (Maw of the Infernal)
-    --[60974] = true, -- Jagged Claw (Maw of the Infernal)
-    --[60971] = true, -- Fiery Breath (Maw of the Infernal)
-    --[60972] = true, -- Fiery Breath (Maw of the Infernal)
-    --[60973] = true, -- Fiery Jaws (Maw of the Infernal)
+    [59507] = true, -- Maw of the Infernal (Maw of the Infernal)
+    [48796] = true, -- DUMMY (Maw of the Infernal)
+    [59508] = true, -- Banished Cells Item Set (Maw of the Infernal)
+    [60974] = true, -- Jagged Claw (Maw of the Infernal)
+    [60971] = true, -- Fiery Breath (Maw of the Infernal)
+    [60972] = true, -- Fiery Breath (Maw of the Infernal)
+    [60973] = true, -- Fiery Jaws (Maw of the Infernal)
 
-    --[126940] = true, -- Maarselok (Maarselok)
-    --[126941] = true, -- Maarselok (Maarselok)
+    [126940] = true, -- Maarselok (Maarselok)
+    [126941] = true, -- Maarselok (Maarselok)
 
-    --[80482] = true, -- Mighty Chudan (Mighty Chudan)
-    --[130633] = true, -- Major Resolve (Mighty Chudan)
+    [80482] = true, -- Mighty Chudan (Mighty Chudan)
+    [130633] = true, -- Major Resolve (Mighty Chudan)
 
-    --[66792] = true, -- Molag Kena (Molag Kena)
-    --[66808] = true, -- Molag Kena (Molag Kena)
-    --[66812] = true, -- Overkill (Molag Kena)
+    [66792] = true, -- Molag Kena (Molag Kena)
+    [66808] = true, -- Molag Kena (Molag Kena)
+    [66812] = true, -- Overkill (Molag Kena)
 
-    --[133378] = true, -- Mother Ciannait (Mother Ciannait)
-    --[133381] = true, -- Mother Ciannait (Mother Ciannait)
+    [133378] = true, -- Mother Ciannait (Mother Ciannait)
+    [133381] = true, -- Mother Ciannait (Mother Ciannait)
+    [137313] = true, -- Mother Ciannait (Mother Ciannait)
 
-    --[59592] = true, -- Nerien'eth
-    --[59594] = true, -- Crpyt of Hearts Item Set
-    --[59593] = true, -- Lich Crystal
+    [59592] = true, -- Nerien'eth
+    [59594] = true, -- Crpyt of Hearts Item Set
+    [59593] = true, -- Lich Crystal
 
     --[80501] = true, -- Pirate Skeleton
     --[98421] = true, -- Pirate Skeleton

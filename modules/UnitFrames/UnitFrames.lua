@@ -1767,7 +1767,17 @@ function UnitFrames.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, pow
         UnitFrames.UpdateAttribute( g_DefaultFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == POWERTYPE_HEALTH) and g_savedHealth[unitTag][4] or nil, eventCode == nil )
     end
     if UnitFrames.CustomFrames[unitTag] then
-        UnitFrames.UpdateAttribute( UnitFrames.CustomFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == POWERTYPE_HEALTH) and g_savedHealth[unitTag][4] or nil, eventCode == nil )
+        if unitTag == "reticleover" and powerType == POWERTYPE_HEALTH then
+            local isCritter = ( g_savedHealth.reticleover[3] <= 9 )
+            local isGuard = IsUnitInvulnerableGuard("reticleover")
+            if (isCritter or isGuard) and powerValue >= 1 then
+                return
+            else
+                UnitFrames.UpdateAttribute( UnitFrames.CustomFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == POWERTYPE_HEALTH) and g_savedHealth[unitTag][4] or nil, eventCode == nil )
+            end
+        else
+            UnitFrames.UpdateAttribute( UnitFrames.CustomFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == POWERTYPE_HEALTH) and g_savedHealth[unitTag][4] or nil, eventCode == nil )
+        end
     end
     if g_AvaCustFrames[unitTag] then
         UnitFrames.UpdateAttribute( g_AvaCustFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == POWERTYPE_HEALTH) and g_savedHealth[unitTag][4] or nil, eventCode == nil )
