@@ -242,6 +242,8 @@ local strings = {
 
     SI_LUIE_SKILL_GENERIC_LOWER_MAX_HP_TP =              "Reduce Max Health by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
+    SI_LUIE_SKILL_GENERIC_REDUCE_DAMAGE_DONE_TP =               "Reduce damage done by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+
     -- Resource Regeneration, Shields
     SI_LUIE_SKILL_GENERIC_HEALTH_RECOVERY_TP =           "Increase Health Recovery for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP =                 "Restoring Magicka every |cFFFFFF<<2>>|r <<2[second/seconds]>> for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
@@ -883,14 +885,15 @@ local strings = {
     SI_LUIE_SKILL_SET_ICEHEART =                         "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nEnemies within |cFFFFFF5|r meters take Frost Damage every |cFFFFFF1|r second while the damage shield holds.",
     SI_LUIE_SKILL_SET_ILAMBRIS =                         "Enemies within |cFFFFFF4|r meters of the meteor shower take <<1>> Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_SET_LORD_WARDEN_BUFF =                 "You and allies within |cFFFFFF8|r meters of the shadow orb have |cFFFFFF3180|r increased Physical and Spell Resistance.",
-    SI_LUIE_SKILL_SET_MALUBETH =                         "Высасывает здоровье каждые |cFFFFFF0.5|r секунды в течение |cFFFFFF4|r секунд, пока луч активен.",
+    SI_LUIE_SKILL_SET_MALUBETH_DAMAGE =                  "Afflicted with Magic Damage every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds while the beam holds.\n\nYour attacker heals for |cFFFFFF100|r% of the damage done.",
+    SI_LUIE_SKILL_SET_MALUBETH_HEAL =                    "Restoring Health every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds while the beam holds.",
     SI_LUIE_SKILL_SET_MAW_OF_THE_INFERNAL =              "A fire breathing Daedroth fights at your side. The daedroth remains for |cFFFFFF<<1>>|r seconds or until killed.\n\nThe daedroth's basic attacks deal Flame Damage.",
     SI_LUIE_SKILL_SET_MOLAG_KENA_TP =                    "When you deal damage with |cFFFFFF2|r consecutive light attacks, you trigger |cFFFFFFOverkill|r for |cFFFFFF6|r seconds.",
     SI_LUIE_SKILL_SET_MOLAG_KENA_OVERKILL_TP =           "Increase Weapon and Spell Damage by |cFFFFFF560|r but increase the cost of your abilities by |cFFFFFF8|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_PIRATE_SKELETON_TP =               "Gain Major Protection but become afflicted with Major Defile for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_SET_SENTINEL_OF_REKUGAMZ_TP =          "After |cFFFFFF2|r seconds, you and allies within |cFFFFFF5|r meters of the Dwemer Spider are healed and restore |cFFFFFF115|r Magicka and Stamina every |cFFFFFF1|r second.",
-    SI_LUIE_SKILL_SET_SENTINEL_OF_REKUGAMZ_GROUND_TP =   "Healing and restoring |cFFFFFF115|r Magicka and Stamina every |cFFFFFF1|r second.",
-    SI_LUIE_SKILL_SET_SHADOWREND_TP =                    "A shadowy Clannfear fights at your side. The clannfear remains for |cFFFFFF<<1>>|r seconds.\n\nThe Clannfear's basic attacks deal Magic Damage and apply Minor Maim to any enemy hit for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_SET_SENTINEL_OF_REKUGAMZ_TP =          "After |cFFFFFF2|r seconds, you and allies within |cFFFFFF5|r meters of the Dwemer Spider are healed and restore |cFFFFFF125|r Magicka and Stamina every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_SET_SENTINEL_OF_REKUGAMZ_GROUND_TP =   "Healing and restoring |cFFFFFF125|r Magicka and Stamina every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_SET_SHADOWREND_TP =                    "A shadowy Clannfear fights at your side. The clannfear remains for |cFFFFFF<<1>>|r seconds.\n\nThe Clannfear's attacks deal Magic Damage and reduce their target's damage done by |cFFFFFF5|r% for |cFFFFFF2|r seconds.",
     SI_LUIE_SKILL_SET_SLIMECRAW =                        "Slimecraw",
     SI_LUIE_SKILL_SET_SPAWN_OF_MEPHALA_TP =              "Противники в радиусе |cFFFFFF4|r метров от паутины получают урон Ядом каждую |cFFFFFF1|r секунду, а их скорость передвижения снижена на  |cFFFFFF50|r% в течение |cFFFFFF10|r секунд.",
     SI_LUIE_SKILL_SET_STORMFIST_TP =                     "Enemies within |cFFFFFF4|r meters of the thunderfist take Shock Damage every |cFFFFFF1|r second.\n\nAfter |cFFFFFF3|r seconds the fist closes, dealing Physical Damage.",

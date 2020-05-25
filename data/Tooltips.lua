@@ -151,6 +151,8 @@ LUIE.Data.Tooltips = {
 
     Generic_Lower_Max_HP                            = GetString(SI_LUIE_SKILL_GENERIC_LOWER_MAX_HP_TP),
 
+    Generic_Reduce_Damage_Done                      = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_DAMAGE_DONE_TP),
+
     Generic_Test                                    = GetString(SI_LUIE_SKILL_TEST_TP),
 
     Generic_Bleed                                   = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_TP), "SUBSTRING", BleedDamage),
@@ -447,7 +449,8 @@ LUIE.Data.Tooltips = {
     Set_Ilambris_Fire                               = zo_strformat(GetString(SI_LUIE_SKILL_SET_ILAMBRIS), GetString(SI_DAMAGETYPE3)),
     Set_Ilambris_Shock                              = zo_strformat(GetString(SI_LUIE_SKILL_SET_ILAMBRIS), GetString(SI_DAMAGETYPE4)),
     Set_Lord_Warden_Buff                            = GetString(SI_LUIE_SKILL_SET_LORD_WARDEN_BUFF),
-    Set_Malubeth                                    = GetString(SI_LUIE_SKILL_SET_MALUBETH),
+    Set_Malubeth_Damage                             = GetString(SI_LUIE_SKILL_SET_MALUBETH_DAMAGE),
+    Set_Malubeth_Heal                               = GetString(SI_LUIE_SKILL_SET_MALUBETH_HEAL),
     Set_Maw_of_the_Infernal                         = GetString(SI_LUIE_SKILL_SET_MAW_OF_THE_INFERNAL),
     Set_Molag_Kena_Overkill                         = GetString(SI_LUIE_SKILL_SET_MOLAG_KENA_OVERKILL_TP),
     Set_Molag_Kena                                  = GetString(SI_LUIE_SKILL_SET_MOLAG_KENA_TP),

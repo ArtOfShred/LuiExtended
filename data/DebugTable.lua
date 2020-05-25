@@ -1091,10 +1091,10 @@ LUIE.DebugAuras = {
     [59517] = true, -- Blood Spawn
     [61274] = true, -- Blood Spawn
 
-    --[59589] = true, -- Nightflame
-    --[59590] = true, -- Imperial Prison Item Set
-    --[59591] = true, -- Bogdan Totem
-    --[61381] = true, -- Imperial Prison Item Set
+    [59589] = true, -- Nightflame
+    [59590] = true, -- Imperial Prison Item Set
+    [59591] = true, -- Bogdan Totem
+    [61381] = true, -- Imperial Prison Item Set
 
     [81068] = true, -- Chokethorn
     [81069] = true, -- Chokethorn
@@ -1158,11 +1158,11 @@ LUIE.DebugAuras = {
     [59586] = true, -- Lord Warden
     [59587] = true, -- Lord Warden
 
-    --[59564] = true, -- Scourge Harvester (Malubeth)
-    --[85658] = true, -- Scourge Harvest (Malubeth)
-    --[59568] = true, -- Scourge Harvest (Malubeth)
-    --[61275] = true, -- Major Vitality (Malubeth)
-    --[59573] = true, -- Scourge Harvest (Malubeth)
+    [59564] = true, -- Scourge Harvester (Malubeth)
+    [85658] = true, -- Scourge Harvest (Malubeth)
+    [59568] = true, -- Scourge Harvest (Malubeth)
+    [61275] = true, -- Major Vitality (Malubeth)
+    [59573] = true, -- Scourge Harvest (Malubeth)
 
     [59507] = true, -- Maw of the Infernal (Maw of the Infernal)
     [48796] = true, -- DUMMY (Maw of the Infernal)
@@ -1190,50 +1190,50 @@ LUIE.DebugAuras = {
     [59594] = true, -- Crpyt of Hearts Item Set
     [59593] = true, -- Lich Crystal
 
-    --[80501] = true, -- Pirate Skeleton
-    --[98421] = true, -- Pirate Skeleton
-    --[98419] = true, -- Pirate Skeleton
-    --[98420] = true, -- Pirate Skeleton
-    --[81675] = true, -- Pirate Skeleton
-    --[83288] = true, -- Pirate Skeleton
-    --[83287] = true, -- Pirate Skeleton
-    --[80853] = true, -- Major Protection (Pirate Skeleton)
-    --[85637] = true, -- Major Defile (Pirate Skeleton)
+    [80501] = true, -- Pirate Skeleton
+    [98421] = true, -- Pirate Skeleton
+    [98419] = true, -- Pirate Skeleton
+    [98420] = true, -- Pirate Skeleton
+    [81675] = true, -- Pirate Skeleton
+    [83288] = true, -- Pirate Skeleton
+    [83287] = true, -- Pirate Skeleton
+    [80853] = true, -- Major Protection (Pirate Skeleton)
+    [85637] = true, -- Major Defile (Pirate Skeleton)
 
-    --[80599] = true, -- Selene
-    --[11317] = true, -- Generic Self PermaStun
-    --[80607] = true, -- Dummy
-    --[80600] = true, -- Selene
-    --[80604] = true, -- Selene
-    --[80609] = true, -- Dummy
-    --[80606] = true, -- Selene
+    [80599] = true, -- Selene
+    [11317] = true, -- Generic Self PermaStun
+    [80607] = true, -- Dummy
+    [80600] = true, -- Selene
+    [80604] = true, -- Selene
+    [80609] = true, -- Dummy
+    [80606] = true, -- Selene
 
-    --[80542] = true, -- Sellistrix
-    --[80545] = true, -- Sellistrix
-    --[80544] = true, -- Sellistrix
-    --[80549] = true, -- Sellistrix
+    [80542] = true, -- Sellistrix
+    [80545] = true, -- Sellistrix
+    [80544] = true, -- Sellistrix
+    [80549] = true, -- Sellistrix
 
-    --[81035] = true, -- Sentinel of Rkugamz
-    --[81036] = true, -- Sentinel of Rkugamz
-    --[81037] = true, -- Sentinel of Rkugamz
-    --[81038] = true, -- Sentinel of Rkugamz
-    --[81041] = true, -- Sentinel of Rkugamz
-    --[133239] = true, -- Sentinel of Rkugamz
+    [81035] = true, -- Sentinel of Rkugamz
+    [81036] = true, -- Sentinel of Rkugamz
+    [81037] = true, -- Sentinel of Rkugamz
+    [81038] = true, -- Sentinel of Rkugamz
+    [81041] = true, -- Sentinel of Rkugamz
+    [133239] = true, -- Sentinel of Rkugamz
 
-    --[80951] = true, -- Shadowrend
-    --[80955] = true, -- Forward Charge
-    --[80954] = true, -- Shadowrend Summon
-    --[80980] = true, -- Shadowrend
-    --[80990] = true, -- Minor Maim
-    --[80989] = true, -- Shadowrend
-    --[81034] = true, -- Minor Maim
+    [80951] = true, -- Shadowrend
+    [80955] = true, -- Forward Charge
+    [80954] = true, -- Shadowrend Summon
+    [80980] = true, -- Shadowrend
+    [80990] = true, -- Shadowrend
+    [80989] = true, -- Shadowrend
+    [81034] = true, -- Shadowrend
 
-    --[80481] = true, -- Minor Berserk (Slimecraw)
+    [80481] = true, -- Minor Berserk (Slimecraw)
 
-    --[59489] = true, -- Spawn of Mephala
-    --[59497] = true, -- Spawn of Mephala
-    --[59498] = true, -- Mephala's Web
-    --[59499] = true, -- Mephala's Web
+    [59489] = true, -- Spawn of Mephala
+    [59497] = true, -- Spawn of Mephala
+    [59498] = true, -- Mephala's Web
+    [59499] = true, -- Mephala's Web
 
     --[116838] = true, -- Stonekeeper (Stonekeeper)
     --[116839] = true, -- Charging (Stonekeeper)
