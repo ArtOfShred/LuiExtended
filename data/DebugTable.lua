@@ -995,6 +995,8 @@ LUIE.DebugAuras = {
 
     -- Weapons
     [100473] = true, -- Chaotic Whirlwind (Asylum)
+    [100474] = true, -- Chaotic Whirlwind (Asylum)
+    [140223] = true, -- Chaotic Whirlwind (Asylum)
     [100301] = true, -- Piercing Spray (Asylum)
     [100302] = true, -- Piercing Spray (Asylum)
     [100293] = true, -- Disciplined Slash (Asylum)
@@ -1004,27 +1006,12 @@ LUIE.DebugAuras = {
     [100465] = true, -- Defensive Position (Perfected) (Asylum)
     [100462] = true, -- Defensive Position (Asylum)
     [100464] = true, -- Defensive Position (Asylum)
-    [100303] = true, -- Concentrated Forced (Asylum)
-    [100304] = true, -- Concentrated Forced (Asylum)
-    [100306] = true, -- Concentrated Forced (Asylum)
+    [100303] = true, -- Concentrated Force (Asylum)
+    [100304] = true, -- Concentrated Force (Asylum)
+    [100306] = true, -- Concentrated Force (Asylum)
+    [140282] = true, -- Concentrated Force (Asylum)
     [100307] = true, -- Timeless Blessing (Asylum)
     [100308] = true, -- Timeless Blessing (Asylum)
-
-    [99597] = true, -- Chaotic Whirlwind (Perfected) (Asylum)
-    [99362] = true, -- Piercing Spray (Perfected) (Asylum)
-    [99363] = true, -- Piercing Spray (Perfected) (Asylum)
-    [99360] = true, -- Disciplined Slash (P) (Asylum)
-    [99361] = true, -- Disciplined Slash (Perfected) (Asylum)
-    [99896] = true, -- Defensive Position (Asylum)
-    [100454] = true, -- Defensive Position (Perfected) (Asylum)
-    [100455] = true, -- Defensive Position (Asylum)
-    [99920] = true, -- Defensive Position (Perfected) (Asylum)
-    [99919] = true, -- Defensive Position (Perfected) (Asylum)
-    [99596] = true, -- Concentrated Force (Perfected) (Asylum)
-    [99987] = true, -- Concentrated Force (P) (Asylum)
-    [99989] = true, -- Concentrated Force (P) (Asylum)
-    [99550] = true, -- Timeless Blessing (Perfected) (Asylum)
-    [99582] = true, -- Timeless Blessing (Perfected) (Asylum)
 
     [99805] = true, -- Cruel Flurry (Maelstrom)
     [99806] = true, -- Cruel Flurry (Maelstrom)
@@ -1033,6 +1020,7 @@ LUIE.DebugAuras = {
     [99854] = true, -- Thunderous Volley (Maelstrom)
     [99853] = true, -- Thunderous Volley (Maelstrom)
     [99787] = true, -- Merciless Charge (Maelstrom)
+    [141877] = true, -- Merciless Charge (Maelstrom)
     [99789] = true, -- Merciless Charge (Maelstrom)
     [99801] = true, -- Rampaging Slash (Maelstrom)
     [100588] = true, -- Rampaging Slash (Maelstrom)
@@ -1060,11 +1048,13 @@ LUIE.DebugAuras = {
     [99761] = true, -- Puncturing Remedy (Master)
     [100575] = true, -- Puncturing Remedy (Master)
     [99774] = true, -- Destructive Impact (Master)
+    [140334] = true, -- Destructive Impact (Master)
     [99780] = true, -- Grand Rejuvenation (Master)
     [99781] = true, -- Grand Rejuvenation (Master)
     [131489] = true, -- Grand Rejuvenation (Master)
 
     [113616] = true, -- Spectral Cloak (Blackrose DW)
+    [141875] = true, -- Spectral Cloak (Blackrose DW)
     [113617] = true, -- Spectral Cloak (Blackrose DW)
     [113619] = true, -- Virulent Shot (Blackrose Bow)
     [113628] = true, -- Virulent Shot (Blackrose Bow)
@@ -1112,9 +1102,9 @@ LUIE.DebugAuras = {
     [97855] = true, -- Earthgore
     [97857] = true, -- Earthgore
 
-    --[84492] = true, -- Grothdarr
-    --[84504] = true, -- Grothdarr
-    --[84502] = true, -- Grothdarr
+    [84492] = true, -- Grothdarr
+    [84504] = true, -- Grothdarr
+    [84502] = true, -- Grothdarr
 
     [126513] = true, -- Grundwulf
     [126529] = true, -- Grundwulf
@@ -1122,10 +1112,10 @@ LUIE.DebugAuras = {
     [126688] = true, -- Grundwulf
     [126528] = true, -- Grundwulf
 
-    --[80560] = true, -- Iceheart
-    --[80561] = true, -- Iceheart
-    --[80562] = true, -- Iceheart
-    --[80563] = true, -- Iceheart
+    [80560] = true, -- Iceheart
+    [80561] = true, -- Iceheart
+    [80562] = true, -- Iceheart
+    [80563] = true, -- Iceheart
 
     [80524] = true, -- Ilambris
     [140516] = true, -- Ilambris
@@ -1235,29 +1225,30 @@ LUIE.DebugAuras = {
     [59498] = true, -- Mephala's Web
     [59499] = true, -- Mephala's Web
 
-    --[116838] = true, -- Stonekeeper (Stonekeeper)
-    --[116839] = true, -- Charging (Stonekeeper)
-    --[116846] = true, -- Stonekeeper (Stonekeeper)
-    --[116847] = true, -- Stonekeeper (Stonekeeper)
-    --[116877] = true, -- Stonekeeper (Stonekeeper)
-    --[116878] = true, -- Stonekeeper (Stonekeeper)
-    --[116876] = true, -- Stonekeeper (Stonekeeper)
-    --[116880] = true, -- Stonekeeper (Stonekeeper)
-    --[116881] = true, -- Stonekeeper (Stonekeeper)
+    [116838] = true, -- Stonekeeper (Stonekeeper)
+    [116839] = true, -- Charging (Stonekeeper)
+    [116846] = true, -- Stonekeeper (Stonekeeper)
+    [116847] = true, -- Stonekeeper (Stonekeeper)
+    [116877] = true, -- Stonekeeper (Stonekeeper)
+    [116878] = true, -- Stonekeeper (Stonekeeper)
+    [116876] = true, -- Stonekeeper (Stonekeeper)
+    [116880] = true, -- Stonekeeper (Stonekeeper)
+    [116881] = true, -- Stonekeeper (Stonekeeper)
 
-    --[80520] = true, -- Stormfist
-    --[80523] = true, -- Stormfist
-    --[80522] = true, -- Stormfist
-    --[80521] = true, -- Stormfist
+    [80520] = true, -- Stormfist
+    [80523] = true, -- Stormfist
+    [80522] = true, -- Stormfist
+    [80521] = true, -- Stormfist
 
-    --[80592] = true, -- Swarm Mother
-    --[84419] = true, -- Swarm Mother Mask
-    --[80593] = true, -- Swarm Mother Mask
+    [80592] = true, -- Swarm Mother
+    [84419] = true, -- Swarm Mother Mask
+    [80593] = true, -- Swarm Mother Mask
 
-    --[117110] = true, -- Symphony of Blades (Symphony of Blades)
-    --[117111] = true, -- Meridia's Favor (Symphony of Blades)
-    --[117118] = true, -- Meridia's Favor (Symphony of Blades)
-    --[117119] = true, -- Meridia's Favor (Symphony of Blades)
+    [117110] = true, -- Symphony of Blades (Symphony of Blades)
+    [117111] = true, -- Meridia's Favor (Symphony of Blades)
+    [117118] = true, -- Meridia's Favor (Symphony of Blades)
+    [117119] = true, -- Meridia's Favor (Symphony of Blades)
+    [140092] = true, -- Meridia's No More Favor (Symphony of Blades)
 
     [59521] = true, -- Engine Guardian
     [60484] = true, -- Sphere Groundrise
@@ -1269,43 +1260,43 @@ LUIE.DebugAuras = {
     [59541] = true, -- Healthy Engine Guardian
     [59543] = true, -- Healthy Engine Guardian
 
-    --[80503] = true, -- The Troll King
-    --[80504] = true, -- The Troll King
+    [80503] = true, -- The Troll King
+    [80504] = true, -- The Troll King
 
-    --[102089] = true, -- Thurvokun
-    --[102094] = true, -- Thurvokun
-    --[102097] = true, -- Thurvokun
-    --[102100] = true, -- Thurvokun
-    --[102093] = true, -- Thurvokun
-    --[102095] = true, -- Thurvokun
+    [102089] = true, -- Thurvokun
+    [102094] = true, -- Thurvokun
+    [102097] = true, -- Thurvokun
+    [102100] = true, -- Thurvokun
+    [102093] = true, -- Thurvokun
+    [102095] = true, -- Thurvokun
 
-    --[80513] = true, -- Tremorscale
-    --[80517] = true, -- Tremorscale
-    --[80865] = true, -- Tremorscale
-    --[80866] = true, -- Tremorscale
+    [80513] = true, -- Tremorscale
+    [80517] = true, -- Tremorscale
+    [80865] = true, -- Tremorscale
+    [80866] = true, -- Tremorscale
 
-    --[59595] = true, -- Valkyn Skoria
-    --[137979] = true, -- Valkyn Skoria
-    --[59596] = true, -- Valkyn Skoria
-    --[61273] = true, -- Valkyn Skoria
+    [59595] = true, -- Valkyn Skoria
+    [137979] = true, -- Valkyn Skoria
+    [59596] = true, -- Valkyn Skoria
+    [61273] = true, -- Valkyn Skoria
 
-    --[80483] = true, -- Velidreth
-    --[80487] = true, -- Hoarvor Mask
-    --[80488] = true, -- Hoarvor Mask
-    --[80856] = true, -- Hoarvor Mask
-    --[80864] = true, -- Hoarvor Mask
-    --[80489] = true, -- Hoarvor Mask
-    --[80490] = true, -- Velidreth
-    --[80859] = true, -- Hoarvor Mask
-    --[80863] = true, -- Hoarvor Mask
+    [80483] = true, -- Velidreth
+    [80487] = true, -- Hoarvor Mask
+    [80488] = true, -- Hoarvor Mask
+    [80856] = true, -- Hoarvor Mask
+    [80864] = true, -- Hoarvor Mask
+    [80489] = true, -- Hoarvor Mask
+    [80490] = true, -- Velidreth
+    [80859] = true, -- Hoarvor Mask
+    [80863] = true, -- Hoarvor Mask
 
-    --[111352] = true, -- Vykosa
-    --[111354] = true, -- Major Maim
+    [111352] = true, -- Vykosa
+    [111354] = true, -- Vykosa
 
-    --[102125] = true, -- Zaan
-    --[102136] = true, -- Zaan
-    --[102142] = true, -- Zaan
-    --[110997] = true, -- Zaan Buffer
+    [102125] = true, -- Zaan
+    [102136] = true, -- Zaan
+    [102142] = true, -- Zaan
+    [110997] = true, -- Zaan Buffer
 
     -- Crafted Sets
     [29124] = true, -- Ashen Grip

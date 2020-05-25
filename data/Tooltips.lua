@@ -146,8 +146,9 @@ LUIE.Data.Tooltips = {
     Generic_Reduce_Physical_Spell_Resist_Value      = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_VALUE_TP),
     Generic_Reduce_Physical_Spell_Resist_No_Dur     = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_TP),
     Generic_Reduce_Physical_Spell_Resist_No_Dur_Value = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_VALUE_TP),
-
     Generic_Reduce_Physical_Spell_Damage_Percentage = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_WEP_SPELL_DMG_PERCENTAGE_TP),
+
+    Generic_Reduce_Physical_Resist_Value            = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHYSICAL_RESIST_VALUE_TP),
 
     Generic_Lower_Max_HP                            = GetString(SI_LUIE_SKILL_GENERIC_LOWER_MAX_HP_TP),
 
@@ -423,16 +424,15 @@ LUIE.Data.Tooltips = {
     ----------------------------------------------------------------
 
     -- Weapon Sets
-    Set_Asylum_Bow                                  = zo_strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_BOW), 45),
-    Set_Asylum_Bow_Perfect                          = zo_strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_BOW), 50),
+    Set_Asylum_Dual_Wield                           = GetString(SI_LUIE_SKILL_SET_ASYLUM_DUAL_WIELD),
+    Set_Asylum_Bow                                  = GetString(SI_LUIE_SKILL_SET_ASYLUM_BOW),
     Set_Asylum_Destruction_Staff                    = GetString(SI_LUIE_SKILL_SET_ASYLUM_DESTRUCTION_STAFF),
-    Set_Asylum_Destruction_Staff_P                  = GetString(SI_LUIE_SKILL_SET_ASYLUM_DESTRUCTION_STAFF_PERFECT),
-    Set_Aslyum_Restoration_Staff                    = zo_strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_RESTORATION_STAFF), 27),
-    Set_Aslyum_Restoration_Staff_P                  = zo_strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_RESTORATION_STAFF), 30),
+    Set_Aslyum_Restoration_Staff                    = GetString(SI_LUIE_SKILL_SET_ASYLUM_RESTORATION_STAFF),
     Set_Maelstrom_DW                                = GetString(SI_LUIE_SKILL_SET_MAELSTROM_DW),
     Set_Maelstrom_1H                                = GetString(SI_LUIE_SKILL_SET_MAELSTROM_1H),
     Set_Master_1H                                   = GetString(SI_LUIE_SKILL_SET_MASTER_1H),
     Set_Master_Resto                                = GetString(SI_LUIE_SKILL_SET_MASTER_RESTO),
+    Set_Blackrose_Dual_Wield                        = GetString(SI_LUIE_SKILL_SET_BLACKROSE_DUAL_WIELD),
     Set_Blackrose_1H                                = GetString(SI_LUIE_SKILL_SET_BLACKROSE_1H_TP),
     Set_Blackrose_Destro_Staff                      = GetString(SI_LUIE_SKILL_SET_BLACKROSE_DESTRO_TP),
 

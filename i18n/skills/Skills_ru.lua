@@ -52,7 +52,7 @@ local strings = {
     SI_LUIE_SKILL_RESURRECTION_IMMUNITY_TP =             "Reviving. Immune to damage and all negative effects.",
     SI_LUIE_SKILL_TAUNT_TP =                             "Спровоцирован.",
     SI_LUIE_SKILL_DISGUISE_TP =                          "Disguised. You can be revealed by sentries or performing suspicious activity.\n\nTaking any damage other than fall damage will destroy your disguise.",
-    SI_LUIE_SKILL_BATTLE_SPIRIT_TP =                     "• Health increased by |cFFFFFF5000|r\n• Damage taken and damage shield strength decreased by |cFFFFFF50|r%\n• Healing received decreased by |cFFFFFF60|r%\n• Ability range of |cFFFFFF28|r meters or more increased by |cFFFFFF8|r",\
+    SI_LUIE_SKILL_BATTLE_SPIRIT_TP =                     "• Health increased by |cFFFFFF5000|r\n• Damage taken and damage shield strength decreased by |cFFFFFF50|r%\n• Healing received decreased by |cFFFFFF60|r%\n• Ability range of |cFFFFFF28|r meters or more increased by |cFFFFFF8|r",
     SI_LUIE_SKILL_BATTLE_SPIRIT_IMPERIAL_CITY_TP =       "• Health increased by |cFFFFFF5000|r\n• Damage taken and damage shield strength decreased by |cFFFFFF50|r%\n• Healing received decreased by |cFFFFFF60|r%",
     SI_LUIE_SKILL_RECALL_PENALTY_TP =                    "Вы недавно пользовались перемещением к дорожному святилищу и должно заплатить дополнительное золото, чтобы воспользоваться им вновь.",
     SI_LUIE_SKILL_BATTLEGROUND_DESERTER_TP =             "You left a Battleground match early and cannot queue again or earn Alliance points from any PvP sources.",
@@ -238,7 +238,9 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_TP =    "Reduce Physical and Spell Resistance.",
     SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_VALUE_TP = "Reduce Physical and Spell Resistance by |cFFFFFF<<2>>|r.",
 
-    SI_LUIE_SKILL_GENERIC_REDUCE_WEP_SPELL_DMG_PERCENTAGE_TP =   "Reduce Weapon and Spell damage by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_REDUCE_PHYSICAL_RESIST_VALUE_TP =     "Reduce Physical Resistance by |cFFFFFF<<2>>|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+
+    SI_LUIE_SKILL_GENERIC_REDUCE_WEP_SPELL_DMG_PERCENTAGE_TP =   "Reduce Weapon and Spell Damage by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     SI_LUIE_SKILL_GENERIC_LOWER_MAX_HP_TP =              "Reduce Max Health by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
@@ -862,15 +864,16 @@ local strings = {
     SI_LUIE_SKILL_DISGUISE_BLOODTHORN_DISGUISE_TP =      "Disguised as a Bloodthorn Cultist.",
 
     -- Weapon Sets
-    SI_LUIE_SKILL_SET_ASYLUM_BOW =                       "The next Snipe, Scatter Shot, or Poison Arrow cast within |cFFFFFF6|r seconds by your attacker deals |cFFFFFF<<1>>|r% additional damage.",
-    SI_LUIE_SKILL_SET_ASYLUM_DESTRUCTION_STAFF =         "Каждое третье применение Force Shock в течение |cFFFFFF10|r секунд будет всегда накладывать эффекты Burning, Concussion и Chilled.",
-    SI_LUIE_SKILL_SET_ASYLUM_DESTRUCTION_STAFF_PERFECT = "Каждое второе применение Force Shock в течение |cFFFFFF10|r секунд будет всегда накладывать эффекты Burning, Concussion и Chilled.",
-    SI_LUIE_SKILL_SET_ASYLUM_RESTORATION_STAFF =         "Reduce the cost of your Magicka and Stamina healing abilities by |cFFFFFF<<1>>|r% for |cFFFFFF3|r seconds.",
-    SI_LUIE_SKILL_SET_MAELSTROM_DW =                     "Your single target damage over time abilities used within |cFFFFFF<<1>>|r seconds gain |cFFFFFF1000|r Spell and Weapon Damage.",
-    SI_LUIE_SKILL_SET_MAELSTROM_1H =                     "Ваша следующая полностью заряженная Силовая атака, применённая в течение |cFFFFFF5|r секунд дополнительно восстановит |cFFFFFF2000|r Магии и Запаса сил.",
-    SI_LUIE_SKILL_SET_MASTER_1H =                        "Gain up to |cFFFFFF2500|r Spell and Physical Resistance for |cFFFFFF3|r seconds based off the amount you healed with Puncturing Remedy.",
-    SI_LUIE_SKILL_SET_MASTER_RESTO =                     "Restoring |cFFFFFF100|r Magicka and Stamina every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_SET_BLACKROSE_1H_TP =                  "Снижает стоимость применения следующей способности ветки Одноручного оружия и щита на |cFFFFFF100|r%.",
+    SI_LUIE_SKILL_SET_ASYLUM_DUAL_WIELD =                "Enemies within |cFFFFFF4|r meters take Physical Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SET_ASYLUM_BOW =                       "Reduce Physical Resistance against Bow attacks by |cFFFFFF6600|r for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SET_ASYLUM_DESTRUCTION_STAFF =         "Каждое третье применение Force Shock в течение |cFFFFFF<<1>>|r секунд будет всегда накладывать эффекты Burning, Concussion и Chilled.",
+    SI_LUIE_SKILL_SET_ASYLUM_RESTORATION_STAFF =         "Reduce the cost of your Magicka and Stamina healing abilities by |cFFFFFF21|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SET_MAELSTROM_DW =                     "Your single target damage over time abilities used within |cFFFFFF<<1>>|r seconds gain |cFFFFFF1690|r Spell and Weapon Damage.",
+    SI_LUIE_SKILL_SET_MAELSTROM_1H =                     "Your next fully-charged Heavy Attack used within |cFFFFFF5|r seconds restores |cFFFFFF1904|r Magicka and Stamina.",
+    SI_LUIE_SKILL_SET_MASTER_1H =                        "Gain Spell and Physical Resistance equal to the amount you healed or overhealed with Puncturing Remedy for |cFFFFFF5|r seconds.",
+    SI_LUIE_SKILL_SET_MASTER_RESTO =                     "Restoring |cFFFFFF117|r Magicka and Stamina every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SET_BLACKROSE_DUAL_WIELD =             "Reduce damage taken and increase damage done by |cFFFFFF10|r% for |cFFFFFF2|r seconds.",
+    SI_LUIE_SKILL_SET_BLACKROSE_1H_TP =                  "Reduce the cost of your next non-Shield Charge One Hand and Shield ability cast within |cFFFFFF<<1>>|r seconds by |cFFFFFF100|r%.",
     SI_LUIE_SKILL_SET_BLACKROSE_DESTRO_TP =              "Afflicted with consecutive Flame, Shock, and Frost Damage for |cFFFFFF8|r seconds.",
 
     -- Monster Helms
@@ -899,13 +902,13 @@ local strings = {
     SI_LUIE_SKILL_SET_STORMFIST_TP =                     "Enemies within |cFFFFFF4|r meters of the thunderfist take Shock Damage every |cFFFFFF1|r second.\n\nAfter |cFFFFFF3|r seconds the fist closes, dealing Physical Damage.",
     SI_LUIE_SKILL_STORMFIST_GROUND_TP =                  "Taking Shock Damage every |cFFFFFF1|r second.\n\nAfter |cFFFFFF3|r seconds the fist closes, dealing Physical Damage.",
     SI_LUIE_SKILL_SET_ENGINE_GUARDIAN =                  "Restoring |cFFFFFF550|r <<1>> every |cFFFFFF0.5|r seconds for |cFFFFFF7|r seconds.",
-    SI_LUIE_SKILL_SET_THE_TROLL_KING_TP =                "Increase Health Recovery by |cFFFFFF1548|r for |cFFFFFF10|r seconds.",
+    SI_LUIE_SKILL_SET_THE_TROLL_KING_TP =                "Increase Health Recovery by |cFFFFFF925|r for |cFFFFFF10|r seconds.",
     SI_LUIE_SKILL_SET_THURVOKUN_TP =                     "Enemies in the growing pool of desecrated bile take Disease Damage every |cFFFFFF1|r second and are afflicted with Minor Maim and Minor Defile for |cFFFFFF4|r seconds.",
     SI_LUIE_SKILL_SET_THURVOKUN_GROUND_TP =              "Taking Disease Damage every |cFFFFFF1|r second.\n\nEach time you take damage you are afflicted with Minor Maim and Minor Defile for |cFFFFFF4|r seconds.",
-    SI_LUIE_SKILL_SET_ZAAN_TP =                          "Afflicted with Flame Damage every |cFFFFFF1|r second for |cFFFFFF5|r seconds while the beam holds.\n\nDeals |cFFFFFF50|r% increased damage every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_SET_ZAAN_TP =                          "Afflicted with Flame Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds while the beam holds.\n\nDeals |cFFFFFF100|r% increased damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_SET_ENERGY_CHARGE =                    "Energy Charge",
     SI_LUIE_SKILL_SET_ENERGY_CHARGE_TP =                 "Gain an Energy Charge for |cFFFFFF<<1>>|r seconds when you block an attack.\n\nWhen you gain |cFFFFFF6|r Charges, release the energy, restoring |cFFFFFF5350|r Stamina and Magicka and healing.\n\nAfter releasing the Charges, you cannot regain new Charges for |cFFFFFF14|r seconds.",
-    SI_LUIE_SKILL_SET_MERIDIAS_FAVOR_TP =                "Restoring |cFFFFFF2325|r Magicka or Stamina, whichever maximum is higher, every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SET_MERIDIAS_FAVOR_TP =                "Restoring |cFFFFFF570|r Magicka or Stamina, whichever maximum is higher, every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_AURORANS_THUNDER_TP =              "Enemies in a |cFFFFFF10|r meter cone in front of you take Shock Damage every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_TZOGVINS_WARBAND_TP =              "Increase Weapon Critical by |cFFFFFF129|r for |cFFFFFF10|r seconds, stacking up to |cFFFFFF10|r times when you deal Critical Damage.\n\nAt max stacks, you also gain Minor Force.",
     SI_LUIE_SKILL_SET_FROZEN_WATCHER_TP =                "Enemies within |cFFFFFF6|r meters of you take Frost Damage every |cFFFFFF1|r second while you are blocking.\n\nYour blizzard has a |cFFFFFF15|r% chance of inflicting Chilled on enemies damaged.",

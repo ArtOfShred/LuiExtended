@@ -414,6 +414,9 @@ Effects.DebuffDisplayOverrideId = {
     [126631] = true, -- Blight Seed (Azureblight)
     [80990] = true, -- Shadowrend (Shadowrend)
     [81034] = true, --Shadowrend (Shadowrend)
+    [80866] = true, -- Tremorscale (Tremorscale)
+    [111354] = true, -- Vykosa (Vykosa)
+    [100302] = true, -- Piercing Spray (Asylum Bow)
 
     -- Dragonknight
     [134336] = true, -- Stagger (Stone Giant)
@@ -430,6 +433,9 @@ Effects.DebuffDisplayOverrideId = {
 
     -- Necromancer
     [118618] = true, -- Pure Agony (Agony Totem)
+
+    -- Nightblade
+    [34734] = true, -- Surprise Attack (Surprise Attack)
 
     -- Warden
     [87560] = true, -- Frozen Gate Root (Frozen Gate)
@@ -3947,20 +3953,14 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Asylum Weapons
+    [100474] = { icon = 'LuiExtended/media/icons/abilities/ability_set_chaotic_whirlwind.dds', tooltip = Tooltips.Set_Asylum_Dual_Wield }, -- Chaotic Whirlwind (Asylum Dual Wield)
+    [140223] = { icon = 'LuiExtended/media/icons/abilities/ability_set_chaotic_whirlwind.dds' }, -- Chaotic Whirlwind (Asylum Dual Wield)
     [100302] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_piercing_spray.dds', tooltip = Tooltips.Set_Asylum_Bow }, -- Piercing Spray (Asylum Bow)
     [100294] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_disciplined_slash.dds' }, -- Disciplined Slash (Asylum 2H)
     [100462] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_defensive_position.dds' }, -- Defensive Position (Asylum 1H + Shield)
     [100464] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_defensive_position.dds' }, -- Defensive Position (Asylum 1H + Shield)
     [100308] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_timeless_blessing.dds', tooltip = Tooltips.Set_Aslyum_Restoration_Staff }, -- Timeless Blessing (Asylum Restoration Staff)
     [100306] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_concentrated_force.dds', tooltip = Tooltips.Set_Asylum_Destruction_Staff }, -- Concentrated Force (Asylum Destruction Staff)
-
-    -- Asylum Weapons (Perfected)
-    [99363] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_piercing_spray.dds', name = Abilities.Set_Piercing_Spray, tooltip = Tooltips.Set_Asylum_Bow_Perfect }, -- Piercing Spray (Perfected) (Perfected Asylum Bow)
-    [99361] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_disciplined_slash.dds', name = Abilities.Set_Disciplined_Slash }, -- Disciplined Slash (Perfected) (Perfected Asylum 2H)
-    [99920] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_defensive_position.dds', name = Abilities.Set_Defensive_Position }, -- Defensive Position (Perfected) (Perfected Asylum 1H + Shield)
-    [99919] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_defensive_position.dds', name = Abilities.Set_Defensive_Position }, -- Defensive Position (Perfected) (Perfected Asylum 1H + Shield)
-    [99582] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_timeless_blessing.dds', name = Abilities.Set_Timeless_Blessing, tooltip = Tooltips.Set_Aslyum_Restoration_Staff_P }, -- Timeless Blessing (Perfected) (Perfected Asylum Restoration Staff)
-    [99989] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_concentrated_force.dds', name = Abilities.Set_Concentrated_Force, tooltip = Tooltips.Set_Asylum_Destruction_Staff_P }, -- Concentrated Force (P) (Asylum Destruction Staff)
 
     -- Maelstrom Weapons
     [99806] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maelstrom_cruel_flurry.dds', tooltip = Tooltips.Set_Maelstrom_DW }, -- Cruel Flurry (Maelstrom Dual Wield)
@@ -3974,11 +3974,12 @@ Effects.EffectOverride = {
     -- Master Weapons
     [99761] = { icon = 'LuiExtended/media/icons/abilities/ability_set_master_puncturing_remedy.dds' }, -- Puncturing Remedy (Master 1H + shield)
     [100575] = { icon = 'LuiExtended/media/icons/abilities/ability_set_master_puncturing_remedy.dds', tooltip = Tooltips.Set_Master_1H }, -- Puncturing Remedy (Master 1H + shield)
+    [140334] = { icon = 'esoui/art/icons/ability_destructionstaff_007_a.dds', tooltip = Tooltips.Generic_Spell_Damage_Duration_Value, tooltipValue2 = 600 }, -- Destructive Impact (Master Destruction Staff)
     [99781] = { icon = 'LuiExtended/media/icons/abilities/ability_set_master_grand_rejuvenation.dds', tooltip = Tooltips.Set_Master_Resto }, -- Grand Rejuvenation (Master Restoration Staff)
     [131489] = { icon = 'LuiExtended/media/icons/abilities/ability_set_master_grand_rejuvenation.dds' }, -- Grand Rejuvenation (Master Restoration Staff)
 
     -- Blackrose Weapons
-    [113617] = { tooltip = Abilities.Set_Blackrose_DW }, -- Spectral Cloak (Blackrose DW)
+    [113617] = { icon = 'LuiExtended/media/icons/abilities/ability_set_spectral_cloak.dds', tooltip = Tooltips.Set_Blackrose_Dual_Wield }, -- Spectral Cloak (Blackrose DW)
     [113619] = { hide = true }, -- Virulent Shot (Blackrose Bow) -- SHOWS ONLY ON TARGET PLAYERS
     [113627] = { icon = 'LuiExtended/media/icons/abilities/ability_set_virulent_shot.dds', tooltip = Tooltips.Generic_Poison, tooltipValue2 = 2 }, -- Virulent Shot (Blackrose Bow)
     [113553] = { icon = 'LuiExtended/media/icons/abilities/ability_set_radial_uppercut.dds' }, -- Radial Uppercut (Blackrose 2H)
@@ -4069,11 +4070,11 @@ Effects.EffectOverride = {
     [59497] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web_white.dds', tooltip = Tooltips.Set_Spawn_of_Mephala }, -- Spawn of Mephala (Spawn of Mephala)
     [59498] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web_white.dds', name = Abilities.Set_Spawn_of_Mephala, groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Poison, tooltipValue2 = 1, tooltipValue3 = 50 }, -- Mephala's Web (Spawn of Mephala)
     [59499] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web_white.dds', name = Abilities.Set_Spawn_of_Mephala, duration = 0, groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Poison, tooltipValue2 = 1, tooltipValue3 = 50, hideGround = true }, -- Mephala's Web (Spawn of Mephala)
-    [80523] = { tooltip = Tooltips.Set_Stormfist }, -- Stormfist (Stormfist)
+    [80523] = { icon = 'LuiExtended/media/icons/abilities/ability_stormatronach_enervating_stone.dds', tooltip = Tooltips.Set_Stormfist }, -- Stormfist (Stormfist)
     [80522] = { icon = 'LuiExtended/media/icons/abilities/ability_stormatronach_enervating_stone.dds', groundLabel = true, tooltip = Tooltips.Skill_Stormfist_Ground }, -- Stormfist (Stormfist)
     [80521] = { icon = 'LuiExtended/media/icons/abilities/ability_stormatronach_enervating_stone.dds' }, -- Stormfist (Stormfist)
-    [84419] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', name = Abilities.Set_Swarm_Mother },
-    [80593] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', name = Abilities.Set_Swarm_Mother },
+    [84419] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_grappling_web.dds', name = Abilities.Set_Swarm_Mother }, -- Swarm Mother Mask (Swarm Mother)
+    [80593] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_grappling_web.dds', name = Abilities.Set_Swarm_Mother }, -- Swarm Mother Mask (Swarm Mother)
     [59522] = { hide = true }, -- Engine Guardian
     [59540] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_stamina.dds', tooltip = Tooltips.Set_Engine_Guardian_Stamina }, -- Robust Engine Guardian
     [59533] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_magicka.dds', tooltip = Tooltips.Set_Engine_Guardian_Magicka }, -- Arcane Engine Guardian
@@ -4082,20 +4083,20 @@ Effects.EffectOverride = {
     [102094] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds', groundLabel = true, tooltip = Tooltips.Set_Thurvokun_Ground }, -- Thurvokun
     [102097] = { tooltip = Abilities.Set_Thurvokun }, -- Minor Maim (Thurvokun)
     [102100] = { tooltip = Abilities.Set_Thurvokun }, -- Minor Defile (Thurvokun)
-    [102093] = { tooltip = Tooltips.Set_Thurvokun }, -- Thurvokun (Thurvokun)
+    [102093] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds', tooltip = Tooltips.Set_Thurvokun }, -- Thurvokun (Thurvokun)
     [80865] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds' }, -- Tremorscale
-    [80866] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 70 }, -- Tremorscale
+    [80866] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds', tooltip = Tooltips.Generic_Reduce_Physical_Resist_Value, tooltipValue2 = 2395 }, -- Tremorscale
     [59596] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_meteor.dds' }, -- Valkyn Skoria
     [61273] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_meteor.dds' }, -- Valkyn Skoria
     [80490] = { icon = 'LuiExtended/media/icons/abilities/ability_set_velidreth.dds' }, -- Velidreth
-    [111354] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vykosa.dds', tooltip = Tooltips.Generic_Reduce_Physical_Spell_Damage_Percentage, tooltipValue2 = 20 }, -- Major Maim (Vykosa)
+    [111354] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vykosa.dds', tooltip = Tooltips.Generic_Reduce_Physical_Spell_Damage_Percentage, tooltipValue2 = 20 }, -- Vykosa (Vykosa)
     [102136] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_zaan.dds', tooltip = Tooltips.Set_Zaan }, -- Zaan
-    [102142] = { hide = true }, -- Zaan
+    [102142] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_zaan.dds', hide = true }, -- Zaan
 
-    [116839] = { icon = 'esoui/art/icons/ability_skeevatonschock.dds', name = Abilities.Set_Energy_Charge, tooltip = Tooltips.Set_Energy_Charge }, -- Charging (Stonekeeper)
-    [116847] = { icon = 'esoui/art/icons/achievement_frostvault_killmonstersb.dds' }, -- Stonekeeper (Stonekeeper)
-    [116877] = { icon = 'esoui/art/icons/achievement_frostvault_killmonstersb.dds' }, -- Stonekeeper (Stonekeeper)
-    [116878] = { icon = 'esoui/art/icons/achievement_frostvault_killmonstersb.dds' }, -- Stonekeeper (Stonekeeper)
+    [116839] = { icon = 'LuiExtended/media/icons/abilities/ability_set_stonekeeper.dds', name = Abilities.Set_Energy_Charge, tooltip = Tooltips.Set_Energy_Charge }, -- Charging (Stonekeeper)
+    [116847] = { icon = 'LuiExtended/media/icons/abilities/ability_set_stonekeeper.dds' }, -- Stonekeeper (Stonekeeper)
+    [116877] = { icon = 'LuiExtended/media/icons/abilities/ability_set_stonekeeper.dds' }, -- Stonekeeper (Stonekeeper)
+    [116878] = { icon = 'LuiExtended/media/icons/abilities/ability_set_stonekeeper.dds' }, -- Stonekeeper (Stonekeeper)
     [116880] = { hide = true }, -- Stonekeeper (Stonekeeper)
 
     [117111] = { icon = 'esoui/art/icons/achievement_depthsofmalatar_killmonstersb.dds', tooltip = Tooltips.Set_Meridias_Favor }, -- Meridia's Favor (Symphony of Blades)
