@@ -529,7 +529,7 @@ LUIE.DebugAuras = {
     [84700] = true, -- Bowl of "Peeled Eyeballs" (Blue)
     [84701] = true, -- Increase Health Regen
     [84702] = true, -- Witchfest Drink: M, H, Flagon
-    [84735] = true, -- Double Bloody Mara (Gold)
+    [84735] = true, -- Purifying Bloody Mara (Gold)
     [84736] = true, -- Increase Health
     [84737] = true, -- Witchfest Drink: Max MH, Flago
     [84720] = true, -- Ghastly Eye Bowl (Blue)
@@ -558,7 +558,7 @@ LUIE.DebugAuras = {
     [89939] = true, -- Jesters Food: Max HS, Reg S
     [89958] = true, -- Increase Stamina
     [89959] = true, -- Increase Health
-    [127531] = true, -- Disastrously Bloody Mara
+    [127531] = true, -- Corrupting Bloody Mara
     [127530] = true, -- Witchfest Drink: Max MH, Flago
     [127537] = true, -- Increase Health
     [127619] = true, -- Increase Health
@@ -1502,6 +1502,8 @@ LUIE.DebugAuras = {
     [57133] = true, -- Dreamer's Mantle (Dreamer's)
 
     [32803] = true, -- Queen's Elegance (Elegant)
+    [135938] = true, -- Queen's Elegance (Elegant)
+    [135939] = true, -- Queen's Elegance (Elegant)
 
     [32743] = true, -- Robes of the Hist (of Hist Sap)
     [85776] = true, -- Robes of the Hist (of Hist Sap)
@@ -2255,7 +2257,6 @@ LUIE.DebugAuras = {
     [61771] = true, -- Powerful Assault (of the Powerful Assault)
 
     [68947] = true, -- Reactive Armor (Reactive)
-    [68948] = true, -- Reactive Armor (Reactive)
     [69567] = true, -- Reactive Armor Effects (Reactive)
 
     [68973] = true, -- Shield Breaker (of the Shield Breaker)
@@ -2989,9 +2990,6 @@ LUIE.DebugAuras = {
     [20499] = true, -- Empowering Chains (Empowering Chains)
     [62023] = true, -- Fiery Grip (Empowering Chains)
     [76506] = true, -- Major Expedition (Empowering Chains)
-    [108679] = true, -- Empower (Empowering Chains)
-    [108678] = true, -- Might of the Guild (Empowering Chains)
-    [109206] = true, -- Empower (Empowering Chains)
 
     [20496] = true, -- Unrelenting Grip (Unrelenting Grip)
     [62004] = true, -- Unrelenting Grip (Unrelenting Grip)

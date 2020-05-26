@@ -217,6 +217,7 @@ Effects.IsFoodBuff = {
     [68411] = true, -- Crown Fortifying Meal
     [92435] = true, -- Crown Combat Mystic's Stew
     [92474] = true, -- Crown Vigorous Ragout
+    [127596] = true, -- Bewitched Sugar Skulls
 
     -- Drink Buff
     [61322] = true, -- Health Drink
@@ -248,6 +249,8 @@ Effects.IsFoodBuff = {
     [68416] = true, -- Crown Refreshing Drink
     [92433] = true, -- Crown Stout Magic Liqueur
     [92476] = true, -- Crown Vigorous Tincture
+    [127531] = true, -- Corrupting Bloody Mara
+    [127572] = true, -- Pack Leader's Bone Broth
 }
 
 -- Experience Buffs
@@ -417,6 +420,7 @@ Effects.DebuffDisplayOverrideId = {
     [80866] = true, -- Tremorscale (Tremorscale)
     [111354] = true, -- Vykosa (Vykosa)
     [100302] = true, -- Piercing Spray (Asylum Bow)
+    [51443] = true, -- Healing Bane (of Mending)
 
     -- Dragonknight
     [134336] = true, -- Stagger (Stone Giant)
@@ -953,7 +957,6 @@ Effects.BarHighlightExtraId = {
 
     -- Dragonknight
     [48946] = 31103, -- Major Fracture --> Noxious Breath
-    [109206] = 108679, -- Empower --> Empower (Empowering Chains)
     [20253] = 31898, -- Burning Talons
     [20528] = 31899, -- Choking Talons --> Minor Maim
     [131340] = 92507, -- Major Brutality --> Major Sorcery (Molten Weapons)
@@ -1042,7 +1045,6 @@ Effects.BarHighlightCheckOnFade = {
 
     -- Dragonknight
     [31103] = { id1 = 48946, id2 = 31103, unitTag = "reticleover"}, -- Noxious Breath --> Major Fracture / Noxious Breath
-    [108679] = { id1 = 109206, id2 = 76506, unitTag = "player" }, -- Empower --> Empower / Major Expedition
     [108798] = { id1 = 21014, unitTag = "player" }, -- Reflective Plate --> Snare Removal
     [31898] = { id1 = 20253, id2 = 31898, unitTag = "reticleover" }, -- Burning Talons
     [31899] = { id1 = 20528, id2 = 31899, unitTag = "reticleover" }, -- Minor Maim --> Choking Talons / Minor Maim
@@ -1146,7 +1148,7 @@ Effects.BarHighlightOverride = {
     [20944] = { newId = 31103 }, -- Noxious Breath
     [20930] = { newId = 31104 }, -- Engulfing Flames
     [20492] = { newId = 76498, secondary = true, noRemove = true }, -- Fiery Grip --> Major Expedition
-    [20499] = { newId = 108679 }, -- Empowering Chains --> Empower
+    [20499] = { newId = 76506 }, -- Empowering Chains --> Major Expedition
     [20496] = { newId = 76502, secondary = true, noRemove = true }, -- Unrelenting Grip --> Major Expedition
     [32963] = { newId = 32958 }, -- Shifting Standard
 
@@ -2073,7 +2075,6 @@ Effects.SynergyNameOverride = {
     [Abilities.Skill_Blade_of_Woe] = { icon = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_blade_of_woe.dds' }, -- Blade of Woe (Dark Brotherhood)
     [Abilities.Skill_Black_Widow] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds' }, -- Black Widow (Undaunted)
     [Abilities.Skill_Arachnophobia] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds' }, -- Arachnophobia (Undaunted)
-    [Abilities.Skill_Feed] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds' }, -- Feed (Vampire)
     [Abilities.Skill_Devour] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Werewolf)
     [Abilities.Set_Shield_of_Ursus] = { icon = 'esoui/art/icons/achievement_u23_natureswrath_blue.dds', name = Abilities.Set_Ursus_Blessing }, -- Ursus's Blessing (Haven of Ursus)
     -- World Bosses
@@ -3677,7 +3678,7 @@ Effects.EffectOverride = {
 
     -- Crafted Seasonal Drink
     [84700] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_bowl_of_peeled_eyeballs.dds', name = Abilities.Drink_Bowl_of_Peeled_Eyeballs, tooltip = Tooltips.Drink_Crafted_Bowl_of_Peeled_Eyeballs }, -- Bowl of "Peeled Eyeballs"
-    [84735] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_double_bloody_mara.dds', tooltip = Tooltips.Drink_Double_Bloody_Mara }, -- Double Bloody Mara
+    [84735] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_purifying_bloody_mara.dds', tooltip = Tooltips.Drink_Double_Bloody_Mara }, -- Purifying Bloody Mara
     [84720] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_ghastly_eye_bowl.dds', name = Abilities.Drink_Ghastly_Eye_Bowl, tooltip = Tooltips.Drink_Crafted_Ghastly_Eye_Bowl }, -- Ghastly Eye Bowl
     [84704] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_witchmothers_party_punch.dds', tooltip = Tooltips.Drink_Crafted_Witchmothers_Party_Punch }, -- Witchmother's Party Punch
     [84731] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_witchmothers_potent_brew.dds', tooltip = Tooltips.Drink_Crafted_Witchmothers_Potent_Brew }, -- Witchmother's Potent Brew
@@ -3687,7 +3688,7 @@ Effects.EffectOverride = {
     [86791] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_snow_bear_glow-wine.dds', name = Abilities.Drink_Snow_Bear_Glow_Wine, tooltip = Tooltips.Drink_Crafted_Snow_Bear_Glow_Wine }, -- Snow Bear Glow-Wine
     [89957] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_dubious_camoran_throne.dds', tooltip = Tooltips.Drink_Crafted_Dubious_Camoran_Throne }, -- Dubious Camoran Throne
     [89971] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_jewels_of_misrule.dds', tooltip = Tooltips.Food_Crafted_Jewels_of_Misrule }, -- Jewels of Misrule
-    [127531] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_disastrously_bloody_mara.dds', tooltip = Tooltips.Drink_Crafted_Disastrously_Bloody_Mara }, -- Disastrously Bloody Mara
+    [127531] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_corrupting_bloody_mara.dds', tooltip = Tooltips.Drink_Crafted_Disastrously_Bloody_Mara }, -- Corrupting Bloody Mara
     [127572] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_pack_leaders_bone_broth.dds', tooltip = Tooltips.Drink_Crafted_Pack_Leaders_Bone_Broth }, -- Pack Leader's Bone Broth
 
     -- Vendor Food & Drink
@@ -4181,6 +4182,9 @@ Effects.EffectOverride = {
     [134040] = { tooltip = Abilities.Set_Critical_Riposte }, -- Minor Enervation (of Critical Riposte)
 
     -- Overland Sets (Light)
+
+    [135938] = { icon = 'LuiExtended/media/icons/abilities/ability_set_queens_elegance.dds', tooltip = Tooltips.Set_Queens_Elegance_LA }, -- Queen's Elegance (Elegant)
+    [135939] = { icon = 'LuiExtended/media/icons/abilities/ability_set_queens_elegance.dds', tooltip = Tooltips.Set_Queens_Elegance_HA }, -- Queen's Elegance (Elegant)
     [75691] = { tooltip = Tooltips.Set_Bahrahas_Curse }, -- Bahraha's Curse
     [75707] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_snare.dds' }, -- Bahraha's Curse
     [75692] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_snare.dds', groundLabel = true, tooltip = Tooltips.Skill_Bahrahas_Curse_Ground }, -- Bahraha's Curse
@@ -4189,7 +4193,7 @@ Effects.EffectOverride = {
     [57177] = { icon = 'esoui/art/icons/achievement_wrothgar_012.dds' }, -- Bloodthorn's Touch (Bloodthorn)
     [48913] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dreamers_mantle.dds', tooltip = Tooltips.Generic_Knockdown }, -- Dreamer's Mantle (Dreamer's)
     [57133] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dreamers_mantle.dds' }, -- Dreamer's Mantle (Dreamer's)
-    [85776] = { icon = 'LuiExtended/media/icons/abilities/ability_set_robes_of_the_hist.dds' }, -- Robes of the Hist (of Hist Sap)
+    [85776] = { icon = 'LuiExtended/media/icons/abilities/ability_set_robes_of_the_hist.dds', tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Robes of the Hist (of Hist Sap)
     [127070] = { icon = 'LuiExtended/media/icons/abilities/ability_set_martial_knowledge.dds', tooltip = Tooltips.Generic_Increase_Damage_Taken, tooltipValue2 = 8 }, -- Way of Martial Knowledge (of Martial Knowledge)
     [85825] = { icon = 'LuiExtended/media/icons/abilities/ability_set_prisoners_rags.dds' }, -- Prisoner's Rags (Prisoner's)
     [79200] = { tooltip = Abilities.Set_Sithis_Touch }, -- Major Berserk (Sithis' Touch)
@@ -4370,14 +4374,14 @@ Effects.EffectOverride = {
     [97627] = { tooltip = Abilities.Set_Ironblood }, -- Major Protection (Ironblood)
     [67078] = { icon = 'LuiExtended/media/icons/abilities/ability_set_jolting.dds', tooltip = Tooltips.Set_Jolting_Arms }, -- Jolting Arms (Jolting)
     [85620] = { icon = 'esoui/art/icons/achievement_darkbrotherhood_028.dds' }, -- Knight-Errant's Mail (Knight-Errant's)
-    [67205] = { tooltip = Tooltips.Set_Leeching_Plate }, -- Leeching Plate (of Leeching)
+    [67205] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_aoe_poison.dds', tooltip = Tooltips.Set_Leeching_Plate }, -- Leeching Plate (of Leeching)
     [69345] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_aoe_poison.dds' }, -- Leeching Plate (of Leeching)
     [67204] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_aoe_poison.dds', groundLabel = true, tooltip = Tooltips.Skill_Leeching_Plate_Ground }, -- Leeching Plate (of Leeching)
     [84277] = { icon = 'esoui/art/icons/achievement_update11_dungeons_006.dds' }, -- Aspect of Mazzatun (of Mazzatun)
     [84278] = { icon = 'esoui/art/icons/achievement_update11_dungeons_006.dds' }, -- Aspect of Mazzatun (of Mazzatun)
     [84279] = { icon = 'esoui/art/icons/achievement_update11_dungeons_006.dds' }, -- Aspect of Mazzatun (of Mazzatun)
     [85611] = { tooltip = Abilities.Set_Medusa }, -- Minor Force (of Medusa)
-    [84354] = { tooltip = Tooltips.Set_Hand_of_Mephala }, -- Hand of Mephala (Mephala's Hand)
+    [84354] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web_green.dds', tooltip = Tooltips.Set_Hand_of_Mephala }, -- Hand of Mephala (Mephala's Hand)
     [84357] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web_green.dds', name = Abilities.Set_Hand_of_Mephala, duration = 0, tooltip = Tooltips.Skill_Hand_of_Mephala_Ground, groundLabel = true }, -- Hand of Mephala Webbing (of Mephala's Hand)
     [84355] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web_green.dds' }, -- Hand of Mephala (of Mephala's Hand)
     [84358] = { tooltip = Abilities.Set_Hand_of_Mephala }, -- Hand of Mephala (of Mephala's Hand)
@@ -4485,8 +4489,7 @@ Effects.EffectOverride = {
     --[999012] = {tooltip = Tooltips.Generic_Set_ICD_Minutes, tooltipValue2 = Abilities.Set_Juggernaut, tooltipValue3 = 1, unbreakable = 1 }, -- Juggernaut (Fake Id)
 
     -- Battleground Sets
-    [92908] = { tooltip = Abilities.Set_Cowards_Gear }, -- Major Expedition (Coward's Gear)
-    [92909] = { tooltip = Abilities.Set_Cowards_Gear }, -- Major Protection (Coward's Gear)
+    [92908] = { icon = 'LuiExtended/media/icons/abilities/ability_set_cowards_gear.dds', name = Abilities.Set_Cowards_Gear, tooltip = Tooltips.Set_Cowards_Gear }, -- Major Expedition (Coward's Gear)
     [93104] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_oblivion_purple.dds' }, -- Knight Slayer
     [92916] = { icon = 'esoui/art/icons/achievement_update15_041.dds', tooltip = Tooltips.Set_Vanguards_Challenge }, -- Vanguard's Challenge
     [92921] = { tooltip = Abilities.Set_Wizards_Riposte }, -- Minor Maim (Wizard's Riposte)
@@ -4504,9 +4507,11 @@ Effects.EffectOverride = {
     [127032] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Phoenix (of the Phoenix)
     [127036] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix.dds', name = Abilities.Set_Phoenix }, -- Phoenix's Flame (of the Phoenix)
 
+    [69567] = { icon = 'LuiExtended/media/icons/abilities/ability_set_reactive_armor.dds', name = Abilities.Set_Reactive_Armor, tooltip = Tooltips.Generic_Reduce_Damage_Taken, tooltipValue2 = 33 }, -- Reactive Armor Effects (Reactive)
+
     -- Cyrodiil Sets (Light)
     [34605] = { icon = 'LuiExtended/media/icons/abilities/ability_set_almalexias_mercy.dds' }, -- Almalexia's Mercy (of Almalexia's Mercy)
-    [70392] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arch-mage.dds' }, -- The Arch-Mage (of the Arch-Mage)
+    [70392] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arch-mage.dds', tooltip = Tooltips.Generic_Magicka_Recovery_Duration_Value, tooltipValue2 = 369 }, -- The Arch-Mage (of the Arch-Mage)
 
     [117359] = { icon = 'LuiExtended/media/icons/abilities/ability_set_curse_eater.dds' }, -- Curse-Eater (Curse-Eating)
 
@@ -4837,8 +4842,6 @@ Effects.EffectOverride = {
     -- Fiery Grip / Empowering Chains / Unrelenting Grip
     [76498] = { tooltip = Abilities.Skill_Fiery_Grip }, -- Major Expedition (Fiery Grip)
     [76506] = { tooltip = Abilities.Skill_Empowering_Chains }, -- Major Expedition (Empowering Chains)
-    [108679] = { tooltip = Abilities.Skill_Empowering_Chains, stack = 2 }, -- Empower (Empowering Chains)
-    [109206] = { tooltip = Abilities.Skill_Empowering_Chains, stack = 1 }, -- Empower (Empowering Chains)
     [62004] = { hide = true }, -- Unrelenting Grip (Unrelenting Grip)
     [76502] = { tooltip = Abilities.Skill_Unrelenting_Grip }, -- Major Expedition (Unrelenting Grip)
     [77105] = { icon = 'esoui/art/icons/ability_dragonknight_005_a.dds' }, -- Unrelenting Grip (Unrelenting Grip)
@@ -6590,9 +6593,9 @@ Effects.EffectOverride = {
     [35776] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_2.dds', stack = 2, tooltip = Tooltips.Skill_Vampirism_Stage_2 }, -- Stage 2 Vampirism (Vampire General)
     [35783] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_3.dds', stack = 3, tooltip = Tooltips.Skill_Vampirism_Stage_3 }, -- Stage 3 Vampirism (Vampire General)
     [35792] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_4.dds', stack = 4, tooltip = Tooltips.Skill_Vampirism_Stage_4 }, -- Stage 4 Vampirism (Vampire General)
-    [33152] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds', tooltip = Tooltips.Skill_Feed }, -- Feed
-    [33177] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds' }, -- Feed
-    [33175] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds', unbreakable = 1 }, -- Feed (Vampire - Feed)
+    --[33152] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds', tooltip = Tooltips.Skill_Feed }, -- Feed
+    --[33177] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds' }, -- Feed
+    --[33175] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds', unbreakable = 1 }, -- Feed (Vampire - Feed)
     [33182] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = Abilities.Passive_Savage_Feeding, tooltip = Tooltips.Generic_Stun }, -- Uber Attack (Savage Feeding - Rank 1)
     [33183] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = Abilities.Passive_Savage_Feeding, unbreakable = 1 }, -- Off-Balance Self (Savage Feeding - Rank 1)
     [46047] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = Abilities.Passive_Savage_Feeding, tooltip = Tooltips.Generic_Stun }, -- Uber Attack (Savage Feeding - Rank 2)

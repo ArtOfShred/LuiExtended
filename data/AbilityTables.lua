@@ -423,6 +423,7 @@ local AbilityTables = {
     Set_Warming_Aura                  = 133210,
     Set_Aegis_Caller                  = 133490,
     Set_Banis_Torment                 = 133290,
+    Set_Reactive_Armor                = 68947,
 
     Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE),
 

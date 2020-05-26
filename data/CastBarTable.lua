@@ -276,7 +276,7 @@ CastBarTable.CastChannelOverride = {
     [125817] = true, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
 
     -- Vampire
-    [33175] = true, -- Feed (Vampire)
+    --[33175] = true, -- Feed (Vampire)
     [40350] = true, -- Feed (Vampire - Bite Player)
 
     ----------------------------------------------------------------
@@ -416,7 +416,7 @@ CastBarTable.CastDurationFix = {
     [125817] = 5000, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
 
     -- Vampire / Werewolf
-    [33175] = 6300, -- Feed (Vampire)
+    --[33175] = 6300, -- Feed (Vampire)
     [40350] = 5300, -- Feed (Vampire - Bite Player)
     [33208] = 3000, -- Devour (Werewolf)
     [39033] = 1100, -- Werewolf Transform Setup (Werewolf)
@@ -652,7 +652,7 @@ CastBarTable.IsCast = {
     [40414] = true, -- Shatter Soul (Soul Magic)
 
     -- Vampire
-    [33175] = true, -- Feed (Vampire)
+    --[33175] = true, -- Feed (Vampire)
     [40350] = true, -- Feed (Vampire - Bite Player)
     [39692] = true, -- Feed (Vampire - Quest)
     [32893] = true, -- Drain Essence (Vampire)
@@ -912,7 +912,7 @@ CastBarTable.CastBreakOnRemoveEffect = {
     [33208] = true, -- Devour (Werewolf)
 
     -- Vampire
-    [33152] = true, -- Feed (Vampire)
+    --[33152] = true, -- Feed (Vampire)
     [32893] = true, -- Drain Essence (Vampire)
     [38949] = true, -- Invigorating Drain (Vampire)
     [38956] = true, -- Accelerating Drain (Vampire)

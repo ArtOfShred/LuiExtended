@@ -80,7 +80,7 @@ local strings = {
     SI_LUIE_SKILL_POISON_CONSPICUOUS =                   "Яд обнаружения",
     SI_LUIE_SKILL_DRINK_INCREASE =                       "Повышение",
     SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL =          "Сила эффектов зависит от вашего уровня.", -- Note this needs to be an exact match to the description in Crown Crate food/drink items for it to be correctly removed in each localization.
-    SI_LUIE_SKILL_REMOVE_TOOLTIP_DOUBLE_BLOODY_MARA =    "Если вы вампир, кровь, входящая в состав этого напитка, постепенно утоляет ваш голод.\nСила эффектов зависит от вашего уровня.", -- Must be exact match in each localization
+    SI_LUIE_SKILL_REMOVE_TOOLTIP_DOUBLE_BLOODY_MARA =    "If you are a vampire, the blood in this drink will also purify you, reducing your Stage by 1.\nThese effects are scaled based on your level.", -- Must be exact match in each localization
     SI_LUIE_SKILL_REMOVE_TOOLTIP_HISSMIR =               "Этот напиток также дает вам понимание того, какая рыба водится в различных водоемах, и наделяет особым вниманием к местам рыбной ловли поблизости.\nСила эффектов зависит от вашего уровня.", -- Must be exact match in each localization
     SI_LUIE_SKILL_ADD_TOOLTIP_HISSMIR =                  "\n\nЭтот напиток также дает вам понимание того, какая рыба водится в различных водоемах, и наделяет особым вниманием к местам рыбной ловли поблизости.",
     SI_LUIE_SKILL_REMOVE_TOOLTIP_ARTAEUM_BOWL =          "Additionally", -- Must be exact match in each localization
@@ -88,7 +88,7 @@ local strings = {
     SI_LUIE_SKILL_REMOVE_TOOLTIP_TWICE_SPIKED_ALE =      "This drink is very gassy.\nThese effects are scaled based on your level.", -- Must be exact match in each localization
     SI_LUIE_SKILL_REMOVE_TOOLTIP_PACK_LEADERS_BROTH =    "If you are a werewolf, the rich marrow will also slightly ease your transformation.\nThese effects are scaled based on your level.", -- Must be exact match in each localization
     SI_LUIE_SKILL_ADD_TOOLTIP_PACK_LEADERS_BROTH =       "\nIf you are a werewolf, the rich marrow will also slightly ease your transformation.",
-    SI_LUIE_SKILL_REMOVE_TOOLTIP_DISASTROUSLY_BLOODY =   "If you are a vampire, the tainted blood in this drink will also spark a fierce hunger in you.\nThese effects are scaled based on your level.", -- Must be exact match in each localization
+    SI_LUIE_SKILL_REMOVE_TOOLTIP_DISASTROUSLY_BLOODY =   "If you are a vampire, the tainted blood in this drink will corrupt you, increasing your Stage to 4.\nThese effects are scaled based on your level.", -- Must be exact match in each localization
     SI_LUIE_SKILL_ESO_PLUS_TP =                          "Увеличивает получаемые Опыт, Золото и Вдохновение на |cFFFFFF10|r%.\nУвеличивает скорость исследования особенностей на |cFFFFFF10|r%.",
 
     -- Collectible
@@ -320,6 +320,7 @@ local strings = {
     SI_LUIE_SKILL_SET_GENERIC_CRITICAL_DAMAGE_TP       = "Increase Critical Damage by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     SI_LUIE_SKILL_GENERIC_INCREASE_DAMAGE_TAKEN_TP     = "Increase damage taken by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_REDUCE_DAMAGE_TAKEN_TP       = "Reduce damage taken by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     SI_LUIE_SKILL_GENERIC_ENRAGE =                       "Increase damage done by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_ENRAGE_NO_DUR =                "Increase damage done by |cFFFFFF<<2>>|r%.",
@@ -934,6 +935,8 @@ local strings = {
     SI_LUIE_SKILL_SET_COLDHARBOURS_FAVORITE_DAMAGE_TP =  "After |cFFFFFF<<1>>|r <<1[second/seconds]>> Honor explodes, afflicting enemies within |cFFFFFF6|r meters with Magic Damage over time for |cFFFFFF4|r seconds.",
 
     -- Light / Medium / Heavy Armor Sets
+    SI_LUIE_SKILL_SET_ELEGANCE_LA_TP =                   "Your next Health, Magicka, or Stamina ability used within |cFFFFFF<<1>>|r <<1[second/seconds]>> costs |cFFFFFF10|r% less.",
+    SI_LUIE_SKILL_SET_ELEGANCE_HA_TP =                   "Your next direct damage attack used within |cFFFFFF<<1>>|r <<1[second/seconds]>> deals |cFFFFFF2610|r additional damage against the first enemy you hit.",
     SI_LUIE_SKILL_SET_BAHRAHAS_CURSE_TP =                "Enemies in the |cFFFFFF3.5|r meter radius of desecrated ground take Magic Damage every |cFFFFFF1|r second and have their Movement Speed reduced by |cFFFFFF70|r%.\n\nYou heal for |cFFFFFF100|r% of the damage done.",
     SI_LUIE_SKILL_BAHRAHAS_CURSE_GROUND_TP =             "Taking Magic Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF70|r%.\n\nYour attacker heals for |cFFFFFF100|r% of the damage done.",
     SI_LUIE_SKILL_SET_BRIARHEART_TP =                    "Increase Weapon Damage by |cFFFFFF450|r for |cFFFFFF<<1>>|r seconds.\n\nWhile this effect is active your Critical Strikes heal you.",
@@ -943,7 +946,7 @@ local strings = {
     SI_LUIE_SKILL_SET_STORM_KNIGHT_TP =                  "Enemies within |cFFFFFF5|r meters take Shock Damage every |cFFFFFF2|r seconds for |cFFFFFF6|r seconds.",
     SI_LUIE_SKILL_SET_VAMPIRE_CLOAK =                    "Vampire Cloak",
     SI_LUIE_SKILL_SET_WARRIOR_POET =                     "Warrior-Poet",
-    SI_LUIE_SKILL_SET_GRACE_OF_GLOOM_TP =                "Your Light and Heavy Attacks heal you for |cFFFFFF5|r seconds.",
+    SI_LUIE_SKILL_SET_GRACE_OF_GLOOM_TP =                "Your Light and Heavy Attacks heal you for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_DRAUGRS_REST_TP =                  "You and allies within |cFFFFFF5|r meters of the consecrated circle heal every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_SET_OVERWHELMING_SURGE_TP =            "Enemies within |cFFFFFF8|r meters take Shock Damage every |cFFFFFF1|r second for |cFFFFFF6|r seconds.\n\n|cFFFFFF15|r% of the damage you deal this way is restored to you as Magicka.",
     SI_LUIE_SKILL_SANCTUARY_TP =                         "Увеличивает получаемое исцеление на |cFFFFFF12|r%.",
@@ -957,7 +960,7 @@ local strings = {
     SI_LUIE_SKILL_SET_BLOOD_SCENT =                      "When you deal damage with a melee Light Attack, you gain a stack of Blood Scent for |cFFFFFF8|r seconds.\n\nWhen you gain |cFFFFFF5|r stacks, you become Frenzied for |cFFFFFF5|r seconds, increasing your melee Light Attack damage by |cFFFFFF55|r% and attack speed by |cFFFFFF50|r%. This effect can occur once every |cFFFFFF15|r seconds.",
     SI_LUIE_SKILL_SET_FRENIZED =                         "Increase melee Light Attack damage by |cFFFFFF55|r% and attack speed by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_EBON_ARMORY =                      "Increase Max Health by |cFFFFFF1000|r.",
-    SI_LUIE_SKILL_SET_EMBERSHIELD =                      "Increase Physical and Spell Resistance by |cFFFFFF3440|r.\n\nEnemies within |cFFFFFF5|r meters take Flame Damage every |cFFFFFF1|r second for |cFFFFFF6|r seconds.",
+    SI_LUIE_SKILL_SET_EMBERSHIELD =                      "Increase Physical and Spell Resistance by |cFFFFFF3300|r.\n\nEnemies within |cFFFFFF5|r meters take Flame Damage every |cFFFFFF1|r second for |cFFFFFF6|r seconds.",
     SI_LUIE_SKILL_SET_HAGRAVENS_GARDEN =                 "Any damage you take from enemies outside of the preservation is reduced by |cFFFFFF50|r%.\n\nThe first time an enemy tries to enter the preservation they are knocked back |cFFFFFF5|r meters.",
     SI_LUIE_SKILL_SET_JOLTING_ARMS =                     "Increase Physical and Spell Resistance by |cFFFFFF4620|r for |cFFFFFF<<1>>|r seconds and your next Bash deals additional damage.",
     SI_LUIE_SKILL_SET_LEECHING_PLATE_TP =                "Enemies in the |cFFFFFF5|r meter radius of the poison cloud take Poison Damage every |cFFFFFF1|r second.\n\nYou heal for |cFFFFFF100|r% of the damage done.",
@@ -973,7 +976,7 @@ local strings = {
     SI_LUIE_SKILL_RENALDS_RESOLVE_TP =                   "Increase healing taken by |cFFFFFF1|r% and Physical and Spell Resistance by |cFFFFFF420|r per stack for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF8|r times when you deal direct damage.\n\nYou can only gain one stack of Resolve every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_DRAGONS_DEFILEMENT_TP =                "Enemies within |cFFFFFF8|r meters are afflicted with Minor Fracture and Minor Breach.",
     SI_LUIE_SKILL_DRAGONGUARD_TACTICS_TP =               "Increase Weapon Critical by |cFFFFFF476|r for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF5|r times when you deal direct damage to an enemy from the front or their sides.\n\nYou can only gain one stack every |cFFFFFF1|r second.",
-    SI_LUIE_SKILL_SENCHALS_DUTY_TP =                     "Gain a persistent stack of Senchal's Duty, stacking up to |cFFFFFF10|r times when you deal damage with a non-Heavy Attack.\n\nAfter dealing damage with a fully-charged Heavy Attack, restore |cFFFFFF666|r Stamina and Magicka for each stack of Senchal's Duty and consume them.\n\nYou can only gain one stack of Senchal's Duty every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_SENCHALS_DUTY_TP =                     "Gain a persistent stack of Senchal's Duty, stacking up to |cFFFFFF10|r times when you deal direct damage with a non-Heavy Attack.\n\nAfter dealing damage with a fully-charged Heavy Attack, restore |cFFFFFF666|r Stamina and Magicka for each stack of Senchal's Duty and consume them.\n\nYou can only gain one stack of Senchal's Duty every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_TRINIMACS_VALOR_TP =                   "After |cFFFFFF2|r seconds the fragment of Trinimac explodes, healing you and allies while dealing Magic Damage to enemies in within |cFFFFFF5|r meters of the fragment.",
     SI_LUIE_SKILL_SET_SEVENTH_LEGION_TP =                "Increase Weapon Damage by |cFFFFFF350|r and Health Recovery by |cFFFFFF350|r for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_RAVAGER_TP =                       "Increase Weapon Damage by |cFFFFFF125|r for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF4|r times when you attempt to reduce a target's Physical or Spell Resistance.\n\nThis effect can occur once every second.\n\nUpon reaching |cFFFFFF4|r stacks, the duration is doubled but can no longer be refreshed.",
@@ -1004,6 +1007,7 @@ local strings = {
 
     -- Battleground Sets
     SI_LUIE_SKILL_SET_COWARDS_GEAR =                     "Coward's Gear",
+    SI_LUIE_SKILL_SET_COWARDS_GEAR_TP =                  "While Sprinting you gain Major Expedition and Major Protection.",
     SI_LUIE_SKILL_SET_VANGUARDS_CHALLENGE_TP =           "Наносите на |cFFFFFF100|r% больше урона игроку, который провоцирует вас, но на |cFFFFFF50|r% меньше урона другим игрокам в течение |cFFFFFF15|r секунд.",
 
     -- Imperial City Sets
@@ -1021,7 +1025,7 @@ local strings = {
     SI_LUIE_SKILL_SET_CYRODIILS_LIGHT_TP =               "Ваша следующая способность, расходующая Магию, применённая в течение |cFFFFFF30|r секунд, будет применена бесплатно.",
     SI_LUIE_SKILL_SET_MORAG_TONG_TP =                    "Увеличивает урон, получаемый от способностей с уроном от Яда, на |cFFFFFF10|r% в течение |cFFFFFF5|r секунд.",
     SI_LUIE_SKILL_SET_WARRIORS_FURY_TP =                 "Increase Weapon Damage by |cFFFFFF30|r for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF20|r times when you take damage.\n\nThis effect can occur once every half second.\n\nUpon reaching |cFFFFFF20|r stacks, the duration is doubled but can no longer be refreshed.",
-    SI_LUIE_SKILL_SET_ROBES_OF_TRANSMUTATION_TP =        "Increase Critical Resistance by |cFFFFFF1304|r for |cFFFFFF20|r seconds.",
+    SI_LUIE_SKILL_SET_ROBES_OF_TRANSMUTATION_TP =        "Increase Critical Resistance by |cFFFFFF1400|r for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_BECKONING_STEEL_TP =               "Reduce damage taken from projectiles by |cFFFFFF10|r%.",
     SI_LUIE_SKILL_SET_SENTRY_TP =                        "Dramatically increase Stealth Detection radius for |cFFFFFF<<1>>|r seconds.",
 

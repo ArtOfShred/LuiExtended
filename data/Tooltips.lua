@@ -127,6 +127,7 @@ LUIE.Data.Tooltips = {
     Generic_Enrage_Stack_Permanent                  = GetString(SI_LUIE_SKILL_GENERIC_ENRAGE_STACK_PERMANENT_TP),
 
     Generic_Increase_Damage_Taken                   = GetString(SI_LUIE_SKILL_GENERIC_INCREASE_DAMAGE_TAKEN_TP),
+    Generic_Reduce_Damage_Taken                     = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_DAMAGE_TAKEN_TP),
     Generic_Critical_Damage                         = GetString(SI_LUIE_SKILL_SET_GENERIC_CRITICAL_DAMAGE_TP),
 
     Generic_Movement_Speed                          = GetString(SI_LUIE_SKILL_GENERIC_MOVEMENT_SPEED_TP),
@@ -502,6 +503,8 @@ LUIE.Data.Tooltips = {
     Set_Coldharbours_Favorite_Damage                = GetString(SI_LUIE_SKILL_SET_COLDHARBOURS_FAVORITE_DAMAGE_TP),
 
     -- Light / Medium / Heavy Sets
+    Set_Queens_Elegance_LA                          = GetString(SI_LUIE_SKILL_SET_ELEGANCE_LA_TP),
+    Set_Queens_Elegance_HA                          = GetString(SI_LUIE_SKILL_SET_ELEGANCE_HA_TP),
     Set_Bahrahas_Curse                              = GetString(SI_LUIE_SKILL_SET_BAHRAHAS_CURSE_TP),
     Skill_Bahrahas_Curse_Ground                     = GetString(SI_LUIE_SKILL_BAHRAHAS_CURSE_GROUND_TP),
     Set_Briarheart                                  = GetString(SI_LUIE_SKILL_SET_BRIARHEART_TP),
@@ -557,6 +560,7 @@ LUIE.Data.Tooltips = {
 
     -- Battleground Sets
     Set_Vanguards_Challenge                         = GetString(SI_LUIE_SKILL_SET_VANGUARDS_CHALLENGE_TP),
+    Set_Cowards_Gear                                = GetString(SI_LUIE_SKILL_SET_COWARDS_GEAR_TP),
 
     -- Imperial City Sets
     Set_Galerions_Revenge                           = GetString(SI_LUIE_SKILL_SET_GALERIONS_REVENGE_TP),
