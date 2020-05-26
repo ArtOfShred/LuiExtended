@@ -164,10 +164,11 @@ LUIE.DebugAuras = {
     [64568] = true, -- Major Savagery (... of Weapon Critical)
     [64555] = true, -- Major Brutality (... of Weapon Power)
     [125027] = true, -- Minor Heroism (... of Heroism)
+    [140700] = true, -- of Timidity (Minor Timidity)
 
     -- Crafted Potions (3 Traits)
     [64565] = true, -- Major Resolve (... of Armor)
-    -- (no ... of Creeping Ravage Health)
+    [79710] = true, -- Creeping Ravage Health (... of Creeping Ravage Health)
     [79860] = true, -- Minor Defile (... of Defile)
     [45458] = true, -- Increase Detection (... of Detection)
     [63670] = true, -- Major Fortitude (... of Health)
@@ -198,6 +199,7 @@ LUIE.DebugAuras = {
     [64569] = true, -- Major Savagery (... of Weapon Critical)
     [64554] = true, -- Major Brutality (... of Weapon Power)
     [125041] = true, -- Minor Heroism (... of Heroism)
+    [140701] = true, -- of Timidity (Minor Timidity)
 
     -- Vendor Potions + AVA Potions + Roguish Draughts
     [63672] = true, -- Major Fortitude (... of Health)
@@ -205,10 +207,14 @@ LUIE.DebugAuras = {
     [63683] = true, -- Major Endurance (... of Stamina)
     [72935] = true, -- Major Endurance (Alliance Battle Draught)
     [72936] = true, -- Major Brutality (Alliance Battle Draught)
+    [137007] = true, -- Major Savagery (Alliance Battle Draugh)
     [72928] = true, -- Major Fortitude (Alliance Health Draught)
     [72930] = true, -- Unstoppable (Alliance Health Draught)
+    [137002] = true, -- Invisibility (Alliance Health Draught)
+    [137000] = true, -- Clairvoyance Fx (Alliance Health Draught)
     [72932] = true, -- Major Intellect (Alliance Spell Draught)
     [72933] = true, -- Major Sorcery (Alliance Spell Draught)
+    [137006] = true, -- Major Prophecy (Alliance Spell Draught)
     [78054] = true, -- Major Endurance (Roguish Stealth Draught)
     [78058] = true, -- Vanish (Roguish Stealth Draught)
     [78057] = true, -- Clairvoyance Fx (Roguish Escape Draught)
@@ -321,6 +327,7 @@ LUIE.DebugAuras = {
     [79861] = true, -- Minor Defile (Defiling Poison)
     [125203] = true, -- Trauma (Traumatic Poison)
     [125204] = true, -- Minor Heroism (Traumatic Poison)
+    [134149] = true, -- Minor Timidity (Timidity Poison) DEBUFF
 
     -- Crafted Poisons (3 Traits)
     [79135] = true, -- Drain Health (Drain Health Poison)
@@ -362,8 +369,7 @@ LUIE.DebugAuras = {
     [79701] = true, --  Creeping Drain Health (Gradual Health Drain Poison)
     [81348] = true, -- Creeping Drain Helath (Gradual Health Drain Poison)
     [79702] = true, -- Lingering Restore Health (Gradual Health Drain Poison)
-    -- (no Gradual Ravage Health Poison)
-    -- (no Gradual Ravage Health Poison)
+    [79708] = true, -- Creeping Ravage Health (Gradual Ravage Health Poison)
     [79726] = true, -- Minor Vulnerability (Protection-Reversing Poison)
     [79727] = true, -- Minor Protection (Protection-Reversing Poison)
     [79720] = true, -- Minor Vulnerability (Vulnerability Poison)
@@ -372,6 +378,7 @@ LUIE.DebugAuras = {
     [79862] = true, -- Minor Defile (Defiling Poison)
     [125205] = true, -- Minor Traumatizing (Traumatic Poison)
     [125206] = true, -- Minor Heroism (Traumatic Poison)
+    [134150] = true, -- Minor Timidity (Timidity Poison) DEBUFF
 
     -- Vendor Poisons
     [81553] = true, -- Ravage Health (Cloudy Damage Health Poison)
@@ -522,7 +529,7 @@ LUIE.DebugAuras = {
     [84700] = true, -- Bowl of "Peeled Eyeballs" (Blue)
     [84701] = true, -- Increase Health Regen
     [84702] = true, -- Witchfest Drink: M, H, Flagon
-    [84735] = true, -- Double Bloody Mara (Gold)
+    [84735] = true, -- Purifying Bloody Mara (Gold)
     [84736] = true, -- Increase Health
     [84737] = true, -- Witchfest Drink: Max MH, Flago
     [84720] = true, -- Ghastly Eye Bowl (Blue)
@@ -551,7 +558,7 @@ LUIE.DebugAuras = {
     [89939] = true, -- Jesters Food: Max HS, Reg S
     [89958] = true, -- Increase Stamina
     [89959] = true, -- Increase Health
-    [127531] = true, -- Disastrously Bloody Mara
+    [127531] = true, -- Corrupting Bloody Mara
     [127530] = true, -- Witchfest Drink: Max MH, Flago
     [127537] = true, -- Increase Health
     [127619] = true, -- Increase Health
@@ -712,6 +719,51 @@ LUIE.DebugAuras = {
     [69293] = true, -- Sigil of Imperial Retreat (Sigil of Imperial Retreat)
     [59581] = true, -- Clickable Eat Food (Spoiled Food)
 
+    -- Glenmoril Wyrd Treasure Maps
+    [128186] = true, -- Glenmoril Wyrd Treasure Map: Alik'r
+    [128258] = true, -- Glenmoril Wyrd Treasure Map: Auridon
+    [128264] = true, -- Glenmoril Wyrd Treasure Map: Bangkorai
+    [128274] = true, -- Glenmoril Wyrd Treasure Map: Eastmarch
+    [128266] = true, -- Glenmoril Wyrd Treasure Map: Glenumbra
+    [128351] = true, -- Glenmoril Wyrd Treasure Map: Malabal Tor
+    [128356] = true, -- Glenmoril Wyrd Treasure Map: Reaper's March
+    [128362] = true, -- Glenmoril Wyrd Treasure Map: Rivenspire
+    [128367] = true, -- Glenmoril Wyrd Treasure Map: Shadowfen
+    [128373] = true, -- Glenmoril Wyrd Treasure Map: Stonefalls
+
+    -- PTS Items
+    [81736] = true, -- Donolon's Blue Recipe Book (Recipe: Donolon's Blue Recipe Book)
+    [81735] = true, -- Donolon's Green Recipe Book (Recipe: Donolon's Green Recipe Book)
+    [95397] = true, -- Donolon's Holiday Recipe Book (Recipe: Donolon's Holiday Recipe Book)
+    [81737] = true, -- Donolon's Rare Recipe Book (Recipe: Donolon's Rare Recipe Book)
+    [89338] = true, -- Exquisite Furniture Tome (ALL Furniture Plan Book)
+    [115175] = true, -- Murkmire Furniture Tome (Murkmire Furniture Plan Book)
+    [87282] = true, -- Vampire Maxer (Vampire Maxer)
+    [87286] = true, -- Werewolf Maxer (Werewolf Maxer)
+    [66704] = true, -- _CRWN Remove Vamp/Werewolf (Cleansing Ritual)
+    [66705] = true, -- _CRWN Remove Vamp/Werewolf (Cleansing Ritual)
+    [66706] = true, -- _CRWN Remove Vamp/Werewolf (Cleansing Ritual)
+
+    -- Arena Gladiator's Proof Items
+    [111188] = true, -- Arena Gladiator Costume (Arena Gladiator's Exultation)
+    [111190] = true, -- 68235 Stun (Arena Gladiator's Exultation)
+    [115062] = true, -- Arena Gladiator Emote (Arena Gladiator's Mockery)
+    [115064] = true, -- 68235 Stun (Arena Gladiator's Mockery)
+    [106173] = true, -- Arena Gladiator Helm (Arena Gladiator's Recognition)
+    [106174] = true, -- 68235 Stun (Arena Gladiator's Recognition)
+    [116414] = true, -- Arena Gladiator Pet (Arena Gladiator's Roar)
+    [116416] = true, -- 68235 Stun (Arena Gladiator's Roar)
+    [134882] = true, -- Knights of the Circle Weapon Style Page (Knight's Rebuke)
+    [134883] = true, -- 68235 Stun (Knight's Rebuke)
+    [134850] = true, -- Knights of the Circle Armor Style Page (Knight's Resolve)
+    [134851] = true, -- 68235 Stun (Knight's Resolve)
+    [140620] = true, -- Reach-Mage Ceremonial Skullcap (Reach-Mage's Ferocity)
+    [140622] = true, -- 68235 Stun (Reach-Mage's Ferocity)
+    --[124788] = true, -- Arena Gladiator Helm (Siege of Cyrodiil Recognition)
+    --[124789] = true, -- 68235 Stun (Siege of Cyrodiil Recognition)
+    --[126708] = true, -- Siegemaster Costume (Siege of Cyrodiil Recommendation)
+    --[126710] = true, -- 68235 Stun (Siege of Cyrodiil Recommendation)
+
     -------------------------------------
     -- MEMENTOS -------------------------
     -------------------------------------
@@ -773,6 +825,7 @@ LUIE.DebugAuras = {
     [91453] = true, -- Breda's Magnificent Mead -- Breda's Bottomless Mead Mug
     [91449] = true, -- Breda's Magnificent Mead -- Breda's Bottomless Mead Mug
     [86075] = true, -- Breda's Magnificent Mead -- Breda's Magnificent Mead
+    [126689] = true, -- Grant Ach Progress: Skel Merionette (Skeletal Marionette)
     [125820] = true, -- Witches Festival 2019 Marionette (Skeletal Marionette)
     [125832] = true, -- Marionette Summon (Skeletal Marionette)
 
@@ -942,6 +995,8 @@ LUIE.DebugAuras = {
 
     -- Weapons
     [100473] = true, -- Chaotic Whirlwind (Asylum)
+    [100474] = true, -- Chaotic Whirlwind (Asylum)
+    [140223] = true, -- Chaotic Whirlwind (Asylum)
     [100301] = true, -- Piercing Spray (Asylum)
     [100302] = true, -- Piercing Spray (Asylum)
     [100293] = true, -- Disciplined Slash (Asylum)
@@ -951,27 +1006,12 @@ LUIE.DebugAuras = {
     [100465] = true, -- Defensive Position (Perfected) (Asylum)
     [100462] = true, -- Defensive Position (Asylum)
     [100464] = true, -- Defensive Position (Asylum)
-    [100303] = true, -- Concentrated Forced (Asylum)
-    [100304] = true, -- Concentrated Forced (Asylum)
-    [100306] = true, -- Concentrated Forced (Asylum)
+    [100303] = true, -- Concentrated Force (Asylum)
+    [100304] = true, -- Concentrated Force (Asylum)
+    [100306] = true, -- Concentrated Force (Asylum)
+    [140282] = true, -- Concentrated Force (Asylum)
     [100307] = true, -- Timeless Blessing (Asylum)
     [100308] = true, -- Timeless Blessing (Asylum)
-
-    [99597] = true, -- Chaotic Whirlwind (Perfected) (Asylum)
-    [99362] = true, -- Piercing Spray (Perfected) (Asylum)
-    [99363] = true, -- Piercing Spray (Perfected) (Asylum)
-    [99360] = true, -- Disciplined Slash (P) (Asylum)
-    [99361] = true, -- Disciplined Slash (Perfected) (Asylum)
-    [99896] = true, -- Defensive Position (Asylum)
-    [100454] = true, -- Defensive Position (Perfected) (Asylum)
-    [100455] = true, -- Defensive Position (Asylum)
-    [99920] = true, -- Defensive Position (Perfected) (Asylum)
-    [99919] = true, -- Defensive Position (Perfected) (Asylum)
-    [99596] = true, -- Concentrated Force (Perfected) (Asylum)
-    [99987] = true, -- Concentrated Force (P) (Asylum)
-    [99989] = true, -- Concentrated Force (P) (Asylum)
-    [99550] = true, -- Timeless Blessing (Perfected) (Asylum)
-    [99582] = true, -- Timeless Blessing (Perfected) (Asylum)
 
     [99805] = true, -- Cruel Flurry (Maelstrom)
     [99806] = true, -- Cruel Flurry (Maelstrom)
@@ -980,6 +1020,7 @@ LUIE.DebugAuras = {
     [99854] = true, -- Thunderous Volley (Maelstrom)
     [99853] = true, -- Thunderous Volley (Maelstrom)
     [99787] = true, -- Merciless Charge (Maelstrom)
+    [141877] = true, -- Merciless Charge (Maelstrom)
     [99789] = true, -- Merciless Charge (Maelstrom)
     [99801] = true, -- Rampaging Slash (Maelstrom)
     [100588] = true, -- Rampaging Slash (Maelstrom)
@@ -1007,11 +1048,13 @@ LUIE.DebugAuras = {
     [99761] = true, -- Puncturing Remedy (Master)
     [100575] = true, -- Puncturing Remedy (Master)
     [99774] = true, -- Destructive Impact (Master)
+    [140334] = true, -- Destructive Impact (Master)
     [99780] = true, -- Grand Rejuvenation (Master)
     [99781] = true, -- Grand Rejuvenation (Master)
     [131489] = true, -- Grand Rejuvenation (Master)
 
     [113616] = true, -- Spectral Cloak (Blackrose DW)
+    [141875] = true, -- Spectral Cloak (Blackrose DW)
     [113617] = true, -- Spectral Cloak (Blackrose DW)
     [113619] = true, -- Virulent Shot (Blackrose Bow)
     [113628] = true, -- Virulent Shot (Blackrose Bow)
@@ -1075,6 +1118,7 @@ LUIE.DebugAuras = {
     [80563] = true, -- Iceheart
 
     [80524] = true, -- Ilambris
+    [140516] = true, -- Ilambris
     [80529] = true, -- Ilambris
     [80526] = true, -- Ilambris
     [80527] = true, -- Ilambris
@@ -1130,6 +1174,7 @@ LUIE.DebugAuras = {
 
     [133378] = true, -- Mother Ciannait (Mother Ciannait)
     [133381] = true, -- Mother Ciannait (Mother Ciannait)
+    [137313] = true, -- Mother Ciannait (Mother Ciannait)
 
     [59592] = true, -- Nerien'eth
     [59594] = true, -- Crpyt of Hearts Item Set
@@ -1169,9 +1214,9 @@ LUIE.DebugAuras = {
     [80955] = true, -- Forward Charge
     [80954] = true, -- Shadowrend Summon
     [80980] = true, -- Shadowrend
-    [80990] = true, -- Minor Maim
+    [80990] = true, -- Shadowrend
     [80989] = true, -- Shadowrend
-    [81034] = true, -- Minor Maim
+    [81034] = true, -- Shadowrend
 
     [80481] = true, -- Minor Berserk (Slimecraw)
 
@@ -1203,16 +1248,17 @@ LUIE.DebugAuras = {
     [117111] = true, -- Meridia's Favor (Symphony of Blades)
     [117118] = true, -- Meridia's Favor (Symphony of Blades)
     [117119] = true, -- Meridia's Favor (Symphony of Blades)
+    [140092] = true, -- Meridia's No More Favor (Symphony of Blades)
 
     [59521] = true, -- Engine Guardian
     [60484] = true, -- Sphere Groundrise
     [59522] = true, -- Engine Guardian
-    [59539] = true, -- Engine Guardian
-    [59540] = true, -- Engine Guardian Stamina
-    [59525] = true, -- Engine Guardian
-    [59533] = true, -- Engine Guardian Magicka
-    [59541] = true, -- Engine Guardian
-    [59543] = true, -- Engine Guardian Health
+    [59539] = true, -- Robust Engine Guardian
+    [59540] = true, -- Robust Engine Guardian
+    [59525] = true, -- Arcane Engine Guardian
+    [59533] = true, -- Arcane Engine Guardian
+    [59541] = true, -- Healthy Engine Guardian
+    [59543] = true, -- Healthy Engine Guardian
 
     [80503] = true, -- The Troll King
     [80504] = true, -- The Troll King
@@ -1245,7 +1291,7 @@ LUIE.DebugAuras = {
     [80863] = true, -- Hoarvor Mask
 
     [111352] = true, -- Vykosa
-    [111354] = true, -- Major Maim
+    [111354] = true, -- Vykosa
 
     [102125] = true, -- Zaan
     [102136] = true, -- Zaan
@@ -1456,6 +1502,8 @@ LUIE.DebugAuras = {
     [57133] = true, -- Dreamer's Mantle (Dreamer's)
 
     [32803] = true, -- Queen's Elegance (Elegant)
+    [135938] = true, -- Queen's Elegance (Elegant)
+    [135939] = true, -- Queen's Elegance (Elegant)
 
     [32743] = true, -- Robes of the Hist (of Hist Sap)
     [85776] = true, -- Robes of the Hist (of Hist Sap)
@@ -2209,7 +2257,6 @@ LUIE.DebugAuras = {
     [61771] = true, -- Powerful Assault (of the Powerful Assault)
 
     [68947] = true, -- Reactive Armor (Reactive)
-    [68948] = true, -- Reactive Armor (Reactive)
     [69567] = true, -- Reactive Armor Effects (Reactive)
 
     [68973] = true, -- Shield Breaker (of the Shield Breaker)
@@ -2705,9 +2752,11 @@ LUIE.DebugAuras = {
 
     -- PET EFFECTS
     [28609] = true, -- Dummy Target Setter
-    [43958] = true, -- Pet AoE Resistance
-    [70116] = true, -- Pet PvP Damage Reduction
-    [62197] = true, -- Pet Crit Chance
+    [43958] = true, -- Player Pet Defenses
+    [70116] = true, -- Player Pet Battle Spirit
+    [71904] = true, -- Player Pet Speed
+    [62197] = true, -- Player Pet Critical Chance
+    [43963] = true, -- Player Pet Threat
     [62201] = true, -- Taunt
     [63795] = true, -- Taunt
     [63794] = true, -- Taunt
@@ -2727,7 +2776,6 @@ LUIE.DebugAuras = {
     [105217] = true, -- 68235 Stun (Attunable Jewelry Crafting Station)
     [89652] = true, -- Create Woodworking Set Stati (Attunable Woodworking Station)
     [89654] = true, -- 68235 Stun (Attunable Woodworking Station)
-    [89338] = true, -- ALL Furniture Plan Book (Crafting Book - PTS Only)
 
     -- HOUSING TARGET DUMMY
     [120010] = true, -- Major Breach (Target Iron Atronach, Trial)
@@ -2942,9 +2990,6 @@ LUIE.DebugAuras = {
     [20499] = true, -- Empowering Chains (Empowering Chains)
     [62023] = true, -- Fiery Grip (Empowering Chains)
     [76506] = true, -- Major Expedition (Empowering Chains)
-    [108679] = true, -- Empower (Empowering Chains)
-    [108678] = true, -- Might of the Guild (Empowering Chains)
-    [109206] = true, -- Empower (Empowering Chains)
 
     [20496] = true, -- Unrelenting Grip (Unrelenting Grip)
     [62004] = true, -- Unrelenting Grip (Unrelenting Grip)
@@ -3385,8 +3430,6 @@ LUIE.DebugAuras = {
     [76632] = true, -- Manifestation of Terror (Manifestation of Terror)
 
     [65269] = true, -- Shade Initialize (Summon Shade - All Morphs)
-    [71904] = true, -- Player Pet Speed
-    [62197] = true, -- Pet Crit Chance (Summon Shade - All Morphs)
     --[85086] = true, -- Boss (Summon Shade - All Morphs)
     --[85087] = true, -- Boss (Summon Shade - All Morphs)
 
@@ -3691,7 +3734,6 @@ LUIE.DebugAuras = {
 
     [27287] = true, -- Birth Unstable Familiar (Summon Unstable Familiar - All Ranks)
     [29536] = true, -- Familiar Set Target (Summon Unstable Familiar - All Ranks)
-    [43963] = true, -- Pet Bonus Threat (Summon Unstable Familiar - All Ranks)
     [27850] = true, -- Familiar Melee (Summon Unstable Familiar + Summon Volatile Familiar)
 
     [23304] = true, -- Summon Unstable Familiar (Summon Unstable Familiar)
@@ -6806,6 +6848,7 @@ LUIE.DebugAuras = {
 
     [103478] = true, -- Undo (Undo)
     [108609] = true, -- Undo (Undo)
+    [108615] = true, -- Undo (Undo)
 
     [103557] = true, -- Precognition (Precognition)
     [108621] = true, -- Precognition (Precognition)
@@ -6815,6 +6858,7 @@ LUIE.DebugAuras = {
     [103570] = true, -- Minor Protection (Temporal Guard)
     [103564] = true, -- Temporal Guard (Temporal Guard)
     [108641] = true, -- Temporal Guard (Temporal Guard)
+    [108643] = true, -- Temporal Guard (Temporal Guard)
 
     -------------------------------------
     -- THIEVES GUILD PASSIVES -----------
@@ -15613,6 +15657,30 @@ LUIE.DebugAuras = {
     [66242] = true, -- Fire Ballista Bolt (Cold Fire Ballista)
     [66244] = true, -- Fire Ballista Bolt (Cold Fire Ballista)
     [66243] = true, -- Cold Harbor Ballista Bolt (Cold Fire Ballista)
+
+    [135862] = true, -- Create Lance Cannon... (Shock Lancer)
+    [135861] = true, -- Create Lance Cannon... (Shock Lancer)
+    [135860] = true, -- Create Lance Cannon... (Shock Lancer)
+    [138555] = true, -- Shock Lancer (Shock Lancer)
+    [138556] = true, -- Shock Lancer (Shock Lancer)
+    [138558] = true, -- Shock Lancer (Shock Lancer)
+    [138557] = true, -- Shock Lancer (Shock Lancer)
+
+    [135859] = true, -- Create Lance Cannon... (Fire Lancer)
+    [135858] = true, -- Create Lance Cannon... (Fire Lancer)
+    [135836] = true, -- Create Lance Cannon... (Fire Lancer)
+    [138426] = true, -- Fire Lancer (Fire Lancer)
+    [138434] = true, -- Fire Lancer (Fire Lancer)
+    [138436] = true, -- Fire Lancer (Fire Lancer)
+    [138435] = true, -- Fire Lancer (Fire Lancer)
+
+    [135868] = true, -- Create Lance Cannon... (Frost Lancer)
+    [135867] = true, -- Create Lance Cannon... (Frost Lancer)
+    [135866] = true, -- Create Lance Cannon... (Frost Lancer)
+    [138551] = true, -- Frost Lancer (Frost Lancer)
+    [138552] = true, -- Frost Lancer (Frost Lancer)
+    [138554] = true, -- Frost Lancer (Frost Lancer)
+    [138553] = true, -- Frost Lancer (Frost Lancer)
 
     [22570] = true, -- Create Boiling Oil... (Flaming Oil)
     [15775] = true, -- Flaming oil (Flaming Oil)

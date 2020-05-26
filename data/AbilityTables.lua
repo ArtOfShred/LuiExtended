@@ -65,6 +65,7 @@ local AbilityTables = {
     Skill_Minor_Uncertainty           = 47204,
     Skill_Minor_Cowardice             = 46202,
     Skill_Minor_Mangle                = 39168,
+    Skill_Minor_Timidity              = 140700,
     Skill_Minor_Slayer                = 76618,
     Skill_Minor_Aegis                 = 76617,
     Skill_Off_Balance                 = 14062,
@@ -119,6 +120,16 @@ local AbilityTables = {
     Innate_Pardon_Edict_Low           = GetString(SI_LUIE_SKILL_COUNTERFEIT_PARDON_EDICT),
     Innate_Pardon_Edict_Medium        = GetString(SI_LUIE_SKILL_LENIENCY_EDICT),
     Innate_Pardon_Edict_High          = GetString(SI_LUIE_SKILL_GRAND_AMNESTY_EDICT),
+
+    Innate_Arena_Gladiators_Exultation      = GetItemLinkName("|H0:item:141751:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Arena_Gladiators_Mockery         = GetItemLinkName("|H0:item:146042:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Arena_Gladiators_Recognition     = GetItemLinkName("|H0:item:138785:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Arena_Gladiators_Roar            = GetItemLinkName("|H0:item:147285:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Knights_Rebuke                   = GetItemLinkName("|H0:item:159544:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Knights_Resolve                  = GetItemLinkName("|H0:item:159535:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Reach_Mages_Ferocity             = GetItemLinkName("|H0:item:166469:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Siege_of_Cyrodiil_Recognition    = GetItemLinkName("|H0:item:151938:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Siege_of_Cyrodiil_Recommendation = GetItemLinkName("|H0:item:153536:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
 
     -- Champion
     Champion_Last_Stand               = 60413,
@@ -294,11 +305,6 @@ local AbilityTables = {
     -- ITEM SETS -----------------------------------------
     -- ---------------------------------------------------
 
-    Set_Piercing_Spray                = 100302, -- Piercing Spray (Asylum Bow)
-    Set_Disciplined_Slash             = 100294, -- Disciplined Slash (Asylum 2H)
-    Set_Defensive_Position            = 100462, -- Defensive Position (Asylum 1H + Shield)
-    Set_Concentrated_Force            = 100306, -- Concentrated Force (Asylum Destruction Staff)
-    Set_Timeless_Blessing             = 100308, -- Timeless Blessing (Asylum Restoration Staff)
     Set_Bogdan_the_Nightflame         = GetString(SI_LUIE_SKILL_SET_BOGDAN_THE_NIGHTFLAME),
     Set_Lord_Warden_Dusk              = GetString(SI_LUIE_SKILL_SET_LORD_WARDEN_DUSK),
     Set_Malubeth_the_Scourger         = GetString(SI_LUIE_SKILL_SET_MALUBETH_THE_SCOURGER),
@@ -307,7 +313,6 @@ local AbilityTables = {
     Set_Shadowrend                    = 80989,
     Set_Spawn_of_Mephala              = 59497,
     Set_Swarm_Mother                  = 80592,
-    Set_Engine_Guardian               = 59521,
     Set_The_Troll_King                = GetString(SI_LUIE_SKILL_SET_TROLL_KING),
     Set_Energy_Charge                 = GetString(SI_LUIE_SKILL_SET_ENERGY_CHARGE),
     Set_Tzogvins_Warband              = 116734,
@@ -349,7 +354,6 @@ local AbilityTables = {
     Set_Pirate_Skeleton               = 80501,
     Set_Slimecraw                     = GetString(SI_LUIE_SKILL_SET_SLIMECRAW),
     Set_Thurvokun                     = 102089,
-    Set_Blackrose_DW                  = 113616,
     Set_Blackrose_Resto_Staff         = 113651,
     Set_Wisdom_of_Vanus               = 106805,
     Set_Champion_of_the_Hist          = 113284,
@@ -419,6 +423,7 @@ local AbilityTables = {
     Set_Warming_Aura                  = 133210,
     Set_Aegis_Caller                  = 133490,
     Set_Banis_Torment                 = 133290,
+    Set_Reactive_Armor                = 68947,
 
     Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE),
 
@@ -864,7 +869,6 @@ local AbilityTables = {
     -- ---------------------------------------------------
 
     Skill_Battle_Spirit               = GetString(SI_LUIE_SKILL_BATTLE_SPIRIT),
-    Skill_Imperial_City               = GetCollectibleName(154),
     Skill_Edge_Keep_Bonus_I           = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_SKILL_EDGE_KEEP_BONUS), "I"),
     Skill_Edge_Keep_Bonus_II          = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_SKILL_EDGE_KEEP_BONUS), "II"),
     Skill_Edge_Keep_Bonus_III         = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_SKILL_EDGE_KEEP_BONUS), "III"),
@@ -876,11 +880,8 @@ local AbilityTables = {
     Skill_Covenant                    = GetString(SI_LUIE_SKILL_COVENANT),
     Skill_Dominion                    = GetString(SI_LUIE_SKILL_DOMINION),
     Skill_Ballista                    = 68205,
-    Skill_Ballista_Bolt               = 7468,
     Skill_Fire_Ballista               = 35049,
-    Skill_Fire_Ballista_Bolt          = 28480,
     Skill_Lightning_Ballista          = GetString(SI_LUIE_SKILL_LIGHTNING_BALLISTA),
-    Skill_Lightning_Ballista_Bolt     = 14364,
 
     Skill_Stone_Trebuchet             = 14159,
     Skill_Iceball_Trebuchet           = 13551,
@@ -889,10 +890,13 @@ local AbilityTables = {
     Skill_Oil_Catapult                = 16789,
     Skill_Scattershot_Catapult        = 14611,
 
+    Skill_Shock_Lancer                = 138555,
+    Skill_Fire_Lancer                 = 138426,
+    Skill_Frost_Lancer                = 138551,
+
     Skill_Cold_Stone_Trebuchet        = GetString(SI_LUIE_SKILL_COLD_STONE_TREBUCHET),
     Skill_Cold_Fire_Trebuchet         = GetString(SI_LUIE_SKILL_COLD_FIRE_TREBUCHET),
     Skill_Cold_Fire_Ballista          = GetString(SI_LUIE_SKILL_COLD_FIRE_BALLISTA),
-    Skill_Cold_Fire_Ballista_Bolt     = 66239,
 
     Skill_Flaming_Oil                 = 15774,
     Skill_Battering_Ram               = 15197,

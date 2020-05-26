@@ -176,6 +176,9 @@ CrowdControl.aoePlayerSet = {
     -- Siege
     [104693] = 1, -- Meatbag Catapult
     [104695] = 1, -- Scattershot Catapult
+    [138556] = 1, -- Shock Lancer
+    [138434] = 1, -- Fire Lancer
+    [138552] = 1, -- Frost Lancer
 
 }
 

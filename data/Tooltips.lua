@@ -77,6 +77,7 @@ LUIE.Data.Tooltips = {
     Skill_Minor_Uncertainty                         = GetString(SI_LUIE_SKILL_MINOR_UNCERTAINTY_TP),
     Skill_Minor_Cowardice                           = GetString(SI_LUIE_SKILL_MINOR_COWARDICE_TP),
     Skill_Minor_Mangle                              = GetString(SI_LUIE_SKILL_MINOR_MANGLE_TP),
+    Skill_Minor_Timidity                            = GetString(SI_LUIE_SKILL_MINOR_TIMIDITY_TP),
 
     -- Aegis/Slayer
     Skill_Minor_Aegis                               = GetString(SI_LUIE_SKILL_MINOR_AEGIS_TP),
@@ -126,6 +127,7 @@ LUIE.Data.Tooltips = {
     Generic_Enrage_Stack_Permanent                  = GetString(SI_LUIE_SKILL_GENERIC_ENRAGE_STACK_PERMANENT_TP),
 
     Generic_Increase_Damage_Taken                   = GetString(SI_LUIE_SKILL_GENERIC_INCREASE_DAMAGE_TAKEN_TP),
+    Generic_Reduce_Damage_Taken                     = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_DAMAGE_TAKEN_TP),
     Generic_Critical_Damage                         = GetString(SI_LUIE_SKILL_SET_GENERIC_CRITICAL_DAMAGE_TP),
 
     Generic_Movement_Speed                          = GetString(SI_LUIE_SKILL_GENERIC_MOVEMENT_SPEED_TP),
@@ -145,10 +147,13 @@ LUIE.Data.Tooltips = {
     Generic_Reduce_Physical_Spell_Resist_Value      = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_VALUE_TP),
     Generic_Reduce_Physical_Spell_Resist_No_Dur     = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_TP),
     Generic_Reduce_Physical_Spell_Resist_No_Dur_Value = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_VALUE_TP),
-
     Generic_Reduce_Physical_Spell_Damage_Percentage = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_WEP_SPELL_DMG_PERCENTAGE_TP),
 
+    Generic_Reduce_Physical_Resist_Value            = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHYSICAL_RESIST_VALUE_TP),
+
     Generic_Lower_Max_HP                            = GetString(SI_LUIE_SKILL_GENERIC_LOWER_MAX_HP_TP),
+
+    Generic_Reduce_Damage_Done                      = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_DAMAGE_DONE_TP),
 
     Generic_Test                                    = GetString(SI_LUIE_SKILL_TEST_TP),
 
@@ -216,9 +221,11 @@ LUIE.Data.Tooltips = {
     Generic_Invisibility                            = GetString(SI_LUIE_SKILL_GENERIC_INVISIBILITY_TP),
     Generic_Detection_Potion                        = GetString(SI_LUIE_SKILL_GENERIC_DETECTION_POTION_TP),
     Generic_Detection_NPC                           = GetString(SI_LUIE_SKILL_GENERIC_DETECTION_NPC_TP),
+
+    Generic_Ravage_Health_Potion                    = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_HEALTH_POTION_TP),
     Generic_Ravage_Magicka_Potion                   = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POTION_TP),
     Generic_Ravage_Stamina_Potion                   = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POTION_TP),
-
+    Generic_Ravage_Health_Poison                    = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_HEALTH_POISON_TP),
     Generic_Ravage_Magicka_Poison                   = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POISON_TP),
     Generic_Ravage_Stamina_Poison                   = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POISON_TP),
 
@@ -247,6 +254,7 @@ LUIE.Data.Tooltips = {
     Innate_Taunt                                    = GetString(SI_LUIE_SKILL_TAUNT_TP),
     Innate_Disguised                                = GetString(SI_LUIE_SKILL_DISGUISE_TP),
     Innate_Battle_Spirit                            = GetString(SI_LUIE_SKILL_BATTLE_SPIRIT_TP),
+    Innate_Battle_Spirit_Imperial_City              = GetString(SI_LUIE_SKILL_BATTLE_SPIRIT_IMPERIAL_CITY_TP),
     Innate_Recall_Penalty                           = GetString(SI_LUIE_SKILL_RECALL_PENALTY_TP),
     Innate_Battleground_Deserter                    = GetString(SI_LUIE_SKILL_BATTLEGROUND_DESERTER_TP),
     Innate_Ayleid_Well                              = GetString(SI_LUIE_SKILL_AYLEID_WELL_TP),
@@ -417,16 +425,15 @@ LUIE.Data.Tooltips = {
     ----------------------------------------------------------------
 
     -- Weapon Sets
-    Set_Asylum_Bow                                  = zo_strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_BOW), 45),
-    Set_Asylum_Bow_Perfect                          = zo_strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_BOW), 50),
+    Set_Asylum_Dual_Wield                           = GetString(SI_LUIE_SKILL_SET_ASYLUM_DUAL_WIELD),
+    Set_Asylum_Bow                                  = GetString(SI_LUIE_SKILL_SET_ASYLUM_BOW),
     Set_Asylum_Destruction_Staff                    = GetString(SI_LUIE_SKILL_SET_ASYLUM_DESTRUCTION_STAFF),
-    Set_Asylum_Destruction_Staff_P                  = GetString(SI_LUIE_SKILL_SET_ASYLUM_DESTRUCTION_STAFF_PERFECT),
-    Set_Aslyum_Restoration_Staff                    = zo_strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_RESTORATION_STAFF), 27),
-    Set_Aslyum_Restoration_Staff_P                  = zo_strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_RESTORATION_STAFF), 30),
+    Set_Aslyum_Restoration_Staff                    = GetString(SI_LUIE_SKILL_SET_ASYLUM_RESTORATION_STAFF),
     Set_Maelstrom_DW                                = GetString(SI_LUIE_SKILL_SET_MAELSTROM_DW),
     Set_Maelstrom_1H                                = GetString(SI_LUIE_SKILL_SET_MAELSTROM_1H),
     Set_Master_1H                                   = GetString(SI_LUIE_SKILL_SET_MASTER_1H),
     Set_Master_Resto                                = GetString(SI_LUIE_SKILL_SET_MASTER_RESTO),
+    Set_Blackrose_Dual_Wield                        = GetString(SI_LUIE_SKILL_SET_BLACKROSE_DUAL_WIELD),
     Set_Blackrose_1H                                = GetString(SI_LUIE_SKILL_SET_BLACKROSE_1H_TP),
     Set_Blackrose_Destro_Staff                      = GetString(SI_LUIE_SKILL_SET_BLACKROSE_DESTRO_TP),
 
@@ -443,7 +450,8 @@ LUIE.Data.Tooltips = {
     Set_Ilambris_Fire                               = zo_strformat(GetString(SI_LUIE_SKILL_SET_ILAMBRIS), GetString(SI_DAMAGETYPE3)),
     Set_Ilambris_Shock                              = zo_strformat(GetString(SI_LUIE_SKILL_SET_ILAMBRIS), GetString(SI_DAMAGETYPE4)),
     Set_Lord_Warden_Buff                            = GetString(SI_LUIE_SKILL_SET_LORD_WARDEN_BUFF),
-    Set_Malubeth                                    = GetString(SI_LUIE_SKILL_SET_MALUBETH),
+    Set_Malubeth_Damage                             = GetString(SI_LUIE_SKILL_SET_MALUBETH_DAMAGE),
+    Set_Malubeth_Heal                               = GetString(SI_LUIE_SKILL_SET_MALUBETH_HEAL),
     Set_Maw_of_the_Infernal                         = GetString(SI_LUIE_SKILL_SET_MAW_OF_THE_INFERNAL),
     Set_Molag_Kena_Overkill                         = GetString(SI_LUIE_SKILL_SET_MOLAG_KENA_OVERKILL_TP),
     Set_Molag_Kena                                  = GetString(SI_LUIE_SKILL_SET_MOLAG_KENA_TP),
@@ -495,6 +503,8 @@ LUIE.Data.Tooltips = {
     Set_Coldharbours_Favorite_Damage                = GetString(SI_LUIE_SKILL_SET_COLDHARBOURS_FAVORITE_DAMAGE_TP),
 
     -- Light / Medium / Heavy Sets
+    Set_Queens_Elegance_LA                          = GetString(SI_LUIE_SKILL_SET_ELEGANCE_LA_TP),
+    Set_Queens_Elegance_HA                          = GetString(SI_LUIE_SKILL_SET_ELEGANCE_HA_TP),
     Set_Bahrahas_Curse                              = GetString(SI_LUIE_SKILL_SET_BAHRAHAS_CURSE_TP),
     Skill_Bahrahas_Curse_Ground                     = GetString(SI_LUIE_SKILL_BAHRAHAS_CURSE_GROUND_TP),
     Set_Briarheart                                  = GetString(SI_LUIE_SKILL_SET_BRIARHEART_TP),
@@ -550,6 +560,7 @@ LUIE.Data.Tooltips = {
 
     -- Battleground Sets
     Set_Vanguards_Challenge                         = GetString(SI_LUIE_SKILL_SET_VANGUARDS_CHALLENGE_TP),
+    Set_Cowards_Gear                                = GetString(SI_LUIE_SKILL_SET_COWARDS_GEAR_TP),
 
     -- Imperial City Sets
     Set_Galerions_Revenge                           = GetString(SI_LUIE_SKILL_SET_GALERIONS_REVENGE_TP),

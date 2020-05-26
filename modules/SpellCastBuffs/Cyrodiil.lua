@@ -34,9 +34,16 @@ function SpellCastBuffs.LoadBattleSpiritTarget()
 
     -- Create Battle Spirit Buff if we are in a PVP zone or this is our current Duel Target
     if ( LUIE.ResolvePVPZone() and IsUnitPlayer("reticleover") and (GetUnitReaction("reticleover") == UNIT_REACTION_PLAYER_ALLY) ) or GetUnitName("reticleover") == g_currentDuelTarget then
+        local abilityId
+        -- Imperial City version of battle spirit doesn't extend the range of our abilities, unlike the variant used for Cyrodiil, Duels, and BGs.
+        if IsInImperialCity() then
+            abilityId = 999015
+        else
+            abilityId = 999014
+        end
         SpellCastBuffs.EffectsList.reticleover1[ Abilities.Skill_Battle_Spirit ] = {
             type=1,
-            id=85701, name=Abilities.Skill_Battle_Spirit, icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
+            id=abilityId, name=Abilities.Skill_Battle_Spirit, icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
             dur=0, starts=1, ends=nil,
             forced = "short",
             restart=true, iconNum=0,

@@ -577,6 +577,8 @@ function CombatInfo.RegisterCombatInfo()
         end
         eventManager:RegisterForEvent(moduleName, EVENT_START_SOUL_GEM_RESURRECTION, CombatInfo.SoulGemResurrectionStart)
         eventManager:RegisterForEvent(moduleName, EVENT_END_SOUL_GEM_RESURRECTION, CombatInfo.SoulGemResurrectionEnd)
+        eventManager:RegisterForEvent(moduleName, EVENT_GAME_CAMERA_UI_MODE_CHANGED, CombatInfo.OnGameCameraUIModeChanged)
+        eventManager:RegisterForEvent(moduleName, EVENT_END_SIEGE_CONTROL, CombatInfo.OnSiegeEnd)
         --eventManager:RegisterForEvent(moduleName, EVENT_CLIENT_INTERACT_RESULT, CombatInfo.ClientInteractResult)
         --[[counter = 0
         for id, _ in pairs (Effects.CastBreakOnRemoveEvent) do
@@ -728,6 +730,21 @@ function CombatInfo.OnUpdate(currentTime)
         end
     end
 
+end
+
+-- Run on the EVENT_GAME_CAMERA_UI_MODE_CHANGED handler
+function CombatInfo.OnGameCameraUIModeChanged(eventCode)
+    if Castbar.BreakSiegeOnWindowOpen[castbar.id] then
+        CombatInfo.StopCastBar()
+    end
+end
+
+-- Run on the EVENT_END_SIEGE_CONTROL handler
+-- Used to break the cast for Stow Siege Weapon if the player exits siege control.
+function CombatInfo.OnSiegeEnd(eventCode)
+    if castbar.id == 12256 then
+        CombatInfo.StopCastBar()
+    end
 end
 
 function CombatInfo.StopCastBar()
