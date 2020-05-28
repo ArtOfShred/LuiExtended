@@ -383,7 +383,7 @@ LUIE.Data.AlertTable = {
     [91946] = { avoid = true, interrupt = true, eventdetect = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1000, cc = LUIE_CC_TYPE_STAGGER, postCast = 750, bossMatch = { Unitnames.Boss_Ysolmarr_the_Roving_Pyre, Unitnames.Boss_Gar_Xuu_Gar } }, -- Ground Tremor (Daedroth)
     [91937] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1767, cc = LUIE_CC_TYPE_STUN, postCast = 500 }, -- Burst of Embers (Daedroth)
 
-    [26324] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 1300 }, -- Lava Geyser (Flame Atronach)
+    [26324] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 1300 }, -- Lava Geyser (Flame Atronach)
     --[50216] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250, duration = 2000, neverShowInterrupt = true }, -- Combustion (Flame Atronach)
 
     [5017] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 2500, cc = LUIE_CC_TYPE_STUN }, -- Hoarfrost Fist (Frost Atronach)

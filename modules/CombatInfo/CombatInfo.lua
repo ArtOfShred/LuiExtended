@@ -51,6 +51,9 @@ CombatInfo.Defaults = {
     BarFontStyle                     = "outline",
     BarFontSize                      = 18,
     BarMiilis                        = true,
+    BarShowBack                      = false,
+    BarDesaturateUnused              = false,
+    BarHideUnused                    = false,
     PotionTimerShow                  = true,
     PotionTimerLabelPosition         = 0,
     PotionTimerFontFace              = "Univers 67",
@@ -249,6 +252,11 @@ local g_castbarFont -- Font for Castbar Label & Timer
 local g_ProcSound -- Proc Sound
 local g_boundArmamentsPlayed  = false -- Specific variable to lockout Bound Armaments from playing a proc sound at 5 stacks to only once per 5 seconds.
 local g_disableProcSound      = {} -- When we play a proc sound from a bar ability changing (like power lash) we put a 3 sec ICD on it so it doesn't spam when mousing on/off a target, etc
+local g_hotbarCategory  -- Set on initialization and when we swap weapons to determine the current hotbar category
+local g_backbarButtons = {} -- Table to hold backbar buttons
+local g_activeWeaponSwapInProgress = false -- Toggled on when weapon swapping, TODO: maybe not needed
+
+local ACTION_BAR = ZO_ActionBar1
 
 -- Quickslot
 local uiQuickSlot   = {
@@ -277,6 +285,43 @@ local CooldownMethod = {
     [2] = CD_TYPE_VERTICAL,
     [3] = CD_TYPE_RADIAL,
 }
+
+-- Constants from actionbar.lua with only the information we need
+local GAMEPAD_CONSTANTS =
+{
+    abilitySlotOffsetX = 10,
+    ultimateSlotOffsetX = 65,
+    --anchor = ZO_Anchor:New(BOTTOM, GuiRoot, BOTTOM, 0, -25),
+    width = 606,
+    showNormalBindingTextOnUltimate = false,
+    --showKeybindBG = false,
+    --showWeaponSwapButton = false,
+}
+local KEYBOARD_CONSTANTS =
+{
+    abilitySlotOffsetX = 2,
+    ultimateSlotOffsetX = 62,
+    --anchor = ZO_Anchor:New(BOTTOM, GuiRoot, BOTTOM, 0, 0),
+    width = 483,
+    showNormalBindingTextOnUltimate = true,
+    --showKeybindBG = true,
+    --showWeaponSwapButton = true,
+}
+
+local function OnSwapAnimationHalfDone(animation, button)
+    CombatInfo.SetupBackBarIcons(button, true)
+end
+
+local function OnSwapAnimationDone(animation, button)
+    button.noUpdates = false
+    if button:GetSlot() == ACTION_BAR_ULTIMATE_SLOT_INDEX + 1 then
+        g_activeWeaponSwapInProgress = false
+    end
+end
+
+local function SetupFlipAnimation(button)
+    button:SetupFlipAnimation(OnSwapAnimationHalfDone, OnSwapAnimationDone)
+end
 
 -- Module initialization
 function CombatInfo.Initialize(enabled)
@@ -319,6 +364,23 @@ function CombatInfo.Initialize(enabled)
     -- And buff texture
     uiUltimate.Texture = UI.Texture(ActionButton8, {CENTER,CENTER}, {160,160}, "/esoui/art/crafting/white_burst.dds", DL_BACKGROUND, true)
 
+    -- Create a top level window for backbar butons
+    local tlw = windowManager:CreateControl("LUIE_Backbar", ACTION_BAR, CT_CONTROL)
+    tlw:SetParent(ACTION_BAR)
+
+    local offset = 50
+    for i = 3 + offset, 8 + offset do
+        local button = ActionButton:New(i, ACTION_BUTTON_TYPE_VISIBLE, tlw, 'ZO_ActionButton')
+        SetupFlipAnimation(button)
+        button:SetupBounceAnimation()
+        g_backbarButtons[i] = button
+    end
+
+    CombatInfo.BackbarSetupTemplate()
+    CombatInfo.BackbarToggleSettings()
+
+    -------------------------------------------------------------------------------------
+
     CombatInfo.RegisterCombatInfo()
 
     if CombatInfo.SV.GlobalShowGCD then
@@ -338,6 +400,34 @@ function CombatInfo.Initialize(enabled)
     -- Setup CCT
     CombatInfo.CrowdControlTracker.UpdateAOEList()
     CombatInfo.CrowdControlTracker.Initialize()
+
+end
+
+-- Called on initialization and on full update to swap icons on backbar
+function CombatInfo.SetupBackBarIcons(button, flip)
+    -- Setup icons for backbar
+    local hotbarCategory = g_hotbarCategory == HOTBAR_CATEGORY_BACKUP and HOTBAR_CATEGORY_PRIMARY or HOTBAR_CATEGORY_BACKUP
+    local slotNum = button.slot.slotNum
+    local slotId = GetSlotBoundId(slotNum-50, hotbarCategory)
+
+    -- Check if something is in this action bar slot and if not hide the slot
+    if slotId > 0 then
+        button.icon:SetTexture(GetAbilityIcon(slotId))
+        button.icon:SetHidden(false)
+    else
+        button.icon:SetHidden(true)
+    end
+
+    if flip then
+        if g_uiCustomToggle[slotNum] and g_uiCustomToggle[slotNum]:IsHidden() then
+            CombatInfo.BackbarHideSlot(slotNum)
+        end
+    end
+end
+
+function CombatInfo.OnActiveWeaponPairChanged()
+    g_hotbarCategory = GetActiveHotbarCategory()
+    g_activeWeaponSwapInProgress = true
 end
 
 function CombatInfo.HookGCD()
@@ -556,6 +646,7 @@ function CombatInfo.RegisterCombatInfo()
     eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED)
     eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOTS_ALL_HOTBARS_UPDATED)
     eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED )
+    eventManager:UnregisterForEvent(moduleName, EVENT_ACTIVE_WEAPON_PAIR_CHANGED )
     eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED)
     if CombatInfo.SV.UltimateLabelEnabled or CombatInfo.SV.UltimatePctEnabled then
         eventManager:RegisterForEvent(moduleName .. "CombatEvent1", EVENT_COMBAT_EVENT, CombatInfo.OnCombatEvent)
@@ -597,6 +688,8 @@ function CombatInfo.RegisterCombatInfo()
         eventManager:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED, CombatInfo.OnDeath)
         eventManager:RegisterForEvent(moduleName, EVENT_TARGET_CHANGE, CombatInfo.OnTargetChange)
         eventManager:RegisterForEvent(moduleName, EVENT_RETICLE_TARGET_CHANGED, CombatInfo.OnReticleTargetChanged)
+        eventManager:RegisterForEvent(moduleName, EVENT_ACTIVE_WEAPON_PAIR_CHANGED, CombatInfo.OnActiveWeaponPairChanged)
+        eventManager:RegisterForEvent(moduleName, EVENT_GAMEPAD_PREFERRED_MODE_CHANGED, CombatInfo.BackbarSetupTemplate)
 
         eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED, CombatInfo.InventoryItemUsed)
 
@@ -621,6 +714,11 @@ function CombatInfo.OnPlayerActivated(eventCode)
 
     -- Manually trigger event to update stats
     CombatInfo.OnSlotsFullUpdate()
+    g_hotbarCategory = GetActiveHotbarCategory()
+    for i = 3 + 50, 8 + 50 do
+        local button = g_backbarButtons[i]
+        CombatInfo.SetupBackBarIcons(button)
+    end
     CombatInfo.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, "player", nil, POWERTYPE_ULTIMATE, GetUnitPower("player", POWERTYPE_ULTIMATE))
 end
 
@@ -657,10 +755,8 @@ function CombatInfo.OnUpdate(currentTime)
         -- If duration reaches 0 then remove effect
         if v < currentTime then
             if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] then
-                g_uiCustomToggle[g_toggledSlots[k]]:SetHidden(true)
-                if g_toggledSlots[k] == 8 and CombatInfo.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
-                    uiUltimate.LabelPct:SetHidden(false)
-                end
+                local slotNum = g_toggledSlots[k]
+        		CombatInfo.HideSlot(slotNum, k)
             end
             g_toggledSlotsRemain[k] = nil
         end
@@ -890,6 +986,7 @@ function CombatInfo.ResetBarLabel()
     end
 
     for i = 3, 8 do
+        -- Clear base action bars
         local actionButton = ZO_ActionBar_GetButton(i)
         if g_uiCustomToggle[i] then
             g_uiCustomToggle[i].label:ClearAnchors()
@@ -900,6 +997,21 @@ function CombatInfo.ResetBarLabel()
             g_uiProcAnimation[i].procLoopTexture.label:SetAnchor(TOPLEFT, actionButton.slot)
             g_uiProcAnimation[i].procLoopTexture.label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CombatInfo.SV.BarLabelPosition)
         end
+
+        -- Clear backbar
+        --[[
+        local backIndex = i + 50
+        local actionButton = ZO_ActionBar_GetButton(backIndex)
+        if g_uiCustomToggle[backIndex] then
+            g_uiCustomToggle[backIndex].label:ClearAnchors()
+            g_uiCustomToggle[backIndex].label:SetAnchor(TOPLEFT, actionButton.slot)
+            g_uiCustomToggle[backIndex].label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CombatInfo.SV.BarLabelPosition)
+        elseif g_uiProcAnimation[backIndex] then
+            g_uiProcAnimation[backIndex].procLoopTexture.label:ClearAnchors()
+            g_uiProcAnimation[backIndex].procLoopTexture.label:SetAnchor(TOPLEFT, actionButton.slot)
+            g_uiProcAnimation[backIndex].procLoopTexture.label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CombatInfo.SV.BarLabelPosition)
+        end
+        ]]--
     end
 end
 
@@ -928,7 +1040,8 @@ function CombatInfo.OnReticleTargetChanged(eventCode)
 
     for k, v in pairs(g_toggledSlotsRemain) do
         if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] and not (g_toggledSlotsPlayer[k] or g_ignoreMouseover[k] or g_barNoRemove[k]) then
-            g_uiCustomToggle[g_toggledSlots[k]]:SetHidden(true)
+            local slotNum = g_toggledSlots[k]
+    		CombatInfo.HideSlot(slotNum, k)
             g_toggledSlotsRemain[k] = nil
             if Effects.BarHighlightCheckOnFade[k] then
                 CombatInfo.BarHighlightSwap(k)
@@ -1048,10 +1161,8 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                     if g_mineStacks[abilityId] == 0 and not g_mineNoTurnOff[abilityId] then
                         if g_toggledSlotsRemain[abilityId] then
                             if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
-                                g_uiCustomToggle[g_toggledSlots[abilityId]]:SetHidden(true)
-                                if g_toggledSlots[abilityId] == 8 and CombatInfo.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
-                                    uiUltimate.LabelPct:SetHidden(false)
-                                end
+                                local slotNum = g_toggledSlots[abilityId]
+                                CombatInfo.HideSlot(slotNum, abilityId)
                             end
                         end
                         g_toggledSlotsRemain[abilityId] = nil
@@ -1062,10 +1173,8 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                     -- Stop any toggle animation associated with this effect
                     if g_toggledSlotsRemain[abilityId] then
                         if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
-                            g_uiCustomToggle[g_toggledSlots[abilityId]]:SetHidden(true)
-                            if g_toggledSlots[abilityId] == 8 and CombatInfo.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
-                                uiUltimate.LabelPct:SetHidden(false)
-                            end
+                            local slotNum = g_toggledSlots[abilityId]
+                            CombatInfo.HideSlot(slotNum, abilityId)
                         end
                     end
                     g_toggledSlotsRemain[abilityId] = nil
@@ -1097,15 +1206,8 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                 local currentTime = GetGameTimeMilliseconds()
                 if g_toggledSlots[abilityId] then
                     g_toggledSlotsRemain[abilityId] = 1000 * endTime
-                    CombatInfo.ShowCustomToggle(g_toggledSlots[abilityId])
-                    if g_toggledSlots[abilityId] == 8 and CombatInfo.SV.UltimatePctEnabled then
-                        uiUltimate.LabelPct:SetHidden(true)
-                    end
-                    if CombatInfo.SV.BarShowLabel then
-                        if not g_uiCustomToggle[g_toggledSlots[abilityId]] then return end
-                        local remain = g_toggledSlotsRemain[abilityId] - currentTime
-                        g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
-                    end
+                    local slotNum = g_toggledSlots[abilityId]
+                    CombatInfo.ShowSlot(slotNum, abilityId, currentTime)
                 end
             end
         end
@@ -1145,10 +1247,8 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
         -- Stop any toggle animation associated with this effect
         if g_toggledSlotsRemain[abilityId] then
             if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
-                g_uiCustomToggle[g_toggledSlots[abilityId]]:SetHidden(true)
-                if g_toggledSlots[abilityId] == 8 and CombatInfo.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
-                    uiUltimate.LabelPct:SetHidden(false)
-                end
+                local slotNum = g_toggledSlots[abilityId]
+                CombatInfo.HideSlot(slotNum, abilityId)
             end
             g_toggledSlotsRemain[abilityId] = nil
         end
@@ -1190,17 +1290,112 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                 local currentTime = GetGameTimeMilliseconds()
                 if CombatInfo.SV.ShowToggled then
                     g_toggledSlotsRemain[abilityId] = 1000 * endTime
-                    CombatInfo.ShowCustomToggle(g_toggledSlots[abilityId])
-                    if g_toggledSlots[abilityId] == 8 and CombatInfo.SV.UltimatePctEnabled then
-                        uiUltimate.LabelPct:SetHidden(true)
-                    end
-                    if CombatInfo.SV.BarShowLabel then
-                        if not g_uiCustomToggle[g_toggledSlots[abilityId]] then return end
-                        local remain = g_toggledSlotsRemain[abilityId] - currentTime
-                        g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
-                    end
+                    local slotNum = g_toggledSlots[abilityId]
+                    CombatInfo.ShowSlot(slotNum, abilityId, currentTime)
                 end
             end
+        end
+    end
+end
+
+function CombatInfo.HideSlot(slotNum, abilityId)
+    local slotNum = g_toggledSlots[abilityId]
+    g_uiCustomToggle[slotNum]:SetHidden(true)
+    if slotNum > 50 then
+        CombatInfo.BackbarHideSlot(slotNum)
+    end
+    if slotNum == 8 and CombatInfo.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
+        uiUltimate.LabelPct:SetHidden(false)
+    end
+end
+
+function CombatInfo.ShowSlot(slotNum, abilityId, currentTime)
+    CombatInfo.ShowCustomToggle(slotNum)
+    if slotNum > 50 then
+        CombatInfo.BackbarShowSlot(slotNum)
+    end
+    if slotNum == 8 and CombatInfo.SV.UltimatePctEnabled then
+        uiUltimate.LabelPct:SetHidden(true)
+    end
+    if CombatInfo.SV.BarShowLabel then
+        if not g_uiCustomToggle[slotNum] then return end
+        local remain = g_toggledSlotsRemain[abilityId] - currentTime
+        g_uiCustomToggle[slotNum].label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
+    end
+end
+
+
+function CombatInfo.BackbarHideSlot(slotNum)
+    if CombatInfo.SV.BarHideUnused then
+        g_backbarButtons[slotNum].slot:SetHidden(true)
+    end
+    if CombatInfo.SV.BarDesaturateUnused then
+        g_backbarButtons[slotNum].icon:SetDesaturation(1)
+    end
+end
+
+function CombatInfo.BackbarShowSlot(slotNum)
+    -- Unhide the slot
+    if CombatInfo.SV.BarShowBack then
+        g_backbarButtons[slotNum].slot:SetHidden(false)
+        -- Set full saturation
+        g_backbarButtons[slotNum].icon:SetDesaturation(0)
+    end
+end
+
+-- Called on initialization and when swapping in and out of Gamepad mode
+function CombatInfo.BackbarSetupTemplate()
+    local style = IsInGamepadPreferredMode() and GAMEPAD_CONSTANTS or KEYBOARD_CONSTANTS
+    local weaponSwapControl = ACTION_BAR:GetNamedChild('WeaponSwap')
+
+    -- Set positions for new buttons, modified from actionbar.lua - function ApplyStyle(style) )
+    local lastButton
+    local buttonTemplate = ZO_GetPlatformTemplate('ZO_ActionButton')
+    local ultimateTemplate = ZO_GetPlatformTemplate('ZO_UltimateActionButton')
+    for i = 3, 8 do
+        -- Get our backbar button
+        local targetButton = g_backbarButtons[i + 50]
+
+        -- Normal slots
+        if i > 2 and i < 8 then
+            local anchorTarget = lastButton and lastButton.slot
+            if not lastButton then
+                anchorTarget = weaponSwapControl
+            end
+            targetButton:ApplyAnchor(anchorTarget, style.abilitySlotOffsetX)
+            targetButton:ApplyStyle(buttonTemplate)
+        -- Ultimate slot
+        elseif i == 8 then
+            targetButton:ApplyStyle(ultimateTemplate)
+            targetButton:SetShowBindingText(style.showNormalBindingTextOnUltimate)
+            targetButton:ApplyAnchor(lastButton.slot, style.ultimateSlotOffsetX)
+        end
+
+        lastButton = targetButton
+    end
+
+    -- Anchor the backbar to the normal bar with spacing
+    local offsetY = IsInGamepadPreferredMode() and ACTION_BAR:GetHeight() * 1.6 or ACTION_BAR:GetHeight()
+    ActionButton53:ClearAnchors()
+    ActionButton53:SetAnchor(CENTER, ActionButton3, CENTER, 0, -(offsetY*0.8) )
+end
+
+-- Called from the menu and on init
+function CombatInfo.BackbarToggleSettings()
+    for i = 3, 8 do
+        -- Get our backbar button
+        local targetButton = g_backbarButtons[i + 50]
+
+        if CombatInfo.SV.BarShowBack and not CombatInfo.SV.BarHideUnused then
+            targetButton.slot:SetHidden(false)
+        end
+        if CombatInfo.SV.BarDesaturateUnused then
+            targetButton.icon:SetDesaturation(1)
+        else
+            targetButton.icon:SetDesaturation(0)
+        end
+        if CombatInfo.SV.BarHideUnused or not CombatInfo.SV.BarShowBack then
+            targetButton.slot:SetHidden(true)
         end
     end
 end
@@ -1650,15 +1845,8 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
                 local duration = GetUpdatedAbilityDuration(abilityId)
                 local endTime = currentTime + duration
                 g_toggledSlotsRemain[abilityId] = endTime
-                CombatInfo.ShowCustomToggle(g_toggledSlots[abilityId])
-                if g_toggledSlots[abilityId] == 8 and CombatInfo.SV.UltimatePctEnabled then
-                    uiUltimate.LabelPct:SetHidden(true)
-                end
-                if CombatInfo.SV.BarShowLabel then
-                    if not g_uiCustomToggle[g_toggledSlots[abilityId]] then return end
-                    local remain = g_toggledSlotsRemain[abilityId] - currentTime
-                    g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
-                end
+                local slotNum = g_toggledSlots[abilityId]
+                CombatInfo.ShowSlot(slotNum, abilityId, currentTime)
             end
         end
     elseif result == ACTION_RESULT_EFFECT_FADED then
@@ -1667,10 +1855,8 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
 
         if g_toggledSlotsRemain[abilityId] then
             if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
-                g_uiCustomToggle[g_toggledSlots[abilityId]]:SetHidden(true)
-                if g_toggledSlots[abilityId] == 8 and CombatInfo.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
-                    uiUltimate.LabelPct:SetHidden(false)
-                end
+                local slotNum = g_toggledSlots[abilityId]
+        		CombatInfo.HideSlot(slotNum, abilityId)
             end
             g_toggledSlotsRemain[abilityId] = nil
         end
@@ -1688,13 +1874,16 @@ function CombatInfo.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
     -- Handle slot update for action bars
     --d(string.format("%d: %s(%d)", slotNum, GetSlotName(slotNum), GetSlotBoundId(slotNum)))
     -- Look only for action bar slots
-    if CombatInfo.SV.ShowToggledUltimate then
-        if slotNum < 3 or slotNum > 8 then
-            return
-        end
-    else
-        if slotNum < 3 or slotNum > 7 then
-            return
+
+    if slotNum < 50 then
+        if CombatInfo.SV.ShowToggledUltimate then
+            if slotNum < 3 or slotNum > 8 then
+                return
+            end
+        else
+            if slotNum < 3 or slotNum > 7 then
+                return
+            end
         end
     end
 
@@ -1723,13 +1912,19 @@ function CombatInfo.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
         g_uiCustomToggle[slotNum]:SetHidden(true)
     end
 
-    -- Bail out if slot is not used
-    if not IsSlotUsed(slotNum) then
+    -- Bail out if slot is not used and we're not referencing a fake backbar slot.
+    if slotNum < 50 and not IsSlotUsed(slotNum) then
         return
     end
 
-    -- Get the slotted ability ID
-    local ability_id = GetSlotBoundId(slotNum)
+    local ability_id
+    if slotNum > 50 then
+        local hotbarCategory = g_hotbarCategory == HOTBAR_CATEGORY_BACKUP and HOTBAR_CATEGORY_PRIMARY or HOTBAR_CATEGORY_BACKUP
+        ability_id = GetSlotBoundId(slotNum - 50, hotbarCategory)
+    else
+        ability_id = GetSlotBoundId(slotNum)
+    end
+
     local showFakeAura = (Effects.BarHighlightOverride[ability_id] and Effects.BarHighlightOverride[ability_id].showFakeAura)
 
     -- If secondary effects aren't set to display then don't setup highlight for this slot.
@@ -1784,15 +1979,8 @@ function CombatInfo.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
         g_toggledSlots[ability_id] = slotNum
         if g_toggledSlotsRemain[ability_id] then
             if CombatInfo.SV.ShowToggled then
-                CombatInfo.ShowCustomToggle(slotNum)
-                if slotNum == 8 and CombatInfo.SV.UltimatePctEnabled then
-                    uiUltimate.LabelPct:SetHidden(true)
-                end
-                if CombatInfo.SV.BarShowLabel then
-                    if not g_uiCustomToggle[slotNum] then return end
-                    local remain = g_toggledSlotsRemain[ability_id] - currentTime
-                    g_uiCustomToggle[slotNum].label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
-                end
+                local slotNum = g_toggledSlots[ability_id]
+                CombatInfo.ShowSlot(slotNum, ability_id, currentTime)
             end
         end
     end
@@ -1826,9 +2014,21 @@ function CombatInfo.InventoryItemUsed()
 end
 
 function CombatInfo.OnActiveHotbarUpdate(eventCode, didActiveHotbarChange, shouldUpdateAbilityAssignments, activeHotbarCategory)
-    if didActiveHotbarChange == true or  shouldUpdateAbilityAssignments == true then
+    if didActiveHotbarChange == true or shouldUpdateAbilityAssignments == true then
         CombatInfo.OnSlotsFullUpdate()
+        for i = 53, 58 do
+            CombatInfo.OnSlotUpdated(nil, i, false)
+        end
+        for _, physicalSlot in pairs(g_backbarButtons) do
+            if physicalSlot.hotbarSwapAnimation then
+                physicalSlot.noUpdates = true
+                physicalSlot.hotbarSwapAnimation:PlayFromStart()
+            end
+        end
+    else
+        g_activeWeaponSwapInProgress = false
     end
+
 end
 
 function CombatInfo.OnSlotsFullUpdate(eventCode)
@@ -1893,13 +2093,23 @@ function CombatInfo.OnDeath(eventCode, unitTag, isDead)
                 end
             end
         end
+        for slotNum = 53, 58 do
+            if g_uiCustomToggle[slotNum] then
+                g_uiCustomToggle[slotNum]:SetHidden(true)
+            end
+        end
     end
 end
 
 -- Displays custom toggle texture
 function CombatInfo.ShowCustomToggle(slotNum)
     if not g_uiCustomToggle[slotNum] then
-        local actionButton = ZO_ActionBar_GetButton(slotNum)
+        local actionButton
+        if slotNum < 50 then
+            actionButton = ZO_ActionBar_GetButton(slotNum)
+        else
+            actionButton = g_backbarButtons[slotNum]
+        end
         local name = "ActionButton" .. slotNum .. "Toggle_LUIE"
         local window = windowManager:GetControlByName(name) -- Check to see if this frame already exists, don't create it if it does.
         if window == nil then

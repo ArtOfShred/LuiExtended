@@ -318,6 +318,42 @@ function CombatInfo.CreateSettings()
                 default = Defaults.ShowToggledUltimate,
                 disabled = function() return not (Settings.ShowToggled and LUIE.SV.CombatInfo_Enabled) end,
             },
+
+
+            {
+                -- Show Backbar
+                type = "checkbox",
+                name = "TODO: SHOW BACKBAR",
+                tooltip = "TODO",
+                getFunc = function() return Settings.BarShowBack end,
+                setFunc = function(value) Settings.BarShowBack = value CombatInfo.OnSlotsFullUpdate() CombatInfo.BackbarToggleSettings() end,
+                width = "full",
+                default = Defaults.BarShowBack,
+                disabled = function() return not (Settings.ShowToggled and LUIE.SV.CombatInfo_Enabled) end,
+            },
+            {
+                -- Desaturate Backbar
+                type = "checkbox",
+                name = "TODO: BACKBAR - DESATURATE",
+                tooltip = "TODO",
+                getFunc = function() return Settings.BarDesaturateUnused end,
+                setFunc = function(value) Settings.BarDesaturateUnused = value CombatInfo.OnSlotsFullUpdate() CombatInfo.BackbarToggleSettings() end,
+                width = "full",
+                default = Defaults.BarDesaturateUnused,
+                disabled = function() return not (Settings.ShowToggled and LUIE.SV.CombatInfo_Enabled) end,
+            },
+            {
+                -- Hide Unused Backbar
+                type = "checkbox",
+                name = "TODO: Only show active backbar skills",
+                tooltip = "TODO",
+                getFunc = function() return Settings.BarHideUnused end,
+                setFunc = function(value) Settings.BarHideUnused = value CombatInfo.OnSlotsFullUpdate() CombatInfo.BackbarToggleSettings() end,
+                width = "full",
+                default = Defaults.BarHideUnused,
+                disabled = function() return not (Settings.ShowToggled and LUIE.SV.CombatInfo_Enabled) end,
+            },
+
             {
                 -- Show Label On Bar Highlight
                 type = "checkbox",

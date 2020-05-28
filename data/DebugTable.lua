@@ -4980,6 +4980,7 @@ LUIE.DebugAuras = {
     [118227] = true, -- Ruinous Scythe (Ruinous Scythe)
     [125749] = true, -- Ruinous Scythe (Ruinous Scythe)
     [125750] = true, -- Off Balance (Ruinous Scythe)
+    [125751] = true, -- Ruinous Scythe (Ruinous Scythe)
 
     [118223] = true, -- Hungry Scythe (Hungry Scythe)
     [122615] = true, -- Hungry Scythe (Hungry Scythe)
@@ -8205,7 +8206,7 @@ LUIE.DebugAuras = {
     [60898] = true, -- Ice Barrier -- Frost Mage
     [14194] = true, -- Ice Barrier -- Frost Mage
     [29331] = true, -- Ice Barrier -- Frost Mage
-    [7145] = true, -- Chilled -- Frost Mage
+    --[7145] = true, -- Chilled -- Frost Mage
 
     [35151] = true, -- Spell Absorption -- Spirit Mage
     [14472] = true, -- Burdening Eye -- Spirit Mage

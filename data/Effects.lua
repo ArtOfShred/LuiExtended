@@ -7648,7 +7648,7 @@ Effects.EffectOverride = {
     [12460] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_winters_reach.dds' }, -- Winter's Reach (Frost Mage)
     [14550] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_winters_reach.dds', tooltip = Tooltips.Generic_Immobilize }, -- Winter's Reach (Frost Mage)
     [14194] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_ice_barrier.dds', tooltip = Tooltips.Skill_Ice_Barrier }, -- Ice Barrier (Frost Mage)
-    [7145] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_ice_barrier.dds', name = Abilities.Proc_Chill, stack = 0, tooltip = Tooltips.Generic_Snare, tooltipValue2 = 20 }, -- Ice Barrier (Frost Mage)
+    [7145] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 20 }, -- Ice Barrier (Frost Mage)
 
     -- Spirit Mage
     [35151] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_spell_absorption.dds', tooltip = Tooltips.Skill_Spell_Absorption }, -- Spell Absorption (Spirit Mage)
