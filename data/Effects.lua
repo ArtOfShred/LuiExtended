@@ -1576,8 +1576,8 @@ Effects.BarHighlightOverride = {
     [40211] = { newId = 57477 }, -- Retreating Maneuver --> Major Gallop
     [40215] = { newId = 57481 }, -- Charging Maneuver --> Major Gallop
     [61503] = { newId = 61504, ignoreMouseover = true }, -- Vigor
-    [61505] = { newId = 61506 }, -- Echoing Vigor
-    [61507] = { newId = 61509, ignoreMouseover = true }, -- Resolving Vigor
+    [61505] = { newId = 61506, ignoreMouseover = true }, -- Echoing Vigor
+    [61507] = { newId = 61509 }, -- Resolving Vigor
     [33376] = { newId = 38549 }, -- Caltrops
     [40255] = { newId = 40265 }, -- Anti-Cavalry Caltrops
     [40242] = { newId = 40251 }, -- Razor Caltrops --> Caltrops
