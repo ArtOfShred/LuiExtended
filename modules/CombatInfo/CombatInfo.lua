@@ -294,21 +294,11 @@ local GAMEPAD_CONSTANTS =
 {
     abilitySlotOffsetX = 10,
     ultimateSlotOffsetX = 65,
-    --anchor = ZO_Anchor:New(BOTTOM, GuiRoot, BOTTOM, 0, -25),
-    width = 606,
-    showNormalBindingTextOnUltimate = false,
-    --showKeybindBG = false,
-    --showWeaponSwapButton = false,
 }
 local KEYBOARD_CONSTANTS =
 {
     abilitySlotOffsetX = 2,
     ultimateSlotOffsetX = 62,
-    --anchor = ZO_Anchor:New(BOTTOM, GuiRoot, BOTTOM, 0, 0),
-    width = 483,
-    showNormalBindingTextOnUltimate = true,
-    --showKeybindBG = true,
-    --showWeaponSwapButton = true,
 }
 
 local function OnSwapAnimationHalfDone(animation, button)
@@ -1383,14 +1373,13 @@ function CombatInfo.BackbarSetupTemplate()
         -- Ultimate slot
         --elseif i == 8 then
         --    targetButton:ApplyStyle(ultimateTemplate)
-        --    targetButton:SetShowBindingText(style.showNormalBindingTextOnUltimate)
         --    targetButton:ApplyAnchor(lastButton.slot, style.ultimateSlotOffsetX)
         end
 
         lastButton = targetButton
     end
 
-    -- Anchor the backbar to the normal bar with spacing
+    -- Anchor the backbar to the normal action bar with spacing
     local offsetY = IsInGamepadPreferredMode() and ACTION_BAR:GetHeight() * 1.6 or ACTION_BAR:GetHeight()
     ActionButton53:ClearAnchors()
     ActionButton53:SetAnchor(CENTER, ActionButton3, CENTER, 0, -(offsetY*0.8) )
