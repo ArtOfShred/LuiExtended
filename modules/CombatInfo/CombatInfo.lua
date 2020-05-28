@@ -419,9 +419,17 @@ function CombatInfo.SetupBackBarIcons(button, flip)
     end
 
     if flip then
-        if g_uiCustomToggle[slotNum] and g_uiCustomToggle[slotNum]:IsHidden() then
-            CombatInfo.BackbarHideSlot(slotNum)
+        local desaturate
+        if g_uiCustomToggle[slotNum] then
+            desaturate = false
+            if g_uiCustomToggle[slotNum]:IsHidden() then
+                CombatInfo.BackbarHideSlot(slotNum)
+                desaturate = true
+            end
+        else
+            desaturate = true
         end
+        CombatInfo.ToggleBackbarSaturation(slotNum, desaturate)
     end
 end
 
@@ -1207,7 +1215,7 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                 if g_toggledSlots[abilityId] then
                     g_toggledSlotsRemain[abilityId] = 1000 * endTime
                     local slotNum = g_toggledSlots[abilityId]
-                    CombatInfo.ShowSlot(slotNum, abilityId, currentTime)
+                    CombatInfo.ShowSlot(slotNum, abilityId, currentTime, false)
                 end
             end
         end
@@ -1291,7 +1299,7 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                 if CombatInfo.SV.ShowToggled then
                     g_toggledSlotsRemain[abilityId] = 1000 * endTime
                     local slotNum = g_toggledSlots[abilityId]
-                    CombatInfo.ShowSlot(slotNum, abilityId, currentTime)
+                    CombatInfo.ShowSlot(slotNum, abilityId, currentTime, false)
                 end
             end
         end
@@ -1303,16 +1311,18 @@ function CombatInfo.HideSlot(slotNum, abilityId)
     g_uiCustomToggle[slotNum]:SetHidden(true)
     if slotNum > 50 then
         CombatInfo.BackbarHideSlot(slotNum)
+        CombatInfo.ToggleBackbarSaturation(slotNum, CombatInfo.SV.BarDesaturateUnused)
     end
     if slotNum == 8 and CombatInfo.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
         uiUltimate.LabelPct:SetHidden(false)
     end
 end
 
-function CombatInfo.ShowSlot(slotNum, abilityId, currentTime)
+function CombatInfo.ShowSlot(slotNum, abilityId, currentTime, desaturate)
     CombatInfo.ShowCustomToggle(slotNum)
     if slotNum > 50 then
         CombatInfo.BackbarShowSlot(slotNum)
+        CombatInfo.ToggleBackbarSaturation(slotNum, desaturate)
     end
     if slotNum == 8 and CombatInfo.SV.UltimatePctEnabled then
         uiUltimate.LabelPct:SetHidden(true)
@@ -1329,18 +1339,23 @@ function CombatInfo.BackbarHideSlot(slotNum)
     if CombatInfo.SV.BarHideUnused then
         g_backbarButtons[slotNum].slot:SetHidden(true)
     end
-    if CombatInfo.SV.BarDesaturateUnused then
-        g_backbarButtons[slotNum].icon:SetDesaturation(1)
-    end
 end
 
 function CombatInfo.BackbarShowSlot(slotNum)
     -- Unhide the slot
     if CombatInfo.SV.BarShowBack then
         g_backbarButtons[slotNum].slot:SetHidden(false)
-        -- Set full saturation
-        g_backbarButtons[slotNum].icon:SetDesaturation(0)
     end
+end
+
+function CombatInfo.ToggleBackbarSaturation(slotNum, desaturate)
+    -- Don't change saturation if the option is not enabled
+    if not CombatInfo.SV.BarDesaturateUnused then
+        return
+    end
+    -- Set saturation otherwise
+    local saturation = desaturate and 1 or 0
+    g_backbarButtons[slotNum].icon:SetDesaturation(saturation)
 end
 
 -- Called on initialization and when swapping in and out of Gamepad mode
@@ -1846,7 +1861,7 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
                 local endTime = currentTime + duration
                 g_toggledSlotsRemain[abilityId] = endTime
                 local slotNum = g_toggledSlots[abilityId]
-                CombatInfo.ShowSlot(slotNum, abilityId, currentTime)
+                CombatInfo.ShowSlot(slotNum, abilityId, currentTime, false)
             end
         end
     elseif result == ACTION_RESULT_EFFECT_FADED then
@@ -1980,7 +1995,19 @@ function CombatInfo.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
         if g_toggledSlotsRemain[ability_id] then
             if CombatInfo.SV.ShowToggled then
                 local slotNum = g_toggledSlots[ability_id]
-                CombatInfo.ShowSlot(slotNum, ability_id, currentTime)
+                -- Check the other slot here to determine if we desaturate (in case effects are running in both slots)
+                local desaturate
+                local math = slotNum > 50 and slotNum - 50 or nil
+                if math then
+                    if g_uiCustomToggle[math] then
+                        desaturate = false
+                        if g_uiCustomToggle[math]:IsHidden() then
+                            CombatInfo.BackbarHideSlot(slotNum)
+                            desaturate = true
+                        end
+                    end
+                end
+                CombatInfo.ShowSlot(slotNum, ability_id, currentTime, desaturate)
             end
         end
     end
