@@ -52,6 +52,7 @@ CombatInfo.Defaults = {
     BarFontSize                      = 18,
     BarMiilis                        = true,
     BarShowBack                      = false,
+    BarDarkUnused                    = false,
     BarDesaturateUnused              = false,
     BarHideUnused                    = false,
     PotionTimerShow                  = true,
@@ -257,8 +258,9 @@ local g_backbarButtons = {} -- Table to hold backbar buttons
 local g_activeWeaponSwapInProgress = false -- Toggled on when weapon swapping, TODO: maybe not needed
 
 local ACTION_BAR = ZO_ActionBar1
-local BACKBAR_INDEX_START = 3
-local BACKBAR_INDEX_END = 7 -- No ultimate slot for now
+local BAR_INDEX_START = 3
+local BAR_INDEX_END = 8
+local BACKBAR_INDEX_END = 7 -- Separate index for backbar as long as we're not using an ultimate button.
 local BACKBAR_INDEX_OFFSET = 50
 
 -- Quickslot
@@ -301,8 +303,21 @@ local KEYBOARD_CONSTANTS =
     ultimateSlotOffsetX = 62,
 }
 
+local slotsUpdated = {}
+
 local function OnSwapAnimationHalfDone(animation, button)
-    CombatInfo.SetupBackBarIcons(button, true)
+    for i = BAR_INDEX_START, BAR_INDEX_END do
+        if not slotsUpdated[i] then
+            local targetButton = g_backbarButtons[i + BACKBAR_INDEX_OFFSET]
+            CombatInfo.BarSlotUpdate(i, false, false)
+            CombatInfo.BarSlotUpdate(i + BACKBAR_INDEX_OFFSET, false, false)
+            -- Don't try to setup back bar ultimate
+            if i < 8 then
+                CombatInfo.SetupBackBarIcons(targetButton, true)
+            end
+            slotsUpdated[i] = true
+        end
+    end
 end
 
 local function OnSwapAnimationDone(animation, button)
@@ -310,6 +325,7 @@ local function OnSwapAnimationDone(animation, button)
     if button:GetSlot() == ACTION_BAR_ULTIMATE_SLOT_INDEX + 1 then
         g_activeWeaponSwapInProgress = false
     end
+    slotsUpdated = {}
 end
 
 local function SetupFlipAnimation(button)
@@ -361,7 +377,7 @@ function CombatInfo.Initialize(enabled)
     local tlw = windowManager:CreateControl("LUIE_Backbar", ACTION_BAR, CT_CONTROL)
     tlw:SetParent(ACTION_BAR)
 
-    for i = BACKBAR_INDEX_START + BACKBAR_INDEX_OFFSET, BACKBAR_INDEX_END + BACKBAR_INDEX_OFFSET do
+    for i = BAR_INDEX_START + BACKBAR_INDEX_OFFSET, BACKBAR_INDEX_END + BACKBAR_INDEX_OFFSET do
         local button = ActionButton:New(i, ACTION_BUTTON_TYPE_VISIBLE, tlw, 'ZO_ActionButton')
         SetupFlipAnimation(button)
         button:SetupBounceAnimation()
@@ -400,7 +416,7 @@ function CombatInfo.SetupBackBarIcons(button, flip)
     -- Setup icons for backbar
     local hotbarCategory = g_hotbarCategory == HOTBAR_CATEGORY_BACKUP and HOTBAR_CATEGORY_PRIMARY or HOTBAR_CATEGORY_BACKUP
     local slotNum = button.slot.slotNum
-    local slotId = GetSlotBoundId(slotNum-BACKBAR_INDEX_OFFSET, hotbarCategory)
+    local slotId = GetSlotBoundId(slotNum - BACKBAR_INDEX_OFFSET, hotbarCategory)
 
     -- Check if something is in this action bar slot and if not hide the slot
     if slotId > 0 then
@@ -713,12 +729,8 @@ function CombatInfo.OnPlayerActivated(eventCode)
     eventManager:UnregisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED )
 
     -- Manually trigger event to update stats
-    CombatInfo.OnSlotsFullUpdate()
     g_hotbarCategory = GetActiveHotbarCategory()
-    for i = BACKBAR_INDEX_START + BACKBAR_INDEX_OFFSET, BACKBAR_INDEX_END + BACKBAR_INDEX_OFFSET do
-        local button = g_backbarButtons[i]
-        CombatInfo.SetupBackBarIcons(button)
-    end
+    CombatInfo.OnSlotsFullUpdate()
     CombatInfo.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, "player", nil, POWERTYPE_ULTIMATE, GetUnitPower("player", POWERTYPE_ULTIMATE))
 end
 
@@ -985,7 +997,7 @@ function CombatInfo.ResetBarLabel()
         g_uiCustomToggle[k].label:SetText("")
     end
 
-    for i = 3, 8 do
+    for i = BAR_INDEX_START, BAR_INDEX_END do
         -- Clear base action bars
         local actionButton = ZO_ActionBar_GetButton(i)
         if g_uiCustomToggle[i] then
@@ -1301,7 +1313,7 @@ function CombatInfo.HideSlot(slotNum, abilityId)
     g_uiCustomToggle[slotNum]:SetHidden(true)
     if slotNum > BACKBAR_INDEX_OFFSET then
         CombatInfo.BackbarHideSlot(slotNum)
-        CombatInfo.ToggleBackbarSaturation(slotNum, CombatInfo.SV.BarDesaturateUnused)
+        CombatInfo.ToggleBackbarSaturation(slotNum, CombatInfo.SV.BarDarkUnused)
     end
     if slotNum == 8 and CombatInfo.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
         uiUltimate.LabelPct:SetHidden(false)
@@ -1324,7 +1336,6 @@ function CombatInfo.ShowSlot(slotNum, abilityId, currentTime, desaturate)
     end
 end
 
-
 function CombatInfo.BackbarHideSlot(slotNum)
     if CombatInfo.SV.BarHideUnused then
         g_backbarButtons[slotNum].slot:SetHidden(true)
@@ -1339,13 +1350,14 @@ function CombatInfo.BackbarShowSlot(slotNum)
 end
 
 function CombatInfo.ToggleBackbarSaturation(slotNum, desaturate)
-    -- Don't change saturation if the option is not enabled
-    if not CombatInfo.SV.BarDesaturateUnused then
-        return
+    local button = g_backbarButtons[slotNum]
+    if CombatInfo.SV.BarDarkUnused then
+        ZO_ActionSlot_SetUnusable(button.icon, desaturate, false)
     end
-    -- Set saturation otherwise
-    local saturation = desaturate and 1 or 0
-    g_backbarButtons[slotNum].icon:SetDesaturation(saturation)
+    if CombatInfo.SV.BarDesaturateUnused then
+        local saturation = desaturate and 1 or 0
+        button.icon:SetDesaturation(saturation)
+    end
 end
 
 -- Called on initialization and when swapping in and out of Gamepad mode
@@ -1357,7 +1369,7 @@ function CombatInfo.BackbarSetupTemplate()
     local lastButton
     local buttonTemplate = ZO_GetPlatformTemplate('ZO_ActionButton')
     local ultimateTemplate = ZO_GetPlatformTemplate('ZO_UltimateActionButton')
-    for i = BACKBAR_INDEX_START, BACKBAR_INDEX_END do
+    for i = BAR_INDEX_START, BACKBAR_INDEX_END do
 
         -- Get our backbar button
         local targetButton = g_backbarButtons[i + BACKBAR_INDEX_OFFSET]
@@ -1387,18 +1399,17 @@ end
 
 -- Called from the menu and on init
 function CombatInfo.BackbarToggleSettings()
-    for i = BACKBAR_INDEX_START, BACKBAR_INDEX_END do
+    for i = BAR_INDEX_START, BACKBAR_INDEX_END do
         -- Get our backbar button
         local targetButton = g_backbarButtons[i + BACKBAR_INDEX_OFFSET]
 
         if CombatInfo.SV.BarShowBack and not CombatInfo.SV.BarHideUnused then
             targetButton.slot:SetHidden(false)
         end
-        if CombatInfo.SV.BarDesaturateUnused then
-            targetButton.icon:SetDesaturation(1)
-        else
-            targetButton.icon:SetDesaturation(0)
-        end
+        ZO_ActionSlot_SetUnusable(targetButton.icon, CombatInfo.SV.BarDarkUnused, false)
+        local saturation = CombatInfo.SV.BarDesaturateUnused and 1 or 0
+        targetButton.icon:SetDesaturation(saturation)
+
         if CombatInfo.SV.BarHideUnused or not CombatInfo.SV.BarShowBack then
             targetButton.slot:SetHidden(true)
         end
@@ -1871,10 +1882,24 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
     end
 end
 
-function CombatInfo.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
+function CombatInfo.OnSlotUpdated(eventCode, slotNum)
+
+    -- Update ultimate label
     if slotNum == 8 then
         CombatInfo.UpdateUltimateLabel(eventCode)
     end
+
+    -- Update the slot if the bound id has a proc
+    if slotNum >= BAR_INDEX_START and slotNum <= BAR_INDEX_END then
+        local abilityId = GetSlotBoundId(slotNum)
+        if Effects.IsAbilityProc[abilityId] or Effects.BaseForAbilityProc[abilityId] then
+            CombatInfo.BarSlotUpdate(slotNum, false, true)
+        end
+    end
+
+end
+
+function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
 
     -- Handle slot update for action bars
     --d(string.format("%d: %s(%d)", slotNum, GetSlotName(slotNum), GetSlotBoundId(slotNum)))
@@ -1882,11 +1907,11 @@ function CombatInfo.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
 
     if slotNum < BACKBAR_INDEX_OFFSET then
         if CombatInfo.SV.ShowToggledUltimate then
-            if slotNum < 3 or slotNum > 8 then
+            if slotNum < BAR_INDEX_START or slotNum > BAR_INDEX_END then
                 return
             end
         else
-            if slotNum < 3 or slotNum > 7 then
+            if slotNum < BAR_INDEX_START or slotNum > (BAR_INDEX_END - 1) then
                 return
             end
         end
@@ -1905,16 +1930,18 @@ function CombatInfo.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
         g_uiProcAnimation[slotNum]:Stop()
     end
 
-    -- Remove custom toggle information and custom highlight
-    for abilityId, slot in pairs(g_toggledSlots) do
-        if (slot == slotNum) then
-            g_toggledSlots[abilityId] = nil
+    if onlyProc == false then
+        -- Remove custom toggle information and custom highlight
+        for abilityId, slot in pairs(g_toggledSlots) do
+            if (slot == slotNum) then
+                g_toggledSlots[abilityId] = nil
+            end
         end
-    end
 
-    if g_uiCustomToggle[slotNum] then
-        --g_uiCustomToggle[slotNum].label:SetText("")
-        g_uiCustomToggle[slotNum]:SetHidden(true)
+        if g_uiCustomToggle[slotNum] then
+            --g_uiCustomToggle[slotNum].label:SetText("")
+            g_uiCustomToggle[slotNum]:SetHidden(true)
+        end
     end
 
     -- Bail out if slot is not used and we're not referencing a fake backbar slot.
@@ -1980,27 +2007,30 @@ function CombatInfo.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
     end
 
     -- Check for active duration to display highlight for abilities on bar swap
-    if duration > 0 or Effects.AddNoDurationBarHighlight[ability_id] then
-        g_toggledSlots[ability_id] = slotNum
-        if g_toggledSlotsRemain[ability_id] then
-            if CombatInfo.SV.ShowToggled then
-                local slotNum = g_toggledSlots[ability_id]
-                -- Check the other slot here to determine if we desaturate (in case effects are running in both slots)
-                local desaturate
-                local math = slotNum > BACKBAR_INDEX_OFFSET and slotNum - BACKBAR_INDEX_OFFSET or nil
-                if math then
-                    if g_uiCustomToggle[math] then
-                        desaturate = false
-                        if g_uiCustomToggle[math]:IsHidden() then
-                            CombatInfo.BackbarHideSlot(slotNum)
-                            desaturate = true
+    if onlyProc == false then
+        if duration > 0 or Effects.AddNoDurationBarHighlight[ability_id] then
+            g_toggledSlots[ability_id] = slotNum
+            if g_toggledSlotsRemain[ability_id] then
+                if CombatInfo.SV.ShowToggled then
+                    local slotNum = g_toggledSlots[ability_id]
+                    -- Check the other slot here to determine if we desaturate (in case effects are running in both slots)
+                    local desaturate
+                    local math = slotNum > BACKBAR_INDEX_OFFSET and slotNum - BACKBAR_INDEX_OFFSET or nil
+                    if math then
+                        if g_uiCustomToggle[math] then
+                            desaturate = false
+                            if g_uiCustomToggle[math]:IsHidden() then
+                                CombatInfo.BackbarHideSlot(slotNum)
+                                desaturate = true
+                            end
                         end
                     end
+                    CombatInfo.ShowSlot(slotNum, ability_id, currentTime, desaturate)
                 end
-                CombatInfo.ShowSlot(slotNum, ability_id, currentTime, desaturate)
             end
         end
     end
+
 end
 
 function CombatInfo.UpdateUltimateLabel(eventCode)
@@ -2032,10 +2062,6 @@ end
 
 function CombatInfo.OnActiveHotbarUpdate(eventCode, didActiveHotbarChange, shouldUpdateAbilityAssignments, activeHotbarCategory)
     if didActiveHotbarChange == true or shouldUpdateAbilityAssignments == true then
-        CombatInfo.OnSlotsFullUpdate()
-        for i = BACKBAR_INDEX_START + BACKBAR_INDEX_OFFSET, BACKBAR_INDEX_END + BACKBAR_INDEX_OFFSET do
-            CombatInfo.OnSlotUpdated(nil, i, false)
-        end
         for _, physicalSlot in pairs(g_backbarButtons) do
             if physicalSlot.hotbarSwapAnimation then
                 physicalSlot.noUpdates = true
@@ -2056,14 +2082,29 @@ function CombatInfo.OnSlotsFullUpdate(eventCode)
     if g_potionUsed == true then return end
 
     -- Update action bar skills
-    for i = 3, 8 do
-        CombatInfo.OnSlotUpdated(eventCode, i, true)
+    for i = BAR_INDEX_START, BAR_INDEX_END do
+        CombatInfo.BarSlotUpdate(i, true, false)
+    end
+    for i = (BAR_INDEX_START + BACKBAR_INDEX_OFFSET), (BACKBAR_INDEX_END + BACKBAR_INDEX_OFFSET) do
+        local button = g_backbarButtons[i]
+        CombatInfo.SetupBackBarIcons(button)
+        --CombatInfo.BarSlotUpdate(i, true, false)
     end
 end
 
 function CombatInfo.PlayProcAnimations(slotNum)
     if not g_uiProcAnimation[slotNum] then
-        local actionButton = ZO_ActionBar_GetButton(slotNum)
+        -- Don't make a highlight frame for the backbar ultimate slot since it is not created
+        if slotNum == (BAR_INDEX_END + BACKBAR_INDEX_OFFSET) then
+           return
+        end
+        -- Otherwise make a highlight frame
+        local actionButton
+        if slotNum < BACKBAR_INDEX_OFFSET then
+           actionButton = ZO_ActionBar_GetButton(slotNum)
+        else
+           actionButton = g_backbarButtons[slotNum]
+        end
         local procLoopTexture = windowManager:CreateControl("$(parent)Loop_LUIE", actionButton.slot, CT_TEXTURE)
         procLoopTexture:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
         procLoopTexture:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"))
@@ -2102,7 +2143,7 @@ end
 function CombatInfo.OnDeath(eventCode, unitTag, isDead)
     -- And toggle buttons
     if unitTag == "player" then
-        for slotNum = 3, 8 do
+        for slotNum = BAR_INDEX_START, BAR_INDEX_END do
             if g_uiCustomToggle[slotNum] then
                 g_uiCustomToggle[slotNum]:SetHidden(true)
                 if slotNum == 8 and CombatInfo.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
@@ -2110,7 +2151,7 @@ function CombatInfo.OnDeath(eventCode, unitTag, isDead)
                 end
             end
         end
-        for slotNum = BACKBAR_INDEX_START + BACKBAR_INDEX_OFFSET, BACKBAR_INDEX_END + BACKBAR_INDEX_OFFSET do
+        for slotNum = BAR_INDEX_START + BACKBAR_INDEX_OFFSET, BACKBAR_INDEX_END + BACKBAR_INDEX_OFFSET do
             if g_uiCustomToggle[slotNum] then
                 g_uiCustomToggle[slotNum]:SetHidden(true)
             end
@@ -2122,7 +2163,7 @@ end
 function CombatInfo.ShowCustomToggle(slotNum)
     if not g_uiCustomToggle[slotNum] then
          -- Don't make a highlight frame for the backbar ultimate slot since it is not created
-        if slotNum == (BACKBAR_INDEX_END + BACKBAR_INDEX_OFFSET) then
+        if slotNum == (BAR_INDEX_END + BACKBAR_INDEX_OFFSET) then
             return
         end
         -- Otherwise make a highlight frame

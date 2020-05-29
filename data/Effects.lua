@@ -83,10 +83,19 @@ Effects.IsToggle = {
 -- List of abilities flagged to display a Proc highlight / sound notification in Combat Info when the Ability Bar is updated with a matching id.
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.IsAbilityProc = {
-    [20824] = true, -- Power Lash (Flame Lash
+    [20824] = true, -- Power Lash (Flame Lash)
     [61907] = true, -- Assassin's Will (Grim Focus)
     [61932] = true, -- Assassin's Scourge (Relentless Focus)
     [61930] = true, -- Assassin's Will (Merciless Resolve)
+}
+
+-- Flagged to update on a bar slot update
+Effects.BaseForAbilityProc = {
+    [20816] = true, -- Flash Lash
+    [61902] = true, -- Grim Focus
+    [61927] = true, -- Relentless Focus
+    [61919] = true, -- Merciless Resolve
+
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -5137,6 +5146,7 @@ Effects.EffectOverride = {
     [108939] = { tooltip = Abilities.Skill_Corrosive_Spin }, -- Minor Maim (Dark Shade)
 
     [38528] = { hide = true, tooltip = Tooltips.Skill_Shadow_Image }, -- Shadow (Shadow Image)
+    [35445] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_shadow_image_teleport.dds' }, -- Shadow Image Teleport (Shadow Image)
     [51556] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_nightblade_corrode_ranged.dds' }, -- Corrosive Arrow (Shadow Image)
     [51558] = { tooltip = Abilities.Skill_Corrosive_Arrow }, -- Minor Maim (Shadow Image)
 

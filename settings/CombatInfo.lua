@@ -318,42 +318,6 @@ function CombatInfo.CreateSettings()
                 default = Defaults.ShowToggledUltimate,
                 disabled = function() return not (Settings.ShowToggled and LUIE.SV.CombatInfo_Enabled) end,
             },
-
-
-            {
-                -- Show Backbar
-                type = "checkbox",
-                name = "TODO: SHOW BACKBAR",
-                tooltip = "TODO",
-                getFunc = function() return Settings.BarShowBack end,
-                setFunc = function(value) Settings.BarShowBack = value CombatInfo.OnSlotsFullUpdate() CombatInfo.BackbarToggleSettings() end,
-                width = "full",
-                default = Defaults.BarShowBack,
-                disabled = function() return not (Settings.ShowToggled and LUIE.SV.CombatInfo_Enabled) end,
-            },
-            {
-                -- Desaturate Backbar
-                type = "checkbox",
-                name = "TODO: BACKBAR - DESATURATE",
-                tooltip = "TODO",
-                getFunc = function() return Settings.BarDesaturateUnused end,
-                setFunc = function(value) Settings.BarDesaturateUnused = value CombatInfo.OnSlotsFullUpdate() CombatInfo.BackbarToggleSettings() end,
-                width = "full",
-                default = Defaults.BarDesaturateUnused,
-                disabled = function() return not (Settings.ShowToggled and LUIE.SV.CombatInfo_Enabled) end,
-            },
-            {
-                -- Hide Unused Backbar
-                type = "checkbox",
-                name = "TODO: Only show active backbar skills",
-                tooltip = "TODO",
-                getFunc = function() return Settings.BarHideUnused end,
-                setFunc = function(value) Settings.BarHideUnused = value CombatInfo.OnSlotsFullUpdate() CombatInfo.BackbarToggleSettings() end,
-                width = "full",
-                default = Defaults.BarHideUnused,
-                disabled = function() return not (Settings.ShowToggled and LUIE.SV.CombatInfo_Enabled) end,
-            },
-
             {
                 -- Show Label On Bar Highlight
                 type = "checkbox",
@@ -421,6 +385,58 @@ function CombatInfo.CreateSettings()
                 width = "full",
                 default = Defaults.BarMiilis,
                 disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.BarShowLabel and ( Settings.ShowTriggered or Settings.ShowToggled)) end,
+            },
+            {
+                type = "divider",
+                width = "full",
+            },
+            {
+                type = "description",
+                text = GetString(SI_LUIE_LAM_CI_BACKBAR_NOTE),
+            },
+            {
+                -- Show Backbar
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_BACKBAR_ENABLE),
+                tooltip = GetString(SI_LUIE_LAM_CI_BACKBAR_ENABLE_TP),
+                getFunc = function() return Settings.BarShowBack end,
+                setFunc = function(value) Settings.BarShowBack = value CombatInfo.OnSlotsFullUpdate() CombatInfo.BackbarToggleSettings() end,
+                width = "full",
+                default = Defaults.BarShowBack,
+                disabled = function() return not (Settings.ShowToggled and LUIE.SV.CombatInfo_Enabled) end,
+            },
+            {
+                -- Dark Backbar
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BACKBAR_DARK)),
+                tooltip = GetString(SI_LUIE_LAM_CI_BACKBAR_DARK_TP),
+                getFunc = function() return Settings.BarDarkUnused end,
+                setFunc = function(value) Settings.BarDarkUnused = value CombatInfo.OnSlotsFullUpdate() CombatInfo.BackbarToggleSettings() end,
+                width = "full",
+                default = Defaults.BarDarkUnused,
+                disabled = function() return not (Settings.ShowToggled and Settings.BarShowBack and LUIE.SV.CombatInfo_Enabled) end,
+            },
+            {
+                -- Desaturate Backbar
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BACKBAR_DESATURATE)),
+                tooltip = GetString(SI_LUIE_LAM_CI_BACKBAR_DESATURATE_TP),
+                getFunc = function() return Settings.BarDesaturateUnused end,
+                setFunc = function(value) Settings.BarDesaturateUnused = value CombatInfo.OnSlotsFullUpdate() CombatInfo.BackbarToggleSettings() end,
+                width = "full",
+                default = Defaults.BarDesaturateUnused,
+                disabled = function() return not (Settings.ShowToggled and LUIE.SV.CombatInfo_Enabled) end,
+            },
+            {
+                -- Hide Unused Backbar
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BACKBAR_HIDE_UNUSED)),
+                tooltip = GetString(SI_LUIE_LAM_CI_BACKBAR_HIDE_UNUSED_TP),
+                getFunc = function() return Settings.BarHideUnused end,
+                setFunc = function(value) Settings.BarHideUnused = value CombatInfo.OnSlotsFullUpdate() CombatInfo.BackbarToggleSettings() end,
+                width = "full",
+                default = Defaults.BarHideUnused,
+                disabled = function() return not (Settings.ShowToggled and Settings.BarShowBack and LUIE.SV.CombatInfo_Enabled) end,
             },
         },
     }
