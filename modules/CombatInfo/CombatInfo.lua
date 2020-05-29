@@ -1415,14 +1415,18 @@ end
 
 function CombatInfo.BackbarHideSlot(slotNum)
     if CombatInfo.SV.BarHideUnused then
-        g_backbarButtons[slotNum].slot:SetHidden(true)
+        if g_backbarButtons[slotNum] then
+            g_backbarButtons[slotNum].slot:SetHidden(true)
+        end
     end
 end
 
 function CombatInfo.BackbarShowSlot(slotNum)
     -- Unhide the slot
     if CombatInfo.SV.BarShowBack then
-        g_backbarButtons[slotNum].slot:SetHidden(false)
+        if g_backbarButtons[slotNum] then
+            g_backbarButtons[slotNum].slot:SetHidden(false)
+        end
     end
 end
 
