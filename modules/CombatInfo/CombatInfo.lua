@@ -234,7 +234,8 @@ local g_uiProcAnimation       = {} -- Animation for bar slots
 local g_uiCustomToggle        = {} -- Toggle slots for bar Slots
 local g_triggeredSlots        = {} -- Triggered bar highlight slots
 local g_triggeredSlotsRemain  = {} -- Table of remaining durations on proc abilities
-local g_toggledSlots          = {} -- Toggled bar highlight slots
+local g_toggledSlotsBack      = {} -- Toggled bar highlight slots
+local g_toggledSlotsFront     = {} -- Toggled bar highlight slots
 local g_toggledSlotsRemain    = {} -- Table of remaining durations on active abilities
 local g_toggledSlotsPlayer    = {} -- Table of abilities that target the player (bar highlight doesn't fade on reticleover change)
 local g_potionUsed            = false -- Toggled on when a potion is used to prevent OnSlotsFullUpdate from updating timers.
@@ -578,7 +579,8 @@ function CombatInfo.UpdateBarHighlightTables()
     g_uiCustomToggle            = {}
     g_triggeredSlots            = {}
     g_triggeredSlotsRemain      = {}
-    g_toggledSlots              = {}
+    g_toggledSlotsFront         = {}
+    g_toggledSlotsBack          = {}
     g_toggledSlotsRemain        = {}
     g_toggledSlotsPlayer        = {}
     g_barOverrideCI             = {}
@@ -766,21 +768,35 @@ function CombatInfo.OnUpdate(currentTime)
         local remain = g_toggledSlotsRemain[k] - currentTime
         -- If duration reaches 0 then remove effect
         if v < currentTime then
-            if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] then
-                local slotNum = g_toggledSlots[k]
+            if g_toggledSlotsFront[k] and g_uiCustomToggle[g_toggledSlotsFront[k]] then
+                local slotNum = g_toggledSlotsFront[k]
         		CombatInfo.HideSlot(slotNum, k)
+            end
+            if g_toggledSlotsBack[k] and g_uiCustomToggle[g_toggledSlotsBack[k]] then
+                local slotNum = g_toggledSlotsBack[k]
+                CombatInfo.HideSlot(slotNum, k)
             end
             g_toggledSlotsRemain[k] = nil
         end
 
-        -- Update Label
-        if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] and g_toggledSlotsRemain[k] then
-            if g_toggledSlots[k] == 8 and CombatInfo.SV.UltimatePctEnabled then
+        -- Update Label (FRONT)
+        if g_toggledSlotsFront[k] and g_uiCustomToggle[g_toggledSlotsFront[k]] and g_toggledSlotsRemain[k] then
+            if g_toggledSlotsFront[k] == 8 and CombatInfo.SV.UltimatePctEnabled then
                 uiUltimate.LabelPct:SetHidden(true)
             end
             if CombatInfo.SV.BarShowLabel then
-                if not g_uiCustomToggle[g_toggledSlots[k]] then return end
-                g_uiCustomToggle[g_toggledSlots[k]].label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
+                if not g_uiCustomToggle[g_toggledSlotsFront[k]] then return end
+                g_uiCustomToggle[g_toggledSlotsFront[k]].label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
+            end
+        end
+        -- Update Label (BACK)
+        if g_toggledSlotsBack[k] and g_uiCustomToggle[g_toggledSlotsBack[k]] and g_toggledSlotsRemain[k] then
+            if g_toggledSlotsBack[k] == 8 and CombatInfo.SV.UltimatePctEnabled then
+                uiUltimate.LabelPct:SetHidden(true)
+            end
+            if CombatInfo.SV.BarShowLabel then
+                if not g_uiCustomToggle[g_toggledSlotsBack[k]] then return end
+                g_uiCustomToggle[g_toggledSlotsBack[k]].label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
             end
         end
     end
@@ -1049,9 +1065,15 @@ function CombatInfo.OnReticleTargetChanged(eventCode)
     local unitTag = "reticleover"
 
     for k, v in pairs(g_toggledSlotsRemain) do
-        if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] and not (g_toggledSlotsPlayer[k] or g_ignoreMouseover[k] or g_barNoRemove[k]) then
-            local slotNum = g_toggledSlots[k]
-    		CombatInfo.HideSlot(slotNum, k)
+        if ( (g_toggledSlotsFront[k] and g_uiCustomToggle[g_toggledSlotsFront[k]]) or (g_toggledSlotsBack[k] and g_uiCustomToggle[g_toggledSlotsBack[k]]) ) and not (g_toggledSlotsPlayer[k] or g_ignoreMouseover[k] or g_barNoRemove[k]) then
+            if (g_toggledSlotsFront[k] and g_uiCustomToggle[g_toggledSlotsFront[k]]) then
+                local slotNum = g_toggledSlotsFront[k]
+        		CombatInfo.HideSlot(slotNum, k)
+            end
+            if (g_toggledSlotsBack[k] and g_uiCustomToggle[g_toggledSlotsBack[k]]) then
+                local slotNum = g_toggledSlotsBack[k]
+                CombatInfo.HideSlot(slotNum, k)
+            end
             g_toggledSlotsRemain[k] = nil
             if Effects.BarHighlightCheckOnFade[k] then
                 CombatInfo.BarHighlightSwap(k)
@@ -1170,8 +1192,12 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                     g_mineStacks[abilityId] = g_mineStacks[abilityId] - Effects.EffectGroundDisplay[abilityId].stackRemove
                     if g_mineStacks[abilityId] == 0 and not g_mineNoTurnOff[abilityId] then
                         if g_toggledSlotsRemain[abilityId] then
-                            if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
-                                local slotNum = g_toggledSlots[abilityId]
+                            if g_toggledSlotsFront[abilityId] and g_uiCustomToggle[g_toggledSlotsFront[abilityId]] then
+                                local slotNum = g_toggledSlotsFront[abilityId]
+                                CombatInfo.HideSlot(slotNum, abilityId)
+                            end
+                            if g_toggledSlotsBack[abilityId] and g_uiCustomToggle[g_toggledSlotsBack[abilityId]] then
+                                local slotNum = g_toggledSlotsBack[abilityId]
                                 CombatInfo.HideSlot(slotNum, abilityId)
                             end
                         end
@@ -1182,8 +1208,12 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                     if g_barNoRemove[abilityId] then return end
                     -- Stop any toggle animation associated with this effect
                     if g_toggledSlotsRemain[abilityId] then
-                        if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
-                            local slotNum = g_toggledSlots[abilityId]
+                        if g_toggledSlotsFront[abilityId] and g_uiCustomToggle[g_toggledSlotsFront[abilityId]] then
+                            local slotNum = g_toggledSlotsFront[abilityId]
+                            CombatInfo.HideSlot(slotNum, abilityId)
+                        end
+                        if g_toggledSlotsBack[abilityId] and g_uiCustomToggle[g_toggledSlotsBack[abilityId]] then
+                            local slotNum = g_toggledSlotsBack[abilityId]
                             CombatInfo.HideSlot(slotNum, abilityId)
                         end
                     end
@@ -1214,10 +1244,16 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
             if CombatInfo.SV.ShowToggled then
                 g_toggledSlotsPlayer[abilityId] = true
                 local currentTime = GetGameTimeMilliseconds()
-                if g_toggledSlots[abilityId] then
+                if g_toggledSlotsFront[abilityId] or g_toggledSlotsBack[abilityId] then
                     g_toggledSlotsRemain[abilityId] = 1000 * endTime
-                    local slotNum = g_toggledSlots[abilityId]
-                    CombatInfo.ShowSlot(slotNum, abilityId, currentTime, false)
+                    if g_toggledSlotsFront[abilityId] then
+                        local slotNum = g_toggledSlotsFront[abilityId]
+                        CombatInfo.ShowSlot(slotNum, abilityId, currentTime, false)
+                    end
+                    if g_toggledSlotsBack[abilityId] then
+                        local slotNum = g_toggledSlotsBack[abilityId]
+                        CombatInfo.ShowSlot(slotNum, abilityId, currentTime, false)
+                    end
                 end
             end
         end
@@ -1256,8 +1292,12 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
         end
         -- Stop any toggle animation associated with this effect
         if g_toggledSlotsRemain[abilityId] then
-            if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
-                local slotNum = g_toggledSlots[abilityId]
+            if g_toggledSlotsFront[abilityId] and g_uiCustomToggle[g_toggledSlotsFront[abilityId]] then
+                local slotNum = g_toggledSlotsFront[abilityId]
+                CombatInfo.HideSlot(slotNum, abilityId)
+            end
+            if g_toggledSlotsBack[abilityId] and g_uiCustomToggle[g_toggledSlotsBack[abilityId]] then
+                local slotNum = g_toggledSlotsBack[abilityId]
                 CombatInfo.HideSlot(slotNum, abilityId)
             end
             g_toggledSlotsRemain[abilityId] = nil
@@ -1296,12 +1336,18 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                 end
             end
             -- Display active effects
-            if g_toggledSlots[abilityId] then
+            if g_toggledSlotsFront[abilityId] or g_toggledSlotsBack[abilityId] then
                 local currentTime = GetGameTimeMilliseconds()
                 if CombatInfo.SV.ShowToggled then
                     g_toggledSlotsRemain[abilityId] = 1000 * endTime
-                    local slotNum = g_toggledSlots[abilityId]
-                    CombatInfo.ShowSlot(slotNum, abilityId, currentTime, false)
+                    if g_toggledSlotsFront[abilityId] then
+                        local slotNum = g_toggledSlotsFront[abilityId]
+                        CombatInfo.ShowSlot(slotNum, abilityId, currentTime, false)
+                    end
+                    if g_toggledSlotsBack[abilityId] then
+                        local slotNum = g_toggledSlotsBack[abilityId]
+                        CombatInfo.ShowSlot(slotNum, abilityId, currentTime, false)
+                    end
                 end
             end
         end
@@ -1309,7 +1355,6 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
 end
 
 function CombatInfo.HideSlot(slotNum, abilityId)
-    local slotNum = g_toggledSlots[abilityId]
     g_uiCustomToggle[slotNum]:SetHidden(true)
     if slotNum > BACKBAR_INDEX_OFFSET then
         CombatInfo.BackbarHideSlot(slotNum)
@@ -1856,13 +1901,19 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
 
     if result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED or result == ACTION_RESULT_EFFECT_GAINED_DURATION then
         local currentTime = GetGameTimeMilliseconds()
-        if g_toggledSlots[abilityId] then
+        if g_toggledSlotsFront[abilityId] or g_toggledSlotsBack[abilityId] then
             if CombatInfo.SV.ShowToggled then
                 local duration = GetUpdatedAbilityDuration(abilityId)
                 local endTime = currentTime + duration
                 g_toggledSlotsRemain[abilityId] = endTime
-                local slotNum = g_toggledSlots[abilityId]
-                CombatInfo.ShowSlot(slotNum, abilityId, currentTime, false)
+                if g_toggledSlotsFront[abilityId] then
+                    local slotNum = g_toggledSlotsFront[abilityId]
+                    CombatInfo.ShowSlot(slotNum, abilityId, currentTime, false)
+                end
+                if g_toggledSlotsBack[abilityId] then
+                    local slotNum = g_toggledSlotsBack[abilityId]
+                    CombatInfo.ShowSlot(slotNum, abilityId, currentTime, false)
+                end
             end
         end
     elseif result == ACTION_RESULT_EFFECT_FADED then
@@ -1870,9 +1921,13 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
         if g_barNoRemove[abilityId] then return end
 
         if g_toggledSlotsRemain[abilityId] then
-            if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
-                local slotNum = g_toggledSlots[abilityId]
+            if g_toggledSlotsFront[abilityId] and g_uiCustomToggle[g_toggledSlotsFront[abilityId]] then
+                local slotNum = g_toggledSlotsFront[abilityId]
         		CombatInfo.HideSlot(slotNum, abilityId)
+            end
+            if g_toggledSlotsBack[abilityId] and g_uiCustomToggle[g_toggledSlotsBack[abilityId]] then
+                local slotNum = g_toggledSlotsBack[abilityId]
+                CombatInfo.HideSlot(slotNum, abilityId)
             end
             g_toggledSlotsRemain[abilityId] = nil
         end
@@ -1932,9 +1987,14 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
 
     if onlyProc == false then
         -- Remove custom toggle information and custom highlight
-        for abilityId, slot in pairs(g_toggledSlots) do
+        for abilityId, slot in pairs(g_toggledSlotsFront) do
             if (slot == slotNum) then
-                g_toggledSlots[abilityId] = nil
+                g_toggledSlotsFront[abilityId] = nil
+            end
+        end
+        for abilityId, slot in pairs(g_toggledSlotsBack) do
+            if (slot == slotNum) then
+                g_toggledSlotsBack[abilityId] = nil
             end
         end
 
@@ -2006,13 +2066,20 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
         end
     end
 
+    local toggledSlots
+    if slotNum > BACKBAR_INDEX_OFFSET then
+        toggledSlots = g_toggledSlotsBack
+    else
+        toggledSlots = g_toggledSlotsFront
+    end
+
     -- Check for active duration to display highlight for abilities on bar swap
     if onlyProc == false then
         if duration > 0 or Effects.AddNoDurationBarHighlight[ability_id] then
-            g_toggledSlots[ability_id] = slotNum
+            toggledSlots[ability_id] = slotNum
             if g_toggledSlotsRemain[ability_id] then
                 if CombatInfo.SV.ShowToggled then
-                    local slotNum = g_toggledSlots[ability_id]
+                    local slotNum = toggledSlots[ability_id]
                     -- Check the other slot here to determine if we desaturate (in case effects are running in both slots)
                     local desaturate
                     local math = slotNum > BACKBAR_INDEX_OFFSET and slotNum - BACKBAR_INDEX_OFFSET or nil
