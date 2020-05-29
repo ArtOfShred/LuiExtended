@@ -232,7 +232,8 @@ local g_ultimateCurrent       = 0 -- Current ultimate value
 local g_ultimateSlot          = ACTION_BAR_ULTIMATE_SLOT_INDEX + 1 -- Ultimate slot number
 local g_uiProcAnimation       = {} -- Animation for bar slots
 local g_uiCustomToggle        = {} -- Toggle slots for bar Slots
-local g_triggeredSlots        = {} -- Triggered bar highlight slots
+local g_triggeredSlotsFront   = {} -- Triggered bar highlight slots
+local g_triggeredSlotsBack    = {} -- Triggered bar highlight slots
 local g_triggeredSlotsRemain  = {} -- Table of remaining durations on proc abilities
 local g_toggledSlotsBack      = {} -- Toggled bar highlight slots
 local g_toggledSlotsFront     = {} -- Toggled bar highlight slots
@@ -577,7 +578,8 @@ end
 function CombatInfo.UpdateBarHighlightTables()
     g_uiProcAnimation           = {}
     g_uiCustomToggle            = {}
-    g_triggeredSlots            = {}
+    g_triggeredSlotsFront       = {}
+    g_triggeredSlotsBack        = {}
     g_triggeredSlotsRemain      = {}
     g_toggledSlotsFront         = {}
     g_toggledSlotsBack          = {}
@@ -749,16 +751,25 @@ function CombatInfo.OnUpdate(currentTime)
 
         -- If duration reaches 0 then remove effect
         if v < currentTime then
-            if g_triggeredSlots[k] and g_uiProcAnimation[g_triggeredSlots[k]] then
-                g_uiProcAnimation[g_triggeredSlots[k]]:Stop()
+            if g_triggeredSlotsFront[k] and g_uiProcAnimation[g_triggeredSlotsFront[k]] then
+                g_uiProcAnimation[g_triggeredSlotsFront[k]]:Stop()
+            end
+            if g_triggeredSlotsBack[k] and g_uiProcAnimation[g_triggeredSlotsBack[k]] then
+                g_uiProcAnimation[g_triggeredSlotsBack[k]]:Stop()
             end
             g_triggeredSlotsRemain[k] = nil
         end
 
-        -- Update Label
-        if g_triggeredSlots[k] and g_uiProcAnimation[g_triggeredSlots[k]] and g_triggeredSlotsRemain[k] then
+        -- Update Label (FRONT)
+        if g_triggeredSlotsFront[k] and g_uiProcAnimation[g_triggeredSlotsFront[k]] and g_triggeredSlotsRemain[k] then
             if CombatInfo.SV.BarShowLabel then
-                g_uiProcAnimation[g_triggeredSlots[k]].procLoopTexture.label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain/1000))
+                g_uiProcAnimation[g_triggeredSlotsFront[k]].procLoopTexture.label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain/1000))
+            end
+        end
+        -- Update Label (BACK)
+        if g_triggeredSlotsBack[k] and g_uiProcAnimation[g_triggeredSlotsBack[k]] and g_triggeredSlotsRemain[k] then
+            if CombatInfo.SV.BarShowLabel then
+                g_uiProcAnimation[g_triggeredSlotsBack[k]].procLoopTexture.label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain/1000))
             end
         end
     end
@@ -1285,8 +1296,11 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
 
         -- Stop any proc animation associated with this effect
         if g_triggeredSlotsRemain[abilityId] then
-            if g_triggeredSlots[abilityId] and g_uiProcAnimation[g_triggeredSlots[abilityId]] then
-                g_uiProcAnimation[g_triggeredSlots[abilityId]]:Stop()
+            if g_triggeredSlotsFront[abilityId] and g_uiProcAnimation[g_triggeredSlotsFront[abilityId]] then
+                g_uiProcAnimation[g_triggeredSlotsFront[abilityId]]:Stop()
+            end
+            if g_triggeredSlotsBack[abilityId] and g_uiProcAnimation[g_triggeredSlotsBack[abilityId]] then
+                g_uiProcAnimation[g_triggeredSlotsBack[abilityId]]:Stop()
             end
             g_triggeredSlotsRemain[abilityId] = nil
         end
@@ -1310,11 +1324,11 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
         -- Also create visual enhancements from skill bar
         if castByPlayer == COMBAT_UNIT_TYPE_PLAYER then
             -- start any proc animation associated with this effect
-            if g_triggeredSlots[abilityId] then
+            if g_triggeredSlotsFront[abilityId] or g_triggeredSlotsBack[abilityId] then
                 local currentTime = GetGameTimeMilliseconds()
                 if CombatInfo.SV.ShowTriggered then
                     -- Play sound twice so its a little louder.
-                    if CombatInfo.SV.ProcEnableSound and unitTag == "player" then
+                    if CombatInfo.SV.ProcEnableSound and unitTag == "player" and g_triggeredSlotsFront[abilityId] then
                         if abilityId == 130293 and stackCount ~= 4 then
                             g_boundArmamentsPlayed = false
                         end
@@ -1327,11 +1341,20 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                         end
                     end
                     g_triggeredSlotsRemain[abilityId] = 1000 * endTime
-                    CombatInfo.PlayProcAnimations(g_triggeredSlots[abilityId])
-                    if CombatInfo.SV.BarShowLabel then
-                        if not g_uiProcAnimation[g_triggeredSlots[abilityId]] then return end
-                        local remain = g_triggeredSlotsRemain[abilityId] - currentTime
-                        g_uiProcAnimation[g_triggeredSlots[abilityId]].procLoopTexture.label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
+                    local remain = g_triggeredSlotsRemain[abilityId] - currentTime
+                    -- Front
+                    if g_triggeredSlotsFront[abilityId] then
+                        CombatInfo.PlayProcAnimations(g_triggeredSlotsFront[abilityId])
+                        if CombatInfo.SV.BarShowLabel and g_uiProcAnimation[g_triggeredSlotsFront[abilityId]] then
+                            g_uiProcAnimation[g_triggeredSlotsFront[abilityId]].procLoopTexture.label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
+                        end
+                    end
+                    -- Back
+                    if g_triggeredSlotsBack[abilityId] then
+                        CombatInfo.PlayProcAnimations(g_triggeredSlotsBack[abilityId])
+                        if CombatInfo.SV.BarShowLabel and g_uiProcAnimation[g_triggeredSlotsBack[abilityId]] then
+                            g_uiProcAnimation[g_triggeredSlotsBack[abilityId]].procLoopTexture.label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
+                        end
                     end
                 end
             end
@@ -1973,9 +1996,14 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
     end
 
     -- Remove saved triggered proc information
-    for abilityId, slot in pairs(g_triggeredSlots) do
+    for abilityId, slot in pairs(g_triggeredSlotsFront) do
         if (slot == slotNum) then
-            g_triggeredSlots[abilityId] = nil
+            g_triggeredSlotsFront[abilityId] = nil
+        end
+    end
+    for abilityId, slot in pairs(g_triggeredSlotsBack) do
+        if (slot == slotNum) then
+            g_triggeredSlotsBack[abilityId] = nil
         end
     end
 
@@ -2037,6 +2065,13 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
     local duration = GetUpdatedAbilityDuration(ability_id)
     local currentTime = GetGameTimeMilliseconds()
 
+    local triggeredSlots
+    if slotNum > BACKBAR_INDEX_OFFSET then
+        triggeredSlots = g_triggeredSlotsBack
+    else
+        triggeredSlots = g_triggeredSlotsFront
+    end
+
     -- Check if currently this ability is in proc state
     local proc = Effects.HasAbilityProc[abilityName]
     if Effects.IsAbilityProc[GetSlotBoundId(slotNum)] then
@@ -2053,7 +2088,7 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
             end
         end
     elseif proc then
-        g_triggeredSlots[proc] = slotNum
+        triggeredSlots[proc] = slotNum
          if g_triggeredSlotsRemain[proc] then
             if CombatInfo.SV.ShowTriggered then
                 CombatInfo.PlayProcAnimations(slotNum)
