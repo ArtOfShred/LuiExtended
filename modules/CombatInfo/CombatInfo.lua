@@ -735,6 +735,10 @@ function CombatInfo.OnPlayerActivated(eventCode)
     -- Manually trigger event to update stats
     g_hotbarCategory = GetActiveHotbarCategory()
     CombatInfo.OnSlotsFullUpdate()
+    for i = (BAR_INDEX_START + BACKBAR_INDEX_OFFSET), (BACKBAR_INDEX_END + BACKBAR_INDEX_OFFSET) do
+        -- Update Bar Slots on initial load (don't want to do it normally when we do a slot update)
+        CombatInfo.BarSlotUpdate(i, true, false)
+    end
     CombatInfo.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, "player", nil, POWERTYPE_ULTIMATE, GetUnitPower("player", POWERTYPE_ULTIMATE))
 end
 
@@ -761,13 +765,13 @@ function CombatInfo.OnUpdate(currentTime)
         end
 
         -- Update Label (FRONT)
-        if g_triggeredSlotsFront[k] and g_uiProcAnimation[g_triggeredSlotsFront[k]] and g_triggeredSlotsRemain[k] then
+        if g_triggeredSlotsFront[k] and g_uiProcAnimation[g_triggeredSlotsFront[k]] and g_triggeredSlotsRemain[k] and k ~= 130293 then
             if CombatInfo.SV.BarShowLabel then
                 g_uiProcAnimation[g_triggeredSlotsFront[k]].procLoopTexture.label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain/1000))
             end
         end
         -- Update Label (BACK)
-        if g_triggeredSlotsBack[k] and g_uiProcAnimation[g_triggeredSlotsBack[k]] and g_triggeredSlotsRemain[k] then
+        if g_triggeredSlotsBack[k] and g_uiProcAnimation[g_triggeredSlotsBack[k]] and g_triggeredSlotsRemain[k] and k ~= 130293 then
             if CombatInfo.SV.BarShowLabel then
                 g_uiProcAnimation[g_triggeredSlotsBack[k]].procLoopTexture.label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain/1000))
             end
@@ -1345,14 +1349,14 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                     -- Front
                     if g_triggeredSlotsFront[abilityId] then
                         CombatInfo.PlayProcAnimations(g_triggeredSlotsFront[abilityId])
-                        if CombatInfo.SV.BarShowLabel and g_uiProcAnimation[g_triggeredSlotsFront[abilityId]] then
+                        if CombatInfo.SV.BarShowLabel and g_uiProcAnimation[g_triggeredSlotsFront[abilityId]] and abilityId ~= 130293 then
                             g_uiProcAnimation[g_triggeredSlotsFront[abilityId]].procLoopTexture.label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
                         end
                     end
                     -- Back
                     if g_triggeredSlotsBack[abilityId] then
                         CombatInfo.PlayProcAnimations(g_triggeredSlotsBack[abilityId])
-                        if CombatInfo.SV.BarShowLabel and g_uiProcAnimation[g_triggeredSlotsBack[abilityId]] then
+                        if CombatInfo.SV.BarShowLabel and g_uiProcAnimation[g_triggeredSlotsBack[abilityId]] and abilityId ~= 130293 then
                             g_uiProcAnimation[g_triggeredSlotsBack[abilityId]].procLoopTexture.label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
                         end
                     end
@@ -2092,7 +2096,7 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
          if g_triggeredSlotsRemain[proc] then
             if CombatInfo.SV.ShowTriggered then
                 CombatInfo.PlayProcAnimations(slotNum)
-                if CombatInfo.SV.BarShowLabel then
+                if CombatInfo.SV.BarShowLabel and ability_id ~= 130293 then
                     if not g_uiProcAnimation[slotNum] then return end
                     local remain = g_triggeredSlotsRemain[proc] - currentTime
                     g_uiProcAnimation[slotNum].procLoopTexture.label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
