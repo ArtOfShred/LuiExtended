@@ -420,6 +420,11 @@ function CombatInfo.SetupBackBarIcons(button, flip)
     local slotNum = button.slot.slotNum
     local slotId = GetSlotBoundId(slotNum - BACKBAR_INDEX_OFFSET, hotbarCategory)
 
+    -- Special case for Grim Focus, switch icon back so it doesn't get stuck
+    if slotId == 61907 then slotId = 61902 end -- Assassin's Will --> Grim Focus
+    if slotId == 61932 then slotId = 61927 end -- Assassin's Scourge --> Relentless Focus
+    if slotId == 61930 then slotId = 61919 end -- Assassin's Will --> Merciless Resolve
+
     -- Check if something is in this action bar slot and if not hide the slot
     if slotId > 0 then
         button.icon:SetTexture(GetAbilityIcon(slotId))

@@ -5315,6 +5315,7 @@ Effects.EffectOverride = {
     [27287] = { hide = true }, -- Birth Unstable Familiar (Summon Unstable Familiar - All Morphs)
     [23304] = { tooltip = Tooltips.Skill_Unstable_Familiar }, -- Summon Unstable Familiar (Summon Unstable Familiar)
     [27850] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_familiar_melee.dds', name = Abilities.Skill_Entropic_Touch }, -- Familiar Melee (Summon Unstable Familiar + Summon Volatile Familiar)
+    [108840] = { icon = 'esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds' }, -- Summon Unstable Familiar (Summon Unstable Familiar)
     [108842] = { name = Abilities.Skill_Unstable_Pulse, tooltip = Tooltips.Skill_Familiar_Damage_Pulse, icon = 'esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds'  }, -- Volatile Familiar Damage Pulsi (Summon Unstable Familiar)
     [108843] = { name = Abilities.Skill_Unstable_Pulse, tooltip = Tooltips.Skill_Familiar_Damage_Pulse_Self, icon = 'esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds'  }, -- Volatile Familiar (Summon Unstable Familiar)
     [108844] = { name = Abilities.Skill_Unstable_Pulse, icon = 'esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds' }, -- Familiar Damage Pulse (Summon Unstable Familiar)
@@ -5339,8 +5340,9 @@ Effects.EffectOverride = {
     [28027] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_kick.dds', name = Abilities.Skill_Kick }, -- Kick (Summon Winged Twilight - All Morphs)
     [24613] = { tooltip = Tooltips.Skill_Winged_Twilight }, -- Summon Winged Twilight (Summon Winged Twilight)
     [24739] = { hide = true }, -- Summon Winged Twilight (Summon Winged Twilight)
-    [108847] = { icon = 'esoui/art/icons/ability_sorcerer_lightning_prey_summoned.dds' }, -- Summon Twilight Matriarch (Summon Winged Twilight)
-    [108846] = { icon = 'esoui/art/icons/ability_sorcerer_lightning_prey_summoned.dds' }, -- Summon Twilight Matriarch (Summon Winged Twilight)
+    [108845] = { icon = 'esoui/art/icons/ability_sorcerer_lightning_prey_summoned.dds' }, -- Winged Twilight Restore (Summon Winged Twilight)
+    [108847] = { icon = 'esoui/art/icons/ability_sorcerer_lightning_prey_summoned.dds' }, -- Winged Twilight Restore (Summon Winged Twilight)
+    [108846] = { icon = 'esoui/art/icons/ability_sorcerer_lightning_prey_summoned.dds' }, -- Winged Twilight Restore (Summon Winged Twilight)
     [24636] = { tooltip = Tooltips.Skill_Twilight_Tormentor }, -- Summon Twilight Tormentor (Summon Twilight Tormentor)
     [24741] = { hide = true }, -- Twilight Tormentor (Summon Twilight Tormentor)
     [77354] = { tooltip = Tooltips.Skill_Tormentor_Damage_Boost }, -- Twilight Tormentor Enrage (Summon Twilight Tormentor)
@@ -6316,6 +6318,7 @@ Effects.EffectOverride = {
     [126651] = { tooltip = Tooltips.Generic_Stun, name = Abilities.Skill_Shrouded_Daggers }, -- Shrouded Daggers (Shrouded Daggers)
 
     [126667] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_flying_blade_jump.dds', tooltip = Tooltips.Skill_Flying_Blade }, -- Flying Blade (Flying Blade)
+    [126659] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_flying_blade_jump.dds' }, -- Flying Blade (Flying Blade)
     [126666] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_flying_blade_jump.dds' }, -- Flying Blade (Flying Blade)
     [126670] = { consolidateExtra = true, tooltip = Abilities.Skill_Flying_Blade }, -- Major Brutality (Flying Blade)
     [126658] = { icon = '' }, -- Flying Blade (Flying Blade)
@@ -7144,14 +7147,17 @@ Effects.EffectOverride = {
     -- Guard / Mystic Guard / Stalwart Guard
     [61511] = { duration = 0, forcedContainer = 'short', tooltip = Tooltips.Skill_Guard_Other }, -- Guard (Guard)
     [80923] = { duration = 0, tooltip = Tooltips.Skill_Guard_Self }, -- Guard (Guard)
+    [78338] = { icon = 'esoui/art/icons/ability_ava_guard.dds' }, -- Guard (Guard)
     [61536] = { duration = 0, forcedContainer = 'short', tooltip = Tooltips.Skill_Guard_Other }, -- Mystic Guard (Mystic Guard)
     [80947] = { duration = 0, tooltip = Tooltips.Skill_Guard_Self }, -- Mystic Guard (Mystic Guard)
     [80953] = { duration = 0, forcedContainer = 'short', consolidate = true, tooltip = Abilities.Skill_Mystic_Guard }, -- Minor Vitality (Mystic Guard)
     [64080] = { duration = 0, consolidate = true, tooltip = Abilities.Skill_Mystic_Guard }, -- Minor Vitality (Mystic Guard)
+    [81415] = { icon = 'esoui/art/icons/ability_ava_mystic_guard.dds' }, -- Mystic Guard (Mystic Guard)
     [61529] = { duration = 0, forcedContainer = 'short', tooltip = Tooltips.Skill_Guard_Other }, -- Stalwart Guard (Stalwart Guard)
     [80983] = { duration = 0, tooltip = Tooltips.Skill_Guard_Self }, -- Stalwart Guard (Stalwart Guard)
     [80984] = { duration = 0, forcedContainer = 'short', consolidate = true, tooltip = Abilities.Skill_Stalwart_Guard }, -- Minor Force (Stalwart Guard)
     [80986] = { duration = 0, consolidate = true, tooltip = Abilities.Skill_Stalwart_Guard }, -- Minor Force (Stalwart Guard)
+    [81420] = { icon = 'esoui/art/icons/ability_ava_stalwart_guard.dds' }, -- Stalwart Guard (Stalwart Guard)
 
     -- Skill_Revealing_Flare
 
