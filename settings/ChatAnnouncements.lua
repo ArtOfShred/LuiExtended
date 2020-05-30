@@ -1075,6 +1075,17 @@ function ChatAnnouncements.CreateSettings()
                 default = Defaults.Inventory.LootShowRemove,
             },
             {
+                -- Show List Items
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWLIST)),
+                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWLIST_TP),
+                getFunc = function() return Settings.Inventory.LootShowList end,
+                setFunc = function(value) Settings.Inventory.LootShowList = value ChatAnnouncements.RegisterLootEvents() end,
+                width = "full",
+                disabled = function() return not (Settings.Inventory.Loot and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = Defaults.Inventory.LootShowList,
+            },
+            {
                 -- Show Turnin Items
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWTURNIN)),
@@ -1674,7 +1685,7 @@ function ChatAnnouncements.CreateSettings()
                 default = Defaults.ContextMessages.CurrencyMessageTrader,
             },
             {
-                -- Listing Message
+                -- Listing Message CURRENCY
                 type = "editbox",
                 name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LISTING),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LISTING_TP),
@@ -1684,6 +1695,30 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = Defaults.ContextMessages.CurrencyMessageListing,
             },
+            {
+                -- Listing Message ITEM
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LIST),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LIST_TP),
+                getFunc = function() return Settings.ContextMessages.CurrencyMessageList end,
+                setFunc = function(value) Settings.ContextMessages.CurrencyMessageList = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.ContextMessages.CurrencyMessageList,
+            },
+
+            {
+                -- Listing Message (Combined)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LISTING_VALUE),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LISTING_VALUE_TP),
+                getFunc = function() return Settings.ContextMessages.CurrencyMessageListingValue end,
+                setFunc = function(value) Settings.ContextMessages.CurrencyMessageListingValue = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.ContextMessages.CurrencyMessageListingValue,
+            },
+
             {
                 -- Loot Message (Buy)
                 type = "editbox",

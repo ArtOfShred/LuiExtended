@@ -1389,8 +1389,10 @@ end
 function CombatInfo.HideSlot(slotNum, abilityId)
     g_uiCustomToggle[slotNum]:SetHidden(true)
     if slotNum > BACKBAR_INDEX_OFFSET then
-        CombatInfo.BackbarHideSlot(slotNum)
-        CombatInfo.ToggleBackbarSaturation(slotNum, CombatInfo.SV.BarDarkUnused)
+        if slotNum ~= BAR_INDEX_END + BACKBAR_INDEX_OFFSET then
+            CombatInfo.BackbarHideSlot(slotNum)
+            CombatInfo.ToggleBackbarSaturation(slotNum, CombatInfo.SV.BarDarkUnused)
+        end
     end
     if slotNum == 8 and CombatInfo.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
         uiUltimate.LabelPct:SetHidden(false)
@@ -1400,8 +1402,10 @@ end
 function CombatInfo.ShowSlot(slotNum, abilityId, currentTime, desaturate)
     CombatInfo.ShowCustomToggle(slotNum)
     if slotNum > BACKBAR_INDEX_OFFSET then
-        CombatInfo.BackbarShowSlot(slotNum)
-        CombatInfo.ToggleBackbarSaturation(slotNum, desaturate)
+        if slotNum ~= BAR_INDEX_END + BACKBAR_INDEX_OFFSET then
+            CombatInfo.BackbarShowSlot(slotNum)
+            CombatInfo.ToggleBackbarSaturation(slotNum, desaturate)
+        end
     end
     if slotNum == 8 and CombatInfo.SV.UltimatePctEnabled then
         uiUltimate.LabelPct:SetHidden(true)

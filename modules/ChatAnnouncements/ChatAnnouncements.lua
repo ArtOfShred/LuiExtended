@@ -428,6 +428,7 @@ ChatAnnouncements.Defaults = {
         LootShowDestroy                 = true,
         LootShowRemove                  = true,
         LootShowTurnIn                  = true,
+        LootShowList                    = true,
         LootShowUsePotion               = false,
         LootShowUseFoodDrink            = false,
         LootShowUseRepairKit            = true,
@@ -483,6 +484,8 @@ ChatAnnouncements.Defaults = {
         CurrencyMessageTrader           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADER),
         CurrencyMessageRepair           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_REPAIR),
         CurrencyMessageListing          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LISTING),
+        CurrencyMessageListingValue     = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LISTING_VALUE),
+        CurrencyMessageList             = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LIST),
         CurrencyMessageCampaign         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_CAMPAIGN),
         CurrencyMessageFence            = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_FENCE_VALUE),
         CurrencyMessageFenceNoV         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_FENCE),
@@ -544,6 +547,7 @@ local g_queuedMessagesCounter       = 1             -- Counter value for queued 
 -- Loot/Currency
 local g_savedPurchase               = { }
 local g_savedLaunder                = { }
+local g_savedItem                   = { }
 local g_isLooted                    = false         -- Toggled on to modify loot notification to "looted."
 local g_isPickpocketed              = false         -- Toggled on to modify loot notification to "pickpocketed."
 local g_isStolen                    = false         -- Toggled on to modify loot notification to "stolen."
@@ -553,6 +557,7 @@ local g_itemReceivedIsQuestAbandon  = false         -- Toggled on to modify remo
 local g_itemsConfiscated            = false         -- Toggled on when items are confiscated to modify the notification message.
 local g_weAreInAStore               = false         -- Toggled on when the player opens a store.
 local g_weAreInAFence               = false         -- Toggled on when the player opens a fence.
+local g_weAreInAGuildStore          = false         -- Toggled on when the player opens a guild store.
 local g_itemWasDestroyed            = false         -- Tracker for item being destroyed
 local g_lockpickBroken              = false         -- Tracker for lockpick being broken
 local g_groupLootIndex              = {}            -- Table to hold group member names for group loot display.
@@ -1123,7 +1128,11 @@ function ChatAnnouncements.RegisterLootEvents()
     eventManager:UnregisterForEvent(moduleName, EVENT_OPEN_FENCE)
     eventManager:UnregisterForEvent(moduleName, EVENT_CLOSE_STORE)
     eventManager:UnregisterForEvent(moduleName, EVENT_OPEN_STORE)
+    eventManager:UnregisterForEvent(moduleName, EVENT_CLOSE_TRADING_HOUSE)
+    eventManager:UnregisterForEvent(moduleName, EVENT_OPEN_TRADING_HOUSE)
     eventManager:UnregisterForEvent(moduleName, EVENT_ITEM_LAUNDER_RESULT)
+    -- TRADING POST
+    eventManager:UnregisterForEvent(moduleName, EVENT_TRADING_HOUSE_RESPONSE_RECEIVED)
     -- BANK
     eventManager:UnregisterForEvent(moduleName, EVENT_OPEN_BANK)
     eventManager:UnregisterForEvent(moduleName, EVENT_CLOSE_BANK)
@@ -1167,10 +1176,16 @@ function ChatAnnouncements.RegisterLootEvents()
         eventManager:RegisterForEvent(moduleName, EVENT_SELL_RECEIPT, ChatAnnouncements.OnSellItem)
         eventManager:RegisterForEvent(moduleName, EVENT_ITEM_LAUNDER_RESULT, ChatAnnouncements.FenceSuccess)
     end
+    -- TRADING POST
+    if ChatAnnouncements.SV.Inventory.LootShowList then
+        eventManager:RegisterForEvent(moduleName, EVENT_TRADING_HOUSE_RESPONSE_RECEIVED, ChatAnnouncements.TradingHouseResponseReceived)
+    end
     if ChatAnnouncements.SV.Inventory.Loot or ChatAnnouncements.SV.Inventory.LootVendor then
         eventManager:RegisterForEvent(moduleName, EVENT_OPEN_FENCE, ChatAnnouncements.FenceOpen)
         eventManager:RegisterForEvent(moduleName, EVENT_OPEN_STORE, ChatAnnouncements.StoreOpen)
         eventManager:RegisterForEvent(moduleName, EVENT_CLOSE_STORE, ChatAnnouncements.StoreClose)
+        eventManager:RegisterForEvent(moduleName, EVENT_OPEN_TRADING_HOUSE, ChatAnnouncements.GuildStoreOpen)
+        eventManager:RegisterForEvent(moduleName, EVENT_CLOSE_TRADING_HOUSE, ChatAnnouncements.GuildStoreClose)
     end
     -- BANK
     if ChatAnnouncements.SV.Inventory.LootBank then
@@ -2323,8 +2338,17 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageRepair
     -- Listing Fee (33)
     elseif reason == 33 then
-        if ChatAnnouncements.SV.Currency.CurrencyGoldHideListingAH then return end
-        messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageListing
+        if ChatAnnouncements.SV.Currency.CurrencyGoldHideListingAH then
+            return
+        end
+        g_savedPurchase.changeType=changeType
+        g_savedPurchase.formattedValue=formattedValue
+        g_savedPurchase.currencyTypeColor=currencyTypeColor
+        g_savedPurchase.currencyIcon=currencyIcon
+        g_savedPurchase.currencyName=currencyName
+        g_savedPurchase.currencyTotal=currencyTotal
+        g_savedPurchase.messageTotal=messageTotal
+        return
     -- Respec Skills (44)
     elseif reason == 44 then
         ChatAnnouncements.PointRespecDisplay(RESPEC_TYPE_SKILLS)
@@ -2697,6 +2721,10 @@ isCollectibleHorse = {
 
 function ChatAnnouncements.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCurrencyType1, specialCurrencyInfo1, specialCurrencyQuantity1, specialCurrencyType2, specialCurrencyInfo2, specialCurrencyQuantity2, itemSoundCategory)
     local itemIcon
+
+    d(itemName)
+    d(entryType)
+
     if isCollectibleHorse[itemName] then
         local id = isCollectibleHorse[itemName]
         itemName = GetCollectibleLink(id, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
@@ -2787,6 +2815,64 @@ function ChatAnnouncements.OnSellItem(eventCode, itemName, quantity, money)
         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
     end
     g_savedPurchase = { }
+end
+
+function ChatAnnouncements.TradingHouseResponseReceived(eventCode, TradingHouseResult, result)
+
+    -- Bail if a pending item isn't being sold
+    if not TradingHouseResult == TRADING_HOUSE_RESULT_POST_PENDING then
+        return
+    end
+    -- If we don't have both a valid saved currency transaction and saved message then bail out.
+    if not g_savedPurchase.formattedValue or not g_savedItem.itemLink then
+        g_savedPurchase = { }
+        g_savedItem = { }
+        return
+    end
+
+    local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+    local type = "LUIE_CURRENCY_VENDOR"
+    local messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageListingValue
+
+    local icon = g_savedItem.icon
+    local formattedIcon = ( ChatAnnouncements.SV.Inventory.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
+    local stack = g_savedItem.stack
+    local itemCount = stack > 1 and (" |cFFFFFFx" .. stack .. "|r") or ""
+    local itemName = g_savedItem.itemLink
+
+    local carriedItem
+    if ChatAnnouncements.SV.BracketOptionItem == 1 then
+        carriedItem = ( formattedIcon .. itemName ..  itemCount )
+    else
+        carriedItem = ( formattedIcon .. itemName:gsub("^|H0", "|H1", 1) ..  itemCount )
+    end
+
+    local carriedItemTotal = ""
+    if ChatAnnouncements.SV.Inventory.LootVendorTotalItems then
+        local total1, total2, total3 = GetItemLinkStacks(itemName)
+        local total = total1 + total2 + total3
+        if total > 1 then
+            carriedItemTotal = string.format(" |c%s%s|r %s|cFFFFFF%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+        end
+    end
+
+    if ChatAnnouncements.SV.Inventory.LootVendorCurrency then
+        ChatAnnouncements.CurrencyPrinter(g_savedPurchase.formattedValue, changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, messageChange, g_savedPurchase.messageTotal, type, carriedItem, carriedItemTotal)
+    else
+        type = "CURRENCY"
+        messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageList
+        local finalMessageP1 = string.format(carriedItem .. "|r|c" .. changeColor)
+        local finalMessageP2 = string.format(messageChange, finalMessageP1)
+        local finalMessage = string.format("|c%s%s|r%s", changeColor, finalMessageP2, carriedItemTotal)
+        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = type }
+        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+        eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
+        messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageListing
+        ChatAnnouncements.CurrencyPrinter(g_savedPurchase.formattedValue, changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, messageChange, g_savedPurchase.messageTotal, type)
+    end
+    g_savedPurchase = { }
+    g_savedItem = { }
+
 end
 
 function ChatAnnouncements.MailMoneyChanged(eventCode)
@@ -3311,6 +3397,22 @@ function ChatAnnouncements.StoreClose(eventCode)
         g_inventoryStacks = {}
     end
     zo_callLater(function() g_weAreInAStore = false g_weAreInAFence = false end, 1000)
+end
+
+function ChatAnnouncements.GuildStoreOpen(eventCode)
+    g_weAreInAStore = true
+    g_weAreInAGuildStore = true
+end
+
+function ChatAnnouncements.GuildStoreClose(eventCode)
+    eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    if ChatAnnouncements.SV.Inventory.Loot or ChatAnnouncements.SV.Inventory.LootShowDisguise then
+        eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, ChatAnnouncements.InventoryUpdate)
+    end
+    if not (ChatAnnouncements.SV.Inventory.Loot or ChatAnnouncements.SV.Inventory.LootShowDisguise) then
+        g_inventoryStacks = {}
+    end
+    zo_callLater(function() g_weAreInAStore = false g_weAreInAGuildStore = false end, 1000)
 end
 
 function ChatAnnouncements.FenceSuccess(eventCode, result)
@@ -4143,7 +4245,7 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                         ChatAnnouncements.ItemPrinter(removedIcon, change, removedItemType, removedItemId, removedItemLink, receivedBy, logPrefix, gainOrLoss, false, nil, true)
                     end
                 -- Check to see if the item was removed in dialogue and Quest Item turnin is on.
-            elseif g_talkingToNPC and not g_weAreInAStore and ChatAnnouncements.SV.Inventory.LootShowTurnIn then
+                elseif g_talkingToNPC and not g_weAreInAStore and ChatAnnouncements.SV.Inventory.LootShowTurnIn then
                     gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestTurnIn
                     zo_callLater(function()
@@ -4151,6 +4253,10 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                         ChatAnnouncements.ItemCounterDelay(removedIcon, change, removedItemType, removedItemId, removedItemLink, receivedBy, logPrefix, gainOrLoss, false, false, true, false)
                         end
                     end, 25)
+                elseif g_weAreInAGuildStore and ChatAnnouncements.SV.Inventory.LootShowList then
+                    gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageList
+                    g_savedItem = { icon = removedIcon, stack = change, itemLink = removedItemLink}
                 -- Check to see if the item was used
                 elseif not g_itemWasDestroyed and not g_talkingToNPC then
                     local flag -- When set to true we deliver a message on a zo_callLater
@@ -4193,7 +4299,7 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                         end, 25)
                     end
                 -- For any leftover cases for items removed.
-            elseif not g_itemWasDestroyed and g_removeableIDs[itemId] and ChatAnnouncements.SV.Inventory.LootShowRemove then
+                elseif not g_itemWasDestroyed and g_removeableIDs[itemId] and ChatAnnouncements.SV.Inventory.LootShowRemove then
                     gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageRemove
                     ChatAnnouncements.ItemPrinter(removedIcon, change, removedItemType, removedItemId, removedItemLink, receivedBy, logPrefix, gainOrLoss, false)
