@@ -439,10 +439,15 @@ function CombatInfo.SetupBackBarIcons(button, flip)
     local slotNum = button.slot.slotNum
     local slotId = GetSlotBoundId(slotNum - BACKBAR_INDEX_OFFSET, hotbarCategory)
 
-    -- Special case for Grim Focus, switch icon back so it doesn't get stuck
+    -- Special case for certain skills, so the proc icon doesn't get stuck.
     if slotId == 61907 then slotId = 61902 end -- Assassin's Will --> Grim Focus
     if slotId == 61932 then slotId = 61927 end -- Assassin's Scourge --> Relentless Focus
     if slotId == 61930 then slotId = 61919 end -- Assassin's Will --> Merciless Resolve
+    if slotId == 114716 then slotId = 46324 end -- Crystal Fragments --> Crystal Fragments
+    if slotId == 20824 then slotId = 20816 end -- Power Lash --> Flame Lash
+    if slotId == 35445 then slotId = 35441 end -- Shadow Image Teleport --> Shadow Image
+    if slotId == 126659 then slotId = 38910 end -- Flying Blade --> Flying Blade
+    if slotId == 130291 then slotId = 24165 end -- Bound Armaments --> Bound Armaments
 
     -- Check if something is in this action bar slot and if not hide the slot
     if slotId > 0 then
@@ -2091,7 +2096,7 @@ function CombatInfo.OnSlotUpdated(eventCode, slotNum)
     -- Update the slot if the bound id has a proc
     if slotNum >= BAR_INDEX_START and slotNum <= BAR_INDEX_END then
         local abilityId = GetSlotBoundId(slotNum)
-        if Effects.IsAbilityProc[abilityId] or Effects.BaseForAbilityProc[abilityId] or abilityId == 130291 then
+        if Effects.IsAbilityProc[abilityId] or Effects.BaseForAbilityProc[abilityId] then
             CombatInfo.BarSlotUpdate(slotNum, false, true)
         end
     end
