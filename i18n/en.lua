@@ -26,6 +26,16 @@ local strings = {
     SI_LUIE_DEFAULT_FRAME_BATTLEGROUND_SCORE =           "Battleground Score",
     SI_LUIE_DEFAULT_FRAME_LOOT_HISTORY =                 "Loot History",
     SI_LUIE_DEFAULT_FRAME_EQUIPMENT_STATUS =             "Equipment Status",
+    SI_LUIE_DEFAULT_FRAME_INFAMY_METER =                 "Infamy Meter",
+    SI_LUIE_DEFAULT_FRAME_TEL_VAR_METER =                "Tel Var Meter",
+    SI_LUIE_DEFAULT_FRAME_VOLENDRUNG_METER =             "Volendrung Meter",
+    SI_LUIE_DEFAULT_FRAME_ACTION_BAR =                   "Action Bar",
+    SI_LUIE_DEFAULT_FRAME_SUBTITLES =                    "Subtitles",
+    SI_LUIE_DEFAULT_FRAME_TUTORIALS =                    "Tutorials",
+    SI_LUIE_DEFAULT_FRAME_OBJECTIVE_METER =              "Objective &\nResurrection\nMeter",
+    SI_LUIE_DEFAULT_FRAME_PLAYER_INTERACTION =           "Player Interaction Prompt",
+    SI_LUIE_DEFAULT_FRAME_ACTIVE_COMBAT_TIPS =           "Active Combat Tips",
+    SI_LUIE_DEFAULT_FRAME_SYNERGY =                      "Synergy",
 
     -- Bindings
     SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Summon Banker (Tythis)",

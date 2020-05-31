@@ -2729,6 +2729,7 @@ LUIE.DebugAuras = {
 
     -- MISC
     [22706] = true, -- Remove Sprint
+    --[20311] = true, -- Remove Sprint
     [20303] = true, -- Remove Sprint
     [38519] = true, -- Hiding
     [39046] = true, -- Add Guild Rep

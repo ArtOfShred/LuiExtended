@@ -2713,24 +2713,30 @@ function ChatAnnouncements.OnBuybackItem(eventCode, itemName, quantity, money, i
     g_savedPurchase = { }
 end
 
-isCollectibleHorse = {
-    [GetCollectibleInfo(3)] = 3,
-    [GetCollectibleInfo(4)] = 4,
-    [GetCollectibleInfo(5)] = 5,
+local isShopCollectible = {
+    [GetCollectibleInfo(3)] = 3, -- Brown Paint Horse
+    [GetCollectibleInfo(4)] = 4, -- Bay Dun Horse
+    [GetCollectibleInfo(5)] = 5, -- Midnight Steed
+    --[GetCollectibleInfo(4673)] = 4673, -- Storage Coffer, Fortified (From level up rewards)
+    [GetCollectibleInfo(4674)] = 4674, -- Storage Chest, Fortified (Tel Var / Writ Vouchers)
+    [GetCollectibleInfo(4675)] = 4675, -- Storage Coffer, Oaken (Tel Var / Writ Vouchers)
+    [GetCollectibleInfo(4676)] = 4676, -- Storage Coffer, Secure (Tel Var / Writ Vouchers)
+    [GetCollectibleInfo(4677)] = 4677, -- Storage Coffer, Sturdy (Tel Var / Writ Vouchers)
+    [GetCollectibleInfo(4678)] = 4678, -- Storage Chest, Oaken (Tel Var / Writ Vouchers)
+    [GetCollectibleInfo(4679)] = 4679, -- Storage Chest, Secure (Tel Var / Writ Vouchers)
+    [GetCollectibleInfo(4680)] = 4680, -- Storage Chest, Sturdy (Tel Var / Writ Vouchers)
 }
 
 function ChatAnnouncements.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCurrencyType1, specialCurrencyInfo1, specialCurrencyQuantity1, specialCurrencyType2, specialCurrencyInfo2, specialCurrencyQuantity2, itemSoundCategory)
     local itemIcon
-
-    d(itemName)
-    d(entryType)
-
-    if isCollectibleHorse[itemName] then
-        local id = isCollectibleHorse[itemName]
-        itemName = GetCollectibleLink(id, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
-        _, _, itemIcon = GetCollectibleInfo(id)
-    else
-        itemIcon,_,_,_,_ = GetItemLinkInfo(itemName)
+    if entryType == STORE_ENTRY_TYPE_COLLECTIBLE then
+        if isShopCollectible[itemName] then
+            local id = isShopCollectible[itemName]
+            itemName = GetCollectibleLink(id, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+            _, _, itemIcon = GetCollectibleInfo(id)
+        else
+            itemIcon,_,_,_,_ = GetItemLinkInfo(itemName)
+        end
     end
 
     local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
@@ -3703,6 +3709,7 @@ local function DisplayQuestItem(itemId, stackCount, icon, reset)
 end
 
 function ChatAnnouncements.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound, lootType, lootedBySelf, isPickpocketLoot, questItemIcon, itemId, isStolen)
+
     -- If the player loots an item
     if not isPickpocketLoot and lootedBySelf then
         g_isLooted = true
@@ -3742,6 +3749,13 @@ function ChatAnnouncements.OnLootReceived(eventCode, receivedBy, itemLink, quant
         local gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
         local logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageGroup
 
+        local formattedItemLink
+        if ChatAnnouncements.SV.BracketOptionItem == 1 then
+            formattedItemLink = itemLink
+        else
+            formattedItemLink = ( itemLink:gsub("^|H0", "|H1", 1) )
+        end
+
         local formatName = zo_strformat(SI_UNIT_NAME, receivedBy)
 
         local recipient
@@ -3756,7 +3770,7 @@ function ChatAnnouncements.OnLootReceived(eventCode, receivedBy, itemLink, quant
             end
             recipient = ZO_SELECTED_TEXT:Colorize(nameLink)
         end
-        ChatAnnouncements.ItemPrinter(icon, quantity, itemType, itemId, itemLink, recipient, logPrefix, gainOrLoss, false, true)
+        ChatAnnouncements.ItemPrinter(icon, quantity, itemType, itemId, formattedItemLink, recipient, logPrefix, gainOrLoss, false, true)
     end
 end
 

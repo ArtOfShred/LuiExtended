@@ -1706,6 +1706,7 @@ Effects.AddNameAura = {
     [Unitnames.Dummy_Target_Voriplasm] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_Wraith_of_Crows] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_The_Precursor] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Target_Stone_Husk] = { [1] = { id = 33097 } },
 
     -- Various Mobs
     [Unitnames.NPC_Daedroth] = { [1] = { id = 999013, zone = 935 } }, -- Daedroth
@@ -4834,7 +4835,7 @@ Effects.EffectOverride = {
     [20806] = { tooltip = Abilities.Skill_Molten_Whip, unbreakable = 1 }, -- Off Balance (Molten Whip)
     [122658] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_seething_fury.dds', tooltip = Tooltips.Skill_Seething_Fury }, -- Seething Fury (Molten Whip)
     [34117] = { tooltip = Abilities.Skill_Flame_Lash, unbreakable = 1 }, -- Off Balance (Flame Lash)
-    [20824] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds' }, -- Power Lash (Flame Lash)
+    [20824] = { icon = 'esoui/art/icons/ability_dragonknight_001_a.dds' }, -- Power Lash (Flame Lash)
     [23105] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds', tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Power Lash (Flame Lash)
 
     -- Searing Strike / Venomous Claw /Burning Embers
@@ -5146,7 +5147,7 @@ Effects.EffectOverride = {
     [108939] = { tooltip = Abilities.Skill_Corrosive_Spin }, -- Minor Maim (Dark Shade)
 
     [38528] = { hide = true, tooltip = Tooltips.Skill_Shadow_Image }, -- Shadow (Shadow Image)
-    [35445] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_shadow_image_teleport.dds' }, -- Shadow Image Teleport (Shadow Image)
+    [35445] = { icon = 'esoui/art/icons/ability_nightblade_001_b.dds' }, -- Shadow Image Teleport (Shadow Image)
     [51556] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_nightblade_corrode_ranged.dds' }, -- Corrosive Arrow (Shadow Image)
     [51558] = { tooltip = Abilities.Skill_Corrosive_Arrow }, -- Minor Maim (Shadow Image)
 
@@ -6318,7 +6319,7 @@ Effects.EffectOverride = {
     [126651] = { tooltip = Tooltips.Generic_Stun, name = Abilities.Skill_Shrouded_Daggers }, -- Shrouded Daggers (Shrouded Daggers)
 
     [126667] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_flying_blade_jump.dds', tooltip = Tooltips.Skill_Flying_Blade }, -- Flying Blade (Flying Blade)
-    [126659] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_flying_blade_jump.dds' }, -- Flying Blade (Flying Blade)
+    [126659] = { icon = 'esoui/art/icons/ability_dualwield_003_a.dds' }, -- Flying Blade (Flying Blade)
     [126666] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_flying_blade_jump.dds' }, -- Flying Blade (Flying Blade)
     [126670] = { consolidateExtra = true, tooltip = Abilities.Skill_Flying_Blade }, -- Major Brutality (Flying Blade)
     [126658] = { icon = '' }, -- Flying Blade (Flying Blade)

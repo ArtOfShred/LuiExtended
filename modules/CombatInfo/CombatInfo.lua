@@ -317,6 +317,9 @@ local function OnSwapAnimationHalfDone(animation, button)
             if i < 8 then
                 CombatInfo.SetupBackBarIcons(targetButton, true)
             end
+            if i == 8 then
+                CombatInfo.UpdateUltimateLabel()
+            end
             slotsUpdated[i] = true
         end
     end
@@ -1981,7 +1984,7 @@ function CombatInfo.OnSlotUpdated(eventCode, slotNum)
 
     -- Update ultimate label
     if slotNum == 8 then
-        CombatInfo.UpdateUltimateLabel(eventCode)
+        CombatInfo.UpdateUltimateLabel()
     end
 
     -- Update the slot if the bound id has a proc
@@ -2152,26 +2155,13 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
 
 end
 
-function CombatInfo.UpdateUltimateLabel(eventCode)
-    -- Handle ultimate label first
-    local setHiddenLabel = not (CombatInfo.SV.UltimateLabelEnabled and IsSlotUsed(g_ultimateSlot))
-    local setHiddenPct = not (CombatInfo.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot))
-
-    uiUltimate.LabelVal:SetHidden(setHiddenLabel)
-    if setHiddenPct then
-        uiUltimate.LabelPct:SetHidden(true)
-    end
-
+function CombatInfo.UpdateUltimateLabel()
     -- Get the currently slotted ultimate cost
     local cost, mechType = GetSlotAbilityCost(g_ultimateSlot)
-
     g_ultimateCost = (mechType == POWERTYPE_ULTIMATE) and cost or 0
 
-    -- if this event was caused only by user manually changing the ultimate ability, then
-    -- force recalculation of percent value. Otherwise (weapons swap) this will be called by the game
-    if ((eventCode == EVENT_ACTION_SLOT_UPDATED or EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED or EVENT_ACTION_SLOTS_ALL_HOTBARS_UPDATED) and not setHidden) then
-        CombatInfo.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, "player", nil, POWERTYPE_ULTIMATE, g_ultimateCurrent, 0, 0)
-    end
+    -- Update ultimate label
+    CombatInfo.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, "player", nil, POWERTYPE_ULTIMATE, g_ultimateCurrent, 0, 0)
 end
 
 function CombatInfo.InventoryItemUsed()
@@ -2195,7 +2185,7 @@ end
 
 function CombatInfo.OnSlotsFullUpdate(eventCode)
     -- Handle ultimate label first
-    CombatInfo.UpdateUltimateLabel(eventCode)
+    CombatInfo.UpdateUltimateLabel()
 
     -- Don't update bars if this full update event was from using an inventory item
     if g_potionUsed == true then return end
@@ -2332,25 +2322,26 @@ function CombatInfo.OnPowerUpdatePlayer(eventCode , unitTag, powerIndex, powerTy
     uiUltimate.NotFull = (powerValue < powerMax)
     -- Calculate the percentage to activation old one and current
     local pct = (g_ultimateCost > 0) and math.floor((powerValue / g_ultimateCost) * 100 ) or 0
-    -- Update the tooltip only when corresponding setting is enabled
-    if CombatInfo.SV.UltimateLabelEnabled or CombatInfo.SV.UltimatePctEnabled then
-        if IsSlotUsed(g_ultimateSlot) then
-            -- Values label: Set Value and assign colour
-            -- Pct label: show always when less then 100% and possibly if UltimateHideFull is false
-            if CombatInfo.SV.UltimateLabelEnabled then
-                uiUltimate.LabelVal:SetText(powerValue .. "/" .. g_ultimateCost)
-            end
+    -- Update the tooltip only when the slot is used and percentage is enabled
+    if IsSlotUsed(g_ultimateSlot) then
+        if CombatInfo.SV.UltimateLabelEnabled or CombatInfo.SV.UltimatePctEnabled then
+            -- Set % value
             if CombatInfo.SV.UltimatePctEnabled then
                 uiUltimate.LabelPct:SetText(pct .. "%")
             end
+            -- Set label value
+            if CombatInfo.SV.UltimateLabelEnabled then
+                uiUltimate.LabelVal:SetText(powerValue .. "/" .. g_ultimateCost)
+            end
+            -- Pct label: show always when less then 100% and possibly if UltimateHideFull is false
             if pct < 100  then
-                if CombatInfo.SV.UltimatePctEnabled then
-                    local setHidden = false
-                    if (CombatInfo.SV.ShowToggledUltimate and g_uiCustomToggle[8] and not g_uiCustomToggle[8]:IsHidden()) then
-                        setHidden = true
-                    end
-                    uiUltimate.LabelPct:SetHidden(setHidden)
+                -- Check Ultimate Percent Setting & if slot is used then check if the slot is currently showing a toggle
+                local setHiddenPct = not CombatInfo.SV.UltimatePctEnabled
+                if (CombatInfo.SV.ShowToggledUltimate and g_uiCustomToggle[8] and not g_uiCustomToggle[8]:IsHidden()) then
+                    setHiddenPct = true
                 end
+                uiUltimate.LabelPct:SetHidden(setHiddenPct)
+                -- Update Label Color
                 if CombatInfo.SV.UltimateLabelEnabled then
                     for i = #(uiUltimate.pctColours), 1, -1 do
                         if pct < uiUltimate.pctColours[i].pct then
@@ -2360,18 +2351,24 @@ function CombatInfo.OnPowerUpdatePlayer(eventCode , unitTag, powerIndex, powerTy
                     end
                 end
             else
-                local setHidden = false
+                -- Check Ultimate Percent Setting & if slot is used then check if the slot is currently showing a toggle
+                local setHiddenPct = not (CombatInfo.SV.UltimatePctEnabled)
                 if (CombatInfo.SV.ShowToggledUltimate and g_uiCustomToggle[8] and not g_uiCustomToggle[8]:IsHidden()) or CombatInfo.SV.UltimateHideFull then
-                    setHidden = true
+                    setHiddenPct = true
                 end
-                if CombatInfo.SV.UltimatePctEnabled then
-                    uiUltimate.LabelPct:SetHidden(setHidden)
-                end
+                uiUltimate.LabelPct:SetHidden(setHiddenPct)
+                -- Update Label Color
                 if CombatInfo.SV.UltimateLabelEnabled then
                     uiUltimate.LabelVal:SetColor(unpack(uiUltimate.colour))
                 end
             end
+            -- Set label hidden or showing
+            local setHiddenLabel = not CombatInfo.SV.UltimateLabelEnabled
+            uiUltimate.LabelVal:SetHidden(setHiddenLabel)
         end
+    else
+        uiUltimate.LabelPct:SetHidden(true)
+        uiUltimate.LabelVal:SetHidden(true)
     end
     -- Update stored value
     g_ultimateCurrent = powerValue

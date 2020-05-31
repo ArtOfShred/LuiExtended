@@ -30,6 +30,7 @@ LUIE.Data.UnitNames = {
     Dummy_Target_Voriplasm                      = GetItemLinkName("|H0:item:146069:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Dummy_Target_Wraith_of_Crows                = GetItemLinkName("|H0:item:141778:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Dummy_Target_The_Precursor                  = GetItemLinkName("|H0:item:132348:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Dummy_Target_Stone_Husk                     = GetItemLinkName("|H0:item:166960:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
 
     ----------------------------------------------------------------
     -- CYORDIIL GUARD NAMES ----------------------------------------

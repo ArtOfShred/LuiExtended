@@ -47,6 +47,9 @@ end
 local function LoadScreen()
     eventManager:UnregisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED)
 
+    -- Set Positions for moved Default UI elements
+    LUIE.SetElementPosition()
+
     if not LUIE.SV.StartupInfo then
         LUIE.PrintToChat(zo_strformat("|cFFFFFF<<1>> by|r |c00C000<<2>>|r |cFFFFFFv<<3>>|r", LUIE.name, LUIE.author, LUIE.version), true)
     end
@@ -79,8 +82,6 @@ local function OnAddonOnLoaded(eventCode, addonName)
 
     -- Initialize Hooks
     LUIE.InitializeHooks()
-    -- Set Positions for moved Default UI elements
-    LUIE.SetElementPosition()
 
     LUIE.PlayerNameRaw = GetRawUnitName("player")
     LUIE.PlayerNameFormatted = zo_strformat(SI_UNIT_NAME, GetUnitName("player"))
