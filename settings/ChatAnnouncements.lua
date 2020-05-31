@@ -1322,7 +1322,7 @@ function ChatAnnouncements.CreateSettings()
                 getFunc = function() return unpack(Settings.Currency.CurrencyColor) end,
                 setFunc = function(r, g, b, a) Settings.Currency.CurrencyColor = { r, g, b, a } ChatAnnouncements.RegisterColorEvents() end,
                 width = "full",
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable or Settings.Currency.CurrencyContextColor end,
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = {r=Defaults.Currency.CurrencyColor[1], g=Defaults.Currency.CurrencyColor[2], b=Defaults.Currency.CurrencyColor[3]}
             },
             {
@@ -1356,6 +1356,20 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function() return not (Settings.Currency.CurrencyContextColor and LUIE.SV.ChatAnnouncements_Enable) end,
                 default = {r=Defaults.Currency.CurrencyColorDown[1], g=Defaults.Currency.CurrencyColorDown[2], b=Defaults.Currency.CurrencyColorDown[3]}
             },
+            {
+                -- Use Generic Color for Merged Transactions
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_COLOR_CONTEXT_MERGED),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_COLOR_CONTEXT_MERGED_TP),
+                getFunc = function() return Settings.Currency.CurrencyContextMergedColor end,
+                setFunc = function(value) Settings.Currency.CurrencyContextMergedColor = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.Currency.CurrencyContextMergedColor,
+            },
+
+
+
             {
                 -- Context Messages Header
                 type = "header",

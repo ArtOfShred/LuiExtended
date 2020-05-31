@@ -1068,6 +1068,7 @@ Effects.BarHighlightCheckOnFade = {
 
     -- Sorcerer
     [24165] = { id1 = 24165, unitTag = "player" }, -- Bound Armaments
+    --[130291] = { id1 = 24165, unitTag = "player" }, -- Bound Armaments
 
     -- Warden
     [130139] = { id1 = 130140, id2 = 130139, unitTag = "reticleover" }, -- Off-Balance --> Cutting Dive / Off-Balance
@@ -1252,6 +1253,7 @@ Effects.BarHighlightOverride = {
     [23634] = { newId = 80459 }, -- Summon Storm Atronach
     [23492] = { newId = 80463 }, -- Greater Storm Atronach
     [23495] = { newId = 80468 }, -- Summon Charged Atronach
+    --[130291] = { newId = 24165 }, -- Bound Armaments
 
     -- Storm Calling
     [18718] = { newId = 18746 }, -- Mages' Fury

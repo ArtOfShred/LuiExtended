@@ -348,6 +348,7 @@ ChatAnnouncements.Defaults = {
         CurrencyColorDown               = { 0.7, 0, 0, 1 },
         CurrencyColorUp                 = { 0.043137, 0.380392, 0.043137, 1 },
         CurrencyContextColor            = true,
+        CurrencyContextMergedColor      = false,
         CurrencyGoldChange              = true,
         CurrencyGoldColor               = { 1, 1, 0.2, 1 },
         CurrencyGoldFilter              = 0,
@@ -2675,6 +2676,9 @@ end
 
 function ChatAnnouncements.OnBuybackItem(eventCode, itemName, quantity, money, itemSound)
     local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+    if ChatAnnouncements.SV.Inventory.LootVendorCurrency and ChatAnnouncements.SV.Currency.CurrencyContextMergedColor then
+        changeColor = CurrencyColorize:ToHex()
+    end
     local itemIcon,_,_,_,_ = GetItemLinkInfo(itemName)
     local icon = itemIcon
     local formattedIcon = ( ChatAnnouncements.SV.Inventory.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
@@ -2740,6 +2744,9 @@ function ChatAnnouncements.OnBuyItem(eventCode, itemName, entryType, quantity, m
     end
 
     local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+    if ChatAnnouncements.SV.Inventory.LootVendorCurrency and ChatAnnouncements.SV.Currency.CurrencyContextMergedColor then
+        changeColor = CurrencyColorize:ToHex()
+    end
     local icon = itemIcon
     local formattedIcon = ( ChatAnnouncements.SV.Inventory.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
     local type = "LUIE_CURRENCY_VENDOR"
@@ -2780,6 +2787,9 @@ end
 
 function ChatAnnouncements.OnSellItem(eventCode, itemName, quantity, money)
     local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyUpColorize:ToHex() or CurrencyColorize:ToHex()
+    if ChatAnnouncements.SV.Inventory.LootVendorCurrency and ChatAnnouncements.SV.Currency.CurrencyContextMergedColor then
+        changeColor = CurrencyColorize:ToHex()
+    end
     local itemIcon,_,_,_,_ = GetItemLinkInfo(itemName)
     local icon = itemIcon
     local formattedIcon = ( ChatAnnouncements.SV.Inventory.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
@@ -2837,6 +2847,9 @@ function ChatAnnouncements.TradingHouseResponseReceived(eventCode, TradingHouseR
     end
 
     local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+    if ChatAnnouncements.SV.Inventory.LootVendorCurrency and ChatAnnouncements.SV.Currency.CurrencyContextMergedColor then
+        changeColor = CurrencyColorize:ToHex()
+    end
     local type = "LUIE_CURRENCY_VENDOR"
     local messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageListingValue
 
@@ -5274,6 +5287,9 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
                 logPrefix = ChatAnnouncements.SV.Inventory.LootVendorCurrency and ChatAnnouncements.SV.ContextMessages.CurrencyMessageLaunder or ChatAnnouncements.SV.ContextMessages.CurrencyMessageLaunderNoV
                 if not g_weAreInAStore and ChatAnnouncements.SV.Inventory.Loot then
                     local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+                    if ChatAnnouncements.SV.Inventory.LootVendorCurrency and ChatAnnouncements.SV.Currency.CurrencyContextMergedColor then
+                        changeColor = CurrencyColorize:ToHex()
+                    end
                     local type = "LUIE_CURRENCY_VENDOR"
 
                     local parts = {ZO_LinkHandler_ParseLink(itemLink)}
@@ -5321,6 +5337,9 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
                     gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
                     logPrefix = ChatAnnouncements.SV.Inventory.LootVendorCurrency and ChatAnnouncements.SV.ContextMessages.CurrencyMessageLaunder or ChatAnnouncements.SV.ContextMessages.CurrencyMessageLaunderNoV
                     local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+                    if ChatAnnouncements.SV.Inventory.LootVendorCurrency and ChatAnnouncements.SV.Currency.CurrencyContextMergedColor then
+                        changeColor = CurrencyColorize:ToHex()
+                    end
                     local type = "LUIE_CURRENCY_VENDOR"
 
                     local parts = {ZO_LinkHandler_ParseLink(itemLink)}
@@ -5374,6 +5393,9 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
         if not g_weAreInAStore and ChatAnnouncements.SV.Inventory.Loot then
             local change = stackCountChange > 0 and stackCountChange or stackCountChange*-1
             local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+            if ChatAnnouncements.SV.Inventory.LootVendorCurrency and ChatAnnouncements.SV.Currency.CurrencyContextMergedColor then
+                changeColor = CurrencyColorize:ToHex()
+            end
             local type = "LUIE_CURRENCY_VENDOR"
 
             local parts = {ZO_LinkHandler_ParseLink(itemLink)}

@@ -238,6 +238,7 @@ local g_triggeredSlotsRemain  = {} -- Table of remaining durations on proc abili
 local g_toggledSlotsBack      = {} -- Toggled bar highlight slots
 local g_toggledSlotsFront     = {} -- Toggled bar highlight slots
 local g_toggledSlotsRemain    = {} -- Table of remaining durations on active abilities
+local g_toggledSlotsStack     = {} -- Table of stacks for active abilities
 local g_toggledSlotsPlayer    = {} -- Table of abilities that target the player (bar highlight doesn't fade on reticleover change)
 local g_potionUsed            = false -- Toggled on when a potion is used to prevent OnSlotsFullUpdate from updating timers.
 local g_barOverrideCI         = {} -- Table for storing abilityId's from Effects.BarHighlightOverride that should show as an aura
@@ -303,6 +304,21 @@ local KEYBOARD_CONSTANTS =
 {
     abilitySlotOffsetX = 2,
     ultimateSlotOffsetX = 62,
+}
+
+
+local isStackCounter = {
+    [61905] = true, -- Grim Focus
+    [61928] = true, -- Relentless Focus
+    [61920] = true, -- Merciless Resolve
+    [130293] = true, -- Bound Armaments
+}
+
+local isStackBaseAbility = {
+    [61902] = true, -- Grim Focus
+    [61927] = true, -- Relentless Focus
+    [61919] = true, -- Merciless Resolve
+    [24165] = true, -- Bound Armaments
 }
 
 local slotsUpdated = {}
@@ -592,6 +608,7 @@ function CombatInfo.UpdateBarHighlightTables()
     g_toggledSlotsFront         = {}
     g_toggledSlotsBack          = {}
     g_toggledSlotsRemain        = {}
+    g_toggledSlotsStack         = {}
     g_toggledSlotsPlayer        = {}
     g_barOverrideCI             = {}
     g_barFakeAura               = {}
@@ -773,13 +790,13 @@ function CombatInfo.OnUpdate(currentTime)
         end
 
         -- Update Label (FRONT)
-        if g_triggeredSlotsFront[k] and g_uiProcAnimation[g_triggeredSlotsFront[k]] and g_triggeredSlotsRemain[k] and k ~= 130293 then
+        if g_triggeredSlotsFront[k] and g_uiProcAnimation[g_triggeredSlotsFront[k]] and g_triggeredSlotsRemain[k] then
             if CombatInfo.SV.BarShowLabel then
                 g_uiProcAnimation[g_triggeredSlotsFront[k]].procLoopTexture.label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain/1000))
             end
         end
         -- Update Label (BACK)
-        if g_triggeredSlotsBack[k] and g_uiProcAnimation[g_triggeredSlotsBack[k]] and g_triggeredSlotsRemain[k] and k ~= 130293 then
+        if g_triggeredSlotsBack[k] and g_uiProcAnimation[g_triggeredSlotsBack[k]] and g_triggeredSlotsRemain[k] then
             if CombatInfo.SV.BarShowLabel then
                 g_uiProcAnimation[g_triggeredSlotsBack[k]].procLoopTexture.label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain/1000))
             end
@@ -800,6 +817,7 @@ function CombatInfo.OnUpdate(currentTime)
                 CombatInfo.HideSlot(slotNum, k)
             end
             g_toggledSlotsRemain[k] = nil
+            g_toggledSlotsStack[k] = nil
         end
 
         -- Update Label (FRONT)
@@ -955,6 +973,7 @@ function CombatInfo.ApplyFont()
 
     for k, _ in pairs(g_uiCustomToggle) do
         g_uiCustomToggle[k].label:SetFont(g_barFont)
+        g_uiCustomToggle[k].stack:SetFont(g_barFont)
     end
 
     -- Setup Potion Timer Font
@@ -1098,6 +1117,7 @@ function CombatInfo.OnReticleTargetChanged(eventCode)
                 CombatInfo.HideSlot(slotNum, k)
             end
             g_toggledSlotsRemain[k] = nil
+            g_toggledSlotsStack[k] = nil
             if Effects.BarHighlightCheckOnFade[k] then
                 CombatInfo.BarHighlightSwap(k)
             end
@@ -1225,6 +1245,7 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                             end
                         end
                         g_toggledSlotsRemain[abilityId] = nil
+                        g_toggledSlotsStack[abilityId] = nil
                     end
                 else
                     -- Ignore fading event if override is true
@@ -1241,6 +1262,7 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                         end
                     end
                     g_toggledSlotsRemain[abilityId] = nil
+                    g_toggledSlotsStack[abilityId] = nil
                 end
             end
         elseif changeType == EFFECT_RESULT_GAINED then
@@ -1269,6 +1291,7 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                 local currentTime = GetGameTimeMilliseconds()
                 if g_toggledSlotsFront[abilityId] or g_toggledSlotsBack[abilityId] then
                     g_toggledSlotsRemain[abilityId] = 1000 * endTime
+                    g_toggledSlotsStack[abilityId] = stackCount
                     if g_toggledSlotsFront[abilityId] then
                         local slotNum = g_toggledSlotsFront[abilityId]
                         CombatInfo.ShowSlot(slotNum, abilityId, currentTime, false)
@@ -1303,6 +1326,30 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
     end
 
     if changeType == EFFECT_RESULT_FADED then -- delete Effect
+
+        -- Remove stacks when Grim Focus ends
+        if isStackCounter[abilityId] then
+            for k, v in pairs(isStackBaseAbility) do
+                g_toggledSlotsStack[k] = nil
+                if g_toggledSlotsFront[k] or g_toggledSlotsBack[k] then
+                    if CombatInfo.SV.ShowToggled and CombatInfo.SV.BarShowLabel then
+                        if g_toggledSlotsFront[k] then
+                            local slotNum = g_toggledSlotsFront[k]
+                            if g_uiCustomToggle[slotNum] then
+                                g_uiCustomToggle[slotNum].stack:SetText("")
+                            end
+                        end
+                        if g_toggledSlotsBack[k] then
+                            local slotNum = g_toggledSlotsBack[k]
+                            if g_uiCustomToggle[slotNum] then
+                                g_uiCustomToggle[slotNum].stack:SetText("")
+                            end
+                        end
+                    end
+                end
+            end
+        end
+
         -- Ignore fading event if override is true
         if g_barNoRemove[abilityId] then return end
 
@@ -1327,6 +1374,10 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                 CombatInfo.HideSlot(slotNum, abilityId)
             end
             g_toggledSlotsRemain[abilityId] = nil
+            -- Don't modify stacks for Grim Focus since we use the actual stack ids to handle this
+            if not isStackBaseAbility[abilityId] then
+                g_toggledSlotsStack[abilityId] = nil
+            end
         end
 
         if Effects.BarHighlightCheckOnFade[abilityId] and castByPlayer == 1 then
@@ -1335,36 +1386,41 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
     else
         -- Also create visual enhancements from skill bar
         if castByPlayer == COMBAT_UNIT_TYPE_PLAYER then
+            -- Handle proc sound for Bound Armaments
+            if abilityId == 130293 then
+                if CombatInfo.SV.ShowTriggered and CombatInfo.SV.ProcEnableSound then
+                    if stackCount ~= 4 then
+                        g_boundArmamentsPlayed = false
+                    end
+                    if stackCount == 4 and not g_boundArmamentsPlayed then
+                        PlaySound(g_procSound)
+                        PlaySound(g_procSound)
+                        g_boundArmamentsPlayed = true
+                    end
+                end
+            end
             -- start any proc animation associated with this effect
             if g_triggeredSlotsFront[abilityId] or g_triggeredSlotsBack[abilityId] then
                 local currentTime = GetGameTimeMilliseconds()
                 if CombatInfo.SV.ShowTriggered then
                     -- Play sound twice so its a little louder.
                     if CombatInfo.SV.ProcEnableSound and unitTag == "player" and g_triggeredSlotsFront[abilityId] then
-                        if abilityId == 130293 and stackCount ~= 4 then
-                            g_boundArmamentsPlayed = false
-                        end
-                        if abilityId ~= 130293 or (abilityId == 130293 and stackCount == 4 and not g_boundArmamentsPlayed) then
-                            PlaySound(g_procSound)
-                            PlaySound(g_procSound)
-                            if abilityId == 130293 then
-                                g_boundArmamentsPlayed = true
-                            end
-                        end
+                        PlaySound(g_procSound)
+                        PlaySound(g_procSound)
                     end
                     g_triggeredSlotsRemain[abilityId] = 1000 * endTime
                     local remain = g_triggeredSlotsRemain[abilityId] - currentTime
                     -- Front
                     if g_triggeredSlotsFront[abilityId] then
                         CombatInfo.PlayProcAnimations(g_triggeredSlotsFront[abilityId])
-                        if CombatInfo.SV.BarShowLabel and g_uiProcAnimation[g_triggeredSlotsFront[abilityId]] and abilityId ~= 130293 then
+                        if CombatInfo.SV.BarShowLabel and g_uiProcAnimation[g_triggeredSlotsFront[abilityId]] then
                             g_uiProcAnimation[g_triggeredSlotsFront[abilityId]].procLoopTexture.label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
                         end
                     end
                     -- Back
                     if g_triggeredSlotsBack[abilityId] then
                         CombatInfo.PlayProcAnimations(g_triggeredSlotsBack[abilityId])
-                        if CombatInfo.SV.BarShowLabel and g_uiProcAnimation[g_triggeredSlotsBack[abilityId]] and abilityId ~= 130293 then
+                        if CombatInfo.SV.BarShowLabel and g_uiProcAnimation[g_triggeredSlotsBack[abilityId]] then
                             g_uiProcAnimation[g_triggeredSlotsBack[abilityId]].procLoopTexture.label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
                         end
                     end
@@ -1375,6 +1431,10 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                 local currentTime = GetGameTimeMilliseconds()
                 if CombatInfo.SV.ShowToggled then
                     g_toggledSlotsRemain[abilityId] = 1000 * endTime
+                    -- Don't modify stacks for Grim Focus since we use the actual stack ids to handle this
+                    if not isStackBaseAbility[abilityId] then
+                        g_toggledSlotsStack[abilityId] = stackCount
+                    end
                     if g_toggledSlotsFront[abilityId] then
                         local slotNum = g_toggledSlotsFront[abilityId]
                         CombatInfo.ShowSlot(slotNum, abilityId, currentTime, false)
@@ -1385,6 +1445,41 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                     end
                 end
             end
+
+            -- Set stack count when Grim Focus duration buff changes
+            if isStackCounter[abilityId] then
+                for i = 1, GetNumBuffs(unitTag) do
+                    local _, _, _, _, _, _, _, _, _, _, abilityId = GetUnitBuffInfo(unitTag, i)
+                    if isStackBaseAbility[abilityId] then
+                        g_toggledSlotsStack[abilityId] = stackCount
+                        if g_toggledSlotsFront[abilityId] or g_toggledSlotsBack[abilityId] then
+                            if CombatInfo.SV.ShowToggled and CombatInfo.SV.BarShowLabel then
+                                if g_toggledSlotsFront[abilityId] then
+                                    local slotNum = g_toggledSlotsFront[abilityId]
+                                    if g_uiCustomToggle[slotNum] then
+                                        if g_toggledSlotsStack[abilityId] and g_toggledSlotsStack[abilityId] > 0 then
+                                            g_uiCustomToggle[slotNum].stack:SetText(g_toggledSlotsStack[abilityId])
+                                        else
+                                            g_uiCustomToggle[slotNum].stack:SetText("")
+                                        end
+                                    end
+                                end
+                                if g_toggledSlotsBack[abilityId] then
+                                    local slotNum = g_toggledSlotsBack[abilityId]
+                                    if g_uiCustomToggle[slotNum] then
+                                        if g_toggledSlotsStack[abilityId] and g_toggledSlotsStack[abilityId] > 0 then
+                                            g_uiCustomToggle[slotNum].stack:SetText(g_toggledSlotsStack[abilityId])
+                                        else
+                                            g_uiCustomToggle[slotNum].stack:SetText("")
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+
         end
     end
 end
@@ -1417,6 +1512,11 @@ function CombatInfo.ShowSlot(slotNum, abilityId, currentTime, desaturate)
         if not g_uiCustomToggle[slotNum] then return end
         local remain = g_toggledSlotsRemain[abilityId] - currentTime
         g_uiCustomToggle[slotNum].label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
+        if g_toggledSlotsStack[abilityId] and g_toggledSlotsStack[abilityId] > 0 then
+            g_uiCustomToggle[slotNum].stack:SetText(g_toggledSlotsStack[abilityId])
+        else
+            g_uiCustomToggle[slotNum].stack:SetText("")
+        end
     end
 end
 
@@ -1973,6 +2073,7 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
                 CombatInfo.HideSlot(slotNum, abilityId)
             end
             g_toggledSlotsRemain[abilityId] = nil
+            g_toggledSlotsStack[abilityId] = nil
         end
         if Effects.BarHighlightCheckOnFade[abilityId] and targetType == COMBAT_UNIT_TYPE_PLAYER then
             CombatInfo.BarHighlightSwap(abilityId)
@@ -1990,7 +2091,7 @@ function CombatInfo.OnSlotUpdated(eventCode, slotNum)
     -- Update the slot if the bound id has a proc
     if slotNum >= BAR_INDEX_START and slotNum <= BAR_INDEX_END then
         local abilityId = GetSlotBoundId(slotNum)
-        if Effects.IsAbilityProc[abilityId] or Effects.BaseForAbilityProc[abilityId] then
+        if Effects.IsAbilityProc[abilityId] or Effects.BaseForAbilityProc[abilityId] or abilityId == 130291 then
             CombatInfo.BarSlotUpdate(slotNum, false, true)
         end
     end
@@ -2112,7 +2213,7 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
          if g_triggeredSlotsRemain[proc] then
             if CombatInfo.SV.ShowTriggered then
                 CombatInfo.PlayProcAnimations(slotNum)
-                if CombatInfo.SV.BarShowLabel and ability_id ~= 130293 then
+                if CombatInfo.SV.BarShowLabel then
                     if not g_uiProcAnimation[slotNum] then return end
                     local remain = g_triggeredSlotsRemain[proc] - currentTime
                     g_uiProcAnimation[slotNum].procLoopTexture.label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
@@ -2305,6 +2406,18 @@ function CombatInfo.ShowCustomToggle(slotNum)
             toggleFrame.label:SetDrawTier(3)
             toggleFrame.label:SetColor(unpack(CombatInfo.SV.RemainingTextColoured and colour or {1,1,1,1}))
             toggleFrame.label:SetHidden(false)
+
+            toggleFrame.stack = UI.Label(toggleFrame, nil, nil, nil, g_barFont, nil, false)
+            toggleFrame.stack:SetAnchor(CENTER, actionButton.slot, BOTTOMLEFT)
+            toggleFrame.stack:SetAnchor(CENTER, actionButton.slot, TOPRIGHT, -12, 14)
+            --toggleFrame.stack:SetAnchor(TOPLEFT, actionButton.slot)
+            --toggleFrame.stack:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 22, -22)
+
+            toggleFrame.stack:SetDrawLayer(DL_COUNT)
+            toggleFrame.stack:SetDrawLevel(1)
+            toggleFrame.stack:SetDrawTier(3)
+            toggleFrame.stack:SetColor(unpack(CombatInfo.SV.RemainingTextColoured and colour or {1,1,1,1}))
+            toggleFrame.stack:SetHidden(false)
 
             g_uiCustomToggle[slotNum] = toggleFrame
         end
