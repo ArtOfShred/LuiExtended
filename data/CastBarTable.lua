@@ -276,7 +276,6 @@ CastBarTable.CastChannelOverride = {
     [125817] = true, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
 
     -- Vampire
-    --[33175] = true, -- Feed (Vampire)
     [40350] = true, -- Feed (Vampire - Bite Player)
 
     ----------------------------------------------------------------
@@ -415,9 +414,17 @@ CastBarTable.CastDurationFix = {
     [125816] = 10000, -- Maarselok Corruption Memento (Corruption of Maarselok)
     [125817] = 5000, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
 
-    -- Vampire / Werewolf
-    --[33175] = 6300, -- Feed (Vampire)
-    [40350] = 5300, -- Feed (Vampire - Bite Player)
+    -- Vampire
+    [40350] = 22500, -- Feed (Vampire - Bite Player)
+
+    [138565] = 1200, -- Blood Scion (Vampire)
+    [138568] = 1200, -- Blood Scion (Vampire)
+    [138614] = 1200, -- Swarming Scion (Vampire)
+    [138615] = 1200, -- Swarming Scion (Vampire)
+    [138618] = 1200, -- Perfect Scion (Vampire)
+    [138619] = 1200, -- Perfect Scion (Vampire)
+
+    -- Werewolf
     [33208] = 3000, -- Devour (Werewolf)
     [39033] = 1100, -- Werewolf Transform Setup (Werewolf)
     [39477] = 1500, -- De-Werewolf (Werewolf)
@@ -652,15 +659,18 @@ CastBarTable.IsCast = {
     [40414] = true, -- Shatter Soul (Soul Magic)
 
     -- Vampire
-    --[33175] = true, -- Feed (Vampire)
     [40350] = true, -- Feed (Vampire - Bite Player)
-    [39692] = true, -- Feed (Vampire - Quest)
-    [32893] = true, -- Drain Essence (Vampire)
-    [32986] = true, -- Mist Form (Vampire)
-    [38963] = true, -- Elusive Mist (Vampire)
-    [38965] = true, -- Baleful Mist (Vampire)
-    [38949] = true, -- Invigorating Drain (Vampire)
-    [38956] = true, -- Accelerating Drain (Vampire)
+
+    [134583] = true, -- Vampiric Drain (Vampire)
+    [135905] = true, -- Drain Vigor (Vampire)
+    [137259] = true, -- Exhilarating Drain (Vampire)
+
+    [138565] = true, -- Blood Scion (Vampire)
+    [138568] = true, -- Blood Scion (Vampire)
+    [138614] = true, -- Swarming Scion (Vampire)
+    [138615] = true, -- Swarming Scion (Vampire)
+    [138618] = true, -- Perfect Scion (Vampire)
+    [138619] = true, -- Perfect Scion (Vampire)
 
     -- Werewolf
     [33208] = true, -- Devour (Werewolf)
@@ -912,16 +922,9 @@ CastBarTable.CastBreakOnRemoveEffect = {
     [33208] = true, -- Devour (Werewolf)
 
     -- Vampire
-    --[33152] = true, -- Feed (Vampire)
-    [32893] = true, -- Drain Essence (Vampire)
-    [38949] = true, -- Invigorating Drain (Vampire)
-    [38956] = true, -- Accelerating Drain (Vampire)
-    [32986] = true, -- Mist Form (Vampire)
-    [38963] = true, -- Elusive Mist (Vampire)
-    [38965] = true, -- Baleful Mist (Vampire)
-
-    -- Quests
-    [39692] = true, -- Feed (Scion of the Blood Matron)
+    [134583] = true, -- Vampiric Drain (Vampire)
+    [135905] = true, -- Drain Vigor (Vampire)
+    [137259] = true, -- Exhilarating Drain (Vampire)
 }
 
 --[[

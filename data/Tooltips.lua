@@ -937,17 +937,20 @@ LUIE.Data.Tooltips = {
     Skill_Vampirism_Stage_2                         = GetString(SI_LUIE_SKILL_VAMPIRISM_STAGE2_TP),
     Skill_Vampirism_Stage_3                         = GetString(SI_LUIE_SKILL_VAMPIRISM_STAGE3_TP),
     Skill_Vampirism_Stage_4                         = GetString(SI_LUIE_SKILL_VAMPIRISM_STAGE4_TP),
-    Skill_Feed                                      = GetString(SI_LUIE_SKILL_FEED_TP),
-    Skill_Feed_Quest                                = GetString(SI_LUIE_SKILL_FEED_QUEST_TP),
+    Skill_Vampirism_Stage_5                         = GetString(SI_LUIE_SKILL_VAMPIRISM_STAGE5_TP),
     Skill_Blood_Ritual                              = GetString(SI_LUIE_SKILL_BLOOD_RITUAL_TP),
-    Skill_Drain_Essence                             = GetString(SI_LUIE_SKILL_DRAIN_ESSENCE_TP),
-    Skill_Invigorating_Drain                        = GetString(SI_LUIE_SKILL_INVIGORATING_DRAIN_TP),
+    Skill_Unnatural_Movement                        = GetString(SI_LUIE_SKILL_UNNATURAL_MOVEMENT_TP),
+    Skill_Blood_Frenzy                              = GetString(SI_LUIE_SKILL_BLOOD_FRENZY_TP),
+    Skill_Simmering_Frenzy                          = GetString(SI_LUIE_SKILL_SIMMERING_FRENZY_TP),
+    Skill_Sated_Fury                                = GetString(SI_LUIE_SKILL_SATED_FURY_TP),
+    Skill_Vampiric_Drain                            = GetString(SI_LUIE_SKILL_VAMPIRIC_DRAIN_TP),
+    Skill_Drain_Vigor                               = GetString(SI_LUIE_SKILL_DRAIN_VIGOR_TP),
+    Skill_Exhilarating_Drain                        = GetString(SI_LUIE_SKILL_EXHILARATING_DRAIN_TP),
+    Skill_Stupefy                                   = GetString(SI_LUIE_SKILL_STUPEFY_TP),
     Skill_Mist_Form                                 = GetString(SI_LUIE_SKILL_MIST_FORM_TP),
-    Skill_Baleful_Mist                              = GetString(SI_LUIE_SKILL_BALEFUL_MIST_TP),
-    Skill_Bat_Swarm                                 = GetString(SI_LUIE_SKILL_BAT_SWARM_TP),
-    Skill_Clouding_Swarm                            = GetString(SI_LUIE_SKILL_CLOUDING_SWARM_TP),
-    Skill_Devouring_Swarm                           = GetString(SI_LUIE_SKILL_DEVOURING_SWARM_TP),
-    Skill_Devouring_Swarm_Ground                    = GetString(SI_LUIE_SKILL_DEVOURING_SWARM_GROUND_TP),
+    Skill_Blood_Mist                                = GetString(SI_LUIE_SKILL_BLOOD_MIST_TP),
+    Skill_Blood_Scion                               = GetString(SI_LUIE_SKILL_BLOOD_SCION_TP),
+    Skill_Swarming_Scion                            = GetString(SI_LUIE_SKILL_SWARMING_SCION_TP),
 
     -- Werewolf
     Skill_Sanies_Lupinus                            = GetString(SI_LUIE_SKILL_SANIES_LUPINUS_TP),
@@ -1230,7 +1233,7 @@ LUIE.Data.Tooltips = {
     Skill_Wing_Gust_Stun                            = GetString(SI_LUIE_SKILL_WING_GUST_STUN),
 
     -- Undead
-    Skill_Vampiric_Drain                            = GetString(SI_LUIE_SKILL_VAMPIRIC_DRAIN_TP),
+    Skill_Vampiric_Drain_NPC                        = GetString(SI_LUIE_SKILL_VAMPIRIC_DRAIN_NPC_TP),
 
     -- Dwemer
     Skill_Static_Field                              = GetString(SI_LUIE_SKILL_STATIC_FIELD_TP),
@@ -1335,6 +1338,9 @@ LUIE.Data.Tooltips = {
     Skill_Crippling_Grasp_NPC                       = GetString(SI_LUIE_SKILL_CRIPPLING_GRASP_NPC_TP),
     Skill_Power_Extraction_NPC                      = GetString(SI_LUIE_SKILLPOWER_EXTRACTION_NPC_TP),
     Skill_Marked_for_Death                          = GetString(SI_LUIE_SKILL_MARKED_FOR_DEATH_TP),
+
+    Skill_Devouring_Swarm                           = GetString(SI_LUIE_SKILL_DEVOURING_SWARM_TP),
+    Skill_Devouring_Swarm_Ground                    = GetString(SI_LUIE_SKILL_DEVOURING_SWARM_GROUND_TP),
 
     Skill_Enrage_FG_Gladiator                       = GetString(SI_LUIE_SKILL_ENRAGE_FG_GLADIATOR_TP),
     Skill_Torch_Grab                                = GetString(SI_LUIE_SKILL_TORCH_GRAB_TP),

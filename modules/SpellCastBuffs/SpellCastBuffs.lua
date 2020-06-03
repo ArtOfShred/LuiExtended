@@ -1318,7 +1318,7 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
         SpellCastBuffs.TooltipBottomLine(control, detailsLine)
 
         --Debug
-        --GameTooltip:SetAbilityId(140223)
+        --GameTooltip:SetAbilityId(38935)
 
     end
 end
@@ -1682,6 +1682,41 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
             for i = 1, GetNumBuffs(unitTag) do
                 local _, _, _, _, stack, _, _, _, _, _, abilityId = GetUnitBuffInfo(unitTag, i)
                 if Effects.IsGrimFocus[abilityId] then
+                    stackCount = stack
+                end
+            end
+        end
+    end
+
+    -- Simmering Frenzy Stack counter
+    if Effects.IsSimmeringFrenzy[abilityId] or Effects.IsSimmeringFrenzyOverride[abilityId] then
+        local context
+        if unitTag == "player" then
+            context = { SpellCastBuffs.EffectsList.player1, SpellCastBuffs.EffectsList.promb_player, SpellCastBuffs.EffectsList.promd_player }
+        else
+            context = { SpellCastBuffs.EffectsList.reticleover1 }
+        end
+
+        -- Set stack count when Grim Focus counter changes
+        if Effects.IsSimmeringFrenzy[abilityId] then
+            for _, effectsList in pairs(context) do
+                for k, v in pairs(effectsList) do
+                    if Effects.IsSimmeringFrenzyOverride[v.id] then
+                        if changeType == EFFECT_RESULT_FADED then
+                            v.stack = 0
+                        else
+                            v.stack = stackCount
+                        end
+                    end
+                end
+            end
+        end
+
+        -- Set stack count when Simmering Frenzy duration buff changes
+        if Effects.IsSimmeringFrenzyOverride[abilityId] then
+            for i = 1, GetNumBuffs(unitTag) do
+                local _, _, _, _, stack, _, _, _, _, _, abilityId = GetUnitBuffInfo(unitTag, i)
+                if Effects.IsSimmeringFrenzy[abilityId] then
                     stackCount = stack
                 end
             end

@@ -66,6 +66,9 @@ Effects.IsToggle = {
     [103543] = true, -- Mend Wounds
     [103747] = true, -- Mend Spirit
     [103755] = true, -- Symbiosis
+    [103492] = true, -- Meditate
+    [103652] = true, -- Deep Thoughts
+    [103665] = true, -- Introspection
 
     -- Support
     [80923] = true, -- Guard (Guard)
@@ -73,6 +76,15 @@ Effects.IsToggle = {
     [64080] = true, -- Minor Vitality (Mystic Guard)
     [80983] = true, -- Stalwart Guard (Stalwart Guard)
     [80986] = true, -- Minor Force (Stalwart Guard)
+
+    -- Vampire
+    [132141] = true, -- Blood Frenzy
+    [134160] = true, -- Simmering Frenzy
+    [135841] = true, -- Sated Fury
+    [32986] = true, -- Mist Form
+    [38963] = true, -- Elusive Mist
+    [38967] = true, -- Major Expedition
+    [38965] = true, -- Blood Mist
 
     -- NPC Abilities
     [53462] = true, -- Siphoning Strikes (Nightblade)
@@ -111,10 +123,11 @@ Effects.HasAbilityProc = {
 
 -- Vampire Stages
 Effects.IsVamp = {
-    [35771] = true, -- Stage 1 Vampirism
-    [35996] = true, -- Stage 2 Vampirism
-    [35783] = true, -- Stage 3 Vampirism
-    [35792] = true, -- Stage 4 Vampirism
+    [135397] = true, -- Vampire Stage 1
+    [135399] = true, -- Vampire Stage 2
+    [135400] = true, -- Vampire Stage 3
+    [135402] = true, -- Vampire Stage 4
+    [135412] = true, -- Vampire Stage 5
 }
 
 -- Werewolf Buff
@@ -124,8 +137,8 @@ Effects.IsLycan = {
 
 -- Werewolf & Vampire Precursor Diseases
 Effects.IsVampLycanDisease = {
-    [39472] = true, -- Vampirism (NPC Bite)
-    [40360] = true, -- Vampirism (Player Bite)
+    [39472] = true, -- Noxiphilic Sanguivoria (NPC Bite)
+    [40360] = true, -- Noxiphilic Sanguivoria (Player Bite)
     [31068] = true, -- Sanies Lupinus (NPC Bite)
     [40521] = true, -- Sanies Lupinus (Player Bite)
 }
@@ -299,6 +312,10 @@ Effects.IsGrimFocus = {
     [61920] = true, -- Merciless Resolve
 }
 
+Effects.IsSimmeringFrenzy = {
+    [134166] = true, -- Simmering Frenzy
+}
+
 --------------------------------------------------------------------------------------------------------------------------------
 -- Grim Focus Override Id's - Used by SpellCastBuffs to track the id's for Grim Focus & its morphs - These id's are merged with the base buff for stack tracking
 --------------------------------------------------------------------------------------------------------------------------------
@@ -306,6 +323,10 @@ Effects.IsGrimFocusOverride = {
     [61902] = true, -- Grim Focus
     [61927] = true, -- Relentless Focus
     [61919] = true, -- Merciless Resolve
+}
+
+Effects.IsSimmeringFrenzyOverride = {
+    [134160] = true, -- Simmering Frenzy
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -892,9 +913,6 @@ Effects.EffectCreateSkillAura = {
     [103708] = { consolidate = true, extendedDisplay = true, abilityId = 103706 }, -- Minor Force --> Channeled Acceleration
     [103712] = { consolidate = true, extendedDisplay = true, abilityId = 103710 }, -- Minor Force --> Race Against Time
 
-    -- Vampire
-    [38963] = { alwaysShow = true, removeOnEnd = true, abilityId = 38967 }, -- Elusive Mist --> Major Expedition
-
     -- Assault
     [57472] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 38566 }, -- Major Gallop (Rapid Maneuver)
     [101169] = { alwaysShow = true, removeOnEnd = true, abilityId = 40211 }, -- Major Expedition (Retreating Maneuver)
@@ -1040,6 +1058,9 @@ Effects.BarHighlightExtraId = {
     -- Werewolf
     [39113] = 45834, -- Ferocious Roar --> Off Balance
     [39114] = 111788, -- Deafening Roar --> Major Fracture
+
+    -- Vampire
+    [138130] = 138098, -- Stupefy
 
 }
 
@@ -1509,10 +1530,9 @@ Effects.BarHighlightOverride = {
     -- Vampire ----------------
     ---------------------------
 
-    [32893] = { newId = 68883 }, -- Drain Essence
-    [38949] = { newId = 68892 }, -- Invigorating Drain
-    [38956] = { newId = 63558 }, -- Accelerating Drain --> Minor Expedition
-    [88158] = { newId = 38932 }, -- Materialize --> Clouding Swarm
+    [128709] = { newId = 128712 }, -- Mesmerize
+    [137861] = { newId = 137865 }, -- Hypnosis
+    [138097] = { newId = 138098 }, -- Stupefy
 
     ---------------------------
     -- Werewolf ---------------
@@ -6601,68 +6621,90 @@ Effects.EffectOverride = {
     -- VAMPIRE PASSIVES --------------------------------------------
     ----------------------------------------------------------------
 
-    [39472] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_noxiphilic_sanguivoria.dds', name = Abilities.Passive_Noxiphilic_Sanguivoria, tooltip = Tooltips.Skill_Noxiphilic_Sanguivoria }, -- Vampirism (Blood Ritual)
-    [40360] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_noxiphilic_sanguivoria.dds', name = Abilities.Passive_Noxiphilic_Sanguivoria, tooltip = Tooltips.Skill_Noxiphilic_Sanguivoria }, -- Vampirism (Blood Ritual)
-    [35771] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_1.dds', stack = 1, tooltip = Tooltips.Skill_Vampirism_Stage_1 }, -- Stage 1 Vampirism (Vampire General)
-    [35776] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_2.dds', stack = 2, tooltip = Tooltips.Skill_Vampirism_Stage_2 }, -- Stage 2 Vampirism (Vampire General)
-    [35783] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_3.dds', stack = 3, tooltip = Tooltips.Skill_Vampirism_Stage_3 }, -- Stage 3 Vampirism (Vampire General)
-    [35792] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_4.dds', stack = 4, tooltip = Tooltips.Skill_Vampirism_Stage_4 }, -- Stage 4 Vampirism (Vampire General)
-    --[33152] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds', tooltip = Tooltips.Skill_Feed }, -- Feed
-    --[33177] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds' }, -- Feed
-    --[33175] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds', unbreakable = 1 }, -- Feed (Vampire - Feed)
-    [33182] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = Abilities.Passive_Savage_Feeding, tooltip = Tooltips.Generic_Stun }, -- Uber Attack (Savage Feeding - Rank 1)
-    [33183] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = Abilities.Passive_Savage_Feeding, unbreakable = 1 }, -- Off-Balance Self (Savage Feeding - Rank 1)
-    [46047] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = Abilities.Passive_Savage_Feeding, tooltip = Tooltips.Generic_Stun }, -- Uber Attack (Savage Feeding - Rank 2)
-    [46046] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = Abilities.Passive_Savage_Feeding, unbreakable = 1 }, -- Off-Balance Self (Savage Feeding - Rank 2)
-    [40349] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, duration = .95, tooltip = Tooltips.Generic_Stun }, -- Feed (Blood Ritual - Rank 1)
-    [40351] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds' }, -- Feed (Blood Ritual - Rank 1)
-    [40350] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds', unbreakable = 1 }, -- Feed (Blood Ritual - Rank 1)
-    [40353] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds', name = Abilities.Skill_Feed, tooltip = Tooltips.Generic_Stun }, -- Uber Attack (Blood Ritual - Rank 1)
+    -- Vampire Precursor
+    [39472] = { tooltip = Tooltips.Skill_Noxiphilic_Sanguivoria, type = BUFF_EFFECT_TYPE_BUFF }, -- Vampirism (Blood Ritual)
+    [40360] = { tooltip = Tooltips.Skill_Noxiphilic_Sanguivoria, type = BUFF_EFFECT_TYPE_BUFF }, -- Vampirism (Blood Ritual)
+
+    -- Base Vampire
+    [135397] = { stack = 1, tooltip = Tooltips.Skill_Vampirism_Stage_1 }, -- Vampire Stage 1
+    [135399] = { stack = 2, tooltip = Tooltips.Skill_Vampirism_Stage_2 }, -- Vampire Stage 2
+    [135400] = { stack = 3, tooltip = Tooltips.Skill_Vampirism_Stage_3 }, -- Vampire Stage 3
+    [135402] = { stack = 4, tooltip = Tooltips.Skill_Vampirism_Stage_4 }, -- Vampire Stage 4
+    [135412] = { stack = 5, tooltip = Tooltips.Skill_Vampirism_Stage_5 }, -- Vampire Stage 5
+
+    -- Feed
+    [33182] = { icon = 'esoui/art/icons/ability_u26_vampire_synergy_feed.dds' }, -- Feed (Feed)
+    [33175] = { icon = 'esoui/art/icons/ability_u26_vampire_synergy_feed.dds' }, -- Feed (Feed)
+    [138780] = { icon = 'esoui/art/icons/ability_u26_vampire_synergy_feed.dds' }, -- Feed (Feed)
+
+    -- Strike from the Shadows
+    [135189] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_strike_from_the_shadows.dds', tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration_Value, tooltipValue2 = 150 }, -- Strike from the Shadows (Strike from the Shadows - Rank 1)
+    [135190] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_strike_from_the_shadows.dds', tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration_Value, tooltipValue2 = 300 }, -- Strike from the Shadows (Strike from the Shadows - Rank 2)
+
+    -- Blood Ritual
+    [40349] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Stun }, -- Feed (Blood Ritual - Rank 1)
+    [40350] = { icon = 'esoui/art/icons/ability_u26_vampire_synergy_feed.dds' }, -- Feed (Blood Ritual - Rank 1)
     [40359] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Passive_Blood_Ritual, Abilities.Set_Cooldown), tooltip = Tooltips.Skill_Blood_Ritual }, -- Fed on ally (Blood Ritual)
+
+    -- Unnatural Movement
+    [132849] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_unnatural_movement.dds', tooltip = Tooltips.Skill_Unnatural_Movement, forcedContainer = 'short' }, -- Unnatural Movement (Unnatural Movement - Rank 1)
+    [135226] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_unnatural_movement.dds', tooltip = Tooltips.Skill_Unnatural_Movement, forcedContainer = 'short' }, -- Unnatural Movement (Unnatural Movement - Rank 2)
 
     ----------------------------------------------------------------
     -- VAMPIRE ACTIVES --------------------------------------------
     ----------------------------------------------------------------
 
-    -- Drain Essence / Invigorating Drain / Accelerating Drain
-    [32893] = { tooltip = Tooltips.Skill_Drain_Essence, tooltipValue2 = 1 }, -- Drain Essence
-    [68883] = { tooltip = Tooltips.Generic_Stun }, -- Drain Essence
-    [38949] = { tooltip = Tooltips.Skill_Invigorating_Drain }, -- Invigorating Drain
-    [68892] = { tooltip = Tooltips.Generic_Stun }, -- Invigorating Drain
-    [38956] = { tooltip = Tooltips.Skill_Drain_Essence, tooltipValue2 = 0.7 }, -- Accelerating Drain
-    [81493] = { tooltip = Tooltips.Generic_Stun }, -- Accelerating Drain
-    [63558] = { tooltip = Abilities.Skill_Accelerating_Drain }, -- Minor Expedition (Accelerating Drain)
+    -- Blood Frenzy/Simmering Frenzy/Sated Fury
+    [132141] = { forcedContainer = 'short', tooltip = Tooltips.Skill_Blood_Frenzy }, -- Blood Frenzy (Blood Frenzy)
+    [134160] = { forcedContainer = 'short', tooltip = Tooltips.Skill_Simmering_Frenzy }, -- Simmering Frenzy (Simmering Frenzy)
+    [134166] = { hide = true }, -- Simmering Frenzy (Simmering Frenzy)
+    [135841] = { forcedContainer = 'short', tooltip = Tooltips.Skill_Sated_Fury }, -- Sated Fury (Sated Fury)
 
-    -- Mist Form / Elusive Mist / Baleful Mist
-    [32986] = { tooltip = Tooltips.Skill_Mist_Form }, -- Mist Form
-    [38963] = { tooltip = Tooltips.Skill_Mist_Form }, -- Elusive Mist
-    [38967] = { tooltip = Abilities.Skill_Elusive_Mist }, -- Major Expedition (Elusive Mist)
-    [38965] = { tooltip = Tooltips.Skill_Baleful_Mist }, -- Baleful Mist
+    -- Vampiric Drain/Drain Vigor/Exhilarating Drain
+    [134583] = { tooltip = Tooltips.Skill_Vampiric_Drain }, -- Vampiric Drain (Vampiric Drain)
+    [135905] = { tooltip = Tooltips.Skill_Drain_Vigor }, -- Drain Vigor (Drain Vigor)
+    [137259] = { tooltip = Tooltips.Skill_Exhilarating_Drain }, -- Exhilarating Drain (Exhilarating Drain)
 
-    -- Bat Swarm / Clouding Swarm / Devouring Swarm
-    [32624] = { tooltip = Tooltips.Skill_Bat_Swarm }, -- Bat Swarm
-    [38932] = { tooltip = Tooltips.Skill_Clouding_Swarm }, -- Clouding Swarm
-    [38931] = { tooltip = Tooltips.Skill_Devouring_Swarm }, -- Devouring Swarm
+    -- Mesmerize/Hypnosis/Stupefy
+    [128712] = { tooltip = Tooltips.Generic_Stun }, -- Mesmerize (Mesmerize)
+    [137865] = { tooltip = Tooltips.Generic_Stun }, -- Hypnosis (Hypnosis)
+    [138098] = { tooltip = Tooltips.Skill_Stupefy }, -- Stupefy (Stupefy)
+    [138130] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 53 }, -- Stupefy (Stupefy)
 
-    [32625] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1 }, -- Bat Swarm
-    [38935] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1 }, -- Clouding Swarm
-    [38934] = { groundLabel = true, tooltip = Tooltips.Skill_Devouring_Swarm_Ground }, -- Devouring Swarm
+    -- Mist Form
+    [32986] = { tooltip = Tooltips.Skill_Mist_Form, forcedContainer = 'short' }, -- Mist Form
+    [38963] = { tooltip = Tooltips.Skill_Mist_Form, forcedContainer = 'short' }, -- Elusive Mist
+    [38967] = { tooltip = Abilities.Skill_Elusive_Mist, forcedContainer = 'short', consolidateExtra = true }, -- Major Expedition (Elusive Mist)
+    [38965] = { tooltip = Tooltips.Skill_Blood_Mist, forcedContainer = 'short' }, -- Blood Mist
+    [38968] = { icon = 'esoui/art/icons/ability_u26_vampire_05_b.dds' }, -- Blood Mist (Blood Mist)
+    [135427] = { icon = 'esoui/art/icons/ability_u26_vampire_05_b.dds' }, -- Blood Mist (Blood Mist)
+
+    [32624] = { tooltip = Tooltips.Skill_Blood_Scion }, -- Blood Scion (Blood Scion)
+    [138565] = { icon = 'esoui/art/icons/ability_u26_vampire_06.dds' }, -- Blood Scion (Blood Scion)
+    [138568] = { icon = 'esoui/art/icons/ability_u26_vampire_06.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Skill_Remove, Abilities.Skill_Blood_Scion)  }, -- Blood Scion (Blood Scion)
+
+    [38932] = { tooltip = Tooltips.Skill_Swarming_Scion }, -- Swarming Scion (Swarming Scion)
+    [138614] = { icon = 'esoui/art/icons/ability_u26_vampire_06_a.dds' }, -- Swarming Scion (Swarming Scion)
+    [38935] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1 }, -- Swarming Scion
+    [138615] = { icon = 'esoui/art/icons/ability_u26_vampire_06_a.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Skill_Remove, Abilities.Skill_Swarming_Scion) }, -- Swarming Scion (Swarming Scion)
+
+    [38931] = { tooltip = Tooltips.Skill_Blood_Scion }, -- Perfect Scion (Perfect Scion)
+    [138618] = { icon = 'esoui/art/icons/ability_u26_vampire_06_b.dds' }, -- Swarming Scion (Swarming Scion)
+    [138619] = { icon = 'esoui/art/icons/ability_u26_vampire_06_b.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Skill_Remove, Abilities.Skill_Perfect_Scion) }, -- Swarming Scion (Swarming Scion)
 
     ----------------------------------------------------------------
     -- VAMPIRE QUEST ---------------------------------------------
     ----------------------------------------------------------------
 
-    [42821] = { hide = true }, -- VampInt_LamaeFirstFeed
-    [44676] = { hide = true }, -- SELF SNARE
     [39507] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_profane_symbol.dds', name = Abilities.Skill_Profane_Symbol }, -- VampInitStun_Profane
     [44222] = { hide = true }, -- VampireInitiation_Lamae
-    [39728] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds', name = Abilities.Skill_Feed }, -- VampInit_TheaterFeed
-    [39509] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_4.dds', name = Abilities.Skill_Vampirism }, -- VampInit_PC Becomes a Vampire
+    [39728] = { icon = 'esoui/art/icons/ability_u26_vampire_synergy_feed.dds', name = Abilities.Skill_Feed }, -- VampInit_TheaterFeed
+    [39509] = { icon = 'esoui/art/icons/ability_u26_vampire_03.dds', name = Abilities.Skill_Vampirism }, -- VampInit_PC Becomes a Vampire
+
+    [135533] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_lamaes_blessing.dds' }, -- Lamae's Blessing
+
     [39422] = { hide = true }, -- Mist Form
     [56684] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds' }, -- Quick Strike
-    [39692] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds', type = BUFF_EFFECT_TYPE_DEBUFF, duration = -5.2, tooltip = Tooltips.Skill_Feed_Quest }, -- Feed
-    [39698] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds' }, -- Feed
-    [39693] = { hide = true }, -- Feed
 
     ----------------------------------------------------------------
     -- WEREWOLF PASSIVES -------------------------------------------
@@ -9080,7 +9122,7 @@ Effects.EffectOverride = {
     [50182] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_consuming_energy.dds' }, -- Consuming Energy (Spellfiend)
     [50183] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_consuming_energy.dds' }, -- Consuming Energy (Spellfiend)
     [52398] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_consuming_energy.dds', tooltip = Tooltips.Generic_Stun }, -- Consuming Energy (Spellfiend)
-    [68735] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', tooltip = Tooltips.Skill_Vampiric_Drain }, -- Vampiric Drain (Vampire)
+    [68735] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', tooltip = Tooltips.Skill_Vampiric_Drain_NPC }, -- Vampiric Drain (Vampire)
     [68750] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', hide = true }, -- Vampiric Drain (Vampire)
     [68765] = { hide = true }, -- Vampiric Drain (Vampire)
     [68771] = { hide = true }, -- Vampiric Drain (Vampire)
@@ -12484,6 +12526,9 @@ Effects.FakeExternalDebuffs = {
     -- Destruction Staff
     [38946] = { duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach) -- Fire
 
+    -- Vampire
+    [40349] = { duration = 23000 }, -- Feed (Blood Ritual - Rank 1)
+
     -- Werewolf
     [40520] = { duration = 7000 }, -- Q3047 - Knockdown (Blood Moon)
 
@@ -12812,10 +12857,6 @@ Effects.FakePlayerBuffs = {
 
     -- Armor
     [126582] = { duration = 6000 }, -- Unstoppable Brute (Unstoppable Brute)
-
-    -- Vampire
-    --[40350] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = Abilities.Skill_Feed, duration = 5300 }, -- Feed (Blood Ritual)
-    --[33175] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = Abilities.Skill_Feed, duration = 6300 }, -- Feed (Vampire - Feed)
 
     -- Mages Guild
     [40449] = { duration = "GET" }, -- Spell Symmetry (Spell Symmetry)
@@ -13160,9 +13201,7 @@ Effects.AddGroundDamageAura = {
     [42039] = { duration = 600, type = BUFF_EFFECT_TYPE_BUFF }, -- Energy Orb (Energy Orb)
 
     -- Vampire
-    [32625] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Bat Swarm
-    [38935] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Clouding Swarm
-    [38934] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Devouring Swarm
+    [38935] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Swarming Scion
 
     -- Assault
     [38561] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Caltrops (Caltrops)

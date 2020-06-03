@@ -65,9 +65,7 @@ CrowdControl.aoePlayerUltimate = {
     [63471] = 0, -- Shooting Star
 
     -- Vampire
-    [32625] = 1, -- Bat Swarm
-    [38935] = 0, -- Clouding Swarm
-    [38934] = 0, -- Devouring Swarm
+    [38935] = 1, -- Swarming Scion
 
     -- Volendrung
     [116669] = 1, -- Ebony Cyclone (Ruinous Cyclone)

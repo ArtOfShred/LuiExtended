@@ -6180,127 +6180,164 @@ LUIE.DebugAuras = {
     -- VAMPIRE PASSIVES -----------------
     -------------------------------------
 
-    [35770] = true, -- Vampirism Base
-    [39472] = true, -- Vampirism
-    [40360] = true, -- Vampirism
-    [44767] = true, -- Sense Fed Upon
-    [80225] = true, -- Timer Reducer
-    [35771] = true, -- Stage 1 Vampirism
-    [38414] = true, -- Stage 1 Vampirism
-    [35776] = true, -- Stage 2 Vampirism
-    [35774] = true, -- Stage 2 Vampirism
-    [38415] = true, -- Stage 2 Vampirism
-    [35783] = true, -- Stage 3 Vampirism
-    [35784] = true, -- Stage 3 Vampirism
-    [35785] = true, -- Stage 3 Vampirism
-    [38416] = true, -- Stage 3 Vampirism
-    [35792] = true, -- Stage 4 Vampirism
-    [35790] = true, -- Stage 4 Vampirism
-    [35791] = true, -- Stage 4 Vampirism
-    [38417] = true, -- Stage 4 Vampirism
+    -- Vampire Precursor Disease
+    --[39472] = true, -- Noxiphilic Sanguivoria
+    [40360] = true, -- Noxiphilic Sanguivoria
 
+    -- Base Vampirism
+    [135397] = true, -- Vampire Stage 1
+    [135399] = true, -- Vampire Stage 2
+    [135400] = true, -- Vampire Stage 3
+    [135402] = true, -- Vampire Stage 4
+    [135412] = true, -- Vampire Stage 5
+
+    -- Feed
+    [35770] = true, -- Feed (P2M Grant Ability)
     [33152] = true, -- Feed
-    [33177] = true, -- Feed
+    [33182] = true, -- Feed
     [33175] = true, -- Feed
-    [32901] = true, -- Essenece Drained
+    [138780] = true, -- Feed
 
-    [42054] = true, -- Savage Feeding (Rank 1)
-    [33182] = true, -- Uber Attack
-    [33183] = true, -- Off-Balance Self
-    [46045] = true, -- Savage Feeding (Rank 2)
-    [46047] = true, -- Uber Attack
-    [46046] = true, -- Off-Balance Self
+    -- Dark Stalker
+    [33095] = true, -- Dark Stalker (Rank 1)
+    [46041] = true, -- Dark Stalker (Rank 2)
 
-    [33095] = true, -- Supernatural Recovery (Rank 1)
-    [46041] = true, -- Supernatural Recovery (Rank 2)
+    -- Strike from the Shadows
+    [33096] = true, -- Strike from the Shadows (Rank 1)
+    [135189] = true, -- Strike from the Shadows
+    [46040] = true, -- Strike from the Shadows (Rank 2)
+    [135190] = true, -- Strike from the Shadows
 
-
+    -- Blood Ritual
     [33091] = true, -- Blood Ritual (Rank 1)
-    [40355] = true, -- Ally Feed
+    [40355] = true, -- Feed
     [40349] = true, -- Feed
-    [40351] = true, -- Feed
     [40350] = true, -- Feed
-    [40353] = true, -- Uber Attack
-    [40359] = true, -- Fed on ally
+    [40359] = true, -- Feed Cooldown
 
-    [33096] = true, -- Undeath (Rank 1)
-    [46040] = true, -- Undeath (Rank 2)
+    -- Undeath
+    [33093] = true, -- Undeath (Undeath Rank 1)
+    [33090] = true, -- Undeath (Undeath Rank 2)
 
-    [33093] = true, -- Unnatural Resistance (Rank 1)
+    -- Unnatural Movement
+    [132844] = true, -- Unnatural Movement (Rank 1)
+    [135208] = true, -- Unnatural Movement
+    [132845] = true, -- Unnatural Movement
+    [132849] = true, -- Unnatural Movement
+    [132848] = true, -- Unnatural Movement
 
-    [33090] = true, -- Dark Stalker (Rank 1)
+    [135218] = true, -- Unnatural Movement (Rank 2)
+    [135220] = true, -- Unnatural Movement (Rank 2)
+    [135223] = true, -- Unnatural Movement (Rank 2)
+    [135226] = true, -- Unnatural Movement (Rank 2)
+    [135225] = true, -- Unnatural Movement (Rank 2)
+
 
     -------------------------------------
     -- VAMPIRE ACTIVES ------------------
     -------------------------------------
 
-    [80226] = true, -- Reduce Stage Timer (Drain Essence - All Morphs)
-    [32893] = true, -- Drain Essence (Drain Essence)
-    [68883] = true, -- Drain Essence (Drain Essence)
-    [81464] = true, -- Drain Essence (Drain Essence)
-    [68884] = true, -- Drain Essence (Drain Essence)
+    [32893] = true, -- Eviscerate (Eviscerate)
 
-    [38949] = true, -- Invigorating Drain (Invigorating Drain)
-    [68892] = true, -- Invigorating Drain (Invigorating Drain)
-    [81474] = true, -- Invigorating Drain (Invigorating Drain)
-    [81475] = true, -- Invigorating Drain (Invigorating Drain)
-    [38954] = true, -- Invigorating Drain (Invigorating Drain)
+    [38949] = true, -- Blood for Blood
 
-    [38956] = true, -- Accelerating Drain (Accelerating Drain)
-    [81493] = true, -- Accelerating Drain (Accelerating Drain)
-    [81491] = true, -- Accelerating Drain (Accelerating Drain)
-    [81492] = true, -- Accelerating Drain (Accelerating Drain)
-    [63558] = true, -- Minor Expedition (Accelerating Drain)
+    [38956] = true, -- Arterial Burst
+    [81491] = true, -- Arterial Burst
+
+    [132141] = true, -- Blood Frenzy
+    [142464] = true, -- Blood Frenzy
+
+    [134160] = true, -- Simmering Frenzy
+    [134166] = true, -- Simmering Frenzy
+    [134165] = true, -- Simmering Frenzy
+
+    [135841] = true, -- Sated Fury
+    [135847] = true, -- Sated Fury
+    [142495] = true, -- Sated Fury
+    [135846] = true, -- Sated Fury
+
+    [134583] = true, -- Vampiric Drain
+    [134588] = true, -- Vampiric Drain
+
+    [135905] = true, -- Drain Vigor
+    [135906] = true, -- Drain Vigor
+    [135907] = true, -- Drain Vigor
+
+    [137259] = true, -- Exhilarating Drain
+    [137260] = true, -- Exhilarating Drain
+    [137261] = true, -- Exhilarating Drain
+
+    [128709] = true, -- Mesmerize
+    [128712] = true, -- Mesmerize
+    [137798] = true, -- Mesmerize
+
+    [137861] = true, -- Hypnosis
+    [137865] = true, -- Hypnosis
+    [137866] = true, -- Hypnosis
+
+    [138097] = true, -- Stupefy
+    [138098] = true, -- Stupefy
+    [138130] = true, -- Stupefy
+    [138099] = true, -- Stupefy
 
     [32986] = true, -- Mist Form (Mist Form)
 
     [38963] = true, -- Elusive Mist (Elusive Mist)
     [38967] = true, -- Major Expedition (Elusive Mist)
 
-    [38965] = true, -- Baleful Mist (Baleful Mist)
-    [38968] = true, -- Baleful Mist (Baleful Mist)
+    [38965] = true, -- Blood Mist (Blood Mist)
+    [38968] = true, -- Blood Mist (Blood Mist)
+    [135427] = true, -- Blood Mist (Blood Mist)
 
-    [32624] = true, -- Bat Swarm (Bat Swarm)
-    [32625] = true, -- Bat Swarm (Bat Swarm)
+    [32624] = true, -- Blood Scion (Blood Scion)
+    [135978] = true, -- Blood Scion (Blood Scion)
+    [138565] = true, -- Blood Scion (Blood Scion)
+    [138607] = true, -- Blood Scion (Blood Scion)
+    [138564] = true, -- Blood Scion (Blood Scion)
+    [140368] = true, -- Blood Scion (Blood Scion)
+    [135945] = true, -- Blood Scion (Blood Scion)
+    [138568] = true, -- Blood Scion (Blood Scion)
 
-    [38932] = true, -- Clouding Swarm (Clouding Swarm)
-    [38935] = true, -- Clouding Swarm (Clouding Swarm)
-    [88158] = true, -- Materialize (Clouding Swarm)
-    [88163] = true, -- Materialize (Clouding Swarm)
+    [38932] = true, -- Swarming Scion (Swarming Scion)
+    [136092] = true, -- Swarming Scion (Swarming Scion)
+    [138614] = true, -- Swarming Scion (Swarming Scion)
+    [138607] = true, -- Swarming Scion (Swarming Scion)
+    [138613] = true, -- Swarming Scion (Swarming Scion)
+    [140777] = true, -- Swarming Scion (Swarming Scion)
+    [136088] = true, -- Swarming Scion (Swarming Scion)
+    [38935] = true, -- Swarming Scion (Swarming Scion)
+    [138615] = true, -- Swarming Scion (Swarming Scion)
 
-    [38931] = true, -- Devouring Swarm (Devouring Swarm)
-    [38934] = true, -- Devouring Swarm (Devouring Swarm)
-    [38936] = true, -- Devouring Swarm (Devouring Swarm)
+    [38931] = true, -- Perfect Scion (Perfect Scion)
+    [137420] = true, -- Perfect Scion (Perfect Scion)
+    [138618] = true, -- Perfect Scion (Perfect Scion)
+    [138617] = true, -- Perfect Scion (Perfect Scion)
+    [140779] = true, -- Perfect Scion (Perfect Scion)
+    [137416] = true, -- Perfect Scion (Perfect Scion)
+    [138619] = true, -- Perfect Scion (Perfect Scion)
 
     -------------------------------------
     -- VAMPIRE QUEST --------------------
     -------------------------------------
 
     [44670] = true, -- Vamp Theater Head Grab Stun
-    [42821] = true, -- VampInit_LamaeFirstFeed
-    [44676] = true, -- SELF SNARE
     [39507] = true, -- VampInitStun_Profane
     [39505] = true, -- VampInit_FeedTarget
 
     [44222] = true, -- VampireInitiation_Lamae
     [39653] = true, -- VampInitStun_Submit
-    [7488] = true, -- CON-
     [39506] = true, -- Devour
     [39518] = true, -- VampInitStun
     [39728] = true, -- VampInit_TheaterFeed
     [39422] = true, -- Mist Form
     [39509] = true, -- VampInit_PC Becomes a Vampire
     [44134] = true, -- Vampire Abilities
-
-    [39689] = true, -- Vampirism Base
     [56684] = true, -- Quick Strike
-
-    [39692] = true, -- Feed
-    [39698] = true, -- Feed
-    [39693] = true, -- Feed
-
+    [140367] = true, -- Voice of Lamae
+    [140370] = true, -- Voice of Lamae
+    [140371] = true, -- Voice of Lamae
+    [135533] = true, -- Lamae's Blessing
     [40499] = true, -- Rite of the Scion
-
     [72945] = true, -- _CRWN Become Vampire
     [72946] = true, -- Stun
 
@@ -9604,6 +9641,7 @@ LUIE.DebugAuras = {
     [25103] = true, -- Charge -- Giant Wasp
     [25110] = true, -- Charge -- Giant Wasp
     [48559] = true, -- Focused Charge -- Giant Wasp
+    [48557] = true, -- Charge -- Giant Wasp
     [25114] = true, -- Focused Charge -- Giant Wasp
     [25119] = true, -- Charge -- Giant Wasp
     [25116] = true, -- Charge -- Giant Wasp

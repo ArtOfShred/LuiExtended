@@ -459,9 +459,7 @@ local AbilityTables = {
     Passive_Soul_Summons              = 39269,
 
     -- Vampire
-    Passive_Savage_Feeding            = 42054,
     Passive_Blood_Ritual              = 33091,
-    Passive_Noxiphilic_Sanguivoria    = GetString(SI_LUIE_SKILL_PASSIVE_NOXIPHILIC_SANGUIVORIA),
 
     -- Werewolf
     Passive_Bloodmoon                 = 32639,
@@ -774,10 +772,12 @@ local AbilityTables = {
     -- ---------------------------------------------------
 
     Skill_Feed                        = 33152,
-    Skill_Vampirism                   = 39472,
+    Skill_Vampirism                   = GetString(SI_LUIE_SKILL_VAMPIRISM),
     Skill_Profane_Symbol              = GetString(SI_LUIE_SKILL_PROFANE_SYMBOL),
-    Skill_Accelerating_Drain          = 38956,
     Skill_Elusive_Mist                = 38963,
+    Skill_Blood_Scion                 = 32624,
+    Skill_Swarming_Scion              = 38932,
+    Skill_Perfect_Scion               = 38931,
 
     -- ---------------------------------------------------
     -- WEREWOLF SKILLS -----------------------------------
