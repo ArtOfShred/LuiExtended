@@ -1831,10 +1831,12 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
     if changeType == EFFECT_RESULT_FADED then -- delete Effect
         SpellCastBuffs.EffectsList[context][effectSlot] = nil
         if Effects.EffectCreateSkillAura[ abilityId ] and Effects.EffectCreateSkillAura [ abilityId ].removeOnEnd then
-            local name = zo_strformat(SI_UNIT_NAME, GetAbilityName(Effects.EffectCreateSkillAura[abilityId].abilityId))
             local id = Effects.EffectCreateSkillAura[abilityId].abilityId
+
+            local name = zo_strformat(SI_UNIT_NAME, GetAbilityName(id))
+            local fakeEffectType = Effects.EffectOverride[id] and Effects.EffectOverride[id].type or effectType
             if not (SpellCastBuffs.SV.BlacklistTable[name] or SpellCastBuffs.SV.BlacklistTable[id]) then
-                local simulatedContext = unitTag .. effectType
+                local simulatedContext = unitTag .. fakeEffectType
 
                 if (SpellCastBuffs.SV.PromDebuffTable[name] or SpellCastBuffs.SV.PromDebuffTable[id]) then
                     if simulatedContext == "player1" then
@@ -1887,10 +1889,12 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
         --EffectCreateSkillAura
         if Effects.EffectCreateSkillAura[abilityId] then
             if (not Effects.EffectCreateSkillAura[abilityId].requiredStack) or (Effects.EffectCreateSkillAura[abilityId].requiredStack and stackCount == Effects.EffectCreateSkillAura[abilityId].requiredStack) then
-                local name = zo_strformat(SI_UNIT_NAME, GetAbilityName(Effects.EffectCreateSkillAura[abilityId].abilityId))
                 local id = Effects.EffectCreateSkillAura[abilityId].abilityId
+                local name = zo_strformat(SI_UNIT_NAME, GetAbilityName(id))
+                local fakeEffectType = Effects.EffectOverride[id] and Effects.EffectOverride[id].type or effectType
+                local fakeUnbreakable = Effects.EffectOverride[id] and Effects.EffectOverride[id].unbreakable or 0
                 if not (SpellCastBuffs.SV.BlacklistTable[name] or SpellCastBuffs.SV.BlacklistTable[id]) then
-                    local simulatedContext = unitTag .. effectType
+                    local simulatedContext = unitTag .. fakeEffectType
 
                     if (SpellCastBuffs.SV.PromDebuffTable[name] or SpellCastBuffs.SV.PromDebuffTable[id]) then
                         if simulatedContext == "player1" then
@@ -1911,13 +1915,13 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
                             if ( ( Effects.EffectCreateSkillAura[abilityId].consolidateNewIdExtended and not (SpellCastBuffs.SV.ExtraExpanded and SpellCastBuffs.SV.ExtraConsolidate) ) or ( Effects.EffectCreateSkillAura[abilityId].consolidateNewId and not SpellCastBuffs.SV.ExtraConsolidate) ) or not (Effects.EffectCreateSkillAura[abilityId].consolidateNewIdExtended or Effects.EffectCreateSkillAura[abilityId].consolidateNewId) then
                                 local icon = Effects.EffectCreateSkillAura[abilityId].icon or GetAbilityIcon(id)
                                 SpellCastBuffs.EffectsList[simulatedContext][ Effects.EffectCreateSkillAura[abilityId].abilityId ] = {
-                                    target=unitTag, type=effectType,
+                                    target=unitTag, type=fakeEffectType,
                                     id=id, name=name, icon=icon,
                                     dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
                                     forced=forcedType,
                                     restart=true, iconNum=0,
                                     stack = 0,
-                                    unbreakable=unbreakable,
+                                    unbreakable=fakeUnbreakable,
                                     groundLabel = groundLabel,
                                     toggle = toggle,
                                 }

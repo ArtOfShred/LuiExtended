@@ -962,6 +962,12 @@ LUIE.Data.Tooltips = {
     Skill_Werewolf_Berserker                        = GetString(SI_LUIE_SKILL_WEREWOLF_BERSERKER_TP),
     Skill_Pack_Leader                               = GetString(SI_LUIE_SKILL_PACK_LEADER_TP),
 
+    Skill_Carnage_Proc                              = GetString(SI_LUIE_SKILL_CARNAGE_PROC_TP),
+    Skill_Carnage                                   = GetString(SI_LUIE_SKILL_CARNAGE_TP),
+    Skill_Feral_Carnage                             = GetString(SI_LUIE_SKILL_FERAL_CARNAGE_TP),
+    Skill_Brutal_Carnage_Buff                       = GetString(SI_LUIE_SKILL_BRUTAL_CARNAGE_BUFF_TP),
+    Skill_Hircines_Fortitude                        = GetString(SI_LUIE_SKILL_HIRCINES_FORTITUDE_TP),
+
     ----------------------------------------------------------------
     -- GUILDS SKILLS ------------------------------------------------
     ----------------------------------------------------------------

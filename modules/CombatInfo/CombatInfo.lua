@@ -1154,6 +1154,8 @@ function CombatInfo.BarHighlightSwap(abilityId)
     local id2 = Effects.BarHighlightCheckOnFade[abilityId].id2 or 0
     local id3 = Effects.BarHighlightCheckOnFade[abilityId].id3 or 0
     local unitTag = Effects.BarHighlightCheckOnFade[abilityId].unitTag
+    local id2Tag = Effects.BarHighlightCheckOnFade[abilityId].id2Tag
+    local id3Tag = Effects.BarHighlightCheckOnFade[abilityId].id3Tag
     local duration = Effects.BarHighlightCheckOnFade[abilityId].duration or 0
     local durationMod = Effects.BarHighlightCheckOnFade[abilityId].durationMod or 0
     -- If the unitTag doesn't exist, bail out here
@@ -1178,6 +1180,8 @@ function CombatInfo.BarHighlightSwap(abilityId)
             end
         end
     end
+    -- Swap tag here for id2 checking
+    if id2Tag then unitTag = id2Tag end
     -- Only iterate again if there is a second ID to look for
     if id2 ~= 0 then
         for i = 1, GetNumBuffs(unitTag) do
@@ -1188,6 +1192,8 @@ function CombatInfo.BarHighlightSwap(abilityId)
             end
         end
     end
+    -- Swap tag here for id2 checking
+    if id3Tag then unitTag = id2Tag end
     -- Only iterate again if there is a third ID to look for
     if id3 ~= 0 then
         for i = 1, GetNumBuffs(unitTag) do

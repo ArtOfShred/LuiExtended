@@ -918,6 +918,9 @@ Effects.EffectCreateSkillAura = {
     [101169] = { alwaysShow = true, removeOnEnd = true, abilityId = 40211 }, -- Major Expedition (Retreating Maneuver)
     [57481] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 40215 }, -- Major Gallop (Charging Maneuver)
 
+    -- Werewolf
+    [137206] = { alwaysShow = true, abilityId = 999016, removeOnEnd = true }, -- Major Berserk (Hircine's Rage)
+
     -- Sets
     [106867] = { alwaysShow = true, abilityId = 106865 }, -- Major Evasion --> Grace of Gloom
     [116742] = { alwaysShow = true, abilityId = 116775, requiredStack = 10 }, -- Precision --> Minor Force (Tzogvin's Warband)
@@ -1056,6 +1059,8 @@ Effects.BarHighlightExtraId = {
     [126897] = 126898, -- Consuming Trap
 
     -- Werewolf
+    --[137157] = 137156, -- Carnage
+
     [39113] = 45834, -- Ferocious Roar --> Off Balance
     [39114] = 111788, -- Deafening Roar --> Major Fracture
 
@@ -1070,6 +1075,7 @@ Effects.BarHighlightExtraId = {
 -- If duration value is set to an ID, the duration will be pulled from this ID
 -- If durationMod value is set to an ID, this value will be subtracted from the final duration (UNUSED)
 -- Note that any secondary id's for Bar Highlight in the table above will set their id to the original tracked id here
+-- Note all effects will check unitTag unless an id2Tag or id3Tag are specified in which case they will switch unitTags when searching for other ids.
 Effects.BarHighlightCheckOnFade = {
 
     -- Dragonknight
@@ -1132,6 +1138,8 @@ Effects.BarHighlightCheckOnFade = {
     [63118] = { id1 = 63119, unitTag = "player" }, -- Immovable --> Major Resolve
 
     -- Werewolf
+    --[137156] = { id1 = 137157, unitTag = "player", id2 = 137156, id2Tag = "reticleover" }, -- Carnage
+
     [45834] = { id1 = 39113, id2 = 45834, unitTag = "reticleover" }, -- Off Balance --> Ferocious Roar / Off Balance
     [111788] = { id1 = 39114, id2 = 111788, unitTag = "reticleover" }, -- Major Fracture --> Deafening Roar / Major Fracture
 
@@ -1182,6 +1190,11 @@ Effects.BarHighlightOverride = {
     [32963] = { newId = 32958 }, -- Shifting Standard
 
     -- Draconic Power
+    [20319] = { ignoreMouseover = true }, -- Spiked Armor
+    [20328] = { ignoreMouseover = true }, -- Hardened Armor
+    [20323] = { ignoreMouseover = true }, -- Volatile Armor
+
+
     [20245] = { newId = 20527 }, -- Dark Talons
     [20252] = { newId = 31898 }, -- Burning Talons
     [20251] = { newId = 31899 }, -- Choking Talons --> Minor Maim
@@ -1201,7 +1214,7 @@ Effects.BarHighlightOverride = {
     [133027] = { newId = 31816 }, -- Stone Giant
     [29043] = { newId = 92507, noRemove = true }, -- Molten Weapons --> Major Sorcery
     [31874] = { newId = 92503, noRemove = true }, -- Igneous Weapons --> Major Sorcery
-    [31888] = { newId = 76537 }, -- Molten Armaments
+    [31888] = { newId = 76537, ignoreMouseover = true }, -- Molten Armaments
 
     ---------------------------
     -- Nightblade -------------
@@ -1538,7 +1551,12 @@ Effects.BarHighlightOverride = {
     -- Werewolf ---------------
     ---------------------------
 
-    [58317] = { newId = 58318, noRemove = true }, -- Hircine's Rage --> Major Brutality
+    [32632] = { newId = 137156 }, -- Pounce --> Carnage
+    [39105] = { newId = 137189 }, -- Brutal Pounce --> Brutal Carnage
+    [39104] = { newId = 137164 }, -- Feral Pounce --> Feral Carnage
+
+    [58317] = { newId = 137206 }, -- Hircine's Rage --> Major Berserk
+
     [39113] = { newId = 45834 }, -- Ferocious Roar --> Off Balance
     [39114] = { newId = 111788 }, -- Deafening Roar --> Major Fracture
     [58855] = { newId = 58856 }, -- Infectious Claws
@@ -2151,6 +2169,10 @@ Effects.IsAbilityActiveHighlight = {
 
 Effects.IsAbilityActiveGlow = {
     [126659] = true, -- Flying Blade (Flying Blade)
+
+    [137156] = true, -- Carnage (Pounce)
+    [137184] = true, -- Brutal Carnage (Brutal Pounce)
+    [137164] = true, -- Feral Carnage (Feral Pounce)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -3120,6 +3142,10 @@ function Effects.UpdateEffectOnSkillUpdate()
 
     -- Mages Guild
     Effects.EffectOverride[40465].tooltip = zo_strformat(GetString(SI_LUIE_SKILL_SCALDING_RUNE_TP), (GetAbilityDuration(40468) / 1000) + GetNumPassiveSkillRanks(GetSkillLineIndicesFromSkillLineId(44), select(2, GetSkillLineIndicesFromSkillLineId(44)), 8) )
+
+    -- Werewolf
+    Effects.EffectOverride[137193] = { tooltip = LUIE.GetSkillMorphName(58310) } -- Major Bruality (Hircine's Bounty)
+    Effects.EffectOverride[138072] = { tooltip = LUIE.GetSkillMorphName(32633) } -- Major Savagery (Roar)
 
 end
 
@@ -6729,10 +6755,30 @@ Effects.EffectOverride = {
     -- WEREWOLF ACTIVES --------------------------------------------
     ----------------------------------------------------------------
 
+    -- Pounce / Brutal Pounce / Feral Pounce
+    [137157] = { tooltip = Tooltips.Skill_Carnage_Proc, tooltipValue2 = Abilities.Skill_Carnage }, -- Carnage (Pounce)
+    [137156] = { tooltip = Tooltips.Skill_Carnage }, -- Carnage (Pounce)
+    [137186] = { tooltip = Tooltips.Skill_Carnage_Proc, tooltipValue2 = Abilities.Skill_Brutal_Carnage }, -- Brutal Carnage (Brutal Pounce)
+    [137184] = { tooltip = Tooltips.Skill_Carnage }, -- Brutal Carnage (Brutal Pounce)
+    [137189] = { tooltip = Tooltips.Skill_Brutal_Carnage_Buff }, -- Brutal Carnage (Brutal Pounce)
+    [137165] = { tooltip = Tooltips.Skill_Carnage_Proc, tooltipValue2 = Abilities.Skill_Feral_Carnage }, -- Feral Carnage (Feral Pounce)
+    [137164] = { tooltip = Tooltips.Skill_Feral_Carnage }, -- Feral Carnage (Feral Pounce)
+
     -- Hircine's Bounty / Hircine's Rage / Hircine's Fortitude
-    [58318] = { tooltip = Abilities.Skill_Hircines_Rage }, -- Major Brutality (Hircine's Rage)
+    [137193] = { tooltip = LUIE.GetSkillMorphName(58310) }, -- Major Bruality (Hircine's Bounty)
+    [137202] = { icon = 'esoui/art/icons/ability_werewolf_004_a.dds' }, -- Hircine's Bounty (Hircine's Bounty)
+
+    [137204] = { icon = 'esoui/art/icons/ability_werewolf_004_b.dds' }, -- Hircine's Rage (Hircine's Rage)
+    [137206] = { tooltip = Abilities.Skill_Hircines_Rage }, -- Major Berserk (Hircine's Rage)
+    [999016] = { icon = 'esoui/art/icons/ability_werewolf_004_b.dds', name = Abilities.Skill_Hircines_Rage, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Increase_Damage_Taken, tooltipValue2 = 20 }, -- FAKE BUFF FOR DAMAGE TAKEN - Major Berserk
+
+    [137209] = { icon = 'esoui/art/icons/ability_werewolf_004_c.dds' }, -- Hircine's Fortitude (Hircine's Fortitude)
+    [137210] = { tooltip = Tooltips.Skill_Hircines_Fortitude }, -- Hircine's Fortitude (Hircine's Fortitude)
+
 
     -- Roar / Ferocious Roar / Defeaning Roar
+    [138072] = { tooltip = LUIE.GetSkillMorphName(32633) }, -- Major Savagery (Roar)
+
     [32633] = { tooltip = Tooltips.Generic_Fear }, -- Roar (Roar)
     [39113] = { tooltip = Tooltips.Generic_Fear }, -- Ferocious Roar (Ferocious Roar)
     [45834] = { tooltip = Abilities.Skill_Ferocious_Roar, unbreakable = 1 }, -- Off Balance (Ferocious Roar)
@@ -6754,6 +6800,7 @@ Effects.EffectOverride = {
     [111832] = { tooltip = Tooltips.Generic_Fear }, -- Werewolf Transformation
     [39075] = { tooltip = Tooltips.Skill_Pack_Leader }, -- Pack Leader (Pack Leader)
     [111843] = { tooltip = Tooltips.Generic_Fear }, -- Pack Leader
+    [137348] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_courage.dds', tooltip = Abilities.Skill_Pack_Leader }, -- Minor Courage (Pack Leader)
     [80180] = { hide = true }, -- Birth Direwolf (Pack Leader)
     [80177] = { hide = true }, -- Pack Leader (Pack Leader)
     [80178] = { hide = true }, -- Pack Leader (Pack Leader)
@@ -6761,11 +6808,10 @@ Effects.EffectOverride = {
     [127161] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_lunge_pack_leader.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 30 }, -- Lunge (Pack Leader)
     [80189] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_gnash.dds' }, -- Gnash (Pack Leader)
     [80190] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_gnash.dds' }, -- Gnash (Pack Leader)
-    [127162] = { tooltip = Abilities.Skill_Gnash }, -- Minor Maim (Pack Leader)
 
     [39076] = { tooltip = Tooltips.Skill_Werewolf_Berserker }, -- Werewolf Berserker (Werewolf Berserker)
     [111844] = { tooltip = Tooltips.Generic_Fear }, -- Werewolf Berserker
-    [89147] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds', name = Abilities.Skill_Werewolf_Blood, tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Werewolf Berserker Bleed (Werewolf Bleed)
+    [89147] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds', tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Werewolf Berserker Bleed (Werewolf Bleed)
 
     ----------------------------------------------------------------
     -- WEREWOLF QUEST ABILITIES ------------------------------------
