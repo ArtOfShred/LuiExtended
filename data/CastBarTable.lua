@@ -278,6 +278,9 @@ CastBarTable.CastChannelOverride = {
     -- Vampire
     [40350] = true, -- Feed (Vampire - Bite Player)
 
+    -- Werewolf
+    [40515] = true, -- Devour (Werewolf - Bite Player)
+
     ----------------------------------------------------------------
     -- QUEST ABILITIES ---------------------------------------------
     ----------------------------------------------------------------

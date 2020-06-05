@@ -6347,7 +6347,7 @@ LUIE.DebugAuras = {
 
     [35658] = true, -- Lycanthrophy
     --[31068] = true, -- Sanies Lupinus (NPC Bite)
-    --[40521] = true, -- Sanies Lupinus (Player Bite)
+    [40521] = true, -- Sanies Lupinus (Player Bite)
 
     [32464] = true, -- Light Attack
     [32477] = true, -- Heavy Attack (Were)
@@ -6375,9 +6375,9 @@ LUIE.DebugAuras = {
 
     [32639] = true, -- Bloodmoon (Rank 1)
     [40514] = true, -- Ally Bite (Bloodmoon)
-    --[40515] = true, -- Devour (Bloodmoon)
-    --[40520] = true, -- Q3047 - Knockdown (Bloodmoon)
-    --[40525] = true, -- Bit an ally (Bloodmoon)
+    [40515] = true, -- Devour (Bloodmoon)
+    [40520] = true, -- Q3047 - Knockdown (Bloodmoon)
+    [40525] = true, -- Bit an ally (Bloodmoon)
 
     [32638] = true, -- Savage Strength (Rank 1)
     [46139] = true, -- Savage Strength (Rank 2)
@@ -6424,40 +6424,46 @@ LUIE.DebugAuras = {
 
     [138072] = true, -- Major Savagery (Roar - All Morphs)
 
-    --[32633] = true, -- Roar (Roar)
-    --[125004] = true, -- Roar (Roar)
+    [32633] = true, -- Roar (Roar)
+    [125004] = true, -- Roar (Roar)
+    [137257] = true, -- Off Balance (Roar)
 
-    --[39113] = true, -- Ferocious Roar (Ferocious Roar)
-    --[125007] = true, -- Ferocious Roar (Ferocious Roar)
-    --[45834] = true, -- Off Balance (Ferocious Roar)
+    [39113] = true, -- Ferocious Roar (Ferocious Roar)
+    [125007] = true, -- Ferocious Roar (Ferocious Roar)
+    [45834] = true, -- Off Balance (Ferocious Roar)
+    [137287] = true, -- Ferocious Roar (Ferocious Roar)
 
-    --[39114] = true, -- Deafening Roar (Deafening Roar)
-    --[125023] = true, -- Deafening Roar (Deafening Roar)
-    --[111788] = true, -- Major Fracture (Deafening Roar)
+    [39114] = true, -- Deafening Roar (Deafening Roar)
+    [125023] = true, -- Deafening Roar (Deafening Roar)
+    [111788] = true, -- Major Fracture (Deafening Roar)
+    [137311] = true, -- Minor Maim (Deafening Roar)
+    [137312] = true, -- Off Balance (Deafening Roar)
 
-    --[58405] = true, -- Piercing Howl (Piercing Howl)
+    [58405] = true, -- Piercing Howl (Piercing Howl)
+    [137317] = true, -- Piercing Howl (Piercing Howl)
 
-    --[58775] = true, -- Feeding Frenzy (Howl of Despair - Feeding Frenzy Synergy)
-    --[58813] = true, -- Feeding Frenzy (Howl of Despair - Feeding Frenzy Synergy)
-    --[58742] = true, -- Howl of Despair (Howl of Despair)
-    --[58745] = true, -- Feeding Frenzy (Howl of Despair)
-    --[58744] = true, -- Howl of Despair Synergy (Howl of Despair)
+    [58775] = true, -- Feeding Frenzy (Howl of Despair - Feeding Frenzy Synergy)
+    [58813] = true, -- Feeding Frenzy (Howl of Despair - Feeding Frenzy Synergy)
+    [58742] = true, -- Howl of Despair (Howl of Despair)
+    [58745] = true, -- Feeding Frenzy (Howl of Despair)
+    [58744] = true, -- Howl of Despair Synergy (Howl of Despair)
+    [137321] = true, -- Piercing Howl (Howl of Despair)
 
-    --[58801] = true, -- Howl of Agony Bonus (Howl of Agony)
-    --[58798] = true, -- Howl of Agony (Howl of Agony)
+    [58801] = true, -- Howl of Agony Bonus (Howl of Agony)
+    [58798] = true, -- Howl of Agony (Howl of Agony)
 
-    --[58855] = true, -- Infectious Claws (Infectious Claws)
-    --[58856] = true, -- Infectious Claws (Infectious Claws)
+    [58855] = true, -- Infectious Claws (Infectious Claws)
+    [58856] = true, -- Infectious Claws (Infectious Claws)
 
-    --[58864] = true, -- Claws of Anguish (Claws of Anguish)
-    --[58865] = true, -- Claws of Anguish (Claws of Anguish)
-    --[58869] = true, -- Major Defile (Claws of Anguish)
+    [58864] = true, -- Claws of Anguish (Claws of Anguish)
+    [58865] = true, -- Claws of Anguish (Claws of Anguish)
+    [58869] = true, -- Major Defile (Claws of Anguish)
 
-    --[58879] = true, -- Claws of Life (Claws of Life)
-    --[58880] = true, -- Claws of Life (Claws of Life)
-    --[61378] = true, -- Claws of Life Caused Damage (Claws of Life)
-    --[61379] = true, -- Claws of Life Saved Damage (Claws of Life)
-    --[58881] = true, -- Claws of Life (Claws of Life)
+    [58879] = true, -- Claws of Life (Claws of Life)
+    [58880] = true, -- Claws of Life (Claws of Life)
+    [61378] = true, -- Claws of Life Caused Damage (Claws of Life)
+    [61379] = true, -- Claws of Life Saved Damage (Claws of Life)
+    [58881] = true, -- Claws of Life (Claws of Life)
 
     [33469] = true, -- Werewolf Transformation (Werewolf Transformation - All Morphs)
     [39033] = true, -- Werewolf Transform Setup (Werewolf Transformation - All Morphs)
@@ -6506,28 +6512,28 @@ LUIE.DebugAuras = {
     -- WEREWOLF QUEST EVENTS ------------
     -------------------------------------
 
-    --[39421] = true, -- Q4961 HircineStun
-    --[65429] = true, -- Q4961 Songamdir Werewolf
-    --[39441] = true, -- Hircine's Power
-    --[75008] = true, -- Werewolf Transformation
-    --[39457] = true, -- Werewolf Transformation
-    --[39458] = true, -- Werewolf Effects
-    --[40123] = true, -- Devour Passive
+    [39421] = true, -- Q4961 HircineStun
+    [65429] = true, -- Q4961 Songamdir Werewolf
+    [39441] = true, -- Hircine's Power
+    [75008] = true, -- Werewolf Transformation
+    [39457] = true, -- Werewolf Transformation
+    [39458] = true, -- Werewolf Effects
+    [40123] = true, -- Devour Passive
 
-    --[55885] = true, -- Light Attack
-    --[55886] = true, -- Heavy Attack (Were)
-    --[55887] = true, -- Heavy Attack Damage Bonus
-    --[55888] = true, -- Heavy Attack
-    --[55891] = true, -- Heavy Attack Werewolf
-    --[55890] = true, -- Heavy Attack
+    [55885] = true, -- Light Attack
+    [55886] = true, -- Heavy Attack (Were)
+    [55887] = true, -- Heavy Attack Damage Bonus
+    [55888] = true, -- Heavy Attack
+    [55891] = true, -- Heavy Attack Werewolf
+    [55890] = true, -- Heavy Attack
 
-    --[44687] = true, -- Slow Despawn Self 15M
-    --[40101] = true, -- Q4961 Feast Swipe
-    --[40102] = true, -- Q4961 Feast Munch
+    [44687] = true, -- Slow Despawn Self 15M
+    [40101] = true, -- Q4961 Feast Swipe
+    [40102] = true, -- Q4961 Feast Munch
     --[40124] = true, -- Devour
     --[40125] = true, -- Devour
 
-    --[41057] = true, -- Begin Werewolf
+    [41057] = true, -- Begin Werewolf
 
     [73123] = true, -- _CRWN Become Werewolf
     [73124] = true, -- Stun

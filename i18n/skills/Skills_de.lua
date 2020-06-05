@@ -662,12 +662,12 @@ local strings = {
     SI_LUIE_SKILL_WEREWOLF_TRANSFORMATION_TP =           "Transformed into a werewolf.\n\nWhile transformed your Max Stamina is increased by |cFFFFFF30|r%.\n\nYou cannot generate Ultimate while transformed.",
     SI_LUIE_SKILL_WEREWOLF_BERSERKER_TP =                "Transformed into a werewolf.\n\nWhile transformed, your Light Attacks apply a bleed over |cFFFFFF4|r seconds, your Heavy Attacks deal |cFFFFFF50|r% splash damage, and your Max Stamina is increased by |cFFFFFF30|r%.\n\nYou cannot generate Ultimate while transformed.",
     SI_LUIE_SKILL_PACK_LEADER_TP =                       "Transformed into a werewolf.\n\nWhile transformed your Max Stamina is increased by |cFFFFFF30|r%, you take |cFFFFFF10|r% less damage, and you summon two direwolves. You also grant yourself and nearby allies Minor Courage.\n\nYou cannot generate Ultimate while transformed.",
-
     SI_LUIE_SKILL_CARNAGE_PROC_TP =                      "For |cFFFFFF<<1>>|r seconds you can cast <<2>>.",
     SI_LUIE_SKILL_CARNAGE_TP =                           "Afflicted with Bleed Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nDeals up to |cFFFFFF450|r% more damage in proportion to your missing health under |cFFFFFF100|r%.",
     SI_LUIE_SKILL_FERAL_CARNAGE_TP =                     "Afflicted with Bleed Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nDeals up to |cFFFFFF450|r% more damage in proportion to your missing health under |cFFFFFF100|r%.\n\nEach time this effect deals damage the werewolf restores |cFFFFFF100|r Stamina.",
     SI_LUIE_SKILL_BRUTAL_CARNAGE_BUFF_TP =               "Increase Weapon Damage by |cFFFFFF100|r for |cFFFFFF10|r seconds, stacking up to |cFFFFFF6|r times for each enemy hit by Brutal Carnage.",
     SI_LUIE_SKILL_HIRCINES_FORTITUDE_TP =                "Gain Health and Stamina Recovery equal to |cFFFFFF5|r% of the amount you healed with Hircine's Fortitude, up to a maximum of |cFFFFFF666|r, for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_FEROCIOUS_ROAR_TP =                    "Increase Heavy Attack casting speed by |cFFFFFF33|r% for |cFFFFFF<<1>>|r seconds.",
 
     -- Vampire
     SI_LUIE_SKILL_NOXIPHILIC_SANGUIVORIA_TP =            "You have been bitten by a Vampire and contracted Noxiphilic Sanguivoria.",

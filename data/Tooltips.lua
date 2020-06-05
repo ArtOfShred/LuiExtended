@@ -967,6 +967,7 @@ LUIE.Data.Tooltips = {
     Skill_Feral_Carnage                             = GetString(SI_LUIE_SKILL_FERAL_CARNAGE_TP),
     Skill_Brutal_Carnage_Buff                       = GetString(SI_LUIE_SKILL_BRUTAL_CARNAGE_BUFF_TP),
     Skill_Hircines_Fortitude                        = GetString(SI_LUIE_SKILL_HIRCINES_FORTITUDE_TP),
+    Skill_Ferocious_Roar                            = GetString(SI_LUIE_SKILL_FEROCIOUS_ROAR_TP),
 
     ----------------------------------------------------------------
     -- GUILDS SKILLS ------------------------------------------------

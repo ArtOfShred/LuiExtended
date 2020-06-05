@@ -1061,8 +1061,9 @@ Effects.BarHighlightExtraId = {
     -- Werewolf
     --[137157] = 137156, -- Carnage
 
-    [39113] = 45834, -- Ferocious Roar --> Off Balance
+    [32633] = 137257, -- Roar --> Off Balance
     [39114] = 111788, -- Deafening Roar --> Major Fracture
+    [137311] = 111788, -- Minor Maim --> Major Fracture
 
     -- Vampire
     [138130] = 138098, -- Stupefy
@@ -1140,8 +1141,8 @@ Effects.BarHighlightCheckOnFade = {
     -- Werewolf
     --[137156] = { id1 = 137157, unitTag = "player", id2 = 137156, id2Tag = "reticleover" }, -- Carnage
 
-    [45834] = { id1 = 39113, id2 = 45834, unitTag = "reticleover" }, -- Off Balance --> Ferocious Roar / Off Balance
-    [111788] = { id1 = 39114, id2 = 111788, unitTag = "reticleover" }, -- Major Fracture --> Deafening Roar / Major Fracture
+    [137257] = { id1 = 137257, id2 = 32633, unitTag = "reticleover" }, -- Off Balance --> Ferocious Roar / Off Balance
+    [111788] = { id1 = 39114, id2 = 137311, id3 = 111788, unitTag = "reticleover" }, -- Major Fracture --> Deafening Roar / Minor Maim / Major Fracture
 
     -- Mages Guild
     [126374] = { id1 = 63227, unitTag = "player" }, -- Degeneration --> Major Sorcery
@@ -1552,7 +1553,8 @@ Effects.BarHighlightOverride = {
 
     [58317] = { newId = 137206 }, -- Hircine's Rage --> Major Berserk
 
-    [39113] = { newId = 45834 }, -- Ferocious Roar --> Off Balance
+    [32633] = { newId = 137257 }, -- Roar --> Off Balance
+    [39113] = { newId = 137287 }, -- Ferocious Roar --> Off Balance
     [39114] = { newId = 111788 }, -- Deafening Roar --> Major Fracture
     [58855] = { newId = 58856 }, -- Infectious Claws
     [58864] = { newId = 58865 }, -- Claws of Anguish
@@ -6742,7 +6744,7 @@ Effects.EffectOverride = {
     [33208] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', hide = true }, -- Devour (Devour)
     [33209] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Devour)
     [40515] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Blood Moon)
-    [40520] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', name = Abilities.Skill_Devour, unbreakable = 1, tooltip = Tooltips.Generic_Knockdown }, -- Q3047 - Knockdown (Blood Moon)
+    [40520] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', name = Abilities.Skill_Devour, unbreakable = 1, tooltip = Tooltips.Generic_Knockdown }, -- Q3047 - Knockdown (Blood Moon - Rank 1)
     [40525] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_bloodmoon_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Passive_Bloodmoon, Abilities.Set_Cooldown), tooltip = Tooltips.Skill_Blood_Moon }, -- Bit an Ally (Blood Moon)
 
     ----------------------------------------------------------------
@@ -6774,13 +6776,19 @@ Effects.EffectOverride = {
     [138072] = { tooltip = LUIE.GetSkillMorphName(32633) }, -- Major Savagery (Roar)
 
     [32633] = { tooltip = Tooltips.Generic_Fear }, -- Roar (Roar)
+    [137257] = { tooltip = Abilities.Skill_Roar, unbreakable = 1 }, -- Off Balance (Roar)
+
     [39113] = { tooltip = Tooltips.Generic_Fear }, -- Ferocious Roar (Ferocious Roar)
     [45834] = { tooltip = Abilities.Skill_Ferocious_Roar, unbreakable = 1 }, -- Off Balance (Ferocious Roar)
+    [137287] = { tooltip = Tooltips.Skill_Ferocious_Roar }, -- Ferocious Roar (Ferocious Roar)
+
     [39114] = { tooltip = Tooltips.Generic_Fear }, -- Deafening Roar (Deafening Roar)
     [111788] = { tooltip = Abilities.Skill_Deafening_Roar }, -- Major Fracture (Deafening Roar)
+    [137311] = { tooltip = Abilities.Skill_Deafening_Roar }, -- Minor Maim (Deafening Roar)
+    [137312] = { tooltip = Abilities.Skill_Deafening_Roar, unbreakable = 1 }, -- Off Balance (Deafening Roar)
 
     -- Piercing Howl / Howl of Despair / Howl of Agony
-    [58775] = { tooltip = Tooltips.Skill_Feeding_Frenzy }, -- Feeding Frenzy (Howl of Despair - Feeding Frenzy Synergy)
+    [131353] = { name = Abilities.Skill_Feeding_Frenzy, tooltip = Tooltips.Skill_Feeding_Frenzy }, -- Empower (Howl of Despair - Feeding Frenzy Synergy)
 
     -- Infectious Claws / Claws of Anguish / Claws of Life
     [58856] = { tooltip = Tooltips.Generic_Disease, tooltipValue2 = 2 }, -- Infection (Infectious Claws)
@@ -6816,7 +6824,7 @@ Effects.EffectOverride = {
     [55888] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackmedium.dds', name = Abilities.Skill_Medium_Attack }, -- Heavy Attack
     [55891] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack Werewolf
     [55890] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds' }, -- Heavy Attack
-    [40124] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', hide = true }, -- Devour
+    [40124] = { hide = true }, -- Devour
     [40125] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour
 
     ----------------------------------------------------------------
@@ -12570,7 +12578,7 @@ Effects.FakeExternalDebuffs = {
     [40349] = { duration = 23000 }, -- Feed (Blood Ritual - Rank 1)
 
     -- Werewolf
-    [40520] = { duration = 7000 }, -- Q3047 - Knockdown (Blood Moon)
+    [40520] = { duration = 7000 }, -- Q3047 - Knockdown (Blood Moon - Rank 1)
 
     -- Item Sets
     [75706] = { duration = 0 }, -- Bahraha's Curse
@@ -12970,8 +12978,11 @@ Effects.FakePlayerDebuffs = {
     -- Destruction Staff
     [38946] = { duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach) -- Fire
 
+    -- Vampire
+    [40349] = { duration = 23000 }, -- Feed (Blood Ritual - Rank 1)
+
     -- Werewolf
-    [40520] = { duration = 7000 }, -- Q3047 - Knockdown (Blood Moon)
+    [40520] = { duration = 7000 }, -- Q3047 - Knockdown (Blood Moon - Rank 1)
 
     -- Item Sets
     [75706] = { duration = 1100, overrideDuration = true }, -- Bahraha's Curse -- Note: We add 100 ms to buffer here because it doesn't really matter and stops flashing

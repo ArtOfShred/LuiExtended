@@ -786,15 +786,15 @@ local AbilityTables = {
     Skill_Werewolf_Transformation     = 32455,
     Skill_Pack_Leader                 = 39075,
     Skill_Devour                      = 32634,
-
     Skill_Carnage                     = 137157,
     Skill_Brutal_Carnage              = 137186,
     Skill_Feral_Carnage               = 137165,
     Skill_Hircines_Rage               = 58317,
-
+    Skill_Roar                        = 32633,
     Skill_Ferocious_Roar              = 39113,
     Skill_Deafening_Roar              = 39114,
-    Skill_Werewolf_Fear               = 39045,
+    Skill_Feeding_Frenzy              = 58745,
+    Skill_Claws_of_Anguish            = 58864,
     Skill_Remove                      = 31262,
 
     -- ---------------------------------------------------
