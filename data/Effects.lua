@@ -1079,7 +1079,7 @@ Effects.BarHighlightExtraId = {
 Effects.BarHighlightCheckOnFade = {
 
     -- Dragonknight
-    [31103] = { id1 = 48946, id2 = 31103, unitTag = "reticleover"}, -- Noxious Breath --> Major Fracture / Noxious Breath
+    [31103] = { id1 = 48946, id2 = 31103, unitTag = "reticleover" }, -- Noxious Breath --> Major Fracture / Noxious Breath
     [108798] = { id1 = 21014, unitTag = "player" }, -- Reflective Plate --> Snare Removal
     [31898] = { id1 = 20253, id2 = 31898, unitTag = "reticleover" }, -- Burning Talons
     [31899] = { id1 = 20528, id2 = 31899, unitTag = "reticleover" }, -- Minor Maim --> Choking Talons / Minor Maim
@@ -1164,9 +1164,8 @@ Effects.BarHighlightOverride = {
         -- newId = # -- Replace ID
         -- showFakeAura = true -- USE EVENT_COMBAT_EVENT instead - allows auras to display even if they weren't applied. Should be used with major/minor effects.
         -- secondary = true -- If the menu option for Secondary effects set to false, hide this ID
-        -- noRemove = ture -- don't remove effect on fading -- Doesn't apply to hostile effects. Should be used with major/minor effects.
+        -- noRemove = ture -- don't remove effect on fading or target change -- Doesn't apply to hostile effects. Should be used with major/minor effects.
         -- duration = # -- override duration
-        -- ignoreMouseover = true -- Don't remove this highlight on target change
         -- hide = true -- Hide this bar highlight
 
     ---------------------------
@@ -1190,17 +1189,13 @@ Effects.BarHighlightOverride = {
     [32963] = { newId = 32958 }, -- Shifting Standard
 
     -- Draconic Power
-    [20319] = { ignoreMouseover = true }, -- Spiked Armor
-    [20328] = { ignoreMouseover = true }, -- Hardened Armor
-    [20323] = { ignoreMouseover = true }, -- Volatile Armor
-
-
     [20245] = { newId = 20527 }, -- Dark Talons
     [20252] = { newId = 31898 }, -- Burning Talons
     [20251] = { newId = 31899 }, -- Choking Talons --> Minor Maim
     [29004] = { showFakeAura = true, noRemove = true }, -- Dragon Blood
     [32744] = { showFakeAura = true, noRemove = true }, -- Green Dragon Blood
     [32722] = { showFakeAura = true, noRemove = true }, -- Coagulating Blood
+
     [21014] = { newId = 108798 }, -- Reflective Plate --> Snare Removal
     [31837] = { newId = 31841, showFakeAura = true }, -- Inhale
     [32792] = { newId = 32796, showFakeAura = true }, -- Deep Breath
@@ -1214,7 +1209,7 @@ Effects.BarHighlightOverride = {
     [133027] = { newId = 31816 }, -- Stone Giant
     [29043] = { newId = 92507, noRemove = true }, -- Molten Weapons --> Major Sorcery
     [31874] = { newId = 92503, noRemove = true }, -- Igneous Weapons --> Major Sorcery
-    [31888] = { newId = 76537, ignoreMouseover = true }, -- Molten Armaments
+    [31888] = { newId = 76537, noRemove = true }, -- Molten Armaments
 
     ---------------------------
     -- Nightblade -------------
@@ -1226,7 +1221,7 @@ Effects.BarHighlightOverride = {
     [25484] = { newId = 124804 }, -- Ambush --> Minor Vulnerability
     [33375] = { newId = 90587, noRemove = true }, -- Blur --> Major Evasion
     [35414] = { newId = 90593, noRemove = true }, -- Mirage --> Major Evasion
-    [35419] = { newId = 125314, ignoreMouseover = true }, -- Phantasmal Escape --> Major Evasion
+    [35419] = { newId = 125314, noRemove = true }, -- Phantasmal Escape --> Major Evasion
     [61907] = { newId = 61902 }, -- Grim Focus --> Assassin's Will
     [61932] = { newId = 61927 }, -- Relentless Focus --> Assassin's Scourge
     [61930] = { newId = 61919 }, -- Merciless Resolve --> Assassin's Will
@@ -1249,7 +1244,7 @@ Effects.BarHighlightOverride = {
 
     -- Siphoning
     [33291] = { newId = 33292 }, -- Strife
-    [34838] = { newId = 34841, ignoreMouseover = true }, -- Funnel Health
+    [34838] = { newId = 34841, noRemove = true }, -- Funnel Health
     [34835] = { newId = 34836 }, -- Swallow Soul
     [33308] = { newId = 108925, secondary = true, noRemove = true }, -- Malevolent Offering
     [34721] = { newId = 108927, secondary = true, noRemove = true }, -- Shrewd Offering
@@ -1336,7 +1331,7 @@ Effects.BarHighlightOverride = {
     [22259] = { newId = 80547 }, -- Ritual of Retribution (Ritual of Retribution)
     [22262] = { newId = 80553 }, -- Extended Ritual (Extended Ritual)
 
-    [22234] = { showFakeAura = true, ignoreMouseover = true, noRemove = true }, -- Rune Focus
+    [22234] = { showFakeAura = true, noRemove = true }, -- Rune Focus
     [22240] = { newId = 37009 }, -- Channeled Focus
     [22237] = { newId = 114842 }, -- Restoring Focus
 
@@ -1520,12 +1515,12 @@ Effects.BarHighlightOverride = {
     -- Armor ------------------
     ---------------------------
 
-    [29556] = { newId = 63015, ignoreMouseover = true }, -- Evasion --> Major Evasion
-    [39195] = { newId = 39196, ignoreMouseover = true }, -- Shuffle
+    [29556] = { newId = 63015, noRemove = true }, -- Evasion --> Major Evasion
+    [39195] = { newId = 39196, noRemove = true }, -- Shuffle
     [39192] = { newId = 126958, showFakeAura = true }, -- Elude
-    [29552] = { newId = 126581, ignoreMouseover = true }, -- Unstoppable
+    [29552] = { newId = 126581, noRemove = true }, -- Unstoppable
     [39205] = { newId = 126582, showFakeAura = true }, -- Immovable Brute
-    [39197] = { newId = 63118, ignoreMouseover = true }, -- Immovable
+    [39197] = { newId = 63118, noRemove = true }, -- Immovable
 
     ---------------------------
     -- Soul Magic -------------
@@ -1570,10 +1565,9 @@ Effects.BarHighlightOverride = {
     [40336] = { newId = 40340 }, -- Silver Leash
     [40195] = { noRemove = true }, -- Camouflaged Hunter
 
-
-    [35750] = { ignoreMouseover = true }, -- Trap Beast
-    [40382] = { ignoreMouseover = true }, -- Barbed Trap
-    [40372] = { ignoreMouseover = true }, -- Lightweight Beast Trap
+    [35750] = { noRemove = true }, -- Trap Beast
+    [40382] = { noRemove = true }, -- Barbed Trap
+    [40372] = { noRemove = true }, -- Lightweight Beast Trap
 
     [35713] = { newId = 62305 }, -- Dawnbreaker
     [40161] = { newId = 126312 }, -- Flawless Dawnbreaker
@@ -1602,7 +1596,7 @@ Effects.BarHighlightOverride = {
     [104059] = { newId = 104078 }, -- Borrowed Time
     [103503] = { newId = 103521, noRemove = true }, -- Accelerate --> Minor Force
     [103706] = { newId = 103708, noRemove = true }, -- Channeled Acceleration --> Minor Force
-    [103710] = { newId = 122260, showFakeAura = true, ignoreMouseover = true }, -- Race Against Time
+    [103710] = { newId = 122260, showFakeAura = true, noRemove = true }, -- Race Against Time
     [103543] = { hide = true }, -- Mend Wounds
     [103747] = { hide = true }, -- Mend Spirit
     [103755] = { hide = true }, -- Symbiosis
@@ -1622,8 +1616,8 @@ Effects.BarHighlightOverride = {
     [38566] = { newId = 57472 }, -- Rapid Maneuver --> Major Gallop
     [40211] = { newId = 57477 }, -- Retreating Maneuver --> Major Gallop
     [40215] = { newId = 57481 }, -- Charging Maneuver --> Major Gallop
-    [61503] = { newId = 61504, ignoreMouseover = true }, -- Vigor
-    [61505] = { newId = 61506, ignoreMouseover = true }, -- Echoing Vigor
+    [61503] = { newId = 61504 }, -- Vigor
+    [61505] = { newId = 61506 }, -- Echoing Vigor
     [61507] = { newId = 61509 }, -- Resolving Vigor
     [33376] = { newId = 38549 }, -- Caltrops
     [40255] = { newId = 40265 }, -- Anti-Cavalry Caltrops
@@ -1645,7 +1639,7 @@ Effects.BarHighlightOverride = {
     ---------------------------
 
     [116093] = { newId = 116364 }, -- Rourken's Rebuke
-    [116095] = { showFakeAura = true, ignoreMouseover = true }, -- Pariah's Resolve
+    [116095] = { showFakeAura = true, noRemove = true }, -- Pariah's Resolve
 
 
 }
