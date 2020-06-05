@@ -7,6 +7,9 @@ You can submit any issues or feature requests in the [Github Issues Section][2],
 What I need feedback on:
 ------
 
+### General
+- Report if you don't like the icon style or find the quality of a custom icon for an NPC spell lacking.
+
 ### Combat Info - Bar Highlight Tracking
 - Report if you see any ability fade or improperly tracked on the bar highlight component. Conditions or ways to replicate it would be great but that's not always obvious. This allows me to fix any issues with tracking that ability.
 - Report if the tracking for an ability seems confusing (in some cases one ability has 3 or 4 effects that occur and it can be difficult to determine whats best to track/ignore.
