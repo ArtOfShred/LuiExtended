@@ -1008,6 +1008,7 @@ Effects.BarHighlightExtraId = {
     -- Sorcerer
     [24576] = 24574, -- Defensive Rune
     [89491] = 24330, -- Haunting Curse
+    [132946] = 28482, -- Streak
 
     -- Warden
     [130140] = 130139, -- Cutting Dive --> Off-Balance
@@ -2191,6 +2192,11 @@ Effects.EffectOverrideByName = {
 
         -- Elsweyr
         [Unitnames.Elite_Captain_Carvain] =      { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace1h_quick_strike.dds' }, -- Captain Carvain (Elsweyr - Bright Moons, Warm Sands)
+
+        -- Greymoor
+        [Unitnames.Elite_Vitrus_the_Bloody] =    { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_2h_light.dds' }, -- Vitrus the Bloody (Greymoor - Bound in Blood)
+        [Unitnames.NPC_Icereach_Brute] =         { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_1h_light.dds' }, -- Icereach Brute (Greymoor - Bound in Blood)
+        [Unitnames.NPC_Icereach_Charger] =       { icon = 'LuiExtended/media/icons/abilities/ability_spell_hammer_2h_light.dds' }, -- Icereach Charger (Greymoor - Bound in Blood)
 
         -- DUNGEONS
         [Unitnames.NPC_Darkfern_Mauler] =        { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_1h_light_reach.dds' }, -- Darkfern Mauler (Elden Hollow I)
@@ -3945,6 +3951,7 @@ Effects.EffectOverride = {
     -- ENCHANTS ----------------------------------------------------
     ----------------------------------------------------------------
 
+    [46739] = { hide = true }, -- Bracing Enchant (Glyph of Bracing)
     [28919] = { icon = 'LuiExtended/media/icons/glyphs/glyph_absorb_health.dds' }, -- Life Drain (Glyph of Absorb Health)
     [28921] = { icon = 'LuiExtended/media/icons/glyphs/glyph_absorb_health.dds' }, -- Life Drain (Glyph of Absorb Health)
     [46743] = { icon = 'LuiExtended/media/icons/glyphs/glyph_absorb_magicka.dds' }, -- Absorb Magicka (Glyph of Absorb Magicka)
@@ -4796,17 +4803,28 @@ Effects.EffectOverride = {
 
     -- Housing Target Dummy
     [89977] = { hide = true }, -- Target Skeleton (Target Dummy)
+    [120010] = { tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Major Breach (Target Iron Atronach, Trial)
+    [120019] = { tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Minor Breach (Target Iron Atronach, Trial)
+    [120022] = { tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Major Fracture (Target Iron Atronach, Trial)
+    [120027] = { tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Minor Fracture (Target Iron Atronach, Trial)
+    [120030] = { tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Minor Vulnerability (Target Iron Atronach, Trial)
     [120007] = { icon = 'LuiExtended/media/icons/glyphs/glyph_crushing.dds', name = Abilities.Item_Glyph_of_Crushing, tooltip = Tooltips.Generic_Reduce_Physical_Spell_Resist_No_Dur }, -- Crusher (Target Iron Atronach, Trial)
     [120011] = { tooltip = Tooltips.Skill_Engulfing_Flames_Dummy }, -- Engulfing Flames (Target Iron Atronach, Trial)
     [120018] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds', name = Abilities.Set_Line_Breaker, tooltip = Tooltips.Generic_Reduce_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 3010 }, -- Roar of Alkosh (Target Iron Atronach, Trial)
-    [120012] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Target Iron Atronach, Trial)
-    [120020] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds' }, -- Minor Toughness (Target Iron Atronach, Trial)
+    [120017] = { tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Minor Sorcery (Target Iron Atronach, Trial)
+    [120023] = { tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Minor Brutality (Target Iron Atronach, Trial)
+    [120028] = { tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Minor Prophecy (Target Iron Atronach, Trial)
+    [120029] = { tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Minor Savagery (Target Iron Atronach, Trial)
+    [120008] = { tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Minor Berserk (Target Iron Atronach, Trial)
+    [120012] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds', tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Minor Magickasteal (Target Iron Atronach, Trial)
+    [120020] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds', tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Minor Toughness (Target Iron Atronach, Trial)
     [120021] = { tooltip = Tooltips.Skill_War_Horn_Dummy }, -- Aggressive Horn (Target Iron Atronach, Trial)
+    [120013] = { tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Major Force (Target Iron Atronach, Trial)
+    [120014] = { unbreakable = 1, tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Off Balance (Target Iron Atronach, Trial)
     [120024] = { icon = 'LuiExtended/media/icons/abilities/ability_set_worm_cult.dds', tooltip = Tooltips.Set_Worms_Raiment }, -- Worm's Raiment (Target Iron Atronach, Trial)
     [120026] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hircine.dds', tooltip = Tooltips.Set_Hircines_Veneer }, -- Hircine's Veneer (Target Iron Atronach, Trial)
-    [120015] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds', name = Abilities.Skill_Major_Courage }, -- Spell Power Cure (Target Iron Atronach, Trial)
+    [120015] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds', name = Abilities.Skill_Major_Courage, tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Spell Power Cure (Target Iron Atronach, Trial)
     [121572] = { hide = true }, -- Spear Shards (Target Iron Atronach, Trial)
-    [120014] = { unbreakable = 1 }, -- Off Balance (Target Iron Atronach, Trial)
 
     ----------------------------------------------------------------
     -- WORLD EVENTS  -----------------------------------------------
@@ -5480,7 +5498,8 @@ Effects.EffectOverride = {
     [51392] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Bolt_Escape_Fatigue }, -- Bolt Escape Fatigue (Bolt Escape - All Morphs)
     [23235] = { tooltip = Tooltips.Generic_Stun }, -- Bolt Escape (Bolt Escape)
     [28482] = { tooltip = Tooltips.Generic_Stun }, -- Streak (Streak)
-    [131383] = { icon = 'esoui/art/icons/ability_sorcerer_ball_of_lightning.dds', tooltip = Tooltips.Innate_Snare_Immobilize_Immunity }, -- Ball of Lightning (Ball of Lightning)
+    [132946] = { tooltip = Tooltips.Generic_Stun }, -- Streak (Streak)
+    [131383] = { tooltip = Tooltips.Innate_Snare_Immobilize_Immunity }, -- Ball of Lightning (Ball of Lightning)
     [23283] = { hide = true }, -- Summoned Ball of Lightning (Ball of Lightning)
     [23279] = { hide = true, tooltip = Tooltips.Skill_Intercept }, -- Ball of Lightning (Ball of Lightning)
     [23278] = { tooltip = Tooltips.Generic_Stun }, -- Ball of Lightning (Ball of Lightning)
@@ -6199,7 +6218,7 @@ Effects.EffectOverride = {
 
     -- One Hand and Shield
     [29420] = { icon = 'esoui/art/icons/ability_weapon_029.dds' }, -- Fortress (Fortress - Rank 1)
-    [45471] = { icon = 'esoui/art/icons/ability_weapon_029.dds' }, -- Fortress (Fortress - Rank 2)
+    [45471] = { icon = 'esoui/art/icons/ability_weapon_029.dds', hide = true }, -- Fortress (Fortress - Rank 2)
     [29397] = { icon = 'LuiExtended/media/icons/abilities/passive_weapon_sword_and_board.dds' }, -- Sword and Board (Sword and Board - Rank 1)
     [45452] = { icon = 'LuiExtended/media/icons/abilities/passive_weapon_sword_and_board.dds' }, -- Sword and Board (Sword and Board - Rank 2)
     [29415] = { icon = 'LuiExtended/media/icons/abilities/passive_weapon_deadly_bash.dds' }, -- Deadly Bash (Deadly Bash - Rank 1)
@@ -6239,8 +6258,9 @@ Effects.EffectOverride = {
     [30951] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_tri_focus_damage.dds' }, -- Shock (Tri Focus - Rank 1)
     [45505] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_tri_focus_damage.dds' }, -- Shock (Tri Focus - Rank 2)
     [30959] = { icon = 'esoui/art/icons/ability_weapon_007.dds' }, -- Ancient Knowledge (Ancient Knowledge - Rank 1)
-    [45513] = { icon = 'esoui/art/icons/ability_weapon_007.dds' }, -- Ancient Knowledge (Ancient Knowledge - Rank 2)
+    [45513] = { icon = 'esoui/art/icons/ability_weapon_007.dds', hide = true }, -- Ancient Knowledge (Ancient Knowledge - Rank 2)
     [30966] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_destruction_expert.dds' }, -- Magicka Restore (Destruction Expert - Rank 1)
+    [45514] = { hide = true }, -- Destruction Expert (Destruction Expert - Rank 2)
     [45515] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_destruction_expert.dds', name = Abilities.Passive_Destruction_Expert }, -- Magicka Restore (Destruction Expert - Rank 2)
 
     -- Restoration Staff
@@ -8684,7 +8704,7 @@ Effects.EffectOverride = {
     [12312] = { icon = 'LuiExtended/media/icons/abilities/ability_scorpion_paralyze.dds', name = Abilities.Skill_Paralyze, tooltip = Tooltips.Generic_Snare, tooltipValue2 = 55 }, -- Snare (Giant Scorpion)
     [6758] = { icon = 'LuiExtended/media/icons/abilities/ability_scorpion_hardened_carapace.dds', tooltip = Tooltips.Skill_Hardened_Carapace }, -- Hardened Carapace (Giant Scorpion)
     [4731] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_bite.dds' }, -- Bite (Giant Spider)
-    [44086] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_aoe_poison.dds', name = Abilities.Skill_Poisonous_Burst }, -- Poisonous Burst (Giant Spider)
+    [5789] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_aoe_poison.dds' }, -- Poisonous Burst (Giant Spider)
     [5790] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_aoe_poison.dds' }, -- Poisonous Burst (Giant Spider)
     [5685] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_corrosive_bite.dds' }, -- Corrosive Bite (Giant Spider)
     [8087] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_poison_spray.dds' }, -- Poison Spray (Giant Spider)
@@ -10391,6 +10411,38 @@ Effects.EffectOverride = {
     [124283] = { hide = true }, -- Roll Dodge (grand Adept Ma'hja-dro)
     [124272] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_focused_healing.dds', tooltip = Tooltips.Generic_HoT_Channel, tooltipValue2 = 0.5 }, -- Focused Healing (Grand Adept Ma'hja-dro)
     [124310] = { icon = 'esoui/art/icons/ability_restorationstaff_001.dds', name = Abilities.Skill_Steadfast_Ward, tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Master's Shield (Grand Adept Ma'hja-dro)
+
+    ----------------------------------------------------------------
+    -- GREYMOOR     ------------------------------------------------
+    ----------------------------------------------------------------
+
+    [136859] = { hide = true }, -- Pushback (Player)
+
+    [113262] = { hide = true }, -- CVFHeal CombatDet NOB InCombat (Fennorian)
+    [113273] = { hide = true }, -- CVFHeal CombatDet STN Start (Fennorian)
+    [113275] = { hide = true }, -- CVFHeal CombatDet STN End (Fennorian)
+    [113261] = { hide = true }, -- CVFHEAL CombatDet Root (Fennorian)
+    [113278] = { hide = true }, -- Damage (Fennorian)
+    [113271] = { icon = 'LuiExtended/media/icons/abilities/ability_set_almalexias_mercy.dds', hide = true }, -- Heal (Fennorian)
+
+    [131865] = { icon = 'esoui/art/icons/ability_2handed_001.dds', hide = true }, -- Uppercut (Vitrus the Bloody)
+    [131864] = { icon = 'esoui/art/icons/ability_2handed_001.dds', tooltip = Tooltips.Generic_Knockback }, -- Uppercut (Vitrus the Bloody)
+    [131861] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_throw_dagger_tutorial.dds', name = Abilities.Skill_Piercing_Dagger, hide = true }, -- Throw Dagger (Vitrus the Bloody)
+    [131862] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_throw_dagger_tutorial.dds', name = Abilities.Skill_Piercing_Dagger, tooltip = Tooltips.Generic_Stun }, -- Stunned (Vitrus the Bloody)
+
+    [135039] = { hide = true }, -- Drop In (Frostbite Spider)
+    [99566] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_spawn_hatchlings.dds' }, -- Falling Spiders (Frostbite Spider)
+
+    [135773] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_arrow.dds', name = Abilities.Skill_Frostbolt }, -- Flare (Matron Urgala)
+
+    [135612] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_frost_wave.dds', hide = true }, -- Frost Wave (Matron Urgala)
+    [135627] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_frost_wave.dds', hide = true }, -- Frost Wave (Matron Urgala)
+    [135672] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_frost_wave.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 25, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, noDuplicate = true }, -- Frost Wave (Matron Urgala)
+
+    [135718] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_freezing_vines.dds', name = Abilities.Skill_Freezing_Vines }, -- Frost Vines (Matron Urgala)
+    [135721] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_freezing_vines.dds', name = Abilities.Skill_Freezing_Vines, hideReduce = true, tooltip = Tooltips.Skill_Freezing_Vines }, -- Frost Vines (Matron Urgala)
+    [135720] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_freezing_vines.dds', name = Abilities.Skill_Freezing_Vines, tooltip = Tooltips.Skill_Freezing_Vines }, -- Frost Vines (Matron Urgala)
+    [135723] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_freezing_vineburst.dds', name = Abilities.Skill_Freezing_Vineburst }, -- Frost Vines (Matron Urgala)
 
     ----------------------------------------------------------------
     -- VVARDENFELL     ---------------------------------------------
@@ -13477,14 +13529,21 @@ Effects.MapDataOverride = {
     [11338] = { -- In Lava
         [608] = { name = Abilities.Skill_Flames, icon = 'LuiExtended/media/icons/abilities/ability_trap_fire.dds' }, -- Vvardenfell Tutorial Area -- TODO 1A: GET ID FOR ZONE
     },
+    [121005] = {
+        [1160] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_2h_heavy.dds' }, -- Heavy Attack (Vitrus the Bloody)
+    },
 
     -- ALDMERI DOMINION
 
     [77905] = { -- Knockback (Giant)
+        -- QUESTS
         [381] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hammer_2h_shock_aura.dds', name = Abilities.Skill_Shock_Blast }, -- Auridon - Captain Blanchete
+        [1160] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_gore.dds', name = Abilities.Skill_Gore }, -- Deepwood Vale (Greymoor)
     },
     [77906] = { -- Stun (Giant)
+        -- QUESTS
         [381] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hammer_2h_shock_aura.dds', name = Abilities.Skill_Shock_Blast }, -- Auridon - Captain Blanchete
+        [1160] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_gore.dds', name = Abilities.Skill_Gore }, -- Deepwood Vale (Greymoor)
     },
 
     -- DUNGEONS

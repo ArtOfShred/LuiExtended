@@ -11,6 +11,7 @@ local UI = LUIE.UI
 local Effects = LUIE.Data.Effects
 local Alerts = LUIE.Data.AlertTable
 local AlertsZone = LUIE.Data.AlertZoneOverride
+local AlertsMap = LUIE.Data.AlertMapOverride
 local AlertsConvert = LUIE.Data.AlertBossNameConvert
 
 local printToChat = LUIE.PrintToChat
@@ -630,22 +631,32 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
         end
     end
 
-    -- Override by zone specific here
+    -- Override by location name if it exists or map id here (location name takes priority over zone id)
     if AlertsZone[abilityId] then
         local index = GetZoneId(GetCurrentMapZoneIndex())
         local zoneName = GetPlayerLocationName()
-        if AlertsZone[abilityId][index] then
+        if AlertsZone[abilityId][zoneName] then
+            unitName = AlertsZone[abilityId][zoneName]
+            -- Debug for my accounts
+            if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
+                d("Zone Name: " .. zoneName .. ": " .. unitName)
+            end
+        elseif AlertsZone[abilityId][index] then
             unitName = AlertsZone[abilityId][index]
             -- Debug for my accounts
             if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
                 d(index .. ": " .. unitName)
             end
         end
-        if AlertsZone[abilityId][zoneName] then
-            unitName = AlertsZone[abilityId][zoneName]
+    end
+    -- Override by map name here (have to run this after we check location name and zone id)
+    if AlertsMap[abilityId] then
+        local mapName = GetMapName()
+        if AlertsMap[abilityId][mapName] then
+            unitName = AlertsMap[abilityId][mapName]
             -- Debug for my accounts
             if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
-                d(zoneName .. ": " .. unitName)
+                d("Map Name: " .. mapName .. ": " .. unitName)
             end
         end
     end

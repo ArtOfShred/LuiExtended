@@ -110,7 +110,7 @@ function UnitFrames.CreateSettings()
         setFunc = function(value) Settings.ResolutionOptions = resolutionOptionsKeys[value] UnitFrames.CustomFramesSetPositions() end,
         width = "full",
         default = Defaults.ResolutionOptions,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesRaid ) end,
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
 
     -- Custom Unit Frames Unlock

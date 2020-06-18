@@ -125,6 +125,7 @@ LUIE.Data.UnitNames = {
     NPC_Alit                              = 'Alit', -- GENERIC NPC
     NPC_Strangler                         = 'Strangler', -- GENERIC NPC
     NPC_Crocodile                         = 'Crocodile', -- GENERIC NPC
+    NPC_Feral_Guardian                    = 'Feral Guardian', -- GENERIC NPC (SUMMON)
 
     NPC_Aura_of_Protection                = 'Aura of Protection',
 
@@ -228,6 +229,16 @@ LUIE.Data.UnitNames = {
     -- Elsweyr Quests
     Elite_Captain_Carvain = 'Captain Carvain',
     Boss_Bahlokdaan = 'Bahlokdaan',
+
+    -- Greymoor Quests
+    Elite_Vitrus_the_Bloody = "Vitrus the Bloody",
+    Elite_Matron_Urgala = "Matron Urgala",
+    NPC_Frostbite_Spider = "Frostbite Spider",
+    NPC_Icereach_Chillrender = "Icereach Chillrender",
+    NPC_Icereach_Brute = "Icereach Brute",
+    NPC_Icereach_Thornslinger = "Icereach Thornslinger",
+    NPC_Icereach_Charger = "Icereach Charger",
+    NPC_Icereach_Beastcaller = "Icereach Beastcaller",
 
     ----------------------------------------------------------------
     -- WORLD BOSSES ------------------------------------------------

@@ -667,6 +667,7 @@ local g_talkingToNPC                = false         -- Toggled when we're in dia
 local g_tradeTarget                 = ""            -- Saves name of target player being traded with.
 local g_tradeStacksIn               = { }           -- Table for storing items to be traded in.
 local g_tradeStacksOut              = { }           -- Table for storing items to be traded out.
+local g_inTrade                     = false         -- Toggled on when in a trade.
 
 ------------------------------------------------
 -- COLORIZE VALUES -----------------------------
@@ -2387,8 +2388,8 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
             g_savedPurchase.messageTotal=messageTotal
             return
         end
-    -- Keep Reward (14), Keep Repair (40), PVP Resurrect (41), Defensive Keep Reward (75)
-elseif reason == 14 or reason == 40 or reason == 41 or reason == 75 then
+    -- Keep Reward (14), Keep Repair (40), PVP Resurrect (41), Offensive Keep Reward (74), Defensive Keep Reward (75)
+elseif reason == 14 or reason == 40 or reason == 41 or reason == 74 or reason == 75 then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageEarn
     -- Reward (27)
     elseif reason == 27 then
@@ -2416,8 +2417,8 @@ elseif reason == 14 or reason == 40 or reason == 41 or reason == 75 then
     -- Pickpocketed (59)
     elseif reason == 59 then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessagePickpocket
-    -- Looted - From Chest (0), Looted from Player/NPC (65)
-    elseif reason == 0 or reason == 65 then
+    -- Looted - From Chest (0), Looted from Player/NPC (65), Loot Currency Container (76)
+    elseif reason == 0 or reason == 65 or reason == 76 then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageLoot
     -- Looted - Stolen Gold (62)
     elseif reason == 62 then
@@ -2444,30 +2445,38 @@ elseif reason == 14 or reason == 40 or reason == 41 or reason == 75 then
         end
 
     -- ==============================================================================
-    -- DEBUG EVENTS WE DON'T KNOW YET
-    elseif reason == 6 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 15 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- Keep Upgrade
-    elseif reason == 16 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 18 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 20 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 22 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 23 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 25 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 26 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 30 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 34 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 36 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 37 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 38 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 39 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 46 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 53 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 58 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 66 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    -- DEBUG EVENTS - Don't know if these are implemented or what they are for.
+    elseif reason == 6 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_ACTION
+    elseif reason == 15 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_KEEP_UPGRADE
+    elseif reason == 16 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_DECONSTRUCT
+    elseif reason == 18 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_SOUL_HEAL
+    elseif reason == 20 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_CASH_ON_DELIVERY
+    elseif reason == 22 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_ABILITY_UPGRADE_PURCHASE
+    elseif reason == 23 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_HOOKPOINT_STORE
+    elseif reason == 25 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_STABLESPACE
+    elseif reason == 26 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_ACHIEVEMENT
+    elseif reason == 30 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_TRAIT_REVEAL
+    elseif reason == 34 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_REFORGE
+    elseif reason == 36 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_RECIPE
+    elseif reason == 37 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_CONSUME_FOOD_DRINK
+    elseif reason == 38 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_CONSUME_POTION
+    elseif reason == 39 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_HARVEST_REAGENT
+    elseif reason == 46 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_RESEARCH_TRAIT
+    elseif reason == 53 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_GUILD_STANDARD
+    elseif reason == 58 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_GUILD_FORWARD_CAMP
+    elseif reason == 66 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_BANK_FEE
+    elseif reason == 77 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_CHARACTER_UPGRADE
     -- END DEBUG EVENTS
     -- ==============================================================================
     -- If none of these returned true, then we must have just looted the currency (Potentially a few currency change events I missed too may have to adjust later)
     else messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageLoot end
+
+    -- Haven't seen this one yet: Loot Currency Container (76), but it's more recently added and thus probably used for something.
+    if reason == 76 then
+        if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
+            d("Currency Change reason 76 - CURRENCY_CHANGE_REASON_LOOT_CURRENCY_CONTAINER")
+        end
+    end
 
     -- Send relevant values over to the currency printer
     ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
@@ -3045,7 +3054,7 @@ function ChatAnnouncements.OnMailSuccess(eventCode)
                 local gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                 local logPrefix = g_mailTarget ~= "" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOut or ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOutNoName
                 local item = g_mailStacksOut[mailIndex]
-                ChatAnnouncements.ItemPrinter(item.icon, item.stack, item.itemType, item.itemId, item.itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
+                ChatAnnouncements.ItemCounterDelayOut(item.icon, item.stack, item.itemType, item.itemId, item.itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
             end
         end
     end
@@ -4048,6 +4057,7 @@ function ChatAnnouncements.CraftModeOverrides()
 end
 
 local delayedItemPool = { } -- Store items we are counting up when the player loots multiple bodies at once to print combined counts for any duplicate items
+local delayedItemPoolOut = { } -- Stacks for outbound delayed item pool
 
 function ChatAnnouncements.ItemCounterDelay(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter, groupLoot, alwaysFirst, delay)
     if delayedItemPool[itemId] then
@@ -4067,6 +4077,26 @@ function ChatAnnouncements.SendDelayedItems()
         end
     end
     delayedItemPool = { }
+end
+
+function ChatAnnouncements.ItemCounterDelayOut(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter, groupLoot, alwaysFirst, delay)
+    if delayedItemPoolOut[itemId] then
+        stack = delayedItemPoolOut[itemId].stack + stack -- Add stack count first, only if item already exists.
+    end
+    delayedItemPoolOut[itemId] = { icon = icon, itemType = itemType, itemLink = itemLink, stack = stack, receivedBy=receivedBy, logPrefix=logPrefix, gainOrLoss=gainOrLoss, filter=filter, groupLoot=groupLoot, alwaysFirst=alwaysFirst, delay=delay } -- Save relevant parameters
+
+    -- Pass along all values to SendDelayedItems()
+    eventManager:UnregisterForUpdate(moduleName .. "SendDelayedItemsOut")
+    eventManager:RegisterForUpdate(moduleName .. "SendDelayedItemsOut", 25, ChatAnnouncements.SendDelayedItemsOut)
+end
+
+function ChatAnnouncements.SendDelayedItemsOut()
+    for id, data in pairs(delayedItemPoolOut) do
+        if id then
+            ChatAnnouncements.ItemPrinter(data.icon, data.stack, data.itemType, id, data.itemLink, data.receivedBy, data.logPrefix, data.gainOrLoss, data.filter, data.groupLoot, data.alwaysFirst, data.delay)
+        end
+    end
+    delayedItemPoolOut = { }
 end
 
 function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
@@ -4203,7 +4233,7 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                 ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true, nil, false, true)
             end
             if g_inMail and isNewItem then
-                ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
+                ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
             end
         -- EXISTING ITEM
         elseif g_inventoryStacks[slotId] then
@@ -4247,7 +4277,7 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                     ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true, nil, false, true)
                 end
                 if g_inMail and isNewItem then
-                    ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
+                    ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
                 end
             -- STACK COUNT INCREMENTED DOWN
             elseif stackCountChange < 0 then
@@ -4285,7 +4315,7 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageList
                     g_savedItem = { icon = removedIcon, stack = change, itemLink = removedItemLink}
                 -- Check to see if the item was used
-                elseif not g_itemWasDestroyed and not g_talkingToNPC then
+                elseif not g_itemWasDestroyed and not g_talkingToNPC and not g_inTrade and not g_inMail then
                     local flag -- When set to true we deliver a message on a zo_callLater
                     if ChatAnnouncements.SV.Inventory.LootShowUsePotion and removedItemType == ITEMTYPE_POTION then
                         gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
@@ -4361,7 +4391,7 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
             ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true, nil, false, true)
         end
         if g_inMail and isNewItem then
-            ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
+            ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
         end
     end
 
@@ -6783,6 +6813,7 @@ function ChatAnnouncements.HookFunction()
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
 
         g_tradeTarget = ""
+        g_inTrade = false
         return true
     end
 
@@ -6805,7 +6836,7 @@ function ChatAnnouncements.HookFunction()
                     local gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                     local logPrefix = g_tradeTarget ~= "" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageTradeOut or ChatAnnouncements.SV.ContextMessages.CurrencyMessageTradeOutNoName
                     local item = g_tradeStacksOut[indexOut]
-                    ChatAnnouncements.ItemPrinter(item.icon, item.stack, item.itemType, item.itemId, item.itemLink, g_tradeTarget, logPrefix, gainOrLoss, false)
+                    ChatAnnouncements.ItemCounterDelayOut(item.icon, item.stack, item.itemType, item.itemId, item.itemLink, g_tradeTarget, logPrefix, gainOrLoss, false)
                 end
             end
 
@@ -6814,7 +6845,7 @@ function ChatAnnouncements.HookFunction()
                     local gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
                     local logPrefix = g_tradeTarget ~= "" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageTradeIn or ChatAnnouncements.SV.ContextMessages.CurrencyMessageTradeInNoName
                     local item = g_tradeStacksIn[indexIn]
-                    ChatAnnouncements.ItemPrinter(item.icon, item.stack, item.itemType, item.itemId, item.itemLink, g_tradeTarget, logPrefix, gainOrLoss, false)
+                    ChatAnnouncements.ItemCounterDelay(item.icon, item.stack, item.itemType, item.itemId, item.itemLink, g_tradeTarget, logPrefix, gainOrLoss, false)
                 end
             end
         end
@@ -7041,7 +7072,7 @@ function ChatAnnouncements.HookFunction()
                 if ChatAnnouncements.SV.Lorebooks.LorebookCollectionCSA then
                     local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.BOOK_COLLECTION_COMPLETED)
                     messageParams:SetText(csaPrefix, zo_strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
-                    messageParams:SetIconData(textureName)
+                    messageParams:SetIconData(textureName, "EsoUI/Art/Achievements/achievements_iconBG.dds")
                     messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_LORE_COLLECTION_COMPLETED)
                     CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
                 end
@@ -7101,7 +7132,7 @@ function ChatAnnouncements.HookFunction()
                         messageParams:SetBarParams(barParams)
                     end
                     messageParams:SetText(csaPrefix, zo_strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
-                    messageParams:SetIconData(textureName)
+                    messageParams:SetIconData(textureName, "EsoUI/Art/Achievements/achievements_iconBG.dds")
                     messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_LORE_COLLECTION_COMPLETED_SKILL_EXPERIENCE)
                     CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
                 end
@@ -10076,9 +10107,8 @@ end
 function ChatAnnouncements.OnTradeAdded(eventCode, who, tradeIndex, itemSoundCategory)
     local index = tradeIndex
     local name, icon, stack = GetTradeItemInfo(who, tradeIndex)
-    local bagId, slotId = GetTradeItemBagAndSlot(who, tradeIndex)
-    local itemId = GetItemId(bagId, slotId)
     local itemLink = GetTradeItemLink(who, tradeIndex, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+    local itemId = GetItemLinkItemId(itemLink)
     local itemType = GetItemLinkItemType(itemLink)
 
     if who == 0 then

@@ -170,7 +170,7 @@ LUIE.Data.AlertTable = {
     [64980] = { block = true, dodge = true, interrupt = true, reflect = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = LUIE_CC_TYPE_STAGGER }, -- Javelin (Winterborn Warrior)
     [65033] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_EFFECT_GAINED, duration = 1000, cc = LUIE_CC_TYPE_STAGGER }, -- Retaliation (Winterborn Warrior)
 
-    [55909] = { dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = LUIE_CC_TYPE_SNARE }, -- Grasping Vines (Winterborn Mage)
+    [55909] = { dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = LUIE_CC_TYPE_SNARE, postCast = 2300 }, -- Grasping Vines (Winterborn Mage)
     [64704] = { block = true, avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 1500, result = ACTION_RESULT_BEGIN, duration = 4500 }, -- Flames (Winterborn Mage)
 
     [65235] = { power = true, auradetect = true, priority = 2 }, -- Enrage (Vosh Rakh Devoted)
@@ -194,8 +194,8 @@ LUIE.Data.AlertTable = {
     [77019] = { block = true, dodge = true, reflect = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 766, cc = LUIE_CC_TYPE_SNARE }, -- Pin (Tracker) (Morrowind)
     [78432] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, cc = LUIE_CC_TYPE_STUN }, -- Lunge (Tracker) (Morrowind)
 
-    [88371] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1000 }, -- Dive (Beastcaller) (Morrowind)
-    [88394] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1000, cc = LUIE_CC_TYPE_STUN, eventdetect = true }, -- Gore (Beastcaller) (Morrowind)
+    [88371] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1000, eventdetect = true, postCast = 1200 }, -- Dive (Beastcaller) (Morrowind)
+    [88394] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1000, cc = LUIE_CC_TYPE_STUN, eventdetect = true, postCast = 2300 }, -- Gore (Beastcaller) (Morrowind)
     [88409] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Raise the Earth (Beastcaller)
 
     [87901] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Bombard (Arbalest) (Morrowind)
@@ -293,7 +293,7 @@ LUIE.Data.AlertTable = {
     [72789] = { avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1667, cc = LUIE_CC_TYPE_STAGGER }, -- Shockwave (Haj Mota)
 
     [76307] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1467 }, -- Lunge (Dire Wolf)
-    [76324] = { power = true, auradetect = true, priority = 2, refire = 1000 }, -- Baleful Call (Dire Wolf)
+    [76324] = { power = true, auradetect = true, priority = 2, refire = 1000, hiddenDuration = 2500 }, -- Baleful Call (Dire Wolf)
 
     [85201] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1167, cc = LUIE_CC_TYPE_STAGGER }, -- Bite (Nix-Ox)
     [85084] = { block = true, avoid = true, priority = 3, eventdetect = true, refire = 750, result = ACTION_RESULT_BEGIN, duration = 500, cc = LUIE_CC_TYPE_STAGGER }, -- Shriek (Nix-Ox)
@@ -314,7 +314,7 @@ LUIE.Data.AlertTable = {
     [6756] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = LUIE_CC_TYPE_SNARE }, -- Paralyze (Giant Scorpion)
     [6758] = { power = true, auradetect = true, priority = 2, ignoreRefresh = true, refire = 500 }, -- Hardened Carapace (Giant Scorpion)
 
-    [44086] = { avoid = true, priority = 3, auradetect = true, ignoreRefresh = true }, -- Fire Runes (Giant Spider)
+    [5789] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, duration = 2000, neverShowInterrupt = true }, -- Fire Runes (Giant Spider)
     [5685] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Corrosive Bite (Giant Spider)
     [8087] = { block = true, avoid = true, priority = 3, eventdetect = true, refire = 1200, result = ACTION_RESULT_BEGIN, duration = 5100 }, -- Poison Spray (Giant Spider)
     [4737] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = LUIE_CC_TYPE_SNARE }, -- Encase (Giant Spider)
@@ -813,6 +813,13 @@ LUIE.Data.AlertTable = {
     [125241] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1567, fakeName = Unitnames.Boss_Bahlokdaan, cc = LUIE_CC_TYPE_STUN  }, -- Tail Whip (Bahlokdaan)
     [125242] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1533, fakeName = Unitnames.Boss_Bahlokdaan, cc = LUIE_CC_TYPE_STUN  }, -- Wing Thrash (Bahlokdaan)
     [125243] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1533, fakeName = Unitnames.Boss_Bahlokdaan, cc = LUIE_CC_TYPE_STUN  }, -- Wing Thrash (Bahlokdaan)
+
+    --------------------------------------------------
+    -- GREYMOOR ---------------------------------------
+    --------------------------------------------------
+
+    [135718] = { dodge = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1500, cc = LUIE_CC_TYPE_SNARE, postCast = 2300 }, -- Frost Vines (Matron Urgala)
+    [135612] = { block = true, avoid = true, interrupt = true, priority = 2, eventdetect = true, refire = 2000, result = ACTION_RESULT_BEGIN, duration = 4500 }, -- Frost Wave (Matron Urgala)
 
     --------------------------------------------------
     -- ARENAS ----------------------------------------
@@ -1376,11 +1383,14 @@ LUIE.Data.AlertZoneOverride = {
     },
 
     [12459] = { -- Winter's Reach (Frost Mage)
+        -- QUESTS
+        [1160] = Unitnames.NPC_Icereach_Chillrender, -- Deepwood Vale (Greymoor)
         -- DUNGEONS
         [380] = Unitnames.NPC_Banished_Mage, -- Banished Cells I
     },
     [14194] = { -- Ice Barrier (Frost Mage)
-
+        -- QUESTS
+        [1160] = Unitnames.NPC_Icereach_Chillrender, -- Deepwood Vale (Greymoor)
         -- DUNGEONS
         [380] = Unitnames.NPC_Banished_Mage, -- Banished Cells I
     },
@@ -1424,6 +1434,9 @@ LUIE.Data.AlertZoneOverride = {
         [435] = Unitnames.NPC_Sainted_Charger, -- Cathedral of the Golden Path
         [555] = Unitnames.NPC_Sea_Viper_Charger, -- Abecean Sea
 
+        -- Greymoor
+        [1160] = Unitnames.NPC_Icereach_Charger, -- Deepwood Vale (Greymoor)
+
         -- DUNGEONS
         [131] = Unitnames.NPC_Sea_Viper_Charger, -- Tempest Island
         [58] = Unitnames.NPC_Sea_Viper_Charger, -- Tempest Island
@@ -1435,6 +1448,9 @@ LUIE.Data.AlertZoneOverride = {
 
         [435] = Unitnames.NPC_Sainted_Charger, -- Cathedral of the Golden Path
         [555] = Unitnames.NPC_Sea_Viper_Charger, -- Abecean Sea
+
+        -- Greymoor
+        [1160] = Unitnames.NPC_Icereach_Charger, -- Deepwood Vale (Greymoor)
 
         -- DUNGEONS
         [126] = Unitnames.Boss_Nenesh_gro_Mal, -- Elden Hollow I
@@ -1493,6 +1509,9 @@ LUIE.Data.AlertZoneOverride = {
         --
         [435] = Unitnames.NPC_Sainted_Archer, -- Cathedral of the Golden Path
 
+        -- Greymoor
+        [1160] = Unitnames.NPC_Icereach_Thornslinger, -- Deepwood Vale (Greymoor)
+
         -- DUNGEONS
         [130] = Unitnames.NPC_Skeletal_Archer, -- Crypt of Hearts I
         [380] = Unitnames.NPC_Banished_Archer, -- Banished Cells I
@@ -1524,6 +1543,9 @@ LUIE.Data.AlertZoneOverride = {
 
         --
         [435] = Unitnames.NPC_Sainted_Archer, -- Cathedral of the Golden Path
+
+        -- Greymoor
+        [1160] = Unitnames.NPC_Icereach_Thornslinger, -- Deepwood Vale (Greymoor)
 
         -- DUNGEONS
         [130] = Unitnames.NPC_Skeletal_Archer, -- Crypt of Hearts I
@@ -1857,8 +1879,10 @@ LUIE.Data.AlertZoneOverride = {
         [381] = Unitnames.NPC_Bear, -- Auridon
     },
 
-    [44086] = {-- Fire Runes (Giant Spider)
+    [5789] = {-- Fire Runes (Giant Spider)
+        -- QUESTS
         [393] = Unitnames.NPC_Spider, -- Saltspray Cave (Auridon)
+        [1160] = Unitnames.NPC_Frostbite_Spider, -- Deepwood Vale (Greymoor)
     },
     [8087] = { -- Poison Spray (Giant Spider)
         [393] = Unitnames.NPC_Spider, -- Saltspray Cave (Auridon)
@@ -1956,4 +1980,34 @@ LUIE.Data.AlertZoneOverride = {
     [7544] = { -- Quake (Dwemer Sphere)
         [534] = Unitnames.Elite_Tempered_Sphere, -- Stros M'Kai
     },
+
+    [135612] = { -- Frost Wave (Matron Urgala)
+        -- QUESTS
+        [1160] = Unitnames.Elite_Matron_Urgala, -- Deepwood Vale (Greymoor Tutorial)
+    },
+
+    [70366] = { -- Slam (Great Bear)
+        -- QUESTS
+        [Zonenames.Zone_Deepwood_Vale] = Unitnames.NPC_Feral_Guardian, -- Deepwood Vale (Greymoor Tutorial)
+    },
+
+    [88371] = { -- Dive (Beastcaller) (Morrowind)
+        [1160] = Unitnames.NPC_Icereach_Beastcaller, -- Deepwood Vale (Greymoor)
+    },
+    [88394] = { -- Gore (Beastcaller) (Morrowind)
+        [1160] = Unitnames.NPC_Icereach_Beastcaller, -- Deepwood Vale (Greymoor)
+    },
+    [88409] = { -- Raise the Earth (Beastcaller)
+        [1160] = Unitnames.NPC_Icereach_Beastcaller, -- Deepwood Vale (Greymoor)
+    },
+}
+
+-- Map Name override - Sometimes we need to use GetMapName() instead of Location Name or ZoneId
+LUIE.Data.AlertMapOverride = {
+
+    [70366] = { -- Slam (Great Bear)
+        -- QUESTS
+        [Zonenames.Zone_Deepwood_Barrow] = Unitnames.NPC_Great_Bear, -- Deepwood Vale (Greymoor Tutorial)
+    },
+
 }

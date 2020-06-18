@@ -229,6 +229,9 @@ Quests.ItemRemovedMessage = {
     [7032] = LUIE_QUEST_MESSAGE_DISCARD, -- Letter from Abnur Tharn (Bright Moons, Warm Sands)
     [6929] = LUIE_QUEST_MESSAGE_USE, -- Room Key (Bright Moons, Warm Sands)
 
+    -- Greymoor
+    [7161] = LUIE_QUEST_MESSAGE_TURNIN, -- Fennorian's Flask (Bound in Blood)
+
 }
 
 -- Message to override when an item is removed while we are in dialogue with an NPC.

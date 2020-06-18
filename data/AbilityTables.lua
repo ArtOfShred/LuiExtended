@@ -998,7 +998,6 @@ local AbilityTables = {
 
     -- Insects
     Skill_Paralyze                    = 6756,
-    Skill_Poisonous_Burst             = 5790,
     Skill_Web                         = 58521,
     Skill_Inject_Larva                = 9229,
     Skill_Zoom                        = GetString(SI_LUIE_SKILL_ZOOM),
@@ -1198,6 +1197,12 @@ local AbilityTables = {
     Skill_Headbutt                    = 125270,
     Skill_Star_Haven_Dragonhorn       = GetString(SI_LUIE_SKILL_STAR_HAVEN_DRAGONHORN),
     Skill_Steadfast_Ward              = 37232,
+
+    -- Greymoor Quests
+    Skill_Piercing_Dagger             = GetString(SI_LUIE_SKILL_PIERCING_DAGGER),
+    Skill_Frostbolt                   = 119222,
+    Skill_Freezing_Vines              = GetString(SI_LUIE_SKILL_FREEZING_VINES),
+    Skill_Freezing_Vineburst          = GetString(SI_LUIE_SKILL_FREEZING_VINEBURST),
 
     -- ---------------------------------------------------
     -- ARENA EFFECTS -----------------------------------

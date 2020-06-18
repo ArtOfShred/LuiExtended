@@ -249,9 +249,19 @@ function SpellCastBuffs.TempSlashConsolidate()
     LUIE.SpellCastBuffs.ReloadEffects("player")
 end
 
+function SpellCastBuffs.TempSlashZoneCheck()
+    local zoneid = GetZoneId(GetCurrentMapZoneIndex())
+    LUIE.PrintToChat("Zone Id: " .. zoneid)
+    local locName = GetPlayerLocationName()
+    LUIE.PrintToChat("Location: " .. locName)
+    local mapName = GetMapName()
+    LUIE.PrintToChat("Map: " .. mapName)
+end
+
 local displayName = GetDisplayName()
 if displayName == "@ArtOfShredPTS" or displayName == "@ArtOfShredLegacy" then
     SLASH_COMMANDS["/filter"] = SpellCastBuffs.TempSlashFilter
     SLASH_COMMANDS["/ground"] = SpellCastBuffs.TempSlashGround
     SLASH_COMMANDS["/consolidate"] = SpellCastBuffs.TempSlashConsolidate
+    SLASH_COMMANDS["/zonecheck"] = SpellCastBuffs.TempSlashZoneCheck
 end

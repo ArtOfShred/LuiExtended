@@ -42,4 +42,11 @@ LUIE.Data.ZoneNames = {
     -- Stros M'Kai
     Zone_The_Grave                        = 'The Grave',
 
+    ----------------------------------------------------------------
+    -- GREYMOOR ----------------------------------------------------
+    ----------------------------------------------------------------
+
+    Zone_Deepwood_Barrow                  = 'Deepwood Barrow',
+    Zone_Deepwood_Vale                    = 'Deepwood Vale',
+
 }

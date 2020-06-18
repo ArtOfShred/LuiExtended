@@ -943,7 +943,7 @@ LUIE.DebugAuras = {
     [46742] = true, -- Reduce Potion Cooldown (Glyph of Potion Speed)
     [46733] = true, -- Reduce Stamina Cost (Glyph of Reduce Feat Cost)
     [26750] = true, -- Reduce Magicka Cost (Glyph of Reduce Spell Cost)
-    [46739] = true, -- Reduce Block and Bash Cost (Glyph of Shielding)
+    [46739] = true, -- Bracing Enchant (Glyph of Bracing)
     [140300] = true, -- Prismatic Reduced Cost (Glyph of Reduced Skill Cost)
 
     -- Weapon Enchants
@@ -3967,6 +3967,7 @@ LUIE.DebugAuras = {
     [23236] = true, -- Streak (Streak)
     [23239] = true, -- Streak (Streak)
     [28482] = true, -- Streak (Streak)
+    [132946] = true, -- Streak (Streak)
 
     [23277] = true, -- Ball of Lightning (Ball of Lightning)
     [131383] = true, -- Ball of Lightning (Ball of Lightning)
@@ -4118,6 +4119,7 @@ LUIE.DebugAuras = {
     [94973] = true, -- Blessed Shards (Spear Shards - All Ranks)
     [94974] = true, -- Blessed Shards (Spear Shards - All Ranks)
     [48052] = true, -- Spear Shards / Necrotic Orb CD (Spear Shards - All Ranks)
+    [26832] = true, -- Blessed Shrads (Spear Shards - All Ranks)
     [26188] = true, -- Spear Shards (Spear Shards)
     [26190] = true, -- Spear Shards (Spear Shards)
     [95932] = true, -- Spear Shards (Spear Shards)
@@ -4870,6 +4872,7 @@ LUIE.DebugAuras = {
     [117714] = true, -- Blighted Blastbones (Blighted Blastones)
     [117727] = true, -- Major Defile (Blighted Blastbones)
     [124851] = true, -- Blighted Blastbones ActionList (Blighted Blastbones)
+    [117719] = true, -- Blighted Blastbones Leap (Blighted Blastbones)
 
     [117749] = true, -- Stalking Blastbones (Stalking Blastbones)
     [117773] = true, -- Relentless Blastbones (Stalking Blastbones)
@@ -4882,6 +4885,7 @@ LUIE.DebugAuras = {
     [117757] = true, -- Stalking Blastbones (Stalking Blastbones)
     [117756] = true, -- Stalking Blastbones (Stalking Blastbones)
     [124853] = true, -- Stalking Blastbones ActionList (Stalking Blastbones)
+    [117760] = true, -- Stalking Blastbones Leap (Stalking Blastbones)
 
     [125219] = true, -- Synergy Damage Bonus (Boneyard - Grave Robber Synergy)
     [115567] = true, -- Grave Robber (Boneyard - Grave Robber Synergy)
@@ -4890,6 +4894,7 @@ LUIE.DebugAuras = {
     [115573] = true, -- Grave Robber (Boneyard - Grave Robber Synergy)
     [118945] = true, -- Grave Robber (Boneyard - Grave Robber Synergy)
     [118946] = true, -- Grave Robber (Boneyard - Grave Robber Synergy)
+    [115548] = true, -- Grave Robber (Boneyard - Grave Robber Synergy)
 
     [115252] = true, -- Boneyard (Boneyard)
     [115255] = true, -- Boneyard (Boneyard)
@@ -6788,6 +6793,7 @@ LUIE.DebugAuras = {
     [63473] = true, -- Shooting Star (Shooting Star)
     [63471] = true, -- Shooting Star (Shooting Star)
     [114715] = true, -- Stun (Shooting Star)
+    [134553] = true, -- Shooting Star (Shooting Star)
 
     -------------------------------------
     -- PSIJIC ORDER PASSIVES ------------
@@ -8121,7 +8127,7 @@ LUIE.DebugAuras = {
     [29766] = true, -- Blocked Stack -- Guard
     [29765] = true, -- Uber Attack -- Guard
     [29767] = true, -- Uber Attack -- Guard
-    --[84346] = true, -- Uber Attack -- Guard
+    [84346] = true, -- Uber Attack -- Guard
 
     [34917] = true, -- Low Slash -- Brute
     [34919] = true, -- Low Slash -- Brute
@@ -12835,6 +12841,77 @@ LUIE.DebugAuras = {
     [123118] = true, -- Takeoff (Bahlokdaan)
     [123119] = true, -- Takeoff (Bahlokdaan)
     [122675] = true, -- Ground Snare Exception (Bahlokdaan)
+
+    -------------------------------------
+    -- GREYMOOR QUESTS/EVENTS -----------
+    -------------------------------------
+
+    [136859] = true, -- Pushback (Player)
+
+    [113260] = true, -- CVFHEAL CombatDet PASSIVE (Fennorian)
+    [113263] = true, -- CVFHEAL CombatDet REG LeftCon (Fennorian)
+    [113267] = true, -- CVFHEAL CombatDet IMM (Fennorian)
+    [113283] = true, -- CVFHEAL CombatDet PASSIVE (Fennorian)
+    [136492] = true, -- Snare (Fennorian)
+    [136493] = true, -- Snare (Fennorian)
+    [136494] = true, -- Snare (Fennorian)
+    [113262] = true, -- CVFHEAL CombatDet NOB InCombat
+    [113273] = true, -- CVFHEAL CombatDet STN Start
+    [113275] = true, -- CVFHEAL CombatDet STN End
+    [113261] = true, -- CVFHEAL CombatDet ROOT (Fennorian)
+    [113281] = true, -- Damage (Fennorian)
+    [113278] = true, -- Damage (Fennorian)
+    [113269] = true, -- Heal (Fennorian)
+    [113271] = true, -- Heal (Fennorian)
+
+    [131863] = true, -- Uppercut (Vitrus the Bloody)
+    [131865] = true, -- Uppercut (Vitrus the Bloody)
+    [131864] = true, -- Uppercut (Vitrus the Bloody)
+    [131861] = true, -- Throw Dagger (Vitrus the Bloody)
+    [131862] = true, -- Stunned (Vitrus the Bloody)
+
+    [135039] = true, -- Drop In (Frostbite Spider)
+    [99564] = true, -- Spiders (Frostbite Spider)
+    [99566] = true, -- Falling Spiders (Frostbite Spider)
+    [99565] = true, -- Falling Rocks (Frostbite Spider)
+
+    --[131796] = true, -- Can Be Hemo Buffed (Harrowfiend)
+
+    [135773] = true, -- Flare (Matron Urgala)
+    [135612] = true, -- Frost Wave (Matron Urgala)
+    [135642] = true, -- Frost Wave (Matron Urgala)
+    [135643] = true, -- Frost Wave (Matron Urgala)
+    [135644] = true, -- Frost Wave (Matron Urgala)
+    [135628] = true, -- Frost Wave (Matron Urgala)
+    [135645] = true, -- Frost Wave (Matron Urgala)
+    [135637] = true, -- Frost Wave (Matron Urgala)
+    [135646] = true, -- Frost Wave (Matron Urgala)
+    [135629] = true, -- Frost Wave (Matron Urgala)
+    [135647] = true, -- Frost Wave (Matron Urgala)
+    [135648] = true, -- Frost Wave (Matron Urgala)
+    [135635] = true, -- Frost Wave (Matron Urgala)
+    [135630] = true, -- Frost Wave (Matron Urgala)
+    [135636] = true, -- Frost Wave (Matron Urgala)
+    [135632] = true, -- Frost Wave (Matron Urgala)
+    [135631] = true, -- Frost Wave (Matron Urgala)
+    [135634] = true, -- Frost Wave (Matron Urgala)
+    [135633] = true, -- Frost Wave (Matron Urgala)
+    [135641] = true, -- Frost Wave (Matron Urgala)
+    [135639] = true, -- Frost Wave (Matron Urgala)
+    [135638] = true, -- Frost Wave (Matron Urgala)
+    [135640] = true, -- Frost Wave (Matron Urgala)
+    [135627] = true, -- Frost Wave (Matron Urgala)
+    [135672] = true, -- Frost Wave (Matron Urgala)
+
+    [135718] = true, -- Frost Vines (Matron Urgala)
+    [135721] = true, -- Frost Vines (Matron Urgala)
+    [135720] = true, -- Frost Vines (Matron Urgala)
+    [135722] = true, -- Frost Vines (Matron Urgala)
+    [135723] = true, -- Frost Vines (Matron Urgala)
+
+    [137595] = true, -- Soul Charged (Witch Pike)
+    [137652] = true, -- Soul Charged (Witch Pike)
+    [137665] = true, -- Soul Charged (Witch Pike)
 
     -------------------------------------
     -- ARENAS ---------------------------

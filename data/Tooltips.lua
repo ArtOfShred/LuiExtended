@@ -1299,6 +1299,9 @@ LUIE.Data.Tooltips = {
     -- Elsweyr Quests
     Skill_Flame_Aura                                = GetString(SI_LUIE_SKILL_FLAME_AURA),
 
+    -- Greymoor Quests
+    Skill_Freezing_Vines                            = GetString(SI_LUIE_SKILL_FREEZING_VINES_TP),
+
     ----------------------------------------------------------------
     -- ARENAS ------------------------------------------------------
     ----------------------------------------------------------------
