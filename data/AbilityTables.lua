@@ -983,7 +983,7 @@ local AbilityTables = {
     -- Animals
     Skill_Lacerate                    = 5452,
     Skill_Bite                        = 17957,
-    Skill_Savage_Blows                = 4416,
+    Skill_Savage_Blow                 = 139956,
     Skill_Slam                        = 70366,
     Skill_Rip_and_Tear                = GetString(SI_LUIE_SKILL_RIP_AND_TEAR),
     Skill_Rush                        = 14380,

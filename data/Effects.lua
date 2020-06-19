@@ -7724,9 +7724,16 @@ Effects.EffectOverride = {
     [81218] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hammer_2h_thunder_hammer.dds' }, -- Thunder Hammer (Thundermaul -- Boss)
 
     -- Nightblade (NPC)
-    [73712] = { hide = true }, -- Shadow Cloak (Nightblade NPC) (Pointless .5 second aura applied on player)
-    [73713] = { icon = 'esoui/art/icons/ability_nightblade_004.dds' }, -- Shadow Cloak (Nightblade)
+    [73712] = { hide = true }, -- Shadow Cloak (Nightblade NPC)
+    [73713] = { icon = 'esoui/art/icons/ability_nightblade_004.dds', tooltip = Tooltips.Generic_Invisibility }, -- Shadow Cloak (Nightblade)
     [36471] = { icon = 'esoui/art/icons/ability_nightblade_002.dds', tooltip = Tooltips.Generic_Stun }, -- Veiled Strike (Nightblade)
+
+    [137148] = { icon = 'esoui/art/icons/ability_nightblade_002.dds', hide = true }, -- Veiled Strike (Nightblade)
+    [137152] = { icon = 'esoui/art/icons/ability_nightblade_002.dds', tooltip = Tooltips.Generic_Stun }, -- Veiled Strike (Nightblade)
+    [138382] = { hide = true }, -- Shadow Cloak (Nightblade NPC)
+    [137150] = { hide = true }, -- Shadow Cloak (Nightblade)
+
+
     [63822] = { icon = 'esoui/art/icons/ability_nightblade_008.dds', tooltip = Tooltips.Generic_Stun }, -- Teleport Strike (Nightblade)
     [44345] = { icon = 'esoui/art/icons/ability_nightblade_018_a.dds', hide = true }, -- Soul Tether (Nightblade - Elite)
     [44349] = { icon = 'esoui/art/icons/ability_nightblade_018_a.dds' }, -- Soul Tether (Nightblade - Elite)
@@ -7735,6 +7742,7 @@ Effects.EffectOverride = {
     [53462] = { icon = 'esoui/art/icons/ability_nightblade_003.dds', tooltip = Tooltips.Skill_Siphoning_Strikes_NPC }, -- Siphoning Strikes (Nightblade - Elite)
 
     -- Archer
+    [37108] = { icon = 'esoui/art/icons/ability_bow_005.dds' }, -- Arrow Spray (Archer)
     [37109] = { icon = 'esoui/art/icons/ability_bow_005.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 75 }, -- Arrow Spray (Archer)
     [28628] = { icon = 'esoui/art/icons/ability_bow_003.dds' }, -- Volley (Archer)
     [28629] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Physical, tooltipValue2 = 0.5 }, -- Volley (Archer)
@@ -8071,9 +8079,12 @@ Effects.EffectOverride = {
     [4415] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds' }, -- Crushing Swipe (Bear)
     [38772] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds' }, -- Crushing Swipe (Bear)
     [18273] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', tooltip = Tooltips.Generic_Knockdown }, -- Crushing Swipe (Bear)
-    [4416] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_savage_blows.dds' }, -- Savage Blows (Bear)
-    [12380] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_savage_blows.dds' }, -- Savage Blows (Bear)
-    [61594] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_savage_blows.dds', name = Abilities.Skill_Savage_Blows, tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Savage Blows Bleeding (Bear)
+
+    [139956] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_savage_blows.dds' }, -- Savage Blow (Bear)
+    [139957] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_savage_blows.dds' }, -- Savage Blow (Bear)
+    [139963] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_savage_blows.dds', name = Abilities.Skill_Savage_Blow, tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Savage Bleeding (Bear)
+    [139958] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_savage_blows.dds', name = Abilities.Skill_Savage_Blow }, -- Savage Bleeding (Bear)
+
     [70355] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_bite.dds' }, -- Bite (Great Bear)
     [70357] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_lunge.dds' }, -- Lunge (Great Bear)
     [70359] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_lunge.dds' }, -- Lunge (Great Bear)
@@ -11442,8 +11453,8 @@ Effects.EffectOverride = {
     [84039] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_stone_swipe.dds' }, -- Stone Swipe (Menhir Stoneskin)
     [84040] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_stone_swipe.dds' }, -- Stone Swipe (Menhir Stoneskin)
     [84041] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_stone_swipe.dds', tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 0.5 }, -- Stone Swipe (Menhir Stoneskin)
-    [84037] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_petrifying_bellow.dds' }, -- Petrifying Bellow (Menhir Stoneskin)
-    [84038] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_petrifying_bellow.dds', tooltip = Tooltips.Generic_Stun, noDuplicate = true }, -- Petrifying Bellow (Menhir Stoneskin)
+    [84037] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_petrifying_bellow.dds' }, -- Petrifying Bellow (Menhir Stoneskin)
+    [84038] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_petrifying_bellow.dds', tooltip = Tooltips.Generic_Stun, noDuplicate = true }, -- Petrifying Bellow (Menhir Stoneskin)
     [84580] = { hide = true }, -- Petrifing Bellow (Menhir Stoneskin)
     [84292] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_lacerate.dds' }, -- Graven Slash (Menhir Stoneskin)
     [84293] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_lacerate.dds', name = Abilities.Skill_Graven_Slash, tooltip = Tooltips.Skill_Graven_Slash, hideReduce = true }, -- Graven Slash (Menhir Stoneskin)

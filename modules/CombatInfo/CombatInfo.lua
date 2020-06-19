@@ -1919,12 +1919,11 @@ end
 
 -- Listens to EVENT_COMBAT_EVENT
 function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
-    -- Manually track Ultimate generation -- same as in CombatInfo module
+    -- Track ultimate generation when we block an attack or hit a target with a light/medium/heavy attack.
     if CombatInfo.SV.UltimateGeneration and uiUltimate.NotFull and (
         ( result == ACTION_RESULT_BLOCKED_DAMAGE and targetType == COMBAT_UNIT_TYPE_PLAYER ) or
-        ( Effects.IsWeaponAttack[abilityName] and sourceType == COMBAT_UNIT_TYPE_PLAYER and targetType == COMBAT_UNIT_TYPE_NONE )
+        ( Effects.IsWeaponAttack[abilityName] and sourceType == COMBAT_UNIT_TYPE_PLAYER and targetName ~= "" )
         ) then
-
         uiUltimate.Texture:SetHidden(false)
         uiUltimate.FadeTime = GetGameTimeMilliseconds() + 8000
     end
@@ -2054,6 +2053,31 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
         g_toggledSlotsPlayer[abilityId] = true
     end
 
+    -- Special handling for Crystallized Shield + Morphs
+    if abilityId == 92068 or abilityId == 92168 or abilityId == 92170 then
+        if result == ACTION_RESULT_DAMAGE_SHIELDED then
+            if g_toggledSlotsFront[abilityId] or g_toggledSlotsBack[abilityId] then
+                g_toggledSlotsStack[abilityId] = g_toggledSlotsStack[abilityId] -1
+                if g_toggledSlotsFront[abilityId] then
+                    local slotNum = g_toggledSlotsFront[abilityId]
+                    if g_toggledSlotsStack[abilityId] and g_toggledSlotsStack[abilityId] > 0 then
+                        g_uiCustomToggle[slotNum].stack:SetText(g_toggledSlotsStack[abilityId])
+                    else
+                        g_uiCustomToggle[slotNum].stack:SetText("")
+                    end
+                end
+                if g_toggledSlotsBack[abilityId] then
+                    local slotNum = g_toggledSlotsBack[abilityId]
+                    if g_toggledSlotsStack[abilityId] and g_toggledSlotsStack[abilityId] > 0 then
+                        g_uiCustomToggle[slotNum].stack:SetText(g_toggledSlotsStack[abilityId])
+                    else
+                        g_uiCustomToggle[slotNum].stack:SetText("")
+                    end
+                end
+            end
+        end
+    end
+
     if result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED or result == ACTION_RESULT_EFFECT_GAINED_DURATION then
         local currentTime = GetGameTimeMilliseconds()
         if g_toggledSlotsFront[abilityId] or g_toggledSlotsBack[abilityId] then
@@ -2061,6 +2085,11 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
                 local duration = GetUpdatedAbilityDuration(abilityId)
                 local endTime = currentTime + duration
                 g_toggledSlotsRemain[abilityId] = endTime
+                -- Handling for Crystallized Shield + Morphs
+                if abilityId == 92068 or abilityId == 92168 or abilityId == 92170 then
+                    g_toggledSlotsStack[abilityId] = 3
+                end
+                -- Toggle highlight on
                 if g_toggledSlotsFront[abilityId] then
                     local slotNum = g_toggledSlotsFront[abilityId]
                     CombatInfo.ShowSlot(slotNum, abilityId, currentTime, false)

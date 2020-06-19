@@ -110,6 +110,7 @@ LUIE.Data.AlertTable = {
     [81217] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 1533, bossMatch = { Unitnames.Boss_Captain_Blanchete } }, -- Thunder Hammer (Thundermaul - Boss)
 
     [36470] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 2500, cc = LUIE_CC_TYPE_STUN }, -- Veiled Strike (Nightblade)
+    [137148] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 2500, cc = LUIE_CC_TYPE_STUN }, -- Veiled Strike (Nightblade)
     [44345] = { block = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = LUIE_CC_TYPE_STUN, duration = 600, bossMatch = { Unitnames.Boss_Dogas_the_Berserker } }, -- Soul Tether (Nightblade)
 
     [34742] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Fiery Breath (Dragonknight)
@@ -223,7 +224,7 @@ LUIE.Data.AlertTable = {
     [5452] = { block = true, dodge = true, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1500, cc = LUIE_CC_TYPE_STAGGER }, -- Lacerate (Alit)
 
     [4415] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1600, cc = LUIE_CC_TYPE_STUN }, -- Crushing Swipe (Bear)
-    [4416] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 2000, cc = LUIE_CC_TYPE_STAGGER }, -- Savage Blows (Bear)
+    [139956] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 2000, cc = LUIE_CC_TYPE_STAGGER }, -- Savage Blow (Bear)
 
     [70366] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2167, cc = LUIE_CC_TYPE_STUN, bossMatch = { Unitnames.Boss_Gurgozu, Unitnames.Boss_Graufang } }, -- Slam (Great Bear)
 

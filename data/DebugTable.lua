@@ -8231,8 +8231,12 @@ LUIE.DebugAuras = {
 
     [73712] = true, -- Shadow Cloak -- Nightblade
     [73713] = true, -- Shadow Cloak -- Nightblade
-    [36470] = true, -- Veiled Strike -- Nightblade
-    [36471] = true, -- Veiled Strike -- Nightblade
+    --[36470] = true, -- Veiled Strike -- Nightblade
+    --[36471] = true, -- Veiled Strike -- Nightblade
+    [137148] = true, -- Veiled Strike -- Nightblade
+    [137152] = true, -- Veiled Strike -- Nightblade
+    [138382] = true, -- Shadow Cloak -- Nightblade
+    [137150] = true, -- Shadow Cloak -- Nightblade
     [36460] = true, -- Teleport Strike -- Nightblade
     [63821] = true, -- Teleport Strike -- Nightblade
     [63822] = true, -- Teleport Strike -- Nightblade
@@ -8247,7 +8251,6 @@ LUIE.DebugAuras = {
 
     [37108] = true, -- Arrow Spray -- Archer
     [37109] = true, -- Arrow Spray -- Archer
-    [37116] = true, -- Arrow Spray -- Archer
     [28628] = true, -- Volley -- Archer
     [28629] = true, -- Volley -- Archer
     [74978] = true, -- Taking Aim -- Archer
@@ -8847,9 +8850,10 @@ LUIE.DebugAuras = {
     [4415] = true, -- Crushing Swipe -- Bear
     [38772] = true, -- Crushing Swipe -- Bear
     [18273] = true, -- Crushing Swipe -- Bear
-    [4416] = true, -- Savage Blows -- Bear
-    [12380] = true, -- Savage Blows -- Bear
-    [61594] = true, -- Savage Blows Bleeding -- Bear
+    [139956] = true, -- Savage Blow -- Bear
+    [139957] = true, -- Savage Blow -- Bear
+    [139963] = true, -- Savage Bleeding -- Bear
+    [139958] = true, -- Savage Bleeding -- Bear
     [4419] = true, -- Daunting Roar -- Bear
 
     [70355] = true, -- Bite -- Great Bear
