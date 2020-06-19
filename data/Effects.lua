@@ -6826,10 +6826,10 @@ Effects.EffectOverride = {
     [80180] = { hide = true }, -- Birth Direwolf (Pack Leader)
     [80177] = { hide = true }, -- Pack Leader (Pack Leader)
     [80178] = { hide = true }, -- Pack Leader (Pack Leader)
-    [80184] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_lunge_pack_leader.dds' }, -- Lunge (Pack Leader)
-    [127161] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_lunge_pack_leader.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 30 }, -- Lunge (Pack Leader)
-    [80189] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_gnash.dds' }, -- Gnash (Pack Leader)
-    [80190] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_gnash.dds' }, -- Gnash (Pack Leader)
+    [80184] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_lunge.dds' }, -- Lunge (Pack Leader)
+    [127161] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_lunge.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 30 }, -- Lunge (Pack Leader)
+    [80189] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_gnash.dds' }, -- Gnash (Pack Leader)
+    [80190] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_gnash.dds' }, -- Gnash (Pack Leader)
 
     [39076] = { tooltip = Tooltips.Skill_Werewolf_Berserker }, -- Werewolf Berserker (Werewolf Berserker)
     [111844] = { tooltip = Tooltips.Generic_Fear }, -- Werewolf Berserker

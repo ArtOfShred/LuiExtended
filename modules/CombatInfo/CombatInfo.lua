@@ -688,6 +688,8 @@ function CombatInfo.RegisterCombatInfo()
         eventManager:AddFilterForEvent(moduleName .. "CombatEvent1", REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false, REGISTER_FILTER_COMBAT_RESULT, ACTION_RESULT_BLOCKED_DAMAGE)
         eventManager:RegisterForEvent(moduleName .. "PowerUpdate", EVENT_POWER_UPDATE, CombatInfo.OnPowerUpdatePlayer)
         eventManager:AddFilterForEvent(moduleName .. "PowerUpdate", EVENT_POWER_UPDATE, REGISTER_FILTER_UNIT_TAG, "player")
+        eventManager:RegisterForEvent(moduleName .. "InventoryUpdate", EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CombatInfo.OnInventorySlotUpdate)
+        eventManager:AddFilterForEvent(moduleName .. "InventoryUpdate", EVENT_INVENTORY_SINGLE_SLOT_UPDATE, REGISTER_FILTER_BAG_ID, BAG_WORN, REGISTER_FILTER_INVENTORY_UPDATE_REASON, INVENTORY_UPDATE_REASON_DEFAULT, REGISTER_FILTER_IS_NEW_ITEM, false)
     end
     if CombatInfo.SV.UltimateLabelEnabled or CombatInfo.SV.UltimatePctEnabled or CombatInfo.SV.CastBarEnable then
         eventManager:RegisterForEvent(moduleName .. "CombatEvent2", EVENT_COMBAT_EVENT, CombatInfo.OnCombatEvent)
@@ -731,8 +733,8 @@ function CombatInfo.RegisterCombatInfo()
         -- Setup bar highlight
         CombatInfo.UpdateBarHighlightTables()
     end
-    -- Have to register EVENT_EFFECT_CHANGED for werewolf as well - Stop devour cast bar when devour fades
-    if CombatInfo.SV.ShowTriggered or CombatInfo.SV.ShowToggled or CombatInfo.SV.CastBarEnable then
+    -- Have to register EVENT_EFFECT_CHANGED for werewolf as well - Stop devour cast bar when devour fades / also handles updating Vampire Ultimate cost on stage change
+    if CombatInfo.SV.ShowTriggered or CombatInfo.SV.ShowToggled or CombatInfo.SV.CastBarEnable or CombatInfo.SV.UltimateLabelEnabled or CombatInfo.SV.UltimatePctEnabled then
         eventManager:RegisterForEvent(moduleName, EVENT_EFFECT_CHANGED, CombatInfo.OnEffectChanged)
     end
 
@@ -1210,6 +1212,11 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
     -- Bail out if this effect wasn't cast by the player.
     if castByPlayer ~= COMBAT_UNIT_TYPE_PLAYER then
         return
+    end
+
+    -- Update ultimate label on vampire stage change.
+    if Effects.IsVamp[abilityId] and changeType == EFFECT_RESULT_GAINED then
+        CombatInfo.UpdateUltimateLabel()
     end
 
     if Castbar.CastBreakOnRemoveEffect[abilityId] and changeType == EFFECT_RESULT_FADED then
@@ -2440,6 +2447,10 @@ function CombatInfo.OnPowerUpdatePlayer(eventCode , unitTag, powerIndex, powerTy
     uiUltimate.NotFull = (powerValue < powerMax)
     -- Calculate the percentage to activation old one and current
     local pct = (g_ultimateCost > 0) and math.floor((powerValue / g_ultimateCost) * 100 ) or 0
+    -- Set max percentage label to 100%.
+    if pct > 100 then
+        pct = 100
+    end
     -- Update the tooltip only when the slot is used and percentage is enabled
     if IsSlotUsed(g_ultimateSlot) then
         if CombatInfo.SV.UltimateLabelEnabled or CombatInfo.SV.UltimatePctEnabled then
@@ -2490,4 +2501,11 @@ function CombatInfo.OnPowerUpdatePlayer(eventCode , unitTag, powerIndex, powerTy
     end
     -- Update stored value
     g_ultimateCurrent = powerValue
+end
+
+function CombatInfo.OnInventorySlotUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
+
+    if stackCountChange >= 0 then
+        CombatInfo.UpdateUltimateLabel()
+    end
 end

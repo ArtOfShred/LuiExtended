@@ -719,6 +719,28 @@ LUIE.DebugAuras = {
     [69293] = true, -- Sigil of Imperial Retreat (Sigil of Imperial Retreat)
     [59581] = true, -- Clickable Eat Food (Spoiled Food)
 
+    -- Research Scrolls
+    [95149] = true, -- Research Scroll Blacksmithing (Research Scroll, Blacksmithing, 1 Day)
+    [95147] = true, -- Research Scroll Clothing 1day (Research Scroll, Clothing, 1 Day)
+    [106557] = true, -- Research Scroll Jewelry Crafti (Research Scroll, Jewelry Crafting, 1 Day)
+    [95148] = true, -- Research Scroll Woodworking 1d (Research Scroll, Woodworking, 1 Day)
+    [92871] = true, -- Instant Blacksmithing Research (Research Scroll Blacksmithing)
+    [92938] = true, -- Instant Blacksmithing Research, Grand (Research Scroll Blacksmithing)
+    [92940] = true, -- Instant Blacksmithing Research, Major (Research Scroll Blacksmithing)
+    [92942] = true, -- Instant Clothing Research (Research Scroll 1 Day)
+    [92944] = true, -- Instant Clothing Research , Grand (Research Scroll Clothing 15day)
+    [92947] = true, -- Instant Clothing Research , Major (Research Scroll Clothing 7day)
+    [107848] = true, -- Instant Jewelry Crafting Research (Research Scroll Jewelry Crafti)
+    [107853] = true, -- Instant Jewelry Crafting Research, Grand (Research Scroll Jewelry Crafti)
+    [107851] = true, -- Instant Jewelry Crafting Research, Major (Research Scroll Jewelry Crafti)
+    [92950] = true, -- Instant Woodworking Research (Research Scroll Woodworking 1)
+    [92952] = true, -- Instant Woodworking Research, Grand (Research Scroll Woodworking 15)
+    [92954] = true, -- Instant Woodworking Research, Major (Research Scroll Woodworking 7d)
+    [92960] = true, -- Research Scroll All 1 Day (Instant All Research)
+
+    -- Crown Respec Scrolls
+    [67049] = true, -- _CRWN Respec Attriutes (Attribute Respecification Scroll)
+
     -- Glenmoril Wyrd Treasure Maps
     [128186] = true, -- Glenmoril Wyrd Treasure Map: Alik'r
     [128258] = true, -- Glenmoril Wyrd Treasure Map: Auridon
