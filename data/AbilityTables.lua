@@ -1304,7 +1304,6 @@ local AbilityTables = {
     Skill_Trail_of_Flames             = GetString(SI_LUIE_SKILL_TRAIL_OF_FLAMES),
     Skill_Pyroclasm                   = 92269,
     Skill_Fire_Rune                   = 47102,
-    Skill_Flare                       = 10611,
     Skill_Seismic_Tremor              = 55203,
     Skill_Enraged_Fortitude           = GetString(SI_LUIE_SKILL_ENRAGED_FORTITUDE),
     Skill_Wing_Gust                   = 26554,
@@ -1319,6 +1318,7 @@ local AbilityTables = {
     Skill_Flame_Barrier               = GetString(SI_LUIE_SKILL_FLAME_BARRIER),
     Skill_Call_Storm_Atronach         = GetString(SI_LUIE_SKILL_CALL_STORM_ATRONACH),
     Skill_Call_Storm_Atronachs        = GetString(SI_LUIE_SKILL_CALL_STORM_ATRONACHS),
+    Skill_Explosive_Flare             = GetString(SI_LUIE_SKILL_EXPLOSIVE_FLARE),
 
     -- Tempest Island
     Skill_Sonic_Scream                = 46732,

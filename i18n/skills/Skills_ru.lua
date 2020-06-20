@@ -270,7 +270,7 @@ local strings = {
     -- Crowd Control / Immunity
     SI_LUIE_SKILL_GENERIC_OFF_BALANCE_IMMUNITY_TP =      "Immune to effects that exploit off balance targets for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_MAJOR_VULNERABILITY_IMMUNITY = "Major Vulnerability Immunity",
-    SI_LUIE_SKILL_GENERIC_MAJOR_VULNERABILITY_IMMUNITY_TP = "Immune to effects that apply Major Vulnerability for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_MAJOR_VULNERABILITY_IMMUNITY_TP = "Immune to Major Vulnerability for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_OFF_BALANCE_TP =               "Off Balance for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_OFF_BALANCE_NO_DUR_TP =        "Off Balance.",
     SI_LUIE_SKILL_GENERIC_SNARE_TP =                     "Movement Speed reduced by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
@@ -900,7 +900,7 @@ local strings = {
     SI_LUIE_SKILL_SET_LORD_WARDEN_BUFF =                 "You and allies within |cFFFFFF8|r meters of the shadow orb have |cFFFFFF3180|r increased Physical and Spell Resistance.",
     SI_LUIE_SKILL_SET_MALUBETH_DAMAGE =                  "Afflicted with Magic Damage every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds while the beam holds.\n\nYour attacker heals for |cFFFFFF100|r% of the damage done.",
     SI_LUIE_SKILL_SET_MALUBETH_HEAL =                    "Restoring Health every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds while the beam holds.",
-    SI_LUIE_SKILL_SET_MAW_OF_THE_INFERNAL =              "A fire breathing Daedroth fights at your side. The daedroth remains for |cFFFFFF<<1>>|r seconds or until killed.\n\nThe daedroth's basic attacks deal Flame Damage.",
+    SI_LUIE_SKILL_SET_MAW_OF_THE_INFERNAL =              "A fire breathing Daedroth fights at your side. The daedroth remains for |cFFFFFF<<1>>|r seconds or until killed.\n\nThe daedroth's attacks deal Flame Damage.",
     SI_LUIE_SKILL_SET_MOLAG_KENA_TP =                    "When you deal damage with |cFFFFFF2|r consecutive light attacks, you trigger |cFFFFFFOverkill|r for |cFFFFFF6|r seconds.",
     SI_LUIE_SKILL_SET_MOLAG_KENA_OVERKILL_TP =           "Increase Weapon and Spell Damage by |cFFFFFF560|r but increase the cost of your abilities by |cFFFFFF8|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_PIRATE_SKELETON_TP =               "Gain Major Protection but become afflicted with Major Defile for |cFFFFFF<<1>>|r seconds.",
@@ -1382,6 +1382,7 @@ local strings = {
     SI_LUIE_SKILL_FREEZING_VINES =                       "Freezing Vines",
     SI_LUIE_SKILL_FREEZING_VINEBURST =                   "Freezing Vineburst",
     SI_LUIE_SKILL_FREEZING_VINES_TP =                    "Afflicted with Bleed Damage every |cFFFFFF0.5|r seconds and immobilized for |cFFFFFF<<1>>|r seconds.\n\nThe vines shatter at the end of the duration, dealing Frost Damage if you do not move away.",
+    SI_LUIE_SKILL_EXPLOSIVE_FLARE =                      "Explosive Flare",
 
     -- Keep Upgrade
     SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_RANGE =              "Longer Range on Ranged Guards",

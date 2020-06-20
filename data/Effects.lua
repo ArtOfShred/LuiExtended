@@ -11810,8 +11810,8 @@ Effects.EffectOverride = {
     [61201] = { hide = true }, -- Melt Up
     [56178] = { hide = true }, -- Gaunt NPC Add Threat
     [56186] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_voice_to_wake_the_dead.dds' }, -- Voice to Wake the Dead (Flame Colossus)
-    [86753] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_large.dds', name = Abilities.Skill_Flare }, -- Bone Flare (Flame Colossus)
-    [55744] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_large.dds', name = Abilities.Skill_Flare }, -- Bone Flare (Flame Colossus)
+    [86753] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_bone_flare.dds', name = Abilities.Skill_Explosive_Flare }, -- Bone Flare (Flame Colossus)
+    [55744] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_bone_flare.dds', name = Abilities.Skill_Explosive_Flare }, -- Bone Flare (Flame Colossus)
 
     [56055] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_jagged_claw.dds' }, -- Jagged Claw (Horvantud the Fire Maw)
     [56054] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_jaws.dds' }, -- Fiery Jaws (Horvantud the Fire Maw)

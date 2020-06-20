@@ -341,7 +341,7 @@ LUIE.Data.AlertTable = {
     [5252] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1100 }, -- Fire Bite (Shalk)
     [5262] = { avoid = true, interrupt = true, priority = 3, auradetect = true, duration = 4000 }, -- Burning Ground (Shalk)
 
-    [8429] = { interrupt = true, priority = 3, refire = 750, result = ACTION_RESULT_BEGIN, duration = 4600 }, -- Zap (Thunderbug)
+    [8429] = { interrupt = true, priority = 3, refire = 1000, result = ACTION_RESULT_BEGIN, duration = 4600 }, -- Zap (Thunderbug)
     [26412] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, postCast = 1800 }, -- Thunderstrikes (Thunderbug)
 
     [73172] = { dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 3667, cc = LUIE_CC_TYPE_SNARE }, -- Swarm (Kotu Gava Broodmother)
