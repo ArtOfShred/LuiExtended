@@ -36,6 +36,7 @@ local strings = {
     SI_LUIE_DEFAULT_FRAME_PLAYER_INTERACTION =           "Player Interaction Prompt",
     SI_LUIE_DEFAULT_FRAME_ACTIVE_COMBAT_TIPS =           "Active Combat Tips",
     SI_LUIE_DEFAULT_FRAME_SYNERGY =                      "Synergy",
+    SI_LUIE_DISMISS_PET =                                "|cBFBFBFYou dismiss |r<<1>>|cBFBFBF.|r",
 
     -- Bindings
     SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Summon Banker (Tythis)",
@@ -43,6 +44,7 @@ local strings = {
     SI_BINDING_NAME_LUIE_COMMAND_MERCHANT =              "Summon Merchant (Nuzhimeh)",
     SI_BINDING_NAME_LUIE_COMMAND_MERCHANT_CAT =          "Summon Merchant (Fezez)",
     SI_BINDING_NAME_LUIE_COMMAND_FENCE =                 "Summon Fence",
+    SI_BINDING_NAME_LUIE_DISMISS_PET =                   "Dismiss Pet",
     SI_BINDING_NAME_LUIE_COMMAND_READY_CHECK =           "Initiate Ready Check",
     SI_BINDING_NAME_LUIE_COMMAND_HOME =                  "Teleport to Primary Home",
     SI_BINDING_NAME_LUIE_COMMAND_LEAVE_GROUP =           "Leave Group",

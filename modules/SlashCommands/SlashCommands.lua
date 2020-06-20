@@ -41,6 +41,8 @@ SlashCommands.Defaults = {
     SlashMead           = true,
     SlashWitch          = true,
     SlashReport         = true,
+    SlashPet            = true,
+    SlashPetMessage     = true,
 }
 SlashCommands.SV = nil
 
@@ -201,6 +203,12 @@ function SlashCommands.RegisterSlashCommands()
     if SlashCommands.SV.SlashFence then
         SLASH_COMMANDS["/smuggler"]     = function(...) SlashCommands.SlashCollectible(300) end
         SLASH_COMMANDS["/fence"]        = function(...) SlashCommands.SlashCollectible(300) end
+    end
+    if SlashCommands.SV.SlashPet then
+        SLASH_COMMANDS["/pet"]         = SlashCommands.SlashPet
+        SLASH_COMMANDS["/pets"]        = SlashCommands.SlashPet
+        SLASH_COMMANDS["/dismisspet"]  = SlashCommands.SlashPet
+        SLASH_COMMANDS["/dismisspets"] = SlashCommands.SlashPet
     end
     if SlashCommands.SV.SlashCake then
         SLASH_COMMANDS["/cake"]         = function(...) SlashCommands.SlashCollectible(7619) end

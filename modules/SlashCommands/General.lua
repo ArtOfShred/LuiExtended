@@ -294,3 +294,30 @@ function SlashCommands.SlashReport(player)
     -- Open the reporting window
     HELP_CUSTOMER_SUPPORT_KEYBOARD:OpenScreen(HELP_CUSTOMER_SERVICE_ASK_FOR_HELP_KEYBOARD_FRAGMENT)
 end
+
+local petIds = {
+    [23304] = "[Familiar]", -- Summon Unstable Familiar (Sorcerer)
+    [23319] = "[Clannfear]", -- Summon Unstable Clannfear (Sorcerer)
+    [23316] = "[Volatile Familiar]", -- Summon Volatile Familiar (Sorcerer)
+    [24613] = "[Winged Twilight]", -- Summon Winged Twilight (Sorcerer)
+    [24636] = "[Twilight Tormentor]", -- Summon Twilight Tormentor (Sorcerer)
+    [24639] = "[Twilight Matriarch]", -- Summon Twilight Matriarch (Sorcerer)
+    [85982] = "[Feral Guardian]", -- Feral Guardian (Warden)
+    [85986] = "[Eternal Guardian]", -- Eternal Guardian (Warden)
+    [85990] = "[Wild Guardian]", -- Wild Guardian (Warden)
+}
+
+-- Slash Command to dismiss pets and optionally non-combat pets
+function SlashCommands.SlashPet()
+    for i = 1, GetNumBuffs("player") do
+        local _, _, _, buffSlot, _, _, _, _, _, _, abilityId = GetUnitBuffInfo("player", i)
+        if petIds[abilityId] then
+            CancelBuff(buffSlot)
+            if SlashCommands.SV.SlashPetMessage then
+                local petName = petIds[abilityId]
+                local message = zo_strformat(GetString(SI_LUIE_DISMISS_PET), petName)
+                printToChat(message)
+            end
+        end
+    end
+end

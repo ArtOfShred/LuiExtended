@@ -1413,6 +1413,66 @@ local function CreateCustomFrames()
     end
 end
 
+local defaultPos = { }
+
+-- Save default frame positions
+function UnitFrames.SaveDefaultFramePositions()
+    -- Get Default Positions
+    local isValidAnchor, point, relativeTo, relativePoint, offsetX, offsetY = ZO_PlayerAttributeHealth:GetAnchor()
+    defaultPos.health = { point, relativeTo, relativePoint, offsetX, offsetY }
+    local isValidAnchor, point, relativeTo, relativePoint, offsetX, offsetY = ZO_PlayerAttributeMagicka:GetAnchor()
+    defaultPos.magicka = { point, relativeTo, relativePoint, offsetX, offsetY }
+    local isValidAnchor, point, relativeTo, relativePoint, offsetX, offsetY = ZO_PlayerAttributeStamina:GetAnchor()
+    defaultPos.stamina = { point, relativeTo, relativePoint, offsetX, offsetY }
+    local isValidAnchor, point, relativeTo, relativePoint, offsetX, offsetY = ZO_PlayerAttributeSiegeHealth:GetAnchor()
+    defaultPos.siege = { point, relativeTo, relativePoint, offsetX, offsetY }
+    local isValidAnchor, point, relativeTo, relativePoint, offsetX, offsetY = ZO_RAM.control:GetAnchor()
+    defaultPos.ram = { point, relativeTo, relativePoint, offsetX, offsetY }
+    local isValidAnchor, point, relativeTo, relativePoint, offsetX, offsetY = ZO_SmallGroupAnchorFrame:GetAnchor()
+    defaultPos.smallGroup = { point, relativeTo, relativePoint, offsetX, offsetY }
+end
+
+-- Adjust default frame position.
+function UnitFrames.RepositionDefaultFrames()
+
+    if not UnitFrames.SV.RepositionFrames then
+        if defaultPos.health then
+            ZO_PlayerAttributeHealth:ClearAnchors()
+            ZO_PlayerAttributeHealth:SetAnchor( defaultPos.health[1], defaultPos.health[2], defaultPos.health[3], defaultPos.health[4], defaultPos.health[5] - UnitFrames.SV.RepositionFramesAdjust )
+            ZO_PlayerAttributeMagicka:ClearAnchors()
+            ZO_PlayerAttributeMagicka:SetAnchor( defaultPos.magicka[1], defaultPos.magicka[2], defaultPos.magicka[3], defaultPos.magicka[4], defaultPos.magicka[5] - UnitFrames.SV.RepositionFramesAdjust )
+            ZO_PlayerAttributeStamina:ClearAnchors()
+            ZO_PlayerAttributeStamina:SetAnchor( defaultPos.stamina[1], defaultPos.stamina[2], defaultPos.stamina[3], defaultPos.stamina[4], defaultPos.stamina[5] - UnitFrames.SV.RepositionFramesAdjust )
+            ZO_PlayerAttributeSiegeHealth:ClearAnchors()
+            ZO_PlayerAttributeSiegeHealth:SetAnchor( defaultPos.siege[1], defaultPos.siege[2], defaultPos.siege[3], defaultPos.siege[4], defaultPos.siege[5] - UnitFrames.SV.RepositionFramesAdjust )
+            ZO_RAM.control:ClearAnchors()
+            ZO_RAM.control:SetAnchor( defaultPos.ram[1], defaultPos.ram[2], defaultPos.ram[3], defaultPos.ram[4], defaultPos.ram[5] - UnitFrames.SV.RepositionFramesAdjust )
+            ZO_SmallGroupAnchorFrame:ClearAnchors()
+            ZO_SmallGroupAnchorFrame:SetAnchor( defaultPos.smallGroup[1], defaultPos.smallGroup[2], defaultPos.smallGroup[3], defaultPos.smallGroup[4], defaultPos.smallGroup[5] - UnitFrames.SV.RepositionFramesAdjust )
+        end
+    end
+
+    -- Reposition frames
+    if UnitFrames.SV.RepositionFrames then
+        -- Shift to center magicka and stamina bars
+        ZO_PlayerAttributeHealth:ClearAnchors()
+        ZO_PlayerAttributeHealth:SetAnchor( BOTTOM, ActionButton5, TOP, 0, -47 - UnitFrames.SV.RepositionFramesAdjust )
+        ZO_PlayerAttributeMagicka:ClearAnchors()
+        ZO_PlayerAttributeMagicka:SetAnchor( TOPRIGHT, ZO_PlayerAttributeHealth, BOTTOM, -1, 2 )
+        ZO_PlayerAttributeStamina:ClearAnchors()
+        ZO_PlayerAttributeStamina:SetAnchor( TOPLEFT, ZO_PlayerAttributeHealth, BOTTOM, 1, 2 )
+        -- Shift to the right siege weapon health and ram control
+        ZO_PlayerAttributeSiegeHealth:ClearAnchors()
+        ZO_PlayerAttributeSiegeHealth:SetAnchor( CENTER, ZO_PlayerAttributeHealth, CENTER, 300, 0 )
+        ZO_RAM.control:ClearAnchors()
+        ZO_RAM.control:SetAnchor( BOTTOM, ZO_PlayerAttributeHealth, TOP, 300, 0 )
+        -- Shift a little upwards small group unit frames
+        ZO_SmallGroupAnchorFrame:ClearAnchors()
+        ZO_SmallGroupAnchorFrame:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, 20, 80 ) -- default is 28,100
+    end
+
+end
+
 -- Main entry point to this module
 function UnitFrames.Initialize(enabled)
     -- Load settings
@@ -1483,25 +1543,8 @@ function UnitFrames.Initialize(enabled)
         end
     end
 
-    -- Reposition frames
-    if UnitFrames.SV.RepositionFrames then
-        -- Shift to center magicka and stamina bars
-        ZO_PlayerAttributeHealth:ClearAnchors()
-        ZO_PlayerAttributeHealth:SetAnchor( BOTTOM, ActionButton5, TOP, 0, -47 - UnitFrames.SV.RepositionFramesAdjust )
-        ZO_PlayerAttributeMagicka:ClearAnchors()
-        ZO_PlayerAttributeMagicka:SetAnchor( TOPRIGHT, ZO_PlayerAttributeHealth, BOTTOM, -1, 2 )
-        ZO_PlayerAttributeStamina:ClearAnchors()
-        ZO_PlayerAttributeStamina:SetAnchor( TOPLEFT, ZO_PlayerAttributeHealth, BOTTOM, 1, 2 )
-        -- Shift to the right siege weapon health and ram control
-        ZO_PlayerAttributeSiegeHealth:ClearAnchors()
-        ZO_PlayerAttributeSiegeHealth:SetAnchor( CENTER, ZO_PlayerAttributeHealth, CENTER, 300, 0 )
-        ZO_RAM.control:ClearAnchors()
-        ZO_RAM.control:SetAnchor( BOTTOM, ZO_PlayerAttributeHealth, TOP, 300, 0 )
-        -- Shift a little upwards small group unit frames
-        ZO_SmallGroupAnchorFrame:ClearAnchors()
-        ZO_SmallGroupAnchorFrame:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, 20, 80 ) -- default is 28,100
-    end
-
+    UnitFrames.SaveDefaultFramePositions()
+    UnitFrames.RepositionDefaultFrames()
     UnitFrames.SetDefaultFramesTransparency()
 
     -- Set event handlers

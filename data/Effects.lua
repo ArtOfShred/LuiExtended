@@ -1811,7 +1811,7 @@ Effects.AddNameAura = {
     [Unitnames.Boss_Old_Widow_Silk] = { [1] = { id = 33097 } }, -- Spider Nest (Stormhaven)
     [Unitnames.Boss_Titanclaw] = { [1] = { id = 33097 } }, -- Mudcrab Beach (Stormhaven)
     [Unitnames.Boss_Brood_Queen] = { [1] = { id = 33097 } }, -- Dreugh Waters (Stormhaven)
-    [Unitnames.Boss_Cousin_Scrag] = { [1] = { id = 33097 } }, -- Scrag's Larder (Stormhaven)
+    --[Unitnames.Boss_Cousin_Scrag] = { [1] = { id = 33097 } }, -- Scrag's Larder (Stormhaven)
 
     -- Rivenspire
     [Unitnames.Boss_Aesar_the_Hatespinner] = { [1] = { id = 33097 } }, -- Aesar's Web (Rivenspire)

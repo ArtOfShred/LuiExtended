@@ -36,6 +36,7 @@ local strings = {
     SI_LUIE_DEFAULT_FRAME_PLAYER_INTERACTION =           "Player Interaction Prompt",
     SI_LUIE_DEFAULT_FRAME_ACTIVE_COMBAT_TIPS =           "Active Combat Tips",
     SI_LUIE_DEFAULT_FRAME_SYNERGY =                      "Synergy",
+    SI_LUIE_DISMISS_PET =                                "|cBFBFBFYou dismiss |r<<1>>|cBFBFBF.|r",
 
     -- Bindings
     SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Призвать Банкира (Tythis)",
@@ -43,6 +44,7 @@ local strings = {
     SI_BINDING_NAME_LUIE_COMMAND_MERCHANT =              "Призвать Торговца (Nuzhimeh)",
     SI_BINDING_NAME_LUIE_COMMAND_MERCHANT_CAT =          "Призвать Торговца (Fezez)",
     SI_BINDING_NAME_LUIE_COMMAND_FENCE =                 "Призвать Воровку",
+    SI_BINDING_NAME_LUIE_DISMISS_PET =                   "Dismiss Pet",
     SI_BINDING_NAME_LUIE_COMMAND_READY_CHECK =           "Запустить проверку готовности",
     SI_BINDING_NAME_LUIE_COMMAND_HOME =                  "Переместиться в основной дом",
     SI_BINDING_NAME_LUIE_COMMAND_LEAVE_GROUP =           "Leave Group",

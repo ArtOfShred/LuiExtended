@@ -28,6 +28,10 @@ local defaultPanels = {
     [ZO_PlayerToPlayerAreaPromptContainer] = { GetString(SI_LUIE_DEFAULT_FRAME_PLAYER_INTERACTION), nil, 30 },
     [ZO_ActiveCombatTipsTip] = { GetString(SI_LUIE_DEFAULT_FRAME_ACTIVE_COMBAT_TIPS), 250, 20 },
     [ZO_SynergyTopLevelContainer] = { GetString(SI_LUIE_DEFAULT_FRAME_SYNERGY) },
+
+    --[ZO_PlayerAttributeHealth] = { "Health Bar" },
+    --[ZO_PlayerAttributeMagicka]	= { "Magicka Bar" },
+    --[ZO_PlayerAttributeStamina]	= { "Stamina Bar" },
 }
 
 -- Our custom mover frames

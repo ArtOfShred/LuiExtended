@@ -196,10 +196,9 @@ function UnitFrames.CreateSettings()
                 name = GetString(SI_LUIE_LAM_UF_DFRAMES_REPOSIT),
                 tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_REPOSIT_TP),
                 getFunc = function() return Settings.RepositionFrames end,
-                setFunc = function(value) Settings.RepositionFrames = value end,
+                setFunc = function(value) Settings.RepositionFrames = value UnitFrames.RepositionDefaultFrames() end,
                 width = "full",
                 default = Defaults.RepositionFrames,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
             },
             {
@@ -209,11 +208,10 @@ function UnitFrames.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_VERT_TP),
                 min = -150, max = 300, step = 5,
                 getFunc = function() return Settings.RepositionFramesAdjust end,
-                setFunc = function(value) Settings.RepositionFramesAdjust = value end,
+                setFunc = function(value) Settings.RepositionFramesAdjust = value UnitFrames.RepositionDefaultFrames() end,
                 width = "full",
                 default = Defaults.RepositionFramesAdjust,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.RepositionFrames) end,
+                disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
             },
             {
                 -- Out-of-Combat bars transparency

@@ -154,6 +154,27 @@ function SlashCommands.CreateSettings()
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
+                -- SlashPet
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_SLASHCMDS_PET),
+                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_PET_TP),
+                getFunc = function() return Settings.SlashPet end,
+                setFunc = function(value) Settings.SlashPet = value SlashCommands.RegisterSlashCommands() end,
+                width = "full",
+                default = Defaults.SlashPet,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+            },
+            {
+                -- SlashPet Message
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_SLASHCMDS_PET_MESSAGE)),
+                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_PET_MESSAGE_TP),
+                getFunc = function() return Settings.SlashPetMessage end,
+                setFunc = function(value) Settings.SlashPetMessage = value end,
+                width = "full",
+                default = LUIE.Defaults.SlashPetMessage,
+            },
+            {
                 -- SlashOutfit
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_OUTFIT),

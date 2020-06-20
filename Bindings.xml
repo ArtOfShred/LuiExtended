@@ -11,6 +11,7 @@
             <Action name="LUIE_COMMAND_MERCHANT_CAT"><Down>LUIE.SlashCommands.SlashCollectible(6378, true)</Down></Action>
             <Action name="LUIE_COMMAND_BANKER"><Down>LUIE.SlashCommands.SlashCollectible(267, true)</Down></Action>
             <Action name="LUIE_COMMAND_BANKER_CAT"><Down>LUIE.SlashCommands.SlashCollectible(6376, true)</Down></Action>
+            <Action name="LUIE_DISMISS_PET"><Down>LUIE.SlashCommands.SlashPet()</Down></Action>
             <Action name="LUIE_COMMAND_HOME"><Down>LUIE.SlashCommands.SlashHome()</Down></Action>
             <Action name="LUIE_COMMAND_READY_CHECK"><Down>LUIE.SlashCommands.SlashReadyCheck()</Down></Action>
             <Action name="LUIE_COMMAND_LEAVE_GROUP"><Down>LUIE.SlashCommands.SlashGroupLeave()</Down></Action>
