@@ -1517,7 +1517,6 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = Defaults.ContextMessages.CurrencyMessagePay,
             },
-
             {
                 -- Loot Message (Use) - Repair Kit, etc...
                 type = "editbox",
@@ -1540,7 +1539,6 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = Defaults.ContextMessages.CurrencyMessagePotion,
             },
-
             {
                 -- Loot Message (Food)
                 type = "editbox",
@@ -1563,7 +1561,6 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = Defaults.ContextMessages.CurrencyMessageDrink,
             },
-
             {
                 -- Loot Message (Deploy)
                 type = "editbox",
@@ -1575,7 +1572,6 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = Defaults.ContextMessages.CurrencyMessageDeploy,
             },
-
             {
                 -- Loot Message (Learn Recipe)
                 type = "editbox",
@@ -1587,7 +1583,6 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = Defaults.ContextMessages.CurrencyMessageLearnRecipe,
             },
-
             {
                 -- Loot Message (Learn Motif)
                 type = "editbox",
@@ -1599,7 +1594,6 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = Defaults.ContextMessages.CurrencyMessageLearnMotif,
             },
-
             {
                 -- Loot Message (Learn Style)
                 type = "editbox",
@@ -1611,8 +1605,17 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = Defaults.ContextMessages.CurrencyMessageLearnStyle,
             },
-
-
+            {
+                -- Loot Message (Excavate)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EXCAVATE),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EXCAVATE_TP),
+                getFunc = function() return Settings.ContextMessages.CurrencyMessageExcavate end,
+                setFunc = function(value) Settings.ContextMessages.CurrencyMessageExcavate = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.ContextMessages.CurrencyMessageExcavate,
+            },
             {
                 -- Loot Message (TradeIn)
                 type = "editbox",
@@ -3553,6 +3556,144 @@ function ChatAnnouncements.CreateSettings()
                 Settings.Lorebooks.LorebookCollectionAlert and
                 LUIE.SV.ChatAnnouncements_Enable) end,
                 default = Defaults.Lorebooks.LorebookShowHidden,
+            },
+        },
+    }
+
+    -- Chat Announcements - Antiquities Announcements Options Submenu
+    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
+        type = "submenu",
+        name = GetString(SI_LUIE_LAM_CA_ANTIQUITY_HEADER),
+        controls = {
+            {
+                -- Sub Header Antiquity Leads
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CA_ANTIQUITY_LEAD_HEADER),
+                width = "full",
+            },
+            {
+                -- Show Antiquities (CA)
+                type = "checkbox",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ANTIQUITY_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ANTIQUITY_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                getFunc = function() return Settings.Antiquities.AntiquityCA end,
+                setFunc = function(value) Settings.Antiquities.AntiquityCA = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.Antiquities.AntiquityCA,
+            },
+            {
+                -- Show Antiquities (CSA)
+                type = "checkbox",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ANTIQUITY_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ANTIQUITY_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                getFunc = function() return Settings.Antiquities.AntiquityCSA end,
+                setFunc = function(value) Settings.Antiquities.AntiquityCSA = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.Antiquities.AntiquityCSA,
+            },
+            {
+                -- Show Antiquities (Alert)
+                type = "checkbox",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ANTIQUITY_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ANTIQUITY_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                getFunc = function() return Settings.Antiquities.AntiquityAlert end,
+                setFunc = function(value) Settings.Antiquities.AntiquityAlert = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.Antiquities.AntiquityAlert,
+            },
+            {
+                -- Antiquities Item Bracket
+                type = "dropdown",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_ANTIQUITY_BRACKET)),
+                tooltip = GetString(SI_LUIE_LAM_CA_ANTIQUITY_BRACKET_TP),
+                choices = linkBracketDisplayOptions,
+                getFunc = function() return linkBracketDisplayOptions[Settings.Antiquities.AntiquityBracket] end,
+                setFunc = function(value) Settings.Antiquities.AntiquityBracket = linkBracketDisplayOptionsKeys[value] end,
+                width = "full",
+                disabled = function() return not (
+                Settings.Antiquities.AntiquityCA or
+                Settings.Antiquities.AntiquityCSA or
+                Settings.Antiquities.AntiquityAlert and
+                LUIE.SV.ChatAnnouncements_Enable) end,
+                default = Defaults.Antiquities.AntiquityBracket,
+            },
+            {
+                -- Antiquities Icon
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_ANTIQUITY_ICON)),
+                tooltip = GetString(SI_LUIE_LAM_CA_ANTIQUITY_ICON_TP),
+                getFunc = function() return Settings.Antiquities.AntiquityIcon end,
+                setFunc = function(value) Settings.Antiquities.AntiquityIcon = value end,
+                width = "full",
+                disabled = function() return not (
+                Settings.Antiquities.AntiquityCA or
+                Settings.Antiquities.AntiquityCSA or
+                Settings.Antiquities.AntiquityAlert and
+                LUIE.SV.ChatAnnouncements_Enable) end,
+                default = Defaults.Antiquities.AntiquityIcon,
+            },
+            {
+                -- Antiquities Color
+                type = "colorpicker",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_ANTIQUITY_COLOR)),
+                getFunc = function() return unpack(Settings.Antiquities.AntiquityColor) end,
+                setFunc = function(r, g, b, a) Settings.Antiquities.AntiquityColor = { r, g, b, a } ChatAnnouncements.RegisterColorEvents() end,
+                width = "full",
+                disabled = function() return not (
+                Settings.Antiquities.AntiquityCA or
+                Settings.Antiquities.AntiquityCSA or
+                Settings.Antiquities.AntiquityAlert and
+                LUIE.SV.ChatAnnouncements_Enable) end,
+                default = {r=Defaults.Antiquities.AntiquityColor[1], g=Defaults.Antiquities.AntiquityColor[2], b=Defaults.Antiquities.AntiquityColor[3]}
+            },
+            {
+                -- Antiquities Prefix
+                type = "editbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_ANTIQUITY_PREFIX)),
+                tooltip = GetString(SI_LUIE_LAM_CA_ANTIQUITY_PREFIX_TP),
+                getFunc = function() return Settings.Antiquities.AntiquityPrefix end,
+                setFunc = function(value) Settings.Antiquities.AntiquityPrefix = value end,
+                width = "full",
+                disabled = function() return not (
+                Settings.Antiquities.AntiquityCA or
+                Settings.Antiquities.AntiquityCSA or
+                Settings.Antiquities.AntiquityAlert and
+                LUIE.SV.ChatAnnouncements_Enable) end,
+                default = Defaults.Antiquities.AntiquityPrefix,
+            },
+            {
+                -- Antiquities Prefix Bracket Options
+                type = "dropdown",
+                name = zo_strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_ANTIQUITY_PREFIX_BRACKET)),
+                choices = bracketOptions5,
+                tooltip = GetString(SI_LUIE_LAM_CA_ANTIQUITY_PREFIX_BRACKET_TP),
+                getFunc = function() return bracketOptions5[Settings.Antiquities.AntiquityPrefixBracket] end,
+                setFunc = function(value) Settings.Antiquities.AntiquityPrefixBracket = bracketOptions5Keys[value] end,
+                width = "full",
+                disabled = function() return not (
+                Settings.Antiquities.AntiquityCA or
+                Settings.Antiquities.AntiquityCSA or
+                Settings.Antiquities.AntiquityAlert and
+                LUIE.SV.ChatAnnouncements_Enable) end,
+                default = Defaults.Antiquities.AntiquityPrefixBracket
+            },
+            {
+                -- Antiquities Suffix
+                type = "editbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_ANTIQUITY_SUFFIX)),
+                tooltip = GetString(SI_LUIE_LAM_CA_ANTIQUITY_SUFFIX_TP),
+                getFunc = function() return Settings.Antiquities.AntiquitySuffix end,
+                setFunc = function(value) Settings.Antiquities.AntiquitySuffix = value end,
+                width = "full",
+                disabled = function() return not (
+                Settings.Antiquities.AntiquityCA or
+                Settings.Antiquities.AntiquityCSA or
+                Settings.Antiquities.AntiquityAlert and
+                LUIE.SV.ChatAnnouncements_Enable) end,
+                default = Defaults.Antiquities.AntiquitySuffix,
             },
         },
     }

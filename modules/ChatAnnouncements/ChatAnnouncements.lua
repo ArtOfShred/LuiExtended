@@ -220,6 +220,19 @@ ChatAnnouncements.Defaults = {
         LorebookCategory              = true,  -- Display "added to X category" message
     },
 
+    -- Antiquities
+    Antiquities = {
+    	AntiquityCA = true,
+    	AntiquityCSA = true,
+    	AntiquityAlert = false,
+    	AntiquityBracket = 2,
+    	AntiquityPrefix = GetString(SI_LUIE_CA_ANTIQUITY_PREFIX),
+        AntiquityPrefixBracket = 4,
+        AntiquitySuffix = "",
+    	AntiquityColor = { .75, .75, .75, 1 },
+    	AntiquityIcon = true,
+    },
+
     -- Quest
     Quests = {
         QuestShareCA                    = true,
@@ -470,6 +483,7 @@ ChatAnnouncements.Defaults = {
         CurrencyMessageLearnRecipe      = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LEARN_RECIPE),
         CurrencyMessageLearnMotif       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LEARN_MOTIF),
         CurrencyMessageLearnStyle       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LEARN_STYLE),
+        CurrencyMessageExcavate         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_EXCAVATE),
         CurrencyMessageTradeIn          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEIN),
         CurrencyMessageTradeInNoName    = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEIN_NO_NAME),
         CurrencyMessageTradeOut         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEOUT),
@@ -679,6 +693,9 @@ local g_tradeStacksIn               = { }           -- Table for storing items t
 local g_tradeStacksOut              = { }           -- Table for storing items to be traded out.
 local g_inTrade                     = false         -- Toggled on when in a trade.
 
+-- Antiquities
+local g_weAreInADig                 = false         -- When in a digsite.
+
 ------------------------------------------------
 -- COLORIZE VALUES -----------------------------
 ------------------------------------------------
@@ -748,6 +765,9 @@ local QuestColorQuestDescriptionColorize
 local StorageRidingColorize
 local StorageRidingBookColorize
 local StorageBagColorize
+
+-- Antiquities
+local AntiquityColorize
 
 ------------------------------------------------
 -- BRACKET OPTIONS -----------------------------
@@ -948,6 +968,10 @@ function ChatAnnouncements.Initialize(enabled)
     -- TEMP: Social Error Register
     eventManager:RegisterForEvent(moduleName, EVENT_SOCIAL_ERROR, ChatAnnouncements.OnErrorSocialChat)
 
+    -- TEMP: Register Antiquity Dig Toggle
+    eventManager:RegisterForEvent(moduleName, EVENT_ANTIQUITY_DIGGING_READY_TO_PLAY, ChatAnnouncements.OnDigStart)
+    eventManager:RegisterForEvent(moduleName, EVENT_ANTIQUITY_DIGGING_GAME_OVER, ChatAnnouncements.OnDigEnd)
+
     ChatAnnouncements.RegisterGuildEvents()
     ChatAnnouncements.RegisterSocialEvents()
     ChatAnnouncements.RegisterDisguiseEvents()
@@ -1015,6 +1039,7 @@ function ChatAnnouncements.RegisterColorEvents()
     StorageBagColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Notify.StorageBagColor))
     --NotificationColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Notify.NotificationColor))
     GuildColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Social.GuildColor))
+    AntiquityColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Antiquities.AntiquityColor))
 end
 
 function ChatAnnouncements.RegisterSocialEvents()
@@ -1311,6 +1336,14 @@ function ChatAnnouncements.OnErrorSocialChat(eventCode, error)
     if not IsSocialErrorIgnoreResponse(error) and ShouldShowSocialErrorInChat(error) then
         printToChat(zo_strformat(GetString("SI_SOCIALACTIONRESULT", error)))
     end
+end
+
+function ChatAnnouncements.OnDigStart()
+    g_weAreInADig = true
+end
+
+function ChatAnnouncements.OnDigEnd()
+    zo_callLater(function() g_weAreInADig = false end, 1000)
 end
 
 function ChatAnnouncements.GuildHeraldrySaved()
@@ -2404,6 +2437,9 @@ elseif reason == 14 or reason == 40 or reason == 41 or reason == 74 or reason ==
     -- Reward (27)
     elseif reason == 27 then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
+    -- CURRENCY_CHANGE_REASON_DEPRECATED_1 (Gold looted during digs)
+    elseif reason == 11 then
+        messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageExcavate
     -- Buy on AH (31)
     elseif reason == 31 then
         if ChatAnnouncements.SV.Currency.CurrencyGoldHideAH then return end
@@ -4248,6 +4284,9 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
             else
                 logPrefix = ""
             end
+            if g_weAreInADig then
+                logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageExcavate
+            end
             if not g_weAreInAStore and ChatAnnouncements.SV.Inventory.Loot and isNewItem and not g_inTrade and not g_inMail then
                 ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true, nil, false, true)
             end
@@ -4291,6 +4330,9 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                     logPrefix = g_mailTarget ~= "" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailIn or ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailInNoName
                 else
                     logPrefix = ""
+                end
+                if g_weAreInADig then
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageExcavate
                 end
                 if not g_weAreInAStore and ChatAnnouncements.SV.Inventory.Loot and isNewItem and not g_inTrade and not g_inMail then
                     ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true, nil, false, true)
@@ -4436,6 +4478,9 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
             logPrefix = g_mailTarget ~= "" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailIn or ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailInNoName
         else
             logPrefix = ""
+        end
+        if g_weAreInADig then
+            logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageExcavate
         end
         local itemLink = ChatAnnouncements.GetItemLinkFromItemId(slotId)
         local icon = GetItemLinkInfo(itemLink)
@@ -9333,6 +9378,43 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
+    -- EVENT_ANTIQUITY_LEAD_ACQUIRED
+    local function AntiquityLeadAcquired(antiquityId)
+        -- Get antiquity data
+        local antiquityData = ANTIQUITY_DATA_MANAGER:GetAntiquityData(antiquityId)
+        -- Get name
+        local antiquityName = antiquityData:GetName()
+
+        if ChatAnnouncements.SV.Antiquities.AntiquityCA then
+            local antiquityColor = GetAntiquityQualityColor(antiquityData:GetQuality())
+            local antiquityIcon = antiquityData:GetIcon()
+            local formattedName = ChatAnnouncements.SV.Antiquities.AntiquityBracket == 2 and antiquityColor:Colorize("[" .. antiquityName .. "]") or antiquityColor:Colorize(antiquityName)
+            local formattedIcon = ChatAnnouncements.SV.Antiquities.AntiquityIcon and ("|t16:16:" .. antiquityIcon .. "|t ") or ""
+
+            local messageP1 = AntiquityColorize:Colorize(string.format("%s%s%s %s%s", bracket1[ChatAnnouncements.SV.Antiquities.AntiquityPrefixBracket], ChatAnnouncements.SV.Antiquities.AntiquityPrefix, bracket2[ChatAnnouncements.SV.Antiquities.AntiquityPrefixBracket], formattedIcon, formattedName))
+            local messageP2 = AntiquityColorize:Colorize(ChatAnnouncements.SV.Antiquities.AntiquitySuffix)
+            local finalMessage = zo_strformat("<<1>> <<2>>", messageP1, messageP2)
+            g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "ACHIEVEMENT" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
+        end
+
+        if ChatAnnouncements.SV.Antiquities.AntiquityAlert then
+            local alertMessage = zo_strformat("<<1>>: <<2>> <<3>>", ChatAnnouncements.SV.Antiquities.AntiquityPrefix, antiquityName, ChatAnnouncements.SV.Antiquities.AntiquitySuffix)
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertMessage)
+        end
+
+        if ChatAnnouncements.SV.Antiquities.AntiquityCSA then
+            local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
+            local secondaryText = zo_strformat(SI_ANTIQUITY_LEAD_ACQUIRED_TEXT, antiquityData:GetColorizedName())
+            messageParams:SetText(GetString(SI_ANTIQUITY_LEAD_ACQUIRED_TITLE), secondaryText)
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_ANTIQUITY_LEAD_ACQUIRED)
+            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+        end
+
+        return true
+    end
+
     -- Unregister the ZOS events for handling Quest Removal/Advanced/Added to replace with our own functions
     eventManager:UnregisterForEvent("CSA_MiscellaneousHandlers", EVENT_QUEST_REMOVED)
     eventManager:UnregisterForEvent("CSA_MiscellaneousHandlers", EVENT_QUEST_ADVANCED)
@@ -9384,6 +9466,8 @@ function ChatAnnouncements.HookFunction()
     ZO_PreHook(csaHandlers, EVENT_PLEDGE_OF_MARA_RESULT, PledgeOfMaraHook)
 
     eventManager:RegisterForEvent(moduleName, EVENT_PLEDGE_OF_MARA_OFFER, ChatAnnouncements.MaraOffer)
+
+    ZO_PreHook(csaHandlers, EVENT_ANTIQUITY_LEAD_ACQUIRED, AntiquityLeadAcquired)
 
     -- HOOK PLAYER_TO_PLAYER Group Notifications to edit Ignore alert
     local KEYBOARD_INTERACT_ICONS = {
