@@ -5896,11 +5896,26 @@ end
 -- LINK_HANDLER.LINK_CLICKED_EVENT
 -- Custom Link Handlers to deal with when a book link in chat is clicked, this will open the book rather than the default link that only shows whether a lore entry has been read or not.
 function LUIE.HandleClickEvent(rawLink, mouseButton, linkText, linkStyle, linkType, categoryIndex, collectionIndex, bookIndex)
-  if linkType == "LINK_TYPE_LUIBOOK" then
-    -- Read the book
-    ZO_LoreLibrary_ReadBook(categoryIndex, collectionIndex, bookIndex)
-    return true
-  end
+    if linkType == "LINK_TYPE_LUIBOOK" then
+        -- Read the book
+        ZO_LoreLibrary_ReadBook(categoryIndex, collectionIndex, bookIndex)
+        return true
+    end
+    if linkType == "LINK_TYPE_LUIANTIQUITY" then
+        local categoryIndex = tonumber(categoryIndex)
+        -- Open the codex
+        if IsInGamepadPreferredMode() then
+            local DONT_PUSH = false
+            local antiquityData = ANTIQUITY_DATA_MANAGER:GetAntiquityData(categoryIndex)
+            internalassert(antiquityData ~= nil)
+            if antiquityData then
+                ANTIQUITY_LORE_GAMEPAD:ShowAntiquityOrSet(antiquityData, DONT_PUSH)
+            end
+        else
+            ANTIQUITY_LORE_KEYBOARD:ShowAntiquity(categoryIndex)
+        end
+        return true
+    end
 end
 
 -- Used by functions calling bar updates
@@ -9388,12 +9403,24 @@ function ChatAnnouncements.HookFunction()
         if ChatAnnouncements.SV.Antiquities.AntiquityCA then
             local antiquityColor = GetAntiquityQualityColor(antiquityData:GetQuality())
             local antiquityIcon = antiquityData:GetIcon()
-            local formattedName = ChatAnnouncements.SV.Antiquities.AntiquityBracket == 2 and antiquityColor:Colorize("[" .. antiquityName .. "]") or antiquityColor:Colorize(antiquityName)
+
+            local formattedName
+            local antiquityLink
+            local linkColor = antiquityColor:ToHex()
+            if ChatAnnouncements.SV.Antiquities.AntiquityBracket == 1 then
+                formattedName = antiquityName
+                antiquityLink = string.format("|c%s|H0:LINK_TYPE_LUIANTIQUITY:%s|h%s|h|r", linkColor, antiquityId, formattedName)
+            else
+                formattedName = ("[" .. antiquityName .. "]")
+                antiquityLink = string.format("|c%s|H1:LINK_TYPE_LUIANTIQUITY:%s|h%s|h|r", linkColor, antiquityId, formattedName)
+            end
+
             local formattedIcon = ChatAnnouncements.SV.Antiquities.AntiquityIcon and ("|t16:16:" .. antiquityIcon .. "|t ") or ""
 
-            local messageP1 = AntiquityColorize:Colorize(string.format("%s%s%s %s%s", bracket1[ChatAnnouncements.SV.Antiquities.AntiquityPrefixBracket], ChatAnnouncements.SV.Antiquities.AntiquityPrefix, bracket2[ChatAnnouncements.SV.Antiquities.AntiquityPrefixBracket], formattedIcon, formattedName))
-            local messageP2 = AntiquityColorize:Colorize(ChatAnnouncements.SV.Antiquities.AntiquitySuffix)
-            local finalMessage = zo_strformat("<<1>> <<2>>", messageP1, messageP2)
+            local messageP1 = AntiquityColorize:Colorize(string.format("%s%s%s %s", bracket1[ChatAnnouncements.SV.Antiquities.AntiquityPrefixBracket], ChatAnnouncements.SV.Antiquities.AntiquityPrefix, bracket2[ChatAnnouncements.SV.Antiquities.AntiquityPrefixBracket], formattedIcon))
+            local messageP2 = antiquityLink
+            local messageP3 = AntiquityColorize:Colorize(" " .. ChatAnnouncements.SV.Antiquities.AntiquitySuffix)
+            local finalMessage = zo_strformat("<<1>><<2>><<3>>", messageP1, messageP2, messageP3)
             g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "ACHIEVEMENT" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
