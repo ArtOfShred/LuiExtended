@@ -431,7 +431,8 @@ ChatAnnouncements.Defaults = {
         LootShowTurnIn                  = true,
         LootShowList                    = true,
         LootShowUsePotion               = false,
-        LootShowUseFoodDrink            = false,
+        LootShowUseFood                 = false,
+        LootShowUseDrink                = false,
         LootShowUseRepairKit            = true,
         LootShowUseSoulGem              = false,
         LootShowUseSiege                = true,
@@ -439,6 +440,10 @@ ChatAnnouncements.Defaults = {
         LootShowContainer               = true,
         LootShowDisguise                = true,
         LootShowLockpick                = true,
+        LootShowRecipe                  = true,
+        LootShowMotif                   = true,
+        LootShowStylePage               = true,
+        LootRecipeHideAlert             = true,
         LootQuestAdd                    = true,
         LootQuestRemove                 = false,
     },
@@ -458,8 +463,13 @@ ChatAnnouncements.Defaults = {
         CurrencyMessageSpend            = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_SPEND),
         CurrencyMessagePay              = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_PAY),
         CurrencyMessageUseKit           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_USEKIT),
-        CurrencyMessageConsume          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_CONSUME),
+        CurrencyMessagePotion           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_POTION),
+        CurrencyMessageFood             = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_EAT),
+        CurrencyMessageDrink            = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DRINK),
         CurrencyMessageDeploy           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DEPLOY),
+        CurrencyMessageLearnRecipe      = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LEARN_RECIPE),
+        CurrencyMessageLearnMotif       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LEARN_MOTIF),
+        CurrencyMessageLearnStyle       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LEARN_STYLE),
         CurrencyMessageTradeIn          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEIN),
         CurrencyMessageTradeInNoName    = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEIN_NO_NAME),
         CurrencyMessageTradeOut         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEOUT),
@@ -4099,6 +4109,15 @@ function ChatAnnouncements.SendDelayedItemsOut()
     delayedItemPoolOut = { }
 end
 
+local crownRidingIds = {
+    [64700] = true, -- Crown Lesson: Riding Speed
+    [64701] = true, -- Crown Lesson: Riding Stamina
+    [64702] = true, -- Crown Lesson: Riding Capacity
+    [135115] = true, -- Crown Lesson: Riding Speed
+    [135116] = true, -- Crown Lesson: Riding Stamina
+    [135117] = true, -- Crown Lesson: Riding Capacity
+}
+
 function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
     -- End right now if this is any other reason (durability loss, etc)
     if inventoryUpdateReason ~= INVENTORY_UPDATE_REASON_DEFAULT then return end
@@ -4308,6 +4327,8 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                     zo_callLater(function()
                         if g_stackSplit == false then
                         ChatAnnouncements.ItemCounterDelay(removedIcon, change, removedItemType, removedItemId, removedItemLink, receivedBy, logPrefix, gainOrLoss, false, false, true, false)
+                        eventManager:UnregisterForUpdate(moduleName .. "Printer")
+                        eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
                         end
                     end, 25)
                 elseif g_weAreInAGuildStore and ChatAnnouncements.SV.Inventory.LootShowList then
@@ -4319,12 +4340,17 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                     local flag -- When set to true we deliver a message on a zo_callLater
                     if ChatAnnouncements.SV.Inventory.LootShowUsePotion and removedItemType == ITEMTYPE_POTION then
                         gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
-                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageConsume
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessagePotion
                         flag = true
                     end
-                    if ChatAnnouncements.SV.Inventory.LootShowUseFoodDrink and (removedItemType == ITEMTYPE_FOOD or removedItemType == ITEMTYPE_DRINK) then
+                    if ChatAnnouncements.SV.Inventory.LootShowUseFood and removedItemType == ITEMTYPE_FOOD then
                         gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
-                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageConsume
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageFood
+                        flag = true
+                    end
+                    if ChatAnnouncements.SV.Inventory.LootShowUseDrink and removedItemType == ITEMTYPE_DRINK then
+                        gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDrink
                         flag = true
                     end
                     if ChatAnnouncements.SV.Inventory.LootShowUseRepairKit and (removedItemType == ITEMTYPE_TOOL or removedItemType == ITEMTYPE_CROWN_REPAIR or removedItemType == ITEMTYPE_AVA_REPAIR or removedItemType == ITEMTYPE_GROUP_REPAIR) then
@@ -4342,16 +4368,46 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                         logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeploy
                         flag = true
                     end
-                    if ChatAnnouncements.SV.Inventory.LootShowUseMisc and (removedItemType == ITEMTYPE_RECALL_STONE or removedItemType == ITEMTYPE_TROPHY or removedItemType == ITEMTYPE_MASTER_WRIT) then
-                        gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
-                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse
+                    if ChatAnnouncements.SV.Inventory.LootShowUseMisc and (removedItemType == ITEMTYPE_RECALL_STONE or removedItemType == ITEMTYPE_TROPHY or removedItemType == ITEMTYPE_MASTER_WRIT or removedItemType == ITEMTYPE_CROWN_ITEM) then
+                        -- Check to make sure the items aren't riding lesson books.
+                        if not crownRidingIds[removedItemId] then
+                            gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                            logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse
+                            flag = true
+                        end
+                    end
+                    -- Learn Recipe
+                    if ChatAnnouncements.SV.Inventory.LootShowRecipe and removedItemType == ITEMTYPE_RECIPE then
+                        gainOrLoss = 4
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageLearnRecipe
                         flag = true
+                        if ChatAnnouncements.SV.Inventory.LootRecipeHideAlert then
+                            PlaySound(SOUNDS.RECIPE_LEARNED)
+                        end
+                    end
+                    -- Learn Motif
+                    if ChatAnnouncements.SV.Inventory.LootShowMotif and removedItemType == ITEMTYPE_RACIAL_STYLE_MOTIF then
+                        gainOrLoss = 4
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageLearnMotif
+                        flag = true
+                    end
+                    -- Learn Style
+                    if ChatAnnouncements.SV.Inventory.LootShowStylePage and removedItemType == ITEMTYPE_CONTAINER then
+                        -- Don't display a message if the specialized item type is not "Container Style Page"
+                        local _, specializedType = GetItemLinkItemType(itemLink)
+                        if specializedType == SPECIALIZED_ITEMTYPE_CONTAINER_STYLE_PAGE then
+                            gainOrLoss = 4
+                            logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageLearnStyle
+                            flag = true
+                        end
                     end
                     -- If any of these options were flagged, run a callLater on a 50ms delay to make sure we didn't just split stacks.
                     if flag then
                         zo_callLater(function()
                             if g_stackSplit == false then
                             ChatAnnouncements.ItemCounterDelay(removedIcon, change, removedItemType, removedItemId, removedItemLink, receivedBy, logPrefix, gainOrLoss, false, false, true, false)
+                            eventManager:UnregisterForUpdate(moduleName .. "Printer")
+                            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
                             end
                         end, 25)
                     end
@@ -5880,23 +5936,64 @@ local GUILD_SKILL_ICONS =
 function ChatAnnouncements.HookFunction()
     local alertHandlers = ZO_AlertText_GetHandlers()
 
-    -- Style book learned
-    --[[
-    local function StyleLearnedHook(styleIndex, chapterIndex, isDefaultRacialStyle)
-        if not isDefaultRacialStyle then
-            local itemStyle = select(5, GetSmithingStyleItemInfo(styleIndex))
-            if chapterIndex == ITEM_STYLE_CHAPTER_ALL then
-                printToChat(zo_strformat(SI_NEW_STYLE_LEARNED, GetString("SI_ITEMSTYLE", itemStyle)))
-                return ALERT, zo_strformat(SI_NEW_STYLE_LEARNED, GetString("SI_ITEMSTYLE", itemStyle))
-            else
-                printToChat(zo_strformat(SI_NEW_STYLE_CHAPTER_LEARNED, GetString("SI_ITEMSTYLE", itemStyle), GetString("SI_ITEMSTYLECHAPTER", chapterIndex)))
-                return ALERT, zo_strformat(SI_NEW_STYLE_CHAPTER_LEARNED, GetString("SI_ITEMSTYLE", itemStyle), GetString("SI_ITEMSTYLECHAPTER", chapterIndex))
+    -- EVENT_STYLE_LEARNED (Alert Handler)
+    local function StyleLearnedHook(itemStyleId, chapterIndex, isDefaultRacialStyle)
 
+        local flag
+        if ChatAnnouncements.SV.Inventory.LootShowMotif and ChatAnnouncements.SV.Inventory.LootRecipeHideAlert then
+            flag = true
+        else
+            flag = false
+        end
+
+        if not flag then
+            if not isDefaultRacialStyle then
+                if chapterIndex == ITEM_STYLE_CHAPTER_ALL then
+                    local text = zo_strformat(SI_NEW_STYLE_LEARNED, GetItemStyleName(itemStyleId))
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
+                else
+                    local text = zo_strformat(SI_NEW_STYLE_CHAPTER_LEARNED, GetItemStyleName(itemStyleId), GetString("SI_ITEMSTYLECHAPTER", chapterIndex))
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
+                end
             end
         end
+        return true
     end
-    ZO_PreHook(alertHandlers, EVENT_STYLE_LEARNED, StyleLearnedHook)
-    ]]--
+
+    -- EVENT_RECIPE_LEARNED (Alert Handler)
+    local function RecipeLearnedHook(recipeListIndex, recipeIndex)
+
+        local flag
+        if ChatAnnouncements.SV.Inventory.LootShowRecipe and ChatAnnouncements.SV.Inventory.LootRecipeHideAlert then
+            flag = true
+        else
+            flag = false
+        end
+
+        if not flag then
+            local _, name = GetRecipeInfo(recipeListIndex, recipeIndex)
+            local text = zo_strformat(SI_NEW_RECIPE_LEARNED, name)
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, SOUNDS.RECIPE_LEARNED, text)
+        end
+        return true
+    end
+
+    -- EVENT_MULTIPLE_RECIPES_LEARNED (Alert Handler)
+    local function MultipleRecipeLearnedHook(numLearned)
+
+        local flag
+        if ChatAnnouncements.SV.Inventory.LootShowRecipe and ChatAnnouncements.SV.Inventory.LootRecipeHideAlert then
+            flag = true
+        else
+            flag = false
+        end
+
+        if not flag then
+            local text = zo_strformat(SI_NEW_RECIPES_LEARNED, numLearned)
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, SOUNDS.RECIPE_LEARNED, text)
+        end
+        return true
+    end
 
     -- EVENT_LORE_BOOK_ALREADY_KNOWN (Alert Handler)
     -- Note: We just hide this alert because it is pointless pretty much (only ever seen in trigger from server lag)
@@ -5957,6 +6054,8 @@ function ChatAnnouncements.HookFunction()
         if guildReputationIndex == 0 or isMaxRank then
             -- We only want to fire this event if a player is not part of the guild or if they've reached max level in the guild.
             -- Otherwise, the _SKILL_EXPERIENCE version of this event will send a center screen message instead.
+            local name, numCollections, categoryId = GetLoreCategoryInfo(categoryIndex)
+            if name == "Crafting Motifs" then return end
 
             local collectionName, _, numKnownBooks, totalBooks, hidden = GetLoreCollectionInfo(categoryIndex, collectionIndex)
 
@@ -6950,6 +7049,10 @@ function ChatAnnouncements.HookFunction()
     ZO_PreHook(alertHandlers, EVENT_TRADE_SUCCEEDED, TradeSucceededAlert)
     ZO_PreHook(alertHandlers, EVENT_DISCOVERY_EXPERIENCE, DiscoveryExperienceAlert)
     ZO_PreHook(alertHandlers, EVENT_MAIL_SEND_FAILED, MailSendFailedAlert)
+
+    ZO_PreHook(alertHandlers, EVENT_STYLE_LEARNED, StyleLearnedHook)
+    ZO_PreHook(alertHandlers, EVENT_RECIPE_LEARNED, RecipeLearnedHook)
+    ZO_PreHook(alertHandlers, EVENT_MULTIPLE_RECIPES_LEARNED, MultipleRecipeLearnedHook)
 
     local csaHandlers = ZO_CenterScreenAnnounce_GetEventHandlers()
     local csaCallbackHandlers = ZO_CenterScreenAnnounce_GetCallbackHandlers()

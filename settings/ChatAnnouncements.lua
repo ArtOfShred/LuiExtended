@@ -1108,15 +1108,26 @@ function ChatAnnouncements.CreateSettings()
                 default = Defaults.Inventory.LootShowUsePotion,
             },
             {
-                -- Show Use Food & Drink
+                -- Show Use Food
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWUSE_FOOD_DRINK)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWUSE_FOOD_DRINK_TP),
-                getFunc = function() return Settings.Inventory.LootShowUseFoodDrink end,
-                setFunc = function(value) Settings.Inventory.LootShowUseFoodDrink = value ChatAnnouncements.RegisterLootEvents() end,
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWUSE_FOOD)),
+                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWUSE_FOOD_TP),
+                getFunc = function() return Settings.Inventory.LootShowUseFood end,
+                setFunc = function(value) Settings.Inventory.LootShowUseFood = value ChatAnnouncements.RegisterLootEvents() end,
                 width = "full",
                 disabled = function() return not (Settings.Inventory.Loot and LUIE.SV.ChatAnnouncements_Enable) end,
-                default = Defaults.Inventory.LootShowUseFoodDrink,
+                default = Defaults.Inventory.LootShowUseFood,
+            },
+            {
+                -- Show Use Drink
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWUSE_DRINK)),
+                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWUSE_DRINK_TP),
+                getFunc = function() return Settings.Inventory.LootShowUseDrink end,
+                setFunc = function(value) Settings.Inventory.LootShowUseDrink = value ChatAnnouncements.RegisterLootEvents() end,
+                width = "full",
+                disabled = function() return not (Settings.Inventory.Loot and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = Defaults.Inventory.LootShowUseDrink,
             },
             {
                 -- Show Use Repair Kit
@@ -1162,8 +1173,6 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function() return not (Settings.Inventory.Loot and LUIE.SV.ChatAnnouncements_Enable) end,
                 default = Defaults.Inventory.LootShowUseMisc,
             },
-
-
             {
                 -- Show Lockpick Break
                 type = "checkbox",
@@ -1174,6 +1183,50 @@ function ChatAnnouncements.CreateSettings()
                 width = "full",
                 disabled = function() return not (Settings.Inventory.Loot and LUIE.SV.ChatAnnouncements_Enable) end,
                 default = Defaults.Inventory.LootShowLockpick,
+            },
+            {
+                -- Show Use RECIPE
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTRECIPE)),
+                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTRECIPE_TP),
+                getFunc = function() return Settings.Inventory.LootShowRecipe end,
+                setFunc = function(value) Settings.Inventory.LootShowRecipe = value ChatAnnouncements.RegisterLootEvents() end,
+                width = "full",
+                disabled = function() return not (Settings.Inventory.Loot and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = Defaults.Inventory.LootShowRecipe,
+            },
+            {
+                -- Show Use MOTIF
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTMOTIF)),
+                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTMOTIF_TP),
+                getFunc = function() return Settings.Inventory.LootShowMotif end,
+                setFunc = function(value) Settings.Inventory.LootShowMotif = value ChatAnnouncements.RegisterLootEvents() end,
+                width = "full",
+                disabled = function() return not (Settings.Inventory.Loot and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = Defaults.Inventory.LootShowMotif,
+            },
+            {
+                -- Show Use STYLE
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSTYLE)),
+                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSTYLE_TP),
+                getFunc = function() return Settings.Inventory.LootShowStylePage end,
+                setFunc = function(value) Settings.Inventory.LootShowStylePage = value ChatAnnouncements.RegisterLootEvents() end,
+                width = "full",
+                disabled = function() return not (Settings.Inventory.Loot and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = Defaults.Inventory.LootShowStylePage,
+            },
+            {
+                -- Hide Recipe Alert
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_HIDE_RECIPE_ALERT)),
+                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_HIDE_RECIPE_ALERT_TP),
+                getFunc = function() return Settings.Inventory.LootRecipeHideAlert end,
+                setFunc = function(value) Settings.Inventory.LootRecipeHideAlert = value ChatAnnouncements.RegisterLootEvents() end,
+                width = "full",
+                disabled = function() return not (Settings.Inventory.Loot and (Settings.Inventory.LootShowRecipe or Settings.Inventory.LootShowMotif or Settings.Inventory.LootShowStylePage) and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = Defaults.Inventory.LootRecipeHideAlert,
             },
             {
                 -- Show Quest Loot (Add)
@@ -1477,16 +1530,40 @@ function ChatAnnouncements.CreateSettings()
                 default = Defaults.ContextMessages.CurrencyMessageUseKit,
             },
             {
-                -- Loot Message (Consume)
+                -- Loot Message (Potion)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CONSUME),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CONSUME_TP),
-                getFunc = function() return Settings.ContextMessages.CurrencyMessageConsume end,
-                setFunc = function(value) Settings.ContextMessages.CurrencyMessageConsume = value end,
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_POTION),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_POTION_TP),
+                getFunc = function() return Settings.ContextMessages.CurrencyMessagePotion end,
+                setFunc = function(value) Settings.ContextMessages.CurrencyMessagePotion = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = Defaults.ContextMessages.CurrencyMessageConsume,
+                default = Defaults.ContextMessages.CurrencyMessagePotion,
             },
+
+            {
+                -- Loot Message (Food)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FOOD),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FOOD_TP),
+                getFunc = function() return Settings.ContextMessages.CurrencyMessageFood end,
+                setFunc = function(value) Settings.ContextMessages.CurrencyMessageFood = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.ContextMessages.CurrencyMessageFood,
+            },
+            {
+                -- Loot Message (Drink)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DRINK),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DRINK_TP),
+                getFunc = function() return Settings.ContextMessages.CurrencyMessageDrink end,
+                setFunc = function(value) Settings.ContextMessages.CurrencyMessageDrink = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.ContextMessages.CurrencyMessageDrink,
+            },
+
             {
                 -- Loot Message (Deploy)
                 type = "editbox",
@@ -1497,6 +1574,42 @@ function ChatAnnouncements.CreateSettings()
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = Defaults.ContextMessages.CurrencyMessageDeploy,
+            },
+
+            {
+                -- Loot Message (Learn Recipe)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LEARN_RECIPE),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LEARN_RECIPE_TP),
+                getFunc = function() return Settings.ContextMessages.CurrencyMessageLearnRecipe end,
+                setFunc = function(value) Settings.ContextMessages.CurrencyMessageLearnRecipe = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.ContextMessages.CurrencyMessageLearnRecipe,
+            },
+
+            {
+                -- Loot Message (Learn Motif)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LEARN_MOTIF),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LEARN_MOTIF_TP),
+                getFunc = function() return Settings.ContextMessages.CurrencyMessageLearnMotif end,
+                setFunc = function(value) Settings.ContextMessages.CurrencyMessageLearnMotif = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.ContextMessages.CurrencyMessageLearnMotif,
+            },
+
+            {
+                -- Loot Message (Learn Style)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LEARN_STYLE),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LEARN_STYLE_TP),
+                getFunc = function() return Settings.ContextMessages.CurrencyMessageLearnStyle end,
+                setFunc = function(value) Settings.ContextMessages.CurrencyMessageLearnStyle = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.ContextMessages.CurrencyMessageLearnStyle,
             },
 
 
