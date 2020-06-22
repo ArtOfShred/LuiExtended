@@ -19,6 +19,8 @@ local playerFrameOptionsKeys = { ["Vertical Stacked Frames"] = 1, ["Separated Ho
 local championOptions        = { "Show Above Cap", "Limit to Cap" }
 local resolutionOptions      = { "1080p", "1440p", "4K" }
 local resolutionOptionsKeys  = { ["1080p"] = 1, ["1440p"] = 2, ["4K"] = 3 }
+local alignmentOptions       = { "Left to Right (Default)", "Right to Left", "Center" }
+local alignmentOptionsKeys   = { ["Left to Right (Default)"] = 1, ["Right to Left"] = 2, ["Center"] = 3 }
 
 local formatOptions = {
     "Nothing",
@@ -477,7 +479,6 @@ function UnitFrames.CreateSettings()
             },
         },
     }
-
     -- Unit Frames - Custom Unit Frame Color Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
@@ -1117,6 +1118,98 @@ function UnitFrames.CreateSettings()
                 default = Defaults.CustomOocAlphaPower,
                 disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( Settings.CustomFramesPlayer or Settings.CustomFramesTarget ) ) end,
             },
+        },
+    }
+
+    -- Unit Frames -- Custom Unit Frames Bar Alignment
+    optionsDataUnitFrames[#optionsDataUnitFrames +1] = {
+        type = "submenu",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_HEADER),
+        controls = {
+            {
+                -- Alignment Player Health Bar
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_PLAYER_HEALTH),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_PLAYER_HEALTH_TP),
+                choices = alignmentOptions,
+                getFunc = function() return alignmentOptions[Settings.BarAlignPlayerHealth] end,
+                setFunc = function(value) Settings.BarAlignPlayerHealth = alignmentOptionsKeys[value] UnitFrames.CustomFramesApplyBarAlignment() end,
+                width = "full",
+                default = Defaults.BarAlignPlayerHealth,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer ) end,
+            },
+            {
+                -- Alignment Player Magicka Bar
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_PLAYER_MAGICKA),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_PLAYER_MAGICKA_TP),
+                choices = alignmentOptions,
+                getFunc = function() return alignmentOptions[Settings.BarAlignPlayerMagicka] end,
+                setFunc = function(value) Settings.BarAlignPlayerMagicka = alignmentOptionsKeys[value] UnitFrames.CustomFramesApplyBarAlignment() end,
+                width = "full",
+                default = Defaults.BarAlignPlayerMagicka,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer ) end,
+            },
+            {
+                -- Alignment Player Stamina Bar
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_PLAYER_STAMINA),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_PLAYER_STAMINA_TP),
+                choices = alignmentOptions,
+                getFunc = function() return alignmentOptions[Settings.BarAlignPlayerStamina] end,
+                setFunc = function(value) Settings.BarAlignPlayerStamina = alignmentOptionsKeys[value] UnitFrames.CustomFramesApplyBarAlignment() end,
+                width = "full",
+                default = Defaults.BarAlignPlayerStamina,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer ) end,
+            },
+            {
+                -- Alignment Target Health Bar
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_TARGET),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_TARGET_TP),
+                choices = alignmentOptions,
+                getFunc = function() return alignmentOptions[Settings.BarAlignTarget] end,
+                setFunc = function(value) Settings.BarAlignTarget = alignmentOptionsKeys[value] UnitFrames.CustomFramesApplyBarAlignment() end,
+                width = "full",
+                default = Defaults.BarAlignTarget,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer ) end,
+            },
+
+            {
+                -- Center Label for Player Bars
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_LABEL_PLAYER),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_LABEL_PLAYER_TP),
+                getFunc = function() return Settings.BarAlignCenterLabelPlayer end,
+                setFunc = function(value) Settings.BarAlignCenterLabelPlayer = value UnitFrames.CustomFramesFormatLabels(true) UnitFrames.CustomFramesApplyLayoutPlayer(true) end,
+                width = "full",
+                default = Defaults.BarAlignCenterLabelPlayer,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer ) end,
+            },
+            {
+                -- Center Label for Target Bar
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_LABEL_TARGET),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_LABEL_TARGET_TP),
+                getFunc = function() return Settings.BarAlignCenterLabelTarget end,
+                setFunc = function(value) Settings.BarAlignCenterLabelTarget = value UnitFrames.CustomFramesFormatLabels(true) UnitFrames.CustomFramesApplyLayoutPlayer(true) end,
+                width = "full",
+                default = Defaults.BarAlignCenterLabelTarget,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer ) end,
+            },
+            {
+                -- Custom Unit Frames format left label
+                type = "dropdown",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_LABEL_CENTER_FORM)),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_LABEL_CENTER_FORM),
+                choices = formatOptions,
+                getFunc = function() return Settings.CustomFormatCenterLabel end,
+                setFunc = function(var) Settings.CustomFormatCenterLabel = var UnitFrames.CustomFramesFormatLabels(true) UnitFrames.CustomFramesApplyLayoutPlayer(true) end,
+                width = "full",
+                disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+                default = Defaults.CustomFormatCenterLabel,
+            },
+
         },
     }
 

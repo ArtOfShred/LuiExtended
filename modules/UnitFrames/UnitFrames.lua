@@ -197,6 +197,13 @@ UnitFrames.Defaults = {
     PetOocAlpha                      = 85,
     whitelist                        = {}, -- whitelist for pet names
     PetNameClip                      = 88,
+    BarAlignPlayerHealth             = 1,
+    BarAlignPlayerMagicka            = 1,
+    BarAlignPlayerStamina            = 1,
+    BarAlignTarget                   = 1,
+    BarAlignCenterLabelPlayer        = false,
+    BarAlignCenterLabelTarget        = false,
+    CustomFormatCenterLabel          = "Current + Shield / Max (Percentage%)", -- TODO: localization
 
 }
 UnitFrames.SV = nil
@@ -1404,6 +1411,7 @@ local function CreateCustomFrames()
     UnitFrames.CustomFramesApplyTexture()
     -- Apply fonts
     UnitFrames.CustomFramesApplyFont()
+    UnitFrames.CustomFramesApplyBarAlignment()
 
         -- Add this top level window to global controls list, so it can be hidden
     for _, unitTag in pairs( { 'player', 'reticleover', 'SmallGroup1', 'RaidGroup1', 'boss1', 'AvaPlayerTarget', "PetGroup1" } ) do
@@ -1414,6 +1422,29 @@ local function CreateCustomFrames()
 end
 
 local defaultPos = { }
+
+function UnitFrames.CustomFramesApplyBarAlignment()
+    if UnitFrames.CustomFrames["player"] then
+        local hpBar = UnitFrames.CustomFrames["player"][POWERTYPE_HEALTH]
+        if hpBar then
+            hpBar.bar:SetBarAlignment(UnitFrames.SV.BarAlignPlayerHealth- 1 )
+        end
+        local magBar = UnitFrames.CustomFrames["player"][POWERTYPE_MAGICKA]
+        if magBar then
+            magBar.bar:SetBarAlignment(UnitFrames.SV.BarAlignPlayerMagicka - 1 )
+        end
+        local stamBar = UnitFrames.CustomFrames["player"][POWERTYPE_STAMINA]
+        if stamBar then
+            stamBar.bar:SetBarAlignment(UnitFrames.SV.BarAlignPlayerStamina - 1 )
+        end
+    end
+    if UnitFrames.CustomFrames["reticleover"] then
+        local hpBar = UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH]
+        if hpBar then
+            hpBar.bar:SetBarAlignment(UnitFrames.SV.BarAlignTarget - 1 )
+        end
+    end
+end
 
 -- Save default frame positions
 function UnitFrames.SaveDefaultFramePositions()
@@ -1658,24 +1689,65 @@ end
 -- Update format for labels on CustomFrames
 function UnitFrames.CustomFramesFormatLabels(menu)
     -- Search CustomFrames for attribute bars with correct labels
-    -- Format Player/Target Labels
-    for _, baseName in pairs( { "player", "reticleover" } ) do
-        local unitTag = baseName
-        if UnitFrames.CustomFrames[unitTag] then
-            for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA} ) do
-                if UnitFrames.CustomFrames[unitTag][powerType] then
-                    if UnitFrames.CustomFrames[unitTag][powerType].labelOne then
-                        UnitFrames.CustomFrames[unitTag][powerType].labelOne.fmt = UnitFrames.SV.CustomFormatOnePT
+
+    -- Format Player Labels
+    if UnitFrames.CustomFrames["player"] then
+        for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA} ) do
+            if UnitFrames.CustomFrames["player"][powerType] then
+                if UnitFrames.CustomFrames["player"][powerType].labelOne then
+                    if UnitFrames.SV.BarAlignCenterLabelPlayer then
+                        UnitFrames.CustomFrames["player"][powerType].labelOne.fmt = UnitFrames.SV.CustomFormatCenterLabel
+                        UnitFrames.CustomFrames["player"][powerType].labelOne:ClearAnchors()
+                        UnitFrames.CustomFrames["player"][powerType].labelOne:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
+                        UnitFrames.CustomFrames["player"][powerType].labelOne:SetAnchor ( CENTER, UnitFrames.CustomFrames["player"][powerType].backdrop, CENTER, 0, 0 )
+                    else
+                        UnitFrames.CustomFrames["player"][powerType].labelOne.fmt = UnitFrames.SV.CustomFormatOnePT
+                        UnitFrames.CustomFrames["player"][powerType].labelOne:ClearAnchors()
+                        UnitFrames.CustomFrames["player"][powerType].labelOne:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
+                        UnitFrames.CustomFrames["player"][powerType].labelOne:SetAnchor ( LEFT, UnitFrames.CustomFrames["player"][powerType].backdrop, LEFT, 5, 0 )
                     end
-                    if UnitFrames.CustomFrames[unitTag][powerType].labelTwo then
-                        UnitFrames.CustomFrames[unitTag][powerType].labelTwo.fmt = UnitFrames.SV.CustomFormatTwoPT
+                end
+                if UnitFrames.CustomFrames["player"][powerType].labelTwo then
+                    if UnitFrames.SV.BarAlignCenterLabelPlayer then
+                        UnitFrames.CustomFrames["player"][powerType].labelTwo.fmt = "Nothing"
+                    else
+                        UnitFrames.CustomFrames["player"][powerType].labelTwo.fmt = UnitFrames.SV.CustomFormatTwoPT
                     end
                 end
             end
         end
-        if menu and DoesUnitExist(unitTag) then
-            UnitFrames.ReloadValues(unitTag)
+    end
+    if menu and DoesUnitExist("player") then
+        UnitFrames.ReloadValues("player")
+    end
+
+    -- Format Target Labels
+    if UnitFrames.CustomFrames["reticleover"] then
+        if UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH] then
+            if UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].labelOne then
+                if UnitFrames.SV.BarAlignCenterLabelTarget then
+                    UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].labelOne.fmt = UnitFrames.SV.CustomFormatCenterLabel
+                    UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].labelOne:ClearAnchors()
+                    UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].labelOne:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
+                    UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].labelOne:SetAnchor ( CENTER, UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].backdrop, CENTER, 0, 0 )
+                else
+                    UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].labelOne.fmt = UnitFrames.SV.CustomFormatOnePT
+                    UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].labelOne:ClearAnchors()
+                    UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].labelOne:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
+                    UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].labelOne:SetAnchor ( LEFT, UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].backdrop, LEFT, 5, 0 )
+                end
+            end
+            if UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].labelTwo then
+                if UnitFrames.SV.BarAlignCenterLabelTarget then
+                    UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].labelTwo.fmt = "Nothing"
+                else
+                    UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].labelTwo.fmt = UnitFrames.SV.CustomFormatTwoPT
+                end
+            end
         end
+    end
+    if menu and DoesUnitExist("reticleover") then
+        UnitFrames.ReloadValues("reticleover")
     end
 
     -- Format Small Group Labels
