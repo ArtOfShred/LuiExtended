@@ -425,7 +425,7 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.BarDesaturateUnused = value CombatInfo.OnSlotsFullUpdate() CombatInfo.BackbarToggleSettings() end,
                 width = "full",
                 default = Defaults.BarDesaturateUnused,
-                disabled = function() return not (Settings.ShowToggled and LUIE.SV.CombatInfo_Enabled) end,
+                disabled = function() return not (Settings.ShowToggled and Settings.BarShowBack and LUIE.SV.CombatInfo_Enabled) end,
             },
             {
                 -- Hide Unused Backbar

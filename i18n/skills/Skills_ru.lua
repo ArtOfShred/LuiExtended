@@ -330,6 +330,8 @@ local strings = {
 
     SI_LUIE_SKILL_GENERIC_MOVEMENT_SPEED_TP =            "Increase Movement Speed by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
+    SI_LUIE_SKILL_GENERIC_PHYSICAL_SPELL_PEN_TP =        "Increase Physical and Spell Penetration by |cFFFFFF<<2>>|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+
     SI_LUIE_SKILL_SET_GENERIC_ICD_TP =                   "You have recently benefitted from the effects of <<2>> and may not do so again for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_SET_GENERIC_ICD_MINUTES_TP =           "You have recently benefitted from the effects of <<2>> and may not do so again for |cFFFFFF<<3>>|r <<3[minute/minutes]>>.",
 
@@ -439,7 +441,7 @@ local strings = {
     SI_LUIE_SKILL_LIGHTNING_FORM_TP =                    "Enemies within |cFFFFFF5|r meters take Shock Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_HURRICANE_TP =                         "Enemies within |cFFFFFF5|r meters take Physical Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nThe winds grow in damage and size, increasing up to |cFFFFFF150|r% more damage and up to |cFFFFFF9|r meters in size.",
     SI_LUIE_SKILL_LIGHTNING_SPLASH_TP =                  "Enemies standing in the |cFFFFFF<<2>>|r meter radius of the storm energy take Shock Damage every |cFFFFFF1|r second.\n\nAn ally standing within the nexus can activate the |cFFFFFFConduit|r synergy.",
-    SI_LUIE_SKILL_SURGE_TP =                             "Dealing a Critical Strike heals you. This effect can occur once every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_SURGE_TP =                             "Dealing Critical Damage heals you. This effect can occur once every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_POWER_SURGE_TP =                       "Activating a Critical Heal causes the ability to heal you and allies within |cFFFFFF18|r meters. This effect can occur once every |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_BOLT_ESCAPE_FATIGUE_TP =               "Consecutive Bolt Escape casts cost |cFFFFFF33|r% more Magicka per stack for the next |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_INTERCEPT_TP =                         "A Ball of Lightning absorbs all projectiles directed at you for the next |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
@@ -926,6 +928,10 @@ local strings = {
     SI_LUIE_SKILL_NERIENETH_TP =                         "After |cFFFFFF2|r seconds the Lich Crystal explodes, dealing Magic Damage to enemies within |cFFFFFF4|r meters of the crystal.",
     SI_LUIE_SKILL_SELLISTRIX_TP =                        "After |cFFFFFF1.5|r seconds the earthquake erupts, dealing Physical Damage to enemies in a |cFFFFFF4|r meter radius and stunning them for |cFFFFFF3|r seconds.",
 
+    -- Mythic Items
+    SI_LUIE_SKILL_SET_BLOODLORDS_EMBRACE_TP =            "When your attacker blocks an attack from you, they restore |cFFFFFF1535|r Magicka.\n\nThis effect can occur every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_SET_THRASSIAN_STANGLERS_TP =           "Stacks up to |cFFFFFF20|r times when you kill an enemy.\n\n• Increase Spell Damage by |cFFFFFF150|r per stack.\n• Increase damage taken by |cFFFFFF2|r% per stack.\n• Healing received and damage shield strength decreased by |cFFFFFF2|r% per stack.",
+
     -- Crafted Sets
     SI_LUIE_SKILL_SET_ALESSIAS_BULWARK =                 "Урон от Оружия снижен на |cFFFFFF10|r% в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_SET_ETERNAL_HUNT =                     "Detonates when an enemy enters the |cFFFFFF2.5|r meter radius of the rune, dealing Poison Damage and immoblizing them for |cFFFFFF1.5|r seconds.",
@@ -942,6 +948,8 @@ local strings = {
     SI_LUIE_SKILL_SET_MIGHT_OF_THE_LOST_LEGION_TP =      "Gain the effects of |cFFFFFFEmpower|r for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_COLDHARBOURS_FAVORITE_HEAL_TP =    "After |cFFFFFF<<1>>|r <<1[second/seconds]>> Honor casts a healing spell on you and allies within |cFFFFFF6|r meters that heals over time for |cFFFFFF4|r seconds.",
     SI_LUIE_SKILL_SET_COLDHARBOURS_FAVORITE_DAMAGE_TP =  "After |cFFFFFF<<1>>|r <<1[second/seconds]>> Honor explodes, afflicting enemies within |cFFFFFF6|r meters with Magic Damage over time for |cFFFFFF4|r seconds.",
+    SI_LUIE_SKILL_SET_STUHNS_FAVOR_TP =                  "Increase Physical and Spell Penetration by |cFFFFFF<<2>>|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThe duration is refreshed when you deal damage to an enemy who is Off Balance.",
+    SI_LUIE_SKILL_SET_DRAGONS_APPETITE_TP =              "Dealing non-Bleed damage to Bleeding enemies generates a persistent stack of Dragon's Appetite, up to once per second.\n\nUpon reaching |cFFFFFF10|r stacks you consume Dragon's Appetite and heal.",
 
     -- Light / Medium / Heavy Armor Sets
     SI_LUIE_SKILL_SET_ELEGANCE_LA_TP =                   "Your next Health, Magicka, or Stamina ability used within |cFFFFFF<<1>>|r <<1[second/seconds]>> costs |cFFFFFF10|r% less.",
@@ -992,13 +1000,14 @@ local strings = {
     SI_LUIE_SKILL_SET_HATCHLINGS_SHELL_TP =              "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThis shield replenishes to absorb |cFFFFFF20|r% of your Max Health in damage for |cFFFFFF15|r seconds every |cFFFFFF15|r seconds.",
     SI_LUIE_SKILL_SET_UNDAUNTED_UNWEAVER_TP =            "Your Light Attacks deal an additional |cFFFFFF774|r damage and Heavy Attacks deal an additional |cFFFFFF1161|r damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_SET_DUNERIPPERS_SCALES_TP =            "Increase Physical and Spell Resistance by |cFFFFFF5310|r while you are blocking.",
-
     SI_LUIE_SKILL_KJALNARS_NIGHTMARE_TP =                "Marked for |cFFFFFF5|r seconds, stacking up to |cFFFFFF5|r times when your attacker damages you with a Light Attack.\n\nAt |cFFFFFF5|r stacks, an undodgeable skeletal hand attacks you after |cFFFFFF1|r second, knocking you into the air and stunning you for |cFFFFFF3|r seconds or dealing Magic Damage if you cannot be stunned.\n\nYou can only receive a stack once per second.",
     SI_LUIE_SET_HITIS_HEARTH_TP =                        "You and group members within |cFFFFFF10|r meters heal every |cFFFFFF1|r second and have the cost of Sprint, Block, and Roll Dodge reduced by |cFFFFFF5|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SET_HITIS_HEARTH_GROUND_TP =                 "Healing every |cFFFFFF1|r second and reduces the cost of Sprint, Block, and Roll Dodge by |cFFFFFF5|r%.",
     SI_LUIE_SET_DRAUGRKIN_TP =                           "Increase damage taken from your attacker by |cFFFFFF617|r for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SET_AEGIS_CALLER_TP =                        "After |cFFFFFF2.5|r seconds, the Lesser Aegis spins its blades, dealing Bleed Damage every |cFFFFFF1|r second to enemies within a |cFFFFFF6|r meter radius.",
     SI_LUIE_SET_GRAVE_GUARDIAN_TP =                      "You and group members within |cFFFFFF8|r meters gain |cFFFFFF4430|r Physical and Spell Resistance while you are blocking.",
+    SI_LUIE_SET_WINTERS_RESPITE_TP =                     "You and allies in the |cFFFFFF8|r meter radius of healing frost restore Health every |cFFFFFF1|r second.",
+    SI_LUIE_SET_HUNTERS_VENOM_TP =                       "You and allies within a |cFFFFFF6|r meter radius take Poison Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
 
     -- Trial Sets
     SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP =            "Increase Weapon Critical by |cFFFFFF400|r for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF5|r times when you deal melee damage.\n\nThis effect can occur once every half second.",
@@ -1013,6 +1022,10 @@ local strings = {
     SI_LUIE_SKILL_SET_EYE_OF_NAHVIINTAAS =               "Reduce the cost of non-Ultimate abilities by |cFFFFFF12|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_HARMFUL_WINDS =                    "Harmful Winds",
     SI_LUIE_SKILL_SET_RELEQUEN_TP =                      "Afflicted with Physical Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF20|r times when your attacker damages you with a Light or Heavy Attack.",
+    SI_LUIE_SKILL_SET_KYNES_BLESSING_TP =                "You and allies standing in the |cFFFFFF6|r meter radius of Kyne's Blessing restore |cFFFFFF399|r Stamina and Magicka every |cFFFFFF1|r second.",
+    --SI_LUIE_SKILL_SET_KYNES_BLESSING_GROUND_TP =       "Restoring |cFFFFFF399|r Stamina and Magicka every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_SET_GIANTS_ENDURANCE_TP =              "Increase Stamina Recovery by |cFFFFFF69|r, stacking up to |cFFFFFF5|r times when you deal Critical Damage.\n\nDealing damage with a Fully Charged Heavy Attack removes Giant's Endurance and grants Giant's Might for |cFFFFFF10|r seconds, increasing your Weapon Damage by |cFFFFFF111|r per stack removed.\n\nYou can only gain a stack of Giant's Endurance once per second.",
+    SI_LUIE_SKILL_SET_GIANTS_MIGHT_TP =                  "Increase Weapon Damage by |cFFFFFF111|r per stack of Giant's Endurance consumed for |cFFFFFF<<1>>|r seconds.",
 
     -- Battleground Sets
     SI_LUIE_SKILL_SET_COWARDS_GEAR =                     "Coward's Gear",
@@ -1383,6 +1396,9 @@ local strings = {
     SI_LUIE_SKILL_FREEZING_VINEBURST =                   "Freezing Vineburst",
     SI_LUIE_SKILL_FREEZING_VINES_TP =                    "Afflicted with Bleed Damage every |cFFFFFF0.5|r seconds and immobilized for |cFFFFFF<<1>>|r seconds.\n\nThe vines shatter at the end of the duration, dealing Frost Damage if you do not move away.",
     SI_LUIE_SKILL_EXPLOSIVE_FLARE =                      "Explosive Flare",
+    SI_LUIE_SKILL_SUMMON_SPIDERKITH =                    "Summon Spiderkith",
+    SI_LUIE_SKILL_SUMMON_DEATH_SPIDER =                  "Summon Death Spider",
+    SI_LUIE_SKILL_SUMMON_DEATH_SPIDER_TP =               "A death spider fights at your side. The death spider remains for |cFFFFFF2|r minutes or until killed.",
 
     -- Keep Upgrade
     SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_RANGE =              "Longer Range on Ranged Guards",

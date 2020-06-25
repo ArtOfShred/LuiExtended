@@ -1317,8 +1317,8 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
 
         SpellCastBuffs.TooltipBottomLine(control, detailsLine)
 
-        --Debug
-        --GameTooltip:SetAbilityId(38935)
+        -- Tooltip Debug
+        --GameTooltip:SetAbilityId(136098)
 
     end
 end
@@ -2977,10 +2977,18 @@ function SpellCastBuffs.AddNameAura()
             local abilityName = GetAbilityName(v.id)
             local abilityIcon = GetAbilityIcon(v.id)
             stack = v.stack or 0
+
             local zone = v.zone
-            if zone and GetZoneId(GetCurrentMapZoneIndex()) ~= zone then
-                return
+            if zone then
+                local flag = false
+                for k, v in pairs(zone) do
+                    if GetZoneId(GetCurrentMapZoneIndex()) == k then
+                        flag = true
+                    end
+                end
+                if not flag then return end
             end
+
             SpellCastBuffs.EffectsList.reticleover1[ "Name Specific Buff" .. k ] = {
                 type=1,
                 id= v.id, name= abilityName, icon= abilityIcon,

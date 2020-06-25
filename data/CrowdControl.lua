@@ -170,6 +170,7 @@ CrowdControl.aoePlayerSet = {
     [102094] = 1, -- Thurvokun (Thurvokun)
     [116920] = 1, -- Auroran's Thunder (Auroran's Thunder)
     [133494] = 1, -- Aegis Caller (Aegis Caller's)
+    [137526] = 1, -- Hunter's Venom (Venomous)
 
     -- Siege
     [104693] = 1, -- Meatbag Catapult
@@ -376,6 +377,9 @@ CrowdControl.aoeNPCBoss = {
     [22398] = 1, -- Call Lightning (Ilambris-Athor)
     [22401] = 0, -- Call Lightning (Ilambris-Athor)
     [22403] = 0, -- Call Lightning (Ilambris-Athor)
+
+    -- Crypt of Hearts II
+    [51883] = 1, -- Creeping Storm (Creeping Storm)
 
 }
 

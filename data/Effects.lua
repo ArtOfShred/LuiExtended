@@ -588,6 +588,7 @@ Effects.EffectGroundDisplay = {
     -- Overland Sets
     [75691] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_snare.dds', buff = false, debuff = false, ground = true }, -- Bahraha's Curse
     [71664] = { icon = 'LuiExtended/media/icons/abilities/ability_set_trinimacs_valor.dds', buff = false, debuff = false, ground = true }, -- Trinimac's Valor
+    [135659] = { icon = 'LuiExtended/media/icons/abilities/ability_set_winters_respite.dds', buff = true, debuff = false, ground = false }, -- Winter's Respite (of Winter's Respite)
 
     -- Dungeon Sets
     [97538] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrs_rest.dds', buff = true, debuff = false, ground = false }, -- Draugr's Rest
@@ -603,6 +604,8 @@ Effects.EffectGroundDisplay = {
     [109084] = { icon = 'LuiExtended/media/icons/abilities/ability_set_olorime.dds', name = Abilities.Set_Vestment_of_Olorime, buff = true, debuff = false, ground = false }, -- Ideal Vestment of Olirime (Olirime's Perfect)
     [107095] = { icon = 'LuiExtended/media/icons/abilities/ability_set_mantle_of_siroria.dds', buff = true, debuff = false, ground = false }, -- Mantle of Siroria (Siroria's)
     [109081] = { icon = 'LuiExtended/media/icons/abilities/ability_set_mantle_of_siroria.dds', name = Abilities.Set_Mantle_of_Siroria, buff = true, debuff = false, ground = false }, -- Ideal Mantle of Siroria (Perfect Siroria's)
+    [136098] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds', buff = true, debuff = false, ground = false }, -- Kyne's Blessing (of Kyne's Wind)
+    [137995] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds', buff = true, debuff = false, ground = false }, -- Kyne's Blessing (of Kyne's Wind (Perfect))
 
     ---------------------------
     -- Class Abilities --------
@@ -1744,7 +1747,7 @@ Effects.AddNameAura = {
     [Unitnames.Dummy_Target_Stone_Husk] = { [1] = { id = 33097 } },
 
     -- Various Mobs
-    [Unitnames.NPC_Daedroth] = { [1] = { id = 999013, zone = 935 } }, -- Daedroth
+    [Unitnames.NPC_Daedroth] = { [1] = { id = 999013, zone = { [935] = true }, } }, -- Daedroth
 
     -- World Bosses
 
@@ -1935,9 +1938,9 @@ Effects.AddNameAura = {
     [Unitnames.Boss_Anala_tuwha] = { [1] = { id = 33097 } }, -- Anal'a Tu'wha
     [Unitnames.NPC_Pacthunter_Ranger] = { [1] = { id = 33097 } }, -- Pacthunter Ranger
     [Unitnames.Boss_Pishna_Longshot] = { [1] = { id = 33097 } }, -- Pishna Longshot
-    [Unitnames.Boss_Shadow_Knight] = { [1] = { id = 33097, zone = 635 } }, -- Shadow Knight (Dragonstar Arena)
-    [Unitnames.Boss_Dark_Mage] = { [1] = { id = 33097, zone = 635 } }, -- Dark Mage (Dragonstar Arena)
-    [Unitnames.NPC_Dwarven_Fire_Centurion] = { [1] = { id = 33097, zone = 635 } }, -- Dwarven Fire Centurion (Dragonstar Arena)
+    [Unitnames.Boss_Shadow_Knight] = { [1] = { id = 33097, zone = { [635] = true }, } }, -- Shadow Knight (Dragonstar Arena)
+    [Unitnames.Boss_Dark_Mage] = { [1] = { id = 33097, zone = { [635] = true }, } }, -- Dark Mage (Dragonstar Arena)
+    [Unitnames.NPC_Dwarven_Fire_Centurion] = { [1] = { id = 33097, zone = { [635] = true }, } }, -- Dwarven Fire Centurion (Dragonstar Arena)
     [Unitnames.Boss_Mavus_Talnarith] =  { [1] = { id = 33097 } }, -- Mavus Talnarith
     [Unitnames.Boss_Zackael_Jonnicent] =  { [1] = { id = 33097 } }, -- Zackael Jonnicent
     [Unitnames.Boss_Rubyn_Jonnicent] =  { [1] = { id = 33097 } }, -- Rubyn Jonnicent
@@ -1946,14 +1949,14 @@ Effects.AddNameAura = {
 
     -- Maelstrom Arena
     [Unitnames.Boss_Maxus_the_Many] = { [1] = { id = 33097 } }, -- Maxus the Many
-    [Unitnames.NPC_Clockwork_Sentry] = { [1] = { id = 33097, zone = 677 } }, -- Clockwork Sentry (Maelstrom Arena)
-    [Unitnames.NPC_Queens_Pet] = { [1] = { id = 33097, zone = 677 } }, -- Queen's Pet (Maelstrom Arena)
-    [Unitnames.NPC_Queens_Champion] = { [1] = { id = 33097, zone = 677 } }, -- Queen's Champion (Maelstrom Arena)
-    [Unitnames.NPC_Queens_Advisor] = { [1] = { id = 33097, zone = 677 } }, -- Queen's Advisor (Maelstrom Arena)
-    [Unitnames.Boss_Lamia_Queen] = { [1] = { id = 33097, zone = 677 } }, -- Lamia Queen (Maelstrom Arena)
+    [Unitnames.NPC_Clockwork_Sentry] = { [1] = { id = 33097, zone = { [677] = true }, } }, -- Clockwork Sentry (Maelstrom Arena)
+    [Unitnames.NPC_Queens_Pet] = { [1] = { id = 33097, zone = { [677] = true }, } }, -- Queen's Pet (Maelstrom Arena)
+    [Unitnames.NPC_Queens_Champion] = { [1] = { id = 33097, zone = { [677] = true }, } }, -- Queen's Champion (Maelstrom Arena)
+    [Unitnames.NPC_Queens_Advisor] = { [1] = { id = 33097, zone = { [677] = true }, } }, -- Queen's Advisor (Maelstrom Arena)
+    [Unitnames.Boss_Lamia_Queen] = { [1] = { id = 33097, zone = { [677] = true }, } }, -- Lamia Queen (Maelstrom Arena)
     [Unitnames.Boss_The_Control_Guardian] = { [1] = { id = 33097 } }, -- The Control Guardian
     [Unitnames.NPC_Troll_Breaker] = { [1] = { id = 33097 } }, -- Troll Breaker
-    [Unitnames.NPC_Ogre_Elder] = { [1] = { id = 33097, zone = 677 } }, -- Ogre Elder (Maelstrom Arena)
+    [Unitnames.NPC_Ogre_Elder] = { [1] = { id = 33097, zone = { [677] = true }, } }, -- Ogre Elder (Maelstrom Arena)
     [Unitnames.Boss_Matriarch_Runa] = { [1] = { id = 33097 } }, -- Matriarch Runa
 
     --------------------------------------------
@@ -2008,8 +2011,8 @@ Effects.AddNameAura = {
     [Unitnames.NPC_Flame_Colossus] = { [1] = { id = 33097 } }, -- Flame Colossus
     [Unitnames.Boss_Horvantud_the_Fire_Maw] = { [1] = { id = 33097 } }, -- Horvantud the Fire Maw
     [Unitnames.Boss_Ash_Titan] = { [1] = { id = 33097 } }, -- Ash Titan
-    [Unitnames.NPC_Air_Atronach] = { [1] = { id = 33097, zone = 681 } }, -- Air Atronach (City of Ash II)
-    [Unitnames.NPC_Dremora_Hauzkyn] = { [1] = { id = 33097, zone = 681 } }, -- Dremora Hauzkyn (City of Ash II)
+    [Unitnames.NPC_Air_Atronach] = { [1] = { id = 33097, zone = { [681] = true }, } }, -- Air Atronach (City of Ash II)
+    [Unitnames.NPC_Dremora_Hauzkyn] = { [1] = { id = 33097, zone = { [681] = true }, } }, -- Dremora Hauzkyn (City of Ash II)
     [Unitnames.NPC_Fire_Ravager] = { [1] = { id = 33097 } }, -- Fire Ravager
     [Unitnames.NPC_Xivilai_Fulminator] = { [1] = { id = 33097 } }, -- Xivilai Fulminator
     [Unitnames.NPC_Xivilai_Boltaic] = { [1] = { id = 33097 } }, -- Xivilai Fulminator
@@ -2043,7 +2046,7 @@ Effects.AddNameAura = {
     -- Spindleclutch II
     [Unitnames.Boss_Mad_Mortine] = { [1] = { id = 33097 } }, -- Mad Mortine
     [Unitnames.Boss_Blood_Spawn] = { [1] = { id = 33097 } }, -- Blood Spawn
-    [Unitnames.NPC_Flesh_Atronach] = { [1] = { id = 33097, zone = 936 } }, -- Flesh Atronach
+    [Unitnames.NPC_Flesh_Atronach] = { [1] = { id = 33097, zone = { [936] = true, [932] = true }, } }, -- Flesh Atronach
     [Unitnames.Boss_Urvan_Veleth] = { [1] = { id = 33097 } }, -- Urvan Veleth
     [Unitnames.Boss_Vorenor_Winterbourne] = { [1] = { id = 33097 } }, -- Vorenor Winterborne
 
@@ -2069,6 +2072,11 @@ Effects.AddNameAura = {
     [Unitnames.Boss_Dogas_the_Berserker] = { [1] = { id = 33097 } }, -- Dogas the Berserker
     [Unitnames.Boss_Ilambris_Athor] = { [1] = { id = 33097 } }, -- Ilambris-Athor
     [Unitnames.Boss_Ilambris_Zaven] = { [1] = { id = 33097 } }, -- Ilambris-Zaven
+
+    [Unitnames.Boss_Ibelgast] = { [1] = { id = 33097 } }, -- Ibelgast
+    [Unitnames.Boss_Ruzozuzalpamaz] = { [1] = { id = 33097 } }, -- Ruzozuzalpamaz
+    [Unitnames.NPC_Ibelgasts_Flesh_Atronach] = { [1] = { id = 33097 } }, -- Ibelgasts Flesh Atronach
+    [Unitnames.NPC_Ogrim] = { [1] = { id = 33097, zone = { [932] = true }, } }, -- Ogrim
 
     -- Frostvault
     [Unitnames.NPC_Coldsnap_Ogre] = { [1] = { id = 33097 } }, -- Coldsnap Ogre
@@ -2213,12 +2221,15 @@ Effects.EffectOverrideByName = {
         [Unitnames.NPC_Sea_Viper_Berserker] =    { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_1h_light.dds' }, -- Sea Viper Berserker (Tempest Island)
         [Unitnames.NPC_Sea_Viper_Charger] =      { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_2h_light.dds' }, -- Sea Viper Charger (Tempest Island)
         [Unitnames.Boss_Commodore_Ohmanil] =     { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_2h_light.dds' }, -- Commodore Ohmanil (Tempest Island)
+        [Unitnames.Boss_Ibelgast] =              { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_light.dds' }, -- Ibelgast (Crypt of Hearts II)
+        [Unitnames.NPC_Spiderkith_Venifex] =     { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_light.dds' }, -- Spiderkith Venifex (Crypt of Hearts II)
+        [Unitnames.NPC_Spiderkith_Warper] =      { icon = 'LuiExtended/media/icons/abilities/ability_spell_dagger_1h_light.dds' }, -- Spiderkith Warper (Crypt of Hearts II)
     },
 
     [29035] = { -- Quick Strike (Rogue/Skirmisher)
         -- Daggerfall Covenant
-        [Unitnames.NPC_Dogeater_Skirmisher] =    { icon = 'LuiExtended/media/icons/abilities/ability_spell_dagger_1h_light.dds' }, -- Dogeater Skirmisher (Stros M'Kai)
-        [Unitnames.NPC_Drake_Cutthroat] =    { icon = 'LuiExtended/media/icons/abilities/ability_spell_dagger_1h_light.dds' }, -- Dogeater Skirmisher (Stros M'Kai)
+        [Unitnames.NPC_Dogeater_Skirmisher] =   { icon = 'LuiExtended/media/icons/abilities/ability_spell_dagger_1h_light.dds' }, -- Dogeater Skirmisher (Stros M'Kai)
+        [Unitnames.NPC_Drake_Cutthroat] =       { icon = 'LuiExtended/media/icons/abilities/ability_spell_dagger_1h_light.dds' }, -- Drake Cutthroat (Stros M'Kai)
     },
 
     [26332] = { -- Slash (Valaran Stormcaller)
@@ -2629,6 +2640,9 @@ Effects.EffectSourceOverride = {
 
     -- Crypt of Hearts I
     [22432] = { pet = '' }, -- Electric Prison (Lightning Rod)
+
+    -- Crypt of Hearts II
+    [51883] = { pet = '' }, -- Creeping Storm (Creeping Storm)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -2684,6 +2698,7 @@ Effects.EffectHideSCT = {
     [75706] = true, -- Bahraha's Curse (of Bahraha's Curse)
     [34870] = true, -- Wilderqueen's Arch (of the Wilderqueen)
     [84357] = true, -- Hand of Mephala Webbing (of Mephala's Hand)
+    [135919] = true, -- Spell Parasite (Spell Parasite's)
 
     ----------------------------
     -- Nightblade
@@ -2854,6 +2869,7 @@ Effects.EffectHideSCT = {
     [51646] = true, -- Frozen Ground (Frost Atronach)
     [4829] = true, -- Fire Brand (Flesh Atronach)
     [6410] = true, -- Tail Clip (Winged Twilight)
+    [24699] = true, -- Body Slam (Ogrim)
 
     -- Undead NPC
     [22525] = true, -- Defiled Ground (Lich)
@@ -4170,6 +4186,11 @@ Effects.EffectOverride = {
 
     [126941] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_maarselok.dds', tooltip = Tooltips.Set_Maarselok }, -- Maarselok (Maarselok)
 
+    -- Mythic Items
+    [139903] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bloodlords_embrace.dds', tooltip = Tooltips.Set_Bloodlords_Embrace }, -- Blood Curse (Bloodlord's Embrace)
+    [139914] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bloodlords_embrace.dds', name = Abilities.Set_Blood_Curse }, -- Bloodlord's Embrace (Bloodlord's Embrace)
+    [136123] = { tooltip = Tooltips.Set_Thrassian_Stranglers }, -- Sload's Call (Thrassian Stranglers)
+
     -- Crafted Sets
     [34502] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ashen_grip.dds' }, -- Ashen Grip
     [34592] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', tooltip = Tooltips.Set_Alessias_Bulwark }, -- Alessia's Bulwark
@@ -4240,6 +4261,12 @@ Effects.EffectOverride = {
     [134034] = { tooltip = Abilities.Set_Critical_Riposte }, -- Minor Uncertainty (of Critical Riposte)
     [134040] = { tooltip = Abilities.Set_Critical_Riposte }, -- Minor Enervation (of Critical Riposte)
 
+    [141916] = { icon = 'LuiExtended/media/icons/abilities/ability_set_stuhns_favor.dds', tooltip = Tooltips.Set_Stuhns_Favor, tooltipValue2 = 5312 }, -- Stuhn's Favor (Stuhn's)
+    [135919] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds' }, -- Spell Parasite (Spell Parasite's)
+
+    [137126] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dragons_appetite.dds', tooltip = Tooltips.Set_Dragons_Appetite, forcedContainer = 'short' }, -- Dragon's Appetite (of Dragon's Appetite)
+    [135878] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dragons_appetite.dds' }, -- Dragon's Appetite (of Dragon's Appetite)
+
     -- Overland Sets (Light)
 
     [135938] = { icon = 'LuiExtended/media/icons/abilities/ability_set_queens_elegance.dds', tooltip = Tooltips.Set_Queens_Elegance_LA }, -- Queen's Elegance (Elegant)
@@ -4271,6 +4298,9 @@ Effects.EffectOverride = {
     [106806] = { tooltip = Abilities.Set_Wisdom_of_Vanus }, -- Major Mending (Wisdom of Vanus)
     [129389] = { icon = 'LuiExtended/media/icons/abilities/ability_set_marauders_haste.dds', tooltip = Tooltips.Generic_Movement_Speed, tooltipValue2 = 20 }, -- Marauder's Haste (Marauder's Haste)
 
+    [135659] = { icon = 'LuiExtended/media/icons/abilities/ability_set_winters_respite.dds', tooltip = Tooltips.Set_Winters_Respite }, -- Winter's Respite (of Winter's Respite)
+    [135658] = { icon = 'LuiExtended/media/icons/abilities/ability_set_winters_respite.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Winter's Respite (of Winter's Respite)
+
     -- Overland Sets (Medium)
     [71106] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds' }, -- Briarheart
     [71107] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds', tooltip = Tooltips.Set_Briarheart }, -- Briarheart
@@ -4299,6 +4329,9 @@ Effects.EffectOverride = {
     [121602] = { icon = 'LuiExtended/media/icons/abilities/ability_set_darloc_brae.dds' }, -- Vesture of Darloc Brae (Darloc Brae's)
     [121618] = { icon = 'LuiExtended/media/icons/abilities/ability_set_darloc_brae.dds' }, -- Vesture of Darloc Brae (Darloc Brae's)
     [129407] = { icon = 'esoui/art/icons/achievement_u24_mainquest_5.dds', tooltip = Tooltips.Set_Dragonguard_Tactics }, -- Dragonguard Tactics (Dragonguard Elite's)
+
+    [135690] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hunters_venom.dds', tooltip = Tooltips.Set_Hunters_Venom }, -- Hunter's Venom (Venomous)
+    [137526] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hunters_venom.dds' }, -- Hunter's Venom (Venomous)
 
     -- Overland Sets (Heavy)
     [34711] = { icon = 'LuiExtended/media/icons/abilities/ability_set_meridia.dds', tooltip = Tooltips.Generic_Blind }, -- Meridia's Blessed Armor (Blessed)
@@ -4540,6 +4573,26 @@ Effects.EffectOverride = {
     [122812] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eye_of_nahviintaas.dds', tooltip = Tooltips.Set_Eye_of_Nahviintaas }, -- Eye of Nahviintaas (Nahviintaas')
     [121871] = { icon = 'esoui/art/icons/ability_buff_major_erosion.dds', tooltip = Tooltips.Skill_Major_Slayer }, -- Major Slayer (Lokkestiiz's)
     [121878] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_courage.dds', tooltip = Abilities.Set_Claw_of_Yolnakhriin }, -- Minor Courage (Yolnakriin's)
+
+    -- Trial Sets (Kyne's Aegis)
+    [135923] = { icon = 'esoui/art/icons/ability_buff_major_erosion.dds', tooltip = Tooltips.Skill_Major_Slayer }, -- Major Slayer (Roaring Opportunist's)
+    [137986] = { icon = 'esoui/art/icons/ability_buff_major_erosion.dds', tooltip = Tooltips.Skill_Major_Slayer }, -- Major Slayer (Roaring Opportunist's Perfected)
+
+    [136098] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds', tooltip = Tooltips.Set_Kynes_Blessing }, -- Kyne's Blessing (of Kyne's Wind)
+    [136101] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds', name = Abilities.Set_Kynes_Blessing }, -- Kyne's Wind (of Kyne's Wind)
+    [136099] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds', name = Abilities.Set_Kynes_Blessing }, -- Kyne's Wind (of Kyne's Wind)
+
+    [137995] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds', tooltip = Tooltips.Set_Kynes_Blessing }, -- Kyne's Blessing (of Kyne's Wind (Perfect))
+    [137996] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds', name = Abilities.Set_Kynes_Blessing }, -- Kyne's Blessing (of Kyne's Wind (Perfect))
+    [137993] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds', name = Abilities.Set_Kynes_Blessing }, -- Kyne's Blessing (of Kyne's Wind (Perfect))
+
+    [135950] = { icon = 'LuiExtended/media/icons/abilities/ability_set_giants_endurance.dds', tooltip = Tooltips.Set_Giants_Endurance, forcedContainer = 'short' }, -- Giant's Endurance (Yandir's)
+    [135951] = { icon = 'LuiExtended/media/icons/abilities/ability_set_giants_might.dds', tooltip = Tooltips.Set_Giants_Might }, -- Giant's Might (Yandir's)
+    [138013] = { icon = 'LuiExtended/media/icons/abilities/ability_set_giants_endurance.dds', tooltip = Tooltips.Set_Giants_Endurance, forcedContainer = 'short' }, -- Giant's Endurance (Yandir's Perfect)
+    [138019] = { icon = 'LuiExtended/media/icons/abilities/ability_set_giants_might.dds', tooltip = Tooltips.Set_Giants_Might }, -- Giant's Might (Yandir's Perfect)
+
+    [135926] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_aegis.dds', tooltip = Tooltips.Skill_Major_Aegis }, -- Major Aegis (Vrol's)
+    [137989] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_aegis.dds', tooltip = Tooltips.Skill_Major_Aegis }, -- Major Aegis (Vrol's Perfect)
 
     -- Set ICD's (Fake Id's)
     [999009] = { tooltip = Tooltips.Generic_Set_ICD, tooltipValue2 = Abilities.Set_Immortal_Warrior, unbreakable = 1 }, -- Immortal Warrior (Fake Id)
@@ -8500,6 +8553,7 @@ Effects.EffectOverride = {
     [8205] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_regeneration.dds', tooltip = Tooltips.Generic_HoT_Channel, tooltipValue2 = 0.5 }, -- Regeneration (Ogrim)
     [24690] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_body_slam.dds' }, -- Body Slam (Ogrim)
     [48553] = { hide = true },  -- Focused Charge (Ogrim)
+    [24699] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_body_slam.dds' }, -- Body Slam (Ogrim)
     [24693] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_body_slam.dds', hide = true }, -- Body Slam (Ogrim)
     [24700] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_body_slam.dds', tooltip = Tooltips.Generic_Knockdown }, -- Body Slam (Ogrim)
     [91848] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_stomp.dds' }, -- Stomp (Ogrim)
@@ -12502,6 +12556,29 @@ Effects.EffectOverride = {
     [22383] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris_fire.dds', hide = true }, -- Rain Fire (Ilambris-Zaven)
     [22388] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris_fire.dds', tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1.5, groundLabel = true }, -- Rain Fire (Ilambris-Zaven)
 
+    -- Crypt of Hearts II
+
+    -- Trash
+    [52270] = { hide = true }, -- VDUN_CoH_Alanwe Knockback
+
+    [51746] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_death_spider.dds', name = Abilities.Skill_Summon_Death_Spider, tooltip = Tooltips.Skill_Summon_Death_Spider }, -- Voice to Wake the Spiders (Spiderkith Broodnurse)
+
+    [53285] = { icon = 'esoui/art/icons/achievement_update11_dungeons_025.dds', name = Abilities.Skill_Summon_Spiderkith }, -- Summon (Ogrim)
+
+    -- Ruzozuzalpamaz
+    [52954] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_slime.dds' }, -- Spit (Ruzozuzalpamaz)
+    [51882] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_guardian_storm.dds', hide = true }, -- Ruzozuzalpamaz (Creeping Storm)
+    [51881] = { hide = true }, -- Creeping Storm (Creeping Storm)
+    [51895] = { hide = true }, -- Creeping Storm (Creeping Storm)
+    [51883] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_guardian_storm.dds', hide = true, groundLabel = true, tooltip = Tooltips.Generic_AOE_Shock_Stacking, tooltipValue2 = 1, tooltipValue3 = 25, stack = 1, stackAdd = 1 }, -- Creeping Storm (Creeping Storm)
+    [52017] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_lightning_onslaught.dds' }, -- Lightning Onslaught (Ruzozuzalpamaz)
+    [52018] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_lightning_onslaught.dds' }, -- Lightning Onslaught (Ruzozuzalpamaz)
+
+
+    -- Trash
+    [52298] = { hide = true }, -- Skeletons Emerge (Spiderkith Broodnurse)
+
+
     -- temporary gap here just for ease of editing
     -- temporary gap here just for ease of editing
     -- temporary gap here just for ease of editing
@@ -13187,6 +13264,7 @@ Effects.AddGroundDamageAura = {
     [97539] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Draugr's Rest
     [67204] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Leeching Plate (of Leeching)
     [133494] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Aegis Caller (Aegis Caller's)
+    [135658] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Winter's Respite (of Winter's Respite)
 
     -- Dragonknight
     [28995] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Dragonknight Standard
@@ -13528,6 +13606,9 @@ Effects.AddGroundDamageAura = {
     [46950] = { duration = 900, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Fire Trail (Death's Leviathan)
     [22432] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Electric Prison (Ilambris-Athor)
     [22388] = { duration = 2000, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Rain Fire (Ilambris-Zaven)
+
+    -- Crypt of Hearts II
+    [51883] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Creeping Storm (Creeping Storm)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------

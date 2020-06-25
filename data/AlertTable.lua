@@ -143,7 +143,7 @@ LUIE.Data.AlertTable = {
     [88554] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon the Dead (Necromancer)
     [88555] = { summon = true, priority = 2, auradetect = true, fakeName = "", bossMatch = { Unitnames.Boss_Gravecaller_Niramo, Unitnames.Boss_Grivier_Bloodcaller, Unitnames.Boss_Louna_Darkblood } }, -- Summon the Dead (Necromancer)
     [88556] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon the Dead (Necromancer)
-    --[13397] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, duration = 5000, bossMatch = { Unitnames.Boss_Gravecaller_Niramo, Unitnames.Boss_Grivier_Bloodcaller, Unitnames.Boss_Louna_Darkblood } }, -- Empower Undead (Necromancer)
+    [13397] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, duration = 5000, bossMatch = { Unitnames.Boss_Gravecaller_Niramo, Unitnames.Boss_Grivier_Bloodcaller, Unitnames.Boss_Louna_Darkblood }, hideIfNoSource = true }, -- Empower Undead (Necromancer)
 
     [14350] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1667, cc = LUIE_CC_TYPE_FEAR }, -- Aspect of Terror (Fear Mage)
 
@@ -1274,6 +1274,12 @@ LUIE.Data.AlertTable = {
     [22457] = { power = true, priority = 1, auradetect = true }, -- Emit Flames (Ilambris-Zaven)
     [22383] = { avoid = true, priority = 1, auradetect = true, duration = 6100, neverShowInterrupt = true }, -- Rain Fire (Ilambris-Zaven)
 
+    -- Crypt of Hearts II
+    [51746] = { summon = true, priority = 2, auradetect = true, fakeName = Unitnames.NPC_Spiderkith_Broodnurse }, -- Summon the Dead (Spiderkith Broodnurse)
+    [53285] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = Unitnames.NPC_Ogrim }, -- Summon (Ogrim)
+    [51882] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 3000, postCast = 5000, bossName = true }, -- Creeping Storm (Ruzozuzalpamaz)
+    [52017] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000, postCast = 2200, bossName = true }, -- Lightning Onslaught (Ruzozuzalpamaz)
+
     -- Frostvault
     [109574] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 3250 }, -- Fire Power (Coldsnap Harrier)
     [117352] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Whirlwind (Coldsnap Snowstalker)
@@ -1613,6 +1619,12 @@ LUIE.Data.AlertZoneOverride = {
     },
     --[88556] = { -- Summon the Dead (Necromancer)
     --
+
+    [13397] = { -- Empower Undead (Necromancer)
+        -- DUNGEONS
+        [932] = Unitnames.NPC_Spiderkith_Broodnurse, -- Crypt of Hearts II
+    },
+
     --},
     [10805] = { -- Ignite (Synergy)
         -- Auridon
@@ -1935,6 +1947,7 @@ LUIE.Data.AlertZoneOverride = {
 
         -- DUNGEONS
         [935] = Unitnames.NPC_Flesh_Atronach, -- Banished Cells I (Summon Only)
+        --[932] = Unitnames.NPC_Flesh_Atronach, -- Crypt of Hearts II
     },
     [6412] = { -- Dusk's Howl (Winged Twilight)
 
@@ -1947,11 +1960,13 @@ LUIE.Data.AlertZoneOverride = {
 
         -- DUNGEONS
         [935] = Unitnames.NPC_Flame_Ogrim, -- Banished Cells II (Summon Only)
+        [932] = Unitnames.NPC_Ogrim, -- Crypt of Hearts II
     },
     [91848] = { -- Stomp (Ogrim)
 
         -- DUNGEONS
         [935] = Unitnames.NPC_Flame_Ogrim, -- Banished Cells II (Summon Only)
+        [932] = Unitnames.NPC_Ogrim, -- Crypt of Hearts II
     },
 
     [28939] = { -- Heat Wave (Sees-All-Colors)

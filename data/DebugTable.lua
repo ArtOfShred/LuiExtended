@@ -1320,6 +1320,18 @@ LUIE.DebugAuras = {
     [102142] = true, -- Zaan
     [110997] = true, -- Zaan Buffer
 
+    -- Mythic Items
+    [136347] = true, -- Malacath's Band of Brutality (Malacath's Band of Brutality)
+    [139526] = true, -- Snow Treaders (Snow Treaders)
+    [139552] = true, -- Snow Treaders (Snow Treaders)
+    [139902] = true, -- Bloodlord's Embrace (Bloodlord's Embrace)
+    [139903] = true, -- Blood Curse (Bloodlord's Embrace)
+    [140200] = true, -- Only 1 Curse (Bloodlord's Embrace)
+    [139914] = true, -- Bloodlord's Embrace (Bloodlord's Embrace)
+    [136116] = true, -- Thrassian Stranglers (Thrassian Stranglers)
+    [136123] = true, -- Sload's Call (Thrassian Stranglers)
+    [136479] = true, -- Thrassian Stranglers (Thrassian Stranglers)
+
     -- Crafted Sets
     [29124] = true, -- Ashen Grip
     [34502] = true, -- Ashen Grip
@@ -1502,6 +1514,16 @@ LUIE.DebugAuras = {
     [134040] = true, -- Minor Enervation (of Critical Riposte)
     [134280] = true, -- Critical Riposte Immunity (of Critical Riposte)
 
+    [135874] = true, -- Stuhn's Favor (Stuhn's)
+    [141916] = true, -- Stuhn's Favor (Stuhn's)
+
+    [135886] = true, -- Spell Parasite (Spell Parasites's)
+    [135919] = true, -- Spell Parasite (Spell Parasites's)
+
+    [135876] = true, -- Dragon's Appetite (of Dragon's Appetite)
+    [137126] = true, -- Dragon's Appetite (of Dragon's Appetite)
+    [135878] = true, -- Dragon's Appetite (of Dragon's Appetite)
+
     -- Overland Sets (All Types)
     [85541] = true, -- Armor of the Trainee (of the Trainee)
 
@@ -1587,6 +1609,10 @@ LUIE.DebugAuras = {
     [129388] = true, -- Marauder's Haste (Marauder's Haste)
     [129389] = true, -- Marauder's Haste (Marauder's Haste)
 
+    [135652] = true, -- Winter's Respite (of Winter's Respite)
+    [135659] = true, -- Winter's Respite (of Winter's Respite)
+    [135658] = true, -- Winter's Respite (of Winter's Respite)
+
     -- Overland Sets (Medium)
 
     [71102] = true, -- Briarheart
@@ -1671,6 +1697,10 @@ LUIE.DebugAuras = {
 
     [129405] = true, -- Dragonguard Elite (Dragonguard Elite's)
     [129407] = true, -- Dragonguard Tactics (Dragonguard Elite's)
+
+    [135687] = true, -- Venomous Smite (Venomous)
+    [135690] = true, -- Hunter's Venom (Venomous)
+    [137526] = true, -- Hunter's Venom (Venomous)
 
     -- Overland Sets (Heavy)
 
@@ -2240,6 +2270,35 @@ LUIE.DebugAuras = {
 
     [121875] = true, -- Claw of Yolnakhriin (Yolnakriin's)
     [121878] = true, -- Minor Courage (Yolnakriin's)
+
+    -- Trial Sets (Kyne's Aegis)
+    [135920] = true, -- Roaring Opportunist (Roaring Opportunist's)
+    [135924] = true, -- Roaring Opportunist Cooldown (Roaring Opportunist's)
+    [135923] = true, -- Major Slayer (Roaring Opportunist's)
+    [137984] = true, -- Roaring Opportunist (Roaring Opportunist's Perfected)
+    [137985] = true, -- Roaring Opportunist Cooldown (Roaring Opportunist's Perfected)
+    [137986] = true, -- Major Slayer (Roaring Opportunist's Perfected)
+
+    [136045] = true, -- Kyne's Wind (of Kyne's Wind)
+    [136098] = true, -- Kyne's Blessing (of Kyne's Wind)
+    [136101] = true, -- Kyne's Wind (of Kyne's Wind)
+    [136099] = true, -- Kyne's Wind (of Kyne's Wind)
+    [137992] = true, -- Kyne's Wind (of Kyne's Wind (Perfect))
+    [137995] = true, -- Kyne's Blessing (of Kyne's Wind (Perfect))
+    [137996] = true, -- Kyne's Wind (of Kyne's Wind (Perfect))
+    [137993] = true, -- Kyne's Wind (of Kyne's Wind (Perfect))
+
+    [135944] = true, -- Yandir's Might (Yandir's)
+    [135950] = true, -- Giant's Endurance (Yandir's)
+    [135951] = true, -- Giant's Might (Yandir's)
+    [138012] = true, -- Yandir's Might (Yandir's Perfect)
+    [138013] = true, -- Giant's Endurance (Yandir's Perfect)
+    [138019] = true, -- Giant's Might (Yandir's Perfect)
+
+    [135925] = true, -- Vrol's Command (Vrol's)
+    [135926] = true, -- Major Aegis (Vrol's)
+    [137988] = true, -- Vrol's Command (Vrol's Perfect)
+    [137989] = true, -- Major Aegis (Vrol's Perfect)
 
     -- Battleground Sets
     [92908] = true, -- Major Expedition (Coward's Gear)
@@ -3859,7 +3918,10 @@ LUIE.DebugAuras = {
 
     [48078] = true, -- Major Berserk (Summon Storm Atronach - Charged Lightning Synergy)
     [62195] = true, -- Major Berserk (Summon Storm Atronach - Charged Lightning Synergy)
-    [48085] = true, -- Major Berserk (Summon Storm Atronach - Charged Lightning Synergy)
+    [121059] = true, -- Charged Lightning (Summon Storm Atronach - Charged Lightning Synergy)
+    [121065] = true, -- Major Berserk (Summon Storm Atronach - Charged Lightning Synergy)
+    [48076] = true, -- Charged Lightning (Summon Storm Atronach - Charged Lightning Synergy)
+    [48085] = true, -- Charged Lightning Cooldown (Summon Storm Atronach - Charged Lightning Synergy)
 
     [25312] = true, -- Storm Atronach (Summon Storm Atronach - All Morphs)
     [31409] = true, -- Killed Trigger (Summon Storm Atronach - All Morphs)
@@ -15565,6 +15627,52 @@ LUIE.DebugAuras = {
     [22388] = true, -- Rain Fire (Ilambris-Zaven)
 
     [25662] = true, -- Merging of the Shards (Alanwe)
+
+    -- Crypt of Hearts II
+    [21544] = true, -- Generic Evil Lightning
+    --[52270] = true, -- VDUN_CoH_Alanwe Knocback
+    --[52268] = true, -- Knockback
+    [51975] = true, -- Portal
+    --[48892] = true, -- Q4487 Mephala Spawn/Despawn
+    [53523] = true, -- Claw Buff Damage (Flesh Atronach)
+
+    [51744] = true, -- Summon the Dead (Spiderkith Broodnurse)
+    [51747] = true, -- Risen Spider (Spiderkith Broodnurse)
+    [51746] = true, -- Voice to Wake the Spiders (Spiderkith Broodnurse)
+    [51745] = true, -- VO Sound (Spiderkith Broodnurse)
+
+
+    [52030] = true, -- VDUN-CoH MiniBoss 01 InitAct
+    [52151] = true, -- Necromantic Circle (Ibelgast's Broodnurse)
+    [52040] = true, -- Summon Atronach (Ibelgast's Broodnurse)
+    [52048] = true, -- Summon Atronach (Ibelgast's Broodnurse)
+    [52160] = true, -- Flesh Atronach Rises (Ibelgast's Broodnurse)
+    [52072] = true, -- Summon Atronach (Ibelgast's Broodnurse)
+
+    [53597] = true, -- Strike Buff Damage (Ogrim)
+    [53285] = true, -- Summon (Ogrim)
+
+    [52954] = true, -- Spit (Ruzozuzalpamaz)
+    [51882] = true, -- Creeping Storm (Ruzozuzalpamaz)
+    [53942] = true, -- Storm Tracker (Ruzozuzalpamaz)
+    [51881] = true, -- Creeping Storm (Creeping Storm)
+    [54321] = true, -- Stun (Creeping Storm)
+    [51895] = true, -- Creeping Storm (Creeping Storm)
+    [51883] = true, -- Creeping Storm (Creeping Storm)
+    [53337] = true, -- Creeping Storm (Creeping Storm)
+    [52017] = true, -- Lightning Onslaught (Ruzozuzalpamaz)
+    [52019] = true, -- Lightning Onslaught (Ruzozuzalpamaz)
+    [53390] = true, -- Lightning Onslaught (Ruzozuzalpamaz)
+    [52018] = true, -- Lightning Onslaught (Ruzozuzalpamaz)
+
+    [53779] = true, -- Webdrop (Spider)
+    [51410] = true, -- Spider Swarm (Spider)
+
+    --[52296] = true, -- Summon Skeletons (Spiderkith Broodnurse)
+    [52374] = true, -- Grab Targets (Spiderkith Broodnurse)
+    --[52298] = true, -- Skeletons Emerge (Spiderkith Broodnurse)
+    [52359] = true, -- Projectile (Spiderkith Broodnurse)
+    [52383] = true, -- Rise Beam (Spiderkith Broodnurse)
 
 
     -- Frostvault

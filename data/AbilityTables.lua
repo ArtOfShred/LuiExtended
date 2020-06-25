@@ -424,6 +424,8 @@ local AbilityTables = {
     Set_Aegis_Caller                  = 133490,
     Set_Banis_Torment                 = 133290,
     Set_Reactive_Armor                = 68947,
+    Set_Kynes_Blessing                = 136098,
+    Set_Blood_Curse                   = 139903,
 
     Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE),
 
@@ -1378,6 +1380,10 @@ local AbilityTables = {
     Skill_Immolate                    = 46679,
     Skill_Electric_Prison             = 22432,
     Skill_Overwhelming_Blow           = GetString(SI_LUIE_SKILL_OVERWHELMING_BLOW),
+
+    -- Crypt of Hearts II
+    Skill_Summon_Spiderkith           = GetString(SI_LUIE_SKILL_SUMMON_SPIDERKITH),
+    Skill_Summon_Death_Spider         = GetString(SI_LUIE_SKILL_SUMMON_DEATH_SPIDER),
 
     -- Frostvault
     Skill_Rending_Bleed               = 117286,

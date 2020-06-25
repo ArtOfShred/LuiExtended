@@ -176,6 +176,8 @@ LUIE.Data.UnitNames = {
     NPC_Drake_Cutthroat                   = 'Drake Cutthroat', -- GENERIC NPC (Stros M'Kai)
     NPC_Drake_Brigand                     = 'Drake Brigand', -- GENERIC NPC (Stros M'Kai)
 
+    NPC_Ogrim                             = 'Ogrim', -- GENERIC NPC
+
     ----------------------------------------------------------------
     -- QUESTS ------------------------------------------------------
     ----------------------------------------------------------------
@@ -549,6 +551,14 @@ LUIE.Data.UnitNames = {
     Boss_Dogas_the_Berserker              = 'Dogas the Berserker',
     Boss_Ilambris_Athor                   = 'Ilambris-Athor',
     Boss_Ilambris_Zaven                   = 'Ilambris-Zaven',
+
+    -- Crypt of Hearts II
+    NPC_Spiderkith_Venifex                = 'Spiderkith Venifex',
+    NPC_Spiderkith_Warper                 = 'Spiderkith Warper',
+    NPC_Spiderkith_Broodnurse             = 'Spiderkith Broodnurse',
+    Boss_Ibelgast                         = 'Ibelgast',
+    NPC_Ibelgasts_Flesh_Atronach          = 'Ibelgast\'s Flesh Atronach',
+    Boss_Ruzozuzalpamaz                   = 'Ruzozuzalpamaz',
 
     -- Frostvault
     NPC_Coldsnap_Ogre                     = 'Coldsnap Ogre',
