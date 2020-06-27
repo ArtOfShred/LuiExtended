@@ -33,7 +33,7 @@ local changelogMessages = {
     "[*] Bar Highlight: Cleaned up the backend for Bar Highlight tracking, and the highlights now sync with the flipcard animations when bar swapping, making everything look a little smoother.",
     "[*] Bar Highlight: Tracking for Sorcerer - Bound Armaments now just shows the duration of the overall buff instead of the 10 sec stack duration making it easier to follow.",
     "[*] Bar Highlight: Tracking for Warden - Crystallized Shield (and its morphs) now track stacks.",
-    "[*] Ultimate Tracking: The ultimate tracking Percentage label will now cap at 100% value, and both the value and percentage labels and will update when your Vampire Stage changes or when you change your equipped gear (in case you equip/unequip a set that reduces ultimate cost).",
+    "[*] Ultimate Tracking: The ultimate tracking percentage label will now cap at 100% value, and both the value and percentage labels and will update when your Vampire Stage changes or when you change your equipped gear (in case you equip/unequip a set that reduces ultimate cost).",
     "[*] Ultimate Generation: Fixed an issue where the Ultimate Generation texture sometimes wouldn't display when you were generating ultimate.",
     "[*] Combat Alerts: Added a context message for \"Hard CC\" for the interrupt notification for abilities that can only be interrupted by hard crowd control effects.",
     "",
