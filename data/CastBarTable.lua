@@ -883,7 +883,9 @@ CastBarTable.IsCast = {
     -- DUNGEONS ----------------------------------------------------
     ----------------------------------------------------------------
 
-    [31180] = true, -- Free Ally (Selene)
+    [31180] = true, -- Free Ally (Selene - Selene's Web)
+    [51389] = true, -- Free Ally (Ruzozuzalpamaz - Crypt of Hearts II)
+    [53185] = true, -- Resist Necrosis (Nerien'eth - Crypt of Hearts II)
 
 }
 

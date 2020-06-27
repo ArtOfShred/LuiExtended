@@ -557,6 +557,7 @@ local strings = {
     SI_LUIE_CI_BLOCK_DEFAULT =                           "BLOCKEN",
     SI_LUIE_CI_BLOCKSTAGGER_DEFAULT =                    "*BLOCKEN*",
     SI_LUIE_CI_INTERRUPT_DEFAULT =                       "UNTERBRECHEN",
+    SI_LUIE_CI_SHOULDUSECC_DEFAULT =                     "HARD CC",
     SI_LUIE_CI_UNMIT_DEFAULT =                           "NICHT LINDERBAR",
     SI_LUIE_CI_DODGE_DEFAULT =                           "AUSWEICHEN",
     SI_LUIE_CI_AVOID_DEFAULT =                           "VERMEIDEN",

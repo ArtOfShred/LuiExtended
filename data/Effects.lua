@@ -2077,6 +2077,12 @@ Effects.AddNameAura = {
     [Unitnames.Boss_Ruzozuzalpamaz] = { [1] = { id = 33097 } }, -- Ruzozuzalpamaz
     [Unitnames.NPC_Ibelgasts_Flesh_Atronach] = { [1] = { id = 33097 } }, -- Ibelgasts Flesh Atronach
     [Unitnames.NPC_Ogrim] = { [1] = { id = 33097, zone = { [932] = true }, } }, -- Ogrim
+    [Unitnames.Boss_Chamber_Guardian] = { [1] = { id = 33097, zone = { [932] = true }, } }, -- Chamber Guardian
+    [Unitnames.Boss_Ilambris_Amalgam] = { [1] = { id = 33097 } }, -- Ilambris Amalgam
+    [Unitnames.Boss_Mezeluth] = { [1] = { id = 33097 } }, -- Mezeluth
+    [Unitnames.Boss_Nerieneth] = { [1] = { id = 33097 } }, -- Nerien'eth
+    [Unitnames.NPC_Wraith] = { [1] = { id = 33097, zone = { [932] = true }, } }, -- Wraith
+    [Unitnames.NPC_Student] = { [1] = { id = 33097, zone = { [932] = true }, } }, -- Student
 
     -- Frostvault
     [Unitnames.NPC_Coldsnap_Ogre] = { [1] = { id = 33097 } }, -- Coldsnap Ogre
@@ -2087,7 +2093,10 @@ Effects.AddNameOnBossEngaged = {
 
     [Unitnames.Boss_Razor_Master_Erthas] = {
         [Unitnames.NPC_Flame_Atronach] = 33097, -- Scary Immunities --> Razor Master Erthas --> Flame Atronach (City of Ash I)
-    }
+    },
+    [Unitnames.Boss_Ilambris_Amalgam] = {
+        [Unitnames.NPC_Skeleton] = 33097, -- Scary Immunities --> Ilambris Amalgam --> Skeleton (Crypt of Hearts II)
+    },
 
 }
 
@@ -2096,8 +2105,10 @@ Effects.AddNameOnBossEngaged = {
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.AddNameOnEvent = {
 
-    [46680] = Unitnames.Boss_Deaths_Leviathan, -- Immolate Colossus -- Death's Leviathan (Crypt of Hearts I)
-    [28759] = Unitnames.Boss_Keeper_Voranil, -- Essence Siphon -- Keeper Voranil (Banished Cells II)
+    [46680] = { name = Unitnames.Boss_Deaths_Leviathan, id = 46680 }, -- Immolate Colossus -- Death's Leviathan (Crypt of Hearts I)
+    [28759] = { name = Unitnames.Boss_Keeper_Voranil, id = 28759 }, -- Essence Siphon -- Keeper Voranil (Banished Cells II)
+    [52167] = { name = Unitnames.Boss_Ilambris_Amalgam, id = 53600 }, -- Shock Form -- Ilambris Amalgam (Crpyt of Hearts II)
+    [52166] = { name = Unitnames.Boss_Ilambris_Amalgam, id = 53593 }, -- Fire Form -- Ilambris Amalgam (Crypt of Hearts II)
 
 }
 
@@ -2133,7 +2144,8 @@ Effects.SynergyNameOverride = {
     -- World Bosses
     [Abilities.Skill_Remove_Bolt] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_trapping_bolt.dds' }, -- Remove Bolt (Trapjaw)
     -- Dungeons
-    [Abilities.Skill_Free_Ally] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_web_wrap.dds' }, -- Free Ally (Selene) -- Selene's Web
+    [Abilities.Skill_Free_Ally] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_free_ally.dds' }, -- Free Ally (Selene) -- Selene's Web
+    [Abilities.Skill_Resist_Necrosis] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_resist_necrosis.dds' }, -- Resist Necrosis (Nerien'eth) -- Crypt of Hearts II
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -2224,6 +2236,7 @@ Effects.EffectOverrideByName = {
         [Unitnames.Boss_Ibelgast] =              { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_light.dds' }, -- Ibelgast (Crypt of Hearts II)
         [Unitnames.NPC_Spiderkith_Venifex] =     { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_light.dds' }, -- Spiderkith Venifex (Crypt of Hearts II)
         [Unitnames.NPC_Spiderkith_Warper] =      { icon = 'LuiExtended/media/icons/abilities/ability_spell_dagger_1h_light.dds' }, -- Spiderkith Warper (Crypt of Hearts II)
+        [Unitnames.Boss_Chamber_Guardian] =      { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_2h_light.dds' }, -- Chamber Guardian (Crypt of Hearts II)
     },
 
     [29035] = { -- Quick Strike (Rogue/Skirmisher)
@@ -2518,6 +2531,8 @@ Effects.EffectOverrideByName = {
        [Unitnames.Boss_Magdelena] = { hide = true }, -- Magdelena (Magdelena's Haunt)
        [Unitnames.Boss_Desuuga_the_Siren] = { hide = true }, -- Desuuga the Siren (Siren's Cove)
        [Unitnames.Boss_Uulkar_Bonehand] = { hide = true }, -- Uulkar Bonehand (Crypt of Hearts I)
+       [Unitnames.NPC_Wraith] = { hide = true, zone = { [932] = true } }, -- Wraith (Crypt of Hearts II)
+       [Unitnames.NPC_Student] = { hide = true, zone = { [932] = true } }, -- Wraith (Crypt of Hearts II)
     },
 }
 
@@ -12194,7 +12209,7 @@ Effects.EffectOverride = {
     [31048] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_web_wrap.dds', hide = true }, -- Web Wrap (Selene)
     [31052] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_web_wrap.dds', tooltip = Tooltips.Skill_Web_Wrap }, -- Web Wrap (Selene)
     [31469] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_web_wrap.dds' }, -- Web Wrap (Selene)
-    [31180] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_web_wrap.dds' }, -- Free Ally (Selene)
+    [31180] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_free_ally.dds' }, -- Free Ally (Selene)
 
     [59486] = { hide = true }, -- Shield (Selene)
     [59487] = { hide = true }, -- Shield (Selene)
@@ -12560,9 +12575,11 @@ Effects.EffectOverride = {
 
     -- Trash
     [52270] = { hide = true }, -- VDUN_CoH_Alanwe Knockback
-
     [51746] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_death_spider.dds', name = Abilities.Skill_Summon_Death_Spider, tooltip = Tooltips.Skill_Summon_Death_Spider }, -- Voice to Wake the Spiders (Spiderkith Broodnurse)
-
+    [51753] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_death_spider.dds', name = Abilities.Skill_Summon_Death_Spider, tooltip = Tooltips.Skill_Summon_Death_Spider }, -- Reanimate Skeleton (Spiderkith Broodnurse)
+    [51751] = { hide = true }, -- VO Sound (Spiderkith Broodnurse)
+    [52040] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_summon_flesh_atronach.dds' }, -- Summon Atronach (Ibelgast's Broodnurse)
+    [52160] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_summon_flesh_atronach.dds', name = Abilities.Skill_Summon_Atronach }, -- Flesh Atronach Rises (Ibelgast's Broodnurse)
     [53285] = { icon = 'esoui/art/icons/achievement_update11_dungeons_025.dds', name = Abilities.Skill_Summon_Spiderkith }, -- Summon (Ogrim)
 
     -- Ruzozuzalpamaz
@@ -12574,10 +12591,203 @@ Effects.EffectOverride = {
     [52017] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_lightning_onslaught.dds' }, -- Lightning Onslaught (Ruzozuzalpamaz)
     [52018] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_lightning_onslaught.dds' }, -- Lightning Onslaught (Ruzozuzalpamaz)
 
+    [53779] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_spawn_hatchlings.dds', name = Abilities.Skill_Spider_Swarm }, -- Webdrop (Ruzozuzalpamaz)
+
+    [51381] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_web_wrap.dds', hide = true }, -- Chattering Web (Ruzozuzalpamaz)
+    [51386] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_web_wrap.dds', name = Abilities.Skill_Chattering_Web, tooltip = Tooltips.Skill_Chattering_Web, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Web Wrap (Ruzozuzalpamaz)
+    [51385] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_spider_bites.dds' }, -- Spider Bites (Ruzozuzalpamaz)
+    [51389] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_free_ally.dds' }, -- Free Ally (Ruzozuzalpamaz)
+    [56566] = { hide = true }, -- VDUN_CoH_Boss1 RemoveWeb (Ruzozuzalpamaz)
+    [56567] = { hide = true }, -- Remove Web (Ruzozuzalpamaz)
+
+    [54622] = { icon = 'esoui/art/icons/ability_2handed_001.dds' }, -- Uppercut (Chamber Guardian)
+    [54621] = { icon = 'esoui/art/icons/ability_2handed_001.dds', name = Abilities.Skill_Uppercut, tooltip = Tooltips.Generic_Knockback }, -- Uppercut Stun (Chamber Guardian)
+
+    [51719] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_consuming_horror.dds' }, -- Consuming Horror (Chamber Guardian)
+    [51722] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_consuming_horror.dds', tooltip = Tooltips.Generic_Fear }, -- Consuming Horror (Chamber Guardian)
+    [51721] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_consuming_horror.dds' }, -- Consuming Horror (Chamber Guardian)
+    [51728] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_reanimate_skeletons.dds', name = Abilities.Skill_Reanimate_Skeletons, hide = true }, -- Consuming Horror (Chamber Guardian)
 
     -- Trash
     [52298] = { hide = true }, -- Skeletons Emerge (Spiderkith Broodnurse)
 
+    -- Ilambris Amalgam
+    [52064] = { hide = true }, -- Untargetdummy (Ilambris-Athor)
+    [52060] = { hide = true }, -- Dummy (Ilambris-Athor)
+    [52062] = { hide = true }, -- dummy (Ilambris-Athor)
+
+    [52071] = { hide = true }, -- Untargetdummy (Ilambris-Zaven)
+    [52067] = { hide = true }, -- Dummy (Ilambris-Zaven)
+    [52069] = { hide = true }, -- dummy (Ilambris-Zaven)
+
+    [52167] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_shock_stomp.dds', name = Abilities.Skill_Shock_Stomp }, -- Shock Form (Ilambris Amalgam)
+    [53599] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_shock_stomp.dds' }, -- Shock Stomp (Ilambris Amalgam)
+    [53598] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_shock_stomp.dds', name = Abilities.Skill_Shock_Stomp, unbreakable = 1, tooltip = Tooltips.Generic_Knockdown }, -- CON_Knockback&Knockdown (Ilambris Amalgam)
+
+    [53600] = { icon = 'LuiExtended/media/icons/abilities/ability_bone_colossus_shock_form.dds', name = Abilities.Skill_Shock_Form, hide = true, tooltip = Tooltips.Skill_Shock_Form }, -- Summon Shock Skeleton (Ilambris Amalgam)
+    [53601] = { hide = true }, -- Summon Shock Skeleton (Ilambris Amalgam)
+    [52278] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris_shock.dds', hide = true }, -- Call Lightning (Ilambris Amalgam)
+    [52279] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris_shock.dds' }, -- Call Lightning (Ilambris Amalgam)
+
+    [53475] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_strike.dds' }, -- Strike (Ilambris Amalgam)
+    [52269] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shock_torrent.dds', name = Abilities.Skill_Split_Bolt }, -- Bone Shock (Ilambris Amalgam)
+
+    [52491] = { icon = 'LuiExtended/media/icons/abilities/ability_bone_colossus_thunder_fist.dds' }, -- Thunder Fist (Ilambris Amalgam)
+    [52492] = { icon = 'LuiExtended/media/icons/abilities/ability_bone_colossus_thunder_fist.dds' }, -- Thunder Fist (Ilambris Amalgam)
+    [53403] = { name = Abilities.Innate_Stagger, tooltip = Tooltips.Generic_Stagger, hide = true }, -- Thunder Fist (Ilambris Amalgam)
+
+    [52166] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_paralyzing_slam_fire.dds', name = Abilities.Skill_Fire_Stomp }, -- Fire Form (Ilambris Amalgam)
+    [53592] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_paralyzing_slam_fire.dds', name = Abilities.Skill_Fire_Stomp }, -- Pyrocasm Stomp (Ilambris Amalgam)
+    [53591] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_paralyzing_slam_fire.dds', name = Abilities.Skill_Fire_Stomp, unbreakable = 1, tooltip = Tooltips.Generic_Knockdown }, -- CON_Knockback&Knockdown (Ilambris Amalgam)
+
+    [53593] = { icon = 'LuiExtended/media/icons/abilities/ability_bone_colossus_immolate.dds', name = Abilities.Skill_Fire_Form, hide = true, tooltip = Tooltips.Skill_Fire_Form }, -- Summon Flame Skeleton (Ilambris Amalgam)
+    [53594] = { hide = true }, -- Summon Flame Skeleton (Ilambris Amalgam)
+
+    [52266] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fire_torrent.dds', name = Abilities.Skill_Split_Flare }, -- Bone Flare (Ilambris Amalgam)
+
+    [52285] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris_fire.dds', hide = true }, -- Rain Fire (Ilambris Amalgam)
+    [52286] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris_fire.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1.2 }, -- Rain Fire (Ilambris Amalgam)
+
+    [53495] = { hide = true }, -- Fiery Explosion (Ilambris Amalgam)
+    [53497] = { hide = true }, -- VDUN_COH_B2 Telegraph (Ilambris Amalgam)
+    [53426] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_fiery_explosion.dds' }, -- Fiery Explosion (Ilambris Amalgam)
+    [53428] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_fiery_explosion.dds', tooltip = Tooltips.Generic_Knockback }, -- Fiery Explosion (Ilambris Amalgam)
+    [53427] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_fiery_explosion.dds' }, -- Fiery Explosion (Ilambris Amalgam)
+
+    [52334] = { icon = 'LuiExtended/media/icons/abilities/ability_bone_colossus_final_storm.dds' }, -- Final Storm (Ilambris Amalgam)
+    [52335] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris_fire.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1.2 }, -- Rain Fire (Ilambris Amalgam)
+    [52339] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris_shock.dds' }, -- Call Lightning (Ilambris Amalgam)
+
+    [52585] = { hide = true }, -- Skeletons Emerge (Mezeluth)
+    [52586] = { hide = true }, -- Skeletons Emerge (Mezeluth)
+    [52590] = { hide = true }, -- Skeleton Stun Targetable (Mezeluth)
+
+    [55954] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_large.dds' }, -- Flare (Mezeluth)
+
+    [51090] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_void_grip.dds', name = Abilities.Skill_Void_Grip }, -- Rise and Fall (Mezeluth)
+    [51111] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_void_grip.dds', name = Abilities.Skill_Void_Grip, tooltip = Tooltips.Skill_Void_Grip, unbreakable = 1 }, -- Rise and Fall (Mezeluth)
+    [55961] = { hide = true }, -- VDUN_COH_Dark Betrayal
+    [55962] = { hide = true }, -- VDUN_COH_Dark Betrayal
+    [55960] = { hide = true }, -- VDUN_COH_Dark Betrayal
+
+    [53200] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fulminating_void.dds', name = Abilities.Skill_Fulminating_Void, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Cold_Strike, duration = 0.5 }, -- Fulminating Void (Mezeluth)
+    [51799] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fulminating_void.dds' }, -- Fulminating Void (Mezeluth)
+    [51824] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fulminating_void.dds', name = Abilities.Skill_Fulminating_Void, unbreakable = 1, tooltip = Tooltips.Generic_Knockdown }, -- Fulminating Void (Mezeluth)
+    [53349] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fulminating_void.dds' }, -- Fulminating Void (Mezeluth)
+    [51804] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fulminating_void.dds' }, -- Fulminating Void (Mezeluth)
+    [55947] = { hide = true }, -- Rise and Fall Far (Mezeluth)
+
+    [17204] = { hide = true }, -- Goblin Path (Alanwe)
+    [52613] = { hide = true }, -- Stop Healing (Ebony Blade)
+    [52610] = { hide = true }, -- Soul Lust (Ebony Blade)
+    [53097] = { hide = true }, -- Blade Obj React (Ebony Blade)
+    [52611] = { icon = 'LuiExtended/media/icons/abilities/ability_ebony_blade_soul_lust.dds' }, -- Soul Lust (Ebony Blade)
+    [52620] = { hide = true }, -- Soul Lust (Ebony Blade)
+    [52606] = { hide = true }, -- Binding (Ebony Blade)
+    [52618] = { hide = true }, -- Binding (Ebony Blade)
+
+    [51877] = { hide = true }, -- Necrotic Speed (Nerien'eth)
+    [51792] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_skull_volley.dds', name = Abilities.Skill_Skull_Volley }, -- Necrotic Spear (Nerien'eth)
+    [51953] = { hide = true }, -- Skull Swarm (Nerien'eth)
+
+    [52080] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_swarm.dds', hide = true }, -- Necrotic Swarm (Nerien'eth)
+    [52084] = { hide = true }, -- Necrotic Swarm (Nerien'eth)
+    [52081] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_entropic_bolt.dds', hide = true }, -- Necrotic Swarm (Nerien'eth)
+
+    [52082] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_cage.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Frost, tooltipValue2 = 1.5 }, -- Cursed Ground (Nerien'eth)
+    [52093] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_rupture.dds' }, -- Soul Surge (Nerien'eth)
+
+    [51539] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_blast.dds' }, -- Necrotic Blast (Nerien'eth)
+    [51542] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_blast.dds', unbreakable = 1 }, -- Necrotic Blast (Nerien'eth)
+    [51541] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_blast.dds', tooltip = Tooltips.Generic_Knockback, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Necrotic Blast (Nerien'eth)
+    [51545] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_blast.dds' }, -- Necrotic Blast (Nerien'eth)
+    [52942] = { hide = true }, -- Necrotic Blast (Nerien'eth)
+    [51543] = { name = Abilities.Innate_Stagger, tooltip = Tooltips.Generic_Stagger, hide = true }, -- Necrotic Blast (Nerien'eth)
+    [52935] = { hide = true }, -- Charged Skull (Nerien'eth)
+
+    [51853] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_daedric_step.dds', name = Abilities.Skill_Daedric_Step, hide = true }, -- Soul Pulse (Nerien'eth)
+    [51864] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_explosion.dds', name = Abilities.Skill_Soul_Pulse }, -- Force Pulse (Nerien'eth)
+    [51867] = { name = Abilities.Innate_Stagger, tooltip = Tooltips.Generic_Stagger }, -- Force Pulse (Nerien'eth)
+
+    [51943] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_daedric_step.dds', name = Abilities.Skill_Daedric_Step }, -- Soul Summon (Nerien'eth)
+
+    [55054] = { hide = true }, -- Soul Sacrifice (Nerien'eth)
+    [52856] = { hide = true }, -- Soul Sacrifice (Nerien'eth)
+    [60632] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_summon.dds', name = Abilities.Skill_Soul_Sacrifice, tooltip = Tooltips.Generic_Reduce_Damage_Taken, tooltipValue2 = 15 }, -- Shadow Cloak (Nerien'eth)
+    [51886] = { hide = true }, -- Tainted Soul (Student / Wraith)
+    [51936] = { hide = true }, -- Tainted Soul (Student / Wraith)
+
+    [53122] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_arrow_small.dds', name = Abilities.Skill_Chilling_Bolt }, -- Ice Bolt (Wraith)
+    [53123] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_arrow_small.dds', name = Abilities.Skill_Chilling_Bolt, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Snare, tooltipValue2 = 25 }, -- Cold Strike (Wraith)
+
+    [51878] = { icon = 'LuiExtended/media/icons/abilities/ability_ghost_cold_strike.dds' }, -- Cold Strike (Wraith)
+    [51879] = { icon = 'LuiExtended/media/icons/abilities/ability_ghost_cold_strike.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Snare, tooltipValue2 = 25 }, -- Cold Strike (Wraith)
+    [51880] = { icon = 'LuiExtended/media/icons/abilities/ability_ghost_cold_strike.dds', name = Abilities.Skill_Cold_Strike }, -- Double Strike (Wraith)
+
+    [52945] = { hide = true }, -- Clean Up (Player)
+    [52635] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_daedric_step.dds', name = Abilities.Skill_Daedric_Step }, -- Teleport (Nerien'eth)
+    [52642] = { hide = true }, -- VDUN_CoH_Boss3 Take Blade (Nerien'eth)
+    [52647] = { hide = true }, -- VDUN_CoH_Boss3 Take Blade (Nerien'eth)
+    [52652] = { hide = true }, -- VDUN_CoH_Boss3 Take Blade (Nerien'eth)
+    [60631] = { icon = 'LuiExtended/media/icons/abilities/ability_ebony_blade_soul_lust.dds', name = Abilities.Skill_Draw_the_Ebony_Blade, tooltip = Tooltips.Generic_Immunity }, -- Shadow Cloak (Nerien'eth)
+    [52669] = { hide = true }, -- Damage Shield (Nerien'eth)
+    [52990] = { hide = true }, -- VDUN_CoH_Boss3 Take Blade (Nerien'eth)
+    [53161] = { hide = true }, -- VDUN_CoH_Boss3 Take Blade (Nerien'eth)
+    [53173] = { hide = true }, -- Post Process (Nerien'eth)
+
+    [52643] = { hide = true }, -- VDUN_CoH_Boss3 Take Blade (Nerien'eth)
+    [53133] = { hide = true }, -- Soul Cage (Soul Cage)
+    [53174] = { hide = true }, -- Post Process (Player)
+
+    [52119] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_enervating_sheen.dds', hide = true }, -- Enervating Sheen (Nerien'eth)
+    [52872] = { hide = true }, -- Enervating Sheen (Nerien'eth)
+    [52164] = { hide = true }, -- Enervating Sheen (Nerien'eth)
+    [52165] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_enervating_sheen.dds' }, -- Enervating Sheen (Nerien'eth)
+    [52120] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_enervating_sheen.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Stun }, -- Enervating Sheen (Nerien'eth)
+
+    [52126] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_daedric_step.dds', name = Abilities.Skill_Daedric_Step, hide = true }, -- Teleport (Nerien'eth)
+    [52132] = { hide = true }, -- Blood Lust (Nerien'eth)
+    [52138] = { icon = 'LuiExtended/media/icons/abilities/ability_ebony_blade_bloodlust.dds', hide = true }, -- Blood Lust (Nerien'eth)
+    [52143] = { icon = 'LuiExtended/media/icons/abilities/ability_ebony_blade_bloodlust.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Blood_Lust }, -- Blood Lust (Nerien'eth)
+
+    [52181] = { hide = true }, -- Remove Blood Lust (Nerien'eth)
+    [52397] = { hide = true }, -- Tracker (Nerien'eth)
+    [53761] = { hide = true }, -- Kneel Track (Nerien'eth)
+    [52514] = { icon = 'LuiExtended/media/icons/abilities/ability_ebony_blade_ebony_shield.dds', name = Abilities.Skill_Ebony_Shield, tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Damage Shield (Nerien'eth)
+    [52516] = { hide = true }, -- Damage Shield (Nerien'eth)
+    [52517] = { hide = true }, -- Damage Shield (Nerien'eth)
+    [53185] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_resist_necrosis.dds', duration = 0, tooltip = Tooltips.Skill_Resist_Necrosis, forcedContainer = 'short' }, -- Resist Necrosis (Nerien'eth)
+
+    [53258] = { hide = true }, -- Rage (Nerien'eth)
+    [52513] = { hide = true }, -- Remove Blood Lust (Nerien'eth)
+    [52512] = { hide = true }, -- Remove Blood Lust (Nerien'eth)
+    [52687] = { hide = true }, -- Remove Blood Lust (Nerien'eth)
+    [52142] = { icon = 'LuiExtended/media/icons/abilities/ability_ebony_blade_blood_execution.dds', hide = true }, -- Blood Execution (Nerien'eth)
+    [52750] = { hide = true }, -- Remove Blood Lust (Nerien'eth)
+    [59572] = { icon = 'LuiExtended/media/icons/abilities/ability_ebony_blade_bloodlust.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Stun }, -- Blood Lust (Nerien'eth)
+
+    [53157] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_cage.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Frost, tooltipValue2 = 1.5 }, -- Cursed Ground (Nerien'eth)
+    [53152] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_soul_rupture.dds' }, -- Soul Surge (Nerien'eth)
+
+    [51988] = { icon = 'LuiExtended/media/icons/abilities/ability_ebony_blade_lethal_stab.dds', hide = true }, -- Lethal Stab (Nerien'eth)
+    [52412] = { icon = 'LuiExtended/media/icons/abilities/ability_ebony_blade_lethal_stab.dds' }, -- Lethal Stab (Nerien'eth)
+    [53442] = { icon = 'LuiExtended/media/icons/abilities/ability_ebony_blade_lethal_stab.dds', unbreakable = 1, tooltip = Tooltips.Generic_Oblivion_Snare, tooltipValue2 = 1, tooltipValue3 = 80 }, -- Lethal Stab (Nerien'eth)
+    [53446] = { icon = 'LuiExtended/media/icons/abilities/ability_ebony_blade_lethal_stab.dds', name = Abilities.Skill_Lethal_Stab }, -- Lethal Cut (Nerien'eth)
+
+    [53181] = { icon = 'LuiExtended/media/icons/abilities/ability_ebony_blade_keen_strike.dds' }, -- Keen Strike (Nerien'eth)
+
+    [51993] = { icon = 'LuiExtended/media/icons/abilities/ability_ebony_blade_heavy_slash.dds' }, -- Heavy Slash (Nerien'eth)
+    [51994] = { icon = 'LuiExtended/media/icons/abilities/ability_ebony_blade_heavy_slash.dds', hide = true, unbreakable = 1 }, -- Heavy Slash (Nerien'eth)
+    [51995] = { icon = 'LuiExtended/media/icons/abilities/ability_ebony_blade_heavy_slash.dds', unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Heavy Slash (Nerien'eth)
+
+    [51997] = { icon = 'LuiExtended/media/icons/abilities/ability_ebony_blade_ebony_whirlwind.dds' }, -- Ebony Whirlwind (Nerien'eth)
+    [53127] = { icon = 'LuiExtended/media/icons/abilities/ability_ebony_blade_ebony_whirlwind.dds' }, -- Ebony Whirlwind (Nerien'eth)
+    [52495] = { icon = 'LuiExtended/media/icons/abilities/ability_ebony_blade_ebony_whirlwind.dds' }, -- Ebony Whirlwind (Nerien'eth)
+    [52494] = { name = Abilities.Innate_Stagger, tooltip = Tooltips.Generic_Stagger }, -- Ebony Whirlwind (Nerien'eth)
+
+    [53134] = { icon = 'LuiExtended/media/icons/abilities/ability_ebony_blade_tortured_souls.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Oblivion, tooltipValue2 = 0.5 }, -- Tortured Souls (Nerien'eth)
+
+    [54142] = { hide = true }, -- Soul Cages Opened (Soul Cage)
 
     -- temporary gap here just for ease of editing
     -- temporary gap here just for ease of editing
@@ -12952,6 +13162,14 @@ Effects.FakeExternalDebuffs = {
     [46692] = { duration = 2500 }, -- CON_Knockback&Knockdown (Ilambris-Athor)
     [44088] = { duration = 2000 }, -- CON_Knockback&Knockdown (Ilambris-Zaven)
 
+    -- Crypt of Hearts II
+    [53598] = { duration = 2000 }, -- Shock Form (Ilambris Amalgam)
+    [53591] = { duration = 2000 }, -- CON_Knockback&Knockdown (Ilambris Amalgam)
+    [51111] = { duration = 5000 }, -- Rise and Fall (Mezeluth)
+    [51824] = { duration = 2500 }, -- Fulminating Void (Mezeluth)
+    [53442] = { duration = 6000 }, -- Lethal Stab (Nerien'eth)
+    [51995] = { duration = 2250 }, -- Heavy Slash (Nerien'eth)
+
     -- Frostvault
     [117486] = { duration = 18000 }, -- Bleed (Coldsnap Goblin - Shared)
     [109808] = { duration = 0 }, -- Frostbite (Icestalker)
@@ -13228,6 +13446,12 @@ Effects.FakeStagger = {
     -- Tempest Island
     [46737] = { duration = 433 }, -- Piercing Shriek (Sonolia the Matriarch)
     [46808] = { duration = 100 }, -- Stagger (Twister)
+
+    -- Crypt of Hearts II
+    [53403] = { duration = 433 }, -- Thunder Fist (Ilambris Amalgam)
+    [51543] = { duration = 433 }, -- Necrotic Blast (Nerien'eth)
+    [51867] = { duration = 567 }, -- Force Pulse (Nerien'eth)
+    [52494] = { duration = 567 }, -- Ebony Whirlwind (Nerien'eth)
 
     -- Frostvault
     [117291] = { duration = 433 }, -- Stagger (Coldsnap Ogre)
@@ -13609,6 +13833,11 @@ Effects.AddGroundDamageAura = {
 
     -- Crypt of Hearts II
     [51883] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Creeping Storm (Creeping Storm)
+    [52286] = { duration = 1500, type = BUFF_EFFECT_TYPE_DEBUFF, merge = 3 }, -- Rain Fire (Ilambris-Zaven)
+    [52335] = { duration = 1500, type = BUFF_EFFECT_TYPE_DEBUFF, merge = 3 }, -- Rain Fire (Ilambris-Zaven)
+    [52082] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Cursed Ground (Nerien'eth)
+    [53157] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Cursed Ground (Nerien'eth)
+    [53134] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Tortured Souls (Nerien'eth)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------

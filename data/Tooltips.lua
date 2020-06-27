@@ -173,6 +173,8 @@ LUIE.Data.Tooltips = {
     Generic_HoT_Potion                              = GetString(SI_LUIE_SKILL_GENERIC_HOT_POTION_TP),
     Generic_HoT_Channel                             = GetString(SI_LUIE_SKILL_GENERIC_HOT_CHANNEL_TP),
 
+    Generic_Oblivion_Snare                          = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_SNARE_TP), "SUBSTRING", OblivionDamage),
+
     Generic_AOE_Physical                            = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "SUBSTRING", PhysicalDamage),
     Generic_AOE_Bleed                               = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "SUBSTRING", BleedDamage),
     Generic_AOE_Poison                              = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "SUBSTRING", PoisonDamage),
@@ -181,6 +183,7 @@ LUIE.Data.Tooltips = {
     Generic_AOE_Frost                               = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "SUBSTRING", FrostDamage),
     Generic_AOE_Shock                               = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "SUBSTRING", ShockDamage),
     Generic_AOE_Magic                               = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "SUBSTRING", MagicDamage),
+    Generic_AOE_Oblivion                            = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "SUBSTRING", OblivionDamage),
 
     Generic_AOE_Fire_Stacking                       = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_STACK_TP), "SUBSTRING", FlameDamage),
     Generic_AOE_Shock_Stacking                      = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_STACK_TP), "SUBSTRING", ShockDamage),
@@ -1458,6 +1461,13 @@ LUIE.Data.Tooltips = {
 
     -- Crypt of Hearts II
     Skill_Summon_Death_Spider                       = GetString(SI_LUIE_SKILL_SUMMON_DEATH_SPIDER_TP),
+    Skill_Chattering_Web                            = GetString(SI_LUIE_SKILL_CHATTERING_WEB_TP),
+    Skill_Fire_Form                                 = GetString(SI_LUIE_SKILL_FIRE_FORM_TP),
+    Skill_Shock_Form                                = GetString(SI_LUIE_SKILL_SHOCK_FORM_TP),
+    Skill_Void_Grip                                 = GetString(SI_LUIE_SKILL_VOID_GRIP_TP),
+    Skill_Cold_Strike                               = GetString(SI_LUIE_SKILL_COLD_STRIKE_TP),
+    Skill_Blood_Lust                                = GetString(SI_LUIE_SKILL_BLOOD_LUST_TP),
+    Skill_Resist_Necrosis                           = GetString(SI_LUIE_SKILL_RESIST_NECROSIS_TP),
 
     -- Frostvault
     Skill_Maim                                      = GetString(SI_LUIE_SKILL_MAIM_NPC_TP),

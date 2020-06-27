@@ -722,6 +722,7 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     local dodge
     local avoid
     local interrupt
+    local shouldusecc
     local power
     local destroy
     local summon
@@ -746,6 +747,9 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
         end
         if Alerts[abilityId].interrupt == true then
             interrupt = true
+        end
+        if Alerts[abilityId].shouldusecc == true then
+            shouldusecc = true
         end
     end
 
@@ -774,7 +778,7 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     end
 
     if not (power == true or destroy == true or summon == true or unmit == true) then
-        AbilityAlerts.OnEvent(alertTypes.SHARED, abilityId, abilityName, abilityIcon, unitName, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, hiddenDuration, crowdControl, block, blockstagger, dodge, avoid, interrupt)
+        AbilityAlerts.OnEvent(alertTypes.SHARED, abilityId, abilityName, abilityIcon, unitName, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, hiddenDuration, crowdControl, block, blockstagger, dodge, avoid, interrupt, shouldusecc)
     elseif (power == true or destroy == true or summon == true or unmit == true) then
         if unmit then
             AbilityAlerts.OnEvent(alertTypes.UNMIT, abilityId, abilityName, abilityIcon, unitName, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, hiddenDuration, crowdControl)
@@ -921,7 +925,7 @@ function AbilityAlerts.OnCombatIn(eventCode, resultType, isError, abilityName, a
                 return
             end
 
-            if Alerts[abilityId].block or Alerts[abilityId].dodge or Alerts[abilityId].avoid or Alerts[abilityId].interrupt or Alerts[abilityId].unmit or Alerts[abilityId].power or Alerts[abilityId].destroy or Alerts[abilityId].summon then
+            if Alerts[abilityId].block or Alerts[abilityId].dodge or Alerts[abilityId].avoid or Alerts[abilityId].interrupt or Alerts[abilityId].shouldusecc or Alerts[abilityId].unmit or Alerts[abilityId].power or Alerts[abilityId].destroy or Alerts[abilityId].summon then
                 -- Filter by priority
                 if (Settings.toggles.mitigationDungeon and not IsUnitInDungeon("player")) or not Settings.toggles.mitigationDungeon then
                     if Alerts[abilityId].priority == 3 and not Settings.toggles.mitigationRank3 then return end
@@ -970,7 +974,7 @@ function AbilityAlerts.OnCombatAlert(eventCode, resultType, isError, abilityName
                 return
             end
 
-            if Alerts[abilityId].block or Alerts[abilityId].dodge or Alerts[abilityId].avoid or Alerts[abilityId].interrupt or Alerts[abilityId].unmit or Alerts[abilityId].power or Alerts[abilityId].destroy or Alerts[abilityId].summon then
+            if Alerts[abilityId].block or Alerts[abilityId].dodge or Alerts[abilityId].avoid or Alerts[abilityId].interrupt or Alerts[abilityId].shouldusecc or Alerts[abilityId].unmit or Alerts[abilityId].power or Alerts[abilityId].destroy or Alerts[abilityId].summon then
                 -- Filter by priority
                 if (Settings.toggles.mitigationDungeon and not IsUnitInDungeon("player")) or not Settings.toggles.mitigationDungeon then
                     if Alerts[abilityId].priority == 3 and not Settings.toggles.mitigationRank3 then return end
@@ -997,7 +1001,7 @@ function AbilityAlerts.FormatAlertString(inputFormat, params)
 end
 
 -- VIEWER
-function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, sourceName, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, hiddenDuration, crowdControl, block, blockstagger, dodge, avoid, interrupt)
+function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, sourceName, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, hiddenDuration, crowdControl, block, blockstagger, dodge, avoid, interrupt, shouldusecc)
     local Settings = CombatInfo.SV.alerts
 
     local labelColor = Settings.colors.alertShared
@@ -1045,6 +1049,12 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
             if interrupt then
                 local color = AbilityAlerts.AlertColors.alertColorInterrupt
                 stringInterrupt = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, Settings.formats.alertInterrupt, spacer)
+            else
+                stringInterrupt = ""
+            end
+            if shouldusecc then
+                local color = AbilityAlerts.AlertColors.alertColorInterrupt
+                stringInterrupt = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, Settings.formats.alertShouldUseCC, spacer)
             else
                 stringInterrupt = ""
             end

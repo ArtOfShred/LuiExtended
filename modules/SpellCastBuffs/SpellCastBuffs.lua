@@ -2025,7 +2025,8 @@ local InternalStackCounter = { }
 -- Combat Event - Add Name Aura to Target
 function SpellCastBuffs.OnCombatAddNameEvent( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
     -- Get the name of the target to apply the buff to
-    local name = Effects.AddNameOnEvent[abilityId]
+    local name = Effects.AddNameOnEvent[abilityId].name
+    local id = Effects.AddNameOnEvent[abilityId].id
     -- Bail out if we have no name
     if not name then return end
 
@@ -2036,29 +2037,32 @@ function SpellCastBuffs.OnCombatAddNameEvent( eventCode, result, isError, abilit
             -- Get stack value if its saved.
             local stack = Effects.AddNameAura[name][2] and Effects.AddNameAura[name][2].stack
             Effects.AddNameAura[name][2] = {}
-            Effects.AddNameAura[name][2].id = abilityId
+            Effects.AddNameAura[name][2].id = id
             if Effects.AddStackOnEvent[abilityId] then
                 if stack then
                     Effects.AddNameAura[name][2].stack = stack + 1
                 else
-                    Effects.AddNameAura[name][2].stack = Effects.AddStackOnEvent[abilityId]
+                    Effects.AddNameAura[name][2].stack = Effects.AddStackOnEvent[ability]
                 end
             end
             -- Specific to Crypt of Hearts I (Ignite Colossus)
-            if abilityId == 46680 then
+            if id == 46680 then
                 LUIE.Data.AlertTable[22527].cc = LUIE_CC_TYPE_UNBREAKABLE
                 LUIE.Data.AlertTable[22527].block = nil
                 LUIE.Data.AlertTable[22527].dodge = nil
                 LUIE.Data.AlertTable[22527].avoid = true
             end
         elseif result == ACTION_RESULT_EFFECT_FADED then
-            Effects.AddNameAura[name][2] = nil
-            -- Specific to Crypt of Hearts I (Ignite Colossus)
-            if abilityId == 46680 then
-                LUIE.Data.AlertTable[22527].cc = nil
-                LUIE.Data.AlertTable[22527].block = true
-                LUIE.Data.AlertTable[22527].dodge = true
-                LUIE.Data.AlertTable[22527].avoid = false
+            -- Check to make sure the current added aura here is the same id. If something else overrides the previous one we don't need to worry about removing the previous one.
+            if Effects.AddNameAura[name] and Effects.AddNameAura[name][2] and Effects.AddNameAura[name][2].id == id then
+                Effects.AddNameAura[name][2] = nil
+                -- Specific to Crypt of Hearts I (Ignite Colossus)
+                if id == 46680 then
+                    LUIE.Data.AlertTable[22527].cc = nil
+                    LUIE.Data.AlertTable[22527].block = true
+                    LUIE.Data.AlertTable[22527].dodge = true
+                    LUIE.Data.AlertTable[22527].avoid = false
+                end
             end
         end
 
@@ -2207,7 +2211,19 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
             local unitName = zo_strformat("<<t:1>>", sourceName)
             if Effects.EffectOverrideByName[abilityId][unitName] then
                 if Effects.EffectOverrideByName[abilityId][unitName].hide then
-                    return
+                    if Effects.EffectOverrideByName[abilityId][unitName].zone then
+                        local zones = Effects.EffectOverrideByName[abilityId][unitName].zone
+                        local index = GetZoneId(GetCurrentMapZoneIndex())
+                        for k, v in pairs(zones) do
+                            d(k)
+                            d(index)
+                            if k == index then
+                                return
+                            end
+                        end
+                    else
+                        return
+                    end
                 end
                 iconName = Effects.EffectOverrideByName[abilityId][unitName].icon or iconName
                 effectName = Effects.EffectOverrideByName[abilityId][unitName].name or effectName

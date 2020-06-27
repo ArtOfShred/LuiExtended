@@ -380,6 +380,13 @@ CrowdControl.aoeNPCBoss = {
 
     -- Crypt of Hearts II
     [51883] = 1, -- Creeping Storm (Creeping Storm)
+    [52286] = 1, -- Rain Fire (Ilambris Amalgam)
+    [52335] = 0, -- Rain Fire (Ilambris Amalgam)
+    [52279] = 1, -- Call Lightning (Ilambris Amalgam)
+    [52339] = 0, -- Call Lightning (Ilambris Amalgam)
+    [52082] = 1, -- Cursed Ground (Nerien'eth)
+    [53157] = 0, -- Cursed Ground (Nerien'eth)
+    [53134] = 1, -- Tortured Souls (Soul Cage)
 
 }
 

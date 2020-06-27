@@ -139,6 +139,7 @@ CombatInfo.Defaults = {
             alertBlock                  = GetString(SI_LUIE_CI_BLOCK_DEFAULT),
             alertBlockStagger           = GetString(SI_LUIE_CI_BLOCKSTAGGER_DEFAULT),
             alertInterrupt              = GetString(SI_LUIE_CI_INTERRUPT_DEFAULT),
+            alertShouldUseCC            = GetString(SI_LUIE_CI_SHOULDUSECC_DEFAULT),
             alertUnmit                  = GetString(SI_LUIE_CI_UNMIT_DEFAULT),
             alertDodge                  = GetString(SI_LUIE_CI_DODGE_DEFAULT),
             alertAvoid                  = GetString(SI_LUIE_CI_AVOID_DEFAULT),

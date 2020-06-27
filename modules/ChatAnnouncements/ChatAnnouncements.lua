@@ -7577,7 +7577,7 @@ function ChatAnnouncements.HookFunction()
                             string1 = ""
                         end
                         local string2 = CollectibleColorize2:Colorize(zo_strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, #nowOwnedCollectibles) .. ".")
-                        finalString = zo_strformat("<<1>><<2>>", string1, string2)
+                        local finalString = zo_strformat("<<1>><<2>>", string1, string2)
                         g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "COLLECTIBLE" }
                         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
@@ -7625,7 +7625,7 @@ function ChatAnnouncements.HookFunction()
                             else
                                 string2 = link
                             end
-                            finalString = zo_strformat("<<1>><<2>><<3>>", string1, formattedIcon, string2)
+                            local finalString = zo_strformat("<<1>><<2>><<3>>", string1, formattedIcon, string2)
                             g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "COLLECTIBLE" }
                             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
@@ -10704,7 +10704,7 @@ end
 function ChatAnnouncements.PrintQueuedMessages()
     -- Resolve notification messages first
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "NOTIFICATION" then
+        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "NOTIFICATION" then
             local isSystem
             if g_queuedMessages[i].isSystem then
                 isSystem = true
@@ -10717,63 +10717,63 @@ function ChatAnnouncements.PrintQueuedMessages()
 
     -- Resolve quest POI added
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "QUEST_POI" then
+        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "QUEST_POI" then
             printToChat(g_queuedMessages[i].message)
         end
     end
 
     -- Next display Quest/Objective Completion and Experience
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "QUEST" or g_queuedMessages[i].type == "EXPERIENCE" then
+        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and (g_queuedMessages[i].type == "QUEST" or g_queuedMessages[i].type == "EXPERIENCE") then
             printToChat(g_queuedMessages[i].message)
         end
     end
 
     -- Level Up Notifications
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i].type == "EXPERIENCE LEVEL" then
+        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "EXPERIENCE LEVEL" then
             printToChat(g_queuedMessages[i].message)
         end
     end
 
     -- Skill Gain
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i].type == "SKILL GAIN" then
+        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "SKILL GAIN" then
             printToChat(g_queuedMessages[i].message)
         end
     end
 
     -- Skill Morph
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i].type == "SKILL MORPH" then
+        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "SKILL MORPH" then
             printToChat(g_queuedMessages[i].message)
         end
     end
 
     -- Skill Line
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i].type == "SKILL LINE" then
+        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "SKILL LINE" then
             printToChat(g_queuedMessages[i].message)
         end
     end
 
     -- Skill
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i].type == "SKILL" then
+        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "SKILL" then
             printToChat(g_queuedMessages[i].message)
         end
     end
 
     -- Postage
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i].type == "CURRENCY POSTAGE" then
+        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "CURRENCY POSTAGE" then
             printToChat(g_queuedMessages[i].message)
         end
     end
 
     -- Quest Items (Remove)
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i].type == "QUEST LOOT REMOVE" then
+        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "QUEST LOOT REMOVE" then
             --if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_queuedMessages[i].itemId) end -- TODO: Remove debug later
             local itemId = g_queuedMessages[i].itemId
             --if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_questItemAdded[itemId]) end -- TODO: Remove debug later
@@ -10785,21 +10785,21 @@ function ChatAnnouncements.PrintQueuedMessages()
 
     -- Loot (Container)
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i].type == "CONTAINER" then
+        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "CONTAINER" then
             ChatAnnouncements.ResolveItemMessage(g_queuedMessages[i].message, g_queuedMessages[i].formattedRecipient, g_queuedMessages[i].color, g_queuedMessages[i].logPrefix, g_queuedMessages[i].totalString, g_queuedMessages[i].groupLoot )
         end
     end
 
     -- Currency
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i].type == "CURRENCY" then
+        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "CURRENCY" then
             printToChat(g_queuedMessages[i].message)
         end
     end
 
     -- Quest Items (ADD)
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i].type == "QUEST LOOT ADD" then
+        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "QUEST LOOT ADD" then
             --if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_queuedMessages[i].itemId) end -- TODO: Remove debug later
             local itemId = g_queuedMessages[i].itemId
             --if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_questItemRemoved[itemId]) end -- TODO: Remove debug later
@@ -10811,28 +10811,28 @@ function ChatAnnouncements.PrintQueuedMessages()
 
     -- Loot
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i].type == "LOOT" then
+        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "LOOT" then
             ChatAnnouncements.ResolveItemMessage(g_queuedMessages[i].message, g_queuedMessages[i].formattedRecipient, g_queuedMessages[i].color, g_queuedMessages[i].logPrefix, g_queuedMessages[i].totalString, g_queuedMessages[i].groupLoot )
         end
     end
 
     -- Collectible
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i].type == "COLLECTIBLE" then
+        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "COLLECTIBLE" then
             printToChat(g_queuedMessages[i].message)
         end
     end
 
     -- Resolve achievement update messages second to last
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type == "ACHIEVEMENT" then
+        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "ACHIEVEMENT" then
             printToChat(g_queuedMessages[i].message)
         end
     end
 
     -- Display the rest
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "MESSAGE" then
+        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "MESSAGE" then
             printToChat(g_queuedMessages[i].message)
         end
     end

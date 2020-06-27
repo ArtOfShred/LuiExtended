@@ -557,6 +557,7 @@ local strings = {
     SI_LUIE_CI_BLOCK_DEFAULT =                           "BLOCK",
     SI_LUIE_CI_BLOCKSTAGGER_DEFAULT =                    "*BLOCK*",
     SI_LUIE_CI_INTERRUPT_DEFAULT =                       "INTERRUPT",
+    SI_LUIE_CI_SHOULDUSECC_DEFAULT =                     "HARD CC",
     SI_LUIE_CI_UNMIT_DEFAULT =                           "CANNOT MITIGATE",
     SI_LUIE_CI_DODGE_DEFAULT =                           "DODGE",
     SI_LUIE_CI_AVOID_DEFAULT =                           "AVOID",

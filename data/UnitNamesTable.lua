@@ -88,7 +88,7 @@ LUIE.Data.UnitNames = {
     NPC_Jackal                            = 'Jackal',
     NPC_Skaafin_Miscreal                  = 'Skaafin Miscreal',
     NPC_Skaafin_Wretch                    = 'Skaafin Wretch',
-    NPC_Skeleton                          = 'Skeleton',
+    NPC_Skeleton                          = 'Skeleton', -- Generic Mob (and Crypt of Hearts II)
     NPC_Bone_Flayer                       = 'Bone Flayer',
     NPC_Bone_Reaver                       = 'Bone Reaver',
     NPC_Risen_Dead                        = 'Risen Dead',
@@ -553,12 +553,23 @@ LUIE.Data.UnitNames = {
     Boss_Ilambris_Zaven                   = 'Ilambris-Zaven',
 
     -- Crypt of Hearts II
+    NPC_Spiderkith_Cauterizer             = 'Spiderkith Cauterizer',
+    NPC_Spiderkith_Wefter                 = 'Spiderkith Wefter',
     NPC_Spiderkith_Venifex                = 'Spiderkith Venifex',
     NPC_Spiderkith_Warper                 = 'Spiderkith Warper',
     NPC_Spiderkith_Broodnurse             = 'Spiderkith Broodnurse',
+    NPC_Spiderkith_Enervator              = 'Spiderkith Enervator',
     Boss_Ibelgast                         = 'Ibelgast',
     NPC_Ibelgasts_Flesh_Atronach          = 'Ibelgast\'s Flesh Atronach',
+    NPC_Ibelgasts_Cauterizer              = 'Ibelgast\'s Cauterizer',
+    NPC_Ibelgasts_Wefter                  = 'Ibelgast\'s Wefter',
+    NPC_Ibelgasts_Broodnurse              = 'Ibelgast\'s Broodnurse',
     Boss_Ruzozuzalpamaz                   = 'Ruzozuzalpamaz',
+    Boss_Chamber_Guardian                 = 'Chamber Guardian',
+    Boss_Ilambris_Amalgam                 = 'Ilambris Amalgam',
+    Boss_Mezeluth                         = 'Mezeluth',
+    Boss_Nerieneth                        = 'Nerien\'eth',
+    NPC_Student                           = 'Student',
 
     -- Frostvault
     NPC_Coldsnap_Ogre                     = 'Coldsnap Ogre',

@@ -557,6 +557,7 @@ local strings = {
     SI_LUIE_CI_BLOCK_DEFAULT =                           "БЛОКИРУЙ",
     SI_LUIE_CI_BLOCKSTAGGER_DEFAULT =                    "*БЛОКИРУЙ*",
     SI_LUIE_CI_INTERRUPT_DEFAULT =                       "ПРЕРВИ",
+    SI_LUIE_CI_SHOULDUSECC_DEFAULT =                     "HARD CC",
     SI_LUIE_CI_UNMIT_DEFAULT =                           "CANNOT MITIGATE", -- TODO: Translate
     SI_LUIE_CI_DODGE_DEFAULT =                           "УВЕРНИСЬ",
     SI_LUIE_CI_AVOID_DEFAULT =                           "ИЗБЕГИ",

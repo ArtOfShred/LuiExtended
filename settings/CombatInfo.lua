@@ -1041,6 +1041,17 @@ function CombatInfo.CreateSettings()
                 disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
             {
+                -- Hard CC Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_SHOULDUSECC),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_SHOULDUSECC_TP),
+                getFunc = function() return Settings.alerts.formats.alertShouldUseCC end,
+                setFunc = function(v) Settings.alerts.formats.alertShouldUseCC = v end,
+                isMultiline = false,
+                default = Defaults.alerts.formats.alertShouldUseCC,
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+            },
+            {
                 -- Interrupt Color
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),

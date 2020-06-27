@@ -1276,9 +1276,44 @@ LUIE.Data.AlertTable = {
 
     -- Crypt of Hearts II
     [51746] = { summon = true, priority = 2, auradetect = true, fakeName = Unitnames.NPC_Spiderkith_Broodnurse }, -- Summon the Dead (Spiderkith Broodnurse)
+    [51753] = { summon = true, priority = 2, auradetect = true, fakeName = Unitnames.NPC_Spiderkith_Broodnurse }, -- Reanimate Skeleton (Spiderkith Broodnurse)
+    [52040] = { shouldusecc = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 1000, fakeName = Unitnames.NPC_Spiderkith_Broodnurse, stack = 2 }, -- Summon Atronach (Ibelgast's Broodnurse)
+    [52160] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = Unitnames.NPC_Spiderkith_Broodnurse }, -- Flesh Atronach Rises (Ibelgast's Broodnurse)
     [53285] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = Unitnames.NPC_Ogrim }, -- Summon (Ogrim)
     [51882] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 3000, postCast = 5000, bossName = true }, -- Creeping Storm (Ruzozuzalpamaz)
     [52017] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000, postCast = 2200, bossName = true }, -- Lightning Onslaught (Ruzozuzalpamaz)
+    [53779] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 5000, bossName = true }, -- Webdrop (Ruzozuzalpamaz)
+    [51386] = { power = true, priority = 1, auradetect = true, duration = 30000, effectOnlyInterrupt = true, noSelf = true }, -- Web Wrap (Ruzozuzalpamaz)
+
+    [54620] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1000, cc = LUIE_CC_TYPE_STUN }, -- Uppercut (Chamber Guardian)
+    [51719] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1000, postCast = 2100, cc = LUIE_CC_TYPE_FEAR, fakeName = Unitnames.Boss_Chamber_Guardian }, -- Consuming Horror (Chamber Guardian)
+    [51728] = { summon = true, priority = 1, auradetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 5000, fakeName = Unitnames.Boss_Chamber_Guardian }, -- Consuming Horror (Chamber Guardian)
+
+    [52167] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true, duration = 1650, cc = LUIE_CC_TYPE_UNBREAKABLE }, -- Shock Form (Ilambris Amalgam)
+    [53600] = { power = true, priority = 1, auradetect = true, bossName = true }, -- Summon Shock Skeleton (Ilambris Amalgam)
+    [52278] = { avoid = true, priority = 1, auradetect = true }, -- Call Lightning (Ilambris Amalgam)
+    [52491] = { dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true, duration = 1150, cc = LUIE_CC_TYPE_STAGGER }, -- Thunder Fist (Ilambris Amalgam)
+    [52166] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true, duration = 1650, cc = LUIE_CC_TYPE_UNBREAKABLE }, -- Fire Form (Ilambris Amalgam)
+    [53593] = { power = true, priority = 1, auradetect = true, bossName = true }, -- Summon Flame Skeleton (Ilambris Amalgam)
+    [52285] = { avoid = true, priority = 1, auradetect = true }, -- Rain Fire (Ilambris Amalgam)
+    [52334] = { power = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, bossName = true }, -- Final Storm (Ilambris Amalgam)
+
+    [51090] = { unmit = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000, bossName = true, cc = LUIE_CC_TYPE_UNBREAKABLE }, -- Rise and Fall (Mezeluth)
+
+    [51539] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 2000, cc = LUIE_CC_TYPE_UNBREAKABLE }, -- Necrotic Blast (Nerien'eth)
+    [52080] = { power = true, priority = 1, auradetect = true, duration = 12000, effectOnlyInterrupt = true }, -- Necrotic Swarm (Nerien'eth)
+    [51853] = { power = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = Unitnames.Boss_Nerieneth, hiddenDuration = 1000  }, -- Soul Pulse (Nerien'eth)
+    [51864] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000, cc = LUIE_CC_TYPE_STAGGER, fakeName = Unitnames.Boss_Nerieneth }, -- Force Pulse (Nerien'eth)
+    [51943] = { power = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = Unitnames.Boss_Nerieneth, hiddenDuration = 1000  }, -- Soul Summon (Nerien'eth)
+    [60632] = { summon = true, priority = 1, auradetect = true, duration = 8000, neverShowInterrupt = true }, -- Shadow Cloak (Nerien'eth)
+    [52635] = { power = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = Unitnames.Boss_Nerieneth, hiddenDuration = 1000  }, -- Teleport (Nerien'eth)
+    [60631] = { power = true, priority = 1, auradetect = true, duration = 12000, neverShowInterrupt = true }, -- Shadow Cloak (Nerien'eth)
+    [52119] = { unmit = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 3000, cc = LUIE_CC_TYPE_UNBREAKABLE, refire = 1000, fakeName = Unitnames.Boss_Nerieneth }, -- Enervating Sheen (Nerien'eth)
+    [52126] = { power = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = Unitnames.Boss_Nerieneth, hiddenDuration = 1000  }, -- Teleport (Nerien'eth)
+    [52143] = { power = true, priority = 1, auradetect = true, duration = 14500, cc = LUIE_CC_TYPE_UNBREAKABLE, noSelf = true }, -- Blood Lust (Nerien'eth)
+    [51988] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1750, cc = LUIE_CC_TYPE_SNARE }, -- Lethal Stab (Nerien'eth)
+    [51993] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1000, cc = LUIE_CC_TYPE_UNBREAKABLE }, -- Heavy Slash (Nerien'eth)
+    [51997] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1000, cc = LUIE_CC_TYPE_STAGGER, fakeName = Unitnames.Boss_Nerieneth, postCast = 500 }, -- Ebony Whirlwind (Nerien'eth)
 
     -- Frostvault
     [109574] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 3250 }, -- Fire Power (Coldsnap Harrier)
@@ -1303,6 +1338,39 @@ LUIE.Data.AlertBossNameConvert = {
 
         -- DUNGEONS
         [Unitnames.Boss_Dubroze_the_Infestor] = Unitnames.NPC_Infested_Invoker, -- Elden Hollow II (other mobs in dungeon are NPC_Dremora_Invoker)
+        [Unitnames.Boss_Ibelgast] = Unitnames.NPC_Ibelgasts_Cauterizer, -- Crypt of Hearts II
+    },
+
+    [15164] = { -- Heat Wave (Fire Mage)
+        -- DUNGEONS
+        [Unitnames.Boss_Ibelgast] = Unitnames.NPC_Ibelgasts_Cauterizer, -- Crypt of Hearts II
+    },
+    [47095] = { -- Fire Rune (Fire Mage)
+        -- DUNGEONS
+        [Unitnames.Boss_Ibelgast] = Unitnames.NPC_Ibelgasts_Cauterizer, -- Crypt of Hearts II
+    },
+
+    [37108] = { -- Arrow Spray (Archer)
+        -- DUNGEONS
+        [Unitnames.Boss_Ibelgast] = Unitnames.NPC_Ibelgasts_Wefter, -- Crypt of Hearts II
+    },
+    [28628] = { -- Volley (Archer)
+        -- DUNGEONS
+        [Unitnames.Boss_Ibelgast] = Unitnames.NPC_Ibelgasts_Wefter, -- Crypt of Hearts II
+    },
+
+    [4829] = { -- Fire Brand (Flesh Atronach)
+        -- DUNGEONS
+        [Unitnames.Boss_Ibelgast] = Unitnames.NPC_Ibelgasts_Flesh_Atronach, -- Crypt of Hearts II
+    },
+
+    [51746] = { -- Summon the Dead (Spiderkith Broodnurse)
+    -- DUNGEONS
+        [Unitnames.Boss_Ibelgast] = Unitnames.NPC_Ibelgasts_Broodnurse, -- Crypt of Hearts II
+    },
+    [51753] = { -- Reanimate Skeleton (Spiderkith Broodnurse)
+    -- DUNGEONS
+        [Unitnames.Boss_Ibelgast] = Unitnames.NPC_Ibelgasts_Broodnurse, -- Crypt of Hearts II
     },
 
     [35151] = { -- Spell Absorption (Spirit Mage)
@@ -1376,6 +1444,7 @@ LUIE.Data.AlertZoneOverride = {
         [681] = Unitnames.NPC_Dremora_Gandrakyn, -- City of Ash II
         [131] = Unitnames.NPC_Sea_Viper_Healer, -- Tempest Island
         [58] = Unitnames.NPC_Sea_Viper_Healer, -- Tempest Island
+        [932] = Unitnames.NPC_Spiderkith_Cauterizer, -- Crypt of Hearts II
     },
 
     [35151] = { -- Spell Absorption (Spirit Mage)
@@ -1414,6 +1483,7 @@ LUIE.Data.AlertZoneOverride = {
 
         -- DUNGEONS
         [130] = Unitnames.NPC_Skeletal_Runecaster, -- Crypt of Hearts I
+        [932] = Unitnames.Boss_Mezeluth, -- Crypt of Hearts II
     },
 
     [29471] = { -- Thunder Thrall (Storm Mage)
@@ -1432,6 +1502,7 @@ LUIE.Data.AlertZoneOverride = {
 
         -- DUNGEONS
         [681] = Unitnames.NPC_Urata_Elementalist, -- City of Ash II
+        [932] = Unitnames.NPC_Spiderkith_Enervator, -- Crypt of Hearts II
     },
     [29510] = { -- Thunder Hammer (Thundermaul)
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.Elite_Arstul, -- Maormer Invasion Camp (Auridon)
@@ -1527,6 +1598,7 @@ LUIE.Data.AlertZoneOverride = {
         [681] = Unitnames.NPC_Xivilai_Immolator, -- City of Ash II
         [131] = Unitnames.NPC_Sea_Viper_Deadeye, -- Tempest Island
         [58] = Unitnames.NPC_Sea_Viper_Deadeye, -- Tempest Island
+        [932] = Unitnames.NPC_Spiderkith_Wefter, -- Crypt of Hearts II
     },
     [28628] = { -- Volley (Archer)
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- Maormer Invasion Camp (Auridon)
@@ -1562,6 +1634,7 @@ LUIE.Data.AlertZoneOverride = {
         [681] = Unitnames.NPC_Xivilai_Immolator, -- City of Ash II
         [131] = Unitnames.NPC_Sea_Viper_Deadeye, -- Tempest Island
         [58] = Unitnames.NPC_Sea_Viper_Deadeye, -- Tempest Island
+        [932] = Unitnames.NPC_Spiderkith_Wefter, -- Crypt of Hearts II
     },
     [12439] = { -- Burning Arrow (Synergy)
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- South Beacon (Auridon)
@@ -1678,6 +1751,7 @@ LUIE.Data.AlertZoneOverride = {
         [935] = Unitnames.NPC_Dremora_Kyngald, -- Banished Cells II
         [126] = Unitnames.NPC_Darkfern_Flamerender, -- Elden Hollow I
         [681] = Unitnames.NPC_Dremora_Kyngald, -- City of Ash II
+        [932] = Unitnames.NPC_Spiderkith_Cauterizer, -- Crypt of Hearts II
     },
     [47095] = { -- Fire Rune (Fire Mage)
 
@@ -1705,6 +1779,7 @@ LUIE.Data.AlertZoneOverride = {
         [935] = Unitnames.NPC_Dremora_Kyngald, -- Banished Cells II
         [126] = Unitnames.NPC_Darkfern_Flamerender, -- Elden Hollow I
         [681] = Unitnames.NPC_Dremora_Kyngald, -- City of Ash II
+        [932] = Unitnames.NPC_Spiderkith_Cauterizer, -- Crypt of Hearts II
     },
 
     [8779] = { -- Lightning Onslaught (Spider Daedra)
@@ -1751,6 +1826,10 @@ LUIE.Data.AlertZoneOverride = {
         [935] = Unitnames.NPC_Daedroth, -- Banished Cells II
     },
 
+    [50182] = { -- Consuming Energy (Spellfiend)
+        [932] = Unitnames.NPC_Skeleton, -- Crypt of Hearts II
+    },
+
     [10270] = { -- Quake (Gargoyle)
         [383] = Unitnames.NPC_Gargoyle, -- Grahtwood (for Nairume's Prison)
     },
@@ -1774,12 +1853,14 @@ LUIE.Data.AlertZoneOverride = {
         -- DUNGEONS
         [130] = Unitnames.Boss_The_Mage_Master, -- Crypt of Hearts I
         [935] = Unitnames.NPC_Dremora_Clasher, -- Banished Cells II
+        [932] = Unitnames.Boss_Ibelgast, -- Crypt of Hearts II
     },
     [44216] = { -- Negate Magic (Battlemage - Elite)
         [548] = Unitnames.Elite_Baham, -- Silatar
 
         -- DUNGEONS
         [130] = Unitnames.Boss_The_Mage_Master, -- Crypt of Hearts I
+        [932] = Unitnames.Boss_Ibelgast, -- Crypt of Hearts II
     },
 
     [3767] = { -- Choking Pollen (Lurcher)
@@ -1896,15 +1977,24 @@ LUIE.Data.AlertZoneOverride = {
         -- QUESTS
         [393] = Unitnames.NPC_Spider, -- Saltspray Cave (Auridon)
         [1160] = Unitnames.NPC_Frostbite_Spider, -- Deepwood Vale (Greymoor)
+
+        -- DUNGEONS
+        [932] = Unitnames.NPC_Spider, -- Crypt of Hearts II
     },
     [8087] = { -- Poison Spray (Giant Spider)
+        -- QUESTS
         [393] = Unitnames.NPC_Spider, -- Saltspray Cave (Auridon)
     },
     [4737] = { -- Encase (Giant Spider)
+        -- QUESTS
         [393] = Unitnames.NPC_Spider, -- Saltspray Cave (Auridon)
     },
     [13382] = { -- Devour (Giant Spider)
+        -- QUESTS
         [393] = Unitnames.NPC_Spider, -- Saltspray Cave (Auridon)
+
+        -- DUNGEONS
+        [932] = Unitnames.NPC_Spider, -- Crypt of Hearts II
     },
 
     [6166] = { -- Heat Wave (Scamp)
@@ -1947,7 +2037,7 @@ LUIE.Data.AlertZoneOverride = {
 
         -- DUNGEONS
         [935] = Unitnames.NPC_Flesh_Atronach, -- Banished Cells I (Summon Only)
-        --[932] = Unitnames.NPC_Flesh_Atronach, -- Crypt of Hearts II
+        [932] = Unitnames.NPC_Flesh_Atronach, -- Crypt of Hearts II
     },
     [6412] = { -- Dusk's Howl (Winged Twilight)
 
