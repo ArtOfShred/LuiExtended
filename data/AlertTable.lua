@@ -1315,6 +1315,15 @@ LUIE.Data.AlertTable = {
     [51993] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1000, cc = LUIE_CC_TYPE_UNBREAKABLE }, -- Heavy Slash (Nerien'eth)
     [51997] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1000, cc = LUIE_CC_TYPE_STAGGER, fakeName = Unitnames.Boss_Nerieneth, postCast = 500 }, -- Ebony Whirlwind (Nerien'eth)
 
+    -- Volenfell
+    [25649] = { unmit = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000, cc = LUIE_CC_TYPE_FEAR, fakeName = Unitnames.Boss_Desert_Lion }, -- Debilitating Roar (Desert Lion)
+
+    [25029] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 6000 }, -- Twisted Steel (Quintus Verres)
+    [25142] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 2000, postCast = 4000 }, -- Burning Groud (Quintus Verres)
+
+    [25227] = { block = true, avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = Unitnames.Boss_Monstrous_Gargoyle, duration = 2100, cc = LUIE_CC_TYPE_STUN }, -- Petrifying Bellow (Monstrous Gargoyle)
+    [25222] = { block = true, avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = Unitnames.Boss_Monstrous_Gargoyle, duration = 6100, refire = 5000 }, -- Heaving Quake (Monstrous Gargoyle)
+
     -- Frostvault
     [109574] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 3250 }, -- Fire Power (Coldsnap Harrier)
     [117352] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Whirlwind (Coldsnap Snowstalker)

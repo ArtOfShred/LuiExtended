@@ -1413,6 +1413,9 @@ local strings = {
     SI_LUIE_SKILL_EBONY_SHIELD =                         "Mage Barrier",
     SI_LUIE_SKILL_BLOOD_LUST_TP =                        "Levitated and afflicted with Oblivion Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds. Each time this effect deals damage Nerien'eth is healed.\n\nYou must break Nerienth's Ebony Barrier in order to avoid being executed.",
     SI_LUIE_SKILL_RESIST_NECROSIS_TP =                   "Resisting the life draining power of the Ebony Blade, preventing Blood Lust from draining your life and healing Nerien'eth.",
+    SI_LUIE_SKILL_MIGHTY_SWING =                         "Mighty Swing",
+    SI_LUIE_SKILL_FLAME_WRAITH =                         "Flame Wraith",
+    SI_LUIE_SKILL_GARGOYLE_LEAP =                        "Gargoyle Leap",
 
     -- Keep Upgrade
     SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_RANGE =              "Longer Range on Ranged Guards",

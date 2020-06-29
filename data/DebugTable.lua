@@ -8087,6 +8087,9 @@ LUIE.DebugAuras = {
     [32245] = true, -- Searing Steam (Steam Trap)
     [32246] = true, -- Searing Steam (Steam Trap)
 
+    [26039] = true, -- Vent Steam (Steam Vent) -- Volenfell
+    [26040] = true, -- Steam Blast (Steam Vent) -- Volenfell
+
     -- Elinhir Private Arena
     [117429] = true, -- Lava Eruption (Lava Trap)
     [117430] = true, -- Projectile (Lava Trap)
@@ -15984,6 +15987,51 @@ LUIE.DebugAuras = {
     [53997] = true, -- Aura of Mephala
     [53009] = true, -- VDUN-CoH Final Spell
     [53076] = true, -- VDUN-CoH Final Spell React
+
+    -- Volenfell
+    [25649] = true, -- Debilitating Roar (Desert Lion)
+    [26707] = true, -- BCrucible-Wave Spawner Leap (Quintus Verres)
+    [25038] = true, -- Slash (Quintus Verres)
+    [25031] = true, -- VF_Boss1_Twisted Steel (Quintus Verres)
+    [25029] = true, -- Twisted Steel (Quintus Verres)
+    [25030] = true, -- Twisted Steel (Quintus Verres)
+
+    [25055] = true, -- Dummy (Quintus Verres)
+    [25060] = true, -- Staffpickup (Quintus Verres)
+    [25067] = true, -- VF_Boss1_StaffHold (Quintus Verres)
+    [25138] = true, -- VF_Boss1_StaffHold (Quintus Verres)
+    [29452] = true, -- Dummy (Quintus Verres)
+
+    [25142] = true, -- Burning Groud (Quintus Verres)
+    [32081] = true, -- Nova (Quintus Verres)
+    [25142] = true, -- Burning Groud (Quintus Verres)
+    [25420] = true, -- Burning Groud (Quintus Verres)
+    [25143] = true, -- Burning Ground (Quintus Verres)
+    [25151] = true, -- Summon Wraith (Quintus Verres)
+    [25149] = true, -- Firebolt (Quintus Verres)
+    [25167] = true, -- Stagger (Quintus Verres)
+
+
+    [25299] = true, -- Dummy (Quintus Verres)
+    [25189] = true, -- VF_Boss1_Transferbeam (Quintus Verres)
+    [25337] = true, -- Essence (Quintus Verres)
+    [25306] = true, -- Gargoyleleap (Quintus Verres)
+    [25404] = true, -- VF_Boss1_Leapdummy (Quintus Verres)
+    [46312] = true, -- VF_Boss1_Leapdummy (Quintus Verres)
+    [46313] = true, -- Fire Backlash (Quintus Verres)
+    [46314] = true, -- CON_Knockback&Knockdown (Quintus Verres)
+    [29456] = true, -- Death (Quintus Verres)
+
+
+    [25218] = true, -- Double Swipe (Monstrous Gargoyle)
+    [25219] = true, -- Double Swipe (Monstrous Gargoyle)
+
+    [25227] = true, -- Petrifying Bellow (Monstrous Gargoyle)
+    [42930] = true, -- Petrifying Bellow (Monstrous Gargoyle)
+
+    [25222] = true, -- Heaving Quake (Monstrous Gargoyle)
+    [25223] = true, -- Heaving Quake (Monstrous Gargoyle)
+    [27318] = true, -- Heaving Quake (Monstrous Gargoyle)
 
     -- Frostvault
     [115316] = true, -- Weatherman

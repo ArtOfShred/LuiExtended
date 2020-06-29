@@ -571,6 +571,12 @@ LUIE.Data.UnitNames = {
     Boss_Nerieneth                        = 'Nerien\'eth',
     NPC_Student                           = 'Student',
 
+    -- Volenfell
+    Boss_Desert_Lioness                   = 'Desert Lioness',
+    Boss_Desert_Lion                      = 'Desert Lion',
+    Boss_Quintus_Verres                   = 'Quintus Verres',
+    Boss_Monstrous_Gargoyle               = 'Monstrous Gargoyle',
+
     -- Frostvault
     NPC_Coldsnap_Ogre                     = 'Coldsnap Ogre',
     Boss_Icestalker                       = 'Icestalker',

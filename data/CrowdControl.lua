@@ -206,6 +206,8 @@ CrowdControl.aoeTraps = {
     [27940] = 0, -- Laser Damage (Generic Flame Wave Shooter) -- Stros M'Kai
     [32245] = 0, -- Searing Steam (Steam Trap) -- Stros M'Kai
 
+    [26040] = 0, -- Steam Blast (Steam Vent) -- Volenfell
+
     [92757] = 0, -- Spinning Blade (Ald Carac)
 
     [117508] = 0, -- Shock Wall (Lightning Trap - Elinhir Private Arena)
@@ -387,6 +389,11 @@ CrowdControl.aoeNPCBoss = {
     [52082] = 1, -- Cursed Ground (Nerien'eth)
     [53157] = 0, -- Cursed Ground (Nerien'eth)
     [53134] = 1, -- Tortured Souls (Soul Cage)
+
+    -- Volenfell
+    [25030] = 1, -- Twisted Steel (Quintus Verres)
+    [25143] = 1, -- Burning Ground (Quintus Verres)
+    [25223] = 1, -- Heaving Quake (Quintus Verres)
 
 }
 
