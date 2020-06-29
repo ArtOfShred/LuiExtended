@@ -50,7 +50,8 @@ CombatInfo.Defaults = {
     BarFontFace                      = "Univers 67",
     BarFontStyle                     = "outline",
     BarFontSize                      = 18,
-    BarMiilis                        = true,
+    BarMillis                        = true,
+    BarMillisAboveTen                = true,
     BarShowBack                      = false,
     BarDarkUnused                    = false,
     BarDesaturateUnused              = false,
@@ -351,6 +352,10 @@ end
 
 local function SetupFlipAnimation(button)
     button:SetupFlipAnimation(OnSwapAnimationHalfDone, OnSwapAnimationDone)
+end
+
+local function FormatDurationSeconds(remain)
+    return string.format((CombatInfo.SV.BarMillis and (remain < 10000 or CombatInfo.SV.BarMillisAboveTen)) and "%.1f" or "%.1d", remain/1000)
 end
 
 -- Module initialization
@@ -785,13 +790,13 @@ function CombatInfo.OnUpdate(currentTime)
         -- Update Label (FRONT)
         if g_triggeredSlotsFront[k] and g_uiProcAnimation[g_triggeredSlotsFront[k]] and g_triggeredSlotsRemain[k] then
             if CombatInfo.SV.BarShowLabel then
-                g_uiProcAnimation[g_triggeredSlotsFront[k]].procLoopTexture.label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain/1000))
+                g_uiProcAnimation[g_triggeredSlotsFront[k]].procLoopTexture.label:SetText(FormatDurationSeconds(remain))
             end
         end
         -- Update Label (BACK)
         if g_triggeredSlotsBack[k] and g_uiProcAnimation[g_triggeredSlotsBack[k]] and g_triggeredSlotsRemain[k] then
             if CombatInfo.SV.BarShowLabel then
-                g_uiProcAnimation[g_triggeredSlotsBack[k]].procLoopTexture.label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain/1000))
+                g_uiProcAnimation[g_triggeredSlotsBack[k]].procLoopTexture.label:SetText(FormatDurationSeconds(remain))
             end
         end
     end
@@ -820,7 +825,7 @@ function CombatInfo.OnUpdate(currentTime)
             end
             if CombatInfo.SV.BarShowLabel then
                 if not g_uiCustomToggle[g_toggledSlotsFront[k]] then return end
-                g_uiCustomToggle[g_toggledSlotsFront[k]].label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
+                g_uiCustomToggle[g_toggledSlotsFront[k]].label:SetText(FormatDurationSeconds(remain))
             end
         end
         -- Update Label (BACK)
@@ -830,7 +835,7 @@ function CombatInfo.OnUpdate(currentTime)
             end
             if CombatInfo.SV.BarShowLabel then
                 if not g_uiCustomToggle[g_toggledSlotsBack[k]] then return end
-                g_uiCustomToggle[g_toggledSlotsBack[k]].label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
+                g_uiCustomToggle[g_toggledSlotsBack[k]].label:SetText(FormatDurationSeconds(remain))
             end
         end
     end
@@ -1429,14 +1434,14 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                 if g_triggeredSlotsFront[abilityId] then
                     CombatInfo.PlayProcAnimations(g_triggeredSlotsFront[abilityId])
                     if CombatInfo.SV.BarShowLabel and g_uiProcAnimation[g_triggeredSlotsFront[abilityId]] then
-                        g_uiProcAnimation[g_triggeredSlotsFront[abilityId]].procLoopTexture.label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
+                        g_uiProcAnimation[g_triggeredSlotsFront[abilityId]].procLoopTexture.label:SetText(FormatDurationSeconds(remain))
                     end
                 end
                 -- Back
                 if g_triggeredSlotsBack[abilityId] then
                     CombatInfo.PlayProcAnimations(g_triggeredSlotsBack[abilityId])
                     if CombatInfo.SV.BarShowLabel and g_uiProcAnimation[g_triggeredSlotsBack[abilityId]] then
-                        g_uiProcAnimation[g_triggeredSlotsBack[abilityId]].procLoopTexture.label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
+                        g_uiProcAnimation[g_triggeredSlotsBack[abilityId]].procLoopTexture.label:SetText(FormatDurationSeconds(remain))
                     end
                 end
             end
@@ -1524,7 +1529,7 @@ function CombatInfo.ShowSlot(slotNum, abilityId, currentTime, desaturate)
     if CombatInfo.SV.BarShowLabel then
         if not g_uiCustomToggle[slotNum] then return end
         local remain = g_toggledSlotsRemain[abilityId] - currentTime
-        g_uiCustomToggle[slotNum].label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
+        g_uiCustomToggle[slotNum].label:SetText(FormatDurationSeconds(remain))
         if g_toggledSlotsStack[abilityId] and g_toggledSlotsStack[abilityId] > 0 then
             g_uiCustomToggle[slotNum].stack:SetText(g_toggledSlotsStack[abilityId])
         else
@@ -2258,7 +2263,7 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
                 if CombatInfo.SV.BarShowLabel then
                     if not g_uiProcAnimation[slotNum] then return end
                     local remain = g_triggeredSlotsRemain[proc] - currentTime
-                    g_uiProcAnimation[slotNum].procLoopTexture.label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
+                    g_uiProcAnimation[slotNum].procLoopTexture.label:SetText(FormatDurationSeconds(remain))
                 end
             end
         end
