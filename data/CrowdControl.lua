@@ -206,6 +206,11 @@ CrowdControl.aoeTraps = {
     [27940] = 0, -- Laser Damage (Generic Flame Wave Shooter) -- Stros M'Kai
     [32245] = 0, -- Searing Steam (Steam Trap) -- Stros M'Kai
 
+    [26040] = 0, -- Steam Blast (Steam Vent) -- Volenfell
+    [26089] = 0, -- Steam Blast (Steam Vent) -- Volenfell
+    [26077] = 1, -- Steam Blast (Steam Vent) -- Volenfell
+    [26091] = 1, -- Steam Blast (Steam Vent) -- Volenfell
+
     [92757] = 0, -- Spinning Blade (Ald Carac)
 
     [117508] = 0, -- Shock Wall (Lightning Trap - Elinhir Private Arena)
@@ -388,6 +393,17 @@ CrowdControl.aoeNPCBoss = {
     [53157] = 0, -- Cursed Ground (Nerien'eth)
     [53134] = 1, -- Tortured Souls (Soul Cage)
 
+    -- Volenfell
+    [25030] = 1, -- Twisted Steel (Quintus Verres)
+    [25143] = 1, -- Burning Ground (Quintus Verres)
+    [25223] = 1, -- Heaving Quake (Quintus Verres)
+    [25674] = 1, -- Flame Burst (Boilbite)
+    [25675] = 1, -- Flame Burst (Boilbite)
+    [25676] = 1, -- Flame Burst (Boilbite)
+    [25677] = 1, -- Flame Burst (Boilbite)
+    [44113] = 1, -- Barrage Function (The Guardian's Spark)
+    [25213] = 1, -- Whirlwind Function (The Guardian's Strength)
+
 }
 
 CrowdControl.aoeNPCElite = {
@@ -423,7 +439,6 @@ CrowdControl.aoeNPCElite = {
     [54161] = 1, -- Berserker Frenzy (House Dres Slaver)
     [54080] = 1, -- Cinder Storm (Earthen Heart Knight)
     [52892] = 1, -- Flames of Oblivion (Anal'a Tu'wha)
-    [25213] = 1, -- Whirlwind Function (Dwarven Fire Centurion)
     [55981] = 1, -- Ice Charge (Dwarven Ice Centurion)
 
     -- Maelstrom Arena

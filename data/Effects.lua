@@ -2073,6 +2073,7 @@ Effects.AddNameAura = {
     [Unitnames.Boss_Ilambris_Athor] = { [1] = { id = 33097 } }, -- Ilambris-Athor
     [Unitnames.Boss_Ilambris_Zaven] = { [1] = { id = 33097 } }, -- Ilambris-Zaven
 
+    -- Crypt of Hearts II
     [Unitnames.Boss_Ibelgast] = { [1] = { id = 33097 } }, -- Ibelgast
     [Unitnames.Boss_Ruzozuzalpamaz] = { [1] = { id = 33097 } }, -- Ruzozuzalpamaz
     [Unitnames.NPC_Ibelgasts_Flesh_Atronach] = { [1] = { id = 33097 } }, -- Ibelgasts Flesh Atronach
@@ -2083,6 +2084,20 @@ Effects.AddNameAura = {
     [Unitnames.Boss_Nerieneth] = { [1] = { id = 33097 } }, -- Nerien'eth
     [Unitnames.NPC_Wraith] = { [1] = { id = 33097, zone = { [932] = true }, } }, -- Wraith
     [Unitnames.NPC_Student] = { [1] = { id = 33097, zone = { [932] = true }, } }, -- Student
+
+    -- Volenfell
+    [Unitnames.Boss_Desert_Lioness] = { [1] = { id = 33097, zone = { [22] = true }, } },-- Desert Lioness
+    [Unitnames.Boss_Desert_Lion] = { [1] = { id = 33097, zone = { [22] = true }, } },-- Desert Lion
+    [Unitnames.Boss_Quintus_Verres] = { [1] = { id = 33097 } }, -- Quintus Verres
+    [Unitnames.Boss_Monstrous_Gargoyle] = { [1] = { id = 33097 } }, -- Monstrous Gargoyle
+    [Unitnames.Boss_Boilbite] = { [1] = { id = 33097 } }, -- Boilbite
+    [Unitnames.Boss_Boilbites_Assassin_Beetle] = { [1] = { id = 33097 } }, -- Boilbite's Assassin Beetle
+    [Unitnames.Boss_Unstable_Construct] = { [1] = { id = 33097 } }, -- Unstable Construct
+    [Unitnames.Boss_Unstable_Dwarven_Spider] = { [1] = { id = 33097, zone = { [22] = true }, } },-- Unstable Dwarven Spider
+    [Unitnames.Boss_Tremorscale] = { [1] = { id = 33097 } }, -- Tremorscale
+    [Unitnames.Boss_The_Guardians_Strength] = { [1] = { id = 33097 } }, -- The Guardian's Strength
+    [Unitnames.Boss_The_Guardians_Spark] = { [1] = { id = 33097 } }, -- The Guardian's Spark
+    [Unitnames.Boss_The_Guardians_Soul] = { [1] = { id = 33097 } }, -- The Guardian's Soul
 
     -- Frostvault
     [Unitnames.NPC_Coldsnap_Ogre] = { [1] = { id = 33097 } }, -- Coldsnap Ogre
@@ -2107,7 +2122,7 @@ Effects.AddNameOnEvent = {
 
     [46680] = { name = Unitnames.Boss_Deaths_Leviathan, id = 46680 }, -- Immolate Colossus -- Death's Leviathan (Crypt of Hearts I)
     [28759] = { name = Unitnames.Boss_Keeper_Voranil, id = 28759 }, -- Essence Siphon -- Keeper Voranil (Banished Cells II)
-    [52167] = { name = Unitnames.Boss_Ilambris_Amalgam, id = 53600 }, -- Shock Form -- Ilambris Amalgam (Crpyt of Hearts II)
+    [52167] = { name = Unitnames.Boss_Ilambris_Amalgam, id = 53600 }, -- Shock Form -- Ilambris Amalgam (Crypt of Hearts II)
     [52166] = { name = Unitnames.Boss_Ilambris_Amalgam, id = 53593 }, -- Fire Form -- Ilambris Amalgam (Crypt of Hearts II)
 
 }
@@ -2278,7 +2293,9 @@ Effects.EffectOverrideByName = {
     -- ANIMALS
     [7170] = { -- Rend (Lion)
         [Unitnames.NPC_Lion] =                    { icon = 'LuiExtended/media/icons/abilities/ability_lion_rend.dds' }, -- Rend (Lion)
+        [Unitnames.Boss_Desert_Lion] =            { icon = 'LuiExtended/media/icons/abilities/ability_lion_rend.dds' }, -- Rend (Lion)
         [Unitnames.NPC_Lioness] =                 { icon = 'LuiExtended/media/icons/abilities/ability_lioness_rend.dds' }, -- Rend (Lion)
+        [Unitnames.Boss_Desert_Lioness] =          { icon = 'LuiExtended/media/icons/abilities/ability_lioness_rend.dds' }, -- Rend (Lion)
         [Unitnames.NPC_Sabre_Cat] =               { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_rend.dds' }, -- Rend (Sabre Cat)
         [Unitnames.NPC_Senche_Tiger] =            { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
         [Unitnames.Boss_Nindaeril_the_Monsoon] =   { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend_white.dds' }, -- Rend (Senche-Tiger)
@@ -2292,11 +2309,13 @@ Effects.EffectOverrideByName = {
         [Unitnames.Boss_Heartstalker] =            { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
         [Unitnames.Boss_Nighteyes] =               { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
         [Unitnames.Boss_Shadowhiskers] =           { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
-        [Abilities.Skill_Senche_Spirit] =           { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite_ghost.dds' }, -- Rend (Senche Spirit)
+        [Abilities.Skill_Senche_Spirit] =           { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend_ghost.dds' }, -- Rend (Senche Spirit)
     },
     [60630] = { -- Rend (Lion)
         [Unitnames.NPC_Lion] =                    { icon = 'LuiExtended/media/icons/abilities/ability_lion_rend.dds' }, -- Rend (Lion)
+        [Unitnames.Boss_Desert_Lion] =            { icon = 'LuiExtended/media/icons/abilities/ability_lion_rend.dds' }, -- Rend (Lion)
         [Unitnames.NPC_Lioness] =                 { icon = 'LuiExtended/media/icons/abilities/ability_lioness_rend.dds' }, -- Rend (Lion)
+        [Unitnames.Boss_Desert_Lioness] =          { icon = 'LuiExtended/media/icons/abilities/ability_lioness_rend.dds' }, -- Rend (Lion)
         [Unitnames.NPC_Sabre_Cat] =               { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_rend.dds' }, -- Rend (Sabre Cat)
         [Unitnames.NPC_Senche_Tiger] =            { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
         [Unitnames.Boss_Nindaeril_the_Monsoon] =   { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend_white.dds' }, -- Rend (Senche-Tiger)
@@ -2310,7 +2329,7 @@ Effects.EffectOverrideByName = {
         [Unitnames.Boss_Heartstalker] =            { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
         [Unitnames.Boss_Nighteyes] =               { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
         [Unitnames.Boss_Shadowhiskers] =           { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
-        [Abilities.Skill_Senche_Spirit] =           { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite_ghost.dds' }, -- Rend (Senche Spirit)
+        [Abilities.Skill_Senche_Spirit] =           { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend_ghost.dds' }, -- Rend (Senche Spirit)
     },
     [60641] = { -- Claw (Lion)
         [Unitnames.NPC_Sabre_Cat] =               { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_claw.dds' }, -- Claw (Sabre Cat)
@@ -2325,6 +2344,7 @@ Effects.EffectOverrideByName = {
     [7158] = { -- Bite (Lion)
         [Unitnames.NPC_Lion] =                    { icon = 'LuiExtended/media/icons/abilities/ability_lion_bite.dds' }, -- Bite (Lion)
         [Unitnames.NPC_Lioness] =                 { icon = 'LuiExtended/media/icons/abilities/ability_lioness_bite.dds' }, -- Bite (Lion)
+        [Unitnames.Boss_Desert_Lioness] =          { icon = 'LuiExtended/media/icons/abilities/ability_lioness_bite.dds' }, -- Bite (Lion)
         [Unitnames.NPC_Sabre_Cat] =               { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_bite.dds' }, -- Bite (Sabre Cat)
         [Unitnames.NPC_Senche_Tiger] =            { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
         [Unitnames.Boss_Nindaeril_the_Monsoon] =   { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite_white.dds' }, -- Bite (Senche-Tiger)
@@ -2470,6 +2490,12 @@ Effects.EffectOverrideByName = {
     [4769] = { -- Choking Pollen (Lurcher)
         [Unitnames.Boss_Limbscather] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Limbscather (Glenumbra)
     },
+    [5278] = { -- Bite (Assassin Beetle)
+        [Unitnames.Boss_Boilbite] = { icon = 'LuiExtended/media/icons/abilities/ability_shalk_bite.dds' }, -- Boilbite (Volenfell)
+    },
+    [91791] = { -- Feast (Assassin Beetle)
+        [Unitnames.Boss_Boilbite] = { icon = 'LuiExtended/media/icons/abilities/ability_shalk_feast.dds' }, -- Boilbite (Volenfell)
+    },
 
     -- CYRODIIL
     [64674] = { -- Cyrodiil Guard See Stealth
@@ -2505,6 +2531,7 @@ Effects.EffectOverrideByName = {
          [Unitnames.NPC_Honor_Guard_DC]                     = { icon = 'LuiExtended/media/icons/abilities/ability_spell_honor_guard_rage_dc.dds' }, -- Covenant Honor Gaurd
          [Unitnames.NPC_Honor_Guard_EP]                     = { icon = 'LuiExtended/media/icons/abilities/ability_spell_honor_guard_rage_ep.dds' }, -- Pact Honor Guard
     },
+
     -- QUESTS
     [37028] = {
         [Unitnames.NPC_Auroran_Battlemage] =      { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds', name = Abilities.Skill_Quick_Strike }, -- Quick Strike (Auroran Battlemage)
@@ -8773,7 +8800,7 @@ Effects.EffectOverride = {
     [51735] = { icon = 'LuiExtended/media/icons/abilities/ability_assassinbeetle_laceration.dds', name = Abilities.Skill_Lacerate }, -- Bleeding (Assassin Beetle)
     [5268] = { icon = 'LuiExtended/media/icons/abilities/ability_assassinbeetle_collywobbles.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 20 }, -- Collywobbles (Assassin Beetle)
     [91789] = { hide = true }, -- Ambush (Assassin Beetle)
-    [91791] = { icon = 'LuiExtended/media/icons/abilities/ability_assassinbeetle_feast.dds', tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 0.5 }, -- Feast (Assassin Beetle)
+    [91791] = { icon = 'LuiExtended/media/icons/abilities/ability_assassinbeetle_feast.dds', hide = true }, -- Feast (Assassin Beetle)
     [13680] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_poison_damage.dds', tooltip = Tooltips.Generic_AOE_Poison, tooltipValue2 = 0.5, groundLabel = true }, -- Acid Blood (Assassin Beetle)
     [6754] = { icon = 'LuiExtended/media/icons/abilities/ability_scorpion_pincer.dds' }, -- Pincer (Giant Scorpion)
     [6755] = { icon = 'LuiExtended/media/icons/abilities/ability_scorpion_sting.dds' }, -- Sting (Giant Scorpion)
@@ -9741,6 +9768,15 @@ Effects.EffectOverride = {
     -- Steam Trap (Stroks M'Kai - Buried Secrets)
     [32245] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_steam.dds', name = Abilities.Trap_Steam_Vent, groundLabel = true, unbreakable = 1, tooltip = Tooltips.Generic_AOE_Snare_Fire, tooltipValue2 = 0.75, tooltipValue3 = 50 }, -- Searing Steam (Steam Trap) -- Stros M'Kai
     [32246] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_steam.dds', name = Abilities.Trap_Steam_Vent, tooltip = Tooltips.Generic_AOE_Snare_Fire, tooltipValue2 = 0.75, tooltipValue3 = 50, groundLabel = true, unbreakable = 1, hideGround = true }, -- Searing Steam (Steam Trap) -- Stros M'Kai
+
+    [26039] = { hide = true }, -- Vent Steam (Steam Vent) -- Volenfell
+    [26040] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_steam_pipe.dds', name = Abilities.Trap_Steam_Vent, groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.5 }, -- Steam Blast (Steam Vent) -- Volenfell
+    [26088] = { hide = true }, -- Vent Steam (Steam Vent) -- Volenfell
+    [26089] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_steam_pipe.dds', name = Abilities.Trap_Steam_Vent, groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.5 }, -- Steam Blast (Steam Vent) -- Volenfell
+    [26090] = { hide = true }, -- Vent Steam (Steam Vent) -- Volenfell
+    [26091] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_steam.dds', name = Abilities.Trap_Steam_Vent, groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.5 }, -- Steam Blast (Steam Vent) -- Volenfell
+    [26076] = { hide = true }, -- Vent Steam (Steam Vent) -- Volenfell
+    [26077] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_steam.dds', name = Abilities.Trap_Steam_Vent, groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.5 }, -- Steam Blast (Steam Vent) -- Volenfell
 
     -- Elinhir Private Arena
     [117428] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava_trap.dds', name = Abilities.Trap_Lava_Trap }, -- Lava Eruption (Lava Trap)
@@ -12789,6 +12825,69 @@ Effects.EffectOverride = {
 
     [54142] = { hide = true }, -- Soul Cages Opened (Soul Cage)
 
+    -- Volenfell
+    [25649] = { icon = 'LuiExtended/media/icons/abilities/ability_lion_debilitating_roar.dds', tooltip = Tooltips.Generic_Fear }, -- Debilitating Roar (Desert Lion)
+
+    [25038] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_xivilai_light.dds' }, -- Slash (Quintus Verres)
+    [25029] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_twisted_steel.dds' }, -- Twisted Steel (Quintus Verres)
+    [25030] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_twisted_steel.dds' }, -- Twisted Steel (Quintus Verres)
+
+    [25142] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_burning_field.dds', name = Abilities.Skill_Burning_Ground }, -- Burning Ground (Quintus Verres)
+    [25143] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_burning_field.dds', tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1.5, groundLabel = true }, -- Burning Ground (Quintus Verres)
+
+    [25151] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_wraith_flame.dds', name = Abilities.Skill_Flame_Wraith, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Fear }, -- Flame Wraith (Quintus Verres)
+    [25149] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_firebolt.dds' }, -- Firebolt (Quintus Verres)
+
+    [46313] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_leap.dds', name = Abilities.Skill_Gargoyle_Leap, unbreakable = 1 }, -- Fire Backlash (Monstrous Gargoyle)
+    [46314] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_leap.dds', name = Abilities.Skill_Gargoyle_Leap, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- CON_Knockback&Knockdown (Monstrous Gargoyle)
+
+    [25218] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_double_swipe.dds' }, -- Double Swipe (Monstrous Gargoyle)
+    [25219] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_double_swipe.dds' }, -- Double Swipe (Monstrous Gargoyle)
+
+    [25227] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_petrifying_bellow.dds' }, -- Petrifying Bellow (Monstrous Gargoyle)
+    [42930] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_petrifying_bellow.dds', tooltip = Tooltips.Generic_Stun }, -- Petrifying Bellow (Monstrous Gargoyle)
+
+    [25222] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_quake.dds' }, -- Heaving Quake (Monstrous Gargoyle)
+    [25223] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_quake.dds' }, -- Heaving Quake (Monstrous Gargoyle)
+
+    [24930] = { hide = true }, -- Tail Swipe (Tremorscale)
+
+    [25672] = { icon = 'LuiExtended/media/icons/abilities/ability_shalk_flame_burst.dds' }, -- Flame Burst (Boilbite)
+    [25674] = { icon = 'LuiExtended/media/icons/abilities/ability_shalk_flame_burst.dds' }, -- Flame Burst (Boilbite)
+    [25675] = { icon = 'LuiExtended/media/icons/abilities/ability_shalk_flame_burst.dds' }, -- Flame Burst (Boilbite)
+    [25676] = { icon = 'LuiExtended/media/icons/abilities/ability_shalk_flame_burst.dds' }, -- Flame Burst (Boilbite)
+    [25677] = { icon = 'LuiExtended/media/icons/abilities/ability_shalk_flame_burst.dds' }, -- Flame Burst (Boilbite)
+
+    [25655] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensphere_explosive_bolt.dds', hide = true }, -- Explosive Bolt (Unstable Construct)
+    [25659] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensphere_explosive_bolt.dds', name = Abilities.Skill_Explosive_Bolt, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Explosive_Bolt }, -- Countdown (Unstable Construct)
+    [25660] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensphere_explosive_bolt_explosion.dds', name = Abilities.Skill_Explosive_Bolt }, -- Explosion (Unstable Construct)
+
+
+    [24857] = { icon = 'LuiExtended/media/icons/abilities/ability_duneripper_crushing_chomp.dds' }, -- Bite (Tremorscale)
+
+    [24744] = { icon = 'LuiExtended/media/icons/abilities/ability_duneripper_hemorrhaging_tear.dds' }, -- Hemorrhaging Tear (Tremorscale)
+    [24748] = { icon = 'LuiExtended/media/icons/abilities/ability_duneripper_hemorrhaging_tear.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Hemorrhaging_Tear, tooltipValue2 = 2, stackMax = 3 }, -- Hemorrhaging Tear (Tremorscale)
+
+    [24777] = { icon = 'LuiExtended/media/icons/abilities/ability_duneripper_sweep.dds' }, -- Tail Swipe (Tremorscale)
+    [24780] = { icon = 'LuiExtended/media/icons/abilities/ability_duneripper_sweep.dds', name = Abilities.Skill_Tail_Swipe, unbreakable = 1, hide = true }, -- Fire Backlash (Tremorscale)
+    [24781] = { icon = 'LuiExtended/media/icons/abilities/ability_duneripper_sweep.dds', name = Abilities.Skill_Tail_Swipe, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- CON_Knockback&Knockdown (Tremorscale)
+
+    [29165] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds' }, -- Rupture (Tremorscale)
+    [29164] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds' }, -- Rupture (Tremorscale)
+    [29167] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds', name = Abilities.Skill_Rupture }, -- Dummy (Tremorscale)
+    [29163] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds', name = Abilities.Skill_Rupture, unbreakable = 1 }, -- Staggering Roar (Tremorscale)
+    [29166] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds', name = Abilities.Skill_Rupture, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- CON_Knockback&Knockdown (Tremorscale)
+
+    [25229] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_barrage_function.dds', hide = true }, -- Barrage Function (The Guardian's Spark)
+    [44113] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_barrage_function.dds' }, -- Barrage Function (The Guardian's Spark)
+
+    [25262] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_hammer_strike.dds' }, -- Hammer Strike (The Guardian's Soul)
+    [58657] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_hammer_strike.dds' }, -- Hammer Strike (The Guardian's Soul)
+
+    [25263] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_decapitation.dds' }, -- Decapitation Function (The Guardian's Soul)
+    [25265] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_decapitation.dds', unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Decapitation Function (The Guardian's Soul)
+    [25264] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_decapitation.dds', unbreakable = 1 }, -- Decapitation Function (The Guardian's Soul)
+
     -- temporary gap here just for ease of editing
     -- temporary gap here just for ease of editing
     -- temporary gap here just for ease of editing
@@ -13169,6 +13268,13 @@ Effects.FakeExternalDebuffs = {
     [51824] = { duration = 2500 }, -- Fulminating Void (Mezeluth)
     [53442] = { duration = 6000 }, -- Lethal Stab (Nerien'eth)
     [51995] = { duration = 2250 }, -- Heavy Slash (Nerien'eth)
+
+    -- Volenfell
+    [25649] = { duration = 4000, ignoreBegin = true }, -- Debilitating Roar (Desert Lion)
+    [46314] = { duration = 2500 }, -- CON_Knockback&Knockdown (Monstrous Gargoyle)
+    [42930] = { duration = 6000 }, -- Petrifying Bellow (Monstrous Gargoyle)
+    [29166] = { duration = 2000 }, -- CON_Knockback&Knockdown (Tremorscale)
+    [25265] = { duration = 2000 }, -- Decapitation Function (The Guardian's Soul)
 
     -- Frostvault
     [117486] = { duration = 18000 }, -- Bleed (Coldsnap Goblin - Shared)
@@ -13641,6 +13747,11 @@ Effects.AddGroundDamageAura = {
     [27940] = { duration = 350, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Laser Damage (Generic Flame Wave Shooter) -- Stros M'Kai
     [32245] = { duration = 2000, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Searing Steam (Steam Trap) -- Stros M'Kai
 
+    [26040] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Steam Blast (Steam Vent) -- Volenfell
+    [26089] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Steam Blast (Steam Vent) -- Volenfell
+    [26091] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Steam Blast (Steam Vent) -- Volenfell
+    [26077] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Steam Blast (Steam Vent) -- Volenfell
+
     --------------------
     -- NPC
     --------------------
@@ -13838,6 +13949,9 @@ Effects.AddGroundDamageAura = {
     [52082] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Cursed Ground (Nerien'eth)
     [53157] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Cursed Ground (Nerien'eth)
     [53134] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Tortured Souls (Nerien'eth)
+
+    -- Volenfell
+    [25143] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Burning Ground (Quintus Verres)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -13997,5 +14111,14 @@ Effects.MapDataOverride = {
     [27828] = { -- Crushing Blow  (Yalorasse the Speaker)
         [58] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_dw_crushing_blow.dds', name = Abilities.Skill_Precision_Strike }, -- Tempest Island
         [935] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_mace_2h_slam.dds', name = Abilities.Skill_Crushing_Blow }, -- Banished Cells II
+    },
+    [25034] = { -- Crushing Blow (Golor the Banekin Handler)
+        [22] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_2h_mighty_swing.dds', name = Abilities.Skill_Mighty_Swing }, -- Volenfell
+    },
+    [25035] = { -- Crushing Blow (Golor the Banekin Handler)
+        [22] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_2h_mighty_swing.dds', name = Abilities.Skill_Mighty_Swing }, -- Volenfell
+    },
+    [25036] = { -- Crushing Blow (Golor the Banekin Handler)
+        [22] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_2h_mighty_swing.dds', name = Abilities.Skill_Mighty_Swing }, -- Volenfell
     },
 }

@@ -117,6 +117,7 @@ LUIE.StatusbarTextures = {
     ["Elder Scrolls Gradient"]  = "/LuiExtended/media/unitframes/textures/ElderScrollsGrad.dds",
     ["Glass"]                   = "/LuiExtended/media/unitframes/textures/Glass.dds",
     ["Glaze"]                   = "/LuiExtended/media/unitframes/textures/Glaze.dds",
+    ["Grainy"]                  = "/LuiExtended/media/unitframes/textures/grainy.dds",
     ["Horizontal Gradient 1"]   = "/LuiExtended/media/unitframes/textures/HorizontalGrad.dds",
     ["Horizontal Gradient 2"]   = "/LuiExtended/media/unitframes/textures/HorizontalGradV2.dds",
     ["Inner Glow"]              = "/LuiExtended/media/unitframes/textures/InnerGlow.dds",

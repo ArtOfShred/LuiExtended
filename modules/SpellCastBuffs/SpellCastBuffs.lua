@@ -1318,7 +1318,7 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
         SpellCastBuffs.TooltipBottomLine(control, detailsLine)
 
         -- Tooltip Debug
-        --GameTooltip:SetAbilityId(136098)
+        --GameTooltip:SetAbilityId(25660)
 
     end
 end
@@ -1951,6 +1951,13 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
                         end
                     end
                 end
+            end
+        end
+
+        -- Limit stacks for certain abilities.
+        if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].stackMax then
+            if stackCount > Effects.EffectOverride[abilityId].stackMax then
+                stackCount = Effects.EffectOverride[abilityId].stackMax
             end
         end
 

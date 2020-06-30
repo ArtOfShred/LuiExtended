@@ -178,6 +178,13 @@ LUIE.Data.UnitNames = {
 
     NPC_Ogrim                             = 'Ogrim', -- GENERIC NPC
 
+    NPC_Duneripper                        = 'Duneripper', -- GENERIC NPC
+
+    -- DWEMER
+    NPC_Dwarven_Sphere                    = 'Dwarven Sphere',
+    NPC_Dwarven_Spider                    = 'Dwarven Spider',
+    NPC_Dwarven_Centurion                 = 'Dwarven Centurion',
+
     ----------------------------------------------------------------
     -- QUESTS ------------------------------------------------------
     ----------------------------------------------------------------
@@ -389,7 +396,6 @@ LUIE.Data.UnitNames = {
     Boss_Shadow_Knight                    = 'Shadow Knight',
     Boss_Dark_Mage                        = 'Dark Mage',
     NPC_Dwarven_Fire_Centurion            = 'Dwarven Fire Centurion',
-    NPC_Dwarven_Sphere                    = 'Dwarven Sphere',
     Boss_Mavus_Talnarith                  = 'Mavus Talnarith',
     NPC_Graveoath_Ravener                 = 'Graveoath Ravener',
     Boss_Zackael_Jonnicent                = 'Zackael Jonnicent',
@@ -404,7 +410,6 @@ LUIE.Data.UnitNames = {
     NPC_Queens_Champion                   = 'Queen\'s Champion',
     NPC_Queens_Advisor                    = 'Queen\'s Advisor',
     Boss_Lamia_Queen                      = 'Lamia Queen',
-    NPC_Dwarven_Spider                    = 'Dwarven Spider',
     Boss_The_Control_Guardian             = 'The Control Guardian',
     NPC_Scavenger_Thunder_Smith           = 'Scavenger Thunder-Smith',
     NPC_Troll_Breaker                     = 'Troll Breaker',
@@ -570,6 +575,23 @@ LUIE.Data.UnitNames = {
     Boss_Mezeluth                         = 'Mezeluth',
     Boss_Nerieneth                        = 'Nerien\'eth',
     NPC_Student                           = 'Student',
+
+    -- Volenfell
+    Boss_Desert_Lioness                   = 'Desert Lioness',
+    Boss_Desert_Lion                      = 'Desert Lion',
+    Boss_Quintus_Verres                   = 'Quintus Verres',
+    Boss_Monstrous_Gargoyle               = 'Monstrous Gargoyle',
+    Boss_Boilbite                         = 'Boilbite',
+    Boss_Boilbites_Assassin_Beetle        = 'Boilbite\'s Assassin Beetle',
+    Boss_Unstable_Construct               = 'Unstable Construct',
+    Boss_Unstable_Dwarven_Spider          = 'Unstable Dwarven Spider',
+    NPC_Treasure_Hunter_Healer            = 'Treasure Hunter Healer',
+    NPC_Treasure_Hunter_Incendiary        = 'Treasure Hunter Incendiary',
+    NPC_Imperial_Overseer                 = 'Imperial Overseer',
+    Boss_Tremorscale                      = 'Tremorscale',
+    Boss_The_Guardians_Strength           = 'The Guardian\'s Strength',
+    Boss_The_Guardians_Spark              = 'The Guardian\'s Spark',
+    Boss_The_Guardians_Soul               = 'The Guardian\'s Soul',
 
     -- Frostvault
     NPC_Coldsnap_Ogre                     = 'Coldsnap Ogre',
