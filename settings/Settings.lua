@@ -6,6 +6,9 @@
 local zo_strformat = zo_strformat
 local g_ElementMovingEnabled
 
+local alignmentOptions     = { "LEFT", "CENTER", "RIGHT" }
+local alignmentOptionsKeys = { ["LEFT"] = 1, ["CENTER"] = 1, ["RIGHT"] = 3 }
+
 -- Create Settings Menu
 function LUIE.CreateSettings()
     -- Load LibAddonMenu
@@ -369,6 +372,31 @@ function LUIE.CreateSettings()
         type = "header",
         name = GetString(SI_LUIE_LAM_MISCHEADER),
         width = "full",
+    }
+
+    --[[
+    -- Alert Text Alignment
+    optionsData[#optionsData + 1] = {
+        type = "dropdown",
+        name = GetString(SI_LUIE_LAM_ALERT_TEXT_ALIGNMENT),
+        tooltip = GetString(SI_LUIE_LAM_ALERT_TEXT_ALIGNMENT_TP),
+        choices = alignmentOptions,
+        getFunc = function() return alignmentOptions[Settings.AlertFrameAlignment] end,
+        setFunc = function(value) Settings.AlertFrameAlignment = alignmentOptionsKeys[value] end,
+        width = "full",
+        default = Defaults.AlertFrameAlignment,
+    }
+    ]]--
+
+    -- Hide Alerts
+    optionsData[#optionsData + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_ALERT_HIDE_ALL),
+        tooltip = GetString(SI_LUIE_LAM_ALERT_HIDE_ALL_TP),
+        getFunc = function() return Settings.HideAlertFrame end,
+        setFunc = function(value) Settings.HideAlertFrame = value LUIE.SetupAlertFrameVisibility() end,
+        width = "full",
+        default = Defaults.HideAlertFrame,
     }
 
     -- Toggle XP Bar popup

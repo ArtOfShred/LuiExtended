@@ -36,6 +36,10 @@ local strings = {
     SI_LUIE_DEFAULT_FRAME_PLAYER_INTERACTION =           "Player Interaction Prompt",
     SI_LUIE_DEFAULT_FRAME_ACTIVE_COMBAT_TIPS =           "Активные боевые советы",
     SI_LUIE_DEFAULT_FRAME_SYNERGY =                      "Синергия",
+    SI_LUIE_DEFAULT_FRAME_ALERTS =                       "Alert Text",
+    SI_LUIE_DEFAULT_FRAME_COMPASS =                      "Compass Frame",
+    SI_LUIE_DEFAULT_FRAME_PLAYER_PROGRESS =              "Experience/Champion Bar",
+    SI_LUIE_DEFAULT_FRAME_CSA =                          "Center Screen Announcements",
     SI_LUIE_DISMISS_PET =                                "|cBFBFBFВы отозвали |r<<1>>|cBFBFBF.|r",
 
     -- Bindings

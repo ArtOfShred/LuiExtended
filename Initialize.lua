@@ -83,6 +83,9 @@ local function OnAddonOnLoaded(eventCode, addonName)
     -- Initialize Hooks
     LUIE.InitializeHooks()
 
+    -- Toggle Alert Frame Visibility if needed
+    LUIE.SetupAlertFrameVisibility()
+
     LUIE.PlayerNameRaw = GetRawUnitName("player")
     LUIE.PlayerNameFormatted = zo_strformat(SI_UNIT_NAME, GetUnitName("player"))
     LUIE.PlayerDisplayName = zo_strformat(SI_UNIT_NAME, GetUnitDisplayName("player"))
