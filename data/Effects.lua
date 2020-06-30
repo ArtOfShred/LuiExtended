@@ -2090,6 +2090,14 @@ Effects.AddNameAura = {
     [Unitnames.Boss_Desert_Lion] = { [1] = { id = 33097, zone = { [22] = true }, } },-- Desert Lion
     [Unitnames.Boss_Quintus_Verres] = { [1] = { id = 33097 } }, -- Quintus Verres
     [Unitnames.Boss_Monstrous_Gargoyle] = { [1] = { id = 33097 } }, -- Monstrous Gargoyle
+    [Unitnames.Boss_Boilbite] = { [1] = { id = 33097 } }, -- Boilbite
+    [Unitnames.Boss_Boilbites_Assassin_Beetle] = { [1] = { id = 33097 } }, -- Boilbite's Assassin Beetle
+    [Unitnames.Boss_Unstable_Construct] = { [1] = { id = 33097 } }, -- Unstable Construct
+    [Unitnames.Boss_Unstable_Dwarven_Spider] = { [1] = { id = 33097, zone = { [22] = true }, } },-- Unstable Dwarven Spider
+    [Unitnames.Boss_Tremorscale] = { [1] = { id = 33097 } }, -- Tremorscale
+    [Unitnames.Boss_The_Guardians_Strength] = { [1] = { id = 33097 } }, -- The Guardian's Strength
+    [Unitnames.Boss_The_Guardians_Spark] = { [1] = { id = 33097 } }, -- The Guardian's Spark
+    [Unitnames.Boss_The_Guardians_Soul] = { [1] = { id = 33097 } }, -- The Guardian's Soul
 
     -- Frostvault
     [Unitnames.NPC_Coldsnap_Ogre] = { [1] = { id = 33097 } }, -- Coldsnap Ogre
@@ -2482,6 +2490,12 @@ Effects.EffectOverrideByName = {
     [4769] = { -- Choking Pollen (Lurcher)
         [Unitnames.Boss_Limbscather] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Limbscather (Glenumbra)
     },
+    [5278] = { -- Bite (Assassin Beetle)
+        [Unitnames.Boss_Boilbite] = { icon = 'LuiExtended/media/icons/abilities/ability_shalk_bite.dds' }, -- Boilbite (Volenfell)
+    },
+    [91791] = { -- Feast (Assassin Beetle)
+        [Unitnames.Boss_Boilbite] = { icon = 'LuiExtended/media/icons/abilities/ability_shalk_feast.dds' }, -- Boilbite (Volenfell)
+    },
 
     -- CYRODIIL
     [64674] = { -- Cyrodiil Guard See Stealth
@@ -2517,6 +2531,7 @@ Effects.EffectOverrideByName = {
          [Unitnames.NPC_Honor_Guard_DC]                     = { icon = 'LuiExtended/media/icons/abilities/ability_spell_honor_guard_rage_dc.dds' }, -- Covenant Honor Gaurd
          [Unitnames.NPC_Honor_Guard_EP]                     = { icon = 'LuiExtended/media/icons/abilities/ability_spell_honor_guard_rage_ep.dds' }, -- Pact Honor Guard
     },
+
     -- QUESTS
     [37028] = {
         [Unitnames.NPC_Auroran_Battlemage] =      { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds', name = Abilities.Skill_Quick_Strike }, -- Quick Strike (Auroran Battlemage)
@@ -8785,7 +8800,7 @@ Effects.EffectOverride = {
     [51735] = { icon = 'LuiExtended/media/icons/abilities/ability_assassinbeetle_laceration.dds', name = Abilities.Skill_Lacerate }, -- Bleeding (Assassin Beetle)
     [5268] = { icon = 'LuiExtended/media/icons/abilities/ability_assassinbeetle_collywobbles.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 20 }, -- Collywobbles (Assassin Beetle)
     [91789] = { hide = true }, -- Ambush (Assassin Beetle)
-    [91791] = { icon = 'LuiExtended/media/icons/abilities/ability_assassinbeetle_feast.dds', tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 0.5 }, -- Feast (Assassin Beetle)
+    [91791] = { icon = 'LuiExtended/media/icons/abilities/ability_assassinbeetle_feast.dds', hide = true }, -- Feast (Assassin Beetle)
     [13680] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_poison_damage.dds', tooltip = Tooltips.Generic_AOE_Poison, tooltipValue2 = 0.5, groundLabel = true }, -- Acid Blood (Assassin Beetle)
     [6754] = { icon = 'LuiExtended/media/icons/abilities/ability_scorpion_pincer.dds' }, -- Pincer (Giant Scorpion)
     [6755] = { icon = 'LuiExtended/media/icons/abilities/ability_scorpion_sting.dds' }, -- Sting (Giant Scorpion)
@@ -9755,7 +9770,13 @@ Effects.EffectOverride = {
     [32246] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_steam.dds', name = Abilities.Trap_Steam_Vent, tooltip = Tooltips.Generic_AOE_Snare_Fire, tooltipValue2 = 0.75, tooltipValue3 = 50, groundLabel = true, unbreakable = 1, hideGround = true }, -- Searing Steam (Steam Trap) -- Stros M'Kai
 
     [26039] = { hide = true }, -- Vent Steam (Steam Vent) -- Volenfell
-    [26040] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_steam_pipe.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.5 }, -- Steam Blast (Steam Vent) -- Volenfell
+    [26040] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_steam_pipe.dds', name = Abilities.Trap_Steam_Vent, groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.5 }, -- Steam Blast (Steam Vent) -- Volenfell
+    [26088] = { hide = true }, -- Vent Steam (Steam Vent) -- Volenfell
+    [26089] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_steam_pipe.dds', name = Abilities.Trap_Steam_Vent, groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.5 }, -- Steam Blast (Steam Vent) -- Volenfell
+    [26090] = { hide = true }, -- Vent Steam (Steam Vent) -- Volenfell
+    [26091] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_steam.dds', name = Abilities.Trap_Steam_Vent, groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.5 }, -- Steam Blast (Steam Vent) -- Volenfell
+    [26076] = { hide = true }, -- Vent Steam (Steam Vent) -- Volenfell
+    [26077] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_steam.dds', name = Abilities.Trap_Steam_Vent, groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.5 }, -- Steam Blast (Steam Vent) -- Volenfell
 
     -- Elinhir Private Arena
     [117428] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava_trap.dds', name = Abilities.Trap_Lava_Trap }, -- Lava Eruption (Lava Trap)
@@ -12829,6 +12850,44 @@ Effects.EffectOverride = {
     [25222] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_quake.dds' }, -- Heaving Quake (Monstrous Gargoyle)
     [25223] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_quake.dds' }, -- Heaving Quake (Monstrous Gargoyle)
 
+    [24930] = { hide = true }, -- Tail Swipe (Tremorscale)
+
+    [25672] = { icon = 'LuiExtended/media/icons/abilities/ability_shalk_flame_burst.dds' }, -- Flame Burst (Boilbite)
+    [25674] = { icon = 'LuiExtended/media/icons/abilities/ability_shalk_flame_burst.dds' }, -- Flame Burst (Boilbite)
+    [25675] = { icon = 'LuiExtended/media/icons/abilities/ability_shalk_flame_burst.dds' }, -- Flame Burst (Boilbite)
+    [25676] = { icon = 'LuiExtended/media/icons/abilities/ability_shalk_flame_burst.dds' }, -- Flame Burst (Boilbite)
+    [25677] = { icon = 'LuiExtended/media/icons/abilities/ability_shalk_flame_burst.dds' }, -- Flame Burst (Boilbite)
+
+    [25655] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensphere_explosive_bolt.dds', hide = true }, -- Explosive Bolt (Unstable Construct)
+    [25659] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensphere_explosive_bolt.dds', name = Abilities.Skill_Explosive_Bolt, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Explosive_Bolt }, -- Countdown (Unstable Construct)
+    [25660] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensphere_explosive_bolt_explosion.dds', name = Abilities.Skill_Explosive_Bolt }, -- Explosion (Unstable Construct)
+
+
+    [24857] = { icon = 'LuiExtended/media/icons/abilities/ability_duneripper_crushing_chomp.dds' }, -- Bite (Tremorscale)
+
+    [24744] = { icon = 'LuiExtended/media/icons/abilities/ability_duneripper_hemorrhaging_tear.dds' }, -- Hemorrhaging Tear (Tremorscale)
+    [24748] = { icon = 'LuiExtended/media/icons/abilities/ability_duneripper_hemorrhaging_tear.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Hemorrhaging_Tear, tooltipValue2 = 2, stackMax = 3 }, -- Hemorrhaging Tear (Tremorscale)
+
+    [24777] = { icon = 'LuiExtended/media/icons/abilities/ability_duneripper_sweep.dds' }, -- Tail Swipe (Tremorscale)
+    [24780] = { icon = 'LuiExtended/media/icons/abilities/ability_duneripper_sweep.dds', name = Abilities.Skill_Tail_Swipe, unbreakable = 1, hide = true }, -- Fire Backlash (Tremorscale)
+    [24781] = { icon = 'LuiExtended/media/icons/abilities/ability_duneripper_sweep.dds', name = Abilities.Skill_Tail_Swipe, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- CON_Knockback&Knockdown (Tremorscale)
+
+    [29165] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds' }, -- Rupture (Tremorscale)
+    [29164] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds' }, -- Rupture (Tremorscale)
+    [29167] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds', name = Abilities.Skill_Rupture }, -- Dummy (Tremorscale)
+    [29163] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds', name = Abilities.Skill_Rupture, unbreakable = 1 }, -- Staggering Roar (Tremorscale)
+    [29166] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds', name = Abilities.Skill_Rupture, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- CON_Knockback&Knockdown (Tremorscale)
+
+    [25229] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_barrage_function.dds', hide = true }, -- Barrage Function (The Guardian's Spark)
+    [44113] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_barrage_function.dds' }, -- Barrage Function (The Guardian's Spark)
+
+    [25262] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_hammer_strike.dds' }, -- Hammer Strike (The Guardian's Soul)
+    [58657] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_hammer_strike.dds' }, -- Hammer Strike (The Guardian's Soul)
+
+    [25263] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_decapitation.dds' }, -- Decapitation Function (The Guardian's Soul)
+    [25265] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_decapitation.dds', unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Decapitation Function (The Guardian's Soul)
+    [25264] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_decapitation.dds', unbreakable = 1 }, -- Decapitation Function (The Guardian's Soul)
+
     -- temporary gap here just for ease of editing
     -- temporary gap here just for ease of editing
     -- temporary gap here just for ease of editing
@@ -13214,6 +13273,8 @@ Effects.FakeExternalDebuffs = {
     [25649] = { duration = 4000, ignoreBegin = true }, -- Debilitating Roar (Desert Lion)
     [46314] = { duration = 2500 }, -- CON_Knockback&Knockdown (Monstrous Gargoyle)
     [42930] = { duration = 6000 }, -- Petrifying Bellow (Monstrous Gargoyle)
+    [29166] = { duration = 2000 }, -- CON_Knockback&Knockdown (Tremorscale)
+    [25265] = { duration = 2000 }, -- Decapitation Function (The Guardian's Soul)
 
     -- Frostvault
     [117486] = { duration = 18000 }, -- Bleed (Coldsnap Goblin - Shared)
@@ -13687,6 +13748,9 @@ Effects.AddGroundDamageAura = {
     [32245] = { duration = 2000, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Searing Steam (Steam Trap) -- Stros M'Kai
 
     [26040] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Steam Blast (Steam Vent) -- Volenfell
+    [26089] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Steam Blast (Steam Vent) -- Volenfell
+    [26091] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Steam Blast (Steam Vent) -- Volenfell
+    [26077] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Steam Blast (Steam Vent) -- Volenfell
 
     --------------------
     -- NPC

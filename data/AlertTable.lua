@@ -113,7 +113,7 @@ LUIE.Data.AlertTable = {
     [137148] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 2500, cc = LUIE_CC_TYPE_STUN }, -- Veiled Strike (Nightblade)
     [44345] = { block = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = LUIE_CC_TYPE_STUN, duration = 600, bossMatch = { Unitnames.Boss_Dogas_the_Berserker } }, -- Soul Tether (Nightblade)
 
-    [34742] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Fiery Breath (Dragonknight)
+    [34742] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 1200 }, -- Fiery Breath (Dragonknight)
     [34646] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1800 }, -- Lava Whip (Dragonknight)
     [44227] = { avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, bossMatch = { Unitnames.Boss_Jahlasri, Unitnames.Boss_Dugan_the_Red } }, -- Dragonknight Standard (Dragonknight - Elite)
     [52041] = { block = true, dodge = true, priority = 2, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1667, cc = LUIE_CC_TYPE_STUN, bossMatch = { Unitnames.Boss_Jahlasri } }, -- Blink Strike (Dragonknight - Elite)
@@ -231,7 +231,7 @@ LUIE.Data.AlertTable = {
     [4591] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 970, hideIfNoSource = true }, -- Sweep (Crocodile)
     [4594] = { power = true, auradetect = true, priority = 2, ignoreRefresh = true, refire = 500 }, -- Ancient Skin (Crocodile)
 
-    [8977] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1721 }, -- Sweep (Duneripper)
+    [8977] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1721 }, -- Sweep (Duneripper)
 
     [7227] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1100 }, -- Rotbone (Durzog)
 
@@ -574,9 +574,9 @@ LUIE.Data.AlertTable = {
     [103931] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1333, cc = LUIE_CC_TYPE_STUN }, -- Luminescent Mark (Yaghra Spewer)
 
     -- DWEMER
-    [16031] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1000 }, -- Ricochet Wave (Dwemer Sphere)
-    [7520] = { block = true, bs = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1267 }, -- Steam Wall (Dwemer Sphere)
-    [7544] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1000 }, -- Quake (Dwemer Sphere)
+    [16031] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1000, bossMatch = { Unitnames.Boss_Unstable_Construct } }, -- Ricochet Wave (Dwemer Sphere)
+    [7520] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1267 }, -- Steam Wall (Dwemer Sphere)
+    [7544] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1000, bossMatch = { Unitnames.Boss_Unstable_Construct } }, -- Quake (Dwemer Sphere)
 
     [11247] = { block = true, dodge = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000, cc = LUIE_CC_TYPE_STUN }, -- Sweeping Spin (Dwemer Centurion)
     [11246] = { avoid = true, priority = 2, eventdetect = true, refire = 2000, result = ACTION_RESULT_BEGIN, duration = 3500 }, -- Steam Breath (Dwemer Centurion)
@@ -898,7 +898,6 @@ LUIE.Data.AlertTable = {
     [54809] = { interrupt = true, priority = 1, auradetect = true }, -- Dark Deal (Dark Mage)
 
     -- Stage 8 - Steamworks
-    [25211] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Whirlwind Function (Dwarven Fire Centurion)
     [54841] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Ice Charge (Dwarven Ice Centurion)
     [56065] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, noSelf = true }, -- Ice Charge (Dwarven Ice Centurion)
     [72180] = { avoid = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = Unitnames.NPC_Dwarven_Sphere }, -- Electric Wave (Dwarven Sphere)
@@ -1324,6 +1323,18 @@ LUIE.Data.AlertTable = {
     [25227] = { block = true, avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = Unitnames.Boss_Monstrous_Gargoyle, duration = 2100, cc = LUIE_CC_TYPE_STUN }, -- Petrifying Bellow (Monstrous Gargoyle)
     [25222] = { block = true, avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = Unitnames.Boss_Monstrous_Gargoyle, duration = 6100, refire = 5000 }, -- Heaving Quake (Monstrous Gargoyle)
 
+    [25672] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 4000 }, -- Flame Burst (Boilbite)
+    [25655] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 700 }, -- Explosive Bolt (Unstable Construct)
+    [25659] = { avoid = true, priority = 1, auradetect = true, result = ACTION_RESULT_BEGIN, duration = 1500, noSelf = true }, -- Countdown (Unstable Construct)
+
+    [24777] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = Unitnames.Boss_Tremorscale, duration = 1500, cc = LUIE_CC_TYPE_UNBREAKABLE }, -- Tail Swipe (Tremorscale)
+    [29167] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, fakeName = Unitnames.Boss_Tremorscale, duration = 1800, cc = LUIE_CC_TYPE_UNBREAKABLE }, -- Dummy (Tremorscale)
+
+    [25211] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Whirlwind Function (The Guardian's Strength)
+    [25229] = { avoid = true, priority = 1, auradetect = true }, -- Barrage Function (Centurion Champion)
+    [25262] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 1950 }, -- Hammer Strike (The Guardian's Soul)
+    [25263] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 2000, cc = LUIE_CC_TYPE_UNBREAKABLE }, -- Decapitation Function (The Guardian's Soul)
+
     -- Frostvault
     [109574] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 3250 }, -- Fire Power (Coldsnap Harrier)
     [117352] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Whirlwind (Coldsnap Snowstalker)
@@ -1442,6 +1453,7 @@ LUIE.Data.AlertZoneOverride = {
         -- DUNGEONS
         [176] = Unitnames.NPC_Dremora_Kynval, -- City of Ash I
         [681] = Unitnames.NPC_Dremora_Kynval, -- City of Ash 2
+        [22] = Unitnames.NPC_Imperial_Overseer, -- Volenfell
 
     },
 
@@ -1454,6 +1466,7 @@ LUIE.Data.AlertZoneOverride = {
         [131] = Unitnames.NPC_Sea_Viper_Healer, -- Tempest Island
         [58] = Unitnames.NPC_Sea_Viper_Healer, -- Tempest Island
         [932] = Unitnames.NPC_Spiderkith_Cauterizer, -- Crypt of Hearts II
+        [22] = Unitnames.NPC_Treasure_Hunter_Healer, -- Volenfell
     },
 
     [35151] = { -- Spell Absorption (Spirit Mage)
@@ -1733,6 +1746,7 @@ LUIE.Data.AlertZoneOverride = {
         [935] = Unitnames.NPC_Dremora_Kyngald, -- Banished Cells II
         [126] = Unitnames.NPC_Darkfern_Flamerender, -- Elden Hollow I
         [176] = Unitnames.NPC_Scamp, -- City of Ash I
+        [22] = Unitnames.NPC_Treasure_Hunter_Incendiary, -- Volenfell
     },
     [15164] = { -- Heat Wave (Fire Mage)
 
@@ -1761,6 +1775,7 @@ LUIE.Data.AlertZoneOverride = {
         [126] = Unitnames.NPC_Darkfern_Flamerender, -- Elden Hollow I
         [681] = Unitnames.NPC_Dremora_Kyngald, -- City of Ash II
         [932] = Unitnames.NPC_Spiderkith_Cauterizer, -- Crypt of Hearts II
+        [22] = Unitnames.NPC_Treasure_Hunter_Incendiary, -- Volenfell
     },
     [47095] = { -- Fire Rune (Fire Mage)
 
@@ -1789,6 +1804,7 @@ LUIE.Data.AlertZoneOverride = {
         [126] = Unitnames.NPC_Darkfern_Flamerender, -- Elden Hollow I
         [681] = Unitnames.NPC_Dremora_Kyngald, -- City of Ash II
         [932] = Unitnames.NPC_Spiderkith_Cauterizer, -- Crypt of Hearts II
+        [22] = Unitnames.NPC_Treasure_Hunter_Incendiary, -- Volenfell
     },
 
     [8779] = { -- Lightning Onslaught (Spider Daedra)
@@ -2089,11 +2105,28 @@ LUIE.Data.AlertZoneOverride = {
         [534] = Unitnames.NPC_Wolf, -- Stros M'Kai
     },
 
-    [7520] = {-- Steam Wall (Dwemer Sphere)
+    [16031] = {-- Steam Wall (Dwemer Sphere)
+        -- QUESTS
         [534] = Unitnames.Elite_Tempered_Sphere, -- Stros M'Kai
+
+        -- DUNGEONS
+        [22] = Unitnames.NPC_Dwarven_Sphere, -- Volenfell
     },
     [7544] = { -- Quake (Dwemer Sphere)
+        -- QUESTS
         [534] = Unitnames.Elite_Tempered_Sphere, -- Stros M'Kai
+
+        -- DUNGEONS
+        [22] = Unitnames.NPC_Dwarven_Sphere, -- Volenfell
+    },
+
+    [11247] = { -- Sweeping Spin (Dwemer Centurion)
+        -- DUNGEONS
+        [22] = Unitnames.NPC_Dwarven_Centurion, -- Volenfell
+    },
+    [11246] = { -- Steam Breath (Dwemer Centurion)
+        -- DUNGEONS
+        [22] = Unitnames.NPC_Dwarven_Centurion, -- Volenfell
     },
 
     [135612] = { -- Frost Wave (Matron Urgala)
@@ -2115,6 +2148,20 @@ LUIE.Data.AlertZoneOverride = {
     [88409] = { -- Raise the Earth (Beastcaller)
         [1160] = Unitnames.NPC_Icereach_Beastcaller, -- Deepwood Vale (Greymoor)
     },
+    [8977] = { -- Sweep (Duneripper)
+        -- DUNGEONS
+        [22] = Unitnames.NPC_Duneripper, -- Volenfell
+    },
+
+    [25211] = { -- Whirlwind Function (The Guardian's Strength)
+        -- DUNGEONS
+        [22] = Unitnames.Boss_The_Guardians_Strength, -- Volenfell
+    },
+    [25262] = { -- Hammer Strike (The Guardian's Soul)
+    -- DUNGEONS
+        [22] = Unitnames.Boss_The_Guardians_Strength, -- Volenfell
+    },
+
 }
 
 -- Map Name override - Sometimes we need to use GetMapName() instead of Location Name or ZoneId

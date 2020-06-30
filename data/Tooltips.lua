@@ -1469,6 +1469,10 @@ LUIE.Data.Tooltips = {
     Skill_Blood_Lust                                = GetString(SI_LUIE_SKILL_BLOOD_LUST_TP),
     Skill_Resist_Necrosis                           = GetString(SI_LUIE_SKILL_RESIST_NECROSIS_TP),
 
+    -- Volenfell
+    Skill_Explosive_Bolt                            = GetString(SI_LUIE_SKILL_EXPLOSIVE_BOLT_TP),
+    Skill_Hemorrhaging_Tear                         = GetString(SI_LUIE_SKILL_HEMORRHAGING_TEAR_TP),
+
     -- Frostvault
     Skill_Maim                                      = GetString(SI_LUIE_SKILL_MAIM_NPC_TP),
 

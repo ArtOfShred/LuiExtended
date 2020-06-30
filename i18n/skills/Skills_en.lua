@@ -1416,6 +1416,8 @@ local strings = {
     SI_LUIE_SKILL_MIGHTY_SWING =                         "Mighty Swing",
     SI_LUIE_SKILL_FLAME_WRAITH =                         "Flame Wraith",
     SI_LUIE_SKILL_GARGOYLE_LEAP =                        "Gargoyle Leap",
+    SI_LUIE_SKILL_EXPLOSIVE_BOLT_TP =                    "After |cFFFFFF<<1>>|r <<1[second/seconds]>>, the explosive bolt detonates, dealing Flame Damage to you and allies within |cFFFFFF5|r meters.",
+    SI_LUIE_SKILL_HEMORRHAGING_TEAR_TP =                 "Afflicted with Bleed Damage every |cFFFFFF<<2>>|r <<2[second/seconds]>> for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nStacks up to |cFFFFFF3|r times, dealing |cFFFFFF50|r% more damage for each stack above the initial application.",
 
     -- Keep Upgrade
     SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_RANGE =              "Longer Range on Ranged Guards",

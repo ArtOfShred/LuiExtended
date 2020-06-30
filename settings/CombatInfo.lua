@@ -388,17 +388,21 @@ function CombatInfo.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWFRACTIONSABOVETEN)),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWFRACTIONSABOVETEN)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWFRACTIONSABOVETEN_TP),
                 getFunc = function() return Settings.BarMillisAboveTen end,
                 setFunc = function(value) Settings.BarMillisAboveTen = value end,
                 width = "full",
                 default = Defaults.BarMillisAboveTen,
                 disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.BarShowLabel and Settings.BarMillis) end,
-            },            
+            },
             {
                 type = "divider",
                 width = "full",
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CI_BACKBAR_HEADER),
             },
             {
                 type = "description",

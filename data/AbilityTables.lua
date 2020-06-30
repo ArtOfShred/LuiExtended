@@ -1411,6 +1411,9 @@ local AbilityTables = {
     Skill_Flame_Wraith                = GetString(SI_LUIE_SKILL_FLAME_WRAITH),
     Skill_Burning_Ground              = 25143,
     Skill_Gargoyle_Leap               = GetString(SI_LUIE_SKILL_GARGOYLE_LEAP),
+    Skill_Explosive_Bolt              = 25655,
+    Skill_Tail_Swipe                  = 24777,
+    Skill_Rupture                     = 29164,
 
     -- Frostvault
     Skill_Rending_Bleed               = 117286,

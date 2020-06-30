@@ -8089,6 +8089,12 @@ LUIE.DebugAuras = {
 
     [26039] = true, -- Vent Steam (Steam Vent) -- Volenfell
     [26040] = true, -- Steam Blast (Steam Vent) -- Volenfell
+    [26088] = true, -- Vent Steam (Steam Vent) -- Volenfell
+    [26089] = true, -- Steam Blast (Steam Vent) -- Volenfell
+    [26090] = true, -- Vent Steam (Steam Vent) -- Volenfell
+    [26091] = true, -- Steam Blast (Steam Vent) -- Volenfell
+    [26076] = true, -- Vent Steam (Steam Vent) -- Volenfell
+    [26077] = true, -- Steam Blast (Steam Vent) -- Volenfell
 
     -- Elinhir Private Arena
     [117429] = true, -- Lava Eruption (Lava Trap)
@@ -15989,6 +15995,7 @@ LUIE.DebugAuras = {
     [53076] = true, -- VDUN-CoH Final Spell React
 
     -- Volenfell
+    [85798] = true, -- Teleport
     [25649] = true, -- Debilitating Roar (Desert Lion)
     [26707] = true, -- BCrucible-Wave Spawner Leap (Quintus Verres)
     [25038] = true, -- Slash (Quintus Verres)
@@ -16032,6 +16039,70 @@ LUIE.DebugAuras = {
     [25222] = true, -- Heaving Quake (Monstrous Gargoyle)
     [25223] = true, -- Heaving Quake (Monstrous Gargoyle)
     [27318] = true, -- Heaving Quake (Monstrous Gargoyle)
+
+    [64230] = true, -- Axe (Dwarven Centurion)
+    [24930] = true, -- Tail Swipe (Tremorscale)
+    [25639] = true, -- Dummy (Tremorscale)
+    [24961] = true, -- Rupture (Tremorscale)
+
+    [25672] = true, -- Flame Burst (Boilbite)
+    [25673] = true, -- Counter (Boilbite)
+    [25674] = true, -- Flame Burst (Boilbite)
+    [25675] = true, -- Flame Burst (Boilbite)
+    [25676] = true, -- Flame Burst (Boilbite)
+    [25677] = true, -- Flame Burst (Boilbite)
+
+    [25650] = true, -- PFXdummy (Tremorscale)
+    [25652] = true, -- Speed (Tremorscale)
+    [25679] = true, -- Intro 3 (Tremorscale)
+    [25688] = true, -- Dummy (Tremorscale)
+    [25689] = true, -- Dummy (Tremorscale)
+
+    [25655] = true, -- Explosive Bolt (Unstable Construct)
+    [25659] = true, -- Countdown (Unstable Construct)
+    [25660] = true, -- Explosion (Unstable Construct)
+
+    [24857] = true, -- Bite (Tremorscale)
+    [24744] = true, -- Hemorrhaging Tear (Tremorscale)
+    [24748] = true, -- Hemorrhaging Tear (Tremorscale)
+    [24750] = true, -- Hemorrhaging Tear (Tremorscale)
+
+    [24777] = true, -- Tail Swipe (Tremorscale)
+    [24780] = true, -- Fire Backlash (Tremorscale)
+    [24781] = true, -- CON_Knockback&Knockdown (Tremorscale)
+
+    [24901] = true, -- Rupture Find (Tremorscale)
+    [25426] = true, -- Addsummon (Tremorscale)
+    [25434] = true, -- Rupture (Tremorscale)
+    [29165] = true, -- Rupture (Tremorscale)
+    [29167] = true, -- Dummy (Tremorscale)
+
+    [29164] = true, -- Rupture (Tremorscale)
+    [29163] = true, -- Staggering Roar (Tremorscale)
+    [29166] = true, -- CON_Knockback&Knockdown (Tremorscale)
+
+    --[60312] = true, -- Taunt Immne (The Guardian's Strength)
+
+    [25229] = true, -- Barrage Function (The Guardian's Spark)
+    [44118] = true, -- Barrage Function (The Guardian's Spark)
+    [44116] = true, -- Barrage Function (The Guardian's Spark)
+    [44117] = true, -- Barrage Function (The Guardian's Spark)
+    [44115] = true, -- Barrage Function (The Guardian's Spark)
+    [44113] = true, -- Barrage Function (The Guardian's Spark)
+
+    [25221] = true, -- Green (The Guardian's Soul)
+    [25262] = true, -- Hammer Strike (The Guardian's Soul)
+    [58657] = true, -- Hammer Strike (The Guardian's Soul)
+    [25263] = true, -- Decapitation Function (The Guardian's Soul)
+    [25265] = true, -- Decapitation Function (The Guardian's Soul)
+    [25264] = true, -- Decapitation Function (The Guardian's Soul)
+    [25273] = true, -- Equilibrium Function (The Guardian's Soul)
+    [25274] = true, -- Equilibrium Function (The Guardian's Soul)
+    [25538] = true, -- Equilibrium Function (The Guardian's Soul)
+    [25539] = true, -- Equilibrium Function (The Guardian's Soul)
+    [25540] = true, -- Equilibrium Function (The Guardian's Soul)
+    [25545] = true, -- Equilibrium Function (The Guardian's Soul)
+    [25546] = true, -- Equilibrium Function (The Guardian's Soul)
 
     -- Frostvault
     [115316] = true, -- Weatherman

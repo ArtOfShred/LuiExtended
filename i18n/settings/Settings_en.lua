@@ -1109,6 +1109,7 @@ local strings = {
     SI_LUIE_LAM_CI_BAR_ULTIMATE_TP =                     "Highlights currently active ultimate abilities on the ability bar for their active duration. This will hide the percentage label for the duration of the effect when enabled.",
     SI_LUIE_LAM_CI_BACKBAR_ENABLE =                      "Display Back Bar and Track Skills",
     SI_LUIE_LAM_CI_BACKBAR_ENABLE_TP =                   "Displays your back bar abilities above the normal ability bar and tracks the duration of active effects on your back bar.",
+    SI_LUIE_LAM_CI_BACKBAR_HEADER =                      "Back Bar Tracking",
     SI_LUIE_LAM_CI_BACKBAR_NOTE =                        "You may need to adjust the position of your default or custom Unit Frames to compensate for the extra space taken up by the back bar, or you can move the ability bar by unlocking default UI elements in the base LuiExtended options menu.",
     SI_LUIE_LAM_CI_BACKBAR_DARK =                        "Back Bar - Darken Inactive Slots",
     SI_LUIE_LAM_CI_BACKBAR_DARK_TP =                     "Set back bar abilities that are not currently active to darken.",
