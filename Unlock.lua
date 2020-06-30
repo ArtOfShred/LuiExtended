@@ -72,6 +72,11 @@ function LUIE.SetElementPosition()
                 k:ClearAnchors()
                 k:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, x, y)
             end
+
+            -- Fix the Objective Capture Meter fill alignment
+            if k == ZO_ObjectiveCaptureMeter then
+                ZO_ObjectiveCaptureMeterFrame:SetAnchor(BOTTOM, ZO_ObjectiveCaptureMeter, BOTTOM, 0, 0)
+            end
         end
     end
 end
