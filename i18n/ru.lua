@@ -36,7 +36,49 @@ local strings = {
     SI_LUIE_DEFAULT_FRAME_PLAYER_INTERACTION =           "Player Interaction Prompt",
     SI_LUIE_DEFAULT_FRAME_ACTIVE_COMBAT_TIPS =           "Активные боевые советы",
     SI_LUIE_DEFAULT_FRAME_SYNERGY =                      "Синергия",
+    SI_LUIE_DEFAULT_FRAME_ALERTS =                       "Alert Text",
+    SI_LUIE_DEFAULT_FRAME_COMPASS =                      "Compass Frame",
+    SI_LUIE_DEFAULT_FRAME_PLAYER_PROGRESS =              "Experience/Champion Bar",
+    SI_LUIE_DEFAULT_FRAME_CSA =                          "Center Screen Announcements",
     SI_LUIE_DISMISS_PET =                                "|cBFBFBFВы отозвали |r<<1>>|cBFBFBF.|r",
+
+    -- Pet Names (Sorcerer)
+    SI_LUIE_PET_NAME_UNSTABLE_FAMILIAR =                "Familiar",
+    SI_LUIE_PET_NAME_CLANNFEAR =                        "Clannfear",
+    SI_LUIE_PET_NAME_VOLATILE_FAMILIAR =                "Volatile Familiar",
+    SI_LUIE_PET_NAME_WINGED_TWILIGHT =                  "Winged Twilight",
+    SI_LUIE_PET_NAME_TWILIGHT_TORMENTOR =               "Twilight Tormentor",
+    SI_LUIE_PET_NAME_TWILIGT_MATRIARCH =                "Twilight Matriarch",
+    SI_LUIE_PET_NAME_SUMMON_STORM_ATRONACH =            "Summoned Storm Atronach",
+    SI_LUIE_PET_NAME_GREATER_STORM_ATRONACH =           "Greater Storm Atronach",
+    SI_LUIE_PET_NAME_CHARGED_ATRONACH =                 "Charged Atronach",
+
+    -- Pet Names (Warden)
+    SI_LUIE_PET_NAME_FERAL_GUARDIAN =                   "Feral Guardian",
+    SI_LUIE_PET_NAME_ETERNAL_GUARDIAN =                 "Eternal Guardian",
+    SI_LUIE_PET_NAME_WILD_GUARDIAN =                    "Wild Guardian",
+
+    -- Pet Names (Necromancer)
+    SI_LUIE_PET_NAME_SKELETAL_MAGE =                    "Skeletal Mage",
+    SI_LUIE_PET_NAME_SKELETAL_ARCHER =                  "Skeletal Archer",
+    SI_LUIE_PET_NAME_SKELETAL_ARCANIST =                "Skeletal Arcanist",
+    SI_LUIE_PET_NAME_SPIRIT_MENDER =                    "Spirit Mender",
+    SI_LUIE_PET_NAME_SPIRIT_GUARDIAN =                  "Spirit Guardian",
+    SI_LUIE_PET_NAME_INTENSIVE =                        "Intensive Mender",
+
+    -- Pet Names (Sets)
+    SI_LUIE_PET_NAME_ENGINE_GUARDIAN =                  "Dwarven Sphere",
+    SI_LUIE_PET_NAME_MAW_OF_THE_INFERNAL =              "Daedroth",
+    SI_LUIE_PET_NAME_SHADOWREND =                       "Shadowrend",
+    SI_LUIE_PET_NAME_SENTINEL_OF_RKUGAMZ =              "Dwemer Spider",
+    SI_LUIE_PET_NAME_MORKULDIN_SWORD =                  "Morkuldin Sword",
+
+    -- Pet Names (Assistants)
+    SI_LUIE_PET_NAME_ASSISTANT_EZABI =                  "Ezabi",
+    SI_LUIE_PET_NAME_ASSISTANT_FEZEZ =                  "Fezez",
+    SI_LUIE_PET_NAME_ASSISTANT_PIRHARRI =               "Pirharri the Smuggler",
+    SI_LUIE_PET_NAME_ASSISTANT_NUZHIMEH =               "Nuzhimeh",
+    SI_LUIE_PET_NAME_ASSISTANT_TYTHIS =                 "Tythis",
 
     -- Bindings
     SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Призвать Банкира (Tythis)",

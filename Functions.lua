@@ -9,6 +9,11 @@ function LUIE.UpdateTimeStampColor()
     LUIE.TimeStampColorize = ZO_ColorDef:New(unpack(LUIE.ChatAnnouncements.SV.TimeStampColor)):ToHex()
 end
 
+-- Toggle the display of the Alert Frame
+function LUIE.SetupAlertFrameVisibility()
+    ZO_AlertTextNotification:SetHidden(LUIE.SV.HideAlertFrame)
+end
+
 -- Return a formatted time
 -- Stolen from pChat, thanks @Ayantir
 function LUIE.CreateTimestamp(timeStr, formatStr)

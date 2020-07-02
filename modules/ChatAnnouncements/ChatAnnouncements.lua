@@ -9421,7 +9421,7 @@ function ChatAnnouncements.HookFunction()
             local messageP2 = antiquityLink
             local messageP3 = AntiquityColorize:Colorize(" " .. ChatAnnouncements.SV.Antiquities.AntiquitySuffix)
             local finalMessage = zo_strformat("<<1>><<2>><<3>>", messageP1, messageP2, messageP3)
-            g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "ACHIEVEMENT" }
+            g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "ANTIQUITY" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
         end
@@ -10813,6 +10813,13 @@ function ChatAnnouncements.PrintQueuedMessages()
     for i=1, #g_queuedMessages do
         if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "LOOT" then
             ChatAnnouncements.ResolveItemMessage(g_queuedMessages[i].message, g_queuedMessages[i].formattedRecipient, g_queuedMessages[i].color, g_queuedMessages[i].logPrefix, g_queuedMessages[i].totalString, g_queuedMessages[i].groupLoot )
+        end
+    end
+
+    -- Resolve achievement update messages second to last
+    for i=1, #g_queuedMessages do
+        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "ANTIQUITY" then
+            printToChat(g_queuedMessages[i].message)
         end
     end
 

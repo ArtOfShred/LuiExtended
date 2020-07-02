@@ -77,7 +77,7 @@ LUIE.Data.AlertTable = {
     --------------------------------------------------
 
     -- Shared
-    [39058] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = LUIE_CC_TYPE_UNBREAKABLE }, -- Bear Trap (Bear Trap)
+    --[39058] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = LUIE_CC_TYPE_UNBREAKABLE }, -- Bear Trap (Bear Trap)
 
     -- Synergy
     [12439] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 2500, duration = 1800, postCast = 4000 }, -- Burning Arrow (Synergy)
@@ -410,7 +410,7 @@ LUIE.Data.AlertTable = {
     [8205] = { interrupt = true, priority = 3, auradetect = true, duration = 6000 }, -- Regeneration (Ogrim)
     [24690] = { block = true, dodge = true, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = LUIE_CC_TYPE_STUN }, -- Focused Charge (Ogrim)
     [91848] = { dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1970, cc = LUIE_CC_TYPE_SNARE }, -- Stomp (Ogrim)
-    [91855] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000, cc = LUIE_CC_TYPE_STAGGER }, -- Boulder Toss (Ogrim)
+    [91855] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000, cc = LUIE_CC_TYPE_STAGGER, postCast = 1000 }, -- Boulder Toss (Ogrim)
 
     [6166] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Heat Wave (Scamp)
     [6160] = { avoid = true, interrupt = true, priority = 3, auradetect = true, duration = 5000 }, -- Rain of Fire (Scamp)

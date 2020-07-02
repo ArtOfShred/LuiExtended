@@ -9439,9 +9439,6 @@ LUIE.DebugAuras = {
     [91851] = true, -- Stomp -- Ogrim
     [91855] = true, -- Boulder Toss -- Ogrim
     [127629] = true, -- Boulder Toss -- Ogrim
-    [91870] = true, -- Boulder Toss -- Ogrim
-    [91872] = true, -- Boulder Toss -- Ogrim
-    [91873] = true, -- Boulder Toss -- Ogrim
     [127630] = true, -- Boulder Toss -- Ogrim
 
     [6158] = true, -- Flare -- Scamp
