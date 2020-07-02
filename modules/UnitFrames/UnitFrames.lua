@@ -339,6 +339,19 @@ local function CreateDecreasedArmorOverlay( parent, small )
     return control
 end
 
+function UnitFrames.AddCurrentPetsToCustomList(list)
+    for i = 1, 7 do
+        local unitTag = "playerpet" .. i
+        if DoesUnitExist(unitTag) then
+            local unitName = GetUnitName(unitTag)
+            if unitName ~= "" and unitName ~= nil then
+                UnitFrames.AddToCustomList(list, unitName)
+            end
+        end
+    end
+end
+
+
 -- Bulk list add from menu buttons
 function UnitFrames.AddBulkToCustomList(list, table)
     if table ~= nil then
@@ -1942,7 +1955,6 @@ function UnitFrames.CustomPetUpdate()
     local petList = {}
 
     -- First we query all pet unitTag for existence and save them to local list
-    -- At the same time we will calculate how many group members we have and then will hide rest of custom control elements
     local n = 1 -- counter used to reference custom frames. it always continuous while games unitTag could have gaps
     for i = 1, 7 do
         local unitTag = "playerpet" .. i
