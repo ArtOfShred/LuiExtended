@@ -9151,11 +9151,11 @@ Effects.EffectOverride = {
     [48256] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_boulder_toss.dds' }, -- Boulder Toss (Troll - Ranged)
     [48257] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_boulder_toss.dds' }, -- Boulder Toss (Troll - Ranged)
     [50387] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_boulder_toss.dds', tooltip = Tooltips.Generic_Knockdown }, -- Boulder Toss (Troll - Ranged)
-    [48282] = { icon = 'esoui/art/icons/achievement_update11_dungeons_029.dds' }, -- Consuming Omen (Troll - Ranged)
+    [48282] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_consuming_omen.dds' }, -- Consuming Omen (Troll - Ranged)
 
-    [48287] = { icon = 'esoui/art/icons/achievement_update11_dungeons_029.dds', hide = true, tooltip = Tooltips.Skill_Consuming_Omen_Snare }, -- Consuming Omen (Troll - Ranged)
-    [48294] = { icon = 'esoui/art/icons/achievement_update11_dungeons_029.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Consuming_Omen }, -- Consuming Omen (Troll - Ranged)
-    [48297] = { icon = 'esoui/art/icons/achievement_update11_dungeons_029.dds' }, -- Consuming Omen (Troll - Ranged)
+    [48287] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_consuming_omen.dds', hide = true, tooltip = Tooltips.Skill_Consuming_Omen_Snare }, -- Consuming Omen (Troll - Ranged)
+    [48294] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_consuming_omen.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Consuming_Omen }, -- Consuming Omen (Troll - Ranged)
+    [48297] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_consuming_omen.dds' }, -- Consuming Omen (Troll - Ranged)
 
     [4304] = { icon = 'LuiExtended/media/icons/abilities/ability_wisp_assault.dds' }, -- Assault (Wisp)
     [18634] = { icon = 'LuiExtended/media/icons/abilities/ability_wisp_assault.dds' }, -- Assault (Wisp)
