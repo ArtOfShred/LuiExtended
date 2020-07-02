@@ -7,6 +7,9 @@ You can submit any issues or feature requests in the [Github Issues Section][2],
 What I need feedback on:
 ------
 
+### Localization
+- You can find more information about translating LUI to other languages in the [README.md][5] in the i18n folder.
+
 ### General
 - Report if you don't like the icon style or find the quality of a custom icon for an NPC spell lacking.
 
@@ -26,3 +29,4 @@ What I need feedback on:
 [2]: https://github.com/ArtOfShred/LuiExtended/issues
 [3]: https://www.esoui.com/downloads/info818-LuiExtended.html#comments
 [4]: mailto:artofshred@artofshred.net
+[5]: https://github.com/ArtOfShred/LuiExtended/blob/master/i18n/README.md
