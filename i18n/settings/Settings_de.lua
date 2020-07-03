@@ -1505,6 +1505,8 @@ local strings = {
     SI_LUIE_LAM_UF_WHITELIST_ADD_SETS_TP =               "Add Engine Guardian, Maw of the Infernal, Morkuldin, Sentinel of Rkugamz, and Shadowrend to the whitelist.",
     SI_LUIE_LAM_UF_WHITELIST_ADD_ASSISTANTS =            "Add Assistants",
     SI_LUIE_LAM_UF_WHITELIST_ADD_ASSISTANTS_TP =         "Add Ezabi, Fezez, Pirharri, Nuzhimeh, and Tythis to the whitelist.",
+    SI_LUIE_LAM_UF_WHITELIST_ADD_CURRENT =               "Add Currently Active Pets",
+    SI_LUIE_LAM_UF_WHITELIST_ADD_CURRENT_TP =            "Add any currently active pets to the whitelist including assistants. This option is useful if localization is not yet done for the language you are using, or you are using an addon like RuESO that changes the way Pet Unit Names display.",
     SI_LUIE_LAM_UF_WHITELIST_CLEAR =                     "Clear Whitelist",
     SI_LUIE_LAM_UF_WHITELIST_CLEAR_TP =                  "Remove all entries from the whitelist.",
 

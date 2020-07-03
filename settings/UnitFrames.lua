@@ -1867,6 +1867,16 @@ function UnitFrames.CreateSettings()
                 func = function() UnitFrames.AddBulkToCustomList(Settings.whitelist, PetNames.Assistants) LUIE_WhitelistUF:UpdateChoices(GenerateCustomList(Settings.whitelist)) UnitFrames.CustomPetUpdate() end,
                 width = "half",
             },
+
+            -- Add All Currently Active Pets
+            {
+                type = "button",
+                name = GetString(SI_LUIE_LAM_UF_WHITELIST_ADD_CURRENT),
+                tooltip = GetString(SI_LUIE_LAM_UF_WHITELIST_ADD_CURRENT_TP),
+                func = function() UnitFrames.AddCurrentPetsToCustomList(Settings.whitelist) LUIE_WhitelistUF:UpdateChoices(GenerateCustomList(Settings.whitelist)) UnitFrames.CustomPetUpdate() end,
+                width = "half",
+            },
+
             -- Clear Whitelist
             {
                 type = "button",
