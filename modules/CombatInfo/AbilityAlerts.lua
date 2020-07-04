@@ -1049,10 +1049,7 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
             if interrupt then
                 local color = AbilityAlerts.AlertColors.alertColorInterrupt
                 stringInterrupt = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, Settings.formats.alertInterrupt, spacer)
-            else
-                stringInterrupt = ""
-            end
-            if shouldusecc then
+            elseif shouldusecc then
                 local color = AbilityAlerts.AlertColors.alertColorInterrupt
                 stringInterrupt = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, Settings.formats.alertShouldUseCC, spacer)
             else

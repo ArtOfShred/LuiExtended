@@ -3441,6 +3441,38 @@ Effects.StatusEffectIconTable = {
     [130809] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_concussion.dds', normalize = 'esoui/art/icons/ability_debuff_minor_vulnerability.dds' }, -- Minor Vulnerability (Shock Status Effect - Siege)
 }
 
+Effects.MajorMinorIconTable = {
+    [76617] = { icon = 'esoui/art/icons/ability_buff_minor_erosion.dds', normalize = 'esoui/art/icons/ability_warrior_025.dds' }, -- Minor Slayer (of the Infallible Aether)
+    [98103] = { icon = 'esoui/art/icons/ability_buff_minor_erosion.dds', normalize = 'esoui/art/icons/ability_warrior_025.dds' }, -- Minor Slayer (of the Vicious Ophidian)
+    [98102] = { icon = 'esoui/art/icons/ability_buff_minor_erosion.dds', normalize = 'esoui/art/icons/ability_warrior_025.dds' }, -- Minor Slayer (of Alkosh)
+
+    [93120] = { icon = 'esoui/art/icons/ability_buff_major_erosion.dds', normalize = 'esoui/art/icons/procs_006.dds' }, -- Major Slayer (Master Architect)
+    [93442] = { icon = 'esoui/art/icons/ability_buff_major_erosion.dds', normalize = 'esoui/art/icons/procs_006.dds' }, -- Major Slayer (War Machine)
+    [121871] = { icon = 'esoui/art/icons/ability_buff_major_erosion.dds', normalize = 'esoui/art/icons/procs_006.dds' }, -- Major Slayer (Lokkestiiz's)
+    [135923] = { icon = 'esoui/art/icons/ability_buff_major_erosion.dds', normalize = 'esoui/art/icons/procs_006.dds' }, -- Major Slayer (Roaring Opportunist's)
+    [137986] = { icon = 'esoui/art/icons/ability_buff_major_erosion.dds', normalize = 'esoui/art/icons/procs_006.dds' }, -- Major Slayer (Roaring Opportunist's Perfected)
+
+    [76618] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_aegis.dds', normalize = 'esoui/art/icons/ability_warrior_030.dds' }, -- Minor Aegis (Eternal Yokeda)
+
+    [93444] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_aegis.dds', normalize = 'esoui/art/icons/procs_004.dds' }, -- Major Aegis (Automated Defense)
+    [93125] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_aegis.dds', normalize = 'esoui/art/icons/procs_004.dds' }, -- Major Aegis (Inventor's Guard)
+    [135926] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_aegis.dds', normalize = 'esoui/art/icons/procs_004.dds' }, -- Major Aegis (Vrol's)
+    [137989] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_aegis.dds', normalize = 'esoui/art/icons/procs_004.dds' }, -- Major Aegis (Vrol's Perfect)
+
+    [88492] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds', normalize = 'esoui/art/icons/achievement_031.dds' }, -- Minor Toughness (Maturation - Rank 1)
+    [88509] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds', normalize = 'esoui/art/icons/achievement_031.dds' }, -- Minor Toughness (Maturation - Rank 2)
+    [92762] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds', normalize = 'esoui/art/icons/achievement_031.dds' }, -- Minor Toughness (Warrior-Poet's)
+    [120020] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds', normalize = 'esoui/art/icons/achievement_031.dds' }, -- Minor Toughness (Target Iron Atronach, Trial)
+
+    [137348] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_courage.dds', normalize = 'esoui/art/icons/ability_mage_045.dds' }, -- Minor Courage (Pack Leader)
+    [121878] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_courage.dds', normalize = 'esoui/art/icons/ability_mage_045.dds' }, -- Minor Courage (Yolnakriin's)
+
+    [66902] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds', normalize = 'esoui/art/icons/ability_mage_045.dds' }, -- Major Courage (Spell Power Cure)
+    [109994] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds', normalize = 'esoui/art/icons/ability_mage_045.dds' }, -- Major Courage (Olirime's)
+    [110020] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds', normalize = 'esoui/art/icons/ability_mage_045.dds' }, -- Major Courage (Olirime's Perfect)
+    [120015] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds', normalize = 'esoui/art/icons/ability_mage_045.dds' }, -- Spell Power Cure (Target Iron Atronach, Trial)
+}
+
 --------------------------------------------------------------------------------------------------------------------------------
 -- Override various information displayed for Effect auras
 --------------------------------------------------------------------------------------------------------------------------------

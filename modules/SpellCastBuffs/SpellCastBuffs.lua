@@ -148,6 +148,7 @@ SpellCastBuffs.Defaults = {
     GenericPotion                       = false,
     GenericPoison                       = true,
     GenericStatusEffect                 = false,
+    GenericMajorMinor                   = false,
 }
 SpellCastBuffs.SV = nil
 
@@ -499,6 +500,15 @@ function SpellCastBuffs.RegisterDebugEvents()
         eventManager:RegisterForEvent(moduleName .. "AuthorDebugEffect", EVENT_EFFECT_CHANGED, SpellCastBuffs.AuthorEffectDebug)
     end
 
+end
+
+-- Bulk list add from menu buttons
+function SpellCastBuffs.AddBulkToCustomList(list, table)
+    if table ~= nil then
+        for k, v in pairs(table) do
+            SpellCastBuffs.AddToCustomList(list, k)
+        end
+    end
 end
 
 -- List Handling (Add) for Prominent Auras & Blacklist
@@ -3671,6 +3681,24 @@ function SpellCastBuffs.UpdateStatusEffectList(menu)
     -- Minimize the amount of iterating we need to do, we only need to toggle back if we're disabling the setting from the menu.
     elseif menu and not LUIE.SpellCastBuffs.SV.GenericStatusEffect then
         for k, v in pairs(Effects.StatusEffectIconTable) do
+            if v.icon then
+                Effects.EffectOverride[k].icon = v.icon
+            end
+        end
+    end
+end
+
+-- Called from the menu and on initialize to build major/minor generic icon overrides.
+function SpellCastBuffs.UpdateMajorMinorList(menu)
+    if LUIE.SpellCastBuffs.SV.GenericMajorMinor then
+        for k, v in pairs(Effects.MajorMinorIconTable) do
+            if v.normalize then
+                Effects.EffectOverride[k].icon = v.normalize
+            end
+        end
+    -- Minimize the amount of iterating we need to do, we only need to toggle back if we're disabling the setting from the menu.
+    elseif menu and not LUIE.SpellCastBuffs.SV.GenericMajorMinor then
+        for k, v in pairs(Effects.MajorMinorIconTable) do
             if v.icon then
                 Effects.EffectOverride[k].icon = v.icon
             end

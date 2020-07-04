@@ -4,6 +4,7 @@
 --]]
 
 local SpellCastBuffs = LUIE.SpellCastBuffs
+local BlacklistPresets = LUIE.Data.AbilityBlacklistPresets
 
 local zo_strformat = zo_strformat
 
@@ -1022,6 +1023,17 @@ function SpellCastBuffs.CreateSettings()
                 default = Defaults.GenericStatusEffect,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
+            {
+                -- Slayer/Courage Etc Use Default
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_GENERIC_MAJOR_MINOR),
+                tooltip = GetString(SI_LUIE_LAM_GENERIC_MAJOR_MINOR_TP),
+                getFunc = function() return Settings.GenericMajorMinor end,
+                setFunc = function(value) Settings.GenericMajorMinor = value SpellCastBuffs.UpdateMajorMinorList(true) SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = Defaults.GenericMajorMinor,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
        },
     }
 
@@ -1340,6 +1352,49 @@ function SpellCastBuffs.CreateSettings()
                 type = "description",
                 text = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_DESCRIPT),
             },
+
+
+            -- Add Minor Buffs
+            {
+                type = "button",
+                name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MINOR_BUFF),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MINOR_BUFF_TP),
+                func = function() SpellCastBuffs.AddBulkToCustomList(Settings.BlacklistTable, BlacklistPresets.MinorBuffs) LUIE_Blacklist:UpdateChoices(GenerateCustomList(Settings.BlacklistTable)) end,
+                width = "half",
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
+            },
+
+            -- Add Major Buffs
+            {
+                type = "button",
+                name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MAJOR_BUFF),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MAJOR_BUFF_TP),
+                func = function() SpellCastBuffs.AddBulkToCustomList(Settings.BlacklistTable, BlacklistPresets.MajorBuffs) LUIE_Blacklist:UpdateChoices(GenerateCustomList(Settings.BlacklistTable)) end,
+                width = "half",
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
+            },
+
+            -- Add Minor Debuffs
+            {
+                type = "button",
+                name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MINOR_DEBUFF),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MINOR_DEBUFF_TP),
+                func = function() SpellCastBuffs.AddBulkToCustomList(Settings.BlacklistTable, BlacklistPresets.MinorDebuffs) LUIE_Blacklist:UpdateChoices(GenerateCustomList(Settings.BlacklistTable)) end,
+                width = "half",
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
+            },
+
+            -- Add Major Debuffs
+            {
+                type = "button",
+                name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MAJOR_DEBUFF),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MAJOR_DEBUFF_TP),
+                func = function() SpellCastBuffs.AddBulkToCustomList(Settings.BlacklistTable, BlacklistPresets.MajorDebuffs) LUIE_Blacklist:UpdateChoices(GenerateCustomList(Settings.BlacklistTable)) end,
+                width = "half",
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
+            },
+
+
             {
                 -- Buffs & Debuffs Blacklist (Add)
                 type = "editbox",

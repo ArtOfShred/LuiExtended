@@ -341,6 +341,16 @@ local strings = {
     SI_LUIE_LAM_GENERIC_POISON_TP =                      "Where applicable poisons will use their respective Major/Minor effect icon instead of using a custom icon.",
     SI_LUIE_LAM_GENERIC_STATUS =                         "Status Effects - Use Major/Minor Icons",
     SI_LUIE_LAM_GENERIC_STATUS_TP =                      "Where applicable status effects will use their respective Major/Minor effect icon instead of using a custom icon.",
+    SI_LUIE_LAM_GENERIC_MAJOR_MINOR =                    "Use Default Major & Minor Slayer/Aegis/etc Icons",
+    SI_LUIE_LAM_GENERIC_MAJOR_MINOR_TP =                 "When enabled, use the default icons for Major/Minor Slayer, Aegis, Courage, and Toughness.",
+    SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MINOR_BUFF =          "Add Minor Buffs",
+    SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MINOR_BUFF_TP =       "Add all Minor Buffs (except Minor Courage, Slayer, and Aegis) to the blacklist.",
+    SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MAJOR_BUFF =          "Add Major Buffs",
+    SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MAJOR_BUFF_TP =       "Add all Major Buffs (except Major Berserk, Force, Protection, Courage, Slayer, and Aegis) to the blacklist.",
+    SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MINOR_DEBUFF =        "Add Minor Debuffs",
+    SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MINOR_DEBUFF_TP =     "Add all Minor Debuffs to the blacklist.",
+    SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MAJOR_DEBUFF =        "Add Major Debuffs",
+    SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MAJOR_DEBUFF_TP =     "Add all Major Debuffs (except Major Maim and Vulnerability) to the blacklist.",
 
     -- Module: Chat Announcements
     SI_LUIE_LAM_CA_ENABLE =                              "Chat Announcements Module",
