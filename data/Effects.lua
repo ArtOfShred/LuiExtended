@@ -479,6 +479,18 @@ Effects.DebuffDisplayOverrideId = {
     -- Werewolf
     [127161] = true, -- Lunge (Pack Leader)
 
+}
+
+-- These will always show regardless of the menu setting since they may indicate important information (self applied debuffs on enemy NPCs)
+Effects.DebuffDisplayOverrideIdAlways = {
+
+    ----------------------------------------------------------------
+    -- BASIC -----------------------------------------------
+    ----------------------------------------------------------------
+
+    [134599] = true, -- Off Balance Immunity
+    [132831] = true, -- Major Vulnerability Invulnerability
+
     ----------------------------------------------------------------
     -- NPC ABILITIES -----------------------------------------------
     ----------------------------------------------------------------
