@@ -415,8 +415,6 @@ Effects.DebuffDisplayOverrideId = {
     ----------------------------------------------------------------
 
     -- Basic (Shared)
-    [134599] = true, -- Off Balance Immunity
-    [132831] = true, -- Major Vulnerability Invulnerability
     [16593] = true, -- Melee Snare
     [2727] = true, -- Off-Balance
 
@@ -513,6 +511,7 @@ Effects.DebuffDisplayOverrideId = {
 
     -- Maelstrom Arena
     [72450] = true, -- Interrupted (Troll Breaker)
+
 }
 
 --------------------------------------------------------------------------------------------------------------------------------

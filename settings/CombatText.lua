@@ -167,6 +167,14 @@ function CombatText.CreateSettings()
                 text = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_DESCRIPT),
             },
             {
+                -- Clear Blacklist
+                type = "button",
+                name = GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR),
+                tooltip = GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_TP),
+                func = function() CombatText.ClearCustomList(Settings.blacklist) LUIE_BlacklistCT:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,
+                width = "half",
+            },
+            {
                 -- Combat Text Blacklist (Add)
                 type = "editbox",
                 name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST),

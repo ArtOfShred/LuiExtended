@@ -145,6 +145,10 @@ local strings = {
     SI_LUIE_LAM_BUFF_EXTEND_EXTRA_TP =                   "Enabling this will extend the settings for Extra or Consolidated Buffs to effects with only a single Major/Minor effect such as Blur, Shuffle, Molten Weapons.",
     SI_LUIE_LAM_BUFF_REDUCE =                            "Hide Duplicates in Paired Auras",
     SI_LUIE_LAM_BUFF_REDUCE_TP =                         "Some abilities have multiple effects with the same duration, for example: Burning Talons applies an equivalent duration DoT & Snare effect. Enabling this will hide one of these icons for this ability and others like it, reducing the amount of pollution in the buff/debuff containers.",
+    SI_LUIE_LAM_BUFF_ALWAYS_SHARED_EFFECTS =             "Always Show Useful Group Debuffs",
+    SI_LUIE_LAM_BUFF_ALWAYS_SHARED_EFFECTS_TP =          "By default only debuffs applied by YOU will display - Enabling this option will also show useful group debuffs such as Stagger, Crushing, Alkosh, Tremorscale etc... even when they are not applied by you.",
+    SI_LUIE_LAM_BUFF_ALWAYS_MAJOR_MINOR_EFFECTS =        "Always Show Major/Minor Debuffs",
+    SI_LUIE_LAM_BUFF_ALWAYS_MAJOR_MINOR_EFFECTS_TP =     "By default only debuffs applied by YOU will display - Enabling this option will also show all Major/Minor debuffs on a target even if they are not sourced from the player.\n\nNote: It is recommended you leave this setting enabled. If you disable this setting and another player overrides one of your Major/Minor debuffs, the debuff will disappear.",
     SI_LUIE_LAM_BUFF_SHOW_GROUND_DAMAGE =                "Display GROUND Damage/Healing Auras",
     SI_LUIE_LAM_BUFF_SHOW_GROUND_DAMAGE_TP =             "Display a buff indicator when you are standing in a hostile ground effect without any crowd control elements such as Arrow Barrage. Also shows for healing effects such as Cleansing Ritual.",
     SI_LUIE_LAM_BUFF_ICON_HEADER =                       "Icon Options",
@@ -1519,6 +1523,8 @@ local strings = {
     SI_LUIE_LAM_UF_WHITELIST_ADD_CURRENT_TP =            "Add any currently active pets to the whitelist including assistants. This option is useful if localization is not yet done for the language you are using, or you are using an addon like RuESO that changes the way Pet Unit Names display.",
     SI_LUIE_LAM_UF_WHITELIST_CLEAR =                     "Clear Whitelist",
     SI_LUIE_LAM_UF_WHITELIST_CLEAR_TP =                  "Remove all entries from the whitelist.",
+    SI_LUIE_LAM_UF_BLACKLIST_CLEAR =                     "Clear Blacklist",
+    SI_LUIE_LAM_UF_BLACKLIST_CLEAR_TP =                  "Remove all entries from the blacklist.",
 
     -- Module: Combat Text
     SI_LUIE_LAM_CT =                                     "Combat Text",

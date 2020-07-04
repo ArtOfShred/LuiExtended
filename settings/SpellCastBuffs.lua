@@ -234,6 +234,31 @@ function SpellCastBuffs.CreateSettings()
                 default = Settings.HideReduce,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
+
+            {
+                -- Always Show Shared Debuffs
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_ALWAYS_SHARED_EFFECTS),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_ALWAYS_SHARED_EFFECTS_TP),
+                getFunc = function() return Settings.ShowSharedEffects end,
+                setFunc = function(value) Settings.ShowSharedEffects = value SpellCastBuffs.UpdateDisplayOverrideIdList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = Defaults.ShowSharedEffects,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+
+            {
+                -- Always Show Major/Minor Debuffs
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_ALWAYS_MAJOR_MINOR_EFFECTS),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_ALWAYS_MAJOR_MINOR_EFFECTS_TP),
+                getFunc = function() return Settings.ShowSharedMajorMinor end,
+                setFunc = function(value) Settings.ShowSharedMajorMinor = value SpellCastBuffs.UpdateDisplayOverrideNameList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = Defaults.ShowSharedMajorMinor,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+
         },
     }
 
@@ -1352,8 +1377,6 @@ function SpellCastBuffs.CreateSettings()
                 type = "description",
                 text = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_DESCRIPT),
             },
-
-
             -- Add Minor Buffs
             {
                 type = "button",
@@ -1363,7 +1386,6 @@ function SpellCastBuffs.CreateSettings()
                 width = "half",
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-
             -- Add Major Buffs
             {
                 type = "button",
@@ -1373,7 +1395,6 @@ function SpellCastBuffs.CreateSettings()
                 width = "half",
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-
             -- Add Minor Debuffs
             {
                 type = "button",
@@ -1383,7 +1404,6 @@ function SpellCastBuffs.CreateSettings()
                 width = "half",
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-
             -- Add Major Debuffs
             {
                 type = "button",
@@ -1393,8 +1413,14 @@ function SpellCastBuffs.CreateSettings()
                 width = "half",
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-
-
+            {
+                -- Clear Blacklist
+                type = "button",
+                name = GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR),
+                tooltip = GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_TP),
+                func = function() SpellCastBuffs.ClearCustomList(Settings.BlacklistTable) LUIE_Blacklist:UpdateChoices(GenerateCustomList(Settings.BlacklistTable)) end,
+                width = "half",
+            },
             {
                 -- Buffs & Debuffs Blacklist (Add)
                 type = "editbox",
