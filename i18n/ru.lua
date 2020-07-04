@@ -43,7 +43,7 @@ local strings = {
     SI_LUIE_DISMISS_PET =                                "|cBFBFBFВы отозвали |r<<1>>|cBFBFBF.|r",
 
     -- Pet Names (Sorcerer)
-    SI_LUIE_PET_NAME_UNSTABLE_FAMILIAR =                "Familiar", --TODO: Translete
+    SI_LUIE_PET_NAME_UNSTABLE_FAMILIAR =                "Слуга",
     SI_LUIE_PET_NAME_CLANNFEAR =                        "Кланфир",
     SI_LUIE_PET_NAME_VOLATILE_FAMILIAR =                "Взрывной призванный слуга",
     SI_LUIE_PET_NAME_WINGED_TWILIGHT =                  "Крылатый сумрак",
@@ -55,7 +55,7 @@ local strings = {
 
     -- Pet Names (Warden)
     SI_LUIE_PET_NAME_FERAL_GUARDIAN =                   "Хищный страж",
-    SI_LUIE_PET_NAME_ETERNAL_GUARDIAN =                 "Eternal Guardian", --TODO: Translete
+    SI_LUIE_PET_NAME_ETERNAL_GUARDIAN =                 "Вечный защитник",
     SI_LUIE_PET_NAME_WILD_GUARDIAN =                    "Дикий страж",
 
     -- Pet Names (Necromancer)
@@ -63,14 +63,14 @@ local strings = {
     SI_LUIE_PET_NAME_SKELETAL_ARCHER =                  "Скелет-лучник",
     SI_LUIE_PET_NAME_SKELETAL_ARCANIST =                "Скелет-колдун",
     SI_LUIE_PET_NAME_SPIRIT_MENDER =                    "Призрачный лекарь",
-    SI_LUIE_PET_NAME_SPIRIT_GUARDIAN =                  "Spirit Guardian", --TODO: Translete
+    SI_LUIE_PET_NAME_SPIRIT_GUARDIAN =                  "Призрачный страж",
     SI_LUIE_PET_NAME_INTENSIVE =                        "Усиленный лекарь",
 
     -- Pet Names (Sets)
     SI_LUIE_PET_NAME_ENGINE_GUARDIAN =                  "Двемерская сфера",
     SI_LUIE_PET_NAME_MAW_OF_THE_INFERNAL =              "Даэдрот",
     SI_LUIE_PET_NAME_SHADOWREND =                       "Теневик",
-    SI_LUIE_PET_NAME_SENTINEL_OF_RKUGAMZ =              "Dwemer Spider", --TODO: Translete
+    SI_LUIE_PET_NAME_SENTINEL_OF_RKUGAMZ =              "Двемерский паук",
     SI_LUIE_PET_NAME_MORKULDIN_SWORD =                  "Меч моркулдин",
 
     -- Pet Names (Assistants)
@@ -81,10 +81,10 @@ local strings = {
     SI_LUIE_PET_NAME_ASSISTANT_TYTHIS =                 "Тифис Андромо",
 
     -- Bindings
-    SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Призвать Банкира (Tythis)",
-    SI_BINDING_NAME_LUIE_COMMAND_BANKER_CAT =            "Призвать Банкира (Ezabi)",
-    SI_BINDING_NAME_LUIE_COMMAND_MERCHANT =              "Призвать Торговца (Nuzhimeh)",
-    SI_BINDING_NAME_LUIE_COMMAND_MERCHANT_CAT =          "Призвать Торговца (Fezez)",
+    SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Призвать Банкира (Тифис)",
+    SI_BINDING_NAME_LUIE_COMMAND_BANKER_CAT =            "Призвать Банкира (Эзаби)",
+    SI_BINDING_NAME_LUIE_COMMAND_MERCHANT =              "Призвать Торговца (Нузима)",
+    SI_BINDING_NAME_LUIE_COMMAND_MERCHANT_CAT =          "Призвать Торговца (Фезез)",
     SI_BINDING_NAME_LUIE_COMMAND_FENCE =                 "Призвать Воровку",
     SI_BINDING_NAME_LUIE_DISMISS_PET =                   "Отозвать боевого питомца",
     SI_BINDING_NAME_LUIE_COMMAND_READY_CHECK =           "Запустить проверку готовности",
