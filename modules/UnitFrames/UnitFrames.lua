@@ -4414,9 +4414,7 @@ function UnitFrames.CustomFramesApplyLayoutPlayer(unhide)
 
             local altW = math.ceil(UnitFrames.SV.PlayerBarWidth * 2/3)
 
-            if not UnitFrames.SV.HideBarHealth then
-                phb.backdrop:SetDimensions( UnitFrames.SV.PlayerBarWidth, UnitFrames.SV.PlayerBarHeightHealth )
-            end
+            phb.backdrop:SetDimensions( UnitFrames.SV.PlayerBarWidth, UnitFrames.SV.PlayerBarHeightHealth )
             phb.backdrop:SetHidden(UnitFrames.SV.HideBarHealth)
 
             if phb.shieldbackdrop then
