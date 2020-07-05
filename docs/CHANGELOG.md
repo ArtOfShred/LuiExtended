@@ -1,3 +1,37 @@
+### Version 6.1.1
+
+General
+- A ton of additional Russian translation has been done by FAR474 including localizing pet names for the buttons in the Pet Unit Frames Options. If you notice any errors with translations, reach out to FAR747 on ESOUI!
+- Added Grainy Statusbar textures to the dropdown texture options for Unit Frames (thanks to saenic).
+- Updated icons/auras/alerts/etc for Volenfell as well as improved many enemy ability icons.
+- The option to unlock default UI elements has been expanded with the ability to move the Alerts Frame, Compass, and Experience Bar.
+- Fixed an issue where when moving the Objective Capture Meter frame, the objective fill for the frame wouldn't move with it.
+- Added an option to hide ALL alerts (that display by default in the upper right corner of the screen).
+
+Buffs & Debuffs
+- Added a toggle option under Position and Display Options for showing useful raid debuffs applied by other players (enabled by default to mimic the current behavior).
+- Added a toggle option under Position and Display Options for showing Major/Minor debuffs applied by other players (enabled by default to mimic the current behavior).
+- Added buttons under Buff & Debuff Blacklisting to separately add Major & Minor Buffs/Debuffs to the blacklist and a button to clear all entries in the ability blacklist.
+- Added a toggle option under Custom Icon & Normalization Options to use the default icons for Major & Minor Slayer/Aegis/Courage/Toughness instead of the custom LUIE icons.
+
+Chat Announcements
+- Fixed the order in which Antiquity announcements display in chat (after gold/loot but before collectibles/achievements).
+
+Combat Info
+- Bar Highlight: Expanded the ability to hide bar label fractions with an option to show fractions when the remaining duration is < 10 seconds and hide them above that duration. Thanks to saenic for implementing this feature!
+- Ability Alerts: Fixed an issue where interrupt alerts weren't showing (thanks to Niobiritzu for finding this issue).
+- Ability Alerts: Adjusted the alert for Boulder Toss (Ogrim) to have a slight post cast duration so it remains active while the rock hurtles toward your domepiece.
+- Ability Alerts: Hid the alert for the Bear Trap dropped by some NPCs since it was pretty much pointless.
+
+Combat Text
+- Added a button to clear all entries in the ability blacklist for Combat Text.
+
+Unit Frames
+- Added a button to add all of your CURRENTLY active pets to the whitelist for pet names. This option is useful if you are using an addon like RuESO that changes the way Pet Unit Names display.
+- Added toggle options to hide the Player Health Bar label and entirely hide the Player Health Bar. I don't recommend hiding the bar but you can still do it if you like.
+
+---
+
 ### Version 6.1.0
 
 General
