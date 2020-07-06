@@ -345,16 +345,16 @@ local strings = {
     SI_LUIE_LAM_GENERIC_POISON_TP =                      "Там, где это применимо, яд будет использовать стандартный значок эффекта Major/Minor вместо кастомного значка.",
     SI_LUIE_LAM_GENERIC_STATUS =                         "Статус эффект - Major/Minor иконки",
     SI_LUIE_LAM_GENERIC_STATUS_TP =                      "Там, где это применимо, статус эффект будет использовать стандартный значок эффекта Major/Minor вместо кастомного значка.",
-    SI_LUIE_LAM_GENERIC_MAJOR_MINOR =                    "Use Default Major & Minor Slayer/Aegis/etc Icons",
-    SI_LUIE_LAM_GENERIC_MAJOR_MINOR_TP =                 "When enabled, use the default icons for Major/Minor Slayer, Aegis, Courage, and Toughness.",
-    SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MINOR_BUFF =          "Add Minor Buffs",
-    SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MINOR_BUFF_TP =       "Add all Minor Buffs (except Minor Courage, Slayer, and Aegis) to the blacklist.",
-    SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MAJOR_BUFF =          "Add Major Buffs",
-    SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MAJOR_BUFF_TP =       "Add all Major Buffs (except Major Berserk, Force, Protection, Courage, Slayer, and Aegis) to the blacklist.",
-    SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MINOR_DEBUFF =        "Add Minor Debuffs",
-    SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MINOR_DEBUFF_TP =     "Add all Minor Debuffs to the blacklist.",
-    SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MAJOR_DEBUFF =        "Add Major Debuffs",
-    SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MAJOR_DEBUFF_TP =     "Add all Major Debuffs (except Major Maim and Vulnerability) to the blacklist.",
+    SI_LUIE_LAM_GENERIC_MAJOR_MINOR =                    "Use Default Major & Minor Slayer/Aegis/etc Icons", --TODO Translete
+    SI_LUIE_LAM_GENERIC_MAJOR_MINOR_TP =                 "When enabled, use the default icons for Major/Minor Slayer, Aegis, Courage, and Toughness.", --TODO Translete
+    SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MINOR_BUFF =          "Добавить Minor баффы",
+    SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MINOR_BUFF_TP =       "Добавляет все Minor баффы (кроме Minor Courage, Slayer и Aegis) в черный список.",
+    SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MAJOR_BUFF =          "Добавить Major баффы",
+    SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MAJOR_BUFF_TP =       "Добавляет все Major баффы (кроме Major Berserk, Force, Protection, Courage, Slayer, и Aegis) в черный список.",
+    SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MINOR_DEBUFF =        "Добавить Minor дебаффы",
+    SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MINOR_DEBUFF_TP =     "Добавляет все Minor дебаффы в черный список.",
+    SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MAJOR_DEBUFF =        "Добавить Major дебаффы",
+    SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MAJOR_DEBUFF_TP =     "Добавляет все Major дебаффы (кроме Major Maim и Vulnerability) в черный список.",
 
     -- Module: Chat Announcements
     SI_LUIE_LAM_CA_ENABLE =                              "Оповещения чата",

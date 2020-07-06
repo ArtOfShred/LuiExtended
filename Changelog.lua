@@ -9,7 +9,7 @@ local changelogMessages = {
     "|cFFA500LuiExtended Version 6.1.1|r",
     "",
     "|cFFFF00General:|r",
-    "[*] A ton of additional Russian translation has been done by FAR474 including localizing pet names for the buttons in the Pet Unit Frames Options. If you notice any errors with translations, reach out to FAR747 on ESOUI!",
+    "[*] A ton of additional Russian translation has been done by FAR747 including localizing pet names for the buttons in the Pet Unit Frames Options. If you notice any errors with translations, reach out to FAR747 on ESOUI!",
     "[*] Added Grainy Statusbar textures to the dropdown texture options for Unit Frames (thanks to saenic).",
     "[*] Updated icons/auras/alerts/etc for Volenfell as well as improved many enemy ability icons.",
     "[*] The option to unlock default UI elements has been expanded with the ability to move the Alerts Frame, Compass, and Experience Bar.",
