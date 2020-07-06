@@ -22,6 +22,8 @@ local moduleName = LUIE.name .. "SpellCastBuffs"
 
 local hidePlayerEffects = { } -- Table of Effects to hide on Player - generated on load or updated from Menu
 local hideTargetEffects = { } -- Table of Effects to hide on Target - generated on load or updated from Menu
+local debuffDisplayOverrideId = { } -- Table of Effects (by id) that should show on the target regardless of who applied them.
+local debuffDisplayOverrideName = { } -- Table of Effects (by name) that should show on the target regardless of who applied them.
 
 local windowTitles = {
     playerb             = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS),
@@ -148,6 +150,9 @@ SpellCastBuffs.Defaults = {
     GenericPotion                       = false,
     GenericPoison                       = true,
     GenericStatusEffect                 = false,
+    GenericMajorMinor                   = false,
+    ShowSharedEffects                   = true,
+    ShowSharedMajorMinor                = true,
 }
 SpellCastBuffs.SV = nil
 
@@ -377,9 +382,12 @@ function SpellCastBuffs.Initialize(enabled)
 
     SpellCastBuffs.Reset()
     SpellCastBuffs.UpdateContextHideList()
+    SpellCastBuffs.UpdateDisplayOverrideIdList()
+    SpellCastBuffs.UpdateDisplayOverrideNameList()
     SpellCastBuffs.UpdatePotionList()
     SpellCastBuffs.UpdatePoisonList()
     SpellCastBuffs.UpdateStatusEffectList()
+    SpellCastBuffs.UpdateMajorMinorList()
 
     -- Register events
     eventManager:RegisterForUpdate(moduleName, 100, SpellCastBuffs.OnUpdate )
@@ -499,6 +507,24 @@ function SpellCastBuffs.RegisterDebugEvents()
         eventManager:RegisterForEvent(moduleName .. "AuthorDebugEffect", EVENT_EFFECT_CHANGED, SpellCastBuffs.AuthorEffectDebug)
     end
 
+end
+
+-- Bulk list add from menu buttons
+function SpellCastBuffs.AddBulkToCustomList(list, table)
+    if table ~= nil then
+        for k, v in pairs(table) do
+            SpellCastBuffs.AddToCustomList(list, k)
+        end
+    end
+end
+
+function SpellCastBuffs.ClearCustomList(list)
+    local listRef = list == SpellCastBuffs.SV.BlacklistTable and GetString(SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST) or ""
+    for k, v in pairs(list) do
+        list[k] = nil
+    end
+    CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+    printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_CLEARED), listRef), true)
 end
 
 -- List Handling (Add) for Prominent Auras & Blacklist
@@ -1625,7 +1651,7 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
 
     -- If the source of the buff isn't the player or the buff is not on the AbilityId or AbilityName override list then we don't display it
     if unitTag ~= "player" then
-        if effectType == 2 and not (castByPlayer == 1) and not (Effects.DebuffDisplayOverrideId[abilityId] or Effects.DebuffDisplayOverrideName[effectName]) then
+        if effectType == 2 and not (castByPlayer == 1) and not (debuffDisplayOverrideId[abilityId] or debuffDisplayOverrideName[effectName]) then
             return
         end
     end
@@ -2999,6 +3025,12 @@ function SpellCastBuffs.AddNameAura()
         for k, v in ipairs(Effects.AddNameAura[unitName]) do
             local abilityName = GetAbilityName(v.id)
             local abilityIcon = GetAbilityIcon(v.id)
+
+            -- Bail out if this ability is blacklisted
+            if SpellCastBuffs.SV.BlacklistTable[v.id] or SpellCastBuffs.SV.BlacklistTable[abilityName] then
+                return
+            end
+
             stack = v.stack or 0
 
             local zone = v.zone
@@ -3027,7 +3059,16 @@ function SpellCastBuffs.AddNameAura()
             local abilityName = GetAbilityName(v.id)
             local abilityIcon = GetAbilityIcon(v.id)
             local zone = v.zone
+            -- Bail out of there is a zone requirement that is not met.
             if zone and GetZoneId(GetCurrentMapZoneIndex()) ~= zone then
+                return
+            end
+            -- Bail out if this ability is blacklisted
+            if SpellCastBuffs.SV.BlacklistTable[v.id] or SpellCastBuffs.SV.BlacklistTable[abilityName] then
+                return
+            end
+            -- Specific case for the Minor Magickasteal added onto the Target Iron Atronach, Trial
+            if v.id == 120012 and not SpellCastBuffs.SV.ShowSharedMajorMinor then
                 return
             end
             SpellCastBuffs.EffectsList.reticleover2[ "Name Specific Buff" .. k ] = {
@@ -3624,6 +3665,40 @@ function SpellCastBuffs.UpdateContextHideList()
     end
 end
 
+-- Called from the menu and on initialize to build the table of effects we should show regardless of source (by id).
+function SpellCastBuffs.UpdateDisplayOverrideIdList()
+    -- Clear the list
+    debuffDisplayOverrideId = { }
+
+    -- Add effects from table if enabled
+    if SpellCastBuffs.SV.ShowSharedEffects then
+        for k, v in pairs(Effects.DebuffDisplayOverrideId) do
+            debuffDisplayOverrideId[k] = v
+        end
+    end
+    -- Always show NPC self applied debuffs
+    for k, v in pairs(Effects.DebuffDisplayOverrideIdAlways) do
+        debuffDisplayOverrideId[k] = v
+    end
+end
+
+-- Called from the menu and on initialize to build the table of effects we should show regardless of source (by name).
+function SpellCastBuffs.UpdateDisplayOverrideNameList()
+
+    -- Clear the list
+    debuffDisplayOverrideName = { }
+
+    -- Add effects from table if enabled
+    if SpellCastBuffs.SV.ShowSharedMajorMinor then
+        for k, v in pairs(Effects.DebuffDisplayOverrideName) do
+            debuffDisplayOverrideName[k] = v
+        end
+    end
+    -- Always show Off Balance since a lot of Off Balance effects self apply
+    debuffDisplayOverrideName[Abilities.Skill_Off_Balance] = true
+
+end
+
 -- Called from the menu and on initialize to build potion effect generic icon overrides.
 function SpellCastBuffs.UpdatePotionList(menu)
     if LUIE.SpellCastBuffs.SV.GenericPotion then
@@ -3671,6 +3746,24 @@ function SpellCastBuffs.UpdateStatusEffectList(menu)
     -- Minimize the amount of iterating we need to do, we only need to toggle back if we're disabling the setting from the menu.
     elseif menu and not LUIE.SpellCastBuffs.SV.GenericStatusEffect then
         for k, v in pairs(Effects.StatusEffectIconTable) do
+            if v.icon then
+                Effects.EffectOverride[k].icon = v.icon
+            end
+        end
+    end
+end
+
+-- Called from the menu and on initialize to build major/minor generic icon overrides.
+function SpellCastBuffs.UpdateMajorMinorList(menu)
+    if LUIE.SpellCastBuffs.SV.GenericMajorMinor then
+        for k, v in pairs(Effects.MajorMinorIconTable) do
+            if v.normalize then
+                Effects.EffectOverride[k].icon = v.normalize
+            end
+        end
+    -- Minimize the amount of iterating we need to do, we only need to toggle back if we're disabling the setting from the menu.
+    elseif menu and not LUIE.SpellCastBuffs.SV.GenericMajorMinor then
+        for k, v in pairs(Effects.MajorMinorIconTable) do
             if v.icon then
                 Effects.EffectOverride[k].icon = v.icon
             end

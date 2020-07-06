@@ -110,6 +110,8 @@ UnitFrames.Defaults = {
     HideLabelMagicka                 = false,
     HideBarStamina                   = false,
     HideLabelStamina                 = false,
+    HideLabelHealth                  = false,
+    HideBarHealth                    = false,
     PlayerBarSpacing                 = 0,
     TargetBarHeight                  = 36,
     PlayerEnableYourname             = true,
@@ -705,6 +707,12 @@ local function CreateCustomFrames()
         }
 
         UnitFrames.CustomFrames.player.name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
+
+        -- If Health Label is hidden in menu optins, hide the health bar labels
+        if UnitFrames.SV.HideLabelHealth then
+            UnitFrames.CustomFrames.player[POWERTYPE_HEALTH].labelOne:SetHidden(true)
+            UnitFrames.CustomFrames.player[POWERTYPE_HEALTH].labelTwo:SetHidden(true)
+        end
 
         -- If Stamina Label is hidden in menu options, hide the stamina bar labels
         if UnitFrames.SV.HideLabelStamina then
@@ -4299,7 +4307,10 @@ function UnitFrames.CustomFramesApplyLayoutPlayer(unhide)
 
             local altW = math.ceil(UnitFrames.SV.PlayerBarWidth * 2/3)
 
-            phb.backdrop:SetDimensions( UnitFrames.SV.PlayerBarWidth, UnitFrames.SV.PlayerBarHeightHealth )
+            if not UnitFrames.SV.HideBarHealth then
+                phb.backdrop:SetDimensions( UnitFrames.SV.PlayerBarWidth, UnitFrames.SV.PlayerBarHeightHealth )
+            end
+            phb.backdrop:SetHidden(UnitFrames.SV.HideBarHealth)
 
             if not UnitFrames.SV.ReverseResourceBars then
                 pmb.backdrop:ClearAnchors()
@@ -4369,9 +4380,10 @@ function UnitFrames.CustomFramesApplyLayoutPlayer(unhide)
                 end
             end
             alt.backdrop:SetWidth( altW )
-
-            phb.labelOne:SetDimensions( UnitFrames.SV.PlayerBarWidth-50, UnitFrames.SV.PlayerBarHeightHealth-2 )
-            phb.labelTwo:SetDimensions( UnitFrames.SV.PlayerBarWidth-50, UnitFrames.SV.PlayerBarHeightHealth-2 )
+            if not UnitFrames.SV.HideLabelHealth then
+                phb.labelOne:SetDimensions( UnitFrames.SV.PlayerBarWidth-50, UnitFrames.SV.PlayerBarHeightHealth-2 )
+                phb.labelTwo:SetDimensions( UnitFrames.SV.PlayerBarWidth-50, UnitFrames.SV.PlayerBarHeightHealth-2 )
+            end
             if not UnitFrames.SV.HideLabelMagicka then
                 pmb.labelOne:SetDimensions( UnitFrames.SV.PlayerBarWidth-50, UnitFrames.SV.PlayerBarHeightMagicka-2 )
                 pmb.labelTwo:SetDimensions( UnitFrames.SV.PlayerBarWidth-50, UnitFrames.SV.PlayerBarHeightMagicka-2 )
@@ -4403,6 +4415,7 @@ function UnitFrames.CustomFramesApplyLayoutPlayer(unhide)
             local altW = math.ceil(UnitFrames.SV.PlayerBarWidth * 2/3)
 
             phb.backdrop:SetDimensions( UnitFrames.SV.PlayerBarWidth, UnitFrames.SV.PlayerBarHeightHealth )
+            phb.backdrop:SetHidden(UnitFrames.SV.HideBarHealth)
 
             if phb.shieldbackdrop then
                 phb.shieldbackdrop:ClearAnchors()
@@ -4437,8 +4450,10 @@ function UnitFrames.CustomFramesApplyLayoutPlayer(unhide)
             end
             alt.backdrop:SetWidth( altW )
 
-            phb.labelOne:SetDimensions( UnitFrames.SV.PlayerBarWidth-50, UnitFrames.SV.PlayerBarHeightHealth-2 )
-            phb.labelTwo:SetDimensions( UnitFrames.SV.PlayerBarWidth-50, UnitFrames.SV.PlayerBarHeightHealth-2 )
+            if not UnitFrames.SV.HideLabelHealth then
+                phb.labelOne:SetDimensions( UnitFrames.SV.PlayerBarWidth-50, UnitFrames.SV.PlayerBarHeightHealth-2 )
+                phb.labelTwo:SetDimensions( UnitFrames.SV.PlayerBarWidth-50, UnitFrames.SV.PlayerBarHeightHealth-2 )
+            end
             if not UnitFrames.SV.HideLabelMagicka then
                 pmb.labelOne:SetDimensions( UnitFrames.SV.PlayerBarWidth-50, UnitFrames.SV.PlayerBarHeightMagicka-2 )
                 pmb.labelTwo:SetDimensions( UnitFrames.SV.PlayerBarWidth-50, UnitFrames.SV.PlayerBarHeightMagicka-2 )
@@ -4470,6 +4485,7 @@ function UnitFrames.CustomFramesApplyLayoutPlayer(unhide)
             local altW = math.ceil(UnitFrames.SV.PlayerBarWidth * 2/3)
 
             phb.backdrop:SetDimensions( UnitFrames.SV.PlayerBarWidth, UnitFrames.SV.PlayerBarHeightHealth )
+            phb.backdrop:SetHidden(UnitFrames.SV.HideBarHealth)
 
             if not UnitFrames.SV.ReverseResourceBars then
                 pmb.backdrop:ClearAnchors()
@@ -4535,8 +4551,10 @@ function UnitFrames.CustomFramesApplyLayoutPlayer(unhide)
             player.buffAnchor:SetWidth( UnitFrames.SV.PlayerBarWidth )
             alt.backdrop:SetWidth( altW )
 
-            phb.labelOne:SetDimensions( UnitFrames.SV.PlayerBarWidth-50, UnitFrames.SV.PlayerBarHeightHealth-2 )
-            phb.labelTwo:SetDimensions( UnitFrames.SV.PlayerBarWidth-50, UnitFrames.SV.PlayerBarHeightHealth-2 )
+            if not UnitFrames.SV.HideLabelHealth then
+                phb.labelOne:SetDimensions( UnitFrames.SV.PlayerBarWidth-50, UnitFrames.SV.PlayerBarHeightHealth-2 )
+                phb.labelTwo:SetDimensions( UnitFrames.SV.PlayerBarWidth-50, UnitFrames.SV.PlayerBarHeightHealth-2 )
+            end
             if not UnitFrames.SV.HideLabelMagicka then
                 pmb.labelOne:SetDimensions( UnitFrames.SV.PlayerBarWidth-50, UnitFrames.SV.PlayerBarHeightMagicka-2 )
                 pmb.labelTwo:SetDimensions( UnitFrames.SV.PlayerBarWidth-50, UnitFrames.SV.PlayerBarHeightMagicka-2 )

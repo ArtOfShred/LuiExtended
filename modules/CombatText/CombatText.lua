@@ -347,6 +347,15 @@ local function SavePosition(panel)
     panelSettings.dimensions = dimensions
 end
 
+function CombatText.ClearCustomList(list)
+    local listRef = list == CombatText.SV.blacklist and GetString(SI_LUIE_CUSTOM_LIST_CT_BLACKLIST) or ""
+    for k, v in pairs(list) do
+        list[k] = nil
+    end
+    CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+    printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_CLEARED), listRef), true)
+end
+
 -- List Handling (Add) for Prominent Auras & Blacklist
 function CombatText.AddToCustomList(list, input)
     local id = tonumber(input)

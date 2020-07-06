@@ -1292,6 +1292,30 @@ function UnitFrames.CreateSettings()
                 disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer and ( Settings.PlayerFrameOptions == 1 or Settings.PlayerFrameOptions == 3 ) ) end,
             },
             {
+                -- Hide Player Health Bar Label
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_HP_NOLABEL),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_HP_NOLABEL_TP),
+                getFunc = function() return Settings.HideLabelHealth end,
+                setFunc = function(value) Settings.HideLabelHealth = value Settings.HideBarHealth = false end,
+                width = "full",
+                default = Defaults.HideLabelHealth,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer ) end,
+            },
+            {
+                 -- Hide Player Health Bar
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_HP_NOBAR)),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_HP_NOBAR_TP),
+                getFunc = function() return Settings.HideBarHealth end,
+                setFunc = function(value) Settings.HideBarHealth = value end,
+                width = "full",
+                default = Defaults.HideBarHealth,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer and Settings.HideLabelHealth ) end,
+            },
+            {
                 -- Hide Player Magicka Bar Label
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL),
