@@ -2776,7 +2776,9 @@ local isShopCollectible = {
     [GetCollectibleInfo(3)] = 3, -- Brown Paint Horse
     [GetCollectibleInfo(4)] = 4, -- Bay Dun Horse
     [GetCollectibleInfo(5)] = 5, -- Midnight Steed
+
     --[GetCollectibleInfo(4673)] = 4673, -- Storage Coffer, Fortified (From level up rewards)
+
     [GetCollectibleInfo(4674)] = 4674, -- Storage Chest, Fortified (Tel Var / Writ Vouchers)
     [GetCollectibleInfo(4675)] = 4675, -- Storage Coffer, Oaken (Tel Var / Writ Vouchers)
     [GetCollectibleInfo(4676)] = 4676, -- Storage Coffer, Secure (Tel Var / Writ Vouchers)
@@ -2784,6 +2786,46 @@ local isShopCollectible = {
     [GetCollectibleInfo(4678)] = 4678, -- Storage Chest, Oaken (Tel Var / Writ Vouchers)
     [GetCollectibleInfo(4679)] = 4679, -- Storage Chest, Secure (Tel Var / Writ Vouchers)
     [GetCollectibleInfo(4680)] = 4680, -- Storage Chest, Sturdy (Tel Var / Writ Vouchers)
+
+    [GetCollectibleInfo(6706)] = 6706, -- Emerald Indrik Feather
+    [GetCollectibleInfo(6707)] = 6707, -- Gilded Indrik Feather
+    [GetCollectibleInfo(6708)] = 6708, -- Onyx Indrik Feather
+    [GetCollectibleInfo(6709)] = 6709, -- Opaline Indrik Feather
+
+    [GetCollectibleInfo(6659)] = 6659, -- Dawnwood Berries of Bloom
+    [GetCollectibleInfo(6660)] = 6660, -- Dawnwood Berries of Budding
+    [GetCollectibleInfo(6661)] = 6661, -- Dawnwood Berries of Growth
+    [GetCollectibleInfo(6662)] = 6662, -- Dawnwood Berries of Ripeness
+
+    [GetCollectibleInfo(6694)] = 6694, -- Luminous Berries of Bloom
+    [GetCollectibleInfo(6695)] = 6695, -- Luminous Berries of Budding
+    [GetCollectibleInfo(6696)] = 6696, -- Luminous Berries of Growth
+    [GetCollectibleInfo(6697)] = 6697, -- Luminous Berries of Ripeness
+
+    [GetCollectibleInfo(6698)] = 6698, -- Onyx Berries of Bloom
+    [GetCollectibleInfo(6699)] = 6699, -- Onyx Berries of Budding
+    [GetCollectibleInfo(6700)] = 6700, -- Onyx Berries of Growth
+    [GetCollectibleInfo(6701)] = 6701, -- Onyx Berries of Ripeness
+
+    [GetCollectibleInfo(6702)] = 6702, -- Pure-Snow Berries of Bloom
+    [GetCollectibleInfo(6703)] = 6703, -- Pure-Snow Berries of Budding
+    [GetCollectibleInfo(6704)] = 6704, -- Pure-Snow Berries of Growth
+    [GetCollectibleInfo(6705)] = 6705, -- Pure-Snow Berries of Ripeness
+
+    [GetCollectibleInfo(7021)] = 7021, -- Spectral Berries of Bloom
+    [GetCollectibleInfo(7022)] = 7022, -- Spectral Berries of Budding
+    [GetCollectibleInfo(7023)] = 7023, -- Spectral Berries of Growth
+    [GetCollectibleInfo(7024)] = 7024, -- Spectral Berries of Ripeness
+
+    [GetCollectibleInfo(7791)] = 7791, -- Icebreath Berries of Bloom
+    [GetCollectibleInfo(7792)] = 7792, -- Icebreath Berries of Budding
+    [GetCollectibleInfo(7793)] = 7793, -- Icebreath Berries of Growth
+    [GetCollectibleInfo(7794)] = 7794, -- Icebreath Berries of Ripeness
+
+    [GetCollectibleInfo(8126)] = 8126, -- Mossheart Berries of Bloom
+    [GetCollectibleInfo(8127)] = 8127, -- Mossheart Berries of Budding
+    [GetCollectibleInfo(8128)] = 8128, -- Mossheart Berries of Growth
+    [GetCollectibleInfo(8129)] = 8129, -- Mossheart Berries of Ripeness
 }
 
 function ChatAnnouncements.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCurrencyType1, specialCurrencyInfo1, specialCurrencyQuantity1, specialCurrencyType2, specialCurrencyInfo2, specialCurrencyQuantity2, itemSoundCategory)
