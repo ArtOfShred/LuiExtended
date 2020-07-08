@@ -604,8 +604,10 @@ local g_enchant_prefix_neg          = {}
 local g_smithing_prefix_pos         = {}
 local g_smithing_prefix_neg         = {}
 local g_itemCounterGain             = 0             -- Counter value for items created via crafting
+local g_itemCounterGainTracker      = 0             -- Tracker for how many items have been counted, when we reach a certain threshold, it is too many items to display so we cut the string off.
 local g_itemStringGain              = ""            -- Counter value for items created via crafting
 local g_itemCounterLoss             = 0             -- Counter value for items removed via crafting
+local g_itemCounterLossTracker      = 0             -- Tracker for how many items have been counted, when we reach a certain threshold, it is too many items to display so we cut the string off.
 local g_itemStringLoss              = ""            -- Combined string variable for items removed via crafting
 local g_oldItem                     = { }           -- Saved old item for crafting upgrades
 
@@ -4006,6 +4008,11 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
             g_itemStringGain = itemString
         end
 
+        g_itemCounterGainTracker = g_itemCounterGainTracker + 1
+        if g_itemCounterGainTracker > 12 then
+            g_itemStringGain = string.format("|c%stoo many items to display|r", color)
+        end
+
         if g_itemCounterGain == 0 then g_itemCounterGain = g_queuedMessagesCounter end
         if g_queuedMessagesCounter -1 == g_itemCounterGain then g_queuedMessagesCounter = g_itemCounterGain end
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
@@ -4019,6 +4026,12 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
         if g_itemStringLoss == "" then
             g_itemStringLoss = itemString
         end
+
+        g_itemCounterLossTracker = g_itemCounterLossTracker + 1
+        if g_itemCounterLossTracker > 12 then
+            g_itemStringLoss = string.format("|c%stoo many items to display|r", color)
+        end
+
         if g_itemCounterLoss == 0 then g_itemCounterLoss = g_queuedMessagesCounter end
         if g_queuedMessagesCounter -1 == g_itemCounterLoss then g_queuedMessagesCounter = g_itemCounterLoss end
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
@@ -4086,7 +4099,9 @@ function ChatAnnouncements.ResolveItemMessage(message, formattedRecipient, color
 
     -- Reset variables for crafted item counter
     g_itemCounterGain = 0
+    g_itemCounterGainTracker = 0
     g_itemCounterLoss = 0
+    g_itemCounterLossTracker = 0
     g_itemStringGain = ""
     g_itemStringLoss = ""
 
@@ -4540,6 +4555,34 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
 
     g_itemWasDestroyed = false
     g_lockpickBroken = false
+end
+
+-- TODO: DELETE - This is a dummy function for testing chat messages being cut off.
+function ChatAnnouncements.Dummy()
+    -- Items Removed
+    LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 808, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, -200)
+    LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 4482, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, -500)
+    LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 5820, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, -800)
+
+    -- Items Gained
+    LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 4487, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 83)
+    LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 5413, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 134)
+    LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 6000, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 33)
+    LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 6001, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 232)
+    LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 23107, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 12)
+    LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 46128, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 73)
+    LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 46129, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 44)
+    LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 46130, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 58)
+    LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 64489, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 91)
+    LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 533, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 91)
+    --LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 803, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 24)
+    --LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 23121, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 78)
+    --LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 23122, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 56)
+    --LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 23123, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 33)
+    --LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 46139, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 131)
+    --LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 46140, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 215)
+    --LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 46141, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 80)
+    --LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 46142, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 66)
 end
 
 function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)

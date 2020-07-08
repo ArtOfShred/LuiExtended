@@ -75,11 +75,9 @@ function LUIE.PrintToChat(msg, isSystem)
             if not LUIE.ChatAnnouncements.SV.ChatBypassFormat and CHAT_SYSTEM.primaryContainer then
                 -- Add timestamps if bypass is not enabled
                 local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
-                -- Use CHAT ROUTER here to ignore other addons (at least until a chat addon hooks into this)
                 CHAT_ROUTER:AddSystemMessage(msg)
             else
-                -- We're just using debug here for now, with all the chat changes at least currently pChat and rChat pick up these strings.
-                d(msg)
+                CHAT_ROUTER:AddSystemMessage(msg)
             end
         else
             -- If we have system messages sent to display in all windows then just print to all windows at once, otherwise send messages to individual tabs.
@@ -87,28 +85,36 @@ function LUIE.PrintToChat(msg, isSystem)
                 if not LUIE.ChatAnnouncements.SV.ChatBypassFormat then
                     -- Add timestamps if bypass is not enabled
                     local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
-                    -- Use CHAT ROUTER here to ignore other addons (at least until a chat addon hooks into this)
                     CHAT_ROUTER:AddSystemMessage(msg)
                 else
-                    -- We're just using debug here for now, with all the chat changes at least currently pChat and rChat pick up these strings.
-                    d(msg)
+                    CHAT_ROUTER:AddSystemMessage(msg)
                 end
             else
                 for k, cc in ipairs(CHAT_SYSTEM.containers) do
                     for i = 1, #cc.windows do
                         if LUIE.ChatAnnouncements.SV.ChatTab[i] == true then
                             local chatContainer = cc
-                            local chatWindow = cc.windows[i]
-                            local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
-                            local r,g,b = 1, 1, 1
-                            if chatContainer then chatContainer:AddEventMessageToWindow(chatWindow, msg, CHAT_CATEGORY_SYSTEM) end
+                            if chatContainer then
+                                local chatWindow = cc.windows[i]
+                                local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
+
+                                -- Don't print into the Combat Metrics Log window if CMX is enabled.
+                                local flagHide = false
+                                if CMX and CMX.db and CMX.db.chatLog then
+                                    if chatContainer:GetTabName(i) == CMX.db.chatLog.name then
+                                        flagHide = true
+                                    end
+                                end
+                                if not flagHide then
+                                    chatContainer:AddEventMessageToWindow(chatWindow, msg, CHAT_CATEGORY_SYSTEM)
+                                end
+                            end
                         end
                     end
                 end
             end
         end
     end
-
 end
 
 -- Returns a formatted number with commas
