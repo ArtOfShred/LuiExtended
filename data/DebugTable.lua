@@ -9900,6 +9900,10 @@ LUIE.DebugAuras = {
     [25718] = true, -- Bleeding -- Gargoyle
     [25714] = true, -- Vampiric Touch -- Gargoyle
     [25715] = true, -- Vampiric Touch -- Gargoyle
+    [51352] = true, -- Petrify (Gargoyle)
+    [51365] = true, -- Petrify (Gargoyle)
+    [51353] = true, -- Petrify (Gargoyle)
+    [51354] = true, -- Petrify (Gargoyle)
 
     [8671] = true, -- Sweep -- Giant
     [46845] = true, -- Sweep -- Giant
@@ -13235,10 +13239,6 @@ LUIE.DebugAuras = {
     [52878] = true, -- Pull (Anka-Ra Blademaster)
 
     [25720] = true, -- Vampiric Touch (Gargoyle)
-    [51352] = true, -- Petrify (Gargoyle)
-    [51365] = true, -- Petrify (Gargoyle)
-    [51353] = true, -- Petrify (Gargoyle)
-    [51354] = true, -- Petrify (Gargoyle)
 
     [54411] = true, -- Celestial Blast (Anka-Ra Shadowcaster)
     [54415] = true, -- Celestial Blast (Anka-Ra Shadowcaster)

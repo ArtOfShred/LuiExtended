@@ -145,8 +145,10 @@ ChatAnnouncements.Defaults = {
         NotificationConfiscateAlert   = false,
         NotificationLockpickCA        = true,
         NotificationLockpickAlert     = false,
-        NotificationMailCA            = false,
-        NotificationMailAlert         = false,
+        NotificationMailSendCA        = false,
+        NotificationMailSendAlert     = false,
+        NotificationMailErrorCA       = true,
+        NotificationMailErrorAlert    = false,
         NotificationTradeCA           = true,
         NotificationTradeAlert        = false,
         NotificationRespecCA          = true,
@@ -3004,14 +3006,14 @@ function ChatAnnouncements.MailCODChanged(eventCode)
 end
 
 function ChatAnnouncements.MailRemoved(eventCode)
-    if ChatAnnouncements.SV.Notify.NotificationMailCA or ChatAnnouncements.SV.Notify.NotificationMailAlert then
-        if ChatAnnouncements.SV.Notify.NotificationMailCA then
+    if ChatAnnouncements.SV.Notify.NotificationMailSendCA or ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
+        if ChatAnnouncements.SV.Notify.NotificationMailSendCA then
             local message = GetString(SI_LUIE_CA_MAIL_DELETED_MSG)
             g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "NOTIFICATION", isSystem = true }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
         end
-        if ChatAnnouncements.SV.Notify.NotificationMailAlert then
+        if ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_MAIL_DELETED_MSG))
         end
     end
@@ -3042,7 +3044,7 @@ function ChatAnnouncements.OnMailReadable(eventCode, mailId)
 end
 
 function ChatAnnouncements.OnMailTakeAttachedItem(eventCode, mailId)
-    if ChatAnnouncements.SV.Notify.NotificationMailCA or ChatAnnouncements.SV.Notify.NotificationMailAlert then
+    if ChatAnnouncements.SV.Notify.NotificationMailSendCA or ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
         local mailString
         if g_mailCODPresent then
             mailString = GetString(SI_LUIE_CA_MAIL_RECEIVED_COD)
@@ -3050,12 +3052,12 @@ function ChatAnnouncements.OnMailTakeAttachedItem(eventCode, mailId)
             mailString = GetString(SI_LUIE_CA_MAIL_RECEIVED)
         end
         if mailString then
-            if ChatAnnouncements.SV.Notify.NotificationMailCA then
+            if ChatAnnouncements.SV.Notify.NotificationMailSendCA then
                 g_queuedMessages[g_queuedMessagesCounter] = { message = mailString, type = "NOTIFICATION", isSystem = true }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
             end
-            if ChatAnnouncements.SV.Notify.NotificationMailAlert then
+            if ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, mailString)
             end
         end
@@ -3117,7 +3119,7 @@ function ChatAnnouncements.OnMailSuccess(eventCode)
         ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
     end
 
-    if ChatAnnouncements.SV.Notify.NotificationMailCA or ChatAnnouncements.SV.Notify.NotificationMailAlert then
+    if ChatAnnouncements.SV.Notify.NotificationMailSendCA or ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
         local mailString
         if not g_mailCODPresent then
             if g_mailCOD > 1 then
@@ -3127,12 +3129,12 @@ function ChatAnnouncements.OnMailSuccess(eventCode)
             end
         end
         if mailString then
-            if ChatAnnouncements.SV.Notify.NotificationMailCA then
+            if ChatAnnouncements.SV.Notify.NotificationMailSendCA then
                 g_queuedMessages[g_queuedMessagesCounter] = { message = mailString, type = "NOTIFICATION", isSystem = true }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
             end
-            if ChatAnnouncements.SV.Notify.NotificationMailAlert then
+            if ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, mailString)
             end
         end
@@ -4095,6 +4097,8 @@ function ChatAnnouncements.ResolveItemMessage(message, formattedRecipient, color
 
     local finalMessage = string.format("|c%s%s|r%s", color, formattedMessageP2, totalString)
 
+    LUIE.SV.DummyDumpString = finalMessage
+
     printToChat(finalMessage)
 
     -- Reset variables for crafted item counter
@@ -4575,6 +4579,10 @@ function ChatAnnouncements.Dummy()
     LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 46130, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 58)
     LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 64489, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 91)
     LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 533, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 91)
+
+
+    d("|c0b610bYou craft |r|t16:16:/esoui/art/icons/crafting_smith_plug_standard_r_001.dds|t |H1:item:6000:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Dwarven Ingot]|h |cFFFFFFx33|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_ore_base_ebony_r3.dds|t |H1:item:6001:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Ebony Ingot]|h |cFFFFFFx232|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_ore_base_iron_r3.dds|t |H1:item:23107:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Orichalcum Ingot]|h |cFFFFFFx12|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_ore_base_iron_r2.dds|t |H1:item:5413:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Iron Ingot]|h |cFFFFFFx134|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_ore_base_high_iron_r3.dds|t |H1:item:4487:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Steel Ingot]|h |cFFFFFFx83|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_colossus_iron.dds|t |H1:item:64489:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Rubedite Ingot]|h |cFFFFFFx91|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_wood_base_oak_r3.dds|t |H1:item:533:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Sanded Oak]|h |cFFFFFFx91|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_ingot_voidstone.dds|t |H1:item:46130:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Voidstone Ingot]|h |cFFFFFFx58|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_ingot_moonstone.dds|t |H1:item:46129:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Quicksilver Ingot]|h |cFFFFFFx44|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_ingot_galatite.dds|t |H1:item:46128:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Galatite Ingot]|h |cFFFFFFx73|r|c0b610b.|r")
+
     --LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 803, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 24)
     --LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 23121, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 78)
     --LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 23122, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 56)
@@ -7134,10 +7142,10 @@ function ChatAnnouncements.HookFunction()
                 zo_callLater(function() eventManager:RegisterForEvent(moduleName, EVENT_CURRENCY_UPDATE, ChatAnnouncements.OnCurrencyUpdate) end, 500)
             end
 
-            if ChatAnnouncements.SV.Notify.NotificationMailCA then
+            if ChatAnnouncements.SV.Notify.NotificationMailErrorCA then
                 printToChat(GetString("SI_SENDMAILRESULT", reason), true)
             end
-            if ChatAnnouncements.SV.Notify.NotificationMailAlert then
+            if ChatAnnouncements.SV.Notify.NotificationMailErrorAlert then
                 ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString("SI_SENDMAILRESULT", reason))
             end
             PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
@@ -10039,10 +10047,10 @@ function ChatAnnouncements.HookFunction()
     MAIL_SEND.Send = function(self)
         windowManager:SetFocusByName("")
         if not self.sendMoneyMode and GetQueuedCOD() == 0 then
-            if ChatAnnouncements.SV.Notify.NotificationMailCA then
+            if ChatAnnouncements.SV.Notify.NotificationMailSendCA then
                 printToChat(GetString(SI_LUIE_CA_MAIL_ERROR_NO_COD_VALUE), true)
             end
-            if ChatAnnouncements.SV.Notify.NotificationMailAlert then
+            if ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
                 ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_CA_MAIL_ERROR_NO_COD_VALUE))
             end
             PlaySound(SOUNDS.NEGATIVE_CLICK)

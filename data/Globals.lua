@@ -49,6 +49,25 @@ LUIE_COMBAT_ALERT_TYPE_POWER = 3
 LUIE_COMBAT_ALERT_TYPE_SUMMON = 4
 LUIE_COMBAT_ALERT_TYPE_SHARED = 5
 
+-- LUIE_ALERT_SOUND_TYPE
+LUIE_ALERT_SOUND_TYPE_ST = 1 -- Single Target
+LUIE_ALERT_SOUND_TYPE_ST_CC = 2 -- Single Target with CC
+LUIE_ALERT_SOUND_TYPE_AOE = 3 -- Conal/Radial attacks
+LUIE_ALERT_SOUND_TYPE_AOE_CC = 4 -- Conal/Radial attacks with CC
+LUIE_ALERT_SOUND_TYPE_POWER_ATTACK = 5 -- (ONE-SHOT) Power attacks that need to be blocked
+LUIE_ALERT_SOUND_TYPE_RADIAL_AVOID = 6 -- (ONE-SHOT) Radial/aoe/etc attacks that need to be avoided
+LUIE_ALERT_SOUND_TYPE_TRAVELER = 7 -- Traveling ground line aoes
+LUIE_ALERT_SOUND_TYPE_TRAVELER_CC = 8 -- Traveling ground like aoes (with CC component)
+LUIE_ALERT_SOUND_TYPE_GROUND = 9 -- Ground aoe effects
+LUIE_ALERT_SOUND_TYPE_METEOR = 10 -- Meteor type AOE's
+LUIE_ALERT_SOUND_TYPE_UNMIT = 11 -- Unmitigable Single Target (Fossilize type effects)
+LUIE_ALERT_SOUND_TYPE_UNMIT_AOE = 12 -- Unmitigable AOE (Room/area wide effect)
+LUIE_ALERT_SOUND_TYPE_POWER_DAMAGE = 13 -- Power Buff (Damage)
+LUIE_ALERT_SOUND_TYPE_POWER_DEFENSE = 14 -- Power Buff (Defense/Misc)
+LUIE_ALERT_SOUND_TYPE_SUMMON = 15 -- Summon Buff
+LUIE_ALERT_SOUND_TYPE_DESTROY = 16 -- Destroy (Priority Target)
+LUIE_ALERT_SOUND_TYPE_HEAL = 17 -- Heal (Interrupt)
+
 -- LUIE_QUEST_MESSAGE
 LUIE_QUEST_MESSAGE_TURNIN = 1
 LUIE_QUEST_MESSAGE_USE = 2

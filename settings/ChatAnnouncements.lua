@@ -5272,27 +5272,51 @@ function ChatAnnouncements.CreateSettings()
         name = GetString(SI_LUIE_LAM_CA_MISC_HEADER),
         controls = {
             {
-                -- Mail (ChatAnnouncements)
+                -- Mail (Send/Recieve - CA)
                 type = "checkbox",
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
-                getFunc = function() return Settings.Notify.NotificationMailCA end,
-                setFunc = function(value) Settings.Notify.NotificationMailCA = value ChatAnnouncements.RegisterMailEvents() end,
+                getFunc = function() return Settings.Notify.NotificationMailSendCA end,
+                setFunc = function(value) Settings.Notify.NotificationMailSendCA = value ChatAnnouncements.RegisterMailEvents() end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = Defaults.Notify.NotificationMailCA,
+                default = Defaults.Notify.NotificationMailSendCA,
             },
             {
-                -- Mail (ALERT)
+                -- Mail (Send/Recieve - Alert)
                 type = "checkbox",
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
-                getFunc = function() return Settings.Notify.NotificationMailAlert end,
-                setFunc = function(value) Settings.Notify.NotificationMailAlert = value ChatAnnouncements.RegisterMailEvents() end,
+                getFunc = function() return Settings.Notify.NotificationMailSendAlert end,
+                setFunc = function(value) Settings.Notify.NotificationMailSendAlert = value ChatAnnouncements.RegisterMailEvents() end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = Defaults.Notify.NotificationMailAlert,
+                default = Defaults.Notify.NotificationMailSendAlert,
             },
+
+            {
+                -- Mail (Send/Recieve - CA)
+                type = "checkbox",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAILERROR), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAILERROR_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                getFunc = function() return Settings.Notify.NotificationMailErrorCA end,
+                setFunc = function(value) Settings.Notify.NotificationMailErrorCA = value ChatAnnouncements.RegisterMailEvents() end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.Notify.NotificationMailErrorCA,
+            },
+            {
+                -- Mail (Send/Recieve - Alert)
+                type = "checkbox",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAILERROR), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAILERROR_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                getFunc = function() return Settings.Notify.NotificationMailErrorAlert end,
+                setFunc = function(value) Settings.Notify.NotificationMailErrorAlert = value ChatAnnouncements.RegisterMailEvents() end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.Notify.NotificationMailErrorAlert,
+            },
+
             {
                 -- Show Lockpick Events ChatAnnouncements
                 type = "checkbox",

@@ -8891,7 +8891,7 @@ Effects.EffectOverride = {
     [61245] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_fevered_retch.dds', tooltip = Tooltips.Generic_Poison, tooltipValue2 = 1 }, -- Fevered Retch (Hoarvor DLC)
     [61360] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_infectious_swarm.dds' }, -- Infectious Swarm (Hoarvor DLC)
     [61377] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_infectious_swarm.dds' }, -- Infectious Swarm (Hoarvor DLC)
-    [61372] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_infectious_swarm.dds', tooltip = Tooltips.Generic_Poison, tooltipValue2 = 0.5 }, -- Infectious Swarm (Hoarvor DLC)
+    [61372] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_infectious_swarm.dds', tooltip = Tooltips.Skill_Venomous_Burst, tooltipValue2 = 2.5, tooltipValue3 = 0.5 }, -- Infectious Swarm (Hoarvor DLC)
     [61374] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_infectious_swarm.dds' }, -- Infectious Swarm (Hoarvor DLC)
     [61376] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_infectious_swarm.dds', hide = true }, -- Infectious Swarm (Hoarvor DLC)
     [61375] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_poison_snare.dds', name = Abilities.Skill_Infectious_Swarm, tooltip = Tooltips.Generic_Snare, tooltipValue2 = 75 }, -- Infectious Swarm (Hoarvor DLC)
@@ -8992,6 +8992,8 @@ Effects.EffectOverride = {
     [87031] = { icon = 'LuiExtended/media/icons/abilities/ability_fetcherflygolem_focused_swarm.dds' }, -- Focused Swarm (Fetcherfly Hive Golem)
 
     -- Monsters
+
+    -- Gargoyle
     [10259] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_double_swipe.dds' }, -- Double Swipe (Gargoyle)
     [32672] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_double_swipe.dds' }, -- Double Swipe (Gargoyle)
     [10270] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_quake.dds' }, -- Quake (Gargoyle)
@@ -9000,6 +9002,13 @@ Effects.EffectOverride = {
     [25716] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_lacerate.dds', name = Abilities.Skill_Lacerate, tooltip = Tooltips.Skill_Lacerate_Gargoyle, hideReduce = true }, -- Stun (Gargoyle)
     [25718] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_lacerate.dds', name = Abilities.Skill_Lacerate, tooltip = Tooltips.Skill_Lacerate_Gargoyle }, -- Stun (Gargoyle)
     [25714] = { icon = 'esoui/art/icons/achievement_update11_dungeons_029.dds', tooltip = Tooltips.Skill_Vampiric_Touch_Gargoyle }, -- Vampiric Touch (Gargoyle)
+
+    [51352] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_petrify.dds', hide = true }, -- Petrify (Gargoyle)
+    [51365] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_petrify.dds', tooltip = Tooltips.Skill_Petrify_NPC }, -- Petrify (Gargoyle)
+    [51353] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_petrify.dds' }, -- Petrify (Gargoyle)
+    [51354] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_petrify.dds', tooltip = Tooltips.Generic_Stun }, -- Petrify (Gargoyle)
+
+    -- Giant
     [46845] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_sweep.dds' }, -- Sweep (Giant)
     [8674] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_kick.dds' }, -- Sweep (Giant)
     [26124] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_shatter.dds' }, -- Shatter (Giant)
@@ -11010,11 +11019,6 @@ Effects.EffectOverride = {
     [52879] = { tooltip = Tooltips.Skill_Generic_Enrage, tooltipValue2 = 5 }, -- Empowering Chains (Anka-Ra Blademaster)
     [52878] = { name = Abilities.Skill_Empowering_Chains }, -- Pull (Anka-Ra Blademaster)
 
-    [51352] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_petrify.dds', hide = true }, -- Petrify (Gargoyle)
-    [51365] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_petrify.dds', tooltip = Tooltips.Skill_Petrify_NPC }, -- Petrify (Gargoyle)
-    [51353] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_petrify.dds' }, -- Petrify (Gargoyle)
-    [51354] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_petrify.dds', tooltip = Tooltips.Generic_Stun }, -- Petrify (Gargoyle)
-
     [54411] = { icon = 'esoui/art/icons/ability_mage_013.dds', hide = true }, -- Celestial Blast (Anka-Ra Shadowcaster)
     [54415] = { hide = true }, -- Celestial Blast (Anka-Ra Shadowcaster)
     [54404] = { icon = 'esoui/art/icons/ability_mage_013.dds', tooltip = Tooltips.Skill_Celestial_Blast, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Celestial Blast (Anka-Ra Shadowcaster)
@@ -12257,7 +12261,7 @@ Effects.EffectOverride = {
     [34520] = { hide = true }, -- Q4733_Locked_Door_Effect
 
     [31202] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_poison.dds', hide = true }, -- Venomous Burst (Queen Aklayah)
-    [31205] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_venomous_burst.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Venomous_Burst }, -- Venomous Burst (Queen Aklayah)
+    [31205] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_venomous_burst.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Venomous_Burst, tooltipValue2 = 5, tooltipValue3 = 1 }, -- Venomous Burst (Queen Aklayah)
     [31203] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_venomous_burst.dds' }, -- Venomous Burst (Queen Aklayah)
 
     [30982] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_bite.dds', name = Abilities.Skill_Bite }, -- Swipe (Foulhide)
@@ -13128,6 +13132,7 @@ Effects.FakeExternalDebuffs = {
     [8429] = { duration = 4000, ignoreBegin = true }, -- Zap (Thunderbug)
 
     -- Monsters
+    [51354] = { duration = 500 }, -- Petrify (Gargoyle)
     [17703] = { duration = 4000, ignoreBegin = true }, -- Flame Ray (Imp - Fire)
     [8884] = { duration = 4000, ignoreBegin = true }, -- Zap (Imp - Lightning)
     [81794] = { duration = 4000, ignoreBegin = true }, -- Frost Ray (Imp - Frost)
@@ -13213,7 +13218,6 @@ Effects.FakeExternalDebuffs = {
     -- Dragonstar Arena
     [27920] = { duration = 1800 }, -- Generic Knockback Stun (House Dres Templar)
     [54068] = { duration = 500 }, -- Fossilize (Earthen Heart Knight)
-    [51354] = { duration = 500 }, -- Petrify (Gargoyle)
     [54405] = { duration = 4000 }, -- Celestial Blast (Anka-Ra Shadowcaster)
     [52910] = { duration = 6000 }, -- Dark Flare Trauma (Shadow Knight)
     [56065] = { duration = 12000 }, -- Ice Charge (Dwarven Ice Centurion)

@@ -478,6 +478,7 @@ CrowdControl.aoeNPCNormal = {
     [85421] = 1, -- Retch (Cliff Strider)
     [85391] = 1, -- Slash (Cliff Strider)
     [13680] = 1, -- Acid Blood (Assassin Beetle)
+    [61374] = 1, -- Infectious Swarm (Necrotic Hoarvor)
     [10947] = 1, -- Fiery Breath (Shalk)
     [5265] = 1, -- Burning Ground (Shalk)
     [8088] = 1, -- Poison Spray (Giant Spider)
