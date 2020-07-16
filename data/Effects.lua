@@ -3019,6 +3019,7 @@ Effects.EffectHideSCT = {
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.ArtificialEffectOverride = {
     [0] = { tooltip = Tooltips.Innate_Battle_Spirit }, -- Battle Spirit (Cyrodiil, Duel, Battleground)
+    [1] = { name = string.gsub(GetArtificialEffectInfo(1), "For", "for"), tooltip = Tooltips.Innate_Looking_for_Group }, -- Looking For Group (Dungeon Finder)
     [2] = { name = Abilities.Skill_Battle_Spirit, tooltip = Tooltips.Innate_Battle_Spirit_Imperial_City }, -- Battle Spirit Imperial City
     [3] = { tooltip = Tooltips.Innate_Battleground_Deserter }, -- Battleground Deserter Penalty
 }
@@ -4756,7 +4757,7 @@ Effects.EffectOverride = {
     [128494] = { tooltip = Tooltips.Set_Warriors_Fury }, -- Warrior's Fury (of Fury)
     [76940] = { tooltip = Abilities.Set_Lekis_Focus }, -- Major Evasion (Leki's Focus)
     [76936] = { icon = 'LuiExtended/media/icons/abilities/ability_set_transmutation.dds', tooltip = Tooltips.Set_Robes_of_Transmutation }, -- Transmutation (of Transmutation)
-    [76938] = { icon = 'esoui/art/icons/procs_003.dds' }, -- Vicious Death (of Vicious Death)
+    [76938] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vicious_death.dds' }, -- Vicious Death (of Vicious Death)
 
     -- Maelstrom Arena Sets
     [127081] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_melee_alt.dds', tooltip = Tooltips.Set_Succession_Flame }, -- Flame Succession (of Succession)

@@ -8493,6 +8493,7 @@ LUIE.DebugAuras = {
     [88504] = true, -- Summon Abomination -- Bonelord
     [88503] = true, -- Summon Abomination -- Bonelord
     [89231] = true, -- Summon Abomination -- Bonelord
+    [89184] = true, -- Summon Abomination -- Bonelord
     [44339] = true, -- Bone Surge -- Bonelord
 
     [79803] = true, -- Covetous Return -- Healer

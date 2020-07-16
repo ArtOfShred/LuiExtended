@@ -52,10 +52,11 @@ local strings = {
     SI_LUIE_SKILL_RESURRECTION_IMMUNITY_TP =             "Wiederbeleben. Immun gegen Schaden und alle negativen Effekte.",
     SI_LUIE_SKILL_TAUNT_TP =                             "Verspottet. Dieser Gegner konzentriert alle Angriffe auf Euch.",
     SI_LUIE_SKILL_DISGUISE_TP =                          "Disguised. You can be revealed by sentries or performing suspicious activity.\n\nTaking any damage other than fall damage will destroy your disguise.",
-    SI_LUIE_SKILL_BATTLE_SPIRIT_TP =                     "• Health increased by |cFFFFFF5000|r\n• Damage taken and damage shield strength decreased by |cFFFFFF50|r%\n• Healing received decreased by |cFFFFFF60|r%\n• Ability range of |cFFFFFF28|r meters or more increased by |cFFFFFF8|r",
-    SI_LUIE_SKILL_BATTLE_SPIRIT_IMPERIAL_CITY_TP =       "• Health increased by |cFFFFFF5000|r\n• Damage taken and damage shield strength decreased by |cFFFFFF50|r%\n• Healing received decreased by |cFFFFFF60|r%",
+    SI_LUIE_SKILL_BATTLE_SPIRIT_TP =                     "• Increase Max Health by |cFFFFFF5000|r\n• Reduce damage taken and damage shield strength by |cFFFFFF50|r%\n• Reduce healing received by |cFFFFFF60|r%\n• Increase the range of abilities with a range greater than |cFFFFFF28|r meters by |cFFFFFF8|r meters",
+    SI_LUIE_SKILL_BATTLE_SPIRIT_IMPERIAL_CITY_TP =       "• Increase Max Health by |cFFFFFF5000|r\n• Reduce damage taken and damage shield strength by |cFFFFFF50|r%\n• Reduce healing received by |cFFFFFF60|r%",
     SI_LUIE_SKILL_RECALL_PENALTY_TP =                    "Ihr habt kürzlich zu einem Wegeschrein zurückggerufen und müsst eine zusätzliche Gebühr in Gold zahlen um es erneut zu tun.",
     SI_LUIE_SKILL_BATTLEGROUND_DESERTER_TP =             "Ihr habt ein Schlachtfeld zu früh verlassen und könnt Euch nicht erneut anmelden oder Allianzpunkte im PvP erhalten.",
+    SI_LUIE_SKILL_LOOKING_FOR_GROUP_TP =                 "• Increase Max Health by |cFFFFFF20|r%\n• Increase Weapon and Spell Damage by |cFFFFFF25|r%",
 
     ----------------------------------------------------------------
     -- ITEM / CONSUMABLE TOOLTIPS ----------------------------------
@@ -931,7 +932,7 @@ local strings = {
 
     -- Mythic Items
     SI_LUIE_SKILL_SET_BLOODLORDS_EMBRACE_TP =            "When your attacker blocks an attack from you, they restore |cFFFFFF1535|r Magicka.\n\nThis effect can occur every |cFFFFFF1|r second.",
-    SI_LUIE_SKILL_SET_THRASSIAN_STANGLERS_TP =           "Stacks up to |cFFFFFF20|r times when you kill an enemy.\n\n• Increase Spell Damage by |cFFFFFF150|r per stack.\n• Increase damage taken by |cFFFFFF2|r% per stack.\n• Healing received and damage shield strength decreased by |cFFFFFF2|r% per stack.",
+    SI_LUIE_SKILL_SET_THRASSIAN_STANGLERS_TP =           "Stacks up to |cFFFFFF20|r times when you kill an enemy.\n\n• Increase Spell Damage by |cFFFFFF150|r per stack.\n• Increase damage taken by |cFFFFFF2|r% per stack.\n• Reduce healing received and damage shield strength by |cFFFFFF2|r% per stack.",
 
     -- Crafted Sets
     SI_LUIE_SKILL_SET_ALESSIAS_BULWARK =                 "Reduce Weapon Damage by |cFFFFFF10|r% for |cFFFFFF<<1>>|r seconds.",
@@ -1008,7 +1009,7 @@ local strings = {
     SI_LUIE_SET_AEGIS_CALLER_TP =                        "After |cFFFFFF2.5|r seconds, the Lesser Aegis spins its blades, dealing Bleed Damage every |cFFFFFF1|r second to enemies within a |cFFFFFF6|r meter radius.",
     SI_LUIE_SET_GRAVE_GUARDIAN_TP =                      "You and group members within |cFFFFFF8|r meters gain |cFFFFFF4430|r Physical and Spell Resistance while you are blocking.",
     SI_LUIE_SET_WINTERS_RESPITE_TP =                     "You and allies in the |cFFFFFF8|r meter radius of healing frost restore Health every |cFFFFFF1|r second.",
-    SI_LUIE_SET_HUNTERS_VENOM_TP =                       "You and allies within a |cFFFFFF6|r meter radius take Poison Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SET_HUNTERS_VENOM_TP =                       "You and any player opposed to your attacker within a |cFFFFFF6|r meter radius take Poison Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
 
     -- Trial Sets
     SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP =            "Increase Weapon Critical by |cFFFFFF400|r for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF5|r times when you deal melee damage.\n\nThis effect can occur once every half second.",

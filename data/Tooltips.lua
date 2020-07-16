@@ -263,6 +263,7 @@ LUIE.Data.Tooltips = {
     Innate_Battle_Spirit_Imperial_City              = GetString(SI_LUIE_SKILL_BATTLE_SPIRIT_IMPERIAL_CITY_TP),
     Innate_Recall_Penalty                           = GetString(SI_LUIE_SKILL_RECALL_PENALTY_TP),
     Innate_Battleground_Deserter                    = GetString(SI_LUIE_SKILL_BATTLEGROUND_DESERTER_TP),
+    Innate_Looking_for_Group                        = GetString(SI_LUIE_SKILL_LOOKING_FOR_GROUP_TP),
     Innate_Ayleid_Well                              = GetString(SI_LUIE_SKILL_AYLEID_WELL_TP),
     Innate_Ayleid_Well_Fortified                    = GetString(SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED_TP),
     Innate_Firelight                                = GetString(SI_LUIE_SKILL_FIRELIGHT_TP),
