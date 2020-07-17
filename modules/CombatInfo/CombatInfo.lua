@@ -52,6 +52,7 @@ CombatInfo.Defaults = {
     BarFontSize                      = 18,
     BarMillis                        = true,
     BarMillisAboveTen                = true,
+    BarMillisThreshold               = 10,
     BarShowBack                      = false,
     BarDarkUnused                    = false,
     BarDesaturateUnused              = false,
@@ -384,7 +385,7 @@ local function SetupFlipAnimation(button)
 end
 
 local function FormatDurationSeconds(remain)
-    return string.format((CombatInfo.SV.BarMillis and (remain < 10000 or CombatInfo.SV.BarMillisAboveTen)) and "%.1f" or "%.1d", remain/1000)
+    return string.format((CombatInfo.SV.BarMillis and ((remain < CombatInfo.SV.BarMillisThreshold * 1000) or CombatInfo.SV.BarMillisAboveTen)) and "%.1f" or "%.1d", remain/1000)
 end
 
 -- Module initialization
