@@ -153,6 +153,8 @@ LUIE.Data.Tooltips = {
 
     Generic_Reduce_Physical_Resist_Value            = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHYSICAL_RESIST_VALUE_TP),
 
+    Generic_Reduce_Healing_Received                 = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_HEALING_RECEIVED_TP),
+
     Generic_Lower_Max_HP                            = GetString(SI_LUIE_SKILL_GENERIC_LOWER_MAX_HP_TP),
 
     Generic_Reduce_Damage_Done                      = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_DAMAGE_DONE_TP),
@@ -173,6 +175,7 @@ LUIE.Data.Tooltips = {
     Generic_HoT_Potion                              = GetString(SI_LUIE_SKILL_GENERIC_HOT_POTION_TP),
     Generic_HoT_Channel                             = GetString(SI_LUIE_SKILL_GENERIC_HOT_CHANNEL_TP),
 
+    Generic_Shock_Snare                             = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_SNARE_TP), "SUBSTRING", ShockDamage),
     Generic_Oblivion_Snare                          = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_SNARE_TP), "SUBSTRING", OblivionDamage),
 
     Generic_AOE_Physical                            = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "SUBSTRING", PhysicalDamage),
@@ -1130,7 +1133,6 @@ LUIE.Data.Tooltips = {
     Skill_Razor_Armor                               = GetString(SI_LUIE_SKILL_RAZOR_ARMOR_TP),
     Skill_Unstable_Core_Cyrodiil                    = GetString(SI_LUIE_SKILL_UNSTABLE_CORE_CYRODIIL_TP),
     Skill_Shattering_Prison_Cyrodiil                = GetString(SI_LUIE_SKILL_SHATTERING_PRISON_CYRODIIL_TP),
-    Skill_Lethal_Arrow_Cyrodiil                     = GetString(SI_LUIE_SKILL_LETHAL_ARROW_CYRODIIL_TP),
     Skill_Siege_Shield_Cyrodiil                     = GetString(SI_LUIE_SKILL_SIEGE_SHIELD_CYRODIIL_TP),
     Skill_Power_Bash_Cyrodiil                       = GetString(SI_LUIE_SKILL_POWER_BASH_CYRODIIL_TP),
     Skill_Rune_Focus_Cyrodiil                       = GetString(SI_LUIE_SKILL_RUNE_FOCUS_CYRODIIL_TP),

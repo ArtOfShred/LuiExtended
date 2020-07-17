@@ -16440,14 +16440,21 @@ LUIE.DebugAuras = {
 
     -- Siege Warfare
     [35106] = true, -- Fire (Firepot Trebuchet)
+    [35103] = true, -- Fire (Firepot Trebuchet)
     [35099] = true, -- Ice Damage (Iceball Trebuchet)
+    [35100] = true, -- Iceball Snare
     [35112] = true, -- Stoneball (Stone Trebuchet)
     [35094] = true, -- Bolt (Ballista)
     [35055] = true, -- Fire (Firebolt Ballista)
     [35080] = true, -- Bolt (Lightning Ballista)
+    [35078] = true, -- Snare (Lightning Ballista)
     [35121] = true, -- Ice Damage (Scattershot Catapult)
+    [35119] = true, -- Scatter Snare (Scattershot Catapult)
     [35136] = true, -- Meatbag (Meatbag Catapult)
+    [35138] = true, -- Diseased (Meatbag Catapult)
     [35132] = true, -- Oil Pot (Oil Catapult)
+    [35131] = true, -- Oil Pot (Oil Catapult)
+    [35365] = true, -- Fire (Flaming Oil)
     [33348] = true, -- Practice Siege Repair Kit (Practice Siege Repair Kit)
 
     -- Chaos Magic

@@ -482,6 +482,7 @@ ChatAnnouncements.Defaults = {
         CurrencyMessageFood             = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_EAT),
         CurrencyMessageDrink            = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DRINK),
         CurrencyMessageDeploy           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DEPLOY),
+        CurrencyMessageStow             = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_STOW),
         CurrencyMessageLearnRecipe      = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LEARN_RECIPE),
         CurrencyMessageLearnMotif       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LEARN_MOTIF),
         CurrencyMessageLearnStyle       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LEARN_STYLE),
@@ -586,6 +587,7 @@ local g_weAreInAStore               = false         -- Toggled on when the playe
 local g_weAreInAFence               = false         -- Toggled on when the player opens a fence.
 local g_weAreInAGuildStore          = false         -- Toggled on when the player opens a guild store.
 local g_itemWasDestroyed            = false         -- Tracker for item being destroyed
+local g_packSiege                   = false         -- Tracker for siege packed
 local g_lockpickBroken              = false         -- Tracker for lockpick being broken
 local g_groupLootIndex              = {}            -- Table to hold group member names for group loot display.
 local g_stackSplit                  = false         -- Determines if we just split an inventory item stack
@@ -1252,6 +1254,8 @@ function ChatAnnouncements.RegisterLootEvents()
     end
     -- DESTROY
     eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_DESTROYED, ChatAnnouncements.DestroyItem)
+    -- PACK SIEGE
+    eventManager:RegisterForEvent(moduleName, EVENT_DISABLE_SIEGE_PACKUP_ABILITY, ChatAnnouncements.OnPackSiege)
     -- JUSTICE
     if ChatAnnouncements.SV.Inventory.Loot or ChatAnnouncements.SV.Notify.NotificationConfiscateCA or ChatAnnouncements.SV.Notify.NotificationConfiscateAlert or ChatAnnouncements.SV.Inventory.LootShowDisguise then
         eventManager:RegisterForEvent(moduleName, EVENT_JUSTICE_STOLEN_ITEMS_REMOVED, ChatAnnouncements.JusticeStealRemove)
@@ -3556,6 +3560,16 @@ function ChatAnnouncements.DestroyItem(eventCode, itemSoundCategory)
     g_itemWasDestroyed = true
 end
 
+function ChatAnnouncements.OnPackSiege()
+    local function ResetPackSiege()
+        g_packSiege = false
+        eventManager:UnregisterForUpdate(moduleName .. "ResetPackSiege")
+    end
+    g_packSiege = true
+    eventManager:UnregisterForUpdate(moduleName .. "ResetPackSiege")
+    eventManager:RegisterForUpdate(moduleName .. "ResetPackSiege", 4000, ResetPackSiege )
+end
+
 -- Helper function for Craft Bag
 function ChatAnnouncements.GetItemLinkFromItemId(itemId)
     local name = GetItemLinkName(ZO_LinkHandler_CreateLink("Test Trash", nil, ITEM_LINK_TYPE,itemId, 1, 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 10000, 0))
@@ -4348,6 +4362,9 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
             if g_weAreInADig then
                 logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageExcavate
             end
+            if g_packSiege and itemType == ITEMTYPE_SIEGE then
+                logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageStow
+            end
             if not g_weAreInAStore and ChatAnnouncements.SV.Inventory.Loot and isNewItem and not g_inTrade and not g_inMail then
                 ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true, nil, false, true)
             end
@@ -4394,6 +4411,9 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                 end
                 if g_weAreInADig then
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageExcavate
+                end
+                if g_packSiege and itemType == ITEMTYPE_SIEGE then
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageStow
                 end
                 if not g_weAreInAStore and ChatAnnouncements.SV.Inventory.Loot and isNewItem and not g_inTrade and not g_inMail then
                     ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true, nil, false, true)

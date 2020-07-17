@@ -368,6 +368,7 @@ local strings = {
     SI_LUIE_CA_CURRENCY_MESSAGE_LEARN_MOTIF =            "Вы изучили %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_LEARN_STYLE =            "Вы изучили %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_DEPLOY =                 "Вы развернули %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_STOW =                   "You stow %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_LOST =                   "Вы потеряли %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_BOUNTY =                 "Вы заплатили в качестве штрафа: %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_REPAIR =                 "Вы заплатили %s за ремонт.",

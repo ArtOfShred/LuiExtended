@@ -247,6 +247,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_LOWER_MAX_HP_TP =              "Reduce Max Health by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     SI_LUIE_SKILL_GENERIC_REDUCE_DAMAGE_DONE_TP =               "Reduce damage done by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_REDUCE_HEALING_RECEIVED_TP =  "Reduce healing received by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     -- Resource Regeneration, Shields
     SI_LUIE_SKILL_GENERIC_HEALTH_RECOVERY_TP =           "Increase Health Recovery for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
@@ -828,7 +829,6 @@ local strings = {
     SI_LUIE_SKILL_RAZOR_ARMOR_TP =                       "Reduce damage taken by |cFFFFFF30|r% for |cFFFFFF<<1>>|r seconds.\n\nWhile active the armor returns Physical Damage to attackers.",
     SI_LUIE_SKILL_UNSTABLE_CORE_CYRODIIL_TP =            "Your single target ranged abilities are reflected back on you for |cFFFFFF<<1>>|r seconds.\n\nThe core explodes when this effect ends, dealing Magic Damage.",
     SI_LUIE_SKILL_SHATTERING_PRISON_CYRODIIL_TP =        "Disoriented for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThe prison shatters when this effect ends, dealing Magic Damage.",
-    SI_LUIE_SKILL_LETHAL_ARROW_CYRODIIL_TP =             "Reduce healing received by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SIEGE_SHIELD_CYRODIIL_TP =             "Negate damage taken from Siege Weapons for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_POWER_BASH_CYRODIIL_TP =               "Stunned for |cFFFFFF<<1>>|r seconds.\n\nWhen this effect ends you will be disoriented for |cFFFFFF15|r seconds.",
     SI_LUIE_SKILL_ELDER_SCROLL_TP =                      "Carrying the |cFFFFFF<<1>>|r.",

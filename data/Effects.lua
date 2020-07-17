@@ -8187,7 +8187,7 @@ Effects.EffectOverride = {
     [52866] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Physical, tooltipValue2 = 0.5 }, -- Volley (Cyrodiil Archer T1)
     [54258] = { name = Abilities.Skill_Improved_Volley, groundLabel = true, tooltip = Tooltips.Generic_AOE_Physical, tooltipValue2 = 0.5 }, -- Upgraded Volley (Cyrodiil Archer T2)
     [54264] = { icon = 'esoui/art/icons/ability_bow_001_a.dds', hide = true }, -- Lethal Arrow (Cryodiil Archer T2)
-    [54265] = { icon = 'esoui/art/icons/ability_bow_001_a.dds', tooltip = Tooltips.Skill_Lethal_Arrow_Cyrodiil }, -- Lethal Arrow (Cryodiil Archer T2)
+    [54265] = { icon = 'esoui/art/icons/ability_bow_001_a.dds', tooltip = Tooltips.Generic_Reduce_Healing_Received, tooltipValue2 = 50 }, -- Lethal Arrow (Cryodiil Archer T2)
     [54259] = { icon = 'esoui/art/icons/ability_bow_004_a.dds', hide = true }, -- Draining Shot (Cryodiil Archer T2)
     [54261] = { icon = 'esoui/art/icons/ability_bow_004_a.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 50 }, -- Draining Shot (Cryodiil Archer T2)
     [70414] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_fire_damage.dds', tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 0.5, groundLabel = true }, -- Ignite (Synergy - Fire Mage)
@@ -9694,7 +9694,7 @@ Effects.EffectOverride = {
     [138553] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_frost_lancer.dds' }, -- Frost Lancer (Fire Lancer)
 
     [22570] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_flaming_oil.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Skill_Deploy, Abilities.Skill_Flaming_Oil) }, -- Create Boiling Oil... (Flaming Oil)
-    [15775] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_burning_oil.dds', tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Flaming oil (Flaming Oil)
+    [15775] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_burning_oil.dds', tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Flaming Oil (Flaming Oil)
     [15776] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_burning_oil.dds', name = Abilities.Skill_Flaming_Oil, tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Flaming oil (Flaming Oil)
 
     [15876] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_ram.dds', name = zo_strformat("<<1>> <<2>> <<3>>", Abilities.Skill_Deploy, Abilities.Skill_Covenant, Abilities.Skill_Battering_Ram) }, -- Create Large Ram... (Battering Ram)
@@ -9736,15 +9736,22 @@ Effects.EffectOverride = {
     [116680] = { icon = 'esoui/art/icons/ability_artifact_volendrung_006.dds' }, -- Ruinous Cyclone (Ruinous Cyclone)
 
     -- Siege Warfare
-    [35106] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_firepot_trebuchet.dds' , name = Abilities.Skill_Firepot_Trebuchet }, -- Fire (Firepot Trebuchet)
+    [35106] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_firepot_trebuchet.dds', name = Abilities.Skill_Firepot_Trebuchet }, -- Fire (Firepot Trebuchet)
+    [35103] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_firepot_trebuchet.dds', name = Abilities.Skill_Firepot_Trebuchet, tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 } , -- Fire (Firepot Trebuchet)
     [35099] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_iceball_trebuchet.dds', name = Abilities.Skill_Iceball_Trebuchet }, -- Ice Damage (Iceball Trebuchet)
+    [35100] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_iceball_trebuchet.dds', name = Abilities.Skill_Iceball_Trebuchet, tooltip = Tooltips.Generic_Snare, tooltipValue2 = 70 }, -- Iceball Snare (Iceball Trebuchet)
     [35112] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_stone_trebuchet.dds', name = Abilities.Skill_Stone_Trebuchet }, -- Stoneball (Stone Trebuchet)
     [35094] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_ballista_bolt.dds', name = Abilities.Skill_Ballista }, -- Bolt (Ballista)
-    [35055] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_fire_ballista_bolt.dds', name = Abilities.Skill_Fire_Ballista }, -- Fire (Firebolt Ballista)
-    [35080] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_lightning_ballista_bolt.dds', name = Abilities.Skill_Lightning_Ballista }, -- Bolt (Lightning Ballista)
+    [35055] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_fire_ballista_bolt.dds', name = Abilities.Skill_Fire_Ballista, tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Fire (Firebolt Ballista)
+    [35080] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_lightning_ballista_bolt.dds', name = Abilities.Skill_Lightning_Ballista, tooltip = Tooltips.Generic_Shock_Snare, tooltipValue2 = 2, tooltipValue3 = 50 }, -- Bolt (Lightning Ballista)
+    [35078] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_lightning_ballista_bolt.dds', name = Abilities.Skill_Lightning_Ballista }, -- Snare (Lightning Ballista)
     [35121] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_scattershot_catapult.dds', name = Abilities.Skill_Scattershot_Catapult }, -- Ice Damage (Scattershot Catapult)
-    [35136] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_meatbag_catapult.dds' , name = Abilities.Skill_Meatbag_Catapult }, -- Meatbag (Meatbag Catapult)
+    [35119] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_scattershot_catapult.dds', name = Abilities.Skill_Scattershot_Catapult, tooltip = Tooltips.Generic_Snare, tooltipValue2 = 50 }, -- Scatter Snare (Scattershot Catapult)
+    [35136] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_meatbag_catapult.dds' , name = Abilities.Skill_Meatbag_Catapult, tooltip = Tooltips.Generic_Disease, tooltipValue2 = 2 }, -- Meatbag (Meatbag Catapult)
+    [35138] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_meatbag_catapult.dds' , name = Abilities.Skill_Meatbag_Catapult, tooltip = Tooltips.Generic_Reduce_Healing_Received, tooltipValue2 = 75 }, -- Diseased (Meatbag Catapult)
     [35132] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_oil_catapult.dds', name = Abilities.Skill_Oil_Catapult }, -- Oil Pot (Oil Catapult)
+    [35131] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_oil_catapult.dds', name = Abilities.Skill_Oil_Catapult, tooltip = Tooltips.Generic_Snare, tooltipValue2 = 75 }, -- Oil Pot (Oil Catapult)
+    [35365] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_burning_oil.dds', name = Abilities.Skill_Flaming_Oil, tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Fire (Flaming Oil)
     [33348] = { icon = 'LuiExtended/media/icons/abilities/ability_item_ava_repair_kit_practice_siege.dds' }, -- Practice Siege Repair Kit (Practice Siege Repair Kit)
 
     ----------------------------------------------------------------
@@ -11061,7 +11068,7 @@ Effects.EffectOverride = {
     [52805] = { icon = 'esoui/art/icons/ability_bow_002_b.dds', tooltip = Tooltips.Skill_Poison_Injection }, -- Poison Injection (Pishna Longshot)
 
     [52825] = { icon = 'esoui/art/icons/ability_bow_001_a.dds' }, -- Lethal Arrow (Pishna Longshot)
-    [52826] = { icon = 'esoui/art/icons/ability_bow_001_a.dds', tooltip = Tooltips.Skill_Lethal_Arrow_Cyrodiil }, -- Lethal Arrow (Pishna Longshot)
+    [52826] = { icon = 'esoui/art/icons/ability_bow_001_a.dds', tooltip = Tooltips.Generic_Reduce_Healing_Received, tooltipValue2 = 50 }, -- Lethal Arrow (Pishna Longshot)
 
     -- Stage 7 - Circle of Rituals
     [56946] = { icon = 'esoui/art/icons/ability_dragonknight_008.dds', name = Abilities.Skill_Reflective_Scale, tooltip = Tooltips.Skill_Reflective_Shadows }, -- Dragon Fire Scale (Bloodwraith Kynval)

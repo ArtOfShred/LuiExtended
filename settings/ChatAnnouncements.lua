@@ -1573,6 +1573,17 @@ function ChatAnnouncements.CreateSettings()
                 default = Defaults.ContextMessages.CurrencyMessageDeploy,
             },
             {
+                -- Loot Message (Stow)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STOW),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STOW_TP),
+                getFunc = function() return Settings.ContextMessages.CurrencyMessageStow end,
+                setFunc = function(value) Settings.ContextMessages.CurrencyMessageStow = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.ContextMessages.CurrencyMessageStow,
+            },
+            {
                 -- Loot Message (Learn Recipe)
                 type = "editbox",
                 name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LEARN_RECIPE),
