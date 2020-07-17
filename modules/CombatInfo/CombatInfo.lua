@@ -2437,9 +2437,9 @@ function CombatInfo.OnDeath(eventCode, unitTag, isDead)
         for slotNum = BAR_INDEX_START, BAR_INDEX_END do
             if g_uiCustomToggle[slotNum] then
                 g_uiCustomToggle[slotNum]:SetHidden(true)
-                if slotNum == 8 and CombatInfo.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
+                --[[if slotNum == 8 and CombatInfo.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
                     uiUltimate.LabelPct:SetHidden(false)
-                end
+                end]]--
             end
         end
         for slotNum = BAR_INDEX_START + BACKBAR_INDEX_OFFSET, BACKBAR_INDEX_END + BACKBAR_INDEX_OFFSET do

@@ -1433,10 +1433,10 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.toggles.sound_stEnable end,
-                setFunc = function(value) Settings.alerts.toggles.sound_stEnable = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function() return Settings.alerts.sounds.sound_st end,
+                setFunc = function(value) Settings.alerts.sounds.sound_st = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
-                default = Defaults.alerts.toggles.sound_stEnable,
+                default = Defaults.alerts.sounds.sound_st,
                 disabled = function() return not (Settings.alerts.toggles.sound_stEnable and Settings.alerts.toggles.alertEnable) end,
             },
             {
@@ -1444,11 +1444,11 @@ function CombatInfo.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_CC),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_CC_TP),
-                getFunc = function() return Settings.alerts.sounds.sound_st end,
-                setFunc = function(v) Settings.alerts.sounds.sound_st = v end,
+                getFunc = function() return Settings.alerts.toggles.sound_st_ccEnable end,
+                setFunc = function(v) Settings.alerts.toggles.sound_st_ccEnablet = v end,
                 width = "half",
                 disabled = function() return not Settings.alerts.toggles.alertEnable end,
-                defaults = Defaults.alerts.sounds.sound_st,
+                defaults = Defaults.alerts.toggles.sound_st_ccEnable,
             },
             {
                 -- Sound Selection (Single Target CC)

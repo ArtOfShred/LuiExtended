@@ -965,7 +965,7 @@ function AbilityAlerts.OnCombatAlert(eventCode, resultType, isError, abilityName
     local Settings = CombatInfo.SV.alerts
 
     -- NEW ALERTS
-    if Settings.toggles.alertEnable and (Settings.toggles.mitigationAura or IsUnitInDungeon("player")) then
+    if Settings.toggles.alertEnable and (Settings.toggles.mitigationAura or sourceUnitId ~= 0 or IsUnitInDungeon("player")) then
         if not refireDelay[abilityId] then
 
             -- Filter when only a certain event type should fire this
