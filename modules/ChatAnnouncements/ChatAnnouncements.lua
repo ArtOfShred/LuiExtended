@@ -205,9 +205,10 @@ ChatAnnouncements.Defaults = {
 
     -- Lorebooks
     Lorebooks = {
-        LorebookCA                    = true,  -- Display a CA for Lorebooks
-        LorebookCSA                   = true,  -- Display a CSA for Lorebooks
-        LorebookAlert                 = false, -- Display a ZO_Alert for Lorebooks
+        LorebookCA                    = true, -- Display a CA for Lorebooks
+        LorebookCSA                   = true, -- Display a CSA for Lorebooks
+        LorebookCSALoreOnly           = true, -- Only Display a CSA for non-Eidetic Memory Books
+        LorebookAlert                 = false,-- Display a ZO_Alert for Lorebooks
         LorebookCollectionCA          = true,
         LorebookCollectionCSA         = true,
         LorebookCollectionAlert       = false,
@@ -6287,15 +6288,18 @@ function ChatAnnouncements.HookFunction()
 
                 -- Center Screen Announcement
                 if ChatAnnouncements.SV.Lorebooks.LorebookCSA then
-                    local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.BOOK_ACQUIRED)
-                    if collectionName ~= "" then
-                        messageParams:SetText(csaPrefix, zo_strformat(SI_LUIE_CA_LOREBOOK_ADDED_CSA, title, collectionName))
-                    else
-                        messageParams:SetText(csaPrefix, zo_strformat(SI_LUIE_CA_LOREBOOK_ADDED_CSA, title, GetString(SI_WINDOW_TITLE_LORE_LIBRARY)))
+                    -- Only display a CSA if this is a Lore Book and we have Eidetic Memory books set to not show.
+                    if (categoryIndex == 1 and ChatAnnouncements.SV.Lorebooks.LorebookCSALoreOnly) or not ChatAnnouncements.SV.Lorebooks.LorebookCSALoreOnly then
+                        local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.BOOK_ACQUIRED)
+                        if collectionName ~= "" then
+                            messageParams:SetText(csaPrefix, zo_strformat(SI_LUIE_CA_LOREBOOK_ADDED_CSA, title, collectionName))
+                        else
+                            messageParams:SetText(csaPrefix, zo_strformat(SI_LUIE_CA_LOREBOOK_ADDED_CSA, title, GetString(SI_WINDOW_TITLE_LORE_LIBRARY)))
+                        end
+                        messageParams:SetIconData(icon, "EsoUI/Art/Achievements/achievements_iconBG.dds")
+                        messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_LORE_BOOK_LEARNED)
+                        CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
                     end
-                    messageParams:SetIconData(icon, "EsoUI/Art/Achievements/achievements_iconBG.dds")
-                    messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_LORE_BOOK_LEARNED)
-                    CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
                 end
                 if not ChatAnnouncements.SV.Lorebooks.LorebookCSA then
                     PlaySound(SOUNDS.BOOK_ACQUIRED)
@@ -7287,23 +7291,26 @@ function ChatAnnouncements.HookFunction()
 
             -- Center Screen Announcement
             if ChatAnnouncements.SV.Lorebooks.LorebookCSA then
-                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.BOOK_ACQUIRED)
-                if not LUIE.SV.HideXPBar then
-                    local barType = PLAYER_PROGRESS_BAR:GetBarType(PPB_CLASS_SKILL, skillType, skillIndex)
-                    local rankStartXP, nextRankStartXP = GetSkillLineRankXPExtents(skillType, skillIndex, rank)
-                    local barParams = CENTER_SCREEN_ANNOUNCE:CreateBarParams(barType, rank, previousXP - rankStartXP, currentXP - rankStartXP)
-                    barParams:SetTriggeringEvent(EVENT_LORE_BOOK_LEARNED_SKILL_EXPERIENCE)
-                    ValidateProgressBarParams(barParams)
-                    messageParams:SetBarParams(barParams)
+                -- Only display a CSA if this is a Lore Book and we have Eidetic Memory books set to not show.
+                if (categoryIndex == 1 and ChatAnnouncements.SV.Lorebooks.LorebookCSALoreOnly) or not ChatAnnouncements.SV.Lorebooks.LorebookCSALoreOnly then
+                    local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.BOOK_ACQUIRED)
+                    if not LUIE.SV.HideXPBar then
+                        local barType = PLAYER_PROGRESS_BAR:GetBarType(PPB_CLASS_SKILL, skillType, skillIndex)
+                        local rankStartXP, nextRankStartXP = GetSkillLineRankXPExtents(skillType, skillIndex, rank)
+                        local barParams = CENTER_SCREEN_ANNOUNCE:CreateBarParams(barType, rank, previousXP - rankStartXP, currentXP - rankStartXP)
+                        barParams:SetTriggeringEvent(EVENT_LORE_BOOK_LEARNED_SKILL_EXPERIENCE)
+                        ValidateProgressBarParams(barParams)
+                        messageParams:SetBarParams(barParams)
+                    end
+                    if collectionName ~= "" then
+                        messageParams:SetText(csaPrefix, zo_strformat(SI_LUIE_CA_LOREBOOK_ADDED_CSA, title, collectionName))
+                    else
+                        messageParams:SetText(csaPrefix, zo_strformat(SI_LUIE_CA_LOREBOOK_ADDED_CSA, title, GetString(SI_WINDOW_TITLE_LORE_LIBRARY)))
+                    end
+                    messageParams:SetIconData(icon, "EsoUI/Art/Achievements/achievements_iconBG.dds")
+                    messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_LORE_BOOK_LEARNED_SKILL_EXPERIENCE)
+                    CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
                 end
-                if collectionName ~= "" then
-                    messageParams:SetText(csaPrefix, zo_strformat(SI_LUIE_CA_LOREBOOK_ADDED_CSA, title, collectionName))
-                else
-                    messageParams:SetText(csaPrefix, zo_strformat(SI_LUIE_CA_LOREBOOK_ADDED_CSA, title, GetString(SI_WINDOW_TITLE_LORE_LIBRARY)))
-                end
-                messageParams:SetIconData(icon, "EsoUI/Art/Achievements/achievements_iconBG.dds")
-                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_LORE_BOOK_LEARNED_SKILL_EXPERIENCE)
-                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
             if not ChatAnnouncements.SV.Lorebooks.LorebookCSA then
                 PlaySound(SOUNDS.BOOK_ACQUIRED)

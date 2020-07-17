@@ -3363,6 +3363,20 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = Defaults.Lorebooks.LorebookCSA,
             },
+
+
+            {
+                -- Show Lorebooks (CSA - Lore Category Only))
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOREBOOK_CSA_LOREONLY)),
+                tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_CSA_LOREONLY_TP),
+                getFunc = function() return Settings.Lorebooks.LorebookCSALoreOnly end,
+                setFunc = function(value) Settings.Lorebooks.LorebookCSALoreOnly = value end,
+                width = "full",
+                disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and Settings.Lorebooks.LorebookCSA) end,
+                default = Defaults.Lorebooks.LorebookCSALoreOnly,
+            },
+
             {
                 -- Show Lorebooks (Alert)
                 type = "checkbox",
