@@ -211,6 +211,11 @@ CrowdControl.aoeTraps = {
     [26077] = 1, -- Steam Blast (Steam Vent) -- Volenfell
     [26091] = 1, -- Steam Blast (Steam Vent) -- Volenfell
 
+    [110416] = 1, -- Putrid Cloud (Gas Blossom) -- Housing
+    [110542] = 1, -- Stunted Current (Static Pitcher) -- Housing
+    [111258] = 1, -- Surprise Attack (Lantern Mantis) -- Housing
+    [111261] = 1, -- Surprise Attack (Lantern Mantis) -- Housing
+
     [92757] = 0, -- Spinning Blade (Ald Carac)
 
     [117508] = 0, -- Shock Wall (Lightning Trap - Elinhir Private Arena)

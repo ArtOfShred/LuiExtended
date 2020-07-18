@@ -853,6 +853,8 @@ local strings = {
     SI_LUIE_SKILL_LIGHTNING_TRAP =                       "Lightning Trap",
     SI_LUIE_SKILL_SPIKE_TRAP_TP =                        "Movement Speed reduced by |cFFFFFF25|r% for |cFFFFFF5|r seconds.\n\nImmobilized for |cFFFFFF0.8|r seconds.",
     SI_LUIE_SKILL_SPIKE_TRAP_AURIDON_TP =                "Movement Speed reduced by |cFFFFFF25|r% for |cFFFFFF10|r seconds.\n\nThis effect stacks up to |cFFFFFF3|r times, to a maximum of |cFFFFFF75|r% Movement Speed reduction.\n\nStunned for |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_STATIC_PITCHER_TP =                    "Taking Shock Damage every |cFFFFFF<<2>>|r <<2[second/seconds]>>. Each tick drains |cFFFFFF10|r% of your Max Stamina and Magicka.",
+    SI_LUIE_SKILL_STUNTED_CURRENT_TP =                   "Reduce Stamina Recovery by |cFFFFFF359|r and Magicka Recovery by |cFFFFFF212|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     ----------------------------------------------------------------
     -- SETS --------------------------------------------------------

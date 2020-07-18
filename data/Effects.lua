@@ -3909,6 +3909,9 @@ Effects.EffectOverride = {
     [124789] = { icon = 'LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds', name = Abilities.Innate_Siege_of_Cyrodiil_Recognition }, -- 68235 Stun (Siege of Cyrodiil Recognition)
     [126708] = { hide = true }, -- Siegemaster Costume (Siege of Cyrodiil Recommendation)
     [126710] = { icon = 'LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds', name = Abilities.Innate_Siege_of_Cyrodiil_Recommendation }, -- 68235 Stun (Siege of Cyrodiil Recommendation)
+    [124622] = { hide = true }, -- Alliance Standard-Bearer Emote (Alliance Standard-Bearer's License)
+    [124624] = { icon = 'LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds', name = Abilities.Innate_Alliance_Standard_Bearers }, -- 68235 Stun (Alliance Standard-Bearer's License)
+
 
 
 
@@ -9838,6 +9841,16 @@ Effects.EffectOverride = {
     [26076] = { hide = true }, -- Vent Steam (Steam Vent) -- Volenfell
     [26077] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_steam.dds', name = Abilities.Trap_Steam_Vent, groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.5 }, -- Steam Blast (Steam Vent) -- Volenfell
 
+    [110416] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_gas_blossom.dds', name = Abilities.Trap_Gas_Blossom, groundLabel = true, tooltip = Tooltips.Generic_AOE_Poison, tooltipValue2 = 1 }, -- Putrid Cloud (Gas Blossom) -- Housing
+
+    [110542] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_static_pitcher.dds', name = Abilities.Trap_Static_Pitcher, groundLabel = true, tooltip = Tooltips.Skill_Trap_Static_Pitcher, tooltipValue2 = 0.5 }, -- Stunted Current (Static Pitcher) -- Housing
+    [111229] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_stunted_current.dds', tooltip = Tooltips.Skill_Trap_Stunted_Current }, -- Stunted Current (Static Pitcher) -- Housing
+    [110576] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_static_pitcher.dds', name = Abilities.Trap_Static_Pitcher }, -- Stunted Current (Static Pitcher) -- Housing
+    [110578] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_static_pitcher.dds', name = Abilities.Trap_Static_Pitcher }, -- Stunted Current (Static Pitcher) -- Housing
+
+    [111258] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lantern_mantis.dds', name = Abilities.Trap_Lantern_Mantis }, -- Surprise Attack (Lantern Mantis) -- Housing
+    [111261] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lantern_mantis.dds', name = Abilities.Trap_Lantern_Mantis }, -- Surprise Attack (Lantern Mantis) -- Housing
+
     -- Elinhir Private Arena
     [117428] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava_trap.dds', name = Abilities.Trap_Lava_Trap }, -- Lava Eruption (Lava Trap)
     [118437] = { tooltip = Abilities.Trap_Lava_Trap }, -- Lava Eruption (Lava Trap)
@@ -13806,6 +13819,9 @@ Effects.AddGroundDamageAura = {
     [26089] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Steam Blast (Steam Vent) -- Volenfell
     [26091] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Steam Blast (Steam Vent) -- Volenfell
     [26077] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Steam Blast (Steam Vent) -- Volenfell
+
+    [110416] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Putrid Cloud (Gas Blossom) -- Housing
+    [110542] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Stunted Current (Static Pitcher) -- Housing
 
     --------------------
     -- NPC

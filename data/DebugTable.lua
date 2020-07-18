@@ -785,6 +785,8 @@ LUIE.DebugAuras = {
     --[124789] = true, -- 68235 Stun (Siege of Cyrodiil Recognition)
     --[126708] = true, -- Siegemaster Costume (Siege of Cyrodiil Recommendation)
     --[126710] = true, -- 68235 Stun (Siege of Cyrodiil Recommendation)
+    [124622] = true, -- Alliance Standard-Bearer Emote (Alliance Standard-Bearer's License)
+    [124624] = true, -- 68235 Stun (Alliance Standard-Bearer's License)
 
     -------------------------------------
     -- MEMENTOS -------------------------
@@ -8095,6 +8097,24 @@ LUIE.DebugAuras = {
     [26091] = true, -- Steam Blast (Steam Vent) -- Volenfell
     [26076] = true, -- Vent Steam (Steam Vent) -- Volenfell
     [26077] = true, -- Steam Blast (Steam Vent) -- Volenfell
+
+    [75810] = true, -- Trap Regen Stopper (Gas Blossom) -- Housing
+    [110416] = true, -- Putrid Cloud (Gas Blossom) -- Housing
+    [110571] = true, -- Putrid Cloud (Gas Blossom) -- Housing
+
+    [110541] = true, -- Stunted Current (Static Pitcher) -- Housing
+    [110542] = true, -- Stunted Current (Static Pitcher) -- Housing
+    [111229] = true, -- Stunted Current (Static Pitcher) -- Housing
+    [110576] = true, -- Stunted Current (Static Pitcher) -- Housing
+    [110578] = true, -- Stunted Current (Static Pitcher) -- Housing
+
+    [111256] = true, -- Surprise Attack (Lantern Mantis) -- Housing
+    [113122] = true, -- Disarmed (Lantern Mantis) -- Housing
+    [111347] = true, -- Surprise Attack (Lantern Mantis) -- Housing
+    [111260] = true, -- Surprise Attack (Lantern Mantis) -- Housing
+    [111348] = true, -- Surprise Attack (Lantern Mantis) -- Housing
+    [111258] = true, -- Surprise Attack (Lantern Mantis) -- Housing
+    [111261] = true, -- Surprise Attack (Lantern Mantis) -- Housing
 
     -- Elinhir Private Arena
     [117429] = true, -- Lava Eruption (Lava Trap)

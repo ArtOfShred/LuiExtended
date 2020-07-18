@@ -375,6 +375,7 @@ CastBarTable.CastDurationFix = {
     [140622] = 5000, -- 68235 Stun (Reach-Mage's Ferocity)
     [124789] = 5000, -- 68235 Stun (Siege of Cyrodiil Recognition)
     [126710] = 5000, -- 68235 Stun (Siege of Cyrodiil Recommendation)
+    [124624] = 5000, -- 68235 Stun (Alliance Standard-Bearer's License)
 
     -- Seasonal Mementos and Items
     [86792] = 3000, -- Eating (High Hrothgar Festival Mints)
@@ -528,6 +529,7 @@ CastBarTable.IsCast = {
     [140622] = true, -- 68235 Stun (Reach-Mage's Ferocity)
     [124789] = true, -- 68235 Stun (Siege of Cyrodiil Recognition)
     [126710] = true, -- 68235 Stun (Siege of Cyrodiil Recommendation)
+    [124624] = true, -- 68235 Stun (Alliance Standard-Bearer's License)
 
     -- Seasonal Mementos and Items
     [86792] = true, -- Eating (High Hrothgar Festival Mints)

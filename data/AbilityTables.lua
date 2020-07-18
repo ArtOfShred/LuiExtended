@@ -132,6 +132,7 @@ local AbilityTables = {
     Innate_Reach_Mages_Ferocity             = GetItemLinkName("|H0:item:166469:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Innate_Siege_of_Cyrodiil_Recognition    = GetItemLinkName("|H0:item:151938:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Innate_Siege_of_Cyrodiil_Recommendation = GetItemLinkName("|H0:item:153536:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Alliance_Standard_Bearers        = GetItemLinkName("|H0:item:151934:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
 
     -- Champion
     Champion_Last_Stand               = 60413,
@@ -1078,6 +1079,10 @@ local AbilityTables = {
 
     Trap_Charge_Wire                 = GetString(SI_LUIE_SKILL_CHARGE_WIRE),
     Trap_Steam_Vent                  = GetString(SI_LUIE_SKILL_STEAM_VENT),
+
+    Trap_Static_Pitcher              = GetItemLinkName("|H0:item:145491:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Trap_Gas_Blossom                 = GetItemLinkName("|H0:item:145492:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Trap_Lantern_Mantis              = GetItemLinkName("|H0:item:145493:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
 
     -- ---------------------------------------------------
     -- WORLD BOSSES --------------------------------------

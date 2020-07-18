@@ -1160,6 +1160,9 @@ LUIE.Data.Tooltips = {
 
     Skill_Spike_Trap                                = GetString(SI_LUIE_SKILL_SPIKE_TRAP_TP),
     Skill_Spike_Trap_Auridon                        = GetString(SI_LUIE_SKILL_SPIKE_TRAP_AURIDON_TP),
+    Skill_Trap_Static_Pitcher                       = GetString(SI_LUIE_SKILL_STATIC_PITCHER_TP),
+    Skill_Trap_Stunted_Current                      = GetString(SI_LUIE_SKILL_STUNTED_CURRENT_TP),
+
 
     ----------------------------------------------------------------
     -- NPCS ------------------------------------------------------
