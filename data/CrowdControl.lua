@@ -432,6 +432,9 @@ CrowdControl.aoeNPCElite = {
     [75980] = 1, -- Pillar Eruption (Minotaur Shaman)
     [11282] = 1, -- Steam Breath (Dwemer Centurion)
 
+    -- World
+    [95841] = 1, -- Static Charge (Dark Anchor)
+
     -- Quests
     [50765] = 1, -- CON_AOE_Template1 (Pelidil's End)
 
@@ -524,6 +527,9 @@ CrowdControl.LavaAlerts = {
 
     -- Consumables
     [68565] = true, -- Stun (Potion of Stun)
+
+    -- World
+    [95841] = true, -- Static Charge (Dark Anchor)
 
     -- Battlegrounds
     [87949] = true, -- Lava (Foyada Quarry)

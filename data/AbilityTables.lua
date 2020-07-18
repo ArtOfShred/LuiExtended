@@ -1331,7 +1331,6 @@ local AbilityTables = {
     Skill_Flame_Barrier               = GetString(SI_LUIE_SKILL_FLAME_BARRIER),
     Skill_Call_Storm_Atronach         = GetString(SI_LUIE_SKILL_CALL_STORM_ATRONACH),
     Skill_Call_Storm_Atronachs        = GetString(SI_LUIE_SKILL_CALL_STORM_ATRONACHS),
-    Skill_Explosive_Flare             = GetString(SI_LUIE_SKILL_EXPLOSIVE_FLARE),
 
     -- Tempest Island
     Skill_Sonic_Scream                = 46732,

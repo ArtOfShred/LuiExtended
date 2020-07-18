@@ -1400,7 +1400,6 @@ local strings = {
     SI_LUIE_SKILL_FREEZING_VINES =                       "Freezing Vines",
     SI_LUIE_SKILL_FREEZING_VINEBURST =                   "Freezing Vineburst",
     SI_LUIE_SKILL_FREEZING_VINES_TP =                    "Afflicted with Bleed Damage every |cFFFFFF0.5|r seconds and immobilized for |cFFFFFF<<1>>|r seconds.\n\nThe vines shatter at the end of the duration, dealing Frost Damage if you do not move away.",
-    SI_LUIE_SKILL_EXPLOSIVE_FLARE =                      "Explosive Flare",
     SI_LUIE_SKILL_SUMMON_SPIDERKITH =                    "Summon Spiderkith",
     SI_LUIE_SKILL_SUMMON_DEATH_SPIDER =                  "Summon Death Spider",
     SI_LUIE_SKILL_SUMMON_DEATH_SPIDER_TP =               "A death spider fights at your side. The death spider remains for |cFFFFFF2|r minutes or until killed.",

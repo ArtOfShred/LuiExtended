@@ -4979,7 +4979,7 @@ Effects.EffectOverride = {
     -- WORLD EVENTS  -----------------------------------------------
     ----------------------------------------------------------------
 
-    -- Daedric Anchor
+    -- Dark Anchor
     [86717] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_anchor_drop.dds', name = Abilities.Innate_Anchor_Drop }, -- Drop Anchor
     [46690] = { hide = true }, -- Power of the Daedra
     [46689] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_power_of_the_daedra.dds', name = Abilities.Innate_Power_of_the_Daedra }, -- Vitality of the Daedra
@@ -4991,7 +4991,7 @@ Effects.EffectOverride = {
     [46291] = { hide = true }, -- Rain of Doom
     [46293] = { hide = true }, -- Stun
 
-    -- Daedric Anchor Bosses
+    -- Dark Anchor Bosses
     [89249] = { hide = true }, -- Summon Daedra (Ozozzachar)
     [89251] = { hide = true }, -- Summon Daedra (Ozozzachar)
 
@@ -11992,8 +11992,8 @@ Effects.EffectOverride = {
     [61201] = { hide = true }, -- Melt Up
     [56178] = { hide = true }, -- Gaunt NPC Add Threat
     [56186] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_voice_to_wake_the_dead.dds' }, -- Voice to Wake the Dead (Flame Colossus)
-    [86753] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_bone_flare.dds', name = Abilities.Skill_Explosive_Flare }, -- Bone Flare (Flame Colossus)
-    [55744] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_bone_flare.dds', name = Abilities.Skill_Explosive_Flare }, -- Bone Flare (Flame Colossus)
+    [86753] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fire_torrent.dds', name = Abilities.Skill_Split_Flare }, -- Bone Flare (Flame Colossus)
+    [55744] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_fire_torrent.dds', name = Abilities.Skill_Split_Flare }, -- Bone Flare (Flame Colossus)
 
     [56055] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_jagged_claw.dds' }, -- Jagged Claw (Horvantud the Fire Maw)
     [56054] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_jaws.dds' }, -- Fiery Jaws (Horvantud the Fire Maw)

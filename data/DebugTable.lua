@@ -2900,7 +2900,7 @@ LUIE.DebugAuras = {
     -- WORLD EVENTS ---------------------
     -------------------------------------
 
-    -- Daedric Anchor
+    -- Dark Anchor
     [13603] = true, -- CON_Destealth
     [44045] = true, -- Summon Victim
     [44056] = true, -- Summon Victim Spawn
@@ -2947,7 +2947,7 @@ LUIE.DebugAuras = {
     [51505] = true, -- Portal Spawn
     [51507] = true, -- Targetable On
 
-    -- Daedric Anchor Bosses
+    -- Dark Anchor Bosses
     --[89249] = true, -- Summon Daedra (Ozozzachar)
     --[89251] = true, -- Summon Daedra (Ozozzachar)
 
