@@ -1354,7 +1354,7 @@ local strings = {
     SI_LUIE_SKILL_ENTROPY_NPC_TP =                       "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker heals every |cFFFFFF6|r seconds while Entropy remains active.",
 
     SI_LUIE_SKILL_BECKON_GATHWEN =                       "Beckon Gathwen",
-    SI_LUIE_SKILL_DRAINING_BITE_TP =                     "Afflicted with Bleed Damage every |cFFFFFF0.2|r seconds for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nYour attacker heals at the end of this duration.",
+    --SI_LUIE_SKILL_DRAINING_BITE_TP =                     "Afflicted with Bleed Damage every |cFFFFFF0.2|r seconds for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nYour attacker heals at the end of this duration.",
     SI_LUIE_SKILL_MOLTEN_PILLAR_INCALESCENCE =           "Molten Pillar Incalescence",
     SI_LUIE_SKILL_MOLTEN_PILLAR_TP =                     "Enemies within |cFFFFFF3|r meters of the pillar are hindered by sweltering heat, reducing their Movement Speed by |cFFFFFF60|r%.\n\nThe Ogre Shaman's Blazing Bolts will shackle any hindered targets, inflicting them with a |cFFFFFF4|r second immobilize.",
 

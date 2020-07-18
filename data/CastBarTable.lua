@@ -366,6 +366,10 @@ CastBarTable.CastDurationFix = {
     [130394] = 5000, -- 68235 Stun (Spectral Indrik)
     [131536] = 5000, -- Generic Stun & Combine (Sovereign Sow)
 
+    [68259] = 5000, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [70584] = 5000, -- 68235 Stun (Merethic Restorative Resin)
+    [88451] = 5000, -- 88449 Stun (Aetheric Cipher)
+
     [111190] = 5000, -- 68235 Stun (Arena Gladiator's Exultation)
     [115064] = 5000, -- 68235 Stun (Arena Gladiator's Mockery)
     [106174] = 5000, -- 68235 Stun (Arena Gladiator's Recognition)
@@ -515,6 +519,11 @@ CastBarTable.IsCast = {
     [113432] = true, -- 68235 Stun (Nascent Indrik)
     [130394] = true, -- 68235 Stun (Spectral Indrik)
     [131536] = true, -- Generic Stun & Combine (Sovereign Sow)
+
+    [68259] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [70584] = true, -- 68235 Stun (Merethic Restorative Resin)
+    [88451] = true, -- 88449 Stun (Aetheric Cipher)
+
     [63427] = true, -- Clean Fish (Filet Fish)
     [78052] = true, -- Minor Pardon (Counterfeit Pardon Edict)
     [76350] = true, -- Moderate Pardon (Leniency Edict)

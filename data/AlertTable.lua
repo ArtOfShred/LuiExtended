@@ -596,6 +596,9 @@ LUIE.Data.AlertTable = {
     [85319] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, eventdetect = true, sound = LUIE_ALERT_SOUND_TYPE_GROUND }, -- Siege Ballista (Dwemer Arquebus)
     [85326] = { interrupt = true, priority = 3, eventdetect = true, refire = 1000, result = ACTION_RESULT_BEGIN, duration = 10000, sound = LUIE_ALERT_SOUND_TYPE_HEAL }, -- Polarizing Field (Dwemer Arquebus)
 
+    -- WORLD
+    [95820] = { avoid = true, priority = 2, result = ACTION_RESULT_EFFECT_GAINED, sound = LUIE_ALERT_SOUND_TYPE_ST, duration = 5000 }, -- Static Charge (Dark Anchor)
+
     --------------------------------------------------
     -- FRIENDLY NPC ----------------------------------
     --------------------------------------------------

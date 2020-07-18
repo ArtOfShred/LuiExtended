@@ -3921,7 +3921,14 @@ Effects.EffectOverride = {
     [113432] = { icon = 'LuiExtended/media/icons/abilities/ability_item_indrik_nascent.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Summon, Abilities.Innate_Indrik_Nascent) }, -- 68235 Stun (Nascent Indrik)
     [130394] = { icon = 'LuiExtended/media/icons/abilities/ability_item_indrik_spectral.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Summon, Abilities.Innate_Indrik_Spectral) }, -- 68235 Stun (Spectral Indrik)
     [131536] = { icon = 'LuiExtended/media/icons/abilities/ability_item_pet_sovereign_sow.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Summon, Abilities.Innate_Sovereign_Sow) }, -- Generic Stun & Combine (Sovereign Sow)
+
+    [68259] = { icon = 'LuiExtended/media/icons/abilities/ability_item_psijic_ambrosia_fragment.dds', name = Abilities.Innate_Create_Psijic_Ambrosia_Recipe }, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
     [70582] = { hide = true }, -- Roll 1d1000 (Merethic Restorative Resin)
+    [70584] = { icon = 'LuiExtended/media/icons/abilities/ability_item_merethic_restorative_resin.dds', name = Abilities.Innate_Merethic_Restorative_Resin }, -- 68235 Stun (Merethic Restorative Resin)
+    [88449] = { hide = true }, -- Create Super Psijic Ambrosia (Aetheric Cipher)
+    [88451] = { icon = 'LuiExtended/media/icons/abilities/ability_item_aetheric_cipher.dds', name = Abilities.Innate_Aetheric_Cipher }, -- 88449 Stun (Aetheric Cipher)
+
+
     [63427] = { icon = 'LuiExtended/media/icons/abilities/ability_item_fillet_fish.dds', name = Abilities.Innate_Fillet_Fish }, -- Clean Fish
     [78052] = { icon = 'LuiExtended/media/icons/abilities/ability_item_pardon_edict_low.dds', name = Abilities.Innate_Pardon_Edict_Low }, -- Minor Pardon
     [76350] = { icon = 'LuiExtended/media/icons/abilities/ability_item_pardon_edict_medium.dds', name = Abilities.Innate_Pardon_Edict_Medium }, -- Moderate Pardon
@@ -4973,12 +4980,14 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Daedric Anchor
-    [86717] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_anchor_drop.dds', name = Abilities.Innate_Anchor_Drop }, -- Drop Anchor
+    [86717] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_anchor_drop.dds', name = Abilities.Innate_Anchor_Drop }, -- Drop Anchor
     [46690] = { hide = true }, -- Power of the Daedra
-    [46689] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_power_of_the_daedra.dds', name = Abilities.Innate_Power_of_the_Daedra }, -- Vitality of the Daedra
-    [51632] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_power_of_the_daedra.dds', name = Abilities.Innate_Power_of_the_Daedra }, -- Vitality of the Daedra
-    [51633] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_power_of_the_daedra.dds', name = Abilities.Innate_Power_of_the_Daedra }, -- Vitality of the Daedra
-    [95813] = { type = BUFF_EFFECT_TYPE_DEBUFF, duration = 0, unbreakable = 1, tooltip = Tooltips.Skill_Static_Charge, groundLabel = true }, -- Static Charge
+    [46689] = { icon = 'LuiExtended/media/icons/abilities/ability_otherclass_soul_lock.dds', name = Abilities.Innate_Power_of_the_Daedra }, -- Vitality of the Daedra
+    [51632] = { icon = 'LuiExtended/media/icons/abilities/ability_otherclass_soul_lock.dds', name = Abilities.Innate_Power_of_the_Daedra }, -- Vitality of the Daedra
+    [51633] = { icon = 'LuiExtended/media/icons/abilities/ability_otherclass_soul_lock.dds', name = Abilities.Innate_Power_of_the_Daedra }, -- Vitality of the Daedra
+    [95820] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_static_charge.dds' }, -- Static Charge
+    [95841] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_static_charge.dds' }, -- Static Charge
+    [95813] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_static_charge.dds', type = BUFF_EFFECT_TYPE_DEBUFF, duration = 0, unbreakable = 1, tooltip = Tooltips.Skill_Static_Charge, groundLabel = true }, -- Static Charge
     [46291] = { hide = true }, -- Rain of Doom
     [46293] = { hide = true }, -- Stun
 
@@ -8025,9 +8034,9 @@ Effects.EffectOverride = {
 
     -- Bonelord
     [7590] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_entropic_bolt.dds' }, -- Entropic Bolt (Bonelord)
-    [35387] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_root.dds' }, -- Bone Cage (Bonelord)
-    [88322] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_root.dds' }, -- Bone Cage (Bonelord)
-    [35391] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_root.dds', name = Abilities.Skill_Bone_Cage, tooltip = Tooltips.Generic_Immobilize }, -- Defiled Grave (Bonelord)
+    [35387] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_bone_cage.dds' }, -- Bone Cage (Bonelord)
+    [88322] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_bone_cage.dds' }, -- Bone Cage (Bonelord)
+    [35391] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_bone_cage.dds', name = Abilities.Skill_Bone_Cage, tooltip = Tooltips.Generic_Immobilize }, -- Defiled Grave (Bonelord)
     [88504] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', name = Abilities.Skill_Weakness, duration = -120, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Summon Abomination (Bonelord)
     [88506] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_flesh_atronach.dds' }, -- Summon Abomination (Bonelord)
     [88507] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_flesh_atronach.dds' }, -- Summon Abomination (Bonelord)
@@ -8282,7 +8291,7 @@ Effects.EffectOverride = {
     [4632] = { icon = 'LuiExtended/media/icons/abilities/ability_bat_screech.dds' }, -- Screech (Giant Bat)
     [47321] = { icon = 'LuiExtended/media/icons/abilities/ability_bat_screech.dds' }, -- Screech (Giant Bat)
     [18319] = { icon = 'LuiExtended/media/icons/abilities/ability_bat_screech.dds', tooltip = Tooltips.Generic_Stun }, -- Screech (Giant Bat)
-    [4630] = { icon = 'LuiExtended/media/icons/abilities/ability_bat_draining_bite.dds', tooltip = Tooltips.Skill_Draining_Bite }, -- Draining Bite (Giant Bat)
+    [4630] = { icon = 'LuiExtended/media/icons/abilities/ability_bat_draining_bite.dds', hide = true }, -- Draining Bite (Giant Bat)
 
     -- Giant Snake
     [8540] = { icon = 'LuiExtended/media/icons/abilities/ability_snake_strike.dds' }, -- Strike (Giant Snake)
@@ -11243,23 +11252,23 @@ Effects.EffectOverride = {
 
     [44622] = { hide = true }, -- Break Free (Clones)
 
-    [67765] = { icon = 'esoui/art/icons/ability_mage_025.dds' }, -- Multiply (Maxus the Many)
-    [67656] = { icon = 'esoui/art/icons/ability_mage_025.dds' }, -- Multiply (Maxus the Many)
-    [69515] = { icon = 'esoui/art/icons/ability_mage_025.dds' }, -- Multiply (Maxus the Many)
+    [67765] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_multiply_male.dds' }, -- Multiply (Maxus the Many)
+    [67656] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_multiply_male.dds' }, -- Multiply (Maxus the Many)
+    [69515] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_multiply_male.dds' }, -- Multiply (Maxus the Many)
 
-    [67691] = { icon = 'esoui/art/icons/ability_mage_044.dds' }, -- Reunite (Maxus the Many)
+    [67691] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_reunite_male.dds' }, -- Reunite (Maxus the Many)
     [67683] = { hide = true }, -- Absorb Clones (Maxus the Many)
     [67694] = { hide = true }, -- Reunite (Maxus the Many)
     [67690] = { hide = true }, -- Set Clone CD (Maxus the Many)
 
     [70891] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_entropic_bolt.dds' }, -- Entropic Bolt (Maxus the Many)
-    [70892] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_root.dds', name = Abilities.Skill_Defiled_Grave }, -- Bone Cage (Maxus the Many)
-    [70893] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_root.dds', tooltip = Tooltips.Skill_Defiled_Grave, groundLabel = true, duration = 0, hideGround = true }, -- Defiled Grave (Maxus the Many)
-    [70901] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_root.dds', tooltip = Tooltips.Skill_Defiled_Grave, groundLabel = true }, -- Defiled Grave (Maxus the Many)
+    [70892] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_bone_cage.dds', name = Abilities.Skill_Defiled_Grave }, -- Bone Cage (Maxus the Many)
+    [70893] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_bone_cage.dds', tooltip = Tooltips.Skill_Defiled_Grave, groundLabel = true, duration = 0, hideGround = true }, -- Defiled Grave (Maxus the Many)
+    [70901] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_bone_cage.dds', tooltip = Tooltips.Skill_Defiled_Grave, groundLabel = true }, -- Defiled Grave (Maxus the Many)
 
-    [72148] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_root.dds', name = Abilities.Skill_Defiled_Grave }, -- Bone Cage (Maxus the Many)
-    [72152] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_root.dds', tooltip = Tooltips.Skill_Defiled_Grave, groundLabel = true, duration = 0, hideGround = true }, -- Defiled Grave (Maxus the Many)
-    [72149] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_root.dds', tooltip = Tooltips.Skill_Defiled_Grave, groundLabel = true }, -- Defiled Grave (Maxus the Many)
+    [72148] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_bone_cage.dds', name = Abilities.Skill_Defiled_Grave }, -- Bone Cage (Maxus the Many)
+    [72152] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_bone_cage.dds', tooltip = Tooltips.Skill_Defiled_Grave, groundLabel = true, duration = 0, hideGround = true }, -- Defiled Grave (Maxus the Many)
+    [72149] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_bone_cage.dds', tooltip = Tooltips.Skill_Defiled_Grave, groundLabel = true }, -- Defiled Grave (Maxus the Many)
 
     [72086] = { hide = true }, -- Shadow Strength (Maxus the Many)
 
@@ -11958,7 +11967,7 @@ Effects.EffectOverride = {
 
     [55654] = { hide = true }, -- Venomous Explosion (Venomous Skeleton)
     [55655] = { hide = true }, -- Venomous Explosion (Venomous Skeleton)
-    [55658] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_necrotic_explosion.dds' }, -- Venomous Explosion (Venomous Skeleton)
+    [55658] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_venomous_explosion.dds' }, -- Venomous Explosion (Venomous Skeleton)
     [55657] = { name = Abilities.Innate_Stagger, tooltip = Tooltips.Generic_Stagger }, -- Venomous Explosion (Venomous Skeleton)
 
     [55184] = { hide = true }, -- Urata Spawn In

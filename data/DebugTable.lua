@@ -700,9 +700,13 @@ LUIE.DebugAuras = {
     [115046] = true, -- 68235 Stun (Nascent Indrik)
     [130394] = true, -- 68235 Stun (Spectral Indrik)
     [131536] = true, -- Generic Stun & Combine (Sovereign Sow)
-    --[68259] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
-    --[70582] = true, -- Roll 1d1000 (Merethic Resorative Resin)
-    --[70584] = true, -- 68235 Stun (Merethic Restorative Resin)
+
+    [68259] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [70582] = true, -- Roll 1d1000 (Merethic Resorative Resin)
+    [70584] = true, -- 68235 Stun (Merethic Restorative Resin)
+    [88449] = true, -- Create Super Psijic Ambrosia (Aetheric Cipher)
+    [88451] = true, -- 88449 Stun (Aetheric Cipher)
+
     [63427] = true, -- Clean Fish (Any Fish)
     [78052] = true, -- Minor Pardon (Counterfeit Pardon Edict)
     [76350] = true, -- Moderate Pardon (Leniency Edict)

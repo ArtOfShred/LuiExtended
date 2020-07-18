@@ -1180,7 +1180,6 @@ LUIE.Data.Tooltips = {
     Skill_Hardened_Shell                            = GetString(SI_LUIE_SKILL_HARDENED_SHELL_TP),
     Skill_Slash_Cliff_Strider                       = GetString(SI_LUIE_SKILL_SLASH_CLIFF_STRIDER_TP),
     Skill_Baleful_Call                              = GetString(SI_LUIE_SKILL_BALEFUL_CALL_TP),
-    Skill_Draining_Bite                             = GetString(SI_LUIE_SKILL_DRAINING_BITE_TP),
 
     -- Human NPCs
     Skill_Cleave_Stance                             = GetString(SI_LUIE_SKILL_CLEAVE_STANCE_TP),
