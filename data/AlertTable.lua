@@ -424,7 +424,7 @@ LUIE.Data.AlertTable = {
     [4864] = { dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, cc = LUIE_CC_TYPE_SNARE, duration = 633, sound = LUIE_ALERT_SOUND_TYPE_ST }, -- Storm Bound (Storm Atronach)
 
     [7095] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1400, sound = LUIE_ALERT_SOUND_TYPE_ST }, -- Heavy Attack (Xivilai)
-    [88947] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, hiddenDuration = 3000, bossMatch = { Unitnames.NPC_Xivilai_Fulminator, Unitnames.NPC_Xivilai_Boltaic }, sound = LUIE_ALERT_SOUND_TYPE_GROUND }, -- Lightning Grasp (Xivilai)
+    [88947] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, hiddenDuration = 3000, bossMatch = { Unitnames.NPC_Xivilai_Fulminator, Unitnames.NPC_Xivilai_Boltaic }, sound = LUIE_ALERT_SOUND_TYPE_GROUND, noDirect = true }, -- Lightning Grasp (Xivilai)
     [7100] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1333, postCast = 3000, sound = LUIE_ALERT_SOUND_TYPE_TRAVELER }, -- Hand of Flame (Xivilai)
     [25726] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = "", sound = LUIE_ALERT_SOUND_TYPE_SUMMON }, -- Summon Daedra (Xivilai)
 

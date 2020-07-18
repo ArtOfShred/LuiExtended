@@ -4982,9 +4982,9 @@ Effects.EffectOverride = {
     -- Daedric Anchor
     [86717] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_anchor_drop.dds', name = Abilities.Innate_Anchor_Drop }, -- Drop Anchor
     [46690] = { hide = true }, -- Power of the Daedra
-    [46689] = { icon = 'LuiExtended/media/icons/abilities/ability_otherclass_soul_lock.dds', name = Abilities.Innate_Power_of_the_Daedra }, -- Vitality of the Daedra
-    [51632] = { icon = 'LuiExtended/media/icons/abilities/ability_otherclass_soul_lock.dds', name = Abilities.Innate_Power_of_the_Daedra }, -- Vitality of the Daedra
-    [51633] = { icon = 'LuiExtended/media/icons/abilities/ability_otherclass_soul_lock.dds', name = Abilities.Innate_Power_of_the_Daedra }, -- Vitality of the Daedra
+    [46689] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_power_of_the_daedra.dds', name = Abilities.Innate_Power_of_the_Daedra }, -- Vitality of the Daedra
+    [51632] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_power_of_the_daedra.dds', name = Abilities.Innate_Power_of_the_Daedra }, -- Vitality of the Daedra
+    [51633] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_power_of_the_daedra.dds', name = Abilities.Innate_Power_of_the_Daedra }, -- Vitality of the Daedra
     [95820] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_static_charge.dds' }, -- Static Charge
     [95841] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_static_charge.dds' }, -- Static Charge
     [95813] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_static_charge.dds', type = BUFF_EFFECT_TYPE_DEBUFF, duration = 0, unbreakable = 1, tooltip = Tooltips.Skill_Static_Charge, groundLabel = true }, -- Static Charge
