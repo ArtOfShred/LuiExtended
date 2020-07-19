@@ -10617,10 +10617,12 @@ Effects.EffectOverride = {
     [125270] = { icon = 'LuiExtended/media/icons/abilities/ability_dragon_headbutt.dds' }, -- Headbutt (Bahlokdaan)
     [125271] = { icon = 'LuiExtended/media/icons/abilities/ability_dragon_headbutt.dds' }, -- Headbutt (Bahlokdaan)
     [125268] = { icon = 'LuiExtended/media/icons/abilities/ability_dragon_headbutt.dds', tooltip = Tooltips.Generic_Knockback, cc = LUIE_CC_TYPE_KNOCKBACK }, -- Headbutt (Bahlokdaan)
-    [125272] = { name = Abilities.Innate_Stagger, tooltip = Tooltips.Generic_Stagger, cc = LUIE_CC_TYPE_STAGGER }, -- Headbutt (Bahlokdaan)
-    [125269] = { hide = true }, -- Headbutt (Bahlokdaan)
+    [125272] = { name = Abilities.Innate_Stagger }, -- Headbutt (Bahlokdaan)
+    [125269] = { icon = 'LuiExtended/media/icons/abilities/ability_dragon_headbutt.dds', tooltip = Tooltips.Generic_Stun, cc = LUIE_CC_TYPE_STUN }, -- Headbutt (Bahlokdaan)
 
     [125570] = { icon = 'LuiExtended/media/icons/abilities/ability_dragon_chomp.dds' }, -- Chomp (Bahlokdaan)
+    [122200] = { icon = 'LuiExtended/media/icons/abilities/ability_dragon_chomp.dds' }, -- Chomp (Bahlokdaan)
+    [122201] = { icon = 'LuiExtended/media/icons/abilities/ability_dragon_chomp.dds' }, -- Chomp (Bahlokdaan)
     [122199] = { icon = 'LuiExtended/media/icons/abilities/ability_dragon_chomp.dds' }, -- Chomp (Bahlokdaan)
     [117192] = { icon = 'LuiExtended/media/icons/abilities/ability_dragon_chomp.dds', tooltip = Tooltips.Generic_Stun, cc = LUIE_CC_TYPE_STUN }, -- Chomp (Bahlokdaan)
 
@@ -10628,16 +10630,22 @@ Effects.EffectOverride = {
     [125575] = { hide = true }, -- Tail Swipe (Bahlokdaan)
     [125266] = { icon = 'esoui/art/icons/ability_u24_drg_tailswipe.dds' }, -- Tail Whip (Bahlokdaan)
     [125263] = { tooltip = Tooltips.Generic_Knockback, cc = LUIE_CC_TYPE_KNOCKBACK }, -- Tail Whip (Bahlokdaan)
+    [125267] = { name = Abilities.Innate_Stagger }, -- Tail Whip (Bahlokdaan)
+    [125264] = { tooltip = Tooltips.Generic_Stun, cc = LUIE_CC_TYPE_STUN }, -- Tail Whip (Bahlokdaan)
 
     [125242] = { icon = 'esoui/art/icons/ability_u24_drg_wingthrash.dds' }, -- Wing Thrash (Bahlokdaan)
     [125277] = { hide = true }, -- Wing Swipe (Bahlokdaan)
     [125250] = { icon = 'esoui/art/icons/ability_u24_drg_wingthrash.dds' }, -- Wing Thrash (Bahlokdaan)
     [125245] = { tooltip = Tooltips.Generic_Knockback, cc = LUIE_CC_TYPE_KNOCKBACK }, -- Wing Thrash (Bahlokdaan)
+    [125249] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = Abilities.Innate_Stagger }, -- Wing Swipe (Bahlokdaan)
+    [125246] = { name = Abilities.Skill_Wing_Thrash, tooltip = Tooltips.Generic_Stun, cc = LUIE_CC_TYPE_STUN }, -- Wing Swipe (Bahlokdaan)
 
     [125243] = { icon = 'esoui/art/icons/ability_u24_drg_wingthrash.dds' }, -- Wing Thrash (Bahlokdaan)
     [125274] = { hide = true }, -- Wing Swipe (Bahlokdaan)
     [125256] = { icon = 'esoui/art/icons/ability_u24_drg_wingthrash.dds' }, -- Wing Thrash (Bahlokdaan)
-    [125243] = { tooltip = Tooltips.Generic_Knockback, cc = LUIE_CC_TYPE_KNOCKBACK }, -- Wing Thrash (Bahlokdaan)
+    [125253] = { tooltip = Tooltips.Generic_Knockback, cc = LUIE_CC_TYPE_KNOCKBACK }, -- Wing Thrash (Bahlokdaan)
+    [125257] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = Abilities.Innate_Stagger }, -- Wing Swipe (Bahlokdaan)
+    [125254] = { name = Abilities.Skill_Wing_Thrash, tooltip = Tooltips.Generic_Stun, cc = LUIE_CC_TYPE_STUN }, -- Wing Swipe (Bahlokdaan)
 
     [123118] = { hide = true }, -- Takeoff (Bahlokdaan)
 
@@ -13629,7 +13637,6 @@ Effects.FakeStagger = {
 
     -- Elsweyr
     [121476] = { duration = 433 }, -- Devastating Leap (Bone Flayer) (Bright Moons, Warm Sands)
-    [125272] = { duration = 750 }, -- Headbutt (Bahlokdaan) (Bright Moons, Warm Sands)
 
     -- On Target
     [86310] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = Abilities.Innate_Stagger, duration = 500 }, -- Stagger (Player Blocks charged NPC attack)

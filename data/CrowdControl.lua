@@ -609,7 +609,6 @@ CrowdControl.IgnoreList ={
     -- Elsweyr
     [121032] = true, -- Bash (Grand Adept Ma'hja-dro) (Bright Moons, Warm Sands)
     [121035] = true, -- Staggered (Grand Adept Ma'hja-dro) (Bright Moons, Warm Sands)
-    [125269] = true, -- Headbutt (Bahlokdaan) (Bright Moons, Warm Sands)
 
     ----------------
     -- Arenas

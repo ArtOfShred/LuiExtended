@@ -1211,6 +1211,7 @@ local AbilityTables = {
     Skill_Headbutt                    = 125270,
     Skill_Star_Haven_Dragonhorn       = GetString(SI_LUIE_SKILL_STAR_HAVEN_DRAGONHORN),
     Skill_Steadfast_Ward              = 37232,
+    Skill_Wing_Thrash                 = 125242,
 
     -- Greymoor Quests
     Skill_Piercing_Dagger             = GetString(SI_LUIE_SKILL_PIERCING_DAGGER),

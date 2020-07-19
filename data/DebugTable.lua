@@ -12948,6 +12948,8 @@ LUIE.DebugAuras = {
     [125285] = true, -- Sweeping Breath (Bahlokdaan)
 
     [125569] = true, -- Bite (Bahlokdaan)
+    [122195] = true, -- Bite R (Bahlokdaan)
+    [122196] = true, -- Bite L (Bahlokdaan)
     [122194] = true, -- Bite (Bahlokdaan)
 
     [125244] = true, -- Head Strike (Bahlokdaan)
@@ -12958,6 +12960,8 @@ LUIE.DebugAuras = {
     [125269] = true, -- Headbutt (Bahlokdaan)
 
     [125570] = true, -- Chomp (Bahlokdaan)
+    [122200] = true, -- Chomp (Bahlokdaan)
+    [122201] = true, -- Chomp (Bahlokdaan)
     [122199] = true, -- Chomp (Bahlokdaan)
     [117192] = true, -- Chomp (Bahlokdaan)
 
@@ -12967,6 +12971,8 @@ LUIE.DebugAuras = {
     [125265] = true, -- Tail Whip (Bahlokdaan)
     [125266] = true, -- Tail Whip (Bahlokdaan)
     [125263] = true, -- Tail Whip (Bahlokdaan)
+    [125267] = true, -- Tail Whip (Bahlokdaan)
+    [125264] = true, -- Tail Whip (Bahlokdaan)
 
     [125242] = true, -- Wing Thrash (Bahlokdaan)
     [125278] = true, -- Wing Swipe (Bahlokdaan)
@@ -12974,13 +12980,17 @@ LUIE.DebugAuras = {
     [125247] = true, -- Wing Thrash (Bahlokdaan)
     [125250] = true, -- Wing Thrash (Bahlokdaan)
     [125245] = true, -- Wing Thrash (Bahlokdaan)
+    [125249] = true, -- Wing Thrash (Bahlokdaan)
+    [125246] = true, -- Wing Thrash (Bahlokdaan)
 
-    --[125243] = true, -- Wing Thrash (Bahlokdaan)
-    --[125275] = true, -- Wing Swipe (Bahlokdaan)
-    --[125274] = true, -- Wing Swipe (Bahlokdaan)
-    --[125255] = true, -- Wing Thrash (Bahlokdaan)
-    --[125256] = true, -- Wing Thrash (Bahlokdaan)
-    --[125253] = true, -- Wing Thrash (Bahlokdaan)
+    [125243] = true, -- Wing Thrash (Bahlokdaan)
+    [125275] = true, -- Wing Swipe (Bahlokdaan)
+    [125274] = true, -- Wing Swipe (Bahlokdaan)
+    [125255] = true, -- Wing Thrash (Bahlokdaan)
+    [125256] = true, -- Wing Thrash (Bahlokdaan)
+    [125253] = true, -- Wing Thrash (Bahlokdaan)
+    [125257] = true, -- Wing Thrash (Bahlokdaan)
+    [125254] = true, -- Wing Thrash (Bahlokdaan)
 
     [123812] = true, -- Summon Bahlokdaan (Bahlokdaan)
     [125607] = true, -- Receive Call (Bahlokdaan)
