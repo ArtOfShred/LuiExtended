@@ -927,6 +927,7 @@ local AbilityTables = {
 
     Skill_Pariahs_Resolve             = 116095,
     Skill_Consume_Lifeforce           = GetString(SI_LUIE_SKILL_CONSUME_LIFEFORCE),
+    Skill_Wall_of_Souls               = 21677,
 
     -- ---------------------------------------------------
     -- BATTLEGROUNDS -------------------------------------

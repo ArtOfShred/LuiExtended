@@ -94,6 +94,7 @@ LUIE.Data.Tooltips = {
     ----------------------------------------------------------------
 
     Generic_Immunity                                = GetString(SI_LUIE_SKILL_SET_GENERIC_IMMUNITY_TP),
+    Generic_Immunity_Permanent                      = GetString(SI_LUIE_SKILL_GENERIC_IMMUNITY_PERMANENT_TP),
 
     Generic_Snare                                   = GetString(SI_LUIE_SKILL_GENERIC_SNARE_TP),
     Generic_Snare_No_Dur                            = GetString(SI_LUIE_SKILL_GENERIC_SNARE_NO_DUR_TP),
@@ -1145,6 +1146,8 @@ LUIE.Data.Tooltips = {
     Skill_Elder_Scroll_Alma_Ruma                    = zo_strformat(GetString(SI_LUIE_SKILL_ELDER_SCROLL_TP), GetAbilityName(22299)),
 
     Skill_Ruinous_Cyclone                           = GetString(SI_LUIE_SKILL_RUINOUS_CYCLONE),
+
+    Skill_Wall_of_Souls                             = GetString(SI_LUIE_SKILL_WALL_OF_SOULS_TP),
 
     -- ---------------------------------------------------
     -- BATTLEGROUNDS -------------------------------------

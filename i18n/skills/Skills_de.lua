@@ -297,6 +297,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_SCARY_IMMUNITIES_DUR_TP =      "Immune to all crowd control and movement impairing effects for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_FLYING_IMMUNITIES_TP =         "Immune to movement imparing effects.",
     SI_LUIE_SKILL_SET_GENERIC_IMMUNITY_TP =              "Immune to damage and all negative effects for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_IMMUNITY_PERMANENT_TP =        "Immune to damage and all negative effects.",
     SI_LUIE_SKILL_GENERIC_DISORIENT_TP =                 "Disoriented for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_DISORIENT_NO_DUR_TP =          "Disoriented.",
 
@@ -1082,10 +1083,10 @@ local strings = {
     SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME =               "Empower Atronach: Flame",
     SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST =               "Empower Atronach: Frost",
     SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM =               "Empower Atronach: Storm",
-    SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME_TP =            "The death of a nearby Flame Atronach has empowered this Air Atronach, granting it the use of |cFFFFFFFlame Tornado|r for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME_UNLIMITED_TP =  "This Air Atronach is empowered, granting it the use of |cFFFFFFFlame Tornado|r.",
-    SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM_TP =            "The death of a nearby Storm Atronach has empowered this Air Atronach, granting it the use of |cFFFFFFLightning Rod|r for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST_TP =            "The death of a nearby Frost Atronach has empowered this Air Atronach, granting it the use of |cFFFFFFIce Vortex|r for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME_TP =            "Empowered by Flame, granting the use of |cFFFFFFFlame Tornado|r for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME_UNLIMITED_TP =  "Empowered by Flame, granting the use of |cFFFFFFFlame Tornado|r.",
+    SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM_TP =            "Empowered by Storm, granting the use of |cFFFFFFLightning Rod|r for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST_TP =            "Empowered by Frost, granting the use of |cFFFFFFIce Vortex|r for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_STORM_BOUND_TP =                       "Afflicted with Shock Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_CHILLING_AURA_TP =                     "Enemies within |cFFFFFF2.5|r meters have their Movement Speed reduced by |cFFFFFF20|r%.",
     SI_LUIE_SKILL_RADIANCE_TP =                          "Enemies within |cFFFFFF3|r meters take Flame Damage every |cFFFFFF1|r second.",
@@ -1349,8 +1350,8 @@ local strings = {
     SI_LUIE_SKILL_ENERGIZE =                             "Energize",
     SI_LUIE_SKILL_REFLECTIVE_SCALE =                     "Reflective Scale",
     SI_LUIE_SKILL_FETCHERFLY_SWARM =                     "Fetcherfly Swarm",
-    SI_LUIE_SKILL_WING_GUST_STUN =                       "Knocked back for |cFFFFFF<<1>>|r seconds.\n\nMovement speed reduced by |cFFFFFF50|r% for |cFFFFFF<<2>>|r seconds.",
-    SI_LUIE_SKILL_WING_GUST_SNARE =                      "Knocked back for |cFFFFFF<<2>>|r seconds.\n\nMovement speed reduced by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_WING_GUST_STUN =                       "Knocked back for |cFFFFFF<<1>>|r seconds.\n\nMovement speed reduced by |cFFFFFF45|r% for |cFFFFFF<<2>>|r seconds.",
+    SI_LUIE_SKILL_WING_GUST_SNARE =                      "Knocked back for |cFFFFFF<<2>>|r seconds.\n\nMovement speed reduced by |cFFFFFF45|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_ENTROPY_NPC_TP =                       "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker heals every |cFFFFFF6|r seconds while Entropy remains active.",
 
     SI_LUIE_SKILL_BECKON_GATHWEN =                       "Beckon Gathwen",
@@ -1420,6 +1421,7 @@ local strings = {
     SI_LUIE_SKILL_GARGOYLE_LEAP =                        "Gargoyle Leap",
     SI_LUIE_SKILL_EXPLOSIVE_BOLT_TP =                    "After |cFFFFFF<<1>>|r <<1[second/seconds]>>, the explosive bolt detonates, dealing Flame Damage to you and allies within |cFFFFFF5|r meters.",
     SI_LUIE_SKILL_HEMORRHAGING_TEAR_TP =                 "Afflicted with Bleed Damage every |cFFFFFF<<2>>|r <<2[second/seconds]>> for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nStacks up to |cFFFFFF3|r times, dealing |cFFFFFF50|r% more damage for each stack above the initial application.",
+    SI_LUIE_SKILL_WALL_OF_SOULS_TP =                     "A wall of souls protects you from death.\n\nIf any enemy crosses the threshold of the wall they are killed instantly.",
 
     -- Keep Upgrade
     SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_RANGE =              "Longer Range on Ranged Guards",

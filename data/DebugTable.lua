@@ -950,8 +950,9 @@ LUIE.DebugAuras = {
     --[81301] = true, -- _CRWN_Badger_EatCritter
     [72955] = true, -- _CROWN Pet Goat,Black
     [81352] = true, -- _CRWN_12.5s (Spotted Snow Senche-Leopard)
-    [127179] = true, -- _Crwn Pet Doom Spawn (Mudcrab of Eternal Doom)
+    --[127179] = true, -- _Crwn Pet Doom Spawn (Mudcrab of Eternal Doom)
     [60665] = true, -- Vanity Pet Sphere Stun
+    --[79693] = true, -- _CRWN_ChubLoon_Bellyflop (Chub Loon)
 
     -------------------------------------
     -- OTHER COLLECTIBLES ---------------
@@ -2815,8 +2816,9 @@ LUIE.DebugAuras = {
     [13372] = true, -- Spotted
 
     -- MISC
+    [37079] = true, -- remove
     [22706] = true, -- Remove Sprint
-    --[20311] = true, -- Remove Sprint
+    [20311] = true, -- Remove Sprint
     [20303] = true, -- Remove Sprint
     [38519] = true, -- Hiding
     [39046] = true, -- Add Guild Rep
@@ -2837,6 +2839,28 @@ LUIE.DebugAuras = {
     --[105190] = true, -- Grim Focus Combat Trigger
     --[105192] = true, -- Grim Focus Combat Trigger
     --[105194] = true, -- RF Combat Trigger
+
+    -- DEATH ACHIEVE CHECK (VETERAN DUNGEONS)
+    [55883] = true, -- Death Achieve Check
+    [55884] = true, -- Death Achieve Check
+    [58955] = true, -- Death Achieve Check
+    [58963] = true, -- Death Achieve Check
+    [66271] = true, -- Death Achieve Check
+    [66272] = true, -- Death Achieve Check
+    [75612] = true, -- Death Achieve Check
+    [75615] = true, -- Death Achieve Check
+    [76264] = true, -- Death Achieve Check
+    [76265] = true, -- Death Achieve Check
+    [55883] = true, -- Death Achieve Check
+    [55884] = true, -- Death Achieve Check
+    [58955] = true, -- Death Achieve Check
+    [58963] = true, -- Death Achieve Check
+    [66271] = true, -- Death Achieve Check
+    [66272] = true, -- Death Achieve Check
+    [75612] = true, -- Death Achieve Check
+    [75615] = true, -- Death Achieve Check
+    [76264] = true, -- Death Achieve Check
+    [76265] = true, -- Death Achieve Check
 
     -- PET EFFECTS
     [28609] = true, -- Dummy Target Setter
@@ -16461,6 +16485,11 @@ LUIE.DebugAuras = {
     [116669] = true, -- Ruinous Cyclone (Ruinous Cyclone)
     [116680] = true, -- Ruinous Cyclone (Ruinous Cyclone)
     [116678] = true, -- Ruinous Cyclone (Ruinous Cyclone)
+
+    -- World
+    [21675] = true, -- Molag Bal's Favor (Daedric Titan / Daedroth)
+    [21677] = true, -- Wall of Souls (Dremora Channeler)
+    [21707] = true, -- Imperial Law (Player)
 
     -- Siege Warfare
     [35106] = true, -- Fire (Firepot Trebuchet)

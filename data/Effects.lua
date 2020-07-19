@@ -2543,6 +2543,12 @@ Effects.EffectOverrideByName = {
          [Unitnames.NPC_Honor_Guard_EP]                     = { icon = 'LuiExtended/media/icons/abilities/ability_spell_honor_guard_rage_ep.dds' }, -- Pact Honor Guard
     },
 
+    [21677] = { -- Wall of Souls
+        [Unitnames.NPC_Burdening_Eye] = { hide = true }, -- Burdening Eye
+        [Unitnames.NPC_Daedroth] = { hide = true }, -- Daedroth
+        [Unitnames.NPC_Daedric_Titan] = { hide = true }, -- Daedric Titan
+    },
+
     -- QUESTS
     [37028] = {
         [Unitnames.NPC_Auroran_Battlemage] =      { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds', name = Abilities.Skill_Quick_Strike }, -- Quick Strike (Auroran Battlemage)
@@ -2611,6 +2617,9 @@ Effects.EffectSourceOverride = {
     [27940] = { source = Abilities.Trap_Charge_Wire }, -- Laser Damage (Generic Flame Wave Shooter) -- Stros M'Kai
     [32245] = { source = Abilities.Trap_Steam_Vent }, -- Searing Steam (Steam Trap) -- Stros M'Kai
 
+    -- CYRODIIL
+    [21707] = { source = Unitnames.NPC_Dremora_Channeler }, -- Imperial Law (Player) NPC_Dremora_Channeler
+
     -- ENVIRONMENTAL
     [44034] = { source = Abilities.Trap_Slaughterfish, addSource = true }, -- Slaughterfish Attack
     [113082] = { source = Abilities.Trap_Slaughterfish, addSource = true }, -- Slaughterfish Attack
@@ -2631,7 +2640,7 @@ Effects.EffectSourceOverride = {
     [88404] = {source = 'Blade Trap'}, -- Blade {Vvardenfell}
     [88454] = {source = 'Blade Trap'}, -- Blade {Vvardenfell}
     [88455] = {source = 'Blade Trap'}, -- Blade {Vvardenfell}
-    [91659] = {source = Abilities.Trap_Falling_Rocks}, -- Falling Rocks {Vvardenfell}
+    [91659] = {source = Abilities.Trap_Falling_Rocks }, -- Falling Rocks {Vvardenfell}
     [92672] = {source = 'Red Mountain'}, -- Pyroclast  {Vvardenfell}
     [84527] = {source = 'Steam Vent'}, -- Searing Steam {Vvardenfell}
 
@@ -4055,6 +4064,7 @@ Effects.EffectOverride = {
     [72955] = { hide = true }, -- _CRWN Pet Goat,Black (Sanguine's Black Goat)
     [81352] = { hide = true }, -- _CRWN_12.5s (Spotted Snow Senche-Leopard)
     [127179] = { hide = true }, -- _Crwn Pet Doom Spawn (Mudcrab of Eternal Doom)
+    [79693] = { hide = true }, -- _CRWN_ChubLoon_Bellyflop (Chub Loon)
 
     -- Assistants
     [77645] = { hide = true }, -- Stealth (Pirharri the Smuggler)
@@ -4938,6 +4948,28 @@ Effects.EffectOverride = {
     -- Disguise Effects
     [50602] = { tooltip = Tooltips.Innate_Disguised }, -- Disguised
     [13371] = { hide = true }, -- Acting Suspicious
+
+    -- Death Achieve Check (Veteran Dungeons)
+    [55883] = { hide = true }, -- Death Achieve Check
+    [55884] = { hide = true }, -- Death Achieve Check
+    [58955] = { hide = true }, -- Death Achieve Check
+    [58963] = { hide = true }, -- Death Achieve Check
+    [66271] = { hide = true }, -- Death Achieve Check
+    [66272] = { hide = true }, -- Death Achieve Check
+    [75612] = { hide = true }, -- Death Achieve Check
+    [75615] = { hide = true }, -- Death Achieve Check
+    [76264] = { hide = true }, -- Death Achieve Check
+    [76265] = { hide = true }, -- Death Achieve Check
+    [55883] = { hide = true }, -- Death Achieve Check
+    [55884] = { hide = true }, -- Death Achieve Check
+    [58955] = { hide = true }, -- Death Achieve Check
+    [58963] = { hide = true }, -- Death Achieve Check
+    [66271] = { hide = true }, -- Death Achieve Check
+    [66272] = { hide = true }, -- Death Achieve Check
+    [75612] = { hide = true }, -- Death Achieve Check
+    [75615] = { hide = true }, -- Death Achieve Check
+    [76264] = { hide = true }, -- Death Achieve Check
+    [76265] = { hide = true }, -- Death Achieve Check
 
     -- Pet Effects
     [63794] = { hide = true }, -- Taunt
@@ -8536,12 +8568,12 @@ Effects.EffectOverride = {
     [26641] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_soul_flame.dds' }, -- Soul Flame (Daedric Titan)
     [32696] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_soul_flame.dds' }, -- Soul Flame (Daedric Titan)
     [35280] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_soul_flame.dds', tooltip = Tooltips.Generic_Stun }, -- Soul Flame (Daedric Titan)
-    [73437] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_burning_field_blue.dds', tooltip = Tooltips.Generic_AOE_Snare_Fire, tooltipValue2 = 1, tooltipValue3 = 50, groundLabel = true }, -- Soul Flame (Daedric Titan)
-    [35278] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_burning_field_blue.dds', tooltip = Tooltips.Generic_AOE_Snare_Fire, tooltipValue2 = 1, tooltipValue3 = 50, hideGround = true, duration = 0, groundLabel = true }, -- Soul Flame (Daedric Titan)
+    [73437] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_burning_field_blue.dds', tooltip = Tooltips.Generic_AOE_Snare_Fire, tooltipValue2 = 1, tooltipValue3 = 80, groundLabel = true }, -- Soul Flame (Daedric Titan)
+    [35278] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_burning_field_blue.dds', tooltip = Tooltips.Generic_AOE_Snare_Fire, tooltipValue2 = 1, tooltipValue3 = 80, hideGround = true, duration = 0, groundLabel = true }, -- Soul Flame (Daedric Titan)
     [34405] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_swallowing_souls.dds' }, -- Swallowing Souls (Daedric Titan)
     [34406] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_swallowing_souls.dds' }, -- Swallowing Souls (Daedric Titan)
     [26554] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_wing_gust.dds', tooltip = Tooltips.Skill_Wing_Gust_Stun, tooltipValue2Id = 33085, hideReduce = true }, -- Wing Gust (Daedric Titan)
-    [33085] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_wing_gust.dds', tooltip = Tooltips.Skill_Wing_Gust_Snare, tooltipValue2Id = 26554 }, -- Wing Gust (Daedric Titan) -- TODO: Get snare % tooltip value
+    [33085] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_wing_gust.dds', tooltip = Tooltips.Skill_Wing_Gust_Snare, tooltipValue2Id = 26554 }, -- Wing Gust (Daedric Titan)
     [33086] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_wing_gust.dds' }, -- Wing Gust (Daedric Titan)
 
     -- Daedroth
@@ -9746,6 +9778,10 @@ Effects.EffectOverride = {
     [116096] = { tooltip = Tooltips.Skill_Ruinous_Cyclone }, -- Ruinous Cyclone (Ruinous Cyclone)
     [116669] = { icon = 'esoui/art/icons/ability_artifact_volendrung_006.dds', tooltip = Tooltips.Generic_AOE_Physical, tooltipValue2 = 0.5, groundLabel = true }, -- Ruinous Cyclone (Ruinous Cyclone)
     [116680] = { icon = 'esoui/art/icons/ability_artifact_volendrung_006.dds' }, -- Ruinous Cyclone (Ruinous Cyclone)
+
+    [21675] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_molag_bals_favor.dds', tooltip = Tooltips.Generic_Immunity_Permanent }, -- Molag Bal's Favor
+    [21677] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_wall_of_souls.dds', tooltip = Tooltips.Skill_Wall_of_Souls }, -- Wall of Souls (Dremora Channeler)
+    [21707] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_wall_of_souls.dds', name = Abilities.Skill_Wall_of_Souls }, -- Imperial Law (Player)
 
     -- Siege Warfare
     [35106] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_siege_firepot_trebuchet.dds', name = Abilities.Skill_Firepot_Trebuchet }, -- Fire (Firepot Trebuchet)

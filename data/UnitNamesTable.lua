@@ -118,6 +118,7 @@ LUIE.Data.UnitNames = {
     NPC_Xivilai                           = 'Xivilai', -- GENERIC NPC
     NPC_Wraith                            = 'Wraith', -- GENERIC NPC
     NPC_Daedroth                          = 'Daedroth', -- GENERIC NPC
+    NPC_Daedric_Titan                     = 'Daedric Titan', -- GENERIC NPC
     NPC_Spider_Daedra                     = 'Spider Daedra', -- GENERIC NPC
     NPC_Spiderling                        = 'Spiderling', -- GENERIC NPC
     NPC_Flame_Ogrim                       = 'Flame Ogrim', -- GENERIC NPC (SUMMON)
@@ -179,6 +180,9 @@ LUIE.Data.UnitNames = {
     NPC_Ogrim                             = 'Ogrim', -- GENERIC NPC
 
     NPC_Duneripper                        = 'Duneripper', -- GENERIC NPC
+
+    NPC_Dremora_Channeler                 = 'Dremora Channeler', -- Cyrodiil IC Bridges
+    NPC_Burdening_Eye                     = 'Burdening Eye', -- Summoned NPC
 
     -- DWEMER
     NPC_Dwarven_Sphere                    = 'Dwarven Sphere',
