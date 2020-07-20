@@ -255,7 +255,7 @@ local AbilityTables = {
 
     -- Mementos
     Memento_Almalexias_Lantern        = GetCollectibleName(341),
-    Memento_Battered_Bear_Trap        = GetCollectibleName(343),
+    --Memento_Battered_Bear_Trap        = GetCollectibleName(343),
     Memento_Bonesnap_Binding_Stone    = GetCollectibleName(348),
     Memento_Discourse_Amaranthine     = GetCollectibleName(345),
     Menento_Lenas_Wand_of_Finding     = GetCollectibleName(340),

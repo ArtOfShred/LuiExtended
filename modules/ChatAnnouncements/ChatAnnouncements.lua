@@ -853,7 +853,7 @@ local g_removeableIDs = {
     [33235] = true, -- Wabbajack (Mages Guild Quests)
 }
 
--- List of items to blacklist as annyoing loot
+-- List of items to blacklist as annoying loot
 local g_blacklistIDs = {
     -- General
     [64713]  = true,    -- Laurel
@@ -874,21 +874,16 @@ local g_blacklistIDs = {
     [139670] = true,    -- Dro-m'Athra's Burnished Coffer
     [138711] = true,    -- Welkynar's Grounded Coffer
 
-    -- Mercenary Motif Pages
-    [64716]  = true,    -- Mercenary Motif
-    [64717]  = true,    -- Mercenary Motif
-    [64718]  = true,    -- Mercenary Motif
-    [64719]  = true,    -- Mercenary Motif
-    [64720]  = true,    -- Mercenary Motif
-    [64721]  = true,    -- Mercenary Motif
-    [64722]  = true,    -- Mercenary Motif
-    [64723]  = true,    -- Mercenary Motif
-    [64724]  = true,    -- Mercenary Motif
-    [64725]  = true,    -- Mercenary Motif
-    [64726]  = true,    -- Mercenary Motif
-    [64727]  = true,    -- Mercenary Motif
-    [64728]  = true,    -- Mercenary Motif
-    [64729]  = true,    -- Mercenary Motif
+    -- Transmutation Geodes
+    [134583] = true, -- Transmutation Geode
+    [134588] = true, -- Transmutation Geode
+    [134590] = true, -- Transmutation Geode
+    [134591] = true, -- Transmutation Geode
+    [134595] = true, -- Tester's Infinite Transmutation Geode
+    [134618] = true, -- Uncracked Transmutation Geode
+    [134622] = true, -- Uncracked Transmutation Geode
+    [134623] = true, -- Uncracked Transmutation Geode
+    [140222] = true, -- 200 Transmute Crystals (This is probably just a test item)
 }
 
 local guildAllianceColors = {

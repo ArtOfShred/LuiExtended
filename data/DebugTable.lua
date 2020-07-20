@@ -884,7 +884,6 @@ LUIE.DebugAuras = {
     [25369] = true, -- Sanguine's Goblet (Sanguine's Goblet)
     [42008] = true, -- Blessing of Root Sunder (Token of Root Sunder)
     [42053] = true, -- Yokudan Salute (Yokudan Totem)
-    --[12478] = true, -- CON_Ground Rise on (Yokudan Totem)
     [42067] = true, -- Explosion (Yokudan Totem)
 
     [89550] = true, -- TROPHY Azura's Light (Twilight Shard)
@@ -930,6 +929,7 @@ LUIE.DebugAuras = {
     [104323] = true, -- Psijic Hourglass (Psijic Tautology Glass)
     [104325] = true, -- Psijic Disintegrate (Sapiarchic Discorporation Lens)
     [110482] = true, -- Rind-Renewing Pumpkin (Rind-Renewing Pumpkin)
+    [116543] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [110481] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [113697] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [113696] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)

@@ -3985,7 +3985,7 @@ Effects.EffectOverride = {
 
     -- Base Mementos
     [26829] = { icon = 'LuiExtended/media/icons/mementos/memento_almalexias_enchanted_lantern.dds', name = Abilities.Memento_Almalexias_Lantern, unbreakable = 1, tooltip = Tooltips.Memento_Almalexias_Lantern }, -- Light of the Tribunal (Almalexia's Enchanted Lantern)
-    [26736] = { icon = 'LuiExtended/media/icons/mementos/memento_battered_bear_trap.dds', name = Abilities.Memento_Battered_Bear_Trap }, -- Bear Trap (Battered Bear Trap)
+    --[26736] = { icon = 'LuiExtended/media/icons/mementos/memento_battered_bear_trap.dds', name = Abilities.Memento_Battered_Bear_Trap }, -- Bear Trap (Battered Bear Trap)
     [16846] = { icon = 'LuiExtended/media/icons/mementos/memento_blackfeather_court_whistle.dds', hide = true }, -- Blackfeather Court Whistle (Blackfeather Court Whistle)
     [41988] = {icon = 'LuiExtended/media/icons/mementos/memento_bonesnap_binding_stone.dds', unbreakable = 1, tooltip = Tooltips.Memento_Bonesnap_Binding_Talisman }, -- Bonesnap Binding Stone (Bonesnap Binding Stone)
     [39245] = {icon = 'LuiExtended/media/icons/mementos/memento_discourse_amaranthine.dds', name = Abilities.Memento_Discourse_Amaranthine, unbreakable = 1, tooltip = Tooltips.Memento_Discourse_Amaranthine }, -- Glimpse of the Forbidden (Discoure Amaranthine)
@@ -4048,6 +4048,7 @@ Effects.EffectOverride = {
     [104323] = { icon = 'LuiExtended/media/icons/mementos/memento_psijic_tautology_glass.dds', name = Abilities.Memento_Psijic_Tautology_Glass, unbreakable = 1 }, -- Psijic Hourglass (Psijic Tautology Glass)
     [104325] = { icon = 'LuiExtended/media/icons/mementos/memento_sapiarchic_discorporation_lens.dds', name = Abilities.Memento_Sapiarchic_Discorporation, unbreakable = 1, hide = true }, -- Psijic Disintegrate (Sapiarchic Discorporation Lens)
     [110482] = { icon = 'LuiExtended/media/icons/mementos/memento_rind_renewing_pumpkin.dds', unbreakable = 1 }, -- Rind-Renewing Pumpkin (Rind-Renewing Pumpkin)
+    [116543] = { icon = 'LuiExtended/media/icons/mementos/memento_gourd_gallows_stump.dds', unbreakable = 1 }, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [110481] = { icon = 'LuiExtended/media/icons/mementos/memento_gourd_gallows_stump.dds', unbreakable = 1 }, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [110483] = { icon = 'LuiExtended/media/icons/mementos/memento_ghost_lantern.dds', name = Abilities.Memento_Ghost_Lantern, unbreakable = 1, tooltip = Tooltips.Memento_Ghost_Lantern }, -- Ghost Lantern (Ghost Lantern)
     [113288] = { icon = 'LuiExtended/media/icons/mementos/memento_mire_drum.dds', name = Abilities.Memento_Mire_Drum, unbreakable = 1 }, -- U20 Crown Memento 1 (Mire Drum)
