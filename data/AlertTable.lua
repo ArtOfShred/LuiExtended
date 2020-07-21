@@ -687,7 +687,6 @@ LUIE.Data.AlertTable = {
     -- MSQ Tutorial (Soul Shriven in Coldharbour)
     -- [61748] = { block = true, priority = 1}, -- Heavy Attack (Tutorial) -- Default game tutorials display regardless
     -- [61916] = { interrupt = true, priority = 1}, -- Heat Wave (Tutorial) -- Default game tutorials display regardless
-    [63269] = { block = true, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Heat Wave (Tutorial)
     [63737] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Heavy Attack (Tutorial)
     [63684] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Uppercut (Tutorial)
     [63761] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Pound (Tutorial)
@@ -825,8 +824,8 @@ LUIE.Data.AlertTable = {
     -- GREYMOOR ---------------------------------------
     --------------------------------------------------
 
-    [135718] = { dodge = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1500, cc = LUIE_CC_TYPE_SNARE, postCast = 2300 }, -- Frost Vines (Matron Urgala)
-    [135612] = { block = true, avoid = true, interrupt = true, priority = 2, eventdetect = true, refire = 2000, result = ACTION_RESULT_BEGIN, duration = 4500 }, -- Frost Wave (Matron Urgala)
+    [135718] = { dodge = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1500, cc = LUIE_CC_TYPE_SNARE, postCast = 2300, sound = LUIE_ALERT_SOUND_TYPE_TRAVELER }, -- Frost Vines (Matron Urgala)
+    [135612] = { block = true, avoid = true, interrupt = true, priority = 2, eventdetect = true, refire = 2000, result = ACTION_RESULT_BEGIN, duration = 4500, sound = LUIE_ALERT_SOUND_TYPE_TRAVELER }, -- Frost Wave (Matron Urgala)
 
     --------------------------------------------------
     -- ARENAS ----------------------------------------

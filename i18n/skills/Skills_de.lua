@@ -1220,7 +1220,7 @@ local strings = {
     SI_LUIE_SKILL_STATIC_SHIELD_TP =                     "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nIf the shield is not destroyed it will detonate at the end of the duration, dealing Shock Damage to nearby enemies.",
     SI_LUIE_SKILL_TURRET_MODE_TP =                       "Charged by a power conduit, enabling the Sentry to shield itself with |cFFFFFFStatic Shield|r and use the |cFFFFFFThunderbolt|r ability.",
     SI_LUIE_SKILL_STATIC_CHARGE_TP =                     "Residual static energy from the Dolmen is suppressing your Health Recovery and you will be targeted by Static Charge, taking Oblivion damage.\n\nMove to reduce to the static buildup.",
-    SI_LUIE_SKILL_INCAPACITATING_TERROR_TP =             "Feared and taking Frost Damage every |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_INCAPACITATING_TERROR_TP =             "Feared and afflicted with Frost Damage every |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_SPIRITUAL_CLOAK_TP =                   "A spiritual cloak prevents Soul Thirsters from pulling you into the spirit realm for |cFFFFFF1|r minute.",
     SI_LUIE_SKILL_AETHERIAL_SHIFT_TP =                   "Stunned and shifting into the spirit realm over |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_BLESSING_GATHWEN_TP =                  "Reduce damage taken by |cFFFFFF3|r% for |cFFFFFF<<1>>|r seconds.",
@@ -1422,6 +1422,7 @@ local strings = {
     SI_LUIE_SKILL_EXPLOSIVE_BOLT_TP =                    "After |cFFFFFF<<1>>|r <<1[second/seconds]>>, the explosive bolt detonates, dealing Flame Damage to you and allies within |cFFFFFF5|r meters.",
     SI_LUIE_SKILL_HEMORRHAGING_TEAR_TP =                 "Afflicted with Bleed Damage every |cFFFFFF<<2>>|r <<2[second/seconds]>> for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nStacks up to |cFFFFFF3|r times, dealing |cFFFFFF50|r% more damage for each stack above the initial application.",
     SI_LUIE_SKILL_WALL_OF_SOULS_TP =                     "A wall of souls protects you from death.\n\nIf any enemy crosses the threshold of the wall they are killed instantly.",
+    SI_LUIE_SKILL_EYE_OF_THE_SENTINEL_TP =               "You are paralyzed by the gaze of the Coldharbour Sentinel.",
 
     -- Keep Upgrade
     SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_RANGE =              "Longer Range on Ranged Guards",

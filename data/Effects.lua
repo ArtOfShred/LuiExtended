@@ -9946,8 +9946,6 @@ Effects.EffectOverride = {
     [75527] = { hide = true }, -- Ultimate Protection (Tutorial)
     [64091] = { hide = true }, -- Power Bash (Tutorial - Used on Lyris)
     [61748] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_heavy.dds' }, -- Heavy Attack (Tutorial)
-    [63269] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heat_wave.dds' }, -- Heat Wave
-    [63270] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heat_wave.dds', hide = true }, -- Heat Wave
     [63737] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_heavy.dds' }, -- Heavy Attack (Dremora Churl)
     [63685] = { icon = 'esoui/art/icons/ability_2handed_001.dds', name = Abilities.Skill_Uppercut, tooltip = Tooltips.Generic_Knockback }, -- Uppercut Stun (Dremora Caitiff)
     [63686] = { icon = 'esoui/art/icons/ability_2handed_001.dds' }, -- Uppercut (Dremora Caitiff)
@@ -9956,13 +9954,13 @@ Effects.EffectOverride = {
     [63753] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_vomit.dds' }, -- Vomit (Feral Soul Shriven)
     [63755] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heat_wave.dds' }, -- Heat Wave (Skeletal Pyromancer)
     [63756] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heat_wave.dds', hide = true }, -- Heat Wave - Used by Skeletal Pyromancer in Tutorial }, -- Heat Wave (Skeletal Pyromancer)
-    [64072] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', type = BUFF_EFFECT_TYPE_DEBUFF, duration = 0, unbreakable = 1, tooltip = Tooltips.Generic_Stun_No_Dur, stack = 0 }, -- Eye of the Sentinel (CH Tutorial)
+    [64072] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', type = BUFF_EFFECT_TYPE_DEBUFF, duration = 0, unbreakable = 1, tooltip = Tooltips.Skill_Eye_of_the_Sentinel, stack = 0, cc = LUIE_CC_TYPE_STUN }, -- Eye of the Sentinel (CH Tutorial)
     [48345] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_focused_healing.dds', tooltip = Tooltips.Generic_HoT_Channel, tooltipValue2 = 0.5 }, -- Focused Healing (The Prophet)
     [48346] = { hide = true }, -- Minor Wound (The Prophet)
     [63521] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_bone_saw_tutorial.dds', name = Abilities.Skill_Stomp }, -- Bone Crush (Child of Bones)
     [63522] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_bone_saw_tutorial.dds', name = Abilities.Skill_Stomp }, -- Bone Saw (Child of Bones)
-    [61646] = { icon = 'LuiExtended/media/icons/abilities/ability_bone_colossus_incapacitating_terror.dds', duration = 0, tooltip = Tooltips.Skill_Incapacitating_Terror }, -- Incapacitating Terror
-    [64074] = { icon = 'LuiExtended/media/icons/abilities/ability_bone_colossus_incapacitating_terror.dds'}, -- Incapacitating Terror
+    [61646] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_incapacitating_terror.dds', duration = 0, tooltip = Tooltips.Skill_Incapacitating_Terror, cc = LUIE_CC_TYPE_FEAR }, -- Incapacitating Terror
+    [64074] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_incapacitating_terror.dds'}, -- Incapacitating Terror
     [75514] = { hide = true }, -- Greater Protection - CH Tutorial pointless aura
     [1718] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds', name = Abilities.Skill_Light_Attack }, -- Attack
     [64772] = { hide = true }, -- MQ1 Input Lock LAtk - CH Tutorial pointless aura
@@ -9973,7 +9971,6 @@ Effects.EffectOverride = {
     [64677] = { hide = true }, -- MQ1 Tutorial Perma Off-Balance - CH Tutorial pointless aura
     [64069] = { hide = true }, -- Sentinel Barrier
     [64166] = { hide = true }, -- Major Protection - CH Tutorial pointless aura
-    [63637] = { hide = true }, -- Teleport - CH Tutorial event when player teleports out
 
     -- Daughter of Giants
     [29994] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_inferno.dds' }, -- Inferno (Manifestation of Solitude)

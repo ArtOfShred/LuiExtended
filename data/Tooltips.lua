@@ -1296,7 +1296,8 @@ LUIE.Data.Tooltips = {
     -- QUESTS ------------------------------------------------------
     ----------------------------------------------------------------
 
-    -- MQS
+    -- MSQ
+    Skill_Eye_of_the_Sentinel                       = GetString(SI_LUIE_SKILL_EYE_OF_THE_SENTINEL_TP),
     Skill_Incapacitating_Terror                     = GetString(SI_LUIE_SKILL_INCAPACITATING_TERROR_TP),
 
     -- Aldmeri Quests
