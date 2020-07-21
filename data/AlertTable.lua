@@ -35,6 +35,7 @@ LUIE.Data.AlertTable = {
     -- fakeName = string -- Set this name for the source
     -- bossName = true -- Use the name of the current BOSS target frame for this ability source if possible
     -- bossMatch = NAME -- If there are multiple bosses, look for this name and use it as the source if possible
+    -- noForcedNameOverride = true -- Only fill in a name here if the name is missing, this gets around a few minor limitations
 
     -- CC TYPE
     -- cc = LUIE_CC_TYPE_STUN/LUIE_CC_TYPE_DISORIENT/LUIE_CC_TYPE_FEAR/LUIE_CC_TYPE_STAGGER/LUIE_CC_TYPE_SILENCE/LUIE_CC_TYPE_SNARE/LUIE_CC_TYPE_UNBREAKABLE -- If applicable set the CC type of this effect here
@@ -123,7 +124,7 @@ LUIE.Data.AlertTable = {
     [89425] = { summon = true, priority = 2, auradetect = true, fakeName = "", sound = LUIE_ALERT_SOUND_TYPE_SUMMON }, -- Call Ally (Pet Ranger)
     [44301] = { dodge = true, priority = 3, auradetect = true , ignoreRefresh = true, cc = LUIE_CC_TYPE_SNARE, sound = LUIE_ALERT_SOUND_TYPE_GROUND }, -- Trap Beast (Pet Ranger)
 
-    [15164] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, bossMatch = { Unitnames.Boss_Akezel, Unitnames.Boss_Calixte_Darkblood }, sound = LUIE_ALERT_SOUND_TYPE_TRAVELER }, -- Heat Wave (Fire Mage)
+    [15164] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 1500, bossMatch = { Unitnames.Boss_Akezel, Unitnames.Boss_Calixte_Darkblood }, sound = LUIE_ALERT_SOUND_TYPE_TRAVELER, noForcedNameOverride = true }, -- Heat Wave (Fire Mage)
     [47095] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 2000, postCast = 4000, bossMatch = { Unitnames.Boss_Calixte_Darkblood, Unitnames.Boss_Keeper_Areldur }, sound = LUIE_ALERT_SOUND_TYPE_GROUND }, -- Fire Rune (Fire Mage)
 
     [29471] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1800, bossMatch = { Unitnames.NPC_Xivilai_Fulminator, Unitnames.NPC_Xivilai_Boltaic }, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Thunder Thrall (Storm Mage)
@@ -687,12 +688,11 @@ LUIE.Data.AlertTable = {
     -- MSQ Tutorial (Soul Shriven in Coldharbour)
     -- [61748] = { block = true, priority = 1}, -- Heavy Attack (Tutorial) -- Default game tutorials display regardless
     -- [61916] = { interrupt = true, priority = 1}, -- Heat Wave (Tutorial) -- Default game tutorials display regardless
-    [63737] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Heavy Attack (Tutorial)
-    [63684] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Uppercut (Tutorial)
-    [63761] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Pound (Tutorial)
-    [63752] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Vomit (Tutorial)
-    [63755] = { block = true, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Heat Wave (Tutorial)
-    [63521] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Bone Crush (Tutorial)
+    [63737] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1800, sound = LUIE_ALERT_SOUND_TYPE_ST }, -- Heavy Attack (Tutorial)
+    [63684] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 2200, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_ST_CC }, -- Uppercut (Tutorial)
+    [63761] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1800, cc = LUIE_CC_TYPE_STAGGER, sound = LUIE_ALERT_SOUND_TYPE_ST_CC }, -- Pound (Tutorial)
+    [63752] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2750, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Vomit (Tutorial)
+    [63521] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2500, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Bone Crush (Tutorial)
 
     -- MSQ 2 (Daughter of Giants)
     [27767] = { block = true, bs = true, dodge = true, priority = 2 }, -- Rending Leap (Ancient Clannfear)
@@ -765,7 +765,7 @@ LUIE.Data.AlertTable = {
     -- Tutorial
     -- [83416] = { block = true, priority = 1}, -- Heavy Attack (Tutorial) -- Default game tutorials display regardless
     -- [92233] = { interrupt = true, priority = 1}, -- Throw Dagger (Tutorial) -- Default game tutorials display regardless
-    [92668] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2533 }, -- Whirlwind (Slaver Cutthroat)
+    [92668] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2533, fakeName = Unitnames.NPC_Slaver_Cutthroat, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Whirlwind (Slaver Cutthroat)
 
     -- Main Quest
     [87958] = { avoid = true, interrupt = true, priority = 2 }, -- Ash Storm (Divine Delusions)
@@ -1572,6 +1572,10 @@ LUIE.Data.AlertZoneOverride = {
         -- [176] = Unitnames.NPC_Dremora_Hauzkyn, -- City of Ash I -- Can't use due to Dremora Shaman
     },
     [28408] = { -- Whirlwind (Skirmisher)
+
+        -- QUESTS
+        [968] = Unitnames.NPC_Slaver_Cutthroat, -- Firemoth Island (Vvardenfell)
+
         [Zonenames.Zone_Mathiisen] = Unitnames.NPC_Heritance_Cutthroat, -- Mathiisen (Auridon)
         [810] = Unitnames.NPC_Heritance_Cutthroat, -- Smuggler's Tunnel (Auridon)
         --[Zonenames.Zone_Castle_Rilis] = Unitnames.NPC_Skeletal_Striker, -- Castle Rilis (Auridon) -- Can't, elite here stops this from working
@@ -1595,6 +1599,10 @@ LUIE.Data.AlertZoneOverride = {
         [58] = Unitnames.Boss_Yalorasse_the_Speaker, -- Tempest Island
     },
     [37108] = { -- Arrow Spray (Archer)
+        -- QUESTS
+        [0] = Unitnames.NPC_Skeletal_Archer, -- The Wailing Prison (Soul Shriven in Coldharbour)
+        [968] = Unitnames.NPC_Slaver_Archer, -- Firemoth Island (Vvardenfell)
+
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- Maormer Invasion Camp (Auridon)
         [Zonenames.Zone_South_Beacon] = Unitnames.NPC_Sea_Viper_Deadeye, -- South Beacon (Auridon)
         [Zonenames.Zone_Mathiisen] = Unitnames.NPC_Heritance_Deadeye, -- Mathiisen (Auridon)
@@ -1631,6 +1639,9 @@ LUIE.Data.AlertZoneOverride = {
         [932] = Unitnames.NPC_Spiderkith_Wefter, -- Crypt of Hearts II
     },
     [28628] = { -- Volley (Archer)
+        -- QUESTS
+        [968] = Unitnames.NPC_Slaver_Archer, -- Firemoth Island (Vvardenfell)
+
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- Maormer Invasion Camp (Auridon)
         [Zonenames.Zone_South_Beacon] = Unitnames.NPC_Sea_Viper_Deadeye, -- South Beacon (Auridon)
         [Zonenames.Zone_Mathiisen] = Unitnames.NPC_Heritance_Deadeye, -- Mathiisen (Auridon)
@@ -1667,6 +1678,9 @@ LUIE.Data.AlertZoneOverride = {
         [932] = Unitnames.NPC_Spiderkith_Wefter, -- Crypt of Hearts II
     },
     [12439] = { -- Burning Arrow (Synergy)
+        -- QUESTS
+        [968] = Unitnames.NPC_Slaver_Archer, -- Firemoth Island (Vvardenfell)
+
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- South Beacon (Auridon)
         [Zonenames.Zone_South_Beacon] = Unitnames.NPC_Sea_Viper_Deadeye, -- South Beacon (Auridon)
         [Zonenames.Zone_Mathiisen] = Unitnames.NPC_Heritance_Deadeye, -- Mathiisen (Auridon)
@@ -1758,7 +1772,10 @@ LUIE.Data.AlertZoneOverride = {
     },
     [15164] = { -- Heat Wave (Fire Mage)
 
-        -- Auridon
+        -- QUESTS
+        [0] = Unitnames.NPC_Skeletal_Pyromancer, -- The Wailing Prison (Soul Shriven in Coldharbour)
+
+
         [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Incendiary, -- Silsailen (Auridon)
         [Zonenames.Zone_Tower_of_the_Vale] = Unitnames.Elite_Minantilles_Rage, -- Tower of the Vale (Auridon)
         [Zonenames.Zone_Quendeluun] = Unitnames.NPC_Pact_Pyromancer, -- Quendeluun (Auridon)
@@ -1833,6 +1850,9 @@ LUIE.Data.AlertZoneOverride = {
     [4799] = { -- Tail Spike (Clannfear)
         [395] = Unitnames.Elite_Marrow, -- The Refuge of Dread
         [Zonenames.Zone_Torinaan] = Unitnames.NPC_Clannfear, -- Torinaan (Auridon)
+
+        -- QUESTS
+        [0] = Unitnames.NPC_Clannfear, -- The Wailing Prison (Soul Shriven in Coldharbour)
 
         -- DUNGEONS
         [380] = Unitnames.NPC_Clannfear, -- Banished Cells I
@@ -2114,7 +2134,27 @@ LUIE.Data.AlertZoneOverride = {
     },
 
     [5452] = { -- Lacerate (Alit)
+        -- QUESTS
+        [968] = Unitnames.NPC_Alit, -- Firemoth Island (Vvardenfell)
+
+        -- DUNGEONS
         -- [126] = Unitnames.NPC_Alit, -- Elden Hollow I (Can't use because Alit's are right next to Leafseether and can easily also be casting this)
+
+    },
+
+    [5441] = { -- Dive (Guar)
+        -- QUESTS
+        [968] = Unitnames.NPC_Guar, -- Firemoth Island (Vvardenfell)
+
+    },
+
+    [85395] = { -- Dive (Cliff Strider)
+        -- QUESTS
+        [968] = Unitnames.NPC_Cliff_Strider, -- Firemoth Island (Vvardenfell)
+    },
+    [85399] = { -- Retch (Cliff Strider)
+        -- QUESTS
+        [968] = Unitnames.NPC_Cliff_Strider, -- Firemoth Island (Vvardenfell)
     },
 
     [26412] = { -- Thunderstrikes (Thunderbug)
@@ -2185,6 +2225,12 @@ LUIE.Data.AlertZoneOverride = {
         [22] = Unitnames.Boss_The_Guardians_Strength, -- Volenfell
     },
 
+    [63752] = { -- Vomit (Tutorial)
+        [0] = Unitnames.NPC_Feral_Soul_Shriven, -- The Wailing Prison (Soul Shriven in Coldharbour)
+    },
+    [63521] = { -- Bone Crush (Tutorial)
+        [0] = Unitnames.Elite_Child_of_Bones, -- The Wailing Prison (Soul Shriven in Coldharbour)
+    },
 }
 
 -- Map Name override - Sometimes we need to use GetMapName() instead of Location Name or ZoneId

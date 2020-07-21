@@ -32,7 +32,7 @@ function SpellCastBuffs.EventCombatDebug(eventCode, result, isError, abilityName
     if LUIE.DebugAuras[abilityId] and SpellCastBuffs.SV.ShowDebugFilter then return end
 
     local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
-    local nameFormatted = zo_strformat(SI_UNIT_NAME, GetAbilityName(abilityId))
+    local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
     local source = zo_strformat("<<t:1>>", sourceName)
     local target = zo_strformat("<<t:1>>", targetName)
@@ -62,13 +62,7 @@ function SpellCastBuffs.EventCombatDebug(eventCode, result, isError, abilityName
 
     local finalString = (iconFormatted .. " ["..abilityId.."] "..ability..": [S] "..source.." --> [T] "..target .. " [D] " .. duration .. showachantime .. showacasttime .. " [R] " .. formattedResult)
     finalString = MillisecondTimestampDebug(finalString)
-    if CHAT_SYSTEM.primaryContainer then
-        for k, cc in ipairs(CHAT_SYSTEM.containers) do
-            local chatContainer = cc
-            local chatWindow = cc.windows[1]
-            if chatContainer then chatContainer:AddEventMessageToWindow(chatWindow, finalString, CHAT_CATEGORY_SYSTEM) end
-        end
-    end
+    LUIE.PrintToChat(finalString)
 end
 
 -- Debug Display for Effect Events
@@ -78,7 +72,7 @@ function SpellCastBuffs.EventEffectDebug(eventCode, changeType, effectSlot, effe
     end
 
     local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
-    local nameFormatted = zo_strformat(SI_UNIT_NAME, GetAbilityName(abilityId))
+    local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
     unitName = zo_strformat("<<t:1>>", unitName)
     if unitName == LUIE.PlayerNameFormatted then
@@ -117,20 +111,14 @@ function SpellCastBuffs.EventEffectDebug(eventCode, changeType, effectSlot, effe
         finalString = ("|c00E200Refreshed:|r " .. iconFormatted .. " (" .. changeType .. ") [" .. abilityId .. "] " ..nameFormatted .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
     end
     finalString = MillisecondTimestampDebug(finalString)
-    if CHAT_SYSTEM.primaryContainer then
-        for k, cc in ipairs(CHAT_SYSTEM.containers) do
-            local chatContainer = cc
-            local chatWindow = cc.windows[1]
-            if chatContainer then chatContainer:AddEventMessageToWindow(chatWindow, finalString, CHAT_CATEGORY_SYSTEM) end
-        end
-    end
+    LUIE.PrintToChat(finalString)
 end
 
 -- Account specific DEBUG for ArtOfShred (These are only registered to give me some additional debug options)
 function SpellCastBuffs.AuthorCombatDebug(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
 
     local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
-    local nameFormatted = zo_strformat(SI_UNIT_NAME, GetAbilityName(abilityId))
+    local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
     local source = zo_strformat("<<t:1>>", sourceName)
     local target = zo_strformat("<<t:1>>", targetName)
@@ -172,7 +160,7 @@ end
 function SpellCastBuffs.AuthorEffectDebug(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
 
     local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
-    local nameFormatted = zo_strformat(SI_UNIT_NAME, GetAbilityName(abilityId))
+    local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
     unitName = zo_strformat("<<t:1>>", unitName)
     if unitName == LUIE.PlayerNameFormatted then

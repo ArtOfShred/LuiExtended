@@ -583,6 +583,7 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     local abilityName = GetAbilityName(abilityId)
     local abilityIcon = GetAbilityIcon(abilityId)
     unitName = zo_strformat("<<t:1>>", unitName)
+    local savedName = unitName
 
     -- Override unitName here if we utilize a fakeName / bossName
     if not Alerts[abilityId].summon and not Alerts[abilityId].destroy then
@@ -645,13 +646,13 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
         if AlertsZone[abilityId][zoneName] then
             unitName = AlertsZone[abilityId][zoneName]
             -- Debug for my accounts
-            if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
+            if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
                 d("Zone Name: " .. zoneName .. ": " .. unitName)
             end
         elseif AlertsZone[abilityId][index] then
             unitName = AlertsZone[abilityId][index]
             -- Debug for my accounts
-            if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
+            if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
                 d(index .. ": " .. unitName)
             end
         end
@@ -662,7 +663,7 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
         if AlertsMap[abilityId][mapName] then
             unitName = AlertsMap[abilityId][mapName]
             -- Debug for my accounts
-            if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
+            if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
                 d("Map Name: " .. mapName .. ": " .. unitName)
             end
         end
@@ -676,7 +677,7 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
                 if bossName == Alerts[abilityId].bossMatch[x] then
                     unitName = Alerts[abilityId].bossMatch[x]
                     -- Debug for my accounts
-                    if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
+                    if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
                         d("Boss Match: " .. unitName)
                     end
                 end
@@ -689,9 +690,19 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
             local bossName = DoesUnitExist('boss' .. i) and zo_strformat("<<t:1>>", GetUnitName('boss' .. i)) or ""
             if AlertsConvert[abilityId][bossName] then
                 unitName = AlertsConvert[abilityId][bossName]
-                if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
+                if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
                     d("Boss Enemy with adds detected, converting name of NPC source to: " .. unitName)
                 end
+            end
+        end
+    end
+
+    -- If an ability is flagged to not replace an override name if the source already exists, then use that name after checking its not nil.
+    if Alerts[abilityId].noForcedNameOverride then
+        if savedName ~= "" and savedName ~= nil then
+            unitName = savedName
+            if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
+                d("noForcedNameOverride override detected for enemy, using default name: " .. unitName)
             end
         end
     end
@@ -876,7 +887,7 @@ function AbilityAlerts.OnCombatIn(eventCode, resultType, isError, abilityName, a
     if not Alerts[abilityId] then return end
 
     local Settings = CombatInfo.SV.alerts
-    abilityName = zo_strformat(SI_UNIT_NAME, GetAbilityName(abilityId))
+    abilityName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
     local abilityIcon = GetAbilityIcon(abilityId)
 
     local sourceNameCheck = zo_strformat("<<t:1>>", sourceName)

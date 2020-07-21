@@ -1079,7 +1079,7 @@ local AbilityTables = {
     Trap_Lightning_Trap               = GetString(SI_LUIE_SKILL_LIGHTNING_TRAP),
     Trap_Blade_Trap                   = 66793,
 
-    Trap_Slaughterfish                = zo_strformat(SI_UNIT_NAME, GetItemLinkName("|H0:item:42861:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")),
+    Trap_Slaughterfish                = zo_strformat("<<C:1>>", GetItemLinkName("|H0:item:42861:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")),
     Trap_Lava                         = 5139,
 
     Trap_Charge_Wire                 = GetString(SI_LUIE_SKILL_CHARGE_WIRE),
@@ -1478,7 +1478,7 @@ local AbilityTables = {
 local k, v
 for k, v in pairs(AbilityTables) do
     if type(v) == "number" then
-        AbilityTables[k] = zo_strformat(SI_UNIT_NAME, GetAbilityName(v))
+        AbilityTables[k] = zo_strformat("<<C:1>>", GetAbilityName(v))
     end
 end
 

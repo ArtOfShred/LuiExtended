@@ -191,7 +191,7 @@ CrowdControl.aoeTraps = {
     [56277] = 0, -- Lava (City of Ash II)
     [5140] = 0, -- Lava (Dragonstar Arena)
 
-    [62770] = 0, -- Coldharbour Flames (Flame Trap) - Coldharbour Tutorial
+    [62770] = 0, -- Coldharbour Flames (Flame Trap) - Soul Shriven in Coldharbour
     [21943] = 0, -- Spike Trap (Spike Trap)
     [53169] = 0, -- Spike Trap (Spike Trap) - Dragonstar Arena
     [26531] = 0, -- Bear Trap (Bear Trap)

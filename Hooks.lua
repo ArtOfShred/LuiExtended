@@ -83,6 +83,20 @@ function LUIE.InitializeHooks()
                 if LUIE.Data.Effects.EffectSourceOverride[abilityId].removePlayer then
                     isPlayer = false
                 end
+                if LUIE.Data.Effects.MapDataOverride[abilityId] then
+                    local index = GetZoneId(GetCurrentMapZoneIndex())
+                    local zoneName = GetPlayerLocationName()
+                    if LUIE.Data.Effects.MapDataOverride[abilityId][index] then
+                        if LUIE.Data.Effects.MapDataOverride[abilityId][index].source then
+                            attackerRawName = LUIE.Data.Effects.MapDataOverride[abilityId][index].source
+                        end
+                    end
+                    if LUIE.Data.Effects.MapDataOverride[abilityId][zoneName] then
+                        if LUIE.Data.Effects.MapDataOverride[abilityId][zoneName].source then
+                            attackerRawName = LUIE.Data.Effects.MapDataOverride[abilityId][zoneName].source
+                        end
+                    end
+                end
             end
 
             return attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName
@@ -1265,7 +1279,7 @@ function LUIE.InitializeHooks()
                 if skillProgressionData:GetSkillData():GetPointAllocator():CanPurchase() then
                     local dialogAbility = dialog.ability
                     local id = skillProgressionData:GetAbilityId()
-                    dialog.abilityName:SetText(zo_strformat(SI_UNIT_NAME, GetAbilityName(id)))
+                    dialog.abilityName:SetText(zo_strformat("<<C:1>>", GetAbilityName(id)))
 
                     dialogAbility.skillProgressionData = skillProgressionData
                     dialogAbility.icon:SetTexture(GetAbilityIcon(id))
