@@ -257,11 +257,8 @@ CrowdControl.aoeTraps = {
 
 CrowdControl.aoeNPCBoss = {
 
-    -- Summerset
-    [105889] = 0, -- Pustulant Eruption (Yaghra Nightmare)
-
     -- Vvardenfell
-    [94936] = 1, -- Tremor (Nchuleftingth - Mud-Tusk)
+    [94936] = 0, -- Tremor (Nchuleftingth - Mud-Tusk)
     [86566] = 1, -- Fire Runes (Nchuleftingth - Friar Hadelar)
     [89754] = 1, -- Shocking Rake (Old Rust-Eye - Khartag Point)
     [90148] = 1, -- Sunder's Echo (Vvardenfell -- Divine Intervention)
@@ -437,6 +434,9 @@ CrowdControl.aoeNPCElite = {
 
     -- Quests
     [50765] = 1, -- CON_AOE_Template1 (Pelidil's End)
+
+    -- Summerset
+    [105889] = 1, -- Pustulant Eruption (Yaghra Nightmare)
 
     -- Dragonstar Arena
     [53314] = 1, -- Flame Volley (Sovngarde Ranger)

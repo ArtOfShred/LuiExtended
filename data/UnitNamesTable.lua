@@ -252,6 +252,11 @@ LUIE.Data.UnitNames = {
     NPC_Slaver_Archer = 'Slaver Archer',
     Elite_First_Mate_Ulveni = 'First Mate Ulveni',
 
+    -- Summerset Quests
+    Elite_Yaghra_Nightmare = 'Yaghra Nightmare',
+    NPC_Dessicated_Archer = 'Dessicated Archer',
+    NPC_Dessicated_Fire_Mage = 'Dessicated Fire Mage',
+
     -- Elsweyr Quests
     Elite_Captain_Carvain = 'Captain Carvain',
     Boss_Bahlokdaan = 'Bahlokdaan',

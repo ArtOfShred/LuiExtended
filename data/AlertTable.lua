@@ -796,11 +796,9 @@ LUIE.Data.AlertTable = {
     -- SUMMERSET -------------------------------------
     --------------------------------------------------
 
-    -- TODO: Setup these alerts
-    [105601] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Explosive Toxins (Yaghra Larva)
-
-    [107282] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Impale (Yaghra Nightmare)
-    [105867] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Pustulant Explosion (Yaghra Nightmare)
+    [105601] = { block = true, avoid = true, priority = 3, duration = 1250, result = ACTION_RESULT_BEGIN, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Explosive Toxins (Yaghra Larva)
+    [107282] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 1067, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_AOE_CC }, -- Impale (Yaghra Nightmare)
+    [105867] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 1200, postCast = 4000, cc = LUIE_CC_TYPE_SNARE, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Pustulant Explosion (Yaghra Nightmare)
 
     --------------------------------------------------
     -- ELSWEYR ---------------------------------------
@@ -1602,6 +1600,7 @@ LUIE.Data.AlertZoneOverride = {
         -- QUESTS
         [0] = Unitnames.NPC_Skeletal_Archer, -- The Wailing Prison (Soul Shriven in Coldharbour)
         [968] = Unitnames.NPC_Slaver_Archer, -- Firemoth Island (Vvardenfell)
+        [1013] = Unitnames.NPC_Dessicated_Archer, -- Summerset (The Mind Trap)
 
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- Maormer Invasion Camp (Auridon)
         [Zonenames.Zone_South_Beacon] = Unitnames.NPC_Sea_Viper_Deadeye, -- South Beacon (Auridon)
@@ -1641,6 +1640,7 @@ LUIE.Data.AlertZoneOverride = {
     [28628] = { -- Volley (Archer)
         -- QUESTS
         [968] = Unitnames.NPC_Slaver_Archer, -- Firemoth Island (Vvardenfell)
+        [1013] = Unitnames.NPC_Dessicated_Archer, -- Summerset (The Mind Trap)
 
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- Maormer Invasion Camp (Auridon)
         [Zonenames.Zone_South_Beacon] = Unitnames.NPC_Sea_Viper_Deadeye, -- South Beacon (Auridon)
@@ -1680,6 +1680,7 @@ LUIE.Data.AlertZoneOverride = {
     [12439] = { -- Burning Arrow (Synergy)
         -- QUESTS
         [968] = Unitnames.NPC_Slaver_Archer, -- Firemoth Island (Vvardenfell)
+        [1013] = Unitnames.NPC_Dessicated_Archer, -- Summerset (The Mind Trap)
 
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- South Beacon (Auridon)
         [Zonenames.Zone_South_Beacon] = Unitnames.NPC_Sea_Viper_Deadeye, -- South Beacon (Auridon)
@@ -1744,6 +1745,8 @@ LUIE.Data.AlertZoneOverride = {
 
     --},
     [10805] = { -- Ignite (Synergy)
+        --QUESTS
+        [1013] = Unitnames.NPC_Dessicated_Fire_Mage, -- Summerset (The Mind Trap)
         -- Auridon
         [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Incendiary, -- Silsailen (Auridon)
         [Zonenames.Zone_Tower_of_the_Vale] = Unitnames.Elite_Minantilles_Rage, -- Tower of the Vale (Auridon)
@@ -1774,6 +1777,7 @@ LUIE.Data.AlertZoneOverride = {
 
         -- QUESTS
         [0] = Unitnames.NPC_Skeletal_Pyromancer, -- The Wailing Prison (Soul Shriven in Coldharbour)
+        [1013] = Unitnames.NPC_Dessicated_Fire_Mage, -- Summerset (The Mind Trap)
 
 
         [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Incendiary, -- Silsailen (Auridon)
@@ -1803,7 +1807,8 @@ LUIE.Data.AlertZoneOverride = {
         [22] = Unitnames.NPC_Treasure_Hunter_Incendiary, -- Volenfell
     },
     [47095] = { -- Fire Rune (Fire Mage)
-
+        --QUESTS
+        [1013] = Unitnames.NPC_Dessicated_Fire_Mage, -- Summerset (The Mind Trap)
         -- Auridon
         [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Incendiary, -- Silsailen (Auridon)
         [Zonenames.Zone_Tower_of_the_Vale] = Unitnames.Elite_Minantilles_Rage, -- Tower of the Vale (Auridon)
@@ -2230,6 +2235,12 @@ LUIE.Data.AlertZoneOverride = {
     },
     [63521] = { -- Bone Crush (Tutorial)
         [0] = Unitnames.Elite_Child_of_Bones, -- The Wailing Prison (Soul Shriven in Coldharbour)
+    },
+    [107282] = { -- Impale (Yaghra Nightmare)
+        [1013] = Unitnames.Elite_Yaghra_Nightmare, -- Summerset (The Mind Trap)
+    },
+    [105867] = { -- Pustulant Explosion (Yaghra Nightmare)
+        [1013] = Unitnames.Elite_Yaghra_Nightmare, -- Summerset (The Mind Trap)
     },
 }
 

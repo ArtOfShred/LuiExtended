@@ -12831,6 +12831,7 @@ LUIE.DebugAuras = {
     -- SUMMERSET QUESTS/EVENTS ----------
     -------------------------------------
 
+    -- Tutorial - The Mind Trap
     [107581] = true, -- Mind Haze
     [107747] = true, -- Mind Trap
     [100672] = true, -- MQ1 Input Lock Visual

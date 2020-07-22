@@ -10919,7 +10919,7 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     [100678] = { hide = true }, -- Major Protection (The Mind Trap)
-    [100671] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_heavy.dds' }, -- Heavy Attack (The Mind Trap)
+    [100671] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_2h_heavy.dds' }, -- Heavy Attack (The Mind Trap)
     [100683] = { hide = true }, -- Block Me (The Mind Trap)
     [100677] = { hide = true }, -- Block Me (The Mind Trap)
     [100687] = { hide = true }, -- Off-Balance (The Mind Trap)
@@ -10941,7 +10941,7 @@ Effects.EffectOverride = {
 
     [105867] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_slime_damage.dds' }, -- Pustulant Eruption (Yaghra Nightmare)
     [105889] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_slime_damage.dds' }, -- Pustulant Eruption (Yaghra Nightmare)
-    [105912] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_slime_snare_alt.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare, tooltipValue2 = 50 }, -- Pustulant Eruption (Yaghra Nightmare)
+    [105912] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_slime_snare_alt.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 50, cc = LUIE_CC_TYPE_SNARE }, -- Pustulant Eruption (Yaghra Nightmare)
     [105893] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_slime_damage.dds', name = Abilities.Skill_Pustulant_Eruption }, -- Pustulant Film (Yaghra Nightmare)
 
     ----------------------------------------------------------------
@@ -13967,6 +13967,8 @@ Effects.AddGroundDamageAura = {
     -- Elsweyr
     [121644] = { duration = 800, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Defiled Ground (Euraxian Necromancer) (Bright Moons, Warm Sands)
 
+    -- Summerset
+
     ------------------
     -- ARENAS --------
     ------------------
@@ -14095,11 +14097,13 @@ Effects.MapDataOverride = {
 
     [77905] = { -- Knockback (Giant)
         -- QUESTS
+        [1013] = { icon = 'LuiExtended/media/icons/abilities/ability_yaghranightmare_impale.dds' }, -- Summerset (The Mind Trap) -- Yaghra Nightmare
         [381] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hammer_2h_shock_aura.dds', name = Abilities.Skill_Shock_Blast }, -- Auridon - Captain Blanchete
         [1160] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_gore.dds', name = Abilities.Skill_Gore }, -- Deepwood Vale (Greymoor)
     },
     [77906] = { -- Stun (Giant)
         -- QUESTS
+        [1013] = { icon = 'LuiExtended/media/icons/abilities/ability_yaghranightmare_impale.dds' }, -- Summerset (The Mind Trap) -- Yaghra Nightmare
         [381] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hammer_2h_shock_aura.dds', name = Abilities.Skill_Shock_Blast }, -- Auridon - Captain Blanchete
         [1160] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_gore.dds', name = Abilities.Skill_Gore }, -- Deepwood Vale (Greymoor)
     },
