@@ -2576,8 +2576,8 @@ function UnitFrames.UpdateStaticControls( unitFrame )
         end
     end
     -- Reanchor buffs if title changes
-    if unitFrame.buffs then
-        if UnitFrames.SV.PlayerFrameOptions ~= 1 and unitFrame.unitTag == "reticleover" then
+    if unitFrame.buffs and unitFrame.unitTag == "reticleover" then
+        if UnitFrames.SV.PlayerFrameOptions ~= 1 then
             if (not UnitFrames.SV.TargetEnableRank and not UnitFrames.SV.TargetEnableTitle and not UnitFrames.SV.TargetEnableRankIcon) or (savedTitle == "" and not UnitFrames.SV.TargetEnableRankIcon and unitFrame.isPlayer) or (savedTitle == "" and not unitFrame.isPlayer) then
                 unitFrame.debuffs:ClearAnchors()
                 unitFrame.debuffs:SetAnchor( TOP, unitFrame.control, BOTTOM, 0, 5 )

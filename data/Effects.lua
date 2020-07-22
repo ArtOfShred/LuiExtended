@@ -10594,7 +10594,7 @@ Effects.EffectOverride = {
 
     [121456] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_necrotic_spear_euraxian.dds', hide = true }, -- Necrotic Spear (Euraxian Necromancer)
     [121643] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_damage.dds' }, -- Defiled Ground (Euraxian Necromancer)
-    [121644] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_damage.dds', tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.7 }, -- Defiled Ground (Euraxian Necromancer)
+    [121644] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_damage.dds', tooltip = Tooltips.Generic_AOE_Magic, groundLabel = true, tooltipValue2 = 0.7 }, -- Defiled Ground (Euraxian Necromancer)
     [121645] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_stun.dds', tooltip = Tooltips.Generic_Stun, cc = LUIE_CC_TYPE_STUN }, -- Defiled Ground (Euraxian Necromancer)
     [121402] = { hide = true }, -- Sum Necro Skeleton (Euraxian Necromancer)
     [121458] = { hide = true }, -- Sum Necro Skeleton (Euraxian Necromancer)
@@ -10602,7 +10602,7 @@ Effects.EffectOverride = {
     [119292] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_dragonhorn.dds', name = Abilities.Skill_Star_Haven_Dragonhorn, hide = true }, -- Stun (Player)
 
     [121354] = { hide = true }, -- Boss (Bahlokdaan)
-    [121294] = { tooltip = Tooltips.Generic_Knockdown_No_Dur, cc = LUIE_CC_TYPE_STUN }, -- Unrelenting Force (Bahlokdaan)
+    [121294] = { tooltip = Tooltips.Generic_Knockdown_No_Dur, cc = LUIE_CC_TYPE_KNOCKDOWN }, -- Unrelenting Force (Bahlokdaan)
     [121349] = { hide = true }, -- Unrelenting Force (Bahlokdaan)
     [121351] = { hide = true }, -- Unrelenting Force (Bahlokdaan)
     [124337] = { hide = true }, -- Unrelenting Force (Bahlokdaan)
@@ -10654,7 +10654,7 @@ Effects.EffectOverride = {
 
     [124286] = { hide = true }, -- Set Area (grand Adept Ma'hja-dro)
     [124283] = { hide = true }, -- Roll Dodge (grand Adept Ma'hja-dro)
-    [124272] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_focused_healing.dds', tooltip = Tooltips.Generic_HoT_Channel, tooltipValue2 = 0.5 }, -- Focused Healing (Grand Adept Ma'hja-dro)
+    [124272] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_focused_healing.dds' }, -- Focused Healing (Grand Adept Ma'hja-dro)
     [124310] = { icon = 'esoui/art/icons/ability_restorationstaff_001.dds', name = Abilities.Skill_Steadfast_Ward, tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Master's Shield (Grand Adept Ma'hja-dro)
 
     ----------------------------------------------------------------
@@ -13121,7 +13121,6 @@ Effects.FakeExternalBuffs = {
     [21403] = { duration = 60000, ignoreFade = true }, -- Spiritual Cloak (The Mallari-Mora)
 
     -- Elsweyr Quests
-    [124272] = { duration = 4000 }, -- Focused Healing (Grand Adept Ma'hja-dro)
     [124310] = { duration = 10000 }, -- Master's Shield (Grand Adept Ma'hja-dro)
 
     ----------------

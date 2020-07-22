@@ -767,6 +767,9 @@ LUIE.Data.AlertTable = {
     -- [92233] = { interrupt = true, priority = 1}, -- Throw Dagger (Tutorial) -- Default game tutorials display regardless
     [92668] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2533, fakeName = Unitnames.NPC_Slaver_Cutthroat, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Whirlwind (Slaver Cutthroat)
 
+
+    -- TODO: THE REST OF THESE NON-TUTORIAL
+
     -- Main Quest
     [87958] = { avoid = true, interrupt = true, priority = 2 }, -- Ash Storm (Divine Delusions)
     [90139] = { block = true, dodge = true, priority = 2, bs = true }, -- Empowered Strike (Divine Intervention)
@@ -804,19 +807,19 @@ LUIE.Data.AlertTable = {
     -- ELSWEYR ---------------------------------------
     --------------------------------------------------
 
-    [121475] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1300, cc = LUIE_CC_TYPE_STAGGER }, -- Devastating Leap (Bone Flayer)
-    [121473] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2400 }, -- Flurry (Bone Flayer)
+    [121475] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1300, cc = LUIE_CC_TYPE_STAGGER, sound = LUIE_ALERT_SOUND_TYPE_ST_CC }, -- Devastating Leap (Bone Flayer)
+    [121473] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2400, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Flurry (Bone Flayer)
 
-    [121643] = { interrupt = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2800, cc = LUIE_CC_TYPE_STUN }, -- Defiled Ground (Euraxian Necromancer)
+    [121643] = { interrupt = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2800, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Defiled Ground (Euraxian Necromancer)
 
-    [125281] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 4400, fakeName = Unitnames.Boss_Bahlokdaan, refire = 2000 }, -- Sweeping Breath (Bahlokdaan)
-    [125244] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1567, fakeName = Unitnames.Boss_Bahlokdaan, cc = LUIE_CC_TYPE_STUN }, -- Head Strike (Bahlokdaan)
-    [125570] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1400, cc = LUIE_CC_TYPE_STUN }, -- Chomp (Bahlokdaan)
-    [122200] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1400, cc = LUIE_CC_TYPE_STUN }, -- Chomp (Bahlokdaan)
-    [122201] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1400, cc = LUIE_CC_TYPE_STUN }, -- Chomp (Bahlokdaan)
-    [125241] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1567, fakeName = Unitnames.Boss_Bahlokdaan, cc = LUIE_CC_TYPE_STUN  }, -- Tail Whip (Bahlokdaan)
-    [125242] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1533, fakeName = Unitnames.Boss_Bahlokdaan, cc = LUIE_CC_TYPE_STUN  }, -- Wing Thrash (Bahlokdaan)
-    [125243] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1533, fakeName = Unitnames.Boss_Bahlokdaan, cc = LUIE_CC_TYPE_STUN  }, -- Wing Thrash (Bahlokdaan)
+    [125281] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 4400, fakeName = Unitnames.Boss_Bahlokdaan, refire = 2000, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Sweeping Breath (Bahlokdaan)
+    [125244] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1567, fakeName = Unitnames.Boss_Bahlokdaan, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_AOE_CC }, -- Head Strike (Bahlokdaan)
+    [125570] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1400, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_ST_CC }, -- Chomp (Bahlokdaan)
+    [122200] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1400, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_ST_CC }, -- Chomp (Bahlokdaan)
+    [122201] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1400, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_ST_CC }, -- Chomp (Bahlokdaan)
+    [125241] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1567, fakeName = Unitnames.Boss_Bahlokdaan, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_AOE_CC  }, -- Tail Whip (Bahlokdaan)
+    [125242] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1533, fakeName = Unitnames.Boss_Bahlokdaan, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_AOE_CC  }, -- Wing Thrash (Bahlokdaan)
+    [125243] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1533, fakeName = Unitnames.Boss_Bahlokdaan, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_AOE_CC  }, -- Wing Thrash (Bahlokdaan)
 
     --------------------------------------------------
     -- GREYMOOR ---------------------------------------
@@ -2241,6 +2244,10 @@ LUIE.Data.AlertZoneOverride = {
     },
     [105867] = { -- Pustulant Explosion (Yaghra Nightmare)
         [1013] = Unitnames.Elite_Yaghra_Nightmare, -- Summerset (The Mind Trap)
+    },
+
+    [121643] = { -- Defiled Ground (Euraxian Necromancer)
+        [1106] = Unitnames.NPC_Euraxian_Necromancer, -- Elsweyr (Bright Moons, Warm Sands)
     },
 }
 

@@ -258,6 +258,7 @@ LUIE.Data.UnitNames = {
     NPC_Dessicated_Fire_Mage = 'Dessicated Fire Mage',
 
     -- Elsweyr Quests
+    NPC_Euraxian_Necromancer = 'Euraxian Necromancer',
     Elite_Captain_Carvain = 'Captain Carvain',
     Boss_Bahlokdaan = 'Bahlokdaan',
 
