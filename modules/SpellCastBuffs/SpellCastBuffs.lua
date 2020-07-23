@@ -1435,7 +1435,7 @@ function SpellCastBuffs.CreateSingleIcon(container, AnchorItem, effectType)
 end
 
  -- Set proper color of border and text on single buff element
-function SpellCastBuffs.SetSingleIconBuffType(buff, buffType, unbreakable)
+function SpellCastBuffs.SetSingleIconBuffType(buff, buffType, unbreakable, id)
     local contextType
     local colour
     if not unbreakable or unbreakable == 0 then
@@ -1444,7 +1444,7 @@ function SpellCastBuffs.SetSingleIconBuffType(buff, buffType, unbreakable)
             colour = {0,1,0,1}
         else
             contextType = "debuff"
-            colour = {1,0,0,1}
+            colour = {0,0,0,1}
         end
     elseif unbreakable == 1 then
         if buffType == 1 then
@@ -1455,6 +1455,29 @@ function SpellCastBuffs.SetSingleIconBuffType(buff, buffType, unbreakable)
             colour = {.88,.88,1,1}
         end
     end
+
+    if Effects.EffectOverride[id] and Effects.EffectOverride[id].cc then
+        local cc = Effects.EffectOverride[id].cc
+        if cc == LUIE_CC_TYPE_STUN then
+            colour = {1, 0, 0, 1} -- red
+        elseif cc == LUIE_CC_TYPE_KNOCKBACK or cc == LUIE_CC_TYPE_KNOCKDOWN or cc == LUIE_CC_TYPE_PULL then
+            colour = { 0, 0, 1, 1 } -- dark blue
+        elseif cc == LUIE_CC_TYPE_SNARE then
+            colour = { 1, 1, 0, 1 } -- yellow
+        elseif cc == LUIE_CC_TYPE_ROOT then
+            colour = { 1, 0.69, 0, 1 } -- orangeish
+        elseif cc == LUIE_CC_TYPE_DISORIENT then
+            colour = { 0, 0.62, 1, 1 } -- light blue
+        elseif cc == LUIE_CC_TYPE_FEAR then
+            colour = { 1, 0, 1, 1 } -- purple
+        elseif cc == LUIE_CC_TYPE_SILENCE then
+            colour = { 0, 1, 1, 1 } -- cyan
+        elseif cc == LUIE_CC_TYPE_STAGGER then
+            colour = { 1, 1, 0, 1 } -- yellow
+        end
+    end
+        
+
     -- {0.07, 0.45, 0.8}
 
     buff.frame:SetTexture("/esoui/art/actionbar/" .. contextType .. "_frame.dds")
@@ -3348,7 +3371,7 @@ function SpellCastBuffs.updateIcons(currentTime, sortedList, container)
         if effect.iconNum ~= index then
             effect.iconNum = index
             effect.restart = true
-            SpellCastBuffs.SetSingleIconBuffType(buff, effect.type, effect.unbreakable)
+            SpellCastBuffs.SetSingleIconBuffType(buff, effect.type, effect.unbreakable, effect.id)
 
             -- Setup Info for Tooltip function to pull
             buff.effectId = effect.id

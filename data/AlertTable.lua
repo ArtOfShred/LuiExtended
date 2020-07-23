@@ -826,7 +826,7 @@ LUIE.Data.AlertTable = {
     --------------------------------------------------
 
     [135718] = { dodge = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1500, cc = LUIE_CC_TYPE_SNARE, postCast = 2300, sound = LUIE_ALERT_SOUND_TYPE_TRAVELER }, -- Frost Vines (Matron Urgala)
-    [135612] = { block = true, avoid = true, interrupt = true, priority = 2, eventdetect = true, refire = 2000, result = ACTION_RESULT_BEGIN, duration = 4500, sound = LUIE_ALERT_SOUND_TYPE_TRAVELER }, -- Frost Wave (Matron Urgala)
+    [135612] = { block = true, avoid = true, interrupt = true, priority = 2, eventdetect = true, refire = 2000, cc = LUIE_CC_TYPE_SNARE, result = ACTION_RESULT_BEGIN, duration = 4500, sound = LUIE_ALERT_SOUND_TYPE_TRAVELER }, -- Frost Wave (Matron Urgala)
 
     --------------------------------------------------
     -- ARENAS ----------------------------------------

@@ -10152,8 +10152,8 @@ Effects.EffectOverride = {
     [33233] = { icon = 'esoui/art/icons/perks_mages_guild_004.dds', name = Abilities.Skill_Beckon_Gathwen }, -- 4625 Stun for Beckon 1.5s
     [31652] = { hide = true }, -- 4625 Gathwen Destory Ward
     [33231] = { hide = true }, -- 4625 Ward Destory
-    [33136] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_blessing.dds', tooltip = Tooltips.Skill_Blessing_Gathwen }, -- Blessing (Gathwen)
-    [35185] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_blessing.dds', name = Abilities.Skill_Blessing, hide = true }, -- 4625 Heal (Gathwen)
+    [33136] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heal.dds', tooltip = Tooltips.Skill_Blessing_Gathwen }, -- Blessing (Gathwen)
+    [35185] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heal.dds', name = Abilities.Skill_Blessing, hide = true }, -- 4625 Heal (Gathwen)
     [32063] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_feedback.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Stun }, -- Feedback
     [35195] = { hide = true }, -- No Heal Check
     [31709] = { hide = true }, -- 4625 Gathwen Beam Ritual
@@ -10668,12 +10668,12 @@ Effects.EffectOverride = {
     [113275] = { hide = true }, -- CVFHeal CombatDet STN End (Fennorian)
     [113261] = { hide = true }, -- CVFHEAL CombatDet Root (Fennorian)
     [113278] = { hide = true }, -- Damage (Fennorian)
-    [113271] = { icon = 'LuiExtended/media/icons/abilities/ability_set_almalexias_mercy.dds', hide = true }, -- Heal (Fennorian)
+    [113271] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_heal.dds', hide = true }, -- Heal (Fennorian)
 
     [131865] = { icon = 'esoui/art/icons/ability_2handed_001.dds', hide = true }, -- Uppercut (Vitrus the Bloody)
-    [131864] = { icon = 'esoui/art/icons/ability_2handed_001.dds', tooltip = Tooltips.Generic_Knockback }, -- Uppercut (Vitrus the Bloody)
+    [131864] = { icon = 'esoui/art/icons/ability_2handed_001.dds', tooltip = Tooltips.Generic_Knockback, cc = LUIE_CC_TYPE_KNOCKBACK }, -- Uppercut (Vitrus the Bloody)
     [131861] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_throw_dagger_tutorial.dds', name = Abilities.Skill_Piercing_Dagger, hide = true }, -- Throw Dagger (Vitrus the Bloody)
-    [131862] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_throw_dagger_tutorial.dds', name = Abilities.Skill_Piercing_Dagger, tooltip = Tooltips.Generic_Stun }, -- Stunned (Vitrus the Bloody)
+    [131862] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_throw_dagger_tutorial.dds', name = Abilities.Skill_Piercing_Dagger, tooltip = Tooltips.Generic_Stun, cc = LUIE_CC_TYPE_STUN }, -- Stunned (Vitrus the Bloody)
 
     [135039] = { hide = true }, -- Drop In (Frostbite Spider)
     [99566] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_spawn_hatchlings.dds' }, -- Falling Spiders (Frostbite Spider)
@@ -10682,11 +10682,11 @@ Effects.EffectOverride = {
 
     [135612] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_frost_wave.dds', hide = true }, -- Frost Wave (Matron Urgala)
     [135627] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_frost_wave.dds', hide = true }, -- Frost Wave (Matron Urgala)
-    [135672] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_frost_wave.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 25, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, noDuplicate = true }, -- Frost Wave (Matron Urgala)
+    [135672] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_frost_wave.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 25, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, noDuplicate = true, cc = LUIE_CC_TYPE_SNARE }, -- Frost Wave (Matron Urgala)
 
     [135718] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_freezing_vines.dds', name = Abilities.Skill_Freezing_Vines }, -- Frost Vines (Matron Urgala)
-    [135721] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_freezing_vines.dds', name = Abilities.Skill_Freezing_Vines, hideReduce = true, tooltip = Tooltips.Skill_Freezing_Vines }, -- Frost Vines (Matron Urgala)
-    [135720] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_freezing_vines.dds', name = Abilities.Skill_Freezing_Vines, tooltip = Tooltips.Skill_Freezing_Vines }, -- Frost Vines (Matron Urgala)
+    [135721] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_freezing_vines.dds', name = Abilities.Skill_Freezing_Vines, hideReduce = true, tooltip = Tooltips.Skill_Freezing_Vines, cc = LUIE_CC_TYPE_ROOT }, -- Frost Vines (Matron Urgala)
+    [135720] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_freezing_vines.dds', name = Abilities.Skill_Freezing_Vines, tooltip = Tooltips.Skill_Freezing_Vines, cc = LUIE_CC_TYPE_ROOT }, -- Frost Vines (Matron Urgala)
     [135723] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_freezing_vineburst.dds', name = Abilities.Skill_Freezing_Vineburst }, -- Frost Vines (Matron Urgala)
 
     ----------------------------------------------------------------
