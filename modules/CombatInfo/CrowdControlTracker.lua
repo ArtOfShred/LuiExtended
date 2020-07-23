@@ -294,14 +294,24 @@ local function ResolveAbilityName(abilityId, sourceName)
         end
     end
 
-    if Effects.MapDataOverride[abilityId] then
+    if Effects.ZoneDataOverride[abilityId] then
         local index = GetZoneId(GetCurrentMapZoneIndex())
         local zoneName = GetPlayerLocationName()
-        if Effects.MapDataOverride[abilityId][index] then
-            abilityName = Effects.MapDataOverride[abilityId][index].name
+        if Effects.ZoneDataOverride[abilityId][index] then
+            abilityName = Effects.ZoneDataOverride[abilityId][index].name
         end
-        if Effects.MapDataOverride[abilityId][zoneName] then
-            abilityName = Effects.MapDataOverride[abilityId][zoneName].name
+        if Effects.ZoneDataOverride[abilityId][zoneName] then
+            abilityName = Effects.ZoneDataOverride[abilityId][zoneName].name
+        end
+    end
+
+    -- Override name, icon, or hide based on Map Name
+    if Effects.MapDataOverride[abilityId] then
+        local mapName = GetMapName()
+        if Effects.MapDataOverride[abilityId][mapName] then
+            if Effects.MapDataOverride[abilityId][mapName].name then
+                abilityName = Effects.MapDataOverride[abilityId][mapName].name
+            end
         end
     end
 
@@ -320,14 +330,24 @@ local function ResolveAbilityIcon(abilityId, sourceName)
         end
     end
 
-    if Effects.MapDataOverride[abilityId] then
+    if Effects.ZoneDataOverride[abilityId] then
         local index = GetZoneId(GetCurrentMapZoneIndex())
         local zoneName = GetPlayerLocationName()
-        if Effects.MapDataOverride[abilityId][index] then
-            abilityIcon = Effects.MapDataOverride[abilityId][index].icon
+        if Effects.ZoneDataOverride[abilityId][index] then
+            abilityIcon = Effects.ZoneDataOverride[abilityId][index].icon
         end
-        if Effects.MapDataOverride[abilityId][zoneName] then
-            abilityIcon = Effects.MapDataOverride[abilityId][zoneName].icon
+        if Effects.ZoneDataOverride[abilityId][zoneName] then
+            abilityIcon = Effects.ZoneDataOverride[abilityId][zoneName].icon
+        end
+    end
+
+    -- Override name, icon, or hide based on Map Name
+    if Effects.MapDataOverride[abilityId] then
+        local mapName = GetMapName()
+        if Effects.MapDataOverride[abilityId][mapName] then
+            if Effects.MapDataOverride[abilityId][mapName].icon then
+                abilityIcon = Effects.MapDataOverride[abilityId][mapName].icon
+            end
         end
     end
 

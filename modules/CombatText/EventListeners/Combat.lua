@@ -54,17 +54,27 @@ function CombatTextCombatEventListener:OnCombatIn(...)
     end
 
     -- Handle effects that override by ZoneId
-    if Effects.MapDataOverride[abilityId] then
+    if Effects.ZoneDataOverride[abilityId] then
         local index = GetZoneId(GetCurrentMapZoneIndex())
         local zoneName = GetPlayerLocationName()
-        if Effects.MapDataOverride[abilityId][index] then
-            if Effects.MapDataOverride[abilityId][index].name then
-                abilityName = Effects.MapDataOverride[abilityId][index].name
+        if Effects.ZoneDataOverride[abilityId][index] then
+            if Effects.ZoneDataOverride[abilityId][index].name then
+                abilityName = Effects.ZoneDataOverride[abilityId][index].name
             end
         end
-        if Effects.MapDataOverride[abilityId][zoneName] then
-            if Effects.MapDataOverride[abilityId][zoneName].name then
-                abilityName = Effects.MapDataOverride[abilityId][zoneName].name
+        if Effects.ZoneDataOverride[abilityId][zoneName] then
+            if Effects.ZoneDataOverride[abilityId][zoneName].name then
+                abilityName = Effects.ZoneDataOverride[abilityId][zoneName].name
+            end
+        end
+    end
+
+    -- Override name, icon, or hide based on Map Name
+    if Effects.MapDataOverride[abilityId] then
+        local mapName = GetMapName()
+        if Effects.MapDataOverride[abilityId][mapName] then
+            if Effects.MapDataOverride[abilityId][mapName].name then
+                abilityName = Effects.MapDataOverride[abilityId][mapName].name
             end
         end
     end

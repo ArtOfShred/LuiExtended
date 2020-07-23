@@ -8470,6 +8470,8 @@ Effects.EffectOverride = {
     [76184] = { hide = true }, -- Bog Burst (Haj Mota)
     [72789] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shockwave.dds' }, -- Shockwave (Haj Mota)
     [73494] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_shockwave.dds', hide = true }, -- Shockwave (Haj Mota)
+
+    -- Dire Wolf
     [76319] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_backstabber.dds', name = Abilities.Skill_Backstabber, tooltip = Tooltips.Skill_Backstabber }, -- Backstabber (Dire Wolf)
     [80382] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_bite.dds' }, -- Bite (Dire Wolf)
     [80383] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_bite.dds' }, -- Bite (Dire Wolf)
@@ -8484,6 +8486,8 @@ Effects.EffectOverride = {
     [76312] = { hide = true }, -- Harry (Dire Wolf)
     [76324] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_baleful_call.dds', tooltip = Tooltips.Skill_Baleful_Call }, -- Baleful Call (Dire Wolf)
     [76322] = { hide = true }, -- Baleful Call (Dire Wolf)
+
+    -- Nix Ox
     [85200] = { icon = 'LuiExtended/media/icons/abilities/ability_nixox_scythe.dds' }, -- Scythe (Nix-Ox)
     [85198] = { icon = 'LuiExtended/media/icons/abilities/ability_nixox_snap.dds' }, -- Snap (Nix-Ox)
     [85201] = { icon = 'LuiExtended/media/icons/abilities/ability_nixox_gore.dds', name = Abilities.Skill_Gore }, -- Bite (Nix-Ox)
@@ -14081,7 +14085,7 @@ Effects.AddGroundDamageAura = {
 --------------------------------------------------------------------------------------------------------------------------------
 -- When GetZoneId(GetCurrentMapZoneIndex()) matches this filter, customize the ability based off this criteria.
 --------------------------------------------------------------------------------------------------------------------------------
-Effects.MapDataOverride = {
+Effects.ZoneDataOverride = {
 
     -- TUTORIAL AREAS
 
@@ -14090,6 +14094,62 @@ Effects.MapDataOverride = {
     },
     [121005] = {
         [1160] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_2h_heavy.dds' }, -- Heavy Attack (Vitrus the Bloody)
+    },
+
+    [70355] = {
+        [1160] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_bite_black.dds' }, -- Bite (Great Bear)
+    },
+    [70357] = {
+        [1160] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_lunge_black.dds' }, -- Lunge (Great Bear)
+    },
+    [70359] = {
+        [1160] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_lunge_black.dds' }, -- Lunge (Great Bear)
+    },
+    [70366] = {
+        [1160] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe_black.dds' }, -- Slam (Great Bear)
+    },
+    [89189] = {
+        [1160] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe_black.dds' }, -- Slam (Great Bear)
+    },
+    [69073] = {
+        [1160] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe_black.dds' }, -- Knockdown (Great Bear)
+    },
+    [70374] = {
+        [1160] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_ferocity_black.dds' }, -- Ferocity (Great Bear)
+    },
+
+    [80382] = {
+        [1160] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_bite_white.dds' }, -- Bite (Dire Wolf)
+        },
+    [80383] = {
+        [1160] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_bite_white.dds' }, -- Bite (Dire Wolf)
+        },
+    [76307] = {
+        [1160] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_lunge_white.dds' }, -- Lunge (Dire Wolf)
+        },
+    [76308] = {
+        [1160] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_lunge_white.dds' }, -- Lunge (Dire Wolf)
+        },
+    [76303] = {
+        [1160] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_nip_white.dds' }, -- Nip (Dire Wolf)
+        },
+    [76304] = {
+        [1160] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_nip_white.dds' }, -- Nip (Dire Wolf)
+        },
+    [76305] = {
+        [1160] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_gnash_white.dds' }, -- Gnash (Dire Wolf)
+        },
+    [76306] = {
+        [1160] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_gnash_white.dds' }, -- Gnash (Dire Wolf)
+        },
+    [76311] = {
+        [1160] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_harry_white.dds' }, -- Harry (Dire Wolf)
+        },
+    [85656] = {
+        [1160] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_harry_white.dds' }, -- Harry (Dire Wolf)
+        },
+    [76324] = {
+        [1160] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_baleful_call_white.dds' }, -- Baleful Call (Dire Wolf)
     },
 
     -- ALDMERI DOMINION
@@ -14258,6 +14318,32 @@ Effects.MapDataOverride = {
     },
     [14096] = { -- Heavy Attack (Footsoldier)
         [809] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_1h_heavy.dds' }, -- The Wailing Prison (MSQ - Tutorial) -- Dreamora Kynval
+    },
+
+}
+
+Effects.MapDataOverride = {
+
+    [70355] = {
+        [Zonenames.Zone_Deepwood_Barrow] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_bite_w.dds' }, -- Bite (Great Bear)
+    },
+    [70357] = {
+        [Zonenames.Zone_Deepwood_Barrow] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_lunge_white.dds' }, -- Lunge (Great Bear)
+    },
+    [70359] = {
+        [Zonenames.Zone_Deepwood_Barrow] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_lunge_white.dds' }, -- Lunge (Great Bear)
+    },
+    [70366] = {
+        [Zonenames.Zone_Deepwood_Barrow] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe_white.dds' }, -- Slam (Great Bear)
+    },
+    [89189] = {
+        [Zonenames.Zone_Deepwood_Barrow] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe_white.dds' }, -- Slam (Great Bear)
+    },
+    [69073] = {
+        [Zonenames.Zone_Deepwood_Barrow] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe_white.dds' }, -- Knockdown (Great Bear)
+    },
+    [70374] = {
+        [Zonenames.Zone_Deepwood_Barrow] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_ferocity_white.dds' }, -- Ferocity (Great Bear)
     },
 
 }
