@@ -52,6 +52,7 @@ CombatInfo.Defaults = {
     BarFontSize                      = 18,
     BarMillis                        = true,
     BarMillisAboveTen                = true,
+    BarMillisThreshold               = 10,
     BarShowBack                      = false,
     BarDarkUnused                    = false,
     BarDesaturateUnused              = false,
@@ -85,6 +86,9 @@ CombatInfo.Defaults = {
             showMitigation              = true,
             mitigationPrefix            = "%t",
             mitigationPrefixN           = "%n - %t",
+            modifierEnable              = true,
+            mitigationModifierOnYou     = GetString(SI_LUIE_CI_MITIGATION_MODIFIER_ON_YOU),
+            mitigationModifierSpreadOut = GetString(SI_LUIE_CI_MITIGATION_MODIFIER_SPREAD_OUT),
             showCrowdControlBorder      = true,
             mitigationPowerPrefix2      = "%t",
             mitigationPowerPrefixN2     = GetString(SI_LUIE_CI_MITIGATION_FORMAT_POWER_N),
@@ -103,19 +107,26 @@ CombatInfo.Defaults = {
             showAlertDestroy            = true,
             showAlertSummon             = true,
             alertOptions                = 1,
-            soundEnable3                = false,
-            soundEnable3CC              = true,
-            soundEnable3UB              = true,
-            soundEnable2                = false,
-            soundEnable2CC              = true,
-            soundEnable2UB              = true,
-            soundEnable1                = false,
-            soundEnable1CC              = true,
-            soundEnable1UB              = true,
-            soundEnableUnmit            = true,
-            soundEnablePower            = false,
-            soundEnableSummon           = false,
-            soundEnableDestroy          = true,
+
+            soundVolume                 = 2,
+            sound_stEnable              = false,
+            sound_st_ccEnable           = true,
+            sound_aoeEnable             = false,
+            sound_aoe_ccEnable          = true,
+            sound_powerattackEnable     = true,
+            sound_radialEnable          = true,
+            sound_travelEnable          = false,
+            sound_travel_ccEnable       = true,
+            sound_groundEnable          = false,
+            sound_meteorEnable          = true,
+            sound_unmit_stEnable        = true,
+            sound_unmit_aoeEnable       = true,
+            sound_power_damageEnable    = true,
+            sound_power_buffEnable      = true,
+            sound_summonEnable          = false,
+            sound_destroyEnable         = true,
+            sound_healEnable            = false,
+
         },
         colors = {
             alertShared                 = { 1, 1, 1, 1 },
@@ -149,6 +160,7 @@ CombatInfo.Defaults = {
             alertSummon                 = GetString(SI_LUIE_CI_SUMMON_DEFAULT),
         },
         sounds = {
+            --[[ Old Sounds here for reference
             sound3                      = "Champion Damage Taken",
             sound3CC                    = "Champion Points Committed",
             sound3UB                    = "Trial - Scored Added Very Low",
@@ -162,6 +174,24 @@ CombatInfo.Defaults = {
             soundPower                  = "Champion Respec Accept",
             soundSummon                 = "Duel Invite Received",
             soundDestroy                = "Duel Invite Received",
+            ]]--
+            sound_st                    = "Champion Respec Accept",
+            sound_st_cc                 = "Champion Points Committed",
+            sound_aoe                   = "Champion Respec Accept",
+            sound_aoe_cc                = "Champion Points Committed",
+            sound_powerattack           = "Trial - Scored Added Normal",
+            sound_radial                = "Duel Accepted",
+            sound_travel                = "Champion Respec Accept",
+            sound_travel_cc             = "Console Game Enter",
+            sound_ground                = "Champion Respec Accept",
+            sound_meteor                = "LFG Find Replacement",
+            sound_unmit_st              = "Duel Start",
+            sound_unmit_aoe             = "Duel Start",
+            sound_power_damage          = "Book Collection Completed",
+            sound_power_buff            = "Book Collection Completed",
+            sound_summon                = "Duel Invite Received",
+            sound_destroy               = "Duel Invite Received",
+            sound_heal                  = "Console Game Enter",
         },
     },
     cct = {
@@ -355,7 +385,7 @@ local function SetupFlipAnimation(button)
 end
 
 local function FormatDurationSeconds(remain)
-    return string.format((CombatInfo.SV.BarMillis and (remain < 10000 or CombatInfo.SV.BarMillisAboveTen)) and "%.1f" or "%.1d", remain/1000)
+    return string.format((CombatInfo.SV.BarMillis and ((remain < CombatInfo.SV.BarMillisThreshold * 1000) or CombatInfo.SV.BarMillisAboveTen)) and "%.1f" or "%.1d", remain/1000)
 end
 
 -- Module initialization
@@ -1955,7 +1985,7 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
     end
 
     local icon = GetAbilityIcon(abilityId)
-    local name = zo_strformat(SI_UNIT_NAME, GetAbilityName(abilityId))
+    local name = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
     local duration
     local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId)
@@ -2061,9 +2091,13 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
 
     -- Special handling for Crystallized Shield + Morphs
     if abilityId == 92068 or abilityId == 92168 or abilityId == 92170 then
-        if result == ACTION_RESULT_DAMAGE_SHIELDED then
+        -- Make sure this event occured on the player only. If we hit another Warden's shield we don't want to change stack count.
+        if result == ACTION_RESULT_DAMAGE_SHIELDED and targetType == COMBAT_UNIT_TYPE_PLAYER then
             if g_toggledSlotsFront[abilityId] or g_toggledSlotsBack[abilityId] then
-                g_toggledSlotsStack[abilityId] = g_toggledSlotsStack[abilityId] -1
+                -- Reduce stack by one
+                if g_toggledSlotsStack[abilityId] then
+                    g_toggledSlotsStack[abilityId] = g_toggledSlotsStack[abilityId] -1
+                end
                 if g_toggledSlotsFront[abilityId] then
                     local slotNum = g_toggledSlotsFront[abilityId]
                     if g_toggledSlotsStack[abilityId] and g_toggledSlotsStack[abilityId] > 0 then
@@ -2403,9 +2437,9 @@ function CombatInfo.OnDeath(eventCode, unitTag, isDead)
         for slotNum = BAR_INDEX_START, BAR_INDEX_END do
             if g_uiCustomToggle[slotNum] then
                 g_uiCustomToggle[slotNum]:SetHidden(true)
-                if slotNum == 8 and CombatInfo.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
+                --[[if slotNum == 8 and CombatInfo.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
                     uiUltimate.LabelPct:SetHidden(false)
-                end
+                end]]--
             end
         end
         for slotNum = BAR_INDEX_START + BACKBAR_INDEX_OFFSET, BACKBAR_INDEX_END + BACKBAR_INDEX_OFFSET do

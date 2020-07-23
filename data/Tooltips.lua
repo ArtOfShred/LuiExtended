@@ -94,6 +94,7 @@ LUIE.Data.Tooltips = {
     ----------------------------------------------------------------
 
     Generic_Immunity                                = GetString(SI_LUIE_SKILL_SET_GENERIC_IMMUNITY_TP),
+    Generic_Immunity_Permanent                      = GetString(SI_LUIE_SKILL_GENERIC_IMMUNITY_PERMANENT_TP),
 
     Generic_Snare                                   = GetString(SI_LUIE_SKILL_GENERIC_SNARE_TP),
     Generic_Snare_No_Dur                            = GetString(SI_LUIE_SKILL_GENERIC_SNARE_NO_DUR_TP),
@@ -153,6 +154,8 @@ LUIE.Data.Tooltips = {
 
     Generic_Reduce_Physical_Resist_Value            = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHYSICAL_RESIST_VALUE_TP),
 
+    Generic_Reduce_Healing_Received                 = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_HEALING_RECEIVED_TP),
+
     Generic_Lower_Max_HP                            = GetString(SI_LUIE_SKILL_GENERIC_LOWER_MAX_HP_TP),
 
     Generic_Reduce_Damage_Done                      = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_DAMAGE_DONE_TP),
@@ -173,6 +176,7 @@ LUIE.Data.Tooltips = {
     Generic_HoT_Potion                              = GetString(SI_LUIE_SKILL_GENERIC_HOT_POTION_TP),
     Generic_HoT_Channel                             = GetString(SI_LUIE_SKILL_GENERIC_HOT_CHANNEL_TP),
 
+    Generic_Shock_Snare                             = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_SNARE_TP), "SUBSTRING", ShockDamage),
     Generic_Oblivion_Snare                          = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_SNARE_TP), "SUBSTRING", OblivionDamage),
 
     Generic_AOE_Physical                            = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "SUBSTRING", PhysicalDamage),
@@ -263,6 +267,7 @@ LUIE.Data.Tooltips = {
     Innate_Battle_Spirit_Imperial_City              = GetString(SI_LUIE_SKILL_BATTLE_SPIRIT_IMPERIAL_CITY_TP),
     Innate_Recall_Penalty                           = GetString(SI_LUIE_SKILL_RECALL_PENALTY_TP),
     Innate_Battleground_Deserter                    = GetString(SI_LUIE_SKILL_BATTLEGROUND_DESERTER_TP),
+    Innate_Looking_for_Group                        = GetString(SI_LUIE_SKILL_LOOKING_FOR_GROUP_TP),
     Innate_Ayleid_Well                              = GetString(SI_LUIE_SKILL_AYLEID_WELL_TP),
     Innate_Ayleid_Well_Fortified                    = GetString(SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED_TP),
     Innate_Firelight                                = GetString(SI_LUIE_SKILL_FIRELIGHT_TP),
@@ -1129,7 +1134,6 @@ LUIE.Data.Tooltips = {
     Skill_Razor_Armor                               = GetString(SI_LUIE_SKILL_RAZOR_ARMOR_TP),
     Skill_Unstable_Core_Cyrodiil                    = GetString(SI_LUIE_SKILL_UNSTABLE_CORE_CYRODIIL_TP),
     Skill_Shattering_Prison_Cyrodiil                = GetString(SI_LUIE_SKILL_SHATTERING_PRISON_CYRODIIL_TP),
-    Skill_Lethal_Arrow_Cyrodiil                     = GetString(SI_LUIE_SKILL_LETHAL_ARROW_CYRODIIL_TP),
     Skill_Siege_Shield_Cyrodiil                     = GetString(SI_LUIE_SKILL_SIEGE_SHIELD_CYRODIIL_TP),
     Skill_Power_Bash_Cyrodiil                       = GetString(SI_LUIE_SKILL_POWER_BASH_CYRODIIL_TP),
     Skill_Rune_Focus_Cyrodiil                       = GetString(SI_LUIE_SKILL_RUNE_FOCUS_CYRODIIL_TP),
@@ -1142,6 +1146,8 @@ LUIE.Data.Tooltips = {
     Skill_Elder_Scroll_Alma_Ruma                    = zo_strformat(GetString(SI_LUIE_SKILL_ELDER_SCROLL_TP), GetAbilityName(22299)),
 
     Skill_Ruinous_Cyclone                           = GetString(SI_LUIE_SKILL_RUINOUS_CYCLONE),
+
+    Skill_Wall_of_Souls                             = GetString(SI_LUIE_SKILL_WALL_OF_SOULS_TP),
 
     -- ---------------------------------------------------
     -- BATTLEGROUNDS -------------------------------------
@@ -1157,6 +1163,9 @@ LUIE.Data.Tooltips = {
 
     Skill_Spike_Trap                                = GetString(SI_LUIE_SKILL_SPIKE_TRAP_TP),
     Skill_Spike_Trap_Auridon                        = GetString(SI_LUIE_SKILL_SPIKE_TRAP_AURIDON_TP),
+    Skill_Trap_Static_Pitcher                       = GetString(SI_LUIE_SKILL_STATIC_PITCHER_TP),
+    Skill_Trap_Stunted_Current                      = GetString(SI_LUIE_SKILL_STUNTED_CURRENT_TP),
+
 
     ----------------------------------------------------------------
     -- NPCS ------------------------------------------------------
@@ -1174,7 +1183,6 @@ LUIE.Data.Tooltips = {
     Skill_Hardened_Shell                            = GetString(SI_LUIE_SKILL_HARDENED_SHELL_TP),
     Skill_Slash_Cliff_Strider                       = GetString(SI_LUIE_SKILL_SLASH_CLIFF_STRIDER_TP),
     Skill_Baleful_Call                              = GetString(SI_LUIE_SKILL_BALEFUL_CALL_TP),
-    Skill_Draining_Bite                             = GetString(SI_LUIE_SKILL_DRAINING_BITE_TP),
 
     -- Human NPCs
     Skill_Cleave_Stance                             = GetString(SI_LUIE_SKILL_CLEAVE_STANCE_TP),
@@ -1288,7 +1296,8 @@ LUIE.Data.Tooltips = {
     -- QUESTS ------------------------------------------------------
     ----------------------------------------------------------------
 
-    -- MQS
+    -- MSQ
+    Skill_Eye_of_the_Sentinel                       = GetString(SI_LUIE_SKILL_EYE_OF_THE_SENTINEL_TP),
     Skill_Incapacitating_Terror                     = GetString(SI_LUIE_SKILL_INCAPACITATING_TERROR_TP),
 
     -- Aldmeri Quests

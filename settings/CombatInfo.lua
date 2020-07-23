@@ -387,9 +387,20 @@ function CombatInfo.CreateSettings()
                 disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.BarShowLabel and ( Settings.ShowTriggered or Settings.ShowToggled)) end,
             },
             {
+                type = "slider",
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWFRACTIONSTHRESHOLDVALUE)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWFRACTIONSTHRESHOLDVALUE_TP),
+                min = 1, max = 30, step = 1,
+                getFunc = function() return Settings.BarMillisThreshold end,
+                setFunc = function(value) Settings.BarMillisThreshold = value CombatInfo.ApplyFont() end,
+                width = "full",
+                default = Defaults.BarMillisThreshold,
+                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.BarShowLabel and Settings.BarMillis) end,
+            },
+            {
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWFRACTIONSABOVETEN)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWFRACTIONSABOVETEN_TP),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWFRACTIONSABOVETHRESHOLD)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWFRACTIONSABOVETHRESHOLD_TP),
                 getFunc = function() return Settings.BarMillisAboveTen end,
                 setFunc = function(value) Settings.BarMillisAboveTen = value end,
                 width = "full",
@@ -946,7 +957,36 @@ function CombatInfo.CreateSettings()
                 disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable) end,
                 default = Defaults.alerts.toggles.showCrowdControlBorder,
             },
-
+            {
+                -- Enable Modifiers
+                type    = "checkbox",
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_ALLOW_MODIFIER)),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_ALLOW_MODIFIER_TP),
+                getFunc = function() return Settings.alerts.toggles.modifierEnable end,
+                setFunc = function(v) Settings.alerts.toggles.modifierEnable = v end,
+                disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable) end,
+                default = Defaults.alerts.toggles.modifierEnable,
+            },
+            {
+                -- Modifier (Directed at you)
+                type    = "editbox",
+                name    = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MODIFIER_DIRECT)),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_MODIFIER_DIRECT_TP),
+                getFunc = function() return Settings.alerts.toggles.mitigationModifierOnYou end,
+                setFunc = function(v) Settings.alerts.toggles.mitigationModifierOnYou = v end,
+                disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.modifierEnable) end,
+                default = Defaults.alerts.toggles.mitigationModifierOnYou,
+            },
+            {
+                -- Modifier (Spread Out)
+                type    = "editbox",
+                name    = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MODIFIER_SPREAD)),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_MODIFIER_SPREAD_TP),
+                getFunc = function() return Settings.alerts.toggles.mitigationModifierSpreadOut end,
+                setFunc = function(v) Settings.alerts.toggles.mitigationModifierSpreadOut = v end,
+                disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.modifierEnable) end,
+                default = Defaults.alerts.toggles.mitigationModifierSpreadOut,
+            },
             {
                 type = "header",
                 name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK),
@@ -1364,329 +1404,410 @@ function CombatInfo.CreateSettings()
             },
 
             {
-                -- Play Sound Priority 3
-                type    = "checkbox",
-                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_3), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_NO_CC)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_TP), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_3), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_NO_CC)),
-                getFunc = function() return Settings.alerts.toggles.soundEnable3 end,
-                setFunc = function(v) Settings.alerts.toggles.soundEnable3 = v end,
+                -- Sound Volume
+                type = "slider",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_VOLUME),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_VOLUME_TP),
+                default = Defaults.alerts.toggles.soundVolume,
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                min     = 1,
+                max     = 5,
+                step    = 1,
+                getFunc = function() return Settings.alerts.toggles.soundVolume end,
+                setFunc = function(v) Settings.alerts.toggles.soundVolume = v end,
+            },
+            {
+                -- Play Sound (Single Target)
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_TP),
+                getFunc = function() return Settings.alerts.toggles.sound_stEnable end,
+                setFunc = function(v) Settings.alerts.toggles.sound_stEnable = v end,
                 width = "half",
                 disabled = function() return not Settings.alerts.toggles.alertEnable end,
-                default = Defaults.alerts.toggles.soundEnable3,
+                defaults = Defaults.alerts.toggles.sound_stEnable,
             },
-
             {
-                -- Sound Priority 3
+                -- Sound Selection (Single Target)
                 type = "dropdown",
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound3 end,
-                setFunc = function(value) Settings.alerts.sounds.sound3 = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function() return Settings.alerts.sounds.sound_st end,
+                setFunc = function(value) Settings.alerts.sounds.sound_st = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
-                default = Defaults.alerts.sounds.sound3,
-                disabled = function() return not (Settings.alerts.toggles.soundEnable3 and Settings.alerts.toggles.alertEnable) end,
+                default = Defaults.alerts.sounds.sound_st,
+                disabled = function() return not (Settings.alerts.toggles.sound_stEnable and Settings.alerts.toggles.alertEnable) end,
             },
-
             {
-                -- Play Sound Priority 3 CC
-                type    = "checkbox",
-                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_3), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_HARD_CC)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_TP), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_3), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_HARD_CC)),
-                getFunc = function() return Settings.alerts.toggles.soundEnable3CC end,
-                setFunc = function(v) Settings.alerts.toggles.soundEnable3CC = v end,
+                -- Play Sound (Single Target CC)
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_CC),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_CC_TP),
+                getFunc = function() return Settings.alerts.toggles.sound_st_ccEnable end,
+                setFunc = function(v) Settings.alerts.toggles.sound_st_ccEnablet = v end,
                 width = "half",
                 disabled = function() return not Settings.alerts.toggles.alertEnable end,
-                default = Defaults.alerts.toggles.soundEnable3CC,
+                defaults = Defaults.alerts.toggles.sound_st_ccEnable,
             },
-
             {
-                -- Sound Priority 3 CC
+                -- Sound Selection (Single Target CC)
                 type = "dropdown",
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound3CC end,
-                setFunc = function(value) Settings.alerts.sounds.sound3CC = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function() return Settings.alerts.sounds.sound_st_cc end,
+                setFunc = function(value) Settings.alerts.sounds.sound_st_cc = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
-                default = Defaults.alerts.sounds.sound3CC,
-                disabled = function() return not (Settings.alerts.toggles.soundEnable3CC and Settings.alerts.toggles.alertEnable) end,
+                default = Defaults.alerts.sounds.sound_st_cc,
+                disabled = function() return not (Settings.alerts.toggles.sound_st_ccEnable and Settings.alerts.toggles.alertEnable) end,
             },
-
             {
-                -- Play Sound Priority 3 UB
-                type    = "checkbox",
-                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_3), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_UNBREAKABLE_CC)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_TP), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_3), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_UNBREAKABLE_CC)),
-                getFunc = function() return Settings.alerts.toggles.soundEnable3UB end,
-                setFunc = function(v) Settings.alerts.toggles.soundEnable3UB = v end,
+                -- Play Sound (AOE)
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_AOE),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_AOE_TP),
+                getFunc = function() return Settings.alerts.toggles.sound_aoeEnable end,
+                setFunc = function(v) Settings.alerts.toggles.sound_aoeEnable = v end,
                 width = "half",
                 disabled = function() return not Settings.alerts.toggles.alertEnable end,
-                default = Defaults.alerts.toggles.soundEnable3UB,
+                defaults = Defaults.alerts.toggles.sound_aoeEnable,
             },
-
             {
-                -- Sound Priority 3 UB
+                -- Sound Selection (AOE)
                 type = "dropdown",
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound3UB end,
-                setFunc = function(value) Settings.alerts.sounds.sound3UB = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function() return Settings.alerts.sounds.sound_aoe end,
+                setFunc = function(value) Settings.alerts.sounds.sound_aoe = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
-                default = Defaults.alerts.sounds.sound3UB,
-                disabled = function() return not (Settings.alerts.toggles.soundEnable3UB and Settings.alerts.toggles.alertEnable) end,
+                default = Defaults.alerts.sounds.sound_aoe,
+                disabled = function() return not (Settings.alerts.toggles.sound_aoeEnable and Settings.alerts.toggles.alertEnable) end,
             },
-
             {
-                -- Play Sound Priority 2
-                type    = "checkbox",
-                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_2), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_NO_CC)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_TP), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_2), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_NO_CC)),
-                getFunc = function() return Settings.alerts.toggles.soundEnable2 end,
-                setFunc = function(v) Settings.alerts.toggles.soundEnable2 = v end,
+                -- Play Sound (AOE CC)
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_AOE_CC),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_AOE_CC_TP),
+                getFunc = function() return Settings.alerts.toggles.sound_aoe_ccEnable end,
+                setFunc = function(v) Settings.alerts.toggles.sound_aoe_ccEnable = v end,
                 width = "half",
                 disabled = function() return not Settings.alerts.toggles.alertEnable end,
-                default = Defaults.alerts.toggles.soundEnable2,
+                defaults = Defaults.alerts.toggles.sound_aoe_ccEnable,
             },
-
             {
-                -- Sound Priority 2
+                -- Sound Selection (AOE CC)
                 type = "dropdown",
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound2 end,
-                setFunc = function(value) Settings.alerts.sounds.sound2 = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function() return Settings.alerts.sounds.sound_aoe_cc end,
+                setFunc = function(value) Settings.alerts.sounds.sound_aoe_cc = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
-                default = Defaults.alerts.sounds.sound2,
-                disabled = function() return not (Settings.alerts.toggles.soundEnable2 and Settings.alerts.toggles.alertEnable) end,
+                default = Defaults.alerts.sounds.sound_aoe_cc,
+                disabled = function() return not (Settings.alerts.toggles.sound_aoe_ccEnable and Settings.alerts.toggles.alertEnable) end,
             },
-
             {
-                -- Play Sound Priority 2 CC
-                type    = "checkbox",
-                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_2), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_HARD_CC)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_TP), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_2), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_HARD_CC)),
-                getFunc = function() return Settings.alerts.toggles.soundEnable2CC end,
-                setFunc = function(v) Settings.alerts.toggles.soundEnable2CC = v end,
+                -- Play Sound (POWER ATTACK)
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_POWER_ATTACK),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_POWER_ATTACK_TP),
+                getFunc = function() return Settings.alerts.toggles.sound_powerattackEnable end,
+                setFunc = function(v) Settings.alerts.toggles.sound_powerattackEnable = v end,
                 width = "half",
                 disabled = function() return not Settings.alerts.toggles.alertEnable end,
-                default = Defaults.alerts.toggles.soundEnable2CC,
+                defaults = Defaults.alerts.toggles.sound_powerattackEnable,
             },
-
             {
-                -- Sound Priority 2 CC
+                -- Sound Selection (POWER ATTACK)
                 type = "dropdown",
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound2CC end,
-                setFunc = function(value) Settings.alerts.sounds.sound2CC = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function() return Settings.alerts.sounds.sound_powerattack end,
+                setFunc = function(value) Settings.alerts.sounds.sound_powerattack = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
-                default = Defaults.alerts.sounds.sound2CC,
-                disabled = function() return not (Settings.alerts.toggles.soundEnable2CC and Settings.alerts.toggles.alertEnable) end,
+                default = Defaults.alerts.sounds.sound_powerattack,
+                disabled = function() return not (Settings.alerts.toggles.sound_powerattackEnable and Settings.alerts.toggles.alertEnable) end,
             },
-
             {
-                -- Play Sound Priority 2 UB
-                type    = "checkbox",
-                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_2), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_UNBREAKABLE_CC)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_TP), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_2), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_UNBREAKABLE_CC)),
-                getFunc = function() return Settings.alerts.toggles.soundEnable2UB end,
-                setFunc = function(v) Settings.alerts.toggles.soundEnable2UB = v end,
+                -- Play Sound (RADIAL AVOID)
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_RADIAL_AVOID),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_RADIAL_AVOID_TP),
+                getFunc = function() return Settings.alerts.toggles.sound_radialEnable end,
+                setFunc = function(v) Settings.alerts.toggles.sound_radialEnable = v end,
                 width = "half",
                 disabled = function() return not Settings.alerts.toggles.alertEnable end,
-                default = Defaults.alerts.toggles.soundEnable2UB,
+                defaults = Defaults.alerts.toggles.sound_radialEnable,
             },
-
             {
-                -- Sound Priority 2 UB
+                -- Sound Selection (RADIAL AVOID)
                 type = "dropdown",
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound2UB end,
-                setFunc = function(value) Settings.alerts.sounds.sound2UB = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function() return Settings.alerts.sounds.sound_radial end,
+                setFunc = function(value) Settings.alerts.sounds.sound_radial = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
-                default = Defaults.alerts.sounds.sound2UB,
-                disabled = function() return not (Settings.alerts.toggles.soundEnable2UB and Settings.alerts.toggles.alertEnable) end,
+                default = Defaults.alerts.sounds.sound_radial,
+                disabled = function() return not (Settings.alerts.toggles.sound_radialEnable and Settings.alerts.toggles.alertEnable) end,
             },
-
             {
-                -- Play Sound Priority 1
-                type    = "checkbox",
-                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_1), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_NO_CC)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_TP), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_1), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_NO_CC)),
-                getFunc = function() return Settings.alerts.toggles.soundEnable1 end,
-                setFunc = function(v) Settings.alerts.toggles.soundEnable1 = v end,
+                -- Play Sound (GROUND TRAVEL)
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_GROUND_TRAVEL),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_GROUND_TRAVEL_TP),
+                getFunc = function() return Settings.alerts.toggles.sound_travelEnable end,
+                setFunc = function(v) Settings.alerts.toggles.sound_travelEnable = v end,
                 width = "half",
                 disabled = function() return not Settings.alerts.toggles.alertEnable end,
-                default = Defaults.alerts.toggles.soundEnable1,
+                defaults = Defaults.alerts.toggles.sound_travelEnable,
             },
-
             {
-                -- Sound Priority 1
+                -- Sound Selection (GROUND TRAVEL)
                 type = "dropdown",
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound1 end,
-                setFunc = function(value) Settings.alerts.sounds.sound1 = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function() return Settings.alerts.sounds.sound_travel end,
+                setFunc = function(value) Settings.alerts.sounds.sound_travel = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
-                default = Defaults.alerts.sounds.sound1,
-                disabled = function() return not (Settings.alerts.toggles.soundEnable1 and Settings.alerts.toggles.alertEnable) end,
+                default = Defaults.alerts.sounds.sound_travel,
+                disabled = function() return not (Settings.alerts.toggles.sound_travelEnable and Settings.alerts.toggles.alertEnable) end,
             },
-
             {
-                -- Play Sound Priority 1 CC
-                type    = "checkbox",
-                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_1), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_HARD_CC)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_TP), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_1), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_HARD_CC)),
-                getFunc = function() return Settings.alerts.toggles.soundEnable1CC end,
-                setFunc = function(v) Settings.alerts.toggles.soundEnable1CC = v end,
+                -- Play Sound (GROUND TRAVEL CC)
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_GROUND_TRAVEL_CC),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_GROUND_TRAVEL_CC_TP),
+                getFunc = function() return Settings.alerts.toggles.sound_travel_ccEnable end,
+                setFunc = function(v) Settings.alerts.toggles.sound_travel_ccEnable = v end,
                 width = "half",
                 disabled = function() return not Settings.alerts.toggles.alertEnable end,
-                default = Defaults.alerts.toggles.soundEnable1CC,
+                defaults = Defaults.alerts.toggles.sound_travel_ccEnable,
             },
-
             {
-                -- Sound Priority 1 CC
+                -- Sound Selection (GROUND TRAVEL CC)
                 type = "dropdown",
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound1CC end,
-                setFunc = function(value) Settings.alerts.sounds.sound1CC = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function() return Settings.alerts.sounds.sound_travel_cc end,
+                setFunc = function(value) Settings.alerts.sounds.sound_travel_cc = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
-                default = Defaults.alerts.sounds.sound1CC,
-                disabled = function() return not (Settings.alerts.toggles.soundEnable1CC and Settings.alerts.toggles.alertEnable) end,
+                default = Defaults.alerts.sounds.sound_travel_cc,
+                disabled = function() return not (Settings.alerts.toggles.sound_travel_ccEnable and Settings.alerts.toggles.alertEnable) end,
             },
-
             {
-                -- Play Sound Priority 1 UB
-                type    = "checkbox",
-                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_1), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_UNBREAKABLE_CC)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_TP), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_1), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_UNBREAKABLE_CC)),
-                getFunc = function() return Settings.alerts.toggles.soundEnable1UB end,
-                setFunc = function(v) Settings.alerts.toggles.soundEnable1UB = v end,
+                -- Play Sound (GROUND)
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_GROUND),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_GROUND_TP),
+                getFunc = function() return Settings.alerts.toggles.sound_groundEnable end,
+                setFunc = function(v) Settings.alerts.toggles.sound_groundEnable = v end,
                 width = "half",
                 disabled = function() return not Settings.alerts.toggles.alertEnable end,
-                default = Defaults.alerts.toggles.soundEnable1UB,
+                defaults = Defaults.alerts.toggles.sound_groundEnable,
             },
-
             {
-                -- Sound Priority 1 UB
+                -- Sound Selection (GROUND)
                 type = "dropdown",
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound1UB end,
-                setFunc = function(value) Settings.alerts.sounds.sound1UB = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function() return Settings.alerts.sounds.sound_ground end,
+                setFunc = function(value) Settings.alerts.sounds.sound_ground = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
-                default = Defaults.alerts.sounds.sound1UB,
-                disabled = function() return not (Settings.alerts.toggles.soundEnable1UB and Settings.alerts.toggles.alertEnable) end,
+                default = Defaults.alerts.sounds.sound_ground,
+                disabled = function() return not (Settings.alerts.toggles.sound_groundEnable and Settings.alerts.toggles.alertEnable) end,
             },
-
             {
-                -- Play Sound Unmit
-                type    = "checkbox",
-                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_MISC), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_UNMIT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_MISC_TP), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_UNMIT)),
-                getFunc = function() return Settings.alerts.toggles.soundEnableUnmit end,
-                setFunc = function(v) Settings.alerts.toggles.soundEnableUnmit = v end,
+                -- Play Sound (METEOR)
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_METEOR),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_METEOR_TP),
+                getFunc = function() return Settings.alerts.toggles.sound_meteorEnable end,
+                setFunc = function(v) Settings.alerts.toggles.sound_meteorEnable = v end,
                 width = "half",
                 disabled = function() return not Settings.alerts.toggles.alertEnable end,
-                default = Defaults.alerts.toggles.soundEnableUnmit,
+                defaults = Defaults.alerts.toggles.sound_meteorEnable,
             },
-
             {
-                -- Sound Unmit
+                -- Sound Selection (METEOR)
                 type = "dropdown",
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.soundUnmit end,
-                setFunc = function(value) Settings.alerts.sounds.soundUnmit = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function() return Settings.alerts.sounds.sound_meteor end,
+                setFunc = function(value) Settings.alerts.sounds.sound_meteor = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
-                default = Defaults.alerts.sounds.soundUnmit,
-                disabled = function() return not (Settings.alerts.toggles.soundEnableUnmit and Settings.alerts.toggles.alertEnable) end,
+                default = Defaults.alerts.sounds.sound_meteor,
+                disabled = function() return not (Settings.alerts.toggles.sound_meteorEnable and Settings.alerts.toggles.alertEnable) end,
             },
-
             {
-                -- Play Sound Power
-                type    = "checkbox",
-                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_MISC), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_POWER)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_MISC_TP), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_POWER)),
-                getFunc = function() return Settings.alerts.toggles.soundEnablePower end,
-                setFunc = function(v) Settings.alerts.toggles.soundEnablePower = v end,
+                -- Play Sound (UNMIT ST)
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_UNMIT),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_UNMIT_TP),
+                getFunc = function() return Settings.alerts.toggles.sound_unmit_stEnable end,
+                setFunc = function(v) Settings.alerts.toggles.sound_unmit_stEnable = v end,
                 width = "half",
                 disabled = function() return not Settings.alerts.toggles.alertEnable end,
-                default = Defaults.alerts.toggles.soundEnablePower,
+                defaults = Defaults.alerts.toggles.sound_unmit_stEnable,
             },
-
             {
-                -- Sound Power
+                -- Sound Selection (UNMIT ST)
                 type = "dropdown",
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.soundPower end,
-                setFunc = function(value) Settings.alerts.sounds.soundPower = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function() return Settings.alerts.sounds.sound_unmit_st end,
+                setFunc = function(value) Settings.alerts.sounds.sound_unmit_st = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
-                default = Defaults.alerts.sounds.soundPower,
-                disabled = function() return not (Settings.alerts.toggles.soundEnablePower and Settings.alerts.toggles.alertEnable) end,
+                default = Defaults.alerts.sounds.sound_unmit_st,
+                disabled = function() return not (Settings.alerts.toggles.sound_unmit_stEnable and Settings.alerts.toggles.alertEnable) end,
             },
-
             {
-                -- Play Sound Summon
-                type    = "checkbox",
-                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_MISC), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_SUMMON)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_MISC_TP), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_SUMMON)),
-                getFunc = function() return Settings.alerts.toggles.soundEnableSummon end,
-                setFunc = function(v) Settings.alerts.toggles.soundEnableSummon = v end,
+                -- Play Sound (UNMIT AOE)
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_UNMIT_AOE),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_UNMIT_AOE_TP),
+                getFunc = function() return Settings.alerts.toggles.sound_unmit_aoeEnable end,
+                setFunc = function(v) Settings.alerts.toggles.sound_unmit_aoeEnable = v end,
                 width = "half",
                 disabled = function() return not Settings.alerts.toggles.alertEnable end,
-                default = Defaults.alerts.toggles.soundEnableSummon,
+                defaults = Defaults.alerts.toggles.sound_unmit_aoeEnable,
             },
-
             {
-                -- Sound Summon
+                -- Sound Selection (UNMIT AOE)
                 type = "dropdown",
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.soundSummon end,
-                setFunc = function(value) Settings.alerts.sounds.soundSummon = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function() return Settings.alerts.sounds.sound_unmit_aoe end,
+                setFunc = function(value) Settings.alerts.sounds.sound_unmit_aoe = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
-                default = Defaults.alerts.sounds.soundSummon,
-                disabled = function() return not (Settings.alerts.toggles.soundEnableSummon and Settings.alerts.toggles.alertEnable) end,
+                default = Defaults.alerts.sounds.sound_unmit_aoe,
+                disabled = function() return not (Settings.alerts.toggles.sound_unmit_aoeEnable and Settings.alerts.toggles.alertEnable) end,
             },
-
             {
-                -- Play Sound Destroy
-                type    = "checkbox",
-                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_MISC), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_DESTROY)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_MISC_TP), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DESTROY)),
-                getFunc = function() return Settings.alerts.toggles.soundEnableDestroy end,
-                setFunc = function(v) Settings.alerts.toggles.soundEnableDestroy = v end,
+                -- Play Sound (POWER - DAMAGE)
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_POWER_DAMAGE),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_POWER_DAMAGE_TP),
+                getFunc = function() return Settings.alerts.toggles.sound_power_damageEnable end,
+                setFunc = function(v) Settings.alerts.toggles.sound_power_damageEnable = v end,
                 width = "half",
                 disabled = function() return not Settings.alerts.toggles.alertEnable end,
-                default = Defaults.alerts.toggles.soundEnableDestroy,
+                defaults = Defaults.alerts.toggles.sound_power_damageEnable,
             },
-
             {
-                -- Sound Destroy
+                -- Sound Selection (POWER - DAMAGE)
                 type = "dropdown",
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.soundDestroy end,
-                setFunc = function(value) Settings.alerts.sounds.soundDestroy = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function() return Settings.alerts.sounds.sound_power_damage end,
+                setFunc = function(value) Settings.alerts.sounds.sound_power_damage = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
-                default = Defaults.alerts.sounds.soundDestroy,
-                disabled = function() return not (Settings.alerts.toggles.soundEnableDestroy and Settings.alerts.toggles.alertEnable) end,
+                default = Defaults.alerts.sounds.sound_power_damage,
+                disabled = function() return not (Settings.alerts.toggles.sound_power_damageEnable and Settings.alerts.toggles.alertEnable) end,
             },
+            {
+                -- Play Sound (POWER - DEFENSE)
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_POWER_DEFENSE),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_POWER_DEFENSE_TP),
+                getFunc = function() return Settings.alerts.toggles.sound_power_buffEnable end,
+                setFunc = function(v) Settings.alerts.toggles.sound_power_buffEnable = v end,
+                width = "half",
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                defaults = Defaults.alerts.toggles.sound_power_buffEnable,
+            },
+            {
+                -- Sound Selection (POWER - DEFENSE)
+                type = "dropdown",
+                scrollable = true,
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return Settings.alerts.sounds.sound_power_buff end,
+                setFunc = function(value) Settings.alerts.sounds.sound_power_buff = value AbilityAlerts.PreviewAlertSound(value) end,
+                width = "half",
+                default = Defaults.alerts.sounds.sound_power_buff,
+                disabled = function() return not (Settings.alerts.toggles.sound_power_buffEnable and Settings.alerts.toggles.alertEnable) end,
+            },
+            {
+                -- Play Sound (SUMMON)
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_SUMMON),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_SUMMON_TP),
+                getFunc = function() return Settings.alerts.toggles.sound_summonEnable end,
+                setFunc = function(v) Settings.alerts.toggles.sound_summonEnable = v end,
+                width = "half",
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                defaults = Defaults.alerts.toggles.sound_summonEnable,
+            },
+            {
+                -- Sound Selection (SUMMON)
+                type = "dropdown",
+                scrollable = true,
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return Settings.alerts.sounds.sound_summon end,
+                setFunc = function(value) Settings.alerts.sounds.sound_summon = value AbilityAlerts.PreviewAlertSound(value) end,
+                width = "half",
+                default = Defaults.alerts.sounds.sound_summon,
+                disabled = function() return not (Settings.alerts.toggles.sound_summonEnable and Settings.alerts.toggles.alertEnable) end,
+            },
+            {
+                -- Play Sound (DESTROY)
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_DESTROY),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_DESTROY_TP),
+                getFunc = function() return Settings.alerts.toggles.sound_destroyEnable end,
+                setFunc = function(v) Settings.alerts.toggles.sound_destroyEnable = v end,
+                width = "half",
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                defaults = Defaults.alerts.toggles.sound_destroyEnable,
+            },
+            {
+                -- Sound Selection (DESTROY)
+                type = "dropdown",
+                scrollable = true,
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return Settings.alerts.sounds.sound_destroy end,
+                setFunc = function(value) Settings.alerts.sounds.sound_destroy = value AbilityAlerts.PreviewAlertSound(value) end,
+                width = "half",
+                default = Defaults.alerts.sounds.sound_destroy,
+                disabled = function() return not (Settings.alerts.toggles.sound_destroyEnable and Settings.alerts.toggles.alertEnable) end,
+            },
+            {
+                -- Play Sound (HEAL)
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_HEAL),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_HEAL_TP),
+                getFunc = function() return Settings.alerts.toggles.sound_healEnable end,
+                setFunc = function(v) Settings.alerts.toggles.sound_healEnable = v end,
+                width = "half",
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                defaults = Defaults.alerts.toggles.sound_healEnable,
+            },
+            {
+                -- Sound Selection (HEAL)
+                type = "dropdown",
+                scrollable = true,
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return Settings.alerts.sounds.sound_heal end,
+                setFunc = function(value) Settings.alerts.sounds.sound_heal = value AbilityAlerts.PreviewAlertSound(value) end,
+                width = "half",
+                default = Defaults.alerts.sounds.sound_heal,
+                disabled = function() return not (Settings.alerts.toggles.sound_healEnable and Settings.alerts.toggles.alertEnable) end,
+            },
+
         },
     }
 

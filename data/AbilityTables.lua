@@ -123,6 +123,10 @@ local AbilityTables = {
     Innate_Pardon_Edict_Medium        = GetString(SI_LUIE_SKILL_LENIENCY_EDICT),
     Innate_Pardon_Edict_High          = GetString(SI_LUIE_SKILL_GRAND_AMNESTY_EDICT),
 
+    Innate_Merethic_Restorative_Resin       = GetItemLinkName("|H0:item:69434:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Aetheric_Cipher                  = GetItemLinkName("|H0:item:115028:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Create_Psijic_Ambrosia_Recipe    = 68258,
+
     Innate_Arena_Gladiators_Exultation      = GetItemLinkName("|H0:item:141751:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Innate_Arena_Gladiators_Mockery         = GetItemLinkName("|H0:item:146042:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Innate_Arena_Gladiators_Recognition     = GetItemLinkName("|H0:item:138785:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
@@ -132,6 +136,7 @@ local AbilityTables = {
     Innate_Reach_Mages_Ferocity             = GetItemLinkName("|H0:item:166469:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Innate_Siege_of_Cyrodiil_Recognition    = GetItemLinkName("|H0:item:151938:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Innate_Siege_of_Cyrodiil_Recommendation = GetItemLinkName("|H0:item:153536:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Alliance_Standard_Bearers        = GetItemLinkName("|H0:item:151934:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
 
     -- Champion
     Champion_Last_Stand               = 60413,
@@ -250,7 +255,7 @@ local AbilityTables = {
 
     -- Mementos
     Memento_Almalexias_Lantern        = GetCollectibleName(341),
-    Memento_Battered_Bear_Trap        = GetCollectibleName(343),
+    --Memento_Battered_Bear_Trap        = GetCollectibleName(343),
     Memento_Bonesnap_Binding_Stone    = GetCollectibleName(348),
     Memento_Discourse_Amaranthine     = GetCollectibleName(345),
     Menento_Lenas_Wand_of_Finding     = GetCollectibleName(340),
@@ -922,6 +927,7 @@ local AbilityTables = {
 
     Skill_Pariahs_Resolve             = 116095,
     Skill_Consume_Lifeforce           = GetString(SI_LUIE_SKILL_CONSUME_LIFEFORCE),
+    Skill_Wall_of_Souls               = 21677,
 
     -- ---------------------------------------------------
     -- BATTLEGROUNDS -------------------------------------
@@ -1073,11 +1079,15 @@ local AbilityTables = {
     Trap_Lightning_Trap               = GetString(SI_LUIE_SKILL_LIGHTNING_TRAP),
     Trap_Blade_Trap                   = 66793,
 
-    Trap_Slaughterfish                = zo_strformat(SI_UNIT_NAME, GetItemLinkName("|H0:item:42861:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")),
+    Trap_Slaughterfish                = zo_strformat("<<C:1>>", GetItemLinkName("|H0:item:42861:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")),
     Trap_Lava                         = 5139,
 
     Trap_Charge_Wire                 = GetString(SI_LUIE_SKILL_CHARGE_WIRE),
     Trap_Steam_Vent                  = GetString(SI_LUIE_SKILL_STEAM_VENT),
+
+    Trap_Static_Pitcher              = GetItemLinkName("|H0:item:145491:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Trap_Gas_Blossom                 = GetItemLinkName("|H0:item:145492:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Trap_Lantern_Mantis              = GetItemLinkName("|H0:item:145493:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
 
     -- ---------------------------------------------------
     -- WORLD BOSSES --------------------------------------
@@ -1201,6 +1211,7 @@ local AbilityTables = {
     Skill_Headbutt                    = 125270,
     Skill_Star_Haven_Dragonhorn       = GetString(SI_LUIE_SKILL_STAR_HAVEN_DRAGONHORN),
     Skill_Steadfast_Ward              = 37232,
+    Skill_Wing_Thrash                 = 125242,
 
     -- Greymoor Quests
     Skill_Piercing_Dagger             = GetString(SI_LUIE_SKILL_PIERCING_DAGGER),
@@ -1322,7 +1333,6 @@ local AbilityTables = {
     Skill_Flame_Barrier               = GetString(SI_LUIE_SKILL_FLAME_BARRIER),
     Skill_Call_Storm_Atronach         = GetString(SI_LUIE_SKILL_CALL_STORM_ATRONACH),
     Skill_Call_Storm_Atronachs        = GetString(SI_LUIE_SKILL_CALL_STORM_ATRONACHS),
-    Skill_Explosive_Flare             = GetString(SI_LUIE_SKILL_EXPLOSIVE_FLARE),
 
     -- Tempest Island
     Skill_Sonic_Scream                = 46732,
@@ -1468,7 +1478,7 @@ local AbilityTables = {
 local k, v
 for k, v in pairs(AbilityTables) do
     if type(v) == "number" then
-        AbilityTables[k] = zo_strformat(SI_UNIT_NAME, GetAbilityName(v))
+        AbilityTables[k] = zo_strformat("<<C:1>>", GetAbilityName(v))
     end
 end
 

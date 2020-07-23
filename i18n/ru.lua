@@ -368,6 +368,7 @@ local strings = {
     SI_LUIE_CA_CURRENCY_MESSAGE_LEARN_MOTIF =            "Вы изучили %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_LEARN_STYLE =            "Вы изучили %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_DEPLOY =                 "Вы развернули %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_STOW =                   "You stow %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_LOST =                   "Вы потеряли %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_BOUNTY =                 "Вы заплатили в качестве штрафа: %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_REPAIR =                 "Вы заплатили %s за ремонт.",
@@ -607,6 +608,8 @@ local strings = {
     SI_LUIE_CI_DESTROY_DEFAULT =                         "УНИЧТОЖЬ",
     SI_LUIE_CI_SUMMON_DEFAULT =                          "SUMMON", -- TODO: Translate
     SI_LUIE_CI_MITIGATION_FORMAT_POWER_N =               "%t на %n!",
+    SI_LUIE_CI_MITIGATION_MODIFIER_ON_YOU =              "- ON YOU!",
+    SI_LUIE_CI_MITIGATION_MODIFIER_SPREAD_OUT =          "- SPREAD OUT!",
 
     -- UnitFrames
     SI_LUIE_UF_WEREWOLF_POWER =                          "<<1>>/<<2>> Энергия (<<3>>%)",

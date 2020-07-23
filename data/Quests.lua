@@ -145,6 +145,11 @@ Quests.QuestItemHideRemove = {
     [3597] = true, -- Rahkaz's Blade (The Enemy Within)
     [3596] = true, -- Knife (The Enemy Within)
     [4576] = true, -- Dull Crystal Shard (Light in the Darkness)
+
+    -- Vvardenfell
+    [6125] = true, -- Fire Salts (Broken Bonds)
+    [6126] = true, -- Kindlepitch (Broken Bonds)
+
 }
 
 -- Limit the maximum number of quantity of a quest item that can be added.
@@ -186,6 +191,9 @@ Quests.QuestItemMerge = {
     [3360] = { 3368, 3369 }, -- Volatile Fire Mixture (The Serpent's Beacon) -- Kindlepitch, Fire Salts
     [3402] = { 3403, 3404, 3405 }, -- Spore Potion (The Depths of Madness) -- Bloodcrown Spores, Lavendercap Mushrooms, Gleamcap Spores
 
+    -- Vvardenfell
+    [6116] = { 6125, 6126 }, -- Fire Bomb (Broken Bonds) -- Fire Salts, Kindlepitch
+
 }
 
 -- Message to override when an item is removed.
@@ -224,6 +232,9 @@ Quests.ItemRemovedMessage = {
     [3800] = LUIE_QUEST_MESSAGE_DISCARD, -- Shovel (Izad's Treasure)
     [3803] = LUIE_QUEST_MESSAGE_OPEN, -- The Clues, Damn Your Eyes (Izad's Treasure)
     [3819] = LUIE_QUEST_MESSAGE_DISCARD, -- Captain Izad's Letter (Izad's Treasure)
+
+    -- Vvardenfell
+    [6116] = LUIE_QUEST_MESSAGE_USE, -- Fire Bomb (Broken Bonds)
 
     -- Elsweyr
     [7032] = LUIE_QUEST_MESSAGE_DISCARD, -- Letter from Abnur Tharn (Bright Moons, Warm Sands)
@@ -270,6 +281,9 @@ Quests.ItemReceivedMessage = {
     [3803] = LUIE_QUEST_MESSAGE_LOOT, -- The Clues, Damn Your Eyes (Izad's Treasure)
     [3819] = LUIE_QUEST_MESSAGE_LOOT, -- Captain Izad's Letter (Izad's Treasure)
     [3858] = LUIE_QUEST_MESSAGE_LOOT, -- Shazeem's Blade (Washed Ashore)
+
+    -- Vvardenfell
+    [6116] = LUIE_QUEST_MESSAGE_MIX, -- Fire Bomb (Broken Bonds)
 
     -- Elsweyr
     [7032] = LUIE_QUEST_MESSAGE_LOOT, -- Letter from Abnur Tharn (Bright Moons, Warm Sands)

@@ -117,6 +117,15 @@ CastBarTable.BreakCastOnMove = {
     -- Misc Items
     [63427] = true, -- Clean Fish (Filet Fish)
 
+    -- Mementos
+    [42008] = true, -- Blessing of Root Sunder (Token of Root Sunder)
+    [42053] = true, -- Yokudan Salute (Yokudan Totem)
+    [42105] = true, -- Nanwen's Sword (Nanwen's Sword)
+    [42076] = true, -- Tear (Mezha-dro's Sealing Amulet)
+    [41988] = true, -- Bonesnap Binding Stone (Bonesnap Binding Stone)
+    [41948] = true, -- Glanir's Smoke Bomb (Glanir's Smoke Bomb)
+    [25369] = true, -- Sanguine's Goblet (Sanguine's Goblet)
+
     -- Werewolf
     [40515] = true, -- Devour (Werewolf - Bite Player)
 
@@ -219,6 +228,8 @@ CastBarTable.BreakCastOnMove = {
 
 CastBarTable.IgnoreCastBreakingActions = {
     [86792] = true, -- Eating (High Hrothgar Festival Mints)
+    [43700] = true, -- Wand of Finding (Lena's Wand of Finding)
+    [81575] = true, -- Event - WitchFest Cauldron (Witchmother's Whistle)
     --[21112] = true, -- Q4220 PC Forced to L0
 }
 
@@ -258,6 +269,7 @@ CastBarTable.CastChannelOverride = {
     [104323] = true, -- Psijic Hourglass (Psijic Tautology Glass)
     [104325] = true, -- Psijic Disintegrate (Sapiarchic Discorporation Lens)
     [110482] = true, -- Rind-Renewing Pumpkin (Rind-Renewing Pumpkin)
+    [116543] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [110481] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [113288] = true, -- U20 Crown Memento 1 (Mire Drum)
     [113291] = true, --  U20 Crown Memento 2 (Vossa-satl)
@@ -366,6 +378,10 @@ CastBarTable.CastDurationFix = {
     [130394] = 5000, -- 68235 Stun (Spectral Indrik)
     [131536] = 5000, -- Generic Stun & Combine (Sovereign Sow)
 
+    [68259] = 5000, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [70584] = 5000, -- 68235 Stun (Merethic Restorative Resin)
+    [88451] = 5000, -- 88449 Stun (Aetheric Cipher)
+
     [111190] = 5000, -- 68235 Stun (Arena Gladiator's Exultation)
     [115064] = 5000, -- 68235 Stun (Arena Gladiator's Mockery)
     [106174] = 5000, -- 68235 Stun (Arena Gladiator's Recognition)
@@ -375,6 +391,7 @@ CastBarTable.CastDurationFix = {
     [140622] = 5000, -- 68235 Stun (Reach-Mage's Ferocity)
     [124789] = 5000, -- 68235 Stun (Siege of Cyrodiil Recognition)
     [126710] = 5000, -- 68235 Stun (Siege of Cyrodiil Recommendation)
+    [124624] = 5000, -- 68235 Stun (Alliance Standard-Bearer's License)
 
     -- Seasonal Mementos and Items
     [86792] = 3000, -- Eating (High Hrothgar Festival Mints)
@@ -399,6 +416,7 @@ CastBarTable.CastDurationFix = {
     [104323] = 6000, -- Psijic Hourglass (Psijic Tautology Glass)
     [104325] = 6500, -- Psijic Disintegrate (Sapiarchic Discorporation Lens)
     [110482] = 9000, -- Rind-Renewing Pumpkin (Rind-Renewing Pumpkin)
+    [116543] = 1500, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [110481] = 1500, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [113288] = 10000, -- U20 Crown Memento 1 (Mire Drum)
     [113291] = 13000, --  U20 Crown Memento 2 (Vossa-satl)
@@ -514,6 +532,11 @@ CastBarTable.IsCast = {
     [113432] = true, -- 68235 Stun (Nascent Indrik)
     [130394] = true, -- 68235 Stun (Spectral Indrik)
     [131536] = true, -- Generic Stun & Combine (Sovereign Sow)
+
+    [68259] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [70584] = true, -- 68235 Stun (Merethic Restorative Resin)
+    [88451] = true, -- 88449 Stun (Aetheric Cipher)
+
     [63427] = true, -- Clean Fish (Filet Fish)
     [78052] = true, -- Minor Pardon (Counterfeit Pardon Edict)
     [76350] = true, -- Moderate Pardon (Leniency Edict)
@@ -528,6 +551,7 @@ CastBarTable.IsCast = {
     [140622] = true, -- 68235 Stun (Reach-Mage's Ferocity)
     [124789] = true, -- 68235 Stun (Siege of Cyrodiil Recognition)
     [126710] = true, -- 68235 Stun (Siege of Cyrodiil Recommendation)
+    [124624] = true, -- 68235 Stun (Alliance Standard-Bearer's License)
 
     -- Seasonal Mementos and Items
     [86792] = true, -- Eating (High Hrothgar Festival Mints)
@@ -549,6 +573,7 @@ CastBarTable.IsCast = {
     [104323] = true, -- Psijic Hourglass (Psijic Tautology Glass)
     [104325] = true, -- Psijic Disintegrate (Sapiarchic Discorporation Lens)
     [110482] = true, -- Rind-Renewing Pumpkin (Rind-Renewing Pumpkin)
+    [116543] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [110481] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [113288] = true, -- U20 Crown Memento 1 (Mire Drum)
     [113291] = true, --  U20 Crown Memento 2 (Vossa-satl)
@@ -565,7 +590,7 @@ CastBarTable.IsCast = {
     [101872] = true, -- _CRWN Dragon Priest Memento3 (Bone Dragon Summons Focus)
 
     -- Memento (Base)
-    [26736] = true, -- Bear Trap (Battered Bear Trap)
+    --[26736] = true, -- Bear Trap (Battered Bear Trap)
     [16846] = true, -- Blackfeather Court Whistle (Blackfeather Court Whistle)
     [41988] = true, -- Bonesnap Binding Stone (Bonesnap Binding Stone)
     [41948] = true, -- Glanir's Smoke Bomb (Glanir's Smoke Bomb)

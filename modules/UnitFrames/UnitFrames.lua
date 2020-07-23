@@ -428,7 +428,7 @@ function UnitFrames.GroupFrames_OnMouseUp(self, button, upInside)
         ClearMenu()
         local isPlayer = AreUnitsEqual(unitTag, "player") -- Flag Player
         local isLFG = DoesGroupModificationRequireVote() -- Flag if we're in an LFG Group
-        local accountName = zo_strformat(SI_UNIT_NAME, GetUnitDisplayName(unitTag))
+        local accountName = zo_strformat("<<C:1>>", GetUnitDisplayName(unitTag))
         local isOnline = IsUnitOnline(unitTag)
 
         if isPlayer then
@@ -546,7 +546,7 @@ function UnitFrames.AltBar_OnMouseEnterSiege(control)
         local siegeName = GetUnitName("controlledsiege")
         InitializeTooltip(InformationTooltip, control, BOTTOM, 0, -10)
 
-        SetTooltipText(InformationTooltip, zo_strformat(SI_UNIT_NAME, siegeName))
+        SetTooltipText(InformationTooltip, zo_strformat("<<C:1>>", siegeName))
         InformationTooltip:AddLine(zo_strformat(SI_LUIE_UF_SIEGE_POWER, ZO_CommaDelimitNumber(currentPower), ZO_CommaDelimitNumber(maxPower), percentagePower))
     end
     UpdateSiegePower()
@@ -2576,8 +2576,8 @@ function UnitFrames.UpdateStaticControls( unitFrame )
         end
     end
     -- Reanchor buffs if title changes
-    if unitFrame.buffs then
-        if UnitFrames.SV.PlayerFrameOptions ~= 1 and unitFrame.unitTag == "reticleover" then
+    if unitFrame.buffs and unitFrame.unitTag == "reticleover" then
+        if UnitFrames.SV.PlayerFrameOptions ~= 1 then
             if (not UnitFrames.SV.TargetEnableRank and not UnitFrames.SV.TargetEnableTitle and not UnitFrames.SV.TargetEnableRankIcon) or (savedTitle == "" and not UnitFrames.SV.TargetEnableRankIcon and unitFrame.isPlayer) or (savedTitle == "" and not unitFrame.isPlayer) then
                 unitFrame.debuffs:ClearAnchors()
                 unitFrame.debuffs:SetAnchor( TOP, unitFrame.control, BOTTOM, 0, 5 )

@@ -52,10 +52,11 @@ local strings = {
     SI_LUIE_SKILL_RESURRECTION_IMMUNITY_TP =             "Reviving. Immune to damage and all negative effects.",
     SI_LUIE_SKILL_TAUNT_TP =                             "Taunted.",
     SI_LUIE_SKILL_DISGUISE_TP =                          "Disguised. You can be revealed by sentries or performing suspicious activity.\n\nTaking any damage other than fall damage will destroy your disguise.",
-    SI_LUIE_SKILL_BATTLE_SPIRIT_TP =                     "• Health increased by |cFFFFFF5000|r\n• Damage taken and damage shield strength decreased by |cFFFFFF50|r%\n• Healing received decreased by |cFFFFFF60|r%\n• Ability range of |cFFFFFF28|r meters or more increased by |cFFFFFF8|r",
-    SI_LUIE_SKILL_BATTLE_SPIRIT_IMPERIAL_CITY_TP =       "• Health increased by |cFFFFFF5000|r\n• Damage taken and damage shield strength decreased by |cFFFFFF50|r%\n• Healing received decreased by |cFFFFFF60|r%",
+    SI_LUIE_SKILL_BATTLE_SPIRIT_TP =                     "• Increase Max Health by |cFFFFFF5000|r\n• Reduce damage taken and damage shield strength by |cFFFFFF50|r%\n• Reduce healing received by |cFFFFFF60|r%\n• Increase the range of abilities with a range greater than |cFFFFFF28|r meters by |cFFFFFF8|r meters",
+    SI_LUIE_SKILL_BATTLE_SPIRIT_IMPERIAL_CITY_TP =       "• Increase Max Health by |cFFFFFF5000|r\n• Reduce damage taken and damage shield strength by |cFFFFFF50|r%\n• Reduce healing received by |cFFFFFF60|r%",
     SI_LUIE_SKILL_RECALL_PENALTY_TP =                    "You have recently recalled to a Wayshrine and must pay an additional gold fee to do so again.",
     SI_LUIE_SKILL_BATTLEGROUND_DESERTER_TP =             "You left a Battleground match early and cannot queue again or earn Alliance points from any PvP sources.",
+    SI_LUIE_SKILL_LOOKING_FOR_GROUP_TP =                 "• Increase Max Health by |cFFFFFF20|r%\n• Increase Weapon and Spell Damage by |cFFFFFF25|r%",
 
     ----------------------------------------------------------------
     -- ITEM / CONSUMABLE TOOLTIPS ----------------------------------
@@ -246,6 +247,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_LOWER_MAX_HP_TP =              "Reduce Max Health by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     SI_LUIE_SKILL_GENERIC_REDUCE_DAMAGE_DONE_TP =               "Reduce damage done by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_REDUCE_HEALING_RECEIVED_TP =  "Reduce healing received by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     -- Resource Regeneration, Shields
     SI_LUIE_SKILL_GENERIC_HEALTH_RECOVERY_TP =           "Increase Health Recovery for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
@@ -295,6 +297,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_SCARY_IMMUNITIES_DUR_TP =      "Immune to all crowd control and movement impairing effects for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_FLYING_IMMUNITIES_TP =         "Immune to movement imparing effects.",
     SI_LUIE_SKILL_SET_GENERIC_IMMUNITY_TP =              "Immune to damage and all negative effects for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_IMMUNITY_PERMANENT_TP =        "Immune to damage and all negative effects.",
     SI_LUIE_SKILL_GENERIC_DISORIENT_TP =                 "Disoriented for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_DISORIENT_NO_DUR_TP =          "Disoriented.",
 
@@ -827,7 +830,6 @@ local strings = {
     SI_LUIE_SKILL_RAZOR_ARMOR_TP =                       "Reduce damage taken by |cFFFFFF30|r% for |cFFFFFF<<1>>|r seconds.\n\nWhile active the armor returns Physical Damage to attackers.",
     SI_LUIE_SKILL_UNSTABLE_CORE_CYRODIIL_TP =            "Your single target ranged abilities are reflected back on you for |cFFFFFF<<1>>|r seconds.\n\nThe core explodes when this effect ends, dealing Magic Damage.",
     SI_LUIE_SKILL_SHATTERING_PRISON_CYRODIIL_TP =        "Disoriented for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThe prison shatters when this effect ends, dealing Magic Damage.",
-    SI_LUIE_SKILL_LETHAL_ARROW_CYRODIIL_TP =             "Reduce healing received by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SIEGE_SHIELD_CYRODIIL_TP =             "Negate damage taken from Siege Weapons for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_POWER_BASH_CYRODIIL_TP =               "Stunned for |cFFFFFF<<1>>|r seconds.\n\nWhen this effect ends you will be disoriented for |cFFFFFF15|r seconds.",
     SI_LUIE_SKILL_ELDER_SCROLL_TP =                      "Carrying the |cFFFFFF<<1>>|r.",
@@ -852,6 +854,8 @@ local strings = {
     SI_LUIE_SKILL_LIGHTNING_TRAP =                       "Lightning Trap",
     SI_LUIE_SKILL_SPIKE_TRAP_TP =                        "Movement Speed reduced by |cFFFFFF25|r% for |cFFFFFF5|r seconds.\n\nImmobilized for |cFFFFFF0.8|r seconds.",
     SI_LUIE_SKILL_SPIKE_TRAP_AURIDON_TP =                "Movement Speed reduced by |cFFFFFF25|r% for |cFFFFFF10|r seconds.\n\nThis effect stacks up to |cFFFFFF3|r times, to a maximum of |cFFFFFF75|r% Movement Speed reduction.\n\nStunned for |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_STATIC_PITCHER_TP =                    "Taking Shock Damage every |cFFFFFF<<2>>|r <<2[second/seconds]>>. Each tick drains |cFFFFFF10|r% of your Max Stamina and Magicka.",
+    SI_LUIE_SKILL_STUNTED_CURRENT_TP =                   "Reduce Stamina Recovery by |cFFFFFF359|r and Magicka Recovery by |cFFFFFF212|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     ----------------------------------------------------------------
     -- SETS --------------------------------------------------------
@@ -931,7 +935,7 @@ local strings = {
 
     -- Mythic Items
     SI_LUIE_SKILL_SET_BLOODLORDS_EMBRACE_TP =            "When your attacker blocks an attack from you, they restore |cFFFFFF1535|r Magicka.\n\nThis effect can occur every |cFFFFFF1|r second.",
-    SI_LUIE_SKILL_SET_THRASSIAN_STANGLERS_TP =           "Stacks up to |cFFFFFF20|r times when you kill an enemy.\n\n• Increase Spell Damage by |cFFFFFF150|r per stack.\n• Increase damage taken by |cFFFFFF2|r% per stack.\n• Healing received and damage shield strength decreased by |cFFFFFF2|r% per stack.",
+    SI_LUIE_SKILL_SET_THRASSIAN_STANGLERS_TP =           "Stacks up to |cFFFFFF20|r times when you kill an enemy.\n\n• Increase Spell Damage by |cFFFFFF150|r per stack.\n• Increase damage taken by |cFFFFFF2|r% per stack.\n• Reduce healing received and damage shield strength by |cFFFFFF2|r% per stack.",
 
     -- Crafted Sets
     SI_LUIE_SKILL_SET_ALESSIAS_BULWARK =                 "Reduce Weapon Damage by |cFFFFFF10|r% for |cFFFFFF<<1>>|r seconds.",
@@ -1008,7 +1012,7 @@ local strings = {
     SI_LUIE_SET_AEGIS_CALLER_TP =                        "After |cFFFFFF2.5|r seconds, the Lesser Aegis spins its blades, dealing Bleed Damage every |cFFFFFF1|r second to enemies within a |cFFFFFF6|r meter radius.",
     SI_LUIE_SET_GRAVE_GUARDIAN_TP =                      "You and group members within |cFFFFFF8|r meters gain |cFFFFFF4430|r Physical and Spell Resistance while you are blocking.",
     SI_LUIE_SET_WINTERS_RESPITE_TP =                     "You and allies in the |cFFFFFF8|r meter radius of healing frost restore Health every |cFFFFFF1|r second.",
-    SI_LUIE_SET_HUNTERS_VENOM_TP =                       "You and allies within a |cFFFFFF6|r meter radius take Poison Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SET_HUNTERS_VENOM_TP =                       "You and any player opposed to your attacker within a |cFFFFFF6|r meter radius take Poison Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
 
     -- Trial Sets
     SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP =            "Increase Weapon Critical by |cFFFFFF400|r for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF5|r times when you deal melee damage.\n\nThis effect can occur once every half second.",
@@ -1079,10 +1083,10 @@ local strings = {
     SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME =               "Empower Atronach: Flame",
     SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST =               "Empower Atronach: Frost",
     SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM =               "Empower Atronach: Storm",
-    SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME_TP =            "The death of a nearby Flame Atronach has empowered this Air Atronach, granting it the use of |cFFFFFFFlame Tornado|r for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME_UNLIMITED_TP =  "This Air Atronach is empowered, granting it the use of |cFFFFFFFlame Tornado|r.",
-    SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM_TP =            "The death of a nearby Storm Atronach has empowered this Air Atronach, granting it the use of |cFFFFFFLightning Rod|r for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST_TP =            "The death of a nearby Frost Atronach has empowered this Air Atronach, granting it the use of |cFFFFFFIce Vortex|r for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME_TP =            "Empowered by Flame, granting the use of |cFFFFFFFlame Tornado|r for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME_UNLIMITED_TP =  "Empowered by Flame, granting the use of |cFFFFFFFlame Tornado|r.",
+    SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM_TP =            "Empowered by Storm, granting the use of |cFFFFFFLightning Rod|r for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST_TP =            "Empowered by Frost, granting the use of |cFFFFFFIce Vortex|r for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_STORM_BOUND_TP =                       "Afflicted with Shock Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_CHILLING_AURA_TP =                     "Enemies within |cFFFFFF2.5|r meters have their Movement Speed reduced by |cFFFFFF20|r%.",
     SI_LUIE_SKILL_RADIANCE_TP =                          "Enemies within |cFFFFFF3|r meters take Flame Damage every |cFFFFFF1|r second.",
@@ -1216,7 +1220,7 @@ local strings = {
     SI_LUIE_SKILL_STATIC_SHIELD_TP =                     "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nIf the shield is not destroyed it will detonate at the end of the duration, dealing Shock Damage to nearby enemies.",
     SI_LUIE_SKILL_TURRET_MODE_TP =                       "Charged by a power conduit, enabling the Sentry to shield itself with |cFFFFFFStatic Shield|r and use the |cFFFFFFThunderbolt|r ability.",
     SI_LUIE_SKILL_STATIC_CHARGE_TP =                     "Residual static energy from the Dolmen is suppressing your Health Recovery and you will be targeted by Static Charge, taking Oblivion damage.\n\nMove to reduce to the static buildup.",
-    SI_LUIE_SKILL_INCAPACITATING_TERROR_TP =             "Feared and taking Frost Damage every |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_INCAPACITATING_TERROR_TP =             "Feared and afflicted with Frost Damage every |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_SPIRITUAL_CLOAK_TP =                   "A spiritual cloak prevents Soul Thirsters from pulling you into the spirit realm for |cFFFFFF1|r minute.",
     SI_LUIE_SKILL_AETHERIAL_SHIFT_TP =                   "Stunned and shifting into the spirit realm over |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_BLESSING_GATHWEN_TP =                  "Reduce damage taken by |cFFFFFF3|r% for |cFFFFFF<<1>>|r seconds.",
@@ -1264,7 +1268,7 @@ local strings = {
     SI_LUIE_SKILL_ENSNARE_TP =                           "Stunned for |cFFFFFF4|r seconds.\n\nMovement Speed reduced by |cFFFFFF50|r% for |cFFFFFF8|r seconds.",
     SI_LUIE_SKILL_MIRROR_WARD_TP =                       "Reflect all projectiles cast at you.",
     SI_LUIE_SKILL_POISON_SHOT_TP =                       "Afflicted with Poison Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds, stacking indefinitely.",
-    SI_LUIE_SKILL_VENOMOUS_BURST_TP =                    "You and nearby allies take Poison Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_VENOMOUS_BURST_TP =                    "You and allies within |cFFFFFF<<2>>|r meters take Poison Damage every |cFFFFFF<<3>>|r <<3[second/seconds]>> for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SELENES_ROSE =                         "Selene's Roses",
     SI_LUIE_SKILL_WEB_WRAP_TP =                          "Wrapped in webs and unable to take any action for |cFFFFFF<<1>>|r seconds.\n\nAn ally near you can activate the |cFFFFFFFree Ally|r synergy to free you.",
     SI_LUIE_SKILL_CHATTERING_WEB_TP =                    "Wrapped in webs, taking Poison Damage from Spider Bites every |cFFFFFF1|r second and preventing you from taking any action for |cFFFFFF<<1>>|r seconds.\n\nAn ally near you can activate the |cFFFFFFFree Ally|r synergy to free you.",
@@ -1346,12 +1350,12 @@ local strings = {
     SI_LUIE_SKILL_ENERGIZE =                             "Energize",
     SI_LUIE_SKILL_REFLECTIVE_SCALE =                     "Reflective Scale",
     SI_LUIE_SKILL_FETCHERFLY_SWARM =                     "Fetcherfly Swarm",
-    SI_LUIE_SKILL_WING_GUST_STUN =                       "Knocked back for |cFFFFFF<<1>>|r seconds.\n\nMovement speed reduced by |cFFFFFF50|r% for |cFFFFFF<<2>>|r seconds.",
-    SI_LUIE_SKILL_WING_GUST_SNARE =                      "Knocked back for |cFFFFFF<<2>>|r seconds.\n\nMovement speed reduced by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_WING_GUST_STUN =                       "Knocked back for |cFFFFFF<<1>>|r seconds.\n\nMovement speed reduced by |cFFFFFF45|r% for |cFFFFFF<<2>>|r seconds.",
+    SI_LUIE_SKILL_WING_GUST_SNARE =                      "Knocked back for |cFFFFFF<<2>>|r seconds.\n\nMovement speed reduced by |cFFFFFF45|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_ENTROPY_NPC_TP =                       "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker heals every |cFFFFFF6|r seconds while Entropy remains active.",
 
     SI_LUIE_SKILL_BECKON_GATHWEN =                       "Beckon Gathwen",
-    SI_LUIE_SKILL_DRAINING_BITE_TP =                     "Afflicted with Bleed Damage every |cFFFFFF0.2|r seconds for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nYour attacker heals at the end of this duration.",
+    --SI_LUIE_SKILL_DRAINING_BITE_TP =                     "Afflicted with Bleed Damage every |cFFFFFF0.2|r seconds for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nYour attacker heals at the end of this duration.",
     SI_LUIE_SKILL_MOLTEN_PILLAR_INCALESCENCE =           "Molten Pillar Incalescence",
     SI_LUIE_SKILL_MOLTEN_PILLAR_TP =                     "Enemies within |cFFFFFF3|r meters of the pillar are hindered by sweltering heat, reducing their Movement Speed by |cFFFFFF60|r%.\n\nThe Ogre Shaman's Blazing Bolts will shackle any hindered targets, inflicting them with a |cFFFFFF4|r second immobilize.",
 
@@ -1397,7 +1401,6 @@ local strings = {
     SI_LUIE_SKILL_FREEZING_VINES =                       "Freezing Vines",
     SI_LUIE_SKILL_FREEZING_VINEBURST =                   "Freezing Vineburst",
     SI_LUIE_SKILL_FREEZING_VINES_TP =                    "Afflicted with Bleed Damage every |cFFFFFF0.5|r seconds and immobilized for |cFFFFFF<<1>>|r seconds.\n\nThe vines shatter at the end of the duration, dealing Frost Damage if you do not move away.",
-    SI_LUIE_SKILL_EXPLOSIVE_FLARE =                      "Explosive Flare",
     SI_LUIE_SKILL_SUMMON_SPIDERKITH =                    "Summon Spiderkith",
     SI_LUIE_SKILL_SUMMON_DEATH_SPIDER =                  "Summon Death Spider",
     SI_LUIE_SKILL_SUMMON_DEATH_SPIDER_TP =               "A death spider fights at your side. The death spider remains for |cFFFFFF2|r minutes or until killed.",
@@ -1418,6 +1421,8 @@ local strings = {
     SI_LUIE_SKILL_GARGOYLE_LEAP =                        "Gargoyle Leap",
     SI_LUIE_SKILL_EXPLOSIVE_BOLT_TP =                    "After |cFFFFFF<<1>>|r <<1[second/seconds]>>, the explosive bolt detonates, dealing Flame Damage to you and allies within |cFFFFFF5|r meters.",
     SI_LUIE_SKILL_HEMORRHAGING_TEAR_TP =                 "Afflicted with Bleed Damage every |cFFFFFF<<2>>|r <<2[second/seconds]>> for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nStacks up to |cFFFFFF3|r times, dealing |cFFFFFF50|r% more damage for each stack above the initial application.",
+    SI_LUIE_SKILL_WALL_OF_SOULS_TP =                     "A wall of souls protects you from death.\n\nIf any enemy crosses the threshold of the wall they are killed instantly.",
+    SI_LUIE_SKILL_EYE_OF_THE_SENTINEL_TP =               "You are paralyzed by the gaze of the Coldharbour Sentinel.",
 
     -- Keep Upgrade
     SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_RANGE =              "Longer Range on Ranged Guards",

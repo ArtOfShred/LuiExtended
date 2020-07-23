@@ -191,7 +191,7 @@ CrowdControl.aoeTraps = {
     [56277] = 0, -- Lava (City of Ash II)
     [5140] = 0, -- Lava (Dragonstar Arena)
 
-    [62770] = 0, -- Coldharbour Flames (Flame Trap) - Coldharbour Tutorial
+    [62770] = 0, -- Coldharbour Flames (Flame Trap) - Soul Shriven in Coldharbour
     [21943] = 0, -- Spike Trap (Spike Trap)
     [53169] = 0, -- Spike Trap (Spike Trap) - Dragonstar Arena
     [26531] = 0, -- Bear Trap (Bear Trap)
@@ -210,6 +210,11 @@ CrowdControl.aoeTraps = {
     [26089] = 0, -- Steam Blast (Steam Vent) -- Volenfell
     [26077] = 1, -- Steam Blast (Steam Vent) -- Volenfell
     [26091] = 1, -- Steam Blast (Steam Vent) -- Volenfell
+
+    [110416] = 1, -- Putrid Cloud (Gas Blossom) -- Housing
+    [110542] = 1, -- Stunted Current (Static Pitcher) -- Housing
+    [111258] = 1, -- Surprise Attack (Lantern Mantis) -- Housing
+    [111261] = 1, -- Surprise Attack (Lantern Mantis) -- Housing
 
     [92757] = 0, -- Spinning Blade (Ald Carac)
 
@@ -252,11 +257,8 @@ CrowdControl.aoeTraps = {
 
 CrowdControl.aoeNPCBoss = {
 
-    -- Summerset
-    [105889] = 0, -- Pustulant Eruption (Yaghra Nightmare)
-
     -- Vvardenfell
-    [94936] = 1, -- Tremor (Nchuleftingth - Mud-Tusk)
+    [94936] = 0, -- Tremor (Nchuleftingth - Mud-Tusk)
     [86566] = 1, -- Fire Runes (Nchuleftingth - Friar Hadelar)
     [89754] = 1, -- Shocking Rake (Old Rust-Eye - Khartag Point)
     [90148] = 1, -- Sunder's Echo (Vvardenfell -- Divine Intervention)
@@ -427,8 +429,14 @@ CrowdControl.aoeNPCElite = {
     [75980] = 1, -- Pillar Eruption (Minotaur Shaman)
     [11282] = 1, -- Steam Breath (Dwemer Centurion)
 
+    -- World
+    [95841] = 1, -- Static Charge (Dark Anchor)
+
     -- Quests
     [50765] = 1, -- CON_AOE_Template1 (Pelidil's End)
+
+    -- Summerset
+    [105889] = 1, -- Pustulant Eruption (Yaghra Nightmare)
 
     -- Dragonstar Arena
     [53314] = 1, -- Flame Volley (Sovngarde Ranger)
@@ -478,6 +486,7 @@ CrowdControl.aoeNPCNormal = {
     [85421] = 1, -- Retch (Cliff Strider)
     [85391] = 1, -- Slash (Cliff Strider)
     [13680] = 1, -- Acid Blood (Assassin Beetle)
+    [61374] = 1, -- Infectious Swarm (Necrotic Hoarvor)
     [10947] = 1, -- Fiery Breath (Shalk)
     [5265] = 1, -- Burning Ground (Shalk)
     [8088] = 1, -- Poison Spray (Giant Spider)
@@ -518,6 +527,9 @@ CrowdControl.LavaAlerts = {
 
     -- Consumables
     [68565] = true, -- Stun (Potion of Stun)
+
+    -- World
+    [95841] = true, -- Static Charge (Dark Anchor)
 
     -- Battlegrounds
     [87949] = true, -- Lava (Foyada Quarry)
@@ -597,7 +609,6 @@ CrowdControl.IgnoreList ={
     -- Elsweyr
     [121032] = true, -- Bash (Grand Adept Ma'hja-dro) (Bright Moons, Warm Sands)
     [121035] = true, -- Staggered (Grand Adept Ma'hja-dro) (Bright Moons, Warm Sands)
-    [125269] = true, -- Headbutt (Bahlokdaan) (Bright Moons, Warm Sands)
 
     ----------------
     -- Arenas

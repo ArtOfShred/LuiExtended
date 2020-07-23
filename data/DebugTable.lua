@@ -700,9 +700,13 @@ LUIE.DebugAuras = {
     [115046] = true, -- 68235 Stun (Nascent Indrik)
     [130394] = true, -- 68235 Stun (Spectral Indrik)
     [131536] = true, -- Generic Stun & Combine (Sovereign Sow)
-    --[68259] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
-    --[70582] = true, -- Roll 1d1000 (Merethic Resorative Resin)
-    --[70584] = true, -- 68235 Stun (Merethic Restorative Resin)
+
+    [68259] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [70582] = true, -- Roll 1d1000 (Merethic Resorative Resin)
+    [70584] = true, -- 68235 Stun (Merethic Restorative Resin)
+    [88449] = true, -- Create Super Psijic Ambrosia (Aetheric Cipher)
+    [88451] = true, -- 88449 Stun (Aetheric Cipher)
+
     [63427] = true, -- Clean Fish (Any Fish)
     [78052] = true, -- Minor Pardon (Counterfeit Pardon Edict)
     [76350] = true, -- Moderate Pardon (Leniency Edict)
@@ -785,6 +789,8 @@ LUIE.DebugAuras = {
     --[124789] = true, -- 68235 Stun (Siege of Cyrodiil Recognition)
     --[126708] = true, -- Siegemaster Costume (Siege of Cyrodiil Recommendation)
     --[126710] = true, -- 68235 Stun (Siege of Cyrodiil Recommendation)
+    [124622] = true, -- Alliance Standard-Bearer Emote (Alliance Standard-Bearer's License)
+    [124624] = true, -- 68235 Stun (Alliance Standard-Bearer's License)
 
     -------------------------------------
     -- MEMENTOS -------------------------
@@ -878,7 +884,6 @@ LUIE.DebugAuras = {
     [25369] = true, -- Sanguine's Goblet (Sanguine's Goblet)
     [42008] = true, -- Blessing of Root Sunder (Token of Root Sunder)
     [42053] = true, -- Yokudan Salute (Yokudan Totem)
-    --[12478] = true, -- CON_Ground Rise on (Yokudan Totem)
     [42067] = true, -- Explosion (Yokudan Totem)
 
     [89550] = true, -- TROPHY Azura's Light (Twilight Shard)
@@ -924,6 +929,7 @@ LUIE.DebugAuras = {
     [104323] = true, -- Psijic Hourglass (Psijic Tautology Glass)
     [104325] = true, -- Psijic Disintegrate (Sapiarchic Discorporation Lens)
     [110482] = true, -- Rind-Renewing Pumpkin (Rind-Renewing Pumpkin)
+    [116543] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [110481] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [113697] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [113696] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
@@ -944,8 +950,9 @@ LUIE.DebugAuras = {
     --[81301] = true, -- _CRWN_Badger_EatCritter
     [72955] = true, -- _CROWN Pet Goat,Black
     [81352] = true, -- _CRWN_12.5s (Spotted Snow Senche-Leopard)
-    [127179] = true, -- _Crwn Pet Doom Spawn (Mudcrab of Eternal Doom)
+    --[127179] = true, -- _Crwn Pet Doom Spawn (Mudcrab of Eternal Doom)
     [60665] = true, -- Vanity Pet Sphere Stun
+    --[79693] = true, -- _CRWN_ChubLoon_Bellyflop (Chub Loon)
 
     -------------------------------------
     -- OTHER COLLECTIBLES ---------------
@@ -2809,8 +2816,9 @@ LUIE.DebugAuras = {
     [13372] = true, -- Spotted
 
     -- MISC
+    [37079] = true, -- remove
     [22706] = true, -- Remove Sprint
-    --[20311] = true, -- Remove Sprint
+    [20311] = true, -- Remove Sprint
     [20303] = true, -- Remove Sprint
     [38519] = true, -- Hiding
     [39046] = true, -- Add Guild Rep
@@ -2831,6 +2839,28 @@ LUIE.DebugAuras = {
     --[105190] = true, -- Grim Focus Combat Trigger
     --[105192] = true, -- Grim Focus Combat Trigger
     --[105194] = true, -- RF Combat Trigger
+
+    -- DEATH ACHIEVE CHECK (VETERAN DUNGEONS)
+    [55883] = true, -- Death Achieve Check
+    [55884] = true, -- Death Achieve Check
+    [58955] = true, -- Death Achieve Check
+    [58963] = true, -- Death Achieve Check
+    [66271] = true, -- Death Achieve Check
+    [66272] = true, -- Death Achieve Check
+    [75612] = true, -- Death Achieve Check
+    [75615] = true, -- Death Achieve Check
+    [76264] = true, -- Death Achieve Check
+    [76265] = true, -- Death Achieve Check
+    [55883] = true, -- Death Achieve Check
+    [55884] = true, -- Death Achieve Check
+    [58955] = true, -- Death Achieve Check
+    [58963] = true, -- Death Achieve Check
+    [66271] = true, -- Death Achieve Check
+    [66272] = true, -- Death Achieve Check
+    [75612] = true, -- Death Achieve Check
+    [75615] = true, -- Death Achieve Check
+    [76264] = true, -- Death Achieve Check
+    [76265] = true, -- Death Achieve Check
 
     -- PET EFFECTS
     [28609] = true, -- Dummy Target Setter
@@ -2894,7 +2924,7 @@ LUIE.DebugAuras = {
     -- WORLD EVENTS ---------------------
     -------------------------------------
 
-    -- Daedric Anchor
+    -- Dark Anchor
     [13603] = true, -- CON_Destealth
     [44045] = true, -- Summon Victim
     [44056] = true, -- Summon Victim Spawn
@@ -2941,7 +2971,7 @@ LUIE.DebugAuras = {
     [51505] = true, -- Portal Spawn
     [51507] = true, -- Targetable On
 
-    -- Daedric Anchor Bosses
+    -- Dark Anchor Bosses
     --[89249] = true, -- Summon Daedra (Ozozzachar)
     --[89251] = true, -- Summon Daedra (Ozozzachar)
 
@@ -8096,6 +8126,24 @@ LUIE.DebugAuras = {
     [26076] = true, -- Vent Steam (Steam Vent) -- Volenfell
     [26077] = true, -- Steam Blast (Steam Vent) -- Volenfell
 
+    [75810] = true, -- Trap Regen Stopper (Gas Blossom) -- Housing
+    [110416] = true, -- Putrid Cloud (Gas Blossom) -- Housing
+    [110571] = true, -- Putrid Cloud (Gas Blossom) -- Housing
+
+    [110541] = true, -- Stunted Current (Static Pitcher) -- Housing
+    [110542] = true, -- Stunted Current (Static Pitcher) -- Housing
+    [111229] = true, -- Stunted Current (Static Pitcher) -- Housing
+    [110576] = true, -- Stunted Current (Static Pitcher) -- Housing
+    [110578] = true, -- Stunted Current (Static Pitcher) -- Housing
+
+    [111256] = true, -- Surprise Attack (Lantern Mantis) -- Housing
+    [113122] = true, -- Disarmed (Lantern Mantis) -- Housing
+    [111347] = true, -- Surprise Attack (Lantern Mantis) -- Housing
+    [111260] = true, -- Surprise Attack (Lantern Mantis) -- Housing
+    [111348] = true, -- Surprise Attack (Lantern Mantis) -- Housing
+    [111258] = true, -- Surprise Attack (Lantern Mantis) -- Housing
+    [111261] = true, -- Surprise Attack (Lantern Mantis) -- Housing
+
     -- Elinhir Private Arena
     [117429] = true, -- Lava Eruption (Lava Trap)
     [117430] = true, -- Projectile (Lava Trap)
@@ -8493,6 +8541,7 @@ LUIE.DebugAuras = {
     [88504] = true, -- Summon Abomination -- Bonelord
     [88503] = true, -- Summon Abomination -- Bonelord
     [89231] = true, -- Summon Abomination -- Bonelord
+    [89184] = true, -- Summon Abomination -- Bonelord
     [44339] = true, -- Bone Surge -- Bonelord
 
     [79803] = true, -- Covetous Return -- Healer
@@ -9900,6 +9949,10 @@ LUIE.DebugAuras = {
     [25718] = true, -- Bleeding -- Gargoyle
     [25714] = true, -- Vampiric Touch -- Gargoyle
     [25715] = true, -- Vampiric Touch -- Gargoyle
+    [51352] = true, -- Petrify (Gargoyle)
+    [51365] = true, -- Petrify (Gargoyle)
+    [51353] = true, -- Petrify (Gargoyle)
+    [51354] = true, -- Petrify (Gargoyle)
 
     [8671] = true, -- Sweep -- Giant
     [46845] = true, -- Sweep -- Giant
@@ -10669,14 +10722,11 @@ LUIE.DebugAuras = {
     [61980] = true, -- Off-Balance
     [61961] = true, -- Perma Set Off Balance Target
     [64677] = true, -- MQ1 Tutorial Perma Off-Balance
-    [63900] = true, -- Major Protection die
     [64676] = true, -- MQ1 Tutorial Perma Off-Balance
     [61916] = true, -- Heat Wave
     [64798] = true, -- MQ1 Heat Wave (Tutorial)
     [75531] = true, -- Retarget
     [0] = true, -- (No Name)
-    [63269] = true, -- Heat Wave (Vaekar the Forgemaster)
-    [63270] = true, -- Heat Wave (Vaekar the Forgemaster)
     [63737] = true, -- Heavy Attack
     [63684] = true, -- Uppercut
     [63685] = true, -- Uppercut Stun
@@ -10692,8 +10742,6 @@ LUIE.DebugAuras = {
     [64112] = true, -- CON_Ground Rise on
     [48345] = true, -- Focused Healing
     [48346] = true, -- Minor Wound
-    [63755] = true, -- Heat Wave
-    [63756] = true, -- Heat Wave
     [51692] = true, -- Ground Rise on
     [51693] = true, -- Hate
     [63521] = true, -- Bone Crush
@@ -12304,13 +12352,29 @@ LUIE.DebugAuras = {
 
     -- Tutorial
     [89095] = true, -- Slaver Clothes
-    [92087] = true, -- Slaver Clothes
-    [92100] = true, -- Slaver Clothes
-    [92106] = true, -- Slaver Clothes
-    [92108] = true, -- Slaver Clothes
-    [92089] = true, -- Slaver Clothes
-    [92105] = true, -- Slaver Clothes
     [89096] = true, -- Slaver Clothes
+    [92087] = true, -- Slaver Clothes
+    [92088] = true, -- Slaver Clothes
+    [92089] = true, -- Slaver Clothes
+    [92090] = true, -- Slaver Clothes
+    [92091] = true, -- Slaver Clothes
+    [92092] = true, -- Slaver Clothes
+    [92093] = true, -- Slaver Clothes
+    [92094] = true, -- Slaver Clothes
+    [92095] = true, -- Slaver Clothes
+    [92096] = true, -- Slaver Clothes
+    [92097] = true, -- Slaver Clothes
+    [92098] = true, -- Slaver Clothes
+    [92099] = true, -- Slaver Clothes
+    [92100] = true, -- Slaver Clothes
+    [92101] = true, -- Slaver Clothes
+    [92102] = true, -- Slaver Clothes
+    [92103] = true, -- Slaver Clothes
+    [92104] = true, -- Slaver Clothes
+    [92105] = true, -- Slaver Clothes
+    [92106] = true, -- Slaver Clothes
+    [92107] = true, -- Slaver Clothes
+    [92108] = true, -- Slaver Clothes
     [88444] = true, -- Sit
     [93489] = true, -- Sit
     [92743] = true, -- Waking
@@ -12331,16 +12395,14 @@ LUIE.DebugAuras = {
     [92233] = true, -- Throw Dagger
     [92238] = true, -- MQ1 Heat Wave (Tutorial)
     [62546] = true, -- MQ1 Lockpick Grant
+    [92668] = true, -- Whirlwind (Slaver Cutthroat)
+    [92669] = true, -- Whirlwind (Slaver Cutthroat)
     [93604] = true, -- Q5804 Input Lock Visual
     [88904] = true, -- Metal Trap
     [88905] = true, -- Metal Trap
     [22337] = true, -- Generic Fade to Black 2s
     [92002] = true, -- Waking
     [106162] = true, -- Not CC Immune
-
-    -- Tutorial NPC's
-    [92668] = true, -- Whirlwind (Slaver Cutthroat)
-    [92669] = true, -- Whirlwind (Slaver Cutthroat)
 
     -- Divine Conundrum (Main Quest)
     [91600] = true, -- Disintegration
@@ -12769,6 +12831,7 @@ LUIE.DebugAuras = {
     -- SUMMERSET QUESTS/EVENTS ----------
     -------------------------------------
 
+    -- Tutorial - The Mind Trap
     [107581] = true, -- Mind Haze
     [107747] = true, -- Mind Trap
     [100672] = true, -- MQ1 Input Lock Visual
@@ -12895,6 +12958,8 @@ LUIE.DebugAuras = {
     [125285] = true, -- Sweeping Breath (Bahlokdaan)
 
     [125569] = true, -- Bite (Bahlokdaan)
+    [122195] = true, -- Bite R (Bahlokdaan)
+    [122196] = true, -- Bite L (Bahlokdaan)
     [122194] = true, -- Bite (Bahlokdaan)
 
     [125244] = true, -- Head Strike (Bahlokdaan)
@@ -12905,6 +12970,8 @@ LUIE.DebugAuras = {
     [125269] = true, -- Headbutt (Bahlokdaan)
 
     [125570] = true, -- Chomp (Bahlokdaan)
+    [122200] = true, -- Chomp (Bahlokdaan)
+    [122201] = true, -- Chomp (Bahlokdaan)
     [122199] = true, -- Chomp (Bahlokdaan)
     [117192] = true, -- Chomp (Bahlokdaan)
 
@@ -12914,6 +12981,8 @@ LUIE.DebugAuras = {
     [125265] = true, -- Tail Whip (Bahlokdaan)
     [125266] = true, -- Tail Whip (Bahlokdaan)
     [125263] = true, -- Tail Whip (Bahlokdaan)
+    [125267] = true, -- Tail Whip (Bahlokdaan)
+    [125264] = true, -- Tail Whip (Bahlokdaan)
 
     [125242] = true, -- Wing Thrash (Bahlokdaan)
     [125278] = true, -- Wing Swipe (Bahlokdaan)
@@ -12921,13 +12990,17 @@ LUIE.DebugAuras = {
     [125247] = true, -- Wing Thrash (Bahlokdaan)
     [125250] = true, -- Wing Thrash (Bahlokdaan)
     [125245] = true, -- Wing Thrash (Bahlokdaan)
+    [125249] = true, -- Wing Thrash (Bahlokdaan)
+    [125246] = true, -- Wing Thrash (Bahlokdaan)
 
-    --[125243] = true, -- Wing Thrash (Bahlokdaan)
-    --[125275] = true, -- Wing Swipe (Bahlokdaan)
-    --[125274] = true, -- Wing Swipe (Bahlokdaan)
-    --[125255] = true, -- Wing Thrash (Bahlokdaan)
-    --[125256] = true, -- Wing Thrash (Bahlokdaan)
-    --[125253] = true, -- Wing Thrash (Bahlokdaan)
+    [125243] = true, -- Wing Thrash (Bahlokdaan)
+    [125275] = true, -- Wing Swipe (Bahlokdaan)
+    [125274] = true, -- Wing Swipe (Bahlokdaan)
+    [125255] = true, -- Wing Thrash (Bahlokdaan)
+    [125256] = true, -- Wing Thrash (Bahlokdaan)
+    [125253] = true, -- Wing Thrash (Bahlokdaan)
+    [125257] = true, -- Wing Thrash (Bahlokdaan)
+    [125254] = true, -- Wing Thrash (Bahlokdaan)
 
     [123812] = true, -- Summon Bahlokdaan (Bahlokdaan)
     [125607] = true, -- Receive Call (Bahlokdaan)
@@ -13235,10 +13308,6 @@ LUIE.DebugAuras = {
     [52878] = true, -- Pull (Anka-Ra Blademaster)
 
     [25720] = true, -- Vampiric Touch (Gargoyle)
-    [51352] = true, -- Petrify (Gargoyle)
-    [51365] = true, -- Petrify (Gargoyle)
-    [51353] = true, -- Petrify (Gargoyle)
-    [51354] = true, -- Petrify (Gargoyle)
 
     [54411] = true, -- Celestial Blast (Anka-Ra Shadowcaster)
     [54415] = true, -- Celestial Blast (Anka-Ra Shadowcaster)
@@ -16437,16 +16506,28 @@ LUIE.DebugAuras = {
     [116680] = true, -- Ruinous Cyclone (Ruinous Cyclone)
     [116678] = true, -- Ruinous Cyclone (Ruinous Cyclone)
 
+    -- World
+    [21675] = true, -- Molag Bal's Favor (Daedric Titan / Daedroth)
+    [21677] = true, -- Wall of Souls (Dremora Channeler)
+    [21707] = true, -- Imperial Law (Player)
+
     -- Siege Warfare
     [35106] = true, -- Fire (Firepot Trebuchet)
+    [35103] = true, -- Fire (Firepot Trebuchet)
     [35099] = true, -- Ice Damage (Iceball Trebuchet)
+    [35100] = true, -- Iceball Snare
     [35112] = true, -- Stoneball (Stone Trebuchet)
     [35094] = true, -- Bolt (Ballista)
     [35055] = true, -- Fire (Firebolt Ballista)
     [35080] = true, -- Bolt (Lightning Ballista)
+    [35078] = true, -- Snare (Lightning Ballista)
     [35121] = true, -- Ice Damage (Scattershot Catapult)
+    [35119] = true, -- Scatter Snare (Scattershot Catapult)
     [35136] = true, -- Meatbag (Meatbag Catapult)
+    [35138] = true, -- Diseased (Meatbag Catapult)
     [35132] = true, -- Oil Pot (Oil Catapult)
+    [35131] = true, -- Oil Pot (Oil Catapult)
+    [35365] = true, -- Fire (Flaming Oil)
     [33348] = true, -- Practice Siege Repair Kit (Practice Siege Repair Kit)
 
     -- Chaos Magic

@@ -22,7 +22,7 @@ end
 function CombatTextDeathViewer:OnEvent(unitTag)
     local Settings = LUIE.CombatText.SV
 
-	local name = zo_strformat(SI_UNIT_NAME, GetUnitName(unitTag))
+	local name = zo_strformat("<<C:1>>", GetUnitName(unitTag))
 
     --Label setup
     local control, controlPoolKey = self.poolManager:GetPoolObject(poolTypes.CONTROL)
