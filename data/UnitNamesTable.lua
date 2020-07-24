@@ -243,6 +243,7 @@ LUIE.Data.UnitNames = {
     Boss_Shade_of_Naemon = 'Shade of Naemon',
 
     -- DC Quests
+    Elite_Deathfang = 'Deathfang',
     Elite_King_Demog = 'King Demog',
     Elite_Gornog = 'Gornog',
     Elite_Tempered_Sphere = 'Tempered Sphere',

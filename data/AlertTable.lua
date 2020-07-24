@@ -177,7 +177,7 @@ LUIE.Data.AlertTable = {
     [43646] = { avoid = true, priority = 3, auradetect = true, sound = LUIE_ALERT_SOUND_TYPE_GROUND }, -- Barrier [monster synergy]  (Faction NPCs)
 
     [70070] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1250, sound = LUIE_ALERT_SOUND_TYPE_ST }, -- Heavy Strike (Winterborn Warrior)
-    [64980] = { block = true, dodge = true, interrupt = true, reflect = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = LUIE_CC_TYPE_STAGGER, sound = LUIE_ALERT_SOUND_TYPE_ST_CC }, -- Javelin (Winterborn Warrior)
+    [64980] = { block = true, dodge = true, interrupt = true, reflect = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = LUIE_CC_TYPE_STAGGER, sound = LUIE_ALERT_SOUND_TYPE_ST_CC, postCast = 500 }, -- Javelin (Winterborn Warrior)
     [65033] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_EFFECT_GAINED, duration = 1000, cc = LUIE_CC_TYPE_STAGGER, sound = LUIE_ALERT_SOUND_TYPE_ST_CC }, -- Retaliation (Winterborn Warrior)
 
     [55909] = { dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = LUIE_CC_TYPE_SNARE, postCast = 2300, sound = LUIE_ALERT_SOUND_TYPE_TRAVELER }, -- Grasping Vines (Winterborn Mage)
@@ -227,7 +227,7 @@ LUIE.Data.AlertTable = {
 
     [84818] = { interrupt = true, priority = 3, auradetect = true, duration = 4000, sound = LUIE_ALERT_SOUND_TYPE_HEAL }, -- Fiendish Healing (Skaafin Witchling) (Morrowind)
 
-    [84835] = { avoid = true, priority = 2, eventdetect = true, sound = LUIE_ALERT_SOUND_TYPE_GROUND }, -- Broken Pact (Skaafin) (Morrowind) -- TODO: Result needed here
+    [84835] = { avoid = true, priority = 2, eventdetect = true, duration = 2300, result = ACTION_RESULT_BEGIN, sound = LUIE_ALERT_SOUND_TYPE_GROUND, postCast = 4000 }, -- Broken Pact (Skaafin) (Morrowind)
 
     -- ANIMALS
     [5452] = { block = true, dodge = true, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1500, cc = LUIE_CC_TYPE_STAGGER, sound = LUIE_ALERT_SOUND_TYPE_AOE_CC }, -- Lacerate (Alit)
@@ -2257,6 +2257,10 @@ LUIE.Data.AlertZoneOverride = {
     [121643] = { -- Defiled Ground (Euraxian Necromancer)
         [1106] = Unitnames.NPC_Euraxian_Necromancer, -- Elsweyr (Bright Moons, Warm Sands)
     },
+
+    [5240] = { -- Lash (Giant Snake)
+        [534] = Unitnames.Elite_Deathfang, -- Deathfang (Stros M'Kai)
+    }
 }
 
 -- Map Name override - Sometimes we need to use GetMapName() instead of Location Name or ZoneId

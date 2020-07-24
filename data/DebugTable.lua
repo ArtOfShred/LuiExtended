@@ -8722,6 +8722,7 @@ LUIE.DebugAuras = {
     [79930] = true, -- Lunge (Tracker)
     [79929] = true, -- Lunge (Tracker)
     [78664] = true, -- Lunge (Tracker)
+    [129913] = true, -- Lunge Target (Tracker)
 
     [88481] = true, -- Spectral Claw (Beastcaller)
     [88478] = true, -- Swarm (Beastcaller)
@@ -8851,12 +8852,12 @@ LUIE.DebugAuras = {
     [84820] = true, -- Fiendish Healing (Skaafin Witchling)
     [84821] = true, -- Fiendish Healing (Skaafin Witchling)
 
-    --[84835] = true, -- Broken Pact (Skaafin)
-    --[84851] = true, -- Broken Pact (Skaafin)
-    --[84850] = true, -- Broken Pact (Skaafin)
-    --[84838] = true, -- Broken Pact (Skaafin)
-    --[84836] = true, -- Broken Pact (Skaafin)
-    --[84837] = true, -- Broken Pact (Skaafin)
+    [84835] = true, -- Broken Pact (Skaafin Witchling)
+    [84851] = true, -- Broken Pact (Skaafin Witchling)
+    [84850] = true, -- Broken Pact (Skaafin Witchling)
+    [84838] = true, -- Broken Pact (Skaafin Witchling)
+    [84836] = true, -- Broken Pact (Skaafin Witchling)
+    [84837] = true, -- Broken Pact (Skaafin Witchling)
 
     -------------------------------------
     -- CYRODIIL GUARDS ------------------

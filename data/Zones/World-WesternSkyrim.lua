@@ -8,7 +8,10 @@
 -- Deepwood Vale (1160) - Bound in Blood (Greymoor Tutorial)
 LUIE.Data.Zones[1160] = {
 
-AlertMapOverride = { 
+
+
+
+AlertMapOverride = {
 
     [70366] = { -- Slam (Great Bear)
         -- QUESTS
@@ -20,4 +23,3 @@ AlertMapOverride = {
 
 
 },
-
