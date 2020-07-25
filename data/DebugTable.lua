@@ -3212,8 +3212,8 @@ LUIE.DebugAuras = {
 
     [21007] = true, -- Reflective Scale (Reflective Scale)
 
-    [21014] = true, -- Reflective Plate (Reflective Plate)
-    [108798] = true, -- Snare Removal (Reflective Plate)
+    [21014] = true, -- Protective Plate (Protective Plate)
+    [108798] = true, -- Protective Plate (Protective Plate)
 
     [21017] = true, -- Dragon Fire Scale (Dragon Fire Scale)
     [32753] = true, -- Dragon Fire Scale (Dragon Fire Scale)

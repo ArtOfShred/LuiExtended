@@ -379,7 +379,7 @@ local strings = {
 
     -- Nightblade Skills
     SI_LUIE_SKILL_DEATH_STROKE_DEBUFF =                  "Increase damage taken from the Nightblade by |cFFFFFF20|r% for |cFFFFFF6|r seconds.",
-    SI_LUIE_SKILL_INCAPACITATING_STRIKE =                "Increase damage taken from the Nightblade by |cFFFFFF20|r% for |cFFFFFF6|r seconds.\n\nSilenced for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_INCAPACITATING_STRIKE =                "Increase damage taken from the Nightblade by |cFFFFFF20|r% for |cFFFFFF6|r seconds.\n\nStunned for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_SURPRISE_ATTACK_TP =                   "Reduce Physical Resistance by |cFFFFFF5|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SHADOWY_DISGUISE_TP =                  "Invisible for |cFFFFFF<<1>>|r seconds.\n\nYour next direct damage attack used within |cFFFFFF<<1>>|r seconds will always be a Critical Strike.",
     SI_LUIE_SKILL_GRIM_FOCUS_TP =                        "For |cFFFFFF<<1>>|r seconds, hitting an enemy with |cFFFFFF5|r Light or Heavy Attacks changes this ability into Assassin's Will, allowing you to fire a single shot from a spectral bow for half cost at an enemy to deal Magic Damage.\n\nEach stack reduces damage taken by |cFFFFFF2|r%, persisting even after <<2>> fades as long as you remain in combat.\n\nStacks are lost when firing the spectral bow.",

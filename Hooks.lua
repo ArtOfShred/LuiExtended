@@ -336,7 +336,7 @@ function LUIE.InitializeHooks()
                         if LUIE.Data.Effects.EffectOverride[compareId] and LUIE.Data.Effects.EffectOverride[compareId].noDuplicate then
                             for k, v in pairs(trackBuffs) do
                                 -- Only remove the lower duration effects that were cast previously or simultaneously.
-                                if v.abilityId == compareId and v.endTime <= compareTime then
+                                if v.abilityId == compareId and v.endTime < compareTime then
                                     v.markForRemove = true
                                 end
                             end

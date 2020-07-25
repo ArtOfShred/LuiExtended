@@ -1007,9 +1007,6 @@ Effects.BarHighlightExtraId = {
     [61785] = 32685, -- Fossilize
     [108813] = 32678, -- Shattering Rocks
 
-    [134009] = 29032, -- Stonefist
-    [134355] = 31816, -- Stonefist
-
     -- Nightblade
     [124806] = 35336, -- Minor Vulnerability --> Lotus Fan
     [36973] = 36967, -- Major Berserk --> Reaper's Mark
@@ -1020,7 +1017,6 @@ Effects.BarHighlightExtraId = {
     [131343] = 62240, -- Major Brutality --> Major Sorcery (Sap Essence)
 
     -- Sorcerer
-    [24576] = 24574, -- Defensive Rune
     [89491] = 24330, -- Haunting Curse
     [132946] = 28482, -- Streak
 
@@ -1096,11 +1092,9 @@ Effects.BarHighlightCheckOnFade = {
 
     -- Dragonknight
     [31103] = { id1 = 48946, id2 = 31103, unitTag = "reticleover" }, -- Noxious Breath --> Major Fracture / Noxious Breath
-    [108798] = { id1 = 21014, unitTag = "player" }, -- Reflective Plate --> Snare Removal
+    [108798] = { id1 = 21014, unitTag = "player" }, -- Protective Plate
     [31898] = { id1 = 20253, id2 = 31898, unitTag = "reticleover" }, -- Burning Talons
     [31899] = { id1 = 20528, id2 = 31899, unitTag = "reticleover" }, -- Minor Maim --> Choking Talons / Minor Maim
-    [29032] = { id1 = 29032, unitTag = "player" }, -- Stonefist
-    [31816] = { id1 = 31816, unitTag = "player" }, -- Stone Giant
 
     -- Nightblade
     [35336] = { id1 = 124806, id2 = 35336, unitTag = "reticleover" }, -- Lotus Fan --> Minor Vulnerability / Lotus Fan
@@ -1212,7 +1206,7 @@ Effects.BarHighlightOverride = {
     [32744] = { showFakeAura = true, noRemove = true }, -- Green Dragon Blood
     [32722] = { showFakeAura = true, noRemove = true }, -- Coagulating Blood
 
-    [21014] = { newId = 108798 }, -- Reflective Plate --> Snare Removal
+    [21014] = { newId = 108798 }, -- Protective Plate
     [31837] = { newId = 31841, showFakeAura = true }, -- Inhale
     [32792] = { newId = 32796, showFakeAura = true }, -- Deep Breath
     [32785] = { newId = 32788, showFakeAura = true }, -- Draw Essence
@@ -5165,7 +5159,7 @@ Effects.EffectOverride = {
     -- Protective Scale / Protective Plate / Dragon Fire Scale
     [21007] = { tooltip = Tooltips.Skill_Protective_Scale }, -- Protective Scale (Protective Scale)
     [21014] = { tooltip = Tooltips.Skill_Protective_Plate }, -- Protective Plate (Protective Plate)
-    [108798] = { name = Abilities.Skill_Reflective_Plate, tooltip = Tooltips.Skill_Protective_Plate, hideReduce = true, noDuplicate = true }, -- Snare Removal (Protective Plate)
+    [108798] = { tooltip = Tooltips.Skill_Protective_Plate, hideReduce = true, noDuplicate = true }, -- Protective Plate (Protective Plate)
     [21017] = { tooltip = Tooltips.Skill_Dragon_Fire_Scale }, -- Dragon Fire Scale (Dragon Fire Scale)
 
     -- Inhale / Deep Breath / Draw Essence
@@ -5340,7 +5334,6 @@ Effects.EffectOverride = {
     [125923] = { icon = 'esoui/art/icons/ability_nightblade_007_a.dds' }, -- Reave (Incapacitating Strike)
     [61393] = { name = Abilities.Skill_Incapacitating_Strike, tooltip = Tooltips.Skill_Death_Stroke_Debuff }, -- Damage Taken Increased (Incapacitating Strike)
     [113107] = { icon = 'esoui/art/icons/ability_nightblade_007_c.dds', name = Abilities.Skill_Incapacitating_Strike, tooltip = Tooltips.Skill_Incapacitating_Strike }, -- Damage Taken Increased (Incapacitating Strike)
-    [113109] = { icon = 'esoui/art/icons/ability_nightblade_007_c.dds' }, -- Incapacitating Strike (Incapacitating Strike)
     [126444] = { icon = 'esoui/art/icons/ability_nightblade_007_c.dds', tooltip = Tooltips.Skill_Incapacitating_Strike, hideReduce = true }, -- Incapacitating Strike (Incapacitating Strike)
     [36515] = { tooltip = Abilities.Skill_Soul_Harvest }, -- Major Defile (Soul Harvest)
     [61400] = { name = Abilities.Skill_Soul_Harvest, tooltip = Tooltips.Skill_Death_Stroke_Debuff }, -- Damage Taken Increased (Soul Harvest)
@@ -6937,7 +6930,7 @@ Effects.EffectOverride = {
     [135533] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_lamaes_blessing.dds' }, -- Lamae's Blessing
 
     [39422] = { hide = true }, -- Mist Form
-    [56684] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds' }, -- Quick Strike
+    [56684] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_dagger_1h_light.dds' }, -- Quick Strike
 
     ----------------------------------------------------------------
     -- WEREWOLF PASSIVES -------------------------------------------

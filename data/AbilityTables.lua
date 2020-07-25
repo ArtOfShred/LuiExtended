@@ -507,7 +507,6 @@ local AbilityTables = {
     Skill_Dragon_Blood                = 29004,
     Skill_Green_Dragon_Blood          = 32744,
     Skill_Coagulating_Blood           = 32722,
-    Skill_Reflective_Plate            = 21014,
     Skill_Inhale                      = 31837,
     Skill_Dragon_Leap                 = 29016,
     Skill_Take_Flight                 = 32719,
@@ -566,7 +565,7 @@ local AbilityTables = {
     -- Sorcerer
     Skill_Exploitation                = 31389,
     Skill_Crystal_Shard               = 43714,
-    Skill_Crystal_Blast               = 46331,
+    Skill_Crystal_Blast               = 46704,
     Skill_Crystal_Fragments           = 46324,
     Skill_Restraining_Prison          = 28311,
     Skill_Daedric_Tomb                = 24842,
