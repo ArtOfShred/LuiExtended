@@ -1344,7 +1344,7 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
         SpellCastBuffs.TooltipBottomLine(control, detailsLine)
 
         -- Tooltip Debug
-        --GameTooltip:SetAbilityId(25660)
+        --GameTooltip:SetAbilityId(136098)
 
     end
 end

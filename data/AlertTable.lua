@@ -1438,11 +1438,11 @@ LUIE.Data.AlertZoneOverride = {
 
     [7835] = { -- Convalescence (Lamia)
         [131] = Unitnames.NPC_Lamia_Curare, -- Tempest Island
-        [58] = Unitnames.NPC_Lamia_Curare, -- Tempest Island
+        [Zonenames.Zone_Tempest_Island] = Unitnames.NPC_Lamia_Curare, -- Tempest Island
     },
     [9680] = { -- Summon Spectral Lamia
         [131] = Unitnames.NPC_Lamia_Curare, -- Tempest Island
-        [58] = Unitnames.NPC_Lamia_Curare, -- Tempest Island
+        [Zonenames.Zone_Tempest_Island] = Unitnames.NPC_Lamia_Curare, -- Tempest Island
     },
 
     [35220] = { -- Impending Storm (Storm Atronach)
@@ -1450,7 +1450,7 @@ LUIE.Data.AlertZoneOverride = {
         -- DUNGEONS
         [681] = Unitnames.NPC_Storm_Atronach, -- City of Ash II
         [131] = Unitnames.NPC_Storm_Atronach, -- Tempest Island
-        [58] = Unitnames.NPC_Storm_Atronach, -- Tempest Island
+        [Zonenames.Zone_Tempest_Island] = Unitnames.NPC_Storm_Atronach, -- Tempest Island
     },
 
     [54021] = { -- Release Flame (Marruz)
@@ -1481,7 +1481,7 @@ LUIE.Data.AlertZoneOverride = {
         [931] = Unitnames.NPC_Dremora_Invoker, -- Elden Hollow II
         [681] = Unitnames.NPC_Dremora_Gandrakyn, -- City of Ash II
         [131] = Unitnames.NPC_Sea_Viper_Healer, -- Tempest Island
-        [58] = Unitnames.NPC_Sea_Viper_Healer, -- Tempest Island
+        [Zonenames.Zone_Tempest_Island] = Unitnames.NPC_Sea_Viper_Healer, -- Tempest Island
         [932] = Unitnames.NPC_Spiderkith_Cauterizer, -- Crypt of Hearts II
         [22] = Unitnames.NPC_Treasure_Hunter_Healer, -- Volenfell
     },
@@ -1556,7 +1556,7 @@ LUIE.Data.AlertZoneOverride = {
 
         -- DUNGEONS
         [131] = Unitnames.NPC_Sea_Viper_Charger, -- Tempest Island
-        [58] = Unitnames.NPC_Sea_Viper_Charger, -- Tempest Island
+        [Zonenames.Zone_Tempest_Island] = Unitnames.NPC_Sea_Viper_Charger, -- Tempest Island
     },
     [17867] = { -- Shock Aura (Thundermaul)
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.Elite_Arstul, -- Maormer Invasion Camp (Auridon)
@@ -1572,7 +1572,7 @@ LUIE.Data.AlertZoneOverride = {
         -- DUNGEONS
         [126] = Unitnames.Boss_Nenesh_gro_Mal, -- Elden Hollow I
         [131] = Unitnames.NPC_Sea_Viper_Charger, -- Tempest Island
-        [58] = Unitnames.NPC_Sea_Viper_Charger, -- Tempest Island
+        [Zonenames.Zone_Tempest_Island] = Unitnames.NPC_Sea_Viper_Charger, -- Tempest Island
     },
     [29520] = { -- Aura of Protection (Shaman)
 
@@ -1605,7 +1605,7 @@ LUIE.Data.AlertZoneOverride = {
         [126] = Unitnames.NPC_Darkfern_Stalker, -- Elden Hollow I
         -- [176] = Unitnames.NPC_Dagonite_Assassin, -- City of Ash I -- Can't use due to Assassin Exemplar
         [681] = Unitnames.NPC_Urata_Militant, -- City of Ash II
-        [58] = Unitnames.Boss_Yalorasse_the_Speaker, -- Tempest Island
+        [Zonenames.Zone_Tempest_Island] = Unitnames.Boss_Yalorasse_the_Speaker, -- Tempest Island
     },
     [37108] = { -- Arrow Spray (Archer)
         -- QUESTS
@@ -1645,7 +1645,7 @@ LUIE.Data.AlertZoneOverride = {
         [126] = Unitnames.NPC_Darkfern_Archer, -- Elden Hollow I
         [681] = Unitnames.NPC_Xivilai_Immolator, -- City of Ash II
         [131] = Unitnames.NPC_Sea_Viper_Deadeye, -- Tempest Island
-        [58] = Unitnames.NPC_Sea_Viper_Deadeye, -- Tempest Island
+        [Zonenames.Zone_Tempest_Island] = Unitnames.NPC_Sea_Viper_Deadeye, -- Tempest Island
         [932] = Unitnames.NPC_Spiderkith_Wefter, -- Crypt of Hearts II
     },
     [28628] = { -- Volley (Archer)
@@ -1685,7 +1685,7 @@ LUIE.Data.AlertZoneOverride = {
         [126] = Unitnames.NPC_Darkfern_Archer, -- Elden Hollow I
         [681] = Unitnames.NPC_Xivilai_Immolator, -- City of Ash II
         [131] = Unitnames.NPC_Sea_Viper_Deadeye, -- Tempest Island
-        [58] = Unitnames.NPC_Sea_Viper_Deadeye, -- Tempest Island
+        [Zonenames.Zone_Tempest_Island] = Unitnames.NPC_Sea_Viper_Deadeye, -- Tempest Island
         [932] = Unitnames.NPC_Spiderkith_Wefter, -- Crypt of Hearts II
     },
     [12439] = { -- Burning Arrow (Synergy)
@@ -1916,7 +1916,7 @@ LUIE.Data.AlertZoneOverride = {
 
         -- DUNGEONS
         [131] = Unitnames.NPC_Sea_Viper_Strongarm, -- Tempest Island
-        [58] = Unitnames.NPC_Sea_Viper_Strongarm, -- Tempest Island
+        [Zonenames.Zone_Tempest_Island] = Unitnames.NPC_Sea_Viper_Strongarm, -- Tempest Island
     },
 
     [37087] = { -- Lightning Onslaught (Battlemage)
