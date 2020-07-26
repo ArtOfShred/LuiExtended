@@ -1043,6 +1043,15 @@ Effects.BarHighlightExtraId = {
     [62485] = 62484, -- Major Breach --> Major Fracture (Pierce Armor)
     [38271] = 62495, -- Deep Slash --> Minor Maim
 
+    -- Bow
+    [38707] = 100302, -- Bombard --> Piercing Spray
+    [38706] = 100302, -- Bombard --> Piercing Spray
+    [38703] = 100302, -- Acid Spray --> Piercing Spray
+
+    [28887] = 113627, -- Virulent Shot --> Scatter Shot
+    [38674] = 113627, -- Virulent Shot --> Magnum Shot
+    [131688] = 113627, -- Virulent Shot --> Draining Shot
+
     -- Destruction Staff
     [39100] = 62787, -- Minor Magickasteal --> Major Breach (Elemental Drain)
 
@@ -1132,6 +1141,14 @@ Effects.BarHighlightCheckOnFade = {
 
     -- Dual Wield
     [126667] = { id1 = 126670, unitTag = "player" }, -- Flying Blade --> Major Bruality
+
+    -- Bow
+    [100302] = { id1 = 38707, id2 = 38706, id3 = 100302, unitTag = "reticleover" }, -- Piercing Spray --> Bombard / Bombard / Piercing Spray
+    [100302] = { id1 = 38703, id2 = 100302, unitTag = "reticleover" }, -- Piercing Spray --> Acid Spray / Piercing Spray
+
+    [113627] = { id1 = 28887, id2 = 113627, unitTag = "reticleover" }, -- Virulent Shot --> Scatter Shot / Virulent Shot
+    [113627] = { id1 = 38674, id2 = 113627, unitTag = "reticleover" }, -- Virulent Shot --> Magnum Shot / Virulent Shot
+    [113627] = { id1 = 131688, id2 = 113627, unitTag = "reticleover" }, -- Virulent Shot --> Draining Shot / Virulent Shot
 
     -- Destruction Staff
     [62787] = { id1 = 62787, id2 = 39100, unitTag = "reticleover" }, -- Major Breach --> Minor Magickasteal / Major Breach (Elemental Drain)
@@ -1433,6 +1450,10 @@ Effects.BarHighlightOverride = {
     [38788] = { newId = 38791 }, -- Stampede
     [38745] = { newId = 38747 }, -- Carve
     [38754] = { newId = 38763 }, -- Brawler
+
+    [28448] = { newId = 99789 }, -- Critical Charge --> Merciless Charge
+    [38778] = { newId = 99789 }, -- Critical Rush --> Merciless Charge
+
     [28297] = { newId = 61670, noRemove = true }, -- Momentum --> Major Brutality
     [38794] = { newId = 38797 }, -- Forward Momentum
     [83216] = { newId = 83217 }, -- Berserker Strike
@@ -1459,9 +1480,18 @@ Effects.BarHighlightOverride = {
     -- Dual Wield -------------
     ---------------------------
 
+    [28607] = { newId = 99806 }, -- Flurry --> Cruel Flurry
+    [38857] = { newId = 99806 }, -- Rapid Strikes --> Cruel Flurry
+    [38846] = { newId = 99806 }, -- Bloodthirst --> Cruel Flurry
+
     [28379] = { newId = 29293 }, -- Twin Slashes --> Twin Slashes Bleed
     [38839] = { newId = 38841 }, -- Rending Slashes --> Rending Slashes Bleed
     [38845] = { newId = 38852 }, -- Blood Craze
+
+    [28591] = { newId = 100474 }, -- Whirlwind --> Chaotic Whirlwind
+    [38891] = { newId = 100474 }, -- Whirling Blades --> Chaotic Whirlwind
+    [38861] = { newId = 100474 }, -- Steel Tornado --> Chaotic Whirlwind
+
     [21157] = { newId = 68807, noRemove = true }, -- Hidden Blade --> Major Brutality
     [38914] = { newId = 126647, noRemove = true }, -- Shrouded Daggers --> Major Brutality
     [38910] = { newId = 126667 }, -- Flying Blade
@@ -1476,11 +1506,15 @@ Effects.BarHighlightOverride = {
 
     [38685] = { newId = 38686 }, -- Lethal Arrow --> Minor Defile
     [38687] = { newId = 38688 }, -- Focused Aim
-    [28879] = { newId = 28888 }, -- Scatter Shot
-    [38672] = { newId = 38675 }, -- Magnum Shot
-    [38669] = { newId = 131688 }, -- Draining Shot
-    [38705] = { newId = 38706 }, -- Bombard
-    [38701] = { newId = 38703 }, -- Acid Spray
+
+    [28879] = { newId = 113627 }, -- Scatter Shot --> Virulent Shot
+    [38672] = { newId = 113627 }, -- Magnum Shot --> Virulent Shot
+    [38669] = { newId = 113627 }, -- Draining Shot --> Virulent Shot
+
+    [31271] = { newId = 100302 }, -- Arrow Spray --> Piercing Spray
+    [38705] = { newId = 100302 }, -- Bombard --> Piercing Spray
+    [38701] = { newId = 100302 }, -- Acid Spray --> Piercing Spray
+
     [28869] = { newId = 44540 }, -- Poison Arrow
     [38645] = { newId = 44545 }, -- Venom Arrow
     [38660] = { newId = 44549 }, -- Poison Injection
@@ -1492,7 +1526,11 @@ Effects.BarHighlightOverride = {
     -- Destruction Staff ------
     ---------------------------
 
-    [46348] = { newId = 48011 }, -- Crushing Shock --> Uber Attack
+    --[46348] = { newId = 48011 }, -- Crushing Shock --> Uber Attack
+    [46340] = { newId = 100306 }, -- Force Shock --> Concentrated Force
+    [46348] = { newId = 100306 }, -- Crushing Shock --> Concentrated Force
+    [46356] = { newId = 100306 }, -- Force Pulse --> Concentrated Force
+
     [29073] = { newId = 62648 }, -- Flame Touch (Destructive Touch)
     [29089] = { newId = 62722 }, -- Shock Touch (Destructive Touch)
     [29078] = { newId = 62692 }, -- Frost Touch (Destructive Touch)
@@ -1506,6 +1544,13 @@ Effects.BarHighlightOverride = {
     [29173] = { newId = 53881 }, -- Weakness to Elements (Weakness to Elements)
     [39089] = { newId = 62775 }, -- Elemental Susceptibility (Elemental Susceptibility)
     [39095] = { newId = 62787 }, -- Elemental Drain (Elemental Drain)
+
+    [28794] = { newId = 115003 }, -- Fire Impulse --> Wild Impulse
+    [28799] = { newId = 115003 }, -- Shock Impulse --> Wild Impulse
+    [28798] = { newId = 115003 }, -- Frost Impulse --> Wild Impulse
+    [39145] = { newId = 115003 }, -- Fire Ring --> Wild Impulse
+    [39147] = { newId = 115003 }, -- Shock Ring --> Wild Impulse
+    [39146] = { newId = 115003 }, -- Frost Ring --> Wild Impulse
     [39162] = { newId = 39168 }, -- Flame Pulsar --> Minor Mangle
     [39167] = { newId = 39181 }, -- Storm Pulsar --> Minor Mangle
     [39163] = { newId = 39180 }, -- Frost Pulsar --> Minor Mangle
@@ -6595,8 +6640,8 @@ Effects.EffectOverride = {
     [38696] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Physical, tooltipValue2 = 1 }, -- Arrow Barrage (Arrow Barrage)
 
     -- Scatter Shot / Magnum Shot / Draining Shot
-    [28888] = { tooltip = Tooltips.Generic_Knockback }, -- Scatter Shot (Scatter Shot)
-    [38675] = { tooltip = Tooltips.Generic_Knockback }, -- Magnum Shot (Magnum Shot)
+    [28887] = { tooltip = Tooltips.Generic_Knockback }, -- Scatter Shot (Scatter Shot)
+    [38674] = { tooltip = Tooltips.Generic_Knockback }, -- Magnum Shot (Magnum Shot)
     [131688] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 60 }, -- Draining Shot (Draining Shot)
     [80764] = { name = Abilities.Skill_Draining_Shot }, -- Draining Shot Heal (Draining Shot)
 

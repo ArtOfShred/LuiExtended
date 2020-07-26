@@ -1282,6 +1282,32 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
             if not g_protectAbilityRemoval[abilityId] or g_protectAbilityRemoval[abilityId] < currentTime then
                 if (Effects.IsGroundMineAura[abilityId] or Effects.IsGroundMineStack[abilityId]) then
                     g_mineStacks[abilityId] = g_mineStacks[abilityId] - Effects.EffectGroundDisplay[abilityId].stackRemove
+
+                    -- Set Stacks label if changed
+                    if CombatInfo.SV.BarShowLabel then
+                        if g_toggledSlotsFront[abilityId] and g_uiCustomToggle[g_toggledSlotsFront[abilityId]] then
+                            if not Effects.HideGroundMineStacks[abilityId] then
+                                local slotNum = g_toggledSlotsFront[abilityId]
+                                if g_mineStacks[abilityId] > 0 then
+                                    g_uiCustomToggle[slotNum].stack:SetText(g_mineStacks[abilityId])
+                                else
+                                    g_uiCustomToggle[slotNum].stack:SetText("")
+                                end
+                            end
+                        end
+                        if g_toggledSlotsBack[abilityId] and g_uiCustomToggle[g_toggledSlotsBack[abilityId]] then
+                            if not Effects.HideGroundMineStacks[abilityId] then
+                                local slotNum = g_toggledSlotsBack[abilityId]
+                                if g_mineStacks[abilityId] > 0 then
+                                    g_uiCustomToggle[slotNum].stack:SetText(g_mineStacks[abilityId])
+                                else
+                                    g_uiCustomToggle[slotNum].stack:SetText("")
+                                end
+                            end
+                        end
+                    end
+
+                    -- Handle stacks reaching 0
                     if g_mineStacks[abilityId] == 0 and not g_mineNoTurnOff[abilityId] then
                         if g_toggledSlotsRemain[abilityId] then
                             if g_toggledSlotsFront[abilityId] and g_uiCustomToggle[g_toggledSlotsFront[abilityId]] then
@@ -1562,6 +1588,10 @@ function CombatInfo.ShowSlot(slotNum, abilityId, currentTime, desaturate)
         g_uiCustomToggle[slotNum].label:SetText(FormatDurationSeconds(remain))
         if g_toggledSlotsStack[abilityId] and g_toggledSlotsStack[abilityId] > 0 then
             g_uiCustomToggle[slotNum].stack:SetText(g_toggledSlotsStack[abilityId])
+        elseif g_mineStacks[abilityId] and g_mineStacks[abilityId] > 0 then
+            if not Effects.HideGroundMineStacks[abilityId] then -- No stack for Time Freeze
+                g_uiCustomToggle[slotNum].stack:SetText(g_mineStacks[abilityId])
+            end
         else
             g_uiCustomToggle[slotNum].stack:SetText("")
         end
