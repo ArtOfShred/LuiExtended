@@ -612,8 +612,7 @@ local strings = {
     SI_LUIE_CI_MITIGATION_MODIFIER_SPREAD_OUT =          "- SPREAD OUT!",
 
     -- UnitFrames
-    SI_LUIE_UF_WEREWOLF_POWER =                          "<<1>>/<<2>> Энергия (<<3>>%)",
-    SI_LUIE_UF_WEREWOLF_TP =                             "Вы останетесь в форме оборотня в течение |cFFFFFF<<1>>|r секунд.",
+    SI_LUIE_UF_WEREWOLF_POWER =                          "<<1>>/<<2>> Энергия (<<3>>%)", -- TODO: Should be updated to say "Rage"
     SI_LUIE_UF_MOUNT_POWER =                             "<<1>>/<<2>> Запас сил езд. животного (<<3>>%)",
     SI_LUIE_UF_SIEGE_POWER =                             "<<1>>/<<2>> Состояние (<<3>>%)",
     SI_LUIE_UF_DEAD_STATUS_REVIVING =                    "Reviving...",

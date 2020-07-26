@@ -6488,9 +6488,9 @@ LUIE.DebugAuras = {
     [46142] = true, -- Pursuit (Rank 2)
 
     [32637] = true, -- Blood Rage (Rank 1)
-    [111924] = true, -- Blood Rage
     [46135] = true, -- Blood Rage (Rank 2)
-    [111925] = true, -- Blood Rage
+    [144209] = true, -- Blood Rage
+    [144208] = true, -- Blood Rage
 
     [32639] = true, -- Bloodmoon (Rank 1)
     [40514] = true, -- Ally Bite (Bloodmoon)

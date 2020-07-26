@@ -507,14 +507,10 @@ function UnitFrames.AltBar_OnMouseEnterWerewolf(control)
     local function UpdateWerewolfPower()
         local currentPower, maxPower = GetUnitPower("player", POWERTYPE_WEREWOLF)
         local percentagePower = zo_floor(currentPower / maxPower * 100)
-        local duration = ( currentPower / 27 )
-        -- Round up by 1 from any decimal number
-        local durationFormatted = math.floor(duration + 0.999)
 
         InitializeTooltip(InformationTooltip, control, BOTTOM, 0, -10)
         SetTooltipText(InformationTooltip, zo_strformat(SI_MONSTERSOCIALCLASS45))
         InformationTooltip:AddLine(zo_strformat(SI_LUIE_UF_WEREWOLF_POWER, currentPower, maxPower, percentagePower))
-        InformationTooltip:AddLine(zo_strformat(SI_LUIE_UF_WEREWOLF_TP, durationFormatted), nil, ZO_NORMAL_TEXT:UnpackRGBA() )
     end
     UpdateWerewolfPower()
 

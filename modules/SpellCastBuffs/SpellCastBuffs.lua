@@ -481,10 +481,6 @@ function SpellCastBuffs.RegisterWerewolfEvents()
     eventManager:UnregisterForEvent(moduleName .. "Werewolf2", EVENT_EFFECT_CHANGED)
     if SpellCastBuffs.SV.ShowWerewolf then
         eventManager:RegisterForEvent(moduleName, EVENT_WEREWOLF_STATE_CHANGED, SpellCastBuffs.WerewolfState)
-        eventManager:RegisterForEvent(moduleName .. "Werewolf1", EVENT_EFFECT_CHANGED, SpellCastBuffs.DevourEffectListener )
-        eventManager:RegisterForEvent(moduleName .. "Werewolf2", EVENT_EFFECT_CHANGED, SpellCastBuffs.DevourEffectListener )
-        eventManager:AddFilterForEvent(moduleName .. "Werewolf1", EVENT_EFFECT_CHANGED, REGISTER_FILTER_ABILITY_ID , 33208, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER ) -- Target -> Player
-        eventManager:AddFilterForEvent(moduleName .. "Werewolf2", EVENT_EFFECT_CHANGED, REGISTER_FILTER_ABILITY_ID , 39477, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_UNIT_TAG, 'player' ) -- Target -> Player
         if IsWerewolf() then
             SpellCastBuffs.WerewolfState(nil, true, true)
         end
@@ -2942,7 +2938,7 @@ function SpellCastBuffs.OnDeath(eventCode, unitTag, isDead)
 
             -- If werewolf is active, reset the icon so it's not removed (otherwise it flashes off for about a second until the trailer function picks up on the fact that no power drain has occurred.
             if SpellCastBuffs.SV.ShowWerewolf and IsWerewolf() then
-                SpellCastBuffs.SetWerewolfIconFrozen()
+                SpellCastBuffs.WerewolfState(nil, true, true)
             end
         else
             for effectType = 1, 2 do
@@ -3309,6 +3305,8 @@ function SpellCastBuffs.updateBar(currentTime, sortedList, container)
         if buff and buff.bar and buff.bar.bar then
             if auraStarts and auraEnds and remain > 0 and not ground then
                 buff.bar.bar:SetValue(1 - ((currentTime - auraStarts) / (auraEnds - auraStarts)))
+            elseif effect.werewolf then
+                buff.bar.bar:SetValue(effect.werewolf)
             else
                 buff.bar.bar:SetValue(1)
             end
@@ -3543,10 +3541,6 @@ function SpellCastBuffs.OnPlayerActivated(eventCode)
     -- Resolve Werewolf
     if SpellCastBuffs.SV.ShowWerewolf and IsWerewolf() then
         SpellCastBuffs.WerewolfState(nil, true, true)
-        -- If player is dead, add unlimited duration Werewolf indicator buff
-        if IsUnitDead("player") then
-            SpellCastBuffs.SetWerewolfIconFrozen()
-        end
     end
 
     -- Sets the player to dead if reloading UI or loading in while dead.
@@ -3577,7 +3571,6 @@ function SpellCastBuffs.OnPlayerAlive(eventCode)
     -- Reload werewolf effects
     if SpellCastBuffs.SV.ShowWerewolf and IsWerewolf() then
         SpellCastBuffs.WerewolfState(nil, true, true)
-        SpellCastBuffs.SetWerewolfIconFrozen()
     end
 
     -- Start Resurrection Sequence

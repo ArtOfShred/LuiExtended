@@ -612,8 +612,7 @@ local strings = {
     SI_LUIE_CI_MITIGATION_MODIFIER_SPREAD_OUT =          "- SPREAD OUT!",
 
     -- UnitFrames
-    SI_LUIE_UF_WEREWOLF_POWER =                          "<<1>>/<<2>> Kraft (<<3>>%)",
-    SI_LUIE_UF_WEREWOLF_TP =                             "Du verbleibst in der Werwolf-Form für |cFFFFFF<<1>>|r Sekunden.",
+    SI_LUIE_UF_WEREWOLF_POWER =                          "<<1>>/<<2>> Kraft (<<3>>%)", -- TODO: Should be updated to say "Rage"
     SI_LUIE_UF_MOUNT_POWER =                             "<<1>>/<<2>> Reitausdauer (<<3>>%)",
     SI_LUIE_UF_SIEGE_POWER =                             "<<1>>/<<2>> Ausdauer (<<3>>%)",
     SI_LUIE_UF_DEAD_STATUS_REVIVING =                    "Reviving...",
