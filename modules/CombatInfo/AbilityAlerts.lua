@@ -26,6 +26,7 @@ local moduleName = LUIE.name .. "CombatInfo"
 local uiTlw = {} -- GUI
 local refireDelay = {}
 local g_alertFont -- Font for Alerts
+local g_inDuel -- Tracker for whether the player is in a duel or not
 
 local alertTypes = {
     UNMIT    = "LUIE_ALERT_TYPE_UNMIT",
@@ -224,6 +225,27 @@ function AbilityAlerts.CreateAlertFrame()
     end
 
     eventManager:RegisterForUpdate(moduleName .. "AlertUpdate", 100, AbilityAlerts.AlertUpdate)
+
+    eventManager:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, AbilityAlerts.OnDuelStarted)
+    eventManager:RegisterForEvent(moduleName, EVENT_DUEL_FINISHED, AbilityAlerts.OnDuelFinished)
+    eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, AbilityAlerts.OnPlayerActivated)
+
+end
+
+function AbilityAlerts.OnDuelStarted()
+    g_inDuel = true
+end
+
+function AbilityAlerts.OnDuelFinished()
+    g_inDuel = false
+end
+
+function AbilityAlerts.OnPlayerActivated()
+    local duelState = GetDuelInfo()
+    if duelState == DUEL_STATE_DUELING then
+        g_inDuel = true
+    end
+    UnregisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED)
 end
 
 function AbilityAlerts.ResetAlertFramePosition()
@@ -543,6 +565,8 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     if not Alerts[abilityId] then return end
     -- Ignore this event if we are on refire delay (whether from delay input in the table or from a "bad" event processing)
     if refireDelay[abilityId] then return end
+    -- Ignore this event if we're dueling
+    if g_inDuel then return end
 
     -- Set CC Type if applicable
     local crowdControl

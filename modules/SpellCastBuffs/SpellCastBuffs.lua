@@ -474,11 +474,9 @@ function SpellCastBuffs.Initialize(enabled)
 end
 
 function SpellCastBuffs.RegisterWerewolfEvents()
+    eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE)
     eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
     eventManager:UnregisterForEvent(moduleName, EVENT_WEREWOLF_STATE_CHANGED)
-    eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE)
-    eventManager:UnregisterForEvent(moduleName .. "Werewolf1", EVENT_EFFECT_CHANGED)
-    eventManager:UnregisterForEvent(moduleName .. "Werewolf2", EVENT_EFFECT_CHANGED)
     if SpellCastBuffs.SV.ShowWerewolf then
         eventManager:RegisterForEvent(moduleName, EVENT_WEREWOLF_STATE_CHANGED, SpellCastBuffs.WerewolfState)
         if IsWerewolf() then
