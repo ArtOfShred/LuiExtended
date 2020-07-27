@@ -243,6 +243,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_REDUCE_PHYSICAL_RESIST_VALUE_TP =     "Reduce Physical Resistance by |cFFFFFF<<2>>|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     SI_LUIE_SKILL_GENERIC_REDUCE_WEP_SPELL_DMG_PERCENTAGE_TP =   "Reduce Weapon and Spell Damage by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_REDUCE_WEP_SPELL_DMG_VALUE_TP =        "Reduce Weapon and Spell Damage by |cFFFFFF<<2>>|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     SI_LUIE_SKILL_GENERIC_LOWER_MAX_HP_TP =              "Reduce Max Health by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
@@ -339,6 +340,8 @@ local strings = {
     SI_LUIE_SKILL_SET_GENERIC_ICD_TP =                   "You have recently benefitted from the effects of <<2>> and may not do so again for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_SET_GENERIC_ICD_MINUTES_TP =           "You have recently benefitted from the effects of <<2>> and may not do so again for |cFFFFFF<<3>>|r <<3[minute/minutes]>>.",
 
+    SI_LUIE_SKILL_SET_GENERIC_REDUCE_WEAPON_DAMAGE_TIME_VALUE_TP = "Reduce Weapon Damage by |cFFFFFF<<2>>|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+
     ----------------------------------------------------------------
     -- CLASS SKILLS ------------------------------------------------
     ----------------------------------------------------------------
@@ -405,7 +408,6 @@ local strings = {
     SI_LUIE_SKILL_SIPHONING_ATTACKS_TP =                 "Your Light and Heavy Attacks heal you and restore |cFFFFFF106|r Magicka for |cFFFFFF20|r seconds. Fully charged Heavy Attacks restore twice the value.\n\nYou restore up to |cFFFFFF4270|r additional Magicka when the effect ends, based on the length of time Siphoning Attacks was active.",
     SI_LUIE_SKILL_SOUL_TETHER_TP =                       "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF8|r seconds.\n\nStunned for |cFFFFFF4|r seconds.",
     SI_LUIE_SKILL_REFRESHING_PATH_GROUND =               "Healing every |cFFFFFF1|r second.\n\nThe effect persists for |cFFFFFF2|r seconds after leaving the path.",
-    SI_LUIE_SKILL_POWER_EXTRACTION_TP =                  "Reduce Weapon and Spell Damage by |cFFFFFF200|r for |cFFFFFF<<1>>|r seconds.",
 
     -- Sorcerer
     SI_LUIE_SKILL_PERSISTENCE =                          "Your next Health, Magicka, or Stamina ability used within |cFFFFFF4|r seconds costs |cFFFFFF<<1>>|r% less.",
@@ -938,21 +940,19 @@ local strings = {
     SI_LUIE_SKILL_SET_THRASSIAN_STANGLERS_TP =           "Stacks up to |cFFFFFF20|r times when you kill an enemy.\n\n• Increase Spell Damage by |cFFFFFF150|r per stack.\n• Increase damage taken by |cFFFFFF2|r% per stack.\n• Reduce healing received and damage shield strength by |cFFFFFF2|r% per stack.",
 
     -- Crafted Sets
-    SI_LUIE_SKILL_SET_ALESSIAS_BULWARK =                 "Урон от Оружия снижен на |cFFFFFF10|r% в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_SET_ETERNAL_HUNT =                     "Detonates when an enemy enters the |cFFFFFF2.5|r meter radius of the rune, dealing Poison Damage and immoblizing them for |cFFFFFF1.5|r seconds.",
     SI_LUIE_SKILL_SET_MORKULDIN =                        "An animated weapon fights at your side. The animated weapon remains for |cFFFFFF15|r seconds.",
-    SI_LUIE_SKILL_SET_TAVAS_FAVOR =                      "Generating |cFFFFFF3|r Ultimate every |cFFFFFF1|r second for |cFFFFFF3|r seconds.",
-    SI_LUIE_SKILL_SET_TRIAL_BY_FIRE =                    "Increase <<1>> Resistance by |cFFFFFF7727|r for |cFFFFFF4|r seconds.",
-    SI_LUIE_SKILL_SET_VARENS_LEGACY =                    "Your next direct damage area of effect attack used within |cFFFFFF<<1>>|r seconds deals |cFFFFFF3450|r additional damage.",
+    SI_LUIE_SKILL_SET_TAVAS_FAVOR =                      "Generating |cFFFFFF4|r Ultimate every |cFFFFFF1|r second for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_SET_VARENS_LEGACY =                    "Your next direct damage area of effect attack used within |cFFFFFF<<1>>|r seconds deals |cFFFFFF3290|r additional damage.",
     SI_LUIE_SKILL_SET_MECHANICAL_ACUITY =                "Повышает шанс критического удара Заклинанием и Оружием до |cFFFFFF100|r% в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_SET_ADEPT_RIDER =                      "Enemies in the dust cloud take Physical Damage every |cFFFFFF1|r second, while you and group members gain Major Evasion.",
     SI_LUIE_SKILL_SET_SENCHE_RAHTS_GRIT =                "Increase healing received by |cFFFFFF6|r% and Physical and Spell Resistance by |cFFFFFF2585|r for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_VASTARIES_TUTELAGE =               "Increase Weapon and Spell Damage by |cFFFFFF258|r and reduce the cost of non-Ultimate abilities by |cFFFFFF10|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_SLOADS_TP =                        "Taking |cFFFFFF3|r% of your Max Health as Oblivion Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nThis effect can deal a maximum of |cFFFFFF3000|r Oblivion Damage per tick.",
-    SI_LUIE_SKILL_SET_GRAVE_STAKE_COLLECTOR_TP =         "When you touch the grave-stake, restore |cFFFFFF6500|r Stamina and Magicka.\n\nOnly one grave-stake can appear at a time.",
+    SI_LUIE_SKILL_SET_GRAVE_STAKE_COLLECTOR_TP =         "When you touch the grave-stake, restore |cFFFFFF4190|r Stamina and Magicka.\n\nOnly one grave-stake can appear at a time.",
     SI_LUIE_SKILL_SET_MIGHT_OF_THE_LOST_LEGION_TP =      "Gain the effects of |cFFFFFFEmpower|r for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_SET_COLDHARBOURS_FAVORITE_HEAL_TP =    "After |cFFFFFF<<1>>|r <<1[second/seconds]>> Honor casts a healing spell on you and allies within |cFFFFFF6|r meters that heals over time for |cFFFFFF4|r seconds.",
-    SI_LUIE_SKILL_SET_COLDHARBOURS_FAVORITE_DAMAGE_TP =  "After |cFFFFFF<<1>>|r <<1[second/seconds]>> Honor explodes, afflicting enemies within |cFFFFFF6|r meters with Magic Damage over time for |cFFFFFF4|r seconds.",
+    SI_LUIE_SKILL_SET_COLDHARBOURS_FAVORITE_HEAL_TP =    "After |cFFFFFF<<1>>|r <<1[second/seconds]>> Honor casts a healing spell on you and allies within |cFFFFFF6|r meters that heals over time for |cFFFFFF6|r seconds.",
+    SI_LUIE_SKILL_SET_COLDHARBOURS_FAVORITE_DAMAGE_TP =  "After |cFFFFFF<<1>>|r <<1[second/seconds]>> Honor explodes, afflicting enemies within |cFFFFFF6|r meters with Magic Damage over time for |cFFFFFF6|r seconds.",
     SI_LUIE_SKILL_SET_STUHNS_FAVOR_TP =                  "Increase Physical and Spell Penetration by |cFFFFFF<<2>>|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThe duration is refreshed when you deal damage to an enemy who is Off Balance.",
     SI_LUIE_SKILL_SET_DRAGONS_APPETITE_TP =              "Dealing non-Bleed damage to Bleeding enemies generates a persistent stack of Dragon's Appetite, up to once per second.\n\nUpon reaching |cFFFFFF10|r stacks you consume Dragon's Appetite and heal.",
 
@@ -960,7 +960,7 @@ local strings = {
     SI_LUIE_SKILL_SET_ELEGANCE_LA_TP =                   "Your next Health, Magicka, or Stamina ability used within |cFFFFFF<<1>>|r <<1[second/seconds]>> costs |cFFFFFF10|r% less.",
     SI_LUIE_SKILL_SET_ELEGANCE_HA_TP =                   "Your next direct damage attack used within |cFFFFFF<<1>>|r <<1[second/seconds]>> deals |cFFFFFF2610|r additional damage against the first enemy you hit.",
     SI_LUIE_SKILL_SET_BAHRAHAS_CURSE_TP =                "Enemies in the |cFFFFFF3.5|r meter radius of desecrated ground take Magic Damage every |cFFFFFF1|r second and have their Movement Speed reduced by |cFFFFFF70|r%.\n\nYou heal for |cFFFFFF100|r% of the damage done.",
-    SI_LUIE_SKILL_BAHRAHAS_CURSE_GROUND_TP =             "Taking Magic Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF70|r%.\n\nYour attacker heals for |cFFFFFF100|r% of the damage done.",
+    SI_LUIE_SKILL_BAHRAHAS_CURSE_GROUND_TP =             "Taking Magic Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF60|r%.\n\nYour attacker heals for |cFFFFFF100|r% of the damage done.",
     SI_LUIE_SKILL_SET_BRIARHEART_TP =                    "Increase Weapon Damage by |cFFFFFF450|r for |cFFFFFF<<1>>|r seconds.\n\nWhile this effect is active your Critical Strikes heal you.",
     SI_LUIE_SKILL_SET_UNFATHOMABLE_DARKNESS_TP =         "Every |cFFFFFF3|r seconds a crow will be sent to peck the closest enemy within |cFFFFFF12|r meters, dealing Physical Damage.",
     SI_LUIE_SKILL_SET_SHALK_EXOSKELETON =                "Shalk Exoskeleton",
@@ -1017,7 +1017,6 @@ local strings = {
     -- Trial Sets
     SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP =            "Increase Weapon Critical by |cFFFFFF400|r for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF5|r times when you deal melee damage.\n\nThis effect can occur once every half second.",
     SI_LUIE_SKILL_SET_DESTRUCTIVE_MAGE_TP =              "When an attacker damages you with a fully-charged Heavy Attack they detonate the bomb, dealing Magic Damage to you and allies within |cFFFFFF8|r meters.",
-    SI_LUIE_SKILL_SET_HEALING_MAGE_TP =                  "Reduce Weapon Damage by |cFFFFFF430|r for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_SET_TWICE_FANGED_SERPENT_TP =          "Increase Physical Penetration by |cFFFFFF860|r for |cFFFFFF3|r seconds, stacking up to |cFFFFFF5|r times when you deal damage.",
     SI_LUIE_SKILL_SET_LUNAR_BASTION_TP =                 "You and allies within the |cFFFFFF8|r meter radius of the lunar blessing are granted a damage shield every |cFFFFFF2|r seconds.",
     SI_LUIE_SKILL_SET_LUNAR_BASTION_GROUND_TP =          "Absorbing damage every |cFFFFFF2|r seconds while standing in the lunar blessing.",

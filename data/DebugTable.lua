@@ -1352,7 +1352,6 @@ LUIE.DebugAuras = {
     [75746] = true, -- Clever Alchemist
 
     [92769] = true, -- of Daedric Trickery (of Daedric Trickery)
-    [92772] = true, -- of Daedric Trickery (of Daedric Trickery)
     [92774] = true, -- Major Mending (of Daedric Trickery)
     [92771] = true, -- Major Expedition (of Daedric Trickery)
     [92775] = true, -- Major Heroism (of Daedric Trickery)
@@ -1439,12 +1438,6 @@ LUIE.DebugAuras = {
     [32759] = true, -- Torug's Pact (Torug's Pact)
 
     [71018] = true, -- Trial by Fire (Trials)
-    [71055] = true, -- Trial by Fire Cooldown (Trials)
-    [71067] = true, -- Trial by Shock (Trials)
-    [71058] = true, -- Trial by Fire (Trials)
-    [71019] = true, -- Trial by Frost (Trials)
-    [71072] = true, -- Trial by Poison (Trials)
-    [71069] = true, -- Trial by Disease (Trials)
 
     [29098] = true, -- Twilight's Embrace
 
@@ -1473,7 +1466,6 @@ LUIE.DebugAuras = {
 
     [113180] = true, -- Grave-Stake Collector (Grave-Stake Collector)
     [113183] = true, -- Grave-Stake Collector (Grave-Stake Collector)
-    [114172] = true, -- Grave-Stake Collector (Grave-Stake Collector)
     [113181] = true, -- Grave-Stake Collector (Grave-Stake Collector)
     [113259] = true, -- Grave-Stake Collector (Grave-Stake Collector)
     [113185] = true, -- Grave-Stake Collector (Grave-Stake Collector)
