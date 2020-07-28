@@ -4457,7 +4457,7 @@ Effects.EffectOverride = {
     [93307] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_torpor.dds' }, -- Defiler
     [93305] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_torpor.dds', tooltip = Tooltips.Generic_Stun }, -- Defiler
     [34875] = { icon = 'LuiExtended/media/icons/abilities/ability_set_night_terror.dds' }, -- Night Terror (of Night Terror)
-    [127192] = { icon = 'LuiExtended/media/icons/abilities/ability_set_senches_bite.dds', tooltip = Tooltips.Generic_Critical_Damage, tooltipValue2 = 12 }, -- Senche's Bite (Senche's)
+    [127192] = { icon = 'LuiExtended/media/icons/abilities/ability_set_senches_bite.dds', tooltip = Tooltips.Generic_Critical_Damage, tooltipValue2 = 15 }, -- Senche's Bite (Senche's)
     [76344] = { icon = 'LuiExtended/media/icons/abilities/ability_set_syvarras_scales.dds', name = Abilities.Set_Syvarras_Scales, hide = true }, -- Serpent's Spirit (Syvarra's Scales)
     [75718] = { icon = 'LuiExtended/media/icons/abilities/ability_set_syvarras_scales.dds', name = Abilities.Set_Syvarras_Scales, tooltip = Tooltips.Generic_Poison, tooltipValue2 = 1 }, -- Serpent's Spirit (Syvarra's Scales)
     [52709] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_razor_flourish.dds', tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration_Value, tooltipValue2 = 344 }, -- Way of Air (of the Air)
@@ -4507,9 +4507,9 @@ Effects.EffectOverride = {
     [113286] = { icon = 'esoui/art/icons/ability_buff_minor_heroism.dds' }, -- Minor Heroism (Champion of the Hist)
     [121634] = { name = Abilities.Skill_Minor_Lifesteal, tooltip = Abilities.Set_Call_of_the_Undertaker }, -- Lifesteal (Undertaker's)
     [121635] = { icon = 'esoui/art/icons/ability_buff_minor_lifesteal.dds', name = Abilities.Skill_Minor_Lifesteal }, -- Call of the Undertaker (Undertaker's)
-    [129442] = { icon = 'esoui/art/icons/achievement_u24_quests_gbdaily_30.dds', tooltip = Tooltips.Set_Senchals_Duty, forcedContainer = 'short' }, -- Senchal's Duty (Senchal Defender's)
-    [129509] = { icon = 'esoui/art/icons/achievement_u24_quests_gbdaily_30.dds', name = Abilities.Set_Senchals_Duty }, -- Senchal Defender (Senchal Defender's)
-    [129523] = { icon = 'esoui/art/icons/achievement_u24_quests_gbdaily_30.dds', name = Abilities.Set_Senchals_Duty }, -- Senchal Defender (Senchal Defender's)
+    [129442] = { icon = 'LuiExtended/media/icons/abilities/ability_set_senchals_duty.dds', tooltip = Tooltips.Set_Senchals_Duty, forcedContainer = 'short' }, -- Senchal's Duty (Senchal Defender's)
+    [129509] = { icon = 'LuiExtended/media/icons/abilities/ability_set_senchals_duty.dds', name = Abilities.Set_Senchals_Duty }, -- Senchal Defender (Senchal Defender's)
+    [129523] = { icon = 'LuiExtended/media/icons/abilities/ability_set_senchals_duty.dds', name = Abilities.Set_Senchals_Duty }, -- Senchal Defender (Senchal Defender's)
 
     -- Dungeon Sets (Light)
     [61459] = { icon = 'LuiExtended/media/icons/abilities/ability_set_burning_spellweave.dds', tooltip = Tooltips.Generic_Spell_Damage_Duration_Value, tooltipValue2 = 525 }, -- Burning Spellweave
