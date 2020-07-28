@@ -492,6 +492,7 @@ LUIE.Data.Tooltips = {
     Set_Nerieneth                                   = GetString(SI_LUIE_SKILL_NERIENETH_TP),
     Set_Sellistrix                                  = GetString(SI_LUIE_SKILL_SELLISTRIX_TP),
     Set_Kjalnars_Nightmare                          = GetString(SI_LUIE_SKILL_KJALNARS_NIGHTMARE_TP),
+    Set_Meridias_Blessed_Armor                      = GetString(SI_LUIE_SKILL_SET_MERIDIAS_BLESSED_ARMOR_TP),
 
     -- Mythic Items
     Set_Bloodlords_Embrace                          = GetString(SI_LUIE_SKILL_SET_BLOODLORDS_EMBRACE_TP),
@@ -525,7 +526,6 @@ LUIE.Data.Tooltips = {
     Set_Briarheart                                  = GetString(SI_LUIE_SKILL_SET_BRIARHEART_TP),
     Set_Unfathomable_Darknesss                      = GetString(SI_LUIE_SKILL_SET_UNFATHOMABLE_DARKNESS_TP),
     Set_Storm_Knight                                = GetString(SI_LUIE_SKILL_SET_STORM_KNIGHT_TP),
-    Set_Grace_of_Gloom                              = GetString(SI_LUIE_SKILL_SET_GRACE_OF_GLOOM_TP),
     Set_Draugrs_Rest                                = GetString(SI_LUIE_SKILL_SET_DRAUGRS_REST_TP),
     Set_Overwhelming_Surge                          = GetString(SI_LUIE_SKILL_SET_OVERWHELMING_SURGE_TP),
     Set_Sanctuary                                   = GetString(SI_LUIE_SKILL_SANCTUARY_TP),

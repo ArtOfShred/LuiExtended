@@ -1625,8 +1625,6 @@ LUIE.DebugAuras = {
     [93304] = true, -- Defiler (Defiler's)
     [93307] = true, -- Defiler (Defiler's)
     [93305] = true, -- Defiler (Defiler's)
-    [93326] = true, -- Defiler (Defiler's)
-    [100704] = true, -- Defiler (Defiler's)
 
     [29104] = true, -- Fiord's Legacy (Fiord's)
 
@@ -1718,10 +1716,9 @@ LUIE.DebugAuras = {
     [99461] = true, -- Livewire
 
     [79110] = true, -- Hide of Morihaus (of Morihaus)
-    [79315] = true, -- Hide of Horihaus (of Morihaus)
     [79506] = true, -- Hide of Morihaus (of Morihaus)
     [79123] = true, -- Hide of Morihaus (of Morihaus)
-    [79507] = true, -- Tracker (of Morihaus)
+    [79507] = true, -- Hide of Morihaus (of Morihaus)
     [79112] = true, -- Hide of Morihaus (of Morihaus)
 
     [32752] = true, -- Seventh Legion Brute (Seventh Legion's)

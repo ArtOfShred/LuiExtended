@@ -4423,9 +4423,10 @@ Effects.EffectOverride = {
     [75707] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_snare.dds' }, -- Bahraha's Curse
     [75692] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_snare.dds', groundLabel = true, tooltip = Tooltips.Skill_Bahrahas_Curse_Ground }, -- Bahraha's Curse
     [75706] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_snare.dds', tooltip = Tooltips.Skill_Bahrahas_Curse_Ground, groundLabel = true, hideGround = true }, -- Bahraha's Curse
-    [34522] = { icon = 'esoui/art/icons/achievement_wrothgar_012.dds' }, -- Bloodthorn's Touch (Bloodthorn)
-    [57177] = { icon = 'esoui/art/icons/achievement_wrothgar_012.dds' }, -- Bloodthorn's Touch (Bloodthorn)
-    [48913] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dreamers_mantle.dds', tooltip = Tooltips.Generic_Knockdown }, -- Dreamer's Mantle (Dreamer's)
+    [34522] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bloodthorns_touch.dds' }, -- Bloodthorn's Touch (Bloodthorn)
+    [57177] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bloodthorns_touch.dds' }, -- Bloodthorn's Touch (Bloodthorn)
+    [31213] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dreamers_mantle.dds' }, -- Dreamer's Mantle (Dreamer's)
+    [48913] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dreamers_mantle.dds', tooltip = Tooltips.Generic_Knockback }, -- Dreamer's Mantle (Dreamer's)
     [57133] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dreamers_mantle.dds' }, -- Dreamer's Mantle (Dreamer's)
     [85776] = { icon = 'LuiExtended/media/icons/abilities/ability_set_robes_of_the_hist.dds', tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Robes of the Hist (of Hist Sap)
     [127070] = { icon = 'LuiExtended/media/icons/abilities/ability_set_martial_knowledge.dds', tooltip = Tooltips.Generic_Increase_Damage_Taken, tooltipValue2 = 8 }, -- Way of Martial Knowledge (of Martial Knowledge)
@@ -4455,8 +4456,6 @@ Effects.EffectOverride = {
     [93308] = { hide = true }, -- Defiler
     [93307] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_torpor.dds' }, -- Defiler
     [93305] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_torpor.dds', tooltip = Tooltips.Generic_Stun }, -- Defiler
-    [93326] = { hide = true }, -- Defiler
-    [100704] = { hide = true }, -- Defiler
     [34875] = { icon = 'LuiExtended/media/icons/abilities/ability_set_night_terror.dds' }, -- Night Terror (of Night Terror)
     [127192] = { icon = 'LuiExtended/media/icons/abilities/ability_set_senches_bite.dds', tooltip = Tooltips.Generic_Critical_Damage, tooltipValue2 = 12 }, -- Senche's Bite (Senche's)
     [76344] = { icon = 'LuiExtended/media/icons/abilities/ability_set_syvarras_scales.dds', name = Abilities.Set_Syvarras_Scales, hide = true }, -- Serpent's Spirit (Syvarra's Scales)
@@ -4472,7 +4471,7 @@ Effects.EffectOverride = {
     [85818] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds' }, -- Witchman Armor (Witchman's)
     [106860] = { tooltip = Abilities.Set_Gyphons_Ferocity }, -- Minor Expedition (Gyphon's Ferocity)
     [106861] = { tooltip = Abilities.Set_Gyphons_Ferocity }, -- Minor Force (Gyphon's Ferocity)
-    [114977] = { icon = 'esoui/art/icons/achievement_murkmire_friend_dead_water.dds' }, -- Dead-Water's Guile (Dead-Water's Guile)
+    [114977] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dead_waters_guile.dds' }, -- Dead-Water's Guile (Dead-Water's Guile)
     [121615] = { icon = 'LuiExtended/media/icons/abilities/ability_set_darloc_brae.dds' }, -- Vesture of Darloc Brae (Darloc Brae's)
     [121602] = { icon = 'LuiExtended/media/icons/abilities/ability_set_darloc_brae.dds' }, -- Vesture of Darloc Brae (Darloc Brae's)
     [121618] = { icon = 'LuiExtended/media/icons/abilities/ability_set_darloc_brae.dds' }, -- Vesture of Darloc Brae (Darloc Brae's)
@@ -4482,9 +4481,9 @@ Effects.EffectOverride = {
     [137526] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hunters_venom.dds' }, -- Hunter's Venom (Venomous)
 
     -- Overland Sets (Heavy)
-    [34711] = { icon = 'LuiExtended/media/icons/abilities/ability_set_meridia.dds', tooltip = Tooltips.Generic_Blind }, -- Meridia's Blessed Armor (Blessed)
-    [57298] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrs_heritage.dds', hide = true }, -- Draugr's Heritage
-    [57296] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrs_heritage.dds', tooltip = Tooltips.Generic_Knockdown }, -- Draugr's Heritage
+    [34711] = { icon = 'LuiExtended/media/icons/abilities/ability_set_meridias.dds', tooltip = Tooltips.Set_Meridias_Blessed_Armor }, -- Meridia's Blessed Armor (Blessed)
+    [57298] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrs_heritage.dds' }, -- Draugr's Heritage
+    [57296] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrs_heritage.dds', tooltip = Tooltips.Generic_Knockback }, -- Draugr's Heritage
     [57297] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrs_heritage.dds' }, -- Draugr's Heritage
     [99286] = { icon = 'LuiExtended/media/icons/abilities/ability_set_livewire.dds' }, -- Livewire
     [79123] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morihaus.dds' }, -- Hide of Morihaus (of Morihaus)
@@ -4501,7 +4500,7 @@ Effects.EffectOverride = {
     [127275] = { icon = 'esoui/art/icons/perks_fighters_guild_003.dds', tooltip = Tooltips.Generic_Weapon_Damage_Duration_Value, tooltipValue2 = 400 }, -- Armor of the Veiled Heritance (of the Veiled Heritance)
     [33497] = { icon = 'esoui/art/icons/achievement_vvardenfel_035.dds' }, -- Thunderbug's Carapace (Thunderbug's)
     [92762] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds', tooltip = Abilities.Set_Warrior_Poet }, -- Minor Toughness (Warrior-Poet's)
-    [106865] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grace_of_gloom.dds', tooltip = Tooltips.Set_Grace_of_Gloom }, -- Grace of Gloom (Gloom-Graced)
+    [106865] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grace_of_gloom.dds', tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Grace of Gloom (Gloom-Graced)
     [106867] = { tooltip = Abilities.Set_Grace_of_Gloom }, -- Major Evasion (Gloom-Graced)
     [106868] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grace_of_gloom.dds' }, -- Grace of Gloom (Gloom-Graced)
     [113284] = { name = Abilities.Skill_Minor_Heroism, tooltip = Abilities.Set_Champion_of_the_Hist }, -- Champion of the Hist (Champion of the Hist)

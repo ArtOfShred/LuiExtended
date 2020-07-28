@@ -934,6 +934,7 @@ local strings = {
     SI_LUIE_SKILL_MAARSELOK_TP =                         "Afflicted with Disease Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nDeals |cFFFFFF5|r% increased damage for each negative effect on you, up to |cFFFFFF150|r% additional damage.",
     SI_LUIE_SKILL_NERIENETH_TP =                         "After |cFFFFFF2|r seconds the Lich Crystal explodes, dealing Magic Damage to enemies within |cFFFFFF4|r meters of the crystal.",
     SI_LUIE_SKILL_SELLISTRIX_TP =                        "After |cFFFFFF1.5|r seconds the earthquake erupts, dealing Physical Damage to enemies in a |cFFFFFF4|r meter radius and stunning them for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_SET_MERIDIAS_BLESSED_ARMOR_TP =        "Dodging all incoming attacks that are able to be dodged for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     -- Mythic Items
     SI_LUIE_SKILL_SET_BLOODLORDS_EMBRACE_TP =            "When your attacker blocks an attack from you, they restore |cFFFFFF1535|r Magicka.\n\nThis effect can occur every |cFFFFFF1|r second.",
@@ -968,7 +969,6 @@ local strings = {
     SI_LUIE_SKILL_SET_STORM_KNIGHT_TP =                  "Enemies within |cFFFFFF5|r meters take Shock Damage every |cFFFFFF2|r seconds for |cFFFFFF6|r seconds.",
     SI_LUIE_SKILL_SET_VAMPIRE_CLOAK =                    "Vampire Cloak",
     SI_LUIE_SKILL_SET_WARRIOR_POET =                     "Warrior-Poet",
-    SI_LUIE_SKILL_SET_GRACE_OF_GLOOM_TP =                "Your Light and Heavy Attacks heal you for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_DRAUGRS_REST_TP =                  "You and allies within |cFFFFFF5|r meters of the consecrated circle heal every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_SET_OVERWHELMING_SURGE_TP =            "Enemies within |cFFFFFF8|r meters take Shock Damage every |cFFFFFF1|r second for |cFFFFFF6|r seconds.\n\n|cFFFFFF15|r% of the damage you deal this way is restored to you as Magicka.",
     SI_LUIE_SKILL_SANCTUARY_TP =                         "Increase healing received by |cFFFFFF12|r%.",
