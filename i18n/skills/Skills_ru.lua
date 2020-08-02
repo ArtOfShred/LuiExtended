@@ -213,6 +213,10 @@ local strings = {
     -- Test Effect
     SI_LUIE_SKILL_TEST_TP =                              "Это тестовый эффект.",
 
+    -- Generic Recovery
+    SI_LUIE_SKILL_GENERIC_STAMINA_RECOVERY_NO_DUR_TP =  "Increase Stamina Recovery by |cFFFFFF<<2>>|r.",
+    SI_LUIE_SKILL_GENERIC_MAGICKA_RECOVERY_NO_DUR_TP =  "Increase Magicka Recovery by |cFFFFFF<<2>>|r.",
+
     -- Damage over Time / Heal over Time
     SI_LUIE_SKILL_GENERIC_DOT_NO_TICK_TP =               "Afflicted with SUBSTRING over time for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_DOT_TP =                       "Afflicted with SUBSTRING every |cFFFFFF<<2>>|r <<2[second/seconds]>> for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
@@ -934,7 +938,7 @@ local strings = {
     SI_LUIE_SKILL_MAARSELOK_TP =                         "Afflicted with Disease Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nDeals |cFFFFFF5|r% increased damage for each negative effect on you, up to |cFFFFFF150|r% additional damage.",
     SI_LUIE_SKILL_NERIENETH_TP =                         "After |cFFFFFF2|r seconds the Lich Crystal explodes, dealing Magic Damage to enemies within |cFFFFFF4|r meters of the crystal.",
     SI_LUIE_SKILL_SELLISTRIX_TP =                        "After |cFFFFFF1.5|r seconds the earthquake erupts, dealing Physical Damage to enemies in a |cFFFFFF4|r meter radius and stunning them for |cFFFFFF3|r seconds.",
-    SI_LUIE_SKILL_SET_MERIDIAS_BLESSED_ARMOR_TP =        "Dodging all incoming attacks that are able to be dodged for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_SET_MERIDIAS_BLESSED_ARMOR_TP =        "Dodging all incoming dodgeable attacks for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     -- Mythic Items
     SI_LUIE_SKILL_SET_BLOODLORDS_EMBRACE_TP =            "When your attacker blocks an attack from you, they restore |cFFFFFF1535|r Magicka.\n\nThis effect can occur every |cFFFFFF1|r second.",
@@ -983,16 +987,16 @@ local strings = {
     SI_LUIE_SKILL_SET_FRENIZED =                         "Increase melee Light Attack damage by |cFFFFFF55|r% and attack speed by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_EBON_ARMORY =                      "Increase Max Health by |cFFFFFF1000|r.",
     SI_LUIE_SKILL_SET_EMBERSHIELD =                      "Increase Physical and Spell Resistance by |cFFFFFF3300|r.\n\nEnemies within |cFFFFFF5|r meters take Flame Damage every |cFFFFFF1|r second for |cFFFFFF6|r seconds.",
-    SI_LUIE_SKILL_SET_HAGRAVENS_GARDEN =                 "Any damage you take from enemies outside of the preservation is reduced by |cFFFFFF50|r%.\n\nThe first time an enemy tries to enter the preservation they are knocked back |cFFFFFF5|r meters.",
+    SI_LUIE_SKILL_SET_HAGRAVENS_GARDEN =                 "You and up to |cFFFFFF5|r group members in the |cFFFFFF8|r meter radius of the preservation of nature gain Major Protection.",
     SI_LUIE_SKILL_SET_JOLTING_ARMS =                     "Increase Physical and Spell Resistance by |cFFFFFF4620|r for |cFFFFFF<<1>>|r seconds and your next Bash deals additional damage.",
-    SI_LUIE_SKILL_SET_LEECHING_PLATE_TP =                "Enemies in the |cFFFFFF5|r meter radius of the poison cloud take Poison Damage every |cFFFFFF1|r second.\n\nYou heal for |cFFFFFF100|r% of the damage done.",
+    SI_LUIE_SKILL_SET_LEECHING_PLATE_TP =                "Enemies in the |cFFFFFF5|r meter radius of the cloud of leeching poison take Poison Damage every |cFFFFFF1|r second.\n\nYou heal for |cFFFFFF100|r% of the damage done.",
     SI_LUIE_SKILL_SET_MEDUSA =                           "Medusa",
-    SI_LUIE_SKILL_SET_HAND_OF_MEPHALA_TP =               "Enemies in the web have their Movement Speed reduced by |cFFFFFF50|r% for |cFFFFFF5|r seconds.\n\nAfter |cFFFFFF5|r seconds the webs burst into venom, dealing Poison Damage and applying Minor Fracture to any enemy hit for |cFFFFFF5|r seconds.",
+    SI_LUIE_SKILL_SET_HAND_OF_MEPHALA_TP =               "Enemies in the web have their Movement Speed reduced by |cFFFFFF50|r% and are afflicted with Minor Fracture.\n\nAfter |cFFFFFF5|r seconds the webs burst into venom, dealing Poison Damage.",
     SI_LUIE_SKILL_SET_RATTLECAGE =                       "Rattlecage",
     SI_LUIE_SKILL_SET_DREUGH_KING_SLAYER =               "Dreugh King Slayer",
     SI_LUIE_SKILL_LEECHING_PLATE_GROUND_TP =             "Taking Poison Damage every |cFFFFFF1|r second.\n\nYour attacker heals for |cFFFFFF100|r% of the damage done.",
-    SI_LUIE_SKILL_HAND_OF_MEPHALA_GROUND_TP =            "Movement Speed reduced by |cFFFFFF50|r%.\n\nAfter |cFFFFFF5|r seconds the webs burst into venom, dealing Poison Damage and applying Minor Fracture for |cFFFFFF5|r seconds.",
-    SI_LUIE_SKILL_HOLLOWFANG_THIRST_TP =                 "After |cFFFFFF2|r seconds the ball of Hemoglobin explodes, restoring |cFFFFFF3000|r Magicka and applying Minor Vitality to you and allies within |cFFFFFF6|r meters of the ball for |cFFFFFF9|r seconds.",
+    SI_LUIE_SKILL_HAND_OF_MEPHALA_GROUND_TP =            "Movement Speed reduced by |cFFFFFF50|r%.\n\nAfter |cFFFFFF5|r seconds the webs burst into venom, dealing Poison Damage.",
+    SI_LUIE_SKILL_HOLLOWFANG_THIRST_TP =                 "After |cFFFFFF2|r seconds the ball of Hemoglobin explodes, restoring |cFFFFFF2523|r Magicka and applying Minor Vitality to you and allies within |cFFFFFF6|r meters of the ball for |cFFFFFF9|r seconds.",
     SI_LUIE_SKILL_TOUCH_OF_ZEN_TP =                      "Taking |cFFFFFF1|r% more damage for each damage over time effect your attacker has afflicted you with, up to |cFFFFFF5|r%.",
     SI_LUIE_SKILL_SET_BLIGHT_SEED_TP =                   "When your attacker deals damage with a damage over time effect, you are infected with a stack of Blight Seed for |cFFFFFF<<1>>|r seconds.\n\nAt |cFFFFFF20|r stacks, the Blight Seeds explode, dealing Disease Damage to you and allies within |cFFFFFF6|r meters.",
     SI_LUIE_SKILL_RENALDS_RESOLVE_TP =                   "Increase healing taken by |cFFFFFF1|r% and Physical and Spell Resistance by |cFFFFFF420|r per stack for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF8|r times when you deal direct damage.\n\nYou can only gain one stack of Resolve every |cFFFFFF1|r second.",
@@ -1044,9 +1048,9 @@ local strings = {
     -- Alliance War Sets
     SI_LUIE_SKILL_SET_SOLDIER_OF_ANGUISH_TP =            "Negate the next |cFFFFFF4800|r points of healing received for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_SET_SPELL_STRATEGIST_TP =              "Your attacker gains |cFFFFFF500|r additional Spell Damage against you for |cFFFFFF5|r seconds.",
-    SI_LUIE_SKILL_SET_SUCCESSION_TP =                    "Increase Spell Damage by |cFFFFFF550|r for <<1>> dealing attacks for |cFFFFFF4|r seconds.\n\nThis effect can occur once every |cFFFFFF4|r seconds per element.",
+    SI_LUIE_SKILL_SET_SUCCESSION_TP =                    "Increase Spell Damage by |cFFFFFF492|r for <<1>> dealing attacks for |cFFFFFF4|r seconds.\n\nThis effect can occur once every |cFFFFFF4|r seconds per element.",
     SI_LUIE_SKILL_SET_PARA_BELLUM_TP =                   "Absorbing damage. The shield will replenish if you do not take any damage for |cFFFFFF10|r seconds.",
-    SI_LUIE_SKILL_SET_GLORIOUS_DEFENDER_TP =             "|cFFFFFF100|r% chance to dodge the next attack made against you within |cFFFFFF10|r seconds.",
+    SI_LUIE_SKILL_SET_GLORIOUS_DEFENDER_TP =             "Dodge the next dodgeable attack made against you within |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_SET_HEALERS_HABIT =                    "Healer's Habit",
     SI_LUIE_SKILL_SET_CYRODIILS_LIGHT_TP =               "Ваша следующая способность, расходующая Магию, применённая в течение |cFFFFFF30|r секунд, будет применена бесплатно.",
     SI_LUIE_SKILL_SET_MORAG_TONG_TP =                    "Увеличивает урон, получаемый от способностей с уроном от Яда, на |cFFFFFF10|r% в течение |cFFFFFF5|r секунд.",

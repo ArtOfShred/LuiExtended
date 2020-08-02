@@ -604,8 +604,8 @@ Effects.EffectGroundDisplay = {
     -- Dungeon Sets
     [97538] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrs_rest.dds', buff = true, debuff = false, ground = false }, -- Draugr's Rest
     [102106] = { icon = 'esoui/art/icons/achievement_bossflavoreasy.dds', name = Abilities.Set_Plague_Slinger, buff = false, debuff = false, ground = true }, -- Skeever Corpse
-    [97908] = { icon = 'esoui/art/icons/achievement_wrothgar_044.dds', buff = true, debuff = false, ground = true }, -- Hagraven's Garden (Hagraven's)
-    [67205] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_aoe_poison.dds', buff = false, debuff = false, ground = true }, -- Leeching Plate (of Leeching)
+    [97908] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hagravens_garden.dds', buff = true, debuff = false, ground = false }, -- Hagraven's Garden (Hagraven's)
+    [67205] = { icon = 'LuiExtended/media/icons/abilities/ability_set_leeching_plate.dds', buff = false, debuff = false, ground = true }, -- Leeching Plate (of Leeching)
     [84354] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web_green.dds', buff = false, debuff = false, ground = true }, -- Hand of Mephala (of Mephala's Hand)
     [126924] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hollowfang.dds', buff = true, debuff = false, ground = false }, -- Hollowfang Thirst (Hollowfang Thirst)
     [133493] = { icon = 'LuiExtended/media/icons/abilities/ability_set_aegis_caller.dds', name = Abilities.Set_Aegis_Caller, buff = false, debuff = false, ground = true }, -- Aegis Caller (Aegis Caller's)
@@ -2205,7 +2205,7 @@ Effects.SynergyNameOverride = {
     [Abilities.Skill_Black_Widow] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds' }, -- Black Widow (Undaunted)
     [Abilities.Skill_Arachnophobia] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds' }, -- Arachnophobia (Undaunted)
     [Abilities.Skill_Devour] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Werewolf)
-    [Abilities.Set_Shield_of_Ursus] = { icon = 'esoui/art/icons/achievement_u23_natureswrath_blue.dds', name = Abilities.Set_Ursus_Blessing }, -- Ursus's Blessing (Haven of Ursus)
+    [Abilities.Set_Shield_of_Ursus] = { icon = 'LuiExtended/media/icons/abilities/ability_set_haven_of_ursus.dds', name = Abilities.Set_Ursus_Blessing }, -- Ursus's Blessing (Haven of Ursus)
     -- World Bosses
     [Abilities.Skill_Remove_Bolt] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_trapping_bolt.dds' }, -- Remove Bolt (Trapjaw)
     -- Dungeons
@@ -4458,17 +4458,20 @@ Effects.EffectOverride = {
     [93305] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_torpor.dds', tooltip = Tooltips.Generic_Stun }, -- Defiler
     [34875] = { icon = 'LuiExtended/media/icons/abilities/ability_set_night_terror.dds' }, -- Night Terror (of Night Terror)
     [127192] = { icon = 'LuiExtended/media/icons/abilities/ability_set_senches_bite.dds', tooltip = Tooltips.Generic_Critical_Damage, tooltipValue2 = 15 }, -- Senche's Bite (Senche's)
+    [144480] = { icon = 'LuiExtended/media/icons/abilities/ability_set_stygian.dds', tooltip = Tooltips.Generic_Spell_Damage_Duration_Value, tooltipValue2 = 369 }, -- Stygian (Stygian)
     [76344] = { icon = 'LuiExtended/media/icons/abilities/ability_set_syvarras_scales.dds', name = Abilities.Set_Syvarras_Scales, hide = true }, -- Serpent's Spirit (Syvarra's Scales)
     [75718] = { icon = 'LuiExtended/media/icons/abilities/ability_set_syvarras_scales.dds', name = Abilities.Set_Syvarras_Scales, tooltip = Tooltips.Generic_Poison, tooltipValue2 = 1 }, -- Serpent's Spirit (Syvarra's Scales)
-    [52709] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_razor_flourish.dds', tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration_Value, tooltipValue2 = 344 }, -- Way of Air (of the Air)
+    [52709] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_razor_flourish.dds', tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration_Value, tooltipValue2 = 391 }, -- Way of Air (of the Air)
     [34383] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava_trap.dds' }, -- Shadow of the Red Mountain (of the Red Mountain)
     [34817] = { icon = 'LuiExtended/media/icons/abilities/ability_set_twin_sisters.dds', name = Abilities.Set_Twin_Sisters, tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 2 }, -- Twin Sisters Bleed
-    [34870] = { icon = 'LuiExtended/media/icons/abilities/ability_set_wilderqueen.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 30 }, -- Wilderqueen's Arch (of the Wilderqueen)
+    [34870] = { icon = 'LuiExtended/media/icons/abilities/ability_set_wilderqueen.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 15 }, -- Wilderqueen's Arch (of the Wilderqueen)
+    [141867] = { icon = 'LuiExtended/media/icons/abilities/ability_set_wilderqueen.dds', name = Abilities.Set_Wilderqueens_Arch, tooltip = Tooltips.Generic_Movement_Speed, tooltipValue2 = 15 }, -- Marauder's Haste (of the Wilderqueen)
     [99268] = { icon = 'LuiExtended/media/icons/abilities/ability_set_unfathomable_darkness.dds', tooltip = Tooltips.Set_Unfathomable_Darknesss }, -- Unfathomable Darkness (of Unfathomable Darkness)
     [99267] = { icon = 'LuiExtended/media/icons/abilities/ability_set_unfathomable_darkness.dds', hide = true }, -- Unfathomable Darkness (of Unfathomable Darkness)
     [34508] = { icon = 'esoui/art/icons/crownstore_skillline_werewolf.dds' }, -- Hide of the Werewolf (Werewolf Hide)
-    [18993] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds' }, -- Witchman Armor (Witchman's)
-    [85818] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds' }, -- Witchman Armor (Witchman's)
+    [18993] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bloodthorns_touch.dds' }, -- Witchman Armor (Witchman's)
+    [85818] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bloodthorns_touch.dds' }, -- Witchman Armor (Witchman's)
+    [141869] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bloodthorns_touch.dds' }, -- Witchman Armor (Witchman's)
     [106860] = { tooltip = Abilities.Set_Gyphons_Ferocity }, -- Minor Expedition (Gyphon's Ferocity)
     [106861] = { tooltip = Abilities.Set_Gyphons_Ferocity }, -- Minor Force (Gyphon's Ferocity)
     [114977] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dead_waters_guile.dds' }, -- Dead-Water's Guile (Dead-Water's Guile)
@@ -4491,14 +4494,15 @@ Effects.EffectOverride = {
     [127270] = { icon = 'LuiExtended/media/icons/abilities/ability_set_seventh_legion.dds', tooltip = Tooltips.Set_Seventh_Legion }, -- Seventh Legion Brute (Seventh Legion)
     [85593] = { tooltip = Abilities.Set_Shalk_Exoskeleton }, -- Minor Heroism (Shalk's)
     [85594] = { icon = 'esoui/art/icons/ability_buff_minor_heroism.dds' }, -- Minor Heroism (Shalk's)
-    [52711] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_fire.dds', name = Abilities.Set_Way_of_Fire }, -- Fiery Weapon (Way of Fire)
+    [144478] = { icon = 'LuiExtended/media/icons/abilities/ability_set_soulshine.dds', tooltip = Tooltips.Generic_Spell_Damage_Duration_Value, tooltipValue2 = 369 }, -- Soulshine (of Soulshine)
+    [52711] = { icon = 'LuiExtended/media/icons/abilities/ability_set_way_of_fire.dds' }, -- Way of Fire (Way of Fire)
     [112523] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hatchlings_shell.dds', tooltip = Tooltips.Set_Hatchlings_Shell }, -- Hatchling's Shell (of the Hatchling's Shell)
     [85565] = { tooltip = Abilities.Set_Order_of_Diagna }, -- Minor Vitality (Order of Diagna)
     [57210] = { icon = 'LuiExtended/media/icons/abilities/ability_set_storm_knight.dds', tooltip = Tooltips.Set_Storm_Knight }, -- Storm Knight's Plate (of the Storm Knight)
     [57209] = { icon = 'LuiExtended/media/icons/abilities/ability_set_storm_knight.dds' }, -- Storm Knight's Plate (of the Storm Knight)
     [85551] = { tooltip = Abilities.Set_Vampire_Cloak }, -- Minor Protection (Vampire's Cloak)
     [127275] = { icon = 'esoui/art/icons/perks_fighters_guild_003.dds', tooltip = Tooltips.Generic_Weapon_Damage_Duration_Value, tooltipValue2 = 400 }, -- Armor of the Veiled Heritance (of the Veiled Heritance)
-    [33497] = { icon = 'esoui/art/icons/achievement_vvardenfel_035.dds' }, -- Thunderbug's Carapace (Thunderbug's)
+    [33497] = { icon = 'LuiExtended/media/icons/abilities/ability_set_thunderbug.dds' }, -- Thunderbug's Carapace (Thunderbug's)
     [92762] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds', tooltip = Abilities.Set_Warrior_Poet }, -- Minor Toughness (Warrior-Poet's)
     [106865] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grace_of_gloom.dds', tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Grace of Gloom (Gloom-Graced)
     [106867] = { tooltip = Abilities.Set_Grace_of_Gloom }, -- Major Evasion (Gloom-Graced)
@@ -4512,7 +4516,7 @@ Effects.EffectOverride = {
     [129523] = { icon = 'LuiExtended/media/icons/abilities/ability_set_senchals_duty.dds', name = Abilities.Set_Senchals_Duty }, -- Senchal Defender (Senchal Defender's)
 
     -- Dungeon Sets (Light)
-    [61459] = { icon = 'LuiExtended/media/icons/abilities/ability_set_burning_spellweave.dds', tooltip = Tooltips.Generic_Spell_Damage_Duration_Value, tooltipValue2 = 525 }, -- Burning Spellweave
+    [61459] = { icon = 'LuiExtended/media/icons/abilities/ability_set_burning_spellweave.dds', tooltip = Tooltips.Generic_Spell_Damage_Duration_Value, tooltipValue2 = 490 }, -- Burning Spellweave
     [102027] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds', hide = true }, -- Caluurion's Legacy (Fire)
     [102032] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_frost.dds', hide = true }, -- Caluurion's Legacy (Frost)
     [102033] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_slime.dds', hide = true }, -- Caluurion's Legacy (Disease)
@@ -4521,7 +4525,9 @@ Effects.EffectOverride = {
     [97539] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrs_rest.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Draugr's Rest
     [97574] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flame_blossom.dds' }, -- Flame Blossom
     [84341] = { tooltip = Abilities.Set_Gossamer }, -- Major Evasion (Gossamer)
-    [85610] = { icon = 'esoui/art/icons/achievement_021.dds' }, -- Lamia's Song (Lamia's)
+    [85610] = { icon = 'LuiExtended/media/icons/abilities/ability_set_song_of_lamae.dds' }, -- Lamia's Song (Lamia's)
+    [143097] = { icon = 'LuiExtended/media/icons/abilities/ability_set_song_of_lamae.dds' }, -- Lamia's Song (Lamia's)
+    [143098] = { icon = 'LuiExtended/media/icons/abilities/ability_set_song_of_lamae.dds' }, -- Lamia's Song (Lamia's)
     [67129] = { icon = 'LuiExtended/media/icons/abilities/ability_set_overwhelming.dds', tooltip = Tooltips.Set_Overwhelming_Surge }, -- Overwhelming Surge (Overwhelming)
     [67136] = { icon = 'LuiExtended/media/icons/abilities/ability_set_overwhelming.dds' }, -- Overwhelming Surge (Overwhelming)
     [127131] = { icon = 'LuiExtended/media/icons/abilities/ability_set_overwhelming.dds' }, -- Overwhelming Surge (Overwhelming)
@@ -4539,8 +4545,8 @@ Effects.EffectOverride = {
     [85613] = { tooltip = Abilities.Set_Treasure_Hunter }, -- Major Prophecy (Treasure Hunter's)
     [111377] = { tooltip = Abilities.Set_Hanus_Compassion }, -- Major Heroism (Hanu's Compassion)
     [111380] = { tooltip = Abilities.Set_Hanus_Compassion }, -- Major Heroism (Hanu's Compassion)
-    [111204] = { icon = 'esoui/art/icons/achievement_thievesguild_003.dds', tooltip = Tooltips.Generic_Spell_Damage_Duration_Value, tooltipValue2 = 600 }, -- Moon Hunter (Moon Hunter)
-    [117666] = { icon = 'LuiExtended/media/icons/abilities/ability_set_icy_conjuror.dds', hide = true }, -- Icy Conjuror
+    [111204] = { icon = 'esoui/art/icons/achievement_thievesguild_003.dds', tooltip = Tooltips.Generic_Spell_Damage_Duration_Value, tooltipValue2 = 547 }, -- Moon Hunter (Moon Hunter)
+    [117666] = { icon = 'LuiExtended/media/icons/abilities/ability_set_icy_conjuror.dds' }, -- Icy Conjuror
     [116727] = { icon = 'LuiExtended/media/icons/abilities/ability_set_icy_conjuror.dds', tooltip = Tooltips.Generic_Freeze, tooltipValue2 = 1 }, -- Icy Conjuror (Icy Conjuror)
     [116884] = { icon = 'LuiExtended/media/icons/abilities/ability_set_aurorans_thunder.dds', tooltip = Tooltips.Set_Aurorans_Thunder }, -- Auroran's Thunder (Auroran's Thunder)
     [116920] = { icon = 'LuiExtended/media/icons/abilities/ability_set_aurorans_thunder.dds' }, -- Auroran's Thunder (Auroran's Thunder)
@@ -4559,7 +4565,7 @@ Effects.EffectOverride = {
     [85977] = { icon = 'LuiExtended/media/icons/abilities/ability_set_barkskin.dds' }, -- Barkskin
     [85978] = { icon = 'LuiExtended/media/icons/abilities/ability_set_barkskin.dds' }, -- Barkskin
     [84310] = { tooltip = Abilities.Set_Heem_Jas }, -- Major Berserk (Heem-Jas' Retribution)
-    [47365] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hircine.dds', tooltip = Tooltips.Set_Hircines_Veneer }, -- Hircine's Veneer (Hircine's)
+    [47365] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hircine.dds', tooltip = Tooltips.Generic_Increase_Stamina_Recovery_No_Dur, tooltipValue2 = 145 }, -- Hircine's Veneer (Hircine's)
     [85602] = { tooltip = Abilities.Set_Jailbreaker }, -- Minor Expedition (Jailbreaker)
     [34612] = { hide = true }, -- Oblivion's Edge (of Oblivion)
     [57206] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_oblivion_blue.dds' }, -- Oblivion's Edge (of Oblivion)
@@ -4605,25 +4611,24 @@ Effects.EffectOverride = {
     [47362] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ebon.dds', tooltip = Tooltips.Set_Ebon_Armory }, -- Ebon Armory (Ebon)
     [59695] = { icon = 'LuiExtended/media/icons/abilities/ability_set_embershield.dds', tooltip = Tooltips.Set_Embershield }, -- Embershield (Embershield)
     [59696] = { icon = 'LuiExtended/media/icons/abilities/ability_set_embershield.dds' }, -- Embershield (Embershield)
-    [97908] = { con = 'esoui/art/icons/achievement_wrothgar_044.dds', tooltip = Tooltips.Set_Hagravens_Garden}, -- Hagraven's Garden (Hagraven's)
-    [97918] = { icon = 'esoui/art/icons/achievement_wrothgar_044.dds' }, -- Hagraven's Garden (Hagraven's)
-    [114802] = { icon = 'esoui/art/icons/achievement_wrothgar_044.dds', name = Abilities.Set_Hagravens_Garden, tooltip = Tooltips.Generic_Knockback }, -- Stun (Hagraven's)
+    [97908] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hagravens_garden.dds', tooltip = Tooltips.Set_Hagravens_Garden}, -- Hagraven's Garden (Hagraven's)
+    [97910] = { tooltip = Abilities.Set_Hagravens_Garden, forcedContainer = 'short', groundLabel = true }, -- Major Protection (Hagraven's)
     [34404] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ice_furnace.dds', name = Abilities.Set_Ice_Furnace }, -- Frostfire (Ice Furnace)
     [97626] = { icon = 'esoui/art/icons/achievement_update11_dungeons_036.dds', unbreakable = 1, tooltip = Tooltips.Generic_Snare, tooltipValue2 = 50 }, -- Ironblood
     [97627] = { tooltip = Abilities.Set_Ironblood }, -- Major Protection (Ironblood)
-    [67078] = { icon = 'LuiExtended/media/icons/abilities/ability_set_jolting.dds', tooltip = Tooltips.Set_Jolting_Arms }, -- Jolting Arms (Jolting)
-    [85620] = { icon = 'esoui/art/icons/achievement_darkbrotherhood_028.dds' }, -- Knight-Errant's Mail (Knight-Errant's)
-    [67205] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_aoe_poison.dds', tooltip = Tooltips.Set_Leeching_Plate }, -- Leeching Plate (of Leeching)
-    [69345] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_aoe_poison.dds' }, -- Leeching Plate (of Leeching)
-    [67204] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_aoe_poison.dds', groundLabel = true, tooltip = Tooltips.Skill_Leeching_Plate_Ground }, -- Leeching Plate (of Leeching)
-    [84277] = { icon = 'esoui/art/icons/achievement_update11_dungeons_006.dds' }, -- Aspect of Mazzatun (of Mazzatun)
-    [84278] = { icon = 'esoui/art/icons/achievement_update11_dungeons_006.dds' }, -- Aspect of Mazzatun (of Mazzatun)
-    [84279] = { icon = 'esoui/art/icons/achievement_update11_dungeons_006.dds' }, -- Aspect of Mazzatun (of Mazzatun)
+    [67078] = { icon = 'LuiExtended/media/icons/abilities/ability_set_jolting_arms.dds', tooltip = Tooltips.Set_Jolting_Arms }, -- Jolting Arms (Jolting)
+    [85620] = { icon = 'LuiExtended/media/icons/abilities/ability_set_knight_errant.dds' }, -- Knight-Errant's Mail (Knight-Errant's)
+    [67205] = { icon = 'LuiExtended/media/icons/abilities/ability_set_leeching_plate.dds', tooltip = Tooltips.Set_Leeching_Plate }, -- Leeching Plate (of Leeching)
+    [69345] = { icon = 'LuiExtended/media/icons/abilities/ability_set_leeching_plate.dds' }, -- Leeching Plate (of Leeching)
+    [67204] = { icon = 'LuiExtended/media/icons/abilities/ability_set_leeching_plate.dds', groundLabel = true, tooltip = Tooltips.Skill_Leeching_Plate_Ground }, -- Leeching Plate (of Leeching)
+    [84277] = { icon = 'LuiExtended/media/icons/abilities/ability_set_aspect_of_mazzatun.dds' }, -- Aspect of Mazzatun (of Mazzatun)
+    [84278] = { icon = 'LuiExtended/media/icons/abilities/ability_set_aspect_of_mazzatun.dds' }, -- Aspect of Mazzatun (of Mazzatun)
+    [84279] = { icon = 'LuiExtended/media/icons/abilities/ability_set_aspect_of_mazzatun.dds' }, -- Aspect of Mazzatun (of Mazzatun)
     [85611] = { tooltip = Abilities.Set_Medusa }, -- Minor Force (of Medusa)
     [84354] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web_green.dds', tooltip = Tooltips.Set_Hand_of_Mephala }, -- Hand of Mephala (Mephala's Hand)
     [84357] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web_green.dds', name = Abilities.Set_Hand_of_Mephala, duration = 0, tooltip = Tooltips.Skill_Hand_of_Mephala_Ground, groundLabel = true }, -- Hand of Mephala Webbing (of Mephala's Hand)
     [84355] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web_green.dds' }, -- Hand of Mephala (of Mephala's Hand)
-    [84358] = { tooltip = Abilities.Set_Hand_of_Mephala }, -- Hand of Mephala (of Mephala's Hand)
+    [84358] = { tooltip = Abilities.Set_Hand_of_Mephala, groundLabel = true }, -- Hand of Mephala (of Mephala's Hand)
     [85623] = { tooltip = Abilities.Set_Rattlecage }, -- Major Sorcery (Rattlecage)
     [32735] = { tooltip = Abilities.Set_Dreugh_King_Slayer }, -- Major Brutality (Dreugh King Slayer)
     [34511] = { tooltip = Abilities.Set_Dreugh_King_Slayer }, -- Major Expedition (Dreugh King Slayer)
@@ -4632,8 +4637,8 @@ Effects.EffectOverride = {
     [67283] = { icon = 'LuiExtended/media/icons/abilities/ability_set_tormentor.dds', name = Abilities.Set_Tormentor, tooltip = Tooltips.Generic_Physical_Spell_Resist_Value, tooltipValue2 = 3642 }, -- Tormentor Resistance (of the Tormentor)
     [61200] = { icon = 'esoui/art/icons/achievement_undaunteddailies_003.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Undaunted Bastion (of the Undaunted Bastion)
     [86070] = { icon = 'esoui/art/icons/achievement_thievesguild_034.dds', tooltip = Tooltips.Generic_Weapon_Damage_Duration_Value, tooltipValue2 = 460 }, -- Armor of Truth (of Truth)
-    [112414] = { icon = 'esoui/art/icons/achievement_u23_natureswrath_blue.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Ursus's Blessing (Haven of Ursus)
-    [111445] = { icon = 'esoui/art/icons/achievement_u23_natureswrath_blue.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Ursus's Blessing (Haven of Ursus)
+    [112414] = { icon = 'LuiExtended/media/icons/abilities/ability_set_haven_of_ursus.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Ursus's Blessing (Haven of Ursus)
+    [111445] = { icon = 'LuiExtended/media/icons/abilities/ability_set_haven_of_ursus.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Ursus's Blessing (Haven of Ursus)
     [111221] = { tooltip = Abilities.Set_Jailers_Tenacity }, -- Major Vitality (Jailer's Tenacity)
     [116805] = { tooltip = Abilities.Set_Mighty_Glacier }, -- Major Resolve (Mighty Glacier)
     [117082] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds', tooltip = Tooltips.Set_Frozen_Watcher }, -- Frozen Watcher (Frozen Watcher)
@@ -4641,7 +4646,7 @@ Effects.EffectOverride = {
 
     [126535] = { icon = 'esoui/art/icons/achievement_u23_dun1_killmonstersa.dds', tooltip = Tooltips.Set_Renalds_Resolve }, -- Resolve (Renald's)
 
-    [126682] = { icon = 'esoui/art/icons/achievement_u24_capperquest_1.dds', tooltip = Tooltips.Set_Dragons_Defilement }, -- Dragon's Defilement (Defiled Dragon's)
+    [126682] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dragons_defilement.dds', tooltip = Tooltips.Set_Dragons_Defilement }, -- Dragon's Defilement (Defiled Dragon's)
     [126684] = { tooltip = Abilities.Set_Dragons_Defilement, groundLabel = true }, -- Minor Fracture (Defiled Dragon's)
     [126685] = { tooltip = Abilities.Set_Dragons_Defilement, groundLabel = true }, -- Minor Breach (Defiled Dragon's)
 
@@ -4821,9 +4826,9 @@ Effects.EffectOverride = {
     [76938] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vicious_death.dds' }, -- Vicious Death (of Vicious Death)
 
     -- Maelstrom Arena Sets
-    [127081] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_melee_alt.dds', tooltip = Tooltips.Set_Succession_Flame }, -- Flame Succession (of Succession)
-    [127084] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_melee_alt.dds', tooltip = Tooltips.Set_Succession_Shock  }, -- Shock Succession (of Succession)
-    [127088] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cold_melee_alt.dds', tooltip = Tooltips.Set_Succession_Frost }, -- Frost Succession (of Succession)
+    [127081] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_fire.dds', tooltip = Tooltips.Set_Succession_Flame }, -- Flame Succession (of Succession)
+    [127084] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_shock.dds', tooltip = Tooltips.Set_Succession_Shock  }, -- Shock Succession (of Succession)
+    [127088] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_frost.dds', tooltip = Tooltips.Set_Succession_Frost }, -- Frost Succession (of Succession)
     [73296] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_pillar.dds', name = Abilities.Set_Winterborn, duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 60 }, -- Winterborn Snare (Winterborn)
     [71646] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_pillar.dds' }, -- Winterborn (Winterborn)
     [71188] = { icon = 'esoui/art/icons/ability_rogue_019.dds', name = Abilities.Set_Glorious_Defender, tooltip = Tooltips.Set_Glorious_Defender }, -- Glorious Defense (of Glory)

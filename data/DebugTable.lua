@@ -1640,6 +1640,7 @@ LUIE.DebugAuras = {
     [127192] = true, -- Senche's Bite (Senche's)
 
     [32750] = true, -- Stygian (Stygian)
+    [144480] = true, -- Stygian (Stygian)
 
     [67099] = true, -- Swamp Raider
 
@@ -1667,6 +1668,7 @@ LUIE.DebugAuras = {
 
     [32829] = true, -- Wilderqueen's Arch (of the Wilderqueen)
     [34870] = true, -- Wilderqueen's Arch (of the Wilderqueen)
+    [141867] = true, -- Marauder's Haste (of the Wilderqueen)
 
     [99266] = true, -- Unfathomable Darkness (of Unfathomable Darkness)
     [99267] = true, -- Unfathomable Darkness (of Unfathomable Darkness)
@@ -1678,6 +1680,7 @@ LUIE.DebugAuras = {
     [18991] = true, -- Witchman Armor (Witchman's)
     [18993] = true, -- Witchman Armor (Witchman's)
     [85818] = true, -- Witchman Armor (Witchman's)
+    [141869] = true, -- Witchman Armor (Witchman's)
 
     [106858] = true, -- Gryphon's Ferocity (Gryphon's)
     [106860] = true, -- Minor Expedition (Gryphon's)
@@ -1729,11 +1732,12 @@ LUIE.DebugAuras = {
     [85594] = true, -- Minor Heroism (Shalk's)
 
     [32838] = true, -- Soulshine (of Soulshine)
+    [144478] = true, -- Soulshine (of Soulshine)
 
     [18996] = true, -- Akaviri Dragonguard (of the Dragon)
 
     [52710] = true, -- Way of Fire (of the Fire)
-    [52711] = true, -- Fiery Weapon (of the Fire)
+    [52711] = true, -- Way of Fire (of the Fire)
 
     [85570] = true, -- Green Pact (of the Green Pact)
 
@@ -1784,7 +1788,6 @@ LUIE.DebugAuras = {
     [60419] = true, -- Burning Spellweave
 
     [102026] = true, -- Caluurion's Legacy
-    [102060] = true, -- Caluurion's Legacy
     [102027] = true, -- Caluurion's Legacy (Fire)
     [102032] = true, -- Caluurion's Legacy (Ice)
     [102033] = true, -- Caluurion's Legacy (Disease)
@@ -1808,6 +1811,8 @@ LUIE.DebugAuras = {
     [85609] = true, -- Lamia's Song (Lamia's)
     [85610] = true, -- Lamia's Song (Lamia's)
     [85636] = true, -- Lamia's Song (Lamia's)
+    [143097] = true, -- Lamia's Song (Lamia's)
+    [143098] = true, -- Lamia's Song (Lamia's)
 
     [85604] = true, -- Light Speaker (Light Speaker's)
 
@@ -2025,10 +2030,7 @@ LUIE.DebugAuras = {
 
     [97907] = true, -- Hagraven's Garden (Hagraven's)
     [97908] = true, -- Hagraven's Garden (Hagraven's)
-    [97909] = true, -- Hagraven's Garden (Hagraven's)
     [97910] = true, -- Hagraven's Garden (Hagraven's)
-    [97918] = true, -- Hagraven's Garden (Hagraven's)
-    [114802] = true, -- Stun (Hagraven's)
 
     [29123] = true, -- The Ice Furnace (Ice Furnace)
     [34404] = true, -- Frostfire (Ice Furnace)
@@ -2094,10 +2096,11 @@ LUIE.DebugAuras = {
     [111442] = true, -- Haven of Ursus (Haven of Ursus)
     [111443] = true, -- Haven of Ursus (Haven of Ursus)
     [111452] = true, -- Haven of Ursus (Haven of Ursus)
-    [112414] =  true, -- Ursus's Blessing (Haven of Ursus)
-    [111445] =  true, -- Ursus's Blessing (Haven of Ursus)
+    [112414] = true, -- Ursus's Blessing (Haven of Ursus)
+    [111445] = true, -- Ursus's Blessing (Haven of Ursus)
     [111440] = true, -- Ursus CD (Haven of Ursus)
     [113423] = true, -- Checker (Haven of Ursus)
+
     [111220] = true, -- Jailer's Tenacity (Jailer's Tenacity)
     [111221] = true, -- Major Vitality (Jailer's Tenacity)
 

@@ -165,6 +165,9 @@ LUIE.Data.Tooltips = {
 
     Generic_Test                                    = GetString(SI_LUIE_SKILL_TEST_TP),
 
+    Generic_Increase_Stamina_Recovery_No_Dur        = GetString(SI_LUIE_SKILL_GENERIC_STAMINA_RECOVERY_NO_DUR_TP),
+    Generic_Increase_Magicka_Recovery_No_Dur        = GetString(SI_LUIE_SKILL_GENERIC_MAGICKA_RECOVERY_NO_DUR_TP),
+
     Generic_Bleed                                   = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_TP), "SUBSTRING", BleedDamage),
     Generic_Physical                                = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_TP), "SUBSTRING", PhysicalDamage),
     Generic_Disease                                 = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_TP), "SUBSTRING", DiseaseDamage),
