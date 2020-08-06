@@ -1831,7 +1831,6 @@ LUIE.DebugAuras = {
     [85603] = true, -- Spider Cultist Cowl (Spider Cultist's)
 
     [66899] = true, -- Spell Power Cure (Spell Power Cure)
-    [69402] = true, -- WGT Heal Set (Spell Power Cure)
     [66902] = true, -- Spell Power Cure (Spell Power Cure)
 
     [67096] = true, -- Combat Physician (of the Combat Physician)
@@ -1930,16 +1929,14 @@ LUIE.DebugAuras = {
     [102113] = true, -- Plague Slinger
 
     [67140] = true, -- Sheer Venom (of Sheer Venom)
-    [67926] = true, -- Sheer Venom (of Sheer Venom)
-    [67927] = true, -- Sheer Venom (of Sheer Venom)
     [67141] = true, -- Sheer Venom (of Sheer Venom)
 
     [85624] = true, -- Spelunker (Spelunker's)
     [85626] = true, -- Spelunker (Spelunker's)
     [85635] = true, -- Spelunker (Spelunker's)
+    [143136] = true, -- Spelunker (Spelunker's)
 
     [66939] = true, -- Storm Master (Storm Master's)
-    [70297] = true, -- Storm Master (Storm Master's)
     [70298] = true, -- Storm Master (Storm Master's)
 
     [85622] = true, -- Sword Dancer (Sword Dancer's)
@@ -2491,7 +2488,6 @@ LUIE.DebugAuras = {
     [71605] = true, -- Hunt Leader (of the Hunt)
     [74106] = true, -- Hunt Leader (of the Hunt)
     [71191] = true, -- Para Bellum (Para Bellum)
-    [71194] = true, -- Para Bellum Timer (Para Bellum)
     [71193] = true, -- Para Bellum Shield (Para Bellum)
 
     [71180] = true, -- Glorious Defender (of Glory)
