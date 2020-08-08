@@ -1022,7 +1022,7 @@ local strings = {
     SI_LUIE_SKILL_SET_TWICE_FANGED_SERPENT_TP =          "Increase Physical Penetration by |cFFFFFF544|r for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF10|r times when you deal damage.\n\nThis effect can occur once every half second.",
     SI_LUIE_SKILL_SET_LUNAR_BASTION_TP =                 "You and group members within the |cFFFFFF8|r meter radius of the lunar blessing are granted a damage shield that lasts |cFFFFFF4|r seconds every |cFFFFFF2|r seconds.\n\nThe shield stacks up to |cFFFFFF6|r times.",
     SI_LUIE_SKILL_SET_LUNAR_BASTION_GROUND_TP =          "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThis effect is refreshed every |cFFFFFF2|r seconds while standing in the lunar blessing, and stacks up to |cFFFFFF6|r times.",
-    SI_LUIE_SKILL_SET_VESTMENT_OF_OLORIME_TP =           "You and allies standing in the circle of might gain Major Courage for |cFFFFFF30|r seconds.",
+    SI_LUIE_SKILL_SET_VESTMENT_OF_OLORIME_TP =           "You and group members standing in the circle of might gain Major Courage for |cFFFFFF20|r seconds.",
     SI_LUIE_SKILL_SET_MANTLE_OF_SIRORIA_TP =             "Standing in the ring grants you a stack of Siroria's Boon every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_SET_SIRORIAS_BOON_TP =                 "Increase Spell Damage by |cFFFFFF52|r for |cFFFFFF5|r seconds, stacking up to |cFFFFFF10|r times when standing in the ring of fire.",
     SI_LUIE_SKILL_SET_EYE_OF_NAHVIINTAAS =               "Reduce the cost of non-Ultimate abilities by |cFFFFFF12|r% for |cFFFFFF<<1>>|r seconds.",
@@ -1030,8 +1030,9 @@ local strings = {
     SI_LUIE_SKILL_SET_RELEQUEN_TP =                      "Afflicted with Physical Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF10|r times when your attacker damages you with a Light or Heavy Attack.",
     SI_LUIE_SKILL_SET_KYNES_BLESSING_TP =                "You and allies standing in the |cFFFFFF8|r meter radius of Kyne's Blessing restore |cFFFFFF399|r Stamina and Magicka every |cFFFFFF1|r second.",
     --SI_LUIE_SKILL_SET_KYNES_BLESSING_GROUND_TP =       "Restoring |cFFFFFF399|r Stamina and Magicka every |cFFFFFF1|r second.",
-    SI_LUIE_SKILL_SET_GIANTS_ENDURANCE_TP =              "Increase Stamina Recovery by |cFFFFFF69|r, stacking up to |cFFFFFF5|r times when you deal Critical Damage.\n\nDealing damage with a Fully Charged Heavy Attack removes Giant's Endurance and grants Giant's Might for |cFFFFFF10|r seconds, increasing your Weapon Damage by |cFFFFFF111|r per stack removed.\n\nYou can only gain a stack of Giant's Endurance once per second.",
+    SI_LUIE_SKILL_SET_GIANTS_ENDURANCE_TP =              "Increase Weapon Damage by |cFFFFFF74|r, stacking up to |cFFFFFF5|r times when you deal Critical Damage.\n\nCompleting a fully-charged Heavy Attack removes Giant's Endurance and grants Giant's Might for |cFFFFFF10|r seconds, increasing your Weapon Damage by |cFFFFFF111|r per stack removed.\n\nYou can only gain a stack of Giant's Endurance once every half second.",
     SI_LUIE_SKILL_SET_GIANTS_MIGHT_TP =                  "Increase Weapon Damage by |cFFFFFF111|r per stack of Giant's Endurance consumed for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_ROAR_OF_ALKOSH_TP =                    "Reduce Physical and Spell Resistance by the initial damage done by Roar of Alkosh for |cFFFFFF10|r seconds.",
 
     -- Battleground Sets
     SI_LUIE_SKILL_SET_COWARDS_GEAR =                     "Coward's Gear",

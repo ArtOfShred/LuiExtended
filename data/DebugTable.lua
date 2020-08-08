@@ -2147,6 +2147,7 @@ LUIE.DebugAuras = {
     [51314] = true, -- Destructive Mage (Aether ... of Destruction)
     [51315] = true, -- Destructive Mage (Aether ... of Destruction)
     [51320] = true, -- Mage Destruction Bomb (Aether ... of Destruction)
+    [137519] = true, -- Destructive Mage (Aether ... of Destruction)
 
     [51442] = true, -- Healing Mage (of Mending)
     [51443] = true, -- Healing Bane (of Mending)

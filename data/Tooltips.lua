@@ -580,6 +580,7 @@ LUIE.Data.Tooltips = {
     --Set_Kynes_Blessing_Ground                     = GetString(SI_LUIE_SKILL_SET_KYNES_BLESSING_GROUND_TP),
     Set_Giants_Endurance                            = GetString(SI_LUIE_SKILL_SET_GIANTS_ENDURANCE_TP),
     Set_Giants_Might                                = GetString(SI_LUIE_SKILL_SET_GIANTS_MIGHT_TP),
+    Set_Roar_of_Alkosh                              = GetString(SI_LUIE_SKILL_ROAR_OF_ALKOSH_TP),
 
     -- Battleground Sets
     Set_Vanguards_Challenge                         = GetString(SI_LUIE_SKILL_SET_VANGUARDS_CHALLENGE_TP),

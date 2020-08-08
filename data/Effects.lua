@@ -4675,7 +4675,7 @@ Effects.EffectOverride = {
 
     -- Trial Sets (Sanctum Ophidia)
     [51241] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vipers_sting.dds' }, -- Poisonous Serpent (Ophidian ... of Venom)
-    [51176] = { icon = 'esoui/art/icons/achievement_darkbrotherhood_010.dds', tooltip = Tooltips.Set_Twice_Fanged_Serpent }, -- Twice-Fanged Serpent (of the Two-Fanged Snake)
+    [51176] = { icon = 'LuiExtended/media/icons/abilities/ability_set_twice_fanged_serpent.dds', tooltip = Tooltips.Set_Twice_Fanged_Serpent }, -- Twice-Fanged Serpent (of the Two-Fanged Snake)
     [98103] = { icon = 'esoui/art/icons/ability_buff_minor_erosion.dds', tooltip = Tooltips.Skill_Minor_Slayer }, -- Minor Slayer (of the Vicious Ophidian)
     [50997] = { tooltip = Abilities.Set_Quick_Serpent }, -- Major Expedition (Ophidian.. of Celerity)
     [57159] = { icon = 'LuiExtended/media/icons/abilities/ability_set_quick_serpent.dds' }, -- Quick Serpent (Ophidian.. of Celerity)
@@ -4687,7 +4687,7 @@ Effects.EffectOverride = {
     [75804] = { icon = 'LuiExtended/media/icons/abilities/ability_set_moondancer_shadow.dds', tooltip = Tooltips.Generic_Spell_Damage_Duration_Value, tooltipValue2 = 474 }, -- Shadow Blessing (Moondancer)
     [98102] = { icon = 'esoui/art/icons/ability_buff_minor_erosion.dds', tooltip = Tooltips.Skill_Minor_Slayer }, -- Minor Slayer (of Alkosh)
     [75752] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds' }, -- Roar of Alkosh (of Alkosh)
-    [75753] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds', tooltip = Tooltips.Generic_Reduce_Physical_Spell_Resist_Value, tooltipValue2 = 3010 }, -- Line Breaker (of Alkosh)
+    [75753] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds', tooltip = Tooltips.Set_Roar_of_Alkosh }, -- Line Breaker (of Alkosh)
     [76667] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds', tooltip = Tooltips.Generic_Physical, tooltipValue2 = 1 }, -- Roar of Alkosh (of Alkosh)
     [75814] = { icon = 'LuiExtended/media/icons/abilities/ability_set_lunar_bastion.dds', tooltip = Tooltips.Set_Lunar_Bastion }, -- Lunar Bastion (of the Lunar Bastion)
     [75815] = { icon = 'LuiExtended/media/icons/abilities/ability_set_lunar_bastion.dds', tooltip = Tooltips.Set_Lunar_Bastion_Ground }, -- Lunar Bastion (of the Lunar Bastion)
