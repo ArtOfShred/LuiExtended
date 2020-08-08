@@ -4771,8 +4771,8 @@ Effects.EffectOverride = {
     [65706] = { icon = 'esoui/art/icons/crownstore_skillline_alliancewar_support.dds', tooltip = Tooltips.Generic_Physical_Spell_Resist_Value, tooltipValue2 = 3540 }, -- Meritorious Service (of Meritorious Service)
     [61771] = { icon = 'esoui/art/icons/crownstore_skillline_alliancewar_assault.dds', tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration_Value, tooltipValue2 = 307 }, -- Powerful Assault (of the Powerful Assault)
     [79363] = { icon = 'esoui/art/icons/achievement_029.dds' }, -- Thews of the Harbinger (of the Harbinger)
-    [79469] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vicecanon.dds', name = Abilities.Set_Vicecannon_of_Venom, tooltip = Tooltips.Set_Vicecanon_of_Venom }, -- Deadly Venom (the Vicecanon's)
-    [79471] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vicecanon.dds', name = Abilities.Set_Vicecannon_of_Venom }, -- Deadly Venom (the Vicecanon's)
+    [79469] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vicecanon_of_venom.dds', name = Abilities.Set_Vicecannon_of_Venom, tooltip = Tooltips.Set_Vicecanon_of_Venom }, -- Deadly Venom (the Vicecanon's)
+    [79471] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vicecanon_of_venom.dds', name = Abilities.Set_Vicecannon_of_Venom }, -- Deadly Venom (the Vicecanon's)
 
     [127032] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Phoenix (of the Phoenix)
     [127036] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix.dds', name = Abilities.Set_Phoenix }, -- Phoenix's Flame (of the Phoenix)
