@@ -584,11 +584,10 @@ LUIE.Data.Tooltips = {
 
     -- Battleground Sets
     Set_Vanguards_Challenge                         = GetString(SI_LUIE_SKILL_SET_VANGUARDS_CHALLENGE_TP),
-    Set_Cowards_Gear                                = GetString(SI_LUIE_SKILL_SET_COWARDS_GEAR_TP),
+    --Set_Cowards_Gear                                = GetString(SI_LUIE_SKILL_SET_COWARDS_GEAR_TP),
 
     -- Imperial City Sets
     Set_Galerions_Revenge                           = GetString(SI_LUIE_SKILL_SET_GALERIONS_REVENGE_TP),
-    Set_Meritorius_Service                          = GetString(SI_LUIE_SKILL_SET_MERITORIUS_SERVICE_TP),
     Set_Vicecanon_of_Venom                          = GetString(SI_LUIE_SKILL_SET_VICECANON_OF_VENOM_TP),
 
     -- Cyrodiil Sets

@@ -1003,7 +1003,7 @@ local strings = {
     SI_LUIE_SKILL_SENCHALS_DUTY_TP =                     "Gain a persistent stack of Senchal's Duty, stacking up to |cFFFFFF10|r times when you deal direct damage with a non-Heavy Attack.\n\nAfter completing a fully-charged Heavy Attack, restore |cFFFFFF757|r Stamina and Magicka for each stack of Senchal's Duty and consume them.\n\nYou can only gain one stack of Senchal's Duty every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_TRINIMACS_VALOR_TP =                   "After |cFFFFFF2|r seconds the fragment of Trinimac explodes, healing you and allies while dealing Magic Damage to enemies in within |cFFFFFF5|r meters of the fragment.",
     SI_LUIE_SKILL_SET_SEVENTH_LEGION_TP =                "Increase Weapon Damage by |cFFFFFF341|r and Health Recovery by |cFFFFFF341|r for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_SET_RAVAGER_TP =                       "Increase Weapon Damage by |cFFFFFF125|r for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF4|r times when you attempt to reduce a target's Physical or Spell Resistance.\n\nThis effect can occur once every second.\n\nUpon reaching |cFFFFFF4|r stacks, the duration is doubled but can no longer be refreshed.",
+    SI_LUIE_SKILL_SET_RAVAGER_TP =                       "Increase Weapon Damage by |cFFFFFF146|r for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF4|r times when you attempt to reduce a target's Physical or Spell Resistance.\n\nThis effect can occur once every second.\n\nUpon reaching |cFFFFFF4|r stacks, the duration is doubled but can no longer be refreshed.",
     SI_LUIE_SKILL_SET_HATCHLINGS_SHELL_TP =              "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThis shield replenishes to absorb |cFFFFFF20|r% of your Max Health in damage for |cFFFFFF15|r seconds every |cFFFFFF15|r seconds.",
     SI_LUIE_SKILL_SET_DUNERIPPERS_SCALES_TP =            "Increase Physical and Spell Resistance by |cFFFFFF5310|r while you are blocking.",
     SI_LUIE_SKILL_KJALNARS_NIGHTMARE_TP =                "Marked for |cFFFFFF5|r seconds, stacking up to |cFFFFFF5|r times when your attacker damages you with a Light Attack.\n\nAt |cFFFFFF5|r stacks, an undodgeable skeletal hand attacks you after |cFFFFFF1|r second, knocking you into the air and stunning you for |cFFFFFF3|r seconds or dealing Magic Damage if you cannot be stunned.\n\nYou can only receive a stack once per second.",
@@ -1035,24 +1035,22 @@ local strings = {
     SI_LUIE_SKILL_ROAR_OF_ALKOSH_TP =                    "Reduce Physical and Spell Resistance by the initial damage done by Roar of Alkosh for |cFFFFFF10|r seconds.",
 
     -- Battleground Sets
-    SI_LUIE_SKILL_SET_COWARDS_GEAR =                     "Coward's Gear",
-    SI_LUIE_SKILL_SET_COWARDS_GEAR_TP =                  "While Sprinting you gain Major Expedition and Major Protection.",
-    SI_LUIE_SKILL_SET_VANGUARDS_CHALLENGE_TP =           "Deal |cFFFFFF100|r% more damage to the player that taunted you, but |cFFFFFF50|r% less damage to all other players for |cFFFFFF15|r seconds.",
+    --SI_LUIE_SKILL_SET_COWARDS_GEAR_TP =                  "While Sprinting you gain Major Expedition and Major Protection.",
+    SI_LUIE_SKILL_SET_VANGUARDS_CHALLENGE_TP =           "Deal |cFFFFFF35|r% more damage to the player that taunted you, but |cFFFFFF35|r% less damage to all other players for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     -- Imperial City Sets
     SI_LUIE_SKILL_SET_GALERIONS_REVENGE_TP =             "Marked for |cFFFFFF15|r seconds, stacking up to |cFFFFFF5|r times when your attacker damages you with a Light or Heavy Attack.\n\nAt |cFFFFFF5|r stacks, the Marks of Revenge detonate, dealing Magic Damage.\n\nYou can only receive a stack once per second.",
-    SI_LUIE_SKILL_SET_MERITORIUS_SERVICE_TP =            "Increase Physical and Spell Resistance by |cFFFFFF3010|r for |cFFFFFF2|r minutes.",
     SI_LUIE_SKILL_SET_VICECANON_OF_VENOM_TP =            "Afflicted with Poison Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nYour attacker heals for |cFFFFFF100|r% of the damage done.",
 
     -- Alliance War Sets
-    SI_LUIE_SKILL_SET_SOLDIER_OF_ANGUISH_TP =            "Negate the next |cFFFFFF4800|r points of healing received for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
-    SI_LUIE_SKILL_SET_SPELL_STRATEGIST_TP =              "Your attacker gains |cFFFFFF500|r additional Spell Damage against you for |cFFFFFF5|r seconds.",
+    SI_LUIE_SKILL_SET_SOLDIER_OF_ANGUISH_TP =            "Negate the next |cFFFFFF4830|r points of healing received for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_SET_SPELL_STRATEGIST_TP =              "Your attacker gains |cFFFFFF460|r additional Spell Damage against you for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_SET_SUCCESSION_TP =                    "Increase Spell Damage by |cFFFFFF492|r for <<1>> dealing attacks for |cFFFFFF4|r seconds.\n\nThis effect can occur once every |cFFFFFF4|r seconds per element.",
     SI_LUIE_SKILL_SET_PARA_BELLUM_TP =                   "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThe shield will replenish every |cFFFFFF10|r seconds.",
     SI_LUIE_SKILL_SET_GLORIOUS_DEFENDER_TP =             "Dodge the next dodgeable attack made against you within |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_SET_HEALERS_HABIT =                    "Healer's Habit",
     SI_LUIE_SKILL_SET_CYRODIILS_LIGHT_TP =               "Your next Magicka ability used within |cFFFFFF30|r seconds will cost no Magicka.",
-    SI_LUIE_SKILL_SET_MORAG_TONG_TP =                    "Increase damage taken from Poison Damage abilities by |cFFFFFF10|r% for |cFFFFFF5|r seconds.",
+    SI_LUIE_SKILL_SET_MORAG_TONG_TP =                    "Increase damage taken from Poison and Disease attacks by |cFFFFFF10|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_SET_WARRIORS_FURY_TP =                 "Increase Weapon Damage by |cFFFFFF30|r for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF20|r times when you take damage.\n\nThis effect can occur once every half second.\n\nUpon reaching |cFFFFFF20|r stacks, the duration is doubled but can no longer be refreshed.",
     SI_LUIE_SKILL_SET_ROBES_OF_TRANSMUTATION_TP =        "Increase Critical Resistance by |cFFFFFF1400|r for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_BECKONING_STEEL_TP =               "Reduce damage taken from projectiles by |cFFFFFF10|r%.",

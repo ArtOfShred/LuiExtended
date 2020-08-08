@@ -2299,8 +2299,9 @@ LUIE.DebugAuras = {
     [137989] = true, -- Major Aegis (Vrol's Perfect)
 
     -- Battleground Sets
-    [92908] = true, -- Major Expedition (Coward's Gear)
+    [92908] = true, -- Coward's Gear (Coward's Gear)
     [92909] = true, -- Major Protection (Coward's Gear)
+    [144708] = true, -- Major Expedition (Coward's Gear)
 
     [93099] = true, -- Knight Slayer
     [93104] = true, -- Knight Slayer
@@ -2430,6 +2431,7 @@ LUIE.DebugAuras = {
 
     [32737] = true, -- The Juggernaut (of the Juggernaut)
     [34512] = true, -- The Juggernaut (of the Juggernaut)
+    [142401] = true, -- The Juggernaut (of the Juggernaut)
 
     [129364] = true, -- Battle Hardened (of the Potentates)
     [47356] = true, -- Blessing of the Potentates (of the Potentates)

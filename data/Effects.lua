@@ -196,7 +196,7 @@ Effects.IsSetICD = {
     [129477] = true, -- Immortal Warrior
     [127235] = true, -- Eternal Warrior
     [127032] = true, -- Phoenix
-    --[34512] = true, -- Juggernaut
+    [142401] = true, -- Juggernaut
 }
 
 -- Food & Drink Buffs
@@ -448,6 +448,7 @@ Effects.DebuffDisplayOverrideId = {
     [111354] = true, -- Vykosa (Vykosa)
     [100302] = true, -- Piercing Spray (Asylum Bow)
     [51443] = true, -- Healing Bane (of Mending)
+    [34384] = true, -- The Morag Tong (of the Morag Tong)
 
     -- Dragonknight
     [134336] = true, -- Stagger (Stone Giant)
@@ -826,6 +827,9 @@ Effects.EffectCreateSkillAura = {
         -- consolidateNewId = true -- This will consolidate the new aura if consolidate is active (for fake major/minor effects we have to create in some cases) - Basically reverse logic, if Consolidate is enabled - hide
         -- consolidateNewIdExtended = true -- This will consolidate the new aura if consolidate is active (for fake major/minor effects we have to create in some cases) - Basically reverse logic, if Consolidate Single is enabled - hide
         -- requiredStack = number -- Requires this number of stacks to apply
+
+    -- Sets
+    [144708] = { alwaysShow = true, removeOnEnd = true, abilityId = 92909 }, -- Major Expedition --> Coward's Gear
 
     -- Dragonknight
     [75088] = { removeOnEnd = true, consolidate = true, extendedDisplay = true, abilityId = 28969 }, -- Major Prophecy --> Inferno
@@ -4749,21 +4753,23 @@ Effects.EffectOverride = {
     -- Set ICD's (Fake Id's)
     [999009] = { tooltip = Tooltips.Generic_Set_ICD, tooltipValue2 = Abilities.Set_Immortal_Warrior, unbreakable = 1 }, -- Immortal Warrior (Fake Id)
     [999010] = { tooltip = Tooltips.Generic_Set_ICD_Minutes, tooltipValue2 = Abilities.Set_Eternal_Warrior, tooltipValue3 = 1, unbreakable = 1 }, -- Eternal Warrior (Fake Id)
-    [999011] = { tooltip = Tooltips.Generic_Set_ICD, tooltipValue2 = Abilities.Set_Phoenix, unbreakable = 1 }, -- Phoenix (Fake Id)
-    --[999012] = {tooltip = Tooltips.Generic_Set_ICD_Minutes, tooltipValue2 = Abilities.Set_Juggernaut, tooltipValue3 = 1, unbreakable = 1 }, -- Juggernaut (Fake Id)
+    [999011] = { tooltip = Tooltips.Generic_Set_ICD_Minutes, tooltipValue2 = Abilities.Set_Phoenix, tooltipValue3 = 1, unbreakable = 1 }, -- Phoenix (Fake Id)
+    [999012] = {tooltip = Tooltips.Generic_Set_ICD_Minutes, tooltipValue2 = Abilities.Set_Juggernaut, tooltipValue3 = 1, unbreakable = 1 }, -- Juggernaut (Fake Id)
 
     -- Battleground Sets
-    [92908] = { icon = 'LuiExtended/media/icons/abilities/ability_set_cowards_gear.dds', name = Abilities.Set_Cowards_Gear, tooltip = Tooltips.Set_Cowards_Gear }, -- Major Expedition (Coward's Gear)
+    --[92908] = { icon = 'LuiExtended/media/icons/abilities/ability_set_cowards_gear.dds', tooltip = Tooltips.Set_Cowards_Gear }, -- Major Expedition (Coward's Gear)
+    [92909] = { tooltip = Abilities.Set_Cowards_Gear }, -- Major Protection (Coward's Gear)
+    [144708] = { tooltip = Abilities.Set_Cowards_Gear }, -- Major Expedition (Coward's Gear)
     [93104] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_oblivion_purple.dds' }, -- Knight Slayer
-    [92916] = { icon = 'esoui/art/icons/achievement_update15_041.dds', tooltip = Tooltips.Set_Vanguards_Challenge }, -- Vanguard's Challenge
+    [92916] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vanguards_challenge.dds', tooltip = Tooltips.Set_Vanguards_Challenge }, -- Vanguard's Challenge
     [92921] = { tooltip = Abilities.Set_Wizards_Riposte }, -- Minor Maim (Wizard's Riposte)
 
     -- Imperial City Sets
     [61762] = { hide = true }, -- Black Rose (of the Black Rose)
     [79421] = { icon = 'LuiExtended/media/icons/abilities/ability_set_galerions_revenge.dds', tooltip = Tooltips.Set_Galerions_Revenge }, -- Mark of Revenge (Galerion's)
     [79420] = { icon = 'LuiExtended/media/icons/abilities/ability_set_galerions_revenge.dds' }, -- Galerion's Revenge (Galerion's)
-    [65706] = { icon = 'esoui/art/icons/crownstore_skillline_alliancewar_support.dds', tooltip = Tooltips.Set_Meritorius_Service }, -- Meritorious Service (of Meritorious Service)
-    [61771] = { icon = 'esoui/art/icons/crownstore_skillline_alliancewar_assault.dds', tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration_Value, tooltipValue2 = 164 }, -- Powerful Assault (of the Powerful Assault)
+    [65706] = { icon = 'esoui/art/icons/crownstore_skillline_alliancewar_support.dds', tooltip = Tooltips.Generic_Physical_Spell_Resist_Value, tooltipValue2 = 3540 }, -- Meritorious Service (of Meritorious Service)
+    [61771] = { icon = 'esoui/art/icons/crownstore_skillline_alliancewar_assault.dds', tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration_Value, tooltipValue2 = 307 }, -- Powerful Assault (of the Powerful Assault)
     [79363] = { icon = 'esoui/art/icons/achievement_029.dds' }, -- Thews of the Harbinger (of the Harbinger)
     [79469] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vicecanon.dds', name = Abilities.Set_Vicecannon_of_Venom, tooltip = Tooltips.Set_Vicecanon_of_Venom }, -- Deadly Venom (the Vicecanon's)
     [79471] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vicecanon.dds', name = Abilities.Set_Vicecannon_of_Venom }, -- Deadly Venom (the Vicecanon's)
@@ -4774,14 +4780,14 @@ Effects.EffectOverride = {
     [69567] = { icon = 'LuiExtended/media/icons/abilities/ability_set_reactive_armor.dds', name = Abilities.Set_Reactive_Armor, tooltip = Tooltips.Generic_Reduce_Damage_Taken, tooltipValue2 = 33 }, -- Reactive Armor Effects (Reactive)
 
     -- Cyrodiil Sets (Light)
-    [34605] = { icon = 'LuiExtended/media/icons/abilities/ability_set_almalexias_mercy.dds' }, -- Almalexia's Mercy (of Almalexia's Mercy)
-    [70392] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arch-mage.dds', tooltip = Tooltips.Generic_Magicka_Recovery_Duration_Value, tooltipValue2 = 369 }, -- The Arch-Mage (of the Arch-Mage)
+    [34605] = { icon = 'LuiExtended/media/icons/abilities/ability_set_almalexias_mercy.dds', tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Almalexia's Mercy (of Almalexia's Mercy)
+    [70392] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arch-mage.dds', tooltip = Tooltips.Generic_Magicka_Recovery_Duration_Value, tooltipValue2 = 506 }, -- The Arch-Mage (of the Arch-Mage)
 
     [117359] = { icon = 'LuiExtended/media/icons/abilities/ability_set_curse_eater.dds' }, -- Curse-Eater (Curse-Eating)
 
     [111550] = { icon ='esoui/art/icons/achievement_darkbrotherhood_027.dds', tooltip = Tooltips.Set_Light_of_Cyrodiil }, -- Light of Cyrodiil (of Cyrodiil's Light)
     [112750] = { hide = true }, -- Light of Cyrodiil (of Cyrodiil's Light)
-    [33498] = { icon = 'esoui/art/icons/achievement_update11_dungeons_007.dds' }, -- Desert Rose (of the Desert Rose)
+    [33498] = { icon = 'LuiExtended/media/icons/abilities/ability_set_desert_rose.dds' }, -- Desert Rose (of the Desert Rose)
 
     -- Cyrodiil Sets (Medium)
     [34876] = { tooltip = Abilities.Set_Ward_of_Cyrodiil }, -- Major Defile (of Cyrodiil's Ward)
@@ -4807,6 +4813,7 @@ Effects.EffectOverride = {
     [127280] = { icon = 'LuiExtended/media/icons/abilities/ability_set_the_ravager.dds', tooltip = Tooltips.Set_Ravager }, -- The Ravager (Ravaging)
     [127284] = { icon = 'LuiExtended/media/icons/abilities/ability_set_the_ravager.dds', tooltip = Tooltips.Set_Ravager }, -- The Ravager (Ravaging)
     [34512] = { icon = 'LuiExtended/media/icons/abilities/ability_set_the_juggernaut.dds' }, -- The Juggernaut (of the Juggernaut)
+    [142401] = { icon = 'LuiExtended/media/icons/abilities/ability_set_the_juggernaut.dds', tooltip = Tooltips.Generic_Physical_Spell_Resist_Value, tooltipValue2 = 20000 }, -- The Juggernaut (of the Juggernaut)
 
     -- Rewards for the Worthy Sets
     [113523] = { icon = 'LuiExtended/media/icons/abilities/ability_set_battalion_defender.dds' }, -- Battalion Defender (Battalion Defender)
@@ -13499,7 +13506,7 @@ Effects.FakePlayerBuffs = {
     [129477] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Immortal_Warrior, Abilities.Set_Cooldown), duration = 35000, shiftId = 999009, debuff = true }, -- Immortal Warrior
     [127235] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_warrior_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Eternal_Warrior, Abilities.Set_Cooldown), duration = 60000, shiftId = 999010, debuff = true }, -- Eternal Warrior
     [127032] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Phoenix, Abilities.Set_Cooldown), duration = 60000, shiftId = 999011, debuff = true }, -- Phoenix
-    --[34512] = { icon = 'LuiExtended/media/icons/abilities/ability_set_the_juggernaut_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Juggernaut, Abilities.Set_Cooldown), duration = 60000, shiftId = 999012, debuff = true }, -- Juggernaut
+    [142401] = { icon = 'LuiExtended/media/icons/abilities/ability_set_the_juggernaut_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Juggernaut, Abilities.Set_Cooldown), duration = 60000, shiftId = 999012, debuff = true }, -- Juggernaut
 
     -- Player (Basic)
     [973] = { duration = 0 }, -- Sprint
