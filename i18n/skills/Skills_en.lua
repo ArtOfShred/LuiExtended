@@ -944,7 +944,7 @@ local strings = {
 
     -- Mythic Items
     SI_LUIE_SKILL_SET_BLOODLORDS_EMBRACE_TP =            "When your attacker blocks an attack from you, they restore |cFFFFFF1535|r Magicka.\n\nThis effect can occur every |cFFFFFF1|r second.",
-    SI_LUIE_SKILL_SET_THRASSIAN_STANGLERS_TP =           "Stacks up to |cFFFFFF20|r times when you kill an enemy.\n\n• Increase Spell Damage by |cFFFFFF150|r per stack.\n• Increase damage taken by |cFFFFFF2|r% per stack.\n• Reduce healing received and damage shield strength by |cFFFFFF2|r% per stack.",
+    SI_LUIE_SKILL_SET_THRASSIAN_STANGLERS_TP =           "• Increase Weapon and Spell Damage by |cFFFFFF150|r per stack.\n• Reduce Max Health by |cFFFFFF120|r per stack.\n• Reduce damage shield strength by |cFFFFFF1|r% per stack.\n\nStacks up to |cFFFFFF50|r times when you kill an enemy.",
 
     -- Crafted Sets
     SI_LUIE_SKILL_SET_ETERNAL_HUNT =                     "Detonates when an enemy enters the |cFFFFFF2.5|r meter radius of the rune, dealing Poison Damage and immoblizing them for |cFFFFFF1.5|r seconds.",
@@ -1017,17 +1017,17 @@ local strings = {
     SI_LUIE_SET_SHEER_VENOM_TP =                         "Afflicted with Poison Damage every |cFFFFFF1|r seconds for |cFFFFFF<<1>>|r seconds.\n\nDeals up to |cFFFFFF100|r% more damage in proportion to your missing health under |cFFFFFF100|r%.",
 
     -- Trial Sets
-    SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP =            "Increase Weapon Critical by |cFFFFFF400|r for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF5|r times when you deal melee damage.\n\nThis effect can occur once every half second.",
+    SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP =            "Increase Weapon Critical by |cFFFFFF305|r for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF10|r times when you deal melee damage.\n\nThis effect can occur once every half second.",
     SI_LUIE_SKILL_SET_DESTRUCTIVE_MAGE_TP =              "When an attacker damages you with a fully-charged Heavy Attack they detonate the bomb, dealing Magic Damage to you and allies within |cFFFFFF8|r meters.",
-    SI_LUIE_SKILL_SET_TWICE_FANGED_SERPENT_TP =          "Increase Physical Penetration by |cFFFFFF860|r for |cFFFFFF3|r seconds, stacking up to |cFFFFFF5|r times when you deal damage.",
-    SI_LUIE_SKILL_SET_LUNAR_BASTION_TP =                 "You and allies within the |cFFFFFF8|r meter radius of the lunar blessing are granted a damage shield every |cFFFFFF2|r seconds.",
-    SI_LUIE_SKILL_SET_LUNAR_BASTION_GROUND_TP =          "Absorbing damage every |cFFFFFF2|r seconds while standing in the lunar blessing.",
+    SI_LUIE_SKILL_SET_TWICE_FANGED_SERPENT_TP =          "Increase Physical Penetration by |cFFFFFF544|r for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF10|r times when you deal damage.\n\nThis effect can occur once every half second.",
+    SI_LUIE_SKILL_SET_LUNAR_BASTION_TP =                 "You and group members within the |cFFFFFF8|r meter radius of the lunar blessing are granted a damage shield that lasts |cFFFFFF4|r seconds every |cFFFFFF2|r seconds.\n\nThe shield stacks up to |cFFFFFF6|r times.",
+    SI_LUIE_SKILL_SET_LUNAR_BASTION_GROUND_TP =          "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThis effect is refreshed every |cFFFFFF2|r seconds while standing in the lunar blessing, and stacks up to |cFFFFFF6|r times.",
     SI_LUIE_SKILL_SET_VESTMENT_OF_OLORIME_TP =           "You and allies standing in the circle of might gain Major Courage for |cFFFFFF30|r seconds.",
     SI_LUIE_SKILL_SET_MANTLE_OF_SIRORIA_TP =             "Standing in the ring grants you a stack of Siroria's Boon every |cFFFFFF1|r second.",
-    SI_LUIE_SKILL_SET_SIRORIAS_BOON_TP =                 "Increase Spell Damage by |cFFFFFF30|r for |cFFFFFF5|r seconds, stacking up to |cFFFFFF20|r times when standing in the ring of fire.",
+    SI_LUIE_SKILL_SET_SIRORIAS_BOON_TP =                 "Increase Spell Damage by |cFFFFFF52|r for |cFFFFFF5|r seconds, stacking up to |cFFFFFF10|r times when standing in the ring of fire.",
     SI_LUIE_SKILL_SET_EYE_OF_NAHVIINTAAS =               "Reduce the cost of non-Ultimate abilities by |cFFFFFF12|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_HARMFUL_WINDS =                    "Harmful Winds",
-    SI_LUIE_SKILL_SET_RELEQUEN_TP =                      "Afflicted with Physical Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF20|r times when your attacker damages you with a Light or Heavy Attack.",
+    SI_LUIE_SKILL_SET_RELEQUEN_TP =                      "Afflicted with Physical Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF10|r times when your attacker damages you with a Light or Heavy Attack.",
     SI_LUIE_SKILL_SET_KYNES_BLESSING_TP =                "You and allies standing in the |cFFFFFF8|r meter radius of Kyne's Blessing restore |cFFFFFF399|r Stamina and Magicka every |cFFFFFF1|r second.",
     --SI_LUIE_SKILL_SET_KYNES_BLESSING_GROUND_TP =       "Restoring |cFFFFFF399|r Stamina and Magicka every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_SET_GIANTS_ENDURANCE_TP =              "Increase Stamina Recovery by |cFFFFFF69|r, stacking up to |cFFFFFF5|r times when you deal Critical Damage.\n\nDealing damage with a Fully Charged Heavy Attack removes Giant's Endurance and grants Giant's Might for |cFFFFFF10|r seconds, increasing your Weapon Damage by |cFFFFFF111|r per stack removed.\n\nYou can only gain a stack of Giant's Endurance once per second.",
