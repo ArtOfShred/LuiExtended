@@ -1173,6 +1173,16 @@ LUIE.DebugAuras = {
     [80566] = true, -- Kra'gh
     [80565] = true, -- Kra'gh
 
+    [141897] = true, -- Lady Thorn (Lady Thorn)
+    [141905] = true, -- Corrupted Blood (Lady Thorn)
+    [141972] = true, -- Lady Thorn (Lady Thorn)
+    [142318] = true, -- Synergy Damage Bonus (Lady Thorn)
+    [141971] = true, -- Lady Thorn CD (Lady Thorn)
+    [142307] = true, -- Sanguine Burst Area (Lady Thorn)
+    [142305] = true, -- Sanguine Burst (Lady Thorn)
+    [141927] = true, -- Major Maim (Lady Thorn)
+    [143335] = true, -- Sanguine Burst Immunity (Lady Thorn)
+
     [59585] = true, -- Lord Warden
     [59586] = true, -- Lord Warden
     [59587] = true, -- Lord Warden
@@ -1263,6 +1273,12 @@ LUIE.DebugAuras = {
     [116876] = true, -- Stonekeeper (Stonekeeper)
     [116880] = true, -- Stonekeeper (Stonekeeper)
     [116881] = true, -- Stonekeeper (Stonekeeper)
+
+    [142977] = true, -- Stone Husk (Stone Husk)
+    [143032] = true, -- Stone Husk (Stone Husk)
+    [143077] = true, -- Stone Husk (Stone Husk)
+    [145199] = true, -- Husk Drain (Stone Husk)
+    [144908] = true, -- Stone Husk (Stone Husk)
 
     [80520] = true, -- Stormfist
     [80523] = true, -- Stormfist
@@ -1895,6 +1911,11 @@ LUIE.DebugAuras = {
     [133387] = true, -- Draugrkin's Grip (Draugrkin)
     [133406] = true, -- Draugrkin's Grip (Draugrkin)
 
+    [142596] = true, --Elemental Catalyst (Elemental Catalyst)
+    [142610] = true, --Flame Weakness (Elemental Catalyst)
+    [142652] = true, --Frost Weakness (Elemental Catalyst)
+    [142653] = true, --Shock Weakness (Elemental Catalyst)
+
     -- Dungeon Sets (Medium)
 
     [85607] = true, -- Strength of the Automaton (Automaton's)
@@ -2005,6 +2026,20 @@ LUIE.DebugAuras = {
     [133494] = true, -- Aegis Caller (Aegis Caller's)
 
     [133281] = true, -- Titanborn Strength (Titanborn's)
+
+    [141203] = true, -- Unleashed Terror (Unleashed)
+    [141204] = true, -- Unleashed Terror (Unleashed)
+    [141249] = true, -- Unleashed Terror Cooldown (Unleashed)
+
+    [142696] = true, -- Kraglen's Howl (Kraglen's)
+    [142687] = true, -- Kraglen's Howl (Kraglen's)
+    [142705] = true, -- Kraglen's Howl (Kraglen's)
+    [142775] = true, -- Heed the Call (Kraglen's)
+    [142817] = true, -- Kraglen's Howl (Kraglen's)
+    [142816] = true, -- Kraglen's Howl (Kraglen's)
+    [143536] = true, -- Synergy Bonus (Kraglen's)
+    [142780] = true, -- Heed the Call (Kraglen's)
+    [142713] = true, -- Kraglen CD (Kraglen's)
 
     -- Dungeon Sets (Heavy)
 
@@ -2124,6 +2159,15 @@ LUIE.DebugAuras = {
     [133430] = true, -- Grave Guardian (Grave Guardian's)
     [135554] = true, -- Grave Guardian (Grave Guardian's)
     [133451] = true, -- Grave Guardian (Grave Guardian's)
+
+    [141636] = true, -- Crimson Twilight (Crimson)
+    [141638] = true, -- Crimson Twilight (Crimson)
+    [141642] = true, -- Crimson Twilight (Crimson)
+    [141865] = true, -- Crimson Twilight (Crimson)
+    [145415] = true, -- Crimson Twilight (Crimson)
+
+    [142654] = true, -- Arkasis's Genius (Arkasis)
+    [142660] = true, -- Arkasis's Genius (Arkasis)
 
     -- Trial Sets (Hel Ra Citadel)
 

@@ -943,6 +943,7 @@ local strings = {
     SI_LUIE_SKILL_SET_MERIDIAS_BLESSED_ARMOR_TP =        "Dodging all incoming dodgeable attacks for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     -- Mythic Items
+    SI_LUIE_SKILL_SET_SNOW_TREADERS_TP =                 "Immune to Snare and Immobilization effects that can be cleansed, but you cannot Sprint.",
     SI_LUIE_SKILL_SET_BLOODLORDS_EMBRACE_TP =            "When your attacker blocks an attack from you, they restore |cFFFFFF1535|r Magicka.\n\nThis effect can occur every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_SET_THRASSIAN_STANGLERS_TP =           "• Increase Weapon and Spell Damage by |cFFFFFF150|r per stack.\n• Reduce Max Health by |cFFFFFF120|r per stack.\n• Reduce damage shield strength by |cFFFFFF1|r% per stack.\n\nStacks up to |cFFFFFF50|r times when you kill an enemy.",
 
@@ -1015,6 +1016,11 @@ local strings = {
     SI_LUIE_SET_WINTERS_RESPITE_TP =                     "You and allies in the |cFFFFFF8|r meter radius of healing frost restore Health every |cFFFFFF1|r second.",
     SI_LUIE_SET_HUNTERS_VENOM_TP =                       "You and any player opposed to your attacker within a |cFFFFFF6|r meter radius take Poison Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SET_SHEER_VENOM_TP =                         "Afflicted with Poison Damage every |cFFFFFF1|r seconds for |cFFFFFF<<1>>|r seconds.\n\nDeals up to |cFFFFFF100|r% more damage in proportion to your missing health under |cFFFFFF100|r%.",
+    SI_LUIE_SET_ELEMENTAL_CATALYST_TP =                  "Increase Critical Damage taken by |cFFFFFF3|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SET_CRIMSON_TWILIGHT_TP =                    "After |cFFFFFF<<1>>|r <<1[second/seconds]>>, violently siphon the mist of blood into your body, dealing Bleed Damage to enemies within |cFFFFFF8|r meters and healing you for |cFFFFFF100|r% of the damage done.",
+    SI_LUIE_SET_STONE_HUSK_DOT_TP =                      "Tethered for |cFFFFFF<<1>>|r <<1[second/seconds]>>. You and your allies touching the tether take physical damage every |cFFFFFF1|r second.\n\nEach time this effect deals damage your attacker gains a stack of Husk Drain.",
+    SI_LUIE_SET_STONE_HUSK_HUSK_DRAIN_TP =               "Gaining stacks each time the tether deals damage.\n\nWhen the tether ends, you consume the stacks and gain |cFFFFFF30|r Weapon Damage per stack consumed for |cFFFFFF5|r seconds.",
+    SI_LUEI_SET_STONE_HUSK_BUFF_TP =                     "Increase Weapon Damage by |cFFFFFF30|r per stack of Stone Husk consumed for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     -- Trial Sets
     SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP =            "Increase Weapon Critical by |cFFFFFF305|r for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF10|r times when you deal melee damage.\n\nThis effect can occur once every half second.",

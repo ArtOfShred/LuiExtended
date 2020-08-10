@@ -171,6 +171,7 @@ CrowdControl.aoePlayerSet = {
     [116920] = 1, -- Auroran's Thunder (Auroran's Thunder)
     [133494] = 1, -- Aegis Caller (Aegis Caller's)
     [137526] = 1, -- Hunter's Venom (Venomous)
+    [143077] = 1, -- Stone Husk (Stone Husk)
 
     -- Siege
     [104693] = 1, -- Meatbag Catapult

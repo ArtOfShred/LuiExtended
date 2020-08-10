@@ -499,7 +499,12 @@ LUIE.Data.Tooltips = {
     Set_Kjalnars_Nightmare                          = GetString(SI_LUIE_SKILL_KJALNARS_NIGHTMARE_TP),
     Set_Meridias_Blessed_Armor                      = GetString(SI_LUIE_SKILL_SET_MERIDIAS_BLESSED_ARMOR_TP),
 
+    Set_Stone_Husk_DOT                              = GetString(SI_LUIE_SET_STONE_HUSK_DOT_TP),
+    Set_Stone_Husk_Drain                            = GetString(SI_LUIE_SET_STONE_HUSK_HUSK_DRAIN_TP),
+    Set_Stone_Husk_Buff                             = GetString(SI_LUEI_SET_STONE_HUSK_BUFF_TP),
+
     -- Mythic Items
+    Set_Snow_Treaders                               = GetString(SI_LUIE_SKILL_SET_SNOW_TREADERS_TP),
     Set_Bloodlords_Embrace                          = GetString(SI_LUIE_SKILL_SET_BLOODLORDS_EMBRACE_TP),
     Set_Thrassian_Stranglers                        = GetString(SI_LUIE_SKILL_SET_THRASSIAN_STANGLERS_TP),
 
@@ -564,6 +569,8 @@ LUIE.Data.Tooltips = {
     Set_Winters_Respite                             = GetString(SI_LUIE_SET_WINTERS_RESPITE_TP),
     Set_Hunters_Venom                               = GetString(SI_LUIE_SET_HUNTERS_VENOM_TP),
     Set_Sheer_Venom                                 = GetString(SI_LUIE_SET_SHEER_VENOM_TP),
+    Set_Elemental_Catalyst                          = GetString(SI_LUIE_SET_ELEMENTAL_CATALYST_TP),
+    Set_Crimson_Twilight                            = GetString(SI_LUIE_SET_CRIMSON_TWILIGHT_TP),
 
     -- Trial Sets
     Set_Berserking_Warrior                          = GetString(SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP),
