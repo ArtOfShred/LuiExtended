@@ -598,7 +598,7 @@ Effects.EffectGroundDisplay = {
     -- Crafted Sets
     [75930] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds', name = Abilities.Set_Eternal_Hunt, buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 7 }, -- Daedric Mines (Eternal Hunt)
     [71671] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_light_attack.dds', buff = true, debuff = false, ground = false }, -- Morkuldin (Morkuldin)
-    [106784] = { name = Abilities.Set_Dust_Cloud, buff = false, debuff = false, ground = true }, -- Dustcloud (Adept Rider's)
+    [106784] = { icon = 'LuiExtended/media/icons/abilities/ability_set_adept_rider.dds', name = Abilities.Set_Dust_Cloud, buff = false, debuff = false, ground = true }, -- Dustcloud (Adept Rider's)
     [113181] = { icon = 'esoui/art/icons/mm_teaser.dds', buff = true, debuff = false, ground = false }, -- Grave-Stake Collector (Grave-Stake Collector)
     [121915] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_scorn.dds', name = Abilities.Set_Honors_Scorn, buff = false, debuff = false, ground = true }, -- Coldharbour's Favorite (Coldharbour's Favorite)
     [121912] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_love.dds', name = Abilities.Set_Honors_Love, buff = true, debuff = false, ground = false }, -- Coldharbour's Favorite (Coldharbour's Favorite)
@@ -4407,8 +4407,8 @@ Effects.EffectOverride = {
     [49236] = { icon = 'LuiExtended/media/icons/abilities/ability_set_whitestrake.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Whitestake's Retribution (Whitestrake's)
     [106776] = { forcedContainer = 'short', tooltip = Abilities.Set_Adept_Rider }, -- Major Evasion (Adept Rider's)
     [106790] = { forcedContainer = 'short', tooltip = Abilities.Set_Adept_Rider, groundLabel = true }, -- Major Evasion (Adept Rider's)
-    [106783] = { name = Abilities.Set_Dust_Cloud, groundLabel = true, tooltip = Tooltips.Generic_AOE_Physical, tooltipValue2 = 1 }, -- Dustcloud Damage (Adept Rider's)
-    [106784] = { name = Abilities.Set_Dust_Cloud, tooltip = Tooltips.Set_Adept_Rider }, -- Dustcloud (Adept Rider's)
+    [106783] = { icon = 'LuiExtended/media/icons/abilities/ability_set_adept_rider.dds', name = Abilities.Set_Dust_Cloud, groundLabel = true, tooltip = Tooltips.Generic_AOE_Physical, tooltipValue2 = 1 }, -- Dustcloud Damage (Adept Rider's)
+    [106784] = { icon = 'LuiExtended/media/icons/abilities/ability_set_adept_rider.dds', name = Abilities.Set_Dust_Cloud, tooltip = Tooltips.Set_Adept_Rider }, -- Dustcloud (Adept Rider's)
     [106804] = { name = Abilities.Set_Nocturnals_Favor, tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Nocturnal's Heal (Nocturnal's Favor)
     [106798] = { icon = 'esoui/art/icons/achievement_su_mainquest_2.dds', tooltip = Tooltips.Set_Sloads }, -- Sload's Semblance (Sload's)
     [113092] = { icon = 'esoui/art/icons/achievement_su_mainquest_2.dds', name = Abilities.Set_Sloads_Semblance }, -- Sload's Projectile (Sloads)
@@ -4418,7 +4418,7 @@ Effects.EffectOverride = {
     [113312] = { icon = 'esoui/art/icons/achievement_depthsofmalatar_killmonstersa.dds', name = Abilities.Set_Might_of_the_Lost_Legion, tooltip = Tooltips.Set_Might_of_the_Lost_Legion }, -- Empower (Might of the Lost Legion)
     [113306] = { tooltip = Abilities.Set_Naga_Shaman }, -- Minor Vitality (Naga Shaman)
     [113307] = { tooltip = Abilities.Set_Naga_Shaman }, -- Minor Mending (Naga Shaman)
-    [124303] = { icon = 'esoui/art/icons/achievement_els_lrgzone_groupboss4.dds', tooltip = Tooltips.Set_Senche_Rahts_Grit }, -- Senche-Raht's Grit (Senche-Raht's)
+    --[124303] = { icon = 'esoui/art/icons/achievement_els_lrgzone_groupboss4.dds', tooltip = Tooltips.Set_Senche_Rahts_Grit }, -- Senche-Raht's Grit (Senche-Raht's)
     [121915] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_scorn.dds', name = Abilities.Set_Honors_Scorn, tooltip = Tooltips.Set_Coldharbours_Favorite_Damage }, -- Coldharbour's Favorite (Coldharbour's Favorite)
     [121917] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_scorn.dds', tooltip = Tooltips.Generic_Magic, tooltipValue2 = 1 }, -- Honor's Scorn (Coldharbour's Favorite)
     [121912] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_love.dds', name = Abilities.Set_Honors_Love, tooltip = Tooltips.Set_Coldharbours_Favorite_Heal }, -- Coldharbour's Favorite (Coldharbour's Favorite)
@@ -5089,8 +5089,8 @@ Effects.EffectOverride = {
     [120021] = { tooltip = Tooltips.Skill_War_Horn_Dummy }, -- Aggressive Horn (Target Iron Atronach, Trial)
     [120013] = { tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Major Force (Target Iron Atronach, Trial)
     [120014] = { unbreakable = 1, tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Off Balance (Target Iron Atronach, Trial)
-    [120024] = { icon = 'LuiExtended/media/icons/abilities/ability_set_worm_cult.dds', tooltip = Tooltips.Generic_Increase_Magicka_Recovery_No_Dur, tooltipValue2 = 145 }, -- Worm's Raiment (Target Iron Atronach, Trial)
-    [120026] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hircine.dds', tooltip = Tooltips.Generic_Increase_Stamina_Recovery_No_Dur, tooltipValue2 = 145 }, -- Hircine's Veneer (Target Iron Atronach, Trial)
+    [120024] = { icon = 'LuiExtended/media/icons/abilities/ability_set_worm_cult.dds', tooltip = Tooltips.Set_Worms_Raiment_Dummy }, -- Worm's Raiment (Target Iron Atronach, Trial)
+    [120026] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hircine.dds', tooltip = Tooltips.Set_Hircines_Veneer_Dummy }, -- Hircine's Veneer (Target Iron Atronach, Trial)
     [120015] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds', name = Abilities.Skill_Major_Courage, tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Spell Power Cure (Target Iron Atronach, Trial)
     [121572] = { hide = true }, -- Spear Shards (Target Iron Atronach, Trial)
 
@@ -13548,7 +13548,7 @@ Effects.FakePlayerBuffs = {
     [83288] = { duration = 10000 }, -- Pirate Skeleton
     [83287] = { duration = 10000 }, -- Pirate Skeleton
     [97627] = { icon = 'esoui/art/icons/achievement_update11_dungeons_036.dds', name = Abilities.Set_Ironblood, duration = 10000, debuff = true, shiftId = 97626 }, -- Ironblood
-    [124303] = { duration = 3000 }, -- Senche-Raht's Grit (Senche-Raht's)
+    --[124303] = { duration = 3000 }, -- Senche-Raht's Grit (Senche-Raht's)
     [117082] = { duration = 0 }, -- Frozen Watcher (Frozen Watcher)
     [134930] = { duration = 0 }, -- Duneripper's Scales
     [135554] = { duration = 0 }, -- Grave Guardian (Grave Guardian's)
