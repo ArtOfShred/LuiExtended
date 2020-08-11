@@ -457,6 +457,9 @@ Effects.DebuffDisplayOverrideId = {
     [134336] = true, -- Stagger (Stone Giant)
     [98447] = true, -- Shackle Snare (Dragonknight Standard Synergy)
 
+    -- Sorcerer
+    [143808] = true, -- Crystal Weapon (Crystal Weapon)
+
     -- Templar
     [31562] = true, -- Supernova (Nova Synergy)
     [34443] = true, -- Gravity Crush (Solar Prison Synergy)
@@ -918,7 +921,6 @@ Effects.EffectCreateSkillAura = {
     [63015] = { consolidate = true, extendedDisplay = true, abilityId = 29556 }, -- Major Evasion --> Evasion
     [63019] = { consolidate = true, extendedDisplay = true, abilityId = 39195 }, -- Major Evasion --> Shuffle
     [63030] = { alwaysShow = true, abilityId = 39192 }, -- Major Evasion --> Elude
-    [63118] = { alwaysShow = true, abilityId = 28301 }, -- Immovable --> Crowd Control Immunity
 
     -- Fighters Guild
     [64509] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 999004 }, -- Major Savagery --> Expert Hunter
@@ -1169,7 +1171,7 @@ Effects.BarHighlightCheckOnFade = {
     -- Heavy Armor
     [126581] = { id1 = 63084, unitTag = "player" }, -- Unstoppable --> Major Resolve
     [126582] = { id1 = 63134, unitTag = "player" }, -- Immovable Brute --> Major Resolve
-    [63118] = { id1 = 63119, unitTag = "player" }, -- Immovable --> Major Resolve
+    [126583] = { id1 = 63119, unitTag = "player" }, -- Immovable --> Major Resolve
 
     -- Werewolf
     --[137156] = { id1 = 137157, unitTag = "player", id2 = 137156, id2Tag = "reticleover" }, -- Carnage
@@ -1297,7 +1299,6 @@ Effects.BarHighlightOverride = {
     ---------------------------
 
     -- Dark Magic
-    [46331] = { newId = 46332 }, -- Crystal Blast
     [24371] = { newId = 24559 }, -- Rune Prison
     [24578] = { newId = 24581 }, -- Rune Cage
     [24584] = { newId = 114903 }, -- Dark Exchange
@@ -1581,8 +1582,8 @@ Effects.BarHighlightOverride = {
     [39195] = { newId = 39196, noRemove = true }, -- Shuffle
     [39192] = { newId = 126958, showFakeAura = true }, -- Elude
     [29552] = { newId = 126581, noRemove = true }, -- Unstoppable
-    [39205] = { newId = 126582, showFakeAura = true }, -- Immovable Brute
-    [39197] = { newId = 63118, noRemove = true }, -- Immovable
+    [39205] = { newId = 126582, noRemove = true }, -- Immovable Brute
+    [39197] = { newId = 126583, noRemove = true }, -- Immovable
 
     ---------------------------
     -- Soul Magic -------------
@@ -2891,9 +2892,14 @@ Effects.EffectHideSCT = {
 
     [118014] = true, -- Mystic Siphon (Mystic Siphon)
     [121513] = true, -- Grave Grasp (Grave Grasp)
+    [143915] = true, -- Grave Grasp (Grave Grasp)
+    [143917] = true, -- Grave Grasp (Grave Grasp)
     [118309] = true, -- Ghostly Embrace (Ghostly Embrace)
     [118325] = true, -- Ghostly Embrace (Ghostly Embrace)
+    [143945] = true, -- Ghostly Embrace (Ghostly Embrace)
     [118354] = true, -- Empowering Grasp (Empowering Grasp)
+    [143948] = true, -- Empowering Grasp (Empowering Grasp)
+    [143949] = true, -- Empowering Grasp (Empowering Grasp)
     [123233] = true, -- Mortal Coil (Mortal Coil)
 
     ----------------------------
@@ -5394,15 +5400,15 @@ Effects.EffectOverride = {
     [36973] = { tooltip = Abilities.Skill_Reapers_Mark }, -- Major Berserk (Reaper's Mark)
 
     -- Grim Focus / Relentless Focus / Merciless Resolve
-    [61902] = { tooltip = Tooltips.Skill_Grim_Focus, tooltipValue2 = zo_strformat("<<C:1>>", GetAbilityName(61902)) }, -- Grim Focus (Grim Focus)
+    [61902] = { tooltip = Tooltips.Skill_Grim_Focus }, -- Grim Focus (Grim Focus)
     [61907] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Will (Grim Focus)
     [122585] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Will (Grim Focus)
     [61905] = { tooltip = Tooltips.Skill_Grim_Focus_Defense }, -- Grim Focus (Grim Focus)
-    [61927] = { tooltip = Tooltips.Skill_Relentless_Focus, tooltipValue2 = zo_strformat("<<C:1>>", GetAbilityName(61927)) }, -- Relentless Focus (Relentless Focus)
+    [61927] = { tooltip = Tooltips.Skill_Relentless_Focus }, -- Relentless Focus (Relentless Focus)
     [61932] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Scourge (Relentless Focus)
     [122587] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds', name = Abilities.Skill_Assassins_Scourge }, -- Assassin's Will (Relentless Focus)
     [61928] = { tooltip = Tooltips.Skill_Grim_Focus_Defense }, -- Relentless Focus (Relentless Focus)
-    [61919] = { tooltip = Tooltips.Skill_Grim_Focus, tooltipValue2 = zo_strformat("<<C:1>>", GetAbilityName(61919)) }, -- Merciless Resolve (Merciless Resolve)
+    [61919] = { tooltip = Tooltips.Skill_Merciless_Resolve }, -- Merciless Resolve (Merciless Resolve)
     [61930] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Will (Merciless Resolve)
     [122586] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Will (Merciless Resolve)
     [61920] = { tooltip = Tooltips.Skill_Grim_Focus_Defense }, -- Merciless Resolve (Merciless Resolve)
@@ -5458,7 +5464,6 @@ Effects.EffectOverride = {
 
     -- Summon Shade / Dark Shade / Shadow Image
     [65269] = { hide = true }, -- Shade Initialize (Summon Shade - All Morphs)
-    [85086] = { hide = true }, -- Boss (Summon Shade - All Morphs)
     [33219] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_corrode.dds' }, -- Corrosive Strike (Shade) (Summon Shade - Summon Shade/Dark Shade)
     [33228] = { tooltip = Abilities.Skill_Corrosive_Strike }, -- Minor Maim (Summon Shade)
     [38517] = { hide = true, tooltip = Tooltips.Skill_Summon_Shade }, -- Summon Shade (Summon Shade)
@@ -5563,8 +5568,8 @@ Effects.EffectOverride = {
     [31398] = { icon = 'esoui/art/icons/ability_sorcerer_054.dds' }, -- Rebate (Rebate - Rank 1)
     [45198] = { icon = 'esoui/art/icons/ability_sorcerer_054.dds' }, -- Rebate (Rebate - Rank 2)
 
-    [64860] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_rebate.dds' }, -- Rebate (Rebate - Rank 1)
-    [64861] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_rebate.dds' }, -- Rebate (Rebate - Rank 2)
+    [64849] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_rebate.dds' }, -- Rebate (Rebate - Rank 1)
+    [143500] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_rebate.dds' }, -- Rebate (Rebate - Rank 2)
 
     [31417] = { icon = 'esoui/art/icons/ability_sorcerer_056.dds' }, -- Daedric Protection (Daedric Protection - Rank 1)
     [45200] = { icon = 'esoui/art/icons/ability_sorcerer_056.dds' }, -- Daedric Protection (Daedric Protection - Rank 2)
@@ -5590,15 +5595,26 @@ Effects.EffectOverride = {
     -- SORCERER ACTIVES --------------------------------------------
     ----------------------------------------------------------------
 
-    -- Crystal Shard / Crystal Blast / Crystal Fragments
-    [46332] = { tooltip = Tooltips.Generic_Knockdown }, -- Crystal Blast (Crystal Blast)
+    -- Crystal Shard / Crystal Weapon / Crystal Fragments
+    [143744] = { tooltip = Tooltips.Skill_Crystal_Weaver }, -- Crystal Weaver (Crystal Shard)
+
+    [46331] = { tooltip = Tooltips.Skill_Crystal_Weapon }, -- Crystal Weapon (Crystal Weapon)
+    [143808] = { tooltip = Tooltips.Generic_Reduce_Physical_Spell_Resist_Value, tooltipValue2 = 1000 }, -- Crystal Weapon (Crystal Weapon)
+    [143806] = { tooltip = Tooltips.Skill_Crystal_Weaver }, -- Crystal Weaver (Crystal Weapon)
+
     [46327] = { name = Abilities.Skill_Crystal_Fragments, tooltip = Tooltips.Skill_Crystal_Fragments }, -- Crystal Fragments Proc (Crystal Fragments)
+    [143747] = { tooltip = Tooltips.Skill_Crystal_Weaver }, -- Crystal Weaver (Crystal Fragments)
 
     -- Encase / Shattering Prison / Restraining Prison
     [28025] = { tooltip = Tooltips.Generic_Immobilize }, -- Encase (Encase)
     [28308] = { tooltip = Tooltips.Skill_Shattering_Prison }, -- Shattering Prison (Shattering Prison)
     [28311] = { tooltip = Tooltips.Generic_Immobilize }, -- Restraining Prison (Restraining Prison)
     [108832] = { tooltip = Abilities.Skill_Restraining_Prison }, -- Major Vitality (Restraining Prison)
+
+    -- Encase  + Morphs Resource Restore
+    [143659] = { icon = 'esoui/art/icons/ability_sorcerer_cyclone.dds' }, -- Encase (Encase)
+    [143663] = { icon = 'esoui/art/icons/ability_sorcerer_twister.dds' }, -- Shattering Prison (Shattering Prison)
+    [143668] = { icon = 'esoui/art/icons/ability_sorcerer_crushing_winds.dds' }, -- Restraining Prison (Restraining Prison)
 
     -- Rune Prison / Rune Cage / Defensive Rune
     [24371] = { hide = true }, -- Rune Prison (Rune Prison)
@@ -5820,6 +5836,7 @@ Effects.EffectOverride = {
     [26795] = { tooltip = Abilities.Skill_Biting_Jabs }, -- Major Savagery (Biting Jabs)
     [76912] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Biting Jabs (Biting Jabs)
     [55183] = { icon = 'esoui/art/icons/ability_templar_reckless_attacks.dds', name = Abilities.Skill_Puncturing_Sweep }, -- Puncturing Sweep Heal (Puncturing Sweep)
+    [144127] = { icon = 'esoui/art/icons/ability_templar_reckless_attacks.dds', name = Abilities.Skill_Puncturing_Sweep }, -- Puncturing Sweep Heal (Puncturing Sweep)
     [76916] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Puncturing Sweep (Puncturing Sweep)
 
     -- Piercing Javelin / Aurora Javelin / Binding Javelin
@@ -5950,7 +5967,6 @@ Effects.EffectOverride = {
     [44013] = { icon = 'esoui/art/icons/ability_templar_cleansing_ritual.dds' }, -- Purify (Cleansing Ritual - Purify Synergy)
     [26286] = { name = Abilities.Skill_Cleansing_Ritual, groundLabel = true, tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 2 }, -- Healing Ritual (Cleansing Ritual)
     [80540] = { icon = 'esoui/art/icons/ability_templar_cleansing_ritual.dds', tooltip = Tooltips.Skill_Cleansing_Ritual }, -- Cleansing Ritual (Cleansing Ritual)
-    [26298] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 2 }, -- Ritual of Retribution (Ritual of Retribution)
     [80172] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 2 }, -- Ritual of Retribution (Ritual of Retribution)
     [80547] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds', tooltip = Tooltips.Skill_Ritual_of_Retribution }, -- Ritual of Retribution (Ritual of Retribution)
     [26303] = { icon = 'esoui/art/icons/ability_templar_extended_ritual.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 2 }, -- Extended Ritual (Extended Ritual)
@@ -6328,15 +6344,22 @@ Effects.EffectOverride = {
     [118411] = { tooltip = Tooltips.Generic_Fear }, -- Agony Totem (Agony Totem)
 
     -- Grave Grasp / Ghostly Embrace / Empowering Grasp
-    [121513] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 50 }, -- Grave Grasp (Grave Grasp)
+    [121513] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 30 }, -- Grave Grasp (Grave Grasp)
     [121517] = { tooltip = Abilities.Skill_Grave_Grasp }, -- Minor Maim (Grave Grasp)
-    [118309] = { icon = 'esoui/art/icons/ability_necromancer_009_b.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 50 }, -- Ghostly Embrace (Ghostly Embrace)
+    [143915] = { icon = 'esoui/art/icons/ability_necromancer_009.dds', tooltip = Tooltips.Generic_Immobilize }, -- Grave Grasp (Grave Grasp)
+    [143917] = { icon = 'esoui/art/icons/ability_necromancer_009.dds', tooltip = Tooltips.Generic_Stun }, -- Grave Grasp (Grave Grasp)
+
+    [118309] = { icon = 'esoui/art/icons/ability_necromancer_009_b.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 30 }, -- Ghostly Embrace (Ghostly Embrace)
     [118313] = { tooltip = Abilities.Skill_Ghostly_Embrace }, -- Minor Maim (Ghostly Embrace)
     [118325] = { icon = 'esoui/art/icons/ability_necromancer_009_b.dds', tooltip = Tooltips.Generic_Immobilize }, -- Ghostly Embrace (Ghostly Embrace)
-    [118366] = { tooltip = Abilities.Skill_Empowering_Grasp }, -- Empower (Empowering Grasp)
-    [118369] = { icon = 'esoui/art/icons/ability_necromancer_009_a.dds', tooltip = Tooltips.Skill_Empowering_Grasp }, -- Empowering Grasp (Empowering Grasp)
-    [118354] = { icon = 'esoui/art/icons/ability_necromancer_009_a.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 50 }, -- Empowering Grasp (Empowering Grasp)
+    [143945] = { icon = 'esoui/art/icons/ability_necromancer_009_b.dds', tooltip = Tooltips.Generic_Stun }, -- Ghostly Embrace (Ghostly Embrace)
+
+    [118366] = { icon = 'esoui/art/icons/ability_necromancer_009_a.dds', name = Abilities.Skill_Empowering_Grasp, tooltip = Tooltips.Set_Might_of_the_Lost_Legion }, -- Empower (Empowering Grasp)
+    [118369] = { icon = 'esoui/art/icons/ability_necromancer_009_a.dds', hide = true}, -- Empowering Grasp (Empowering Grasp)
+    [118354] = { icon = 'esoui/art/icons/ability_necromancer_009_a.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 30 }, -- Empowering Grasp (Empowering Grasp)
     [118358] = { tooltip = Abilities.Skill_Empowering_Grasp }, -- Minor Maim (Empowering Grasp)
+    [143948] = { tooltip = Tooltips.Generic_Immobilize }, -- Empowering Grasp (Empowering Grasp)
+    [143949] = { tooltip = Tooltips.Generic_Stun }, -- Empowering Grasp (Empowering Grasp)
 
     -- Bone Goliath Transformation / Pummeling Goliath / Ravenous Goliath
     [115001] = { tooltip = Tooltips.Skill_Bone_Goliath_Transformation }, -- Bone Goliath Transformation (Bone Goliath Transformation)
@@ -6874,17 +6897,14 @@ Effects.EffectOverride = {
     [126957] = {  tooltip = Abilities.Skill_Elude }, -- Major Expedition (Elude)
 
     -- HEAVY ARMOR
-    [29552] = { hide = true }, -- Unstoppable (Unstoppable)
     [63084] = { tooltip = Abilities.Skill_Unstoppable }, -- Major Resolve (Unstoppable)
     [126581] = { icon = 'esoui/art/icons/ability_armor_001.dds', tooltip = Tooltips.Skill_Unstoppable }, -- Unstoppable (Unstoppable)
 
-    [39205] = { hide = true }, -- Unstoppable Brute (Unstoppable Brute)
     [63134] = { tooltip = Abilities.Skill_Unstoppable_Brute }, -- Major Resolve (Unstoppable Brute)
-    [126582] = { icon = 'esoui/art/icons/ability_armor_001_a.dds', tooltip = Tooltips.Skill_Unstoppable_Brute }, -- Unstoppable Brute (Unstoppable Brute)
+    [126582] = { icon = 'esoui/art/icons/ability_armor_001_a.dds', name = Abilities.Skill_Unstoppable_Brute, tooltip = Tooltips.Skill_Unstoppable_Brute }, -- Unstoppable Brute (Unstoppable Brute)
 
-    [39197] = { hide = true }, -- Immovable (Immovable)
     [63119] = { tooltip = Abilities.Skill_Immovable }, -- Major Resolve (Immovable)
-    [63118] = { tooltip = Tooltips.Skill_Immovable }, -- Immovable (Immovable)
+    [126583] = { tooltip = Tooltips.Skill_Immovable }, -- Immovable (Immovable)
 
     ----------------------------------------------------------------
     -- SOUL MAGIC PASSIVES -----------------------------------------
@@ -6958,6 +6978,9 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
     -- VAMPIRE ACTIVES --------------------------------------------
     ----------------------------------------------------------------
+
+    -- Blood for Blood
+    [145002] = { icon = 'esoui/art/icons/ability_u26_vampire_01_a.dds', tooltip = Tooltips.Skill_Blood_for_Blood, unbreakable = 1 }, -- Blood for Blood (Blood for Blood)
 
     -- Blood Frenzy/Simmering Frenzy/Sated Fury
     [132141] = { forcedContainer = 'short', tooltip = Tooltips.Skill_Blood_Frenzy }, -- Blood Frenzy (Blood Frenzy)
@@ -13564,14 +13587,14 @@ Effects.FakePlayerBuffs = {
     [92168] = { duration = "GET" }, -- Crystalized Slab (Crystallized Slab)
     [92170] = { duration = "GET" }, -- Shimmering Shield (Shimmering Shield)
 
-    -- Armor
-    [126582] = { duration = 6000 }, -- Unstoppable Brute (Unstoppable Brute)
-
     -- Mages Guild
     [40449] = { duration = "GET" }, -- Spell Symmetry (Spell Symmetry)
 
     -- Psijic Order
     [122260] = { duration = "GET" }, -- Race Against Time (Race Against Time)
+
+    -- Vampire
+    [145002] = { duration = 5000, debuff = true }, -- Blood for Blood (Blood for Blood)
 
     -- Seasonal Quests (New Life Festival)
     --[84125] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = Abilities.Skill_Lava_Foot_Stomp, duration = 10000}, -- Breton Male Dance (Lava Foot Stomp)
@@ -13820,7 +13843,6 @@ Effects.AddGroundDamageAura = {
     [26879] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Blazing Spear
 
     [26286] = { duration = 2100, type = BUFF_EFFECT_TYPE_BUFF }, -- Healing Ritual (Cleansing Ritual)
-    [26298] = { duration = 2100, type = BUFF_EFFECT_TYPE_BUFF }, -- Ritual of Retribution
     [80172] = { duration = 2100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Ritual of Retribution
     [26303] = { duration = 2100, type = BUFF_EFFECT_TYPE_BUFF }, -- Extended Ritual
 

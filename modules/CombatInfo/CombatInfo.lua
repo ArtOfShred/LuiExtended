@@ -1428,7 +1428,12 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
         end
 
         -- Ignore fading event if override is true
-        if g_barNoRemove[abilityId] then return end
+        if g_barNoRemove[abilityId] then
+            if Effects.BarHighlightCheckOnFade[abilityId] then
+                CombatInfo.BarHighlightSwap(abilityId)
+            end
+            return
+        end
 
         -- Stop any proc animation associated with this effect
         if g_triggeredSlotsRemain[abilityId] then
@@ -2172,7 +2177,12 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
         end
     elseif result == ACTION_RESULT_EFFECT_FADED then
         -- Ignore fading event if override is true
-        if g_barNoRemove[abilityId] then return end
+        if g_barNoRemove[abilityId] then
+            if Effects.BarHighlightCheckOnFade[abilityId] then
+                CombatInfo.BarHighlightSwap(abilityId)
+            end
+            return
+        end
 
         if g_toggledSlotsRemain[abilityId] then
             if g_toggledSlotsFront[abilityId] and g_uiCustomToggle[g_toggledSlotsFront[abilityId]] then

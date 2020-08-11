@@ -2031,7 +2031,7 @@ LUIE.DebugAuras = {
     [141204] = true, -- Unleashed Terror (Unleashed)
     [141249] = true, -- Unleashed Terror Cooldown (Unleashed)
 
-    [142696] = true, -- Kraglen's Howl (Kraglen's)
+    [142686] = true, -- Kraglen's Howl (Kraglen's)
     [142687] = true, -- Kraglen's Howl (Kraglen's)
     [142705] = true, -- Kraglen's Howl (Kraglen's)
     [142775] = true, -- Heed the Call (Kraglen's)
@@ -3758,9 +3758,9 @@ LUIE.DebugAuras = {
 
     -- Daedric Summoning
     [31398] = true, -- Rebate (Rank 1)
-    [64860] = true, -- Rebate
     [45198] = true, -- Rebate (Rank 2)
-    [64861] = true, -- Rebate
+    [64849] = true, -- Rebate
+    [143500] = true, -- Rebate
     [31396] = true, -- Power Stone (Rank 1)
     [45196] = true, -- Power Stone (Rank 2)
     [31417] = true, -- Daedric Protection (Rank 1)
@@ -3785,26 +3785,31 @@ LUIE.DebugAuras = {
     -------------------------------------
 
     [43714] = true, -- Crystal Shard (Crystal Shard)
+    [143744] = true, -- Crystal Weaver (Crystal Shard)
 
-    [46331] = true, -- Crystal Blast (Crystal Blast)
-    [46332] = true, -- Crystal Blast (Crystal Blast)
-    [46333] = true, -- Crystal Blast (Crystal Blast)
+    [46331] = true, -- Crystal Weapon (Crystal Weapon)
+    [143804] = true, -- Crystal Weapon (Crystal Weapon)
+    [143808] = true, -- Crystal Weapon (Crystal Weapon)
+    [143806] = true, -- Crystal Weaver (Crystal Weapon)
 
     [46326] = true, -- Crystal Fragments Passive (Crystal Fragments)
     [46324] = true, -- Crystal Fragments (Crystal Fragments)
     [46327] = true, -- Crystal Fragments Proc (Crystal Fragments)
     [114716] = true, -- Crystal Fragments (Crystal Fragments)
+    [143747] = true, -- Crystal Weaver (Crystal Fragments)
 
     [28025] = true, -- Encase (Encase)
     [43759] = true, -- Encase (Encase)
     [43761] = true, -- Encase (Encase)
     [43760] = true, -- Encase (Encase)
+    [143659] = true, -- Encase (Encase)
 
     [28308] = true, -- Shattering Prison (Shattering Prison)
     [43781] = true, -- Encase (Shattering Prison)
     [43782] = true, -- Encase (Shattering Prison)
     [43780] = true, -- Encase (Shattering Prison)
     [28309] = true, -- Shattering Prison (Shattering Prison)
+    [143663] = true, -- Shattering Prison (Shattering Prison)
 
     [28311] = true, -- Restraining Prison (Restraining Prison)
     [43793] = true, -- Encase (Restraining Prison)
@@ -3812,6 +3817,7 @@ LUIE.DebugAuras = {
     [43792] = true, -- Encase (Restraining Prison)
     [108833] = true, -- Restraining Stack Count (Restraining Prison)
     [108832] = true, -- Major Vitality (Restraining Prison)
+    [143668] = true, -- Restraining Prison (Restraining Prison)
 
     [24371] = true, -- Rune Prison (Rune Prison)
     [24559] = true, -- Rune Prison (Rune Prison)
@@ -4170,9 +4176,11 @@ LUIE.DebugAuras = {
     [44721] = true, -- Spear Wall (Rank 2)
     [114841] = true, -- Minor Protetion (Spear Wall)
     [31718] = true, -- Burning Light (Rank 1)
+    [144021] = true, -- Burning Light
     [31720] = true, -- Burning Light
     [80153] = true, -- Burning Light
     [44730] = true, -- Burning Light (Rank 2)
+    [144028] = true, -- Burning Light
     [44731] = true, -- Burning Light
     [80170] = true, -- Burning Light
     [31565] = true, -- Balanced Warrior (Rank 1)
@@ -4227,10 +4235,9 @@ LUIE.DebugAuras = {
     [44432] = true, -- Biting Jabs (Biting Jabs)
     [76912] = true, -- Biting Jabs (Biting Jabs)
 
-    [55219] = true, -- Puncturing Sweeps (Puncturing Sweep)
     [26797] = true, -- Puncturing Sweep (Puncturing Sweep)
-    [103310] = true, -- Puncturing Sweep (Puncturing Sweep)
-    [55183] = true, -- Puncturing Sweep Healing (Puncturing Sweep)
+    --[55183] = true, -- Puncturing Sweep Healing (Puncturing Sweep)
+    [144127] = true, -- Puncturing Sweep Healing (Puncturing Sweep)
     [26799] = true, -- Puncturing Sweep (Puncturing Sweep)
     [44436] = true, -- Puncturing Sweep (Puncturing Sweep)
     [76916] = true, -- Puncturing Sweep (Puncturing Sweep)
@@ -4508,7 +4515,7 @@ LUIE.DebugAuras = {
     [26295] = true, -- Purify (Cleansing Ritual)
 
     [22259] = true, -- Ritual of Retribution (Ritual of Retribution)
-    [26298] = true, -- Ritual of Retribution (Ritual of Retribution)
+    [143432] = true, -- Ritual of Retribution (Ritual of Retribution)
     [80172] = true, -- Ritual of Retribution (Ritual of Retribution)
     [26299] = true, -- Ritual of Retribution (Ritual of Retribution)
     [26301] = true, -- Ritual of Retribution (Ritual of Retribution)
@@ -5223,6 +5230,10 @@ LUIE.DebugAuras = {
     [121518] = true, -- Grave Grasp (Grave Grasp)
     [121513] = true, -- Grave Grasp (Grave Grasp)
     [121517] = true, -- Minor Maim (Grave Grasp)
+    [143916] = true, -- Grave Grasp (Grave Grasp)
+    [143915] = true, -- Grave Grasp (Grave Grasp)
+    [143918] = true, -- Grave Grasp (Grave Grasp)
+    [143917] = true, -- Grave Grasp (Grave Grasp)
 
     [118308] = true, -- Ghostly Embrace (Ghostly Embrace)
     [118311] = true, -- Ghostly Embrace (Ghostly Embrace)
@@ -5231,7 +5242,10 @@ LUIE.DebugAuras = {
     [118314] = true, -- Ghostly Embrace (Ghostly Embrace)
     [118309] = true, -- Ghostly Embrace (Ghostly Embrace)
     [118313] = true, -- Minor Maim (Ghostly Embrace)
+    [143944] = true, -- Ghostly Embrace (Ghostly Embrace)
     [118325] = true, -- Ghostly Embrace (Ghostly Embrace)
+    [143946] = true, -- Ghostly Embrace (Ghostly Embrace)
+    [143945] = true, -- Ghostly Embrace (Ghostly Embrace)
 
     [118352] = true, -- Empowering Grasp (Empowering Grasp)
     [118356] = true, -- Empowering Grasp (Empowering Grasp)
@@ -5243,6 +5257,10 @@ LUIE.DebugAuras = {
     [124816] = true, -- Empowering Grasp (Empowering Grasp)
     [118354] = true, -- Empowering Grasp (Empowering Grasp)
     [118358] = true, -- Minor Maim (Empowering Grasp)
+    [143950] = true, -- Empowering Grasp (Empowering Grasp)
+    [143948] = true, -- Empowering Grasp (Empowering Grasp)
+    [143951] = true, -- Empowering Grasp (Empowering Grasp)
+    [143949] = true, -- Empowering Grasp (Empowering Grasp)
 
     [118802] = true, -- Bone Goliath Transform Setup (Bone Goliath Transformation - All Morphs)
     [123228] = true, -- De-Bone (Bone Goliath Transformation - All Morphs)
@@ -5815,7 +5833,7 @@ LUIE.DebugAuras = {
 
     [85257] = true, -- Toxic Barrage (Toxic Barrage)
     [85260] = true, -- Toxic Barrage (Toxic Barrage)
-    [85261] = true, -- Toxic Barrage (Toxic Barrage)
+    --[85261] = true, -- Toxic Barrage (Toxic Barrage)
 
     [85451] = true, -- Ballista (Ballista)
     [85458] = true, -- Ballista (Ballista)
@@ -6395,6 +6413,7 @@ LUIE.DebugAuras = {
     [32893] = true, -- Eviscerate (Eviscerate)
 
     [38949] = true, -- Blood for Blood
+    [145002] = true, -- Blood for Blood
 
     [38956] = true, -- Arterial Burst
     [81491] = true, -- Arterial Burst
@@ -6553,7 +6572,6 @@ LUIE.DebugAuras = {
 
     [39105] = true, -- Brutal Pounce (Brutal Pounce)
     [39109] = true, -- Brutal Pounce (Brutal Pounce)
-    [61369] = true, -- Brutal Pounce (Brutal Pounce)
     [137186] = true, -- Brutal Carnage (Brutal Pounce)
     [137184] = true, -- Brutal Carnage (Brutal Pounce)
     [137189] = true, -- Brutal Carnage (Brutal Pounce)

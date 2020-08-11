@@ -625,7 +625,6 @@ CastBarTable.IsCast = {
 
     -- Sorcerer
     [43714] = true, -- Crystal Shard (Sorcerer)
-    [46331] = true, -- Crystal Blast (Sorcerer)
     [46324] = true, -- Crystal Fragments (Sorcerer)
     [24584] = true, -- Dark Exchange (Sorcerer)
     [24595] = true, -- Dark Deal (Sorcerer)
@@ -641,6 +640,9 @@ CastBarTable.IsCast = {
     [26114] = true, -- Puncturing Strikes (Templar)
     [26792] = true, -- Biting Jabs (Templar)
     [26797] = true, -- Puncturing Sweep (Templar)
+    [22138] = true, -- Radial Sweep (Templar)
+    [22144] = true, -- Empowering Sweep (Templar)
+    [22139] = true, -- Crescent Sweep (Templar)
     [22057] = true, -- Solar Flare (Templar)
     [22110] = true, -- Dark Flare (Templar)
     [63029] = true, -- Radiant Destruction (Templar)

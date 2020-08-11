@@ -30,7 +30,7 @@ local AbilityTables = {
     Skill_Major_Berserk               = 36973,
     Skill_Minor_Force                 = 68595,
     Skill_Major_Force                 = 85154,
-    Skill_Minor_Vitality              = 34837,
+    Skill_Minor_Vitality              = 64080,
     Skill_Major_Vitality              = 42197,
     Skill_Minor_Mending               = 29096,
     Skill_Major_Mending               = 55033,
@@ -688,6 +688,7 @@ local AbilityTables = {
     Skill_Render_Flesh                = 114196,
     Skill_Resistant_Flesh             = 117883,
     Skill_Blood_Sacrifice             = 117888,
+    Skill_Empowering_Grasp            = 118352,
 
     -- ---------------------------------------------------
     -- WEAPON SKILLS -------------------------------------
