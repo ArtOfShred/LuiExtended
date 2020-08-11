@@ -12,19 +12,31 @@ local strings = {
     ----------------------------------------------------------------
 
     -- Mundus Stones
-    SI_LUIE_SKILL_MUNDUS_BASIC_LADY =                    "Erhöht Eure physische Resistenz und Magieresistenz um |cFFFFFF2752|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_LOVER =                   "Erhöht Euren Rüstungsdurchstoß und die Magiedurchdringung um |cFFFFFF2752|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_LORD =                    "Erhöht Euer maximales Leben um |cFFFFFF2230|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_MAGE =                    "Erhöht Eure maximale Magicka um |cFFFFFF2028|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_TOWER =                   "Erhöht Eure maximale Ausdauer um |cFFFFFF2028|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_ATRONACH =                "Erhöht Eure Magickaregeneration um |cFFFFFF238|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_SERPENT =                 "Erhöht Eure Ausdauerregeneration um |cFFFFFF238|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_SHADOW =                  "Erhöht Euren kritischen Schaden um |cFFFFFF9|r%.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_RITUAL =                  "Erhöht Eure gewirkte Heilung um |cFFFFFF10|r%.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_THIEF =                   "Erhöht Eure Wertung für kritische Magie- und Waffentreffer um |cFFFFFF1533|r.",
+    -- TODO: Translations need syntax updated (en strings changed as follows):
+        -- "Increases your" --> "Increase"
+        -- "Spell and Physical" --> "Physical and Spell"
+        -- "Critical Strike ratings" --> "Critical"
+    SI_LUIE_SKILL_MUNDUS_BASIC_LADY =                    "Erhöht Eure physische Resistenz und Magieresistenz um |cFFFFFF2744|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_LOVER =                   "Erhöht Euren Rüstungsdurchstoß und die Magiedurchdringung um |cFFFFFF2744|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_LORD =                    "Erhöht Euer maximales Leben um |cFFFFFF2225|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_MAGE =                    "Erhöht Eure maximale Magicka um |cFFFFFF2023|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_TOWER =                   "Erhöht Eure maximale Ausdauer um |cFFFFFF2023|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_ATRONACH =                "Erhöht Eure Magickaregeneration um |cFFFFFF310|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_SERPENT =                 "Erhöht Eure Ausdauerregeneration um |cFFFFFF310|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_SHADOW =                  "Erhöht Euren kritischen Schaden um |cFFFFFF11|r%.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_RITUAL =                  "Erhöht Eure gewirkte Heilung um |cFFFFFF8|r%.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_THIEF =                   "Erhöht Eure Wertung für kritische Magie- und Waffentreffer um |cFFFFFF1537|r.",
     SI_LUIE_SKILL_MUNDUS_BASIC_WARRIOR =                 "Erhöht Eure Waffenkraft um |cFFFFFF238|r.",
     SI_LUIE_SKILL_MUNDUS_BASIC_APPRENTICE =              "Erhöht Eure Magiekraft um |cFFFFFF238|r.",
     SI_LUIE_SKILL_MUNDUS_BASIC_STEED =                   "Erhöht Euer Lauftempo um |cFFFFFF10|r% und Eure Lebensregeneration um |cFFFFFF238|r.",
+
+    -- Mundus Substitute strings for scaled default tooltips
+    -- TODO: Needs translated, strings must be an exact match with default tooltip
+    SI_LUIE_SKILL_MUNDUS_SUB_THIEF =                     "Critical Strike ratings",
+    SI_LUIE_SKILL_MUNDUS_SUB_THIEF_REPLACE =             "Critical",
+    SI_LUIE_SKILL_MUNDUS_SUB_RES_PEN =                   "Spell and Physical",
+    SI_LUIE_SKILL_MUNDUS_SUB_RES_PEN_REPLACE =           "Physical and Spell",
+    SI_LUIE_SKILL_MUNDUS_STRING =                        "Increases your",
 
     -- Player Innate
     SI_LUIE_SKILL_RECALL_PENALTY =                       "Rückrufstrafe",

@@ -12,19 +12,31 @@ local strings = {
     ----------------------------------------------------------------
 
     -- Mundus Stones
-    SI_LUIE_SKILL_MUNDUS_BASIC_LADY =                    "Повышает ваши магическую и физическую сопротивляемости на |cFFFFFF2752|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_LOVER =                   "Повышает ваши магическую и физическую проникновение на |cFFFFFF2752|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_LORD =                    "Повышает ваш макс.запас Здоровья на |cFFFFFF2230|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_MAGE =                    "Повышает ваш макс.запас Магии на |cFFFFFF2028|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_TOWER =                   "Повышает ваш макс. Запас сил на |cFFFFFF2028|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_ATRONACH =                "Повышает ваше восстановление Магии на |cFFFFFF238|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_SERPENT =                 "Повышает ваше восстановление Запаса сил на |cFFFFFF238|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_SHADOW =                  "Повышает ваш критический урон на |cFFFFFF9|r%.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_RITUAL =                  "Повышает наносимое вами исцеление на |cFFFFFF10|r%.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_THIEF =                   "Повышает ваш рейтинг критического удара Оружием и Заклинаниями на |cFFFFFF1533|r.",
+    -- TODO: Translations need syntax updated (en strings changed as follows):
+        -- "Increases your" --> "Increase"
+        -- "Spell and Physical" --> "Physical and Spell"
+        -- "Critical Strike ratings" --> "Critical"
+    SI_LUIE_SKILL_MUNDUS_BASIC_LADY =                    "Повышает ваши магическую и физическую сопротивляемости на |cFFFFFF2744|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_LOVER =                   "Повышает ваши магическую и физическую проникновение на |cFFFFFF2744|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_LORD =                    "Повышает ваш макс.запас Здоровья на |cFFFFFF2225|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_MAGE =                    "Повышает ваш макс.запас Магии на |cFFFFFF2023|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_TOWER =                   "Повышает ваш макс. Запас сил на |cFFFFFF2023|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_ATRONACH =                "Повышает ваше восстановление Магии на |cFFFFFF310|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_SERPENT =                 "Повышает ваше восстановление Запаса сил на |cFFFFFF310|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_SHADOW =                  "Повышает ваш критический урон на |cFFFFFF11|r%.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_RITUAL =                  "Повышает наносимое вами исцеление на |cFFFFFF8|r%.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_THIEF =                   "Повышает ваш рейтинг критического удара Оружием и Заклинаниями на |cFFFFFF1537|r.",
     SI_LUIE_SKILL_MUNDUS_BASIC_WARRIOR =                 "Повышает ваш урон от Оружия на |cFFFFFF238|r.",
     SI_LUIE_SKILL_MUNDUS_BASIC_APPRENTICE =              "Повышает ваш урон от Заклинаний на |cFFFFFF238|r.",
     SI_LUIE_SKILL_MUNDUS_BASIC_STEED =                   "Повышает вашу скорость передвижения на |cFFFFFF10|r% и восстановление Здоровья на |cFFFFFF238|r.",
+
+    -- Mundus Substitute strings for scaled default tooltips
+    -- TODO: Needs translated, strings must be an exact match with default tooltip
+    SI_LUIE_SKILL_MUNDUS_SUB_THIEF =                     "Critical Strike ratings",
+    SI_LUIE_SKILL_MUNDUS_SUB_THIEF_REPLACE =             "Critical",
+    SI_LUIE_SKILL_MUNDUS_SUB_RES_PEN =                   "Spell and Physical",
+    SI_LUIE_SKILL_MUNDUS_SUB_RES_PEN_REPLACE =           "Physical and Spell",
+    SI_LUIE_SKILL_MUNDUS_STRING =                        "Increases your",
 
     -- Player Innate
     SI_LUIE_SKILL_RECALL_PENALTY =                       "Штраф перемещения",

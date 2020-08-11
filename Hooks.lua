@@ -398,6 +398,7 @@ function LUIE.InitializeHooks()
                         if LUIE.Data.Effects.TooltipUseDefault[abilityId] then
                             if GetAbilityEffectDescription(buffSlot) ~= "" then
                                 tooltipText = GetAbilityEffectDescription(buffSlot)
+                                tooltipText = LUIE.UpdateMundusTooltipSyntax(abilityId, tooltipText)
                             end
                         end
 
@@ -529,6 +530,7 @@ function LUIE.InitializeHooks()
                     if LUIE.Data.Effects.TooltipUseDefault[abilityId] then
                         if GetAbilityEffectDescription(buffSlot) ~= "" then
                             tooltipText = GetAbilityEffectDescription(buffSlot)
+                            tooltipText = LUIE.UpdateMundusTooltipSyntax(abilityId, tooltipText)
                         end
                     end
 

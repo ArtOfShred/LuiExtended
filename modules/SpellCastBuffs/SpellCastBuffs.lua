@@ -1294,6 +1294,7 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
         if Effects.TooltipUseDefault[control.effectId] then
             if GetAbilityEffectDescription(control.buffSlot) ~= "" then
                 tooltipText = GetAbilityEffectDescription(control.buffSlot)
+                tooltipText = LUIE.UpdateMundusTooltipSyntax(control.effectId, tooltipText)
             end
         end
 

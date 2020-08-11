@@ -12,19 +12,26 @@ local strings = {
     ----------------------------------------------------------------
 
     -- Mundus Stones
-    SI_LUIE_SKILL_MUNDUS_BASIC_LADY =                    "Increases your Spell and Physical Resistance by |cFFFFFF2752|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_LOVER =                   "Increases your Spell and Physical Penetration by |cFFFFFF2752|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_LORD =                    "Increases your Maximum Health by |cFFFFFF2230|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_MAGE =                    "Increases your Maximum Magicka by |cFFFFFF2028|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_TOWER =                   "Increases your Maximum Stamina by |cFFFFFF2028|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_ATRONACH =                "Increases your Magicka Recovery by |cFFFFFF238|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_SERPENT =                 "Increases your Stamina Recovery by |cFFFFFF238|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_SHADOW =                  "Increases your Critical Damage by |cFFFFFF9|r%.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_RITUAL =                  "Increases your healing done by |cFFFFFF10|r%.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_THIEF =                   "Increases your Weapon and Spell Critical Strike ratings by |cFFFFFF1533|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_WARRIOR =                 "Increases your Weapon Damage by |cFFFFFF238|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_APPRENTICE =              "Increases your Spell Damage by |cFFFFFF238|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_STEED =                   "Increases your Movement Speed by |cFFFFFF10|r% and Health Recovery by |cFFFFFF238|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_LADY =                    "Increases Physical and Spell Resistance by |cFFFFFF2744|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_LOVER =                   "Increases Physical and Spell Penetration by |cFFFFFF2744|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_LORD =                    "Increase Maximum Health by |cFFFFFF2225|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_MAGE =                    "Increase Maximum Magicka by |cFFFFFF2023|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_TOWER =                   "Increase Maximum Stamina by |cFFFFFF2023|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_ATRONACH =                "Increase Magicka Recovery by |cFFFFFF310|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_SERPENT =                 "Increase Stamina Recovery by |cFFFFFF310|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_SHADOW =                  "Increase Critical Damage by |cFFFFFF11|r%.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_RITUAL =                  "Increase healing done by |cFFFFFF8|r%.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_THIEF =                   "Increase Weapon and Spell Critical by |cFFFFFF1537|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_WARRIOR =                 "Increase Weapon Damage by |cFFFFFF238|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_APPRENTICE =              "Increase Spell Damage by |cFFFFFF238|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_STEED =                   "Increase Movement Speed by |cFFFFFF10|r% and Health Recovery by |cFFFFFF238|r.",
+
+    -- Mundus Substitute strings for scaled default tooltips
+    SI_LUIE_SKILL_MUNDUS_SUB_THIEF =                     "Critical Strike ratings",
+    SI_LUIE_SKILL_MUNDUS_SUB_THIEF_REPLACE =             "Critical",
+    SI_LUIE_SKILL_MUNDUS_SUB_RES_PEN =                   "Spell and Physical",
+    SI_LUIE_SKILL_MUNDUS_SUB_RES_PEN_REPLACE =           "Physical and Spell",
+    SI_LUIE_SKILL_MUNDUS_STRING =                        "Increases your",
 
     -- Player Innate
     SI_LUIE_SKILL_RECALL_PENALTY =                       "Recall Penalty",

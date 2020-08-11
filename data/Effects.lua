@@ -1185,7 +1185,7 @@ Effects.BarHighlightCheckOnFade = {
     [48141] = { id1 = 80160, unitTag = "player" }, -- Balance --> Major Resolve
 
     -- Psijic Order
-    [122260] = { id1 = 103712, id2 = 103711, unitTag = "player" }, -- Race Against Time --> Minor Force / Minor Expedition
+    [103711] = { id1 = 103712, unitTag = "player" }, -- Race Against Time --> Minor Force
 
     -- Support
     [40237] = { id1 = 40238, unitTag = "player" }, -- Reviving Barrier --> Reviving Barrier Heal
@@ -1660,7 +1660,7 @@ Effects.BarHighlightOverride = {
     [104059] = { newId = 104078 }, -- Borrowed Time
     [103503] = { newId = 103521, noRemove = true }, -- Accelerate --> Minor Force
     [103706] = { newId = 103708, noRemove = true }, -- Channeled Acceleration --> Minor Force
-    [103710] = { newId = 122260, showFakeAura = true, noRemove = true }, -- Race Against Time
+    [103710] = { newId = 103711, noRemove = true }, -- Race Against Time
     [103543] = { hide = true }, -- Mend Wounds
     [103747] = { hide = true }, -- Mend Spirit
     [103755] = { hide = true }, -- Symbiosis
