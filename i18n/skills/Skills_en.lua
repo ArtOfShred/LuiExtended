@@ -12,8 +12,8 @@ local strings = {
     ----------------------------------------------------------------
 
     -- Mundus Stones
-    SI_LUIE_SKILL_MUNDUS_BASIC_LADY =                    "Increases Physical and Spell Resistance by |cFFFFFF2744|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_LOVER =                   "Increases Physical and Spell Penetration by |cFFFFFF2744|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_LADY =                    "Increase Physical and Spell Resistance by |cFFFFFF2744|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_LOVER =                   "Increase Physical and Spell Penetration by |cFFFFFF2744|r.",
     SI_LUIE_SKILL_MUNDUS_BASIC_LORD =                    "Increase Maximum Health by |cFFFFFF2225|r.",
     SI_LUIE_SKILL_MUNDUS_BASIC_MAGE =                    "Increase Maximum Magicka by |cFFFFFF2023|r.",
     SI_LUIE_SKILL_MUNDUS_BASIC_TOWER =                   "Increase Maximum Stamina by |cFFFFFF2023|r.",
