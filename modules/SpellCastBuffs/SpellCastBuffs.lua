@@ -1451,6 +1451,8 @@ function SpellCastBuffs.SetSingleIconBuffType(buff, buffType, unbreakable, id)
         end
     end
 
+    -- TODO: WIP - Add later - support for coloring debuff type by CC type
+    --[[
     if Effects.EffectOverride[id] and Effects.EffectOverride[id].cc then
         local cc = Effects.EffectOverride[id].cc
         if cc == LUIE_CC_TYPE_STUN then
@@ -1471,8 +1473,7 @@ function SpellCastBuffs.SetSingleIconBuffType(buff, buffType, unbreakable, id)
             colour = { 1, 1, 0, 1 } -- yellow
         end
     end
-
-
+    ]]--
     -- {0.07, 0.45, 0.8}
 
     buff.frame:SetTexture("/esoui/art/actionbar/" .. contextType .. "_frame.dds")
