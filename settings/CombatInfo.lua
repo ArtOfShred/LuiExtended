@@ -1445,7 +1445,7 @@ function CombatInfo.CreateSettings()
                 name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_CC),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_CC_TP),
                 getFunc = function() return Settings.alerts.toggles.sound_st_ccEnable end,
-                setFunc = function(v) Settings.alerts.toggles.sound_st_ccEnablet = v end,
+                setFunc = function(v) Settings.alerts.toggles.sound_st_ccEnable = v end,
                 width = "half",
                 disabled = function() return not Settings.alerts.toggles.alertEnable end,
                 defaults = Defaults.alerts.toggles.sound_st_ccEnable,

@@ -1281,46 +1281,48 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
             local currentTime = GetGameTimeMilliseconds()
             if not g_protectAbilityRemoval[abilityId] or g_protectAbilityRemoval[abilityId] < currentTime then
                 if (Effects.IsGroundMineAura[abilityId] or Effects.IsGroundMineStack[abilityId]) then
-                    g_mineStacks[abilityId] = g_mineStacks[abilityId] - Effects.EffectGroundDisplay[abilityId].stackRemove
+                    if g_mineStacks[abilityId] then
+                        g_mineStacks[abilityId] = g_mineStacks[abilityId] - Effects.EffectGroundDisplay[abilityId].stackRemove
 
-                    -- Set Stacks label if changed
-                    if CombatInfo.SV.BarShowLabel then
-                        if g_toggledSlotsFront[abilityId] and g_uiCustomToggle[g_toggledSlotsFront[abilityId]] then
-                            if not Effects.HideGroundMineStacks[abilityId] then
-                                local slotNum = g_toggledSlotsFront[abilityId]
-                                if g_mineStacks[abilityId] > 0 then
-                                    g_uiCustomToggle[slotNum].stack:SetText(g_mineStacks[abilityId])
-                                else
-                                    g_uiCustomToggle[slotNum].stack:SetText("")
-                                end
-                            end
-                        end
-                        if g_toggledSlotsBack[abilityId] and g_uiCustomToggle[g_toggledSlotsBack[abilityId]] then
-                            if not Effects.HideGroundMineStacks[abilityId] then
-                                local slotNum = g_toggledSlotsBack[abilityId]
-                                if g_mineStacks[abilityId] > 0 then
-                                    g_uiCustomToggle[slotNum].stack:SetText(g_mineStacks[abilityId])
-                                else
-                                    g_uiCustomToggle[slotNum].stack:SetText("")
-                                end
-                            end
-                        end
-                    end
-
-                    -- Handle stacks reaching 0
-                    if g_mineStacks[abilityId] == 0 and not g_mineNoTurnOff[abilityId] then
-                        if g_toggledSlotsRemain[abilityId] then
+                        -- Set Stacks label if changed
+                        if CombatInfo.SV.BarShowLabel then
                             if g_toggledSlotsFront[abilityId] and g_uiCustomToggle[g_toggledSlotsFront[abilityId]] then
-                                local slotNum = g_toggledSlotsFront[abilityId]
-                                CombatInfo.HideSlot(slotNum, abilityId)
+                                if not Effects.HideGroundMineStacks[abilityId] then
+                                    local slotNum = g_toggledSlotsFront[abilityId]
+                                    if g_mineStacks[abilityId] > 0 then
+                                        g_uiCustomToggle[slotNum].stack:SetText(g_mineStacks[abilityId])
+                                    else
+                                        g_uiCustomToggle[slotNum].stack:SetText("")
+                                    end
+                                end
                             end
                             if g_toggledSlotsBack[abilityId] and g_uiCustomToggle[g_toggledSlotsBack[abilityId]] then
-                                local slotNum = g_toggledSlotsBack[abilityId]
-                                CombatInfo.HideSlot(slotNum, abilityId)
+                                if not Effects.HideGroundMineStacks[abilityId] then
+                                    local slotNum = g_toggledSlotsBack[abilityId]
+                                    if g_mineStacks[abilityId] > 0 then
+                                        g_uiCustomToggle[slotNum].stack:SetText(g_mineStacks[abilityId])
+                                    else
+                                        g_uiCustomToggle[slotNum].stack:SetText("")
+                                    end
+                                end
                             end
                         end
-                        g_toggledSlotsRemain[abilityId] = nil
-                        g_toggledSlotsStack[abilityId] = nil
+
+                        -- Handle stacks reaching 0
+                        if g_mineStacks[abilityId] == 0 and not g_mineNoTurnOff[abilityId] then
+                            if g_toggledSlotsRemain[abilityId] then
+                                if g_toggledSlotsFront[abilityId] and g_uiCustomToggle[g_toggledSlotsFront[abilityId]] then
+                                    local slotNum = g_toggledSlotsFront[abilityId]
+                                    CombatInfo.HideSlot(slotNum, abilityId)
+                                end
+                                if g_toggledSlotsBack[abilityId] and g_uiCustomToggle[g_toggledSlotsBack[abilityId]] then
+                                    local slotNum = g_toggledSlotsBack[abilityId]
+                                    CombatInfo.HideSlot(slotNum, abilityId)
+                                end
+                            end
+                            g_toggledSlotsRemain[abilityId] = nil
+                            g_toggledSlotsStack[abilityId] = nil
+                        end
                     end
                 else
                     -- Ignore fading event if override is true
@@ -1352,12 +1354,17 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
             if Effects.IsGroundMineAura[abilityId] then
                 g_mineStacks[abilityId] = Effects.EffectGroundDisplay[abilityId].stackReset
             elseif Effects.IsGroundMineStack[abilityId] then
+                -- Check if this is an existing mine with stacks
                 if g_mineStacks[abilityId] then
                     g_mineStacks[abilityId] = g_mineStacks[abilityId] + Effects.EffectGroundDisplay[abilityId].stackRemove
+                -- Otherwise set the count to 1
                 else
                     g_mineStacks[abilityId] = 1
                 end
-                if g_mineStacks[abilityId] > Effects.EffectGroundDisplay[abilityId].stackReset then g_mineStacks[abilityId] = Effects.EffectGroundDisplay[abilityId].stackReset end
+                -- If the stack counter is higher than a manual limit we set then override it to that value
+                if g_mineStacks[abilityId] > Effects.EffectGroundDisplay[abilityId].stackReset then
+                    g_mineStacks[abilityId] = Effects.EffectGroundDisplay[abilityId].stackReset
+                end
             end
 
             -- Bar Tracker

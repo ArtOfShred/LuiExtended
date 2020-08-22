@@ -2603,7 +2603,7 @@ function UnitFrames.UpdateStaticControls( unitFrame )
 
     end
     -- Finally set transparency for group frames that has .control field
-    if "group" == string.sub(unitFrame.unitTag, 0, 5) and unitFrame.control then
+    if unitFrame.unitTag and "group" == string.sub(unitFrame.unitTag, 0, 5) and unitFrame.control then
         unitFrame.control:SetAlpha( IsUnitInGroupSupportRange(unitFrame.unitTag) and ( UnitFrames.SV.GroupAlpha * 0.01) or ( UnitFrames.SV.GroupAlpha * 0.01) / 2 )
     end
 end
@@ -2688,6 +2688,8 @@ end
 -- Updates title for unit if changed, and also re-anchors buffs or toggles display on/off if the unitTag had no title selected previously
 -- Called from EVENT_TITLE_UPDATE & EVENT_RANK_POINT_UPDATE
 function UnitFrames.TitleUpdate( eventCode, unitTag )
+    -- No need to update title for anything but reticleover target
+    if unitTag ~= "reticleover" then return end
     UnitFrames.UpdateStaticControls( g_DefaultFrames[unitTag] )
     UnitFrames.UpdateStaticControls( UnitFrames.CustomFrames[unitTag] )
     UnitFrames.UpdateStaticControls( g_AvaCustFrames[unitTag] )

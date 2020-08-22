@@ -9354,7 +9354,7 @@ Effects.EffectOverride = {
     [60549] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_rock_toss.dds' }, -- Rock Toss (Troll - Ranged)
     [48256] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_boulder_toss.dds' }, -- Boulder Toss (Troll - Ranged)
     [48257] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_boulder_toss.dds' }, -- Boulder Toss (Troll - Ranged)
-    [50387] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_boulder_toss.dds', tooltip = Tooltips.Generic_Knockdown }, -- Boulder Toss (Troll - Ranged)
+    [50387] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_boulder_toss.dds', tooltip = Tooltips.Generic_Knockdown, noDuplicate = true }, -- Boulder Toss (Troll - Ranged) -- TODO: Check this still duplicates auras
     [48282] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_consuming_omen.dds' }, -- Consuming Omen (Troll - Ranged)
 
     [48287] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_consuming_omen.dds', hide = true, tooltip = Tooltips.Skill_Consuming_Omen_Snare }, -- Consuming Omen (Troll - Ranged)
