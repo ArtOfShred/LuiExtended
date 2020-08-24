@@ -49,4 +49,10 @@ LUIE.Data.ZoneNames = {
     Zone_Deepwood_Barrow                  = 'Deepwood Barrow',
     Zone_Deepwood_Vale                    = 'Deepwood Vale',
 
+    ----------------------------------------------------------------
+    -- DUNGEONS ----------------------------------------------------
+    ----------------------------------------------------------------
+
+    Zone_Tempest_Island                   = 'Tempest Island',
+
 }

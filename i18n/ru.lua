@@ -239,7 +239,7 @@ local strings = {
     SI_LUIE_CA_LOREBOOK_BOOK =                           "Книга открыта",
     SI_LUIE_CA_LOREBOOK_ADDED_CSA =                      "<<1>> добавлена в <<2>>",
     SI_LUIE_CA_LOREBOOK_ADDED_CA =                       "добавлена в", -- Have to add this extra string for CA, if we try to colorize the whole string with the link, it also colorizes our custom link type.
-    SI_LUIE_CA_ANTIQUITY_PREFIX =                        "Antiquity Lead Acquired",
+    SI_LUIE_CA_ANTIQUITY_PREFIX =                        "Найдена зацепка",
     SI_LUIE_CA_FRIENDS_FRIEND_ADDED =                    "<<1>> добавлен в друзья.", -- TODO: Retranslate this as "friends list"
     SI_LUIE_CA_FRIENDS_FRIEND_REMOVED =                  "<<1>> убран из друзей.", -- TODO: Retranslate this as "friends list"
     SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST =         "<<1>> хочет быть вашим другом.",
@@ -612,8 +612,7 @@ local strings = {
     SI_LUIE_CI_MITIGATION_MODIFIER_SPREAD_OUT =          "- SPREAD OUT!",
 
     -- UnitFrames
-    SI_LUIE_UF_WEREWOLF_POWER =                          "<<1>>/<<2>> Энергия (<<3>>%)",
-    SI_LUIE_UF_WEREWOLF_TP =                             "Вы останетесь в форме оборотня в течение |cFFFFFF<<1>>|r секунд.",
+    SI_LUIE_UF_WEREWOLF_POWER =                          "<<1>>/<<2>> Энергия (<<3>>%)", -- TODO: Should be updated to say "Rage"
     SI_LUIE_UF_MOUNT_POWER =                             "<<1>>/<<2>> Запас сил езд. животного (<<3>>%)",
     SI_LUIE_UF_SIEGE_POWER =                             "<<1>>/<<2>> Состояние (<<3>>%)",
     SI_LUIE_UF_DEAD_STATUS_REVIVING =                    "Reviving...",

@@ -83,6 +83,21 @@ function LUIE.InitializeHooks()
                 if LUIE.Data.Effects.EffectSourceOverride[abilityId].removePlayer then
                     isPlayer = false
                 end
+                if LUIE.Data.Effects.ZoneDataOverride[abilityId] then
+                    local index = GetZoneId(GetCurrentMapZoneIndex())
+                    local zoneName = GetPlayerLocationName()
+                    if LUIE.Data.Effects.ZoneDataOverride[abilityId][index] then
+                        if LUIE.Data.Effects.ZoneDataOverride[abilityId][index].source then
+                            attackerRawName = LUIE.Data.Effects.ZoneDataOverride[abilityId][index].source
+                        end
+                    end
+                    if LUIE.Data.Effects.ZoneDataOverride[abilityId][zoneName] then
+                        if LUIE.Data.Effects.ZoneDataOverride[abilityId][zoneName].source then
+                            attackerRawName = LUIE.Data.Effects.ZoneDataOverride[abilityId][zoneName].source
+                        end
+                    end
+                end
+
             end
 
             return attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName
@@ -97,28 +112,44 @@ function LUIE.InitializeHooks()
                 attackIcon = LUIE.Data.Effects.EffectOverride[abilityId].icon or attackIcon
             end
 
-            if LUIE.Data.Effects.MapDataOverride[abilityId] then
+            if LUIE.Data.Effects.ZoneDataOverride[abilityId] then
                 local index = GetZoneId(GetCurrentMapZoneIndex())
                 local zoneName = GetPlayerLocationName()
-                if LUIE.Data.Effects.MapDataOverride[abilityId][index] then
-                    if LUIE.Data.Effects.MapDataOverride[abilityId][index].icon then
-                        attackIcon = LUIE.Data.Effects.MapDataOverride[abilityId][index].icon
+                if LUIE.Data.Effects.ZoneDataOverride[abilityId][index] then
+                    if LUIE.Data.Effects.ZoneDataOverride[abilityId][index].icon then
+                        attackIcon = LUIE.Data.Effects.ZoneDataOverride[abilityId][index].icon
                     end
-                    if LUIE.Data.Effects.MapDataOverride[abilityId][index].name then
-                        attackName = LUIE.Data.Effects.MapDataOverride[abilityId][index].name
+                    if LUIE.Data.Effects.ZoneDataOverride[abilityId][index].name then
+                        attackName = LUIE.Data.Effects.ZoneDataOverride[abilityId][index].name
                     end
-                    if LUIE.Data.Effects.MapDataOverride[abilityId][index].hide then
+                    if LUIE.Data.Effects.ZoneDataOverride[abilityId][index].hide then
                         return
                     end
                 end
-                if LUIE.Data.Effects.MapDataOverride[abilityId][zoneName] then
-                    if LUIE.Data.Effects.MapDataOverride[abilityId][zoneName].icon then
-                        attackIcon = LUIE.Data.Effects.MapDataOverride[abilityId][zoneName].icon
+                if LUIE.Data.Effects.ZoneDataOverride[abilityId][zoneName] then
+                    if LUIE.Data.Effects.ZoneDataOverride[abilityId][zoneName].icon then
+                        attackIcon = LUIE.Data.Effects.ZoneDataOverride[abilityId][zoneName].icon
                     end
-                    if LUIE.Data.Effects.MapDataOverride[abilityId][zoneName].name then
-                        attackName = LUIE.Data.Effects.MapDataOverride[abilityId][zoneName].name
+                    if LUIE.Data.Effects.ZoneDataOverride[abilityId][zoneName].name then
+                        attackName = LUIE.Data.Effects.ZoneDataOverride[abilityId][zoneName].name
                     end
-                    if LUIE.Data.Effects.MapDataOverride[abilityId][zoneName].hide then
+                    if LUIE.Data.Effects.ZoneDataOverride[abilityId][zoneName].hide then
+                        return
+                    end
+                end
+            end
+
+            -- Override name, icon, or hide based on Map Name
+            if LUIE.Data.Effects.MapDataOverride[abilityId] then
+                local mapName = GetMapName()
+                if LUIE.Data.Effects.MapDataOverride[abilityId][mapName] then
+                    if LUIE.Data.Effects.MapDataOverride[abilityId][mapName].icon then
+                        attackIcon = LUIE.Data.Effects.MapDataOverride[abilityId][mapName].icon
+                    end
+                    if LUIE.Data.Effects.MapDataOverride[abilityId][mapName].name then
+                        attackName = LUIE.Data.Effects.MapDataOverride[abilityId][mapName].name
+                    end
+                    if LUIE.Data.Effects.MapDataOverride[abilityId][mapName].hide then
                         return
                     end
                 end
@@ -305,7 +336,7 @@ function LUIE.InitializeHooks()
                         if LUIE.Data.Effects.EffectOverride[compareId] and LUIE.Data.Effects.EffectOverride[compareId].noDuplicate then
                             for k, v in pairs(trackBuffs) do
                                 -- Only remove the lower duration effects that were cast previously or simultaneously.
-                                if v.abilityId == compareId and v.endTime <= compareTime then
+                                if v.abilityId == compareId and v.endTime < compareTime then
                                     v.markForRemove = true
                                 end
                             end
@@ -367,6 +398,7 @@ function LUIE.InitializeHooks()
                         if LUIE.Data.Effects.TooltipUseDefault[abilityId] then
                             if GetAbilityEffectDescription(buffSlot) ~= "" then
                                 tooltipText = GetAbilityEffectDescription(buffSlot)
+                                tooltipText = LUIE.UpdateMundusTooltipSyntax(abilityId, tooltipText)
                             end
                         end
 
@@ -498,6 +530,7 @@ function LUIE.InitializeHooks()
                     if LUIE.Data.Effects.TooltipUseDefault[abilityId] then
                         if GetAbilityEffectDescription(buffSlot) ~= "" then
                             tooltipText = GetAbilityEffectDescription(buffSlot)
+                            tooltipText = LUIE.UpdateMundusTooltipSyntax(abilityId, tooltipText)
                         end
                     end
 
@@ -1265,7 +1298,7 @@ function LUIE.InitializeHooks()
                 if skillProgressionData:GetSkillData():GetPointAllocator():CanPurchase() then
                     local dialogAbility = dialog.ability
                     local id = skillProgressionData:GetAbilityId()
-                    dialog.abilityName:SetText(zo_strformat(SI_UNIT_NAME, GetAbilityName(id)))
+                    dialog.abilityName:SetText(zo_strformat("<<C:1>>", GetAbilityName(id)))
 
                     dialogAbility.skillProgressionData = skillProgressionData
                     dialogAbility.icon:SetTexture(GetAbilityIcon(id))

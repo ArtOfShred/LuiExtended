@@ -15,7 +15,7 @@ local g_currentDuelTarget = nil -- Saved Duel Target for generating Battle Spiri
 function SpellCastBuffs.DuelStart()
     local duelState, characterName = GetDuelInfo()
     if duelState == 3 and not SpellCastBuffs.SV.IgnoreBattleSpiritTarget then
-        g_currentDuelTarget = zo_strformat(SI_UNIT_NAME, characterName)
+        g_currentDuelTarget = zo_strformat("<<C:1>>", characterName)
         SpellCastBuffs.ReloadEffects("reticleover")
     end
 end

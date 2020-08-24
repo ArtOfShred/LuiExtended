@@ -94,6 +94,7 @@ LUIE.Data.Tooltips = {
     ----------------------------------------------------------------
 
     Generic_Immunity                                = GetString(SI_LUIE_SKILL_SET_GENERIC_IMMUNITY_TP),
+    Generic_Immunity_Permanent                      = GetString(SI_LUIE_SKILL_GENERIC_IMMUNITY_PERMANENT_TP),
 
     Generic_Snare                                   = GetString(SI_LUIE_SKILL_GENERIC_SNARE_TP),
     Generic_Snare_No_Dur                            = GetString(SI_LUIE_SKILL_GENERIC_SNARE_NO_DUR_TP),
@@ -111,6 +112,8 @@ LUIE.Data.Tooltips = {
     Generic_Magicka_Recovery_Duration_Value         = GetString(SI_LUIE_SKILL_SET_GENERIC_MAG_RECOVERY_TIME_VALUE_TP),
     Generic_Weapon_Spell_Damage_Duration            = GetString(SI_LUIE_SKILL_SET_GENERIC_WEP_SPELL_DAMAGE_TIME_TP),
     Generic_Weapon_Spell_Damage_Duration_Value      = GetString(SI_LUIE_SKILL_SET_GENERIC_WEP_SPELL_DAMAGE_TIME_VALUE_TP),
+
+    Generic_Reduce_Weapon_Damage_Duration_Value     = GetString(SI_LUIE_SKILL_SET_GENERIC_REDUCE_WEAPON_DAMAGE_TIME_VALUE_TP),
 
     Generic_Magicka_Regen                           = GetString(SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP),
     Generic_Magicka_Regen_Value                     = GetString(SI_LUIE_SKILL_GENERIC_MGK_REGEN_VALUE_TP),
@@ -150,6 +153,7 @@ LUIE.Data.Tooltips = {
     Generic_Reduce_Physical_Spell_Resist_No_Dur     = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_TP),
     Generic_Reduce_Physical_Spell_Resist_No_Dur_Value = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_VALUE_TP),
     Generic_Reduce_Physical_Spell_Damage_Percentage = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_WEP_SPELL_DMG_PERCENTAGE_TP),
+    Generic_Reduce_Physical_Spell_Damage_Value      = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_WEP_SPELL_DMG_VALUE_TP),
 
     Generic_Reduce_Physical_Resist_Value            = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHYSICAL_RESIST_VALUE_TP),
 
@@ -160,6 +164,11 @@ LUIE.Data.Tooltips = {
     Generic_Reduce_Damage_Done                      = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_DAMAGE_DONE_TP),
 
     Generic_Test                                    = GetString(SI_LUIE_SKILL_TEST_TP),
+
+    Generic_Increase_Stamina_Recovery_No_Dur        = GetString(SI_LUIE_SKILL_GENERIC_STAMINA_RECOVERY_NO_DUR_TP),
+    Generic_Increase_Magicka_Recovery_No_Dur        = GetString(SI_LUIE_SKILL_GENERIC_MAGICKA_RECOVERY_NO_DUR_TP),
+
+    Generic_Increase_Healing_Received_No_Dur        = GetString(SI_LUIE_SKILL_GENERIC_INCREASE_HEALING_RECEIVED_NO_DUR_TP),
 
     Generic_Bleed                                   = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_TP), "SUBSTRING", BleedDamage),
     Generic_Physical                                = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_TP), "SUBSTRING", PhysicalDamage),
@@ -441,6 +450,7 @@ LUIE.Data.Tooltips = {
     Set_Aslyum_Restoration_Staff                    = GetString(SI_LUIE_SKILL_SET_ASYLUM_RESTORATION_STAFF),
     Set_Maelstrom_DW                                = GetString(SI_LUIE_SKILL_SET_MAELSTROM_DW),
     Set_Maelstrom_1H                                = GetString(SI_LUIE_SKILL_SET_MAELSTROM_1H),
+    Set_Maelstrom_2H                                = string.gsub(zo_strformat(GetString(SI_LUIE_SKILL_GENERIC_DOT_TP), 6, 1), "SUBSTRING", BleedDamage),
     Set_Master_1H                                   = GetString(SI_LUIE_SKILL_SET_MASTER_1H),
     Set_Master_Resto                                = GetString(SI_LUIE_SKILL_SET_MASTER_RESTO),
     Set_Blackrose_Dual_Wield                        = GetString(SI_LUIE_SKILL_SET_BLACKROSE_DUAL_WIELD),
@@ -487,26 +497,26 @@ LUIE.Data.Tooltips = {
     Set_Nerieneth                                   = GetString(SI_LUIE_SKILL_NERIENETH_TP),
     Set_Sellistrix                                  = GetString(SI_LUIE_SKILL_SELLISTRIX_TP),
     Set_Kjalnars_Nightmare                          = GetString(SI_LUIE_SKILL_KJALNARS_NIGHTMARE_TP),
+    Set_Meridias_Blessed_Armor                      = GetString(SI_LUIE_SKILL_SET_MERIDIAS_BLESSED_ARMOR_TP),
+
+    Set_Stone_Husk_DOT                              = GetString(SI_LUIE_SET_STONE_HUSK_DOT_TP),
+    Set_Stone_Husk_Drain                            = GetString(SI_LUIE_SET_STONE_HUSK_HUSK_DRAIN_TP),
+    Set_Stone_Husk_Buff                             = GetString(SI_LUEI_SET_STONE_HUSK_BUFF_TP),
 
     -- Mythic Items
+    Set_Snow_Treaders                               = GetString(SI_LUIE_SKILL_SET_SNOW_TREADERS_TP),
     Set_Bloodlords_Embrace                          = GetString(SI_LUIE_SKILL_SET_BLOODLORDS_EMBRACE_TP),
     Set_Thrassian_Stranglers                        = GetString(SI_LUIE_SKILL_SET_THRASSIAN_STANGLERS_TP),
 
     -- Crafted Sets
-    Set_Alessias_Bulwark                            = GetString(SI_LUIE_SKILL_SET_ALESSIAS_BULWARK),
     Set_Clever_Alchemist                            = GetString(SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST),
     Set_Eternal_Hunt                                = GetString(SI_LUIE_SKILL_SET_ETERNAL_HUNT),
     Set_Morkuldin                                   = GetString(SI_LUIE_SKILL_SET_MORKULDIN),
     Set_Tavas_Favor                                 = GetString(SI_LUIE_SKILL_SET_TAVAS_FAVOR),
-    Set_Trials_Fire                                 = zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE3)),
-    Set_Trials_Shock                                = zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE4)),
-    Set_Trials_Frost                                = zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE6)),
-    Set_Trials_Poison                               = zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE11)),
-    Set_Trials_Disease                              = zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE10)),
     Set_Varens_Legacy                               = GetString(SI_LUIE_SKILL_SET_VARENS_LEGACY),
     Set_Mechanical_Acuity                           = GetString(SI_LUIE_SKILL_SET_MECHANICAL_ACUITY),
     Set_Adept_Rider                                 = GetString(SI_LUIE_SKILL_SET_ADEPT_RIDER),
-    Set_Senche_Rahts_Grit                           = GetString(SI_LUIE_SKILL_SET_SENCHE_RAHTS_GRIT),
+    --Set_Senche_Rahts_Grit                           = GetString(SI_LUIE_SKILL_SET_SENCHE_RAHTS_GRIT),
     Set_Vastaries_Tutelage                          = GetString(SI_LUIE_SKILL_SET_VASTARIES_TUTELAGE),
     Set_Eye_of_Nahviintaas                          = GetString(SI_LUIE_SKILL_SET_EYE_OF_NAHVIINTAAS),
     Set_Seventh_Legion                              = GetString(SI_LUIE_SKILL_SET_SEVENTH_LEGION_TP),
@@ -526,13 +536,11 @@ LUIE.Data.Tooltips = {
     Set_Briarheart                                  = GetString(SI_LUIE_SKILL_SET_BRIARHEART_TP),
     Set_Unfathomable_Darknesss                      = GetString(SI_LUIE_SKILL_SET_UNFATHOMABLE_DARKNESS_TP),
     Set_Storm_Knight                                = GetString(SI_LUIE_SKILL_SET_STORM_KNIGHT_TP),
-    Set_Grace_of_Gloom                              = GetString(SI_LUIE_SKILL_SET_GRACE_OF_GLOOM_TP),
     Set_Draugrs_Rest                                = GetString(SI_LUIE_SKILL_SET_DRAUGRS_REST_TP),
     Set_Overwhelming_Surge                          = GetString(SI_LUIE_SKILL_SET_OVERWHELMING_SURGE_TP),
-    Set_Sanctuary                                   = GetString(SI_LUIE_SKILL_SANCTUARY_TP),
     Set_Noble_Duelist                               = GetString(SI_LUIE_SKILL_SET_NOBLE_DUELIST_TP),
-    Set_Worms_Raiment                               = GetString(SI_LUIE_SKILL_SET_WORMS_RAIMENT_TP),
-    Set_Hircines_Veneer                             = GetString(SI_LUIE_SKILL_SET_HIRCINES_VENEER_TP),
+    Set_Worms_Raiment_Dummy                         = GetString(SI_LUIE_SKILL_SET_WORMS_RAIMENT_DUMMY_TP),
+    Set_Hircines_Veneer_Dummy                       = GetString(SI_LUIE_SKILL_SET_HIRCINES_VENEER_DUMMY_TP),
     Set_Plague_Slinger                              = GetString(SI_LUIE_SKILL_PLAGUE_SLINGER_TP),
     Set_Storm_Master                                = GetString(SI_LUIE_SKILL_SET_STORM_MASTER_TP),
     Set_Blood_Moon_Scent                            = GetString(SI_LUIE_SKILL_SET_BLOOD_SCENT),
@@ -554,7 +562,6 @@ LUIE.Data.Tooltips = {
     Set_Senchals_Duty                               = GetString(SI_LUIE_SKILL_SENCHALS_DUTY_TP),
     Set_Trinimacs_Valor                             = GetString(SI_LUIE_SKILL_TRINIMACS_VALOR_TP),
     Set_Hatchlings_Shell                            = GetString(SI_LUIE_SKILL_SET_HATCHLINGS_SHELL_TP),
-    Set_Undaunted_Unweaver                          = GetString(SI_LUIE_SKILL_SET_UNDAUNTED_UNWEAVER_TP),
     Set_Dunerippers_Scales                          = GetString(SI_LUIE_SKILL_SET_DUNERIPPERS_SCALES_TP),
     Set_Hitis_Hearth                                = GetString(SI_LUIE_SET_HITIS_HEARTH_TP),
     Set_Hitis_Hearth_Ground                         = GetString(SI_LUIE_SET_HITIS_HEARTH_GROUND_TP),
@@ -563,11 +570,13 @@ LUIE.Data.Tooltips = {
     Set_Grave_Guardian                              = GetString(SI_LUIE_SET_GRAVE_GUARDIAN_TP),
     Set_Winters_Respite                             = GetString(SI_LUIE_SET_WINTERS_RESPITE_TP),
     Set_Hunters_Venom                               = GetString(SI_LUIE_SET_HUNTERS_VENOM_TP),
+    Set_Sheer_Venom                                 = GetString(SI_LUIE_SET_SHEER_VENOM_TP),
+    Set_Elemental_Catalyst                          = GetString(SI_LUIE_SET_ELEMENTAL_CATALYST_TP),
+    Set_Crimson_Twilight                            = GetString(SI_LUIE_SET_CRIMSON_TWILIGHT_TP),
 
     -- Trial Sets
     Set_Berserking_Warrior                          = GetString(SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP),
     Set_Destructive_Mage                            = GetString(SI_LUIE_SKILL_SET_DESTRUCTIVE_MAGE_TP),
-    Set_Healing_Mage                                = GetString(SI_LUIE_SKILL_SET_HEALING_MAGE_TP),
     Set_Twice_Fanged_Serpent                        = GetString(SI_LUIE_SKILL_SET_TWICE_FANGED_SERPENT_TP),
     Set_Lunar_Bastion                               = GetString(SI_LUIE_SKILL_SET_LUNAR_BASTION_TP),
     Set_Lunar_Bastion_Ground                        = GetString(SI_LUIE_SKILL_SET_LUNAR_BASTION_GROUND_TP),
@@ -580,14 +589,14 @@ LUIE.Data.Tooltips = {
     --Set_Kynes_Blessing_Ground                     = GetString(SI_LUIE_SKILL_SET_KYNES_BLESSING_GROUND_TP),
     Set_Giants_Endurance                            = GetString(SI_LUIE_SKILL_SET_GIANTS_ENDURANCE_TP),
     Set_Giants_Might                                = GetString(SI_LUIE_SKILL_SET_GIANTS_MIGHT_TP),
+    Set_Roar_of_Alkosh                              = GetString(SI_LUIE_SKILL_ROAR_OF_ALKOSH_TP),
 
     -- Battleground Sets
     Set_Vanguards_Challenge                         = GetString(SI_LUIE_SKILL_SET_VANGUARDS_CHALLENGE_TP),
-    Set_Cowards_Gear                                = GetString(SI_LUIE_SKILL_SET_COWARDS_GEAR_TP),
+    --Set_Cowards_Gear                                = GetString(SI_LUIE_SKILL_SET_COWARDS_GEAR_TP),
 
     -- Imperial City Sets
     Set_Galerions_Revenge                           = GetString(SI_LUIE_SKILL_SET_GALERIONS_REVENGE_TP),
-    Set_Meritorius_Service                          = GetString(SI_LUIE_SKILL_SET_MERITORIUS_SERVICE_TP),
     Set_Vicecanon_of_Venom                          = GetString(SI_LUIE_SKILL_SET_VICECANON_OF_VENOM_TP),
 
     -- Cyrodiil Sets
@@ -665,6 +674,7 @@ LUIE.Data.Tooltips = {
     Skill_Shadowy_Disguise                          = GetString(SI_LUIE_SKILL_SHADOWY_DISGUISE_TP),
     Skill_Grim_Focus                                = GetString(SI_LUIE_SKILL_GRIM_FOCUS_TP),
     Skill_Relentless_Focus                          = GetString(SI_LUIE_SKILL_RELENTLESS_FOCUS_TP),
+    Skill_Merciless_Resolve                         = GetString(SI_LUIE_SKILL_MERCILESS_RESOLVE_TP),
     Skill_Grim_Focus_Defense                        = GetString(SI_LUIE_SKILL_GRIM_FOCUS_DEFENSE_TP),
     Skill_Surprise_Attack                           = GetString(SI_LUIE_SKILL_SURPRISE_ATTACK_TP),
     Skill_Path_of_Darkness                          = GetString(SI_LUIE_SKILL_PATH_OF_DARKNESS_TP),
@@ -685,12 +695,13 @@ LUIE.Data.Tooltips = {
     Skill_Leeching_Strikes                          = GetString(SI_LUIE_SKILL_LEECHING_STRIKES_TP),
     Skill_Siphoning_Attacks                         = GetString(SI_LUIE_SKILL_SIPHONING_ATTACKS_TP),
     Skill_Soul_Tether                               = GetString(SI_LUIE_SKILL_SOUL_TETHER_TP),
-    Skill_Power_Extraction                          = GetString(SI_LUIE_SKILL_POWER_EXTRACTION_TP),
     Skill_Refreshing_Path_Ground                    = GetString(SI_LUIE_SKILL_REFRESHING_PATH_GROUND),
 
     -- Sorcerer
     Skill_Persistence_Rank_1                        = zo_strformat(GetString(SI_LUIE_SKILL_PERSISTENCE), 7),
     Skill_Persistence_Rank_2                        = zo_strformat(GetString(SI_LUIE_SKILL_PERSISTENCE), 15),
+    Skill_Crystal_Weaver                            = GetString(SI_LUIE_SKILL_CRYSTAL_WEAVER_TP),
+    Skill_Crystal_Weapon                            = GetString(SI_LUIE_SKILL_CRYSTAL_WEAPON_TP),
     Skill_Crystal_Fragments                         = GetString(SI_LUIE_SKILL_CRYSTAL_FRAGMENTS_TP),
     Skill_Shattering_Prison                         = GetString(SI_LUIE_SKILL_SHATTERING_PRISON_TP),
     Skill_Rune_Cage                                 = GetString(SI_LUIE_SKILL_RUNE_CAGE_TP),
@@ -831,7 +842,6 @@ LUIE.Data.Tooltips = {
     Skill_Ruinous_Scythe                            = GetString(SI_LUIE_SKILL_RUINOUS_SCYTHE_TP),
     Skill_Bone_Totem                                = GetString(SI_LUIE_SKILL_BONE_TOTEM_TP),
     Skill_Agony_Totem                               = GetString(SI_LUIE_SKILL_AGONY_TOTEM_TP),
-    Skill_Empowering_Grasp                          = GetString(SI_LUIE_SKILL_EMPOWERING_GRASP_TP),
     Skill_Bone_Goliath_Transformation               = GetString(SI_LUIE_SKILL_BONE_GOLIATH_TRANSFORMATION_TP),
     Skill_Pummeling_Goliath                         = GetString(SI_LUIE_SKILL_PUMMELING_GOLIATH_TP),
     Skill_Ravenous_Goliath                          = GetString(SI_LUIE_SKILL_RAVENOUS_GOLIATH_TP),
@@ -963,6 +973,7 @@ LUIE.Data.Tooltips = {
     Skill_Vampirism_Stage_5                         = GetString(SI_LUIE_SKILL_VAMPIRISM_STAGE5_TP),
     Skill_Blood_Ritual                              = GetString(SI_LUIE_SKILL_BLOOD_RITUAL_TP),
     Skill_Unnatural_Movement                        = GetString(SI_LUIE_SKILL_UNNATURAL_MOVEMENT_TP),
+    Skill_Blood_for_Blood                           = GetString(SI_LUIE_SKILL_BLOOD_FOR_BLOOD_TP),
     Skill_Blood_Frenzy                              = GetString(SI_LUIE_SKILL_BLOOD_FRENZY_TP),
     Skill_Simmering_Frenzy                          = GetString(SI_LUIE_SKILL_SIMMERING_FRENZY_TP),
     Skill_Sated_Fury                                = GetString(SI_LUIE_SKILL_SATED_FURY_TP),
@@ -1146,6 +1157,8 @@ LUIE.Data.Tooltips = {
 
     Skill_Ruinous_Cyclone                           = GetString(SI_LUIE_SKILL_RUINOUS_CYCLONE),
 
+    Skill_Wall_of_Souls                             = GetString(SI_LUIE_SKILL_WALL_OF_SOULS_TP),
+
     -- ---------------------------------------------------
     -- BATTLEGROUNDS -------------------------------------
     -- ---------------------------------------------------
@@ -1160,6 +1173,9 @@ LUIE.Data.Tooltips = {
 
     Skill_Spike_Trap                                = GetString(SI_LUIE_SKILL_SPIKE_TRAP_TP),
     Skill_Spike_Trap_Auridon                        = GetString(SI_LUIE_SKILL_SPIKE_TRAP_AURIDON_TP),
+    Skill_Trap_Static_Pitcher                       = GetString(SI_LUIE_SKILL_STATIC_PITCHER_TP),
+    Skill_Trap_Stunted_Current                      = GetString(SI_LUIE_SKILL_STUNTED_CURRENT_TP),
+
 
     ----------------------------------------------------------------
     -- NPCS ------------------------------------------------------
@@ -1177,14 +1193,13 @@ LUIE.Data.Tooltips = {
     Skill_Hardened_Shell                            = GetString(SI_LUIE_SKILL_HARDENED_SHELL_TP),
     Skill_Slash_Cliff_Strider                       = GetString(SI_LUIE_SKILL_SLASH_CLIFF_STRIDER_TP),
     Skill_Baleful_Call                              = GetString(SI_LUIE_SKILL_BALEFUL_CALL_TP),
-    Skill_Draining_Bite                             = GetString(SI_LUIE_SKILL_DRAINING_BITE_TP),
 
     -- Human NPCs
     Skill_Cleave_Stance                             = GetString(SI_LUIE_SKILL_CLEAVE_STANCE_TP),
     Skill_Defensive_Ward                            = GetString(SI_LUIE_SKILL_DEFENSIVE_WARD_TP),
     Skill_Soul_Tether_NPC                           = GetString(SI_LUIE_SKILL_SOUL_TETHER_NPC_TP),
     Skill_Siphoning_Strikes_NPC                     = GetString(SI_LUIE_SKILL_SIPHONING_STRIKES_NPC_TP),
-    Skill_Focused_Healing                           = GetString(SI_LUIE_SKILL_FOCUSED_HEALING_TP),
+    --Skill_Focused_Healing                           = GetString(SI_LUIE_SKILL_FOCUSED_HEALING_TP),
     Skill_Rite_of_Passage_NPC                       = GetString(SI_LUIE_SKILL_RITE_OF_PASSAGE_NPC_TP),
     Skill_Throw_Dagger                              = GetString(SI_LUIE_SKILL_THROW_DAGGER_TP),
     Skill_Agony                                     = GetString(SI_LUIE_SKILL_AGONY_TP),
@@ -1291,7 +1306,8 @@ LUIE.Data.Tooltips = {
     -- QUESTS ------------------------------------------------------
     ----------------------------------------------------------------
 
-    -- MQS
+    -- MSQ
+    Skill_Eye_of_the_Sentinel                       = GetString(SI_LUIE_SKILL_EYE_OF_THE_SENTINEL_TP),
     Skill_Incapacitating_Terror                     = GetString(SI_LUIE_SKILL_INCAPACITATING_TERROR_TP),
 
     -- Aldmeri Quests

@@ -87,8 +87,8 @@ local function OnAddonOnLoaded(eventCode, addonName)
     LUIE.SetupAlertFrameVisibility()
 
     LUIE.PlayerNameRaw = GetRawUnitName("player")
-    LUIE.PlayerNameFormatted = zo_strformat(SI_UNIT_NAME, GetUnitName("player"))
-    LUIE.PlayerDisplayName = zo_strformat(SI_UNIT_NAME, GetUnitDisplayName("player"))
+    LUIE.PlayerNameFormatted = zo_strformat("<<C:1>>", GetUnitName("player"))
+    LUIE.PlayerDisplayName = zo_strformat("<<C:1>>", GetUnitDisplayName("player"))
     LUIE.PlayerFaction = GetUnitAlliance("player")
 
     -- Initialize this addon modules according to user preferences

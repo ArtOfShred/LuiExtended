@@ -474,17 +474,11 @@ function SpellCastBuffs.Initialize(enabled)
 end
 
 function SpellCastBuffs.RegisterWerewolfEvents()
+    eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE)
     eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
     eventManager:UnregisterForEvent(moduleName, EVENT_WEREWOLF_STATE_CHANGED)
-    eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE)
-    eventManager:UnregisterForEvent(moduleName .. "Werewolf1", EVENT_EFFECT_CHANGED)
-    eventManager:UnregisterForEvent(moduleName .. "Werewolf2", EVENT_EFFECT_CHANGED)
     if SpellCastBuffs.SV.ShowWerewolf then
         eventManager:RegisterForEvent(moduleName, EVENT_WEREWOLF_STATE_CHANGED, SpellCastBuffs.WerewolfState)
-        eventManager:RegisterForEvent(moduleName .. "Werewolf1", EVENT_EFFECT_CHANGED, SpellCastBuffs.DevourEffectListener )
-        eventManager:RegisterForEvent(moduleName .. "Werewolf2", EVENT_EFFECT_CHANGED, SpellCastBuffs.DevourEffectListener )
-        eventManager:AddFilterForEvent(moduleName .. "Werewolf1", EVENT_EFFECT_CHANGED, REGISTER_FILTER_ABILITY_ID , 33208, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER ) -- Target -> Player
-        eventManager:AddFilterForEvent(moduleName .. "Werewolf2", EVENT_EFFECT_CHANGED, REGISTER_FILTER_ABILITY_ID , 39477, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_UNIT_TAG, 'player' ) -- Target -> Player
         if IsWerewolf() then
             SpellCastBuffs.WerewolfState(nil, true, true)
         end
@@ -532,7 +526,7 @@ function SpellCastBuffs.AddToCustomList(list, input)
     local id = tonumber(input)
     local listRef = list == SpellCastBuffs.SV.PromBuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS) or list == SpellCastBuffs.SV.PromDebuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS) or list == SpellCastBuffs.SV.BlacklistTable and GetString(SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST) or ""
     if id and id > 0 then
-        local name = zo_strformat(SI_UNIT_NAME, GetAbilityName(id))
+        local name = zo_strformat("<<C:1>>", GetAbilityName(id))
         if name ~= nil and name ~= "" then
             local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = true
@@ -557,7 +551,7 @@ function SpellCastBuffs.RemoveFromCustomList(list, input)
     local id = tonumber(input)
     local listRef = list == SpellCastBuffs.SV.PromBuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS) or list == SpellCastBuffs.SV.PromDebuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS) or list == SpellCastBuffs.SV.BlacklistTable and GetString(SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST) or ""
     if id and id > 0 then
-        local name = zo_strformat(SI_UNIT_NAME, GetAbilityName(id))
+        local name = zo_strformat("<<C:1>>", GetAbilityName(id))
         if name ~= nil and name ~= "" then
             local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = nil
@@ -1300,6 +1294,7 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
         if Effects.TooltipUseDefault[control.effectId] then
             if GetAbilityEffectDescription(control.buffSlot) ~= "" then
                 tooltipText = GetAbilityEffectDescription(control.buffSlot)
+                tooltipText = LUIE.UpdateMundusTooltipSyntax(control.effectId, tooltipText)
             end
         end
 
@@ -1344,7 +1339,7 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
         SpellCastBuffs.TooltipBottomLine(control, detailsLine)
 
         -- Tooltip Debug
-        --GameTooltip:SetAbilityId(25660)
+        --GameTooltip:SetAbilityId(136098)
 
     end
 end
@@ -1435,7 +1430,7 @@ function SpellCastBuffs.CreateSingleIcon(container, AnchorItem, effectType)
 end
 
  -- Set proper color of border and text on single buff element
-function SpellCastBuffs.SetSingleIconBuffType(buff, buffType, unbreakable)
+function SpellCastBuffs.SetSingleIconBuffType(buff, buffType, unbreakable, id)
     local contextType
     local colour
     if not unbreakable or unbreakable == 0 then
@@ -1444,7 +1439,7 @@ function SpellCastBuffs.SetSingleIconBuffType(buff, buffType, unbreakable)
             colour = {0,1,0,1}
         else
             contextType = "debuff"
-            colour = {1,0,0,1}
+            colour = {0,0,0,1}
         end
     elseif unbreakable == 1 then
         if buffType == 1 then
@@ -1455,6 +1450,30 @@ function SpellCastBuffs.SetSingleIconBuffType(buff, buffType, unbreakable)
             colour = {.88,.88,1,1}
         end
     end
+
+    -- TODO: WIP - Add later - support for coloring debuff type by CC type
+    --[[
+    if Effects.EffectOverride[id] and Effects.EffectOverride[id].cc then
+        local cc = Effects.EffectOverride[id].cc
+        if cc == LUIE_CC_TYPE_STUN then
+            colour = {1, 0, 0, 1} -- red
+        elseif cc == LUIE_CC_TYPE_KNOCKBACK or cc == LUIE_CC_TYPE_KNOCKDOWN or cc == LUIE_CC_TYPE_PULL then
+            colour = { 0, 0, 1, 1 } -- dark blue
+        elseif cc == LUIE_CC_TYPE_SNARE then
+            colour = { 1, 1, 0, 1 } -- yellow
+        elseif cc == LUIE_CC_TYPE_ROOT then
+            colour = { 1, 0.5, 0, 1 } -- orangeish
+        elseif cc == LUIE_CC_TYPE_DISORIENT then
+            colour = { 0, 0.62, 1, 1 } -- light blue
+        elseif cc == LUIE_CC_TYPE_FEAR then
+            colour = { 1, 0, 1, 1 } -- purple
+        elseif cc == LUIE_CC_TYPE_SILENCE then
+            colour = { 0, 1, 1, 1 } -- cyan
+        elseif cc == LUIE_CC_TYPE_STAGGER then
+            colour = { 1, 1, 0, 1 } -- yellow
+        end
+    end
+    ]]--
     -- {0.07, 0.45, 0.8}
 
     buff.frame:SetTexture("/esoui/art/actionbar/" .. contextType .. "_frame.dds")
@@ -1789,28 +1808,44 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
     end
 
     -- Override name, icon, or hide based on MapZoneIndex
-    if Effects.MapDataOverride[abilityId] then
+    if Effects.ZoneDataOverride[abilityId] then
         local index = GetZoneId(GetCurrentMapZoneIndex())
         local zoneName = GetPlayerLocationName()
-        if Effects.MapDataOverride[abilityId][index] then
-            if Effects.MapDataOverride[abilityId][index].icon then
-                iconName = Effects.MapDataOverride[abilityId][index].icon
+        if Effects.ZoneDataOverride[abilityId][index] then
+            if Effects.ZoneDataOverride[abilityId][index].icon then
+                iconName = Effects.ZoneDataOverride[abilityId][index].icon
             end
-            if Effects.MapDataOverride[abilityId][index].name then
-                effectName = Effects.MapDataOverride[abilityId][index].name
+            if Effects.ZoneDataOverride[abilityId][index].name then
+                effectName = Effects.ZoneDataOverride[abilityId][index].name
             end
-            if Effects.MapDataOverride[abilityId][index].hide then
+            if Effects.ZoneDataOverride[abilityId][index].hide then
                 return
             end
         end
-        if Effects.MapDataOverride[abilityId][zoneName] then
-            if Effects.MapDataOverride[abilityId][zoneName].icon then
-                iconName = Effects.MapDataOverride[abilityId][zoneName].icon
+        if Effects.ZoneDataOverride[abilityId][zoneName] then
+            if Effects.ZoneDataOverride[abilityId][zoneName].icon then
+                iconName = Effects.ZoneDataOverride[abilityId][zoneName].icon
             end
-            if Effects.MapDataOverride[abilityId][zoneName].name then
-                effectName = Effects.MapDataOverride[abilityId][zoneName].name
+            if Effects.ZoneDataOverride[abilityId][zoneName].name then
+                effectName = Effects.ZoneDataOverride[abilityId][zoneName].name
             end
-            if Effects.MapDataOverride[abilityId][zoneName].hide then
+            if Effects.ZoneDataOverride[abilityId][zoneName].hide then
+                return
+            end
+        end
+    end
+
+    -- Override name, icon, or hide based on Map Name
+    if Effects.MapDataOverride[abilityId] then
+        local mapName = GetMapName()
+        if Effects.MapDataOverride[abilityId][mapName] then
+            if Effects.MapDataOverride[abilityId][mapName].icon then
+                iconName = Effects.MapDataOverride[abilityId][mapName].icon
+            end
+            if Effects.MapDataOverride[abilityId][mapName].name then
+                effectName = Effects.MapDataOverride[abilityId][mapName].name
+            end
+            if Effects.MapDataOverride[abilityId][mapName].hide then
                 return
             end
         end
@@ -1859,7 +1894,7 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
         if Effects.EffectCreateSkillAura[ abilityId ] and Effects.EffectCreateSkillAura [ abilityId ].removeOnEnd then
             local id = Effects.EffectCreateSkillAura[abilityId].abilityId
 
-            local name = zo_strformat(SI_UNIT_NAME, GetAbilityName(id))
+            local name = zo_strformat("<<C:1>>", GetAbilityName(id))
             local fakeEffectType = Effects.EffectOverride[id] and Effects.EffectOverride[id].type or effectType
             if not (SpellCastBuffs.SV.BlacklistTable[name] or SpellCastBuffs.SV.BlacklistTable[id]) then
                 local simulatedContext = unitTag .. fakeEffectType
@@ -1916,7 +1951,7 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
         if Effects.EffectCreateSkillAura[abilityId] then
             if (not Effects.EffectCreateSkillAura[abilityId].requiredStack) or (Effects.EffectCreateSkillAura[abilityId].requiredStack and stackCount == Effects.EffectCreateSkillAura[abilityId].requiredStack) then
                 local id = Effects.EffectCreateSkillAura[abilityId].abilityId
-                local name = zo_strformat(SI_UNIT_NAME, GetAbilityName(id))
+                local name = zo_strformat("<<C:1>>", GetAbilityName(id))
                 local fakeEffectType = Effects.EffectOverride[id] and Effects.EffectOverride[id].type or effectType
                 local fakeUnbreakable = Effects.EffectOverride[id] and Effects.EffectOverride[id].unbreakable or 0
                 if not (SpellCastBuffs.SV.BlacklistTable[name] or SpellCastBuffs.SV.BlacklistTable[id]) then
@@ -2212,28 +2247,44 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
         end
 
         -- Override name, icon, or hide based on MapZoneIndex
-        if Effects.MapDataOverride[abilityId] then
+        if Effects.ZoneDataOverride[abilityId] then
             local index = GetZoneId(GetCurrentMapZoneIndex())
             local zoneName = GetPlayerLocationName()
-            if Effects.MapDataOverride[abilityId][index] then
-                if Effects.MapDataOverride[abilityId][index].icon then
-                    iconName = Effects.MapDataOverride[abilityId][index].icon
+            if Effects.ZoneDataOverride[abilityId][index] then
+                if Effects.ZoneDataOverride[abilityId][index].icon then
+                    iconName = Effects.ZoneDataOverride[abilityId][index].icon
                 end
-                if Effects.MapDataOverride[abilityId][index].name then
-                    effectName = Effects.MapDataOverride[abilityId][index].name
+                if Effects.ZoneDataOverride[abilityId][index].name then
+                    effectName = Effects.ZoneDataOverride[abilityId][index].name
                 end
-                if Effects.MapDataOverride[abilityId][index].hide then
+                if Effects.ZoneDataOverride[abilityId][index].hide then
                     return
                 end
             end
-            if Effects.MapDataOverride[abilityId][zoneName] then
-                if Effects.MapDataOverride[abilityId][zoneName].icon then
-                    iconName = Effects.MapDataOverride[abilityId][zoneName].icon
+            if Effects.ZoneDataOverride[abilityId][zoneName] then
+                if Effects.ZoneDataOverride[abilityId][zoneName].icon then
+                    iconName = Effects.ZoneDataOverride[abilityId][zoneName].icon
                 end
-                if Effects.MapDataOverride[abilityId][zoneName].name then
-                    effectName = Effects.MapDataOverride[abilityId][zoneName].name
+                if Effects.ZoneDataOverride[abilityId][zoneName].name then
+                    effectName = Effects.ZoneDataOverride[abilityId][zoneName].name
                 end
-                if Effects.MapDataOverride[abilityId][zoneName].hide then
+                if Effects.ZoneDataOverride[abilityId][zoneName].hide then
+                    return
+                end
+            end
+        end
+
+        -- Override name, icon, or hide based on Map Name
+        if Effects.MapDataOverride[abilityId] then
+            local mapName = GetMapName()
+            if Effects.MapDataOverride[abilityId][mapName] then
+                if Effects.MapDataOverride[abilityId][mapName].icon then
+                    iconName = Effects.MapDataOverride[abilityId][mapName].icon
+                end
+                if Effects.MapDataOverride[abilityId][mapName].name then
+                    effectName = Effects.MapDataOverride[abilityId][mapName].name
+                end
+                if Effects.MapDataOverride[abilityId][mapName].hide then
                     return
                 end
             end
@@ -2449,28 +2500,44 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
         local source = zo_strformat("<<t:1>>",sourceName)
         local target = zo_strformat("<<t:1>>",targetName)
 
-        if Effects.MapDataOverride[abilityId] then
+        if Effects.ZoneDataOverride[abilityId] then
             local index = GetZoneId(GetCurrentMapZoneIndex())
             local zoneName = GetPlayerLocationName()
-            if Effects.MapDataOverride[abilityId][index] then
-                if Effects.MapDataOverride[abilityId][index].icon then
-                    iconName = Effects.MapDataOverride[abilityId][index].icon
+            if Effects.ZoneDataOverride[abilityId][index] then
+                if Effects.ZoneDataOverride[abilityId][index].icon then
+                    iconName = Effects.ZoneDataOverride[abilityId][index].icon
                 end
-                if Effects.MapDataOverride[abilityId][index].name then
-                    effectName = Effects.MapDataOverride[abilityId][index].name
+                if Effects.ZoneDataOverride[abilityId][index].name then
+                    effectName = Effects.ZoneDataOverride[abilityId][index].name
                 end
-                if Effects.MapDataOverride[abilityId][index].hide then
+                if Effects.ZoneDataOverride[abilityId][index].hide then
                     return
                 end
             end
-            if Effects.MapDataOverride[abilityId][zoneName] then
-                if Effects.MapDataOverride[abilityId][zoneName].icon then
-                    iconName = Effects.MapDataOverride[abilityId][zoneName].icon
+            if Effects.ZoneDataOverride[abilityId][zoneName] then
+                if Effects.ZoneDataOverride[abilityId][zoneName].icon then
+                    iconName = Effects.ZoneDataOverride[abilityId][zoneName].icon
                 end
-                if Effects.MapDataOverride[abilityId][zoneName].name then
-                    effectName = Effects.MapDataOverride[abilityId][zoneName].name
+                if Effects.ZoneDataOverride[abilityId][zoneName].name then
+                    effectName = Effects.ZoneDataOverride[abilityId][zoneName].name
                 end
-                if Effects.MapDataOverride[abilityId][zoneName].hide then
+                if Effects.ZoneDataOverride[abilityId][zoneName].hide then
+                    return
+                end
+            end
+        end
+
+        -- Override name, icon, or hide based on Map Name
+        if Effects.MapDataOverride[abilityId] then
+            local mapName = GetMapName()
+            if Effects.MapDataOverride[abilityId][mapName] then
+                if Effects.MapDataOverride[abilityId][mapName].icon then
+                    iconName = Effects.MapDataOverride[abilityId][mapName].icon
+                end
+                if Effects.MapDataOverride[abilityId][mapName].name then
+                    effectName = Effects.MapDataOverride[abilityId][mapName].name
+                end
+                if Effects.MapDataOverride[abilityId][mapName].hide then
                     return
                 end
             end
@@ -2780,7 +2847,7 @@ function SpellCastBuffs.OnCombatEventOut( eventCode, result, isError, abilityNam
                     forced = "short",
                     restart=true, iconNum=0,
                     unbreakable=unbreakable,
-                    savedName = zo_strformat(SI_UNIT_NAME, targetName),
+                    savedName = zo_strformat("<<C:1>>", targetName),
                     fakeDuration = overrideDuration,
                     groundLabel = groundLabel,
                 }
@@ -2792,7 +2859,7 @@ function SpellCastBuffs.OnCombatEventOut( eventCode, result, isError, abilityNam
                     forced = "short",
                     restart=true, iconNum=0,
                     unbreakable=unbreakable,
-                    savedName = zo_strformat(SI_UNIT_NAME, targetName),
+                    savedName = zo_strformat("<<C:1>>", targetName),
                     fakeDuration = overrideDuration,
                     groundLabel = groundLabel,
                 }
@@ -2835,7 +2902,7 @@ function SpellCastBuffs.OnCombatEventOut( eventCode, result, isError, abilityNam
                     forced = "short",
                     restart=true, iconNum=0,
                     unbreakable=unbreakable,
-                    savedName = zo_strformat(SI_UNIT_NAME, targetName),
+                    savedName = zo_strformat("<<C:1>>", targetName),
                     groundLabel = groundLabel,
                 }
             else
@@ -2846,7 +2913,7 @@ function SpellCastBuffs.OnCombatEventOut( eventCode, result, isError, abilityNam
                     forced = "short",
                     restart=true, iconNum=0,
                     unbreakable=unbreakable,
-                    savedName = zo_strformat(SI_UNIT_NAME, targetName),
+                    savedName = zo_strformat("<<C:1>>", targetName),
                     groundLabel = groundLabel,
                 }
             end
@@ -2871,7 +2938,7 @@ function SpellCastBuffs.OnDeath(eventCode, unitTag, isDead)
 
             -- If werewolf is active, reset the icon so it's not removed (otherwise it flashes off for about a second until the trailer function picks up on the fact that no power drain has occurred.
             if SpellCastBuffs.SV.ShowWerewolf and IsWerewolf() then
-                SpellCastBuffs.SetWerewolfIconFrozen()
+                SpellCastBuffs.WerewolfState(nil, true, true)
             end
         else
             for effectType = 1, 2 do
@@ -2999,7 +3066,7 @@ function SpellCastBuffs.RestoreSavedFakeEffects()
         --local container = containerRouting[context]
         for k, v in pairs(effectsList) do
             if v.savedName ~= nil then
-                local unitName = zo_strformat(SI_UNIT_NAME, GetUnitName('reticleover'))
+                local unitName = zo_strformat("<<C:1>>", GetUnitName('reticleover'))
                 if unitName == v.savedName then
                     if SpellCastBuffs.EffectsList.saved[k] then
                         SpellCastBuffs.EffectsList.ground[k] = SpellCastBuffs.EffectsList.saved[k]
@@ -3238,6 +3305,8 @@ function SpellCastBuffs.updateBar(currentTime, sortedList, container)
         if buff and buff.bar and buff.bar.bar then
             if auraStarts and auraEnds and remain > 0 and not ground then
                 buff.bar.bar:SetValue(1 - ((currentTime - auraStarts) / (auraEnds - auraStarts)))
+            elseif effect.werewolf then
+                buff.bar.bar:SetValue(effect.werewolf)
             else
                 buff.bar.bar:SetValue(1)
             end
@@ -3348,7 +3417,7 @@ function SpellCastBuffs.updateIcons(currentTime, sortedList, container)
         if effect.iconNum ~= index then
             effect.iconNum = index
             effect.restart = true
-            SpellCastBuffs.SetSingleIconBuffType(buff, effect.type, effect.unbreakable)
+            SpellCastBuffs.SetSingleIconBuffType(buff, effect.type, effect.unbreakable, effect.id)
 
             -- Setup Info for Tooltip function to pull
             buff.effectId = effect.id
@@ -3382,7 +3451,7 @@ function SpellCastBuffs.updateIcons(currentTime, sortedList, container)
             end
 
             if buff.name then
-                buff.name:SetText(zo_strformat(SI_UNIT_NAME, effect.name))
+                buff.name:SetText(zo_strformat("<<C:1>>", effect.name))
             end
 
         end
@@ -3472,10 +3541,6 @@ function SpellCastBuffs.OnPlayerActivated(eventCode)
     -- Resolve Werewolf
     if SpellCastBuffs.SV.ShowWerewolf and IsWerewolf() then
         SpellCastBuffs.WerewolfState(nil, true, true)
-        -- If player is dead, add unlimited duration Werewolf indicator buff
-        if IsUnitDead("player") then
-            SpellCastBuffs.SetWerewolfIconFrozen()
-        end
     end
 
     -- Sets the player to dead if reloading UI or loading in while dead.
@@ -3506,7 +3571,6 @@ function SpellCastBuffs.OnPlayerAlive(eventCode)
     -- Reload werewolf effects
     if SpellCastBuffs.SV.ShowWerewolf and IsWerewolf() then
         SpellCastBuffs.WerewolfState(nil, true, true)
-        SpellCastBuffs.SetWerewolfIconFrozen()
     end
 
     -- Start Resurrection Sequence

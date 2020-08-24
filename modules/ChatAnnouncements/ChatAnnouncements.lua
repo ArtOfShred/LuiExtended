@@ -853,7 +853,7 @@ local g_removeableIDs = {
     [33235] = true, -- Wabbajack (Mages Guild Quests)
 }
 
--- List of items to blacklist as annyoing loot
+-- List of items to blacklist as annoying loot
 local g_blacklistIDs = {
     -- General
     [64713]  = true,    -- Laurel
@@ -874,21 +874,16 @@ local g_blacklistIDs = {
     [139670] = true,    -- Dro-m'Athra's Burnished Coffer
     [138711] = true,    -- Welkynar's Grounded Coffer
 
-    -- Mercenary Motif Pages
-    [64716]  = true,    -- Mercenary Motif
-    [64717]  = true,    -- Mercenary Motif
-    [64718]  = true,    -- Mercenary Motif
-    [64719]  = true,    -- Mercenary Motif
-    [64720]  = true,    -- Mercenary Motif
-    [64721]  = true,    -- Mercenary Motif
-    [64722]  = true,    -- Mercenary Motif
-    [64723]  = true,    -- Mercenary Motif
-    [64724]  = true,    -- Mercenary Motif
-    [64725]  = true,    -- Mercenary Motif
-    [64726]  = true,    -- Mercenary Motif
-    [64727]  = true,    -- Mercenary Motif
-    [64728]  = true,    -- Mercenary Motif
-    [64729]  = true,    -- Mercenary Motif
+    -- Transmutation Geodes
+    [134583] = true, -- Transmutation Geode
+    [134588] = true, -- Transmutation Geode
+    [134590] = true, -- Transmutation Geode
+    [134591] = true, -- Transmutation Geode
+    [134595] = true, -- Tester's Infinite Transmutation Geode
+    [134618] = true, -- Uncracked Transmutation Geode
+    [134622] = true, -- Uncracked Transmutation Geode
+    [134623] = true, -- Uncracked Transmutation Geode
+    [140222] = true, -- 200 Transmute Crystals (This is probably just a test item)
 }
 
 local guildAllianceColors = {
@@ -1863,7 +1858,7 @@ function ChatAnnouncements.ActivityStatusUpdate(eventCode, status)
 
     -- Debug
     if status == ACTIVITY_FINDER_STATUS_FORMING_GROUP and g_savedQueueValue ~= ACTIVITY_FINDER_STATUS_FORMING_GROUP then
-        if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
+        if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
             d("Old ACTIVITY_FINDER_STATUS_FORMING_GROUP event triggered")
         end
     end
@@ -2528,7 +2523,7 @@ elseif reason == 14 or reason == 40 or reason == 41 or reason == 74 or reason ==
 
     -- Haven't seen this one yet: Loot Currency Container (76), but it's more recently added and thus probably used for something.
     if reason == 76 then
-        if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
+        if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
             d("Currency Change reason 76 - CURRENCY_CHANGE_REASON_LOOT_CURRENCY_CONTAINER")
         end
     end
@@ -3637,7 +3632,7 @@ function ChatAnnouncements.ResolveQuestItemChange()
             -- Lower
             if newValue < questItemIndex[itemId].stack then
                 -- Easy temporary debug for my accounts only
-                if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
+                if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
                     d(itemId .. " Removed")
                 end
                 --
@@ -3718,7 +3713,7 @@ function ChatAnnouncements.ResolveQuestItemChange()
             -- Higher
             if newValue > questItemIndex[itemId].stack then
                 -- Easy temporary debug for my accounts only
-                if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
+                if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
                     d(itemId .. " Added")
                 end
                 --
@@ -3745,10 +3740,10 @@ function ChatAnnouncements.ResolveQuestItemChange()
                             logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
                         end
                         if Quests.ItemReceivedMessage[itemId] then
-                            logPrefix = Quests.ItemReceivedMessage[itemId] == LUIE_QUEST_MESSAGE_COMBINE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestCombine or
-                            Quests.ItemReceivedMessage[itemId] == LUIE_QUEST_MESSAGE_MIX and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestMix or
-                            Quests.ItemReceivedMessage[itemId] == LUIE_QUEST_MESSAGE_BUNDLE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestBundle or
-                            Quests.ItemReceivedMessage[itemId] == LUIE_QUEST_MESSAGE_LOOT and ChatAnnouncements.SV.ContextMessages.CurrencyMessageLoot
+                            logPrefix = Quests.ItemReceivedMessage[itemId] == LUIE_QUEST_MESSAGE_BUNDLE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestBundle or
+                            Quests.ItemReceivedMessage[itemId] == LUIE_QUEST_MESSAGE_LOOT and ChatAnnouncements.SV.ContextMessages.CurrencyMessageLoot or
+                            Quests.ItemReceivedMessage[itemId] == LUIE_QUEST_MESSAGE_COMBINE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestCombine or
+                            Quests.ItemReceivedMessage[itemId] == LUIE_QUEST_MESSAGE_MIX and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestMix
                         end
 
                         -- Some quest items we want to limit the maximum possible quantity displayed when looted (for wierd item swapping) so replace the actual quantity with this value.
@@ -3758,11 +3753,8 @@ function ChatAnnouncements.ResolveQuestItemChange()
                         local quantity = countChange > 1 and (" |cFFFFFFx" .. countChange .. "|r") or ""
 
                         formattedMessageP1 = ("|r" .. formattedIcon .. itemLink .. quantity .. "|c" .. color)
-                        formattedMessageP2 = string.format(logPrefix, formattedMessageP1)
-
                         -- Message for items being merged.
                         if Quests.QuestItemMerge[itemId] then
-
                             local line = ""
                             for i = 1, #Quests.QuestItemMerge[itemId] do
                                 local comma
@@ -3782,7 +3774,11 @@ function ChatAnnouncements.ResolveQuestItemChange()
                                 end
                                 line = (line .. comma .. "|r" .. formattedIcon .. usedLink .. quantity .. "|c" .. color)
                             end
+
                             formattedMessageP2 = string.format(logPrefix, line, formattedMessageP1)
+                        -- Or if we don't have a merged message just use the normal one
+                        else
+                            formattedMessageP2 = string.format(logPrefix, formattedMessageP1)
                         end
 
                         if ChatAnnouncements.SV.Inventory.LootTotal and total > 1 then
@@ -3885,7 +3881,7 @@ function ChatAnnouncements.OnLootReceived(eventCode, receivedBy, itemLink, quant
             formattedItemLink = ( itemLink:gsub("^|H0", "|H1", 1) )
         end
 
-        local formatName = zo_strformat(SI_UNIT_NAME, receivedBy)
+        local formatName = zo_strformat("<<C:1>>", receivedBy)
 
         local recipient
         if g_groupLootIndex[formatName] then
@@ -5899,7 +5895,7 @@ function ChatAnnouncements.OnPlayerActivated(eventCode)
 
     if characterName ~= "" and displayName ~= "" then
         local tradeName = ChatAnnouncements.ResolveNameLink(characterName, displayName)
-        g_tradeTarget = ZO_SELECTED_TEXT:Colorize(zo_strformat(SI_UNIT_NAME, tradeName))
+        g_tradeTarget = ZO_SELECTED_TEXT:Colorize(zo_strformat("<<C:1>>", tradeName))
     end
 
     if g_firstLoad then
@@ -6992,7 +6988,7 @@ function ChatAnnouncements.HookFunction()
         if ChatAnnouncements.SV.Notify.NotificationTradeCA or ChatAnnouncements.SV.Notify.NotificationTradeAlert then
             local finalName = ChatAnnouncements.ResolveNameLink(inviterCharacterName, inviterDisplayName)
             local finalAlertName = ChatAnnouncements.ResolveNameNoLink(inviterCharacterName, inviterDisplayName)
-            g_tradeTarget = ZO_SELECTED_TEXT:Colorize(zo_strformat(SI_UNIT_NAME, finalName))
+            g_tradeTarget = ZO_SELECTED_TEXT:Colorize(zo_strformat("<<C:1>>", finalName))
 
             if ChatAnnouncements.SV.Notify.NotificationTradeCA then
                 printToChat(zo_strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MESSAGE), finalName), true)
@@ -7010,7 +7006,7 @@ function ChatAnnouncements.HookFunction()
         if ChatAnnouncements.SV.Notify.NotificationTradeCA or ChatAnnouncements.SV.Notify.NotificationTradeAlert then
             local finalName = ChatAnnouncements.ResolveNameLink(inviteeCharacterName, inviteeDisplayName)
             local finalAlertName = ChatAnnouncements.ResolveNameNoLink(inviteeCharacterName, inviteeDisplayName)
-            g_tradeTarget = ZO_SELECTED_TEXT:Colorize(zo_strformat(SI_UNIT_NAME, finalName))
+            g_tradeTarget = ZO_SELECTED_TEXT:Colorize(zo_strformat("<<C:1>>", finalName))
 
             if ChatAnnouncements.SV.Notify.NotificationTradeCA then
                 printToChat(zo_strformat(GetString(SI_LUIE_CA_TRADE_INVITE_CONFIRM), finalName), true)
@@ -7984,7 +7980,7 @@ function ChatAnnouncements.HookFunction()
         end
 
         -- Debug for my account - TODO: Remove
-        if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
+        if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
             d(conditionType)
         end
 
@@ -10718,7 +10714,7 @@ end
 function ChatAnnouncements.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previousXP, currentXP)
     if (skillType == SKILL_TYPE_GUILD) then
         local lineName, _, _, lineId = GetSkillLineInfo(skillType, skillIndex)
-        formattedName = zo_strformat(SI_UNIT_NAME, lineName)
+        formattedName = zo_strformat("<<C:1>>", lineName)
 
         -- Bail out early if a certain type is not set to be displayed
         if lineId == 45 and not ChatAnnouncements.SV.Skills.SkillGuildFighters then

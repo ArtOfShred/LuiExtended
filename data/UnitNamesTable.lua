@@ -118,18 +118,19 @@ LUIE.Data.UnitNames = {
     NPC_Xivilai                           = 'Xivilai', -- GENERIC NPC
     NPC_Wraith                            = 'Wraith', -- GENERIC NPC
     NPC_Daedroth                          = 'Daedroth', -- GENERIC NPC
+    NPC_Daedric_Titan                     = 'Daedric Titan', -- GENERIC NPC
     NPC_Spider_Daedra                     = 'Spider Daedra', -- GENERIC NPC
     NPC_Spiderling                        = 'Spiderling', -- GENERIC NPC
     NPC_Flame_Ogrim                       = 'Flame Ogrim', -- GENERIC NPC (SUMMON)
     NPC_Winged_Twilight                   = 'Winged Twilight', -- GENERIC NPC
     NPC_Alit                              = 'Alit', -- GENERIC NPC
+    NPC_Guar                              = 'Guar', -- GENERIC NPC
+    NPC_Cliff_Strider                     = 'Cliff Strider', -- GENERIC NPC
     NPC_Strangler                         = 'Strangler', -- GENERIC NPC
     NPC_Crocodile                         = 'Crocodile', -- GENERIC NPC
     NPC_Feral_Guardian                    = 'Feral Guardian', -- GENERIC NPC (SUMMON)
 
     NPC_Aura_of_Protection                = 'Aura of Protection',
-
-    NPC_Naryu_Virian                      = 'Naryu Virian',
 
     NPC_Heritance_Cutthroat               = 'Heritance Cutthroat',
     NPC_Heritance_Deadeye                 = 'Heritance Deadeye',
@@ -180,6 +181,11 @@ LUIE.Data.UnitNames = {
 
     NPC_Duneripper                        = 'Duneripper', -- GENERIC NPC
 
+    NPC_Dremora_Channeler                 = 'Dremora Channeler', -- Cyrodiil IC Bridges
+    NPC_Burdening_Eye                     = 'Burdening Eye', -- Summoned NPC
+
+    NPC_Dremora_Caitiff                   = 'Dremora Caitiff', -- Dremora Caitiff
+
     -- DWEMER
     NPC_Dwarven_Sphere                    = 'Dwarven Sphere',
     NPC_Dwarven_Spider                    = 'Dwarven Spider',
@@ -190,6 +196,12 @@ LUIE.Data.UnitNames = {
     ----------------------------------------------------------------
 
     -- MSQ
+    Elite_Vaekar_the_Forgemaster = 'Vaekar the Forgemaster',
+    NPC_Feral_Soul_Shriven = 'Feral Soul Shriven',
+    NPC_Dremora_Baunekyn = 'Dremora Baunekyn',
+    NPC_Skeletal_Ravager = 'Skeletal Ravager',
+    Elite_Child_of_Bones = 'Child of Bones',
+
     Boss_Ragjar = 'Ragjar',
     Boss_Manifestation_of_Regret = 'Manifestation of Regret',
     Boss_Ancient_Clannfear = 'Ancient Clannfear',
@@ -231,11 +243,23 @@ LUIE.Data.UnitNames = {
     Boss_Shade_of_Naemon = 'Shade of Naemon',
 
     -- DC Quests
+    Elite_Deathfang = 'Deathfang',
     Elite_King_Demog = 'King Demog',
     Elite_Gornog = 'Gornog',
     Elite_Tempered_Sphere = 'Tempered Sphere',
 
+    -- Vvardenfell
+    NPC_Slaver_Cutthroat = 'Slaver Cutthroat',
+    NPC_Slaver_Archer = 'Slaver Archer',
+    Elite_First_Mate_Ulveni = 'First Mate Ulveni',
+
+    -- Summerset Quests
+    Elite_Yaghra_Nightmare = 'Yaghra Nightmare',
+    NPC_Dessicated_Archer = 'Dessicated Archer',
+    NPC_Dessicated_Fire_Mage = 'Dessicated Fire Mage',
+
     -- Elsweyr Quests
+    NPC_Euraxian_Necromancer = 'Euraxian Necromancer',
     Elite_Captain_Carvain = 'Captain Carvain',
     Boss_Bahlokdaan = 'Bahlokdaan',
 

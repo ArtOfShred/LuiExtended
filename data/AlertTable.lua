@@ -7,6 +7,14 @@ local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
 local Abilities = LUIE.Data.Abilities
 
+LUIE.Data.ZoneTable = {
+
+    [63157] = { block = true, dodge = true, priority = 2, bs = true, result = ACTION_RESULT_BEGIN, duration = 1500, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_ST_CC }, -- Heavy Blow (Justice Guard 1H)
+    [63261] = { block = true, dodge = true, priority = 2, bs = true, result = ACTION_RESULT_BEGIN, duration = 1250, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_ST_CC }, -- Heavy Blow (Justice Guard 2H)
+    [63179] = { block = true, dodge = true, interrupt = true, reflect = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1000, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_ST_CC }, -- Flame Shard (Justice Guard 2H)
+
+}
+
 LUIE.Data.AlertTable = {
 
     -- SET A PRIORITY
@@ -35,6 +43,7 @@ LUIE.Data.AlertTable = {
     -- fakeName = string -- Set this name for the source
     -- bossName = true -- Use the name of the current BOSS target frame for this ability source if possible
     -- bossMatch = NAME -- If there are multiple bosses, look for this name and use it as the source if possible
+    -- noForcedNameOverride = true -- Only fill in a name here if the name is missing, this gets around a few minor limitations
 
     -- CC TYPE
     -- cc = LUIE_CC_TYPE_STUN/LUIE_CC_TYPE_DISORIENT/LUIE_CC_TYPE_FEAR/LUIE_CC_TYPE_STAGGER/LUIE_CC_TYPE_SILENCE/LUIE_CC_TYPE_SNARE/LUIE_CC_TYPE_UNBREAKABLE -- If applicable set the CC type of this effect here
@@ -123,7 +132,7 @@ LUIE.Data.AlertTable = {
     [89425] = { summon = true, priority = 2, auradetect = true, fakeName = "", sound = LUIE_ALERT_SOUND_TYPE_SUMMON }, -- Call Ally (Pet Ranger)
     [44301] = { dodge = true, priority = 3, auradetect = true , ignoreRefresh = true, cc = LUIE_CC_TYPE_SNARE, sound = LUIE_ALERT_SOUND_TYPE_GROUND }, -- Trap Beast (Pet Ranger)
 
-    [15164] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, bossMatch = { Unitnames.Boss_Akezel, Unitnames.Boss_Calixte_Darkblood }, sound = LUIE_ALERT_SOUND_TYPE_TRAVELER }, -- Heat Wave (Fire Mage)
+    [15164] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 1500, bossMatch = { Unitnames.Boss_Akezel, Unitnames.Boss_Calixte_Darkblood }, sound = LUIE_ALERT_SOUND_TYPE_TRAVELER, noForcedNameOverride = true }, -- Heat Wave (Fire Mage)
     [47095] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 2000, postCast = 4000, bossMatch = { Unitnames.Boss_Calixte_Darkblood, Unitnames.Boss_Keeper_Areldur }, sound = LUIE_ALERT_SOUND_TYPE_GROUND }, -- Fire Rune (Fire Mage)
 
     [29471] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1800, bossMatch = { Unitnames.NPC_Xivilai_Fulminator, Unitnames.NPC_Xivilai_Boltaic }, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Thunder Thrall (Storm Mage)
@@ -168,7 +177,7 @@ LUIE.Data.AlertTable = {
     [43646] = { avoid = true, priority = 3, auradetect = true, sound = LUIE_ALERT_SOUND_TYPE_GROUND }, -- Barrier [monster synergy]  (Faction NPCs)
 
     [70070] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1250, sound = LUIE_ALERT_SOUND_TYPE_ST }, -- Heavy Strike (Winterborn Warrior)
-    [64980] = { block = true, dodge = true, interrupt = true, reflect = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = LUIE_CC_TYPE_STAGGER, sound = LUIE_ALERT_SOUND_TYPE_ST_CC }, -- Javelin (Winterborn Warrior)
+    [64980] = { block = true, dodge = true, interrupt = true, reflect = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = LUIE_CC_TYPE_STAGGER, sound = LUIE_ALERT_SOUND_TYPE_ST_CC, postCast = 500 }, -- Javelin (Winterborn Warrior)
     [65033] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_EFFECT_GAINED, duration = 1000, cc = LUIE_CC_TYPE_STAGGER, sound = LUIE_ALERT_SOUND_TYPE_ST_CC }, -- Retaliation (Winterborn Warrior)
 
     [55909] = { dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = LUIE_CC_TYPE_SNARE, postCast = 2300, sound = LUIE_ALERT_SOUND_TYPE_TRAVELER }, -- Grasping Vines (Winterborn Mage)
@@ -218,7 +227,7 @@ LUIE.Data.AlertTable = {
 
     [84818] = { interrupt = true, priority = 3, auradetect = true, duration = 4000, sound = LUIE_ALERT_SOUND_TYPE_HEAL }, -- Fiendish Healing (Skaafin Witchling) (Morrowind)
 
-    [84835] = { avoid = true, priority = 2, eventdetect = true, sound = LUIE_ALERT_SOUND_TYPE_GROUND }, -- Broken Pact (Skaafin) (Morrowind) -- TODO: Result needed here
+    [84835] = { avoid = true, priority = 2, eventdetect = true, duration = 2300, result = ACTION_RESULT_BEGIN, sound = LUIE_ALERT_SOUND_TYPE_GROUND, postCast = 4000 }, -- Broken Pact (Skaafin) (Morrowind)
 
     -- ANIMALS
     [5452] = { block = true, dodge = true, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1500, cc = LUIE_CC_TYPE_STAGGER, sound = LUIE_ALERT_SOUND_TYPE_AOE_CC }, -- Lacerate (Alit)
@@ -424,7 +433,7 @@ LUIE.Data.AlertTable = {
     [4864] = { dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, cc = LUIE_CC_TYPE_SNARE, duration = 633, sound = LUIE_ALERT_SOUND_TYPE_ST }, -- Storm Bound (Storm Atronach)
 
     [7095] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1400, sound = LUIE_ALERT_SOUND_TYPE_ST }, -- Heavy Attack (Xivilai)
-    [88947] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, hiddenDuration = 3000, bossMatch = { Unitnames.NPC_Xivilai_Fulminator, Unitnames.NPC_Xivilai_Boltaic }, sound = LUIE_ALERT_SOUND_TYPE_GROUND }, -- Lightning Grasp (Xivilai)
+    [88947] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, hiddenDuration = 3000, bossMatch = { Unitnames.NPC_Xivilai_Fulminator, Unitnames.NPC_Xivilai_Boltaic }, sound = LUIE_ALERT_SOUND_TYPE_GROUND, noDirect = true }, -- Lightning Grasp (Xivilai)
     [7100] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1333, postCast = 3000, sound = LUIE_ALERT_SOUND_TYPE_TRAVELER }, -- Hand of Flame (Xivilai)
     [25726] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = "", sound = LUIE_ALERT_SOUND_TYPE_SUMMON }, -- Summon Daedra (Xivilai)
 
@@ -596,6 +605,9 @@ LUIE.Data.AlertTable = {
     [85319] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, eventdetect = true, sound = LUIE_ALERT_SOUND_TYPE_GROUND }, -- Siege Ballista (Dwemer Arquebus)
     [85326] = { interrupt = true, priority = 3, eventdetect = true, refire = 1000, result = ACTION_RESULT_BEGIN, duration = 10000, sound = LUIE_ALERT_SOUND_TYPE_HEAL }, -- Polarizing Field (Dwemer Arquebus)
 
+    -- WORLD
+    [95820] = { avoid = true, priority = 2, result = ACTION_RESULT_EFFECT_GAINED, sound = LUIE_ALERT_SOUND_TYPE_ST, duration = 5000 }, -- Static Charge (Dark Anchor)
+
     --------------------------------------------------
     -- FRIENDLY NPC ----------------------------------
     --------------------------------------------------
@@ -684,13 +696,11 @@ LUIE.Data.AlertTable = {
     -- MSQ Tutorial (Soul Shriven in Coldharbour)
     -- [61748] = { block = true, priority = 1}, -- Heavy Attack (Tutorial) -- Default game tutorials display regardless
     -- [61916] = { interrupt = true, priority = 1}, -- Heat Wave (Tutorial) -- Default game tutorials display regardless
-    [63269] = { block = true, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Heat Wave (Tutorial)
-    [63737] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Heavy Attack (Tutorial)
-    [63684] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Uppercut (Tutorial)
-    [63761] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Pound (Tutorial)
-    [63752] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Vomit (Tutorial)
-    [63755] = { block = true, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Heat Wave (Tutorial)
-    [63521] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Bone Crush (Tutorial)
+    [63737] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1800, sound = LUIE_ALERT_SOUND_TYPE_ST }, -- Heavy Attack (Tutorial)
+    [63684] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 2200, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_ST_CC }, -- Uppercut (Tutorial)
+    [63761] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1800, cc = LUIE_CC_TYPE_STAGGER, sound = LUIE_ALERT_SOUND_TYPE_ST_CC }, -- Pound (Tutorial)
+    [63752] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2750, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Vomit (Tutorial)
+    [63521] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2500, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Bone Crush (Tutorial)
 
     -- MSQ 2 (Daughter of Giants)
     [27767] = { block = true, bs = true, dodge = true, priority = 2 }, -- Rending Leap (Ancient Clannfear)
@@ -763,7 +773,10 @@ LUIE.Data.AlertTable = {
     -- Tutorial
     -- [83416] = { block = true, priority = 1}, -- Heavy Attack (Tutorial) -- Default game tutorials display regardless
     -- [92233] = { interrupt = true, priority = 1}, -- Throw Dagger (Tutorial) -- Default game tutorials display regardless
-    [92668] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2533 }, -- Whirlwind (Slaver Cutthroat)
+    [92668] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2533, fakeName = Unitnames.NPC_Slaver_Cutthroat, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Whirlwind (Slaver Cutthroat)
+
+
+    -- TODO: THE REST OF THESE NON-TUTORIAL
 
     -- Main Quest
     [87958] = { avoid = true, interrupt = true, priority = 2 }, -- Ash Storm (Divine Delusions)
@@ -794,34 +807,34 @@ LUIE.Data.AlertTable = {
     -- SUMMERSET -------------------------------------
     --------------------------------------------------
 
-    -- TODO: Setup these alerts
-    [105601] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Explosive Toxins (Yaghra Larva)
-
-    [107282] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Impale (Yaghra Nightmare)
-    [105867] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Pustulant Explosion (Yaghra Nightmare)
+    [105601] = { block = true, avoid = true, priority = 3, duration = 1250, result = ACTION_RESULT_BEGIN, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Explosive Toxins (Yaghra Larva)
+    [107282] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 1067, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_AOE_CC }, -- Impale (Yaghra Nightmare)
+    [105867] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 1200, postCast = 4000, cc = LUIE_CC_TYPE_SNARE, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Pustulant Explosion (Yaghra Nightmare)
 
     --------------------------------------------------
     -- ELSWEYR ---------------------------------------
     --------------------------------------------------
 
-    [121475] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1300, cc = LUIE_CC_TYPE_STAGGER }, -- Devastating Leap (Bone Flayer)
-    [121473] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2400 }, -- Flurry (Bone Flayer)
+    [121475] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1300, cc = LUIE_CC_TYPE_STAGGER, sound = LUIE_ALERT_SOUND_TYPE_ST_CC }, -- Devastating Leap (Bone Flayer)
+    [121473] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2400, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Flurry (Bone Flayer)
 
-    [121643] = { interrupt = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2800, cc = LUIE_CC_TYPE_STUN }, -- Defiled Ground (Euraxian Necromancer)
+    [121643] = { interrupt = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2800, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Defiled Ground (Euraxian Necromancer)
 
-    [125281] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 4400, fakeName = Unitnames.Boss_Bahlokdaan, refire = 2000 }, -- Sweeping Breath (Bahlokdaan)
-    [125244] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1567, fakeName = Unitnames.Boss_Bahlokdaan, cc = LUIE_CC_TYPE_STUN }, -- Head Strike (Bahlokdaan)
-    [125570] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1400, cc = LUIE_CC_TYPE_STUN }, -- Chomp (Bahlokdaan)
-    [125241] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1567, fakeName = Unitnames.Boss_Bahlokdaan, cc = LUIE_CC_TYPE_STUN  }, -- Tail Whip (Bahlokdaan)
-    [125242] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1533, fakeName = Unitnames.Boss_Bahlokdaan, cc = LUIE_CC_TYPE_STUN  }, -- Wing Thrash (Bahlokdaan)
-    [125243] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1533, fakeName = Unitnames.Boss_Bahlokdaan, cc = LUIE_CC_TYPE_STUN  }, -- Wing Thrash (Bahlokdaan)
+    [125281] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 4400, fakeName = Unitnames.Boss_Bahlokdaan, refire = 2000, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Sweeping Breath (Bahlokdaan)
+    [125244] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1567, fakeName = Unitnames.Boss_Bahlokdaan, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_AOE_CC }, -- Head Strike (Bahlokdaan)
+    [125570] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1400, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_ST_CC }, -- Chomp (Bahlokdaan)
+    [122200] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1400, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_ST_CC }, -- Chomp (Bahlokdaan)
+    [122201] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1400, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_ST_CC }, -- Chomp (Bahlokdaan)
+    [125241] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1567, fakeName = Unitnames.Boss_Bahlokdaan, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_AOE_CC  }, -- Tail Whip (Bahlokdaan)
+    [125242] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1533, fakeName = Unitnames.Boss_Bahlokdaan, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_AOE_CC  }, -- Wing Thrash (Bahlokdaan)
+    [125243] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1533, fakeName = Unitnames.Boss_Bahlokdaan, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_AOE_CC  }, -- Wing Thrash (Bahlokdaan)
 
     --------------------------------------------------
     -- GREYMOOR ---------------------------------------
     --------------------------------------------------
 
-    [135718] = { dodge = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1500, cc = LUIE_CC_TYPE_SNARE, postCast = 2300 }, -- Frost Vines (Matron Urgala)
-    [135612] = { block = true, avoid = true, interrupt = true, priority = 2, eventdetect = true, refire = 2000, result = ACTION_RESULT_BEGIN, duration = 4500 }, -- Frost Wave (Matron Urgala)
+    [135718] = { dodge = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1500, cc = LUIE_CC_TYPE_SNARE, postCast = 2300, sound = LUIE_ALERT_SOUND_TYPE_TRAVELER }, -- Frost Vines (Matron Urgala)
+    [135612] = { block = true, avoid = true, interrupt = true, priority = 2, eventdetect = true, refire = 2000, cc = LUIE_CC_TYPE_SNARE, result = ACTION_RESULT_BEGIN, duration = 4500, sound = LUIE_ALERT_SOUND_TYPE_TRAVELER }, -- Frost Wave (Matron Urgala)
 
     --------------------------------------------------
     -- ARENAS ----------------------------------------
@@ -1425,11 +1438,11 @@ LUIE.Data.AlertZoneOverride = {
 
     [7835] = { -- Convalescence (Lamia)
         [131] = Unitnames.NPC_Lamia_Curare, -- Tempest Island
-        [58] = Unitnames.NPC_Lamia_Curare, -- Tempest Island
+        [Zonenames.Zone_Tempest_Island] = Unitnames.NPC_Lamia_Curare, -- Tempest Island
     },
     [9680] = { -- Summon Spectral Lamia
         [131] = Unitnames.NPC_Lamia_Curare, -- Tempest Island
-        [58] = Unitnames.NPC_Lamia_Curare, -- Tempest Island
+        [Zonenames.Zone_Tempest_Island] = Unitnames.NPC_Lamia_Curare, -- Tempest Island
     },
 
     [35220] = { -- Impending Storm (Storm Atronach)
@@ -1437,7 +1450,7 @@ LUIE.Data.AlertZoneOverride = {
         -- DUNGEONS
         [681] = Unitnames.NPC_Storm_Atronach, -- City of Ash II
         [131] = Unitnames.NPC_Storm_Atronach, -- Tempest Island
-        [58] = Unitnames.NPC_Storm_Atronach, -- Tempest Island
+        [Zonenames.Zone_Tempest_Island] = Unitnames.NPC_Storm_Atronach, -- Tempest Island
     },
 
     [54021] = { -- Release Flame (Marruz)
@@ -1468,7 +1481,7 @@ LUIE.Data.AlertZoneOverride = {
         [931] = Unitnames.NPC_Dremora_Invoker, -- Elden Hollow II
         [681] = Unitnames.NPC_Dremora_Gandrakyn, -- City of Ash II
         [131] = Unitnames.NPC_Sea_Viper_Healer, -- Tempest Island
-        [58] = Unitnames.NPC_Sea_Viper_Healer, -- Tempest Island
+        [Zonenames.Zone_Tempest_Island] = Unitnames.NPC_Sea_Viper_Healer, -- Tempest Island
         [932] = Unitnames.NPC_Spiderkith_Cauterizer, -- Crypt of Hearts II
         [22] = Unitnames.NPC_Treasure_Hunter_Healer, -- Volenfell
     },
@@ -1543,7 +1556,7 @@ LUIE.Data.AlertZoneOverride = {
 
         -- DUNGEONS
         [131] = Unitnames.NPC_Sea_Viper_Charger, -- Tempest Island
-        [58] = Unitnames.NPC_Sea_Viper_Charger, -- Tempest Island
+        [Zonenames.Zone_Tempest_Island] = Unitnames.NPC_Sea_Viper_Charger, -- Tempest Island
     },
     [17867] = { -- Shock Aura (Thundermaul)
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.Elite_Arstul, -- Maormer Invasion Camp (Auridon)
@@ -1559,7 +1572,7 @@ LUIE.Data.AlertZoneOverride = {
         -- DUNGEONS
         [126] = Unitnames.Boss_Nenesh_gro_Mal, -- Elden Hollow I
         [131] = Unitnames.NPC_Sea_Viper_Charger, -- Tempest Island
-        [58] = Unitnames.NPC_Sea_Viper_Charger, -- Tempest Island
+        [Zonenames.Zone_Tempest_Island] = Unitnames.NPC_Sea_Viper_Charger, -- Tempest Island
     },
     [29520] = { -- Aura of Protection (Shaman)
 
@@ -1568,6 +1581,10 @@ LUIE.Data.AlertZoneOverride = {
         -- [176] = Unitnames.NPC_Dremora_Hauzkyn, -- City of Ash I -- Can't use due to Dremora Shaman
     },
     [28408] = { -- Whirlwind (Skirmisher)
+
+        -- QUESTS
+        [968] = Unitnames.NPC_Slaver_Cutthroat, -- Firemoth Island (Vvardenfell)
+
         [Zonenames.Zone_Mathiisen] = Unitnames.NPC_Heritance_Cutthroat, -- Mathiisen (Auridon)
         [810] = Unitnames.NPC_Heritance_Cutthroat, -- Smuggler's Tunnel (Auridon)
         --[Zonenames.Zone_Castle_Rilis] = Unitnames.NPC_Skeletal_Striker, -- Castle Rilis (Auridon) -- Can't, elite here stops this from working
@@ -1588,9 +1605,14 @@ LUIE.Data.AlertZoneOverride = {
         [126] = Unitnames.NPC_Darkfern_Stalker, -- Elden Hollow I
         -- [176] = Unitnames.NPC_Dagonite_Assassin, -- City of Ash I -- Can't use due to Assassin Exemplar
         [681] = Unitnames.NPC_Urata_Militant, -- City of Ash II
-        [58] = Unitnames.Boss_Yalorasse_the_Speaker, -- Tempest Island
+        [Zonenames.Zone_Tempest_Island] = Unitnames.Boss_Yalorasse_the_Speaker, -- Tempest Island
     },
     [37108] = { -- Arrow Spray (Archer)
+        -- QUESTS
+        [0] = Unitnames.NPC_Skeletal_Archer, -- The Wailing Prison (Soul Shriven in Coldharbour)
+        [968] = Unitnames.NPC_Slaver_Archer, -- Firemoth Island (Vvardenfell)
+        [1013] = Unitnames.NPC_Dessicated_Archer, -- Summerset (The Mind Trap)
+
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- Maormer Invasion Camp (Auridon)
         [Zonenames.Zone_South_Beacon] = Unitnames.NPC_Sea_Viper_Deadeye, -- South Beacon (Auridon)
         [Zonenames.Zone_Mathiisen] = Unitnames.NPC_Heritance_Deadeye, -- Mathiisen (Auridon)
@@ -1623,10 +1645,14 @@ LUIE.Data.AlertZoneOverride = {
         [126] = Unitnames.NPC_Darkfern_Archer, -- Elden Hollow I
         [681] = Unitnames.NPC_Xivilai_Immolator, -- City of Ash II
         [131] = Unitnames.NPC_Sea_Viper_Deadeye, -- Tempest Island
-        [58] = Unitnames.NPC_Sea_Viper_Deadeye, -- Tempest Island
+        [Zonenames.Zone_Tempest_Island] = Unitnames.NPC_Sea_Viper_Deadeye, -- Tempest Island
         [932] = Unitnames.NPC_Spiderkith_Wefter, -- Crypt of Hearts II
     },
     [28628] = { -- Volley (Archer)
+        -- QUESTS
+        [968] = Unitnames.NPC_Slaver_Archer, -- Firemoth Island (Vvardenfell)
+        [1013] = Unitnames.NPC_Dessicated_Archer, -- Summerset (The Mind Trap)
+
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- Maormer Invasion Camp (Auridon)
         [Zonenames.Zone_South_Beacon] = Unitnames.NPC_Sea_Viper_Deadeye, -- South Beacon (Auridon)
         [Zonenames.Zone_Mathiisen] = Unitnames.NPC_Heritance_Deadeye, -- Mathiisen (Auridon)
@@ -1659,10 +1685,14 @@ LUIE.Data.AlertZoneOverride = {
         [126] = Unitnames.NPC_Darkfern_Archer, -- Elden Hollow I
         [681] = Unitnames.NPC_Xivilai_Immolator, -- City of Ash II
         [131] = Unitnames.NPC_Sea_Viper_Deadeye, -- Tempest Island
-        [58] = Unitnames.NPC_Sea_Viper_Deadeye, -- Tempest Island
+        [Zonenames.Zone_Tempest_Island] = Unitnames.NPC_Sea_Viper_Deadeye, -- Tempest Island
         [932] = Unitnames.NPC_Spiderkith_Wefter, -- Crypt of Hearts II
     },
     [12439] = { -- Burning Arrow (Synergy)
+        -- QUESTS
+        [968] = Unitnames.NPC_Slaver_Archer, -- Firemoth Island (Vvardenfell)
+        [1013] = Unitnames.NPC_Dessicated_Archer, -- Summerset (The Mind Trap)
+
         [Zonenames.Zone_Maormer_Invasion_Camp] = Unitnames.NPC_Sea_Viper_Deadeye, -- South Beacon (Auridon)
         [Zonenames.Zone_South_Beacon] = Unitnames.NPC_Sea_Viper_Deadeye, -- South Beacon (Auridon)
         [Zonenames.Zone_Mathiisen] = Unitnames.NPC_Heritance_Deadeye, -- Mathiisen (Auridon)
@@ -1726,6 +1756,8 @@ LUIE.Data.AlertZoneOverride = {
 
     --},
     [10805] = { -- Ignite (Synergy)
+        --QUESTS
+        [1013] = Unitnames.NPC_Dessicated_Fire_Mage, -- Summerset (The Mind Trap)
         -- Auridon
         [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Incendiary, -- Silsailen (Auridon)
         [Zonenames.Zone_Tower_of_the_Vale] = Unitnames.Elite_Minantilles_Rage, -- Tower of the Vale (Auridon)
@@ -1754,7 +1786,11 @@ LUIE.Data.AlertZoneOverride = {
     },
     [15164] = { -- Heat Wave (Fire Mage)
 
-        -- Auridon
+        -- QUESTS
+        [0] = Unitnames.NPC_Skeletal_Pyromancer, -- The Wailing Prison (Soul Shriven in Coldharbour)
+        [1013] = Unitnames.NPC_Dessicated_Fire_Mage, -- Summerset (The Mind Trap)
+
+
         [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Incendiary, -- Silsailen (Auridon)
         [Zonenames.Zone_Tower_of_the_Vale] = Unitnames.Elite_Minantilles_Rage, -- Tower of the Vale (Auridon)
         [Zonenames.Zone_Quendeluun] = Unitnames.NPC_Pact_Pyromancer, -- Quendeluun (Auridon)
@@ -1782,7 +1818,8 @@ LUIE.Data.AlertZoneOverride = {
         [22] = Unitnames.NPC_Treasure_Hunter_Incendiary, -- Volenfell
     },
     [47095] = { -- Fire Rune (Fire Mage)
-
+        --QUESTS
+        [1013] = Unitnames.NPC_Dessicated_Fire_Mage, -- Summerset (The Mind Trap)
         -- Auridon
         [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Incendiary, -- Silsailen (Auridon)
         [Zonenames.Zone_Tower_of_the_Vale] = Unitnames.Elite_Minantilles_Rage, -- Tower of the Vale (Auridon)
@@ -1830,6 +1867,9 @@ LUIE.Data.AlertZoneOverride = {
         [395] = Unitnames.Elite_Marrow, -- The Refuge of Dread
         [Zonenames.Zone_Torinaan] = Unitnames.NPC_Clannfear, -- Torinaan (Auridon)
 
+        -- QUESTS
+        [0] = Unitnames.NPC_Clannfear, -- The Wailing Prison (Soul Shriven in Coldharbour)
+
         -- DUNGEONS
         [380] = Unitnames.NPC_Clannfear, -- Banished Cells I
         [935] = Unitnames.NPC_Clannfear, -- Banished Cells II
@@ -1876,7 +1916,7 @@ LUIE.Data.AlertZoneOverride = {
 
         -- DUNGEONS
         [131] = Unitnames.NPC_Sea_Viper_Strongarm, -- Tempest Island
-        [58] = Unitnames.NPC_Sea_Viper_Strongarm, -- Tempest Island
+        [Zonenames.Zone_Tempest_Island] = Unitnames.NPC_Sea_Viper_Strongarm, -- Tempest Island
     },
 
     [37087] = { -- Lightning Onslaught (Battlemage)
@@ -2110,7 +2150,27 @@ LUIE.Data.AlertZoneOverride = {
     },
 
     [5452] = { -- Lacerate (Alit)
+        -- QUESTS
+        [968] = Unitnames.NPC_Alit, -- Firemoth Island (Vvardenfell)
+
+        -- DUNGEONS
         -- [126] = Unitnames.NPC_Alit, -- Elden Hollow I (Can't use because Alit's are right next to Leafseether and can easily also be casting this)
+
+    },
+
+    [5441] = { -- Dive (Guar)
+        -- QUESTS
+        [968] = Unitnames.NPC_Guar, -- Firemoth Island (Vvardenfell)
+
+    },
+
+    [85395] = { -- Dive (Cliff Strider)
+        -- QUESTS
+        [968] = Unitnames.NPC_Cliff_Strider, -- Firemoth Island (Vvardenfell)
+    },
+    [85399] = { -- Retch (Cliff Strider)
+        -- QUESTS
+        [968] = Unitnames.NPC_Cliff_Strider, -- Firemoth Island (Vvardenfell)
     },
 
     [26412] = { -- Thunderstrikes (Thunderbug)
@@ -2181,6 +2241,26 @@ LUIE.Data.AlertZoneOverride = {
         [22] = Unitnames.Boss_The_Guardians_Strength, -- Volenfell
     },
 
+    [63752] = { -- Vomit (Tutorial)
+        [0] = Unitnames.NPC_Feral_Soul_Shriven, -- The Wailing Prison (Soul Shriven in Coldharbour)
+    },
+    [63521] = { -- Bone Crush (Tutorial)
+        [0] = Unitnames.Elite_Child_of_Bones, -- The Wailing Prison (Soul Shriven in Coldharbour)
+    },
+    [107282] = { -- Impale (Yaghra Nightmare)
+        [1013] = Unitnames.Elite_Yaghra_Nightmare, -- Summerset (The Mind Trap)
+    },
+    [105867] = { -- Pustulant Explosion (Yaghra Nightmare)
+        [1013] = Unitnames.Elite_Yaghra_Nightmare, -- Summerset (The Mind Trap)
+    },
+
+    [121643] = { -- Defiled Ground (Euraxian Necromancer)
+        [1106] = Unitnames.NPC_Euraxian_Necromancer, -- Elsweyr (Bright Moons, Warm Sands)
+    },
+
+    [5240] = { -- Lash (Giant Snake)
+        [534] = Unitnames.Elite_Deathfang, -- Deathfang (Stros M'Kai)
+    }
 }
 
 -- Map Name override - Sometimes we need to use GetMapName() instead of Location Name or ZoneId

@@ -428,7 +428,7 @@ function UnitFrames.GroupFrames_OnMouseUp(self, button, upInside)
         ClearMenu()
         local isPlayer = AreUnitsEqual(unitTag, "player") -- Flag Player
         local isLFG = DoesGroupModificationRequireVote() -- Flag if we're in an LFG Group
-        local accountName = zo_strformat(SI_UNIT_NAME, GetUnitDisplayName(unitTag))
+        local accountName = zo_strformat("<<C:1>>", GetUnitDisplayName(unitTag))
         local isOnline = IsUnitOnline(unitTag)
 
         if isPlayer then
@@ -507,14 +507,10 @@ function UnitFrames.AltBar_OnMouseEnterWerewolf(control)
     local function UpdateWerewolfPower()
         local currentPower, maxPower = GetUnitPower("player", POWERTYPE_WEREWOLF)
         local percentagePower = zo_floor(currentPower / maxPower * 100)
-        local duration = ( currentPower / 27 )
-        -- Round up by 1 from any decimal number
-        local durationFormatted = math.floor(duration + 0.999)
 
         InitializeTooltip(InformationTooltip, control, BOTTOM, 0, -10)
         SetTooltipText(InformationTooltip, zo_strformat(SI_MONSTERSOCIALCLASS45))
         InformationTooltip:AddLine(zo_strformat(SI_LUIE_UF_WEREWOLF_POWER, currentPower, maxPower, percentagePower))
-        InformationTooltip:AddLine(zo_strformat(SI_LUIE_UF_WEREWOLF_TP, durationFormatted), nil, ZO_NORMAL_TEXT:UnpackRGBA() )
     end
     UpdateWerewolfPower()
 
@@ -546,7 +542,7 @@ function UnitFrames.AltBar_OnMouseEnterSiege(control)
         local siegeName = GetUnitName("controlledsiege")
         InitializeTooltip(InformationTooltip, control, BOTTOM, 0, -10)
 
-        SetTooltipText(InformationTooltip, zo_strformat(SI_UNIT_NAME, siegeName))
+        SetTooltipText(InformationTooltip, zo_strformat("<<C:1>>", siegeName))
         InformationTooltip:AddLine(zo_strformat(SI_LUIE_UF_SIEGE_POWER, ZO_CommaDelimitNumber(currentPower), ZO_CommaDelimitNumber(maxPower), percentagePower))
     end
     UpdateSiegePower()
@@ -2576,8 +2572,8 @@ function UnitFrames.UpdateStaticControls( unitFrame )
         end
     end
     -- Reanchor buffs if title changes
-    if unitFrame.buffs then
-        if UnitFrames.SV.PlayerFrameOptions ~= 1 and unitFrame.unitTag == "reticleover" then
+    if unitFrame.buffs and unitFrame.unitTag == "reticleover" then
+        if UnitFrames.SV.PlayerFrameOptions ~= 1 then
             if (not UnitFrames.SV.TargetEnableRank and not UnitFrames.SV.TargetEnableTitle and not UnitFrames.SV.TargetEnableRankIcon) or (savedTitle == "" and not UnitFrames.SV.TargetEnableRankIcon and unitFrame.isPlayer) or (savedTitle == "" and not unitFrame.isPlayer) then
                 unitFrame.debuffs:ClearAnchors()
                 unitFrame.debuffs:SetAnchor( TOP, unitFrame.control, BOTTOM, 0, 5 )
@@ -2607,7 +2603,7 @@ function UnitFrames.UpdateStaticControls( unitFrame )
 
     end
     -- Finally set transparency for group frames that has .control field
-    if "group" == string.sub(unitFrame.unitTag, 0, 5) and unitFrame.control then
+    if unitFrame.unitTag and "group" == string.sub(unitFrame.unitTag, 0, 5) and unitFrame.control then
         unitFrame.control:SetAlpha( IsUnitInGroupSupportRange(unitFrame.unitTag) and ( UnitFrames.SV.GroupAlpha * 0.01) or ( UnitFrames.SV.GroupAlpha * 0.01) / 2 )
     end
 end
@@ -2692,6 +2688,8 @@ end
 -- Updates title for unit if changed, and also re-anchors buffs or toggles display on/off if the unitTag had no title selected previously
 -- Called from EVENT_TITLE_UPDATE & EVENT_RANK_POINT_UPDATE
 function UnitFrames.TitleUpdate( eventCode, unitTag )
+    -- No need to update title for anything but reticleover target
+    if unitTag ~= "reticleover" then return end
     UnitFrames.UpdateStaticControls( g_DefaultFrames[unitTag] )
     UnitFrames.UpdateStaticControls( UnitFrames.CustomFrames[unitTag] )
     UnitFrames.UpdateStaticControls( g_AvaCustFrames[unitTag] )
