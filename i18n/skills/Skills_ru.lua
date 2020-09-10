@@ -1447,6 +1447,12 @@ local strings = {
     SI_LUIE_SKILL_WALL_OF_SOULS_TP =                     "A wall of souls protects you from death.\n\nIf any enemy crosses the threshold of the wall they are killed instantly.",
     SI_LUIE_SKILL_EYE_OF_THE_SENTINEL_TP =               "You are paralyzed by the gaze of the Coldharbour Sentinel.",
 
+    -- Mounted
+    SI_LUIE_SKILL_MOUNTED =                              "Mounted",
+    SI_LUIE_SKILL_MOUNTED_TP =                           "You are mounted.",
+    SI_LUIE_SKILL_MOUNTED_PASSENGER =                    "Mounted (Passenger)",
+    SI_LUIE_SKILL_MOUNTED_PASSENGER_TP =                 "You are mounted as a passenger.",
+
     -- Keep Upgrade
     SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_RANGE =              "Longer Range on Ranged Guards",
     SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_RANGE_TP =           "Increase the range of Mage and Archer Guards.",

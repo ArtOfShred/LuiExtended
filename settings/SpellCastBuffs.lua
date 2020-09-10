@@ -591,28 +591,6 @@ function SpellCastBuffs.CreateSettings()
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
             },
             {
-                -- Long Term - Mounts
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_TP),
-                getFunc = function() return not Settings.IgnoreMount end,
-                setFunc = function(value) Settings.IgnoreMount = not value SpellCastBuffs.OnPlayerActivated() end,
-                width = "full",
-                default = not Defaults.IgnoreMount,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Use Generic Mount Icon
-                type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_ICON)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_ICON_TP),
-                getFunc = function() return Settings.MountGenericIcon end,
-                setFunc = function(value) Settings.MountGenericIcon = value SpellCastBuffs.OnPlayerActivated() end,
-                width = "full",
-                default = not Defaults.MountGenericIcon,
-                disabled = function() return Settings.IgnoreMount and not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
                 -- Long Term - Pets
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET),
@@ -632,6 +610,40 @@ function SpellCastBuffs.CreateSettings()
                 setFunc = function(value) Settings.IgnoreSetICDPlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
                 width = "full",
                 default = not Defaults.IgnoreSetICDPlayer,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - Mounts (Player)
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_PLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_PLAYER_TP),
+                getFunc = function() return not Settings.IgnoreMountPlayer end,
+                setFunc = function(value) Settings.IgnoreMountPlayer = not value SpellCastBuffs.OnPlayerActivated() end,
+                width = "full",
+                default = not Defaults.IgnoreMountPlayer,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Use Generic Mount Icon
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_ICON)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_ICON_TP),
+                getFunc = function() return Settings.MountDetail end,
+                setFunc = function(value) Settings.MountDetail = value SpellCastBuffs.OnPlayerActivated() end,
+                width = "full",
+                default = not Defaults.MountDetail,
+                disabled = function() return Settings.IgnoreMountPlayer end,
+            },
+
+            {
+                -- Long Term - Mounts (Target)
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_TARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_TARGET_TP),
+                getFunc = function() return not Settings.IgnoreMountTarget end,
+                setFunc = function(value) Settings.IgnoreMountTarget = not value end,
+                width = "full",
+                default = not Defaults.IgnoreMountTarget,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
             },
             {

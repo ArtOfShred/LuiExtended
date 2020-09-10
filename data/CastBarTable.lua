@@ -362,7 +362,8 @@ CastBarTable.CastDurationFix = {
     [118287] = 1200, -- Ravenous Goliath Self Snare (Ravenous Goliath)
 
     -- Innate
-    [37059] = 1165, -- Mount Up
+    [37059] = 1165, -- Mount Up (Mount)
+    [141013] = 1165, -- Mount Up (Passenger Mount)
     [14644] = 4000, -- Revive (Death Dialogue)
     [32346] = 5800, -- Skyshard Collect
     [47270] = 5600, -- Ritual of Mara
@@ -518,7 +519,8 @@ CastBarTable.IsCast = {
     -- Innate
     [6811] = true, -- Recall
     [69293] = true, -- Sigil of Imperial Retreat
-    [37059] = true, -- Mount Up
+    [37059] = true, -- Mount Up (Mount)
+    [141013] = true, -- Mount Up (Passenger Mount)
     [14031] = true, -- Mundus Use
     [14644] = true, -- Revive (Death Dialogue)
     [32346] = true, -- Skyshard Collect
@@ -938,7 +940,8 @@ CastBarTable.MultiCast = {
 --------------------------------------------------------------------------------------------------------------------------------
 CastBarTable.IgnoreCastBarStun = {
     -- Player
-    [36434] = true, -- Mount Stun
+    [36434] = true, -- Mount Up (Mount)
+    [141001] = true, -- Mount Up (Passenger Mount)
     [74232] = true, -- Stun (Malacath's Wrathful Flame)
     [92863] = true, -- Stun (Dreamer's Chime)
     [115046] = true, -- 68235 Stun (Nascent Indrik)

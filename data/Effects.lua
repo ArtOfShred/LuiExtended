@@ -4987,8 +4987,10 @@ Effects.EffectOverride = {
     [105194] = { hide = true }, -- RF Combat Trigger
 
     -- Mount
-    [37059] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_mounted.dds' }, -- Mount Up
-    [115607] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds', unbreakable = 1, tooltip = Tooltips.Generic_Knockdown }, -- Hard Dismount
+    [37059] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_mounted.dds' }, -- Mount Up (Mount)
+    [141013] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_mounted.dds' }, -- Mount Up (Passenger Mount)
+    [115607] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds', unbreakable = 1, tooltip = Tooltips.Generic_Knockdown }, -- Hard Dismount (Mount)
+    [141004] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds', unbreakable = 1, tooltip = Tooltips.Generic_Knockdown }, -- Hard Dismount (Passenger Mount)
     [33439] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_mount_sprint.dds', name = Abilities.Innate_Gallop, tooltip = Tooltips.Innate_Gallop }, -- Mount Sprint (Generic)
 
     -- Block
@@ -13677,7 +13679,8 @@ Effects.FakePlayerDebuffs = {
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.FakeStagger = {
     -- Player Basic
-    [115607] = { duration = 2000 }, -- Hard Dismount
+    [115607] = { duration = 2000 }, -- Hard Dismount (Mount)
+    [141004] = { duration = 2000 }, -- Hard Dismount (Passenger Mount)
 
     -- Dual Wield
     [126640] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = Abilities.Innate_Stagger, duration = 433 }, -- Stagger (Hidden Blade)

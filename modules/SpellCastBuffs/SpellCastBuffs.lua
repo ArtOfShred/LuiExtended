@@ -90,8 +90,9 @@ SpellCastBuffs.Defaults = {
     IgnorePolymorph                     = true,
     IgnoreAssistant                     = true,
     IgnorePet                           = true,
-    IgnoreMount                         = false,
-    MountGenericIcon                    = false,
+    IgnoreMountPlayer                   = false,
+    IgnoreMountTarget                   = false,
+    MountDetail                         = true,
     LongTermEffectsSeparate             = true,
     LongTermEffectsReverse              = true,
     LongTermEffectsSeparateAlignment    = 2,
@@ -3039,6 +3040,8 @@ function SpellCastBuffs.ReloadEffects(unitTag)
         SpellCastBuffs.AddNameAura()
         -- Display Battle Spirit
         SpellCastBuffs.LoadBattleSpiritTarget()
+        -- Display Mounted Status
+        SpellCastBuffs.DisplayMountIcon("reticleover")
     end
 end
 
@@ -3524,7 +3527,7 @@ function SpellCastBuffs.OnPlayerActivated(eventCode)
     SpellCastBuffs.DuelStart()
 
     -- Resolve Mounted icon
-    if not SpellCastBuffs.SV.IgnoreMount and IsMounted() then
+    if not SpellCastBuffs.SV.IgnoreMountPlayer and IsMounted() then
         zo_callLater(function() SpellCastBuffs.MountStatus(eventCode, true) end, 50)
     end
 

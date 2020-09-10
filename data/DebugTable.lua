@@ -2765,6 +2765,18 @@ LUIE.DebugAuras = {
     [41703] = true, -- Sprint
     [41704] = true, -- Sprint
 
+    -- PASSENGER MOUNT
+    [140996] = true, -- Mount Up Passenger
+    [141013] = true, -- Mount Up
+    [141012] = true, -- Mount Up
+    [141001] = true, -- Mount Up
+    [141011] = true, -- Remove on Dismount
+    [141008] = true, -- Dismount
+    [141002] = true, -- Dismount
+    [140998] = true, -- Dismount
+    [141003] = true, -- Pause Mount Stamina Regen
+    [141004] = true, -- Hard Dismount
+
     -- BLOCK
     [14890] = true, -- Block
     [16270] = true, -- Brace Cost
