@@ -1440,7 +1440,7 @@ function SpellCastBuffs.SetSingleIconBuffType(buff, buffType, unbreakable, id)
             colour = {0,1,0,1}
         else
             contextType = "debuff"
-            colour = {0,0,0,1}
+            colour = {1,0,0,1}
         end
     elseif unbreakable == 1 then
         if buffType == 1 then
