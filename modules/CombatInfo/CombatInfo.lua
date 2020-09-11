@@ -1493,8 +1493,15 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
             if CombatInfo.SV.ShowTriggered then
                 -- Play sound twice so its a little louder.
                 if CombatInfo.SV.ProcEnableSound and unitTag == "player" and g_triggeredSlotsFront[abilityId] then
-                    PlaySound(g_procSound)
-                    PlaySound(g_procSound)
+                    if abilityId == 46327 then
+                        if changeType == EFFECT_RESULT_GAINED then
+                            PlaySound(g_procSound)
+                            PlaySound(g_procSound)
+                        end
+                    else
+                        PlaySound(g_procSound)
+                        PlaySound(g_procSound)
+                    end
                 end
                 g_triggeredSlotsRemain[abilityId] = 1000 * endTime
                 local remain = g_triggeredSlotsRemain[abilityId] - currentTime

@@ -1563,8 +1563,8 @@ function UnitFrames.Initialize(enabled)
     g_targetThreshold = UnitFrames.SV.ExecutePercentage
 
     g_healthThreshold = UnitFrames.SV.LowResourceHealth
-    g_magickaThreshold = UnitFrames.SV.LowResourceStamina
-    g_staminaThreshold = UnitFrames.SV.LowResourceMagicka
+    g_magickaThreshold = UnitFrames.SV.LowResourceMagicka
+    g_staminaThreshold = UnitFrames.SV.LowResourceStamina
 
     CreateDefaultFrames()
 
@@ -5057,8 +5057,8 @@ end
 
 function UnitFrames.CustomFramesReloadLowResourceThreshold()
     g_healthThreshold = UnitFrames.SV.LowResourceHealth
-    g_magickaThreshold = UnitFrames.SV.LowResourceStamina
-    g_staminaThreshold = UnitFrames.SV.LowResourceMagicka
+    g_magickaThreshold = UnitFrames.SV.LowResourceMagicka
+    g_staminaThreshold = UnitFrames.SV.LowResourceStamina
 
     if UnitFrames.CustomFrames["player"] and UnitFrames.CustomFrames["player"][POWERTYPE_HEALTH] then
         UnitFrames.CustomFrames["player"][POWERTYPE_HEALTH].threshold = g_healthThreshold
