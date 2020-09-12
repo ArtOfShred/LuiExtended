@@ -10,7 +10,7 @@ Status
 ------
 
 ### Main Addon
-Main addon translation idk what to write
+This is the translation for the main addon strings consisting of most text displayed outside of the settings menu.
 
 | File       | Status     |
 |:----------:|:----------:|
@@ -21,7 +21,7 @@ Main addon translation idk what to write
 | `jp.lua`   | 0% done    |
 
 ### Skills
-This is the translation for bla bla bla
+This is the translation for ability names and tooltips.
 
 | File              | Status     |
 |:-----------------:|:----------:|
@@ -32,7 +32,7 @@ This is the translation for bla bla bla
 | `Skills_jp.lua`   | 0% done    |
 
 ### Settings  
-This is the translation for the AddOn Settings Menu
+This is the translation for the AddOn Settings Menu.
 
 | File                | Status     |
 |:-------------------:|:----------:|

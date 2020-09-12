@@ -634,7 +634,7 @@ function SpellCastBuffs.CreateSettings()
                 default = not Defaults.MountDetail,
                 disabled = function() return Settings.IgnoreMountPlayer end,
             },
-
+            --[[
             {
                 -- Long Term - Mounts (Target)
                 type = "checkbox",
@@ -646,6 +646,7 @@ function SpellCastBuffs.CreateSettings()
                 default = not Defaults.IgnoreMountTarget,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
             },
+            ]]--
             {
                 -- Long Term - Mundus - Player
                 type = "checkbox",

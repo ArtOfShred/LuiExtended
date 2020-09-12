@@ -3040,8 +3040,8 @@ function SpellCastBuffs.ReloadEffects(unitTag)
         SpellCastBuffs.AddNameAura()
         -- Display Battle Spirit
         SpellCastBuffs.LoadBattleSpiritTarget()
-        -- Display Mounted Status
-        SpellCastBuffs.DisplayMountIcon("reticleover")
+        -- TODO: Maybe implement - Display Mounted Status for target
+        -- SpellCastBuffs.DisplayMountIcon("reticleover")
     end
 end
 
