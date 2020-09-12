@@ -651,7 +651,6 @@ local g_currentGroupLeaderDisplayName = nil           -- Tracks current Group Le
 local g_currentActivityId           = nil           -- current activity ID for LFG.
 local g_stopGroupLeaveQueue         = false         -- Stops group notification messages from printing for a short time an LFG group is formed - Called when a ready check has the possible result of success.
 local g_lfgDisableGroupEvents       = false         -- Stops group notification messages from printing for a short time an LFG group is formed - Called when succesfully joining a new LFG activity.
-local g_groupJoinFudger             = false         -- Toggled on when a group invite is accepted. Controls display of group join message.
 local g_joinLFGOverride             = false         -- Toggled on to stop display of standard group join message when joining an LFG group. Instead an alternate message with the LFG activity name will display.
 local g_leaveLFGOverride            = false         -- Toggled on to modify group leave message to display "You are no longer in an LFG group."
 local g_showActivityStatus          = true          -- Variable to control display of LFG status
@@ -6529,11 +6528,6 @@ function ChatAnnouncements.HookFunction()
     local function GroupUpdateAlert()
         g_currentGroupLeaderRawName = GetRawUnitName(GetGroupLeaderUnitTag())
         g_currentGroupLeaderDisplayName = GetUnitDisplayName(GetGroupLeaderUnitTag())
-
-        if g_groupJoinFudger then
-            zo_callLater(ChatAnnouncements.CheckLFGStatusJoin, 100)
-        end
-        g_groupJoinFudger = false
     end
 
     -- EVENT_GROUP_MEMBER_LEFT (Alert Handler)
@@ -7227,7 +7221,6 @@ function ChatAnnouncements.HookFunction()
 
     ZO_PreHook(alertHandlers, EVENT_GROUP_MEMBER_JOINED, OnGroupMemberJoined)
 
-    eventManager:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_REMOVED, ChatAnnouncements.GroupInviteRemoved)
     eventManager:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED, ChatAnnouncements.OnGroupInviteReceived)
     eventManager:RegisterForEvent(moduleName, EVENT_GROUP_TYPE_CHANGED, ChatAnnouncements.OnGroupTypeChanged)
     eventManager:RegisterForEvent(moduleName, EVENT_GROUP_ELECTION_NOTIFICATION_ADDED, ChatAnnouncements.VoteNotify)
@@ -10597,15 +10590,8 @@ function ChatAnnouncements.CheckLFGStatusLeave(WasKicked)
     g_leaveLFGOverride = false
 end
 
--- EVENT_GROUP_INVITE_REMOVED
-function ChatAnnouncements.GroupInviteRemoved(eventCode)
-    g_groupJoinFudger = true
-end
-
 -- EVENT_GROUP_INVITE_RECEIVED
 function ChatAnnouncements.OnGroupInviteReceived(eventCode, inviterName, inviterDisplayName)
-    g_groupJoinFudger = false
-
     if ChatAnnouncements.SV.Group.GroupCA then
         local finalName = ChatAnnouncements.ResolveNameLink(inviterName, inviterDisplayName)
         local message = zo_strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE), finalName)
