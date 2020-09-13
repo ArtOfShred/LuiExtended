@@ -16364,6 +16364,10 @@ LUIE.DebugAuras = {
     [11353] = true, -- Enemy Keep Bonus VIII
     [11356] = true, -- Enemy Keep Bonus IX
 
+    [111540] = true, -- Edge Keep Bonus 1
+    [111552] = true, -- Edge Keep Bonus 2
+    [111553] = true, -- Edge Keep Bonus 3
+
     [15060] = true, -- Defensive Scroll Bonus I
     [16350] = true, -- Defensive Scroll Bonus II
 
