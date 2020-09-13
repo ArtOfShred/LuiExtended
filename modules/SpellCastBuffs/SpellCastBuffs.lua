@@ -3015,8 +3015,6 @@ function SpellCastBuffs.ReloadEffects(unitTag)
         SpellCastBuffs.OnEffectChanged(0, 3, buffSlot, buffName, unitTag, timeStarted, timeEnding, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, unitName, 0--[[unitId]], abilityId, castByPlayer)
     end
 
-    -- Load Cyrodiil Buffs
-    SpellCastBuffs.LoadCyrodiilBuffs(unitTag)
     -- Display Disguise State
     SpellCastBuffs.DisguiseStateChanged(nil, unitTag, GetUnitDisguiseState(unitTag))
     -- Display Stealth State
