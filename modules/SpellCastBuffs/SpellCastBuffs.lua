@@ -2513,12 +2513,16 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
         if abilityId == 26406 then g_ignoreAbilityId[abilityId] = true end
         SpellCastBuffs.EffectsList[context][ abilityId ] = nil
         SpellCastBuffs.EffectsList.player2[ abilityId ] = nil
+        --[[ TODO: Remove this block (this id no longer exists)
         if abilityId == 973 and not SpellCastBuffs.SV.ShowSprint then
             return
         end
+        ]]--
+        --[[ TODO: Remove this block (this id no longer exists)
         if abilityId == 33439 and not SpellCastBuffs.SV.ShowGallop then
             return
         end
+        ]]--
 
         local toggle = Effects.IsToggle[abilityId] or false
 
@@ -3046,10 +3050,6 @@ function SpellCastBuffs.AddNameAura()
             end
             -- Bail out if this ability is blacklisted
             if SpellCastBuffs.SV.BlacklistTable[v.id] or SpellCastBuffs.SV.BlacklistTable[abilityName] then
-                return
-            end
-            -- Specific case for the Minor Magickasteal added onto the Target Iron Atronach, Trial
-            if v.id == 120012 and not SpellCastBuffs.SV.ShowSharedMajorMinor then
                 return
             end
             SpellCastBuffs.EffectsList.reticleover2[ "Name Specific Buff" .. k ] = {

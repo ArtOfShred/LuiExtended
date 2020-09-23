@@ -265,9 +265,9 @@ LUIE.Data.Tooltips = {
     Innate_Dodge_Fatigue                            = GetString(SI_LUIE_SKILL_DODGE_FATIGUE_TP),
     Innate_Hidden                                   = GetString(SI_LUIE_SKILL_HIDDEN_TP),
     Innate_Invisible                                = GetString(SI_LUIE_SKILL_INVISIBLE_TP),
-    Innate_Sprint                                   = GetString(SI_LUIE_SKILL_SPRINT_TP),
+    --Innate_Sprint                                   = GetString(SI_LUIE_SKILL_SPRINT_TP),
     Innate_Gallop                                   = GetString(SI_LUIE_SKILL_GALLOP_TP),
-    Innate_Block                                    = GetString(SI_LUIE_SKILL_BLOCK_TP),
+    --Innate_Block                                    = GetString(SI_LUIE_SKILL_BLOCK_TP),
     Innate_Resurrection_Immunity                    = GetString(SI_LUIE_SKILL_RESURRECTION_IMMUNITY_TP),
     Innate_Taunt                                    = GetString(SI_LUIE_SKILL_TAUNT_TP),
     Innate_Disguised                                = GetString(SI_LUIE_SKILL_DISGUISE_TP),
@@ -573,6 +573,7 @@ LUIE.Data.Tooltips = {
     Set_Sheer_Venom                                 = GetString(SI_LUIE_SET_SHEER_VENOM_TP),
     Set_Elemental_Catalyst                          = GetString(SI_LUIE_SET_ELEMENTAL_CATALYST_TP),
     Set_Crimson_Twilight                            = GetString(SI_LUIE_SET_CRIMSON_TWILIGHT_TP),
+    Set_Ironblood                                   = GetString(SI_LUIE_SKILL_SET_IRONBLOOD_TP),
 
     -- Trial Sets
     Set_Berserking_Warrior                          = GetString(SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP),
@@ -729,7 +730,6 @@ LUIE.Data.Tooltips = {
     Skill_Bound_Armaments_Skill                     = GetString(SI_LUIE_SKILL_BOUND_ARMAMENTS_SKILL_TP),
     Skill_Bound_Armaments_Stack                     = GetString(SI_LUIE_SKILL_BOUND_ARMAMENTS_STACK_TP),
     Skill_Bound_Aegis                               = GetAbilityDescription(24163),
-    Skill_Atronach_Zap                              = GetString(SI_LUIE_SKILL_ATRONACH_ZAP_TP),
     Skill_Storm_Atronach                            = GetString(SI_LUIE_SKILL_STORM_ATRONACH_TP),
     Skill_Charged_Atronach                          = GetString(SI_LUIE_SKILL_CHARGED_ATRONACH_TP),
     Skill_Mages_Fury                                = GetString(SI_LUIE_SKILL_MAGES_FURY_TP),

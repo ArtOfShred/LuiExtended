@@ -516,8 +516,6 @@ CrowdControl.aoeNPCNormal = {
     [103992] = 1, -- Luminescent Burn (Yaghra Spewer)
     [121644] = 1, -- Defiled Ground (Euraxian Necromancer)
 
-    [90182] = 1, -- Oily Smoke (Vvardenfell -- Divine Restoration) -- TODO: Check, maybe is elite?
-
 }
 
 
