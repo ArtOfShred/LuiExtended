@@ -170,6 +170,8 @@ LUIE.DebugAuras = {
 
     [63569] = true, -- Major Gallop
 
+    [109966] = true, -- Major Courage
+
     [61723] = true, -- Minor Maim
     [61725] = true, -- Major Maim
 
@@ -182,6 +184,7 @@ LUIE.DebugAuras = {
     [61727] = true, -- Major Defile
 
     [79867] = true, -- Minor Cowardice
+    [147643] = true, -- Major Cowardice
 
     [76618] = true, -- Minor Aegis
     [147225] = true, -- Minor Aegis -- Dummy
@@ -1289,7 +1292,7 @@ LUIE.DebugAuras = {
     [83288] = true, -- Pirate Skeleton
     [83287] = true, -- Pirate Skeleton
     [80853] = true, -- Major Protection (Pirate Skeleton)
-    [85637] = true, -- Major Defile (Pirate Skeleton)
+    [85637] = true, -- Minor Defile (Pirate Skeleton)
 
     [80599] = true, -- Selene
     [11317] = true, -- Generic Self PermaStun
@@ -1397,7 +1400,7 @@ LUIE.DebugAuras = {
     [80863] = true, -- Hoarvor Mask
 
     [111352] = true, -- Vykosa
-    [111354] = true, -- Vykosa
+    [111354] = true, -- Major Cowardice
 
     [102125] = true, -- Zaan
     [102136] = true, -- Zaan
@@ -2308,13 +2311,13 @@ LUIE.DebugAuras = {
 
     -- Trial Sets (Cloudrest)
 
-    [107117] = true, -- Vestment of Olirime (Olirime's)
-    [107141] = true, -- Vestment of Olirime (Olirime's)
-    [109994] = true, -- Major Courage (Olirime's)
+    [107117] = true, -- Vestment of Olirime (Olorime's)
+    [107141] = true, -- Vestment of Olirime (Olorime's)
+    [109994] = true, -- Major Courage (Olorime's)
 
-    [109082] = true, -- Ideal Vestment of Olorime (Olirime's Perfect)
-    [109084] = true, -- Ideal Vestment of Olorime (Olirime's Perfect)
-    [110020] = true, -- Major Courage (Olirime's Perfect)
+    [109082] = true, -- Ideal Vestment of Olorime (Olorime's Perfect)
+    [109084] = true, -- Ideal Vestment of Olorime (Olorime's Perfect)
+    [110020] = true, -- Major Courage (Olorime's Perfect)
 
     [107093] = true, -- Mantle of Siroria (Siroria's)
     [107095] = true, -- Mantle of Siroria (Siroria's)
@@ -2775,8 +2778,6 @@ LUIE.DebugAuras = {
 
     -- MISC
     [15594] = true, -- Bonus vs off Balance
-    --[20663] = true, -- Range Test Cast
-    --[20667] = true, -- Heal Test Cast
     [28541] = true, -- Swap Weapons
     [25166] = true, -- Clumsy
     [10950] = true, -- Fall Snare
@@ -2911,9 +2912,6 @@ LUIE.DebugAuras = {
     [45819] = true, -- Remove Werevamp
     [51064] = true, -- Weakness
     [39405] = true, -- Weakness
-    --[105188] = true, -- Grim Focus Combat Trigger
-    --[105190] = true, -- Grim Focus Combat Trigger
-    --[105192] = true, -- Grim Focus Combat Trigger
     --[105194] = true, -- RF Combat Trigger
 
     -- DEATH ACHIEVE CHECK (VETERAN DUNGEONS)
@@ -8254,11 +8252,8 @@ LUIE.DebugAuras = {
     [38262] = true, -- Ignite -- Synergies (Fire Mage)
     [38260] = true, -- Ignite -- Synergies (Fire Mage)
 
-    --[31385] = true, -- Necromancer Synergy Move Back (Cultist)
-    --[31390] = true, -- Necromancer Synergy Move Back (Cultist)
     --[31387] = true, -- Necromancer Synergy Kill Self (Cultist)
     --[43756] = true, -- Necromancer Synergy Kill Self (Cultist)
-    --[43757] = true, -- Cultist Synergy Cast (Cultist)
 
     [14096] = true, -- Heavy Attack -- Footsoldier
     [27683] = true, -- Step Back -- Footsoldier
@@ -16607,8 +16602,6 @@ LUIE.DebugAuras = {
     [84378] = true, -- Mudball -- Mud Ball Merriment
     [84335] = true, -- Covered in Mud -- Mud Ball Merriment
     [85639] = true, -- Covered in Mud -- Mud Ball Merriment
-    --[85351] = true, -- Self-Serve Mudbath -- Mud Ball Merriment (Likely unused)
-    --[85352] = true, -- Covered in Mud -- Mud Ball Merriment (Likely unused)
 
     -- Witches Harvest
     [83775] = true, -- Event - Q5742 WitchFest Intro (The Witchmother's Bargain)

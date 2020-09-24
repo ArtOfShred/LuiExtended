@@ -152,7 +152,7 @@ LUIE.Data.Tooltips = {
     Generic_Reduce_Physical_Spell_Resist_Value      = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_VALUE_TP),
     Generic_Reduce_Physical_Spell_Resist_No_Dur     = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_TP),
     Generic_Reduce_Physical_Spell_Resist_No_Dur_Value = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_VALUE_TP),
-    Generic_Reduce_Physical_Spell_Damage_Percentage = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_WEP_SPELL_DMG_PERCENTAGE_TP),
+    Generic_Reduce_Physical_Spell_Damage_Percentage = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_WEP_SPELL_DMG_PERCENTAGE_TP), -- TODO: Unused
     Generic_Reduce_Physical_Spell_Damage_Value      = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_WEP_SPELL_DMG_VALUE_TP),
 
     Generic_Reduce_Physical_Resist_Value            = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHYSICAL_RESIST_VALUE_TP),
