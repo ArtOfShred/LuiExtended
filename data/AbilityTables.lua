@@ -653,34 +653,22 @@ local AbilityTables = {
     Skill_Dizzying_Swing              = 38814,
     Skill_Stampede                    = 38788,
     Skill_Cleave                      = 20919,
-    Skill_Momentum                    = 28297,
-    Skill_Forward_Momentum            = 38794,
-    Skill_Rally                       = 38802,
 
     -- One Hand & Shield
     Skill_Puncture                    = 28306,
-    Skill_Ransack                     = 38256,
     Skill_Pierce_Armor                = 38250,
-    Skill_Low_Slash                   = 28304,
     Skill_Deep_Slash                  = 38268,
-    Skill_Heroic_Slash                = 38264,
     Skill_Shield_Charge               = 28719,
     Skill_Invasion                    = 38405,
     Skill_Power_Bash                  = 28365,
 
     -- Dual Wield
     Skill_Twin_Slashes                = 28379,
-    Skill_Blade_Cloak                 = 28613,
-    Skill_Quick_Cloak                 = 38901,
-    Skill_Deadly_Cloak                = 38906,
     Skill_Hidden_Blade                = 21157,
     Skill_Shrouded_Daggers            = 38914,
     Skill_Flying_Blade                = 38910,
 
     -- Bow
-    Skill_Hasty_Retreat               = 30923,
-    Skill_Lethal_Arrow                = 38685,
-    Skill_Focused_Aim                 = 38687,
     Skill_Draining_Shot               = 38669,
     Skill_Bombard                     = 38705,
     Skill_Venom_Arrow                 = 38645,

@@ -5557,6 +5557,7 @@ LUIE.DebugAuras = {
 
     [38250] = true, -- Pierce Armor (Pierce Armor)
     [62485] = true, -- Major Breach (Pierce Armor)
+    [146908] = true, -- Minor Breach (Pierce Armor)
 
     [28304] = true, -- Low Slash (Low Slash)
     [29308] = true, -- Minor Maim (Low Slash)
@@ -5779,7 +5780,7 @@ LUIE.DebugAuras = {
     [38686] = true, -- Major Defile (Lethal Arrow)
 
     [38687] = true, -- Focused Aim (Focused Aim)
-    [38688] = true, -- Minor Fracture (Focused Aim)
+    [38688] = true, -- Minor Breach (Focused Aim)
 
     [28876] = true, -- Volley (Volley)
     [38424] = true, -- Summon Shade (Volley)

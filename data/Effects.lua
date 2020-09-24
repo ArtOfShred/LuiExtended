@@ -959,17 +959,6 @@ Effects.EffectCreateSkillAura = {
     [88761] = { consolidate = true, abilityId = 86130 }, -- Major Resolve --> Ice Fortress
     [87194] = { consolidate = true, abilityId = 86130 }, -- Minor Protection --> Ice Fortress
 
-    -- Two Handed
-    [61670] = { consolidate = true, abilityId = 28297 }, -- Major Brutality --> Momentum
-    [126527] = { consolidate = true, abilityId = 28297 }, -- Minor Endurance --> Momentum
-    [62387] =  { consolidate = true, abilityId = 38794 }, -- Major Brutality --> Forward Momentum
-    [126534] =  { consolidate = true, abilityId = 38794 }, -- Minor Endurance --> Forward Momentum
-
-    -- Dual Wield
-    [68807] = { consolidate = true, extendedDisplay = true, abilityId = 21157 }, -- Major Brutality (Hidden Blade)
-    [126647] = { consolidate = true, extendedDisplay = true, abilityId = 38914 }, -- Major Brutality (Shrouded Daggers)
-    [126670] = { consolidate = true, extendedDisplay = true, abilityId = 38910 }, -- Major Brutality (Flying Blade)
-
     -- Armor
     [63015] = { consolidate = true, extendedDisplay = true, abilityId = 29556 }, -- Major Evasion --> Evasion
     [63019] = { consolidate = true, extendedDisplay = true, abilityId = 39195 }, -- Major Evasion --> Shuffle
@@ -1086,12 +1075,6 @@ Effects.BarHighlightExtraId = {
     [118309] = 118313, -- Ghostly Embrace --> Minor Maim
     [118354] = 118358, -- Empowering Grasp --> Minor Maim
 
-    -- Two Handed
-    [126527] = 61670, -- Major Endurance --> Major Brutality (Momentum)
-
-    -- One Hand and Shield
-    [38271] = 62495, -- Deep Slash --> Minor Maim
-
     -- Bow
     [38707] = 100302, -- Bombard --> Piercing Spray
     [38706] = 100302, -- Bombard --> Piercing Spray
@@ -1173,16 +1156,10 @@ Effects.BarHighlightCheckOnFade = {
     [118358] = { id1 = 118354, id2 = 118358, unitTag = "reticleover" }, -- Minor Maim --> Empowering Grasp / Minor Maim
 
     -- Two Handed
-    [38797] = { id1 = 62387, id2 = 126534, unitTag = "player" }, -- Forward Momentum --> Major Brutality / Minor Endurance
-
-    -- One Hand and Shield
-    [62474] = { id1 = 62475, unitTag = "player" }, -- Major Breach --> Minor Protection (Ransack)
-
-    [62495] = { id1 = 38271, id2 = 62495, unitTag = "reticleover" }, -- Minor Maim --> Deep Slash / Minor Maim
-    [62504] = { id1 = 62505, unitTag = "player" }, -- Minor Heroism --> Minor Maim (Heroic Slash)
+    [38797] = { duration = 38794, durationMod = 38797, unitTag = "player" }, -- Forward Momentum --> Major Brutality / Minor Endurance
 
     -- Dual Wield
-    [126667] = { id1 = 126670, unitTag = "player" }, -- Flying Blade --> Major Bruality
+    [126667] = { id1 = 61665, unitTag = "player" }, -- Flying Blade --> Major Bruality
 
     -- Bow
     [100302] = { id1 = 38707, id2 = 38706, id3 = 100302, unitTag = "reticleover" }, -- Piercing Spray --> Bombard / Bombard / Piercing Spray
@@ -1489,7 +1466,7 @@ Effects.BarHighlightOverride = {
     [28448] = { newId = 99789 }, -- Critical Charge --> Merciless Charge
     [38778] = { newId = 99789 }, -- Critical Rush --> Merciless Charge
 
-    [28297] = { newId = 61670, noRemove = true }, -- Momentum --> Major Brutality
+    [28297] = { showFakeAura = true, noRemove = true }, -- Momentum --> Major Brutality
     [38794] = { newId = 38797 }, -- Forward Momentum
     [83216] = { newId = 83217 }, -- Berserker Strike
     [83229] = { newId = 83230 }, -- Onslaught
@@ -1499,12 +1476,12 @@ Effects.BarHighlightOverride = {
     -- One Hand and Shield ----
     ---------------------------
 
-    [28306] = { newId = 28307 }, -- Puncture --> Major Breach
-    [38256] = { newId = 62474 }, -- Ransack --> Major Breach
-    [38250] = { newId = 62485 }, -- Pierce Armor --> Major Breach
-    [28304] = { newId = 29308 }, -- Low Slash --> Minor Maim
-    [38264] = { newId = 62504 }, -- Heroic Slash --> Minor Maim
-    [38268] = { newId = 62495 }, -- Deep Slash --> Minor Maim
+    [28306] = { newId = 38541 }, -- Puncture --> Major Breach
+    [38256] = { newId = 38541 }, -- Ransack --> Major Breach
+    [38250] = { newId = 38541 }, -- Pierce Armor --> Major Breach
+    [28304] = { newId = 61723 }, -- Low Slash --> Minor Maim
+    [38268] = { newId = 61723 }, -- Deep Slash --> Minor Maim
+    [38264] = { newId = 61723 }, -- Heroic Slash --> Minor Maim
     [28719] = { newId = 28720 }, -- Shield Charge
     [38401] = { newId = 38404 }, -- Shielded Assault
     [38405] = { newId = 38407 }, -- Invasion
@@ -1527,8 +1504,8 @@ Effects.BarHighlightOverride = {
     [38891] = { newId = 100474 }, -- Whirling Blades --> Chaotic Whirlwind
     [38861] = { newId = 100474 }, -- Steel Tornado --> Chaotic Whirlwind
 
-    [21157] = { newId = 68807, noRemove = true }, -- Hidden Blade --> Major Brutality
-    [38914] = { newId = 126647, noRemove = true }, -- Shrouded Daggers --> Major Brutality
+    [21157] = { newId = 61665 }, -- Hidden Blade --> Major Brutality
+    [38914] = { newId = 61665 }, -- Shrouded Daggers --> Major Brutality
     [38910] = { newId = 126667 }, -- Flying Blade
     [126659] = { newId = 126667 }, -- Flying Blade
     [83600] = { newId = 85156 }, -- Lacerate
@@ -1539,8 +1516,8 @@ Effects.BarHighlightOverride = {
     -- Bow --------------------
     ---------------------------
 
-    [38685] = { newId = 38686 }, -- Lethal Arrow --> Minor Defile
-    [38687] = { newId = 38688 }, -- Focused Aim
+    [38685] = { newId = 61726 }, -- Lethal Arrow --> Minor Defile
+    [38687] = { newId = 61742 }, -- Focused Aim --> Minor Breach
 
     [28879] = { newId = 113627 }, -- Scatter Shot --> Virulent Shot
     [38672] = { newId = 113627 }, -- Magnum Shot --> Virulent Shot
@@ -6395,9 +6372,7 @@ Effects.EffectOverride = {
     [45497] = { icon = 'LuiExtended/media/icons/abilities/passive_weapon_hawk_eye.dds' }, -- Hawk Eye (Hawk Eye - Rank 2)
     [78855] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_hawk_eye.dds', tooltip = Tooltips.Skill_Hawk_Eye_Rank_2 }, -- Hawk Eye (Hawk Eye - Rank 2)
     [30923] = { icon = 'LuiExtended/media/icons/abilities/passive_weapon_hasty_retreat.dds' }, -- Hasty Retreat (Hasty Retreat - Rank 1)
-    [98489] = { tooltip = Abilities.Skill_Hasty_Retreat }, -- Major Expedition (Hasty Retreat - Rank 1)
     [45498] = { icon = 'LuiExtended/media/icons/abilities/passive_weapon_hasty_retreat.dds' }, -- Hasty Retreat (Hasty Retreat - Rank 2)
-    [98490] = { tooltip = Abilities.Skill_Hasty_Retreat }, -- Major Expedition (Hasty Retreat - Rank 2)
 
     -- Destruction Staff
     [30948] = { icon = 'LuiExtended/media/icons/abilities/passive_weapon_tri_focus_shield.dds' }, -- Tri Focus (Tri Focus - Rank 1)
@@ -6444,14 +6419,8 @@ Effects.EffectOverride = {
     [38827] = { icon = 'esoui/art/icons/ability_2handed_004_b.dds' }, -- Reverse Slice (Reverse Slice)
 
     -- Momentum / Forward Momentum / Rally
-    [61670] = { consolidate = true, tooltip = Abilities.Skill_Momentum }, -- Major Brutality (Momentum)
-    [126527] = { consolidate = true, tooltip = Abilities.Skill_Momentum }, -- Minor Endurance (Momentum)
-    [62387] = { consolidate = true, tooltip = Abilities.Skill_Forward_Momentum }, -- Major Brutality (Forward Momentum)
-    [126534] = { consolidate = true, tooltip = Abilities.Skill_Forward_Momentum }, -- Minor Endurance (Forward Momentum)
     [38797] = { tooltip = Tooltips.Innate_Snare_Immobilize_Immunity }, -- Forward Momentum (Forward Momentum)
     [38802] = { tooltip = Tooltips.Skill_Rally }, -- Rally (Rally)
-    [62415] = { consolidate = true, tooltip = Abilities.Skill_Rally }, -- Major Brutality (Rally)
-    [126537] = { consolidate = true, tooltip = Abilities.Skill_Rally }, -- Minor Endurance (Rally)
 
     -- Berserker Strike / Onslaught / Berserker Rage
     [83217] = { tooltip = Tooltips.Skill_Berserker_Strike }, -- Berserker Strike (Berserker Strike)
@@ -6464,18 +6433,8 @@ Effects.EffectOverride = {
     -- ONE HAND AND SHIELD ACTIVES ----------
     -----------------------------------------
 
-    -- Puncture / Ransack / Pierce Armor
-    [28307] = { tooltip = Abilities.Skill_Puncture }, -- Major Breach (Puncture)
-    [62474] = { tooltip = Abilities.Skill_Ransack }, -- Major Breach (Ransack)
-    [62475] = { tooltip = Abilities.Skill_Ransack }, -- Minor Protection (Ransack)
-    [62485] = { tooltip = Abilities.Skill_Pierce_Armor }, -- Major Breach (Pierce Armor)
-
     -- Low Slash / Deep Slash / Heroic Slash
-    [29308] = { tooltip = Abilities.Skill_Low_Slash }, -- Minor Maim (Low Slash)
-    [62495] = { tooltip = Abilities.Skill_Deep_Slash }, -- Minor Maim (Deep Slash)
     [38271] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 30 }, -- Deep Slash (Deep Slash)
-    [62504] = { tooltip = Abilities.Skill_Heroic_Slash }, -- Minor Maim (Heroic Slash)
-    [62505] = { tooltip = Abilities.Skill_Heroic_Slash }, -- Minor Heroism (Heroic Slash)
 
     -- Defensive Posture / Defensive Stance / Absorb Magic
     [28727] = { tooltip = Tooltips.Skill_Defensive_Posture }, -- Defensive Posture (Defensive Posture)
@@ -6510,20 +6469,14 @@ Effects.EffectOverride = {
 
     -- Blade Cloak / Quick Cloak / Deadly Cloak
     [28613] = { tooltip = Tooltips.Skill_Blade_Cloak, tooltipValue2 = 2 }, -- Blade Cloak (Blade Cloak)
-    [123651] = { consolidateExtra = true, icon = 'esoui/art/icons/ability_buff_major_evasion.dds', tooltip = Abilities.Skill_Blade_Cloak }, -- Major Evasion (Blade Cloak)
     [38901] = { tooltip = Tooltips.Skill_Blade_Cloak, tooltipValue2 = 2 }, -- Quick Cloak (Quick Cloak)
-    [123652] = { consolidateExtra = true, icon = 'esoui/art/icons/ability_buff_major_evasion.dds', tooltip = Abilities.Skill_Quick_Cloak }, -- Major Evasion (Quick Cloak)
-    [62531] = { tooltip = Abilities.Skill_Quick_Cloak }, -- Major Expedition (Quick Cloak)
     [38906] = { tooltip = Tooltips.Skill_Blade_Cloak, tooltipValue2 = 1 }, -- Deadly Cloak (Deadly Cloak)
-    [123653] = { consolidateExtra = true, icon = 'esoui/art/icons/ability_buff_major_evasion.dds', tooltip = Abilities.Skill_Deadly_Cloak }, -- Major Evasion (Deadly Cloak)
 
     -- Hidden Blade / Shrouded Daggers / Flying Blade
-    [68807] = { consolidateExtra = true, tooltip = Abilities.Skill_Hidden_Blade }, -- Major Brutality (Hidden Blade)
     [126641] = { icon = '' }, -- Hidden Blade (Hidden Blade)
     [126640] = { icon = 'esoui/art/icons/ability_dualwield_003.dds', name = Abilities.Skill_Hidden_Blade, tooltip = Tooltips.Generic_Stagger }, -- Stagger (Hidden Blade)
     [126639] = { tooltip = Tooltips.Generic_Stun }, -- Hidden Blade (Hidden Blade)
 
-    [126647] = { consolidateExtra = true, tooltip = Abilities.Skill_Shrouded_Daggers }, -- Major Brutality (Shrouded Daggers)
     [126649] = { icon = '', name = Abilities.Skill_Shrouded_Daggers }, -- Shrouded Dagger (Shrouded Daggers)
     [126650] = { icon = 'esoui/art/icons/ability_dualwield_003_b.dds', name = Abilities.Skill_Shrouded_Daggers, tooltip = Tooltips.Generic_Stagger }, -- Stagger (Shrouded Daggers)
     [126651] = { tooltip = Tooltips.Generic_Stun, name = Abilities.Skill_Shrouded_Daggers }, -- Shrouded Daggers (Shrouded Daggers)
@@ -6531,7 +6484,6 @@ Effects.EffectOverride = {
     [126667] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_flying_blade_jump.dds', tooltip = Tooltips.Skill_Flying_Blade }, -- Flying Blade (Flying Blade)
     [126659] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_flying_blade_jump.dds' }, -- Flying Blade (Flying Blade)
     [126666] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_flying_blade_jump.dds' }, -- Flying Blade (Flying Blade)
-    [126670] = { consolidateExtra = true, tooltip = Abilities.Skill_Flying_Blade }, -- Major Brutality (Flying Blade)
     [126658] = { icon = '' }, -- Flying Blade (Flying Blade)
     [126655] = { icon = 'esoui/art/icons/ability_dualwield_003_a.dds', name = Abilities.Skill_Flying_Blade, tooltip = Tooltips.Generic_Stagger }, -- Stagger (Flying Blade)
     [126654] = { icon = 'esoui/art/icons/ability_dualwield_003_a.dds', tooltip = Tooltips.Generic_Stun }, -- Flying Blade (Flying Blade)
@@ -6545,10 +6497,6 @@ Effects.EffectOverride = {
     -----------------------------------------
     -- BOW ACTIVES --------------------------
     -----------------------------------------
-
-    -- Snipe / Lethal Arrow / Focused Aim
-    [38686] = { tooltip = Abilities.Skill_Lethal_Arrow }, -- Minor Defile (Lethal Arrow)
-    [38688] = { tooltip = Abilities.Skill_Focused_Aim }, -- Minor Fracture (Focused Aim)
 
     -- Volley / Endless Hail / Arrow Barrage
     [28876] = { tooltip = zo_strformat(Tooltips.Skill_Volley, 5) }, -- Volley (Volley)
@@ -13382,6 +13330,10 @@ Effects.FakePlayerBuffs = {
     [92068] = { duration = 6000 }, -- Crystalized Shield (Crystallized Shield)
     [92168] = { duration = "GET" }, -- Crystalized Slab (Crystallized Slab)
     [92170] = { duration = "GET" }, -- Shimmering Shield (Shimmering Shield)
+
+    -- Two Handed
+    [28297] = { duration = "GET", onlyExtra = true }, -- Momentum
+    [38794] = { duration = "GET", onlyExtra = true }, -- Forward Momentum
 
     -- Restoration Staff
     [37243] = { duration = "GET", onlyExtended = true, ignoreFade = true }, -- Blessing of Protection (Blessing of Protection)
