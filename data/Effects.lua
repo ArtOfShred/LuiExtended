@@ -921,9 +921,6 @@ Effects.EffectCreateSkillAura = {
     -- Werewolf
     [137206] = { alwaysShow = true, abilityId = 999016, removeOnEnd = true }, -- Major Berserk (Hircine's Rage)
 
-    -- Sets
-    [116742] = { alwaysShow = true, abilityId = 116775, requiredStack = 10 }, -- Precision --> Minor Force (Tzogvin's Warband)
-
     -- Cyrodiil Artifacts (Volendrung)
     [116374] = { removeOnEnd = false, consolidate = true, abilityId = 116095 }, -- Major Expedition -> Pariah's Resolve
     [116371] = { removeOnEnd = false, consolidate = true, abilityId = 116095 }, -- Major Brutality -> Pariah's Resolve
@@ -3499,7 +3496,6 @@ Effects.MajorMinorIconTable = {
 
     [88492] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds', normalize = 'esoui/art/icons/achievement_031.dds' }, -- Minor Toughness (Maturation - Rank 1)
     [88509] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds', normalize = 'esoui/art/icons/achievement_031.dds' }, -- Minor Toughness (Maturation - Rank 2)
-    --[92762] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds', normalize = 'esoui/art/icons/achievement_031.dds' }, -- Minor Toughness (Warrior-Poet's)
     [120020] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds', normalize = 'esoui/art/icons/achievement_031.dds' }, -- Minor Toughness (Target Iron Atronach, Trial)
 
     [137348] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_courage.dds', normalize = 'esoui/art/icons/ability_mage_045.dds' }, -- Minor Courage (Pack Leader)
@@ -4259,7 +4255,6 @@ Effects.EffectOverride = {
     [80990] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_shadow_proxy.dds', tooltip = Tooltips.Generic_Reduce_Damage_Done, tooltipValue2 = 5 }, -- Shadowrend (Shadowrend)
     [80989] = { icon = 'LuiExtended/media/icons/abilities/ability_clannfear_tail_spike_shadowrend.dds', name = Abilities.Skill_Tail_Spike }, -- Shadowrend (Shadowrend)
     [81034] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_shadow_proxy.dds', tooltip = Tooltips.Generic_Reduce_Damage_Done, tooltipValue2 = 5 }, -- Shadowrend (Shadowrend)
-    [80481] = { tooltip = Abilities.Set_Slimecraw }, -- Minor Berserk (Slimecraw)
     [59497] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web_white.dds', tooltip = Tooltips.Set_Spawn_of_Mephala }, -- Spawn of Mephala (Spawn of Mephala)
     [59498] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web_white.dds', name = Abilities.Set_Spawn_of_Mephala, groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Poison, tooltipValue2 = 1, tooltipValue3 = 50 }, -- Mephala's Web (Spawn of Mephala)
     [59499] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web_white.dds', name = Abilities.Set_Spawn_of_Mephala, duration = 0, groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Poison, tooltipValue2 = 1, tooltipValue3 = 50, hideGround = true }, -- Mephala's Web (Spawn of Mephala)
@@ -4274,7 +4269,6 @@ Effects.EffectOverride = {
     [59543] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_health.dds', tooltip = Tooltips.Generic_HoT, tooltipValue2 = 0.5 }, -- Healthy Engine Guardian
     [80504] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_regeneration.dds', name = Abilities.Set_The_Troll_King, tooltip = Tooltips.Set_The_Troll_King }, -- The Troll King
     [102094] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds', groundLabel = true, tooltip = Tooltips.Set_Thurvokun_Ground }, -- Thurvokun
-    [102097] = { tooltip = Abilities.Set_Thurvokun }, -- Minor Maim (Thurvokun)
     [102093] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds', tooltip = Tooltips.Set_Thurvokun }, -- Thurvokun (Thurvokun)
     [80865] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds' }, -- Tremorscale
     [80866] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds', tooltip = Tooltips.Generic_Reduce_Physical_Resist_Value, tooltipValue2 = 2395 }, -- Tremorscale
@@ -4350,8 +4344,6 @@ Effects.EffectOverride = {
     [113185] = { icon = 'esoui/art/icons/mm_teaser.dds' }, -- Grave-Stake Collector (Grave-Stake Collector)
     [113237] = { icon = 'esoui/art/icons/mm_teaser.dds' }, -- Grave-Stake Collector (Grave-Stake Collector)
     [113312] = { icon = 'esoui/art/icons/achievement_depthsofmalatar_killmonstersa.dds', name = Abilities.Set_Might_of_the_Lost_Legion, tooltip = Tooltips.Set_Might_of_the_Lost_Legion }, -- Empower (Might of the Lost Legion)
-    [113306] = { tooltip = Abilities.Set_Naga_Shaman }, -- Minor Vitality (Naga Shaman)
-    [113307] = { tooltip = Abilities.Set_Naga_Shaman }, -- Minor Mending (Naga Shaman)
     --[124303] = { icon = 'esoui/art/icons/achievement_els_lrgzone_groupboss4.dds', tooltip = Tooltips.Set_Senche_Rahts_Grit }, -- Senche-Raht's Grit (Senche-Raht's)
     [121915] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_scorn.dds', name = Abilities.Set_Honors_Scorn, tooltip = Tooltips.Set_Coldharbours_Favorite_Damage }, -- Coldharbour's Favorite (Coldharbour's Favorite)
     [121917] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_scorn.dds', tooltip = Tooltips.Generic_Magic, tooltipValue2 = 1 }, -- Honor's Scorn (Coldharbour's Favorite)
@@ -4359,12 +4351,8 @@ Effects.EffectOverride = {
     [121913] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_love.dds', tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Honor's Love (Coldharbour's Favorite)
     [123717] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vastaries_tutelage.dds', tooltip = Tooltips.Set_Vastaries_Tutelage }, -- Vastarie's Tutelage (Vastarie's Tutelage)
     [123715] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vastaries_tutelage.dds', tooltip = Tooltips.Set_Vastaries_Tutelage }, -- Vastarie's Tutelage (Vastarie's Tutelage)
-    [129536] = { tooltip = Abilities.Set_Daring_Corsair }, -- Minor Heroism (Daring Corsair's)
 
     [134254] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dauntless_combatant_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Dauntless_Combatant, Abilities.Set_Cooldown), tooltip = Tooltips.Generic_Set_ICD, tooltipValue2 = Abilities.Set_Dauntless_Combatant, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Winded (Dauntless Combatant's)
-
-    [134034] = { tooltip = Abilities.Set_Critical_Riposte }, -- Minor Uncertainty (of Critical Riposte)
-    [134040] = { tooltip = Abilities.Set_Critical_Riposte }, -- Minor Enervation (of Critical Riposte)
 
     [141916] = { icon = 'LuiExtended/media/icons/abilities/ability_set_stuhns_favor.dds', tooltip = Tooltips.Set_Stuhns_Favor, tooltipValue2 = 5312 }, -- Stuhn's Favor (Stuhn's)
     [135919] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds' }, -- Spell Parasite (Spell Parasite's)
@@ -4426,8 +4414,6 @@ Effects.EffectOverride = {
     [18993] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bloodthorns_touch.dds' }, -- Witchman Armor (Witchman's)
     [85818] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bloodthorns_touch.dds' }, -- Witchman Armor (Witchman's)
     [141869] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bloodthorns_touch.dds' }, -- Witchman Armor (Witchman's)
-    [106860] = { tooltip = Abilities.Set_Gyphons_Ferocity }, -- Minor Expedition (Gyphon's Ferocity)
-    [106861] = { tooltip = Abilities.Set_Gyphons_Ferocity }, -- Minor Force (Gyphon's Ferocity)
     [114977] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dead_waters_guile.dds' }, -- Dead-Water's Guile (Dead-Water's Guile)
     [121615] = { icon = 'LuiExtended/media/icons/abilities/ability_set_darloc_brae.dds' }, -- Vesture of Darloc Brae (Darloc Brae's)
     [121602] = { icon = 'LuiExtended/media/icons/abilities/ability_set_darloc_brae.dds' }, -- Vesture of Darloc Brae (Darloc Brae's)
@@ -4491,7 +4477,6 @@ Effects.EffectOverride = {
     [116884] = { icon = 'LuiExtended/media/icons/abilities/ability_set_aurorans_thunder.dds', tooltip = Tooltips.Set_Aurorans_Thunder }, -- Auroran's Thunder (Auroran's Thunder)
     [116920] = { icon = 'LuiExtended/media/icons/abilities/ability_set_aurorans_thunder.dds' }, -- Auroran's Thunder (Auroran's Thunder)
     [126924] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hollowfang.dds', tooltip = Tooltips.Set_Hollowfang_Thirst }, -- Hollowfang Thirst (Hollowfang Thirst)
-    [126925] = { tooltip = Abilities.Set_Hollowfang_Thirst }, -- Minor Vitality (Hollowfang Thirst)
     [126938] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hollowfang.dds' }, -- Hollowfang Thirst (Hollowfang Thirst)
     [126597] = { icon = 'LuiExtended/media/icons/abilities/ability_set_touch_of_zen.dds', tooltip = Tooltips.Set_Touch_of_Zen }, -- Touch of Z'en (Z'en's)
 
@@ -4509,7 +4494,6 @@ Effects.EffectOverride = {
     [85977] = { icon = 'LuiExtended/media/icons/abilities/ability_set_barkskin.dds' }, -- Barkskin
     [85978] = { icon = 'LuiExtended/media/icons/abilities/ability_set_barkskin.dds' }, -- Barkskin
     [47365] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hircine.dds', tooltip = Tooltips.Generic_Increase_Stamina_Recovery_No_Dur, tooltipValue2 = 145 }, -- Hircine's Veneer (Hircine's)
-    [85602] = { tooltip = Abilities.Set_Jailbreaker }, -- Minor Expedition (Jailbreaker)
     [34612] = { hide = true }, -- Oblivion's Edge (of Oblivion)
     [57206] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_oblivion_blue.dds' }, -- Oblivion's Edge (of Oblivion)
     [97716] = { icon = 'LuiExtended/media/icons/abilities/ability_set_pillar_of_nirn.dds' }, -- Pillar of Nirn
@@ -4533,10 +4517,8 @@ Effects.EffectOverride = {
     [111386] = { icon = 'LuiExtended/media/icons/abilities/ability_set_frenzied.dds', tooltip = Tooltips.Set_Blood_Moon_Frenzied }, -- Frenzied (Blood Moon)
     [111216] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_bleed.dds', tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Savage Werewolf (Savage Werewolf)
     [116742] = { icon = 'LuiExtended/media/icons/abilities/ability_set_tzogvins_warband.dds', tooltip = Tooltips.Set_Tzogvins_Warband }, -- Precision (Tzogvin's Warband)
-    [116775] = { tooltip = Abilities.Set_Tzogvins_Warband, hide = true }, -- Minor Force (Tzogvin's Warband)
     [116954] = { hide = true }, -- Stalked (Scavenging Demise)
     [116991] = { icon = 'LuiExtended/media/icons/abilities/ability_set_scavenging_demise.dds', name = Abilities.Set_Scavenging_Demise }, -- Stalked (Scavenging Demise)
-    [117025] = { tooltip = Abilities.Set_Scavenging_Demise }, -- Minor Vulnerability (Scavenging Demise)
 
     [126631] = { icon = 'LuiExtended/media/icons/abilities/ability_set_blight_seed.dds', tooltip = Tooltips.Set_Blight_Seed, unbreakable = 1 }, -- Blight Seed (Azureblight)
     [126633] = { icon = 'LuiExtended/media/icons/abilities/ability_set_blight_seed.dds', tooltip = Tooltips.Set_Blight_Seed }, -- Blight Seed (Azureblight)
@@ -4564,7 +4546,6 @@ Effects.EffectOverride = {
     [84277] = { icon = 'LuiExtended/media/icons/abilities/ability_set_aspect_of_mazzatun.dds' }, -- Aspect of Mazzatun (of Mazzatun)
     [84278] = { icon = 'LuiExtended/media/icons/abilities/ability_set_aspect_of_mazzatun.dds' }, -- Aspect of Mazzatun (of Mazzatun)
     [84279] = { icon = 'LuiExtended/media/icons/abilities/ability_set_aspect_of_mazzatun.dds' }, -- Aspect of Mazzatun (of Mazzatun)
-    [85611] = { tooltip = Abilities.Set_Medusa }, -- Minor Force (of Medusa)
     [84354] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web_green.dds', tooltip = Tooltips.Set_Hand_of_Mephala }, -- Hand of Mephala (Mephala's Hand)
     [84357] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web_green.dds', name = Abilities.Set_Hand_of_Mephala, duration = 0, tooltip = Tooltips.Skill_Hand_of_Mephala_Ground, groundLabel = true }, -- Hand of Mephala Webbing (of Mephala's Hand)
     [84355] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web_green.dds' }, -- Hand of Mephala (of Mephala's Hand)
@@ -4579,7 +4560,6 @@ Effects.EffectOverride = {
     [126535] = { icon = 'LuiExtended/media/icons/abilities/ability_set_renalds_resolve.dds', tooltip = Tooltips.Set_Renalds_Resolve }, -- Resolve (Renald's)
 
     [126682] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dragons_defilement.dds', tooltip = Tooltips.Set_Dragons_Defilement }, -- Dragon's Defilement (Defiled Dragon's)
-    [126685] = { tooltip = Abilities.Set_Dragons_Defilement, groundLabel = true }, -- Minor Breach (Defiled Dragon's)
 
     [135554] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grave_guardian.dds', tooltip = Tooltips.Set_Grave_Guardian }, -- Grave Guardian (Grave Guardian's)
     [133451] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grave_guardian.dds', groundLabel = true, tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 4430, forcedContainer = 'short' }, -- Grave Guardian (Grave Guardian's)

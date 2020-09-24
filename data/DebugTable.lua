@@ -132,6 +132,7 @@ LUIE.DebugAuras = {
     -- MAJOR / MINOR BUFFS & DEBUFFS ----
     -------------------------------------
 
+    [61744] = true, -- Minor Berserk
     [61745] = true, -- Major Berserk
 
     [61665] = true, -- Major Brutality
@@ -172,6 +173,8 @@ LUIE.DebugAuras = {
 
     [109966] = true, -- Major Courage
 
+    [61746] = true, -- Minor Force
+
     [61723] = true, -- Minor Maim
     [61725] = true, -- Major Maim
 
@@ -185,6 +188,10 @@ LUIE.DebugAuras = {
 
     [79867] = true, -- Minor Cowardice
     [147643] = true, -- Major Cowardice
+
+    [79895] = true, -- Minor Uncertainty
+
+    [79907] = true, -- Minor Enervation
 
     [76618] = true, -- Minor Aegis
     [147225] = true, -- Minor Aegis -- Dummy
