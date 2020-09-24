@@ -1530,9 +1530,9 @@ Effects.BarHighlightOverride = {
     [39145] = { newId = 115003 }, -- Fire Ring --> Wild Impulse
     [39147] = { newId = 115003 }, -- Shock Ring --> Wild Impulse
     [39146] = { newId = 115003 }, -- Frost Ring --> Wild Impulse
-    [39162] = { newId = 39168 }, -- Flame Pulsar --> Minor Mangle
-    [39167] = { newId = 39181 }, -- Storm Pulsar --> Minor Mangle
-    [39163] = { newId = 39180 }, -- Frost Pulsar --> Minor Mangle
+    [39162] = { newId = 115003 }, -- Flame Pulsar --> Wild Impulse
+    [39167] = { newId = 115003 }, -- Storm Pulsar --> Wild Impulse
+    [39163] = { newId = 11503 }, -- Frost Pulsar --> Wild Impulse
 
     ---------------------------
     -- Restoration Staff ------
@@ -3499,7 +3499,7 @@ Effects.MajorMinorIconTable = {
     [120020] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds', normalize = 'esoui/art/icons/achievement_031.dds' }, -- Minor Toughness (Target Iron Atronach, Trial)
 
     [137348] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_courage.dds', normalize = 'esoui/art/icons/ability_mage_045.dds' }, -- Minor Courage (Pack Leader)
-    [121878] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_courage.dds', normalize = 'esoui/art/icons/ability_mage_045.dds' }, -- Minor Courage (Yolnakriin's)
+    --[121878] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_courage.dds', normalize = 'esoui/art/icons/ability_mage_045.dds' }, -- Minor Courage (Yolnakriin's)
 
     --[66902] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds', normalize = 'esoui/art/icons/ability_mage_045.dds' }, -- Major Courage (Spell Power Cure)
     [120015] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds', normalize = 'esoui/art/icons/ability_mage_045.dds' }, -- Spell Power Cure (Target Iron Atronach, Trial)
@@ -4582,9 +4582,7 @@ Effects.EffectOverride = {
     -- Trial Sets (Aetherian Archive)
     [51315] = { icon = 'LuiExtended/media/icons/abilities/ability_set_destructive_mage.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Set_Destructive_Mage }, -- Destructive Mage (Aether... of Destruction)
     [51320] = { icon = 'LuiExtended/media/icons/abilities/ability_set_destructive_mage.dds', name = Abilities.Set_Destructive_Mage }, -- Mage Destruction Bomb (Aether... of Destruction)
-    [51434] = { tooltip = Abilities.Set_Wise_Mage }, -- Minor Vulnerability (Aether ... of Strategy)
     [76617] = { icon = 'esoui/art/icons/ability_buff_minor_erosion.dds', tooltip = Tooltips.Skill_Minor_Slayer }, -- Minor Slayer (of the Infallible Aether) -- TODO: MOVE
-    [81519] = { tooltip = Abilities.Set_Infallible_Mage }, -- Minor Vulnerability (of the Infallible Aether)
 
     -- Trial Sets (Sanctum Ophidia)
     [51241] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vipers_sting.dds' }, -- Poisonous Serpent (Ophidian ... of Venom)
@@ -4601,7 +4599,6 @@ Effects.EffectOverride = {
     [75814] = { icon = 'LuiExtended/media/icons/abilities/ability_set_lunar_bastion.dds', tooltip = Tooltips.Set_Lunar_Bastion }, -- Lunar Bastion (of the Lunar Bastion)
     [75815] = { icon = 'LuiExtended/media/icons/abilities/ability_set_lunar_bastion.dds', tooltip = Tooltips.Set_Lunar_Bastion_Ground }, -- Lunar Bastion (of the Lunar Bastion)
     [75770] = { icon = 'LuiExtended/media/icons/abilities/ability_set_twilight_remedy.dds', tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Twilight Remedy (of Twilight Remedy)
-    [76564] = { tooltip = Abilities.Set_Twilight_Remedy }, -- Minor Force (of Twilight Remedy)
 
     -- Trial Sets (Cloudrest)
     [107141] = { icon = 'LuiExtended/media/icons/abilities/ability_set_olorime.dds', name = Abilities.Set_Vestment_of_Olorime, tooltip = Tooltips.Set_Vestment_of_Olorime }, -- Vestment of Olirime (Olorime's)
@@ -4622,7 +4619,6 @@ Effects.EffectOverride = {
     [124800] = { icon = 'LuiExtended/media/icons/abilities/ability_set_false_gods_devotion.dds', name = Abilities.Set_False_Gods_Devotion }, -- False God's Devotion (Perfected False God's Devotion)
     [121898] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eye_of_nahviintaas.dds', tooltip = Tooltips.Set_Eye_of_Nahviintaas }, -- Eye of Nahviintaas (Nahviintaas')
     [122812] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eye_of_nahviintaas.dds', tooltip = Tooltips.Set_Eye_of_Nahviintaas }, -- Eye of Nahviintaas (Nahviintaas')
-    [121878] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_courage.dds', tooltip = Abilities.Set_Claw_of_Yolnakhriin }, -- Minor Courage (Yolnakriin's)
 
     -- Trial Sets (Kyne's Aegis)
     [136098] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds', tooltip = Tooltips.Set_Kynes_Blessing }, -- Kyne's Blessing (of Kyne's Wind)
@@ -4646,7 +4642,6 @@ Effects.EffectOverride = {
     -- Battleground Sets
     [93104] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_oblivion_purple.dds' }, -- Knight Slayer
     [92916] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vanguards_challenge.dds', tooltip = Tooltips.Set_Vanguards_Challenge }, -- Vanguard's Challenge
-    [92921] = { tooltip = Abilities.Set_Wizards_Riposte }, -- Minor Maim (Wizard's Riposte)
 
     -- Imperial City Sets
     [79421] = { icon = 'LuiExtended/media/icons/abilities/ability_set_galerions_revenge.dds', tooltip = Tooltips.Set_Galerions_Revenge }, -- Mark of Revenge (Galerion's)
@@ -4698,8 +4693,6 @@ Effects.EffectOverride = {
 
     -- Rewards for the Worthy Sets
     [113523] = { icon = 'LuiExtended/media/icons/abilities/ability_set_battalion_defender.dds' }, -- Battalion Defender (Battalion Defender)
-    [113355] = { tooltip = Abilities.Set_Indomitable_Fury }, -- Indomitable Fury (Indomitable Fury)
-    [113356] = { tooltip = Abilities.Set_Indomitable_Fury }, -- Indomitable Fury (Indomitable Fury)
     [113461] = { icon = 'esoui/art/icons/achievement_murkmire_rescue_villagers.dds', name = Abilities.Set_Soldier_of_Anguish, tooltip = Tooltips.Set_Soldier_of_Anguish }, -- Heal Absorption (Soldier of Anguish)
     [113382] = { icon = 'esoui/art/icons/achievement_blackrose_boss_5.dds', tooltip = Tooltips.Set_Spell_Strategist }, -- Spell Strategist (Spell Strategist)
     [113417] = { hide = true }, -- Spell Strategist (Spell Strategist)
@@ -4719,9 +4712,6 @@ Effects.EffectOverride = {
     [71605] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_beast_bear.dds' }, -- Hunt Leader (of the Hunt)
     [74106] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_beast_bear.dds' }, -- Hunt Leader (of the Hunt)
     [71193] = { icon = 'LuiExtended/media/icons/abilities/ability_set_para_bellum.dds', name = Abilities.Set_Para_Bellum, tooltip = Tooltips.Set_Para_Bellum }, -- Para Bellum Shield (Para Bellum)
-
-    -- Dragonstar Arena Sets
-    [29096] = { tooltip = Abilities.Set_Healers_Habit }, -- Minor Mending (of the Healer)
 
     -- DISGUISES
     [30879] = { tooltip = Tooltips.Disguise_Kollopi_Essence }, -- Shimmering Glow (Kollopi Essence)
@@ -6363,8 +6353,10 @@ Effects.EffectOverride = {
     [30959] = { icon = 'esoui/art/icons/ability_weapon_007.dds' }, -- Ancient Knowledge (Ancient Knowledge - Rank 1)
     [45513] = { icon = 'esoui/art/icons/ability_weapon_007.dds', hide = true }, -- Ancient Knowledge (Ancient Knowledge - Rank 2)
     [30966] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_destruction_expert.dds' }, -- Magicka Restore (Destruction Expert - Rank 1)
+    [146324] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_destruction_expert.dds', name = Abilities.Passive_Destruction_Expert }, -- Magicka Restore (Destruction Expert - Rank 1)
     [45514] = { hide = true }, -- Destruction Expert (Destruction Expert - Rank 2)
     [45515] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_destruction_expert.dds', name = Abilities.Passive_Destruction_Expert }, -- Magicka Restore (Destruction Expert - Rank 2)
+    [146323] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_destruction_expert.dds', name = Abilities.Passive_Destruction_Expert }, -- Magicka Restore (Destruction Expert - Rank 2)
 
     -- Restoration Staff
     [30973] = { icon = 'esoui/art/icons/ability_weapon_002.dds' }, -- Essence Drain (Essence Drain -  Rank 1)
@@ -6552,14 +6544,18 @@ Effects.EffectOverride = {
     [28854] = { tooltip = Tooltips.Skill_Wall_of_Elements_Shock }, -- Wall of Storms (Wall of Storms)
     [62968] = { tooltip = Abilities.Skill_Wall_of_Storms, unbreakable = 1 }, -- Off Balance (Wall of Storms)
     [28849] = { tooltip = Tooltips.Skill_Wall_of_Elements_Frost }, -- Wall of Frost (Wall of Frost)
+    [146169] = { tooltip = Tooltips.Skill_Wall_of_Elements_Frost_Shield }, -- Frost Shield (Wall of Frost)
     [39053] = { tooltip = Tooltips.Skill_U_Wall_of_Elements_Fire }, -- Unstable Wall of Fire (Unstable Wall of Fire)
     [39073] = { tooltip = Tooltips.Skill_U_Wall_of_Elements_Shock }, -- Unstable Wall of Storms (Unstable Wall of Storms)
     [39077] = { tooltip = Abilities.Skill_Unstable_Wall_of_Storms, unbreakable = 1 }, -- Off Balance (Unstable Wall of Storms)
     [39067] = { tooltip = Tooltips.Skill_U_Wall_of_Elements_Frost }, -- Unstable Wall of Frost (Unstable Wall of Frost)
+    [146276] = { tooltip = Tooltips.Skill_Wall_of_Elements_Frost_Shield }, -- Unstable Frost Shield (Unstable Wall of Frost)
+    [146279] = { tooltip = Tooltips.Skill_Wall_of_Elements_Frost_Shield }, -- Unstable Frost Shield (Unstable Wall of Frost)
     [39012] = { tooltip = Tooltips.Skill_Wall_of_Elements_Fire }, -- Blockade of Fire (Blockade of Fire)
     [39018] = { tooltip = Tooltips.Skill_Wall_of_Elements_Shock }, -- Blockade of Storms (Blockade of Storms)
     [62988] = { tooltip = Abilities.Skill_Blockade_of_Storms, unbreakable = 1 }, -- Off Balance (Blockade of Storms)
     [39028] = { tooltip = Tooltips.Skill_Wall_of_Elements_Frost }, -- Blockade of Frost (Blockade of Frost)
+    [146311] = { tooltip = Tooltips.Skill_Wall_of_Elements_Frost_Shield }, -- Frost Safeguard (Blockade of Frost)
 
     [62896] = { groundLabel = true, tooltip = Tooltips.Skill_Wall_of_Elements_Ground_Fire }, -- Wall of Fire
     [62971] = { groundLabel = true, tooltip = Tooltips.Skill_Wall_of_Elements_Ground_Shock }, -- Wall of Storms
@@ -6588,11 +6584,6 @@ Effects.EffectOverride = {
     [62775] = { consolidate = true, tooltip = Abilities.Skill_Elemental_Susceptibility }, -- Major Breach (Elemental Susceptibility)
     [39100] = { consolidate = true, tooltip = Abilities.Skill_Elemental_Drain }, -- Minor Magickasteal (Elemental Drain)
     [62787] = { consolidate = true, tooltip = Abilities.Skill_Elemental_Drain }, -- Minor Magickasteal (Elemental Drain)
-
-    -- Impulse / Elemental Ring / Pulsar
-    [39168] = { tooltip = Abilities.Skill_Flame_Pulsar }, -- Minor Mangle (Flame Pulsar)
-    [39181] = { tooltip = Abilities.Skill_Storm_Pulsar }, -- Minor Mangle (Storm Pulsar)
-    [39180] = { tooltip = Abilities.Skill_Frost_Pulsar }, -- Minor Mangle (Frost Pulsar)
 
     -- Elemental Storm / Elemental Rage / Eye of the Storm
     [83625] = { tooltip = Tooltips.Skill_Fire_Storm }, -- Fire Storm (Elemental Storm)

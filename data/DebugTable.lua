@@ -171,6 +171,7 @@ LUIE.DebugAuras = {
 
     [63569] = true, -- Major Gallop
 
+    [147417] = true, -- Minor Courage
     [109966] = true, -- Major Courage
 
     [61746] = true, -- Minor Force
@@ -192,6 +193,10 @@ LUIE.DebugAuras = {
     [79895] = true, -- Minor Uncertainty
 
     [79907] = true, -- Minor Enervation
+
+    [145975] = true, -- Minor Brittle
+
+    [61733] = true, -- Minor Mangle
 
     [76618] = true, -- Minor Aegis
     [147225] = true, -- Minor Aegis -- Dummy
@@ -5873,8 +5878,10 @@ LUIE.DebugAuras = {
 
     [30965] = true, -- Destruction Expert -- Rank 1
     [30966] = true, -- Destruction Expert
+    [146324] = true, -- Magicka Restore
     [45514] = true, -- Destruction Expert -- Rank 1
     [45515] = true, -- Magicka Restore
+    [146323] = true, -- Magicka Restore
 
     -------------------------------------
     -- DESTRUCTION STAFF ACTIVES --------
@@ -5902,6 +5909,7 @@ LUIE.DebugAuras = {
 
     [68719] = true, -- Frozen (Wall of Elements) -- Frost
     [43192] = true, -- Fire Wall Damage Bonus (Wall of Elements - All Morphs) -- Fire
+    [146697] = true, -- Minor Brittle (Wall of Elements) -- Frost
 
     [28858] = true, -- Wall of Elements (Wall of Elements)
     [28807] = true, -- Wall of Fire (Wall of Elements) -- Fire
@@ -5918,6 +5926,8 @@ LUIE.DebugAuras = {
     [28849] = true, -- Wall of Frost (Wall of Elements) -- Frost
     [62930] = true, -- Unstable Wall of Fire (Wall of Elements) -- Frost
     [62929] = true, -- Unstable Wall of Frost (Wall of Elements) -- Frost
+    [146029] = true, -- Unstable Wall of Frost (Wall of Elements) -- Frost
+    [146169] = true, -- Frost Shield (Wall of Elements) -- Frost
     [62931] = true, -- Wall of Frost (Wall of Elements) -- Frost
 
     [39052] = true, -- Unstable Wall of Elements (Unstable Wall of Elements)
@@ -5943,7 +5953,9 @@ LUIE.DebugAuras = {
     [39069] = true, -- Unstable Wall of Frost (Unstable Wall of Elements) -- Frost
     [39070] = true, -- Unstable Wall of Frost (Unstable Wall of Elements) -- Frost
     [62838] = true, -- Unstable Wall (Unstable Wall of Elements) -- Frost
-    [114886] = true, -- Summon Shade
+    [114886] = true, -- Summon Shade (Unstable Wall of Elements) -- Frost
+    [146276] = true, -- Unstable Frost Shield (Unstable Wall of Elements) -- Frost
+    [146279] = true, -- Unstable Frost Shield (Unstable Wall of Elements) -- Frost
     [39071] = true, -- Unstable Wall of Frost (Unstable Wall of Elements) -- Frost
     [39072] = true, -- Unstable Wall of Frost (Unstable Wall of Elements) -- Frost
 
@@ -5966,6 +5978,7 @@ LUIE.DebugAuras = {
     [62949] = true, -- Unstable Wall of Frost (Elemental Blockade) -- Frost
     [62947] = true, -- Unstable Wall of Frost (Elemental Blockade) -- Frost
     [114885] = true, -- Summon Shade
+    [146311] = true, -- Frost Safeguard (Elemental Blockade) -- Frost
     [62951] = true, -- Blockade of Frost (Elemental Blockade) -- Frost
 
     [29091] = true, -- Destructive Touch (Destructive Touch)
@@ -6005,26 +6018,43 @@ LUIE.DebugAuras = {
 
     [28800] = true, -- Impulse (Impulse)
     [28794] = true, -- Fire Impulse (Impulse)
+    [146531] = true, -- Impulse Afterburn (Impulse)
     [28799] = true, -- Shock Impulse (Impulse)
+    [146557] = true, -- Shock Impulse (Impulse)
+    [146556] = true, -- Shock Impulse (Impulse)
+    [146553] = true, -- Shock Impulse (Impulse)
     [28798] = true, -- Frost Impulse (Impulse)
+    [146795] = true, -- Minor Protection (Impulse)
 
     [39143] = true, -- Elemental Ring (Elemental Ring)
     [39145] = true, -- Elemental Ring (Fire Ring)
     [39149] = true, -- Elemental Ring (Fire Ring)
+    [146586] = true, -- Ring Afterburn (Fire Ring)
     [39147] = true, -- Elemental Ring (Shock Ring)
+    [146610] = true, -- Shock Impulse (Shock Ring)
+    [146613] = true, -- Shock Impulse (Shock Ring)
+    [146609] = true, -- Shock Impulse (Shock Ring)
     [39153] = true, -- Elemental Ring (Shock Ring)
     [39146] = true, -- Elemental Ring (Frost Ring)
     [39151] = true, -- Elemental Ring (Frost Ring)
+    [146796] = true, -- Minor Protection (Frost Ring)
 
     [39161] = true, -- Pulsar (Pulsar)
     [39162] = true, -- Flame Pulsar (Pulsar)
-    [89837] = true, -- Fiery Pulsar (Pulsar)
+    [146585] = true, -- Pulsar Afterburn (Pulsar)
+    --[89837] = true, -- Fiery Pulsar (Pulsar)
     [39168] = true, -- Minor Mangle (Pulsar)
+
     [39167] = true, -- Storm Pulsar (Pulsar)
+    [146596] = true, -- Shock Impulse (Pulsar)
+    [146603] = true, -- Shock Impulse (Pulsar)
+    [146593] = true, -- Storm Pulsar (Pulsar)
     [39181] = true, -- Minor Mangle (Pulsar)
+
     [39163] = true, -- Frost Pulsar (Pulsar)
-    [89840] = true, -- Frost Pulsar (Pulsar)
+    --[89840] = true, -- Frost Pulsar (Pulsar)
     [39180] = true, -- Minor Mangle (Pulsar)
+    [146797] = true, -- Minor Protection (Pulsar)
 
     [83619] = true, -- Elemental Storm (Elemental Storm)
     [83625] = true, -- Fire Storm (Elemental Storm)

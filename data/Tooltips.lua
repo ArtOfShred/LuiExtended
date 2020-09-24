@@ -913,6 +913,7 @@ LUIE.Data.Tooltips = {
     Skill_U_Wall_of_Elements_Ground_Fire            = GetString(SI_LUIE_SKILL_U_WALL_OF_ELEMENTS_GROUND_FIRE),
     Skill_U_Wall_of_Elements_Ground_Shock           = GetString(SI_LUIE_SKILL_U_WALL_OF_ELEMENTS_GROUND_SHOCK),
     Skill_U_Wall_of_Elements_Ground_Frost           = GetString(SI_LUIE_SKILL_U_WALL_OF_ELEMENTS_GROUND_FROST),
+    Skill_Wall_of_Elements_Frost_Shield             = GetString(SI_LUIE_SKILL_WOE_FROST_SHIELD_TP),
     Skill_Flame_Touch                               = GetString(SI_LUIE_SKILL_FLAME_TOUCH_TP),
     Skill_Flame_Touch_Alt                           = GetString(SI_LUIE_SKILL_FLAME_TOUCH_ALT_TP),
     Skill_Shock_Touch                               = GetString(SI_LUIE_SKILL_SHOCK_TOUCH_TP),
