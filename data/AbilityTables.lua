@@ -59,8 +59,8 @@ local AbilityTables = {
     Skill_Major_Maim                  = 92041,
     Skill_Minor_Defile                = 61726,
     Skill_Major_Defile                = 85944,
-    Skill_Minor_Magickasteal          = 40114, -- TODO: No longer exists, replace id
-    Skill_Minor_Lifesteal             = 33541, -- TODO: No longer exists, replace id
+    Skill_Minor_Magickasteal          = 88401,
+    Skill_Minor_Lifesteal             = 86304,
     Skill_Minor_Enveration            = 47202,
     Skill_Minor_Uncertainty           = 47204,
     Skill_Minor_Cowardice             = 46202,
@@ -633,14 +633,7 @@ local AbilityTables = {
     -- ---------------------------------------------------
 
     -- Restoration Staff
-    Skill_Essence_Drain               = 30973,
-    Skill_Blessing_of_Protection      = 37243,
     Skill_Blessing_of_Restoration     = GetString(SI_LUIE_SKILL_BLESSING_OF_RESTORATION),
-    Skill_Combat_Prayer               = 40094,
-    Skill_Force_Siphon                = 31531,
-    Skill_Siphon_Spirit               = 40109,
-    Skill_Quick_Siphon                = 40116,
-    Skill_Lights_Champion             = 85132,
 
     -- Destruction Staff
     Skill_Crushing_Shock              = 46348,
@@ -653,8 +646,6 @@ local AbilityTables = {
     Skill_Shock_Clench                = 38993,
     Skill_Frost_Clench                = 38989,
     Skill_Weakness_to_Elements        = 29173,
-    Skill_Elemental_Susceptibility    = 39089,
-    Skill_Elemental_Drain             = 39095,
     Skill_Frost_Pulsar                = 39163,
 
     -- Two-Handed

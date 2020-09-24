@@ -1169,11 +1169,8 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
                 end
                 duration = math.floor((duration * 10) + 0.5) / 10
 
-                if control.buffSlot then
-                    tooltipText = (Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltip) and zo_strformat(Effects.EffectOverride[control.effectId].tooltip, duration, value2, value3) or GetAbilityDescription(abilityId)
-                else
-                    tooltipText = (Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltip) and zo_strformat(Effects.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
-                end
+                tooltipText = (Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltip) and zo_strformat(Effects.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
+
                 -- Use seperate Veteran difficulty tooltip if applicable.
                 if LUIE.ResolveVeteranDifficulty() == true and Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltipVet then
                     tooltipText = zo_strformat(Effects.EffectOverride[control.effectId].tooltipVet, duration, value2, value3)
@@ -1190,15 +1187,12 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
                     end
                 end
 
-                -- TODO: Implement this functionality but it needs to have a filter for ONLY specific ids.
-                --[[
                 -- Display Default Description if no internal effect description is present
                 if tooltipText == "" or tooltipText == nil then
                     if GetAbilityDescription(control.effectId) ~= "" then
                         tooltipText = GetAbilityDescription(control.effectId)
                     end
                 end
-                ]]--
 
             else
                 duration = 0
@@ -1558,6 +1552,8 @@ end
 -- Runs on the EVENT_EFFECT_CHANGED listener.
 -- This handler fires every long-term effect added or removed
 function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
+
+    --d(effectName .. " - " .. castByPlayer)
 
     -- Change the effect type before we determine if we want to filter anything else.
     if Effects.EffectOverride[abilityId] then
@@ -2493,6 +2489,12 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
         if SpellCastBuffs.SV.HidePlayerBuffs and not (SpellCastBuffs.SV.PromDebuffTable[abilityId] or SpellCastBuffs.SV.PromDebuffTable[effectName] or SpellCastBuffs.SV.PromBuffTable[abilityId] or SpellCastBuffs.SV.PromBuffTable[effectName]) then
             return
         end
+        if Effects.FakePlayerBuffs[abilityId].onlyExtra and not SpellCastBuffs.SV.ExtraBuffs then
+            return
+        end
+        if Effects.FakePlayerBuffs[abilityId].onlyExtended and not (SpellCastBuffs.SV.ExtraBuffs and SpellCastBuffs.SV.ExtraExpanded) then
+            return
+        end
 
         -- If this is a fake set ICD then don't display if we have Set ICD's disabled.
         if Effects.IsSetICD[abilityId] and SpellCastBuffs.SV.IgnoreSetICDPlayer then return end
@@ -2537,7 +2539,7 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
         local source = zo_strformat("<<t:1>>",sourceName)
         local target = zo_strformat("<<t:1>>",targetName)
         -- Pull unbreakable info from Shift Id if present
-        unbreakable = Effects.EffectOverride[finalId].unbreakable or unbreakable
+        unbreakable = (Effects.EffectOverride[finalId] and Effects.EffectOverride[finalId].unbreakable) or unbreakable
         if source == LUIE.PlayerNameFormatted and target == LUIE.PlayerNameFormatted then
             -- If the "buff" is flagged as a debuff, then display it here instead
             if Effects.FakePlayerBuffs[abilityId].debuff == true then

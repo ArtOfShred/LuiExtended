@@ -2366,7 +2366,7 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
 
     -- Check for active duration to display highlight for abilities on bar swap
     if onlyProc == false then
-        if duration > 0 or Effects.AddNoDurationBarHighlight[ability_id] then
+        if duration > 0 or Effects.AddNoDurationBarHighlight[ability_id] or Effects.MajorMinor[ability_id] then
             toggledSlots[ability_id] = slotNum
             if g_toggledSlotsRemain[ability_id] then
                 if CombatInfo.SV.ShowToggled then

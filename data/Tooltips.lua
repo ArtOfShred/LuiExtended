@@ -936,7 +936,6 @@ LUIE.Data.Tooltips = {
     Skill_Grand_Healing                             = GetString(SI_LUIE_SKILL_GRAND_HEALING),
     Skill_Healing_Springs                           = GetString(SI_LUIE_SKILL_HEALING_SPRINGS),
     Skill_Healing_Ward                              = GetString(SI_LUIE_SKILL_HEALING_WARD),
-    Skill_Quick_Siphon                              = GetString(SI_LUIE_SKILL_QUICK_SIPHON),
     Skill_Lights_Champion                           = GetString(SI_LUIE_SKILL_LIGHTS_CHAMPION),
 
     ----------------------------------------------------------------

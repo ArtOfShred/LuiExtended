@@ -539,6 +539,98 @@ Effects.DebuffDisplayOverrideName = {
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
+-- Table of Major / Minor Effects
+--------------------------------------------------------------------------------------------------------------------------------
+
+-- TODO: Finis this
+Effects.MajorMinor = {
+
+    [61744] = true, -- Minor Berserk
+    [61745] = true, -- Major Berserk
+
+    [61665] = true, -- Major Brutality
+
+    [61687] = true, -- Major Sorcery
+
+    [61691] = true, -- Minor Prophecy
+    [61689] = true, -- Major Prophecy
+
+    [61667] = true, -- Major Savagery
+
+    [61708] = true, -- Minor Heroism
+
+    [61685] = true, -- Minor Sorcery
+
+    [61693] = true, -- Minor Resolve
+    [61694] = true, -- Major Resolve
+
+    [61716] = true, -- Major Evasion
+
+    [61549] = true, -- Minor Vitality
+    [61713] = true, -- Major Vitality
+
+    [61710] = true, -- Minor Mending
+    [61711] = true, -- Major Mending
+
+    [88490] = true, -- Minor Toughness
+
+    [61704] = true, -- Minor Endurance
+
+    [61721] = true, -- Minor Protection
+    [61722] = true, -- Major Protection
+
+    [61735] = true, -- Minor Expedition
+    [61736] = true, -- Major Expedition
+
+    [63569] = true, -- Major Gallop
+
+    [147417] = true, -- Minor Courage
+    [109966] = true, -- Major Courage
+
+    [61746] = true, -- Minor Force
+    [61747] = true, -- Major Force
+
+    [61723] = true, -- Minor Maim
+    [61725] = true, -- Major Maim
+
+    [79717] = true, -- Minor Vulnerability
+
+    [61742] = true, -- Minor Breach
+    [61743] = true, -- Major Breach
+
+    [61726] = true, -- Minor Defile
+    [61727] = true, -- Major Defile
+
+    [79867] = true, -- Minor Cowardice
+    [147643] = true, -- Major Cowardice
+
+    [79895] = true, -- Minor Uncertainty
+
+    [79907] = true, -- Minor Enervation
+
+    [145975] = true, -- Minor Brittle
+
+    [61733] = true, -- Minor Mangle
+
+    [88401] = true, -- Minor Magickasteal
+    [88402] = true, -- Minor Magickasteal
+
+    [86304] = true, -- Minor Lifesteal
+    [86305] = true, -- Minor Lifesteal
+
+    [76618] = true, -- Minor Aegis
+    [147225] = true, -- Minor Aegis -- Dummy
+
+    [93123] = true, -- Major Aegis
+
+    [76617] = true, -- Minor Slayer
+    [147226] = true, -- Minor Slayer -- Dummy
+
+    [93109] = true, -- Major Slayer
+
+}
+
+--------------------------------------------------------------------------------------------------------------------------------
 -- Adds this aura to a list of fake Ground auras to display when the player casts them
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.EffectGroundDisplay = {
@@ -878,22 +970,6 @@ Effects.EffectCreateSkillAura = {
     [126647] = { consolidate = true, extendedDisplay = true, abilityId = 38914 }, -- Major Brutality (Shrouded Daggers)
     [126670] = { consolidate = true, extendedDisplay = true, abilityId = 38910 }, -- Major Brutality (Flying Blade)
 
-    -- Destruction Staff
-    [53881] = { removeOnEnd = true, abilityId = 29173 }, -- Major Breach --> Weakness to Elements
-    [62775] = { removeOnEnd = true, abilityId = 39089 }, -- Major Breach (Elemental Susceptibility)
-    [62787] = { removeOnEnd = true, abilityId = 39095 }, -- Major Breach (Elemental Drain)
-    [39100] = { removeOnEnd = true, abilityId = 39095 }, -- Minor Magickasteal (Elemental Drain)
-
-    -- Restoration Staff
-    [37247] = { consolidate = true, extendedDisplay = true, abilityId = 37243 }, -- Minor Resolve (Blessing of Protection)
-    [62626] = { consolidate = true, extendedDisplay = true, abilityId = 40103, name = Abilities.Skill_Blessing_of_Restoration }, -- Minor Resolve (Blessing of Restoration)
-    [62634] = { consolidate = true, abilityId = 40094 }, -- Minor Resolve (Combat Prayer)
-    [62636] = { consolidate = true, abilityId = 40094 }, -- Minor Berserk (Combat Prayer)
-    [88565] = { removeOnEnd = true, abilityId = 31531 }, -- Minor Lifesteal (Force Siphon)
-    [88575] = { removeOnEnd = true, abilityId = 40109 }, -- Minor Lifesteal (Siphon Spirit)
-    [88576] = { removeOnEnd = true, abilityId = 40109 }, -- Minor Lifesteal (Siphon Spirit)
-    [88606] = { alwaysShow = true, removeOnEnd = true, abilityId = 40116 }, -- Minor Lifesteal (Quick Siphon)
-
     -- Armor
     [63015] = { consolidate = true, extendedDisplay = true, abilityId = 29556 }, -- Major Evasion --> Evasion
     [63019] = { consolidate = true, extendedDisplay = true, abilityId = 39195 }, -- Major Evasion --> Shuffle
@@ -945,10 +1021,6 @@ function Effects.BarHighlightRefresh()
 
         -- Necromancer
         Effects.BarHighlightOverride[117883] = { newId = 117885, secondary = true } -- Resistant Flesh --> Minor Defile
-
-        -- Restoration Staff
-        Effects.BarHighlightOverride[85132] = { newId = 85154, showFakeAura = true, secondary = true, noRemove = true } -- Light's Champion --> Major Force
-
     else
         -- Nightblade
         Effects.BarHighlightOverride[25255] = { newId = 33185 } -- Veiled Strike
@@ -956,10 +1028,6 @@ function Effects.BarHighlightRefresh()
 
         -- Necromancer
         Effects.BarHighlightOverride[117883] = { newId = 117886 } -- Resistant Flesh --> Minor Defile
-
-        -- Restoration Staff
-        Effects.BarHighlightOverride[85132] = nil -- Light's Champion
-
     end
 end
 
@@ -1032,12 +1100,6 @@ Effects.BarHighlightExtraId = {
     [28887] = 113627, -- Virulent Shot --> Scatter Shot
     [38674] = 113627, -- Virulent Shot --> Magnum Shot
     [131688] = 113627, -- Virulent Shot --> Draining Shot
-
-    -- Destruction Staff
-    [39100] = 62787, -- Minor Magickasteal --> Major Breach (Elemental Drain)
-
-    -- Restoration Staff
-    [88576] = 88575, -- Minor Magickasteal --> Minor Lifesteal (Siphon Spirit)
 
     -- Fighters Guild
     [80471] = 40195, -- Camouflaged Hunter
@@ -1129,12 +1191,6 @@ Effects.BarHighlightCheckOnFade = {
     [113627] = { id1 = 28887, id2 = 113627, unitTag = "reticleover" }, -- Virulent Shot --> Scatter Shot / Virulent Shot
     [113627] = { id1 = 38674, id2 = 113627, unitTag = "reticleover" }, -- Virulent Shot --> Magnum Shot / Virulent Shot
     [113627] = { id1 = 131688, id2 = 113627, unitTag = "reticleover" }, -- Virulent Shot --> Draining Shot / Virulent Shot
-
-    -- Destruction Staff
-    [62787] = { id1 = 62787, id2 = 39100, unitTag = "reticleover" }, -- Major Breach --> Minor Magickasteal / Major Breach (Elemental Drain)
-
-    -- Restoration Staff
-    [88575] = { id1 = 88576, id2 = 88575, unitTag = "reticleover" }, -- Minor Magickasteal --> Minor Lifesteal (Siphon Spirit)
 
     -- Medium Armor
     [39196] = { id1 = 63019, unitTag = "player" }, -- Shuffle --> Major Evasion
@@ -1520,9 +1576,9 @@ Effects.BarHighlightOverride = {
     [38944] = { newId = 62682 }, -- Flame Reach (Destructive Reach)
     [38978] = { newId = 62745 }, -- Shock Reach (Destructive Reach)
     [38970] = { newId = 62712 }, -- Frost Reach (Destructive Reach)
-    [29173] = { newId = 53881 }, -- Weakness to Elements (Weakness to Elements)
-    [39089] = { newId = 62775 }, -- Elemental Susceptibility (Elemental Susceptibility)
-    [39095] = { newId = 62787 }, -- Elemental Drain (Elemental Drain)
+    [29173] = { newId = 61743 }, -- Weakness to Elements (Weakness to Elements)
+    [39089] = { newId = 61743 }, -- Elemental Susceptibility (Elemental Susceptibility)
+    [39095] = { newId = 61743 }, -- Elemental Drain (Elemental Drain)
 
     [28794] = { newId = 115003 }, -- Fire Impulse --> Wild Impulse
     [28799] = { newId = 115003 }, -- Shock Impulse --> Wild Impulse
@@ -1541,9 +1597,9 @@ Effects.BarHighlightOverride = {
     [37243] = { showFakeAura = true, noRemove = true }, -- Blessing of Protection (Blessing of Protection)
     [40103] = { showFakeAura = true, noRemove = true }, -- Blessing of Restoration (Blessing of Restoration)
     [40094] = { showFakeAura = true, noRemove = true }, -- Combat Prayer (Combat Prayer)
-    [31531] = { newId = 88565 }, -- Force Siphon (Force Siphon)
-    [40109] = { newId = 88575 }, -- Siphon Spirit (Siphon Spirit)
-    [40116] = { newId = 88606 }, -- Quick Siphon (Quick Siphon)
+    [31531] = { newId = 86304 }, -- Force Siphon (Force Siphon)
+    [40109] = { newId = 86304 }, -- Siphon Spirit (Siphon Spirit)
+    [40116] = { newId = 86304 }, -- Quick Siphon (Quick Siphon)
 
     ---------------------------
     -- Armor ------------------
@@ -6360,10 +6416,8 @@ Effects.EffectOverride = {
 
     -- Restoration Staff
     [30973] = { icon = 'esoui/art/icons/ability_weapon_002.dds' }, -- Essence Drain (Essence Drain -  Rank 1)
-    [77918] = { tooltip = Abilities.Skill_Essence_Drain }, -- Major Mending (Essence Drain -  Rank 1)
     [30978] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_essence_drain.dds' }, -- Essence Drain (Essence Drain -  Rank 1)
     [45517] = { icon = 'esoui/art/icons/ability_weapon_002.dds' }, -- Essence Drain (Essence Drain -  Rank 2)
-    [77922] = { tooltip = Abilities.Skill_Essence_Drain }, -- Major Mending (Essence Drain -  Rank 2)
     [45518] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_essence_drain.dds' }, -- Essence Drain (Essence Drain -  Rank 2)
     [30971] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_absorb.dds' }, -- Absorb (Absorb - Rank 1)
     [45522] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_absorb.dds' }, -- Absorb (Absorb - Rank 2)
@@ -6579,12 +6633,6 @@ Effects.EffectOverride = {
     [62745] = { tooltip = Tooltips.Generic_Shock, tooltipValue2 = 2 }, -- Shock Reach (Destructive Reach) -- Shock
     [62712] = { tooltip = Tooltips.Generic_Freeze, tooltipValue2 = 2 }, -- Frost Reach (Destructive Reach)
 
-    -- Weakness to Elements / Elemental Susceptibility / Elemental Drain
-    [53881] = { consolidate = true, tooltip = Abilities.Skill_Weakness_to_Elements }, -- Major Breach (Weakness to Elements)
-    [62775] = { consolidate = true, tooltip = Abilities.Skill_Elemental_Susceptibility }, -- Major Breach (Elemental Susceptibility)
-    [39100] = { consolidate = true, tooltip = Abilities.Skill_Elemental_Drain }, -- Minor Magickasteal (Elemental Drain)
-    [62787] = { consolidate = true, tooltip = Abilities.Skill_Elemental_Drain }, -- Minor Magickasteal (Elemental Drain)
-
     -- Elemental Storm / Elemental Rage / Eye of the Storm
     [83625] = { tooltip = Tooltips.Skill_Fire_Storm }, -- Fire Storm (Elemental Storm)
     [83630] = { tooltip = Tooltips.Skill_Thunder_Storm }, -- Thunder Storm (Elemental Storm)
@@ -6628,13 +6676,7 @@ Effects.EffectOverride = {
     [40079] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Radiating Regeneration (Radiating Regeneration)
 
     -- Blessing of Protection / Blessing of Restoration / Combat Prayer
-    [37243] = { hide = true }, -- Blessing of Protection (Blessing of Protection)
-    [37247] = { consolidateExtra = true, tooltip = Abilities.Skill_Blessing_of_Protection }, -- Minor Resolve (Blessing of Protection)
-    [40103] = { hide = true, name = Abilities.Skill_Blessing_of_Restoration }, -- Blessing of Restoration (Blessing of Restoration)
-    [62626] = { consolidateExtra = true, tooltip = Abilities.Skill_Blessing_of_Restoration }, -- Minor Resolve (Blessing of Restoration)
-    [40094] = { hide = true }, -- Combat Prayer (Combat Prayer)
-    [62634] = { consolidate = true, tooltip = Abilities.Skill_Combat_Prayer }, -- Minor Resolve (Combat Prayer)
-    [62636] = { consolidate = true, tooltip = Abilities.Skill_Combat_Prayer }, -- Minor Berserk (Combat Prayer)
+    [40103] = { name = Abilities.Skill_Blessing_of_Restoration }, -- Blessing of Restoration (Blessing of Restoration)
 
     -- Steadfast Ward / Ward Ally / Healing Ward
     [37232] = { tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Steadfast Ward (Steadfast Ward)
@@ -6642,19 +6684,10 @@ Effects.EffectOverride = {
     [40132] = { tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Ward Ally (Ward Ally)
     [40126] = { tooltip = Tooltips.Skill_Healing_Ward }, -- Healing Ward (Healing Ward)
 
-    -- Force Siphon / Siphon Spirit / Quick Siphon
-    [88565] = { consolidate = true, tooltip = Abilities.Skill_Force_Siphon }, -- Minor Lifesteal (Force Siphon)
-    [88575] = { consolidate = true, tooltip = Abilities.Skill_Siphon_Spirit }, -- Minor Lifesteal (Siphon Spirit)
-    [88576] = { consolidate = true, tooltip = Abilities.Skill_Siphon_Spirit }, -- Minor Magickasteal (Siphon Spirit)
-    [40116] = { tooltip = Tooltips.Skill_Quick_Siphon }, -- Quick Siphon (Quick Siphon)
-    [88606] = { consolidate = true, tooltip = Abilities.Skill_Quick_Siphon }, -- Minor Lifesteal (Quick Siphon)
-    [125901] = { tooltip = Abilities.Skill_Quick_Siphon }, -- Minor Expedition (Quick Siphon)
-
     -- Panacea / Life Giver / Light's Champion
     [83552] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Panacea (Panacea)
     [83850] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Life Giver (Life Giver)
     [85132] = { tooltip = Tooltips.Skill_Lights_Champion }, -- Light's Champion (Light's Champion)
-    [85154] = { tooltip = Abilities.Skill_Lights_Champion }, -- Major Force (Light's Champion)
 
     ----------------------------------------------------------------
     -- ARMOR PASSIVES ----------------------------------------------
@@ -13265,6 +13298,8 @@ Effects.FakeExternalDebuffs = {
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- Fake buffs applied onto the player by self (also supports debuffs with debuff = true)
+-- onlyExtra -- Only display this if the Show Extra Buffs menu option is enabled
+-- onlyExtended -- Only display this if the Show Extra Buffs menu option with "Extend Settings to Single Aura Effects" is enabled.
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.FakePlayerBuffs = {
     -- Misc Consumables
@@ -13347,6 +13382,11 @@ Effects.FakePlayerBuffs = {
     [92068] = { duration = 6000 }, -- Crystalized Shield (Crystallized Shield)
     [92168] = { duration = "GET" }, -- Crystalized Slab (Crystallized Slab)
     [92170] = { duration = "GET" }, -- Shimmering Shield (Shimmering Shield)
+
+    -- Restoration Staff
+    [37243] = { duration = "GET", onlyExtended = true, ignoreFade = true }, -- Blessing of Protection (Blessing of Protection)
+    [40103] = { duration = "GET", onlyExtended = true, ignoreFade = true }, -- Blessing of Restoration (Blessing Of Restoration)
+    [40094] = { duration = "GET", onlyExtra = true, ignoreFade = true }, -- Combat Prayer (Combat Prayer)
 
     -- Mages Guild
     [40449] = { duration = "GET" }, -- Spell Symmetry (Spell Symmetry)

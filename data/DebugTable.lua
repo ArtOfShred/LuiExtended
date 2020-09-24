@@ -175,6 +175,7 @@ LUIE.DebugAuras = {
     [109966] = true, -- Major Courage
 
     [61746] = true, -- Minor Force
+    [61747] = true, -- Major Force
 
     [61723] = true, -- Minor Maim
     [61725] = true, -- Major Maim
@@ -197,6 +198,12 @@ LUIE.DebugAuras = {
     [145975] = true, -- Minor Brittle
 
     [61733] = true, -- Minor Mangle
+
+    [88401] = true, -- Minor Magickasteal
+    [88402] = true, -- Minor Magickasteal
+
+    [86304] = true, -- Minor Lifesteal
+    [86305] = true, -- Minor Lifesteal
 
     [76618] = true, -- Minor Aegis
     [147225] = true, -- Minor Aegis -- Dummy
@@ -6089,7 +6096,7 @@ LUIE.DebugAuras = {
     [16212] = true, -- Restoration Staff Channel
     [67022] = true, -- Restoration Staff Heavy Attack
     [32760] = true, -- Heavy Attack (Restoration)
-    [67106] = true, -- Partial Heavy Attack (Resto)
+    --[67106] = true, -- Partial Heavy Attack (Resto)
 
     [30973] = true, -- Essence Drain (Rank 1)
     [77918] = true, -- Major Mending
