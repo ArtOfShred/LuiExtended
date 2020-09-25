@@ -963,9 +963,6 @@ Effects.EffectCreateSkillAura = {
     [101169] = { alwaysShow = true, removeOnEnd = true, abilityId = 40211 }, -- Major Expedition (Retreating Maneuver)
     [57481] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 40215 }, -- Major Gallop (Charging Maneuver)
 
-    -- Werewolf
-    [137206] = { alwaysShow = true, abilityId = 999016, removeOnEnd = true }, -- Major Berserk (Hircine's Rage)
-
     -- Cyrodiil Artifacts (Volendrung)
     [116374] = { removeOnEnd = false, consolidate = true, abilityId = 116095 }, -- Major Expedition -> Pariah's Resolve
     [116371] = { removeOnEnd = false, consolidate = true, abilityId = 116095 }, -- Major Brutality -> Pariah's Resolve
@@ -1078,11 +1075,8 @@ Effects.BarHighlightExtraId = {
     [126897] = 126898, -- Consuming Trap
 
     -- Werewolf
-    --[137157] = 137156, -- Carnage
-
     [32633] = 137257, -- Roar --> Off Balance
-    [39114] = 111788, -- Deafening Roar --> Major Fracture
-    [137311] = 111788, -- Minor Maim --> Major Fracture
+    [39114] = 137312, --> Deafening Roar --> Off Balance
 
     -- Vampire
     [138130] = 138098, -- Stupefy
@@ -1151,10 +1145,9 @@ Effects.BarHighlightCheckOnFade = {
     [126583] = { duration = 63119, durationMod = 126583, unitTag = "player" }, -- Immovable --> Major Resolve
 
     -- Werewolf
-    --[137156] = { id1 = 137157, unitTag = "player", id2 = 137156, id2Tag = "reticleover" }, -- Carnage
 
-    [137257] = { id1 = 137257, id2 = 32633, unitTag = "reticleover" }, -- Off Balance --> Ferocious Roar / Off Balance
-    [111788] = { id1 = 39114, id2 = 137311, id3 = 111788, unitTag = "reticleover" }, -- Major Fracture --> Deafening Roar / Minor Maim / Major Fracture
+    [137257] = { id1 = 137257, id2 = 32633, unitTag = "reticleover" }, -- Off Balance --> Roar / Off Balance
+    [137312] = { id1 = 137312, id2 = 39114, unitTag = "reticleover" }, -- Off Balance --> Deafening Roar / Off Balance
 
     -- Fighters Guild
     [35750] = { duration = 68595, unitTag = "player" }, -- Trap Beast --> Minor Force
@@ -1594,11 +1587,11 @@ Effects.BarHighlightOverride = {
     [39105] = { newId = 137189 }, -- Brutal Pounce --> Brutal Carnage
     [39104] = { newId = 137164 }, -- Feral Pounce --> Feral Carnage
 
-    [58317] = { newId = 137206 }, -- Hircine's Rage --> Major Berserk
+    [58317] = { newId = 137206, showFakeAura = true }, -- Hircine's Rage --> Major Berserk
 
     [32633] = { newId = 137257 }, -- Roar --> Off Balance
-    [39113] = { newId = 137287 }, -- Ferocious Roar --> Off Balance
-    [39114] = { newId = 111788 }, -- Deafening Roar --> Major Fracture
+    [39113] = { newId = 137287 }, -- Ferocious Roar
+    [39114] = { newId = 137312 }, -- Deafening Roar --> Off Balance
     [58855] = { newId = 58856 }, -- Infectious Claws
     [58864] = { newId = 58865 }, -- Claws of Anguish
     [58879] = { newId = 58880 }, -- Claws of Life
@@ -3500,7 +3493,6 @@ Effects.MajorMinorIconTable = {
     [88509] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds', normalize = 'esoui/art/icons/achievement_031.dds' }, -- Minor Toughness (Maturation - Rank 2)
     [120020] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds', normalize = 'esoui/art/icons/achievement_031.dds' }, -- Minor Toughness (Target Iron Atronach, Trial)
 
-    [137348] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_courage.dds', normalize = 'esoui/art/icons/ability_mage_045.dds' }, -- Minor Courage (Pack Leader)
     --[121878] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_courage.dds', normalize = 'esoui/art/icons/ability_mage_045.dds' }, -- Minor Courage (Yolnakriin's)
 
     --[66902] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds', normalize = 'esoui/art/icons/ability_mage_045.dds' }, -- Major Courage (Spell Power Cure)
@@ -6808,13 +6800,13 @@ Effects.EffectOverride = {
     [137202] = { icon = 'esoui/art/icons/ability_werewolf_004_a.dds' }, -- Hircine's Bounty (Hircine's Bounty)
 
     [137204] = { icon = 'esoui/art/icons/ability_werewolf_004_b.dds' }, -- Hircine's Rage (Hircine's Rage)
-    [999016] = { icon = 'esoui/art/icons/ability_werewolf_004_b.dds', name = Abilities.Skill_Hircines_Rage, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Increase_Damage_Taken, tooltipValue2 = 20 }, -- FAKE BUFF FOR DAMAGE TAKEN - Major Berserk
+    [137206] = { icon = 'esoui/art/icons/ability_werewolf_004_b.dds', name = Abilities.Skill_Hircines_Rage, unbreakable = 1, tooltip = Tooltips.Generic_Increase_Damage_Taken, tooltipValue2 = 5 }, -- Major Berserk (Hircine's Rage)
 
     [137209] = { icon = 'esoui/art/icons/ability_werewolf_004_c.dds' }, -- Hircine's Fortitude (Hircine's Fortitude)
     [137210] = { tooltip = Tooltips.Skill_Hircines_Fortitude }, -- Hircine's Fortitude (Hircine's Fortitude)
 
 
-    -- Roar / Ferocious Roar / Defeaning Roar
+    -- Roar / Ferocious Roar / Deafening Roar
     [32633] = { tooltip = Tooltips.Generic_Fear }, -- Roar (Roar)
     [137257] = { tooltip = Abilities.Skill_Roar, unbreakable = 1 }, -- Off Balance (Roar)
 
@@ -6828,7 +6820,6 @@ Effects.EffectOverride = {
     -- Infectious Claws / Claws of Anguish / Claws of Life
     [58856] = { tooltip = Tooltips.Generic_Disease, tooltipValue2 = 2 }, -- Infection (Infectious Claws)
     [58865] = { tooltip = Tooltips.Generic_Disease, tooltipValue2 = 2 }, -- Infection (Claws of Anguish)
-    [58869] = { tooltip = Abilities.Skill_Claws_of_Anguish }, -- Major Defile (Claws of Anguish)
     [58880] = { tooltip = Tooltips.Skill_Claws_of_Life }, -- Infection (Claws of Life)
 
     -- Werewolf Transformation / Pack Leader / Werewolf Berserker
@@ -6837,7 +6828,6 @@ Effects.EffectOverride = {
     [111832] = { tooltip = Tooltips.Generic_Fear }, -- Werewolf Transformation
     [39075] = { tooltip = Tooltips.Skill_Pack_Leader }, -- Pack Leader (Pack Leader)
     [111843] = { tooltip = Tooltips.Generic_Fear }, -- Pack Leader
-    [137348] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_courage.dds', tooltip = Abilities.Skill_Pack_Leader }, -- Minor Courage (Pack Leader)
     [80180] = { hide = true }, -- Birth Direwolf (Pack Leader)
     [80177] = { hide = true }, -- Pack Leader (Pack Leader)
     [80178] = { hide = true }, -- Pack Leader (Pack Leader)
@@ -13261,6 +13251,9 @@ Effects.FakePlayerBuffs = {
 
     -- Vampire
     [145002] = { duration = 5000, debuff = true }, -- Blood for Blood (Blood for Blood)
+
+    -- Werewolf
+    [137206] = { duration = "GET", debuff = true }, -- Major Berserk (Hircine's Rage)
 
     -- Seasonal Quests (New Life Festival)
     --[84125] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = Abilities.Skill_Lava_Foot_Stomp, duration = 10000}, -- Breton Male Dance (Lava Foot Stomp)

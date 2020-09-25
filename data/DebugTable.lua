@@ -6563,8 +6563,10 @@ LUIE.DebugAuras = {
 
     [32637] = true, -- Blood Rage (Rank 1)
     [46135] = true, -- Blood Rage (Rank 2)
-    [144209] = true, -- Blood Rage
-    [144208] = true, -- Blood Rage
+    [144209] = true, -- Blood Rage (Werewolf/Berserker)
+    [144208] = true, -- Blood Rage (Werewolf/Berserker)
+    [144211] = true, -- Blood Rage (Pack Leader)
+    [144210] = true, -- Blood Rage (Pack Leader)
 
     [32639] = true, -- Bloodmoon (Rank 1)
     [40514] = true, -- Ally Bite (Bloodmoon)
@@ -6635,6 +6637,7 @@ LUIE.DebugAuras = {
     [137317] = true, -- Piercing Howl (Piercing Howl)
 
     [58775] = true, -- Feeding Frenzy (Howl of Despair - Feeding Frenzy Synergy)
+    [131353] = true, -- Empower (Howl of Despair - Feeding Frenzy Synergy)
     [58813] = true, -- Feeding Frenzy (Howl of Despair - Feeding Frenzy Synergy)
     [58742] = true, -- Howl of Despair (Howl of Despair)
     [58745] = true, -- Feeding Frenzy (Howl of Despair)
