@@ -79,7 +79,6 @@ Effects.IsToggle = {
     [135841] = true, -- Sated Fury
     [32986] = true, -- Mist Form
     [38963] = true, -- Elusive Mist
-    [38967] = true, -- Major Expedition
     [38965] = true, -- Blood Mist
 
     -- NPC Abilities
@@ -959,25 +958,6 @@ Effects.EffectCreateSkillAura = {
     [88761] = { consolidate = true, abilityId = 86130 }, -- Major Resolve --> Ice Fortress
     [87194] = { consolidate = true, abilityId = 86130 }, -- Minor Protection --> Ice Fortress
 
-    -- Armor
-    [63015] = { consolidate = true, extendedDisplay = true, abilityId = 29556 }, -- Major Evasion --> Evasion
-    [63019] = { consolidate = true, extendedDisplay = true, abilityId = 39195 }, -- Major Evasion --> Shuffle
-    [63030] = { alwaysShow = true, abilityId = 39192 }, -- Major Evasion --> Elude
-
-    -- Fighters Guild
-    [64509] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 999004 }, -- Major Savagery --> Expert Hunter
-
-    -- Mages Guild
-    [77928] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 999005 }, -- Major Prophecy --> Magelight
-    [77945] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 999006 }, -- Major Prophecy --> Inner Light
-    [77958] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 999007 }, -- Major Prophecy --> Radiant Magelight
-    [80160] = { consolidate = true, extendedDisplay = true, abilityId = 40441 }, -- Balance --> Major Resolve
-
-    -- Psijic Order
-    [103521] = { consolidate = true, extendedDisplay = true, abilityId = 103503 }, -- Minor Force --> Accelerate
-    [103708] = { consolidate = true, extendedDisplay = true, abilityId = 103706 }, -- Minor Force --> Channeled Acceleration
-    [103712] = { consolidate = true, extendedDisplay = true, abilityId = 103710 }, -- Minor Force --> Race Against Time
-
     -- Assault
     [57472] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 38566 }, -- Major Gallop (Rapid Maneuver)
     [101169] = { alwaysShow = true, removeOnEnd = true, abilityId = 40211 }, -- Major Expedition (Retreating Maneuver)
@@ -1084,13 +1064,6 @@ Effects.BarHighlightExtraId = {
     [38674] = 113627, -- Virulent Shot --> Magnum Shot
     [131688] = 113627, -- Virulent Shot --> Draining Shot
 
-    -- Fighters Guild
-    [80471] = 40195, -- Camouflaged Hunter
-
-    [68595] = 35750, -- Trap Beast
-    [68632] = 40382, -- Barbed Trap
-    [68628] = 40372, -- Lightweight Beast Trap
-
     -- Mages Guild
     [40468] = 40465, -- Scalding Rune
     [40476] = 40470, -- Volcanic Rune
@@ -1170,12 +1143,12 @@ Effects.BarHighlightCheckOnFade = {
     [113627] = { id1 = 131688, id2 = 113627, unitTag = "reticleover" }, -- Virulent Shot --> Draining Shot / Virulent Shot
 
     -- Medium Armor
-    [39196] = { id1 = 63019, unitTag = "player" }, -- Shuffle --> Major Evasion
+    [39196] = { duration = 63019, durationMod = 39196, unitTag = "player" }, -- Shuffle --> Major Evasion
 
     -- Heavy Armor
-    [126581] = { id1 = 63084, unitTag = "player" }, -- Unstoppable --> Major Resolve
-    [126582] = { id1 = 63134, unitTag = "player" }, -- Immovable Brute --> Major Resolve
-    [126583] = { id1 = 63119, unitTag = "player" }, -- Immovable --> Major Resolve
+    [126581] = { duration = 63084, durationMod = 126581, unitTag = "player" }, -- Unstoppable --> Major Resolve
+    [126582] = { duration = 63134, durationMod = 126582, unitTag = "player" }, -- Immovable Brute --> Major Resolve
+    [126583] = { duration = 63119, durationMod = 126583, unitTag = "player" }, -- Immovable --> Major Resolve
 
     -- Werewolf
     --[137156] = { id1 = 137157, unitTag = "player", id2 = 137156, id2Tag = "reticleover" }, -- Carnage
@@ -1183,10 +1156,14 @@ Effects.BarHighlightCheckOnFade = {
     [137257] = { id1 = 137257, id2 = 32633, unitTag = "reticleover" }, -- Off Balance --> Ferocious Roar / Off Balance
     [111788] = { id1 = 39114, id2 = 137311, id3 = 111788, unitTag = "reticleover" }, -- Major Fracture --> Deafening Roar / Minor Maim / Major Fracture
 
+    -- Fighters Guild
+    [35750] = { duration = 68595, unitTag = "player" }, -- Trap Beast --> Minor Force
+    [40382] = { duration = 68632, unitTag = "player" }, -- Barbed Trap --> Minor Force
+    [40372] = { duration = 68628, unitTag = "player" }, -- Lightweight Beast Trap --> Minor Force
+
     -- Mages Guild
-    [126374] = { id1 = 63227, unitTag = "player" }, -- Degeneration --> Major Sorcery
     [40449] = { id1 = 48136, unitTag = "player" }, -- Spell Symmetry
-    [48141] = { id1 = 80160, unitTag = "player" }, -- Balance --> Major Resolve
+    [48141] = { duration = 80160, durationMod = 48141, unitTag = "player" }, -- Balance --> Major Resolve
 
     -- Psijic Order
     [103711] = { id1 = 103712, unitTag = "player" }, -- Race Against Time --> Minor Force
@@ -1582,9 +1559,9 @@ Effects.BarHighlightOverride = {
     -- Armor ------------------
     ---------------------------
 
-    [29556] = { newId = 63015, noRemove = true }, -- Evasion --> Major Evasion
-    [39195] = { newId = 39196, noRemove = true }, -- Shuffle
-    [39192] = { newId = 126958, showFakeAura = true }, -- Elude
+    [29556] = { newId = 63015, showFakeAura = true }, -- Evasion --> Major Evasion
+    [39195] = { newId = 39196, showFakeAura = true }, -- Shuffle --> Major Evasion
+    [39192] = { newId = 126958, showFakeAura = true }, -- Elude --> Major Evasion
     [29552] = { newId = 126581, noRemove = true }, -- Unstoppable
     [39205] = { newId = 126582, noRemove = true }, -- Immovable Brute
     [39197] = { newId = 126583, noRemove = true }, -- Immovable
@@ -3276,16 +3253,8 @@ function Effects.UpdateEffectOnSkillUpdate()
     Effects.EffectOverride[26216] = { consolidate = true, tooltip = LUIE.GetSkillMorphName(26209) } -- Minor Intellect (Restoring Aura - All Morphs)
     Effects.EffectOverride[26215] = { consolidate = true, tooltip = LUIE.GetSkillMorphName(26209) } -- Minor Endurance (Restoring Aura - All Morphs)
 
-    -- Fighter's Guild
-    Effects.EffectOverride[64509] = { consolidateExtra = true, tooltip = LUIE.GetSkillMorphName(35762) } -- Major Savagery
-    Effects.EffectOverride[999004] = { name = LUIE.GetSkillMorphName(35762), icon = LUIE.GetSkillMorphIcon(35762), tooltip = GetAbilityDescription(LUIE.GetSkillMorphAbilityId(35762)) } -- Major Savagery fake aura for Expert Hunter
-
     -- Mages Guild
     Effects.EffectOverride[40465].tooltip = zo_strformat(GetString(SI_LUIE_SKILL_SCALDING_RUNE_TP), (GetAbilityDuration(40468) / 1000) + GetNumPassiveSkillRanks(GetSkillLineIndicesFromSkillLineId(44), select(2, GetSkillLineIndicesFromSkillLineId(44)), 8) )
-
-    -- Werewolf
-    Effects.EffectOverride[137193] = { tooltip = LUIE.GetSkillMorphName(58310) } -- Major Bruality (Hircine's Bounty)
-    Effects.EffectOverride[138072] = { tooltip = LUIE.GetSkillMorphName(32633) } -- Major Savagery (Roar)
 
 end
 
@@ -4668,9 +4637,9 @@ Effects.EffectOverride = {
     [138019] = { icon = 'LuiExtended/media/icons/abilities/ability_set_giants_might.dds', tooltip = Tooltips.Set_Giants_Might }, -- Giant's Might (Yandir's Perfect)
 
     -- Set ICD's (Fake Id's)
-    [999010] = { tooltip = Tooltips.Generic_Set_ICD_Minutes, tooltipValue2 = Abilities.Set_Eternal_Warrior, tooltipValue3 = 1, unbreakable = 1 }, -- Eternal Warrior (Fake Id)
-    [999011] = { tooltip = Tooltips.Generic_Set_ICD_Minutes, tooltipValue2 = Abilities.Set_Phoenix, tooltipValue3 = 1, unbreakable = 1 }, -- Phoenix (Fake Id)
-    [999012] = {tooltip = Tooltips.Generic_Set_ICD_Minutes, tooltipValue2 = Abilities.Set_Juggernaut, tooltipValue3 = 1, unbreakable = 1 }, -- Juggernaut (Fake Id)
+    [999010] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_warrior_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Eternal_Warrior, Abilities.Set_Cooldown), tooltip = Tooltips.Generic_Set_ICD_Minutes, tooltipValue2 = Abilities.Set_Eternal_Warrior, tooltipValue3 = 1, unbreakable = 1 }, -- Eternal Warrior (Fake Id)
+    [999011] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Phoenix, Abilities.Set_Cooldown), tooltip = Tooltips.Generic_Set_ICD_Minutes, tooltipValue2 = Abilities.Set_Phoenix, tooltipValue3 = 1, unbreakable = 1 }, -- Phoenix (Fake Id)
+    [999012] = { icon = 'LuiExtended/media/icons/abilities/ability_set_the_juggernaut_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Juggernaut, Abilities.Set_Cooldown), tooltip = Tooltips.Generic_Set_ICD_Minutes, tooltipValue2 = Abilities.Set_Juggernaut, tooltipValue3 = 1, unbreakable = 1 }, -- Juggernaut (Fake Id)
 
     -- Battleground Sets
     [93104] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_oblivion_purple.dds' }, -- Knight Slayer
@@ -4880,7 +4849,7 @@ Effects.EffectOverride = {
     -- Basic Attacks
     [16593] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_pin.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 25 }, -- Melee Snare
     [48532] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_pin.dds', hide = true }, -- Charge Snare
-    [61737] = { tooltip = "" }, -- Empower
+    [61737] = { tooltip = "" }, -- Empower -- TODO: FIX
     [55080] = { hide = true }, -- Pet Hidden
     [28301] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', tooltip = Tooltips.Generic_CC_Immunity }, -- Crowd Control Immunity
     [38117] = { hide = true }, -- Crowd Control Immunity
@@ -6668,22 +6637,12 @@ Effects.EffectOverride = {
     [39182] = { tooltip = Tooltips.Skill_Harness_Magicka }, -- Harness Magicka (Harness Magicka)
 
     -- MEDIUM ARMOR
-    [63015] = { consolidateExtra = true, tooltip = Abilities.Skill_Evasion }, -- Major Evasion (Evasion)
-    [63019] = { consolidateExtra = true, tooltip = Abilities.Skill_Shuffle }, -- Major Evasion (Shuffle)
     [39196] = { tooltip = Tooltips.Innate_Snare_Immobilize_Immunity }, -- Shuffle (Shuffle)
-
-    [39192] = { tooltip = Tooltips.Skill_Elude }, -- Elude (Elude)
-    [63030] = { consolidateExtra = true, tooltip = Abilities.Skill_Elude }, -- Major Evasion (Elude)
-    [126957] = {  tooltip = Abilities.Skill_Elude }, -- Major Expedition (Elude)
+    [126958] = { icon = 'esoui/art/icons/ability_armor_002_b.dds', tooltip = Tooltips.Skill_Elude }, -- Elude (Elude)
 
     -- HEAVY ARMOR
-    [63084] = { tooltip = Abilities.Skill_Unstoppable }, -- Major Resolve (Unstoppable)
-    [126581] = { icon = 'esoui/art/icons/ability_armor_001.dds', tooltip = Tooltips.Skill_Unstoppable }, -- Unstoppable (Unstoppable)
-
-    [63134] = { tooltip = Abilities.Skill_Unstoppable_Brute }, -- Major Resolve (Unstoppable Brute)
-    [126582] = { icon = 'esoui/art/icons/ability_armor_001_a.dds', name = Abilities.Skill_Unstoppable_Brute, tooltip = Tooltips.Skill_Unstoppable_Brute }, -- Unstoppable Brute (Unstoppable Brute)
-
-    [63119] = { tooltip = Abilities.Skill_Immovable }, -- Major Resolve (Immovable)
+    [126581] = { tooltip = Tooltips.Skill_Unstoppable }, -- Unstoppable (Unstoppable)
+    [126582] = { name = Abilities.Skill_Unstoppable_Brute, tooltip = Tooltips.Skill_Unstoppable_Brute }, -- Unstoppable Brute (Unstoppable Brute)
     [126583] = { tooltip = Tooltips.Skill_Immovable }, -- Immovable (Immovable)
 
     ----------------------------------------------------------------
@@ -6782,7 +6741,6 @@ Effects.EffectOverride = {
     -- Mist Form
     [32986] = { tooltip = Tooltips.Skill_Mist_Form, forcedContainer = 'short' }, -- Mist Form
     [38963] = { tooltip = Tooltips.Skill_Mist_Form, forcedContainer = 'short' }, -- Elusive Mist
-    [38967] = { tooltip = Abilities.Skill_Elusive_Mist, forcedContainer = 'short', consolidateExtra = true }, -- Major Expedition (Elusive Mist)
     [38965] = { tooltip = Tooltips.Skill_Blood_Mist, forcedContainer = 'short' }, -- Blood Mist
     [38968] = { icon = 'esoui/art/icons/ability_u26_vampire_05_b.dds' }, -- Blood Mist (Blood Mist)
     [135427] = { icon = 'esoui/art/icons/ability_u26_vampire_05_b.dds' }, -- Blood Mist (Blood Mist)
@@ -6847,11 +6805,9 @@ Effects.EffectOverride = {
     [137164] = { tooltip = Tooltips.Skill_Feral_Carnage }, -- Feral Carnage (Feral Pounce)
 
     -- Hircine's Bounty / Hircine's Rage / Hircine's Fortitude
-    [137193] = { tooltip = LUIE.GetSkillMorphName(58310) }, -- Major Bruality (Hircine's Bounty)
     [137202] = { icon = 'esoui/art/icons/ability_werewolf_004_a.dds' }, -- Hircine's Bounty (Hircine's Bounty)
 
     [137204] = { icon = 'esoui/art/icons/ability_werewolf_004_b.dds' }, -- Hircine's Rage (Hircine's Rage)
-    [137206] = { tooltip = Abilities.Skill_Hircines_Rage }, -- Major Berserk (Hircine's Rage)
     [999016] = { icon = 'esoui/art/icons/ability_werewolf_004_b.dds', name = Abilities.Skill_Hircines_Rage, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Increase_Damage_Taken, tooltipValue2 = 20 }, -- FAKE BUFF FOR DAMAGE TAKEN - Major Berserk
 
     [137209] = { icon = 'esoui/art/icons/ability_werewolf_004_c.dds' }, -- Hircine's Fortitude (Hircine's Fortitude)
@@ -6859,8 +6815,6 @@ Effects.EffectOverride = {
 
 
     -- Roar / Ferocious Roar / Defeaning Roar
-    [138072] = { tooltip = LUIE.GetSkillMorphName(32633) }, -- Major Savagery (Roar)
-
     [32633] = { tooltip = Tooltips.Generic_Fear }, -- Roar (Roar)
     [137257] = { tooltip = Abilities.Skill_Roar, unbreakable = 1 }, -- Off Balance (Roar)
 
@@ -6869,12 +6823,7 @@ Effects.EffectOverride = {
     [137287] = { tooltip = Tooltips.Skill_Ferocious_Roar }, -- Ferocious Roar (Ferocious Roar)
 
     [39114] = { tooltip = Tooltips.Generic_Fear }, -- Deafening Roar (Deafening Roar)
-    [111788] = { tooltip = Abilities.Skill_Deafening_Roar }, -- Major Fracture (Deafening Roar)
-    [137311] = { tooltip = Abilities.Skill_Deafening_Roar }, -- Minor Maim (Deafening Roar)
     [137312] = { tooltip = Abilities.Skill_Deafening_Roar, unbreakable = 1 }, -- Off Balance (Deafening Roar)
-
-    -- Piercing Howl / Howl of Despair / Howl of Agony
-    [131353] = { name = Abilities.Skill_Feeding_Frenzy, tooltip = Tooltips.Skill_Feeding_Frenzy }, -- Empower (Howl of Despair - Feeding Frenzy Synergy)
 
     -- Infectious Claws / Claws of Anguish / Claws of Life
     [58856] = { tooltip = Tooltips.Generic_Disease, tooltipValue2 = 2 }, -- Infection (Infectious Claws)
@@ -6918,10 +6867,6 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     [76325] = { icon = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_blade_of_woe.dds' }, -- Blade of Woe
-    [79623] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds', tooltip = Abilities.Skill_Padomaic_Sprint }, -- Major Expedition (Padomaic Sprint - Rank 1) (Blade of Woe Kill)
-    [79624] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds', tooltip = Abilities.Skill_Padomaic_Sprint }, -- Major Expedition (Padomaic Sprint - Rank 2) (Blade of Woe Kill)
-    [79625] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds', tooltip = Abilities.Skill_Padomaic_Sprint }, -- Major Expedition (Padomaic Sprint - Rank 3) (Blade of Woe Kill)
-    [79877] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds', tooltip = Abilities.Skill_Padomaic_Sprint }, -- Major Expedition (Padomaic Sprint - Rank 4) (Blade of Woe Kill)
 
     ----------------------------------------------------------------
     -- FIGHTERS GUILD PASSIVES -------------------------------------
@@ -6950,43 +6895,31 @@ Effects.EffectOverride = {
 
     -- Circle of Protection / Turn Evil / Ring of Preservation
     [35737] = { tooltip = Tooltips.Skill_Circle_of_Protection }, -- Circle of Protection
-    [80271] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = Abilities.Skill_Circle_of_Protection }, -- Minor Endurance (Circle of Protection)
-    [35739] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = Abilities.Skill_Circle_of_Protection }, -- Minor Protection (Circle of Protection)
     [40181] = { tooltip = Tooltips.Skill_Circle_of_Protection }, -- Turn Evil
-    [80276] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = Abilities.Skill_Turn_Undead }, -- Minor Endurance (Turn Evil)
-    [40185] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = Abilities.Skill_Turn_Undead }, -- Minor Protection (Turn Evil)
     [40187] = { tooltip = Tooltips.Generic_Fear }, -- Turn Evil (Turn Evil)
     [40169] = { tooltip = Tooltips.Skill_Ring_of_Preservation }, -- Ring of Preservation
-    [80284] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = Abilities.Skill_Ring_of_Preservation }, -- Minor Endurance (Ring of Preservation)
-    [40171] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = Abilities.Skill_Ring_of_Preservation }, -- Minor Protection (Ring of Preservation)
     [80293] = { tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 0.5, groundLabel = true }, -- Ring of Preservation (Ring of Preservation)
 
     -- Expert Hunter / Evil Hunter / Camouflaged Hunter
-    [64509] = { consolidateExtra = true, tooltip = LUIE.GetSkillMorphName(35762) }, -- Major Savagery
-    [999004] = { name = LUIE.GetSkillMorphName(35762), icon = LUIE.GetSkillMorphIcon(35762), tooltip = GetAbilityDescription(LUIE.GetSkillMorphAbilityId(35762)) }, -- Major Savagery fake aura for Expert Hunter
     [35762] = { tooltip = Tooltips.Skill_Expert_Hunter }, -- Expert Hunter (Expert Hunter)
     [80307] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = Abilities.Skill_Revealed, tooltip = Abilities.Skill_Expert_Hunter }, -- Expert Hunter (Expert Hunter)
     [40194] = { tooltip = Tooltips.Skill_Evil_Hunter }, -- Evil Hunter (Evil Hunter)
     [80381] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = Abilities.Skill_Revealed, tooltip = Abilities.Skill_Evil_Hunter }, -- Evil Hunter (Evil Hunter)
     [40195] = { tooltip = Tooltips.Skill_Expert_Hunter}, -- Camouflaged Hunter (Camouflaged Hunter)
     [80338] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = Abilities.Skill_Revealed, tooltip = Abilities.Skill_Camouflaged_Hunter }, -- Camouflaged Hunter (Camouflaged Hunter)
-    [80471] = { tooltip = Abilities.Skill_Camouflaged_Hunter }, -- Minor Berserk (Camouflaged Hunter)
 
     -- Trap Beast / Barbed Trap / Lightweight Beast Trap
     [35750] = { tooltip = Tooltips.Skill_Trap_Beast }, -- Trap Beast (Trap Beast)
     [35756] = { tooltip = Tooltips.Skill_Trap_Beast_Debuff }, -- Trap Beast (Trap Beast)
     [35753] = { hideReduce = true, tooltip = Tooltips.Skill_Trap_Beast_Debuff }, -- Trap Beast (Trap Beast)
-    [68595] = { tooltip = Abilities.Skill_Trap_Beast }, -- Minor Force (Trap Beast)
 
     [40382] = { tooltip = Tooltips.Skill_Barbed_Trap }, -- Barbed Trap (Barbed Trap)
     [40385] = { tooltip = Tooltips.Skill_Barbed_Trap_Debuff }, -- Barbed Trap (Barbed Trap)
     [40384] = { hideReduce = true, tooltip = Tooltips.Skill_Barbed_Trap_Debuff }, -- Barbed Trap (Barbed Trap)
-    [68632] = { tooltip = Abilities.Skill_Barbed_Trap }, -- Minor Force (Barbed Trap)
 
     [40372] = { tooltip = Tooltips.Skill_Trap_Beast }, -- Lightweight Beast Trap (Lightweight Beast Trap)
     [40375] = { tooltip = Tooltips.Skill_Trap_Beast_Debuff }, -- Lightweight Beast Trap (Lightweight Beast Trap)
     [40374] = { hideReduce = true, tooltip = Tooltips.Skill_Trap_Beast_Debuff }, -- Lightweight Beast Trap (Lightweight Beast Trap)
-    [68628] = { tooltip = Abilities.Skill_Lightweight_Beast_Trap }, -- Minor Force (Lightweight Beast Trap)
 
     -- Dawnbreaker / Flawless Dawnbreaker / Dawnbreaker of Smiting
     [62305] = { tooltip = Tooltips.Generic_Physical, tooltipValue2 = 2 }, -- Dawnbreaker
@@ -7007,34 +6940,23 @@ Effects.EffectOverride = {
     [40438] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_magicka_controller.dds' }, -- Magicka Controller (Rank 1)
     [45603] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_magicka_controller.dds' }, -- Magicka Controller (Rank 2)
     [43561] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_might_of_the_guild.dds' }, -- Might of the Guild (Rank 1)
-    [65507] = { tooltip = Abilities.Skill_Might_of_the_Guild }, -- Empower (Might of the Guild)
     [45607] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_might_of_the_guild.dds' }, -- Might of the Guild (Rank 2)
-    [65541] = { tooltip = Abilities.Skill_Might_of_the_Guild }, -- Empower (Might of the Guild)
 
     ----------------------------------------------------------------
     -- MAGES GUILD ACTIVE ABILITIES --------------------------------
     ----------------------------------------------------------------
 
     -- Magelight / Radiant Magelight / Inner Light
-    [77928] = { consolidateExtra = true, tooltip = Abilities.Skill_Magelight }, -- Major Prophecy (Magelight)
     [30920] = { tooltip = Tooltips.Skill_Expert_Hunter }, -- Magelight (Magelight)
     [31079] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = Abilities.Skill_Revealed, tooltip = Abilities.Skill_Magelight }, -- Magelight (Magelight)
-    [77945] = { consolidateExtra = true, tooltip = Abilities.Skill_Inner_Light }, -- Major Prophecy (Inner Light)
     [40478] = { tooltip = Tooltips.Skill_Expert_Hunter }, -- Inner Light (Inner Light)
     [40480] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = Abilities.Skill_Revealed, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Abilities.Skill_Inner_Light }, -- Inner Light (Inner Light)
-    [77958] = { consolidateExtra = true, tooltip = Abilities.Skill_Radiant_Magelight }, -- Major Prophecy (Radiant Magelight)
     [40483] = { tooltip = Tooltips.Skill_Radiant_Magelight }, -- Radiant Magelight (Radiant Magelight)
     [40484] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = Abilities.Skill_Revealed, tooltip = Abilities.Skill_Radiant_Magelight }, -- Radiant Magelight (Radiant Magelight)
-    [999005] = { icon = 'esoui/art/icons/ability_mageguild_002.dds', name = Abilities.Skill_Magelight, tooltip = Tooltips.Skill_Magelight_Passive }, -- Magelight Fake ID for Consolidate
-    [999006] = { icon = 'esoui/art/icons/ability_mageguild_002_b.dds', name = Abilities.Skill_Inner_Light, tooltip = Tooltips.Skill_Inner_Light_Passive }, -- Inner Light Fake ID for Consolidate
-    [999007] = { icon = 'esoui/art/icons/ability_mageguild_002_a.dds', name = Abilities.Skill_Radiant_Magelight, tooltip = Tooltips.Skill_Radiant_Magelight_Passive }, -- Radiant Magelight Fake ID for Consolidate
 
     -- Entropy / Degeneration / Structured Entropy
     [126370] = { tooltip = Tooltips.Generic_Magic, tooltipValue2 = 2 }, -- Entropy
-
-    [126374] = { tooltip = Tooltips.Skill_Degeneration }, -- Degeneration
-    [63227] = { tooltip = Abilities.Skill_Degeneration }, -- Major Sorcery (Degeneration)
-
+    [126374] = { tooltip = Tooltips.Generic_Magic, tooltipValue2 = 2 }, -- Degeneration
     [126371] = { tooltip = Tooltips.Skill_Structured_Entropy }, -- Structured Entropy
 
     -- Fire Rune / Volcanic Rune / Scalding Rune
@@ -7052,7 +6974,6 @@ Effects.EffectOverride = {
     [48131] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Equilibrium }, -- Equilibrium (Equilibrium)
     [48136] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Equilibrium }, -- Spell Symmetry (Spell Symmetry)
     [40449] = { tooltip = Tooltips.Skill_Spell_Symmetry }, -- Spell Symmetry (Spell Symmetry)
-    [80160] = { consolidateExtra = true, tooltip = Abilities.Skill_Balance }, -- Major Resolve (Balance)
     [48141] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Equilibrium }, -- Balance (Balance)
 
     -- Meteor / Ice Comet / Shooting Star
@@ -7115,12 +7036,6 @@ Effects.EffectOverride = {
     [110422] = { icon = 'esoui/art/icons/ability_psijic_003_b.dds', name = Abilities.Skill_Crushing_Weapon }, -- Crushing Weapon Restore (Crushing Weapon)
 
     -- Accelerate / Channeled Acceleration / Race Against Time
-    [103520] = { tooltip = Abilities.Skill_Accelerate }, -- Major Expedition (Accelerate)
-    [103521] = { consolidateExtra = true, tooltip = Abilities.Skill_Accelerate }, -- Minor Force (Accelerate)
-    [103707] = { tooltip = Abilities.Skill_Channeled_Acceleration }, -- Major Expedition (Channeled Acceleration)
-    [103708] = { consolidateExtra = true, tooltip = Abilities.Skill_Channeled_Acceleration }, -- Minor Force (Channeled Acceleration)
-    [103711] = { tooltip = Abilities.Skill_Race_Against_Time }, -- Major Expedition (Race Against Time)
-    [103712] = { consolidateExtra = true, tooltip = Abilities.Skill_Race_Against_Time }, -- Minor Force (Race Against Time)
     [122260] = { icon = 'esoui/art/icons/ability_psijic_005_b.dds', tooltip = Tooltips.Innate_Snare_Immobilize_Immunity }, -- Race Against Time (Race Against Time)
 
     -- Mend Wounds / Mend Spirit / Symbiosis
@@ -7129,8 +7044,6 @@ Effects.EffectOverride = {
     [118617] = { icon = 'esoui/art/icons/ability_psijic_006.dds' }, -- Mend Wounds (Mend Wounds)
     [103747] = { tooltip = Tooltips.Skill_Mend_Spirit }, -- Mend Spirit (Mend Spirit)
     [107629] = { hide = true }, -- Mend Spirit (Mend Spirit)
-    [107632] = { tooltip = Abilities.Skill_Mend_Spirit }, -- Major Resolve (Mend Spirit)
-    [103752] = { tooltip = Abilities.Skill_Mend_Spirit }, -- Major Resolve (Mend Spirit)
     [118638] = { icon = 'esoui/art/icons/ability_psijic_006_a.dds' }, -- Mend Spirit (Mend Spirit)
     [103755] = { tooltip = Tooltips.Skill_Symbiosis }, -- Symbiosis (Symbiosis)
     [107636] = { hide = true }, -- Symbiosis (Symbiosis)
@@ -7146,9 +7059,6 @@ Effects.EffectOverride = {
     [103665] = { forcedContainer = 'short', tooltip = Tooltips.Skill_Introspection }, -- Introspection (Introspection)
     [103668] = { icon = 'esoui/art/icons/ability_psijic_004_b.dds' }, -- Introspection (Introspection)
     [103669] = { icon = 'esoui/art/icons/ability_psijic_004_b.dds' }, -- Introspection (Introspection)
-
-    -- Undo / Precognition / Temporal Guard
-    [103570] = { tooltip = Abilities.Skill_Temporal_Guard }, -- Minor Protection (Temporal Guard)
 
     ----------------------------------------------------------------
     -- UNDAUNTED PASSIVES ------------------------------------------
@@ -7172,7 +7082,6 @@ Effects.EffectOverride = {
     -- Blood Altar / Sanguine Altar / Overflowing Altar
     [39501] = { icon = 'esoui/art/icons/ability_undaunted_001.dds' }, -- Blood Funnel (Blood Altar - Blood Funnel Synergy)
     [41964] = { icon = 'esoui/art/icons/ability_undaunted_001_a.dds' }, -- Blood Feast (Overflowing Altar)
-    [80020] = { tooltip = Abilities.Skill_Blood_Altar, groundLabel = true }, -- Blood Altar (Blood Altar - Shared - All Morphs)
     [39489] = { tooltip = Tooltips.Skill_Blood_Altar }, -- Blood Altar (Blood Altar)
     [41967] = { tooltip = Tooltips.Skill_Blood_Altar }, -- Sanguine Altar (Sanguine Altar)
     [41958] = { tooltip = Tooltips.Skill_Overflowing_Altar }, -- Overflowing Altar (Overflowing Altar)
@@ -7208,7 +7117,6 @@ Effects.EffectOverride = {
     -- Bone Shield / Spiked Bone Shield / Bone Surge
     [39379] = { tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Bone Wall (Bone Shield - Bone Wall Synergy)
     [42198] = { tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Spinal Surge (Bone Surge - Spinal Surge Synergy)
-    [42197] = { tooltip = Abilities.Skill_Spinal_Surge }, -- Major Vitality (Bone Surge - Spinal Surge Synergy)
     [39369] = { tooltip = Tooltips.Skill_Bone_Shield }, -- Bone Shield
     [42138] = { tooltip = Tooltips.Skill_Spiked_Bone_Shield }, -- Spiked Bone Shield
     [42176] = { tooltip = Tooltips.Skill_Bone_Surge }, -- Bone Surge
@@ -13302,9 +13210,9 @@ Effects.FakePlayerBuffs = {
 
     -- Set ICD's
     [129477] = { duration = 20000, debuff = true }, -- Immortal Warrior
-    [127235] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_warrior_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Eternal_Warrior, Abilities.Set_Cooldown), duration = 60000, shiftId = 999010, debuff = true }, -- Eternal Warrior
-    [127032] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Phoenix, Abilities.Set_Cooldown), duration = 60000, shiftId = 999011, debuff = true }, -- Phoenix
-    [142401] = { icon = 'LuiExtended/media/icons/abilities/ability_set_the_juggernaut_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Juggernaut, Abilities.Set_Cooldown), duration = 60000, shiftId = 999012, debuff = true }, -- Juggernaut
+    [127235] = { duration = 60000, shiftId = 999010, debuff = true }, -- Eternal Warrior
+    [127032] = { duration = 60000, shiftId = 999011, debuff = true }, -- Phoenix
+    [142401] = { duration = 60000, shiftId = 999012, debuff = true }, -- Juggernaut
 
     -- Player (Basic)
     [123970] = { duration = 3000 }, -- Lesser Reincarnate
@@ -13345,6 +13253,11 @@ Effects.FakePlayerBuffs = {
 
     -- Psijic Order
     [122260] = { duration = "GET" }, -- Race Against Time (Race Against Time)
+
+    -- Armor
+    [63015] = { duration = "GET", onlyExtended = true, shiftId = 29556 }, -- Major Evasion (Evasion)
+    [63019] = { duration = "GET", onlyExtended = true, shiftId = 39195 }, -- Major Evasion (Shuffle)
+    [126958] = { duration = "GET" }, -- Elude (Elude)
 
     -- Vampire
     [145002] = { duration = 5000, debuff = true }, -- Blood for Blood (Blood for Blood)

@@ -685,7 +685,6 @@ local strings = {
     SI_LUIE_SKILL_SANIES_LUPINUS_TP =                    "Вы были укушены Оборотнем и заразились Гнойным люпинусом.",
     SI_LUIE_SKILL_LYCANTHROPHY_TP =                      "Вы можете обратиться в дикого Оборотня.\n\nВы получаете на |cFFFFFF25|r% больше урона от Яда, пока находитесь в форме Вервольфа.",
     SI_LUIE_SKILL_BLOOD_MOON_TP =                        "Вы укусили другого игрока. Вы не сможете сделать этого снова в течение |cFFFFFF7|r дней.", -- TODO: Check Translation
-    SI_LUIE_SKILL_FEEDING_FRENZY_TP =                    "Empowered for |cFFFFFF<<1>>|r seconds, increasing the damage of your Light Attacks by |cFFFFFF40|r%.",
     SI_LUIE_SKILL_CLAWS_OF_LIFE_TP =                     "Afflicted with Disease Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nThe werewolf heals for |cFFFFFF100|r% of the damage done.",
     SI_LUIE_SKILL_WEREWOLF_TRANSFORMATION_TP =           "Transformed into a werewolf.\n\nWhile transformed your Max Stamina is increased by |cFFFFFF30|r%.\n\nYou cannot generate Ultimate while transformed.",
     SI_LUIE_SKILL_WEREWOLF_BERSERKER_TP =                "Transformed into a werewolf.\n\nWhile transformed, your Light Attacks apply a bleed over |cFFFFFF4|r seconds, your Heavy Attacks deal |cFFFFFF50|r% splash damage, and your Max Stamina is increased by |cFFFFFF30|r%.\n\nYou cannot generate Ultimate while transformed.",
@@ -740,7 +739,6 @@ local strings = {
     -- Mages Guild
     SI_LUIE_SKILL_RADIANT_MAGELIGHT_TP =                 "Revealing stealthed and invisible enemies within |cFFFFFF12|r meters for |cFFFFFF<<1>>|r seconds.\n\nExposed enemies cannot return to stealth or invisibility for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_STRUCTURED_ENTROPY_TP =                "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker heals every |cFFFFFF2|r seconds while Structured Entropy remains active.",
-    SI_LUIE_SKILL_DEGENERATION_TP =                      "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nWhile active, your attacker restores |cFFFFFF100|r Magicka when they hit you with a Light or Heavy Attack.",
     SI_LUIE_SKILL_FIRE_RUNE_TP =                         "When triggered, the rune blasts all enemies in the target |cFFFFFF3|r meter area for Flame Damage.",
     SI_LUIE_SKILL_VOLCANIC_RUNE_TP =                     "When triggered, the rune blasts all enemies in the target |cFFFFFF3|r meter area for Flame Damage, knocks them into the air, and stuns them for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_SCALDING_RUNE_TP =                     "When triggered, the rune blasts all enemies in the target |cFFFFFF3|r meter area for Flame Damage and afflicts them with additional Flame Damage over |cFFFFFF<<1>>|r seconds.",

@@ -2533,6 +2533,10 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
         duration = Effects.FakePlayerBuffs[abilityId].duration
         if duration == "GET" then duration = GetAbilityDuration(abilityId) end
         local finalId = Effects.FakePlayerBuffs[abilityId].shiftId or abilityId
+        if Effects.FakePlayerBuffs[abilityId].shiftId then
+            iconName = Effects.FakePlayerBuffs[finalId] and Effects.FakePlayerBuffs[finalId].icon or GetAbilityIcon(finalId)
+            effectName = Effects.FakePlayerBuffs[finalId] and Effects.FakePlayerBuffs[finalId].name or GetAbilityName(finalId)
+        end
         local forcedType = Effects.FakePlayerBuffs[abilityId].long and "long" or "short"
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
@@ -2687,6 +2691,10 @@ function SpellCastBuffs.OnCombatEventOut( eventCode, result, isError, abilityNam
         duration = Effects.FakePlayerOfflineAura[abilityId].duration
         if duration == "GET" then duration = GetAbilityDuration(abilityId) end
         local finalId = Effects.FakePlayerOfflineAura[abilityId].shiftId or abilityId
+        if Effects.FakePlayerOfflineAura[abilityId].shiftId then
+            iconName = Effects.FakePlayerOfflineAura and Effects.FakePlayerOfflineAura[finalId].icon or GetAbilityIcon(finalId)
+            effectName = Effects.FakePlayerOfflineAura and Effects.FakePlayerOfflineAura[finalId].name or GetAbilityName(finalId)
+        end
         local forcedType = Effects.FakePlayerOfflineAura[abilityId].long and "long" or "short"
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration

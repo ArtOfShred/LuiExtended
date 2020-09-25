@@ -215,6 +215,8 @@ LUIE.DebugAuras = {
 
     [93109] = true, -- Major Slayer
 
+    [61737] = true, -- Empower
+
     -------------------------------------
     -- POTIONS --------------------------
     -------------------------------------
@@ -6286,7 +6288,7 @@ LUIE.DebugAuras = {
 
     [39197] = true, -- Immovable (Immovable)
     [63119] = true, -- Major Resolve (Immovable)
-    [63118] = true, -- Immovable (Immovable)
+    --[63118] = true, -- Immovable (Immovable)
     [126583] = true, -- Immovable (Immovable)
 
     -------------------------------------
@@ -6528,7 +6530,7 @@ LUIE.DebugAuras = {
     [140370] = true, -- Voice of Lamae
     [140371] = true, -- Voice of Lamae
     [135533] = true, -- Lamae's Blessing
-    [40499] = true, -- Rite of the Scion
+    --[40499] = true, -- Rite of the Scion
     [72945] = true, -- _CRWN Become Vampire
     [72946] = true, -- Stun
 
@@ -6738,6 +6740,7 @@ LUIE.DebugAuras = {
     [76325] = true, -- Blade of Woe
     [77101] = true, -- Blade of Woe
     [77102] = true, -- Blade of Woe Snare
+    [146301] = true, -- Blade of Woe
     [81101] = true, -- Assassins League Style Item Gi
     [81118] = true, -- Assassins League Style Item FX
     [81604] = true, -- Self Reveal
@@ -6832,6 +6835,7 @@ LUIE.DebugAuras = {
     [80471] = true, -- Minor Berserk (Camouflaged Hunter)
 
     [35750] = true, -- Trap Beast (Trap Beast)
+    [37050] = true, -- Trap Beast (Trap Beast)
     [35757] = true, -- Trap Beast (Trap Beast)
     [35754] = true, -- Trap Beast (Trap Beast)
     [35756] = true, -- Trap Beast (Trap Beast)
@@ -6839,6 +6843,7 @@ LUIE.DebugAuras = {
     [68595] = true, -- Minor Force (Trap Beast)
 
     [40382] = true, -- Barbed Trap (Barbed Trap)
+    [40387] = true, -- Barbed Trap (Barbed Trap)
     [40386] = true, -- Barbed Trap (Barbed Trap)
     [40389] = true, -- Barbed Trap (Barbed Trap)
     [40385] = true, -- Barbed Trap (Barbed Trap)

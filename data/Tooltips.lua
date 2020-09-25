@@ -990,7 +990,6 @@ LUIE.Data.Tooltips = {
     Skill_Sanies_Lupinus                            = GetString(SI_LUIE_SKILL_SANIES_LUPINUS_TP),
     Skill_Lycanthrophy                              = GetString(SI_LUIE_SKILL_LYCANTHROPHY_TP),
     Skill_Blood_Moon                                = GetString(SI_LUIE_SKILL_BLOOD_MOON_TP),
-    Skill_Feeding_Frenzy                            = GetString(SI_LUIE_SKILL_FEEDING_FRENZY_TP),
     Skill_Claws_of_Life                             = GetString(SI_LUIE_SKILL_CLAWS_OF_LIFE_TP),
     Skill_Werewolf_Transformation                   = GetString(SI_LUIE_SKILL_WEREWOLF_TRANSFORMATION_TP),
     Skill_Werewolf_Berserker                        = GetString(SI_LUIE_SKILL_WEREWOLF_BERSERKER_TP),
@@ -1021,11 +1020,7 @@ LUIE.Data.Tooltips = {
 
     -- Mages Guild
     Skill_Radiant_Magelight                         = GetString(SI_LUIE_SKILL_RADIANT_MAGELIGHT_TP),
-    Skill_Magelight_Passive                         = GetAbilityDescription(30920),
-    Skill_Inner_Light_Passive                       = GetAbilityDescription(40478),
-    Skill_Radiant_Magelight_Passive                 = GetAbilityDescription(40483),
     Skill_Structured_Entropy                        = GetString(SI_LUIE_SKILL_STRUCTURED_ENTROPY_TP),
-    Skill_Degeneration                              = GetString(SI_LUIE_SKILL_DEGENERATION_TP),
     Skill_Fire_Rune                                 = GetString(SI_LUIE_SKILL_FIRE_RUNE_TP),
     Skill_Volcanic_Rune                             = GetString(SI_LUIE_SKILL_VOLCANIC_RUNE_TP),
     Skill_Scalding_Rune                             = zo_strformat(GetString(SI_LUIE_SKILL_SCALDING_RUNE_TP), (GetAbilityDuration(40468) / 1000) + GetNumPassiveSkillRanks(GetSkillLineIndicesFromSkillLineId(44), select(2, GetSkillLineIndicesFromSkillLineId(44)), 8) ),

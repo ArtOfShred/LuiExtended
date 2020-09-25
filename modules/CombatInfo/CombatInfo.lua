@@ -1271,7 +1271,7 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
         end
     end
 
-    if Effects.EffectGroundDisplay[abilityId] or Effects.LinkedGroundMine[abilityId] then
+    if (Effects.EffectGroundDisplay[abilityId] or Effects.LinkedGroundMine[abilityId]) and not passThrough then
         if Effects.LinkedGroundMine[abilityId] then
             abilityId = Effects.LinkedGroundMine[abilityId]
         end
@@ -1322,6 +1322,9 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                             end
                             g_toggledSlotsRemain[abilityId] = nil
                             g_toggledSlotsStack[abilityId] = nil
+                            if Effects.BarHighlightCheckOnFade[abilityId] then
+                                CombatInfo.BarHighlightSwap(abilityId)
+                            end
                         end
                     end
                 else

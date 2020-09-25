@@ -678,14 +678,8 @@ local AbilityTables = {
     -- ARMOR SKILLS --------------------------------------
     -- ---------------------------------------------------
 
-    Skill_Evasion                     = 29556,
-    Skill_Shuffle                     = 39195,
-    Skill_Elude                       = 39192,
-
     -- Heavy Armor
-    Skill_Unstoppable                 = 29553,
     Skill_Unstoppable_Brute           = 39205,
-    Skill_Immovable                   = 63118,
 
     -- ---------------------------------------------------
     -- SOUL MAGIC SKILLS ---------------------------------
@@ -700,7 +694,6 @@ local AbilityTables = {
     Skill_Feed                        = 33152,
     Skill_Vampirism                   = GetString(SI_LUIE_SKILL_VAMPIRISM),
     Skill_Profane_Symbol              = GetString(SI_LUIE_SKILL_PROFANE_SYMBOL),
-    Skill_Elusive_Mist                = 38963,
     Skill_Blood_Scion                 = 32624,
     Skill_Swarming_Scion              = 38932,
     Skill_Perfect_Scion               = 38931,
@@ -719,7 +712,6 @@ local AbilityTables = {
     Skill_Roar                        = 32633,
     Skill_Ferocious_Roar              = 39113,
     Skill_Deafening_Roar              = 39114,
-    Skill_Feeding_Frenzy              = 58745,
     Skill_Claws_of_Anguish            = 58864,
     Skill_Remove                      = 31262,
 
@@ -729,30 +721,21 @@ local AbilityTables = {
 
     -- Dark Brotherhood
     Skill_Blade_of_Woe                = 78219,
-    Skill_Padomaic_Sprint             = 77397,
 
     -- Fighters Guild
-    Skill_Circle_of_Protection        = 35737,
-    Skill_Turn_Undead                 = 40181,
-    Skill_Ring_of_Preservation        = 40169,
     Skill_Expert_Hunter               = 35762,
     Skill_Evil_Hunter                 = 40194,
     Skill_Camouflaged_Hunter          = 40195,
     Skill_Revealed                    = 11717,
     Skill_Marked                      = 103943,
-    Skill_Trap_Beast                  = 35750,
-    Skill_Barbed_Trap                 = 40382,
     Skill_Lightweight_Beast_Trap      = 40372,
     Skill_Flawless_Dawnbreaker        = 40161,
 
     -- Mages Guild
-    Skill_Might_of_the_Guild          = 43561,
     Skill_Magelight                   = 30920,
     Skill_Inner_Light                 = 40478,
     Skill_Radiant_Magelight           = 77960,
     Skill_Entropy                     = 28567,
-    Skill_Degeneration                = 40457,
-    Skill_Balance                     = 40441,
     Skill_Meteor                      = 16536,
     Skill_Ice_Comet                   = 40489,
     Skill_Shooting_Star               = 40493,
@@ -761,17 +744,10 @@ local AbilityTables = {
     Skill_Imbue_Weapon                = 103483,
     Skill_Elemental_Weapon            = 103571,
     Skill_Crushing_Weapon             = 103623,
-    Skill_Accelerate                  = 103503,
-    Skill_Channeled_Acceleration      = 103706,
-    Skill_Race_Against_Time           = 103710,
-    Skill_Mend_Spirit                 = 103747,
-    Skill_Temporal_Guard              = 103564,
 
     -- Undaunted
-    Skill_Blood_Altar                 = 39489,
     Skill_Black_Widow                 = 41994,
     Skill_Arachnophobia               = 42016,
-    Skill_Spinal_Surge                = 42198,
 
     -- ---------------------------------------------------
     -- ALLIANCE WAR --------------------------------------
