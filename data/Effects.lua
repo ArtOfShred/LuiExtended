@@ -69,9 +69,7 @@ Effects.IsToggle = {
     -- Support
     [80923] = true, -- Guard (Guard)
     [80947] = true, -- Mystic Guard (Mystic Guard)
-    [64080] = true, -- Minor Vitality (Mystic Guard)
     [80983] = true, -- Stalwart Guard (Stalwart Guard)
-    [80986] = true, -- Minor Force (Stalwart Guard)
 
     -- Vampire
     [132141] = true, -- Blood Frenzy
@@ -958,11 +956,6 @@ Effects.EffectCreateSkillAura = {
     [88761] = { consolidate = true, abilityId = 86130 }, -- Major Resolve --> Ice Fortress
     [87194] = { consolidate = true, abilityId = 86130 }, -- Minor Protection --> Ice Fortress
 
-    -- Assault
-    [57472] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 38566 }, -- Major Gallop (Rapid Maneuver)
-    [101169] = { alwaysShow = true, removeOnEnd = true, abilityId = 40211 }, -- Major Expedition (Retreating Maneuver)
-    [57481] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 40215 }, -- Major Gallop (Charging Maneuver)
-
     -- Cyrodiil Artifacts (Volendrung)
     [116374] = { removeOnEnd = false, consolidate = true, abilityId = 116095 }, -- Major Expedition -> Pariah's Resolve
     [116371] = { removeOnEnd = false, consolidate = true, abilityId = 116095 }, -- Major Brutality -> Pariah's Resolve
@@ -1651,9 +1644,9 @@ Effects.BarHighlightOverride = {
     -- Assault ----------------
     ---------------------------
 
-    [38566] = { newId = 57472 }, -- Rapid Maneuver --> Major Gallop
-    [40211] = { newId = 57477 }, -- Retreating Maneuver --> Major Gallop
-    [40215] = { newId = 57481 }, -- Charging Maneuver --> Major Gallop
+    [38566] = { newId = 63569 }, -- Rapid Maneuver --> Major Gallop
+    [40211] = { newId = 63569 }, -- Retreating Maneuver --> Major Gallop
+    [40215] = { newId = 63569 }, -- Charging Maneuver --> Major Gallop
     [61503] = { newId = 61504 }, -- Vigor
     [61505] = { newId = 61506 }, -- Echoing Vigor
     [61507] = { newId = 61509 }, -- Resolving Vigor
@@ -7144,14 +7137,7 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Rapid Manuever / Retreating Maneuver / Charging Maneuver
-    [101161] = { tooltip = Abilities.Skill_Rapid_Manuever }, -- Major Expedition (Rapid Maneuver)
-    [57472] = { consolidateExtra = true, tooltip = Abilities.Skill_Rapid_Manuever }, -- Major Gallop (Rapid Maneuver)
     [40211] = { tooltip = Tooltips.Skill_Retreating_Maneuver }, -- Retreating Maneuver (Retreating Maneuver)
-    [101169] = { tooltip = Abilities.Skill_Retreating_Manuever }, -- Major Expedition (Retreating Maneuver)
-    [57477] = { tooltip = Abilities.Skill_Retreating_Manuever }, -- Major Gallop (Retreating Maneuver)
-    [101178] = { tooltip = Abilities.Skill_Charging_Manuever }, -- Major Expedition (Charging Maneuver)
-    [57481] = { consolidateExtra = true, tooltip = Abilities.Skill_Charging_Manuever }, -- Major Gallop (Charging Maneuver)
-    [40219] = { tooltip = Abilities.Skill_Charging_Manuever }, -- Minor Expedition (Charging Maneuver)
 
     -- Vigor / Echoing Vigor / Resolving Vigor
     [61504] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Vigor (Vigor)
@@ -7168,7 +7154,6 @@ Effects.EffectOverride = {
     [113770] = { tooltip = Tooltips.Skill_Anti_Cavalry_Caltrops_Debuff, groundLabel = true, hideGround = true }, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
 
     [40251] = { icon = 'esoui/art/icons/ability_ava_001_b.dds', name = Abilities.Skill_Razor_Caltrops, tooltip = Tooltips.Skill_Razor_Caltrops }, -- Caltrops (Razor Caltrops)
-    [40254] = { tooltip = Abilities.Skill_Razor_Caltrops }, -- Major Fracture (Razor Caltrops)
     [113771] = { tooltip = Tooltips.Skill_Razor_Caltrops_Debuff, groundLabel = true, hideGround = true }, -- Razor Caltrops (Razor Caltrops)
     [40252] = { groundLabel = true, tooltip = Tooltips.Skill_Razor_Caltrops_Debuff }, -- Razor Caltrops (Razor Caltrops)
 
@@ -7183,7 +7168,6 @@ Effects.EffectOverride = {
     -- War Horn
     [38564] = { tooltip = Tooltips.Skill_War_Horn }, -- War Horn (War Horn)
     [40224] = { tooltip = Tooltips.Skill_War_Horn }, -- Aggresive Horn (Aggresive Horn)
-    [40225] = { tooltip = Abilities.Skill_Aggressive_Horn }, -- Major Force (Aggresive Horn)
     [40221] = { tooltip = Tooltips.Skill_Study_Horn }, -- Sturdy Horn (Sturdy Horn)
     [63571] = { tooltip = Tooltips.Skill_Study_Horn, icon = 'esoui/art/icons/ability_ava_003_b.dds', hideReduce = true }, -- Sturdy Horn (Sturdy Horn)
 
@@ -7219,13 +7203,9 @@ Effects.EffectOverride = {
     [78338] = { icon = 'esoui/art/icons/ability_ava_guard.dds' }, -- Guard (Guard)
     [61536] = { duration = 0, forcedContainer = 'short', tooltip = Tooltips.Skill_Guard_Other }, -- Mystic Guard (Mystic Guard)
     [80947] = { duration = 0, tooltip = Tooltips.Skill_Guard_Self }, -- Mystic Guard (Mystic Guard)
-    [80953] = { duration = 0, forcedContainer = 'short', consolidate = true, tooltip = Abilities.Skill_Mystic_Guard }, -- Minor Vitality (Mystic Guard)
-    [64080] = { duration = 0, consolidate = true, tooltip = Abilities.Skill_Mystic_Guard }, -- Minor Vitality (Mystic Guard)
     [81415] = { icon = 'esoui/art/icons/ability_ava_mystic_guard.dds' }, -- Mystic Guard (Mystic Guard)
     [61529] = { duration = 0, forcedContainer = 'short', tooltip = Tooltips.Skill_Guard_Other }, -- Stalwart Guard (Stalwart Guard)
     [80983] = { duration = 0, tooltip = Tooltips.Skill_Guard_Self }, -- Stalwart Guard (Stalwart Guard)
-    [80984] = { duration = 0, forcedContainer = 'short', consolidate = true, tooltip = Abilities.Skill_Stalwart_Guard }, -- Minor Force (Stalwart Guard)
-    [80986] = { duration = 0, consolidate = true, tooltip = Abilities.Skill_Stalwart_Guard }, -- Minor Force (Stalwart Guard)
     [81420] = { icon = 'esoui/art/icons/ability_ava_stalwart_guard.dds' }, -- Stalwart Guard (Stalwart Guard)
 
     -- Skill_Revealing_Flare
@@ -13254,6 +13234,11 @@ Effects.FakePlayerBuffs = {
 
     -- Werewolf
     [137206] = { duration = "GET", debuff = true }, -- Major Berserk (Hircine's Rage)
+
+    -- Alliance War
+    [57472] = { duration = "GET", onlyExtended = true, shiftId = 38566 }, -- Major Gallop (Rapid Maneuver)
+    [57477] = { duration = "GET", shiftId = 40211 }, -- Major Gallop (Retreating Maneuver)
+    [57481] = { duration = "GET", onlyExtended = true, shiftId = 40215 }, -- Major Gallop (Charging Maneuver)
 
     -- Seasonal Quests (New Life Festival)
     --[84125] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = Abilities.Skill_Lava_Foot_Stomp, duration = 10000}, -- Breton Male Dance (Lava Foot Stomp)

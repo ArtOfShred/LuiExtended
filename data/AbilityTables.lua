@@ -752,16 +752,10 @@ local AbilityTables = {
     -- ---------------------------------------------------
 
     -- Assault
-    Skill_Rapid_Manuever              = 38566,
-    Skill_Retreating_Manuever         = 40211,
-    Skill_Charging_Manuever           = 40215,
     Skill_Caltrops                    = 33376,
     Skill_Razor_Caltrops              = 40242,
-    Skill_Aggressive_Horn             = 40223,
 
     -- Support
-    Skill_Mystic_Guard                = 61536,
-    Skill_Stalwart_Guard              = 61529,
     Skill_Revealing_Flare             = 61489,
     Skill_Lingering_Flare             = 61519,
     Skill_Blinding_Flare              = 61524,
