@@ -128,7 +128,6 @@ SpellCastBuffs.Defaults = {
     HideTargetDebuffs                   = false,
     HideGroundEffects                   = false,
     ExtraBuffs                          = true,
-    ExtraConsolidate                    = false,
     ExtraExpanded                       = false,
     ShowDebugCombat                     = false,
     ShowDebugEffect                     = false,
@@ -1866,7 +1865,7 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
                 local fakeUnbreakable = Effects.EffectOverride[id] and Effects.EffectOverride[id].unbreakable or 0
                 if not (SpellCastBuffs.SV.BlacklistTable[name] or SpellCastBuffs.SV.BlacklistTable[id]) then
                     local simulatedContext = unitTag .. fakeEffectType
-
+                    -- Set Context based on prominent settings
                     if (SpellCastBuffs.SV.PromDebuffTable[name] or SpellCastBuffs.SV.PromDebuffTable[id]) then
                         if simulatedContext == "player1" then
                             simulatedContext = "promd_player"
@@ -1880,25 +1879,19 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
                             simulatedContext = "promb_target"
                         end
                     end
-
-                    if ( SpellCastBuffs.SV.ExtraBuffs ) or ( Effects.EffectCreateSkillAura[abilityId].consolidate and SpellCastBuffs.SV.ExtraConsolidate ) or ( Effects.EffectCreateSkillAura[abilityId].alwaysShow ) then
-                        if ( not Effects.EffectCreateSkillAura[abilityId].extendedDisplay ) or (Effects.EffectCreateSkillAura[abilityId].extendedDisplay and SpellCastBuffs.SV.ExtraExpanded) then
-                            if ( ( Effects.EffectCreateSkillAura[abilityId].consolidateNewIdExtended and not (SpellCastBuffs.SV.ExtraExpanded and SpellCastBuffs.SV.ExtraConsolidate) ) or ( Effects.EffectCreateSkillAura[abilityId].consolidateNewId and not SpellCastBuffs.SV.ExtraConsolidate) ) or not (Effects.EffectCreateSkillAura[abilityId].consolidateNewIdExtended or Effects.EffectCreateSkillAura[abilityId].consolidateNewId) then
-                                local icon = Effects.EffectCreateSkillAura[abilityId].icon or GetAbilityIcon(id)
-                                SpellCastBuffs.EffectsList[simulatedContext][ Effects.EffectCreateSkillAura[abilityId].abilityId ] = {
-                                    target=unitTag, type=fakeEffectType,
-                                    id=id, name=name, icon=icon,
-                                    dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
-                                    forced=forcedType,
-                                    restart=true, iconNum=0,
-                                    stack = 0,
-                                    unbreakable=fakeUnbreakable,
-                                    groundLabel = groundLabel,
-                                    toggle = toggle,
-                                }
-                            end
-                        end
-                    end
+                    -- Create Buff
+                    local icon = Effects.EffectCreateSkillAura[abilityId].icon or GetAbilityIcon(id)
+                    SpellCastBuffs.EffectsList[simulatedContext][ Effects.EffectCreateSkillAura[abilityId].abilityId ] = {
+                        target=unitTag, type=fakeEffectType,
+                        id=id, name=name, icon=icon,
+                        dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
+                        forced=forcedType,
+                        restart=true, iconNum=0,
+                        stack = 0,
+                        unbreakable=fakeUnbreakable,
+                        groundLabel = groundLabel,
+                        toggle = toggle,
+                    }
                 end
             end
         end

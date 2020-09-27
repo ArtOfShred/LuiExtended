@@ -62,8 +62,6 @@ LUIE.Data.Tooltips = {
     -- Major/Minor Debuffs
     Skill_Minor_Breach                              = GetString(SI_LUIE_SKILL_MINOR_BREACH_TP),
     Skill_Major_Breach                              = GetString(SI_LUIE_SKILL_MAJOR_BREACH_TP),
-    Skill_Minor_Fracture                            = GetString(SI_LUIE_SKILL_MINOR_FRACTURE_TP),
-    Skill_Major_Fracture                            = GetString(SI_LUIE_SKILL_MAJOR_FRACTURE_TP),
     Skill_Major_Fracture_NPC                        = GetString(SI_LUIE_SKILL_MAJOR_FRACTURE_NPC_TP),
     Skill_Minor_Vulnerability                       = GetString(SI_LUIE_SKILL_MINOR_VULNERABILITY_TP),
     Skill_Major_Vulnerability                       = GetString(SI_LUIE_SKILL_MAJOR_VULNERABILITY_TP),

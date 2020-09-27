@@ -204,17 +204,6 @@ function SpellCastBuffs.CreateSettings()
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
             {
-                -- Consolidate
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_CONSOLIDATE)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_CONSOLIDATE_TP),
-                getFunc = function() return Settings.ExtraConsolidate end,
-                setFunc = function(value) Settings.ExtraConsolidate = value SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = Settings.ExtraConsolidate,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-            {
                 -- Extra Expanded
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_EXTEND_EXTRA)),

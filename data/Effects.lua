@@ -519,8 +519,6 @@ Effects.DebuffDisplayOverrideName = {
     [Abilities.Skill_Major_Breach]              = true,
     [Abilities.Skill_Minor_Defile]              = true,
     [Abilities.Skill_Major_Defile]              = true,
-    [Abilities.Skill_Minor_Fracture]            = true,
-    [Abilities.Skill_Major_Fracture]            = true,
     [Abilities.Skill_Minor_Maim]                = true,
     [Abilities.Skill_Major_Maim]                = true,
     [Abilities.Skill_Minor_Vulnerability]       = true,
@@ -896,36 +894,14 @@ Effects.EffectCreateSkillAura = {
     -- Optional:
         --name = '' -- Add a custom name
         --icon = '' -- Add a custom icon
-        -- alwaysShow = true -- Ignore the menu setting and always show this ability - Used for PVE abilities where we need to create additional information
         -- removeOnEnd = true -- Remove this aura when one of these effects ends.
-        -- consolidate = true -- Also use this when consolidated auras is enabled.
-        -- extendedDisplay = true -- This will only display if the option to display single effects is enabled as well.
-        -- consolidateNewId = true -- This will consolidate the new aura if consolidate is active (for fake major/minor effects we have to create in some cases) - Basically reverse logic, if Consolidate is enabled - hide
-        -- consolidateNewIdExtended = true -- This will consolidate the new aura if consolidate is active (for fake major/minor effects we have to create in some cases) - Basically reverse logic, if Consolidate Single is enabled - hide
         -- requiredStack = number -- Requires this number of stacks to apply
 
-    -- NPC's
-    -- Always Show = show regardless of menu setting
-    [65235] = { alwaysShow = true, removeOnEnd = true, abilityId = 33097 }, -- Enrage (Vosh Rakh Devoted)
-    [50187] = { alwaysShow = true, removeOnEnd = true, abilityId = 33097 }, -- Enrage (Mantikora)
-    [56689] = { alwaysShow = true, removeOnEnd = true, abilityId = 33097 }, -- Enraged (Mantikora)
-    [72725] = { alwaysShow = true, removeOnEnd = true, abilityId = 28301 }, -- Fool Me Once (Sentinel) (TG DLC)
+    [65235] = { removeOnEnd = true, abilityId = 33097 }, -- Enrage (Vosh Rakh Devoted)
+    [50187] = { removeOnEnd = true, abilityId = 33097 }, -- Enrage (Mantikora)
+    [56689] = { removeOnEnd = true, abilityId = 33097 }, -- Enraged (Mantikora)
+    [72725] = { removeOnEnd = true, abilityId = 28301 }, -- Fool Me Once (Sentinel) (TG DLC)
 }
-
---------------------------------------------------------------------------------------------------------------------------------
--- Function called in CombatInfo to toggle a few options for some potentially useful skills. Called by CombatInfo when changing menu settings for Bar Highlight Overrides.
---------------------------------------------------------------------------------------------------------------------------------
-function Effects.BarHighlightRefresh()
-    if LUIE.CombatInfo.SV.ShowToggledSecondary then
-        -- Nightblade
-        Effects.BarHighlightOverride[25255] = { newId = 25256, secondary = true } -- Veiled Strike --> Off Balance
-        Effects.BarHighlightOverride[25267] = { newId = 34737, secondary = true } -- Concealed Weapon --> Off Balance
-    else
-        -- Nightblade
-        Effects.BarHighlightOverride[25255] = { newId = 33185 } -- Veiled Strike
-        Effects.BarHighlightOverride[25267] = { newId = 34736 } -- Concealed Weapon
-    end
-end
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- We don't add bar highlights for 0 duration abilities, a few abilities with dynamic durations show as 0 duration so we need this override table.
@@ -1097,9 +1073,9 @@ Effects.BarHighlightOverride = {
     ---------------------------
 
     -- Ardent Flame
-    [23806] = { newId = 23808, secondary = true }, -- Lava Whip --> Off Balance
+    [23806] = { newId = 23808 }, -- Lava Whip --> Off Balance
     [20805] = { newId = 122658 }, -- Molten Whip --> Seething Fury
-    [20816] = { newId = 34117, secondary = true }, -- Flame Lash --> Off Balance
+    [20816] = { newId = 34117 }, -- Flame Lash --> Off Balance
     [20824] = { newId = 34117 }, -- Flame Lash --> Off Balance
     [20657] = { newId = 44363 }, -- Searing Strike
     [20668] = { newId = 44369 }, -- Venomous Claw
@@ -1168,9 +1144,9 @@ Effects.BarHighlightOverride = {
     [33291] = { newId = 33292 }, -- Strife
     [34838] = { newId = 34841, noRemove = true }, -- Funnel Health
     [34835] = { newId = 34836 }, -- Swallow Soul
-    [33308] = { newId = 108925, secondary = true, noRemove = true }, -- Malevolent Offering
-    [34721] = { newId = 108927, secondary = true, noRemove = true }, -- Shrewd Offering
-    [34727] = { newId = 108932, secondary = true, noRemove = true }, -- Healthy Offering
+    [33308] = { newId = 108925, noRemove = true }, -- Malevolent Offering
+    [34721] = { newId = 108927, noRemove = true }, -- Shrewd Offering
+    [34727] = { newId = 108932, noRemove = true }, -- Healthy Offering
     [33326] = { newId = 33333 }, -- Cripple
     [36943] = { newId = 36947 }, -- Debilitate
     [36957] = { newId = 36960 }, -- Crippling Grasp
@@ -3017,8 +2993,6 @@ Effects.TooltipNameOverride = {
     -- Major/Minor Debuffs
     [Abilities.Skill_Minor_Breach]          = Tooltips.Skill_Minor_Breach,
     [Abilities.Skill_Major_Breach]          = Tooltips.Skill_Major_Breach,
-    [Abilities.Skill_Minor_Fracture]        = Tooltips.Skill_Minor_Fracture,
-    [Abilities.Skill_Major_Fracture]        = Tooltips.Skill_Major_Fracture,
     [Abilities.Skill_Minor_Vulnerability]   = Tooltips.Skill_Minor_Vulnerability,
     [Abilities.Skill_Major_Vulnerability]   = Tooltips.Skill_Major_Vulnerability,
     [Abilities.Skill_Minor_Maim]            = Tooltips.Skill_Minor_Maim,
@@ -3115,9 +3089,6 @@ Effects.TooltipNameOverride = {
     -- Justice NPC's
     [77941]                         = Tooltips.Generic_Reveal_No_Dur, -- Revealed
     [72695]                         = Tooltips.Generic_Reveal_No_Dur, -- Revealed
-
-    -- NPC Abilities
-    [85362]                         = Tooltips.Skill_Major_Fracture_NPC, -- Major Fracture (Peasant)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -3407,8 +3378,6 @@ Effects.EffectOverride = {
     -- duration = # modify the duration display of this effect. Option 1 - Set a negative value - to subtract x seconds from the duration of the effect. Option 2 - Set to 0 to display the buff for an unlimited amount of time until an action result of fade occurs.
     -- unbreakable = 1 -- flag this aura as unremoveable and change border color to grey for debuffs or cyan for buffs
     -- forcedContainer = 'short' or 'long' - Forces a buff to appear in one of these containers
-    -- consolidate = true -- If the menu option to consolidate buffs is enabled, this auras will be hidden.
-    -- consolidateExtra = true -- If the menu option to consolidate buffs for Single Auras as well is enabled, this auras will be hidden
     -- groundLabel = true -- "Display a "G" ground label on this effect to indicate it is the result of standing in a ground aura
     -- noDuplicate = true -- Adds to a table that uses an expensive function - in some cases effects like Shuffle add a new aura every time the effect is cast. This will flag the effect to only show the latest casted one and hide the others.
     -- hideReduce = true -- Hide this aura if the "HIDE PAIRED AURAS" menu setting is enabled. Merging similar effects so as not to clutter the UI such as the Sun Fire effect with its snare.

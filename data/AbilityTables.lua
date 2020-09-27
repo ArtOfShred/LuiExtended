@@ -51,8 +51,6 @@ local AbilityTables = {
     -- Major/Minor Debuffs
     Skill_Minor_Breach                = 46206,
     Skill_Major_Breach                = 33363,
-    Skill_Minor_Fracture              = 38688,
-    Skill_Major_Fracture              = 28307,
     Skill_Minor_Vulnerability         = 51434,
     Skill_Major_Vulnerability         = 106754,
     Skill_Minor_Maim                  = 29308,

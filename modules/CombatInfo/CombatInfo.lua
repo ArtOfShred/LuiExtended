@@ -44,7 +44,6 @@ CombatInfo.Defaults = {
     ProcSoundName                    = "Death Recap Killing Blow",
     ShowToggled                      = true,
     ShowToggledUltimate              = true,
-    ShowToggledSecondary             = false,
     BarShowLabel                     = true,
     BarLabelPosition                 = -20,
     BarFontFace                      = "Univers 67",
@@ -663,7 +662,6 @@ function CombatInfo.UpdateBarHighlightTables()
     end
 
     if CombatInfo.SV.ShowTriggered or CombatInfo.SV.ShowToggled then
-        Effects.BarHighlightRefresh()
         -- Grab any aura's from the list that have on EVENT_COMBAT_EVENT AURA support
         for abilityId, value in pairs(Effects.BarHighlightOverride) do
             if value.showFakeAura == true then
@@ -2305,11 +2303,6 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
     end
 
     local showFakeAura = (Effects.BarHighlightOverride[ability_id] and Effects.BarHighlightOverride[ability_id].showFakeAura)
-
-    -- If secondary effects aren't set to display then don't setup highlight for this slot.
-    if (Effects.BarHighlightOverride[ability_id] and Effects.BarHighlightOverride[ability_id].secondary) and not CombatInfo.SV.ShowToggledSecondary then
-        return
-    end
 
     if Effects.BarHighlightOverride[ability_id] then
         if Effects.BarHighlightOverride[ability_id].hide then

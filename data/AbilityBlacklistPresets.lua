@@ -53,7 +53,6 @@ BlacklistPresets.MajorBuffs = {
 -- Minor Debuffs
 BlacklistPresets.MinorDebuffs = {
     [Abilities.Skill_Minor_Breach]                = true,
-    [Abilities.Skill_Minor_Fracture]              = true,
     [Abilities.Skill_Minor_Vulnerability]         = true,
     [Abilities.Skill_Minor_Maim]                  = true,
     [Abilities.Skill_Minor_Defile]                = true,
@@ -69,7 +68,6 @@ BlacklistPresets.MinorDebuffs = {
 -- Major Debuffs
 BlacklistPresets.MajorDebuffs = {
     [Abilities.Skill_Major_Breach]                = true,
-    [Abilities.Skill_Major_Fracture]              = true,
     [Abilities.Skill_Major_Defile]                = true,
 }
 

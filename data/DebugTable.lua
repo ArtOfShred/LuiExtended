@@ -2937,7 +2937,7 @@ LUIE.DebugAuras = {
     [85701] = true, -- Dueling Flag
     --[2727] = true, -- Off-Balance
     [134599] = true, -- Off Balance Immunity
-    [132831] = true, -- Major Vulnerability Invulnerability
+    --[132831] = true, -- Major Vulnerability Invulnerability
     [21263] = true, -- Ayleid Health Bonus
     [100862] = true, -- Fortified Ayleid Health Bonus
     [45819] = true, -- Remove Werevamp
@@ -3188,7 +3188,7 @@ LUIE.DebugAuras = {
 
     [20944] = true, -- Noxious Breath (Noxious Breath)
     [31103] = true, -- Noxious Breath (Noxious Breath)
-    [48946] = true, -- Major Fracture (Noxious Breath)
+    [48946] = true, -- Major Breach (Noxious Breath)
 
     [20930] = true, -- Engulfing Flames (Engulfing Flames)
     [31104] = true, -- Engulfing Flames (Engulfing Flames)
@@ -5572,10 +5572,10 @@ LUIE.DebugAuras = {
     -------------------------------------
 
     [28306] =  true, -- Puncture (Puncture)
-    [28307] =  true, -- Major Fracture (Puncture)
+    [28307] =  true, -- Major Breach (Puncture)
 
     [38256] = true, -- Ransack (Ransack)
-    [62474] = true, -- Major Fracture (Ransack)
+    [62474] = true, -- Major Breach (Ransack)
     [62475] = true, -- Minor Protection (Ransack)
 
     [38250] = true, -- Pierce Armor (Pierce Armor)
@@ -6650,7 +6650,7 @@ LUIE.DebugAuras = {
 
     [39114] = true, -- Deafening Roar (Deafening Roar)
     [125023] = true, -- Deafening Roar (Deafening Roar)
-    [111788] = true, -- Major Fracture (Deafening Roar)
+    [111788] = true, -- Major Breach (Deafening Roar)
     [137311] = true, -- Minor Maim (Deafening Roar)
     [137312] = true, -- Off Balance (Deafening Roar)
 
@@ -7386,7 +7386,7 @@ LUIE.DebugAuras = {
     [40244] = true, -- Razor Caltrops (Razor Caltrops)
     [40251] = true, -- Caltrops (Razor Caltrops)
     [40249] = true, -- Spear Shards (Razor Caltrops)
-    [40254] = true, -- Major Fracture (Razor Caltrops)
+    [40254] = true, -- Major Breach (Razor Caltrops)
     [40252] = true, -- Razor Caltrops (Razor Caltrops)
     [113771] = true, -- Razor Caltrops (Razor Caltrops)
 
