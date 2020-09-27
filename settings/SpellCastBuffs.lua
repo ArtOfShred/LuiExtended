@@ -212,7 +212,7 @@ function SpellCastBuffs.CreateSettings()
                 setFunc = function(value) Settings.ExtraExpanded = value SpellCastBuffs.ReloadEffects("player") end,
                 width = "full",
                 default = Settings.ExtraExpanded,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.ExtraBuffs or Settings.ExtraConsolidate ) ) end,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and Settings.ExtraBuffs ) end,
             },
             {
             type = "divider",

@@ -1896,12 +1896,6 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
             end
         end
 
-        -- If consolidate is enabled then hide the consolidated ability
-        if Effects.EffectOverride[abilityId] and SpellCastBuffs.SV.ExtraConsolidate then
-            if Effects.EffectOverride[abilityId].consolidate or ( Effects.EffectOverride[abilityId].consolidateExtra and SpellCastBuffs.SV.ExtraExpanded ) then
-                return
-            end
-        end
         -- If this effect doesn't properly display stacks - then add them.
         if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].displayStacks then
             for context, effectsList in pairs( SpellCastBuffs.EffectsList ) do

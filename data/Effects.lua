@@ -1063,7 +1063,6 @@ Effects.BarHighlightOverride = {
     -- Optional
         -- newId = # -- Replace ID
         -- showFakeAura = true -- USE EVENT_COMBAT_EVENT instead - allows auras to display even if they weren't applied. Should be used with major/minor effects.
-        -- secondary = true -- If the menu option for Secondary effects set to false, hide this ID
         -- noRemove = ture -- don't remove effect on fading or target change -- Doesn't apply to hostile effects. Should be used with major/minor effects.
         -- duration = # -- override duration
         -- hide = true -- Hide this bar highlight
@@ -1629,10 +1628,10 @@ Effects.AssistantIcons = {
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
--- When a target name matches a string here, add id's in the table as debuff - currently just used for Iron Atronach Target Dummy
+-- When a target name matches a string here, add id's in the table as debuff
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.AddNameAuraAlways = {
-    -- TODO: Possibly remove this table / functions referencing it
+    -- TODO: Possibly remove, unused at the moment
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
