@@ -135,18 +135,25 @@ LUIE.DebugAuras = {
     [61744] = true, -- Minor Berserk
     [61745] = true, -- Major Berserk
 
+    [61662] = true, -- Minor Bruality
     [61665] = true, -- Major Brutality
 
+    [61685] = true, -- Minor Sorcery
     [61687] = true, -- Major Sorcery
 
     [61691] = true, -- Minor Prophecy
     [61689] = true, -- Major Prophecy
 
+    [61666] = true, -- Minor Savagery
     [61667] = true, -- Major Savagery
 
     [61708] = true, -- Minor Heroism
+    [61709] = true, -- Major Heroism
 
-    [61685] = true, -- Minor Sorcery
+    [61697] = true, -- Minor Fortitude
+    [61698] = true, -- Major Fortitude
+
+    [61706] = true, -- Minor Intellect
 
     [61693] = true, -- Minor Resolve
     [61694] = true, -- Major Resolve
@@ -162,6 +169,7 @@ LUIE.DebugAuras = {
     [88490] = true, -- Minor Toughness
 
     [61704] = true, -- Minor Endurance
+    [61705] = true, -- Major Endurance
 
     [61721] = true, -- Minor Protection
     [61722] = true, -- Major Protection
@@ -181,6 +189,7 @@ LUIE.DebugAuras = {
     [61725] = true, -- Major Maim
 
     [79717] = true, -- Minor Vulnerability
+    [106754] = true, -- Minor Vulnerability
 
     [61742] = true, -- Minor Breach
     [61743] = true, -- Major Breach
@@ -2887,7 +2896,6 @@ LUIE.DebugAuras = {
     --[16593] = true, -- Melee Snare
     [64842] = true, -- Critter Smash
     [48532] = true, -- Charge Snare
-    --[61737] = true, -- Empower
     [41952] = true, -- Cower
     [55080] = true, -- Pet Hidden
     [16566] = true, -- CC Immunity
@@ -2918,6 +2926,8 @@ LUIE.DebugAuras = {
     [37079] = true, -- remove
     [20311] = true, -- Remove Sprint
     [20303] = true, -- Remove Sprint
+    [70379] = true, -- Remove
+    [70385] = true, -- Remove
     [38519] = true, -- Hiding
     [39046] = true, -- Add Guild Rep
     [62797] = true, -- Weapon Swap Cooldown Timer
@@ -3192,6 +3202,7 @@ LUIE.DebugAuras = {
 
     [20499] = true, -- Empowering Chains (Empowering Chains)
     [62023] = true, -- Fiery Grip (Empowering Chains)
+    [147421] = true, -- Empower (Empowering Chains)
     [76506] = true, -- Major Expedition (Empowering Chains)
 
     [20496] = true, -- Unrelenting Grip (Unrelenting Grip)
@@ -3489,6 +3500,7 @@ LUIE.DebugAuras = {
 
     [25484] = true, -- Ambush (Ambush)
     [25485] = true, -- Ambush (Ambush)
+    [147422] = true, -- Empower (Ambush)
     [124804] = true, -- Minor Vulnerability (Lotus Fan)
 
     [25493] = true, -- Lotus Fan (Lotus Fan)
@@ -3704,6 +3716,7 @@ LUIE.DebugAuras = {
     [33327] = true, -- Cripple (Cripple)
 
     [36943] = true, -- Debilitate (Debilitate)
+    [125316] = true, -- Minor Magickasteal (Debilitate)
     [36947] = true, -- Debilitate (Debilitate)
     [36945] = true, -- Debilitate (Debilitate)
 
@@ -3742,7 +3755,7 @@ LUIE.DebugAuras = {
     [36901] = true, -- Power Extraction (Power Extraction)
     [36903] = true, -- Major Brutality (Power Extraction)
     [131344] = true, -- Major Sorcery (Power Extraction)
-    [126675] = true, -- Power Extraction (Power Extraction)
+    [126675] = true, -- Minor Cowardice (Power Extraction)
 
     [36891] = true, -- Sap Essence (Sap Essence)
     [45655] = true, -- Sap Essence (Sap Essence)
@@ -4396,6 +4409,7 @@ LUIE.DebugAuras = {
     [109419] = true, -- Empower (Dark Flare)
 
     [22095] = true, -- Solar Barrage (Solar Barrage)
+    [109420] = true, -- Empower (Solar Barrage)
     [100223] = true, -- Solar Barrage (Solar Barrage)
     [100218] = true, -- Solar Barrage (Solar Barrage)
 
@@ -4644,7 +4658,7 @@ LUIE.DebugAuras = {
     [131441] = true, -- Arms of Relequen (Cutting Dive)
     [130140] = true, -- Cutting Dive (Cutting Dive)
 
-    [87663] = true, -- Screaming Cliff Racer B (Screaming Cliff Racer)
+    [87663] = true, -- Screaming Cliff Racer (Screaming Cliff Racer)
     [86003] = true, -- Screaming Cliff Racer (Screaming Cliff Racer)
     [130145] = true, -- Off-Balance (Screaming Cliff Racer)
 
@@ -4659,6 +4673,11 @@ LUIE.DebugAuras = {
     [94441] = true, -- Subterranean Assault (Subterranean Assault)
     [94442] = true, -- Subterranean Assault (Subterranean Assault)
     [94445] = true, -- Subterranean Assault (Subterranean Assault)
+
+    [146919] = true, -- Subterranean Assault (Subterranean Assault)
+    [146916] = true, -- Subterranean Assault (Subterranean Assault)
+    [146917] = true, -- Subterranean Assault (Subterranean Assault)
+    [146915] = true, -- Subterranean Assault (Subterranean Assault)
 
     [86015] = true, -- Deep Fissure (Deep Fissure)
     [94421] = true, -- Deep Fissure (Deep Fissure)
@@ -4812,7 +4831,7 @@ LUIE.DebugAuras = {
     [85855] = true, -- Lotus Blossom (Lotus Blossom)
     [86303] = true, -- Major Prophecy (Lotus Blossom)
     [88695] = true, -- Lotus Blossom Heal (Lotus Blossom)
-    [94590] = true, -- Lotus Blossom Heal (Lotus Blossom)
+    [94590] = true, -- Lotus Blossum Heal (Lotus Blossom)
 
     [85564] = true, -- Nature's Grasp (Nature's Grasp)
     [90266] = true, -- Nature's Grasp (Nature's Grasp)
@@ -4938,6 +4957,7 @@ LUIE.DebugAuras = {
     [86250] = true, -- Sleet Storm (Sleet Storm)
 
     [86113] = true, -- Northern Storm (Northern Storm)
+    [132429] = true, -- Northern Storm (Northern Storm)
     [88859] = true, -- Major Protection (Northern Storm)
     [88860] = true, -- Northern Storm (Northern Storm)
     [88858] = true, -- Northern Storm (Northern Storm)
@@ -5452,6 +5472,7 @@ LUIE.DebugAuras = {
     [137807] = true, -- Dizzying Swing (Dizzying Swing)
 
     [38807] = true, -- Wrecking Blow (Wrecking Blow)
+    [147423] = true, -- Empower (Wrecking Blow)
 
     [28448] = true, -- Critical Charge (Critical Charge)
     [28450] = true, -- Critical Strike (Critical Charge)

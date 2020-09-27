@@ -115,6 +115,8 @@ LUIE.Data.Tooltips = {
 
     Generic_Reduce_Weapon_Damage_Duration_Value     = GetString(SI_LUIE_SKILL_SET_GENERIC_REDUCE_WEAPON_DAMAGE_TIME_VALUE_TP),
 
+    Generic_Increase_Max_Magicka_Duration_Percentage = GetString(SI_LUIE_SKILL_INCREASE_MAX_MAGICKA_DURATION_PERCENTAGE_TP),
+
     Generic_Magicka_Regen                           = GetString(SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP),
     Generic_Magicka_Regen_Value                     = GetString(SI_LUIE_SKILL_GENERIC_MGK_REGEN_VALUE_TP),
     Generic_Magicka_Regen_Potion                    = GetString(SI_LUIE_SKILL_GENERIC_MGK_REGEN_POTION_TP),
@@ -153,7 +155,7 @@ LUIE.Data.Tooltips = {
     Generic_Reduce_Physical_Spell_Resist_No_Dur     = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_TP),
     Generic_Reduce_Physical_Spell_Resist_No_Dur_Value = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_VALUE_TP),
     Generic_Reduce_Physical_Spell_Damage_Percentage = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_WEP_SPELL_DMG_PERCENTAGE_TP), -- TODO: Unused
-    Generic_Reduce_Physical_Spell_Damage_Value      = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_WEP_SPELL_DMG_VALUE_TP),
+    Generic_Reduce_Physical_Spell_Damage_Value      = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_WEP_SPELL_DMG_VALUE_TP), -- TODO: Unused
 
     Generic_Reduce_Physical_Resist_Value            = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHYSICAL_RESIST_VALUE_TP),
 
@@ -522,7 +524,6 @@ LUIE.Data.Tooltips = {
     Set_Seventh_Legion                              = GetString(SI_LUIE_SKILL_SET_SEVENTH_LEGION_TP),
     Set_Sloads                                      = GetString(SI_LUIE_SKILL_SET_SLOADS_TP),
     Set_Grave_Stake_Collector                       = GetString(SI_LUIE_SKILL_SET_GRAVE_STAKE_COLLECTOR_TP),
-    Set_Might_of_the_Lost_Legion                    = GetString(SI_LUIE_SKILL_SET_MIGHT_OF_THE_LOST_LEGION_TP),
     Set_Coldharbours_Favorite_Heal                  = GetString(SI_LUIE_SKILL_SET_COLDHARBOURS_FAVORITE_HEAL_TP),
     Set_Coldharbours_Favorite_Damage                = GetString(SI_LUIE_SKILL_SET_COLDHARBOURS_FAVORITE_DAMAGE_TP),
     Set_Stuhns_Favor                                = GetString(SI_LUIE_SKILL_SET_STUHNS_FAVOR_TP),
@@ -638,11 +639,8 @@ LUIE.Data.Tooltips = {
     Skill_Burning_Embers                            = GetString(SI_LUIE_SKILL_BURNING_EMBERS_TP),
     Skill_Engulfing_Flames                          = GetString(SI_LUIE_SKILL_ENGULFING_FLAMES_TP),
     Skill_Engulfing_Flames_Dummy                    = GetString(SI_LUIE_SKILL_ENGULFING_FLAMES_DUMMY_TP),
-    Skill_Inferno_Base                              = GetAbilityDescription(28967),
     Skill_Inferno_Active                            = GetString(SI_LUIE_SKILL_INFERNO_TP),
-    Skill_Flames_of_Oblivion_Base                   = GetAbilityDescription(32853),
     Skill_Flames_of_Oblivion_Active                 = GetString(SI_LUIE_SKILL_FLAMES_OF_OBLIVION_TP),
-    Skill_Cauterize_Base                            = GetAbilityDescription(32881),
     Skill_Cauterize_Active                          = GetString(SI_LUIE_SKILL_CAUTERIZE_TP),
     Skill_Dragonknight_Standard                     = GetString(SI_LUIE_SKILL_DRAGONKNIGHT_STANDARD_TP),
     Skill_Dragonknight_Standard_Ground              = GetString(SI_LUIE_SKILL_DRAGONKNIGHT_STANDARD_GROUND_TP),
@@ -670,6 +668,8 @@ LUIE.Data.Tooltips = {
     Skill_Stagger                                   = GetString(SI_LUIE_SKILL_STAGGER_TP),
 
     -- Nightblade
+    Skill_Mark_Target                               = GetString(SI_LUIE_SKILL_MARK_TARGET_TP),
+    Skill_Reapers_Mark                              = GetString(SI_LUIE_SKILL_REAPERS_MARK_TP),
     Skill_Death_Stroke_Debuff                       = GetString(SI_LUIE_SKILL_DEATH_STROKE_DEBUFF),
     Skill_Incapacitating_Strike                     = GetString(SI_LUIE_SKILL_INCAPACITATING_STRIKE),
     Skill_Shadowy_Disguise                          = GetString(SI_LUIE_SKILL_SHADOWY_DISGUISE_TP),
@@ -729,7 +729,6 @@ LUIE.Data.Tooltips = {
     Skill_Bound_Armor                               = GetString(SI_LUIE_SKILL_BOUND_ARMOR_TP),
     Skill_Bound_Armaments_Skill                     = GetString(SI_LUIE_SKILL_BOUND_ARMAMENTS_SKILL_TP),
     Skill_Bound_Armaments_Stack                     = GetString(SI_LUIE_SKILL_BOUND_ARMAMENTS_STACK_TP),
-    Skill_Bound_Aegis                               = GetAbilityDescription(24163),
     Skill_Storm_Atronach                            = GetString(SI_LUIE_SKILL_STORM_ATRONACH_TP),
     Skill_Charged_Atronach                          = GetString(SI_LUIE_SKILL_CHARGED_ATRONACH_TP),
     Skill_Mages_Fury                                = GetString(SI_LUIE_SKILL_MAGES_FURY_TP),
@@ -751,7 +750,6 @@ LUIE.Data.Tooltips = {
     Skill_Luminous_Shards                           = GetString(SI_LUIE_SKILL_LUMINOUS_SHARDS_TP),
     Skill_Blazing_Shield                            = GetString(SI_LUIE_SKILL_BLAZING_SHIELD_TP),
     Skill_Radial_Sweep                              = GetString(SI_LUIE_SKILL_RADIAL_SWEEP_TP),
-    Skill_Empowering_Sweep                          = GetString(SI_LUIE_SKILL_EMPOWERING_SWEEP_TP),
     Skill_Sun_Fire                                  = GetString(SI_LUIE_SKILL_SUN_FIRE_TP),
     Skill_Sun_Fire_Snare                            = GetString(SI_LUIE_SKILL_SUN_FIRE_SNARE_TP),
     Skill_Solar_Barrage                             = GetString(SI_LUIE_SKILL_SOLAR_BARRAGE_TP),
@@ -776,6 +774,7 @@ LUIE.Data.Tooltips = {
     Skill_Cutting_Dive                              = GetString(SI_LUIE_SKILL_CUTTING_DIVE_TP),
     Skill_Scorch                                    = GetString(SI_LUIE_SKILL_SCORCH_TP),
     Skill_Subterranean_Assault                      = GetString(SI_LUIE_SKILL_SUB_ASSAULT_TP),
+    Skill_Subterranean_Assault_Echo                 = GetString(SI_LUIE_SKILL_SUB_ASSAULT_ECHO_TP),
     Skill_Deep_Fissure                              = GetString(SI_LUIE_SKILL_DEEP_FISSURE_TP),
     Skill_Fetcher_Infection_Bonus                   = GetString(SI_LUIE_SKILL_FETCHER_INFECTION_BONUS_DAMAGE_TP),
     Skill_Growing_Swarm                             = GetString(SI_LUIE_SKILL_GROWING_SWARM_TP),

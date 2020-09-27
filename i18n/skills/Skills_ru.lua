@@ -361,6 +361,8 @@ local strings = {
 
     SI_LUIE_SKILL_SET_GENERIC_REDUCE_WEAPON_DAMAGE_TIME_VALUE_TP = "Reduce Weapon Damage by |cFFFFFF<<2>>|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
+    SI_LUIE_SKILL_INCREASE_MAX_MAGICKA_DURATION_PERCENTAGE_TP = "Increase Max Magicka by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+
     ----------------------------------------------------------------
     -- CLASS SKILLS ------------------------------------------------
     ----------------------------------------------------------------
@@ -371,8 +373,8 @@ local strings = {
     SI_LUIE_SKILL_BURNING_EMBERS_TP =                    "Подвержен урону от Огня каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд.\n\nИсцеляет рыцаря-дракона на |cFFFFFF75|r% от нанесённого урона по завершению действия эффекта.",
     SI_LUIE_SKILL_ENGULFING_FLAMES_TP =                  "Подвержен урону от Огня каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд.\n\nIncrease damage taken from Flame Damage attacks by up to |cFFFFFF10|r%.",
     SI_LUIE_SKILL_ENGULFING_FLAMES_DUMMY_TP =            "Increase damage taken from Flame Damage attacks by |cFFFFFF10|r%.",
-    SI_LUIE_SKILL_INFERNO_TP =                           "Запускает в ближайшего противника огненный шар, наносящий урон от Огня  каждые |cFFFFFF5|r секунд в течение |cFFFFFF15|r секунд.",
-    SI_LUIE_SKILL_FLAMES_OF_OBLIVION_TP =                "Launch a fireball at |cFFFFFF2|r enemies, dealing Flame Damage every |cFFFFFF5|r seconds for |cFFFFFF15|r seconds.",
+    SI_LUIE_SKILL_INFERNO_TP =                           "Launch a fireball at the nearest enemy every |cFFFFFF5|r seconds for |cFFFFFF15|r seconds, dealing Flame Damage.",
+    SI_LUIE_SKILL_FLAMES_OF_OBLIVION_TP =                "Launch a fireball at |cFFFFFF2|r enemies every |cFFFFFF5|r seconds for |cFFFFFF15|r seconds, dealing Flame Damage.",
     SI_LUIE_SKILL_CAUTERIZE_TP =                         "Launch a fireball at yourself or an ally to cauterize their wounds every |cFFFFFF5|r seconds for |cFFFFFF15|r seconds.",
     SI_LUIE_SKILL_DRAGONKNIGHT_STANDARD_TP =             "Enemies within the |cFFFFFF8|r meter radius of the standard take Flame Damage every |cFFFFFF1|r second and have Major Defile applied to them.\n\nAn ally near the standard can activate the |cFFFFFFShackle|r synergy.",
     SI_LUIE_SKILL_DRAGONKNIGHT_STANDARD_GROUND_TP =      "Taking Flame Damage every |cFFFFFF<<2>>|r <<2[second/seconds]>> and afflicted with Major Defile.",
@@ -400,6 +402,8 @@ local strings = {
     SI_LUIE_SKILL_STAGGER_TP =                           "Increase damage taken by |cFFFFFF65|r per stack for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF3|r times when you are hit by Stone Giant.",
 
     -- Nightblade Skills
+    SI_LUIE_SKILL_MARK_TARGET_TP =                       "You have been marked for death by a Nightblade.\n\nThe Nightblade heals for |cFFFFFF40|r% of their Max Health if you die under this effect.",
+    SI_LUIE_SKILL_REAPERS_MARK_TP =                      "You have been marked for death by a Nightblade.\n\nThe Nightblade heals for |cFFFFFF60|r% of their Max Health and gains Major Berserk for |cFFFFFF5|r seconds if you die under this effect.",
     SI_LUIE_SKILL_DEATH_STROKE_DEBUFF =                  "Увеличивает урон, получаемый от Клинка ночи на |cFFFFFF20|r% в течение |cFFFFFF6|r секунд.",
     SI_LUIE_SKILL_INCAPACITATING_STRIKE =                "Increase damage taken from the Nightblade by |cFFFFFF20|r% for |cFFFFFF6|r seconds.\n\nStunned for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_SURPRISE_ATTACK_TP =                   "Reduce Physical Resistance by |cFFFFFF5|r% for |cFFFFFF<<1>>|r seconds.",
@@ -482,10 +486,9 @@ local strings = {
     SI_LUIE_SKILL_LUMINOUS_SHARDS_TP =                   "Enemies in the |cFFFFFF8|r meter radius of the spear take Magic Damage every |cFFFFFF1|r second.\n\nAn ally near the spear can activate the |cFFFFFFHoly Shards|r synergy.",
     SI_LUIE_SKILL_BLAZING_SHIELD_TP =                    "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nWhen the shield expires it explodes outward, dealing |cFFFFFF40|r% of the damage it absorbed as Magic Damage to enemies within |cFFFFFF5|r meters.",
     SI_LUIE_SKILL_RADIAL_SWEEP_TP =                      "Enemies within |cFFFFFF8|r meters take Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_EMPOWERING_SWEEP_TP =                  "Enemies within |cFFFFFF8|r meters take Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nWhile this ability is active you gain |cFFFFFFEmpower|r.",
     SI_LUIE_SKILL_SUN_FIRE_TP =                          "Afflicted with Flame Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nMovement Speed reduced by |cFFFFFF40|r% for |cFFFFFF<<2>>|r seconds.",
     SI_LUIE_SKILL_SUN_FIRE_SNARE_TP =                    "Afflicted with Flame Damage every |cFFFFFF2|r seconds for |cFFFFFF<<2>>|r seconds.\n\nMovement Speed reduced by |cFFFFFF40|r% for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_SOLAR_BARRAGE_TP =                     "Enemies within |cFFFFFF8|r meters take Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nWhile this ability is active you gain |cFFFFFFEmpower|r.",
+    SI_LUIE_SKILL_SOLAR_BARRAGE_TP =                     "Enemies within |cFFFFFF8|r meters take Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_BACKLASH_TP =                          "|cFFFFFF20|r% of all damage taken for the next |cFFFFFF<<1>>|r seconds will be copied and released as Magic Damage when the effect ends.",
     SI_LUIE_SKILL_PURIFYING_LIGHT_TP =                   "|cFFFFFF20|r% of all damage taken for the next |cFFFFFF<<1>>|r seconds will be copied and released as Magic Damage when the effect ends.\n\nWhen the effect ends, a pool of sunlight remains attached to you, healing the Templar and their allies if they are nearby every |cFFFFFF2|r seconds for |cFFFFFF6|r seconds.",
     SI_LUIE_SKILL_POWER_OF_THE_LIGHT_TP =                "|cFFFFFF20|r% of all damage taken for the next |cFFFFFF<<1>>|r seconds will be copied and released as Physical Damage when the effect ends.",
@@ -507,7 +510,8 @@ local strings = {
     SI_LUIE_SKILL_BOND_WITH_NATURE =                     "Bond with Nature",
     SI_LUIE_SKILL_CUTTING_DIVE_TP =                      "Afflicted with Bleed Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nThis effect stacks up to |cFFFFFF7|r times.",
     SI_LUIE_SKILL_SCORCH_TP =                            "Через |cFFFFFF3|r секунды, наносит Магический урон противникам перед вами на расстоянии до |cFFFFFF20|r метров.",
-    SI_LUIE_SKILL_SUB_ASSAULT_TP =                       "Через |cFFFFFF3|r секунды, наносит Физический урон и накладывает Major Breach на |cFFFFFF5|r секунд противникам перед вами на расстоянии до |cFFFFFF20|r метров.",
+    SI_LUIE_SKILL_SUB_ASSAULT_TP =                       "After |cFFFFFF3|r seconds, deal Poison Damage to enemies up to |cFFFFFF20|r meters in front of you.",
+    SI_LUIE_SKILL_SUB_ASSAULT_ECHO_TP =                  "After |cFFFFFF3|r seconds, deal Poison Damage to enemies up to |cFFFFFF20|r meters in front of you.\n\nAfter the shalk complete their attack, they burrow again for |cFFFFFF3|r seconds and then resurface again.",
     SI_LUIE_SKILL_DEEP_FISSURE_TP =                      "Через |cFFFFFF3|r секунды, наносит Магический урон и накладывает Major Breach на |cFFFFFF5|r секунд противникам перед вами на расстоянии до |cFFFFFF20|r метров.",
     SI_LUIE_SKILL_FETCHER_INFECTION_BONUS_DAMAGE_TP =    "Ваше следующее применение Fetcher Infection нанесёт на |cFFFFFF50|r% больше урона.",
     SI_LUIE_SKILL_GROWING_SWARM_TP =                     "Afflicted with Physical Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nAllies within |cFFFFFF5|r meters take Physical Damage every |cFFFFFF2|r seconds.",
@@ -970,7 +974,6 @@ local strings = {
     SI_LUIE_SKILL_SET_VASTARIES_TUTELAGE =               "Increase Weapon and Spell Damage by |cFFFFFF258|r and reduce the cost of non-Ultimate abilities by |cFFFFFF10|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_SLOADS_TP =                        "Taking |cFFFFFF3|r% of your Max Health as Oblivion Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThis effect can deal a maximum of |cFFFFFF3000|r Oblivion Damage per tick.",
     SI_LUIE_SKILL_SET_GRAVE_STAKE_COLLECTOR_TP =         "When you touch the grave-stake, restore |cFFFFFF4190|r Stamina and Magicka.\n\nOnly one grave-stake can appear at a time.",
-    SI_LUIE_SKILL_SET_MIGHT_OF_THE_LOST_LEGION_TP =      "Gain the effects of |cFFFFFFEmpower|r for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_COLDHARBOURS_FAVORITE_HEAL_TP =    "After |cFFFFFF<<1>>|r <<1[second/seconds]>> Honor casts a healing spell on you and group members within |cFFFFFF6|r meters that heals over time for |cFFFFFF6|r seconds.",
     SI_LUIE_SKILL_SET_COLDHARBOURS_FAVORITE_DAMAGE_TP =  "After |cFFFFFF<<1>>|r <<1[second/seconds]>> Honor explodes, afflicting enemies within |cFFFFFF6|r meters with Magic Damage over time for |cFFFFFF6|r seconds.",
     SI_LUIE_SKILL_SET_STUHNS_FAVOR_TP =                  "Increase Physical and Spell Penetration by |cFFFFFF<<2>>|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThe duration is refreshed when you deal damage to an enemy who is Off Balance.",

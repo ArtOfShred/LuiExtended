@@ -1247,7 +1247,7 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
         SpellCastBuffs.TooltipBottomLine(control, detailsLine)
 
         -- Tooltip Debug
-        --GameTooltip:SetAbilityId(136098)
+        -- GameTooltip:SetAbilityId(117391)
 
     end
 end
@@ -1553,7 +1553,7 @@ end
 -- This handler fires every long-term effect added or removed
 function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
 
-    d(effectName .. " - " .. castByPlayer)
+    --d(effectName .. " - " .. castByPlayer)
 
     -- Change the effect type before we determine if we want to filter anything else.
     if Effects.EffectOverride[abilityId] then
