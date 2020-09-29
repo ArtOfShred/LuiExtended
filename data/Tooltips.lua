@@ -85,7 +85,6 @@ LUIE.Data.Tooltips = {
 
     -- Empower / Hindrance
     Skill_Empower                                   = GetString(SI_LUIE_SKILL_EMPOWER_TP),
-    Skill_Hindrance                                 = GetString(SI_LUIE_SKILL_HINDRANCE_TP),
 
     ----------------------------------------------------------------
     -- GENERIC SKILLS ----------------------------------------------
@@ -117,10 +116,8 @@ LUIE.Data.Tooltips = {
 
     Generic_Magicka_Regen                           = GetString(SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP),
     Generic_Magicka_Regen_Value                     = GetString(SI_LUIE_SKILL_GENERIC_MGK_REGEN_VALUE_TP),
-    Generic_Magicka_Regen_Potion                    = GetString(SI_LUIE_SKILL_GENERIC_MGK_REGEN_POTION_TP),
     Generic_Stamina_Regen                           = GetString(SI_LUIE_SKILL_GENERIC_STAM_REGEN_TP),
     Generic_Stamina_Regen_Value                     = GetString(SI_LUIE_SKILL_GENERIC_STAM_REGEN_VALUE_TP),
-    Generic_Stamina_Regen_Potion                    = GetString(SI_LUIE_SKILL_GENERIC_STAM_REGEN_POTION_TP),
     Generic_Health_Recovery                         = GetString(SI_LUIE_SKILL_GENERIC_HEALTH_RECOVERY_TP),
 
     Generic_Enrage                                  = GetString(SI_LUIE_SKILL_GENERIC_ENRAGE),
@@ -181,7 +178,6 @@ LUIE.Data.Tooltips = {
     Generic_Magic_No_Tick                           = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_NO_TICK_TP), "SUBSTRING", MagicDamage),
     Generic_Magic                                   = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_TP), "SUBSTRING", MagicDamage),
     Generic_HoT                                     = GetString(SI_LUIE_SKILL_GENERIC_HOT_TP),
-    Generic_HoT_Potion                              = GetString(SI_LUIE_SKILL_GENERIC_HOT_POTION_TP),
     Generic_HoT_Channel                             = GetString(SI_LUIE_SKILL_GENERIC_HOT_CHANNEL_TP),
 
     Generic_Shock_Snare                             = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_SNARE_TP), "SUBSTRING", ShockDamage),
@@ -237,13 +233,13 @@ LUIE.Data.Tooltips = {
     Generic_Scary_Immunities_Duration               = GetString(SI_LUIE_SKILL_GENERIC_SCARY_IMMUNITIES_DUR_TP),
     Generic_Flying_Immunities                       = GetString(SI_LUIE_SKILL_GENERIC_FLYING_IMMUNITIES_TP),
     Generic_Invisibility                            = GetString(SI_LUIE_SKILL_GENERIC_INVISIBILITY_TP),
-    Generic_Detection_Potion                        = GetString(SI_LUIE_SKILL_GENERIC_DETECTION_POTION_TP),
+    Generic_Detection                               = GetString(SI_LUIE_SKILL_GENERIC_DETECTION_TP),
     Generic_Detection_NPC                           = GetString(SI_LUIE_SKILL_GENERIC_DETECTION_NPC_TP),
 
-    Generic_Ravage_Health_Potion                    = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_HEALTH_POTION_TP),
-    Generic_Ravage_Magicka_Potion                   = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POTION_TP),
-    Generic_Ravage_Stamina_Potion                   = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POTION_TP),
-    Generic_Ravage_Health_Poison                    = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_HEALTH_POISON_TP),
+    Generic_Ravage_Health_Potion                    = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_HEALTH_POTION_TP), "SUBSTRING", PoisonDamage),
+    Generic_Gradual_Ravage_Health_Potion            = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_HEALTH_POTION_TP), "SUBSTRING", BleedDamage),
+    --Generic_Ravage_Magicka_Potion                   = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POTION_TP),
+    --Generic_Ravage_Stamina_Potion                   = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POTION_TP),
     Generic_Ravage_Magicka_Poison                   = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POISON_TP),
     Generic_Ravage_Stamina_Poison                   = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POISON_TP),
 
@@ -252,8 +248,13 @@ LUIE.Data.Tooltips = {
     Generic_Reveal                                  = GetString(SI_LUIE_SKILL_GENERIC_REVEAL_TP),
     Generic_Reveal_No_Dur                           = GetString(SI_LUIE_SKILL_GENERIC_REVEAL_NO_DUR_TP),
     Generic_Blind                                   = GetString(SI_LUIE_SKILL_GENERIC_BLIND_TP),
+
     Skill_Spell_Resistance_Potion                   = GetString(SI_LUIE_SKILL_SPELL_RESISTANCE_POTION_TP),
     Skill_Physical_Resistance_Potion                = GetString(SI_LUIE_SKILL_PHYSICAL_RESISTANCE_POTION_TP),
+    Skill_Ravage_Armor_Potion                       = GetString(SI_LUIE_SKILL_RAVAGE_ARMOR_TP),
+    Skill_Ravage_Spell_Protection_Potion            = GetString(SI_LUIE_SKILL_RAVAGE_SPELL_PROTECTION_TP),
+    Skill_Spell_Resistance_Poison                   = GetString(SI_LUIE_SKILL_SPELL_RESISTANCE_POISON_TP),
+    Skill_Physical_Resistance_Poison                = GetString(SI_LUIE_SKILL_PHYSICAL_RESISTANCE_POISON_TP),
 
     ----------------------------------------------------------------
     -- INNATE SKILLS ----------------------------------------------

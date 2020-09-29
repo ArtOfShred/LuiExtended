@@ -187,7 +187,6 @@ local strings = {
     SI_LUIE_SKILL_MINOR_COWARDICE_TP =                   "Reduce Weapon and Spell Damage by |cFFFFFF215|r.",
     SI_LUIE_SKILL_MAJOR_COWARDICE_TP =                   "Reduce Weapon and Spell Damage by |cFFFFFF430|r.",
     SI_LUIE_SKILL_MINOR_MANGLE_TP =                      "Reduce Max Health by |cFFFFFF10|r%.",
-    SI_LUIE_SKILL_HINDRANCE_TP =                         "Reduce Movement Speed by |cFFFFFF40|r%.",
     SI_LUIE_SKILL_MINOR_TIMIDITY_TP =                    "Consume |cFFFFFF1|r Ultimate every |cFFFFFF1.5|r seconds while in combat.",
     SI_LUIE_SKILL_MINOR_BRITTLE =                        "Increase Critical Damage taken by |cFFFFFF10|r%.",
     SI_LUIE_SKILL_MAJOR_BRITTLE =                        "Increase Critical Damage taken by |cFFFFFF20|r%.",
@@ -202,8 +201,12 @@ local strings = {
     SI_LUIE_SKILL_EMPOWER_TP =                           "Increase Light and Heavy Attack damage by |cFFFFFF40|r%.",
 
     -- Potions
-    SI_LUIE_SKILL_SPELL_RESISTANCE_POTION_TP =           "Increase Spell Resistance by |cFFFFFF5280|r.",
-    SI_LUIE_SKILL_PHYSICAL_RESISTANCE_POTION_TP =        "Increase Physical Resistance by |cFFFFFF5280|r.",
+    SI_LUIE_SKILL_SPELL_RESISTANCE_POTION_TP =           "Increase Spell Resistance by |cFFFFFF5280|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_PHYSICAL_RESISTANCE_POTION_TP =        "Increase Physical Resistance by |cFFFFFF5280|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_RAVAGE_ARMOR_TP =                      "Reduce Physical Resistance by |cFFFFFF1320|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_RAVAGE_SPELL_PROTECTION_TP =           "Reduce Spell Resistance by |cFFFFFF1320|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_SPELL_RESISTANCE_POISON_TP =           "Increase Spell Resistance by |cFFFFFF1320|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_PHYSICAL_RESISTANCE_POISON_TP =        "Increase Physical Resistance by |cFFFFFF1320|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     ----------------------------------------------------------------
     -- CHAMPION POINT SKILLS ---------------------------------------
@@ -237,7 +240,6 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_DOT_TP =                       "Afflicted with SUBSTRING every |cFFFFFF<<2>>|r <<2[second/seconds]>> for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_DOT_SNARE_TP =                 "Afflicted with SUBSTRING every |cFFFFFF<<2>>|r <<2[second/seconds]>> and Movement Speed reduced by |cFFFFFF<<3>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_HOT_TP =                       "Healing every |cFFFFFF<<2>>|r <<2[second/seconds]>> for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
-    SI_LUIE_SKILL_GENERIC_HOT_POTION_TP =                "Healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_HOT_CHANNEL_TP =               "Healing every |cFFFFFF<<2>>|r <<2[second/seconds]>> for |cFFFFFF<<1>>|r <<1[second/seconds]>> while the channel is maintained.",
 
     -- Ground over Time
@@ -273,10 +275,8 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_HEALTH_RECOVERY_TP =           "Increase Health Recovery for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP =                 "Restoring Magicka every |cFFFFFF<<2>>|r <<2[second/seconds]>> for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_MGK_REGEN_VALUE_TP =           "Restoring |cFFFFFF<<3>>|r Magicka every |cFFFFFF<<2>>|r <<2[second/seconds]>> for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
-    SI_LUIE_SKILL_GENERIC_MGK_REGEN_POTION_TP =          "Restoring Magicka every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_STAM_REGEN_TP =                "Restoring Stamina every |cFFFFFF<<2>>|r <<2[second/seconds]>> for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_STAM_REGEN_VALUE_TP =          "Restoring |cFFFFFF<<3>>|r Stamina every |cFFFFFF<<2>>|r <<2[second/seconds]>> for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
-    SI_LUIE_SKILL_GENERIC_STAM_REGEN_POTION_TP =         "Restoring Stamina every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_NO_DUR_TP =      "Absorbing damage.",
     SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_TP =             "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_PERCENT_TP =     "Absorbing |cFFFFFF<<2>>|r% of damage taken for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
@@ -287,7 +287,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_REVEAL_TP =                    "Revealed for |cFFFFFF<<1>>|r <<1[second/seconds]>>. You are unable to stealth.",
     SI_LUIE_SKILL_GENERIC_REVEAL_NO_DUR_TP =             "Revealed. You are unable to stealth.",
     SI_LUIE_SKILL_GENERIC_INVISIBILITY_TP =              "Invisible for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
-    SI_LUIE_SKILL_GENERIC_DETECTION_POTION_TP =          "Stealth Detection increased by |cFFFFFF20|r meters for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_DETECTION_TP =          "Increase Stealth Detection by |cFFFFFF20|r meters for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_DETECTION_NPC_TP =             "Revealing nearby stealthed and invisible enemies.",
 
     -- Crowd Control / Immunity
@@ -322,12 +322,11 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_DISORIENT_NO_DUR_TP =          "Disoriented.",
 
     -- Ravage Potions / Poisons
-    SI_LUIE_SKILL_GENERIC_RAVAGE_HEALTH_POTION_TP =      "Afflicted with Bleed Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
-    SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POTION_TP =     "Increase the cost of Magicka abilities by |cFFFFFF60|r%.",
-    SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POTION_TP =     "Increase the cost of Stamina abilities by |cFFFFFF60|r%.",
-    SI_LUIE_SKILL_GENERIC_RAVAGE_HEALTH_POISON_TP =      "Afflicted with Poison Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
-    SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POISON_TP =     "Increase the cost of Magicka abilities by |cFFFFFF10|r%.",
-    SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POISON_TP =     "Increase the cost of Stamina abilities by |cFFFFFF10|r%.",
+    SI_LUIE_SKILL_GENERIC_RAVAGE_HEALTH_POTION_TP =      "Afflicted with unmitigable SUBSTRING every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThis damage cannot be absorbed by a damage shield.",
+    --SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POTION_TP =     "Increase the cost of Magicka abilities by |cFFFFFF60|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    --SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POTION_TP =     "Increase the cost of Stamina abilities by |cFFFFFF60|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POISON_TP =     "Increase the cost of Magicka abilities by |cFFFFFF10|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POISON_TP =     "Increase the cost of Stamina abilities by |cFFFFFF10|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     -- Generic Stat Buffs
     SI_LUIE_SKILL_SET_GENERIC_WEP_SPELL_DAMAGE_TIME_TP = "Increase Weapon and Spell Damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
@@ -1067,7 +1066,7 @@ local strings = {
     SI_LUIE_SKILL_SET_WARRIORS_FURY_TP =                 "Increase Weapon Damage by |cFFFFFF24|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>, stacking up to |cFFFFFF20|r times when you take damage.\n\nThis effect can occur once every half second.\n\nUpon reaching |cFFFFFF20|r stacks, the duration is doubled but can no longer be refreshed.",
     SI_LUIE_SKILL_SET_ROBES_OF_TRANSMUTATION_TP =        "Increase Critical Resistance by |cFFFFFF1400|r for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_BECKONING_STEEL_TP =               "Reduce damage taken from projectiles by |cFFFFFF10|r%.",
-    SI_LUIE_SKILL_SET_SENTRY_TP =                        "Dramatically increase Stealth Detection radius for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SET_SENTRY_TP =                        "Dramatically increase Stealth Detection for |cFFFFFF<<1>>|r seconds.",
 
     ----------------------------------------------------------------
     -- NPC ABILITY / QUEST TOOLTIPS --------------------------------
@@ -1188,7 +1187,7 @@ local strings = {
     SI_LUIE_SKILL_LATCH_ON_TP =                          "Afflicted with Bleed Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nEach time this effect deals damage it heals the hoarvor.",
     SI_LUIE_SKILL_KOTU_GAVA_SWARM_TP =                   "Afflicted with Poison Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nAfter |cFFFFFF<<2>>|r <<2[second/seconds]>>, a swarm of Kotu Gava will spawn around you.",
     SI_LUIE_SKILL_HARDENED_SHELL_TP =                    "Chance when hit to reduce damage taken by |cFFFFFF50|r%.",
-    SI_LUIE_SKILL_UNCANNY_DODGE_TP =                     "Unable to be taken off guard. Will always dodge the initial hit when engaged.",
+    SI_LUIE_SKILL_UNCANNY_DODGE_TP =                     "You are unable to be caught off guard and will dodge any single target attacks directed at you before entering combat.",
     SI_LUIE_SKILL_BLOCK_NPC_TP =                         "Brace for attack, reducing damage taken by |cFFFFFF80|r% and granting immunity to Stun and Knockback effects.\n\nEnemies that deal damage with a melee Medium or Heavy Attack will be staggered, stunned for |cFFFFFF3|r seconds, and set Off Balance for |cFFFFFF7|r seconds.",
     SI_LUIE_SKILL_BLOCK_NPC_THEATER_TP =                 "Brace for attack, reducing damage taken by |cFFFFFF80|r% and granting immunity to Stun and Knockback effects.",
     SI_LUIE_SKILL_CALL_ALLY_TP =                         "A summoned beast ally fights at your side. The beast remains for |cFFFFFF2|r minutes or until killed.",

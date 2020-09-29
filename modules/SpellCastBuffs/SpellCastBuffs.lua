@@ -3682,7 +3682,7 @@ end
 
 -- Called from the menu and on initialize to build potion effect generic icon overrides.
 function SpellCastBuffs.UpdatePotionList(menu)
-    if LUIE.SpellCastBuffs.SV.GenericPotion then
+    --[[if LUIE.SpellCastBuffs.SV.GenericPotion then
         for k, v in pairs(Effects.PotionIconTable) do
             if v.normalize then
                 Effects.EffectOverride[k].icon = v.normalize
@@ -3695,12 +3695,12 @@ function SpellCastBuffs.UpdatePotionList(menu)
                 Effects.EffectOverride[k].icon = v.icon
             end
         end
-    end
+    end]]--
 end
 
 -- Called from the menu and on initialize to build poison effect generic icon overrides.
 function SpellCastBuffs.UpdatePoisonList(menu)
-    if LUIE.SpellCastBuffs.SV.GenericPoison then
+    --[[if LUIE.SpellCastBuffs.SV.GenericPoison then
         for k, v in pairs(Effects.PoisonIconTable) do
             if v.normalize then
                 Effects.EffectOverride[k].icon = v.normalize
@@ -3713,7 +3713,7 @@ function SpellCastBuffs.UpdatePoisonList(menu)
                 Effects.EffectOverride[k].icon = v.icon
             end
         end
-    end
+    end]]--
 end
 
 -- Called from the menu and on initialize to build status effect generic icon overrides.

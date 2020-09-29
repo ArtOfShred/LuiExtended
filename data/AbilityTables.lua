@@ -74,8 +74,6 @@ local AbilityTables = {
 
     Skill_Empower                     = 61737,
     Skill_Hindrance                   = 46210,
-    Skill_Stun                        = 68565,
-    Skill_Trauma                      = 125203,
 
     -- ---------------------------------------------------
     -- INNATE ABILITIES ----------------------------------
@@ -180,8 +178,6 @@ local AbilityTables = {
     Proc_Concussion                   = 21487,
 
     -- Potions/Poisons
-    Potion                            = 32732,
-    Poison                            = 2563,
     Potion_Invisiblity                = 3668,
     Potion_Ravage_Health              = 46111,
     Potion_Restore_Health             = 45221,
