@@ -396,7 +396,6 @@ Effects.DebuffDisplayOverrideId = {
 
     -- Basic (Shared)
     [16593] = true, -- Melee Snare
-    [2727] = true, -- Off-Balance
 
     ----------------------------------------------------------------
     -- HOUSING TARGET DUMMY ----------------------------------------
@@ -487,7 +486,6 @@ Effects.DebuffDisplayOverrideIdAlways = {
     [88504] = true, -- Summon Abomination (Bonelord)
     [92158] = true, -- Raise the Earth (Beastcaller)
     [29597] = true, -- Combustion (Shaman)
-    [29598] = true, -- Off Balance (Shaman)
     [89301] = true, -- Summon Spiderling (Spider Daedra)
 
     -- Monsters
@@ -511,118 +509,103 @@ Effects.DebuffDisplayOverrideIdAlways = {
 
 }
 
---------------------------------------------------------------------------------------------------------------------------------
--- Filter out Debuffs to always display regardless of whether they are sourced from the player - BY name =- Used for all Major / Minor Debuffs
---------------------------------------------------------------------------------------------------------------------------------
-Effects.DebuffDisplayOverrideName = {
-    [Abilities.Skill_Minor_Breach]              = true,
-    [Abilities.Skill_Major_Breach]              = true,
-    [Abilities.Skill_Minor_Defile]              = true,
-    [Abilities.Skill_Major_Defile]              = true,
-    [Abilities.Skill_Minor_Maim]                = true,
-    [Abilities.Skill_Major_Maim]                = true,
-    [Abilities.Skill_Minor_Vulnerability]       = true,
-    [Abilities.Skill_Major_Vulnerability]       = true,
-    [Abilities.Skill_Minor_Mangle]              = true,
-    [Abilities.Skill_Minor_Cowardice]           = true,
-    [Abilities.Skill_Minor_Enveration]          = true,
-    [Abilities.Skill_Minor_Uncertainty]         = true,
-    [Abilities.Skill_Minor_Magickasteal]        = true,
-    [Abilities.Skill_Minor_Lifesteal]           = true,
-    [Abilities.Skill_Minor_Timidity]            = true,
-    [Abilities.Skill_Off_Balance]               = true,
+-- Add Major/Minor Id's to list to show always even if not sourced from the player
+Effects.DebuffDisplayOverrideMajorMinor = {
+    [61742] = true, -- Minor Breach
+    [79717] = true, -- Minor Vulnerability
+    [61723] = true, -- Minor Maim
+    [61726] = true, -- Minor Defile
+    [88401] = true, -- Minor Magickasteal
+    [86304] = true, -- Minor Lifesteal
+    [79907] = true, -- Minor Enervation
+    [79895] = true, -- Minor Uncertainty
+    [79867] = true, -- Minor Cowardice
+    [61733] = true, -- Minor Mangle
+    [140699] = true, -- Minor Timidity
+    [145975] = true, -- Minor Brittle
+    [61743] = true, -- Major Breach
+    [106754] = true, -- Major Vulnerability
+    [61725] = true, -- Major Maim
+    [61727] = true, -- Major Defile
+    [147643] = true, -- Major Cowardice
+    --[145977] = true, -- Major Brittle
 }
 
---------------------------------------------------------------------------------------------------------------------------------
--- Table of Major / Minor Effects
---------------------------------------------------------------------------------------------------------------------------------
-
--- TODO: Finish this
+-- Table of all Major / Minor Effects (Used by CombatInfo Bar Highlight to override the 0 duration on these abilities)
 Effects.MajorMinor = {
-
-    [61744] = true, -- Minor Berserk
-    [61745] = true, -- Major Berserk
-
-    [61665] = true, -- Major Brutality
-
-    [61687] = true, -- Major Sorcery
-
-    [61691] = true, -- Minor Prophecy
-    [61689] = true, -- Major Prophecy
-
-    [61667] = true, -- Major Savagery
-
-    [61708] = true, -- Minor Heroism
-
-    [61685] = true, -- Minor Sorcery
-
+    -- Major / Minor Buffs
     [61693] = true, -- Minor Resolve
     [61694] = true, -- Major Resolve
-
-    [61716] = true, -- Major Evasion
-
+    [61697] = true, -- Minor Fortitude
+    [61698] = true, -- Major Fortitude
+    [61704] = true, -- Minor Endurance
+    [61705] = true, -- Major Endurance
+    [61706] = true, -- Minor Intellect
+    [61707] = true, -- Major Intellect
+    [61685] = true, -- Minor Sorcery
+    [61687] = true, -- Major Sorcery
+    [61691] = true, -- Minor Prophecy
+    [61689] = true, -- Major Prophecy
+    [61662] = true, -- Minor Brutality
+    [61665] = true, -- Major Brutality
+    [61666] = true, -- Minor Savagery
+    [61667] = true, -- Major Savagery
+    [61744] = true, -- Minor Berserk
+    [61745] = true, -- Major Berserk
+    [61746] = true, -- Minor Force
+    [61747] = true, -- Major Force
     [61549] = true, -- Minor Vitality
     [61713] = true, -- Major Vitality
-
     [61710] = true, -- Minor Mending
     [61711] = true, -- Major Mending
-
-    [88490] = true, -- Minor Toughness
-
-    [61704] = true, -- Minor Endurance
-
     [61721] = true, -- Minor Protection
     [61722] = true, -- Major Protection
-
+    [61715] = true, -- Minor Evasion
+    [61716] = true, -- Major Evasion
     [61735] = true, -- Minor Expedition
     [61736] = true, -- Major Expedition
-
     [63569] = true, -- Major Gallop
-
+    [61708] = true, -- Minor Heroism
+    [61709] = true, -- Major Heroism
+    [88490] = true, -- Minor Toughness
     [147417] = true, -- Minor Courage
     [109966] = true, -- Major Courage
 
-    [61746] = true, -- Minor Force
-    [61747] = true, -- Major Force
-
-    [61723] = true, -- Minor Maim
-    [61725] = true, -- Major Maim
-
-    [79717] = true, -- Minor Vulnerability
-
+    -- Major / Minor Debuffs
     [61742] = true, -- Minor Breach
     [61743] = true, -- Major Breach
-
+    [79717] = true, -- Minor Vulnerability
+    [106754] = true, -- Major Vulnerability
+    [61723] = true, -- Minor Maim
+    [61725] = true, -- Major Maim
     [61726] = true, -- Minor Defile
     [61727] = true, -- Major Defile
-
+    [88401] = true, -- Minor Magickasteal
+    [86304] = true, -- Minor Lifesteal
+    [79907] = true, -- Minor Enervation
+    [79895] = true, -- Minor Uncertainty
     [79867] = true, -- Minor Cowardice
     [147643] = true, -- Major Cowardice
-
-    [79895] = true, -- Minor Uncertainty
-
-    [79907] = true, -- Minor Enervation
-
-    [145975] = true, -- Minor Brittle
-
     [61733] = true, -- Minor Mangle
+    [140699] = true, -- Minor Timidity
+    [145975] = true, -- Minor Brittle
+    --[145977] = true, -- Major Brittle (Unused)
 
-    [88401] = true, -- Minor Magickasteal
-    [88402] = true, -- Minor Magickasteal
-
-    [86304] = true, -- Minor Lifesteal
-    [86305] = true, -- Minor Lifesteal
-
+    -- Slayer / Aegis
     [76618] = true, -- Minor Aegis
-    [147225] = true, -- Minor Aegis -- Dummy
-
     [93123] = true, -- Major Aegis
-
     [76617] = true, -- Minor Slayer
-    [147226] = true, -- Minor Slayer -- Dummy
-
     [93109] = true, -- Major Slayer
 
+    -- Empower
+    [61737] = true, -- Empower
+}
+
+--------------------------------------------------------------------------------------------------------------------------------
+-- Filter out Debuffs to always display regardless of whether they are sourced from the player - BY NAME
+--------------------------------------------------------------------------------------------------------------------------------
+Effects.DebuffDisplayOverrideName = {
+    [Abilities.Skill_Off_Balance]               = true,
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -2627,8 +2610,6 @@ Effects.EffectSourceOverride = {
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.EffectMergeName = {
     [Abilities.Skill_Overcharge] = "MERGED_EFFECT_OVERCHARGE",
-    [Abilities.Skill_Minor_Slayer] = "MERGED_EFFECT_SLAYER",
-    [Abilities.Skill_Minor_Aegis] = "MERGED_EFFECT_AEGIS",
     [Abilities.Skill_Boulder_Toss] = "MERGED_EFFECT_BOULDER_TOSS",
     [Abilities.Skill_Boss_CC_Immunity] = "MERGED_EFFECT_BOSS_IMMUNITIES", -- Scary Immunities
 }
@@ -3034,6 +3015,7 @@ Effects.KeepUpgradeTooltip = {
     [Abilities.Keep_Upgrade_Food_Guard_Abilities]       = Tooltips.Keep_Upgrade_Food_Guard_Abilities,
 }
 
+-- TODO: Remove these tables
 Effects.PotionIconTable = {
 }
 
@@ -3041,11 +3023,7 @@ Effects.PoisonIconTable = {
 }
 
 Effects.StatusEffectIconTable = {
-    [21927] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_diseased.dds', normalize = 'esoui/art/icons/ability_debuff_minor_defile.dds' }, -- Minor Defile (Disease Status Effect)
-    [68368] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_chill.dds', normalize = 'esoui/art/icons/ability_debuff_minor_maim.dds' }, -- Minor Maim (Frost Status Effect)
-    [130815] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_chill.dds', normalize = 'esoui/art/icons/ability_debuff_minor_maim.dds' }, -- Minor Maim (Frost Status Effect)s
-    [68359] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_concussion.dds', normalize = 'esoui/art/icons/ability_debuff_minor_vulnerability.dds' }, -- Minor Vulnerability (Shock Status Effect)
-    [130809] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_concussion.dds', normalize = 'esoui/art/icons/ability_debuff_minor_vulnerability.dds' }, -- Minor Vulnerability (Shock Status Effect - Siege)
+
 }
 
 Effects.MajorMinorIconTable = {
@@ -3564,16 +3542,11 @@ Effects.EffectOverride = {
     [18084] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_burning.dds', tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Burning (Fire Status Effect)
     [130804] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_burning.dds', tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Burning (Fire Status Effect - Siege)
     [21925] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_diseased.dds' }, -- Diseased (Disease Status Effect)
-    [21927] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_diseased.dds', tooltip = Abilities.Proc_Diseased }, -- Minor Defile (Disease Status Effect)
     [21481] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_chill.dds', name = Abilities.Proc_Chilled }, -- Chill (Frost Status Effect)
-    [68368] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_chill.dds', tooltip = Abilities.Proc_Chilled }, -- Minor Maim (Frost Status Effect)
     [130814] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_chill.dds', name = Abilities.Proc_Chilled }, -- Chill (Frost Status Effect)
-    [130815] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_chill.dds', tooltip = Abilities.Proc_Chilled }, -- Minor Maim (Frost Status Effect)
     [21929] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_poisoned.dds', tooltip = Tooltips.Generic_Poison, tooltipValue2 = 2 }, -- Poisoned (Poison Status Effect)
     [21487] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_concussion.dds' }, -- Concussion (Shock Status Effect)
-    [68359] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_concussion.dds', tooltip = Abilities.Proc_Concussion }, -- Minor Vulnerability (Shock Status Effect)
     [130808] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_concussion.dds' }, -- Concussion (Shock Status Effect - Siege)
-    [130809] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_concussion.dds', tooltip = Abilities.Proc_Concussion }, -- Minor Vulnerability (Shock Status Effect - Siege)
 
     ----------------------------------------------------------------
     -- MUNDUS STONE BOONS ------------------------------------------
@@ -3891,7 +3864,6 @@ Effects.EffectOverride = {
     [33497] = { icon = 'LuiExtended/media/icons/abilities/ability_set_thunderbug.dds' }, -- Thunderbug's Carapace (Thunderbug's)
     [106867] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grace_of_gloom.dds', name = Abilities.Set_Grace_of_Gloom, tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Major Evasion (Gloom-Graced)
     [106868] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grace_of_gloom.dds' }, -- Grace of Gloom (Gloom-Graced)
-    [121634] = { name = Abilities.Skill_Minor_Lifesteal, tooltip = Abilities.Set_Call_of_the_Undertaker }, -- Lifesteal (Undertaker's)
     [129442] = { icon = 'LuiExtended/media/icons/abilities/ability_set_senchals_duty.dds', tooltip = Tooltips.Set_Senchals_Duty, forcedContainer = 'short' }, -- Senchal's Duty (Senchal Defender's)
     [129509] = { icon = 'LuiExtended/media/icons/abilities/ability_set_senchals_duty.dds', name = Abilities.Set_Senchals_Duty }, -- Senchal Defender (Senchal Defender's)
     [129523] = { icon = 'LuiExtended/media/icons/abilities/ability_set_senchals_duty.dds', name = Abilities.Set_Senchals_Duty }, -- Senchal Defender (Senchal Defender's)
@@ -3999,6 +3971,7 @@ Effects.EffectOverride = {
     [84354] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web_green.dds', tooltip = Tooltips.Set_Hand_of_Mephala }, -- Hand of Mephala (Mephala's Hand)
     [84357] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web_green.dds', name = Abilities.Set_Hand_of_Mephala, duration = 0, tooltip = Tooltips.Skill_Hand_of_Mephala_Ground, groundLabel = true }, -- Hand of Mephala Webbing (of Mephala's Hand)
     [84355] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web_green.dds' }, -- Hand of Mephala (of Mephala's Hand)
+    [32735] = { hide = true }, -- Major Brutality (Dreugh King Slayer)
     [66887] = { icon = 'LuiExtended/media/icons/abilities/ability_set_imperium.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Brands of the Imperium (of the Imperium)
     [67283] = { icon = 'LuiExtended/media/icons/abilities/ability_set_tormentor.dds', name = Abilities.Set_Tormentor, tooltip = Tooltips.Generic_Physical_Spell_Resist_Value, tooltipValue2 = 3642 }, -- Tormentor Resistance (of the Tormentor)
     [61200] = { icon = 'LuiExtended/media/icons/abilities/ability_set_undaunted_bastion.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Undaunted Bastion (of the Undaunted Bastion)
@@ -4171,6 +4144,79 @@ Effects.EffectOverride = {
     [32045] = { tooltip = Tooltips.Disguise_Servants_Robes }, -- Servant Costume (Servant's Robes)
     [46281] = { tooltip = Tooltips.Disguise_Bloodthorn }, -- Necromancer Disguise (Bloodthorn Disguise)
     [82631] = { icon = 'LuiExtended/media/icons/disguises/disguise_monks_disguise.dds', name = Abilities.Disguise_Monks_Disguise }, -- Monk Disguise Timer (Monk's Disguise)
+
+    ----------------------------------------------------------------
+    -- MAJOR / MINOR EFFECTS ---------------------------------------
+    ----------------------------------------------------------------
+
+    -- Major / Minor Buffs
+    [61693] = { tooltip = Tooltips.Skill_Minor_Resolve }, -- Minor Resolve
+    [61694] = { tooltip = Tooltips.Skill_Major_Resolve }, -- Major Resolve
+    [61697] = { tooltip = Tooltips.Skill_Minor_Fortitude }, -- Minor Fortitude
+    [61698] = { tooltip = Tooltips.Skill_Major_Fortitude }, -- Major Fortitude
+    [61704] = { tooltip = Tooltips.Skill_Minor_Endurance }, -- Minor Endurance
+    [61705] = { tooltip = Tooltips.Skill_Major_Endurance }, -- Major Endurance
+    [61706] = { tooltip = Tooltips.Skill_Minor_Intellect }, -- Minor Intellect
+    [61707] = { tooltip = Tooltips.Skill_Major_Intellect  }, -- Major Intellect
+    [61685] = { tooltip = Tooltips.Skill_Minor_Sorcery }, -- Minor Sorcery
+    [61687] = { tooltip = Tooltips.Skill_Major_Sorcery }, -- Major Sorcery
+    [61691] = { tooltip = Tooltips.Skill_Minor_Prophecy }, -- Minor Prophecy
+    [61689] = { tooltip = Tooltips.Skill_Major_Prophecy }, -- Major Prophecy
+    [61662] = { tooltip = Tooltips.Skill_Minor_Brutality }, -- Minor Brutality
+    [61665] = { tooltip = Tooltips.Skill_Major_Brutality }, -- Major Brutality
+    [61666] = { tooltip = Tooltips.Skill_Minor_Savagery }, -- Minor Savagery
+    [61667] = { tooltip = Tooltips.Skill_Major_Savagery }, -- Major Savagery
+    [61744] = { tooltip = Tooltips.Skill_Minor_Berserk }, -- Minor Berserk
+    [61745] = { tooltip = Tooltips.Skill_Major_Berserk }, -- Major Berserk
+    [61746] = { tooltip = Tooltips.Skill_Minor_Force }, -- Minor Force
+    [61747] = { tooltip = Tooltips.Skill_Major_Force }, -- Major Force
+    [61549] = { tooltip = Tooltips.Skill_Minor_Vitality }, -- Minor Vitality
+    [61713] = { tooltip = Tooltips.Skill_Major_Vitality }, -- Major Vitality
+    [61710] = { tooltip = Tooltips.Skill_Minor_Mending }, -- Minor Mending
+    [61711] = { tooltip = Tooltips.Skill_Major_Mending }, -- Major Mending
+    [61721] = { tooltip = Tooltips.Skill_Minor_Protection }, -- Minor Protection
+    [61722] = { tooltip = Tooltips.Skill_Major_Protection }, -- Major Protection
+    [61715] = { tooltip = Tooltips.Skill_Minor_Evasion }, -- Minor Evasion
+    [61716] = { tooltip = Tooltips.Skill_Major_Evasion }, -- Major Evasion
+    [61735] = { tooltip = Tooltips.Skill_Minor_Expedition }, -- Minor Expedition
+    [61736] = { tooltip = Tooltips.Skill_Major_Expedition }, -- Major Expedition
+    [63569] = { tooltip = Tooltips.Skill_Major_Gallop }, -- Major Gallop
+    [61708] = { tooltip = Tooltips.Skill_Minor_Heroism }, -- Minor Heroism
+    [61709] = { tooltip = Tooltips.Skill_Major_Heroism }, -- Major Heroism
+    [88490] = { tooltip = Tooltips.Skill_Minor_Toughness }, -- Minor Toughness
+    [147417] = { tooltip = Tooltips.Skill_Minor_Courage }, -- Minor Courage
+    [109966] = { tooltip = Tooltips.Skill_Major_Courage }, -- Major Courage
+
+    -- Major / Minor Debuffs
+    [61742] = { tooltip = Tooltips.Skill_Minor_Breach }, -- Minor Breach
+    [61743] = { tooltip = Tooltips.Skill_Major_Breach }, -- Major Breach
+    [79717] = { tooltip = Tooltips.Skill_Minor_Vulnerability }, -- Minor Vulnerability
+    [106754] = { tooltip = Tooltips.Skill_Major_Vulnerability }, -- Major Vulnerability
+    [61723] = { tooltip = Tooltips.Skill_Minor_Maim }, -- Minor Maim
+    [61725] = { tooltip = Tooltips.Skill_Major_Maim }, -- Major Maim
+    [61726] = { tooltip = Tooltips.Skill_Minor_Defile }, -- Minor Defile
+    [61727] = { tooltip = Tooltips.Skill_Major_Defile }, -- Major Defile
+    [88401] = { tooltip = Tooltips.Skill_Minor_Magickasteal }, -- Minor Magickasteal
+    [88402] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal -- Steal
+    [86304] = { tooltip = Tooltips.Skill_Minor_Lifesteal }, -- Minor Lifesteal
+    [86305] = { icon = 'esoui/art/icons/ability_buff_minor_lifesteal.dds' }, -- Minor Lifesteal -- Steal
+    [79907] = { tooltip = Tooltips.Skill_Minor_Enveration }, -- Minor Enervation
+    [79895] = { tooltip = Tooltips.Skill_Minor_Uncertainty }, -- Minor Uncertainty
+    [79867] = { tooltip = Tooltips.Skill_Minor_Cowardice }, -- Minor Cowardice
+    [147643] = { tooltip = Tooltips.Skill_Major_Cowardice }, -- Major Cowardice
+    [61733] = { tooltip = Tooltips.Skill_Minor_Mangle }, -- Minor Mangle
+    [140699] = { tooltip = Tooltips.Skill_Minor_Timidity }, -- Minor Timidity
+    [145975] = { tooltip = Tooltips.Skill_Minor_Brittle }, -- Minor Brittle
+    [145977] = { tooltip = Tooltips.Skill_Major_Brittle }, -- Major Brittle (Unused)
+
+    -- Slayer / Aegis
+    [76618] = { tooltip = Tooltips.Skill_Minor_Aegis }, -- Minor Aegis
+    [93123] = { tooltip = Tooltips.Skill_Major_Aegis }, -- Major Aegis
+    [76617] = { tooltip = Tooltips.Skill_Minor_Slayer }, -- Minor Slayer
+    [93109] = { tooltip = Tooltips.Skill_Major_Slayer }, -- Major Slayer
+
+    -- Empower
+    [61737] = { tooltip = Tooltips.Skill_Empower }, -- Empower
 
     ----------------------------------------------------------------
     -- CHAMPION POINTS ---------------------------------------------

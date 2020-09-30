@@ -74,8 +74,11 @@ LUIE.Data.Tooltips = {
     Skill_Minor_Enveration                          = GetString(SI_LUIE_SKILL_MINOR_ENERVATION_TP),
     Skill_Minor_Uncertainty                         = GetString(SI_LUIE_SKILL_MINOR_UNCERTAINTY_TP),
     Skill_Minor_Cowardice                           = GetString(SI_LUIE_SKILL_MINOR_COWARDICE_TP),
+    Skill_Major_Cowardice                           = GetString(SI_LUIE_SKILL_MAJOR_COWARDICE_TP),
     Skill_Minor_Mangle                              = GetString(SI_LUIE_SKILL_MINOR_MANGLE_TP),
     Skill_Minor_Timidity                            = GetString(SI_LUIE_SKILL_MINOR_TIMIDITY_TP),
+    Skill_Minor_Brittle                             = GetString(SI_LUIE_SKILL_MINOR_BRITTLE_TP),
+    Skill_Major_Brittle                             = GetString(SI_LUIE_SKILL_MAJOR_BRITTLE_TP),
 
     -- Aegis/Slayer
     Skill_Minor_Aegis                               = GetString(SI_LUIE_SKILL_MINOR_AEGIS_TP),

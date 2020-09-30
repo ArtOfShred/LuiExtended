@@ -247,7 +247,7 @@ function SpellCastBuffs.CreateSettings()
                 name = GetString(SI_LUIE_LAM_BUFF_ALWAYS_MAJOR_MINOR_EFFECTS),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_ALWAYS_MAJOR_MINOR_EFFECTS_TP),
                 getFunc = function() return Settings.ShowSharedMajorMinor end,
-                setFunc = function(value) Settings.ShowSharedMajorMinor = value SpellCastBuffs.UpdateDisplayOverrideNameList() SpellCastBuffs.ReloadEffects("player") end,
+                setFunc = function(value) Settings.ShowSharedMajorMinor = value SpellCastBuffs.UpdateDisplayOverrideIdList() SpellCastBuffs.ReloadEffects("player") end,
                 width = "full",
                 default = Defaults.ShowSharedMajorMinor,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,

@@ -6,73 +6,12 @@
 -- AbilityTables namespace
 local AbilityTables = {
     -- ---------------------------------------------------
-    -- MAJOR/MINOR DEBUFFS & DEBUFFS ---------------------
+    -- GENERIC BUFFS & DEBUFFS ---------------------------
     -- ---------------------------------------------------
 
-    -- Major/Minor Buffs
-    Skill_Minor_Resolve               = 61693,
-    Skill_Major_Resolve               = 22236,
-    Skill_Minor_Fortitude             = 26213,
-    Skill_Major_Fortitude             = 29011,
-    Skill_Minor_Endurance             = 26215,
-    Skill_Major_Endurance             = 32748,
-    Skill_Minor_Intellect             = 26216,
-    Skill_Major_Intellect             = 45224,
-    Skill_Minor_Sorcery               = 61685,
-    Skill_Major_Sorcery               = 45227,
-    Skill_Minor_Prophecy              = 61688,
-    Skill_Major_Prophecy              = 47195,
-    Skill_Minor_Brutality             = 61662,
-    Skill_Major_Brutality             = 23673,
-    Skill_Minor_Savagery              = 79453,
-    Skill_Major_Savagery              = 26795,
-    Skill_Minor_Berserk               = 62636,
-    Skill_Major_Berserk               = 36973,
-    Skill_Minor_Force                 = 68595,
-    Skill_Major_Force                 = 85154,
-    Skill_Minor_Vitality              = 64080,
-    Skill_Major_Vitality              = 42197,
-    Skill_Minor_Mending               = 29096,
-    Skill_Major_Mending               = 55033,
-    Skill_Minor_Protection            = 40171,
-    Skill_Major_Protection            = 22233,
-    Skill_Minor_Evasion               = 61715,
-    Skill_Major_Evasion               = 61716,
-    Skill_Minor_Expedition            = 40219,
-    Skill_Major_Expedition            = 23216,
-    --Skill_Minor_Gallop              =
-    Skill_Major_Gallop                = 57472,
-    Skill_Minor_Heroism               = 62505,
-    Skill_Major_Heroism               = 61709,
-    Skill_Minor_Toughness             = 88492,
-    Skill_Minor_Courage               = 121878,
-    Skill_Major_Courage               = 66902,
-
-    -- Major/Minor Debuffs
-    Skill_Minor_Breach                = 46206,
-    Skill_Major_Breach                = 33363,
-    Skill_Minor_Vulnerability         = 51434,
-    Skill_Major_Vulnerability         = 106754,
-    Skill_Minor_Maim                  = 29308,
-    Skill_Major_Maim                  = 92041,
-    Skill_Minor_Defile                = 61726,
-    Skill_Major_Defile                = 85944,
-    Skill_Minor_Magickasteal          = 88401,
-    Skill_Minor_Lifesteal             = 86304,
-    Skill_Minor_Enveration            = 47202,
-    Skill_Minor_Uncertainty           = 47204,
-    Skill_Minor_Cowardice             = 46202,
-    Skill_Minor_Mangle                = 39168,
-    Skill_Minor_Timidity              = 140700,
-    Skill_Minor_Slayer                = 76618,
-    Skill_Major_Slayer                = 93120,
-    Skill_Minor_Aegis                 = 76617,
-    Skill_Major_Aegis                 = 93444,
     Skill_Off_Balance                 = 14062,
     Skill_Off_Balace_Immunity         = 134599,
     Skill_Major_Vulnerability_Immunity = GetString(SI_LUIE_SKILL_GENERIC_MAJOR_VULNERABILITY_IMMUNITY),
-
-    Skill_Empower                     = 61737,
     Skill_Hindrance                   = 46210,
 
     -- ---------------------------------------------------
@@ -170,12 +109,7 @@ local AbilityTables = {
     Item_Glyph_of_Weapon_Damage       = GetString(SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE),
 
     -- Elemental Status Effect
-    Proc_Burning                      = 18084,
-    Proc_Diseased                     = 21925,
-    Proc_Chill                        = 21481,
     Proc_Chilled                      = 7145,
-    Proc_Poisoned                     = 21929,
-    Proc_Concussion                   = 21487,
 
     -- Potions/Poisons
     Potion_Invisiblity                = 3668,
@@ -344,7 +278,6 @@ local AbilityTables = {
     Set_Affliction                    = 34787,
     Set_Sentry                        = 32807,
     Set_Line_Breaker                  = 75753,
-    Set_Call_of_the_Undertaker        = 121633,
     Set_False_Gods_Devotion           = 121823,
     Set_Morkuldin                     = 71670,
     Set_Senchals_Duty                 = 129442,

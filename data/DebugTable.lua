@@ -132,101 +132,75 @@ LUIE.DebugAuras = {
     -- MAJOR / MINOR BUFFS & DEBUFFS ----
     -------------------------------------
 
-    [61744] = true, -- Minor Berserk
-    [61745] = true, -- Major Berserk
-
-    [61662] = true, -- Minor Bruality
-    [61665] = true, -- Major Brutality
-
-    [61685] = true, -- Minor Sorcery
-    [61687] = true, -- Major Sorcery
-
-    [61691] = true, -- Minor Prophecy
-    [61689] = true, -- Major Prophecy
-
-    [61666] = true, -- Minor Savagery
-    [61667] = true, -- Major Savagery
-
-    [61708] = true, -- Minor Heroism
-    [61709] = true, -- Major Heroism
-
-    [61697] = true, -- Minor Fortitude
-    [61698] = true, -- Major Fortitude
-
-    [61706] = true, -- Minor Intellect
-    [61707] = true, -- Major Intellect
-
+    -- Major / Minor Buffs
     [61693] = true, -- Minor Resolve
     [61694] = true, -- Major Resolve
-
-    [61716] = true, -- Major Evasion
-
-    [61549] = true, -- Minor Vitality
-    [61713] = true, -- Major Vitality
-
-    [61710] = true, -- Minor Mending
-    [61711] = true, -- Major Mending
-
-    [88490] = true, -- Minor Toughness
-
+    [61697] = true, -- Minor Fortitude
+    [61698] = true, -- Major Fortitude
     [61704] = true, -- Minor Endurance
     [61705] = true, -- Major Endurance
-
+    [61706] = true, -- Minor Intellect
+    [61707] = true, -- Major Intellect
+    [61685] = true, -- Minor Sorcery
+    [61687] = true, -- Major Sorcery
+    [61691] = true, -- Minor Prophecy
+    [61689] = true, -- Major Prophecy
+    [61662] = true, -- Minor Brutality
+    [61665] = true, -- Major Brutality
+    [61666] = true, -- Minor Savagery
+    [61667] = true, -- Major Savagery
+    [61744] = true, -- Minor Berserk
+    [61745] = true, -- Major Berserk
+    [61746] = true, -- Minor Force
+    [61747] = true, -- Major Force
+    [61549] = true, -- Minor Vitality
+    [61713] = true, -- Major Vitality
+    [61710] = true, -- Minor Mending
+    [61711] = true, -- Major Mending
     [61721] = true, -- Minor Protection
     [61722] = true, -- Major Protection
-
+    [61715] = true, -- Minor Evasion
+    [61716] = true, -- Major Evasion
     [61735] = true, -- Minor Expedition
     [61736] = true, -- Major Expedition
-
     [63569] = true, -- Major Gallop
-
+    [61708] = true, -- Minor Heroism
+    [61709] = true, -- Major Heroism
+    [88490] = true, -- Minor Toughness
     [147417] = true, -- Minor Courage
     [109966] = true, -- Major Courage
 
-    [61746] = true, -- Minor Force
-    [61747] = true, -- Major Force
-
-    [61723] = true, -- Minor Maim
-    [61725] = true, -- Major Maim
-
-    [79717] = true, -- Minor Vulnerability
-    [106754] = true, -- Minor Vulnerability
-
+    -- Major / Minor Debuffs
     [61742] = true, -- Minor Breach
     [61743] = true, -- Major Breach
-
+    [79717] = true, -- Minor Vulnerability
+    [106754] = true, -- Major Vulnerability
+    [61723] = true, -- Minor Maim
+    [61725] = true, -- Major Maim
     [61726] = true, -- Minor Defile
     [61727] = true, -- Major Defile
-
+    [88401] = true, -- Minor Magickasteal
+    [88402] = true, -- Minor Magickasteal -- Steal
+    [86304] = true, -- Minor Lifesteal
+    [86305] = true, -- Minor Lifesteal -- Steal
+    [79907] = true, -- Minor Enervation
+    [79895] = true, -- Minor Uncertainty
     [79867] = true, -- Minor Cowardice
     [147643] = true, -- Major Cowardice
-
-    [79895] = true, -- Minor Uncertainty
-
-    [79907] = true, -- Minor Enervation
-
-    [140699] = true, -- Minor Timidity
-
-    [145975] = true, -- Minor Brittle
-
     [61733] = true, -- Minor Mangle
+    [140699] = true, -- Minor Timidity
+    [145975] = true, -- Minor Brittle
+    [145977] = true, -- Major Brittle (Unused)
 
-    [88401] = true, -- Minor Magickasteal
-    [88402] = true, -- Minor Magickasteal
-
-    [86304] = true, -- Minor Lifesteal
-    [86305] = true, -- Minor Lifesteal
-
+    -- Slayer / Aegis
     [76618] = true, -- Minor Aegis
     [147225] = true, -- Minor Aegis -- Dummy
-
     [93123] = true, -- Major Aegis
-
     [76617] = true, -- Minor Slayer
     [147226] = true, -- Minor Slayer -- Dummy
-
     [93109] = true, -- Major Slayer
 
+    -- Empower
     [61737] = true, -- Empower
 
     -------------------------------------

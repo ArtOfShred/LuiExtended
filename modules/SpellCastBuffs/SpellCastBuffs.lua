@@ -23,7 +23,6 @@ local moduleName = LUIE.name .. "SpellCastBuffs"
 local hidePlayerEffects = { } -- Table of Effects to hide on Player - generated on load or updated from Menu
 local hideTargetEffects = { } -- Table of Effects to hide on Target - generated on load or updated from Menu
 local debuffDisplayOverrideId = { } -- Table of Effects (by id) that should show on the target regardless of who applied them.
-local debuffDisplayOverrideName = { } -- Table of Effects (by name) that should show on the target regardless of who applied them.
 
 local windowTitles = {
     playerb             = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS),
@@ -386,7 +385,6 @@ function SpellCastBuffs.Initialize(enabled)
     SpellCastBuffs.Reset()
     SpellCastBuffs.UpdateContextHideList()
     SpellCastBuffs.UpdateDisplayOverrideIdList()
-    SpellCastBuffs.UpdateDisplayOverrideNameList()
     SpellCastBuffs.UpdatePotionList()
     SpellCastBuffs.UpdatePoisonList()
     SpellCastBuffs.UpdateStatusEffectList()
@@ -1579,7 +1577,7 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
 
     -- If the source of the buff isn't the player or the buff is not on the AbilityId or AbilityName override list then we don't display it
     if unitTag ~= "player" then
-        if effectType == 2 and not (castByPlayer == 1) and not (debuffDisplayOverrideId[abilityId] or debuffDisplayOverrideName[effectName]) then
+        if effectType == 2 and not (castByPlayer == 1) and not (debuffDisplayOverrideId[abilityId] or Effects.DebuffDisplayOverrideName[effectName]) then
             return
         end
     end
@@ -3661,23 +3659,14 @@ function SpellCastBuffs.UpdateDisplayOverrideIdList()
     for k, v in pairs(Effects.DebuffDisplayOverrideIdAlways) do
         debuffDisplayOverrideId[k] = v
     end
-end
-
--- Called from the menu and on initialize to build the table of effects we should show regardless of source (by name).
-function SpellCastBuffs.UpdateDisplayOverrideNameList()
-
-    -- Clear the list
-    debuffDisplayOverrideName = { }
-
-    -- Add effects from table if enabled
+    -- Major/Minor
     if SpellCastBuffs.SV.ShowSharedMajorMinor then
-        for k, v in pairs(Effects.DebuffDisplayOverrideName) do
-            debuffDisplayOverrideName[k] = v
+        for k, v in pairs(Effects.DebuffDisplayOverrideMajorMinor) do
+            for k, v in pairs(Effects.DebuffDisplayOverrideMajorMinor) do
+                debuffDisplayOverrideId[k] = v
+            end
         end
     end
-    -- Always show Off Balance since a lot of Off Balance effects self apply
-    debuffDisplayOverrideName[Abilities.Skill_Off_Balance] = true
-
 end
 
 -- Called from the menu and on initialize to build potion effect generic icon overrides.
@@ -3718,7 +3707,7 @@ end
 
 -- Called from the menu and on initialize to build status effect generic icon overrides.
 function SpellCastBuffs.UpdateStatusEffectList(menu)
-    if LUIE.SpellCastBuffs.SV.GenericStatusEffect then
+    --[[if LUIE.SpellCastBuffs.SV.GenericStatusEffect then
         for k, v in pairs(Effects.StatusEffectIconTable) do
             if v.normalize then
                 Effects.EffectOverride[k].icon = v.normalize
@@ -3731,7 +3720,7 @@ function SpellCastBuffs.UpdateStatusEffectList(menu)
                 Effects.EffectOverride[k].icon = v.icon
             end
         end
-    end
+    end]]--
 end
 
 -- Called from the menu and on initialize to build major/minor generic icon overrides.

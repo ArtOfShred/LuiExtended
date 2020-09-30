@@ -188,8 +188,8 @@ local strings = {
     SI_LUIE_SKILL_MAJOR_COWARDICE_TP =                   "Reduce Weapon and Spell Damage by |cFFFFFF430|r.",
     SI_LUIE_SKILL_MINOR_MANGLE_TP =                      "Reduce Max Health by |cFFFFFF10|r%.",
     SI_LUIE_SKILL_MINOR_TIMIDITY_TP =                    "Consume |cFFFFFF1|r Ultimate every |cFFFFFF1.5|r seconds while in combat.",
-    SI_LUIE_SKILL_MINOR_BRITTLE =                        "Increase Critical Damage taken by |cFFFFFF10|r%.",
-    SI_LUIE_SKILL_MAJOR_BRITTLE =                        "Increase Critical Damage taken by |cFFFFFF20|r%.",
+    SI_LUIE_SKILL_MINOR_BRITTLE_TP =                     "Increase Critical Damage taken by |cFFFFFF10|r%.",
+    SI_LUIE_SKILL_MAJOR_BRITTLE_TP =                     "Increase Critical Damage taken by |cFFFFFF20|r%.",
 
     -- Slayer / Aegis
     SI_LUIE_SKILL_MINOR_SLAYER_TP =                      "Your attacks deal |cFFFFFF5|r% more damage to Dungeon, Trial, and Arena enemies.",
