@@ -116,8 +116,8 @@ SpellCastBuffs.Defaults = {
     StealthStateTarget                  = true,
     DisguiseStatePlayer                 = true,
     DisguiseStateTarget                 = true,
-    ShowSprint                          = true,
-    ShowGallop                          = true,
+    --ShowSprint                          = true,
+    --ShowGallop                          = true,
     ShowResurrectionImmunity            = true,
     ShowRecall                          = true,
     ShowWerewolf                        = true,
@@ -155,9 +155,6 @@ SpellCastBuffs.Defaults = {
     TooltipSticky                       = 0,
     TooltipAbilityId                    = false,
     TooltipBuffType                     = false,
-    GenericPotion                       = false,
-    GenericPoison                       = true,
-    GenericStatusEffect                 = false,
     GenericMajorMinor                   = false,
     ShowSharedEffects                   = true,
     ShowSharedMajorMinor                = true,
@@ -385,9 +382,6 @@ function SpellCastBuffs.Initialize(enabled)
     SpellCastBuffs.Reset()
     SpellCastBuffs.UpdateContextHideList()
     SpellCastBuffs.UpdateDisplayOverrideIdList()
-    SpellCastBuffs.UpdatePotionList()
-    SpellCastBuffs.UpdatePoisonList()
-    SpellCastBuffs.UpdateStatusEffectList()
     SpellCastBuffs.UpdateMajorMinorList()
 
     -- Register events
@@ -2500,16 +2494,6 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
         if abilityId == 26406 then g_ignoreAbilityId[abilityId] = true end
         SpellCastBuffs.EffectsList[context][ abilityId ] = nil
         SpellCastBuffs.EffectsList.player2[ abilityId ] = nil
-        --[[ TODO: Remove this block (this id no longer exists)
-        if abilityId == 973 and not SpellCastBuffs.SV.ShowSprint then
-            return
-        end
-        ]]--
-        --[[ TODO: Remove this block (this id no longer exists)
-        if abilityId == 33439 and not SpellCastBuffs.SV.ShowGallop then
-            return
-        end
-        ]]--
 
         local toggle = Effects.IsToggle[abilityId] or false
 
@@ -3667,60 +3651,6 @@ function SpellCastBuffs.UpdateDisplayOverrideIdList()
             end
         end
     end
-end
-
--- Called from the menu and on initialize to build potion effect generic icon overrides.
-function SpellCastBuffs.UpdatePotionList(menu)
-    --[[if LUIE.SpellCastBuffs.SV.GenericPotion then
-        for k, v in pairs(Effects.PotionIconTable) do
-            if v.normalize then
-                Effects.EffectOverride[k].icon = v.normalize
-            end
-        end
-    -- Minimize the amount of iterating we need to do, we only need to toggle back if we're disabling the setting from the menu.
-    elseif menu and not LUIE.SpellCastBuffs.SV.GenericPotion then
-        for k, v in pairs(Effects.PotionIconTable) do
-            if v.icon then
-                Effects.EffectOverride[k].icon = v.icon
-            end
-        end
-    end]]--
-end
-
--- Called from the menu and on initialize to build poison effect generic icon overrides.
-function SpellCastBuffs.UpdatePoisonList(menu)
-    --[[if LUIE.SpellCastBuffs.SV.GenericPoison then
-        for k, v in pairs(Effects.PoisonIconTable) do
-            if v.normalize then
-                Effects.EffectOverride[k].icon = v.normalize
-            end
-        end
-    -- Minimize the amount of iterating we need to do, we only need to toggle back if we're disabling the setting from the menu.
-    elseif menu and not LUIE.SpellCastBuffs.SV.GenericPoison then
-        for k, v in pairs(Effects.PoisonIconTable) do
-            if v.icon then
-                Effects.EffectOverride[k].icon = v.icon
-            end
-        end
-    end]]--
-end
-
--- Called from the menu and on initialize to build status effect generic icon overrides.
-function SpellCastBuffs.UpdateStatusEffectList(menu)
-    --[[if LUIE.SpellCastBuffs.SV.GenericStatusEffect then
-        for k, v in pairs(Effects.StatusEffectIconTable) do
-            if v.normalize then
-                Effects.EffectOverride[k].icon = v.normalize
-            end
-        end
-    -- Minimize the amount of iterating we need to do, we only need to toggle back if we're disabling the setting from the menu.
-    elseif menu and not LUIE.SpellCastBuffs.SV.GenericStatusEffect then
-        for k, v in pairs(Effects.StatusEffectIconTable) do
-            if v.icon then
-                Effects.EffectOverride[k].icon = v.icon
-            end
-        end
-    end]]--
 end
 
 -- Called from the menu and on initialize to build major/minor generic icon overrides.

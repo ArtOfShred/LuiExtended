@@ -1252,39 +1252,6 @@ function SpellCastBuffs.CreateSettings()
         name = GetString(SI_LUIE_LAM_BUFF_NORMALIZE_HEADER),
         controls = {
             {
-                -- Potion - Use Major/Minor Icons
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_GENERIC_POTION),
-                tooltip = GetString(SI_LUIE_LAM_GENERIC_POTION_TP),
-                getFunc = function() return Settings.GenericPotion end,
-                setFunc = function(value) Settings.GenericPotion = value SpellCastBuffs.UpdatePotionList(true) SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = Defaults.GenericPotion,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-            {
-                -- Posion - Use Major/Minor Icons
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_GENERIC_POISON),
-                tooltip = GetString(SI_LUIE_LAM_GENERIC_POISON_TP),
-                getFunc = function() return Settings.GenericPoison end,
-                setFunc = function(value) Settings.GenericPoison = value SpellCastBuffs.UpdatePoisonList(true) SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = Defaults.GenericPoison,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-            {
-                -- Status Effects - Use Major/Minor Icons
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_GENERIC_STATUS),
-                tooltip = GetString(SI_LUIE_LAM_GENERIC_STATUS_TP),
-                getFunc = function() return Settings.GenericStatusEffect end,
-                setFunc = function(value) Settings.GenericStatusEffect = value SpellCastBuffs.UpdateStatusEffectList(true) SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = Defaults.GenericStatusEffect,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-            {
                 -- Slayer/Courage Etc Use Default
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_GENERIC_MAJOR_MINOR),
