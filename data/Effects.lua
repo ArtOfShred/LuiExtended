@@ -3747,6 +3747,7 @@ Effects.EffectOverride = {
     [71671] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_light_attack.dds', hide = true, tooltip = Tooltips.Set_Morkuldin }, -- Morkuldin (Morkuldin)
     [71678] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_light_attack.dds' }, -- Light Attack (Morkuldin)
     [71679] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_cleave.dds' }, -- Cleave (Morkuldin)
+    [148882] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_oblivion_blue.dds', tooltip = Tooltips.Generic_Magic, tooltipValue2 = 2 }, -- Oblivion's Foe (of Oblivion's Foe)
     [61784] = { icon = 'LuiExtended/media/icons/abilities/ability_set_redistributor.dds', hide = true }, -- Redistribution
     [49126] = { icon = 'LuiExtended/media/icons/abilities/ability_set_shalidors_curse.dds' }, -- Shalidor's Curse
     [75726] = { icon = 'LuiExtended/media/icons/abilities/ability_set_tavas_favor.dds', tooltip = Tooltips.Set_Tavas_Favor }, -- Tava's Favor
@@ -3998,14 +3999,12 @@ Effects.EffectOverride = {
     [129477] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Immortal_Warrior, Abilities.Set_Cooldown), tooltip = Tooltips.Generic_Set_ICD, tooltipValue2 = Abilities.Set_Immortal_Warrior, unbreakable = 1 }, -- Major Protection (Immortal Yokeda)
     [86907] = { icon = 'LuiExtended/media/icons/abilities/ability_set_defending_warrior.dds' }, -- Defending Warrior (Resilient Yokeda)
     [50992] = { icon = 'LuiExtended/media/icons/abilities/ability_set_defending_warrior.dds' }, -- Defending Warrior (Resilient Yokeda)
-    [76618] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_aegis.dds', tooltip = Tooltips.Skill_Minor_Aegis }, -- Minor Aegis (Eternal Yokeda) -- TODO: MOVE
     [127235] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_warrior.dds' }, -- Eternal Warrior (Eternal Yokeda)
     [127236] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_warrior.dds' }, -- Eternal Warrior (Eternal Yokeda)
 
     -- Trial Sets (Aetherian Archive)
     [51315] = { icon = 'LuiExtended/media/icons/abilities/ability_set_destructive_mage.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Set_Destructive_Mage }, -- Destructive Mage (Aether... of Destruction)
     [51320] = { icon = 'LuiExtended/media/icons/abilities/ability_set_destructive_mage.dds', name = Abilities.Set_Destructive_Mage }, -- Mage Destruction Bomb (Aether... of Destruction)
-    [76617] = { icon = 'esoui/art/icons/ability_buff_minor_erosion.dds', tooltip = Tooltips.Skill_Minor_Slayer }, -- Minor Slayer (of the Infallible Aether) -- TODO: MOVE
 
     -- Trial Sets (Sanctum Ophidia)
     [51241] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vipers_sting.dds' }, -- Poisonous Serpent (Ophidian ... of Venom)
@@ -4197,9 +4196,9 @@ Effects.EffectOverride = {
     [61726] = { tooltip = Tooltips.Skill_Minor_Defile }, -- Minor Defile
     [61727] = { tooltip = Tooltips.Skill_Major_Defile }, -- Major Defile
     [88401] = { tooltip = Tooltips.Skill_Minor_Magickasteal }, -- Minor Magickasteal
-    [88402] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal -- Steal
+    [88402] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal
     [86304] = { tooltip = Tooltips.Skill_Minor_Lifesteal }, -- Minor Lifesteal
-    [86305] = { icon = 'esoui/art/icons/ability_buff_minor_lifesteal.dds' }, -- Minor Lifesteal -- Steal
+    [86305] = { icon = 'esoui/art/icons/ability_buff_minor_lifesteal.dds' }, -- Minor Lifesteal
     [79907] = { tooltip = Tooltips.Skill_Minor_Enveration }, -- Minor Enervation
     [79895] = { tooltip = Tooltips.Skill_Minor_Uncertainty }, -- Minor Uncertainty
     [79867] = { tooltip = Tooltips.Skill_Minor_Cowardice }, -- Minor Cowardice
@@ -4210,9 +4209,9 @@ Effects.EffectOverride = {
     [145977] = { tooltip = Tooltips.Skill_Major_Brittle }, -- Major Brittle (Unused)
 
     -- Slayer / Aegis
-    [76618] = { tooltip = Tooltips.Skill_Minor_Aegis }, -- Minor Aegis
+    [76618] = { tooltip = Tooltips.Skill_Minor_Aegis, icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_aegis.dds' }, -- Minor Aegis
     [93123] = { tooltip = Tooltips.Skill_Major_Aegis }, -- Major Aegis
-    [76617] = { tooltip = Tooltips.Skill_Minor_Slayer }, -- Minor Slayer
+    [76617] = { tooltip = Tooltips.Skill_Minor_Slayer, icon = 'esoui/art/icons/ability_buff_minor_erosion.dds' }, -- Minor Slayer
     [93109] = { tooltip = Tooltips.Skill_Major_Slayer }, -- Major Slayer
 
     -- Empower
@@ -6786,7 +6785,6 @@ Effects.EffectOverride = {
 
     [63153] = { hide = true }, -- Guard Immunities (Justice Guard)
     [63174] = { hide = true }, -- Guard Speed Boost (Justice Guard)
-    [63148] = { icon = 'esoui/art/icons/ability_debuff_major_defile.dds', tooltip = Abilities.Skill_Criminals_Bane }, -- Major Defile (Justice Guard)
     [63168] = { tooltip = Tooltips.Generic_Immobilize }, -- Cage Talons (Justice Guard 1H + 2H)
     [63095] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_focused_strike.dds' }, -- Focused Strike (Justice Guard)
     [63157] = { icon = 'esoui/art/icons/ability_1handed_005.dds', name = Abilities.Skill_Power_Bash }, -- Heavy Blow (Justice Guard)
@@ -6960,10 +6958,9 @@ Effects.EffectOverride = {
     [34706] = { tooltip = Tooltips.Generic_Immobilize }, -- Dark Talons (Dragonknight)
     [44227] = { icon = 'esoui/art/icons/ability_dragonknight_006.dds'}, -- Dragonknight Standard (Dragonknight - Elite)
     [44228] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1 }, -- Dragonknight Standard (Dragonknight - Elite)
-    [44229] = { icon = 'esoui/art/icons/ability_debuff_major_defile.dds', duration = 0, groundLabel = true, tooltip = Abilities.Skill_Dragonknight_Standard }, -- Major Defile (Dragonknight - Elite)
     [52041] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_blink_strike.dds' }, -- Blink Strike (Dragonknight  - Elite)
-    [52045] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_blink_strike.dds' }, -- Blink Strike (Dragonknight  - Elite)
     [52051] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_blink_strike.dds', tooltip = Tooltips.Generic_Knockdown }, -- Blink Strike (Dragonknight  - Elite)
+    [136500] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_blink_strike.dds' }, -- Blink Strike (Dragonknight  - Elite)
 
     -- Thundermaul
     [29510] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_hammer_2h_thunder_hammer.dds' }, -- Thunder Hammer (Thundermaul)
@@ -10014,12 +10011,11 @@ Effects.EffectOverride = {
     -- Dragonstar Arena (Stage 2) - The Frozen Ring
     [53329] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_warmth.dds', name = Abilities.Skill_Warmth, duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = Tooltips.Skill_Warming_Aura }, -- Warming Aura
 
-    [56755] = { icon = 'esoui/art/icons/ability_1handed_002_b.dds' }, -- Pierce Armor (Sovngarde Brawler)
-    [56757] = { icon = 'esoui/art/icons/ability_1handed_002_b.dds', name = Abilities.Skill_Pierce_Armor, tooltip = Tooltips.Skill_Pierce_Armor_NPC }, -- Puncture (Sovngarde Brawler)
+    [56757] = { name = Abilities.Skill_Pierce_Armor, tooltip = Tooltips.Skill_Pierce_Armor_NPC }, -- Puncture (Sovngarde Brawler)
 
     [56758] = { icon = 'esoui/art/icons/ability_1handed_001_b.dds' }, -- Deep Slash (Sovngarde Brawler)
-    [56759] = { icon = 'esoui/art/icons/ability_debuff_minor_maim.dds', name = Abilities.Skill_Minor_Maim, tooltip = Abilities.Skill_Deep_Slash }, -- Deep Slash (Sovngarde Brawler)
-    [56760] = { icon = 'esoui/art/icons/ability_1handed_001_b.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 60 }, -- Deep Slash (Sovngarde Brawler)
+    [56759] = { icon = 'esoui/art/icons/ability_1handed_001_b.dds', tooltip = Tooltips.Skill_Deep_Slash_NPC }, -- Deep Slash (Sovngarde Brawler)
+    [56760] = { icon = 'esoui/art/icons/ability_1handed_001_b.dds', tooltip = Tooltips.Skill_Deep_Slash_NPC, hideReduce = true }, -- Deep Slash (Sovngarde Brawler)
 
     [53341] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds' }, -- Biting Cold (Biting Cold)
     [53342] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds' }, -- Biting Cold (Biting Cold)
@@ -10067,7 +10063,7 @@ Effects.EffectOverride = {
     [53292] = { name = Abilities.Skill_Weakness_to_Elements, tooltip = Tooltips.Skill_Elemental_Susceptibility_NPC }, -- Elemental Susceptibility (Katti Ice-Turner)
 
     [53301] = { icon = 'esoui/art/icons/ability_destructionstaff_008_b.dds', name = Abilities.Skill_Frost_Pulsar }, -- Icy Pulsar (Katti Ice-Turner)
-    [53302] = { icon = 'esoui/art/icons/ability_debuff_minor_mangle.dds', name = Abilities.Skill_Minor_Mangle, tooltip = Abilities.Skill_Frost_Pulsar }, -- Icy Pulsar (Katti Ice-Turner)
+    [53302] = { icon = 'esoui/art/icons/ability_debuff_minor_mangle.dds', name = Abilities.Skill_Minor_Mangle, tooltip = Tooltips.Skill_Minor_Mangle }, -- Icy Pulsar (Katti Ice-Turner)
 
     [8243] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_swipe.dds' }, -- Strike (Corprus Husk)
     [8244] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_pound.dds' }, -- Devastate (Corprus Husk)
@@ -10834,12 +10830,10 @@ Effects.EffectOverride = {
     [35847] = { hide = true }, -- Dummy
 
     [999013] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_enraged_fortitude.dds', name = Abilities.Skill_Resilience, tooltip = Tooltips.Skill_Resilience }, -- FAKE AURA FOR DAEDROTH DAMAGE REDUCTION TO AOE
-    [28570] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_levitate_blue.dds' }, -- Levitate (High Kinlord Rilis)
-    [28462] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_levitate_red.dds' }, -- Levitate (High Kinlord Rilis)
+    [28570] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_levitate_blue.dds', name = Abilities.Skill_Levitate, unbreakable = 1, tooltip = Tooltips.Skill_Levitating_Dominance }, -- Levitate (High Kinlord Rilis)
+    [28462] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_levitate_red.dds', name = Abilities.Skill_Levitate, unbreakable = 1, tooltip = Tooltips.Skill_Levitate_Suffering }, -- Levitate (High Kinlord Rilis)
 
     [28715] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ranged_shock.dds' }, -- Daedric Bolt (High Kinlord Rilis)
-    --[28772] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_levitate_blue.dds', name = Abilities.Skill_Levitate, unbreakable = 1, tooltip = Tooltips.Skill_Levitating_Dominance }, -- Stun (High Kinlord Rilis) -- TODO: Fix
-    --[28774] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_levitate_red.dds', name = Abilities.Skill_Levitate, unbreakable = 1, tooltip = Tooltips.Skill_Levitate_Suffering }, -- Stun (High Kinlord Rilis) -- TODO: Fix
     [28475] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_curse_of_suffering.dds', tooltip = Tooltips.Skill_Curse_of_Suffering, unbreakable = 1, duration = 0 }, -- Curse of Suffering (High Kinlord Rilis)
     [48308] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_curse_of_suffering.dds' }, -- Curse of Suffering (High Kinlord Rilis)
     [28571] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_curse_of_dominance.dds', tooltip = Tooltips.Skill_Curse_of_Dominance, unbreakable = 1, duration = 0 }, -- Curse of Dominance (High Kinlord Rilis)
@@ -12356,8 +12350,8 @@ Effects.FakeExternalDebuffs = {
     -- Banished Cells II
     [35680] = { duration = 2250 }, -- Immolating Bite (Maw of the Infernal)
     [27828] = { duration = 2500 }, -- Crushing Blow (Keeper Voranil)
-    --[28772] = { duration = 5000 }, -- Stun (High Kinlord Rilis) -- TODO: Fix
-    --[28774] = { duration = 5000 }, -- Stun (High Kinlord Rilis) -- TODO: Fix
+    [28570] = { duration = 5000 }, -- Levitate (High Kinlord Rilis)
+    [28462] = { duration = 5000 }, -- Levitate (High Kinlord Rilis)
 
     -- Elden Hollow I
     [25310] = { duration = 2500 }, -- Executioners Strike (Akash gra-Mal)

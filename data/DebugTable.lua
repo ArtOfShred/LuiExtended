@@ -1480,6 +1480,7 @@ LUIE.DebugAuras = {
     [79103] = true, -- Pelinal's Aptitude (Pelinal's)
 
     [32756] = true, -- Oblivion's Foe (of Oblivion's Foe)
+    [148882] = true, -- Oblivion's Foe (of Oblivion's Foe)
 
     [32801] = true, -- Orgnum's Scales (Orgnum's Scales)
 
@@ -8382,6 +8383,7 @@ LUIE.DebugAuras = {
     [52041] = true, -- Blink Strike -- Dragonknight
     [52045] = true, -- Blink Strike -- Dragonknight
     [52051] = true, -- Blink Strike -- Dragonknight
+    [136500] = true, -- Blink Strike -- Dragonknight
 
     [29510] = true, -- Thunder Hammer -- Thundermaul
     [29511] = true, -- Thunder Hammer -- Thundermaul

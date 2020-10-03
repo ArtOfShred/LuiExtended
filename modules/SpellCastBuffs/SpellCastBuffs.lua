@@ -1546,8 +1546,9 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
 
     --d(effectName .. " - " .. castByPlayer)
 
-    -- Change the effect type before we determine if we want to filter anything else.
+    -- Change the effect type / name before we determine if we want to filter anything else.
     if Effects.EffectOverride[abilityId] then
+        effectName = Effects.EffectOverride[abilityId].name or effectName
         effectType = Effects.EffectOverride[abilityId].type or effectType
         -- Bail out now if we hide ground snares and other effects because we are showing Damaging Auras (Only do this for the player, we don't want effects on targets to stop showing up).
         if Effects.EffectOverride[abilityId].hideGround and SpellCastBuffs.SV.GroundDamageAura and unitTag == "player" then
@@ -1681,7 +1682,6 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
             return
         end
         iconName = Effects.EffectOverride[abilityId].icon or iconName
-        effectName = Effects.EffectOverride[abilityId].name or effectName
         unbreakable = Effects.EffectOverride[abilityId].unbreakable or 0
         stackCount = Effects.EffectOverride[abilityId].stack or stackCount
         -- Destroy other effects of the same type if we don't want to show duplicates at all.
@@ -1999,7 +1999,7 @@ function SpellCastBuffs.OnCombatAddNameEvent( eventCode, result, isError, abilit
                 if stack then
                     Effects.AddNameAura[name][2].stack = stack + 1
                 else
-                    Effects.AddNameAura[name][2].stack = Effects.AddStackOnEvent[ability]
+                    Effects.AddNameAura[name][2].stack = Effects.AddStackOnEvent[abilityId]
                 end
             end
             -- Specific to Crypt of Hearts I (Ignite Colossus)

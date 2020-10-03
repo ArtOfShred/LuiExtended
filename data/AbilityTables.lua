@@ -9,10 +9,14 @@ local AbilityTables = {
     -- GENERIC BUFFS & DEBUFFS ---------------------------
     -- ---------------------------------------------------
 
-    Skill_Off_Balance                 = 14062,
-    Skill_Off_Balace_Immunity         = 134599,
-    Skill_Major_Vulnerability_Immunity = GetString(SI_LUIE_SKILL_GENERIC_MAJOR_VULNERABILITY_IMMUNITY),
-    Skill_Hindrance                   = 46210,
+    -- Major/Minor
+    Skill_Minor_Mangle                  = 61733,
+
+    -- Generic
+    Skill_Off_Balance                   = 14062,
+    Skill_Off_Balace_Immunity           = 134599,
+    Skill_Major_Vulnerability_Immunity  = GetString(SI_LUIE_SKILL_GENERIC_MAJOR_VULNERABILITY_IMMUNITY),
+    Skill_Hindrance                     = 46210,
 
     -- ---------------------------------------------------
     -- INNATE ABILITIES ----------------------------------
@@ -351,7 +355,6 @@ local AbilityTables = {
     Skill_Fiery_Grip                  = 20492,
     Skill_Empowering_Chains           = 20499,
     Skill_Inferno                     = 28967,
-    Skill_Dragonknight_Standard       = 28988,
     Skill_Shackle                     = 32905,
     Skill_Dragon_Blood                = 29004,
     Skill_Inhale                      = 31837,
@@ -454,8 +457,8 @@ local AbilityTables = {
     Skill_Cleave                      = 20919,
 
     -- One Hand & Shield
-    Skill_Puncture                    = 28306,
     Skill_Pierce_Armor                = 38250,
+    Skill_Puncture                    = 28306,
     Skill_Deep_Slash                  = 38268,
     Skill_Shield_Charge               = 28719,
     Skill_Invasion                    = 38405,
@@ -643,7 +646,6 @@ local AbilityTables = {
     Skill_Void_Burst                  = 36987,
 
     -- Justice
-    Skill_Criminals_Bane              = 63145,
     Skill_Heavy_Blow                  = 63157,
     Skill_Mighty_Charge               = GetString(SI_LUIE_SKILL_MIGHTY_CHARGE),
     Skill_Throw_Dagger                = 28499,

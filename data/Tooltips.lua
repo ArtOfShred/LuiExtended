@@ -1344,6 +1344,7 @@ LUIE.Data.Tooltips = {
     Skill_Expert_Hunter_NPC                         = GetString(SI_LUIE_SKILL_EXPERT_HUNTER_NPC_TP),
     Skill_Circle_of_Protection_NPC                  = GetString(SI_LUIE_SKILL_CIRCLE_OF_PROTECTION_NPC_TP),
     Skill_Pierce_Armor_NPC                          = GetString(SI_LUIE_SKILL_PIERCE_ARMOR_NPC_TP),
+    Skill_Deep_Slash_NPC                            = GetString(SI_LUIE_SKILL_DEEP_SLASH_NPC_TP),
     Skill_Biting_Cold                               = GetString(SI_LUIE_SKILL_BITING_COLD_TP),
     Skill_Biting_Cold_Vet                           = GetString(SI_LUIE_SKILL_BITING_COLD_VET_TP),
     Skill_Frost_Clench_NPC                          = GetString(SI_LUIE_SKILL_FROST_CLENCH_NPC_TP),
