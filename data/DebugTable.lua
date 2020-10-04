@@ -770,6 +770,18 @@ LUIE.DebugAuras = {
     [85501] = true, -- Increased Experience (Crown Crate Experience Scroll)
     [85502] = true, -- Increased Experience (Major Crown Crate Experience Scroll)
     [85503] = true, -- Increased Experience (Grand Crown Crate Experience Scroll)
+    [147466] = true, -- Alliance Skill Gain (Alliance War Skill Line Scroll)
+    [137733] = true, -- Alliance Skill Gain (Alliance War Skill Line Scroll, Major)
+    [147467] = true, -- Alliance Skill Gain (Alliance War Skill Line Scroll, Grand)
+    [147687] = true, -- Alliance Skill Gain 50% Boost (Colovian War Torte)
+    [147733] = true, -- Alliance Skill Gain 100% Boost (Molten War Torte)
+    [147734] = true, -- Alliance Skill Gain 100% Boost (White-Gold War Torte)
+
+    -- Experience Item Crafting
+    [147793] = true, -- Create 100% AvA Skill Boost R (Chef Arquitius's Torte Dissertation)
+    [147795] = true, -- 88449 Stun (Chef Arquitius's Torte Dissertation)
+    [147841] = true, -- Create 150% AvA Skill Boost R (Chef Arquitius's Lost Thesis)
+    [147850] = true, -- 88449 Stun (Chef Arquitius's Lost Thesis)
 
     -- Other
     [113432] = true, -- 68235 Stun (Nascent Indrik)
@@ -867,6 +879,8 @@ LUIE.DebugAuras = {
     --[126710] = true, -- 68235 Stun (Siege of Cyrodiil Recommendation)
     [124622] = true, -- Alliance Standard-Bearer Emote (Alliance Standard-Bearer's License)
     [124624] = true, -- 68235 Stun (Alliance Standard-Bearer's License)
+    --[148419] = true, -- Reachman Emote (Siege of Cyrodiil Commendation)
+    --[148421] = true, -- 68235 Stun (Siege of Cyrodiil Commendation)
 
     -------------------------------------
     -- MEMENTOS -------------------------
@@ -1610,6 +1624,12 @@ LUIE.DebugAuras = {
     [137126] = true, -- Dragon's Appetite (of Dragon's Appetite)
     [135878] = true, -- Dragon's Appetite (of Dragon's Appetite)
 
+    [147321] = true, -- Aetherial Ascension (of Aetherial Ascension)
+    [147300] = true, -- Red Eagle's Fury (of Red Eagle's Fury)
+    [147388] = true, -- Legacy of Karth (Karth's)
+    [147389] = true, -- Legacy of Karth (Karth's)
+    [147390] = true, -- Karth's Rot (Karth's)
+
     -- Overland Sets (All Types)
     [85541] = true, -- Armor of the Trainee (of the Trainee)
 
@@ -1698,6 +1718,10 @@ LUIE.DebugAuras = {
     [135652] = true, -- Winter's Respite (of Winter's Respite)
     [135659] = true, -- Winter's Respite (of Winter's Respite)
     [135658] = true, -- Winter's Respite (of Winter's Respite)
+
+    [147138] = true, -- Voidcaller (of the Voidcaller)
+    [147141] = true, -- Voidcaller (of the Voidcaller)
+    [147140] = true, -- Voidcaller (of the Voidcaller)
 
     -- Overland Sets (Medium)
 
@@ -1788,6 +1812,8 @@ LUIE.DebugAuras = {
     [135690] = true, -- Hunter's Venom (Venomous)
     [137526] = true, -- Hunter's Venom (Venomous)
 
+    [147145] = true, -- Witch-Knight's Defiance (Witch-Knight's)
+
     -- Overland Sets (Heavy)
 
     [32815] = true, -- Meridia's Blessed Armor (Blessed)
@@ -1863,6 +1889,9 @@ LUIE.DebugAuras = {
     [129616] = true, -- FX Holder (Senchal Defender's)
     [129509] = true, -- Senchal Defender (Senchal Defender's)
     [129523] = true, -- Senchal Defender (Senchal Defender's)
+
+    [147220] = true, -- Radiant Bastion (of the Radiant Bastion)
+    [147221] = true, -- Radiant Bastion (of the Radiant Bastion)
 
     -- Dungeon Sets (Light)
 
@@ -2605,6 +2634,28 @@ LUIE.DebugAuras = {
     [32806] = true, -- Robes of Destruction Mastery (of Destruction Mastery)
     [29114] = true, -- Footman's Fortune (of the Footman)
     [29096] = true, -- Minor Mending (of the Healer)
+
+    -- Vatesharn Hollows Sets
+    [147668] = true, -- Hex Siphon (Hex Siphoner's)
+    [147676] = true, -- Hex Siphon (Hex Siphoner's)
+    [147675] = true, -- Hex Siphon (Hex Siphoner's)
+    [147677] = true, -- Hex Siphon (Hex Siphoner's)
+
+    [147681] = true, -- Pestilent Host (of the Pestilent Host)
+    [147683] = true, -- Pestilent Host (of the Pestilent Host)
+    [147682] = true, -- Pestilent Host (of the Pestilent Host)
+    [147686] = true, -- Pestilent Host (of the Pestilent Host)
+
+    [147690] = true, -- Explosive Rebuke (of Explosive Rebuke)
+    [147692] = true, -- Explosive Rebuke (of Explosive Rebuke)
+    [147694] = true, -- Explosive Rebuke (of Explosive Rebuke)
+    [147693] = true, -- Explosive Rebuke (of Explosive Rebuke)
+
+    [147414] = true, -- Ring of the Pale Order (Ring of the Pale Order)
+    [147415] = true, -- Ring of the Pale Order (Ring of the Pale Order)
+
+    [147459] = true, -- Pearls of Ehlnofey (Pearls of Ehlnofey)
+    [147462] = true, -- Pearls of Ehlnofey (Pearls of Ehlnofey)
 
     -- Disguises
 

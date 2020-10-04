@@ -111,6 +111,8 @@ local strings = {
     SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP =              "Increase Experience Points earned by |cFFFFFF<<1>>|r% for |cFFFFFF30|r minutes.",
     SI_LUIE_SKILL_EXPERIENCE_HOUR_TP =                   "Increase Experience Points earned by |cFFFFFF<<1>>|r% for |cFFFFFF<<2>>|r <<2[hour/hours]>>.",
     SI_LUIE_SKILL_EXPERIENCE_PELINAL =                   "Increase Alliance Points earned by |cFFFFFF100|r% and Experience Points earned from player kills by |cFFFFFF100|r% for |cFFFFFF<<1>>|r <<1[hour/hours]>>.",
+    SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HALF_HOUR_TP =     "Increase Alliance War Skill Line progression by |cFFFFFF<<1>>|r% for |cFFFFFF30|r minutes.",
+    SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HOUR_TP =          "Increase Alliance War Skill Line progression by |cFFFFFF<<1>>|r% for |cFFFFFF1|r hour.",
 
     -- Misc
     SI_LUIE_SKILL_FILLET_FISH =                          "Fillet Fish",
@@ -1028,6 +1030,7 @@ local strings = {
     SI_LUIE_SET_STONE_HUSK_DOT_TP =                      "Tethered for |cFFFFFF<<1>>|r <<1[second/seconds]>>. You and your allies touching the tether take physical damage every |cFFFFFF1|r second.\n\nEach time this effect deals damage your attacker gains a stack of Husk Drain.",
     SI_LUIE_SET_STONE_HUSK_HUSK_DRAIN_TP =               "Gaining stacks each time the tether deals damage.\n\nWhen the tether ends, you consume the stacks and gain |cFFFFFF30|r Weapon Damage per stack consumed for |cFFFFFF5|r seconds.",
     SI_LUEI_SET_STONE_HUSK_BUFF_TP =                     "Increase Weapon Damage by |cFFFFFF30|r per stack of Stone Husk consumed for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SET_VOIDCALLER_TP =                          "Increase Spell Damage by |cFFFFFF24|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>, stacking up to |cFFFFFF20|r times when you take damage.\n\nThis effect can occur once every half second.\n\nUpon reaching |cFFFFFF20|r stacks, the duration is doubled but can no longer be refreshed.",
 
     -- Trial Sets
     SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP =            "Increase Weapon Critical by |cFFFFFF305|r for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF10|r times when you deal melee damage.\n\nThis effect can occur once every half second.",
@@ -1055,12 +1058,16 @@ local strings = {
     SI_LUIE_SKILL_SET_GALERIONS_REVENGE_TP =             "Marked for |cFFFFFF15|r seconds, stacking up to |cFFFFFF5|r times when your attacker damages you with a Light or Heavy Attack.\n\nAt |cFFFFFF5|r stacks, the Marks of Revenge detonate, dealing Magic Damage.\n\nYou can only receive a stack once per second.",
     SI_LUIE_SKILL_SET_VICECANON_OF_VENOM_TP =            "Afflicted with Poison Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nYour attacker heals for |cFFFFFF100|r% of the damage done.",
 
-    -- Alliance War Sets
+    -- Arena Sets
     SI_LUIE_SKILL_SET_SOLDIER_OF_ANGUISH_TP =            "Negate the next |cFFFFFF4830|r points of healing received for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_SET_SPELL_STRATEGIST_TP =              "Your attacker gains |cFFFFFF460|r additional Spell Damage against you for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_SET_SUCCESSION_TP =                    "Increase Spell Damage by |cFFFFFF492|r for <<1>> dealing attacks for |cFFFFFF4|r seconds.\n\nThis effect can occur once every |cFFFFFF4|r seconds per element.",
     SI_LUIE_SKILL_SET_PARA_BELLUM_TP =                   "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThe shield will replenish every |cFFFFFF10|r seconds.",
     SI_LUIE_SKILL_SET_GLORIOUS_DEFENDER_TP =             "Dodge the next dodgeable attack directed at you within |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_SET_HEX_SIPHON_TP =                    "Increase Spell Damage by |cFFFFFF88|r for |cFFFFFF8|r seconds, stacking up to |cFFFFFF6|r times for each enemy hit by Hex Siphon.",
+    SI_LUIE_SKILL_SET_EXPLOSIVE_REBUKE_TP =              "Tagged with an explosive bomb for |cFFFFFF<<1>>|r seconds.\n\nWhen your attacker hits you with a fully-charged Heavy Attack, the bomb detonates, dealing Flame Damage to you and all allies within |cFFFFFF8|r meters.",
+
+    -- Alliance War Sets
     SI_LUIE_SKILL_SET_CYRODIILS_LIGHT_TP =               "Your next Magicka ability used within |cFFFFFF30|r seconds will cost no Magicka.",
     SI_LUIE_SKILL_SET_MORAG_TONG_TP =                    "Increase damage taken from Poison and Disease attacks by |cFFFFFF10|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_SET_WARRIORS_FURY_TP =                 "Increase Weapon Damage by |cFFFFFF24|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>, stacking up to |cFFFFFF20|r times when you take damage.\n\nThis effect can occur once every half second.\n\nUpon reaching |cFFFFFF20|r stacks, the duration is doubled but can no longer be refreshed.",

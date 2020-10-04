@@ -421,6 +421,16 @@ LUIE.Data.Tooltips = {
     Experience_Seasonal_Event                       = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "100", "2"),
     Experience_Seasonal_Pelinal                     = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_PELINAL), "2"),
 
+    -- Alliance War Experience
+    Experience_Alliance_War_Skill                   = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HOUR_TP), "50"),
+    Experience_Alliance_War_Skill_Major             = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HOUR_TP), "100"),
+    Experience_Alliance_War_Skill_Grand             = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HOUR_TP), "150"),
+
+    Experience_Colovian_War_Torte                   = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HALF_HOUR_TP), "50"), -- Colovian War Torte
+    Experience_Molten_War_Torte                     = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HALF_HOUR_TP), "100"), -- Molten War Torte
+    Experience_White_Gold_War_Torte                 = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HALF_HOUR_TP), "150"), -- White-Gold War Torte
+
+
     -- Mementos
     Memento_Almalexias_Lantern                      = select(2, GetCollectibleInfo(341)),
     Memento_Bonesnap_Binding_Talisman               = select(2, GetCollectibleInfo(348)),
@@ -530,6 +540,7 @@ LUIE.Data.Tooltips = {
     Set_Coldharbours_Favorite_Damage                = GetString(SI_LUIE_SKILL_SET_COLDHARBOURS_FAVORITE_DAMAGE_TP),
     Set_Stuhns_Favor                                = GetString(SI_LUIE_SKILL_SET_STUHNS_FAVOR_TP),
     Set_Dragons_Appetite                            = GetString(SI_LUIE_SKILL_SET_DRAGONS_APPETITE_TP),
+    Set_Voidcaller                                  = GetString(SI_LUIE_SET_VOIDCALLER_TP),
 
     -- Light / Medium / Heavy Sets
     Set_Queens_Elegance_LA                          = GetString(SI_LUIE_SKILL_SET_ELEGANCE_LA_TP),
@@ -620,6 +631,8 @@ LUIE.Data.Tooltips = {
     Set_Succession_Shock                            = zo_strformat(GetString(SI_LUIE_SKILL_SET_SUCCESSION_TP), ShockDamage),
     Set_Succession_Frost                            = zo_strformat(GetString(SI_LUIE_SKILL_SET_SUCCESSION_TP), FrostDamage),
     Set_Para_Bellum                                 = GetString(SI_LUIE_SKILL_SET_PARA_BELLUM_TP),
+    Set_Hex_Siphon                                  = GetString(SI_LUIE_SKILL_SET_HEX_SIPHON_TP),
+    Set_Explosive_Rebuke                            = GetString(SI_LUIE_SKILL_SET_EXPLOSIVE_REBUKE_TP),
 
     -- Disguises
     Disguise_Kollopi_Essence                        = GetString(SI_LUIE_SKILL_DISGUISE_KOLLOPI_ESSENCE_TP),

@@ -3221,10 +3221,10 @@ Effects.EffectOverride = {
     [88475] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_green_r.dds', tooltip = Tooltips.Generic_Ravage_Stamina_Poison }, -- Drain Stamina (Crown Draining Poison)
     [88473] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_blue_g.dds', tooltip = Tooltips.Generic_Magicka_Regen, tooltipValue2 = 1 }, -- Restore Magicka (Crown Draining Poison)
     [88474] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_green_g.dds', tooltip = Tooltips.Generic_Stamina_Regen, tooltipValue2 = 1 }, -- Restore Stamina (Crown Draining Poison)
-    [81274] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_red_r.dds', tooltip = Tooltips.Generic_Poison, tooltipValue2 = 1 }, -- Ravage Health (Crown Lethal Poison) DEBUFF
-    [81275] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_orange_r.dds', tooltip = Tooltips.Generic_Poison, tooltipValue2 = 1 }, -- Creeping Ravage Health (Crown Lethal Poison) DEBUFF
     [88462] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_red_r.dds', tooltip = Tooltips.Generic_Immobilize }, -- Immobilize (Crown Trapping Poison)
     [88463] = { icon = 'esoui/art/icons/ability_debuff_minor_hindrance.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Hindrance (Crown Trapping Poison)
+    [81274] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_red_r.dds', tooltip = Tooltips.Generic_Poison, tooltipValue2 = 1 }, -- Ravage Health (Crown Lethal Poison) DEBUFF
+    [81275] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_orange_r.dds', tooltip = Tooltips.Generic_Poison, tooltipValue2 = 1 }, -- Creeping Ravage Health (Crown Lethal Poison) DEBUFF
 
     ----------------------------------------------------------------
     -- FOOD & DRINK ------------------------------------------------
@@ -3332,6 +3332,20 @@ Effects.EffectOverride = {
     [85502] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_2.dds', name = Abilities.Experience_Crown_Crate_Scroll_2, tooltip = Tooltips.Experience_Major_Gold_Coast }, -- Major Gold Coast Experience Scroll
     [85503] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_3.dds', name = Abilities.Experience_Crown_Crate_Scroll_3, tooltip = Tooltips.Experience_Grand_Gold_Coast }, -- Grand Gold Coast Experience Scroll
 
+    -- Alliance War Experience Bonuses
+    [147466] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_alliance_war_1.dds', name = Abilities.Experience_Alliance_War_Skill_1, tooltip = Tooltips.Experience_Alliance_War_Skill }, -- Alliance Skill Gain (Alliance War Skill Line Scroll)
+    [137733] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_alliance_war_2.dds', name = Abilities.Experience_Alliance_War_Skill_2, tooltip = Tooltips.Experience_Alliance_War_Skill_Major }, -- Alliance Skill Gain (Alliance War Skill Line Scroll, Major)
+    [147467] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_alliance_war_3.dds', name = Abilities.Experience_Alliance_War_Skill_3, tooltip = Tooltips.Experience_Alliance_War_Skill_Grand }, -- Alliance Skill Gain (Alliance War Skill Line Scroll, Grand)
+    [147687] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_alliance_war_torte_1.dds', name = Abilities.Experience_Alliance_War_Torte_1, tooltip = Tooltips.Experience_Colovian_War_Torte }, -- Alliance Skill Gain 50% Boost (Colovian War Torte)
+    [147733] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_alliance_war_torte_2.dds', name = Abilities.Experience_Alliance_War_Torte_2, tooltip = Tooltips.Experience_Molten_War_Torte }, -- Alliance Skill Gain 100% Boost (Molten War Torte)
+    [147734] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_alliance_war_torte_3.dds', name = Abilities.Experience_Alliance_War_Torte_3, tooltip = Tooltips.Experience_White_Gold_War_Torte }, -- Alliance Skill Gain 150% Boost (White-Gold War Torte)
+
+    -- Experience Item Crafting
+    [147793] = { hide = true }, -- Create 100% AvA Skill Boost R (Chef Arquitius's Torte Dissertation)
+    [147795] = { icon = 'LuiExtended/media/icons/abilities/ability_item_chef_arquitius_torte_dissertation.dds', name = Abilities.Innate_Chef_Arquitius_Torte_Dissertation }, -- 88449 Stun (Chef Arquitius's Torte Dissertation)
+    [147841] = { hide = true }, -- Create 150% AvA Skill Boost R (Chef Arquitius's Lost Thesis)
+    [147850] = { icon = 'LuiExtended/media/icons/abilities/ability_item_chef_arquitius_lost_thesis.dds', name = Abilities.Innate_Chef_Arquitius_Lost_Thesis }, -- 88449 Stun (Chef Arquitius's Lost Thesis)
+
     -- PTS Items
     [89338] = { hide = true }, -- Exquisite Furniture Tome (ALL Furniture Plan Book)
     [115175] = { hide = true }, -- Murkmire Furniture Tome (Murkmire Furniture Plan Book)
@@ -3357,8 +3371,8 @@ Effects.EffectOverride = {
     [126710] = { icon = 'LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds', name = Abilities.Innate_Siege_of_Cyrodiil_Recommendation }, -- 68235 Stun (Siege of Cyrodiil Recommendation)
     [124622] = { hide = true }, -- Alliance Standard-Bearer Emote (Alliance Standard-Bearer's License)
     [124624] = { icon = 'LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds', name = Abilities.Innate_Alliance_Standard_Bearers }, -- 68235 Stun (Alliance Standard-Bearer's License)
-
-
+    [148419] = { hide = true }, -- Reachman Emote (Siege of Cyrodiil Commendation)
+    [148421] = { icon = 'LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds', name = Abilities.Innate_Siege_of_Cyrodiil_Commendation }, -- 68235 Stun (Siege of Cyrodiil Commendation)
 
 
 
@@ -3730,6 +3744,9 @@ Effects.EffectOverride = {
     [139914] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bloodlords_embrace.dds', name = Abilities.Set_Blood_Curse }, -- Bloodlord's Embrace (Bloodlord's Embrace)
     [136123] = { tooltip = Tooltips.Set_Thrassian_Stranglers }, -- Sload's Call (Thrassian Stranglers)
 
+    [147415] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ring_of_the_pale_order.dds' }, -- Ring of the Pale Order (Ring of the Pale Order)
+    [147462] = { icon = 'LuiExtended/media/icons/abilities/ability_set_pearls_of_ehlnofey.dds' }, -- Pearls of Ehlnofey (Pearls of Ehlnofey)
+
     -- Crafted Sets
     [34502] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ashen_grip.dds' }, -- Ashen Grip
     [34592] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', tooltip = Tooltips.Generic_Reduce_Weapon_Damage_Duration_Value, tooltipValue2 = 300 }, -- Alessia's Bulwark
@@ -3781,6 +3798,8 @@ Effects.EffectOverride = {
     [137126] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dragons_appetite.dds', tooltip = Tooltips.Set_Dragons_Appetite, forcedContainer = 'short' }, -- Dragon's Appetite (of Dragon's Appetite)
     [135878] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dragons_appetite.dds' }, -- Dragon's Appetite (of Dragon's Appetite)
 
+    [147390] = { icon = 'LuiExtended/media/icons/abilities/ability_set_legacy_of_karth.dds', name = Abilities.Set_Legacy_of_Karth }, -- Karth's Rot (Karth's)
+
     -- Overland Sets (Light)
 
     [135938] = { icon = 'LuiExtended/media/icons/abilities/ability_set_queens_elegance.dds', tooltip = Tooltips.Set_Queens_Elegance_LA }, -- Queen's Elegance (Elegant)
@@ -3809,9 +3828,11 @@ Effects.EffectOverride = {
     [93003] = { icon = 'esoui/art/icons/achievement_update16_029.dds', hide = true }, -- Mad Tinkerer (Mad Tinkerer's)
     [93001] = { icon = 'esoui/art/icons/achievement_update16_029.dds', tooltip = Tooltips.Generic_Knockback }, -- Mad Tinkerer (Mad Tinkerer's)
     [129389] = { icon = 'LuiExtended/media/icons/abilities/ability_set_marauders_haste.dds', tooltip = Tooltips.Generic_Movement_Speed, tooltipValue2 = 20 }, -- Marauder's Haste (Marauder's Haste)
-
     [135659] = { icon = 'LuiExtended/media/icons/abilities/ability_set_winters_respite.dds', tooltip = Tooltips.Set_Winters_Respite }, -- Winter's Respite (of Winter's Respite)
     [135658] = { icon = 'LuiExtended/media/icons/abilities/ability_set_winters_respite.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Winter's Respite (of Winter's Respite)
+
+    [147141] = { icon = 'LuiExtended/media/icons/abilities/ability_set_voidcaller.dds', tooltip = Tooltips.Set_Voidcaller }, -- Voidcaller (of the Voidcaller)
+    [147140] = { icon = 'LuiExtended/media/icons/abilities/ability_set_voidcaller.dds', tooltip = Tooltips.Set_Voidcaller }, -- Voidcaller (of the Voidcaller)
 
     -- Overland Sets (Medium)
     [71106] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds' }, -- Briarheart
@@ -3840,7 +3861,6 @@ Effects.EffectOverride = {
     [121602] = { icon = 'LuiExtended/media/icons/abilities/ability_set_darloc_brae.dds' }, -- Vesture of Darloc Brae (Darloc Brae's)
     [121618] = { icon = 'LuiExtended/media/icons/abilities/ability_set_darloc_brae.dds' }, -- Vesture of Darloc Brae (Darloc Brae's)
     [129407] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dragonguard_tactics.dds', tooltip = Tooltips.Set_Dragonguard_Tactics }, -- Dragonguard Tactics (Dragonguard Elite's)
-
     [135690] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hunters_venom.dds', tooltip = Tooltips.Set_Hunters_Venom }, -- Hunter's Venom (Venomous)
     [137526] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hunters_venom.dds' }, -- Hunter's Venom (Venomous)
 
@@ -3865,6 +3885,7 @@ Effects.EffectOverride = {
     [129442] = { icon = 'LuiExtended/media/icons/abilities/ability_set_senchals_duty.dds', tooltip = Tooltips.Set_Senchals_Duty, forcedContainer = 'short' }, -- Senchal's Duty (Senchal Defender's)
     [129509] = { icon = 'LuiExtended/media/icons/abilities/ability_set_senchals_duty.dds', name = Abilities.Set_Senchals_Duty }, -- Senchal Defender (Senchal Defender's)
     [129523] = { icon = 'LuiExtended/media/icons/abilities/ability_set_senchals_duty.dds', name = Abilities.Set_Senchals_Duty }, -- Senchal Defender (Senchal Defender's)
+    [147221] = { icon = 'LuiExtended/media/icons/abilities/ability_set_radiant_bastion.dds', hide = true }, -- Radiant Bastion (of the Radiant Bastion)
 
     -- Dungeon Sets (Light)
     [61459] = { icon = 'LuiExtended/media/icons/abilities/ability_set_burning_spellweave.dds', tooltip = Tooltips.Generic_Spell_Damage_Duration_Value, tooltipValue2 = 490 }, -- Burning Spellweave
@@ -4129,6 +4150,14 @@ Effects.EffectOverride = {
     [71605] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_beast_bear.dds' }, -- Hunt Leader (of the Hunt)
     [74106] = { icon = 'LuiExtended/media/icons/abilities/ability_summon_beast_bear.dds' }, -- Hunt Leader (of the Hunt)
     [71193] = { icon = 'LuiExtended/media/icons/abilities/ability_set_para_bellum.dds', name = Abilities.Set_Para_Bellum, tooltip = Tooltips.Set_Para_Bellum }, -- Para Bellum Shield (Para Bellum)
+
+    -- Vatesharn Hollows Sets
+    [147675] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hex_siphon.dds', tooltip = Tooltips.Set_Hex_Siphon }, -- Hex Siphon (Hex Siphoner's)
+    [147677] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hex_siphon.dds' }, -- Hex Siphon (Hex Siphoner's)
+    [147686] = { icon = 'LuiExtended/media/icons/abilities/ability_set_pestilent_host.dds', tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Pestilent Host (of the Pestilent Host)
+
+    [147692] = { icon = 'LuiExtended/media/icons/abilities/ability_set_explosive_rebuke.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Set_Explosive_Rebuke }, -- Explosive Rebuke (of Explosive Rebuke)
+    [147694] = { icon = 'LuiExtended/media/icons/abilities/ability_set_explosive_rebuke.dds' }, -- Explosive Rebuke (of Explosive Rebuke)
 
     -- DISGUISES
     [30879] = { tooltip = Tooltips.Disguise_Kollopi_Essence }, -- Shimmering Glow (Kollopi Essence)
