@@ -3027,16 +3027,13 @@ Effects.StatusEffectIconTable = {
 }
 
 Effects.MajorMinorIconTable = {
-    --[76617] = { icon = 'esoui/art/icons/ability_buff_minor_erosion.dds', normalize = 'esoui/art/icons/ability_warrior_025.dds' }, -- Minor Slayer (of the Infallible Aether)
-    --[93120] = { icon = 'esoui/art/icons/ability_buff_major_erosion.dds', normalize = 'esoui/art/icons/procs_006.dds' }, -- Major Slayer (Master Architect)
-    --[76618] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_aegis.dds', normalize = 'esoui/art/icons/ability_warrior_030.dds' }, -- Minor Aegis (Eternal Yokeda)
-    --[93444] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_aegis.dds', normalize = 'esoui/art/icons/procs_004.dds' }, -- Major Aegis (Automated Defense)
-
-    --[120020] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds', normalize = 'esoui/art/icons/achievement_031.dds' }, -- Minor Toughness (Target Iron Atronach, Trial)
-
-    --[121878] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_courage.dds', normalize = 'esoui/art/icons/ability_mage_045.dds' }, -- Minor Courage (Yolnakriin's)
-
-    --[120015] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds', normalize = 'esoui/art/icons/ability_mage_045.dds' }, -- Spell Power Cure (Target Iron Atronach, Trial)
+    [76617] = { icon = 'esoui/art/icons/ability_buff_minor_erosion.dds', normalize = 'esoui/art/icons/ability_warrior_025.dds' }, -- Minor Slayer
+    [93109] = { icon = 'esoui/art/icons/ability_buff_major_erosion.dds', normalize = 'esoui/art/icons/procs_006.dds' }, -- Major Slayer
+    [76618] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_aegis.dds', normalize = 'esoui/art/icons/ability_warrior_030.dds' }, -- Minor Aegis
+    [93123] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_aegis.dds', normalize = 'esoui/art/icons/procs_004.dds' }, -- Major Aegis
+    [88490] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds', normalize = 'esoui/art/icons/achievement_031.dds' }, -- Minor Toughness
+    [147417] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_courage.dds', normalize = 'esoui/art/icons/u26_skyrim_world_boss_daily1.dds' }, -- Minor Courage
+    [109966] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds', normalize = 'esoui/art/icons/u26_skyrim_world_boss_daily30.dds' }, -- Major Courage
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -4182,9 +4179,9 @@ Effects.EffectOverride = {
     [63569] = { tooltip = Tooltips.Skill_Major_Gallop }, -- Major Gallop
     [61708] = { tooltip = Tooltips.Skill_Minor_Heroism }, -- Minor Heroism
     [61709] = { tooltip = Tooltips.Skill_Major_Heroism }, -- Major Heroism
-    [88490] = { tooltip = Tooltips.Skill_Minor_Toughness }, -- Minor Toughness
-    [147417] = { tooltip = Tooltips.Skill_Minor_Courage }, -- Minor Courage
-    [109966] = { tooltip = Tooltips.Skill_Major_Courage }, -- Major Courage
+    [88490] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds', tooltip = Tooltips.Skill_Minor_Toughness }, -- Minor Toughness
+    [147417] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_courage.dds', tooltip = Tooltips.Skill_Minor_Courage }, -- Minor Courage
+    [109966] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds', tooltip = Tooltips.Skill_Major_Courage }, -- Major Courage
 
     -- Major / Minor Debuffs
     [61742] = { tooltip = Tooltips.Skill_Minor_Breach }, -- Minor Breach
@@ -4209,10 +4206,10 @@ Effects.EffectOverride = {
     [145977] = { tooltip = Tooltips.Skill_Major_Brittle }, -- Major Brittle (Unused)
 
     -- Slayer / Aegis
-    [76618] = { tooltip = Tooltips.Skill_Minor_Aegis, icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_aegis.dds' }, -- Minor Aegis
-    [93123] = { tooltip = Tooltips.Skill_Major_Aegis }, -- Major Aegis
-    [76617] = { tooltip = Tooltips.Skill_Minor_Slayer, icon = 'esoui/art/icons/ability_buff_minor_erosion.dds' }, -- Minor Slayer
-    [93109] = { tooltip = Tooltips.Skill_Major_Slayer }, -- Major Slayer
+    [76618] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_aegis.dds', tooltip = Tooltips.Skill_Minor_Aegis }, -- Minor Aegis
+    [93123] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_aegis.dds', tooltip = Tooltips.Skill_Major_Aegis }, -- Major Aegis
+    [76617] = { icon = 'esoui/art/icons/ability_buff_minor_erosion.dds', tooltip = Tooltips.Skill_Minor_Slayer }, -- Minor Slayer
+    [93109] = { icon = 'esoui/art/icons/ability_buff_major_erosion.dds', tooltip = Tooltips.Skill_Major_Slayer }, -- Major Slayer
 
     -- Empower
     [61737] = { tooltip = Tooltips.Skill_Empower }, -- Empower
@@ -6816,10 +6813,10 @@ Effects.EffectOverride = {
     [78771] = { hide = true }, -- Confusion
     [63179] = { icon = 'esoui/art/icons/ability_dragonknight_013.dds', name = Abilities.Skill_Stonefist }, -- Flame Shard (Justice Guard 2H)
     [63194] = { icon = 'esoui/art/icons/ability_dragonknight_013.dds', name = Abilities.Skill_Stonefist, tooltip = Tooltips.Generic_Stun }, -- Flame Shard (Justice Guard 2H)
-    [78743] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_flare_blue.dds' }, -- Flare (Guard)
+    [78743] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_reveal.dds' }, -- Flare (Guard)
     [78789] = { hide = true }, -- Flare (Guard)
     [78750] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', tooltip = Tooltips.Generic_Reveal }, -- Revealed (Guard)
-    [78744] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_flare_blue.dds' }, -- Flare (Guard)
+    [78744] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_flare_reveal.dds' }, -- Flare (Guard)
     [75613] = { hide = true }, -- Shadowcloak Immunity (Mage Guard)
     [77919] = { hide = true }, -- Clairvoyance Tutorial (Mage Guard)
     [77937] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_detection.dds', name = Abilities.Skill_Detection, tooltip = Tooltips.Generic_Detection_NPC }, -- Clairvoyance (Mage Guard)
@@ -6949,7 +6946,6 @@ Effects.EffectOverride = {
     [49252] = { icon = 'esoui/art/icons/ability_dualwield_001_b.dds' }, -- Blood Craze (Berserker)
     [49253] = { icon = 'esoui/art/icons/ability_dualwield_001_b.dds', tooltip = Tooltips.Skill_Blood_Craze_Heal }, -- Blood Craze (Berserker)
     [49254] = { icon = 'esoui/art/icons/ability_dualwield_001_b.dds', tooltip = Tooltips.Skill_Blood_Craze }, -- Blood Craze (Berserker)
-    [44206] = { icon = 'esoui/art/icons/ability_debuff_minor_maim.dds', tooltip = Abilities.Skill_Heated_Blades }, -- Minor Maim (Berserker)
 
     -- Dragonknight (NPC)
     [34742] = { icon = 'esoui/art/icons/ability_dragonknight_004.dds' }, -- Fiery Breath (Dragonknight)
@@ -7083,7 +7079,6 @@ Effects.EffectOverride = {
     [44250] = { hide = true, icon = 'esoui/art/icons/ability_nightblade_001.dds', name = Abilities.Skill_Summon_Shade }, -- Dark Shade (Dreadweaver)
     [89017] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', name = Abilities.Skill_Weakness, duration = -23, type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = Tooltips.Skill_Weakness_NPC_Summon }, -- Dark Shade (Dreadweaver)
     [89010] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_corrode.dds', name = Abilities.Skill_Corrosive_Strike }, -- Corrode (Dreadweaver)
-    [89012] = { icon = 'esoui/art/icons/ability_debuff_minor_maim.dds', tooltip = Abilities.Skill_Corrosive_Strike }, -- Minor Maim (Dreadweaver)
 
     -- Soulbrander
     [44323] = { icon = 'esoui/art/icons/ability_armor_003_a.dds', tooltip = Tooltips.Skill_Dampen_Magic }, -- Dampen Magic (Soulbrander)
@@ -8586,7 +8581,6 @@ Effects.EffectOverride = {
     [86704] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_peasant_pickaxe_light.dds' }, -- Chop (Hleran Noble)
     [86705] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_peasant_pickaxe_light.dds' }, -- Lop (Hleran Noble)
     [85361] = { icon = 'esoui/art/icons/ability_1handed_002.dds' }, -- Puncture (Hleran Noble)
-    [85362] = { icon = 'esoui/art/icons/ability_debuff_major_fracture.dds', tooltip = Abilities.Skill_Puncture }, -- Major Fracture (Hleran Noble)
     [87064] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_volcanic_debris.dds' }, -- Volcanic Debris (Fire-Binder)
     [87065] = { hide = true }, -- Volcanic Debris (Fire-Binder)
     [92647] = { hide = true }, -- Volcanic Debris (Fire-Binder)
@@ -10011,7 +10005,8 @@ Effects.EffectOverride = {
     -- Dragonstar Arena (Stage 2) - The Frozen Ring
     [53329] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_warmth.dds', name = Abilities.Skill_Warmth, duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = Tooltips.Skill_Warming_Aura }, -- Warming Aura
 
-    [56757] = { name = Abilities.Skill_Pierce_Armor, tooltip = Tooltips.Skill_Pierce_Armor_NPC }, -- Puncture (Sovngarde Brawler)
+    [56755] = { name = Abilities.Skill_Puncture }, -- Pierce Armor (Sovngarde Brawler)
+    [56757] = { tooltip = Tooltips.Skill_Pierce_Armor_NPC }, -- Puncture (Sovngarde Brawler)
 
     [56758] = { icon = 'esoui/art/icons/ability_1handed_001_b.dds' }, -- Deep Slash (Sovngarde Brawler)
     [56759] = { icon = 'esoui/art/icons/ability_1handed_001_b.dds', tooltip = Tooltips.Skill_Deep_Slash_NPC }, -- Deep Slash (Sovngarde Brawler)

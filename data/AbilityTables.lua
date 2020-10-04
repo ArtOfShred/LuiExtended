@@ -457,7 +457,6 @@ local AbilityTables = {
     Skill_Cleave                      = 20919,
 
     -- One Hand & Shield
-    Skill_Pierce_Armor                = 38250,
     Skill_Puncture                    = 28306,
     Skill_Deep_Slash                  = 38268,
     Skill_Shield_Charge               = 28719,
@@ -641,7 +640,6 @@ local AbilityTables = {
     Skill_Clobber                     = 24671,
     Skill_Shadowy_Barrier             = GetString(SI_LUIE_SKILL_SHADOWY_BARRIER),
     Skill_Flare_Trap                  = 74628,
-    Skill_Heated_Blades               = 44208,
     Skill_Bear_Trap                   = 39058,
     Skill_Void_Burst                  = 36987,
 

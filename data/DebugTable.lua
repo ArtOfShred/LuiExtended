@@ -8058,7 +8058,7 @@ LUIE.DebugAuras = {
     [78743] = true, -- Flare
     [78789] = true, -- Flare
     [78750] = true, -- Revealed
-    --[78746] = true, -- Flare
+    [78746] = true, -- Flare
     [78744] = true, -- Flare
 
     [75613] = true, -- Shadowcloak Immunity (Mage Guard)
@@ -8098,6 +8098,7 @@ LUIE.DebugAuras = {
 
     [54363] = true, -- Halt (Guard)
     [63625] = true, -- Arrest Stun (Guard)
+    [148272] = true, -- Arrest Passenger Dismount (Guard)
     [64647] = true, -- Remove Effects (Guard)
 
     [77452] = true, -- Shadow Cloak Immunity (Basic Justice NPC)
@@ -8530,6 +8531,7 @@ LUIE.DebugAuras = {
     [89010] = true, -- Corrode -- Dreadweaver - Dark Shade
     [89012] = true, -- Minor Maim -- Dreadweaver - Dark Shade
     [89016] = true, -- Dark Shade -- Dreadweaver
+    [89454] = true, -- Dark Shade -- Dreadweaver
     [89455] = true, -- Dark Shade -- Dreadweaver
 
     [44323] = true, -- Dampen Magic -- Soulbrander
