@@ -801,9 +801,9 @@ local strings = {
     SI_LUIE_SKILL_MAGICKA_DETONATION_TP =                "Cursed with a magical bomb that explodes after |cFFFFFF<<1>>|r seconds, dealing Magic Damage to you and any allies within |cFFFFFF8|r meters.\n\nEach ally within the bomb's radius increases the damage by |cFFFFFF25|r%.",
     SI_LUIE_SKILL_INEVITABLE_DETONATION_TP =             "Cursed with a magical bomb that explodes after |cFFFFFF<<1>>|r seconds, dealing Magic Damage to you and any allies within |cFFFFFF8|r meters.\n\nIf the bomb is dispelled or removed early, the explosion is triggered immediately.\n\nEach ally within the bomb's radius increases the damage by |cFFFFFF25|r%.",
     SI_LUIE_SKILL_PROXIMITY_DETONATION_TP =              "Charging a magical bomb that explodes after |cFFFFFF<<1>>|r seconds, dealing Magic Damage to all enemies within |cFFFFFF8|r meters.\n\nEach enemy within the bomb's radius increases the damage by |cFFFFFF25|r%.",
-    SI_LUIE_SKILL_WAR_HORN_TP =                          "Increase Max Stamina and Max Magicka by |cFFFFFF10|r% for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_WAR_HORN_DUMMY_TP =                    "Increase Max Stamina and Max Magicka by |cFFFFFF10|r%.",
-    SI_LUIE_SKILL_STURDY_HORN_TP =                       "Increase Max Stamina and Max Magicka by |cFFFFFF10|r% for |cFFFFFF30|r seconds.\n\nIncrease Critical Resistance by |cFFFFFF990|r for |cFFFFFF10|r seconds.",
+    SI_LUIE_SKILL_WAR_HORN_TP =                          "Increase Max Stamina and Magicka by |cFFFFFF10|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_WAR_HORN_DUMMY_TP =                    "Increase Max Stamina and Magicka by |cFFFFFF10|r%.",
+    SI_LUIE_SKILL_STURDY_HORN_TP =                       "Increase Max Stamina and Magicka by |cFFFFFF10|r% for |cFFFFFF30|r seconds.\n\nIncrease Critical Resistance by |cFFFFFF990|r for |cFFFFFF10|r seconds.",
 
     -- Support
     SI_LUIE_SKILL_SIEGE_SHIELD_TP =                      "Reduce damage taken from siege weapons by |cFFFFFF50|r%.",
