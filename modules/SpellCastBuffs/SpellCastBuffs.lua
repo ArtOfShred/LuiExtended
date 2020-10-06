@@ -3008,8 +3008,11 @@ function SpellCastBuffs.AddNameAura()
                 if not flag then return end
             end
 
-            SpellCastBuffs.EffectsList.reticleover1[ "Name Specific Buff" .. k ] = {
-                type=1,
+            local buffType = v.debuff or 1
+            local context = v.debuff and "reticleover2" or "reticleover1"
+
+            SpellCastBuffs.EffectsList[context][ "Name Specific Buff" .. k ] = {
+                type=buffType,
                 id= v.id, name= abilityName, icon= abilityIcon,
                 dur=0, starts=1, ends=nil,
                 forced = "short",

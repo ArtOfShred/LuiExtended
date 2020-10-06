@@ -1111,7 +1111,7 @@ LUIE.DebugAuras = {
     -- EQUIPMENT ------------------------
     -------------------------------------
 
-    -- Weapons
+    -- Asylum Weapons
     [100473] = true, -- Chaotic Whirlwind (Asylum)
     [100474] = true, -- Chaotic Whirlwind (Asylum)
     [140223] = true, -- Chaotic Whirlwind (Asylum)
@@ -1131,6 +1131,7 @@ LUIE.DebugAuras = {
     [100307] = true, -- Timeless Blessing (Asylum)
     [100308] = true, -- Timeless Blessing (Asylum)
 
+    -- Maelstrom Weapons
     [99805] = true, -- Cruel Flurry (Maelstrom)
     [99806] = true, -- Cruel Flurry (Maelstrom)
     [99851] = true, -- Thunderous Volley (Maelstrom)
@@ -1154,6 +1155,7 @@ LUIE.DebugAuras = {
     [100161] = true, -- Precise Regeneration (Maelstrom)
     [99887] = true, -- Precise Regeneration (Maelstrom)
 
+    -- Master Weapons
     [99762] = true, -- Stinging Slashes (Master)
     [100070] = true, -- Stinging Slashes (Master)
     [99766] = true, -- Caustic Arrow (Master)
@@ -1169,6 +1171,7 @@ LUIE.DebugAuras = {
     [99781] = true, -- Grand Rejuvenation (Master)
     [131489] = true, -- Grand Rejuvenation (Master)
 
+    -- Blackrose Weapons
     [113616] = true, -- Spectral Cloak (Blackrose DW)
     [141875] = true, -- Spectral Cloak (Blackrose DW)
     [113617] = true, -- Spectral Cloak (Blackrose DW)
@@ -1188,6 +1191,33 @@ LUIE.DebugAuras = {
     [113651] = true, -- Mender's Ward (Blackrose Restoration Staff)
     [113654] = true, -- Razor Shot (Blackrose Restoration Staff)
     [113653] = true, -- Major Vitality (Blackrose Restoration Staff)
+
+    -- Vateshran Weapons
+    [147791] = true, -- Executioner's Blade (Vateshran Dual Wield)
+    [147798] = true, -- Executioner's Blade (Vateshran Dual Wield)
+    [147786] = true, -- Point-Blank Snipe (Vateshran Bow)
+    [147792] = true, -- Point-Blank Snipe (Vateshran Bow)
+    [147698] = true, -- Frenzied Momentum (Vateshran 2H)
+    [147700] = true, -- Frenzied Momentum (Vateshran 2H)
+    [147701] = true, -- Frenzied Momentum (Vateshran 2H)
+    [147704] = true, -- Frenzied Momentum (Vateshran 2H)
+    [147703] = true, -- Frenzied Momentum (Vateshran 2H)
+    [147719] = true, -- Void Bash (Vateshran 1H)
+    [147747] = true, -- Call of the Void (Vateshran 1H)
+    [147744] = true, -- Void Bash (Vateshran 1H)
+    [147743] = true, -- Void Bash (Vateshran 1H)
+    [147746] = true, -- Major Maim (Vateshran 1H)
+    [147828] = true, -- Wrath of Elements (Vateshran Destruction Staff)
+    [147843] = true, -- Wrath of Elements (Vateshran Destruction Staff)
+    [147858] = true, -- Wrath of Elements (Vateshran Destruction Staff)
+    [147847] = true, -- Wrath of Elements (Vateshran Destruction Staff)
+    [147844] = true, -- Wrath of Elements (Vateshran Destruction Staff)
+    [147846] = true, -- Wrath of Elements (Vateshran Destruction Staff)
+    [147871] = true, -- Force Overflow (Vateshran Restoration Staff)
+    [147872] = true, -- Force Overflow (Vateshran Restoration Staff)
+    [147875] = true, -- Force Overflow (Vateshran Restoration Staff)
+    [147873] = true, -- Force Overflow (Vateshran Restoration Staff)
+    [147879] = true, -- Force Overflow (Vateshran Restoration Staff)
 
     -- Monster Helms
     [111504] = true, -- Balorgh
@@ -3025,25 +3055,28 @@ LUIE.DebugAuras = {
     -- HOUSING TARGET DUMMY
     [120010] = true, -- Major Breach (Target Iron Atronach, Trial)
     [120019] = true, -- Minor Breach (Target Iron Atronach, Trial)
+    [148976] = true, -- Major Vulnerability (Target Iron Atronach, Trial)
     [120030] = true, -- Minor Vulnerability (Target Iron Atronach, Trial)
-    [120007] = true, -- Crusher (Target Iron Atronach, Trial)
+    [148977] = true, -- Minor Brittle (Target Iron Atronach, Trial)
+    [149012] = true, -- Minor Magickasteal (Target Iron Atronach, Trial)
     [120016] = true, -- Joe Buff Granter (Target Iron Atronach, Trial)
+    [120007] = true, -- Crusher (Target Iron Atronach, Trial)
     [120011] = true, -- Engulfing Flames (Target Iron Atronach, Trial)
     [120018] = true, -- Roar of Alkosh (Target Iron Atronach, Trial)
+    [120014] = true, -- Off Balance (Target Iron Atronach, Trial)
 
     [120017] = true, -- Minor Sorcery (Target Iron Atronach, Trial)
     [120023] = true, -- Minor Brutality (Target Iron Atronach, Trial)
     [120028] = true, -- Minor Prophecy (Target Iron Atronach, Trial)
     [120029] = true, -- Minor Savagery (Target Iron Atronach, Trial)
     [120008] = true, -- Minor Berserk (Target Iron Atronach, Trial)
+    [120015] = true, -- Major Courage (Target Iron Atronach, Trial)
     [120020] = true, -- Minor Toughness (Target Iron Atronach, Trial)
     [120021] = true, -- Aggressive Horn (Target Iron Atronach, Trial)
     [120025] = true, -- Aggressive Horn (Target Iron Atronach, Trial)
     [120013] = true, -- Major Force (Target Iron Atronach, Trial)
-    [120014] = true, -- Off Balance (Target Iron Atronach, Trial)
     [120024] = true, -- Worm's Raiment (Target Iron Atronach, Trial)
     [120026] = true, -- Hircine's Veneer (Target Iron Atronach, Trial)
-    [120015] = true, -- Spell Power Cure (Target Iron Atronach, Trial)
 
     [121572] = true, -- Spear Shards (Target Iron Atronach, Trial)
     [121628] = true, -- Spear Shards (Target Iron Atronach, Trial)

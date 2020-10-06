@@ -470,6 +470,10 @@ LUIE.Data.Tooltips = {
     Set_Blackrose_Dual_Wield                        = GetString(SI_LUIE_SKILL_SET_BLACKROSE_DUAL_WIELD),
     Set_Blackrose_1H                                = GetString(SI_LUIE_SKILL_SET_BLACKROSE_1H_TP),
     Set_Blackrose_Destro_Staff                      = GetString(SI_LUIE_SKILL_SET_BLACKROSE_DESTRO_TP),
+    Set_Vateshran_2H                                = GetString(SI_LUIE_SKILL_SET_VATESHRAN_2H_TP),
+    Set_Vateshran_1H                                = GetString(SI_LUIE_SKILL_SET_VATESHRAN_1H_TP),
+    Set_Vateshran_Destro_Staff                      = GetString(SI_LUIE_SKILL_SET_VATESHRAN_DESTRO_TP),
+    Set_Vateshran_Resto_Staff                       = GetString(SI_LUIE_SKILL_SET_VATESHRAN_RESTO_TP),
 
     -- Monster Helms
     Set_Balorgh                                     = GetString(SI_LUIE_SKILL_SET_BALORGH),
@@ -553,8 +557,6 @@ LUIE.Data.Tooltips = {
     Set_Draugrs_Rest                                = GetString(SI_LUIE_SKILL_SET_DRAUGRS_REST_TP),
     Set_Overwhelming_Surge                          = GetString(SI_LUIE_SKILL_SET_OVERWHELMING_SURGE_TP),
     Set_Noble_Duelist                               = GetString(SI_LUIE_SKILL_SET_NOBLE_DUELIST_TP),
-    Set_Worms_Raiment_Dummy                         = GetString(SI_LUIE_SKILL_SET_WORMS_RAIMENT_DUMMY_TP),
-    Set_Hircines_Veneer_Dummy                       = GetString(SI_LUIE_SKILL_SET_HIRCINES_VENEER_DUMMY_TP),
     Set_Plague_Slinger                              = GetString(SI_LUIE_SKILL_PLAGUE_SLINGER_TP),
     Set_Storm_Master                                = GetString(SI_LUIE_SKILL_SET_STORM_MASTER_TP),
     Set_Blood_Moon_Scent                            = GetString(SI_LUIE_SKILL_SET_BLOOD_SCENT),

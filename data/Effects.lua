@@ -1632,7 +1632,7 @@ Effects.AddNameAura = {
     [Unitnames.Dummy_Target_Centurion_Robust_Refabricated] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_Frost_Atronach] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_Iron_Atronach] = { [1] = { id = 33097 } },
-    [Unitnames.Dummy_Target_Atronach_Trial] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Target_Atronach_Trial] = { [1] = { id = 33097 }, [2] = { id = 61742, debuff = true }, [3] = { id = 61743, debuff = true }, [4] = { id = 79717, debuff = true }, [5] = { id = 106754, debuff = true }, [6] = { id = 145975, debuff = true } },
     [Unitnames.Dummy_Target_Mournful_Aegis] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_Skeleton_Humanoid] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_Skeleton_Khajiit] = { [1] = { id = 33097 } },
@@ -3618,6 +3618,22 @@ Effects.EffectOverride = {
     [115005] = { icon = 'LuiExtended/media/icons/abilities/ability_set_wild_impulse.dds' }, -- Wild Impulse (Blackrose Destruction Staff)
     [115006] = { icon = 'LuiExtended/media/icons/abilities/ability_set_wild_impulse.dds' }, -- Wild Impulse (Blackrose Destruction Staff)
 
+    -- Vateshran Weapons
+    [147701] = { icon = 'LuiExtended/media/icons/abilities/ability_set_frenzied_momentum.dds', tooltip = Tooltips.Set_Vateshran_2H }, -- Frenzied Momentum (Vateshran 2H)
+    [147703] = { icon = 'LuiExtended/media/icons/abilities/ability_set_frenzied_momentum.dds' }, -- Frenzied Momentum (Vateshran 2H)
+
+    [147747] = { icon = 'LuiExtended/media/icons/abilities/ability_set_void_bash.dds', tooltip = Tooltips.Set_Vateshran_1H }, -- Call of the Void (Vateshran 1H)
+    [147743] = { icon = 'LuiExtended/media/icons/abilities/ability_set_void_bash.dds' }, -- Void Bash (Vateshran 1H)
+
+    [147843] = { icon = 'LuiExtended/media/icons/abilities/ability_set_wrath_of_elements.dds', tooltip = Tooltips.Set_Vateshran_Destro_Staff, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Wrath of Elements (Vateshran Destruction Staff)
+    [147847] = { icon = 'LuiExtended/media/icons/abilities/ability_set_wrath_of_elements.dds' }, -- Wrath of Elements (Vateshran Destruction Staff)
+    [147844] = { icon = 'LuiExtended/media/icons/abilities/ability_set_wrath_of_elements.dds' }, -- Wrath of Elements (Vateshran Destruction Staff)
+    [147846] = { icon = 'LuiExtended/media/icons/abilities/ability_set_wrath_of_elements.dds' }, -- Wrath of Elements (Vateshran Destruction Staff)
+
+    [147872] = { icon = 'LuiExtended/media/icons/abilities/ability_set_force_overflow.dds', tooltip = Tooltips.Set_Vateshran_Resto_Staff, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Force Overflow (Vateshran Restoration Staff)
+    [147873] = { icon = 'LuiExtended/media/icons/abilities/ability_set_force_overflow.dds' }, -- Force Overflow (Vateshran Restoration Staff)
+    [147879] = { icon = 'LuiExtended/media/icons/abilities/ability_set_force_overflow.dds' }, -- Force Overflow (Vateshran Restoration Staff)
+
     -- Monster Sets
     [111505] = { icon = 'LuiExtended/media/icons/abilities/ability_set_balorgh.dds', tooltip = Tooltips.Set_Balorgh }, -- Balorgh (Balorgh)
     [59517] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_blood_spawn.dds', tooltip = Tooltips.Generic_Physical_Spell_Resist_Value, tooltipValue2 = 3731 }, -- Blood Spawn (Blood Spawn)
@@ -4411,25 +4427,14 @@ Effects.EffectOverride = {
 
     -- Housing Target Dummy
     [89977] = { hide = true }, -- Target Skeleton (Target Dummy)
-    [120010] = { tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Major Breach (Target Iron Atronach, Trial)
-    [120019] = { tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Minor Breach (Target Iron Atronach, Trial)
-    [120030] = { tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Minor Vulnerability (Target Iron Atronach, Trial)
     [120007] = { icon = 'LuiExtended/media/icons/glyphs/glyph_crushing.dds', name = Abilities.Item_Glyph_of_Crushing, tooltip = Tooltips.Generic_Reduce_Physical_Spell_Resist_No_Dur }, -- Crusher (Target Iron Atronach, Trial)
     [120011] = { tooltip = Tooltips.Skill_Engulfing_Flames_Dummy }, -- Engulfing Flames (Target Iron Atronach, Trial)
     [120018] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds', name = Abilities.Set_Line_Breaker, tooltip = Tooltips.Generic_Reduce_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 3010 }, -- Roar of Alkosh (Target Iron Atronach, Trial)
-    [120017] = { tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Minor Sorcery (Target Iron Atronach, Trial)
-    [120023] = { tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Minor Brutality (Target Iron Atronach, Trial)
-    [120028] = { tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Minor Prophecy (Target Iron Atronach, Trial)
-    [120029] = { tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Minor Savagery (Target Iron Atronach, Trial)
-    [120008] = { tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Minor Berserk (Target Iron Atronach, Trial)
-    [120020] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds', tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Minor Toughness (Target Iron Atronach, Trial)
-    [120021] = { tooltip = Tooltips.Skill_War_Horn_Dummy }, -- Aggressive Horn (Target Iron Atronach, Trial)
-    [120013] = { tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Major Force (Target Iron Atronach, Trial)
     [120014] = { tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off Balance (Target Iron Atronach, Trial)
-    [120024] = { icon = 'LuiExtended/media/icons/abilities/ability_set_worm_cult.dds', tooltip = Tooltips.Set_Worms_Raiment_Dummy }, -- Worm's Raiment (Target Iron Atronach, Trial)
-    [120026] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hircine.dds', tooltip = Tooltips.Set_Hircines_Veneer_Dummy }, -- Hircine's Veneer (Target Iron Atronach, Trial)
-    [120015] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds', name = Abilities.Skill_Major_Courage, tooltip = Unitnames.NPC_Target_Iron_Atronach }, -- Spell Power Cure (Target Iron Atronach, Trial)
-    [121572] = { hide = true }, -- Spear Shards (Target Iron Atronach, Trial)
+    [120020] = { hide = true }, -- Minor Toughness (Target Iron Atronach, Trial)
+    [120021] = { tooltip = Tooltips.Skill_War_Horn_Dummy }, -- Aggressive Horn (Target Iron Atronach, Trial)
+    [120024] = { icon = 'LuiExtended/media/icons/abilities/ability_set_worm_cult.dds', tooltip = Tooltips.Generic_Increase_Magicka_Recovery_No_Dur, tooltipValue2 = 145 }, -- Worm's Raiment (Target Iron Atronach, Trial)
+    [120026] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hircine.dds', tooltip = Tooltips.Generic_Increase_Stamina_Recovery_No_Dur, tooltipValue2 = 145 }, -- Hircine's Veneer (Target Iron Atronach, Trial)
 
     ----------------------------------------------------------------
     -- WORLD EVENTS  -----------------------------------------------

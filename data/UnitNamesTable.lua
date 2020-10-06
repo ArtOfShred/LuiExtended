@@ -66,8 +66,6 @@ LUIE.Data.UnitNames = {
     -- NORMAL NPC NAMES --------------------------------------------
     ----------------------------------------------------------------
 
-    NPC_Target_Iron_Atronach              = 'Target Iron Atronach, Trial',
-
     NPC_The_Feast                         = 'The Feast', -- GENERIC NPC
     NPC_Ice_Barrier                       = 'Ice Barrier',
     NPC_Clannfear                         = 'Clannfear', -- GENERIC NPC

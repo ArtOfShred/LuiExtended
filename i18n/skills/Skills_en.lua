@@ -919,6 +919,10 @@ local strings = {
     SI_LUIE_SKILL_SET_BLACKROSE_DUAL_WIELD =             "Reduce damage taken and increase damage done by |cFFFFFF10|r% for |cFFFFFF2|r seconds.",
     SI_LUIE_SKILL_SET_BLACKROSE_1H_TP =                  "Reduce the cost of your next non-Shield Charge One Hand and Shield ability cast within |cFFFFFF<<1>>|r seconds by |cFFFFFF100|r%.",
     SI_LUIE_SKILL_SET_BLACKROSE_DESTRO_TP =              "Afflicted with consecutive Flame, Shock, and Frost Damage for |cFFFFFF8|r seconds.",
+    SI_LUIE_SKILL_SET_VATESHRAN_2H_TP =                  "Increase Weapon Damage by |cFFFFFF38|r per stack for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF5|r times when you cast a Stamina ability while Momentum is active.\n\nUpon reaching max stacks, your next Heavy Attack will consume all stacks and release a violent explosion of energy around you, dealing Physical Damage to all enemies within |cFFFFFF8|r meters.",
+    SI_LUIE_SKILL_SET_VATESHRAN_1H_TP =                  "After |cFFFFFF<<1>>|r <<1[second/seconds]>>, apply Major Maim to enemies within |cFFFFFF12|r meters for |cFFFFFF10|r seconds.",
+    SI_LUIE_SKILL_SET_VATESHRAN_DESTRO_TP =              "Tethered to your attacker for |cFFFFFF<<1>>|r seconds. You and allies touching the tether take random Flame, Shock, or Frost damage every |cFFFFFF1|r second.\n\nThe tether breaks if you move beyond |cFFFFFF15|r meters away from your attacker.",
+    SI_LUIE_SKILL_SET_VATESHRAN_RESTO_TP =               "Tethered to your attacker for |cFFFFFF<<1>>|r seconds. Your attacker and their allies touching the tether restore |cFFFFFF175|r Magicka and Stamina every |cFFFFFF1|r second.\n\nThe tether breaks if you move beyond |cFFFFFF15|r meters away from your attacker.",
 
     -- Monster Helms
     SI_LUIE_SKILL_SET_BALORGH =                          "Increase Weapon and Spell Damage equal to the cost of your last Ultimate used and Physical and Spell Penetration equal to |cFFFFFF23|r times the amount for |cFFFFFF<<1>>|r seconds.",
@@ -992,8 +996,6 @@ local strings = {
     SI_LUIE_SKILL_SET_DRAUGRS_REST_TP =                  "You and group members within |cFFFFFF5|r meters of the consecrated circle heal every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_SET_OVERWHELMING_SURGE_TP =            "Enemies within |cFFFFFF8|r meters take Shock Damage every |cFFFFFF1|r second for |cFFFFFF6|r seconds.\n\n|cFFFFFF15|r% of the damage you deal this way is restored to you as Magicka.",
     SI_LUIE_SKILL_SET_NOBLE_DUELIST =                    "Noble Duelist's Silks",
-    SI_LUIE_SKILL_SET_WORMS_RAIMENT_DUMMY_TP =           "Reduce the cost of your Magicka abilities by |cFFFFFF4|r%.",
-    SI_LUIE_SKILL_SET_HIRCINES_VENEER_DUMMY_TP =         "Reduce the cost of your Stamina abilities by |cFFFFFF4|r%.",
     SI_LUIE_SKILL_PLAGUE_SLINGER_TP =                    "After |cFFFFFF1|r second, launch five posion balls over |cFFFFFF5|r seconds, dealing Poison Damage every |cFFFFFF1|r second to the nearest enemy within |cFFFFFF10|r meters of the Skeever Corpse.",
     SI_LUIE_SKILL_SET_BLOOD_SCENT =                      "When you deal damage with a melee Light Attack, you gain a stack of Blood Scent for |cFFFFFF8|r seconds.\n\nWhen you gain |cFFFFFF5|r stacks, you become Frenzied for |cFFFFFF5|r seconds, increasing your melee Light Attack damage by |cFFFFFF55|r% and attack speed by |cFFFFFF50|r%. This effect can occur once every |cFFFFFF15|r seconds.",
     SI_LUIE_SKILL_SET_FRENIZED =                         "Increase melee Light Attack damage by |cFFFFFF55|r% and attack speed by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
