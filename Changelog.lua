@@ -6,7 +6,7 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
-    "|cFFA500LuiExtended Version 6.2.1|r",
+    "|cFFA500LuiExtended Version 6.2.2|r",
     "",
     "|cFFFF00Known Issues:|r",
     "[*] Currently no chat announcement/alert will display when another player joins your group. This is due to the API Event for group members joining (EVENT_GROUP_MEMBER_JOINED) not triggering properly when players join. I've reported the issue so hopefully it is addressed by the next major game update.",
