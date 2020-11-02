@@ -6,78 +6,17 @@
 -- AbilityTables namespace
 local AbilityTables = {
     -- ---------------------------------------------------
-    -- MAJOR/MINOR DEBUFFS & DEBUFFS ---------------------
+    -- GENERIC BUFFS & DEBUFFS ---------------------------
     -- ---------------------------------------------------
 
-    -- Major/Minor Buffs
-    Skill_Minor_Resolve               = 61693,
-    Skill_Major_Resolve               = 22236,
-    Skill_Minor_Fortitude             = 26213,
-    Skill_Major_Fortitude             = 29011,
-    Skill_Minor_Endurance             = 26215,
-    Skill_Major_Endurance             = 32748,
-    Skill_Minor_Intellect             = 26216,
-    Skill_Major_Intellect             = 45224,
-    Skill_Minor_Sorcery               = 61685,
-    Skill_Major_Sorcery               = 45227,
-    Skill_Minor_Prophecy              = 61688,
-    Skill_Major_Prophecy              = 47195,
-    Skill_Minor_Brutality             = 61662,
-    Skill_Major_Brutality             = 23673,
-    Skill_Minor_Savagery              = 79453,
-    Skill_Major_Savagery              = 26795,
-    Skill_Minor_Berserk               = 62636,
-    Skill_Major_Berserk               = 36973,
-    Skill_Minor_Force                 = 68595,
-    Skill_Major_Force                 = 85154,
-    Skill_Minor_Vitality              = 64080,
-    Skill_Major_Vitality              = 42197,
-    Skill_Minor_Mending               = 29096,
-    Skill_Major_Mending               = 55033,
-    Skill_Minor_Protection            = 40171,
-    Skill_Major_Protection            = 22233,
-    Skill_Minor_Evasion               = 61715,
-    Skill_Major_Evasion               = 61716,
-    Skill_Minor_Expedition            = 40219,
-    Skill_Major_Expedition            = 23216,
-    --Skill_Minor_Gallop              =
-    Skill_Major_Gallop                = 57472,
-    Skill_Minor_Heroism               = 62505,
-    Skill_Major_Heroism               = 61709,
-    Skill_Minor_Toughness             = 88492,
-    Skill_Minor_Courage               = 121878,
-    Skill_Major_Courage               = 66902,
+    -- Major/Minor
+    Skill_Minor_Mangle                  = 61733,
 
-    -- Major/Minor Debuffs
-    Skill_Minor_Breach                = 46206,
-    Skill_Major_Breach                = 33363,
-    Skill_Minor_Fracture              = 38688,
-    Skill_Major_Fracture              = 28307,
-    Skill_Minor_Vulnerability         = 51434,
-    Skill_Major_Vulnerability         = 106754,
-    Skill_Minor_Maim                  = 29308,
-    Skill_Major_Maim                  = 92041,
-    Skill_Minor_Defile                = 61726,
-    Skill_Major_Defile                = 85944,
-    Skill_Minor_Magickasteal          = 40114,
-    Skill_Minor_Lifesteal             = 33541,
-    Skill_Minor_Enveration            = 47202,
-    Skill_Minor_Uncertainty           = 47204,
-    Skill_Minor_Cowardice             = 46202,
-    Skill_Minor_Mangle                = 39168,
-    Skill_Minor_Timidity              = 140700,
-    Skill_Minor_Slayer                = 76618,
-    Skill_Major_Slayer                = 93120,
-    Skill_Minor_Aegis                 = 76617,
-    Skill_Major_Aegis                 = 93444,
-    Skill_Off_Balance                 = 14062,
-    Skill_Off_Balace_Immunity         = 134599,
-    Skill_Major_Vulnerability_Immunity = GetString(SI_LUIE_SKILL_GENERIC_MAJOR_VULNERABILITY_IMMUNITY),
-
-    Skill_Empower                     = 61737,
-    Skill_Hindrance                   = 46210,
-    Skill_Stun                        = 68565,
-    Skill_Trauma                      = 125203,
+    -- Generic
+    Skill_Off_Balance                   = 14062,
+    Skill_Off_Balace_Immunity           = 134599,
+    Skill_Major_Vulnerability_Immunity  = GetString(SI_LUIE_SKILL_GENERIC_MAJOR_VULNERABILITY_IMMUNITY),
+    Skill_Hindrance                     = 46210,
 
     -- ---------------------------------------------------
     -- INNATE ABILITIES ----------------------------------
@@ -95,12 +34,12 @@ local AbilityTables = {
     Innate_Stealth_Stun               = GetString(SI_LUIE_SKILL_STEALTH_STUN), -- Crouch Stun
     Innate_Disguised                  = 23553, -- Disguised
     Innate_Hidden                     = 20309, -- Hidden
-    Innate_Sprint                     = 973,   -- Sprint
     Innate_Block_Stun                 = GetString(SI_LUIE_SKILL_BLOCK_STUN), -- Block Stun
+    --Innate_Sprint                     = 15614, -- Sprint
+    --Innate_Gallop                     = GetString(SI_LUIE_SKILL_MOUNT_SPRINT), -- Gallop
     Innate_Brace                      = 29761, -- Brace
     Innate_Bash                       = 21970, -- Bash
     Innate_Bash_Stun                  = 21971, -- Bash Stun
-    Innate_Gallop                     = GetString(SI_LUIE_SKILL_MOUNT_SPRINT), -- Gallop
     Innate_Fall_Damage                = GetString(SI_LUIE_SKILL_FALL_DAMAGE), -- Fall Damage
     Innate_Absorbing_Skyshard         = GetString(SI_LUIE_SKILL_ABSORBING_SKYSHARD), -- Absorbing Skyshard
     Innate_Receiving_Boon             = GetString(SI_LUIE_SKILL_RECEIVING_BOON), -- Receiving Boon
@@ -127,6 +66,8 @@ local AbilityTables = {
     Innate_Aetheric_Cipher                  = GetItemLinkName("|H0:item:115028:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Innate_Create_Psijic_Ambrosia_Recipe    = 68258,
 
+    Innate_Chef_Arquitius_Torte_Dissertation    = GetItemLinkName("|H0:item:171430:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Chef_Arquitius_Lost_Thesis           = GetItemLinkName("|H0:item:171434:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Innate_Arena_Gladiators_Exultation      = GetItemLinkName("|H0:item:141751:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Innate_Arena_Gladiators_Mockery         = GetItemLinkName("|H0:item:146042:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Innate_Arena_Gladiators_Recognition     = GetItemLinkName("|H0:item:138785:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
@@ -137,10 +78,7 @@ local AbilityTables = {
     Innate_Siege_of_Cyrodiil_Recognition    = GetItemLinkName("|H0:item:151938:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Innate_Siege_of_Cyrodiil_Recommendation = GetItemLinkName("|H0:item:153536:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Innate_Alliance_Standard_Bearers        = GetItemLinkName("|H0:item:151934:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
-
-    -- Champion
-    Champion_Last_Stand               = 60413,
-    Champion_Tactician                = 60486,
+    Innate_Siege_of_Cyrodiil_Commendation   = GetItemLinkName("|H0:item:171532:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
 
     -- World
     Innate_Drop_Anchor                = 86717, -- Drop Anchor
@@ -179,16 +117,9 @@ local AbilityTables = {
     Item_Glyph_of_Weapon_Damage       = GetString(SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE),
 
     -- Elemental Status Effect
-    Proc_Burning                      = 18084,
-    Proc_Diseased                     = 21925,
-    Proc_Chill                        = 21481,
     Proc_Chilled                      = 7145,
-    Proc_Poisoned                     = 21929,
-    Proc_Concussion                   = 21487,
 
     -- Potions/Poisons
-    Potion                            = 32732,
-    Poison                            = 2563,
     Potion_Invisiblity                = 3668,
     Potion_Ravage_Health              = 46111,
     Potion_Restore_Health             = 45221,
@@ -243,6 +174,15 @@ local AbilityTables = {
     Experience_Crown_Crate_Scroll_1   = GetItemLinkName("|H0:item:94439:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h"), -- Gold Coast Experience Scroll
     Experience_Crown_Crate_Scroll_2   = GetItemLinkName("|H0:item:94440:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h"), -- Major Gold Coast Experience Scroll
     Experience_Crown_Crate_Scroll_3   = GetItemLinkName("|H0:item:94441:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h"), -- Grand Gold Coast Experience Scroll
+
+    -- Alliance War Skill Consumables
+    Experience_Alliance_War_Skill_1   = GetItemLinkName("|H0:item:171262:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h"), -- Alliance War Skill Line Scroll
+    Experience_Alliance_War_Skill_2   = GetItemLinkName("|H0:item:170148:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h"), -- Alliance War Skill Line Scroll, Major
+    Experience_Alliance_War_Skill_3   = GetItemLinkName("|H0:item:171263:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h"), -- Alliance War Skill Line Scroll, Grand
+
+    Experience_Alliance_War_Torte_1   = GetItemLinkName("|H0:item:171323:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h"), -- Colovian War Torte
+    Experience_Alliance_War_Torte_2   = GetItemLinkName("|H0:item:171329:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h"), -- Molten War Torte
+    Experience_Alliance_War_Torte_3   = GetItemLinkName("|H0:item:171432:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h"), -- White-Gold War Torte
 
     -- Misc Consumables
     Consumable_Festival_Mints         = GetItemLinkName("|H0:item:112442:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- High Hrothgar Festival Mints
@@ -314,7 +254,7 @@ local AbilityTables = {
 
     Set_Bogdan_the_Nightflame         = GetString(SI_LUIE_SKILL_SET_BOGDAN_THE_NIGHTFLAME),
     Set_Lord_Warden_Dusk              = GetString(SI_LUIE_SKILL_SET_LORD_WARDEN_DUSK),
-    Set_Malubeth_the_Scourger         = GetString(SI_LUIE_SKILL_SET_MALUBETH_THE_SCOURGER),
+    Set_Scourge_Harvester             = 59564,
     Set_Maw_of_the_Infernal           = 59507,
     Set_Nerieneth                     = 59592,
     Set_Shadowrend                    = 80989,
@@ -322,9 +262,7 @@ local AbilityTables = {
     Set_Swarm_Mother                  = 80592,
     Set_The_Troll_King                = GetString(SI_LUIE_SKILL_SET_TROLL_KING),
     Set_Energy_Charge                 = GetString(SI_LUIE_SKILL_SET_ENERGY_CHARGE),
-    Set_Tzogvins_Warband              = 116734,
     Set_Scavenging_Demise             = 116947,
-    Set_Mighty_Glacier                = 116798,
     Set_Varens_Legacy                 = 79029,
     Set_Syvarras_Scales               = 75717,
     Set_Twin_Sisters                  = 32828,
@@ -337,7 +275,6 @@ local AbilityTables = {
     Set_Healing_Mage                  = 51442,
     Set_Vicious_Serpent               = 61440,
     Set_Vicecannon_of_Venom           = 79464,
-    Set_Ironblood                     = 97626,
     Set_Cooldown                      = GetString(SI_LUIE_SKILL_SET_COOLDOWN),
     Set_Eternal_Hunt                  = 75927,
     Set_Glorious_Defender             = 71180,
@@ -348,93 +285,34 @@ local AbilityTables = {
     Set_Vestment_of_Olorime           = 107117,
     Set_Mantle_of_Siroria             = 107093,
     Set_Harmful_Winds                 = GetString(SI_LUIE_SKILL_SET_HARMFUL_WINDS),
-    Set_Aegis_of_Galenwe              = 107268,
-    Set_Hist_Bark                     = 32781,
-    Skill_Night_Mothers_Gaze          = 29113,
-    Skill_Nobles_Conquest             = 61780,
-    Set_Daedric_Trickery              = 92769,
-    Set_Might_of_the_Lost_Legion      = 113311,
-    Set_Naga_Shaman                   = 113287,
-    Set_Adept_Rider                   = 106775,
     Set_Sloads_Semblance              = 106797,
-    Set_Mighty_Chudan                 = 80482,
-    Set_Pirate_Skeleton               = 80501,
-    Set_Slimecraw                     = GetString(SI_LUIE_SKILL_SET_SLIMECRAW),
-    Set_Thurvokun                     = 102089,
-    Set_Blackrose_Resto_Staff         = 113651,
-    Set_Wisdom_of_Vanus               = 106805,
-    Set_Champion_of_the_Hist          = 113284,
-    Set_Hanus_Compassion              = 111376,
     Set_Shield_of_Ursus               = 111437,
     Set_Ursus_Blessing                = 112414,
-    Set_Jailers_Tenacity              = 111220,
-    Set_Sithis_Touch                  = 79192,
-    Set_Skooma_Smuggler               = 85591,
-    Set_Gyphons_Ferocity              = 106858,
-    Set_Shalk_Exoskeleton             = GetString(SI_LUIE_SKILL_SET_SHALK_EXOSKELETON),
-    Set_Order_of_Diagna               = GetString(SI_LUIE_SKILL_SET_ORDER_OF_DIAGNA),
-    Set_Vampire_Cloak                 = GetString(SI_LUIE_SKILL_SET_VAMPIRE_CLOAK),
-    Set_Warrior_Poet                  = GetString(SI_LUIE_SKILL_SET_WARRIOR_POET),
     Set_Grace_of_Gloom                = 106865,
-    Set_Gossamer                      = 84340,
-    Set_Spell_Power_Cure              = 66899,
     Set_Noble_Duelist                 = GetString(SI_LUIE_SKILL_SET_NOBLE_DUELIST),
-    Set_Treasure_Hunter               = 60566,
-    Set_Heem_Jas                      = 84305,
-    Set_Jailbreaker                   = GetString(SI_LUIE_SKILL_SET_JAILBREAKER),
-    Set_Sunderflame                   = 60059,
-    Set_Toothrow                      = GetString(SI_LUIE_SKILL_SET_TOOTHROW),
-    Set_Duroks_Bane                   = 32754,
-    Set_Hagravens_Garden              = 97907,
-    Set_Ironblood                     = 97626,
-    Set_Medusa                        = GetString(SI_LUIE_SKILL_SET_MEDUSA),
     Set_Hand_of_Mephala               = 84353,
-    Set_Rattlecage                    = GetString(SI_LUIE_SKILL_SET_RATTLECAGE),
-    Set_Dreugh_King_Slayer            = GetString(SI_LUIE_SKILL_SET_DREUGH_KING_SLAYER),
-    Set_Knightmare                    = 29117,
-    Set_Wise_Mage                     = 51432,
-    Set_Infallible_Mage               = 61438,
-    Set_Quick_Serpent                 = 50995,
-    Set_Vicious_Serpent               = 61440,
-    Set_Twilight_Remedy               = 75770,
-    Set_Cowards_Gear                  = 92908,
-    Set_Wizards_Riposte               = 92920,
-    Set_Indomitable_Fury              = 113324,
     Set_Soldier_of_Anguish            = 113460,
-    Set_Steadfast_Hero                = 113508,
-    Set_Healers_Habit                 = GetString(SI_LUIE_SKILL_SET_HEALERS_HABIT),
-    Set_Ward_of_Cyrodiil              = 32837,
     Set_Affliction                    = 34787,
-    Set_Fasallas_Guile                = 76946,
     Set_Sentry                        = 32807,
     Set_Line_Breaker                  = 75753,
-    Set_Call_of_the_Undertaker        = 121633,
     Set_False_Gods_Devotion           = 121823,
-    Set_Claw_of_Yolnakhriin           = 121875,
-    Set_Hollowfang_Thirst             = 126921,
-    Set_Dragons_Defilement            = 126682,
     Set_Morkuldin                     = 71670,
     Set_Senchals_Duty                 = 129442,
-    Set_Daring_Corsair                = 129534,
     Set_Phoenix                       = 68933,
     Set_Immortal_Warrior              = 51300,
     Set_Eternal_Warrior               = 61436,
-    Set_Spectres_Eye                  = 32757,
     Set_Juggernaut                    = 34512,
     Set_Honors_Scorn                  = 121917,
     Set_Honors_Love                   = 121913,
-    Set_Lekis_Focus                   = 76944,
     Set_Dauntless_Combatant           = 134103,
-    Set_Unchained_Aggressor           = 134090,
-    Set_Critical_Riposte              = 134017,
     Set_Warming_Aura                  = 133210,
     Set_Aegis_Caller                  = 133490,
-    Set_Banis_Torment                 = 133290,
     Set_Reactive_Armor                = 68947,
     Set_Kynes_Blessing                = 136098,
     Set_Blood_Curse                   = 139903,
     Set_Sanguine_Burst                = 142305,
     Set_Heed_the_Call                 = 142780,
+    Set_Legacy_of_Karth               = 147388,
 
     Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE),
 
@@ -486,274 +364,125 @@ local AbilityTables = {
     -- ---------------------------------------------------
 
     -- Dragonknight
-    Skill_Mountains_Blessing          = 29473,
-    Skill_Lava_Whip                   = 23806,
-    Skill_Molten_Whip                 = 20805,
-    Skill_Flame_Lash                  = 20816,
     Skill_Fiery_Breath                = 20917,
-    Skill_Noxious_Breath              = 20944,
     Skill_Fiery_Grip                  = 20492,
     Skill_Empowering_Chains           = 20499,
-    Skill_Unrelenting_Grip            = 20496,
     Skill_Inferno                     = 28967,
-    Skill_Flames_of_Oblivion          = 32853,
-    Skill_Cauterize                   = 32881,
-    Skill_Dragonknight_Standard       = 28988,
-    Skill_Shifting_Standard           = 32967,
-    Skill_Standard_of_Might           = 32947,
     Skill_Shackle                     = 32905,
-    Skill_Spiked_Armor                = 20319,
-    Skill_Hardened_Armor              = 20328,
-    Skill_Volatile_Armor              = 20323,
-    Skill_Choking_Talons              = 20528,
     Skill_Dragon_Blood                = 29004,
-    Skill_Green_Dragon_Blood          = 32744,
-    Skill_Coagulating_Blood           = 32722,
     Skill_Inhale                      = 31837,
     Skill_Dragon_Leap                 = 29016,
     Skill_Take_Flight                 = 32719,
     Skill_Ferocious_Leap              = 32715,
     Skill_Stonefist                   = 29032,
     Skill_Molten_Weapons              = 29043,
-    Skill_Igneous_Weapons             = 31874,
-    Skill_Molten_Armaments            = 31888,
-    Skill_Obsidian_Shield             = 29071,
-    Skill_Igneous_Shield              = 29224,
-    Skill_Fragmented_Shield           = 32673,
 
     -- Nightblade
-    Skill_Hemorrhage                  = 36641,
-    Skill_Shadow_Barrier              = 18866,
-    Skill_Teleport_Strike             = 18342,
-    Skill_Lotus_Fan                   = 25493,
-    Skill_Ambush                      = 25484,
-    Skill_Blur                        = 33375,
-    Skill_Mirage                      = 35414,
-    Skill_Double_Take                 = 35419,
-    Skill_Mark_Target                 = 33357,
-    Skill_Piercing_Mark               = 36968,
-    Skill_Reapers_Mark                = 36967,
     Skill_Assassins_Scourge           = 61932,
     Skill_Death_Stroke                = 33398,
     Skill_Incapacitating_Strike       = 36508,
     Skill_Soul_Harvest                = 36514,
-    Skill_Veiled_Strike               = 25255,
-    Skill_Concealed_Weapon            = 34739,
-    Skill_Dark_Cloak                  = 25377,
-    Skill_Path_of_Darkness            = 33195,
-    Skill_Twisting_Path               = 36049,
-    Skill_Refreshing_Path             = 36028,
     Skill_Corrosive_Strike            = 33219,
     Skill_Corrosive_Spin              = GetString(SI_LUIE_SKILL_CORROSIVE_SPIN_TP),
-    Skill_Corrosive_Arrow             = 51556,
     Skill_Summon_Shade                = 33211,
     Skill_Shade                       = 38508,
     Skill_Dark_Shade                  = 35434,
     Skill_Shadow_Image                = 35441,
-    Skill_Shadow_Image_Teleport       = 35445,
-    Skill_Consuming_Darkness          = 25411,
-    Skill_Bolstering_Darkness         = 36493,
-    Skill_Veil_of_Blades              = 36485,
-    Skill_Healthy_Offering            = 34727,
-    Skill_Debilitate                  = 36943,
     Skill_Crippling_Grasp             = 36957,
-    Skill_Drain_Power                 = 33316,
-    Skill_Power_Extraction            = 36901,
     Skill_Sap_Essence                 = 36891,
-    Skill_Soul_Tether                 = 35460,
-    Skill_Soul_Siphon                 = 35508,
-    Skill_Refreshing_Path             = 36028,
 
     -- Sorcerer
-    Skill_Exploitation                = 31389,
     Skill_Crystal_Shard               = 43714,
     Skill_Crystal_Blast               = 46704,
     Skill_Crystal_Fragments           = 46324,
-    Skill_Restraining_Prison          = 28311,
     Skill_Daedric_Tomb                = 24842,
     Skill_Daedric_Minefield           = 24834,
     Skill_Unstable_Pulse              = GetString(SI_LUIE_SKILL_UNSTABLE_PULSE),
     Skill_Volatile_Pulse              = GetString(SI_LUIE_SKILL_VOLATILE_PULSE),
-    Skill_Empowered_Ward              = 29482,
     Skill_Summon_Storm_Atronach       = 23634,
     Skill_Summon_Storm_Atronachs      = GetString(SI_LUIE_SKILL_SUMMON_STORM_ATRONACHS),
     Skill_Greater_Storm_Atronach      = 23492,
     Skill_Summon_Charged_Atronach     = 23495,
-    Skill_Charged_Lightning           = 102310,
     Skill_Atronach_Zap                = 23428,
     Skill_Bound_Aegis                 = 24163,
     Skill_Lightning_Form              = 23210,
-    Skill_Hurricane                   = 23231,
-    Skill_Boundless_Storm             = 23213,
-    Skill_Surge                       = 23670,
-    Skill_Power_Surge                 = 23674,
-    Skill_Critical_Surge              = 23678,
     Skill_Kick                        = 4125,
     Skill_Entropic_Touch              = 9743,
     Skill_Intercept                   = 23284,
 
     -- Templar
-    Skill_Spear_Wall                  = 31708,
-    Skill_Illuminate                  = 31743,
-    Skill_Sacred_Ground               = 31757,
-    Skill_Biting_Jabs                 = 26792,
     Skill_Puncturing_Sweep            = 26797,
     Skill_Aurora_Javelin              = 26800,
     Skill_Crescent_Sweep              = 22139,
     Skill_Sun_Fire                    = 21726,
-    Skill_Vampires_Bane               = 21729,
-    Skill_Reflective_Light            = 21732,
-    Skill_Solar_Flare                 = 22057,
     Skill_Dark_Flare                  = 22110,
-    Skill_Power_of_the_Light          = 21763,
     Skill_Unstable_Core               = 22004,
     Skill_Radiant_Glory               = 63044,
     Skill_Nova                        = 21752,
-    Skill_Solar_Prison                = 21755,
     Skill_Solar_Disturbance           = 21758,
-    Skill_Hasty_Prayer                = 22314,
-    Skill_Restoring_Aura              = 26209,
-    Skill_Repentance                  = 26821,
-    Skill_Radiant_Aura                = 26807,
     Skill_Cleansing_Ritual            = 22265,
     Skill_Rune_Focus                  = 22234,
     Skill_Channeled_Focus             = 22240,
     Skill_Restoring_Focus             = 22237,
-    Skill_Remembrance                 = 22229,
 
     -- Warden
-    Skill_Dive                        = 85995,
-    Skill_Cutting_Dive                = 85999,
-    Skill_Screaming_Cliff_Racer       = 86003,
-    Skill_Swarm                       = 86023,
-    Skill_Fetcher_Infection           = 86027,
-    Skill_Growing_Swarm               = 86031,
-    Skill_Accelerated_Growth          = 85882,
-    Skill_Maturation                  = 85880,
-    Skill_Subterranean_Assault        = 86019,
-    Skill_Deep_Fissure                = 86015,
-    Skill_Betty_Netch                 = 86050,
-    Skill_Blue_Betty                  = 86054,
-    Skill_Bull_Netch                  = 86058,
-    Skill_Falcons_Swiftness           = 86037,
-    Skill_Deceptive_Predator          = 86041,
-    Skill_Bird_of_Prey                = 86045,
     Skill_Feral_Guardian              = 85982,
     Skill_Eternal_Guardian            = 85986,
-    Skill_Enchanted_Growth            = 85862,
     Skill_Budding_Seeds               = 85840,
-    Skill_Corrupting_Pollen           = 85845,
-    Skill_Leeching_Vines              = 85850,
-    Skill_Green_Lotus                 = 85854,
     Skill_Lotus_Blossom               = 85855,
     Skill_Natures_Grasp               = 85564,
     Skill_Bursting_Vines              = 85859,
     Skill_Natures_Embrace             = 85858,
-    Skill_Frost_Cloak                 = 86122,
-    Skill_Expansive_Frost_Cloak       = 86126,
-    Skill_Ice_Fortress                = 86130,
     Skill_Crystallized_Shield         = 86135,
     Skill_Crystallized_Slab           = 86139,
     Skill_Shimmering_Shield           = 86143,
     Skill_Frozen_Device               = 86179,
-    Skill_Icy_Escape                  = 88884,
-    Skill_Sleet_Storm                 = 86109,
-    Skill_Northern_Storm              = 87542,
-    Skill_Permafrost                  = 86117,
 
     -- Necromancer
-    Skill_Blighted_Blastbones         = 117690,
-    Skill_Unnerving_Boneyard          = 117809,
     Skill_Skeletal_Mage               = 114317,
     Skill_Skeletal_Arcanist           = 118726,
-    Skill_Frozen_Colossus             = 122174,
-    Skill_Pestilent_Colossus          = 122397,
-    Skill_Glacial_Colossus            = 122388,
-    Skill_Ruinous_Scythe              = 118226,
-    Skill_Bone_Armor                  = 115206,
-    Skill_Beckoning_Armor             = 118237,
-    Skill_Summoners_Armor             = 118244,
     Skill_Bitter_Harvest              = 115238,
     Skill_Deaden_Pain                 = 118623,
-    Skill_Bone_Totem                  = 115093,
-    Skill_Remote_Totem                = 118380,
-    Skill_Agony_Totem                 = 118404,
-    Skill_Pure_Agony                  = 118618,
-    Skill_Grave_Grasp                 = 115177,
-    Skill_Ghostly_Embrace             = 118308,
-    Skill_Empowering_Grasp            = 118359,
     Skill_Bone_Goliath_Transformation = 115001,
     Skill_Pummeling_Goliath           = 118664,
     Skill_Ravenous_Goliath            = 118279,
-    Skill_Render_Flesh                = 114196,
-    Skill_Resistant_Flesh             = 117883,
-    Skill_Blood_Sacrifice             = 117888,
-    Skill_Empowering_Grasp            = 118352,
 
     -- ---------------------------------------------------
     -- WEAPON SKILLS -------------------------------------
     -- ---------------------------------------------------
 
     -- Restoration Staff
-    Skill_Essence_Drain               = 30973,
-    Skill_Blessing_of_Protection      = 37243,
     Skill_Blessing_of_Restoration     = GetString(SI_LUIE_SKILL_BLESSING_OF_RESTORATION),
-    Skill_Combat_Prayer               = 40094,
-    Skill_Force_Siphon                = 31531,
-    Skill_Siphon_Spirit               = 40109,
-    Skill_Quick_Siphon                = 40116,
-    Skill_Lights_Champion             = 85132,
 
     -- Destruction Staff
     Skill_Crushing_Shock              = 46348,
     Skill_Frozen                      = 68719,
-    Skill_Wall_of_Storms              = 28854,
-    Skill_Unstable_Wall_of_Storms     = 39073,
-    Skill_Blockade_of_Storms          = 39018,
     Skill_Flame_Touch                 = 29073,
     Skill_Flame_Clench                = 38985,
     Skill_Shock_Clench                = 38993,
     Skill_Frost_Clench                = 38989,
     Skill_Weakness_to_Elements        = 29173,
-    Skill_Elemental_Susceptibility    = 39089,
-    Skill_Elemental_Drain             = 39095,
-    Skill_Flame_Pulsar                = 39162,
-    Skill_Storm_Pulsar                = 39167,
     Skill_Frost_Pulsar                = 39163,
 
     -- Two-Handed
     Skill_Uppercut                    = 28279,
-    Skill_Dizzying_Swing              = 38814,
     Skill_Stampede                    = 38788,
     Skill_Cleave                      = 20919,
-    Skill_Momentum                    = 28297,
-    Skill_Forward_Momentum            = 38794,
-    Skill_Rally                       = 38802,
 
     -- One Hand & Shield
     Skill_Puncture                    = 28306,
-    Skill_Ransack                     = 38256,
-    Skill_Pierce_Armor                = 38250,
-    Skill_Low_Slash                   = 28304,
     Skill_Deep_Slash                  = 38268,
-    Skill_Heroic_Slash                = 38264,
     Skill_Shield_Charge               = 28719,
     Skill_Invasion                    = 38405,
     Skill_Power_Bash                  = 28365,
 
     -- Dual Wield
     Skill_Twin_Slashes                = 28379,
-    Skill_Blade_Cloak                 = 28613,
-    Skill_Quick_Cloak                 = 38901,
-    Skill_Deadly_Cloak                = 38906,
     Skill_Hidden_Blade                = 21157,
     Skill_Shrouded_Daggers            = 38914,
     Skill_Flying_Blade                = 38910,
 
     -- Bow
-    Skill_Hasty_Retreat               = 30923,
-    Skill_Lethal_Arrow                = 38685,
-    Skill_Focused_Aim                 = 38687,
     Skill_Draining_Shot               = 38669,
     Skill_Bombard                     = 38705,
     Skill_Venom_Arrow                 = 38645,
@@ -763,14 +492,8 @@ local AbilityTables = {
     -- ARMOR SKILLS --------------------------------------
     -- ---------------------------------------------------
 
-    Skill_Evasion                     = 29556,
-    Skill_Shuffle                     = 39195,
-    Skill_Elude                       = 39192,
-
     -- Heavy Armor
-    Skill_Unstoppable                 = 29553,
     Skill_Unstoppable_Brute           = 39205,
-    Skill_Immovable                   = 63118,
 
     -- ---------------------------------------------------
     -- SOUL MAGIC SKILLS ---------------------------------
@@ -785,7 +508,6 @@ local AbilityTables = {
     Skill_Feed                        = 33152,
     Skill_Vampirism                   = GetString(SI_LUIE_SKILL_VAMPIRISM),
     Skill_Profane_Symbol              = GetString(SI_LUIE_SKILL_PROFANE_SYMBOL),
-    Skill_Elusive_Mist                = 38963,
     Skill_Blood_Scion                 = 32624,
     Skill_Swarming_Scion              = 38932,
     Skill_Perfect_Scion               = 38931,
@@ -795,17 +517,11 @@ local AbilityTables = {
     -- ---------------------------------------------------
 
     Skill_Werewolf_Transformation     = 32455,
-    Skill_Pack_Leader                 = 39075,
     Skill_Devour                      = 32634,
     Skill_Carnage                     = 137157,
     Skill_Brutal_Carnage              = 137186,
     Skill_Feral_Carnage               = 137165,
     Skill_Hircines_Rage               = 58317,
-    Skill_Roar                        = 32633,
-    Skill_Ferocious_Roar              = 39113,
-    Skill_Deafening_Roar              = 39114,
-    Skill_Feeding_Frenzy              = 58745,
-    Skill_Claws_of_Anguish            = 58864,
     Skill_Remove                      = 31262,
 
     -- ---------------------------------------------------
@@ -814,30 +530,16 @@ local AbilityTables = {
 
     -- Dark Brotherhood
     Skill_Blade_of_Woe                = 78219,
-    Skill_Padomaic_Sprint             = 77397,
 
     -- Fighters Guild
-    Skill_Circle_of_Protection        = 35737,
-    Skill_Turn_Undead                 = 40181,
-    Skill_Ring_of_Preservation        = 40169,
-    Skill_Expert_Hunter               = 35762,
-    Skill_Evil_Hunter                 = 40194,
-    Skill_Camouflaged_Hunter          = 40195,
     Skill_Revealed                    = 11717,
     Skill_Marked                      = 103943,
-    Skill_Trap_Beast                  = 35750,
-    Skill_Barbed_Trap                 = 40382,
     Skill_Lightweight_Beast_Trap      = 40372,
     Skill_Flawless_Dawnbreaker        = 40161,
 
     -- Mages Guild
-    Skill_Might_of_the_Guild          = 43561,
     Skill_Magelight                   = 30920,
-    Skill_Inner_Light                 = 40478,
-    Skill_Radiant_Magelight           = 77960,
     Skill_Entropy                     = 28567,
-    Skill_Degeneration                = 40457,
-    Skill_Balance                     = 40441,
     Skill_Meteor                      = 16536,
     Skill_Ice_Comet                   = 40489,
     Skill_Shooting_Star               = 40493,
@@ -846,36 +548,21 @@ local AbilityTables = {
     Skill_Imbue_Weapon                = 103483,
     Skill_Elemental_Weapon            = 103571,
     Skill_Crushing_Weapon             = 103623,
-    Skill_Accelerate                  = 103503,
-    Skill_Channeled_Acceleration      = 103706,
-    Skill_Race_Against_Time           = 103710,
-    Skill_Mend_Spirit                 = 103747,
-    Skill_Temporal_Guard              = 103564,
 
     -- Undaunted
-    Skill_Blood_Altar                 = 39489,
     Skill_Black_Widow                 = 41994,
     Skill_Arachnophobia               = 42016,
-    Skill_Spinal_Surge                = 42198,
 
     -- ---------------------------------------------------
     -- ALLIANCE WAR --------------------------------------
     -- ---------------------------------------------------
 
     -- Assault
-    Skill_Rapid_Manuever              = 38566,
-    Skill_Retreating_Manuever         = 40211,
-    Skill_Charging_Manuever           = 40215,
     Skill_Caltrops                    = 33376,
     Skill_Razor_Caltrops              = 40242,
-    Skill_Aggressive_Horn             = 40223,
 
     -- Support
-    Skill_Mystic_Guard                = 61536,
-    Skill_Stalwart_Guard              = 61529,
-    Skill_Revealing_Flare             = 61489,
     Skill_Lingering_Flare             = 61519,
-    Skill_Blinding_Flare              = 61524,
     Skill_Reviving_Barrier            = 40237,
 
     -- ---------------------------------------------------
@@ -927,7 +614,6 @@ local AbilityTables = {
 
     Skill_Razor_Armor                 = 36304,
 
-    Skill_Pariahs_Resolve             = 116095,
     Skill_Consume_Lifeforce           = GetString(SI_LUIE_SKILL_CONSUME_LIFEFORCE),
     Skill_Wall_of_Souls               = 21677,
 
@@ -960,7 +646,6 @@ local AbilityTables = {
     Skill_Vanish                      = 24687,
     Skill_Bone_Cage                   = 35387,
     Skill_Defensive_Ward              = GetString(SI_LUIE_SKILL_DEFENSIVE_WARD),
-    Skill_Retaliation                 = 65033,
     Skill_Divine_Leap                 = 54027,
     Skill_Inspire                     = GetString(SI_LUIE_SKILL_INSPIRE),
     Skill_Hide_in_Shadows             = GetString(SI_LUIE_SKILL_HIDE_IN_SHADOWS),
@@ -968,12 +653,10 @@ local AbilityTables = {
     Skill_Clobber                     = 24671,
     Skill_Shadowy_Barrier             = GetString(SI_LUIE_SKILL_SHADOWY_BARRIER),
     Skill_Flare_Trap                  = 74628,
-    Skill_Heated_Blades               = 44208,
     Skill_Bear_Trap                   = 39058,
     Skill_Void_Burst                  = 36987,
 
     -- Justice
-    Skill_Criminals_Bane              = 63145,
     Skill_Heavy_Blow                  = 63157,
     Skill_Mighty_Charge               = GetString(SI_LUIE_SKILL_MIGHTY_CHARGE),
     Skill_Throw_Dagger                = 28499,
@@ -1096,7 +779,6 @@ local AbilityTables = {
     -- ---------------------------------------------------
 
     Skill_Ferocious_Charge            = 83033,
-    Skill_Stone_Crusher               = 83160,
     Skill_Molten_Impact               = 83203,
     Skill_Molten_Pillar_Incalescence  = GetString(SI_LUIE_SKILL_MOLTEN_PILLAR_INCALESCENCE),
     Skill_Trapping_Bolt               = 83925,

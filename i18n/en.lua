@@ -174,7 +174,7 @@ local strings = {
     -- SpellCastBuffs
     SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS =                "Player Buffs",
     SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS =              "Player Debuffs",
-    SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS =      "Player Long Term Effects",
+    SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS =      "Player Long Term",
     SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS =                "Target Buffs",
     SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS =              "Target Debuffs",
     SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS =             "Prominent Buffs",

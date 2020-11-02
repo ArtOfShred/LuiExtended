@@ -11,77 +11,70 @@ local Abilities = LUIE.Data.Abilities
 
 -- Minor Buffs
 BlacklistPresets.MinorBuffs = {
-    [Abilities.Skill_Minor_Resolve]               = true,
-    [Abilities.Skill_Minor_Fortitude]             = true,
-    [Abilities.Skill_Minor_Endurance]             = true,
-    [Abilities.Skill_Minor_Intellect]             = true,
-    [Abilities.Skill_Minor_Sorcery]               = true,
-    [Abilities.Skill_Minor_Prophecy]              = true,
-    [Abilities.Skill_Minor_Brutality]             = true,
-    [Abilities.Skill_Minor_Savagery]              = true,
-    [Abilities.Skill_Minor_Berserk]               = true,
-    [Abilities.Skill_Minor_Force]                 = true,
-    [Abilities.Skill_Minor_Vitality]              = true,
-    [Abilities.Skill_Minor_Mending]               = true,
-    [Abilities.Skill_Minor_Protection]            = true,
-    [Abilities.Skill_Minor_Evasion]               = true,
-    [Abilities.Skill_Minor_Expedition]            = true,
-    [Abilities.Skill_Minor_Heroism]               = true,
-    [Abilities.Skill_Minor_Toughness]             = true,
-    --[Abilities.Skill_Minor_Courage]               = true,
+    [61693] = true, -- Minor Resolve
+    [61697] = true, -- Minor Fortitude
+    [61704] = true, -- Minor Endurance
+    [61706] = true, -- Minor Intellect
+    [61685] = true, -- Minor Sorcery
+    [61691] = true, -- Minor Prophecy
+    [61662] = true, -- Minor Brutality
+    [61666] = true, -- Minor Savagery
+    [61744] = true, -- Minor Berserk
+    [61746] = true, -- Minor Force
+    [61549] = true, -- Minor Vitality
+    [61710] = true, -- Minor Mending
+    [61721] = true, -- Minor Protection
+    [61715] = true, -- Minor Evasion
+    [61735] = true, -- Minor Expedition
+    [61708] = true, -- Minor Heroism
+    [88490] = true, -- Minor Toughness
+    [147417] = true, -- Minor Courage
 }
 
 -- Major Buffs
 BlacklistPresets.MajorBuffs = {
-    [Abilities.Skill_Major_Resolve]               = true,
-    [Abilities.Skill_Major_Fortitude]             = true,
-    [Abilities.Skill_Major_Endurance]             = true,
-    [Abilities.Skill_Major_Intellect]             = true,
-    [Abilities.Skill_Major_Sorcery]               = true,
-    [Abilities.Skill_Major_Prophecy]              = true,
-    [Abilities.Skill_Major_Brutality]             = true,
-    [Abilities.Skill_Major_Savagery]              = true,
-    [Abilities.Skill_Major_Vitality]              = true,
-    [Abilities.Skill_Major_Mending]               = true,
-    [Abilities.Skill_Major_Evasion]               = true,
-    [Abilities.Skill_Major_Expedition]            = true,
-    [Abilities.Skill_Major_Gallop]                = true,
-    [Abilities.Skill_Major_Heroism]               = true,
-    --[Abilities.Skill_Major_Courage]               = true,
+    [61694] = true, -- Major Resolve
+    [61698] = true, -- Major Fortitude
+    [61705] = true, -- Major Endurance
+    [61707] = true, -- Major Intellect
+    [61687] = true, -- Major Sorcery
+    [61689] = true, -- Major Prophecy
+    [61665] = true, -- Major Brutality
+    [61667] = true, -- Major Savagery
+    [61745] = true, -- Major Berserk
+    [61747] = true, -- Major Force
+    [61713] = true, -- Major Vitality
+    [61711] = true, -- Major Mending
+    [61722] = true, -- Major Protection
+    [61716] = true, -- Major Evasion
+    [61736] = true, -- Major Expedition
+    [63569] = true, -- Major Gallop
+    [61709] = true, -- Major Heroism
+    [109966] = true, -- Major Courage
 }
 
 -- Minor Debuffs
 BlacklistPresets.MinorDebuffs = {
-    [Abilities.Skill_Minor_Breach]                = true,
-    [Abilities.Skill_Minor_Fracture]              = true,
-    [Abilities.Skill_Minor_Vulnerability]         = true,
-    [Abilities.Skill_Minor_Maim]                  = true,
-    [Abilities.Skill_Minor_Defile]                = true,
-    [Abilities.Skill_Minor_Magickasteal]          = true,
-    [Abilities.Skill_Minor_Lifesteal]             = true,
-    [Abilities.Skill_Minor_Enveration]            = true,
-    [Abilities.Skill_Minor_Uncertainty]           = true,
-    [Abilities.Skill_Minor_Cowardice]             = true,
-    [Abilities.Skill_Minor_Mangle]                = true,
-    [Abilities.Skill_Minor_Timidity]              = true,
+    [61742] = true, -- Minor Breach
+    [79717] = true, -- Minor Vulnerability
+    [61723] = true, -- Minor Maim
+    [61726] = true, -- Minor Defile
+    [88401] = true, -- Minor Magickasteal
+    [86304] = true, -- Minor Lifesteal
+    [79907] = true, -- Minor Enervation
+    [79895] = true, -- Minor Uncertainty
+    [79867] = true, -- Minor Cowardice
+    [61733] = true, -- Minor Mangle
+    [140699] = true, -- Minor Timidity
+    [145975] = true, -- Minor Brittle
 }
 
 -- Major Debuffs
 BlacklistPresets.MajorDebuffs = {
-    [Abilities.Skill_Major_Breach]                = true,
-    [Abilities.Skill_Major_Fracture]              = true,
-    [Abilities.Skill_Major_Defile]                = true,
-}
-
--- High Priority Major Buffs
-BlacklistPresets.MajorBuffsHigh = {
-    [Abilities.Skill_Major_Berserk]               = true,
-    [Abilities.Skill_Major_Force]                 = true,
-    [Abilities.Skill_Major_Protection]            = true,
-}
-
--- High Priority Major Debuffs
-BlacklistPresets.MajorDebuffsHigh = {
-    [Abilities.Skill_Major_Maim]                  = true,
-    [Abilities.Skill_Major_Vulnerability]         = true,
+    [61743] = true, -- Major Breach
+    [106754] = true, -- Major Vulnerability
+    [61725] = true, -- Major Maim
+    [61727] = true, -- Major Defile
+    [147643] = true, -- Major Cowardice
+    --[145977] = true, -- Major Brittle
 }

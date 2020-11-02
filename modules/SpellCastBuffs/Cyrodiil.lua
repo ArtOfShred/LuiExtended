@@ -26,6 +26,7 @@ function SpellCastBuffs.DuelEnd()
     SpellCastBuffs.ReloadEffects("reticleover")
 end
 
+-- Called by SpellCastBuffs.ReloadEffects(unitTag) from the EVENT_RETICLE_TARGET_CHANGED handler
 function SpellCastBuffs.LoadBattleSpiritTarget()
     -- Return if we don't have Battle Spirit enabled for Target
     if SpellCastBuffs.SV.HideTargetBuffs or SpellCastBuffs.SV.IgnoreBattleSpiritTarget then
@@ -48,70 +49,5 @@ function SpellCastBuffs.LoadBattleSpiritTarget()
             forced = "short",
             restart=true, iconNum=0,
         }
-    end
-end
-
-function SpellCastBuffs.LoadCyrodiilBuffs(unitTag)
-    -- If we aren't in the AvA World then return (needs to check for Cyrodiil only - we don't want this displaying in BG's)
-    if not IsPlayerInAvAWorld() then
-        return
-    end
-
-    -- If the unitTag isn't a player then bail out
-    if not IsUnitPlayer(unitTag) then
-        return
-    end
-
-    -- Return if we don't have Buffs / Cyrodiil Buffs enabled for this unitTag
-    if unitTag == "player" and (SpellCastBuffs.SV.HidePlayerBuffs or SpellCastBuffs.SV.IgnoreCyrodiilPlayer) then
-        return
-    elseif unitTag == "reticleover" and (SpellCastBuffs.SV.HideTargetBuffs or SpellCastBuffs.SV.IgnoreCyrodiilTarget) then
-        return
-    end
-
-    -- Set context based off unitTag
-    local context = unitTag .. "1"
-    -- Force to long container if Player and short if Target
-    local forced = unitTag == "player" and "long" or "short"
-
-    local campaignId = GetCurrentCampaignId()
-    local alliance = GetUnitAlliance(unitTag)
-    -- Bail if no Alliance is returned
-    if alliance == ALLIANCE_NONE then
-        return
-    end
-    local _, _, _, _, edgeKeepCount = GetAvAKeepScore(campaignId, alliance)
-    local id
-    local icon
-    local name
-    local stack
-
-    if edgeKeepCount >= 1 then
-        if edgeKeepCount == 1 then
-            id = 111549
-            icon = "LuiExtended/media/icons/abilities/ability_cryodiil_edge_keep_bonus_1.dds"
-            name = Abilities.Skill_Edge_Keep_Bonus_I
-            stack = 1
-        elseif edgeKeepCount == 2 then
-            id = 111552
-            icon = "LuiExtended/media/icons/abilities/ability_cryodiil_edge_keep_bonus_2.dds"
-            name = Abilities.Skill_Edge_Keep_Bonus_II
-            stack = 2
-        elseif edgeKeepCount == 3 then
-            id = 111553
-            icon = "LuiExtended/media/icons/abilities/ability_cryodiil_edge_keep_bonus_3.dds"
-            name = Abilities.Skill_Edge_Keep_Bonus_III
-            stack = 3
-        end
-        if not (SpellCastBuffs.SV.BlacklistTable[id] or SpellCastBuffs.SV.BlacklistTable[name]) then
-            SpellCastBuffs.EffectsList[context][ Abilities.Skill_Edge_Keep_Bonus_I ] = {
-                target=unitTag, type=1,
-                id=id, name=name, icon = icon,
-                dur=0, starts=1, ends=nil,
-                forced = forced,
-                restart=true, iconNum=0,
-                stack = stack,
-            }
-        end
     end
 end

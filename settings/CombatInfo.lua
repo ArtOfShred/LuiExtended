@@ -297,17 +297,6 @@ function CombatInfo.CreateSettings()
                 disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
             },
             {
-                -- Show Toggled Secondary
-                type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_SECONDARY)),
-                tooltip = GetString(SI_LUIE_LAM_CI_BAR_SECONDARY_TP),
-                getFunc = function() return Settings.ShowToggledSecondary end,
-                setFunc = function(value) Settings.ShowToggledSecondary = value CombatInfo.UpdateBarHighlightTables() CombatInfo.OnSlotsFullUpdate() end,
-                width = "full",
-                default = Defaults.ShowToggledSecondary,
-                disabled = function() return not (Settings.ShowToggled and LUIE.SV.CombatInfo_Enabled) end,
-            },
-            {
                 -- Show Toggled Ultimate
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_ULTIMATE)),

@@ -44,7 +44,6 @@ CombatInfo.Defaults = {
     ProcSoundName                    = "Death Recap Killing Blow",
     ShowToggled                      = true,
     ShowToggledUltimate              = true,
-    ShowToggledSecondary             = false,
     BarShowLabel                     = true,
     BarLabelPosition                 = -20,
     BarFontFace                      = "Univers 67",
@@ -663,7 +662,6 @@ function CombatInfo.UpdateBarHighlightTables()
     end
 
     if CombatInfo.SV.ShowTriggered or CombatInfo.SV.ShowToggled then
-        Effects.BarHighlightRefresh()
         -- Grab any aura's from the list that have on EVENT_COMBAT_EVENT AURA support
         for abilityId, value in pairs(Effects.BarHighlightOverride) do
             if value.showFakeAura == true then
@@ -1271,7 +1269,7 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
         end
     end
 
-    if Effects.EffectGroundDisplay[abilityId] or Effects.LinkedGroundMine[abilityId] then
+    if (Effects.EffectGroundDisplay[abilityId] or Effects.LinkedGroundMine[abilityId]) and not passThrough then
         if Effects.LinkedGroundMine[abilityId] then
             abilityId = Effects.LinkedGroundMine[abilityId]
         end
@@ -1322,6 +1320,9 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                             end
                             g_toggledSlotsRemain[abilityId] = nil
                             g_toggledSlotsStack[abilityId] = nil
+                            if Effects.BarHighlightCheckOnFade[abilityId] then
+                                CombatInfo.BarHighlightSwap(abilityId)
+                            end
                         end
                     end
                 else
@@ -2303,11 +2304,6 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
 
     local showFakeAura = (Effects.BarHighlightOverride[ability_id] and Effects.BarHighlightOverride[ability_id].showFakeAura)
 
-    -- If secondary effects aren't set to display then don't setup highlight for this slot.
-    if (Effects.BarHighlightOverride[ability_id] and Effects.BarHighlightOverride[ability_id].secondary) and not CombatInfo.SV.ShowToggledSecondary then
-        return
-    end
-
     if Effects.BarHighlightOverride[ability_id] then
         if Effects.BarHighlightOverride[ability_id].hide then
             return
@@ -2366,7 +2362,7 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
 
     -- Check for active duration to display highlight for abilities on bar swap
     if onlyProc == false then
-        if duration > 0 or Effects.AddNoDurationBarHighlight[ability_id] then
+        if duration > 0 or Effects.AddNoDurationBarHighlight[ability_id] or Effects.MajorMinor[ability_id] then
             toggledSlots[ability_id] = slotNum
             if g_toggledSlotsRemain[ability_id] then
                 if CombatInfo.SV.ShowToggled then

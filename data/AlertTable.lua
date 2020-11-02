@@ -77,8 +77,6 @@ LUIE.Data.AlertTable = {
 
     [78265] = { power = true, priority = 2, result = ACTION_RESULT_BEGIN, sound = LUIE_ALERT_SOUND_TYPE_SUMMON }, -- Alarm (Estate Marshal) (DB DLC)
 
-    [52471] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2300, cc = LUIE_CC_TYPE_SILENCE, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Nullify (Estate Spellbreaker) (DB DLC)
-
     [73229] = { power = true, priority = 2, auradetect = true, ignoreRefresh = true, sound = LUIE_ALERT_SOUND_TYPE_POWER_DEFENSE }, -- Hurried Ward (Guard - DB Mage)
 
     --------------------------------------------------
@@ -492,7 +490,6 @@ LUIE.Data.AlertTable = {
     [51352] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 2000, postCast = 600, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_ST_CC }, -- Petrify (Gargoyle)
 
     [26124] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1800, eventdetect = true, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Shatter (Giant)
-    [15715] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 3000, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_AOE_CC }, -- Obliterate (Giant)
     [127910] = { block = true, avoid = true, priority = 2, auradetect = true, duration = 3200, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_AOE_CC }, -- Giant's Maul (Giant)
 
     [2786] = { interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 1250, duration = 6100, sound = LUIE_ALERT_SOUND_TYPE_ST }, -- Steal Essence (Hag)
@@ -781,7 +778,6 @@ LUIE.Data.AlertTable = {
     -- Main Quest
     [87958] = { avoid = true, interrupt = true, priority = 2 }, -- Ash Storm (Divine Delusions)
     [90139] = { block = true, dodge = true, priority = 2, bs = true }, -- Empowered Strike (Divine Intervention)
-    [90181] = { avoid = true, priority = 2 , refire = 1500 }, -- Oily Smoke (Divine Restoration)
     [87038] = { block = true, dodge = true, priority = 2, bs = true}, -- Spinning Blades (Divine Restoration)
     [87047] = { block = true, dodge = true, priority = 2, refire = 1500 }, -- Lunge (Divine Restoration)
     [87090] = { block = true, dodge = true, priority = 2}, -- Barbs (Divine Restoration)

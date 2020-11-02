@@ -23,7 +23,6 @@ local moduleName = LUIE.name .. "SpellCastBuffs"
 local hidePlayerEffects = { } -- Table of Effects to hide on Player - generated on load or updated from Menu
 local hideTargetEffects = { } -- Table of Effects to hide on Target - generated on load or updated from Menu
 local debuffDisplayOverrideId = { } -- Table of Effects (by id) that should show on the target regardless of who applied them.
-local debuffDisplayOverrideName = { } -- Table of Effects (by name) that should show on the target regardless of who applied them.
 
 local windowTitles = {
     playerb             = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS),
@@ -47,10 +46,26 @@ SpellCastBuffs.Defaults = {
     BuffFontStyle                       = "outline",
     BuffFontSize                        = 16,
     BuffShowLabel                       = true,
-    Alignment                           = "Centered",
-    AlignmentLongVert                   = "Top",
+    AlignmentBuffsPlayer                = "Centered",
+    SortBuffsPlayer                     = "Left to Right",
+    AlignmentDebuffsPlayer              = "Centered",
+    SortDebuffsPlayer                   = "Left to Right",
+    AlignmentBuffsTarget                = "Centered",
+    SortBuffsTarget                     = "Left to Right",
+    AlignmentDebuffsTarget              = "Centered",
+    SortDebuffsTarget                   = "Left to Right",
     AlignmentLongHorz                   = "Centered",
-    SortDirection                       = "Left to Right",
+    SortLongHorz                        = "Left to Right",
+    AlignmentLongVert                   = "Top",
+    SortLongVert                        = "Top to Bottom",
+    AlignmentPromBuffsHorz              = "Centered",
+    SortPromBuffsHorz                   = "Left to Right",
+    AlignmentPromBuffsVert              = "Bottom",
+    SortPromBuffsVert                   = "Bottom to Top",
+    AlignmentPromDebuffsHorz            = "Centered",
+    SortPromDebuffsHorz                 = "Left to Right",
+    AlignmentPromDebuffsVert            = "Bottom",
+    SortPromDebuffsVert                 = "Bottom to Top",
     GlowIcons                           = false,
     RemainingText                       = true,
     RemainingTextColoured               = false,
@@ -94,7 +109,6 @@ SpellCastBuffs.Defaults = {
     IgnoreMountTarget                   = false,
     MountDetail                         = true,
     LongTermEffectsSeparate             = true,
-    LongTermEffectsReverse              = true,
     LongTermEffectsSeparateAlignment    = 2,
     ShowBlockPlayer                     = true,
     ShowBlockTarget                     = true,
@@ -102,8 +116,8 @@ SpellCastBuffs.Defaults = {
     StealthStateTarget                  = true,
     DisguiseStatePlayer                 = true,
     DisguiseStateTarget                 = true,
-    ShowSprint                          = true,
-    ShowGallop                          = true,
+    --ShowSprint                          = true,
+    --ShowGallop                          = true,
     ShowResurrectionImmunity            = true,
     ShowRecall                          = true,
     ShowWerewolf                        = true,
@@ -113,7 +127,6 @@ SpellCastBuffs.Defaults = {
     HideTargetDebuffs                   = false,
     HideGroundEffects                   = false,
     ExtraBuffs                          = true,
-    ExtraConsolidate                    = false,
     ExtraExpanded                       = false,
     ShowDebugCombat                     = false,
     ShowDebugEffect                     = false,
@@ -133,12 +146,6 @@ SpellCastBuffs.Defaults = {
     ProminentProgressDebuffC2           = { .4, 0, 0 },
     ProminentBuffContainerAlignment     = 2,
     ProminentDebuffContainerAlignment   = 2,
-    ProminentBuffAlignmentVertical      = "Bottom",
-    ProminentBuffAlignmentHorizontal    = "Centered",
-    ProminentDebuffAlignmentVertical    = "Bottom",
-    ProminentDebuffAlignmentHorizontal  = "Centered",
-    ProminentBuffReverseSort            = false,
-    ProminentDebuffReverseSort          = false,
     ProminentBuffLabelDirection         = "Left",
     ProminentDebuffLabelDirection       = "Right",
     PromBuffTable                       = {},
@@ -148,9 +155,6 @@ SpellCastBuffs.Defaults = {
     TooltipSticky                       = 0,
     TooltipAbilityId                    = false,
     TooltipBuffType                     = false,
-    GenericPotion                       = false,
-    GenericPoison                       = true,
-    GenericStatusEffect                 = false,
     GenericMajorMinor                   = false,
     ShowSharedEffects                   = true,
     ShowSharedMajorMinor                = true,
@@ -161,22 +165,17 @@ SpellCastBuffs.EffectsList           = { player1 = {}, player2 = {}, reticleover
 
 local uiTlw                          = {} -- GUI
 local containerRouting               = {} -- Routing for Auras
+local g_alignmentDirection           = {} -- Holds alignment direction for all containers
+local g_sortDirection                = {} -- Holds sorting direction for all containers
+
 local g_playerActive                 = false -- Player Active State
 local g_playerDead                   = false -- Player Dead State
 local g_playerResurrectStage         = nil -- Player resurrection sequence state
+
 local g_buffsFont                    -- Buff font
 local g_prominentFont                -- Prominent buffs label font
 local g_padding                      = 0 -- Padding between icons
-local g_horizAlign                   = CENTER -- Alignment for standard buff containers
-local g_longHorizAlign               = CENTER -- Alignment for Long Term Buffs (Horizontal)
-local g_longVertAlign                = MIDDLE -- Alignment for Long Term Buffs (Vertical)
-local g_prominentVertBuffAlign       = BOTTOM -- Alignment for Prominent Buffs
-local g_prominentHorizBuffAlign      = CENTER -- Alignment for Prominent Buffs
-local g_prominentVertDebuffAlign     = BOTTOM -- Alignment for Prominent Debuffs
-local g_prominentHorizDebuffAlign    = CENTER -- Alignment for Prominent Debuffs
-local g_horizSortInvert              = false -- Invert sort order on buff container
 local g_protectAbilityRemoval        = {} -- AbilityId's set to a timestamp here to prevent removal of ground effects when refreshing ground auras from causing the aura to fade.
-local g_grimFocusCount               = 0 -- Tracker for Grim Focus Stacks
 local g_ignoreAbilityId              = {} -- Ignored abilityId's on EVENT_COMBAT_EVENT, some events fire twice and we need to ignore every other one.
 
 -- Add buff containers into LUIE namespace
@@ -187,7 +186,6 @@ local function EaseOutQuad(t, b, c, d)
     t = t / d
     return -c * t*(t-2) + b
 end
-
 
 -- Initialization
 function SpellCastBuffs.Initialize(enabled)
@@ -384,10 +382,6 @@ function SpellCastBuffs.Initialize(enabled)
     SpellCastBuffs.Reset()
     SpellCastBuffs.UpdateContextHideList()
     SpellCastBuffs.UpdateDisplayOverrideIdList()
-    SpellCastBuffs.UpdateDisplayOverrideNameList()
-    SpellCastBuffs.UpdatePotionList()
-    SpellCastBuffs.UpdatePoisonList()
-    SpellCastBuffs.UpdateStatusEffectList()
     SpellCastBuffs.UpdateMajorMinorList()
 
     -- Register events
@@ -572,161 +566,83 @@ function SpellCastBuffs.RemoveFromCustomList(list, input)
     SpellCastBuffs.Reset()
 end
 
--- Function to loop through alignments
-function SpellCastBuffs.SetAlignment()
-    for _, v in pairs(containerRouting) do
-        if uiTlw[v].iconHolder then
+-- Set g_alignmentDirection table to equal the values from our SV Table & converts string values to proper alignment values. Called from Settings Menu & on Initialize
+function SpellCastBuffs.SetupContainerAlignment()
+    g_alignmentDirection = { }
+
+    g_alignmentDirection.player1 = SpellCastBuffs.SV.AlignmentBuffsPlayer -- No icon holder for anchored buffs/debuffs - This value gets passed to SpellCastBuffs.updateIcons()
+    g_alignmentDirection.playerb = SpellCastBuffs.SV.AlignmentBuffsPlayer
+    g_alignmentDirection.player2 = SpellCastBuffs.SV.AlignmentDebuffsPlayer -- No icon holder for anchored buffs/debuffs - This value gets passed to SpellCastBuffs.updateIcons()
+    g_alignmentDirection.playerd = SpellCastBuffs.SV.AlignmentDebuffsPlayer
+    g_alignmentDirection.target1 = SpellCastBuffs.SV.AlignmentBuffsTarget -- No icon holder for anchored buffs/debuffs - This value gets passed to SpellCastBuffs.updateIcons()
+    g_alignmentDirection.targetb = SpellCastBuffs.SV.AlignmentBuffsTarget
+    g_alignmentDirection.target2 = SpellCastBuffs.SV.AlignmentDebuffsTarget -- No icon holder for anchored buffs/debuffs - This value gets passed to SpellCastBuffs.updateIcons()
+    g_alignmentDirection.targetd = SpellCastBuffs.SV.AlignmentDebuffsTarget
+    g_alignmentDirection.player_long = SpellCastBuffs.SV.AlignmentLongVert
+    g_alignmentDirection.prominentbuffs = SpellCastBuffs.SV.AlignmentPromBuffsVert
+    g_alignmentDirection.prominentdebuffs = SpellCastBuffs.SV.AlignmentPromDebuffsVert
+
+    for k, v in pairs(g_alignmentDirection) do
+        if v == "Left" then
+            g_alignmentDirection[k] = LEFT
+        elseif v == "Right" then
+            g_alignmentDirection[k] = RIGHT
+        elseif v == "Centered" then
+            g_alignmentDirection[k] = CENTER
+        elseif v == "Top" then
+            g_alignmentDirection[k] = TOP
+        elseif v == "Bottom" then
+            g_alignmentDirection[k] = BOTTOM
+        else
+            g_alignmentDirection[k] = CENTER -- Fallback
+        end
+    end
+
+    for k, v in pairs(containerRouting) do
+        if uiTlw[v].iconHolder and g_alignmentDirection[v] then
             uiTlw[v].iconHolder:ClearAnchors()
-            if uiTlw[v].alignVertical then
-                -- TODO: Might need to consolidate these two functions somehow, possibly consolidate all options so that Left = Top, Middle = Center, Right = Bottom
-                if v == "player_long" then
-                    uiTlw[v].iconHolder:SetAnchor( g_longVertAlign )
-                elseif v== "prominentbuffs" then
-                    uiTlw[v].iconHolder:SetAnchor( g_prominentVertBuffAlign)
-                elseif v== "prominentdebuffs" then
-                    uiTlw[v].iconHolder:SetAnchor( g_prominentVertDebuffAlign)
-                else
-                    uiTlw[v].iconHolder:SetAnchor( g_longVertAlign )
-                end
-            else
-                if v == "player_long" then
-                    uiTlw[v].iconHolder:SetAnchor( g_longHorizAlign )
-                elseif v== "prominentbuffs" then
-                    uiTlw[v].iconHolder:SetAnchor( g_prominentHorizBuffAlign)
-                elseif v== "prominentdebuffs" then
-                    uiTlw[v].iconHolder:SetAnchor( g_prominentHorizDebuffAlign)
-                else
-                    uiTlw[v].iconHolder:SetAnchor( g_horizAlign )
-                end
-            end
+            uiTlw[v].iconHolder:SetAnchor(g_alignmentDirection[v])
         end
     end
 end
--- Sets horizontal alignment of icon. Called from Settings Menu.
--- This is done simply by setting of iconHolder anchor.
-function SpellCastBuffs.SetIconsAlignment(value)
-    -- Check correctness of argument value
-    if value ~= "Left" and value ~= "Centered" and value ~= "Right" then
-        value = SpellCastBuffs.Defaults.Alignment
-    end
-    SpellCastBuffs.SV.Alignment = value
 
-    if not SpellCastBuffs.Enabled then
-        return
-    end
+-- Set g_sortDirection table to equal the values from our SV table. Called from Settings Menu & on Initialize
+function SpellCastBuffs.SetupContainerSort()
 
-    g_horizAlign = ( value == "Left" ) and LEFT or ( value == "Right" ) and RIGHT or CENTER
+    -- Clear the sort direction table
+    g_sortDirection = { }
 
-    SpellCastBuffs.SetAlignment()
-end
+    -- Set sort order for player/target containers
+    g_sortDirection.player1 = SpellCastBuffs.SV.SortBuffsPlayer
+    g_sortDirection.playerb = SpellCastBuffs.SV.SortBuffsPlayer
+    g_sortDirection.player2 = SpellCastBuffs.SV.SortDebuffsPlayer
+    g_sortDirection.playerd = SpellCastBuffs.SV.SortDebuffsPlayer
+    g_sortDirection.target1 = SpellCastBuffs.SV.SortBuffsTarget
+    g_sortDirection.targetb = SpellCastBuffs.SV.SortBuffsTarget
+    g_sortDirection.target2 = SpellCastBuffs.SV.SortDebuffsTarget
+    g_sortDirection.targetd = SpellCastBuffs.SV.SortDebuffsTarget
 
--- Sets vertical alignment of Prominent Buff icons
-function SpellCastBuffs.SetIconsAlignmentProminentBuffVert(value)
-    if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
-        value = SpellCastBuffs.Defaults.ProminentBuffAlignmentVertical
-    end
-    SpellCastBuffs.SV.ProminentBuffAlignmentVertical = value
-
-    if not SpellCastBuffs.Enabled then
-        return
+    -- Set Long Term Effects Sort Order
+    if SpellCastBuffs.SV.LongTermEffectsSeparateAlignment == 1 then -- Horizontal
+        g_sortDirection.player_long = SpellCastBuffs.SV.SortLongHorz
+    elseif SpellCastBuffs.SV.LongTermEffectsSeparateAlignment == 2 then -- Vertical
+        g_sortDirection.player_long = SpellCastBuffs.SV.SortLongVert
     end
 
-    g_prominentVertBuffAlign = ( value == "Top" ) and TOP or ( value == "Bottom" ) and BOTTOM or CENTER
-
-    SpellCastBuffs.SetAlignment()
-end
-
--- Sets horizontal alignment of Prominent Buff icons
-function SpellCastBuffs.SetIconsAlignmentProminentBuffHoriz(value)
-    if value ~= "Left" and value ~= "Centered" and value ~= "Right" then
-        value = SpellCastBuffs.Defaults.ProminentBuffAlignmentHorizontal
-    end
-    SpellCastBuffs.SV.ProminentBuffAlignmentHorizontal = value
-
-    if not SpellCastBuffs.Enabled then
-        return
+    -- Set Prominent Buffs Sort Order
+    if SpellCastBuffs.SV.ProminentBuffContainerAlignment == 1 then -- Horizontal
+        g_sortDirection.prominentbuffs = SpellCastBuffs.SV.SortPromBuffsHorz
+    elseif SpellCastBuffs.SV.ProminentBuffContainerAlignment == 2 then -- Vertical
+        g_sortDirection.prominentbuffs = SpellCastBuffs.SV.SortPromBuffsVert
     end
 
-    g_prominentHorizBuffAlign = ( value == "Left" ) and LEFT or ( value == "Right" ) and RIGHT or CENTER
-
-    SpellCastBuffs.SetAlignment()
-end
-
--- Sets vertical alignment of Prominent Debuff icons
-function SpellCastBuffs.SetIconsAlignmentProminentDebuffVert(value)
-    if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
-        value = SpellCastBuffs.Defaults.ProminentDebuffAlignmentVertical
-    end
-    SpellCastBuffs.SV.ProminentDebuffAlignmentVertical = value
-
-    if not SpellCastBuffs.Enabled then
-        return
+    -- Set Prominent Debuffs Sort Order
+    if SpellCastBuffs.SV.ProminentDebuffContainerAlignment == 1 then -- Horizontal
+        g_sortDirection.prominentdebuffs = SpellCastBuffs.SV.SortPromDebuffsHorz
+    elseif SpellCastBuffs.SV.ProminentDebuffContainerAlignment == 2 then -- Vertical
+        g_sortDirection.prominentdebuffs = SpellCastBuffs.SV.SortPromDebuffsVert
     end
 
-    g_prominentVertDebuffAlign = ( value == "Top" ) and TOP or ( value == "Bottom" ) and BOTTOM or CENTER
-
-    SpellCastBuffs.SetAlignment()
-end
-
--- Sets horizontal alignment of Prominent Debuff icons
-function SpellCastBuffs.SetIconsAlignmentProminentDebuffHoriz(value)
-    if value ~= "Left" and value ~= "Centered" and value ~= "Right" then
-        value = SpellCastBuffs.Defaults.ProminentDebuffAlignmentHorizontal
-    end
-    SpellCastBuffs.SV.ProminentDebuffAlignmentHorizontal = value
-
-    if not SpellCastBuffs.Enabled then
-        return
-    end
-
-    g_prominentHorizDebuffAlign = ( value == "Left" ) and LEFT or ( value == "Right" ) and RIGHT or CENTER
-
-    SpellCastBuffs.SetAlignment()
-end
-
--- Set PLAYER LONG Container Vertical Alignment
-function SpellCastBuffs.SetIconsAlignmentLongVert(value)
-    -- Check correctness of argument value
-    if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
-        value = SpellCastBuffs.Defaults.AlignmentLongVert
-    end
-    SpellCastBuffs.SV.AlignmentLongVert = value
-
-    if not SpellCastBuffs.Enabled then
-        return
-    end
-
-    g_longVertAlign = ( value == "Top" ) and TOP or ( value == "Bottom" ) and BOTTOM or CENTER
-
-    SpellCastBuffs.SetAlignment()
-end
-
--- Set PLAYER LONG Container Horizontal Alignment
-function SpellCastBuffs.SetIconsAlignmentLongHorz(value)
-    -- Check correctness of argument value
-    if value ~= "Left" and value ~= "Centered" and value ~= "Right" then
-        value = SpellCastBuffs.Defaults.AlignmentLongHorz
-    end
-    SpellCastBuffs.SV.AlignmentLongHorz = value
-
-    if not SpellCastBuffs.Enabled then
-        return
-    end
-
-    g_longHorizAlign = ( value == "Left" ) and LEFT or ( value == "Right" ) and RIGHT or CENTER
-
-    SpellCastBuffs.SetAlignment()
-end
-
--- Sets horizontal sort direction. Called from Settings Menu.
-function SpellCastBuffs.SetSortDirection(value)
-    -- Check correctness of argument value
-    if value ~= "Left to Right" and value ~= "Right to Left" then
-        value = SpellCastBuffs.Defaults.SortDirection
-    end
-    SpellCastBuffs.SV.SortDirection = value
-
-    g_horizSortInvert = (value == "Right to Left")
 end
 
 -- Reset position of windows. Called from Settings Menu.
@@ -759,9 +675,7 @@ end
 
 -- Set position of windows. Called from .Initialize() and .ResetTlwPosition()
 function SpellCastBuffs.SetTlwPosition()
-    -- If icons are locked to custom frames, i.e. uiTlw[] is a CT_CONTROL of LUIE.UnitFrames.CustomFrames.player
-    -- We do not have to do anything here. so just bail out
-
+    -- If icons are locked to custom frames, i.e. uiTlw[] is a CT_CONTROL of LUIE.UnitFrames.CustomFrames.player we do not have to do anything here. so just bail out
     -- Otherwise set position of uiTlw[] which are CT_TOPLEVELCONTROLs to saved or default positions
     if uiTlw.playerb and uiTlw.playerb:GetType() == CT_TOPLEVELCONTROL then
         uiTlw.playerb:ClearAnchors()
@@ -962,15 +876,9 @@ function SpellCastBuffs.Reset()
         end
     end
 
-    -- Reset alignment and sort
-    SpellCastBuffs.SetIconsAlignment( SpellCastBuffs.SV.Alignment )
-    SpellCastBuffs.SetIconsAlignmentLongVert( SpellCastBuffs.SV.AlignmentLongVert )
-    SpellCastBuffs.SetIconsAlignmentLongHorz( SpellCastBuffs.SV.AlignmentLongHorz )
-    SpellCastBuffs.SetIconsAlignmentProminentBuffVert( SpellCastBuffs.SV.ProminentBuffAlignmentVertical )
-    SpellCastBuffs.SetIconsAlignmentProminentBuffHoriz( SpellCastBuffs.SV.ProminentBuffAlignmentHorizontal )
-    SpellCastBuffs.SetIconsAlignmentProminentDebuffVert( SpellCastBuffs.SV.ProminentDebuffAlignmentVertical )
-    SpellCastBuffs.SetIconsAlignmentProminentDebuffHoriz( SpellCastBuffs.SV.ProminentDebuffAlignmentHorizontal )
-    SpellCastBuffs.SetSortDirection( SpellCastBuffs.SV.SortDirection )
+    -- Set Alignment and Sort Direction
+    SpellCastBuffs.SetupContainerAlignment()
+    SpellCastBuffs.SetupContainerSort()
 
     local needs_reset = {}
     -- And reset sizes of already existing icons
@@ -1117,7 +1025,7 @@ function SpellCastBuffs.ResetSingleIcon( container, buff, AnchorItem )
         end
     end
 
-    -- Position all items except first one to the right of it's neighbour
+    -- Position all items except first one to the right of it's neighbor
     -- First icon is positioned automatically if the container is present
     buff:ClearAnchors()
     if AnchorItem == nil then
@@ -1154,17 +1062,14 @@ local function ClearStickyTooltip()
 end
 
 local buffTypes = {
-
     [1] = "Buff",
     [2] = "Debuff",
     [3] = "Unbreakable Buff",
     [4] = "Unbreakable Debuff",
     [5] = "None",
-
 }
 
 function SpellCastBuffs.TooltipBottomLine(control, detailsLine, artificial)
-
     -- Add bottom divider and info if present:
     if SpellCastBuffs.SV.TooltipAbilityId or SpellCastBuffs.SV.TooltipBuffType then
         ZO_Tooltip_AddDivider(GameTooltip)
@@ -1195,7 +1100,6 @@ function SpellCastBuffs.TooltipBottomLine(control, detailsLine, artificial)
             detailsLine = detailsLine + 1
         end
     end
-
 end
 
 -- OnMouseEnter for Buff Tooltips
@@ -1256,11 +1160,8 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
                 end
                 duration = math.floor((duration * 10) + 0.5) / 10
 
-                if control.buffSlot then
-                    tooltipText = (Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltip) and zo_strformat(Effects.EffectOverride[control.effectId].tooltip, duration, value2, value3) or GetAbilityDescription(abilityId)
-                else
-                    tooltipText = (Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltip) and zo_strformat(Effects.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
-                end
+                tooltipText = (Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltip) and zo_strformat(Effects.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
+
                 -- Use seperate Veteran difficulty tooltip if applicable.
                 if LUIE.ResolveVeteranDifficulty() == true and Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltipVet then
                     tooltipText = zo_strformat(Effects.EffectOverride[control.effectId].tooltipVet, duration, value2, value3)
@@ -1277,15 +1178,12 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
                     end
                 end
 
-                -- TODO: Implement this functionality but it needs to have a filter for ONLY specific ids.
-                --[[
                 -- Display Default Description if no internal effect description is present
                 if tooltipText == "" or tooltipText == nil then
                     if GetAbilityDescription(control.effectId) ~= "" then
                         tooltipText = GetAbilityDescription(control.effectId)
                     end
                 end
-                ]]--
 
             else
                 duration = 0
@@ -1340,7 +1238,7 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
         SpellCastBuffs.TooltipBottomLine(control, detailsLine)
 
         -- Tooltip Debug
-        --GameTooltip:SetAbilityId(136098)
+        -- GameTooltip:SetAbilityId(117391)
 
     end
 end
@@ -1646,8 +1544,11 @@ end
 -- This handler fires every long-term effect added or removed
 function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
 
-    -- Change the effect type before we determine if we want to filter anything else.
+    --d(effectName .. " - " .. castByPlayer)
+
+    -- Change the effect type / name before we determine if we want to filter anything else.
     if Effects.EffectOverride[abilityId] then
+        effectName = Effects.EffectOverride[abilityId].name or effectName
         effectType = Effects.EffectOverride[abilityId].type or effectType
         -- Bail out now if we hide ground snares and other effects because we are showing Damaging Auras (Only do this for the player, we don't want effects on targets to stop showing up).
         if Effects.EffectOverride[abilityId].hideGround and SpellCastBuffs.SV.GroundDamageAura and unitTag == "player" then
@@ -1671,7 +1572,7 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
 
     -- If the source of the buff isn't the player or the buff is not on the AbilityId or AbilityName override list then we don't display it
     if unitTag ~= "player" then
-        if effectType == 2 and not (castByPlayer == 1) and not (debuffDisplayOverrideId[abilityId] or debuffDisplayOverrideName[effectName]) then
+        if effectType == 2 and not (castByPlayer == 1) and not (debuffDisplayOverrideId[abilityId] or Effects.DebuffDisplayOverrideName[effectName]) then
             return
         end
     end
@@ -1781,7 +1682,6 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
             return
         end
         iconName = Effects.EffectOverride[abilityId].icon or iconName
-        effectName = Effects.EffectOverride[abilityId].name or effectName
         unbreakable = Effects.EffectOverride[abilityId].unbreakable or 0
         stackCount = Effects.EffectOverride[abilityId].stack or stackCount
         -- Destroy other effects of the same type if we don't want to show duplicates at all.
@@ -1957,7 +1857,7 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
                 local fakeUnbreakable = Effects.EffectOverride[id] and Effects.EffectOverride[id].unbreakable or 0
                 if not (SpellCastBuffs.SV.BlacklistTable[name] or SpellCastBuffs.SV.BlacklistTable[id]) then
                     local simulatedContext = unitTag .. fakeEffectType
-
+                    -- Set Context based on prominent settings
                     if (SpellCastBuffs.SV.PromDebuffTable[name] or SpellCastBuffs.SV.PromDebuffTable[id]) then
                         if simulatedContext == "player1" then
                             simulatedContext = "promd_player"
@@ -1971,35 +1871,23 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
                             simulatedContext = "promb_target"
                         end
                     end
-
-                    if ( SpellCastBuffs.SV.ExtraBuffs ) or ( Effects.EffectCreateSkillAura[abilityId].consolidate and SpellCastBuffs.SV.ExtraConsolidate ) or ( Effects.EffectCreateSkillAura[abilityId].alwaysShow ) then
-                        if ( not Effects.EffectCreateSkillAura[abilityId].extendedDisplay ) or (Effects.EffectCreateSkillAura[abilityId].extendedDisplay and SpellCastBuffs.SV.ExtraExpanded) then
-                            if ( ( Effects.EffectCreateSkillAura[abilityId].consolidateNewIdExtended and not (SpellCastBuffs.SV.ExtraExpanded and SpellCastBuffs.SV.ExtraConsolidate) ) or ( Effects.EffectCreateSkillAura[abilityId].consolidateNewId and not SpellCastBuffs.SV.ExtraConsolidate) ) or not (Effects.EffectCreateSkillAura[abilityId].consolidateNewIdExtended or Effects.EffectCreateSkillAura[abilityId].consolidateNewId) then
-                                local icon = Effects.EffectCreateSkillAura[abilityId].icon or GetAbilityIcon(id)
-                                SpellCastBuffs.EffectsList[simulatedContext][ Effects.EffectCreateSkillAura[abilityId].abilityId ] = {
-                                    target=unitTag, type=fakeEffectType,
-                                    id=id, name=name, icon=icon,
-                                    dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
-                                    forced=forcedType,
-                                    restart=true, iconNum=0,
-                                    stack = 0,
-                                    unbreakable=fakeUnbreakable,
-                                    groundLabel = groundLabel,
-                                    toggle = toggle,
-                                }
-                            end
-                        end
-                    end
+                    -- Create Buff
+                    local icon = Effects.EffectCreateSkillAura[abilityId].icon or GetAbilityIcon(id)
+                    SpellCastBuffs.EffectsList[simulatedContext][ Effects.EffectCreateSkillAura[abilityId].abilityId ] = {
+                        target=unitTag, type=fakeEffectType,
+                        id=id, name=name, icon=icon,
+                        dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
+                        forced=forcedType,
+                        restart=true, iconNum=0,
+                        stack = 0,
+                        unbreakable=fakeUnbreakable,
+                        groundLabel = groundLabel,
+                        toggle = toggle,
+                    }
                 end
             end
         end
 
-        -- If consolidate is enabled then hide the consolidated ability
-        if Effects.EffectOverride[abilityId] and SpellCastBuffs.SV.ExtraConsolidate then
-            if Effects.EffectOverride[abilityId].consolidate or ( Effects.EffectOverride[abilityId].consolidateExtra and SpellCastBuffs.SV.ExtraExpanded ) then
-                return
-            end
-        end
         -- If this effect doesn't properly display stacks - then add them.
         if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].displayStacks then
             for context, effectsList in pairs( SpellCastBuffs.EffectsList ) do
@@ -2111,7 +1999,7 @@ function SpellCastBuffs.OnCombatAddNameEvent( eventCode, result, isError, abilit
                 if stack then
                     Effects.AddNameAura[name][2].stack = stack + 1
                 else
-                    Effects.AddNameAura[name][2].stack = Effects.AddStackOnEvent[ability]
+                    Effects.AddNameAura[name][2].stack = Effects.AddStackOnEvent[abilityId]
                 end
             end
             -- Specific to Crypt of Hearts I (Ignite Colossus)
@@ -2580,6 +2468,12 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
         if SpellCastBuffs.SV.HidePlayerBuffs and not (SpellCastBuffs.SV.PromDebuffTable[abilityId] or SpellCastBuffs.SV.PromDebuffTable[effectName] or SpellCastBuffs.SV.PromBuffTable[abilityId] or SpellCastBuffs.SV.PromBuffTable[effectName]) then
             return
         end
+        if Effects.FakePlayerBuffs[abilityId].onlyExtra and not SpellCastBuffs.SV.ExtraBuffs then
+            return
+        end
+        if Effects.FakePlayerBuffs[abilityId].onlyExtended and not (SpellCastBuffs.SV.ExtraBuffs and SpellCastBuffs.SV.ExtraExpanded) then
+            return
+        end
 
         -- If this is a fake set ICD then don't display if we have Set ICD's disabled.
         if Effects.IsSetICD[abilityId] and SpellCastBuffs.SV.IgnoreSetICDPlayer then return end
@@ -2600,12 +2494,6 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
         if abilityId == 26406 then g_ignoreAbilityId[abilityId] = true end
         SpellCastBuffs.EffectsList[context][ abilityId ] = nil
         SpellCastBuffs.EffectsList.player2[ abilityId ] = nil
-        if abilityId == 973 and not SpellCastBuffs.SV.ShowSprint then
-            return
-        end
-        if abilityId == 33439 and not SpellCastBuffs.SV.ShowGallop then
-            return
-        end
 
         local toggle = Effects.IsToggle[abilityId] or false
 
@@ -2614,13 +2502,17 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
         duration = Effects.FakePlayerBuffs[abilityId].duration
         if duration == "GET" then duration = GetAbilityDuration(abilityId) end
         local finalId = Effects.FakePlayerBuffs[abilityId].shiftId or abilityId
+        if Effects.FakePlayerBuffs[abilityId].shiftId then
+            iconName = Effects.FakePlayerBuffs[finalId] and Effects.FakePlayerBuffs[finalId].icon or GetAbilityIcon(finalId)
+            effectName = Effects.FakePlayerBuffs[finalId] and Effects.FakePlayerBuffs[finalId].name or GetAbilityName(finalId)
+        end
         local forcedType = Effects.FakePlayerBuffs[abilityId].long and "long" or "short"
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
         local source = zo_strformat("<<t:1>>",sourceName)
         local target = zo_strformat("<<t:1>>",targetName)
         -- Pull unbreakable info from Shift Id if present
-        unbreakable = Effects.EffectOverride[finalId].unbreakable or unbreakable
+        unbreakable = (Effects.EffectOverride[finalId] and Effects.EffectOverride[finalId].unbreakable) or unbreakable
         if source == LUIE.PlayerNameFormatted and target == LUIE.PlayerNameFormatted then
             -- If the "buff" is flagged as a debuff, then display it here instead
             if Effects.FakePlayerBuffs[abilityId].debuff == true then
@@ -2768,6 +2660,10 @@ function SpellCastBuffs.OnCombatEventOut( eventCode, result, isError, abilityNam
         duration = Effects.FakePlayerOfflineAura[abilityId].duration
         if duration == "GET" then duration = GetAbilityDuration(abilityId) end
         local finalId = Effects.FakePlayerOfflineAura[abilityId].shiftId or abilityId
+        if Effects.FakePlayerOfflineAura[abilityId].shiftId then
+            iconName = Effects.FakePlayerOfflineAura and Effects.FakePlayerOfflineAura[finalId].icon or GetAbilityIcon(finalId)
+            effectName = Effects.FakePlayerOfflineAura and Effects.FakePlayerOfflineAura[finalId].name or GetAbilityName(finalId)
+        end
         local forcedType = Effects.FakePlayerOfflineAura[abilityId].long and "long" or "short"
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
@@ -3015,8 +2911,6 @@ function SpellCastBuffs.ReloadEffects(unitTag)
         SpellCastBuffs.OnEffectChanged(0, 3, buffSlot, buffName, unitTag, timeStarted, timeEnding, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, unitName, 0--[[unitId]], abilityId, castByPlayer)
     end
 
-    -- Load Cyrodiil Buffs
-    SpellCastBuffs.LoadCyrodiilBuffs(unitTag)
     -- Display Disguise State
     SpellCastBuffs.DisguiseStateChanged(nil, unitTag, GetUnitDisguiseState(unitTag))
     -- Display Stealth State
@@ -3114,8 +3008,11 @@ function SpellCastBuffs.AddNameAura()
                 if not flag then return end
             end
 
-            SpellCastBuffs.EffectsList.reticleover1[ "Name Specific Buff" .. k ] = {
-                type=1,
+            local buffType = v.debuff or 1
+            local context = v.debuff and "reticleover2" or "reticleover1"
+
+            SpellCastBuffs.EffectsList[context][ "Name Specific Buff" .. k ] = {
+                type=buffType,
                 id= v.id, name= abilityName, icon= abilityIcon,
                 dur=0, starts=1, ends=nil,
                 forced = "short",
@@ -3135,10 +3032,6 @@ function SpellCastBuffs.AddNameAura()
             end
             -- Bail out if this ability is blacklisted
             if SpellCastBuffs.SV.BlacklistTable[v.id] or SpellCastBuffs.SV.BlacklistTable[abilityName] then
-                return
-            end
-            -- Specific case for the Minor Magickasteal added onto the Target Iron Atronach, Trial
-            if v.id == 120012 and not SpellCastBuffs.SV.ShowSharedMajorMinor then
                 return
             end
             SpellCastBuffs.EffectsList.reticleover2[ "Name Specific Buff" .. k ] = {
@@ -3281,8 +3174,14 @@ function SpellCastBuffs.updateBar(currentTime, sortedList, container)
     local iconsNum = #sortedList
     local istart, iend, istep
 
-    if g_horizSortInvert and not uiTlw[container].alignVertical then
-        istart, iend, istep = iconsNum, 1, -1
+    if g_sortDirection[container] then
+        if g_sortDirection[container] == "Left to Right" or g_sortDirection[container] == "Bottom to Top" then
+            istart, iend, istep = 1, iconsNum, 1
+        end
+        if g_sortDirection[container] == "Right to Left" or g_sortDirection[container] == "Top to Bottom" then
+            istart, iend, istep = iconsNum, 1, -1
+        end
+    -- Fall back in case for some strange reason the container doesn't exist
     else
         istart, iend, istep = 1, iconsNum, 1
     end
@@ -3318,6 +3217,7 @@ function SpellCastBuffs.updateBar(currentTime, sortedList, container)
 end
 
 function SpellCastBuffs.updateIcons(currentTime, sortedList, container)
+
     -- Special workaround for container with player long buffs. We do not need to update it every 100ms, but rather 3 times less often
     if uiTlw[container].skipUpdate then
         uiTlw[container].skipUpdate = uiTlw[container].skipUpdate + 1
@@ -3329,26 +3229,19 @@ function SpellCastBuffs.updateIcons(currentTime, sortedList, container)
     end
 
     local iconsNum = #sortedList
-
-    -- Chose direction of iteration
     local istart, iend, istep
-    -- Reverse the order for right aligned icons
-    if container == "player_long" and SpellCastBuffs.SV.LongTermEffectsReverse then
-        if g_horizSortInvert and not uiTlw[container].alignVertical then
-            istart, iend, istep = iconsNum, 1, -1
-        else
-            istart, iend, istep = iconsNum, 1, -1
-        end
-    elseif (container == "prominentbuffs") and SpellCastBuffs.SV.ProminentBuffReverseSort then
-            istart, iend, istep = iconsNum, 1, -1
-    elseif (container == "prominentdebuffs") and SpellCastBuffs.SV.ProminentDebuffReverseSort then
-            istart, iend, istep = iconsNum, 1, -1
-    else
-        if g_horizSortInvert and not uiTlw[container].alignVertical then
-            istart, iend, istep = iconsNum, 1, -1
-        else
+
+    -- Set Sort Direction
+    if g_sortDirection[container] then
+        if g_sortDirection[container] == "Left to Right" or g_sortDirection[container] == "Bottom to Top" then
             istart, iend, istep = 1, iconsNum, 1
         end
+        if g_sortDirection[container] == "Right to Left" or g_sortDirection[container] == "Top to Bottom" then
+            istart, iend, istep = iconsNum, 1, -1
+        end
+    -- Fall back in case there is no sort direction for the container somehow
+    else
+        istart, iend, istep = 1, iconsNum, 1
     end
 
     -- Size of icon+padding
@@ -3389,13 +3282,19 @@ function SpellCastBuffs.updateIcons(currentTime, sortedList, container)
             if iconsNum ~= uiTlw[container].prevIconsCount and index == next_row_break --[[ and horizontal orientation of container ]] then
                 -- Padding of first icon in a row
                 local anchor, leftPadding
-                if g_horizAlign == LEFT then
-                    anchor = TOPLEFT
-                    leftPadding = g_padding
-                elseif g_horizAlign == RIGHT then
-                    anchor = TOPRIGHT
-                    leftPadding = - math.min(uiTlw[container].maxIcons, iconsNum-uiTlw[container].maxIcons*row) * iconSize - g_padding
-                else
+
+                if g_alignmentDirection[container] then
+                    if g_alignmentDirection[container] == LEFT then
+                        anchor = TOPLEFT
+                        leftPadding = g_padding
+                    elseif g_alignmentDirection[container] == RIGHT then
+                        anchor = TOPRIGHT
+                        leftPadding = - math.min(uiTlw[container].maxIcons, iconsNum-uiTlw[container].maxIcons*row) * iconSize - g_padding
+                    else
+                        anchor = TOP
+                        leftPadding = - 0.5 * ( math.min(uiTlw[container].maxIcons, iconsNum-uiTlw[container].maxIcons*row) * iconSize - g_padding )
+                    end
+                else -- Fallback
                     anchor = TOP
                     leftPadding = - 0.5 * ( math.min(uiTlw[container].maxIcons, iconsNum-uiTlw[container].maxIcons*row) * iconSize - g_padding )
                 end
@@ -3747,74 +3646,11 @@ function SpellCastBuffs.UpdateDisplayOverrideIdList()
     for k, v in pairs(Effects.DebuffDisplayOverrideIdAlways) do
         debuffDisplayOverrideId[k] = v
     end
-end
-
--- Called from the menu and on initialize to build the table of effects we should show regardless of source (by name).
-function SpellCastBuffs.UpdateDisplayOverrideNameList()
-
-    -- Clear the list
-    debuffDisplayOverrideName = { }
-
-    -- Add effects from table if enabled
+    -- Major/Minor
     if SpellCastBuffs.SV.ShowSharedMajorMinor then
-        for k, v in pairs(Effects.DebuffDisplayOverrideName) do
-            debuffDisplayOverrideName[k] = v
-        end
-    end
-    -- Always show Off Balance since a lot of Off Balance effects self apply
-    debuffDisplayOverrideName[Abilities.Skill_Off_Balance] = true
-
-end
-
--- Called from the menu and on initialize to build potion effect generic icon overrides.
-function SpellCastBuffs.UpdatePotionList(menu)
-    if LUIE.SpellCastBuffs.SV.GenericPotion then
-        for k, v in pairs(Effects.PotionIconTable) do
-            if v.normalize then
-                Effects.EffectOverride[k].icon = v.normalize
-            end
-        end
-    -- Minimize the amount of iterating we need to do, we only need to toggle back if we're disabling the setting from the menu.
-    elseif menu and not LUIE.SpellCastBuffs.SV.GenericPotion then
-        for k, v in pairs(Effects.PotionIconTable) do
-            if v.icon then
-                Effects.EffectOverride[k].icon = v.icon
-            end
-        end
-    end
-end
-
--- Called from the menu and on initialize to build poison effect generic icon overrides.
-function SpellCastBuffs.UpdatePoisonList(menu)
-    if LUIE.SpellCastBuffs.SV.GenericPoison then
-        for k, v in pairs(Effects.PoisonIconTable) do
-            if v.normalize then
-                Effects.EffectOverride[k].icon = v.normalize
-            end
-        end
-    -- Minimize the amount of iterating we need to do, we only need to toggle back if we're disabling the setting from the menu.
-    elseif menu and not LUIE.SpellCastBuffs.SV.GenericPoison then
-        for k, v in pairs(Effects.PoisonIconTable) do
-            if v.icon then
-                Effects.EffectOverride[k].icon = v.icon
-            end
-        end
-    end
-end
-
--- Called from the menu and on initialize to build status effect generic icon overrides.
-function SpellCastBuffs.UpdateStatusEffectList(menu)
-    if LUIE.SpellCastBuffs.SV.GenericStatusEffect then
-        for k, v in pairs(Effects.StatusEffectIconTable) do
-            if v.normalize then
-                Effects.EffectOverride[k].icon = v.normalize
-            end
-        end
-    -- Minimize the amount of iterating we need to do, we only need to toggle back if we're disabling the setting from the menu.
-    elseif menu and not LUIE.SpellCastBuffs.SV.GenericStatusEffect then
-        for k, v in pairs(Effects.StatusEffectIconTable) do
-            if v.icon then
-                Effects.EffectOverride[k].icon = v.icon
+        for k, v in pairs(Effects.DebuffDisplayOverrideMajorMinor) do
+            for k, v in pairs(Effects.DebuffDisplayOverrideMajorMinor) do
+                debuffDisplayOverrideId[k] = v
             end
         end
     end

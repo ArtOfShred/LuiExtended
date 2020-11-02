@@ -26,10 +26,7 @@ CastBarTable.CastBreakingStatus = {
 CastBarTable.CastBreakingActions = {
     [28549] = true, -- Roll Dodge
     [55146] = true, -- Interrupt Bonus (when player bashes it can interrupt a channel - note that it won't succesfully go off until after the cast if it can't be stopped by bashing so this is safe to apply to everything)
-    --[14890] = true, -- Block -- Replaced with function in Castbar update that checks IsBlockActive
     --[20309] = true, -- Hidden -- Shouldn't break any casts or channels (or is unable to be using during one)
-    --[973] = true, -- Sprint -- TODO: No longer works
-    --[33439] = true, -- Mount Sprint -- TODO: No longer works
 }
 
 -- Used to break Siege Weapon deployment/stoy when the player opens their inventory or another window or tabs out of the game.
@@ -383,6 +380,8 @@ CastBarTable.CastDurationFix = {
     [70584] = 5000, -- 68235 Stun (Merethic Restorative Resin)
     [88451] = 5000, -- 88449 Stun (Aetheric Cipher)
 
+    [147795] = 5000, -- 88449 Stun (Chef Arquitius's Torte Dissertation)
+    [147850] = 5000, -- 88449 Stun (Chef Arquitius's Lost Thesis)
     [111190] = 5000, -- 68235 Stun (Arena Gladiator's Exultation)
     [115064] = 5000, -- 68235 Stun (Arena Gladiator's Mockery)
     [106174] = 5000, -- 68235 Stun (Arena Gladiator's Recognition)
@@ -393,6 +392,7 @@ CastBarTable.CastDurationFix = {
     [124789] = 5000, -- 68235 Stun (Siege of Cyrodiil Recognition)
     [126710] = 5000, -- 68235 Stun (Siege of Cyrodiil Recommendation)
     [124624] = 5000, -- 68235 Stun (Alliance Standard-Bearer's License)
+    [148421] = 5000, -- 68235 Stun (Siege of Cyrodiil Commendation)
 
     -- Seasonal Mementos and Items
     [86792] = 3000, -- Eating (High Hrothgar Festival Mints)
@@ -544,6 +544,8 @@ CastBarTable.IsCast = {
     [76350] = true, -- Moderate Pardon (Leniency Edict)
     [76349] = true, -- Full Pardon (Grand Amnesty Edict)
 
+    [147795] = true, -- 88449 Stun (Chef Arquitius's Torte Dissertation)
+    [147850] = true, -- 88449 Stun (Chef Arquitius's Lost Thesis)
     [111190] = true, -- 68235 Stun (Arena Gladiator's Exultation)
     [115064] = true, -- 68235 Stun (Arena Gladiator's Mockery)
     [106174] = true, -- 68235 Stun (Arena Gladiator's Recognition)
@@ -554,6 +556,7 @@ CastBarTable.IsCast = {
     [124789] = true, -- 68235 Stun (Siege of Cyrodiil Recognition)
     [126710] = true, -- 68235 Stun (Siege of Cyrodiil Recommendation)
     [124624] = true, -- 68235 Stun (Alliance Standard-Bearer's License)
+    [148421] = true, -- 68235 Stun (Siege of Cyrodiil Commendation)
 
     -- Seasonal Mementos and Items
     [86792] = true, -- Eating (High Hrothgar Festival Mints)
