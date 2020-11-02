@@ -1,3 +1,25 @@
+### Version 6.2.2
+
+Known Issues
+- Due to API changes with Major/Minor effects the Bar Highlight component of Combat Info may have some issues tracking Major/Minor debuffs applied onto a target. In some cases they won't start tracking until you mouse off and back on to the target. This is due to some issues with the API that I hope are addressed in the future (although it may not technically qualify as a bug).
+
+General
+- Updated icons & tooltips for the new sets and Alliance War skill line consumables introduced in this update.
+
+Buffs & Debuffs
+- You can now independently control the alignment and sorting direction of each buff or debuff container. The new settings mirror the previous default settings, you may need to readjust some of these settings if you had modified them before.
+- You can now independently control the Horizontal/Vertical orientation of the Long Term Buffs, Prominent Buffs, and Prominent Debuffs container. The new settings mirror the previous default settings, you may need to readjust some of these settings if you had modified them before.
+- Added a new Alignment & Sorting Options submenu for the changes above to make changing these settings easier.
+- Removed the display of Cyrodiil Home/Enemy/Edge Keep bonus buffs - these took up too much space and the functions used to determine/display them were inefficient.
+- The toggle option for Cyrodiil buffs now only applies to Cyrodiil Scroll bonuses. Emperorship Alliance Bonus & Blessing of War will now always display (Note: The toggle setting for Battle Spirit is separate and remains unchanged).
+- The options for Consolidating Major/Minor effects has been removed due to API changes to Major/Minor effect handling.
+- Custom icons for Major/Minor effects from Potions/Poisons have been removed due to API Changes and the menu option for toggling these icons has been removed (Note: The option to toggle the default icons for Major/Minor Slayer/Aegis remains).
+
+Combat Info
+- Removed the "Highlight Secondary Id" option from Bar Highlight settings. This applied to all of about 2 or 3 abilities before (The magicka regen buff for Honor the Dead for example) that now always display when Highlight is enabled.
+
+---
+
 ### Version 6.2.1
 
 Known Issues

@@ -3703,6 +3703,7 @@ LUIE.DebugAuras = {
     --[85087] = true, -- Boss (Summon Shade - All Morphs)
 
     [33211] = true, -- Summon Shade (Summon Shade)
+    --[88663] = true, -- Summon Shade (Summon Shade)
     [38517] = true, -- Summon Shade (Summon Shade)
     [33290] = true, -- Summon Shade (Summon Shade)
     [33219] = true, -- Corrosive Strike (Shade) (Summon Shade)

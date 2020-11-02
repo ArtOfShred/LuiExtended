@@ -693,6 +693,7 @@ Effects.EffectGroundDisplay = {
     [36049] = { buff = false, debuff = false, ground = true }, -- Twisting Path (Twisting Path)
     [36028] = { buff = true, debuff = false, ground = false }, -- Refreshing Path (Refreshing Path)
     [38517] = { buff = true, debuff = false, ground = false }, -- Summon Shade (Summon Shade)
+    --[88663] = { buff = true, debuff = false, ground = false }, -- Summon Shade (Summon Shade)
     [35438] = { buff = true, debuff = false, ground = false }, -- Dark Shade (Dark Shade)
     [38528] = { name = Abilities.Skill_Shadow_Image, buff = true, debuff = false, ground = false }, -- Shadow (Shadow Image)
     [37475] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 2 }, -- Manifestation of Terror (Nightblade)
@@ -908,6 +909,12 @@ Effects.BarHighlightExtraId = {
     [61785] = 32685, -- Fossilize
     [108813] = 32678, -- Shattering Rocks
 
+    -- Nightblade
+    --[88663] = 38517, -- Summon Shade (Argonian)
+    --[xxxxx] = 35438, -- Dark Shade --> Summon Shade
+    --[xxxxx] = 38528, -- Shadow Image --> Shadow
+    --[xxxxx] = 38528, -- Shadow Image Teleport --> Shadow
+
     -- Sorcerer
     [89491] = 24330, -- Haunting Curse
     [132946] = 28482, -- Streak
@@ -942,7 +949,6 @@ Effects.BarHighlightExtraId = {
 
     -- Psijic Order
     [104085] = 104079, -- Time Freeze
-    [103520] = 103521, -- Major Expedition --> Minor Force (Accelerate)
 
     -- Soul Magic
     [126890] = 126891, -- Soul Trap
@@ -1027,9 +1033,6 @@ Effects.BarHighlightCheckOnFade = {
     -- Mages Guild
     [40449] = { id1 = 48136, unitTag = "player" }, -- Spell Symmetry
     [48141] = { duration = 80160, durationMod = 48141, unitTag = "player" }, -- Balance --> Major Resolve
-
-    -- Psijic Order
-    [103711] = { id1 = 103712, unitTag = "player" }, -- Race Against Time --> Minor Force
 
     -- Support
     [40237] = { id1 = 40238, unitTag = "player" }, -- Reviving Barrier --> Reviving Barrier Heal
@@ -1500,9 +1503,9 @@ Effects.BarHighlightOverride = {
 
     [103488] = { newId = 104050 }, -- Time Stop
     [104059] = { newId = 104078 }, -- Borrowed Time
-    [103503] = { newId = 103521, noRemove = true }, -- Accelerate --> Minor Force
-    [103706] = { newId = 103708, noRemove = true }, -- Channeled Acceleration --> Minor Force
-    [103710] = { newId = 103711, noRemove = true }, -- Race Against Time
+    [103503] = { newId = 103521, showFakeAura = true }, -- Accelerate --> Minor Force
+    [103706] = { newId = 103708, showFakeAura = true }, -- Channeled Acceleration --> Minor Force
+    [103710] = { newId = 103712, showFakeAura = true }, -- Race Against Time
     [103543] = { hide = true }, -- Mend Wounds
     [103747] = { hide = true }, -- Mend Spirit
     [103755] = { hide = true }, -- Symbiosis
@@ -4753,6 +4756,7 @@ Effects.EffectOverride = {
     [65269] = { hide = true }, -- Shade Initialize (Summon Shade - All Morphs)
     [33219] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_corrode.dds' }, -- Corrosive Strike (Shade) (Summon Shade - Summon Shade/Dark Shade)
     [38517] = { hide = true, tooltip = Tooltips.Skill_Summon_Shade }, -- Summon Shade (Summon Shade)
+    --[88663] = { hide = true, tooltip = Tooltips.Skill_Summon_Shade }, -- Summon Shade (Summon Shade) -- Argonian
 
     [35438] = { hide = true, tooltip = Tooltips.Skill_Dark_Shade }, -- Summon Shade (Dark Shade)
     [123945] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_corrode.dds', name = Abilities.Skill_Corrosive_Strike }, -- Corrosive Flurry (Dark Shade)
