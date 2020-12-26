@@ -950,7 +950,7 @@ function UnitFrames.CreateSettings()
             {
                 -- In-Combat frame opacity
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGET_OOCPACITY),
+                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGET_ICPACITY),
                 tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGET_ICPACITY_TP),
                 min = 0, max = 100, step = 5,
                 getFunc = function() return Settings.TargetIncAlpha end,
@@ -1653,7 +1653,7 @@ function UnitFrames.CreateSettings()
                 name = GetString(SI_LUIE_LAM_UF_CFRAMESR_SPACER),
                 tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_SPACER_TP),
                 getFunc = function() return Settings.RaidSpacers end,
-                setFunc = function(value) Settings.RaidSpacers = UnitFrames.CustomFramesApplyLayoutRaid(true) end,
+                setFunc = function(value) Settings.RaidSpacers = value UnitFrames.CustomFramesApplyLayoutRaid(true) end,
                 width = "full",
                 default = Defaults.RaidSpacers,
                 disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesRaid ) end,

@@ -163,7 +163,7 @@ function CombatTextEventViewer:ControlLayout(control, abilityId, combatType, sou
         local iconPath = Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].icon or GetAbilityIcon(abilityId)
 
         if Effects.EffectOverrideByName[abilityId] then
-            sourceName = zo_strformat("<<t:1>>", sourceName)
+            sourceName = zo_strformat("<<C:1>>", sourceName)
             if Effects.EffectOverrideByName[abilityId][sourceName] and Effects.EffectOverrideByName[abilityId][sourceName].icon then
                 iconPath = Effects.EffectOverrideByName[abilityId][sourceName].icon
             end

@@ -34,9 +34,9 @@ function SpellCastBuffs.EventCombatDebug(eventCode, result, isError, abilityName
     local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
     local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
-    local source = zo_strformat("<<t:1>>", sourceName)
-    local target = zo_strformat("<<t:1>>", targetName)
-    local ability = zo_strformat("<<t:1>>", nameFormatted)
+    local source = zo_strformat("<<C:1>>", sourceName)
+    local target = zo_strformat("<<C:1>>", targetName)
+    local ability = zo_strformat("<<C:1>>", nameFormatted)
     local duration = GetAbilityDuration(abilityId)
     local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId)
     local showacasttime = ""
@@ -74,7 +74,7 @@ function SpellCastBuffs.EventEffectDebug(eventCode, changeType, effectSlot, effe
     local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
     local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
-    unitName = zo_strformat("<<t:1>>", unitName)
+    unitName = zo_strformat("<<C:1>>", unitName)
     if unitName == LUIE.PlayerNameFormatted then
         unitName = "Player"
     end
@@ -120,9 +120,9 @@ function SpellCastBuffs.AuthorCombatDebug(eventCode, result, isError, abilityNam
     local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
     local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
-    local source = zo_strformat("<<t:1>>", sourceName)
-    local target = zo_strformat("<<t:1>>", targetName)
-    local ability = zo_strformat("<<t:1>>", nameFormatted)
+    local source = zo_strformat("<<C:1>>", sourceName)
+    local target = zo_strformat("<<C:1>>", targetName)
+    local ability = zo_strformat("<<C:1>>", nameFormatted)
     if source == LUIE.PlayerNameFormatted then
         source = "Player"
     end
@@ -162,7 +162,7 @@ function SpellCastBuffs.AuthorEffectDebug(eventCode, changeType, effectSlot, eff
     local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
     local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
-    unitName = zo_strformat("<<t:1>>", unitName)
+    unitName = zo_strformat("<<C:1>>", unitName)
     if unitName == LUIE.PlayerNameFormatted then
         unitName = "Player"
     end

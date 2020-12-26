@@ -42,7 +42,7 @@ function CombatTextCombatEventListener:OnCombatIn(...)
     local combatType, togglesInOut = CombatTextConstants.combatType.INCOMING, Settings.toggles.incoming
     abilityName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
-    local sourceNameCheck = zo_strformat("<<t:1>>", sourceName)
+    local sourceNameCheck = zo_strformat("<<C:1>>", sourceName)
 
     -- Handle effects that override by UnitName
     if Effects.EffectOverrideByName[abilityId] then

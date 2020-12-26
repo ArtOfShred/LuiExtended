@@ -288,7 +288,7 @@ local function ResolveAbilityName(abilityId, sourceName)
 
 
     if Effects.EffectOverrideByName[abilityId] then
-        sourceName = zo_strformat("<<t:1>>", sourceName)
+        sourceName = zo_strformat("<<C:1>>", sourceName)
         if Effects.EffectOverrideByName[abilityId][sourceName] then
             abilityName = Effects.EffectOverrideByName[abilityId][sourceName].name or abilityName
         end
@@ -324,7 +324,7 @@ local function ResolveAbilityIcon(abilityId, sourceName)
     local abilityIcon = GetAbilityIcon(abilityId)
 
     if Effects.EffectOverrideByName[abilityId] then
-        sourceName = zo_strformat("<<t:1>>", sourceName)
+        sourceName = zo_strformat("<<C:1>>", sourceName)
         if Effects.EffectOverrideByName[abilityId][sourceName] then
             abilityIcon = Effects.EffectOverrideByName[abilityId][sourceName].icon or abilityIcon
         end

@@ -156,8 +156,8 @@ function LUIE.InitializeHooks()
             end
 
             if LUIE.Data.Effects.EffectOverrideByName[abilityId] then
-                local unitName = zo_strformat("<<t:1>>", attackerRawName)
-                local petName = zo_strformat("<<t:1>>", minionName)
+                local unitName = zo_strformat("<<C:1>>", attackerRawName)
+                local petName = zo_strformat("<<C:1>>", minionName)
                 if LUIE.Data.Effects.EffectOverrideByName[abilityId][unitName] then
                     if LUIE.Data.Effects.EffectOverrideByName[abilityId][unitName].hide then
                         return
