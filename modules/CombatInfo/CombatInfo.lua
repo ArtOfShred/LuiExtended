@@ -1299,7 +1299,7 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                             if g_toggledSlotsBack[abilityId] and g_uiCustomToggle[g_toggledSlotsBack[abilityId]] then
                                 if not Effects.HideGroundMineStacks[abilityId] then
                                     local slotNum = g_toggledSlotsBack[abilityId]
-                                    if g_uiCustomToggle[slotNum]
+                                    if g_uiCustomToggle[slotNum] then
                                         if g_mineStacks[abilityId] > 0 then
                                             g_uiCustomToggle[slotNum].stack:SetText(g_mineStacks[abilityId])
                                         else
