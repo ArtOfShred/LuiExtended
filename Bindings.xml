@@ -6,6 +6,7 @@
 <Bindings>
     <Layer name="SI_KEYBINDINGS_LAYER_GENERAL">
         <Category name="|cE12000L|cFFFFB0ui E|rxtended|r">
+            <Action name="LUIE_COMMAND_RELOADUI"><Down>ReloadUI("ingame")</Down></Action>
             <Action name="LUIE_COMMAND_FENCE"><Down>LUIE.SlashCommands.SlashCollectible(300, true)</Down></Action>
             <Action name="LUIE_COMMAND_MERCHANT"><Down>LUIE.SlashCommands.SlashCollectible(301, true)</Down></Action>
             <Action name="LUIE_COMMAND_MERCHANT_CAT"><Down>LUIE.SlashCommands.SlashCollectible(6378, true)</Down></Action>

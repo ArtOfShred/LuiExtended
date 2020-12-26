@@ -91,6 +91,7 @@ local strings = {
     SI_BINDING_NAME_LUIE_COMMAND_HOME =                  "Nach Hause teleportieren",
     SI_BINDING_NAME_LUIE_COMMAND_LEAVE_GROUP =           "Leave Group",
     SI_BINDING_NAME_LUIE_COMMAND_REGROUP =               "Neugruppieren (Auflösen & Neubilden)",
+    SI_BINDING_NAME_LUIE_COMMAND_RELOADUI =              GetString(SI_ADDON_MANAGER_RELOAD),
     SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_1 =              "Montur in Slot 1 ausrüsten",
     SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_2 =              "Montur in Slot 2 ausrüsten",
     SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_3 =              "Montur in Slot 3 ausrüsten",

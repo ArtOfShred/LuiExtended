@@ -91,6 +91,7 @@ local strings = {
     SI_BINDING_NAME_LUIE_COMMAND_HOME =                  "Переместиться в основной дом",
     SI_BINDING_NAME_LUIE_COMMAND_LEAVE_GROUP =           "Выйти из группы",
     SI_BINDING_NAME_LUIE_COMMAND_REGROUP =               "Перегруппироваться (Распустить & Собраться)",
+    SI_BINDING_NAME_LUIE_COMMAND_RELOADUI =              GetString(SI_ADDON_MANAGER_RELOAD),
     SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_1 =              "Экипировать наряд из ячейки 1",
     SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_2 =              "Экипировать наряд из ячейки 2",
     SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_3 =              "Экипировать наряд из ячейки 3",
