@@ -936,6 +936,30 @@ function SpellCastBuffs.CreateSettings()
                 default = not Defaults.IgnoreExperienceTarget,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
             },
+
+            {
+                -- Long Term - Alliance XP - Player
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ALLIANCEXPPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ALLIANCEXPPLAYER_TP),
+                getFunc = function() return not Settings.IgnoreAllianceXPPlayer end,
+                setFunc = function(value) Settings.IgnoreAllianceXPPlayer  = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreAllianceXPPlayer ,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - Alliance XP - Target
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ALLIANCEXPTARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ALLIANCEXPTARGET_TP),
+                getFunc = function() return not Settings.IgnoreAllianceXPTarget end,
+                setFunc = function(value) Settings.IgnoreAllianceXPTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreAllianceXPTarget,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+
             {
                 -- Long Term - Vamp Stage - Player
                 type = "checkbox",

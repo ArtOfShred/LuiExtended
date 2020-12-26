@@ -268,13 +268,30 @@ Effects.IsExperienceBuff = {
 
     -- Event
     [91369] = true, -- The Pie of Misrule (Jester's Experience Boost Pie)
-    [92232] = true, -- Pelinal's Ferocity
     [91449] = true, -- Breda's Magnificent Mead
     [86075] = true, -- Breda's Magnificent Mead
     [77123] = true, -- Anniversary EXP Buff
     [118985] = true, -- Anniversary EXP Buff
     [136348] = true, -- Anniversary EXP Buff
     [96118] = true, -- Witchmother's Boon -- TODO: Check one more time
+}
+
+Effects.IsAllianceXPBuff = {
+
+    -- Consumable
+    [147466] = true, -- Alliance Skill Gain (Alliance War Skill Line Scroll)
+    [137733] = true, -- Alliance Skill Gain (Alliance War Skill Line Scroll, Major)
+    [147467] = true, -- Alliance Skill Gain (Alliance War Skill Line Scroll, Grand)
+    [147687] = true, -- Alliance Skill Gain 50% Boost (Colovian War Torte)
+    [147733] = true, -- Alliance Skill Gain 100% Boost (Molten War Torte)
+    [147734] = true, -- Alliance Skill Gain 150% Boost (White-Gold War Torte)
+
+    -- Event
+    [92232] = true, -- Pelinal's Ferocity
+
+    -- World
+    [66282] = true, -- Blessing of War
+
 }
 
 -- Block buffs (NPC and Player)

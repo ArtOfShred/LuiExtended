@@ -98,6 +98,8 @@ SpellCastBuffs.Defaults = {
     IgnoreFoodTarget                    = false,
     IgnoreExperiencePlayer              = false,
     IgnoreExperienceTarget              = false,
+    IgnoreAllianceXPPlayer              = false,
+    IgnoreAllianceXPTarget              = false,
     IgnoreDisguise                      = false,
     IgnoreCostume                       = true,
     IgnoreHat                           = true,
@@ -3634,6 +3636,16 @@ function SpellCastBuffs.UpdateContextHideList()
     end
     if SpellCastBuffs.SV.IgnoreExperienceTarget then
         for k, v in pairs(Effects.IsExperienceBuff) do
+            hideTargetEffects[k] = v
+        end
+    end
+    if SpellCastBuffs.SV.IgnoreAllianceXPPlayer then
+        for k, v in pairs(Effects.IsAllianceXPBuff) do
+            hidePlayerEffects[k] = v
+        end
+    end
+    if SpellCastBuffs.SV.IgnoreAllianceXPTarget then
+        for k, v in pairs(Effects.IsAllianceXPBuff) do
             hideTargetEffects[k] = v
         end
     end
