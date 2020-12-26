@@ -9444,7 +9444,7 @@ Effects.EffectOverride = {
     [39312] = { hide = true }, -- CON_Portal Perm
     [39308] = { hide = true }, -- Stun
     [39384] = { hide = true }, -- Q4917 Lurcher Construct Ground
-    [41325] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_blacksaps_brew.dds', tooltip = Tooltips.Skill_Blacksaps_Brew }, -- Blacksap's Brew
+    [41325] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_blacksaps_brew.dds', tooltip = Tooltips.Skill_Blacksaps_Brew, forcedContainer = 'long' }, -- Blacksap's Brew
 
     -- Luck of the Albatross
     [35984] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_captains_whistle.dds', name = Abilities.Skill_Call_for_Help }, -- Q4436 Summon Pirate
@@ -9461,15 +9461,15 @@ Effects.EffectOverride = {
     -- Bosmer Insight
     [36438] = { hide = true }, -- Q4833
     [36544] = { hide = true }, -- Fast Jumper
-    [35991] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_vision_journey.dds', tooltip = Tooltips.Skill_Vision_Journey }, -- Vision Journey
+    [35991] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_vision_journey.dds', tooltip = Tooltips.Skill_Vision_Journey, forcedContainer = 'long' }, -- Vision Journey
     [36883] = { hide = true }, -- Q4833 Teleport into Tree
     [36882] = { hide = true }, -- Q4833 Teleport into Tree
     [36710] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_snake_scales.dds', name = Abilities.Skill_Snake_Scales }, -- Q4833 Apply Snake Buff
-    [36713] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_snake_scales.dds', tooltip = Tooltips.Skill_Snakes_Scales }, -- Snake Scales
+    [36713] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_snake_scales.dds', tooltip = Tooltips.Skill_Snakes_Scales, forcedContainer = 'long' }, -- Snake Scales
     [36841] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_wolfs_pelt.dds', name = Abilities.Skill_Wolfs_Pelt }, -- Q4833 Apply Wolf Buff
-    [36843] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_wolfs_pelt.dds', tooltip = Tooltips.Skill_Wolfs_Pelt }, -- Wolf's Pelt
+    [36843] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_wolfs_pelt.dds', tooltip = Tooltips.Skill_Wolfs_Pelt, forcedContainer = 'long' }, -- Wolf's Pelt
     [36824] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_tigers_fur.dds', name = Abilities.Skill_Tigers_Fur }, -- Q4833 Apply Tiger Buff
-    [36828] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_tigers_fur.dds', tooltip = Tooltips.Skill_Tigers_Fur }, -- Tiger's Fur
+    [36828] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_tigers_fur.dds', tooltip = Tooltips.Skill_Tigers_Fur, forcedContainer = 'long' }, -- Tiger's Fur
 
     -- The Unquiet Dead
     [37062] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_bone_scepter.dds', hide = true }, -- Exorcise
@@ -9498,7 +9498,7 @@ Effects.EffectOverride = {
     [33581] = { hide = true }, -- DUN-RF_Event_Blue_Fire
 
     -- Audience with the Wilderking
-    [37759] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_spirit_armor.dds', tooltip = Tooltips.Skill_Spirit_Armor }, -- Spirit Armor
+    [37759] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_spirit_armor.dds', tooltip = Tooltips.Skill_Spirit_Armor, forcedContainer = 'long' }, -- Spirit Armor
 
     -- The Witch of Silatar
     [33384] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_grasping_vines.dds', name = Abilities.Skill_Restricting_Vines, unbreakable = 1, tooltip = Tooltips.Generic_Stun }, -- Q4586 Aranias Vine Stun
@@ -9507,7 +9507,7 @@ Effects.EffectOverride = {
     [49116] = { hide = true }, -- Q4586_HugeTree
 
     -- Throne of the Wilderking
-    [35014] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_wilderkings_protection.dds', tooltip = Tooltips.Skill_Wilderkings_Protection }, -- Wilderking's Protection
+    [35014] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_wilderkings_protection.dds', tooltip = Tooltips.Skill_Wilderkings_Protection, forcedContainer = 'long' }, -- Wilderking's Protection
     [33701] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds', name = Abilities.Skill_Burrow, hide = true }, -- BurrowEND
     [33727] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds', name = Abilities.Skill_Emerge, hide = true }, -- BurrowEND
     [33829] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds', name = Abilities.Skill_Burrow, tooltip = Tooltips.Skill_Burrow }, -- Burrowing
