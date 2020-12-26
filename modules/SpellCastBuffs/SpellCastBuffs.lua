@@ -3153,13 +3153,11 @@ function SpellCastBuffs.OnUpdate(currentTime)
                 if v.starts < currentTime then
                     -- Filter Long-Term effects:
                     -- Always show debuffs and short-term buffs
-                    if v.type == 2 or v.forced == "short" or not (v.forced == "long" or v.ends == nil or v.dur == 0 or v.ends-currentTime > 120000) then
+                    if v.type == 2 or v.forced == "short" or not (v.forced == "long" or v.ends == nil or v.dur == 0) then
                         table.insert(buffsSorted[container], v)
-
                     -- Show long-term target buffs in same container
                     elseif v.target == "reticleover" and SpellCastBuffs.SV.LongTermEffects_Target then
                         table.insert(buffsSorted[container], v)
-
                     -- Show long-term player buffs
                     elseif v.target == "player" and SpellCastBuffs.SV.LongTermEffects_Player then
                         -- Choose container for long-term player buffs
