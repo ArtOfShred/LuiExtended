@@ -604,7 +604,7 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     end
 
     -- Get Ability Name & Icon
-    local abilityName = GetAbilityName(abilityId)
+    local abilityName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
     local abilityIcon = GetAbilityIcon(abilityId)
     unitName = zo_strformat("<<C:1>>", unitName)
     local savedName = unitName
