@@ -2107,12 +2107,11 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
 
     local UpOrDown = newValue - oldValue
 
-    --[[ DEBUG
-    d("currency: " .. currency)
-    d("NV: " .. newValue)
-    d("OV: " .. oldValue)
-    d("reason: " .. reason)
-    ]]
+    -- DEBUG
+    --d("currency: " .. currency)
+    --d("NV: " .. newValue)
+    --d("OV: " .. oldValue)
+    --d("reason: " .. reason)
 
     -- If the total gold change was 0 or (Reason 7 = Command) or (Reason 28 = Mount Feed) or (Reason 35 = Player Init) - End Now
     if UpOrDown == 0 or UpOrDown + g_postageAmount == 0 or UpOrDown - g_postageAmount == 0 or reason == 7 or reason == 28 or reason == 35 then
@@ -2340,8 +2339,8 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
     elseif reason == 3 and UpOrDown < 0 then
         messageChange = g_tradeTarget ~="" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageTradeOut or ChatAnnouncements.SV.ContextMessages.CurrencyMessageTradeOutNoName
         if g_tradeTarget ~="" then type = "LUIE_CURRENCY_TRADE" end
-    -- Receive from Quest Reward (4), Medal (21), AH Refund (32), Jump Failure Refund (54)
-    elseif reason == 4 or reason == 21 or reason == 32 or reason == 54 then
+    -- Receive from Quest Reward (4), Deconstruct (16), Medal (21), AH Refund (32), Jump Failure Refund (54)
+    elseif reason == 4 or reason == 16 or reason == 21 or reason == 32 or reason == 54 then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
     -- Sell to Fence (63)
     elseif reason == 63 then
@@ -2378,8 +2377,8 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
     -- Wayshrine (19)
     elseif reason == 19 then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageWayshrine
-    -- Craft (24)
-    elseif reason == 24 then
+    -- Craft (24), Deconstruct (78)
+    elseif reason == 24 or reason == 78 then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse
     -- Repairs (29)
     elseif reason == 29 then
@@ -2497,7 +2496,6 @@ elseif reason == 14 or reason == 40 or reason == 41 or reason == 74 or reason ==
     -- DEBUG EVENTS - Don't know if these are implemented or what they are for.
     elseif reason == 6 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_ACTION
     elseif reason == 15 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_KEEP_UPGRADE
-    elseif reason == 16 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_DECONSTRUCT
     elseif reason == 18 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_SOUL_HEAL
     elseif reason == 20 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_CASH_ON_DELIVERY
     elseif reason == 22 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_ABILITY_UPGRADE_PURCHASE
