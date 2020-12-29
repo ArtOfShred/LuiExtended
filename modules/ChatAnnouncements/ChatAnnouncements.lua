@@ -2496,10 +2496,11 @@ elseif reason == 14 or reason == 40 or reason == 41 or reason == 74 or reason ==
     -- DEBUG EVENTS - Don't know if these are implemented or what they are for.
     elseif reason == 6 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_ACTION
     elseif reason == 15 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_KEEP_UPGRADE
+    elseif reason == 17 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_DEPRECATED_2
     elseif reason == 18 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_SOUL_HEAL
     elseif reason == 20 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_CASH_ON_DELIVERY
     elseif reason == 22 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_ABILITY_UPGRADE_PURCHASE
-    elseif reason == 23 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_HOOKPOINT_STORE
+    elseif reason == 23 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_DEPRECATED_1
     elseif reason == 25 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_STABLESPACE
     elseif reason == 26 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_ACHIEVEMENT
     elseif reason == 30 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_TRAIT_REVEAL
@@ -10174,10 +10175,23 @@ function ChatAnnouncements.HookFunction()
 
         local index = #inventory.slots[questIndex]
 
-        if(searchType == SEARCH_TYPE_QUEST_ITEM) then
-            questItem.searchData = {type = SEARCH_TYPE_QUEST_ITEM, questIndex = questIndex, stepIndex = questItem.stepIndex, conditionIndex = questItem.conditionIndex, index = index }
+        if searchType == ZO_TEXT_SEARCH_TYPE_QUEST_ITEM then
+            questItem.searchData =
+            {
+                type = ZO_TEXT_SEARCH_TYPE_QUEST_ITEM,
+                questIndex = questIndex,
+                stepIndex = questItem.stepIndex,
+                conditionIndex = questItem.conditionIndex,
+                index = index,
+            }
         else
-            questItem.searchData = {type = SEARCH_TYPE_QUEST_TOOL, questIndex = questIndex, toolIndex = questItem.toolIndex, index = index }
+            questItem.searchData =
+            {
+                type = ZO_TEXT_SEARCH_TYPE_QUEST_TOOL,
+                questIndex = questIndex,
+                toolIndex = questItem.toolIndex,
+                index = index,
+            }
         end
 
         inventory.stringSearch:Insert(questItem.searchData)
