@@ -104,8 +104,8 @@ ChatAnnouncements.Defaults = {
         GuildAlert                    = false,
         GuildRankCA                   = true,
         GuildRankAlert                = false,
-        GuildManageCA                 = false,
-        GuildManageAlert              = false,
+        GuildManagementCA                 = false,
+        GuildManagementAlert              = false,
         GuildIcon                     = true,
         GuildAllianceColor            = true,
         GuildColor                    = { 1, 1, 1, 1 },
@@ -1374,13 +1374,13 @@ function ChatAnnouncements.GuildHeraldrySaved()
         local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
         local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
-        if ChatAnnouncements.SV.Social.GuildManageCA then
+        if ChatAnnouncements.SV.Social.GuildManagementCA then
             local finalMessage = zo_strformat(GetString(SI_LUIE_CA_GUILD_HERALDRY_UPDATE), guildNameAlliance)
             g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION", isSystem = true }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
         end
-        if ChatAnnouncements.SV.Social.GuildManageAlert then
+        if ChatAnnouncements.SV.Social.GuildManagementAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_CA_GUILD_HERALDRY_UPDATE), guildNameAllianceAlert))
         end
     end
@@ -1393,13 +1393,13 @@ function ChatAnnouncements.GuildRanksSaved(eventCode, guildId)
     local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
     local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
-    if ChatAnnouncements.SV.Social.GuildManageCA then
+    if ChatAnnouncements.SV.Social.GuildManagementCA then
         local finalMessage = zo_strformat(GetString(SI_LUIE_CA_GUILD_RANKS_UPDATE), guildNameAlliance)
         g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION", isSystem = true }
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
     end
-    if ChatAnnouncements.SV.Social.GuildManageAlert then
+    if ChatAnnouncements.SV.Social.GuildManagementAlert then
         ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_CA_GUILD_RANKS_UPDATE), guildNameAllianceAlert))
     end
 end
@@ -1425,10 +1425,10 @@ function ChatAnnouncements.GuildRankSaved(eventCode, guildId, rankIndex)
     local rankSyntax = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankName)) or (guildColor:Colorize(rankName))
     local rankSyntaxAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", rankName) or rankName
 
-    if ChatAnnouncements.SV.Social.GuildManageCA then
+    if ChatAnnouncements.SV.Social.GuildManagementCA then
         printToChat(zo_strformat(GetString(SI_LUIE_CA_GUILD_RANK_UPDATE), rankSyntax, guildNameAlliance), true)
     end
-    if ChatAnnouncements.SV.Social.GuildManageAlert then
+    if ChatAnnouncements.SV.Social.GuildManagementAlert then
         ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_CA_GUILD_RANK_UPDATE), rankSyntaxAlert, guildNameAllianceAlert))
     end
 end
@@ -1443,13 +1443,13 @@ function ChatAnnouncements.GuildTextChanged(eventCode, guildId)
     local messageString = eventCode == EVENT_GUILD_DESCRIPTION_CHANGED and SI_LUIE_CA_GUILD_DESCRIPTION_CHANGED or EVENT_GUILD_MOTD_CHANGED and SI_LUIE_CA_GUILD_MOTD_CHANGED or nil
 
     if messageString ~= nil then
-        if ChatAnnouncements.SV.Social.GuildManageCA then
+        if ChatAnnouncements.SV.Social.GuildManagementCA then
             local finalMessage = zo_strformat(GetString(messageString), guildNameAlliance)
             g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION", isSystem = true }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
         end
-        if ChatAnnouncements.SV.Social.GuildManageAlert then
+        if ChatAnnouncements.SV.Social.GuildManagementAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(messageString), guildNameAllianceAlert))
         end
     end
@@ -6473,9 +6473,14 @@ function ChatAnnouncements.HookFunction()
             finalAlertName = ""
         end
 
-        if(response ~= GROUP_INVITE_RESPONSE_ACCEPTED and response ~= GROUP_INVITE_RESPONSE_CONSIDERING_OTHER) then
+        if(response ~= GROUP_INVITE_RESPONSE_ACCEPTED) then
             local message
             local alertMessage
+
+            -- If player is already in a group and tries to invite themself, don't display a duplicate message.
+            if response == GROUP_INVITE_RESPONSE_ALREADY_GROUPED_CANT_JOIN and (LUIE.PlayerNameFormatted == characterName or LUIE.PlayerDisplayName == displayName) then
+                return true
+            end
 
             if response == GROUP_INVITE_RESPONSE_ALREADY_GROUPED and (LUIE.PlayerNameFormatted == characterName or LUIE.PlayerDisplayName == displayName) then
                 message = zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_SELF_INVITE))
