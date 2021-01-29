@@ -269,7 +269,6 @@ local strings = {
     SI_LUIE_CA_GROUPINVITERESPONSE13 =                   "Kann |cFFFFFF<<1>>|r nicht beitreten. Die Gruppe ist voll.",
     SI_LUIE_CA_GROUPINVITERESPONSE14 =                   "Kann |cFFFFFF<<1>>|r nicht beitreten. Du bist bereits in einer Gruppe.",
     SI_LUIE_CA_GROUPINVITERESPONSE15 =                   "|cFFFFFF<<1>>|r ist momentan auf einem Schlachtfeld.",
-    SI_LUIE_CA_GROUPINVITERESPONSE16 =                   "|cFFFFFF<<1>>|r has invited you to their group. You must leave your current group before you can join another.",
     SI_LUIE_CA_GROUP_LEADERKICK_ERROR =                  "Du musst Gruppenführer sein um einen Spieler zu entfernen.",
     SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE =              "|cFFFFFF<<1>>|r möchte die Quest <<2>> mit dir teilen.",
     SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_P2P =          "|cFFFFFF<<1>>|r möchte die Quest |cFFFFFF<<2>>|r mit dir teilen.",
