@@ -1585,9 +1585,6 @@ LUIE.DebugAuras = {
 
     [106775] = true, -- Adept Rider (Adept Rider's)
     [106776] = true, -- Major Evasion (Adept Rider's)
-    [106790] = true, -- Major Evasion (Adept Rider's)
-    [106784] = true, -- Dustcloud (Adept Rider's)
-    [106783] = true, -- Dustcloud Damage (Adept Rider's)
 
     [106803] = true, -- Nocturnal's Favor (Nocturnal's Favored)
     [106804] = true, -- Nocturnal's Heal (Nocturnal's Favored)
@@ -3296,7 +3293,6 @@ LUIE.DebugAuras = {
     [28988] = true, -- Dragonknight Standard (Dragonknight Standard)
     [28995] = true, -- Dragonknight Standard (Dragonknight Standard)
     [29230] = true, -- Major Defile (Dragonknight Standard)
-    [102366] = true, -- Shackle Synergy Anchor (Dragonknight Standard)
     [32905] = true, -- Shackle (Dragonknight Standard)
 
     [32967] = true, -- Shifting Standard (Shifting Standard)
@@ -3468,7 +3464,6 @@ LUIE.DebugAuras = {
 
     [32678] = true, -- Shattering Rocks (Shattering Rocks)
     [32684] = true, -- Shattering Rocks (Shattering Rocks)
-    [108813] = true, -- Shattering Rocks (Shattering Rocks)
     [108811] = true, -- Shattering Rocks (Shattering Rocks)
 
     [29059] = true, -- Ash Cloud (Ash Cloud)
@@ -3778,7 +3773,6 @@ LUIE.DebugAuras = {
     [33327] = true, -- Cripple (Cripple)
 
     [36943] = true, -- Debilitate (Debilitate)
-    [125316] = true, -- Minor Magickasteal (Debilitate)
     [36947] = true, -- Debilitate (Debilitate)
     [36945] = true, -- Debilitate (Debilitate)
 
@@ -4336,7 +4330,6 @@ LUIE.DebugAuras = {
 
     [26792] = true, -- Biting Jabs (Biting Jabs)
     [26795] = true, -- Major Savagery (Biting Jabs)
-    [103212] = true, -- Biting Jabs (Biting Jabs)
     [26794] = true, -- Biting Jabs (Biting Jabs)
     [44432] = true, -- Biting Jabs (Biting Jabs)
     [76912] = true, -- Biting Jabs (Biting Jabs)
@@ -5506,9 +5499,7 @@ LUIE.DebugAuras = {
     [45445] = true, -- Forceful
 
     [29375] = true, -- Heavy Weapons (Rank 1)
-    [29383] = true, -- Heavy Weapons Bleed
     [45430] = true, -- Heavy Weapons (Rank 2)
-    [45431] = true, -- Heavy Weapons Bleed
 
     [29388] = true, -- Balanced Blade (Rank 1)
     [45443] = true, -- Balanced Blade (Rank 2)
@@ -5724,9 +5715,7 @@ LUIE.DebugAuras = {
     [45481] = true, -- Ruffian (Rank 2)
 
     [30893] = true, -- Twin Blade and Blunt (Rank 1)
-    [30894] = true, -- Twin Blade and Blunt Bleed
     [45482] = true, -- Twin Blade and Blunt (Rank 2)
-    [45483] = true, -- Twin Blade and Blunt Bleed
 
     -------------------------------------
     -- DUAL WIELD ACTIVES ---------------
@@ -7409,15 +7398,12 @@ LUIE.DebugAuras = {
 
     [38566] = true, -- Rapid Maneuver (Rapid Maneuver)
     [101161] = true, -- Major Expedition (Rapid Maneuver)
-    [57472] = true, -- Major Gallop (Rapid Maneuver)
 
     [40211] = true, -- Retreating Maneuver (Retreating Maneuver)
     [101169] = true, -- Major Expedition (Retreating Maneuver)
-    [57477] = true, -- Major Gallop (Retreating Maneuver)
 
     [40215] = true, -- Charging Maneuver (Charging Maneuver)
     [101178] = true, -- Major Expedition (Charging Maneuver)
-    [57481] = true, -- Major Gallop (Charging Maneuver)
     [40219] = true, -- Minor Expedition (Charging Maneuver)
 
     [61503] = true, -- Vigor (Vigor)
@@ -7722,17 +7708,8 @@ LUIE.DebugAuras = {
     [45279] = true, -- Imperial Mettle (Rank 2)
     [45280] = true, -- Imperial Mettle (Rank 3)
     [36155] = true, -- Red Diamond (Rank 1)
-    [36214] = true, -- Red Diamond
-    [121126] = true, -- Red Diamond
-    [121127] = true, -- Red Diamond
     [45291] = true, -- Red Diamond (Rank 2)
-    [45292] = true, -- Red Diamond
-    [121139] = true, -- Red Diamond
-    [121140] = true, -- Red Diamond
     [45293] = true, -- Red Diamond (Rank 3)
-    [45294] = true, -- Red Diamond
-    [121141] = true, -- Red Diamond
-    [121142] = true, -- Red Diamond
 
 
     -------------------------------------
@@ -7974,7 +7951,6 @@ LUIE.DebugAuras = {
     [61933] = true, -- Remove
 
     -- SHARED NPC PASSIVES
-    [67950] = true, -- CC Immunity Plus -- Various NPC's
     [33097] = true, -- Scary Immunities -- Various NPC's
     [44176] = true, -- Flying Immunities -- Various NPC's
     [13739] = true, -- Backstabber -- Various NPC's
