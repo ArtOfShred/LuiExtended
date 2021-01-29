@@ -3638,7 +3638,6 @@ LUIE.DebugAuras = {
     [25260] = true, -- Surprise Attack (Surprise Attack)
     [34733] = true, -- Off Balance (Surprise Attack)
     [34732] = true, -- Surprise Attack (Surprise Attack)
-    [34734] = true, -- Surprise Attack (Surprise Attack)
 
     [34738] = true, -- Concealed Weapon Passive (Concealed Weapon)
     [61155] = true, -- Concealed Weapon (Concealed Weapon)

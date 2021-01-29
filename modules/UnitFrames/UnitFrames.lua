@@ -3275,7 +3275,8 @@ end
 -- Used to change icon on alternative bar for next champion point type
 function UnitFrames.OnChampionPointGained(eventCode)
     if UnitFrames.CustomFrames.player and UnitFrames.CustomFrames.player.ChampionXP then
-        local attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned()+1 )
+        --local attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned()+1 ) -- TODO: Fix when this function is fixed
+        local attribute = 1
         local colour = ( UnitFrames.SV.PlayerChampionColour and CP_BAR_COLOURS[attribute] ) and CP_BAR_COLOURS[attribute][2] or XP_BAR_COLOURS
         local colour2 = ( UnitFrames.SV.PlayerChampionColour and CP_BAR_COLOURS[attribute] ) and CP_BAR_COLOURS[attribute][1] or XP_BAR_COLOURS
         UnitFrames.CustomFrames.player.ChampionXP.backdrop:SetCenterColor( 0.1*colour.r, 0.1*colour.g, 0.1*colour.b, 0.9 )
