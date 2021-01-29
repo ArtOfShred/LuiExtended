@@ -9789,16 +9789,6 @@ function ChatAnnouncements.HookFunction()
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
     end
 
-    local function AlertMountError(SendString, primaryName)
-        local formattedString = zo_strformat(SendString, primaryName)
-        local alertString = IsConsoleUI() and SI_PLAYER_TO_PLAYER_BLOCKED or formattedString
-        printToChat(alertString, true)
-        if ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, alertString)
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-    end
-
     PLAYER_TO_PLAYER.ShowPlayerInteractMenu = function(self, isIgnored)
         local currentTargetCharacterName = self.currentTargetCharacterName
         local currentTargetCharacterNameRaw = self.currentTargetCharacterNameRaw
@@ -9922,41 +9912,8 @@ function ChatAnnouncements.HookFunction()
             local isPassengerForTarget = IsGroupMountPassengerForTarget(currentTargetCharacterNameRaw)
             local groupMountEnabled = (mountedState == PLAYER_MOUNTED_STATE_MOUNT_RIDER and isRidingGroupMount and (not IsMounted() or isPassengerForTarget))
             local function MountOption() UseMountAsPassenger(currentTargetCharacterNameRaw) end
-            local function MountIgnore() AlertIgnored(SI_LUIE_IGNORE_ERROR_MOUNT_IGNORE) end
-            local function MountInvalidNoMount() AlertMountError(SI_LUIE_IGNORE_ERROR_MOUNT_INVALID, primaryName) end
-            local function MountInvalidFull() AlertMountError(SI_LUIE_IGNORE_ERROR_MOUNT_INVALID_FULL, primaryName) end
-            local function MountInvalidTargetPassenger() AlertMountError(SI_LUIE_IGNORE_ERROR_MOUNT_INVALID_PASSENGER, primaryName) end
             local optionToShow = isPassengerForTarget and SI_PLAYER_TO_PLAYER_DISMOUNT or SI_PLAYER_TO_PLAYER_RIDE_MOUNT
-            local mountFunction
-            local mountEnabled
-            if ENABLED_IF_NOT_IGNORED then
-                -- You are riding
-                if isPassengerForTarget then
-                    mountFunction = MountOption
-                    mountEnabled = groupMountEnabled
-                -- Target is riding a group mount
-                elseif mountedState == PLAYER_MOUNTED_STATE_MOUNT_PASSENGER then
-                    mountFunction = MountInvalidTargetPassenger
-                    mountEnabled = false
-                -- Target Player is not riding a group mount
-                elseif not isRidingGroupMount or mountedState == PLAYER_MOUNTED_STATE_NOT_MOUNTED then
-                    mountFunction = MountInvalidNoMount
-                    mountEnabled = false
-                -- Target already has a passenger
-                elseif not hasFreePassengerSlot and isRidingGroupMount then
-                    mountFunction = MountInvalidFull
-                    mountEnabled = false
-                -- Target Player has an open group mount
-                elseif hasFreePassengerSlot and groupMountEnabled then
-                    mountFunction = MountOption
-                    mountEnabled = groupMountEnabled
-                end
-            else
-                -- Only allow dismount if the player is ignored.
-                mountFunction = isPassengerForTarget and MountOption or MountIgnore
-                mountEnabled = isPassengerForTarget and true or false
-            end
-            self:AddMenuEntry(GetString(optionToShow), platformIcons[optionToShow], mountEnabled, mountFunction)
+            self:AddMenuEntry(GetString(optionToShow), platformIcons[optionToShow], groupMountEnabled, MountOption)
         end
 
         --Report--

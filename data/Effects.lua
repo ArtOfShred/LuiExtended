@@ -466,6 +466,9 @@ Effects.DebuffDisplayOverrideId = {
     -- Necromancer
     [118618] = true, -- Pure Agony (Agony Totem)
 
+    -- Nightblade
+    [34734] = true, -- Surprise Attack (Surprise Attack)
+
     -- Warden
     [87560] = true, -- Frozen Gate Root (Frozen Gate)
     [92039] = true, -- Frozen Gate Root (Frozen Device)
@@ -1128,7 +1131,7 @@ Effects.BarHighlightOverride = {
 
     -- Shadow
     [25255] = { newId = 33185 }, -- Veiled Strike
-    --[25260] = { newId = 34734 }, -- Surprise Attack REPLACE WITH CORRECT DEBUFF
+    [25260] = { newId = 34734 }, -- Surprise Attack
     [25267] = { newId = 34736 }, -- Concealed Weapon
     [25375] = { newId = 25376 }, -- Shadow Cloak
     [25380] = { newId = 62141 }, -- Shadowy Disguise
@@ -4737,6 +4740,7 @@ Effects.EffectOverride = {
     [33185] = { tooltip = Tooltips.Generic_Stun }, -- Veiled Strike (Veiled Strike)
     [34733] = { tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off Balance (Surprise Attack)
     [34732] = { tooltip = Tooltips.Generic_Stun }, -- Surprise Attack (Surprise Attack)
+    [34734] = { tooltip = Tooltips.Skill_Surprise_Attack }, -- Surprise Attack (Surprise Attack)
     [34737] = { tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off Balance (Concealed Weapon)
     [34736] = { tooltip = Tooltips.Generic_Stun }, -- Concealed Weapon (Concealed Weapon)
 
