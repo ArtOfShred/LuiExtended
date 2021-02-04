@@ -8727,7 +8727,7 @@ function ChatAnnouncements.HookFunction()
         local championPointsByType = { 0, 0, 0 }
 
         while startingPoints <= savedEndingPoints do
-            local pointType = GetChampionPointAttributeForRank(startingPoints)
+            local pointType = 1
             championPointsByType[pointType] = championPointsByType[pointType] + 1
             startingPoints = startingPoints + 1
         end
@@ -10225,28 +10225,6 @@ function ChatAnnouncements.HookFunction()
         questItem.slotIndex = questIndex
         table.insert(inventory.slots[questIndex], questItem)
 
-        local index = #inventory.slots[questIndex]
-
-        if searchType == ZO_TEXT_SEARCH_TYPE_QUEST_ITEM then
-            questItem.searchData =
-            {
-                type = ZO_TEXT_SEARCH_TYPE_QUEST_ITEM,
-                questIndex = questIndex,
-                stepIndex = questItem.stepIndex,
-                conditionIndex = questItem.conditionIndex,
-                index = index,
-            }
-        else
-            questItem.searchData =
-            {
-                type = ZO_TEXT_SEARCH_TYPE_QUEST_TOOL,
-                questIndex = questIndex,
-                toolIndex = questItem.toolIndex,
-                index = index,
-            }
-        end
-
-        inventory.stringSearch:Insert(questItem.searchData)
         -- Display Item if set to display
         if ChatAnnouncements.SV.Inventory.LootQuestAdd or ChatAnnouncements.SV.Inventory.LootQuestRemove then
             DisplayQuestItem(questItem.questItemId, questItem.stackCount, questItem.iconFile, false)
@@ -10259,7 +10237,6 @@ function ChatAnnouncements.HookFunction()
         if itemTable then
             --remove all quest items from search
             for i = 1, #itemTable do
-                inventory.stringSearch:Remove(itemTable.searchData)
                 -- Display Item if set to display
                 if ChatAnnouncements.SV.Inventory.LootQuestAdd or ChatAnnouncements.SV.Inventory.LootQuestRemove then
                     local itemId = itemTable[i].questItemId
@@ -10269,7 +10246,6 @@ function ChatAnnouncements.HookFunction()
                 end
             end
         end
-
         inventory.slots[questIndex] = nil
     end
 
