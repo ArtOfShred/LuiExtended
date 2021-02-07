@@ -98,7 +98,7 @@ function SlashCommands.SlashCampaignQ(option)
     end
 
     -- Compare names to campaigns available, join the campaign and bail out of the function if it is available.
-    for i = 1, 100 do
+    for i = 1, 124 do
         local compareName = string.lower(GetCampaignName(i))
         local option = string.lower(option)
         if compareName == option then
