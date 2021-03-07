@@ -3741,7 +3741,8 @@ function ChatAnnouncements.ResolveQuestItemChange()
                             logPrefix = Quests.ItemReceivedMessage[itemId] == LUIE_QUEST_MESSAGE_BUNDLE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestBundle or
                             Quests.ItemReceivedMessage[itemId] == LUIE_QUEST_MESSAGE_LOOT and ChatAnnouncements.SV.ContextMessages.CurrencyMessageLoot or
                             Quests.ItemReceivedMessage[itemId] == LUIE_QUEST_MESSAGE_COMBINE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestCombine or
-                            Quests.ItemReceivedMessage[itemId] == LUIE_QUEST_MESSAGE_MIX and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestMix
+                            Quests.ItemReceivedMessage[itemId] == LUIE_QUEST_MESSAGE_MIX and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestMix or
+                            Quests.ItemReceivedMessage[itemId] == LUIE_QUEST_MESSAGE_STEAL and ChatAnnouncements.SV.ContextMessages.CurrencyMessageSteal
                         end
 
                         -- Some quest items we want to limit the maximum possible quantity displayed when looted (for wierd item swapping) so replace the actual quantity with this value.
@@ -8727,7 +8728,7 @@ function ChatAnnouncements.HookFunction()
         local championPointsByType = { 0, 0, 0 }
 
         while startingPoints <= savedEndingPoints do
-            local pointType = 1
+            local pointType = 1 -- TODO: Figure something out for this later
             championPointsByType[pointType] = championPointsByType[pointType] + 1
             startingPoints = startingPoints + 1
         end

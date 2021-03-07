@@ -214,15 +214,9 @@ local strings = {
     -- CHAMPION POINT SKILLS ---------------------------------------
     ----------------------------------------------------------------
 
-    SI_LUIE_SKILL_PHASE_TP =                             "Increase Physical and Spell Resistance by |cFFFFFF660|r for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_UNCHAINED_TP =                         "Reduce the cost of your next Stamina ability used within |cFFFFFF<<1>>|r seconds by |cFFFFFF80|r%.",
-    SI_LUIE_SKILL_FORESIGHT_TP =                         "Reduce the cost of your next Magicka ability used within |cFFFFFF<<1>>|r seconds by |cFFFFFF80|r%.",
-    SI_LUIE_SKILL_RETALIATION_TP =                       "Your next Light Attack used within |cFFFFFF<<1>>|r seconds deals |cFFFFFF30|r% additional damage.",
-    SI_LUIE_SKILL_OPPORTUNIST_TP =                       "Your next Physical Damage ability used within |cFFFFFF<<1>>|r seconds deals |cFFFFFF15|r% additional damage.",
-    SI_LUIE_SKILL_SIPHONER_TP =                          "Decrease Health, Magicka, and Stamina resource restore and Recovery for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_VENGEANCE_TP =                         "Your next Magicka ability used within |cFFFFFF<<1>>|r seconds will always be a Critical Strike.",
-    SI_LUIE_SKILL_VENGEANCE_CHARGE =                     "Vengeance Charge",
-    SI_LUIE_SKILL_REINFORCED_TP =                        "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>> while you are bracing.",
+    SI_LUIE_SKILL_SHADOWSTRIKE_TP =                      "Invisible for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nWhile under this effect you can cast Blade of Woe.",
+    SI_LUIE_SKILL_FORESIGHT_TP =                         "Reduce the cost of your Magicka and Stamina healing abilities by |cFFFFFF75|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_UNCHAINED_TP =                         "Reduce the cost of your next Stamina ability used within |cFFFFFF<<1>>|r seconds by |cFFFFFF11|r% per stage.",
 
     ----------------------------------------------------------------
     -- GENERIC / SHARED TOOLTIPS -----------------------------------

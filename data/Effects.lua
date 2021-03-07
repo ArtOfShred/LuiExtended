@@ -2648,9 +2648,6 @@ Effects.EffectHideSCT = {
     [45982] = true, -- Bash Stun
     [16825] = true, -- Off-Balance Exploit
 
-    -- Player - Champion Points
-    [64245] = true, -- Shadowstrike
-
     -- Player - Weapons
     [18429] = true, -- Heavy Attack (Unarmed)
     [16041] = true, -- Heavy Attack (2H)
@@ -4277,49 +4274,17 @@ Effects.EffectOverride = {
     -- CHAMPION POINTS ---------------------------------------------
     ----------------------------------------------------------------
 
-    -- The Steed
-    [98313] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_invigorating_bash.dds' }, -- Invigorating Bash
-    [98294] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_phase.dds', tooltip = Tooltips.Champion_Phase }, -- Phase
-    [61661] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_resilient.dds' }, -- Resilient
-    [135653] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_reinforced.dds', tooltip = Tooltips.Champion_Reinforced }, -- Reinforced
+    -- Craft
+    [152360] = { hide = true }, -- Friends in Low Places
+    [151860] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_thief_shadowstrike.dds', tooltip = Tooltips.Champion_Shadowstrike }, -- Shadowstrike
 
-    -- The Lady
-    [63110] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_spell_absorption.dds' }, -- Spell Absorption
-    [60371] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_critical_leech.dds' }, -- Critical Leech
-    [98316] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_unchained.dds', tooltip = Tooltips.Champion_Unchained }, -- Unchained
-
-    -- The Lord
-    [98404] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_infusion.dds', tooltip = Tooltips.Generic_Magicka_Recovery_Duration }, -- Infusion
-    [98414] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_reinforced.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Revival
-    [61015] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_reinforced.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Determination
-
-    -- The Tower
-    [98308] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_thief_ensnare.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 20 }, -- Ensnare
-    [92428] = { icon = 'esoui/art/icons/ability_healer_012.dds', tooltip = Tooltips.Champion_Siphoner }, -- Siphoner
-    [62518] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_thief_maras_gift.dds' }, -- Mara's Gift
-
-    -- The Lover
-    [63878] = { icon = 'esoui/art/icons/ability_healer_033.dds' }, -- Synergizer
-
-    -- The Shadow
-    [64244] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_thief_shadowstrike.dds', tooltip = Tooltips.Generic_Invisibility }, -- Shadowstrike
-    [64245] = { hide = true }, -- Shadowstrike
-
-    -- The Apprentice
-    [63152] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_vengeance.dds', name = Abilities.Champion_Vengeance_Charge, tooltip = Tooltips.Champion_Vengeance_Charge }, -- Vengeance Count
-    [63151] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_vengeance_full.dds', tooltip = Tooltips.Champion_Vengeance }, -- Vengeance
+    -- Warfare
     [59530] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_foresight.dds', tooltip = Tooltips.Champion_Foresight }, -- Foresight
-    [63114] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_arcane_well.dds' }, -- Arcane Well
-    [88784] = { hide = true }, -- Arcane Well
-
-    -- The Atronach
-    [63106] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_retaliation.dds', tooltip = Tooltips.Champion_Retaliation }, -- Retaliation
     [60230] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_riposte.dds' }, -- Riposte
-    [63108] = { name = Abilities.Skill_Off_Balance, tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off-Balance (Tactician)
+    [135653] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_reinforced.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Reinforced
 
-    -- The Ritual
-    [98307] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_opportunist.dds', tooltip = Tooltips.Champion_Opportunist }, -- Opportunist
-    [100408] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_opportunist.dds', tooltip = Tooltips.Champion_Opportunist }, -- Opportunist
+    -- Fitness
+    [98316] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_unchained.dds', tooltip = Tooltips.Champion_Unchained }, -- Unchained
 
     ----------------------------------------------------------------
     -- PLAYER ABILITIES - BASIC ------------------------------------
@@ -6008,7 +5973,7 @@ Effects.EffectOverride = {
     [45584] = { icon = 'LuiExtended/media/icons/abilities/ability_otherclass_soul_shatter.dds' }, -- Soul Shatter (Soul Shatter - Rank 2)
     [39269] = { icon = 'LuiExtended/media/icons/abilities/passive_otherclass_soul_summons.dds' }, -- Soul Summons
     [45590] = { icon = 'LuiExtended/media/icons/abilities/passive_otherclass_soul_summons.dds' }, -- Soul Summons
-    [43752] = { icon = 'LuiExtended/media/icons/abilities/ability_otherclass_soul_summons_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Passive_Soul_Summons, Abilities.Set_Cooldown), tooltip = Tooltips.Skill_Soul_Summons }, -- Soul Summons
+    [43752] = { icon = 'LuiExtended/media/icons/abilities/ability_otherclass_soul_summons_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Passive_Soul_Summons, Abilities.Set_Cooldown), tooltip = Tooltips.Skill_Soul_Summons, forcedContainer = 'long' }, -- Soul Summons
     [39263] = { icon = 'LuiExtended/media/icons/abilities/passive_otherclass_soul_lock.dds' }, -- Soul Lock
     [39264] = { hide = true }, -- Soul Trap (Soul Lock - Rank 1)
     [45580] = { icon = 'LuiExtended/media/icons/abilities/passive_otherclass_soul_lock.dds' }, -- Soul Lock
@@ -8633,6 +8598,22 @@ Effects.EffectOverride = {
     [88095] = { icon = 'LuiExtended/media/icons/abilities/ability_item_dazzler_3.dds', name = Abilities.Event_Sparkle_Dazzler }, -- Illusion Dazzler - Royal Revelry
     [88123] = { icon = 'LuiExtended/media/icons/abilities/ability_item_dazzler_2.dds', name = Abilities.Event_Burst_Dazzler }, -- Illusion Dazzler - Royal Revelry
     [88124] = { icon = 'LuiExtended/media/icons/abilities/ability_item_dazzler_1.dds', name = Abilities.Event_Flash_Dazzler }, -- Illusion Dazzler - Royal Revelry
+
+    [127194] = { hide = true }, -- Uproot (King Boar) - A Foe Most Porcine
+
+    [145282] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_grease_slip.dds', name = Abilities.Skill_Grease_Slip }, -- Grease Shake (King Boar) - A Foe Most Porcine
+    [146018] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_grease_slip.dds', name = Abilities.Skill_Grease_Slip }, -- Grease Shake (King Boar) - A Foe Most Porcine
+    [143695] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_grease_slip.dds', tooltip = Tooltips.Generic_Knockdown }, -- Grease Slip (King Boar) - A Foe Most Porcine
+    [144135] = { hide = true }, -- Greased Hands (King Boar) - A Foe Most Porcine
+    [145861] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_grease_snare.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Greased Footing (King Boar) - A Foe Most Porcine
+
+    [126947] = { hide = true }, -- Thrash (Prince Boar) - A Foe Most Porcine
+    [144351] = { hide = true }, -- Thrash (Prince Boar) - A Foe Most Porcine
+
+    --[144340] = { icon = 'LuiExtended/media/icons/abilities/ability_welwa_charge.dds' }, -- Thrash (Prince Boar) - A Foe Most Porcine
+    --[144338] = { icon = 'LuiExtended/media/icons/abilities/ability_welwa_charge.dds', name = Abilities.Skill_Thrash }, -- Knockback (Prince Boar) - A Foe Most Porcine
+    --[144337] = { icon = 'LuiExtended/media/icons/abilities/ability_welwa_charge.dds', name = Abilities.Skill_Thrash, tooltip = Tooltips.Generic_Knockback }, -- Stun (Prince Boar) - A Foe Most Porcine
+    --[144339] = { name = Abilities.Innate_Stagger, tooltip = Tooltips.Generic_Stagger, cc = LUIE_CC_TYPE_STAGGER }, -- Staggered (Prince Boar) - A Foe Most Porcine
 
     -- New Life Festival
     [84847] = {icon = 'LuiExtended/media/icons/abilities/ability_quest_celebratory_belch.dds', name = Abilities.Skill_Celebratory_Belch, unbreakable = 1 }, -- Celebratory Belch (Stonetooth Bash)
@@ -12730,6 +12711,7 @@ Effects.FakeStagger = {
     [47020] = { duration = 1000 }, -- Pull (Puncturing Chains) (Cyrodiil Guard T2)
 
     -- Quest
+    [144339] = { duration = 433 }, -- Staggered (Prince Boar) - A Foe Most Porcine
     [84284] = { duration = 433 }, -- Coursing Bones (Oskana)
     [84197] = { duration = 433 }, -- Marsh Masher (Gathongor the Mauler)
     [83161] = { duration = 433 }, -- Stone Crusher (Thodundor of the Hill)

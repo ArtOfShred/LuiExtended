@@ -800,6 +800,9 @@ local AbilityTables = {
     Event_Burst_Dazzler               = GetQuestItemNameFromLink("|H0:quest_item:6192|h|h"),
     Event_Flash_Dazzler               = GetQuestItemNameFromLink("|H0:quest_item:6193|h|h"),
 
+    Skill_Grease_Slip                 = 143695,
+    Skill_Thrash                      = 144340,
+
     -- MSQ
     Skill_Wall_of_Flames              = GetString(SI_LUIE_SKILL_WALL_OF_FLAMES),
     Skill_Necrotic                    = 41852,

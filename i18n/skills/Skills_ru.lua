@@ -214,15 +214,9 @@ local strings = {
     -- CHAMPION POINT SKILLS ---------------------------------------
     ----------------------------------------------------------------
 
-    SI_LUIE_SKILL_PHASE_TP =                             "Повышает Физическую и Магическую сопротивляемости на |cFFFFFF660|r в течение |cFFFFFF<<1>>|r секунд.",
-    SI_LUIE_SKILL_UNCHAINED_TP =                         "Снижает расход Запаса сил на вашу следующую способность, применённую в течение |cFFFFFF<<1>>|r секунд на |cFFFFFF80|r%.",
-    SI_LUIE_SKILL_FORESIGHT_TP =                         "Снижает расход Магии на вашу следующую способность, применённую в течение |cFFFFFF<<1>>|r секунд на |cFFFFFF80|r%.",
-    SI_LUIE_SKILL_RETALIATION_TP =                       "Ваша следующая Обычная атака, проведённая в течение |cFFFFFF<<1>>|r секунд наносит |cFFFFFF30|r% дополнительного урона.",
-    SI_LUIE_SKILL_OPPORTUNIST_TP =                       "Ваша следующая способность, наносящая Физический урон, применённая в течение |cFFFFFF7|r секунд наносит |cFFFFFF15|r% дополнительного урона.",
-    SI_LUIE_SKILL_SIPHONER_TP =                          "Снижает Здоровье, Магию и Запас сил, а также их восстановление на |cFFFFFF<<1>>|r секунд.",
-    SI_LUIE_SKILL_VENGEANCE_TP =                         "Ваша следующая способность, расходующая магию, применённая в течение |cFFFFFF<<1>>|r секунд обязательно нанесёт Критический удар.",
-    SI_LUIE_SKILL_VENGEANCE_CHARGE =                     "Месть",
-    SI_LUIE_SKILL_REINFORCED_TP =                        "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>> while you are bracing.",
+    SI_LUIE_SKILL_SHADOWSTRIKE_TP =                      "Invisible for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nWhile under this effect you can cast Blade of Woe.",
+    SI_LUIE_SKILL_FORESIGHT_TP =                         "Reduce the cost of your Magicka and Stamina healing abilities by |cFFFFFF75|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_UNCHAINED_TP =                         "Reduce the cost of your next Stamina ability used within |cFFFFFF<<1>>|r seconds by |cFFFFFF11|r% per stage.",
 
     ----------------------------------------------------------------
     -- GENERIC / SHARED TOOLTIPS -----------------------------------
