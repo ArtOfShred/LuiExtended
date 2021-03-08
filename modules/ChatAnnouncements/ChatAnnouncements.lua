@@ -104,8 +104,8 @@ ChatAnnouncements.Defaults = {
         GuildAlert                    = false,
         GuildRankCA                   = true,
         GuildRankAlert                = false,
-        GuildManagementCA                 = false,
-        GuildManagementAlert              = false,
+        GuildManageCA                 = false,
+        GuildManageAlert              = false,
         GuildIcon                     = true,
         GuildAllianceColor            = true,
         GuildColor                    = { 1, 1, 1, 1 },
@@ -1376,13 +1376,13 @@ function ChatAnnouncements.GuildHeraldrySaved()
         local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
         local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
-        if ChatAnnouncements.SV.Social.GuildManagementCA then
+        if ChatAnnouncements.SV.Social.GuildManageCA then
             local finalMessage = zo_strformat(GetString(SI_LUIE_CA_GUILD_HERALDRY_UPDATE), guildNameAlliance)
             g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION", isSystem = true }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
         end
-        if ChatAnnouncements.SV.Social.GuildManagementAlert then
+        if ChatAnnouncements.SV.Social.GuildManageAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_CA_GUILD_HERALDRY_UPDATE), guildNameAllianceAlert))
         end
     end
@@ -1396,13 +1396,13 @@ function ChatAnnouncements.GuildRanksSaved(eventCode, guildId)
     local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
     local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
-    if ChatAnnouncements.SV.Social.GuildManagementCA then
+    if ChatAnnouncements.SV.Social.GuildManageCA then
         local finalMessage = zo_strformat(GetString(SI_LUIE_CA_GUILD_RANKS_UPDATE), guildNameAlliance)
         g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION", isSystem = true }
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
     end
-    if ChatAnnouncements.SV.Social.GuildManagementAlert then
+    if ChatAnnouncements.SV.Social.GuildManageAlert then
         ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_CA_GUILD_RANKS_UPDATE), guildNameAllianceAlert))
     end
 end
@@ -1428,10 +1428,10 @@ function ChatAnnouncements.GuildRankSaved(eventCode, guildId, rankIndex)
     local rankSyntax = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankName)) or (guildColor:Colorize(rankName))
     local rankSyntaxAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", rankName) or rankName
 
-    if ChatAnnouncements.SV.Social.GuildManagementCA then
+    if ChatAnnouncements.SV.Social.GuildManageCA then
         printToChat(zo_strformat(GetString(SI_LUIE_CA_GUILD_RANK_UPDATE), rankSyntax, guildNameAlliance), true)
     end
-    if ChatAnnouncements.SV.Social.GuildManagementAlert then
+    if ChatAnnouncements.SV.Social.GuildManageAlert then
         ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_CA_GUILD_RANK_UPDATE), rankSyntaxAlert, guildNameAllianceAlert))
     end
 end
@@ -1446,13 +1446,13 @@ function ChatAnnouncements.GuildTextChanged(eventCode, guildId)
     local messageString = eventCode == EVENT_GUILD_DESCRIPTION_CHANGED and SI_LUIE_CA_GUILD_DESCRIPTION_CHANGED or EVENT_GUILD_MOTD_CHANGED and SI_LUIE_CA_GUILD_MOTD_CHANGED or nil
 
     if messageString ~= nil then
-        if ChatAnnouncements.SV.Social.GuildManagementCA then
+        if ChatAnnouncements.SV.Social.GuildManageCA then
             local finalMessage = zo_strformat(GetString(messageString), guildNameAlliance)
             g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION", isSystem = true }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
         end
-        if ChatAnnouncements.SV.Social.GuildManagementAlert then
+        if ChatAnnouncements.SV.Social.GuildManageAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(messageString), guildNameAllianceAlert))
         end
     end
@@ -6480,14 +6480,9 @@ function ChatAnnouncements.HookFunction()
             finalAlertName = ""
         end
 
-        if(response ~= GROUP_INVITE_RESPONSE_ACCEPTED) then
+        if(response ~= GROUP_INVITE_RESPONSE_ACCEPTED and response ~= GROUP_INVITE_RESPONSE_CONSIDERING_OTHER) then
             local message
             local alertMessage
-
-            -- If player is already in a group and tries to invite themself, don't display a duplicate message.
-            if response == GROUP_INVITE_RESPONSE_ALREADY_GROUPED_CANT_JOIN and (LUIE.PlayerNameFormatted == characterName or LUIE.PlayerDisplayName == displayName) then
-                return true
-            end
 
             if response == GROUP_INVITE_RESPONSE_ALREADY_GROUPED and (LUIE.PlayerNameFormatted == characterName or LUIE.PlayerDisplayName == displayName) then
                 message = zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_SELF_INVITE))
@@ -9710,16 +9705,6 @@ function ChatAnnouncements.HookFunction()
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
     end
 
-    local function AlertMountError(SendString, primaryName)
-        local formattedString = zo_strformat(SendString, primaryName)
-        local alertString = IsConsoleUI() and SI_PLAYER_TO_PLAYER_BLOCKED or formattedString
-        printToChat(alertString, true)
-        if ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, alertString)
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-    end
-
     PLAYER_TO_PLAYER.ShowPlayerInteractMenu = function(self, isIgnored)
         local currentTargetCharacterName = self.currentTargetCharacterName
         local currentTargetCharacterNameRaw = self.currentTargetCharacterNameRaw
@@ -9843,41 +9828,8 @@ function ChatAnnouncements.HookFunction()
             local isPassengerForTarget = IsGroupMountPassengerForTarget(currentTargetCharacterNameRaw)
             local groupMountEnabled = (mountedState == PLAYER_MOUNTED_STATE_MOUNT_RIDER and isRidingGroupMount and (not IsMounted() or isPassengerForTarget))
             local function MountOption() UseMountAsPassenger(currentTargetCharacterNameRaw) end
-            local function MountIgnore() AlertIgnored(SI_LUIE_IGNORE_ERROR_MOUNT_IGNORE) end
-            local function MountInvalidNoMount() AlertMountError(SI_LUIE_IGNORE_ERROR_MOUNT_INVALID, primaryName) end
-            local function MountInvalidFull() AlertMountError(SI_LUIE_IGNORE_ERROR_MOUNT_INVALID_FULL, primaryName) end
-            local function MountInvalidTargetPassenger() AlertMountError(SI_LUIE_IGNORE_ERROR_MOUNT_INVALID_PASSENGER, primaryName) end
             local optionToShow = isPassengerForTarget and SI_PLAYER_TO_PLAYER_DISMOUNT or SI_PLAYER_TO_PLAYER_RIDE_MOUNT
-            local mountFunction
-            local mountEnabled
-            if ENABLED_IF_NOT_IGNORED then
-                -- You are riding
-                if isPassengerForTarget then
-                    mountFunction = MountOption
-                    mountEnabled = groupMountEnabled
-                -- Target is riding a group mount
-                elseif mountedState == PLAYER_MOUNTED_STATE_MOUNT_PASSENGER then
-                    mountFunction = MountInvalidTargetPassenger
-                    mountEnabled = false
-                -- Target Player is not riding a group mount
-                elseif not isRidingGroupMount or mountedState == PLAYER_MOUNTED_STATE_NOT_MOUNTED then
-                    mountFunction = MountInvalidNoMount
-                    mountEnabled = false
-                -- Target already has a passenger
-                elseif not hasFreePassengerSlot and isRidingGroupMount then
-                    mountFunction = MountInvalidFull
-                    mountEnabled = false
-                -- Target Player has an open group mount
-                elseif hasFreePassengerSlot and groupMountEnabled then
-                    mountFunction = MountOption
-                    mountEnabled = groupMountEnabled
-                end
-            else
-                -- Only allow dismount if the player is ignored.
-                mountFunction = isPassengerForTarget and MountOption or MountIgnore
-                mountEnabled = isPassengerForTarget and true or false
-            end
-            self:AddMenuEntry(GetString(optionToShow), platformIcons[optionToShow], mountEnabled, mountFunction)
+            self:AddMenuEntry(GetString(optionToShow), platformIcons[optionToShow], groupMountEnabled, MountOption)
         end
 
         --Report--

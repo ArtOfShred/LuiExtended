@@ -687,6 +687,7 @@ LUIE.Data.Tooltips = {
     Skill_Relentless_Focus                          = GetString(SI_LUIE_SKILL_RELENTLESS_FOCUS_TP),
     Skill_Merciless_Resolve                         = GetString(SI_LUIE_SKILL_MERCILESS_RESOLVE_TP),
     Skill_Grim_Focus_Defense                        = GetString(SI_LUIE_SKILL_GRIM_FOCUS_DEFENSE_TP),
+    Skill_Surprise_Attack                           = GetString(SI_LUIE_SKILL_SURPRISE_ATTACK_TP),
     Skill_Path_of_Darkness                          = GetString(SI_LUIE_SKILL_PATH_OF_DARKNESS_TP),
     Skill_Twisting_Path                             = GetString(SI_LUIE_SKILL_TWISTING_PATH_TP),
     Skill_Refreshing_Path                           = GetString(SI_LUIE_SKILL_REFRESHING_PATH_TP),

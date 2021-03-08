@@ -4495,22 +4495,22 @@ function ChatAnnouncements.CreateSettings()
                 type = "checkbox",
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
-                getFunc = function() return Settings.Social.GuildManagementCA end,
-                setFunc = function(value) Settings.Social.GuildManagementCA = value end,
+                getFunc = function() return Settings.Social.GuildManageCA end,
+                setFunc = function(value) Settings.Social.GuildManageCA = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = Defaults.Social.GuildManagementCA,
+                default = Defaults.Social.GuildManageCA,
             },
             {
                 -- Show Guild Management Alert
                 type = "checkbox",
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
-                getFunc = function() return Settings.Social.GuildManagementAlert end,
-                setFunc = function(value) Settings.Social.GuildManagementAlert = value end,
+                getFunc = function() return Settings.Social.GuildManageAlert end,
+                setFunc = function(value) Settings.Social.GuildManageAlert = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = Defaults.Social.GuildManagementAlert,
+                default = Defaults.Social.GuildManageAlert,
             },
             {
                 -- Show Guild Icons
@@ -4525,8 +4525,8 @@ function ChatAnnouncements.CreateSettings()
                 Settings.Social.GuildAlert or
                 Settings.Social.GuildRankCA or
                 Settings.Social.GuildRankAlert or
-                Settings.Social.GuildManagementCA or
-                Settings.Social.GuildManagementAlert and
+                Settings.Social.GuildManageCA or
+                Settings.Social.GuildManageAlert and
                 LUIE.SV.ChatAnnouncements_Enable) end,
                 default = Defaults.Social.GuildIcon,
             },
@@ -4542,8 +4542,8 @@ function ChatAnnouncements.CreateSettings()
                 Settings.Social.GuildAlert or
                 Settings.Social.GuildRankCA or
                 Settings.Social.GuildRankAlert or
-                Settings.Social.GuildManagementCA or
-                Settings.Social.GuildManagementAlert and
+                Settings.Social.GuildManageCA or
+                Settings.Social.GuildManageAlert and
                 LUIE.SV.ChatAnnouncements_Enable) end,
                 default = {r=Defaults.Social.GuildColor[1], g=Defaults.Social.GuildColor[2], b=Defaults.Social.GuildColor[3]}
             },
@@ -4560,8 +4560,8 @@ function ChatAnnouncements.CreateSettings()
                 Settings.Social.GuildAlert or
                 Settings.Social.GuildRankCA or
                 Settings.Social.GuildRankAlert or
-                Settings.Social.GuildManagementCA or
-                Settings.Social.GuildManagementAlert and
+                Settings.Social.GuildManageCA or
+                Settings.Social.GuildManageAlert and
                 LUIE.SV.ChatAnnouncements_Enable) end,
                 default = Defaults.Social.GuildAllianceColor,
             },
