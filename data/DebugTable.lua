@@ -1585,9 +1585,6 @@ LUIE.DebugAuras = {
 
     [106775] = true, -- Adept Rider (Adept Rider's)
     [106776] = true, -- Major Evasion (Adept Rider's)
-    [106790] = true, -- Major Evasion (Adept Rider's)
-    [106784] = true, -- Dustcloud (Adept Rider's)
-    [106783] = true, -- Dustcloud Damage (Adept Rider's)
 
     [106803] = true, -- Nocturnal's Favor (Nocturnal's Favored)
     [106804] = true, -- Nocturnal's Heal (Nocturnal's Favored)
@@ -2722,125 +2719,253 @@ LUIE.DebugAuras = {
     -- CHAMPION POINTS ------------------
     -------------------------------------
 
+    -- Craft
+    [142205] = true, -- Breakfall
+    --[142232] = true, -- Soul Reservoir
+    --[142206] = true, -- Wanderer
+    --[142206] = true, -- Wanderer
+    --[142207] = true, -- Fortune's Favor
+    --[152371] = true, -- Fortune's Favor
+    --[142210] = true, -- Haggler
+    [142213] = true, -- Friends in Low Places
+    [152360] = true, -- Friends in Low Places
+    [142203] = true, -- Fleet Phantom
+    [142204] = true, -- Out of Sight
+    [142208] = true, -- Inspiration Boost
+    --[142211] = true, -- Steadfast Enchantment
+    --[152367] = true, -- Steadfast Enchantment
+    --[142224] = true, -- Meticulous Disassembly
+    --[142225] = true, -- Meticulous Disassembly
+    --[142226] = true, -- Meticulous Disassembly
+    --[142227] = true, -- Meticulous Disassembly
+    [142218] = true, -- Treasure Hunter
+    --[142217] = true, -- Master Gatherer
+    --[152372] = true, -- Master Gatherer
+    [149286] = true, -- Gifted Rider
+    [142228] = true, -- Fade Away
+    --[152310] = true, -- Fade Away
+    --[142215] = true, -- Infamous
+    [142219] = true, -- Shadowstrike
+    [151862] = true, -- Shadowstrike
+    --[151861] = true, -- Shadowstrike
+    [151860] = true, -- Shadowstrike
+    [151859] = true, -- Clairvoyance Fx
+    [142235] = true, -- Cutpurse's Art
+    [142220] = true, -- Plentiful Harvest
+    --[142236] = true, -- Homemaker
+
+    [142230] = true, -- Rationer
+    --[152373] = true, -- Rationer
+    [142125] = true, -- Steed's Blessing
+    [142123] = true, -- Sustaining Shadows
+    --[142121] = true, -- Professional Upkeep
+    --[152369] = true, -- Professional Upkeep
+
+    -- Warfare
+    [149305] = true, -- Eldritch Insight
+    [141898] = true, -- Precision
+    [147888] = true, -- Tireless Discipline
+    --[149439] = true, -- Blessed
+    [141998] = true, -- Soothing Tide
+    [142000] = true, -- Focused Mending
+    [142002] = true, -- Swift Renewal
+    [141929] = true, -- Quick Recovery
+    [141901] = true, -- Preparation
+    [149273] = true, -- Elemental Aegis
+    [149274] = true, -- Hardy
+    [141900] = true, -- Resilience
+    [141895] = true, -- Piercing
+    [141931] = true, -- War Mage
+    [149276] = true, -- Battle Mastery
+    [141930] = true, -- Mighty
+    --[149275] = true, -- Flawless Ritual
+    [141999] = true, -- Deadly Aim
+    [141997] = true, -- Biting Aura
+    [142001] = true, -- Thaumaturge
+    [141899] = true, -- Fighting Finesse
+    [142006] = true, -- Backstabber
+    [141941] = true, -- Wrathful Strikes
+    [142007] = true, -- Reaving Blows
+    [142008] = true, -- Reaving Blows
+    [142010] = true, -- Occult Overload
+    [142011] = true, -- Occult Overload
+    [141942] = true, -- Rejuvenator
+    [59526] = true, -- Foresight
+    [59530] = true, -- Foresight
+    [142003] = true, -- Cleansing Revival
+    --[142005] = true, -- Cleansing Revival
+    [151749] = true, -- Duelist's Rebuff
+    [151748] = true, -- Unassailable
+    [151750] = true, -- Enduring Resolve
+    [60229] = true, -- Riposte
+    [60230] = true, -- Riposte
+    [64067] = true, -- Reinforced
+    [135653] = true, -- Reinforced
+    [64079] = true, -- Bulwark
+    [60413] = true, -- Last Stand
+    [65133] = true, -- Major Heroism
+    [142012] = true, -- Cutting Defense
+    [142013] = true, -- Cutting Defense
+    [141744] = true, -- Arcane Supremacy
+    [146960] = true, -- Untamed Aggression
+    [141773] = true, -- Endless Endurance
+
+    -- Fitness
+    [142079] = true, -- Sprinter
+    [142083] = true, -- Hasty
+    [142080] = true, -- Tireless Guardian
+    [142081] = true, -- Savage Defense
+    [142091] = true, -- Bashing Brutality
+    [142088] = true, -- Nimble Protector
+    [142086] = true, -- Fortification
+    [142077] = true, -- Tumbling
+    [149624] = true, -- Defiance
+    --[149311] = true, -- Hero's Vigor
+    --[142096] = true, -- Mystic Tenacity
+    [142089] = true, -- Piercing Gaze
+    --[142109] = true, -- Tempered Soul
+    [142100] = true, -- Spirit Mastery
+
+    [142111] = true, -- On Guard
+    [142115] = true, -- Rousing Speed
+    [142092] = true, -- Expert Evasion
+    --[142093] = true, -- Expert Evasion
+    [151113] = true, -- Expert Evasion
+
+    [142099] = true, -- Hardened
+    [142097] = true, -- Peace of Mind
+    [142094] = true, -- Slippery
+    [145804] = true, -- Slippery
+    [142095] = true, -- Slippery
+    --[149282] = true, -- Unchained
+    [98316] = true, -- Unchained
+    [142110] = true, -- Juggernaut
+    --[142102] = true, -- Survival Instincts
+    [149283] = true, -- Shield Master
+    [142090] = true, -- Bastion
+    [142113] = true, -- Arcane Alacrity
+    [141995] = true, -- Stategic Reserve
+    [141991] = true, -- Siphoning Spells
+    [141992] = true, -- Siphoning Spells
+    [141993] = true, -- Bloody Renewal
+    [141994] = true, -- Bloody Renewal
+    [142034] = true, -- Boundless Vitality
+    [142035] = true, -- Ironclad
+    [142074] = true, -- Rejuvenation
+
+    ---- OLD CHAMPION POINTS           ----
+    ---- TODO: REMOVE AT SOME PT       ----
+    ---- KEEP FOR NOW TO TRACK REMOVAL ----
+
     -- The Steed
-    [59120] = true, -- Medium Armor Focus (The Steed)
-    [92423] = true, -- Ironclad (The Steed)
-    [62760] = true, -- Spell Shield (The Steed)
-    [60384] = true, -- Resistant (The Steed)
-    [60407] = true, -- Invigorating Bash (The Steed 10 - Invigorating Bash)
-    [98313] = true, -- Invigorating Bash (The Steed 10 - Invigorating Bash)
-    [63852] = true, -- Phase (The Steed 30 - Phase)
-    [98294] = true, -- Phase (The Steed 30 - Phase)
-    [61660] = true, -- Resilient (The Steed 75 - Resilient)
-    [61661] = true, -- Resilient (The Steed 75 - Resilient)
-    [64067] = true, -- Reinforced (The Steed 120 - Reinforced)
-    [135653] = true, -- Reinforced (The Steed 120 - Reinforced)
+    --[59120] = true, -- Medium Armor Focus (The Steed)
+    --[92423] = true, -- Ironclad (The Steed)
+    --[62760] = true, -- Spell Shield (The Steed)
+    --[60384] = true, -- Resistant (The Steed)
+    --[60407] = true, -- Invigorating Bash (The Steed 10 - Invigorating Bash)
+    --[98313] = true, -- Invigorating Bash (The Steed 10 - Invigorating Bash)
+    --[63852] = true, -- Phase (The Steed 30 - Phase)
+    --[98294] = true, -- Phase (The Steed 30 - Phase)
+    --[61660] = true, -- Resilient (The Steed 75 - Resilient)
+    --[61661] = true, -- Resilient (The Steed 75 - Resilient)
 
     -- The Lady
-    [60502] = true, -- Light Armor Focus (The Lady)
-    [63850] = true, -- Thick Skinned (The Lady)
-    [63844] = true, -- Hardy (The Lady)
-    [63843] = true, -- Elemental Defender (The Lady)
-    [63109] = true, -- Spell Absorption (The Lady 10 - Spell Absorption)
-    [63110] = true,  -- Spell Absorption (The Lady 10 - Spell Absorption)
-    [64079] = true, -- Shield Expert (The Lady 30 - Shield Expert)
-    [60370] = true, -- Critical Leech (The Lady 75 - Critical Leech)
-    [60371] = true, -- Critical Leech (The Lady 75 - Critical Leech)
-    [59286] = true, -- Unchained (The Lady 120 - Unchained)
-    [98316] = true, -- Unchained (The Lady 120 - Unchained)
+    --[60502] = true, -- Light Armor Focus (The Lady)
+    --[63850] = true, -- Thick Skinned (The Lady)
+    --[63844] = true, -- Hardy (The Lady)
+    --[63843] = true, -- Elemental Defender (The Lady)
+    --[63109] = true, -- Spell Absorption (The Lady 10 - Spell Absorption)
+    --[63110] = true,  -- Spell Absorption (The Lady 10 - Spell Absorption)
+    --[60370] = true, -- Critical Leech (The Lady 75 - Critical Leech)
+    --[60371] = true, -- Critical Leech (The Lady 75 - Critical Leech)
+    --[59286] = true, -- Unchained (The Lady 120 - Unchained)
 
     -- The Lord
-    [60624] = true, -- Heavy Armor Focus (The Lord)
-    [59948] = true, -- Bastion (The Lord)
-    [59953] = true, -- Expert Defender (The Lord)
-    [63851] = true, -- Quick Recovery (The Lord)
-    [59300] = true, -- Field Physician (The Lord 10 - Field Physician)
-    [98405] = true, -- Field Physician (The Lord 10 - Field Physician)
-    [59582] = true, -- Infusion (The Lord 30 - Infusion)
-    [98404] = true, -- Infusion (The Lord 30 - Infusion)
-    [60427] = true, -- Revival (The Lord 75 - Revival)
-    [98414] = true, -- Revival (The Lord 75 - Revival)
-    [59893] = true, -- Determination (The Lord 120 - Determination)
-    [61015] = true, -- Determination (The Lord 120 - Determination)
+    --[60624] = true, -- Heavy Armor Focus (The Lord)
+    --[59948] = true, -- Bastion (The Lord)
+    --[59953] = true, -- Expert Defender (The Lord)
+    --[63851] = true, -- Quick Recovery (The Lord)
+    --[59300] = true, -- Field Physician (The Lord 10 - Field Physician)
+    --[98405] = true, -- Field Physician (The Lord 10 - Field Physician)
+    --[59582] = true, -- Infusion (The Lord 30 - Infusion)
+    --[98404] = true, -- Infusion (The Lord 30 - Infusion)
+    --[60427] = true, -- Revival (The Lord 75 - Revival)
+    --[98414] = true, -- Revival (The Lord 75 - Revival)
+    --[59893] = true, -- Determination (The Lord 120 - Determination)
+    --[61015] = true, -- Determination (The Lord 120 - Determination)
 
     -- The Tower
-    [58899] = true, -- Bashing Focus (The Tower)
-    [64077] = true, -- Sprinter (The Tower)
-    [92425] = true, -- Siphoner (The Tower)
-    [92428] = true, -- Siphoner (The Tower)
-    [92431] = true, -- Warlord (The Tower)
-    [60398] = true, -- Ensnare (The Tower 10 - Ensnare)
-    [98308] = true, -- Ensnare (The Tower 10 - Ensnare)
-    [60494] = true, -- Inspiration Boost (The Tower 30 - Inspiration Boost)
-    [62516] = true, -- Mara's Gift (The Tower 75 - Mara's Gift)
-    [62518] = true, -- Mara's Gift (The Tower 75 - Mara's Gift)
-    [62274] = true, -- War Mount (The Tower 120 - War Mount)
+    --[58899] = true, -- Bashing Focus (The Tower)
+    --[64077] = true, -- Sprinter (The Tower)
+    --[92425] = true, -- Siphoner (The Tower)
+    --[92428] = true, -- Siphoner (The Tower)
+    --[92431] = true, -- Warlord (The Tower)
+    --[60398] = true, -- Ensnare (The Tower 10 - Ensnare)
+    --[98308] = true, -- Ensnare (The Tower 10 - Ensnare)
+    --[60494] = true, -- Inspiration Boost (The Tower 30 - Inspiration Boost)
+    --[62516] = true, -- Mara's Gift (The Tower 75 - Mara's Gift)
+    --[62518] = true, -- Mara's Gift (The Tower 75 - Mara's Gift)
+    --[62274] = true, -- War Mount (The Tower 120 - War Mount)
 
     -- The Lover
-    [59346] = true, -- Mooncalf (The Lover)
-    [59577] = true, -- Arcanist (The Lover)
-    [60374] = true, -- Healthy (The Lover)
-    [63854] = true, -- Tenacity (The Lover)
-    [63663] = true, -- Plentiful Harvest (The Lover 10 - Plentiful Harvest)
-    [63875] = true, -- Synergizer (The Lover 30 - Synergizer)
-    [63878] = true, -- Synergizer (The Lover 30 - Synergizer)
-    [60555] = true, -- Master Gatherer (The Lover 75 - Master Gatherer)
-    [60560] = true, -- Windrunning (The Lover 125 - Windrunning)
+    --[59346] = true, -- Mooncalf (The Lover)
+    --[59577] = true, -- Arcanist (The Lover)
+    --[60374] = true, -- Healthy (The Lover)
+    --[63854] = true, -- Tenacity (The Lover)
+    --[63663] = true, -- Plentiful Harvest (The Lover 10 - Plentiful Harvest)
+    --[63875] = true, -- Synergizer (The Lover 30 - Synergizer)
+    --[63878] = true, -- Synergizer (The Lover 30 - Synergizer)
+    --[60555] = true, -- Master Gatherer (The Lover 75 - Master Gatherer)
+    --[60560] = true, -- Windrunning (The Lover 125 - Windrunning)
 
     -- The Shadow
-    [59298] = true, -- Befoul (The Shadow)
-    [61548] = true, -- Shade (The Shadow)
-    [60649] = true, -- Shadow Ward (The Shadow)
-    [63863] = true, -- Tumbling (The Shadow)
-    [56630] = true, -- Fortune Seeker (The Shadow 10 - Fortune Seeker)
-    [60501] = true, -- Merchant Favored (The Shadow 30 - Merchant Favored)
-    [60566] = true, -- Treasure Hunter (The Shadow 75 - Treasure Hunter)
-    [61426] = true, -- Shadowstrike (The Shadow 120 - Shadowstrike)
-    [64244] = true, -- Shadowstrike (The Shadow 120 - Shadowstrike)
-    [64245] = true, -- Shadowstrike (The Shadow 120 - Shadowstrike)
-    [140520] = true, -- Shadowstrike (The Shadow 120 - Shadowstrike)
-    [77773] = true, -- Clairvoyance Fx (The Shadow 120 - Shadowstrike)
+    --[59298] = true, -- Befoul (The Shadow)
+    --[61548] = true, -- Shade (The Shadow)
+    --[60649] = true, -- Shadow Ward (The Shadow)
+    --[63863] = true, -- Tumbling (The Shadow)
+    --[56630] = true, -- Fortune Seeker (The Shadow 10 - Fortune Seeker)
+    --[60501] = true, -- Merchant Favored (The Shadow 30 - Merchant Favored)
+    --[60566] = true, -- Treasure Hunter (The Shadow 75 - Treasure Hunter)
+    --[61426] = true, -- Shadowstrike (The Shadow 120 - Shadowstrike)
+    --[64244] = true, -- Shadowstrike (The Shadow 120 - Shadowstrike)
+    --[64245] = true, -- Shadowstrike (The Shadow 120 - Shadowstrike)
+    --[140520] = true, -- Shadowstrike (The Shadow 120 - Shadowstrike)
+    --[77773] = true, -- Clairvoyance Fx (The Shadow 120 - Shadowstrike)
 
     -- The Apprentice
-    [63848] = true, -- Elemental Expert (The Apprentice)
-    [61555] = true, -- Spell Erosion (The Apprentice)
-    [61680] = true, -- Elfborn (The Apprentice)
-    [59630] = true, -- Blessed (The Apprentice)
-    [63150] = true, -- Vengeance (The Apprentice 10 - Vengeance)
-    [63152] = true, -- Vengeance Count (The Apprentice 10 - Vengeance)
-    [63151] = true, -- Vengeance (The Apprentice 10 - Vengeance)
-    [59626] = true, -- Spell Precision (The Apprentice 30 - Spell Precision)
-    [59526] = true, -- Foresight (The Apprentice 75 - Foresight)
-    [59530] = true, -- Foresight (The Apprentice 75 - Foresight)
-    [63111] = true, -- Arcane Well (The Apprentice 120 - Arcane Well)
-    [63114] = true, -- Arcane Well (The Apprentice 120 - Arcane Well)
-    [88784] = true, -- Arcane Well (The Apprentice 120 - Arcane Well)
+    --[63848] = true, -- Elemental Expert (The Apprentice)
+    --[61555] = true, -- Spell Erosion (The Apprentice)
+    --[61680] = true, -- Elfborn (The Apprentice)
+    --[59630] = true, -- Blessed (The Apprentice)
+    --[63150] = true, -- Vengeance (The Apprentice 10 - Vengeance)
+    --[63152] = true, -- Vengeance Count (The Apprentice 10 - Vengeance)
+    --[63151] = true, -- Vengeance (The Apprentice 10 - Vengeance)
+    --[59626] = true, -- Spell Precision (The Apprentice 30 - Spell Precision)
+    --[63111] = true, -- Arcane Well (The Apprentice 120 - Arcane Well)
+    --[63114] = true, -- Arcane Well (The Apprentice 120 - Arcane Well)
+    --[88784] = true, -- Arcane Well (The Apprentice 120 - Arcane Well)
 
     -- The Atronach
-    [92424] = true, -- Physical Weapon Expert (The Atronach)
-    [60662] = true, -- Shattering Blows (The Atronach)
-    [92134] = true, -- Master-at-Arms Expert (The Atronach)
-    [60503] = true, -- Staff Expert (The Atronach)
-    [63104] = true, -- Retaliation (The Atronach 10 - Retaliation)
-    [63106] = true, -- Retaliation (The Atronach 10 - Retaliation)
-    [60229] = true, -- Riposte (The Atronach 30 - Riposte)
-    [60230] = true, -- Riposte (The Atronach 30 - Riposte)
-    [63879] = true, -- Butcher (The Atronach 75 - Butcher)
-    [60486] = true, -- Tactician (The Atronach 120 - Tactician)
-    [63108] = true, -- Off-Balance (The Atronach 120 - Tactician)
+    --[92424] = true, -- Physical Weapon Expert (The Atronach)
+    --[60662] = true, -- Shattering Blows (The Atronach)
+    --[92134] = true, -- Master-at-Arms Expert (The Atronach)
+    --[60503] = true, -- Staff Expert (The Atronach)
+    --[63104] = true, -- Retaliation (The Atronach 10 - Retaliation)
+    --[63106] = true, -- Retaliation (The Atronach 10 - Retaliation)
+    --[63879] = true, -- Butcher (The Atronach 75 - Butcher)
+    --[60486] = true, -- Tactician (The Atronach 120 - Tactician)
+    --[63108] = true, -- Off-Balance (The Atronach 120 - Tactician)
 
     -- The Ritual
-    [63847] = true, -- Thaumaturge (The Ritual)
-    [59105] = true, -- Precise Strikes (The Ritual)
-    [61546] = true, -- Piercing (The Ritual)
-    [63868] = true, -- Mighty (The Ritual)
-    [63099] = true, -- Opportunist (The Ritual 10 - Opportunist)
-    [98307] = true, -- Opportunist (The Ritual 10 - Opportunist)
-    [100408] = true, -- Opportunist (The Ritual 10 - Opportunist)
-    [59418] = true, -- Perfect Strike (The Ritual 30 - Perfect Strike)
-    [63880] = true, -- Exploiter (The Ritual 75 - Exploiter)
-    [60413] = true, -- Last Stand (The Ritual 120 - Last Stand)
-    [65133] = true, -- Major Heroism (The Ritual 120 - Last Stand)
+    --[63847] = true, -- Thaumaturge (The Ritual)
+    --[59105] = true, -- Precise Strikes (The Ritual)
+    --[61546] = true, -- Piercing (The Ritual)
+    --[63868] = true, -- Mighty (The Ritual)
+    --[63099] = true, -- Opportunist (The Ritual 10 - Opportunist)
+    --[98307] = true, -- Opportunist (The Ritual 10 - Opportunist)
+    --[100408] = true, -- Opportunist (The Ritual 10 - Opportunist)
+    --[59418] = true, -- Perfect Strike (The Ritual 30 - Perfect Strike)
+    --[63880] = true, -- Exploiter (The Ritual 75 - Exploiter)
 
     -------------------------------------
     -- PLAYER EFFECTS -------------------
@@ -3296,7 +3421,6 @@ LUIE.DebugAuras = {
     [28988] = true, -- Dragonknight Standard (Dragonknight Standard)
     [28995] = true, -- Dragonknight Standard (Dragonknight Standard)
     [29230] = true, -- Major Defile (Dragonknight Standard)
-    [102366] = true, -- Shackle Synergy Anchor (Dragonknight Standard)
     [32905] = true, -- Shackle (Dragonknight Standard)
 
     [32967] = true, -- Shifting Standard (Shifting Standard)
@@ -3468,7 +3592,6 @@ LUIE.DebugAuras = {
 
     [32678] = true, -- Shattering Rocks (Shattering Rocks)
     [32684] = true, -- Shattering Rocks (Shattering Rocks)
-    [108813] = true, -- Shattering Rocks (Shattering Rocks)
     [108811] = true, -- Shattering Rocks (Shattering Rocks)
 
     [29059] = true, -- Ash Cloud (Ash Cloud)
@@ -3779,7 +3902,6 @@ LUIE.DebugAuras = {
     [33327] = true, -- Cripple (Cripple)
 
     [36943] = true, -- Debilitate (Debilitate)
-    [125316] = true, -- Minor Magickasteal (Debilitate)
     [36947] = true, -- Debilitate (Debilitate)
     [36945] = true, -- Debilitate (Debilitate)
 
@@ -4337,7 +4459,6 @@ LUIE.DebugAuras = {
 
     [26792] = true, -- Biting Jabs (Biting Jabs)
     [26795] = true, -- Major Savagery (Biting Jabs)
-    [103212] = true, -- Biting Jabs (Biting Jabs)
     [26794] = true, -- Biting Jabs (Biting Jabs)
     [44432] = true, -- Biting Jabs (Biting Jabs)
     [76912] = true, -- Biting Jabs (Biting Jabs)
@@ -5507,9 +5628,7 @@ LUIE.DebugAuras = {
     [45445] = true, -- Forceful
 
     [29375] = true, -- Heavy Weapons (Rank 1)
-    [29383] = true, -- Heavy Weapons Bleed
     [45430] = true, -- Heavy Weapons (Rank 2)
-    [45431] = true, -- Heavy Weapons Bleed
 
     [29388] = true, -- Balanced Blade (Rank 1)
     [45443] = true, -- Balanced Blade (Rank 2)
@@ -5725,9 +5844,7 @@ LUIE.DebugAuras = {
     [45481] = true, -- Ruffian (Rank 2)
 
     [30893] = true, -- Twin Blade and Blunt (Rank 1)
-    [30894] = true, -- Twin Blade and Blunt Bleed
     [45482] = true, -- Twin Blade and Blunt (Rank 2)
-    [45483] = true, -- Twin Blade and Blunt Bleed
 
     -------------------------------------
     -- DUAL WIELD ACTIVES ---------------
@@ -6830,6 +6947,7 @@ LUIE.DebugAuras = {
     [146301] = true, -- Blade of Woe
     [81101] = true, -- Assassins League Style Item Gi
     [81118] = true, -- Assassins League Style Item FX
+    [81133] = true, -- Assassins League Style Item FX
     [81604] = true, -- Self Reveal
 
     [77392] = true, -- Scales of Pitiless Justice (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
@@ -7410,15 +7528,12 @@ LUIE.DebugAuras = {
 
     [38566] = true, -- Rapid Maneuver (Rapid Maneuver)
     [101161] = true, -- Major Expedition (Rapid Maneuver)
-    [57472] = true, -- Major Gallop (Rapid Maneuver)
 
     [40211] = true, -- Retreating Maneuver (Retreating Maneuver)
     [101169] = true, -- Major Expedition (Retreating Maneuver)
-    [57477] = true, -- Major Gallop (Retreating Maneuver)
 
     [40215] = true, -- Charging Maneuver (Charging Maneuver)
     [101178] = true, -- Major Expedition (Charging Maneuver)
-    [57481] = true, -- Major Gallop (Charging Maneuver)
     [40219] = true, -- Minor Expedition (Charging Maneuver)
 
     [61503] = true, -- Vigor (Vigor)
@@ -7723,17 +7838,8 @@ LUIE.DebugAuras = {
     [45279] = true, -- Imperial Mettle (Rank 2)
     [45280] = true, -- Imperial Mettle (Rank 3)
     [36155] = true, -- Red Diamond (Rank 1)
-    [36214] = true, -- Red Diamond
-    [121126] = true, -- Red Diamond
-    [121127] = true, -- Red Diamond
     [45291] = true, -- Red Diamond (Rank 2)
-    [45292] = true, -- Red Diamond
-    [121139] = true, -- Red Diamond
-    [121140] = true, -- Red Diamond
     [45293] = true, -- Red Diamond (Rank 3)
-    [45294] = true, -- Red Diamond
-    [121141] = true, -- Red Diamond
-    [121142] = true, -- Red Diamond
 
 
     -------------------------------------
@@ -7975,7 +8081,6 @@ LUIE.DebugAuras = {
     [61933] = true, -- Remove
 
     -- SHARED NPC PASSIVES
-    [67950] = true, -- CC Immunity Plus -- Various NPC's
     [33097] = true, -- Scary Immunities -- Various NPC's
     [44176] = true, -- Flying Immunities -- Various NPC's
     [13739] = true, -- Backstabber -- Various NPC's
@@ -16700,6 +16805,65 @@ LUIE.DebugAuras = {
     [88095] = true, -- Illusion Dazzler -- Royal Revelry
     [88123] = true, -- Illusion Dazzler -- Royal Revelry
     [88124] = true, -- Illusion Dazzler -- Royal Revelry
+
+    [144487] = true, -- Greased Lightning (King Boar)
+    [127184] = true, -- Home (King Boar)
+    [127185] = true, -- Thrash Anchor (King Boar)
+
+    [149110] = true, -- Gore (King Boar)
+    [149112] = true, -- Gore (King Boar)
+    [149114] = true, -- Gore (King Boar)
+    [149116] = true, -- Gore (King Boar)
+    [149115] = true, -- Gore Tracker 1 (King Boar)
+    [149109] = true, -- Gore (King Boar)
+    [149118] = true, -- Gore Tracker 2 (King Boar)
+    [149120] = true, -- Gore (King Boar)
+    [149121] = true, -- Gore Tracker 3 (King Boar)
+    [149117] = true, -- Gore (King Boar)
+    [149108] = true, -- Gore (King Boar)
+
+    [127193] = true, -- Uproot (King Boar)
+    [127227] = true, -- Uproot (King Boar)
+    [127194] = true, -- Uproot (King Boar)
+
+    [143397] = true, -- Grease Shake (King Boar)
+    [143696] = true, -- Grease Shake (King Boar)
+    [145852] = true, -- Grease Shake (King Boar)
+    [145170] = true, -- Grease Shake (King Boar)
+    [145198] = true, -- Grease Shake (King Boar)
+    [145209] = true, -- Grease Shake (King Boar)
+
+    [145282] = true, -- Grease Shake (King Boar)
+    [146018] = true, -- Grease Shake (King Boar)
+    [143695] = true, -- Grease Slip (King Boar)
+    [145099] = true, -- Slip Immune (King Boar)
+    [144135] = true, -- Greased Hands (King Boar)
+    [145861] = true, -- Greased Footing (King Boar)
+
+    [144203] = true, -- Summon Prince Boars (Friendly NPC)
+    [116849] = true, -- Fast (Prince Boar)
+    [126947] = true, -- Thrash (Prince Boar)
+    [126963] = true, -- Thrash Anchor (Prince Boar)
+    [126998] = true, -- Thrash Anchor (Prince Boar)
+    [126965] = true, -- Thrash Anchor (Prince Boar)
+    [127000] = true, -- Thrash Anchor (Prince Boar)
+    [126964] = true, -- Thrash Anchor (Prince Boar)
+    [126999] = true, -- Thrash Anchor (Prince Boar)
+    [126962] = true, -- Thrash Anchor (Prince Boar)
+    [126997] = true, -- Thrash Anchor (Prince Boar)
+    [129731] = true, -- Thrash Anchor (Prince Boar)
+    [129730] = true, -- Thrash Anchor (Prince Boar)
+
+    [144336] = true, -- Thrash (Prince Boar)
+    [144343] = true, -- Thrash (Prince Boar)
+    [144341] = true, -- Thrash (Prince Boar)
+    [144342] = true, -- Thrash (Prince Boar)
+    [144347] = true, -- Thrash (Prince Boar)
+    [144345] = true, -- Thrash (Prince Boar)
+    [144350] = true, -- Thrash (Prince Boar)
+    [144352] = true, -- Thrash (Prince Boar)
+    [144351] = true, -- Thrash (Prince Boar)
+
 
     -- New Life Festival
     [84847] = true, -- Celebratory Belch -- Stonetooth Bash

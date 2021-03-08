@@ -161,7 +161,6 @@ CrowdControl.aoePlayerSet = {
     [97883] = 1, -- Domihaus
     [97899] = 0, -- Domihaus
     [80565] = 1, -- Kra'gh
-    [106783] = 1, -- Dustcloud Damage (Adept Rider's)
     [75692] = 1, -- Bahraha's Curse (of Bahraha's Curse)
     [57209] = 1, -- Storm Knight's Plate (of the Storm Knight)
     [67136] = 1, -- Overwhelming Surge (Overwhelming)

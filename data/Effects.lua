@@ -666,7 +666,6 @@ Effects.EffectGroundDisplay = {
     -- Crafted Sets
     [75930] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds', name = Abilities.Set_Eternal_Hunt, buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 7 }, -- Daedric Mines (Eternal Hunt)
     [71671] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_light_attack.dds', buff = true, debuff = false, ground = false }, -- Morkuldin (Morkuldin)
-    [106784] = { icon = 'LuiExtended/media/icons/abilities/ability_set_adept_rider.dds', name = Abilities.Set_Dust_Cloud, buff = false, debuff = false, ground = true }, -- Dustcloud (Adept Rider's)
     [113181] = { icon = 'esoui/art/icons/mm_teaser.dds', buff = true, debuff = false, ground = false }, -- Grave-Stake Collector (Grave-Stake Collector)
     [121915] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_scorn.dds', name = Abilities.Set_Honors_Scorn, buff = false, debuff = false, ground = true }, -- Coldharbour's Favorite (Coldharbour's Favorite)
     [121912] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_love.dds', name = Abilities.Set_Honors_Love, buff = true, debuff = false, ground = false }, -- Coldharbour's Favorite (Coldharbour's Favorite)
@@ -924,7 +923,7 @@ Effects.BarHighlightExtraId = {
     -- Dragonknight
     [20253] = 31898, -- Burning Talons
     [61785] = 32685, -- Fossilize
-    [108813] = 32678, -- Shattering Rocks
+    --[108813] = 32678, -- Shattering Rocks -- TODO: Check
 
     -- Nightblade
     --[88663] = 38517, -- Summon Shade (Argonian)
@@ -1539,9 +1538,9 @@ Effects.BarHighlightOverride = {
     -- Assault ----------------
     ---------------------------
 
-    [38566] = { newId = 63569 }, -- Rapid Maneuver --> Major Gallop
-    [40211] = { newId = 63569 }, -- Retreating Maneuver --> Major Gallop
-    [40215] = { newId = 63569 }, -- Charging Maneuver --> Major Gallop
+    [38566] = { newId = 61736 }, -- Rapid Maneuver --> Major Expedition
+    [40211] = { newId = 61736 }, -- Retreating Maneuver --> Major Expedition
+    [40215] = { newId = 61736 }, -- Charging Maneuver --> Major Expedition
     [61503] = { newId = 61504 }, -- Vigor
     [61505] = { newId = 61506 }, -- Echoing Vigor
     [61507] = { newId = 61509 }, -- Resolving Vigor
@@ -2651,9 +2650,6 @@ Effects.EffectHideSCT = {
     [55401] = true, -- Magicka Restore
     [45982] = true, -- Bash Stun
     [16825] = true, -- Off-Balance Exploit
-
-    -- Player - Champion Points
-    [64245] = true, -- Shadowstrike
 
     -- Player - Weapons
     [18429] = true, -- Heavy Attack (Unarmed)
@@ -3810,8 +3806,6 @@ Effects.EffectOverride = {
     [79093] = { hide = true }, -- Remove Trigger (Varen's Legacy)
     [57170] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vampires_kiss.dds', tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Vampire's Kiss
     [49236] = { icon = 'LuiExtended/media/icons/abilities/ability_set_whitestrake.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Whitestake's Retribution (Whitestrake's)
-    [106783] = { icon = 'LuiExtended/media/icons/abilities/ability_set_adept_rider.dds', name = Abilities.Set_Dust_Cloud, groundLabel = true, tooltip = Tooltips.Generic_AOE_Physical, tooltipValue2 = 1 }, -- Dustcloud Damage (Adept Rider's)
-    [106784] = { icon = 'LuiExtended/media/icons/abilities/ability_set_adept_rider.dds', name = Abilities.Set_Dust_Cloud, tooltip = Tooltips.Set_Adept_Rider }, -- Dustcloud (Adept Rider's)
     [106804] = { name = Abilities.Set_Nocturnals_Favor, tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Nocturnal's Heal (Nocturnal's Favor)
     [106798] = { icon = 'esoui/art/icons/achievement_su_mainquest_2.dds', tooltip = Tooltips.Set_Sloads }, -- Sload's Semblance (Sload's)
     [113092] = { icon = 'esoui/art/icons/achievement_su_mainquest_2.dds', name = Abilities.Set_Sloads_Semblance }, -- Sload's Projectile (Sloads)
@@ -4283,49 +4277,17 @@ Effects.EffectOverride = {
     -- CHAMPION POINTS ---------------------------------------------
     ----------------------------------------------------------------
 
-    -- The Steed
-    [98313] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_invigorating_bash.dds' }, -- Invigorating Bash
-    [98294] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_phase.dds', tooltip = Tooltips.Champion_Phase }, -- Phase
-    [61661] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_resilient.dds' }, -- Resilient
-    [135653] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_reinforced.dds', tooltip = Tooltips.Champion_Reinforced }, -- Reinforced
+    -- Craft
+    [152360] = { hide = true }, -- Friends in Low Places
+    [151860] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_thief_shadowstrike.dds', tooltip = Tooltips.Champion_Shadowstrike }, -- Shadowstrike
 
-    -- The Lady
-    [63110] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_spell_absorption.dds' }, -- Spell Absorption
-    [60371] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_critical_leech.dds' }, -- Critical Leech
-    [98316] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_unchained.dds', tooltip = Tooltips.Champion_Unchained }, -- Unchained
-
-    -- The Lord
-    [98404] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_infusion.dds', tooltip = Tooltips.Generic_Magicka_Recovery_Duration }, -- Infusion
-    [98414] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_reinforced.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Revival
-    [61015] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_reinforced.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Determination
-
-    -- The Tower
-    [98308] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_thief_ensnare.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 20 }, -- Ensnare
-    [92428] = { icon = 'esoui/art/icons/ability_healer_012.dds', tooltip = Tooltips.Champion_Siphoner }, -- Siphoner
-    [62518] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_thief_maras_gift.dds' }, -- Mara's Gift
-
-    -- The Lover
-    [63878] = { icon = 'esoui/art/icons/ability_healer_033.dds' }, -- Synergizer
-
-    -- The Shadow
-    [64244] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_thief_shadowstrike.dds', tooltip = Tooltips.Generic_Invisibility }, -- Shadowstrike
-    [64245] = { hide = true }, -- Shadowstrike
-
-    -- The Apprentice
-    [63152] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_vengeance.dds', name = Abilities.Champion_Vengeance_Charge, tooltip = Tooltips.Champion_Vengeance_Charge }, -- Vengeance Count
-    [63151] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_vengeance_full.dds', tooltip = Tooltips.Champion_Vengeance }, -- Vengeance
+    -- Warfare
     [59530] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_foresight.dds', tooltip = Tooltips.Champion_Foresight }, -- Foresight
-    [63114] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_arcane_well.dds' }, -- Arcane Well
-    [88784] = { hide = true }, -- Arcane Well
-
-    -- The Atronach
-    [63106] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_retaliation.dds', tooltip = Tooltips.Champion_Retaliation }, -- Retaliation
     [60230] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_riposte.dds' }, -- Riposte
-    [63108] = { name = Abilities.Skill_Off_Balance, tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off-Balance (Tactician)
+    [135653] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_reinforced.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Reinforced
 
-    -- The Ritual
-    [98307] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_opportunist.dds', tooltip = Tooltips.Champion_Opportunist }, -- Opportunist
-    [100408] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_opportunist.dds', tooltip = Tooltips.Champion_Opportunist }, -- Opportunist
+    -- Fitness
+    [98316] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_unchained.dds', tooltip = Tooltips.Champion_Unchained }, -- Unchained
 
     ----------------------------------------------------------------
     -- PLAYER ABILITIES - BASIC ------------------------------------
@@ -4627,7 +4589,7 @@ Effects.EffectOverride = {
     [32685] = { tooltip = Tooltips.Skill_Fossilize_Stun }, -- Fossilize (Fossilize)
     [61785] = { tooltip = Tooltips.Generic_Immobilize }, -- Fossilize (Fossilize)
     [32678] = { tooltip = Tooltips.Skill_Shattering_Rocks_Stun }, -- Shattering Rocks (Shattering Rocks)
-    [108813] = { tooltip = Tooltips.Skill_Shattering_Rocks }, -- Shattering Rocks (Shattering Rocks)
+    [108813] = { tooltip = Tooltips.Skill_Shattering_Rocks }, -- Shattering Rocks (Shattering Rocks) -- TODO: Check
 
     -- Ash Cloud / Cinder Storm / Eruption
     [29059] = { tooltip = Tooltips.Skill_Ash_Cloud }, -- Ash Cloud (Ash Cloud)
@@ -5663,9 +5625,7 @@ Effects.EffectOverride = {
     [30821] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_forceful.dds' }, -- Forceful (Rank 1)
     [45445] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_forceful.dds' }, -- Forceful (Rank 2)
     [29375] = { icon = 'LuiExtended/media/icons/abilities/passive_weapon_heavy_weapons.dds' }, -- Heavy Weapons (Rank 1)
-    [29383] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleed.dds', name = Abilities.Passive_Heavy_Weapons, tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Heavy Weapons Bleed (Rank 1)
     [45430] = { icon = 'LuiExtended/media/icons/abilities/passive_weapon_heavy_weapons.dds' }, -- Heavy Weapons (Rank 2)
-    [45431] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleed.dds', name = Abilities.Passive_Heavy_Weapons, tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Heavy Weapons Bleed (Rank 2)
     [29388] = { icon = 'LuiExtended/media/icons/abilities/passive_weapon_balanced_blade.dds' }, -- Balanced Blade (Rank 1)
     [45443] = { icon = 'LuiExtended/media/icons/abilities/passive_weapon_balanced_blade.dds' }, -- Balanced Blade (Rank 2)
     [29389] = { icon = 'LuiExtended/media/icons/abilities/passive_weapon_follow_up.dds' }, -- Follow Up (Follow Up - Rank 1)
@@ -5692,8 +5652,6 @@ Effects.EffectOverride = {
     [45478] = { icon = 'esoui/art/icons/ability_weapon_020.dds' }, -- Controlled Fury (Controlled Fury - Rank 2)
     [21114] = { icon = 'esoui/art/icons/ability_weapon_012.dds' }, -- Ruffian (Ruffian - Rank 1)
     [45481] = { icon = 'esoui/art/icons/ability_weapon_012.dds' }, -- Ruffian (Ruffian - Rank 2)
-    [30894] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleed.dds', name = Abilities.Passive_Twin_Blade_and_Blunt, tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Twin Blade and Blunt Bleed (Rank 1)
-    [45483] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleed.dds', name = Abilities.Passive_Twin_Blade_and_Blunt, tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Twin Blade and Blunt Bleed (Rank 2)
 
     -- Bow
     [30930] = { icon = 'LuiExtended/media/icons/abilities/passive_weapon_accuracy.dds' }, -- Accuracy (Accuracy - Rank 1)
@@ -6019,7 +5977,7 @@ Effects.EffectOverride = {
     [45584] = { icon = 'LuiExtended/media/icons/abilities/ability_otherclass_soul_shatter.dds' }, -- Soul Shatter (Soul Shatter - Rank 2)
     [39269] = { icon = 'LuiExtended/media/icons/abilities/passive_otherclass_soul_summons.dds' }, -- Soul Summons
     [45590] = { icon = 'LuiExtended/media/icons/abilities/passive_otherclass_soul_summons.dds' }, -- Soul Summons
-    [43752] = { icon = 'LuiExtended/media/icons/abilities/ability_otherclass_soul_summons_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Passive_Soul_Summons, Abilities.Set_Cooldown), tooltip = Tooltips.Skill_Soul_Summons }, -- Soul Summons
+    [43752] = { icon = 'LuiExtended/media/icons/abilities/ability_otherclass_soul_summons_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Passive_Soul_Summons, Abilities.Set_Cooldown), tooltip = Tooltips.Skill_Soul_Summons, forcedContainer = 'long' }, -- Soul Summons
     [39263] = { icon = 'LuiExtended/media/icons/abilities/passive_otherclass_soul_lock.dds' }, -- Soul Lock
     [39264] = { hide = true }, -- Soul Trap (Soul Lock - Rank 1)
     [45580] = { icon = 'LuiExtended/media/icons/abilities/passive_otherclass_soul_lock.dds' }, -- Soul Lock
@@ -6771,16 +6729,6 @@ Effects.EffectOverride = {
     [63701] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_resourceful.dds' }, -- Resourceful (Resourceful - Rank 3)
     [63702] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_resourceful.dds' }, -- Resourceful (Resourceful - Rank 3)
     [63703] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_resourceful.dds' }, -- Resourceful (Resourceful - Rank 3)
-
-    [36214] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 1)
-    [121126] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 1)
-    [121127] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 1)
-    [45292] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 2)
-    [121139] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 2)
-    [121140] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 2)
-    [45294] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 3)
-    [121141] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 3)
-    [121142] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 3)
 
     ----------------------------------------------------------------
     -- CRAFTING PASSIVES -------------------------------------------
@@ -8654,6 +8602,22 @@ Effects.EffectOverride = {
     [88095] = { icon = 'LuiExtended/media/icons/abilities/ability_item_dazzler_3.dds', name = Abilities.Event_Sparkle_Dazzler }, -- Illusion Dazzler - Royal Revelry
     [88123] = { icon = 'LuiExtended/media/icons/abilities/ability_item_dazzler_2.dds', name = Abilities.Event_Burst_Dazzler }, -- Illusion Dazzler - Royal Revelry
     [88124] = { icon = 'LuiExtended/media/icons/abilities/ability_item_dazzler_1.dds', name = Abilities.Event_Flash_Dazzler }, -- Illusion Dazzler - Royal Revelry
+
+    [127194] = { hide = true }, -- Uproot (King Boar) - A Foe Most Porcine
+
+    [145282] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_grease_slip.dds', name = Abilities.Skill_Grease_Slip }, -- Grease Shake (King Boar) - A Foe Most Porcine
+    [146018] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_grease_slip.dds', name = Abilities.Skill_Grease_Slip }, -- Grease Shake (King Boar) - A Foe Most Porcine
+    [143695] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_grease_slip.dds', tooltip = Tooltips.Generic_Knockdown }, -- Grease Slip (King Boar) - A Foe Most Porcine
+    [144135] = { hide = true }, -- Greased Hands (King Boar) - A Foe Most Porcine
+    [145861] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_grease_snare.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Greased Footing (King Boar) - A Foe Most Porcine
+
+    [126947] = { hide = true }, -- Thrash (Prince Boar) - A Foe Most Porcine
+    [144351] = { hide = true }, -- Thrash (Prince Boar) - A Foe Most Porcine
+
+    --[144340] = { icon = 'LuiExtended/media/icons/abilities/ability_welwa_charge.dds' }, -- Thrash (Prince Boar) - A Foe Most Porcine
+    --[144338] = { icon = 'LuiExtended/media/icons/abilities/ability_welwa_charge.dds', name = Abilities.Skill_Thrash }, -- Knockback (Prince Boar) - A Foe Most Porcine
+    --[144337] = { icon = 'LuiExtended/media/icons/abilities/ability_welwa_charge.dds', name = Abilities.Skill_Thrash, tooltip = Tooltips.Generic_Knockback }, -- Stun (Prince Boar) - A Foe Most Porcine
+    --[144339] = { name = Abilities.Innate_Stagger, tooltip = Tooltips.Generic_Stagger, cc = LUIE_CC_TYPE_STAGGER }, -- Staggered (Prince Boar) - A Foe Most Porcine
 
     -- New Life Festival
     [84847] = {icon = 'LuiExtended/media/icons/abilities/ability_quest_celebratory_belch.dds', name = Abilities.Skill_Celebratory_Belch, unbreakable = 1 }, -- Celebratory Belch (Stonetooth Bash)
@@ -12628,9 +12592,7 @@ Effects.FakePlayerBuffs = {
     [137206] = { duration = "GET", debuff = true }, -- Major Berserk (Hircine's Rage)
 
     -- Alliance War
-    [57472] = { duration = "GET", onlyExtended = true, shiftId = 38566 }, -- Major Gallop (Rapid Maneuver)
-    [57477] = { duration = "GET", shiftId = 40211 }, -- Major Gallop (Retreating Maneuver)
-    [57481] = { duration = "GET", onlyExtended = true, shiftId = 40215 }, -- Major Gallop (Charging Maneuver)
+    [101169] = { duration = "GET", shiftId = 40211 }, -- Retreating Maneuever (Retreating Maneuver)
 
     -- Seasonal Quests (New Life Festival)
     --[84125] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = Abilities.Skill_Lava_Foot_Stomp, duration = 10000}, -- Breton Male Dance (Lava Foot Stomp)
@@ -12753,6 +12715,7 @@ Effects.FakeStagger = {
     [47020] = { duration = 1000 }, -- Pull (Puncturing Chains) (Cyrodiil Guard T2)
 
     -- Quest
+    [144339] = { duration = 433 }, -- Staggered (Prince Boar) - A Foe Most Porcine
     [84284] = { duration = 433 }, -- Coursing Bones (Oskana)
     [84197] = { duration = 433 }, -- Marsh Masher (Gathongor the Mauler)
     [83161] = { duration = 433 }, -- Stone Crusher (Thodundor of the Hill)
@@ -12844,7 +12807,6 @@ Effects.AddGroundDamageAura = {
     [59498] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Spawn of Mephala
     [80522] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Stormfist
     [102094] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Thurvokun
-    [106783] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Dustcloud Damage (Adept Rider's)
     [75692] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Bahraha's Curse
     [97539] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Draugr's Rest
     [67204] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Leeching Plate (of Leeching)

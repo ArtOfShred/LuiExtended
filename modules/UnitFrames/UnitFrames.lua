@@ -479,10 +479,15 @@ function UnitFrames.AltBar_OnMouseEnterXP(control)
     local current
     local levelSize
     local label
+    local isMax = false -- If player reaches Champion Point cap
     if isChampion then
         level = GetPlayerChampionPointsEarned()
         current = GetPlayerChampionXP()
         levelSize = GetNumChampionXPInChampionPoint(level)
+        if levelSize == nil then
+            levelSize = current -- TODO: Probably don't need to set this value, can clean this function up in the future
+            isMax = true
+        end
         label = GetString(SI_EXPERIENCE_CHAMPION_LABEL)
     else
         level = GetUnitLevel("player")
@@ -497,7 +502,10 @@ function UnitFrames.AltBar_OnMouseEnterXP(control)
     InitializeTooltip(InformationTooltip, control, BOTTOM, 0, -10)
 
     SetTooltipText(InformationTooltip, zo_strformat(SI_LEVEL_DISPLAY, label, level))
-    InformationTooltip:AddLine(zo_strformat(SI_EXPERIENCE_CURRENT_MAX_PERCENT, ZO_CommaDelimitNumber(current), ZO_CommaDelimitNumber(levelSize), percentageXP))
+    if not isMax then
+        -- TODO: Maybe add a line here if Champion XP is capped
+        InformationTooltip:AddLine(zo_strformat(SI_EXPERIENCE_CURRENT_MAX_PERCENT, ZO_CommaDelimitNumber(current), ZO_CommaDelimitNumber(levelSize), percentageXP))
+    end
     if enlightenedPool > 0 then
         InformationTooltip:AddLine(zo_strformat(SI_EXPERIENCE_CHAMPION_ENLIGHTENED_TOOLTIP, enlightenedValue), nil, ZO_SUCCEEDED_TEXT:UnpackRGB())
     end
@@ -2894,6 +2902,10 @@ function UnitFrames.UpdateVeteranXP()
             local enlightenedPool = 4 * GetEnlightenedPool()
             local xp = GetPlayerChampionXP()
             local maxBar = GetNumChampionXPInChampionPoint(GetPlayerChampionPointsEarned())
+            -- If Champion Points are maxed out then fill the bar all the way up.
+            if maxBar == nil then
+                maxBar = xp
+            end
             local enlightenedBar = enlightenedPool + xp
             if enlightenedBar > maxBar then enlightenedBar = maxBar end -- If the enlightenment pool extends past the current level then cap it at the maximum bar value.
 
@@ -3114,6 +3126,10 @@ function UnitFrames.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted
         local enlightenedPool = 4 * GetEnlightenedPool()
         local xp = GetPlayerChampionXP()
         local maxBar = GetNumChampionXPInChampionPoint(GetPlayerChampionPointsEarned())
+        -- If Champion Points are maxed out then fill the bar all the way up.
+        if maxBar == nil then
+            maxBar = xp
+        end
         local enlightenedBar = enlightenedPool + xp
         if enlightenedBar > maxBar then enlightenedBar = maxBar end -- If the enlightenment pool extends past the current level then cap it at the maximum bar value.
 
@@ -3140,7 +3156,11 @@ function UnitFrames.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted
         UnitFrames.CustomFrames.player.ChampionXP = nil
         UnitFrames.CustomFrames.player.Experience = UnitFrames.CustomFrames.player.alternative
 
-        UnitFrames.CustomFrames.player.Experience.bar:SetMinMax( 0 , UnitFrames.CustomFrames.player.isChampion and GetNumChampionXPInChampionPoint("player")  or GetUnitXPMax("player") )
+        local championXP = GetNumChampionXPInChampionPoint(GetPlayerChampionPointsEarned())
+        if championXP == nil then
+            championXP = GetPlayerChampionXP()
+        end
+        UnitFrames.CustomFrames.player.Experience.bar:SetMinMax( 0 , UnitFrames.CustomFrames.player.isChampion and championXP or GetUnitXPMax("player") )
         UnitFrames.CustomFrames.player.Experience.bar:SetValue( UnitFrames.CustomFrames.player.isChampion and GetPlayerChampionXP() or GetUnitXP("player") )
 
         recenter = true
@@ -3275,7 +3295,7 @@ end
 -- Used to change icon on alternative bar for next champion point type
 function UnitFrames.OnChampionPointGained(eventCode)
     if UnitFrames.CustomFrames.player and UnitFrames.CustomFrames.player.ChampionXP then
-        local attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned()+1 )
+        local attribute = 1 -- TODO: Replace this eventually with a color choice option or something
         local colour = ( UnitFrames.SV.PlayerChampionColour and CP_BAR_COLOURS[attribute] ) and CP_BAR_COLOURS[attribute][2] or XP_BAR_COLOURS
         local colour2 = ( UnitFrames.SV.PlayerChampionColour and CP_BAR_COLOURS[attribute] ) and CP_BAR_COLOURS[attribute][1] or XP_BAR_COLOURS
         UnitFrames.CustomFrames.player.ChampionXP.backdrop:SetCenterColor( 0.1*colour.r, 0.1*colour.g, 0.1*colour.b, 0.9 )

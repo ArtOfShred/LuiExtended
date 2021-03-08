@@ -215,15 +215,9 @@ local strings = {
     -- CHAMPION POINT SKILLS ---------------------------------------
     ----------------------------------------------------------------
 
-    SI_LUIE_SKILL_PHASE_TP =                             "Increase Physical and Spell Resistance by |cFFFFFF660|r for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_UNCHAINED_TP =                         "Reduce the cost of your next Stamina ability used within |cFFFFFF<<1>>|r seconds by |cFFFFFF80|r%.",
-    SI_LUIE_SKILL_FORESIGHT_TP =                         "Reduce the cost of your next Magicka ability used within |cFFFFFF<<1>>|r seconds by |cFFFFFF80|r%.",
-    SI_LUIE_SKILL_RETALIATION_TP =                       "Your next Light Attack used within |cFFFFFF<<1>>|r seconds deals |cFFFFFF30|r% additional damage.",
-    SI_LUIE_SKILL_OPPORTUNIST_TP =                       "Your next Physical Damage ability used within |cFFFFFF<<1>>|r seconds deals |cFFFFFF15|r% additional damage.",
-    SI_LUIE_SKILL_SIPHONER_TP =                          "Decrease Health, Magicka, and Stamina resource restore and Recovery for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_VENGEANCE_TP =                         "Your next Magicka ability used within |cFFFFFF<<1>>|r seconds will always be a Critical Strike.",
-    SI_LUIE_SKILL_VENGEANCE_CHARGE =                     "Vengeance Charge",
-    SI_LUIE_SKILL_REINFORCED_TP =                        "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>> while you are bracing.",
+    SI_LUIE_SKILL_SHADOWSTRIKE_TP =                      "Invisible for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nWhile under this effect you can cast Blade of Woe.",
+    SI_LUIE_SKILL_FORESIGHT_TP =                         "Reduce the cost of your Magicka and Stamina healing abilities by |cFFFFFF75|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_UNCHAINED_TP =                         "Reduce the cost of your next Stamina ability used within |cFFFFFF<<1>>|r seconds by |cFFFFFF11|r% per stage.",
 
     ----------------------------------------------------------------
     -- GENERIC / SHARED TOOLTIPS -----------------------------------
@@ -975,7 +969,6 @@ local strings = {
     SI_LUIE_SKILL_SET_TAVAS_FAVOR =                      "Generating |cFFFFFF4|r Ultimate every |cFFFFFF1|r second for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_SET_VARENS_LEGACY =                    "Your next direct damage area of effect attack used within |cFFFFFF<<1>>|r seconds deals |cFFFFFF3290|r additional damage.",
     SI_LUIE_SKILL_SET_MECHANICAL_ACUITY =                "Increase Weapon and Spell Critical by |cFFFFFF100|r% for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_SET_ADEPT_RIDER =                      "Enemies in the dust cloud take Physical Damage every |cFFFFFF1|r second, while you and group members gain Major Evasion.",
     --SI_LUIE_SKILL_SET_SENCHE_RAHTS_GRIT =                "Increase healing received by |cFFFFFF6|r% and Physical and Spell Resistance by |cFFFFFF2585|r for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_VASTARIES_TUTELAGE =               "Increase Weapon and Spell Damage by |cFFFFFF258|r and reduce the cost of non-Ultimate abilities by |cFFFFFF10|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_SLOADS_TP =                        "Taking |cFFFFFF3|r% of your Max Health as Oblivion Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThis effect can deal a maximum of |cFFFFFF3000|r Oblivion Damage per tick.",
@@ -1114,7 +1107,6 @@ local strings = {
     SI_LUIE_SKILL_RADIANCE_TP =                          "Enemies within |cFFFFFF3|r meters take Flame Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_LIGHTNING_ROD_TP =                     "Afflicted with Shock Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nDeals additional Shock Damage if the channel is finished.",
     SI_LUIE_SKILL_COLOSSAL_STOMP =                       "Colossal Stomp",
-    SI_LUIE_SKILL_DUST_CLOUD =                           "Dust Cloud",
     SI_LUIE_SKILL_BATTLE_SPIRIT =                        "Battle Spirit",
     SI_LUIE_SKILL_COLD_FIRE_TRAP =                       "Cold Fire Trap",
     SI_LUIE_SKILL_LAVA_FOOT_STOMP =                      "Lava Foot Stomp",

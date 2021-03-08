@@ -314,15 +314,9 @@ LUIE.Data.Tooltips = {
     -- CHAMPION POINT SKILLS ---------------------------------------
     ----------------------------------------------------------------
 
-    Champion_Phase                                  = GetString(SI_LUIE_SKILL_PHASE_TP),
-    Champion_Unchained                              = GetString(SI_LUIE_SKILL_UNCHAINED_TP),
-    Champion_Siphoner                               = GetString(SI_LUIE_SKILL_SIPHONER_TP),
+    Champion_Shadowstrike                           = GetString(SI_LUIE_SKILL_SHADOWSTRIKE_TP),
     Champion_Foresight                              = GetString(SI_LUIE_SKILL_FORESIGHT_TP),
-    Champion_Vengeance_Charge                       = GetAbilityDescription(63150),
-    Champion_Vengeance                              = GetString(SI_LUIE_SKILL_VENGEANCE_TP),
-    Champion_Retaliation                            = GetString(SI_LUIE_SKILL_RETALIATION_TP),
-    Champion_Opportunist                            = GetString(SI_LUIE_SKILL_OPPORTUNIST_TP),
-    Champion_Reinforced                             = GetString(SI_LUIE_SKILL_REINFORCED_TP),
+    Champion_Unchained                              = GetString(SI_LUIE_SKILL_UNCHAINED_TP),
 
     ----------------------------------------------------------------
     -- CONSUMABLES & ITEMS -----------------------------------------
@@ -533,7 +527,6 @@ LUIE.Data.Tooltips = {
     Set_Tavas_Favor                                 = GetString(SI_LUIE_SKILL_SET_TAVAS_FAVOR),
     Set_Varens_Legacy                               = GetString(SI_LUIE_SKILL_SET_VARENS_LEGACY),
     Set_Mechanical_Acuity                           = GetString(SI_LUIE_SKILL_SET_MECHANICAL_ACUITY),
-    Set_Adept_Rider                                 = GetString(SI_LUIE_SKILL_SET_ADEPT_RIDER),
     --Set_Senche_Rahts_Grit                           = GetString(SI_LUIE_SKILL_SET_SENCHE_RAHTS_GRIT),
     Set_Vastaries_Tutelage                          = GetString(SI_LUIE_SKILL_SET_VASTARIES_TUTELAGE),
     Set_Eye_of_Nahviintaas                          = GetString(SI_LUIE_SKILL_SET_EYE_OF_NAHVIINTAAS),

@@ -1,3 +1,14 @@
+### Version 6.2.3
+
+General
+- Fixed various errors related to API changes from this update.
+- Attempted to fix an issue where the Combat Info Bar Highlight component threw errors when Shimmering Shield was hit on a Warden.
+- Removed a hooked function for Guild Heraldry updates that had been reported to cause errors.
+- Removed some unused icons and updated tooltips for most new Champion Point abilities.
+- A more detailed Change Log may be released in the future. This was a quick update for Flames of Ambition.
+
+---
+
 ### Version 6.2.2
 
 Known Issues

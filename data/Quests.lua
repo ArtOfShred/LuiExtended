@@ -203,7 +203,23 @@ Quests.QuestItemMerge = {
 --LUIE_QUEST_MESSAGE_OFFER = 4
 --LUIE_QUEST_MESSAGE_DISCARD = 5
 --LUIE_QUEST_MESSAGE_CONFISCATE = 6
+--LUIE_QUEST_MESSAGE_OPEN = 11
+--LUIE_QUEST_MESSAGE_ADMINISTER = 12
+--LUIE_QUEST_MESSAGE_PLACE = 13
 Quests.ItemRemovedMessage = {
+
+    -- Jester's Festival
+    [6163] = LUIE_QUEST_MESSAGE_OFFER, -- Mudcrab Apples (A Noble Guest)
+    [6145] = LUIE_QUEST_MESSAGE_DISCARD, -- Petal Pelters (Springtime Flair)
+    [6186] = LUIE_QUEST_MESSAGE_TURNIN, -- Glowing Ayleid Bone Dust (Royal Revelry)
+    [6187] = LUIE_QUEST_MESSAGE_TURNIN, -- Dragonfire Dust (Royal Revelry)
+    [6192] = LUIE_QUEST_MESSAGE_EXHAUST, -- Burst Dazzler (Royal Revelry)
+    [6193] = LUIE_QUEST_MESSAGE_EXHAUST, -- Flash Dazzler (Royal Revelry)
+    [6191] = LUIE_QUEST_MESSAGE_EXHAUST, -- Sparkle Dazzler (Royal Revelry)
+    [7628] = LUIE_QUEST_MESSAGE_DISCARD, -- Special Arena Pass (The King's Spoils)
+    [7617] = LUIE_QUEST_MESSAGE_PLACE, -- Slime Prank Kit (Prankster's Carnival)
+    [7614] = LUIE_QUEST_MESSAGE_PLACE, -- Glitter Prank Kit (Prankster's Carnival)
+    [7616] = LUIE_QUEST_MESSAGE_PLACE, -- Stinkpot Prank Kit (Prankster's Carnival)
 
     -- Werewolf / Vampire
     [5475] = LUIE_QUEST_MESSAGE_OFFER, -- Tribute (Hircine's Gift)
@@ -258,10 +274,16 @@ Quests.ItemRemovedInDialogueMessage = {
 --LUIE_QUEST_MESSAGE_MIX = 8
 --LUIE_QUEST_MESSAGE_BUNDLE = 9
 --LUIE_QUEST_MESSAGE_LOOT = 10
---LUIE_QUEST_MESSAGE_OPEN = 11
---LUIE_QUEST_MESSAGE_ADMINISTER = 12
---LUIE_QUEST_MESSAGE_PLACE = 13
+--LUIE_QUEST_MESSAGE_STEAL = 14
 Quests.ItemReceivedMessage = {
+
+    -- Jester's Festival
+    [6163] = LUIE_QUEST_MESSAGE_STEAL, -- Mudcrab Apples (A Noble Guest)
+    [6192] = LUIE_QUEST_MESSAGE_LOOT, -- Burst Dazzler (Royal Revelry)
+    [6193] = LUIE_QUEST_MESSAGE_LOOT, -- Flash Dazzler (Royal Revelry)
+    [6191] = LUIE_QUEST_MESSAGE_LOOT, -- Sparkle Dazzler (Royal Revelry)
+    [7533] = LUIE_QUEST_MESSAGE_LOOT, -- King Boar Invitational (A Foe Most Porcine)
+    [7566] = LUIE_QUEST_MESSAGE_LOOT, -- Fermented Mudcrab Apples (The King's Spoils)
 
     -- Auridon (MSQ)
     [3429] = LUIE_QUEST_MESSAGE_LOOT, -- Deployment Plans (Ensuring Security)
