@@ -1,3 +1,11 @@
+### Version 6.2.4
+
+General
+- Fixed an issue where Combat Text was throwing UI errors for Bleed abilities. I missed that a DAMAGE_TYPE_BLEED was added with this patch as a new damage type for bleeds.
+- Fixed an issue where the Global Cooldown Tracking component of Combat Info was throwing UI errors.
+
+---
+
 ### Version 6.2.3
 
 General

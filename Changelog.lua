@@ -6,6 +6,12 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
+    "|cFFA500LuiExtended Version 6.2.4|r",
+    "",
+    "|cFFFF00General:|r",
+    "[*] Fixed an issue where Combat Text was throwing UI errors for Bleed abilities. I missed that a DAMAGE_TYPE_BLEED was added with this patch as a new damage type for bleeds.",
+    "[*] Fixed an issue where the Global Cooldown Tracking component of Combat Info was throwing UI errors.",
+    "",
     "|cFFA500LuiExtended Version 6.2.3|r",
     "",
     "|cFFFF00General:|r",
