@@ -49,6 +49,7 @@ LUIE.Data.CombatTextConstants = {
         [DAMAGE_TYPE_DROWN]                 = true,
         [DAMAGE_TYPE_DISEASE]               = true,
         [DAMAGE_TYPE_POISON]                = true,
+        [DAMAGE_TYPE_BLEED]                 = true,
     },
     -- Mitigation
     isMiss = {

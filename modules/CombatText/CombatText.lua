@@ -210,7 +210,8 @@ CombatText.Defaults = {
             [DAMAGE_TYPE_MAGIC]     = { 1, 1, 0, 1 },
             [DAMAGE_TYPE_DROWN]     = { 35/255, 70/255, 255/255, 1 },
             [DAMAGE_TYPE_DISEASE]   = { 25/255, 85/255, 0, 1 },
-            [DAMAGE_TYPE_POISON]    = { 0, 1, 127/255, 1 }
+            [DAMAGE_TYPE_POISON]    = { 0, 1, 127/255, 1 },
+            [DAMAGE_TYPE_BLEED]     = { 200/255, 200/255, 160/255, 1 },
         },
         healing                     = { 0, 192/255, 0, 1 },
         energizeMagicka             = { 0, 192/255, 1, 1 },

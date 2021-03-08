@@ -545,9 +545,8 @@ function CombatInfo.HookGCD()
         local slotType = GetSlotType(slotnum)
         local showGlobalCooldownForCollectible = global and slotType == ACTION_TYPE_COLLECTIBLE and globalSlotType == ACTION_TYPE_COLLECTIBLE
         local showCooldown = isInCooldown and (CombatInfo.SV.GlobalShowGCD or not global or showGlobalCooldownForCollectible)
-        self.cooldown:SetHidden(not showCooldown)
-
         local updateChromaQuickslot = slotType ~= ACTION_TYPE_ABILITY and ZO_RZCHROMA_EFFECTS
+        self.cooldown:SetHidden(not showCooldown)
 
         if showCooldown then
             -- For items with a long CD we need to be sure not to hide the countdown radial timer, so if the duration is the 1 sec GCD, then we don't turn off the cooldown animation.
@@ -558,9 +557,6 @@ function CombatInfo.HookGCD()
                 end
 
                 if IsInGamepadPreferredMode() then
-                    if not self.itemQtyFailure then
-                        self.icon:SetDesaturation(0)
-                    end
                     self.cooldown:SetHidden(true)
                     if not self.showingCooldown then
                         self:SetNeedsAnimationParameterUpdate(true)
@@ -602,19 +598,18 @@ function CombatInfo.HookGCD()
         end
 
         if showCooldown ~= self.showingCooldown then
-            self.showingCooldown = showCooldown
-
-            if self.showingCooldown then
-                ZO_ContextualActionBar_AddReference()
-            else
-                ZO_ContextualActionBar_RemoveReference()
-            end
-
+            self:SetShowCooldown(showCooldown)
             self:UpdateActivationHighlight()
+
             if IsInGamepadPreferredMode() then
-                self:SetCooldownHeight(self.icon.percentComplete)
+                self:SetCooldownPercentComplete(self.icon.percentComplete)
             end
-            self:SetCooldownIconAnchors(showCooldown)
+        end
+
+        if showCooldown or self.itemQtyFailure then
+            self.icon:SetDesaturation(1)
+        else
+            self.icon:SetDesaturation(0)
         end
 
         local textColor

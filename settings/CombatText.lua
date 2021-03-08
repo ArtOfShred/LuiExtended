@@ -387,6 +387,15 @@ function CombatText.CreateSettings()
                 default = {r=Defaults.colors.damage[2][1], g=Defaults.colors.damage[2][2], b=Defaults.colors.damage[2][3]}
             },
             {
+                -- Generic
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_BLEED),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_BLEED_TP),
+                getFunc = function() return unpack(Settings.colors.damage[12]) end,
+                setFunc = function(r, g, b, a) Settings.colors.damage[12] = { r, g, b, a } end,
+                default = {r=Defaults.colors.damage[12][1], g=Defaults.colors.damage[12][2], b=Defaults.colors.damage[12][3]}
+            },
+            {
                 -- Fire
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_FIRE),
