@@ -3156,7 +3156,7 @@ function UnitFrames.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted
         UnitFrames.CustomFrames.player.ChampionXP = nil
         UnitFrames.CustomFrames.player.Experience = UnitFrames.CustomFrames.player.alternative
 
-        local championXP = GetNumChampionXPInChampionPoint("player")
+        local championXP = GetNumChampionXPInChampionPoint(GetPlayerChampionPointsEarned())
         if championXP == nil then
             championXP = GetPlayerChampionXP()
         end
