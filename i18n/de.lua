@@ -231,7 +231,6 @@ local strings = {
     SI_LUIE_CA_DUEL_STATE1 =                             "Du wartest auf eine Antwort zur Duell-Herausforderung von |cFFFFFF<<1>>|r.",
     SI_LUIE_CA_DUEL_STATE2 =                             "Du schuldest noch eine Antwort zur Duell-Herausforderung von |cFFFFFF<<1>>|r.",
     SI_LUIE_CA_ACHIEVEMENT_PROGRESS_MSG =                "Errungenschaft aktualisert",
-    SI_LUIE_CHAMPION_POINT_TYPE =                        "<<1>><<2>> <<3>> <<1[Punkt/Punkte]>>",
     SI_LUIE_CA_EXPERIENCE_MESSAGE =                      "Du verdienst %s.",
     SI_LUIE_CA_EXPERIENCE_NAME =                         "<<1[Erfahrungspunkt/Erfahrungspunkte]>>",
     SI_LUIE_CA_LVL_ANNOUNCE_CP =                         "Champion Level erreicht!", -- TODO: Unused

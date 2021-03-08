@@ -662,7 +662,7 @@ local g_rcSpamPrevention            = false         -- Stops LFG failed ready ch
 
 -- Guild
 local g_selectedGuild               = 1             -- Set selected guild to 1 by default, whenever the player reloads their first guild will always be selected
-local g_pendingHeraldryCost         = 0             -- Pending cost of heraldry change used to modify currency messages.
+-- local g_pendingHeraldryCost         = 0             -- Pending cost of heraldry change used to modify currency messages. TODO: Fix later
 local g_disableRankMessage          = false         -- Variable is toggled to true when the player modifies a guild memeber's rank, this prevents the normal rank change message from displaying.
 
 -- Achievements
@@ -1078,7 +1078,7 @@ function ChatAnnouncements.RegisterGuildEvents()
     eventManager:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD, ChatAnnouncements.GuildAddedSelf)
     eventManager:RegisterForEvent(moduleName, EVENT_GUILD_INVITE_ADDED, ChatAnnouncements.GuildInviteAdded)
     eventManager:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_RANK_CHANGED, ChatAnnouncements.GuildRankChanged)
-    eventManager:RegisterForEvent(moduleName, EVENT_HERALDRY_SAVED, ChatAnnouncements.GuildHeraldrySaved)
+    --eventManager:RegisterForEvent(moduleName, EVENT_HERALDRY_SAVED, ChatAnnouncements.GuildHeraldrySaved) -- TODO: Fix later
     eventManager:RegisterForEvent(moduleName, EVENT_GUILD_RANKS_CHANGED, ChatAnnouncements.GuildRanksSaved)
     eventManager:RegisterForEvent(moduleName, EVENT_GUILD_RANK_CHANGED, ChatAnnouncements.GuildRankSaved)
     eventManager:RegisterForEvent(moduleName, EVENT_GUILD_DESCRIPTION_CHANGED, ChatAnnouncements.GuildTextChanged)
@@ -1349,6 +1349,8 @@ function ChatAnnouncements.OnDigEnd()
     zo_callLater(function() g_weAreInADig = false end, 1000)
 end
 
+-- TODO: Fix later
+--[[
 function ChatAnnouncements.GuildHeraldrySaved()
     if ChatAnnouncements.SV.Currency.CurrencyGoldChange then
         local value = g_pendingHeraldryCost > 0 and g_pendingHeraldryCost or 1000
@@ -1385,6 +1387,7 @@ function ChatAnnouncements.GuildHeraldrySaved()
         end
     end
 end
+]]--
 
 function ChatAnnouncements.GuildRanksSaved(eventCode, guildId)
     local guildName = GetGuildName(guildId)
@@ -2560,10 +2563,13 @@ function ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeTy
             return string.format("|r" .. icon .. "|cFFFFFF" .. bagType .. "|r|c" .. changeColor)
         end
         formattedMessageP1 = (string.format(messageChange, ResolveStorageType(), messageP1))
+        -- TODO: Fix later
+        --[[
     elseif type == "LUIE_CURRENCY_HERALDRY" then
         local icon = ChatAnnouncements.SV.Inventory.LootIcons and "|t16:16:LuiExtended/media/unitframes/ca_heraldry.dds|t " or ""
         local heraldryMessage = string.format("|r" .. icon .. "|cFFFFFF" .. linkBracket1[ChatAnnouncements.SV.BracketOptionItem] .. GetString(SI_LUIE_CA_CURRENCY_NAME_HERALDRY) .. linkBracket2[ChatAnnouncements.SV.BracketOptionItem] .. "|r|c" .. changeColor)
         formattedMessageP1 = (string.format(messageChange, messageP1, heraldryMessage))
+        ]]--
     elseif type == "LUIE_CURRENCY_RIDING_SPEED" or type == "LUIE_CURRENCY_RIDING_CAPACITY" or type == "LUIE_CURRENCY_RIDING_STAMINA" then
         local function ResolveRidingStats()
             -- if somevar then icon = else no
@@ -8719,92 +8725,6 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    local savedEndingPoints = 0 -- We reset this value after the throttled function sends info to the chat printer
-    local savedPointDelta = 0 -- We reset this value after the throttled function sends info to the chat printer
-
-    local function ChampionPointGainedPrinter()
-        -- adding one so that we are starting from the first gained point instead of the starting champion points
-        local startingPoints = savedEndingPoints - savedPointDelta + 1
-        local championPointsByType = { 0, 0, 0 }
-
-        while startingPoints <= savedEndingPoints do
-            local pointType = 1 -- TODO: Figure something out for this later
-            championPointsByType[pointType] = championPointsByType[pointType] + 1
-            startingPoints = startingPoints + 1
-        end
-
-        if ChatAnnouncements.SV.XP.ExperienceLevelUpCA then
-            local formattedString = ExperienceLevelUpColorize:Colorize(zo_strformat(SI_CHAMPION_POINT_EARNED, savedPointDelta) .. ": ")
-            eventManager:UnregisterForUpdate(moduleName .. "Printer")
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            eventManager:RegisterForUpdate(moduleName .. "Printer", 25, ChatAnnouncements.PrintQueuedMessages )
-        end
-
-        local secondLine = ""
-        if ChatAnnouncements.SV.XP.ExperienceLevelUpCA or ChatAnnouncements.SV.XP.ExperienceLevelUpCSA then
-            for pointType,amount in pairs(championPointsByType) do
-                if amount > 0 then
-                    local formattedString
-                    local icon = GetChampionPointAttributeHUDIcon(pointType)
-                    local formattedIcon = ChatAnnouncements.SV.XP.ExperienceLevelUpIcon and zo_strformat(" <<1>>", zo_iconFormat(icon, 16, 16)) or ""
-                    local constellationGroupName = ZO_Champion_GetUnformattedConstellationGroupNameFromAttribute(pointType)
-                    if ChatAnnouncements.SV.XP.ExperienceLevelColorByLevel then
-                        formattedString = ZO_CP_BAR_GRADIENT_COLORS[pointType][2]:Colorize(zo_strformat(SI_LUIE_CHAMPION_POINT_TYPE, amount, formattedIcon, constellationGroupName))
-                    else
-                        formattedString = ExperienceLevelUpColorize:Colorize(zo_strformat(SI_LUIE_CHAMPION_POINT_TYPE, amount, formattedIcon, constellationGroupName))
-                    end
-                    if ChatAnnouncements.SV.XP.ExperienceLevelUpCA then
-                        eventManager:UnregisterForUpdate(moduleName .. "Printer")
-                        g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
-                        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                        eventManager:RegisterForUpdate(moduleName .. "Printer", 25, ChatAnnouncements.PrintQueuedMessages )
-                    end
-                    if ChatAnnouncements.SV.XP.ExperienceLevelUpCSA then
-                        secondLine = secondLine .. zo_strformat(SI_CHAMPION_POINT_TYPE, amount, icon, constellationGroupName) .. "\n"
-                    end
-                end
-            end
-        end
-
-        if ChatAnnouncements.SV.XP.ExperienceLevelUpCSA then
-            local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.CHAMPION_POINT_GAINED)
-            messageParams:SetText(zo_strformat(SI_CHAMPION_POINT_EARNED, savedPointDelta), secondLine)
-            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_CHAMPION_POINT_GAINED)
-            messageParams:MarkSuppressIconFrame()
-            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
-        end
-
-        if ChatAnnouncements.SV.XP.ExperienceLevelUpAlert then
-            local text = zo_strformat("<<1>>!", GetString(SI_CHAMPION_POINT_EARNED, savedPointDelta))
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
-        end
-
-        if not ChatAnnouncements.SV.XP.ExperienceLevelUpCSA then
-            PlaySound(SOUNDS.CHAMPION_POINT_GAINED)
-        end
-
-        savedEndingPoints = 0
-        savedPointDelta = 0
-
-        eventManager:UnregisterForUpdate(moduleName .. "ChampionPointThrottle")
-    end
-
-    -- EVENT_CHAMPION_POINT_GAINED (CSA Handler)
-    local function ChampionPointGainedHook(pointDelta)
-        -- Print throttled XP value
-        eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
-        ChatAnnouncements.PrintBufferedXP()
-
-        savedEndingPoints = GetPlayerChampionPointsEarned()
-        savedPointDelta = savedPointDelta + pointDelta
-
-        eventManager:UnregisterForUpdate(moduleName .. "ChampionPointThrottle")
-        eventManager:RegisterForUpdate(moduleName .. "ChampionPointThrottle", 25, ChampionPointGainedPrinter)
-
-        return true
-    end
-
     -- Local variables and functions for DuelNearBoundaryHook()
     local DUEL_BOUNDARY_WARNING_LIFESPAN_MS = 2000
     local DUEL_BOUNDARY_WARNING_UPDATE_TIME_MS = 2100
@@ -9620,7 +9540,7 @@ function ChatAnnouncements.HookFunction()
     ZO_PreHook(csaHandlers, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, InventoryBagCapacityHook)
     ZO_PreHook(csaHandlers, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, InventoryBankCapacityHook)
     ZO_PreHook(csaHandlers, EVENT_CHAMPION_LEVEL_ACHIEVED, ChampionLevelAchievedHook)
-    ZO_PreHook(csaHandlers, EVENT_CHAMPION_POINT_GAINED, ChampionPointGainedHook)
+    --ZO_PreHook(csaHandlers, EVENT_CHAMPION_POINT_GAINED, ChampionPointGainedHook) -- TODO: Reimplement in the future
     ZO_PreHook(csaHandlers, EVENT_DUEL_NEAR_BOUNDARY, DuelNearBoundaryHook)
     ZO_PreHook(csaHandlers, EVENT_DUEL_FINISHED, DuelFinishedHook)
     ZO_PreHook(csaHandlers, EVENT_DUEL_COUNTDOWN, DuelCountdownHook)
@@ -10477,6 +10397,8 @@ function ChatAnnouncements.HookFunction()
     end
 
     -- Used to pull the cost of guild Heraldry change
+    -- TODO: Fix later
+    --[[
     ZO_GuildHeraldryManager_Shared.AttemptSaveAndExit = function(self, showBaseScene)
         local blocked = false
 
@@ -10498,6 +10420,7 @@ function ChatAnnouncements.HookFunction()
             self:ConfirmExit(showBaseScene)
         end
     end
+    ]]--
 
     -- Replace the default DeclineLFGReadyCheckNotification function to display the message that we are not in queue any longer + LFG activity join event.
     local zos_DeclineLFGReadyCheckNotification = DeclineLFGReadyCheckNotification
