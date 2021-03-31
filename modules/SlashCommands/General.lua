@@ -3,6 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
+LUIE.CampaignNames = { }
+
 local SlashCommands = LUIE.SlashCommands
 
 local printToChat = LUIE.PrintToChat
@@ -77,6 +79,8 @@ function SlashCommands.SlashTrade(option)
     TradeInviteByName(option)
 end
 
+local firstRun = true -- Changed by SlashCommands.SlashCampaignQ() when called, used to index available campaigns.
+
 -- Slash Command to queue for a campaign
 function SlashCommands.SlashCampaignQ(option)
     if option == "" then
@@ -97,32 +101,41 @@ function SlashCommands.SlashCampaignQ(option)
         return
     end
 
-    -- Compare names to campaigns available, join the campaign and bail out of the function if it is available.
-    for i = 1, 124 do
-        local compareName = string.lower(GetCampaignName(i))
-        local option = string.lower(option)
-        if compareName == option then
-            local campaignName
-            campaignName = GetCampaignName(i)
-
-            if GetAssignedCampaignId() == i or GetGuestCampaignId() == i then
-                QueueForCampaign (i)
-                printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName), true)
-                if LUIE.SV.TempAlertCampaign then
-                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName))
-                end
-                return
-            else
-                printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED), true)
-                if LUIE.SV.TempAlertCampaign then
-                    ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED))
-                end
-                PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-                return
+    -- The first time we call this function and it passes a check to make sure input is valid, fill a table with campaign names and their corresponding id.
+    if firstRun then
+        firstRun = false
+        for i = 1, 200 do -- TODO: Find a way to determine # of campaigns dynamically instead of iterating.
+            local campaignName = string.lower(GetCampaignName(i))
+            if campaignName ~= "" and campaignName ~= nil then
+                LUIE.CampaignNames[campaignName] = i
             end
         end
     end
 
+    -- If input is valid and the name is in the campaign table, try to queue for the campaign.
+    local option = string.lower(option)
+    if LUIE.CampaignNames[option] then
+        local campaignId = LUIE.CampaignNames[option]
+        local campaignName = GetCampaignName(campaignId)
+
+        if GetAssignedCampaignId() == campaignId or GetGuestCampaignId() == campaignId then
+            QueueForCampaign(campaignId)
+            printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName), true)
+            if LUIE.SV.TempAlertCampaign then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName))
+            end
+            return
+        else
+            printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED), true)
+            if LUIE.SV.TempAlertCampaign then
+                ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED))
+            end
+            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+            return
+        end
+    end
+
+    -- Otherwise, return an error message that the campaign doesn't exist.
     printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_WRONGCAMPAIGN), true)
     if LUIE.SV.TempAlertCampaign then
         ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_WRONGCAMPAIGN))
