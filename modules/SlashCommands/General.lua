@@ -83,6 +83,7 @@ local firstRun = true -- Changed by SlashCommands.SlashCampaignQ() when called, 
 
 -- Slash Command to queue for a campaign
 function SlashCommands.SlashCampaignQ(option)
+    -- Return an error message if no input is entered.
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NONAME), true)
         if LUIE.SV.TempAlertCampaign then
@@ -92,6 +93,7 @@ function SlashCommands.SlashCampaignQ(option)
         return
     end
 
+    -- Return an error message if the player is in a battleground. -- TODO: Verify you can't queue in a battleground, remove this if you can.
     if IsActiveWorldBattleground() then
         printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG), true)
         if LUIE.SV.TempAlertCampaign then
