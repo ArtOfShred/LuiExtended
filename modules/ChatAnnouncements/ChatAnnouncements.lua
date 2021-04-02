@@ -4015,7 +4015,7 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
     local delayTimer = 50
     local messageType = alwaysFirst and "CONTAINER" or "LOOT"
 
-    -- Printer function, seperate handling for listed entires (from crafting) or simple function that sends a message over to the printer.
+    -- Printer function, separate handling for listed entires (from crafting) or simple function that sends a message over to the printer.
     if receivedBy == "LUIE_RECEIVE_CRAFT" and (gainOrLoss == 1 or gainOrLoss == 3) and logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgradeFail then
         local itemString2 = itemString
 

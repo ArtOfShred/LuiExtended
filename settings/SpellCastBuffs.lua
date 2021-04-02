@@ -763,6 +763,17 @@ function SpellCastBuffs.CreateSettings()
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
             {
+                -- Separate control for player effects
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_SEPCTRL)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SEPCTRL_TP),
+                getFunc = function() return Settings.LongTermEffectsSeparate end,
+                setFunc = function(value) Settings.LongTermEffectsSeparate = value SpellCastBuffs.Reset() end,
+                width = "full",
+                default = Defaults.LongTermEffectsSeparate,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and Settings.LongTermEffects_Player ) end,
+            },
+            {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_TARGET),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_TARGET_TP),
@@ -773,24 +784,8 @@ function SpellCastBuffs.CreateSettings()
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
             {
-                -- Seperate control for player effects
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SEPCTRL),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SEPCTRL_TP),
-                getFunc = function() return Settings.LongTermEffectsSeparate end,
-                setFunc = function(value) Settings.LongTermEffectsSeparate = value SpellCastBuffs.Reset() end,
-                width = "full",
-                default = Defaults.LongTermEffectsSeparate,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and Settings.LongTermEffects_Player ) end,
+            type = "divider",
             },
-        },
-    }
-
-    -- Buffs&Debuffs - Long Term Effect Filters Options Submenu
-    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-        type = "submenu",
-        name = GetString(SI_LUIE_LAM_BUFF_FILTER_LONG_HEADER),
-        controls = {
             {
                 -- Long Term - Disguises
                 type = "checkbox",
@@ -1139,11 +1134,35 @@ function SpellCastBuffs.CreateSettings()
         },
     }
 
-    -- Buffs&Debuffs - Short Term Effect Filters Options Submenu
+    -- Buffs&Debuffs - Short Term Effects Options Submenu
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_BUFF_MISC_HEADER),
         controls = {
+            {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_SHORTTERM_SELF),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_SHORTTERM_SELF_TP),
+                getFunc = function() return Settings.ShortTermEffects_Player end,
+                setFunc = function(value) Settings.ShortTermEffects_Player = value SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = Defaults.ShortTermEffects_Player,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_SHORTTERM_TARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_SHORTTERM_TARGET_TP),
+                getFunc = function() return Settings.ShortTermEffects_Target end,
+                setFunc = function(value) Settings.ShortTermEffects_Target = value SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = Defaults.ShortTermEffects_Target,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+
+            {
+            type = "divider",
+            },
             --[[
             {
                 -- Show Sprint Icon

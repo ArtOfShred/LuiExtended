@@ -382,7 +382,7 @@ function LUIE.InitializeHooks()
 
                         local tooltipText
 
-                        -- Use seperate Veteran difficulty tooltip if applicable.
+                        -- Use separate Veteran difficulty tooltip if applicable.
                         if LUIE.ResolveVeteranDifficulty() == true and LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltipVet then
                             tooltipText = zo_strformat(LUIE.Data.Effects.EffectOverride[abilityId].tooltipVet, timer, value2, value3)
                         else

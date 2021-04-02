@@ -75,6 +75,8 @@ SpellCastBuffs.Defaults = {
     lockPositionToUnitFrames            = true,
     LongTermEffects_Player              = true,
     LongTermEffects_Target              = true,
+    ShortTermEffects_Player             = true,
+    ShortTermEffects_Target             = true,
     IgnoreMundusPlayer                  = false,
     IgnoreMundusTarget                  = false,
     IgnoreVampPlayer                    = false,
@@ -1182,7 +1184,7 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
 
                 tooltipText = (Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltip) and zo_strformat(Effects.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
 
-                -- Use seperate Veteran difficulty tooltip if applicable.
+                -- Use separate Veteran difficulty tooltip if applicable.
                 if LUIE.ResolveVeteranDifficulty() == true and Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltipVet then
                     tooltipText = zo_strformat(Effects.EffectOverride[control.effectId].tooltipVet, duration, value2, value3)
                 end
@@ -3159,7 +3161,11 @@ function SpellCastBuffs.OnUpdate(currentTime)
                     -- Filter Long-Term effects:
                     -- Always show debuffs and short-term buffs
                     if v.type == 2 or v.forced == "short" or not (v.forced == "long" or v.ends == nil or v.dur == 0) then
-                        table.insert(buffsSorted[container], v)
+                        if v.target == "reticleover" and SpellCastBuffs.SV.ShortTermEffects_Target then
+                            table.insert(buffsSorted[container], v)
+                        elseif v.target == "player" and SpellCastBuffs.SV.ShortTermEffects_Player then
+                            table.insert(buffsSorted[container], v)
+                        end
                     -- Show long-term target buffs in same container
                     elseif v.target == "reticleover" and SpellCastBuffs.SV.LongTermEffects_Target then
                         table.insert(buffsSorted[container], v)

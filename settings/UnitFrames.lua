@@ -409,8 +409,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Separate Shield Bar
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_TP),
+                name = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPARATE),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPARATE_TP),
                 getFunc = function() return Settings.CustomShieldBarSeparate end,
                 setFunc = function(value) Settings.CustomShieldBarSeparate = value end,
                 width = "full",
@@ -421,8 +421,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Separate Shield Bar Height
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_HEIGHT)),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_HEIGHT_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPARATE_HEIGHT)),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPARATE_HEIGHT_TP),
                 min = 4, max = 12, step = 1,
                 getFunc = function() return Settings.CustomShieldBarHeight end,
                 setFunc = function(value) Settings.CustomShieldBarHeight = value UnitFrames.CustomFramesApplyLayoutPlayer(true) UnitFrames.CustomFramesApplyLayoutGroup() end,
