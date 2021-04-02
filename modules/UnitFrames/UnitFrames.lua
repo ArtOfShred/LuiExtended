@@ -502,12 +502,13 @@ function UnitFrames.AltBar_OnMouseEnterXP(control)
     InitializeTooltip(InformationTooltip, control, BOTTOM, 0, -10)
 
     SetTooltipText(InformationTooltip, zo_strformat(SI_LEVEL_DISPLAY, label, level))
-    if not isMax then
-        -- TODO: Maybe add a line here if Champion XP is capped
+    if isMax then
+        InformationTooltip:AddLine(GetString(SI_EXPERIENCE_LIMIT_REACHED))
+    else
         InformationTooltip:AddLine(zo_strformat(SI_EXPERIENCE_CURRENT_MAX_PERCENT, ZO_CommaDelimitNumber(current), ZO_CommaDelimitNumber(levelSize), percentageXP))
-    end
-    if enlightenedPool > 0 then
-        InformationTooltip:AddLine(zo_strformat(SI_EXPERIENCE_CHAMPION_ENLIGHTENED_TOOLTIP, enlightenedValue), nil, ZO_SUCCEEDED_TEXT:UnpackRGB())
+        if enlightenedPool > 0 then
+            InformationTooltip:AddLine(zo_strformat(SI_EXPERIENCE_CHAMPION_ENLIGHTENED_TOOLTIP, enlightenedValue), nil, ZO_SUCCEEDED_TEXT:UnpackRGB())
+        end
     end
 end
 
