@@ -4296,13 +4296,16 @@ Effects.EffectOverride = {
     -- Test
     [16415] = { tooltip = Tooltips.Generic_Test }, -- Test
 
+    -- Block
+    [974] = { dynamicTooltip = true }, -- Brace
+
     -- Roll Dodge
     [29721] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_roll_dodge.dds', tooltip = Tooltips.Innate_Immobilize_Immunity }, -- Immobilize Immunity
     [119068] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_roll_dodge.dds', tooltip = Tooltips.Innate_Immobilize_Immunity }, -- Immobilize Immunity
     [69143] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_dodge_fatigue.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Innate_Dodge_Fatigue, displayStacks = true, stack = 1, maxStacks = 100 }, -- Dodge Fatigue
 
     -- Crouch
-    [20299] = { tooltip = Tooltips.Innate_Hidden }, -- Sneak
+    [20299] = { dynamicTooltip = true }, -- Sneak
     [20309] = { tooltip = Tooltips.Innate_Invisible }, -- Crouch
     [20301] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_hidden.dds', name = Abilities.Innate_Crouch }, -- Crouch Drain
     [26245] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = Abilities.Innate_Stealth_Stun, tooltip = Tooltips.Generic_Stun }, -- Slam Stun (Stun from crouch attack)

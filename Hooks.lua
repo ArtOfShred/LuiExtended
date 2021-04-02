@@ -381,6 +381,8 @@ function LUIE.InitializeHooks()
                         timer = math.floor((timer * 10) + 0.5) / 10
 
                         local tooltipText
+
+                        -- Use seperate Veteran difficulty tooltip if applicable.
                         if LUIE.ResolveVeteranDifficulty() == true and LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltipVet then
                             tooltipText = zo_strformat(LUIE.Data.Effects.EffectOverride[abilityId].tooltipVet, timer, value2, value3)
                         else
@@ -400,6 +402,11 @@ function LUIE.InitializeHooks()
                                 tooltipText = GetAbilityEffectDescription(buffSlot)
                                 tooltipText = LUIE.UpdateMundusTooltipSyntax(abilityId, tooltipText)
                             end
+                        end
+
+                        -- Dynamic Tooltip if present
+                        if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].dynamicTooltip then
+                            tooltipText = LUIE.DynamicTooltip(abilityId)
                         end
 
                         if tooltipText ~= "" then

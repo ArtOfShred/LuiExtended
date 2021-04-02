@@ -267,11 +267,9 @@ LUIE.Data.Tooltips = {
     Innate_Immobilize_Immunity                      = GetString(SI_LUIE_SKILL_IMMOBILIZE_IMMUNITY_TP),
     Innate_Snare_Immobilize_Immunity                = GetString(SI_LUIE_SKILL_SNARE_IMMOBILIZE_IMMUNITY_TP),
     Innate_Dodge_Fatigue                            = GetString(SI_LUIE_SKILL_DODGE_FATIGUE_TP),
-    Innate_Hidden                                   = GetString(SI_LUIE_SKILL_HIDDEN_TP),
     Innate_Invisible                                = GetString(SI_LUIE_SKILL_INVISIBLE_TP),
     --Innate_Sprint                                   = GetString(SI_LUIE_SKILL_SPRINT_TP),
     --Innate_Gallop                                   = GetString(SI_LUIE_SKILL_GALLOP_TP),
-    --Innate_Brace                                    = GetString(SI_LUIE_SKILL_BRACE_TP),
     Innate_Resurrection_Immunity                    = GetString(SI_LUIE_SKILL_RESURRECTION_IMMUNITY_TP),
     Innate_Taunt                                    = GetString(SI_LUIE_SKILL_TAUNT_TP),
     Innate_Disguised                                = GetString(SI_LUIE_SKILL_DISGUISE_TP),
@@ -1526,9 +1524,31 @@ LUIE.Data.Tooltips = {
 
 }
 
---[[
-Possibly use these at some point
+-- Returns dynamic tooltips when called by Tooltip function
+function LUIE.DynamicTooltip(abilityId)
+    -- Brace
+    if abilityId == 974 then
+        local _, _, mitigation = GetAdvancedStatValue(ADVANCED_STAT_DISPLAY_TYPE_BLOCK_MITIGATION)
+        local _, _, speed = GetAdvancedStatValue(ADVANCED_STAT_DISPLAY_TYPE_BLOCK_SPEED)
+        local finalSpeed = 100 - speed
+        local _, cost = GetAdvancedStatValue(ADVANCED_STAT_DISPLAY_TYPE_BLOCK_COST)
+        tooltip = zo_strformat(GetString(SI_LUIE_SKILL_BRACE_TP), mitigation, finalSpeed, cost)
+    end
+    -- Crouch
+    if abilityId == 20299 then
+        local _, _, speed = GetAdvancedStatValue(ADVANCED_STAT_DISPLAY_TYPE_SNEAK_SPEED_REDUCTION)
+        local _, cost = GetAdvancedStatValue(ADVANCED_STAT_DISPLAY_TYPE_SNEAK_COST)
+        if speed <= 0 or speed >= 100 then
+            tooltip = zo_strformat(GetString(SI_LUIE_SKILL_HIDDEN_NO_SPEED_TP), cost)
+        else
+            local finalSpeed = 100 - speed
+            tooltip = zo_strformat(GetString(SI_LUIE_SKILL_HIDDEN_TP), finalSpeed, cost)
+        end
+    end
+    return tooltip
+end
 
+--[[
 function LUIE.ProcessTooltipType(input, tooltip)
     -- dummy func, maybe use
 end

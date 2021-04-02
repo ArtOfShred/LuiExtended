@@ -93,7 +93,7 @@ function SlashCommands.SlashCampaignQ(option)
         return
     end
 
-    -- Return an error message if the player is in a battleground. -- TODO: Verify you can't queue in a battleground, remove this if you can.
+    -- Return an error message if the player is in a battleground (can't queue for campaigns in a battleground).
     if IsActiveWorldBattleground() then
         printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG), true)
         if LUIE.SV.TempAlertCampaign then

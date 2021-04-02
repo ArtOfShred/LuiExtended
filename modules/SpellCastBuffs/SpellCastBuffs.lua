@@ -1205,6 +1205,11 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
                     end
                 end
 
+                -- Dynamic Tooltip if present
+                if Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].dynamicTooltip then
+                    tooltipText = LUIE.DynamicTooltip(control.effectId)
+                end
+
             else
                 duration = 0
             end
@@ -3184,6 +3189,22 @@ function SpellCastBuffs.OnUpdate(currentTime)
         if isProminent then
             SpellCastBuffs.updateBar( currentTime, buffsSorted[container], container )
         end
+    end
+
+    -- Display Block buff for player if enabled
+    if IsBlockActive() and SpellCastBuffs.SV.ShowBlockPlayer then
+        if not IsPlayerStunned() then -- Is Block Active returns true when the player is stunned currently.
+            SpellCastBuffs.EffectsList["player1"][Abilities.Innate_Brace] = {
+                target="player", type=1,
+                id=974, name=Abilities.Innate_Brace, icon='LuiExtended/media/icons/abilities/ability_innate_block.dds',
+                dur=0, starts=currentTime, ends=nil,
+                restart=true, iconNum=0,
+                forced = "short",
+                toggle = true,
+            }
+        end
+    else
+        SpellCastBuffs.EffectsList["player1"][Abilities.Innate_Brace] = nil
     end
 
 end
