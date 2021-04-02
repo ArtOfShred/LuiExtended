@@ -348,6 +348,15 @@ local function SavePosition(panel)
     panelSettings.dimensions = dimensions
 end
 
+-- Bulk list add from menu buttons
+function CombatText.AddBulkToCustomList(list, table)
+    if table ~= nil then
+        for k, v in pairs(table) do
+            CombatText.AddToCustomList(list, k)
+        end
+    end
+end
+
 function CombatText.ClearCustomList(list)
     local listRef = list == CombatText.SV.blacklist and GetString(SI_LUIE_CUSTOM_LIST_CT_BLACKLIST) or ""
     for k, v in pairs(list) do
@@ -477,4 +486,13 @@ function CombatText.Initialize(enabled)
     LUIE.CombatTextPointEventViewer:New(poolManager, LMP)
     LUIE.CombatTextResourceEventViewer:New(poolManager, LMP)
     LUIE.CombatTextDeathViewer:New(poolManager, LMP)
+
+    -- If we don't have an AdjustVars variable set then set Crouch Drain to default on the blacklist.
+    if (LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVars ~= 1) then
+        local list = CombatText.SV.blacklist
+        list[20301] = true
+    end
+    -- Set AdjustVars = 1 so this doesn't occur again.
+    LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVars = 1
+
 end

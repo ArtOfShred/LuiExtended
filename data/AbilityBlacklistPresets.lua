@@ -3,11 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
--- Quests namespace
 LUIE.Data.AbilityBlacklistPresets = {}
 local BlacklistPresets = LUIE.Data.AbilityBlacklistPresets
-
-local Abilities = LUIE.Data.Abilities
 
 -- Minor Buffs
 BlacklistPresets.MinorBuffs = {

@@ -5,6 +5,7 @@
 
 local CombatText = LUIE.CombatText
 local CombatTextConstants = LUIE.Data.CombatTextConstants
+local BlacklistPresets = LUIE.Data.CombatTextBlacklistPresets
 
 local zo_strformat = zo_strformat
 
@@ -166,6 +167,57 @@ function CombatText.CreateSettings()
                 type = "description",
                 text = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_DESCRIPT),
             },
+
+            -- Blacklist Button - Crouch Drain
+            {
+                type = "button",
+                name = GetString(SI_LUIE_LAM_CT_BLACKLIST_ADD_CROUCH),
+                tooltip = GetString(SI_LUIE_LAM_CT_BLACKLIST_ADD_CROUCH_TP),
+                func = function() CombatText.AddBulkToCustomList(Settings.blacklist, BlacklistPresets.CrouchDrain) LUIE_BlacklistCT:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,
+                width = "half",
+            },
+            -- Blacklist Button - Sets
+            {
+                type = "button",
+                name = GetString(SI_LUIE_LAM_CT_BLACKLIST_ADD_SETS),
+                tooltip = GetString(SI_LUIE_LAM_CT_BLACKLIST_ADD_SETS_TP),
+                func = function() CombatText.AddBulkToCustomList(Settings.blacklist, BlacklistPresets.Sets) LUIE_BlacklistCT:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,
+                width = "half",
+            },
+            -- Blacklist Button - Sorcerer
+            {
+                type = "button",
+                name = GetString(SI_LUIE_LAM_CT_BLACKLIST_ADD_SORCERER),
+                tooltip = GetString(SI_LUIE_LAM_CT_BLACKLIST_ADD_SORCERER_TP),
+                func = function() CombatText.AddBulkToCustomList(Settings.blacklist, BlacklistPresets.Sorcerer) LUIE_BlacklistCT:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,
+                width = "half",
+            },
+            -- Blacklist Button - Templar
+            {
+                type = "button",
+                name = GetString(SI_LUIE_LAM_CT_BLACKLIST_ADD_TEMPLAR),
+                tooltip = GetString(SI_LUIE_LAM_CT_BLACKLIST_ADD_TEMPLAR_TP),
+                func = function() CombatText.AddBulkToCustomList(Settings.blacklist, BlacklistPresets.Templar) LUIE_BlacklistCT:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,
+                width = "half",
+            },
+            -- Blacklist Button - Warden
+            {
+                type = "button",
+                name = GetString(SI_LUIE_LAM_CT_BLACKLIST_ADD_WARDEN),
+                tooltip = GetString(SI_LUIE_LAM_CT_BLACKLIST_ADD_WARDEN_TP),
+                func = function() CombatText.AddBulkToCustomList(Settings.blacklist, BlacklistPresets.Warden) LUIE_BlacklistCT:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,
+                width = "half",
+            },
+            -- Blacklist Button - Necromancer
+            {
+                type = "button",
+                name = GetString(SI_LUIE_LAM_CT_BLACKLIST_ADD_NECROMANCER),
+                tooltip = GetString(SI_LUIE_LAM_CT_BLACKLIST_ADD_NECROMANCER_TP),
+                func = function() CombatText.AddBulkToCustomList(Settings.blacklist, BlacklistPresets.Necromancer) LUIE_BlacklistCT:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,
+                width = "half",
+            },
+
+
             {
                 -- Clear Blacklist
                 type = "button",

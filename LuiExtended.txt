@@ -76,6 +76,7 @@ data/DebugTable.lua
 data/Quests.lua
 data/PetNames.lua
 data/AbilityBlacklistPresets.lua
+data/CombatTextBlacklistPresets.lua
 
 modules/ChatAnnouncements/ChatAnnouncements.lua
 

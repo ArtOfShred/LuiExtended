@@ -2645,7 +2645,6 @@ Effects.EffectMergeId = {
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.EffectHideSCT = {
     -- Player - Basic
-    [20301] = true, -- Crouch Drain
     [55400] = true, -- Magicka Restore
     [55401] = true, -- Magicka Restore
     [45982] = true, -- Bash Stun
@@ -2671,7 +2670,6 @@ Effects.EffectHideSCT = {
     [75706] = true, -- Bahraha's Curse (of Bahraha's Curse)
     [34870] = true, -- Wilderqueen's Arch (of the Wilderqueen)
     [84357] = true, -- Hand of Mephala Webbing (of Mephala's Hand)
-    [135919] = true, -- Spell Parasite (Spell Parasite's)
 
     ----------------------------
     -- Nightblade
@@ -2695,10 +2693,6 @@ Effects.EffectHideSCT = {
     -- Sorcerer
     ----------------------------
 
-    [114903] = true, -- Dark Exchange
-    [114908] = true, -- Dark Deal
-    [114909] = true, -- Dark Conversion
-
     [29824] = true, -- Negate Magic
     [47147] = true, -- Negate Magic
     [47160] = true, -- Suppression Field
@@ -2720,19 +2714,14 @@ Effects.EffectHideSCT = {
     [80261] = true, -- Sacred Ground (Sacred Ground) - Rite of Passage
 
     -- Actives
-    [76908] = true, -- Puncturuing Strikes
+    [76908] = true, -- Puncturing Strikes
     [76912] = true, -- Biting Jabs
     [76916] = true, -- Puncturing Sweep
-
-    [37009] = true, -- Channeled Focus (Channeled Focus)
-    [114842] = true, -- Restoring Focus (Restoring Focus)
 
     ----------------------------
     -- Warden
     ----------------------------
 
-    [114854] = true, -- Betty Netch (Blue Betty)
-    [114853] = true, -- Bull Netch (Bull Netch)
     [86238] = true, -- Impaling Shards (Impaling Shards)
     [87448] = true, -- Gripping Shards (Gripping Shards)
     [88801] = true, -- Winter's Revenge (Gripping Shards)
@@ -2743,8 +2732,6 @@ Effects.EffectHideSCT = {
     ----------------------------
     -- Necromancer
     ----------------------------
-
-    [118014] = true, -- Mystic Siphon (Mystic Siphon)
     [121513] = true, -- Grave Grasp (Grave Grasp)
     [143915] = true, -- Grave Grasp (Grave Grasp)
     [143917] = true, -- Grave Grasp (Grave Grasp)
@@ -2754,7 +2741,6 @@ Effects.EffectHideSCT = {
     [118354] = true, -- Empowering Grasp (Empowering Grasp)
     [143948] = true, -- Empowering Grasp (Empowering Grasp)
     [143949] = true, -- Empowering Grasp (Empowering Grasp)
-    [123233] = true, -- Mortal Coil (Mortal Coil)
 
     ----------------------------
     -- One Hand and Shield
