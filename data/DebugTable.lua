@@ -1106,6 +1106,14 @@ LUIE.DebugAuras = {
     [130808] = true, -- Concussion (Shock Status Effect - Siege)
     [130809] = true, -- Minor Maim (Shock Status Effect - Siege)
     [130810] = true, -- Concussion (Shock Status Effect - Siege)
+    [148800] = true, -- Sundered (Physical Status Effect)
+    [148803] = true, -- Minor Breach (Physical Status Effect)
+    [149573] = true, -- Sundered (Physical Status Effect - Siege)
+    [149576] = true, -- Minor Breach (Physical Status Effect - Siege)
+    [148801] = true, -- Hemorrhaging (Bleed Status Effect)
+    [148808] = true, -- Minor Mangle (Bleed Status Effect)
+    [148797] = true, -- Overcharged (Magic Status Effect)
+    [148798] = true, -- Minor Magickasteal (Magic Status Effect)
 
     -------------------------------------
     -- EQUIPMENT ------------------------
@@ -3761,7 +3769,6 @@ LUIE.DebugAuras = {
     [25260] = true, -- Surprise Attack (Surprise Attack)
     [34733] = true, -- Off Balance (Surprise Attack)
     [34732] = true, -- Surprise Attack (Surprise Attack)
-    [34734] = true, -- Surprise Attack (Surprise Attack)
 
     [34738] = true, -- Concealed Weapon Passive (Concealed Weapon)
     [61155] = true, -- Concealed Weapon (Concealed Weapon)

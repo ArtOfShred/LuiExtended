@@ -2125,7 +2125,7 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
         if result ~= ACTION_RESULT_DAMAGE and
            result ~= ACTION_RESULT_DAMAGE_SHIELDED and
            result ~= ACTION_RESULT_DODGED and
-           result ~=ACTION_RESULT_CRITICAL_DAMAGE and
+           result ~= ACTION_RESULT_CRITICAL_DAMAGE and
            result ~= ACTION_RESULT_CRITICAL_HEAL and
            result ~= ACTION_RESULT_HEAL and
            result ~= ACTION_RESULT_BLOCKED and
@@ -2260,7 +2260,7 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
             forced = "short",
             restart=true, iconNum=0,
             unbreakable=unbreakable,
-            fakeDuration= true,
+            fakeDuration=true,
             groundLabel = groundLabel,
             toggle = toggle,
             stack = stack,
@@ -3246,7 +3246,6 @@ function SpellCastBuffs.updateBar(currentTime, sortedList, container)
         if effect.overrideDur then
             auraStarts = auraEnds - effect.overrideDur
         end
-        local fakeDuration = effect.fakeDuration
 
         -- If this isn't a permanent duration buff then update the bar on every tick
         if buff and buff.bar and buff.bar.bar then

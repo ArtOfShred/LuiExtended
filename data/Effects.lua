@@ -466,9 +466,6 @@ Effects.DebuffDisplayOverrideId = {
     -- Necromancer
     [118618] = true, -- Pure Agony (Agony Totem)
 
-    -- Nightblade
-    [34734] = true, -- Surprise Attack (Surprise Attack)
-
     -- Warden
     [87560] = true, -- Frozen Gate Root (Frozen Gate)
     [92039] = true, -- Frozen Gate Root (Frozen Device)
@@ -1130,7 +1127,7 @@ Effects.BarHighlightOverride = {
 
     -- Shadow
     [25255] = { newId = 33185 }, -- Veiled Strike
-    [25260] = { newId = 34734 }, -- Surprise Attack
+    --[25260] = { newId = xxxxx }, -- Surprise Attack -- TODO: Update
     [25267] = { newId = 34736 }, -- Concealed Weapon
     [25375] = { newId = 25376 }, -- Shadow Cloak
     [25380] = { newId = 62141 }, -- Shadowy Disguise
@@ -3560,6 +3557,10 @@ Effects.EffectOverride = {
     [21929] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_poisoned.dds', tooltip = Tooltips.Generic_Poison, tooltipValue2 = 2 }, -- Poisoned (Poison Status Effect)
     [21487] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_concussion.dds' }, -- Concussion (Shock Status Effect)
     [130808] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_concussion.dds' }, -- Concussion (Shock Status Effect - Siege)
+    [148800] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_sundered.dds' }, -- Sundered (Physical Status Effect)
+    [149573] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_sundered.dds' }, -- Sundered (Physical Status Effect - Siege)
+    [148801] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_hemorrhaging.dds', tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 2 }, -- Hemorrhaging (Bleed Status Effect)
+    [148797] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_overcharged.dds' }, -- Overcharged (Magic Status Effect)
 
     ----------------------------------------------------------------
     -- MUNDUS STONE BOONS ------------------------------------------
@@ -4691,7 +4692,6 @@ Effects.EffectOverride = {
     [33185] = { tooltip = Tooltips.Generic_Stun }, -- Veiled Strike (Veiled Strike)
     [34733] = { tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off Balance (Surprise Attack)
     [34732] = { tooltip = Tooltips.Generic_Stun }, -- Surprise Attack (Surprise Attack)
-    [34734] = { tooltip = Tooltips.Skill_Surprise_Attack }, -- Surprise Attack (Surprise Attack)
     [34737] = { tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off Balance (Concealed Weapon)
     [34736] = { tooltip = Tooltips.Generic_Stun }, -- Concealed Weapon (Concealed Weapon)
 
