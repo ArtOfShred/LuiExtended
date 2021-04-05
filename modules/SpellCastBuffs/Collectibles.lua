@@ -108,6 +108,12 @@ function SpellCastBuffs.CollectibleBuff()
         return
     end
 
+    -- Bail out if we are in a house
+    local currentHouse = GetCurrentZoneHouseId()
+    if currentHouse ~= nil and currentHouse > 0 then
+        return
+    end
+
     -- Pets
     if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0 and not SpellCastBuffs.SV.IgnorePet then
         local collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)

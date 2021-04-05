@@ -1556,6 +1556,7 @@ function LUIE.DynamicTooltip(abilityId)
                  resourceType = GetString(SI_ATTRIBUTES2) -- Magicka
              end
         end
+        mitigation = math.floor(mitigation * 100 + 0.5) / 100 -- Remove decimal places -- TODO: Recheck this if they ever update the function itself to round
         tooltip = zo_strformat(GetString(SI_LUIE_SKILL_BRACE_TP), mitigation, finalSpeed, cost, resourceType)
     end
     -- Crouch

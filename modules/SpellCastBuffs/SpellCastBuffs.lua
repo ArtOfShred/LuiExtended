@@ -198,13 +198,13 @@ function SpellCastBuffs.DetermineContext(context, abilityId, abilityName, castBy
     if (SpellCastBuffs.SV.PromDebuffTable[abilityId] or SpellCastBuffs.SV.PromDebuffTable[abilityName]) then
         if context == "player1" then
             context = "promd_player"
-        elseif (context == "reticleover2" and castByPlayer == COMBAT_UNIT_TYPE_PLAYER) or abilityId == 134599 then -- Exception for Off Balance Immunity
+        elseif (context == "reticleover2" and castByPlayer == COMBAT_UNIT_TYPE_PLAYER) then
             context = "promd_target"
         end
     elseif (SpellCastBuffs.SV.PromBuffTable[abilityId] or SpellCastBuffs.SV.PromBuffTable[abilityName]) then
         if context == "player1" then
             context = "promb_player"
-        elseif (context == "reticleover2" and castByPlayer == COMBAT_UNIT_TYPE_PLAYER) or abilityId == 134599 then -- Exception for Off Balance Immunity
+        elseif (context == "reticleover2" and castByPlayer == COMBAT_UNIT_TYPE_PLAYER) then
             context = "promb_target"
         end
     end
@@ -1849,7 +1849,21 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
 
     -- Where the new icon will go into
     local context = unitTag .. effectType
-    context = SpellCastBuffs.DetermineContext(context, abilityId, effectName, castByPlayer)
+
+    -- Override for Off-Balance Immunity to show it as a prominent debuff for tracking.
+    if abilityId == 134599 then
+        if context == "reticleover1" then
+            if (SpellCastBuffs.SV.PromDebuffTable[abilityId] or SpellCastBuffs.SV.PromDebuffTable[effectName]) then
+                context = "promd_target"
+            end
+        elseif context == "player1" then
+            if (SpellCastBuffs.SV.PromBuffTable[abilityId] or SpellCastBuffs.SV.PromBuffTable[effectName]) then
+                context = "promb_player"
+            end
+        end
+    else
+        context = SpellCastBuffs.DetermineContext(context, abilityId, effectName, castByPlayer)
+    end
 
     -- Exit here if there is no container to hold this effect
     if not containerRouting[context] then
@@ -2562,7 +2576,7 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
             effectName = Effects.FakePlayerBuffs[finalId] and Effects.FakePlayerBuffs[finalId].name or GetAbilityName(finalId)
         end
         -- TODO: Do we want to enable self debuffs from this to show as prominent (ICD for sets for example?)
-        local context = SpellCastBuffs.DetermineContextSimple(context, finalId, effectName)
+        context = SpellCastBuffs.DetermineContextSimple(context, finalId, effectName)
         SpellCastBuffs.EffectsList[context][finalId] = nil
         local forcedType = Effects.FakePlayerBuffs[abilityId].long and "long" or "short"
         local beginTime = GetGameTimeMilliseconds()
@@ -3063,7 +3077,7 @@ function SpellCastBuffs.AddNameAura()
 
             local buffType = v.debuff or 1
             local context = v.debuff and "reticleover2" or "reticleover1"
-            local context = SpellCastBuffs.DetermineContext(context, abilityId, abilityName)
+            context = SpellCastBuffs.DetermineContext(context, abilityId, abilityName)
             SpellCastBuffs.EffectsList[context]["Name Specific Buff" .. k] = {
                 target=SpellCastBuffs.DetermineTarget(context), type=buffType,
                 id= v.id, name= abilityName, icon= abilityIcon,

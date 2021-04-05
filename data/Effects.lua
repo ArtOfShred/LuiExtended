@@ -1648,7 +1648,7 @@ Effects.AddNameAura = {
     [Unitnames.Dummy_Target_Centurion_Robust_Refabricated] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_Frost_Atronach] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_Iron_Atronach] = { [1] = { id = 33097 } },
-    [Unitnames.Dummy_Target_Atronach_Trial] = { [1] = { id = 33097 }, [2] = { id = 61742, debuff = true }, [3] = { id = 61743, debuff = true }, [4] = { id = 79717, debuff = true }, [5] = { id = 106754, debuff = true }, [6] = { id = 145975, debuff = true } },
+    [Unitnames.Dummy_Target_Atronach_Trial] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_Mournful_Aegis] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_Skeleton_Humanoid] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_Skeleton_Khajiit] = { [1] = { id = 33097 } },
@@ -8428,6 +8428,7 @@ Effects.EffectOverride = {
     [8813] = { icon = 'LuiExtended/media/icons/abilities/ability_ghost_double_strike.dds' }, -- Double Strike (Ghost)
     [18514] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_chill_touch.dds' }, -- Chill Touch (Ghost)
     [18515] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_chill_touch.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Chill Touch (Ghost)
+    [18765] = { hide = true }, -- Haunting Spectre (Ghost)
     [19137] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_haunting_spectre.dds' }, -- Haunting Spectre (Ghost)
     [19138] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_haunting_spectre.dds' }, -- Haunting Spectre (Ghost)
     [19140] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_haunting_spectre.dds', tooltip = Tooltips.Generic_Fear }, -- Haunting Spectre (Ghost)

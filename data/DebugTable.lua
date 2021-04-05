@@ -9883,6 +9883,7 @@ LUIE.DebugAuras = {
     [8813] = true, -- Double Strike -- Ghost
     [18514] = true, -- Chill Touch -- Ghost
     [18515] = true, -- Chill Touch -- Ghost
+    [18765] = true, -- Haunting Spectre -- Ghost
     [18766] = true, -- Haunting Spectre -- Ghost
     [19137] = true, -- Haunting Spectre -- Ghost
     [19138] = true, -- Haunting Spectre -- Ghost
