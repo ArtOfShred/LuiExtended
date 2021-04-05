@@ -30,8 +30,8 @@ Effects.IsWeaponAttack = {
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.IsToggle = {
     -- Innate
-    [20299] = true, -- Sneak (Innate) -- Used for hidden
-    [20301] = true, -- Crouch (Innate) -- Used for invisibility
+    [20299] = true, -- Sneak -- Used for hidden
+    [20309] = true, -- Hidden -- Used for invisibility
     [40165] = true, -- Scene Choreo Brace (Monster Fight))
     [29761] = true, -- Brace (Guard)
 
@@ -487,7 +487,7 @@ Effects.DebuffDisplayOverrideIdAlways = {
     ----------------------------------------------------------------
 
     [134599] = true, -- Off Balance Immunity
-    [132831] = true, -- Major Vulnerability Invulnerability
+    --[132831] = true, -- Major Vulnerability Invulnerability -- TODO: Likely remove
 
     ----------------------------------------------------------------
     -- NPC ABILITIES -----------------------------------------------
@@ -736,9 +736,9 @@ Effects.EffectGroundDisplay = {
     [80540] = { icon = 'esoui/art/icons/ability_templar_cleansing_ritual.dds', buff = true, debuff = false, ground = false }, -- Cleansing Ritual (Cleansing Ritual)
     [80547] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds', buff = true, debuff = false, ground = false }, -- Ritual of Retribution (Ritual of Retribution)
     [80553] = { icon = 'esoui/art/icons/ability_templar_extended_ritual.dds', buff = true, debuff = false, ground = false }, -- Extended Ritual (Extended Ritual)
-    --[22234] = { buff = true, debuff = false, ground = false }, -- Rune Focus (Rune Focus)
-    --[22240] = { buff = true, debuff = false, ground = false }, -- Channeled Focus (Channeled Focus)
-    --[22237] = { buff = true, debuff = false, ground = false }, -- Restoring Focus (Restoring Focus)
+    --[22234] = { buff = true, debuff = false, ground = false }, -- Rune Focus (Rune Focus) -- TODO: Check this?
+    --[22240] = { buff = true, debuff = false, ground = false }, -- Channeled Focus (Channeled Focus) -- TODO: Check this?
+    --[22237] = { buff = true, debuff = false, ground = false }, -- Restoring Focus (Restoring Focus) -- TODO: Check this?
 
     -- Warden
     [86161] = { buff = false, debuff = false, ground = true }, -- Impaling Shards (Impaling Shards)
@@ -2921,9 +2921,9 @@ Effects.EffectHideSCT = {
 -- Using a separate chart for ZOS Artificial Effects just in case this is significantly expanded at any point -- Overrides Artificial Effect id name or icon.
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.ArtificialEffectOverride = {
-    [0] = { tooltip = Tooltips.Innate_Battle_Spirit }, -- Battle Spirit (Cyrodiil, Duel, Battleground)
+    [0] = { tooltip = Tooltips.Innate_Battle_Spirit }, -- Battle Spirit (Cyrodiil, Duel, Battleground) (used for Active Effects window)
     [1] = { name = string.gsub(GetArtificialEffectInfo(1), "For", "for"), tooltip = Tooltips.Innate_Looking_for_Group }, -- Looking For Group (Dungeon Finder)
-    [2] = { name = Abilities.Skill_Battle_Spirit, tooltip = Tooltips.Innate_Battle_Spirit_Imperial_City }, -- Battle Spirit Imperial City
+    [2] = { name = Abilities.Skill_Battle_Spirit, tooltip = Tooltips.Innate_Battle_Spirit_Imperial_City }, -- Battle Spirit Imperial City (used for Active Effects window)
     [3] = { tooltip = Tooltips.Innate_Battleground_Deserter }, -- Battleground Deserter Penalty
 }
 
@@ -4280,11 +4280,15 @@ Effects.EffectOverride = {
     -- PLAYER ABILITIES - BASIC ------------------------------------
     ----------------------------------------------------------------
 
+    -- Misc
+    [999018] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_pet.dds', name = Abilities.Innate_Vanity_Pet }, -- Pet FAKE BUFf
+    [999019] = { icon = 'LuiExtended/media/icons/assistants/assistant_nuzhimeh.dds', name = Abilities.Innate_Assistant }, -- Assistant FAKE BUFF
+
     -- Test
     [16415] = { tooltip = Tooltips.Generic_Test }, -- Test
 
     -- Block
-    [974] = { dynamicTooltip = true }, -- Brace
+    [974] = { icon= 'LuiExtended/media/icons/abilities/ability_innate_block.dds', name = Abilities.Innate_Brace, dynamicTooltip = true }, -- Brace
 
     -- Roll Dodge
     [29721] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_roll_dodge.dds', tooltip = Tooltips.Innate_Immobilize_Immunity }, -- Immobilize Immunity
@@ -4292,16 +4296,17 @@ Effects.EffectOverride = {
     [69143] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_dodge_fatigue.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Innate_Dodge_Fatigue, displayStacks = true, stack = 1, maxStacks = 100 }, -- Dodge Fatigue
 
     -- Crouch
-    [20299] = { dynamicTooltip = true }, -- Sneak
-    [20309] = { tooltip = Tooltips.Innate_Invisible }, -- Crouch
-    [20301] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_hidden.dds', name = Abilities.Innate_Crouch }, -- Crouch Drain
-    [26245] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = Abilities.Innate_Stealth_Stun, tooltip = Tooltips.Generic_Stun }, -- Slam Stun (Stun from crouch attack)
+    [20299] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_hidden.dds', dynamicTooltip = true }, -- Sneak
+    [20309] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_invisible.dds', tooltip = Tooltips.Innate_Invisible }, -- Hidden
+    [20301] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_hidden.dds', name = Abilities.Innate_Sneak }, -- Crouch Drain
+    [26245] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Sneak, Abilities.Innate_Stun), tooltip = Tooltips.Generic_Stun }, -- Slam Stun (Stun from crouch attack)
     [72902] = { hide = true }, -- Hidden
 
     -- Misc
     [15594] = { hide = true }, -- Bonus vs off Balance
     [10950] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fall_snare.dds', name = Abilities.Innate_Fall_Damage }, -- Fall Snare
-    [6811] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recall.dds', tooltip = Tooltips.Innate_Recall_Penalty }, -- Recall
+    [999016] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recall_cooldown.dds', name = Abilities.Innate_Recall_Penalty, tooltip = Tooltips.Innate_Recall_Penalty }, -- Recall Penalty FAKE
+    [6811] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recall.dds' }, -- Recall
     [69293] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recall.dds', name = Abilities.Innate_Recall }, -- Sigil of Imperial Retreat
     [14644] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds', name = Abilities.Innate_Revive }, -- Revive (Death Dialogue)
     [31221] = { hide = true }, -- Skyshard Collect (Aura on Skyshard when player collects it)
@@ -4310,24 +4315,24 @@ Effects.EffectOverride = {
     [47270] = { icon = 'esoui/art/icons/achievement_update11_dungeons_017.dds', hide = true }, -- Ritual of Mara
     [2727] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off-Balance
     [134599] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_off_balance_immunity.dds', type = 1, tooltip = Tooltips.Generic_Off_Balance_Immunity }, -- Off Balance Immunity
-    [132831] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_major_vulnerability_immunity.dds', name = Abilities.Skill_Major_Vulnerability_Immunity, type = 1, tooltip = Tooltips.Generic_Major_Vulnerability_Immunity }, -- Major Vulnerability Invulnerability
+    --[132831] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_major_vulnerability_immunity.dds', name = Abilities.Skill_Major_Vulnerability_Immunity, type = 1, tooltip = Tooltips.Generic_Major_Vulnerability_Immunity }, -- Major Vulnerability Invulnerability -- TODO: Likely remove
     [85701] = { hide = true }, -- Dueling Flag
-    [999014] = { tooltip = Tooltips.Innate_Battle_Spirit }, -- Battle Spirit FAKE
-    [999015] = { tooltip = Tooltips.Innate_Battle_Spirit_Imperial_City }, -- Battle Spirit Imperial City FAKE
+    [999014] = { icon = 'esoui/art/icons/artificialeffect_battle-spirit.dds', name = Abilities.Skill_Battle_Spirit }, -- Battle Spirit FAKE
     [21263] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = Abilities.Innate_Ayleid_Well, tooltip = Tooltips.Innate_Ayleid_Well }, -- Ayleid Health Bonus
     [100862] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = Abilities.Innate_Ayleid_Well_Fortified, tooltip = Tooltips.Innate_Ayleid_Well_Fortified }, -- Ayleid Health Bonus
     [105194] = { hide = true }, -- RF Combat Trigger
 
     -- Mount
     [37059] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_mounted.dds' }, -- Mount Up (Mount)
+    [999017] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_mounted.dds', name = Abilities.Innate_Mounted }, -- Mounted FAKE
     [141013] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_mounted.dds' }, -- Mount Up (Passenger Mount)
     [115607] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds', unbreakable = 1, tooltip = Tooltips.Generic_Knockdown }, -- Hard Dismount (Mount)
     [141004] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds', unbreakable = 1, tooltip = Tooltips.Generic_Knockdown }, -- Hard Dismount (Passenger Mount)
 
     -- Block
-    [86310] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = Abilities.Innate_Block_Stun, hide = true, tooltip = Tooltips.Generic_Stagger }, -- Stagger (Player blocks NPC charged attack)
-    [86309] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = Abilities.Innate_Block_Stun, tooltip = Tooltips.Generic_Stun }, -- Stun (Player blocks NPC charged attack)
-    [86312] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = Abilities.Innate_Block_Stun, tooltip = Tooltips.Generic_Stun }, -- Stun (Player blocks Ogrim Body Slam)
+    [86310] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Block, Abilities.Innate_Stun), hide = true, tooltip = Tooltips.Generic_Stagger }, -- Stagger (Player blocks NPC charged attack)
+    [86309] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Block, Abilities.Innate_Stun), tooltip = Tooltips.Generic_Stun }, -- Stun (Player blocks NPC charged attack)
+    [86312] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Block, Abilities.Innate_Stun), tooltip = Tooltips.Generic_Stun }, -- Stun (Player blocks Ogrim Body Slam)
     [45902] = { name = Abilities.Skill_Off_Balance, tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off-Balance
 
     -- Bash
@@ -4345,7 +4350,7 @@ Effects.EffectOverride = {
     [14031] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_mundus_use.dds', name = Abilities.Innate_Receiving_Boon, unbreakable = 1}, -- Mundus Use
 
     -- Death/Resurrection
-    [14646] = { tooltip = Tooltips.Innate_Resurrection_Immunity }, -- Recently Revived
+    [14646] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds', name = Abilities.Innate_Resurrection_Immunity, tooltip = Tooltips.Innate_Resurrection_Immunity }, -- Recently Revived
     [55400] = { hide = true }, -- Magicka Restore
     [55401] = { hide = true }, -- Magicka Restore
     [123970] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds', name = Abilities.Innate_Resurrection_Immunity, tooltip = Tooltips.Innate_Resurrection_Immunity }, -- Lesser Reincarnate
@@ -4362,8 +4367,9 @@ Effects.EffectOverride = {
     [38541] = { icon = 'esoui/art/icons/ability_warrior_010.dds', tooltip = Tooltips.Innate_Taunt }, -- Taunt
 
     -- Disguise Effects
-    [50602] = { tooltip = Tooltips.Innate_Disguised }, -- Disguised
+    [50602] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_disguised.dds', tooltip = Tooltips.Innate_Disguised }, -- Disguised
     [13371] = { hide = true }, -- Acting Suspicious
+    [999020] = { icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', name = Abilities.Innate_Disguise }, -- Disguise FAKE
 
     -- Death Achieve Check (Veteran Dungeons)
     [55883] = { hide = true }, -- Death Achieve Check
@@ -6909,9 +6915,9 @@ Effects.EffectOverride = {
     [29757] = { hide = true }, -- Remove block (Guard)
     [84351] = { hide = true }, -- Remove block (Guard)
     [29766] = { hide = true }, -- Blocked Stack (Guard)
-    [29765] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = Abilities.Innate_Block_Stun, hide = true, tooltip = Tooltips.Generic_Stagger }, -- Uber Attack (Guard)
-    [29767] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = Abilities.Innate_Block_Stun, tooltip = Tooltips.Generic_Stun }, -- Uber Attack (Guard)
-    [84346] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = Abilities.Innate_Block_Stun, tooltip = Tooltips.Generic_Stun }, -- Uber Attack (Guard)
+    [29765] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Block, Abilities.Innate_Stun), hide = true, tooltip = Tooltips.Generic_Stagger }, -- Uber Attack (Guard)
+    [29767] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Block, Abilities.Innate_Stun), tooltip = Tooltips.Generic_Stun }, -- Uber Attack (Guard)
+    [84346] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Block, Abilities.Innate_Stun), tooltip = Tooltips.Generic_Stun }, -- Uber Attack (Guard)
 
     -- Brute (1H + Shield)
     [34919] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 60 }, -- Low Slash (Brute)
@@ -10699,7 +10705,7 @@ Effects.EffectOverride = {
     [84169] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_charge.dds' }, -- Rolling Thunder (Wamasu)
     [84179] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_charge.dds' }, -- Rolling Thunder (Wamasu)
     [84173] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_charge.dds', tooltip = Tooltips.Generic_Knockdown }, -- Rolling Thunder (Wamasu)
-    [84172] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = Abilities.Innate_Block_Stun, tooltip = Tooltips.Generic_Stun, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Charge (Trapjaw)
+    [84172] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Block, Abilities.Innate_Stun), tooltip = Tooltips.Generic_Stun, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Charge (Trapjaw)
     [83925] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_trapping_bolt.dds', hide = true }, -- Trapping Bolt (Trapjaw)
     [83930] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_trapping_bolt.dds', tooltip = Tooltips.Skill_Trapping_Bolt }, -- Trapping Bolt (Trapjaw)
     [83928] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_shock_root.dds', name = Abilities.Skill_Trapping_Bolt, tooltip = Tooltips.Generic_Immobilize, unbreakable = 1, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Arx_boss2_KDrecover

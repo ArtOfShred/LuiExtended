@@ -264,6 +264,10 @@ LUIE.Data.Tooltips = {
     ----------------------------------------------------------------
 
     -- Player Basic
+
+    Innate_Mounted                                  = GetString(SI_LUIE_SKILL_MOUNTED_TP),
+    Innate_Mounted_Passenger                        = GetString(SI_LUIE_SKILL_MOUNTED_PASSENGER_TP),
+    Innate_Vanity_Pet                               = GetString(SI_LUIE_SKILL_COLLECTIBLE_VANITY_PET_TP),
     Innate_Immobilize_Immunity                      = GetString(SI_LUIE_SKILL_IMMOBILIZE_IMMUNITY_TP),
     Innate_Snare_Immobilize_Immunity                = GetString(SI_LUIE_SKILL_SNARE_IMMOBILIZE_IMMUNITY_TP),
     Innate_Dodge_Fatigue                            = GetString(SI_LUIE_SKILL_DODGE_FATIGUE_TP),
@@ -628,6 +632,7 @@ LUIE.Data.Tooltips = {
     Set_Explosive_Rebuke                            = GetString(SI_LUIE_SKILL_SET_EXPLOSIVE_REBUKE_TP),
 
     -- Disguises
+    Disguise_Generic                                = GetString(SI_LUIE_SKILL_DISGUISE_GENERIC_TP),
     Disguise_Kollopi_Essence                        = GetString(SI_LUIE_SKILL_DISGUISE_KOLLOPI_ESSENCE_TP),
     Disguise_Sea_Viper_Armor                        = GetString(SI_LUIE_SKILL_DISGUISE_SEA_VIPER_ARMOR_TP),
     Disguise_Vulkhel_Guard                          = GetString(SI_LUIE_SKILL_DISGUISE_VULKHEL_GUARD_TP),
@@ -1531,7 +1536,27 @@ function LUIE.DynamicTooltip(abilityId)
         local _, _, speed = GetAdvancedStatValue(ADVANCED_STAT_DISPLAY_TYPE_BLOCK_SPEED)
         local finalSpeed = 100 - speed
         local _, cost = GetAdvancedStatValue(ADVANCED_STAT_DISPLAY_TYPE_BLOCK_COST)
-        tooltip = zo_strformat(GetString(SI_LUIE_SKILL_BRACE_TP), mitigation, finalSpeed, cost)
+        -- Get current weapons to check if a frost staff is equipped.
+        local weaponPair = GetActiveWeaponPairInfo()
+        local weaponType
+        if weaponPair == ACTIVE_WEAPON_PAIR_MAIN then
+            weaponType = GetItemWeaponType(BAG_WORN, EQUIP_SLOT_MAIN_HAND)
+        elseif weaponPair == ACTIVE_WEAPON_PAIR_BACKUP then
+            weaponType = GetItemWeaponType(BAG_WORN, EQUIP_SLOT_BACKUP_MAIN)
+        else
+            weaponType = WEAPONTYPE_NONE
+        end
+        -- Set tooltip resource to Stamina by default
+        local resourceType = GetString(SI_ATTRIBUTES3) -- Stamina
+        -- If we have a frost staff equipped and have learned Tri Focus then use Magicka for the tooltip
+        if weaponType == WEAPONTYPE_FROST_STAFF then
+             local skillType, skillIndex, abilityIndex = GetSpecificSkillAbilityKeysByAbilityId(30948)
+             local purchased = select(6, GetSkillAbilityInfo(skillType, skillIndex, abilityIndex))
+             if purchased then
+                 resourceType = GetString(SI_ATTRIBUTES2) -- Magicka
+             end
+        end
+        tooltip = zo_strformat(GetString(SI_LUIE_SKILL_BRACE_TP), mitigation, finalSpeed, cost, resourceType)
     end
     -- Crouch
     if abilityId == 20299 then

@@ -133,7 +133,7 @@ function SpellCastBuffs.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SHOWPLAYERBUFF)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWPLAYERBUFF_TP),
                 getFunc = function() return not Settings.HidePlayerBuffs end,
-                setFunc = function(value) Settings.HidePlayerBuffs = not value end,
+                setFunc = function(value) Settings.HidePlayerBuffs = not value SpellCastBuffs.ReloadEffects("player") end,
                 width = "half",
                 default = not Defaults.HidePlayerBuffs,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
@@ -143,7 +143,7 @@ function SpellCastBuffs.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SHOWPLAYERDEBUFF)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWPLAYERDEBUFF_TP),
                 getFunc = function() return not Settings.HidePlayerDebuffs end,
-                setFunc = function(value) Settings.HidePlayerDebuffs = not value end,
+                setFunc = function(value) Settings.HidePlayerDebuffs = not value SpellCastBuffs.ReloadEffects("player") end,
                 width = "half",
                 default = not Defaults.HidePlayerDebuffs,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
@@ -173,7 +173,7 @@ function SpellCastBuffs.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SHOWGROUNDBUFFDEBUFF)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWGROUNDBUFFDEBUFF_TP),
                 getFunc = function() return not Settings.HideGroundEffects end,
-                setFunc = function(value) Settings.HideGroundEffects = not value end,
+                setFunc = function(value) Settings.HideGroundEffects = not value SpellCastBuffs.ReloadEffects("player") end,
                 width = "half",
                 default = not Settings.HideGroundEffects,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
@@ -820,15 +820,15 @@ function SpellCastBuffs.CreateSettings()
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
             },
             {
-                -- Long Term - Set ICD - Player
+                -- Use Generic Pet Icon
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER_TP),
-                getFunc = function() return not Settings.IgnoreSetICDPlayer end,
-                setFunc = function(value) Settings.IgnoreSetICDPlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET_ICON)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET_ICON_TP),
+                getFunc = function() return Settings.PetDetail end,
+                setFunc = function(value) Settings.PetDetail = value SpellCastBuffs.OnPlayerActivated() end,
                 width = "full",
-                default = not Defaults.IgnoreSetICDPlayer,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+                default = not Defaults.PetDetail,
+                disabled = function() return Settings.IgnorePet end,
             },
             {
                 -- Long Term - Mounts (Player)
@@ -851,6 +851,17 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.MountDetail,
                 disabled = function() return Settings.IgnoreMountPlayer end,
+            },
+            {
+                -- Long Term - Set ICD - Player
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER_TP),
+                getFunc = function() return not Settings.IgnoreSetICDPlayer end,
+                setFunc = function(value) Settings.IgnoreSetICDPlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreSetICDPlayer,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
             },
             --[[
             {

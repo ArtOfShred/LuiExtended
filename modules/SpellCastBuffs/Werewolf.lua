@@ -15,20 +15,6 @@ local g_werewolfId = "" -- AbilityId for Werewolf Transformation morph
 local g_werewolfCounter = 0 -- Counter for Werewolf transformation events
 local g_werewolfQuest = 0 -- Counter for Werewolf transformation events (Quest)
 
--- Function to determine what container to put the icon in (if we have it set to prominent or not)
-local function ResolveContainerContext(abilityId, effectName)
-    local context
-    if (SpellCastBuffs.SV.PromDebuffTable[abilityId] or SpellCastBuffs.SV.PromDebuffTable[effectName]) then
-        context = "promd_player"
-    elseif (SpellCastBuffs.SV.PromBuffTable[abilityId] or SpellCastBuffs.SV.PromBuffTable[effectName]) then
-        context = "promb_player"
-    else
-        context = "player1"
-    end
-
-    return context
-end
-
 -- Function to pull Werewolf Cast Bar / Buff Aura Icon based off the players morph choice
 local function SetWerewolfIcon()
     local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(32455)
@@ -38,7 +24,7 @@ end
 
 function SpellCastBuffs.DisplayWerewolfIcon()
     SetWerewolfIcon()
-    local context = ResolveContainerContext(g_werewolfId, g_werewolfName)
+    local context = SpellCastBuffs.DetermineContextSimple("player1", g_werewolfId, g_werewolfName)
     local power = GetUnitPower("player", POWERTYPE_WEREWOLF)
     SpellCastBuffs.EffectsList[context]["Werewolf Indicator"] = {
         target="player", type=1,
@@ -51,13 +37,13 @@ function SpellCastBuffs.DisplayWerewolfIcon()
 end
 
 function SpellCastBuffs.HideWerewolfIcon()
-    local context = ResolveContainerContext(g_werewolfId, g_werewolfName)
+    local context = SpellCastBuffs.DetermineContextSimple("player1", g_werewolfId, g_werewolfName)
     SpellCastBuffs.EffectsList[context]["Werewolf Indicator"] = nil
 end
 
 -- Get Werewolf State for Werewolf Buff Tracker
 function SpellCastBuffs.WerewolfState(eventCode, werewolf, onActivation)
-    if werewolf then
+    if werewolf and not SpellCastBuffs.SV.HidePlayerBuffs then
         for i = 1, 6 do
             name, _, discovered, skillLineId = GetSkillLineInfo(SKILL_TYPE_WORLD, i)
             if skillLineId == 50 and discovered then

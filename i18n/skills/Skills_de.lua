@@ -40,15 +40,12 @@ local strings = {
 
     -- Player Innate
     SI_LUIE_SKILL_RECALL_PENALTY =                       "Rückrufstrafe",
-    SI_LUIE_SKILL_MOUNTED =                              "Aufsitzend",
     SI_LUIE_SKILL_RESURRECTION_IMMUNITY =                "Wiederbelebungsimmunität",
     SI_LUIE_SKILL_SOUL_GEM_RESURRECTION =                "Soul Gem Resurrection",
-    SI_LUIE_SKILL_STEALTH_STUN =                         "Verborgene Betäubung",
     SI_LUIE_SKILL_FALL_DAMAGE =                          "Fallschaden",
     SI_LUIE_SKILL_ABSORBING_SKYSHARD =                   "Himmelsscherbe absorbieren",
     SI_LUIE_SKILL_RECEIVING_BOON =                       "Segen erhalten",
     --SI_LUIE_SKILL_MOUNT_SPRINT =                         "Gallopieren",
-    SI_LUIE_SKILL_BLOCK_STUN =                           "Betäubung blocken",
     SI_LUIE_SKILL_AYLEID_WELL =                          "Ayleïdenbrunnen",
     SI_LUIE_SKILL_AYLEID_WELL_TP =                       "Erhöht Euer maximales Leben |cFFFFFF10|r Minuten um |cFFFFFF10|r%.",
     SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED =                "Verstärkter Ayleïdenbrunnen",
@@ -61,12 +58,12 @@ local strings = {
     SI_LUIE_SKILL_INVISIBLE_TP =                         "Verborgen im magischen oder umwelttechnischen Sinne.",
     --SI_LUIE_SKILL_SPRINT_TP =                            "Sprinten, erhöht die Bewegungsgeschwindigkeit um |cFFFFFF40|r%.\n\nEntzieht Ausdauer während der Bewegung.",
     --SI_LUIE_SKILL_GALLOP_TP =                            "Gallopieren, ierhöht die Bewegungsgeschwindigkeit um |cFFFFFF30|r%.\n\nEntzieht Reitausdauer während der Bewegung.",
-    SI_LUIE_SKILL_BRACE_TP =                             "Brace for attack, reducing damage taken by |cFFFFFF<<1>>|r% and movement speed by |cFFFFFF<<2>>|r% while granting immunity to Stun and Knockback effects.\n\nDrains |cFFFFFF<<3>>|r Stamina on a successful block.",
+    SI_LUIE_SKILL_BRACE_TP =                             "Brace for attack, reducing damage taken by |cFFFFFF<<1>>|r% and movement speed by |cFFFFFF<<2>>|r% while granting immunity to Stun and Knockback effects.\n\nDrains |cFFFFFF<<3>>|r <<4>> on a successful block.",
     SI_LUIE_SKILL_RESURRECTION_IMMUNITY_TP =             "Wiederbeleben. Immun gegen Schaden und alle negativen Effekte.",
     SI_LUIE_SKILL_TAUNT_TP =                             "Verspottet. Dieser Gegner konzentriert alle Angriffe auf Euch.",
     SI_LUIE_SKILL_DISGUISE_TP =                          "Disguised. You can be revealed by sentries or performing suspicious activity.\n\nTaking any damage other than fall damage will destroy your disguise.",
-    SI_LUIE_SKILL_BATTLE_SPIRIT_TP =                     "• Increase Max Health by |cFFFFFF5000|r\n• Reduce damage taken and damage shield strength by |cFFFFFF50|r%\n• Reduce healing received by |cFFFFFF55|r%\n• Increase the range of abilities with a range greater than |cFFFFFF28|r meters by |cFFFFFF8|r meters",
-    SI_LUIE_SKILL_BATTLE_SPIRIT_IMPERIAL_CITY_TP =       "• Increase Max Health by |cFFFFFF5000|r\n• Reduce damage taken and damage shield strength by |cFFFFFF50|r%\n• Reduce healing received by |cFFFFFF55|r%",
+    SI_LUIE_SKILL_BATTLE_SPIRIT_TP =                     "• Reduce damage taken by |cFFFFFF44|r%\n• Reduce damage shield strength by |cFFFFFF50|r%\n• Reduce healing received by |cFFFFFF50|r%\n• Increase the range of abilities with a range greater than |cFFFFFF28|r meters by |cFFFFFF8|r meters",
+    SI_LUIE_SKILL_BATTLE_SPIRIT_IMPERIAL_CITY_TP =       "• Reduce damage taken by |cFFFFFF44|r%\n• Reduce damage shield strength by |cFFFFFF50|r%\n• Reduce healing received by |cFFFFFF50|r%",
     SI_LUIE_SKILL_RECALL_PENALTY_TP =                    "Ihr habt kürzlich zu einem Wegeschrein zurückggerufen und müsst eine zusätzliche Gebühr in Gold zahlen um es erneut zu tun.",
     SI_LUIE_SKILL_BATTLEGROUND_DESERTER_TP =             "Ihr habt ein Schlachtfeld zu früh verlassen und könnt Euch nicht erneut anmelden oder Allianzpunkte im PvP erhalten.",
     SI_LUIE_SKILL_LOOKING_FOR_GROUP_TP =                 "• Increase Max Health by |cFFFFFF20|r%\n• Increase Weapon and Spell Damage by |cFFFFFF25|r%",
@@ -107,6 +104,7 @@ local strings = {
 
     -- Collectible
     SI_LUIE_SKILL_COLLECTIBLE_MYSTERY_MEAT =             "Mystery Meat",
+    SI_LUIE_SKILL_COLLECTIBLE_VANITY_PET_TP =            "You have an active Non-Combat Pet.",
 
     -- Experience
     SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP =              "Increase Experience Points earned by |cFFFFFF<<1>>|r% for |cFFFFFF30|r minutes.",
@@ -891,6 +889,7 @@ local strings = {
     SI_LUIE_SKILL_SET_IRONBLOOD_TP =                     "Reduce damage taken by |cFFFFFF30|r% but reduce Movement Speed by |cFFFFFF50|r%.",
 
     -- Disguises
+    SI_LUIE_SKILL_DISGUISE_GENERIC_TP =                  "You are wearing a disguise.",
     SI_LUIE_SKILL_DISGUISE_KOLLOPI_ESSENCE_TP =          "Cloaked in a haze of forest moths, preventing Wood Orcs from detecting you.\n\nWill not work in PvP enabled areas.",
     SI_LUIE_SKILL_DISGUISE_SEA_VIPER_ARMOR_TP =          "Disguised as a Maormer Soldier.",
     SI_LUIE_SKILL_DISGUISE_VULKHEL_GUARD_TP =            "Disguised as a First Auridon Marine.",
@@ -1439,7 +1438,7 @@ local strings = {
     SI_LUIE_SKILL_EYE_OF_THE_SENTINEL_TP =               "You are paralyzed by the gaze of the Coldharbour Sentinel.",
 
     -- Mounted
-    SI_LUIE_SKILL_MOUNTED =                              "Mounted",
+    SI_LUIE_SKILL_MOUNTED =                              "Aufsitzend",
     SI_LUIE_SKILL_MOUNTED_TP =                           "You are mounted.",
     SI_LUIE_SKILL_MOUNTED_PASSENGER =                    "Mounted (Passenger)",
     SI_LUIE_SKILL_MOUNTED_PASSENGER_TP =                 "You are mounted as a passenger.",

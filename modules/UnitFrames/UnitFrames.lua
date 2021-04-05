@@ -1442,7 +1442,7 @@ local function CreateCustomFrames()
         -- Add this top level window to global controls list, so it can be hidden
     for _, unitTag in pairs( { 'player', 'reticleover', 'SmallGroup1', 'RaidGroup1', 'boss1', 'AvaPlayerTarget', "PetGroup1" } ) do
         if UnitFrames.CustomFrames[unitTag] then
-            LUIE.Components[ moduleName .. '_CustomFrame_' .. unitTag ] = UnitFrames.CustomFrames[unitTag].tlw
+            LUIE.Components[moduleName .. '_CustomFrame_' .. unitTag] = UnitFrames.CustomFrames[unitTag].tlw
         end
     end
 end
@@ -2000,7 +2000,7 @@ function UnitFrames.CustomPetUpdate()
     local n = 0
     for _, v in ipairs(petList) do
         n = n + 1
-        UnitFrames.CustomFrames[v.unitTag] = UnitFrames.CustomFrames[ "PetGroup" .. n]
+        UnitFrames.CustomFrames[v.unitTag] = UnitFrames.CustomFrames["PetGroup" .. n]
         if UnitFrames.CustomFrames[v.unitTag] then
             UnitFrames.CustomFrames[v.unitTag].control:SetHidden ( false )
             UnitFrames.CustomFrames[v.unitTag].unitTag = v.unitTag
@@ -3302,7 +3302,7 @@ function UnitFrames.OnChampionPointGained(eventCode)
         UnitFrames.CustomFrames.player.ChampionXP.backdrop:SetCenterColor( 0.1*colour.r, 0.1*colour.g, 0.1*colour.b, 0.9 )
         UnitFrames.CustomFrames.player.ChampionXP.enlightenment:SetColor( colour2.r, colour2.g, colour2.b, .40 )
         UnitFrames.CustomFrames.player.ChampionXP.bar:SetColor( colour.r, colour.g, colour.b, 0.9 )
-        UnitFrames.CustomFrames.player.ChampionXP.icon:SetTexture( CHAMPION_ATTRIBUTE_HUD_ICONS[ attribute ] )
+        UnitFrames.CustomFrames.player.ChampionXP.icon:SetTexture( CHAMPION_ATTRIBUTE_HUD_ICONS[attribute] )
     end
 end
 
@@ -3491,7 +3491,7 @@ function UnitFrames.CustomFramesGroupUpdate()
     for _, v in ipairs(groupList) do
         -- Increase local counter
         n = n + 1
-        UnitFrames.CustomFrames[v.unitTag] = UnitFrames.CustomFrames[ (raid and "RaidGroup" or "SmallGroup" ) .. n]
+        UnitFrames.CustomFrames[v.unitTag] = UnitFrames.CustomFrames[(raid and "RaidGroup" or "SmallGroup" ) .. n]
         if UnitFrames.CustomFrames[v.unitTag] then
             UnitFrames.CustomFrames[v.unitTag].control:SetHidden( false )
 

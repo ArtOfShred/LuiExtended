@@ -30,14 +30,19 @@ local AbilityTables = {
 
     -- Player Basic
     Innate_Immobilize_Immunity        = 29721,
-    Innate_Crouch                     = 20306, -- Crouch
-    Innate_Stealth_Stun               = GetString(SI_LUIE_SKILL_STEALTH_STUN), -- Crouch Stun
+    Innate_Stun                       = 14756, -- Stun
+    Innate_Disguise                   = 31287, -- Disguise
     Innate_Disguised                  = 23553, -- Disguised
+    Innate_Sneak                      = 20299, -- Sneak
     Innate_Hidden                     = 20309, -- Hidden
-    Innate_Block_Stun                 = GetString(SI_LUIE_SKILL_BLOCK_STUN), -- Block Stun
+    Innate_Mounted                    = GetString(SI_LUIE_SKILL_MOUNTED),
+    Innate_Mounted_Passenger          = GetString(SI_LUIE_SKILL_MOUNTED_PASSENGER),
+    Innate_Vanity_Pet                 = GetString(SI_COLLECTIBLECATEGORYTYPE3),
+    Innate_Assistant                  = GetString(SI_COLLECTIBLECATEGORYTYPE8),
     --Innate_Sprint                     = 15614, -- Sprint
     --Innate_Gallop                     = GetString(SI_LUIE_SKILL_MOUNT_SPRINT), -- Gallop
     Innate_Brace                      = 29761, -- Brace
+    Innate_Block                      = 2890, -- Block
     Innate_Bash                       = 21970, -- Bash
     Innate_Bash_Stun                  = 21971, -- Bash Stun
     Innate_Fall_Damage                = GetString(SI_LUIE_SKILL_FALL_DAMAGE), -- Fall Damage

@@ -325,7 +325,7 @@ function InfoPanel.Initialize(enabled)
     InfoPanel.RearrangePanel()
 
     -- add control to global list so it can be hidden
-    LUIE.Components[ moduleName ] = uiPanel
+    LUIE.Components[moduleName] = uiPanel
 
     -- Panel position
     if InfoPanel.SV.position ~= nil and #InfoPanel.SV.position == 2 then

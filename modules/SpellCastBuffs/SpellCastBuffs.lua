@@ -10,6 +10,7 @@ local SpellCastBuffs = LUIE.SpellCastBuffs
 local UI = LUIE.UI
 local Effects = LUIE.Data.Effects
 local Abilities = LUIE.Data.Abilities
+local Tooltips = LUIE.Data.Tooltips
 
 local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
@@ -109,6 +110,7 @@ SpellCastBuffs.Defaults = {
     IgnorePolymorph                     = true,
     IgnoreAssistant                     = true,
     IgnorePet                           = true,
+    PetDetail                           = true,
     IgnoreMountPlayer                   = false,
     IgnoreMountTarget                   = false,
     MountDetail                         = true,
@@ -189,6 +191,56 @@ SpellCastBuffs.BuffContainers = uiTlw
 local function EaseOutQuad(t, b, c, d)
     t = t / d
     return -c * t*(t-2) + b
+end
+
+-- Function for determining container context for prominent effects
+function SpellCastBuffs.DetermineContext(context, abilityId, abilityName, castByPlayer)
+    if (SpellCastBuffs.SV.PromDebuffTable[abilityId] or SpellCastBuffs.SV.PromDebuffTable[abilityName]) then
+        if context == "player1" then
+            context = "promd_player"
+        elseif (context == "reticleover2" and castByPlayer == COMBAT_UNIT_TYPE_PLAYER) or abilityId == 134599 then -- Exception for Off Balance Immunity
+            context = "promd_target"
+        end
+    elseif (SpellCastBuffs.SV.PromBuffTable[abilityId] or SpellCastBuffs.SV.PromBuffTable[abilityName]) then
+        if context == "player1" then
+            context = "promb_player"
+        elseif (context == "reticleover2" and castByPlayer == COMBAT_UNIT_TYPE_PLAYER) or abilityId == 134599 then -- Exception for Off Balance Immunity
+            context = "promb_target"
+        end
+    end
+    return context
+end
+
+-- Function for determining container context for prominent effects (player only)
+-- Used in cases where the effect will never be a debuff cast by the player (disguise/stealth state, collectible buffs, etc)
+function SpellCastBuffs.DetermineContextSimple(context, abilityId, abilityName)
+    if context == "player1" then
+        if (SpellCastBuffs.SV.PromDebuffTable[abilityId] or SpellCastBuffs.SV.PromDebuffTable[abilityName]) then
+            context = "promd_player"
+        elseif (SpellCastBuffs.SV.PromBuffTable[abilityId] or SpellCastBuffs.SV.PromBuffTable[abilityName]) then
+            context = "promb_player"
+        end
+    end
+    return context
+end
+
+-- Function for determining target for buff sorting
+function SpellCastBuffs.DetermineTarget(context)
+    if context == "player1" or context == "player2" then
+        return "player"
+    elseif context == "reticleover1" or context == "reticleover2" or context == "ground" or context == "saved" then
+        return "reticleover"
+    else
+        return "prominent"
+    end
+end
+
+-- Specifically for clearing a player buff, removes this buff from player1, promd_player, and promb_player containers
+function SpellCastBuffs.ClearPlayerBuff(abilityId)
+    local context = { "player1", "promd_player", "promb_player" }
+    for _, v in pairs(context) do
+        SpellCastBuffs.EffectsList[v][abilityId] = nil
+    end
 end
 
 -- Initialization
@@ -379,7 +431,7 @@ function SpellCastBuffs.Initialize(enabled)
             uiTlw[v].icons = {}
 
             -- add this top level window to global controls list, so it can be hidden
-            if uiTlw[v]:GetType() == CT_TOPLEVELCONTROL then LUIE.Components[ moduleName .. v ] = uiTlw[v] end
+            if uiTlw[v]:GetType() == CT_TOPLEVELCONTROL then LUIE.Components[moduleName .. v] = uiTlw[v] end
         end
     end
 
@@ -1503,12 +1555,12 @@ function SpellCastBuffs.OnEffectChangedGround(eventCode, changeType, effectSlot,
                     end
                     if (Effects.IsGroundMineAura[abilityId] or Effects.IsGroundMineStack[abilityId]) then
                         -- Check to make sure aura exists in case of reloadUI
-                        if SpellCastBuffs.EffectsList[context][ abilityId ] then
-                            SpellCastBuffs.EffectsList[context][ abilityId ].stack = SpellCastBuffs.EffectsList[context][ abilityId ].stack - Effects.EffectGroundDisplay[abilityId].stackRemove
-                            if SpellCastBuffs.EffectsList[context][ abilityId ].stack == 0 then SpellCastBuffs.EffectsList[context][ abilityId ] = nil end
+                        if SpellCastBuffs.EffectsList[context][abilityId] then
+                            SpellCastBuffs.EffectsList[context][abilityId].stack = SpellCastBuffs.EffectsList[context][abilityId].stack - Effects.EffectGroundDisplay[abilityId].stackRemove
+                            if SpellCastBuffs.EffectsList[context][abilityId].stack == 0 then SpellCastBuffs.EffectsList[context][abilityId] = nil end
                         end
                     else
-                        SpellCastBuffs.EffectsList[context][ abilityId ] = nil
+                        SpellCastBuffs.EffectsList[context][abilityId] = nil
                     end
                 end
             end
@@ -1541,16 +1593,16 @@ function SpellCastBuffs.OnEffectChangedGround(eventCode, changeType, effectSlot,
                         stackCount = 0
                     end
                 elseif Effects.IsGroundMineStack[abilityId] then
-                    if SpellCastBuffs.EffectsList[context][ abilityId ] then
-                        stackCount = SpellCastBuffs.EffectsList[context][ abilityId ].stack + Effects.EffectGroundDisplay[abilityId].stackRemove
+                    if SpellCastBuffs.EffectsList[context][abilityId] then
+                        stackCount = SpellCastBuffs.EffectsList[context][abilityId].stack + Effects.EffectGroundDisplay[abilityId].stackRemove
                     else
                         stackCount = 1
                     end
                     if stackCount > Effects.EffectGroundDisplay[abilityId].stackReset then stackCount = Effects.EffectGroundDisplay[abilityId].stackReset end
                 end
 
-                SpellCastBuffs.EffectsList[context][ abilityId ] = {
-                    type=groundType[i].type,
+                SpellCastBuffs.EffectsList[context][abilityId] = {
+                    target=SpellCastBuffs.DetermineTarget(context), type=groundType[i].type,
                     id=abilityId, name=effectName, icon=iconName,
                     dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
                     forced=nil,
@@ -1631,9 +1683,9 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
     if Effects.IsGrimFocus[abilityId] or Effects.IsGrimFocusOverride[abilityId] then
         local context
         if unitTag == "player" then
-            context = { SpellCastBuffs.EffectsList.player1, SpellCastBuffs.EffectsList.promb_player, SpellCastBuffs.EffectsList.promd_player }
+            context = { SpellCastBuffs.EffectsList["player1"], SpellCastBuffs.EffectsList["promb_player"], SpellCastBuffs.EffectsList["promd_player"] }
         else
-            context = { SpellCastBuffs.EffectsList.reticleover1 }
+            context = { SpellCastBuffs.EffectsList["reticleover1"] }
         end
 
         -- Set stack count when Grim Focus counter changes
@@ -1666,9 +1718,9 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
     if Effects.IsSimmeringFrenzy[abilityId] or Effects.IsSimmeringFrenzyOverride[abilityId] then
         local context
         if unitTag == "player" then
-            context = { SpellCastBuffs.EffectsList.player1, SpellCastBuffs.EffectsList.promb_player, SpellCastBuffs.EffectsList.promd_player }
+            context = { SpellCastBuffs.EffectsList["player1"], SpellCastBuffs.EffectsList["promb_player"], SpellCastBuffs.EffectsList["promd_player"] }
         else
-            context = { SpellCastBuffs.EffectsList.reticleover1 }
+            context = { SpellCastBuffs.EffectsList["reticleover1"] }
         end
 
         -- Set stack count when Grim Focus counter changes
@@ -1717,7 +1769,7 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
                 for k, v in pairs(effectsList) do
                     -- Only remove the lower duration effects that were cast previously or simultaneously.
                     if v.id == abilityId and v.ends <= (1000*endTime) then
-                        SpellCastBuffs.EffectsList[context][ k ] = nil
+                        SpellCastBuffs.EffectsList[context][k] = nil
                     end
                 end
             end
@@ -1797,20 +1849,7 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
 
     -- Where the new icon will go into
     local context = unitTag .. effectType
-
-    if (SpellCastBuffs.SV.PromDebuffTable[abilityId] or SpellCastBuffs.SV.PromDebuffTable[effectName]) then
-        if context == "player1" then
-            context = "promd_player"
-        elseif (context == "reticleover2" and castByPlayer == COMBAT_UNIT_TYPE_PLAYER) or abilityId == 134599 or abilityId == 132831 then
-            context = "promd_target"
-        end
-    elseif (SpellCastBuffs.SV.PromBuffTable[abilityId] or SpellCastBuffs.SV.PromBuffTable[effectName]) then
-        if context == "player1" then
-            context = "promb_player"
-        elseif (context == "reticleover2" and castByPlayer == COMBAT_UNIT_TYPE_PLAYER) or abilityId == 134599 or abilityId == 132831 then
-            context = "promb_target"
-        end
-    end
+    context = SpellCastBuffs.DetermineContext(context, abilityId, effectName, castByPlayer)
 
     -- Exit here if there is no container to hold this effect
     if not containerRouting[context] then
@@ -1819,28 +1858,15 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
 
     if changeType == EFFECT_RESULT_FADED then -- delete Effect
         SpellCastBuffs.EffectsList[context][effectSlot] = nil
-        if Effects.EffectCreateSkillAura[ abilityId ] and Effects.EffectCreateSkillAura [ abilityId ].removeOnEnd then
+        if Effects.EffectCreateSkillAura[abilityId] and Effects.EffectCreateSkillAura [abilityId].removeOnEnd then
             local id = Effects.EffectCreateSkillAura[abilityId].abilityId
 
             local name = zo_strformat("<<C:1>>", GetAbilityName(id))
             local fakeEffectType = Effects.EffectOverride[id] and Effects.EffectOverride[id].type or effectType
             if not (SpellCastBuffs.SV.BlacklistTable[name] or SpellCastBuffs.SV.BlacklistTable[id]) then
                 local simulatedContext = unitTag .. fakeEffectType
-
-                if (SpellCastBuffs.SV.PromDebuffTable[name] or SpellCastBuffs.SV.PromDebuffTable[id]) then
-                    if simulatedContext == "player1" then
-                        simulatedContext = "promd_player"
-                    elseif (simulatedContext == "reticleover2" and castByPlayer == COMBAT_UNIT_TYPE_PLAYER)  then
-                        simulatedContext = "promd_target"
-                    end
-                elseif (SpellCastBuffs.SV.PromBuffTable[name] or SpellCastBuffs.SV.PromBuffTable[id]) then
-                    if simulatedContext == "player1" then
-                        simulatedContext = "promb_player"
-                    elseif (simulatedContext == "reticleover2" and castByPlayer == COMBAT_UNIT_TYPE_PLAYER) then
-                        simulatedContext = "promb_target"
-                    end
-                end
-                SpellCastBuffs.EffectsList[simulatedContext][ Effects.EffectCreateSkillAura[abilityId].abilityId ] = nil
+                simulatedContext = SpellCastBuffs.DetermineContext(simulatedContext, id, name, castByPlayer)
+                SpellCastBuffs.EffectsList[simulatedContext][Effects.EffectCreateSkillAura[abilityId].abilityId] = nil
             end
         end
 
@@ -1884,24 +1910,12 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
                 local fakeUnbreakable = Effects.EffectOverride[id] and Effects.EffectOverride[id].unbreakable or 0
                 if not (SpellCastBuffs.SV.BlacklistTable[name] or SpellCastBuffs.SV.BlacklistTable[id]) then
                     local simulatedContext = unitTag .. fakeEffectType
-                    -- Set Context based on prominent settings
-                    if (SpellCastBuffs.SV.PromDebuffTable[name] or SpellCastBuffs.SV.PromDebuffTable[id]) then
-                        if simulatedContext == "player1" then
-                            simulatedContext = "promd_player"
-                        elseif (simulatedContext == "reticleover2" and castByPlayer == COMBAT_UNIT_TYPE_PLAYER)  then
-                            simulatedContext = "promd_target"
-                        end
-                    elseif (SpellCastBuffs.SV.PromBuffTable[name] or SpellCastBuffs.SV.PromBuffTable[id]) then
-                        if simulatedContext == "player1" then
-                            simulatedContext = "promb_player"
-                        elseif (simulatedContext == "reticleover2" and castByPlayer == COMBAT_UNIT_TYPE_PLAYER)  then
-                            simulatedContext = "promb_target"
-                        end
-                    end
+                    simulatedContext = SpellCastBuffs.DetermineContext(simulatedContext, id, name, castByPlayer)
+
                     -- Create Buff
                     local icon = Effects.EffectCreateSkillAura[abilityId].icon or GetAbilityIcon(id)
-                    SpellCastBuffs.EffectsList[simulatedContext][ Effects.EffectCreateSkillAura[abilityId].abilityId ] = {
-                        target=unitTag, type=fakeEffectType,
+                    SpellCastBuffs.EffectsList[simulatedContext][Effects.EffectCreateSkillAura[abilityId].abilityId] = {
+                        target=SpellCastBuffs.DetermineTarget(simulatedContext), type=fakeEffectType,
                         id=id, name=name, icon=icon,
                         dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
                         forced=forcedType,
@@ -1939,8 +1953,8 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
         end
 
         -- Buffs are created based on their effectSlot, this allows multiple buffs/debuffs of the same type to appear.
-        SpellCastBuffs.EffectsList[context][ effectSlot ] = {
-            target=unitTag, type=effectType,
+        SpellCastBuffs.EffectsList[context][effectSlot] = {
+            target=SpellCastBuffs.DetermineTarget(context), type=effectType,
             id=abilityId, name=effectName, icon=iconName,
             dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
             forced=forcedType,
@@ -1962,20 +1976,24 @@ function SpellCastBuffs.ArtificialEffectUpdate(eventCode, effectId)
     end
 
     if effectId then
-        SpellCastBuffs.EffectsList.player1[effectId] = nil
+        local removeEffect = effectId
+        -- Battle Spirit handling, set this id to a fake id so it matches the target display
+        if effectId == 0 or effectId == 2 then
+            removeEffect = 999014
+        end
+        local context = SpellCastBuffs.DetermineContextSimple("player1", removeEffect, displayName)
+        SpellCastBuffs.EffectsList[context][removeEffect] = nil
     end
 
     for effectId in ZO_GetNextActiveArtificialEffectIdIter do
-        local displayName, iconFile, effectType, _, startTime = GetArtificialEffectInfo(effectId)
-        --local forcedType = Effects.EffectForcedType[artificialEffectId]
         -- Bail out if we don't have Battle Spirit display for the player on
-
-        local duration = 0
-        local endTime = nil
-
         if (effectId == 0 or effectId == 2) and SpellCastBuffs.SV.IgnoreBattleSpiritPlayer then
             return
         end
+
+        local displayName, iconFile, effectType, _, startTime = GetArtificialEffectInfo(effectId)
+        local duration = 0
+        local endTime = nil
 
         if (effectId == 3) then
             duration = 300000
@@ -1984,13 +2002,27 @@ function SpellCastBuffs.ArtificialEffectUpdate(eventCode, effectId)
             effectType = BUFF_EFFECT_TYPE_BUFF -- Set to buff so it shows in long duration effects
         end
 
-        SpellCastBuffs.EffectsList.player1[ effectId ] = {
-            target="player", type=effectType,
-            id=effectId, name = displayName, icon = iconFile,
+        local tooltip = nil
+        local artificial = true
+        -- Battle Spirit handling, set this id to a fake id so it matches the target display
+        if effectId == 0 or effectId == 2 then
+            if effectId == 0 then
+                tooltip = Tooltips.Innate_Battle_Spirit
+            else
+                tooltip = Tooltips.Innate_Battle_Spirit_Imperial_City
+            end
+            effectId = 999014
+            artificial = false
+        end
+
+        local context = SpellCastBuffs.DetermineContextSimple("player1", effectId, displayName)
+        SpellCastBuffs.EffectsList[context][effectId] = {
+            target=SpellCastBuffs.DetermineTarget(context), type=effectType,
+            id=effectId, name = displayName, icon = iconFile, tooltip = tooltip,
             dur=duration, starts=startTime, ends=endTime,
             forced="long",
             restart=true, iconNum=0,
-            artificial = true,
+            artificial = artificial,
         }
     end
 end
@@ -2051,7 +2083,9 @@ function SpellCastBuffs.OnCombatAddNameEvent( eventCode, result, isError, abilit
         end
 
         -- Reload Effects on current target
-        SpellCastBuffs.AddNameAura()
+        if not SpellCastBuffs.SV.HideTargetBuffs then
+            SpellCastBuffs.AddNameAura()
+        end
     end
 end
 
@@ -2080,7 +2114,9 @@ function SpellCastBuffs.AddNameOnBossEngaged(eventCode)
     end
 
     -- Reload Effects on current target
-    SpellCastBuffs.AddNameAura()
+    if not SpellCastBuffs.SV.HideTargetBuffs then
+        SpellCastBuffs.AddNameAura()
+    end
 end
 
 -- Called from EVENT_PLAYER_ACTIVATED
@@ -2093,8 +2129,9 @@ function SpellCastBuffs.AddZoneBuffs()
         local abilityIcon = GetAbilityIcon(abilityId)
         local beginTime = GetGameTimeMilliseconds()
 
-        SpellCastBuffs.EffectsList["player1"][ abilityId ] = {
-            target="player", type=1,
+        local context = SpellCastBuffs.DetermineContextSimple("player1", abilityId, abilityName)
+        SpellCastBuffs.EffectsList["player1"][abilityId] = {
+            target=SpellCastBuffs.DetermineTarget(context), type=1,
             id=abilityId, name=abilityName, icon=abilityIcon,
             dur=0, starts=beginTime, ends=nil,
             forced = "long",
@@ -2241,20 +2278,21 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
         local context = "player" .. effectType
 
         -- Stack Resolution
-        if SpellCastBuffs.EffectsList[context][ buffSlot ] and Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].stackAdd then
+        if SpellCastBuffs.EffectsList[context][buffSlot] and Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].stackAdd then
             if Effects.EffectOverride[abilityId].stackMax then
-                if not (SpellCastBuffs.EffectsList[context][ buffSlot ].stack == Effects.EffectOverride[abilityId].stackMax) then
-                    stack = SpellCastBuffs.EffectsList[context][ buffSlot ].stack + Effects.EffectOverride[abilityId].stackAdd
+                if not (SpellCastBuffs.EffectsList[context][buffSlot].stack == Effects.EffectOverride[abilityId].stackMax) then
+                    stack = SpellCastBuffs.EffectsList[context][buffSlot].stack + Effects.EffectOverride[abilityId].stackAdd
                 else
-                    stack = SpellCastBuffs.EffectsList[context][ buffSlot ].stack
+                    stack = SpellCastBuffs.EffectsList[context][buffSlot].stack
                 end
             else
-                stack = SpellCastBuffs.EffectsList[context][ buffSlot ].stack + Effects.EffectOverride[abilityId].stackAdd
+                stack = SpellCastBuffs.EffectsList[context][buffSlot].stack + Effects.EffectOverride[abilityId].stackAdd
             end
         end
 
-        SpellCastBuffs.EffectsList[context][ buffSlot ] = {
-            type=effectType,
+        -- TODO: May need to update this to support prominent
+        SpellCastBuffs.EffectsList[context][buffSlot] = {
+            target=SpellCastBuffs.DetermineTarget(context), type=effectType,
             id=abilityId, name=effectName, icon=iconName,
             dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
             forced = "short",
@@ -2270,18 +2308,12 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
     -- Special handling for Crystallized Shield + Morphs
     if abilityId == 92068 or abilityId == 92168 or abilityId == 92170 then
         if result == ACTION_RESULT_DAMAGE_SHIELDED then
-            local context
-            if (SpellCastBuffs.SV.PromDebuffTable[abilityId] or SpellCastBuffs.SV.PromDebuffTable[effectName]) then
-                context = "promd_player"
-            elseif (SpellCastBuffs.SV.PromBuffTable[abilityId] or SpellCastBuffs.SV.PromBuffTable[effectName]) then
-                context = "promb_player"
-            else
-                context = "player1"
-            end
-            if SpellCastBuffs.EffectsList[context][ abilityId ] then
-                SpellCastBuffs.EffectsList[context][ abilityId ].stack = SpellCastBuffs.EffectsList[context][ abilityId ].stack - 1
-                if SpellCastBuffs.EffectsList[context][ abilityId ].stack == 0 then
-                    SpellCastBuffs.EffectsList[context][ abilityId ] = nil
+            local context = SpellCastBuffs.DetermineContext(context, abilityId, effectName)
+
+            if SpellCastBuffs.EffectsList[context][abilityId] then
+                SpellCastBuffs.EffectsList[context][abilityId].stack = SpellCastBuffs.EffectsList[context][abilityId].stack - 1
+                if SpellCastBuffs.EffectsList[context][abilityId].stack == 0 then
+                    SpellCastBuffs.EffectsList[context][abilityId] = nil
                 end
             end
         end
@@ -2335,9 +2367,11 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
             return
         end
 
-        SpellCastBuffs.EffectsList.player1[ abilityId ] = nil
+
         iconName = Effects.FakeExternalBuffs[abilityId].icon or GetAbilityIcon(abilityId)
         effectName = Effects.FakeExternalBuffs[abilityId].name or GetAbilityName(abilityId)
+        local context = SpellCastBuffs.DetermineContextSimple("player1", abilityId, effectName)
+        SpellCastBuffs.EffectsList[context][abilityId] = nil
         overrideDuration = Effects.FakeExternalBuffs[abilityId].overrideDuration
         duration = Effects.FakeExternalBuffs[abilityId].duration
         local beginTime = GetGameTimeMilliseconds()
@@ -2345,8 +2379,8 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
         local source = zo_strformat("<<C:1>>",sourceName)
         local target = zo_strformat("<<C:1>>",targetName)
         if source ~= "" and target == LUIE.PlayerNameFormatted then
-            SpellCastBuffs.EffectsList.player1[ abilityId ] = {
-                type=1,
+            SpellCastBuffs.EffectsList[context][abilityId] = {
+                target=SpellCastBuffs.DetermineTarget(context), type=1,
                 id=abilityId, name=effectName, icon=iconName,
                 dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
                 forced = "short",
@@ -2378,16 +2412,18 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
             return
         end
 
+        local context = "player2"
+
         -- Stack handling
-        if SpellCastBuffs.EffectsList.player2[ abilityId ] and Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].stackAdd then -- Before removing old effect, if this effect is currently present and stack is set to increment on event, then add to stack counter
+        if SpellCastBuffs.EffectsList[context][abilityId] and Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].stackAdd then -- Before removing old effect, if this effect is currently present and stack is set to increment on event, then add to stack counter
             if Effects.EffectOverride[abilityId].stackMax then
-                if not (SpellCastBuffs.EffectsList.player2[ abilityId ].stack == Effects.EffectOverride[abilityId].stackMax) then
-                    stack = SpellCastBuffs.EffectsList.player2[ abilityId ].stack + Effects.EffectOverride[abilityId].stackAdd
+                if not (SpellCastBuffs.EffectsList[context][abilityId].stack == Effects.EffectOverride[abilityId].stackMax) then
+                    stack = SpellCastBuffs.EffectsList[context][abilityId].stack + Effects.EffectOverride[abilityId].stackAdd
                 else
-                    stack = SpellCastBuffs.EffectsList.player2[ abilityId ].stack
+                    stack = SpellCastBuffs.EffectsList[context][abilityId].stack
                 end
             else
-                stack = SpellCastBuffs.EffectsList.player2[ abilityId ].stack + Effects.EffectOverride[abilityId].stackAdd
+                stack = SpellCastBuffs.EffectsList[context][abilityId].stack + Effects.EffectOverride[abilityId].stackAdd
             end
         end
 
@@ -2398,14 +2434,14 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
             elseif result == ACTION_RESULT_EFFECT_GAINED_DURATION then
                 InternalStackCounter[abilityId] = InternalStackCounter[abilityId] + 1
             end
-            if SpellCastBuffs.EffectsList.player2[abilityId] then
+            if SpellCastBuffs.EffectsList[context][abilityId] then
                 if InternalStackCounter[abilityId] <= 0 then
-                    SpellCastBuffs.EffectsList.player2[abilityId] = nil
+                    SpellCastBuffs.EffectsList[context][abilityId] = nil
                     InternalStackCounter[abilityId] = nil
                 end
             end
         else
-            SpellCastBuffs.EffectsList.player2[ abilityId ] = nil
+            SpellCastBuffs.EffectsList[context][abilityId] = nil
         end
 
         iconName = Effects.FakeExternalDebuffs[abilityId].icon or GetAbilityIcon(abilityId)
@@ -2467,8 +2503,8 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
         end
 
         if source ~= "" and target == LUIE.PlayerNameFormatted then
-            SpellCastBuffs.EffectsList.player2[ abilityId ] = {
-                type=BUFF_EFFECT_TYPE_DEBUFF,
+            SpellCastBuffs.EffectsList[context][abilityId] = {
+                target=SpellCastBuffs.DetermineTarget(context), type=BUFF_EFFECT_TYPE_DEBUFF,
                 id=abilityId, name=effectName, icon=iconName,
                 dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
                 forced = "short",
@@ -2506,21 +2542,13 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
         if Effects.IsSetICD[abilityId] and SpellCastBuffs.SV.IgnoreSetICDPlayer then return end
 
         -- Prominent Support
-        local context
-        if (SpellCastBuffs.SV.PromDebuffTable[abilityId] or SpellCastBuffs.SV.PromDebuffTable[effectName]) then
-            context = "promd_player"
-        elseif (SpellCastBuffs.SV.PromBuffTable[abilityId] or SpellCastBuffs.SV.PromBuffTable[effectName]) then
-            context = "promb_player"
-        else
-            context = "player1"
-        end
+        local effectType = Effects.FakePlayerBuffs[abilityId].debuff and BUFF_EFFECT_TYPE_DEBUFF or BUFF_EFFECT_TYPE_BUFF -- TODO: Expand this for below instead of calling again
+        local context = "player" .. effectType
 
-        if SpellCastBuffs.EffectsList[context][ abilityId ] and Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].stackAdd then -- Before removing old effect, if this effect is currently present and stack is set to increment on event, then add to stack counter
-            stack = SpellCastBuffs.EffectsList[context][ abilityId ].stack + Effects.EffectOverride[abilityId].stackAdd
+        if SpellCastBuffs.EffectsList[context][abilityId] and Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].stackAdd then -- Before removing old effect, if this effect is currently present and stack is set to increment on event, then add to stack counter
+            stack = SpellCastBuffs.EffectsList[context][abilityId].stack + Effects.EffectOverride[abilityId].stackAdd
         end
         if abilityId == 26406 then g_ignoreAbilityId[abilityId] = true end
-        SpellCastBuffs.EffectsList[context][ abilityId ] = nil
-        SpellCastBuffs.EffectsList.player2[ abilityId ] = nil
 
         local toggle = Effects.IsToggle[abilityId] or false
 
@@ -2533,6 +2561,9 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
             iconName = Effects.FakePlayerBuffs[finalId] and Effects.FakePlayerBuffs[finalId].icon or GetAbilityIcon(finalId)
             effectName = Effects.FakePlayerBuffs[finalId] and Effects.FakePlayerBuffs[finalId].name or GetAbilityName(finalId)
         end
+        -- TODO: Do we want to enable self debuffs from this to show as prominent (ICD for sets for example?)
+        local context = SpellCastBuffs.DetermineContextSimple(context, finalId, effectName)
+        SpellCastBuffs.EffectsList[context][finalId] = nil
         local forcedType = Effects.FakePlayerBuffs[abilityId].long and "long" or "short"
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
@@ -2541,33 +2572,17 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
         -- Pull unbreakable info from Shift Id if present
         unbreakable = (Effects.EffectOverride[finalId] and Effects.EffectOverride[finalId].unbreakable) or unbreakable
         if source == LUIE.PlayerNameFormatted and target == LUIE.PlayerNameFormatted then
-            -- If the "buff" is flagged as a debuff, then display it here instead
-            if Effects.FakePlayerBuffs[abilityId].debuff == true then
-                SpellCastBuffs.EffectsList.player2[ finalId ] = {
-                    type=BUFF_EFFECT_TYPE_DEBUFF,
-                    id=finalId, name=effectName, icon=iconName,
-                    dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-                    forced = "short",
-                    restart=true, iconNum=0,
-                    unbreakable=unbreakable,
-                    stack = stack,
-                    groundLabel = groundLabel,
-                    toggle = toggle,
-                }
-            -- Otherwise, display as a normal buff
-            else
-                SpellCastBuffs.EffectsList[context][ finalId ] = {
-                    target="player", type=1,
-                    id=finalId, name=effectName, icon=iconName,
-                    dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-                    forced = forcedType,
-                    restart=true, iconNum=0,
-                    unbreakable=unbreakable,
-                    stack = stack,
-                    groundLabel = groundLabel,
-                    toggle = toggle,
-                }
-            end
+            SpellCastBuffs.EffectsList[context][finalId] = {
+                target=SpellCastBuffs.DetermineTarget(context), type=effectType,
+                id=finalId, name=effectName, icon=iconName,
+                dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+                forced = forcedType,
+                restart=true, iconNum=0,
+                unbreakable=unbreakable,
+                stack = stack,
+                groundLabel = groundLabel,
+                toggle = toggle,
+            }
         end
     end
 
@@ -2594,9 +2609,10 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
         local source = zo_strformat("<<C:1>>",sourceName)
         local target = zo_strformat("<<C:1>>",targetName)
         local unitName = zo_strformat("<<C:1>>", GetUnitName("reticleover") )
+        local context = "player2"
         if source ~= "" and target == LUIE.PlayerNameFormatted then
-            SpellCastBuffs.EffectsList.player2[ abilityId ] = {
-                type=BUFF_EFFECT_TYPE_DEBUFF,
+            SpellCastBuffs.EffectsList[context][abilityId] = {
+                target=SpellCastBuffs.DetermineTarget(context), type=BUFF_EFFECT_TYPE_DEBUFF,
                 id=abilityId, name=effectName, icon=iconName,
                 dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
                 forced = "short",
@@ -2674,11 +2690,11 @@ function SpellCastBuffs.OnCombatEventOut( eventCode, result, isError, abilityNam
             context = "promb_player"
         end
 
-        if SpellCastBuffs.EffectsList[context][ abilityId ] and Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].stackAdd then -- Before removing old effect, if this effect is currently present and stack is set to increment on event, then add to stack counter
-            stack = SpellCastBuffs.EffectsList[context][ abilityId ].stack + Effects.EffectOverride[abilityId].stackAdd
+        if SpellCastBuffs.EffectsList[context][abilityId] and Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].stackAdd then -- Before removing old effect, if this effect is currently present and stack is set to increment on event, then add to stack counter
+            stack = SpellCastBuffs.EffectsList[context][abilityId].stack + Effects.EffectOverride[abilityId].stackAdd
         end
 
-        SpellCastBuffs.EffectsList[context][ abilityId ] = nil
+        SpellCastBuffs.EffectsList[context][abilityId] = nil
 
         local toggle = Effects.IsToggle[abilityId] or false
 
@@ -2701,8 +2717,8 @@ function SpellCastBuffs.OnCombatEventOut( eventCode, result, isError, abilityNam
         if source == LUIE.PlayerNameFormatted then
             -- If the "buff" is flagged as a debuff, then display it here instead
             if Effects.FakePlayerOfflineAura[abilityId].ground == true then
-                SpellCastBuffs.EffectsList[context][ finalId ] = {
-                    type=BUFF_EFFECT_TYPE_DEBUFF,
+                SpellCastBuffs.EffectsList[context][finalId] = {
+                    target=SpellCastBuffs.DetermineTarget(context), type=BUFF_EFFECT_TYPE_DEBUFF,
                     id=finalId, name=effectName, icon=iconName,
                     dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
                     forced = "short",
@@ -2714,8 +2730,8 @@ function SpellCastBuffs.OnCombatEventOut( eventCode, result, isError, abilityNam
                 }
             -- Otherwise, display as a normal buff
             else
-                SpellCastBuffs.EffectsList[context][ finalId ] = {
-                    target="player", type=1,
+                SpellCastBuffs.EffectsList[context][finalId] = {
+                    target=SpellCastBuffs.DetermineTarget(context), type=1,
                     id=finalId, name=effectName, icon=iconName,
                     dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
                     forced = forcedType,
@@ -2744,12 +2760,12 @@ function SpellCastBuffs.OnCombatEventOut( eventCode, result, isError, abilityNam
         if SpellCastBuffs.SV.HideTargetDebuffs then
             return
         end
-        SpellCastBuffs.EffectsList.reticleover2[ abilityId ] = nil
         if not DoesUnitExist("reticleover") then end
         --if GetUnitReaction("reticleover") ~= UNIT_REACTION_HOSTILE then return end
         if IsUnitDead(unitTag) then return end
         iconName = Effects.FakePlayerDebuffs[abilityId].icon or GetAbilityIcon(abilityId)
         effectName = Effects.FakePlayerDebuffs[abilityId].name or GetAbilityName(abilityId)
+        local context = "reticleover2" -- NOTE: TODO - No prominent support here and probably won't add
         duration = Effects.FakePlayerDebuffs[abilityId].duration
         overrideDuration = Effects.FakePlayerDebuffs[abilityId].overrideDuration
         effectType = BUFF_EFFECT_TYPE_DEBUFF
@@ -2764,8 +2780,8 @@ function SpellCastBuffs.OnCombatEventOut( eventCode, result, isError, abilityNam
                 return
             end
             if unitName == target then
-                SpellCastBuffs.EffectsList.ground[ abilityId ] = {
-                    type=effectType,
+                SpellCastBuffs.EffectsList["ground"][abilityId] = {
+                    target=SpellCastBuffs.DetermineTarget(context), type=effectType,
                     id=abilityId, name=effectName, icon=iconName,
                     dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
                     forced = "short",
@@ -2776,8 +2792,8 @@ function SpellCastBuffs.OnCombatEventOut( eventCode, result, isError, abilityNam
                     groundLabel = groundLabel,
                 }
             else
-                SpellCastBuffs.EffectsList.saved[ abilityId ] = {
-                    type=effectType,
+                SpellCastBuffs.EffectsList["saved"][abilityId] = {
+                    target=SpellCastBuffs.DetermineTarget(context), type=effectType,
                     id=abilityId, name=effectName, icon=iconName,
                     dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
                     forced = "short",
@@ -2808,6 +2824,7 @@ function SpellCastBuffs.OnCombatEventOut( eventCode, result, isError, abilityNam
         end
         iconName = Effects.FakeStagger[abilityId].icon or GetAbilityIcon(abilityId)
         effectName = Effects.FakeStagger[abilityId].name or GetAbilityName(abilityId)
+        local context = "reticleover2" -- NOTE: TODO - No prominent support here and probably won't add
         duration = Effects.FakeStagger[abilityId].duration
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
@@ -2819,8 +2836,8 @@ function SpellCastBuffs.OnCombatEventOut( eventCode, result, isError, abilityNam
                 return
             end
             if unitName == target then
-                SpellCastBuffs.EffectsList.ground[ abilityId ] = {
-                    type=BUFF_EFFECT_TYPE_DEBUFF,
+                SpellCastBuffs.EffectsList["ground"][abilityId] = {
+                    target=SpellCastBuffs.DetermineTarget(context), type=BUFF_EFFECT_TYPE_DEBUFF,
                     id=abilityId, name=effectName, icon=iconName,
                     dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
                     forced = "short",
@@ -2830,8 +2847,8 @@ function SpellCastBuffs.OnCombatEventOut( eventCode, result, isError, abilityNam
                     groundLabel = groundLabel,
                 }
             else
-                SpellCastBuffs.EffectsList.saved[ abilityId ] = {
-                    type=BUFF_EFFECT_TYPE_DEBUFF,
+                SpellCastBuffs.EffectsList["saved"][abilityId] = {
+                    target=SpellCastBuffs.DetermineTarget(context), type=BUFF_EFFECT_TYPE_DEBUFF,
                     id=abilityId, name=effectName, icon=iconName,
                     dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
                     forced = "short",
@@ -2852,21 +2869,19 @@ function SpellCastBuffs.OnDeath(eventCode, unitTag, isDead)
     if isDead then
         if unitTag == "player" then
             -- Clear all player/ground/prominent containers
-            SpellCastBuffs.EffectsList.player1 = {}
-            SpellCastBuffs.EffectsList.player2 = {}
-            SpellCastBuffs.EffectsList.ground = {}
-            SpellCastBuffs.EffectsList.promb_ground = {}
-            SpellCastBuffs.EffectsList.promd_ground = {}
-            SpellCastBuffs.EffectsList.promb_player = {}
-            SpellCastBuffs.EffectsList.promd_player = {}
+            local context = { "player1", "player2", "ground", "promb_ground", "promd_ground", "promb_player", "promd_player" }
+            for _, v in pairs(context) do
+                SpellCastBuffs.EffectsList[v] = { }
+            end
 
             -- If werewolf is active, reset the icon so it's not removed (otherwise it flashes off for about a second until the trailer function picks up on the fact that no power drain has occurred.
             if SpellCastBuffs.SV.ShowWerewolf and IsWerewolf() then
                 SpellCastBuffs.WerewolfState(nil, true, true)
             end
         else
+            -- TODO: Do we need to clear prominent target containers here? (Don't think so)
             for effectType = 1, 2 do
-                SpellCastBuffs.EffectsList[ unitTag .. effectType ] = {}
+                SpellCastBuffs.EffectsList[unitTag .. effectType] = {}
             end
         end
     end
@@ -2875,7 +2890,9 @@ end
 -- Runs on the EVENT_DISPOSITION_UPDATE listener.
 -- This handler fires when the disposition of a reticleover unitTag changes. We filter for only this case.
 function SpellCastBuffs.OnDispositionUpdate(eventCode, unitTag)
-    SpellCastBuffs.AddNameAura()
+    if not SpellCastBuffs.SV.HideTargetBuffs then
+        SpellCastBuffs.AddNameAura()
+    end
 end
 
 -- Runs on the EVENT_TARGET_CHANGE listener.
@@ -2902,18 +2919,21 @@ function SpellCastBuffs.ReloadEffects(unitTag)
         return
     end
 
-    -- Clear Existing
+    -- Clear existing base containers
     for effectType = 1, 2 do
-        SpellCastBuffs.EffectsList[ unitTag .. effectType ] = {}
+        SpellCastBuffs.EffectsList[unitTag .. effectType] = {}
     end
+    -- Clear prominent containers
     if unitTag == "player" then
-        SpellCastBuffs.EffectsList["promb_player"] = {}
-        SpellCastBuffs.EffectsList["promb_ground"] = {}
-        SpellCastBuffs.EffectsList["promd_player"] = {}
-        SpellCastBuffs.EffectsList["promd_ground"] = {}
+        local context = { "promb_player", "promb_ground", "promd_player", "promd_ground" }
+        for _, v in pairs(context) do
+            SpellCastBuffs.EffectsList[v] = { }
+        end
     else
-        SpellCastBuffs.EffectsList["promb_target"] = {}
-        SpellCastBuffs.EffectsList["promd_target"] = {}
+        local context = { "promb_target", "promd_target" }
+        for _, v in pairs(context) do
+            SpellCastBuffs.EffectsList[v] = { }
+        end
     end
 
     -- Stop doing anything else if we moused off a target
@@ -2937,14 +2957,20 @@ function SpellCastBuffs.ReloadEffects(unitTag)
         end
         SpellCastBuffs.OnEffectChanged(0, 3, buffSlot, buffName, unitTag, timeStarted, timeEnding, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, unitName, 0--[[unitId]], abilityId, castByPlayer)
     end
-
-    -- Display Disguise State
+    -- Display Disguise State (note that this function handles filtering player/target buffs if hidden)
     SpellCastBuffs.DisguiseStateChanged(nil, unitTag, GetUnitDisguiseState(unitTag))
-    -- Display Stealth State
+    -- Display Stealth State (note that this function handles filtering player/target buffs if hidden)
     SpellCastBuffs.StealthStateChanged(nil, unitTag, GetUnitStealthState(unitTag))
 
-    -- PLAYER SPECIFIC
+    -- Player Specific
     if unitTag == "player" and not SpellCastBuffs.SV.HidePlayerBuffs then
+        -- Display Assistant/Non-Combat Pet/Mount Icon
+        SpellCastBuffs.CollectibleBuff()
+        SpellCastBuffs.MountStatus("", true)
+        -- Display Disguise Icon (if disguised)
+        if not SpellCastBuffs.SV.IgnoreDisguise then
+            SpellCastBuffs.SetDisguiseItem()
+        end
         -- Update Artificial Effects
         SpellCastBuffs.ArtificialEffectUpdate()
         -- Display Recall Cooldown
@@ -2953,7 +2979,7 @@ function SpellCastBuffs.ReloadEffects(unitTag)
         end
     end
 
-    -- TARGET SPECIFIC
+    -- Target Specific
     if unitTag == "reticleover" and not SpellCastBuffs.SV.HideTargetBuffs then
         -- Handle FAKE DEBUFFS between targets
         SpellCastBuffs.RestoreSavedFakeEffects()
@@ -2961,24 +2987,24 @@ function SpellCastBuffs.ReloadEffects(unitTag)
         SpellCastBuffs.AddNameAura()
         -- Display Battle Spirit
         SpellCastBuffs.LoadBattleSpiritTarget()
-        -- TODO: Maybe implement - Display Mounted Status for target
-        -- SpellCastBuffs.DisplayMountIcon("reticleover")
     end
 end
 
--- Called by EVENT_RETICLE_TARGET_CHANGED listener - Displays recall cooldown
+-- Called by SpellCastBuffs.ReloadEffects - Displays recall cooldown
 function SpellCastBuffs.ShowRecallCooldown()
     local recallRemain, _ = GetRecallCooldown()
     if recallRemain > 0 then
         local currentTime = GetGameTimeMilliseconds()
-        SpellCastBuffs.EffectsList["player1"][ Abilities.Innate_Recall_Penalty ] = {
-            target="player", type=1,
-            id=6811, name=Abilities.Innate_Recall_Penalty, icon='LuiExtended/media/icons/abilities/ability_innate_recall_cooldown.dds',
+        local abilityId = 999016
+        local abilityName = Abilities.Innate_Recall_Penalty
+        local context = SpellCastBuffs.DetermineContextSimple("player1", abilityId, abilityName)
+        SpellCastBuffs.EffectsList[context][abilityName] = {
+            target=SpellCastBuffs.DetermineTarget(context), type=1,
+            id=abilityId, name=abilityName, icon='LuiExtended/media/icons/abilities/ability_innate_recall_cooldown.dds',
             dur=600000, starts=currentTime, ends=currentTime+recallRemain,
             forced = "long",
             restart=true, iconNum=0,
-            unbreakable=1,
-            overrideDur = 600000
+            -- unbreakable=1 -- TODO: Maybe re-enable this? It makes prominent show as unbreakable blue since its a buff technically
         }
     end
 end
@@ -2986,21 +3012,21 @@ end
 -- Called by EVENT_RETICLE_TARGET_CHANGED listener - Saves active FAKE debuffs on enemies and moves them back and forth between the active container or hidden.
 function SpellCastBuffs.RestoreSavedFakeEffects()
     -- Restore Ground Effects
-    for _, effectsList in pairs( {SpellCastBuffs.EffectsList.ground, SpellCastBuffs.EffectsList.saved} ) do
+    for _, effectsList in pairs( {SpellCastBuffs.EffectsList["ground"], SpellCastBuffs.EffectsList["saved"]} ) do
         --local container = containerRouting[context]
         for k, v in pairs(effectsList) do
             if v.savedName ~= nil then
                 local unitName = zo_strformat("<<C:1>>", GetUnitName('reticleover'))
                 if unitName == v.savedName then
-                    if SpellCastBuffs.EffectsList.saved[k] then
-                        SpellCastBuffs.EffectsList.ground[k] = SpellCastBuffs.EffectsList.saved[k]
-                        SpellCastBuffs.EffectsList.ground[k].iconNum = 0
-                        SpellCastBuffs.EffectsList.saved[k] = nil
+                    if SpellCastBuffs.EffectsList["saved"][k] then
+                        SpellCastBuffs.EffectsList["ground"][k] = SpellCastBuffs.EffectsList["saved"][k]
+                        SpellCastBuffs.EffectsList["ground"][k].iconNum = 0
+                        SpellCastBuffs.EffectsList["saved"][k] = nil
                     end
                 else
-                    if SpellCastBuffs.EffectsList.ground[k] then
-                        SpellCastBuffs.EffectsList.saved[k] = SpellCastBuffs.EffectsList.ground[k]
-                        SpellCastBuffs.EffectsList.ground[k] = nil
+                    if SpellCastBuffs.EffectsList["ground"][k] then
+                        SpellCastBuffs.EffectsList["saved"][k] = SpellCastBuffs.EffectsList["ground"][k]
+                        SpellCastBuffs.EffectsList["ground"][k] = nil
                     end
                 end
             end
@@ -3037,9 +3063,9 @@ function SpellCastBuffs.AddNameAura()
 
             local buffType = v.debuff or 1
             local context = v.debuff and "reticleover2" or "reticleover1"
-
-            SpellCastBuffs.EffectsList[context][ "Name Specific Buff" .. k ] = {
-                type=buffType,
+            local context = SpellCastBuffs.DetermineContext(context, abilityId, abilityName)
+            SpellCastBuffs.EffectsList[context]["Name Specific Buff" .. k] = {
+                target=SpellCastBuffs.DetermineTarget(context), type=buffType,
                 id= v.id, name= abilityName, icon= abilityIcon,
                 dur=0, starts=1, ends=nil,
                 forced = "short",
@@ -3048,6 +3074,8 @@ function SpellCastBuffs.AddNameAura()
             }
         end
     end
+    -- TODO: Unused, possibly remove. Probably needs some adjustments (type is set to BUFF_EFFECT_TYPE_DEBUFF for example)
+    --[[
     if Effects.AddNameAuraAlways[unitName] then
         for k, v in ipairs(Effects.AddNameAuraAlways[unitName]) do
             local abilityName = GetAbilityName(v.id)
@@ -3061,8 +3089,8 @@ function SpellCastBuffs.AddNameAura()
             if SpellCastBuffs.SV.BlacklistTable[v.id] or SpellCastBuffs.SV.BlacklistTable[abilityName] then
                 return
             end
-            SpellCastBuffs.EffectsList.reticleover2[ "Name Specific Buff" .. k ] = {
-                type=BUFF_EFFECT_TYPE_DEBUFF,
+            SpellCastBuffs.EffectsList["reticleover2"]["Name Specific Buff" .. k] = {
+                target="reticleover", type=BUFF_EFFECT_TYPE_DEBUFF,
                 id= v.id, name= abilityName, icon= abilityIcon,
                 dur=0, starts=1, ends=nil,
                 forced = "short",
@@ -3070,6 +3098,7 @@ function SpellCastBuffs.AddNameAura()
             }
         end
     end
+    ]]
 end
 
 -- Called by menu to preview icon positions. Simply iterates through all containers other than player_long and adds dummy test buffs into them.
@@ -3086,8 +3115,8 @@ function SpellCastBuffs.MenuPreview()
             local type = c < 4 and 1 or 2
             local name = ("Test Effect: " .. i )
             local duration = testEffectDurationList[i]
-            SpellCastBuffs.EffectsList[context][ abilityId ] = {
-                target = context, type=type,
+            SpellCastBuffs.EffectsList[context][abilityId] = {
+                target=SpellCastBuffs.DetermineTarget(context), type=type,
                 id=16415, name=name, icon=icon,
                 dur = duration * 1000,
                 starts = currentTime,
@@ -3158,18 +3187,17 @@ function SpellCastBuffs.OnUpdate(currentTime)
             elseif container then
                 -- Add icons to to-be-sorted list only if effect already started
                 if v.starts < currentTime then
-                    -- Filter Long-Term effects:
-                    -- Always show debuffs and short-term buffs
-                    if v.type == 2 or v.forced == "short" or not (v.forced == "long" or v.ends == nil or v.dur == 0) then
-                        if v.target == "reticleover" and SpellCastBuffs.SV.ShortTermEffects_Target then
-                            table.insert(buffsSorted[container], v)
-                        elseif v.target == "player" and SpellCastBuffs.SV.ShortTermEffects_Player then
-                            table.insert(buffsSorted[container], v)
-                        end
-                    -- Show long-term target buffs in same container
+                    -- Filter Effects
+                    -- Always show prominent effects
+                    if v.target == "prominent" then
+                        table.insert(buffsSorted[container], v)
+                    -- If the effect is not flagged as long or 0 duration and flagged to display in short container, then display normally.
+                    elseif v.type == 2 or v.forced == "short" or not (v.forced == "long" or v.ends == nil or v.dur == 0) then
+                        table.insert(buffsSorted[container], v)
+                    -- If the effect is a long term effect on the target then use Long Term Target settings.
                     elseif v.target == "reticleover" and SpellCastBuffs.SV.LongTermEffects_Target then
                         table.insert(buffsSorted[container], v)
-                    -- Show long-term player buffs
+                    -- If the effect is a long term effect on the player then use Long Term Player settings.
                     elseif v.target == "player" and SpellCastBuffs.SV.LongTermEffects_Player then
                         -- Choose container for long-term player buffs
                         if SpellCastBuffs.SV.LongTermEffectsSeparate and not (container == "prominentbuffs" or container == "prominentdebuffs") then
@@ -3198,19 +3226,22 @@ function SpellCastBuffs.OnUpdate(currentTime)
     end
 
     -- Display Block buff for player if enabled
-    if IsBlockActive() and SpellCastBuffs.SV.ShowBlockPlayer then
-        if not IsPlayerStunned() then -- Is Block Active returns true when the player is stunned currently.
-            SpellCastBuffs.EffectsList["player1"][Abilities.Innate_Brace] = {
-                target="player", type=1,
-                id=974, name=Abilities.Innate_Brace, icon='LuiExtended/media/icons/abilities/ability_innate_block.dds',
+    if SpellCastBuffs.SV.ShowBlockPlayer and not SpellCastBuffs.SV.HidePlayerBuffs then
+        if IsBlockActive() and not IsPlayerStunned() then -- Is Block Active returns true when the player is stunned currently.
+            local abilityId = 974
+            local abilityName = Abilities.Innate_Brace
+            local context = SpellCastBuffs.DetermineContextSimple("player1", abilityId, abilityName)
+            SpellCastBuffs.EffectsList[context][abilityId] = {
+                target=SpellCastBuffs.DetermineTarget(context), type=1,
+                id=abilityId, name=abilityName, icon='LuiExtended/media/icons/abilities/ability_innate_block.dds',
                 dur=0, starts=currentTime, ends=nil,
                 restart=true, iconNum=0,
                 forced = "short",
                 toggle = true,
             }
+        else
+            SpellCastBuffs.ClearPlayerBuff(974)
         end
-    else
-        SpellCastBuffs.EffectsList["player1"][Abilities.Innate_Brace] = nil
     end
 
 end
@@ -3242,9 +3273,9 @@ function SpellCastBuffs.updateBar(currentTime, sortedList, container)
         local buff = uiTlw[container].icons[index]
         local auraStarts = effect.starts or nil
         local auraEnds = effect.ends or nil
-        -- Modify abilities with forced maximum durations.
-        if effect.overrideDur then
-            auraStarts = auraEnds - effect.overrideDur
+        -- Modify recall penalty to show forced max duration
+        if effect.id == 999016 then
+            auraStarts = auraEnds - 600000
         end
 
         -- If this isn't a permanent duration buff then update the bar on every tick
@@ -3323,7 +3354,7 @@ function SpellCastBuffs.updateIcons(currentTime, sortedList, container)
 
         -- Perform manual alignment
         if not uiTlw[container].iconHolder then
-            if iconsNum ~= uiTlw[container].prevIconsCount and index == next_row_break --[[ and horizontal orientation of container ]] then
+            if iconsNum ~= uiTlw[container].prevIconsCount and index == next_row_break --[[and horizontal orientation of container]] then
                 -- Padding of first icon in a row
                 local anchor, leftPadding
 
@@ -3426,9 +3457,9 @@ function SpellCastBuffs.updateIcons(currentTime, sortedList, container)
             end
         end
         if effect.restart and buff.cd ~= nil then
-            -- Modify abilities with forced maximum durations.
-            if effect.overrideDur then
-                effect.dur = effect.overrideDur
+            -- Modify recall penalty to show forced max duration
+            if effect.id == 999016 then
+                effect.dur = 600000
             end
             if remain == nil or effect.dur == nil or effect.dur == 0 or effect.fakeDuration then
                 buff.cd:StartCooldown(0, 0, CD_TYPE_RADIAL, CD_TIME_TYPE_TIME_REMAINING, false )
@@ -3464,14 +3495,16 @@ function SpellCastBuffs.OnPlayerActivated(eventCode)
     SpellCastBuffs.AddNameOnBossEngaged()
 
     -- Load Zone Specific Buffs
-    SpellCastBuffs.AddZoneBuffs()
+    if not SpellCastBuffs.SV.HidePlayerBuffs then
+        SpellCastBuffs.AddZoneBuffs()
+    end
 
     -- Resolve Duel Target
     SpellCastBuffs.DuelStart()
 
     -- Resolve Mounted icon
     if not SpellCastBuffs.SV.IgnoreMountPlayer and IsMounted() then
-        zo_callLater(function() SpellCastBuffs.MountStatus(eventCode, true) end, 50)
+        zo_callLater(function() SpellCastBuffs.MountStatus("", true) end, 50)
     end
 
     -- Resolve Disguise Icon
@@ -3481,7 +3514,7 @@ function SpellCastBuffs.OnPlayerActivated(eventCode)
 
     -- Resolve Assistant Icon
     if not SpellCastBuffs.SV.IgnorePet or not SpellCastBuffs.SV.IgnoreAssistant then
-        zo_callLater(function() SpellCastBuffs.CollectibleBuff( eventCode, 0, true) end, 50)
+        zo_callLater(function() SpellCastBuffs.CollectibleBuff() end, 50)
     end
 
     -- Resolve Werewolf
@@ -3550,10 +3583,13 @@ function SpellCastBuffs.OnVibration(eventCode, duration, coarseMotor, fineMotor,
         -- We got correct sequence, so let us create a buff and reset the g_playerResurrectStage
         g_playerResurrectStage = nil
         local currentTime = GetGameTimeMilliseconds()
-        SpellCastBuffs.EffectsList["player1"]["Resurrection Immunity"] = {
-            target="player", type=1,
-            id=14646, name = Abilities.Innate_Resurrection_Immunity, icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds',
-            dur = 10000, starts= currentTime, ends = currentTime + 10000,
+        local abilityId = 14646
+        local abilityName = Abilities.Innate_Resurrection_Immunity
+        local context = SpellCastBuffs.DetermineContextSimple("player1", abilityId, abilityName)
+        SpellCastBuffs.EffectsList[context][abilityId] = {
+            target=SpellCastBuffs.DetermineTarget(context), type=1,
+            id=abilityId, name=abilityName, icon='LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds',
+            dur=10000, starts=currentTime, ends=currentTime+10000,
             restart=true, iconNum=0,
         }
     else

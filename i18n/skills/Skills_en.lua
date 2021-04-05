@@ -40,15 +40,12 @@ local strings = {
 
     -- Player Innate
     SI_LUIE_SKILL_RECALL_PENALTY =                       "Recall Penalty",
-    SI_LUIE_SKILL_MOUNTED =                              "Mounted",
     SI_LUIE_SKILL_RESURRECTION_IMMUNITY =                "Resurrection Immunity",
     SI_LUIE_SKILL_SOUL_GEM_RESURRECTION =                "Soul Gem Resurrection",
-    SI_LUIE_SKILL_STEALTH_STUN =                         "Stealth Stun",
     SI_LUIE_SKILL_FALL_DAMAGE =                          "Fall Damage",
     SI_LUIE_SKILL_ABSORBING_SKYSHARD =                   "Absorb Skyshard",
     SI_LUIE_SKILL_RECEIVING_BOON =                       "Receive Boon",
     --SI_LUIE_SKILL_MOUNT_SPRINT =                         "Gallop",
-    SI_LUIE_SKILL_BLOCK_STUN =                           "Block Stun",
     SI_LUIE_SKILL_AYLEID_WELL =                          "Ayleid Well",
     SI_LUIE_SKILL_AYLEID_WELL_TP =                       "Increase Max Health by |cFFFFFF10|r% for |cFFFFFF10|r minutes.",
     SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED =                "Fortified Ayleid Well",
@@ -61,12 +58,12 @@ local strings = {
     SI_LUIE_SKILL_INVISIBLE_TP =                         "Concealed from sight by magical or environmental means.",
     --SI_LUIE_SKILL_SPRINT_TP =                            "Sprint, increasing movement speed by |cFFFFFF40|r%.\n\nDrains Stamina while moving.",
     --SI_LUIE_SKILL_GALLOP_TP =                            "Gallop, increasing movement speed by |cFFFFFF30|r%.\n\nDrains Mount Stamina while moving.",
-    SI_LUIE_SKILL_BRACE_TP =                             "Brace for attack, reducing damage taken by |cFFFFFF<<1>>|r% and movement speed by |cFFFFFF<<2>>|r% while granting immunity to Stun and Knockback effects.\n\nDrains |cFFFFFF<<3>>|r Stamina on a successful block.",
+    SI_LUIE_SKILL_BRACE_TP =                             "Brace for attack, reducing damage taken by |cFFFFFF<<1>>|r% and movement speed by |cFFFFFF<<2>>|r% while granting immunity to Stun and Knockback effects.\n\nDrains |cFFFFFF<<3>>|r <<4>> on a successful block.",
     SI_LUIE_SKILL_RESURRECTION_IMMUNITY_TP =             "Reviving. Immune to damage and all negative effects.",
     SI_LUIE_SKILL_TAUNT_TP =                             "Taunted.",
     SI_LUIE_SKILL_DISGUISE_TP =                          "Disguised. You can be revealed by sentries or performing suspicious activity.\n\nTaking any damage other than fall damage will destroy your disguise.",
-    SI_LUIE_SKILL_BATTLE_SPIRIT_TP =                     "• Increase Max Health by |cFFFFFF5000|r\n• Reduce damage taken and damage shield strength by |cFFFFFF50|r%\n• Reduce healing received by |cFFFFFF55|r%\n• Increase the range of abilities with a range greater than |cFFFFFF28|r meters by |cFFFFFF8|r meters",
-    SI_LUIE_SKILL_BATTLE_SPIRIT_IMPERIAL_CITY_TP =       "• Increase Max Health by |cFFFFFF5000|r\n• Reduce damage taken and damage shield strength by |cFFFFFF50|r%\n• Reduce healing received by |cFFFFFF55|r%",
+    SI_LUIE_SKILL_BATTLE_SPIRIT_TP =                     "• Reduce damage taken by |cFFFFFF44|r%\n• Reduce damage shield strength by |cFFFFFF50|r%\n• Reduce healing received by |cFFFFFF50|r%\n• Increase the range of abilities with a range greater than |cFFFFFF28|r meters by |cFFFFFF8|r meters",
+    SI_LUIE_SKILL_BATTLE_SPIRIT_IMPERIAL_CITY_TP =       "• Reduce damage taken by |cFFFFFF44|r%\n• Reduce damage shield strength by |cFFFFFF50|r%\n• Reduce healing received by |cFFFFFF50|r%",
     SI_LUIE_SKILL_RECALL_PENALTY_TP =                    "You have recently recalled to a Wayshrine and must pay an additional gold fee to do so again.",
     SI_LUIE_SKILL_BATTLEGROUND_DESERTER_TP =             "You left a Battleground match early and cannot queue again or earn Alliance points from any PvP sources.",
     SI_LUIE_SKILL_LOOKING_FOR_GROUP_TP =                 "• Increase Max Health by |cFFFFFF20|r%\n• Increase Weapon and Spell Damage by |cFFFFFF25|r%",
@@ -107,6 +104,7 @@ local strings = {
 
     -- Collectible
     SI_LUIE_SKILL_COLLECTIBLE_MYSTERY_MEAT =             "Mystery Meat",
+    SI_LUIE_SKILL_COLLECTIBLE_VANITY_PET_TP =            "You have an active Non-Combat Pet.",
 
     -- Experience
     SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP =              "Increase Experience Points earned by |cFFFFFF<<1>>|r% for |cFFFFFF30|r minutes.",
@@ -892,6 +890,7 @@ local strings = {
     SI_LUIE_SKILL_SET_IRONBLOOD_TP =                     "Reduce damage taken by |cFFFFFF30|r% but reduce Movement Speed by |cFFFFFF50|r%.",
 
     -- Disguises
+    SI_LUIE_SKILL_DISGUISE_GENERIC_TP =                  "You are wearing a disguise.",
     SI_LUIE_SKILL_DISGUISE_KOLLOPI_ESSENCE_TP =          "Cloaked in a haze of forest moths, preventing Wood Orcs from detecting you.\n\nWill not work in PvP enabled areas.",
     SI_LUIE_SKILL_DISGUISE_SEA_VIPER_ARMOR_TP =          "Disguised as a Maormer Soldier.",
     SI_LUIE_SKILL_DISGUISE_VULKHEL_GUARD_TP =            "Disguised as a First Auridon Marine.",
