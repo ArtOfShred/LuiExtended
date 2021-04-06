@@ -20,7 +20,6 @@ local strings = {
     SI_LUIE_CUSTOM_LIST_ADDED_NAME =                     "<<1>> добавлен к <<2>>.",
     SI_LUIE_CUSTOM_LIST_CLEARED =                        "Очистил все записи от <<1>>.",
     SI_LUIE_CUSTOM_LIST_REMOVED_ID =                     "<<1>> [<<2>>] <<3>> убраны из <<4>>.",
-    SI_LUIE_CUSTOM_LIST_REMOVED_FAILED =                 "Не возможно убрать [<<1>>] до <<2>>. Этот abilityID не существует.",
     SI_LUIE_CUSTOM_LIST_REMOVED_NAME =                   "<<1>> убран из <<2>>.",
     SI_LUIE_DEFAULT_FRAME_QUEST_LOG =                    "Лог заданий",
     SI_LUIE_DEFAULT_FRAME_BATTLEGROUND_SCORE =           "Счет полей сражений",

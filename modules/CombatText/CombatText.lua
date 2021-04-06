@@ -396,15 +396,10 @@ function CombatText.RemoveFromCustomList(list, input)
     local listRef = list == CombatText.SV.blacklist and GetString(SI_LUIE_CUSTOM_LIST_CT_BLACKLIST) or ""
     if id and id > 0 then
         local name = zo_strformat("<<C:1>>", GetAbilityName(id))
-        if name ~= nil and name ~= "" then
-            local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
-            list[id] = nil
-            CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_ID), icon, id, name, listRef), true)
-        else
-            CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_FAILED), input, listRef), true)
-        end
+        local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
+        list[id] = nil
+        CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+        printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_ID), icon, id, name, listRef), true)
     else
         if input ~= "" then
             list[input] = nil

@@ -594,7 +594,7 @@ function SpellCastBuffs.AddToCustomList(list, input)
             printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_NAME), input, listRef), true)
         end
     end
-    SpellCastBuffs.Reset()
+    SpellCastBuffs.ReloadEffects("player")
 end
 
 -- List Handling (Remove) for Prominent Auras & Blacklist
@@ -603,15 +603,10 @@ function SpellCastBuffs.RemoveFromCustomList(list, input)
     local listRef = list == SpellCastBuffs.SV.PromBuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS) or list == SpellCastBuffs.SV.PromDebuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS) or list == SpellCastBuffs.SV.BlacklistTable and GetString(SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST) or ""
     if id and id > 0 then
         local name = zo_strformat("<<C:1>>", GetAbilityName(id))
-        if name ~= nil and name ~= "" then
-            local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
-            list[id] = nil
-            CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_ID), icon, id, name, listRef), true)
-        else
-            CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_FAILED), input, listRef), true)
-        end
+        local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
+        list[id] = nil
+        CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+        printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_ID), icon, id, name, listRef), true)
     else
         if input ~= "" then
             list[input] = nil
@@ -619,7 +614,7 @@ function SpellCastBuffs.RemoveFromCustomList(list, input)
             printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_NAME), input, listRef), true)
         end
     end
-    SpellCastBuffs.Reset()
+    SpellCastBuffs.ReloadEffects("player")
 end
 
 -- Set g_alignmentDirection table to equal the values from our SV Table & converts string values to proper alignment values. Called from Settings Menu & on Initialize
