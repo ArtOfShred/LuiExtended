@@ -273,6 +273,7 @@ Effects.IsExperienceBuff = {
     [77123] = true, -- Anniversary EXP Buff
     [118985] = true, -- Anniversary EXP Buff
     [136348] = true, -- Anniversary EXP Buff
+    [152514] = true, -- Anniversary EXP Buff
     [96118] = true, -- Witchmother's Boon -- TODO: Check one more time
 }
 
@@ -3419,6 +3420,7 @@ Effects.EffectOverride = {
     [77123] = { icon = 'LuiExtended/media/icons/mementos/memento_jubilee_cake.dds', name = Abilities.Memento_Jubliee_Cake, tooltip = Tooltips.Experience_Seasonal_Event, forcedContainer = 'long' }, -- Anniversary EXP Buff (Other Jubilee Cake)
     [118985] = { icon = 'LuiExtended/media/icons/mementos/memento_jubilee_cake.dds', name = Abilities.Memento_Jubliee_Cake, tooltip = Tooltips.Experience_Seasonal_Event, forcedContainer = 'long' }, -- Anniversary EXP Buff (Jubilee Cake 2019)
     [136348] = { icon = 'LuiExtended/media/icons/mementos/memento_jubilee_cake.dds', name = Abilities.Memento_Jubliee_Cake, tooltip = Tooltips.Experience_Seasonal_Event, forcedContainer = 'long' }, -- Anniversary EXP Buff (Jubilee Cake 2020)
+    [152514] = { icon = 'LuiExtended/media/icons/mementos/memento_jubilee_cake.dds', name = Abilities.Memento_Jubliee_Cake, tooltip = Tooltips.Experience_Seasonal_Event, forcedContainer = 'long' }, -- Anniversary EXP Buff (Jubilee Cake 2021)
     [81575] = { icon = 'LuiExtended/media/icons/mementos/memento_witchmothers_whistle.dds', name = Abilities.Memento_Witchmothers_Whistle, hide = true }, -- Event - WitchFest Cauldron (Witchmother's Whistle)
     [96118] = { icon = 'LuiExtended/media/icons/mementos/memento_witchmothers_brew.dds', tooltip = Tooltips.Experience_Seasonal_Event, forcedContainer = 'long' }, -- Witchmother's Boon (Witchmother's Whistle)
     [84364] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds' }, -- Witchmother's Brew (Witchmother's Whistle)
