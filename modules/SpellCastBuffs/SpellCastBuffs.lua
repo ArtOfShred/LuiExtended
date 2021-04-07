@@ -3234,6 +3234,8 @@ function SpellCastBuffs.OnUpdate(currentTime)
         end
     end
 
+    -- TODO: Fix implementation if possible
+    --[[
     -- Display Block buff for player if enabled
     if SpellCastBuffs.SV.ShowBlockPlayer and not SpellCastBuffs.SV.HidePlayerBuffs then
         if IsBlockActive() and not IsPlayerStunned() then -- Is Block Active returns true when the player is stunned currently.
@@ -3252,6 +3254,7 @@ function SpellCastBuffs.OnUpdate(currentTime)
             SpellCastBuffs.ClearPlayerBuff(974)
         end
     end
+    ]]--
 
 end
 

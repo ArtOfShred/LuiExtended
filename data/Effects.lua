@@ -3809,7 +3809,7 @@ Effects.EffectOverride = {
     [123717] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vastaries_tutelage.dds', tooltip = Tooltips.Set_Vastaries_Tutelage }, -- Vastarie's Tutelage (Vastarie's Tutelage)
     [123715] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vastaries_tutelage.dds', tooltip = Tooltips.Set_Vastaries_Tutelage }, -- Vastarie's Tutelage (Vastarie's Tutelage)
 
-    [134254] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dauntless_combatant_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Dauntless_Combatant, Abilities.Set_Cooldown), tooltip = Tooltips.Generic_Set_ICD, tooltipValue2 = Abilities.Set_Dauntless_Combatant, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Winded (Dauntless Combatant's)
+    --[134254] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dauntless_combatant_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Dauntless_Combatant, Abilities.Set_Cooldown), tooltip = Tooltips.Generic_Set_ICD, tooltipValue2 = Abilities.Set_Dauntless_Combatant, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Winded (Dauntless Combatant's)
 
     [141916] = { icon = 'LuiExtended/media/icons/abilities/ability_set_stuhns_favor.dds', tooltip = Tooltips.Set_Stuhns_Favor, tooltipValue2 = 5312 }, -- Stuhn's Favor (Stuhn's)
     [135919] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds' }, -- Spell Parasite (Spell Parasite's)

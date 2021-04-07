@@ -1231,6 +1231,7 @@ function SpellCastBuffs.CreateSettings()
                 default = Defaults.ShowWerewolf,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
+            --[[ TODO: Reimplement if possible
             {
                 -- Show Block Player Icon
                 type = "checkbox",
@@ -1242,6 +1243,7 @@ function SpellCastBuffs.CreateSettings()
                 default = Defaults.ShowBlockPlayer,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
+            ]]--
             {
                 -- Show Block Target Icon
                 type = "checkbox",
