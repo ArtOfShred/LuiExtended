@@ -393,6 +393,236 @@ function SpellCastBuffs.CreateSettings()
         },
     }
 
+    -- Buffs&Debuffs - Color Options Submenu
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs +1] = {
+        type = "submenu",
+        name = GetString(SI_LUIE_LAM_BUFF_COLOR_HEADER),
+        controls = {
+            {
+                -- Basic Color Options
+                type = "header",
+                name = GetString(SI_LUIE_LAM_BUFF_COLOR_HEADER_BASIC),
+                width = "full",
+            },
+            {
+                -- buff
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_BUFF_COLOR_BUFF),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_BUFF_TP),
+                getFunc = function() return unpack(Settings.colors.buff) end,
+                setFunc = function(r, g, b, a) Settings.colors.buff = { r, g, b, a } end,
+                default = {r=Defaults.colors.buff[1], g=Defaults.colors.buff[2], b=Defaults.colors.buff[3]},
+                width = "half",
+            },
+            {
+                -- debuff
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_BUFF_COLOR_DEBUFF),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_DEBUFF_TP),
+                getFunc = function() return unpack(Settings.colors.debuff) end,
+                setFunc = function(r, g, b, a) Settings.colors.debuff = { r, g, b, a } end,
+                default = {r=Defaults.colors.debuff[1], g=Defaults.colors.debuff[2], b=Defaults.colors.debuff[3]},
+                width = "half",
+            },
+            {
+                -- prioritybuff
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_BUFF_COLOR_PRIORITYBUFF),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_PRIORITYBUFF_TP),
+                getFunc = function() return unpack(Settings.colors.prioritybuff) end,
+                setFunc = function(r, g, b, a) Settings.colors.prioritybuff = { r, g, b, a } end,
+                default = {r=Defaults.colors.prioritybuff[1], g=Defaults.colors.prioritybuff[2], b=Defaults.colors.prioritybuff[3]},
+                width = "half",
+            },
+            {
+                -- prioritydebuff
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_BUFF_COLOR_PRIORITYDEBUFF),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_PRIORITYDEBUFF_TP),
+                getFunc = function() return unpack(Settings.colors.prioritydebuff) end,
+                setFunc = function(r, g, b, a) Settings.colors.prioritydebuff = { r, g, b, a } end,
+                default = {r=Defaults.colors.prioritydebuff[1], g=Defaults.colors.prioritydebuff[2], b=Defaults.colors.prioritydebuff[3]},
+                width = "half",
+            },
+            {
+                -- Unbreakable & Cosmetic Header
+                type = "header",
+                name = GetString(SI_LUIE_LAM_BUFF_COLOR_HEADER_UNBREAKABLE),
+                width = "full",
+            },
+            {
+                -- Unbreakable Toggle
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_COLOR_UNBREAKABLE_TOGGLE),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_UNBREAKABLE_TOGGLE_TP),
+                getFunc = function() return Settings.ColorUnbreakable end,
+                setFunc = function(value) Settings.ColorUnbreakable = value SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = Defaults.ColorUnbreakable,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
+                -- unbreakable
+                type    = "colorpicker",
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_COLOR_UNBREAKABLE)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_UNBREAKABLE_TP),
+                getFunc = function() return unpack(Settings.colors.unbreakable) end,
+                setFunc = function(r, g, b, a) Settings.colors.unbreakable = { r, g, b, a } end,
+                default = {r=Defaults.colors.unbreakable[1], g=Defaults.colors.unbreakable[2], b=Defaults.colors.unbreakable[3]},
+                disabled = function() return not Settings.ColorUnbreakable end,
+            },
+
+            {
+                -- Cosmetic Toggle
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_COLOR_COSMETIC_TOGGLE),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_COSMETIC_TOGGLE_TP),
+                getFunc = function() return Settings.ColorCosmetic end,
+                setFunc = function(value) Settings.ColorCosmetic = value SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = Defaults.ColorCosmetic,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
+                -- cosmetic
+                type    = "colorpicker",
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_COLOR_COSMETIC)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_COSMETIC_TP),
+                getFunc = function() return unpack(Settings.colors.cosmetic) end,
+                setFunc = function(r, g, b, a) Settings.colors.cosmetic = { r, g, b, a } end,
+                default = {r=Defaults.colors.cosmetic[1], g=Defaults.colors.cosmetic[2], b=Defaults.colors.cosmetic[3]},
+                disabled = function() return not Settings.ColorCosmetic end,
+            },
+            {
+                -- Crowd Control Header
+                type = "header",
+                name = GetString(SI_LUIE_LAM_BUFF_COLOR_HEADER_CROWD_CONTROL),
+                width = "full",
+            },
+            {
+                -- CC Toggle
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_COLOR_BY_CC),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_BY_CC_TP),
+                getFunc = function() return Settings.ColorCC end,
+                setFunc = function(value) Settings.ColorCC = value SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = Defaults.ColorCC,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
+                -- nocc
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_BUFF_COLOR_NOCC),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_NOCC_TP),
+                getFunc = function() return unpack(Settings.colors.nocc) end,
+                setFunc = function(r, g, b, a) Settings.colors.nocc = { r, g, b, a } end,
+                default = {r=Defaults.colors.nocc[1], g=Defaults.colors.nocc[2], b=Defaults.colors.nocc[3]},
+                width = "half",
+                disabled = function() return not Settings.ColorCC end,
+            },
+            {
+                -- stun
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_BUFF_COLOR_STUN),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_STUN_TP),
+                getFunc = function() return unpack(Settings.colors.stun) end,
+                setFunc = function(r, g, b, a) Settings.colors.stun = { r, g, b, a } end,
+                default = {r=Defaults.colors.stun[1], g=Defaults.colors.stun[2], b=Defaults.colors.stun[3]},
+                width = "half",
+                disabled = function() return not Settings.ColorCC end,
+            },
+            {
+                -- knockback
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_BUFF_COLOR_KNOCKBACK),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_KNOCKBACK_TP),
+                getFunc = function() return unpack(Settings.colors.knockback) end,
+                setFunc = function(r, g, b, a) Settings.colors.knockback = { r, g, b, a } end,
+                default = {r=Defaults.colors.knockback[1], g=Defaults.colors.knockback[2], b=Defaults.colors.knockback[3]},
+                width = "half",
+                disabled = function() return not Settings.ColorCC end,
+            },
+            {
+                -- levitate
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_BUFF_COLOR_LEVITATE),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_LEVITATE_TP),
+                getFunc = function() return unpack(Settings.colors.levitate) end,
+                setFunc = function(r, g, b, a) Settings.colors.levitate = { r, g, b, a } end,
+                default = {r=Defaults.colors.levitate[1], g=Defaults.colors.levitate[2], b=Defaults.colors.levitate[3]},
+                width = "half",
+                disabled = function() return not Settings.ColorCC end,
+            },
+            {
+                -- disorient
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_BUFF_COLOR_DISORIENT),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_DISORIENT_TP),
+                getFunc = function() return unpack(Settings.colors.disorient) end,
+                setFunc = function(r, g, b, a) Settings.colors.disorient = { r, g, b, a } end,
+                default = {r=Defaults.colors.disorient[1], g=Defaults.colors.disorient[2], b=Defaults.colors.disorient[3]},
+                width = "half",
+                disabled = function() return not Settings.ColorCC end,
+            },
+            {
+                -- fear
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_BUFF_COLOR_FEAR),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_FEAR_TP),
+                getFunc = function() return unpack(Settings.colors.fear) end,
+                setFunc = function(r, g, b, a) Settings.colors.fear = { r, g, b, a } end,
+                default = {r=Defaults.colors.fear[1], g=Defaults.colors.fear[2], b=Defaults.colors.fear[3]},
+                width = "half",
+                disabled = function() return not Settings.ColorCC end,
+            },
+            {
+                -- stagger
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_BUFF_COLOR_STAGGER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_STAGGER_TP),
+                getFunc = function() return unpack(Settings.colors.stagger) end,
+                setFunc = function(r, g, b, a) Settings.colors.stagger = { r, g, b, a } end,
+                default = {r=Defaults.colors.stagger[1], g=Defaults.colors.stagger[2], b=Defaults.colors.stagger[3]},
+                width = "half",
+                disabled = function() return not Settings.ColorCC end,
+            },
+            {
+                -- silence
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_BUFF_COLOR_SILENCE),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_SILENCE_TP),
+                getFunc = function() return unpack(Settings.colors.silence) end,
+                setFunc = function(r, g, b, a) Settings.colors.silence = { r, g, b, a } end,
+                default = {r=Defaults.colors.silence[1], g=Defaults.colors.silence[2], b=Defaults.colors.silence[3]},
+                width = "half",
+                disabled = function() return not Settings.ColorCC end,
+            },
+            {
+                -- snare
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_BUFF_COLOR_SNARE),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_SNARE_TP),
+                getFunc = function() return unpack(Settings.colors.snare) end,
+                setFunc = function(r, g, b, a) Settings.colors.snare = { r, g, b, a } end,
+                default = {r=Defaults.colors.snare[1], g=Defaults.colors.snare[2], b=Defaults.colors.snare[3]},
+                width = "half",
+                disabled = function() return not Settings.ColorCC end,
+            },
+            {
+                -- root
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_BUFF_COLOR_ROOT),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_ROOT_TP),
+                getFunc = function() return unpack(Settings.colors.root) end,
+                setFunc = function(r, g, b, a) Settings.colors.root = { r, g, b, a } end,
+                default = {r=Defaults.colors.root[1], g=Defaults.colors.root[2], b=Defaults.colors.root[3]},
+                width = "half",
+                disabled = function() return not Settings.ColorCC end,
+            },
+        },
+    }
+
     -- Buffs&Debuffs - Alignment & Sorting Options Submenu
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
         type = "submenu",
@@ -1321,6 +1551,72 @@ function SpellCastBuffs.CreateSettings()
        },
     }
 
+    -- Buffs&Debuffs - Priority Buffs & Debuffs Options Submenu
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+        type = "submenu",
+        name = GetString(SI_LUIE_LAM_BUFF_PRIORITY_HEADER),
+        controls = {
+            {
+                -- Prominent Buffs & Debuffs Description
+                type = "description",
+                text = GetString(SI_LUIE_LAM_BUFF_PRIORITY_DESCRIPTION),
+            },
+            {
+                type = "divider",
+            },
+            {
+                type = "description",
+                text = GetString(SI_LUIE_LAM_BUFF_PROM_DIALOGUE_DESCRIPT),
+            },
+            {
+                -- Priority Buffs List (Add)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_BUFF_PRIORITY_BUFF_ADDLIST),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PRIORITY_BUFF_ADDLIST_TP),
+                getFunc = function() end,
+                setFunc = function(value) SpellCastBuffs.AddToCustomList(Settings.PriorityBuffTable, value) LUIE_Priority_Buffs_List:UpdateChoices(GenerateCustomList(Settings.PriorityBuffTable)) end,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
+            },
+            {
+                -- Priority Buffs List (Remove)
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_BUFF_PRIORITY_BUFF_REMLIST),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PRIORITY_BUFF_REMLIST_TP),
+                choices = PromBuffs,
+                choicesValues = PromBuffsValues,
+                scrollable = true,
+                sort = "name-up",
+                getFunc = function() LUIE_Priority_Buffs_List:UpdateChoices(GenerateCustomList(Settings.PriorityBuffTable)) end,
+                setFunc = function(value) SpellCastBuffs.RemoveFromCustomList(Settings.PriorityBuffTable, value) LUIE_Priority_Buffs_List:UpdateChoices(GenerateCustomList(Settings.PriorityBuffTable)) end,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
+                reference = "LUIE_Priority_Buffs_List"
+            },
+            {
+                -- Priority Debuffs List (Add)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_BUFF_PRIORITY_DEBUFF_ADDLIST),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PRIORITY_DEBUFF_ADDLIST_TP),
+                getFunc = function() end,
+                setFunc = function(value) SpellCastBuffs.AddToCustomList(Settings.PriorityDebuffTable, value) LUIE_Priority_Debuffs_List:UpdateChoices(GenerateCustomList(Settings.PriorityDebuffTable)) end,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
+            },
+            {
+                -- Priority Debuffs List (Remove)
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_BUFF_PRIORITY_DEBUFF_REMLIST),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PRIORITY_DEBUFF_REMLIST_TP),
+                choices = PromDebuffs,
+                choicesValues = PromDebuffsValues,
+                scrollable = true,
+                sort = "name-up",
+                getFunc = function() LUIE_Priority_Debuffs_List:UpdateChoices(GenerateCustomList(Settings.PriorityDebuffTable)) end,
+                setFunc = function(value) SpellCastBuffs.RemoveFromCustomList(Settings.PriorityDebuffTable, value) LUIE_Priority_Debuffs_List:UpdateChoices(GenerateCustomList(Settings.PriorityDebuffTable)) end,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
+                reference = "LUIE_Priority_Debuffs_List"
+            },
+       },
+    }
+
     -- Buffs&Debuffs - Prominent Buffs & Debuffs Options Submenu
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
         type = "submenu",
@@ -1428,6 +1724,30 @@ function SpellCastBuffs.CreateSettings()
                 default = {r=Settings.ProminentProgressBuffC2[1], g=Settings.ProminentProgressBuffC2[2], b=Settings.ProminentProgressBuffC2[3]},
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and Settings.ProminentProgress ) end,
             },
+
+            {
+                -- Prominent Buffs Gradient Color 1 (Priority)
+                type    = "colorpicker",
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFFPRIORITY1)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFFPRIORITY1_TP),
+                getFunc = function() return unpack(Settings.ProminentProgressBuffPriorityC1) end,
+                setFunc = function(r, g, b, a) Settings.ProminentProgressBuffPriorityC1 = { r, g, b, a } SpellCastBuffs.Reset() end,
+                width = "half",
+                default = {r=Settings.ProminentProgressBuffPriorityC1[1], g=Settings.ProminentProgressBuffPriorityC1[2], b=Settings.ProminentProgressBuffPriorityC1[3]},
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and Settings.ProminentProgress ) end,
+            },
+            {
+                -- Prominent Buffs Gradient Color 2 (Priority)
+                type    = "colorpicker",
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFFPRIORITY2)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFFPRIORITY2_TP),
+                getFunc = function() return unpack(Settings.ProminentProgressBuffPriorityC2) end,
+                setFunc = function(r, g, b, a) Settings.ProminentProgressBuffPriorityC2 = { r, g, b, a } SpellCastBuffs.Reset() end,
+                width = "half",
+                default = {r=Settings.ProminentProgressBuffPriorityC2[1], g=Settings.ProminentProgressBuffPriorityC2[2], b=Settings.ProminentProgressBuffPriorityC2[3]},
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and Settings.ProminentProgress ) end,
+            },
+
             {
                 -- Prominent Debuffs Gradient Color 1
                 type    = "colorpicker",
@@ -1450,6 +1770,30 @@ function SpellCastBuffs.CreateSettings()
                 default = {r=Settings.ProminentProgressDebuffC2[1], g=Settings.ProminentProgressDebuffC2[2], b=Settings.ProminentProgressDebuffC2[3]},
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and Settings.ProminentProgress ) end,
             },
+
+            {
+                -- Prominent Debuffs Gradient Color 1 (Priority)
+                type    = "colorpicker",
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFFPRIORITY1)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFFPRIORITY1_TP),
+                getFunc = function() return unpack(Settings.ProminentProgressDebuffPriorityC1) end,
+                setFunc = function(r, g, b, a) Settings.ProminentProgressDebuffPriorityC1 = { r, g, b, a } SpellCastBuffs.Reset() end,
+                width = "half",
+                default = {r=Settings.ProminentProgressDebuffPriorityC1[1], g=Settings.ProminentProgressDebuffPriorityC1[2], b=Settings.ProminentProgressDebuffPriorityC1[3]},
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and Settings.ProminentProgress ) end,
+            },
+            {
+                -- Prominent Debuffs Gradient Color 2 (Priority)
+                type    = "colorpicker",
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFFPRIORITY2)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFFPRIORITY2_TP),
+                getFunc = function() return unpack(Settings.ProminentProgressDebuffPriorityC2) end,
+                setFunc = function(r, g, b, a) Settings.ProminentProgressDebuffPriorityC2 = { r, g, b, a } SpellCastBuffs.Reset() end,
+                width = "half",
+                default = {r=Settings.ProminentProgressDebuffPriorityC2[1], g=Settings.ProminentProgressDebuffPriorityC2[2], b=Settings.ProminentProgressDebuffPriorityC2[3]},
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and Settings.ProminentProgress ) end,
+            },
+
             {
                 -- Prominent Buffs Label/Progress Bar Direction
                 type = "dropdown",
@@ -1475,6 +1819,9 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = Defaults.ProminentDebuffLabelDirection,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and (Settings.ProminentLabel or Settings.ProminentProgress) ) end,
+            },
+            {
+                type = "divider",
             },
             {
                 type = "description",

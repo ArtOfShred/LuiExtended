@@ -13,6 +13,8 @@ local strings = {
 
     -- Shared
     SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST =                 "аура в черный список",
+    SI_LUIE_CUSTOM_LIST_PRIORITY_BUFFS =                 "Priority Buffs",
+    SI_LUIE_CUSTOM_LIST_PRIORITY_DEBUFFS =               "Priority Debuffs",
     SI_LUIE_CUSTOM_LIST_CT_BLACKLIST =                   "Combat Text Blacklist",
     SI_LUIE_CUSTOM_LIST_UF_WHITELIST =                   "Белый список имен питомцев",
     SI_LUIE_CUSTOM_LIST_ADDED_ID =                       "<<1>> [<<2>>] <<3>> добавлены к <<4>>.",

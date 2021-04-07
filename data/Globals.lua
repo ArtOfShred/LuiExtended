@@ -21,6 +21,7 @@ LUIE_CC_TYPE_TRAP = 12 -- Trap
 LUIE_CC_TYPE_ENVIRONMENTAL = 13 -- Environmental Hazard (I.E. Lava)
 
 -- LUIE_BUFF_TYPE
+-- TODO: Unimplemented
 LUIE_BUFF_TYPE_BUFF = 1 -- Buff
 LUIE_BUFF_TYPE_DEBUFF = 2 -- Debuff
 LUIE_BUFF_TYPE_UB_BUFF = 3 -- Unbreakable buff

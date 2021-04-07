@@ -41,6 +41,27 @@ local windowTitles = {
 
 SpellCastBuffs.Enabled = false
 SpellCastBuffs.Defaults = {
+    ColorCosmetic                       = true,
+    ColorUnbreakable                    = true,
+    ColorCC                             = false,
+    colors = {
+        buff                            = { 0, 1, 0 }, -- gren
+        debuff                          = { 1, 0, 0 }, -- red
+        prioritybuff                    = { 1, 1, 0 }, -- yellow
+        prioritydebuff                  = { 1, 1, 0 }, -- yellow
+        unbreakable                     = { 0.88, 0.88, 1 }, -- light grey
+        cosmetic                        = { 0, .4, 0 }, -- dark green
+        nocc                            = { 0, 0, 0 }, -- black
+        stun                            = { 1, 0, 0 }, -- red
+        knockback                       = { 1, 0, 0 }, -- red
+        levitate                        = { 0, 0, 1 }, -- dark blue
+        disorient                       = { 0.0313725509, 0.6274510026, 1 }, -- blue
+        fear                            = { 0.5607843137, 0.0352941176, 0.9254901961 }, -- purple
+        stagger                         = { 1, 0.9490196109, 0.1294117719 }, -- yellow
+        silence                         = { 0, 1, 1 }, -- cyan
+        snare                           = { 1, .6470, 0 }, -- orange
+        root                            = { 1, .6470, 0 }, -- orange
+    },
     IconSize                            = 40,
     LabelPosition                       = 0,
     BuffFontFace                        = "Fontin Regular",
@@ -150,10 +171,16 @@ SpellCastBuffs.Defaults = {
     ProminentProgressBuffC2             = { 0, .4, 0 },
     ProminentProgressDebuffC1           = { 1, 0, 0 },
     ProminentProgressDebuffC2           = { .4, 0, 0 },
+    ProminentProgressBuffPriorityC1     = { 1, 1, 0 },
+    ProminentProgressBuffPriorityC2     = { .6, .6, 0 },
+    ProminentProgressDebuffPriorityC1   = { 1, 1, 0 },
+    ProminentProgressDebuffPriorityC2   = { .6, .6, 0 },
     ProminentBuffContainerAlignment     = 2,
     ProminentDebuffContainerAlignment   = 2,
     ProminentBuffLabelDirection         = "Left",
     ProminentDebuffLabelDirection       = "Right",
+    PriorityBuffTable                   = {},
+    PriorityDebuffTable                 = {},
     PromBuffTable                       = {},
     PromDebuffTable                     = {},
     BlacklistTable                      = {},
@@ -575,7 +602,12 @@ end
 -- List Handling (Add) for Prominent Auras & Blacklist
 function SpellCastBuffs.AddToCustomList(list, input)
     local id = tonumber(input)
-    local listRef = list == SpellCastBuffs.SV.PromBuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS) or list == SpellCastBuffs.SV.PromDebuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS) or list == SpellCastBuffs.SV.BlacklistTable and GetString(SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST) or ""
+    local listRef =
+        list == SpellCastBuffs.SV.PromBuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS) or
+        list == SpellCastBuffs.SV.PromDebuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS) or
+        list == SpellCastBuffs.SV.PriorityBuffTable and GetString(SI_LUIE_CUSTOM_LIST_PRIORITY_BUFFS) or
+        list == SpellCastBuffs.SV.PriorityDebuffTable and GetString(SI_LUIE_CUSTOM_LIST_PRIORITY_DEBUFFS) or
+        list == SpellCastBuffs.SV.BlacklistTable and GetString(SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST) or ""
     if id and id > 0 then
         local name = zo_strformat("<<C:1>>", GetAbilityName(id))
         if name ~= nil and name ~= "" then
@@ -600,7 +632,12 @@ end
 -- List Handling (Remove) for Prominent Auras & Blacklist
 function SpellCastBuffs.RemoveFromCustomList(list, input)
     local id = tonumber(input)
-    local listRef = list == SpellCastBuffs.SV.PromBuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS) or list == SpellCastBuffs.SV.PromDebuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS) or list == SpellCastBuffs.SV.BlacklistTable and GetString(SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST) or ""
+    local listRef =
+        list == SpellCastBuffs.SV.PromBuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS) or
+        list == SpellCastBuffs.SV.PromDebuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS) or
+        list == SpellCastBuffs.SV.PriorityBuffTable and GetString(SI_LUIE_CUSTOM_LIST_PRIORITY_BUFFS) or
+        list == SpellCastBuffs.SV.PriorityDebuffTable and GetString(SI_LUIE_CUSTOM_LIST_PRIORITY_DEBUFFS) or
+        list == SpellCastBuffs.SV.BlacklistTable and GetString(SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST) or ""
     if id and id > 0 then
         local name = zo_strformat("<<C:1>>", GetAbilityName(id))
         local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
@@ -1020,16 +1057,6 @@ function SpellCastBuffs.ResetSingleIcon( container, buff, AnchorItem )
         buff.iconbg:SetAnchor( BOTTOMRIGHT, buff, BOTTOMRIGHT, -inset, -inset)
     end
 
-    if buff.bar then
-        if buff.effectType == 1 then
-            buff.bar.backdrop:SetCenterColor((0.1*SpellCastBuffs.SV.ProminentProgressBuffC2[1]), (0.1*SpellCastBuffs.SV.ProminentProgressBuffC2[2]), (0.1*SpellCastBuffs.SV.ProminentProgressBuffC2[3]), 0.75)
-            buff.bar.bar:SetGradientColors( SpellCastBuffs.SV.ProminentProgressBuffC2[1], SpellCastBuffs.SV.ProminentProgressBuffC2[2], SpellCastBuffs.SV.ProminentProgressBuffC2[3], 1, SpellCastBuffs.SV.ProminentProgressBuffC1[1], SpellCastBuffs.SV.ProminentProgressBuffC1[2], SpellCastBuffs.SV.ProminentProgressBuffC1[3], 1)
-        else
-            buff.bar.backdrop:SetCenterColor((0.1*SpellCastBuffs.SV.ProminentProgressDebuffC2[1]), (0.1*SpellCastBuffs.SV.ProminentProgressDebuffC2[2]), (0.1*SpellCastBuffs.SV.ProminentProgressDebuffC2[3]), 0.75)
-            buff.bar.bar:SetGradientColors( SpellCastBuffs.SV.ProminentProgressDebuffC2[1], SpellCastBuffs.SV.ProminentProgressDebuffC2[2], SpellCastBuffs.SV.ProminentProgressDebuffC2[3], 1, SpellCastBuffs.SV.ProminentProgressDebuffC1[1], SpellCastBuffs.SV.ProminentProgressDebuffC1[2], SpellCastBuffs.SV.ProminentProgressDebuffC1[3], 1)
-        end
-    end
-
     if container == "prominentbuffs" then
         if SpellCastBuffs.SV.ProminentBuffLabelDirection == "Left" then
             buff.name:ClearAnchors()
@@ -1424,6 +1451,14 @@ function SpellCastBuffs.SetSingleIconBuffType(buff, buffType, unbreakable, id)
         end
     end
 
+    -- Priority buffs/debuffs color
+    local abilityName = GetAbilityName(id)
+    if buffType == BUFF_EFFECT_TYPE_DEBUFF and (SpellCastBuffs.SV.PriorityDebuffTable[id] or SpellCastBuffs.SV.PriorityDebuffTable[abilityName]) then
+        colour = {1,1,0,1}
+    elseif buffType == BUFF_EFFECT_TYPE_BUFF and (SpellCastBuffs.SV.PriorityBuffTable[id] or SpellCastBuffs.SV.PriorityBuffTable[abilityName]) then
+        colour = {1,1,0,1}
+    end
+
     -- TODO: WIP - Add later - support for coloring debuff type by CC type
     --[[
     if Effects.EffectOverride[id] and Effects.EffectOverride[id].cc then
@@ -1457,12 +1492,22 @@ function SpellCastBuffs.SetSingleIconBuffType(buff, buffType, unbreakable, id)
     end
 
     if buff.bar then
-        if buffType == 1 then
-            buff.bar.backdrop:SetCenterColor((0.1*SpellCastBuffs.SV.ProminentProgressBuffC2[1]), (0.1*SpellCastBuffs.SV.ProminentProgressBuffC2[2]), (0.1*SpellCastBuffs.SV.ProminentProgressBuffC2[3]), 0.75)
-            buff.bar.bar:SetGradientColors( SpellCastBuffs.SV.ProminentProgressBuffC2[1], SpellCastBuffs.SV.ProminentProgressBuffC2[2], SpellCastBuffs.SV.ProminentProgressBuffC2[3], 1, SpellCastBuffs.SV.ProminentProgressBuffC1[1], SpellCastBuffs.SV.ProminentProgressBuffC1[2], SpellCastBuffs.SV.ProminentProgressBuffC1[3], 1)
-        else
-            buff.bar.backdrop:SetCenterColor((0.1*SpellCastBuffs.SV.ProminentProgressDebuffC2[1]), (0.1*SpellCastBuffs.SV.ProminentProgressDebuffC2[2]), (0.1*SpellCastBuffs.SV.ProminentProgressDebuffC2[3]), 0.75)
-            buff.bar.bar:SetGradientColors( SpellCastBuffs.SV.ProminentProgressDebuffC2[1], SpellCastBuffs.SV.ProminentProgressDebuffC2[2], SpellCastBuffs.SV.ProminentProgressDebuffC2[3], 1, SpellCastBuffs.SV.ProminentProgressDebuffC1[1], SpellCastBuffs.SV.ProminentProgressDebuffC1[2], SpellCastBuffs.SV.ProminentProgressDebuffC1[3], 1)
+        if buffType == BUFF_EFFECT_TYPE_DEBUFF then
+            if SpellCastBuffs.SV.PriorityDebuffTable[id] or SpellCastBuffs.SV.PriorityDebuffTable[abilityName] then
+                buff.bar.backdrop:SetCenterColor((0.1*SpellCastBuffs.SV.ProminentProgressDebuffPriorityC2[1]), (0.1*SpellCastBuffs.SV.ProminentProgressDebuffPriorityC2[2]), (0.1*SpellCastBuffs.SV.ProminentProgressDebuffPriorityC2[3]), 0.75)
+                buff.bar.bar:SetGradientColors( SpellCastBuffs.SV.ProminentProgressDebuffPriorityC2[1], SpellCastBuffs.SV.ProminentProgressDebuffPriorityC2[2], SpellCastBuffs.SV.ProminentProgressDebuffPriorityC2[3], 1, SpellCastBuffs.SV.ProminentProgressDebuffPriorityC1[1], SpellCastBuffs.SV.ProminentProgressDebuffPriorityC1[2], SpellCastBuffs.SV.ProminentProgressDebuffPriorityC1[3], 1)
+            else
+                buff.bar.backdrop:SetCenterColor((0.1*SpellCastBuffs.SV.ProminentProgressDebuffC2[1]), (0.1*SpellCastBuffs.SV.ProminentProgressDebuffC2[2]), (0.1*SpellCastBuffs.SV.ProminentProgressDebuffC2[3]), 0.75)
+                buff.bar.bar:SetGradientColors( SpellCastBuffs.SV.ProminentProgressDebuffC2[1], SpellCastBuffs.SV.ProminentProgressDebuffC2[2], SpellCastBuffs.SV.ProminentProgressDebuffC2[3], 1, SpellCastBuffs.SV.ProminentProgressDebuffC1[1], SpellCastBuffs.SV.ProminentProgressDebuffC1[2], SpellCastBuffs.SV.ProminentProgressDebuffC1[3], 1)
+            end
+        elseif buffType == BUFF_EFFECT_TYPE_BUFF then
+            if SpellCastBuffs.SV.PriorityBuffTable[id] or SpellCastBuffs.SV.PriorityBuffTable[abilityName] then
+                buff.bar.backdrop:SetCenterColor((0.1*SpellCastBuffs.SV.ProminentProgressBuffPriorityC2[1]), (0.1*SpellCastBuffs.SV.ProminentProgressBuffPriorityC2[2]), (0.1*SpellCastBuffs.SV.ProminentProgressBuffPriorityC2[3]), 0.75)
+                buff.bar.bar:SetGradientColors( SpellCastBuffs.SV.ProminentProgressBuffPriorityC2[1], SpellCastBuffs.SV.ProminentProgressBuffPriorityC2[2], SpellCastBuffs.SV.ProminentProgressBuffPriorityC2[3], 1, SpellCastBuffs.SV.ProminentProgressBuffPriorityC1[1], SpellCastBuffs.SV.ProminentProgressBuffPriorityC1[2], SpellCastBuffs.SV.ProminentProgressBuffPriorityC1[3], 1)
+            else
+                buff.bar.backdrop:SetCenterColor((0.1*SpellCastBuffs.SV.ProminentProgressBuffC2[1]), (0.1*SpellCastBuffs.SV.ProminentProgressBuffC2[2]), (0.1*SpellCastBuffs.SV.ProminentProgressBuffC2[3]), 0.75)
+                buff.bar.bar:SetGradientColors( SpellCastBuffs.SV.ProminentProgressBuffC2[1], SpellCastBuffs.SV.ProminentProgressBuffC2[2], SpellCastBuffs.SV.ProminentProgressBuffC2[3], 1, SpellCastBuffs.SV.ProminentProgressBuffC1[1], SpellCastBuffs.SV.ProminentProgressBuffC1[2], SpellCastBuffs.SV.ProminentProgressBuffC1[3], 1)
+            end
         end
     end
 end

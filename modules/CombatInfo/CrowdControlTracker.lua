@@ -32,7 +32,7 @@ local defaultDisorientIcon = "esoui/art/icons/ability_debuff_disorient.dds"
 local defaultSilenceIcon = "esoui/art/icons/ability_debuff_silence.dds"
 local defaultImmuneIcon = "LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds"
 
--- local defaultIconBorder = "esoui/art/actionbar/debuff_frame.dds"
+-- local defaultIconBorder = "esoui/art/actionbar/debuff_frame.dds" -- TODO: Unused, probably remove
 local iconBorder = "LuiExtended/media/combatinfo/crowdcontroltracker/border.dds"
 
 local SET_SCALE_FROM_SV = true
@@ -767,9 +767,10 @@ function CrowdControlTracker:OnDraw(abilityId, abilityIcon, ccDuration, result, 
     local wasDefault
 
     -- TODO: Override icon with default here if needed
-    -- ADD  THIS SV
+    -- ADD THIS SV
     if CombatInfo.SV.cct.defaultIcon or abilityIcon == defaultIcon then
         abilityIcon = self:GetDefaultIcon(result)
+        -- TODO: Change to knockback or levitate icon here if needed
         wasDefault = true
     end
 
