@@ -934,9 +934,6 @@ Effects.BarHighlightExtraId = {
 
     -- Warden
     [130140] = 130139, -- Cutting Dive --> Off-Balance
-
-    [146919] = 86019, -- Subterranean Assault
-
     [87194] = 88761, -- Minor Protection --> Major Resolve (Ice Fortress)
 
     -- Necromancer
@@ -998,8 +995,6 @@ Effects.BarHighlightCheckOnFade = {
 
     -- Warden
     [130139] = { id1 = 130140, id2 = 130139, unitTag = "reticleover" }, -- Off-Balance --> Cutting Dive / Off-Balance
-
-    [86019] = { id1 = 146919, id2 = 86019, unitTag = "player" }, -- Subterranean Assault
 
     [85552] = { id1 = 85552, unitTag = "player" }, -- Living Vines (If player mouses over target with this ability and mouses off and has this ability on themselves, we want to resume that)
     [85850] = { id1 = 85850, unitTag = "player" }, -- Leeching Vines (If player mouses over target with this ability and mouses off and has this ability on themselves, we want to resume that)
@@ -1241,6 +1236,8 @@ Effects.BarHighlightOverride = {
     [85995] = { newId = 130129 }, -- Dive --> Off-Balance
     [85999] = { newId = 130139 }, -- Cutting Dive --> Off-Balance
     [86003] = { newId = 130145 }, -- Screaming Cliff Racer --> Off-Balance
+
+    [86019] = { showFakeAura = true, duration = 6000, noRemove = true }, -- Subterranean Assault
 
     [86023] = { newId = 101703 }, -- Swarm
     [86027] = { newId = 101904 }, -- Fetcher Infection
