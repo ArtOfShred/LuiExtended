@@ -3835,14 +3835,17 @@ LUIE.DebugAuras = {
     --[85087] = true, -- Boss (Summon Shade - All Morphs)
 
     [33211] = true, -- Summon Shade (Summon Shade)
-    --[88663] = true, -- Summon Shade (Summon Shade)
     [38517] = true, -- Summon Shade (Summon Shade)
+    [88662] = true, -- Summon Shade (Summon Shade) -- Khajiit
+    [88663] = true, -- Summon Shade (Summon Shade) -- Argonian
     [33290] = true, -- Summon Shade (Summon Shade)
     [33219] = true, -- Corrosive Strike (Shade) (Summon Shade)
     [33228] = true, -- Minor Maim (Summon Shade)
 
     [35434] = true, -- Dark Shade (Dark Shade)
     [35438] = true, -- Summon Shade (Dark Shade)
+    [88677] = true, -- Summon Shade (Dark Shade) -- Khajiit
+    [88678] = true, -- Summon Shade (Dark Shade) -- Argonian
     [108940] = true, -- Summon Shade (Dark Shade)
     [123945] = true, -- Corrosive Flurry (Dark Shade)
     [123946] = true, -- Minor Maim (Dark Shade)
@@ -3851,6 +3854,8 @@ LUIE.DebugAuras = {
 
     [35441] = true, -- Shadow Image (Shadow Image)
     [38528] = true, -- Shadow (Shadow Image)
+    [88696] = true, -- Shadow (Shadow Image) -- Khajiit
+    [88697] = true, -- Shadow (Shadow Image) -- Argonian
     [35442] = true, -- Summon Shade (Shadow Image)
     [35451] = true, -- Shadow (Shadow Image)
     [51556] = true, -- Corrosive Arrow (Shadow Image)

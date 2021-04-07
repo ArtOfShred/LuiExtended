@@ -707,9 +707,14 @@ Effects.EffectGroundDisplay = {
     [36049] = { buff = false, debuff = false, ground = true }, -- Twisting Path (Twisting Path)
     [36028] = { buff = true, debuff = false, ground = false }, -- Refreshing Path (Refreshing Path)
     [38517] = { buff = true, debuff = false, ground = false }, -- Summon Shade (Summon Shade)
-    --[88663] = { buff = true, debuff = false, ground = false }, -- Summon Shade (Summon Shade)
+    [88662] = { buff = true, debuff = false, ground = false }, -- Summon Shade (Summon Shade) -- Khajiit
+    [88663] = { buff = true, debuff = false, ground = false }, -- Summon Shade (Summon Shade) -- Argonian
     [35438] = { buff = true, debuff = false, ground = false }, -- Dark Shade (Dark Shade)
+    [88677] = { buff = true, debuff = false, ground = false }, -- Dark Shade (Dark Shade) -- Khajiit
+    [88678] = { buff = true, debuff = false, ground = false }, -- Dark Shade (Dark Shade) -- Argonian
     [38528] = { name = Abilities.Skill_Shadow_Image, buff = true, debuff = false, ground = false }, -- Shadow (Shadow Image)
+    [88696] = { name = Abilities.Skill_Shadow_Image, buff = true, debuff = false, ground = false }, -- Shadow (Shadow Image) -- Khajiit
+    [88697] = { name = Abilities.Skill_Shadow_Image, buff = true, debuff = false, ground = false }, -- Shadow (Shadow Image) -- Argonian
     [37475] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 2 }, -- Manifestation of Terror (Nightblade)
     [25411] = { buff = true, debuff = false, ground = false }, -- Consuming Darkness (Consuming Darkness)
     [36493] = { buff = true, debuff = false, ground = false }, -- Bolstering Darkness (Bolstering Darkness)
@@ -923,12 +928,6 @@ Effects.BarHighlightExtraId = {
     [61785] = 32685, -- Fossilize
     --[108813] = 32678, -- Shattering Rocks -- TODO: Check
 
-    -- Nightblade
-    --[88663] = 38517, -- Summon Shade (Argonian)
-    --[xxxxx] = 35438, -- Dark Shade --> Summon Shade
-    --[xxxxx] = 38528, -- Shadow Image --> Shadow
-    --[xxxxx] = 38528, -- Shadow Image Teleport --> Shadow
-
     -- Sorcerer
     [89491] = 24330, -- Haunting Curse
     [132946] = 28482, -- Streak
@@ -1134,10 +1133,10 @@ Effects.BarHighlightOverride = {
     [25380] = { newId = 62141 }, -- Shadowy Disguise
     --[25352] = { }, -- Aspect of Terror -- TODO: Disabled because API won't return correct duration for Fear
     --[37470] = { }, -- Mass Hysteria -- TODO: Disabled because API won't return correct duration for Fear
-    [33211] = { newId = 38517 }, -- Summon Shade
-    [35434] = { newId = 35438 }, -- Dark Shade --> Summon Shade
-    [35441] = { newId = 38528 }, -- Shadow Image --> Shadow
-    [35445] = { newId = 38528 }, -- Shadow Image Teleport --> Shadow
+    [33211] = { showFakeAura = true, noRemove = true }, -- Summon Shade
+    [35434] = { showFakeAura = true, noRemove = true }, -- Dark Shade --> Summon Shade
+    [35441] = { showFakeAura = true, noRemove = true }, -- Shadow Image --> Shadow
+    [35445] = { showFakeAura = true, noRemove = true }, -- Shadow Image Teleport --> Shadow
 
     -- Siphoning
     [33291] = { newId = 33292 }, -- Strife
@@ -4732,13 +4731,18 @@ Effects.EffectOverride = {
     [65269] = { hide = true }, -- Shade Initialize (Summon Shade - All Morphs)
     [33219] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_corrode.dds' }, -- Corrosive Strike (Shade) (Summon Shade - Summon Shade/Dark Shade)
     [38517] = { hide = true, tooltip = Tooltips.Skill_Summon_Shade }, -- Summon Shade (Summon Shade)
-    --[88663] = { hide = true, tooltip = Tooltips.Skill_Summon_Shade }, -- Summon Shade (Summon Shade) -- Argonian
+    [88662] = { hide = true, tooltip = Tooltips.Skill_Summon_Shade }, -- Summon Shade (Summon Shade) -- Khajiit
+    [88663] = { hide = true, tooltip = Tooltips.Skill_Summon_Shade }, -- Summon Shade (Summon Shade) -- Argonian
 
     [35438] = { hide = true, tooltip = Tooltips.Skill_Dark_Shade }, -- Summon Shade (Dark Shade)
+    [88677] = { hide = true, tooltip = Tooltips.Skill_Dark_Shade }, -- Summon Shade (Dark Shade) -- Khajiit
+    [88678] = { hide = true, tooltip = Tooltips.Skill_Dark_Shade }, -- Summon Shade (Dark Shade) -- Argonian
     [123945] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_corrode.dds', name = Abilities.Skill_Corrosive_Strike }, -- Corrosive Flurry (Dark Shade)
     [108936] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_whirlwind.dds', name = Abilities.Skill_Corrosive_Spin }, -- Corrosive Slash (Dark Shade)
 
     [38528] = { name = Abilities.Skill_Shadow_Image, hide = true, tooltip = Tooltips.Skill_Shadow_Image }, -- Shadow (Shadow Image)
+    [88696] = { name = Abilities.Skill_Shadow_Image, hide = true, tooltip = Tooltips.Skill_Shadow_Image }, -- Shadow (Shadow Image) -- Khajiit
+    [88697] = { name = Abilities.Skill_Shadow_Image, hide = true, tooltip = Tooltips.Skill_Shadow_Image }, -- Shadow (Shadow Image) -- Argonian
     [35445] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_shadow_image_teleport.dds' }, -- Shadow Image Teleport (Shadow Image)
     [51556] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_nightblade_corrode_ranged.dds' }, -- Corrosive Arrow (Shadow Image)
 
