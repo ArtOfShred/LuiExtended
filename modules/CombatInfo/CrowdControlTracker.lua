@@ -24,15 +24,15 @@ local graceTime = 5
 
 local iconFont = "$(GAMEPAD_BOLD_FONT)|25|thick-outline"
 local staggerFont = "$(GAMEPAD_BOLD_FONT)|36|thick-outline"
-local defaultIcon = "esoui/art/icons/ability_mage_065.dds"
 
-local defaultStunIcon = "esoui/art/icons/ability_debuff_stun"
+local defaultStunIcon = "esoui/art/icons/ability_debuff_stun.dds"
+local defaultKnockbackIcon = "esoui/art/icons/ability_debuff_knockback.dds"
+local defaultPullIcon = "esoui/art/icons/ability_debuff_levitat.dds"
 local defaultFearIcon = "esoui/art/icons/ability_debuff_fear.dds"
 local defaultDisorientIcon = "esoui/art/icons/ability_debuff_disorient.dds"
 local defaultSilenceIcon = "esoui/art/icons/ability_debuff_silence.dds"
 local defaultImmuneIcon = "LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds"
 
--- local defaultIconBorder = "esoui/art/actionbar/debuff_frame.dds" -- TODO: Unused, probably remove
 local iconBorder = "LuiExtended/media/combatinfo/crowdcontroltracker/border.dds"
 
 local SET_SCALE_FROM_SV = true
@@ -750,11 +750,28 @@ function CrowdControlTracker:GetDefaultIcon(ccType)
     elseif ccType == ACTION_RESULT_FEARED then return defaultFearIcon
     elseif ccType == ACTION_RESULT_DISORIENTED then return defaultDisorientIcon
     elseif ccType == ACTION_RESULT_SILENCED then return defaultSilenceIcon
-    elseif ccType == ACTION_RESULT_AREA_EFFECT then return defaultIcon
     elseif ccType == ACTION_RESULT_IMMUNE then return defaultImmuneIcon
     elseif ccType == ACTION_RESULT_DODGED then return defaultImmuneIcon
     elseif ccType == ACTION_RESULT_BLOCKED then return defaultImmuneIcon
     elseif ccType == ACTION_RESULT_BLOCKED_DAMAGE then return defaultImmuneIcon
+    end
+end
+
+function CrowdControlTracker:GetSpecialColor(abilityId, ccType)
+
+end
+
+function CrowdControlTracker:SetupDefaultIcon(abilityId, ccType)
+    if ccType == ACTION_RESULT_STUNNED and Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].cc then
+        if Effects.EffectOverride[abilityId].cc == LUIE_CC_TYPE_KNOCKBACK then
+            return defaultKnockbackIcon
+        elseif Effects.EffectOverride[abilityId].cc == LUIE_CC_TYPE_PULL then
+            return defaultPullIcon
+        else
+            return self:GetDefaultIcon(ccType)
+        end
+    else
+        return self:GetDefaultIcon(ccType)
     end
 end
 
@@ -764,14 +781,9 @@ function CrowdControlTracker:OnDraw(abilityId, abilityIcon, ccDuration, result, 
         return
     end
 
-    local wasDefault
-
-    -- TODO: Override icon with default here if needed
-    -- ADD THIS SV
-    if CombatInfo.SV.cct.defaultIcon or abilityIcon == defaultIcon then
-        abilityIcon = self:GetDefaultIcon(result)
-        -- TODO: Change to knockback or levitate icon here if needed
-        wasDefault = true
+    --Override icon with default if enabled
+    if CombatInfo.SV.cct.useDefaultIcon and result ~= ACTION_RESULT_AREA_EFFECT then
+        abilityIcon = self:SetupDefaultIcon(abilityId, result)
     end
 
     local ccText
@@ -780,11 +792,21 @@ function CrowdControlTracker:OnDraw(abilityId, abilityIcon, ccDuration, result, 
     else
         ccText = self.controlText[result]
     end
+
     -- If the effect is flagged as unbreakable in the Effect Override table then switch the effect to color as unbreakable (unless its an AOE).
     if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].unbreakable and not CrowdControlTracker.aoeTypesId[abilityId] then
-        self:SetupInfo(ccText, CombatInfo.SV.cct.colors.unbreakable, abilityIcon, wasDefault)
+        self:SetupInfo(ccText, CombatInfo.SV.cct.colors.unbreakable, abilityIcon)
+    -- If the effect is labeled as a Knockback or Pull then change the color setting.
+    elseif result == ACTION_RESULT_STUNNED and Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].cc then
+        if Effects.EffectOverride[abilityId].cc == LUIE_CC_TYPE_KNOCKBACK then
+            self:SetupInfo(ccText, CombatInfo.SV.cct.colors[ACTION_RESULT_KNOCKBACK], abilityIcon)
+        elseif Effects.EffectOverride[abilityId].cc == LUIE_CC_TYPE_PULL then
+            self:SetupInfo(ccText, CombatInfo.SV.cct.colors[ACTION_RESULT_LEVITATED], abilityIcon)
+        else
+            self:SetupInfo(ccText, CombatInfo.SV.cct.colors[result], abilityIcon)
+        end
     else
-        self:SetupInfo(ccText, CombatInfo.SV.cct.colors[result], abilityIcon, wasDefault)
+        self:SetupInfo(ccText, CombatInfo.SV.cct.colors[result], abilityIcon)
     end
 
     if result == ACTION_RESULT_SILENCED or result == ACTION_RESULT_AREA_EFFECT then
@@ -795,9 +817,6 @@ function CrowdControlTracker:OnDraw(abilityId, abilityIcon, ccDuration, result, 
         end
     elseif result == ACTION_RESULT_IMMUNE or result == ACTION_RESULT_DODGED or result == ACTION_RESULT_BLOCKED or result == ACTION_RESULT_BLOCKED_DAMAGE then
         self:OnAnimation(LUIE_CCTracker, "immune")
-        if wasDefault then
-            LUIE_CCTracker_IconFrame_Icon:SetTextureCoords(0.2,0.8,0.2,0.8)
-        end
     else
         self:OnProc(ccDuration, interval)
     end
@@ -835,23 +854,15 @@ function CrowdControlTracker:BreakFreeHidden(hidden)
     end
 end
 
-function CrowdControlTracker:SetupInfo(ccText, ccColor, abilityIcon, wasDefault)
+function CrowdControlTracker:SetupInfo(ccText, ccColor, abilityIcon)
     LUIE_CCTracker_TextFrame_Label:SetFont(iconFont)
     LUIE_CCTracker_TextFrame_Label:SetText(ccText)
     LUIE_CCTracker_TextFrame_Label:SetColor(unpack(ccColor))
     LUIE_CCTracker_IconFrame_Icon:SetTexture(abilityIcon)
-
-    if wasDefault then
-        LUIE_CCTracker_IconFrame_Icon:SetColor(unpack(ccColor))
-    else
-        LUIE_CCTracker_IconFrame_Icon:SetColor(1,1,1,1)
-    end
-
+    LUIE_CCTracker_IconFrame_Icon:SetColor(1,1,1,1)
     LUIE_CCTracker_IconFrame_IconBG:SetColor(unpack(ccColor))
-
     LUIE_CCTracker_IconFrame_IconBorder:SetColor(unpack(ccColor))
     LUIE_CCTracker_IconFrame_IconBorderHighlight:SetColor(unpack(ccColor))
-
     LUIE_CCTracker_Timer_Label:SetColor(unpack(ccColor))
 end
 
@@ -942,9 +953,26 @@ function CrowdControlTracker:StopDrawBreakFree()
     if currentCC ~= 0 and currentCC ~= 4 and currentCC ~= 6 then
         local currentResult = self:CCPriority(currentCC).result
         local currentAbilityId = self:CCPriority(currentCC).abilityId
-        local currentColor = CombatInfo.SV.cct.colors[currentResult]
+        local currentColor
+        if Effects.EffectOverride[currentAbilityId] and Effects.EffectOverride[currentAbilityId].unbreakable then
+            currentColor = CombatInfo.SV.cct.colors.unbreakable
+        elseif currentResult == ACTION_RESULT_STUNNED and Effects.EffectOverride[currentAbilityId] and Effects.EffectOverride[currentAbilityId].cc then
+            if Effects.EffectOverride[currentAbilityId].cc == LUIE_CC_TYPE_KNOCKBACK then
+                currentColor = CombatInfo.SV.cct.colors[ACTION_RESULT_KNOCKBACK]
+            elseif Effects.EffectOverride[currentAbilityId].cc == LUIE_CC_TYPE_PULL then
+                currentColor = CombatInfo.SV.cct.colors[ACTION_RESULT_LEVITATED]
+            else
+                currentColor = CombatInfo.SV.cct.colors[currentResult]
+            end
+        else
+            currentColor = CombatInfo.SV.cct.colors[currentResult]
+        end
 
-        currentCCIcon = GetAbilityIcon(currentAbilityId)
+        if CombatInfo.SV.cct.useDefaultIcon and currentResult ~= ACTION_RESULT_AREA_EFFECT then
+            currentCCIcon = self:SetupDefaultIcon(currentAbilityId, currentResult)
+        else
+            currentCCIcon = GetAbilityIcon(currentAbilityId)
+        end
 
         LUIE_CCTracker_BreakFreeFrame_Left_IconBG:SetColor(unpack(currentColor))
         LUIE_CCTracker_BreakFreeFrame_Right_IconBG:SetColor(unpack(currentColor))
@@ -968,14 +996,8 @@ function CrowdControlTracker:StopDrawBreakFree()
         return
     end
 
-    if breakFreeIcon == defaultIcon then
-        breakFreeIcon = self:GetDefaultIcon(currentResult)
-        LUIE_CCTracker_BreakFreeFrame_Left_Icon:SetColor(unpack(CombatInfo.SV.cct.colors[self.controlTypes[currentCC]]))
-        LUIE_CCTracker_BreakFreeFrame_Right_Icon:SetColor(unpack(CombatInfo.SV.cct.colors[self.controlTypes[currentCC]]))
-    else
-        LUIE_CCTracker_BreakFreeFrame_Left_Icon:SetColor(1,1,1,1)
-        LUIE_CCTracker_BreakFreeFrame_Right_Icon:SetColor(1,1,1,1)
-    end
+    LUIE_CCTracker_BreakFreeFrame_Left_Icon:SetColor(1,1,1,1)
+    LUIE_CCTracker_BreakFreeFrame_Right_Icon:SetColor(1,1,1,1)
     LUIE_CCTracker_BreakFreeFrame_Left_Icon:SetTexture(breakFreeIcon)
     LUIE_CCTracker_BreakFreeFrame_Left_Icon:SetTextureCoords(0,0.5,0,1)
     LUIE_CCTracker_BreakFreeFrame_Right_Icon:SetTexture(breakFreeIcon)

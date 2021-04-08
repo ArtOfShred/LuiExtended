@@ -6931,7 +6931,7 @@ Effects.EffectOverride = {
     [14926] = { icon = 'esoui/art/icons/ability_warrior_011.dds', name = Abilities.Skill_Shield_Rush, tooltip = Tooltips.Generic_Knockdown }, -- Charge (Brute)
 
     -- Ravager (2H)
-    [29379] = { icon = 'esoui/art/icons/ability_2handed_001.dds', tooltip = Tooltips.Generic_Knockback }, -- Uppercut (Ravager)
+    [29379] = { icon = 'esoui/art/icons/ability_2handed_001.dds', tooltip = Tooltips.Generic_Knockback, cc = LUIE_CC_TYPE_KNOCKBACK }, -- Uppercut (Ravager)
     [29380] = { icon = 'esoui/art/icons/ability_2handed_001.dds', hide = true }, -- Uppercut (Ravager)
 
     -- Skirmisher (DW)

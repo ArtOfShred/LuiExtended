@@ -45,22 +45,22 @@ SpellCastBuffs.Defaults = {
     ColorUnbreakable                    = true,
     ColorCC                             = false,
     colors = {
-        buff                            = { 0, 1, 0 }, -- gren
-        debuff                          = { 1, 0, 0 }, -- red
-        prioritybuff                    = { 1, 1, 0 }, -- yellow
-        prioritydebuff                  = { 1, 1, 0 }, -- yellow
-        unbreakable                     = { 0.88, 0.88, 1 }, -- light grey
-        cosmetic                        = { 0, .4, 0 }, -- dark green
-        nocc                            = { 0, 0, 0 }, -- black
-        stun                            = { 1, 0, 0 }, -- red
-        knockback                       = { 1, 0, 0 }, -- red
-        levitate                        = { 0, 0, 1 }, -- dark blue
-        disorient                       = { 0.0313725509, 0.6274510026, 1 }, -- blue
-        fear                            = { 0.5607843137, 0.0352941176, 0.9254901961 }, -- purple
-        stagger                         = { 1, 0.9490196109, 0.1294117719 }, -- yellow
-        silence                         = { 0, 1, 1 }, -- cyan
-        snare                           = { 1, .6470, 0 }, -- orange
-        root                            = { 1, .6470, 0 }, -- orange
+        buff                            = { 0, 1, 0, 1 }, -- gren
+        debuff                          = { 1, 0, 0, 1 }, -- red
+        prioritybuff                    = { 1, 1, 0, 1 }, -- yellow
+        prioritydebuff                  = { 1, 1, 0, 1 }, -- yellow
+        unbreakable                     = { 0.88, 0.88, 1, 1 }, -- light grey
+        cosmetic                        = { 0, .5, 0, 1 }, -- dark green
+        nocc                            = { 0, 0, 0, 1 }, -- black
+        stun                            = { 1, 0, 0, 1 }, -- red
+        knockback                       = { 1, 0, 0, 1 }, -- red
+        levitate                        = { 0, 0, 1, 1 }, -- dark blue
+        disorient                       = { 0, 0.3137, 1, 1 }, -- blue
+        fear                            = { 0.5607843137, 0.0352941176, 0.9254901961, 1 }, -- purple
+        stagger                         = { 1, 0.9490196109, 0.1294117719, 1 }, -- yellow
+        silence                         = { 0, 1, 1, 1 }, -- cyan
+        snare                           = { 1, .6470, 0, 1 }, -- orange
+        root                            = { 1, .6470, 0, 1 }, -- orange
     },
     IconSize                            = 40,
     LabelPosition                       = 0,
@@ -1431,64 +1431,72 @@ end
 
  -- Set proper color of border and text on single buff element
 function SpellCastBuffs.SetSingleIconBuffType(buff, buffType, unbreakable, id)
+
     local contextType
-    local colour
-    if not unbreakable or unbreakable == 0 then
-        if buffType == 1 then
-            contextType = "buff"
-            colour = {0,1,0,1}
-        else
-            contextType = "debuff"
-            colour = {1,0,0,1}
-        end
-    elseif unbreakable == 1 then
-        if buffType == 1 then
-            contextType = "buff"
-            colour = {0,1,1,1}
-        else
-            contextType = "debuff"
-            colour = {.88,.88,1,1}
-        end
+    local fillColor
+
+    if buffType == BUFF_EFFECT_TYPE_BUFF then
+        contextType = "buff"
+    else
+        contextType = "debuff"
     end
 
-    -- Priority buffs/debuffs color
     local abilityName = GetAbilityName(id)
-    if buffType == BUFF_EFFECT_TYPE_DEBUFF and (SpellCastBuffs.SV.PriorityDebuffTable[id] or SpellCastBuffs.SV.PriorityDebuffTable[abilityName]) then
-        colour = {1,1,0,1}
-    elseif buffType == BUFF_EFFECT_TYPE_BUFF and (SpellCastBuffs.SV.PriorityBuffTable[id] or SpellCastBuffs.SV.PriorityBuffTable[abilityName]) then
-        colour = {1,1,0,1}
-    end
 
-    -- TODO: WIP - Add later - support for coloring debuff type by CC type
-    --[[
-    if Effects.EffectOverride[id] and Effects.EffectOverride[id].cc then
-        local cc = Effects.EffectOverride[id].cc
-        if cc == LUIE_CC_TYPE_STUN then
-            colour = {1, 0, 0, 1} -- red
-        elseif cc == LUIE_CC_TYPE_KNOCKBACK or cc == LUIE_CC_TYPE_KNOCKDOWN or cc == LUIE_CC_TYPE_PULL then
-            colour = { 0, 0, 1, 1 } -- dark blue
-        elseif cc == LUIE_CC_TYPE_SNARE then
-            colour = { 1, 1, 0, 1 } -- yellow
-        elseif cc == LUIE_CC_TYPE_ROOT then
-            colour = { 1, 0.5, 0, 1 } -- orangeish
-        elseif cc == LUIE_CC_TYPE_DISORIENT then
-            colour = { 0, 0.62, 1, 1 } -- light blue
-        elseif cc == LUIE_CC_TYPE_FEAR then
-            colour = { 1, 0, 1, 1 } -- purple
-        elseif cc == LUIE_CC_TYPE_SILENCE then
-            colour = { 0, 1, 1, 1 } -- cyan
-        elseif cc == LUIE_CC_TYPE_STAGGER then
-            colour = { 1, 1, 0, 1 } -- yellow
+    if contextType == "buff" then
+        if SpellCastBuffs.SV.PriorityBuffTable[id] or SpellCastBuffs.SV.PriorityBuffTable[abilityName] then
+            fillColor = SpellCastBuffs.SV.colors.prioritybuff
+        elseif unbreakable == 1 and SpellCastBuffs.SV.ColorCosmetic then
+            fillColor = SpellCastBuffs.SV.colors.cosmetic
+        else
+            fillColor = SpellCastBuffs.SV.colors.buff
+        end
+    elseif contextType == "debuff" then
+        if SpellCastBuffs.SV.PriorityDebuffTable[id] or SpellCastBuffs.SV.PriorityDebuffTable[abilityName] then
+            fillColor = SpellCastBuffs.SV.colors.prioritydebuff
+        elseif unbreakable == 1 and SpellCastBuffs.SV.ColorUnbreakable then
+            fillColor = SpellCastBuffs.SV.colors.unbreakable
+        else
+            -- If color by CC type is enabled then color by the crowd control type if detected
+            if SpellCastBuffs.SV.ColorCC then
+                if Effects.EffectOverride[id] and Effects.EffectOverride[id].cc then
+                    local cc = Effects.EffectOverride[id].cc
+                    if cc == LUIE_CC_TYPE_STUN or cc == LUIE_CC_TYPE_KNOCKDOWN then
+                        fillColor = SpellCastBuffs.SV.colors.stun
+                    elseif cc == LUIE_CC_TYPE_KNOCKBACK then
+                        fillColor = SpellCastBuffs.SV.colors.knockback
+                    elseif cc == LUIE_CC_TYPE_PULL then
+                        fillColor = SpellCastBuffs.SV.colors.levitate
+                    elseif cc == LUIE_CC_TYPE_DISORIENT then
+                        fillColor = SpellCastBuffs.SV.colors.disorient
+                    elseif cc == LUIE_CC_TYPE_FEAR then
+                        fillColor = SpellCastBuffs.SV.colors.fear
+                    elseif cc == LUIE_CC_TYPE_SILENCE then
+                        fillColor = SpellCastBuffs.SV.colors.silence
+                    elseif cc == LUIE_CC_TYPE_STAGGER then
+                        fillColor = SpellCastBuffs.SV.colors.stagger
+                    elseif cc == LUIE_CC_TYPE_SNARE then
+                        fillColor = SpellCastBuffs.SV.colors.snare
+                    elseif cc == LUIE_CC_TYPE_ROOT then
+                        fillColor = SpellCastBuffs.SV.colors.root
+                    else
+                        fillColor = SpellCastBuffs.SV.colors.nocc
+                    end
+                else
+                    fillColor = SpellCastBuffs.SV.colors.nocc
+                end
+            else
+                fillColor = SpellCastBuffs.SV.colors.debuff
+            end
         end
     end
-    ]]--
-    -- {0.07, 0.45, 0.8}
 
     buff.frame:SetTexture("/esoui/art/actionbar/" .. contextType .. "_frame.dds")
-    buff.label:SetColor( unpack( SpellCastBuffs.SV.RemainingTextColoured and colour or {1,1,1,1} ) )
-    buff.stack:SetColor( unpack( SpellCastBuffs.SV.RemainingTextColoured and colour or {1,1,1,1} ) )
+    local labelColor = contextType == "buff" and SpellCastBuffs.SV.colors.buff or SpellCastBuffs.SV.colors.debuff
+    buff.label:SetColor( unpack( SpellCastBuffs.SV.RemainingTextColoured and labelColor or {1,1,1,1} ) )
+    buff.stack:SetColor( unpack( SpellCastBuffs.SV.RemainingTextColoured and labelColor or {1,1,1,1} ) )
     if buff.cd ~= nil then
-        buff.cd:SetFillColor( unpack(colour) )
+        buff.cd:SetFillColor(unpack(fillColor))
     end
 
     if buff.bar then

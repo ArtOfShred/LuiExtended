@@ -1894,6 +1894,16 @@ function CombatInfo.CreateSettings()
                 setFunc = function(newValue) Settings.cct.useAbilityName = newValue CrowdControlTracker:InitControls() end,
             },
             {
+                -- Use Generic Icon for CC Type
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_TP),
+                default = Defaults.cct.useDefaultIcon,
+                disabled = function() return (not Settings.cct.enabled) or (Settings.cct.showOptions=="icon") end,
+                getFunc = function() return Settings.cct.useDefaultIcon end,
+                setFunc = function(newValue) Settings.cct.useDefaultIcon = newValue CrowdControlTracker:InitControls() end,
+            },
+            {
                 -- Icon and Text Scale
                 type = "slider",
                 name = GetString(SI_LUIE_LAM_CI_CCT_SCALE),
@@ -2015,6 +2025,35 @@ function CombatInfo.CreateSettings()
                     CrowdControlTracker:InitControls()
                 end,
             },
+
+            {
+                -- Knockback
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_KNOCKBACK),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_KNOCKBACK)),
+                default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_KNOCKBACK])),
+                disabled = function() return not Settings.cct.enabled end,
+                getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_KNOCKBACK]) end,
+                setFunc = function(r,g,b,a)
+                    Settings.cct.colors[ACTION_RESULT_KNOCKBACK] = {r,g,b,a}
+                    CrowdControlTracker:InitControls()
+                end,
+            },
+
+            {
+                -- Pull & Levitate
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_LEVITATE),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_LEVITATE)),
+                default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_LEVITATED])),
+                disabled = function() return not Settings.cct.enabled end,
+                getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_LEVITATED]) end,
+                setFunc = function(r,g,b,a)
+                    Settings.cct.colors[ACTION_RESULT_LEVITATED] = {r,g,b,a}
+                    CrowdControlTracker:InitControls()
+                end,
+            },
+
             {
                 -- Disorient
                 type = "colorpicker",
