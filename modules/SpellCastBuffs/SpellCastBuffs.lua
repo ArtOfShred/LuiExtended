@@ -222,6 +222,16 @@ local function EaseOutQuad(t, b, c, d)
     return -c * t*(t-2) + b
 end
 
+--[[
+-- Function to pull icons with default CC icons if neccesary
+function SpellCastBuffs.GetDefaultAbilityIcon(abilityId)
+    if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].cc then
+        icon = LUIE.Data.Effects.EffectOverride[abilityId].icon
+    end
+    return(icon)
+end
+]]--
+
 -- Function for determining container context for prominent effects
 function SpellCastBuffs.DetermineContext(context, abilityId, abilityName, castByPlayer)
     if (SpellCastBuffs.SV.PromDebuffTable[abilityId] or SpellCastBuffs.SV.PromDebuffTable[abilityName]) then

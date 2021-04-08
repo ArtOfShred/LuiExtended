@@ -25,14 +25,6 @@ local graceTime = 5
 local iconFont = "$(GAMEPAD_BOLD_FONT)|25|thick-outline"
 local staggerFont = "$(GAMEPAD_BOLD_FONT)|36|thick-outline"
 
-local defaultStunIcon = "esoui/art/icons/ability_debuff_stun.dds"
-local defaultKnockbackIcon = "esoui/art/icons/ability_debuff_knockback.dds"
-local defaultPullIcon = "esoui/art/icons/ability_debuff_levitat.dds"
-local defaultFearIcon = "esoui/art/icons/ability_debuff_fear.dds"
-local defaultDisorientIcon = "esoui/art/icons/ability_debuff_disorient.dds"
-local defaultSilenceIcon = "esoui/art/icons/ability_debuff_silence.dds"
-local defaultImmuneIcon = "LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds"
-
 local iconBorder = "LuiExtended/media/combatinfo/crowdcontroltracker/border.dds"
 
 local SET_SCALE_FROM_SV = true
@@ -746,14 +738,16 @@ function CrowdControlTracker:OnStunnedState(eventCode, playerStunned)
 end
 
 function CrowdControlTracker:GetDefaultIcon(ccType)
-    if ccType == ACTION_RESULT_STUNNED then return defaultStunIcon
-    elseif ccType == ACTION_RESULT_FEARED then return defaultFearIcon
-    elseif ccType == ACTION_RESULT_DISORIENTED then return defaultDisorientIcon
-    elseif ccType == ACTION_RESULT_SILENCED then return defaultSilenceIcon
-    elseif ccType == ACTION_RESULT_IMMUNE then return defaultImmuneIcon
-    elseif ccType == ACTION_RESULT_DODGED then return defaultImmuneIcon
-    elseif ccType == ACTION_RESULT_BLOCKED then return defaultImmuneIcon
-    elseif ccType == ACTION_RESULT_BLOCKED_DAMAGE then return defaultImmuneIcon
+    if ccType == ACTION_RESULT_STUNNED then return LUIE_CC_ICON_STUN
+    elseif ccType == ACTION_RESULT_KNOCKBACK then return LUIE_CC_ICON_KNOCKBACK
+    elseif ccType == ACTION_RESULT_LEVITATED then return LUIE_CC_ICON_PULL
+    elseif ccType == ACTION_RESULT_FEARED then return LUIE_CC_ICON_FEAR
+    elseif ccType == ACTION_RESULT_DISORIENTED then return LUIE_CC_ICON_DISORIENT
+    elseif ccType == ACTION_RESULT_SILENCED then return LUIE_CC_ICON_SILENCE
+    elseif ccType == ACTION_RESULT_IMMUNE then return LUIE_CC_ICON_IMMUNE
+    elseif ccType == ACTION_RESULT_DODGED then return LUIE_CC_ICON_IMMUNE
+    elseif ccType == ACTION_RESULT_BLOCKED then return LUIE_CC_ICON_IMMUNE
+    elseif ccType == ACTION_RESULT_BLOCKED_DAMAGE then return LUIE_CC_ICON_IMMUNE
     end
 end
 
@@ -772,15 +766,12 @@ end
 function CrowdControlTracker:SetupDefaultIcon(abilityId, ccType)
     if ccType == ACTION_RESULT_STUNNED and Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].cc then
         if Effects.EffectOverride[abilityId].cc == LUIE_CC_TYPE_KNOCKBACK then
-            return defaultKnockbackIcon
+            ccType = ACTION_RESULT_KNOCKBACK
         elseif Effects.EffectOverride[abilityId].cc == LUIE_CC_TYPE_PULL then
-            return defaultPullIcon
-        else
-            return self:GetDefaultIcon(ccType)
+            ccType = ACTION_RESULT_LEVITATED
         end
-    else
-        return self:GetDefaultIcon(ccType)
     end
+    return self:GetDefaultIcon(ccType)
 end
 
 function CrowdControlTracker:OnDraw(abilityId, abilityIcon, ccDuration, result, abilityName, interval)
