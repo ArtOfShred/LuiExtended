@@ -420,20 +420,26 @@ end
 
 function AbilityAlerts.CrowdControlColorSetup(crowdControl)
     if CombatInfo.SV.alerts.toggles.showCrowdControlBorder then
-        if crowdControl == LUIE_CC_TYPE_STUN then
+        if crowdControl == LUIE_CC_TYPE_STUN or crowdControl == LUIE_CC_TYPE_KNOCKDOWN then -- Stun/Knockdown
             return CombatInfo.SV.alerts.colors.stunColor
-        elseif crowdControl == LUIE_CC_TYPE_DISORIENT then
+        elseif crowdControl == LUIE_CC_TYPE_KNOCKBACK then -- Knockback
+            return CombatInfo.SV.alerts.colors.knockbackColor
+        elseif crowdControl == LUIE_CC_TYPE_PULL then -- Pull/Levitate
+            return CombatInfo.SV.alerts.colors.levitateColor
+        elseif crowdControl == LUIE_CC_TYPE_DISORIENT then -- Disorient
             return CombatInfo.SV.alerts.colors.disorientColor
-        elseif crowdControl == LUIE_CC_TYPE_FEAR then
+        elseif crowdControl == LUIE_CC_TYPE_FEAR then -- Fear
             return CombatInfo.SV.alerts.colors.fearColor
-        elseif crowdControl == LUIE_CC_TYPE_SILENCE then
+        elseif crowdControl == LUIE_CC_TYPE_SILENCE then -- Silence
             return CombatInfo.SV.alerts.colors.silenceColor
-        elseif crowdControl == LUIE_CC_TYPE_STAGGER then
+        elseif crowdControl == LUIE_CC_TYPE_STAGGER then -- Stagger
             return CombatInfo.SV.alerts.colors.staggerColor
-        elseif crowdControl == LUIE_CC_TYPE_UNBREAKABLE then
+        elseif crowdControl == LUIE_CC_TYPE_UNBREAKABLE then -- Unbreakable
             return CombatInfo.SV.alerts.colors.unbreakableColor
-        elseif crowdControl == LUIE_CC_TYPE_SNARE then
+        elseif crowdControl == LUIE_CC_TYPE_SNARE then -- Snare
             return CombatInfo.SV.alerts.colors.snareColor
+        elseif crowdControl == LUIE_CC_TYPE_ROOT then -- Immobilize
+            return CombatInfo.SV.alerts.colors.rootColor
         else
             return { 0, 0, 0, 0 }
         end
@@ -577,7 +583,7 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     -- Get menu setting for filtering and bail out here depending on that setting
     local option = Settings.toggles.alertOptions
     -- Bail out if we only have CC selected and this is not CC
-    if option == 2 and crowdControl ~= LUIE_CC_TYPE_STUN and crowdControl ~= LUIE_CC_TYPE_DISORIENT and crowdControl ~= LUIE_CC_TYPE_FEAR and crowdControl ~= LUIE_CC_TYPE_STAGGER and crowdControl ~= LUIE_CC_TYPE_UNBREAKABLE then
+    if option == 2 and crowdControl ~= LUIE_CC_TYPE_STUN and crowdControl ~= LUIE_CC_TYPE_KNOCKDOWN and crowdControl ~= LUIE_CC_TYPE_KNOCKBACK and crowdControl ~= LUIE_CC_TYPE_PULL and crowdControl ~= LUIE_CC_TYPE_DISORIENT and crowdControl ~= LUIE_CC_TYPE_FEAR and crowdControl ~= LUIE_CC_TYPE_STAGGER and crowdControl ~= LUIE_CC_TYPE_UNBREAKABLE then
         return
     end
     -- Bail out if we only have unbreakable selected and this is not unbreakable

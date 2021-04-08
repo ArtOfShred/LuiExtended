@@ -12,6 +12,8 @@ local g_BuffsMovingEnabled = false -- Helper local flag
 
 local rotationOptions     = { "Horizontal", "Vertical" }
 local rotationOptionsKeys = { ["Horizontal"] = 1, ["Vertical"] = 2 }
+local globalIconOptions = { "All Crowd Control", "NPC CC Only", "Player CC Only" }
+local globalIconOptionsKeys = { ["All Crowd Control"] = 1, ["NPC CC Only"] = 2, ["Player CC Only"] = 3 }
 
 -- Variables for custom generated tables
 local PromBuffs, PromBuffsValues = {}
@@ -1547,6 +1549,28 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = Defaults.GenericMajorMinor,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
+                -- Use Generic Icon for CC Type
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_TP),
+                getFunc = function() return Settings.UseDefaultIcon end,
+                setFunc = function(newValue) Settings.UseDefaultIcon = newValue end,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+                default = Defaults.UseDefaultIcon,
+            },
+            {
+                -- Generic Icon Options
+                type = "dropdown",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_OPTIONS)),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_OPTIONS_TP),
+                choices = globalIconOptions,
+                getFunc = function() return globalIconOptions[Settings.DefaultIconOptions] end,
+                setFunc = function(value) Settings.DefaultIconOptions = globalIconOptionsKeys[value] end,
+                width = "full",
+                disabled = function() return not Settings.UseDefaultIcon end,
+                default = Defaults.DefaultIconOptions,
             },
        },
     }

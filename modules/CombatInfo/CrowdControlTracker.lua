@@ -757,8 +757,16 @@ function CrowdControlTracker:GetDefaultIcon(ccType)
     end
 end
 
-function CrowdControlTracker:GetSpecialColor(abilityId, ccType)
-
+function CrowdControlTracker:ShouldUseDefaultIcon(abilityId)
+    if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].cc then
+        if CombatInfo.SV.cct.defaultIconOptions == 1 then
+            return true
+        elseif CombatInfo.SV.cct.defaultIconOptions == 2 then
+            return Effects.EffectOverride[abilityId].isPlayerAbility and false or true
+        elseif CombatInfo.SV.cct.defaultIconOptions == 3 then
+            return Effects.EffectOverride[abilityId].isPlayerAbility and true or false
+        end
+    end
 end
 
 function CrowdControlTracker:SetupDefaultIcon(abilityId, ccType)
@@ -782,7 +790,7 @@ function CrowdControlTracker:OnDraw(abilityId, abilityIcon, ccDuration, result, 
     end
 
     --Override icon with default if enabled
-    if CombatInfo.SV.cct.useDefaultIcon and result ~= ACTION_RESULT_AREA_EFFECT then
+    if CombatInfo.SV.cct.useDefaultIcon and result ~= ACTION_RESULT_AREA_EFFECT and self:ShouldUseDefaultIcon(abilityId) == true then
         abilityIcon = self:SetupDefaultIcon(abilityId, result)
     end
 
@@ -968,7 +976,7 @@ function CrowdControlTracker:StopDrawBreakFree()
             currentColor = CombatInfo.SV.cct.colors[currentResult]
         end
 
-        if CombatInfo.SV.cct.useDefaultIcon and currentResult ~= ACTION_RESULT_AREA_EFFECT then
+        if CombatInfo.SV.cct.useDefaultIcon and currentResult ~= ACTION_RESULT_AREA_EFFECT and self:ShouldUseDefaultIcon(currentAbilityId) == true then
             currentCCIcon = self:SetupDefaultIcon(currentAbilityId, currentResult)
         else
             currentCCIcon = GetAbilityIcon(currentAbilityId)

@@ -16,6 +16,8 @@ local globalMethodOptions = { "Ascending", "Descending", "Radial" }
 local globalMethodOptionsKeys = { ["Ascending"] = 1, ["Descending"] = 2, ["Radial"] = 3 }
 local globalAlertOptions = { "Show All Incoming Abilities", "Only Show Hard CC Effects", "Only Show Unbreakable CC Effects" }
 local globalAlertOptionsKeys = { ["Show All Incoming Abilities"] = 1, ["Only Show Hard CC Effects"] = 2, ["Only Show Unbreakable CC Effects"] = 3 }
+local globalIconOptions = { "All Crowd Control", "NPC CC Only", "Player CC Only" }
+local globalIconOptionsKeys = { ["All Crowd Control"] = 1, ["NPC CC Only"] = 2, ["Player CC Only"] = 3 }
 
 local ACTION_RESULT_AREA_EFFECT = 669966
 
@@ -946,6 +948,31 @@ function CombatInfo.CreateSettings()
                 disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable) end,
                 default = Defaults.alerts.toggles.showCrowdControlBorder,
             },
+
+            {
+                -- Use Generic Icon for CC Type
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON)),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_TP),
+                getFunc = function() return Settings.alerts.toggles.useDefaultIcon end,
+                setFunc = function(newValue) Settings.alerts.toggles.useDefaultIcon = newValue end,
+                disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable) end,
+                default = Defaults.alerts.toggles.useDefaultIcon,
+            },
+
+            {
+                -- Generic Icon Options
+                type = "dropdown",
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_OPTIONS)),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_OPTIONS_TP),
+                choices = globalIconOptions,
+                getFunc = function() return globalIconOptions[Settings.alerts.toggles.defaultIconOptions] end,
+                setFunc = function(value) Settings.alerts.toggles.defaultIconOptions = globalIconOptionsKeys[value] end,
+                width = "full",
+                disabled = function() return not Settings.alerts.toggles.useDefaultIcon end,
+                default = Defaults.alerts.toggles.defaultIconOptions,
+            },
+
             {
                 -- Enable Modifiers
                 type    = "checkbox",
@@ -1326,6 +1353,26 @@ function CombatInfo.CreateSettings()
                 disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
             {
+                -- Knockback
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_KNOCKBACK),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_KNOCKBACK_TP),
+                getFunc = function() return unpack(Settings.alerts.colors.knockbackColor) end,
+                setFunc = function(r, g, b, a) Settings.alerts.colors.knockbackColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
+                default = {r=Defaults.alerts.colors.knockbackColor[1], g=Defaults.alerts.colors.knockbackColor[2], b=Defaults.alerts.colors.knockbackColor[3]},
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+            },
+            {
+                -- Levitate/Pull
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_LEVITATE),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_LEVIATE_TP),
+                getFunc = function() return unpack(Settings.alerts.colors.levitateColor) end,
+                setFunc = function(r, g, b, a) Settings.alerts.colors.levitateColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
+                default = {r=Defaults.alerts.colors.levitateColor[1], g=Defaults.alerts.colors.levitateColor[2], b=Defaults.alerts.colors.levitateColor[3]},
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+            },
+            {
                 -- Disorient
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_DISORIENT),
@@ -1383,6 +1430,16 @@ function CombatInfo.CreateSettings()
                 getFunc = function() return unpack(Settings.alerts.colors.snareColor) end,
                 setFunc = function(r, g, b, a) Settings.alerts.snareColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
                 default = {r=Defaults.alerts.colors.snareColor[1], g=Defaults.alerts.colors.snareColor[2], b=Defaults.alerts.colors.snareColor[3]},
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+            },
+            {
+                -- Root
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_ROOT),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_ROOT_TP),
+                getFunc = function() return unpack(Settings.alerts.colors.rootColor) end,
+                setFunc = function(r, g, b, a) Settings.alerts.colors.rootColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
+                default = {r=Defaults.alerts.colors.rootColor[1], g=Defaults.alerts.colors.rootColor[2], b=Defaults.alerts.colors.rootColor[3]},
                 disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
 
@@ -1902,6 +1959,19 @@ function CombatInfo.CreateSettings()
                 disabled = function() return (not Settings.cct.enabled) or (Settings.cct.showOptions=="icon") end,
                 getFunc = function() return Settings.cct.useDefaultIcon end,
                 setFunc = function(newValue) Settings.cct.useDefaultIcon = newValue CrowdControlTracker:InitControls() end,
+            },
+
+            {
+                -- Generic Icon Options
+                type = "dropdown",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_OPTIONS)),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_OPTIONS_TP),
+                choices = globalIconOptions,
+                getFunc = function() return globalIconOptions[Settings.cct.defaultIconOptions] end,
+                setFunc = function(value) Settings.cct.defaultIconOptions = globalIconOptionsKeys[value] CrowdControlTracker:InitControls() end,
+                width = "full",
+                default = Defaults.cct.defaultIconOptions,
+                disabled = function() return not Settings.cct.useDefaultIcon end,
             },
             {
                 -- Icon and Text Scale

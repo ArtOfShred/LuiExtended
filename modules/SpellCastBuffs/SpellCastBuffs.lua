@@ -189,6 +189,8 @@ SpellCastBuffs.Defaults = {
     TooltipAbilityId                    = false,
     TooltipBuffType                     = false,
     GenericMajorMinor                   = false,
+    UseDefaultIcon                      = false,
+    DefaultIconOptions                  = 1,
     ShowSharedEffects                   = true,
     ShowSharedMajorMinor                = true,
 }
