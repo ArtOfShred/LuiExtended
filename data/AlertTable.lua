@@ -91,7 +91,7 @@ LUIE.Data.AlertTable = {
     [10805] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1500, postCast = 4000, refire = 2500, bossMatch = { Unitnames.Boss_Calixte_Darkblood, Unitnames.Boss_Angata_the_Clannfear_Handler }, sound = LUIE_ALERT_SOUND_TYPE_GROUND }, -- Ignite (Synergy)
 
     -- Abilities
-    [29378] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1600, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_ST_CC }, -- Uppercut (Ravager)
+    [29378] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1600, cc = LUIE_CC_TYPE_KNOCKBACK, sound = LUIE_ALERT_SOUND_TYPE_ST_CC }, -- Uppercut (Ravager)
 
     [28408] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1533, bossMatch = { Unitnames.Boss_Smiles_With_Knife }, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Whirlwind (Skirmisher)
 

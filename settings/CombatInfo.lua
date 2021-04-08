@@ -949,28 +949,17 @@ function CombatInfo.CreateSettings()
                 default = Defaults.alerts.toggles.showCrowdControlBorder,
             },
 
+
+            -- TODO: Update the icon for this
             {
                 -- Use Generic Icon for CC Type
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON)),
-                tooltip = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_TP),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_ALERT_TP),
                 getFunc = function() return Settings.alerts.toggles.useDefaultIcon end,
                 setFunc = function(newValue) Settings.alerts.toggles.useDefaultIcon = newValue end,
                 disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable) end,
                 default = Defaults.alerts.toggles.useDefaultIcon,
-            },
-
-            {
-                -- Generic Icon Options
-                type = "dropdown",
-                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_OPTIONS)),
-                tooltip = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_OPTIONS_TP),
-                choices = globalIconOptions,
-                getFunc = function() return globalIconOptions[Settings.alerts.toggles.defaultIconOptions] end,
-                setFunc = function(value) Settings.alerts.toggles.defaultIconOptions = globalIconOptionsKeys[value] end,
-                width = "full",
-                disabled = function() return not Settings.alerts.toggles.useDefaultIcon end,
-                default = Defaults.alerts.toggles.defaultIconOptions,
             },
 
             {

@@ -90,7 +90,6 @@ CombatInfo.Defaults = {
             mitigationModifierSpreadOut = GetString(SI_LUIE_CI_MITIGATION_MODIFIER_SPREAD_OUT),
             showCrowdControlBorder      = true,
             useDefaultIcon              = false,
-            defaultIconOptions          = 1,
             mitigationPowerPrefix2      = "%t",
             mitigationPowerPrefixN2     = GetString(SI_LUIE_CI_MITIGATION_FORMAT_POWER_N),
             mitigationDestroyPrefix2    = "%t",

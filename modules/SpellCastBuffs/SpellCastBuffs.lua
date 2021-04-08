@@ -222,15 +222,31 @@ local function EaseOutQuad(t, b, c, d)
     return -c * t*(t-2) + b
 end
 
---[[
--- Function to pull icons with default CC icons if neccesary
-function SpellCastBuffs.GetDefaultAbilityIcon(abilityId)
-    if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].cc then
-        icon = LUIE.Data.Effects.EffectOverride[abilityId].icon
+function SpellCastBuffs.ShouldUseDefaultIcon(abilityId)
+    if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].cc then
+        if SpellCastBuffs.SV.DefaultIconOptions == 1 then
+            return true
+        elseif SpellCastBuffs.SV.DefaultIconOptions == 2 then
+            return Effects.EffectOverride[abilityId].isPlayerAbility and false or true
+        elseif SpellCastBuffs.SV.DefaultIconOptions == 3 then
+            return Effects.EffectOverride[abilityId].isPlayerAbility and true or false
+        end
     end
-    return(icon)
 end
-]]--
+
+function SpellCastBuffs.GetDefaultIcon(ccType)
+    if ccType == LUIE_CC_TYPE_STUN then return LUIE_CC_ICON_STUN
+    elseif ccType == LUIE_CC_TYPE_KNOCKDOWN then return LUIE_CC_ICON_STUN
+    elseif ccType == LUIE_CC_TYPE_KNOCKBACK then return LUIE_CC_ICON_KNOCKBACK
+    elseif ccType == LUIE_CC_TYPE_PULL then return LUIE_CC_ICON_PULL
+    elseif ccType == LUIE_CC_TYPE_DISORIENT then return LUIE_CC_ICON_DISORIENT
+    elseif ccType == LUIE_CC_TYPE_FEAR then return LUIE_CC_ICON_FEAR
+    elseif ccType == LUIE_CC_TYPE_STAGGER then return LUIE_CC_ICON_SILENCE
+    elseif ccType == LUIE_CC_TYPE_SILENCE then return LUIE_CC_ICON_SILENCE
+    elseif ccType == LUIE_CC_TYPE_SNARE then return LUIE_CC_ICON_SNARE
+    elseif ccType == LUIE_CC_TYPE_ROOT then return LUIE_CC_ICON_ROOT
+    end
+end
 
 -- Function for determining container context for prominent effects
 function SpellCastBuffs.DetermineContext(context, abilityId, abilityName, castByPlayer)
@@ -1903,6 +1919,11 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
         end
     end
 
+    --Override icon with default if enabled
+    if SpellCastBuffs.SV.UseDefaultIcon and SpellCastBuffs.ShouldUseDefaultIcon(abilityId) == true then
+        iconName = SpellCastBuffs.GetDefaultIcon(Effects.EffectOverride[abilityId].cc)
+    end
+
     local forcedType = Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].forcedContainer or nil
     local savedEffectSlot = effectSlot
     effectSlot = Effects.EffectMergeId[abilityId] or Effects.EffectMergeName[effectName] or effectSlot
@@ -2569,6 +2590,11 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
             end
         end
 
+        --Override icon with default if enabled
+        if SpellCastBuffs.SV.UseDefaultIcon and SpellCastBuffs.ShouldUseDefaultIcon(abilityId) == true then
+            iconName = SpellCastBuffs.GetDefaultIcon(Effects.EffectOverride[abilityId].cc)
+        end
+
         -- TODO: Temp - converts icon for Helljoint, might be other abilities that need this in the future
         if abilityId == 14523 then
             if source == "Jackal" then
@@ -2838,6 +2864,12 @@ function SpellCastBuffs.OnCombatEventOut( eventCode, result, isError, abilityNam
         --if GetUnitReaction("reticleover") ~= UNIT_REACTION_HOSTILE then return end
         if IsUnitDead(unitTag) then return end
         iconName = Effects.FakePlayerDebuffs[abilityId].icon or GetAbilityIcon(abilityId)
+
+        --Override icon with default if enabled
+        if SpellCastBuffs.SV.UseDefaultIcon and SpellCastBuffs.ShouldUseDefaultIcon(abilityId) == true then
+            iconName = SpellCastBuffs.GetDefaultIcon(Effects.EffectOverride[abilityId].cc)
+        end
+
         effectName = Effects.FakePlayerDebuffs[abilityId].name or GetAbilityName(abilityId)
         local context = "reticleover2" -- NOTE: TODO - No prominent support here and probably won't add
         duration = Effects.FakePlayerDebuffs[abilityId].duration

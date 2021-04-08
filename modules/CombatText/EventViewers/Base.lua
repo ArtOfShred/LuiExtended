@@ -5,6 +5,7 @@
 
 LUIE.CombatTextEventViewer = ZO_Object:Subclass()
 local CombatTextEventViewer = LUIE.CombatTextEventViewer
+local CombatText = LUIE.CombatText
 
 local Effects = LUIE.Data.Effects
 local CombatTextConstants = LUIE.Data.CombatTextConstants
@@ -19,6 +20,32 @@ function CombatTextEventViewer:New(poolManager, LMP)
     self.poolManager = poolManager
     self.LMP = LMP
     return obj
+end
+
+function CombatTextEventViewer:ShouldUseDefaultIcon(abilityId)
+    if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].cc then
+        if CombatText.SV.common.defaultIconOptions == 1 then
+            return true
+        elseif CombatText.SV.common.defaultIconOptions == 2 then
+            return Effects.EffectOverride[abilityId].isPlayerAbility and false or true
+        elseif CombatText.SV.common.defaultIconOptions == 3 then
+            return Effects.EffectOverride[abilityId].isPlayerAbility and true or false
+        end
+    end
+end
+
+function CombatTextEventViewer:GetDefaultIcon(ccType)
+    if ccType == LUIE_CC_TYPE_STUN then return LUIE_CC_ICON_STUN
+    elseif ccType == LUIE_CC_TYPE_KNOCKDOWN then return LUIE_CC_ICON_STUN
+    elseif ccType == LUIE_CC_TYPE_KNOCKBACK then return LUIE_CC_ICON_KNOCKBACK
+    elseif ccType == LUIE_CC_TYPE_PULL then return LUIE_CC_ICON_PULL
+    elseif ccType == LUIE_CC_TYPE_DISORIENT then return LUIE_CC_ICON_DISORIENT
+    elseif ccType == LUIE_CC_TYPE_FEAR then return LUIE_CC_ICON_FEAR
+    elseif ccType == LUIE_CC_TYPE_STAGGER then return LUIE_CC_ICON_SILENCE
+    elseif ccType == LUIE_CC_TYPE_SILENCE then return LUIE_CC_ICON_SILENCE
+    elseif ccType == LUIE_CC_TYPE_SNARE then return LUIE_CC_ICON_SNARE
+    elseif ccType == LUIE_CC_TYPE_ROOT then return LUIE_CC_ICON_ROOT
+    end
 end
 
 function CombatTextEventViewer:FormatString(inputFormat, params)
@@ -192,6 +219,11 @@ function CombatTextEventViewer:ControlLayout(control, abilityId, combatType, sou
                     iconPath = Effects.MapDataOverride[abilityId][mapName].icon
                 end
             end
+        end
+
+        --Override icon with default if enabled
+        if Settings.common.useDefaultIcon and self:ShouldUseDefaultIcon(abilityId) == true then
+            iconPath = self:GetDefaultIcon(Effects.EffectOverride[abilityId].cc)
         end
 
         if iconPath and iconPath ~= '' then

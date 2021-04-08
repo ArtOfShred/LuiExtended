@@ -99,6 +99,26 @@ local deathResults = {
     [ACTION_RESULT_DIED_XP] = true,
 }
 
+function AbilityAlerts.ShouldUseDefaultIcon(abilityId)
+    if Alerts[abilityId] and Alerts[abilityId].cc then
+        return true
+    end
+end
+
+function AbilityAlerts.GetDefaultIcon(ccType)
+    if ccType == LUIE_CC_TYPE_STUN then return LUIE_CC_ICON_STUN
+    elseif ccType == LUIE_CC_TYPE_KNOCKDOWN then return LUIE_CC_ICON_STUN
+    elseif ccType == LUIE_CC_TYPE_KNOCKBACK then return LUIE_CC_ICON_KNOCKBACK
+    elseif ccType == LUIE_CC_TYPE_PULL then return LUIE_CC_ICON_PULL
+    elseif ccType == LUIE_CC_TYPE_DISORIENT then return LUIE_CC_ICON_DISORIENT
+    elseif ccType == LUIE_CC_TYPE_FEAR then return LUIE_CC_ICON_FEAR
+    elseif ccType == LUIE_CC_TYPE_STAGGER then return LUIE_CC_ICON_SILENCE
+    elseif ccType == LUIE_CC_TYPE_SILENCE then return LUIE_CC_ICON_SILENCE
+    elseif ccType == LUIE_CC_TYPE_SNARE then return LUIE_CC_ICON_SNARE
+    elseif ccType == LUIE_CC_TYPE_ROOT then return LUIE_CC_ICON_ROOT
+    end
+end
+
 -- Create Alert Frame - basic setup for now
 function AbilityAlerts.CreateAlertFrame()
     -- Apply font for alerts
@@ -672,6 +692,11 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
         end
     end
 
+    --Override icon with default if enabled
+    if Settings.toggles.useDefaultIcon and AbilityAlerts.ShouldUseDefaultIcon(abilityId) == true then
+        abilityIcon = AbilityAlerts.GetDefaultIcon(Alerts[abilityId].cc)
+    end
+
     -- Override unitName here if we utilize a fakeName / bossName
     if Alerts[abilityId].summon or Alerts[abilityId].destroy then
         if Alerts[abilityId].fakeName then
@@ -967,6 +992,11 @@ function AbilityAlerts.OnCombatIn(eventCode, resultType, isError, abilityName, a
                 abilityIcon = Effects.ZoneDataOverride[abilityId][zoneName].icon
             end
         end
+    end
+
+    --Override icon with default if enabled
+    if Settings.toggles.useDefaultIcon and AbilityAlerts.ShouldUseDefaultIcon(abilityId) == true then
+        abilityIcon = AbilityAlerts.GetDefaultIcon(Alerts[abilityId].cc)
     end
 
     -- NEW ALERTS

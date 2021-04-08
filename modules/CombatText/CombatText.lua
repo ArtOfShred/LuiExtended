@@ -75,6 +75,8 @@ CombatText.Defaults = {
         overkill                    = true,
         overheal                    = true,
         abbreviateNumbers           = false,
+        useDefaultIcon              = false,
+        defaultIconOptions          = false,
     },
     -- Toggle Defaults
     toggles = {

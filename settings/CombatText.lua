@@ -9,6 +9,9 @@ local BlacklistPresets = LUIE.Data.CombatTextBlacklistPresets
 
 local zo_strformat = zo_strformat
 
+local globalIconOptions = { "All Crowd Control", "NPC CC Only", "Player CC Only" }
+local globalIconOptionsKeys = { ["All Crowd Control"] = 1, ["NPC CC Only"] = 2, ["Player CC Only"] = 3 }
+
 local callbackManager = CALLBACK_MANAGER
 
 local Blacklist, BlackListValues = {}
@@ -155,6 +158,29 @@ function CombatText.CreateSettings()
                 setFunc = function(v) Settings.common.abbreviateNumbers = v end,
                 default = Defaults.common.abbreviateNumbers,
             },
+
+            {
+                -- Use Generic Icon for CC Type
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_TP),
+                getFunc = function() return Settings.common.useDefaultIcon end,
+                setFunc = function(newValue) Settings.common.useDefaultIcon = newValue end,
+                default = Defaults.common.useDefaultIcon,
+            },
+            {
+                -- Generic Icon Options
+                type = "dropdown",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_OPTIONS)),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_OPTIONS_TP),
+                choices = globalIconOptions,
+                getFunc = function() return globalIconOptions[Settings.common.defaultIconOptions] end,
+                setFunc = function(value) Settings.common.defaultIconOptions = globalIconOptionsKeys[value] end,
+                width = "full",
+                disabled = function() return not Settings.common.useDefaultIcon end,
+                default = Defaults.common.defaultIconOptions,
+            },
+
         },
     }
 

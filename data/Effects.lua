@@ -6932,7 +6932,7 @@ Effects.EffectOverride = {
 
     -- Ravager (2H)
     [29379] = { icon = 'esoui/art/icons/ability_2handed_001.dds', tooltip = Tooltips.Generic_Knockback, cc = LUIE_CC_TYPE_KNOCKBACK }, -- Uppercut (Ravager)
-    [29380] = { icon = 'esoui/art/icons/ability_2handed_001.dds', hide = true }, -- Uppercut (Ravager)
+    [29380] = { icon = 'esoui/art/icons/ability_2handed_001.dds', hide = true, cc = LUIE_CC_TYPE_KNOCKBACK  }, -- Uppercut (Ravager)
 
     -- Skirmisher (DW)
     [29035] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_sword_1h_light.dds' }, -- Quick Strike (Rogue/Skirmisher)
