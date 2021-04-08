@@ -919,24 +919,24 @@ function CombatInfo.CreateSettings()
                 default = Defaults.alerts.toggles.showMitigation,
             },
             {
-                -- Mitigation Prefix (No Name)
+                -- Mitigation - Ability Name
                 type    = "editbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME)),
-                tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME_TP)),
-                getFunc = function() return Settings.alerts.toggles.mitigationPrefix end,
-                setFunc = function(v) Settings.alerts.toggles.mitigationPrefix = v end,
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_ABILITY)),
+                tooltip = zo_strformat("<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_ABILITY_TP)),
+                getFunc = function() return Settings.alerts.toggles.mitigationAbilityName end,
+                setFunc = function(v) Settings.alerts.toggles.mitigationAbilityName = v end,
                 disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable) end,
-                default = Defaults.alerts.toggles.mitigationPrefix,
+                default = Defaults.alerts.toggles.mitigationAbilityName,
             },
             {
-                -- Mitigation Prefix (Name)
+                -- Mitigation - Enemy Name
                 type    = "editbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME)),
-                tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME_TP)),
-                getFunc = function() return Settings.alerts.toggles.mitigationPrefixN end,
-                setFunc = function(v) Settings.alerts.toggles.mitigationPrefixN = v end,
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_NAME)),
+                tooltip = zo_strformat("<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_NAME_TP)),
+                getFunc = function() return Settings.alerts.toggles.mitigationEnemyName end,
+                setFunc = function(v) Settings.alerts.toggles.mitigationEnemyName = v end,
                 disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable) end,
-                default = Defaults.alerts.toggles.mitigationPrefixN,
+                default = Defaults.alerts.toggles.mitigationEnemyName,
             },
             {
                 -- Show Crowd Control Border
@@ -948,9 +948,16 @@ function CombatInfo.CreateSettings()
                 disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable) end,
                 default = Defaults.alerts.toggles.showCrowdControlBorder,
             },
-
-
-            -- TODO: Update the icon for this
+            {
+                -- Color Ability Name by CC Type
+                type    = "checkbox",
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_LABEL_COLOR)),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_LABEL_COLOR_TP),
+                getFunc = function() return Settings.alerts.toggles.ccLabelColor end,
+                setFunc = function(v) Settings.alerts.toggles.ccLabelColor = v end,
+                disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable) end,
+                default = Defaults.alerts.toggles.ccLabelColor,
+            },
             {
                 -- Use Generic Icon for CC Type
                 type = "checkbox",
@@ -961,7 +968,6 @@ function CombatInfo.CreateSettings()
                 disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable) end,
                 default = Defaults.alerts.toggles.useDefaultIcon,
             },
-
             {
                 -- Enable Modifiers
                 type    = "checkbox",

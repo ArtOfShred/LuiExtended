@@ -61,7 +61,9 @@ end
 function AbilityAlerts.ResetAlertSize()
     for i = 1, 3 do
         local alert = _G["LUIE_Alert" .. i]
+        alert.prefix:SetFont(g_alertFont)
         alert.name:SetFont(g_alertFont)
+        alert.modifier:SetFont(g_alertFont)
         alert.mitigation:SetFont(g_alertFont)
         alert.timer:SetFont(g_alertFont)
         alert.icon:SetDimensions(CombatInfo.SV.alerts.toggles.alertFontSize + 8, CombatInfo.SV.alerts.toggles.alertFontSize + 8)
@@ -74,7 +76,7 @@ function AbilityAlerts.ResetAlertSize()
         alert.icon.icon:ClearAnchors()
         alert.icon.icon:SetAnchor(TOPLEFT, alert.icon, TOPLEFT, 3, 3)
         alert.icon.icon:SetAnchor(BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -3, -3)
-        alert:SetDimensions(alert.name:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth(), height)
+        alert:SetDimensions(alert.prefix:GetTextWidth() + alert.name:GetTextWidth() + alert.modifier:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth(), height)
     end
 
     uiTlw.alertFrame:SetDimensions(500, (CombatInfo.SV.alerts.toggles.alertFontSize * 2) + 4)
@@ -135,7 +137,9 @@ function AbilityAlerts.CreateAlertFrame()
 
         alert.data = {
             ["available"] = true,
+            ["textPrefix"] = "",
             ["textName"] = "TEST NAME",
+            ["textModifier"] = "",
             ["textMitigation"] = "TEST MITIGATION MESSAGE",
             ["duration"] = nil,
             ["showDuration"] = false,
@@ -146,12 +150,16 @@ function AbilityAlerts.CreateAlertFrame()
             ["effectOnlyInterrupt"] = nil,
         }
 
+        alert.prefix = UI.Label(alert, nil, nil, nil, g_alertFont, alert.data.textPrefix, false)
         alert.name = UI.Label(alert, nil, nil, nil, g_alertFont, alert.data.textName, false)
-        alert.name:SetAnchor(LEFT, alert, LEFT, 0, 0)
+        alert.modifier = UI.Label(alert, nil, nil, nil, g_alertFont, alert.data.textModifier, false)
+        alert.prefix:SetAnchor(LEFT, alert, LEFT, 0, 0)
+        alert.name:SetAnchor(LEFT, alert.prefix, RIGHT, 0, 0)
+        alert.modifier:SetAnchor(LEFT, alert.name, RIGHT, 0, 0)
 
         alert.icon = UI.Backdrop(alert.name, nil, nil, {0,0,0,0.5}, {0,0,0,1}, false)
         alert.icon:SetDimensions(CombatInfo.SV.alerts.toggles.alertFontSize + 8, CombatInfo.SV.alerts.toggles.alertFontSize + 8)
-        alert.icon:SetAnchor(LEFT, alert.name, RIGHT, 6, 0)
+        alert.icon:SetAnchor(LEFT, alert.modifier, RIGHT, 6, 0)
 
         alert.icon.back = UI.Texture(alert.icon, nil, nil, "/esoui/art/actionbar/abilityframe64_up.dds", nil, false)
         alert.icon.back:SetAnchor(TOPLEFT, alert.icon, TOPLEFT)
@@ -166,7 +174,7 @@ function AbilityAlerts.CreateAlertFrame()
         alert.icon.cd = windowManager:CreateControl(nil, alert.icon, CT_COOLDOWN)
         alert.icon.cd:SetAnchor(TOPLEFT, alert.icon, TOPLEFT, 1, 1)
         alert.icon.cd:SetAnchor(BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -1, -1)
-        alert.icon.cd:SetFillColor(0,1,0,1)
+        alert.icon.cd:SetFillColor(0,0,0,0)
         alert.icon.cd:StartCooldown(0, 0, CD_TYPE_RADIAL, CD_TIME_TYPE_TIME_REMAINING, false)
         alert.icon.cd:SetDrawLayer(DL_BACKGROUND)
 
@@ -180,7 +188,7 @@ function AbilityAlerts.CreateAlertFrame()
         alert.timer = UI.Label(alert.icon, nil, nil, nil, g_alertFont, alert.data.duration, false)
         alert.timer:SetAnchor(LEFT, alert.mitigation, RIGHT, 0, 0)
 
-        alert:SetDimensions(alert.name:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth(), height)
+        alert:SetDimensions(alert.prefix:GetTextWidth() + alert.name:GetTextWidth() + alert.modifier:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth(), height)
         alert:SetHidden(true)
 
         anchor = { TOP, BOTTOM, 0, 0, alert }
@@ -310,8 +318,13 @@ end
 function AbilityAlerts.GenerateAlertFramePreview(state)
     for i = 1, 3 do
         local alert = _G["LUIE_Alert" .. i]
+            alert.prefix:SetText("")
             alert.name:SetText("NAME TEST")
+            alert.name:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
+            alert.modifier:SetText("")
             alert.icon.icon:SetTexture("/esoui/art/icons/icon_missing.dds")
+            alert.icon.cd:SetFillColor(0,0,0,0)
+            alert.icon.cd:StartCooldown(0, 0, CD_TYPE_RADIAL, CD_TIME_TYPE_TIME_REMAINING, false)
             alert.mitigation:SetText("MITGATION TEST")
             alert.timer:SetText(CombatInfo.SV.alerts.toggles.alertTimer and " 1.0" or "")
         if state then
@@ -419,15 +432,19 @@ function AbilityAlerts.AlertInterrupt(eventCode, resultType, isError, abilityNam
                 alert.data = { }
                 alert.data.available = true
                 alert.data.id = ""
-                alert.data.textMitigation =  ""
+                alert.data.textMitigation = ""
+                alert.data.textPrefix = ""
                 alert.data.textName = "INTERRUPTED!"
+                alert.data.textModifier = ""
                 alert.data.sourceUnitId = ""
                 alert.icon:SetHidden(true)
                 alert.data.duration = currentTime + 1500
                 alert.data.postCast = 0
                 alert.data.showDuration = false
+                alert.prefix:SetText(alert.data.textPrefix)
                 alert.name:SetText(alert.data.textName)
                 alert.name:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
+                alert.modifier:SetText(alert.data.textModifier)
                 alert.mitigation:SetText("")
                 alert.timer:SetText("")
                 alert:SetHidden(false)
@@ -439,30 +456,26 @@ function AbilityAlerts.AlertInterrupt(eventCode, resultType, isError, abilityNam
 end
 
 function AbilityAlerts.CrowdControlColorSetup(crowdControl)
-    if CombatInfo.SV.alerts.toggles.showCrowdControlBorder then
-        if crowdControl == LUIE_CC_TYPE_STUN or crowdControl == LUIE_CC_TYPE_KNOCKDOWN then -- Stun/Knockdown
-            return CombatInfo.SV.alerts.colors.stunColor
-        elseif crowdControl == LUIE_CC_TYPE_KNOCKBACK then -- Knockback
-            return CombatInfo.SV.alerts.colors.knockbackColor
-        elseif crowdControl == LUIE_CC_TYPE_PULL then -- Pull/Levitate
-            return CombatInfo.SV.alerts.colors.levitateColor
-        elseif crowdControl == LUIE_CC_TYPE_DISORIENT then -- Disorient
-            return CombatInfo.SV.alerts.colors.disorientColor
-        elseif crowdControl == LUIE_CC_TYPE_FEAR then -- Fear
-            return CombatInfo.SV.alerts.colors.fearColor
-        elseif crowdControl == LUIE_CC_TYPE_SILENCE then -- Silence
-            return CombatInfo.SV.alerts.colors.silenceColor
-        elseif crowdControl == LUIE_CC_TYPE_STAGGER then -- Stagger
-            return CombatInfo.SV.alerts.colors.staggerColor
-        elseif crowdControl == LUIE_CC_TYPE_UNBREAKABLE then -- Unbreakable
-            return CombatInfo.SV.alerts.colors.unbreakableColor
-        elseif crowdControl == LUIE_CC_TYPE_SNARE then -- Snare
-            return CombatInfo.SV.alerts.colors.snareColor
-        elseif crowdControl == LUIE_CC_TYPE_ROOT then -- Immobilize
-            return CombatInfo.SV.alerts.colors.rootColor
-        else
-            return { 0, 0, 0, 0 }
-        end
+    if crowdControl == LUIE_CC_TYPE_STUN or crowdControl == LUIE_CC_TYPE_KNOCKDOWN then -- Stun/Knockdown
+        return CombatInfo.SV.alerts.colors.stunColor
+    elseif crowdControl == LUIE_CC_TYPE_KNOCKBACK then -- Knockback
+        return CombatInfo.SV.alerts.colors.knockbackColor
+    elseif crowdControl == LUIE_CC_TYPE_PULL then -- Pull/Levitate
+        return CombatInfo.SV.alerts.colors.levitateColor
+    elseif crowdControl == LUIE_CC_TYPE_DISORIENT then -- Disorient
+        return CombatInfo.SV.alerts.colors.disorientColor
+    elseif crowdControl == LUIE_CC_TYPE_FEAR then -- Fear
+        return CombatInfo.SV.alerts.colors.fearColor
+    elseif crowdControl == LUIE_CC_TYPE_SILENCE then -- Silence
+        return CombatInfo.SV.alerts.colors.silenceColor
+    elseif crowdControl == LUIE_CC_TYPE_STAGGER then -- Stagger
+        return CombatInfo.SV.alerts.colors.staggerColor
+    elseif crowdControl == LUIE_CC_TYPE_UNBREAKABLE then -- Unbreakable
+        return CombatInfo.SV.alerts.colors.unbreakableColor
+    elseif crowdControl == LUIE_CC_TYPE_SNARE then -- Snare
+        return CombatInfo.SV.alerts.colors.snareColor
+    elseif crowdControl == LUIE_CC_TYPE_ROOT then -- Immobilize
+        return CombatInfo.SV.alerts.colors.rootColor
     else
         return { 0, 0, 0, 0 }
     end
@@ -510,15 +523,29 @@ function AbilityAlerts.PlayAlertSound(abilityId)
 end
 
 local drawLocation = 1
-function AbilityAlerts.SetupSingleAlertFrame(abilityId, textName, textMitigation, abilityIcon, currentTime, endTime, showDuration, crowdControl, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt)
-    local color = AbilityAlerts.CrowdControlColorSetup(crowdControl)
+function AbilityAlerts.SetupSingleAlertFrame(abilityId, textPrefix, textModifier, textName, textMitigation, abilityIcon, currentTime, endTime, showDuration, crowdControl, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt)
+    local labelColor
+    local borderColor
+
+    if CombatInfo.SV.alerts.toggles.showCrowdControlBorder then
+        borderColor = AbilityAlerts.CrowdControlColorSetup(crowdControl)
+    else
+        borderColor = { 0, 0, 0, 0 }
+    end
+    if CombatInfo.SV.alerts.toggles.ccLabelColor then
+        labelColor = AbilityAlerts.CrowdControlColorSetup(crowdControl)
+    else
+        labelColor = CombatInfo.SV.alerts.colors.alertShared
+    end
 
     for i = 1, 3 do
         local alert = _G["LUIE_Alert" .. i]
         if alert.data.available then
             alert.data.id = abilityId
             alert.data.textMitigation =  textMitigation
-            alert.data.textName =  textName
+            alert.data.textPrefix = textPrefix or ""
+            alert.data.textName = textName
+            alert.data.textModifier = textModifier or ""
             alert.data.sourceUnitId = sourceUnitId
             alert.icon.icon:SetTexture(abilityIcon)
             alert.data.duration = endTime
@@ -528,8 +555,12 @@ function AbilityAlerts.SetupSingleAlertFrame(abilityId, textName, textMitigation
             alert.data.alwaysShowInterrupt = alwaysShowInterrupt
             alert.data.neverShowInterrupt = neverShowInterrupt
             alert.data.effectOnlyInterrupt = effectOnlyInterrupt
-            alert.name:SetText(textName)
-            alert.name:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
+            alert.prefix:SetText(alert.data.textPrefix)
+            alert.prefix:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
+            alert.name:SetText(alert.data.textName)
+            alert.name:SetColor(unpack(labelColor))
+            alert.modifier:SetText(alert.data.textModifier)
+            alert.modifier:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
             alert.mitigation:SetText(textMitigation)
             alert.mitigation:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
             alert.timer:SetText(alert.data.showDuration and string.format(" %.1f", remain / 1000) or "")
@@ -538,7 +569,7 @@ function AbilityAlerts.SetupSingleAlertFrame(abilityId, textName, textMitigation
             alert:SetHidden(false)
             alert:SetAlpha(1)
             alert.data.available = false
-            alert.icon.cd:SetFillColor(color[1], color[2], color[3], color[4])
+            alert.icon.cd:SetFillColor(unpack(borderColor))
             --alert.icon.cd:SetHidden(not crowdControl)
             drawLocation = 1 -- As long as this text is filling an available spot, we reset the draw over location to slot 1. If all slots are filled then the draw over code below will cycle and handle abilities.
             AbilityAlerts.RealignAlerts(i)
@@ -548,8 +579,10 @@ function AbilityAlerts.SetupSingleAlertFrame(abilityId, textName, textMitigation
     -- If no alert frame is available, then draw over in the first spot
     local alert = _G["LUIE_Alert" .. drawLocation]
     alert.data.id = abilityId
-    alert.data.textMitigation = textMitigation
+    alert.data.textMitigation =  textMitigation
+    alert.data.textPrefix = textPrefix or ""
     alert.data.textName = textName
+    alert.data.textModifier = textModifier or ""
     alert.data.sourceUnitId = sourceUnitId
     alert.icon.icon:SetTexture(abilityIcon)
     alert.data.duration = endTime
@@ -559,8 +592,12 @@ function AbilityAlerts.SetupSingleAlertFrame(abilityId, textName, textMitigation
     alert.data.alwaysShowInterrupt = alwaysShowInterrupt
     alert.data.neverShowInterrupt = neverShowInterrupt
     alert.data.effectOnlyInterrupt = effectOnlyInterrupt
-    alert.name:SetText(textName)
-    alert.name:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
+    alert.prefix:SetText(alert.data.textPrefix)
+    alert.prefix:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
+    alert.name:SetText(alert.data.textName)
+    alert.name:SetColor(unpack(labelColor))
+    alert.modifier:SetText(alert.data.textModifier)
+    alert.modifier:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
     alert.mitigation:SetText(textMitigation)
     alert.mitigation:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
     alert.timer:SetText(alert.data.showDuration and string.format(" %.1f", remain / 1000) or "")
@@ -569,7 +606,7 @@ function AbilityAlerts.SetupSingleAlertFrame(abilityId, textName, textMitigation
     alert:SetHidden(false)
     alert:SetAlpha(1)
     alert.data.available = false
-    alert.icon.cd:SetFillColor(color[1], color[2], color[3], color[4])
+    alert.icon.cd:SetFillColor(unpack(borderColor))
     --alert.icon.cd:SetHidden(not crowdControl)
     drawLocation = drawLocation +1
     if drawLocation > 3 then
@@ -581,7 +618,7 @@ end
 function AbilityAlerts.RealignAlerts(alertNumber)
     local height = (CombatInfo.SV.alerts.toggles.alertFontSize * 2)
     local alert = _G["LUIE_Alert" .. alertNumber]
-    alert:SetDimensions(alert.name:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth(), height)
+    alert:SetDimensions(alert.prefix:GetTextWidth() + alert.name:GetTextWidth() + alert.modifier:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth(), height)
 end
 
 function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
@@ -908,14 +945,19 @@ local function CheckInterruptEvent(unitId, abilityId)
                     alert.data.available = true
                     alert.data.id = ""
                     alert.data.textMitigation = ""
+                    alert.data.textPrefix = ""
                     alert.data.textName = "INTERRUPTED!"
+                    alert.data.textModifier = ""
                     alert.data.sourceUnitId = ""
                     alert.icon:SetHidden(true)
                     alert.data.duration = currentTime + 1500
                     alert.data.postCast = 0
                     alert.data.showDuration = false
+                    alert.prefix:SetText(alert.data.textPrefix)
                     alert.name:SetText(alert.data.textName)
                     alert.name:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
+                    alert.modifier:SetText(alert.data.textModifier)
+
                     alert.mitigation:SetText("")
                     alert.timer:SetText("")
                     alert:SetHidden(false)
@@ -1106,11 +1148,11 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
     local Settings = CombatInfo.SV.alerts
 
     local labelColor = Settings.colors.alertShared
-    local prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and Settings.toggles.mitigationPrefixN or Settings.toggles.mitigationPrefix
-    -- Add modifier if one was set
-    if modifier ~= "" then
-        prefix = (prefix .. " " .. modifier)
-    end
+    local prefix
+    local textPrefix
+    local textName
+    local textModifier
+    local textMitigation
 
     if (alertType == alertTypes.SHARED) then
         local spacer = "-"
@@ -1166,12 +1208,33 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
             end
         end
 
-        textName = AbilityAlerts.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
+        local name = Settings.toggles.mitigationAbilityName
+        if modifier ~= "" then
+            modifier = (" " .. modifier)
+        end
+        prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and Settings.toggles.mitigationEnemyName or ""
+        if prefix ~= "" then
+            name = (" " .. name)
+        end
+
+        textPrefix = AbilityAlerts.FormatAlertString(prefix, { source = sourceName })
+        textName = AbilityAlerts.FormatAlertString(name, { source = sourceName, ability = abilityName })
+        textModifier = modifier
         textMitigation = Settings.toggles.showMitigation and zo_strformat(" <<1>> <<2>><<3>><<4>><<5>>", spacer, stringBlock, stringDodge, stringAvoid, stringInterrupt) or ""
     -- UNMIT
     elseif (alertType == alertTypes.UNMIT) then
-        local color = AbilityAlerts.AlertColors.alertColorUnmit
-        textName = AbilityAlerts.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
+        local name = Settings.toggles.mitigationAbilityName
+        if modifier ~= "" then
+            modifier = (" " .. modifier)
+        end
+        prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and Settings.toggles.mitigationEnemyName or ""
+        if prefix ~= "" then
+            name = (" " .. name)
+        end
+
+        textPrefix = AbilityAlerts.FormatAlertString(prefix, { source = sourceName })
+        textName = AbilityAlerts.FormatAlertString(name, { source = sourceName, ability = abilityName })
+        textModifier = modifier
         textMitigation = zo_strformat("|c<<1>><<2>>|r", color, Settings.formats.alertUnmit)
     -- POWER
     elseif (alertType == alertTypes.POWER) then
@@ -1204,7 +1267,7 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
     local currentTime = GetGameTimeMilliseconds()
     local endTime = currentTime + duration
 
-    AbilityAlerts.SetupSingleAlertFrame(abilityId, textName, textMitigation, abilityIcon, currentTime, endTime, showDuration, crowdControl, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt)
+    AbilityAlerts.SetupSingleAlertFrame(abilityId, textPrefix, textModifier, textName, textMitigation, abilityIcon, currentTime, endTime, showDuration, crowdControl, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt)
     AbilityAlerts.PlayAlertSound(abilityId, alertType)
 end
 
