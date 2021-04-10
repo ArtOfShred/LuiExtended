@@ -146,7 +146,7 @@ function SlashCommands.SlashCampaignQ(option)
 end
 
 -- Slash Command to use collectibles based on their collectible id
-function SlashCommands.SlashCollectible(id, fromKeybind)
+function SlashCommands.SlashCollectible(id)
     -- Check to make sure we're not in Imperial City
     if IsInImperialCity() then
         printToChat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_IC), true)
@@ -178,7 +178,7 @@ function SlashCommands.SlashCollectible(id, fromKeybind)
     if type(id) == "number" then
         if IsCollectibleUnlocked(id) then
             UseCollectible(id)
-            LUIE.SlashCollectibleOverride = not fromKeybind
+            LUIE.SlashCollectibleOverride = true
             if id~= 300 and id ~= 267 and id ~= 6376 and id ~= 301 and id ~= 6378 then
                 LUIE.LastMementoUsed = id
             end
@@ -194,7 +194,7 @@ function SlashCommands.SlashCollectible(id, fromKeybind)
         if SlashCommands.SV.SlashBankerChoice == 1 then
             if IsCollectibleUnlocked(267) then
                 UseCollectible(267) -- Tythis
-                LUIE.SlashCollectibleOverride = not fromKeybind
+                LUIE.SlashCollectibleOverride = true
             else
                 printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(267)), true)
                 if LUIE.SV.TempAlertHome then
@@ -206,7 +206,7 @@ function SlashCommands.SlashCollectible(id, fromKeybind)
         else
             if IsCollectibleUnlocked(6376) then
                 UseCollectible(6376) -- Ezabi
-                LUIE.SlashCollectibleOverride = not fromKeybind
+                LUIE.SlashCollectibleOverride = true
             else
                 printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(6376)), true)
                 if LUIE.SV.TempAlertHome then
@@ -220,7 +220,7 @@ function SlashCommands.SlashCollectible(id, fromKeybind)
         if SlashCommands.SV.SlashMerchantChoice == 1 then
             if IsCollectibleUnlocked(301) then
                 UseCollectible(301) -- Nuzhimeh
-                LUIE.SlashCollectibleOverride = not fromKeybind
+                LUIE.SlashCollectibleOverride = true
             else
                 printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(301)), true)
                 if LUIE.SV.TempAlertHome then
@@ -232,7 +232,7 @@ function SlashCommands.SlashCollectible(id, fromKeybind)
         else
             if IsCollectibleUnlocked(6378) then
                 UseCollectible(6378) -- Ferez
-                LUIE.SlashCollectibleOverride = not fromKeybind
+                LUIE.SlashCollectibleOverride = true
             else
                 printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(6378)), true)
                 if LUIE.SV.TempAlertHome then
