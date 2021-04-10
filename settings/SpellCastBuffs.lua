@@ -1436,7 +1436,7 @@ function SpellCastBuffs.CreateSettings()
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWREZZ),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWREZZ_TP),
                 getFunc = function() return Settings.ShowResurrectionImmunity end,
-                setFunc = function(value) Settings.ShowResurrectionImmunity = value end,
+                setFunc = function(value) Settings.ShowResurrectionImmunity = value SpellCastBuffs.ReloadEffects("player") end,
                 width = "full",
                 default = Defaults.ShowResurrectionImmunity,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,

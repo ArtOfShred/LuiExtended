@@ -3084,6 +3084,10 @@ function SpellCastBuffs.ReloadEffects(unitTag)
         if SpellCastBuffs.SV.ShowRecall and not SpellCastBuffs.SV.HidePlayerDebuffs then
             SpellCastBuffs.ShowRecallCooldown()
         end
+        -- Reload werewolf effects
+        if SpellCastBuffs.SV.ShowWerewolf and IsWerewolf() then
+            SpellCastBuffs.WerewolfState(nil, true, true)
+        end
     end
 
     -- Target Specific
@@ -3300,7 +3304,11 @@ function SpellCastBuffs.OnUpdate(currentTime)
                         table.insert(buffsSorted[container], v)
                     -- If the effect is not flagged as long or 0 duration and flagged to display in short container, then display normally.
                     elseif v.type == 2 or v.forced == "short" or not (v.forced == "long" or v.ends == nil or v.dur == 0) then
-                        table.insert(buffsSorted[container], v)
+                        if v.target =="reticleover" and SpellCastBuffs.SV.ShortTermEffects_Target then
+                            table.insert(buffsSorted[container], v)
+                        elseif v.target == "player" and SpellCastBuffs.SV.ShortTermEffects_Player then
+                            table.insert(buffsSorted[container], v)
+                        end
                     -- If the effect is a long term effect on the target then use Long Term Target settings.
                     elseif v.target == "reticleover" and SpellCastBuffs.SV.LongTermEffects_Target then
                         table.insert(buffsSorted[container], v)
@@ -3656,11 +3664,6 @@ function SpellCastBuffs.OnPlayerAlive(eventCode)
 
     -- This is a good place to reload player buffs, as they were wiped on death
     SpellCastBuffs.ReloadEffects( "player" )
-
-    -- Reload werewolf effects
-    if SpellCastBuffs.SV.ShowWerewolf and IsWerewolf() then
-        SpellCastBuffs.WerewolfState(nil, true, true)
-    end
 
     -- Start Resurrection Sequence
     g_playerResurrectStage = 1
