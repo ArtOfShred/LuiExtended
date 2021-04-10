@@ -2403,7 +2403,7 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
     -- Special handling for Crystallized Shield + Morphs
     if abilityId == 92068 or abilityId == 92168 or abilityId == 92170 then
         if result == ACTION_RESULT_DAMAGE_SHIELDED then
-            local context = "player" .. effectType
+            local context = "player" .. Effects.EffectOverride[abilityId].type
             context = SpellCastBuffs.DetermineContext(context, abilityId, effectName)
 
             if SpellCastBuffs.EffectsList[context][abilityId] then

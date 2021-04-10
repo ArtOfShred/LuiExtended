@@ -5330,14 +5330,14 @@ Effects.EffectOverride = {
 
     -- Crystallized Shield / Crystallized Slab / Shimmering Shield
     [86135] = { hide = true }, -- Crystallized Shield (Crystallized Shield)
-    [92068] = { icon = 'esoui/art/icons/ability_warden_002.dds', name = Abilities.Skill_Crystallized_Shield, tooltip = Tooltips.Skill_Crystallized_Shield, stack = 3 }, -- Crystalized Shield (Crystallized Shield)
+    [92068] = { icon = 'esoui/art/icons/ability_warden_002.dds', name = Abilities.Skill_Crystallized_Shield, tooltip = Tooltips.Skill_Crystallized_Shield, stack = 3, type = BUFF_EFFECT_TYPE_BUFF }, -- Crystalized Shield (Crystallized Shield)
     [87224] = { icon = 'esoui/art/icons/ability_warden_002.dds' }, -- Combat Restore Crystalized Shi (Crystallized Shield)
     [86139] = { hide = true }, -- Crystallized Slab (Crystallized Slab)
-    [92168] = { icon = 'esoui/art/icons/ability_warden_002_a.dds', name = Abilities.Skill_Crystallized_Slab, tooltip = Tooltips.Skill_Crystallized_Slab, stack = 3 }, -- Crystalized Slab (Crystallized Slab)
+    [92168] = { icon = 'esoui/art/icons/ability_warden_002_a.dds', name = Abilities.Skill_Crystallized_Slab, tooltip = Tooltips.Skill_Crystallized_Slab, stack = 3, type = BUFF_EFFECT_TYPE_BUFF }, -- Crystalized Slab (Crystallized Slab)
     [88766] = { icon = 'esoui/art/icons/ability_warden_002_a.dds', name = Abilities.Skill_Crystallized_Slab }, -- Crystalized Slab (Crystallized Slab)
     [93175] = { hide = true }, -- Crystallized Slab (Crystallized Slab)
     [86143] = { hide = true }, -- Shimmering Shield (Shimmering Shield)
-    [92170] = { icon = 'esoui/art/icons/ability_warden_002_b.dds', tooltip = Tooltips.Skill_Shimmering_Shield, stack = 3 }, -- Shimmering Shield (Shimmering Shield)
+    [92170] = { icon = 'esoui/art/icons/ability_warden_002_b.dds', tooltip = Tooltips.Skill_Shimmering_Shield, stack = 3, type = BUFF_EFFECT_TYPE_BUFF }, -- Shimmering Shield (Shimmering Shield)
     [88771] = { icon = 'esoui/art/icons/ability_warden_002_b.dds', name = Abilities.Skill_Shimmering_Shield }, -- Shimmering Shield Restore (Shimmering Shield)
 
     -- Frozen Gate / Frozen Device / Frozen Retreat
