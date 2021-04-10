@@ -213,7 +213,7 @@ CombatText.Defaults = {
             [DAMAGE_TYPE_DROWN]     = { 35/255, 70/255, 255/255, 1 },
             [DAMAGE_TYPE_DISEASE]   = { 25/255, 85/255, 0, 1 },
             [DAMAGE_TYPE_POISON]    = { 0, 1, 127/255, 1 },
-            [DAMAGE_TYPE_BLEED]     = { 200/255, 200/255, 160/255, 1 },
+            [DAMAGE_TYPE_BLEED]     = { 1, 45/255, 45/255, 1 },
         },
         healing                     = { 0, 192/255, 0, 1 },
         energizeMagicka             = { 0, 192/255, 1, 1 },
@@ -484,12 +484,18 @@ function CombatText.Initialize(enabled)
     LUIE.CombatTextResourceEventViewer:New(poolManager, LMP)
     LUIE.CombatTextDeathViewer:New(poolManager, LMP)
 
-    -- If we don't have an AdjustVars variable set then set Crouch Drain to default on the blacklist.
-    if (LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVars ~= 1) then
-        local list = CombatText.SV.blacklist
-        list[20301] = true
+    -- Variable adjustment if needed
+    if not LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVars then
+        LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVars = 0
     end
-    -- Set AdjustVars = 1 so this doesn't occur again.
-    LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVars = 1
-
+    if (LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVars < 1) then
+        -- Blacklist sneak drain by default
+        CombatText.SV.blacklist[20301] = true
+    end
+    if (LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVars < 2) then
+        -- Set color for bleed damage to red
+        CombatText.SV.colors.damage[DAMAGE_TYPE_BLEED] = CombatText.Defaults.colors.damage[DAMAGE_TYPE_BLEED]
+    end
+    -- Increment so this doesn't occur again.
+    LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVars = 2
 end

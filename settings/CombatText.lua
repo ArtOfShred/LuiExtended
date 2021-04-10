@@ -465,7 +465,7 @@ function CombatText.CreateSettings()
                 default = {r=Defaults.colors.damage[2][1], g=Defaults.colors.damage[2][2], b=Defaults.colors.damage[2][3]}
             },
             {
-                -- Generic
+                -- Bleed
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_BLEED),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_BLEED_TP),
