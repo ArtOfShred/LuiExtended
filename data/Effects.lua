@@ -12560,7 +12560,7 @@ Effects.FakePlayerBuffs = {
     [88758] = { duration = "GET", onlyExtended = true, shiftId = 86126 }, -- Major Resolve (Expansive Frost Cloak)
     [88761] = { duration = "GET", onlyExtra = true, shiftId = 86130 }, -- Major Resolve (Ice Fortress)
 
-    [92068] = { duration = 6000 }, -- Crystalized Shield (Crystallized Shield)
+    [92068] = { duration = "GET" }, -- Crystalized Shield (Crystallized Shield)
     [92168] = { duration = "GET" }, -- Crystalized Slab (Crystallized Slab)
     [92170] = { duration = "GET" }, -- Shimmering Shield (Shimmering Shield)
 

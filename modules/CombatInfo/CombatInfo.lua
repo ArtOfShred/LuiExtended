@@ -2167,7 +2167,6 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
                     end
                 end
                 if g_toggledSlotsBack[abilityId] then
-
                     local slotNum = g_toggledSlotsBack[abilityId]
                     if g_uiCustomToggle[slotNum] then
                         if g_toggledSlotsStack[abilityId] and g_toggledSlotsStack[abilityId] > 0 then

@@ -114,7 +114,7 @@ function AbilityAlerts.GetDefaultIcon(ccType)
     elseif ccType == LUIE_CC_TYPE_PULL then return LUIE_CC_ICON_PULL
     elseif ccType == LUIE_CC_TYPE_DISORIENT then return LUIE_CC_ICON_DISORIENT
     elseif ccType == LUIE_CC_TYPE_FEAR then return LUIE_CC_ICON_FEAR
-    elseif ccType == LUIE_CC_TYPE_STAGGER then return LUIE_CC_ICON_SILENCE
+    elseif ccType == LUIE_CC_TYPE_STAGGER then return LUIE_CC_ICON_STAGGER
     elseif ccType == LUIE_CC_TYPE_SILENCE then return LUIE_CC_ICON_SILENCE
     elseif ccType == LUIE_CC_TYPE_SNARE then return LUIE_CC_ICON_SNARE
     elseif ccType == LUIE_CC_TYPE_ROOT then return LUIE_CC_ICON_ROOT
@@ -455,7 +455,7 @@ function AbilityAlerts.AlertInterrupt(eventCode, resultType, isError, abilityNam
     end
 end
 
-function AbilityAlerts.CrowdControlColorSetup(crowdControl)
+function AbilityAlerts.CrowdControlColorSetup(crowdControl, isBorder)
     if crowdControl == LUIE_CC_TYPE_STUN or crowdControl == LUIE_CC_TYPE_KNOCKDOWN then -- Stun/Knockdown
         return CombatInfo.SV.alerts.colors.stunColor
     elseif crowdControl == LUIE_CC_TYPE_KNOCKBACK then -- Knockback
@@ -477,7 +477,11 @@ function AbilityAlerts.CrowdControlColorSetup(crowdControl)
     elseif crowdControl == LUIE_CC_TYPE_ROOT then -- Immobilize
         return CombatInfo.SV.alerts.colors.rootColor
     else
-        return { 0, 0, 0, 0 }
+        if isBorder then
+            return { 0, 0, 0, 0 }
+        else
+            return CombatInfo.SV.alerts.colors.alertShared
+        end
     end
 end
 
@@ -528,12 +532,12 @@ function AbilityAlerts.SetupSingleAlertFrame(abilityId, textPrefix, textModifier
     local borderColor
 
     if CombatInfo.SV.alerts.toggles.showCrowdControlBorder then
-        borderColor = AbilityAlerts.CrowdControlColorSetup(crowdControl)
+        borderColor = AbilityAlerts.CrowdControlColorSetup(crowdControl, true)
     else
         borderColor = { 0, 0, 0, 0 }
     end
     if CombatInfo.SV.alerts.toggles.ccLabelColor then
-        labelColor = AbilityAlerts.CrowdControlColorSetup(crowdControl)
+        labelColor = AbilityAlerts.CrowdControlColorSetup(crowdControl, false)
     else
         labelColor = CombatInfo.SV.alerts.colors.alertShared
     end
@@ -1162,7 +1166,7 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
         local stringInterrupt
         local color = AbilityAlerts.AlertColors.alertColorBlock
 
-        -- Quickly set only one of these to true for priority color formatting.
+        -- Set only one of these to true for priority color formatting.
         -- PRIORITY: INTERRUPT > BLOCK STAGGER > DODGE > BLOCK > AVOID
         if blockstagger then
             block = false
@@ -1217,7 +1221,7 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
             name = (" " .. name)
         end
 
-        textPrefix = AbilityAlerts.FormatAlertString(prefix, { source = sourceName })
+        textPrefix = AbilityAlerts.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
         textName = AbilityAlerts.FormatAlertString(name, { source = sourceName, ability = abilityName })
         textModifier = modifier
         textMitigation = Settings.toggles.showMitigation and zo_strformat(" <<1>> <<2>><<3>><<4>><<5>>", spacer, stringBlock, stringDodge, stringAvoid, stringInterrupt) or ""
@@ -1232,7 +1236,7 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
             name = (" " .. name)
         end
 
-        textPrefix = AbilityAlerts.FormatAlertString(prefix, { source = sourceName })
+        textPrefix = AbilityAlerts.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
         textName = AbilityAlerts.FormatAlertString(name, { source = sourceName, ability = abilityName })
         textModifier = modifier
         textMitigation = zo_strformat("|c<<1>><<2>>|r", color, Settings.formats.alertUnmit)
