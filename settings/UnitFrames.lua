@@ -50,6 +50,26 @@ local function GenerateCustomList(input)
     return options, values
 end
 
+local dialogs = {
+    [1] = { -- Clear Whitelist
+        identifier = "LUIE_CLEAR_PET_WHITELIST",
+        title = GetString(SI_LUIE_LAM_UF_WHITELIST_CLEAR),
+        text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG), GetString(SI_LUIE_CUSTOM_LIST_UF_WHITELIST)),
+        callback = function(dialog)
+            UnitFrames.ClearCustomList(UnitFrames.SV.whitelist)
+            LUIE_WhitelistUF:UpdateChoices(GenerateCustomList(UnitFrames.SV.whitelist))
+            UnitFrames.CustomPetUpdate()
+        end,
+    },
+}
+
+local function loadDialogButtons()
+    for i = 1, #dialogs do
+        local dialog = dialogs[i]
+        LUIE.RegisterDialogueButton(dialog.identifier, dialog.title, dialog.text, dialog.callback)
+    end
+end
+
 function UnitFrames.CreateSettings()
     -- Load LibAddonMenu
     local LAM = LibAddonMenu2
@@ -63,6 +83,9 @@ function UnitFrames.CreateSettings()
     for f in pairs(LUIE.Fonts) do
         table.insert(FontsList, f)
     end
+
+    -- Load Dialog Buttons
+    loadDialogButtons()
 
     -- Get statusbar textures
     local StatusbarTexturesList = {}
@@ -1906,7 +1929,7 @@ function UnitFrames.CreateSettings()
                 type = "button",
                 name = GetString(SI_LUIE_LAM_UF_WHITELIST_CLEAR),
                 tooltip = GetString(SI_LUIE_LAM_UF_WHITELIST_CLEAR_TP),
-                func = function() UnitFrames.ClearCustomList(Settings.whitelist) LUIE_WhitelistUF:UpdateChoices(GenerateCustomList(Settings.whitelist)) UnitFrames.CustomPetUpdate() end,
+                func = function() ZO_Dialogs_ShowDialog("LUIE_CLEAR_PET_WHITELIST") end,
                 width = "half",
             },
 

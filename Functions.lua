@@ -167,6 +167,37 @@ function LUIE.AbbreviateNumber(number, shorten, comma)
     return number
 end
 
+-- Takes an input with a name identifier, title, text, and callback function to create a dialogue button
+function LUIE.RegisterDialogueButton(identifier, title, text, callback)
+    ESO_Dialogs[identifier] =
+    {
+        gamepadInfo =
+        {
+            dialogType = GAMEPAD_DIALOGS.BASIC,
+        },
+        canQueue = true,
+        title =
+        {
+            text = title
+        },
+        mainText =
+        {
+            text = text
+        },
+        buttons =
+        {
+            {
+                text = SI_DIALOG_CONFIRM,
+                callback = callback
+            },
+            {
+                text = SI_DIALOG_CANCEL,
+            },
+        },
+    }
+    return ESO_Dialogs[identifier]
+end
+
 function LUIE.UpdateGuildData()
     local GuildsIndex = GetNumGuilds()
     LUIE.GuildIndexData = {}

@@ -348,6 +348,7 @@ local strings = {
     SI_LUIE_LAM_BUFF_PROM_DEBUFFLABELDIRECTION =         "Положение надписи и прогрессбара (Дебаффы)",
     SI_LUIE_LAM_BUFF_PROM_DEBUFFLABELDIRECTION_TP =      "Выберите, где отображать название способности и прогрессбар, слева или справа от особого дебаффа.",
     SI_LUIE_LAM_BUFF_PROM_DIALOGUE_DESCRIPT =            "Добавляет особый бафф или дебафф по введённому AbilityId (ID способности) или AbilityName (названию способности) в поле ввода и нажатию Enter. Убирает особый бафф или дебафф по клику на AbilityId (ID способности) или AbilityName (названию способности) из ниспадающего списка.",
+    SI_LUIE_LAM_BUFF_PRIORITY_DIALOGUE_DESCRIPT =        "Add priority buffs or debuffs by entering an AbilityId or AbilityName into the input field and pressing enter. Remove priority buffs or debuffs, by clicking the AbilityId or AbilityName from the dropdown list.",
     SI_LUIE_LAM_BUFF_PROM_BUFF_ADDLIST =                 "Добавить особый Бафф",
     SI_LUIE_LAM_BUFF_PROM_BUFF_ADDLIST_TP =              "Добавляет abilityId или abilityName в список особых Баффов.",
     SI_LUIE_LAM_BUFF_PROM_BUFF_REMLIST =                 "Убрать особый Бафф",
@@ -2074,7 +2075,7 @@ local strings = {
     SI_LUIE_LAM_CT_DEATH_FONT_SIZE_TP =                  "Размер шрифта сообщения о смерти.\nПо умолчанию: 32",
     SI_LUIE_LAM_CT_DEATH_COLOR_TP =                      "Цвет предупреждения о смерти члена группы.",
 
-    SI_LUIE_LAM_CT_BLACKLIST_HEADER =                    "Черный список способностей",
+    SI_LUIE_LAM_CT_BLACKLIST_HEADER =                    "Ability Blacklist",
 
 }
 

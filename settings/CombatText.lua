@@ -34,6 +34,25 @@ local function GenerateCustomList(input)
     return options, values
 end
 
+local dialogs = {
+    [1] = { -- Clear Blacklist
+        identifier = "LUIE_CLEAR_CT_BLACKLIST",
+        title = GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR),
+        text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG), GetString(SI_LUIE_LAM_CT_BLACKLIST_HEADER)),
+        callback = function(dialog)
+            CombatText.ClearCustomList(CombatText.SV.blacklist)
+            LUIE_BlacklistCT:UpdateChoices(GenerateCustomList(CombatText.SV.blacklist))
+        end,
+    },
+}
+
+local function loadDialogButtons()
+    for i = 1, #dialogs do
+        local dialog = dialogs[i]
+        LUIE.RegisterDialogueButton(dialog.identifier, dialog.title, dialog.text, dialog.callback)
+    end
+end
+
 function CombatText.CreateSettings()
     -- Load LibAddonMenu
     local LAM = LibAddonMenu2
@@ -51,6 +70,9 @@ function CombatText.CreateSettings()
     for f in pairs(LUIE.Fonts) do
         table.insert(FontsList, f)
     end
+
+    -- Load Dialog Buttons
+    loadDialogButtons()
 
     local panelDataCombatText = {
         type = "panel",
@@ -249,7 +271,7 @@ function CombatText.CreateSettings()
                 type = "button",
                 name = GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR),
                 tooltip = GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_TP),
-                func = function() CombatText.ClearCustomList(Settings.blacklist) LUIE_BlacklistCT:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,
+                func = function() ZO_Dialogs_ShowDialog("LUIE_CLEAR_CT_BLACKLIST") end,
                 width = "half",
             },
             {

@@ -87,38 +87,7 @@ local dialogs = {
     },
 }
 
--- Takes an input with a name identifier, title, text, and callback function to create a dialogue button
-function LUIE.RegisterDialogueButton(identifier, title, text, callback)
-    ESO_Dialogs[identifier] =
-    {
-        gamepadInfo =
-        {
-            dialogType = GAMEPAD_DIALOGS.BASIC,
-        },
-        canQueue = true,
-        title =
-        {
-            text = title
-        },
-        mainText =
-        {
-            text = text
-        },
-        buttons =
-        {
-            {
-                text = SI_DIALOG_CONFIRM,
-                callback = callback
-            },
-            {
-                text = SI_DIALOG_CANCEL,
-            },
-        },
-    }
-    return ESO_Dialogs[identifier]
-end
-
-local function loadDialogue()
+local function loadDialogButtons()
     for i = 1, #dialogs do
         local dialog = dialogs[i]
         LUIE.RegisterDialogueButton(dialog.identifier, dialog.title, dialog.text, dialog.callback)
@@ -145,6 +114,9 @@ function SpellCastBuffs.CreateSettings()
         table.insert(StatusbarTexturesList, key)
     end
 
+    -- Load Dialog Buttons
+    loadDialogButtons()
+
     local panelDataBuffsDebuffs = {
         type = "panel",
         name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_BUFFSDEBUFFS)),
@@ -159,8 +131,6 @@ function SpellCastBuffs.CreateSettings()
         registerForRefresh = true,
         registerForDefaults = true,
     }
-
-    loadDialogue()
 
     local optionsDataBuffsDebuffs = {}
 
@@ -1679,7 +1649,7 @@ function SpellCastBuffs.CreateSettings()
             },
             {
                 type = "description",
-                text = GetString(SI_LUIE_LAM_BUFF_PROM_DIALOGUE_DESCRIPT),
+                text = GetString(SI_LUIE_LAM_BUFF_PRIORITY_DIALOGUE_DESCRIPT),
             },
             {
                 -- Priority Buffs List (Add)

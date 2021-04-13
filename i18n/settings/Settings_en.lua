@@ -348,6 +348,7 @@ local strings = {
     SI_LUIE_LAM_BUFF_PROM_DEBUFFLABELDIRECTION =         "Label & Progress Bar Orientation (Debuffs)",
     SI_LUIE_LAM_BUFF_PROM_DEBUFFLABELDIRECTION_TP =      "Choose whether to display the Ability Name Label and Progress bar to the left or right of prominent debuffs.",
     SI_LUIE_LAM_BUFF_PROM_DIALOGUE_DESCRIPT =            "Add prominent buffs or debuffs by entering an AbilityId or AbilityName into the input field and pressing enter. Remove prominent buffs or debuffs, by clicking the AbilityId or AbilityName from the dropdown list.",
+    SI_LUIE_LAM_BUFF_PRIORITY_DIALOGUE_DESCRIPT =        "Add priority buffs or debuffs by entering an AbilityId or AbilityName into the input field and pressing enter. Remove priority buffs or debuffs, by clicking the AbilityId or AbilityName from the dropdown list.",
     SI_LUIE_LAM_BUFF_PROM_BUFF_ADDLIST =                 "Add Prominent Buff",
     SI_LUIE_LAM_BUFF_PROM_BUFF_ADDLIST_TP =              "Add an abilityId or abilityName to the Prominent Buffs list.",
     SI_LUIE_LAM_BUFF_PROM_BUFF_REMLIST =                 "Remove Prominent Buff",
@@ -2074,7 +2075,7 @@ local strings = {
     SI_LUIE_LAM_CT_DEATH_FONT_SIZE_TP =                  "Font size of message displayed when a group member dies.\nDefault: 32",
     SI_LUIE_LAM_CT_DEATH_COLOR_TP =                      "Set a color for notifications when a group member dies.",
 
-    SI_LUIE_LAM_CT_BLACKLIST_HEADER =                    "Ability Blacklisting",
+    SI_LUIE_LAM_CT_BLACKLIST_HEADER =                    "Ability Blacklist",
 
 }
 

@@ -630,6 +630,7 @@ function SpellCastBuffs.ClearCustomList(list)
     end
     CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
     printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_CLEARED), listRef), true)
+    SpellCastBuffs.ReloadEffects("player")
 end
 
 -- List Handling (Add) for Prominent Auras & Blacklist
