@@ -1598,6 +1598,16 @@ local strings = {
     SI_LUIE_LAM_UF_WHITELIST_CLEAR_TP =                  "Удаляет всех питомцев из белого списка.",
     SI_LUIE_LAM_UF_BLACKLIST_CLEAR =                     "Очистить черный список",
     SI_LUIE_LAM_UF_BLACKLIST_CLEAR_TP =                  "Удалить все записи из черного списка.",
+    SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG =              "Are you sure you want to clear the <<1>>?",
+    SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST =         "Are you sure you want to clear the <<1>> list?",
+    SI_LUIE_LAM_UF_PROMINENT_CLEAR_BUFFS =               "Clear Prominent Buffs",
+    SI_LUIE_LAM_UF_PROMINENT_CLEAR_BUFFS_TP =            "Remove all entries from the Prominent Buffs list.",
+    SI_LUIE_LAM_UF_PROMINENT_CLEAR_DEBUFFS =             "Clear Prominent Debuffs",
+    SI_LUIE_LAM_UF_PROMINENT_CLEAR_DEBUFFS_TP =          "Remove all entries from the Prominent Debuffs list.",
+    SI_LUIE_LAM_UF_PRIORITY_CLEAR_BUFFS =                "Clear Priority Buffs",
+    SI_LUIE_LAM_UF_PRIORITY_CLEAR_BUFFS_TP =             "Remove all entries from the Priority Buffs list.",
+    SI_LUIE_LAM_UF_PRIORITY_CLEAR_DEBUFFS =              "Clear Priority Debuffs",
+    SI_LUIE_LAM_UF_PRIORITY_CLEAR_DEBUFFS_TP =           "Remove all entries from the Priority Debuffs list.",
 
     -- Module: Combat Text
     SI_LUIE_LAM_CT =                                     "Текст боя",

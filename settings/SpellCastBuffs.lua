@@ -38,6 +38,93 @@ local function GenerateCustomList(input)
     return options, values
 end
 
+local dialogs = {
+    [1] = { -- Clear Blacklist
+        identifier = "LUIE_CLEAR_ABILITY_BLACKLIST",
+        title = GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR),
+        text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG), GetString(SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST)),
+        callback = function(dialog)
+            SpellCastBuffs.ClearCustomList(SpellCastBuffs.SV.BlacklistTable)
+            LUIE_Blacklist:UpdateChoices(GenerateCustomList(SpellCastBuffs.SV.BlacklistTable))
+        end,
+    },
+    [2] = { -- Clear Prominent Buffs
+        identifier = "LUIE_CLEAR_PROMINENT_BUFFS",
+        title = GetString(SI_LUIE_LAM_UF_PROMINENT_CLEAR_BUFFS),
+        text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
+        callback = function(dialog)
+            SpellCastBuffs.ClearCustomList(SpellCastBuffs.SV.PromBuffTable)
+            LUIE_Prominent_Buffs_List:UpdateChoices(GenerateCustomList(SpellCastBuffs.SV.PromBuffTable))
+        end,
+    },
+    [3] = { -- Clear Prominent Debuffs
+        identifier = "LUIE_CLEAR_PROMINENT_DEBUFFS",
+        title = GetString(SI_LUIE_LAM_UF_PROMINENT_CLEAR_DEBUFFS),
+        text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
+        callback = function(dialog)
+            SpellCastBuffs.ClearCustomList(SpellCastBuffs.SV.PromDebuffTable)
+            LUIE_Prominent_Debuffs_List:UpdateChoices(GenerateCustomList(SpellCastBuffs.SV.PromDebuffTable))
+        end,
+    },
+
+    [4] = { -- Clear Priority Buffs
+        identifier = "LUIE_CLEAR_PRIORITY_BUFFS",
+        title = GetString(SI_LUIE_LAM_UF_PRIORITY_CLEAR_BUFFS),
+        text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST), GetString(SI_LUIE_CUSTOM_LIST_PRIORITY_BUFFS)),
+        callback = function(dialog)
+            SpellCastBuffs.ClearCustomList(SpellCastBuffs.SV.PriorityBuffTable)
+            LUIE_Priority_Buffs_List:UpdateChoices(GenerateCustomList(SpellCastBuffs.SV.PriorityBuffTable))
+        end,
+    },
+    [5] = { -- Clear Priority Debuffs
+        identifier = "LUIE_CLEAR_PRIORITY_DEBUFFS",
+        title = GetString(SI_LUIE_LAM_UF_PRIORITY_CLEAR_DEBUFFS),
+        text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST), GetString(SI_LUIE_CUSTOM_LIST_PRIORITY_DEBUFFS)),
+        callback = function(dialog)
+            SpellCastBuffs.ClearCustomList(SpellCastBuffs.SV.PriorityDebuffTable)
+            LUIE_Priority_Debuffs_List:UpdateChoices(GenerateCustomList(SpellCastBuffs.SV.PriorityDebuffTable))
+        end,
+    },
+}
+
+-- Takes an input with a name identifier, title, text, and callback function to create a dialogue button
+function LUIE.RegisterDialogueButton(identifier, title, text, callback)
+    ESO_Dialogs[identifier] =
+    {
+        gamepadInfo =
+        {
+            dialogType = GAMEPAD_DIALOGS.BASIC,
+        },
+        canQueue = true,
+        title =
+        {
+            text = title
+        },
+        mainText =
+        {
+            text = text
+        },
+        buttons =
+        {
+            {
+                text = SI_DIALOG_CONFIRM,
+                callback = callback
+            },
+            {
+                text = SI_DIALOG_CANCEL,
+            },
+        },
+    }
+    return ESO_Dialogs[identifier]
+end
+
+local function loadDialogue()
+    for i = 1, #dialogs do
+        local dialog = dialogs[i]
+        LUIE.RegisterDialogueButton(dialog.identifier, dialog.title, dialog.text, dialog.callback)
+    end
+end
+
 function SpellCastBuffs.CreateSettings()
     -- Load LibAddonMenu
     local LAM = LibAddonMenu2
@@ -72,6 +159,8 @@ function SpellCastBuffs.CreateSettings()
         registerForRefresh = true,
         registerForDefaults = true,
     }
+
+    loadDialogue()
 
     local optionsDataBuffsDebuffs = {}
 
@@ -1616,6 +1705,14 @@ function SpellCastBuffs.CreateSettings()
                 reference = "LUIE_Priority_Buffs_List"
             },
             {
+                -- Clear Priority Buffs
+                type = "button",
+                name = GetString(SI_LUIE_LAM_UF_PRIORITY_CLEAR_BUFFS),
+                tooltip = GetString(SI_LUIE_LAM_UF_PRIORITY_CLEAR_BUFFS_TP),
+                func = function() ZO_Dialogs_ShowDialog("LUIE_CLEAR_PRIORITY_BUFFS") end,
+                width = "half",
+            },
+            {
                 -- Priority Debuffs List (Add)
                 type = "editbox",
                 name = GetString(SI_LUIE_LAM_BUFF_PRIORITY_DEBUFF_ADDLIST),
@@ -1637,6 +1734,14 @@ function SpellCastBuffs.CreateSettings()
                 setFunc = function(value) SpellCastBuffs.RemoveFromCustomList(Settings.PriorityDebuffTable, value) LUIE_Priority_Debuffs_List:UpdateChoices(GenerateCustomList(Settings.PriorityDebuffTable)) end,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
                 reference = "LUIE_Priority_Debuffs_List"
+            },
+            {
+                -- Clear Priority Debuffs
+                type = "button",
+                name = GetString(SI_LUIE_LAM_UF_PRIORITY_CLEAR_DEBUFFS),
+                tooltip = GetString(SI_LUIE_LAM_UF_PRIORITY_CLEAR_DEBUFFS_TP),
+                func = function() ZO_Dialogs_ShowDialog("LUIE_CLEAR_PRIORITY_DEBUFFS") end,
+                width = "half",
             },
        },
     }
@@ -1875,6 +1980,14 @@ function SpellCastBuffs.CreateSettings()
                 reference = "LUIE_Prominent_Buffs_List"
             },
             {
+                -- Clear Prominent Buffs
+                type = "button",
+                name = GetString(SI_LUIE_LAM_UF_PROMINENT_CLEAR_BUFFS),
+                tooltip = GetString(SI_LUIE_LAM_UF_PROMINENT_CLEAR_BUFFS_TP),
+                func = function() ZO_Dialogs_ShowDialog("LUIE_CLEAR_PROMINENT_BUFFS") end,
+                width = "half",
+            },
+            {
                 -- Prominent Debuffs List (Add)
                 type = "editbox",
                 name = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFF_ADDLIST),
@@ -1896,6 +2009,14 @@ function SpellCastBuffs.CreateSettings()
                 setFunc = function(value) SpellCastBuffs.RemoveFromCustomList(Settings.PromDebuffTable, value) LUIE_Prominent_Debuffs_List:UpdateChoices(GenerateCustomList(Settings.PromDebuffTable)) end,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
                 reference = "LUIE_Prominent_Debuffs_List"
+            },
+            {
+                -- Clear Prominent Debuffs
+                type = "button",
+                name = GetString(SI_LUIE_LAM_UF_PROMINENT_CLEAR_DEBUFFS),
+                tooltip = GetString(SI_LUIE_LAM_UF_PROMINENT_CLEAR_DEBUFFS_TP),
+                func = function() ZO_Dialogs_ShowDialog("LUIE_CLEAR_PROMINENT_DEBUFFS") end,
+                width = "half",
             },
        },
     }
@@ -1950,7 +2071,7 @@ function SpellCastBuffs.CreateSettings()
                 type = "button",
                 name = GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR),
                 tooltip = GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_TP),
-                func = function() SpellCastBuffs.ClearCustomList(Settings.BlacklistTable) LUIE_Blacklist:UpdateChoices(GenerateCustomList(Settings.BlacklistTable)) end,
+                func = function() ZO_Dialogs_ShowDialog("LUIE_CLEAR_ABILITY_BLACKLIST") end,
                 width = "half",
             },
             {
