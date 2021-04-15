@@ -798,9 +798,8 @@ function SpellCastBuffs.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CONTAINER_TP),
                 choices = rotationOptions,
                 getFunc = function() return rotationOptions[Settings.LongTermEffectsSeparateAlignment] end,
-                setFunc = function(value) Settings.LongTermEffectsSeparateAlignment = rotationOptionsKeys[value] SpellCastBuffs.Reset() end,
+                setFunc = function(value) Settings.LongTermEffectsSeparateAlignment = rotationOptionsKeys[value] SpellCastBuffs.ResetContainerOrientation() SpellCastBuffs.Reset() end,
                 width = "full",
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 default = rotationOptions[2],
             },
             {
@@ -866,9 +865,8 @@ function SpellCastBuffs.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_BUFFCONTAINER_TP),
                 choices = rotationOptions,
                 getFunc = function() return rotationOptions[Settings.ProminentBuffContainerAlignment] end,
-                setFunc = function(value) Settings.ProminentBuffContainerAlignment = rotationOptionsKeys[value] SpellCastBuffs.Reset() end,
+                setFunc = function(value) Settings.ProminentBuffContainerAlignment = rotationOptionsKeys[value] SpellCastBuffs.ResetContainerOrientation() SpellCastBuffs.Reset() end,
                 width = "full",
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 default = rotationOptions[2],
             },
             {
@@ -929,9 +927,8 @@ function SpellCastBuffs.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFFCONTAINER_TP),
                 choices = rotationOptions,
                 getFunc = function() return rotationOptions[Settings.ProminentDebuffContainerAlignment] end,
-                setFunc = function(value) Settings.ProminentDebuffContainerAlignment = rotationOptionsKeys[value] SpellCastBuffs.Reset() end,
+                setFunc = function(value) Settings.ProminentDebuffContainerAlignment = rotationOptionsKeys[value] SpellCastBuffs.ResetContainerOrientation() SpellCastBuffs.Reset() end,
                 width = "full",
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 default = rotationOptions[2],
             },
             {

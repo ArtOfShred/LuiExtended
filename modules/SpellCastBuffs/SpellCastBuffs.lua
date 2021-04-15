@@ -688,6 +688,74 @@ function SpellCastBuffs.RemoveFromCustomList(list, input)
     SpellCastBuffs.ReloadEffects("player")
 end
 
+function SpellCastBuffs.ResetContainerOrientation()
+
+    -- Create TopLevelWindows for Prominent Buffs
+    uiTlw.prominentbuffs:SetHandler( "OnMoveStop", function(self)
+            if self.alignVertical then
+                SpellCastBuffs.SV.prominentbVOffsetX = self:GetLeft()
+                SpellCastBuffs.SV.prominentbVOffsetY = self:GetTop()
+            else
+                SpellCastBuffs.SV.prominentbHOffsetX = self:GetLeft()
+                SpellCastBuffs.SV.prominentbHOffsetY = self:GetTop()
+            end
+        end )
+    uiTlw.prominentdebuffs:SetHandler( "OnMoveStop", function(self)
+            if self.alignVertical then
+                SpellCastBuffs.SV.prominentdVOffsetX = self:GetLeft()
+                SpellCastBuffs.SV.prominentdVOffsetY = self:GetTop()
+            else
+                SpellCastBuffs.SV.prominentdHOffsetX = self:GetLeft()
+                SpellCastBuffs.SV.prominentdHOffsetY = self:GetTop()
+            end
+        end )
+
+    if SpellCastBuffs.SV.ProminentBuffContainerAlignment == 1 then
+        uiTlw.prominentbuffs.alignVertical = false
+    elseif SpellCastBuffs.SV.ProminentBuffContainerAlignment == 2 then
+        uiTlw.prominentbuffs.alignVertical = true
+    end
+    if SpellCastBuffs.SV.ProminentDebuffContainerAlignment == 1 then
+        uiTlw.prominentdebuffs.alignVertical = false
+    elseif SpellCastBuffs.SV.ProminentDebuffContainerAlignment == 2 then
+        uiTlw.prominentdebuffs.alignVertical = true
+    end
+
+    containerRouting.promb_ground = "prominentbuffs"
+    containerRouting.promb_target = "prominentbuffs"
+    containerRouting.promb_player = "prominentbuffs"
+    containerRouting.promd_ground = "prominentdebuffs"
+    containerRouting.promd_target = "prominentdebuffs"
+    containerRouting.promd_player = "prominentdebuffs"
+
+    -- Separate container for players long term buffs
+    if true then
+        uiTlw.player_long:SetHandler( "OnMoveStop", function(self)
+                if self.alignVertical then
+                    SpellCastBuffs.SV.playerVOffsetX = self:GetLeft()
+                    SpellCastBuffs.SV.playerVOffsetY = self:GetTop()
+                else
+                    SpellCastBuffs.SV.playerHOffsetX = self:GetLeft()
+                    SpellCastBuffs.SV.playerHOffsetY = self:GetTop()
+                end
+            end )
+
+        if SpellCastBuffs.SV.LongTermEffectsSeparateAlignment == 1 then
+            uiTlw.player_long.alignVertical = false
+        elseif SpellCastBuffs.SV.LongTermEffectsSeparateAlignment == 2 then
+            uiTlw.player_long.alignVertical = true
+        end
+        uiTlw.player_long.skipUpdate = 0
+        containerRouting.player_long = "player_long"
+    else
+        containerRouting.player_long = containerRouting.player1
+    end
+
+    -- Set Buff Container Positions
+    SpellCastBuffs.SetTlwPosition()
+
+end
+
 -- Set g_alignmentDirection table to equal the values from our SV Table & converts string values to proper alignment values. Called from Settings Menu & on Initialize
 function SpellCastBuffs.SetupContainerAlignment()
     g_alignmentDirection = { }
@@ -1058,12 +1126,21 @@ function SpellCastBuffs.ResetSingleIcon( container, buff, AnchorItem )
     buff.stack:SetHidden( true )
 
     if buff.name ~= nil then
-        buff.name:SetHidden( not SpellCastBuffs.SV.ProminentLabel )
+        if (container == "prominentbuffs" and SpellCastBuffs.SV.ProminentBuffContainerAlignment == 2) or (container == "prominentdebuffs" and SpellCastBuffs.SV.ProminentDebuffContainerAlignment == 2) then -- Vertical
+            buff.name:SetHidden( not SpellCastBuffs.SV.ProminentLabel )
+        else
+            buff.name:SetHidden( true )
+        end
     end
 
     if buff.bar ~= nil then
-        buff.bar.backdrop:SetHidden( not SpellCastBuffs.SV.ProminentProgress )
-        buff.bar.bar:SetHidden( not SpellCastBuffs.SV.ProminentProgress )
+        if (container == "prominentbuffs" and SpellCastBuffs.SV.ProminentBuffContainerAlignment == 2) or (container == "prominentdebuffs" and SpellCastBuffs.SV.ProminentDebuffContainerAlignment == 2) then -- Vertical
+            buff.bar.backdrop:SetHidden( not SpellCastBuffs.SV.ProminentProgress )
+            buff.bar.bar:SetHidden( not SpellCastBuffs.SV.ProminentProgress )
+        else
+            buff.bar.backdrop:SetHidden( true )
+            buff.bar.bar:SetHidden( true )
+        end
     end
 
     if buff.cd ~= nil then
