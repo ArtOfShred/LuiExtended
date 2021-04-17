@@ -317,6 +317,561 @@ function SpellCastBuffs.CreateSettings()
         },
     }
 
+    -- Buffs&Debuffs - Long & Short Term Effects Filters
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+        type = "submenu",
+        name = GetString(SI_LUIE_LAM_BUFF_LONG_SHORT_HEADER),
+        controls = {
+            {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_SHORTTERM_SELF),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_SHORTTERM_SELF_TP),
+                getFunc = function() return Settings.ShortTermEffects_Player end,
+                setFunc = function(value) Settings.ShortTermEffects_Player = value SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = Defaults.ShortTermEffects_Player,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_SHORTTERM_TARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_SHORTTERM_TARGET_TP),
+                getFunc = function() return Settings.ShortTermEffects_Target end,
+                setFunc = function(value) Settings.ShortTermEffects_Target = value SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = Defaults.ShortTermEffects_Target,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SELF),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SELF_TP),
+                getFunc = function() return Settings.LongTermEffects_Player end,
+                setFunc = function(value) Settings.LongTermEffects_Player = value SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = Defaults.LongTermEffects_Player,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
+                -- Separate control for player effects
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_SEPCTRL)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SEPCTRL_TP),
+                getFunc = function() return Settings.LongTermEffectsSeparate end,
+                setFunc = function(value) Settings.LongTermEffectsSeparate = value SpellCastBuffs.Reset() end,
+                width = "full",
+                default = Defaults.LongTermEffectsSeparate,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and Settings.LongTermEffects_Player ) end,
+            },
+            {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_TARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_TARGET_TP),
+                getFunc = function() return Settings.LongTermEffects_Target end,
+                setFunc = function(value) Settings.LongTermEffects_Target = value SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = Defaults.LongTermEffects_Target,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_HEADER),
+                width = "full",
+            },
+
+            --[[
+            {
+                -- Show Sprint Icon
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSPRINT),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSPRINT_TP),
+                getFunc = function() return Settings.ShowSprint end,
+                setFunc = function(value) Settings.ShowSprint = value end,
+                width = "full",
+                default = Defaults.ShowSprint,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
+                -- Show Gallop Icon
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWGALLOP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWGALLOP_TP),
+                getFunc = function() return Settings.ShowGallop end,
+                setFunc = function(value) Settings.ShowGallop = value end,
+                width = "full",
+                default = Defaults.ShowGallop,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            ]]--
+            {
+                -- Show Rezz Immunity Icon
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWREZZ),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWREZZ_TP),
+                getFunc = function() return Settings.ShowResurrectionImmunity end,
+                setFunc = function(value) Settings.ShowResurrectionImmunity = value SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = Defaults.ShowResurrectionImmunity,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
+                -- Show Recall Cooldown Icon
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWRECALL),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWRECALL_TP),
+                getFunc = function() return Settings.ShowRecall end,
+                setFunc = function(value) Settings.ShowRecall = value SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = Defaults.ShowRecall,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
+                -- Show Werewolf Timer Icon
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWWEREWOLF),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWWEREWOLF_TP),
+                getFunc = function() return Settings.ShowWerewolf end,
+                setFunc = function(value) Settings.ShowWerewolf = value SpellCastBuffs.RegisterWerewolfEvents() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = Defaults.ShowWerewolf,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            --[[ TODO: Reimplement if possible
+            {
+                -- Show Block Player Icon
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKPLAYER_TP),
+                getFunc = function() return Settings.ShowBlockPlayer end,
+                setFunc = function(value) Settings.ShowBlockPlayer = value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = Defaults.ShowBlockPlayer,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            ]]--
+            {
+                -- Show Block Target Icon
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKTARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKTARGET_TP),
+                getFunc = function() return Settings.ShowBlockTarget end,
+                setFunc = function(value) Settings.ShowBlockTarget = value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = Defaults.ShowBlockTarget,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
+                -- Show Stealth Player Icon
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHPLAYER_TP),
+                getFunc = function() return Settings.StealthStatePlayer end,
+                setFunc = function(value) Settings.StealthStatePlayer = value SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = Defaults.StealthStatePlayer,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
+                -- Show Stealth Target Icon
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHTARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHTARGET_TP),
+                getFunc = function() return Settings.StealthStateTarget end,
+                setFunc = function(value) Settings.StealthStateTarget = value SpellCastBuffs.ReloadEffects("reticleover") end,
+                width = "full",
+                default = Defaults.StealthStateTarget,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
+                -- Show Disguise Player Icon
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISEPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISEPLAYER_TP),
+                getFunc = function() return Settings.DisguiseStatePlayer end,
+                setFunc = function(value) Settings.DisguiseStatePlayer = value SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = Defaults.DisguiseStatePlayer,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
+                -- Show Disguise Target Icon
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISETARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISETARGET_TP),
+                getFunc = function() return Settings.DisguiseStateTarget end,
+                setFunc = function(value) Settings.DisguiseStateTarget = value SpellCastBuffs.ReloadEffects("reticleover") end,
+                width = "full",
+                default = Defaults.DisguiseStateTarget,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_HEADER),
+                width = "full",
+            },
+
+            {
+                -- Long Term - Disguises
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_DISGUISE),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_DISGUISE_TP),
+                getFunc = function() return not Settings.IgnoreDisguise end,
+                setFunc = function(value) Settings.IgnoreDisguise = not value SpellCastBuffs.OnPlayerActivated() end,
+                width = "full",
+                default = not Defaults.IgnoreDisguise,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - Assistants
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ASSISTANT),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ASSISTANT_TP),
+                getFunc = function() return not Settings.IgnoreAssistant end,
+                setFunc = function(value) Settings.IgnoreAssistant = not value SpellCastBuffs.OnPlayerActivated() end,
+                width = "full",
+                default = not Defaults.IgnoreAssistant,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - Pets
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET_TP),
+                getFunc = function() return not Settings.IgnorePet end,
+                setFunc = function(value) Settings.IgnorePet = not value SpellCastBuffs.OnPlayerActivated() end,
+                width = "full",
+                default = not Defaults.IgnorePet,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Use Generic Pet Icon
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET_ICON)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET_ICON_TP),
+                getFunc = function() return Settings.PetDetail end,
+                setFunc = function(value) Settings.PetDetail = value SpellCastBuffs.OnPlayerActivated() end,
+                width = "full",
+                default = not Defaults.PetDetail,
+                disabled = function() return Settings.IgnorePet end,
+            },
+            {
+                -- Long Term - Mounts (Player)
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_PLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_PLAYER_TP),
+                getFunc = function() return not Settings.IgnoreMountPlayer end,
+                setFunc = function(value) Settings.IgnoreMountPlayer = not value SpellCastBuffs.OnPlayerActivated() end,
+                width = "full",
+                default = not Defaults.IgnoreMountPlayer,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Use Generic Mount Icon
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_ICON)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_ICON_TP),
+                getFunc = function() return Settings.MountDetail end,
+                setFunc = function(value) Settings.MountDetail = value SpellCastBuffs.OnPlayerActivated() end,
+                width = "full",
+                default = not Defaults.MountDetail,
+                disabled = function() return Settings.IgnoreMountPlayer end,
+            },
+            {
+                -- Long Term - Set ICD - Player
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER_TP),
+                getFunc = function() return not Settings.IgnoreSetICDPlayer end,
+                setFunc = function(value) Settings.IgnoreSetICDPlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreSetICDPlayer,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            --[[
+            {
+                -- Long Term - Mounts (Target)
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_TARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_TARGET_TP),
+                getFunc = function() return not Settings.IgnoreMountTarget end,
+                setFunc = function(value) Settings.IgnoreMountTarget = not value end,
+                width = "full",
+                default = not Defaults.IgnoreMountTarget,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            ]]--
+            {
+                -- Long Term - Mundus - Player
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSPLAYER_TP),
+                getFunc = function() return not Settings.IgnoreMundusPlayer end,
+                setFunc = function(value) Settings.IgnoreMundusPlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreMundusPlayer,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - Mundus - Target
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSTARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSTARGET_TP),
+                getFunc = function() return not Settings.IgnoreMundusTarget end,
+                setFunc = function(value) Settings.IgnoreMundusTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreMundusTarget,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - Food & Drink - Player
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_FOODPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_FOODPLAYER_TP),
+                getFunc = function() return not Settings.IgnoreFoodPlayer end,
+                setFunc = function(value) Settings.IgnoreFoodPlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreFoodPlayer,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - Food & Drink - Target
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_FOODTARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_FOODTARGET_TP),
+                getFunc = function() return not Settings.IgnoreFoodTarget end,
+                setFunc = function(value) Settings.IgnoreFoodTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreFoodTarget,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - Experience - Player
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_EXPERIENCEPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_EXPERIENCEPLAYER_TP),
+                getFunc = function() return not Settings.IgnoreExperiencePlayer end,
+                setFunc = function(value) Settings.IgnoreExperiencePlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreExperiencePlayer,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - Experience - Target
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_EXPERIENCETARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_EXPERIENCETARGET_TP),
+                getFunc = function() return not Settings.IgnoreExperienceTarget end,
+                setFunc = function(value) Settings.IgnoreExperienceTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreExperienceTarget,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+
+            {
+                -- Long Term - Alliance XP - Player
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ALLIANCEXPPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ALLIANCEXPPLAYER_TP),
+                getFunc = function() return not Settings.IgnoreAllianceXPPlayer end,
+                setFunc = function(value) Settings.IgnoreAllianceXPPlayer  = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreAllianceXPPlayer ,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - Alliance XP - Target
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ALLIANCEXPTARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ALLIANCEXPTARGET_TP),
+                getFunc = function() return not Settings.IgnoreAllianceXPTarget end,
+                setFunc = function(value) Settings.IgnoreAllianceXPTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreAllianceXPTarget,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+
+            {
+                -- Long Term - Vamp Stage - Player
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGEPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGEPLAYER_TP),
+                getFunc = function() return not Settings.IgnoreVampPlayer end,
+                setFunc = function(value) Settings.IgnoreVampPlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreVampPlayer,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - Vamp Stage - Target
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGETARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGETARGET_TP),
+                getFunc = function() return not Settings.IgnoreVampTarget end,
+                setFunc = function(value) Settings.IgnoreVampTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreVampTarget,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - Lycanthrophy - Player
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_LYCANPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_LYCANPLAYER_TP),
+                getFunc = function() return not Settings.IgnoreLycanPlayer end,
+                setFunc = function(value) Settings.IgnoreLycanPlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreLycanPlayer,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - Lycanthrophy - Target
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_LYCANTARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_LYCANTARGET_TP),
+                getFunc = function() return not Settings.IgnoreLycanTarget end,
+                setFunc = function(value) Settings.IgnoreLycanTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreLycanTarget,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - Bite Disease - Player
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPWWPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPWWPLAYER_TP),
+                getFunc = function() return not Settings.IgnoreDiseasePlayer end,
+                setFunc = function(value) Settings.IgnoreDiseasePlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreDiseasePlayer,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - Bite Disease - Target
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPWWTARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPWWTARGET_TP),
+                getFunc = function() return not Settings.IgnoreDiseaseTarget end,
+                setFunc = function(value) Settings.IgnoreDiseaseTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreDiseaseTarget,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - Bite Timers - Player
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BITEPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BITEPLAYER_TP),
+                getFunc = function() return not Settings.IgnoreBitePlayer end,
+                setFunc = function(value) Settings.IgnoreBitePlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreBitePlayer,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - Bite Timers - Target
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BITETARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BITETARGET_TP),
+                getFunc = function() return not Settings.IgnoreBiteTarget end,
+                setFunc = function(value) Settings.IgnoreBiteTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreBiteTarget,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - Battle Spirit - Player
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITPLAYER_TP),
+                getFunc = function() return not Settings.IgnoreBattleSpiritPlayer end,
+                setFunc = function(value) Settings.IgnoreBattleSpiritPlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") SpellCastBuffs.ArtificialEffectUpdate() end,
+                width = "full",
+                default = not Defaults.IgnoreBattleSpiritPlayer,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - Battle Spirit - Target
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITTARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITTARGET_TP),
+                getFunc = function() return not Settings.IgnoreBattleSpiritTarget end,
+                setFunc = function(value) Settings.IgnoreBattleSpiritTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreBattleSpiritTarget,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - Cyrodiil - Player
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROPLAYER_TP),
+                getFunc = function() return not Settings.IgnoreCyrodiilPlayer end,
+                setFunc = function(value) Settings.IgnoreCyrodiilPlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreCyrodiilPlayer,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - Crodiil - Target
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROTARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROTARGET_TP),
+                getFunc = function() return not Settings.IgnoreCyrodiilTarget end,
+                setFunc = function(value) Settings.IgnoreCyrodiilTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreCyrodiilTarget,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - ESO Plus - Player
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSPLAYER_TP),
+                getFunc = function() return not Settings.IgnoreEsoPlusPlayer end,
+                setFunc = function(value) Settings.IgnoreEsoPlusPlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreEsoPlusPlayer,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - ESO Plus - Target
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSTARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSTARGET_TP),
+                getFunc = function() return not Settings.IgnoreEsoPlusTarget end,
+                setFunc = function(value) Settings.IgnoreEsoPlusTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreEsoPlusTarget,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - Soul Summons - Player
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSPLAYER_TP),
+                getFunc = function() return not Settings.IgnoreSoulSummonsPlayer end,
+                setFunc = function(value) Settings.IgnoreSoulSummonsPlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreSoulSummonsPlayer,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
+                -- Long Term - Soul Summons - Target
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSTARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSTARGET_TP),
+                getFunc = function() return not Settings.IgnoreSoulSummonsTarget end,
+                setFunc = function(value) Settings.IgnoreSoulSummonsTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreSoulSummonsTarget,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+
+        },
+    }
+
     -- Buffs&Debuffs - Icon Options Submenu
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
         type = "submenu",
@@ -451,6 +1006,47 @@ function SpellCastBuffs.CreateSettings()
                 default = Defaults.FadeOutIcons,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
+
+            -- Icon Normalization Options
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_BUFF_NORMALIZE_HEADER),
+                width = "full",
+            },
+            {
+                -- Slayer/Courage Etc Use Default
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_GENERIC_MAJOR_MINOR),
+                tooltip = GetString(SI_LUIE_LAM_GENERIC_MAJOR_MINOR_TP),
+                getFunc = function() return Settings.GenericMajorMinor end,
+                setFunc = function(value) Settings.GenericMajorMinor = value SpellCastBuffs.UpdateMajorMinorList(true) SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = Defaults.GenericMajorMinor,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
+                -- Use Generic Icon for CC Type
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_TP),
+                getFunc = function() return Settings.UseDefaultIcon end,
+                setFunc = function(newValue) Settings.UseDefaultIcon = newValue end,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+                default = Defaults.UseDefaultIcon,
+            },
+            {
+                -- Generic Icon Options
+                type = "dropdown",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_OPTIONS)),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_OPTIONS_TP),
+                choices = globalIconOptions,
+                getFunc = function() return globalIconOptions[Settings.DefaultIconOptions] end,
+                setFunc = function(value) Settings.DefaultIconOptions = globalIconOptionsKeys[value] end,
+                width = "full",
+                disabled = function() return not Settings.UseDefaultIcon end,
+                default = Defaults.DefaultIconOptions,
+            },
+
         },
     }
 
@@ -1033,602 +1629,6 @@ function SpellCastBuffs.CreateSettings()
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
         },
-    }
-
-    -- Buffs&Debuffs - Long Term Effects Options Submenu
-    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-        type = "submenu",
-        name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_HEADER),
-        controls = {
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SELF),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SELF_TP),
-                getFunc = function() return Settings.LongTermEffects_Player end,
-                setFunc = function(value) Settings.LongTermEffects_Player = value SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = Defaults.LongTermEffects_Player,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-            {
-                -- Separate control for player effects
-                type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_SEPCTRL)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SEPCTRL_TP),
-                getFunc = function() return Settings.LongTermEffectsSeparate end,
-                setFunc = function(value) Settings.LongTermEffectsSeparate = value SpellCastBuffs.Reset() end,
-                width = "full",
-                default = Defaults.LongTermEffectsSeparate,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and Settings.LongTermEffects_Player ) end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_TARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_TARGET_TP),
-                getFunc = function() return Settings.LongTermEffects_Target end,
-                setFunc = function(value) Settings.LongTermEffects_Target = value SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = Defaults.LongTermEffects_Target,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-            {
-            type = "divider",
-            },
-            {
-                -- Long Term - Disguises
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_DISGUISE),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_DISGUISE_TP),
-                getFunc = function() return not Settings.IgnoreDisguise end,
-                setFunc = function(value) Settings.IgnoreDisguise = not value SpellCastBuffs.OnPlayerActivated() end,
-                width = "full",
-                default = not Defaults.IgnoreDisguise,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Long Term - Assistants
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ASSISTANT),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ASSISTANT_TP),
-                getFunc = function() return not Settings.IgnoreAssistant end,
-                setFunc = function(value) Settings.IgnoreAssistant = not value SpellCastBuffs.OnPlayerActivated() end,
-                width = "full",
-                default = not Defaults.IgnoreAssistant,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Long Term - Pets
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET_TP),
-                getFunc = function() return not Settings.IgnorePet end,
-                setFunc = function(value) Settings.IgnorePet = not value SpellCastBuffs.OnPlayerActivated() end,
-                width = "full",
-                default = not Defaults.IgnorePet,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Use Generic Pet Icon
-                type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET_ICON)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET_ICON_TP),
-                getFunc = function() return Settings.PetDetail end,
-                setFunc = function(value) Settings.PetDetail = value SpellCastBuffs.OnPlayerActivated() end,
-                width = "full",
-                default = not Defaults.PetDetail,
-                disabled = function() return Settings.IgnorePet end,
-            },
-            {
-                -- Long Term - Mounts (Player)
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_PLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_PLAYER_TP),
-                getFunc = function() return not Settings.IgnoreMountPlayer end,
-                setFunc = function(value) Settings.IgnoreMountPlayer = not value SpellCastBuffs.OnPlayerActivated() end,
-                width = "full",
-                default = not Defaults.IgnoreMountPlayer,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Use Generic Mount Icon
-                type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_ICON)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_ICON_TP),
-                getFunc = function() return Settings.MountDetail end,
-                setFunc = function(value) Settings.MountDetail = value SpellCastBuffs.OnPlayerActivated() end,
-                width = "full",
-                default = not Defaults.MountDetail,
-                disabled = function() return Settings.IgnoreMountPlayer end,
-            },
-            {
-                -- Long Term - Set ICD - Player
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER_TP),
-                getFunc = function() return not Settings.IgnoreSetICDPlayer end,
-                setFunc = function(value) Settings.IgnoreSetICDPlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreSetICDPlayer,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            --[[
-            {
-                -- Long Term - Mounts (Target)
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_TARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_TARGET_TP),
-                getFunc = function() return not Settings.IgnoreMountTarget end,
-                setFunc = function(value) Settings.IgnoreMountTarget = not value end,
-                width = "full",
-                default = not Defaults.IgnoreMountTarget,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            ]]--
-            {
-                -- Long Term - Mundus - Player
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSPLAYER_TP),
-                getFunc = function() return not Settings.IgnoreMundusPlayer end,
-                setFunc = function(value) Settings.IgnoreMundusPlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreMundusPlayer,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Long Term - Mundus - Target
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSTARGET_TP),
-                getFunc = function() return not Settings.IgnoreMundusTarget end,
-                setFunc = function(value) Settings.IgnoreMundusTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreMundusTarget,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Long Term - Food & Drink - Player
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_FOODPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_FOODPLAYER_TP),
-                getFunc = function() return not Settings.IgnoreFoodPlayer end,
-                setFunc = function(value) Settings.IgnoreFoodPlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreFoodPlayer,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Long Term - Food & Drink - Target
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_FOODTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_FOODTARGET_TP),
-                getFunc = function() return not Settings.IgnoreFoodTarget end,
-                setFunc = function(value) Settings.IgnoreFoodTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreFoodTarget,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Long Term - Experience - Player
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_EXPERIENCEPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_EXPERIENCEPLAYER_TP),
-                getFunc = function() return not Settings.IgnoreExperiencePlayer end,
-                setFunc = function(value) Settings.IgnoreExperiencePlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreExperiencePlayer,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Long Term - Experience - Target
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_EXPERIENCETARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_EXPERIENCETARGET_TP),
-                getFunc = function() return not Settings.IgnoreExperienceTarget end,
-                setFunc = function(value) Settings.IgnoreExperienceTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreExperienceTarget,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-
-            {
-                -- Long Term - Alliance XP - Player
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ALLIANCEXPPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ALLIANCEXPPLAYER_TP),
-                getFunc = function() return not Settings.IgnoreAllianceXPPlayer end,
-                setFunc = function(value) Settings.IgnoreAllianceXPPlayer  = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreAllianceXPPlayer ,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Long Term - Alliance XP - Target
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ALLIANCEXPTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ALLIANCEXPTARGET_TP),
-                getFunc = function() return not Settings.IgnoreAllianceXPTarget end,
-                setFunc = function(value) Settings.IgnoreAllianceXPTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreAllianceXPTarget,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-
-            {
-                -- Long Term - Vamp Stage - Player
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGEPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGEPLAYER_TP),
-                getFunc = function() return not Settings.IgnoreVampPlayer end,
-                setFunc = function(value) Settings.IgnoreVampPlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreVampPlayer,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Long Term - Vamp Stage - Target
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGETARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGETARGET_TP),
-                getFunc = function() return not Settings.IgnoreVampTarget end,
-                setFunc = function(value) Settings.IgnoreVampTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreVampTarget,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Long Term - Lycanthrophy - Player
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_LYCANPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_LYCANPLAYER_TP),
-                getFunc = function() return not Settings.IgnoreLycanPlayer end,
-                setFunc = function(value) Settings.IgnoreLycanPlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreLycanPlayer,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Long Term - Lycanthrophy - Target
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_LYCANTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_LYCANTARGET_TP),
-                getFunc = function() return not Settings.IgnoreLycanTarget end,
-                setFunc = function(value) Settings.IgnoreLycanTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreLycanTarget,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Long Term - Bite Disease - Player
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPWWPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPWWPLAYER_TP),
-                getFunc = function() return not Settings.IgnoreDiseasePlayer end,
-                setFunc = function(value) Settings.IgnoreDiseasePlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreDiseasePlayer,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Long Term - Bite Disease - Target
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPWWTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPWWTARGET_TP),
-                getFunc = function() return not Settings.IgnoreDiseaseTarget end,
-                setFunc = function(value) Settings.IgnoreDiseaseTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreDiseaseTarget,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Long Term - Bite Timers - Player
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BITEPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BITEPLAYER_TP),
-                getFunc = function() return not Settings.IgnoreBitePlayer end,
-                setFunc = function(value) Settings.IgnoreBitePlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreBitePlayer,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Long Term - Bite Timers - Target
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BITETARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BITETARGET_TP),
-                getFunc = function() return not Settings.IgnoreBiteTarget end,
-                setFunc = function(value) Settings.IgnoreBiteTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreBiteTarget,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Long Term - Battle Spirit - Player
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITPLAYER_TP),
-                getFunc = function() return not Settings.IgnoreBattleSpiritPlayer end,
-                setFunc = function(value) Settings.IgnoreBattleSpiritPlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") SpellCastBuffs.ArtificialEffectUpdate() end,
-                width = "full",
-                default = not Defaults.IgnoreBattleSpiritPlayer,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Long Term - Battle Spirit - Target
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITTARGET_TP),
-                getFunc = function() return not Settings.IgnoreBattleSpiritTarget end,
-                setFunc = function(value) Settings.IgnoreBattleSpiritTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreBattleSpiritTarget,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Long Term - Cyrodiil - Player
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROPLAYER_TP),
-                getFunc = function() return not Settings.IgnoreCyrodiilPlayer end,
-                setFunc = function(value) Settings.IgnoreCyrodiilPlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreCyrodiilPlayer,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Long Term - Crodiil - Target
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROTARGET_TP),
-                getFunc = function() return not Settings.IgnoreCyrodiilTarget end,
-                setFunc = function(value) Settings.IgnoreCyrodiilTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreCyrodiilTarget,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Long Term - ESO Plus - Player
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSPLAYER_TP),
-                getFunc = function() return not Settings.IgnoreEsoPlusPlayer end,
-                setFunc = function(value) Settings.IgnoreEsoPlusPlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreEsoPlusPlayer,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Long Term - ESO Plus - Target
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSTARGET_TP),
-                getFunc = function() return not Settings.IgnoreEsoPlusTarget end,
-                setFunc = function(value) Settings.IgnoreEsoPlusTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreEsoPlusTarget,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Long Term - Soul Summons - Player
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSPLAYER_TP),
-                getFunc = function() return not Settings.IgnoreSoulSummonsPlayer end,
-                setFunc = function(value) Settings.IgnoreSoulSummonsPlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreSoulSummonsPlayer,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Long Term - Soul Summons - Target
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSTARGET_TP),
-                getFunc = function() return not Settings.IgnoreSoulSummonsTarget end,
-                setFunc = function(value) Settings.IgnoreSoulSummonsTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreSoulSummonsTarget,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-        },
-    }
-
-    -- Buffs&Debuffs - Short Term Effects Options Submenu
-    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-        type = "submenu",
-        name = GetString(SI_LUIE_LAM_BUFF_MISC_HEADER),
-        controls = {
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_SHORTTERM_SELF),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_SHORTTERM_SELF_TP),
-                getFunc = function() return Settings.ShortTermEffects_Player end,
-                setFunc = function(value) Settings.ShortTermEffects_Player = value SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = Defaults.ShortTermEffects_Player,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_SHORTTERM_TARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_SHORTTERM_TARGET_TP),
-                getFunc = function() return Settings.ShortTermEffects_Target end,
-                setFunc = function(value) Settings.ShortTermEffects_Target = value SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = Defaults.ShortTermEffects_Target,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-
-            {
-            type = "divider",
-            },
-            --[[
-            {
-                -- Show Sprint Icon
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSPRINT),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSPRINT_TP),
-                getFunc = function() return Settings.ShowSprint end,
-                setFunc = function(value) Settings.ShowSprint = value end,
-                width = "full",
-                default = Defaults.ShowSprint,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-            {
-                -- Show Gallop Icon
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWGALLOP),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWGALLOP_TP),
-                getFunc = function() return Settings.ShowGallop end,
-                setFunc = function(value) Settings.ShowGallop = value end,
-                width = "full",
-                default = Defaults.ShowGallop,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-            ]]--
-            {
-                -- Show Rezz Immunity Icon
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWREZZ),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWREZZ_TP),
-                getFunc = function() return Settings.ShowResurrectionImmunity end,
-                setFunc = function(value) Settings.ShowResurrectionImmunity = value SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = Defaults.ShowResurrectionImmunity,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-            {
-                -- Show Recall Cooldown Icon
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWRECALL),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWRECALL_TP),
-                getFunc = function() return Settings.ShowRecall end,
-                setFunc = function(value) Settings.ShowRecall = value SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = Defaults.ShowRecall,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-            {
-                -- Show Werewolf Timer Icon
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWWEREWOLF),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWWEREWOLF_TP),
-                getFunc = function() return Settings.ShowWerewolf end,
-                setFunc = function(value) Settings.ShowWerewolf = value SpellCastBuffs.RegisterWerewolfEvents() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = Defaults.ShowWerewolf,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-            --[[ TODO: Reimplement if possible
-            {
-                -- Show Block Player Icon
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKPLAYER_TP),
-                getFunc = function() return Settings.ShowBlockPlayer end,
-                setFunc = function(value) Settings.ShowBlockPlayer = value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = Defaults.ShowBlockPlayer,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-            ]]--
-            {
-                -- Show Block Target Icon
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKTARGET_TP),
-                getFunc = function() return Settings.ShowBlockTarget end,
-                setFunc = function(value) Settings.ShowBlockTarget = value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = Defaults.ShowBlockTarget,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-            {
-                -- Show Stealth Player Icon
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHPLAYER_TP),
-                getFunc = function() return Settings.StealthStatePlayer end,
-                setFunc = function(value) Settings.StealthStatePlayer = value SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = Defaults.StealthStatePlayer,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-            {
-                -- Show Stealth Target Icon
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHTARGET_TP),
-                getFunc = function() return Settings.StealthStateTarget end,
-                setFunc = function(value) Settings.StealthStateTarget = value SpellCastBuffs.ReloadEffects("reticleover") end,
-                width = "full",
-                default = Defaults.StealthStateTarget,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-            {
-                -- Show Disguise Player Icon
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISEPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISEPLAYER_TP),
-                getFunc = function() return Settings.DisguiseStatePlayer end,
-                setFunc = function(value) Settings.DisguiseStatePlayer = value SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = Defaults.DisguiseStatePlayer,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-            {
-                -- Show Disguise Target Icon
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISETARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISETARGET_TP),
-                getFunc = function() return Settings.DisguiseStateTarget end,
-                setFunc = function(value) Settings.DisguiseStateTarget = value SpellCastBuffs.ReloadEffects("reticleover") end,
-                width = "full",
-                default = Defaults.DisguiseStateTarget,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-        },
-    }
-
-    -- Buffs&Debuffs - Custom Icon & Normalization Options
-    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-        type = "submenu",
-        name = GetString(SI_LUIE_LAM_BUFF_NORMALIZE_HEADER),
-        controls = {
-            {
-                -- Slayer/Courage Etc Use Default
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_GENERIC_MAJOR_MINOR),
-                tooltip = GetString(SI_LUIE_LAM_GENERIC_MAJOR_MINOR_TP),
-                getFunc = function() return Settings.GenericMajorMinor end,
-                setFunc = function(value) Settings.GenericMajorMinor = value SpellCastBuffs.UpdateMajorMinorList(true) SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = Defaults.GenericMajorMinor,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-            {
-                -- Use Generic Icon for CC Type
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON),
-                tooltip = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_TP),
-                getFunc = function() return Settings.UseDefaultIcon end,
-                setFunc = function(newValue) Settings.UseDefaultIcon = newValue end,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-                default = Defaults.UseDefaultIcon,
-            },
-            {
-                -- Generic Icon Options
-                type = "dropdown",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_OPTIONS)),
-                tooltip = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_OPTIONS_TP),
-                choices = globalIconOptions,
-                getFunc = function() return globalIconOptions[Settings.DefaultIconOptions] end,
-                setFunc = function(value) Settings.DefaultIconOptions = globalIconOptionsKeys[value] end,
-                width = "full",
-                disabled = function() return not Settings.UseDefaultIcon end,
-                default = Defaults.DefaultIconOptions,
-            },
-       },
     }
 
     -- Buffs&Debuffs - Priority Buffs & Debuffs Options Submenu

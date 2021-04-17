@@ -3952,6 +3952,11 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
         if not ChatAnnouncements.ItemFilter(itemType, itemId, itemLink, false) then return end
     end
 
+    -- Bail out if any key information is missing for some reason.
+    if icon == nil or stack == nil or itemLink == nil then
+        return
+    end
+
     local formattedIcon = (ChatAnnouncements.SV.Inventory.LootIcons and icon ~= "") and zo_strformat("<<1>> ", zo_iconFormat(icon, 16, 16)) or ""
     local color
     if gainOrLoss == 1 then
