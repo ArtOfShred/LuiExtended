@@ -34,16 +34,17 @@ LUIE_CC_TYPE_TRAP = 12 -- Trap
 LUIE_CC_TYPE_ENVIRONMENTAL = 13 -- Environmental Hazard (I.E. Lava)
 
 -- LUIE_BUFF_TYPE
--- TODO: Unimplemented
 LUIE_BUFF_TYPE_BUFF = 1 -- Buff
 LUIE_BUFF_TYPE_DEBUFF = 2 -- Debuff
 LUIE_BUFF_TYPE_UB_BUFF = 3 -- Unbreakable buff
 LUIE_BUFF_TYPE_UB_DEBUFF = 4 -- Unbreakable debuff
-LUIE_BUFF_TYPE_GROUND_BUFF = 5 -- Ground aoe buffs
-LUIE_BUFF_TYPE_GROUND_DEBUFF = 6 -- Ground aoe debuffs
-LUIE_BUFF_TYPE_ENVIRONMENT_BUFF = 7 -- Area buff (entire zone, etc)
-LUIE_BUFF_TYPE_ENVIRONMENT_DEBUFF = 8 -- Hazard (lava, shock water, entire zone/room, etc)
-LUIE_BUFF_TYPE_NONE = 9
+LUIE_BUFF_TYPE_GROUND_BUFF_TRACKER = 5 -- Player cast ground AOE buff
+LUIE_BUFF_TYPE_GROUND_DEBUFF_TRACKER = 6 -- Player cast ground AOE debuff
+LUIE_BUFF_TYPE_GROUND_AOE_BUFF = 7 -- Standing in a ground buff
+LUIE_BUFF_TYPE_GROUND_AOE_DEBUFF = 8 -- Standing in a ground debuff
+LUIE_BUFF_TYPE_ENVIRONMENT_BUFF = 9 -- Area buff (entire zone, etc) -- TODO: Implement if needed
+LUIE_BUFF_TYPE_ENVIRONMENT_DEBUFF = 10 -- Hazard (lava, shock water, entire zone/room, etc) -- TODO: Implement if needed
+LUIE_BUFF_TYPE_NONE = 11
 
 -- Add localized strings for this and use SI_blabla, # to get the right string for determing TYPE on buff mouseover
 --[[

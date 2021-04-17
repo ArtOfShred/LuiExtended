@@ -1268,12 +1268,19 @@ local function ClearStickyTooltip()
     eventManager:UnregisterForUpdate(moduleName .. "StickyTooltip")
 end
 
+-- TODO: Localize
 local buffTypes = {
-    [1] = "Buff",
-    [2] = "Debuff",
-    [3] = "Unbreakable Buff",
-    [4] = "Unbreakable Debuff",
-    [5] = "None",
+    [LUIE_BUFF_TYPE_BUFF] = "Buff",
+    [LUIE_BUFF_TYPE_DEBUFF] = "Debuff",
+    [LUIE_BUFF_TYPE_UB_BUFF] = "Unbreakable Buff",
+    [LUIE_BUFF_TYPE_UB_DEBUFF] = "Unbreakable Debuff",
+    [LUIE_BUFF_TYPE_GROUND_BUFF_TRACKER] = "AOE Buff Tracker",
+    [LUIE_BUFF_TYPE_GROUND_DEBUFF_TRACKER] = "AOE Debuff Tracker",
+    [LUIE_BUFF_TYPE_GROUND_AOE_BUFF] = "AOE Buff",
+    [LUIE_BUFF_TYPE_GROUND_AOE_DEBUFF] = "AOE Debuff",
+    [LUIE_BUFF_TYPE_ENVIRONMENT_BUFF] = "Zone Buff",
+    [LUIE_BUFF_TYPE_ENVIRONMENT_DEBUFF] = "Hazard",
+    [LUIE_BUFF_TYPE_NONE] = "None",
 }
 
 function SpellCastBuffs.TooltipBottomLine(control, detailsLine, artificial)
@@ -1298,10 +1305,22 @@ function SpellCastBuffs.TooltipBottomLine(control, detailsLine, artificial)
 
         -- Add Buff Type Line
         if SpellCastBuffs.SV.TooltipBuffType then
-            local buffType = control.buffType and control.buffType or 5
-            if control.effectId and Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].unbreakable then
+            local buffType = control.buffType and control.buffType or LUIE_BUFF_TYPE_NONE
+            local effectId = control.effectId
+            if effectId and Effects.EffectOverride[effectId] and Effects.EffectOverride[effectId].unbreakable then
                 buffType = buffType + 2
             end
+
+            -- Setup tooltips for player aoe trackers
+            if effectId and Effects.EffectGroundDisplay[effectId] then
+                buffType = buffType + 4
+            end
+
+            -- Setup tooltips for ground buff/debuff effects
+            if effectId and (Effects.AddGroundDamageAura[effectId] or (Effects.EffectOverride[effectId] and Effects.EffectOverride[effectId].groundLabel) ) then
+                buffType = buffType + 6
+            end
+
             GameTooltip:AddHeaderLine("Type", "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_LEFT, ZO_NORMAL_TEXT:UnpackRGB())
             GameTooltip:AddHeaderLine(buffTypes[buffType], "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_RIGHT, 1, 1, 1)
             detailsLine = detailsLine + 1
@@ -1693,7 +1712,7 @@ function SpellCastBuffs.OnEffectChangedGround(eventCode, changeType, effectSlot,
 
     -- Create fake ground aura
     local groundType = { }
-    groundType[1] = { info = Effects.EffectGroundDisplay[abilityId].buff, context = "player1", promB = "promb_player", promD = "promd_player", type = 1 }
+    groundType[1] = { info = Effects.EffectGroundDisplay[abilityId].buff, context = "player1", promB = "promb_player", promD = "promd_player", type = BUFF_EFFECT_TYPE_BUFF }
     groundType[2] = { info = Effects.EffectGroundDisplay[abilityId].debuff, context = "player2", promB = "promb_target", promD = "promd_target", type = BUFF_EFFECT_TYPE_DEBUFF }
     groundType[3] = { info = Effects.EffectGroundDisplay[abilityId].ground, context = "ground", promB = "promb_ground", promD = "promd_ground", type = BUFF_EFFECT_TYPE_DEBUFF }
 
@@ -1782,8 +1801,6 @@ end
 -- This handler fires every long-term effect added or removed
 function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
 
-    --d(effectName .. " - " .. castByPlayer)
-
     -- Change the effect type / name before we determine if we want to filter anything else.
     if Effects.EffectOverride[abilityId] then
         effectName = Effects.EffectOverride[abilityId].name or effectName
@@ -1810,7 +1827,7 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
 
     -- If the source of the buff isn't the player or the buff is not on the AbilityId or AbilityName override list then we don't display it
     if unitTag ~= "player" then
-        if effectType == 2 and not (castByPlayer == 1) and not (debuffDisplayOverrideId[abilityId] or Effects.DebuffDisplayOverrideName[effectName]) then
+        if effectType == BUFF_EFFECT_TYPE_DEBUFF and not (castByPlayer == COMBAT_UNIT_TYPE_PLAYER) and not (debuffDisplayOverrideId[abilityId] or Effects.DebuffDisplayOverrideName[effectName]) then
             return
         end
     end
@@ -1822,16 +1839,16 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
 
     -- If this effect isn't a prominent buff or debuff and we have certain buffs set to hidden - then hide those.
     if not (SpellCastBuffs.SV.PromDebuffTable[abilityId] or SpellCastBuffs.SV.PromDebuffTable[effectName] or SpellCastBuffs.SV.PromBuffTable[abilityId] or SpellCastBuffs.SV.PromBuffTable[effectName]) then
-        if SpellCastBuffs.SV.HidePlayerBuffs and effectType == 1 and unitTag == "player" then
+        if SpellCastBuffs.SV.HidePlayerBuffs and effectType == BUFF_EFFECT_TYPE_BUFF and unitTag == "player" then
             return
         end
-        if SpellCastBuffs.SV.HidePlayerDebuffs and effectType == 2 and unitTag == "player" then
+        if SpellCastBuffs.SV.HidePlayerDebuffs and effectType == BUFF_EFFECT_TYPE_DEBUFF and unitTag == "player" then
             return
         end
-        if SpellCastBuffs.SV.HideTargetBuffs and effectType == 1 and unitTag ~= "player" then
+        if SpellCastBuffs.SV.HideTargetBuffs and effectType == BUFF_EFFECT_TYPE_BUFF and unitTag ~= "player" then
             return
         end
-        if SpellCastBuffs.SV.HideTargetDebuffs and effectType == 2 and unitTag ~= "player" then
+        if SpellCastBuffs.SV.HideTargetDebuffs and effectType == BUFF_EFFECT_TYPE_DEBUFF and unitTag ~= "player" then
             return
         end
     end
@@ -3070,7 +3087,7 @@ function SpellCastBuffs.OnDeath(eventCode, unitTag, isDead)
             end
         else
             -- TODO: Do we need to clear prominent target containers here? (Don't think so)
-            for effectType = 1, 2 do
+            for effectType = BUFF_EFFECT_TYPE_BUFF, BUFF_EFFECT_TYPE_DEBUFF do
                 SpellCastBuffs.EffectsList[unitTag .. effectType] = {}
             end
         end
@@ -3110,7 +3127,7 @@ function SpellCastBuffs.ReloadEffects(unitTag)
     end
 
     -- Clear existing base containers
-    for effectType = 1, 2 do
+    for effectType = BUFF_EFFECT_TYPE_BUFF, BUFF_EFFECT_TYPE_DEBUFF do
         SpellCastBuffs.EffectsList[unitTag .. effectType] = {}
     end
     -- Clear prominent containers
@@ -3141,9 +3158,9 @@ function SpellCastBuffs.ReloadEffects(unitTag)
         local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, i)
         -- Fudge this value to send to SpellCastBuffs.OnEffectChanged if this is a debuff
         if castByPlayer == true then
-            castByPlayer = 1
+            castByPlayer = COMBAT_UNIT_TYPE_PLAYER
         else
-            castByPlayer = 5
+            castByPlayer = COMBAT_UNIT_TYPE_OTHER
         end
         SpellCastBuffs.OnEffectChanged(0, 3, buffSlot, buffName, unitTag, timeStarted, timeEnding, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, unitName, 0--[[unitId]], abilityId, castByPlayer)
     end
@@ -3255,7 +3272,7 @@ function SpellCastBuffs.AddNameAura()
                 if not flag then return end
             end
 
-            local buffType = v.debuff or 1
+            local buffType = v.debuff or BUFF_EFFECT_TYPE_BUFF
             local context = v.debuff and "reticleover2" or "reticleover1"
             context = SpellCastBuffs.DetermineContext(context, abilityId, abilityName)
             SpellCastBuffs.EffectsList[context]["Name Specific Buff" .. k] = {
@@ -3386,7 +3403,7 @@ function SpellCastBuffs.OnUpdate(currentTime)
                     if v.target == "prominent" then
                         table.insert(buffsSorted[container], v)
                     -- If the effect is not flagged as long or 0 duration and flagged to display in short container, then display normally.
-                    elseif v.type == 2 or v.forced == "short" or not (v.forced == "long" or v.ends == nil or v.dur == 0) then
+                    elseif v.type == BUFF_EFFECT_TYPE_DEBUFF or v.forced == "short" or not (v.forced == "long" or v.ends == nil or v.dur == 0) then
                         if v.target =="reticleover" and SpellCastBuffs.SV.ShortTermEffects_Target then
                             table.insert(buffsSorted[container], v)
                         elseif v.target == "player" and SpellCastBuffs.SV.ShortTermEffects_Player then
