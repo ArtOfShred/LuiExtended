@@ -3624,6 +3624,7 @@ Effects.EffectOverride = {
     [147703] = { icon = 'LuiExtended/media/icons/abilities/ability_set_frenzied_momentum.dds' }, -- Frenzied Momentum (Vateshran 2H)
 
     [147747] = { icon = 'LuiExtended/media/icons/abilities/ability_set_void_bash.dds', tooltip = Tooltips.Set_Vateshran_1H }, -- Call of the Void (Vateshran 1H)
+    [147744] = { icon = 'LuiExtended/media/icons/abilities/ability_set_void_bash.dds' }, -- Void Bash (Vateshran 1H)
     [147743] = { icon = 'LuiExtended/media/icons/abilities/ability_set_void_bash.dds' }, -- Void Bash (Vateshran 1H)
 
     [147843] = { icon = 'LuiExtended/media/icons/abilities/ability_set_wrath_of_elements.dds', tooltip = Tooltips.Set_Vateshran_Destro_Staff, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Wrath of Elements (Vateshran Destruction Staff)
