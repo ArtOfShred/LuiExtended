@@ -362,7 +362,8 @@ local isStackBaseAbility = {
 
 local slotsUpdated = {}
 
-local function OnSwapAnimationHalfDone(animation, button)
+local function OnSwapAnimationHalfDone(animation, button, isBackBarSlot)
+
     for i = BAR_INDEX_START, BAR_INDEX_END do
         if not slotsUpdated[i] then
             local targetButton = g_backbarButtons[i + BACKBAR_INDEX_OFFSET]
@@ -388,8 +389,8 @@ local function OnSwapAnimationDone(animation, button)
     slotsUpdated = {}
 end
 
-local function SetupFlipAnimation(button)
-    button:SetupFlipAnimation(OnSwapAnimationHalfDone, OnSwapAnimationDone)
+local function SetupSwapAnimation(button)
+    button:SetupSwapAnimation(OnSwapAnimationHalfDone, OnSwapAnimationDone)
 end
 
 local function FormatDurationSeconds(remain)
@@ -443,7 +444,7 @@ function CombatInfo.Initialize(enabled)
 
     for i = BAR_INDEX_START + BACKBAR_INDEX_OFFSET, BACKBAR_INDEX_END + BACKBAR_INDEX_OFFSET do
         local button = ActionButton:New(i, ACTION_BUTTON_TYPE_VISIBLE, tlw, 'ZO_ActionButton')
-        SetupFlipAnimation(button)
+        SetupSwapAnimation(button)
         button:SetupBounceAnimation()
         g_backbarButtons[i] = button
     end
