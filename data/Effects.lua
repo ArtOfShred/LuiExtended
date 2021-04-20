@@ -1638,14 +1638,17 @@ Effects.AddNameAura = {
     -- Target Dummy
     [Unitnames.Dummy_Robust_Target_Dromathra] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Robust_Target_Minotaur_Handler] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Soul_Sworn_Thrall] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Target_Bloodknight] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Bone_Goliath_Reanimated] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_Centurion_Dwarf_Brass] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_Centurion_Lambent] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_Centurion_Robust_Lambent] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_Centurion_Robust_Refabricated] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_Frost_Atronach] = { [1] = { id = 33097 } },
+    [Unitnames.Target_Harrowing_Reaper_Trial] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_Iron_Atronach] = { [1] = { id = 33097 } },
-    [Unitnames.Dummy_Target_Atronach_Trial] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Target_Iron_Atronach_Trial] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_Mournful_Aegis] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_Skeleton_Humanoid] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_Skeleton_Khajiit] = { [1] = { id = 33097 } },
@@ -1654,10 +1657,10 @@ Effects.AddNameAura = {
     [Unitnames.Dummy_Target_Skeleton_Robust_Khajiit] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_Skeleton_Robust_Argonian] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_Stone_Atronach] = { [1] = { id = 33097 } },
+    [Unitnames.Dummy_Target_Stone_Husk] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_Voriplasm] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_Wraith_of_Crows] = { [1] = { id = 33097 } },
     [Unitnames.Dummy_Target_The_Precursor] = { [1] = { id = 33097 } },
-    [Unitnames.Dummy_Target_Stone_Husk] = { [1] = { id = 33097 } },
 
     -- Various Mobs
     [Unitnames.NPC_Daedroth] = { [1] = { id = 999013, zone = { [935] = true }, } }, -- Daedroth
@@ -3620,6 +3623,8 @@ Effects.EffectOverride = {
     [115006] = { icon = 'LuiExtended/media/icons/abilities/ability_set_wild_impulse.dds' }, -- Wild Impulse (Blackrose Destruction Staff)
 
     -- Vateshran Weapons
+    [149423] = { icon = 'LuiExtended/media/icons/abilities/ability_set_executioners_blade.dds' }, -- Executioner's Blade (Vateshran Dual Wield)
+
     [147701] = { icon = 'LuiExtended/media/icons/abilities/ability_set_frenzied_momentum.dds', tooltip = Tooltips.Set_Vateshran_2H }, -- Frenzied Momentum (Vateshran 2H)
     [147703] = { icon = 'LuiExtended/media/icons/abilities/ability_set_frenzied_momentum.dds' }, -- Frenzied Momentum (Vateshran 2H)
 
@@ -3628,11 +3633,14 @@ Effects.EffectOverride = {
     [147743] = { icon = 'LuiExtended/media/icons/abilities/ability_set_void_bash.dds' }, -- Void Bash (Vateshran 1H)
 
     [147843] = { icon = 'LuiExtended/media/icons/abilities/ability_set_wrath_of_elements.dds', tooltip = Tooltips.Set_Vateshran_Destro_Staff, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Wrath of Elements (Vateshran Destruction Staff)
+    [149413] = { icon = 'LuiExtended/media/icons/abilities/ability_set_wrath_of_elements.dds', tooltip = Tooltips.Set_Vateshran_Destro_Staff_Buff, stackAdd = 1, stackRemove = 1, stackReset = 20 }, -- Wrath of Elements (Vateshran Destruction Staff)
     [147847] = { icon = 'LuiExtended/media/icons/abilities/ability_set_wrath_of_elements.dds' }, -- Wrath of Elements (Vateshran Destruction Staff)
     [147844] = { icon = 'LuiExtended/media/icons/abilities/ability_set_wrath_of_elements.dds' }, -- Wrath of Elements (Vateshran Destruction Staff)
     [147846] = { icon = 'LuiExtended/media/icons/abilities/ability_set_wrath_of_elements.dds' }, -- Wrath of Elements (Vateshran Destruction Staff)
 
     [147872] = { icon = 'LuiExtended/media/icons/abilities/ability_set_force_overflow.dds', tooltip = Tooltips.Set_Vateshran_Resto_Staff, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Force Overflow (Vateshran Restoration Staff)
+    [149878] = { icon = 'LuiExtended/media/icons/abilities/ability_set_force_overflow.dds' }, -- Force Overflow (Vateshran Restoration Staff)
+    [149877] = { icon = 'LuiExtended/media/icons/abilities/ability_set_force_overflow.dds' }, -- Force Overflow (Vateshran Restoration Staff)
     [147873] = { icon = 'LuiExtended/media/icons/abilities/ability_set_force_overflow.dds' }, -- Force Overflow (Vateshran Restoration Staff)
     [147879] = { icon = 'LuiExtended/media/icons/abilities/ability_set_force_overflow.dds' }, -- Force Overflow (Vateshran Restoration Staff)
 
@@ -12498,6 +12506,7 @@ Effects.FakePlayerBuffs = {
     [110483] = { duration = 6800 }, -- Ghost Lantern (Ghost Lantern)
 
     -- Set Items
+    [149413] = { duration = 0 }, -- Wrath of Elements (Vateshran Destruction Staff)
     [98421] = { duration = 15000 }, -- Pirate Skeleton
     [98419] = { duration = 15000 }, -- Pirate Skeleton
     [98420] = { duration = 15000 }, -- Pirate Skeleton
@@ -12853,7 +12862,6 @@ Effects.AddGroundDamageAura = {
     [21759] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Solar Disturbance
 
     -- Warden
-
     [130400] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Arctic Wind (Arctic Wind)
     [130402] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Polar Wind (Polar Wind)
     [130406] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Arctic Blast (Arctic Blast)

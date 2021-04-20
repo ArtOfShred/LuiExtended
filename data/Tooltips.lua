@@ -469,6 +469,7 @@ LUIE.Data.Tooltips = {
     Set_Vateshran_2H                                = GetString(SI_LUIE_SKILL_SET_VATESHRAN_2H_TP),
     Set_Vateshran_1H                                = GetString(SI_LUIE_SKILL_SET_VATESHRAN_1H_TP),
     Set_Vateshran_Destro_Staff                      = GetString(SI_LUIE_SKILL_SET_VATESHRAN_DESTRO_TP),
+    Set_Vateshran_Destro_Staff_Buff                 = GetString(SI_LUIE_SKILL_SET_VATESHRAN_DESTRO_BUFF_TP),
     Set_Vateshran_Resto_Staff                       = GetString(SI_LUIE_SKILL_SET_VATESHRAN_RESTO_TP),
 
     -- Monster Helms

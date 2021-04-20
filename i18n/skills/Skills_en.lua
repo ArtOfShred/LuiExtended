@@ -915,6 +915,7 @@ local strings = {
     SI_LUIE_SKILL_SET_VATESHRAN_2H_TP =                  "Increase Weapon Damage by |cFFFFFF38|r per stack for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF5|r times when you cast a Stamina ability while in combat with Momentum active.\n\nUpon reaching max stacks, your next Heavy Attack will consume all stacks and release a violent explosion of energy around you, dealing Physical Damage to all enemies within |cFFFFFF8|r meters.",
     SI_LUIE_SKILL_SET_VATESHRAN_1H_TP =                  "After |cFFFFFF<<1>>|r <<1[second/seconds]>>, apply Major Maim to enemies within |cFFFFFF12|r meters for |cFFFFFF10|r seconds.",
     SI_LUIE_SKILL_SET_VATESHRAN_DESTRO_TP =              "Tethered to your attacker for |cFFFFFF<<1>>|r seconds. You and allies touching the tether take random Flame, Shock, or Frost damage every |cFFFFFF1|r second.\n\nThe tether breaks if you move beyond |cFFFFFF15|r meters away from your attacker.",
+    SI_LUIE_SKILL_SET_VATESHRAN_DESTRO_BUFF_TP =         "Increase the damage dealt by Wrath of Elements by |cFFFFFF1|r%, stacking up to |cFFFFFF20|r times whenever it deals damage.",
     SI_LUIE_SKILL_SET_VATESHRAN_RESTO_TP =               "Tethered to your attacker for |cFFFFFF<<1>>|r seconds. Your attacker and their allies touching the tether restore |cFFFFFF175|r Magicka and Stamina every |cFFFFFF1|r second.\n\nThe tether breaks if you move beyond |cFFFFFF15|r meters away from your attacker.",
 
     -- Monster Helms
