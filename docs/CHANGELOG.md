@@ -1,3 +1,38 @@
+### Version 6.2.6
+
+General
+- Added options to Buffs & Debuffs, Combat Info - Ability Alerts, Combat Info - Crowd Control Tracker, and Combat Text to use default icons for crowd control effects. This is a WIP for some of the modules as certain things require manual table data to work correctly. I will be aiming to at least add full support for player abilities.
+- Reset the default color options for Buffs & Debuffs, Combat Info - Ability Alerts (Crowd Control Colors), and Combat Info - Crowd Control Tracker. This change will apply once when loading the addon and save any changes you make after.
+- Components that have a blacklist/whitelist function now all have buttons with confirmation prompts to clear the entire list.
+- Updated the keybindings for summoning Merchant/Banker/Fence to display a message in chat always. Previously this used the setting under Chat Announcements for collectible use messages.
+
+Buffs & Debuffs
+- Consolidated several submenus in Buffs & Debuffs.
+- You can now change the container alignment of Long Term Effects & Prominent Buffs/Debuffs without reloading the UI.
+- Prominent Buffs will no longer show clipping bars/labels when set to display with the horizontal method.
+- Added an option to hide the display of Short-term effects on the Player/Target in addition to Long-term effects.
+- Added a new "Priority Buffs & Debuffs" whitelist. These buffs & debuffs will show up with a different color.
+- Added a new menu to customize buff/debuff colors, and the option to toggle coloring debuffs by CC type (Very heavy WIP since it requires manual table data).
+- Fixed an issue where there was no buff icon for Argonian and Khajiit Summon Shade and its morphs.
+- Updated mouseover tooltips for buffs/debuffs to reflect if they are a ground buff/debuff, or a tracker effect for an AOE cast by the player.
+- Added the CC Immunity buff to Target Dummies that were missing it.
+
+Chat Announcements
+- Implemented a safeguard that should prevent a UI error from occuring when refining a large amount of crafting materials.
+
+Combat Info
+- Ability Alerts - Added an option for mitigation alerts to color the incoming ability name by its CC type. Adjusted a few menu options for syntax to accommodate for this change.
+- Bar Highlight - Fixed an issue where Crystallized Shield and its morphs would throw a UI error when taking damage with this component enabled.
+- Bar Highlight - Fixed an issue where the bar highlight for Argonian and Khajiit Summon Shade and its morphs didn't function properly.
+- Bar Highlight - Subterranean Assault now shows a 6 second timer when cast to track the full duration of its effect.
+- Crowd Control Tracker - Added new color options for Knockback & Pull/Levitate effects.
+- Crowd Control Tracker - Fixed an issue where unbreakable buffs would turn from the Unbreakable Color to default CC color when the break free animation played.
+
+Combat Text
+- Reset the default bleed damage color to red. This change will apply once when loading the addon and save any changes you make after.
+
+---
+
 ### Version 6.2.5
 
 Buffs & Debuffs
