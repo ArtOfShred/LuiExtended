@@ -133,23 +133,23 @@ CombatInfo.Defaults = {
             alertShared                 = { 1, 1, 1, 1 },
             alertTimer                  = { 1, 1, 1, 1 },
             alertBlockA                 = { 1, 0, 0, 1 },
-            alertInterruptB             = { 0, 0.50, 1, 1 },
+            alertInterruptC             = { 0, 127/255, 1, 1 },
             alertUnmit                  = { 1, 0, 0, 1 },
             alertDodgeA                 = { 1, 1, 50/255, 1 },
             alertAvoidB                 = { 1, 127/255, 0, 1 },
             alertPower                  = { 1, 1, 1, 1 },
             alertDestroy                = { 1, 1, 1, 1 },
             alertSummon                 = { 1, 1, 1, 1 },
-            stunColor                   = {0.894118, 0.133333, 0.090196, 1},
-            knockbackColor              = {0.894118, 0.133333, 0.090196, 1},
-            levitateColor               = {0.894118, 0.133333, 0.090196, 1},
-            disorientColor              = {0.0313725509,0.6274510026,1, 1},
-            fearColor                   = {0.5607843137, 0.0352941176, 0.9254901961, 1},
-            silenceColor                = {0, 1, 1, 1},
-            staggerColor                = {1,0.9490196109,0.1294117719,1},
-            unbreakableColor            = {0.88,0.88,1,1},
-            snareColor                  = {1,.6470, 0, 1},
-            rootColor                   = { 1, .6470, 0, 1 },
+            stunColor                   = { 1, 0, 0, 1 },
+            knockbackColor              = { 1, 0, 0, 1 },
+            levitateColor               = { 1, 0, 0, 1 },
+            disorientColor              = { 0, 127/255, 1, 1 },
+            fearColor                   = { 143/255, 9/255, 236/255, 1 },
+            silenceColor                = { 0, 1, 1, 1 },
+            staggerColor                = { 1, 127/255, 0, 1 },
+            unbreakableColor            = { 224/255, 224/255, 1, 1 },
+            snareColor                  = { 1, 242/255, 32/255, 1 },
+            rootColor                   = { 1, 165/255, 0, 1 },
         },
         formats = {
             alertBlock                  = GetString(SI_LUIE_CI_BLOCK_DEFAULT),
@@ -243,19 +243,19 @@ CombatInfo.Defaults = {
         offsetX                      = 0,
         offsetY                      = 0,
         colors                       = {
-            [ACTION_RESULT_STUNNED]        = {0.894118, 0.133333, 0.090196, 1},
-            [ACTION_RESULT_KNOCKBACK]      = {0.894118, 0.133333, 0.090196, 1},
-            [ACTION_RESULT_LEVITATED]      = {0.894118, 0.133333, 0.090196, 1},
-            [ACTION_RESULT_DISORIENTED]    = {0.0313725509,0.6274510026,1, 1},
-            [ACTION_RESULT_FEARED]         = {0.5607843137, 0.0352941176, 0.9254901961, 1},
-            [ACTION_RESULT_SILENCED]       = {0, 1, 1, 1},
-            [ACTION_RESULT_STAGGERED]      = {1,0.9490196109,0.1294117719,1},
-            [ACTION_RESULT_IMMUNE]         = {1,1,1,1},
-            [ACTION_RESULT_DODGED]         = {1,1,1,1},
-            [ACTION_RESULT_BLOCKED]        = {1,1,1,1},
-            [ACTION_RESULT_BLOCKED_DAMAGE] = {1,1,1,1},
-            [ACTION_RESULT_AREA_EFFECT]    = {1,0.69,0,1},
-            unbreakable                    = {0.88,0.88,1,1},
+            [ACTION_RESULT_STUNNED]        = { 1, 0, 0, 1 },
+            [ACTION_RESULT_KNOCKBACK]      = { 1, 0, 0, 1 },
+            [ACTION_RESULT_LEVITATED]      = { 1, 0, 0, 1 },
+            [ACTION_RESULT_DISORIENTED]    = { 0, 127/255, 1, 1 },
+            [ACTION_RESULT_FEARED]         = { 143/255, 9/255, 236/255, 1 },
+            [ACTION_RESULT_SILENCED]       = { 0, 1, 1, 1 },
+            [ACTION_RESULT_STAGGERED]      = { 1, 127/255, 0, 1 },
+            [ACTION_RESULT_IMMUNE]         = { 1, 1, 1, 1},
+            [ACTION_RESULT_DODGED]         = { 1, 1, 1, 1},
+            [ACTION_RESULT_BLOCKED]        = { 1, 1, 1, 1},
+            [ACTION_RESULT_BLOCKED_DAMAGE] = { 1, 1, 1, 1},
+            [ACTION_RESULT_AREA_EFFECT]    = { 1, 242/255, 32/255, 1 },
+            unbreakable                    = { 224/255, 224/255, 1, 1 },
         },
     },
 }
@@ -472,6 +472,41 @@ function CombatInfo.Initialize(enabled)
     -- Setup CCT
     CombatInfo.CrowdControlTracker.UpdateAOEList()
     CombatInfo.CrowdControlTracker.Initialize()
+
+    -- Variable adjustment if needed
+    if not LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVarsCI then
+        LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVarsCI = 0
+    end
+    if (LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVarsCI < 2) then
+        -- Set ability alert default colors
+        CombatInfo.SV.alerts.colors.stunColor                   = CombatInfo.Defaults.alerts.colors.stunColor
+        CombatInfo.SV.alerts.colors.knockbackColor              = CombatInfo.Defaults.alerts.colors.knockbackColor
+        CombatInfo.SV.alerts.colors.levitateColor               = CombatInfo.Defaults.alerts.colors.levitateColor
+        CombatInfo.SV.alerts.colors.disorientColor              = CombatInfo.Defaults.alerts.colors.disorientColor
+        CombatInfo.SV.alerts.colors.fearColor                   = CombatInfo.Defaults.alerts.colors.fearColor
+        CombatInfo.SV.alerts.colors.silenceColor                = CombatInfo.Defaults.alerts.colors.silenceColor
+        CombatInfo.SV.alerts.colors.staggerColor                = CombatInfo.Defaults.alerts.colors.staggerColor
+        CombatInfo.SV.alerts.colors.unbreakableColor            = CombatInfo.Defaults.alerts.colors.unbreakableColor
+        CombatInfo.SV.alerts.colors.snareColor                  = CombatInfo.Defaults.alerts.colors.snareColor
+        CombatInfo.SV.alerts.colors.rootColor                   = CombatInfo.Defaults.alerts.colors.rootColor
+        -- Set CCT default colors
+        CombatInfo.SV.cct.colors[ACTION_RESULT_STUNNED]        = CombatInfo.Defaults.cct.colors[ACTION_RESULT_STUNNED]
+        CombatInfo.SV.cct.colors[ACTION_RESULT_KNOCKBACK]      = CombatInfo.Defaults.cct.colors[ACTION_RESULT_KNOCKBACK]
+        CombatInfo.SV.cct.colors[ACTION_RESULT_LEVITATED]      = CombatInfo.Defaults.cct.colors[ACTION_RESULT_LEVITATED]
+        CombatInfo.SV.cct.colors[ACTION_RESULT_DISORIENTED]    = CombatInfo.Defaults.cct.colors[ACTION_RESULT_DISORIENTED]
+        CombatInfo.SV.cct.colors[ACTION_RESULT_FEARED]         = CombatInfo.Defaults.cct.colors[ACTION_RESULT_FEARED]
+        CombatInfo.SV.cct.colors[ACTION_RESULT_SILENCED]       = CombatInfo.Defaults.cct.colors[ACTION_RESULT_SILENCED]
+        CombatInfo.SV.cct.colors[ACTION_RESULT_STAGGERED]      = CombatInfo.Defaults.cct.colors[ACTION_RESULT_STAGGERED]
+        CombatInfo.SV.cct.colors[ACTION_RESULT_IMMUNE]         = CombatInfo.Defaults.cct.colors[ACTION_RESULT_IMMUNE]
+        CombatInfo.SV.cct.colors[ACTION_RESULT_DODGED]         = CombatInfo.Defaults.cct.colors[ACTION_RESULT_DODGED]
+        CombatInfo.SV.cct.colors[ACTION_RESULT_BLOCKED]        = CombatInfo.Defaults.cct.colors[ACTION_RESULT_BLOCKED]
+        CombatInfo.SV.cct.colors[ACTION_RESULT_BLOCKED_DAMAGE] = CombatInfo.Defaults.cct.colors[ACTION_RESULT_BLOCKED_DAMAGE]
+        CombatInfo.SV.cct.colors[ACTION_RESULT_AREA_EFFECT]    = CombatInfo.Defaults.cct.colors[ACTION_RESULT_AREA_EFFECT]
+        CombatInfo.SV.cct.colors.unbreakable                   = CombatInfo.Defaults.cct.colors.unbreakable
+    end
+    -- Increment so this doesn't occur again.
+    LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVarsCI = 2
+
 
 end
 

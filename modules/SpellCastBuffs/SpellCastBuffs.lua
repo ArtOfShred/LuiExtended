@@ -45,22 +45,22 @@ SpellCastBuffs.Defaults = {
     ColorUnbreakable                    = true,
     ColorCC                             = false,
     colors = {
-        buff                            = { 0, 1, 0, 1 }, -- gren
-        debuff                          = { 1, 0, 0, 1 }, -- red
-        prioritybuff                    = { 1, 1, 0, 1 }, -- yellow
-        prioritydebuff                  = { 1, 1, 0, 1 }, -- yellow
-        unbreakable                     = { 0.88, 0.88, 1, 1 }, -- light grey
-        cosmetic                        = { 0, .5, 0, 1 }, -- dark green
-        nocc                            = { 0, 0, 0, 1 }, -- black
-        stun                            = { 1, 0, 0, 1 }, -- red
-        knockback                       = { 1, 0, 0, 1 }, -- red
-        levitate                        = { 0, 0, 1, 1 }, -- dark blue
-        disorient                       = { 0, 0.3137, 1, 1 }, -- blue
-        fear                            = { 0.5607843137, 0.0352941176, 0.9254901961, 1 }, -- purple
-        stagger                         = { 1, 0.9490196109, 0.1294117719, 1 }, -- yellow
-        silence                         = { 0, 1, 1, 1 }, -- cyan
-        snare                           = { 1, .6470, 0, 1 }, -- orange
-        root                            = { 1, .6470, 0, 1 }, -- orange
+        buff                            = { 0, 1, 0, 1 },
+        debuff                          = { 1, 0, 0, 1 },
+        prioritybuff                    = { 1, 1, 0, 1 },
+        prioritydebuff                  = { 1, 1, 0, 1 },
+        unbreakable                     = { 224/255, 224/255, 1, 1 },
+        cosmetic                        = { 0, 100/255, 0, 1 },
+        nocc                            = { 0, 0, 0, 1 },
+        stun                            = { 1, 0, 0, 1 },
+        knockback                       = { 1, 0, 0, 1 },
+        levitate                        = { 1, 0, 0, 1 },
+        disorient                       = { 0, 127/255, 1, 1 },
+        fear                            = { 143/255, 9/255, 236/255, 1 },
+        silence                         = { 0, 1, 1, 1 },
+        stagger                         = { 1, 127/255, 0, 1 },
+        snare                           = { 1, 242/255, 32/255, 1 },
+        root                            = { 1, 165/255, 0, 1 },
     },
     IconSize                            = 40,
     LabelPosition                       = 0,
@@ -577,6 +577,33 @@ function SpellCastBuffs.Initialize(enabled)
 
     -- Debug
     SpellCastBuffs.RegisterDebugEvents()
+
+    -- Variable adjustment if needed
+    if not LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVarsSCB then
+        LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVarsSCB = 0
+    end
+    if (LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVarsSCB < 2) then
+        -- Set buff cc type colors
+        SpellCastBuffs.SV.colors.buff                            = SpellCastBuffs.Defaults.colors.buff
+        SpellCastBuffs.SV.colors.debuff                          = SpellCastBuffs.Defaults.colors.debuff
+        SpellCastBuffs.SV.colors.prioritybuff                    = SpellCastBuffs.Defaults.colors.prioritybuff
+        SpellCastBuffs.SV.colors.prioritydebuff                  = SpellCastBuffs.Defaults.colors.prioritydebuff
+        SpellCastBuffs.SV.colors.unbreakable                     = SpellCastBuffs.Defaults.colors.unbreakable
+        SpellCastBuffs.SV.colors.cosmetic                        = SpellCastBuffs.Defaults.colors.cosmetic
+        SpellCastBuffs.SV.colors.nocc                            = SpellCastBuffs.Defaults.colors.nocc
+        SpellCastBuffs.SV.colors.stun                            = SpellCastBuffs.Defaults.colors.stun
+        SpellCastBuffs.SV.colors.knockback                       = SpellCastBuffs.Defaults.colors.knockback
+        SpellCastBuffs.SV.colors.levitate                        = SpellCastBuffs.Defaults.colors.levitate
+        SpellCastBuffs.SV.colors.disorient                       = SpellCastBuffs.Defaults.colors.disorient
+        SpellCastBuffs.SV.colors.fear                            = SpellCastBuffs.Defaults.colors.fear
+        SpellCastBuffs.SV.colors.silence                         = SpellCastBuffs.Defaults.colors.silence
+        SpellCastBuffs.SV.colors.stagger                         = SpellCastBuffs.Defaults.colors.stagger
+        SpellCastBuffs.SV.colors.snare                           = SpellCastBuffs.Defaults.colors.snare
+        SpellCastBuffs.SV.colors.root                            = SpellCastBuffs.Defaults.colors.root
+    end
+    -- Increment so this doesn't occur again.
+    LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVarsSCB = 2
+
 end
 
 function SpellCastBuffs.RegisterWerewolfEvents()

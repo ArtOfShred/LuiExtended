@@ -49,7 +49,7 @@ function AbilityAlerts.SetAlertColors()
         alertColorBlock = ZO_ColorDef:New(unpack(colors.alertBlockA)):ToHex(),
         alertColorDodge = ZO_ColorDef:New(unpack(colors.alertDodgeA)):ToHex(),
         alertColorAvoid = ZO_ColorDef:New(unpack(colors.alertAvoidB)):ToHex(),
-        alertColorInterrupt = ZO_ColorDef:New(unpack(colors.alertInterruptB)):ToHex(),
+        alertColorInterrupt = ZO_ColorDef:New(unpack(colors.alertInterruptC)):ToHex(),
         alertColorUnmit = ZO_ColorDef:New(unpack(colors.alertUnmit)):ToHex(),
         alertColorPower = ZO_ColorDef:New(unpack(colors.alertPower)):ToHex(),
         alertColorDestroy = ZO_ColorDef:New(unpack(colors.alertDestroy)):ToHex(),

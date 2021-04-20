@@ -485,17 +485,17 @@ function CombatText.Initialize(enabled)
     LUIE.CombatTextDeathViewer:New(poolManager, LMP)
 
     -- Variable adjustment if needed
-    if not LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVars then
-        LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVars = 0
+    if not LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVarsCT then
+        LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVarsCT = 0
     end
-    if (LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVars < 1) then
+    if (LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVarsCT < 1) then
         -- Blacklist sneak drain by default
         CombatText.SV.blacklist[20301] = true
     end
-    if (LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVars < 2) then
+    if (LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVarsCT < 2) then
         -- Set color for bleed damage to red
         CombatText.SV.colors.damage[DAMAGE_TYPE_BLEED] = CombatText.Defaults.colors.damage[DAMAGE_TYPE_BLEED]
     end
     -- Increment so this doesn't occur again.
-    LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVars = 2
+    LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVarsCT = 2
 end
