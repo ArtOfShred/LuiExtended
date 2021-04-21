@@ -7037,7 +7037,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_TRADE_INVITE_CANCELED
+    -- EVENT_TRADE_INVITE_CANCELED (Alert Handler)
     local function TradeInviteCanceledAlert()
         if ChatAnnouncements.SV.Notify.NotificationTradeCA then
             printToChat(GetString(SI_LUIE_CA_TRADE_INVITE_CANCELED), true)
@@ -7052,7 +7052,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_TRADE_CANCELED
+    -- EVENT_TRADE_CANCELED (Alert Handler)
     local function TradeCanceledAlert()
         if ChatAnnouncements.SV.Notify.NotificationTradeCA then
             printToChat(GetString(SI_TRADE_CANCELED), true)
@@ -7077,7 +7077,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_TRADE_FAILED
+    -- EVENT_TRADE_FAILED (Alert Handler)
     local function TradeFailedAlert(reason)
         if ChatAnnouncements.SV.Notify.NotificationTradeCA then
             printToChat(GetString("SI_LUIE_CA_TRADEACTIONRESULT", reason), true)
@@ -7092,7 +7092,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_TRADE_SUCCEEDED
+    -- EVENT_TRADE_SUCCEEDED (Alert Handler)
     local function TradeSucceededAlert()
         if ChatAnnouncements.SV.Notify.NotificationTradeCA then
             local message = GetString(SI_TRADE_COMPLETE)
@@ -8311,7 +8311,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_POI_DISCOVERED (CSA HAndler)
+    -- EVENT_POI_DISCOVERED (CSA Handler)
     local function PoiDiscoveredHook(zoneIndex, poiIndex)
         eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         ChatAnnouncements.PrintBufferedXP()
@@ -9426,7 +9426,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    -- EVENT_ANTIQUITY_LEAD_ACQUIRED
+    -- EVENT_ANTIQUITY_LEAD_ACQUIRED (CSA Handler)
     local function AntiquityLeadAcquired(antiquityId)
         -- Get antiquity data
         local antiquityData = ANTIQUITY_DATA_MANAGER:GetAntiquityData(antiquityId)
@@ -9798,7 +9798,7 @@ function ChatAnnouncements.HookFunction()
         if isInGroup then
             local mountedState, isRidingGroupMount, hasFreePassengerSlot = GetTargetMountedStateInfo(currentTargetCharacterNameRaw)
             local isPassengerForTarget = IsGroupMountPassengerForTarget(currentTargetCharacterNameRaw)
-            local groupMountEnabled = (mountedState == PLAYER_MOUNTED_STATE_MOUNT_RIDER and isRidingGroupMount and (not IsMounted() or isPassengerForTarget))
+            local groupMountEnabled = (mountedState == MOUNTED_STATE_MOUNT_RIDER and isRidingGroupMount and (not IsMounted() or isPassengerForTarget))
             local function MountOption() UseMountAsPassenger(currentTargetCharacterNameRaw) end
             local optionToShow = isPassengerForTarget and SI_PLAYER_TO_PLAYER_DISMOUNT or SI_PLAYER_TO_PLAYER_RIDE_MOUNT
             self:AddMenuEntry(GetString(optionToShow), platformIcons[optionToShow], groupMountEnabled, MountOption)
@@ -9847,7 +9847,7 @@ function ChatAnnouncements.HookFunction()
 
 
     -- Since the Crown Store Gifting functionality was added, hooking these functions seems to cause an insecure code issue when receiving gifts via the Player to Player notification system.
-    -- TODO: Try to securecall some of this when I have access to the gifting system.
+    -- TODO: Try to securecall some of this or maybe use a message specific filter (hook alerts handling?)
     --[[
 
     --local INTERACT_TYPE_TRADE_INVITE = 3
@@ -10095,6 +10095,7 @@ function ChatAnnouncements.HookFunction()
     end
 
     -- Called by hooked TryGroupInviteByName function
+    -- TODO: Maybe see about links for names here for non-menu
     local function CompleteGroupInvite(characterOrDisplayName, sentFromChat, displayInvitedMessage, isMenu)
         local isLeader = IsUnitGroupLeader("player")
         local groupSize = GetGroupSize()

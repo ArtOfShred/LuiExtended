@@ -49,6 +49,7 @@ function LUIE.InitializeHooks()
             return buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer
         end
 
+        -- Hook DoesKillingAttackHaveAttacker - Add a source to attacks that don't normally show one (mostly for environmental effects)
         -- Hook GetKillingAttackerInfo - Change Source Name, Pet Name, or toggle damage that is sourced from the Player on/off
         -- Hook GetKillingAttackInfo - Change Icon or Name (additional support for Zone based changes, and source attacker/pet changes)
         local zos_GetKillingAttackerInfo = GetKillingAttackerInfo
@@ -278,28 +279,33 @@ function LUIE.InitializeHooks()
         end
 
         STATS.AddLongTermEffects = function(self, container, effectsRowPool)
-            local function UpdateEffects(eventCode, changeType, buffSlot, buffName, unitTag, startTime, endTime, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId)
-                if (not unitTag or unitTag == "player") and not container:IsHidden() then
+            local function UpdateEffects()
+                if not container:IsHidden() then
                     effectsRowPool:ReleaseAllObjects()
+
                     local effectsRows = {}
+
                     --Artificial effects--
                     for effectId in ZO_GetNextActiveArtificialEffectIdIter do
-                        local displayName, iconFile, effectType, sortOrder = GetArtificialEffectInfo(effectId)
+                        local displayName, iconFile, effectType, sortOrder, startTime, endTime = GetArtificialEffectInfo(effectId)
                         local effectsRow = effectsRowPool:AcquireObject()
                         effectsRow.name:SetText(zo_strformat(SI_ABILITY_TOOLTIP_NAME, displayName))
                         effectsRow.icon:SetTexture(iconFile)
                         effectsRow.effectType = effectType
-                        effectsRow.time:SetHidden(true)
+                        local duration = startTime - endTime
+                        effectsRow.time:SetHidden(duration == 0)
+                        effectsRow.time.endTime = endTime
                         effectsRow.sortOrder = sortOrder
                         effectsRow.tooltipTitle = zo_strformat(SI_ABILITY_TOOLTIP_NAME, displayName)
                         effectsRow.effectId = effectId
                         effectsRow.isArtificial = true
                         effectsRow.isArtificialTooltip = true
+                        -- TODO: This may no longer be needed, check (the section above is current on live server before Blackwood PTS too)
                         if effectId == 3 then -- Battleground Deserter Penalty
                             startTime = GetFrameTimeSeconds()
                             local cooldown = GetLFGCooldownTimeRemainingSeconds(LFG_COOLDOWN_BATTLEGROUND_DESERTED)
                             endTime = startTime + cooldown
-                            local duration = startTime - endTime
+                            duration = startTime - endTime
                             effectsRow.time:SetHidden(duration == 0)
                             effectsRow.time.endTime = endTime
                             effectsRow.isArtificial = false -- Sort with normal buffs
@@ -450,19 +456,25 @@ function LUIE.InitializeHooks()
                     table.sort(effectsRows, EffectsRowComparator)
                     local prevRow
                     for i, effectsRow in ipairs(effectsRows) do
-                        if(prevRow) then
+                        if prevRow then
                             effectsRow:SetAnchor(TOPLEFT, prevRow, BOTTOMLEFT)
                         else
                             effectsRow:SetAnchor(TOPLEFT, nil, TOPLEFT, 5, 0)
                         end
                         effectsRow:SetHidden(false)
+
                         prevRow = effectsRow
                     end
                 end
             end
 
-            container:RegisterForEvent(EVENT_EFFECT_CHANGED, UpdateEffects)
-            --container:AddFilterForEvent(EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "player")
+
+            local function OnEffectChanged(eventCode, changeType, buffSlot, buffName, unitTag)
+                UpdateEffects()
+            end
+
+            container:RegisterForEvent(EVENT_EFFECT_CHANGED, OnEffectChanged)
+            container:AddFilterForEvent(EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "player")
             container:RegisterForEvent(EVENT_EFFECTS_FULL_UPDATE, UpdateEffects)
             container:RegisterForEvent(EVENT_ARTIFICIAL_EFFECT_ADDED, UpdateEffects)
             container:RegisterForEvent(EVENT_ARTIFICIAL_EFFECT_REMOVED, UpdateEffects)
@@ -616,6 +628,7 @@ function LUIE.InitializeHooks()
             [5] = "None",
         }
 
+        -- Used to update Tooltips for Active Effects Window
         local function TooltipBottomLine(control, detailsLine)
             -- Add bottom divider and info if present:
             if LUIE.SpellCastBuffs.SV.TooltipAbilityId or LUIE.SpellCastBuffs.SV.TooltipBuffType then
@@ -730,17 +743,16 @@ function LUIE.InitializeHooks()
         local ACTION_BUTTON_BORDERS = {normal = "EsoUI/Art/ActionBar/abilityFrame64_up.dds", mouseDown = "EsoUI/Art/ActionBar/abilityFrame64_down.dds"}
 
         local function SetupActionSlot(slotObject, slotId)
-            local slotIcon = GetSlotTexture(slotId)
+            -- pass slotObject.button.hotbarCategory which will be nil or companion
+            local slotIcon = GetSlotTexture(slotId, slotObject.button.hotbarCategory)
 
             -- Added function - Replace icons if needed
-            local abilityId = GetSlotBoundId(slotId)
+            local abilityId = GetSlotBoundId(slotId, slotObject.button.hotbarCategory)
             if LUIE.Data.Effects.BarIdOverride[abilityId] then
                 slotIcon = LUIE.Data.Effects.BarIdOverride[abilityId]
             end
 
-            slotObject.slot:SetHidden(false)
-            slotObject.hasAction = true
-
+            slotObject:SetEnabled(true)
             local isGamepad = IsInGamepadPreferredMode()
             ZO_ActionSlot_SetupSlot(slotObject.icon, slotObject.button, slotIcon, isGamepad and "" or ACTION_BUTTON_BORDERS.normal, isGamepad and "" or ACTION_BUTTON_BORDERS.mouseDown, slotObject.cooldownIcon)
             slotObject:UpdateState()
@@ -780,7 +792,8 @@ function LUIE.InitializeHooks()
             slotObject:Clear()
         end
 
-        SetupSlotHandlers = {
+        SetupSlotHandlers =
+        {
             [ACTION_TYPE_ABILITY]       = SetupAbilitySlot,
             [ACTION_TYPE_ITEM]          = SetupItemSlot,
             [ACTION_TYPE_COLLECTIBLE]   = SetupCollectibleActionSlot,
@@ -791,26 +804,31 @@ function LUIE.InitializeHooks()
         -- Hook to make Activation Highlight Effect play indefinitely instead of animation only once
         ActionButton.UpdateActivationHighlight = function(self)
             local slotnum = self:GetSlot()
-            local slotType = GetSlotType(slotnum)
+            local slotType = GetSlotType(slotnum, self.button.hotbarCategory)
             local slotIsEmpty = (slotType == ACTION_TYPE_NOTHING)
-            local abilityId = GetSlotBoundId(slotnum) -- Check AbilityId for if this should be a fake activation highlight
 
-            local showHighlight = not slotIsEmpty and (HasActivationHighlight(slotnum) or LUIE.Data.Effects.IsAbilityActiveGlow[abilityId] == true) and not self.useFailure and not self.showingCooldown
+            local abilityId = GetSlotBoundId(slotnum, self.button.hotbarCategory) -- Check AbilityId for if this should be a fake activation highlight
+
+            local showHighlight = not slotIsEmpty and (HasActivationHighlight(slotnum, self.button.hotbarCategory) or LUIE.Data.Effects.IsAbilityActiveGlow[abilityId] == true) and not self.useFailure and not self.showingCooldown
             local isShowingHighlight = self.activationHighlight:IsHidden() == false
 
             if showHighlight ~= isShowingHighlight then
                 self.activationHighlight:SetHidden(not showHighlight)
 
                 if showHighlight then
-                    local _, _, activationAnimation = GetSlotTexture(slotnum)
-                    self.activationHighlight:SetTexture(activationAnimation)
+                    local _, _, activationAnimationTexture = GetSlotTexture(slotnum, self.button.hotbarCategory)
+                    self.activationHighlight:SetTexture(activationAnimationTexture)
 
-                    self.activationHighlight.animation = self.activationHighlight.animation or CreateSimpleAnimation(ANIMATION_TEXTURE, self.activationHighlight)
                     local anim = self.activationHighlight.animation
+                    if not anim then
+                        anim = CreateSimpleAnimation(ANIMATION_TEXTURE, self.activationHighlight)
+                        anim:SetImageData(64, 1)
+                        anim:SetFramerate(30)
+                        anim:GetTimeline():SetPlaybackType(ANIMATION_PLAYBACK_LOOP, LOOP_INDEFINITELY)
 
-                    anim:SetImageData(64, 1)
-                    anim:SetFramerate(30)
-                    anim:GetTimeline():SetPlaybackType(ANIMATION_PLAYBACK_LOOP, LOOP_INDEFINITELY) -- Set Playback to loop indefinitely, not sure why this isn't the default behavior
+                        self.activationHighlight.animation = anim
+                    end
+
                     anim:GetTimeline():PlayFromStart()
                 else
                     local anim = self.activationHighlight.animation
@@ -824,11 +842,11 @@ function LUIE.InitializeHooks()
         -- Hook to add AVA Guard Ability + Morphs into Toggle Highlights
         ActionButton.UpdateState = function(self)
             local slotnum = self:GetSlot()
-            local slotType = GetSlotType(slotnum)
+            local slotType = GetSlotType(slotnum, self.button.hotbarCategory)
             local slotIsEmpty = (slotType == ACTION_TYPE_NOTHING)
-            local abilityId = GetSlotBoundId(slotnum) -- Check AbilityId for if this should be a fake activation highlight
+            local abilityId = GetSlotBoundId(slotnum, self.button.hotbarCategory) -- Check AbilityId for if this should be a fake activation highlight
 
-            self.button.actionId = GetSlotBoundId(slotnum)
+            self.button.actionId = GetSlotBoundId(slotnum, self.button.hotbarCategory)
 
             self:UpdateUseFailure()
 
@@ -930,7 +948,7 @@ function LUIE.InitializeHooks()
         end
 
         local function GetEmperorBonusScore(campaignId)
-            if(DoesCampaignHaveEmperor(campaignId)) then
+            if DoesCampaignHaveEmperor(campaignId) then
                 local alliance = GetCampaignEmperorInfo(campaignId)
                 if alliance == GetUnitAlliance("player") then
                     return 1
@@ -940,66 +958,68 @@ function LUIE.InitializeHooks()
             return 0
         end
 
-        local BONUS_SECTION_DATA = {
-            [ZO_CAMPAIGN_BONUS_TYPE_HOME_KEEPS] = {
-                typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
-                typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
-                headerText = GetString(SI_CAMPAIGN_BONUSES_HOME_KEEP_HEADER),
-                infoText = GetHomeKeepBonusString,
-                count = 1,
-                countText = GetString(SI_CAMPAIGN_BONUSES_HOME_KEEP_ALL),
-                abilityFunction = GetKeepScoreBonusAbilityId,
-                scoreFunction = GetHomeKeepBonusScore,
-            },
-            [ZO_CAMPAIGN_BONUS_TYPE_ENEMY_KEEPS] = {
-                typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
-                typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
-                headerText = GetString(SI_CAMPAIGN_BONUSES_ENEMY_KEEP_HEADER),
-                infoText = GetKeepBonusString,
-                count = GetNumKeepScoreBonuses,
-                startIndex = 2,
-                abilityFunction = GetKeepScoreBonusAbilityId,
-                scoreFunction = GetKeepBonusScore,
-            },
-            [ZO_CAMPAIGN_BONUS_TYPE_DEFENSIVE_SCROLLS] = {
-                typeIcon = "EsoUI/Art/Campaign/campaignBonus_scrollIcon.dds",
-                typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_scrolls.dds",
-                headerText = GetString(SI_CAMPAIGN_BONUSES_DEFENSIVE_SCROLL_HEADER),
-                infoText = GetDefensiveBonusString,
-                count = GetDefensiveBonusCount,
-                abilityFunction = GetDefensiveBonusAbilityId,
-                scoreFunction = GetDefensiveBonusScore,
-            },
-            [ZO_CAMPAIGN_BONUS_TYPE_OFFENSIVE_SCROLLS] = {
-                typeIcon = "EsoUI/Art/Campaign/campaignBonus_scrollIcon.dds",
-                typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_scrolls.dds",
-                headerText = GetString(SI_CAMPAIGN_BONUSES_OFFENSIVE_SCROLL_HEADER),
-                infoText = GetOffensiveBonusString,
-                count = GetOffensiveBonusCount,
-                abilityFunction = GetOffensiveBonusAbilityId,
-                scoreFunction = GetOffensiveBonusScore,
-            },
-            [ZO_CAMPAIGN_BONUS_TYPE_EMPEROR] = {
-                typeIcon = "EsoUI/Art/Campaign/campaignBonus_emporershipIcon.dds",
-                typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_emperor.dds",
-                headerText = GetString(SI_CAMPAIGN_BONUSES_EMPERORSHIP_HEADER),
-                infoText = GetEmperorBonusString,
-                count = 1,
-                countText = HIDE_COUNT,
-                abilityFunction = GetEmperorBonusAbilityId,
-                scoreFunction = GetEmperorBonusScore,
-            },
-            [ZO_CAMPAIGN_BONUS_TYPE_EDGE_KEEPS] = {
-                typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
-                typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
-                headerText = GetString(SI_CAMPAIGN_BONUSES_EDGE_KEEP_HEADER),
-                infoText = GetEdgeKeepBonusString,
-                count = GetNumEdgeKeepBonuses,
-                abilityFunction = GetEdgeKeepBonusAbilityId,
-                scoreFunction = GetEdgeKeepBonusScore,
-            },
+        local BONUS_SECTION_DATA =
+        {
+            [ZO_CAMPAIGN_BONUS_TYPE_HOME_KEEPS] =           {
+                                                    typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
+                                                    typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
+                                                    headerText = GetString(SI_CAMPAIGN_BONUSES_HOME_KEEP_HEADER),
+                                                    infoText = GetHomeKeepBonusString,
+                                                    count = 1,
+                                                    countText = GetString(SI_CAMPAIGN_BONUSES_HOME_KEEP_ALL),
+                                                    abilityFunction = GetKeepScoreBonusAbilityId,
+                                                    scoreFunction = GetHomeKeepBonusScore,
+                                                },
+            [ZO_CAMPAIGN_BONUS_TYPE_ENEMY_KEEPS] =          {
+                                                    typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
+                                                    typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
+                                                    headerText = GetString(SI_CAMPAIGN_BONUSES_ENEMY_KEEP_HEADER),
+                                                    infoText = GetKeepBonusString,
+                                                    count = GetNumKeepScoreBonuses,
+                                                    startIndex = 2,
+                                                    abilityFunction = GetKeepScoreBonusAbilityId,
+                                                    scoreFunction = GetKeepBonusScore,
+                                                },
+            [ZO_CAMPAIGN_BONUS_TYPE_DEFENSIVE_SCROLLS] =    {
+                                                    typeIcon = "EsoUI/Art/Campaign/campaignBonus_scrollIcon.dds",
+                                                    typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_scrolls.dds",
+                                                    headerText = GetString(SI_CAMPAIGN_BONUSES_DEFENSIVE_SCROLL_HEADER),
+                                                    infoText = GetDefensiveBonusString,
+                                                    count = GetDefensiveBonusCount,
+                                                    abilityFunction = GetDefensiveBonusAbilityId,
+                                                    scoreFunction = GetDefensiveBonusScore,
+                                                },
+            [ZO_CAMPAIGN_BONUS_TYPE_OFFENSIVE_SCROLLS] =    {
+                                                    typeIcon = "EsoUI/Art/Campaign/campaignBonus_scrollIcon.dds",
+                                                    typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_scrolls.dds",
+                                                    headerText = GetString(SI_CAMPAIGN_BONUSES_OFFENSIVE_SCROLL_HEADER),
+                                                    infoText = GetOffensiveBonusString,
+                                                    count = GetOffensiveBonusCount,
+                                                    abilityFunction = GetOffensiveBonusAbilityId,
+                                                    scoreFunction = GetOffensiveBonusScore,
+                                                },
+            [ZO_CAMPAIGN_BONUS_TYPE_EMPEROR] =              {
+                                                    typeIcon = "EsoUI/Art/Campaign/campaignBonus_emporershipIcon.dds",
+                                                    typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_emperor.dds",
+                                                    headerText = GetString(SI_CAMPAIGN_BONUSES_EMPERORSHIP_HEADER),
+                                                    infoText = GetEmperorBonusString,
+                                                    count = 1,
+                                                    countText = HIDE_COUNT,
+                                                    abilityFunction = GetEmperorBonusAbilityId,
+                                                    scoreFunction = GetEmperorBonusScore,
+                                                },
+            [ZO_CAMPAIGN_BONUS_TYPE_EDGE_KEEPS] =           {
+                                                    typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
+                                                    typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
+                                                    headerText = GetString(SI_CAMPAIGN_BONUSES_EDGE_KEEP_HEADER),
+                                                    infoText = GetEdgeKeepBonusString,
+                                                    count = GetNumEdgeKeepBonuses,
+                                                    abilityFunction = GetEdgeKeepBonusAbilityId,
+                                                    scoreFunction = GetEdgeKeepBonusScore,
+                                                },
         }
 
+        -- Hook Campaign Bonuses functions
         ZO_CampaignBonuses_Shared.CreateDataTable = function(self)
             self:BuildMasterList()
 
@@ -1019,10 +1039,10 @@ function LUIE.InitializeHooks()
                     end
 
                     self.dataTable[i].index = data.index
-                    self.dataTable[i].abilityId = data.abilityId
+                    self.dataTable[i].abilityId = data.abilityId -- Add AbilityId here for LUIE functions
                     self.dataTable[i].typeIcon = data.typeIcon
                     self.dataTable[i].countText = data.countText
-                    self.dataTable[i].name = data.name
+                    self.dataTable[i].name = data.name -- Add AbilityName here for LUIE functions
                     self.dataTable[i].active = data.active
                     self.dataTable[i].bonusType = data.bonusType
                     self.dataTable[i].description = data.description
@@ -1032,8 +1052,7 @@ function LUIE.InitializeHooks()
             end
         end
 
-        -- CAMPAIGN_BONUSES
-
+        -- Hook Campaign Bonuses functions
         ZO_CampaignBonuses_Shared.BuildMasterList = function(self)
             self.masterList = {}
 
@@ -1054,7 +1073,7 @@ function LUIE.InitializeHooks()
                 for i = startIndex, count do
                     local abilityId = info.abilityFunction(i)
                     local name = GetAbilityName(abilityId)
-                    local icon = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon) and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon or GetAbilityIcon(abilityId)
+                    local icon = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon) and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon or GetAbilityIcon(abilityId) -- Get Updated LUIE AbilityIcon here
                     local description = GetAbilityDescription(abilityId)
 
                     local scoreIndex = i - startIndex + 1
@@ -1069,7 +1088,7 @@ function LUIE.InitializeHooks()
 
                     local data = {
                         index = i,
-                        abilityId = abilityId,
+                        abilityId = abilityId, -- Add AbilityId here for LUIE functions
                         isHeader = false,
                         typeIcon = info.typeIcon,
                         typeIconGamepad = info.typeIconGamepad,
@@ -1088,6 +1107,7 @@ function LUIE.InitializeHooks()
             return self.masterList
         end
 
+        -- Hook Gamepad Campaign Bonuses tooltip
         CAMPAIGN_BONUSES_GAMEPAD.UpdateToolTip = function(self)
             GAMEPAD_TOOLTIPS:ClearLines(GAMEPAD_RIGHT_TOOLTIP)
             if self.abilityList:IsActive() then
@@ -1110,6 +1130,7 @@ function LUIE.InitializeHooks()
             self:SetTooltipHidden(true)
         end
 
+        -- Hook Campaign Bonuses
         CAMPAIGN_BONUSES.SetupBonusesEntry = function(self, control, data)
             ZO_SortFilterList.SetupRow(self, control, data)
 
@@ -1120,9 +1141,9 @@ function LUIE.InitializeHooks()
             control.nameLabel = GetControl(control, "Name")
             control.ability.index = data.index
             control.ability.bonusType = data.bonusType
-            control.ability.abilityId = data.abilityId
-            control.ability.name = data.name
-            control.ability.description = data.description
+            control.ability.abilityId = data.abilityId -- Add AbilityId here
+            control.ability.name = data.name -- Add AbilityName here
+            control.ability.description = data.description -- Add tooltip here
 
             control.ability:SetEnabled(data.active)
             ZO_ActionSlot_SetUnusable(control.icon, not data.active)
@@ -1138,6 +1159,7 @@ function LUIE.InitializeHooks()
             control.icon:SetTexture(data.icon)
         end
 
+        -- Hook Campaign Bonuses Tooltip
         function ZO_CampaignBonuses_AbilitySlot_OnMouseEnter(control)
 
             local abilityId = control.abilityId
@@ -1160,7 +1182,7 @@ function LUIE.InitializeHooks()
 
         end
 
-        -- AVA KEEP UPGRADE HOOK
+        -- Hook AVA Keep Upgrade
         ZO_MapKeepUpgrade_Shared.RefreshLevels = function(self)
             self.levelsGridList:ClearGridList()
 
@@ -1210,6 +1232,7 @@ function LUIE.InitializeHooks()
             self.levelsGridList:CommitGridList()
         end
 
+        -- Hook Keep Upgrade Tooltip (Keyboard)
         WORLD_MAP_KEEP_UPGRADE.Button_OnMouseEnter = function(self, control)
             InitializeTooltip(KeepUpgradeTooltip, control, TOPLEFT, 5, 0)
 
@@ -1230,21 +1253,25 @@ function LUIE.InitializeHooks()
             KeepUpgradeTooltip:SetVerticalPadding(0)
         end
 
-        -- HOOK SKILLS
-        local INCREASE_BUTTON_TEXTURES = {
-            PLUS = {
+        -- Variables for Skill Window Hook
+        local INCREASE_BUTTON_TEXTURES =
+        {
+            PLUS =
+            {
                 normal = "EsoUI/Art/Progression/addPoints_up.dds",
                 mouseDown = "EsoUI/Art/Progression/addPoints_down.dds",
                 mouseover = "EsoUI/Art/Progression/addPoints_over.dds",
                 disabled = "EsoUI/Art/Progression/addPoints_disabled.dds",
             },
-            MORPH = {
+            MORPH =
+            {
                 normal = "EsoUI/Art/Progression/morph_up.dds",
                 mouseDown = "EsoUI/Art/Progression/morph_down.dds",
                 mouseover = "EsoUI/Art/Progression/morph_over.dds",
                 disabled = "EsoUI/Art/Progression/morph_disabled.dds",
             },
-            REMORPH = {
+            REMORPH =
+            {
                 normal = "EsoUI/Art/Progression/remorph_up.dds",
                 mouseDown = "EsoUI/Art/Progression/remorph_down.dds",
                 mouseover = "EsoUI/Art/Progression/remorph_over.dds",
@@ -1252,6 +1279,7 @@ function LUIE.InitializeHooks()
             },
         }
 
+        -- Local function for Skill Window Hook
         local function ApplyButtonTextures(button, textures)
             button:SetNormalTexture(textures.normal)
             button:SetPressedTexture(textures.mouseDown)
@@ -1259,38 +1287,128 @@ function LUIE.InitializeHooks()
             button:SetDisabledTexture(textures.disabled)
         end
 
-        local zos_SetupAbilityEntry = SKILLS_WINDOW.SetupAbilityEntry
-        SKILLS_WINDOW.SetupAbilityEntry = function(self, ability, data)
-            zos_SetupAbilityEntry(self, ability, data)
-
-            local skillData = data.skillData
+        -- Hook Skills Window (Keyboard)
+        function ZO_Skills_AbilityEntry_Setup(control, skillData)
             local skillPointAllocator = skillData:GetPointAllocator()
             local skillProgressionData = skillPointAllocator:GetProgressionData()
-            local id = skillProgressionData:GetAbilityId()
 
             local isPassive = skillData:IsPassive()
             local isActive = not isPassive
             local isPurchased = skillPointAllocator:IsPurchased()
             local isUnlocked = skillProgressionData:IsUnlocked()
 
-            local detailedName
-            if isPassive and skillData:GetNumRanks() > 1 then
-                detailedName = skillProgressionData:GetFormattedNameWithUpgradeLevels()
-            elseif isActive then
-                detailedName = skillProgressionData:GetFormattedNameWithRank()
+            local lastSkillProgressionData = control.skillProgressionData
+            control.skillProgressionData = skillProgressionData
+            control.slot.skillProgressionData = skillProgressionData
+
+            -- slot
+            local id = skillProgressionData:GetAbilityId()
+            control.slotIcon:SetTexture(GetAbilityIcon(id))
+            ZO_Skills_SetKeyboardAbilityButtonTextures(control.slot)
+            ZO_ActionSlot_SetUnusable(control.slotIcon, not isPurchased)
+            control.slot:SetEnabled(isPurchased and isActive)
+            control.slotLock:SetHidden(isUnlocked)
+
+            -- xp bar
+            local showXPBar = skillProgressionData:HasRankData()
+            if showXPBar then
+                local currentRank = skillProgressionData:GetCurrentRank()
+                local startXP, endXP = skillProgressionData:GetRankXPExtents(currentRank)
+                local currentXP = skillProgressionData:GetCurrentXP()
+                local dontWrap = lastSkillProgressionData ~= skillProgressionData
+
+                control.xpBar:SetHidden(false)
+                ZO_SkillInfoXPBar_SetValue(control.xpBar, currentRank, startXP, endXP, currentXP, dontWrap)
             else
-                detailedName = skillProgressionData:GetFormattedName()
+                local NO_LEVEL = nil
+                local START_XP = 0
+                local END_XP = 1
+                local NO_XP = 0
+                local DONT_WRAP = true
+
+                control.xpBar:SetHidden(true)
+                ZO_SkillInfoXPBar_SetValue(control.xpBar, NO_LEVEL, START_XP, END_XP, NO_XP, DONT_WRAP)
             end
+
+            -- name
+            local detailedName = skillProgressionData:GetDetailedName()
             detailedName = detailedName:gsub("With", "with") -- Easiest way to fix the capitalization of the skill "Bond With Nature"
             detailedName = detailedName:gsub("Blessing Of", "Blessing of") -- Easiest way to fix the capitalization of the skill "Blessing of Restoration"
-            ability.nameLabel:SetText(detailedName)
+            control.nameLabel:SetText(detailedName)
+            local offsetY = showXPBar and -10 or 0
+            control.nameLabel:SetAnchor(LEFT, control.slot, RIGHT, 10, offsetY)
 
-            local slot = ability.slot
+            if isPurchased then
+                control.nameLabel:SetColor(PURCHASED_COLOR:UnpackRGBA())
+            else
+                if isUnlocked then
+                    control.nameLabel:SetColor(UNPURCHASED_COLOR:UnpackRGBA())
+                else
+                    control.nameLabel:SetColor(LOCKED_COLOR:UnpackRGBA())
+                end
+            end
 
-            slot.icon:SetTexture(GetAbilityIcon(id))
+            -- increase/decrease buttons
+            local increaseButton = control.increaseButton
+            local decreaseButton = control.decreaseButton
+            local hideIncreaseButton = true
+            local hideDecreaseButton = true
+            local canPurchase = skillPointAllocator:CanPurchase()
+            local canIncreaseRank = skillPointAllocator:CanIncreaseRank()
+            local canMorph = skillPointAllocator:CanMorph()
+            local skillPointAllocationMode = SKILLS_AND_ACTION_BAR_MANAGER:GetSkillPointAllocationMode()
+            if skillPointAllocationMode == SKILL_POINT_ALLOCATION_MODE_PURCHASE_ONLY then
+                local increaseTextures = nil
+                if canMorph then
+                    increaseTextures = INCREASE_BUTTON_TEXTURES.MORPH
+                elseif canPurchase or canIncreaseRank then
+                    increaseTextures = INCREASE_BUTTON_TEXTURES.PLUS
+                end
+
+                if increaseTextures then
+                    ApplyButtonTextures(increaseButton, increaseTextures)
+                    if GetActionBarLockedReason() == ACTION_BAR_LOCKED_REASON_COMBAT then
+                        increaseButton:SetState(BSTATE_DISABLED)
+                    else
+                        increaseButton:SetState(BSTATE_NORMAL)
+                    end
+                    hideIncreaseButton = false
+                end
+            else
+                local isFullRespec = skillPointAllocationMode == SKILL_POINT_ALLOCATION_MODE_FULL
+                if skillData:CanPointAllocationsBeAltered(isFullRespec) then
+                    hideIncreaseButton = false
+                    hideDecreaseButton = false
+
+                    if isPassive or not isPurchased or not skillData:IsAtMorph() then
+                        ApplyButtonTextures(increaseButton, INCREASE_BUTTON_TEXTURES.PLUS)
+                    else
+                        if skillProgressionData:IsMorph() then
+                            ApplyButtonTextures(increaseButton, INCREASE_BUTTON_TEXTURES.REMORPH)
+                        else
+                            ApplyButtonTextures(increaseButton, INCREASE_BUTTON_TEXTURES.MORPH)
+                        end
+                    end
+
+                    if canMorph or canPurchase or canIncreaseRank then
+                        increaseButton:SetState(BSTATE_NORMAL)
+                    else
+                        increaseButton:SetState(BSTATE_DISABLED)
+                    end
+
+                    if skillPointAllocator:CanSell() or skillPointAllocator:CanDecreaseRank() or skillPointAllocator:CanUnmorph() then
+                        decreaseButton:SetState(BSTATE_NORMAL)
+                    else
+                        decreaseButton:SetState(BSTATE_DISABLED)
+                    end
+                end
+            end
+
+            increaseButton:SetHidden(hideIncreaseButton)
+            decreaseButton:SetHidden(hideDecreaseButton)
         end
 
-        -- Overwrite default Skill Confirm Learn Menu for Skills with Custom Icons
+        -- Overwrite default Skill Confirm Learn Menu for Skills with Custom Icons (Keyboard)
         local function InitializeKeyboardConfirmDialog()
             local confirmDialogControl = ZO_SkillsConfirmDialog
             confirmDialogControl.abilityName = confirmDialogControl:GetNamedChild("AbilityName")
@@ -1346,7 +1464,7 @@ function LUIE.InitializeHooks()
             })
         end
 
-        -- Overwrite default Upgrade menu for Skills with Custom Icons
+        -- Overwrite default Upgrade menu for Skills with Custom Icons (Keyboard)
         local function InitializeKeyboardUpgradeDialog()
             local upgradeDialogControl = ZO_SkillsUpgradeDialog
             upgradeDialogControl.desc = upgradeDialogControl:GetNamedChild("Description")
