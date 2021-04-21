@@ -68,7 +68,6 @@ function LUIE.InitializeHooks()
             return hasAttacker
         end
 
-
         GetKillingAttackerInfo = function(index)
             local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index)
             local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
@@ -618,7 +617,6 @@ function LUIE.InitializeHooks()
         }
 
         local function TooltipBottomLine(control, detailsLine)
-
             -- Add bottom divider and info if present:
             if LUIE.SpellCastBuffs.SV.TooltipAbilityId or LUIE.SpellCastBuffs.SV.TooltipBuffType then
                 ZO_Tooltip_AddDivider(GameTooltip)
@@ -649,7 +647,6 @@ function LUIE.InitializeHooks()
                     detailsLine = detailsLine + 1
                 end
             end
-
         end
 
         -- Hook Tooltip Generation for STATS Screen Buffs & Debuffs
@@ -700,26 +697,32 @@ function LUIE.InitializeHooks()
         end
 
         -- Hook skills advisor and use this variable to refresh the abilityData one time on initialization. We don't want to reload any more after that.
-        ZO_SkillsAdvisor_Suggestions_Keyboard.SetupAbilityEntry = function(self, ability, skillProgressionData)
+        ZO_SkillsAdvisor_Suggestions_Keyboard.SetupAbilityEntry = function(self, control, skillProgressionData)
             local skillData = skillProgressionData:GetSkillData()
             local isPassive = skillData:IsPassive()
 
-            local detailedName = (isPassive and skillData:GetNumRanks() > 1) and skillProgressionData:GetFormattedNameWithRank() or skillProgressionData:GetFormattedName()
-            detailedName = detailedName:gsub("With", "with") -- Easiest way to fix the capitalization of the skill "Bond With Nature"
-            detailedName = detailedName:gsub("Blessing Of", "Blessing of") -- Easiest way to fix the capitalization of the skill "Blessing of Restoration"
-            ability.nameLabel:SetText(detailedName)
-            ability.nameLabel:SetColor(PURCHASED_COLOR:UnpackRGBA())
-            ability.lock:SetHidden(skillProgressionData:IsUnlocked())
-            ability.skillProgressionData = skillProgressionData
+            control.skillProgressionData = skillProgressionData
+            control.slot.skillProgressionData = skillProgressionData
 
-            local morphControl = ability:GetNamedChild("Morph")
+            -- slot
+            ZO_Skills_SetKeyboardAbilityButtonTextures(control.slot)
+            local id = skillProgressionData:GetAbilityId()
+            control.slotIcon:SetTexture(GetAbilityIcon(id))
+            control.slotLock:SetHidden(skillProgressionData:IsUnlocked())
+            local morphControl = control:GetNamedChild("Morph")
             morphControl:SetHidden(isPassive or not skillProgressionData:IsMorph())
 
-            local slot = ability.slot
-            local id = skillProgressionData:GetAbilityId()
-            slot.skillProgressionData = skillProgressionData
-            slot.icon:SetTexture(GetAbilityIcon(id))
-            ZO_Skills_SetKeyboardAbilityButtonTextures(slot)
+            -- name
+            local detailedName
+            if isPassive and skillData:GetNumRanks() > 1 then
+                detailedName = skillProgressionData:GetFormattedNameWithRank()
+            else
+                detailedName = skillProgressionData:GetFormattedName()
+            end
+            detailedName = detailedName:gsub("With", "with") -- Easiest way to fix the capitalization of the skill "Bond With Nature"
+            detailedName = detailedName:gsub("Blessing Of", "Blessing of") -- Easiest way to fix the capitalization of the skill "Blessing of Restoration"
+            control.nameLabel:SetText(detailedName)
+            control.nameLabel:SetColor(PURCHASED_COLOR:UnpackRGBA())
         end
 
         -- Hook Action Slots
