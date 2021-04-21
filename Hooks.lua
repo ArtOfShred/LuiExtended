@@ -721,11 +721,11 @@ function LUIE.InitializeHooks()
                     end
                     if selectedData.isArtificial then
                         -- Change id for Battle Spirit to match the one we track in SCB to avoid confusion
-                        --if abilityId == 0 or abilityId == 2 then
-                        --    labelAbilityId = 999014
-                        --else
+                        if abilityId == 0 or abilityId == 2 then
+                            labelAbilityId = 999014
+                        else
                             labelAbilityId = "Artificial"
-                        --end
+                        end
                     end
                     contentDescription = contentDescription .. "\n\nAbility ID: " .. labelAbilityId
                 end
