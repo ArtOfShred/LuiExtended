@@ -1268,7 +1268,7 @@ function ChatAnnouncements.RegisterDisguiseEvents()
     if ChatAnnouncements.SV.Notify.DisguiseCA or ChatAnnouncements.SV.Notify.DisguiseCSA or ChatAnnouncements.SV.Notify.DisguiseAlert or ChatAnnouncements.SV.Notify.DisguiseWarnCA or ChatAnnouncements.SV.Notify.DisguiseWarnCSA or ChatAnnouncements.SV.Notify.DisguiseWarnAlert then
         eventManager:RegisterForEvent(moduleName .. "Player", EVENT_DISGUISE_STATE_CHANGED, ChatAnnouncements.DisguiseState )
         eventManager:AddFilterForEvent(moduleName .. "Player", EVENT_DISGUISE_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
-        g_currentDisguise = GetItemId(0, 10) or 0 -- Get the currently equipped disguise itemId if any
+        g_currentDisguise = GetItemId(BAG_WORN, EQUIP_SLOT_COSTUME) or 0 -- Get the currently equipped disguise itemId if any
         if g_activatedFirstLoad then
             g_disguiseState = 0
             g_activatedFirstLoad = false
@@ -3288,12 +3288,16 @@ function ChatAnnouncements.OnAchievementUpdated(eventCode, id)
     end
 end
 
-function ChatAnnouncements.GuildBankItemAdded(eventCode, slotId)
-    zo_callLater(ChatAnnouncements.LogGuildBankChange, 50)
+function ChatAnnouncements.GuildBankItemAdded(eventCode, slotId, addedByLocalPlayer)
+    if addedByLocalPlayer then
+        zo_callLater(ChatAnnouncements.LogGuildBankChange, 50)
+    end
 end
 
-function ChatAnnouncements.GuildBankItemRemoved(eventCode, slotId)
-    zo_callLater(ChatAnnouncements.LogGuildBankChange, 50)
+function ChatAnnouncements.GuildBankItemRemoved(eventCode, slotId, addedByLocalPlayer)
+    if addedByLocalPlayer then
+        zo_callLater(ChatAnnouncements.LogGuildBankChange, 50)
+    end
 end
 
 function ChatAnnouncements.LogGuildBankChange()
@@ -3305,13 +3309,13 @@ end
 
 function ChatAnnouncements.IndexInventory()
     --d("Debug - Inventory Indexed!")
-    local bagsize = GetBagSize(1)
+    local bagsize = GetBagSize(BAG_BACKPACK)
 
     for i = 0,bagsize do
-        local icon, stack = GetItemInfo(1, i)
-        local itemType = GetItemType(1, i)
-        local itemId = GetItemId(1, i)
-        local itemLink = GetItemLink(1, i, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+        local icon, stack = GetItemInfo(BAG_BACKPACK, i)
+        local itemType = GetItemType(BAG_BACKPACK, i)
+        local itemId = GetItemId(BAG_BACKPACK, i)
+        local itemLink = GetItemLink(BAG_BACKPACK, i, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
         if itemLink ~= "" then
             g_inventoryStacks[i] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
         end
@@ -3320,13 +3324,13 @@ end
 
 function ChatAnnouncements.IndexEquipped()
     --d("Debug - Equipped Items Indexed!")
-    local bagsize = GetBagSize(0)
+    local bagsize = GetBagSize(BAG_WORN)
 
     for i = 0,bagsize do
-        local icon, stack = GetItemInfo(0, i)
-        local itemType = GetItemType(0, i)
-        local itemId = GetItemId(0, i)
-        local itemLink = GetItemLink(0, i, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+        local icon, stack = GetItemInfo(BAG_WORN, i)
+        local itemType = GetItemType(BAG_WORN, i)
+        local itemId = GetItemId(BAG_WORN, i)
+        local itemLink = GetItemLink(BAG_WORN, i, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
         if itemLink ~= "" then
             g_equippedStacks[i] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
         end
@@ -3335,24 +3339,24 @@ end
 
 function ChatAnnouncements.IndexBank()
     --("Debug - Bank Indexed!")
-    local bagsizebank = GetBagSize(2)
-    local bagsizesubbank = GetBagSize(6)
+    local bagsizebank = GetBagSize(BAG_BANK)
+    local bagsizesubbank = GetBagSize(BAG_SUBSCRIBER_BANK)
 
     for i = 0,bagsizebank do
-        local icon, stack = GetItemInfo(2, i)
-        local bagitemlink = GetItemLink(2, i, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
-        local itemId = GetItemId(2, i)
-        local itemLink = GetItemLink(2, i, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+        local icon, stack = GetItemInfo(BAG_BANK, i)
+        local bagitemlink = GetItemLink(BAG_BANK, i, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+        local itemId = GetItemId(BAG_BANK, i)
+        local itemLink = GetItemLink(BAG_BANK, i, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
         if bagitemlink ~= "" then
             g_bankStacks[i] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
         end
     end
 
     for i = 0,bagsizesubbank do
-        local icon, stack = GetItemInfo(6, i)
-        local bagitemlink = GetItemLink(6, i, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
-        local itemId = GetItemId(6, i)
-        local itemLink = GetItemLink(6, i, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+        local icon, stack = GetItemInfo(BAG_SUBSCRIBER_BANK, i)
+        local bagitemlink = GetItemLink(BAG_SUBSCRIBER_BANK, i, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+        local itemId = GetItemId(BAG_SUBSCRIBER_BANK, i)
+        local itemLink = GetItemLink(BAG_SUBSCRIBER_BANK, i, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
         if bagitemlink ~= "" then
             g_banksubStacks[i] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
         end
@@ -4231,7 +4235,7 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
             itemId = GetItemId(bagId, slotId)
             itemLink = GetItemLink(bagId, slotId, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
             g_equippedStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
-            if ChatAnnouncements.SV.Inventory.LootShowDisguise and slotId == 10 and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then
+            if ChatAnnouncements.SV.Inventory.LootShowDisguise and slotId == EQUIP_SLOT_COSTUME and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then
                 gainOrLoss = 3
                 receivedBy = "LUIE_INVENTORY_UPDATE_DISGUISE"
                 logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDisguiseEquip
@@ -4258,7 +4262,7 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
 
             -- STACK COUNT REMAINED THE SAME (GEAR SWAPPED)
             if stackCountChange == 0 then
-                if ChatAnnouncements.SV.Inventory.LootShowDisguise and slotId == 10 and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then
+                if ChatAnnouncements.SV.Inventory.LootShowDisguise and slotId == EQUIP_SLOT_COSTUME and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then
                     gainOrLoss = 3
                     receivedBy = "LUIE_INVENTORY_UPDATE_DISGUISE"
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDisguiseEquip
@@ -4273,7 +4277,7 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                     ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
                 if not g_itemWasDestroyed then
-                    if ChatAnnouncements.SV.Inventory.LootShowDisguise and slotId == 10 and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then
+                    if ChatAnnouncements.SV.Inventory.LootShowDisguise and slotId == EQUIP_SLOT_COSTUME and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then
                         if IsUnitInCombat("player") then
                             logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDisguiseDestroy
                             receivedBy = "LUIE_INVENTORY_UPDATE_DISGUISE"
@@ -5684,13 +5688,13 @@ function ChatAnnouncements.JusticeRemovePrint()
 
     -- PART 1 -- INVENTORY
     if ChatAnnouncements.SV.Inventory.LootConfiscate then
-        local bagsize = GetBagSize(1)
+        local bagsize = GetBagSize(BAG_BACKPACK)
 
         for i = 0,bagsize do
-            local icon, stack = GetItemInfo(1, i)
-            local itemType = GetItemType(1, i)
-            local itemId = GetItemId(1, i)
-            local itemLink = GetItemLink(1, i, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+            local icon, stack = GetItemInfo(BAG_BACKPACK, i)
+            local itemType = GetItemType(BAG_BACKPACK, i)
+            local itemId = GetItemId(BAG_BACKPACK, i)
+            local itemLink = GetItemLink(BAG_BACKPACK, i, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
 
             if itemLink ~= "" then
                 g_JusticeStacks[i] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
@@ -5716,7 +5720,7 @@ function ChatAnnouncements.JusticeRemovePrint()
         g_JusticeStacks = {}
 
         -- PART 2 -- EQUIPPED
-        bagsize = GetBagSize(0)
+        bagsize = GetBagSize(BAG_WORN)
 
         -- We have to determine the currently active weapon, and swap the slots because of some wierd interaction when your equipped weapon is confiscated.
         -- This works even if the other weapon slot is empty or both slots have a stolen weapon.
@@ -5740,10 +5744,10 @@ function ChatAnnouncements.JusticeRemovePrint()
         end
 
         for i = 0,bagsize do
-            local icon, stack = GetItemInfo(0, i)
-            local itemType = GetItemType(0, i)
-            local itemId = GetItemId(0, i)
-            local itemLink = GetItemLink(0, i, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+            local icon, stack = GetItemInfo(BAG_WORN, i)
+            local itemType = GetItemType(BAG_WORN, i)
+            local itemId = GetItemId(BAG_WORN, i)
+            local itemLink = GetItemLink(BAG_WORN, i, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
 
             if itemLink ~= "" then
                 g_JusticeStacks[i] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
@@ -5841,7 +5845,7 @@ function ChatAnnouncements.DisguiseState(eventCode, unitTag, disguiseState)
     end
 
     if g_disguiseState == 0 and ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
-        g_currentDisguise = GetItemId(0, 10) or 0
+        g_currentDisguise = GetItemId(BAG_WORN, EQUIP_SLOT_COSTUME) or 0
         local message = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), Effects.DisguiseIcons[g_currentDisguise].description)
         if ChatAnnouncements.SV.Notify.DisguiseCA then
             g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
@@ -5889,7 +5893,7 @@ function ChatAnnouncements.OnPlayerActivated(eventCode)
                 return
             elseif g_disguiseState ~= 0 then
                 g_disguiseState = 1
-                g_currentDisguise = GetItemId(0, 10) or 0
+                g_currentDisguise = GetItemId(BAG_WORN, EQUIP_SLOT_COSTUME) or 0
                 local message = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), Effects.DisguiseIcons[g_currentDisguise].description)
                 if ChatAnnouncements.SV.Notify.DisguiseCA then
                     g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
@@ -5928,7 +5932,7 @@ function ChatAnnouncements.OnPlayerActivated(eventCode)
                 return
             elseif g_disguiseState ~= 0 then
                 g_disguiseState = 1
-                g_currentDisguise = GetItemId(0, 10) or 0
+                g_currentDisguise = GetItemId(BAG_WORN, EQUIP_SLOT_COSTUME) or 0
                 return
             end
         end
