@@ -2117,7 +2117,7 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
     --d("reason: " .. reason)
 
     -- If the total gold change was 0 or (Reason 7 = Command) or (Reason 28 = Mount Feed) or (Reason 35 = Player Init) - End Now
-    if UpOrDown == 0 or UpOrDown + g_postageAmount == 0 or UpOrDown - g_postageAmount == 0 or reason == 7 or reason == 28 or reason == 35 then
+    if UpOrDown == 0 or UpOrDown + g_postageAmount == 0 or UpOrDown - g_postageAmount == 0 or reason == CURRENCY_CHANGE_REASON_COMMAND or reason == CURRENCY_CHANGE_REASON_FEED_MOUNT or reason == CURRENCY_CHANGE_REASON_PLAYER_INIT then
         return
     end
 
@@ -2135,7 +2135,7 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
     if currency == CURT_MONEY then -- Gold
         -- Send change info to the throttle printer and end function now if we throttle gold from loot.
         if not ChatAnnouncements.SV.Currency.CurrencyGoldChange then return end
-        if ChatAnnouncements.SV.Currency.CurrencyGoldThrottle and (reason == 0 or reason == 13) then
+        if ChatAnnouncements.SV.Currency.CurrencyGoldThrottle and (reason == CURRENCY_CHANGE_REASON_LOOT or reason == CURRENCY_CHANGE_REASON_KILL) then
             -- NOTE: Unlike other throttle events, we used zo_callLater here because we have to make the call immediately
             --(if some of the gold is looted after items, the message will appear after the loot if we don't use zo_callLater instead of a RegisterForUpdate)
             zo_callLater( ChatAnnouncements.CurrencyGoldThrottlePrinter, 50 )
@@ -2145,7 +2145,7 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         end
 
         -- If looted gold is below the filter value, end now.
-        if ChatAnnouncements.SV.Currency.CurrencyGoldFilter > 0 and (reason == 0 or reason == 13) then
+        if ChatAnnouncements.SV.Currency.CurrencyGoldFilter > 0 and (reason == CURRENCY_CHANGE_REASON_LOOT or reason == CURRENCY_CHANGE_REASON_KILL) then
             if UpOrDown < ChatAnnouncements.SV.Currency.CurrencyGoldFilter then
                 return
             end
@@ -2160,7 +2160,7 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
     elseif currency == CURT_ALLIANCE_POINTS then -- Alliance Points
         if not ChatAnnouncements.SV.Currency.CurrencyAPShowChange then return end
         -- Send change info to the throttle printer and end function now if we throttle Alliance Points Gained
-        if ChatAnnouncements.SV.Currency.CurrencyAPThrottle > 0 and (reason == 13 or reason == 40 or reason == 41) then
+        if ChatAnnouncements.SV.Currency.CurrencyAPThrottle > 0 and (reason == CURRENCY_CHANGE_REASON_KILL or reason == CURRENCY_CHANGE_REASON_KEEP_REPAIR or reason == CURRENCY_CHANGE_REASON_PVP_RESURRECT) then
             eventManager:UnregisterForUpdate(moduleName .. "BufferedAP")
             eventManager:RegisterForUpdate(moduleName .. "BufferedAP", ChatAnnouncements.SV.Currency.CurrencyAPThrottle, ChatAnnouncements.CurrencyAPThrottlePrinter )
             g_currencyAPThrottleValue = g_currencyAPThrottleValue + UpOrDown
@@ -2169,14 +2169,14 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         end
 
         -- If earned AP is below the filter value, end now.
-        if ChatAnnouncements.SV.Currency.CurrencyAPFilter > 0 and (reason == 13 or reason == 40 or reason == 41) then
+        if ChatAnnouncements.SV.Currency.CurrencyAPFilter > 0 and (reason == CURRENCY_CHANGE_REASON_KILL or reason == CURRENCY_CHANGE_REASON_KEEP_REPAIR or reason == CURRENCY_CHANGE_REASON_PVP_RESURRECT) then
             if UpOrDown < ChatAnnouncements.SV.Currency.CurrencyAPFilter then
                 return
             end
         end
 
         -- Immediately print value if another source of AP is gained (or spent)
-        if ChatAnnouncements.SV.Currency.CurrencyAPThrottle > 0 and (reason ~= 13 and reason ~= 40 and reason ~= 41) then
+        if ChatAnnouncements.SV.Currency.CurrencyAPThrottle > 0 and (reason ~= CURRENCY_CHANGE_REASON_KILL and reason ~= CURRENCY_CHANGE_REASON_KEEP_REPAIR and reason ~= CURRENCY_CHANGE_REASON_PVP_RESURRECT) then
             ChatAnnouncements.CurrencyAPThrottlePrinter()
         end
 
@@ -2190,7 +2190,7 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         if not ChatAnnouncements.SV.Currency.CurrencyTVChange then return end
         -- Send change info to the throttle printer and end function now if we throttle Tel Var Gained
         -- If a container was recently opened then don't throttle the currency change.
-        if ChatAnnouncements.SV.Currency.CurrencyTVThrottle > 0 and (reason == 0 or reason == 65) and not g_containerRecentlyOpened then
+        if ChatAnnouncements.SV.Currency.CurrencyTVThrottle > 0 and (reason == CURRENCY_CHANGE_REASON_LOOT or reason == CURRENCY_CHANGE_REASON_PVP_KILL_TRANSFER) and not g_containerRecentlyOpened then
             eventManager:UnregisterForUpdate(moduleName .. "BufferedTV")
             eventManager:RegisterForUpdate(moduleName .. "BufferedTV", ChatAnnouncements.SV.Currency.CurrencyTVThrottle, ChatAnnouncements.CurrencyTVThrottlePrinter )
             g_currencyTVThrottleValue = g_currencyTVThrottleValue + UpOrDown
@@ -2199,14 +2199,14 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         end
 
         -- If earned Tel Var is below the filter value, end now.
-        if ChatAnnouncements.SV.Currency.CurrencyTVFilter > 0 and (reason == 0 or reason == 65) then
+        if ChatAnnouncements.SV.Currency.CurrencyTVFilter > 0 and (reason == CURRENCY_CHANGE_REASON_LOOT or reason == CURRENCY_CHANGE_REASON_PVP_KILL_TRANSFER) then
             if UpOrDown < ChatAnnouncements.SV.Currency.CurrencyTVFilter then
                 return
             end
         end
 
         -- Immediately print value if another source of TV is gained or lost
-        if ChatAnnouncements.SV.Currency.CurrencyTVThrottle > 0 and (reason ~= 0 and reason ~= 65) then
+        if ChatAnnouncements.SV.Currency.CurrencyTVThrottle > 0 and (reason ~= CURRENCY_CHANGE_REASON_LOOT and reason ~= CURRENCY_CHANGE_REASON_PVP_KILL_TRANSFER) then
             ChatAnnouncements.CurrencyTVThrottlePrinter()
         end
 
@@ -2286,8 +2286,7 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
     end
 
     -- Determine syntax based on reason
-    -- Sell/Buy from a Merchant
-    if reason == 1 and UpOrDown > 0 then
+    if reason == CURRENCY_CHANGE_REASON_VENDOR and UpOrDown > 0 then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
         if ChatAnnouncements.SV.Inventory.LootVendorCurrency then
             g_savedPurchase.changeType=changeType
@@ -2299,7 +2298,7 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
             g_savedPurchase.messageTotal=messageTotal
             return
         end
-    elseif reason == 1 and UpOrDown < 0 then
+    elseif reason == CURRENCY_CHANGE_REASON_VENDOR and UpOrDown < 0 then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageSpend
         if ChatAnnouncements.SV.Inventory.LootVendorCurrency then
             g_savedPurchase.changeType=changeType
@@ -2311,19 +2310,17 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
             g_savedPurchase.messageTotal=messageTotal
             return
         end
-    -- Mail (2)
-    elseif reason == 2 and UpOrDown > 0  then
+    elseif reason == CURRENCY_CHANGE_REASON_MAIL and UpOrDown > 0  then
         messageChange = g_mailTarget ~="" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailIn or ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailInNoName
         if g_mailTarget ~="" then type = "LUIE_CURRENCY_MAIL" end
-    elseif reason == 2 and UpOrDown < 0  then
+    elseif reason == CURRENCY_CHANGE_REASON_MAIL and UpOrDown < 0  then
         if g_mailCODPresent then
             messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailCOD
         else
             messageChange = g_mailTarget ~="" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOut or ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOutNoName
         end
         if g_mailTarget ~="" then type = "LUIE_CURRENCY_MAIL" end
-    -- Buyback (64)
-    elseif reason == 64 then
+    elseif reason == CURRENCY_CHANGE_REASON_BUYBACK then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageSpend
         if ChatAnnouncements.SV.Inventory.LootVendorCurrency then
             g_savedPurchase.changeType=changeType
@@ -2335,18 +2332,15 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
             g_savedPurchase.messageTotal=messageTotal
             return
         end
-    -- Receive/Give Money in a Trade (Likely consolidate this later)
-    elseif reason == 3 and UpOrDown > 0 then
+    elseif reason == CURRENCY_CHANGE_REASON_TRADE and UpOrDown > 0 then
         messageChange = g_tradeTarget ~="" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageTradeIn or ChatAnnouncements.SV.ContextMessages.CurrencyMessageTradeInNoName
         if g_tradeTarget ~="" then type = "LUIE_CURRENCY_TRADE" end
-    elseif reason == 3 and UpOrDown < 0 then
+    elseif reason == CURRENCY_CHANGE_REASON_TRADE and UpOrDown < 0 then
         messageChange = g_tradeTarget ~="" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageTradeOut or ChatAnnouncements.SV.ContextMessages.CurrencyMessageTradeOutNoName
         if g_tradeTarget ~="" then type = "LUIE_CURRENCY_TRADE" end
-    -- Receive from Quest Reward (4), Deconstruct (16), Medal (21), AH Refund (32), Jump Failure Refund (54)
-    elseif reason == 4 or reason == 16 or reason == 21 or reason == 32 or reason == 54 then
+    elseif reason == CURRENCY_CHANGE_REASON_QUESTREWARD or reason == CURRENCY_CHANGE_REASON_DECONSTRUCT or reason == CURRENCY_CHANGE_REASON_MEDAL or reason == CURRENCY_CHANGE_REASON_TRADINGHOUSE_REFUND or reason == CURRENCY_CHANGE_REASON_JUMP_FAILURE_REFUND then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
-    -- Sell to Fence (63)
-    elseif reason == 63 then
+    elseif reason == CURRENCY_CHANGE_REASON_SELL_STOLEN then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
         if ChatAnnouncements.SV.Inventory.LootVendorCurrency then
             g_savedPurchase.changeType=changeType
@@ -2358,36 +2352,27 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
             g_savedPurchase.messageTotal=messageTotal
             return
         end
-    -- Bag Space (8)
-    elseif reason == 8 then
+    elseif reason == CURRENCY_CHANGE_REASON_BAGSPACE then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageStorage
         type = "LUIE_CURRENCY_BAG"
-    -- Bank Space (9)
-    elseif reason == 9 then
+    elseif reason == CURRENCY_CHANGE_REASON_BANKSPACE then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageStorage
         type = "LUIE_CURRENCY_BANK"
-    -- Spend - NPC Conversation (5)
-    elseif reason == 5 then
+    elseif reason == CURRENCY_CHANGE_REASON_CONVERSATION then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessagePay
-    -- Edit Guild Heraldry (49), Buy Guild Tabard (50)
-    elseif reason == 49 or reason == 50 then
+    elseif reason == CURRENCY_CHANGE_REASON_EDIT_GUILD_HERALDRY or reason == CURRENCY_CHANGE_REASON_GUILD_TABARD then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageSpend
-    -- Battleground (12)
-    elseif reason == 12 and UpOrDown < 0 then
+    elseif reason == CURRENCY_CHANGE_REASON_BATTLEGROUND and UpOrDown < 0 then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageCampaign
-    elseif reason == 12 and UpOrDown > 0 then
+    elseif reason == CURRENCY_CHANGE_REASON_BATTLEGROUND and UpOrDown > 0 then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
-    -- Wayshrine (19)
-    elseif reason == 19 then
+    elseif reason == CURRENCY_CHANGE_REASON_TRAVEL_GRAVEYARD then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageWayshrine
-    -- Craft (24), Deconstruct (78)
-    elseif reason == 24 or reason == 78 then
+    elseif reason == CURRENCY_CHANGE_REASON_CRAFT or reason == CURRENCY_CHANGE_REASON_RECONSTRUCTION then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse
-    -- Repairs (29)
-    elseif reason == 29 then
+    elseif reason == CURRENCY_CHANGE_REASON_VENDOR_REPAIR then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageRepair
-    -- Listing Fee (33)
-    elseif reason == 33 then
+    elseif reason == CURRENCY_CHANGE_REASON_TRADINGHOUSE_LISTING then
         if ChatAnnouncements.SV.Currency.CurrencyGoldHideListingAH then
             return
         end
@@ -2399,30 +2384,23 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         g_savedPurchase.currencyTotal=currencyTotal
         g_savedPurchase.messageTotal=messageTotal
         return
-    -- Respec Skills (44)
-    elseif reason == 44 then
+    elseif reason == CURRENCY_CHANGE_REASON_RESPEC_SKILLS then
         ChatAnnouncements.PointRespecDisplay(RESPEC_TYPE_SKILLS)
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageSkills
-    -- Respec Attributes (45)
-    elseif reason == 45 then
+    elseif reason == CURRENCY_CHANGE_REASON_RESPEC_ATTRIBUTES then
         ChatAnnouncements.PointRespecDisplay(RESPEC_TYPE_ATTRIBUTES)
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageAttributes
-    -- Unstuck (48)
-    elseif reason == 48 then
+    elseif reason == CURRENCY_CHANGE_REASON_STUCK then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageUnstuck
-    -- Respec Morphs (55)
-    elseif reason == 55 then
+    elseif reason == CURRENCY_CHANGE_REASON_RESPEC_MORPHS then
         ChatAnnouncements.PointRespecDisplay(RESPEC_TYPE_MORPHS)
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageMorphs
-    -- Pay Fence (56)
-    elseif reason == 56 then
+    elseif reason == CURRENCY_CHANGE_REASON_BOUNTY_PAID_FENCE then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageBounty
-    -- Champion Point Respec (61)
-    elseif reason == 61 then
+    elseif reason == CURRENCY_CHANGE_REASON_RESPEC_CHAMPION then
         ChatAnnouncements.PointRespecDisplay(RESPEC_TYPE_CHAMPION)
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageChampion
-    --  Launder (60)
-    elseif reason == 60 then
+    elseif reason == CURRENCY_CHANGE_REASON_VENDOR_LAUNDER then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageSpend
         if not ChatAnnouncements.SV.Inventory.LootVendorCurrency then
             messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageSpend
@@ -2436,59 +2414,43 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
             g_savedPurchase.messageTotal=messageTotal
             return
         end
-    -- Keep Reward (14), Keep Repair (40), PVP Resurrect (41), Offensive Keep Reward (74), Defensive Keep Reward (75)
-elseif reason == 14 or reason == 40 or reason == 41 or reason == 74 or reason == 75 then
+elseif reason == CURRENCY_CHANGE_REASON_KEEP_REPAIR or reason == CURRENCY_CHANGE_REASON_PVP_RESURRECT or reason == CURRENCY_CHANGE_REASON_OFFENSIVE_KEEP_REWARD or reason == CURRENCY_CHANGE_REASON_DEFENSIVE_KEEP_REWARD then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageEarn
-    -- Reward (27)
-    elseif reason == 27 then
+    elseif reason == CURRENCY_CHANGE_REASON_REWARD then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
-    -- CURRENCY_CHANGE_REASON_DEPRECATED_1 (Gold looted during digs)
-    elseif reason == 11 then
+    elseif reason == CURRENCY_CHANGE_REASON_ANTIQUITY_REWARD then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageExcavate
-    -- Buy on AH (31)
-    elseif reason == 31 then
+    elseif reason == CURRENCY_CHANGE_REASON_TRADINGHOUSE_PURCHASE then
         if ChatAnnouncements.SV.Currency.CurrencyGoldHideAH then return end
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageSpend
-    -- Deposit in Bank (42)
-    elseif reason == 42 then
+    elseif reason == CURRENCY_CHANGE_REASON_BANK_DEPOSIT then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeposit
-    -- Deposit in Guild Bank (51)
-    elseif reason == 51 then
+    elseif reason == CURRENCY_CHANGE_REASON_GUILD_BANK_DEPOSIT then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDepositGuild
-    -- Withdraw from Bank (43)
-    elseif reason == 43 then
+    elseif reason == CURRENCY_CHANGE_REASON_BANK_WITHDRAWAL then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdraw
-    -- Withdraw from Guild Bank (52)
-    elseif reason == 52 then
+    elseif reason == CURRENCY_CHANGE_REASON_GUILD_BANK_WITHDRAWAL then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdrawGuild
-    -- Confiscated -- Pay to Guard (47), Killed by Guard (57)
-    elseif reason == 47 or reason == 57 then
+    elseif reason == CURRENCY_CHANGE_REASON_BOUNTY_PAID_GUARD or reason == CURRENCY_CHANGE_REASON_BOUNTY_CONFISCATED then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageConfiscate
         zo_callLater(ChatAnnouncements.JusticeDisplayConfiscate, 50)
-    -- Pickpocketed (59)
-    elseif reason == 59 then
+    elseif reason == CURRENCY_CHANGE_REASON_PICKPOCKET then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessagePickpocket
-    -- Looted - From Chest (0), Looted from Player/NPC (65), Loot Currency Container (76)
-    elseif reason == 0 or reason == 65 or reason == 76 then
+    elseif reason == CURRENCY_CHANGE_REASON_LOOT or reason == CURRENCY_CHANGE_REASON_PVP_KILL_TRANSFER or reason == CURRENCY_CHANGE_REASON_LOOT_CURRENCY_CONTAINER then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageLoot
-    -- Looted - Stolen Gold (62)
-    elseif reason == 62 then
+    elseif reason == CURRENCY_CHANGE_REASON_LOOT_STOLEN then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageSteal
-    -- Looted (13)
-    elseif reason == 13 then
+    elseif reason == CURRENCY_CHANGE_REASON_KILL then
         if currency == CURT_ALLIANCE_POINTS then
             messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageEarn
         else
             messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageLoot
         end
-    -- Died to Player/NPC (67)
-    elseif reason == 67 then
+    elseif reason == CURRENCY_CHANGE_REASON_DEATH then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageLost
-    -- Crown Crate Duplicate (69), Item Converted To Gems (70), Crowns Purchased (73)
-    elseif reason == 69 or reason == 70 or reason == 73 then
+    elseif reason == CURRENCY_CHANGE_REASON_CROWN_CRATE_DUPLICATE or reason == CURRENCY_CHANGE_REASON_ITEM_CONVERTED_TO_GEMS or reason == CURRENCY_CHANGE_REASON_CROWNS_PURCHASED then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
-    -- Purchased with Gems (71), Purchased with Crowns (72)
-    elseif reason == 71 or reason == 72 then
+    elseif reason == CURRENCY_CHANGE_REASON_PURCHASED_WITH_GEMS or reason == CURRENCY_CHANGE_REASON_PURCHASED_WITH_CROWNS2 then
         if currency == CURT_STYLE_STONES or currency == CURT_EVENT_TICKETS then
             messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
         else
@@ -2497,35 +2459,36 @@ elseif reason == 14 or reason == 40 or reason == 41 or reason == 74 or reason ==
 
     -- ==============================================================================
     -- DEBUG EVENTS - Don't know if these are implemented or what they are for.
-    elseif reason == 6 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_ACTION
-    elseif reason == 15 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_KEEP_UPGRADE
-    elseif reason == 17 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_DEPRECATED_2
-    elseif reason == 18 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_SOUL_HEAL
-    elseif reason == 20 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_CASH_ON_DELIVERY
-    elseif reason == 22 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_ABILITY_UPGRADE_PURCHASE
-    elseif reason == 23 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_DEPRECATED_1
-    elseif reason == 25 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_STABLESPACE
-    elseif reason == 26 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_ACHIEVEMENT
-    elseif reason == 30 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_TRAIT_REVEAL
-    elseif reason == 34 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_REFORGE
-    elseif reason == 36 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_RECIPE
-    elseif reason == 37 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_CONSUME_FOOD_DRINK
-    elseif reason == 38 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_CONSUME_POTION
-    elseif reason == 39 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_HARVEST_REAGENT
-    elseif reason == 46 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_RESEARCH_TRAIT
-    elseif reason == 53 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_GUILD_STANDARD
-    elseif reason == 58 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_GUILD_FORWARD_CAMP
-    elseif reason == 66 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_BANK_FEE
-    elseif reason == 77 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- CURRENCY_CHANGE_REASON_CHARACTER_UPGRADE
+    elseif reason == CURRENCY_CHANGE_REASON_ACTION then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == CURRENCY_CHANGE_REASON_KEEP_UPGRADE then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == CURRENCY_CHANGE_REASON_DEPRECATED_0 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == CURRENCY_CHANGE_REASON_DEPRECATED_2 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == CURRENCY_CHANGE_REASON_SOUL_HEAL then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == CURRENCY_CHANGE_REASON_CASH_ON_DELIVERY then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == CURRENCY_CHANGE_REASON_ABILITY_UPGRADE_PURCHASE then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == CURRENCY_CHANGE_REASON_DEPRECATED_1 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == CURRENCY_CHANGE_REASON_STABLESPACE then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == CURRENCY_CHANGE_REASON_ACHIEVEMENT then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == CURRENCY_CHANGE_REASON_TRAIT_REVEAL then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == CURRENCY_CHANGE_REASON_REFORGE then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == CURRENCY_CHANGE_REASON_RECIPE then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == CURRENCY_CHANGE_REASON_CONSUME_FOOD_DRINK then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == CURRENCY_CHANGE_REASON_CONSUME_POTION then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == CURRENCY_CHANGE_REASON_HARVEST_REAGENT then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == CURRENCY_CHANGE_REASON_RESEARCH_TRAIT then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == CURRENCY_CHANGE_REASON_GUILD_STANDARD then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == CURRENCY_CHANGE_REASON_GUILD_FORWARD_CAMP then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == CURRENCY_CHANGE_REASON_BANK_FEE then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == CURRENCY_CHANGE_REASON_CHARACTER_UPGRADE then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     -- END DEBUG EVENTS
     -- ==============================================================================
     -- If none of these returned true, then we must have just looted the currency (Potentially a few currency change events I missed too may have to adjust later)
     else messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageLoot end
 
-    -- Haven't seen this one yet: Loot Currency Container (76), but it's more recently added and thus probably used for something.
-    if reason == 76 then
+    -- Haven't seen this one yet but it's more recently added and thus probably used for something.
+    if reason == CURRENCY_CHANGE_REASON_LOOT_CURRENCY_CONTAINER then
         if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
-            d("Currency Change reason 76 - CURRENCY_CHANGE_REASON_LOOT_CURRENCY_CONTAINER")
+            d("Currency Change Reason 76 - CURRENCY_CHANGE_REASON_LOOT_CURRENCY_CONTAINER")
         end
     end
 
@@ -3163,12 +3126,12 @@ end
 
 function ChatAnnouncements.OnExperienceGain(eventCode, reason, level, previousExperience, currentExperience, championPoints)
     -- d("Experience Gain) previousExperience: " .. previousExperience .. " --- " .. "currentExperience: " .. currentExperience)
-    if ChatAnnouncements.SV.XP.Experience and ( not ( ChatAnnouncements.SV.XP.ExperienceHideCombat and reason == 0 ) or not reason == 0 ) then
+    if ChatAnnouncements.SV.XP.Experience and ( not ( ChatAnnouncements.SV.XP.ExperienceHideCombat and reason == PROGRESS_REASON_KILL ) or not reason == PROGRESS_REASON_KILL ) then
 
         local change = currentExperience - previousExperience -- Change in Experience Points on gaining them
 
         -- If throttle is enabled, save value and end function here
-        if ChatAnnouncements.SV.XP.ExperienceThrottle > 0 and reason == 0 then
+        if ChatAnnouncements.SV.XP.ExperienceThrottle > 0 and reason == PROGRESS_REASON_KILL then
             g_xpCombatBufferValue = g_xpCombatBufferValue + change
             -- We unregister the event, then re-register it, this keeps the buffer at a constant X throttle after XP is gained.
             eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
@@ -3177,14 +3140,14 @@ function ChatAnnouncements.OnExperienceGain(eventCode, reason, level, previousEx
         end
 
         -- If filter is enabled and value is below filter then end function here
-        if ChatAnnouncements.SV.XP.ExperienceFilter > 0 and reason == 0 then
+        if ChatAnnouncements.SV.XP.ExperienceFilter > 0 and reason == PROGRESS_REASON_KILL then
             if change < ChatAnnouncements.SV.XP.ExperienceFilter then
                 return
             end
         end
 
         -- If we gain experience from a non combat source, and our buffer function holds a value, then we need to immediately dump this value before the next XP update is processed.
-        if ChatAnnouncements.SV.XP.ExperienceThrottle > 0 and g_xpCombatBufferValue > 0 and (reason ~= 0 and reason ~= 99) then
+        if ChatAnnouncements.SV.XP.ExperienceThrottle > 0 and g_xpCombatBufferValue > 0 and (reason ~= PROGRESS_REASON_KILL and reason ~= 99) then
             eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
             ChatAnnouncements.PrintBufferedXP()
         end
@@ -7188,7 +7151,7 @@ function ChatAnnouncements.HookFunction()
             end
 
             -- Stop currency messages from printing here
-            if reason == 2 then
+            if reason == MAIL_SEND_RESULT_FAIL_INVALID_NAME then
                 for i=1, #g_queuedMessages do
                     if g_queuedMessages[i].type == "CURRENCY" then
                         g_queuedMessages[i].type = "GARBAGE"
