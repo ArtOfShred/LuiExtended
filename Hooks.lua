@@ -7,6 +7,22 @@ local zo_strformat = zo_strformat
 local printToChat = LUIE.PrintToChat
 
 function LUIE.InitializeHooks()
+
+        -- TODO: Localize
+        local buffTypes = {
+            [LUIE_BUFF_TYPE_BUFF] = "Buff",
+            [LUIE_BUFF_TYPE_DEBUFF] = "Debuff",
+            [LUIE_BUFF_TYPE_UB_BUFF] = "Unbreakable Buff",
+            [LUIE_BUFF_TYPE_UB_DEBUFF] = "Unbreakable Debuff",
+            [LUIE_BUFF_TYPE_GROUND_BUFF_TRACKER] = "AOE Buff Tracker",
+            [LUIE_BUFF_TYPE_GROUND_DEBUFF_TRACKER] = "AOE Debuff Tracker",
+            [LUIE_BUFF_TYPE_GROUND_AOE_BUFF] = "AOE Buff",
+            [LUIE_BUFF_TYPE_GROUND_AOE_DEBUFF] = "AOE Debuff",
+            [LUIE_BUFF_TYPE_ENVIRONMENT_BUFF] = "Zone Buff",
+            [LUIE_BUFF_TYPE_ENVIRONMENT_DEBUFF] = "Hazard",
+            [LUIE_BUFF_TYPE_NONE] = "None",
+        }
+
         -- Hook for Icon/Name changes
         local zos_GetSkillAbilityInfo = GetSkillAbilityInfo
         GetSkillAbilityInfo = function(skillType, skillIndex, abilityIndex)
@@ -300,6 +316,7 @@ function LUIE.InitializeHooks()
                         effectsRow.effectId = effectId
                         effectsRow.isArtificial = true
                         effectsRow.isArtificialTooltip = true
+
                         -- TODO: This may no longer be needed, check (the section above is current on live server before Blackwood PTS too)
                         if effectId == 3 then -- Battleground Deserter Penalty
                             startTime = GetFrameTimeSeconds()
@@ -481,18 +498,141 @@ function LUIE.InitializeHooks()
             container:SetHandler("OnEffectivelyShown", UpdateEffects)
         end
 
-        -- Hook GAMEPAD Stats
+        local GAMEPAD_STATS_DISPLAY_MODE =
+        {
+            CHARACTER = 1,
+            ATTRIBUTES = 2,
+            EFFECTS = 3,
+            TITLE = 4,
+            OUTFIT = 5,
+            LEVEL_UP_REWARDS = 6,
+            UPCOMING_LEVEL_UP_REWARDS = 7,
+            ADVANCED_ATTRIBUTES = 8,
+        }
+
+        local function ArtificialEffectsRowComparator(left, right)
+            return left.sortOrder < right.sortOrder
+        end
+
+        -- Hook GAMEPAD Stats List
+        GAMEPAD_STATS.RefreshMainList = function(self)
+            if self.currentTitleDropdown and self.currentTitleDropdown:IsDropdownVisible() then
+                self.refreshMainListOnDropdownClose = true
+                return
+            end
+
+            self.mainList:Clear()
+
+            --Level Up Reward
+            if HasPendingLevelUpReward() then
+                self.mainList:AddEntry("ZO_GamepadNewMenuEntryTemplate", self.claimRewardsEntry)
+            elseif HasUpcomingLevelUpReward() then
+                self.mainList:AddEntry("ZO_GamepadMenuEntryTemplate", self.upcomingRewardsEntry)
+            end
+
+            --Title
+            self.mainList:AddEntryWithHeader("ZO_GamepadStatTitleRow", self.titleEntry)
+
+            -- Attributes
+            for index, attributeEntry in ipairs(self.attributeEntries) do
+                if index == 1 then
+                    self.mainList:AddEntryWithHeader("ZO_GamepadStatAttributeRow", attributeEntry)
+                else
+                    self.mainList:AddEntry("ZO_GamepadStatAttributeRow", attributeEntry)
+                end
+            end
+
+            -- Character Info
+            self.mainList:AddEntryWithHeader("ZO_GamepadMenuEntryTemplate", self.advancedStatsEntry)
+            self.mainList:AddEntry("ZO_GamepadMenuEntryTemplate", self.characterEntry)
+
+            -- Active Effects--
+            self.numActiveEffects = 0
+
+            --Artificial effects
+            local sortedArtificialEffectsTable = {}
+            for effectId in ZO_GetNextActiveArtificialEffectIdIter do
+                local displayName, iconFile, effectType, sortOrder, startTime, endTime = GetArtificialEffectInfo(effectId)
+
+                local data = ZO_GamepadEntryData:New(zo_strformat(SI_ABILITY_TOOLTIP_NAME, displayName), iconFile)
+                data.displayMode = GAMEPAD_STATS_DISPLAY_MODE.EFFECTS
+                data.canClickOff = false
+                data.artificialEffectId = effectId
+                data.tooltipTitle = displayName
+                data.sortOrder = sortOrder
+                data.isArtificial = true
+
+                local duration = endTime - startTime
+                if duration > 0 then
+                    local timeLeft = (endTime * 1000.0) - GetFrameTimeMilliseconds()
+                    data:SetCooldown(timeLeft, duration * 1000.0)
+                end
+
+                table.insert(sortedArtificialEffectsTable, data)
+            end
+
+            table.sort(sortedArtificialEffectsTable, ArtificialEffectsRowComparator)
+
+            for i, data in ipairs(sortedArtificialEffectsTable) do
+                self:AddActiveEffectData(data)
+            end
+
+            --Real Effects
+            local numBuffs = GetNumBuffs("player")
+            local hasActiveEffects = numBuffs > 0
+            if hasActiveEffects then
+                for i = 1, numBuffs do
+                    local buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff = GetUnitBuffInfo("player", i)
+
+                    if buffSlot > 0 and buffName ~= "" then
+                        local data = ZO_GamepadEntryData:New(zo_strformat(SI_ABILITY_TOOLTIP_NAME, buffName), iconFile)
+                        data.displayMode = GAMEPAD_STATS_DISPLAY_MODE.EFFECTS
+                        data.buffIndex = i
+                        data.buffSlot = buffSlot
+                        data.canClickOff = canClickOff
+                        data.isArtificial = false
+
+                        local duration = endTime - startTime
+                        if duration > 0 then
+                            local timeLeft = (endTime * 1000.0) - GetFrameTimeMilliseconds()
+                            data:SetCooldown(timeLeft, duration * 1000.0)
+                        end
+
+                        -- Hide effects if they are set to hide on the override.
+                        if not (LUIE.Data.Effects.EffectOverride[abilityId]) or (LUIE.Data.Effects.EffectOverride[abilityId] and not LUIE.Data.Effects.EffectOverride[abilityId].hide) then
+                            self:AddActiveEffectData(data)
+                        end
+                    end
+                end
+            end
+
+            if self.numActiveEffects == 0 then
+                local data = ZO_GamepadEntryData:New(GetString(SI_STAT_GAMEPAD_EFFECTS_NONE_ACTIVE))
+                data.displayMode = GAMEPAD_STATS_DISPLAY_MODE.EFFECTS
+                data:SetHeader(GetString(SI_STATS_ACTIVE_EFFECTS))
+
+                self.mainList:AddEntryWithHeader("ZO_GamepadEffectAttributeRow", data)
+            end
+
+            self.mainList:Commit()
+
+            KEYBIND_STRIP:UpdateKeybindButtonGroup(self.keybindStripDescriptor)
+        end
+
+        -- Hook GAMEPAD Stats Refresh
         GAMEPAD_STATS.RefreshCharacterEffects = function(self)
             local selectedData = self.mainList:GetTargetData()
 
             local contentTitle, contentDescription, contentStartTime, contentEndTime, _
 
+            local buffSlot, abilityId, buffType
             if selectedData.isArtificial then
+                abilityId = selectedData.artificialEffectId
+                buffType = BUFF_EFFECT_TYPE_BUFF
                 contentTitle, _, _, _, contentStartTime, contentEndTime = GetArtificialEffectInfo(selectedData.artificialEffectId)
                 contentDescription = GetArtificialEffectTooltipText(selectedData.artificialEffectId)
             else
-                local buffSlot, abilityId
-                contentTitle, contentStartTime, contentEndTime, buffSlot, _, _, _, _, _, _, abilityId = GetUnitBuffInfo("player", selectedData.buffIndex)
+                contentTitle, contentStartTime, contentEndTime, buffSlot, _, _, _, buffType, _, _, abilityId = GetUnitBuffInfo("player", selectedData.buffIndex)
 
                 if DoesAbilityExist(abilityId) then
                     contentDescription = GetAbilityEffectDescription(buffSlot)
@@ -568,7 +708,47 @@ function LUIE.InitializeHooks()
                     if thirdLine ~= "" and thirdLine ~= nil then
                         contentDescription = thirdLine
                     end
+                end
+            end
 
+            -- Add AbilityId / Buff Type Lines
+            if LUIE.SpellCastBuffs.SV.TooltipAbilityId or LUIE.SpellCastBuffs.SV.TooltipBuffType then
+                -- Add Ability ID Line
+                if LUIE.SpellCastBuffs.SV.TooltipAbilityId then
+                    local labelAbilityId = abilityId and abilityId or "None"
+                    if labelAbilityId == "Fake" then
+                        artificial = true
+                    end
+                    if selectedData.isArtificial then
+                        -- Change id for Battle Spirit to match the one we track in SCB to avoid confusion
+                        --if abilityId == 0 or abilityId == 2 then
+                        --    labelAbilityId = 999014
+                        --else
+                            labelAbilityId = "Artificial"
+                        --end
+                    end
+                    contentDescription = contentDescription .. "\n\nAbility ID: " .. labelAbilityId
+                end
+
+                -- Add Buff Type Line
+                if LUIE.SpellCastBuffs.SV.TooltipBuffType then
+                    buffType = buffType or LUIE_BUFF_TYPE_NONE
+                    if abilityId and LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].unbreakable then
+                        buffType = buffType + 2
+                    end
+
+                    -- Setup tooltips for player aoe trackers
+                    if abilityId and LUIE.Data.Effects.EffectGroundDisplay[abilityId] then
+                        buffType = buffType + 4
+                    end
+
+                    -- Setup tooltips for ground buff/debuff effects
+                    if abilityId and (LUIE.Data.Effects.AddGroundDamageAura[abilityId] or (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].groundLabel) ) then
+                        buffType = buffType + 6
+                    end
+
+                    local endLine = buffTypes[buffType]
+                    contentDescription = contentDescription .. "\nType: " .. endLine
                 end
             end
 
@@ -620,14 +800,6 @@ function LUIE.InitializeHooks()
             end
         end
 
-        local buffTypes = {
-            [1] = "Buff",
-            [2] = "Debuff",
-            [3] = "Unbreakable Buff",
-            [4] = "Unbreakable Debuff",
-            [5] = "None",
-        }
-
         -- Used to update Tooltips for Active Effects Window
         local function TooltipBottomLine(control, detailsLine)
             -- Add bottom divider and info if present:
@@ -642,7 +814,12 @@ function LUIE.InitializeHooks()
                         artificial = true
                     end
                     if control.isArtificial then
-                        labelAbilityId = "Artificial"
+                        -- Change id for Battle Spirit to match the one we track in SCB to avoid confusion
+                        if control.effectId == 0 or control.effectId == 2 then
+                            labelAbilityId = 999014
+                        else
+                            labelAbilityId = "Artificial"
+                        end
                     end
                     GameTooltip:AddHeaderLine("Ability ID", "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_LEFT, ZO_NORMAL_TEXT:UnpackRGB())
                     GameTooltip:AddHeaderLine(labelAbilityId, "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_RIGHT, 1, 1, 1)
@@ -651,10 +828,22 @@ function LUIE.InitializeHooks()
 
                 -- Add Buff Type Line
                 if LUIE.SpellCastBuffs.SV.TooltipBuffType then
-                    local buffType = control.effectType and control.effectType or 5
-                    if control.effectId and LUIE.Data.Effects.EffectOverride[control.effectId] and LUIE.Data.Effects.EffectOverride[control.effectId].unbreakable then
+                    local buffType = control.effectType and control.effectType or LUIE_BUFF_TYPE_NONE
+                    local effectId = control.effectId
+                    if effectId and LUIE.Data.Effects.EffectOverride[effectId] and LUIE.Data.Effects.EffectOverride[effectId].unbreakable then
                         buffType = buffType + 2
                     end
+
+                    -- Setup tooltips for player aoe trackers
+                    if effectId and LUIE.Data.Effects.EffectGroundDisplay[effectId] then
+                        buffType = buffType + 4
+                    end
+
+                    -- Setup tooltips for ground buff/debuff effects
+                    if effectId and (LUIE.Data.Effects.AddGroundDamageAura[effectId] or (LUIE.Data.Effects.EffectOverride[effectId] and LUIE.Data.Effects.EffectOverride[effectId].groundLabel) ) then
+                        buffType = buffType + 6
+                    end
+
                     GameTooltip:AddHeaderLine("Type", "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_LEFT, ZO_NORMAL_TEXT:UnpackRGB())
                     GameTooltip:AddHeaderLine(buffTypes[buffType], "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_RIGHT, 1, 1, 1)
                     detailsLine = detailsLine + 1
