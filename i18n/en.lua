@@ -232,6 +232,7 @@ local strings = {
     SI_LUIE_CA_DUEL_STATE1 =                             "You are currently waiting for a duel challenge response from |cFFFFFF<<1>>|r.",
     SI_LUIE_CA_DUEL_STATE2 =                             "You are currently considering a duel challenge from |cFFFFFF<<1>>|r.",
     SI_LUIE_CA_ACHIEVEMENT_PROGRESS_MSG =                "Achievement Updated",
+    SI_LUIE_CHAMPION_POINT_TYPE =                        "<<1>><<2>> <<3>> <<1[Point/Points]>>",
     SI_LUIE_CA_EXPERIENCE_MESSAGE =                      "You earn %s.",
     SI_LUIE_CA_EXPERIENCE_NAME =                         "experience <<1[point/points]>>",
     SI_LUIE_CA_LVL_ANNOUNCE_CP =                         "Champion Level Achieved!", -- TODO: Unused

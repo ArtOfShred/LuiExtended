@@ -232,6 +232,7 @@ local strings = {
     SI_LUIE_CA_DUEL_STATE1 =                             "Вы ожидаете ответа на вызов на дуэль от игрока |cFFFFFF<<1>>|r.",
     SI_LUIE_CA_DUEL_STATE2 =                             "Вы должны ответить на вызов на дуэль от игрока |cFFFFFF<<1>>|r.",
     SI_LUIE_CA_ACHIEVEMENT_PROGRESS_MSG =                "Достижение обновлено",
+    SI_LUIE_CHAMPION_POINT_TYPE =                        "<<1>><<2>> <<3>> <<1[Очко/Очков]>>",
     SI_LUIE_CA_EXPERIENCE_MESSAGE =                      "Вы получили %s.",
     SI_LUIE_CA_EXPERIENCE_NAME =                         "<<1[очко/очков]>> опыта",
     SI_LUIE_CA_LVL_ANNOUNCE_CP =                         "Получено Очко чемпиона!",
