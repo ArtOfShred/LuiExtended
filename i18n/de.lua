@@ -282,6 +282,7 @@ local strings = {
     SI_LUIE_CA_GROUP_MEMBER_DISBAND_MSG =                "Die Gruppe wurde aufgelöst.",
     SI_LUIE_CA_GROUP_MEMBER_JOIN =                       "|cFFFFFF<<1>>|r ist der Gruppe beigetreten.",
     SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF =                  "Du hast eine Gruppe betreten.",
+    SI_LUIE_CA_GROUP_MEMBER_JOIN_FORM =                  "You have formed a group.",
     SI_LUIE_CA_GROUP_MEMBER_KICKED =                     "|cFFFFFF<<1>>|r wurde aus der Gruppe entfernt.",
     SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF =                 "Du hast die Gruppe verlassen.",
     SI_LUIE_CA_GROUP_QUIT_LFG =                          "Du bist nicht länger  in einer LFG-Gruppe.",

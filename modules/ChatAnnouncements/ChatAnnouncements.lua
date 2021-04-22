@@ -6539,57 +6539,48 @@ function ChatAnnouncements.HookFunction()
                 alert = zo_strformat(SI_LUIE_GROUPDISBANDLEADER)
                 zo_callLater(function() ChatAnnouncements.CheckLFGStatusLeave(false) end , 100)
             elseif isLocalPlayer then
-            --
-            zo_callLater(function() ChatAnnouncements.CheckLFGStatusLeave(false) end , 100)
-            --
+                zo_callLater(function() ChatAnnouncements.CheckLFGStatusLeave(false) end , 100)
             end
-
             sound = SOUNDS.GROUP_DISBAND
         elseif reason == GROUP_LEAVE_REASON_KICKED then
             if actionRequiredVote then
                 if isLocalPlayer then
-                    --
                     zo_callLater(function() ChatAnnouncements.CheckLFGStatusLeave(true) end , 100)
-                    --
                     message = zo_strformat(SI_GROUP_ELECTION_KICK_PLAYER_PASSED)
                     alert = zo_strformat(SI_GROUP_ELECTION_KICK_PLAYER_PASSED)
                 elseif hasValidNames then
-                    --
                     zo_callLater(function() ChatAnnouncements.CheckLFGStatusLeave(false) end , 100)
-                    --
                     message = zo_strformat(SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED, finalName)
                     alert = zo_strformat(SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED, finalAlertName)
-                    message2 = (zo_strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED), finalName))
-                    alert2 =  (zo_strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED), finalAlertName))
+                    message2 = zo_strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED), finalName)
+                    alert2 =  zo_strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED), finalAlertName)
                 end
+                sound = SOUNDS.GROUP_KICK
             else
-                if isLocalPlayer then
-                    --
+                if isLeader and isLocalPlayer then
+                    message = zo_strformat(SI_LUIE_GROUPDISBANDLEADER)
+                    alert = zo_strformat(SI_LUIE_GROUPDISBANDLEADER)
+                    zo_callLater(function() ChatAnnouncements.CheckLFGStatusLeave(false) end , 100)
+                    sound = SOUNDS.GROUP_DISBAND
+                elseif isLocalPlayer then
                     zo_callLater(function() ChatAnnouncements.CheckLFGStatusLeave(true) end , 100)
-                    --
                     message = zo_strformat(SI_GROUP_NOTIFICATION_GROUP_SELF_KICKED)
                     alert = zo_strformat(SI_GROUP_NOTIFICATION_GROUP_SELF_KICKED)
+                    sound = SOUNDS.GROUP_KICK
                 else
-                    --
                     zo_callLater(function() ChatAnnouncements.CheckLFGStatusLeave(false) end , 100)
-                    --
                     useDefaultReasonText = true
+                    sound = SOUNDS.GROUP_KICK
                 end
             end
-
-            sound = SOUNDS.GROUP_KICK
         elseif reason == GROUP_LEAVE_REASON_VOLUNTARY or reason == GROUP_LEAVE_REASON_LEFT_BATTLEGROUND then
             if not isLocalPlayer then
                 useDefaultReasonText = true
-                --
                 zo_callLater(function() ChatAnnouncements.CheckLFGStatusLeave(false) end , 100)
-                --
             else
-                --
                 message = (zo_strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF), finalName))
                 alert = (zo_strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF), finalAlertName))
                 zo_callLater(function() ChatAnnouncements.CheckLFGStatusLeave(false) end , 100)
-                --
             end
 
             sound = SOUNDS.GROUP_LEAVE
@@ -10421,11 +10412,42 @@ function ChatAnnouncements.CheckLFGStatusJoin()
                     ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF_LFG))
                 end
             elseif not IsInLFGGroup() and not g_joinLFGOverride then
+                local isLeader = IsUnitGroupLeader("player") -- If the player is the leader, then they must have formed the group.
                 if ChatAnnouncements.SV.Group.GroupCA then
-                    printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF), true)
+                    if isLeader then
+                        printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_FORM), true)
+                    else
+                        printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF), true)
+                    end
                 end
                 if ChatAnnouncements.SV.Group.GroupAlert then
-                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF))
+                    if isLeader then
+                        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_FORM))
+                    else
+                        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF))
+                    end
+                end
+                -- If the player is the leader, show the other member as joining the group.
+                if isLeader and not IsInLFGGroup() then
+                    local groupSize = GetGroupSize
+                    -- If for some reason the group is bigger or smaller than just 2 people (initial formation), then don't proceed here.
+                    if groupSize == 2 then
+                        local unitToJoin
+                        if GetUnitDisplayName("group1") == LUIE.PlayerDisplayName then
+                            unitToJoin = "group2"
+                        else
+                            unitToJoin = "group1"
+                        end
+                        local joinedMemberName = GetUnitName(unitToJoin)
+                        local joinedMemberAccountName = GetUnitDisplayName(unitToJoin)
+                        -- Resolve name links
+                        local finalName = ChatAnnouncements.ResolveNameLink(joinedMemberName, joinedMemberAccountName)
+                        local finalAlertName = ChatAnnouncements.ResolveNameNoLink(joinedMemberName, joinedMemberAccountName)
+                        -- Set final messages to send
+                        local SendMessage = (zo_strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), finalName))
+                        local SendAlert = (zo_strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), finalAlertName))
+                        ChatAnnouncements.PrintJoinStatusNotSelf(SendMessage, SendAlert)
+                    end
                 end
             end
         end
