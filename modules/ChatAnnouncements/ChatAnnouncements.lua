@@ -10429,25 +10429,21 @@ function ChatAnnouncements.CheckLFGStatusJoin()
                 end
                 -- If the player is the leader, show the other member as joining the group.
                 if isLeader and not IsInLFGGroup() then
-                    local groupSize = GetGroupSize
-                    -- If for some reason the group is bigger or smaller than just 2 people (initial formation), then don't proceed here.
-                    if groupSize == 2 then
-                        local unitToJoin
-                        if GetUnitDisplayName("group1") == LUIE.PlayerDisplayName then
-                            unitToJoin = "group2"
-                        else
-                            unitToJoin = "group1"
-                        end
-                        local joinedMemberName = GetUnitName(unitToJoin)
-                        local joinedMemberAccountName = GetUnitDisplayName(unitToJoin)
-                        -- Resolve name links
-                        local finalName = ChatAnnouncements.ResolveNameLink(joinedMemberName, joinedMemberAccountName)
-                        local finalAlertName = ChatAnnouncements.ResolveNameNoLink(joinedMemberName, joinedMemberAccountName)
-                        -- Set final messages to send
-                        local SendMessage = (zo_strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), finalName))
-                        local SendAlert = (zo_strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), finalAlertName))
-                        ChatAnnouncements.PrintJoinStatusNotSelf(SendMessage, SendAlert)
+                    local unitToJoin
+                    if GetUnitDisplayName("group1") == LUIE.PlayerDisplayName then
+                        unitToJoin = "group2"
+                    else
+                        unitToJoin = "group1"
                     end
+                    local joinedMemberName = GetUnitName(unitToJoin)
+                    local joinedMemberAccountName = GetUnitDisplayName(unitToJoin)
+                    -- Resolve name links
+                    local finalName = ChatAnnouncements.ResolveNameLink(joinedMemberName, joinedMemberAccountName)
+                    local finalAlertName = ChatAnnouncements.ResolveNameNoLink(joinedMemberName, joinedMemberAccountName)
+                    -- Set final messages to send
+                    local SendMessage = (zo_strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), finalName))
+                    local SendAlert = (zo_strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), finalAlertName))
+                    ChatAnnouncements.PrintJoinStatusNotSelf(SendMessage, SendAlert)
                 end
             end
         end
