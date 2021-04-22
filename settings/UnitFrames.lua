@@ -488,18 +488,6 @@ function UnitFrames.CreateSettings()
                 default = Defaults.CustomSmoothBar,
                 disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
             },
-            {
-                -- Champion Points Effective
-                type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_CHAMPION),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_CHAMPION_TP),
-                choices = championOptions,
-                getFunc = function() return Settings.ChampionOptions end,
-                setFunc = function(var) Settings.ChampionOptions = var UnitFrames.OnPlayerActivated() end,
-                width = "full",
-                default = Defaults.ChampionOptions,
-                disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-            },
         },
     }
     -- Unit Frames - Custom Unit Frame Color Options Submenu

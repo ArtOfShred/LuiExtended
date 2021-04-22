@@ -169,7 +169,6 @@ UnitFrames.Defaults = {
     DisplayOptionsGroupRaid          = 2,
     ExecutePercentage                = 20,
     RaidIconOptions                  = 2,
-    ChampionOptions                  = "Show Above Cap", -- TODO: localization
     RepositionFramesAdjust           = 0,
     PlayerFrameOptions               = 1,
     AdjustStaminaHPos                = 200,
@@ -215,7 +214,7 @@ UnitFrames.CustomFramesMovingState  = false
 
 local g_AvaCustFrames       = {} -- Another set of custom frames. Currently designed only to provide AvA Player Target reticleover frame
 local g_DefaultFrames       = {} -- Default Unit Frames are not referenced by external modules
-local g_MaxChampionPoint    = GetChampionPointsPlayerProgressionCap() -- Keet this value in local constant
+local g_MaxChampionPoint    = 3600 -- Keep this value in local constant
 local g_defaultTargetNameLabel   -- Reference to default UI target name label
 local g_defaultThreshold    = 25
 local g_isRaid              = false -- Used by resurrection tracking function to determine if we should use abbreviated or unabbreviated text for resurrection.
@@ -2145,11 +2144,7 @@ function UnitFrames.UpdateDefaultLevelTarget()
     local unitLevel
     local isChampion = IsUnitChampion("reticleover")
     if isChampion then
-        if UnitFrames.SV.ChampionOptions == "Limit to Cap" then
-            unitLevel = GetUnitEffectiveChampionPoints("reticleover")
-        else
-            unitLevel = GetUnitChampionPoints("reticleover")
-        end
+        unitLevel = GetUnitChampionPoints("reticleover")
     else
         unitLevel = GetUnitLevel("reticleover")
     end
@@ -2512,11 +2507,7 @@ function UnitFrames.UpdateStaticControls( unitFrame )
             end
             unitFrame.levelIcon:SetTexture( unitFrame.isChampion and "LuiExtended/media/unitframes/unitframes_level_champion.dds" or "LuiExtended/media/unitframes/unitframes_level_normal.dds" )
             -- Level label should be already anchored
-            if UnitFrames.SV.ChampionOptions == "Limit to Cap" then
-                unitFrame.level:SetText( tostring( unitFrame.isChampion and GetUnitEffectiveChampionPoints( unitFrame.unitTag ) or GetUnitLevel( unitFrame.unitTag ) ) )
-            elseif UnitFrames.SV.ChampionOptions == "Show Above Cap" then
-                unitFrame.level:SetText( tostring( unitFrame.isChampion and GetUnitChampionPoints( unitFrame.unitTag ) or GetUnitLevel( unitFrame.unitTag ) ) )
-            end
+            unitFrame.level:SetText( tostring( unitFrame.isChampion and GetUnitChampionPoints( unitFrame.unitTag ) or GetUnitLevel( unitFrame.unitTag ) ) )
         end
         if unitFrame.unitTag == "player" then
             unitFrame.levelIcon:SetHidden( not UnitFrames.SV.PlayerEnableYourname )
