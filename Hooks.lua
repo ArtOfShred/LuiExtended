@@ -23,6 +23,9 @@ function LUIE.InitializeHooks()
             [LUIE_BUFF_TYPE_NONE] = "None",
         }
 
+        -- Hook Gamepad Skill Advisor for custom icon support
+        LUIE.InitializeHooksSkillAdvisor()
+
         -- Hook for Icon/Name changes
         local zos_GetSkillAbilityInfo = GetSkillAbilityInfo
         GetSkillAbilityInfo = function(skillType, skillIndex, abilityIndex)
@@ -771,7 +774,6 @@ function LUIE.InitializeHooks()
             self:RefreshContentHeader(contentTitle)
         end
 
-
         -- Hook for request friend so menu option also displays invite message
         -- Menu is true if this request is sent from the Player to Player interaction menu
         local zos_RequestFriend = RequestFriend
@@ -899,7 +901,7 @@ function LUIE.InitializeHooks()
             control.animation:PlayForward()
         end
 
-        -- Hook skills advisor and use this variable to refresh the abilityData one time on initialization. We don't want to reload any more after that.
+        -- Hook Skills Advisor (Keyboard) and use this variable to refresh the abilityData one time on initialization. We don't want to reload any more after that.
         ZO_SkillsAdvisor_Suggestions_Keyboard.SetupAbilityEntry = function(self, control, skillProgressionData)
             local skillData = skillProgressionData:GetSkillData()
             local isPassive = skillData:IsPassive()

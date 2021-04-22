@@ -42,6 +42,7 @@
 
 LuiExtended.lua
 Functions.lua
+Hooks-SkillsAdvisor.lua
 Hooks.lua
 Initialize.lua
 UI.lua
