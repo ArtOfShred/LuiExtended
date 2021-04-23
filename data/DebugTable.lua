@@ -852,6 +852,7 @@ LUIE.DebugAuras = {
     [81737] = true, -- Donolon's Rare Recipe Book (Recipe: Donolon's Rare Recipe Book)
     [89338] = true, -- Exquisite Furniture Tome (ALL Furniture Plan Book)
     [115175] = true, -- Murkmire Furniture Tome (Murkmire Furniture Plan Book)
+    [157127] = true, -- Companion Maxer (Companion Booster)
     [87282] = true, -- Vampire Maxer (Vampire Maxer)
     [87286] = true, -- Werewolf Maxer (Werewolf Maxer)
     [66704] = true, -- _CRWN Remove Vamp/Werewolf (Cleansing Ritual)

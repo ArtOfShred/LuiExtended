@@ -110,8 +110,8 @@ local strings = {
     SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP =              "Увеличивает получаемый опыт на |cFFFFFF<<1>>|r% в течение |cFFFFFF30|r минут.",
     SI_LUIE_SKILL_EXPERIENCE_HOUR_TP =                   "Увеличивает получаемый опыт на |cFFFFFF<<1>>|r% в течение |cFFFFFF<<2>>|r <<2[часа/часов]>>.",
     SI_LUIE_SKILL_EXPERIENCE_PELINAL =                   "Увеличивает получаемые Очки Альянса и опыт, получаемый за убийство игроков на |cFFFFFF100|r% в течение |cFFFFFF<<1>>|r <<1[часа/часов]>>.",
-    SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HALF_HOUR_TP =     "Increase Alliance War Skill Line progression by |cFFFFFF<<1>>|r% for |cFFFFFF30|r minutes.",
-    SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HOUR_TP =          "Increase Alliance War Skill Line progression by |cFFFFFF<<1>>|r% for |cFFFFFF1|r hour.",
+    SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HALF_HOUR_TP =     "Increase Alliance Rank and Alliance War Skill Line progression by |cFFFFFF<<1>>|r% for |cFFFFFF30|r minutes.",
+    SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HOUR_TP =          "Increase Alliance Rank and Alliance War Skill Line progression by |cFFFFFF<<1>>|r% for |cFFFFFF1|r hour.",
 
     -- Misc
     SI_LUIE_SKILL_FILLET_FISH =                          "Чистка рыбы",

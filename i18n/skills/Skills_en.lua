@@ -110,8 +110,8 @@ local strings = {
     SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP =              "Increase Experience Points earned by |cFFFFFF<<1>>|r% for |cFFFFFF30|r minutes.",
     SI_LUIE_SKILL_EXPERIENCE_HOUR_TP =                   "Increase Experience Points earned by |cFFFFFF<<1>>|r% for |cFFFFFF<<2>>|r <<2[hour/hours]>>.",
     SI_LUIE_SKILL_EXPERIENCE_PELINAL =                   "Increase Alliance Points earned by |cFFFFFF100|r% and Experience Points earned from player kills by |cFFFFFF100|r% for |cFFFFFF<<1>>|r <<1[hour/hours]>>.",
-    SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HALF_HOUR_TP =     "Increase Alliance War Skill Line progression by |cFFFFFF<<1>>|r% for |cFFFFFF30|r minutes.",
-    SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HOUR_TP =          "Increase Alliance War Skill Line progression by |cFFFFFF<<1>>|r% for |cFFFFFF1|r hour.",
+    SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HALF_HOUR_TP =     "Increase Alliance Rank and Alliance War Skill Line progression by |cFFFFFF<<1>>|r% for |cFFFFFF30|r minutes.",
+    SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HOUR_TP =          "Increase Alliance Rank and Alliance War Skill Line progression by |cFFFFFF<<1>>|r% for |cFFFFFF1|r hour.",
 
     -- Misc
     SI_LUIE_SKILL_FILLET_FISH =                          "Fillet Fish",
