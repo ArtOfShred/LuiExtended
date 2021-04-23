@@ -1699,7 +1699,7 @@ function CombatInfo.BackbarSetupTemplate()
     local lastButton
     local buttonTemplate = ZO_GetPlatformTemplate('ZO_ActionButton')
     local ultimateTemplate = ZO_GetPlatformTemplate('ZO_UltimateActionButton')
-    for i = BAR_INDEX_START, BACKBAR_INDEX_END do
+    for i = BAR_INDEX_START, BAR_INDEX_END do
 
         -- Get our backbar button
         local targetButton = g_backbarButtons[i + BACKBAR_INDEX_OFFSET]
@@ -2285,7 +2285,7 @@ end
 function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
 
     -- Handle slot update for action bars
-    --d(string.format("%d: %s(%d)", slotNum, GetSlotName(slotNum), GetSlotBoundId(slotNum)))
+    -- d(string.format("%d: %s(%d)", slotNum, GetSlotName(slotNum), GetSlotBoundId(slotNum)))
     -- Look only for action bar slots
 
     if slotNum < BACKBAR_INDEX_OFFSET then
@@ -2460,7 +2460,6 @@ function CombatInfo.OnActiveHotbarUpdate(eventCode, didActiveHotbarChange, shoul
     else
         g_activeWeaponSwapInProgress = false
     end
-
 end
 
 function CombatInfo.OnSlotsFullUpdate(eventCode)
@@ -2489,7 +2488,7 @@ function CombatInfo.PlayProcAnimations(slotNum)
         end
         -- Otherwise make a highlight frame
         local actionButton
-        if slotNum < BACKBAR_INDEX_OFFSET then
+        if slotNum <= BAR_INDEX_END then
            actionButton = ZO_ActionBar_GetButton(slotNum)
         else
            actionButton = g_backbarButtons[slotNum]
@@ -2557,7 +2556,7 @@ function CombatInfo.ShowCustomToggle(slotNum)
         end
         -- Otherwise make a highlight frame
         local actionButton
-        if slotNum < BACKBAR_INDEX_OFFSET then
+        if slotNum <= BAR_INDEX_END then
             actionButton = ZO_ActionBar_GetButton(slotNum)
         else
             actionButton = g_backbarButtons[slotNum]
