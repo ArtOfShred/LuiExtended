@@ -3345,6 +3345,15 @@ Effects.EffectOverride = {
     [147841] = { hide = true }, -- Create 150% AvA Skill Boost R (Chef Arquitius's Lost Thesis)
     [147850] = { icon = 'LuiExtended/media/icons/abilities/ability_item_chef_arquitius_lost_thesis.dds', name = Abilities.Innate_Chef_Arquitius_Lost_Thesis }, -- 88449 Stun (Chef Arquitius's Lost Thesis)
 
+    [148050] = { hide = true }, -- Alliance Breton Terrier (Breton Terrier Mammoth Bone)
+    [148052] = { icon = 'LuiExtended/media/icons/abilities/ability_item_breton_terrier_mammoth_bone.dds', name = Abilities.Innate_Breton_Terrier_Mammoth_Bone }, -- 68235 Stun (Breton Terrier Mammoth Bone)
+    [123110] = { icon = 'LuiExtended/media/icons/abilities/ability_item_mummified_alfiq_parts.dds', name = Abilities.Innate_Mummified_Alfiq_Parts }, -- 68235 Stun (Mummified Alfiq Parts)
+    [123115] = { icon = 'LuiExtended/media/icons/abilities/ability_item_plague_drenched_fabric.dds', name = Abilities.Innate_Plague_Drenched_Fabric }, -- 68235 Stun (Plague-Drenched Fabric)
+
+    [111133] = { icon = 'LuiExtended/media/icons/abilities/ability_item_swamp_jelly.dds', name = Abilities.Innate_Swamp_Jelly }, -- 68235 Stun (Swamp Jelly)
+    [117532] = { icon = 'LuiExtended/media/icons/abilities/ability_item_guar_stomp.dds', name = Abilities.Innate_Guar_Stomp }, -- 68235 Stun (Guar Stomp)
+    [92365] = { icon = 'LuiExtended/media/icons/abilities/ability_item_dwarven_theodolite.dds', name = Abilities.Innate_Dwarven_Theodolite }, -- 68235 Stun (Dwarven Theodolite)
+
     -- PTS Items
     [89338] = { hide = true }, -- Exquisite Furniture Tome (ALL Furniture Plan Book)
     [115175] = { hide = true }, -- Murkmire Furniture Tome (Murkmire Furniture Plan Book)
@@ -3377,9 +3386,9 @@ Effects.EffectOverride = {
 
 
 
-    [113432] = { icon = 'LuiExtended/media/icons/abilities/ability_item_indrik_nascent.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Summon, Abilities.Innate_Indrik_Nascent) }, -- 68235 Stun (Nascent Indrik)
-    [130394] = { icon = 'LuiExtended/media/icons/abilities/ability_item_indrik_spectral.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Summon, Abilities.Innate_Indrik_Spectral) }, -- 68235 Stun (Spectral Indrik)
-    [131536] = { icon = 'LuiExtended/media/icons/abilities/ability_item_pet_sovereign_sow.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Summon, Abilities.Innate_Sovereign_Sow) }, -- Generic Stun & Combine (Sovereign Sow)
+    [113432] = { icon = 'LuiExtended/media/icons/abilities/ability_item_indrik_nascent.dds', name = Abilities.Innate_Indrik_Nascent }, -- 68235 Stun (Nascent Indrik)
+    [130394] = { icon = 'LuiExtended/media/icons/abilities/ability_item_indrik_spectral.dds', name = Abilities.Innate_Indrik_Spectral }, -- 68235 Stun (Spectral Indrik)
+    [131536] = { icon = 'LuiExtended/media/icons/abilities/ability_item_pet_sovereign_sow.dds', name = Abilities.Innate_Sovereign_Sow }, -- Generic Stun & Combine (Sovereign Sow)
 
     [68259] = { icon = 'LuiExtended/media/icons/abilities/ability_item_psijic_ambrosia_fragment.dds', name = Abilities.Innate_Create_Psijic_Ambrosia_Recipe }, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
     [70582] = { hide = true }, -- Roll 1d1000 (Merethic Restorative Resin)

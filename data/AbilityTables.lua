@@ -73,6 +73,13 @@ local AbilityTables = {
 
     Innate_Chef_Arquitius_Torte_Dissertation    = GetItemLinkName("|H0:item:171430:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Innate_Chef_Arquitius_Lost_Thesis           = GetItemLinkName("|H0:item:171434:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Breton_Terrier_Mammoth_Bone          = GetItemLinkName("|H0:item:171469:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Mummified_Alfiq_Parts                = GetItemLinkName("|H0:item:147929:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Plague_Drenched_Fabric               = GetItemLinkName("|H0:item:147930:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Guar_Stomp                           = GetCollectibleName(6197),
+    Innate_Swamp_Jelly                          = GetCollectibleName(5656),
+    Innate_Dwarven_Theodolite                   = GetCollectibleName(1232),
+
     Innate_Arena_Gladiators_Exultation      = GetItemLinkName("|H0:item:141751:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Innate_Arena_Gladiators_Mockery         = GetItemLinkName("|H0:item:146042:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Innate_Arena_Gladiators_Recognition     = GetItemLinkName("|H0:item:138785:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),

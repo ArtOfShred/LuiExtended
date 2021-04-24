@@ -783,6 +783,15 @@ LUIE.DebugAuras = {
     [147841] = true, -- Create 150% AvA Skill Boost R (Chef Arquitius's Lost Thesis)
     [147850] = true, -- 88449 Stun (Chef Arquitius's Lost Thesis)
 
+    [148050] = true, -- Alliance Breton Terrier (Breton Terrier Mammoth Bone)
+    [148052] = true, -- 68235 Stun (Breton Terrier Mammoth Bone)
+    [123110] = true, -- 68235 Stun (Mummified Alfiq Parts)
+    [123115] = true, -- 68235 Stun (Plague-Drenched Fabric)
+
+    [111133] = true, -- 68235 Stun (Swamp Jelly)
+    [117532] = true, -- 68235 Stun (Guar Stomp)
+    [92365] = true, -- 68235 Stun (Dwarven Theodolite)
+
     -- Other
     [113432] = true, -- 68235 Stun (Nascent Indrik)
     [115046] = true, -- 68235 Stun (Nascent Indrik)
