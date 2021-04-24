@@ -315,7 +315,6 @@ local AbilityTables = {
     Set_Juggernaut                    = 34512,
     Set_Honors_Scorn                  = 121917,
     Set_Honors_Love                   = 121913,
-    Set_Dauntless_Combatant           = 134103,
     Set_Warming_Aura                  = 133210,
     Set_Aegis_Caller                  = 133490,
     Set_Reactive_Armor                = 68947,

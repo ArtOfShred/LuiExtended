@@ -1014,17 +1014,6 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
             },
             {
-                -- Slayer/Courage Etc Use Default
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_GENERIC_MAJOR_MINOR),
-                tooltip = GetString(SI_LUIE_LAM_GENERIC_MAJOR_MINOR_TP),
-                getFunc = function() return Settings.GenericMajorMinor end,
-                setFunc = function(value) Settings.GenericMajorMinor = value SpellCastBuffs.UpdateMajorMinorList(true) SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = Defaults.GenericMajorMinor,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-            {
                 -- Use Generic Icon for CC Type
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON),

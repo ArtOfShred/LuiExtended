@@ -188,7 +188,6 @@ SpellCastBuffs.Defaults = {
     TooltipSticky                       = 0,
     TooltipAbilityId                    = false,
     TooltipBuffType                     = false,
-    GenericMajorMinor                   = false,
     UseDefaultIcon                      = false,
     DefaultIconOptions                  = 1,
     ShowSharedEffects                   = true,
@@ -493,7 +492,6 @@ function SpellCastBuffs.Initialize(enabled)
     SpellCastBuffs.Reset()
     SpellCastBuffs.UpdateContextHideList()
     SpellCastBuffs.UpdateDisplayOverrideIdList()
-    SpellCastBuffs.UpdateMajorMinorList()
 
     -- Register events
     eventManager:RegisterForUpdate(moduleName, 100, SpellCastBuffs.OnUpdate )
@@ -3981,24 +3979,6 @@ function SpellCastBuffs.UpdateDisplayOverrideIdList()
         for k, v in pairs(Effects.DebuffDisplayOverrideMajorMinor) do
             for k, v in pairs(Effects.DebuffDisplayOverrideMajorMinor) do
                 debuffDisplayOverrideId[k] = v
-            end
-        end
-    end
-end
-
--- Called from the menu and on initialize to build major/minor generic icon overrides.
-function SpellCastBuffs.UpdateMajorMinorList(menu)
-    if LUIE.SpellCastBuffs.SV.GenericMajorMinor then
-        for k, v in pairs(Effects.MajorMinorIconTable) do
-            if v.normalize then
-                Effects.EffectOverride[k].icon = v.normalize
-            end
-        end
-    -- Minimize the amount of iterating we need to do, we only need to toggle back if we're disabling the setting from the menu.
-    elseif menu and not LUIE.SpellCastBuffs.SV.GenericMajorMinor then
-        for k, v in pairs(Effects.MajorMinorIconTable) do
-            if v.icon then
-                Effects.EffectOverride[k].icon = v.icon
             end
         end
     end

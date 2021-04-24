@@ -316,8 +316,15 @@ LUIE.Data.Tooltips = {
     -- CHAMPION POINT SKILLS ---------------------------------------
     ----------------------------------------------------------------
 
+    -- Craft
     Champion_Shadowstrike                           = GetString(SI_LUIE_SKILL_SHADOWSTRIKE_TP),
+
+    -- Warfare
+    Champion_Enlivening_Overflow                    = GetString(SI_LUIE_SKILL_ENLIVENING_OVERFLOW_TP),
     Champion_Foresight                              = GetString(SI_LUIE_SKILL_FORESIGHT_TP),
+
+    -- Fitness
+    Champion_Winded                                 = GetString(SI_LUIE_SKILL_WINDED_TP),
     Champion_Unchained                              = GetString(SI_LUIE_SKILL_UNCHAINED_TP),
 
     ----------------------------------------------------------------
@@ -482,8 +489,8 @@ LUIE.Data.Tooltips = {
     Set_Earthgore                                   = GetString(SI_LUIE_SKILL_SET_EARTHGORE),
     Set_Grothdarr                                   = GetString(SI_LUIE_SKILL_SET_GROTHDARR),
     Set_Iceheart                                    = GetString(SI_LUIE_SKILL_SET_ICEHEART),
-    Set_Ilambris_Fire                               = zo_strformat(GetString(SI_LUIE_SKILL_SET_ILAMBRIS), GetString(SI_DAMAGETYPE3)),
-    Set_Ilambris_Shock                              = zo_strformat(GetString(SI_LUIE_SKILL_SET_ILAMBRIS), GetString(SI_DAMAGETYPE4)),
+    Set_Ilambris                                    = GetString(SI_LUIE_SKILL_SET_ILAMBRIS),
+    Set_Ilambris_Ground                             = GetString(SI_LUIE_SKILL_SET_ILAMBRIS_GROUND),
     Set_Lord_Warden_Buff                            = GetString(SI_LUIE_SKILL_SET_LORD_WARDEN_BUFF),
     Set_Malubeth_Damage                             = GetString(SI_LUIE_SKILL_SET_MALUBETH_DAMAGE),
     Set_Malubeth_Heal                               = GetString(SI_LUIE_SKILL_SET_MALUBETH_HEAL),
@@ -1205,7 +1212,6 @@ LUIE.Data.Tooltips = {
     Skill_Cleave_Stance                             = GetString(SI_LUIE_SKILL_CLEAVE_STANCE_TP),
     Skill_Defensive_Ward                            = GetString(SI_LUIE_SKILL_DEFENSIVE_WARD_TP),
     Skill_Soul_Tether_NPC                           = GetString(SI_LUIE_SKILL_SOUL_TETHER_NPC_TP),
-    Skill_Siphoning_Strikes_NPC                     = GetString(SI_LUIE_SKILL_SIPHONING_STRIKES_NPC_TP),
     --Skill_Focused_Healing                           = GetString(SI_LUIE_SKILL_FOCUSED_HEALING_TP),
     Skill_Rite_of_Passage_NPC                       = GetString(SI_LUIE_SKILL_RITE_OF_PASSAGE_NPC_TP),
     Skill_Throw_Dagger                              = GetString(SI_LUIE_SKILL_THROW_DAGGER_TP),
@@ -1570,6 +1576,13 @@ function LUIE.DynamicTooltip(abilityId)
             local finalSpeed = 100 - speed
             tooltip = zo_strformat(GetString(SI_LUIE_SKILL_HIDDEN_TP), finalSpeed, cost)
         end
+    end
+    -- Unchained
+    if abilityId == 98316 then
+        local duration = GetAbilityDuration(98316) / 1000
+        local pointsSpent = GetNumPointsSpentOnChampionSkill(64) * 1.1
+        local adjustPoints = math.floor(pointsSpent * 100 + 0.5) / 100 -- Remove decimal places
+        tooltip = zo_strformat(GetString(SI_LUIE_SKILL_UNCHAINED_TP), duration, adjustPoints)
     end
     return tooltip
 end

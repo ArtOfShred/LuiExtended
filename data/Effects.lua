@@ -80,7 +80,6 @@ Effects.IsToggle = {
     [38965] = true, -- Blood Mist
 
     -- NPC Abilities
-    [53462] = true, -- Siphoning Strikes (Nightblade)
     [44258] = true, -- Magelight (Soulbrander)
 }
 
@@ -647,8 +646,7 @@ Effects.EffectGroundDisplay = {
     [97901] = { icon = 'LuiExtended/media/icons/abilities/ability_set_domihaus_stone.dds', buff = true, debuff = false, ground = true }, -- Domihaus (Domihaus)
     [97882] = { icon = 'LuiExtended/media/icons/abilities/ability_set_domihaus_fire.dds', buff = true, debuff = false, ground = true }, -- Domihaus (Domihaus)
     [97855] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_earthgore.dds', buff = true, debuff = false, ground = false }, -- Earthgore (Earthgore)
-    [80529] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris_shock.dds', buff = false, debuff = false, ground = true }, -- Ilambris (Ilambris)
-    [80527] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris_fire.dds', buff = false, debuff = false, ground = true }, -- Ilambris (Ilambris)
+    [80527] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris.dds', buff = false, debuff = false, ground = true }, -- Ilambris (Ilambris)
     [59587] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_lord_warden.dds', name = Abilities.Set_Lord_Warden_Dusk, buff = true, debuff = false, ground = false }, -- Lord Warden (Lord Warden)
     [59568] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds', name = Abilities.Set_Scourge_Harvester, buff = true, debuff = false, ground = false, tooltip = Tooltips.Set_Malubeth_Heal  }, -- Scourge Harvest (Malubeth)
     [59508] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maw_of_the_infernal.dds', name = Abilities.Set_Maw_of_the_Infernal, buff = true, debuff = false, ground = false }, -- Banished Cells Item Set (Maw of the Infernal)
@@ -739,9 +737,9 @@ Effects.EffectGroundDisplay = {
     [21976] = { buff = false, debuff = false, ground = true }, -- Nova (Nova)
     [22003] = { buff = false, debuff = false, ground = true }, -- Solar Prison (Solar Prison)
     [22001] = { buff = false, debuff = false, ground = true }, -- Solar Disturbance (Solar Disturbance)
-    [80540] = { icon = 'esoui/art/icons/ability_templar_cleansing_ritual.dds', buff = true, debuff = false, ground = false }, -- Cleansing Ritual (Cleansing Ritual)
-    [80547] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds', buff = true, debuff = false, ground = false }, -- Ritual of Retribution (Ritual of Retribution)
-    [80553] = { icon = 'esoui/art/icons/ability_templar_extended_ritual.dds', buff = true, debuff = false, ground = false }, -- Extended Ritual (Extended Ritual)
+    [22265] = { buff = true, debuff = false, ground = false }, -- Cleansing Ritual (Cleansing Ritual)
+    [22259] = { buff = true, debuff = false, ground = false }, -- Ritual of Retribution (Ritual of Retribution)
+    [22262] = { buff = true, debuff = false, ground = false }, -- Extended Ritual (Extended Ritual)
     --[22234] = { buff = true, debuff = false, ground = false }, -- Rune Focus (Rune Focus) -- TODO: Check this?
     --[22240] = { buff = true, debuff = false, ground = false }, -- Channeled Focus (Channeled Focus) -- TODO: Check this?
     --[22237] = { buff = true, debuff = false, ground = false }, -- Restoring Focus (Restoring Focus) -- TODO: Check this?
@@ -1215,9 +1213,9 @@ Effects.BarHighlightOverride = {
     [22253] = { newId = 35632 }, -- Honor the Dead
     [26209] = { newId = 88401 }, -- Restoring Aura --> Minor Magickasteal
     [26807] = { newId = 88401 }, -- Radiant Aura --> Minor Magickasteal
-    [22265] = { newId = 80540 }, -- Cleansing Ritual (Cleansing Ritual)
-    [22259] = { newId = 80547 }, -- Ritual of Retribution (Ritual of Retribution)
-    [22262] = { newId = 80553 }, -- Extended Ritual (Extended Ritual)
+    [22265] = { showFakeAura = true }, -- Cleansing Ritual (Cleansing Ritual)
+    [22259] = { showFakeAura = true }, -- Ritual of Retribution (Ritual of Retribution)
+    [22262] = { showFakeAura = true }, -- Extended Ritual (Extended Ritual)
 
     [22234] = { showFakeAura = true, noRemove = true }, -- Rune Focus
     [22240] = { newId = 37009 }, -- Channeled Focus
@@ -2647,6 +2645,9 @@ Effects.EffectHideSCT = {
     [45982] = true, -- Bash Stun
     [16825] = true, -- Off-Balance Exploit
 
+    -- Champion Points
+    [151861] = true, -- Shadowstrike
+
     -- Player - Weapons
     [18429] = true, -- Heavy Attack (Unarmed)
     [16041] = true, -- Heavy Attack (2H)
@@ -3012,27 +3013,6 @@ Effects.KeepUpgradeTooltip = {
     [Abilities.Keep_Upgrade_Food_Mage_Abilities]        = Tooltips.Keep_Upgrade_Food_Mage_Abilities,
     [Abilities.Keep_Upgrade_Food_Honor_Guard_Abilities] = Tooltips.Keep_Upgrade_Food_Honor_Guard_Abilities,
     [Abilities.Keep_Upgrade_Food_Guard_Abilities]       = Tooltips.Keep_Upgrade_Food_Guard_Abilities,
-}
-
--- TODO: Remove these tables
-Effects.PotionIconTable = {
-}
-
-Effects.PoisonIconTable = {
-}
-
-Effects.StatusEffectIconTable = {
-
-}
-
-Effects.MajorMinorIconTable = {
-    [76617] = { icon = 'esoui/art/icons/ability_buff_minor_erosion.dds', normalize = 'esoui/art/icons/ability_warrior_025.dds' }, -- Minor Slayer
-    [93109] = { icon = 'esoui/art/icons/ability_buff_major_erosion.dds', normalize = 'esoui/art/icons/procs_006.dds' }, -- Major Slayer
-    [76618] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_aegis.dds', normalize = 'esoui/art/icons/ability_warrior_030.dds' }, -- Minor Aegis
-    [93123] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_aegis.dds', normalize = 'esoui/art/icons/procs_004.dds' }, -- Major Aegis
-    [88490] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds', normalize = 'esoui/art/icons/achievement_031.dds' }, -- Minor Toughness
-    [147417] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_courage.dds', normalize = 'esoui/art/icons/u26_skyrim_world_boss_daily1.dds' }, -- Minor Courage
-    [109966] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds', normalize = 'esoui/art/icons/u26_skyrim_world_boss_daily30.dds' }, -- Major Courage
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -3673,10 +3653,9 @@ Effects.EffectOverride = {
     [84502] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_grothdarr.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1 }, -- Grothdarr (Grothdarr)
     [80562] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_iceheart.dds', tooltip = Tooltips.Set_Iceheart }, -- Iceheart (Iceheart)
     [80561] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_iceheart.dds' }, -- Iceheart (Iceheart)
-    [80529] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris_shock.dds', tooltip = Tooltips.Set_Ilambris_Shock }, -- Ilambris (Ilambris)
-    [80526] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris_shock.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Shock, tooltipValue2 = 1 }, -- Ilambris (Ilambris)
-    [80527] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris_fire.dds', tooltip = Tooltips.Set_Ilambris_Fire }, -- Ilambris (Ilambris)
-    [80525] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris_fire.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1 }, -- Ilambris (Ilambris)
+    [80527] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris.dds', tooltip = Tooltips.Set_Ilambris }, -- Ilambris (Ilambris)
+    [80526] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris.dds', groundLabel = true, tooltip = Tooltips.Set_Ilambris_Ground, tooltipValue2 = 1 }, -- Ilambris (Ilambris)
+    [80525] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ilambris.dds' }, -- Ilambris (Ilambris)
     [83405] = { icon = 'LuiExtended/media/icons/abilities/ability_set_infernal_guardian.dds', hide = true }, -- Infernal Guardian (Infernal Guardian)
     [83409] = { icon = 'LuiExtended/media/icons/abilities/ability_set_infernal_guardian.dds' }, -- Infernal Guardian (Infernal Guardian)
 
@@ -3822,8 +3801,6 @@ Effects.EffectOverride = {
     [121913] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_love.dds', tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Honor's Love (Coldharbour's Favorite)
     [123717] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vastaries_tutelage.dds', tooltip = Tooltips.Set_Vastaries_Tutelage }, -- Vastarie's Tutelage (Vastarie's Tutelage)
     [123715] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vastaries_tutelage.dds', tooltip = Tooltips.Set_Vastaries_Tutelage }, -- Vastarie's Tutelage (Vastarie's Tutelage)
-
-    --[134254] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dauntless_combatant_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Dauntless_Combatant, Abilities.Set_Cooldown), tooltip = Tooltips.Generic_Set_ICD, tooltipValue2 = Abilities.Set_Dauntless_Combatant, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Winded (Dauntless Combatant's)
 
     [141916] = { icon = 'LuiExtended/media/icons/abilities/ability_set_stuhns_favor.dds', tooltip = Tooltips.Set_Stuhns_Favor, tooltipValue2 = 5312 }, -- Stuhn's Favor (Stuhn's)
     [135919] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds' }, -- Spell Parasite (Spell Parasite's)
@@ -4241,9 +4218,9 @@ Effects.EffectOverride = {
     [63569] = { tooltip = Tooltips.Skill_Major_Gallop }, -- Major Gallop
     [61708] = { tooltip = Tooltips.Skill_Minor_Heroism }, -- Minor Heroism
     [61709] = { tooltip = Tooltips.Skill_Major_Heroism }, -- Major Heroism
-    [88490] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds', tooltip = Tooltips.Skill_Minor_Toughness }, -- Minor Toughness
-    [147417] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_courage.dds', tooltip = Tooltips.Skill_Minor_Courage }, -- Minor Courage
-    [109966] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds', tooltip = Tooltips.Skill_Major_Courage }, -- Major Courage
+    [88490] = { tooltip = Tooltips.Skill_Minor_Toughness }, -- Minor Toughness
+    [147417] = { tooltip = Tooltips.Skill_Minor_Courage }, -- Minor Courage
+    [109966] = { tooltip = Tooltips.Skill_Major_Courage }, -- Major Courage
 
     -- Major / Minor Debuffs
     [61742] = { tooltip = Tooltips.Skill_Minor_Breach }, -- Minor Breach
@@ -4268,10 +4245,10 @@ Effects.EffectOverride = {
     [145977] = { tooltip = Tooltips.Skill_Major_Brittle }, -- Major Brittle (Unused)
 
     -- Slayer / Aegis
-    [76618] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_aegis.dds', tooltip = Tooltips.Skill_Minor_Aegis }, -- Minor Aegis
-    [93123] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_aegis.dds', tooltip = Tooltips.Skill_Major_Aegis }, -- Major Aegis
-    [76617] = { icon = 'esoui/art/icons/ability_buff_minor_erosion.dds', tooltip = Tooltips.Skill_Minor_Slayer }, -- Minor Slayer
-    [93109] = { icon = 'esoui/art/icons/ability_buff_major_erosion.dds', tooltip = Tooltips.Skill_Major_Slayer }, -- Major Slayer
+    [76618] = { tooltip = Tooltips.Skill_Minor_Aegis }, -- Minor Aegis
+    [93123] = { tooltip = Tooltips.Skill_Major_Aegis }, -- Major Aegis
+    [76617] = { tooltip = Tooltips.Skill_Minor_Slayer }, -- Minor Slayer
+    [93109] = { tooltip = Tooltips.Skill_Major_Slayer }, -- Major Slayer
 
     -- Empower
     [61737] = { tooltip = Tooltips.Skill_Empower }, -- Empower
@@ -4282,15 +4259,19 @@ Effects.EffectOverride = {
 
     -- Craft
     [152360] = { hide = true }, -- Friends in Low Places
+    [151861] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_thief_shadowstrike.dds' }, -- Shadowstrike
     [151860] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_thief_shadowstrike.dds', tooltip = Tooltips.Champion_Shadowstrike }, -- Shadowstrike
 
     -- Warfare
-    [59530] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_foresight.dds', tooltip = Tooltips.Champion_Foresight }, -- Foresight
-    [60230] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_riposte.dds' }, -- Riposte
-    [135653] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_reinforced.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Reinforced
+    [156012] = { tooltip = Tooltips.Champion_Enlivening_Overflow }, -- Enlivening Overflow
+    [156020] = { tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- From the Brink
+    [59530] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warfare_foresight.dds', tooltip = Tooltips.Champion_Foresight }, -- Foresight
+    [60230] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warfare_riposte.dds' }, -- Riposte
+    [135653] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warfare_reinforced.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Reinforced
 
     -- Fitness
-    [98316] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warrior_unchained.dds', tooltip = Tooltips.Champion_Unchained }, -- Unchained
+    [134254] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_fitness_winded.dds', tooltip = Tooltips.Champion_Winded, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Winded
+    [98316] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_fitness_unchained.dds', dynamicTooltip = true }, -- Unchained
 
     ----------------------------------------------------------------
     -- PLAYER ABILITIES - BASIC ------------------------------------
@@ -5183,11 +5164,11 @@ Effects.EffectOverride = {
     -- Cleansing Ritual / Ritual of Retribution / Extended Ritual
     [44013] = { icon = 'esoui/art/icons/ability_templar_cleansing_ritual.dds' }, -- Purify (Cleansing Ritual - Purify Synergy)
     [26286] = { name = Abilities.Skill_Cleansing_Ritual, groundLabel = true, tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 2 }, -- Healing Ritual (Cleansing Ritual)
-    [80540] = { icon = 'esoui/art/icons/ability_templar_cleansing_ritual.dds', tooltip = Tooltips.Skill_Cleansing_Ritual }, -- Cleansing Ritual (Cleansing Ritual)
+    [22265] = { tooltip = Tooltips.Skill_Cleansing_Ritual }, -- Cleansing Ritual (Cleansing Ritual)
     [80172] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 2 }, -- Ritual of Retribution (Ritual of Retribution)
-    [80547] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds', tooltip = Tooltips.Skill_Ritual_of_Retribution }, -- Ritual of Retribution (Ritual of Retribution)
+    [22259] = { tooltip = Tooltips.Skill_Ritual_of_Retribution }, -- Ritual of Retribution (Ritual of Retribution)
     [26303] = { icon = 'esoui/art/icons/ability_templar_extended_ritual.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 2 }, -- Extended Ritual (Extended Ritual)
-    [80553] = { icon = 'esoui/art/icons/ability_templar_extended_ritual.dds', tooltip = Tooltips.Skill_Cleansing_Ritual }, -- Extended Ritual (Extended Ritual)
+    [22262] = { tooltip = Tooltips.Skill_Cleansing_Ritual }, -- Extended Ritual (Extended Ritual)
 
     -- Rune Focus / Channeled Focus / Restoring Focus
     [112145] = { name = Abilities.Skill_Rune_Focus, tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 2640, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Rune Focus)
@@ -7009,7 +6990,6 @@ Effects.EffectOverride = {
     [44349] = { icon = 'esoui/art/icons/ability_nightblade_018_a.dds' }, -- Soul Tether (Nightblade - Elite)
     [44352] = { icon = 'esoui/art/icons/ability_nightblade_018_a.dds', hideReduce = true, tooltip = Tooltips.Skill_Soul_Tether_NPC }, -- Soul Tether (Nightblade - Elite)
     [44350] = { icon = 'esoui/art/icons/ability_nightblade_018_a.dds', tooltip = Tooltips.Skill_Soul_Tether_NPC }, -- Soul Tether (Nightblade - Elite)
-    [53462] = { icon = 'esoui/art/icons/ability_nightblade_003.dds', tooltip = Tooltips.Skill_Siphoning_Strikes_NPC }, -- Siphoning Strikes (Nightblade - Elite)
 
     -- Archer
     [37108] = { icon = 'esoui/art/icons/ability_bow_005.dds' }, -- Arrow Spray (Archer)
@@ -12820,7 +12800,6 @@ Effects.AddGroundDamageAura = {
     [97857] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Earthgore (Earthgore)
     [84502] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Grothdarr (Grothdarr)
     [80526] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Ilambris
-    [80525] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Ilambris
     [81038] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Sentinel of Rkugamz
     [59498] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Spawn of Mephala
     [80522] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Stormfist

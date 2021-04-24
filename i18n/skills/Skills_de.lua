@@ -213,9 +213,16 @@ local strings = {
     -- CHAMPION POINT SKILLS ---------------------------------------
     ----------------------------------------------------------------
 
+    -- Craft
     SI_LUIE_SKILL_SHADOWSTRIKE_TP =                      "Invisible for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nWhile under this effect you can cast Blade of Woe.",
+
+    -- Warfare
+    SI_LUIE_SKILL_ENLIVENING_OVERFLOW_TP =               "Increase Health, Magicka, and Stamina Recovery by |cFFFFFF0.5|r% of the casters Max Magicka, up to a cap of |cFFFFFF150|r, for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_FORESIGHT_TP =                         "Reduce the cost of your Magicka and Stamina healing abilities by |cFFFFFF75|r% for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_UNCHAINED_TP =                         "Reduce the cost of your next Stamina ability used within |cFFFFFF<<1>>|r seconds by |cFFFFFF11|r% per stage.",
+
+    -- Fitness
+    SI_LUIE_SKILL_UNCHAINED_TP =                         "Reduce the cost of your next Stamina ability used within |cFFFFFF<<1>>|r seconds by |cFFFFFF<<2>>|r%.",
+    SI_LUIE_SKILL_WINDED_TP =                            "You have recently benefitted from a reactive Break Free effect and may not do so again for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     ----------------------------------------------------------------
     -- GENERIC / SHARED TOOLTIPS -----------------------------------
@@ -927,7 +934,8 @@ local strings = {
     SI_LUIE_SKILL_SET_EARTHGORE =                        "Healing the lowest Health group member in the |cFFFFFF7|r meter pool every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_SET_GROTHDARR =                        "Enemies within |cFFFFFF8|r meters take Flame Damage every |cFFFFFF1|r second for |cFFFFFF5|r seconds.",
     SI_LUIE_SKILL_SET_ICEHEART =                         "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nEnemies within |cFFFFFF5|r meters take Frost Damage every |cFFFFFF1|r second while the damage shield holds.",
-    SI_LUIE_SKILL_SET_ILAMBRIS =                         "Enemies within |cFFFFFF4|r meters of the meteor shower take <<1>> Damage every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_SET_ILAMBRIS =                         "Enemies within |cFFFFFF4|r meters of the meteor shower take Flame Damage and Shock Damage every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_SET_ILAMBRIS_GROUND =                  "Taking Flame and Shock Damage every |cFFFFFF<<2>>|r <<2[second/seconds]>>.",
     SI_LUIE_SKILL_SET_LORD_WARDEN_BUFF =                 "You and group members within |cFFFFFF8|r meters of the shadow orb gain |cFFFFFF3180|r Physical and Spell Resistance.",
     SI_LUIE_SKILL_SET_MALUBETH_DAMAGE =                  "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds while the beam holds.\n\nYour attacker heals for |cFFFFFF100|r% of the damage done.",
     SI_LUIE_SKILL_SET_MALUBETH_HEAL =                    "Restoring Health every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds while the beam holds.",
@@ -1162,7 +1170,6 @@ local strings = {
     SI_LUIE_SKILL_CLEAVE_STANCE_TP =                     "Cleaving with wild abandon for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_DEFENSIVE_WARD_TP =                    "Reduce damage taken by |cFFFFFF75|r% for |cFFFFFF<<1>>|r seconds as long as the channel is maintained.",
     SI_LUIE_SKILL_SOUL_TETHER_NPC_TP =                   "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF8|r seconds.\n\nStunned for |cFFFFFF2|r seconds.",
-    SI_LUIE_SKILL_SIPHONING_STRIKES_NPC_TP =             "Your attacks heal you while this ability is toggled on.",
     --SI_LUIE_SKILL_FOCUSED_HEALING_TP =                   "Healing every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds while the channel is maintained.\n\nHealing doubles in power after |cFFFFFF2|r seconds.",
     SI_LUIE_SKILL_RITE_OF_PASSAGE_NPC_TP =               "Reduce damage taken by |cFFFFFF80|r% while the channel is maintained.",
     SI_LUIE_SKILL_INJECT_LARVA_TP =                      "You have been injected with a wasp larva. At the end of its |cFFFFFF<<1>>|r second gestation, it will burst out of you, dealing Physical Damage and spawning a Young Wasp.",

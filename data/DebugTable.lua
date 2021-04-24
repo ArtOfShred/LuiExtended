@@ -1230,7 +1230,6 @@ LUIE.DebugAuras = {
     [147746] = true, -- Major Maim (Vateshran 1H)
     [147828] = true, -- Wrath of Elements (Vateshran Destruction Staff)
     [147843] = true, -- Wrath of Elements (Vateshran Destruction Staff)
-    [147858] = true, -- Wrath of Elements (Vateshran Destruction Staff)
     [149413] = true, -- Wrath of Elements (Vateshran Destruction Staff)
     [147847] = true, -- Wrath of Elements (Vateshran Destruction Staff)
     [147844] = true, -- Wrath of Elements (Vateshran Destruction Staff)
@@ -1289,10 +1288,8 @@ LUIE.DebugAuras = {
     [80563] = true, -- Iceheart
 
     [80524] = true, -- Ilambris
-    [140516] = true, -- Ilambris
-    [80529] = true, -- Ilambris
-    [80526] = true, -- Ilambris
     [80527] = true, -- Ilambris
+    [80526] = true, -- Ilambris
     [80525] = true, -- Ilambris
 
     [81687] = true, -- Infernal Guardian
@@ -1656,7 +1653,6 @@ LUIE.DebugAuras = {
     [134103] = true, -- Dauntless Combatant (Dauntless Combatant's)
     [134104] = true, -- Dauntless Combatant (Dauntless Combatant's)
     [134119] = true, -- Dauntless Combatant (Dauntless Combatant's)
-    [134254] = true, -- Winded (Dauntless Combatant's)
 
     [134090] = true, -- Unchained Aggressor (Unchained Aggressor's)
     [134094] = true, -- Major Berserk (Unchained Aggressor's)
@@ -2176,7 +2172,6 @@ LUIE.DebugAuras = {
 
     [141203] = true, -- Unleashed Terror (Unleashed)
     [141204] = true, -- Unleashed Terror (Unleashed)
-    [141249] = true, -- Unleashed Terror Cooldown (Unleashed)
 
     [142686] = true, -- Kraglen's Howl (Kraglen's)
     [142687] = true, -- Kraglen's Howl (Kraglen's)
@@ -2744,21 +2739,36 @@ LUIE.DebugAuras = {
     -- CHAMPION POINTS ------------------
     -------------------------------------
 
+    -------------------------------------
     -- Craft
+    -------------------------------------
+
+    -- Passives
     [142205] = true, -- Breakfall
     --[142232] = true, -- Soul Reservoir
     --[142206] = true, -- Wanderer
     --[142206] = true, -- Wanderer
     --[142207] = true, -- Fortune's Favor
     --[152371] = true, -- Fortune's Favor
-    --[142210] = true, -- Haggler
-    [142213] = true, -- Friends in Low Places
-    [152360] = true, -- Friends in Low Places
-    [142203] = true, -- Fleet Phantom
+    [142210] = true, -- Gilded Fingers
     [142204] = true, -- Out of Sight
-    [142208] = true, -- Inspiration Boost
+    [142203] = true, -- Fleet Phantom
     --[142211] = true, -- Steadfast Enchantment
     --[152367] = true, -- Steadfast Enchantment
+    [142208] = true, -- Inspiration Boost
+
+    -- Slottables
+    [142213] = true, -- Friends in Low Places
+    [152360] = true, -- Friends in Low Places
+    --[142215] = true, -- Infamous
+    [142219] = true, -- Shadowstrike
+    [151862] = true, -- Shadowstrike
+    --[151861] = true, -- Shadowstrike
+    [151860] = true, -- Shadowstrike
+    [151859] = true, -- Clairvoyance Fx
+    [142235] = true, -- Cutpurse's Art
+    [142228] = true, -- Fade Away
+    --[152310] = true, -- Fade Away
     --[142224] = true, -- Meticulous Disassembly
     --[142225] = true, -- Meticulous Disassembly
     --[142226] = true, -- Meticulous Disassembly
@@ -2767,58 +2777,59 @@ LUIE.DebugAuras = {
     --[142217] = true, -- Master Gatherer
     --[152372] = true, -- Master Gatherer
     [149286] = true, -- Gifted Rider
-    [142228] = true, -- Fade Away
-    --[152310] = true, -- Fade Away
-    --[142215] = true, -- Infamous
-    [142219] = true, -- Shadowstrike
-    [151862] = true, -- Shadowstrike
-    --[151861] = true, -- Shadowstrike
-    [151860] = true, -- Shadowstrike
-    [151859] = true, -- Clairvoyance Fx
-    [142235] = true, -- Cutpurse's Art
+    [142223] = true, -- War Mount
     [142220] = true, -- Plentiful Harvest
     --[142236] = true, -- Homemaker
-
+    --[142233] = true, -- Reel Technique
+    [142234] = true, -- Angler's Instincts
+    --[142231] = true, -- Liquid Efficiency
     [142230] = true, -- Rationer
     --[152373] = true, -- Rationer
     [142125] = true, -- Steed's Blessing
     [142123] = true, -- Sustaining Shadows
     --[142121] = true, -- Professional Upkeep
-    --[152369] = true, -- Professional Upkeep
 
+    -------------------------------------
     -- Warfare
+    -------------------------------------
+
+    -- Passive
     [149305] = true, -- Eldritch Insight
     [141898] = true, -- Precision
     [147888] = true, -- Tireless Discipline
     --[149439] = true, -- Blessed
-    [141998] = true, -- Soothing Tide
-    [142000] = true, -- Focused Mending
-    [142002] = true, -- Swift Renewal
+    --[141928] = true, -- Blessed
     [141929] = true, -- Quick Recovery
     [141901] = true, -- Preparation
     [149273] = true, -- Elemental Aegis
     [149274] = true, -- Hardy
-    [141900] = true, -- Resilience
     [141895] = true, -- Piercing
     [141931] = true, -- War Mage
     [149276] = true, -- Battle Mastery
     [141930] = true, -- Mighty
     --[149275] = true, -- Flawless Ritual
-    [141999] = true, -- Deadly Aim
-    [141997] = true, -- Biting Aura
-    [142001] = true, -- Thaumaturge
-    [141899] = true, -- Fighting Finesse
-    [142006] = true, -- Backstabber
-    [141941] = true, -- Wrathful Strikes
-    [142007] = true, -- Reaving Blows
-    [142008] = true, -- Reaving Blows
-    [142010] = true, -- Occult Overload
-    [142011] = true, -- Occult Overload
+
+    -- Slottable
+    [155992] = true, -- Hope Infusion
+    [155993] = true, -- Minor Heroism
+    [155996] = true, -- Hope Infusion
+    [155978] = true, -- Salve of Renewal
+    [155981] = true, -- Salve of Renewal
+    [156017] = true, -- From the Brink
+    [156020] = true, -- From the Brink
+    [156019] = true, -- From the Brink
+    [156008] = true, -- Enlivening Overflow
+    [156012] = true, -- Enlivening Overflow
+    [156011] = true, -- Enlivening Overflow
+    [141998] = true, -- Soothing Tide
+    [142000] = true, -- Focused Mending
+    [142002] = true, -- Swift Renewal
     [141942] = true, -- Rejuvenator
     [59526] = true, -- Foresight
     [59530] = true, -- Foresight
     [142003] = true, -- Cleansing Revival
     --[142005] = true, -- Cleansing Revival
+    [141900] = true, -- Resilience
     [151749] = true, -- Duelist's Rebuff
     [151748] = true, -- Unassailable
     [151750] = true, -- Enduring Resolve
@@ -2831,49 +2842,67 @@ LUIE.DebugAuras = {
     [65133] = true, -- Major Heroism
     [142012] = true, -- Cutting Defense
     [142013] = true, -- Cutting Defense
+    [155859] = true, -- Weapons Expert
+    [141999] = true, -- Deadly Aim
+    [141997] = true, -- Biting Aura
+    [142001] = true, -- Thaumaturge
+    [92134] = true, -- Master-at-Arms
+    [141899] = true, -- Fighting Finesse
+    [142006] = true, -- Backstabber
+    [141941] = true, -- Wrathful Strikes
+    [142007] = true, -- Reaving Blows
+    [142008] = true, -- Reaving Blows
+    [142010] = true, -- Occult Overload
+    [142011] = true, -- Occult Overload
     [141744] = true, -- Arcane Supremacy
     [146960] = true, -- Untamed Aggression
     [141773] = true, -- Endless Endurance
 
+    -------------------------------------
     -- Fitness
+    -------------------------------------
+
+    -- Passive
     [142079] = true, -- Sprinter
     [142083] = true, -- Hasty
-    [142080] = true, -- Tireless Guardian
-    [142081] = true, -- Savage Defense
-    [142091] = true, -- Bashing Brutality
-    [142088] = true, -- Nimble Protector
-    [142086] = true, -- Fortification
-    [142077] = true, -- Tumbling
-    [149624] = true, -- Defiance
+    --[147889] = true, -- Hero's Vigor
     --[149311] = true, -- Hero's Vigor
     --[142096] = true, -- Mystic Tenacity
+    [142077] = true, -- Tumbling
+    [149624] = true, -- Defiance
     [142089] = true, -- Piercing Gaze
+    [142080] = true, -- Tireless Guardian
+    [142081] = true, -- Savage Defense
+    [142088] = true, -- Nimble Protector
+    [142086] = true, -- Fortification
     --[142109] = true, -- Tempered Soul
-    [142100] = true, -- Spirit Mastery
+    [142091] = true, -- Bashing Brutality
 
+    -- Slottable
     [142111] = true, -- On Guard
     [142115] = true, -- Rousing Speed
     [142092] = true, -- Expert Evasion
     --[142093] = true, -- Expert Evasion
-    [151113] = true, -- Expert Evasion
-
+    --[151113] = true, -- Expert Evasion
+    [142110] = true, -- Juggernaut
+    [141993] = true, -- Bloody Renewal
+    [141994] = true, -- Bloody Renewal
+    [141991] = true, -- Siphoning Spells
+    [141992] = true, -- Siphoning Spells
+    [141995] = true, -- Stategic Reserve
+    [149283] = true, -- Shield Master
+    [142100] = true, -- Spirit Mastery
+    --[142102] = true, -- Survival Instincts
+    [142090] = true, -- Bastion
+    [142113] = true, -- Arcane Alacrity
     [142099] = true, -- Hardened
     [142097] = true, -- Peace of Mind
     [142094] = true, -- Slippery
     [145804] = true, -- Slippery
     [142095] = true, -- Slippery
+    [134254] = true, -- Winded
     --[149282] = true, -- Unchained
     [98316] = true, -- Unchained
-    [142110] = true, -- Juggernaut
-    --[142102] = true, -- Survival Instincts
-    [149283] = true, -- Shield Master
-    [142090] = true, -- Bastion
-    [142113] = true, -- Arcane Alacrity
-    [141995] = true, -- Stategic Reserve
-    [141991] = true, -- Siphoning Spells
-    [141992] = true, -- Siphoning Spells
-    [141993] = true, -- Bloody Renewal
-    [141994] = true, -- Bloody Renewal
     [142034] = true, -- Boundless Vitality
     [142035] = true, -- Ironclad
     [142074] = true, -- Rejuvenation
@@ -2973,7 +3002,6 @@ LUIE.DebugAuras = {
     -- The Atronach
     --[92424] = true, -- Physical Weapon Expert (The Atronach)
     --[60662] = true, -- Shattering Blows (The Atronach)
-    --[92134] = true, -- Master-at-Arms Expert (The Atronach)
     --[60503] = true, -- Staff Expert (The Atronach)
     --[63104] = true, -- Retaliation (The Atronach 10 - Retaliation)
     --[63106] = true, -- Retaliation (The Atronach 10 - Retaliation)
@@ -3453,11 +3481,9 @@ LUIE.DebugAuras = {
     [70735] = true, -- Shifting Standard (Shifting Standard)
     [32960] = true, -- Shifting Standard (Shifting Standard)
     [32961] = true, -- Major Defile (Shifting Standard)
-    [102370] = true, -- Shackle Synergy Anchor (Shifting Standard)
     [32962] = true, -- Shifting Standard (Shifting Standard)
     [32963] = true, -- Shift Standard (Shifting Standard)
     [100100] = true, -- Shift Standard (Shifting Standard)
-    [102376] = true, -- Shackle Synergy Anchor (Shifting Standard)
     [32966] = true, -- Shifting Standard (Shifting Standard)
     [32964] = true, -- Shifting Standard (Shifting Standard)
     [32965] = true, -- Major Deflie (Shifting Standard)
@@ -3467,7 +3493,6 @@ LUIE.DebugAuras = {
     [32947] = true, -- Standard of Might (Standard of Might)
     [32948] = true, -- Standard of Might (Standard of Might)
     [32949] = true, -- Major Defile (Standard of Might)
-    [102413] = true, -- Shackle Synergy Anchor (Standard of Might)
     [32950] = true, -- Standard of Might (Standard of Might)
 
     [20319] = true, -- Spiked Armor (Spiked Armor)
@@ -4349,17 +4374,14 @@ LUIE.DebugAuras = {
     [65711] = true, -- Only 1 Lightning Splash (Lightning Splash - All Morphs)
 
     [23182] = true, -- Lightning Splash (Lightning Splash)
-    [23195] = true, -- Lightning Splash (Lightning Splash)
     [23194] = true, -- Lightning Splash (Lightning Splash)
     [23189] = true, -- Lightning Splash (Lightning Splash)
 
     [23200] = true, -- Liquid Lightning (Liquid Lightning)
-    [23204] = true, -- Lightning Splash (Liquid Lightning)
     [23203] = true, -- Lightning Splash (Liquid Lightning)
     [23202] = true, -- Liquid Lightning (Liquid Lightning)
 
     [23205] = true, -- Lightning Flood (Lightning Flood)
-    [23209] = true, -- Lightning Splash (Lightning Flood)
     [23206] = true, -- Lightning Splash (Lightning Flood)
     [23208] = true, -- Lightning Flood (Lightning Flood)
 
@@ -4538,15 +4560,11 @@ LUIE.DebugAuras = {
     [26190] = true, -- Spear Shards (Spear Shards)
     [95932] = true, -- Spear Shards (Spear Shards)
     [95933] = true, -- Spear Shards (Spear Shards)
-    [26189] = true, -- Spear Shards (Spear Shards)
-    [26191] = true, -- Spear Shards (Spear Shards)
     [26827] = true, -- Spear Shards (Spear Shards)
     [26192] = true, -- Spear Shards (Spear Shards)
     [95931] = true, -- Spear Shards (Spear Shards)
 
     [108821] = true, -- Synergy Damage Bonus (Luminous Shards - All Ranks)
-    [95928] = true, -- Holy Shards (Luminous Shards - All Ranks)
-    [95927] = true, -- Holy Shards (Luminous Shards - All Ranks)
     [95926] = true, -- Holy Shards (Luminous Shards - All Ranks)
     [95925] = true, -- Holy Shards (Luminous Shards - All Ranks)
     [95924] = true, -- Spear Shards / Necrotic Orb CD (Luminous Shards - All Ranks)
@@ -4554,8 +4572,6 @@ LUIE.DebugAuras = {
     [26860] = true, -- Luminous Shards (Luminous Shards)
     [95956] = true, -- Luminous Shards (Luminous Shards)
     [95957] = true, -- Luminous Shards (Luminous Shards)
-    [26865] = true, -- Luminous Shards (Luminous Shards)
-    [26861] = true, -- Luminous Shards (Luminous Shards)
     [26863] = true, -- Luminous Shards (Luminous Shards)
     [26859] = true, -- Luminous Shards (Luminous Shards)
     [95955] = true, -- Luminous Shards (Luminous Shards)
@@ -4564,8 +4580,6 @@ LUIE.DebugAuras = {
     [26878] = true, -- Blazing Spear (Blazing Spear)
     [44445] = true, -- Blazing Spear (Blazing Spear)
     [26880] = true, -- Blazing Spear (Blazing Spear)
-    [26877] = true, -- Blazing Spear (Blazing Spear)
-    [26872] = true, -- Blazing Spear (Blazing Spear)
     [26874] = true, -- Blazing Spear (Blazing Spear)
     [26871] = true, -- Blazing Spear (Blazing Spear)
     [26879] = true, -- Blazing Spear (Blazing Spear)
@@ -4692,7 +4706,6 @@ LUIE.DebugAuras = {
     [21976] = true, -- Nova (Nova)
     [21753] = true, -- Nova (Nova)
     [21754] = true, -- Nova (Nova)
-    [102755] = true, -- Supernova Synergy Anchor (Nova)
     [31537] = true, -- Super Nova (Nova)
 
     [108823] = true, -- Synergy Damage Bonus (Solar Prison - All Ranks)
@@ -4707,7 +4720,6 @@ LUIE.DebugAuras = {
     [22003] = true, -- Solar Prison (Solar Prison)
     [21756] = true, -- Solar Prison (Solar Prison)
     [21757] = true, -- Solar Prison (Solar Prison)
-    [102780] = true, -- Supernova Synergy Anchor (Solar Prison)
     [31598] = true, -- Super Nova (Solar Prison)
 
     [21758] = true, -- Solar Disturbance (Solar Disturbance)
@@ -4715,7 +4727,6 @@ LUIE.DebugAuras = {
     [22001] = true, -- Solar Disturbance (Solar Disturbance)
     [21759] = true, -- Solar Disturbance (Solar Disturbance)
     [21760] = true, -- Solar Disturbance (Solar Disturbance)
-    [102776] = true, -- Supernova Synergy Anchor (Solar Disturbance)
     [31597] = true, -- Super Nova (Solar Disturbance)
 
     [22250] = true, -- Rushed Ceremony (Rushed Ceremony)
@@ -4762,23 +4773,17 @@ LUIE.DebugAuras = {
     [22265] = true, -- Cleansing Ritual (Cleansing Ritual)
     [26286] = true, -- Healing Ritual (Cleansing Ritual)
     [26290] = true, -- Clensing Ritual Dummy (Cleansing Ritual)
-    [26287] = true, -- Healing Ritual (Cleansing Ritual)
-    [80540] = true, -- Cleansing Ritual (Cleansing Ritual)
     [26295] = true, -- Purify (Cleansing Ritual)
 
     [22259] = true, -- Ritual of Retribution (Ritual of Retribution)
     [143432] = true, -- Ritual of Retribution (Ritual of Retribution)
     [80172] = true, -- Ritual of Retribution (Ritual of Retribution)
     [26299] = true, -- Ritual of Retribution (Ritual of Retribution)
-    [26301] = true, -- Ritual of Retribution (Ritual of Retribution)
-    [80547] = true, -- Ritual of Retribution (Ritual of Retribution)
     [26300] = true, -- Purify (Ritual of Retribution)
 
     [22262] = true, -- Extended Ritual (Extended Ritual)
     [26303] = true, -- Extended Ritual (Extended Ritual)
     [26304] = true, -- Clensing Ritual Dummy (Extended Ritual)
-    [26306] = true, -- Extended Ritual (Extended Ritual)
-    [80553] = true, -- Extended Ritual (Extended Ritual)
     [26305] = true, -- Purify (Extended Ritual)
 
     [22236] = true, -- Major Resolve (Rune Focus)
@@ -5301,13 +5306,10 @@ LUIE.DebugAuras = {
     [115571] = true, -- Grave Robber (Boneyard - Grave Robber Synergy)
     [115572] = true, -- Grave Robber (Boneyard - Grave Robber Synergy)
     [115573] = true, -- Grave Robber (Boneyard - Grave Robber Synergy)
-    [118945] = true, -- Grave Robber (Boneyard - Grave Robber Synergy)
-    [118946] = true, -- Grave Robber (Boneyard - Grave Robber Synergy)
     [115548] = true, -- Grave Robber (Boneyard - Grave Robber Synergy)
 
     [115252] = true, -- Boneyard (Boneyard)
     [115255] = true, -- Boneyard (Boneyard)
-    [115542] = true, -- Boneyard (Boneyard)
     [115279] = true, -- Boneyard (Boneyard)
     [117089] = true, -- Boneyard (Boneyard)
     [115254] = true, -- Boneyard (Boneyard)
@@ -5315,7 +5317,6 @@ LUIE.DebugAuras = {
 
     [117805] = true, -- Unnerving Boneyard (Unnerving Boneyard)
     [117807] = true, -- Unnerving Boneyard (Unnerving Boneyard)
-    [117814] = true, -- Unnerving Boneyard (Unnerving Boneyard)
     [117808] = true, -- Unnerving Boneyard (Unnerving Boneyard)
     [117810] = true, -- Unnerving Boneyard (Unnerving Boneyard)
     [117809] = true, -- Unnerving Boneyard (Unnerving Boneyard)
@@ -5324,7 +5325,6 @@ LUIE.DebugAuras = {
 
     [117850] = true, -- Avid Boneyard (Avid Boneyard)
     [117852] = true, -- Avid Boneyard (Avid Boneyard)
-    [117859] = true, -- Avid Boneyard (Avid Boneyard)
     [117853] = true, -- Avid Boneyard (Avid Boneyard)
     [117855] = true, -- Avid Boneyard (Avid Boneyard)
     [117854] = true, -- Avid Boneyard (Avid Boneyard)
@@ -5445,14 +5445,12 @@ LUIE.DebugAuras = {
     [115093] = true, -- Bone Totem (Bone Totem)
     [115095] = true, -- Bone Totem (Bone Totem)
     [115097] = true, -- Minor Protection (Bone Totem)
-    [115129] = true, -- Bone Totem (Bone Totem)
     [115107] = true, -- Bone Totem (Bone Totem)
     [115106] = true, -- Bone Totem (Bone Totem)
 
     [118380] = true, -- Remote Totem (Remote Totem)
     [118381] = true, -- Remote Totem (Remote Totem)
     [118385] = true, -- Minor Protection (Remote Totem)
-    [118382] = true, -- Remote Totem (Remote Totem)
     [118383] = true, -- Remote Totem (Remote Totem)
     [118386] = true, -- Remote Totem (Remote Totem)
 
@@ -5465,9 +5463,7 @@ LUIE.DebugAuras = {
     [118404] = true, -- Agony Totem (Agony Totem)
     [118405] = true, -- Agony Totem (Agony Totem)
     [118409] = true, -- Minor Protection (Agony Totem)
-    [118406] = true, -- Agony Totem (Agony Totem)
     [118407] = true, -- Agony Totem (Agony Totem)
-    [118449] = true, -- Agony Totem (Agony Totem)
     [118411] = true, -- Agony Totem (Agony Totem)
     [118614] = true, -- Agony Totem (Agony Totem)
 
@@ -5731,9 +5727,7 @@ LUIE.DebugAuras = {
     [38802] = true, -- Rally (Rally)
     [62415] = true, -- Major Brutality (Rally)
     [126537] = true, -- Minor Endurance (Rally)
-    [60894] = true, -- Heal Buffer (Rally)
     [60895] = true, -- Heal Buff (Rally)
-    [60996] = true, -- Buff Remover (Rally)
     [38805] = true, -- Rally (Rally)
 
     [83216] = true, -- Berserker Strike (Berserker Strike)
@@ -8642,8 +8636,6 @@ LUIE.DebugAuras = {
     [44350] = true, -- Soul Tether -- Nightblade
     [44346] = true, -- Soul Tether -- Nightblade
     [137661] = true, -- Soul Tether -- Nightblade
-    [53462] = true, -- Siphoning Strikes
-    [53469] = true, -- Leeching Strikes
 
     [37108] = true, -- Arrow Spray -- Archer
     [37109] = true, -- Arrow Spray -- Archer
