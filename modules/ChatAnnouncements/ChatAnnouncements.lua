@@ -2072,12 +2072,15 @@ local LUIE_AttributeDisplayType = {
     [RESPEC_TYPE_MORPHS] = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_MORPHS),
 }
 
+-- Called by various functions to display a respec message, type serves as the message type, delay allows the message to sync timing with the chat printer based on source.
 function ChatAnnouncements.PointRespecDisplay(respecType)
     local message = LUIE_AttributeDisplayType[respecType] .. "."
     local messageCSA = LUIE_AttributeDisplayType[respecType]
 
     if ChatAnnouncements.SV.Notify.NotificationRespecCA then
-        printToChat(message, true)
+        g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE", isSystem = true }
+        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+        eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
     end
 
     if ChatAnnouncements.SV.Notify.NotificationRespecCSA then
@@ -4465,9 +4468,13 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                         logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeploy
                         flag = true
                     end
-                    -- If this is a respec scroll, manually call an announcement for it if enabled (for some reason doesn't display an EVENT_DISPLAY_ANNOUNCEMENT on use anymore)
+                    -- If this is a Skill respec scroll, manually call an announcement for it if enabled (for some reason doesn't display an EVENT_DISPLAY_ANNOUNCEMENT on use anymore)
                     if removedItemType == ITEMTYPE_CROWN_ITEM and (itemId == 64524 or itemId == 135128) then
-                        ChatAnnouncements.PointRespecDisplay(RESPEC_TYPE_SKILLS)
+                        zo_callLater(function() ChatAnnouncements.PointRespecDisplay(RESPEC_TYPE_SKILLS) end, 25)
+                    end
+                    -- If this is an Attribute respec scroll, manually call an announcement for it if enabled (we disable EVENT_DISPLAY_ANNOUNCEMENT for this to sync it better)
+                    if removedItemType == ITEMTYPE_CROWN_ITEM and (itemId == 64523 or itemID == 135130) then
+                        zo_callLater(function() ChatAnnouncements.PointRespecDisplay(RESPEC_TYPE_ATTRIBUTES) end, 25)
                     end
                     if ChatAnnouncements.SV.Inventory.LootShowUseMisc and (removedItemType == ITEMTYPE_RECALL_STONE or removedItemType == ITEMTYPE_TROPHY or removedItemType == ITEMTYPE_MASTER_WRIT or removedItemType == ITEMTYPE_CROWN_ITEM) then
                         -- Check to make sure the items aren't riding lesson books.
@@ -9275,6 +9282,11 @@ function ChatAnnouncements.HookFunction()
             d("Secondary Text: " .. secondaryText)
         end
 
+        -- TODO: Maybe change this eventually, for now should work
+        if primaryText == GetString(SI_RESPECTYPE_POINTSRESETTITLE1) then
+            return true
+        end
+
         -- Let unfiltered messages pass through the normal function
         if (primaryText ~= "" and not overrideDisplayAnnouncementTitle[primaryText]) or (secondaryText ~= "" and not overrideDisplayAnnouncementDescription[secondaryText]) then
             -- Use default behavior if not in the override table
@@ -10967,7 +10979,13 @@ function ChatAnnouncements.PrintQueuedMessages()
     -- Display the rest
     for i=1, #g_queuedMessages do
         if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "MESSAGE" then
-            printToChat(g_queuedMessages[i].message)
+            local isSystem
+            if g_queuedMessages[i].isSystem then
+                isSystem = true
+            else
+                isSystem = false
+            end
+            printToChat(g_queuedMessages[i].message, isSystem)
         end
     end
 
