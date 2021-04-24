@@ -624,6 +624,7 @@ local g_guildSkillThrottleLine      = nil           -- Grab the name for Fighter
 -- Mail
 local g_mailCOD                     = 0             -- Tracks COD amount
 local g_postageAmount               = 0             -- Tracks Postage amount
+local g_mailAmount                  = 0             -- Tracks sent money amount
 local g_mailCODPresent              = false         -- Tracks whether the currently opened mail has a COD value present. On receiving items from the mail this will modify the message displayed.
 local g_inMail                      = false         -- Toggled on when looting mail to prevent notable item display from hiding items acquired.
 local g_mailTarget                  = ""            -- Target of mail being sent.
@@ -2119,8 +2120,9 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
     --d("OV: " .. oldValue)
     --d("reason: " .. reason)
 
+
     -- If the total gold change was 0 or (Reason 7 = Command) or (Reason 28 = Mount Feed) or (Reason 35 = Player Init) - End Now
-    if UpOrDown == 0 or UpOrDown + g_postageAmount == 0 or UpOrDown - g_postageAmount == 0 or reason == CURRENCY_CHANGE_REASON_COMMAND or reason == CURRENCY_CHANGE_REASON_FEED_MOUNT or reason == CURRENCY_CHANGE_REASON_PLAYER_INIT then
+    if reason == CURRENCY_CHANGE_REASON_COMMAND or reason == CURRENCY_CHANGE_REASON_FEED_MOUNT or reason == CURRENCY_CHANGE_REASON_PLAYER_INIT then
         return
     end
 
@@ -2278,14 +2280,14 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         else
             changeColor = CurrencyColorize:ToHex()
         end
-        changeType = ZO_LocalizeDecimalNumber(newValue - oldValue + g_postageAmount)
+        changeType = ZO_LocalizeDecimalNumber(newValue - oldValue)
     elseif UpOrDown < 0 then
         if ChatAnnouncements.SV.Currency.CurrencyContextColor then
             changeColor = CurrencyDownColorize:ToHex()
         else
             changeColor = CurrencyColorize:ToHex()
         end
-        changeType = ZO_LocalizeDecimalNumber(oldValue - newValue - g_postageAmount)
+        changeType = ZO_LocalizeDecimalNumber(oldValue - newValue)
     end
 
     -- Determine syntax based on reason
@@ -2319,10 +2321,10 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
     elseif reason == CURRENCY_CHANGE_REASON_MAIL and UpOrDown < 0  then
         if g_mailCODPresent then
             messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailCOD
+            if g_mailTarget ~="" then type = "LUIE_CURRENCY_MAIL" end
         else
-            messageChange = g_mailTarget ~="" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOut or ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOutNoName
+            return
         end
-        if g_mailTarget ~="" then type = "LUIE_CURRENCY_MAIL" end
     elseif reason == CURRENCY_CHANGE_REASON_BUYBACK then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageSpend
         if ChatAnnouncements.SV.Inventory.LootVendorCurrency then
@@ -2968,11 +2970,13 @@ end
 function ChatAnnouncements.MailMoneyChanged(eventCode)
     g_mailCOD = 0
     g_postageAmount = GetQueuedMailPostage()
+    g_mailAmount = GetQueuedMoneyAttachment()
 end
 
 function ChatAnnouncements.MailCODChanged(eventCode)
     g_mailCOD = GetQueuedCOD()
     g_postageAmount = GetQueuedMailPostage()
+    g_mailAmount = GetQueuedMoneyAttachment()
 end
 
 function ChatAnnouncements.MailRemoved(eventCode)
@@ -3036,6 +3040,7 @@ end
 
 function ChatAnnouncements.OnMailAttach(eventCode, attachmentSlot)
     g_postageAmount = GetQueuedMailPostage()
+    g_mailAmount = GetQueuedMoneyAttachment()
     local mailIndex = attachmentSlot
     local bagId, slotId, icon, stack = GetQueuedItemAttachmentInfo(attachmentSlot)
     local itemId = GetItemId(bagId, slotId)
@@ -3047,6 +3052,7 @@ end
 -- Removes items from index if they are removed from the trade
 function ChatAnnouncements.OnMailAttachRemove(eventCode, attachmentSlot)
     g_postageAmount = GetQueuedMailPostage()
+    g_mailAmount = GetQueuedMoneyAttachment()
     local mailIndex = attachmentSlot
     g_mailStacksOut[mailIndex] = nil
 end
@@ -3089,6 +3095,22 @@ function ChatAnnouncements.OnMailSuccess(eventCode)
         ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
     end
 
+    if not g_mailCODPresent then
+        if g_mailAmount > 0 then
+            local type = "LUIE_CURRENCY_MAIL"
+            local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1))
+            local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+            local changeType = ZO_LocalizeDecimalNumber(g_mailAmount)
+            local currencyTypeColor = CurrencyGoldColorize:ToHex()
+            local currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
+            local currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyGoldName, g_mailAmount)
+            local currencyTotal = ChatAnnouncements.SV.Currency.CurrencyGoldShowTotal
+            local messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalGold
+            local messageChange = g_mailTarget ~="" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOut or ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOutNoName
+            ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
+        end
+    end
+
     if ChatAnnouncements.SV.Notify.NotificationMailSendCA or ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
         local mailString
         if not g_mailCODPresent then
@@ -3124,6 +3146,7 @@ function ChatAnnouncements.OnMailSuccess(eventCode)
     g_mailCODPresent = false
     g_mailCOD = 0
     g_postageAmount = 0
+    g_mailAmount = 0
     g_mailStacksOut = {}
 end
 
@@ -7149,6 +7172,7 @@ function ChatAnnouncements.HookFunction()
         if reason ~= MAIL_SEND_RESULT_CANCELED then
             local function RestoreMailBackupValues()
                 g_postageAmount = GetQueuedMailPostage()
+                g_mailAmount = GetQueuedMoneyAttachment()
                 g_mailCOD = GetQueuedCOD()
             end
 
