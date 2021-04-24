@@ -324,6 +324,7 @@ LUIE.Data.Tooltips = {
     Champion_Foresight                              = GetString(SI_LUIE_SKILL_FORESIGHT_TP),
 
     -- Fitness
+    Champion_Expert_Evasion                         = GetString(SI_LUIE_SKILL_EXPERT_EVASION_TP),
     Champion_Winded                                 = GetString(SI_LUIE_SKILL_WINDED_TP),
     Champion_Unchained                              = GetString(SI_LUIE_SKILL_UNCHAINED_TP),
 

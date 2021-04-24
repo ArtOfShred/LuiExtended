@@ -2647,6 +2647,7 @@ Effects.EffectHideSCT = {
 
     -- Champion Points
     [151861] = true, -- Shadowstrike
+    [151860] = true, -- Shadowstrike
 
     -- Player - Weapons
     [18429] = true, -- Heavy Attack (Unarmed)
@@ -4259,17 +4260,24 @@ Effects.EffectOverride = {
 
     -- Craft
     [152360] = { hide = true }, -- Friends in Low Places
-    [151861] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_thief_shadowstrike.dds' }, -- Shadowstrike
-    [151860] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_thief_shadowstrike.dds', tooltip = Tooltips.Champion_Shadowstrike }, -- Shadowstrike
+    [151861] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_craft_shadowstrike.dds' }, -- Shadowstrike
+    [151860] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_craft_shadowstrike.dds', tooltip = Tooltips.Champion_Shadowstrike }, -- Shadowstrike
 
     -- Warfare
-    [156012] = { tooltip = Tooltips.Champion_Enlivening_Overflow }, -- Enlivening Overflow
-    [156020] = { tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- From the Brink
+    [155981] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warfare_salve_of_renewal.dds' }, -- Salve of Renewal
+    [156012] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warfare_enlivening_overflow.dds', tooltip = Tooltips.Champion_Enlivening_Overflow }, -- Enlivening Overflow
+    [156020] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warfare_from_the_brink.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- From the Brink
     [59530] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warfare_foresight.dds', tooltip = Tooltips.Champion_Foresight }, -- Foresight
     [60230] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warfare_riposte.dds' }, -- Riposte
     [135653] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warfare_reinforced.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Reinforced
+    [142013] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warfare_cutting_defense.dds' }, -- Cutting Defense
+    [142008] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_warfare_reaving_blows.dds' }, -- Reaving Blows
+    [142011] = { icon = 'esoui/art/icons/ability_mage_013.dds' }, -- Occult Overload
 
     -- Fitness
+    [151113] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_fitness_expert_evasion.dds', tooltip = Tooltips.Champion_Expert_Evasion, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Expert Evasion
+    [141994] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_fitness_bloody_renewal.dds' }, -- Bloody Renewal
+    [141992] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_fitness_siphoning_spells.dds' }, -- Siphoning Spells
     [134254] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_fitness_winded.dds', tooltip = Tooltips.Champion_Winded, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Winded
     [98316] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_fitness_unchained.dds', dynamicTooltip = true }, -- Unchained
 

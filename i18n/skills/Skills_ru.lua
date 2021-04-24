@@ -221,8 +221,9 @@ local strings = {
     SI_LUIE_SKILL_FORESIGHT_TP =                         "Reduce the cost of your Magicka and Stamina healing abilities by |cFFFFFF75|r% for |cFFFFFF<<1>>|r seconds.",
 
     -- Fitness
-    SI_LUIE_SKILL_UNCHAINED_TP =                         "Reduce the cost of your next Stamina ability used within |cFFFFFF<<1>>|r seconds by |cFFFFFF<<2>>|r%.",
+    SI_LUIE_SKILL_EXPERT_EVASION_TP =                    "You have recently benefitted from a free Roll Dodge and may not do so again for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_WINDED_TP =                            "You have recently benefitted from a reactive Break Free effect and may not do so again for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_UNCHAINED_TP =                         "Reduce the cost of your next Stamina ability used within |cFFFFFF<<1>>|r seconds by |cFFFFFF<<2>>|r%.",
 
     ----------------------------------------------------------------
     -- GENERIC / SHARED TOOLTIPS -----------------------------------
