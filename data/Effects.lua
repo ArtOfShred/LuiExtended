@@ -203,11 +203,9 @@ Effects.IsFoodBuff = {
     [86798] = true, -- Alcaire Festival Sword-Pie
     [86749] = true, -- Jagga-Drenched "Mud Ball"
     [86673] = true, -- Lava Foot Soup-and-Saltrice
-    [86560] = true, -- Old Aldmeri Orphan Gruel
     [86787] = true, -- Rajhin's Sugar Claws
     [89955] = true, -- Candied Jester's Coins
     [89971] = true, -- Jewels of Misrule
-    [89956] = true, -- Princess' Delight
     [66551] = true, -- Vendor Health Food
     [66568] = true, -- Vendor Magicka Food
     [66576] = true, -- Vendor Stamina Food
@@ -3052,7 +3050,6 @@ Effects.EffectOverride = {
     [64564] = { icon = 'LuiExtended/media/icons/potions/potion_007.dds', tooltip = Tooltips.Skill_Physical_Resistance_Potion }, -- of Armor (Physical Resistance Potion)
     [79709] = { icon = 'LuiExtended/media/icons/potions/potion_014r.dds', tooltip = Tooltips.Generic_Gradual_Ravage_Health_Potion }, -- of Creeping Ravage Health (Creeping Ravage Health)
     [45236] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_detection.dds', tooltip = Tooltips.Generic_Detection }, -- of Detection (Increase Detection)
-    [45239] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_unstoppable.dds', tooltip = Tooltips.Generic_CC_Immunity }, -- of Immovability (Unstoppable) -- NOTE: Used to use 'LuiExtended/media/icons/potions/potion_008.dds'
     [45237] = { icon = 'LuiExtended/media/icons/potions/potion_011.dds', name = Abilities.Potion_Invisiblity, tooltip = Tooltips.Generic_Invisibility }, -- of Invisibility (Vanish)
     [79705] = { icon = 'LuiExtended/media/icons/potions/potion_014.dds', tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- of Lingering Health (Lingering Restore Health)
     [46208] = { icon = 'LuiExtended/media/icons/potions/potion_021.dds', tooltip = Tooltips.Skill_Ravage_Armor_Potion }, -- of Ravage Armor (Physical Resistance Reduction)
@@ -3068,7 +3065,6 @@ Effects.EffectOverride = {
     [64565] = { icon = 'LuiExtended/media/icons/potions/potion_007.dds', tooltip = Tooltips.Skill_Physical_Resistance_Potion }, -- of Armor (Physical Resistance Potion)
     [79710] = { icon = 'LuiExtended/media/icons/potions/potion_014r.dds', tooltip = Tooltips.Generic_Gradual_Ravage_Health_Potion }, -- of Creeping Ravage Health (Creeping Ravage Health)
     [45458] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_detection.dds', tooltip = Tooltips.Generic_Detection }, -- of Detection (Increase Detection)
-    [45463] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_unstoppable.dds', tooltip = Tooltips.Generic_CC_Immunity }, -- of Immovability (Unstoppable) -- NOTE: Used to use 'LuiExtended/media/icons/potions/potion_008.dds'
     [45460] = { icon = 'LuiExtended/media/icons/potions/potion_011.dds', name = Abilities.Potion_Invisiblity, tooltip = Tooltips.Generic_Invisibility }, -- of Invisibility (Vanish)
     [79706] = { icon = 'LuiExtended/media/icons/potions/potion_014.dds', tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- of Lingering Health (Lingering Restore Health)
     [46250] = { icon = 'LuiExtended/media/icons/potions/potion_021.dds', tooltip = Tooltips.Skill_Ravage_Armor_Potion }, -- of Ravage Armor (Physical Resistance Reduction)
@@ -3082,15 +3078,15 @@ Effects.EffectOverride = {
     -- No ... of Stun
 
     -- Vendor Potions + AVA Potions + Roguish Draughts
-    [72930] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_unstoppable.dds', tooltip = Tooltips.Generic_CC_Immunity }, -- Alliance Health Draught (Unstoppable ) -- NOTE: Used to use 'LuiExtended/media/icons/potions/potion_ava_red.dds'
+    [72930] = { icon = 'LuiExtended/media/icons/potions/potion_ava_red.dds', tooltip = Tooltips.Generic_CC_Immunity }, -- Alliance Health Draught (Unstoppable )
     [137002] = { icon = 'LuiExtended/media/icons/potions/potion_ava_purple.dds', tooltip = Tooltips.Generic_Invisibility }, -- Alliance Health Draught (Invisibility)
     [78058] = { icon = 'LuiExtended/media/icons/potions/potion_ava_purple.dds', name = Abilities.Potion_Invisiblity, tooltip = Tooltips.Generic_Invisibility }, -- Roguish Stealth Draught (Vanish)
 
     -- Crown Store Potions
     [86780] = { icon = 'LuiExtended/media/icons/potions/potion_crown_pink.dds', tooltip = Tooltips.Generic_Invisibility }, -- Crown Invisibility Potion (Invisibility)
-    [86698] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_unstoppable.dds', tooltip = Tooltips.Generic_CC_Immunity }, -- Crown Survivor's Elixir (Unstoppable) -- NOTE: Used to use 'LuiExtended/media/icons/potions/potion_crown_red.dds'
-    [86699] = { icon = 'LuiExtended/media/icons/potions/potion_crown_pink_alt.dds', tooltip = Tooltips.Generic_Invisibility }, -- Crown Survivor's Elixir (Invisibility)
-    [92416] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_unstoppable.dds', tooltip = Tooltips.Generic_CC_Immunity }, -- Unstoppable (Gold Coast Swift Survivor Elixir) -- NOTE: Used to use 'LuiExtended/media/icons/potions/potion_crown_red.dds'
+    [86698] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds', tooltip = Tooltips.Generic_CC_Immunity }, -- Gold Coast Survivor Elixir (Unstoppable)
+    [86699] = { icon = 'LuiExtended/media/icons/potions/potion_crown_pink_alt.dds', tooltip = Tooltips.Generic_Invisibility }, -- Gold Coast Survivor Elixir (Invisibility)
+    [92416] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds', tooltip = Tooltips.Generic_CC_Immunity }, -- Unstoppable (Gold Coast Swift Survivor Elixir)
 
     ----------------------------------------------------------------
     -- POTION UP FRONT EFFECTS -------------------------------------
@@ -3122,10 +3118,10 @@ Effects.EffectOverride = {
     [68401] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds', name = Abilities.Potion_Restore_Health }, -- Restore All Resources (Crown Tri-Restoration Potion)
     [68407] = { icon = 'LuiExtended/media/icons/potions/potion_crown_blue.dds' }, -- Restore Magicka (Crown Tri-Restoration Potion)
     [68409] = { icon = 'LuiExtended/media/icons/potions/potion_crown_green.dds' }, -- Restore Stamina (Crown Tri-Restoration Potion)
-    [86682] = { icon = 'LuiExtended/media/icons/potions/potion_crown_blue.dds', name = Abilities.Potion_Restore_Magicka }, -- Crown Spellcaster's Elixir (Crown Spellcaster's Elixir)
-    [86696] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds', name = Abilities.Potion_Restore_Health }, -- Crown Survivor's Elixir (Crown Survivor's Elixir)
-    [86692] = { icon = 'LuiExtended/media/icons/potions/potion_crown_green.dds', name = Abilities.Potion_Restore_Stamina }, -- Crown Warrior's Elixir (Crown Warrior's Elixir)
-    [92414] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds', name = Abilities.Potion_Restore_Health }, -- Crown Survivor's Elixir (Gold Coast Swift Survivor Elixir)
+    [86682] = { icon = 'LuiExtended/media/icons/potions/potion_crown_blue.dds', name = Abilities.Potion_Restore_Magicka }, -- Gold Coast Spellcaster Elixir (Gold Coast Spellcaster Elixir)
+    [86696] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds', name = Abilities.Potion_Restore_Health }, -- Gold Coast Survivor Elixir (Gold Coast Survivor Elixir)
+    [86692] = { icon = 'LuiExtended/media/icons/potions/potion_crown_green.dds', name = Abilities.Potion_Restore_Stamina }, -- Gold Coast Warrior Elixir (Gold Coast Warrior Elixir)
+    [92414] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds', name = Abilities.Potion_Restore_Health }, -- Gold Coast Survivor Elixir (Gold Coast Swift Survivor Elixir)
 
     ----------------------------------------------------------------
     -- POSIONS -----------------------------------------------------
@@ -3148,7 +3144,7 @@ Effects.EffectOverride = {
     [79310] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_g.dds', tooltip = Tooltips.Skill_Physical_Resistance_Poison }, -- Physical Resistance (Resolve-Draining Poison) BUFF
     [79090] = { icon = 'LuiExtended/media/icons/poisons/poison_1_orange_r.dds', tooltip = Tooltips.Skill_Ravage_Armor_Potion }, -- Physical Resistance Reduction (Fracturing Poison) DEBUFF
     [79457] = { icon = 'LuiExtended/media/icons/poisons/poison_2_red_r.dds', tooltip = Tooltips.Generic_Immobilize }, -- Immobilize (Escapist's Poison) DEBUFF
-    [79458] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_unstoppable.dds', tooltip = Tooltips.Generic_CC_Immunity }, -- Unstoppable (Escapist's Poison) BUFF -- NOTE: Used to use 'LuiExtended/media/icons/poisons/poison_2_red_g.dds'
+    [79458] = { icon = 'LuiExtended/media/icons/poisons/poison_2_red_g.dds', tooltip = Tooltips.Generic_CC_Immunity }, -- Unstoppable (Escapist's Poison) BUFF
     [79122] = { icon = 'LuiExtended/media/icons/poisons/poison_1_red_r.dds', tooltip = Tooltips.Generic_Immobilize }, -- Immobilize (Entrapping Poison) DEBUFF
     [79996] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = Abilities.Skill_Revealed, tooltip = Tooltips.Generic_Reveal }, -- Revealing Poison (Stealth-Draining Poison) DEBUFF
     [80003] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_marked.dds', name = Abilities.Skill_Marked, tooltip = Tooltips.Generic_Marked }, -- Marking Poison (Conspicuous Poison) DEBUFF
@@ -3177,7 +3173,7 @@ Effects.EffectOverride = {
     [79091] = { icon = 'LuiExtended/media/icons/poisons/poison_1_orange_r.dds', tooltip = Tooltips.Skill_Physical_Resistance_Poison }, -- Physical Resistance Reduction (Fracturing Poison) DEBUFF
     -- No Uncertainty
     [79459] = { icon = 'LuiExtended/media/icons/poisons/poison_2_red_r.dds', tooltip = Tooltips.Generic_Immobilize }, -- Immobilize (Escapist's Poison) DEBUFF
-    [79460] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_unstoppable.dds', tooltip = Tooltips.Generic_CC_Immunity }, -- Unstoppable (Escapist's Poison) BUFF -- NOTE: Used to use 'LuiExtended/media/icons/poisons/poison_2_red_g.dds'
+    [79460] = { icon = 'LuiExtended/media/icons/poisons/poison_2_red_g.dds', tooltip = Tooltips.Generic_CC_Immunity }, -- Unstoppable (Escapist's Poison)
     -- No Entrapping
     [80002] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = Abilities.Skill_Revealed, tooltip = Tooltips.Generic_Reveal }, -- Revealing Poison (Stealth-Draining Poison) DEBUFF
     [80004] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_marked.dds', name = Abilities.Skill_Marked, tooltip = Tooltips.Generic_Marked }, -- Marking Poison (Conspicuous Poison) DEBUFF
@@ -3195,14 +3191,14 @@ Effects.EffectOverride = {
     [81554] = { icon = 'esoui/art/icons/ability_debuff_minor_hindrance.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Hindrance (Cloudy Hindering Poison) DEBUFF
 
     -- Crown Poisons
-    [88476] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_orange_r.dds', tooltip = Tooltips.Generic_Poison, tooltipValue2 = 1 }, -- Creeping Ravage Health (Crown Debilitating Poison)
-    [88477] = { icon = 'esoui/art/icons/ability_debuff_minor_hindrance.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Hindrance (Crown Debilitating Poison)
-    [88471] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_blue_r.dds', tooltip = Tooltips.Generic_Ravage_Magicka_Poison }, -- Drain Magicka (Crown Draining Poison)
-    [88475] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_green_r.dds', tooltip = Tooltips.Generic_Ravage_Stamina_Poison }, -- Drain Stamina (Crown Draining Poison)
-    [88473] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_blue_g.dds', tooltip = Tooltips.Generic_Magicka_Regen, tooltipValue2 = 1 }, -- Restore Magicka (Crown Draining Poison)
-    [88474] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_green_g.dds', tooltip = Tooltips.Generic_Stamina_Regen, tooltipValue2 = 1 }, -- Restore Stamina (Crown Draining Poison)
-    [88462] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_red_r.dds', tooltip = Tooltips.Generic_Immobilize }, -- Immobilize (Crown Trapping Poison)
-    [88463] = { icon = 'esoui/art/icons/ability_debuff_minor_hindrance.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Hindrance (Crown Trapping Poison)
+    [88476] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_orange_r.dds', tooltip = Tooltips.Generic_Poison, tooltipValue2 = 1 }, -- Creeping Ravage Health (Gold Coast Debilitating Poison)
+    [88477] = { icon = 'esoui/art/icons/ability_debuff_minor_hindrance.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Hindrance (Gold Coast Debilitating Poison)
+    [88471] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_blue_r.dds', tooltip = Tooltips.Generic_Ravage_Magicka_Poison }, -- Drain Magicka (Gold Coast Draining Poison)
+    [88475] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_green_r.dds', tooltip = Tooltips.Generic_Ravage_Stamina_Poison }, -- Drain Stamina (Gold Coast Draining Poison)
+    [88473] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_blue_g.dds', tooltip = Tooltips.Generic_Magicka_Regen, tooltipValue2 = 1 }, -- Restore Magicka (Gold Coast Draining Poison)
+    [88474] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_green_g.dds', tooltip = Tooltips.Generic_Stamina_Regen, tooltipValue2 = 1 }, -- Restore Stamina (Gold Coast Draining Poison)
+    [88462] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_red_r.dds', tooltip = Tooltips.Generic_Immobilize }, -- Immobilize (Gold Coast Trapping Poison)
+    [88463] = { icon = 'esoui/art/icons/ability_debuff_minor_hindrance.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Hindrance (Gold Coast Trapping Poison)
     [81274] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_red_r.dds', tooltip = Tooltips.Generic_Poison, tooltipValue2 = 1 }, -- Ravage Health (Crown Lethal Poison) DEBUFF
     [81275] = { icon = 'LuiExtended/media/icons/poisons/poison_crown_orange_r.dds', tooltip = Tooltips.Generic_Poison, tooltipValue2 = 1 }, -- Creeping Ravage Health (Crown Lethal Poison) DEBUFF
 
@@ -3370,6 +3366,8 @@ Effects.EffectOverride = {
     [113432] = { icon = 'LuiExtended/media/icons/abilities/ability_item_indrik_nascent.dds', name = Abilities.Innate_Indrik_Nascent }, -- 68235 Stun (Nascent Indrik)
     [130394] = { icon = 'LuiExtended/media/icons/abilities/ability_item_indrik_spectral.dds', name = Abilities.Innate_Indrik_Spectral }, -- 68235 Stun (Spectral Indrik)
     [131536] = { icon = 'LuiExtended/media/icons/abilities/ability_item_pet_sovereign_sow.dds', name = Abilities.Innate_Sovereign_Sow }, -- Generic Stun & Combine (Sovereign Sow)
+    [151843] = { icon = 'LuiExtended/media/icons/abilities/ability_item_deadlands_firewalker.dds', name = Abilities.Innate_Deadlands_Firewalker }, -- 68235 Stun (Deadlands Firewalker)
+    [148079] = { icon = 'LuiExtended/media/icons/abilities/ability_item_unstable_morpholith.dds', name = Abilities.Innate_Unstable_Morpholith }, -- 68235 Stun (Unstable Morpholith)
 
     [68259] = { icon = 'LuiExtended/media/icons/abilities/ability_item_psijic_ambrosia_fragment.dds', name = Abilities.Innate_Create_Psijic_Ambrosia_Recipe }, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
     [70582] = { hide = true }, -- Roll 1d1000 (Merethic Restorative Resin)

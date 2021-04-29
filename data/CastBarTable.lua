@@ -228,6 +228,9 @@ CastBarTable.IgnoreCastBreakingActions = {
     [43700] = true, -- Wand of Finding (Lena's Wand of Finding)
     [81575] = true, -- Event - WitchFest Cauldron (Witchmother's Whistle)
     --[21112] = true, -- Q4220 PC Forced to L0
+
+    [113432] = true, -- 68235 Stun (Nascent Indrik)
+    [148079] = true, -- 68235 Stun (Unstable Morpholith)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -375,6 +378,8 @@ CastBarTable.CastDurationFix = {
     [113432] = 8000, -- 68235 Stun (Nascent Indrik)
     [130394] = 5000, -- 68235 Stun (Spectral Indrik)
     [131536] = 5000, -- Generic Stun & Combine (Sovereign Sow)
+    [151843] = 5000, -- 68235 Stun (Deadlands Firewalker)
+    [148079] = 8000, -- 68235 Stun (Unstable Morpholith)
 
     [68259] = 5000, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
     [70584] = 5000, -- 68235 Stun (Merethic Restorative Resin)
@@ -540,6 +545,8 @@ CastBarTable.IsCast = {
     [113432] = true, -- 68235 Stun (Nascent Indrik)
     [130394] = true, -- 68235 Stun (Spectral Indrik)
     [131536] = true, -- Generic Stun & Combine (Sovereign Sow)
+    [151843] = true, -- 68235 Stun (Deadlands Firewalker)
+    [148079] = true, -- 68235 Stun (Unstable Morpholith)
 
     [68259] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
     [70584] = true, -- 68235 Stun (Merethic Restorative Resin)

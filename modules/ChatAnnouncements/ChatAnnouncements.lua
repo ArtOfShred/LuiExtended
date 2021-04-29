@@ -2754,7 +2754,6 @@ local isShopCollectible = {
     [GetCollectibleInfo(5)] = 5, -- Midnight Steed
 
     --[GetCollectibleInfo(4673)] = 4673, -- Storage Coffer, Fortified (From level up rewards)
-
     [GetCollectibleInfo(4674)] = 4674, -- Storage Chest, Fortified (Tel Var / Writ Vouchers)
     [GetCollectibleInfo(4675)] = 4675, -- Storage Coffer, Oaken (Tel Var / Writ Vouchers)
     [GetCollectibleInfo(4676)] = 4676, -- Storage Coffer, Secure (Tel Var / Writ Vouchers)
@@ -2802,6 +2801,19 @@ local isShopCollectible = {
     [GetCollectibleInfo(8127)] = 8127, -- Mossheart Berries of Budding
     [GetCollectibleInfo(8128)] = 8128, -- Mossheart Berries of Growth
     [GetCollectibleInfo(8129)] = 8129, -- Mossheart Berries of Ripeness
+
+    [GetCollectibleInfo(8196)] = 8196, -- Pact Breton Terrier
+    [GetCollectibleInfo(8197)] = 8197, -- Dominion Breton Terrier
+    [GetCollectibleInfo(8198)] = 8198, -- Covenant Breton Terrier
+
+    [GetCollectibleInfo(8866)] = 8866, -- Deadlands Flint
+    [GetCollectibleInfo(8867)] = 8867, -- Rune-Etched Striker
+    [GetCollectibleInfo(8868)] = 8868, -- Smoldering Bloodgrass Tinder
+
+    [GetCollectibleInfo(9085)] = 9085, -- Vial of Simmering Daedric Brew
+    [GetCollectibleInfo(9086)] = 9086, -- Vial of Bubbling Daedric Brew
+    [GetCollectibleInfo(9087)] = 9087, -- Vial of Scalding Daedric Brew
+
 }
 
 function ChatAnnouncements.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCurrencyType1, specialCurrencyInfo1, specialCurrencyQuantity1, specialCurrencyType2, specialCurrencyInfo2, specialCurrencyQuantity2, itemSoundCategory)
