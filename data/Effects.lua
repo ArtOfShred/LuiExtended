@@ -271,7 +271,7 @@ Effects.IsExperienceBuff = {
     [118985] = true, -- Anniversary EXP Buff
     [136348] = true, -- Anniversary EXP Buff
     [152514] = true, -- Anniversary EXP Buff
-    [96118] = true, -- Witchmother's Boon -- TODO: Check one more time
+    [96118] = true, -- Witchmother's Boon
 }
 
 Effects.IsAllianceXPBuff = {
@@ -3370,6 +3370,11 @@ Effects.EffectOverride = {
     [148079] = { icon = 'LuiExtended/media/icons/abilities/ability_item_unstable_morpholith.dds', name = Abilities.Innate_Unstable_Morpholith }, -- 68235 Stun (Unstable Morpholith)
 
     [68259] = { icon = 'LuiExtended/media/icons/abilities/ability_item_psijic_ambrosia_fragment.dds', name = Abilities.Innate_Create_Psijic_Ambrosia_Recipe }, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [68263] = { icon = 'LuiExtended/media/icons/abilities/ability_item_psijic_ambrosia_fragment.dds', name = Abilities.Innate_Create_Psijic_Ambrosia_Recipe }, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [68267] = { icon = 'LuiExtended/media/icons/abilities/ability_item_psijic_ambrosia_fragment.dds', name = Abilities.Innate_Create_Psijic_Ambrosia_Recipe }, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [68271] = { icon = 'LuiExtended/media/icons/abilities/ability_item_psijic_ambrosia_fragment.dds', name = Abilities.Innate_Create_Psijic_Ambrosia_Recipe }, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [68275] = { icon = 'LuiExtended/media/icons/abilities/ability_item_psijic_ambrosia_fragment.dds', name = Abilities.Innate_Create_Psijic_Ambrosia_Recipe }, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [68279] = { icon = 'LuiExtended/media/icons/abilities/ability_item_psijic_ambrosia_fragment.dds', name = Abilities.Innate_Create_Psijic_Ambrosia_Recipe }, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
     [70582] = { hide = true }, -- Roll 1d1000 (Merethic Restorative Resin)
     [70584] = { icon = 'LuiExtended/media/icons/abilities/ability_item_merethic_restorative_resin.dds', name = Abilities.Innate_Merethic_Restorative_Resin }, -- 68235 Stun (Merethic Restorative Resin)
     [88449] = { hide = true }, -- Create Super Psijic Ambrosia (Aetheric Cipher)
@@ -3410,12 +3415,12 @@ Effects.EffectOverride = {
     [152514] = { icon = 'LuiExtended/media/icons/mementos/memento_jubilee_cake.dds', name = Abilities.Memento_Jubliee_Cake, tooltip = Tooltips.Experience_Seasonal_Event, forcedContainer = 'long' }, -- Anniversary EXP Buff (Jubilee Cake 2021)
     [81575] = { icon = 'LuiExtended/media/icons/mementos/memento_witchmothers_whistle.dds', name = Abilities.Memento_Witchmothers_Whistle, hide = true }, -- Event - WitchFest Cauldron (Witchmother's Whistle)
     [96118] = { icon = 'LuiExtended/media/icons/mementos/memento_witchmothers_brew.dds', tooltip = Tooltips.Experience_Seasonal_Event, forcedContainer = 'long' }, -- Witchmother's Boon (Witchmother's Whistle)
-    [84364] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds' }, -- Witchmother's Brew (Witchmother's Whistle)
-    [84365] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds' }, -- Witchmother's Brew (Witchmother's Whistle)
-    [84366] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds' }, -- Witchmother's Brew (Witchmother's Whistle)
-    [84367] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds' }, -- Witchmother's Brew (Witchmother's Whistle)
-    [84368] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds' }, -- Witchmother's Brew (Witchmother's Whistle)
-    [84369] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds' }, -- Witchmother's Brew (Witchmother's Whistle)
+    [84364] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds', unbreakable = 1, forcedContainer = 'long', tooltip = Tooltips.Memento_Witchmothers_Brew }, -- Witchmother's Brew (Witchmother's Whistle)
+    [84365] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds', unbreakable = 1, forcedContainer = 'long', tooltip = Tooltips.Memento_Witchmothers_Brew  }, -- Witchmother's Brew (Witchmother's Whistle)
+    [84366] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds', unbreakable = 1, forcedContainer = 'long', tooltip = Tooltips.Memento_Witchmothers_Brew  }, -- Witchmother's Brew (Witchmother's Whistle)
+    [84367] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds', unbreakable = 1, forcedContainer = 'long', tooltip = Tooltips.Memento_Witchmothers_Brew  }, -- Witchmother's Brew (Witchmother's Whistle)
+    [84368] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds', unbreakable = 1, forcedContainer = 'long', tooltip = Tooltips.Memento_Witchmothers_Brew  }, -- Witchmother's Brew (Witchmother's Whistle)
+    [84369] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds', unbreakable = 1, forcedContainer = 'long', tooltip = Tooltips.Memento_Witchmothers_Brew  }, -- Witchmother's Brew (Witchmother's Whistle)
     [91369] = { icon = 'LuiExtended/media/icons/mementos/memento_the_pie_of_misrule.dds', name = Abilities.Memento_The_Pie_of_Misrule, tooltip = Tooltips.Experience_Seasonal_Event, forcedContainer = 'long' }, -- Jester's Experience Boost Pie (The Pie of Misrule)
     [92232] = { icon = 'LuiExtended/media/icons/mementos/memento_pelinals_ferocity.dds', tooltip = Tooltips.Experience_Seasonal_Pelinal, forcedContainer = 'long' }, -- Pelinal's Ferocity (Scroll of Pelinal's Ferocity)
     [91449] = { icon = 'LuiExtended/media/icons/mementos/memento_bredas_magnificent_mead.dds', tooltip = Tooltips.Experience_Seasonal_Event, forcedContainer = 'long' }, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)

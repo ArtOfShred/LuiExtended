@@ -801,6 +801,11 @@ LUIE.DebugAuras = {
     [148080] = true, -- 68235 Stun (Unstable Morpholith)
 
     [68259] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [68263] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [68267] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [68271] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [68275] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [68279] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
     [70582] = true, -- Roll 1d1000 (Merethic Resorative Resin)
     [70584] = true, -- 68235 Stun (Merethic Restorative Resin)
     [88449] = true, -- Create Super Psijic Ambrosia (Aetheric Cipher)

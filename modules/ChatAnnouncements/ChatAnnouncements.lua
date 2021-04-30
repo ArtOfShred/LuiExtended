@@ -592,6 +592,7 @@ local g_packSiege                   = false         -- Tracker for siege packed
 local g_lockpickBroken              = false         -- Tracker for lockpick being broken
 local g_groupLootIndex              = {}            -- Table to hold group member names for group loot display.
 local g_stackSplit                  = false         -- Determines if we just split an inventory item stack
+local g_combinedRecipe              = false         -- Determines if we just used an item that combines a recipe to stop the "learned" message from showing.
 
 -- Currency Throttle
 local g_currencyGoldThrottleValue   = 0             -- Held value for gold throttle (counter)
@@ -1157,6 +1158,7 @@ function ChatAnnouncements.RegisterLootEvents()
     eventManager:RegisterForEvent(moduleName, EVENT_LOCKPICK_SUCCESS, ChatAnnouncements.MiscAlertLockSuccess)
     -- LOOT RECEIVED
     eventManager:UnregisterForEvent(moduleName, EVENT_LOOT_RECEIVED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED)
     -- QUEST REWARD CONTEXT
     -- INDEX
     eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
@@ -1195,6 +1197,7 @@ function ChatAnnouncements.RegisterLootEvents()
     -- LOOT RECEIVED
     if ChatAnnouncements.SV.Inventory.Loot or ChatAnnouncements.SV.Inventory.LootQuestAdd or ChatAnnouncements.SV.Inventory.LootQuestRemove then
         eventManager:RegisterForEvent(moduleName, EVENT_LOOT_RECEIVED, ChatAnnouncements.OnLootReceived)
+        eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED, ChatAnnouncements.OnInventoryItemUsed)
     end
     -- QUEST LOOT
     if ChatAnnouncements.SV.Inventory.LootQuestAdd or ChatAnnouncements.SV.Inventory.LootQuestRemove then
@@ -3909,6 +3912,20 @@ function ChatAnnouncements.OnLootReceived(eventCode, receivedBy, itemLink, quant
     end
 end
 
+function ChatAnnouncements.OnInventoryItemUsed(eventCode, itemSoundCategory)
+    local function ResetCombinedRecipe()
+        g_combinedRecipe = false
+        eventManager:UnregisterForUpdate(moduleName .. "ResetCombinedRecipe")
+    end
+
+    -- Trophy items used for recipe combination seem to have no itemSoundCategory.
+    if itemSoundCategory == 0 then
+        g_combinedRecipe = true
+        eventManager:UnregisterForUpdate(moduleName .. "ResetCombinedRecipe")
+        eventManager:RegisterForUpdate(moduleName .. "ResetCombinedRecipe", 150, ResetCombinedRecipe )
+    end
+end
+
 -- If filter is true, we run the item through this function to determine if we should display it. Filter only gets set to true for group loot and relevant loot functions. Mail, trade, stores, etc don't apply the filter.
 function ChatAnnouncements.ItemFilter(itemType, itemId, itemLink, groupLoot)
     if ( ChatAnnouncements.SV.Inventory.LootBlacklist and g_blacklistIDs[itemId] ) then
@@ -4521,11 +4538,18 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                     end
                     -- Learn Recipe
                     if ChatAnnouncements.SV.Inventory.LootShowRecipe and removedItemType == ITEMTYPE_RECIPE then
-                        gainOrLoss = 4
-                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageLearnRecipe
-                        flag = true
-                        if ChatAnnouncements.SV.Inventory.LootRecipeHideAlert then
-                            PlaySound(SOUNDS.RECIPE_LEARNED)
+                        -- Show recipe message if a recipe is learned.
+                        if not g_combinedRecipe then
+                            gainOrLoss = 4
+                            logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageLearnRecipe
+                            flag = true
+                            if ChatAnnouncements.SV.Inventory.LootRecipeHideAlert then
+                                PlaySound(SOUNDS.RECIPE_LEARNED)
+                            end
+                        else
+                            gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                            logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse
+                            flag = true
                         end
                     end
                     -- Learn Motif

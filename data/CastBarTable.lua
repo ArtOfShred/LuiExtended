@@ -113,6 +113,9 @@ CastBarTable.BreakCastOnMove = {
 
     -- Misc Items
     [63427] = true, -- Clean Fish (Filet Fish)
+    [78052] = true, -- Minor Pardon (Counterfeit Pardon Edict)
+    [76350] = true, -- Moderate Pardon (Leniency Edict)
+    [76349] = true, -- Full Pardon (Grand Amnesty Edict)
 
     -- Mementos
     [42008] = true, -- Blessing of Root Sunder (Token of Root Sunder)
@@ -382,6 +385,11 @@ CastBarTable.CastDurationFix = {
     [148079] = 8000, -- 68235 Stun (Unstable Morpholith)
 
     [68259] = 5000, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [68263] = 5000, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [68267] = 5000, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [68271] = 5000, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [68275] = 5000, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [68279] = 5000, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
     [70584] = 5000, -- 68235 Stun (Merethic Restorative Resin)
     [88451] = 5000, -- 88449 Stun (Aetheric Cipher)
 
@@ -549,6 +557,11 @@ CastBarTable.IsCast = {
     [148079] = true, -- 68235 Stun (Unstable Morpholith)
 
     [68259] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [68263] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [68267] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [68271] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [68275] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [68279] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
     [70584] = true, -- 68235 Stun (Merethic Restorative Resin)
     [88451] = true, -- 88449 Stun (Aetheric Cipher)
 

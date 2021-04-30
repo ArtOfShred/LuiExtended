@@ -1297,7 +1297,7 @@ end
 local buffTypes = {
     [LUIE_BUFF_TYPE_BUFF] = "Buff",
     [LUIE_BUFF_TYPE_DEBUFF] = "Debuff",
-    [LUIE_BUFF_TYPE_UB_BUFF] = "Unbreakable Buff",
+    [LUIE_BUFF_TYPE_UB_BUFF] = "Cosmetic Buff",
     [LUIE_BUFF_TYPE_UB_DEBUFF] = "Unbreakable Debuff",
     [LUIE_BUFF_TYPE_GROUND_BUFF_TRACKER] = "AOE Buff Tracker",
     [LUIE_BUFF_TYPE_GROUND_DEBUFF_TRACKER] = "AOE Debuff Tracker",
