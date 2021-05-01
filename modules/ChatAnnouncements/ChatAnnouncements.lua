@@ -4559,6 +4559,16 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                         flag = true
                     end
                     -- Learn Style
+                    if ChatAnnouncements.SV.Inventory.LootShowStylePage and removedItemType == ITEMTYPE_COLLECTIBLE then
+                        -- Don't display a message if the specialized item type is not "Collectible Style Page"
+                        local _, specializedType = GetItemLinkItemType(itemLink)
+                        if specializedType == SPECIALIZED_ITEMTYPE_COLLECTIBLE_STYLE_PAGE then
+                            gainOrLoss = 4
+                            logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageLearnStyle
+                            flag = true
+                        end
+                    end
+                    -- Learn Style (TODO: Check if needed since style pages were switched to ITEMTYPE_COLLECTIBLE)
                     if ChatAnnouncements.SV.Inventory.LootShowStylePage and removedItemType == ITEMTYPE_CONTAINER then
                         -- Don't display a message if the specialized item type is not "Container Style Page"
                         local _, specializedType = GetItemLinkItemType(itemLink)

@@ -251,8 +251,6 @@ CastBarTable.CastChannelOverride = {
     [4197] = true, -- Recovering (NPC Duel)
 
     -- Seasonal Mementos & Items
-    [86792] = true, -- Eating (High Hrothgar Festival Mints)
-    [86739] = true, -- Drinking (Sailor's Warning Festival Grog)
     [85355] = true, -- Flame Juggling (Consumable Version)
     [85354] = true, -- Dagger Juggling (Consumable Verison)
     [85353] = true, -- Sword Swallowing (Consumable Version)
