@@ -600,6 +600,7 @@ CastBarTable.IsCast = {
     [87965] = true, -- Jester's Festival Illusion Daz (Plume Dazzler)
     [87966] = true, -- Jester's Festival Illusion Daz (Spiral Dazzler)
     [88374] = true, -- Jester's Festival Illusion Daz (Sparkly Hat Dazzler)
+    [86774] = true, -- Mudball (Mud Ball Pouch)
     [116879] = true, -- Alliance Pie (Revelry Pie)
     [87963] = true, -- Bestowed Cherry Blossoms (Cherry Blossom Branch)
     [102077] = true, -- Jester's Festival Scintillator (Jester's Scintillator)
@@ -625,7 +626,6 @@ CastBarTable.IsCast = {
     [101872] = true, -- _CRWN Dragon Priest Memento3 (Bone Dragon Summons Focus)
 
     -- Memento (Base)
-    --[26736] = true, -- Bear Trap (Battered Bear Trap)
     [16846] = true, -- Blackfeather Court Whistle (Blackfeather Court Whistle)
     [41988] = true, -- Bonesnap Binding Stone (Bonesnap Binding Stone)
     [41948] = true, -- Glanir's Smoke Bomb (Glanir's Smoke Bomb)

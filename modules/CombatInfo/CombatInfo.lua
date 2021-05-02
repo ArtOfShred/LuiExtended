@@ -915,7 +915,21 @@ function CombatInfo.OnUpdate(currentTime)
         -- Don't show unless potion is used - We have to counter for the GCD lockout from casting a spell here
         if (duration > 5000) then
             uiQuickSlot.label:SetHidden(false)
-            uiQuickSlot.label:SetText(string.format(CombatInfo.SV.PotionTimerMiilis and "%.1f" or "%.1d", 0.001 * remain))
+
+            if remain > 86400000 then -- more then 1 day
+                uiQuickSlot.label:SetText( string.format("%d d", math.floor( remain/86400000 )) )
+            elseif remain > 6000000 then -- over 100 minutes - display XXh
+                uiQuickSlot.label:SetText( string.format("%dh", math.floor( remain/3600000 )) )
+            elseif remain > 600000 then -- over 10 minutes - display XXm
+                uiQuickSlot.label:SetText( string.format("%dm", math.floor( remain/60000 )) )
+            elseif remain > 60000 then
+                local m = math.floor( remain/60000 )
+                local s = remain/1000 - 60*m
+                uiQuickSlot.label:SetText( string.format("%d:%.2d", m, s) )
+            else
+                uiQuickSlot.label:SetText(string.format(CombatInfo.SV.PotionTimerMiilis and "%.1f" or "%.1d", 0.001 * remain))
+            end
+
             for i = #(uiQuickSlot.timeColours), 1, -1 do
                 if remain < uiQuickSlot.timeColours[i].remain then
                     if CombatInfo.SV.PotionTimerColor then

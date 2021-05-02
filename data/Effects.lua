@@ -3429,7 +3429,6 @@ Effects.EffectOverride = {
 
     -- Base Mementos
     [26829] = { icon = 'LuiExtended/media/icons/mementos/memento_almalexias_enchanted_lantern.dds', name = Abilities.Memento_Almalexias_Lantern, unbreakable = 1, tooltip = Tooltips.Memento_Almalexias_Lantern }, -- Light of the Tribunal (Almalexia's Enchanted Lantern)
-    --[26736] = { icon = 'LuiExtended/media/icons/mementos/memento_battered_bear_trap.dds', name = Abilities.Memento_Battered_Bear_Trap }, -- Bear Trap (Battered Bear Trap)
     [16846] = { icon = 'LuiExtended/media/icons/mementos/memento_blackfeather_court_whistle.dds', hide = true }, -- Blackfeather Court Whistle (Blackfeather Court Whistle)
     [41988] = {icon = 'LuiExtended/media/icons/mementos/memento_bonesnap_binding_stone.dds', unbreakable = 1, tooltip = Tooltips.Memento_Bonesnap_Binding_Talisman }, -- Bonesnap Binding Stone (Bonesnap Binding Stone)
     [39245] = {icon = 'LuiExtended/media/icons/mementos/memento_discourse_amaranthine.dds', name = Abilities.Memento_Discourse_Amaranthine, unbreakable = 1, tooltip = Tooltips.Memento_Discourse_Amaranthine }, -- Glimpse of the Forbidden (Discoure Amaranthine)
