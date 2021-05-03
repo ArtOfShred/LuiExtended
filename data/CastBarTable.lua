@@ -262,7 +262,6 @@ CastBarTable.CastChannelOverride = {
     [97273] = true, -- TROPHY Death Crate Mem 1 (Crow's Calling)
     [99318] = true, -- TROPHY Flame Crate Mem 1 (Fiery Orb)
     [99319] = true, -- Flame Crate Memento 2 (Flame Pixie)
-    [99320] = true, -- TROPHY Flame Crate Mem 3 (Flame Eruption)
     [101874] = true, -- _CRWN Dragon Priest Mem2 Ice T (Scalecaller Frost Shard)
     [101877] = true, -- _CRWN Dragon Priest Mem1 Fl/St (Scalecaller Rune of Levitation)
     [101872] = true, -- _CRWN Dragon Priest Memento3 (Bone Dragon Summons Focus)
