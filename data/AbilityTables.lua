@@ -81,6 +81,11 @@ local AbilityTables = {
     Innate_Guar_Stomp                           = GetCollectibleName(6197),
     Innate_Swamp_Jelly                          = GetCollectibleName(5656),
     Innate_Dwarven_Theodolite                   = GetCollectibleName(1232),
+    Innate_Big_Eared_Ginger_Kitten              = GetCollectibleName(4996),
+    Innate_Psijic_Glowglobe                     = GetCollectibleName(5047),
+    Innate_Sixth_House_Robe                     = GetCollectibleName(1230),
+    Innate_Stone_Husk_Fragment                  = GetItemLinkName("|H0:item:166466:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Welkynar_Binding                     = GetItemLinkName("|H0:item:141736:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
 
     Innate_Arena_Gladiators_Exultation      = GetItemLinkName("|H0:item:141751:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Innate_Arena_Gladiators_Mockery         = GetItemLinkName("|H0:item:146042:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),

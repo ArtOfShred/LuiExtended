@@ -787,9 +787,59 @@ LUIE.DebugAuras = {
     [123110] = true, -- 68235 Stun (Mummified Alfiq Parts)
     [123115] = true, -- 68235 Stun (Plague-Drenched Fabric)
 
-    [111133] = true, -- 68235 Stun (Swamp Jelly)
-    [117532] = true, -- 68235 Stun (Guar Stomp)
-    [92365] = true, -- 68235 Stun (Dwarven Theodolite)
+    [110871] = true, -- Roll 1d10000 (Welkynar Binding)
+    [110890] = true, -- 68235 Stun (Welkynar Binding)
+
+    [140542] = true, -- Stone Warrior Target Dummy (Stone Husk Fragment)
+    [140544] = true, -- 68235 Stun (Stone Husk Fragment)
+
+    [111141] = true, -- 68235 Stun (Swamp Jelly Carrying Jar)
+    [111129] = true, -- 68235 Stun (Swamp Jelly Fine-Mesh Net)
+    [111153] = true, -- 68235 Stun (Swamp Jelly Hunter's Lense)
+    [111133] = true, -- 68235 Stun (Swamp Jelly Luminous Fishmeal)
+    [111137] = true, -- 68235 Stun (Swamp Jelly Luring Flute)
+    [111149] = true, -- 68235 Stun (Swamp Jelly Moss Bedding)
+    [111145] = true, -- 68235 Stun (Swamp Jelly Spawning Mud)
+
+    [117532] = 5000, -- 68235 Stun (Guar Stomp Elucidating Hand-Sculpture)
+    [117558] = 5000, -- 68235 Stun (Guar Stomp History in Street Theatre)
+    [117554] = 5000, -- 68235 Stun (Guar Stomp Illustrated Reports)
+    [117550] = 5000, -- 68235 Stun (Guar Stomp Noise Reports)
+    [117545] = 5000, -- 68235 Stun (Guar Stomp Rehearsal Tuning Fork)
+    [117562] = 5000, -- 68235 Stun (Guar Stomp Skeletal Reconstruction)
+    [117541] = 5000, -- 68235 Stun (Guar Stomp Steps-Practice Rug)
+
+    --[108312] = true, -- 68235 Stun (Big-Eared Ginger Kitten's "Care and Feeding" Guide)
+    --[108300] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Bait Mouse)
+    --[108283] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Collar)
+    --[108308] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Feather Toy)
+    --[108304] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Milk Saucer)
+    --[108296] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Sleeping-Basket)
+    --[108292] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Tag)
+
+    --[108316] = true, -- 68235 Stun (Psijic Glowglobe's Ancient Texts)
+    --[108320] = true, -- 68235 Stun (Psijic Glowglobe's Conjectural Writings)
+    --[108324] = true, -- 68235 Stun (Psijic Glowglobe's Crystal Ball)
+    --[108328] = true, -- 68235 Stun (Psijic Glowglobe's Meteoric Glass)
+    --[108332] = true, -- 68235 Stun (Psijic Glowglobe's Purified Glow Dust)
+    --[108336] = true, -- 68235 Stun (Psijic Glowglobe's Updated Instructionals)
+    --[108340] = true, -- 68235 Stun (Psijic Glowglobe's Wisp Animus)
+
+    [92381] = true, -- 68235 Stun (Sixth House Incense of Toolwork)
+    [92393] = true, -- 68235 Stun (Sixth House Ornamental Fasteners)
+    [92389] = true, -- 68235 Stun (Sixth House Patterned Belt)
+    [92397] = true, -- 68235 Stun (Sixth House Tailor's Belt)
+    [92385] = true, -- 68235 Stun (Sixth House Tailor's Hammer)
+    [92373] = true, -- 68235 Stun (Sixth House Tailor's Shears)
+    [92377] = true, -- 68235 Stun (Sixth House Writhing Thread)
+
+    [92365] = true, -- 68235 Stun (Dwarven Theodolite Chassis)
+    [92361] = true, -- 68235 Stun (Dwarven Theodolite Eye)
+    [92357] = true, -- 68235 Stun (Dwarven Theodolite Head)
+    [92353] = true, -- 68235 Stun (Dwarven Theodolite Neck)
+    [92349] = true, -- 68235 Stun (Dwarven Theodolite Shoulder)
+    [92345] = true, -- 68235 Stun (Dwarven Theodolite Torso)
+    [92341] = true, -- 68235 Stun (Dwarven Theodolite Wheels)
 
     -- Other
     [113432] = true, -- 68235 Stun (Nascent Indrik)
@@ -800,12 +850,13 @@ LUIE.DebugAuras = {
     [148079] = true, -- 68235 Stun (Unstable Morpholith)
     [148080] = true, -- 68235 Stun (Unstable Morpholith)
 
-    [68259] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
-    [68263] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
-    [68267] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
-    [68271] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
-    [68275] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
-    [68279] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [68259] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I)
+    [68263] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment II)
+    [68267] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment III)
+    [68271] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment IV)
+    [68275] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment V)
+    [68279] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment VI)
+    [68283] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment VII)
     [70582] = true, -- Roll 1d1000 (Merethic Resorative Resin)
     [70584] = true, -- 68235 Stun (Merethic Restorative Resin)
     [88449] = true, -- Create Super Psijic Ambrosia (Aetheric Cipher)
@@ -860,6 +911,24 @@ LUIE.DebugAuras = {
     [128362] = true, -- Glenmoril Wyrd Treasure Map: Rivenspire
     [128367] = true, -- Glenmoril Wyrd Treasure Map: Shadowfen
     [128373] = true, -- Glenmoril Wyrd Treasure Map: Stonefalls
+
+    -- Key Fragments
+    [65704] = true, -- Take key (Bone Shard Trophy Vault)
+    [65947] = true, -- Tooth Key (Bone Shard Trophy Vault)
+    [67824] = true, -- Take teeth (Monstrous Tooth Trophy Vault)
+    [67825] = true, -- Tooth key (Monstrous Tooth Trophy Vault)
+    [67018] = true, -- Take key (Clawed Trophy Vault)
+    [67019] = true, -- Tiny Claw Key (Clawed Trophy Vault)
+    [67033] = true, -- Take dark ether (Ethereal Trophy Vault)
+    [67034] = true, -- Dark Ether Key (Ethereal Trophy Vault)
+    [67798] = true, -- Take key (Planar Armor Trophy Vault)
+    [67799] = true, -- Tiny Claw Key (Planar Armor Trophy Vault)
+    [67709] = true, -- Take marks (Legionary Trophy Vault)
+    [67713] = true, -- Mark Key (Legionary Trophy Vault)
+    [70300] = true, -- Create Key (Daedric Embers Trophy Vault)
+    [70301] = true, -- Create Key (Daedric Embers Trophy Vault)
+    [70281] = true, -- Create Key (Daedric Shackle Vault)
+    [70283] = true, -- Create Key (Daedric Shackle Vault)
 
     -- PTS Items
     [81736] = true, -- Donolon's Blue Recipe Book (Recipe: Donolon's Blue Recipe Book)
