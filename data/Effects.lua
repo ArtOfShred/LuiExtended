@@ -4637,14 +4637,15 @@ Effects.EffectOverride = {
     [147694] = { icon = 'LuiExtended/media/icons/abilities/ability_set_explosive_rebuke.dds' }, -- Explosive Rebuke (of Explosive Rebuke)
 
     -- Disguises
+    [46281] = { tooltip = Tooltips.Disguise_Bloodthorn }, -- Necromancer Disguise (Bloodthorn Disguise)
     [30879] = { tooltip = Tooltips.Disguise_Kollopi_Essence }, -- Shimmering Glow (Kollopi Essence)
-    [33534] = { tooltip = Tooltips.Disguise_Sea_Viper_Armor }, -- Seaside Disguise (Sea Viper Armor)
-    [43722] = { tooltip = Tooltips.Disguise_Vulkhel_Guard }, -- First Auridon Marine Disguise (Vulkhel Guard Marcine Disguise)
     [43716] = { tooltip = Tooltips.Disguise_Phaer_Mercenary }, -- Phaer Mercenary Disguise (Phaer Mercenary Disguise)
     [43719] = { tooltip = Tooltips.Disguise_Quendeluun }, -- Quendeluun Pact Disguise (Quendeluun Veiled Heritance Disguise)
+    [33534] = { tooltip = Tooltips.Disguise_Sea_Viper_Armor }, -- Seaside Disguise (Sea Viper Armor)
     [27457] = { tooltip = Tooltips.Disguise_Seadrake }, -- Seadrake Disguise (Seadrake Disguise)
     [32045] = { tooltip = Tooltips.Disguise_Servants_Robes }, -- Servant Costume (Servant's Robes)
-    [46281] = { tooltip = Tooltips.Disguise_Bloodthorn }, -- Necromancer Disguise (Bloodthorn Disguise)
+    [43722] = { tooltip = Tooltips.Disguise_Vulkhel_Guard }, -- First Auridon Marine Disguise (Vulkhel Guard Marcine Disguise)
+
     [82631] = { icon = 'LuiExtended/media/icons/disguises/disguise_monks_disguise.dds', name = Abilities.Disguise_Monks_Disguise }, -- Monk Disguise Timer (Monk's Disguise)
 
     ----------------------------------------------------------------
