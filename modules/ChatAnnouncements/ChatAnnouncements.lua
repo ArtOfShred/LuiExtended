@@ -191,6 +191,7 @@ ChatAnnouncements.Defaults = {
         CollectibleColor1             = { .75, .75, .75, 1 },
         CollectibleColor2             = { .75, .75, .75, 1 },
         CollectibleCategory           = true,
+        CollectibleSubcategory        = true,
         CollectibleUseCA              = false,
         CollectibleUseAlert           = false,
         CollectibleUsePetNickname     = false,
@@ -2756,7 +2757,7 @@ local isShopCollectible = {
     [GetCollectibleInfo(4)] = 4, -- Bay Dun Horse
     [GetCollectibleInfo(5)] = 5, -- Midnight Steed
 
-    --[GetCollectibleInfo(4673)] = 4673, -- Storage Coffer, Fortified (From level up rewards)
+    --[GetCollectibleInfo(4673)] = 4673, -- Storage Coffer, Fortified (from level up rewards)
     [GetCollectibleInfo(4674)] = 4674, -- Storage Chest, Fortified (Tel Var / Writ Vouchers)
     [GetCollectibleInfo(4675)] = 4675, -- Storage Coffer, Oaken (Tel Var / Writ Vouchers)
     [GetCollectibleInfo(4676)] = 4676, -- Storage Coffer, Secure (Tel Var / Writ Vouchers)
@@ -2809,13 +2810,21 @@ local isShopCollectible = {
     [GetCollectibleInfo(8197)] = 8197, -- Dominion Breton Terrier
     [GetCollectibleInfo(8198)] = 8198, -- Covenant Breton Terrier
 
-    [GetCollectibleInfo(8866)] = 8866, -- Deadlands Flint
-    [GetCollectibleInfo(8867)] = 8867, -- Rune-Etched Striker
-    [GetCollectibleInfo(8868)] = 8868, -- Smoldering Bloodgrass Tinder
+    [GetCollectibleInfo(8866)] = 8866, -- Deadlands Flint (Unstable Morpholith)
+    [GetCollectibleInfo(8867)] = 8867, -- Rune-Etched Striker (Unstable Morpholith)
+    [GetCollectibleInfo(8868)] = 8868, -- Smoldering Bloodgrass Tinder (Unstable Morpholith)
 
-    [GetCollectibleInfo(9085)] = 9085, -- Vial of Simmering Daedric Brew
-    [GetCollectibleInfo(9086)] = 9086, -- Vial of Bubbling Daedric Brew
-    [GetCollectibleInfo(9087)] = 9087, -- Vial of Scalding Daedric Brew
+    [GetCollectibleInfo(8869)] = 8869, -- Rune-Scribed Daedra Hide (Deadlands Scorcher)
+    [GetCollectibleInfo(8870)] = 8870, -- Rune-Scribed Daedra Sleeve (Deadlands Scorcher)
+    [GetCollectibleInfo(8871)] = 8871, -- Rune-Scribed Daedra Veil (Deadlands Scorcher)
+
+    [GetCollectibleInfo(9085)] = 9085, -- Vial of Simmering Daedric Brew (Deadlands Firewalker)
+    [GetCollectibleInfo(9086)] = 9086, -- Vial of Bubbling Daedric Brew (Deadlands Firewalker)
+    [GetCollectibleInfo(9087)] = 9087, -- Vial of Scalding Daedric Brew (Deadlands Firewalker)
+
+    [GetCollectibleInfo(9163)] = 9163, -- Black Iron Bit and Bridle (Dagonic Quasigriff)
+    [GetCollectibleInfo(9164)] = 9164, -- Black Iron Stirrups (Dagonic Quasigriff)
+    [GetCollectibleInfo(9162)] = 9162, -- Smoke-Wreathed Griffon Feather (Dagonic Quasigriff)
 
 }
 
@@ -7790,6 +7799,9 @@ function ChatAnnouncements.HookFunction()
                         local collectibleName = collectibleData:GetName()
                         local icon = collectibleData:GetIcon()
                         local categoryData = collectibleData:GetCategoryData()
+                        local majorCategory = categoryData:GetId()
+                        local majorCategoryTopLevelIndex = GetCategoryInfoFromCollectibleCategoryId(majorCategory)
+                        local majorCategoryName = GetCollectibleCategoryInfo(majorCategoryTopLevelIndex)
                         local categoryName = categoryData:GetName()
                         local collectibleId = collectibleData:GetId()
 
@@ -7807,8 +7819,16 @@ function ChatAnnouncements.HookFunction()
                                 string1 = ""
                             end
                             local string2
-                            if ChatAnnouncements.SV.Collectibles.CollectibleCategory then
-                                string2 = CollectibleColorize2:Colorize(zo_strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, link, categoryName) .. ".")
+                            if ChatAnnouncements.SV.Collectibles.CollectibleCategory or ChatAnnouncements.SV.Collectibles.CollectibleSubcategory then
+                                local categoryString
+                                if ChatAnnouncements.SV.Collectibles.CollectibleCategory and ChatAnnouncements.SV.Collectibles.CollectibleSubcategory then
+                                    categoryString = (majorCategoryName .. " - " .. categoryName)
+                                elseif ChatAnnouncements.SV.Collectibles.CollectibleCategory then
+                                    categoryString = majorCategoryName
+                                else
+                                    categoryString = categoryName
+                                end
+                                string2 = CollectibleColorize2:Colorize(zo_strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, link, categoryString) .. ".")
                             else
                                 string2 = link
                             end
@@ -7822,14 +7842,26 @@ function ChatAnnouncements.HookFunction()
                         -- Note: This also means we don't need to Play Sound if the CSA isn't enabled since a blank one is always sent if the CSA is disabled.
                         local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.COLLECTIBLE_UNLOCKED)
                         if ChatAnnouncements.SV.Collectibles.CollectibleCSA then
-                            messageParams:SetText(csaPrefix, zo_strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, categoryName))
+                            local categoryString
+                            if ChatAnnouncements.SV.Collectibles.CollectibleCategory then
+                                categoryString = (majorCategoryName .. " - " .. categoryName)
+                            else
+                                categoryString = categoryName
+                            end
+                            messageParams:SetText(csaPrefix, zo_strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, categoryString))
                             messageParams:SetIconData(icon, "EsoUI/Art/Achievements/achievements_iconBG.dds")
                             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SINGLE_COLLECTIBLE_UPDATED)
                             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
                         end
 
                         if ChatAnnouncements.SV.Collectibles.CollectibleAlert then
-                            local text = zo_strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, categoryName .. ".")
+                            local categoryString
+                            if ChatAnnouncements.SV.Collectibles.CollectibleCategory then
+                                categoryString = (majorCategoryName .. " - " .. categoryName)
+                            else
+                                categoryString = categoryName
+                            end
+                            local text = zo_strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, categoryString .. ".")
                             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
                         end
                     end

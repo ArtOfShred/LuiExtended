@@ -3192,6 +3192,17 @@ function ChatAnnouncements.CreateSettings()
                 default = Defaults.Collectibles.CollectibleCategory,
             },
             {
+                -- Collectible Subcategory
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_COLLECTIBLE_SUBCATEGORY)),
+                tooltip = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_SUBCATEGORY_TP),
+                getFunc = function() return Settings.Collectibles.CollectibleSubcategory end,
+                setFunc = function(value) Settings.Collectibles.CollectibleSubcategory = value end,
+                width = "full",
+                disabled = function() return not (Settings.Collectibles.CollectibleCA or Settings.Collectibles.CollectibleCSA or Settings.Collectibles.CollectibleAlert and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = Defaults.Collectibles.CollectibleSubcategory,
+            },
+            {
                 -- Collectible Usage
                 type = "header",
                 name = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_HEADER),
