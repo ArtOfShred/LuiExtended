@@ -3598,23 +3598,6 @@ Effects.EffectOverride = {
     [21230] = { icon = 'LuiExtended/media/icons/glyphs/glyph_weapon_damage.dds', name = Abilities.Item_Glyph_of_Weapon_Damage, tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration }, -- Berserker (Glyph of Weapon Damage) (Added in case ever needed)
 
     ----------------------------------------------------------------
-    -- STATUS EFFECT PROCS -----------------------------------------
-    ----------------------------------------------------------------
-
-    [18084] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_burning.dds', tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Burning (Fire Status Effect)
-    [130804] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_burning.dds', tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Burning (Fire Status Effect - Siege)
-    [21925] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_diseased.dds' }, -- Diseased (Disease Status Effect)
-    [21481] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_chill.dds', name = Abilities.Proc_Chilled }, -- Chill (Frost Status Effect)
-    [130814] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_chill.dds', name = Abilities.Proc_Chilled }, -- Chill (Frost Status Effect)
-    [21929] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_poisoned.dds', tooltip = Tooltips.Generic_Poison, tooltipValue2 = 2 }, -- Poisoned (Poison Status Effect)
-    [21487] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_concussion.dds' }, -- Concussion (Shock Status Effect)
-    [130808] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_concussion.dds' }, -- Concussion (Shock Status Effect - Siege)
-    [148800] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_sundered.dds' }, -- Sundered (Physical Status Effect)
-    [149573] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_sundered.dds' }, -- Sundered (Physical Status Effect - Siege)
-    [148801] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_hemorrhaging.dds', tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 2 }, -- Hemorrhaging (Bleed Status Effect)
-    [148797] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_overcharged.dds' }, -- Overcharged (Magic Status Effect)
-
-    ----------------------------------------------------------------
     -- MUNDUS STONE BOONS ------------------------------------------
     ----------------------------------------------------------------
 
@@ -4316,6 +4299,26 @@ Effects.EffectOverride = {
     [61737] = { tooltip = Tooltips.Skill_Empower }, -- Empower
 
     ----------------------------------------------------------------
+    -- STATUS EFFECT PROCS -----------------------------------------
+    ----------------------------------------------------------------
+
+    -- Magic Status Effects
+    [18084] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_burning.dds', tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Burning (Fire Status Effect)
+    [130804] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_burning.dds', tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Burning (Fire Status Effect - Siege)
+    [21481] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_chill.dds', name = Abilities.Proc_Chilled }, -- Chill (Frost Status Effect)
+    [130814] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_chill.dds', name = Abilities.Proc_Chilled }, -- Chill (Frost Status Effect)
+    [21487] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_concussion.dds' }, -- Concussion (Shock Status Effect)
+    [130808] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_concussion.dds' }, -- Concussion (Shock Status Effect - Siege)
+    [148797] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_overcharged.dds' }, -- Overcharged (Magic Status Effect)
+
+    -- Martial Status Effects
+    [21925] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_diseased.dds' }, -- Diseased (Disease Status Effect)
+    [148801] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_hemorrhaging.dds', tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 2 }, -- Hemorrhaging (Bleed Status Effect)
+    [21929] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_poisoned.dds', tooltip = Tooltips.Generic_Poison, tooltipValue2 = 2 }, -- Poisoned (Poison Status Effect)
+    [148800] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_sundered.dds' }, -- Sundered (Physical Status Effect)
+    [149573] = { icon = 'LuiExtended/media/icons/abilities/ability_proc_sundered.dds' }, -- Sundered (Physical Status Effect - Siege)
+
+    ----------------------------------------------------------------
     -- CHAMPION POINTS ---------------------------------------------
     ----------------------------------------------------------------
 
@@ -4386,7 +4389,6 @@ Effects.EffectOverride = {
     [999014] = { icon = 'esoui/art/icons/artificialeffect_battle-spirit.dds', name = Abilities.Skill_Battle_Spirit }, -- Battle Spirit FAKE
     [21263] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = Abilities.Innate_Ayleid_Well, tooltip = Tooltips.Innate_Ayleid_Well }, -- Ayleid Health Bonus
     [100862] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = Abilities.Innate_Ayleid_Well_Fortified, tooltip = Tooltips.Innate_Ayleid_Well_Fortified }, -- Ayleid Health Bonus
-    [105194] = { hide = true }, -- RF Combat Trigger
 
     -- Mount
     [37059] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_mounted.dds' }, -- Mount Up (Mount)
@@ -4438,16 +4440,6 @@ Effects.EffectOverride = {
     [999020] = { icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', name = Abilities.Innate_Disguise }, -- Disguise FAKE
 
     -- Death Achieve Check (Veteran Dungeons)
-    [55883] = { hide = true }, -- Death Achieve Check
-    [55884] = { hide = true }, -- Death Achieve Check
-    [58955] = { hide = true }, -- Death Achieve Check
-    [58963] = { hide = true }, -- Death Achieve Check
-    [66271] = { hide = true }, -- Death Achieve Check
-    [66272] = { hide = true }, -- Death Achieve Check
-    [75612] = { hide = true }, -- Death Achieve Check
-    [75615] = { hide = true }, -- Death Achieve Check
-    [76264] = { hide = true }, -- Death Achieve Check
-    [76265] = { hide = true }, -- Death Achieve Check
     [55883] = { hide = true }, -- Death Achieve Check
     [55884] = { hide = true }, -- Death Achieve Check
     [58955] = { hide = true }, -- Death Achieve Check
@@ -4740,14 +4732,19 @@ Effects.EffectOverride = {
     [61907] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Will (Grim Focus)
     [122585] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Will (Grim Focus)
     [61905] = { tooltip = Tooltips.Skill_Grim_Focus_Defense }, -- Grim Focus (Grim Focus)
+    [105183] = { hide = true }, -- Grim Focus Combat Trigger (Grim Focus)
+
     [61927] = { tooltip = Tooltips.Skill_Relentless_Focus }, -- Relentless Focus (Relentless Focus)
     [61932] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Scourge (Relentless Focus)
     [122587] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds', name = Abilities.Skill_Assassins_Scourge }, -- Assassin's Will (Relentless Focus)
     [61928] = { tooltip = Tooltips.Skill_Grim_Focus_Defense }, -- Relentless Focus (Relentless Focus)
+    [105194] = { hide = true }, -- RF Combat Trigger (Relentless Focus)
+
     [61919] = { tooltip = Tooltips.Skill_Merciless_Resolve }, -- Merciless Resolve (Merciless Resolve)
     [61930] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Will (Merciless Resolve)
     [122586] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Will (Merciless Resolve)
     [61920] = { tooltip = Tooltips.Skill_Grim_Focus_Defense }, -- Merciless Resolve (Merciless Resolve)
+    [105290] = { hide = true }, -- MR Combat Trigger (Merciless Resolve)
 
     -- Death Stroke / Incapacitating Strike / Soul Harvest
     [61389] = { icon = 'esoui/art/icons/ability_nightblade_007.dds', name = Abilities.Skill_Death_Stroke, tooltip = Tooltips.Skill_Death_Stroke_Debuff }, -- Damage Taken Increased (Death Stroke)
