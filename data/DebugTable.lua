@@ -1523,13 +1523,16 @@ LUIE.DebugAuras = {
     [124622] = true, -- Alliance Standard-Bearer Emote (Alliance Standard-Bearer's License)
     [124624] = true, -- 68235 Stun (Alliance Standard-Bearer's License)
 
-    -- Item Combination - Siege of Cyrodiil Commendations
+    -- Item Combination - Siege of Cyrodiil Merits
     --[148419] = true, -- Reachman Emote (Siege of Cyrodiil Commendation)
     --[148421] = true, -- 68235 Stun (Siege of Cyrodiil Commendation)
+
     --[145214] = true, -- Siegemaster Costume (Siege of Cyrodiil Distinction)
     --[145216] = true, -- 68235 Stun (Siege of Cyrodiil Distinction)
+
     --[124788] = true, -- Arena Gladiator Helm (Siege of Cyrodiil Recognition)
     --[124789] = true, -- 68235 Stun (Siege of Cyrodiil Recognition)
+
     --[126708] = true, -- Siegemaster Costume (Siege of Cyrodiil Recommendation)
     --[126710] = true, -- 68235 Stun (Siege of Cyrodiil Recommendation)
 

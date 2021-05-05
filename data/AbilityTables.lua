@@ -98,6 +98,7 @@ local AbilityTables = {
     Innate_Siege_of_Cyrodiil_Recommendation = GetItemLinkName("|H0:item:153536:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Innate_Alliance_Standard_Bearers        = GetItemLinkName("|H0:item:151934:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Innate_Siege_of_Cyrodiil_Commendation   = GetItemLinkName("|H0:item:171532:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Siege_of_Cyrodiil_Distinction    = GetItemLinkName("|H0:item:167303:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
 
     -- World
     Innate_Drop_Anchor                = 86717, -- Drop Anchor
