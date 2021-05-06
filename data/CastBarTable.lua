@@ -254,8 +254,17 @@ CastBarTable.CastChannelOverride = {
     [85355] = true, -- Flame Juggling (Consumable Version)
     [85354] = true, -- Dagger Juggling (Consumable Verison)
     [85353] = true, -- Sword Swallowing (Consumable Version)
+    [146657] = true, -- Memento Cliff Racer (Thetys Ramary's Bait Kit)
+
+    [115681] = true, -- Party Noise Maker (Festive Noise Maker)
+    [129550] = true, -- Stunned (Jester's Festival Joke Popper)
+    [149874] = true, -- Playful Prankster's Surprise Box (Playful Prankster's Surprise Box)
     [102077] = true, -- Jester's Festival Scintillator (Jester's Scintillator)
+    [111458] = true, -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
+    [111459] = true, -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
     [125820] = true, -- Witches Festival 2019 Marionette (Skeletal Marionette)
+    [144790] = true, -- Throw Bones (Throwing Bones)
+    [144791] = true, -- Throw Bones (Throwing Bones)
 
     -- Memento (Crown)
     [85347] = true, -- Storm Orb Juggle (Atronach Juggling)
@@ -285,6 +294,7 @@ CastBarTable.CastChannelOverride = {
     [79510] = true, -- TROPHY Blood Oath (Blade of the Blood Oath)
     [119099] = true, -- Brittle Burial Urn (Brittle Burial Urn)
     [125816] = true, -- Maarselok Corruption Memento (Corruption of Maarselok)
+    [153758] = true, -- Golden Anvil Replica (Full-Scale Golden Anvil Replica)
     [125817] = true, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
 
     -- Vampire
@@ -466,9 +476,18 @@ CastBarTable.CastDurationFix = {
     [85355] = 12000, -- Flame Juggling (Consumable Version)
     [85354] = 12000, -- Dagger Juggling (Consumable Verison)
     [85353] = 12000, -- Sword Swallowing (Consumable Version)
+    [146657] = 19000, -- Memento Cliff Racer (Thetys Ramary's Bait Kit)
+
+    [115681] = 3250, -- Party Noise Maker (Festive Noise Maker)
+    [129550] = 6540, -- Stunned (Jester's Festival Joke Popper)
+    [149874] = 10000, -- Playful Prankster's Surprise Box (Playful Prankster's Surprise Box)
     [102077] = 2000, -- Jester's Festival Scintillator (Jester's Scintillator)
     [81575] = 2000, -- Event - WitchFest Cauldron (Witchmother's Whistle)
+    [111458] = 9000, -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
+    [111459] = 9000, -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
     [125820] = 7500, -- Witches Festival 2019 Marionette (Skeletal Marionette)
+    [144790] = 13000, -- Throw Bones (Throwing Bones)
+    [144791] = 13000, -- Throw Bones (Throwing Bones)
 
     -- Memento (Crown)
     [85347] = 12000, -- Storm Orb Juggle (Atronach Juggling)
@@ -500,6 +519,8 @@ CastBarTable.CastDurationFix = {
     [92862] = 4500, -- Ringing Bell (Dreamer's Chime)
     [119099] = 4000, -- Brittle Burial Urn (Brittle Burial Urn)
     [125816] = 10000, -- Maarselok Corruption Memento (Corruption of Maarselok)
+    [153758] = 11500, -- Golden Anvil Replica (Full-Scale Golden Anvil Replica)
+    [149879] = 3500, -- Daedric Unwarding Amulet (Daedric Unwarding Amulet)
     [125817] = 5000, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
 
     -- Vampire
@@ -695,6 +716,7 @@ CastBarTable.IsCast = {
     [85355] = true, -- Flame Juggling (Consumable Version)
     [85354] = true, -- Dagger Juggling (Consumable Verison)
     [85353] = true, -- Sword Swallowing (Consumable Version)
+    [146657] = true, -- Memento Cliff Racer (Thetys Ramary's Bait Kit)
     [87964] = true, -- Jester's Festival Illusion Daz (Sparkwreath Dazzler)
     [87965] = true, -- Jester's Festival Illusion Daz (Plume Dazzler)
     [87966] = true, -- Jester's Festival Illusion Daz (Spiral Dazzler)
@@ -702,6 +724,10 @@ CastBarTable.IsCast = {
     [86774] = true, -- Mudball (Mud Ball Pouch)
     [116879] = true, -- Alliance Pie (Revelry Pie)
     [87963] = true, -- Bestowed Cherry Blossoms (Cherry Blossom Branch)
+
+    [115681] = true, -- Party Noise Maker (Festive Noise Maker)
+    [129550] = true, -- Stunned (Jester's Festival Joke Popper)
+    [149874] = true, -- Playful Prankster's Surprise Box (Playful Prankster's Surprise Box)
     [102077] = true, -- Jester's Festival Scintillator (Jester's Scintillator)
     [81575] = true, -- Event - WitchFest Cauldron (Witchmother's Whistle)
     [104324] = true, -- Psijic Pearl Summon (Psijic Celestial Orb)
@@ -712,7 +738,11 @@ CastBarTable.IsCast = {
     [110481] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [113288] = true, -- U20 Crown Memento 1 (Mire Drum)
     [113291] = true, --  U20 Crown Memento 2 (Vossa-satl)
+    [111458] = true, -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
+    [111459] = true, -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
     [125820] = true, -- Witches Festival 2019 Marionette (Skeletal Marionette)
+    [144790] = true, -- Throw Bones (Throwing Bones)
+    [144791] = true, -- Throw Bones (Throwing Bones)
 
     -- Memento (Crown)
     [85347] = true, -- Storm Orb Juggle (Atronach Juggling)
@@ -744,6 +774,8 @@ CastBarTable.IsCast = {
     [92862] = true, -- Ringing Bell (Dreamer's Chime)
     [119099] = true, -- Brittle Burial Urn (Brittle Burial Urn)
     [125816] = true, -- Maarselok Corruption Memento (Corruption of Maarselok)
+    [153758] = true, -- Golden Anvil Replica (Full-Scale Golden Anvil Replica)
+    [149879] = true, -- Daedric Unwarding Amulet (Daedric Unwarding Amulet)
     [125817] = true, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
     [119107] = true, -- NAME ME Infect Brew (Winnowing Plague Decoction)
 
@@ -1065,6 +1097,7 @@ CastBarTable.CastOverride = {
 CastBarTable.MultiCast = {
     [42076] = true, -- Tear (Mezha-dro's Sealing Amulet)
     [42053] = true, -- Yokudan Salute (Yokudan Totem)
+    [115681] = true, -- Party Noise Maker (Festive Noise Maker)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------

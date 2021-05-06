@@ -3804,19 +3804,37 @@ Effects.EffectOverride = {
 
     -- Jester's Festival
     [87963] = { icon = 'LuiExtended/media/icons/mementos/memento_cherry_blossom_branch.dds', name = Abilities.Memento_Cherry_Blossom_Branch }, -- Bestowed Cherry Blossoms (Cherry Blossom Branch)
+
+    [115681] = { icon = 'esoui/art/icons/achievement_jestersfestival_memento_noisemaker.dds', name = Abilities.Memento_Festive_Noise_Maker }, -- Party Noise Maker (Festive Noise Maker)
+    [129550] = { icon = 'esoui/art/icons/achievement_jestersfestival_memento_popper.dds', name = Abilities.Memento_Jesters_Festival_Joke_Popper }, -- Stunned (Jester's Festival Joke Popper)
+
     [102077] = { icon = 'LuiExtended/media/icons/mementos/memento_jesters_scintillator.dds', name = Abilities.Memento_Jesters_Scintillator, unbreakable = 1 }, -- Jester's Festival Scintillator (Jester's Scintillator)
+
+    [149874] = { icon = 'LuiExtended/media/icons/mementos/memento_playful_pranksters_surprise_box.dds' }, -- Playful Prankster's Surprise Box (Playful Prankster's Surprise Box)
+
     [91369] = { icon = 'LuiExtended/media/icons/mementos/memento_the_pie_of_misrule.dds', name = Abilities.Memento_The_Pie_of_Misrule, tooltip = Tooltips.Experience_Seasonal_Event, forcedContainer = 'long' }, -- Jester's Experience Boost Pie (The Pie of Misrule)
 
     -- New Life Festival
     [91449] = { icon = 'LuiExtended/media/icons/mementos/memento_bredas_magnificent_mead.dds', tooltip = Tooltips.Experience_Seasonal_Event, forcedContainer = 'long' }, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)
     [86075] = { icon = 'LuiExtended/media/icons/mementos/memento_bredas_magnificent_mead.dds', tooltip = Tooltips.Experience_Seasonal_Event, forcedContainer = 'long' }, -- Breda's Magnificent Mead (Breda's Magnificent Mead)
-    [85355] = {icon = 'LuiExtended/media/icons/mementos/memento_fire_breathers_torches.dds', name = Abilities.Memento_Fire_Breathers_Torches, unbreakable = 1 }, -- Flame Juggling (Fire-Breather's Torches)
-    [85354] = {icon = 'LuiExtended/media/icons/mementos/memento_jugglers_knives.dds', name = Abilities.Memento_Jugglers_Knives, unbreakable = 1 }, -- Dagger Juggling (Juggler's Knives)
+    [85355] = { icon = 'LuiExtended/media/icons/mementos/memento_fire_breathers_torches.dds', name = Abilities.Memento_Fire_Breathers_Torches, unbreakable = 1 }, -- Flame Juggling (Fire-Breather's Torches)
+    [85354] = { icon = 'LuiExtended/media/icons/mementos/memento_jugglers_knives.dds', name = Abilities.Memento_Jugglers_Knives, unbreakable = 1 }, -- Dagger Juggling (Juggler's Knives)
     [86774] = { icon = 'esoui/art/icons/achievement_newlifefestival_001.dds', name = Abilities.Memento_Mud_Ball }, -- Mudball (Mud Ball Pouch)
-    [85353] = {icon = 'LuiExtended/media/icons/mementos/memento_sword_swallowers_blade.dds', name = Abilities.Memento_Sword_Swallowers_Blade, unbreakable = 1 }, -- Sword Swallowing (Sword-Swallower's Blade)
+    [85353] = { icon = 'LuiExtended/media/icons/mementos/memento_sword_swallowers_blade.dds', name = Abilities.Memento_Sword_Swallowers_Blade, unbreakable = 1 }, -- Sword Swallowing (Sword-Swallower's Blade)
+
+    -- Tribunal Celebration Event
+    [146657] = { icon = 'LuiExtended/media/icons/mementos/memento_thetys_ramarys_bait_kit.dds', name = Abilities.Memento_Thetys_Ramarys_Bait_Kit }, -- Memento Cliff Racer Bait (Thetys Ramary's Bait Kit)
+    [147634] = { hide = true }, -- Anchor (Thetys Ramary's Bait Kit)
 
     -- Witches Festival
+    [111458] = { icon = 'LuiExtended/media/icons/mementos/memento_apple_bobbing_cauldron.dds' }, -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
+    [111459] = { icon = 'LuiExtended/media/icons/mementos/memento_apple_bobbing_cauldron.dds' }, -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
     [125820] = { icon = 'LuiExtended/media/icons/mementos/memento_skeletal_marionette.dds', name = Abilities.Memento_Skeletal_Marionette }, -- Witches Festival 2019 Marionette (Skeletal Marionette)
+
+
+    [144790] = { icon = 'LuiExtended/media/icons/mementos/memento_throwing_bones.dds', name = Abilities.Memento_Throwing_Bones }, --  Throw Bones (Throwing Bones)
+    [144791] = { icon = 'LuiExtended/media/icons/mementos/memento_throwing_bones.dds', name = Abilities.Memento_Throwing_Bones }, --  Throw Bones (Throwing Bones)
+
     [81575] = { icon = 'LuiExtended/media/icons/mementos/memento_witchmothers_whistle.dds', name = Abilities.Memento_Witchmothers_Whistle, hide = true }, -- Event - WitchFest Cauldron (Witchmother's Whistle)
     [96118] = { icon = 'LuiExtended/media/icons/mementos/memento_witchmothers_brew.dds', tooltip = Tooltips.Experience_Seasonal_Event, forcedContainer = 'long' }, -- Witchmother's Boon (Witchmother's Whistle)
     [84364] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds', unbreakable = 1, forcedContainer = 'long', tooltip = Tooltips.Memento_Witchmothers_Brew }, -- Witchmother's Brew (Witchmother's Whistle)
@@ -3861,6 +3879,7 @@ Effects.EffectOverride = {
     [34578] = { icon = 'LuiExtended/media/icons/mementos/memento_nirnroot_wine.dds', unbreakable = 1 }, -- Nirnroot Wine (Nirnroot Wine)
 
     -- Prologue Quests
+    [149879] = { icon = 'LuiExtended/media/icons/mementos/memento_daedric_unwarding_amulet.dds' }, -- Daedric Unwarding Amulet (Daedric Unwarding Amulet)
     [125817] = { icon = 'LuiExtended/media/icons/mementos/memento_dragonhorn_curio.dds', name = Abilities.Memento_Dragonhorn_Curio }, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
     [89550] = { icon = 'LuiExtended/media/icons/mementos/memento_twilight_shard.dds', name = Abilities.Memento_Twilight_Shard, unbreakable = 1 }, -- TROPHY Azura's Light (Twilight Shard)
 
@@ -3891,6 +3910,9 @@ Effects.EffectOverride = {
 
     -- Scalebreaker
     [125816] = { icon = 'LuiExtended/media/icons/mementos/memento_corruption_of_maarselok.dds', name = Abilities.Memento_Corruption_of_Maarselok }, -- Maarselok Corruption Memento (Corruption of Maarselok)
+
+    -- Blackwood
+    [153758] = { icon = 'LuiExtended/media/icons/mementos/memento_full_scale_golden_anvil_replica.dds', name = Abilities.Memento_Full_Scale_Golden_Anvil_Replica }, -- Golden Anvil Replica (Full-Scale Golden Anvil Replica)
 
     ----------------------------------------------------------------
     -- CROWN CRATES

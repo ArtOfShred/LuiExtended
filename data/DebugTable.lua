@@ -1651,7 +1651,16 @@ LUIE.DebugAuras = {
     [87963] = true, -- Bestowed Cherry Blossoms (Cherry Blossom Branch)
     [89372] = true, -- Pelted! (Cherry Blossom Branch)
 
+    [115681] = true, -- Party Noise Maker (Festive Noise Maker)
+    [115682] = true, -- Mount Block (Festive Noise Maker)
+
+    [115683] = true, -- Jester Fest Memento (Jester's Festival Joke Popper)
+    [115684] = true, -- Mount Block (Jester's Festival Joke Popper)
+    [129550] = true, -- Stunned (Jester's Festival Joke Popper)
+
     [102077] = true, -- Jester's Festival Scintillator (Jester's Scintillator)
+
+    [149874] = true, -- Playful Prankster's Surprise Box (Playful Prankster's Surprise Box)
 
     [91368] = true, -- Jester's Experience Boost Pie (The Pie of Misrule)
     [91369] = true, -- Jester's Experience Boost Pie (The Pie of Misrule)
@@ -1675,10 +1684,24 @@ LUIE.DebugAuras = {
 
     [85353] = true, -- Sword Swallowing (Sword-Swallower's Blade)
 
+    -- Tribunal Celebration Event
+    [146657] = true, -- Memento Cliff Racer (Thetys Ramary's Bait Kit)
+    [147635] = true, -- Anchor (Thetys Ramary's Bait Kit)
+    [147634] = true, -- Anchor (Thetys Ramary's Bait Kit)
+
     -- Witches Festival
+    [110495] = true, -- Apple Bobbing (Apple-Bobbing Cauldron)
+    [111458] = true, -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
+    [111459] = true, -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
+
     [126689] = true, -- Grant Ach Progress: Skel Merionette (Skeletal Marionette)
     [125820] = true, -- Witches Festival 2019 Marionette (Skeletal Marionette)
     [125832] = true, -- Marionette Summon (Skeletal Marionette)
+
+    [138404] = true, -- Throw Bones (Throwing Bones)
+    --[138405] = true, -- Throw Bones (Throwing Bones)
+    [144790] = true, -- Throw Bones (Throwing Bones)
+    [144791] = true, -- Throw Bones (Throwing Bones)
 
     [81575] = true, -- Event - WitchFest Cauldron (Witchmother's Whistle)
     [96118] = true, -- Witchmother's Boon (Witchmother's Whistle)
@@ -1733,6 +1756,7 @@ LUIE.DebugAuras = {
     [34578] = true, -- Nirnroot Wine (Nirnroot Wine)
 
     -- Prologue Quests
+    [149879] = true, -- Daedric Unwarding Amulet (Daedric Unwarding Amulet)
     [125817] = true, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
     [89550] = true, -- TROPHY Azura's Light (Twilight Shard)
 
@@ -1766,6 +1790,9 @@ LUIE.DebugAuras = {
     -- Scalebreaker
     [125816] = true, -- Maarselok Corruption Memento (Corruption of Maarselok)
     [125822] = true, -- Mount Block (Corruption of Maarselok)
+
+    -- Blackwood
+    [153758] = true, -- Golden Anvil Replica (Full-Scale Golden Anvil Replica)
 
     -------------------------------------
     -- CROWN CRATES

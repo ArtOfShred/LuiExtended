@@ -241,6 +241,12 @@ local AbilityTables = {
     Memento_Jubliee_Cake              = 87998,
     Memento_Mud_Ball                  = 86749,
     Memento_Cherry_Blossom_Branch     = GetCollectibleName(1108),
+
+    Memento_Festive_Noise_Maker          = GetCollectibleName(5885),
+    Memento_Jesters_Festival_Joke_Popper = GetCollectibleName(5887),
+
+    Memento_Thetys_Ramarys_Bait_Kit   = GetCollectibleName(8658),
+
     Memento_Storm_Atronach_Aura       = GetCollectibleName(594),
     Memento_Storm_Orb_Juggle          = GetCollectibleName(595),
     Memento_Wild_Hunt_Aura            = GetCollectibleName(760),
@@ -267,6 +273,8 @@ local AbilityTables = {
     Memento_Dragonhorn_Curio          = GetCollectibleName(6641),
     Memento_Winnowing_Plague_Decoction = GetCollectibleName(6368),
     Memento_Skeletal_Marionette       = GetCollectibleName(6643),
+    Memento_Throwing_Bones            = GetCollectibleName(8079),
+    Memento_Full_Scale_Golden_Anvil_Replica = GetCollectibleName(9363),
 
     -- ---------------------------------------------------
     -- ITEM SETS -----------------------------------------
