@@ -7841,27 +7841,44 @@ function ChatAnnouncements.HookFunction()
                         -- Set message params even if CSA is disabled, we just send a dummy event so the callback handler works correctly.
                         -- Note: This also means we don't need to Play Sound if the CSA isn't enabled since a blank one is always sent if the CSA is disabled.
                         local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.COLLECTIBLE_UNLOCKED)
+                        local csaString
                         if ChatAnnouncements.SV.Collectibles.CollectibleCSA then
-                            local categoryString
-                            if ChatAnnouncements.SV.Collectibles.CollectibleCategory then
-                                categoryString = (majorCategoryName .. " - " .. categoryName)
+                            local csaString
+                            if ChatAnnouncements.SV.Collectibles.CollectibleCategory or ChatAnnouncements.SV.Collectibles.CollectibleSubcategory then
+                                local categoryString
+                                if ChatAnnouncements.SV.Collectibles.CollectibleCategory and ChatAnnouncements.SV.Collectibles.CollectibleSubcategory then
+                                    categoryString = (majorCategoryName .. " - " .. categoryName)
+                                elseif ChatAnnouncements.SV.Collectibles.CollectibleCategory then
+                                    categoryString = majorCategoryName
+                                else
+                                    categoryString = categoryName
+                                end
+                                csaString = zo_strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, categoryString)
                             else
-                                categoryString = categoryName
+                                csaString = zo_strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, categoryName)
                             end
-                            messageParams:SetText(csaPrefix, zo_strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, categoryString))
+                            messageParams:SetText(csaPrefix, csaString)
                             messageParams:SetIconData(icon, "EsoUI/Art/Achievements/achievements_iconBG.dds")
                             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SINGLE_COLLECTIBLE_UPDATED)
                             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
                         end
 
                         if ChatAnnouncements.SV.Collectibles.CollectibleAlert then
-                            local categoryString
-                            if ChatAnnouncements.SV.Collectibles.CollectibleCategory then
-                                categoryString = (majorCategoryName .. " - " .. categoryName)
+                            local alertString
+                            if ChatAnnouncements.SV.Collectibles.CollectibleCategory or ChatAnnouncements.SV.Collectibles.CollectibleSubcategory then
+                                local categoryString
+                                if ChatAnnouncements.SV.Collectibles.CollectibleCategory and ChatAnnouncements.SV.Collectibles.CollectibleSubcategory then
+                                    categoryString = (majorCategoryName .. " - " .. categoryName)
+                                elseif ChatAnnouncements.SV.Collectibles.CollectibleCategory then
+                                    categoryString = majorCategoryName
+                                else
+                                    categoryString = categoryName
+                                end
+                                alertString = zo_strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, categoryString .. ".")
                             else
-                                categoryString = categoryName
+                                alertString = zo_strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, categoryName .. ".")
                             end
-                            local text = zo_strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, categoryString .. ".")
+                            local text = alertString
                             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
                         end
                     end
