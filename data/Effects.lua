@@ -3882,6 +3882,8 @@ Effects.EffectOverride = {
     [149879] = { icon = 'LuiExtended/media/icons/mementos/memento_daedric_unwarding_amulet.dds' }, -- Daedric Unwarding Amulet (Daedric Unwarding Amulet)
     [125817] = { icon = 'LuiExtended/media/icons/mementos/memento_dragonhorn_curio.dds', name = Abilities.Memento_Dragonhorn_Curio }, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
     [89550] = { icon = 'LuiExtended/media/icons/mementos/memento_twilight_shard.dds', name = Abilities.Memento_Twilight_Shard, unbreakable = 1 }, -- TROPHY Azura's Light (Twilight Shard)
+    [143495] = { icon = 'LuiExtended/media/icons/mementos/memento_reliquary_of_dark_designs.dds' }, -- Reliquary of Dark Designs (Reliquary of Dark Designs)
+    [144417] = { hide = true }, -- Reliquary of Dark Designs (Reliquary of Dark Designs)
 
     ----------------------------------------------------------------
     -- DLC & CHAPTERS
@@ -3911,8 +3913,24 @@ Effects.EffectOverride = {
     -- Scalebreaker
     [125816] = { icon = 'LuiExtended/media/icons/mementos/memento_corruption_of_maarselok.dds', name = Abilities.Memento_Corruption_of_Maarselok }, -- Maarselok Corruption Memento (Corruption of Maarselok)
 
+    -- Greymoor
+    [136120] = { icon = 'LuiExtended/media/icons/mementos/memento_ritual_circle_totem.dds' }, -- Ritual Circle Totem (Ritual Circle Totem)
+
+    -- Stonethorn
+    [137919] = { icon = 'LuiExtended/media/icons/mementos/memento_mostly_stable_juggling_potions.dds', name = Abilities.Memento_Mostly_Stable_Juggling_Potions }, -- Juggling Potion Bottles (Mostly Stable Juggling Potions)
+
+    -- Markarth
+    [147598] = { icon = 'LuiExtended/media/icons/mementos/memento_void_shard.dds' }, --  Void Shard (Void Shard)
+    [147688] = { hide = true }, -- Void Shard (Void Shard)
+
+    -- Flames of Ambition
+    [149881] = { icon = 'LuiExtended/media/icons/mementos/memento_illusory_salamander_stone.dds' }, -- Illusory Salamander Stone (Illusory Salamander Stone)
+    [151256] = { hide = true }, -- Illusory Salamander Stone (Illusory Salamander Stone)
+
     -- Blackwood
     [153758] = { icon = 'LuiExtended/media/icons/mementos/memento_full_scale_golden_anvil_replica.dds', name = Abilities.Memento_Full_Scale_Golden_Anvil_Replica }, -- Golden Anvil Replica (Full-Scale Golden Anvil Replica)
+    [146744] = { icon = 'LuiExtended/media/icons/mementos/memento_temperamental_grimoire.dds' }, -- Temperamental Grimoire (Temperamental Grimoire)
+    [153760] = { icon = 'LuiExtended/media/icons/mementos/memento_wilting_weed_killer_phial.dds' }, -- Wilting Weed Killer Phial (Wilting Weed Killer Phial)
 
     ----------------------------------------------------------------
     -- CROWN CRATES
@@ -8854,16 +8872,22 @@ Effects.EffectOverride = {
     [88845] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_empower_atronach.dds', tooltip = Tooltips.Generic_HoT_Channel, tooltipValue2 = 1 }, -- Empower Atronach (Fire-Binder)
 
     ----------------------------------------------------------------
-    -- EVENT QUESTS ---------------------------------------------
+    -- EVENT QUESTS ------------------------------------------------
     ----------------------------------------------------------------
 
+    ----------------------------------------------------------------
     -- Jester's Festival
+    ----------------------------------------------------------------
+
+    -- Springtime Flair
     [87474] = { icon = 'LuiExtended/media/icons/mementos/memento_cherry_blossom_branch.dds', name = Abilities.Event_Petal_Pelters }, -- Flower Garland -- Springtime Flair
 
+    -- Royal Revelry
     [88095] = { icon = 'LuiExtended/media/icons/abilities/ability_item_dazzler_3.dds', name = Abilities.Event_Sparkle_Dazzler }, -- Illusion Dazzler - Royal Revelry
     [88123] = { icon = 'LuiExtended/media/icons/abilities/ability_item_dazzler_2.dds', name = Abilities.Event_Burst_Dazzler }, -- Illusion Dazzler - Royal Revelry
     [88124] = { icon = 'LuiExtended/media/icons/abilities/ability_item_dazzler_1.dds', name = Abilities.Event_Flash_Dazzler }, -- Illusion Dazzler - Royal Revelry
 
+    -- A Foe Most Porcine
     [127194] = { hide = true }, -- Uproot (King Boar) - A Foe Most Porcine
 
     [145282] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_grease_slip.dds', name = Abilities.Skill_Grease_Slip }, -- Grease Shake (King Boar) - A Foe Most Porcine
@@ -8880,12 +8904,18 @@ Effects.EffectOverride = {
     --[144337] = { icon = 'LuiExtended/media/icons/abilities/ability_welwa_charge.dds', name = Abilities.Skill_Thrash, tooltip = Tooltips.Generic_Knockback }, -- Stun (Prince Boar) - A Foe Most Porcine
     --[144339] = { name = Abilities.Innate_Stagger, tooltip = Tooltips.Generic_Stagger, cc = LUIE_CC_TYPE_STAGGER }, -- Staggered (Prince Boar) - A Foe Most Porcine
 
+    ----------------------------------------------------------------
     -- New Life Festival
+    ----------------------------------------------------------------
+
+    -- Stonetooth Bash
     [84847] = {icon = 'LuiExtended/media/icons/abilities/ability_quest_celebratory_belch.dds', name = Abilities.Skill_Celebratory_Belch, unbreakable = 1 }, -- Celebratory Belch (Stonetooth Bash)
+
+    -- Snow Bear Plunge
     [83523] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_frigid_waters.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Event_Freezing }, -- Freezing (Snow Bear Plunge)
     [83522] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_warmth.dds', forcedContainer = 'short', tooltip = Tooltips.Event_Warm }, -- Warm (Snow Bear Plunge)
 
-    -- Seasonal Quests (New Life Festival)
+    -- Lava Foot Stomp
     [84125] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = Abilities.Skill_Lava_Foot_Stomp, unbreakable = 1 }, -- Breton Male Dance (Lava Foot Stomp)
     [84126] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = Abilities.Skill_Lava_Foot_Stomp, unbreakable = 1 }, -- Breton Female Dance (Lava Foot Stomp)
     [84127] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = Abilities.Skill_Lava_Foot_Stomp, unbreakable = 1 }, -- Dunmer Male Dance (Lava Foot Stomp)
@@ -8893,13 +8923,36 @@ Effects.EffectOverride = {
     [84130] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = Abilities.Skill_Lava_Foot_Stomp, unbreakable = 1 }, -- Altmer Male Dance (Lava Foot Stomp)
     [84131] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = Abilities.Skill_Lava_Foot_Stomp, unbreakable = 1 }, -- Altmer Female Dance (Lava Foot Stomp)
     [84133] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = Abilities.Skill_Lava_Foot_Stomp, unbreakable = 1 }, -- Nord Dance (Lava Foot Stomp)
+
+    -- Castle Charm Challenge
     [84528] = {icon = 'LuiExtended/media/icons/mementos/memento_fire_breathers_torches.dds', name = Abilities.Skill_Torch_Juggling, unbreakable = 1 }, -- Flame Juggling (Castle Charm Challenge)
     [84506] = {icon = 'LuiExtended/media/icons/mementos/memento_jugglers_knives.dds', name = Abilities.Skill_Knife_Juggling, unbreakable = 1 }, -- Dagger Juggling (Castle Charm Challenge)
     [84533] = {icon = 'LuiExtended/media/icons/mementos/memento_sword_swallowers_blade.dds', name = Abilities.Skill_Sword_Swallowing, unbreakable = 1 }, -- Sword Swallowing (Castle Charm Challenge)
+
+    -- Mud Ball Merriment
     [84330] = { icon = 'esoui/art/icons/achievement_newlifefestival_001.dds', name = Abilities.Memento_Mud_Ball }, -- Mudball (Mud Ball Merriment)
 
-    -- Seasonal Quests (Witches Festival)
+    ----------------------------------------------------------------
+    -- Witches Festival
+    ----------------------------------------------------------------
+
+    -- The Witchmother's Bargain
     [83775] = { icon = 'LuiExtended/media/icons/mementos/memento_witchmothers_whistle.dds', name = Abilities.Event_Crow_Caller }, -- Event - Q5742 WitchFest Intro (The Witchmother's Bargain)
+
+    ----------------------------------------------------------------
+    -- Pan-Elsweyr Celebration
+    ----------------------------------------------------------------
+
+    -- Misc - Dragon Attacks
+    [120954] = { hide = true }, -- JusticeDragon-Flee
+    [120956] = { hide = true }, -- JusticeDragon-Flee
+    [120957] = { hide = true }, -- RUNJusticeDragon1
+    [120958] = { hide = true }, -- COWERJusticeDragon2
+    [120960] = { hide = true }, -- JusticeDragon-REG WPTReach
+    [120961] = { hide = true }, -- JusticeDragon-REG WPTReach
+    [120977] = { hide = true }, -- COWERJusticeDragon2
+    [120980] = { hide = true }, -- JusticeDragon-Flee
+    [120981] = { hide = true }, -- JusticeDragon-Flee
 
     ----------------------------------------------------------------
     -- CYRODIIL ----------------------------------------------------

@@ -1759,6 +1759,9 @@ LUIE.DebugAuras = {
     [149879] = true, -- Daedric Unwarding Amulet (Daedric Unwarding Amulet)
     [125817] = true, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
     [89550] = true, -- TROPHY Azura's Light (Twilight Shard)
+    [143495] = true, -- Reliquary of Dark Designs (Reliquary of Dark Designs)
+    [144418] = true, -- Reliquary of Dark Designs (Reliquary of Dark Designs)
+    [144417] = true, -- Reliquary of Dark Designs (Reliquary of Dark Designs)
 
     -------------------------------------
     -- DLC & CHAPTERS
@@ -1791,8 +1794,26 @@ LUIE.DebugAuras = {
     [125816] = true, -- Maarselok Corruption Memento (Corruption of Maarselok)
     [125822] = true, -- Mount Block (Corruption of Maarselok)
 
+    -- Greymoor
+    [136120] = true, -- Ritual Circle Totem (Ritual Circle Totem)
+
+    -- Stonethorn
+    [137919] = true, -- Juggling Potion Bottles (Mostly Stable Juggling Potions)
+
+    -- Markarth
+    [147598] = true, -- Void Shard (Void Shard)
+    [147689] = true, -- Void Shard (Void Shard)
+    [147688] = true, -- Void Shard (Void Shard)
+
+    -- Flames of Ambition
+    [149881] = true, -- Illusory Salamander Stone (Illusory Salamander Stone)
+    [151257] = true, -- Illusory Salamander Stone (Illusory Salamander Stone)
+    [151256] = true, -- Illusory Salamander Stone (Illusory Salamander Stone)
+
     -- Blackwood
     [153758] = true, -- Golden Anvil Replica (Full-Scale Golden Anvil Replica)
+    [146744] = true, -- Temperamental Grimoire (Temperamental Grimoire)
+    [153760] = true, -- Wilting Weed Killer Phial (Wilting Weed Killer Phial)
 
     -------------------------------------
     -- CROWN CRATES
@@ -17084,14 +17105,23 @@ LUIE.DebugAuras = {
     -- SEASONAL EVENTS ------------------
     -------------------------------------
 
+    -------------------------------------
     -- Jester's Festival
+    -------------------------------------
+
+    -- A Noble Guest
     [89243] = true, -- Butcher Awareness - A Noble Guest
+
+    -- Springtime Flair
     [89201] = true, -- Flare -- Springtime Flair
     [87474] = true, -- Flower Garland -- Springtime Flair
+
+    -- Royal Revelry
     [88095] = true, -- Illusion Dazzler -- Royal Revelry
     [88123] = true, -- Illusion Dazzler -- Royal Revelry
     [88124] = true, -- Illusion Dazzler -- Royal Revelry
 
+    -- A Foe Most Porcine
     [144487] = true, -- Greased Lightning (King Boar)
     [127184] = true, -- Home (King Boar)
     [127185] = true, -- Thrash Anchor (King Boar)
@@ -17150,13 +17180,20 @@ LUIE.DebugAuras = {
     [144352] = true, -- Thrash (Prince Boar)
     [144351] = true, -- Thrash (Prince Boar)
 
-
+    -------------------------------------
     -- New Life Festival
+    -------------------------------------
+
+    -- Stonetooth Bash
     [84847] = true, -- Celebratory Belch -- Stonetooth Bash
+
+    -- Snow Bear Plunge
     [85680] = true, -- Jump -- Snow Bear Plunge
     [83523] = true, -- Freezing -- Snow Bear Plunge
     [83544] = true, -- Cold -- Snow Bear Plunge
     [83522] = true, -- Warm -- Snow Bear Plunge
+
+    -- Lava Foot Stomp
     [84125] = true, -- Breton Male Dance -- Lava Foot Stomp
     [84187] = true, -- Breton Dance -- Lava Foot Stomp
     [85544] = true, -- Breton Dance -- Lava Foot Stomp
@@ -17179,6 +17216,8 @@ LUIE.DebugAuras = {
     [84133] = true, -- Nord Dance -- Lava Foot Stomp
     [84194] = true, -- Nord Dance -- Lava Foot Stomp
     [85549] = true, -- Breton Dance -- Lava Foot Stomp
+
+    -- Castle Charm Challenge
     [84528] = true, -- Flame Juggling -- Castle Charm Challenge
     [84530] = true, -- Flame Juggling -- Castle Charm Challenge
     [85561] = true, -- Breton Dance -- Castle Charm Challenge
@@ -17188,22 +17227,43 @@ LUIE.DebugAuras = {
     [84533] = true, -- Sword Swallowing -- Castle Charm Challenge
     [84534] = true, -- Sword Swallowing -- Castle Charm Challenge
     [85562] = true, -- Breton Dance -- Castle Charm Challenge
-    [84330] = true, -- Mudball -- Mud Ball Merriment
+
+    -- Mud Ball Merriment
+    --[84330] = true, -- Mudball -- Mud Ball Merriment
     [84378] = true, -- Mudball -- Mud Ball Merriment
     [84335] = true, -- Covered in Mud -- Mud Ball Merriment
     [85639] = true, -- Covered in Mud -- Mud Ball Merriment
 
-    -- Witches Harvest
+    -------------------------------------
+    -- Witches Festival
+    -------------------------------------
+
+    -- The Witchmother's Bargain
     [83775] = true, -- Event - Q5742 WitchFest Intro (The Witchmother's Bargain)
     [83820] = true, -- Event Q5742 WitchFest Done (The Witchmother's Bargain)
     [85055] = true, -- Crows (The Witchmother's Bargain)
     [82898] = true, -- Event - WitchFest Theater (The Witchmother's Bargain)
 
+    -------------------------------------
     -- Anniversary Event
+    -------------------------------------
+
+    -- Ache for Cake
     [88874] = true, -- Q5936 Destroy Voucher 2017 (Ache for Cake)
 
     -------------------------------------
-    -- UNSORTED -------------------------
+    -- Pan-Elsweyr Celebration
     -------------------------------------
+
+    -- Misc - Dragon Attacks
+    [120954] = true, -- JusticeDragon-Flee
+    [120956] = true, -- JusticeDragon-Flee
+    [120957] = true, -- RUNJusticeDragon1
+    [120958] = true, -- COWERJusticeDragon2
+    [120960] = true, -- JusticeDragon-REG WPTReach
+    [120961] = true, -- JusticeDragon-REG WPTReach
+    [120977] = true, -- COWERJusticeDragon2
+    [120980] = true, -- JusticeDragon-Flee
+    [120981] = true, -- JusticeDragon-Flee
 
 }

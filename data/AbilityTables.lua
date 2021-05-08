@@ -275,6 +275,7 @@ local AbilityTables = {
     Memento_Skeletal_Marionette       = GetCollectibleName(6643),
     Memento_Throwing_Bones            = GetCollectibleName(8079),
     Memento_Full_Scale_Golden_Anvil_Replica = GetCollectibleName(9363),
+    Memento_Mostly_Stable_Juggling_Potions = GetCollectibleName(8072),
 
     -- ---------------------------------------------------
     -- ITEM SETS -----------------------------------------
