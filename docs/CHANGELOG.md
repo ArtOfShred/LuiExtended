@@ -494,10 +494,11 @@ Unit Frames
 - Toggling the LUIE overlay on for default unit frames now disables the default UI unitframe text menu option to stop overlap from occuring.
 
 Art Assets
-- Custom ability icons by and modified from eleazzaar licensed under the CC-3 License (https://creativecommons.org/licenses/by/3.0/)
-- Custom ability icons by and modified from AKiZA, Angelina Avgustova, Blade Dancer, ClayManStudio, Dayed, Digital Worlds JSC, Ever Probe, HOSE, Jon Snow, Josch, Kalle Olli, MiDaEm, Moon Tribe, N-hance Studio, PONETI, REXARD, Sky Painter, The 7 Heaven, TiGame, and TonityEden licensed under the Unity Store single entity license. (https://unity3d.com/legal/as_terms)
-- Custom ability icons by and modified from a-ravlik & micart licensed under the GraphicRiver regular license. (https://graphicriver.net/licenses/terms/regular)
-- Custom ability icons by and modified from Forrest Imel and Frostwindz licensed under the GameDevMarket.net pro license. (https://www.gamedevmarket.net/terms-conditions/#pro-licence)
+- Custom Art Assets by and modified from J. W. Bjerk (eleazzaar) licensed under the CC BY 3.0 license (https://creativecommons.org/licenses/by/3.0/)
+- Custom Art Assets by and modified from AKiZA, Angelina Avgustova, Blade Dancer, ClayManStudio, Cool Art, Dayed, Digital Worlds JSC, Ever Probe, HOSE, Jon Snow, Josch, Kalle Olli, Little Sweet Daemon, MiDaEm, Moon Tribe, N-hance Studio, PONETI, REXARD, Sky Painter, The 7 Heaven, TiGame, and TonityEden licensed under the Unity Store single entity license. (https://unity3d.com/legal/as_terms)
+- Custom Art Assets by and modified from a-ravlik, Horski, and micart licensed under the GraphicRiver regular license. (https://graphicriver.net/licenses/terms/regular)
+- Custom Art Assets by and modified from damnwing, Forrest Imel, Frostwindz, and Ruixi licensed under the GameDevMarket.net pro license. (https://www.gamedevmarket.net/terms-conditions/#pro-licence)
+- Custom Art Assets by and modified from Combo 21 licensed under the construct.net asset license. (https://www.construct.net/en/game-assets/asset-licenses)
 
 ---
 
