@@ -66,7 +66,7 @@ function SlashCommands.SlashHome()
     end
 end
 
-function SlashCommands.SetPrimaryHome()
+function SlashCommands.SlashSetPrimaryHome()
     local currentHouse = GetCurrentZoneHouseId()
     if currentHouse ~= nil and currentHouse > 0 then
         local houseName = GetPlayerActiveZoneName()

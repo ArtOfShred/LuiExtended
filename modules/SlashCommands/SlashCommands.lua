@@ -15,6 +15,7 @@ local moduleName = LUIE.name .. "SlashCommands"
 SlashCommands.Enabled  = false
 SlashCommands.Defaults = {
     SlashHome           = true,
+    SlashSetPrimaryHome = true,
     SlashRegroup        = true,
     SlashDisband        = true,
     SlashGroupLeave     = true,
@@ -128,8 +129,8 @@ function SlashCommands.RegisterSlashCommands()
     if SlashCommands.SV.SlashHome then
         SLASH_COMMANDS["/home"]         = SlashCommands.SlashHome
     end
-    if SlashCommands.SV.SlashSetHome then
-        SLASH_COMMANDS["/setprimaryhome"] = SlashCommands.SetPrimaryHome
+    if SlashCommands.SV.SlashSetPrimaryHome then
+        SLASH_COMMANDS["/setprimaryhome"] = SlashCommands.SlashSetPrimaryHome
     end
     if SlashCommands.SV.SlashTrade then
         SLASH_COMMANDS["/trade"]        = SlashCommands.SlashTrade

@@ -90,10 +90,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_HOME_SET_PRIMARY),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_HOME_SET_PRIMARY_TP),
-                getFunc = function() return Settings.SetPrimaryHome end,
-                setFunc = function(value) Settings.SetPrimaryHome = value SlashCommands.RegisterSlashCommands() end,
+                getFunc = function() return Settings.SlashSetPrimaryHome end,
+                setFunc = function(value) Settings.SlashSetPrimaryHome = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
-                default = Defaults.SetPrimaryHome,
+                default = Defaults.SlashSetPrimaryHome,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
