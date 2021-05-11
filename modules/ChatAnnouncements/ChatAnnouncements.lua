@@ -400,6 +400,10 @@ ChatAnnouncements.Defaults = {
         CurrencyCrownGemsColor          = { 244/255, 56/255, 247/255, 1 },
         CurrencyCrownGemsName           = GetString(SI_LUIE_CA_CURRENCY_CROWN_GEM),
         CurrencyCrownGemsShowTotal      = false,
+        CurrencyEndeavorsChange         = true,
+        CurrencyEndeavorsColor          = { 1, 1, 1, 1 },
+        CurrencyEndeavorsName           = GetString(SI_LUIE_CA_CURRENCY_ENDEAVOR),
+        CurrencyEndeavorsShowTotal      = false,
         CurrencyOutfitTokenChange       = true,
         CurrencyOutfitTokenColor        = { 255/255, 225/255, 125/255, 1 },
         CurrencyOutfitTokenName         = GetString(SI_LUIE_CA_CURRENCY_OUTFIT_TOKENS),
@@ -416,6 +420,7 @@ ChatAnnouncements.Defaults = {
         CurrencyMessageTotalEvent       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALEVENT),
         CurrencyMessageTotalCrowns      = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALCROWNS),
         CurrencyMessageTotalCrownGems   = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGEMS),
+        CurrencyMessageTotalEndeavors   = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALENDEAVORS),
         CurrencyMessageTotalOutfitToken = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALOUTFITTOKENS),
         CurrencyMessageTotalUndaunted   = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALUNDAUNTED),
     },
@@ -729,6 +734,7 @@ local CurrencyTransmuteColorize
 local CurrencyEventColorize
 local CurrencyCrownsColorize
 local CurrencyCrownGemsColorize
+local CurrencyEndeavorsColorize
 
 -- Disguise
 local DisguiseAlertColorize
@@ -1016,6 +1022,7 @@ function ChatAnnouncements.RegisterColorEvents()
     CurrencyEventColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyEventColor))
     CurrencyCrownsColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyCrownsColor))
     CurrencyCrownGemsColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyCrownGemsColor))
+    CurrencyEndeavorsColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyEndeavorsColor))
     DisguiseAlertColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Notify.DisguiseAlertColor))
     AchievementColorize1 = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Achievement.AchievementColor1))
     AchievementColorize2 = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Achievement.AchievementColor2))
@@ -2273,6 +2280,13 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyCrownGemsName, UpOrDown)
         currencyTotal = ChatAnnouncements.SV.Currency.CurrencyCrownGemsShowTotal
         messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalCrownGems
+    elseif currency == CURT_ENDEAVOR_SEALS then -- Seals of Endeavor
+        if not ChatAnnouncements.SV.Currency.CurrencyEndeavorsChange then return end
+        currencyTypeColor = CurrencyEndeavorsColorize:ToHex()
+        currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:esoui/art/currency/currency_seals_of_endeavor_32.dds|t" or ""
+        currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyEndeavorsName, UpOrDown)
+        currencyTotal = ChatAnnouncements.SV.Currency.CurrencyEndeavorsShowTotal
+        messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalEndeavors
     else -- If for some reason there is no currency type, end the function now
         return
     end
@@ -2426,7 +2440,12 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
 elseif reason == CURRENCY_CHANGE_REASON_KEEP_REPAIR or reason == CURRENCY_CHANGE_REASON_PVP_RESURRECT or reason == CURRENCY_CHANGE_REASON_OFFENSIVE_KEEP_REWARD or reason == CURRENCY_CHANGE_REASON_DEFENSIVE_KEEP_REWARD then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageEarn
     elseif reason == CURRENCY_CHANGE_REASON_REWARD then
-        messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
+            -- Display "earn" for Seals of Endeavor
+            if currency == CURT_ENDEAVOR_SEALS then
+                messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageEarn
+            else
+                messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
+            end
     elseif reason == CURRENCY_CHANGE_REASON_ANTIQUITY_REWARD then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageExcavate
     elseif reason == CURRENCY_CHANGE_REASON_TRADINGHOUSE_PURCHASE then
@@ -2465,6 +2484,8 @@ elseif reason == CURRENCY_CHANGE_REASON_KEEP_REPAIR or reason == CURRENCY_CHANGE
         else
             messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageSpend
         end
+    elseif reason == 79 then -- TODO: Need to find what this variable is called, used when Endeavors are spent
+        messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageSpend
 
     -- ==============================================================================
     -- DEBUG EVENTS - Don't know if these are implemented or what they are for.
