@@ -86,6 +86,17 @@ function SlashCommands.CreateSettings()
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
+                -- SlashSetPrimaryHome
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_SLASHCMDS_HOME_SET_PRIMARY),
+                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_HOME_SET_PRIMARY_TP),
+                getFunc = function() return Settings.SetPrimaryHome end,
+                setFunc = function(value) Settings.SetPrimaryHome = value SlashCommands.RegisterSlashCommands() end,
+                width = "full",
+                default = Defaults.SetPrimaryHome,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+            },
+            {
                 -- SlashCampaignQ
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_CAMPAIGN),

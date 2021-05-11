@@ -4296,11 +4296,11 @@ Effects.EffectOverride = {
     [71678] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_light_attack.dds' }, -- Light Attack (Morkuldin)
     [71679] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_cleave.dds' }, -- Cleave (Morkuldin)
     [148882] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_oblivion_blue.dds', tooltip = Tooltips.Generic_Magic, tooltipValue2 = 2 }, -- Oblivion's Foe (of Oblivion's Foe)
-    [61784] = { icon = 'LuiExtended/media/icons/abilities/ability_set_redistributor.dds', hide = true }, -- Redistribution
+    [61784] = { icon = 'LuiExtended/media/icons/abilities/ability_set_redistributor.dds', hide = true }, -- Redistributor (Redistribution)
     [49126] = { icon = 'LuiExtended/media/icons/abilities/ability_set_shalidors_curse.dds' }, -- Shalidor's Curse
     [75726] = { icon = 'LuiExtended/media/icons/abilities/ability_set_tavas_favor.dds', tooltip = Tooltips.Set_Tavas_Favor }, -- Tava's Favor
-    [61851] = { hide = true }, -- Armor Master
-    [61870] = { icon = 'LuiExtended/media/icons/abilities/ability_set_armor_master.dds', tooltip = Tooltips.Generic_Physical_Spell_Resist_Value, tooltipValue2 = 5940 }, -- Armor Master
+    [61851] = { hide = true }, -- Armor Master (the Armor Master)
+    [61870] = { icon = 'LuiExtended/media/icons/abilities/ability_set_armor_master.dds', tooltip = Tooltips.Generic_Physical_Spell_Resist_Value, tooltipValue2 = 5940 }, -- Armor Master (the Armor Master)
     [61781] = { icon = 'LuiExtended/media/icons/abilities/ability_set_nobles_conquest.dds', tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Noble's Conquest
     [34587] = { icon = 'LuiExtended/media/icons/abilities/ability_set_song_of_lamae.dds' }, -- Song of Lamae
     [34588] = { icon = 'LuiExtended/media/icons/abilities/ability_set_song_of_lamae.dds' }, -- Song of Lamae

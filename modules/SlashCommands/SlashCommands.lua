@@ -76,6 +76,7 @@ function SlashCommands.RegisterSlashCommands()
 
     -- Slash Commands are no longer set to nil when disabled to prevent interference with other addons that may add the same functionality. This list is preserved as an easy reference for all functions added.
     --SLASH_COMMANDS["/home"]         = nil
+    --SLASH_COMMANDS["/setprimaryhome"] = nil
     --SLASH_COMMANDS["/regroup"]      = nil
     --SLASH_COMMANDS["/disband"]      = nil
     --SLASH_COMMANDS["/leave"]        = nil
@@ -126,6 +127,9 @@ function SlashCommands.RegisterSlashCommands()
     -- Add commands based off menu options
     if SlashCommands.SV.SlashHome then
         SLASH_COMMANDS["/home"]         = SlashCommands.SlashHome
+    end
+    if SlashCommands.SV.SlashSetHome then
+        SLASH_COMMANDS["/setprimaryhome"] = SlashCommands.SetPrimaryHome
     end
     if SlashCommands.SV.SlashTrade then
         SLASH_COMMANDS["/trade"]        = SlashCommands.SlashTrade
