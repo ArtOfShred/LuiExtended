@@ -50,6 +50,7 @@ local AbilityTables = {
     Innate_Receiving_Boon             = GetString(SI_LUIE_SKILL_RECEIVING_BOON), -- Receiving Boon
     Innate_Ayleid_Well                = GetString(SI_LUIE_SKILL_AYLEID_WELL), -- Ayleid Well
     Innate_Ayleid_Well_Fortified      = GetString(SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED), -- Ayleid Well
+    Innate_Aetherial_Well             = 151928,
     Innate_CC_Immunity                = 38117, -- CC Immunity
     Innate_Stagger                    = 1834, -- Stagger
     Innate_Revive                     = 5823, -- Revive

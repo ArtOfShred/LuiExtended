@@ -413,6 +413,14 @@ LUIE.DebugAuras = {
     [85701] = true, -- Dueling Flag
     [21263] = true, -- Ayleid Health Bonus
     [100862] = true, -- Fortified Ayleid Health Bonus
+
+    [151940] = true, -- Aetherial Well (Aetherial Well)
+    [151928] = true, -- Aetherial Well (Aetherial Well)
+    [151935] = true, -- Aetherial Well Restore (Aetherial Well)
+    [151942] = true, -- Aetherial Well Restore (Aetherial Well)
+    [151931] = true, -- Aetherial Well Restore (Aetherial Well)
+    [151934] = true, -- Aetherial Well Restore (Aetherial Well)
+
     [45819] = true, -- Remove Werevamp
     [51064] = true, -- Weakness
     [39405] = true, -- Weakness
@@ -1866,6 +1874,13 @@ LUIE.DebugAuras = {
     -- Crown Crates - Xanmeer Crate
     [113288] = true, -- UC Crown Memento 1 (Mire Drum)
     [113291] = true, -- UC Crown Memento 2 (Vossa-satl)
+
+    -- Crown Crates - Ayleid Crate
+    [149872] = true, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [151489] = true, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [151490] = true, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [151491] = true, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [146752] = true, -- Phial of Clockwork Lubricant (Phial of Clockwork Lubricant)
 
     -------------------------------------
     -- NON-COMBAT PETS

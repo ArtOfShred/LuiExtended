@@ -246,6 +246,7 @@ CastBarTable.CastChannelOverride = {
 
     -- Innate
     [32346] = true, -- Skyshard Collect
+    [151928] = true, -- Aetherial Well (Aetherial Well)
     [47270] = true, -- Ritual of Mara
     [14031] = true, -- Mundus Use
     [4197] = true, -- Recovering (NPC Duel)
@@ -282,6 +283,10 @@ CastBarTable.CastChannelOverride = {
     [110481] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [113288] = true, -- U20 Crown Memento 1 (Mire Drum)
     [113291] = true, --  U20 Crown Memento 2 (Vossa-satl)
+    [151489] = true, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [151490] = true, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [151491] = true, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [146752] = true, -- Phial of Clockwork Lubricant (Phial of Clockwork Lubricant)
 
     -- Memento (Base)
     [43700] = true, -- Wand of Finding (Lena's Wand of Finding)
@@ -382,6 +387,7 @@ CastBarTable.CastDurationFix = {
     [141013] = 1165, -- Mount Up (Passenger Mount)
     [14644] = 4000, -- Revive (Death Dialogue)
     [32346] = 5800, -- Skyshard Collect
+    [151928] = 3000, -- Aetherial Well (Aetherial Well)
     [47270] = 5600, -- Ritual of Mara
     [14031] = 5000, -- Mundus Use
     [4197] = 4000, -- Recovering (NPC Duel)
@@ -512,6 +518,10 @@ CastBarTable.CastDurationFix = {
     [110481] = 1500, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [113288] = 10000, -- U20 Crown Memento 1 (Mire Drum)
     [113291] = 13000, --  U20 Crown Memento 2 (Vossa-satl)
+    [151489] = 21000, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [151490] = 21000, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [151491] = 21000, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [146752] = 15000, -- Phial of Clockwork Lubricant (Phial of Clockwork Lubricant)
 
     -- Memento (Base)
     [42076] = 8000, -- Tear (Mezha-dro's Sealing Amulet)
@@ -624,6 +634,7 @@ CastBarTable.IsCast = {
     [14031] = true, -- Mundus Use
     [14644] = true, -- Revive (Death Dialogue)
     [32346] = true, -- Skyshard Collect
+    [151928] = true, -- Aetherial Well (Aetherial Well)
     [47270] = true, -- Ritual of Mara
 
     -- Misc Items
@@ -752,6 +763,10 @@ CastBarTable.IsCast = {
     [110481] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [113288] = true, -- U20 Crown Memento 1 (Mire Drum)
     [113291] = true, --  U20 Crown Memento 2 (Vossa-satl)
+    [151489] = true, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [151490] = true, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [151491] = true, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [146752] = true, -- Phial of Clockwork Lubricant (Phial of Clockwork Lubricant)
     [111458] = true, -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
     [111459] = true, -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
     [125820] = true, -- Witches Festival 2019 Marionette (Skeletal Marionette)

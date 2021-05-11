@@ -3265,6 +3265,12 @@ Effects.EffectOverride = {
     [21263] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = Abilities.Innate_Ayleid_Well, tooltip = Tooltips.Innate_Ayleid_Well }, -- Ayleid Health Bonus
     [100862] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = Abilities.Innate_Ayleid_Well_Fortified, tooltip = Tooltips.Innate_Ayleid_Well_Fortified }, -- Ayleid Health Bonus
 
+    [151928] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_aetherial_well.dds' }, -- Aetherial Well (Aetherial Well)
+    [151935] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_aetherial_well.dds', name = Abilities.Innate_Aetherial_Well }, -- Aetherial Well Restore (Aetherial Well)
+    [151942] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_aetherial_well.dds', name = Abilities.Innate_Aetherial_Well }, -- Aetherial Well Restore (Aetherial Well)
+    [151931] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_aetherial_well.dds', name = Abilities.Innate_Aetherial_Well }, -- Aetherial Well Restore (Aetherial Well)
+    [151934] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_aetherial_well.dds', name = Abilities.Innate_Aetherial_Well }, -- Aetherial Well Restore (Aetherial Well)
+
     ----------------------------------------------------------------
     -- CHAMPION POINTS ---------------------------------------------
     ----------------------------------------------------------------
@@ -3980,6 +3986,12 @@ Effects.EffectOverride = {
     -- Crown Crates - Xanmeer Crate
     [113288] = { icon = 'LuiExtended/media/icons/mementos/memento_mire_drum.dds', name = Abilities.Memento_Mire_Drum, unbreakable = 1 }, -- U20 Crown Memento 1 (Mire Drum)
     [113291] = { icon = 'LuiExtended/media/icons/mementos/memento_vossa_satl.dds', name = Abilities.Memento_Vossa_Satl, unbreakable = 1 }, -- U20 Crown Memento 2 (Vossa-satl)
+
+    -- Crown Crates - Ayleid Crate
+    [151489] = { icon = 'LuiExtended/media/icons/mementos/memento_painters_easel_and_canvas.dds' }, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [151490] = { icon = 'LuiExtended/media/icons/mementos/memento_painters_easel_and_canvas.dds' }, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [151491] = { icon = 'LuiExtended/media/icons/mementos/memento_painters_easel_and_canvas.dds' }, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [146752] = { icon = 'LuiExtended/media/icons/mementos/memento_phial_of_clockwork_lubricant.dds' }, -- Phial of Clockwork Lubricant (Phial of Clockwork Lubricant)
 
     ----------------------------------------------------------------
     -- Non-Combat Pets
