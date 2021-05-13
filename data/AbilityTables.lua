@@ -454,7 +454,6 @@ local AbilityTables = {
     -- Warden
     Skill_Feral_Guardian              = 85982,
     Skill_Eternal_Guardian            = 85986,
-    Skill_Budding_Seeds               = 85840,
     Skill_Lotus_Blossom               = 85855,
     Skill_Natures_Grasp               = 85564,
     Skill_Bursting_Vines              = 85859,

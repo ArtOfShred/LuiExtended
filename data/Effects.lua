@@ -2638,8 +2638,6 @@ Effects.EffectMergeId = {
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.EffectHideSCT = {
     -- Player - Basic
-    [55400] = true, -- Magicka Restore
-    [55401] = true, -- Magicka Restore
     [45982] = true, -- Bash Stun
     [16825] = true, -- Off-Balance Exploit
 
@@ -3211,8 +3209,6 @@ Effects.EffectOverride = {
     -- Death/Resurrection
     [14644] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds', name = Abilities.Innate_Revive }, -- Revive (Death Dialogue)
     [14646] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds', name = Abilities.Innate_Resurrection_Immunity, tooltip = Tooltips.Innate_Resurrection_Immunity }, -- Recently Revived
-    [55400] = { hide = true }, -- Magicka Restore
-    [55401] = { hide = true }, -- Magicka Restore
     [123970] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds', name = Abilities.Innate_Resurrection_Immunity, tooltip = Tooltips.Innate_Resurrection_Immunity }, -- Lesser Reincarnate
 
     -- Basic Attacks
@@ -5560,7 +5556,6 @@ Effects.EffectOverride = {
     [85577] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Harvest (Healing Seed - Harvest Synergy)
     [85578] = { tooltip = Tooltips.Skill_Healing_Seed } , -- Healing Seed (Healing Seed)
     [85840] = { tooltip = Tooltips.Skill_Budding_Seeds } , -- Budding Seeds (Budding Seeds)
-    [85925] = { name = Abilities.Skill_Budding_Seeds }, -- Budding Seeds (Budding Seeds)
     [129434] = { tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1, groundLabel = true }, -- Budding Seeds (Budding Seeds)
     [85845] = { tooltip = Tooltips.Skill_Corrupting_Pollen } , -- Corrupting Pollen (Corrupting Pollen)
 

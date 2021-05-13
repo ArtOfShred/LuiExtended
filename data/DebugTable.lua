@@ -121,7 +121,10 @@ LUIE.Data.DebugResults = {
     [2450]          = "WEAPON SWAP",
     [8]             = "WRECKING DAMAGE",
     [2380]          = "WRONG WEAPON",
+    [3450]          = "CANT SWAP HOTBAR IS OVERRIDDEN",
+    [3460]          = "SOUL GEM RESURRECTION ACCEPTED",
     [3470]          = "HEAL ABSORBED",
+    [3480]          = "DIED COMPANION XP",
 }
 
 -- List of all abilityId's that have been processed so far
@@ -339,8 +342,6 @@ LUIE.DebugAuras = {
     [14646] = true, -- Recently Revived
     [26770] = true, -- Resurrect
     [55406] = true, -- Resurrect Trigger
-    [55400] = true, -- Magicka Restore
-    [55401] = true, -- Magicka Restore
     [123969] = true, -- Lesser Reincarnate
     [123970] = true, -- Lesser Reincarnate
 
@@ -5316,7 +5317,6 @@ LUIE.DebugAuras = {
     [85843] = true, -- Harvest (Budding Seeds)
     [85841] = true, -- Budding Seeds (Budding Seeds)
     [85922] = true, -- Budding Seeds (Budding Seeds)
-    [85925] = true, -- Budding Seeds Heal (Budding Seeds)
     [129434] = true, -- Budding Seeds (Budding Seeds)
 
     [85845] = true, -- Corrupting Pollen (Corrupting Pollen)
