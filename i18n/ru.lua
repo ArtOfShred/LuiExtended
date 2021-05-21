@@ -13,6 +13,7 @@ local strings = {
 
     -- Shared
     SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST =                 "аура в черный список",
+    SI_LUIE_CUSTOM_LIST_CASTBAR_BLACKLIST =              "Cast Bar Blacklist",
     SI_LUIE_CUSTOM_LIST_PRIORITY_BUFFS =                 "Priority Buffs",
     SI_LUIE_CUSTOM_LIST_PRIORITY_DEBUFFS =               "Priority Debuffs",
     SI_LUIE_CUSTOM_LIST_CT_BLACKLIST =                   "Combat Text Blacklist",

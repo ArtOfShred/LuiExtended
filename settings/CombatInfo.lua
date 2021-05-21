@@ -19,7 +19,46 @@ local globalAlertOptionsKeys = { ["Show All Incoming Abilities"] = 1, ["Only Sho
 local globalIconOptions = { "All Crowd Control", "NPC CC Only", "Player CC Only" }
 local globalIconOptionsKeys = { ["All Crowd Control"] = 1, ["NPC CC Only"] = 2, ["Player CC Only"] = 3 }
 
+local Blacklist, BlackListValues = {}
+
 local ACTION_RESULT_AREA_EFFECT = 669966
+
+-- Create a list of abilityId's / abilityName's to use for Blacklist
+local function GenerateCustomList(input)
+    local options, values = {}, {}
+    local counter = 0
+    for id in pairs(input) do
+        counter = counter + 1
+        -- If the input is a numeric value then we can pull this abilityId's info.
+        if type(id) == "number" then
+            options[counter] = zo_iconFormat(GetAbilityIcon(id), 16, 16) .. " [" .. id .. "] " .. zo_strformat("<<C:1>>", GetAbilityName(id))
+        -- If the input is not numeric then add this as a name only.
+        else
+            options[counter] = id
+        end
+        values[counter] = id
+    end
+    return options, values
+end
+
+local dialogs = {
+    [1] = { -- Clear Blacklist
+        identifier = "LUIE_CLEAR_CASTBAR_BLACKLIST",
+        title = GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR),
+        text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG), GetString(SI_LUIE_CUSTOM_LIST_CASTBAR_BLACKLIST)),
+        callback = function(dialog)
+            CombatInfo.ClearCustomList(CombatInfo.SV.blacklist)
+            LUIE_BlacklistCastbar:UpdateChoices(GenerateCustomList(CombatInfo.SV.blacklist))
+        end,
+    },
+}
+
+local function loadDialogButtons()
+    for i = 1, #dialogs do
+        local dialog = dialogs[i]
+        LUIE.RegisterDialogueButton(dialog.identifier, dialog.title, dialog.text, dialog.callback)
+    end
+end
 
 function CombatInfo.CreateSettings()
     -- Load LibAddonMenu
@@ -46,6 +85,9 @@ function CombatInfo.CreateSettings()
     for key, _ in pairs(LUIE.StatusbarTextures) do
         table.insert(StatusbarTexturesList, key)
     end
+
+    -- Load Dialog Buttons
+    loadDialogButtons()
 
     local panelDataCombatInfo = {
         type = "panel",
@@ -710,6 +752,49 @@ function CombatInfo.CreateSettings()
                 default = {r=Settings.CastBarGradientC2[1], g=Settings.CastBarGradientC2[2], b=Settings.CastBarGradientC2[3]},
                 disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.CastBarEnable ) end,
             },
+
+            {
+                -- Combat Info Castbar Blacklist Header
+                type = "header",
+                name = GetString(SI_LUIE_CUSTOM_LIST_CASTBAR_BLACKLIST),
+                width = "full",
+            },
+            {
+                -- Combat Info Castbar Blacklist Description
+                type = "description",
+                text = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_DESCRIPT),
+            },
+
+            {
+                -- Clear Blacklist
+                type = "button",
+                name = GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR),
+                tooltip = GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_TP),
+                func = function() ZO_Dialogs_ShowDialog("LUIE_CLEAR_CASTBAR_BLACKLIST") end,
+                width = "half",
+            },
+            {
+                -- Combat Info Castbar Blacklist (Add)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST_TP),
+                getFunc = function() end,
+                setFunc = function(value) CombatInfo.AddToCustomList(Settings.blacklist, value) LUIE_BlacklistCastbar:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,
+            },
+            {
+                -- Combat Info Castbar Blacklist (Remove)
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST_TP),
+                choices = Blacklist,
+                choicesValues = BlacklistValues,
+                scrollable = true,
+                sort = "name-up",
+                getFunc = function() LUIE_BlacklistCastbar:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,
+                setFunc = function(value) CombatInfo.RemoveFromCustomList(Settings.blacklist, value) LUIE_BlacklistCastbar:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,
+                reference = "LUIE_BlacklistCastbar"
+            },
+
         },
     }
 

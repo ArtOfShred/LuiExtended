@@ -25,6 +25,7 @@ local ACTION_RESULT_AREA_EFFECT = 669966
 
 CombatInfo.Enabled  = false
 CombatInfo.Defaults = {
+    blacklist = {},
     GlobalShowGCD                    = false,
     GlobalPotion                     = false,
     GlobalFlash                      = true,
@@ -815,6 +816,58 @@ function CombatInfo.RegisterCombatInfo()
     -- Display default UI ultimate text if the LUIE option is enabled.
     if CombatInfo.SV.UltimateLabelEnabled or CombatInfo.SV.UltimatePctEnabled then
         SetSetting(SETTING_TYPE_UI, UI_SETTING_ULTIMATE_NUMBER, 0)
+    end
+end
+
+function CombatInfo.ClearCustomList(list)
+    local listRef = list == CombatInfo.SV.blacklist and GetString(SI_LUIE_CUSTOM_LIST_CASTBAR_BLACKLIST) or ""
+    for k, v in pairs(list) do
+        list[k] = nil
+    end
+    CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+    printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_CLEARED), listRef), true)
+end
+
+-- List Handling (Add) for Prominent Auras & Blacklist
+function CombatInfo.AddToCustomList(list, input)
+    local id = tonumber(input)
+    local listRef = list == CombatInfo.SV.blacklist and GetString(SI_LUIE_CUSTOM_LIST_CASTBAR_BLACKLIST) or ""
+    if id and id > 0 then
+        local name = zo_strformat("<<C:1>>", GetAbilityName(id))
+        if name ~= nil and name ~= "" then
+            local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
+            list[id] = true
+            CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_ID), icon, id, name, listRef), true)
+        else
+            CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_FAILED), input, listRef), true)
+        end
+    else
+        if input ~= "" then
+            list[input] = true
+            CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_NAME), input, listRef), true)
+        end
+    end
+end
+
+-- List Handling (Remove) for Prominent Auras & Blacklist
+function CombatInfo.RemoveFromCustomList(list, input)
+    local id = tonumber(input)
+    local listRef = list == CombatInfo.SV.blacklist and GetString(SI_LUIE_CUSTOM_LIST_CASTBAR_BLACKLIST) or ""
+    if id and id > 0 then
+        local name = zo_strformat("<<C:1>>", GetAbilityName(id))
+        local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
+        list[id] = nil
+        CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+        printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_ID), icon, id, name, listRef), true)
+    else
+        if input ~= "" then
+            list[input] = nil
+            CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_NAME), input, listRef), true)
+        end
     end
 end
 
@@ -2094,6 +2147,11 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
 
     local icon = GetAbilityIcon(abilityId)
     local name = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
+
+    -- Return if ability is blacklisted
+    if CombatInfo.SV.blacklist[abilityId] or CombatInfo.SV.blacklist[name] then
+        return
+    end
 
     local duration
     local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId)

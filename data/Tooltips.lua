@@ -1203,7 +1203,6 @@ LUIE.Data.Tooltips = {
     Skill_Recover_Duel                              = GetString(SI_LUIE_SKILL_RECOVER_DUEL_TP),
 
     -- Animals
-    Skill_Ferocity                                  = GetString(SI_LUIE_SKILL_BEAR_FEROCITY_TP),
     Skill_Ancient_Skin                              = zo_strformat(GetString(SI_LUIE_SKILL_HARDENED_CARAPACE_TP), 9),
     Skill_Weakness_Lion                             = GetString(SI_LUIE_SKILL_WEAKNESS_LION_TP),
     Skill_Hardened_Shell                            = GetString(SI_LUIE_SKILL_HARDENED_SHELL_TP),
