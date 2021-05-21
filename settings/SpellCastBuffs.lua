@@ -437,6 +437,28 @@ function SpellCastBuffs.CreateSettings()
                 default = Defaults.ShowWerewolf,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
+            {
+                -- Short Term - Set ICD - Player
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER_TP),
+                getFunc = function() return not Settings.IgnoreSetICDPlayer end,
+                setFunc = function(value) Settings.IgnoreSetICDPlayer = not value SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreSetICDPlayer,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
+                -- Short Term - Ability ICD - Player
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ABILITYICDPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ABILITYICDPLAYER_TP),
+                getFunc = function() return not Settings.IgnoreAbilityICDPlayer end,
+                setFunc = function(value) Settings.IgnoreAbilityICDPlayer = not value SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreAbilityICDPlayer,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
             --[[ TODO: Reimplement if possible
             {
                 -- Show Block Player Icon
@@ -577,17 +599,6 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.MountDetail,
                 disabled = function() return Settings.IgnoreMountPlayer end,
-            },
-            {
-                -- Long Term - Set ICD - Player
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER_TP),
-                getFunc = function() return not Settings.IgnoreSetICDPlayer end,
-                setFunc = function(value) Settings.IgnoreSetICDPlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreSetICDPlayer,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
             },
             --[[
             {

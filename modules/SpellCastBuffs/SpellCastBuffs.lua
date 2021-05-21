@@ -118,6 +118,7 @@ SpellCastBuffs.Defaults = {
     IgnoreSoulSummonsPlayer             = false,
     IgnoreSoulSummonsTarget             = false,
     IgnoreSetICDPlayer                  = false,
+    IgnoreAbilityICDPlayer              = false,
     IgnoreFoodPlayer                    = false,
     IgnoreFoodTarget                    = false,
     IgnoreExperiencePlayer              = false,
@@ -1878,6 +1879,11 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
         end
     end
 
+    -- If this is a set ICD then don't display if we have Set ICD's disabled.
+    if Effects.IsSetICD[abilityId] and SpellCastBuffs.SV.IgnoreSetICDPlayer then return end
+    -- If this is an ability ICD then don't display if we have Ability ICD's disabled.
+    if Effects.IsAbilityICD[abilityId] and SpellCastBuffs.SV.IgnoreAbilityICDPlayer then return end
+
     local unbreakable = 0
 
     -- Grim Focus Stack counter
@@ -2766,6 +2772,8 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
 
         -- If this is a fake set ICD then don't display if we have Set ICD's disabled.
         if Effects.IsSetICD[abilityId] and SpellCastBuffs.SV.IgnoreSetICDPlayer then return end
+        -- If this is an ability ICD then don't display if we have Ability ICD's disabled.
+        if Effects.IsAbilityICD[abilityId] and SpellCastBuffs.SV.IgnoreAbilityICDPlayer then return end
 
         -- Prominent Support
         local effectType = Effects.FakePlayerBuffs[abilityId].debuff and BUFF_EFFECT_TYPE_DEBUFF or BUFF_EFFECT_TYPE_BUFF -- TODO: Expand this for below instead of calling again

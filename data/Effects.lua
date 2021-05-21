@@ -171,12 +171,19 @@ Effects.IsSoulSummons = {
     [43752] = true, -- Soul Summons
 }
 
--- Internal Cooldown for cheat death set procs
+-- Internal Cooldown for  set procs
 Effects.IsSetICD = {
     [129477] = true, -- Immortal Warrior
     [127235] = true, -- Eternal Warrior
     [127032] = true, -- Phoenix
     [142401] = true, -- Juggernaut
+    [117397] = true, -- Exhausted Sentry (of the Sentry)
+}
+
+-- Internal Cooldown for ability procs
+Effects.IsAbilityICD = {
+    [151113] = true, -- Expert Evasion (Champion)
+    [134254] = true, -- Winded (Champion)
 }
 
 -- Food & Drink Buffs
@@ -3288,7 +3295,7 @@ Effects.EffectOverride = {
     [142011] = { icon = 'esoui/art/icons/ability_mage_013.dds' }, -- Occult Overload
 
     -- Fitness
-    [151113] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_fitness_expert_evasion.dds', tooltip = Tooltips.Champion_Expert_Evasion, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Expert Evasion
+    [151113] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_fitness_expert_evasion.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Champion_Expert_Evasion, Abilities.Set_Cooldown), tooltip = Tooltips.Champion_Expert_Evasion, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Expert Evasion
     [141994] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_fitness_bloody_renewal.dds' }, -- Bloody Renewal
     [141992] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_fitness_siphoning_spells.dds' }, -- Siphoning Spells
     [134254] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_fitness_winded.dds', tooltip = Tooltips.Champion_Winded, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Winded

@@ -350,6 +350,7 @@ local AbilityTables = {
 
     Champion_Vengeance_Charge         = GetString(SI_LUIE_SKILL_VENGEANCE_CHARGE), -- Vengeance Counter
     Champion_Riposte                  = 60230,
+    Champion_Expert_Evasion           = 151113,
 
     -- ---------------------------------------------------
     -- SKILL LINE PASSIVES -------------------------------
@@ -798,6 +799,8 @@ local AbilityTables = {
     Trap_Static_Pitcher              = GetItemLinkName("|H0:item:145491:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Trap_Gas_Blossom                 = GetItemLinkName("|H0:item:145492:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Trap_Lantern_Mantis              = GetItemLinkName("|H0:item:145493:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+
+    Trap_Hiding_Spot                 = 72712,
 
     -- ---------------------------------------------------
     -- WORLD BOSSES --------------------------------------
