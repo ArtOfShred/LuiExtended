@@ -107,35 +107,27 @@ local AbilityTables = {
     Innate_Power_of_the_Daedra        = 46690, -- Power of the Daedra
 
     -- Weapon Attacks
-    Skill_Light_Attack                = 23604, -- Light Attack
+    Skill_Light_Attack                = 39088, -- Light Attack
     Skill_Medium_Attack               = 39097, -- Medium Attack
-    Skill_Heavy_Attack                = 18431, -- Heavy Attack
+    Skill_Heavy_Attack                = 39101, -- Heavy Attack
+
+    -- TODO need everything here for Effects.IsWeaponAttack = { }
+    Skill_Heavy_Attack_Unarmed        = 18429, -- Heavy Attack (Unarmed)
+    Skill_Heavy_Attack_Two_Handed     = 16041, -- Heavy Attack (Two Handed)
+    Skill_Heavy_Attack_One_Handed     = 15279, -- Heavy Attack (One Handed)
     Skill_Heavy_Attack_Dual_Wield     = 16420, -- Heavy Attack (Dual Wield)
-    Skill_Heavy_Attack_Werewolf       = 32480, -- Heavy Attack Werewolf
-    Skill_Heavy_Attack_Shock          = 18396, -- Heavy Attack (Shock)
-    Skill_Heavy_Attack_Main_Hand      = GetString(SI_LUIE_SKILL_PASSIVE_HEAVY_MAIN_HAND),
-    Skill_Heavy_Attack_Off_Hand       = GetString(SI_LUIE_SKILL_PASSIVE_HEAVY_OFF_HAND),
+    Skill_Heavy_Attack_Bow            = 16691, -- Heavy Attack (Bow)
+    Skill_Heavy_Attack_Ice            = 16261, -- Heavy Attack (Ice)
+    Skill_Heavy_Attack_Inferno        = 15383, -- Heavy Attack (Inferno)
+    Skill_Heavy_Attack_Werewolf       = 32477, -- Heavy Attack (Werewolf)
+    Skill_Heavy_Attack_Volendrung     = 116763, -- Heavy Attack (Volendrung)
 
     -- ---------------------------------------------------
     -- COMSUMABLES & ITEMS -------------------------------
     -- ---------------------------------------------------
 
     -- Glyphs
-    Item_Glyph_of_Absorb_Health       = 28919,
-    Item_Glyph_of_Absorb_Magicka      = 46743,
-    Item_Glyph_of_Absorb_Stamina      = 46746,
-    Item_Glyph_of_Crushing            = GetString(SI_LUIE_SKILL_GLYPH_CRUSHING),
-    Item_Glyph_of_Damage_Health       = 46749,
-    Item_Glyph_of_Decrease_Health     = GetString(SI_LUIE_SKILL_GLYPH_DECREASE_HEALTH),
-    Item_Glyph_of_Flame               = 17895,
-    Item_Glyph_of_Foulness            = 17904,
-    Item_Glyph_of_Frost               = 17897,
-    Item_Glyph_of_Hardening           = GetString(SI_LUIE_SKILL_GLYPH_HARDENING),
-    Item_Glyph_of_Poison              = 17902,
-    Item_Glyph_of_Prismatic_Onslaught = 40337,
-    Item_Glyph_of_Shock               = 17899,
-    Item_Glyph_of_Weakening           = GetString(SI_LUIE_SKILL_GLYPH_WEAKENING),
-    Item_Glyph_of_Weapon_Damage       = GetString(SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE),
+    Item_Glyph_of_Weapon_Damage       = 17910,
 
     -- Elemental Status Effect
     Proc_Chilled                      = 7145,

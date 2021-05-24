@@ -286,6 +286,7 @@ LUIE.DebugAuras = {
     [29177] = true, -- Flee
     [64420] = true, -- Remove Pet Stealth
     [26245] = true, -- Slam Stun
+    [49547] = true, -- Bonus limiter
     [72902] = true, -- Hidden
 
     -- Mount
@@ -742,17 +743,17 @@ LUIE.DebugAuras = {
     [46746] = true, -- Absorb Stamina (Glyph of Asborb Stamina)
     [46747] = true, -- Absorb Stamina (Glyph of Asborb Stamina)
     [17906] = true, -- Crusher (Glyph of Crushing)
-    [46749] = true, -- Damaage Health (Glyph of Decrease Health)
+    [46749] = true, -- Decrease Health (Glyph of Decrease Health)
     [17895] = true, -- Fiery Weapon (Glyph of Flame)
     [17904] = true, -- Befouled Weapon (Glyph of Foulness)
     [17897] = true, -- Frozen Weapon (Glyph of Frost)
-    [17947] = true, -- Hardening (Glyph of Hardening)
+    --[17947] = true, -- Hardening (Glyph of Hardening)
     [21578] = true, -- Hardening (Glyph of Hardening)
     [17902] = true, -- Poisoned Weapon (Glyph of Poison)
     [40337] = true, -- Prismatic Weapon (Glyph of Prismatic Onslaught)
     [17899] = true, -- Charged Weapon (Glyph of Shock)
     [17945] = true, -- Weakening (Glyph of Weakening)
-    [17910] = true, -- Weapon Damage (Glyph of Weapon Damage)
+    --[17910] = true, -- Weapon Damage (Glyph of Weapon Damage)
     [21230] = true, -- Berserker (Glyph of Weapon Damage)
 
     -------------------------------------
@@ -2369,8 +2370,8 @@ LUIE.DebugAuras = {
 
     [71670] = true, -- Morkuldin (Morkuldin)
     [71671] = true, -- Morkuldin (Morkuldin)
-    [71678] = true, -- Light Attack (Morkuldin)
-    [71679] = true, -- Cleave (Morkuldin)
+    [71678] = true, -- Morkuldin (Morkuldin)
+    [71679] = true, -- Morkuldin Cleave (Morkuldin)
 
     [79103] = true, -- Pelinal's Aptitude (Pelinal's)
 
@@ -2435,7 +2436,7 @@ LUIE.DebugAuras = {
     [49236] = true, -- Whitestrake's Retribution (Whitestrake's)
 
     [106775] = true, -- Adept Rider (Adept Rider's)
-    [106776] = true, -- Major Evasion (Adept Rider's)
+    --[106776] = true, -- Major Expedition (Adept Rider's)
 
     [106803] = true, -- Nocturnal's Favor (Nocturnal's Favored)
     [106804] = true, -- Nocturnal's Heal (Nocturnal's Favored)
@@ -5922,23 +5923,23 @@ LUIE.DebugAuras = {
     -- UNARMED PASSIVES -----------------
     -------------------------------------
 
-    [23604] = true, -- Light Attack
+    [23604] = true, -- Light Attack (Unarmed)
     [18429] = true, -- Heavy Attack (Unarmed)
-    [18430] = true, -- Heavy Attack
+    [18430] = true, -- Heavy Attack (Unarmed)
     [21991] = true, -- Heavy Attack Damage Bonus
-    [18431] = true, -- Heavy Attack
+    [18431] = true, -- Heavy Attack (Unarmed)
     [60772] = true, -- Heavy Attack (Unarmed)
 
     -------------------------------------
     -- TWO HANDED PASSIVES --------------
     -------------------------------------
 
-    [16037] = true, -- Light Attack
-    [16041] = true, -- Heavy Attack (2H)
-    [17162] = true, -- Heavy Attack
+    [16037] = true, -- Light Attack (Two Handed)
+    [16041] = true, -- Heavy Attack (Two Handed)
+    [17162] = true, -- Heavy Attack (Two Handed)
     [17699] = true, -- Heavy Attack Damage Bonus
-    [17163] = true, -- Heavy Attack
-    [60757] = true, -- Heavy Attack (2H)
+    [17163] = true, -- Heavy Attack (Two Handed)
+    [60757] = true, -- Heavy Attack (Two Handed)
 
     [29387] = true, -- Forceful (Rank 1)
     [30821] = true, -- Forceful
@@ -6043,12 +6044,12 @@ LUIE.DebugAuras = {
     -- ONE HAND AND SHIELD PASSIVES -----
     -------------------------------------
 
-    [15435] = true, -- Light Attack
-    [15279] = true, -- Heavy Attack (1H)
-    [15282] = true, -- Heavy Attack
+    [15435] = true, -- Light Attack (One Handed)
+    [15279] = true, -- Heavy Attack (One Handed)
+    [15282] = true, -- Heavy Attack (One Handed)
     [17694] = true, -- Heavy Attack Damage Bonus
-    [15829] = true, -- Heavy Attack
-    [60759] = true, -- Heavy Attack (Shield)
+    [15829] = true, -- Heavy Attack (One Handed)
+    [60759] = true, -- Heavy Attack (One Handed)
 
     [29420] = true, -- Fortress (Rank 1)
     [45471] = true, -- Fortress (Rank 2)
@@ -6137,15 +6138,14 @@ LUIE.DebugAuras = {
     -- DUAL WIELD PASSIVES --------------
     -------------------------------------
 
-    [16499] = true, -- Light Attack
+    [16499] = true, -- Light Attack (Dual Wield)
     [16420] = true, -- Heavy Attack (Dual Wield)
-    [17170] = true, -- Heavy Attack
+    [17170] = true, -- Heavy Attack (Dual Wield)
     [17700] = true, -- Heavy Attack Damage Bonus
-    [17169] = true, -- Heavy Attack
+    [17169] = true, -- Heavy Attack (Dual Wield)
     [18622] = true, -- Heavy Attack (Dual Wield)
     [60758] = true, -- Heavy Attack (Dual Wield)
     [64546] = true, -- Heavy Attack Damage Bonus
-
 
     [18929] = true, -- Slaughter (Rank 1)
     [45476] = true, -- Slaughter (Rank 2)
@@ -6263,11 +6263,11 @@ LUIE.DebugAuras = {
     -- BOW PASSIVES ---------------------
     -------------------------------------
 
-    [16688] = true, -- Light Attack
+    [16688] = true, -- Light Attack (Bow)
     [16691] = true, -- Heavy Attack (Bow)
-    [17174] = true, -- Heavy Attack
+    [17174] = true, -- Heavy Attack (Bow)
     [17701] = true, -- Heavy Attack Damage Bonus
-    [17173] = true, -- Heavy Attack
+    [17173] = true, -- Heavy Attack (Bow)
     [60761] = true, -- Heavy Attack (Bow)
 
     [30937] = true, -- Long Shots (Rank 1)
@@ -6366,24 +6366,24 @@ LUIE.DebugAuras = {
     -- DESTRUCTION STAFF PASSIVES -------
     -------------------------------------
 
-    [16277] = true, -- Light Attack
-    [16261] = true, -- Heavy Attack (Frost)
-    [18405] = true, -- Heavy Attack
+    [16277] = true, -- Light Attack (Ice)
+    [16261] = true, -- Heavy Attack (Ice)
+    [18405] = true, -- Heavy Attack (Ice)
     [18404] = true, -- Heavy Attack Damage Bonus
-    [18406] = true, -- Heavy Attack
-    [60762] = true, -- Heavy Attack (Frost)
+    [18406] = true, -- Heavy Attack (Ice)
+    [60762] = true, -- Heavy Attack (Ice)
 
-    [16165] = true, -- Light Attack
-    [15383] = true, -- Heavy Attack (Flame)
-    [15385] = true, -- Heavy Attack
+    [16165] = true, -- Light Attack (Inferno)
+    [15383] = true, -- Heavy Attack (Inferno)
+    [15385] = true, -- Heavy Attack (Inferno)
     [23429] = true, -- Heavy Attack Damage Bonus
-    [16321] = true, -- Heavy Attack
-    [60763] = true, -- Heavy Attack (Fire)
+    [16321] = true, -- Heavy Attack (Inferno)
+    [60763] = true, -- Heavy Attack (Inferno)
 
-    [18350] = true, -- Light Attack
-    [18396] = true, -- Heavy Attack (Shock)
-    [19277] = true, -- Shock Pulse
-    [60764] = true, -- Heavy Attack (Shock)
+    [18350] = true, -- Light Attack (Lightning)
+    [18396] = true, -- Heavy Attack (Lightning)
+    [19277] = true, -- Heavy Attack (Lightning)
+    [60764] = true, -- Heavy Attack (Lightning)
 
     [30948] = true, -- Tri Focus -- Rank 1
     [69774] = true, -- Tri Focus
@@ -6612,9 +6612,9 @@ LUIE.DebugAuras = {
     -- RESTORATION STAFF PASSIVES -------
     -------------------------------------
 
-    [16145] = true, -- Light Attack
-    [16212] = true, -- Restoration Staff Channel
-    [67022] = true, -- Restoration Staff Heavy Attack
+    [16145] = true, -- Light Attack (Restoration)
+    [16212] = true, -- Heavy Attack (Restoration)
+    [67022] = true, -- Heavy Attack (Restoration)
     [32760] = true, -- Heavy Attack (Restoration)
 
     [30973] = true, -- Essence Drain (Rank 1)
@@ -7058,13 +7058,13 @@ LUIE.DebugAuras = {
     --[31068] = true, -- Sanies Lupinus (NPC Bite)
     [40521] = true, -- Sanies Lupinus (Player Bite)
 
-    [32464] = true, -- Light Attack
-    [32477] = true, -- Heavy Attack (Were)
-    [32479] = true, -- Heavy Attack
+    [32464] = true, -- Light Attack (Werewolf)
+    [32477] = true, -- Heavy Attack (Werewolf)
+    [32479] = true, -- Heavy Attack (Werewolf)
     [32478] = true, -- Heavy Attack Damage Bonus
-    [32480] = true, -- Heavy Attack Werewolf
-    [32494] = true, -- Heavy Attack
-    [60773] = true, -- Stamina Return
+    [32480] = true, -- Heavy Attack (Werewolf)
+    [32494] = true, -- Heavy Attack (Werewolf)
+    [60773] = true, -- Heavy Attack (Werewolf)
     [40544] = true, -- Keep Corpse
     [40545] = true, -- Keep Corpse
 
@@ -17019,11 +17019,12 @@ LUIE.DebugAuras = {
     [118507] = true, -- Volendrung Passive (Volendrung)
     [118509] = true, -- Set Volendrung Stats (Volendrung)
 
-    [116762] = true, -- Volendrung Light Attack (Volendrung)
-    [116763] = true, -- Volendrung Heavy Attack (2H) (Volendrung)
-    [116765] = true, -- Heavy Attack Partial (Volendrung)
+    [116762] = true, -- Light Attack (Volendrung)
+    [116763] = true, -- Heavy Attack (Volendrung)
+    [116765] = true, -- Heavy Attack (Volendrung)
+    [147973] = true, -- Heavy Attack Damage Bonus (Volendrung)
     [116767] = true, -- Heavy Attack (Volendrung)
-    [116766] = true, -- Heavy Attack (2H) (Volendrung)
+    [116766] = true, -- Heavy Attack (Volendrung)
 
     [118501] = true, -- Heal Self (Volendrung)
     [118504] = true, -- Damage Shield (Volendrung)

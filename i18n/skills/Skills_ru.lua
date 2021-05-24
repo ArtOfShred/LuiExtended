@@ -73,11 +73,6 @@ local strings = {
     ----------------------------------------------------------------
 
     -- Glyphs
-    SI_LUIE_SKILL_GLYPH_CRUSHING =                       "Crushing (Зачарование)",
-    SI_LUIE_SKILL_GLYPH_DECREASE_HEALTH =                "Снижение здоровья",
-    SI_LUIE_SKILL_GLYPH_HARDENING =                      "Hardening (Зачарование)",
-    SI_LUIE_SKILL_GLYPH_WEAKENING =                      "Weakening (Зачарование)",
-    SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE =                  "Урон от оружия (Зачарование)",
     SI_LUIE_SKILL_GLYPH_WEAKENING_TP =                   "Reduce Weapon and Spell Damage for |cFFFFFF<<1>>|r seconds.",
 
     -- Crafting Station Creation
@@ -597,10 +592,6 @@ local strings = {
     -- WEAPON SKILLS -----------------------------------------------
     ----------------------------------------------------------------
 
-    -- Shared
-    SI_LUIE_SKILL_PASSIVE_HEAVY_MAIN_HAND =              "Силовая атака (Ведущая рука)",
-    SI_LUIE_SKILL_PASSIVE_HEAVY_OFF_HAND =               "Силовая атака (Вторая рука)",
-
     -- Two-Handed
     SI_LUIE_SKILL_FOLLOW_UP_TP =                         "Ваша следующая атака с прямым уроном, нанесённая в течение |cFFFFFF7|r секунд нанесёт |cFFFFFF<<1>>|r% дополнительного урона.",
     SI_LUIE_SKILL_BATTLE_RUSH_TP =                       "Увеличивает восстановление Запаса сил на |cFFFFFF<<1>>|r% в течение |cFFFFFF10|r секунд.",
@@ -980,11 +971,11 @@ local strings = {
     --SI_LUIE_SKILL_SET_SENCHE_RAHTS_GRIT =                "Increase healing received by |cFFFFFF6|r% and Physical and Spell Resistance by |cFFFFFF2585|r for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_VASTARIES_TUTELAGE =               "Increase Weapon and Spell Damage by |cFFFFFF258|r and reduce the cost of non-Ultimate abilities by |cFFFFFF10|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_SLOADS_TP =                        "Taking |cFFFFFF3|r% of your Max Health as Oblivion Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThis effect can deal a maximum of |cFFFFFF3000|r Oblivion Damage per tick.",
-    SI_LUIE_SKILL_SET_GRAVE_STAKE_COLLECTOR_TP =         "When you touch the grave-stake, restore |cFFFFFF4190|r Stamina and Magicka.\n\nOnly one grave-stake can appear at a time.",
+    SI_LUIE_SKILL_SET_GRAVE_STAKE_COLLECTOR_TP =         "When you touch the grave-stake, restore |cFFFFFF4564|r Stamina and Magicka.\n\nOnly one grave-stake can appear at a time.",
     SI_LUIE_SKILL_SET_COLDHARBOURS_FAVORITE_HEAL_TP =    "After |cFFFFFF<<1>>|r <<1[second/seconds]>> Honor casts a healing spell on you and group members within |cFFFFFF6|r meters that heals over time for |cFFFFFF6|r seconds.",
     SI_LUIE_SKILL_SET_COLDHARBOURS_FAVORITE_DAMAGE_TP =  "After |cFFFFFF<<1>>|r <<1[second/seconds]>> Honor explodes, afflicting enemies within |cFFFFFF6|r meters with Magic Damage over time for |cFFFFFF6|r seconds.",
     SI_LUIE_SKILL_SET_STUHNS_FAVOR_TP =                  "Increase Physical and Spell Penetration by |cFFFFFF<<2>>|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThe duration is refreshed when you deal damage to an enemy who is Off Balance.",
-    SI_LUIE_SKILL_SET_DRAGONS_APPETITE_TP =              "Dealing non-Bleed damage to Bleeding enemies generates a persistent stack of Dragon's Appetite, up to once per second.\n\nUpon reaching |cFFFFFF10|r stacks you consume Dragon's Appetite and heal.",
+    SI_LUIE_SKILL_SET_DRAGONS_APPETITE_TP =              "Dealing non-Bleed damage to Bleeding enemies generates a persistent stack of Dragon's Appetite, up to once per half second.\n\nUpon reaching |cFFFFFF10|r stacks you consume Dragon's Appetite and heal.",
 
     -- Light / Medium / Heavy Armor Sets
     SI_LUIE_SKILL_SET_ELEGANCE_LA_TP =                   "Your next Health, Magicka, or Stamina ability used within |cFFFFFF<<1>>|r <<1[second/seconds]>> costs |cFFFFFF10|r% less.",

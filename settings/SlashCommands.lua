@@ -165,6 +165,17 @@ function SlashCommands.CreateSettings()
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
+                -- SlashEye
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_SLASHCMDS_EYE),
+                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_EYE_TP),
+                getFunc = function() return Settings.SlashEye end,
+                setFunc = function(value) Settings.SlashEye = value SlashCommands.RegisterSlashCommands() end,
+                width = "full",
+                default = Defaults.SlashEye,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+            },
+            {
                 -- SlashPet
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_PET),

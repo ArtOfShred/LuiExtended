@@ -17,12 +17,11 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- List of abilities considered for Ultimate generation - used by CombatInfo to determine when Ultimate is being generated (Uses base abilityName sent to the listener - so we need the default names, not LUIE modified ones)
 --------------------------------------------------------------------------------------------------------------------------------
+
 Effects.IsWeaponAttack = {
-    [Abilities.Skill_Light_Attack]                  = true, -- Light Attack
-    [Abilities.Skill_Heavy_Attack]                  = true, -- Heavy Attack
+    -- TODO: Finish readding stuff here
+    -- Note: Do not put Werewolf Attacks here (can't generate ultimate)
     [Abilities.Skill_Heavy_Attack_Dual_Wield]       = true, -- Heavy Attack (Dual Wield)
-    [Abilities.Skill_Heavy_Attack_Werewolf]         = true, -- Heavy Attack (Werewolf)
-    [Abilities.Skill_Heavy_Attack_Shock]            = true, -- Heavy Attack (Shock)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -666,7 +665,7 @@ Effects.EffectGroundDisplay = {
 
     -- Crafted Sets
     [75930] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds', name = Abilities.Set_Eternal_Hunt, buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 7 }, -- Daedric Mines (Eternal Hunt)
-    [71671] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_light_attack.dds', buff = true, debuff = false, ground = false }, -- Morkuldin (Morkuldin)
+    [71671] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_summon.dds', buff = true, debuff = false, ground = false }, -- Morkuldin (Morkuldin)
     [113181] = { icon = 'esoui/art/icons/mm_teaser.dds', buff = true, debuff = false, ground = false }, -- Grave-Stake Collector (Grave-Stake Collector)
     [121915] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_scorn.dds', name = Abilities.Set_Honors_Scorn, buff = false, debuff = false, ground = true }, -- Coldharbour's Favorite (Coldharbour's Favorite)
     [121912] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_love.dds', name = Abilities.Set_Honors_Love, buff = true, debuff = false, ground = false }, -- Coldharbour's Favorite (Coldharbour's Favorite)
@@ -2506,8 +2505,8 @@ Effects.EffectOverrideByName = {
 Effects.EffectSourceOverride = {
 
     -- PLAYER SETS
-    [71678] = { pet = Abilities.Set_Morkuldin }, -- Light Attack (Morkuldin Sword)
-    [71679] = { pet = Abilities.Set_Morkuldin }, -- Cleave (Morkuldin Sword)
+    [71678] = { pet = Abilities.Set_Morkuldin }, -- Morkuldin (Morkuldin Sword)
+    [71679] = { pet = Abilities.Set_Morkuldin }, -- Morkuldin Cleave (Morkuldin Sword)
 
     -- PLAYER ABILITIES
     [33219] = { pet = Abilities.Skill_Shade }, -- Corrosive Strike (Dark Shade)
@@ -2654,12 +2653,13 @@ Effects.EffectHideSCT = {
 
     -- Player - Weapons
     [18429] = true, -- Heavy Attack (Unarmed)
-    [16041] = true, -- Heavy Attack (2H)
-    [15279] = true, -- Heavy Attack (1H)
+    [16041] = true, -- Heavy Attack (Two Handed)
+    [15279] = true, -- Heavy Attack (One Handed)
     [16420] = true, -- Heavy Attack (Dual Wield)
     [16691] = true, -- Heavy Attack (Bow)
-    [16261] = true, -- Heavy Attack (Frost)
-    [15383] = true, -- Heavy Attack (Flame)
+    [16261] = true, -- Heavy Attack (Ice)
+    [15383] = true, -- Heavy Attack (Inferno)
+    [32477] = true, -- Heavy Attack (Werewolf)
 
     -- Player - Werewolf
     [111832] = true, -- Werewolf Transformation
@@ -2805,7 +2805,7 @@ Effects.EffectHideSCT = {
     ----------------------------
 
     -- Volendrung
-    [116763] = true, -- Volendrung Heavy Attack (2H) (Volendrung)
+    [116763] = true, -- Heavy Attack (Volendrung)
     [116680] = true, -- Ebony Cyclone (Ruinous Cyclone)
 
     -- NPC Basic
@@ -3319,18 +3319,16 @@ Effects.EffectOverride = {
     [46744] = { icon = 'LuiExtended/media/icons/glyphs/glyph_absorb_magicka.dds' }, -- Absorb Magicka (Glyph of Absorb Magicka)
     [46746] = { icon = 'LuiExtended/media/icons/glyphs/glyph_absorb_stamina.dds' }, -- Absorb Stamina (Glyph of Absorb Stamina)
     [46747] = { icon = 'LuiExtended/media/icons/glyphs/glyph_absorb_stamina.dds' }, -- Absorb Stamina (Glyph of Absorb Stamina)
-    [17906] = { icon = 'LuiExtended/media/icons/glyphs/glyph_crushing.dds', name = Abilities.Item_Glyph_of_Crushing, tooltip = Tooltips.Generic_Reduce_Physical_Spell_Resist }, -- Crusher (Glyph of Crushing)
-    [46749] = { icon = 'LuiExtended/media/icons/glyphs/glyph_decrease_health.dds', name = Abilities.Item_Glyph_of_Decrease_Health }, -- Damage Health (Glyph of Decrease Health)
+    [17906] = { icon = 'LuiExtended/media/icons/glyphs/glyph_crushing.dds', tooltip = Tooltips.Generic_Reduce_Physical_Spell_Resist }, -- Crusher (Glyph of Crushing)
+    [46749] = { icon = 'LuiExtended/media/icons/glyphs/glyph_decrease_health.dds' }, -- Decrease Health (Glyph of Decrease Health)
     [17895] = { icon = 'LuiExtended/media/icons/glyphs/glyph_flame.dds' }, -- Fiery Weapon (Glyph of Flame)
     [17904] = { icon = 'LuiExtended/media/icons/glyphs/glyph_foulness.dds' }, -- Befouled Weapon (Glyph of Foulness)
     [17897] = { icon = 'LuiExtended/media/icons/glyphs/glyph_frost.dds' }, -- Frozen Weapon (Glyph of Frost)
-    --[17947] = { icon = 'LuiExtended/media/icons/glyphs/glyph_hardening.dds', name = Abilities.Item_Glyph_of_Hardening }, -- Hardening (Glyph of Hardening) (DUMMY EVENT }, HERE JUST IN CASE)
-    [21578] = { icon = 'LuiExtended/media/icons/glyphs/glyph_hardening.dds', name = Abilities.Item_Glyph_of_Hardening, tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Hardening (Glyph of Hardening)
+    [21578] = { icon = 'LuiExtended/media/icons/glyphs/glyph_hardening.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Hardening (Glyph of Hardening)
     [17902] = { icon = 'LuiExtended/media/icons/glyphs/glyph_poison.dds' }, -- Poisoned Weapon (Glyph of Poison)
     [40337] = { icon = 'LuiExtended/media/icons/glyphs/glyph_prismatic.dds' }, -- Primatic Weapon (Glyph of Prismatic Onslaught)
     [17899] = { icon = 'LuiExtended/media/icons/glyphs/glyph_shock.dds' }, -- Charged Weapon (Glyph of Shock)
-    [17945] = { icon = 'LuiExtended/media/icons/glyphs/glyph_weakening.dds', name = Abilities.Item_Glyph_of_Weakening, type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = Tooltips.Item_Glyph_of_Weakening, }, -- Weakening (Glyph of Weakening)
-    --[17910] = { icon = 'LuiExtended/media/icons/glyphs/glyph_weapon_damage.dds', name = Abilities.Item_Glyph_of_Weapon_Damage }, -- Weapon Damage (Glyph of Weapon Damage) (DUMMY EVENT }, HERE JUST IN CASE)
+    [17945] = { icon = 'LuiExtended/media/icons/glyphs/glyph_weakening.dds', type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = Tooltips.Item_Glyph_of_Weakening, }, -- Weakening (Glyph of Weakening)
     [21230] = { icon = 'LuiExtended/media/icons/glyphs/glyph_weapon_damage.dds', name = Abilities.Item_Glyph_of_Weapon_Damage, tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration }, -- Berserker (Glyph of Weapon Damage) (Added in case ever needed)
 
     ----------------------------------------------------------------
@@ -3617,7 +3615,7 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Debuffs
-    [120007] = { icon = 'LuiExtended/media/icons/glyphs/glyph_crushing.dds', name = Abilities.Item_Glyph_of_Crushing, tooltip = Tooltips.Generic_Reduce_Physical_Spell_Resist_No_Dur }, -- Crusher (Target Iron Atronach, Trial)
+    [120007] = { icon = 'LuiExtended/media/icons/glyphs/glyph_crushing.dds', tooltip = Tooltips.Generic_Reduce_Physical_Spell_Resist_No_Dur }, -- Crusher (Target Iron Atronach, Trial)
     [120011] = { tooltip = Tooltips.Skill_Engulfing_Flames_Dummy }, -- Engulfing Flames (Target Iron Atronach, Trial)
     [120018] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds', name = Abilities.Set_Line_Breaker, tooltip = Tooltips.Generic_Reduce_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 3010 }, -- Roar of Alkosh (Target Iron Atronach, Trial)
     [120014] = { tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off Balance (Target Iron Atronach, Trial)
@@ -3773,7 +3771,7 @@ Effects.EffectOverride = {
     [76350] = { icon = 'LuiExtended/media/icons/abilities/ability_item_pardon_edict_medium.dds', name = Abilities.Innate_Pardon_Edict_Medium }, -- Moderate Pardon
     [76349] = { icon = 'LuiExtended/media/icons/abilities/ability_item_pardon_edict_high.dds', name = Abilities.Innate_Pardon_Edict_High }, -- Full Pardon
     [69293] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recall.dds', name = Abilities.Innate_Recall }, -- Sigil of Imperial Retreat
-    [47270] = { icon = 'esoui/art/icons/achievement_update11_dungeons_017.dds', hide = true }, -- Ritual of Mara
+    [47270] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ritual_of_mara.dds', hide = true }, -- Ritual of Mara
 
     -- Seasonal Event Items
     [86792] = { icon = 'LuiExtended/media/icons/abilities/ability_item_festival_mints.dds', name = Abilities.Consumable_Festival_Mints }, -- Eating (High Hrothgar Festival Mints)
@@ -4288,16 +4286,16 @@ Effects.EffectOverride = {
     [34502] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ashen_grip.dds' }, -- Ashen Grip
     [34592] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', tooltip = Tooltips.Generic_Reduce_Weapon_Damage_Duration_Value, tooltipValue2 = 300 }, -- Alessia's Bulwark
     [75746] = { icon = 'LuiExtended/media/icons/abilities/ability_set_clever_alchemist.dds', tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration_Value, tooltipValue2 = 675 }, -- Clever Alchemist
-    [33764] = { icon = 'LuiExtended/media/icons/abilities/ability_set_deaths_wind.dds' }, -- Death's Wind
-    [52289] = { icon = 'LuiExtended/media/icons/abilities/ability_set_deaths_wind.dds', tooltip = Tooltips.Generic_Knockback }, -- Death's Wind
+    [33764] = { icon = 'LuiExtended/media/icons/abilities/ability_set_deaths_wind.dds', cc = LUIE_CC_TYPE_KNOCKBACK, isPlayerAbility = true }, -- Death's Wind
+    [52289] = { icon = 'LuiExtended/media/icons/abilities/ability_set_deaths_wind.dds', tooltip = Tooltips.Generic_Knockback, cc = LUIE_CC_TYPE_KNOCKBACK, isPlayerAbility = true }, -- Death's Wind
     [75930] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds', name = Abilities.Set_Eternal_Hunt, tooltip = Tooltips.Set_Eternal_Hunt }, -- Eternal Hunt
     [75929] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds' }, -- Eternal Hunt
     [76533] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds', tooltip = Tooltips.Generic_Immobilize }, -- Eternal Hunt
     [57207] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kagrenacs_hope.dds', hide = true }, -- Kagrenac's Hope
     [99204] = { icon = 'esoui/art/icons/achievement_update16_003.dds', tooltip = Tooltips.Set_Mechanical_Acuity }, -- Mechanical Acuity (of Mechanical Acuity)
-    [71671] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_light_attack.dds', hide = true, tooltip = Tooltips.Set_Morkuldin }, -- Morkuldin (Morkuldin)
-    [71678] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_light_attack.dds' }, -- Light Attack (Morkuldin)
-    [71679] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_cleave.dds' }, -- Cleave (Morkuldin)
+    [71671] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_summon.dds', hide = true, tooltip = Tooltips.Set_Morkuldin }, -- Morkuldin (Morkuldin)
+    [71678] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_light_attack.dds' }, -- Morkuldin (Morkuldin)
+    [71679] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_cleave.dds' }, -- Morkuldin Cleave (Morkuldin)
     [148882] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_oblivion_blue.dds', tooltip = Tooltips.Generic_Magic, tooltipValue2 = 2 }, -- Oblivion's Foe (of Oblivion's Foe)
     [61784] = { icon = 'LuiExtended/media/icons/abilities/ability_set_redistributor.dds', hide = true }, -- Redistributor (Redistribution)
     [49126] = { icon = 'LuiExtended/media/icons/abilities/ability_set_shalidors_curse.dds' }, -- Shalidor's Curse
@@ -5849,66 +5847,66 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Unarmed
-    [23604] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_unarmed_light.dds' }, -- Light Attack
-    [18429] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_unarmed_heavy.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (Unarmed)
-    [18430] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_unarmed_medium.dds', name = Abilities.Skill_Medium_Attack }, -- Heavy Attack
-    [18431] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_unarmed_heavy.dds' }, -- Heavy Attack
-    [60772] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_unarmed_restore.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (Unarmed)
+    [23604] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_unarmed_light.dds' }, -- Light Attack (Unarmed)
+    [18429] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_unarmed_heavy.dds' }, -- Heavy Attack (Unarmed)
+    [18430] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_unarmed_medium.dds', name = string.gsub(Abilities.Skill_Heavy_Attack_Unarmed, Abilities.Skill_Heavy_Attack, Abilities.Skill_Medium_Attack), }, -- Heavy Attack (Unarmed)
+    [18431] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_unarmed_heavy.dds' }, -- Heavy Attack (Unarmed)
+    [60772] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_unarmed_restore.dds' }, -- Heavy Attack (Unarmed)
 
     -- Two Handed
-    [16037] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_two_handed_light.dds' }, -- Light Attack
-    [16041] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_two_handed_heavy.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (2H)
-    [17162] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_two_handed_medium.dds', name = Abilities.Skill_Medium_Attack }, -- Heavy Attack
-    [17163] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_two_handed_heavy.dds' }, -- Heavy Attack
-    [60757] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_two_handed_restore.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (2H)
+    [16037] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_two_handed_light.dds' }, -- Light Attack (Two Handed)
+    [16041] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_two_handed_heavy.dds'}, -- Heavy Attack (Two Handed)
+    [17162] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_two_handed_medium.dds', name = string.gsub(Abilities.Skill_Heavy_Attack_Two_Handed, Abilities.Skill_Heavy_Attack, Abilities.Skill_Medium_Attack), }, -- Heavy Attack (Two Handed)
+    [17163] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_two_handed_heavy.dds' }, -- Heavy Attack (Two Handed)
+    [60757] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_two_handed_restore.dds' }, -- Heavy Attack (Two Handed)
 
     -- One Hand and Shield
-    [15435] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_light.dds' }, -- Light Attack
-    [15279] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_heavy.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (1H)
-    [15282] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_medium.dds', name = Abilities.Skill_Medium_Attack }, -- Heavy Attack
-    [15829] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_heavy.dds' }, -- Heavy Attack
-    [60759] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_restore.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (Shield)
+    [15435] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_light.dds' }, -- Light Attack (One Handed)
+    [15279] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_heavy.dds' }, -- Heavy Attack (One Handed)
+    [15282] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_medium.dds', name = string.gsub(Abilities.Skill_Heavy_Attack_One_Handed, Abilities.Skill_Heavy_Attack, Abilities.Skill_Medium_Attack), }, -- Heavy Attack (One Handed)
+    [15829] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_heavy.dds' }, -- Heavy Attack (One Handed)
+    [60759] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_restore.dds' }, -- Heavy Attack (One Handed)
 
     -- Dual Wield
-    [16499] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_light.dds' }, -- Light Attack
-    [16420] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_dual_wield_heavy.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (Dual Wield)
-    [17170] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_medium.dds', name = Abilities.Skill_Medium_Attack }, -- Heavy Attack
-    [17169] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_dual_wield_heavy.dds', name = Abilities.Skill_Heavy_Attack_Main_Hand }, -- Heavy Attack
-    [18622] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_dual_wield_heavy.dds', name = Abilities.Skill_Heavy_Attack_Off_Hand }, -- Heavy Attack (Dual Wield)
-    [60758] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_dual_wield_restore.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (Dual Wield)
+    [16499] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_light.dds' }, -- Light Attack (Dual Wield)
+    [16420] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_dual_wield_heavy.dds' }, -- Heavy Attack (Dual Wield)
+    [17170] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_melee_medium.dds', name = string.gsub(Abilities.Skill_Heavy_Attack_Dual_Wield, Abilities.Skill_Heavy_Attack, Abilities.Skill_Medium_Attack), }, -- Heavy Attack (Dual Wield)
+    [17169] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_dual_wield_heavy.dds' }, -- Heavy Attack (Dual Wield)
+    [18622] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_dual_wield_heavy.dds' }, -- Heavy Attack (Dual Wield)
+    [60758] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_dual_wield_restore.dds' }, -- Heavy Attack (Dual Wield)
 
     -- Bow
-    [16688] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_bow_light.dds' }, -- Light Attack
-    [16691] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_bow_heavy.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (Bow)
-    [17174] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_bow_medium.dds', name = Abilities.Skill_Medium_Attack }, -- Heavy Attack
-    [17173] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_bow_heavy.dds' }, -- Heavy Attack
-    [60761] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_bow_restore.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (Bow)
+    [16688] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_bow_light.dds' }, -- Light Attack (Bow)
+    [16691] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_bow_heavy.dds' }, -- Heavy Attack (Bow)
+    [17174] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_bow_medium.dds', name = string.gsub(Abilities.Skill_Heavy_Attack_Bow, Abilities.Skill_Heavy_Attack, Abilities.Skill_Medium_Attack), }, -- Heavy Attack (Bow)
+    [17173] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_bow_heavy.dds' }, -- Heavy Attack (Bow)
+    [60761] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_bow_restore.dds' }, -- Heavy Attack (Bow)
 
     -- Destruction Staff (Frost)
-    [16277] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_frost_light.dds' }, -- Light Attack
-    [16261] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_frost_heavy.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (Frost)
-    [18405] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_frost_medium.dds', name = Abilities.Skill_Medium_Attack }, -- Heavy Attack
-    [18406] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_frost_heavy.dds' }, -- Heavy Attack
-    [60762] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_restore.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (Frost)
+    [16277] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_frost_light.dds' }, -- Light Attack (Ice)
+    [16261] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_frost_heavy.dds' }, -- Heavy Attack (Ice)
+    [18405] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_frost_medium.dds', name = string.gsub(Abilities.Skill_Heavy_Attack_Ice, Abilities.Skill_Heavy_Attack, Abilities.Skill_Medium_Attack), }, -- Heavy Attack (Ice)
+    [18406] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_frost_heavy.dds' }, -- Heavy Attack (Ice)
+    [60762] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_restore.dds' }, -- Heavy Attack Heavy Attack (Ice)
 
     -- Destruction Staff (Flame)
-    [16165] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_flame_light.dds' }, -- Light Attack
-    [15383] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_flame_heavy.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (Flame)
-    [15385] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_flame_medium.dds', name = Abilities.Skill_Medium_Attack }, -- Heavy Attack
-    [16321] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_flame_heavy.dds' }, -- Heavy Attack
-    [60763] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_restore.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (Fire)
+    [16165] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_flame_light.dds' }, -- Light Attack (Inferno)
+    [15383] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_flame_heavy.dds' }, -- Heavy Attack (Inferno)
+    [15385] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_flame_medium.dds', name = string.gsub(Abilities.Skill_Heavy_Attack_Inferno, Abilities.Skill_Heavy_Attack, Abilities.Skill_Medium_Attack), }, -- Heavy Attack (Inferno)
+    [16321] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_flame_heavy.dds' }, -- Heavy Attack (Inferno)
+    [60763] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_restore.dds' }, -- Heavy Attack (Inferno)
 
     -- Destruction Staff (Shock)
-    [18350] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_lightning_light.dds' }, -- Light Attack
-    [18396] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_lightning_heavy.dds', name = Abilities.Skill_Heavy_Attack, tooltip = Tooltips.Skill_Heavy_Attack_Lightning }, -- Heavy Attack (Shock)
-    [19277] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_lightning_heavy.dds', name = Abilities.Skill_Heavy_Attack, hide = true }, -- Shock Pulse
-    [60764] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_restore.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (Shock)
+    [18350] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_lightning_light.dds' }, -- Light Attack (Lightning)
+    [18396] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_lightning_heavy.dds', tooltip = Tooltips.Skill_Heavy_Attack_Lightning }, -- Heavy Attack (Lightning)
+    [19277] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_lightning_heavy.dds', hide = true }, -- Heavy Attack (Lightning)
+    [60764] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_restore.dds' }, -- Heavy Attack (Lightning)
 
     -- Restoration Staff
-    [16145] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_restoration_light.dds' }, -- Light Attack
-    [16212] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_restoration_heavy.dds', name = Abilities.Skill_Heavy_Attack, tooltip = Tooltips.Skill_Heavy_Attack_Restoration }, -- Restoration Staff Channel
-    [67022] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_restoration_heavy.dds', name = Abilities.Skill_Heavy_Attack }, -- Restoration Staff Heavy Attack
-    [32760] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_restore.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (Restoration)
+    [16145] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_restoration_light.dds' }, -- Light Attack (Restoration)
+    [16212] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_restoration_heavy.dds', tooltip = Tooltips.Skill_Heavy_Attack_Restoration }, -- Heavy Attack (Restoration)
+    [67022] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_restoration_heavy.dds' }, -- Heavy Attack (Restoration)
+    [32760] = { icon = 'LuiExtended/media/icons/abilities/ability_attack_staff_restore.dds' }, -- Heavy Attack (Restoration)
 
     ----------------------------------------------------------------
     -- PLAYER PASSIVES WEAPONS -------------------------------------
@@ -6394,12 +6392,14 @@ Effects.EffectOverride = {
     [35658] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_lycanthrophy.dds', tooltip = Tooltips.Skill_Lycanthrophy }, -- Lycanthrophy
     [31068] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_sanies_lupinus.dds', tooltip = Tooltips.Skill_Sanies_Lupinus }, -- Sanies Lupinus (from NPC Bite)
     [40521] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_sanies_lupinus.dds', tooltip = Tooltips.Skill_Sanies_Lupinus }, -- Sanies Lupinus (from Player Bite)
-    [32464] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attacklight.dds' }, -- Light Attack
-    [32477] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (Were)
-    [32479] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackmedium.dds', name = Abilities.Skill_Medium_Attack }, -- Heavy Attack
-    [32480] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack Werewolf
-    [32494] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds' }, -- Heavy Attack
-    [60773] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackrestore.dds', name = Abilities.Skill_Heavy_Attack }, -- Stamina Return
+
+    [32464] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attacklight.dds' }, -- Light Attack (Werewolf)
+    [32477] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds' }, -- Heavy Attack (Werewolf)
+    [32479] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackmedium.dds', name = string.gsub(Abilities.Skill_Heavy_Attack_Werewolf, Abilities.Skill_Heavy_Attack, Abilities.Skill_Medium_Attack), }, -- Heavy Attack (Werewolf)
+    [32480] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds'}, -- Heavy Attack (Werewolf)
+    [32494] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds' }, -- Heavy Attack (Werewolf)
+    [60773] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackrestore.dds' }, -- Heavy Attack (Werewolf)
+
     [33208] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', hide = true }, -- Devour (Devour)
     [33209] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Devour)
     [40515] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Blood Moon)
@@ -7629,10 +7629,8 @@ Effects.EffectOverride = {
     [70366] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds' }, -- Slam (Great Bear)
     [89189] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds' }, -- Slam (Great Bear)
     [69073] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', name = Abilities.Skill_Slam, tooltip = Tooltips.Generic_Knockdown }, -- Knockdown (Great Bear)
-    [70374] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_ferocity.dds', tooltip = Tooltips.Generic_Scary_Immunities_Duration }, -- Ferocity (Great Bear)
-    [70372] = { hide = true }, -- Ferocity (Great Bear)
     [70376] = { hide = true }, -- Ferocity (Great Bear)
-    [70375] = { hide = true }, -- Ferocity (Great Bear)
+    [70374] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_ferocity.dds', tooltip = Tooltips.Generic_Scary_Immunities_Duration }, -- Ferocity (Great Bear)
 
     -- Crocodile
     [4583] = { icon = 'LuiExtended/media/icons/abilities/ability_crocodile_bite.dds' }, -- Bite (Crocodile)
@@ -9159,11 +9157,12 @@ Effects.EffectOverride = {
     -- Volendrung
     [118500] = { icon = 'LuiExtended/media/icons/abilities/ability_volendrung_passive.dds' }, -- Volendrung (Volendrung)
 
-    [116762] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_volendrung_attack_light.dds', name = Abilities.Skill_Light_Attack }, -- Volendrung Light Attack (Volendrung)
-    [116763] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_volendrung_attack_heavy.dds', name = Abilities.Skill_Heavy_Attack }, -- Volendrung Heavy Attack (2H) (Volendrung)
-    [116765] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_volendrung_attack_medium.dds', name = Abilities.Skill_Medium_Attack }, -- Heavy Attack Partial (Volendrung)
-    [116767] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_volendrung_attack_heavy.dds', name = Abilities.Skill_Heavy_Attack }, -- Volendrung Heavy Attack (Volendrung)
-    [116766] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_volendrung_attack_restore.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (2H) (Volendrung)
+    [116762] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_volendrung_attack_light.dds' }, -- Light Attack (Volendrung)
+    [116763] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_volendrung_attack_heavy.dds' }, -- Heavy Attack (Volendrung)
+    [116765] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_volendrung_attack_medium.dds', name = string.gsub(Abilities.Skill_Heavy_Attack_Volendrung, Abilities.Skill_Heavy_Attack, Abilities.Skill_Medium_Attack) }, -- Heavy Attack (Volendrung)
+    [116767] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_volendrung_attack_heavy.dds' }, -- Heavy Attack (Volendrung)
+    [116766] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_volendrung_attack_restore.dds' }, -- Heavy Attack (Volendrung)
+
     [118501] = { icon = 'LuiExtended/media/icons/abilities/ability_volendrung_damage_shield.dds', name = Abilities.Skill_Consume_Lifeforce }, -- Damage Shield (Volendrung)
     [118504] = { icon = 'LuiExtended/media/icons/abilities/ability_volendrung_damage_shield.dds', name = Abilities.Skill_Consume_Lifeforce, tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Damage Shield (Volendrung)
 
