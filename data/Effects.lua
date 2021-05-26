@@ -19,9 +19,26 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 
 Effects.IsWeaponAttack = {
-    -- TODO: Finish readding stuff here
-    -- Note: Do not put Werewolf Attacks here (can't generate ultimate)
-    [Abilities.Skill_Heavy_Attack_Dual_Wield]       = true, -- Heavy Attack (Dual Wield)
+    [Abilities.Skill_Light_Attack_Unarmed] = true, -- Light Attack (Unarmed)
+    [Abilities.Skill_Heavy_Attack_Unarmed] = true, -- Heavy Attack (Unarmed)
+    [Abilities.Skill_Light_Attack_Two_Handed] = true, -- Light Attack (Two Handed)
+    [Abilities.Skill_Heavy_Attack_Two_Handed] = true, -- Heavy Attack (Two Handed)
+    [Abilities.Skill_Light_Attack_One_Handed] = true, -- Light Attack (One Handed)
+    [Abilities.Skill_Heavy_Attack_One_Handed] = true, -- Heavy Attack (One Handed)
+    [Abilities.Skill_Light_Attack_Dual_Wield] = true, -- Light Attack (Dual Wield)
+    [Abilities.Skill_Heavy_Attack_Dual_Wield] = true, -- Heavy Attack (Dual Wield)
+    [Abilities.Skill_Light_Attack_Bow] = true, -- Light Attack (Bow)
+    [Abilities.Skill_Heavy_Attack_Bow] = true, -- Heavy Attack (Bow)
+    [Abilities.Skill_Light_Attack_Ice] = true, -- Light Attack (Ice)
+    [Abilities.Skill_Heavy_Attack_Ice] = true, -- Heavy Attack (Ice)
+    [Abilities.Skill_Light_Attack_Inferno] = true, -- Light Attack (Inferno)
+    [Abilities.Skill_Heavy_Attack_Inferno] = true, -- Heavy Attack (Inferno)
+    [Abilities.Skill_Light_Attack_Lightning] = true, -- Light Attack (Lightning)
+    [Abilities.Skill_Heavy_Attack_Lightning] = true, -- Heavy Attack (Lightning)
+    [Abilities.Skill_Light_Attack_Restoration] = true, -- Light Attack (Restoration)
+    [Abilities.Skill_Heavy_Attack_Restoration] = true, -- Heavy Attack (Restoration)
+    [Abilities.Skill_Light_Attack_Volendrung] = true, -- Light Attack (Volendrung)
+    [Abilities.Skill_Heavy_Attack_Volendrung] = true, -- Heavy Attack (Volendrung)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -2659,9 +2676,9 @@ Effects.EffectHideSCT = {
     [16691] = true, -- Heavy Attack (Bow)
     [16261] = true, -- Heavy Attack (Ice)
     [15383] = true, -- Heavy Attack (Inferno)
-    [32477] = true, -- Heavy Attack (Werewolf)
 
     -- Player - Werewolf
+    [32477] = true, -- Heavy Attack (Werewolf)
     [111832] = true, -- Werewolf Transformation
     [111843] = true, -- Pack Leader
     [111844] = true, -- Werewolf Berserker
@@ -2856,6 +2873,9 @@ Effects.EffectHideSCT = {
     ----------------------------
     -- Quests
     ----------------------------
+
+    -- Werewolf
+    [55886] = true, -- Heavy Attack (Were) (Hircine's Gift)
 
     -- Main Quest
     [61648] = true, -- Replenish Stamina (Tutorial - Child of Bones)
@@ -6467,11 +6487,11 @@ Effects.EffectOverride = {
     -- WEREWOLF QUEST ABILITIES ------------------------------------
     ----------------------------------------------------------------
 
-    [55885] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attacklight.dds' }, -- Light Attack
-    [55886] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (Were)
-    [55888] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackmedium.dds', name = Abilities.Skill_Medium_Attack }, -- Heavy Attack
-    [55891] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack Werewolf
-    [55890] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds' }, -- Heavy Attack
+    [55885] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attacklight.dds', name = Abilities.Skill_Light_Attack_Werewolf }, -- Light Attack
+    [55886] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', name = Abilities.Skill_Heavy_Attack_Werewolf }, -- Heavy Attack (Were)
+    [55888] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackmedium.dds', name = string.gsub(Abilities.Skill_Heavy_Attack_Werewolf, Abilities.Skill_Heavy_Attack, Abilities.Skill_Medium_Attack), }, -- Heavy Attack
+    [55891] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', name = Abilities.Skill_Heavy_Attack_Werewolf }, -- Heavy Attack Werewolf
+    [55890] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', name = Abilities.Skill_Heavy_Attack_Werewolf }, -- Heavy Attack
     [40124] = { hide = true }, -- Devour
     [40125] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour
 

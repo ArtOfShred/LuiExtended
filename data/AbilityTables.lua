@@ -111,16 +111,33 @@ local AbilityTables = {
     Skill_Medium_Attack               = 39097, -- Medium Attack
     Skill_Heavy_Attack                = 39101, -- Heavy Attack
 
-    -- TODO need everything here for Effects.IsWeaponAttack = { }
+    Skill_Light_Attack_Unarmed        = 23604, -- Light Attack (Unarmed)
     Skill_Heavy_Attack_Unarmed        = 18429, -- Heavy Attack (Unarmed)
+
+    Skill_Light_Attack_Two_Handed     = 16037, -- Light Attack (Two Handed)
     Skill_Heavy_Attack_Two_Handed     = 16041, -- Heavy Attack (Two Handed)
+    Skill_Light_Attack_One_Handed     = 15435, -- Light Attack (One Handed)
     Skill_Heavy_Attack_One_Handed     = 15279, -- Heavy Attack (One Handed)
+    Skill_Light_Attack_Dual_Wield     = 16499, -- Light Attack (Dual Wield)
     Skill_Heavy_Attack_Dual_Wield     = 16420, -- Heavy Attack (Dual Wield)
+    Skill_Light_Attack_Bow            = 16688, -- Light Attack (Bow)
     Skill_Heavy_Attack_Bow            = 16691, -- Heavy Attack (Bow)
+
+    Skill_Light_Attack_Ice            = 16277, -- Light Attack (Ice)
     Skill_Heavy_Attack_Ice            = 16261, -- Heavy Attack (Ice)
+    Skill_Light_Attack_Inferno        = 16165, -- Light Attack (Inferno)
     Skill_Heavy_Attack_Inferno        = 15383, -- Heavy Attack (Inferno)
-    Skill_Heavy_Attack_Werewolf       = 32477, -- Heavy Attack (Werewolf)
+    Skill_Light_Attack_Lightning      = 18350, -- Light Attack (Lightning)
+    Skill_Heavy_Attack_Lightning      = 18396, -- Heavy Attack (Lightning)
+
+    Skill_Light_Attack_Restoration    = 16145, -- Light Attack (Restoration)
+    Skill_Heavy_Attack_Restoration    = 16212, -- Heavy Attack (Restoration)
+
+    Skill_Light_Attack_Volendrung     = 116762, -- Light Attack (Volendrung)
     Skill_Heavy_Attack_Volendrung     = 116763, -- Heavy Attack (Volendrung)
+
+    Skill_Light_Attack_Werewolf       = 32464, -- Light Attack (Werewolf)
+    Skill_Heavy_Attack_Werewolf       = 32477, -- Heavy Attack (Werewolf)
 
     -- ---------------------------------------------------
     -- COMSUMABLES & ITEMS -------------------------------
