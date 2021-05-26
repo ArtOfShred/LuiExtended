@@ -80,7 +80,7 @@ local strings = {
     SI_LUIE_PET_NAME_ASSISTANT_FEZEZ =                  "Fezez",
     SI_LUIE_PET_NAME_ASSISTANT_PIRHARRI =               "Pirharri the Smuggler",
     SI_LUIE_PET_NAME_ASSISTANT_NUZHIMEH =               "Nuzhimeh",
-    SI_LUIE_PET_NAME_ASSISTANT_TYTHIS =                 "Tythis",
+    SI_LUIE_PET_NAME_ASSISTANT_TYTHIS =                 "Tythis Andromo",
 
     -- Bindings
     SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Summon Banker (Tythis)",

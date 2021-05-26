@@ -1141,7 +1141,7 @@ Effects.BarHighlightOverride = {
 
     -- Shadow
     [25255] = { newId = 33185 }, -- Veiled Strike
-    --[25260] = { newId = xxxxx }, -- Surprise Attack -- TODO: Update
+    [25260] = { newId = 34732 }, -- Surprise Attack
     [25267] = { newId = 34736 }, -- Concealed Weapon
     [25375] = { newId = 25376 }, -- Shadow Cloak
     [25380] = { newId = 62141 }, -- Shadowy Disguise
@@ -5026,7 +5026,7 @@ Effects.EffectOverride = {
     [36049] = { tooltip = Tooltips.Skill_Twisting_Path }, -- Twisting Path (Twisting Path)
     [36052] = { tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1, groundLabel = true }, -- Twisting Path (Twisting Path)
     [36028] = { tooltip = Tooltips.Skill_Refreshing_Path }, -- Refreshing Path (Refreshing Path)
-    [64006] = { groundLabel = true, tooltip = Tooltips.Skill_Refreshing_Path_Ground }, -- Refreshing Path (Refreshing Path)
+    [64006] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Refreshing Path (Refreshing Path)
 
     -- Aspect of Terror / Mass Hysteria / Manifestation of Terror
     [25352] = { tooltip = Tooltips.Generic_Fear }, -- Aspect of Terror (Aspect of Terror)
@@ -5081,8 +5081,8 @@ Effects.EffectOverride = {
     -- Cripple / Debilitate / Crippling Grasp
     [33333] = { tooltip = Tooltips.Skill_Cripple, tooltipValue2 = 30 }, -- Cripple (Cripple)
     [33327] = { icon = 'esoui/art/icons/ability_nightblade_006.dds', tooltip = Tooltips.Skill_Cripple, tooltipValue2 = 30, hideReduce = true }, -- Cripple (Cripple)
-    [36947] = { tooltip = Tooltips.Skill_Cripple, tooltipValue2 = 50 }, -- Debilitate (Debilitate)
-    [36945] = { icon = 'esoui/art/icons/ability_nightblade_006_a.dds', tooltip = Tooltips.Skill_Cripple, tooltipValue2 = 50, hideReduce = true }, -- Debilitate (Debilitate)
+    [36947] = { tooltip = Tooltips.Skill_Debilitate, tooltipValue2 = 50 }, -- Debilitate (Debilitate)
+    [36945] = { icon = 'esoui/art/icons/ability_nightblade_006_a.dds', tooltip = Tooltips.Skill_Debilitate, tooltipValue2 = 50, hideReduce = true }, -- Debilitate (Debilitate)
     [36960] = { tooltip = Tooltips.Skill_Crippling_Grasp }, -- Crippling Grasp (Crippling Grasp)
     [36958] = { icon = 'esoui/art/icons/ability_nightblade_006_b.dds', tooltip = Tooltips.Skill_Crippling_Grasp, hideReduce = true }, -- Crippling Grasp (Crippling Grasp)
     [36963] = { icon = 'esoui/art/icons/ability_nightblade_006_b.dds' }, -- Crippling Grasp (Crippling Grasp)

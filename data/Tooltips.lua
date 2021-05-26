@@ -714,11 +714,11 @@ LUIE.Data.Tooltips = {
     Skill_Malevolent_Offering                       = GetString(SI_LUIE_SKILL_MALEVOLENT_OFFERING_TP),
     Skill_Cripple                                   = GetString(SI_LUIE_SKILL_CRIPPLE_TP),
     Skill_Crippling_Grasp                           = GetString(SI_LUIE_SKILL_CRIPPLING_GRASP_TP),
+    Skill_Debilitate                                = GetString(SI_LUIE_SKILL_DEBILITATE_TP),
     Skill_Siphoning_Strikes                         = GetString(SI_LUIE_SKILL_SIPHONING_STRIKES_TP),
     Skill_Leeching_Strikes                          = GetString(SI_LUIE_SKILL_LEECHING_STRIKES_TP),
     Skill_Siphoning_Attacks                         = GetString(SI_LUIE_SKILL_SIPHONING_ATTACKS_TP),
     Skill_Soul_Tether                               = GetString(SI_LUIE_SKILL_SOUL_TETHER_TP),
-    Skill_Refreshing_Path_Ground                    = GetString(SI_LUIE_SKILL_REFRESHING_PATH_GROUND),
 
     -- Sorcerer
     Skill_Persistence_Rank_1                        = zo_strformat(GetString(SI_LUIE_SKILL_PERSISTENCE), 7),

@@ -4139,7 +4139,7 @@ LUIE.DebugAuras = {
     [36052] = true, -- Twisting Path (Twisting Path)
 
     [36028] = true, -- Refreshing Path (Refreshing Path)
-    [64003] = true, -- Summon Shade (Refreshing Path)
+    [64003] = true, -- Refreshing Path (Refreshing Path)
     [64007] = true, -- Path of Darkness (Refreshing Path)
     [64004] = true, -- Path of Darkness (Refreshing Path)
     [64002] = true, -- Refreshing Path (Refreshing Path)
