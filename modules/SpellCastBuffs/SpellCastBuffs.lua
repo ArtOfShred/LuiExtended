@@ -232,6 +232,15 @@ function SpellCastBuffs.ShouldUseDefaultIcon(abilityId)
             return Effects.EffectOverride[abilityId].isPlayerAbility and true or false
         end
     end
+    if SpellCastBuffs.SV.HideReduce and Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].ccMergedType then
+        if SpellCastBuffs.SV.DefaultIconOptions == 1 then
+            return true
+        elseif SpellCastBuffs.SV.DefaultIconOptions == 2 then
+            return Effects.EffectOverride[abilityId].isPlayerAbility and false or true
+        elseif SpellCastBuffs.SV.DefaultIconOptions == 3 then
+            return Effects.EffectOverride[abilityId].isPlayerAbility and true or false
+        end
+    end
 end
 
 function SpellCastBuffs.GetDefaultIcon(ccType)

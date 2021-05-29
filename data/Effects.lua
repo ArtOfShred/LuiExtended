@@ -3059,6 +3059,10 @@ Effects.EffectOverride = {
     -- refreshOnly = true -- Only show this effect when the duration is updated/refreshed - Toggle this to hide some goofy effects that have a travel time aura for their projectile before the actual effect applies.
     -- hideGround = true -- Hide this effect if ground effect damaging auras are set to show - we want damage to always prioritize so that the aura always shows even if the player is immune to the snare or other effect of the ability.
 
+    --cc = LUIE_CC_TYPE -- Used to determine type of CC
+    --ccMergedType = LUIE_CC_TYPE -- Shows this type of CC if "merged" effects are enabled on
+    --isPlayerAbility = true -- This is a player ability for the purposes of CC icon normalization
+
     -- TEMP MOVE LATER
     [54119] = { forcedContainer = 'short' }, -- Remembrance (The Anger of a King)
 
