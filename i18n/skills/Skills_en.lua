@@ -649,7 +649,7 @@ local strings = {
 
     -- Restoration Staff
     SI_LUIE_SKILL_GRAND_HEALING =                        "Healing you and allies in the |cFFFFFF<<2>>|r meter area every |cFFFFFF1|r second.",
-    SI_LUIE_SKILL_HEALING_SPRINGS =                      "Healing you and allies in the |cFFFFFF<<2>>|r meter area every |cFFFFFF1|r second.\n\nYou restore Magicka every time you or an ally is healed.",
+    SI_LUIE_SKILL_HEALING_SPRINGS =                      "Healing you and allies in the |cFFFFFF<<2>>|r meter area every |cFFFFFF1|r second.\n\nYou restore |cFFFFFF30|r Magicka every time you or an ally is healed.",
     SI_LUIE_SKILL_BLESSING_OF_RESTORATION =              "Blessing of Restoration",
     SI_LUIE_SKILL_HEALING_WARD =                         "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nWhile the shield persists, heal for |cFFFFFF33|r% of the shield's remaining strength every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_LIGHTS_CHAMPION =                      "Healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nGain Major Force for |cFFFFFF8|r seconds each time this effect heals.",

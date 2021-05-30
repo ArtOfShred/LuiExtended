@@ -986,7 +986,7 @@ Effects.BarHighlightExtraId = {
 
     -- Werewolf
     [32633] = 137257, -- Roar --> Off Balance
-    [39114] = 137312, --> Deafening Roar --> Off Balance
+    [39114] = 137312, --> Deafening Roar --> Off Balance -- TODO: Could possibly track Major Breach/Minor Maim
 
     -- Vampire
     [138130] = 138098, -- Stupefy
@@ -1101,7 +1101,7 @@ Effects.BarHighlightOverride = {
     -- Draconic Power
     [20245] = { newId = 20527 }, -- Dark Talons
     [20252] = { newId = 31898 }, -- Burning Talons
-    [20251] = { newId = 20528 }, -- Choking Talons
+    [20251] = { newId = 20528 }, -- Choking Talons -- TODO: Possibly track Maim here as well
     [29004] = { showFakeAura = true, noRemove = true }, -- Dragon Blood
     [32744] = { showFakeAura = true, noRemove = true }, -- Green Dragon Blood
     [32722] = { showFakeAura = true, noRemove = true }, -- Coagulating Blood
@@ -1225,7 +1225,7 @@ Effects.BarHighlightOverride = {
     [21729] = { newId = 21731 }, -- Vampire's Bane
     [21732] = { newId = 21734 }, -- Reflective Light (Reflective Light)
     [22057] = { newId = 61737 }, -- Solar Flare --> Empower
-    [22110] = { newId = 61727 }, -- Dark Flare --> Major Defile
+    [22110] = { newId = 61737 }, -- Dark Flare --> Empower
     [21752] = { newId = 21976 }, -- Nova (Nova)
     [21755] = { newId = 22003 }, -- Solar Prison (Solar Prison)
     [21758] = { newId = 22001 }, -- Solar Disturbance (Solar Disturbance)
@@ -1378,6 +1378,7 @@ Effects.BarHighlightOverride = {
     [38914] = { newId = 61665 }, -- Shrouded Daggers --> Major Brutality
     [38910] = { newId = 126667 }, -- Flying Blade
     [126659] = { newId = 126667 }, -- Flying Blade
+
     [83600] = { newId = 85156 }, -- Lacerate
     [85187] = { newId = 85192 }, -- Rend
     [85179] = { newId = 85184 }, -- Thrive in Chaos
@@ -1433,9 +1434,9 @@ Effects.BarHighlightOverride = {
     [39145] = { newId = 115003 }, -- Fire Ring --> Wild Impulse
     [39147] = { newId = 115003 }, -- Shock Ring --> Wild Impulse
     [39146] = { newId = 115003 }, -- Frost Ring --> Wild Impulse
-    [39162] = { newId = 115003 }, -- Flame Pulsar --> Wild Impulse
-    [39167] = { newId = 115003 }, -- Storm Pulsar --> Wild Impulse
-    [39163] = { newId = 11503 }, -- Frost Pulsar --> Wild Impulse
+    [39162] = { newId = 115003 }, -- Flame Pulsar --> Wild Impulse -- TODO: Maybe track Minor Mangle here too
+    [39167] = { newId = 115003 }, -- Storm Pulsar --> Wild Impulse -- TODO: Maybe track Minor Mangle here too
+    [39163] = { newId = 115003 }, -- Frost Pulsar --> Wild Impulse -- TODO: Maybe track Minor Mangle here too
 
     ---------------------------
     -- Restoration Staff ------
@@ -6346,7 +6347,7 @@ Effects.EffectOverride = {
     -- Blood Ritual
     [40349] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Stun }, -- Feed (Blood Ritual - Rank 1)
     [40350] = { icon = 'esoui/art/icons/ability_u26_vampire_synergy_feed.dds' }, -- Feed (Blood Ritual - Rank 1)
-    [40359] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Passive_Blood_Ritual, Abilities.Set_Cooldown), tooltip = Tooltips.Skill_Blood_Ritual }, -- Fed on ally (Blood Ritual)
+    [40359] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Passive_Blood_Ritual, Abilities.Set_Cooldown), tooltip = Tooltips.Skill_Blood_Ritual, forcedContainer = 'long' }, -- Fed on ally (Blood Ritual)
 
     -- Unnatural Movement
     [132849] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_unnatural_movement.dds', tooltip = Tooltips.Skill_Unnatural_Movement, forcedContainer = 'short' }, -- Unnatural Movement (Unnatural Movement - Rank 1)
@@ -6429,7 +6430,7 @@ Effects.EffectOverride = {
     [33209] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Devour)
     [40515] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Blood Moon)
     [40520] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', name = Abilities.Skill_Devour, unbreakable = 1, tooltip = Tooltips.Generic_Knockdown }, -- Q3047 - Knockdown (Blood Moon - Rank 1)
-    [40525] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_bloodmoon_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Passive_Bloodmoon, Abilities.Set_Cooldown), tooltip = Tooltips.Skill_Blood_Moon }, -- Bit an Ally (Blood Moon)
+    [40525] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_bloodmoon_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Passive_Bloodmoon, Abilities.Set_Cooldown), tooltip = Tooltips.Skill_Blood_Moon, forcedContainer = 'long' }, -- Bit an Ally (Blood Moon)
 
     ----------------------------------------------------------------
     -- WEREWOLF ACTIVES --------------------------------------------
