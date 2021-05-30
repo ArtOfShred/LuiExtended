@@ -2129,6 +2129,7 @@ Effects.BarIdOverride = {
 --------------------------------------------------------------------------------------------------------------------------------
 -- When a bar ability proc with a matching id appears, display the toggle highlight
 --------------------------------------------------------------------------------------------------------------------------------
+
 Effects.IsAbilityActiveHighlight = {
     -- Support
     [78338] = true, -- Guard (Guard)
