@@ -1,4 +1,4 @@
-Version 6.2.7
+### Version 6.2.7
 
 Known Issues
 - Duration & Stack Tracking for Bar Highlight is currently disabled. Something that changed in the API broke this and I haven't been able to figure out what caused it yet despite rooting around for an exceptionally long time. I may have to rewrite this component in the future. I'd suggest using Action Duration Reminder in the meantime.
