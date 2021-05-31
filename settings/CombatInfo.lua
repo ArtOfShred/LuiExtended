@@ -353,14 +353,16 @@ function CombatInfo.CreateSettings()
             },
             {
                 -- Show Label On Bar Highlight
+                -- TODO: Reimplement when fixed
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_LABEL)),
+                name = zo_strformat("\t\t\t\t\t<<1>> - BROKEN", GetString(SI_LUIE_LAM_CI_BAR_LABEL)),
                 tooltip = GetString(SI_LUIE_LAM_CI_BAR_LABEL_TP),
                 getFunc = function() return Settings.BarShowLabel end,
                 setFunc = function(value) Settings.BarShowLabel = value CombatInfo.ResetBarLabel() end,
                 width = "full",
                 default = Defaults.BarShowLabel,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and ( Settings.ShowTriggered or Settings.ShowToggled) ) end,
+                --disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and ( Settings.ShowTriggered or Settings.ShowToggled) ) end,
+                disabled = true
             },
             {
                 type = "slider",

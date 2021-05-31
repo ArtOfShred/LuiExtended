@@ -45,7 +45,7 @@ CombatInfo.Defaults = {
     ProcSoundName                    = "Death Recap Killing Blow",
     ShowToggled                      = true,
     ShowToggledUltimate              = true,
-    BarShowLabel                     = true,
+    BarShowLabel                     = false, -- Temp Disabled
     BarLabelPosition                 = -20,
     BarFontFace                      = "Univers 67",
     BarFontStyle                     = "outline",
@@ -413,6 +413,11 @@ function CombatInfo.Initialize(enabled)
         return
     end
     CombatInfo.Enabled = true
+
+    -- TODO: TEMP: Disabled due to issues
+    if CombatInfo.SV.BarShowLabel == true then
+        CombatInfo.SV.BarShowLabel = false
+    end
 
     CombatInfo.ApplyFont()
     CombatInfo.ApplyProcSound()
@@ -2560,7 +2565,7 @@ function CombatInfo.PlayProcAnimations(slotNum)
         end
         -- Otherwise make a highlight frame
         local actionButton
-        if slotNum <= BAR_INDEX_END then
+        if slotNum < BACKBAR_INDEX_OFFSET then
            actionButton = ZO_ActionBar_GetButton(slotNum)
         else
            actionButton = g_backbarButtons[slotNum]
@@ -2628,7 +2633,7 @@ function CombatInfo.ShowCustomToggle(slotNum)
         end
         -- Otherwise make a highlight frame
         local actionButton
-        if slotNum <= BAR_INDEX_END then
+        if slotNum < BACKBAR_INDEX_OFFSET then
             actionButton = ZO_ActionBar_GetButton(slotNum)
         else
             actionButton = g_backbarButtons[slotNum]
