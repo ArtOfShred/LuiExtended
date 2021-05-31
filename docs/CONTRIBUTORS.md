@@ -25,11 +25,11 @@ LuiExtended wouldn't be where it was without the contributions of other users an
 - AchievementInfo: Formatting for Achievement Tracking in Chat Announcements borrows some ideas from Asto's AchievementInfo.
 
 ## Custom Art Assets
-- Custom ability icons by and modified from eleazzaar licensed under the [CC BY 3.0 license][1].
-- Custom ability icons by and modified from AKiZA, Angelina Avgustova, Blade Dancer, ClayManStudio, Cool Art, Dayed, Digital Worlds JSC, Ever Probe, HOSE, Jon Snow, Josch, Kalle Olli, MiDaEm, Moon Tribe, N-hance Studio, PONETI, REXARD, Sky Painter, The 7 Heaven, TiGame, and TonityEden licensed under the [Unity Store single entity license][2].
-- Custom ability icons by and modified from a-ravlik & micart licensed under the [GraphicRiver regular license][3].
-- Custom ability icons by and modified from Forrest Imel, Frostwindz, and Ruixi licensed under the [GameDevMarket.net pro license][4].
-- Custom Art Assets by and modified from Combat 21 licensed under the [scirra.com royalty free licensed assets license][5].
+- Custom Art Assets by and modified from J. W. Bjerk (eleazzaar) licensed under the [CC BY 3.0 license][1].
+- Custom Art Assets by and modified from AKiZA, Angelina Avgustova, Blade Dancer, ClayManStudio, Cool Art, Dayed, Digital Worlds JSC, Ever Probe, HOSE, Jon Snow, Josch, Kalle Olli, Little Sweet Daemon, MiDaEm, Moon Tribe, N-hance Studio, PONETI, REXARD, Sky Painter, The 7 Heaven, TiGame, and TonityEden licensed under the [Unity Store single entity license][2].
+- Custom Art Assets by and modified from a-ravlik, Horski, and micart licensed under the [GraphicRiver regular license][3].
+- Custom Art Assets by and modified from damnwing, Forrest Imel, Frostwindz, and Ruixi licensed under the [GameDevMarket.net pro license][4].
+- Custom Art Assets by and modified from Combo 21 licensed under the [construct.net asset license][5].
 
 ## Bug Testing
 - scorpius2k1 <esoui.com>
@@ -40,4 +40,4 @@ LuiExtended wouldn't be where it was without the contributions of other users an
   [2]: https://unity3d.com/legal/as_terms
   [3]: https://graphicriver.net/licenses/terms/regular
   [4]: https://www.gamedevmarket.net/terms-conditions/#pro-licence
-  [5]: https://www.scirra.com/store/licensing
+  [5]: https://www.construct.net/en/game-assets/asset-licenses

@@ -113,6 +113,9 @@ CastBarTable.BreakCastOnMove = {
 
     -- Misc Items
     [63427] = true, -- Clean Fish (Filet Fish)
+    [78052] = true, -- Minor Pardon (Counterfeit Pardon Edict)
+    [76350] = true, -- Moderate Pardon (Leniency Edict)
+    [76349] = true, -- Full Pardon (Grand Amnesty Edict)
 
     -- Mementos
     [42008] = true, -- Blessing of Root Sunder (Token of Root Sunder)
@@ -228,6 +231,9 @@ CastBarTable.IgnoreCastBreakingActions = {
     [43700] = true, -- Wand of Finding (Lena's Wand of Finding)
     [81575] = true, -- Event - WitchFest Cauldron (Witchmother's Whistle)
     --[21112] = true, -- Q4220 PC Forced to L0
+
+    [113432] = true, -- 68235 Stun (Nascent Indrik)
+    [148079] = true, -- 68235 Stun (Unstable Morpholith)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -240,25 +246,32 @@ CastBarTable.CastChannelOverride = {
 
     -- Innate
     [32346] = true, -- Skyshard Collect
+    [151928] = true, -- Aetherial Well (Aetherial Well)
     [47270] = true, -- Ritual of Mara
     [14031] = true, -- Mundus Use
     [4197] = true, -- Recovering (NPC Duel)
 
     -- Seasonal Mementos & Items
-    [86792] = true, -- Eating (High Hrothgar Festival Mints)
-    [86739] = true, -- Drinking (Sailor's Warning Festival Grog)
     [85355] = true, -- Flame Juggling (Consumable Version)
     [85354] = true, -- Dagger Juggling (Consumable Verison)
     [85353] = true, -- Sword Swallowing (Consumable Version)
+    [146657] = true, -- Memento Cliff Racer (Thetys Ramary's Bait Kit)
+
+    [115681] = true, -- Party Noise Maker (Festive Noise Maker)
+    [129550] = true, -- Stunned (Jester's Festival Joke Popper)
+    [149874] = true, -- Playful Prankster's Surprise Box (Playful Prankster's Surprise Box)
     [102077] = true, -- Jester's Festival Scintillator (Jester's Scintillator)
+    [111458] = true, -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
+    [111459] = true, -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
     [125820] = true, -- Witches Festival 2019 Marionette (Skeletal Marionette)
+    [144790] = true, -- Throw Bones (Throwing Bones)
+    [144791] = true, -- Throw Bones (Throwing Bones)
 
     -- Memento (Crown)
     [85347] = true, -- Storm Orb Juggle (Atronach Juggling)
     [97273] = true, -- TROPHY Death Crate Mem 1 (Crow's Calling)
     [99318] = true, -- TROPHY Flame Crate Mem 1 (Fiery Orb)
     [99319] = true, -- Flame Crate Memento 2 (Flame Pixie)
-    [99320] = true, -- TROPHY Flame Crate Mem 3 (Flame Eruption)
     [101874] = true, -- _CRWN Dragon Priest Mem2 Ice T (Scalecaller Frost Shard)
     [101877] = true, -- _CRWN Dragon Priest Mem1 Fl/St (Scalecaller Rune of Levitation)
     [101872] = true, -- _CRWN Dragon Priest Memento3 (Bone Dragon Summons Focus)
@@ -270,6 +283,10 @@ CastBarTable.CastChannelOverride = {
     [110481] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [113288] = true, -- U20 Crown Memento 1 (Mire Drum)
     [113291] = true, --  U20 Crown Memento 2 (Vossa-satl)
+    [151489] = true, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [151490] = true, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [151491] = true, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [146752] = true, -- Phial of Clockwork Lubricant (Phial of Clockwork Lubricant)
 
     -- Memento (Base)
     [43700] = true, -- Wand of Finding (Lena's Wand of Finding)
@@ -278,10 +295,17 @@ CastBarTable.CastChannelOverride = {
     [42053] = true, -- Yokudan Salute (Yokudan Totem)
 
     -- Memento (DLC)
+    [143495] = true, -- Reliquary of Dark Designs (Reliquary of Dark Designs)
     [89550] = true, -- TROPHY Azura's Light (Twilight Shard)
     [79510] = true, -- TROPHY Blood Oath (Blade of the Blood Oath)
     [119099] = true, -- Brittle Burial Urn (Brittle Burial Urn)
     [125816] = true, -- Maarselok Corruption Memento (Corruption of Maarselok)
+    [137919] = true, -- Juggling Potion Bottles (Mostly Stable Juggling Potions)
+    [147598] = true, --  Void Shard (Void Shard)
+    [149881] = true, -- Illusory Salamander Stone (Illusory Salamander Stone)
+    [153758] = true, -- Golden Anvil Replica (Full-Scale Golden Anvil Replica)
+    [146744] = true, -- Temperamental Grimoire (Temperamental Grimoire)
+    [153760] = true, -- Wilting Weed Killer Phial (Wilting Weed Killer Phial)
     [125817] = true, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
 
     -- Vampire
@@ -363,6 +387,7 @@ CastBarTable.CastDurationFix = {
     [141013] = 1165, -- Mount Up (Passenger Mount)
     [14644] = 4000, -- Revive (Death Dialogue)
     [32346] = 5800, -- Skyshard Collect
+    [151928] = 3000, -- Aetherial Well (Aetherial Well)
     [47270] = 5600, -- Ritual of Mara
     [14031] = 5000, -- Mundus Use
     [4197] = 4000, -- Recovering (NPC Duel)
@@ -375,13 +400,75 @@ CastBarTable.CastDurationFix = {
     [113432] = 8000, -- 68235 Stun (Nascent Indrik)
     [130394] = 5000, -- 68235 Stun (Spectral Indrik)
     [131536] = 5000, -- Generic Stun & Combine (Sovereign Sow)
+    [151843] = 5000, -- 68235 Stun (Deadlands Firewalker)
+    [148079] = 8000, -- 68235 Stun (Unstable Morpholith)
 
-    [68259] = 5000, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [68259] = 5000, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I)
+    [68263] = 5000, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment II)
+    [68267] = 5000, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment III)
+    [68271] = 5000, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment IV)
+    [68275] = 5000, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment V)
+    [68279] = 5000, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment VI)
+    [68283] = 5000, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment VII)
     [70584] = 5000, -- 68235 Stun (Merethic Restorative Resin)
     [88451] = 5000, -- 88449 Stun (Aetheric Cipher)
+    [110890] = 5000, -- 68235 Stun (Welkynar Binding)
 
     [147795] = 5000, -- 88449 Stun (Chef Arquitius's Torte Dissertation)
     [147850] = 5000, -- 88449 Stun (Chef Arquitius's Lost Thesis)
+    [148052] = 5000, -- 68235 Stun (Breton Terrier Mammoth Bone)
+    [123110] = 5000, -- 68235 Stun (Mummified Alfiq Parts)
+    [123115] = 5000, -- 68235 Stun (Plague-Drenched Fabric)
+    [140544] = 5000, -- 68235 Stun (Stone Husk Fragment)
+
+    [111141] = 5000, -- 68235 Stun (Swamp Jelly Carrying Jar)
+    [111129] = 5000, -- 68235 Stun (Swamp Jelly Fine-Mesh Net)
+    [111153] = 5000, -- 68235 Stun (Swamp Jelly Hunter's Lense)
+    [111133] = 5000, -- 68235 Stun (Swamp Jelly Luminous Fishmeal)
+    [111137] = 5000, -- 68235 Stun (Swamp Jelly Luring Flute)
+    [111149] = 5000, -- 68235 Stun (Swamp Jelly Moss Bedding)
+    [111145] = 5000, -- 68235 Stun (Swamp Jelly Spawning Mud)
+
+    [117532] = 5000, -- 68235 Stun (Guar Stomp Elucidating Hand-Sculpture)
+    [117558] = 5000, -- 68235 Stun (Guar Stomp History in Street Theatre)
+    [117554] = 5000, -- 68235 Stun (Guar Stomp Illustrated Reports)
+    [117550] = 5000, -- 68235 Stun (Guar Stomp Noise Reports)
+    [117545] = 5000, -- 68235 Stun (Guar Stomp Rehearsal Tuning Fork)
+    [117562] = 5000, -- 68235 Stun (Guar Stomp Skeletal Reconstruction)
+    [117541] = 5000, -- 68235 Stun (Guar Stomp Steps-Practice Rug)
+
+    [108312] = 5000, -- 68235 Stun (Big-Eared Ginger Kitten's "Care and Feeding" Guide)
+    [108300] = 5000, -- 68235 Stun (Big-Eared Ginger Kitten's Bait Mouse)
+    [108283] = 5000, -- 68235 Stun (Big-Eared Ginger Kitten's Collar)
+    [108308] = 5000, -- 68235 Stun (Big-Eared Ginger Kitten's Feather Toy)
+    [108304] = 5000, -- 68235 Stun (Big-Eared Ginger Kitten's Milk Saucer)
+    [108296] = 5000, -- 68235 Stun (Big-Eared Ginger Kitten's Sleeping-Basket)
+    [108292] = 5000, -- 68235 Stun (Big-Eared Ginger Kitten's Tag)
+
+    [108316] = 5000, -- 68235 Stun (Psijic Glowglobe's Ancient Texts)
+    [108320] = 5000, -- 68235 Stun (Psijic Glowglobe's Conjectural Writings)
+    [108324] = 5000, -- 68235 Stun (Psijic Glowglobe's Crystal Ball)
+    [108328] = 5000, -- 68235 Stun (Psijic Glowglobe's Meteoric Glass)
+    [108332] = 5000, -- 68235 Stun (Psijic Glowglobe's Purified Glow Dust)
+    [108336] = 5000, -- 68235 Stun (Psijic Glowglobe's Updated Instructionals)
+    [108340] = 5000, -- 68235 Stun (Psijic Glowglobe's Wisp Animus)
+
+    [92381] = 5000, -- 68235 Stun (Sixth House Incense of Toolwork)
+    [92393] = 5000, -- 68235 Stun (Sixth House Ornamental Fasteners)
+    [92389] = 5000, -- 68235 Stun (Sixth House Patterned Belt)
+    [92397] = 5000, -- 68235 Stun (Sixth House Tailor's Belt)
+    [92385] = 5000, -- 68235 Stun (Sixth House Tailor's Hammer)
+    [92373] = 5000, -- 68235 Stun (Sixth House Tailor's Shears)
+    [92377] = 5000, -- 68235 Stun (Sixth House Writhing Thread)
+
+    [92365] = 5000, -- 68235 Stun (Dwarven Theodolite Chassis)
+    [92361] = 5000, -- 68235 Stun (Dwarven Theodolite Eye)
+    [92357] = 5000, -- 68235 Stun (Dwarven Theodolite Head)
+    [92353] = 5000, -- 68235 Stun (Dwarven Theodolite Neck)
+    [92349] = 5000, -- 68235 Stun (Dwarven Theodolite Shoulder)
+    [92345] = 5000, -- 68235 Stun (Dwarven Theodolite Torso)
+    [92341] = 5000, -- 68235 Stun (Dwarven Theodolite Wheels)
+
     [111190] = 5000, -- 68235 Stun (Arena Gladiator's Exultation)
     [115064] = 5000, -- 68235 Stun (Arena Gladiator's Mockery)
     [106174] = 5000, -- 68235 Stun (Arena Gladiator's Recognition)
@@ -389,6 +476,7 @@ CastBarTable.CastDurationFix = {
     [134883] = 5000, -- 68235 Stun (Knight's Rebuke)
     [134851] = 5000, -- 68235 Stun (Knight's Resolve)
     [140622] = 5000, -- 68235 Stun (Reach-Mage's Ferocity)
+    [145216] = true, -- 68235 Stun (Siege of Cyrodiil Distinction)
     [124789] = 5000, -- 68235 Stun (Siege of Cyrodiil Recognition)
     [126710] = 5000, -- 68235 Stun (Siege of Cyrodiil Recommendation)
     [124624] = 5000, -- 68235 Stun (Alliance Standard-Bearer's License)
@@ -400,9 +488,18 @@ CastBarTable.CastDurationFix = {
     [85355] = 12000, -- Flame Juggling (Consumable Version)
     [85354] = 12000, -- Dagger Juggling (Consumable Verison)
     [85353] = 12000, -- Sword Swallowing (Consumable Version)
+    [146657] = 19000, -- Memento Cliff Racer (Thetys Ramary's Bait Kit)
+
+    [115681] = 3250, -- Party Noise Maker (Festive Noise Maker)
+    [129550] = 6540, -- Stunned (Jester's Festival Joke Popper)
+    [149874] = 10000, -- Playful Prankster's Surprise Box (Playful Prankster's Surprise Box)
     [102077] = 2000, -- Jester's Festival Scintillator (Jester's Scintillator)
     [81575] = 2000, -- Event - WitchFest Cauldron (Witchmother's Whistle)
+    [111458] = 9000, -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
+    [111459] = 9000, -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
     [125820] = 7500, -- Witches Festival 2019 Marionette (Skeletal Marionette)
+    [144790] = 13000, -- Throw Bones (Throwing Bones)
+    [144791] = 13000, -- Throw Bones (Throwing Bones)
 
     -- Memento (Crown)
     [85347] = 12000, -- Storm Orb Juggle (Atronach Juggling)
@@ -421,6 +518,10 @@ CastBarTable.CastDurationFix = {
     [110481] = 1500, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [113288] = 10000, -- U20 Crown Memento 1 (Mire Drum)
     [113291] = 13000, --  U20 Crown Memento 2 (Vossa-satl)
+    [151489] = 21000, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [151490] = 21000, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [151491] = 21000, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [146752] = 15000, -- Phial of Clockwork Lubricant (Phial of Clockwork Lubricant)
 
     -- Memento (Base)
     [42076] = 8000, -- Tear (Mezha-dro's Sealing Amulet)
@@ -428,12 +529,21 @@ CastBarTable.CastDurationFix = {
     [42053] = 10000, -- Yokudan Salute (Yokudan Totem)
 
     -- Memento (DLC)
+    [143495] = 7000, -- Reliquary of Dark Designs (Reliquary of Dark Designs)
     [89550] = 9000, -- TROPHY Azura's Light (Twilight Shard)
     [79510] = 6500, -- TROPHY Blood Oath (Blade of the Blood Oath)
     [74151] = 2500, -- Stun (Hidden Pressure Vent)
     [92862] = 4500, -- Ringing Bell (Dreamer's Chime)
     [119099] = 4000, -- Brittle Burial Urn (Brittle Burial Urn)
     [125816] = 10000, -- Maarselok Corruption Memento (Corruption of Maarselok)
+    [136120] = 4000, -- Ritual Circle Totem (Ritual Circle Totem)
+    [137919] = 8000, -- Juggling Potion Bottles (Mostly Stable Juggling Potions)
+    [147598] = 15250, --  Void Shard (Void Shard)
+    [149881] = 8000, -- Illusory Salamander Stone (Illusory Salamander Stone)
+    [153758] = 11500, -- Golden Anvil Replica (Full-Scale Golden Anvil Replica)
+    [146744] = 12000, -- Temperamental Grimoire (Temperamental Grimoire)
+    [153760] = 10000, -- Wilting Weed Killer Phial (Wilting Weed Killer Phial)
+    [149879] = 3500, -- Daedric Unwarding Amulet (Daedric Unwarding Amulet)
     [125817] = 5000, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
 
     -- Vampire
@@ -524,6 +634,7 @@ CastBarTable.IsCast = {
     [14031] = true, -- Mundus Use
     [14644] = true, -- Revive (Death Dialogue)
     [32346] = true, -- Skyshard Collect
+    [151928] = true, -- Aetherial Well (Aetherial Well)
     [47270] = true, -- Ritual of Mara
 
     -- Misc Items
@@ -534,10 +645,19 @@ CastBarTable.IsCast = {
     [113432] = true, -- 68235 Stun (Nascent Indrik)
     [130394] = true, -- 68235 Stun (Spectral Indrik)
     [131536] = true, -- Generic Stun & Combine (Sovereign Sow)
+    [151843] = true, -- 68235 Stun (Deadlands Firewalker)
+    [148079] = true, -- 68235 Stun (Unstable Morpholith)
 
-    [68259] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+    [68259] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I)
+    [68263] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment II)
+    [68267] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment III)
+    [68271] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment IV)
+    [68275] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment V)
+    [68279] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment VI)
+    [68283] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment VII)
     [70584] = true, -- 68235 Stun (Merethic Restorative Resin)
     [88451] = true, -- 88449 Stun (Aetheric Cipher)
+    [110890] = true, -- 68235 Stun (Welkynar Binding)
 
     [63427] = true, -- Clean Fish (Filet Fish)
     [78052] = true, -- Minor Pardon (Counterfeit Pardon Edict)
@@ -546,6 +666,59 @@ CastBarTable.IsCast = {
 
     [147795] = true, -- 88449 Stun (Chef Arquitius's Torte Dissertation)
     [147850] = true, -- 88449 Stun (Chef Arquitius's Lost Thesis)
+    [148052] = true, -- 68235 Stun (Breton Terrier Mammoth Bone)
+    [123110] = true, -- 68235 Stun (Mummified Alfiq Parts)
+    [123115] = true, -- 68235 Stun (Plague-Drenched Fabric)
+    [140544] = true, -- 68235 Stun (Stone Husk Fragment)
+
+    [111141] = true, -- 68235 Stun (Swamp Jelly Carrying Jar)
+    [111129] = true, -- 68235 Stun (Swamp Jelly Fine-Mesh Net)
+    [111153] = true, -- 68235 Stun (Swamp Jelly Hunter's Lense)
+    [111133] = true, -- 68235 Stun (Swamp Jelly Luminous Fishmeal)
+    [111137] = true, -- 68235 Stun (Swamp Jelly Luring Flute)
+    [111149] = true, -- 68235 Stun (Swamp Jelly Moss Bedding)
+    [111145] = true, -- 68235 Stun (Swamp Jelly Spawning Mud)
+
+    [117532] = true, -- 68235 Stun (Guar Stomp Elucidating Hand-Sculpture)
+    [117558] = true, -- 68235 Stun (Guar Stomp History in Street Theatre)
+    [117554] = true, -- 68235 Stun (Guar Stomp Illustrated Reports)
+    [117550] = true, -- 68235 Stun (Guar Stomp Noise Reports)
+    [117545] = true, -- 68235 Stun (Guar Stomp Rehearsal Tuning Fork)
+    [117562] = true, -- 68235 Stun (Guar Stomp Skeletal Reconstruction)
+    [117541] = true, -- 68235 Stun (Guar Stomp Steps-Practice Rug)
+
+    [108312] = true, -- 68235 Stun (Big-Eared Ginger Kitten's "Care and Feeding" Guide)
+    [108300] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Bait Mouse)
+    [108283] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Collar)
+    [108308] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Feather Toy)
+    [108304] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Milk Saucer)
+    [108296] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Sleeping-Basket)
+    [108292] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Tag)
+
+    [108316] = true, -- 68235 Stun (Psijic Glowglobe's Ancient Texts)
+    [108320] = true, -- 68235 Stun (Psijic Glowglobe's Conjectural Writings)
+    [108324] = true, -- 68235 Stun (Psijic Glowglobe's Crystal Ball)
+    [108328] = true, -- 68235 Stun (Psijic Glowglobe's Meteoric Glass)
+    [108332] = true, -- 68235 Stun (Psijic Glowglobe's Purified Glow Dust)
+    [108336] = true, -- 68235 Stun (Psijic Glowglobe's Updated Instructionals)
+    [108340] = true, -- 68235 Stun (Psijic Glowglobe's Wisp Animus)
+
+    [92381] = true, -- 68235 Stun (Sixth House Incense of Toolwork)
+    [92393] = true, -- 68235 Stun (Sixth House Ornamental Fasteners)
+    [92389] = true, -- 68235 Stun (Sixth House Patterned Belt)
+    [92397] = true, -- 68235 Stun (Sixth House Tailor's Belt)
+    [92385] = true, -- 68235 Stun (Sixth House Tailor's Hammer)
+    [92373] = true, -- 68235 Stun (Sixth House Tailor's Shears)
+    [92377] = true, -- 68235 Stun (Sixth House Writhing Thread)
+
+    [92365] = true, -- 68235 Stun (Dwarven Theodolite Chassis)
+    [92361] = true, -- 68235 Stun (Dwarven Theodolite Eye)
+    [92357] = true, -- 68235 Stun (Dwarven Theodolite Head)
+    [92353] = true, -- 68235 Stun (Dwarven Theodolite Neck)
+    [92349] = true, -- 68235 Stun (Dwarven Theodolite Shoulder)
+    [92345] = true, -- 68235 Stun (Dwarven Theodolite Torso)
+    [92341] = true, -- 68235 Stun (Dwarven Theodolite Wheels)
+
     [111190] = true, -- 68235 Stun (Arena Gladiator's Exultation)
     [115064] = true, -- 68235 Stun (Arena Gladiator's Mockery)
     [106174] = true, -- 68235 Stun (Arena Gladiator's Recognition)
@@ -553,6 +726,7 @@ CastBarTable.IsCast = {
     [134883] = true, -- 68235 Stun (Knight's Rebuke)
     [134851] = true, -- 68235 Stun (Knight's Resolve)
     [140622] = true, -- 68235 Stun (Reach-Mage's Ferocity)
+    [145216] = true, -- 68235 Stun (Siege of Cyrodiil Distinction)
     [124789] = true, -- 68235 Stun (Siege of Cyrodiil Recognition)
     [126710] = true, -- 68235 Stun (Siege of Cyrodiil Recommendation)
     [124624] = true, -- 68235 Stun (Alliance Standard-Bearer's License)
@@ -566,12 +740,19 @@ CastBarTable.IsCast = {
     [85355] = true, -- Flame Juggling (Consumable Version)
     [85354] = true, -- Dagger Juggling (Consumable Verison)
     [85353] = true, -- Sword Swallowing (Consumable Version)
+    [146657] = true, -- Memento Cliff Racer (Thetys Ramary's Bait Kit)
     [87964] = true, -- Jester's Festival Illusion Daz (Sparkwreath Dazzler)
     [87965] = true, -- Jester's Festival Illusion Daz (Plume Dazzler)
     [87966] = true, -- Jester's Festival Illusion Daz (Spiral Dazzler)
     [88374] = true, -- Jester's Festival Illusion Daz (Sparkly Hat Dazzler)
+    [86774] = true, -- Mudball (Mud Ball Pouch)
+    [84330] = true, -- Mudball (Mud Ball Merriment)
     [116879] = true, -- Alliance Pie (Revelry Pie)
     [87963] = true, -- Bestowed Cherry Blossoms (Cherry Blossom Branch)
+
+    [115681] = true, -- Party Noise Maker (Festive Noise Maker)
+    [129550] = true, -- Stunned (Jester's Festival Joke Popper)
+    [149874] = true, -- Playful Prankster's Surprise Box (Playful Prankster's Surprise Box)
     [102077] = true, -- Jester's Festival Scintillator (Jester's Scintillator)
     [81575] = true, -- Event - WitchFest Cauldron (Witchmother's Whistle)
     [104324] = true, -- Psijic Pearl Summon (Psijic Celestial Orb)
@@ -582,7 +763,15 @@ CastBarTable.IsCast = {
     [110481] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [113288] = true, -- U20 Crown Memento 1 (Mire Drum)
     [113291] = true, --  U20 Crown Memento 2 (Vossa-satl)
+    [151489] = true, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [151490] = true, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [151491] = true, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [146752] = true, -- Phial of Clockwork Lubricant (Phial of Clockwork Lubricant)
+    [111458] = true, -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
+    [111459] = true, -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
     [125820] = true, -- Witches Festival 2019 Marionette (Skeletal Marionette)
+    [144790] = true, -- Throw Bones (Throwing Bones)
+    [144791] = true, -- Throw Bones (Throwing Bones)
 
     -- Memento (Crown)
     [85347] = true, -- Storm Orb Juggle (Atronach Juggling)
@@ -595,7 +784,6 @@ CastBarTable.IsCast = {
     [101872] = true, -- _CRWN Dragon Priest Memento3 (Bone Dragon Summons Focus)
 
     -- Memento (Base)
-    --[26736] = true, -- Bear Trap (Battered Bear Trap)
     [16846] = true, -- Blackfeather Court Whistle (Blackfeather Court Whistle)
     [41988] = true, -- Bonesnap Binding Stone (Bonesnap Binding Stone)
     [41948] = true, -- Glanir's Smoke Bomb (Glanir's Smoke Bomb)
@@ -608,6 +796,7 @@ CastBarTable.IsCast = {
     [42053] = true, -- Yokudan Salute (Yokudan Totem)
 
     -- Memento (DLC)
+    [143495] = true, -- Reliquary of Dark Designs (Reliquary of Dark Designs)
     [89550] = true, -- TROPHY Azura's Light (Twilight Shard)
     [79510] = true, -- TROPHY Blood Oath (Blade of the Blood Oath)
     [73686] = true, -- Old Orsinium Trophy (Malacath's Wrathful Flame)
@@ -615,6 +804,14 @@ CastBarTable.IsCast = {
     [92862] = true, -- Ringing Bell (Dreamer's Chime)
     [119099] = true, -- Brittle Burial Urn (Brittle Burial Urn)
     [125816] = true, -- Maarselok Corruption Memento (Corruption of Maarselok)
+    [136120] = true, -- Ritual Circle Totem (Ritual Circle Totem)
+    [137919] = true, -- Juggling Potion Bottles (Mostly Stable Juggling Potions)
+    [147598] = true, --  Void Shard (Void Shard)
+    [149881] = true, -- Illusory Salamander Stone (Illusory Salamander Stone)
+    [153758] = true, -- Golden Anvil Replica (Full-Scale Golden Anvil Replica)
+    [146744] = true, -- Temperamental Grimoire (Temperamental Grimoire)
+    [153760] = true, -- Wilting Weed Killer Phial (Wilting Weed Killer Phial)
+    [149879] = true, -- Daedric Unwarding Amulet (Daedric Unwarding Amulet)
     [125817] = true, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
     [119107] = true, -- NAME ME Infect Brew (Winnowing Plague Decoction)
 
@@ -936,6 +1133,7 @@ CastBarTable.CastOverride = {
 CastBarTable.MultiCast = {
     [42076] = true, -- Tear (Mezha-dro's Sealing Amulet)
     [42053] = true, -- Yokudan Salute (Yokudan Totem)
+    [115681] = true, -- Party Noise Maker (Festive Noise Maker)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------

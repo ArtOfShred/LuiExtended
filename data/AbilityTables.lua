@@ -50,6 +50,7 @@ local AbilityTables = {
     Innate_Receiving_Boon             = GetString(SI_LUIE_SKILL_RECEIVING_BOON), -- Receiving Boon
     Innate_Ayleid_Well                = GetString(SI_LUIE_SKILL_AYLEID_WELL), -- Ayleid Well
     Innate_Ayleid_Well_Fortified      = GetString(SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED), -- Ayleid Well
+    Innate_Aetherial_Well             = 151928,
     Innate_CC_Immunity                = 38117, -- CC Immunity
     Innate_Stagger                    = 1834, -- Stagger
     Innate_Revive                     = 5823, -- Revive
@@ -62,6 +63,8 @@ local AbilityTables = {
     Innate_Indrik_Nascent             = GetCollectibleName(5710),
     Innate_Indrik_Spectral            = GetCollectibleName(6942),
     Innate_Sovereign_Sow              = GetCollectibleName(7270),
+    Innate_Deadlands_Firewalker       = GetCollectibleName(774),
+    Innate_Unstable_Morpholith        = GetCollectibleName(8124),
     Innate_Fillet_Fish                = GetString(SI_LUIE_SKILL_FILLET_FISH),
     Innate_Pardon_Edict_Low           = GetString(SI_LUIE_SKILL_COUNTERFEIT_PARDON_EDICT),
     Innate_Pardon_Edict_Medium        = GetString(SI_LUIE_SKILL_LENIENCY_EDICT),
@@ -73,6 +76,18 @@ local AbilityTables = {
 
     Innate_Chef_Arquitius_Torte_Dissertation    = GetItemLinkName("|H0:item:171430:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Innate_Chef_Arquitius_Lost_Thesis           = GetItemLinkName("|H0:item:171434:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Breton_Terrier_Mammoth_Bone          = GetItemLinkName("|H0:item:171469:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Mummified_Alfiq_Parts                = GetItemLinkName("|H0:item:147929:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Plague_Drenched_Fabric               = GetItemLinkName("|H0:item:147930:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Guar_Stomp                           = GetCollectibleName(6197),
+    Innate_Swamp_Jelly                          = GetCollectibleName(5656),
+    Innate_Dwarven_Theodolite                   = GetCollectibleName(1232),
+    Innate_Big_Eared_Ginger_Kitten              = GetCollectibleName(4996),
+    Innate_Psijic_Glowglobe                     = GetCollectibleName(5047),
+    Innate_Sixth_House_Robe                     = GetCollectibleName(1230),
+    Innate_Stone_Husk_Fragment                  = GetItemLinkName("|H0:item:166466:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Welkynar_Binding                     = GetItemLinkName("|H0:item:141736:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+
     Innate_Arena_Gladiators_Exultation      = GetItemLinkName("|H0:item:141751:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Innate_Arena_Gladiators_Mockery         = GetItemLinkName("|H0:item:146042:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Innate_Arena_Gladiators_Recognition     = GetItemLinkName("|H0:item:138785:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
@@ -84,6 +99,7 @@ local AbilityTables = {
     Innate_Siege_of_Cyrodiil_Recommendation = GetItemLinkName("|H0:item:153536:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Innate_Alliance_Standard_Bearers        = GetItemLinkName("|H0:item:151934:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Innate_Siege_of_Cyrodiil_Commendation   = GetItemLinkName("|H0:item:171532:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+    Innate_Siege_of_Cyrodiil_Distinction    = GetItemLinkName("|H0:item:167303:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
 
     -- World
     Innate_Drop_Anchor                = 86717, -- Drop Anchor
@@ -91,35 +107,44 @@ local AbilityTables = {
     Innate_Power_of_the_Daedra        = 46690, -- Power of the Daedra
 
     -- Weapon Attacks
-    Skill_Light_Attack                = 23604, -- Light Attack
+    Skill_Light_Attack                = 39088, -- Light Attack
     Skill_Medium_Attack               = 39097, -- Medium Attack
-    Skill_Heavy_Attack                = 18431, -- Heavy Attack
+    Skill_Heavy_Attack                = 39101, -- Heavy Attack
+
+    Skill_Light_Attack_Unarmed        = 23604, -- Light Attack (Unarmed)
+    Skill_Heavy_Attack_Unarmed        = 18429, -- Heavy Attack (Unarmed)
+
+    Skill_Light_Attack_Two_Handed     = 16037, -- Light Attack (Two Handed)
+    Skill_Heavy_Attack_Two_Handed     = 16041, -- Heavy Attack (Two Handed)
+    Skill_Light_Attack_One_Handed     = 15435, -- Light Attack (One Handed)
+    Skill_Heavy_Attack_One_Handed     = 15279, -- Heavy Attack (One Handed)
+    Skill_Light_Attack_Dual_Wield     = 16499, -- Light Attack (Dual Wield)
     Skill_Heavy_Attack_Dual_Wield     = 16420, -- Heavy Attack (Dual Wield)
-    Skill_Heavy_Attack_Werewolf       = 32480, -- Heavy Attack Werewolf
-    Skill_Heavy_Attack_Shock          = 18396, -- Heavy Attack (Shock)
-    Skill_Heavy_Attack_Main_Hand      = GetString(SI_LUIE_SKILL_PASSIVE_HEAVY_MAIN_HAND),
-    Skill_Heavy_Attack_Off_Hand       = GetString(SI_LUIE_SKILL_PASSIVE_HEAVY_OFF_HAND),
+    Skill_Light_Attack_Bow            = 16688, -- Light Attack (Bow)
+    Skill_Heavy_Attack_Bow            = 16691, -- Heavy Attack (Bow)
+
+    Skill_Light_Attack_Ice            = 16277, -- Light Attack (Ice)
+    Skill_Heavy_Attack_Ice            = 16261, -- Heavy Attack (Ice)
+    Skill_Light_Attack_Inferno        = 16165, -- Light Attack (Inferno)
+    Skill_Heavy_Attack_Inferno        = 15383, -- Heavy Attack (Inferno)
+    Skill_Light_Attack_Lightning      = 18350, -- Light Attack (Lightning)
+    Skill_Heavy_Attack_Lightning      = 18396, -- Heavy Attack (Lightning)
+
+    Skill_Light_Attack_Restoration    = 16145, -- Light Attack (Restoration)
+    Skill_Heavy_Attack_Restoration    = 16212, -- Heavy Attack (Restoration)
+
+    Skill_Light_Attack_Volendrung     = 116762, -- Light Attack (Volendrung)
+    Skill_Heavy_Attack_Volendrung     = 116763, -- Heavy Attack (Volendrung)
+
+    Skill_Light_Attack_Werewolf       = 32464, -- Light Attack (Werewolf)
+    Skill_Heavy_Attack_Werewolf       = 32477, -- Heavy Attack (Werewolf)
 
     -- ---------------------------------------------------
     -- COMSUMABLES & ITEMS -------------------------------
     -- ---------------------------------------------------
 
     -- Glyphs
-    Item_Glyph_of_Absorb_Health       = 28919,
-    Item_Glyph_of_Absorb_Magicka      = 46743,
-    Item_Glyph_of_Absorb_Stamina      = 46746,
-    Item_Glyph_of_Crushing            = GetString(SI_LUIE_SKILL_GLYPH_CRUSHING),
-    Item_Glyph_of_Damage_Health       = 46749,
-    Item_Glyph_of_Decrease_Health     = GetString(SI_LUIE_SKILL_GLYPH_DECREASE_HEALTH),
-    Item_Glyph_of_Flame               = 17895,
-    Item_Glyph_of_Foulness            = 17904,
-    Item_Glyph_of_Frost               = 17897,
-    Item_Glyph_of_Hardening           = GetString(SI_LUIE_SKILL_GLYPH_HARDENING),
-    Item_Glyph_of_Poison              = 17902,
-    Item_Glyph_of_Prismatic_Onslaught = 40337,
-    Item_Glyph_of_Shock               = 17899,
-    Item_Glyph_of_Weakening           = GetString(SI_LUIE_SKILL_GLYPH_WEAKENING),
-    Item_Glyph_of_Weapon_Damage       = GetString(SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE),
+    Item_Glyph_of_Weapon_Damage       = 17910,
 
     -- Elemental Status Effect
     Proc_Chilled                      = 7145,
@@ -226,6 +251,12 @@ local AbilityTables = {
     Memento_Jubliee_Cake              = 87998,
     Memento_Mud_Ball                  = 86749,
     Memento_Cherry_Blossom_Branch     = GetCollectibleName(1108),
+
+    Memento_Festive_Noise_Maker          = GetCollectibleName(5885),
+    Memento_Jesters_Festival_Joke_Popper = GetCollectibleName(5887),
+
+    Memento_Thetys_Ramarys_Bait_Kit   = GetCollectibleName(8658),
+
     Memento_Storm_Atronach_Aura       = GetCollectibleName(594),
     Memento_Storm_Orb_Juggle          = GetCollectibleName(595),
     Memento_Wild_Hunt_Aura            = GetCollectibleName(760),
@@ -252,6 +283,9 @@ local AbilityTables = {
     Memento_Dragonhorn_Curio          = GetCollectibleName(6641),
     Memento_Winnowing_Plague_Decoction = GetCollectibleName(6368),
     Memento_Skeletal_Marionette       = GetCollectibleName(6643),
+    Memento_Throwing_Bones            = GetCollectibleName(8079),
+    Memento_Full_Scale_Golden_Anvil_Replica = GetCollectibleName(9363),
+    Memento_Mostly_Stable_Juggling_Potions = GetCollectibleName(8072),
 
     -- ---------------------------------------------------
     -- ITEM SETS -----------------------------------------
@@ -308,7 +342,6 @@ local AbilityTables = {
     Set_Juggernaut                    = 34512,
     Set_Honors_Scorn                  = 121917,
     Set_Honors_Love                   = 121913,
-    Set_Dauntless_Combatant           = 134103,
     Set_Warming_Aura                  = 133210,
     Set_Aegis_Caller                  = 133490,
     Set_Reactive_Armor                = 68947,
@@ -326,6 +359,7 @@ local AbilityTables = {
 
     Champion_Vengeance_Charge         = GetString(SI_LUIE_SKILL_VENGEANCE_CHARGE), -- Vengeance Counter
     Champion_Riposte                  = 60230,
+    Champion_Expert_Evasion           = 151113,
 
     -- ---------------------------------------------------
     -- SKILL LINE PASSIVES -------------------------------
@@ -430,7 +464,6 @@ local AbilityTables = {
     -- Warden
     Skill_Feral_Guardian              = 85982,
     Skill_Eternal_Guardian            = 85986,
-    Skill_Budding_Seeds               = 85840,
     Skill_Lotus_Blossom               = 85855,
     Skill_Natures_Grasp               = 85564,
     Skill_Bursting_Vines              = 85859,
@@ -775,6 +808,8 @@ local AbilityTables = {
     Trap_Static_Pitcher              = GetItemLinkName("|H0:item:145491:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Trap_Gas_Blossom                 = GetItemLinkName("|H0:item:145492:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Trap_Lantern_Mantis              = GetItemLinkName("|H0:item:145493:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
+
+    Trap_Hiding_Spot                 = 72712,
 
     -- ---------------------------------------------------
     -- WORLD BOSSES --------------------------------------

@@ -121,7 +121,10 @@ LUIE.Data.DebugResults = {
     [2450]          = "WEAPON SWAP",
     [8]             = "WRECKING DAMAGE",
     [2380]          = "WRONG WEAPON",
+    [3450]          = "CANT SWAP HOTBAR IS OVERRIDDEN",
+    [3460]          = "SOUL GEM RESURRECTION ACCEPTED",
     [3470]          = "HEAL ABSORBED",
+    [3480]          = "DIED COMPANION XP",
 }
 
 -- List of all abilityId's that have been processed so far
@@ -129,7 +132,11 @@ LUIE.Data.DebugResults = {
 LUIE.DebugAuras = {
 
     -------------------------------------
-    -- MAJOR / MINOR BUFFS & DEBUFFS ----
+    -- PLAYER ABILITIES -----------------
+    -------------------------------------
+
+    -------------------------------------
+    -- MAJOR / MINOR BUFFS & DEBUFFS
     -------------------------------------
 
     -- Major / Minor Buffs
@@ -192,7 +199,7 @@ LUIE.DebugAuras = {
     [145975] = true, -- Minor Brittle
     [145977] = true, -- Major Brittle (Unused)
 
-    -- Slayer / Aegis
+    -- Major / Minor Aegis & Slayer
     [76618] = true, -- Minor Aegis
     [147225] = true, -- Minor Aegis -- Dummy
     [93123] = true, -- Major Aegis
@@ -204,22 +211,571 @@ LUIE.DebugAuras = {
     [61737] = true, -- Empower
 
     -------------------------------------
-    -- POTIONS --------------------------
+    -- STATUS EFFECT PROCS
+    -------------------------------------
+
+    -- Magic Status Effects
+    [18084] = true, -- Burning (Fire Status Effect)
+    [130804] = true, -- Burning (Fire Status Effect - Siege)
+    [21481] = true, -- Chill (Frost Status Effect)
+    [68368] = true, -- Minor Maim (Frost Status Effect)
+    [95136] = true, -- Chill (Frost Status Effect)
+    [130814] = true, -- Chill (Frost Status Effect - Siege)
+    [130815] = true, -- Minor Maim (Frost Status Effect - Siege)
+    [130816] = true, -- Chill (Frost Status Effect - Siege)
+    [21487] = true, -- Concussion (Shock Status Effect)
+    [68359] = true, -- Minor Maim (Shock Status Effect)
+    [95134] = true, -- Concussion (Shock Status Effect)
+    [130808] = true, -- Concussion (Shock Status Effect - Siege)
+    [130809] = true, -- Minor Maim (Shock Status Effect - Siege)
+    [130810] = true, -- Concussion (Shock Status Effect - Siege)
+    [148797] = true, -- Overcharged (Magic Status Effect)
+    [148798] = true, -- Minor Magickasteal (Magic Status Effect)
+
+    -- Martial Status Effects
+    [21925] = true, -- Diseased (Disease Status Effect)
+    [21927] = true, -- Major Defile (Disease Status Effect)
+    [148801] = true, -- Hemorrhaging (Bleed Status Effect)
+    [148808] = true, -- Minor Mangle (Bleed Status Effect)
+    [21929] = true, -- Poisoned (Poison Status Effect)
+    [148800] = true, -- Sundered (Physical Status Effect)
+    [148803] = true, -- Minor Breach (Physical Status Effect)
+    [149573] = true, -- Sundered (Physical Status Effect - Siege)
+    [149576] = true, -- Minor Breach (Physical Status Effect - Siege)
+
+    -------------------------------------
+    -- MUNDUS STONE
+    -------------------------------------
+
+    -- Stone Use
+    [14031] = true, -- Mundus Use
+
+    -- Boons
+    [13940] = true, -- Boon: The Warrior
+    [13943] = true, -- Boon: The Mage
+    [13974] = true, -- Boon: The Serpent
+    [13975] = true, -- Boon: The Thief
+    [13976] = true, -- Boon: The Lady
+    [13977] = true, -- Boon: The Steed
+    [13978] = true, -- Boon: The Lord
+    [13979] = true, -- Boon: The Apprentice
+    [13980] = true, -- Boon: The Ritual
+    [13981] = true, -- Boon: The Lover
+    [13982] = true, -- Boon: The Atronach
+    [13984] = true, -- Boon: The Shadow
+    [13985] = true, -- Boon: The Tower
+
+    -------------------------------------
+    -- INNATE ABILITIES
+    -------------------------------------
+
+    -- Roll Dodge
+    [28549] = true, -- Roll Dodge
+    [29721] = true, -- Immobilize Immunity
+    [119068] = true, -- Immobilize Immunity
+    [69143] = true, -- Dodge Fatigue
+
+    -- Crouch
+    [20299] = true, -- Sneak
+    [20304] = true, -- Crouch Slow
+    [76463] = true, -- Clairvoyance Fx
+    [20309] = true, -- Hidden
+    [20307] = true, -- Trying to Hide
+    [20301] = true, -- Crouch Drain
+    [38127] = true, -- Remove Sprint
+    [29177] = true, -- Flee
+    [64420] = true, -- Remove Pet Stealth
+    [26245] = true, -- Slam Stun
+    [49547] = true, -- Bonus limiter
+    [72902] = true, -- Hidden
+
+    -- Mount
+    [36010] = true, -- Mount Up
+    [37059] = true, -- Mount Up
+    [37139] = true, -- Mount Up
+    [36434] = true, -- Mount Up
+    [42399] = true, -- Remove on Dismount
+    [36432] = true, -- Dismount
+    [36417] = true, -- Dismount
+    [36419] = true, -- Dismount
+    [46697] = true, -- Pause Mount Stamina Regen
+    [115607] = true, -- Hard Dismount
+
+    -- Passenger Mount
+    [140996] = true, -- Mount Up Passenger
+    [141013] = true, -- Mount Up
+    [141012] = true, -- Mount Up
+    [141001] = true, -- Mount Up
+    [141011] = true, -- Remove on Dismount
+    [141008] = true, -- Dismount
+    [141002] = true, -- Dismount
+    [140998] = true, -- Dismount
+    [141003] = true, -- Pause Mount Stamina Regen
+    [141004] = true, -- Hard Dismount
+
+    -- Block
+    --[86311] = true, -- Block FX
+    [86310] = true, -- Stagger
+    [86309] = true, -- Stun
+    [86312] = true, -- Stun
+    [45902] = true, -- Off-Balance
+
+    -- Bash
+    [55146] = true, -- Interrupt Bonus
+    [21970] = true, -- Bash
+    [21973] = true, -- Bash
+    [21972] = true, -- Stagger
+    [21971] = true, -- Bash Stun
+    [48416] = true, -- Uber Attack
+    [45982] = true, -- Bash Stun
+
+    -- Off-Balance Exploit
+    [20172] = true, -- Off-Balance Exploit
+    [18793] = true, -- Off-Balance Exploit
+    [16825] = true, -- Off-Balance Exploit
+
+    -- Break Free
+    [16565] = true, -- Break Free
+    [46330] = true, -- Brace Cooldown
+
+    -- Death/Resurrection
+    [14644] = true, -- Revive (Death Dialog)
+    [14646] = true, -- Recently Revived
+    [26770] = true, -- Resurrect
+    [55406] = true, -- Resurrect Trigger
+    [123969] = true, -- Lesser Reincarnate
+    [123970] = true, -- Lesser Reincarnate
+
+    -- Basic Attacks
+    --[16593] = true, -- Melee Snare
+    [64842] = true, -- Critter Smash
+    [48532] = true, -- Charge Snare
+    [41952] = true, -- Cower
+    [55080] = true, -- Pet Hidden
+    [16566] = true, -- CC Immunity
+    [28301] = true, -- Crowd Control Immunity
+    [38117] = true, -- Crowd Control Immunity
+
+    -- Taunt Effects
+    [38254] = true, -- Taunt
+    [52790] = true, -- Taunt Counter
+    [38541] = true, -- Taunt
+    [38542] = true, -- Taunt
+
+    -- Disguise Effects
+    [50602] = true, -- Disguised
+    [26237] = true, -- Disguise Warning Area
+    [26238] = true, -- Disguise Warning Area
+    [25584] = true, -- Discovered
+    [25582] = true, -- Remove Disguise
+    [26472] = true, -- Remove Disguise
+    [25602] = true, -- Suspicious
+    [25603] = true, -- Begin
+    [25604] = true, -- Interact Complete
+    [26223] = true, -- Remove Suspicious
+    --[13371] = true, -- Acting Suspicious
+    [13372] = true, -- Spotted
+
+    -- Pet Effects
+    [28609] = true, -- Dummy Target Setter
+    [43958] = true, -- Player Pet Defenses
+    [70116] = true, -- Player Pet Battle Spirit
+    [71904] = true, -- Player Pet Speed
+    [62197] = true, -- Player Pet Critical Chance
+    [43963] = true, -- Player Pet Threat
+    [62201] = true, -- Taunt
+    [63795] = true, -- Taunt
+    [63794] = true, -- Taunt
+    [126366] = true, -- Pet Battle Spirit
+
+    -- Death Achieve Check (Veteran Dungeons)
+    [55883] = true, -- Death Achieve Check
+    [55884] = true, -- Death Achieve Check
+    [58955] = true, -- Death Achieve Check
+    [58963] = true, -- Death Achieve Check
+    [66271] = true, -- Death Achieve Check
+    [66272] = true, -- Death Achieve Check
+    [75612] = true, -- Death Achieve Check
+    [75615] = true, -- Death Achieve Check
+    [76264] = true, -- Death Achieve Check
+    [76265] = true, -- Death Achieve Check
+
+    -- Misc Effects
+    [15594] = true, -- Bonus vs off Balance
+    [28541] = true, -- Swap Weapons
+    [25166] = true, -- Clumsy
+    [10950] = true, -- Fall Snare
+    [6811] = true, -- Recall
+    [31221] = true, -- Skyshard Collect
+    [32346] = true, -- Skyshard Collect
+    [63601] = true, -- ESO Plus Member
+    --[2727] = true, -- Off-Balance
+    [134599] = true, -- Off Balance Immunity
+    --[132831] = true, -- Major Vulnerability Invulnerability
+    [85701] = true, -- Dueling Flag
+    [21263] = true, -- Ayleid Health Bonus
+    [100862] = true, -- Fortified Ayleid Health Bonus
+
+    [151940] = true, -- Aetherial Well (Aetherial Well)
+    [151928] = true, -- Aetherial Well (Aetherial Well)
+    [151935] = true, -- Aetherial Well Restore (Aetherial Well)
+    [151942] = true, -- Aetherial Well Restore (Aetherial Well)
+    [151931] = true, -- Aetherial Well Restore (Aetherial Well)
+    [151934] = true, -- Aetherial Well Restore (Aetherial Well)
+
+    [45819] = true, -- Remove Werevamp
+    [51064] = true, -- Weakness
+    [39405] = true, -- Weakness
+
+    -- Dummy Effects
+    [37079] = true, -- remove
+    [20311] = true, -- Remove Sprint
+    [20303] = true, -- Remove Sprint
+    [70379] = true, -- Remove
+    [70385] = true, -- Remove
+    [38519] = true, -- Hiding
+    [39046] = true, -- Add Guild Rep
+    [62797] = true, -- Weapon Swap Cooldown Timer
+    [62798] = true, -- Weapon Swap Cooldown Timer
+    [61874] = true, -- Swap to Weapon Set 1
+    [61875] = true, -- Swap to Weapon Set 2
+
+    -------------------------------------
+    -- CHAMPION POINTS ------------------
+    -------------------------------------
+
+    -------------------------------------
+    -- CRAFT
+    -------------------------------------
+
+    -- Passives
+    [142205] = true, -- Breakfall
+    --[142232] = true, -- Soul Reservoir
+    --[142206] = true, -- Wanderer
+    --[142206] = true, -- Wanderer
+    --[142207] = true, -- Fortune's Favor
+    --[152371] = true, -- Fortune's Favor
+    [142210] = true, -- Gilded Fingers
+    [142204] = true, -- Out of Sight
+    [142203] = true, -- Fleet Phantom
+    --[142211] = true, -- Steadfast Enchantment
+    --[152367] = true, -- Steadfast Enchantment
+    [142208] = true, -- Inspiration Boost
+
+    -- Slottables
+    [142213] = true, -- Friends in Low Places
+    [152360] = true, -- Friends in Low Places
+    --[142215] = true, -- Infamous
+    [142219] = true, -- Shadowstrike
+    [151862] = true, -- Shadowstrike
+    --[151861] = true, -- Shadowstrike
+    [151860] = true, -- Shadowstrike
+    [151859] = true, -- Clairvoyance Fx
+    [142235] = true, -- Cutpurse's Art
+    [142228] = true, -- Fade Away
+    --[152310] = true, -- Fade Away
+    --[142224] = true, -- Meticulous Disassembly
+    --[142225] = true, -- Meticulous Disassembly
+    --[142226] = true, -- Meticulous Disassembly
+    --[142227] = true, -- Meticulous Disassembly
+    [142218] = true, -- Treasure Hunter
+    --[142217] = true, -- Master Gatherer
+    --[152372] = true, -- Master Gatherer
+    [149286] = true, -- Gifted Rider
+    [142223] = true, -- War Mount
+    [142220] = true, -- Plentiful Harvest
+    --[142236] = true, -- Homemaker
+    --[142233] = true, -- Reel Technique
+    [142234] = true, -- Angler's Instincts
+    --[142231] = true, -- Liquid Efficiency
+    [142230] = true, -- Rationer
+    --[152373] = true, -- Rationer
+    [142125] = true, -- Steed's Blessing
+    [142123] = true, -- Sustaining Shadows
+    --[142121] = true, -- Professional Upkeep
+
+    -------------------------------------
+    -- WARFARE
+    -------------------------------------
+
+    -- Passive
+    [149305] = true, -- Eldritch Insight
+    [141898] = true, -- Precision
+    [147888] = true, -- Tireless Discipline
+    --[149439] = true, -- Blessed
+    --[141928] = true, -- Blessed
+    [141929] = true, -- Quick Recovery
+    [141901] = true, -- Preparation
+    [149273] = true, -- Elemental Aegis
+    [149274] = true, -- Hardy
+    [141895] = true, -- Piercing
+    [141931] = true, -- War Mage
+    [149276] = true, -- Battle Mastery
+    [141930] = true, -- Mighty
+    --[149275] = true, -- Flawless Ritual
+
+    -- Slottable
+    [155992] = true, -- Hope Infusion
+    [155993] = true, -- Minor Heroism
+    [155996] = true, -- Hope Infusion
+    [155978] = true, -- Salve of Renewal
+    [155981] = true, -- Salve of Renewal
+    [156017] = true, -- From the Brink
+    [156020] = true, -- From the Brink
+    [156019] = true, -- From the Brink
+    [156008] = true, -- Enlivening Overflow
+    [156012] = true, -- Enlivening Overflow
+    [156011] = true, -- Enlivening Overflow
+    [141998] = true, -- Soothing Tide
+    [142000] = true, -- Focused Mending
+    [142002] = true, -- Swift Renewal
+    [141942] = true, -- Rejuvenator
+    [59526] = true, -- Foresight
+    [59530] = true, -- Foresight
+    [142003] = true, -- Cleansing Revival
+    --[142005] = true, -- Cleansing Revival
+    [141900] = true, -- Resilience
+    [151749] = true, -- Duelist's Rebuff
+    [151748] = true, -- Unassailable
+    [151750] = true, -- Enduring Resolve
+    [60229] = true, -- Riposte
+    [60230] = true, -- Riposte
+    [64067] = true, -- Reinforced
+    [135653] = true, -- Reinforced
+    [64079] = true, -- Bulwark
+    [60413] = true, -- Last Stand
+    [65133] = true, -- Major Heroism
+    [142012] = true, -- Cutting Defense
+    [142013] = true, -- Cutting Defense
+    [155859] = true, -- Weapons Expert
+    [141999] = true, -- Deadly Aim
+    [141997] = true, -- Biting Aura
+    [142001] = true, -- Thaumaturge
+    [92134] = true, -- Master-at-Arms
+    [141899] = true, -- Fighting Finesse
+    [142006] = true, -- Backstabber
+    [141941] = true, -- Wrathful Strikes
+    [142007] = true, -- Reaving Blows
+    [142008] = true, -- Reaving Blows
+    [142010] = true, -- Occult Overload
+    [142011] = true, -- Occult Overload
+    [141744] = true, -- Arcane Supremacy
+    [146960] = true, -- Untamed Aggression
+    [141773] = true, -- Endless Endurance
+
+    -------------------------------------
+    -- FITNESS
+    -------------------------------------
+
+    -- Passive
+    [142079] = true, -- Sprinter
+    [142083] = true, -- Hasty
+    --[147889] = true, -- Hero's Vigor
+    --[149311] = true, -- Hero's Vigor
+    --[142096] = true, -- Mystic Tenacity
+    [142077] = true, -- Tumbling
+    [149624] = true, -- Defiance
+    [142089] = true, -- Piercing Gaze
+    [142080] = true, -- Tireless Guardian
+    [142081] = true, -- Savage Defense
+    [142088] = true, -- Nimble Protector
+    [142086] = true, -- Fortification
+    --[142109] = true, -- Tempered Soul
+    [142091] = true, -- Bashing Brutality
+
+    -- Slottable
+    [142111] = true, -- On Guard
+    [142115] = true, -- Rousing Speed
+    [142092] = true, -- Expert Evasion
+    --[142093] = true, -- Expert Evasion
+    [151113] = true, -- Expert Evasion
+    [142110] = true, -- Juggernaut
+    [141993] = true, -- Bloody Renewal
+    [141994] = true, -- Bloody Renewal
+    [141991] = true, -- Siphoning Spells
+    [141992] = true, -- Siphoning Spells
+    [141995] = true, -- Stategic Reserve
+    [149283] = true, -- Shield Master
+    [142100] = true, -- Spirit Mastery
+    --[142102] = true, -- Survival Instincts
+    [142090] = true, -- Bastion
+    [142113] = true, -- Arcane Alacrity
+    [142099] = true, -- Hardened
+    [142097] = true, -- Peace of Mind
+    [142094] = true, -- Slippery
+    [145804] = true, -- Slippery
+    [142095] = true, -- Slippery
+    [134254] = true, -- Winded
+    --[149282] = true, -- Unchained
+    [98316] = true, -- Unchained
+    [142034] = true, -- Boundless Vitality
+    [142035] = true, -- Ironclad
+    [142074] = true, -- Rejuvenation
+
+    ---- OLD CHAMPION POINTS           ----
+    ---- TODO: REMOVE AT SOME PT       ----
+    ---- KEEP FOR NOW TO TRACK REMOVAL ----
+
+    -- The Steed
+    --[59120] = true, -- Medium Armor Focus (The Steed)
+    --[92423] = true, -- Ironclad (The Steed)
+    --[62760] = true, -- Spell Shield (The Steed)
+    --[60384] = true, -- Resistant (The Steed)
+    --[60407] = true, -- Invigorating Bash (The Steed 10 - Invigorating Bash)
+    --[63852] = true, -- Phase (The Steed 30 - Phase)
+    --[61660] = true, -- Resilient (The Steed 75 - Resilient)
+    --[61661] = true, -- Resilient (The Steed 75 - Resilient)
+
+    -- The Lady
+    --[60502] = true, -- Light Armor Focus (The Lady)
+    --[63850] = true, -- Thick Skinned (The Lady)
+    --[63844] = true, -- Hardy (The Lady)
+    --[63843] = true, -- Elemental Defender (The Lady)
+    --[63109] = true, -- Spell Absorption (The Lady 10 - Spell Absorption)
+    --[63110] = true,  -- Spell Absorption (The Lady 10 - Spell Absorption)
+    --[60370] = true, -- Critical Leech (The Lady 75 - Critical Leech)
+    --[60371] = true, -- Critical Leech (The Lady 75 - Critical Leech)
+    --[59286] = true, -- Unchained (The Lady 120 - Unchained)
+
+    -- The Lord
+    --[60624] = true, -- Heavy Armor Focus (The Lord)
+    --[59948] = true, -- Bastion (The Lord)
+    --[59953] = true, -- Expert Defender (The Lord)
+    --[63851] = true, -- Quick Recovery (The Lord)
+    --[59300] = true, -- Field Physician (The Lord 10 - Field Physician)
+    --[59582] = true, -- Infusion (The Lord 30 - Infusion)
+    --[60427] = true, -- Revival (The Lord 75 - Revival)
+    --[59893] = true, -- Determination (The Lord 120 - Determination)
+    --[61015] = true, -- Determination (The Lord 120 - Determination)
+
+    -- The Tower
+    --[58899] = true, -- Bashing Focus (The Tower)
+    --[64077] = true, -- Sprinter (The Tower)
+    --[92425] = true, -- Siphoner (The Tower)
+    --[92428] = true, -- Siphoner (The Tower)
+    --[92431] = true, -- Warlord (The Tower)
+    --[60398] = true, -- Ensnare (The Tower 10 - Ensnare)
+    --[60494] = true, -- Inspiration Boost (The Tower 30 - Inspiration Boost)
+    --[62516] = true, -- Mara's Gift (The Tower 75 - Mara's Gift)
+    --[62518] = true, -- Mara's Gift (The Tower 75 - Mara's Gift)
+    --[62274] = true, -- War Mount (The Tower 120 - War Mount)
+
+    -- The Lover
+    --[59346] = true, -- Mooncalf (The Lover)
+    --[59577] = true, -- Arcanist (The Lover)
+    --[60374] = true, -- Healthy (The Lover)
+    --[63854] = true, -- Tenacity (The Lover)
+    --[63663] = true, -- Plentiful Harvest (The Lover 10 - Plentiful Harvest)
+    --[63875] = true, -- Synergizer (The Lover 30 - Synergizer)
+    --[63878] = true, -- Synergizer (The Lover 30 - Synergizer)
+    --[60555] = true, -- Master Gatherer (The Lover 75 - Master Gatherer)
+    --[60560] = true, -- Windrunning (The Lover 125 - Windrunning)
+
+    -- The Shadow
+    --[59298] = true, -- Befoul (The Shadow)
+    --[61548] = true, -- Shade (The Shadow)
+    --[60649] = true, -- Shadow Ward (The Shadow)
+    --[63863] = true, -- Tumbling (The Shadow)
+    --[56630] = true, -- Fortune Seeker (The Shadow 10 - Fortune Seeker)
+    --[60501] = true, -- Merchant Favored (The Shadow 30 - Merchant Favored)
+    --[60566] = true, -- Treasure Hunter (The Shadow 75 - Treasure Hunter)
+    --[61426] = true, -- Shadowstrike (The Shadow 120 - Shadowstrike)
+    --[64244] = true, -- Shadowstrike (The Shadow 120 - Shadowstrike)
+    --[64245] = true, -- Shadowstrike (The Shadow 120 - Shadowstrike)
+    --[140520] = true, -- Shadowstrike (The Shadow 120 - Shadowstrike)
+    --[77773] = true, -- Clairvoyance Fx (The Shadow 120 - Shadowstrike)
+
+    -- The Apprentice
+    --[63848] = true, -- Elemental Expert (The Apprentice)
+    --[61555] = true, -- Spell Erosion (The Apprentice)
+    --[61680] = true, -- Elfborn (The Apprentice)
+    --[59630] = true, -- Blessed (The Apprentice)
+    --[63150] = true, -- Vengeance (The Apprentice 10 - Vengeance)
+    --[63152] = true, -- Vengeance Count (The Apprentice 10 - Vengeance)
+    --[63151] = true, -- Vengeance (The Apprentice 10 - Vengeance)
+    --[59626] = true, -- Spell Precision (The Apprentice 30 - Spell Precision)
+    --[63111] = true, -- Arcane Well (The Apprentice 120 - Arcane Well)
+    --[63114] = true, -- Arcane Well (The Apprentice 120 - Arcane Well)
+    --[88784] = true, -- Arcane Well (The Apprentice 120 - Arcane Well)
+
+    -- The Atronach
+    --[92424] = true, -- Physical Weapon Expert (The Atronach)
+    --[60662] = true, -- Shattering Blows (The Atronach)
+    --[60503] = true, -- Staff Expert (The Atronach)
+    --[63104] = true, -- Retaliation (The Atronach 10 - Retaliation)
+    --[63106] = true, -- Retaliation (The Atronach 10 - Retaliation)
+    --[63879] = true, -- Butcher (The Atronach 75 - Butcher)
+    --[60486] = true, -- Tactician (The Atronach 120 - Tactician)
+    --[63108] = true, -- Off-Balance (The Atronach 120 - Tactician)
+
+    -- The Ritual
+    --[63847] = true, -- Thaumaturge (The Ritual)
+    --[59105] = true, -- Precise Strikes (The Ritual)
+    --[61546] = true, -- Piercing (The Ritual)
+    --[63868] = true, -- Mighty (The Ritual)
+    --[63099] = true, -- Opportunist (The Ritual 10 - Opportunist)
+    --[100408] = true, -- Opportunist (The Ritual 10 - Opportunist)
+    --[59418] = true, -- Perfect Strike (The Ritual 30 - Perfect Strike)
+    --[63880] = true, -- Exploiter (The Ritual 75 - Exploiter)
+
+    -------------------------------------
+    -- ITEMS ----------------------------
+    -------------------------------------
+
+    -------------------------------------
+    -- GLYPHS
+    -------------------------------------
+
+    -- Jewelry Glyphs
+    [46751] = true, -- Increase Bash Damage (Glyph of Bashing)
+    [46741] = true, -- Increase Potion Effect (Glyph of Potion Boost)
+    [46742] = true, -- Reduce Potion Cooldown (Glyph of Potion Speed)
+    [46733] = true, -- Reduce Stamina Cost (Glyph of Reduce Feat Cost)
+    [26750] = true, -- Reduce Magicka Cost (Glyph of Reduce Spell Cost)
+    [46739] = true, -- Bracing Enchant (Glyph of Bracing)
+    [140300] = true, -- Prismatic Reduced Cost (Glyph of Reduced Skill Cost)
+
+    -- Weapon Glyphs
+    [28919] = true, -- Life Drain (Glyph of Absorb Health)
+    [28921] = true, -- Life Drain (Glyph of Absorb Health)
+    [46743] = true, -- Absorb Magicka (Glyph of Absorb Magicka)
+    [46744] = true, -- Absorb Magicka (Glyph of Absorb Magicka)
+    [46746] = true, -- Absorb Stamina (Glyph of Asborb Stamina)
+    [46747] = true, -- Absorb Stamina (Glyph of Asborb Stamina)
+    [17906] = true, -- Crusher (Glyph of Crushing)
+    [46749] = true, -- Decrease Health (Glyph of Decrease Health)
+    [17895] = true, -- Fiery Weapon (Glyph of Flame)
+    [17904] = true, -- Befouled Weapon (Glyph of Foulness)
+    [17897] = true, -- Frozen Weapon (Glyph of Frost)
+    --[17947] = true, -- Hardening (Glyph of Hardening)
+    [21578] = true, -- Hardening (Glyph of Hardening)
+    [17902] = true, -- Poisoned Weapon (Glyph of Poison)
+    [40337] = true, -- Prismatic Weapon (Glyph of Prismatic Onslaught)
+    [17899] = true, -- Charged Weapon (Glyph of Shock)
+    [17945] = true, -- Weakening (Glyph of Weakening)
+    --[17910] = true, -- Weapon Damage (Glyph of Weapon Damage)
+    [21230] = true, -- Berserker (Glyph of Weapon Damage)
+
+    -------------------------------------
+    -- POTIONS
     -------------------------------------
 
     -- Crafted Potions (2 Traits)
     ----[64564] = true, -- Physical Resistance Potion (... of Armor)
     [79709] = true, -- Creeping Ravage Health (... of Creeping Ravage Health)
     [79857] = true, -- Minor Defile (... of Defile)
-    ----[45236] = true, -- Increase Detection (... of Detection)
+    [45236] = true, -- Increase Detection (... of Detection)
+    [45221] = true, -- Restore Health (... of Health)
     [45222] = true, -- Major Fortitude (... of Health)
     [45239] = true, -- Unstoppable (... or Immovability)
-    ----[45237] = true, -- Vanish (... of Invisiblity)
+    [45237] = true, -- Vanish (... of Invisiblity)
     [77767] = true, -- Clairvoyance Fx (... of Invisibility)
     [79705] = true, -- Lingering Restore Health (... of Lingering Health)
+    [45223] = true, -- Restore Magicka (... of Magicka)
     [45224] = true, -- Major Intellect (... of Magicka)
     [79712] = true, -- of Protection (... of Protection)
     ----[46208] = true, -- Physical Resistance Reduction (... of Ravage Armor)
+    [46111] = true, -- Ravage Health (... of Ravage Health)
     [46113] = true, -- Health Potion Poison (... of Ravage Health)
     [46193] = true, -- Ravage Magicka (... of Ravage Magicka)
     [47204] = true, -- Minor Uncertainty (... of Ravage Spell Critical)
@@ -233,6 +789,7 @@ LUIE.DebugAuras = {
     [64570] = true, -- Major Prophecy (... of Spell Critical)
     [64558] = true, -- Major Sorcery (... of Spell Power)
     ----[64562] = true, -- Spell Resistance Potion (... of Spell Protection)
+    [45225] = true, -- Restore Stamina (... of Stamina)
     [45226] = true, -- Major Endurance (... of Stamina)
     [68565] = true, -- Stun (... of Entrapment)
     [79848] = true, -- Major Vitality (... of Major Vitality)
@@ -247,14 +804,17 @@ LUIE.DebugAuras = {
     [79710] = true, -- Creeping Ravage Health (... of Creeping Ravage Health)
     [79860] = true, -- Minor Defile (... of Defile)
     ----[45458] = true, -- Increase Detection (... of Detection)
+    [45382] = true, -- Restore Health (... of Health)
     [63670] = true, -- Major Fortitude (... of Health)
     [45463] = true, -- Unstoppable (... of Immovability)
-    ----[45460] = true, -- Vanish (... of Invisibility)
+    [45460] = true, -- Vanish (... of Invisibility)
     [77766] = true, -- Clairvoyance Fx (... of Invisibility)
     [79706] = true, -- Lingering Restore Health (... of Linger Health)
+    [45385] = true, -- Restore Magicka (... of Magicka)
     [63676] = true, -- Major Intellect (... of Magicka)
     [79714] = true, -- Minor Protection (... of Protection)
     ----[46250] = true, -- Physical Resistance Reduction (... of Ravage Armor)
+    [46215] = true, -- Damage Health (... of Ravage Health)
     [46217] = true, -- Health Potion Lingering Effect (... of Ravage Health)
     [46237] = true, -- Ravage Magicka (... of Ravage Magicka)
     -- (no ... of Ravage Spell Critical)
@@ -268,6 +828,7 @@ LUIE.DebugAuras = {
     [64572] = true, -- Major Prophecy (... of Spell Critical)
     [64561] = true, -- Major Sorcery (... of Spell Power)
     ----[64563] = true, -- Spell Resistance Potion (... of Spell Protection)
+    [45388] = true, -- Restore Stamina (... of Stamina)
     [63681] = true, -- Major Endurance (... of Stamina)
     -- (no... of Stun)
     [79850] = true, -- Major Vitality (... of Vitality)
@@ -278,80 +839,62 @@ LUIE.DebugAuras = {
     [140701] = true, -- of Timidity (Minor Timidity)
 
     -- Vendor Potions + AVA Potions + Roguish Draughts
+    [17302] = true, -- Restore Health (... of Health)
     [63672] = true, -- Major Fortitude (... of Health)
+    [17323] = true, -- Restore Magicka (... of Magicka)
     [63678] = true, -- Major Intellect (... of Magicka)
+    [17328] = true, -- Restore Stamina (... of Stamina)
     [63683] = true, -- Major Endurance (... of Stamina)
+    [72934] = true, -- Restore Stamina (Alliance Battle Draught)
     [72935] = true, -- Major Endurance (Alliance Battle Draught)
     [72936] = true, -- Major Brutality (Alliance Battle Draught)
     [137007] = true, -- Major Savagery (Alliance Battle Draugh)
+    [72927] = true, -- Restore Health (Alliance Health Draught)
     [72928] = true, -- Major Fortitude (Alliance Health Draught)
     [72930] = true, -- Unstoppable (Alliance Health Draught)
     [137002] = true, -- Invisibility (Alliance Health Draught)
     [137000] = true, -- Clairvoyance Fx (Alliance Health Draught)
+    [72931] = true, -- Restore Magicka (Alliance Spell Draught)
     [72932] = true, -- Major Intellect (Alliance Spell Draught)
     [72933] = true, -- Major Sorcery (Alliance Spell Draught)
     [137006] = true, -- Major Prophecy (Alliance Spell Draught)
+    [78053] = true, -- Restore Stamina (Roguish Stealth Draught)
     [78054] = true, -- Major Endurance (Roguish Stealth Draught)
     [78058] = true, -- Vanish (Roguish Stealth Draught)
     [78057] = true, -- Clairvoyance Fx (Roguish Escape Draught)
+    [78079] = true, -- Restore Stamina (Roguish Escape Draught)
     [78080] = true, -- Major Endurance (Roguish Escape Draught)
     [78081] = true, -- Major Expedition (Roguish Escape Draught)
 
     -- Crown Store Potions
+    [68401] = true, -- Restore All Resources (Crown Tri-Restoration Potion)
     [68405] = true, -- Major Fortitude (Crown Tri-Restoration Potion)
+    [68407] = true, -- Restore Magicka (Crown Tri-Restoration Potion)
     [68406] = true, -- Major Intellect (Crown Tri-Restoration Potion)
+    [68409] = true, -- Restore Stamina (Crown Tri-Restoration Potion)
     [68408] = true, -- Major Endurance (Crown Tri-Restoration Potion)
     [86780] = true, -- Invisibility (Crown Invisibility Potion)
     [86782] = true, -- Clairvoyance Fx (Crown Invisibility Potion)
-    [86683] = true, -- Major Intellect (Crown Spellcaster's Elixir)
-    [86684] = true, -- Major Prophecy (Crown Spellcaster's Elixir)
-    [86685] = true, -- Major Sorcery (Crown Spellcaster's Elixir)
-    [86697] = true, -- Major Fortitude (Crown Survivor's Elixir)
-    [86698] = true, -- Unstoppable (Crown Survivor's Elixir)
-    [86699] = true, -- Invisiblity (Crown Survivor's Elixir)
-    [86702] = true, -- Clairvoyance Fx (Crown Survivor's Elixir)
-    [86693] = true, -- Major Endurance (Crown Warrior's Elixir)
-    [86694] = true, -- Major Savagery (Crown Warrior's Elixir)
-    [86695] = true, -- Major Brutality (Crown Warrior's Elixir)
+    [86682] = true, -- Gold Coast Spellcaster Elixir (Gold Coast Spellcaster Elixir)
+    [86683] = true, -- Major Intellect (Gold Coast Spellcaster Elixir)
+    [86684] = true, -- Major Prophecy (Gold Coast Spellcaster Elixir)
+    [86685] = true, -- Major Sorcery (Gold Coast Spellcaster Elixir)
+    [86696] = true, -- Gold Coast Survivor Elixir (Gold Coast Survivor Elixir)
+    [86697] = true, -- Major Fortitude (Gold Coast Survivor Elixir)
+    [86698] = true, -- Unstoppable (Gold Coast Survivor Elixir)
+    [86699] = true, -- Invisiblity (Gold Coast Survivor Elixir)
+    [86702] = true, -- Clairvoyance Fx (Gold Coast Survivor Elixir)
+    [86692] = true, -- Gold Coast Warrior Elixir (Gold Coast Warrior Elixir)
+    [86693] = true, -- Major Endurance (Gold Coast Warrior Elixir)
+    [86694] = true, -- Major Savagery (Gold Coast Warrior Elixir)
+    [86695] = true, -- Major Brutality (Gold Coast Warrior Elixir)
+    [92414] = true, -- Gold Coast Survivor Elixir (Gold Coast Swift Survivor Elixir)
     [92415] = true, -- Major Fortitude (Gold Coast Swift Survivor Elixir)
     [92418] = true, -- Major Expedition (Gold Coast Swift Survivor Elixir)
     [92416] = true, -- Unstoppable (Gold Coast Swift Survivor Elixir)
 
     -------------------------------------
-    -- POTION UP FRONT EFFECTS ----------
-    -------------------------------------
-
-    -- Crafted Potions (2 Traits)
-    [45221] = true, -- Restore Health
-    [45223] = true, -- Restore Magicka
-    [46111] = true, -- Ravage Health
-    [45225] = true, -- Restore Stamina
-
-    -- Crafted Potions (3 Traits)
-    [45382] = true, -- Restore Health
-    [45385] = true, -- Restore Magicka
-    [46215] = true, -- Damage Health
-    [45388] = true, -- Restore Stamina
-
-    -- Vendor Potions + AVA Potions + Roguish Draughts
-    [17302] = true, -- Restore Health (Vendor)
-    [17323] = true, -- Restore Magicka (Vendor)
-    [17328] = true, -- Restore Stamina (Vendor)
-    [72934] = true, -- Restore Stamina (Alliance Battle Draught)
-    [72927] = true, -- Restore Health (Alliance Health Draught)
-    [72931] = true, -- Restore Magicka (Alliance Spell Draught)
-    [78053] = true, -- Restore Stamina (Roguish Stealth Draught)
-    [78079] = true, -- Restore Stamina (Roguish Escape Draught)
-    [68401] = true, -- Restore All Resources (Crown Tri-Restoration Potion)
-    [68407] = true, -- Restore Magicka (Crown Tri-Restoration Potion)
-    [68409] = true, -- Restore Stamina (Crown Tri-Restoration Potion)
-    [86682] = true, -- Crown Spellcaster's Elixir (Crown Spellcaster's Elixir)
-    [86696] = true, -- Crown Survivor's Elixir (Crown Survivor's Elixir)
-    [86692] = true, -- Crown Warrior's Elixir (Crown Warrior's Elixir)
-    [92414] = true, -- Crown Survivor's Elixir (Gold Coast Swift Survivor Elixir)
-
-    -------------------------------------
-    -- POISONS --------------------------
+    -- POISONS
     -------------------------------------
 
     -- Crafted Poisons (2 Traits)
@@ -463,21 +1006,21 @@ LUIE.DebugAuras = {
     [81554] = true, -- Hindrance (Cloudy Hindering Poison)
 
     -- Crown Poisons
-    [88476] = true, -- Creeping Ravage Health (Crown Debilitating Poison)
-    [88477] = true, -- Hindrance (Crown Debilitating Poison)
-    [88471] = true, -- Drain Magicka (Crown Draining Poison)
-    [88475] = true, -- Drain Stamina (Crown Draining Poison)
-    [88473] = true, -- Restore Magicka (Crown Draining Poison)
-    [88474] = true, -- Restore Stamina (Crown Draining Poison)
-    [88469] = true, -- Minor Maim (Crown Enfeebling Poison)
-    [88470] = true, -- Minor Defile (Crown Enfeebling Poison)
+    [88476] = true, -- Creeping Ravage Health (Gold Coast Debilitating Poison)
+    [88477] = true, -- Hindrance (Gold Coast Debilitating Poison)
+    [88471] = true, -- Drain Magicka (Gold Coast Draining Poison)
+    [88475] = true, -- Drain Stamina (Gold Coast Draining Poison)
+    [88473] = true, -- Restore Magicka (Gold Coast Draining Poison)
+    [88474] = true, -- Restore Stamina (Gold Coast Draining Poison)
+    [88469] = true, -- Minor Maim (Gold Coast Enfeebling Poison)
+    [88470] = true, -- Minor Defile (Gold Coast Enfeebling Poison)
     [81274] = true, -- Ravage Health (Crown Lethal Poison)
     [81275] = true, -- Creeping Ravage Health (Crown Lethal Poison)
-    [88462] = true, -- Immobilize (Crown Trapping Poison)
-    [88463] = true, -- Hindrance (Crown Trapping Poison)
+    [88462] = true, -- Immobilize (Gold Coast Trapping Poison)
+    [88463] = true, -- Hindrance (Gold Coast Trapping Poison)
 
     -------------------------------------
-    -- FOOD & DRINK ---------------------
+    -- FOOD & DRINK
     -------------------------------------
 
     -- General Events
@@ -582,7 +1125,6 @@ LUIE.DebugAuras = {
     [86674] = true, -- Increase Stamina Recovery
     [86669] = true, -- Newlife Food: Reg S, Max S, So
     [86785] = true, -- New Life Food: M, Soup
-    [86560] = true, -- Old Aldmeri Orphan Gruel (Green)
     [86786] = true, -- New Life Food: S, Sm Bread
     [86787] = true, -- Rajhin's Sugar Claws (Green)
     [89955] = true, -- Candied Jester's Coins (Blue)
@@ -759,7 +1301,7 @@ LUIE.DebugAuras = {
     --[66585] = true, -- Food: H, Pie -- Probably Unused
 
     -------------------------------------
-    -- MISC CONSUMABLES -----------------
+    -- Experience Consumables
     -------------------------------------
 
     -- Experience Bonuses
@@ -770,6 +1312,8 @@ LUIE.DebugAuras = {
     [85501] = true, -- Increased Experience (Crown Crate Experience Scroll)
     [85502] = true, -- Increased Experience (Major Crown Crate Experience Scroll)
     [85503] = true, -- Increased Experience (Grand Crown Crate Experience Scroll)
+
+    -- Alliance War Bonuses
     [147466] = true, -- Alliance Skill Gain (Alliance War Skill Line Scroll)
     [137733] = true, -- Alliance Skill Gain (Alliance War Skill Line Scroll, Major)
     [147467] = true, -- Alliance Skill Gain (Alliance War Skill Line Scroll, Grand)
@@ -777,45 +1321,17 @@ LUIE.DebugAuras = {
     [147733] = true, -- Alliance Skill Gain 100% Boost (Molten War Torte)
     [147734] = true, -- Alliance Skill Gain 100% Boost (White-Gold War Torte)
 
-    -- Experience Item Crafting
-    [147793] = true, -- Create 100% AvA Skill Boost R (Chef Arquitius's Torte Dissertation)
-    [147795] = true, -- 88449 Stun (Chef Arquitius's Torte Dissertation)
-    [147841] = true, -- Create 150% AvA Skill Boost R (Chef Arquitius's Lost Thesis)
-    [147850] = true, -- 88449 Stun (Chef Arquitius's Lost Thesis)
-
-    -- Other
-    [113432] = true, -- 68235 Stun (Nascent Indrik)
-    [115046] = true, -- 68235 Stun (Nascent Indrik)
-    [130394] = true, -- 68235 Stun (Spectral Indrik)
-    [131536] = true, -- Generic Stun & Combine (Sovereign Sow)
-
-    [68259] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
-    [70582] = true, -- Roll 1d1000 (Merethic Resorative Resin)
-    [70584] = true, -- 68235 Stun (Merethic Restorative Resin)
-    [88449] = true, -- Create Super Psijic Ambrosia (Aetheric Cipher)
-    [88451] = true, -- 88449 Stun (Aetheric Cipher)
-
-    [63427] = true, -- Clean Fish (Any Fish)
-    [78052] = true, -- Minor Pardon (Counterfeit Pardon Edict)
-    [76350] = true, -- Moderate Pardon (Leniency Edict)
-    [76349] = true, -- Full Pardon (Grand Amnesty Edict)
-    [68203] = true, -- Riding Lesson: Carry Capacity (Crown Lesson: Riding Capacity)
-    [68356] = true, -- Riding Carry Track (Crown Lesson: Riding Capacity)
-    [68533] = true, -- Carry Capacity Announcement Tr (Crown Lesson: Riding Capacity)
-    [68201] = true, -- Riding Lesson: Speed (Crown Lesson: Riding Speed)
-    [68472] = true, -- Riding Speed Tracking (Crown Lesson: Riding Speed)
-    [68485] = true, -- Speed Announcement Tracker (Crown Lesson: Riding Speed)
-    [68202] = true, -- Riding Lesson: Stamina(Crown Lesson: Riding Stamina)
-    [68321] = true, -- Riding Stamina Tracking(Crown Lesson: Riding Stamina)
-    [68528] = true, -- Stamina Announcement Tracker (Crown Lesson: Riding Stamina)
-    [69293] = true, -- Sigil of Imperial Retreat (Sigil of Imperial Retreat)
-    [59581] = true, -- Clickable Eat Food (Spoiled Food)
-
+    -------------------------------------
     -- Research Scrolls
+    -------------------------------------
+
+    -- Vendor
     [95149] = true, -- Research Scroll Blacksmithing (Research Scroll, Blacksmithing, 1 Day)
     [95147] = true, -- Research Scroll Clothing 1day (Research Scroll, Clothing, 1 Day)
     [106557] = true, -- Research Scroll Jewelry Crafti (Research Scroll, Jewelry Crafting, 1 Day)
     [95148] = true, -- Research Scroll Woodworking 1d (Research Scroll, Woodworking, 1 Day)
+
+    -- Crown
     [92871] = true, -- Instant Blacksmithing Research (Research Scroll Blacksmithing)
     [92938] = true, -- Instant Blacksmithing Research, Grand (Research Scroll Blacksmithing)
     [92940] = true, -- Instant Blacksmithing Research, Major (Research Scroll Blacksmithing)
@@ -829,6 +1345,199 @@ LUIE.DebugAuras = {
     [92952] = true, -- Instant Woodworking Research, Grand (Research Scroll Woodworking 15)
     [92954] = true, -- Instant Woodworking Research, Major (Research Scroll Woodworking 7d)
     [92960] = true, -- Research Scroll All 1 Day (Instant All Research)
+
+    -------------------------------------
+    -- HOUSING ITEMS
+    -------------------------------------
+
+    -- Target Dummy
+    [89978] = true, -- Target Skeleton (Target Dummy)
+    [89977] = true, -- Target Skeleton (Target Dummy)
+    --[10298] = true, -- Boss (Target Dummy)
+    --[15954] = true, -- Boss (Target Dummy)
+
+    -- Attunable Crafting Station
+    [89445] = true, -- Create Blacksmithing Set Stati (Attunable Blacksmithing Station)
+    [89469] = true, -- 68235 Stun (Attunable Blacksmithing Station)
+    [89643] = true, -- Create Clothier Set Stati (Attunable Clothier Station)
+    [89645] = true, -- 68235 Stun (Attunable Clothier Station)
+    [105215] = true, -- Create Jewelry Set Station (Attunable Jewelry Crafting Station)
+    [105217] = true, -- 68235 Stun (Attunable Jewelry Crafting Station)
+    [89652] = true, -- Create Woodworking Set Stati (Attunable Woodworking Station)
+    [89654] = true, -- 68235 Stun (Attunable Woodworking Station)
+
+    -------------------------------------
+    -- TARGET IRON ATRONACH, TRIAL
+    -------------------------------------
+
+    -- Debuffs
+    [120010] = true, -- Major Breach (Target Iron Atronach, Trial)
+    [120019] = true, -- Minor Breach (Target Iron Atronach, Trial)
+    [148976] = true, -- Major Vulnerability (Target Iron Atronach, Trial)
+    [120030] = true, -- Minor Vulnerability (Target Iron Atronach, Trial)
+    [148977] = true, -- Minor Brittle (Target Iron Atronach, Trial)
+    [149012] = true, -- Minor Magickasteal (Target Iron Atronach, Trial)
+    [120016] = true, -- Joe Buff Granter (Target Iron Atronach, Trial)
+    [120007] = true, -- Crusher (Target Iron Atronach, Trial)
+    [120011] = true, -- Engulfing Flames (Target Iron Atronach, Trial)
+    [120018] = true, -- Roar of Alkosh (Target Iron Atronach, Trial)
+    [120014] = true, -- Off Balance (Target Iron Atronach, Trial)
+
+    -- Buffs
+    [120017] = true, -- Minor Sorcery (Target Iron Atronach, Trial)
+    [120023] = true, -- Minor Brutality (Target Iron Atronach, Trial)
+    [120028] = true, -- Minor Prophecy (Target Iron Atronach, Trial)
+    [120029] = true, -- Minor Savagery (Target Iron Atronach, Trial)
+    [120008] = true, -- Minor Berserk (Target Iron Atronach, Trial)
+    [120015] = true, -- Major Courage (Target Iron Atronach, Trial)
+    [120020] = true, -- Minor Toughness (Target Iron Atronach, Trial)
+    [120021] = true, -- Aggressive Horn (Target Iron Atronach, Trial)
+    [120025] = true, -- Aggressive Horn (Target Iron Atronach, Trial)
+    [120013] = true, -- Major Force (Target Iron Atronach, Trial)
+    [120024] = true, -- Worm's Raiment (Target Iron Atronach, Trial)
+    [120026] = true, -- Hircine's Veneer (Target Iron Atronach, Trial)
+
+    -- Synergy
+    [121572] = true, -- Spear Shards (Target Iron Atronach, Trial)
+    [121628] = true, -- Spear Shards (Target Iron Atronach, Trial)
+    [121629] = true, -- Spear Shards (Target Iron Atronach, Trial)
+    [121630] = true, -- Spear Shards (Target Iron Atronach, Trial)
+
+    -------------------------------------
+    -- MISC ITEMS
+    -------------------------------------
+
+    -- Item Combination
+    [88449] = true, -- Create Super Psijic Ambrosia (Aetheric Cipher)
+    [88451] = true, -- 88449 Stun (Aetheric Cipher)
+
+    --[108312] = true, -- 68235 Stun (Big-Eared Ginger Kitten's "Care and Feeding" Guide)
+    --[108300] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Bait Mouse)
+    --[108283] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Collar)
+    --[108308] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Feather Toy)
+    --[108304] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Milk Saucer)
+    --[108296] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Sleeping-Basket)
+    --[108292] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Tag)
+
+    [148050] = true, -- Alliance Breton Terrier (Breton Terrier Mammoth Bone)
+    [148052] = true, -- 68235 Stun (Breton Terrier Mammoth Bone)
+
+    [147793] = true, -- Create 100% AvA Skill Boost R (Chef Arquitius's Torte Dissertation)
+    [147795] = true, -- 88449 Stun (Chef Arquitius's Torte Dissertation)
+    [147841] = true, -- Create 150% AvA Skill Boost R (Chef Arquitius's Lost Thesis)
+    [147850] = true, -- 88449 Stun (Chef Arquitius's Lost Thesis)
+
+    [92365] = true, -- 68235 Stun (Dwarven Theodolite Chassis)
+    [92361] = true, -- 68235 Stun (Dwarven Theodolite Eye)
+    [92357] = true, -- 68235 Stun (Dwarven Theodolite Head)
+    [92353] = true, -- 68235 Stun (Dwarven Theodolite Neck)
+    [92349] = true, -- 68235 Stun (Dwarven Theodolite Shoulder)
+    [92345] = true, -- 68235 Stun (Dwarven Theodolite Torso)
+    [92341] = true, -- 68235 Stun (Dwarven Theodolite Wheels)
+
+    [117532] = 5000, -- 68235 Stun (Guar Stomp Elucidating Hand-Sculpture)
+    [117558] = 5000, -- 68235 Stun (Guar Stomp History in Street Theatre)
+    [117554] = 5000, -- 68235 Stun (Guar Stomp Illustrated Reports)
+    [117550] = 5000, -- 68235 Stun (Guar Stomp Noise Reports)
+    [117545] = 5000, -- 68235 Stun (Guar Stomp Rehearsal Tuning Fork)
+    [117562] = 5000, -- 68235 Stun (Guar Stomp Skeletal Reconstruction)
+    [117541] = 5000, -- 68235 Stun (Guar Stomp Steps-Practice Rug)
+
+    [70582] = true, -- Roll 1d1000 (Merethic Resorative Resin)
+    [70584] = true, -- 68235 Stun (Merethic Restorative Resin)
+
+    [123110] = true, -- 68235 Stun (Mummified Alfiq Parts)
+
+    [123115] = true, -- 68235 Stun (Plague-Drenched Fabric)
+
+    [68259] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I)
+    [68263] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment II)
+    [68267] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment III)
+    [68271] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment IV)
+    [68275] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment V)
+    [68279] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment VI)
+    [68283] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment VII)
+
+    --[108316] = true, -- 68235 Stun (Psijic Glowglobe's Ancient Texts)
+    --[108320] = true, -- 68235 Stun (Psijic Glowglobe's Conjectural Writings)
+    --[108324] = true, -- 68235 Stun (Psijic Glowglobe's Crystal Ball)
+    --[108328] = true, -- 68235 Stun (Psijic Glowglobe's Meteoric Glass)
+    --[108332] = true, -- 68235 Stun (Psijic Glowglobe's Purified Glow Dust)
+    --[108336] = true, -- 68235 Stun (Psijic Glowglobe's Updated Instructionals)
+    --[108340] = true, -- 68235 Stun (Psijic Glowglobe's Wisp Animus)
+
+    [92381] = true, -- 68235 Stun (Sixth House Incense of Toolwork)
+    [92393] = true, -- 68235 Stun (Sixth House Ornamental Fasteners)
+    [92389] = true, -- 68235 Stun (Sixth House Patterned Belt)
+    [92397] = true, -- 68235 Stun (Sixth House Tailor's Belt)
+    [92385] = true, -- 68235 Stun (Sixth House Tailor's Hammer)
+    [92373] = true, -- 68235 Stun (Sixth House Tailor's Shears)
+    [92377] = true, -- 68235 Stun (Sixth House Writhing Thread)
+
+    [140542] = true, -- Stone Warrior Target Dummy (Stone Husk Fragment)
+    [140544] = true, -- 68235 Stun (Stone Husk Fragment)
+
+    [111141] = true, -- 68235 Stun (Swamp Jelly Carrying Jar)
+    [111129] = true, -- 68235 Stun (Swamp Jelly Fine-Mesh Net)
+    [111153] = true, -- 68235 Stun (Swamp Jelly Hunter's Lense)
+    [111133] = true, -- 68235 Stun (Swamp Jelly Luminous Fishmeal)
+    [111137] = true, -- 68235 Stun (Swamp Jelly Luring Flute)
+    [111149] = true, -- 68235 Stun (Swamp Jelly Moss Bedding)
+    [111145] = true, -- 68235 Stun (Swamp Jelly Spawning Mud)
+
+    [110871] = true, -- Roll 1d10000 (Welkynar Binding)
+    [110890] = true, -- 68235 Stun (Welkynar Binding)
+
+    -- Collectible Fragment Combination
+    [151843] = true, -- 68235 Stun (Deadlands Firewalker)
+
+    [113432] = true, -- 68235 Stun (Nascent Indrik)
+    [115046] = true, -- 68235 Stun (Nascent Indrik)
+
+    [131536] = true, -- Generic Stun & Combine (Sovereign Sow)
+
+    [130394] = true, -- 68235 Stun (Spectral Indrik)
+
+    [148079] = true, -- 68235 Stun (Unstable Morpholith)
+    [148080] = true, -- 68235 Stun (Unstable Morpholith)
+
+    -- Item Combination - Arena Gladiator's Proofs
+    [111188] = true, -- Arena Gladiator Costume (Arena Gladiator's Exultation)
+    [111190] = true, -- 68235 Stun (Arena Gladiator's Exultation)
+
+    [115062] = true, -- Arena Gladiator Emote (Arena Gladiator's Mockery)
+    [115064] = true, -- 68235 Stun (Arena Gladiator's Mockery)
+
+    [106173] = true, -- Arena Gladiator Helm (Arena Gladiator's Recognition)
+    [106174] = true, -- 68235 Stun (Arena Gladiator's Recognition)
+
+    [116414] = true, -- Arena Gladiator Pet (Arena Gladiator's Roar)
+    [116416] = true, -- 68235 Stun (Arena Gladiator's Roar)
+
+    [134882] = true, -- Knights of the Circle Weapon Style Page (Knight's Rebuke)
+    [134883] = true, -- 68235 Stun (Knight's Rebuke)
+
+    [134850] = true, -- Knights of the Circle Armor Style Page (Knight's Resolve)
+    [134851] = true, -- 68235 Stun (Knight's Resolve)
+
+    [140620] = true, -- Reach-Mage Ceremonial Skullcap (Reach-Mage's Ferocity)
+    [140622] = true, -- 68235 Stun (Reach-Mage's Ferocity)
+
+    [124622] = true, -- Alliance Standard-Bearer Emote (Alliance Standard-Bearer's License)
+    [124624] = true, -- 68235 Stun (Alliance Standard-Bearer's License)
+
+    -- Item Combination - Siege of Cyrodiil Merits
+    --[148419] = true, -- Reachman Emote (Siege of Cyrodiil Commendation)
+    --[148421] = true, -- 68235 Stun (Siege of Cyrodiil Commendation)
+
+    --[145214] = true, -- Siegemaster Costume (Siege of Cyrodiil Distinction)
+    --[145216] = true, -- 68235 Stun (Siege of Cyrodiil Distinction)
+
+    --[124788] = true, -- Arena Gladiator Helm (Siege of Cyrodiil Recognition)
+    --[124789] = true, -- 68235 Stun (Siege of Cyrodiil Recognition)
+
+    --[126708] = true, -- Siegemaster Costume (Siege of Cyrodiil Recommendation)
+    --[126710] = true, -- 68235 Stun (Siege of Cyrodiil Recommendation)
 
     -- Crown Respec Scrolls
     [67049] = true, -- _CRWN Respec Attriutes (Attribute Respecification Scroll)
@@ -845,6 +1554,24 @@ LUIE.DebugAuras = {
     [128367] = true, -- Glenmoril Wyrd Treasure Map: Shadowfen
     [128373] = true, -- Glenmoril Wyrd Treasure Map: Stonefalls
 
+    -- Key Fragments
+    [65704] = true, -- Take key (Bone Shard Trophy Vault)
+    [65947] = true, -- Tooth Key (Bone Shard Trophy Vault)
+    [67824] = true, -- Take teeth (Monstrous Tooth Trophy Vault)
+    [67825] = true, -- Tooth key (Monstrous Tooth Trophy Vault)
+    [67018] = true, -- Take key (Clawed Trophy Vault)
+    [67019] = true, -- Tiny Claw Key (Clawed Trophy Vault)
+    [67033] = true, -- Take dark ether (Ethereal Trophy Vault)
+    [67034] = true, -- Dark Ether Key (Ethereal Trophy Vault)
+    [67798] = true, -- Take key (Planar Armor Trophy Vault)
+    [67799] = true, -- Tiny Claw Key (Planar Armor Trophy Vault)
+    [67709] = true, -- Take marks (Legionary Trophy Vault)
+    [67713] = true, -- Mark Key (Legionary Trophy Vault)
+    [70300] = true, -- Create Key (Daedric Embers Trophy Vault)
+    [70301] = true, -- Create Key (Daedric Embers Trophy Vault)
+    [70281] = true, -- Create Key (Daedric Shackle Vault)
+    [70283] = true, -- Create Key (Daedric Shackle Vault)
+
     -- PTS Items
     [81736] = true, -- Donolon's Blue Recipe Book (Recipe: Donolon's Blue Recipe Book)
     [81735] = true, -- Donolon's Green Recipe Book (Recipe: Donolon's Green Recipe Book)
@@ -852,58 +1579,43 @@ LUIE.DebugAuras = {
     [81737] = true, -- Donolon's Rare Recipe Book (Recipe: Donolon's Rare Recipe Book)
     [89338] = true, -- Exquisite Furniture Tome (ALL Furniture Plan Book)
     [115175] = true, -- Murkmire Furniture Tome (Murkmire Furniture Plan Book)
+    [157127] = true, -- Companion Maxer (Companion Booster)
     [87282] = true, -- Vampire Maxer (Vampire Maxer)
     [87286] = true, -- Werewolf Maxer (Werewolf Maxer)
     [66704] = true, -- _CRWN Remove Vamp/Werewolf (Cleansing Ritual)
     [66705] = true, -- _CRWN Remove Vamp/Werewolf (Cleansing Ritual)
     [66706] = true, -- _CRWN Remove Vamp/Werewolf (Cleansing Ritual)
 
-    -- Arena Gladiator's Proof Items
-    [111188] = true, -- Arena Gladiator Costume (Arena Gladiator's Exultation)
-    [111190] = true, -- 68235 Stun (Arena Gladiator's Exultation)
-    [115062] = true, -- Arena Gladiator Emote (Arena Gladiator's Mockery)
-    [115064] = true, -- 68235 Stun (Arena Gladiator's Mockery)
-    [106173] = true, -- Arena Gladiator Helm (Arena Gladiator's Recognition)
-    [106174] = true, -- 68235 Stun (Arena Gladiator's Recognition)
-    [116414] = true, -- Arena Gladiator Pet (Arena Gladiator's Roar)
-    [116416] = true, -- 68235 Stun (Arena Gladiator's Roar)
-    [134882] = true, -- Knights of the Circle Weapon Style Page (Knight's Rebuke)
-    [134883] = true, -- 68235 Stun (Knight's Rebuke)
-    [134850] = true, -- Knights of the Circle Armor Style Page (Knight's Resolve)
-    [134851] = true, -- 68235 Stun (Knight's Resolve)
-    [140620] = true, -- Reach-Mage Ceremonial Skullcap (Reach-Mage's Ferocity)
-    [140622] = true, -- 68235 Stun (Reach-Mage's Ferocity)
-    --[124788] = true, -- Arena Gladiator Helm (Siege of Cyrodiil Recognition)
-    --[124789] = true, -- 68235 Stun (Siege of Cyrodiil Recognition)
-    --[126708] = true, -- Siegemaster Costume (Siege of Cyrodiil Recommendation)
-    --[126710] = true, -- 68235 Stun (Siege of Cyrodiil Recommendation)
-    [124622] = true, -- Alliance Standard-Bearer Emote (Alliance Standard-Bearer's License)
-    [124624] = true, -- 68235 Stun (Alliance Standard-Bearer's License)
-    --[148419] = true, -- Reachman Emote (Siege of Cyrodiil Commendation)
-    --[148421] = true, -- 68235 Stun (Siege of Cyrodiil Commendation)
+    -- Other Items
+    [59581] = true, -- Clickable Eat Food (Spoiled Food)
+    [63427] = true, -- Clean Fish (Fish - Any Type)
+    [78052] = true, -- Minor Pardon (Counterfeit Pardon Edict)
+    [76350] = true, -- Moderate Pardon (Leniency Edict)
+    [76349] = true, -- Full Pardon (Grand Amnesty Edict)
+    [68203] = true, -- Riding Lesson: Carry Capacity (Crown Lesson: Riding Capacity)
+    [68356] = true, -- Riding Carry Track (Crown Lesson: Riding Capacity)
+    [68533] = true, -- Carry Capacity Announcement Tr (Crown Lesson: Riding Capacity)
+    [68201] = true, -- Riding Lesson: Speed (Crown Lesson: Riding Speed)
+    [68472] = true, -- Riding Speed Tracking (Crown Lesson: Riding Speed)
+    [68485] = true, -- Speed Announcement Tracker (Crown Lesson: Riding Speed)
+    [68202] = true, -- Riding Lesson: Stamina(Crown Lesson: Riding Stamina)
+    [68321] = true, -- Riding Stamina Tracking(Crown Lesson: Riding Stamina)
+    [68528] = true, -- Stamina Announcement Tracker (Crown Lesson: Riding Stamina)
+    [69293] = true, -- Sigil of Imperial Retreat (Sigil of Imperial Retreat)
+    [47270] = true, -- Ritual of Mara (Pledge of Mara)
 
-    -------------------------------------
-    -- MEMENTOS -------------------------
-    -------------------------------------
-
-    -- Seasonal Mementos & Items
+    -- Seasonal Event Items
     [86792] = true, -- Eating (High Hrothgar Festival Mints)
     [86794] = true, -- Very Cold (High Hrothgar Festival Mints)
+
     [86739] = true, -- Drinking (Sailor's Warning Festival Grog)
     [86740] = true, -- Very Drunk (Sailor's Warning Festival Grog)
-    [85353] = true, -- Sword Swallowing (Disposable Swallower's Sword)
-    [85354] = true, -- Dagger Juggling (Disposable Juggling Knives)
-    [85355] = true, -- Flame Juggling (Fire-Breather's Oil Bun)
-    [86774] = true, -- Mudball (Mud Ball)
-    [86777] = true, -- Mudball (Mud Ball)
-    [86775] = true, -- Covered in Mud (Mud Ball)
-    [86779] = true, -- Covered in Mud (Mud Ball)
+
     [87964] = true, -- Jester's Festival Illusion Daz (Sparkwreath Dazzler)
     [87965] = true, -- Jester's Festival Illusion Daz (Plume Dazzler)
     [87966] = true, -- Jester's Festival Illusion Daz (Spiral Dazzler)
     [88374] = true, -- Jester's Festival Illusion Daz (Sparkly Hat Dazzler)
-    [87963] = true, -- Bestowed Cherry Blossoms (Cherry Blossom Branch)
-    [89372] = true, -- Pelted! (Cherry Blossom Branch)
+
     [116879] = true, -- Alliance Pie (Revelry Pie)
     [118833] = true, -- Piessive (Revelry Pie)
     [116933] = true, -- Covered in Pie (Revelry Pie)
@@ -915,7 +1627,18 @@ LUIE.DebugAuras = {
     [116942] = true, -- Covered in Pie (Revelry Pie)
     [116944] = true, -- Covered in Pie (Revelry Pie)
     [116943] = true, -- Covered in Pie (Revelry Pie)
-    [102077] = true, -- Jester's Festival Scintillator (Jester's Scintillator
+
+    [92232] = true, -- Pelinal's Ferocity (Scroll of Pelinal's Ferocity)
+
+    -------------------------------------
+    -- MEMENTOS -------------------------
+    -------------------------------------
+
+    -------------------------------------
+    -- EVENTS
+    -------------------------------------
+
+    -- Annual Jubilee
     [77027] = true, -- Anniversary Cake - Forreals (Jubilee Cake)
     [87998] = true, -- Anniversary Cake (2nd Annual Jubilee Cake)
     [102009] = true, -- Anniversary Cake (3rd Annual Jubilee Cake)
@@ -926,6 +1649,63 @@ LUIE.DebugAuras = {
     [136348] = true, -- Anniversary EXP Buff (Jubilee Cake 2020)
     [149946] = true, -- Jubilee Cake 2021 (Jubilee Cake 2021)
     [152514] = true, -- Anniversary EXP Buff (Jubilee Cake 2021)
+
+    -- Jester's Festival
+    [87963] = true, -- Bestowed Cherry Blossoms (Cherry Blossom Branch)
+    [89372] = true, -- Pelted! (Cherry Blossom Branch)
+
+    [115681] = true, -- Party Noise Maker (Festive Noise Maker)
+    [115682] = true, -- Mount Block (Festive Noise Maker)
+
+    [115683] = true, -- Jester Fest Memento (Jester's Festival Joke Popper)
+    [115684] = true, -- Mount Block (Jester's Festival Joke Popper)
+    [129550] = true, -- Stunned (Jester's Festival Joke Popper)
+
+    [102077] = true, -- Jester's Festival Scintillator (Jester's Scintillator)
+
+    [149874] = true, -- Playful Prankster's Surprise Box (Playful Prankster's Surprise Box)
+
+    [91368] = true, -- Jester's Experience Boost Pie (The Pie of Misrule)
+    [91369] = true, -- Jester's Experience Boost Pie (The Pie of Misrule)
+
+    -- New Life Festival
+    [91446] = true, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)
+    [91450] = true, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)
+    [91451] = true, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)
+    [91453] = true, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)
+    [91449] = true, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)
+    [86075] = true, -- Breda's Magnificent Mead (Breda's Magnificent Mead)
+
+    [85355] = true, -- Flame Juggling (Fire-Breather's Torches)
+
+    [85354] = true, -- Dagger Juggling (Juggler's Knives)
+
+    [86774] = true, -- Mudball (Mud Ball)
+    [86777] = true, -- Mudball (Mud Ball)
+    [86775] = true, -- Covered in Mud (Mud Ball)
+    [86779] = true, -- Covered in Mud (Mud Ball)
+
+    [85353] = true, -- Sword Swallowing (Sword-Swallower's Blade)
+
+    -- Tribunal Celebration Event
+    [146657] = true, -- Memento Cliff Racer (Thetys Ramary's Bait Kit)
+    [147635] = true, -- Anchor (Thetys Ramary's Bait Kit)
+    [147634] = true, -- Anchor (Thetys Ramary's Bait Kit)
+
+    -- Witches Festival
+    [110495] = true, -- Apple Bobbing (Apple-Bobbing Cauldron)
+    [111458] = true, -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
+    [111459] = true, -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
+
+    [126689] = true, -- Grant Ach Progress: Skel Merionette (Skeletal Marionette)
+    [125820] = true, -- Witches Festival 2019 Marionette (Skeletal Marionette)
+    [125832] = true, -- Marionette Summon (Skeletal Marionette)
+
+    [138404] = true, -- Throw Bones (Throwing Bones)
+    --[138405] = true, -- Throw Bones (Throwing Bones)
+    [144790] = true, -- Throw Bones (Throwing Bones)
+    [144791] = true, -- Throw Bones (Throwing Bones)
+
     [81575] = true, -- Event - WitchFest Cauldron (Witchmother's Whistle)
     [96118] = true, -- Witchmother's Boon (Witchmother's Whistle)
     [84361] = true, -- Witchmother's Brew (Witchmother's Whistle)
@@ -935,28 +1715,29 @@ LUIE.DebugAuras = {
     [84367] = true, -- Witchmother's Brew (Witchmother's Whistle)
     [84368] = true, -- Witchmother's Brew (Witchmother's Whistle)
     [84369] = true, -- Witchmother's Brew (Witchmother's Whistle)
-    [91368] = true, -- Jester's Experience Boost Pie (The Pie of Misrule)
-    [91369] = true, -- Jester's Experience Boost Pie (The Pie of Misrule)
-    [92232] = true, -- Pelinal's Ferocity (Scroll of Pelinal's Ferocity)
-    [91446] = true, -- Jester's Experience Boost Pie -- Breda's Bottomless Mead Mug
-    [91450] = true, -- Breda's Magnificent Mead -- Breda's Bottomless Mead Mug
-    [91451] = true, -- Breda's Magnificent Mead -- Breda's Bottomless Mead Mug
-    [91453] = true, -- Breda's Magnificent Mead -- Breda's Bottomless Mead Mug
-    [91449] = true, -- Breda's Magnificent Mead -- Breda's Bottomless Mead Mug
-    [86075] = true, -- Breda's Magnificent Mead -- Breda's Magnificent Mead
-    [126689] = true, -- Grant Ach Progress: Skel Merionette (Skeletal Marionette)
-    [125820] = true, -- Witches Festival 2019 Marionette (Skeletal Marionette)
-    [125832] = true, -- Marionette Summon (Skeletal Marionette)
 
-    [26829] = true, -- Light of the Tribunal (Almalexia's Enchanted Lantern)
+    -------------------------------------
+    -- FACTION & PROLOGUE QUESTS
+    -------------------------------------
+
+    -- Aldmeri Dominion
     [26736] = true, -- Bear Trap (Battered Bear Trap)
     [51555] = true, -- Bear Trap (Battered Bear Trap)
-    [16846] = true, -- Blackfeather Court Whistle (Blackfeather Court Whistle)
-    [41988] = true, -- Bonesnap Binding Stone (Bonesnap Binding Stone)
     [39245] = true, -- Glimpse of the Forbidden (Discourse Amaranthine)
+    [41948] = true, -- Glanir's Smoke Bomb (Glanir's Smoke Bomb)
+    [42105] = true, -- Nanwen's Sword (Nanwen's Sword)
+    [42008] = true, -- Blessing of Root Sunder (Token of Root Sunder)
+
+    -- Daggerfall Covenant
+    [41988] = true, -- Bonesnap Binding Stone (Bonesnap Binding Stone)
     [41950] = true, -- Fetish of Anger (Fetish of Anger)
     [21226] = true, -- Finvir's Trinket (Finvir's Trinket)
-    [41948] = true, -- Glanir's Smoke Bomb (Glanir's Smoke Bomb)
+    [42053] = true, -- Yokudan Salute (Yokudan Totem)
+    [42067] = true, -- Explosion (Yokudan Totem)
+
+    -- Ebonheart Pact
+    [26829] = true, -- Light of the Tribunal (Almalexia's Enchanted Lantern)
+    [16846] = true, -- Blackfeather Court Whistle (Blackfeather Court Whistle)
     [25696] = true, -- Falcon Takeoff (Justal's Falcon)
     [25699] = true, -- Falcon Timer (Justal's Falcon)
     [25703] = true, -- Justal's Falcon (Justal's Falcon)
@@ -966,70 +1747,138 @@ LUIE.DebugAuras = {
     [43703] = true, -- Extracting... (Lena's Wand of Finding)
     [43704] = true, -- Extracting... (Lena's Wand of Finding)
     [43701] = true, -- Extracting... (Lena's Wand of Finding)
-    [42076] = true, -- Tear (Mezha-dro's Sealing Amulet)
-    [42080] = true, -- Tear (Mezha-dro's Sealing Amulet)
-    [42105] = true, -- Nanwen's Sword (Nanwen's Sword)
-    [34578] = true, -- Nirnroot Wine (Nirnroot Wine)
     --[8825] = true, -- Generic Crouch Fiddle Animatio (Questionable Meat Sack)
     [26339] = true, -- Eating (Questionable Meat Sack)
     [25369] = true, -- Sanguine's Goblet (Sanguine's Goblet)
-    [42008] = true, -- Blessing of Root Sunder (Token of Root Sunder)
-    [42053] = true, -- Yokudan Salute (Yokudan Totem)
-    [42067] = true, -- Explosion (Yokudan Totem)
 
+    -- Coldharbour
+    [42076] = true, -- Tear (Mezha-dro's Sealing Amulet)
+    [42080] = true, -- Tear (Mezha-dro's Sealing Amulet)
+
+    -- Cyrodiil
+    [34578] = true, -- Nirnroot Wine (Nirnroot Wine)
+
+    -- Prologue Quests
+    [149879] = true, -- Daedric Unwarding Amulet (Daedric Unwarding Amulet)
+    [125817] = true, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
     [89550] = true, -- TROPHY Azura's Light (Twilight Shard)
-    [79510] = true, -- TROPHY Blood Oath (Blade of the Blood Oath)
-    [92862] = true, -- Ringing Bell (Dreamer's Chime)
-    [92863] = true, -- Stun (Dreamer's Chime)
-    --[77785] = true, -- Rain of Coins (Coin of Illusory Riches)
-    --[77786] = true, -- Stun (Coin of Illusory Riches)
+    [143495] = true, -- Reliquary of Dark Designs (Reliquary of Dark Designs)
+    [144418] = true, -- Reliquary of Dark Designs (Reliquary of Dark Designs)
+    [144417] = true, -- Reliquary of Dark Designs (Reliquary of Dark Designs)
+
+    -------------------------------------
+    -- DLC & CHAPTERS
+    -------------------------------------
+
+    -- Orsinium
     [73685] = true, -- Rkindaleft Trophy (Hidden Pressure Vent)
     [74151] = true, -- Stun (Hidden Pressure Vent)
     [73686] = true, -- Old Orsinium Trophy (Malacath's Wrathful Flame)
     [74232] = true, -- Stun (Malacath's Wrathful Flame)
 
+    -- Thieves Guild
+    --[77785] = true, -- Rain of Coins (Coin of Illusory Riches)
+    --[77786] = true, -- Stun (Coin of Illusory Riches)
+
+    -- Dark Brotherhood
+    [79510] = true, -- TROPHY Blood Oath (Blade of the Blood Oath)
+
+    -- Morrowind
+    [92862] = true, -- Ringing Bell (Dreamer's Chime)
+    [92863] = true, -- Stun (Dreamer's Chime)
+
+    -- Elsweyr
     [119099] = true, -- Brittle Burial Urn (Brittle Burial Urn)
     [125053] = true, -- Brittle Burial Urn (Brittle Burial Urn)
-    [125816] = true, -- Maarselok Corruption Memento (Corruption of Maarselok)
-    [125822] = true, -- Mount Block (Corruption of Maarselok)
-    [125817] = true, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
     [119107] = true, -- Stun (Winnowing Plague Decoction)
     [119108] = true, -- NAME ME Infect Brew (Winnowing Plague Decoction)
 
-    -- Crown Mementos
+    -- Scalebreaker
+    [125816] = true, -- Maarselok Corruption Memento (Corruption of Maarselok)
+    [125822] = true, -- Mount Block (Corruption of Maarselok)
+
+    -- Greymoor
+    [136120] = true, -- Ritual Circle Totem (Ritual Circle Totem)
+
+    -- Stonethorn
+    [137919] = true, -- Juggling Potion Bottles (Mostly Stable Juggling Potions)
+
+    -- Markarth
+    [147598] = true, -- Void Shard (Void Shard)
+    [147689] = true, -- Void Shard (Void Shard)
+    [147688] = true, -- Void Shard (Void Shard)
+
+    -- Flames of Ambition
+    [149881] = true, -- Illusory Salamander Stone (Illusory Salamander Stone)
+    [151257] = true, -- Illusory Salamander Stone (Illusory Salamander Stone)
+    [151256] = true, -- Illusory Salamander Stone (Illusory Salamander Stone)
+
+    -- Blackwood
+    [153758] = true, -- Golden Anvil Replica (Full-Scale Golden Anvil Replica)
+    [146744] = true, -- Temperamental Grimoire (Temperamental Grimoire)
+    [153760] = true, -- Wilting Weed Killer Phial (Wilting Weed Killer Phial)
+
+    -------------------------------------
+    -- CROWN CRATES
+    -------------------------------------
+
+    -- Crown Crates - Storm Atronach Crate
     [85344] = true, -- Atronach Aura (Storm Atronach Aura)
     [85349] = true, -- Atronach Transformation (Storm Atronach Transform)
     [85347] = true, -- Atronach Juggling (Storm Orb Juggle)
+
+    -- Crown Crates - Wild Hunt Crate
     [86976] = true, -- Spriggan Aura (Wild Hunt Leaf-Dance Aura)
     [86977] = true, -- Spriggan Transformation (Wild Hunt Transform)
     [86978] = true, -- Grand Spriggan Aura (Floral Swirl Aura)
+
+    -- Crown Crates - Dwarven Crate
     [92866] = true, -- Dwarven Globe (Dwarven Puzzle Orb)
     [92867] = true, -- Dwarven Tuning Forks (Dwaven Tonal Forks)
     [92868] = true, -- Dwarven Transformation (Dwemervamidium Mirage)
+
+    -- Crown Crates - Reaper's Harvest Crate
     [97273] = true, -- TROPHY Death Crate Mem 1 (Crow's Calling)
     [97275] = true, -- TROPHY Death Crate Mem 3 (Murderous Strike)
     [98378] = true, -- Murderous Strike (Murderous Strike)
     [97274] = true, -- Swarm of Crows (Swarm of Crows)
+
+    -- Crown Crates - Flame Atronach Crate
     [99318] = true, -- TROPHY Flame Crate Mem 1 (Fiery Orb)
     [99319] = true, -- Flame Crate Memento 2 (Flame Pixie)
     [99320] = true, -- TROPHY Flame Crate Mem 3 (Flame Eruption)
+
+    -- Crown Crates - Scalecaller Crate
     [101874] = true, -- _CRWN Dragon Priest Mem2 Ice T (Scalecaller Frost Shard)
     [101877] = true, -- _CRWN Dragon Priest Mem1 Fl/St (Scalecaller Rune of Levitation)
     [101872] = true, -- _CRWN Dragon Priest Memento 3 (Bone Dragon Summons Focus)
+
+    -- Crown Crates - Psijic Vault Crate
     [104324] = true, -- Psijic Pearl Summon (Psijic Celestial Orb)
     [104323] = true, -- Psijic Hourglass (Psijic Tautology Glass)
     [104325] = true, -- Psijic Disintegrate (Sapiarchic Discorporation Lens)
+
+    -- Crown Crates - Hollowjack Crate
     [110482] = true, -- Rind-Renewing Pumpkin (Rind-Renewing Pumpkin)
     [116543] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
-    [110481] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
-    [113697] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
-    [113696] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
+    --[110481] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
+    --[113697] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
+    --[113696] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [110483] = true, -- Ghost Lantern (Ghost Lantern)
+
+    -- Crown Crates - Xanmeer Crate
     [113288] = true, -- UC Crown Memento 1 (Mire Drum)
     [113291] = true, -- UC Crown Memento 2 (Vossa-satl)
 
+    -- Crown Crates - Ayleid Crate
+    [149872] = true, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [151489] = true, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [151490] = true, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [151491] = true, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
+    [146752] = true, -- Phial of Clockwork Lubricant (Phial of Clockwork Lubricant)
+
     -------------------------------------
-    -- NON-COMBAT PETS ------------------
+    -- NON-COMBAT PETS
     -------------------------------------
 
     [76364] = true, -- _CRWN_5s
@@ -1046,7 +1895,7 @@ LUIE.DebugAuras = {
     --[79693] = true, -- _CRWN_ChubLoon_Bellyflop (Chub Loon)
 
     -------------------------------------
-    -- OTHER COLLECTIBLES ---------------
+    -- OTHER COLLECTIBLES
     -------------------------------------
 
     [77645] = true, -- Stealth (Pirharri the Smuggler)
@@ -1054,71 +1903,11 @@ LUIE.DebugAuras = {
     [77630] = true, -- Stun For Costumes, 4s (Various Polymorphs)
 
     -------------------------------------
-    -- ENCHANTS -------------------------
+    -- ITEM SETS ------------------------
     -------------------------------------
 
-    -- Jewelry Enchants
-    [46751] = true, -- Increase Bash Damage (Glyph of Bashing)
-    [46741] = true, -- Increase Potion Effect (Glyph of Potion Boost)
-    [46742] = true, -- Reduce Potion Cooldown (Glyph of Potion Speed)
-    [46733] = true, -- Reduce Stamina Cost (Glyph of Reduce Feat Cost)
-    [26750] = true, -- Reduce Magicka Cost (Glyph of Reduce Spell Cost)
-    [46739] = true, -- Bracing Enchant (Glyph of Bracing)
-    [140300] = true, -- Prismatic Reduced Cost (Glyph of Reduced Skill Cost)
-
-    -- Weapon Enchants
-    [28919] = true, -- Life Drain (Glyph of Absorb Health)
-    [28921] = true, -- Life Drain (Glyph of Absorb Health)
-    [46743] = true, -- Absorb Magicka (Glyph of Absorb Magicka)
-    [46744] = true, -- Absorb Magicka (Glyph of Absorb Magicka)
-    [46746] = true, -- Absorb Stamina (Glyph of Asborb Stamina)
-    [46747] = true, -- Absorb Stamina (Glyph of Asborb Stamina)
-    [17906] = true, -- Crusher (Glyph of Crushing)
-    [46749] = true, -- Damaage Health (Glyph of Decrease Health)
-    [17895] = true, -- Fiery Weapon (Glyph of Flame)
-    [17904] = true, -- Befouled Weapon (Glyph of Foulness)
-    [17897] = true, -- Frozen Weapon (Glyph of Frost)
-    [17947] = true, -- Hardening (Glyph of Hardening)
-    [21578] = true, -- Hardening (Glyph of Hardening)
-    [17902] = true, -- Poisoned Weapon (Glyph of Poison)
-    [40337] = true, -- Prismatic Weapon (Glyph of Prismatic Onslaught)
-    [17899] = true, -- Charged Weapon (Glyph of Shock)
-    [17945] = true, -- Weakening (Glyph of Weakening)
-    [17910] = true, -- Weapon Damage (Glyph of Weapon Damage)
-    [21230] = true, -- Berserker (Glyph of Weapon Damage)
-
     -------------------------------------
-    -- STATUS EFFECT PROCS --------------
-    -------------------------------------
-
-    [18084] = true, -- Burning (Fire Status Effect)
-    [130804] = true, -- Burning (Fire Status Effect - Siege)
-    [21925] = true, -- Diseased (Disease Status Effect)
-    [21927] = true, -- Major Defile (Disease Status Effect)
-    [21481] = true, -- Chill (Frost Status Effect)
-    [68368] = true, -- Minor Maim (Frost Status Effect)
-    [95136] = true, -- Chill (Frost Status Effect)
-    [130814] = true, -- Chill (Frost Status Effect - Siege)
-    [130815] = true, -- Minor Maim (Frost Status Effect - Siege)
-    [130816] = true, -- Chill (Frost Status Effect - Siege)
-    [21929] = true, -- Poisoned (Poison Status Effect)
-    [21487] = true, -- Concussion (Shock Status Effect)
-    [68359] = true, -- Minor Maim (Shock Status Effect)
-    [95134] = true, -- Concussion (Shock Status Effect)
-    [130808] = true, -- Concussion (Shock Status Effect - Siege)
-    [130809] = true, -- Minor Maim (Shock Status Effect - Siege)
-    [130810] = true, -- Concussion (Shock Status Effect - Siege)
-    [148800] = true, -- Sundered (Physical Status Effect)
-    [148803] = true, -- Minor Breach (Physical Status Effect)
-    [149573] = true, -- Sundered (Physical Status Effect - Siege)
-    [149576] = true, -- Minor Breach (Physical Status Effect - Siege)
-    [148801] = true, -- Hemorrhaging (Bleed Status Effect)
-    [148808] = true, -- Minor Mangle (Bleed Status Effect)
-    [148797] = true, -- Overcharged (Magic Status Effect)
-    [148798] = true, -- Minor Magickasteal (Magic Status Effect)
-
-    -------------------------------------
-    -- EQUIPMENT ------------------------
+    -- Ability Altering Weapons
     -------------------------------------
 
     -- Asylum Weapons
@@ -1220,7 +2009,6 @@ LUIE.DebugAuras = {
     [147746] = true, -- Major Maim (Vateshran 1H)
     [147828] = true, -- Wrath of Elements (Vateshran Destruction Staff)
     [147843] = true, -- Wrath of Elements (Vateshran Destruction Staff)
-    [147858] = true, -- Wrath of Elements (Vateshran Destruction Staff)
     [149413] = true, -- Wrath of Elements (Vateshran Destruction Staff)
     [147847] = true, -- Wrath of Elements (Vateshran Destruction Staff)
     [147844] = true, -- Wrath of Elements (Vateshran Destruction Staff)
@@ -1234,23 +2022,31 @@ LUIE.DebugAuras = {
     [147873] = true, -- Force Overflow (Vateshran Restoration Staff)
     [147879] = true, -- Force Overflow (Vateshran Restoration Staff)
 
-    -- Monster Helms
+    -------------------------------------
+    -- MONSTER HELMS
+    -------------------------------------
+
+    -- Balorgh
     [111504] = true, -- Balorgh
     [111505] = true, -- Balorgh
 
+    -- Blood Spawn
     [59516] = true, -- Blood Spawn
     [59517] = true, -- Blood Spawn
     [61274] = true, -- Blood Spawn
 
+    -- Bogdan the Nightflame
     [59589] = true, -- Nightflame
     [59590] = true, -- Imperial Prison Item Set
     [59591] = true, -- Bogdan Totem
     [61381] = true, -- Imperial Prison Item Set
 
+    -- Chokethorn
     [81068] = true, -- Chokethorn
     [81069] = true, -- Chokethorn
     [81077] = true, -- Chokethorn
 
+    -- Domihaus
     [97879] = true, -- Domihaus
     [97901] = true, -- Domihaus
     [97900] = true, -- Domihaus
@@ -1259,32 +2055,36 @@ LUIE.DebugAuras = {
     [97896] = true, -- Domihaus
     [97883] = true, -- Domihaus
 
+    -- Earthgore
     [97854] = true, -- Earthgore
     [97855] = true, -- Earthgore
     [97857] = true, -- Earthgore
 
+    -- Grothdarr
     [84492] = true, -- Grothdarr
     [84504] = true, -- Grothdarr
     [84502] = true, -- Grothdarr
 
+    -- Grundwulf
     [126513] = true, -- Grundwulf
     [126529] = true, -- Grundwulf
     [126687] = true, -- Grundwulf
     [126688] = true, -- Grundwulf
     [126528] = true, -- Grundwulf
 
+    -- Iceheart
     [80560] = true, -- Iceheart
     [80561] = true, -- Iceheart
     [80562] = true, -- Iceheart
     [80563] = true, -- Iceheart
 
+    -- Ilambris
     [80524] = true, -- Ilambris
-    [140516] = true, -- Ilambris
-    [80529] = true, -- Ilambris
-    [80526] = true, -- Ilambris
     [80527] = true, -- Ilambris
+    [80526] = true, -- Ilambris
     [80525] = true, -- Ilambris
 
+    -- Infernal Guardian
     [81687] = true, -- Infernal Guardian
     [83405] = true, -- Infernal Guardian
     [83390] = true, -- Infernal Guardian
@@ -1292,6 +2092,7 @@ LUIE.DebugAuras = {
     [83391] = true, -- Infernal Guardian
     [83409] = true, -- Infernal Guardian
 
+    -- Kjalnar's Nightmare
     [133499] = true, -- Kjalnar's Nightmare (Kjalnar's Nightmare)
     [133505] = true, -- Bone (Kjalnar's Nightmare)
     [135094] = true, -- Warning (Kjalnar's Nightmare)
@@ -1301,10 +2102,12 @@ LUIE.DebugAuras = {
     [133506] = true, -- Kjalnar's Nightmare
     [133542] = true, -- Bone Colossus
 
+    -- Kra'gh
     [80564] = true, -- Kra'gh
     [80566] = true, -- Kra'gh
     [80565] = true, -- Kra'gh
 
+    -- Lady Thorn
     [141897] = true, -- Lady Thorn (Lady Thorn)
     [141905] = true, -- Corrupted Blood (Lady Thorn)
     [141972] = true, -- Lady Thorn (Lady Thorn)
@@ -1315,16 +2118,23 @@ LUIE.DebugAuras = {
     [141927] = true, -- Major Maim (Lady Thorn)
     [143335] = true, -- Sanguine Burst Immunity (Lady Thorn)
 
+    -- Lord Warden
     [59585] = true, -- Lord Warden
     [59586] = true, -- Lord Warden
     [59587] = true, -- Lord Warden
 
+    -- Malubeth
     [59564] = true, -- Scourge Harvester (Malubeth)
     [85658] = true, -- Scourge Harvest (Malubeth)
     [59568] = true, -- Scourge Harvest (Malubeth)
     [61275] = true, -- Major Vitality (Malubeth)
     [59573] = true, -- Scourge Harvest (Malubeth)
 
+    -- Maarselok
+    [126940] = true, -- Maarselok (Maarselok)
+    [126941] = true, -- Maarselok (Maarselok)
+
+    -- Maw of the Infernal
     [59507] = true, -- Maw of the Infernal (Maw of the Infernal)
     [48796] = true, -- DUMMY (Maw of the Infernal)
     [59508] = true, -- Banished Cells Item Set (Maw of the Infernal)
@@ -1333,23 +2143,25 @@ LUIE.DebugAuras = {
     [60972] = true, -- Fiery Breath (Maw of the Infernal)
     [60973] = true, -- Fiery Jaws (Maw of the Infernal)
 
-    [126940] = true, -- Maarselok (Maarselok)
-    [126941] = true, -- Maarselok (Maarselok)
-
+    -- Mighty Chudan
     [80482] = true, -- Mighty Chudan (Mighty Chudan)
 
+    -- Molag Kena
     [66792] = true, -- Molag Kena (Molag Kena)
     [66808] = true, -- Molag Kena (Molag Kena)
     [66812] = true, -- Overkill (Molag Kena)
 
+    -- Mother Ciannait
     [133378] = true, -- Mother Ciannait (Mother Ciannait)
     [133381] = true, -- Mother Ciannait (Mother Ciannait)
     [137313] = true, -- Mother Ciannait (Mother Ciannait)
 
+    -- Nerien'eth
     [59592] = true, -- Nerien'eth
     [59594] = true, -- Crpyt of Hearts Item Set
     [59593] = true, -- Lich Crystal
 
+    -- Pirate Skeleton
     [80501] = true, -- Pirate Skeleton
     [98421] = true, -- Pirate Skeleton
     [98419] = true, -- Pirate Skeleton
@@ -1360,6 +2172,7 @@ LUIE.DebugAuras = {
     [80853] = true, -- Major Protection (Pirate Skeleton)
     [85637] = true, -- Minor Defile (Pirate Skeleton)
 
+    -- Selene
     [80599] = true, -- Selene
     [11317] = true, -- Generic Self PermaStun
     [80607] = true, -- Dummy
@@ -1368,11 +2181,13 @@ LUIE.DebugAuras = {
     [80609] = true, -- Dummy
     [80606] = true, -- Selene
 
+    -- Sellistrix
     [80542] = true, -- Sellistrix
     [80545] = true, -- Sellistrix
     [80544] = true, -- Sellistrix
     [80549] = true, -- Sellistrix
 
+    -- Sentinel of Rkugamz
     [81035] = true, -- Sentinel of Rkugamz
     [81036] = true, -- Sentinel of Rkugamz
     [81037] = true, -- Sentinel of Rkugamz
@@ -1380,6 +2195,7 @@ LUIE.DebugAuras = {
     [81041] = true, -- Sentinel of Rkugamz
     [133239] = true, -- Sentinel of Rkugamz
 
+    -- Shadowrend
     [80951] = true, -- Shadowrend
     [80955] = true, -- Forward Charge
     [80954] = true, -- Shadowrend Summon
@@ -1388,13 +2204,16 @@ LUIE.DebugAuras = {
     [80989] = true, -- Shadowrend
     [81034] = true, -- Shadowrend
 
+    -- Slimecraw
     [80481] = true, -- Minor Berserk (Slimecraw)
 
+    -- Spawn of Mephala
     [59489] = true, -- Spawn of Mephala
     [59497] = true, -- Spawn of Mephala
     [59498] = true, -- Mephala's Web
     [59499] = true, -- Mephala's Web
 
+    -- Stonekeeper
     [116838] = true, -- Stonekeeper (Stonekeeper)
     [116839] = true, -- Charging (Stonekeeper)
     [116846] = true, -- Stonekeeper (Stonekeeper)
@@ -1405,27 +2224,32 @@ LUIE.DebugAuras = {
     [116880] = true, -- Stonekeeper (Stonekeeper)
     [116881] = true, -- Stonekeeper (Stonekeeper)
 
+    -- Stone Husk
     [142977] = true, -- Stone Husk (Stone Husk)
     [143032] = true, -- Stone Husk (Stone Husk)
     [143077] = true, -- Stone Husk (Stone Husk)
     [145199] = true, -- Husk Drain (Stone Husk)
     [144908] = true, -- Stone Husk (Stone Husk)
 
+    -- Stormfist
     [80520] = true, -- Stormfist
     [80523] = true, -- Stormfist
     [80522] = true, -- Stormfist
     [80521] = true, -- Stormfist
 
+    -- Swarm Mother
     [80592] = true, -- Swarm Mother
     [84419] = true, -- Swarm Mother Mask
     [80593] = true, -- Swarm Mother Mask
 
+    -- Symphony of Blades
     [117110] = true, -- Symphony of Blades (Symphony of Blades)
     [117111] = true, -- Meridia's Favor (Symphony of Blades)
     [117118] = true, -- Meridia's Favor (Symphony of Blades)
     [117119] = true, -- Meridia's Favor (Symphony of Blades)
     [140092] = true, -- Meridia's No More Favor (Symphony of Blades)
 
+    -- The Engine Guardian
     [59521] = true, -- Engine Guardian
     [60484] = true, -- Sphere Groundrise
     [59522] = true, -- Engine Guardian
@@ -1436,25 +2260,30 @@ LUIE.DebugAuras = {
     [59541] = true, -- Healthy Engine Guardian
     [59543] = true, -- Healthy Engine Guardian
 
+    -- The Troll King
     [80503] = true, -- The Troll King
     [80504] = true, -- The Troll King
 
+    -- Thurvokun
     [102089] = true, -- Thurvokun
     [102094] = true, -- Thurvokun
     [102097] = true, -- Thurvokun
     [102093] = true, -- Thurvokun
     [102095] = true, -- Thurvokun
 
+    -- Tremorscale
     [80513] = true, -- Tremorscale
     [80517] = true, -- Tremorscale
     [80865] = true, -- Tremorscale
     [80866] = true, -- Tremorscale
 
+    -- Valkyn Skoria
     [59595] = true, -- Valkyn Skoria
     [137979] = true, -- Valkyn Skoria
     [59596] = true, -- Valkyn Skoria
     [61273] = true, -- Valkyn Skoria
 
+    -- Velidreth
     [80483] = true, -- Velidreth
     [80487] = true, -- Hoarvor Mask
     [80488] = true, -- Hoarvor Mask
@@ -1465,15 +2294,20 @@ LUIE.DebugAuras = {
     [80859] = true, -- Hoarvor Mask
     [80863] = true, -- Hoarvor Mask
 
+    -- Vykosa
     [111352] = true, -- Vykosa
     [111354] = true, -- Major Cowardice
 
+    -- Zaan
     [102125] = true, -- Zaan
     [102136] = true, -- Zaan
     [102142] = true, -- Zaan
     [110997] = true, -- Zaan Buffer
 
+    -------------------------------------
     -- Mythic Items
+    -------------------------------------
+
     [136347] = true, -- Malacath's Band of Brutality (Malacath's Band of Brutality)
     [139526] = true, -- Snow Treaders (Snow Treaders)
     [139552] = true, -- Snow Treaders (Snow Treaders)
@@ -1484,6 +2318,10 @@ LUIE.DebugAuras = {
     [136116] = true, -- Thrassian Stranglers (Thrassian Stranglers)
     [136123] = true, -- Sload's Call (Thrassian Stranglers)
     [136479] = true, -- Thrassian Stranglers (Thrassian Stranglers)
+
+    -------------------------------------
+    -- Armor Sets
+    -------------------------------------
 
     -- Crafted Sets
     [29124] = true, -- Ashen Grip
@@ -1532,9 +2370,8 @@ LUIE.DebugAuras = {
 
     [71670] = true, -- Morkuldin (Morkuldin)
     [71671] = true, -- Morkuldin (Morkuldin)
-    [71678] = true, -- Light Attack (Morkuldin)
-    [71679] = true, -- Cleave (Morkuldin)
-
+    [71678] = true, -- Morkuldin (Morkuldin)
+    [71679] = true, -- Morkuldin Cleave (Morkuldin)
 
     [79103] = true, -- Pelinal's Aptitude (Pelinal's)
 
@@ -1599,7 +2436,7 @@ LUIE.DebugAuras = {
     [49236] = true, -- Whitestrake's Retribution (Whitestrake's)
 
     [106775] = true, -- Adept Rider (Adept Rider's)
-    [106776] = true, -- Major Evasion (Adept Rider's)
+    --[106776] = true, -- Major Expedition (Adept Rider's)
 
     [106803] = true, -- Nocturnal's Favor (Nocturnal's Favored)
     [106804] = true, -- Nocturnal's Heal (Nocturnal's Favored)
@@ -1646,7 +2483,6 @@ LUIE.DebugAuras = {
     [134103] = true, -- Dauntless Combatant (Dauntless Combatant's)
     [134104] = true, -- Dauntless Combatant (Dauntless Combatant's)
     [134119] = true, -- Dauntless Combatant (Dauntless Combatant's)
-    [134254] = true, -- Winded (Dauntless Combatant's)
 
     [134090] = true, -- Unchained Aggressor (Unchained Aggressor's)
     [134094] = true, -- Major Berserk (Unchained Aggressor's)
@@ -1766,7 +2602,6 @@ LUIE.DebugAuras = {
     [147140] = true, -- Voidcaller (of the Voidcaller)
 
     -- Overland Sets (Medium)
-
     [71102] = true, -- Briarheart
     [71106] = true, -- Briarheart
     [71107] = true, -- Briarheart
@@ -1857,7 +2692,6 @@ LUIE.DebugAuras = {
     [147145] = true, -- Witch-Knight's Defiance (Witch-Knight's)
 
     -- Overland Sets (Heavy)
-
     [32815] = true, -- Meridia's Blessed Armor (Blessed)
     [34711] = true, -- Meridia's Blessed Armor (Blessed)
 
@@ -1936,7 +2770,6 @@ LUIE.DebugAuras = {
     [147221] = true, -- Radiant Bastion (of the Radiant Bastion)
 
     -- Dungeon Sets (Light)
-
     [60418] = true, -- Burning Spellweave
     [61459] = true, -- Burning Spellweave
     [60419] = true, -- Burning Spellweave
@@ -2055,7 +2888,6 @@ LUIE.DebugAuras = {
     [142653] = true, --Shock Weakness (Elemental Catalyst)
 
     -- Dungeon Sets (Medium)
-
     [85607] = true, -- Strength of the Automaton (Automaton's)
 
     [29105] = true, -- Barkskin
@@ -2166,7 +2998,6 @@ LUIE.DebugAuras = {
 
     [141203] = true, -- Unleashed Terror (Unleashed)
     [141204] = true, -- Unleashed Terror (Unleashed)
-    [141249] = true, -- Unleashed Terror Cooldown (Unleashed)
 
     [142686] = true, -- Kraglen's Howl (Kraglen's)
     [142687] = true, -- Kraglen's Howl (Kraglen's)
@@ -2179,7 +3010,6 @@ LUIE.DebugAuras = {
     [142713] = true, -- Kraglen CD (Kraglen's)
 
     -- Dungeon Sets (Heavy)
-
     [102008] = true, -- Curse of Doylemish
     [102023] = true, -- Curse of Doylemish
 
@@ -2304,7 +3134,6 @@ LUIE.DebugAuras = {
     [142660] = true, -- Arkasis's Genius (Arkasis)
 
     -- Trial Sets (Hel Ra Citadel)
-
     [50971] = true, -- Berserking Warrior (Advancing Yokeda)
     [50978] = true, -- Berserking Warrior (Advancing Yokeda)
 
@@ -2320,7 +3149,6 @@ LUIE.DebugAuras = {
     [127236] = true, -- Eternal Warrior (Eternal Yokeda)
 
     -- Trial Sets (Aetherian Archive)
-
     [51314] = true, -- Destructive Mage (Aether ... of Destruction)
     [51315] = true, -- Destructive Mage (Aether ... of Destruction)
     [51320] = true, -- Mage Destruction Bomb (Aether ... of Destruction)
@@ -2336,7 +3164,6 @@ LUIE.DebugAuras = {
     [81519] = true, -- Minor Vulnerability (of the Infallible Aether)
 
     -- Trial Sets (Sanctum Ophidia)
-
     [51132] = true, -- Poisonous Serpent (Ophidian ... of Venom)
     [51241] = true, -- Poisonous Serpent (Ophidian ... of Venom)
 
@@ -2352,7 +3179,6 @@ LUIE.DebugAuras = {
     [81522] = true, -- Serpent Stamina (of the Vicious Ophidian)
 
     -- Trial Sets (Maw of Lorkhaj)
-
     [75797] = true, -- Moondancer (Moondancer)
     [75801] = true, -- Lunar Blessing (Moondancer)
     [75804] = true, -- Shadow Blessing (Moondancer)
@@ -2375,7 +3201,6 @@ LUIE.DebugAuras = {
     [76564] = true, -- Minor Force (of Twilight Remedy)
 
     -- Trial Sets (Halls of Fabrication)
-
     [93443] = true, -- Automated Defense (Automated Defense)
     [93444] = true, -- Major Aegis (Automated Defense)
 
@@ -2389,7 +3214,6 @@ LUIE.DebugAuras = {
     [93442] = true, -- Major Slayer (War Machine)
 
     -- Trial Sets (Cloudrest)
-
     [107117] = true, -- Vestment of Olirime (Olorime's)
     [107141] = true, -- Vestment of Olirime (Olorime's)
     [109994] = true, -- Major Courage (Olorime's)
@@ -2522,7 +3346,6 @@ LUIE.DebugAuras = {
     [79471] = true, -- Venom Heal
 
     -- Cyrodiil Sets (Light)
-
     [32802] = true, -- Almalexia's Mercy (of Almalexia's Mercy)
     [34605] = true, -- Almalexia's Mercy (of Almalexia's Mercy)
 
@@ -2546,7 +3369,6 @@ LUIE.DebugAuras = {
     [47351] = true, -- Buffer of the Swift (of the Swift)
 
     -- Cyrodiil Sets (Medium)
-
     [32835] = true, -- Crest of Cyrodiil (of Cyrodiil's Ward)
     [34876] = true, -- Major Defile (of Cyrodiil's Ward)
 
@@ -2579,7 +3401,6 @@ LUIE.DebugAuras = {
     [47360] = true, -- Vengeance Leech (of Vengeance Leech)
 
     -- Cyrodiil Sets (Heavy)
-
     [32824] = true, -- Affliction (Afflicted)
     [34787] = true, -- Affliction (Afflicted)
 
@@ -2700,7 +3521,6 @@ LUIE.DebugAuras = {
     [147462] = true, -- Pearls of Ehlnofey (Pearls of Ehlnofey)
 
     -- Disguises
-
     [46281] = true, -- Necromancer Disguise (Bloodthorn Disguse)
     [31766] = true, -- Disguised (Colovian Uniform)
     [48429] = true, -- Gold Coast Courier Uniform (Courier Uniform)
@@ -2730,498 +3550,8 @@ LUIE.DebugAuras = {
     [50177] = true, -- Vanguard Uniform (Vanguard Uniform)
     [43722] = true, -- First Auridon Marine Disguise (Vulkhel Guard Marine Disguise)
 
-    -------------------------------------
-    -- CHAMPION POINTS ------------------
-    -------------------------------------
-
-    -- Craft
-    [142205] = true, -- Breakfall
-    --[142232] = true, -- Soul Reservoir
-    --[142206] = true, -- Wanderer
-    --[142206] = true, -- Wanderer
-    --[142207] = true, -- Fortune's Favor
-    --[152371] = true, -- Fortune's Favor
-    --[142210] = true, -- Haggler
-    [142213] = true, -- Friends in Low Places
-    [152360] = true, -- Friends in Low Places
-    [142203] = true, -- Fleet Phantom
-    [142204] = true, -- Out of Sight
-    [142208] = true, -- Inspiration Boost
-    --[142211] = true, -- Steadfast Enchantment
-    --[152367] = true, -- Steadfast Enchantment
-    --[142224] = true, -- Meticulous Disassembly
-    --[142225] = true, -- Meticulous Disassembly
-    --[142226] = true, -- Meticulous Disassembly
-    --[142227] = true, -- Meticulous Disassembly
-    [142218] = true, -- Treasure Hunter
-    --[142217] = true, -- Master Gatherer
-    --[152372] = true, -- Master Gatherer
-    [149286] = true, -- Gifted Rider
-    [142228] = true, -- Fade Away
-    --[152310] = true, -- Fade Away
-    --[142215] = true, -- Infamous
-    [142219] = true, -- Shadowstrike
-    [151862] = true, -- Shadowstrike
-    --[151861] = true, -- Shadowstrike
-    [151860] = true, -- Shadowstrike
-    [151859] = true, -- Clairvoyance Fx
-    [142235] = true, -- Cutpurse's Art
-    [142220] = true, -- Plentiful Harvest
-    --[142236] = true, -- Homemaker
-
-    [142230] = true, -- Rationer
-    --[152373] = true, -- Rationer
-    [142125] = true, -- Steed's Blessing
-    [142123] = true, -- Sustaining Shadows
-    --[142121] = true, -- Professional Upkeep
-    --[152369] = true, -- Professional Upkeep
-
-    -- Warfare
-    [149305] = true, -- Eldritch Insight
-    [141898] = true, -- Precision
-    [147888] = true, -- Tireless Discipline
-    --[149439] = true, -- Blessed
-    [141998] = true, -- Soothing Tide
-    [142000] = true, -- Focused Mending
-    [142002] = true, -- Swift Renewal
-    [141929] = true, -- Quick Recovery
-    [141901] = true, -- Preparation
-    [149273] = true, -- Elemental Aegis
-    [149274] = true, -- Hardy
-    [141900] = true, -- Resilience
-    [141895] = true, -- Piercing
-    [141931] = true, -- War Mage
-    [149276] = true, -- Battle Mastery
-    [141930] = true, -- Mighty
-    --[149275] = true, -- Flawless Ritual
-    [141999] = true, -- Deadly Aim
-    [141997] = true, -- Biting Aura
-    [142001] = true, -- Thaumaturge
-    [141899] = true, -- Fighting Finesse
-    [142006] = true, -- Backstabber
-    [141941] = true, -- Wrathful Strikes
-    [142007] = true, -- Reaving Blows
-    [142008] = true, -- Reaving Blows
-    [142010] = true, -- Occult Overload
-    [142011] = true, -- Occult Overload
-    [141942] = true, -- Rejuvenator
-    [59526] = true, -- Foresight
-    [59530] = true, -- Foresight
-    [142003] = true, -- Cleansing Revival
-    --[142005] = true, -- Cleansing Revival
-    [151749] = true, -- Duelist's Rebuff
-    [151748] = true, -- Unassailable
-    [151750] = true, -- Enduring Resolve
-    [60229] = true, -- Riposte
-    [60230] = true, -- Riposte
-    [64067] = true, -- Reinforced
-    [135653] = true, -- Reinforced
-    [64079] = true, -- Bulwark
-    [60413] = true, -- Last Stand
-    [65133] = true, -- Major Heroism
-    [142012] = true, -- Cutting Defense
-    [142013] = true, -- Cutting Defense
-    [141744] = true, -- Arcane Supremacy
-    [146960] = true, -- Untamed Aggression
-    [141773] = true, -- Endless Endurance
-
-    -- Fitness
-    [142079] = true, -- Sprinter
-    [142083] = true, -- Hasty
-    [142080] = true, -- Tireless Guardian
-    [142081] = true, -- Savage Defense
-    [142091] = true, -- Bashing Brutality
-    [142088] = true, -- Nimble Protector
-    [142086] = true, -- Fortification
-    [142077] = true, -- Tumbling
-    [149624] = true, -- Defiance
-    --[149311] = true, -- Hero's Vigor
-    --[142096] = true, -- Mystic Tenacity
-    [142089] = true, -- Piercing Gaze
-    --[142109] = true, -- Tempered Soul
-    [142100] = true, -- Spirit Mastery
-
-    [142111] = true, -- On Guard
-    [142115] = true, -- Rousing Speed
-    [142092] = true, -- Expert Evasion
-    --[142093] = true, -- Expert Evasion
-    [151113] = true, -- Expert Evasion
-
-    [142099] = true, -- Hardened
-    [142097] = true, -- Peace of Mind
-    [142094] = true, -- Slippery
-    [145804] = true, -- Slippery
-    [142095] = true, -- Slippery
-    --[149282] = true, -- Unchained
-    [98316] = true, -- Unchained
-    [142110] = true, -- Juggernaut
-    --[142102] = true, -- Survival Instincts
-    [149283] = true, -- Shield Master
-    [142090] = true, -- Bastion
-    [142113] = true, -- Arcane Alacrity
-    [141995] = true, -- Stategic Reserve
-    [141991] = true, -- Siphoning Spells
-    [141992] = true, -- Siphoning Spells
-    [141993] = true, -- Bloody Renewal
-    [141994] = true, -- Bloody Renewal
-    [142034] = true, -- Boundless Vitality
-    [142035] = true, -- Ironclad
-    [142074] = true, -- Rejuvenation
-
-    ---- OLD CHAMPION POINTS           ----
-    ---- TODO: REMOVE AT SOME PT       ----
-    ---- KEEP FOR NOW TO TRACK REMOVAL ----
-
-    -- The Steed
-    --[59120] = true, -- Medium Armor Focus (The Steed)
-    --[92423] = true, -- Ironclad (The Steed)
-    --[62760] = true, -- Spell Shield (The Steed)
-    --[60384] = true, -- Resistant (The Steed)
-    --[60407] = true, -- Invigorating Bash (The Steed 10 - Invigorating Bash)
-    --[98313] = true, -- Invigorating Bash (The Steed 10 - Invigorating Bash)
-    --[63852] = true, -- Phase (The Steed 30 - Phase)
-    --[98294] = true, -- Phase (The Steed 30 - Phase)
-    --[61660] = true, -- Resilient (The Steed 75 - Resilient)
-    --[61661] = true, -- Resilient (The Steed 75 - Resilient)
-
-    -- The Lady
-    --[60502] = true, -- Light Armor Focus (The Lady)
-    --[63850] = true, -- Thick Skinned (The Lady)
-    --[63844] = true, -- Hardy (The Lady)
-    --[63843] = true, -- Elemental Defender (The Lady)
-    --[63109] = true, -- Spell Absorption (The Lady 10 - Spell Absorption)
-    --[63110] = true,  -- Spell Absorption (The Lady 10 - Spell Absorption)
-    --[60370] = true, -- Critical Leech (The Lady 75 - Critical Leech)
-    --[60371] = true, -- Critical Leech (The Lady 75 - Critical Leech)
-    --[59286] = true, -- Unchained (The Lady 120 - Unchained)
-
-    -- The Lord
-    --[60624] = true, -- Heavy Armor Focus (The Lord)
-    --[59948] = true, -- Bastion (The Lord)
-    --[59953] = true, -- Expert Defender (The Lord)
-    --[63851] = true, -- Quick Recovery (The Lord)
-    --[59300] = true, -- Field Physician (The Lord 10 - Field Physician)
-    --[98405] = true, -- Field Physician (The Lord 10 - Field Physician)
-    --[59582] = true, -- Infusion (The Lord 30 - Infusion)
-    --[98404] = true, -- Infusion (The Lord 30 - Infusion)
-    --[60427] = true, -- Revival (The Lord 75 - Revival)
-    --[98414] = true, -- Revival (The Lord 75 - Revival)
-    --[59893] = true, -- Determination (The Lord 120 - Determination)
-    --[61015] = true, -- Determination (The Lord 120 - Determination)
-
-    -- The Tower
-    --[58899] = true, -- Bashing Focus (The Tower)
-    --[64077] = true, -- Sprinter (The Tower)
-    --[92425] = true, -- Siphoner (The Tower)
-    --[92428] = true, -- Siphoner (The Tower)
-    --[92431] = true, -- Warlord (The Tower)
-    --[60398] = true, -- Ensnare (The Tower 10 - Ensnare)
-    --[98308] = true, -- Ensnare (The Tower 10 - Ensnare)
-    --[60494] = true, -- Inspiration Boost (The Tower 30 - Inspiration Boost)
-    --[62516] = true, -- Mara's Gift (The Tower 75 - Mara's Gift)
-    --[62518] = true, -- Mara's Gift (The Tower 75 - Mara's Gift)
-    --[62274] = true, -- War Mount (The Tower 120 - War Mount)
-
-    -- The Lover
-    --[59346] = true, -- Mooncalf (The Lover)
-    --[59577] = true, -- Arcanist (The Lover)
-    --[60374] = true, -- Healthy (The Lover)
-    --[63854] = true, -- Tenacity (The Lover)
-    --[63663] = true, -- Plentiful Harvest (The Lover 10 - Plentiful Harvest)
-    --[63875] = true, -- Synergizer (The Lover 30 - Synergizer)
-    --[63878] = true, -- Synergizer (The Lover 30 - Synergizer)
-    --[60555] = true, -- Master Gatherer (The Lover 75 - Master Gatherer)
-    --[60560] = true, -- Windrunning (The Lover 125 - Windrunning)
-
-    -- The Shadow
-    --[59298] = true, -- Befoul (The Shadow)
-    --[61548] = true, -- Shade (The Shadow)
-    --[60649] = true, -- Shadow Ward (The Shadow)
-    --[63863] = true, -- Tumbling (The Shadow)
-    --[56630] = true, -- Fortune Seeker (The Shadow 10 - Fortune Seeker)
-    --[60501] = true, -- Merchant Favored (The Shadow 30 - Merchant Favored)
-    --[60566] = true, -- Treasure Hunter (The Shadow 75 - Treasure Hunter)
-    --[61426] = true, -- Shadowstrike (The Shadow 120 - Shadowstrike)
-    --[64244] = true, -- Shadowstrike (The Shadow 120 - Shadowstrike)
-    --[64245] = true, -- Shadowstrike (The Shadow 120 - Shadowstrike)
-    --[140520] = true, -- Shadowstrike (The Shadow 120 - Shadowstrike)
-    --[77773] = true, -- Clairvoyance Fx (The Shadow 120 - Shadowstrike)
-
-    -- The Apprentice
-    --[63848] = true, -- Elemental Expert (The Apprentice)
-    --[61555] = true, -- Spell Erosion (The Apprentice)
-    --[61680] = true, -- Elfborn (The Apprentice)
-    --[59630] = true, -- Blessed (The Apprentice)
-    --[63150] = true, -- Vengeance (The Apprentice 10 - Vengeance)
-    --[63152] = true, -- Vengeance Count (The Apprentice 10 - Vengeance)
-    --[63151] = true, -- Vengeance (The Apprentice 10 - Vengeance)
-    --[59626] = true, -- Spell Precision (The Apprentice 30 - Spell Precision)
-    --[63111] = true, -- Arcane Well (The Apprentice 120 - Arcane Well)
-    --[63114] = true, -- Arcane Well (The Apprentice 120 - Arcane Well)
-    --[88784] = true, -- Arcane Well (The Apprentice 120 - Arcane Well)
-
-    -- The Atronach
-    --[92424] = true, -- Physical Weapon Expert (The Atronach)
-    --[60662] = true, -- Shattering Blows (The Atronach)
-    --[92134] = true, -- Master-at-Arms Expert (The Atronach)
-    --[60503] = true, -- Staff Expert (The Atronach)
-    --[63104] = true, -- Retaliation (The Atronach 10 - Retaliation)
-    --[63106] = true, -- Retaliation (The Atronach 10 - Retaliation)
-    --[63879] = true, -- Butcher (The Atronach 75 - Butcher)
-    --[60486] = true, -- Tactician (The Atronach 120 - Tactician)
-    --[63108] = true, -- Off-Balance (The Atronach 120 - Tactician)
-
-    -- The Ritual
-    --[63847] = true, -- Thaumaturge (The Ritual)
-    --[59105] = true, -- Precise Strikes (The Ritual)
-    --[61546] = true, -- Piercing (The Ritual)
-    --[63868] = true, -- Mighty (The Ritual)
-    --[63099] = true, -- Opportunist (The Ritual 10 - Opportunist)
-    --[98307] = true, -- Opportunist (The Ritual 10 - Opportunist)
-    --[100408] = true, -- Opportunist (The Ritual 10 - Opportunist)
-    --[59418] = true, -- Perfect Strike (The Ritual 30 - Perfect Strike)
-    --[63880] = true, -- Exploiter (The Ritual 75 - Exploiter)
-
-    -------------------------------------
-    -- PLAYER EFFECTS -------------------
-    -------------------------------------
-
-    -- ROLL DODGE
-    [28549] = true, -- Roll Dodge
-    [29721] = true, -- Immobilize Immunity
-    [119068] = true, -- Immobilize Immunity
-    [69143] = true, -- Dodge Fatigue
-
-    -- CROUCH
-    [20299] = true, -- Sneak
-    [20304] = true, -- Crouch Slow
-    [76463] = true, -- Clairvoyance Fx
-    [20309] = true, -- Hidden
-    [20307] = true, -- Trying to Hide
-    [20301] = true, -- Crouch Drain
-    [38127] = true, -- Remove Sprint
-    [29177] = true, -- Flee
-    [64420] = true, -- Remove Pet Stealth
-    [26245] = true, -- Slam Stun
-    [72902] = true, -- Hidden
-
-    -- MISC
-    [15594] = true, -- Bonus vs off Balance
-    [28541] = true, -- Swap Weapons
-    [25166] = true, -- Clumsy
-    [10950] = true, -- Fall Snare
-    [6811] = true, -- Recall
-    [31221] = true, -- Skyshard Collect
-    [32346] = true, -- Skyshard Collect
-    [63601] = true, -- ESO Plus Member
-    [47270] = true, -- Ritual of Mara
-
-    -- MOUNT
-    [36010] = true, -- Mount Up
-    [37059] = true, -- Mount Up
-    [37139] = true, -- Mount Up
-    [36434] = true, -- Mount Up
-    [42399] = true, -- Remove on Dismount
-    [36432] = true, -- Dismount
-    [36417] = true, -- Dismount
-    [36419] = true, -- Dismount
-    [46697] = true, -- Pause Mount Stamina Regen
-    [115607] = true, -- Hard Dismount
-
-    -- PASSENGER MOUNT
-    [140996] = true, -- Mount Up Passenger
-    [141013] = true, -- Mount Up
-    [141012] = true, -- Mount Up
-    [141001] = true, -- Mount Up
-    [141011] = true, -- Remove on Dismount
-    [141008] = true, -- Dismount
-    [141002] = true, -- Dismount
-    [140998] = true, -- Dismount
-    [141003] = true, -- Pause Mount Stamina Regen
-    [141004] = true, -- Hard Dismount
-
-    -- BLOCK
-    --[86311] = true, -- Block FX
-    [86310] = true, -- Stagger
-    [86309] = true, -- Stun
-    [86312] = true, -- Stun
-    [45902] = true, -- Off-Balance
-
-    -- BASH
-    [55146] = true, -- Interrupt Bonus
-    [21970] = true, -- Bash
-    [21973] = true, -- Bash
-    [21972] = true, -- Stagger
-    [21971] = true, -- Bash Stun
-    [48416] = true, -- Uber Attack
-    [45982] = true, -- Bash Stun
-
-    -- OFF-BALANCE EXPLOIT
-    [20172] = true, -- Off-Balance Exploit
-    [18793] = true, -- Off-Balance Exploit
-    [16825] = true, -- Off-Balance Exploit
-
-    -- BREAK FREE
-    [16565] = true, -- Break Free
-    [46330] = true, -- Brace Cooldown
-
-    -- MUNDUS STONE EVENTS
-    [14031] = true, -- Mundus Use
-    [13940] = true, -- Boon: The Warrior
-    [13943] = true, -- Boon: The Mage
-    [13974] = true, -- Boon: The Serpent
-    [13975] = true, -- Boon: The Thief
-    [13976] = true, -- Boon: The Lady
-    [13977] = true, -- Boon: The Steed
-    [13978] = true, -- Boon: The Lord
-    [13979] = true, -- Boon: The Apprentice
-    [13980] = true, -- Boon: The Ritual
-    [13981] = true, -- Boon: The Lover
-    [13982] = true, -- Boon: The Atronach
-    [13984] = true, -- Boon: The Shadow
-    [13985] = true, -- Boon: The Tower
-
-    -- DEATH/RESURRECTION
-    [14644] = true, -- Revive (Death Dialog)
-    [14646] = true, -- Recently Revived
-    [26770] = true, -- Resurrect
-    [55406] = true, -- Resurrect Trigger
-    [55400] = true, -- Magicka Restore
-    [55401] = true, -- Magicka Restore
-    [123969] = true, -- Lesser Reincarnate
-    [123970] = true, -- Lesser Reincarnate
-
-    -- BASIC ATTACKS
-    --[16593] = true, -- Melee Snare
-    [64842] = true, -- Critter Smash
-    [48532] = true, -- Charge Snare
-    [41952] = true, -- Cower
-    [55080] = true, -- Pet Hidden
-    [16566] = true, -- CC Immunity
-    [28301] = true, -- Crowd Control Immunity
-    [38117] = true, -- Crowd Control Immunity
-
-    -- TAUNT EFFECTS
-    [38254] = true, -- Taunt
-    [52790] = true, -- Taunt Counter
-    [38541] = true, -- Taunt
-    [38542] = true, -- Taunt
-
-    -- DISGUISE EFFECTS
-    [50602] = true, -- Disguised
-    [26237] = true, -- Disguise Warning Area
-    [26238] = true, -- Disguise Warning Area
-    [25584] = true, -- Discovered
-    [25582] = true, -- Remove Disguise
-    [26472] = true, -- Remove Disguise
-    [25602] = true, -- Suspicious
-    [25603] = true, -- Begin
-    [25604] = true, -- Interact Complete
-    [26223] = true, -- Remove Suspicious
-    --[13371] = true, -- Acting Suspicious
-    [13372] = true, -- Spotted
-
-    -- MISC
-    [37079] = true, -- remove
-    [20311] = true, -- Remove Sprint
-    [20303] = true, -- Remove Sprint
-    [70379] = true, -- Remove
-    [70385] = true, -- Remove
-    [38519] = true, -- Hiding
-    [39046] = true, -- Add Guild Rep
-    [62797] = true, -- Weapon Swap Cooldown Timer
-    [62798] = true, -- Weapon Swap Cooldown Timer
-    [61874] = true, -- Swap to Weapon Set 1
-    [61875] = true, -- Swap to Weapon Set 2
-    [85701] = true, -- Dueling Flag
-    --[2727] = true, -- Off-Balance
-    [134599] = true, -- Off Balance Immunity
-    --[132831] = true, -- Major Vulnerability Invulnerability
-    [21263] = true, -- Ayleid Health Bonus
-    [100862] = true, -- Fortified Ayleid Health Bonus
-    [45819] = true, -- Remove Werevamp
-    [51064] = true, -- Weakness
-    [39405] = true, -- Weakness
-    --[105194] = true, -- RF Combat Trigger
-
-    -- DEATH ACHIEVE CHECK (VETERAN DUNGEONS)
-    [55883] = true, -- Death Achieve Check
-    [55884] = true, -- Death Achieve Check
-    [58955] = true, -- Death Achieve Check
-    [58963] = true, -- Death Achieve Check
-    [66271] = true, -- Death Achieve Check
-    [66272] = true, -- Death Achieve Check
-    [75612] = true, -- Death Achieve Check
-    [75615] = true, -- Death Achieve Check
-    [76264] = true, -- Death Achieve Check
-    [76265] = true, -- Death Achieve Check
-    [55883] = true, -- Death Achieve Check
-    [55884] = true, -- Death Achieve Check
-    [58955] = true, -- Death Achieve Check
-    [58963] = true, -- Death Achieve Check
-    [66271] = true, -- Death Achieve Check
-    [66272] = true, -- Death Achieve Check
-    [75612] = true, -- Death Achieve Check
-    [75615] = true, -- Death Achieve Check
-    [76264] = true, -- Death Achieve Check
-    [76265] = true, -- Death Achieve Check
-
-    -- PET EFFECTS
-    [28609] = true, -- Dummy Target Setter
-    [43958] = true, -- Player Pet Defenses
-    [70116] = true, -- Player Pet Battle Spirit
-    [71904] = true, -- Player Pet Speed
-    [62197] = true, -- Player Pet Critical Chance
-    [43963] = true, -- Player Pet Threat
-    [62201] = true, -- Taunt
-    [63795] = true, -- Taunt
-    [63794] = true, -- Taunt
-    [126366] = true, -- Pet Battle Spirit
-
-    -- HOUSING
-    [89978] = true, -- Target Skeleton (Target Dummy)
-    [89977] = true, -- Target Skeleton (Target Dummy)
-    --[10298] = true, -- Boss (Target Dummy)
-    --[15954] = true, -- Boss (Target Dummy)
-    [89445] = true, -- Create Blacksmithing Set Stati (Attunable Blacksmithing Station)
-    [89469] = true, -- 68235 Stun (Attunable Blacksmithing Station)
-    [89643] = true, -- Create Clothier Set Stati (Attunable Clothier Station)
-    [89645] = true, -- 68235 Stun (Attunable Clothier Station)
-    [105215] = true, -- Create Jewelry Set Station (Attunable Jewelry Crafting Station)
-    [105217] = true, -- 68235 Stun (Attunable Jewelry Crafting Station)
-    [89652] = true, -- Create Woodworking Set Stati (Attunable Woodworking Station)
-    [89654] = true, -- 68235 Stun (Attunable Woodworking Station)
-
-    -- HOUSING TARGET DUMMY
-    [120010] = true, -- Major Breach (Target Iron Atronach, Trial)
-    [120019] = true, -- Minor Breach (Target Iron Atronach, Trial)
-    [148976] = true, -- Major Vulnerability (Target Iron Atronach, Trial)
-    [120030] = true, -- Minor Vulnerability (Target Iron Atronach, Trial)
-    [148977] = true, -- Minor Brittle (Target Iron Atronach, Trial)
-    [149012] = true, -- Minor Magickasteal (Target Iron Atronach, Trial)
-    [120016] = true, -- Joe Buff Granter (Target Iron Atronach, Trial)
-    [120007] = true, -- Crusher (Target Iron Atronach, Trial)
-    [120011] = true, -- Engulfing Flames (Target Iron Atronach, Trial)
-    [120018] = true, -- Roar of Alkosh (Target Iron Atronach, Trial)
-    [120014] = true, -- Off Balance (Target Iron Atronach, Trial)
-
-    [120017] = true, -- Minor Sorcery (Target Iron Atronach, Trial)
-    [120023] = true, -- Minor Brutality (Target Iron Atronach, Trial)
-    [120028] = true, -- Minor Prophecy (Target Iron Atronach, Trial)
-    [120029] = true, -- Minor Savagery (Target Iron Atronach, Trial)
-    [120008] = true, -- Minor Berserk (Target Iron Atronach, Trial)
-    [120015] = true, -- Major Courage (Target Iron Atronach, Trial)
-    [120020] = true, -- Minor Toughness (Target Iron Atronach, Trial)
-    [120021] = true, -- Aggressive Horn (Target Iron Atronach, Trial)
-    [120025] = true, -- Aggressive Horn (Target Iron Atronach, Trial)
-    [120013] = true, -- Major Force (Target Iron Atronach, Trial)
-    [120024] = true, -- Worm's Raiment (Target Iron Atronach, Trial)
-    [120026] = true, -- Hircine's Veneer (Target Iron Atronach, Trial)
-
-    [121572] = true, -- Spear Shards (Target Iron Atronach, Trial)
-    [121628] = true, -- Spear Shards (Target Iron Atronach, Trial)
-    [121629] = true, -- Spear Shards (Target Iron Atronach, Trial)
-    [121630] = true, -- Spear Shards (Target Iron Atronach, Trial)
+    --[80204] = true, -- Monk's Disguise (Monk's Disguise)
+    --[82631] = true, -- Monk's Disguise Timer (Monk's Disguise)
 
     -------------------------------------
     -- WORLD EVENTS ---------------------
@@ -3443,11 +3773,9 @@ LUIE.DebugAuras = {
     [70735] = true, -- Shifting Standard (Shifting Standard)
     [32960] = true, -- Shifting Standard (Shifting Standard)
     [32961] = true, -- Major Defile (Shifting Standard)
-    [102370] = true, -- Shackle Synergy Anchor (Shifting Standard)
     [32962] = true, -- Shifting Standard (Shifting Standard)
     [32963] = true, -- Shift Standard (Shifting Standard)
     [100100] = true, -- Shift Standard (Shifting Standard)
-    [102376] = true, -- Shackle Synergy Anchor (Shifting Standard)
     [32966] = true, -- Shifting Standard (Shifting Standard)
     [32964] = true, -- Shifting Standard (Shifting Standard)
     [32965] = true, -- Major Deflie (Shifting Standard)
@@ -3457,7 +3785,6 @@ LUIE.DebugAuras = {
     [32947] = true, -- Standard of Might (Standard of Might)
     [32948] = true, -- Standard of Might (Standard of Might)
     [32949] = true, -- Major Defile (Standard of Might)
-    [102413] = true, -- Shackle Synergy Anchor (Standard of Might)
     [32950] = true, -- Standard of Might (Standard of Might)
 
     [20319] = true, -- Spiked Armor (Spiked Armor)
@@ -3740,16 +4067,19 @@ LUIE.DebugAuras = {
     [122585] = true, -- Assassin's Will (Grim Focus)
     [61902] = true, -- Grim Focus (Grim Focus)
     [61905] = true, -- Grim Focus (Grim Focus)
+    --[105183] = true, -- Grim Focus Combat Trigger (Grim Focus)
 
     [61932] = true, -- Assassin's Scourge (Relentless Focus)
     [122587] = true, -- Assassin's Will (Assassin's Scourge)
     [61927] = true, -- Relentless Focus (Relentless Focus)
     [61928] = true, -- Relentless Focus (Relentless Focus)
+    --[105194] = true, -- RF Combat Trigger (Relentless Focus)
 
     [61930] = true, -- Assassin's Will (Merciless Resolve)
     [122586] = true, -- Assassin's Will (Merciless Resolve)
     [61919] = true, -- Merciless Resolve (Merciless Resolve)
     [61920] = true, -- Merciless Resolve (Merciless Resolve)
+    --[105290] = true, -- MR Combat Trigger (Merciless Resolve)
 
     [33398] = true, -- Death Stroke (Death Stroke)
     [61389] = true, -- Damage Taken Increased (Death Stroke)
@@ -3809,7 +4139,7 @@ LUIE.DebugAuras = {
     [36052] = true, -- Twisting Path (Twisting Path)
 
     [36028] = true, -- Refreshing Path (Refreshing Path)
-    [64003] = true, -- Summon Shade (Refreshing Path)
+    [64003] = true, -- Refreshing Path (Refreshing Path)
     [64007] = true, -- Path of Darkness (Refreshing Path)
     [64004] = true, -- Path of Darkness (Refreshing Path)
     [64002] = true, -- Refreshing Path (Refreshing Path)
@@ -4339,17 +4669,14 @@ LUIE.DebugAuras = {
     [65711] = true, -- Only 1 Lightning Splash (Lightning Splash - All Morphs)
 
     [23182] = true, -- Lightning Splash (Lightning Splash)
-    [23195] = true, -- Lightning Splash (Lightning Splash)
     [23194] = true, -- Lightning Splash (Lightning Splash)
     [23189] = true, -- Lightning Splash (Lightning Splash)
 
     [23200] = true, -- Liquid Lightning (Liquid Lightning)
-    [23204] = true, -- Lightning Splash (Liquid Lightning)
     [23203] = true, -- Lightning Splash (Liquid Lightning)
     [23202] = true, -- Liquid Lightning (Liquid Lightning)
 
     [23205] = true, -- Lightning Flood (Lightning Flood)
-    [23209] = true, -- Lightning Splash (Lightning Flood)
     [23206] = true, -- Lightning Splash (Lightning Flood)
     [23208] = true, -- Lightning Flood (Lightning Flood)
 
@@ -4528,15 +4855,11 @@ LUIE.DebugAuras = {
     [26190] = true, -- Spear Shards (Spear Shards)
     [95932] = true, -- Spear Shards (Spear Shards)
     [95933] = true, -- Spear Shards (Spear Shards)
-    [26189] = true, -- Spear Shards (Spear Shards)
-    [26191] = true, -- Spear Shards (Spear Shards)
     [26827] = true, -- Spear Shards (Spear Shards)
     [26192] = true, -- Spear Shards (Spear Shards)
     [95931] = true, -- Spear Shards (Spear Shards)
 
     [108821] = true, -- Synergy Damage Bonus (Luminous Shards - All Ranks)
-    [95928] = true, -- Holy Shards (Luminous Shards - All Ranks)
-    [95927] = true, -- Holy Shards (Luminous Shards - All Ranks)
     [95926] = true, -- Holy Shards (Luminous Shards - All Ranks)
     [95925] = true, -- Holy Shards (Luminous Shards - All Ranks)
     [95924] = true, -- Spear Shards / Necrotic Orb CD (Luminous Shards - All Ranks)
@@ -4544,8 +4867,6 @@ LUIE.DebugAuras = {
     [26860] = true, -- Luminous Shards (Luminous Shards)
     [95956] = true, -- Luminous Shards (Luminous Shards)
     [95957] = true, -- Luminous Shards (Luminous Shards)
-    [26865] = true, -- Luminous Shards (Luminous Shards)
-    [26861] = true, -- Luminous Shards (Luminous Shards)
     [26863] = true, -- Luminous Shards (Luminous Shards)
     [26859] = true, -- Luminous Shards (Luminous Shards)
     [95955] = true, -- Luminous Shards (Luminous Shards)
@@ -4554,8 +4875,6 @@ LUIE.DebugAuras = {
     [26878] = true, -- Blazing Spear (Blazing Spear)
     [44445] = true, -- Blazing Spear (Blazing Spear)
     [26880] = true, -- Blazing Spear (Blazing Spear)
-    [26877] = true, -- Blazing Spear (Blazing Spear)
-    [26872] = true, -- Blazing Spear (Blazing Spear)
     [26874] = true, -- Blazing Spear (Blazing Spear)
     [26871] = true, -- Blazing Spear (Blazing Spear)
     [26879] = true, -- Blazing Spear (Blazing Spear)
@@ -4682,7 +5001,6 @@ LUIE.DebugAuras = {
     [21976] = true, -- Nova (Nova)
     [21753] = true, -- Nova (Nova)
     [21754] = true, -- Nova (Nova)
-    [102755] = true, -- Supernova Synergy Anchor (Nova)
     [31537] = true, -- Super Nova (Nova)
 
     [108823] = true, -- Synergy Damage Bonus (Solar Prison - All Ranks)
@@ -4697,7 +5015,6 @@ LUIE.DebugAuras = {
     [22003] = true, -- Solar Prison (Solar Prison)
     [21756] = true, -- Solar Prison (Solar Prison)
     [21757] = true, -- Solar Prison (Solar Prison)
-    [102780] = true, -- Supernova Synergy Anchor (Solar Prison)
     [31598] = true, -- Super Nova (Solar Prison)
 
     [21758] = true, -- Solar Disturbance (Solar Disturbance)
@@ -4705,7 +5022,6 @@ LUIE.DebugAuras = {
     [22001] = true, -- Solar Disturbance (Solar Disturbance)
     [21759] = true, -- Solar Disturbance (Solar Disturbance)
     [21760] = true, -- Solar Disturbance (Solar Disturbance)
-    [102776] = true, -- Supernova Synergy Anchor (Solar Disturbance)
     [31597] = true, -- Super Nova (Solar Disturbance)
 
     [22250] = true, -- Rushed Ceremony (Rushed Ceremony)
@@ -4752,23 +5068,17 @@ LUIE.DebugAuras = {
     [22265] = true, -- Cleansing Ritual (Cleansing Ritual)
     [26286] = true, -- Healing Ritual (Cleansing Ritual)
     [26290] = true, -- Clensing Ritual Dummy (Cleansing Ritual)
-    [26287] = true, -- Healing Ritual (Cleansing Ritual)
-    [80540] = true, -- Cleansing Ritual (Cleansing Ritual)
     [26295] = true, -- Purify (Cleansing Ritual)
 
     [22259] = true, -- Ritual of Retribution (Ritual of Retribution)
     [143432] = true, -- Ritual of Retribution (Ritual of Retribution)
     [80172] = true, -- Ritual of Retribution (Ritual of Retribution)
     [26299] = true, -- Ritual of Retribution (Ritual of Retribution)
-    [26301] = true, -- Ritual of Retribution (Ritual of Retribution)
-    [80547] = true, -- Ritual of Retribution (Ritual of Retribution)
     [26300] = true, -- Purify (Ritual of Retribution)
 
     [22262] = true, -- Extended Ritual (Extended Ritual)
     [26303] = true, -- Extended Ritual (Extended Ritual)
     [26304] = true, -- Clensing Ritual Dummy (Extended Ritual)
-    [26306] = true, -- Extended Ritual (Extended Ritual)
-    [80553] = true, -- Extended Ritual (Extended Ritual)
     [26305] = true, -- Purify (Extended Ritual)
 
     [22236] = true, -- Major Resolve (Rune Focus)
@@ -5001,7 +5311,6 @@ LUIE.DebugAuras = {
     [85843] = true, -- Harvest (Budding Seeds)
     [85841] = true, -- Budding Seeds (Budding Seeds)
     [85922] = true, -- Budding Seeds (Budding Seeds)
-    [85925] = true, -- Budding Seeds Heal (Budding Seeds)
     [129434] = true, -- Budding Seeds (Budding Seeds)
 
     [85845] = true, -- Corrupting Pollen (Corrupting Pollen)
@@ -5291,13 +5600,10 @@ LUIE.DebugAuras = {
     [115571] = true, -- Grave Robber (Boneyard - Grave Robber Synergy)
     [115572] = true, -- Grave Robber (Boneyard - Grave Robber Synergy)
     [115573] = true, -- Grave Robber (Boneyard - Grave Robber Synergy)
-    [118945] = true, -- Grave Robber (Boneyard - Grave Robber Synergy)
-    [118946] = true, -- Grave Robber (Boneyard - Grave Robber Synergy)
     [115548] = true, -- Grave Robber (Boneyard - Grave Robber Synergy)
 
     [115252] = true, -- Boneyard (Boneyard)
     [115255] = true, -- Boneyard (Boneyard)
-    [115542] = true, -- Boneyard (Boneyard)
     [115279] = true, -- Boneyard (Boneyard)
     [117089] = true, -- Boneyard (Boneyard)
     [115254] = true, -- Boneyard (Boneyard)
@@ -5305,7 +5611,6 @@ LUIE.DebugAuras = {
 
     [117805] = true, -- Unnerving Boneyard (Unnerving Boneyard)
     [117807] = true, -- Unnerving Boneyard (Unnerving Boneyard)
-    [117814] = true, -- Unnerving Boneyard (Unnerving Boneyard)
     [117808] = true, -- Unnerving Boneyard (Unnerving Boneyard)
     [117810] = true, -- Unnerving Boneyard (Unnerving Boneyard)
     [117809] = true, -- Unnerving Boneyard (Unnerving Boneyard)
@@ -5314,7 +5619,6 @@ LUIE.DebugAuras = {
 
     [117850] = true, -- Avid Boneyard (Avid Boneyard)
     [117852] = true, -- Avid Boneyard (Avid Boneyard)
-    [117859] = true, -- Avid Boneyard (Avid Boneyard)
     [117853] = true, -- Avid Boneyard (Avid Boneyard)
     [117855] = true, -- Avid Boneyard (Avid Boneyard)
     [117854] = true, -- Avid Boneyard (Avid Boneyard)
@@ -5435,14 +5739,12 @@ LUIE.DebugAuras = {
     [115093] = true, -- Bone Totem (Bone Totem)
     [115095] = true, -- Bone Totem (Bone Totem)
     [115097] = true, -- Minor Protection (Bone Totem)
-    [115129] = true, -- Bone Totem (Bone Totem)
     [115107] = true, -- Bone Totem (Bone Totem)
     [115106] = true, -- Bone Totem (Bone Totem)
 
     [118380] = true, -- Remote Totem (Remote Totem)
     [118381] = true, -- Remote Totem (Remote Totem)
     [118385] = true, -- Minor Protection (Remote Totem)
-    [118382] = true, -- Remote Totem (Remote Totem)
     [118383] = true, -- Remote Totem (Remote Totem)
     [118386] = true, -- Remote Totem (Remote Totem)
 
@@ -5455,9 +5757,7 @@ LUIE.DebugAuras = {
     [118404] = true, -- Agony Totem (Agony Totem)
     [118405] = true, -- Agony Totem (Agony Totem)
     [118409] = true, -- Minor Protection (Agony Totem)
-    [118406] = true, -- Agony Totem (Agony Totem)
     [118407] = true, -- Agony Totem (Agony Totem)
-    [118449] = true, -- Agony Totem (Agony Totem)
     [118411] = true, -- Agony Totem (Agony Totem)
     [118614] = true, -- Agony Totem (Agony Totem)
 
@@ -5623,23 +5923,23 @@ LUIE.DebugAuras = {
     -- UNARMED PASSIVES -----------------
     -------------------------------------
 
-    [23604] = true, -- Light Attack
+    [23604] = true, -- Light Attack (Unarmed)
     [18429] = true, -- Heavy Attack (Unarmed)
-    [18430] = true, -- Heavy Attack
+    [18430] = true, -- Heavy Attack (Unarmed)
     [21991] = true, -- Heavy Attack Damage Bonus
-    [18431] = true, -- Heavy Attack
+    [18431] = true, -- Heavy Attack (Unarmed)
     [60772] = true, -- Heavy Attack (Unarmed)
 
     -------------------------------------
     -- TWO HANDED PASSIVES --------------
     -------------------------------------
 
-    [16037] = true, -- Light Attack
-    [16041] = true, -- Heavy Attack (2H)
-    [17162] = true, -- Heavy Attack
+    [16037] = true, -- Light Attack (Two Handed)
+    [16041] = true, -- Heavy Attack (Two Handed)
+    [17162] = true, -- Heavy Attack (Two Handed)
     [17699] = true, -- Heavy Attack Damage Bonus
-    [17163] = true, -- Heavy Attack
-    [60757] = true, -- Heavy Attack (2H)
+    [17163] = true, -- Heavy Attack (Two Handed)
+    [60757] = true, -- Heavy Attack (Two Handed)
 
     [29387] = true, -- Forceful (Rank 1)
     [30821] = true, -- Forceful
@@ -5721,9 +6021,7 @@ LUIE.DebugAuras = {
     [38802] = true, -- Rally (Rally)
     [62415] = true, -- Major Brutality (Rally)
     [126537] = true, -- Minor Endurance (Rally)
-    [60894] = true, -- Heal Buffer (Rally)
     [60895] = true, -- Heal Buff (Rally)
-    [60996] = true, -- Buff Remover (Rally)
     [38805] = true, -- Rally (Rally)
 
     [83216] = true, -- Berserker Strike (Berserker Strike)
@@ -5746,12 +6044,12 @@ LUIE.DebugAuras = {
     -- ONE HAND AND SHIELD PASSIVES -----
     -------------------------------------
 
-    [15435] = true, -- Light Attack
-    [15279] = true, -- Heavy Attack (1H)
-    [15282] = true, -- Heavy Attack
+    [15435] = true, -- Light Attack (One Handed)
+    [15279] = true, -- Heavy Attack (One Handed)
+    [15282] = true, -- Heavy Attack (One Handed)
     [17694] = true, -- Heavy Attack Damage Bonus
-    [15829] = true, -- Heavy Attack
-    [60759] = true, -- Heavy Attack (Shield)
+    [15829] = true, -- Heavy Attack (One Handed)
+    [60759] = true, -- Heavy Attack (One Handed)
 
     [29420] = true, -- Fortress (Rank 1)
     [45471] = true, -- Fortress (Rank 2)
@@ -5840,15 +6138,14 @@ LUIE.DebugAuras = {
     -- DUAL WIELD PASSIVES --------------
     -------------------------------------
 
-    [16499] = true, -- Light Attack
+    [16499] = true, -- Light Attack (Dual Wield)
     [16420] = true, -- Heavy Attack (Dual Wield)
-    [17170] = true, -- Heavy Attack
+    [17170] = true, -- Heavy Attack (Dual Wield)
     [17700] = true, -- Heavy Attack Damage Bonus
-    [17169] = true, -- Heavy Attack
+    [17169] = true, -- Heavy Attack (Dual Wield)
     [18622] = true, -- Heavy Attack (Dual Wield)
     [60758] = true, -- Heavy Attack (Dual Wield)
     [64546] = true, -- Heavy Attack Damage Bonus
-
 
     [18929] = true, -- Slaughter (Rank 1)
     [45476] = true, -- Slaughter (Rank 2)
@@ -5966,11 +6263,11 @@ LUIE.DebugAuras = {
     -- BOW PASSIVES ---------------------
     -------------------------------------
 
-    [16688] = true, -- Light Attack
+    [16688] = true, -- Light Attack (Bow)
     [16691] = true, -- Heavy Attack (Bow)
-    [17174] = true, -- Heavy Attack
+    [17174] = true, -- Heavy Attack (Bow)
     [17701] = true, -- Heavy Attack Damage Bonus
-    [17173] = true, -- Heavy Attack
+    [17173] = true, -- Heavy Attack (Bow)
     [60761] = true, -- Heavy Attack (Bow)
 
     [30937] = true, -- Long Shots (Rank 1)
@@ -6069,24 +6366,24 @@ LUIE.DebugAuras = {
     -- DESTRUCTION STAFF PASSIVES -------
     -------------------------------------
 
-    [16277] = true, -- Light Attack
-    [16261] = true, -- Heavy Attack (Frost)
-    [18405] = true, -- Heavy Attack
+    [16277] = true, -- Light Attack (Ice)
+    [16261] = true, -- Heavy Attack (Ice)
+    [18405] = true, -- Heavy Attack (Ice)
     [18404] = true, -- Heavy Attack Damage Bonus
-    [18406] = true, -- Heavy Attack
-    [60762] = true, -- Heavy Attack (Frost)
+    [18406] = true, -- Heavy Attack (Ice)
+    [60762] = true, -- Heavy Attack (Ice)
 
-    [16165] = true, -- Light Attack
-    [15383] = true, -- Heavy Attack (Flame)
-    [15385] = true, -- Heavy Attack
+    [16165] = true, -- Light Attack (Inferno)
+    [15383] = true, -- Heavy Attack (Inferno)
+    [15385] = true, -- Heavy Attack (Inferno)
     [23429] = true, -- Heavy Attack Damage Bonus
-    [16321] = true, -- Heavy Attack
-    [60763] = true, -- Heavy Attack (Fire)
+    [16321] = true, -- Heavy Attack (Inferno)
+    [60763] = true, -- Heavy Attack (Inferno)
 
-    [18350] = true, -- Light Attack
-    [18396] = true, -- Heavy Attack (Shock)
-    [19277] = true, -- Shock Pulse
-    [60764] = true, -- Heavy Attack (Shock)
+    [18350] = true, -- Light Attack (Lightning)
+    [18396] = true, -- Heavy Attack (Lightning)
+    [19277] = true, -- Heavy Attack (Lightning)
+    [60764] = true, -- Heavy Attack (Lightning)
 
     [30948] = true, -- Tri Focus -- Rank 1
     [69774] = true, -- Tri Focus
@@ -6315,11 +6612,10 @@ LUIE.DebugAuras = {
     -- RESTORATION STAFF PASSIVES -------
     -------------------------------------
 
-    [16145] = true, -- Light Attack
-    [16212] = true, -- Restoration Staff Channel
-    [67022] = true, -- Restoration Staff Heavy Attack
+    [16145] = true, -- Light Attack (Restoration)
+    [16212] = true, -- Heavy Attack (Restoration)
+    [67022] = true, -- Heavy Attack (Restoration)
     [32760] = true, -- Heavy Attack (Restoration)
-    --[67106] = true, -- Partial Heavy Attack (Resto)
 
     [30973] = true, -- Essence Drain (Rank 1)
     [77918] = true, -- Major Mending
@@ -6762,13 +7058,13 @@ LUIE.DebugAuras = {
     --[31068] = true, -- Sanies Lupinus (NPC Bite)
     [40521] = true, -- Sanies Lupinus (Player Bite)
 
-    [32464] = true, -- Light Attack
-    [32477] = true, -- Heavy Attack (Were)
-    [32479] = true, -- Heavy Attack
+    [32464] = true, -- Light Attack (Werewolf)
+    [32477] = true, -- Heavy Attack (Werewolf)
+    [32479] = true, -- Heavy Attack (Werewolf)
     [32478] = true, -- Heavy Attack Damage Bonus
-    [32480] = true, -- Heavy Attack Werewolf
-    [32494] = true, -- Heavy Attack
-    [60773] = true, -- Stamina Return
+    [32480] = true, -- Heavy Attack (Werewolf)
+    [32494] = true, -- Heavy Attack (Werewolf)
+    [60773] = true, -- Heavy Attack (Werewolf)
     [40544] = true, -- Keep Corpse
     [40545] = true, -- Keep Corpse
 
@@ -8632,8 +8928,6 @@ LUIE.DebugAuras = {
     [44350] = true, -- Soul Tether -- Nightblade
     [44346] = true, -- Soul Tether -- Nightblade
     [137661] = true, -- Soul Tether -- Nightblade
-    [53462] = true, -- Siphoning Strikes
-    [53469] = true, -- Leeching Strikes
 
     [37108] = true, -- Arrow Spray -- Archer
     [37109] = true, -- Arrow Spray -- Archer
@@ -16725,11 +17019,12 @@ LUIE.DebugAuras = {
     [118507] = true, -- Volendrung Passive (Volendrung)
     [118509] = true, -- Set Volendrung Stats (Volendrung)
 
-    [116762] = true, -- Volendrung Light Attack (Volendrung)
-    [116763] = true, -- Volendrung Heavy Attack (2H) (Volendrung)
-    [116765] = true, -- Heavy Attack Partial (Volendrung)
+    [116762] = true, -- Light Attack (Volendrung)
+    [116763] = true, -- Heavy Attack (Volendrung)
+    [116765] = true, -- Heavy Attack (Volendrung)
+    [147973] = true, -- Heavy Attack Damage Bonus (Volendrung)
     [116767] = true, -- Heavy Attack (Volendrung)
-    [116766] = true, -- Heavy Attack (2H) (Volendrung)
+    [116766] = true, -- Heavy Attack (Volendrung)
 
     [118501] = true, -- Heal Self (Volendrung)
     [118504] = true, -- Damage Shield (Volendrung)
@@ -16818,14 +17113,23 @@ LUIE.DebugAuras = {
     -- SEASONAL EVENTS ------------------
     -------------------------------------
 
+    -------------------------------------
     -- Jester's Festival
+    -------------------------------------
+
+    -- A Noble Guest
     [89243] = true, -- Butcher Awareness - A Noble Guest
+
+    -- Springtime Flair
     [89201] = true, -- Flare -- Springtime Flair
     [87474] = true, -- Flower Garland -- Springtime Flair
+
+    -- Royal Revelry
     [88095] = true, -- Illusion Dazzler -- Royal Revelry
     [88123] = true, -- Illusion Dazzler -- Royal Revelry
     [88124] = true, -- Illusion Dazzler -- Royal Revelry
 
+    -- A Foe Most Porcine
     [144487] = true, -- Greased Lightning (King Boar)
     [127184] = true, -- Home (King Boar)
     [127185] = true, -- Thrash Anchor (King Boar)
@@ -16884,13 +17188,20 @@ LUIE.DebugAuras = {
     [144352] = true, -- Thrash (Prince Boar)
     [144351] = true, -- Thrash (Prince Boar)
 
-
+    -------------------------------------
     -- New Life Festival
+    -------------------------------------
+
+    -- Stonetooth Bash
     [84847] = true, -- Celebratory Belch -- Stonetooth Bash
+
+    -- Snow Bear Plunge
     [85680] = true, -- Jump -- Snow Bear Plunge
     [83523] = true, -- Freezing -- Snow Bear Plunge
     [83544] = true, -- Cold -- Snow Bear Plunge
     [83522] = true, -- Warm -- Snow Bear Plunge
+
+    -- Lava Foot Stomp
     [84125] = true, -- Breton Male Dance -- Lava Foot Stomp
     [84187] = true, -- Breton Dance -- Lava Foot Stomp
     [85544] = true, -- Breton Dance -- Lava Foot Stomp
@@ -16913,6 +17224,8 @@ LUIE.DebugAuras = {
     [84133] = true, -- Nord Dance -- Lava Foot Stomp
     [84194] = true, -- Nord Dance -- Lava Foot Stomp
     [85549] = true, -- Breton Dance -- Lava Foot Stomp
+
+    -- Castle Charm Challenge
     [84528] = true, -- Flame Juggling -- Castle Charm Challenge
     [84530] = true, -- Flame Juggling -- Castle Charm Challenge
     [85561] = true, -- Breton Dance -- Castle Charm Challenge
@@ -16922,22 +17235,43 @@ LUIE.DebugAuras = {
     [84533] = true, -- Sword Swallowing -- Castle Charm Challenge
     [84534] = true, -- Sword Swallowing -- Castle Charm Challenge
     [85562] = true, -- Breton Dance -- Castle Charm Challenge
-    [84330] = true, -- Mudball -- Mud Ball Merriment
+
+    -- Mud Ball Merriment
+    --[84330] = true, -- Mudball -- Mud Ball Merriment
     [84378] = true, -- Mudball -- Mud Ball Merriment
     [84335] = true, -- Covered in Mud -- Mud Ball Merriment
     [85639] = true, -- Covered in Mud -- Mud Ball Merriment
 
-    -- Witches Harvest
+    -------------------------------------
+    -- Witches Festival
+    -------------------------------------
+
+    -- The Witchmother's Bargain
     [83775] = true, -- Event - Q5742 WitchFest Intro (The Witchmother's Bargain)
     [83820] = true, -- Event Q5742 WitchFest Done (The Witchmother's Bargain)
     [85055] = true, -- Crows (The Witchmother's Bargain)
     [82898] = true, -- Event - WitchFest Theater (The Witchmother's Bargain)
 
+    -------------------------------------
     -- Anniversary Event
+    -------------------------------------
+
+    -- Ache for Cake
     [88874] = true, -- Q5936 Destroy Voucher 2017 (Ache for Cake)
 
     -------------------------------------
-    -- UNSORTED -------------------------
+    -- Pan-Elsweyr Celebration
     -------------------------------------
+
+    -- Misc - Dragon Attacks
+    [120954] = true, -- JusticeDragon-Flee
+    [120956] = true, -- JusticeDragon-Flee
+    [120957] = true, -- RUNJusticeDragon1
+    [120958] = true, -- COWERJusticeDragon2
+    [120960] = true, -- JusticeDragon-REG WPTReach
+    [120961] = true, -- JusticeDragon-REG WPTReach
+    [120977] = true, -- COWERJusticeDragon2
+    [120980] = true, -- JusticeDragon-Flee
+    [120981] = true, -- JusticeDragon-Flee
 
 }

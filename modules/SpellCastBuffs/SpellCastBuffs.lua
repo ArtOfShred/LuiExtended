@@ -118,6 +118,7 @@ SpellCastBuffs.Defaults = {
     IgnoreSoulSummonsPlayer             = false,
     IgnoreSoulSummonsTarget             = false,
     IgnoreSetICDPlayer                  = false,
+    IgnoreAbilityICDPlayer              = false,
     IgnoreFoodPlayer                    = false,
     IgnoreFoodTarget                    = false,
     IgnoreExperiencePlayer              = false,
@@ -188,7 +189,6 @@ SpellCastBuffs.Defaults = {
     TooltipSticky                       = 0,
     TooltipAbilityId                    = false,
     TooltipBuffType                     = false,
-    GenericMajorMinor                   = false,
     UseDefaultIcon                      = false,
     DefaultIconOptions                  = 1,
     ShowSharedEffects                   = true,
@@ -224,6 +224,15 @@ end
 
 function SpellCastBuffs.ShouldUseDefaultIcon(abilityId)
     if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].cc then
+        if SpellCastBuffs.SV.DefaultIconOptions == 1 then
+            return true
+        elseif SpellCastBuffs.SV.DefaultIconOptions == 2 then
+            return Effects.EffectOverride[abilityId].isPlayerAbility and false or true
+        elseif SpellCastBuffs.SV.DefaultIconOptions == 3 then
+            return Effects.EffectOverride[abilityId].isPlayerAbility and true or false
+        end
+    end
+    if SpellCastBuffs.SV.HideReduce and Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].ccMergedType then
         if SpellCastBuffs.SV.DefaultIconOptions == 1 then
             return true
         elseif SpellCastBuffs.SV.DefaultIconOptions == 2 then
@@ -493,7 +502,6 @@ function SpellCastBuffs.Initialize(enabled)
     SpellCastBuffs.Reset()
     SpellCastBuffs.UpdateContextHideList()
     SpellCastBuffs.UpdateDisplayOverrideIdList()
-    SpellCastBuffs.UpdateMajorMinorList()
 
     -- Register events
     eventManager:RegisterForUpdate(moduleName, 100, SpellCastBuffs.OnUpdate )
@@ -1299,7 +1307,7 @@ end
 local buffTypes = {
     [LUIE_BUFF_TYPE_BUFF] = "Buff",
     [LUIE_BUFF_TYPE_DEBUFF] = "Debuff",
-    [LUIE_BUFF_TYPE_UB_BUFF] = "Unbreakable Buff",
+    [LUIE_BUFF_TYPE_UB_BUFF] = "Cosmetic Buff",
     [LUIE_BUFF_TYPE_UB_DEBUFF] = "Unbreakable Debuff",
     [LUIE_BUFF_TYPE_GROUND_BUFF_TRACKER] = "AOE Buff Tracker",
     [LUIE_BUFF_TYPE_GROUND_DEBUFF_TRACKER] = "AOE Debuff Tracker",
@@ -1879,6 +1887,11 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
             return
         end
     end
+
+    -- If this is a set ICD then don't display if we have Set ICD's disabled.
+    if Effects.IsSetICD[abilityId] and SpellCastBuffs.SV.IgnoreSetICDPlayer then return end
+    -- If this is an ability ICD then don't display if we have Ability ICD's disabled.
+    if Effects.IsAbilityICD[abilityId] and SpellCastBuffs.SV.IgnoreAbilityICDPlayer then return end
 
     local unbreakable = 0
 
@@ -2768,6 +2781,8 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
 
         -- If this is a fake set ICD then don't display if we have Set ICD's disabled.
         if Effects.IsSetICD[abilityId] and SpellCastBuffs.SV.IgnoreSetICDPlayer then return end
+        -- If this is an ability ICD then don't display if we have Ability ICD's disabled.
+        if Effects.IsAbilityICD[abilityId] and SpellCastBuffs.SV.IgnoreAbilityICDPlayer then return end
 
         -- Prominent Support
         local effectType = Effects.FakePlayerBuffs[abilityId].debuff and BUFF_EFFECT_TYPE_DEBUFF or BUFF_EFFECT_TYPE_BUFF -- TODO: Expand this for below instead of calling again
@@ -3981,24 +3996,6 @@ function SpellCastBuffs.UpdateDisplayOverrideIdList()
         for k, v in pairs(Effects.DebuffDisplayOverrideMajorMinor) do
             for k, v in pairs(Effects.DebuffDisplayOverrideMajorMinor) do
                 debuffDisplayOverrideId[k] = v
-            end
-        end
-    end
-end
-
--- Called from the menu and on initialize to build major/minor generic icon overrides.
-function SpellCastBuffs.UpdateMajorMinorList(menu)
-    if LUIE.SpellCastBuffs.SV.GenericMajorMinor then
-        for k, v in pairs(Effects.MajorMinorIconTable) do
-            if v.normalize then
-                Effects.EffectOverride[k].icon = v.normalize
-            end
-        end
-    -- Minimize the amount of iterating we need to do, we only need to toggle back if we're disabling the setting from the menu.
-    elseif menu and not LUIE.SpellCastBuffs.SV.GenericMajorMinor then
-        for k, v in pairs(Effects.MajorMinorIconTable) do
-            if v.icon then
-                Effects.EffectOverride[k].icon = v.icon
             end
         end
     end

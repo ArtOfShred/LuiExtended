@@ -86,6 +86,17 @@ function SlashCommands.CreateSettings()
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
+                -- SlashSetPrimaryHome
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_SLASHCMDS_HOME_SET_PRIMARY),
+                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_HOME_SET_PRIMARY_TP),
+                getFunc = function() return Settings.SlashSetPrimaryHome end,
+                setFunc = function(value) Settings.SlashSetPrimaryHome = value SlashCommands.RegisterSlashCommands() end,
+                width = "full",
+                default = Defaults.SlashSetPrimaryHome,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+            },
+            {
                 -- SlashCampaignQ
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_CAMPAIGN),
@@ -151,6 +162,17 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashFence = value SlashCommands.RegisterSlashCommands() end,
                 width = "full",
                 default = Defaults.SlashFence,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+            },
+            {
+                -- SlashEye
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_SLASHCMDS_EYE),
+                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_EYE_TP),
+                getFunc = function() return Settings.SlashEye end,
+                setFunc = function(value) Settings.SlashEye = value SlashCommands.RegisterSlashCommands() end,
+                width = "full",
+                default = Defaults.SlashEye,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {

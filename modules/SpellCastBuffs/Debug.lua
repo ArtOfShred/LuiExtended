@@ -232,9 +232,19 @@ function SpellCastBuffs.TempSlashZoneCheck()
     LUIE.PrintToChat("Map: " .. mapName)
 end
 
+function SpellCastBuffs.TempSlashCheckRemovedAbilities()
+    d("Removed AbilityIds:")
+    for k, v in pairs(LUIE.DebugAuras) do
+    	if not DoesAbilityExist(k) then
+    		d(k)
+    	end
+    end
+end
+
 local displayName = GetDisplayName()
 if displayName == "@ArtOfShredPTS" or displayName == "@ArtOfShredLegacy" or displayName == "@HammerOfGlory" then
     SLASH_COMMANDS["/filter"] = SpellCastBuffs.TempSlashFilter
     SLASH_COMMANDS["/ground"] = SpellCastBuffs.TempSlashGround
     SLASH_COMMANDS["/zonecheck"] = SpellCastBuffs.TempSlashZoneCheck
+    SLASH_COMMANDS["/abilitydump"] = SpellCastBuffs.TempSlashCheckRemovedAbilities
 end

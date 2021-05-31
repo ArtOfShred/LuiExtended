@@ -888,6 +888,62 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and Settings.Currency.CurrencyCrownGemsChange and Settings.Currency.CurrencyCrownGemsShowTotal) end,
                 default = Defaults.Currency.CurrencyMessageTotalCrownGems,
             },
+
+            {
+                -- Show Endeavors
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDEAVORS),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDEAVORS_TP),
+                getFunc = function() return Settings.Currency.CurrencyEndeavorsChange end,
+                setFunc = function(value) Settings.Currency.CurrencyEndeavorsChange = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.Currency.CurrencyEndeavorsChange,
+            },
+            {
+                -- Show Endeavors Color
+                type = "colorpicker",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDEAVORSCOLOR)),
+                getFunc = function() return unpack(Settings.Currency.CurrencyEndeavorsColor) end,
+                setFunc = function(r, g, b, a) Settings.Currency.CurrencyEndeavorsColor = { r, g, b, a } ChatAnnouncements.RegisterColorEvents() end,
+                width = "full",
+                disabled = function() return not (Settings.Currency.CurrencyEndeavorsChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = {r=Defaults.Currency.CurrencyEndeavorsColor[1], g=Defaults.Currency.CurrencyEndeavorsColor[2], b=Defaults.Currency.CurrencyEndeavorsColor[3]}
+            },
+            {
+                -- Show Endeavors Name
+                type = "editbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDEAVORSNAME)),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDEAVORSNAME_TP),
+                getFunc = function() return Settings.Currency.CurrencyEndeavorsName end,
+                setFunc = function(value) Settings.Currency.CurrencyEndeavorsName = value end,
+                width = "full",
+                disabled = function() return not (Settings.Currency.CurrencyEndeavorsChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = Defaults.Currency.CurrencyEndeavorsName,
+            },
+            {
+                -- Show Endeavors Total
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDEAVORSTOTAL)),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDEAVORSTOTAL_TP),
+                getFunc = function() return Settings.Currency.CurrencyEndeavorsShowTotal end,
+                setFunc = function(value) Settings.Currency.CurrencyEndeavorsShowTotal = value end,
+                width = "full",
+                disabled = function() return not (Settings.Currency.CurrencyEndeavorsChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = Defaults.Currency.CurrencyEndeavorsShowTotal,
+            },
+            {
+                -- Total Currency Message (Endeavors)
+                type = "editbox",
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_ENDEAVORSTOTAL_MSG)),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_ENDEAVORSTOTAL_MSG_TP),
+                getFunc = function() return Settings.Currency.CurrencyMessageTotalEndeavors end,
+                setFunc = function(value) Settings.Currency.CurrencyMessageTotalEndeavors = value end,
+                width = "full",
+                disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and Settings.Currency.CurrencyEndeavorsChange and Settings.Currency.CurrencyEndeavorsShowTotal) end,
+                default = Defaults.Currency.CurrencyMessageTotalEndeavors,
+            },
+
         },
     }
 
@@ -3190,6 +3246,17 @@ function ChatAnnouncements.CreateSettings()
                 width = "full",
                 disabled = function() return not (Settings.Collectibles.CollectibleCA or Settings.Collectibles.CollectibleCSA or Settings.Collectibles.CollectibleAlert and LUIE.SV.ChatAnnouncements_Enable) end,
                 default = Defaults.Collectibles.CollectibleCategory,
+            },
+            {
+                -- Collectible Subcategory
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_COLLECTIBLE_SUBCATEGORY)),
+                tooltip = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_SUBCATEGORY_TP),
+                getFunc = function() return Settings.Collectibles.CollectibleSubcategory end,
+                setFunc = function(value) Settings.Collectibles.CollectibleSubcategory = value end,
+                width = "full",
+                disabled = function() return not (Settings.Collectibles.CollectibleCA or Settings.Collectibles.CollectibleCSA or Settings.Collectibles.CollectibleAlert and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = Defaults.Collectibles.CollectibleSubcategory,
             },
             {
                 -- Collectible Usage

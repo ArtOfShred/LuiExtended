@@ -32,11 +32,11 @@ function SpellCastBuffs.DisplayMountIcon()
     local name = GetRawUnitName("player")
     local mountedState = GetTargetMountedStateInfo(name)
 
-    if mountedState == PLAYER_MOUNTED_STATE_MOUNT_RIDER or mountedState == PLAYER_MOUNTED_STATE_MOUNT_PASSENGER then
+    if mountedState == MOUNTED_STATE_MOUNT_RIDER or mountedState == MOUNTED_STATE_MOUNT_PASSENGER then
         local name
         local description
         local icon
-        if mountedState == PLAYER_MOUNTED_STATE_MOUNT_RIDER then
+        if mountedState == MOUNTED_STATE_MOUNT_RIDER then
             if SpellCastBuffs.SV.MountDetail then
                 -- Get detailed collectible information for the player
                 local collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_MOUNT)
@@ -52,7 +52,7 @@ function SpellCastBuffs.DisplayMountIcon()
                 description = Tooltips.Innate_Mounted
                 icon = 'LuiExtended/media/icons/abilities/ability_innate_mounted.dds'
             end
-        elseif mountedState == PLAYER_MOUNTED_STATE_MOUNT_PASSENGER then
+        elseif mountedState == MOUNTED_STATE_MOUNT_PASSENGER then
             name = Abilities.Innate_Mounted_Passenger
             description = Tooltips.Innate_Mounted_Passenger
             icon = 'LuiExtended/media/icons/abilities/ability_innate_mounted.dds'

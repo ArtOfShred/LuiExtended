@@ -169,7 +169,6 @@ UnitFrames.Defaults = {
     DisplayOptionsGroupRaid          = 2,
     ExecutePercentage                = 20,
     RaidIconOptions                  = 2,
-    ChampionOptions                  = "Show Above Cap", -- TODO: localization
     RepositionFramesAdjust           = 0,
     PlayerFrameOptions               = 1,
     AdjustStaminaHPos                = 200,
@@ -215,7 +214,7 @@ UnitFrames.CustomFramesMovingState  = false
 
 local g_AvaCustFrames       = {} -- Another set of custom frames. Currently designed only to provide AvA Player Target reticleover frame
 local g_DefaultFrames       = {} -- Default Unit Frames are not referenced by external modules
-local g_MaxChampionPoint    = GetChampionPointsPlayerProgressionCap() -- Keet this value in local constant
+local g_MaxChampionPoint    = 3600 -- Keep this value in local constant
 local g_defaultTargetNameLabel   -- Reference to default UI target name label
 local g_defaultThreshold    = 25
 local g_isRaid              = false -- Used by resurrection tracking function to determine if we should use abbreviated or unabbreviated text for resurrection.
@@ -254,14 +253,6 @@ local g_DefaultFramesOptions = {
     [1] = "Disable",                                -- false
     [2] = "Do nothing (keep default)",              -- nil
     [3] = "Use Extender (display text overlay)",    -- true
-}
-
--- This icon will be used for alternative bar when using ChampionXP
-local CHAMPION_ATTRIBUTE_HUD_ICONS = {
-    [ATTRIBUTE_NONE] = "/esoui/art/champion/champion_icon_32.dds",
-    [ATTRIBUTE_HEALTH] = "/esoui/art/champion/champion_points_health_icon-hud-32.dds",
-    [ATTRIBUTE_MAGICKA] = "/esoui/art/champion/champion_points_magicka_icon-hud-32.dds",
-    [ATTRIBUTE_STAMINA] = "/esoui/art/champion/champion_points_stamina_icon-hud-32.dds",
 }
 
 -- Default Regen/degen animation used on default group frames and custom frames
@@ -485,7 +476,7 @@ function UnitFrames.AltBar_OnMouseEnterXP(control)
         current = GetPlayerChampionXP()
         levelSize = GetNumChampionXPInChampionPoint(level)
         if levelSize == nil then
-            levelSize = current -- TODO: Probably don't need to set this value, can clean this function up in the future
+            levelSize = current
             isMax = true
         end
         label = GetString(SI_EXPERIENCE_CHAMPION_LABEL)
@@ -2145,11 +2136,7 @@ function UnitFrames.UpdateDefaultLevelTarget()
     local unitLevel
     local isChampion = IsUnitChampion("reticleover")
     if isChampion then
-        if UnitFrames.SV.ChampionOptions == "Limit to Cap" then
-            unitLevel = GetUnitEffectiveChampionPoints("reticleover")
-        else
-            unitLevel = GetUnitChampionPoints("reticleover")
-        end
+        unitLevel = GetUnitChampionPoints("reticleover")
     else
         unitLevel = GetUnitLevel("reticleover")
     end
@@ -2512,11 +2499,7 @@ function UnitFrames.UpdateStaticControls( unitFrame )
             end
             unitFrame.levelIcon:SetTexture( unitFrame.isChampion and "LuiExtended/media/unitframes/unitframes_level_champion.dds" or "LuiExtended/media/unitframes/unitframes_level_normal.dds" )
             -- Level label should be already anchored
-            if UnitFrames.SV.ChampionOptions == "Limit to Cap" then
-                unitFrame.level:SetText( tostring( unitFrame.isChampion and GetUnitEffectiveChampionPoints( unitFrame.unitTag ) or GetUnitLevel( unitFrame.unitTag ) ) )
-            elseif UnitFrames.SV.ChampionOptions == "Show Above Cap" then
-                unitFrame.level:SetText( tostring( unitFrame.isChampion and GetUnitChampionPoints( unitFrame.unitTag ) or GetUnitLevel( unitFrame.unitTag ) ) )
-            end
+            unitFrame.level:SetText( tostring( unitFrame.isChampion and GetUnitChampionPoints( unitFrame.unitTag ) or GetUnitLevel( unitFrame.unitTag ) ) )
         end
         if unitFrame.unitTag == "player" then
             unitFrame.levelIcon:SetHidden( not UnitFrames.SV.PlayerEnableYourname )
@@ -3296,13 +3279,20 @@ end
 -- Used to change icon on alternative bar for next champion point type
 function UnitFrames.OnChampionPointGained(eventCode)
     if UnitFrames.CustomFrames.player and UnitFrames.CustomFrames.player.ChampionXP then
-        local attribute = 1 -- TODO: Replace this eventually with a color choice option or something
+        local championPoints = GetPlayerChampionPointsEarned()
+        local attribute
+        if championPoints == 3600 then
+            attribute = GetChampionPointPoolForRank(championPoints)
+        else
+            attribute = GetChampionPointPoolForRank(championPoints+1)
+        end
         local colour = ( UnitFrames.SV.PlayerChampionColour and CP_BAR_COLOURS[attribute] ) and CP_BAR_COLOURS[attribute][2] or XP_BAR_COLOURS
         local colour2 = ( UnitFrames.SV.PlayerChampionColour and CP_BAR_COLOURS[attribute] ) and CP_BAR_COLOURS[attribute][1] or XP_BAR_COLOURS
         UnitFrames.CustomFrames.player.ChampionXP.backdrop:SetCenterColor( 0.1*colour.r, 0.1*colour.g, 0.1*colour.b, 0.9 )
         UnitFrames.CustomFrames.player.ChampionXP.enlightenment:SetColor( colour2.r, colour2.g, colour2.b, .40 )
         UnitFrames.CustomFrames.player.ChampionXP.bar:SetColor( colour.r, colour.g, colour.b, 0.9 )
-        UnitFrames.CustomFrames.player.ChampionXP.icon:SetTexture( CHAMPION_ATTRIBUTE_HUD_ICONS[attribute] )
+        local disciplineData = CHAMPION_DATA_MANAGER:FindChampionDisciplineDataByType(attribute)
+        UnitFrames.CustomFrames.player.ChampionXP.icon:SetTexture( disciplineData:GetHUDIcon() )
     end
 end
 

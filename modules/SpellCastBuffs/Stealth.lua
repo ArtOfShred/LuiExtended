@@ -25,7 +25,7 @@ function SpellCastBuffs.SetDisguiseItem()
         return
     end
 
-    local name = GetItemName(0, EQUIP_SLOT_COSTUME)
+    local name = GetItemName(BAG_WORN, EQUIP_SLOT_COSTUME)
     local abilityName = Abilities.Innate_Disguise
     local icon = Effects.DisguiseIcons[g_currentDisguise].icon
     local idTooltip = Effects.DisguiseIcons[g_currentDisguise].id or ""
@@ -50,7 +50,7 @@ function SpellCastBuffs.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSo
     end
 
     -- Set current disguise
-    g_currentDisguise = GetItemId(0, EQUIP_SLOT_COSTUME) or 0
+    g_currentDisguise = GetItemId(BAG_WORN, EQUIP_SLOT_COSTUME) or 0
 
     -- Set the icon for the disguise to display
     SpellCastBuffs.SetDisguiseItem()
