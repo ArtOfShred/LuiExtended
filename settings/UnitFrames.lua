@@ -648,6 +648,16 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Reaction color
                 type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_COMPANION),
+                getFunc = function() return unpack(Settings.CustomColourCompanion) end,
+                setFunc = function(r,g,b,a) Settings.CustomColourCompanion={r,g,b} UnitFrames.CustomFramesApplyColours(true) end,
+                width = "full",
+                default = { r=Defaults.CustomColourCompanion[1], g=Defaults.CustomColourCompanion[2], b=Defaults.CustomColourCompanion[3] },
+                disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+            },
+            {
+                -- Custom Unit Reaction color
+                type = "colorpicker",
                 name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_HOSTILE),
                 getFunc = function() return unpack(Settings.CustomColourHostile) end,
                 setFunc = function(r,g,b,a) Settings.CustomColourHostile={r,g,b} UnitFrames.CustomFramesApplyColours(true) end,

@@ -1419,6 +1419,7 @@ local strings = {
     SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_HOSTILE =        "Reaction Color - Hostile",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_NEUTRAL =        "Reaction Color - Neutral",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_GUARD =          "Reaction Color - Guard",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_COMPANION =      "Reaction Color - Companion",
     SI_LUIE_LAM_UF_CFRAMES_ALIGN_HEADER =                "Player & Target - Bar Fill Direction",
     SI_LUIE_LAM_UF_CFRAMES_ALIGN_PLAYER_HEALTH =         "Player Health Bar Alignment",
     SI_LUIE_LAM_UF_CFRAMES_ALIGN_PLAYER_HEALTH_TP =      "Choose the direction the player health bar fills from.",

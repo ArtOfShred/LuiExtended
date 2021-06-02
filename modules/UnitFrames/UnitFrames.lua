@@ -182,6 +182,7 @@ UnitFrames.Defaults = {
     CustomColourHostile              = { 1, 0, 0 },
     CustomColourNeutral              = { 150/255, 150/255, 150/255 },
     CustomColourGuard                = { 95/255, 65/255, 54/255 },
+    CustomColourCompanion            = { 0, 1, 0 },
     LowResourceHealth                = 25,
     LowResourceStamina               = 25,
     LowResourceMagicka               = 25,
@@ -3985,6 +3986,7 @@ function UnitFrames.CustomFramesApplyReactionColor(isPlayer)
             [UNIT_REACTION_NPC_ALLY]        = { UnitFrames.SV.CustomColourFriendly[1], UnitFrames.SV.CustomColourFriendly[2], UnitFrames.SV.CustomColourFriendly[3], 0.9 },
             [UNIT_REACTION_HOSTILE]     = { UnitFrames.SV.CustomColourHostile[1], UnitFrames.SV.CustomColourHostile[2], UnitFrames.SV.CustomColourHostile[3], 0.9 },
             [UNIT_REACTION_NEUTRAL]     = { UnitFrames.SV.CustomColourNeutral[1], UnitFrames.SV.CustomColourNeutral[2], UnitFrames.SV.CustomColourNeutral[3], 0.9 },
+            [UNIT_REACTION_COMPANION]   = { UnitFrames.SV.CustomColourCompanion[1], UnitFrames.SV.CustomColourCompanion[2], UnitFrames.SV.CustomColourCompanion[3], 0.9 },
         }
 
         local reactionBackground = {
@@ -3994,6 +3996,7 @@ function UnitFrames.CustomFramesApplyReactionColor(isPlayer)
             [UNIT_REACTION_NPC_ALLY]        = { 0.1*UnitFrames.SV.CustomColourFriendly[1],   0.1*UnitFrames.SV.CustomColourFriendly[2],   0.1*UnitFrames.SV.CustomColourFriendly[3], 0.9 },
             [UNIT_REACTION_HOSTILE]     = { 0.1*UnitFrames.SV.CustomColourHostile[1],   0.1*UnitFrames.SV.CustomColourHostile[2],   0.1*UnitFrames.SV.CustomColourHostile[3], 0.9 },
             [UNIT_REACTION_NEUTRAL]     = { 0.1*UnitFrames.SV.CustomColourNeutral[1],   0.1*UnitFrames.SV.CustomColourNeutral[2],   0.1*UnitFrames.SV.CustomColourNeutral[3], 0.9 },
+            [UNIT_REACTION_COMPANION]   = { 0.1*UnitFrames.SV.CustomColourCompanion[1],   0.1*UnitFrames.SV.CustomColourCompanion[2],   0.1*UnitFrames.SV.CustomColourCompanion[3], 0.9 },
         }
 
         if UnitFrames.CustomFrames["reticleover"] then

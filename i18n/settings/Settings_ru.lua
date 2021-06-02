@@ -1419,6 +1419,7 @@ local strings = {
     SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_HOSTILE =        "Цвет реакции - Враждебный",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_NEUTRAL =        "Цвет реакции - Нейтральный",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_GUARD =          "Цвет реакции - Стража",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_COMPANION =      "Reaction Color - Companion",
     SI_LUIE_LAM_UF_CFRAMES_ALIGN_HEADER =                "Игрок & Цель - направление заполнения панели",
     SI_LUIE_LAM_UF_CFRAMES_ALIGN_PLAYER_HEALTH =         "Игрок - Заполнение панели здоровья",
     SI_LUIE_LAM_UF_CFRAMES_ALIGN_PLAYER_HEALTH_TP =      "Выберите направление заполнения панели здоровья игрока.",

@@ -280,7 +280,7 @@ function SlashCommands.SlashOutfit(option)
         return
     end
 
-    local numOutfits = GetNumUnlockedOutfits()
+    local numOutfits = GetNumUnlockedOutfits(GAMEPLAY_ACTOR_CATEGORY_PLAYER)
 
     if valid > numOutfits then
         printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED), valid))
@@ -291,9 +291,9 @@ function SlashCommands.SlashOutfit(option)
         return
     end
 
-    EquipOutfit(valid)
+    EquipOutfit(GAMEPLAY_ACTOR_CATEGORY_PLAYER, valid)
     -- Display a confirmation message.
-    local name = GetOutfitName(valid)
+    local name = GetOutfitName(GAMEPLAY_ACTOR_CATEGORY_PLAYER, valid)
     if name == "" then
         name = zo_strformat("<<1>> <<2>>", GetString(SI_CROWN_STORE_SEARCH_ADDITIONAL_OUTFITS), valid)
     end
