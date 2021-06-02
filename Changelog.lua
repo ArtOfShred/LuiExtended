@@ -6,6 +6,15 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
+    "|cFFA500LuiExtended Version 6.2.8|r",
+    "",
+    "|cFFFF00Slash Commands:|r",
+    "[*] Fixed an issue where the '/outfit' command was not working properly due to an API change I missed.",
+    "",
+    "|cFFFF00Unit Frames:|r",
+    "[*] Fixed an issue where a UI error would occur when mousing over a Companion with the \"Target - Use Reaction Color\" option enabled in Unit Frames settings.",
+    "[*] Added the option to change the Reaction Color for Companions in the Custom Unit Frame Color Options menu.",
+    "",
     "|cFFA500LuiExtended Version 6.2.7|r",
     "",
     "|cFFFF00Known Issues:|r",

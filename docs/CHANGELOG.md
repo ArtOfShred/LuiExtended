@@ -1,3 +1,14 @@
+### Version 6.2.8
+
+Slash Commands
+- Fixed an issue where the '/outfit' command was not working properly due to an API change I missed.
+
+Unit Frames
+- Fixed an issue where a UI error would occur when mousing over a Companion with the "Target - Use Reaction Color" option enabled in Unit Frames settings.
+- Added the option to change the Reaction Color for Companions in the Custom Unit Frame Color Options menu.
+
+---
+
 ### Version 6.2.7
 
 Known Issues
