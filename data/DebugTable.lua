@@ -3694,6 +3694,7 @@ LUIE.DebugAuras = {
     [32842] = true, -- Seething Fury (Molten Whip)
     [20805] = true, -- Molten Whip (Molten Whip)
     [122658] = true, -- Seething Fury (Molten Whip)
+    [122729] = true, -- Seething Fury (Molten Whip)
     [20806] = true, -- Off Balance (Molten Whip)
 
     [20816] = true, -- Flame Lash (Flame Lash)
@@ -4465,6 +4466,7 @@ LUIE.DebugAuras = {
     [47147] = true, -- Negate Magic (Negate Magic)
 
     [28341] = true, -- Suppression Field (Suppression Field)
+    [28343] = true, -- Suppression Field (Suppression Field)
     [47160] = true, -- Suppression Field (Suppression Field)
     [47159] = true, -- Suppression Field (Suppression Field)
     [80435] = true, -- Suppression Field (Suppression Field)
@@ -4709,7 +4711,7 @@ LUIE.DebugAuras = {
     [23283] = true, -- Summoned Ball of Lightning (Ball of Lightning)
     [23284] = true, -- Intercept (Ball of Lightning)
     [23279] = true, -- Ball of Lightning (Ball of Lightning)
-    [70518] = true, -- 1 Orb Up (Ball of Lightning)
+    [70518] = true, -- 1 Orb up (Ball of Lightning)
 
     [24785] = true, -- Overload (Overload)
     [24799] = true, -- Overload End (Overload)

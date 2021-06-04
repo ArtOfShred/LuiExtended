@@ -945,7 +945,6 @@ Effects.BarHighlightExtraId = {
     -- Dragonknight
     [20253] = 31898, -- Burning Talons
     [61785] = 32685, -- Fossilize
-    --[108813] = 32678, -- Shattering Rocks -- TODO: Check
 
     -- Sorcerer
     [89491] = 24330, -- Haunting Curse
@@ -4898,7 +4897,6 @@ Effects.EffectOverride = {
     [32685] = { tooltip = Tooltips.Skill_Fossilize_Stun }, -- Fossilize (Fossilize)
     [61785] = { tooltip = Tooltips.Generic_Immobilize }, -- Fossilize (Fossilize)
     [32678] = { tooltip = Tooltips.Skill_Shattering_Rocks_Stun }, -- Shattering Rocks (Shattering Rocks)
-    [108813] = { tooltip = Tooltips.Skill_Shattering_Rocks }, -- Shattering Rocks (Shattering Rocks) -- TODO: Check
 
     -- Ash Cloud / Cinder Storm / Eruption
     [29059] = { tooltip = Tooltips.Skill_Ash_Cloud }, -- Ash Cloud (Ash Cloud)
@@ -5493,9 +5491,9 @@ Effects.EffectOverride = {
 
     -- Rune Focus / Channeled Focus / Restoring Focus
     [112145] = { name = Abilities.Skill_Rune_Focus, tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 2640, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Rune Focus)
-    [37009] = { tooltip = Tooltips.Generic_Magicka_Regen_Value, tooltipValue2 = 1, tooltipValue3 = 240 },  -- Channeled Focus (Channeled Focus)
+    [37009] = { tooltip = Tooltips.Generic_Magicka_Regen_Value, tooltipValue2 = 1, tooltipValue3 = 242 },  -- Channeled Focus (Channeled Focus)
     [112166] = { name = Abilities.Skill_Channeled_Focus, tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 2640, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Channeled Focus)
-    [114842] = { tooltip = Tooltips.Generic_Stamina_Regen_Value, tooltipValue2 = 1, tooltipValue3 = 240 },  -- Restoring Focus (Restoring Focus)
+    [114842] = { tooltip = Tooltips.Generic_Stamina_Regen_Value, tooltipValue2 = 1, tooltipValue3 = 242 },  -- Restoring Focus (Restoring Focus)
     [112167] = { name = Abilities.Skill_Restoring_Focus, tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 2640, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Restoring Focus)
 
     -- Rite of Passage / Remembrance / Practiced Incantation
@@ -5685,8 +5683,8 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Grave Lord
-    [116187] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_reusable_parts.dds', tooltip = Tooltips.Skill_Reusable_Parts_Rank_1 }, -- Reusable Parts (Reusable Parts - Rank 1)
-    [116189] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_reusable_parts.dds', tooltip = Tooltips.Skill_Reusable_Parts_Rank_2 }, -- Reusable Parts (Reusable Parts - Rank 2)
+    [116187] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_reusable_parts.dds', tooltip = Tooltips.Skill_Reusable_Parts_Rank_1, forcedContainer = 'short' }, -- Reusable Parts (Reusable Parts - Rank 1)
+    [116189] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_reusable_parts.dds', tooltip = Tooltips.Skill_Reusable_Parts_Rank_2, forcedContainer = 'short' }, -- Reusable Parts (Reusable Parts - Rank 2)
 
     -- Bone Tyrant
     [119156] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_death_gleaning.dds' }, -- Death Gleaning (Death Gleaning - Rank 1)
@@ -12887,8 +12885,8 @@ Effects.FakePlayerBuffs = {
     [32744] = { duration = "GET", onlyExtra = true }, -- Green Dragon Blood
     [32722] = { duration = "GET", onlyExtended = true }, -- Coagulating Blood
 
-    [92507] = { duration = "GET", shiftId = 29043, onlyExtended = true }, -- Molten Weapons
-    [92503] = { duration = "GET", shiftId = 31874, onlyExtended = true }, -- Igneous Weapons
+    [92507] = { duration = "GET", shiftId = 29043, onlyExtra = true }, -- Molten Weapons
+    [92503] = { duration = "GET", shiftId = 31874, onlyExtra = true }, -- Igneous Weapons
 
     [31841] = { duration = 2500 }, -- Inhale
     [32796] = { duration = 2500 }, -- Deep Breath

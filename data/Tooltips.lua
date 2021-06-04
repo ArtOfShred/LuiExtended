@@ -681,7 +681,6 @@ LUIE.Data.Tooltips = {
     Skill_Petrify_Stun                              = GetString(SI_LUIE_SKILL_PETRIFY_STUN_TP),
     Skill_Fossilize_Stun                            = GetString(SI_LUIE_SKILL_FOSSILIZE_STUN_TP),
     Skill_Shattering_Rocks_Stun                     = GetString(SI_LUIE_SKILL_SHATTERING_ROCKS_STUN_TP),
-    Skill_Shattering_Rocks                          = GetString(SI_LUIE_SKILL_SHATTERING_ROCKS_TP),
     Skill_Ash_Cloud                                 = GetString(SI_LUIE_SKILL_ASH_CLOUD_TP),
     Skill_Eruption                                  = GetString(SI_LUIE_SKILL_ERUPTION_TP),
     Skill_Magma_Armor                               = GetString(SI_LUIE_SKILL_MAGMA_ARMOR_TP),
