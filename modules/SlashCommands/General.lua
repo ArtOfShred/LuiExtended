@@ -65,7 +65,13 @@ function SlashCommands.SlashHome(option)
                 RequestJumpToHouse(primaryHouse, true)
             end
         else
-            local insideOrOutside = (SlashCommands.SV.SlashHomeChoice == 1) and false or true
+            -- TODO: Clean this up
+            local insideOrOutside = SlashCommands.SV.SlashHomeChoice
+            if insideOrOutside == 1 then
+                insideOrOutside = false
+            else
+                insideOrOutside = true
+            end
             RequestJumpToHouse(primaryHouse, insideOrOutside)
         end
         printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG), true)
