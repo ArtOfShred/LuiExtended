@@ -87,7 +87,6 @@ function SlashCommands.CreateSettings()
                 default = Defaults.SlashHome,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
-
             {
                 -- Choose Home Option
                 type = "dropdown",
@@ -97,9 +96,8 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashHomeChoice = homeOptionsKeys[value] end,
                 width = "full",
                 default = Defaults.SlashHomeChoice,
-                disabled = function() return not Defaults.SlashHome end,
+                disabled = function() return not Settings.SlashHome end,
             },
-
             {
                 -- SlashSetPrimaryHome
                 type = "checkbox",

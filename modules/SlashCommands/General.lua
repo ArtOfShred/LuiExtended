@@ -11,7 +11,7 @@ local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
 
 -- Slash Command to port to primary home
-function SlashCommands.SlashHome()
+function SlashCommands.SlashHome(option)
     local primaryHouse = GetHousingPrimaryHouse()
     -- Check if we are in combat
     if IsUnitInCombat("player") then
@@ -58,14 +58,14 @@ function SlashCommands.SlashHome()
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
     else
-        if option and option == "inside" or option == "outside" then
-            if option = "inside" then
-                RequestJumpToHouse(primaryHouse, TRAVEL_OUTSIDE)
-            elseif option = "outside" then
+        if option and (option == "inside" or option == "outside") then
+            if option == "inside" then
                 RequestJumpToHouse(primaryHouse, TRAVEL_INSIDE)
+            elseif option == "outside" then
+                RequestJumpToHouse(primaryHouse, TRAVEL_OUTSIDE)
             end
         else
-            local insideOrOutside = SlashCommands.SV.SlashHomeChoice == 1 and TRAVEL_INSIDE or TRAVEL_OUTSIDE
+            local insideOrOutside = (SlashCommands.SV.SlashHomeChoice == 1) and TRAVEL_INSIDE or TRAVEL_OUTSIDE
             RequestJumpToHouse(primaryHouse, insideOrOutside)
         end
         printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG), true)
