@@ -46,6 +46,8 @@ SlashCommands.Defaults = {
     SlashReport         = true,
     SlashPet            = true,
     SlashPetMessage     = true,
+    SlashCompanion      = true,
+    SlashCompanionChoice = 1,
 }
 SlashCommands.SV = nil
 
@@ -163,7 +165,11 @@ function SlashCommands.RegisterSlashCommands()
         SLASH_COMMANDS["/smuggler"]     = function(...) SlashCommands.SlashCollectible(300) end
         SLASH_COMMANDS["/fence"]        = function(...) SlashCommands.SlashCollectible(300) end
     end
-
+    if SlashCommands.SV.SlashCompanion then
+        SLASH_COMMANDS["/bastian"]      = function(...) SlashCommands.SlashCollectible(9245) end
+        SLASH_COMMANDS["/mirri"]        = function(...) SlashCommands.SlashCollectible(9353) end
+        SLASH_COMMANDS["/companion"]    = SlashCommands.SlashCompanion
+    end
     if SlashCommands.SV.SlashEye then
         SLASH_COMMANDS["/eye"]             = function(...) SlashCommands.SlashCollectible(8006) end
     end

@@ -183,7 +183,7 @@ function SlashCommands.SlashGroupKick(option)
     local groupSize = GetGroupSize()
     -- Rather then error out, let the player use /kick and /remove as a substitute for /votekick and /voteremove in LFG
     if IsInLFGGroup() then
-        if option == "" then
+        if option == "" or option == nil then
             printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NONAME), true)
             if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
                 ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NONAME)))
@@ -223,7 +223,7 @@ function SlashCommands.SlashGroupKick(option)
         return
     end
 
-    if option == "" then
+    if option == "" or option == nil then
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NONAME), true)
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NONAME)))
@@ -274,7 +274,7 @@ end
 
 -- If the player uses /kick with no option then we need to play the kick emote, otherwise handle everything with the SlashGroupKick function.
 function SlashCommands.SlashKick(option)
-    if option == "" or not SlashCommands.SV.SlashGroupKick then
+    if option == "" or option == nil or not SlashCommands.SV.SlashGroupKick then
         PlayEmoteByIndex(109)
     else
         SlashCommands.SlashGroupKick(option)
@@ -313,7 +313,7 @@ function SlashCommands.SlashVoteKick(option)
         return
     end
 
-    if option == "" then
+    if option == "" or option == nil then
         printToChat(GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NONAME), true)
         if LUIE.ChatAnnouncements.SV.Group.GroupLFGAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NONAME)))
@@ -398,7 +398,7 @@ function SlashCommands.SlashInvite(option)
         return
     end
 
-    if option == "" then
+    if option == "" or option == nil then
         printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_NONAME), true)
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_CA_GROUP_INVITE_NONAME))

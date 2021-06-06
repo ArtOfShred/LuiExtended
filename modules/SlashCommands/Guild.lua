@@ -11,7 +11,7 @@ local zo_strformat = zo_strformat
 -- Slash Command to invite someone to a guild
 function SlashCommands.SlashGuildInvite(option)
     -- If no input was entered, display an error and end.
-    if option == "" then
+    if option == "" or option == nil then
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV), true)
         if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV)))
@@ -102,7 +102,7 @@ end
 -- Slash Command to kick someone from a guild
 function SlashCommands.SlashGuildKick(option)
     -- If no input was entered, display an error and end.
-    if option == "" then
+    if option == "" or option == nil then
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK), true)
         if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK)))

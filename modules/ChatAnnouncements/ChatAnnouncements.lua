@@ -678,6 +678,7 @@ local g_achievementLastPercentage   = {}            -- Here we will store last d
 
 -- Collectible Usage Tracking
 local currentAssistant = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
+local currentCompanion = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
 local currentVanity = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
 local currentSpecial = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ABILITY_SKIN)
 local currentHat = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_HAT)
@@ -11174,6 +11175,7 @@ function ChatAnnouncements.CollectibleResult()
     end
 
 	local newAssistant = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
+    local newCompanion = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
 	local newVanity = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
     local newSpecial = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ABILITY_SKIN)
     local newHat = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_HAT)
@@ -11196,6 +11198,13 @@ function ChatAnnouncements.CollectibleResult()
 			lastCollectibleUsed = newAssistant
 		end
 	end
+    if newCompanion ~= currentCompanion then
+        if newCompanion == 0 then
+            lastCollectibleUsed = currentCompanion
+        else
+            lastCollectibleUsed = newCompanion
+        end
+    end
 	if newVanity ~= currentVanity then
 		if newVanity == 0 then
 			lastCollectibleUsed = currentVanity
@@ -11289,6 +11298,7 @@ function ChatAnnouncements.CollectibleResult()
     end
 
 	currentAssistant = newAssistant
+    currentCompanion = newCompanion
 	currentVanity = newVanity
 	currentSpecial = newSpecial
 	currentHat = newHat
@@ -11346,9 +11356,12 @@ function ChatAnnouncements.CollectibleResult()
         end
     end
 
-    -- Assistants
-    if collectibleType == COLLECTIBLE_CATEGORY_TYPE_ASSISTANT and (ChatAnnouncements.SV.Collectibles.CollectibleUseCategory7 or LUIE.SlashCollectibleOverride) then
+    -- Assistants / Companions
+    if (collectibleType == COLLECTIBLE_CATEGORY_TYPE_ASSISTANT or collectibleType == COLLECTIBLE_CATEGORY_TYPE_COMPANION) and (ChatAnnouncements.SV.Collectibles.CollectibleUseCategory7 or LUIE.SlashCollectibleOverride) then
         if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0 then
+            message = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_SUMMON), link, formattedIcon)
+            alert = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_SUMMON), name, "")
+        elseif GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION) > 0 then
             message = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_SUMMON), link, formattedIcon)
             alert = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_SUMMON), name, "")
         else

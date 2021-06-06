@@ -182,7 +182,7 @@ UnitFrames.Defaults = {
     CustomColourHostile              = { 1, 0, 0 },
     CustomColourNeutral              = { 150/255, 150/255, 150/255 },
     CustomColourGuard                = { 95/255, 65/255, 54/255 },
-    CustomColourCompanion            = { 0, 1, 0 },
+    CustomColourCompanionFrame       = { 0, 1, 0 },
     LowResourceHealth                = 25,
     LowResourceStamina               = 25,
     LowResourceMagicka               = 25,
@@ -199,6 +199,18 @@ UnitFrames.Defaults = {
     PetOocAlpha                      = 85,
     whitelist                        = {}, -- whitelist for pet names
     PetNameClip                      = 88,
+
+    CustomFramesCompanion            = true,
+    CustomFormatCompanion            = "Current (Percentage%)",
+    CustomColourCompanion            = { 202/255,  20/255, 0 },
+    CompanionHeight                  = 30,
+    CompanionWidth                   = 220,
+    CompanionUseClassColor           = false,
+    CompanionIncAlpha                = 85,
+    CompanionOocAlpha                = 85,
+    CompanionNameClip                = 88,
+
+
     BarAlignPlayerHealth             = 1,
     BarAlignPlayerMagicka            = 1,
     BarAlignPlayerStamina            = 1,
@@ -1012,12 +1024,54 @@ local function CreateCustomFrames()
                     ["bar"]     = UI.StatusBar( shb, nil, nil, nil, false ),
                     ["shield"]  = UI.StatusBar( shb, nil, nil, nil, true ),
                 },
+                ["dead"]        = UI.Label( shb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "Status", true ),
                 ["name"]        = UI.Label( shb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, unitTag, false ),
 
             }
             UnitFrames.CustomFrames[unitTag].name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
             UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].label.fmt = "Current (Percentage%)"
         end
+    end
+
+    if UnitFrames.SV.CustomFramesCompanion then
+        -- Companion Frame
+        local companionTlw = UI.TopLevel( nil, nil )
+        companionTlw:SetDrawLayer(DL_BACKDROP)
+        companionTlw:SetDrawTier(DT_LOW)
+        companionTlw:SetDrawLevel(1)
+        companionTlw.customPositionAttr = "CustomFramesPetFramePos"
+        companionTlw.preview = UI.Backdrop( companionTlw, "fill", nil, nil, nil, true )
+        companionTlw.previewLabel = UI.Label( companionTlw.preview, {BOTTOM,TOP,0,-1,group}, nil, nil, "ZoFontGameMedium", "Player Companion", false )
+
+        local fragment = ZO_HUDFadeSceneFragment:New(companionTlw, 0, 0)
+
+        sceneManager:GetScene("hud"):AddFragment( fragment )
+        sceneManager:GetScene("hudui"):AddFragment( fragment )
+        sceneManager:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("siegeBarUI"):AddFragment( fragment )
+        sceneManager:GetScene("loot"):AddFragment( fragment )
+
+        local companion = UI.Control( companionTlw, nil, nil, false )
+        local shb = UI.Backdrop( companion, "fill", nil, nil, nil, false )
+        shb:SetDrawLayer(DL_BACKDROP)
+        shb:SetDrawLevel(1)
+
+        UnitFrames.CustomFrames.companion = {
+            ["unitTag"]     = "companion",
+            ["tlw"]         = companionTlw,
+            ["control"]     = companion,
+            [POWERTYPE_HEALTH] = {
+                ["backdrop"]= shb,
+                ["label"]   = UI.Label( shb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
+                ["bar"]     = UI.StatusBar( shb, nil, nil, nil, false ),
+                ["shield"]  = UI.StatusBar( shb, nil, nil, nil, true ),
+            },
+            ["dead"]        = UI.Label( shb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "Status", true ),
+            ["name"]        = UI.Label( shb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, unitTag, false ),
+
+        }
+        UnitFrames.CustomFrames.companion.name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
+        UnitFrames.CustomFrames.companion[POWERTYPE_HEALTH].label.fmt = "Current (Percentage%)"
     end
 
     -- Loop through Bosses
@@ -1077,7 +1131,7 @@ local function CreateCustomFrames()
     end
 
     -- Common actions for all created frames:
-    for _, baseName in pairs( { "player", "reticleover", "SmallGroup", "RaidGroup", "boss", "AvaPlayerTarget", "PetGroup" } ) do
+    for _, baseName in pairs( { "player", "reticleover", "companion", "SmallGroup", "RaidGroup", "boss", "AvaPlayerTarget", "PetGroup" } ) do
         -- set mouse handlers for all created tlws and create anchor coords preview labels
         local unitFrame = UnitFrames.CustomFrames[baseName] or UnitFrames.CustomFrames[baseName .. "1"] or nil
         if unitFrame ~= nil then
@@ -1419,7 +1473,9 @@ local function CreateCustomFrames()
     UnitFrames.CustomFramesApplyLayoutGroup(true)
     UnitFrames.CustomFramesApplyLayoutRaid(true)
     UnitFrames.CustomFramesApplyLayoutPet(true)
+    UnitFrames.CustomFramesApplyLayoutCompanion(true)
     UnitFrames.CustomPetUpdate()
+    UnitFrames.CompanionUpdate()
     UnitFrames.CustomFramesApplyLayoutBosses()
     -- Set positions of tlws using saved values or default ones
     UnitFrames.CustomFramesSetPositions()
@@ -1432,7 +1488,7 @@ local function CreateCustomFrames()
     UnitFrames.CustomFramesApplyBarAlignment()
 
         -- Add this top level window to global controls list, so it can be hidden
-    for _, unitTag in pairs( { 'player', 'reticleover', 'SmallGroup1', 'RaidGroup1', 'boss1', 'AvaPlayerTarget', "PetGroup1" } ) do
+    for _, unitTag in pairs( { 'player', 'reticleover', 'companion', 'SmallGroup1', 'RaidGroup1', 'boss1', 'AvaPlayerTarget', "PetGroup1" } ) do
         if UnitFrames.CustomFrames[unitTag] then
             LUIE.Components[moduleName .. '_CustomFrame_' .. unitTag] = UnitFrames.CustomFrames[unitTag].tlw
         end
@@ -1550,6 +1606,7 @@ function UnitFrames.Initialize(enabled)
     g_savedHealth.player          = {1,1,1,0}
     g_savedHealth.controlledsiege = {1,1,1,0}
     g_savedHealth.reticleover     = {1,1,1,0}
+    g_savedHealth.companion       = {1,1,1,0}
     for i = 1, 24 do
         g_savedHealth["group" .. i] = {1,1,1,0}
     end
@@ -1612,11 +1669,12 @@ function UnitFrames.Initialize(enabled)
     eventManager:RegisterForEvent(moduleName, EVENT_RANK_POINT_UPDATE,  UnitFrames.TitleUpdate )
 
     -- Next events make sense only for CustomFrames
-    if UnitFrames.CustomFrames.player or UnitFrames.CustomFrames.reticleover or UnitFrames.CustomFrames.SmallGroup1 or UnitFrames.CustomFrames.RaidGroup1 or UnitFrames.CustomFrames.boss1 or UnitFrames.PetGroup1 then
+    if UnitFrames.CustomFrames.player or UnitFrames.CustomFrames.reticleover or UnitFrames.CustomFrames.companion or UnitFrames.CustomFrames.SmallGroup1 or UnitFrames.CustomFrames.RaidGroup1 or UnitFrames.CustomFrames.boss1 or UnitFrames.PetGroup1 then
         eventManager:RegisterForEvent(moduleName, EVENT_COMBAT_EVENT,          UnitFrames.OnCombatEvent )
         eventManager:AddFilterForEvent(moduleName, EVENT_COMBAT_EVENT, REGISTER_FILTER_IS_ERROR, true )
 
         eventManager:RegisterForEvent(moduleName, EVENT_UNIT_DESTROYED,        UnitFrames.OnUnitDestroyed )
+        eventManager:RegisterForEvent(moduleName, EVENT_ACTIVE_COMPANION_STATE_CHANGED, UnitFrames.ActiveCompanionStateChanged )
         eventManager:RegisterForEvent(moduleName, EVENT_FRIEND_ADDED,          UnitFrames.SocialUpdateFrames)
         eventManager:RegisterForEvent(moduleName, EVENT_FRIEND_REMOVED,        UnitFrames.SocialUpdateFrames)
         eventManager:RegisterForEvent(moduleName, EVENT_IGNORE_ADDED,          UnitFrames.SocialUpdateFrames)
@@ -1766,6 +1824,18 @@ function UnitFrames.CustomFramesFormatLabels(menu)
     end
     if menu and DoesUnitExist("reticleover") then
         UnitFrames.ReloadValues("reticleover")
+    end
+
+    -- Format Companion Labels
+    if UnitFrames.CustomFrames["companion"] then
+        if UnitFrames.CustomFrames["companion"][POWERTYPE_HEALTH] then
+            if UnitFrames.CustomFrames["companion"][POWERTYPE_HEALTH].label then
+                UnitFrames.CustomFrames["companion"][POWERTYPE_HEALTH].label.fmt = UnitFrames.SV.CustomFormatCompanion
+            end
+        end
+    end
+    if menu and DoesUnitExist("companion") then
+        UnitFrames.ReloadValues("companion")
     end
 
     -- Format Small Group Labels
@@ -1952,6 +2022,21 @@ function UnitFrames.CustomFramesUnreferencePetControl(first)
     end
 end
 
+function UnitFrames.CompanionUpdate()
+    if UnitFrames.CustomFrames.companion == nil then
+        return
+    end
+    local unitTag = "companion"
+    if DoesUnitExist(unitTag) then
+        if UnitFrames.CustomFrames[unitTag] then
+            UnitFrames.CustomFrames[unitTag].control:SetHidden ( false )
+            UnitFrames.ReloadValues(unitTag)
+        end
+    else
+        UnitFrames.CustomFrames[unitTag].control:SetHidden ( true )
+    end
+end
+
 function UnitFrames.CustomPetUpdate()
     if UnitFrames.CustomFrames.PetGroup1 == nil then
         return
@@ -2002,6 +2087,21 @@ function UnitFrames.CustomPetUpdate()
 end
 
 
+-- Runs on the EVENT_ACTIVE_COMPANION_STATE_CHANGED listener.
+function UnitFrames.ActiveCompanionStateChanged(eventCode, newState, oldState)
+
+    if UnitFrames.CustomFrames.companion == nil then
+        return
+    end
+
+    local unitTag = "companion"
+    UnitFrames.CustomFrames[unitTag].control:SetHidden ( true )
+    if DoesUnitExist(unitTag) then
+        if UnitFrames.CustomFrames[unitTag] then
+            UnitFrames.CompanionUpdate()
+        end
+    end
+end
 
 -- Runs on the EVENT_UNIT_CREATED listener.
 -- Used to create DefaultFrames UI controls and request delayed CustomFrames group frame update
@@ -2970,7 +3070,7 @@ function UnitFrames.ResurrectionMonitor(unitTag)
 
     -- Check to make sure this unit exists & the custom frame exists
     if not DoesUnitExist(unitTag) then return end
-    if not ZO_Group_IsGroupUnitTag(unitTag) then return end
+    --if not ZO_Group_IsGroupUnitTag(unitTag) then return end
     if not UnitFrames.CustomFrames[unitTag] then return end
 
     if IsUnitDead(unitTag) then
@@ -3373,6 +3473,9 @@ function UnitFrames.CustomFramesSetDeadLabel( unitFrame, newValue )
         if unitFrame[POWERTYPE_HEALTH].labelTwo ~= nil then
             unitFrame[POWERTYPE_HEALTH].labelTwo:SetHidden( newValue ~= nil )
         end
+        if unitFrame[POWERTYPE_HEALTH].name ~= nil then
+            unitFrame[POWERTYPE_HEALTH].name:SetHidden ( newValue ~= nil )
+        end
     end
 end
 
@@ -3553,6 +3656,7 @@ function UnitFrames.CustomFramesSetPositions()
     local playerCenter
     local reticleover
     local reticleoverCenter
+    local companion
     local SmallGroup1
     local RaidGroup1
     local PetGroup1
@@ -3564,8 +3668,9 @@ function UnitFrames.CustomFramesSetPositions()
         playerCenter = { 0, 334 }
         reticleover = { 192, 205 }
         reticleoverCenter = { 0, -334 }
+        companion = { -954, 180 }
         SmallGroup1 = { -954, -332 }
-        PetGroup1 = { -954, 160 }
+        PetGroup1 = { -954, 250 }
         RaidGroup1 = { -954, -210 }
         boss1 = { 306, -312 }
         AvaPlayerTarget = { 0, -200 }
@@ -3574,8 +3679,9 @@ function UnitFrames.CustomFramesSetPositions()
         playerCenter = { 0, 445 }
         reticleover = { 270, 272 }
         reticleoverCenter = { 0, -445 }
+        companion = { -1271, 280 }
         SmallGroup1 = { -1271, -385 }
-        PetGroup1 = { -1271, 260 }
+        PetGroup1 = { -1271, 350 }
         RaidGroup1 = { -1271, -243 }
         boss1 = { 354, -365 }
         AvaPlayerTarget = { 0, -266 }
@@ -3584,8 +3690,9 @@ function UnitFrames.CustomFramesSetPositions()
         playerCenter = { 0, 668 }
         reticleover = { 438, 410 }
         reticleoverCenter = { 0, -668 }
+        companion = { -2036, 380 }
         SmallGroup1 = { -2036, -498 }
-        PetGroup1 = { -2036, 360 }
+        PetGroup1 = { -2036, 450 }
         RaidGroup1 = { -2036, -315 }
         boss1 = { 459, -478 }
         AvaPlayerTarget = { 0, -400 }
@@ -3598,13 +3705,14 @@ function UnitFrames.CustomFramesSetPositions()
         default_anchors["player"]      = {CENTER,CENTER,playerCenter[1],playerCenter[2]}
         default_anchors["reticleover"] = {CENTER,CENTER,reticleoverCenter[1],reticleoverCenter[2]}
     end
+    default_anchors["companion"] = {TOPLEFT,CENTER,companion[1],companion[2]}
     default_anchors["SmallGroup1"] = {TOPLEFT,CENTER,SmallGroup1[1],SmallGroup1[2]}
     default_anchors["RaidGroup1"]  = {TOPLEFT,CENTER,RaidGroup1[1],RaidGroup1[2]}
     default_anchors["PetGroup1"]   = {TOPLEFT,CENTER,PetGroup1[1],PetGroup1[2]}
     default_anchors["boss1"]       = {TOPLEFT,CENTER,boss1[1],boss1[2]}
     default_anchors["AvaPlayerTarget"] = {CENTER,CENTER,AvaPlayerTarget[1],AvaPlayerTarget[2]}
 
-    for _, unitTag in pairs( { "player", "reticleover", "SmallGroup1", "RaidGroup1", "boss1", "AvaPlayerTarget", "PetGroup1" } ) do
+    for _, unitTag in pairs( { "player", "reticleover", "companion", "SmallGroup1", "RaidGroup1", "boss1", "AvaPlayerTarget", "PetGroup1" } ) do
         if UnitFrames.CustomFrames[unitTag] then
             local savedPos = UnitFrames.SV[UnitFrames.CustomFrames[unitTag].tlw.customPositionAttr]
             local anchors = ( savedPos ~= nil and #savedPos == 2 ) and { TOPLEFT, TOPLEFT, savedPos[1], savedPos[2] } or default_anchors[unitTag]
@@ -3623,7 +3731,7 @@ function UnitFrames.CustomFramesResetPosition(playerOnly)
         end
     end
     if playerOnly == false then
-        for _, unitTag in pairs( { "SmallGroup1", "RaidGroup1", "boss1", "AvaPlayerTarget", "PetGroup1" } ) do
+        for _, unitTag in pairs( { "companion", "SmallGroup1", "RaidGroup1", "boss1", "AvaPlayerTarget", "PetGroup1" } ) do
             if UnitFrames.CustomFrames[unitTag] then
                 UnitFrames.SV[UnitFrames.CustomFrames[unitTag].tlw.customPositionAttr] = nil
             end
@@ -3637,7 +3745,7 @@ function UnitFrames.CustomFramesSetMovingState( state )
     UnitFrames.CustomFramesMovingState = state
 
     -- Unlock individual frames
-    for _, unitTag in pairs( { "player", "reticleover", "SmallGroup1", "RaidGroup1", "boss1", "AvaPlayerTarget", "PetGroup1" } ) do
+    for _, unitTag in pairs( { "player", "reticleover", "companion", "SmallGroup1", "RaidGroup1", "boss1", "AvaPlayerTarget", "PetGroup1" } ) do
         if UnitFrames.CustomFrames[unitTag] then
             local tlw = UnitFrames.CustomFrames[unitTag].tlw
             if tlw.preview then
@@ -3692,6 +3800,7 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
     local class6  = { UnitFrames.SV.CustomColourTemplar[1], UnitFrames.SV.CustomColourTemplar[2], UnitFrames.SV.CustomColourTemplar[3], 0.9} -- Templar
 
     local petcolor = { UnitFrames.SV.CustomColourPet[1], UnitFrames.SV.CustomColourPet[2], UnitFrames.SV.CustomColourPet[3], 0.9} -- Player Pet
+    local companioncolor = { UnitFrames.SV.CustomColourCompanionFrame[1], UnitFrames.SV.CustomColourCompanionFrame[2], UnitFrames.SV.CustomColourCompanionFrame[3], 0.9} -- Companion
 
     local health_bg  = { 0.1*UnitFrames.SV.CustomColourHealth[1],  0.1*UnitFrames.SV.CustomColourHealth[2],  0.1*UnitFrames.SV.CustomColourHealth[3], 0.9 }
     local shield_bg  = { 0.1*UnitFrames.SV.CustomColourShield[1],  0.1*UnitFrames.SV.CustomColourShield[2],  0.1*UnitFrames.SV.CustomColourShield[3], 0.9 }
@@ -3710,6 +3819,7 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
     local class6_bg  = { 0.1*UnitFrames.SV.CustomColourTemplar[1], 0.1*UnitFrames.SV.CustomColourTemplar[2], 0.1*UnitFrames.SV.CustomColourTemplar[3], 0.9} -- Templar
 
     local petcolor_bg = { 0.1*UnitFrames.SV.CustomColourPet[1], 0.1*UnitFrames.SV.CustomColourPet[2], 0.1*UnitFrames.SV.CustomColourPet[3], 0.9} -- Player Pet
+    local companioncolor_bg = { 0.1*UnitFrames.SV.CustomColourCompanionFrame[1], 0.1*UnitFrames.SV.CustomColourCompanionFrame[2], 0.1*UnitFrames.SV.CustomColourCompanionFrame[3], 0.9} -- Companion
 
     -- After colour is applied unhide frames, so player can see changes even from menu
     for _, baseName in pairs( { "player", "reticleover", "boss", "AvaPlayerTarget" } ) do
@@ -3733,6 +3843,50 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
     end
 
     local petClass = GetUnitClassId("player")
+
+    -- Player Companion Frame Color
+    if UnitFrames.CustomFrames["companion"] then
+        local unitFrame = UnitFrames.CustomFrames["companion"]
+        local shb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
+        if UnitFrames.SV.CompanionUseClassColor then
+            local class_color
+            local class_bg
+            if petClass == 1 then
+                class_color = class1
+                class_bg = class1_bg
+            elseif petClass == 2 then
+                class_color = class2
+                class_bg = class2_bg
+            elseif petClass == 3 then
+                class_color = class3
+                class_bg = class3_bg
+            elseif petClass == 4 then
+                class_color = class4
+                class_bg = class4_bg
+            elseif petClass == 5 then
+                class_color = class5
+                class_bg = class5_bg
+            elseif petClass == 6 then
+                class_color = class6
+                class_bg = class6_bg
+            else -- Fallback option just in case
+                class_color = petcolor
+                class_bg = petcolor_bg
+            end
+            shb.bar:SetColor( unpack(class_color) )
+            shb.backdrop:SetCenterColor( unpack(class_bg) )
+        else
+            shb.bar:SetColor( unpack(petcolor) )
+            shb.backdrop:SetCenterColor( unpack(petcolor_bg) )
+        end
+        shb.shield:SetColor( unpack(shield) )
+        if shb.shieldbackdrop then
+            shb.shieldbackdrop:SetCenterColor( unpack(shield_bg) )
+        end
+        if isMenu then
+            unitFrame.tlw:SetHidden ( false )
+        end
+    end
 
     -- Player Pet Frame Color
     for i = 1, 7 do
@@ -3768,8 +3922,8 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
                 shb.bar:SetColor( unpack(class_color) )
                 shb.backdrop:SetCenterColor( unpack(class_bg) )
             else
-                shb.bar:SetColor( unpack(petcolor) )
-                shb.backdrop:SetCenterColor( unpack(petcolor_bg) )
+                shb.bar:SetColor( unpack(companioncolor) )
+                shb.backdrop:SetCenterColor( unpack(companioncolor_bg) )
             end
             shb.shield:SetColor( unpack(shield) )
             if shb.shieldbackdrop then
@@ -4069,6 +4223,12 @@ function UnitFrames.CustomFramesApplyTexture()
         UnitFrames.CustomFrames.AvaPlayerTarget[POWERTYPE_HEALTH].shield:SetTexture(texture)
         UnitFrames.CustomFrames.AvaPlayerTarget.tlw:SetHidden( false )
     end
+    if UnitFrames.CustomFrames.companion then
+        UnitFrames.CustomFrames.companion[POWERTYPE_HEALTH].backdrop:SetCenterTexture(texture)
+        UnitFrames.CustomFrames.companion[POWERTYPE_HEALTH].bar:SetTexture(texture)
+        UnitFrames.CustomFrames.companion[POWERTYPE_HEALTH].shield:SetTexture(texture)
+        UnitFrames.CustomFrames.companion.tlw:SetHidden( false )
+    end
     if UnitFrames.CustomFrames.SmallGroup1 then
         for i = 1, 4 do
             local unitTag = "SmallGroup" .. i
@@ -4186,7 +4346,7 @@ function UnitFrames.CustomFramesApplyFont()
     local __mkFont = function(size) return zo_strformat( "<<1>>|<<2>>|<<3>>", fontName, size, fontStyle ) end
 
     -- After fonts is applied unhide frames, so player can see changes even from menu
-    for _, baseName in pairs( { "player", "reticleover", "SmallGroup", "RaidGroup", "boss", "AvaPlayerTarget", "PetGroup" } ) do
+    for _, baseName in pairs( { "player", "reticleover", "companion", "SmallGroup", "RaidGroup", "boss", "AvaPlayerTarget", "PetGroup" } ) do
         for i = 0, 24 do
             local unitTag = (i==0) and baseName or ( baseName .. i )
             if UnitFrames.CustomFrames[unitTag] then
@@ -4888,6 +5048,29 @@ function UnitFrames.CustomFramesApplyLayoutRaid(unhide)
     end
 end
 
+-- Set dimensions of custom companion frame and anchors
+function UnitFrames.CustomFramesApplyLayoutCompanion(unhide)
+    if not UnitFrames.CustomFrames.companion then
+        return
+    end
+
+    local companion = UnitFrames.CustomFrames.companion.tlw
+    companion:SetDimensions ( UnitFrames.SV.CompanionWidth, UnitFrames.SV.CompanionHeight )
+
+    local unitFrame = UnitFrames.CustomFrames.companion
+    unitFrame.control:ClearAnchors()
+    unitFrame.control:SetAnchorFill()
+    unitFrame.control:SetDimensions(UnitFrames.SV.CompanionWidth, UnitFrames.SV.CompanionHeight )
+    unitFrame.name:SetDimensions( UnitFrames.SV.CompanionWidth - UnitFrames.SV.CompanionNameClip - 10, UnitFrames.SV.CompanionHeight-2 )
+    unitFrame.name:SetAnchor(LEFT, shb, LEFT, 5, 0 )
+    unitFrame[POWERTYPE_HEALTH].label:SetDimensions(UnitFrames.SV.CompanionWidth-50, UnitFrames.SV.CompanionHeight - 2)
+
+    if unhide then
+        companion:SetHidden (false )
+    end
+
+end
+
 -- Set dimensions of custom pet frame and anchors
 function UnitFrames.CustomFramesApplyLayoutPet(unhide)
     if not UnitFrames.CustomFrames.PetGroup1 then
@@ -4965,6 +5148,9 @@ function UnitFrames.CustomFramesApplyInCombat()
     local oocAlphaPet = 0.01 * UnitFrames.SV.PetOocAlpha
     local incAlphaPet = 0.01 * UnitFrames.SV.PetIncAlpha
 
+    local oocAlphaCompanion = 0.01 * UnitFrames.SV.CompanionOocAlpha
+    local incAlphaCompanion = 0.01 * UnitFrames.SV.CompanionIncAlpha
+
     -- Apply to all frames
     if UnitFrames.CustomFrames.player then
         UnitFrames.CustomFrames.player.control:SetAlpha( idle and oocAlphaPlayer or incAlphaPlayer )
@@ -4988,6 +5174,11 @@ function UnitFrames.CustomFramesApplyInCombat()
             UnitFrames.CustomFrames.reticleover.buffs:SetHidden ( false )
             UnitFrames.CustomFrames.reticleover.debuffs:SetHidden ( false )
         end
+    end
+
+    -- Set companion transparency
+    if UnitFrames.CustomFrames.companion then
+        UnitFrames.CustomFrames.companion.control:SetAlpha ( idle and oocAlphaCompanion or incAlphaCompanion)
     end
 
     -- Set boss transparency

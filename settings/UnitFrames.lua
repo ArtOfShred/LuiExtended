@@ -695,6 +695,18 @@ function UnitFrames.CreateSettings()
                 default = { r=Defaults.CustomColourPet[1], g=Defaults.CustomColourPet[2], b=Defaults.CustomColourPet[3] },
                 disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
             },
+
+            {
+                -- Custom Unit Frames Companion Bar Color
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMESPET_COLOR),
+                getFunc = function() return unpack(Settings.CustomColourCompanionFrame) end,
+                setFunc = function(r,g,b,a) Settings.CustomColourCompanionFrame={r,g,b} UnitFrames.CustomFramesApplyColours(true) end,
+                width = "full",
+                default = { r=Defaults.CustomColourCompanionFrame[1], g=Defaults.CustomColourCompanionFrame[2], b=Defaults.CustomColourCompanionFrame[3] },
+                disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+            },
+
         },
     }
 
@@ -1761,6 +1773,108 @@ function UnitFrames.CreateSettings()
                 warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesRaid ) end,
             },
+        },
+    }
+
+    -- Unit Frames - Custom Unit Frames (Companion) Options Submenu
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "submenu",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_HEADER),
+        controls = {
+            {
+                -- Enable Companion Frames
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_ENABLE),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_ENABLE_TP),
+                getFunc = function() return Settings.CustomFramesCompanion end,
+                setFunc = function(value) Settings.CustomFramesCompanion = value end,
+                width = "full",
+                default = Defaults.CustomFramesCompanion,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+            },
+            {
+                -- Companion HP Bar Format
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_UF_SHARED_LABEL),
+                tooltip = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_TP),
+                choices = formatOptions,
+                getFunc = function() return Settings.CustomFormatCompanion end,
+                setFunc = function(var) Settings.CustomFormatCompanion = var UnitFrames.CustomFramesFormatLabels(true) UnitFrames.CustomFramesApplyLayoutCompanion(true) end,
+                width = "full",
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesCompanion ) end,
+                default = Defaults.CustomFormatCompanion,
+            },
+            {
+                -- Companion Bars Width
+                type = "slider",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_WIDTH),
+                min = 100, max = 500, step = 5,
+                getFunc = function() return Settings.CompanionWidth end,
+                setFunc = function(value) Settings.CompanionWidth = value UnitFrames.CustomFramesApplyLayoutCompanion(true) end,
+                width = "full",
+                default = Defaults.CompanionWidth,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesCompanion ) end,
+            },
+            {
+                -- Companion Bars Height
+                type = "slider",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_HEIGHT),
+                min = 20, max = 70, step = 1,
+                getFunc = function() return Settings.CompanionHeight end,
+                setFunc = function(value) Settings.CompanionHeight = value UnitFrames.CustomFramesApplyLayoutCompanion(true) end,
+                width = "full",
+                default = Defaults.CompanionHeight,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesCompanion ) end,
+            },
+            {
+                -- Companion - Out-of-Combat frame opacity
+                type = "slider",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_OOCPACITY),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_OOCPACITY_TP),
+                min = 0, max = 100, step = 5,
+                getFunc = function() return Settings.CompanionOocAlpha end,
+                setFunc = function(value) Settings.CompanionOocAlpha = value UnitFrames.CustomFramesApplyInCombat() UnitFrames.CustomFramesApplyLayoutCompanion(true) end,
+                width = "full",
+                default = Defaults.CompanionOocAlpha,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesCompanion ) end,
+            },
+            {
+                -- Companion - In-Combat frame opacity
+                type = "slider",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_ICPACITY),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_ICPACITY_TP),
+                min = 0, max = 100, step = 5,
+                getFunc = function() return Settings.CompanionIncAlpha end,
+                setFunc = function(value) Settings.CompanionIncAlpha = value UnitFrames.CustomFramesApplyInCombat() UnitFrames.CustomFramesApplyLayoutCompanion(true) end,
+                width = "full",
+                default = Defaults.CompanionIncAlpha,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesCompanion ) end,
+            },
+            {
+                -- Companion Name Clip
+                type = "slider",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_NAMECLIP),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_NAMECLIP_TP),
+                min = 0, max = 200, step = 1,
+                getFunc = function() return Settings.CompanionNameClip end,
+                setFunc = function(value) Settings.CompanionNameClip = value UnitFrames.CustomFramesApplyLayoutCompanion(true) end,
+                width = "full",
+                default = Defaults.CompanionNameClip,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesCompanion ) end,
+            },
+            {
+                -- Companion - Color Target by Class
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_USE_CLASS_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_USE_CLASS_COLOR_TP),
+                getFunc = function() return Settings.CompanionUseClassColor end,
+                setFunc = function(value) Settings.CompanionUseClassColor = value UnitFrames.CustomFramesApplyColours(true) end,
+                width = "full",
+                default = Defaults.CompanionUseClassColor,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesCompanion ) end,
+            },
+
         },
     }
 
