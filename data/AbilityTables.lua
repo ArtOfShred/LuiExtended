@@ -457,8 +457,6 @@ local AbilityTables = {
     Skill_Nova                        = 21752,
     Skill_Solar_Disturbance           = 21758,
     Skill_Cleansing_Ritual            = 22265,
-    Skill_Rune_Focus                  = 22234,
-    Skill_Channeled_Focus             = 22240,
     Skill_Restoring_Focus             = 22237,
 
     -- Warden

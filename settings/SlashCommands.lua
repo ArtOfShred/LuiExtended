@@ -16,6 +16,8 @@ local bankerOptions     = { bankerTythis, bankerCat }
 local bankerOptionsKeys = { [bankerTythis] = 1, [bankerCat] = 2 }
 local merchantOptions   = { merchantNuzimeh, merchantCat }
 local merchantOptionsKeys   = { [merchantNuzimeh] = 1, [merchantCat] = 2 }
+local homeOptions       = { "Inside", "Outside"}
+local homeOptionsKeys   = { ["Inside"] = 1, ["Outside"] = 2 }
 
 -- Create Slash Commands Settings Menu
 function SlashCommands.CreateSettings()
@@ -85,6 +87,19 @@ function SlashCommands.CreateSettings()
                 default = Defaults.SlashHome,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
+
+            {
+                -- Choose Home Option
+                type = "dropdown",
+                name = "\t\t\t\t\tChoose Inside or Outside for /Home",
+                choices = homeOptions,
+                getFunc = function() return homeOptions[Settings.SlashHomeChoice] end,
+                setFunc = function(value) Settings.SlashHomeChoice = homeOptionsKeys[value] end,
+                width = "full",
+                default = Defaults.SlashHomeChoice,
+                disabled = function() return not Defaults.SlashHome end,
+            },
+
             {
                 -- SlashSetPrimaryHome
                 type = "checkbox",

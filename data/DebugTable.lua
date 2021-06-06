@@ -6025,6 +6025,7 @@ LUIE.DebugAuras = {
     [126537] = true, -- Minor Endurance (Rally)
     [60895] = true, -- Heal Buff (Rally)
     [38805] = true, -- Rally (Rally)
+    [157657] = true, -- Rally (Rally)
 
     [83216] = true, -- Berserker Strike (Berserker Strike)
     [126489] = true, -- Berserker Strike (Berserker Strike)
@@ -6358,7 +6359,7 @@ LUIE.DebugAuras = {
 
     [85257] = true, -- Toxic Barrage (Toxic Barrage)
     [85260] = true, -- Toxic Barrage (Toxic Barrage)
-    --[85261] = true, -- Toxic Barrage (Toxic Barrage)
+    [85261] = true, -- Toxic Barrage (Toxic Barrage)
 
     [85451] = true, -- Ballista (Ballista)
     [85458] = true, -- Ballista (Ballista)
@@ -6739,6 +6740,7 @@ LUIE.DebugAuras = {
     [45562] = true, -- Concentration (Rank 2)
 
     -- MEDIUM ARMOR
+    [150057] = true, -- Medium Armor Evasion
     [29743] = true, -- Dexterity (Rank 1)
     [45563] = true, -- Dexterity (Rank 2)
     [45564] = true, -- Dexterity (Rank 3)
@@ -6798,15 +6800,17 @@ LUIE.DebugAuras = {
     -- HEAVY ARMOR
     [29552] = true, -- Unstoppable (Unstoppable)
     [63084] = true, -- Major Resolve (Unstoppable)
+    [29553] = true, -- Unstoppable (Unstoppable)
     [126581] = true, -- Unstoppable (Unstoppable)
 
     [39205] = true, -- Unstoppable Brute (Unstoppable Brute)
     [63134] = true, -- Major Resolve (Unstoppable Brute)
-    [126582] = true, -- Unstoppable (Unstoppable)
+    [63133] = true, -- Unstoppable Brute (Unstoppable Brute)
+    [126582] = true, -- Unstoppable (Unstoppable Brute)
 
     [39197] = true, -- Immovable (Immovable)
     [63119] = true, -- Major Resolve (Immovable)
-    --[63118] = true, -- Immovable (Immovable)
+    [63118] = true, -- Immovable (Immovable)
     [126583] = true, -- Immovable (Immovable)
 
     -------------------------------------
@@ -7092,8 +7096,9 @@ LUIE.DebugAuras = {
     [40520] = true, -- Q3047 - Knockdown (Bloodmoon)
     [40525] = true, -- Bit an ally (Bloodmoon)
 
-    [32638] = true, -- Savage Strength (Rank 1)
-    [46139] = true, -- Savage Strength (Rank 2)
+    [32638] = true, -- Savage Strength (Savage Strength - Rank 1)
+    [46139] = true, -- Savage Strength (Savage Strength - Rank 2)
+    [150999] = true, -- Major Resolve (Savage Strength)
 
     [32641] = true, -- Call of the Pack (Rank 1)
     [80283] = true, -- Call of the Pack
@@ -8068,14 +8073,8 @@ LUIE.DebugAuras = {
     -- Wood Elf (Bosmer)
     [36008] = true, -- Acrobat (Rank 1)
     [36022] = true, -- Hunter's Eye (Rank 1)
-    [49175] = true, -- Hunter's Eye (Rank 1)
-    [121106] = true, -- Hunter's Eye (Rank 1)
     [45295] = true, -- Hunter's Eye (Rank 2)
-    [49176] = true, -- Hunter's Eye (Rank 2)
-    [121108] = true, -- Hunter's Eye (Rank 2)
     [45296] = true, -- Hunter's Eye (Rank 3)
-    [49177] = true, -- Hunter's Eye (Rank 3)
-    [121110] = true, -- Hunter's Eye (Rank 3)
     [64279] = true, -- Y'ffre's Endurance (Rank 1)
     [64280] = true, -- Y'ffre's Endurance (Rank 2)
     [64281] = true, -- Y'ffre's Endurance (Rank 3)

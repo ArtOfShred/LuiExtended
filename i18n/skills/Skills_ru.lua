@@ -495,7 +495,7 @@ local strings = {
     SI_LUIE_SKILL_NOVA_GROUND_TP =                       "Taking Magic Damage every |cFFFFFF1|r second and afflicted with Major Maim.",
     SI_LUIE_SKILL_SOLAR_PRISON_TP =                      "Enemies in the |cFFFFFF8|r meter radius of the nova take Magic Damage every |cFFFFFF1|r second and have Major Maim applied to them.\n\nAn ally near the fragment can activate the |cFFFFFFGravity Crush|r synergy.",
     SI_LUIE_SKILL_SOLAR_DISTURBANCE_TP =                 "Enemies in the |cFFFFFF8|r meter radius of the nova take Magic Damage every |cFFFFFF1|r second and have Major Maim applied to them.\n\nMajor Maim persists on enemies who leave the area for |cFFFFFF<<2>>|r seconds.\n\nAn ally near the fragment can activate the |cFFFFFFSupernova|r synergy.",
-    SI_LUIE_SKILL_SOLAR_DISTURBANCE_GROUND_TP =          "Taking Magic Damage every |cFFFFFF1|r second.\n\nEach time you take damage you are afflicted with Major Maim for |cFFFFFF6|r seconds.",
+    SI_LUIE_SKILL_SOLAR_DISTURBANCE_GROUND_TP =          "Taking Magic Damage every |cFFFFFF1|r second.\n\nEach time you take damage you are afflicted with Major Maim for |cFFFFFF<<2>>|r seconds.",
     SI_LUIE_SKILL_CLEANSING_RITUAL_TP =                  "You and allies in the |cFFFFFF12|r meter radius of sacred light are healed every |cFFFFFF2|r seconds.\n\nAllies in the area can activate the |cFFFFFFPurify|r synergy.",
     SI_LUIE_SKILL_CLEANSING_RITUAL_RETRIBUTION_TP =      "Enemies in the |cFFFFFF12|r meter radius of sacred light take Magic Damage every |cFFFFFF2|r seconds and the damage increases by |cFFFFFF5|r% per tick.\n\nAllies in the area can activate the |cFFFFFFPurify|r synergy.",
     SI_LUIE_SKILL_RITE_OF_PASSAGE_TP =                   "Healing you and allies within |cFFFFFF20|r meters every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
@@ -509,7 +509,7 @@ local strings = {
     SI_LUIE_SKILL_SUB_ASSAULT_ECHO_TP =                  "After |cFFFFFF3|r seconds, deal Poison Damage to enemies up to |cFFFFFF20|r meters in front of you.\n\nAfter the shalk complete their attack, they burrow again for |cFFFFFF3|r seconds and then resurface again.",
     SI_LUIE_SKILL_DEEP_FISSURE_TP =                      "Через |cFFFFFF3|r секунды, наносит Магический урон и накладывает Major Breach на |cFFFFFF5|r секунд противникам перед вами на расстоянии до |cFFFFFF20|r метров.",
     SI_LUIE_SKILL_FETCHER_INFECTION_BONUS_DAMAGE_TP =    "Ваше следующее применение Fetcher Infection нанесёт на |cFFFFFF50|r% больше урона.",
-    SI_LUIE_SKILL_GROWING_SWARM_TP =                     "Afflicted with Physical Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nAllies within |cFFFFFF5|r meters take Physical Damage every |cFFFFFF2|r seconds.",
+    SI_LUIE_SKILL_GROWING_SWARM_TP =                     "Afflicted with Bleed Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nAllies within |cFFFFFF5|r meters take Bleed Damage every |cFFFFFF2|r seconds.",
     SI_LUIE_SKILL_BETTY_NETCH_TP =                       "Every |cFFFFFF5|r seconds, the netch removes |cFFFFFF1|r negative effect from you.",
     SI_LUIE_SKILL_BLUE_BETTY_TP =                        "Restoring |cFFFFFF192|r Magicka every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nEvery |cFFFFFF5|r seconds, the netch removes |cFFFFFF1|r negative effect from you.",
     SI_LUIE_SKILL_BULL_NETCH_TP =                        "Restoring |cFFFFFF192|r Stamina every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nEvery |cFFFFFF5|r seconds, the netch removes |cFFFFFF1|r negative effect from you.",
@@ -613,7 +613,7 @@ local strings = {
     SI_LUIE_SKILL_RENDING_SLASHES_TP =                   "Afflicted with Bleed Damage every |cFFFFFF2|r seconds and Movement Speed reduced by |cFFFFFF40|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_BLOOD_CRAZE_TP =                       "Подвержен Кровотечению каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд.\n\nАтакуюие вас исцеляются каждые |cFFFFFF2|r секунды, пока активная способность Blood Craze.",
     SI_LUIE_SKILL_BLOOD_CRAZE_HEAL_TP =                  "Исцеляет каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд, пока на вашей цели активе эффект Blood Craze.",
-    SI_LUIE_SKILL_BLADE_CLOAK_TP =                       "A ring of floating razors surrounds you, dealing Physical Damage to all enemies within |cFFFFFF5|r meters every |cFFFFFF<<2>>|r <<2[second/seconds]>> for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_BLADE_CLOAK_TP =                       "A protective cloak of razors surrounds you, dealing Physical Damage to all enemies within |cFFFFFF5|r meters every |cFFFFFF<<2>>|r <<2[second/seconds]>> for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_LACERATE_TP =                          "Afflicted with Bleed Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker heals for |cFFFFFF50|r% of the damage done.",
     SI_LUIE_SKILL_THRIVE_IN_CHAOS_TP =                   "Увеличивает наносимый урон на |cFFFFFF6|r% за каждый удар способностью Thrive in Chaos, максимум на |cFFFFFF36|r%.",
     SI_LUIE_SKILL_FLYING_BLADE_TP =                      "Your attacker can jump to you within the next |cFFFFFF<<1>>|r seconds, dealing Physical Damage and granting them Major Brutality for |cFFFFFF40|r seconds.",
@@ -660,12 +660,13 @@ local strings = {
     SI_LUIE_SKILL_HARNESS_MAGICKA =                      "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nWhile active, whenever the shield absorbs damage, you restore Magicka. This effect can occur up to |cFFFFFF3|r times.",
 
     -- Medium Armor
+    SI_LUIE_SKILL_MEDIUM_ARMOR_EVASION =                 "Reduce damage taken from area of effect attacks by |cFFFFFF<<1>>|r% for |cFFFFFF2|r seconds.",
     SI_LUIE_SKILL_ELUDE =                                "When you take damage from a direct area of effect attack, you gain Major Expedition for |cFFFFFF1|r second per piece of Medium Armor worn.",
 
     -- Heavy Armor
-    SI_LUIE_SKILL_UNSTOPPABLE =                          "Immune to knockback and disabling effects for |cFFFFFF<<1>>|r seconds.\n\nMovement Speed reduced by |cFFFFFF65|r% for the duration.",
-    SI_LUIE_SKILL_UNSTOPPABLE_BRUTE =                    "Each piece of Heavy Armor worn decreases the cost of Break Free by |cFFFFFF5|r% for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_IMMOVABLE =                            "Immune to knockback and disabling effects for |cFFFFFF<<1>>|r seconds.\n\nMovement Speed reduced by |cFFFFFF65|r% for the duration.\n\nEach piece of Heavy Armor worn increases the amount of damage you block and the potency of the snare by |cFFFFFF5|r%.",
+    SI_LUIE_SKILL_UNSTOPPABLE =                          "Movement Speed reduced by |cFFFFFF65|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_UNSTOPPABLE_BRUTE =                    "Decrease the cost of Break Free by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r seconds.\n\nMovement Speed reduced by |cFFFFFF65|r% for the duration.",
+    SI_LUIE_SKILL_IMMOVABLE =                            "Increase the amount of damage you block by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r seconds.\n\nMovement Speed reduced by |cFFFFFF<<3>>|r% for the duration.",
 
     ----------------------------------------------------------------
     -- WORLD SKILLS ------------------------------------------------
@@ -688,7 +689,7 @@ local strings = {
     SI_LUIE_SKILL_CARNAGE_TP =                           "Afflicted with Bleed Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nDeals up to |cFFFFFF450|r% more damage in proportion to your missing health under |cFFFFFF100|r%.",
     SI_LUIE_SKILL_FERAL_CARNAGE_TP =                     "Afflicted with Bleed Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nDeals up to |cFFFFFF450|r% more damage in proportion to your missing health under |cFFFFFF100|r%.\n\nEach time this effect deals damage the werewolf restores |cFFFFFF100|r Stamina.",
     SI_LUIE_SKILL_BRUTAL_CARNAGE_BUFF_TP =               "Increase Weapon Damage by |cFFFFFF100|r for |cFFFFFF10|r seconds, stacking up to |cFFFFFF6|r times for each enemy hit by Brutal Carnage.",
-    SI_LUIE_SKILL_HIRCINES_FORTITUDE_TP =                "Gain Health and Stamina Recovery equal to |cFFFFFF5|r% of the amount you healed with Hircine's Fortitude, up to a maximum of |cFFFFFF666|r, for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_HIRCINES_FORTITUDE_TP =                "Gain Health and Stamina Recovery equal to |cFFFFFF5|r% of the amount you healed with Hircine's Fortitude, up to a maximum of |cFFFFFF333|r, for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_FEROCIOUS_ROAR_TP =                    "Increase Heavy Attack casting speed by |cFFFFFF33|r% for |cFFFFFF<<1>>|r seconds.",
 
     -- Vampire
@@ -772,8 +773,8 @@ local strings = {
     SI_LUIE_SKILL_SPIKED_BONE_SHIELD_TP =                "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>> and returning |cFFFFFF138|r% of direct damage absorbed back to the enemy.\n\nAn ally near you can activate the |cFFFFFFBone Wall|r synergy.",
     SI_LUIE_SKILL_BONE_SURGE_TP =                        "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nAn ally near you can activate the |cFFFFFFSpinal Surge|r synergy.",
     SI_LUIE_SKILL_INNER_BEAST_TP =                       "Your attacker deals |cFFFFFF5|r% more damage to you for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_NECROTIC_ORB_TP =                      "A globe of annihilation slowly floats forward, dealing Magic Damage to enemies within |cFFFFFF8|r meters every |cFFFFFF0.5|r seconds.\n\nAn ally near the globe can activate the |cFFFFFFCombustion|r synergy.",
-    SI_LUIE_SKILL_ENERGY_ORB_TP =                        "A globe of regeneration slowly floats forward, healing you and nearby allies within |cFFFFFF8|r meters every |cFFFFFF0.5|r seconds.\n\nAn ally near the globe can activate the |cFFFFFFHealing Combustion|r synergy.",
+    SI_LUIE_SKILL_NECROTIC_ORB_TP =                      "A globe of annihilation slowly floats forward, dealing Magic Damage to enemies within |cFFFFFF8|r meters every |cFFFFFF1|r second.\n\nAn ally near the globe can activate the |cFFFFFFCombustion|r synergy.",
+    SI_LUIE_SKILL_ENERGY_ORB_TP =                        "A globe of regeneration slowly floats forward, healing you and nearby allies within |cFFFFFF8|r meters every |cFFFFFF1|r second.\n\nAn ally near the globe can activate the |cFFFFFFHealing Combustion|r synergy.",
 
     ----------------------------------------------------------------
     -- AVA SKILLS --------------------------------------------------
@@ -793,7 +794,7 @@ local strings = {
     SI_LUIE_SKILL_PROXIMITY_DETONATION_TP =              "Charging a magical bomb that explodes after |cFFFFFF<<1>>|r seconds, dealing Magic Damage to all enemies within |cFFFFFF8|r meters.\n\nEach enemy within the bomb's radius increases the damage by |cFFFFFF25|r%.",
     SI_LUIE_SKILL_WAR_HORN_TP =                          "Increase Max Stamina and Magicka by |cFFFFFF10|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_WAR_HORN_DUMMY_TP =                    "Increase Max Stamina and Magicka by |cFFFFFF10|r%.",
-    SI_LUIE_SKILL_STURDY_HORN_TP =                       "Increase Max Stamina and Magicka by |cFFFFFF10|r% for |cFFFFFF30|r seconds.\n\nIncrease Critical Resistance by |cFFFFFF990|r for |cFFFFFF10|r seconds.",
+    SI_LUIE_SKILL_STURDY_HORN_TP =                       "Increase Max Stamina and Magicka by |cFFFFFF10|r% for |cFFFFFF30|r seconds.\n\nIncrease Critical Resistance by |cFFFFFF1320|r for |cFFFFFF10|r seconds.",
 
     -- Support
     SI_LUIE_SKILL_SIEGE_SHIELD_TP =                      "Reduce damage taken from siege weapons by |cFFFFFF50|r%.",
@@ -807,12 +808,6 @@ local strings = {
     SI_LUIE_SKILL_REVEALING_FLARE_TP =                   "Stealthed and invisible enemies in the |cFFFFFF10|r meter radius of the flare are revealed.\n\nExposed enemies cannot return to stealth or invisibility for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_BLINDING_FLARE_TP =                    "Stealthed and invisible enemies in the |cFFFFFF10|r meter radius of the flare are revealed.\n\nExposed enemies are stunned for |cFFFFFF4|r seconds, and cannot return to stealth or invisiblity for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_REPLENISHING_BARRIER_TP =              "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nWhen the ward dissolves, the caster restores |cFFFFFF4|r Ultimate and |cFFFFFF1000|r Magicka.",
-
-    ----------------------------------------------------------------
-    -- RACIAL SKILLS -----------------------------------------------
-    ----------------------------------------------------------------
-
-    SI_LUIE_SKILL_HUNTERS_EYE_TP =                       "Increase Movement Speed by |cFFFFFF<<1>>|r% and Physical and Spell Penetration by |cFFFFFF<<2>>|r for |cFFFFFF6|r seconds.",
 
     ----------------------------------------------------------------
     -- CYRODIIL ----------------------------------------------------

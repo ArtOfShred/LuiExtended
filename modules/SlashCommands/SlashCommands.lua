@@ -15,6 +15,7 @@ local moduleName = LUIE.name .. "SlashCommands"
 SlashCommands.Enabled  = false
 SlashCommands.Defaults = {
     SlashHome           = true,
+    SlashHomeChoice     = 1,
     SlashSetPrimaryHome = true,
     SlashRegroup        = true,
     SlashDisband        = true,

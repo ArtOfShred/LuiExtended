@@ -709,6 +709,9 @@ Effects.EffectGroundDisplay = {
     [136098] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds', buff = true, debuff = false, ground = false }, -- Kyne's Blessing (of Kyne's Wind)
     [137995] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds', buff = true, debuff = false, ground = false }, -- Kyne's Blessing (of Kyne's Wind (Perfect))
 
+    -- Used only to flag abilities for Tooltips
+    [75814] = { buff = false, debuff = false, ground = false }, -- Lunar Bastion (Lunar Bastion)
+
     ---------------------------
     -- Class Abilities --------
     ---------------------------
@@ -755,15 +758,14 @@ Effects.EffectGroundDisplay = {
     [95933] = { icon = 'esoui/art/icons/ability_templar_sun_strike.dds', buff = false, debuff = false, ground = true }, -- Spear Shards (Spear Shards)
     [95957] = { icon = 'esoui/art/icons/ability_templar_light_strike.dds', buff = false, debuff = false, ground = true }, -- Luminous Shards (Luminous Shards)
     [26880] = { icon = 'esoui/art/icons/ability_templarsun_thrust.dds', buff = false, debuff = false, ground = true }, -- Blazing Spear (Blazing Spear)
-    [21976] = { buff = false, debuff = false, ground = true }, -- Nova (Nova)
-    [22003] = { buff = false, debuff = false, ground = true }, -- Solar Prison (Solar Prison)
-    [22001] = { buff = false, debuff = false, ground = true }, -- Solar Disturbance (Solar Disturbance)
-    [22265] = { buff = true, debuff = false, ground = false }, -- Cleansing Ritual (Cleansing Ritual)
-    [22259] = { buff = true, debuff = false, ground = false }, -- Ritual of Retribution (Ritual of Retribution)
-    [22262] = { buff = true, debuff = false, ground = false }, -- Extended Ritual (Extended Ritual)
-    --[22234] = { buff = true, debuff = false, ground = false }, -- Rune Focus (Rune Focus) -- TODO: Check this?
-    --[22240] = { buff = true, debuff = false, ground = false }, -- Channeled Focus (Channeled Focus) -- TODO: Check this?
-    --[22237] = { buff = true, debuff = false, ground = false }, -- Restoring Focus (Restoring Focus) -- TODO: Check this?
+    [21976] = { icon = 'esoui/art/icons/ability_templar_nova.dds', buff = false, debuff = false, ground = true }, -- Nova (Nova)
+    [22003] = { icon = 'esoui/art/icons/ability_templar_solar_prison.dds', buff = false, debuff = false, ground = true }, -- Solar Prison (Solar Prison)
+    [22001] = { icon = 'esoui/art/icons/ability_templar_solar_disturbance.dds', buff = false, debuff = false, ground = true }, -- Solar Disturbance (Solar Disturbance)
+
+    -- Used only to flag abilities for Tooltips
+    [22265] = { buff = false, debuff = false, ground = false }, -- Cleansing Ritual (Cleansing Ritual)
+    [22259] = { buff = false, debuff = false, ground = false }, -- Ritual of Retribution (Ritual of Retribution)
+    [22262] = { buff = false, debuff = false, ground = false }, -- Extended Ritual (Extended Ritual)
 
     -- Warden
     [86161] = { buff = false, debuff = false, ground = true }, -- Impaling Shards (Impaling Shards)
@@ -5455,17 +5457,17 @@ Effects.EffectOverride = {
 
     -- Nova / Solar Prison / Solar Disturbance
     [31562] = { tooltip = Tooltips.Generic_Stun }, -- Supernova (Nova - Supernova Synergy)
-    [21976] = { tooltip = Tooltips.Skill_Nova }, -- Nova (Nova)
+    [21976] = { icon = 'esoui/art/icons/ability_templar_nova.dds', tooltip = Tooltips.Skill_Nova }, -- Nova (Nova)
     [21754] = { hide = true }, -- Nova (Nova)
     [34443] = { tooltip = Tooltips.Generic_Stun }, -- Gravity Crush (Solar Prison - Gravity Crush Synergy)
-    [22003] = { tooltip = Tooltips.Skill_Solar_Prison }, -- Solar Prison (Solar Prison)
+    [22003] = { icon = 'esoui/art/icons/ability_templar_solar_prison.dds', tooltip = Tooltips.Skill_Solar_Prison }, -- Solar Prison (Solar Prison)
     [21757] = { hide = true }, -- Solar Prison (Solar Prison)
-    [22001] = { tooltip = Tooltips.Skill_Solar_Disturbance, tooltipValue2Id = 21760 }, -- Solar Disturbance (Solar Disturbance)
+    [22001] = { icon = 'esoui/art/icons/ability_templar_solar_disturbance.dds', tooltip = Tooltips.Skill_Solar_Disturbance, tooltipValue2Id = 21760 }, -- Solar Disturbance (Solar Disturbance)
     [21760] = { hide = true }, -- Solar Disturbance (Solar Disturbance)
 
     [21753] = { groundLabel = true, tooltip = Tooltips.Skill_Nova_Ground }, -- Nova
     [21756] = { groundLabel = true, tooltip = Tooltips.Skill_Nova_Ground }, -- Solar Prison
-    [21759] = { groundLabel = true, tooltip = Tooltips.Skill_Solar_Disturbance_Ground }, -- Solar Disturbance
+    [21759] = { groundLabel = true, tooltip = Tooltips.Skill_Solar_Disturbance_Ground, tooltipValue2Id = 21760 }, -- Solar Disturbance
 
     -- Restoring Light
     [35632] = { tooltip = Tooltips.Generic_Magicka_Regen, tooltipValue2 = 2 }, -- Honor the Dead (Honor the Dead)
@@ -5490,11 +5492,11 @@ Effects.EffectOverride = {
     [22262] = { tooltip = Tooltips.Skill_Cleansing_Ritual }, -- Extended Ritual (Extended Ritual)
 
     -- Rune Focus / Channeled Focus / Restoring Focus
-    [112145] = { name = Abilities.Skill_Rune_Focus, tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 2640, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Rune Focus)
+    [112145] = { tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1, forcedContainer = "short", groundLabel = true }, -- Rune Focus (Rune Focus)
     [37009] = { tooltip = Tooltips.Generic_Magicka_Regen_Value, tooltipValue2 = 1, tooltipValue3 = 242 },  -- Channeled Focus (Channeled Focus)
-    [112166] = { name = Abilities.Skill_Channeled_Focus, tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 2640, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Channeled Focus)
+    [112166] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1, forcedContainer = "short", groundLabel = true }, -- Channeled focus (Channeled Focus)
     [114842] = { tooltip = Tooltips.Generic_Stamina_Regen_Value, tooltipValue2 = 1, tooltipValue3 = 242 },  -- Restoring Focus (Restoring Focus)
-    [112167] = { name = Abilities.Skill_Restoring_Focus, tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 2640, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Restoring Focus)
+    [112167] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = Abilities.Skill_Restoring_Focus, tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Restoring Focus)
 
     -- Rite of Passage / Remembrance / Practiced Incantation
     [22223] = { tooltip = Tooltips.Skill_Rite_of_Passage }, -- Rite of Passage (Rite of Passage)
@@ -6076,7 +6078,7 @@ Effects.EffectOverride = {
     -- Blade Cloak / Quick Cloak / Deadly Cloak
     [28613] = { tooltip = Tooltips.Skill_Blade_Cloak, tooltipValue2 = 2 }, -- Blade Cloak (Blade Cloak)
     [38901] = { tooltip = Tooltips.Skill_Blade_Cloak, tooltipValue2 = 2 }, -- Quick Cloak (Quick Cloak)
-    [38906] = { tooltip = Tooltips.Skill_Blade_Cloak, tooltipValue2 = 1 }, -- Deadly Cloak (Deadly Cloak)
+    [38906] = { tooltip = Tooltips.Skill_Blade_Cloak, tooltipValue2 = 2 }, -- Deadly Cloak (Deadly Cloak)
 
     -- Hidden Blade / Shrouded Daggers / Flying Blade
     [126641] = { icon = '' }, -- Hidden Blade (Hidden Blade)
@@ -6274,13 +6276,15 @@ Effects.EffectOverride = {
     [39182] = { tooltip = Tooltips.Skill_Harness_Magicka }, -- Harness Magicka (Harness Magicka)
 
     -- MEDIUM ARMOR
+    [150057] = { icon = 'LuiExtended/media/icons/abilities/ability_armor_medium_armor_evasion.dds', dynamicTooltip = true }, -- Medium Armor Evasion (Medium Armor Bonuses)
+
     [39196] = { tooltip = Tooltips.Innate_Snare_Immobilize_Immunity }, -- Shuffle (Shuffle)
     [126958] = { icon = 'esoui/art/icons/ability_armor_002_b.dds', tooltip = Tooltips.Skill_Elude }, -- Elude (Elude)
 
     -- HEAVY ARMOR
     [126581] = { tooltip = Tooltips.Skill_Unstoppable }, -- Unstoppable (Unstoppable)
-    [126582] = { name = Abilities.Skill_Unstoppable_Brute, tooltip = Tooltips.Skill_Unstoppable_Brute }, -- Unstoppable Brute (Unstoppable Brute)
-    [126583] = { tooltip = Tooltips.Skill_Immovable }, -- Immovable (Immovable)
+    [126582] = { name = Abilities.Skill_Unstoppable_Brute, dynamicTooltip = true }, -- Unstoppable Brute (Unstoppable Brute)
+    [126583] = { dynamicTooltip = true }, -- Immovable (Immovable)
 
     ----------------------------------------------------------------
     -- SOUL MAGIC PASSIVES -----------------------------------------
@@ -6327,11 +6331,11 @@ Effects.EffectOverride = {
     [40360] = { tooltip = Tooltips.Skill_Noxiphilic_Sanguivoria, type = BUFF_EFFECT_TYPE_BUFF }, -- Vampirism (Blood Ritual)
 
     -- Base Vampire
-    [135397] = { stack = 1, tooltip = Tooltips.Skill_Vampirism_Stage_1 }, -- Vampire Stage 1
-    [135399] = { stack = 2, tooltip = Tooltips.Skill_Vampirism_Stage_2 }, -- Vampire Stage 2
-    [135400] = { stack = 3, tooltip = Tooltips.Skill_Vampirism_Stage_3 }, -- Vampire Stage 3
-    [135402] = { stack = 4, tooltip = Tooltips.Skill_Vampirism_Stage_4 }, -- Vampire Stage 4
-    [135412] = { stack = 5, tooltip = Tooltips.Skill_Vampirism_Stage_5 }, -- Vampire Stage 5
+    [135397] = { stack = 1, tooltip = Tooltips.Skill_Vampirism_Stage_1, forcedContainer = 'long' }, -- Vampire Stage 1
+    [135399] = { stack = 2, tooltip = Tooltips.Skill_Vampirism_Stage_2, forcedContainer = 'long' }, -- Vampire Stage 2
+    [135400] = { stack = 3, tooltip = Tooltips.Skill_Vampirism_Stage_3, forcedContainer = 'long' }, -- Vampire Stage 3
+    [135402] = { stack = 4, tooltip = Tooltips.Skill_Vampirism_Stage_4, forcedContainer = 'long' }, -- Vampire Stage 4
+    [135412] = { stack = 5, tooltip = Tooltips.Skill_Vampirism_Stage_5, forcedContainer = 'long' }, -- Vampire Stage 5
 
     -- Feed
     [33182] = { icon = 'esoui/art/icons/ability_u26_vampire_synergy_feed.dds' }, -- Feed (Feed)
@@ -6765,11 +6769,11 @@ Effects.EffectOverride = {
     [63511] = { icon = 'esoui/art/icons/ability_undaunted_004b.dds' }, -- Combustion (Energy Orb - Healing Combustion Synergy)
 
     [39298] = { tooltip = Tooltips.Skill_Necrotic_Orb }, -- Necrotic Orb (Necrotic Orb)
-    [39299] = { tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.5, groundLabel = true }, -- Necrotic Orb (Necrotic Orb)
+    [39299] = { tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1, groundLabel = true }, -- Necrotic Orb (Necrotic Orb)
     [42028] = { tooltip = Tooltips.Skill_Necrotic_Orb }, -- Mystic Orb (Mystic Orb)
-    [42029] = { tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.5, groundLabel = true }, -- Mystic Orb (Mystic Orb)
+    [42029] = { tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1, groundLabel = true }, -- Mystic Orb (Mystic Orb)
     [42038] = { tooltip = Tooltips.Skill_Energy_Orb }, -- Energy Orb (Energy Orb)
-    [42039] = { tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 0.5, groundLabel = true }, -- Energy Orb (Energy Orb)
+    [42039] = { tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1, groundLabel = true }, -- Energy Orb (Energy Orb)
 
     ----------------------------------------------------------------
     -- ASSAULT PASSIVES --------------------------------------------
@@ -6963,11 +6967,8 @@ Effects.EffectOverride = {
     -- Wood Elf (Bosmer)
     [36008] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_acrobat.dds', hide = true }, -- Acrobat -- SHOWS ONLY ON TARGET PLAYERS
     [36022] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_hunters_eye.dds' }, -- Hunter's Eye (Rank 1)
-    [49175] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_hunters_eye.dds', tooltip = Tooltips.Skill_Hunters_Eye_Rank_1 }, -- Hunter's Eye (Rank 1)
     [45295] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_hunters_eye.dds' }, -- Hunter's Eye (Rank 2)
-    [49176] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_hunters_eye.dds', tooltip = Tooltips.Skill_Hunters_Eye_Rank_2 }, -- Hunter's Eye (Rank 2)
     [45296] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_hunters_eye.dds' }, -- Hunter's Eye (Rank 3)
-    [49177] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_hunters_eye.dds', tooltip = Tooltips.Skill_Hunters_Eye_Rank_3 }, -- Hunter's Eye (Rank 3)
     [64279] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_yffres_endurance.dds' }, -- Y'ffre's Endurance (Rank 1)
     [64280] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_yffres_endurance.dds' }, -- Y'ffre's Endurance (Rank 2)
     [64281] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_yffres_endurance.dds' }, -- Y'ffre's Endurance (Rank 3)
@@ -8501,7 +8502,7 @@ Effects.EffectOverride = {
 
     [81794] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_frost_ray.dds', tooltip = Tooltips.Skill_Frost_Ray }, -- Frost Ray (Imp - Frost)
     [88907] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_frost_ray.dds', hide = true }, -- Frost Ray (Imp - Frost)
-    [88915] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_gtaoe_frost_snare.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, hide = true }, -- Frost Ray (Imp - Frost)
+    [88915] = { hide = true }, -- Frost Ray (Imp - Frost)
     [88908] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_ice_pillar.dds' }, -- Frost Ray (Imp - Frost)
 
     [9670] = { icon = 'LuiExtended/media/icons/abilities/ability_lamia_strike.dds' }, -- Strike (Lamia)
@@ -12944,7 +12945,9 @@ Effects.FakePlayerBuffs = {
     [137206] = { duration = "GET", debuff = true }, -- Major Berserk (Hircine's Rage)
 
     -- Alliance War
+    [101161] = { duration = "GET", shiftId = 38566, onlyExtended = true }, -- Rapid Maneuever (Rapid Maneuver)
     [101169] = { duration = "GET", shiftId = 40211 }, -- Retreating Maneuever (Retreating Maneuver)
+    [101178] = { duration = "GET", shiftId = 40215, onlyExtra = true }, -- Charging Maneuver (Charging Maneuver)
 
     -- Seasonal Quests (New Life Festival)
     --[84125] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = Abilities.Skill_Lava_Foot_Stomp, duration = 10000}, -- Breton Male Dance (Lava Foot Stomp)
@@ -12987,7 +12990,13 @@ Effects.FakePlayerBuffs = {
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.FakePlayerOfflineAura = {
 
-    [75814] = { duration = 8000 }, -- Lunar Bastion (Lunar Bastion)
+    -- Sets
+    [75814] = { duration = "GET" }, -- Lunar Bastion (Lunar Bastion)
+
+    -- Templar
+    [22265] = { duration = "GET" }, -- Cleansing Ritual (Cleansing Ritual)
+    [22259] = { duration = "GET" }, -- Ritual of Retribution (Ritual of Retribution)
+    [22262] = { duration = "GET" }, -- Extended Ritual (Extended Ritual)
 
 }
 
@@ -13195,6 +13204,10 @@ Effects.AddGroundDamageAura = {
     [80172] = { duration = 2100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Ritual of Retribution
     [26303] = { duration = 2100, type = BUFF_EFFECT_TYPE_BUFF }, -- Extended Ritual
 
+    [112145] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Rune Focus (Rune Focus)
+    [112166] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Channeled focus (Channeled Focus)
+    [112167] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Rune Focus Circle Bonus (Restoring Focus)
+
     [22225] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Rite of Passage
     [22231] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Remembrance
     [22228] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Practiced Incantation
@@ -13284,9 +13297,9 @@ Effects.AddGroundDamageAura = {
     [63471] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Shooting Star (Shooting Star)
 
     -- Undaunted
-    [39299] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Necrotic Orb (Necrotic Orb)
-    [42029] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Mystic Orb (Mystic Orb)
-    [42039] = { duration = 600, type = BUFF_EFFECT_TYPE_BUFF }, -- Energy Orb (Energy Orb)
+    [39299] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Necrotic Orb (Necrotic Orb)
+    [42029] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Mystic Orb (Mystic Orb)
+    [42039] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Energy Orb (Energy Orb)
 
     -- Vampire
     [38935] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Swarming Scion

@@ -970,8 +970,6 @@ LUIE.Data.Tooltips = {
 
     -- Heavy Armor
     Skill_Unstoppable                               = GetString(SI_LUIE_SKILL_UNSTOPPABLE),
-    Skill_Unstoppable_Brute                         = GetString(SI_LUIE_SKILL_UNSTOPPABLE_BRUTE),
-    Skill_Immovable                                 = GetString(SI_LUIE_SKILL_IMMOVABLE),
 
     ----------------------------------------------------------------
     -- WORLD SKILLS ------------------------------------------------
@@ -1115,14 +1113,6 @@ LUIE.Data.Tooltips = {
     Skill_Revealing_Flare                           = GetString(SI_LUIE_SKILL_REVEALING_FLARE_TP),
     Skill_Blinding_Flare                            = GetString(SI_LUIE_SKILL_BLINDING_FLARE_TP),
     Skill_Replenishing_Barrier                      = GetString(SI_LUIE_SKILL_REPLENISHING_BARRIER_TP),
-
-    -- ---------------------------------------------------
-    -- RACIALS ------------------------------------------
-    -- ---------------------------------------------------
-
-    Skill_Hunters_Eye_Rank_1                        = zo_strformat(GetString(SI_LUIE_SKILL_HUNTERS_EYE_TP), 3, 400),
-    Skill_Hunters_Eye_Rank_2                        = zo_strformat(GetString(SI_LUIE_SKILL_HUNTERS_EYE_TP), 6, 900),
-    Skill_Hunters_Eye_Rank_3                        = zo_strformat(GetString(SI_LUIE_SKILL_HUNTERS_EYE_TP), 10, 1500),
 
     -- ---------------------------------------------------
     -- CYRODIIL ------------------------------------------
@@ -1584,6 +1574,57 @@ function LUIE.DynamicTooltip(abilityId)
         local adjustPoints = math.floor(pointsSpent * 100 + 0.5) / 100 -- Remove decimal places
         tooltip = zo_strformat(GetString(SI_LUIE_SKILL_UNCHAINED_TP), duration, adjustPoints)
     end
+
+    if abilityId == 150057 then -- Medium Armor Evasion
+        -- Counter for bonus
+        local counter = 0
+        -- Count the # of Medium Armor pieces equipped
+        for i = 0, 16 do
+            local itemLink = GetItemLink(BAG_WORN, i)
+            local armorType = GetItemLinkArmorType(itemLink)
+            if armorType == ARMORTYPE_MEDIUM then
+                counter = counter + 1
+            end
+        end
+        local counter = counter * 2
+        tooltip = zo_strformat(GetString(SI_LUIE_SKILL_MEDIUM_ARMOR_EVASION), counter)
+    end
+
+    if abilityId == 126582 then -- Unstoppable Brute
+        -- Counter for bonus
+        local counter = 0
+        -- Count the # of Heavy Armor pieces equipped
+        for i = 0, 16 do
+            local itemLink = GetItemLink(BAG_WORN, i)
+            local armorType = GetItemLinkArmorType(itemLink)
+            if armorType == ARMORTYPE_HEAVY then
+                counter = counter + 1
+            end
+        end
+        local counter = counter * 5
+        local tooltipValue1 = GetAbilityDuration(126582) / 1000
+        local tooltipValue2 = counter
+        tooltip = zo_strformat(GetString(SI_LUIE_SKILL_UNSTOPPABLE_BRUTE), tooltipValue1, tooltipValue2)
+    end
+
+    if abilityId == 126583 then -- Immovable
+        -- Counter for bonus
+        local counter = 0
+        -- Count the # of Heavy Armor pieces equipped
+        for i = 0, 16 do
+            local itemLink = GetItemLink(BAG_WORN, i)
+            local armorType = GetItemLinkArmorType(itemLink)
+            if armorType == ARMORTYPE_HEAVY then
+                counter = counter + 1
+            end
+        end
+        local counter = counter * 5
+        local tooltipValue1 = GetAbilityDuration(126583) / 1000
+        local tooltipValue2 = counter
+        local tooltipValue3 = 65 + counter
+        tooltip = zo_strformat(GetString(SI_LUIE_SKILL_IMMOVABLE), tooltipValue1, tooltipValue2, tooltipValue3)
+    end
+
     return tooltip
 end
 

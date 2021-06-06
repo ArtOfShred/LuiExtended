@@ -58,7 +58,16 @@ function SlashCommands.SlashHome()
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
     else
-        RequestJumpToHouse(primaryHouse)
+        if option and option == "inside" or option == "outside" then
+            if option = "inside" then
+                RequestJumpToHouse(primaryHouse, TRAVEL_OUTSIDE)
+            elseif option = "outside" then
+                RequestJumpToHouse(primaryHouse, TRAVEL_INSIDE)
+            end
+        else
+            local insideOrOutside = SlashCommands.SV.SlashHomeChoice == 1 and TRAVEL_INSIDE or TRAVEL_OUTSIDE
+            RequestJumpToHouse(primaryHouse, insideOrOutside)
+        end
         printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG), true)
         if LUIE.SV.TempAlertHome then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG)))
