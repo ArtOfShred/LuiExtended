@@ -60,12 +60,12 @@ function SlashCommands.SlashHome(option)
     else
         if option and (option == "inside" or option == "outside") then
             if option == "inside" then
-                RequestJumpToHouse(primaryHouse, TRAVEL_INSIDE)
+                RequestJumpToHouse(primaryHouse, false)
             elseif option == "outside" then
-                RequestJumpToHouse(primaryHouse, TRAVEL_OUTSIDE)
+                RequestJumpToHouse(primaryHouse, true)
             end
         else
-            local insideOrOutside = (SlashCommands.SV.SlashHomeChoice == 1) and TRAVEL_INSIDE or TRAVEL_OUTSIDE
+            local insideOrOutside = (SlashCommands.SV.SlashHomeChoice == 1) and false or true
             RequestJumpToHouse(primaryHouse, insideOrOutside)
         end
         printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG), true)
