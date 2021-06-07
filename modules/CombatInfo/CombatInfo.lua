@@ -514,7 +514,6 @@ function CombatInfo.Initialize(enabled)
     -- Increment so this doesn't occur again.
     LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVarsCI = 2
 
-
 end
 
 -- Called on initialization and on full update to swap icons on backbar

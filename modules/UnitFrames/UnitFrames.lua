@@ -1618,12 +1618,22 @@ function UnitFrames.Initialize(enabled)
     -- Get execute threshold percentage
     g_targetThreshold = UnitFrames.SV.ExecutePercentage
 
+    -- Get low health threshold percentage
     g_healthThreshold = UnitFrames.SV.LowResourceHealth
     g_magickaThreshold = UnitFrames.SV.LowResourceMagicka
     g_staminaThreshold = UnitFrames.SV.LowResourceStamina
 
-    CreateDefaultFrames()
+    -- Variable adjustment if needed
+    if not LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVarsUF then
+        LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVarsUF = 0
+    end
+    if (LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVarsUF < 2) then
+        UnitFrames.SV["CustomFramesPetFramePos"] = nil
+    end
+    -- Increment so this doesn't occur again.
+    LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVarsUF = 2
 
+    CreateDefaultFrames()
     CreateCustomFrames()
 
     BOSS_BAR.RefreshBossHealthBar = function(self, smoothAnimate)
@@ -1712,6 +1722,7 @@ function UnitFrames.Initialize(enabled)
     -- Initialize colouring. This is actually needed when user does NOT want those features
     UnitFrames.TargetColourByReaction()
     UnitFrames.ReticleColourByReaction()
+
 end
 
 -- Sets out-of-combat transparency values for default user-frames
