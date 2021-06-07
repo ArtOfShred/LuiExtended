@@ -1,3 +1,28 @@
+### Version 6.2.9
+
+Buffs & Debuffs
+- Fixed an issue where the icon for the ground tracker buff for Nova and its morphs was missing.
+- Fixed an issue where no ground tracker buff was displaying for Cleansing Ritual and its morphs.
+- Rune Focus and its morphs now show a buff when you are standing in the healing circle.
+- Vampire Stages now show as long term buffs.
+- Fixed various ability tooltips to account for changes made in the last couple updates.
+
+Chat Announcements
+- Alerts for collectible usage will now also display when you summon/dismiss a companion.
+
+Slash Commands
+- You can now specify '/home inside' or '/home outside' when warping to your primary home.
+- The '/home' slash command now has an option to toggle whether to default to warping inside or outside your primary home.
+- Added a '/companion' slash command to summon a companion and menu option to determine the default companion to summon. You can also specify the companion to summon with '/companion mirri' or '/companion bastian' or by using the '/mirri' or '/bastian' command.
+- Added keybinding options to summon either companion.
+
+Unit Frames
+- Added a Unit Frame for tracking your active companion (enabled by default). This frame takes the previous default position of the Pet Unit Frames. The Pet Unit Frames position will be reset to default when loading the addon and save any changes you make after.
+- Updated support for the "Dead" label to display on frames. Now companions, pets, bosses, and your target will show as "Dead" instead of at 0 Health.
+- The Target Unit Frame now displays an indicator when a player is being resurrected or reviving (to match the behavior of Group Unit Frames), this also works for the Companion Unit Frame.
+
+---
+
 ### Version 6.2.8
 
 Slash Commands
