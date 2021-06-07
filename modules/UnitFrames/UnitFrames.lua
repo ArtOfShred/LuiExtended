@@ -199,7 +199,6 @@ UnitFrames.Defaults = {
     PetOocAlpha                      = 85,
     whitelist                        = {}, -- whitelist for pet names
     PetNameClip                      = 88,
-
     CustomFramesCompanion            = true,
     CustomFormatCompanion            = "Current (Percentage%)",
     CustomColourCompanion            = { 202/255,  20/255, 0 },
@@ -209,8 +208,6 @@ UnitFrames.Defaults = {
     CompanionIncAlpha                = 85,
     CompanionOocAlpha                = 85,
     CompanionNameClip                = 88,
-
-
     BarAlignPlayerHealth             = 1,
     BarAlignPlayerMagicka            = 1,
     BarAlignPlayerStamina            = 1,
@@ -1111,6 +1108,7 @@ local function CreateCustomFrames()
                     ["shield"]  = UI.StatusBar( bhb, nil, nil, nil, true ),
                     ["threshold"] = g_targetThreshold,
                 },
+                ["dead"]        = UI.Label( bhb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "Status", true ),
                 ["name"]        = UI.Label( bhb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, unitTag, false ),
             }
             UnitFrames.CustomFrames[unitTag].name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
@@ -2335,9 +2333,16 @@ function UnitFrames.OnReticleTargetChanged(eventCode)
                 UnitFrames.CustomFrames.reticleover[POWERTYPE_HEALTH].labelOne:SetText( " - Invulnerable - " )
             end
             UnitFrames.CustomFrames.reticleover[POWERTYPE_HEALTH].labelTwo:SetHidden( isCritter or isGuard or not UnitFrames.CustomFrames.reticleover.dead:IsHidden() )
+
+            if IsUnitReincarnating("reticleover") then
+                UnitFrames.CustomFramesSetDeadLabel( UnitFrames.CustomFrames["reticleover"], strResSelf )
+                eventManager:RegisterForUpdate(moduleName .. "Res" .. "reticleover", 100, function() UnitFrames.ResurrectionMonitor("reticleover") end)
+            end
+
             -- Finally show custom target frame
             UnitFrames.CustomFrames.reticleover.control:SetHidden( false )
         end
+
         -- Unhide second target frame only for player enemies
         if UnitFrames.CustomFrames.AvaPlayerTarget then
             UnitFrames.CustomFrames.AvaPlayerTarget.control:SetHidden( not ( UnitFrames.CustomFrames.AvaPlayerTarget.isPlayer and (reactionType == UNIT_REACTION_HOSTILE) and not IsUnitDead("reticleover") ) )
@@ -2760,6 +2765,10 @@ function UnitFrames.UpdateAttribute( attributeFrame, powerValue, powerEffectiveM
                     :gsub("Nothing", "")
                 -- Change text
                 attributeFrame[label]:SetText( str )
+                -- Don't update if dead
+                if (label == "labelOne" or label == "labelTwo") and UnitFrames.CustomFrames and UnitFrames.CustomFrames["reticleover"] and attributeFrame == UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH] and powerValue == 0 then
+                    attributeFrame[label]:SetHidden(true)
+                end
                 -- And colour it RED if attribute value is lower then threshold
                 attributeFrame[label]:SetColor( unpack( ( pct < ( attributeFrame.threshold or g_defaultThreshold ) ) and {1,0.25,0.38} or attributeFrame.colour or {1,1,1} ) )
             end
