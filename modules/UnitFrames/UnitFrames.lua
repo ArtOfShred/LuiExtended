@@ -1036,7 +1036,7 @@ local function CreateCustomFrames()
         companionTlw:SetDrawLayer(DL_BACKDROP)
         companionTlw:SetDrawTier(DT_LOW)
         companionTlw:SetDrawLevel(1)
-        companionTlw.customPositionAttr = "CustomFramesPetFramePos"
+        companionTlw.customPositionAttr = "CustomFramesCompanionFramePos"
         companionTlw.preview = UI.Backdrop( companionTlw, "fill", nil, nil, nil, true )
         companionTlw.previewLabel = UI.Label( companionTlw.preview, {BOTTOM,TOP,0,-1,group}, nil, nil, "ZoFontGameMedium", "Player Companion", false )
 
