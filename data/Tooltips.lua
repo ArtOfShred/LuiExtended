@@ -790,6 +790,9 @@ LUIE.Data.Tooltips = {
     Skill_Ritual_of_Retribution                     = GetString(SI_LUIE_SKILL_CLEANSING_RITUAL_RETRIBUTION_TP),
     Skill_Rite_of_Passage                           = GetString(SI_LUIE_SKILL_RITE_OF_PASSAGE_TP),
     Skill_Sacred_Ground                             = GetString(SI_LUIE_SKILL_SACRED_GROUND_TP),
+    Skill_Rune_Focus                                = GetString(SI_LUIE_SKILL_RUNE_FOCUS_TP),
+    Skill_Channeled_Focus                           = GetString(SI_LUIE_SKILL_CHANNELED_FOCUS_TP),
+    Skill_Restoring_Focus                           = GetString(SI_LUIE_SKILL_RESTORING_FOCUS_TP),
 
     -- Warden
     Skill_Cutting_Dive                              = GetString(SI_LUIE_SKILL_CUTTING_DIVE_TP),
@@ -834,8 +837,8 @@ LUIE.Data.Tooltips = {
     Skill_Arctic_Blast_Ground                       = GetString(SI_LUIE_SKILL_ARCTIC_BLAST_GROUND_TP),
 
     -- Necromancer
-    Skill_Reusable_Parts_Rank_1                     = zo_strformat(GetString(SI_LUIE_SKILL_REUSABLE_PARTS_TP), 12),
-    Skill_Reusable_Parts_Rank_2                     = zo_strformat(GetString(SI_LUIE_SKILL_REUSABLE_PARTS_TP), 25),
+    Skill_Reusable_Parts_Rank_1                     = zo_strformat(GetString(SI_LUIE_SKILL_REUSABLE_PARTS_TP), 25),
+    Skill_Reusable_Parts_Rank_2                     = zo_strformat(GetString(SI_LUIE_SKILL_REUSABLE_PARTS_TP), 50),
     Skill_Flame_Skull                               = GetString(SI_LUIE_SKILL_FLAME_SKULL_TP),
     Skill_Ricochet_Skull                            = GetString(SI_LUIE_SKILL_RICOCHET_SKULL_TP),
     Skill_Blastbones                                = GetString(SI_LUIE_SKILL_BLASTBONES_TP),

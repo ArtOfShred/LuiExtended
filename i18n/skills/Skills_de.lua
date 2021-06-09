@@ -500,6 +500,9 @@ local strings = {
     SI_LUIE_SKILL_CLEANSING_RITUAL_RETRIBUTION_TP =      "Enemies in the |cFFFFFF12|r meter radius of sacred light take Magic Damage every |cFFFFFF2|r seconds and the damage increases by |cFFFFFF5|r% per tick.\n\nAllies in the area can activate the |cFFFFFFPurify|r synergy.",
     SI_LUIE_SKILL_RITE_OF_PASSAGE_TP =                   "Healing you and allies within |cFFFFFF20|r meters every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SACRED_GROUND_TP =                     "Increase block mitigation by |cFFFFFF10|r% while standing on Sacred Ground.",
+    SI_LUIE_SKILL_RUNE_FOCUS_TP =                        "Standing in the |cFFFFFF3|r meter radius of the rune heals you every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_CHANNELED_FOCUS_TP =                   "Restoring |cFFFFFF242|r Magicka every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nStanding in the |cFFFFFF3|r meter radius of the rune heals you every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_RESTORING_FOCUS_TP =                   "Restoring |cFFFFFF242|r Stamina every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nStanding in the |cFFFFFF3|r meter radius of the rune heals you every |cFFFFFF1|r second.",
 
     -- Warden
     SI_LUIE_SKILL_BOND_WITH_NATURE =                     "Bond with Nature",
