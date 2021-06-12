@@ -6740,7 +6740,8 @@ LUIE.DebugAuras = {
     [45562] = true, -- Concentration (Rank 2)
 
     -- MEDIUM ARMOR
-    [150057] = true, -- Medium Armor Evasion
+    [150054] = true, -- Medium Armor Evasion (Medium Armor Bonuses)
+    [150057] = true, -- Medium Armor Evasion (Medium Armor Bonuses)
     [29743] = true, -- Dexterity (Rank 1)
     [45563] = true, -- Dexterity (Rank 2)
     [45564] = true, -- Dexterity (Rank 3)

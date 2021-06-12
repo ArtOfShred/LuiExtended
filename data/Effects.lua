@@ -762,6 +762,8 @@ Effects.EffectGroundDisplay = {
     [22003] = { icon = 'esoui/art/icons/ability_templar_solar_prison.dds', buff = false, debuff = false, ground = true }, -- Solar Prison (Solar Prison)
     [22001] = { icon = 'esoui/art/icons/ability_templar_solar_disturbance.dds', buff = false, debuff = false, ground = true }, -- Solar Disturbance (Solar Disturbance)
 
+    [22234] = { buff = true, debuff = false, ground = false }, -- Rune Focus (Rune Focus)
+
     -- Used only to flag abilities for Tooltips
     [22265] = { buff = false, debuff = false, ground = false }, -- Cleansing Ritual (Cleansing Ritual)
     [22259] = { buff = false, debuff = false, ground = false }, -- Ritual of Retribution (Ritual of Retribution)
@@ -1239,7 +1241,6 @@ Effects.BarHighlightOverride = {
     [22259] = { showFakeAura = true }, -- Ritual of Retribution (Ritual of Retribution)
     [22262] = { showFakeAura = true }, -- Extended Ritual (Extended Ritual)
 
-    [22234] = { showFakeAura = true, noRemove = true }, -- Rune Focus
     [22240] = { newId = 37009 }, -- Channeled Focus
     [22237] = { newId = 114842 }, -- Restoring Focus
 
@@ -5492,10 +5493,12 @@ Effects.EffectOverride = {
     [22262] = { tooltip = Tooltips.Skill_Cleansing_Ritual }, -- Extended Ritual (Extended Ritual)
 
     -- Rune Focus / Channeled Focus / Restoring Focus
+    [22234] = { tooltip = Tooltips.Skill_Rune_Focus }, -- Rune Focus (Rune Focus)
+
     [112145] = { tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1, forcedContainer = "short", groundLabel = true }, -- Rune Focus (Rune Focus)
-    [37009] = { tooltip = Tooltips.Generic_Magicka_Regen_Value, tooltipValue2 = 1, tooltipValue3 = 242 },  -- Channeled Focus (Channeled Focus)
-    [112166] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1, forcedContainer = "short", groundLabel = true }, -- Channeled focus (Channeled Focus)
-    [114842] = { tooltip = Tooltips.Generic_Stamina_Regen_Value, tooltipValue2 = 1, tooltipValue3 = 242 },  -- Restoring Focus (Restoring Focus)
+    [37009] = { tooltip = Tooltips.Skill_Channeled_Focus },  -- Channeled Focus (Channeled Focus)
+    [112166] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1, forcedContainer = "short", groundLabel = true }, -- Channeled Focus (Channeled Focus)
+    [114842] = { tooltip = Tooltips.Skill_Restoring_Focus },  -- Restoring Focus (Restoring Focus)
     [112167] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = Abilities.Skill_Restoring_Focus, tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Restoring Focus)
 
     -- Rite of Passage / Remembrance / Practiced Incantation
@@ -5685,8 +5688,8 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Grave Lord
-    [116187] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_reusable_parts.dds', tooltip = Tooltips.Skill_Reusable_Parts_Rank_1, forcedContainer = 'short' }, -- Reusable Parts (Reusable Parts - Rank 1)
-    [116189] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_reusable_parts.dds', tooltip = Tooltips.Skill_Reusable_Parts_Rank_2, forcedContainer = 'short' }, -- Reusable Parts (Reusable Parts - Rank 2)
+    [116187] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_reusable_parts.dds', tooltip = Tooltips.Skill_Reusable_Parts_Rank_1 }, -- Reusable Parts (Reusable Parts - Rank 1)
+    [116189] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_reusable_parts.dds', tooltip = Tooltips.Skill_Reusable_Parts_Rank_2 }, -- Reusable Parts (Reusable Parts - Rank 2)
 
     -- Bone Tyrant
     [119156] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_death_gleaning.dds' }, -- Death Gleaning (Death Gleaning - Rank 1)
@@ -6418,8 +6421,8 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     [35658] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_lycanthrophy.dds', tooltip = Tooltips.Skill_Lycanthrophy }, -- Lycanthrophy
-    [31068] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_sanies_lupinus.dds', tooltip = Tooltips.Skill_Sanies_Lupinus }, -- Sanies Lupinus (from NPC Bite)
-    [40521] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_sanies_lupinus.dds', tooltip = Tooltips.Skill_Sanies_Lupinus }, -- Sanies Lupinus (from Player Bite)
+    [31068] = { icon = 'esoui/art/icons/crownstore_skillline_werewolf.dds', tooltip = Tooltips.Skill_Sanies_Lupinus }, -- Sanies Lupinus (from NPC Bite)
+    [40521] = { icon = 'esoui/art/icons/crownstore_skillline_werewolf.dds', tooltip = Tooltips.Skill_Sanies_Lupinus }, -- Sanies Lupinus (from Player Bite)
 
     [32464] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attacklight.dds' }, -- Light Attack (Werewolf)
     [32477] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds' }, -- Heavy Attack (Werewolf)
@@ -6433,6 +6436,9 @@ Effects.EffectOverride = {
     [40515] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Blood Moon)
     [40520] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', name = Abilities.Skill_Devour, unbreakable = 1, tooltip = Tooltips.Generic_Knockdown }, -- Q3047 - Knockdown (Blood Moon - Rank 1)
     [40525] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_bloodmoon_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Passive_Bloodmoon, Abilities.Set_Cooldown), tooltip = Tooltips.Skill_Blood_Moon, forcedContainer = 'long' }, -- Bit an Ally (Blood Moon)
+
+    [32636] = { icon = 'LuiExtended/media/icons/abilities/passive_werewolf_pursuit.dds' }, -- Pursuit (Rank 1)
+    [46142] = { icon = 'LuiExtended/media/icons/abilities/passive_werewolf_pursuit.dds' }, -- Pursuit (Rank 2)
 
     ----------------------------------------------------------------
     -- WEREWOLF ACTIVES --------------------------------------------
