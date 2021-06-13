@@ -41,7 +41,7 @@ local strings = {
     SI_LUIE_DEFAULT_FRAME_ALERTS =                       "Textes d'alertes",
     SI_LUIE_DEFAULT_FRAME_COMPASS =                      "Fenêtre de la boussole",
     SI_LUIE_DEFAULT_FRAME_PLAYER_PROGRESS =              "Barre de points d'Expérience/de Champion",
-    SI_LUIE_DEFAULT_FRAME_CSA =                          "Fenêtres centrale d'annonces",
+    SI_LUIE_DEFAULT_FRAME_CSA =                          "Fenêtre centrale d'annonces",
     SI_LUIE_DISMISS_PET =                                "|cBFBFBFVous renvoyez |r<<1>>|cBFBFBF.|r",
 
     -- Pet Names (Sorcerer)
