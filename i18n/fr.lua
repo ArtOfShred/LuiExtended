@@ -12,12 +12,12 @@ local strings = {
     SI_LUIE_ERROR_SOUND =                                "LUI Extended: Un problème est survenu lors de la sélection du son. Retour à la configuration par défaut.",
 
     -- Shared
-    SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST =                 "Aura Blacklist",
-    SI_LUIE_CUSTOM_LIST_CASTBAR_BLACKLIST =              "Cast Bar Blacklist",
+    SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST =                 "Blacklist des auras",
+    SI_LUIE_CUSTOM_LIST_CASTBAR_BLACKLIST =              "Blacklist de la barre d'actions",
     SI_LUIE_CUSTOM_LIST_PRIORITY_BUFFS =                 "Priorité des améliorations",
     SI_LUIE_CUSTOM_LIST_PRIORITY_DEBUFFS =               "Priorité des affaiblissements",
-    SI_LUIE_CUSTOM_LIST_CT_BLACKLIST =                   "Combat Text Blacklist",
-    SI_LUIE_CUSTOM_LIST_UF_WHITELIST =                   "Pet Name Whitelist",
+    SI_LUIE_CUSTOM_LIST_CT_BLACKLIST =                   "Blacklist des annonces de combat",
+    SI_LUIE_CUSTOM_LIST_UF_WHITELIST =                   "Whitelist des familiers",
     SI_LUIE_CUSTOM_LIST_ADDED_ID =                       "<<1>> [<<2>>] <<3>> ajouté à <<4>>.",
     SI_LUIE_CUSTOM_LIST_ADDED_FAILED =                   "Impossible d'ajouter [<<1>>] à <<2>>. Cet identifiant de compétence n'existe pas.",
     SI_LUIE_CUSTOM_LIST_ADDED_NAME =                     "<<1>> ajouté à <<2>>.",
@@ -189,7 +189,7 @@ local strings = {
     -- SpellCastBuffs
     SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS =                "Améliorations du joueur",
     SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS =              "Affaiblissements du joueur",
-    SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS =      "Player Long Term",
+    SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS =      "Effets à longue durée du joueur",
     SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS =                "Améliorations de la cible",
     SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS =              "Affaiblissements de la cible",
     SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS =             "Améliorations Importantes",
