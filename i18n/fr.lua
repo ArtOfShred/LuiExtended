@@ -8,8 +8,8 @@
 local strings = {
 
     -- LuiExtended
-    SI_LUIE_ERROR_FONT =                                 "LUI Extended: There was a problem with selecting required font. Falling back to default.",
-    SI_LUIE_ERROR_SOUND =                                "LUI Extended: There was a problem with selecting required sound. Falling back to default.",
+    SI_LUIE_ERROR_FONT =                                 "LUI Extended: Un problème est survenu lors de la sélection de la police. Retour à la configuration par défaut.",
+    SI_LUIE_ERROR_SOUND =                                "LUI Extended: Un problème est survenu lors de la sélection du son. Retour à la configuration par défaut.",
 
     -- Shared
     SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST =                 "Aura Blacklist",
@@ -45,28 +45,28 @@ local strings = {
     SI_LUIE_DISMISS_PET =                                "|cBFBFBFVous renvoyez |r<<1>>|cBFBFBF.|r",
 
     -- Pet Names (Sorcerer)
-    SI_LUIE_PET_NAME_UNSTABLE_FAMILIAR =                "Familiar",
-    SI_LUIE_PET_NAME_CLANNFEAR =                        "Clannfear",
-    SI_LUIE_PET_NAME_VOLATILE_FAMILIAR =                "Volatile Familiar",
-    SI_LUIE_PET_NAME_WINGED_TWILIGHT =                  "Winged Twilight",
-    SI_LUIE_PET_NAME_TWILIGHT_TORMENTOR =               "Twilight Tormentor",
-    SI_LUIE_PET_NAME_TWILIGT_MATRIARCH =                "Twilight Matriarch",
-    SI_LUIE_PET_NAME_SUMMON_STORM_ATRONACH =            "Summoned Storm Atronach",
-    SI_LUIE_PET_NAME_GREATER_STORM_ATRONACH =           "Greater Storm Atronach",
-    SI_LUIE_PET_NAME_CHARGED_ATRONACH =                 "Charged Atronach",
+    SI_LUIE_PET_NAME_UNSTABLE_FAMILIAR =                "Familier Instable",
+    SI_LUIE_PET_NAME_CLANNFEAR =                        "Faucheclan Instable",
+    SI_LUIE_PET_NAME_VOLATILE_FAMILIAR =                "Familier Explosif",
+    SI_LUIE_PET_NAME_WINGED_TWILIGHT =                  "Crépuscule Ailé",
+    SI_LUIE_PET_NAME_TWILIGHT_TORMENTOR =               "Crépuscule Ailé",
+    SI_LUIE_PET_NAME_TWILIGT_MATRIARCH =                "Crépuscule Ailé",
+    SI_LUIE_PET_NAME_SUMMON_STORM_ATRONACH =            "Atronach de Foudre",
+    SI_LUIE_PET_NAME_GREATER_STORM_ATRONACH =           "Atronach de Foudre Supérieur",
+    SI_LUIE_PET_NAME_CHARGED_ATRONACH =                 "Atronach Chargé",
 
     -- Pet Names (Warden)
-    SI_LUIE_PET_NAME_FERAL_GUARDIAN =                   "Feral Guardian",
-    SI_LUIE_PET_NAME_ETERNAL_GUARDIAN =                 "Eternal Guardian",
-    SI_LUIE_PET_NAME_WILD_GUARDIAN =                    "Wild Guardian",
+    SI_LUIE_PET_NAME_FERAL_GUARDIAN =                   "Gardien Féroce",
+    SI_LUIE_PET_NAME_ETERNAL_GUARDIAN =                 "Gardien Eternel",
+    SI_LUIE_PET_NAME_WILD_GUARDIAN =                    "Gardien Sauvage",
 
     -- Pet Names (Necromancer)
-    SI_LUIE_PET_NAME_SKELETAL_MAGE =                    "Squelette Mage",
-    SI_LUIE_PET_NAME_SKELETAL_ARCHER =                  "Squelette Archer",
-    SI_LUIE_PET_NAME_SKELETAL_ARCANIST =                "Squelette Arcaniste",
-    SI_LUIE_PET_NAME_SPIRIT_MENDER =                    "Spirit Mender",
-    SI_LUIE_PET_NAME_SPIRIT_GUARDIAN =                  "Spirit Guardian",
-    SI_LUIE_PET_NAME_INTENSIVE =                        "Intensive Mender",
+    SI_LUIE_PET_NAME_SKELETAL_MAGE =                    "Mage Squelette",
+    SI_LUIE_PET_NAME_SKELETAL_ARCHER =                  "Archer Squelette",
+    SI_LUIE_PET_NAME_SKELETAL_ARCANIST =                "Arcaniste Squelette",
+    SI_LUIE_PET_NAME_SPIRIT_MENDER =                    "Soigneur Spirituel",
+    SI_LUIE_PET_NAME_SPIRIT_GUARDIAN =                  "Gardien Spirituel",
+    SI_LUIE_PET_NAME_INTENSIVE =                        "Soigneur Intensif",
 
     -- Pet Names (Sets)
     SI_LUIE_PET_NAME_ENGINE_GUARDIAN =                  "Dwarven Sphere",
@@ -76,16 +76,16 @@ local strings = {
     SI_LUIE_PET_NAME_MORKULDIN_SWORD =                  "Morkuldin Sword",
 
     -- Pet Names (Assistants)
-    SI_LUIE_PET_NAME_ASSISTANT_EZABI =                  "Ezabi",
-    SI_LUIE_PET_NAME_ASSISTANT_FEZEZ =                  "Fezez",
-    SI_LUIE_PET_NAME_ASSISTANT_PIRHARRI =               "Pirharri the Smuggler",
-    SI_LUIE_PET_NAME_ASSISTANT_NUZHIMEH =               "Nuzhimeh",
-    SI_LUIE_PET_NAME_ASSISTANT_TYTHIS =                 "Tythis Andromo",
+    SI_LUIE_PET_NAME_ASSISTANT_EZABI =                  "Ezabi la Banquière",
+    SI_LUIE_PET_NAME_ASSISTANT_FEZEZ =                  "Fezez le Marchand",
+    SI_LUIE_PET_NAME_ASSISTANT_PIRHARRI =               "Pirharri la Contrebandière",
+    SI_LUIE_PET_NAME_ASSISTANT_NUZHIMEH =               "Nuzhimeh la Marchande",
+    SI_LUIE_PET_NAME_ASSISTANT_TYTHIS =                 "Tythis Andromo le Banquier",
 
     -- Bindings
     SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Convocation du Banquier (Tythis)",
-    SI_BINDING_NAME_LUIE_COMMAND_BANKER_CAT =            "Convocation du Banquier (Ezabi)",
-    SI_BINDING_NAME_LUIE_COMMAND_MERCHANT =              "Convocation du Marchand (Nuzhimeh)",
+    SI_BINDING_NAME_LUIE_COMMAND_BANKER_CAT =            "Convocation de la Banquière (Ezabi)",
+    SI_BINDING_NAME_LUIE_COMMAND_MERCHANT =              "Convocation de la Marchande (Nuzhimeh)",
     SI_BINDING_NAME_LUIE_COMMAND_MERCHANT_CAT =          "Convocation du Marchand (Fezez)",
     SI_BINDING_NAME_LUIE_COMMAND_FENCE =                 "Summon Fence",
     SI_BINDING_NAME_LUIE_COMMAND_EYE =                   "Use Antiquarian's Eye",
@@ -183,7 +183,7 @@ local strings = {
     SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION =              "Vous changez de tenue pour: <<1>>.",
 
     -- InfoPanel
-    SI_LUIE_PNL_TRAINNOW =                               "Entrainer",
+    SI_LUIE_PNL_TRAINNOW =                               "Entraîner",
     SI_LUIE_PNL_MAXED =                                  "Au Max",
 
     -- SpellCastBuffs
@@ -331,9 +331,9 @@ local strings = {
     SI_LUIE_NOTIFICATION_SHARE_QUEST_INVITE =            "Quête partagée",
     SI_LUIE_NOTIFICATION_FRIEND_INVITE =                 "Invitation d'ami.e",
     SI_LUIE_NOTIFICATION_GUILD_INVITE =                  "Invitation de guilde",
-    SI_LUIE_CA_GUILD_HERALDRY_UPDATE =                   "The heraldry for <<1>> has changed.",
-    SI_LUIE_CA_GUILD_RANKS_UPDATE =                      "Changements des rangs pour <<1>> enregistrée.",
-    SI_LUIE_CA_GUILD_RANK_UPDATE =                       "Changement du rang <<1>> pour <<2>> enregistrée.",
+    SI_LUIE_CA_GUILD_HERALDRY_UPDATE =                   "L'héraldique de <<1>> a changé.",
+    SI_LUIE_CA_GUILD_RANKS_UPDATE =                      "Changements des rangs pour <<1>> enregistrés.",
+    SI_LUIE_CA_GUILD_RANK_UPDATE =                       "Changement du rang <<1>> pour <<2>> enregistré.",
     SI_LUIE_CA_GUILD_MOTD_CHANGED =                      "Le message du jour pour <<1>> a été modifié.",
     SI_LUIE_CA_GUILD_DESCRIPTION_CHANGED =               "La description pour <<1>> a été modifiée.",
     SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST =            "|cFFFFFF<<1>>|r vous a invité à rejoindre <<2>>.",
@@ -465,7 +465,7 @@ local strings = {
     SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS =                  "Points de compétences réinitialisés",
     SI_LUIE_CA_CURRENCY_NOTIFY_MORPHS =                  "Points de compétences évoluées réinitialisés",
     SI_LUIE_CA_CURRENCY_MESSAGE_HERALDRY =               "Vous avez dépensé %s de la banque de guilde pour améliorer votre %s.",
-    SI_LUIE_CA_CURRENCY_NAME_HERALDRY =                  "Blason de Guilde",
+    SI_LUIE_CA_CURRENCY_NAME_HERALDRY =                  "Héraldique de guilde",
     SI_LUIE_CA_LOOT_MESSAGE_TOTAL =                      "Nouveau Total:",
     SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGOLD =              "Total d'Or: %s",
     SI_LUIE_CA_CURRENCY_MESSAGE_TOTALAP =                "Total de points d'alliance: %s",
