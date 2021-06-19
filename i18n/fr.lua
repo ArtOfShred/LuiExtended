@@ -14,8 +14,8 @@ local strings = {
     -- Shared
     SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST =                 "Blacklist des auras",
     SI_LUIE_CUSTOM_LIST_CASTBAR_BLACKLIST =              "Blacklist de la barre d'actions",
-    SI_LUIE_CUSTOM_LIST_PRIORITY_BUFFS =                 "Priorité des améliorations",
-    SI_LUIE_CUSTOM_LIST_PRIORITY_DEBUFFS =               "Priorité des affaiblissements",
+    SI_LUIE_CUSTOM_LIST_PRIORITY_BUFFS =                 "Priorité des Bonus",
+    SI_LUIE_CUSTOM_LIST_PRIORITY_DEBUFFS =               "Priorité des Malus",
     SI_LUIE_CUSTOM_LIST_CT_BLACKLIST =                   "Blacklist des annonces de combat",
     SI_LUIE_CUSTOM_LIST_UF_WHITELIST =                   "Whitelist des familiers",
     SI_LUIE_CUSTOM_LIST_ADDED_ID =                       "<<1>> [<<2>>] <<3>> ajouté à <<4>>.",
@@ -187,13 +187,13 @@ local strings = {
     SI_LUIE_PNL_MAXED =                                  "Au Max",
 
     -- SpellCastBuffs
-    SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS =                "Améliorations du joueur",
-    SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS =              "Affaiblissements du joueur",
-    SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS =      "Effets à longue durée du joueur",
-    SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS =                "Améliorations de la cible",
-    SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS =              "Affaiblissements de la cible",
-    SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS =             "Améliorations Importantes",
-    SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS =           "Affaiblissements Importants",
+    SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS =                "Bonus du joueur",
+    SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS =              "Malus du joueur",
+    SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS =      "Effets longs du joueur",
+    SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS =                "Bonus de la cible",
+    SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS =              "Malus de la cible",
+    SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS =             "Bonus Importants",
+    SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS =           "Malus Importants",
 
     -- ChatAnnouncements
     SI_LUIE_CA_CURRENCY_GOLD =                           " <<1[Pièce d'Or/Pièces d'Or]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
