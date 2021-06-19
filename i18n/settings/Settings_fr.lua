@@ -146,7 +146,6 @@ local strings = {
     SI_LUIE_LAM_BUFF_SHOW_GROUND_DAMAGE =                "Display GROUND Damage/Healing",
     SI_LUIE_LAM_BUFF_SHOW_GROUND_DAMAGE_TP =             "Display a buff/debuff when you are standing in a hostile ground effect such as Arrow Barrage or a friendly ground effect such as Cleansing Ritual.",
     SI_LUIE_LAM_BUFF_ADD_EXTRA_BUFFS =                   "Display Extra Buffs",
-    SI_LUIE_LAM_BUFF_ADD_EXTRA_BUFFS_TP =                "Display extra icons for some buffs with major/minor auras that normally do not have tracking. This feature is intended to add extra icons for abilities such as Green Dragon Blood so they can be added to prominent auras and tracked.",
     SI_LUIE_LAM_BUFF_EXTEND_EXTRA =                      "Extend Settings to Single Aura Effects",
     SI_LUIE_LAM_BUFF_EXTEND_EXTRA_TP =                   "Enabling this will extend the settings for Extra Buffs to effects with only a single Major/Minor effect such as Blur, Shuffle, and Molten Weapons.",
     SI_LUIE_LAM_BUFF_REDUCE =                            "Hide Duplicates in Paired Auras",
@@ -193,7 +192,7 @@ local strings = {
     SI_LUIE_LAM_BUFF_SORTING_SORT_VERTICAL =             "<<1>> Tri vertical",
     SI_LUIE_LAM_BUFF_SORTING_SORT_VERTICAL_TP =          "Choisir la direction horizontale dans laquelle les icônes sont triées dans le conteneur <<1>>.",
     SI_LUIE_LAM_BUFF_SORTING_LONGTERM_HEADER =           "Bonus du joueur à effet long",
-    SI_LUIE_LAM_BUFF_SORTING_PROMINET_HEADER =           "Bonus & Malus permanents",
+    SI_LUIE_LAM_BUFF_SORTING_PROMINET_HEADER =           "Bonus & Malus importants",
 
     SI_LUIE_LAM_BUFF_TOOLTIP_HEADER =                    "Info-bulles",
     SI_LUIE_LAM_BUFF_TOOLTIP_ENABLE =                    "Display Mouseover Tooltip Description",
