@@ -44,7 +44,7 @@ local strings = {
     SI_LUIE_LAM_RESET_DEFAULT_UI_TP =                    "Réinitialiser les éléments d'interface utilisateur par défaut à leurs positions normales.",
 
     -- Modules
-    SI_LUIE_LAM_UF =                                     "Cadres d'unités",
+    SI_LUIE_LAM_UF =                                     "Cadres des unités",
     SI_LUIE_LAM_CA =                                     "Messages d'annonces ",
     SI_LUIE_LAM_CI =                                     "Informations de combat",
     SI_LUIE_LAM_SLASHCMDS =                              "Commandes Slash ('/')",
@@ -195,10 +195,10 @@ local strings = {
     SI_LUIE_LAM_BUFF_SORTING_PROMINET_HEADER =           "Bonus & Malus importants",
 
     SI_LUIE_LAM_BUFF_TOOLTIP_HEADER =                    "Info-bulles",
-    SI_LUIE_LAM_BUFF_TOOLTIP_ENABLE =                    "Display Mouseover Tooltip Description",
-    SI_LUIE_LAM_BUFF_TOOLTIP_ENABLE_TP =                 "Display detailed tooltips when mousing over a buff or debuff icon.",
+    SI_LUIE_LAM_BUFF_TOOLTIP_ENABLE =                    "Afficher la description de l'info-bulle au passage de la souris",
+    SI_LUIE_LAM_BUFF_TOOLTIP_ENABLE_TP =                 "Afficher des infobulles détaillées lorsque vous passez la souris sur une icône de Bonus ou de Malus.",
     SI_LUIE_LAM_BUFF_TOOLTIP_STICKY =                    "Sticky Tooltip Duration",
-    SI_LUIE_LAM_BUFF_TOOLTIP_STICKY_TP =                 "Set above 0 to delay tooltips from fading for \"x\" milliseconds.",
+    SI_LUIE_LAM_BUFF_TOOLTIP_STICKY_TP =                 "Définir au-dessus de 0 pour retarder la disparition des infobulles pendant \"x\" millisecondes.",
     SI_LUIE_LAM_BUFF_TOOLTIP_ABILITY_ID =                "Display AbilityId on Tooltip",
     SI_LUIE_LAM_BUFF_TOOLTIP_ABILITY_ID_TP =             "Display the AbilityId at the bottom of the tooltip.\nNote: This setting applies to the Active Effects window as well.",
     SI_LUIE_LAM_BUFF_TOOLTIP_BUFF_TYPE =                 "Display Buff Type on Tooltip",
