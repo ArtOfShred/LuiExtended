@@ -83,10 +83,12 @@ local strings = {
     SI_LUIE_PET_NAME_ASSISTANT_TYTHIS =                 "Tythis Andromo le Banquier",
 
     -- Bindings
-    SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Convocation du Banquier (Tythis)",
-    SI_BINDING_NAME_LUIE_COMMAND_BANKER_CAT =            "Convocation de la Banquière (Ezabi)",
-    SI_BINDING_NAME_LUIE_COMMAND_MERCHANT =              "Convocation de la Marchande (Nuzhimeh)",
-    SI_BINDING_NAME_LUIE_COMMAND_MERCHANT_CAT =          "Convocation du Marchand (Fezez)",
+    SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Convocation du banquier (Tythis)",
+    SI_BINDING_NAME_LUIE_COMMAND_BANKER_CAT =            "Convocation de la banquière (Ezabi)",
+    SI_BINDING_NAME_LUIE_COMMAND_BANKER_CROW =           "Convocation du banquier (Baron Pencheplume)",
+    SI_BINDING_NAME_LUIE_COMMAND_MERCHANT =              "Convocation de la marchande (Nuzhimeh)",
+    SI_BINDING_NAME_LUIE_COMMAND_MERCHANT_CAT =          "Convocation du marchand (Fezez)",
+    SI_BINDING_NAME_LUIE_COMMAND_MERCHANT_CROW =         "Convocation de la marchande (Colporteuse de Récompenses)",
     SI_BINDING_NAME_LUIE_COMMAND_FENCE =                 "Summon Fence",
     SI_BINDING_NAME_LUIE_COMMAND_EYE =                   "Utiliser l'Oeil des Antiquaires",
     SI_BINDING_NAME_LUIE_COMMAND_BASTIAN =               "Convocation du Compagnion (Bastian Hallix)",
