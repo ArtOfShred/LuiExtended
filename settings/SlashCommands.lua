@@ -9,15 +9,17 @@ local zo_strformat = zo_strformat
 
 local bankerTythis = GetCollectibleName(267)
 local bankerCat = GetCollectibleName(6376)
+local bankerBaron = GetCollectibleName(8994)
 local merchantNuzimeh = GetCollectibleName(301)
 local merchantCat = GetCollectibleName(6378)
+local merchantPeddlerOfPrizes = GetCollectibleName(8995)
 local companionBastian = GetCollectibleName(9245)
 local companionMirri =  GetCollectibleName(9353)
 
-local bankerOptions     = { bankerTythis, bankerCat }
-local bankerOptionsKeys = { [bankerTythis] = 1, [bankerCat] = 2 }
-local merchantOptions   = { merchantNuzimeh, merchantCat }
-local merchantOptionsKeys   = { [merchantNuzimeh] = 1, [merchantCat] = 2 }
+local bankerOptions     = { bankerTythis, bankerCat, bankerBaron }
+local bankerOptionsKeys = { [bankerTythis] = 1, [bankerCat] = 2, [bankerBaron] = 3 }
+local merchantOptions   = { merchantNuzimeh, merchantCat, merchantPeddlerOfPrizes }
+local merchantOptionsKeys   = { [merchantNuzimeh] = 1, [merchantCat] = 2, [merchantPeddlerOfPrizes] = 3 }
 local companionOptions   = { companionBastian, companionMirri }
 local companionOptionsKeys   = { [companionBastian] = 1, [companionMirri] = 2 }
 local homeOptions       = { "Inside", "Outside"}

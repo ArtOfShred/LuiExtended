@@ -83,10 +83,12 @@ local strings = {
     SI_LUIE_PET_NAME_ASSISTANT_TYTHIS =                 "Tythis Andromo",
 
     -- Bindings
-    SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Bankier rufen",
-    SI_BINDING_NAME_LUIE_COMMAND_BANKER_CAT =            "Bankier (Ezabi) rufen",
-    SI_BINDING_NAME_LUIE_COMMAND_MERCHANT =              "Händler rufen",
-    SI_BINDING_NAME_LUIE_COMMAND_MERCHANT_CAT =          "Händler (Fezes) rufen",
+    SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Bankier beschwören",
+    SI_BINDING_NAME_LUIE_COMMAND_BANKER_CAT =            "Summon Banker (Ezabi)",
+    SI_BINDING_NAME_LUIE_COMMAND_BANKER_CROW =           "Summon Banker (Baron)",
+    SI_BINDING_NAME_LUIE_COMMAND_MERCHANT =              "Händler beschwören",
+    SI_BINDING_NAME_LUIE_COMMAND_MERCHANT_CAT =          "Summon Merchant (Fezez)",
+    SI_BINDING_NAME_LUIE_COMMAND_MERCHANT_CROW =         "Summon Merchant (Peddler of Prizes)",
     SI_BINDING_NAME_LUIE_COMMAND_FENCE =                 "Hehler rufen",
     SI_BINDING_NAME_LUIE_COMMAND_EYE =                   "Auge des Antiquars benutzen",
     SI_BINDING_NAME_LUIE_COMMAND_BASTIAN =               "Begleiter (Bastian Hallix) rufen",

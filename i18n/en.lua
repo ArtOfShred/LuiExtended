@@ -85,8 +85,10 @@ local strings = {
     -- Bindings
     SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Summon Banker (Tythis)",
     SI_BINDING_NAME_LUIE_COMMAND_BANKER_CAT =            "Summon Banker (Ezabi)",
+    SI_BINDING_NAME_LUIE_COMMAND_BANKER_CROW =           "Summon Banker (Baron)",
     SI_BINDING_NAME_LUIE_COMMAND_MERCHANT =              "Summon Merchant (Nuzhimeh)",
     SI_BINDING_NAME_LUIE_COMMAND_MERCHANT_CAT =          "Summon Merchant (Fezez)",
+    SI_BINDING_NAME_LUIE_COMMAND_MERCHANT_CROW =         "Summon Merchant (Peddler of Prizes)",
     SI_BINDING_NAME_LUIE_COMMAND_FENCE =                 "Summon Fence",
     SI_BINDING_NAME_LUIE_COMMAND_EYE =                   "Use Antiquarian's Eye",
     SI_BINDING_NAME_LUIE_COMMAND_BASTIAN =               "Summon Companion (Bastian Hallix)",

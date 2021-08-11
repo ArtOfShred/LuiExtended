@@ -216,16 +216,21 @@ function SlashCommands.SlashCollectible(id)
     if id == "banker" then
         if SlashCommands.SV.SlashBankerChoice == 1 then
             id = 267 -- Tythis
-        else
+        elseif SlashCommands.SV.SlashMerchantChoice == 2 then
             id = 6376 -- Ezabi
+        else
+            id = 8994 -- Baron
         end
     elseif id == "merchant" then
         if SlashCommands.SV.SlashMerchantChoice == 1 then
             id = 301 -- Nuzhimeh
-        else
+        elseif SlashCommands.SV.SlashMerchantChoice == 2 then
             id = 6378 -- Ferez
+        else
+            id = 8995 -- Peddler of Prizes
         end
     end
+
 
     -- Check to make sure we're not in Imperial City
     if IsInImperialCity() then
@@ -256,7 +261,7 @@ function SlashCommands.SlashCollectible(id)
     end
 
     -- If this is a Banker/Merchant/Fence/Companion and we are in a player home then display a message that the collectible can't be used here.
-    if id == 300 or id == 267 or id == 6376 or id == 301 or id == 6378 or id == 8006 or id == 9245 or id == 9353 then
+    if id == 300 or id == 267 or id == 6376 or id == 301 or id == 6378 or id == 8006 or id == 9245 or id == 9353 or id == 8994 or id == 8995 then
         local currentHouse = GetCurrentZoneHouseId()
         if currentHouse ~= nil and currentHouse > 0 then
             printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_HOME), GetCollectibleName(id)), true)
@@ -271,7 +276,7 @@ function SlashCommands.SlashCollectible(id)
     if IsCollectibleUnlocked(id) then
         UseCollectible(id)
         LUIE.SlashCollectibleOverride = true
-        if id ~= 300 and id ~= 267 and id ~= 6376 and id ~= 301 and id ~= 6378 and id ~= 8006 and id ~= 9245 and id ~= 9353 then
+        if id ~= 300 and id ~= 267 and id ~= 6376 and id ~= 301 and id ~= 6378 and id ~= 8006 and id ~= 9245 and id ~= 9353 and id ~= 8994 and id ~= 8995 then
             LUIE.LastMementoUsed = id
         end
     else

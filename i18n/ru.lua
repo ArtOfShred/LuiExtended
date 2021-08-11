@@ -85,8 +85,10 @@ local strings = {
     -- Bindings
     SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Призвать Банкира (Тифис)",
     SI_BINDING_NAME_LUIE_COMMAND_BANKER_CAT =            "Призвать Банкира (Эзаби)",
+    SI_BINDING_NAME_LUIE_COMMAND_BANKER_CROW =           "Призвать Банкира ()",
     SI_BINDING_NAME_LUIE_COMMAND_MERCHANT =              "Призвать Торговца (Нузима)",
     SI_BINDING_NAME_LUIE_COMMAND_MERCHANT_CAT =          "Призвать Торговца (Фезез)",
+    SI_BINDING_NAME_LUIE_COMMAND_MERCHANT_CROW =         "Призвать Торговца ()",
     SI_BINDING_NAME_LUIE_COMMAND_FENCE =                 "Призвать Воровку",
     SI_BINDING_NAME_LUIE_COMMAND_EYE =                   "Use Antiquarian's Eye",
     SI_BINDING_NAME_LUIE_COMMAND_BASTIAN =               "Summon Companion (Bastian Hallix)",
