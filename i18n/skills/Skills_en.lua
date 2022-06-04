@@ -204,7 +204,6 @@ local strings = {
     SI_LUIE_SKILL_SPELL_RESISTANCE_POISON_TP =           "Increase Spell Resistance by |cFFFFFF1320|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_PHYSICAL_RESISTANCE_POISON_TP =        "Increase Physical Resistance by |cFFFFFF1320|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
-
     ----------------------------------------------------------------
     -- CHAMPION POINT SKILLS ---------------------------------------
     ----------------------------------------------------------------

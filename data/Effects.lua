@@ -1643,6 +1643,12 @@ Effects.AssistantIcons = {
     [GetCollectibleName(267)] = 'LuiExtended/media/icons/assistants/assistant_tythis.dds',
     [GetCollectibleName(6376)] = 'LuiExtended/media/icons/assistants/assistant_ezabi.dds',
     [GetCollectibleName(6378)] = 'LuiExtended/media/icons/assistants/assistant_fezez.dds',
+    [GetCollectibleName(8994)] = 'LuiExtended/media/icons/assistants/assistant_crowbanker.dds',
+    [GetCollectibleName(8995)] = 'LuiExtended/media/icons/assistants/assistant_crowmerchant.dds',
+    [GetCollectibleName(9743)] = 'LuiExtended/media/icons/assistants/assistant_factotumbanker.dds',
+    [GetCollectibleName(9744)] = 'LuiExtended/media/icons/assistants/assistant_factotummerchant.dds',
+	[GetCollectibleName(9745)] = 'LuiExtended/media/icons/assistants/assistant_ghrasharog.dds',
+	[GetCollectibleName(10184)] = 'LuiExtended/media/icons/assistants/assistant_giladil.dds',
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -5494,7 +5500,6 @@ Effects.EffectOverride = {
 
     -- Rune Focus / Channeled Focus / Restoring Focus
     [22234] = { tooltip = Tooltips.Skill_Rune_Focus }, -- Rune Focus (Rune Focus)
-
     [112145] = { tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1, forcedContainer = "short", groundLabel = true }, -- Rune Focus (Rune Focus)
     [37009] = { tooltip = Tooltips.Skill_Channeled_Focus },  -- Channeled Focus (Channeled Focus)
     [112166] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1, forcedContainer = "short", groundLabel = true }, -- Channeled Focus (Channeled Focus)

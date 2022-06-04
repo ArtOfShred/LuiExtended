@@ -204,7 +204,6 @@ local strings = {
     SI_LUIE_SKILL_SPELL_RESISTANCE_POISON_TP =           "Augmente la résistance aux sorts de |cFFFFFF1320|r pendant |cFFFFFF<<1>>|r <<1[seconde/secondes]>>.",
     SI_LUIE_SKILL_PHYSICAL_RESISTANCE_POISON_TP =        "Augmente la résistance physique de |cFFFFFF1320|r pendant |cFFFFFF<<1>>|r <<1[seconde/secondes]>>.",
 
-
     ----------------------------------------------------------------
     -- CHAMPION POINT SKILLS ---------------------------------------
     ----------------------------------------------------------------
@@ -220,7 +219,7 @@ local strings = {
     SI_LUIE_SKILL_EXPERT_EVASION_TP =                    "Vous avez récemment bénéficié d'une esquive gratuite et ne pouvez plus le faire pendant |cFFFFFF<<1>>|r <<1[seconde/secondes]>>.",
     SI_LUIE_SKILL_WINDED_TP =                            "You have recently benefitted from a reactive Break Free effect and may not do so again for |cFFFFFF<<1>>|r <<1[seconde/secondes]>>.",
     SI_LUIE_SKILL_UNCHAINED_TP =                         "Réduit le coût de votre prochaine capacité de vigueur utilisée dans les |cFFFFFF<<1>>|r secondes de |cFFFFFF<<2>>|r%.",
-   
+
     ----------------------------------------------------------------
     -- GENERIC / SHARED TOOLTIPS -----------------------------------
     ----------------------------------------------------------------

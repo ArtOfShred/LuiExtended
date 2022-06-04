@@ -9,15 +9,19 @@ local zo_strformat = zo_strformat
 
 local bankerTythis = GetCollectibleName(267)
 local bankerCat = GetCollectibleName(6376)
+local bankerCrow = GetCollectibleName(8994)
+local bankerFactotum = GetCollectibleName(9743)
 local merchantNuzimeh = GetCollectibleName(301)
 local merchantCat = GetCollectibleName(6378)
+local merchantCrow = GetCollectibleName(8995)
+local merchantFactotum = GetCollectibleName(9744)
 local companionBastian = GetCollectibleName(9245)
 local companionMirri =  GetCollectibleName(9353)
 
-local bankerOptions     = { bankerTythis, bankerCat }
-local bankerOptionsKeys = { [bankerTythis] = 1, [bankerCat] = 2 }
-local merchantOptions   = { merchantNuzimeh, merchantCat }
-local merchantOptionsKeys   = { [merchantNuzimeh] = 1, [merchantCat] = 2 }
+local bankerOptions     = { bankerTythis, bankerCat, bankerCrow, bankerFactotum }
+local bankerOptionsKeys = { [bankerTythis] = 1, [bankerCat] = 2, [bankerCrow] = 3, [bankerFactotum] = 4}
+local merchantOptions   = { merchantNuzimeh, merchantCat, merchantCrow, merchantFactotum }
+local merchantOptionsKeys   = { [merchantNuzimeh] = 1, [merchantCat] = 2, [merchantCrow] = 3, [merchantFactotum] = 4 }
 local companionOptions   = { companionBastian, companionMirri }
 local companionOptionsKeys   = { [companionBastian] = 1, [companionMirri] = 2 }
 local homeOptions       = { "Inside", "Outside"}
@@ -94,7 +98,7 @@ function SlashCommands.CreateSettings()
             {
                 -- Choose Home Option
                 type = "dropdown",
-                name = "\t\t\t\t\tChoose Inside or Outside for /Home",
+                name = "\t\t\t\t\tChoose Inside or Outside for /home",
                 choices = homeOptions,
                 getFunc = function() return homeOptions[Settings.SlashHomeChoice] end,
                 setFunc = function(value) Settings.SlashHomeChoice = homeOptionsKeys[value] end,
@@ -123,6 +127,28 @@ function SlashCommands.CreateSettings()
                 width = "full",
                 default = Defaults.SlashCampaignQ,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+            },
+            {
+                -- SlashCompanion
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_SLASHCMDS_COMPANION),
+                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_COMPANION_TP),
+                getFunc = function() return Settings.SlashCompanion end,
+                setFunc = function(value) Settings.SlashCompanion = value SlashCommands.RegisterSlashCommands() end,
+                width = "full",
+                default = Defaults.SlashCompanion,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+            },
+            {
+                -- Choose Companion
+                type = "dropdown",
+                name = "\t\t\t\t\tChoose Companion to Summon",
+                choices = companionOptions,
+                getFunc = function() return companionOptions[Settings.SlashCompanionChoice] end,
+                setFunc = function(value) Settings.SlashCompanionChoice = companionOptionsKeys[value] end,
+                width = "full",
+                default = Defaults.SlashCompanionChoice,
+                disabled = function() return not Defaults.SlashCompanion end,
             },
             {
                 -- SlashBanker
@@ -168,7 +194,28 @@ function SlashCommands.CreateSettings()
                 width = "full",
                 default = Defaults.SlashMerchantChoice,
                 disabled = function() return not Defaults.SlashMerchant end,
-
+            },
+			{
+                -- SlashArmory
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_SLASHCMDS_ARMORY),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_SLASHCMDS_ARMORY_TP), GetCollectibleName(9745)),
+                getFunc = function() return Settings.SlashArmory end,
+                setFunc = function(value) Settings.SlashArmory = value SlashCommands.RegisterSlashCommands() end,
+                width = "full",
+                default = Defaults.SlashArmory,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+            },
+			{
+                -- SlashDecon
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_SLASHCMDS_DECON),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_SLASHCMDS_DECON_TP), GetCollectibleName(10184)),
+                getFunc = function() return Settings.SlashDecon end,
+                setFunc = function(value) Settings.SlashDecon = value SlashCommands.RegisterSlashCommands() end,
+                width = "full",
+                default = Defaults.SlashDecon,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashFence
@@ -180,29 +227,6 @@ function SlashCommands.CreateSettings()
                 width = "full",
                 default = Defaults.SlashFence,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
-            },
-            {
-                -- SlashCompanion
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_COMPANION),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_COMPANION_TP),
-                getFunc = function() return Settings.SlashCompanion end,
-                setFunc = function(value) Settings.SlashCompanion = value SlashCommands.RegisterSlashCommands() end,
-                width = "full",
-                default = Defaults.SlashCompanion,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
-            },
-            {
-                -- Choose Companion
-                type = "dropdown",
-                name = "\t\t\t\t\tChoose Companion to Summon",
-                choices = companionOptions,
-                getFunc = function() return companionOptions[Settings.SlashCompanionChoice] end,
-                setFunc = function(value) Settings.SlashCompanionChoice = companionOptionsKeys[value] end,
-                width = "full",
-                default = Defaults.SlashCompanionChoice,
-                disabled = function() return not Defaults.SlashCompanion end,
-
             },
             {
                 -- SlashEye
@@ -259,9 +283,9 @@ function SlashCommands.CreateSettings()
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
-                -- /Home Alert -- TODO
+                -- /home Alert -- TODO
                 type = "checkbox",
-                name = "/Home Results - Show Alert (Temp Setting)",
+                name = "/home Results - Show Alert (Temp Setting)",
                 tooltip = "Display an alert when the /home command is used.\nNote: This setting will be deprecated in the future when Social Errors Events are implemented in Chat Announcements.",
                 getFunc = function() return LUIE.SV.TempAlertHome end,
                 setFunc = function(value) LUIE.SV.TempAlertHome = value end,

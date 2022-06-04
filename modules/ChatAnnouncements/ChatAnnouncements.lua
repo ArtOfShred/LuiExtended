@@ -11152,7 +11152,7 @@ function ChatAnnouncements.CollectibleResult()
         local icon = GetCollectibleIcon(LUIE.LastMementoUsed)
         local formattedIcon = ChatAnnouncements.SV.Collectibles.CollectibleUseIcon and ("|t16:16:" .. icon .. "|t ") or ""
         local string =
-            LUIE.LastMementoUsed == 9012 and GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_CAKE) or
+            LUIE.LastMementoUsed == 10287 and GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_CAKE) or
             LUIE.LastMementoUsed == 1167 and GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_PIE) or
             LUIE.LastMementoUsed == 1168 and GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_MEAD) or
             LUIE.LastMementoUsed == 479 and GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_WITCH)
@@ -11196,6 +11196,7 @@ function ChatAnnouncements.CollectibleResult()
 			lastCollectibleUsed = currentAssistant
 		else
 			lastCollectibleUsed = newAssistant
+			currentCompanion = newAssistant -- fixes summoning assistant, if companion already summoned, from using sys message/icon of old companion instead of new assistant
 		end
 	end
     if newCompanion ~= currentCompanion then
