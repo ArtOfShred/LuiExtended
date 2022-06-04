@@ -422,6 +422,7 @@ function CombatInfo.Initialize(enabled)
     CombatInfo.ApplyFont()
     CombatInfo.ApplyProcSound()
 
+    --[[
     uiQuickSlot.label = UI.Label(ActionButton9, {CENTER,CENTER}, nil, nil, g_potionFont, nil, true)
     uiQuickSlot.label:SetFont(g_potionFont)
     if CombatInfo.SV.PotionTimerColor then
@@ -432,6 +433,7 @@ function CombatInfo.Initialize(enabled)
     uiQuickSlot.label:SetDrawLayer(DL_OVERLAY)
     uiQuickSlot.label:SetDrawTier(DT_HIGH)
     CombatInfo.ResetPotionTimerLabel() -- Set the label position
+    ]]--
 
     -- Create Ultimate overlay labels
     uiUltimate.LabelVal = UI.Label(ActionButton8, {BOTTOM,TOP,0,-3}, nil, {1,2}, "$(BOLD_FONT)|16|soft-shadow-thick", nil, true)
@@ -462,9 +464,11 @@ function CombatInfo.Initialize(enabled)
 
     CombatInfo.RegisterCombatInfo()
 
+    --[[
     if CombatInfo.SV.GlobalShowGCD then
         CombatInfo.HookGCD()
     end
+    ]]--
 
     -- Create and update Cast Bar
     CombatInfo.CreateCastBar()
@@ -562,6 +566,8 @@ function CombatInfo.OnActiveWeaponPairChanged()
 end
 
 function CombatInfo.HookGCD()
+
+    --[[
     -- Hook to update GCD support
     ActionButton.UpdateUsable = function(self)
         local slotnum = self:GetSlot()
@@ -673,6 +679,8 @@ function CombatInfo.HookGCD()
         self.isGlobalCooldown = global
         self:UpdateUsable()
     end
+
+    ]]--
 end
 
 -- Helper function to get override ability duration.
@@ -966,6 +974,7 @@ function CombatInfo.OnUpdate(currentTime)
     end
 
     -- Quickslot cooldown
+    --[[
     if CombatInfo.SV.PotionTimerShow then
         local slotIndex = GetCurrentQuickslot()
         local remain, duration, global = GetSlotCooldownInfo(slotIndex)
@@ -1002,6 +1011,7 @@ function CombatInfo.OnUpdate(currentTime)
             uiQuickSlot.label:SetColor(unpack(uiQuickSlot.colour))
         end
     end
+    ]]--
 
     -- Hide Ultimate generation texture if it is time to do so
     if CombatInfo.SV.UltimateGeneration then
@@ -1126,9 +1136,11 @@ function CombatInfo.ApplyFont()
     g_potionFont = potionFontName .. "|" .. potionFontSize .. "|" .. potionFontStyle
 
     -- If QuickSlot is created, and we're updating font from the menu setting, set the font here.
+    --[[
     if uiQuickSlot.label then
         uiQuickSlot.label:SetFont(g_potionFont)
     end
+    ]]--
 
     -- Setup Ultimate Font
     local ultimateFontName = LUIE.Fonts[CombatInfo.SV.UltimateFontFace]
@@ -1222,10 +1234,12 @@ end
 
 -- Resets Potion Timer label - called on initialization and menu changes
 function CombatInfo.ResetPotionTimerLabel()
+    --[[
     local actionButton = ZO_ActionBar_GetButton(9)
     uiQuickSlot.label:ClearAnchors()
     uiQuickSlot.label:SetAnchor(TOPLEFT, actionButton.slot)
     uiQuickSlot.label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CombatInfo.SV.PotionTimerLabelPosition)
+    ]]--
 end
 
 -- Runs on the EVENT_TARGET_CHANGE listener.

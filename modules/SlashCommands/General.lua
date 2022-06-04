@@ -216,14 +216,22 @@ function SlashCommands.SlashCollectible(id)
     if id == "banker" then
         if SlashCommands.SV.SlashBankerChoice == 1 then
             id = 267 -- Tythis
-        else
+        elseif SlashCommands.SV.SlashBankerChoice == 2 then
             id = 6376 -- Ezabi
+        elseif SlashCommands.SV.SlashBankerChoice == 3 then
+            id = 8994 -- Baron
+		elseif SlashCommands.SV.SlashBankerChoice == 4 then
+            id = 9743 -- Factotum Banker
         end
     elseif id == "merchant" then
         if SlashCommands.SV.SlashMerchantChoice == 1 then
             id = 301 -- Nuzhimeh
-        else
+        elseif SlashCommands.SV.SlashMerchantChoice == 2 then
             id = 6378 -- Ferez
+		elseif SlashCommands.SV.SlashMerchantChoice == 3 then
+            id = 8995 -- Peddler
+		elseif SlashCommands.SV.SlashMerchantChoice == 4 then
+            id = 9744 -- Factotum Merchant
         end
     end
 
@@ -255,8 +263,8 @@ function SlashCommands.SlashCollectible(id)
         return
     end
 
-    -- If this is a Banker/Merchant/Fence/Companion and we are in a player home then display a message that the collectible can't be used here.
-    if id == 300 or id == 267 or id == 6376 or id == 301 or id == 6378 or id == 8006 or id == 9245 or id == 9353 then
+    -- If this is a Banker/Merchant/Fence/Armory/Deconstruction/Companion and we are in a player home then display a message that the collectible can't be used here.
+    if id == 300 or id == 267 or id == 6376 or id == 301 or id == 6378 or id == 8006 or id == 9245 or id == 9353 or id == 8994 or id == 8995 or id == 9745 or id == 10184 or id == 9743 or id == 9744 or id == 9911 or id == 9912 then
         local currentHouse = GetCurrentZoneHouseId()
         if currentHouse ~= nil and currentHouse > 0 then
             printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_HOME), GetCollectibleName(id)), true)
@@ -271,7 +279,7 @@ function SlashCommands.SlashCollectible(id)
     if IsCollectibleUnlocked(id) then
         UseCollectible(id)
         LUIE.SlashCollectibleOverride = true
-        if id ~= 300 and id ~= 267 and id ~= 6376 and id ~= 301 and id ~= 6378 and id ~= 8006 and id ~= 9245 and id ~= 9353 then
+        if id ~= 300 and id ~= 267 and id ~= 6376 and id ~= 301 and id ~= 6378 and id ~= 8006 and id ~= 9245 and id ~= 9353  and id ~= 8994  and id ~= 8995 and id~= 9745 and id~= 10184 and id~= 9743 and id~= 9744 and id ~= 9911 and id ~= 9912 then
             LUIE.LastMementoUsed = id
         end
     else
@@ -288,7 +296,7 @@ end
 function SlashCommands.SlashCompanion(option)
 
     -- Return an error if input is not blank and is not valid
-    if option and (option ~= "" and option ~= "bastian" and option ~= "mirri") then
+    if option and (option ~= "" and option ~= "bastian" and option ~= "mirri" and option ~= "ember" and option ~= "isobel") then
         printToChat(GetString(SI_LUIE_SLASHCMDS_COMPANION_FAILED_OPTION), true)
         if LUIE.SV.TempAlertHome then
             ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_IC), GetCollectibleName(id)))
@@ -302,6 +310,10 @@ function SlashCommands.SlashCompanion(option)
         SlashCommands.SlashCollectible(9245)
     elseif option == "mirri" then
         SlashCommands.SlashCollectible(9353)
+    elseif option == "ember" then
+        SlashCommands.SlashCollectible(9911)
+    elseif option == "isobel" then
+        SlashCommands.SlashCollectible(9912)
     end
 
     -- If we have no additional input that use dropdown option
@@ -309,8 +321,12 @@ function SlashCommands.SlashCompanion(option)
         -- Determine ID
         if SlashCommands.SV.SlashCompanionChoice == 1 then
             SlashCommands.SlashCollectible(9245)
-        else
+        elseif SlashCommands.SV.SlashCompanionChoice == 2 then
             SlashCommands.SlashCollectible(9353)
+        elseif SlashCommands.SV.SlashCompanionChoice == 3 then
+            SlashCommands.SlashCollectible(9911)
+        else
+            SlashCommands.SlashCollectible(9912)
         end
     end
 

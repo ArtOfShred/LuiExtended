@@ -6,7 +6,7 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
-    "|cFFA500LuiExtended Version 6.2.9|r",
+    "|cFFA500LuiExtended Version 6.3.0|r",
     "",
     "|cFFFF00Buffs & Debuffs:|r",
     "[*] Fixed an issue where the icon for the ground tracker buff for Nova and its morphs was missing.",

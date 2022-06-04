@@ -35,6 +35,8 @@ SlashCommands.Defaults = {
     SlashBankerChoice   = 1,
     SlashMerchant       = true,
     SlashMerchantChoice = 1,
+	SlashArmory         = true,
+	SlashDecon   	    = true,
     SlashFence          = true,
     SlashEye            = true,
     SlashReadyCheck     = true,
@@ -152,6 +154,13 @@ function SlashCommands.RegisterSlashCommands()
         SLASH_COMMANDS["/unignore"]     = SlashCommands.SlashRemoveIgnore
         SLASH_COMMANDS["/removeignore"] = SlashCommands.SlashRemoveIgnore
     end
+    if SlashCommands.SV.SlashCompanion then
+        SLASH_COMMANDS["/bastian"]      = function(...) SlashCommands.SlashCollectible(9245) end
+        SLASH_COMMANDS["/mirri"]        = function(...) SlashCommands.SlashCollectible(9353) end
+        SLASH_COMMANDS["/ember"]        = function(...) SlashCommands.SlashCollectible(9911) end
+        SLASH_COMMANDS["/isobel"]        = function(...) SlashCommands.SlashCollectible(9912) end
+        SLASH_COMMANDS["/companion"]    = SlashCommands.SlashCompanion
+    end
     if SlashCommands.SV.SlashBanker then
         SLASH_COMMANDS["/bank"]         = function(...) SlashCommands.SlashCollectible("banker") end
         SLASH_COMMANDS["/banker"]       = function(...) SlashCommands.SlashCollectible("banker") end
@@ -165,10 +174,12 @@ function SlashCommands.RegisterSlashCommands()
         SLASH_COMMANDS["/smuggler"]     = function(...) SlashCommands.SlashCollectible(300) end
         SLASH_COMMANDS["/fence"]        = function(...) SlashCommands.SlashCollectible(300) end
     end
-    if SlashCommands.SV.SlashCompanion then
-        SLASH_COMMANDS["/bastian"]      = function(...) SlashCommands.SlashCollectible(9245) end
-        SLASH_COMMANDS["/mirri"]        = function(...) SlashCommands.SlashCollectible(9353) end
-        SLASH_COMMANDS["/companion"]    = SlashCommands.SlashCompanion
+    if SlashCommands.SV.SlashArmory then
+        SLASH_COMMANDS["/armory"]       = function(...) SlashCommands.SlashCollectible(9745) end
+    end
+    if SlashCommands.SV.SlashDecon then
+        SLASH_COMMANDS["/decon"]           = function(...) SlashCommands.SlashCollectible(10184) end
+		SLASH_COMMANDS["/deconstruction"]  = function(...) SlashCommands.SlashCollectible(10184) end
     end
     if SlashCommands.SV.SlashEye then
         SLASH_COMMANDS["/eye"]             = function(...) SlashCommands.SlashCollectible(8006) end
@@ -181,8 +192,9 @@ function SlashCommands.RegisterSlashCommands()
         SLASH_COMMANDS["/dismisspets"] = SlashCommands.SlashPet
     end
     if SlashCommands.SV.SlashCake then
-        SLASH_COMMANDS["/cake"]         = function(...) SlashCommands.SlashCollectible(9012) end
-        SLASH_COMMANDS["/anniversary"]  = function(...) SlashCommands.SlashCollectible(9012) end
+        SLASH_COMMANDS["/cake"]         = function(...) SlashCommands.SlashCollectible(10287) end
+        SLASH_COMMANDS["/jubilee"]  	= function(...) SlashCommands.SlashCollectible(10287) end
+
     end
     if SlashCommands.SV.SlashPie then
         SLASH_COMMANDS["/pie"]          = function(...) SlashCommands.SlashCollectible(1167) end

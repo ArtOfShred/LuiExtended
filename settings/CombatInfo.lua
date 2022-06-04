@@ -127,6 +127,10 @@ function CombatInfo.CreateSettings()
         name = GetString(SI_LUIE_LAM_CI_HEADER_GCD),
         controls = {
             {
+                type = "description",
+                text = "- This feature is disabled for High Isle due to API changes",
+            },
+            {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_GCD_SHOW),
                 tooltip = GetString(SI_LUIE_LAM_CI_GCD_SHOW_TP),
@@ -135,7 +139,8 @@ function CombatInfo.CreateSettings()
                 width = "full",
                 warning = GetString(SI_LUIE_LAM_CI_GCD_SHOW_WARN),
                 default = Defaults.GlobalShowGCD,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+                --disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+                disabled = true
             },
             {
                 type = "checkbox",
@@ -145,7 +150,8 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.GlobalPotion = value end,
                 width = "full",
                 default = Defaults.GlobalPotion,
-                disabled = function() return not (LUIE.SV.CombatInfo_Enabled and Settings.GlobalShowGCD) end,
+                --disabled = function() return not (LUIE.SV.CombatInfo_Enabled and Settings.GlobalShowGCD) end,
+                disabled = true
             },
             {
                 -- Show GCD Ready Flash
@@ -156,7 +162,8 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.GlobalFlash = value end,
                 width = "full",
                 default = Defaults.GlobalFlash,
-                disabled = function() return not (LUIE.SV.CombatInfo_Enabled and Settings.GlobalShowGCD) end,
+                --disabled = function() return not (LUIE.SV.CombatInfo_Enabled and Settings.GlobalShowGCD) end,
+                disabled = true
             },
             {
                 -- GCD - Desaturate Icons on GCD
@@ -167,7 +174,8 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.GlobalDesat = value end,
                 width = "full",
                 default = Defaults.GlobalDesat,
-                disabled = function() return not (LUIE.SV.CombatInfo_Enabled and Settings.GlobalShowGCD) end,
+                --disabled = function() return not (LUIE.SV.CombatInfo_Enabled and Settings.GlobalShowGCD) end,
+                disabled = true
             },
             {
                 -- GCD - Color Slot Label Red
@@ -178,7 +186,8 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.GlobalLabelColor = value end,
                 width = "full",
                 default = Defaults.GlobalLabelColor,
-                disabled = function() return not (LUIE.SV.CombatInfo_Enabled and Settings.GlobalShowGCD) end,
+                --disabled = function() return not (LUIE.SV.CombatInfo_Enabled and Settings.GlobalShowGCD) end,
+                disabled = true
             },
             {
                 -- GCD - Animation Method
@@ -190,7 +199,8 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.GlobalMethod = globalMethodOptionsKeys[value] end,
                 width = "full",
                 default = Defaults.GlobalMethod,
-                disabled = function() return not (LUIE.SV.CombatInfo_Enabled and Settings.GlobalShowGCD) end,
+                --disabled = function() return not (LUIE.SV.CombatInfo_Enabled and Settings.GlobalShowGCD) end,
+                disabled = true
             },
         },
     }
@@ -507,6 +517,10 @@ function CombatInfo.CreateSettings()
         name = GetString(SI_LUIE_LAM_CI_HEADER_POTION),
         controls = {
             {
+                type = "description",
+                text = "- This feature is disabled for High Isle due to API changes",
+            },
+            {
                 -- Show Quickslot Cooldown
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_POTION),
@@ -515,7 +529,8 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.PotionTimerShow = value end,
                 width = "full",
                 default = Defaults.PotionTimerShow,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+                --disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+                disabled = true
             },
             {
                 type = "slider",
@@ -526,7 +541,8 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.PotionTimerLabelPosition = value CombatInfo.ResetPotionTimerLabel() end,
                 width = "full",
                 default = Defaults.PotionTimerLabelPosition,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow ) end,
+                --disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow ) end,
+                disabled = true
             },
             {
                 type = "dropdown",
@@ -539,7 +555,8 @@ function CombatInfo.CreateSettings()
                 setFunc = function(var) Settings.PotionTimerFontFace = var CombatInfo.ApplyFont() end,
                 width = "full",
                 default = Defaults.PotionTimerFontFace,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow ) end,
+                --disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow ) end,
+                disabled = true
             },
             {
                 type = "slider",
@@ -550,7 +567,8 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.PotionTimerFontSize = value CombatInfo.ApplyFont() end,
                 width = "full",
                 default = Defaults.PotionTimerFontSize,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow ) end,
+                --disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow ) end,
+                disabled = true
             },
             {
                 type = "dropdown",
@@ -562,7 +580,8 @@ function CombatInfo.CreateSettings()
                 setFunc = function(var) Settings.PotionTimerFontStyle = var CombatInfo.ApplyFont() end,
                 width = "full",
                 default = Defaults.PotionTimerFontStyle,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow ) end,
+                --disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow ) end,
+                disabled = true
             },
             {
                 type = "checkbox",
@@ -572,7 +591,8 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.PotionTimerColor = value end,
                 width = "full",
                 default = Defaults.PotionTimerColor,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow ) end,
+                --disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow ) end,
+                disabled = true
             },
             {
                 type = "checkbox",
@@ -582,7 +602,8 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.PotionTimerMillis = value end,
                 width = "full",
                 default = Defaults.PotionTimerMillis,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow ) end,
+                --disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow ) end,
+                disabled = true
             },
         },
     }

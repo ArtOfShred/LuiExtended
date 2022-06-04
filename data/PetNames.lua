@@ -53,4 +53,9 @@ PetNames.Assistants = {
     [GetString(SI_LUIE_PET_NAME_ASSISTANT_PIRHARRI)] = true,
     [GetString(SI_LUIE_PET_NAME_ASSISTANT_NUZHIMEH)] = true,
     [GetString(SI_LUIE_PET_NAME_ASSISTANT_TYTHIS)] = true,
+    [GetString(SI_LUIE_PET_NAME_ASSISTANT_BARON)] = true,
+    [GetString(SI_LUIE_PET_NAME_ASSISTANT_PEDDLER)] = true,
+	[GetString(SI_LUIE_PET_NAME_ASSISTANT_FACTOTUMB)] = true,
+	[GetString(SI_LUIE_PET_NAME_ASSISTANT_FACTOTUMM)] = true,
+	[GetString(SI_LUIE_PET_NAME_ASSISTANT_GHRASHAROG)] = true,
 }
