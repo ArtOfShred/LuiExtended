@@ -21,6 +21,8 @@
             <Action name="LUIE_COMMAND_EYE"><Down>LUIE.SlashCommands.SlashCollectible(8006)</Down></Action>
             <Action name="LUIE_COMMAND_BASTIAN"><Down>LUIE.SlashCommands.SlashCollectible(9245)</Down></Action>
             <Action name="LUIE_COMMAND_MIRRI"><Down>LUIE.SlashCommands.SlashCollectible(9353)</Down></Action>
+            <Action name="LUIE_COMMAND_EMBER"><Down>LUIE.SlashCommands.SlashCollectible(9911)</Down></Action>
+            <Action name="LUIE_COMMAND_ISOBEL"><Down>LUIE.SlashCommands.SlashCollectible(9912)</Down></Action>
             <Action name="LUIE_DISMISS_PET"><Down>LUIE.SlashCommands.SlashPet()</Down></Action>
             <Action name="LUIE_COMMAND_HOME"><Down>LUIE.SlashCommands.SlashHome()</Down></Action>
             <Action name="LUIE_COMMAND_READY_CHECK"><Down>LUIE.SlashCommands.SlashReadyCheck()</Down></Action>

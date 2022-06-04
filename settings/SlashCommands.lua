@@ -16,14 +16,16 @@ local merchantCat = GetCollectibleName(6378)
 local merchantCrow = GetCollectibleName(8995)
 local merchantFactotum = GetCollectibleName(9744)
 local companionBastian = GetCollectibleName(9245)
-local companionMirri =  GetCollectibleName(9353)
+local companionMirri = GetCollectibleName(9353)
+local companionEmber = GetCollectibleName(9911)
+local companionIsobel = GetCollectibleName(9912)
 
 local bankerOptions     = { bankerTythis, bankerCat, bankerCrow, bankerFactotum }
 local bankerOptionsKeys = { [bankerTythis] = 1, [bankerCat] = 2, [bankerCrow] = 3, [bankerFactotum] = 4}
 local merchantOptions   = { merchantNuzimeh, merchantCat, merchantCrow, merchantFactotum }
 local merchantOptionsKeys   = { [merchantNuzimeh] = 1, [merchantCat] = 2, [merchantCrow] = 3, [merchantFactotum] = 4 }
-local companionOptions   = { companionBastian, companionMirri }
-local companionOptionsKeys   = { [companionBastian] = 1, [companionMirri] = 2 }
+local companionOptions   = { companionBastian, companionMirri, companionEmber, companionIsobel }
+local companionOptionsKeys   = { [companionBastian] = 1, [companionMirri] = 2, [companionEmber] = 3, [companionIsobel] = 4 }
 local homeOptions       = { "Inside", "Outside"}
 local homeOptionsKeys   = { ["Inside"] = 1, ["Outside"] = 2 }
 
