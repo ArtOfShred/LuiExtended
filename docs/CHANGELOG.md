@@ -1,3 +1,24 @@
+### Version 6.3.0
+
+General
+- German localization updated thanks to the efforts of saenic!
+- Added French localization thanks to the efforts of Zhull-GH!
+- Implemented the features of Nagolite's "Updated Assistants for Lui Extended" patch, see more details below in the Slash Commands section.
+
+Buffs & Debuffs
+- Made a few minor changes to tooltips and icons.
+
+Combat Info
+- GCD Tracker: Disabled this feature due to API changes made in High Isle breaking it.
+- Potion Timer: Disabled this feature due to API changes made in High Isle breaking it.
+
+Slash Commands
+- Updated Slash Commands & keybindings with support for Crow Assistants, Factotum Assistants, Ghrasharog, and Giladil the Ragpicker. Thanks to Nagolite for implementing these features!
+- Updated Slash Commands & keybindings with support for Ember and Isobel, the new companions.
+- Various quality improvements and fixes made to Slash Command & keybinding functionality for summoning assistants & companions thanks to the efforts of Nagolite.
+
+---
+
 ### Version 6.2.9
 
 Buffs & Debuffs
