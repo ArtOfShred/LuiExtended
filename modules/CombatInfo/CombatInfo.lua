@@ -422,8 +422,7 @@ function CombatInfo.Initialize(enabled)
     CombatInfo.ApplyFont()
     CombatInfo.ApplyProcSound()
 
-    --[[
-    uiQuickSlot.label = UI.Label(ActionButton9, {CENTER,CENTER}, nil, nil, g_potionFont, nil, true)
+    uiQuickSlot.label = UI.Label(QuickslotButton, {CENTER,CENTER}, nil, nil, g_potionFont, nil, true)
     uiQuickSlot.label:SetFont(g_potionFont)
     if CombatInfo.SV.PotionTimerColor then
         uiQuickSlot.label:SetColor(unpack(uiQuickSlot.colour))
@@ -433,7 +432,6 @@ function CombatInfo.Initialize(enabled)
     uiQuickSlot.label:SetDrawLayer(DL_OVERLAY)
     uiQuickSlot.label:SetDrawTier(DT_HIGH)
     CombatInfo.ResetPotionTimerLabel() -- Set the label position
-    ]]--
 
     -- Create Ultimate overlay labels
     uiUltimate.LabelVal = UI.Label(ActionButton8, {BOTTOM,TOP,0,-3}, nil, {1,2}, "$(BOLD_FONT)|16|soft-shadow-thick", nil, true)
@@ -464,11 +462,9 @@ function CombatInfo.Initialize(enabled)
 
     CombatInfo.RegisterCombatInfo()
 
-    --[[
     if CombatInfo.SV.GlobalShowGCD then
         CombatInfo.HookGCD()
     end
-    ]]--
 
     -- Create and update Cast Bar
     CombatInfo.CreateCastBar()
@@ -567,12 +563,12 @@ end
 
 function CombatInfo.HookGCD()
 
-    --[[
     -- Hook to update GCD support
     ActionButton.UpdateUsable = function(self)
         local slotnum = self:GetSlot()
+        local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or g_hotbarCategory
         local isGamepad = IsInGamepadPreferredMode()
-        local _, duration, _, _ = GetSlotCooldownInfo(slotnum)
+        local _, duration, _, _ = GetSlotCooldownInfo(slotnum, hotbarCategory)
         local isShowingCooldown = self.showingCooldown
         local isKeyboardUltimateSlot = not isGamepad and self.slot.slotNum == ACTION_BAR_ULTIMATE_SLOT_INDEX + 1
         local usable = false
@@ -581,9 +577,10 @@ function CombatInfo.HookGCD()
         elseif (isKeyboardUltimateSlot and self.costFailureOnly and not isShowingCooldown) then
             usable = true
         -- Fix to grey out potions
-        elseif IsSlotItemConsumable(slotnum) and duration <= 1000 and not self.useFailure then
+        elseif IsSlotItemConsumable(slotnum, hotbarCategory) and duration <= 1000 and not self.useFailure then
             usable = true
         end
+
         if usable ~= self.usable or isGamepad ~= self.isGamepad then
             self.usable = usable
             self.isGamepad = isGamepad
@@ -596,9 +593,10 @@ function CombatInfo.HookGCD()
     -- Hook to update GCD support
     ActionButton.UpdateCooldown = function(self, options)
         local slotnum = self:GetSlot()
-        local remain, duration, global, globalSlotType = GetSlotCooldownInfo(slotnum)
+        local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or g_hotbarCategory
+        local remain, duration, global, globalSlotType = GetSlotCooldownInfo(slotnum, hotbarCategory)
         local isInCooldown = duration > 0
-        local slotType = GetSlotType(slotnum)
+        local slotType = GetSlotType(slotnum, hotbarCategory)
         local showGlobalCooldownForCollectible = global and slotType == ACTION_TYPE_COLLECTIBLE and globalSlotType == ACTION_TYPE_COLLECTIBLE
         local showCooldown = isInCooldown and (CombatInfo.SV.GlobalShowGCD or not global or showGlobalCooldownForCollectible)
         local updateChromaQuickslot = slotType ~= ACTION_TYPE_ABILITY and ZO_RZCHROMA_EFFECTS
@@ -606,7 +604,7 @@ function CombatInfo.HookGCD()
 
         if showCooldown then
             -- For items with a long CD we need to be sure not to hide the countdown radial timer, so if the duration is the 1 sec GCD, then we don't turn off the cooldown animation.
-            if not IsSlotItemConsumable(slotnum) or duration > 1000 or CombatInfo.SV.GlobalPotion then
+            if not IsSlotItemConsumable(slotnum, hotbarCategory) or duration > 1000 or CombatInfo.SV.GlobalPotion then
                 self.cooldown:StartCooldown(remain, duration, CooldownMethod[CombatInfo.SV.GlobalMethod], nil, NO_LEADING_EDGE)
                 if self.cooldownCompleteAnim.animation then
                     self.cooldownCompleteAnim.animation:GetTimeline():PlayInstantlyToStart()
@@ -631,7 +629,7 @@ function CombatInfo.HookGCD()
             if CombatInfo.SV.GlobalFlash then
                 if self.showingCooldown then
                     -- Stop flash from appearing on potion/ultimate if toggled off.
-                    if not IsSlotItemConsumable(slotnum) or duration > 1000 or CombatInfo.SV.GlobalPotion then
+                    if not IsSlotItemConsumable(slotnum, hotbarCategory) or duration > 1000 or CombatInfo.SV.GlobalPotion then
                         self.cooldownCompleteAnim.animation = self.cooldownCompleteAnim.animation or CreateSimpleAnimation(ANIMATION_TEXTURE, self.cooldownCompleteAnim)
                         local anim = self.cooldownCompleteAnim.animation
 
@@ -679,8 +677,6 @@ function CombatInfo.HookGCD()
         self.isGlobalCooldown = global
         self:UpdateUsable()
     end
-
-    ]]--
 end
 
 -- Helper function to get override ability duration.
@@ -974,44 +970,43 @@ function CombatInfo.OnUpdate(currentTime)
     end
 
     -- Quickslot cooldown
-    --[[
     if CombatInfo.SV.PotionTimerShow then
         local slotIndex = GetCurrentQuickslot()
-        local remain, duration, global = GetSlotCooldownInfo(slotIndex)
+        local remain, duration, global = GetSlotCooldownInfo(slotIndex, HOTBAR_CATEGORY_QUICKSLOT_WHEEL)
         -- Don't show unless potion is used - We have to counter for the GCD lockout from casting a spell here
         if (duration > 5000) then
             uiQuickSlot.label:SetHidden(false)
 
-            if remain > 86400000 then -- more then 1 day
+            if not CombatInfo.SV.PotionTimerColor then
+                uiQuickSlot.label:SetColor(1, 1, 1, 1)
+            else
+                local color = uiQuickSlot.colour -- default color in case none is found
+                for i = #(uiQuickSlot.timeColours), 1, -1 do
+                    if remain < uiQuickSlot.timeColours[i].remain then
+                        color = uiQuickSlot.timeColours[i].colour
+                        break
+                    end
+                end
+                uiQuickSlot.label:SetColor(unpack(color))
+            end
+
+            if remain > 86400000 then -- more than 1 day
                 uiQuickSlot.label:SetText( string.format("%d d", math.floor( remain/86400000 )) )
             elseif remain > 6000000 then -- over 100 minutes - display XXh
                 uiQuickSlot.label:SetText( string.format("%dh", math.floor( remain/3600000 )) )
             elseif remain > 600000 then -- over 10 minutes - display XXm
                 uiQuickSlot.label:SetText( string.format("%dm", math.floor( remain/60000 )) )
             elseif remain > 60000 then
-                local m = math.floor( remain/60000 )
-                local s = remain/1000 - 60*m
-                uiQuickSlot.label:SetText( string.format("%d:%.2d", m, s) )
+                local m = math.floor(remain / 60000)
+                local s = remain / 1000 - 60 * m
+                uiQuickSlot.label:SetText(string.format("%d:%.2d", m, s))
             else
-                uiQuickSlot.label:SetText(string.format(CombatInfo.SV.PotionTimerMiilis and "%.1f" or "%.1d", 0.001 * remain))
-            end
-
-            for i = #(uiQuickSlot.timeColours), 1, -1 do
-                if remain < uiQuickSlot.timeColours[i].remain then
-                    if CombatInfo.SV.PotionTimerColor then
-                        uiQuickSlot.label:SetColor(unpack(uiQuickSlot.timeColours[i].colour))
-                    else
-                        uiQuickSlot.label:SetColor(1, 1, 1, 1)
-                    end
-                    break
-                end
+                uiQuickSlot.label:SetText(string.format(CombatInfo.SV.PotionTimerMillis and "%.1f" or "%.1d", 0.001 * remain))
             end
         else
             uiQuickSlot.label:SetHidden(true)
-            uiQuickSlot.label:SetColor(unpack(uiQuickSlot.colour))
         end
     end
-    ]]--
 
     -- Hide Ultimate generation texture if it is time to do so
     if CombatInfo.SV.UltimateGeneration then
@@ -1136,11 +1131,9 @@ function CombatInfo.ApplyFont()
     g_potionFont = potionFontName .. "|" .. potionFontSize .. "|" .. potionFontStyle
 
     -- If QuickSlot is created, and we're updating font from the menu setting, set the font here.
-    --[[
     if uiQuickSlot.label then
         uiQuickSlot.label:SetFont(g_potionFont)
     end
-    ]]--
 
     -- Setup Ultimate Font
     local ultimateFontName = LUIE.Fonts[CombatInfo.SV.UltimateFontFace]
@@ -1234,12 +1227,9 @@ end
 
 -- Resets Potion Timer label - called on initialization and menu changes
 function CombatInfo.ResetPotionTimerLabel()
-    --[[
-    local actionButton = ZO_ActionBar_GetButton(9)
     uiQuickSlot.label:ClearAnchors()
-    uiQuickSlot.label:SetAnchor(TOPLEFT, actionButton.slot)
-    uiQuickSlot.label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CombatInfo.SV.PotionTimerLabelPosition)
-    ]]--
+    uiQuickSlot.label:SetAnchor(TOPLEFT, ZO_QuickSlot)
+    uiQuickSlot.label:SetAnchor(BOTTOMRIGHT, ZO_QuickSlot, nil, 0, -CombatInfo.SV.PotionTimerLabelPosition)
 end
 
 -- Runs on the EVENT_TARGET_CHANGE listener.
@@ -2364,7 +2354,8 @@ function CombatInfo.OnSlotUpdated(eventCode, slotNum)
 
     -- Update the slot if the bound id has a proc
     if slotNum >= BAR_INDEX_START and slotNum <= BAR_INDEX_END then
-        local abilityId = GetSlotBoundId(slotNum)
+
+        local abilityId = GetSlotBoundId(slotNum, g_hotbarCategory)
         if Effects.IsAbilityProc[abilityId] or Effects.BaseForAbilityProc[abilityId] then
             CombatInfo.BarSlotUpdate(slotNum, false, true)
         end
@@ -2437,7 +2428,7 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
         local hotbarCategory = g_hotbarCategory == HOTBAR_CATEGORY_BACKUP and HOTBAR_CATEGORY_PRIMARY or HOTBAR_CATEGORY_BACKUP
         ability_id = GetSlotBoundId(slotNum - BACKBAR_INDEX_OFFSET, hotbarCategory)
     else
-        ability_id = GetSlotBoundId(slotNum)
+        ability_id = GetSlotBoundId(slotNum, g_hotbarCategory)
     end
 
     local showFakeAura = (Effects.BarHighlightOverride[ability_id] and Effects.BarHighlightOverride[ability_id].showFakeAura)
@@ -2464,7 +2455,7 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
 
     -- Check if currently this ability is in proc state
     local proc = Effects.HasAbilityProc[abilityName]
-    if Effects.IsAbilityProc[GetSlotBoundId(slotNum)] then
+    if Effects.IsAbilityProc[GetSlotBoundId(slotNum, g_hotbarCategory)] then
         if CombatInfo.SV.ShowTriggered then
             CombatInfo.PlayProcAnimations(slotNum)
             if CombatInfo.SV.ProcEnableSound then

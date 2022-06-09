@@ -6,24 +6,14 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
-    "|cFFA500LuiExtended Version 6.3.0|r",
+    "|cFFA500LuiExtended Version 6.3.1|r",
     "",
     "|cFFFF00General:|r",
-    "[*] German localization updated thanks to the efforts of saenic!",
-    "[*] Added French localization thanks to the efforts of Zhull-GH!",
-    "[*] Implemented the features of Nagolite's \"Updated Assistants for Lui Extended\" patch, see more details below in the Slash Commands section.",
-    "",
-    "|cFFFF00Buffs & Debuffs:|r",
-    "[*] Made a few minor changes to tooltips and icons.",
+    "[*] German localization updated.",
     "",
     "|cFFFF00Combat Info:|r",
-    "[*] GCD Tracker: Disabled this feature due to API changes made in High Isle breaking it.",
-    "[*] Potion Timer: Disabled this feature due to API changes made in High Isle breaking it.",
-    "",
-    "|cFFFF00Slash Commands:|r",
-    "[*] Updated Slash Commands & keybindings with support for Crow Assistants, Factotum Assistants, Ghrasharog, and Giladil the Ragpicker. Thanks to Nagolite for implementing these features!",
-    "[*] Updated Slash Commands & keybindings with support for Ember and Isobel, the new companions.",
-    "[*] Various quality improvements and fixes made to Slash Command & keybinding functionality for summoning assistants & companions thanks to the efforts of Nagolite.",
+    "[*] Re-enabled GCD Tracker and Potion Timer and updated them to support High Isle.",
+    "[*] Fixed small issue with Potion Timer colors.",
     "",
 }
 
