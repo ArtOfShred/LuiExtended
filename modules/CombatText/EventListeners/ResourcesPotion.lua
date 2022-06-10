@@ -24,8 +24,8 @@ function CombatTextResourcesPotionEventListener:PotionCooldown()
     end
 
     local slotIndex = GetCurrentQuickslot()
-    if (GetSlotItemSound(slotIndex) == ITEM_SOUND_CATEGORY_POTION) then
-        local _, duration = GetSlotCooldownInfo( slotIndex )
+    if (GetSlotItemSound(slotIndex, HOTBAR_CATEGORY_QUICKSLOT_WHEEL) == ITEM_SOUND_CATEGORY_POTION) then
+        local _, duration = GetSlotCooldownInfo(slotIndex, HOTBAR_CATEGORY_QUICKSLOT_WHEEL)
         local isInCooldown = duration > 0
 
         if isInCooldown then

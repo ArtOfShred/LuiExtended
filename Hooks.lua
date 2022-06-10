@@ -996,19 +996,20 @@ function LUIE.InitializeHooks()
         -- Hook to make Activation Highlight Effect play indefinitely instead of animation only once
         ActionButton.UpdateActivationHighlight = function(self)
             local slotnum = self:GetSlot()
-            local slotType = GetSlotType(slotnum, self.button.hotbarCategory)
+            local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or self.button.hotbarCategory
+            local slotType = GetSlotType(slotnum, hotbarCategory)
             local slotIsEmpty = (slotType == ACTION_TYPE_NOTHING)
 
-            local abilityId = GetSlotBoundId(slotnum, self.button.hotbarCategory) -- Check AbilityId for if this should be a fake activation highlight
+            local abilityId = GetSlotBoundId(slotnum, hotbarCategory) -- Check AbilityId for if this should be a fake activation highlight
 
-            local showHighlight = not slotIsEmpty and (HasActivationHighlight(slotnum, self.button.hotbarCategory) or LUIE.Data.Effects.IsAbilityActiveGlow[abilityId] == true) and not self.useFailure and not self.showingCooldown
+            local showHighlight = not slotIsEmpty and (HasActivationHighlight(slotnum, hotbarCategory) or LUIE.Data.Effects.IsAbilityActiveGlow[abilityId] == true) and not self.useFailure and not self.showingCooldown
             local isShowingHighlight = self.activationHighlight:IsHidden() == false
 
             if showHighlight ~= isShowingHighlight then
                 self.activationHighlight:SetHidden(not showHighlight)
 
                 if showHighlight then
-                    local _, _, activationAnimationTexture = GetSlotTexture(slotnum, self.button.hotbarCategory)
+                    local _, _, activationAnimationTexture = GetSlotTexture(slotnum, hotbarCategory)
                     self.activationHighlight:SetTexture(activationAnimationTexture)
 
                     local anim = self.activationHighlight.animation
@@ -1034,16 +1035,17 @@ function LUIE.InitializeHooks()
         -- Hook to add AVA Guard Ability + Morphs into Toggle Highlights
         ActionButton.UpdateState = function(self)
             local slotnum = self:GetSlot()
-            local slotType = GetSlotType(slotnum, self.button.hotbarCategory)
+            local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or self.button.hotbarCategory
+            local slotType = GetSlotType(slotnum, hotbarCategory)
             local slotIsEmpty = (slotType == ACTION_TYPE_NOTHING)
-            local abilityId = GetSlotBoundId(slotnum, self.button.hotbarCategory) -- Check AbilityId for if this should be a fake activation highlight
+            local abilityId = GetSlotBoundId(slotnum, hotbarCategory) -- Check AbilityId for if this should be a fake activation highlight
 
-            self.button.actionId = GetSlotBoundId(slotnum, self.button.hotbarCategory)
+            self.button.actionId = GetSlotBoundId(slotnum, hotbarCategory)
 
             self:UpdateUseFailure()
 
             local hidden = true
-            if IsSlotToggled(slotnum) == true or LUIE.Data.Effects.IsAbilityActiveHighlight[abilityId] == true then
+            if IsSlotToggled(slotnum, hotbarCategory) == true or LUIE.Data.Effects.IsAbilityActiveHighlight[abilityId] == true then
                 hidden = false
             end
 
