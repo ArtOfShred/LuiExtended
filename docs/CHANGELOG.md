@@ -1,3 +1,14 @@
+### Version 6.3.1
+
+General
+- German localization updated.
+
+Combat Info
+- Re-enabled GCD Tracker and Potion Timer and updated them to support High Isle.
+- Fixed small issue with Potion Timer colors.
+
+---
+
 ### Version 6.3.0
 
 General
