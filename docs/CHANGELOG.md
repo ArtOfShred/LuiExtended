@@ -6,6 +6,7 @@ General
 Combat Info
 - Re-enabled GCD Tracker and Potion Timer and updated them to support High Isle.
 - Fixed small issue with Potion Timer colors.
+- Fixed Ultimate display.
 
 ---
 

@@ -1705,7 +1705,7 @@ function CombatInfo.HideSlot(slotNum, abilityId)
             CombatInfo.ToggleBackbarSaturation(slotNum, CombatInfo.SV.BarDarkUnused)
         end
     end
-    if slotNum == 8 and CombatInfo.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
+    if slotNum == g_ultimateSlot and CombatInfo.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
         uiUltimate.LabelPct:SetHidden(false)
     end
 end
@@ -2518,8 +2518,7 @@ end
 
 function CombatInfo.UpdateUltimateLabel()
     -- Get the currently slotted ultimate cost
-    local cost, mechType = GetSlotAbilityCost(g_ultimateSlot)
-    g_ultimateCost = (mechType == POWERTYPE_ULTIMATE) and cost or 0
+    g_ultimateCost = GetSlotAbilityCost(g_ultimateSlot) or 0
 
     -- Update ultimate label
     CombatInfo.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, "player", nil, POWERTYPE_ULTIMATE, g_ultimateCurrent, 0, 0)
