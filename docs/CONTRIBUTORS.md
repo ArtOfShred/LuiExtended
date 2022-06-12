@@ -6,7 +6,8 @@ LuiExtended wouldn't be where it was without the contributions of other users an
 - SilverWF <esoui.com> - Updating the role color & icon functions in UnitFrames for LuiExtended 5.6.1 after a API changes
 - AmonFlorian <github.com> - Horizontal Prominent Buffs code, Combat Text speed options, fixing an outdated hook in Chat Announcements for 5.9.5
 - nomaddc <github.com> - Forced Square font implementation
-- saenic <github.com> - Ability Alert label fraction option updates, Grainy Statusbar texture implementation
+- saenic <github.com> - Ability Alert label fraction option updates, Grainy Statusbar texture implementation, German translation, updates for CombatInfo components
+- Nagolite <esoui.com> - Updates and fixes for Slash Commands & keybindings
 
 ## Module / Component Contributions
 - Combat Text: This module was originally sourced from Combat Cloud by Samantha James (Sideshow <esoui.com>). The vast majority of the code is written by Sideshow and has been updated with new features and implemented into LuiExtended. Thanks to Sideshow for the incredible Combat Cloud addon!
@@ -17,6 +18,8 @@ LuiExtended wouldn't be where it was without the contributions of other users an
 - KiriX <esoui.com> - Vast majority of initial RU translation effort
 - Amanozako - Additional RU translation
 - AmonFlorian <github.com> - DE translation
+- saenic <github.com> - DE translation
+- Zhull-GH <github.com> - FR translation
 
 ## Other Addons
 - pChat: Timestamp function and some code used for LUIE.PrintToChat were based off Ayantir's pChat.
