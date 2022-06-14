@@ -341,6 +341,7 @@ local strings = {
     SI_LUIE_IGNORE_ERROR_FRIEND =                        "Du kannst einen ignorierten Spieler nicht als Freund hinzufügen.",
     SI_LUIE_IGNORE_ERROR_WHISPER =                       "Du kannst einen ignorierten Spieler nicht anflüstern.",
     SI_LUIE_IGNORE_ERROR_GUILD =                         "Du kannst einen ignorierten Spieler nicht in eine Gilde einladen.",
+    SI_LUIE_IGNORE_ERROR_TRIBUTE =                       "You cannot play Tales of Tribute with a player you are ignoring.",
     SI_LUIE_NOTIFICATION_GROUP_INVITE =                  "Gruppeneinladung",
     SI_LUIE_NOTIFICATION_SHARE_QUEST_INVITE =            "Geteilte Quest",
     SI_LUIE_NOTIFICATION_FRIEND_INVITE =                 "Freundeseinladung",

@@ -6,15 +6,10 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
-    "|cFFA500LuiExtended Version 6.3.1|r",
+    "|cFFA500LuiExtended Version 6.3.2|r",
     "",
     "|cFFFF00General:|r",
-    "[*] German localization updated.",
-    "",
-    "|cFFFF00Combat Info:|r",
-    "[*] Re-enabled GCD Tracker and Potion Timer and updated them to support High Isle.",
-    "[*] Fixed small issue with Potion Timer colors.",
-    "[*] Fixed Ultimate display",
+    "[*] Fixed an issue where the option to invite a player to a game of Tales of Tribute was missing from the Player interaction wheel.",
     "",
 }
 

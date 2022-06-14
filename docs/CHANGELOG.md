@@ -1,3 +1,10 @@
+### Version 6.3.2
+
+General
+- Fixed an issue where the option to invite a player to a game of Tales of Tribute was missing from the Player interaction wheel.
+
+---
+
 ### Version 6.3.1
 
 General

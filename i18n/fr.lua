@@ -341,6 +341,7 @@ local strings = {
     SI_LUIE_IGNORE_ERROR_FRIEND =                        "Vous ne pouvez pas rajouter en ami un joueur qui est dans votre liste de personnes ignorées.",
     SI_LUIE_IGNORE_ERROR_WHISPER =                       "Vous ne pouvez pas communiquer avec un joueur qui est dans votre liste de personnes ignorées.",
     SI_LUIE_IGNORE_ERROR_GUILD =                         "Vous ne pouvez inviter dans votre guilde un joueur qui est dans votre liste de personnes ignorées.",
+    SI_LUIE_IGNORE_ERROR_TRIBUTE =                       "You cannot play Tales of Tribute with a player you are ignoring.",
     SI_LUIE_NOTIFICATION_GROUP_INVITE =                  "Invitation de groupe",
     SI_LUIE_NOTIFICATION_SHARE_QUEST_INVITE =            "Quête partagée",
     SI_LUIE_NOTIFICATION_FRIEND_INVITE =                 "Invitation d'ami.e",

@@ -9767,7 +9767,8 @@ function ChatAnnouncements.HookFunction()
     ZO_PreHook(csaHandlers, EVENT_ANTIQUITY_LEAD_ACQUIRED, AntiquityLeadAcquired)
 
     -- HOOK PLAYER_TO_PLAYER Group Notifications to edit Ignore alert
-    local KEYBOARD_INTERACT_ICONS = {
+    local KEYBOARD_INTERACT_ICONS =
+    {
         [SI_PLAYER_TO_PLAYER_WHISPER] =
         {
             enabledNormal = "EsoUI/Art/HUD/radialIcon_whisper_up.dds",
@@ -9808,6 +9809,13 @@ function ChatAnnouncements.HookFunction()
             disabledNormal = "EsoUI/Art/HUD/radialIcon_duel_disabled.dds",
             disabledSelected = "EsoUI/Art/HUD/radialIcon_duel_disabled.dds",
         },
+        [SI_PLAYER_TO_PLAYER_INVITE_TRIBUTE] =
+        {
+            enabledNormal = "EsoUI/Art/HUD/radialIcon_tribute_up.dds",
+            enabledSelected = "EsoUI/Art/HUD/radialIcon_tribute_over.dds",
+            disabledNormal = "EsoUI/Art/HUD/radialIcon_tribute_disabled.dds",
+            disabledSelected = "EsoUI/Art/HUD/radialIcon_tribute_disabled.dds",
+        },
         [SI_PLAYER_TO_PLAYER_INVITE_TRADE] =
         {
             enabledNormal = "EsoUI/Art/HUD/radialIcon_trade_up.dds",
@@ -9836,7 +9844,8 @@ function ChatAnnouncements.HookFunction()
         },
     }
 
-    local GAMEPAD_INTERACT_ICONS = {
+    local GAMEPAD_INTERACT_ICONS =
+    {
         [SI_PLAYER_TO_PLAYER_WHISPER] =
         {
             enabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_whisper_down.dds",
@@ -9876,6 +9885,13 @@ function ChatAnnouncements.HookFunction()
             enabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_duel_down.dds",
             disabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_duel_disabled.dds",
             disabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_duel_disabled.dds",
+        },
+        [SI_PLAYER_TO_PLAYER_INVITE_TRIBUTE] =
+        {
+            enabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_tribute_down.dds",
+            enabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_tribute_down.dds",
+            disabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_tribute_disabled.dds",
+            disabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_tribute_disabled.dds",
         },
         [SI_PLAYER_TO_PLAYER_INVITE_TRADE] =
         {
@@ -10066,6 +10082,27 @@ function ChatAnnouncements.HookFunction()
             end
             local function DuelIgnore() AlertIgnored(SI_LUIE_IGNORE_ERROR_DUEL) end
             self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_INVITE_DUEL), platformIcons[SI_PLAYER_TO_PLAYER_INVITE_DUEL], ENABLED_IF_NOT_IGNORED, ENABLED_IF_NOT_IGNORED and DuelInviteOption or DuelIgnore)
+        end
+
+        -- Play Tribute --
+        local tributeInviteState, partnerCharacterName, partnerDisplayName = GetTributeInviteInfo()
+        if tributeInviteState ~= TRIBUTE_INVITE_STATE_NONE then
+            local function TributeInviteFailWarning(tributeInviteState, characterName, displayName)
+                return function()
+                    local userFacingPartnerName = ZO_GetPrimaryPlayerNameWithSecondary(displayName, characterName)
+                    local statusString = GetString("SI_TRIBUTEINVITESTATE", tributeInviteState)
+                    statusString = zo_strformat(statusString, userFacingPartnerName)
+                    ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, statusString)
+                end
+            end
+            self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_INVITE_TRIBUTE), platformIcons[SI_PLAYER_TO_PLAYER_INVITE_TRIBUTE], DISABLED, TributeInviteFailWarning(tributeInviteState, partnerCharacterName, partnerDisplayName))
+        else
+            local function TributeInviteOption()
+                ChallengeTargetToTribute(currentTargetCharacterName)
+            end
+            local isEnabled = ENABLED_IF_NOT_IGNORED and not ZO_IsTributeLocked()
+            local function TributeIgnore() AlertIgnored(SI_LUIE_IGNORE_ERROR_TRIBUTE) end
+            self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_INVITE_TRIBUTE), platformIcons[SI_PLAYER_TO_PLAYER_INVITE_TRIBUTE], isEnabled, ENABLED_IF_NOT_IGNORED and TributeInviteOption or TributeIgnore)
         end
 
         --Trade--

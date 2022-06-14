@@ -341,6 +341,7 @@ local strings = {
     SI_LUIE_IGNORE_ERROR_FRIEND =                        "Вы не можете добавить в друзья игрока, которого вы игнорируете.",
     SI_LUIE_IGNORE_ERROR_WHISPER =                       "Вы не можете шепнуть игроку, которого вы игнорируете.",
     SI_LUIE_IGNORE_ERROR_GUILD =                         "Вы не можете отправить приглашение в гильдию игроку, которого вы игнорируете.",
+    SI_LUIE_IGNORE_ERROR_TRIBUTE =                       "You cannot play Tales of Tribute with a player you are ignoring.",
     SI_LUIE_NOTIFICATION_GROUP_INVITE =                  "Приглашение в группу",
     SI_LUIE_NOTIFICATION_SHARE_QUEST_INVITE =            "Предложение задания",
     SI_LUIE_NOTIFICATION_FRIEND_INVITE =                 "Приглашение в друзья",
