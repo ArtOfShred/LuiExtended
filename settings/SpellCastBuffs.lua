@@ -43,7 +43,7 @@ local dialogs = {
         identifier = "LUIE_CLEAR_ABILITY_BLACKLIST",
         title = GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR),
         text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG), GetString(SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST)),
-        callback = function(dialog)
+        callback = function(_)
             SpellCastBuffs.ClearCustomList(SpellCastBuffs.SV.BlacklistTable)
             LUIE_Blacklist:UpdateChoices(GenerateCustomList(SpellCastBuffs.SV.BlacklistTable))
         end,
@@ -52,7 +52,7 @@ local dialogs = {
         identifier = "LUIE_CLEAR_PROMINENT_BUFFS",
         title = GetString(SI_LUIE_LAM_UF_PROMINENT_CLEAR_BUFFS),
         text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
-        callback = function(dialog)
+        callback = function(_)
             SpellCastBuffs.ClearCustomList(SpellCastBuffs.SV.PromBuffTable)
             LUIE_Prominent_Buffs_List:UpdateChoices(GenerateCustomList(SpellCastBuffs.SV.PromBuffTable))
         end,
@@ -61,7 +61,7 @@ local dialogs = {
         identifier = "LUIE_CLEAR_PROMINENT_DEBUFFS",
         title = GetString(SI_LUIE_LAM_UF_PROMINENT_CLEAR_DEBUFFS),
         text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
-        callback = function(dialog)
+        callback = function(_)
             SpellCastBuffs.ClearCustomList(SpellCastBuffs.SV.PromDebuffTable)
             LUIE_Prominent_Debuffs_List:UpdateChoices(GenerateCustomList(SpellCastBuffs.SV.PromDebuffTable))
         end,
@@ -71,7 +71,7 @@ local dialogs = {
         identifier = "LUIE_CLEAR_PRIORITY_BUFFS",
         title = GetString(SI_LUIE_LAM_UF_PRIORITY_CLEAR_BUFFS),
         text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST), GetString(SI_LUIE_CUSTOM_LIST_PRIORITY_BUFFS)),
-        callback = function(dialog)
+        callback = function(_)
             SpellCastBuffs.ClearCustomList(SpellCastBuffs.SV.PriorityBuffTable)
             LUIE_Priority_Buffs_List:UpdateChoices(GenerateCustomList(SpellCastBuffs.SV.PriorityBuffTable))
         end,
@@ -80,7 +80,7 @@ local dialogs = {
         identifier = "LUIE_CLEAR_PRIORITY_DEBUFFS",
         title = GetString(SI_LUIE_LAM_UF_PRIORITY_CLEAR_DEBUFFS),
         text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST), GetString(SI_LUIE_CUSTOM_LIST_PRIORITY_DEBUFFS)),
-        callback = function(dialog)
+        callback = function(_)
             SpellCastBuffs.ClearCustomList(SpellCastBuffs.SV.PriorityDebuffTable)
             LUIE_Priority_Debuffs_List:UpdateChoices(GenerateCustomList(SpellCastBuffs.SV.PriorityDebuffTable))
         end,

@@ -2431,8 +2431,6 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
         ability_id = GetSlotBoundId(slotNum, g_hotbarCategory)
     end
 
-    local showFakeAura = (Effects.BarHighlightOverride[ability_id] and Effects.BarHighlightOverride[ability_id].showFakeAura)
-
     if Effects.BarHighlightOverride[ability_id] then
         if Effects.BarHighlightOverride[ability_id].hide then
             return

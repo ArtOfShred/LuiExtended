@@ -145,10 +145,11 @@ UnitFrames.Defaults = {
     RaidNameClip                     = 94,
     RaidBarWidth                     = 220,
     RaidBarHeight                    = 30,
-    RaidLayout                       = "2 x 12",
+    RaidLayout                       = "1 x 12",
     RoleIconSmallGroup               = true,
     ColorRoleGroup                   = true,
     ColorRoleRaid                    = true,
+    SortRoleRaid                     = true,
     ColorClassGroup                  = false,
     ColorClassRaid                   = false,
     RaidSpacers                      = false,
@@ -942,7 +943,6 @@ local function CreateCustomFrames()
         raid:SetDrawLevel(1)
         raid.customPositionAttr = "CustomFramesRaidFramePos"
         raid.preview = UI.Backdrop( raid, {TOPLEFT,TOPLEFT}, nil, nil, nil, true )
-        raid.preview2 = UI.Backdrop( raid.preview, nil, nil, nil, nil, false )
         raid.previewLabel = UI.Label( raid.preview, {BOTTOM,TOP,0,-1,raid}, nil, nil, "ZoFontGameMedium", "Raid Group", false )
 
         local fragment = ZO_HUDFadeSceneFragment:New(raid, 0, 0)
@@ -1170,8 +1170,11 @@ local function CreateCustomFrames()
 
                         if powerBar.shield then
                             if shieldOverlay then
-                                powerBar.shield:SetAnchor( TOPLEFT, powerBar.backdrop, shieldFull and TOPLEFT or LEFT, 1, 1 )
+                                --powerBar.shield:SetAnchor( TOPLEFT, powerBar.backdrop, shieldFull and TOPLEFT or LEFT, 1, 1 )
+                                powerBar.shield:SetAnchor( BOTTOMLEFT, powerBar.backdrop, BOTTOMLEFT, 1, 1 )
                                 powerBar.shield:SetAnchor( BOTTOMRIGHT, powerBar.backdrop, BOTTOMRIGHT, -1, -1 )
+                                --powerBar.shield:SetAnchor(BOTTOM, powerBar.backdrop)
+                                powerBar.shield:SetHeight(8)
                             else
                                 -- In non-overlay mode we need to create separate backdrop for shield
                                 powerBar.shieldbackdrop = UI.Backdrop( UnitFrames.CustomFrames[unitTag].control, nil, nil, nil, nil, true )
@@ -3112,7 +3115,7 @@ function UnitFrames.ResurrectionMonitor(unitTag)
 end
 
 -- Runs on the EVENT_LEADER_UPDATE listener.
-function UnitFrames.OnLeaderUpdate(eventCode, leaderTag)
+function UnitFrames.OnLeaderUpdate(_, _)
     UnitFrames.CustomFramesApplyLayoutGroup(false)
     UnitFrames.CustomFramesApplyLayoutRaid(false)
 end
@@ -3811,6 +3814,7 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
     local dps       =  { UnitFrames.SV.CustomColourDPS[1],    UnitFrames.SV.CustomColourDPS[2],     UnitFrames.SV.CustomColourDPS[3], 0.9 }
     local healer    =  { UnitFrames.SV.CustomColourHealer[1], UnitFrames.SV.CustomColourHealer[2],  UnitFrames.SV.CustomColourHealer[3], 0.9 }
     local tank      =  { UnitFrames.SV.CustomColourTank[1],   UnitFrames.SV.CustomColourTank[2],    UnitFrames.SV.CustomColourTank[3], 0.9 }
+    local invalid   =  { 75/255, 75/255, 75/255, 0.9 }
 
     local class1  = { UnitFrames.SV.CustomColourDragonknight[1], UnitFrames.SV.CustomColourDragonknight[2], UnitFrames.SV.CustomColourDragonknight[3], 0.9} -- Dragonkight
     local class2  = { UnitFrames.SV.CustomColourSorcerer[1], UnitFrames.SV.CustomColourSorcerer[2], UnitFrames.SV.CustomColourSorcerer[3], 0.9} -- Sorcerer
@@ -3830,6 +3834,7 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
     local dps_bg    = { 0.1*UnitFrames.SV.CustomColourDPS[1],    0.1*UnitFrames.SV.CustomColourDPS[2],    0.1*UnitFrames.SV.CustomColourDPS[3], 0.9 }
     local healer_bg = { 0.1*UnitFrames.SV.CustomColourHealer[1], 0.1*UnitFrames.SV.CustomColourHealer[2], 0.1*UnitFrames.SV.CustomColourHealer[3], 0.9 }
     local tank_bg   = { 0.1*UnitFrames.SV.CustomColourTank[1],   0.1*UnitFrames.SV.CustomColourTank[2],   0.1*UnitFrames.SV.CustomColourTank[3], 0.9 }
+    local invalid_bg = { 0.1*invalid[1], 0.1*invalid[2], 0.1*invalid[3], 0.9 }
 
     local class1_bg  = { 0.1*UnitFrames.SV.CustomColourDragonknight[1], 0.1*UnitFrames.SV.CustomColourDragonknight[2], 0.1*UnitFrames.SV.CustomColourDragonknight[3], 0.9} -- Dragonkight
     local class2_bg  = { 0.1*UnitFrames.SV.CustomColourSorcerer[1], 0.1*UnitFrames.SV.CustomColourSorcerer[2], 0.1*UnitFrames.SV.CustomColourSorcerer[3], 0.9} -- Sorcerer
@@ -4008,18 +4013,18 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
                 end
 
                 if (group and UnitFrames.SV.ColorRoleGroup) or (raid and UnitFrames.SV.ColorRoleRaid) then
-                    if role == 1 then
+                    if role == LFG_ROLE_DPS then
                         thb.bar:SetColor( unpack(dps) )
                         thb.backdrop:SetCenterColor( unpack(dps_bg) )
-                    elseif role == 4 then
+                    elseif role == LFG_ROLE_HEAL then
                         thb.bar:SetColor( unpack(healer) )
                         thb.backdrop:SetCenterColor( unpack(healer_bg) )
-                    elseif role == 2 then
+                    elseif role == LFG_ROLE_TANK then
                         thb.bar:SetColor( unpack(tank) )
                         thb.backdrop:SetCenterColor( unpack(tank_bg) )
                     else
-                        thb.bar:SetColor( unpack(health) )
-                        thb.backdrop:SetCenterColor( unpack(health_bg) )
+                        thb.bar:SetColor( unpack(invalid) ) -- do not use health as fallback because it might look like tank
+                        thb.backdrop:SetCenterColor( unpack(invalid_bg) )
                     end
                 elseif (group and UnitFrames.SV.ColorClassGroup) or (raid and UnitFrames.SV.ColorClassRaid) and class ~= 0 then
                     local class_color
@@ -4043,8 +4048,8 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
                         class_color = class6
                         class_bg = class6_bg
                     else -- Fallback option just in case
-                        class_color = health
-                        class_bg = health_bg
+                        class_color = invalid
+                        class_bg = invalid_bg
                     end
                     thb.bar:SetColor( unpack(class_color) )
                     thb.backdrop:SetCenterColor( unpack(class_bg) )
@@ -4939,34 +4944,34 @@ function UnitFrames.CustomFramesApplyLayoutRaid(unhide)
         return
     end
 
-    local itemsPerColumn =
-        ( UnitFrames.SV.RaidLayout == "6 x 4" ) and 4 or
-        ( UnitFrames.SV.RaidLayout == "4 x 6" ) and 6 or
-        ( UnitFrames.SV.RaidLayout == "3 x 8" ) and 8 or
-        ( UnitFrames.SV.RaidLayout == "2 x 12" ) and 12 or
-        24
-
+    local itemsPerColumn = ( UnitFrames.SV.RaidLayout == "6 x 2" ) and 2 or ( UnitFrames.SV.RaidLayout == "2 x 6" ) and 6 or 12
     local spacerHeight = 3
-    local spacersPerColumn = { [4] = 1, [6] = 1.5, [8] = 2, [12] = 3, [24] = 6 }
 
     local raid = UnitFrames.CustomFrames.RaidGroup1.tlw
+    raid:SetDimensions( UnitFrames.SV.RaidBarWidth * (12/itemsPerColumn) + (UnitFrames.SV.RaidSpacers and spacerHeight*(itemsPerColumn/4) or 0), UnitFrames.SV.RaidBarHeight * itemsPerColumn )
 
-    raid:SetDimensions( UnitFrames.SV.RaidBarWidth * (24/itemsPerColumn) + (UnitFrames.SV.RaidSpacers and spacerHeight*(itemsPerColumn/4) or 0), UnitFrames.SV.RaidBarHeight * itemsPerColumn )
-
-    -- For preview let us consider that large raid consists of 2 groups of 12 players, and display 2 independent preview backdrops
-    -- They do not overlap, except for the case of '3 x 8' layout
-    local groupWidth = UnitFrames.SV.RaidBarWidth * ( itemsPerColumn == 24 and 1 or math.floor(0.5 + 12/itemsPerColumn) )
+    local groupWidth = UnitFrames.SV.RaidBarWidth * ( math.floor(0.5 + 12/itemsPerColumn) )
     local groupHeight = UnitFrames.SV.RaidBarHeight * math.min(12,itemsPerColumn)
 
     raid.preview:SetDimensions( groupWidth, groupHeight )
-    raid.preview2:SetDimensions( groupWidth, groupHeight )
-    -- raid.preview is already anchored to TOPLEFT,TOPLEFT,0,0
-    raid.preview2:ClearAnchors()
-    raid.preview2:SetAnchor(TOPLEFT, raid, TOPLEFT, UnitFrames.SV.RaidBarWidth*math.floor(12/itemsPerColumn), UnitFrames.SV.RaidBarHeight*( itemsPerColumn == 24 and 12 or 0 ) )
+
+    -- Insert player into list if it matches the currentRole
+    local function insertRole(list, currentRole)
+        for index = 1, GetGroupSize() do
+            local playerRole = GetGroupMemberSelectedRole(GetGroupUnitTagByIndex(index))
+            if (playerRole == currentRole) then
+                table.insert(list, index)
+            end
+        end
+    end
+
+    -- Create a list of players and insert the players according to their role
+    local playerList = {}
+    table.foreach({ LFG_ROLE_TANK, LFG_ROLE_HEAL, LFG_ROLE_DPS, LFG_ROLE_INVALID }, function(_, value) insertRole(playerList, value) end)
 
     local column = 0    -- 0,1,2,3,4,5
-    local row = 0       -- 1,2,3,...,24
-    for i = 1, 24 do
+    local row = 0       -- 1,2,3,...,12
+    for i = 1, GetGroupSize() do
         if row == itemsPerColumn then
             column = column + 1
             row = 1
@@ -4974,11 +4979,13 @@ function UnitFrames.CustomFramesApplyLayoutRaid(unhide)
             row = row + 1
         end
 
-        local unitFrame = UnitFrames.CustomFrames["RaidGroup" .. i]
-        local unitTag = GetGroupUnitTagByIndex(i)
+        local index = UnitFrames.SV.SortRoleRaid and playerList[i] or i
+        local unitFrame = UnitFrames.CustomFrames["RaidGroup" .. index]
+        local unitTag = GetGroupUnitTagByIndex(index)
 
         unitFrame.control:ClearAnchors()
-        unitFrame.control:SetAnchor( TOPLEFT, raid, TOPLEFT, UnitFrames.SV.RaidBarWidth*column, UnitFrames.SV.RaidBarHeight*(row-1) + (UnitFrames.SV.RaidSpacers and spacerHeight*(math.floor((i-1)/4)-math.floor(column*itemsPerColumn/4)) or 0) )
+        unitFrame.control:SetAnchor( TOPLEFT, raid, TOPLEFT, UnitFrames.SV.RaidBarWidth*column, UnitFrames.SV.RaidBarHeight*(row-1) +
+            (UnitFrames.SV.RaidSpacers and spacerHeight*(math.floor((i-1)/4)-math.floor(column*itemsPerColumn/4)) or 0) )
         unitFrame.control:SetDimensions( UnitFrames.SV.RaidBarWidth, UnitFrames.SV.RaidBarHeight )
 
         local role = GetGroupMemberSelectedRole(unitTag)

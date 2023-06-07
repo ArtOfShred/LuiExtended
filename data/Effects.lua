@@ -1652,13 +1652,6 @@ Effects.AssistantIcons = {
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
--- When a target name matches a string here, add id's in the table as debuff
---------------------------------------------------------------------------------------------------------------------------------
-Effects.AddNameAuraAlways = {
-    -- TODO: Possibly remove, unused at the moment
-}
-
---------------------------------------------------------------------------------------------------------------------------------
 -- When a target name matches a string here, add id's in the table with the name and icon specified. We use this primarily to add CC Immunity buffs for bosses.
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.AddNameAura = {
@@ -2960,13 +2953,6 @@ Effects.ArtificialEffectOverride = {
     [1] = { name = string.gsub(GetArtificialEffectInfo(1), "For", "for"), tooltip = Tooltips.Innate_Looking_for_Group }, -- Looking For Group (Dungeon Finder)
     [2] = { name = Abilities.Skill_Battle_Spirit, tooltip = Tooltips.Innate_Battle_Spirit_Imperial_City }, -- Battle Spirit Imperial City (used for Active Effects window)
     [3] = { tooltip = Tooltips.Innate_Battleground_Deserter }, -- Battleground Deserter Penalty
-}
-
---------------------------------------------------------------------------------------------------------------------------------
--- Table of NAME or ID's to add a third line to the tooltip. Any ability listed here should use its source ability as the tooltip, and this added 3 line will describe the effect. Used for major/minor effects & potions/poison primarily.
---------------------------------------------------------------------------------------------------------------------------------
-Effects.TooltipNameOverride = {
-    -- TODO: Maybe remove
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
