@@ -6,10 +6,16 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
-    "|cFFA500LuiExtended Version 6.3.2|r",
+    "|cFFA500LuiExtended Version 6.4.0|r",
     "",
     "|cFFFF00General:|r",
-    "[*] Fixed an issue where the option to invite a player to a game of Tales of Tribute was missing from the Player interaction wheel.",
+    "[*] Removed buff & debuff overrides as they were causing too many troubles",
+    "",
+    "|cFFFF00Unit Frames:|r",
+    "[*] Changed shield bar overlay to be smaller",
+    "[*] Removed 24 player group support",
+    "[*] Added option to sort group by role",
+    "[*] Added arcanist class color (thanks ACastanza)",
     "",
 }
 
