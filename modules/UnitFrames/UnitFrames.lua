@@ -27,6 +27,7 @@ local classIcons = {
     [4] = "/esoui/art/icons/class/class_warden.dds",
     [5] = "/esoui/art/icons/class/class_necromancer.dds",
     [6] = "/esoui/art/icons/class/class_templar.dds",
+    [117] = "/esoui/art/icons/class/class_arcanist.dds",
 }
 
 local roleIcons = {
@@ -93,6 +94,7 @@ UnitFrames.Defaults = {
     CustomColourTemplar              = { 255/255, 240/255, 95/255  },
     CustomColourWarden               = { 136/255, 245/255, 125/255 },
     CustomColourNecromancer          = { 97/255, 37/255, 201/255 },
+    CustomColourArcanist             = { 90/255, 240/255, 80/255 },
     CustomShieldBarSeparate          = false,
     CustomShieldBarHeight            = 10,
     CustomShieldBarFull              = false,
@@ -3822,6 +3824,7 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
     local class4  = { UnitFrames.SV.CustomColourWarden[1], UnitFrames.SV.CustomColourWarden[2], UnitFrames.SV.CustomColourWarden[3], 0.9} -- Warden
     local class5  = { UnitFrames.SV.CustomColourNecromancer[1], UnitFrames.SV.CustomColourNecromancer[2], UnitFrames.SV.CustomColourNecromancer[3], 0.9} -- Necromancer
     local class6  = { UnitFrames.SV.CustomColourTemplar[1], UnitFrames.SV.CustomColourTemplar[2], UnitFrames.SV.CustomColourTemplar[3], 0.9} -- Templar
+    local class117 = { UnitFrames.SV.CustomColourArcanist[1], UnitFrames.SV.CustomColourArcanist[2], UnitFrames.SV.CustomColourArcanist[3], 0.9} -- Arcanist
 
     local petcolor = { UnitFrames.SV.CustomColourPet[1], UnitFrames.SV.CustomColourPet[2], UnitFrames.SV.CustomColourPet[3], 0.9} -- Player Pet
     local companioncolor = { UnitFrames.SV.CustomColourCompanionFrame[1], UnitFrames.SV.CustomColourCompanionFrame[2], UnitFrames.SV.CustomColourCompanionFrame[3], 0.9} -- Companion
@@ -3842,6 +3845,7 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
     local class4_bg  = { 0.1*UnitFrames.SV.CustomColourWarden[1], 0.1*UnitFrames.SV.CustomColourWarden[2], 0.1*UnitFrames.SV.CustomColourWarden[3], 0.9} -- Warden
     local class5_bg  = { 0.1*UnitFrames.SV.CustomColourNecromancer[1], 0.1*UnitFrames.SV.CustomColourNecromancer[2], 0.1*UnitFrames.SV.CustomColourNecromancer[3], 0.9} -- Necromancer
     local class6_bg  = { 0.1*UnitFrames.SV.CustomColourTemplar[1], 0.1*UnitFrames.SV.CustomColourTemplar[2], 0.1*UnitFrames.SV.CustomColourTemplar[3], 0.9} -- Templar
+    local class117_bg = { 0.1 * UnitFrames.SV.CustomColourArcanist[1], 0.1 * UnitFrames.SV.CustomColourArcanist[2], 0.1 * UnitFrames.SV.CustomColourArcanist[3], 0.9 } -- Arcanist
 
     local petcolor_bg = { 0.1*UnitFrames.SV.CustomColourPet[1], 0.1*UnitFrames.SV.CustomColourPet[2], 0.1*UnitFrames.SV.CustomColourPet[3], 0.9} -- Player Pet
     local companioncolor_bg = { 0.1*UnitFrames.SV.CustomColourCompanionFrame[1], 0.1*UnitFrames.SV.CustomColourCompanionFrame[2], 0.1*UnitFrames.SV.CustomColourCompanionFrame[3], 0.9} -- Companion
@@ -3894,6 +3898,9 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
             elseif petClass == 6 then
                 class_color = class6
                 class_bg = class6_bg
+            elseif petClass == 117 then
+                class_color = class117
+                class_bg = class117_bg
             else -- Fallback option just in case
                 class_color = petcolor
                 class_bg = petcolor_bg
@@ -3940,6 +3947,9 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
                 elseif petClass == 6 then
                     class_color = class6
                     class_bg = class6_bg
+                elseif petClass == 117 then
+                    class_color = class117
+                    class_bg = class117_bg
                 else -- Fallback option just in case
                     class_color = petcolor
                     class_bg = petcolor_bg
@@ -4047,6 +4057,9 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
                     elseif class == 6 then
                         class_color = class6
                         class_bg = class6_bg
+                    elseif class == 117 then
+                        class_color = class117
+                        class_bg = class117_bg
                     else -- Fallback option just in case
                         class_color = invalid
                         class_bg = invalid_bg
