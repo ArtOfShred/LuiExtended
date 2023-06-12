@@ -4148,6 +4148,7 @@ function UnitFrames.CustomFramesApplyReactionColor(isPlayer)
             [4]  = { UnitFrames.SV.CustomColourWarden[1], UnitFrames.SV.CustomColourWarden[2], UnitFrames.SV.CustomColourWarden[3], 0.9}, -- Warden
             [5]  = { UnitFrames.SV.CustomColourNecromancer[1], UnitFrames.SV.CustomColourNecromancer[2], UnitFrames.SV.CustomColourNecromancer[3], 0.9}, -- Necromancer
             [6]  = { UnitFrames.SV.CustomColourTemplar[1], UnitFrames.SV.CustomColourTemplar[2], UnitFrames.SV.CustomColourTemplar[3], 0.9}, -- Templar
+            [117]  = { UnitFrames.SV.CustomColourArcanist[1], UnitFrames.SV.CustomColourArcanist[2], UnitFrames.SV.CustomColourArcanist[3], 0.9}, -- Arcanist
         }
 
         local classBackground = {
@@ -4157,6 +4158,7 @@ function UnitFrames.CustomFramesApplyReactionColor(isPlayer)
             [4]  = { 0.1*UnitFrames.SV.CustomColourWarden[1], 0.1*UnitFrames.SV.CustomColourWarden[2], 0.1*UnitFrames.SV.CustomColourWarden[3], 0.9}, -- Warden
             [5]  = { 0.1*UnitFrames.SV.CustomColourNecromancer[1], 0.1*UnitFrames.SV.CustomColourNecromancer[2], 0.1*UnitFrames.SV.CustomColourNecromancer[3], 0.9}, -- Necromancer
             [6]  = { 0.1*UnitFrames.SV.CustomColourTemplar[1], 0.1*UnitFrames.SV.CustomColourTemplar[2], 0.1*UnitFrames.SV.CustomColourTemplar[3], 0.9}, -- Templar
+            [117]  = { UnitFrames.SV.CustomColourTemplar[1], UnitFrames.SV.CustomColourArcanist[2], UnitFrames.SV.CustomColourArcanist[3], 0.9}, -- Arcanist
         }
 
         if UnitFrames.CustomFrames["reticleover"] then
