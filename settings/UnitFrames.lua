@@ -711,6 +711,20 @@ function UnitFrames.CreateSettings()
                 disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
             },
             {
+                -- Custom Unit Frames Arcanist Role Color
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_ARCA),
+                getFunc = function() return unpack(Settings.CustomColourArcanist) end,
+                setFunc = function(r, g, b, a)
+                    Settings.CustomColourArcanst = { r, g, b }
+                    UnitFrames.CustomFramesApplyColours(true)
+                end,
+                width = "full",
+                default = { r = Defaults.CustomColourArcanist[1], g = Defaults.CustomColourArcanist[2], b = Defaults.CustomColourArcanist[3] },
+                disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+            },
+
+            {
                 -- Custom Unit Reaction color
                 type = "colorpicker",
                 name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_PLAYER),
