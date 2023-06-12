@@ -1420,6 +1420,7 @@ local strings = {
     SI_LUIE_LAM_UF_CFRAMES_COLOR_TEMP =                  "Templar Class Color",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_WARD =                  "Warden Class Color",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_NECRO =                 "Necromancer Class Color",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_ARCA =                  "Arcanist Class Color",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_PLAYER =         "Reaction Color - Player",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_FRIENDLY =       "Reaction Color - Friendly",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_HOSTILE =        "Reaction Color - Hostile",
