@@ -6,7 +6,7 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
-    "|cFFA500LuiExtended Version 6.4.0|r",
+    "|cFFA500LuiExtended Version 6.4.1|r",
     "",
     "|cFFFF00General:|r",
     "[*] Removed buff & debuff overrides as they were causing too many troubles",
