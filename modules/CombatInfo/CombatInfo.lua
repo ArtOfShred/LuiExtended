@@ -146,6 +146,7 @@ CombatInfo.Defaults = {
             levitateColor               = { 1, 0, 0, 1 },
             disorientColor              = { 0, 127/255, 1, 1 },
             fearColor                   = { 143/255, 9/255, 236/255, 1 },
+            charmColor                  = { 64/255, 255/255, 32/255, 1 },
             silenceColor                = { 0, 1, 1, 1 },
             staggerColor                = { 1, 127/255, 0, 1 },
             unbreakableColor            = { 224/255, 224/255, 1, 1 },
@@ -249,6 +250,7 @@ CombatInfo.Defaults = {
             [ACTION_RESULT_LEVITATED]      = { 1, 0, 0, 1 },
             [ACTION_RESULT_DISORIENTED]    = { 0, 127/255, 1, 1 },
             [ACTION_RESULT_FEARED]         = { 143/255, 9/255, 236/255, 1 },
+            [ACTION_RESULT_CHARMED]        = { 64/255, 255/255, 32/255, 1 },
             [ACTION_RESULT_SILENCED]       = { 0, 1, 1, 1 },
             [ACTION_RESULT_STAGGERED]      = { 1, 127/255, 0, 1 },
             [ACTION_RESULT_IMMUNE]         = { 1, 1, 1, 1},
@@ -260,6 +262,7 @@ CombatInfo.Defaults = {
         },
     },
 }
+
 CombatInfo.SV = nil
 CombatInfo.AlertColors = {}
 CombatInfo.CastBarUnlocked = false
@@ -491,7 +494,8 @@ function CombatInfo.Initialize(enabled)
         CombatInfo.SV.alerts.colors.levitateColor               = CombatInfo.Defaults.alerts.colors.levitateColor
         CombatInfo.SV.alerts.colors.disorientColor              = CombatInfo.Defaults.alerts.colors.disorientColor
         CombatInfo.SV.alerts.colors.fearColor                   = CombatInfo.Defaults.alerts.colors.fearColor
-        CombatInfo.SV.alerts.colors.silenceColor                = CombatInfo.Defaults.alerts.colors.silenceColor
+        CombatInfo.SV.alerts.colors.charmColor                  = CombatInfo.Defaults.alerts.colors.charmColor
+        CombatInfo.SV.alerts.colors.silenceColor               = CombatInfo.Defaults.alerts.colors.silenceColor
         CombatInfo.SV.alerts.colors.staggerColor                = CombatInfo.Defaults.alerts.colors.staggerColor
         CombatInfo.SV.alerts.colors.unbreakableColor            = CombatInfo.Defaults.alerts.colors.unbreakableColor
         CombatInfo.SV.alerts.colors.snareColor                  = CombatInfo.Defaults.alerts.colors.snareColor
@@ -502,6 +506,7 @@ function CombatInfo.Initialize(enabled)
         CombatInfo.SV.cct.colors[ACTION_RESULT_LEVITATED]      = CombatInfo.Defaults.cct.colors[ACTION_RESULT_LEVITATED]
         CombatInfo.SV.cct.colors[ACTION_RESULT_DISORIENTED]    = CombatInfo.Defaults.cct.colors[ACTION_RESULT_DISORIENTED]
         CombatInfo.SV.cct.colors[ACTION_RESULT_FEARED]         = CombatInfo.Defaults.cct.colors[ACTION_RESULT_FEARED]
+        CombatInfo.SV.cct.colors[ACTION_RESULT_CHARMED]        = CombatInfo.Defaults.cct.colors[ACTION_RESULT_CHARMED]
         CombatInfo.SV.cct.colors[ACTION_RESULT_SILENCED]       = CombatInfo.Defaults.cct.colors[ACTION_RESULT_SILENCED]
         CombatInfo.SV.cct.colors[ACTION_RESULT_STAGGERED]      = CombatInfo.Defaults.cct.colors[ACTION_RESULT_STAGGERED]
         CombatInfo.SV.cct.colors[ACTION_RESULT_IMMUNE]         = CombatInfo.Defaults.cct.colors[ACTION_RESULT_IMMUNE]

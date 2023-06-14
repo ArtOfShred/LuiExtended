@@ -18,6 +18,7 @@ CastBarTable.CastBreakingStatus = {
     [ACTION_RESULT_LEVITATED] = true,
     [ACTION_RESULT_FEARED] = true,
     [ACTION_RESULT_DISORIENTED] = true,
+    [ACTION_RESULT_CHARMED] = true,
 }
 
 --------------------------------------------------------------------------------------------------------------------------------

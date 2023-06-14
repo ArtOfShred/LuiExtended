@@ -83,7 +83,7 @@ LUIE.Data.CombatTextConstants = {
     isFeared = {
         [ACTION_RESULT_FEARED]              = true,
     },
-    isOffBalanced = {
+    isOffBalanced     = {
         [ACTION_RESULT_OFFBALANCE]          = true,
     },
     isSilenced = {
@@ -91,6 +91,9 @@ LUIE.Data.CombatTextConstants = {
     },
     isStunned = {
         [ACTION_RESULT_STUNNED]             = true,
+    },
+    isCharmed         = {
+        [ACTION_RESULT_CHARMED]             = true,
     },
     -- Player Checks
     isPlayer = {
@@ -116,6 +119,7 @@ LUIE.Data.CombatTextConstants = {
         OFFBALANCED                 = "LUIE_CombatText_CROWDCONTROL_TYPE_OFFBALANCED",
         SILENCED                    = "LUIE_CombatText_CROWDCONTROL_TYPE_SILENCED",
         STUNNED                     = "LUIE_CombatText_CROWDCONTROL_TYPE_STUNNED",
+        CHARMED                     = "LUIE_CombatText_CROWDCONTROL_TYPE_CHARMED",
     },
     pointType = {
         ALLIANCE_POINTS             = "LUIE_CombatText_Point_TYPE_ALLIANCE_POINTS",
