@@ -5861,6 +5861,7 @@ Effects.EffectOverride = {
     [118397] = { icon = 'esoui/art/icons/ability_necromancer_002.dds', tooltip = Tooltips.Skill_Blastbones }, -- Blastbones (Blastbones)
     [118448] = { icon = 'esoui/art/icons/ability_necromancer_002_a.dds', tooltip = Tooltips.Skill_Blighted_Blastbones }, -- Blighted Blastbones (Blighted Blastbones)
     [118450] = { icon = 'esoui/art/icons/ability_necromancer_002_b.dds', tooltip = Tooltips.Skill_Stalking_Blastbones }, -- Stalking Blastbones (Stalking Blastbones)
+
     ----------------------------------------------------------------
     -- ARCANIST PASSIVE ABILITIES --------------------------------
     ----------------------------------------------------------------
