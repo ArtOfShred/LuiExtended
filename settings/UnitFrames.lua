@@ -481,7 +481,7 @@ function UnitFrames.CreateSettings()
                 disabled = function() return not LUIE.SV.UnitFrames_Enabled end
             },
             {
-                -- Custom Unit Frames Separate Shield Bar Height
+                -- Custom Unit Frames Shield Bar Height
                 type = "slider",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPARATE_HEIGHT)),
                 tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPARATE_HEIGHT_TP),
@@ -494,7 +494,8 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.CustomShieldBarHeight,
-                disabled = function() return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomShieldBarSeparate) end,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                disabled = function() return not (LUIE.SV.UnitFrames_Enabled and not Settings.CustomShieldBarFull) end,
             },
             {
                 -- Custom Unit Frames Overlay Full Height Shield Bar

@@ -96,7 +96,7 @@ UnitFrames.Defaults = {
     CustomColourNecromancer          = { 97/255, 37/255, 201/255 },
     CustomColourArcanist             = { 90/255, 240/255, 80/255 },
     CustomShieldBarSeparate          = false,
-    CustomShieldBarHeight            = 10,
+    CustomShieldBarHeight            = 8,
     CustomShieldBarFull              = false,
     CustomSmoothBar                  = true,
     CustomFramesPlayer               = true,
@@ -1172,11 +1172,14 @@ local function CreateCustomFrames()
 
                         if powerBar.shield then
                             if shieldOverlay then
-                                --powerBar.shield:SetAnchor( TOPLEFT, powerBar.backdrop, shieldFull and TOPLEFT or LEFT, 1, 1 )
-                                powerBar.shield:SetAnchor( BOTTOMLEFT, powerBar.backdrop, BOTTOMLEFT, 1, 1 )
-                                powerBar.shield:SetAnchor( BOTTOMRIGHT, powerBar.backdrop, BOTTOMRIGHT, -1, -1 )
-                                --powerBar.shield:SetAnchor(BOTTOM, powerBar.backdrop)
-                                powerBar.shield:SetHeight(8)
+                                if (shieldFull) then
+                                    powerBar.shield:SetAnchor( TOPLEFT, powerBar.backdrop, TOPLEFT, 1, 1 )
+                                    powerBar.shield:SetAnchor( BOTTOMRIGHT, powerBar.backdrop, BOTTOMRIGHT, -1, -1 )
+                                else
+                                    powerBar.shield:SetAnchor( BOTTOMLEFT, powerBar.backdrop, BOTTOMLEFT, 1, 1 )
+                                    powerBar.shield:SetAnchor( BOTTOMRIGHT, powerBar.backdrop, BOTTOMRIGHT, -1, -1 )
+                                    powerBar.shield:SetHeight(UnitFrames.SV.CustomShieldBarHeight)
+                                end
                             else
                                 -- In non-overlay mode we need to create separate backdrop for shield
                                 powerBar.shieldbackdrop = UI.Backdrop( UnitFrames.CustomFrames[unitTag].control, nil, nil, nil, nil, true )
