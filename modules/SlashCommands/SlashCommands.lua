@@ -158,7 +158,9 @@ function SlashCommands.RegisterSlashCommands()
         SLASH_COMMANDS["/bastian"]      = function(...) SlashCommands.SlashCollectible(9245) end
         SLASH_COMMANDS["/mirri"]        = function(...) SlashCommands.SlashCollectible(9353) end
         SLASH_COMMANDS["/ember"]        = function(...) SlashCommands.SlashCollectible(9911) end
-        SLASH_COMMANDS["/isobel"]        = function(...) SlashCommands.SlashCollectible(9912) end
+        SLASH_COMMANDS["/isobel"]       = function(...) SlashCommands.SlashCollectible(9912) end
+        SLASH_COMMANDS["/sharp"]        = function(...) SlashCommands.SlashCollectible(11113) end
+        SLASH_COMMANDS["/azander"]      = function(...) SlashCommands.SlashCollectible(11114) end
         SLASH_COMMANDS["/companion"]    = SlashCommands.SlashCompanion
     end
     if SlashCommands.SV.SlashBanker then
