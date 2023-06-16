@@ -1,3 +1,37 @@
+### Version 6.4.2
+
+General
+- Added Necrom companions (thanks to GwynneBleidd)
+
+Unit Frames
+- Added 3 x 4 Raid layout
+- Made shield bar height also work in overlay mode
+
+Combat Info
+- Added Charm CC support (thanks to Anthonysc)
+
+---
+
+### Version 6.4.1
+
+General
+- Fixed Arcanist class colors (thanks Anthonysc)
+
+---
+
+### Version 6.4.0
+
+General
+- Removed buff & debuff overrides as they were causing too many troubles
+
+Unit Frames
+- Changed shield bar overlay to be smaller
+- Removed 24 player group support
+- Added option to sort group by role
+- Added Arcanist class color (thanks Anthonysc)
+
+---
+
 ### Version 6.3.2
 
 General

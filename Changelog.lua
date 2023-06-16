@@ -6,17 +6,17 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
-    "|cFFA500LuiExtended Version 6.4.1|r",
+    "|cFFA500LuiExtended Version 6.4.2|r",
     "",
     "|cFFFF00General:|r",
-    "[*] Removed buff & debuff overrides as they were causing too many troubles",
+    "[*] Added Necrom companions (thanks to GwynneBleidd)",
     "",
     "|cFFFF00Unit Frames:|r",
-    "[*] Changed shield bar overlay to be smaller",
-    "[*] Removed 24 player group support",
-    "[*] Added option to sort group by role",
-    "[*] Added arcanist class color (thanks ACastanza)",
+    "[*] Added 3 x 4 Raid layout",
+    "[*] Made shield bar height also work in overlay mode",
     "",
+    "|cFFFF00Combat Info:|r",
+    "[*] Added Charm CC support (thanks to Anthonysc)",
 }
 
 -- Hide toggle called by the menu or xml button
