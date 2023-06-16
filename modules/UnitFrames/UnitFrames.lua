@@ -1154,7 +1154,6 @@ local function CreateCustomFrames()
 
         -- Now we have to anchor all bars to their backdrops
         local shieldOverlay = ( baseName == "RaidGroup" or baseName == "boss" ) or not UnitFrames.SV.CustomShieldBarSeparate
-        local shieldFull = ( baseName == "RaidGroup" or baseName == "boss" ) or UnitFrames.SV.CustomShieldBarFull
         for i = 0, 24 do
             local unitTag = (i==0) and baseName or ( baseName .. i )
             if UnitFrames.CustomFrames[unitTag] then
@@ -1172,7 +1171,7 @@ local function CreateCustomFrames()
 
                         if powerBar.shield then
                             if shieldOverlay then
-                                if (shieldFull) then
+                                if (UnitFrames.SV.CustomShieldBarFull) then
                                     powerBar.shield:SetAnchor( TOPLEFT, powerBar.backdrop, TOPLEFT, 1, 1 )
                                     powerBar.shield:SetAnchor( BOTTOMRIGHT, powerBar.backdrop, BOTTOMRIGHT, -1, -1 )
                                 else
@@ -4962,8 +4961,12 @@ function UnitFrames.CustomFramesApplyLayoutRaid(unhide)
         return
     end
 
-    local itemsPerColumn = ( UnitFrames.SV.RaidLayout == "6 x 2" ) and 2 or ( UnitFrames.SV.RaidLayout == "2 x 6" ) and 6 or 12
     local spacerHeight = 3
+    local itemsPerColumn =
+        ( UnitFrames.SV.RaidLayout == "6 x 2" ) and 2 or
+        ( UnitFrames.SV.RaidLayout == "3 x 4" ) and 4 or
+        ( UnitFrames.SV.RaidLayout == "2 x 6" ) and 6 or
+        12
 
     local raid = UnitFrames.CustomFrames.RaidGroup1.tlw
     raid:SetDimensions( UnitFrames.SV.RaidBarWidth * (12/itemsPerColumn) + (UnitFrames.SV.RaidSpacers and spacerHeight*(itemsPerColumn/4) or 0), UnitFrames.SV.RaidBarHeight * itemsPerColumn )

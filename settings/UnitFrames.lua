@@ -2007,7 +2007,7 @@ function UnitFrames.CreateSettings()
                 type = "dropdown",
                 name = GetString(SI_LUIE_LAM_UF_CFRAMESR_LAYOUT),
                 tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_LAYOUT_TP),
-                choices = { "1 x 12", "2 x 6", "6 x 2" },
+                choices = { "1 x 12", "2 x 6", "3 x 4", "6 x 2" },
                 -- sort = "name-up",
                 getFunc = function() return Settings.RaidLayout end,
                 setFunc = function(var)
