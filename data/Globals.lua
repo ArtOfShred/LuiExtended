@@ -12,6 +12,7 @@ LUIE_CC_ICON_KNOCKBACK = "esoui/art/icons/ability_debuff_knockback.dds"
 LUIE_CC_ICON_PULL = "esoui/art/icons/ability_debuff_levitate.dds"
 LUIE_CC_ICON_DISORIENT = "esoui/art/icons/ability_debuff_disorient.dds"
 LUIE_CC_ICON_FEAR = "esoui/art/icons/ability_debuff_fear.dds"
+LUIE_CC_ICON_CHARM = "esoui/art/icons/ability_buff_minor_expedition.dds" -- Temporary icon until I can identify the game's correct charm icon
 -- LUIE_CC_ICON_STAGGER = "esoui/art/icons/ability_debuff_stagger.dds"
 LUIE_CC_ICON_SILENCE = "esoui/art/icons/ability_debuff_silence.dds"
 LUIE_CC_ICON_SNARE = "esoui/art/icons/ability_debuff_snare.dds"
@@ -32,6 +33,7 @@ LUIE_CC_TYPE_ROOT = 10 -- Immobilize
 LUIE_CC_TYPE_UNBREAKABLE = 11 -- Unbreakable CC
 LUIE_CC_TYPE_TRAP = 12 -- Trap
 LUIE_CC_TYPE_ENVIRONMENTAL = 13 -- Environmental Hazard (I.E. Lava)
+LUIE_CC_TYPE_CHARM = 14         -- Charm
 
 -- LUIE_BUFF_TYPE
 LUIE_BUFF_TYPE_BUFF = 1 -- Buff

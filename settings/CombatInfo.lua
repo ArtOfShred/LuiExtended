@@ -1475,6 +1475,16 @@ function CombatInfo.CreateSettings()
                 disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
             {
+                -- Charm
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_CHARM),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_CHARM_TP),
+                getFunc = function() return unpack(Settings.alerts.colors.charmColor) end,
+                setFunc = function(r, g, b, a) Settings.alerts.colors.charmColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
+                default = {r=Defaults.alerts.colors.charmColor[1], g=Defaults.alerts.colors.charmColor[2], b=Defaults.alerts.colors.charmColor[3]},
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+            },
+            {
                 -- Silence
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_SILENCE),
@@ -2242,6 +2252,19 @@ function CombatInfo.CreateSettings()
                 getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_FEARED]) end,
                 setFunc = function(r,g,b,a)
                     Settings.cct.colors[ACTION_RESULT_FEARED] = {r,g,b,a}
+                    CrowdControlTracker:InitControls()
+                end,
+            },
+            {
+                -- Charm
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_CHARM),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_CHARM)),
+                default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_CHARMED])),
+                disabled = function() return not Settings.cct.enabled end,
+                getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_CHARMED]) end,
+                setFunc = function(r,g,b,a)
+                    Settings.cct.colors[ACTION_RESULT_CHARMED] = { r, g, b, a }
                     CrowdControlTracker:InitControls()
                 end,
             },

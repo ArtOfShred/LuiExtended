@@ -41,6 +41,7 @@ function CombatTextEventViewer:GetDefaultIcon(ccType)
     elseif ccType == LUIE_CC_TYPE_PULL then return LUIE_CC_ICON_PULL
     elseif ccType == LUIE_CC_TYPE_DISORIENT then return LUIE_CC_ICON_DISORIENT
     elseif ccType == LUIE_CC_TYPE_FEAR then return LUIE_CC_ICON_FEAR
+    elseif ccType == LUIE_CC_TYPE_CHARM then return LUIE_CC_ICON_CHARM
     elseif ccType == LUIE_CC_TYPE_STAGGER then return LUIE_CC_ICON_SILENCE
     elseif ccType == LUIE_CC_TYPE_SILENCE then return LUIE_CC_ICON_SILENCE
     elseif ccType == LUIE_CC_TYPE_SNARE then return LUIE_CC_ICON_SNARE
