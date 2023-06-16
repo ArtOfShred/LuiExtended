@@ -88,6 +88,7 @@ local ccResults = {
     [ACTION_RESULT_KNOCKBACK] = true,
     [ACTION_RESULT_LEVITATED] = true,
     [ACTION_RESULT_FEARED] = true,
+    [ACTION_RESULT_CHARMED] = true,
     [ACTION_RESULT_DISORIENTED] = true,
     [ACTION_RESULT_INTERRUPT] = true,
     [ACTION_RESULT_KILLING_BLOW] = true,
@@ -114,6 +115,7 @@ function AbilityAlerts.GetDefaultIcon(ccType)
     elseif ccType == LUIE_CC_TYPE_PULL then return LUIE_CC_ICON_PULL
     elseif ccType == LUIE_CC_TYPE_DISORIENT then return LUIE_CC_ICON_DISORIENT
     elseif ccType == LUIE_CC_TYPE_FEAR then return LUIE_CC_ICON_FEAR
+    elseif ccType == LUIE_CC_TYPE_CHARM then return LUIE_CC_ICON_CHARM
     elseif ccType == LUIE_CC_TYPE_STAGGER then return LUIE_CC_ICON_STAGGER
     elseif ccType == LUIE_CC_TYPE_SILENCE then return LUIE_CC_ICON_SILENCE
     elseif ccType == LUIE_CC_TYPE_SNARE then return LUIE_CC_ICON_SNARE
@@ -466,6 +468,8 @@ function AbilityAlerts.CrowdControlColorSetup(crowdControl, isBorder)
         return CombatInfo.SV.alerts.colors.disorientColor
     elseif crowdControl == LUIE_CC_TYPE_FEAR then -- Fear
         return CombatInfo.SV.alerts.colors.fearColor
+    elseif crowdControl == LUIE_CC_TYPE_CHARM then -- Charm
+        return CombatInfo.SV.alerts.colors.charmColor
     elseif crowdControl == LUIE_CC_TYPE_SILENCE then -- Silence
         return CombatInfo.SV.alerts.colors.silenceColor
     elseif crowdControl == LUIE_CC_TYPE_STAGGER then -- Stagger
@@ -644,7 +648,7 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     -- Get menu setting for filtering and bail out here depending on that setting
     local option = Settings.toggles.alertOptions
     -- Bail out if we only have CC selected and this is not CC
-    if option == 2 and crowdControl ~= LUIE_CC_TYPE_STUN and crowdControl ~= LUIE_CC_TYPE_KNOCKDOWN and crowdControl ~= LUIE_CC_TYPE_KNOCKBACK and crowdControl ~= LUIE_CC_TYPE_PULL and crowdControl ~= LUIE_CC_TYPE_DISORIENT and crowdControl ~= LUIE_CC_TYPE_FEAR and crowdControl ~= LUIE_CC_TYPE_STAGGER and crowdControl ~= LUIE_CC_TYPE_UNBREAKABLE then
+    if option == 2 and crowdControl ~= LUIE_CC_TYPE_STUN and crowdControl ~= LUIE_CC_TYPE_KNOCKDOWN and crowdControl ~= LUIE_CC_TYPE_KNOCKBACK and crowdControl ~= LUIE_CC_TYPE_PULL and crowdControl ~= LUIE_CC_TYPE_DISORIENT and crowdControl ~= LUIE_CC_TYPE_FEAR and crowdControl ~= LUIE_CC_TYPE_CHARM and crowdControl ~= LUIE_CC_TYPE_STAGGER and crowdControl ~= LUIE_CC_TYPE_UNBREAKABLE then
         return
     end
     -- Bail out if we only have unbreakable selected and this is not unbreakable

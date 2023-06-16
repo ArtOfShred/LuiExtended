@@ -51,6 +51,11 @@ function CombatTextCrowdControlEventViewer:OnEvent(crowdControlType, combatType)
         color = Settings.colors.stunned
         size = Settings.fontSizes.crowdControl
         text = self:FormatString(Settings.formats.stunned, { text = GetString(SI_LUIE_LAM_CT_SHARED_STUNNED) })
+    --Charmed
+    elseif (crowdControlType == crowdControlTypes.CHARMED) then
+        color = Settings.colors.charmed
+        size = Settings.fontSizes.crowdControl
+        text = self:FormatString(Settings.formats.charmed, { text = GetString(SI_LUIE_LAM_CT_SHARED_CHARMED) })
     end
 
     self:PrepareLabel(control.label, size, color, text)

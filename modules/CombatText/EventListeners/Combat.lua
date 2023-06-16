@@ -16,6 +16,7 @@ local isWarned = {
     offBalanced     = false,
     silenced        = false,
     stunned         = false,
+    charmed         = false,
 }
 
 function CombatTextCombatEventListener:New()
@@ -100,8 +101,8 @@ function CombatTextCombatEventListener:OnCombatIn(...)
     local isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted
         = CombatTextConstants.isMiss[resultType], CombatTextConstants.isImmune[resultType], CombatTextConstants.isParried[resultType], CombatTextConstants.isReflected[resultType], CombatTextConstants.isDamageShield[resultType], CombatTextConstants.isDodged[resultType], CombatTextConstants.isBlocked[resultType], CombatTextConstants.isInterrupted[resultType]
     --Crowd Control
-    local isDisoriented, isFeared, isOffBalanced, isSilenced, isStunned
-        = CombatTextConstants.isDisoriented[resultType], CombatTextConstants.isFeared[resultType], CombatTextConstants.isOffBalanced[resultType], CombatTextConstants.isSilenced[resultType], CombatTextConstants.isStunned[resultType]
+    local isDisoriented, isFeared, isOffBalanced, isSilenced, isStunned, isCharmed
+        = CombatTextConstants.isDisoriented[resultType], CombatTextConstants.isFeared[resultType], CombatTextConstants.isOffBalanced[resultType], CombatTextConstants.isSilenced[resultType], CombatTextConstants.isStunned[resultType], CombatTextConstants.isCharmed[resultType]
     --Overflow
     local overkill, overheal
         = (Settings.common.overkill and overflow > 0 and (isDamage or isDamageCritical or isDot or isDotCritical) ), (Settings.common.overheal and overflow > 0 and (isHealing or isHealingCritical or isHot or isHotCritical) )
@@ -186,6 +187,15 @@ function CombatTextCombatEventListener:OnCombatIn(...)
                 isWarned.stunned = true
                 zo_callLater(function() isWarned.stunned = false end, 1000) end --1 second buffer
         end
+        --Charmed
+        if (isCharmed and togglesInOut.showCharmed) then
+            if (isWarned.charmed) then
+                PlaySound('Ability_Failed')
+            else
+                self:TriggerEvent(CombatTextConstants.eventType.CROWDCONTROL, CombatTextConstants.crowdControlType.CHARMED, combatType)
+                isWarned.charmed = true
+                zo_callLater(function() isWarned.charmed = false end, 1000) end --1 second buffer
+        end
     end
 end
 
@@ -220,8 +230,8 @@ function CombatTextCombatEventListener:OnCombatOut(...)
     local isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted
         = CombatTextConstants.isMiss[resultType], CombatTextConstants.isImmune[resultType], CombatTextConstants.isParried[resultType], CombatTextConstants.isReflected[resultType], CombatTextConstants.isDamageShield[resultType], CombatTextConstants.isDodged[resultType], CombatTextConstants.isBlocked[resultType], CombatTextConstants.isInterrupted[resultType]
     --Crowd Control
-    local isDisoriented, isFeared, isOffBalanced, isSilenced, isStunned
-        = CombatTextConstants.isDisoriented[resultType], CombatTextConstants.isFeared[resultType], CombatTextConstants.isOffBalanced[resultType], CombatTextConstants.isSilenced[resultType], CombatTextConstants.isStunned[resultType]
+    local isDisoriented, isFeared, isOffBalanced, isSilenced, isStunned, isCharmed
+        = CombatTextConstants.isDisoriented[resultType], CombatTextConstants.isFeared[resultType], CombatTextConstants.isOffBalanced[resultType], CombatTextConstants.isSilenced[resultType], CombatTextConstants.isStunned[resultType], CombatTextConstants.isCharmed[resultType]
     --Overflow
     local overkill, overheal
         = (Settings.common.overkill and overflow > 0 and (isDamage or isDamageCritical or isDot or isDotCritical) ), (Settings.common.overheal and overflow > 0 and (isHealing or isHealingCritical or isHot or isHotCritical) )
@@ -307,6 +317,16 @@ function CombatTextCombatEventListener:OnCombatOut(...)
                 isWarned.stunned = true
                 zo_callLater(function() isWarned.stunned = false end, 1000) end --1 second buffer
         end
+        --Charmed
+        if (isCharmed and togglesInOut.showCharmed) then
+            if (isWarned.charmed) then
+                PlaySound('Ability_Failed')
+            else
+                self:TriggerEvent(CombatTextConstants.eventType.CROWDCONTROL, CombatTextConstants.crowdControlType.CHARMED, combatType)
+                isWarned.charmed = true
+                zo_callLater(function() isWarned.charmed = false end, 1000) end --1 second buffer
+        end
+
     end
 
 end

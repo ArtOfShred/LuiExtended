@@ -1234,6 +1234,17 @@ function SpellCastBuffs.CreateSettings()
                 disabled = function() return not Settings.ColorCC end,
             },
             {
+                -- charm
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_BUFF_COLOR_CHARM),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_CHARM_TP),
+                getFunc = function() return unpack(Settings.colors.charm) end,
+                setFunc = function(r, g, b, a) Settings.colors.charm = { r, g, b, a } end,
+                default = {r=Defaults.colors.charm[1], g=Defaults.colors.charm[2], b=Defaults.colors.charm[3]},
+                width = "half",
+                disabled = function() return not Settings.ColorCC end,
+            },
+            {
                 -- stagger
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_BUFF_COLOR_STAGGER),

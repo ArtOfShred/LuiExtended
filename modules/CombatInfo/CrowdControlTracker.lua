@@ -39,6 +39,7 @@ CrowdControlTracker.controlTypes = {
     ACTION_RESULT_STUNNED,
     ACTION_RESULT_FEARED,
     ACTION_RESULT_DISORIENTED,
+    ACTION_RESULT_CHARMED,
     ACTION_RESULT_SILENCED,
     ACTION_RESULT_STAGGERED,
     ACTION_RESULT_AREA_EFFECT,
@@ -48,12 +49,14 @@ CrowdControlTracker.actionResults = {
     [ACTION_RESULT_STUNNED]           = true,
     [ACTION_RESULT_FEARED]            = true,
     [ACTION_RESULT_DISORIENTED]       = true,
+    [ACTION_RESULT_CHARMED]           = true,
 }
 
 CrowdControlTracker.controlText = {
     [ACTION_RESULT_STUNNED]           = "STUNNED",
     [ACTION_RESULT_FEARED]            = "FEARED",
     [ACTION_RESULT_DISORIENTED]       = "DISORIENTED",
+    [ACTION_RESULT_CHARMED]           = "CHARMED",
     [ACTION_RESULT_SILENCED]          = "SILENCED",
     [ACTION_RESULT_STAGGERED]         = "STAGGER",
     [ACTION_RESULT_IMMUNE]            = "IMMUNE",
@@ -449,6 +452,7 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
         [ACTION_RESULT_BLOCKED] = true,
         [ACTION_RESULT_BLOCKED_DAMAGE] = true,
         [ACTION_RESULT_DISORIENTED] = true,
+        [ACTION_RESULT_CHARMED] = true,
     }
 
     if not validResults[result] then
@@ -520,6 +524,16 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
                     self:OnDraw(abilityId, abilityIcon, hitValue, ACTION_RESULT_FEARED, abilityName, hitValue)
                 end
                 self.incomingCC = {}
+            elseif abilityId == self.incomingCC[ACTION_RESULT_CHARMED] and (currentEndTime + 200) > PriorityOne.endTime and (currentEndTime + 200) > PriorityTwo.endTime then
+                table.insert(self.fearsQueue, abilityId)
+                PriorityTwo = { endTime = currentEndTime, abilityId = abilityId, abilityIcon = abilityIcon,
+                    hitValue = hitValue, result = ACTION_RESULT_CHARMED, abilityName = abilityName }
+                if PriorityOne.endTime == 0 then
+                    self.currentCC = 2
+                    zo_callLater(function() self:RemoveCC(2, currentEndTime) end, hitValue + graceTime)
+                    self:OnDraw(abilityId, abilityIcon, hitValue, ACTION_RESULT_CHARMED, abilityName, hitValue)
+                end
+                self.incomingCC = {}
             elseif abilityId == self.incomingCC[ACTION_RESULT_DISORIENTED] and (currentEndTime + 200) > PriorityOne.endTime and (currentEndTime + 200) > PriorityTwo.endTime and currentEndTime > PriorityThree.endTime then
                 -- self.incomingCC[ACTION_RESULT_DISORIENTED] == nil
                 table.insert(self.disorientsQueue, abilityId)
@@ -542,7 +556,7 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
             local currentTime = GetFrameTimeMilliseconds()
             local currentEndTime = currentTime + foundValue.hitValue
 
-            if result == ACTION_RESULT_FEARED and (currentEndTime + 200) > PriorityOne.endTime and (currentEndTime + 200) > PriorityTwo.endTime then
+            if (result == ACTION_RESULT_FEARED or result == ACTION_RESULT_CHARMED) and (currentEndTime + 200) > PriorityOne.endTime and (currentEndTime + 200) > PriorityTwo.endTime then
                 table.insert(self.fearsQueue, abilityId)
                 PriorityTwo = {endTime = currentEndTime, abilityId = abilityId, abilityIcon = abilityIcon, hitValue = foundValue.hitValue, result = result, abilityName = abilityName}
                 if PriorityOne.endTime == 0 then
@@ -742,6 +756,7 @@ function CrowdControlTracker:GetDefaultIcon(ccType)
     elseif ccType == ACTION_RESULT_KNOCKBACK then return LUIE_CC_ICON_KNOCKBACK
     elseif ccType == ACTION_RESULT_LEVITATED then return LUIE_CC_ICON_PULL
     elseif ccType == ACTION_RESULT_FEARED then return LUIE_CC_ICON_FEAR
+    elseif ccType == ACTION_RESULT_CHARMED then return LUIE_CC_ICON_CHARM
     elseif ccType == ACTION_RESULT_DISORIENTED then return LUIE_CC_ICON_DISORIENT
     elseif ccType == ACTION_RESULT_SILENCED then return LUIE_CC_ICON_SILENCE
     elseif ccType == ACTION_RESULT_IMMUNE then return LUIE_CC_ICON_IMMUNE

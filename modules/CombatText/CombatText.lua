@@ -112,6 +112,7 @@ CombatText.Defaults = {
             showOffBalanced         = true,
             showSilenced            = true,
             showStunned             = true,
+            showCharmed             = true,
         },
 
         -- Outgoing
@@ -141,6 +142,7 @@ CombatText.Defaults = {
             showOffBalanced         = true,
             showSilenced            = true,
             showStunned             = true,
+            showCharmed             = true,
         },
 
         -- Combat State
@@ -241,7 +243,8 @@ CombatText.Defaults = {
         offBalanced                 = { 1, 1, 1, 1 },
         silenced                    = { 1, 1, 1, 1 },
         stunned                     = { 1, 1, 1, 1 },
-
+        charmed                     = { 1, 1, 1, 1 },
+        
         -- Combat State
         inCombat                    = { 1, 1, 1, 1 },
         outCombat                   = { 1, 1, 1, 1 },
@@ -290,6 +293,7 @@ CombatText.Defaults = {
         offBalanced                 = GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE),
         silenced                    = GetString(SI_LUIE_LAM_CT_SHARED_SILENCED),
         stunned                     = GetString(SI_LUIE_LAM_CT_SHARED_STUNNED),
+        charmed                      = GetString(SI_LUIE_LAM_CT_SHARED_CHARMED),
 
         -- Combat State
         inCombat                    = GetString(SI_LUIE_CT_COMBAT_IN_DEFAULT),

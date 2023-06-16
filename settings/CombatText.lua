@@ -1604,6 +1604,52 @@ function CombatText.CreateSettings()
                 setFunc = function(r, g, b, a) Settings.colors.stunned = { r, g, b, a } end,
                 default = {r=Defaults.colors.stunned[1], g=Defaults.colors.stunned[2], b=Defaults.colors.stunned[3]}
             },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_CHARMED),
+                width = "full",
+            },
+            {
+                -- Charmed (Incoming)
+                type    = "checkbox",
+                width   = "half",
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY),
+                    GetString(SI_LUIE_LAM_CT_SHARED_CHARMED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_CHARMED_TP),
+                getFunc = function() return Settings.toggles.incoming.showCharmed end,
+                setFunc = function(v) Settings.toggles.incoming.showCharmed = v end,
+                default = Defaults.toggles.incoming.showCharmed,
+            },
+            {
+                -- Charmed (Outgoing)
+                type    = "checkbox",
+                width   = "half",
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY),
+                    GetString(SI_LUIE_LAM_CT_SHARED_CHARMED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_CHARMED_TP),
+                getFunc = function() return Settings.toggles.outgoing.showCharmed end,
+                setFunc = function(v) Settings.toggles.outgoing.showCharmed = v end,
+                default = Defaults.toggles.outgoing.showCharmed,
+            },
+            {
+                -- Charmed (Format)
+                type        = "editbox",
+                name        = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip     = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_CHARMED_TP),
+                getFunc     = function() return Settings.formats.charmed end,
+                setFunc     = function(v) Settings.formats.charmed = v end,
+                isMultiline = false,
+                default     = Defaults.formats.charmed,
+            },
+            {
+                -- Charmed (Color)
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_CHARMED_TP),
+                getFunc = function() return unpack(Settings.colors.charmed) end,
+                setFunc = function(r, g, b, a) Settings.colors.charmed = { r, g, b, a } end,
+                default = { r = Defaults.colors.charmed[1], g = Defaults.colors.charmed[2], b = Defaults.colors.charmed[3] }
+            },
         },
     }
 
