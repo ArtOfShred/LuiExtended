@@ -717,7 +717,7 @@ function UnitFrames.CreateSettings()
                 name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_ARCA),
                 getFunc = function() return unpack(Settings.CustomColourArcanist) end,
                 setFunc = function(r, g, b, a)
-                    Settings.CustomColourArcanst = { r, g, b }
+                    Settings.CustomColourArcanist = { r, g, b }
                     UnitFrames.CustomFramesApplyColours(true)
                 end,
                 width = "full",
