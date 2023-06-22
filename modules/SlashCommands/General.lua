@@ -170,7 +170,8 @@ function SlashCommands.SlashCampaignQ(option)
     -- The first time we call this function and it passes a check to make sure input is valid, fill a table with campaign names and their corresponding id.
     if firstRun then
         firstRun = false
-        for i = 1, 200 do -- TODO: Find a way to determine # of campaigns dynamically instead of iterating.
+        for i = 1, 200 do
+            -- TODO: Find a way to determine # of campaigns dynamically instead of iterating.
             local campaignName = string.lower(GetCampaignName(i))
             if campaignName ~= "" and campaignName ~= nil then
                 LUIE.CampaignNames[campaignName] = i
@@ -220,7 +221,7 @@ function SlashCommands.SlashCollectible(id)
             id = 6376 -- Ezabi
         elseif SlashCommands.SV.SlashBankerChoice == 3 then
             id = 8994 -- Baron
-		elseif SlashCommands.SV.SlashBankerChoice == 4 then
+        elseif SlashCommands.SV.SlashBankerChoice == 4 then
             id = 9743 -- Factotum Banker
         end
     elseif id == "merchant" then
@@ -228,9 +229,9 @@ function SlashCommands.SlashCollectible(id)
             id = 301 -- Nuzhimeh
         elseif SlashCommands.SV.SlashMerchantChoice == 2 then
             id = 6378 -- Ferez
-		elseif SlashCommands.SV.SlashMerchantChoice == 3 then
+        elseif SlashCommands.SV.SlashMerchantChoice == 3 then
             id = 8995 -- Peddler
-		elseif SlashCommands.SV.SlashMerchantChoice == 4 then
+        elseif SlashCommands.SV.SlashMerchantChoice == 4 then
             id = 9744 -- Factotum Merchant
         end
     end
@@ -280,8 +281,8 @@ function SlashCommands.SlashCollectible(id)
     if IsCollectibleUnlocked(id) then
         UseCollectible(id)
         LUIE.SlashCollectibleOverride = true
-        if id ~= 300 and id ~= 267 and id ~= 6376 and id ~= 301 and id ~= 6378 and id ~= 8006 and id ~= 9245 and id ~= 9353  and id ~= 8994 and
-            id ~= 8995 and id~= 9745 and id~= 10184 and id~= 9743 and id~= 9744 and id ~= 9911 and id ~= 9912 and id ~= 11113 and id ~= 11114 then
+        if id ~= 300 and id ~= 267 and id ~= 6376 and id ~= 301 and id ~= 6378 and id ~= 8006 and id ~= 9245 and id ~= 9353 and id ~= 8994 and
+            id ~= 8995 and id ~= 9745 and id ~= 10184 and id ~= 9743 and id ~= 9744 and id ~= 9911 and id ~= 9912 and id ~= 11113 and id ~= 11114 then
             LUIE.LastMementoUsed = id
         end
     else
@@ -298,7 +299,7 @@ end
 function SlashCommands.SlashCompanion(option)
 
     -- Return an error if input is not blank and is not valid
-    if option and (option ~= "" and option ~= "bastian" and option ~= "mirri" and option ~= "ember" and option ~= "isobel" and option ~= "sharp" and option ~= "azander") then
+    if option and (option ~= "" and option ~= "bastian" and option ~= "mirri" and option ~= "ember" and option ~= "isobel" and option ~= "sharp" and option ~= "azandar") then
         printToChat(GetString(SI_LUIE_SLASHCMDS_COMPANION_FAILED_OPTION), true)
         if LUIE.SV.TempAlertHome then
             ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_IC), GetCollectibleName(id)))
@@ -318,7 +319,7 @@ function SlashCommands.SlashCompanion(option)
         SlashCommands.SlashCollectible(9912)
     elseif option == "sharp" then
         SlashCommands.SlashCollectible(11113)
-    elseif option == "azander" then
+    elseif option == "azandar" then
         SlashCommands.SlashCollectible(11114)
     end
 
@@ -401,7 +402,7 @@ function SlashCommands.SlashReport(player)
 
     -- Populate the reporting window name and description
     ZO_Help_Ask_For_Help_Keyboard_ControlDetailsTextLineField:SetText(player)
-	ZO_Help_Ask_For_Help_Keyboard_ControlDescriptionBodyField:SetText(zo_strformat(text, player, location, currentdate, currenttime, server))
+    ZO_Help_Ask_For_Help_Keyboard_ControlDescriptionBodyField:SetText(zo_strformat(text, player, location, currentdate, currenttime, server))
 
     -- Open the reporting window
     HELP_CUSTOMER_SUPPORT_KEYBOARD:OpenScreen(HELP_CUSTOMER_SERVICE_ASK_FOR_HELP_KEYBOARD_FRAGMENT)

@@ -20,16 +20,16 @@ local companionMirri = GetCollectibleName(9353)
 local companionEmber = GetCollectibleName(9911)
 local companionIsobel = GetCollectibleName(9912)
 local companionSharp = GetCollectibleName(11113)
-local companionAzander = GetCollectibleName(11114)
+local companionAzandar = GetCollectibleName(11114)
 
-local bankerOptions     = { bankerTythis, bankerCat, bankerCrow, bankerFactotum }
-local bankerOptionsKeys = { [bankerTythis] = 1, [bankerCat] = 2, [bankerCrow] = 3, [bankerFactotum] = 4}
-local merchantOptions   = { merchantNuzimeh, merchantCat, merchantCrow, merchantFactotum }
-local merchantOptionsKeys   = { [merchantNuzimeh] = 1, [merchantCat] = 2, [merchantCrow] = 3, [merchantFactotum] = 4 }
-local companionOptions   = { companionBastian, companionMirri, companionEmber, companionIsobel, companionSharp, companionAzander }
-local companionOptionsKeys   = { [companionBastian] = 1, [companionMirri] = 2, [companionEmber] = 3, [companionIsobel] = 4, [companionSharp]=5, [companionAzander]=6 }
-local homeOptions       = { "Inside", "Outside"}
-local homeOptionsKeys   = { ["Inside"] = 1, ["Outside"] = 2 }
+local bankerOptions = { bankerTythis, bankerCat, bankerCrow, bankerFactotum }
+local bankerOptionsKeys = { [bankerTythis] = 1, [bankerCat] = 2, [bankerCrow] = 3, [bankerFactotum] = 4 }
+local merchantOptions = { merchantNuzimeh, merchantCat, merchantCrow, merchantFactotum }
+local merchantOptionsKeys = { [merchantNuzimeh] = 1, [merchantCat] = 2, [merchantCrow] = 3, [merchantFactotum] = 4 }
+local companionOptions = { companionBastian, companionMirri, companionEmber, companionIsobel, companionSharp, companionAzandar }
+local companionOptionsKeys = { [companionBastian] = 1, [companionMirri] = 2, [companionEmber] = 3, [companionIsobel] = 4, [companionSharp] = 5, [companionAzandar] = 6 }
+local homeOptions = { "Inside", "Outside" }
+local homeOptionsKeys = { ["Inside"] = 1, ["Outside"] = 2 }
 
 -- Create Slash Commands Settings Menu
 function SlashCommands.CreateSettings()
@@ -83,7 +83,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_TRADE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_TRADE_TP),
                 getFunc = function() return Settings.SlashTrade end,
-                setFunc = function(value) Settings.SlashTrade = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashTrade = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashTrade,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -94,7 +97,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_HOME),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_HOME_TP),
                 getFunc = function() return Settings.SlashHome end,
-                setFunc = function(value) Settings.SlashHome = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashHome = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashHome,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -116,7 +122,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_HOME_SET_PRIMARY),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_HOME_SET_PRIMARY_TP),
                 getFunc = function() return Settings.SlashSetPrimaryHome end,
-                setFunc = function(value) Settings.SlashSetPrimaryHome = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashSetPrimaryHome = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashSetPrimaryHome,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -127,7 +136,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_CAMPAIGN),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_CAMPAIGN_TP),
                 getFunc = function() return Settings.SlashCampaignQ end,
-                setFunc = function(value) Settings.SlashCampaignQ = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashCampaignQ = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashCampaignQ,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -138,7 +150,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_COMPANION),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_COMPANION_TP),
                 getFunc = function() return Settings.SlashCompanion end,
-                setFunc = function(value) Settings.SlashCompanion = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashCompanion = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashCompanion,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -160,7 +175,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_BANKER),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_SLASHCMDS_BANKER_TP), GetCollectibleName(267)),
                 getFunc = function() return Settings.SlashBanker end,
-                setFunc = function(value) Settings.SlashBanker = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashBanker = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashBanker,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -183,7 +201,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_MERCHANT),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_SLASHCMDS_MERCHANT_TP), GetCollectibleName(301)),
                 getFunc = function() return Settings.SlashMerchant end,
-                setFunc = function(value) Settings.SlashMerchant = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashMerchant = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashMerchant,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -199,24 +220,30 @@ function SlashCommands.CreateSettings()
                 default = Defaults.SlashMerchantChoice,
                 disabled = function() return not Defaults.SlashMerchant end,
             },
-			{
+            {
                 -- SlashArmory
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_ARMORY),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_SLASHCMDS_ARMORY_TP), GetCollectibleName(9745)),
                 getFunc = function() return Settings.SlashArmory end,
-                setFunc = function(value) Settings.SlashArmory = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashArmory = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashArmory,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
-			{
+            {
                 -- SlashDecon
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_DECON),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_SLASHCMDS_DECON_TP), GetCollectibleName(10184)),
                 getFunc = function() return Settings.SlashDecon end,
-                setFunc = function(value) Settings.SlashDecon = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashDecon = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashDecon,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -227,7 +254,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_FENCE),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_SLASHCMDS_FENCE_TP), GetCollectibleName(300)),
                 getFunc = function() return Settings.SlashFence end,
-                setFunc = function(value) Settings.SlashFence = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashFence = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashFence,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -238,7 +268,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_EYE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_EYE_TP),
                 getFunc = function() return Settings.SlashEye end,
-                setFunc = function(value) Settings.SlashEye = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashEye = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashEye,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -249,7 +282,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_PET),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_PET_TP),
                 getFunc = function() return Settings.SlashPet end,
-                setFunc = function(value) Settings.SlashPet = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashPet = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashPet,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -270,7 +306,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_OUTFIT),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_OUTFIT_TP),
                 getFunc = function() return Settings.SlashOutfit end,
-                setFunc = function(value) Settings.SlashOutfit = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashOutfit = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashOutfit,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -281,7 +320,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_REPORT),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_REPORT_TP),
                 getFunc = function() return Settings.SlashReport end,
-                setFunc = function(value) Settings.SlashReport = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashReport = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashReport,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -330,7 +372,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_READYCHECK),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_READYCHECK_TP),
                 getFunc = function() return Settings.SlashReadyCheck end,
-                setFunc = function(value) Settings.SlashReadyCheck = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashReadyCheck = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashReadyCheck,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -341,7 +386,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_REGROUP),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_REGROUP_TP),
                 getFunc = function() return Settings.SlashRegroup end,
-                setFunc = function(value) Settings.SlashRegroup = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashRegroup = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashRegroup,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -352,7 +400,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_DISBAND),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_DISBAND_TP),
                 getFunc = function() return Settings.SlashDisband end,
-                setFunc = function(value) Settings.SlashDisband = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashDisband = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashDisband,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -363,7 +414,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_LEAVE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_LEAVE_TP),
                 getFunc = function() return Settings.SlashGroupLeave end,
-                setFunc = function(value) Settings.SlashGroupLeave = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashGroupLeave = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashGroupLeave,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -374,7 +428,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_KICK),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_KICK_TP),
                 getFunc = function() return Settings.SlashGroupKick end,
-                setFunc = function(value) Settings.SlashGroupKick = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashGroupKick = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashGroupKick,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -385,7 +442,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_VOTEKICK),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_VOTEKICK_TP),
                 getFunc = function() return Settings.SlashVoteKick end,
-                setFunc = function(value) Settings.SlashVoteKick = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashVoteKick = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashVoteKick,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -404,7 +464,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDINVITE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDINVITE_TP),
                 getFunc = function() return Settings.SlashGuildInvite end,
-                setFunc = function(value) Settings.SlashGuildInvite = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashGuildInvite = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashGuildInvite,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -415,7 +478,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDQUIT),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDQUIT_TP),
                 getFunc = function() return Settings.SlashGuildQuit end,
-                setFunc = function(value) Settings.SlashGuildQuit = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashGuildQuit = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashGuildQuit,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -426,7 +492,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDKICK),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDKICK_TP),
                 getFunc = function() return Settings.SlashGuildKick end,
-                setFunc = function(value) Settings.SlashGuildKick = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashGuildKick = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashGuildKick,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -445,7 +514,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_FRIEND),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_FRIEND_TP),
                 getFunc = function() return Settings.SlashFriend end,
-                setFunc = function(value) Settings.SlashFriend = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashFriend = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashFriend,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -456,7 +528,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_IGNORE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_IGNORE_TP),
                 getFunc = function() return Settings.SlashIgnore end,
-                setFunc = function(value) Settings.SlashIgnore = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashIgnore = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashIgnore,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -467,7 +542,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND_TP),
                 getFunc = function() return Settings.SlashRemoveFriend end,
-                setFunc = function(value) Settings.SlashRemoveFriend = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashRemoveFriend = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashRemoveFriend,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -478,7 +556,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE_TP),
                 getFunc = function() return Settings.SlashRemoveIgnore end,
-                setFunc = function(value) Settings.SlashRemoveIgnore = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashRemoveIgnore = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashRemoveIgnore,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -497,7 +578,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_CAKE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_CAKE_TP),
                 getFunc = function() return Settings.SlashCake end,
-                setFunc = function(value) Settings.SlashCake = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashCake = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashCake,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -508,7 +592,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_PIE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_PIE_TP),
                 getFunc = function() return Settings.SlashPie end,
-                setFunc = function(value) Settings.SlashPie = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashPie = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashPie,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -519,7 +606,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_MEAD),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_MEAD_TP),
                 getFunc = function() return Settings.SlashMead end,
-                setFunc = function(value) Settings.SlashMead = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashMead = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashMead,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
@@ -530,7 +620,10 @@ function SlashCommands.CreateSettings()
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_WITCH),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_WITCH_TP),
                 getFunc = function() return Settings.SlashWitch end,
-                setFunc = function(value) Settings.SlashWitch = value SlashCommands.RegisterSlashCommands() end,
+                setFunc = function(value)
+                    Settings.SlashWitch = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
                 width = "full",
                 default = Defaults.SlashWitch,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
