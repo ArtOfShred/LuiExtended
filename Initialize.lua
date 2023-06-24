@@ -112,6 +112,7 @@ local function OnAddonOnLoaded(eventCode, addonName)
     LUIE.UnitFrames.CreateSettings()
     LUIE.SpellCastBuffs.CreateSettings()
     LUIE.SlashCommands.CreateSettings()
+    LUIE.SlashCommands.MigrateSettings()
 
     -- Display changelog screen
     LUIE.ChangelogScreen()

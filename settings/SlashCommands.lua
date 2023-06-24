@@ -4,32 +4,55 @@
 --]]
 
 local SlashCommands = LUIE.SlashCommands
+local CollectibleTables = LUIE.Data.CollectibleTables
 
 local zo_strformat = zo_strformat
 
-local bankerTythis = GetCollectibleName(267)
-local bankerCat = GetCollectibleName(6376)
-local bankerCrow = GetCollectibleName(8994)
-local bankerFactotum = GetCollectibleName(9743)
-local merchantNuzimeh = GetCollectibleName(301)
-local merchantCat = GetCollectibleName(6378)
-local merchantCrow = GetCollectibleName(8995)
-local merchantFactotum = GetCollectibleName(9744)
-local companionBastian = GetCollectibleName(9245)
-local companionMirri = GetCollectibleName(9353)
-local companionEmber = GetCollectibleName(9911)
-local companionIsobel = GetCollectibleName(9912)
-local companionSharp = GetCollectibleName(11113)
-local companionAzandar = GetCollectibleName(11114)
+local function GetFormattedCollectibleName(id)
+    return zo_strformat("<<1>>", GetCollectibleName(id)) -- Remove ^M and ^F
+end
 
-local bankerOptions = { bankerTythis, bankerCat, bankerCrow, bankerFactotum }
-local bankerOptionsKeys = { [bankerTythis] = 1, [bankerCat] = 2, [bankerCrow] = 3, [bankerFactotum] = 4 }
-local merchantOptions = { merchantNuzimeh, merchantCat, merchantCrow, merchantFactotum }
-local merchantOptionsKeys = { [merchantNuzimeh] = 1, [merchantCat] = 2, [merchantCrow] = 3, [merchantFactotum] = 4 }
-local companionOptions = { companionBastian, companionMirri, companionEmber, companionIsobel, companionSharp, companionAzandar }
-local companionOptionsKeys = { [companionBastian] = 1, [companionMirri] = 2, [companionEmber] = 3, [companionIsobel] = 4, [companionSharp] = 5, [companionAzandar] = 6 }
+local function CreateOptions(collectibleTable)
+    local options = {}
+    local optionKeys = {}
+
+    if (collectibleTable ~= nil) then
+        for id, _ in pairs(collectibleTable) do
+            if (IsCollectibleUnlocked(id)) then
+                local name = GetFormattedCollectibleName(id)
+                table.insert(options, name)
+                optionKeys[name] = id
+            end
+        end
+    end
+
+    return options, optionKeys
+end
+
+local bankerOptions, bankerOptionsKeys = CreateOptions(CollectibleTables.Banker)
+local merchantOptions, merchantOptionsKeys = CreateOptions(CollectibleTables.Merchants)
+local companionOptions, companionOptionsKeys = CreateOptions(CollectibleTables.Companions)
+
 local homeOptions = { "Inside", "Outside" }
 local homeOptionsKeys = { ["Inside"] = 1, ["Outside"] = 2 }
+
+function SlashCommands.MigrateSettings()
+    local Settings = SlashCommands.SV
+
+    -- Migrate old settings
+    if CollectibleTables.Banker[Settings.SlashBankerChoice] == nil then
+        local _, id = next(bankerOptionsKeys)
+        Settings.SlashBankerChoice = id
+    end
+    if CollectibleTables.Merchants[Settings.SlashMerchantChoice] == nil then
+        local _, id = next(merchantOptionsKeys)
+        Settings.SlashMerchantChoice = id
+    end
+    if CollectibleTables.Companions[Settings.SlashCompanionChoice] == nil then
+        local _, id = next(companionOptionsKeys)
+        Settings.SlashCompanionChoice = id
+    end
+end
 
 -- Create Slash Commands Settings Menu
 function SlashCommands.CreateSettings()
@@ -163,7 +186,7 @@ function SlashCommands.CreateSettings()
                 type = "dropdown",
                 name = "\t\t\t\t\tChoose Companion to Summon",
                 choices = companionOptions,
-                getFunc = function() return companionOptions[Settings.SlashCompanionChoice] end,
+                getFunc = function() return GetFormattedCollectibleName(Settings.SlashCompanionChoice) end,
                 setFunc = function(value) Settings.SlashCompanionChoice = companionOptionsKeys[value] end,
                 width = "full",
                 default = Defaults.SlashCompanionChoice,
@@ -188,7 +211,7 @@ function SlashCommands.CreateSettings()
                 type = "dropdown",
                 name = "\t\t\t\t\tChoose Banker to Summon",
                 choices = bankerOptions,
-                getFunc = function() return bankerOptions[Settings.SlashBankerChoice] end,
+                getFunc = function() return GetFormattedCollectibleName(Settings.SlashBankerChoice) end,
                 setFunc = function(value) Settings.SlashBankerChoice = bankerOptionsKeys[value] end,
                 width = "full",
                 default = Defaults.SlashBankerChoice,
@@ -214,7 +237,7 @@ function SlashCommands.CreateSettings()
                 type = "dropdown",
                 name = "\t\t\t\t\tChoose Merchant to Summon",
                 choices = merchantOptions,
-                getFunc = function() return merchantOptions[Settings.SlashMerchantChoice] end,
+                getFunc = function() return GetFormattedCollectibleName(Settings.SlashMerchantChoice) end,
                 setFunc = function(value) Settings.SlashMerchantChoice = merchantOptionsKeys[value] end,
                 width = "full",
                 default = Defaults.SlashMerchantChoice,

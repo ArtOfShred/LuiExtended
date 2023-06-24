@@ -7,11 +7,6 @@
 LUIE.SlashCommands = {}
 local SlashCommands = LUIE.SlashCommands
 
-local printToChat = LUIE.PrintToChat
-local zo_strformat = zo_strformat
-
-local moduleName = LUIE.name .. "SlashCommands"
-
 SlashCommands.Enabled  = false
 SlashCommands.Defaults = {
     SlashHome           = true,
@@ -155,22 +150,20 @@ function SlashCommands.RegisterSlashCommands()
         SLASH_COMMANDS["/removeignore"] = SlashCommands.SlashRemoveIgnore
     end
     if SlashCommands.SV.SlashCompanion then
-        SLASH_COMMANDS["/bastian"]      = function(...) SlashCommands.SlashCollectible(9245) end
-        SLASH_COMMANDS["/mirri"]        = function(...) SlashCommands.SlashCollectible(9353) end
-        SLASH_COMMANDS["/ember"]        = function(...) SlashCommands.SlashCollectible(9911) end
-        SLASH_COMMANDS["/isobel"]       = function(...) SlashCommands.SlashCollectible(9912) end
-        SLASH_COMMANDS["/sharp"]        = function(...) SlashCommands.SlashCollectible(11113) end
-        SLASH_COMMANDS["/azandar"]      = function(...) SlashCommands.SlashCollectible(11114) end
+        for id, name in pairs (LUIE.Data.CollectibleTables.Companions) do
+            local command = "/"..zo_strlower(name)
+            SLASH_COMMANDS[command]     = function(...) SlashCommands.SlashCollectible(id) end
+        end
         SLASH_COMMANDS["/companion"]    = SlashCommands.SlashCompanion
     end
     if SlashCommands.SV.SlashBanker then
-        SLASH_COMMANDS["/bank"]         = function(...) SlashCommands.SlashCollectible("banker") end
-        SLASH_COMMANDS["/banker"]       = function(...) SlashCommands.SlashCollectible("banker") end
+        SLASH_COMMANDS["/bank"]         = SlashCommands.SlashBanker
+        SLASH_COMMANDS["/banker"]       = SlashCommands.SlashBanker
     end
     if SlashCommands.SV.SlashMerchant then
-        SLASH_COMMANDS["/sell"]         = function(...) SlashCommands.SlashCollectible("merchant") end
-        SLASH_COMMANDS["/merchant"]     = function(...) SlashCommands.SlashCollectible("merchant") end
-        SLASH_COMMANDS["/vendor"]       = function(...) SlashCommands.SlashCollectible("merchant") end
+        SLASH_COMMANDS["/sell"]         = SlashCommands.SlashMerchant
+        SLASH_COMMANDS["/merchant"]     = SlashCommands.SlashMerchant
+        SLASH_COMMANDS["/vendor"]       = SlashCommands.SlashMerchant
     end
     if SlashCommands.SV.SlashFence then
         SLASH_COMMANDS["/smuggler"]     = function(...) SlashCommands.SlashCollectible(300) end

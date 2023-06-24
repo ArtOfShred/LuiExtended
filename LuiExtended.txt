@@ -70,6 +70,7 @@ data/UnitNamesTable.lua
 data/ZoneNamesTable.lua
 data/Effects.lua
 data/CastBarTable.lua
+data/CollectibleTables.lua
 data/CombatTextConstants.lua
 data/AlertTable.lua
 data/CrowdControl.lua

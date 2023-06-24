@@ -12,9 +12,6 @@ local CrowdControl = LUIE.Data.CrowdControl
 
 local eventManager = EVENT_MANAGER
 local animationManager = ANIMATION_MANAGER
-local callbackManager = CALLBACK_MANAGER
-
-local moduleName = LUIE.name .. "CombatInfo"
 
 local PriorityOne, PriorityTwo, PriorityThree, PriorityFour, PrioritySix
 
