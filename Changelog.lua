@@ -6,17 +6,18 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
-    "|cFFA500LuiExtended Version 6.4.2|r",
+    "|cFFA500LuiExtended Version 6.4.3|r",
     "",
     "|cFFFF00General:|r",
-    "[*] Added Necrom companions (thanks to GwynneBleidd)",
+    "[*] Added Sharp & Azandar Keybindings",
+    "[*] Removed the Keybindings for individual Banker and Merchants (You have to select your prefered Banker and Merchant now in LUIE Settings -> SlashCommands -> General)",
+    "",
+    "|cFFFF00Slash Commands:|r",
+    "[*] Rewrote Collectible handling to make adding new banker, merchants & companions easier in the future",
+    "[*] Added Aderene",
     "",
     "|cFFFF00Unit Frames:|r",
-    "[*] Added 3 x 4 Raid layout",
-    "[*] Made shield bar height also work in overlay mode",
-    "",
-    "|cFFFF00Combat Info:|r",
-    "[*] Added Charm CC support (thanks to Anthonysc)",
+    "[*] Fixed Colors in Battlegrounds (thanks to Anthonysc)",
 }
 
 -- Hide toggle called by the menu or xml button

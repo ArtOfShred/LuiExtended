@@ -1,3 +1,18 @@
+### Version 6.4.3
+
+General
+- Added Sharp & Azandar Keybindings
+- Removed the Keybindings for individual Banker and Merchants (You have to select your prefered Banker and Merchant now in LUIE Settings -> SlashCommands -> General)
+
+Slash Commands
+- Rewrote Collectible handling to make adding new banker, merchants & companions easier in the future
+- Added Aderene
+
+Unit Frames
+- Fixed Colors in Battlegrounds (thanks to Anthonysc)
+
+---
+
 ### Version 6.4.2
 
 General
