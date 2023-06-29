@@ -23,6 +23,22 @@ CollectibleTables.Merchants = {
     [10617] = "Aderene",
 }
 
+-- Deconstruction
+CollectibleTables.Decon = {
+    [10184] = "Giladil",
+}
+
+-- Armory Assistants
+CollectibleTables.Armory = {
+    [9745] = "Ghrasharog",
+    [10618] = "Zhuqoth",
+}
+
+-- Fence
+CollectibleTables.Fence = {
+    [300] = "Pirharri"
+}
+
 -- Companions
 -- LUI will generate SlashCommands from the lowercase names e.g. Bastian becomes /bastian.
 CollectibleTables.Companions = {
@@ -38,4 +54,7 @@ CollectibleTables.All = {}
 
 for k, v in pairs(CollectibleTables.Merchants) do CollectibleTables.All[k] = v end
 for k, v in pairs(CollectibleTables.Banker) do CollectibleTables.All[k] = v end
+for k, v in pairs(CollectibleTables.Decon) do CollectibleTables.All[k] = v end
+for k, v in pairs(CollectibleTables.Armory) do CollectibleTables.All[k] = v end
+for k, v in pairs(CollectibleTables.Fence) do CollectibleTables.All[k] = v end
 for k, v in pairs(CollectibleTables.Companions) do CollectibleTables.All[k] = v end

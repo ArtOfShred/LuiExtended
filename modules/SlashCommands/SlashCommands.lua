@@ -31,6 +31,7 @@ SlashCommands.Defaults = {
     SlashMerchant       = true,
     SlashMerchantChoice = 1,
 	SlashArmory         = true,
+    SlashArmoryChoice   = 1,
 	SlashDecon   	    = true,
     SlashFence          = true,
     SlashEye            = true,
@@ -170,7 +171,7 @@ function SlashCommands.RegisterSlashCommands()
         SLASH_COMMANDS["/fence"]        = function(...) SlashCommands.SlashCollectible(300) end
     end
     if SlashCommands.SV.SlashArmory then
-        SLASH_COMMANDS["/armory"]       = function(...) SlashCommands.SlashCollectible(9745) end
+        SLASH_COMMANDS["/armory"]       = SlashCommands.SlashArmory
     end
     if SlashCommands.SV.SlashDecon then
         SLASH_COMMANDS["/decon"]           = function(...) SlashCommands.SlashCollectible(10184) end

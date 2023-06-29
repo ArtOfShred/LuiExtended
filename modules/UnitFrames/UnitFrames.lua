@@ -4011,8 +4011,11 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
                 UnitFrames.CustomFrames[unitTag].control.defaultUnitTag = defaultUnitTag
                 if UnitFrames.CustomFrames[unitTag].topInfo then UnitFrames.CustomFrames[unitTag].topInfo.defaultUnitTag = defaultUnitTag end
 
-                local role = GetGroupMemberSelectedRole(defaultUnitTag)
                 local class = GetUnitClassId(defaultUnitTag)
+                local role = GetGroupMemberSelectedRole(defaultUnitTag)
+                if (GetCurrentBattlegroundId() > 0) then
+                    role = LFG_ROLE_DPS
+                end
 
                 local unitFrame = UnitFrames.CustomFrames[unitTag]
                 local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop

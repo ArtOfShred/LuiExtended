@@ -32,6 +32,7 @@ end
 local bankerOptions, bankerOptionsKeys = CreateOptions(CollectibleTables.Banker)
 local merchantOptions, merchantOptionsKeys = CreateOptions(CollectibleTables.Merchants)
 local companionOptions, companionOptionsKeys = CreateOptions(CollectibleTables.Companions)
+local armoryOptions, armoryOptionsKeys = CreateOptions(CollectibleTables.Armory)
 
 local homeOptions = { "Inside", "Outside" }
 local homeOptionsKeys = { ["Inside"] = 1, ["Outside"] = 2 }
@@ -51,6 +52,23 @@ function SlashCommands.MigrateSettings()
     if CollectibleTables.Companions[Settings.SlashCompanionChoice] == nil then
         local _, id = next(companionOptionsKeys)
         Settings.SlashCompanionChoice = id
+    end
+    if CollectibleTables.Armory[Settings.SlashArmoryChoice] == nil then
+        local _, id = next(armoryOptionsKeys)
+        Settings.SlashArmoryChoice = id
+    end
+
+    if #bankerOptions == 0 then
+        Settings.SlashBanker = false
+    end
+    if #merchantOptions == 0 then
+        Settings.SlashMerchant = false
+    end
+    if #companionOptions == 0 then
+        Settings.SlashCompanion = false
+    end
+    if #armoryOptions == 0 then
+        Settings.SlashArmory = false
     end
 end
 
@@ -180,6 +198,7 @@ function SlashCommands.CreateSettings()
                 width = "full",
                 default = Defaults.SlashCompanion,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                disabled = function() return #companionOptions == 0 end
             },
             {
                 -- Choose Companion
@@ -190,13 +209,13 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashCompanionChoice = companionOptionsKeys[value] end,
                 width = "full",
                 default = Defaults.SlashCompanionChoice,
-                disabled = function() return not Defaults.SlashCompanion end,
+                disabled = function() return not Settings.SlashCompanion end,
             },
             {
                 -- SlashBanker
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_BANKER),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_SLASHCMDS_BANKER_TP), GetCollectibleName(267)),
+                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_BANKER_TP),
                 getFunc = function() return Settings.SlashBanker end,
                 setFunc = function(value)
                     Settings.SlashBanker = value
@@ -205,6 +224,7 @@ function SlashCommands.CreateSettings()
                 width = "full",
                 default = Defaults.SlashBanker,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                disabled = function() return #bankerOptions == 0 end
             },
             {
                 -- Choose Banker
@@ -215,14 +235,14 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashBankerChoice = bankerOptionsKeys[value] end,
                 width = "full",
                 default = Defaults.SlashBankerChoice,
-                disabled = function() return not Defaults.SlashBanker end,
+                disabled = function() return not Settings.SlashBanker end,
 
             },
             {
                 -- SlashMerchant
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_MERCHANT),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_SLASHCMDS_MERCHANT_TP), GetCollectibleName(301)),
+                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_MERCHANT_TP),
                 getFunc = function() return Settings.SlashMerchant end,
                 setFunc = function(value)
                     Settings.SlashMerchant = value
@@ -231,6 +251,7 @@ function SlashCommands.CreateSettings()
                 width = "full",
                 default = Defaults.SlashMerchant,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                disabled = function() return #merchantOptions == 0 end
             },
             {
                 -- Choose Merchant
@@ -241,13 +262,13 @@ function SlashCommands.CreateSettings()
                 setFunc = function(value) Settings.SlashMerchantChoice = merchantOptionsKeys[value] end,
                 width = "full",
                 default = Defaults.SlashMerchantChoice,
-                disabled = function() return not Defaults.SlashMerchant end,
+                disabled = function() return not Settings.SlashMerchant end,
             },
             {
                 -- SlashArmory
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_ARMORY),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_SLASHCMDS_ARMORY_TP), GetCollectibleName(9745)),
+                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_ARMORY_TP),
                 getFunc = function() return Settings.SlashArmory end,
                 setFunc = function(value)
                     Settings.SlashArmory = value
@@ -256,6 +277,18 @@ function SlashCommands.CreateSettings()
                 width = "full",
                 default = Defaults.SlashArmory,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                disabled = function() return #armoryOptions == 0 end
+            },
+            {
+                -- Choose Armory
+                type = "dropdown",
+                name = "\t\t\t\t\tChoose Armory Assistant to Summon",
+                choices = armoryOptions,
+                getFunc = function() return GetFormattedCollectibleName(Settings.SlashArmoryChoice) end,
+                setFunc = function(value) Settings.SlashArmoryChoice = armoryOptionsKeys[value] end,
+                width = "full",
+                default = Defaults.SlashArmoryChoice,
+                disabled = function() return not Settings.SlashArmory end,
             },
             {
                 -- SlashDecon

@@ -6,18 +6,16 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
-    "|cFFA500LuiExtended Version 6.4.3|r",
-    "",
-    "|cFFFF00General:|r",
-    "[*] Added Sharp & Azandar Keybindings",
-    "[*] Removed the Keybindings for individual Banker and Merchants (You have to select your prefered Banker and Merchant now in LUIE Settings -> SlashCommands -> General)",
+    "|cFFA500LuiExtended Version 6.4.4|r",
     "",
     "|cFFFF00Slash Commands:|r",
-    "[*] Rewrote Collectible handling to make adding new banker, merchants & companions easier in the future",
-    "[*] Added Aderene",
+    "[*] Added Armory, Fence & Deconstruction to CollectibleTables to hopefully fix a bug with Giladil",
+    "[*] Added Zuqoth Armory Assistant",
+    "[*] Reworked Slash Handling: Will disable armory, companion, merchant or banker if you do not have any of them unlocked. If you buy one of them you need to /reloadui for LUI to update",
     "",
     "|cFFFF00Unit Frames:|r",
-    "[*] Fixed Colors in Battlegrounds (thanks to Anthonysc)",
+    "[*] Fixed Role colors in Battlegrounds",
+    "",
 }
 
 -- Hide toggle called by the menu or xml button

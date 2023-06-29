@@ -295,6 +295,10 @@ function SlashCommands.SlashMerchant()
     SlashCommands.SlashCollectible(SlashCommands.SV.SlashMerchantChoice)
 end
 
+function SlashCommands.SlashArmory()
+    SlashCommands.SlashCollectible(SlashCommands.SV.SlashArmoryChoice)
+end
+
 -- Slash Command to equip a chosen outfit by number
 function SlashCommands.SlashOutfit(option)
     if option == "" or option == nil then

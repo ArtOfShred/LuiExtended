@@ -1,3 +1,15 @@
+### Version 6.4.4
+
+Slash Commands
+- Added Armory, Fence & Deconstruction to CollectibleTables to hopefully fix a bug with Giladil
+- Added Zuqoth Armory Assistant
+- Reworked Slash Handling: Will disable armory, companion, merchant or banker if you do not have any of them unlocked. If you buy one of them you need to /reloadui for LUI to update.
+
+Unit Frames
+- Fixed Role colors in Battlegrounds
+
+---
+
 ### Version 6.4.3
 
 General
