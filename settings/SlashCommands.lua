@@ -33,6 +33,7 @@ local bankerOptions, bankerOptionsKeys = CreateOptions(CollectibleTables.Banker)
 local merchantOptions, merchantOptionsKeys = CreateOptions(CollectibleTables.Merchants)
 local companionOptions, companionOptionsKeys = CreateOptions(CollectibleTables.Companions)
 local armoryOptions, armoryOptionsKeys = CreateOptions(CollectibleTables.Armory)
+local deconOptions, deconOptionsKeys = CreateOptions(CollectibleTables.Decon)
 
 local homeOptions = { "Inside", "Outside" }
 local homeOptionsKeys = { ["Inside"] = 1, ["Outside"] = 2 }
@@ -57,6 +58,10 @@ function SlashCommands.MigrateSettings()
         local _, id = next(armoryOptionsKeys)
         Settings.SlashArmoryChoice = id
     end
+    if CollectibleTables.Decon[Settings.SlashDeconChoice] == nil then
+        local _, id = next(deconOptionsKeys)
+        Settings.SlashDeconChoice = id
+    end
 
     if #bankerOptions == 0 then
         Settings.SlashBanker = false
@@ -70,6 +75,10 @@ function SlashCommands.MigrateSettings()
     if #armoryOptions == 0 then
         Settings.SlashArmory = false
     end
+    if #deconOptions == 0 then
+        Settings.SlashDecon = false
+    end
+
 end
 
 -- Create Slash Commands Settings Menu
@@ -303,6 +312,18 @@ function SlashCommands.CreateSettings()
                 width = "full",
                 default = Defaults.SlashDecon,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                disabled = function() return #deconOptions == 0 end
+            },
+            {
+                -- Choose Decon
+                type = "dropdown",
+                name = "\t\t\t\t\tChoose Deconstruction Assistant to Summon",
+                choices = deconOptions,
+                getFunc = function() return GetFormattedCollectibleName(Settings.SlashDeconChoice) end,
+                setFunc = function(value) Settings.SlashDeconChoice = deconOptionsKeys[value] end,
+                width = "full",
+                default = Defaults.SlashDeconChoice,
+                disabled = function() return not Settings.SlashDecon end,
             },
             {
                 -- SlashFence

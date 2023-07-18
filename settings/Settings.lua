@@ -3,11 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
-local zo_strformat = zo_strformat
 local g_ElementMovingEnabled
-
-local alignmentOptions     = { "LEFT", "CENTER", "RIGHT" }
-local alignmentOptionsKeys = { ["LEFT"] = 1, ["CENTER"] = 1, ["RIGHT"] = 3 }
 
 -- Create Settings Menu
 function LUIE.CreateSettings()
@@ -21,13 +17,12 @@ function LUIE.CreateSettings()
     local optionsData = {}
 
     local profileCharacters = {} -- List of character profiles
-    local profileQueuedCopy = nil -- Currently queued character copy name for copy button
+    local profileQueuedCopy -- Currently queued character copy name for copy button
 
     -- Generate list of character profiles for Menu function
     local function GenerateCharacterProfiles()
         local isCharacterSpecific = LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV -- Pull info from SV for account wide
         local playerName = GetUnitName('player')
-        local version = LUIE.version
 
         for accountName, data in pairs(LUIESV.Default) do
             for profile, vars in pairs(data) do

@@ -33,6 +33,7 @@ SlashCommands.Defaults = {
 	SlashArmory         = true,
     SlashArmoryChoice   = 1,
 	SlashDecon   	    = true,
+	SlashDeconChoice    = 1,
     SlashFence          = true,
     SlashEye            = true,
     SlashReadyCheck     = true,

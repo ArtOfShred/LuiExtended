@@ -8270,67 +8270,67 @@ function ChatAnnouncements.HookFunction()
     end
 
     -- EVENT_QUEST_REMOVED (Registered through CSA_MiscellaneousHandlers)
-    local function OnQuestRemoved(eventId, isCompleted, journalIndex, questName, zoneIndex, poiIndex)
-        if not isCompleted then
-            if ChatAnnouncements.SV.Quests.QuestAbandonCA or ChatAnnouncements.SV.Quests.QuestAbandonCSA or ChatAnnouncements.SV.Quests.QuestAbandonAlert then
+    -- EVENT_QUEST_REMOVED (Registered through CSA_MiscellaneousHandlers)
+    local function OnQuestRemoved(_, isCompleted, _, questName, _, _)
+        if isCompleted then return end
 
-                local iconTexture
+        if ChatAnnouncements.SV.Quests.QuestAbandonCA or ChatAnnouncements.SV.Quests.QuestAbandonCSA or ChatAnnouncements.SV.Quests.QuestAbandonAlert then
+            local iconTexture
 
-                if g_questIndex[questName] then
-                    local questJournalObject = SYSTEMS:GetObject("questJournal")
-                    local questType = g_questIndex[questName].questType
-                    local instanceDisplayType = g_questIndex[questName].instanceDisplayType
-                    iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
-                end
-
-                if ChatAnnouncements.SV.Quests.QuestAbandonCA then
-                    local questNameFormatted = (zo_strformat("|cFFA500<<1>>|r", questName))
-                    local formattedString
-                    if iconTexture and ChatAnnouncements.SV.Quests.QuestIcon then
-                        formattedString = zo_strformat(SI_LUIE_CA_QUEST_ABANDONED_WITH_ICON, zo_iconFormat(iconTexture, 16, 16), questNameFormatted)
-                    else
-                        formattedString = zo_strformat(SI_LUIE_CA_QUEST_ABANDONED, questNameFormatted)
-                    end
-                    g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
-                    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                    eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
-                end
-
-                if ChatAnnouncements.SV.Quests.QuestAbandonCSA then
-                    local formattedString
-                    if iconTexture then
-                        formattedString = zo_strformat(SI_LUIE_CA_QUEST_ABANDONED_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName)
-                    else
-                        formattedString = zo_strformat(SI_LUIE_CA_QUEST_ABANDONED, questName)
-                    end
-                    local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.QUEST_ABANDONED)
-                    messageParams:SetText(formattedString)
-                    messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_ADDED)
-                    CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
-                end
-
-                if ChatAnnouncements.SV.Quests.QuestAbandonAlert then
-                    local formattedString
-                    if iconTexture and ChatAnnouncements.SV.Quests.QuestIcon then
-                        formattedString = zo_strformat(SI_LUIE_CA_QUEST_ABANDONED_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName)
-                    else
-                        formattedString = zo_strformat(SI_LUIE_CA_QUEST_ABANDONED, questName)
-                    end
-                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, formattedString)
-                end
-
-            end
-            if not ChatAnnouncements.SV.Quests.QuestAbandonCSA then
-                PlaySound(SOUNDS.QUEST_ABANDONED)
+            if g_questIndex[questName] then
+                local questJournalObject = SYSTEMS:GetObject("questJournal")
+                local questType = g_questIndex[questName].questType
+                local instanceDisplayType = g_questIndex[questName].instanceDisplayType
+                iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
             end
 
-            -- We set this variable to true in order to override the message syntax that would be applied to a quest reward normally with [Removed] instead.
-            if ChatAnnouncements.SV.Inventory.Loot then
-                g_itemReceivedIsQuestAbandon = true
-                zo_callLater(ResetQuestAbandonStatus, 500)
+            if ChatAnnouncements.SV.Quests.QuestAbandonCA then
+                local questNameFormatted = (zo_strformat("|cFFA500<<1>>|r", questName))
+                local formattedString
+                if iconTexture and ChatAnnouncements.SV.Quests.QuestIcon then
+                    formattedString = zo_strformat(SI_LUIE_CA_QUEST_ABANDONED_WITH_ICON, zo_iconFormat(iconTexture, 16, 16), questNameFormatted)
+                else
+                    formattedString = zo_strformat(SI_LUIE_CA_QUEST_ABANDONED, questNameFormatted)
+                end
+                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
+                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
+            end
+
+            if ChatAnnouncements.SV.Quests.QuestAbandonCSA then
+                local formattedString
+                if iconTexture then
+                    formattedString = zo_strformat(SI_LUIE_CA_QUEST_ABANDONED_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName)
+                else
+                    formattedString = zo_strformat(SI_LUIE_CA_QUEST_ABANDONED, questName)
+                end
+                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.QUEST_ABANDONED)
+                messageParams:SetText(formattedString)
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_ADDED)
+                --CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
+
+            if ChatAnnouncements.SV.Quests.QuestAbandonAlert then
+                local formattedString
+                if iconTexture and ChatAnnouncements.SV.Quests.QuestIcon then
+                    formattedString = zo_strformat(SI_LUIE_CA_QUEST_ABANDONED_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName)
+                else
+                    formattedString = zo_strformat(SI_LUIE_CA_QUEST_ABANDONED, questName)
+                end
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, formattedString)
             end
 
         end
+        if not ChatAnnouncements.SV.Quests.QuestAbandonCSA then
+            PlaySound(SOUNDS.QUEST_ABANDONED)
+        end
+
+        -- We set this variable to true in order to override the message syntax that would be applied to a quest reward normally with [Removed] instead.
+        if ChatAnnouncements.SV.Inventory.Loot then
+            g_itemReceivedIsQuestAbandon = true
+            zo_callLater(ResetQuestAbandonStatus, 500)
+        end
+
         g_questIndex[questName] = nil
 
     end
@@ -11173,7 +11173,41 @@ function ChatAnnouncements.PrintQueuedMessages()
     eventManager:UnregisterForUpdate(moduleName .. "Printer")
 end
 
-function ChatAnnouncements.CollectibleUsed(eventCode, result, isAttemptingActivation)
+local mementoTable = {
+    [10287] = GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_CAKE),
+    [1167] = GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_PIE),
+    [1168] = GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_MEAD),
+    [479] = GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_WITCH),
+}
+
+function ChatAnnouncements.AnnounceMemento()
+    local string = mementoTable[LUIE.LastMementoUsed] or nil
+    if string == nil then
+        LUIE.LastMementoUsed = 0
+        return
+    end
+
+    local link = GetCollectibleLink(LUIE.LastMementoUsed, linkBrackets[ChatAnnouncements.SV.BracketOptionCollectibleUse])
+    local name = GetCollectibleName(LUIE.LastMementoUsed)
+    local icon = GetCollectibleIcon(LUIE.LastMementoUsed)
+
+    local formattedIcon = ChatAnnouncements.SV.Collectibles.CollectibleUseIcon and ("|t16:16:" .. icon .. "|t ") or ""
+
+    local message = zo_strformat(string, link, formattedIcon)
+    local alert = zo_strformat(string, name, "")
+
+    if message and ChatAnnouncements.SV.Collectibles.CollectibleUseCA or LUIE.LastMementoUsed > 0 then
+        message = CollectibleUseColorize:Colorize(message)
+        printToChat(message)
+    end
+    if alert and ChatAnnouncements.SV.Collectibles.CollectibleUseAlert then
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alert)
+    end
+
+    LUIE.LastMementoUsed = 0
+end
+
+function ChatAnnouncements.CollectibleUsed(_, result, _)
     if result ~= COLLECTIBLE_USAGE_BLOCK_REASON_NOT_BLOCKED then return end
     local latency = GetLatency()
     latency = latency + 100
@@ -11181,35 +11215,7 @@ function ChatAnnouncements.CollectibleUsed(eventCode, result, isAttemptingActiva
 end
 
 function ChatAnnouncements.CollectibleResult()
-
-    -- Check if this variable has a value > 0.
-    if LUIE.LastMementoUsed ~= 0 then
-        local link = GetCollectibleLink(LUIE.LastMementoUsed, linkBrackets[ChatAnnouncements.SV.BracketOptionCollectibleUse])
-        local name = GetCollectibleName(LUIE.LastMementoUsed)
-        local icon = GetCollectibleIcon(LUIE.LastMementoUsed)
-        local formattedIcon = ChatAnnouncements.SV.Collectibles.CollectibleUseIcon and ("|t16:16:" .. icon .. "|t ") or ""
-        local string =
-            LUIE.LastMementoUsed == 10287 and GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_CAKE) or
-            LUIE.LastMementoUsed == 1167 and GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_PIE) or
-            LUIE.LastMementoUsed == 1168 and GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_MEAD) or
-            LUIE.LastMementoUsed == 479 and GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_WITCH)
-
-        -- Just in case string is nil then don't do anything here.
-        if string ~= nil then
-            local message = zo_strformat(string, link, formattedIcon)
-            local alert = zo_strformat(string, name, "")
-
-            if message and ChatAnnouncements.SV.Collectibles.CollectibleUseCA or LUIE.LastMementoUsed > 0 then
-                message = CollectibleUseColorize:Colorize(message)
-                printToChat(message)
-            end
-            if alert and ChatAnnouncements.SV.Collectibles.CollectibleUseAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alert)
-            end
-        end
-
-        LUIE.LastMementoUsed = 0
-    end
+    ChatAnnouncements.AnnounceMemento()
 
 	local newAssistant = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
     local newCompanion = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)

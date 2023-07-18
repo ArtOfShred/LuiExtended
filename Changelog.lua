@@ -6,15 +6,15 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
-    "|cFFA500LuiExtended Version 6.4.4|r",
+    "|cFFA500LuiExtended Version 6.4.5|r",
     "",
     "|cFFFF00Slash Commands:|r",
-    "[*] Added Armory, Fence & Deconstruction to CollectibleTables to hopefully fix a bug with Giladil",
-    "[*] Added Zuqoth Armory Assistant",
+    "[*] Added Pyroclast & Hoarfrost",
+    "[*] Fixed Aderene",
     "[*] Reworked Slash Handling: Will disable armory, companion, merchant or banker if you do not have any of them unlocked. If you buy one of them you need to /reloadui for LUI to update",
     "",
-    "|cFFFF00Unit Frames:|r",
-    "[*] Fixed Role colors in Battlegrounds",
+    "|cFFFF00Chat Announcements:|r",
+    "[*] Fixed lua error with mementos",
     "",
 }
 

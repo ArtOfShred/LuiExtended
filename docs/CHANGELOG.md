@@ -1,3 +1,14 @@
+### Version 6.4.5
+
+Slash Commands
+- Added Pyroclast & Hoarfrost
+- Fixed Aderene
+
+Chat Announcements
+- Fixed lua error with mementos
+
+---
+
 ### Version 6.4.4
 
 Slash Commands

@@ -3852,6 +3852,8 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
     local petcolor_bg = { 0.1*UnitFrames.SV.CustomColourPet[1], 0.1*UnitFrames.SV.CustomColourPet[2], 0.1*UnitFrames.SV.CustomColourPet[3], 0.9} -- Player Pet
     local companioncolor_bg = { 0.1*UnitFrames.SV.CustomColourCompanionFrame[1], 0.1*UnitFrames.SV.CustomColourCompanionFrame[2], 0.1*UnitFrames.SV.CustomColourCompanionFrame[3], 0.9} -- Companion
 
+    local isBattleground = IsActiveWorldBattleground()
+
     -- After colour is applied unhide frames, so player can see changes even from menu
     for _, baseName in pairs( { "player", "reticleover", "boss", "AvaPlayerTarget" } ) do
         shield[4] = ( UnitFrames.SV.CustomShieldBarSeparate and not (baseName == "boss") ) and 0.9 or ( UnitFrames.SV.ShieldAlpha / 100 )
@@ -3992,7 +3994,6 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
             end
         end
 
-
         for i = 1, groupSize do
             local unitTag = baseName .. i
             if UnitFrames.CustomFrames[unitTag] then
@@ -4012,10 +4013,7 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
                 if UnitFrames.CustomFrames[unitTag].topInfo then UnitFrames.CustomFrames[unitTag].topInfo.defaultUnitTag = defaultUnitTag end
 
                 local class = GetUnitClassId(defaultUnitTag)
-                local role = GetGroupMemberSelectedRole(defaultUnitTag)
-                if (GetCurrentBattlegroundId() > 0) then
-                    role = LFG_ROLE_DPS
-                end
+                local role = isBattleground and LFG_ROLE_DPS or GetGroupMemberSelectedRole(defaultUnitTag)
 
                 local unitFrame = UnitFrames.CustomFrames[unitTag]
                 local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
@@ -4097,18 +4095,12 @@ end
 
 function UnitFrames.CustomFramesApplyColoursSingle(unitTag)
     local health    = { UnitFrames.SV.CustomColourHealth[1],  UnitFrames.SV.CustomColourHealth[2],  UnitFrames.SV.CustomColourHealth[3], 0.9 }
-    local shield    = { UnitFrames.SV.CustomColourShield[1],  UnitFrames.SV.CustomColourShield[2],  UnitFrames.SV.CustomColourShield[3], 0 } -- .a value will be fixed in the loop
-    local magicka   = { UnitFrames.SV.CustomColourMagicka[1], UnitFrames.SV.CustomColourMagicka[2], UnitFrames.SV.CustomColourMagicka[3], 0.9 }
-    local stamina   = { UnitFrames.SV.CustomColourStamina[1], UnitFrames.SV.CustomColourStamina[2], UnitFrames.SV.CustomColourStamina[3], 0.9 }
 
     local dps       =  { UnitFrames.SV.CustomColourDPS[1],    UnitFrames.SV.CustomColourDPS[2],     UnitFrames.SV.CustomColourDPS[3], 0.9 }
     local healer    =  { UnitFrames.SV.CustomColourHealer[1], UnitFrames.SV.CustomColourHealer[2],  UnitFrames.SV.CustomColourHealer[3], 0.9 }
     local tank      =  { UnitFrames.SV.CustomColourTank[1],   UnitFrames.SV.CustomColourTank[2],    UnitFrames.SV.CustomColourTank[3], 0.9 }
 
     local health_bg  = { 0.1*UnitFrames.SV.CustomColourHealth[1],  0.1*UnitFrames.SV.CustomColourHealth[2],  0.1*UnitFrames.SV.CustomColourHealth[3], 0.9 }
-    local shield_bg  = { 0.1*UnitFrames.SV.CustomColourShield[1],  0.1*UnitFrames.SV.CustomColourShield[2],  0.1*UnitFrames.SV.CustomColourShield[3], 0.9 }
-    local magicka_bg = { 0.1*UnitFrames.SV.CustomColourMagicka[1], 0.1*UnitFrames.SV.CustomColourMagicka[2], 0.1*UnitFrames.SV.CustomColourMagicka[3], 0.9 }
-    local stamina_bg = { 0.1*UnitFrames.SV.CustomColourStamina[1], 0.1*UnitFrames.SV.CustomColourStamina[2], 0.1*UnitFrames.SV.CustomColourStamina[3], 0.9 }
 
     local dps_bg    = { 0.1*UnitFrames.SV.CustomColourDPS[1],    0.1*UnitFrames.SV.CustomColourDPS[2],    0.1*UnitFrames.SV.CustomColourDPS[3], 0.9 }
     local healer_bg = { 0.1*UnitFrames.SV.CustomColourHealer[1], 0.1*UnitFrames.SV.CustomColourHealer[2], 0.1*UnitFrames.SV.CustomColourHealer[3], 0.9 }

@@ -12,6 +12,7 @@ CollectibleTables.Banker = {
     [6376] = "Ezabi",
     [8994] = "Crow",
     [9743] = "Factotum",
+    [11097] = "Pyroclast",
 }
 
 -- Merchants
@@ -20,12 +21,7 @@ CollectibleTables.Merchants = {
     [6378] = "Fezez",
     [8995] = "Crow",
     [9744] = "Factotum",
-    [10617] = "Aderene",
-}
-
--- Deconstruction
-CollectibleTables.Decon = {
-    [10184] = "Giladil",
+    [11059] = "Hoarfrost",
 }
 
 -- Armory Assistants
@@ -34,9 +30,15 @@ CollectibleTables.Armory = {
     [10618] = "Zhuqoth",
 }
 
+-- Deconstruction
+CollectibleTables.Decon = {
+    [10184] = "Giladil",
+    [10617] = "Aderene",
+}
+
 -- Fence
 CollectibleTables.Fence = {
-    [300] = "Pirharri"
+    [300] = "Pirharri",
 }
 
 -- Companions
@@ -52,9 +54,8 @@ CollectibleTables.Companions = {
 
 CollectibleTables.All = {}
 
-for k, v in pairs(CollectibleTables.Merchants) do CollectibleTables.All[k] = v end
-for k, v in pairs(CollectibleTables.Banker) do CollectibleTables.All[k] = v end
-for k, v in pairs(CollectibleTables.Decon) do CollectibleTables.All[k] = v end
-for k, v in pairs(CollectibleTables.Armory) do CollectibleTables.All[k] = v end
-for k, v in pairs(CollectibleTables.Fence) do CollectibleTables.All[k] = v end
-for k, v in pairs(CollectibleTables.Companions) do CollectibleTables.All[k] = v end
+for name, table in pairs(CollectibleTables) do
+    if (type(table) == "table" and tostring(name) ~= "All") then
+        for k, v in pairs(table) do CollectibleTables.All[k] = v end
+    end
+end
