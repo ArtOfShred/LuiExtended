@@ -91,8 +91,8 @@ local strings = {
     -- Bindings
     SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Convocation du banquier",
     SI_BINDING_NAME_LUIE_COMMAND_MERCHANT =              "Convocation de la marchande",
-    SI_BINDING_NAME_LUIE_COMMAND_ARMORY =                "Summon Armory (Ghrasharog)",
-    SI_BINDING_NAME_LUIE_COMMAND_DECON =                 "Summon Deconstruction (Giladil)",
+    SI_BINDING_NAME_LUIE_COMMAND_ARMORY =                "Summon Armory",
+    SI_BINDING_NAME_LUIE_COMMAND_DECON =                 "Summon Deconstruction",
     SI_BINDING_NAME_LUIE_COMMAND_FENCE =                 "Summon Fence",
     SI_BINDING_NAME_LUIE_COMMAND_EYE =                   "Utiliser l'Oeil des Antiquaires",
     SI_BINDING_NAME_LUIE_COMMAND_BASTIAN =               "Convocation du Compagnion (Bastian)",

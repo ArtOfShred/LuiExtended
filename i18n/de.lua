@@ -91,9 +91,9 @@ local strings = {
     -- Bindings
     SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Bankier rufen",
     SI_BINDING_NAME_LUIE_COMMAND_MERCHANT =              "Händler rufen",
-    SI_BINDING_NAME_LUIE_COMMAND_ARMORY =                "Arsenalgehilfe rufen (Ghrasharog)",
-	SI_BINDING_NAME_LUIE_COMMAND_DECON =                 "Verwerterin rufen (Giladil)",
-    SI_BINDING_NAME_LUIE_COMMAND_FENCE =                 "Hehler rufen (Pirharri)",
+    SI_BINDING_NAME_LUIE_COMMAND_ARMORY =                "Arsenalgehilfe rufen",
+	SI_BINDING_NAME_LUIE_COMMAND_DECON =                 "Verwerterin rufen",
+    SI_BINDING_NAME_LUIE_COMMAND_FENCE =                 "Hehler rufen",
     SI_BINDING_NAME_LUIE_COMMAND_EYE =                   "Auge des Antiquars benutzen",
     SI_BINDING_NAME_LUIE_COMMAND_BASTIAN =               "Begleiter rufen (Bastian)",
     SI_BINDING_NAME_LUIE_COMMAND_MIRRI =                 "Begleiterin rufen (Mirri)",

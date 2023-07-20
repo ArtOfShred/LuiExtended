@@ -7,8 +7,8 @@
     <Layer name="SI_KEYBINDINGS_LAYER_GENERAL">
         <Category name="|cE12000L|cFFFFB0ui E|rxtended|r">
             <Action name="LUIE_COMMAND_RELOADUI"><Down>ReloadUI("ingame")</Down></Action>
-            <Action name="LUIE_COMMAND_ARMORY"><Down>LUIE.SlashCommands.SlashCollectible(9745)</Down></Action>
-			<Action name="LUIE_COMMAND_DECON"><Down>LUIE.SlashCommands.SlashCollectible(10184)</Down></Action>
+            <Action name="LUIE_COMMAND_ARMORY"><Down>LUIE.SlashCommands.SlashArmory()</Down></Action>
+			<Action name="LUIE_COMMAND_DECON"><Down>LUIE.SlashCommands.SlashDecon()</Down></Action>
 			<Action name="LUIE_COMMAND_FENCE"><Down>LUIE.SlashCommands.SlashCollectible(300)</Down></Action>
 			<Action name="LUIE_COMMAND_MERCHANT"><Down>LUIE.SlashCommands.SlashMerchant()</Down></Action>
             <Action name="LUIE_COMMAND_BANKER"><Down>LUIE.SlashCommands.SlashBanker()</Down></Action>

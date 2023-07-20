@@ -91,9 +91,9 @@ local strings = {
     -- Bindings
     SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Призвать Банкира",
     SI_BINDING_NAME_LUIE_COMMAND_MERCHANT =              "Призвать Торговца",
-    SI_BINDING_NAME_LUIE_COMMAND_FENCE =                 "Призвать Воровку (Пирарри)",
-    SI_BINDING_NAME_LUIE_COMMAND_ARMORY =                "Призвать Oружейная (Грашарог)",
-	SI_BINDING_NAME_LUIE_COMMAND_DECON =                 "Призвать Деконструкция (Гиладил)",
+    SI_BINDING_NAME_LUIE_COMMAND_FENCE =                 "Призвать Воровку",
+    SI_BINDING_NAME_LUIE_COMMAND_ARMORY =                "Призвать Oружейная",
+	SI_BINDING_NAME_LUIE_COMMAND_DECON =                 "Призвать Деконструкция",
     SI_BINDING_NAME_LUIE_COMMAND_EYE =                   "Use Antiquarian's Eye",
     SI_BINDING_NAME_LUIE_COMMAND_BASTIAN =               "Призвать Компаньон (Bastian)",
     SI_BINDING_NAME_LUIE_COMMAND_MIRRI =                 "Призвать Компаньон (Mirri)",

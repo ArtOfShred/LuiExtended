@@ -1,3 +1,10 @@
+### Version 6.4.6
+
+General
+- Fixed keybindings for Armory and Deconstruction
+
+---
+
 ### Version 6.4.5
 
 Slash Commands

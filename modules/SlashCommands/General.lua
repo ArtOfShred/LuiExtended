@@ -217,7 +217,7 @@ end
 
 -- Slash Command to use collectibles based on their collectible id
 function SlashCommands.SlashCollectible(id)
-    if (id == nil or id == "") then
+    if (id == nil or id == "" or id == 1) then
         return
     end
 
@@ -297,6 +297,10 @@ end
 
 function SlashCommands.SlashArmory()
     SlashCommands.SlashCollectible(SlashCommands.SV.SlashArmoryChoice)
+end
+
+function SlashCommands.SlashDecon()
+    SlashCommands.SlashCollectible(SlashCommands.SV.SlashDeconChoice)
 end
 
 -- Slash Command to equip a chosen outfit by number

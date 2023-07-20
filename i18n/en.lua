@@ -89,11 +89,11 @@ local strings = {
     SI_LUIE_PET_NAME_ASSISTANT_FACTOTUMM =              "Factotum Commerce Delegate",
 
     -- Bindings
-    SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Summon selected Banker",
-    SI_BINDING_NAME_LUIE_COMMAND_MERCHANT =              "Summon selected Merchant",
-    SI_BINDING_NAME_LUIE_COMMAND_ARMORY =                "Summon Armory (Ghrasharog)",
-	SI_BINDING_NAME_LUIE_COMMAND_DECON =                 "Summon Deconstruction (Giladil)",
-    SI_BINDING_NAME_LUIE_COMMAND_FENCE =                 "Summon Fence (Pirharri)",
+    SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Summon Banker",
+    SI_BINDING_NAME_LUIE_COMMAND_MERCHANT =              "Summon Merchant",
+    SI_BINDING_NAME_LUIE_COMMAND_ARMORY =                "Summon Armory",
+	SI_BINDING_NAME_LUIE_COMMAND_DECON =                 "Summon Deconstruction",
+    SI_BINDING_NAME_LUIE_COMMAND_FENCE =                 "Summon Fence",
     SI_BINDING_NAME_LUIE_COMMAND_EYE =                   "Use Antiquarian's Eye",
     SI_BINDING_NAME_LUIE_COMMAND_BASTIAN =               "Summon Companion (Bastian)",
     SI_BINDING_NAME_LUIE_COMMAND_MIRRI =                 "Summon Companion (Mirri)",
