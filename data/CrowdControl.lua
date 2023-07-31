@@ -48,6 +48,12 @@ CrowdControl.aoePlayerUltimate = {
     -- Sorcerer
     [80435] = 1, -- Suppression Field (Suppression Field)
 
+    -- Arcanist
+    [189793] = 1, -- The Unblinking Eye (The Unblinking Eye)
+    [189839] = 0, -- The Tide King's Gaze (The Tide King's Gaze)
+    [189869] = 1, -- The Languid Eye (The Languid Eye)
+    [191889] = 1, -- The Languid Eye (The Languid Eye, Duration?)
+
     -- Destruction Staff
     [85127] = 1, --Fiery Rage
     [85131] = 0, --Thunderous Rage
@@ -116,6 +122,17 @@ CrowdControl.aoePlayerNormal = {
     --[118766] = 0, -- Detonating Siphon (Detonating Siphon)
     --[118011] = 0, -- Mystic Siphon (Mystic Siphon)
 
+    -- Arcanist
+    [194842] = 1, -- Fatecarver (Fatecarver)
+    [194843] = 1, -- Fatecarver (Fatecarver, Area)
+    [186369] = 0, -- Pragmatic Fatecarver (Pragmatic Fatecarver)
+    [186370] = 0, -- Pragmatic Fatecarver (Pragmatic Fatecarver, Area)
+    [184291] = 0, -- Exhausting Fatecarver (Exhausting Fatecarver)
+    [183123] = 0, -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
+    [186772] = 1, -- Abyssal Impact (Abyssal Impact)
+    [183009] = 0, -- Cephaliarch's Flail (Cephaliarch's Flail)
+    [186773] = 0, -- Tentacular Dread (Tentacular Dread)
+
     -- Destruction Staff
     [62896] = 1, -- Wall of Fire
     [62971] = 0, -- Wall of Storms
@@ -144,6 +161,8 @@ CrowdControl.aoePlayerNormal = {
     [40267] = 0, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
     [40252] = 0, -- Razor Caltrops (Razor Caltrops)
 
+    -- Vampire
+    [38968] = 0, -- Blood Mist (Blood Mist)
 }
 
 CrowdControl.aoePlayerSet = {
