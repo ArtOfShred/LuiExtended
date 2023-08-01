@@ -178,6 +178,16 @@ function SlashCommands.SlashGroupLeave()
     GroupLeave()
 end
 
+function SlashCommands.SlashGroupRole(option)
+    if option == "tank" then
+        UpdateSelectedLFGRole(LFG_ROLE_TANK)
+    elseif option == "heal" then
+        UpdateSelectedLFGRole(LFG_ROLE_HEAL)
+    elseif option == "dps" then
+        UpdateSelectedLFGRole(LFG_ROLE_DPS)
+    end
+end
+
 -- Slash Command to kick someone from a group
 function SlashCommands.SlashGroupKick(option)
     local groupSize = GetGroupSize()

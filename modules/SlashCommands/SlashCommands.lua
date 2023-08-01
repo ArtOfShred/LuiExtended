@@ -16,6 +16,7 @@ SlashCommands.Defaults = {
     SlashDisband        = true,
     SlashGroupLeave     = true,
     SlashGroupKick      = true,
+    SlashGroupRole      = true,
     SlashGuildInvite    = true,
     SlashGuildQuit      = false,
     SlashGuildKick      = false,
@@ -113,6 +114,9 @@ function SlashCommands.RegisterSlashCommands()
         SLASH_COMMANDS["/remove"]       = SlashCommands.SlashGroupKick
         SLASH_COMMANDS["/groupkick"]    = SlashCommands.SlashGroupKick
         SLASH_COMMANDS["/groupremove"]  = SlashCommands.SlashGroupKick
+    end
+    if SlashCommands.SV.SlashGroupRole then
+        SLASH_COMMANDS["/changerole"]   = SlashCommands.SlashGroupRole
     end
     if SlashCommands.SV.SlashVoteKick then
         SLASH_COMMANDS["/votekick"]     = SlashCommands.SlashVoteKick

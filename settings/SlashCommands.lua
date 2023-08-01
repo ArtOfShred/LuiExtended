@@ -514,6 +514,20 @@ function SlashCommands.CreateSettings()
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
+                -- SlashGroupRole
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_SLASHCMDS_ROLE),
+                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_ROLE_TP),
+                getFunc = function() return Settings.SlashGroupRole end,
+                setFunc = function(value)
+                    Settings.SlashGroupRole = value
+                    SlashCommands.RegisterSlashCommands()
+                end,
+                width = "full",
+                default = Defaults.SlashGroupRole,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+            },
+            {
                 -- SlashVoteKick
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_VOTEKICK),
