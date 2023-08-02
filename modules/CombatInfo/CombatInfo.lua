@@ -2114,13 +2114,7 @@ end
 -- Very basic handler registered to only read CC events on the player
 function CombatInfo.OnCombatEventBreakCast(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
     -- Some cast/channel abilities (or effects we use to simulate this) stun the player - ignore the effects of these ids when this happens.
-    if Castbar.IgnoreCastBarStun[abilityId] then
-        return
-    end
-
-    if Castbar.IgnoreCastBreakingActions[castbar.id] then
-        return
-    end
+    if Castbar.IgnoreCastBarStun[abilityId] or Castbar.IgnoreCastBreakingActions[castbar.id] then return end
 
     if not Castbar.IsCast[abilityId] then
         CombatInfo.StopCastBar()
@@ -2139,13 +2133,7 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
     end
 
     -- Bail out past here if the source isn't player, cast bar is disabled, or the ability is not on the list of abilities to show the cast bar for
-    if sourceType ~= COMBAT_UNIT_TYPE_PLAYER and not Castbar.CastOverride[abilityId] then
-        return
-    end
-
-    if not CombatInfo.SV.CastBarEnable then
-        return
-    end
+    if not CombatInfo.SV.CastBarEnable or (sourceType ~= COMBAT_UNIT_TYPE_PLAYER and not Castbar.CastOverride[abilityId]) then return end
 
     -- Stop when a cast breaking action is detected
     if Castbar.CastBreakingActions[abilityId] then
@@ -2154,27 +2142,21 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
         end
     end
 
-    if not Castbar.IsCast[abilityId] then
-        return
-    end
-
     local icon = GetAbilityIcon(abilityId)
     local name = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
-    -- Return if ability is blacklisted
-    if CombatInfo.SV.blacklist[abilityId] or CombatInfo.SV.blacklist[name] then
-        return
-    end
+    -- Return if ability not marked as cast or ability is blacklisted
+    if not Castbar.IsCast[abilityId] or CombatInfo.SV.blacklist[abilityId] or CombatInfo.SV.blacklist[name] then return end
 
     local duration
     local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId)
     local forceChanneled = false
+
     -- Override certain things to display as a channel rather than cast. Note only works for events where we override the duration.
-    if Castbar.CastChannelOverride[abilityId] then
-        channeled = true
-    end
+    if Castbar.CastChannelOverride[abilityId] then channeled = true end
+
     if channeled then
-        duration = Castbar.CastDurationFix[abilityId] or channelTime
+        duration = Castbar.CastDurationFix[abilityId] or (result == ACTION_RESULT_EFFECT_GAINED_DURATION) and hitValue or channelTime
     else
         duration = Castbar.CastDurationFix[abilityId] or castTime
     end
@@ -2183,6 +2165,8 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
     if result == ACTION_RESULT_BEGIN and not channeled and not Castbar.CastDurationFix[abilityId] then
         CombatInfo.StopCastBar()
     elseif result == ACTION_RESULT_EFFECT_GAINED and channeled then
+        CombatInfo.StopCastBar()
+    elseif result == ACTION_RESULT_EFFECT_FADED and channeled then
         CombatInfo.StopCastBar()
     end
 
@@ -2203,6 +2187,7 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
         end
     end
 
+    -- Special handling for werewolf transform and transform back
     if abilityId == 39033 or abilityId == 39477 then
         local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(32455)
         name, icon = GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)

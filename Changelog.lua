@@ -6,11 +6,14 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
-    "|cFFA500LuiExtended Version 6.4.6|r",
+    "|cFFA500LuiExtended Version 6.4.7|r",
     "",
-    "|cFFFF00General:|r",
-    "[*] Fixed keybindings for Armory and Deconstruction",
+    "|cFFFF00Slash Commands:|r",
+    "[*] Added /changerole command",
     "",
+    "|cFFFF00Combat Info:|r",
+    "[*] Added Arcanists Fatecarver and Remedy Cascade skills to Cast Bar",
+    "[*] Stop Cast Bar when you get interrupted",
 }
 
 -- Hide toggle called by the menu or xml button

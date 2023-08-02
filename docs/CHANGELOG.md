@@ -1,3 +1,14 @@
+### Version 6.4.7
+
+Slash Commands
+- Added /changerole command
+
+Combat Info
+- Added Arcanists Fatecarver and Remedy Cascade skills to Cast Bar
+- Stop Cast Bar when you get interrupted
+
+---
+
 ### Version 6.4.6
 
 General

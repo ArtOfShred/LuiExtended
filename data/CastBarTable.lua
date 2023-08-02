@@ -865,6 +865,14 @@ CastBarTable.IsCast = {
     [118673] = true, -- Pummeling Goliath Self Snare (Pummeling Goliath)
     [118287] = true, -- Ravenous Goliath Self Snare (Ravenous Goliath)
 
+    -- Arcanist
+    [193331] = true, -- Fatecarver (Arcanist)
+    [193397] = true, -- Exhausting Fatecarver (Arcanist)
+    [193398] = true, -- Pragmatic Fatecarver (Arcanist)
+    [198309] = true, -- Remedy Cascade (Arcanist)
+    [198330] = true, -- Cascading Fortune (Arcanist)
+    [198537] = true, -- Curative Surge (Arcanist)
+
     -- Two Handed
     [28279] = true, -- Uppercut (Two Handed)
     [38814] = true, -- Dizzying Swing (Two Handed)
@@ -1126,6 +1134,13 @@ CastBarTable.CastOverride = {
     [4197] = true, -- Recovering (NPC Duel)
     [47186] = true, -- CHT Portal Killer (The Weight of Three Crown)
     [34499] = true, -- Corruption Beam (The Blight of the Bosmer)
+
+    [193331] = true, -- Fatecarver (Arcanist)
+    [193397] = true, -- Exhausting Fatecarver (Arcanist)
+    [193398] = true, -- Pragmatic Fatecarver (Arcanist)
+    [198309] = true, -- Remedy Cascade (Arcanist)
+    [198330] = true, -- Cascading Fortune (Arcanist)
+    [198537] = true, -- Curative Surge (Arcanist)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
