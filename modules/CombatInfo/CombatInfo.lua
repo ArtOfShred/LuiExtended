@@ -23,147 +23,147 @@ local moduleName = LUIE.name .. "CombatInfo"
 
 local ACTION_RESULT_AREA_EFFECT = 669966
 
-CombatInfo.Enabled  = false
+CombatInfo.Enabled = false
 CombatInfo.Defaults = {
     blacklist = {},
-    GlobalShowGCD                    = false,
-    GlobalPotion                     = false,
-    GlobalFlash                      = true,
-    GlobalDesat                      = false,
-    GlobalLabelColor                 = false,
-    GlobalMethod                     = 3,
-    UltimateLabelEnabled             = true,
-    UltimatePctEnabled               = true,
-    UltimateHideFull                 = true,
-    UltimateGeneration               = true,
-    UltimateLabelPosition            = -20,
-    UltimateFontFace                 = "Univers 67",
-    UltimateFontStyle                = "outline",
-    UltimateFontSize                 = 18,
-    ShowTriggered                    = true,
-    ProcEnableSound                  = true,
-    ProcSoundName                    = "Death Recap Killing Blow",
-    ShowToggled                      = true,
-    ShowToggledUltimate              = true,
-    BarShowLabel                     = false, -- Temp Disabled
-    BarLabelPosition                 = -20,
-    BarFontFace                      = "Univers 67",
-    BarFontStyle                     = "outline",
-    BarFontSize                      = 18,
-    BarMillis                        = true,
-    BarMillisAboveTen                = true,
-    BarMillisThreshold               = 10,
-    BarShowBack                      = false,
-    BarDarkUnused                    = false,
-    BarDesaturateUnused              = false,
-    BarHideUnused                    = false,
-    PotionTimerShow                  = true,
-    PotionTimerLabelPosition         = 0,
-    PotionTimerFontFace              = "Univers 67",
-    PotionTimerFontStyle             = "outline",
-    PotionTimerFontSize              = 18,
-    PotionTimerColor                 = true,
-    PotionTimerMillis                = true,
-    CastBarEnable                    = false,
-    CastBarSizeW                     = 300,
-    CastBarSizeH                     = 22,
-    CastBarIconSize                  = 32,
-    CastBarTexture                   = "Plain",
-    CastBarLabel                     = true,
-    CastBarTimer                     = true,
-    CastBarFontFace                  = "Univers 67",
-    CastBarFontStyle                 = "soft-shadow-thick",
-    CastBarFontSize                  = 16,
-    CastBarGradientC1                = { 0, 47/255, 130/255 },
-    CastBarGradientC2                = { 82/255, 215/255, 1 },
+    GlobalShowGCD = false,
+    GlobalPotion = false,
+    GlobalFlash = true,
+    GlobalDesat = false,
+    GlobalLabelColor = false,
+    GlobalMethod = 3,
+    UltimateLabelEnabled = true,
+    UltimatePctEnabled = true,
+    UltimateHideFull = true,
+    UltimateGeneration = true,
+    UltimateLabelPosition = -20,
+    UltimateFontFace = "Univers 67",
+    UltimateFontStyle = "outline",
+    UltimateFontSize = 18,
+    ShowTriggered = true,
+    ProcEnableSound = true,
+    ProcSoundName = "Death Recap Killing Blow",
+    ShowToggled = true,
+    ShowToggledUltimate = true,
+    BarShowLabel = false, -- Temp Disabled
+    BarLabelPosition = -20,
+    BarFontFace = "Univers 67",
+    BarFontStyle = "outline",
+    BarFontSize = 18,
+    BarMillis = true,
+    BarMillisAboveTen = true,
+    BarMillisThreshold = 10,
+    BarShowBack = false,
+    BarDarkUnused = false,
+    BarDesaturateUnused = false,
+    BarHideUnused = false,
+    PotionTimerShow = true,
+    PotionTimerLabelPosition = 0,
+    PotionTimerFontFace = "Univers 67",
+    PotionTimerFontStyle = "outline",
+    PotionTimerFontSize = 18,
+    PotionTimerColor = true,
+    PotionTimerMillis = true,
+    CastBarEnable = false,
+    CastBarSizeW = 300,
+    CastBarSizeH = 22,
+    CastBarIconSize = 32,
+    CastBarTexture = "Plain",
+    CastBarLabel = true,
+    CastBarTimer = true,
+    CastBarFontFace = "Univers 67",
+    CastBarFontStyle = "soft-shadow-thick",
+    CastBarFontSize = 16,
+    CastBarGradientC1 = { 0, 47 / 255, 130 / 255 },
+    CastBarGradientC2 = { 82 / 255, 215 / 255, 1 },
     alerts = {
         toggles = {
-            alertEnable                 = true,
-            alertFontFace               = "Univers 67",
-            alertFontStyle              = "soft-shadow-thick",
-            alertFontSize               = 32,
-            alertTimer                  = true,
-            showMitigation              = true,
-            mitigationAbilityName       = "%t",
-            mitigationEnemyName         = "%n -",
-            modifierEnable              = true,
-            mitigationModifierOnYou     = GetString(SI_LUIE_CI_MITIGATION_MODIFIER_ON_YOU),
+            alertEnable = true,
+            alertFontFace = "Univers 67",
+            alertFontStyle = "soft-shadow-thick",
+            alertFontSize = 32,
+            alertTimer = true,
+            showMitigation = true,
+            mitigationAbilityName = "%t",
+            mitigationEnemyName = "%n -",
+            modifierEnable = true,
+            mitigationModifierOnYou = GetString(SI_LUIE_CI_MITIGATION_MODIFIER_ON_YOU),
             mitigationModifierSpreadOut = GetString(SI_LUIE_CI_MITIGATION_MODIFIER_SPREAD_OUT),
-            showCrowdControlBorder      = true,
-            ccLabelColor                = false,
-            useDefaultIcon              = false,
-            mitigationPowerPrefix2      = "%t",
-            mitigationPowerPrefixN2     = GetString(SI_LUIE_CI_MITIGATION_FORMAT_POWER_N),
-            mitigationDestroyPrefix2    = "%t",
-            mitigationDestroyPrefixN2   = "%t",
-            mitigationSummonPrefix2     = "%t",
-            mitigationSummonPrefixN2    = "%t",
-            mitigationAura              = false,
-            mitigationRank3             = true,
-            mitigationRank2             = true,
-            mitigationRank1             = true,
-            mitigationDungeon           = true,
-            showAlertMitigate           = true,
-            showAlertUnmit              = true,
-            showAlertPower              = true,
-            showAlertDestroy            = true,
-            showAlertSummon             = true,
-            alertOptions                = 1,
+            showCrowdControlBorder = true,
+            ccLabelColor = false,
+            useDefaultIcon = false,
+            mitigationPowerPrefix2 = "%t",
+            mitigationPowerPrefixN2 = GetString(SI_LUIE_CI_MITIGATION_FORMAT_POWER_N),
+            mitigationDestroyPrefix2 = "%t",
+            mitigationDestroyPrefixN2 = "%t",
+            mitigationSummonPrefix2 = "%t",
+            mitigationSummonPrefixN2 = "%t",
+            mitigationAura = false,
+            mitigationRank3 = true,
+            mitigationRank2 = true,
+            mitigationRank1 = true,
+            mitigationDungeon = true,
+            showAlertMitigate = true,
+            showAlertUnmit = true,
+            showAlertPower = true,
+            showAlertDestroy = true,
+            showAlertSummon = true,
+            alertOptions = 1,
 
-            soundVolume                 = 2,
-            sound_stEnable              = false,
-            sound_st_ccEnable           = true,
-            sound_aoeEnable             = false,
-            sound_aoe_ccEnable          = true,
-            sound_powerattackEnable     = true,
-            sound_radialEnable          = true,
-            sound_travelEnable          = false,
-            sound_travel_ccEnable       = true,
-            sound_groundEnable          = false,
-            sound_meteorEnable          = true,
-            sound_unmit_stEnable        = true,
-            sound_unmit_aoeEnable       = true,
-            sound_power_damageEnable    = true,
-            sound_power_buffEnable      = true,
-            sound_summonEnable          = false,
-            sound_destroyEnable         = true,
-            sound_healEnable            = false,
+            soundVolume = 2,
+            sound_stEnable = false,
+            sound_st_ccEnable = true,
+            sound_aoeEnable = false,
+            sound_aoe_ccEnable = true,
+            sound_powerattackEnable = true,
+            sound_radialEnable = true,
+            sound_travelEnable = false,
+            sound_travel_ccEnable = true,
+            sound_groundEnable = false,
+            sound_meteorEnable = true,
+            sound_unmit_stEnable = true,
+            sound_unmit_aoeEnable = true,
+            sound_power_damageEnable = true,
+            sound_power_buffEnable = true,
+            sound_summonEnable = false,
+            sound_destroyEnable = true,
+            sound_healEnable = false,
 
         },
         colors = {
-            alertShared                 = { 1, 1, 1, 1 },
-            alertTimer                  = { 1, 1, 1, 1 },
-            alertBlockA                 = { 1, 0, 0, 1 },
-            alertInterruptC             = { 0, 127/255, 1, 1 },
-            alertUnmit                  = { 1, 0, 0, 1 },
-            alertDodgeA                 = { 1, 1, 50/255, 1 },
-            alertAvoidB                 = { 1, 127/255, 0, 1 },
-            alertPower                  = { 1, 1, 1, 1 },
-            alertDestroy                = { 1, 1, 1, 1 },
-            alertSummon                 = { 1, 1, 1, 1 },
-            stunColor                   = { 1, 0, 0, 1 },
-            knockbackColor              = { 1, 0, 0, 1 },
-            levitateColor               = { 1, 0, 0, 1 },
-            disorientColor              = { 0, 127/255, 1, 1 },
-            fearColor                   = { 143/255, 9/255, 236/255, 1 },
-            charmColor                  = { 64/255, 255/255, 32/255, 1 },
-            silenceColor                = { 0, 1, 1, 1 },
-            staggerColor                = { 1, 127/255, 0, 1 },
-            unbreakableColor            = { 224/255, 224/255, 1, 1 },
-            snareColor                  = { 1, 242/255, 32/255, 1 },
-            rootColor                   = { 1, 165/255, 0, 1 },
+            alertShared = { 1, 1, 1, 1 },
+            alertTimer = { 1, 1, 1, 1 },
+            alertBlockA = { 1, 0, 0, 1 },
+            alertInterruptC = { 0, 127 / 255, 1, 1 },
+            alertUnmit = { 1, 0, 0, 1 },
+            alertDodgeA = { 1, 1, 50 / 255, 1 },
+            alertAvoidB = { 1, 127 / 255, 0, 1 },
+            alertPower = { 1, 1, 1, 1 },
+            alertDestroy = { 1, 1, 1, 1 },
+            alertSummon = { 1, 1, 1, 1 },
+            stunColor = { 1, 0, 0, 1 },
+            knockbackColor = { 1, 0, 0, 1 },
+            levitateColor = { 1, 0, 0, 1 },
+            disorientColor = { 0, 127 / 255, 1, 1 },
+            fearColor = { 143 / 255, 9 / 255, 236 / 255, 1 },
+            charmColor = { 64 / 255, 255 / 255, 32 / 255, 1 },
+            silenceColor = { 0, 1, 1, 1 },
+            staggerColor = { 1, 127 / 255, 0, 1 },
+            unbreakableColor = { 224 / 255, 224 / 255, 1, 1 },
+            snareColor = { 1, 242 / 255, 32 / 255, 1 },
+            rootColor = { 1, 165 / 255, 0, 1 },
         },
         formats = {
-            alertBlock                  = GetString(SI_LUIE_CI_BLOCK_DEFAULT),
-            alertBlockStagger           = GetString(SI_LUIE_CI_BLOCKSTAGGER_DEFAULT),
-            alertInterrupt              = GetString(SI_LUIE_CI_INTERRUPT_DEFAULT),
-            alertShouldUseCC            = GetString(SI_LUIE_CI_SHOULDUSECC_DEFAULT),
-            alertUnmit                  = GetString(SI_LUIE_CI_UNMIT_DEFAULT),
-            alertDodge                  = GetString(SI_LUIE_CI_DODGE_DEFAULT),
-            alertAvoid                  = GetString(SI_LUIE_CI_AVOID_DEFAULT),
-            alertPower                  = GetString(SI_LUIE_CI_POWER_DEFAULT),
-            alertDestroy                = GetString(SI_LUIE_CI_DESTROY_DEFAULT),
-            alertSummon                 = GetString(SI_LUIE_CI_SUMMON_DEFAULT),
+            alertBlock = GetString(SI_LUIE_CI_BLOCK_DEFAULT),
+            alertBlockStagger = GetString(SI_LUIE_CI_BLOCKSTAGGER_DEFAULT),
+            alertInterrupt = GetString(SI_LUIE_CI_INTERRUPT_DEFAULT),
+            alertShouldUseCC = GetString(SI_LUIE_CI_SHOULDUSECC_DEFAULT),
+            alertUnmit = GetString(SI_LUIE_CI_UNMIT_DEFAULT),
+            alertDodge = GetString(SI_LUIE_CI_DODGE_DEFAULT),
+            alertAvoid = GetString(SI_LUIE_CI_AVOID_DEFAULT),
+            alertPower = GetString(SI_LUIE_CI_POWER_DEFAULT),
+            alertDestroy = GetString(SI_LUIE_CI_DESTROY_DEFAULT),
+            alertSummon = GetString(SI_LUIE_CI_SUMMON_DEFAULT),
         },
         sounds = {
             --[[ Old Sounds here for reference
@@ -181,84 +181,84 @@ CombatInfo.Defaults = {
             soundSummon                 = "Duel Invite Received",
             soundDestroy                = "Duel Invite Received",
             ]]--
-            sound_st                    = "Champion Respec Accept",
-            sound_st_cc                 = "Champion Points Committed",
-            sound_aoe                   = "Champion Respec Accept",
-            sound_aoe_cc                = "Champion Points Committed",
-            sound_powerattack           = "Trial - Scored Added Normal",
-            sound_radial                = "Duel Accepted",
-            sound_travel                = "Champion Respec Accept",
-            sound_travel_cc             = "Console Game Enter",
-            sound_ground                = "Champion Respec Accept",
-            sound_meteor                = "LFG Find Replacement",
-            sound_unmit_st              = "Duel Start",
-            sound_unmit_aoe             = "Duel Start",
-            sound_power_damage          = "Book Collection Completed",
-            sound_power_buff            = "Book Collection Completed",
-            sound_summon                = "Duel Invite Received",
-            sound_destroy               = "Duel Invite Received",
-            sound_heal                  = "Console Game Enter",
+            sound_st = "Champion Respec Accept",
+            sound_st_cc = "Champion Points Committed",
+            sound_aoe = "Champion Respec Accept",
+            sound_aoe_cc = "Champion Points Committed",
+            sound_powerattack = "Trial - Scored Added Normal",
+            sound_radial = "Duel Accepted",
+            sound_travel = "Champion Respec Accept",
+            sound_travel_cc = "Console Game Enter",
+            sound_ground = "Champion Respec Accept",
+            sound_meteor = "LFG Find Replacement",
+            sound_unmit_st = "Duel Start",
+            sound_unmit_aoe = "Duel Start",
+            sound_power_damage = "Book Collection Completed",
+            sound_power_buff = "Book Collection Completed",
+            sound_summon = "Duel Invite Received",
+            sound_destroy = "Duel Invite Received",
+            sound_heal = "Console Game Enter",
         },
     },
     cct = {
-        enabled                      = false,
-        enabledOnlyInCyro            = false,
-        unlock                       = false,
-        controlScale                 = 1.0,
-        useDefaultIcon               = false,
-        defaultIconOptions           = 1,
-        playAnimation                = true,
-        playSound                    = true,
-        playSoundOption              = "Death Recap Killing Blow",
-        useAbilityName               = true,
-        showStaggered                = true,
-        showImmune                   = true,
-        showAoe                      = true,
-        aoePlayerUltimate            = true,
-        aoePlayerNormal              = true,
-        aoePlayerSet                 = true,
-        aoeTraps                     = true,
-        aoeNPCBoss                   = true,
-        aoeNPCElite                  = true,
-        aoeNPCNormal                 = true,
+        enabled = false,
+        enabledOnlyInCyro = false,
+        unlock = false,
+        controlScale = 1.0,
+        useDefaultIcon = false,
+        defaultIconOptions = 1,
+        playAnimation = true,
+        playSound = true,
+        playSoundOption = "Death Recap Killing Blow",
+        useAbilityName = true,
+        showStaggered = true,
+        showImmune = true,
+        showAoe = true,
+        aoePlayerUltimate = true,
+        aoePlayerNormal = true,
+        aoePlayerSet = true,
+        aoeTraps = true,
+        aoeNPCBoss = true,
+        aoeNPCElite = true,
+        aoeNPCNormal = true,
 
         aoePlayerUltimateSoundToggle = true,
-        aoePlayerNormalSoundToggle   = true,
-        aoePlayerSetSoundToggle      = true,
-        aoeTrapsSoundToggle          = true,
-        aoeNPCBossSoundToggle        = true,
-        aoeNPCEliteSoundToggle       = true,
-        aoeNPCNormalSoundToggle      = true,
+        aoePlayerNormalSoundToggle = true,
+        aoePlayerSetSoundToggle = true,
+        aoeTrapsSoundToggle = true,
+        aoeNPCBossSoundToggle = true,
+        aoeNPCEliteSoundToggle = true,
+        aoeNPCNormalSoundToggle = true,
 
-        aoePlayerUltimateSound       = "Death Recap Killing Blow",
-        aoePlayerNormalSound         = "Death Recap Killing Blow",
-        aoePlayerSetSound            = "Death Recap Killing Blow",
-        aoeTrapsSound                = "Death Recap Killing Blow",
-        aoeNPCBossSound              = "Death Recap Killing Blow",
-        aoeNPCEliteSound             = "Death Recap Killing Blow",
-        aoeNPCNormalSound            = "Death Recap Killing Blow",
+        aoePlayerUltimateSound = "Death Recap Killing Blow",
+        aoePlayerNormalSound = "Death Recap Killing Blow",
+        aoePlayerSetSound = "Death Recap Killing Blow",
+        aoeTrapsSound = "Death Recap Killing Blow",
+        aoeNPCBossSound = "Death Recap Killing Blow",
+        aoeNPCEliteSound = "Death Recap Killing Blow",
+        aoeNPCNormalSound = "Death Recap Killing Blow",
 
-        showGCD                      = false,
-        showImmuneOnlyInCyro         = true,
-        immuneDisplayTime            = 750,
-        showOptions                  = "all",
-        offsetX                      = 0,
-        offsetY                      = 0,
-        colors                       = {
-            [ACTION_RESULT_STUNNED]        = { 1, 0, 0, 1 },
-            [ACTION_RESULT_KNOCKBACK]      = { 1, 0, 0, 1 },
-            [ACTION_RESULT_LEVITATED]      = { 1, 0, 0, 1 },
-            [ACTION_RESULT_DISORIENTED]    = { 0, 127/255, 1, 1 },
-            [ACTION_RESULT_FEARED]         = { 143/255, 9/255, 236/255, 1 },
-            [ACTION_RESULT_CHARMED]        = { 64/255, 255/255, 32/255, 1 },
-            [ACTION_RESULT_SILENCED]       = { 0, 1, 1, 1 },
-            [ACTION_RESULT_STAGGERED]      = { 1, 127/255, 0, 1 },
-            [ACTION_RESULT_IMMUNE]         = { 1, 1, 1, 1},
-            [ACTION_RESULT_DODGED]         = { 1, 1, 1, 1},
-            [ACTION_RESULT_BLOCKED]        = { 1, 1, 1, 1},
-            [ACTION_RESULT_BLOCKED_DAMAGE] = { 1, 1, 1, 1},
-            [ACTION_RESULT_AREA_EFFECT]    = { 1, 242/255, 32/255, 1 },
-            unbreakable                    = { 224/255, 224/255, 1, 1 },
+        showGCD = false,
+        showImmuneOnlyInCyro = true,
+        immuneDisplayTime = 750,
+        showOptions = "all",
+        offsetX = 0,
+        offsetY = 0,
+        colors = {
+            [ACTION_RESULT_STUNNED] = { 1, 0, 0, 1 },
+            [ACTION_RESULT_KNOCKBACK] = { 1, 0, 0, 1 },
+            [ACTION_RESULT_LEVITATED] = { 1, 0, 0, 1 },
+            [ACTION_RESULT_DISORIENTED] = { 0, 127 / 255, 1, 1 },
+            [ACTION_RESULT_FEARED] = { 143 / 255, 9 / 255, 236 / 255, 1 },
+            [ACTION_RESULT_CHARMED] = { 64 / 255, 255 / 255, 32 / 255, 1 },
+            [ACTION_RESULT_SILENCED] = { 0, 1, 1, 1 },
+            [ACTION_RESULT_STAGGERED] = { 1, 127 / 255, 0, 1 },
+            [ACTION_RESULT_IMMUNE] = { 1, 1, 1, 1 },
+            [ACTION_RESULT_DODGED] = { 1, 1, 1, 1 },
+            [ACTION_RESULT_BLOCKED] = { 1, 1, 1, 1 },
+            [ACTION_RESULT_BLOCKED_DAMAGE] = { 1, 1, 1, 1 },
+            [ACTION_RESULT_AREA_EFFECT] = { 1, 242 / 255, 32 / 255, 1 },
+            unbreakable = { 224 / 255, 224 / 255, 1, 1 },
         },
     },
 }
@@ -268,37 +268,37 @@ CombatInfo.AlertColors = {}
 CombatInfo.CastBarUnlocked = false
 CombatInfo.AlertFrameUnlocked = false
 
-local uiTlw                   = {} -- GUI
-local castbar                 = {} -- castbar
-local g_casting               = false -- Toggled when casting - prevents additional events from creating a cast bar until finished
-local g_ultimateCost          = 0 -- Cost of ultimate Ability in Slot
-local g_ultimateCurrent       = 0 -- Current ultimate value
-local g_ultimateSlot          = ACTION_BAR_ULTIMATE_SLOT_INDEX + 1 -- Ultimate slot number
-local g_uiProcAnimation       = {} -- Animation for bar slots
-local g_uiCustomToggle        = {} -- Toggle slots for bar Slots
-local g_triggeredSlotsFront   = {} -- Triggered bar highlight slots
-local g_triggeredSlotsBack    = {} -- Triggered bar highlight slots
-local g_triggeredSlotsRemain  = {} -- Table of remaining durations on proc abilities
-local g_toggledSlotsBack      = {} -- Toggled bar highlight slots
-local g_toggledSlotsFront     = {} -- Toggled bar highlight slots
-local g_toggledSlotsRemain    = {} -- Table of remaining durations on active abilities
-local g_toggledSlotsStack     = {} -- Table of stacks for active abilities
-local g_toggledSlotsPlayer    = {} -- Table of abilities that target the player (bar highlight doesn't fade on reticleover change)
-local g_potionUsed            = false -- Toggled on when a potion is used to prevent OnSlotsFullUpdate from updating timers.
-local g_barOverrideCI         = {} -- Table for storing abilityId's from Effects.BarHighlightOverride that should show as an aura
-local g_barFakeAura           = {} -- Table for storing abilityId's that only display a fakeaura
-local g_barDurationOverride   = {} -- Table for storing abilitiyId's that ignore ending event
-local g_barNoRemove           = {} -- Table of abilities we don't remove from bar highlight
+local uiTlw = {} -- GUI
+local castbar = {} -- castbar
+local g_casting = false -- Toggled when casting - prevents additional events from creating a cast bar until finished
+local g_ultimateCost = 0 -- Cost of ultimate Ability in Slot
+local g_ultimateCurrent = 0 -- Current ultimate value
+local g_ultimateSlot = ACTION_BAR_ULTIMATE_SLOT_INDEX + 1 -- Ultimate slot number
+local g_uiProcAnimation = {} -- Animation for bar slots
+local g_uiCustomToggle = {} -- Toggle slots for bar Slots
+local g_triggeredSlotsFront = {} -- Triggered bar highlight slots
+local g_triggeredSlotsBack = {} -- Triggered bar highlight slots
+local g_triggeredSlotsRemain = {} -- Table of remaining durations on proc abilities
+local g_toggledSlotsBack = {} -- Toggled bar highlight slots
+local g_toggledSlotsFront = {} -- Toggled bar highlight slots
+local g_toggledSlotsRemain = {} -- Table of remaining durations on active abilities
+local g_toggledSlotsStack = {} -- Table of stacks for active abilities
+local g_toggledSlotsPlayer = {} -- Table of abilities that target the player (bar highlight doesn't fade on reticleover change)
+local g_potionUsed = false -- Toggled on when a potion is used to prevent OnSlotsFullUpdate from updating timers.
+local g_barOverrideCI = {} -- Table for storing abilityId's from Effects.BarHighlightOverride that should show as an aura
+local g_barFakeAura = {} -- Table for storing abilityId's that only display a fakeaura
+local g_barDurationOverride = {} -- Table for storing abilitiyId's that ignore ending event
+local g_barNoRemove = {} -- Table of abilities we don't remove from bar highlight
 local g_protectAbilityRemoval = {} -- AbilityId's set to a timestamp here to prevent removal of bar highlight when refreshing ground auras from causing the highlight to fade.
-local g_mineStacks            = {} -- Individual AbilityId ground mine stack information
-local g_mineNoTurnOff         = {} -- When this variable is true for an abilityId - don't remove the bar highlight for a mine (We we have reticleover target and the mine effect applies on the enemy)
+local g_mineStacks = {} -- Individual AbilityId ground mine stack information
+local g_mineNoTurnOff = {} -- When this variable is true for an abilityId - don't remove the bar highlight for a mine (We we have reticleover target and the mine effect applies on the enemy)
 local g_barFont -- Font for Ability Highlight Label
 local g_potionFont -- Font for Potion Timer Label
 local g_ultimateFont -- Font for Ultimate Percentage Label
 local g_castbarFont -- Font for Castbar Label & Timer
 local g_ProcSound -- Proc Sound
-local g_boundArmamentsPlayed  = false -- Specific variable to lockout Bound Armaments from playing a proc sound at 5 stacks to only once per 5 seconds.
-local g_disableProcSound      = {} -- When we play a proc sound from a bar ability changing (like power lash) we put a 3 sec ICD on it so it doesn't spam when mousing on/off a target, etc
+local g_boundArmamentsPlayed = false -- Specific variable to lockout Bound Armaments from playing a proc sound at 5 stacks to only once per 5 seconds.
+local g_disableProcSound = {} -- When we play a proc sound from a bar ability changing (like power lash) we put a 3 sec ICD on it so it doesn't spam when mousing on/off a target, etc
 local g_hotbarCategory  -- Set on initialization and when we swap weapons to determine the current hotbar category
 local g_backbarButtons = {} -- Table to hold backbar buttons
 local g_activeWeaponSwapInProgress = false -- Toggled on when weapon swapping, TODO: maybe not needed
@@ -310,21 +310,21 @@ local BACKBAR_INDEX_END = 7 -- Separate index for backbar as long as we're not u
 local BACKBAR_INDEX_OFFSET = 50
 
 -- Quickslot
-local uiQuickSlot   = {
-    colour  = {0.941, 0.565, 0.251},
+local uiQuickSlot = {
+    colour = { 0.941, 0.565, 0.251 },
     timeColours = {
-        [1] = {remain = 15000, colour = {0.878, 0.941, 0.251}},
-        [2] = {remain =  5000, colour = {0.251, 0.941, 0.125}},
+        [1] = { remain = 15000, colour = { 0.878, 0.941, 0.251 } },
+        [2] = { remain = 5000, colour = { 0.251, 0.941, 0.125 } },
     },
 }
 
 -- Ultimate slot
 local uiUltimate = {
-    colour  = {0.941, 0.973, .957},
+    colour = { 0.941, 0.973, .957 },
     pctColours = {
-        [1] = {pct =100, colour = {0.878, 0.941, 0.251}},
-        [2] = {pct = 80, colour = {0.941, 0.565, 0.251}},
-        [3] = {pct = 50, colour = {0.941, 0.251, 0.125}},
+        [1] = { pct = 100, colour = { 0.878, 0.941, 0.251 } },
+        [2] = { pct = 80, colour = { 0.941, 0.565, 0.251 } },
+        [3] = { pct = 50, colour = { 0.941, 0.251, 0.125 } },
     },
     FadeTime = 0,
     NotFull = false,
@@ -338,17 +338,14 @@ local CooldownMethod = {
 }
 
 -- Constants from actionbar.lua with only the information we need
-local GAMEPAD_CONSTANTS =
-{
+local GAMEPAD_CONSTANTS = {
     abilitySlotOffsetX = 10,
     ultimateSlotOffsetX = 65,
 }
-local KEYBOARD_CONSTANTS =
-{
+local KEYBOARD_CONSTANTS = {
     abilitySlotOffsetX = 2,
     ultimateSlotOffsetX = 62,
 }
-
 
 local isStackCounter = {
     [61905] = true, -- Grim Focus
@@ -398,7 +395,7 @@ local function SetupSwapAnimation(button)
 end
 
 local function FormatDurationSeconds(remain)
-    return string.format((CombatInfo.SV.BarMillis and ((remain < CombatInfo.SV.BarMillisThreshold * 1000) or CombatInfo.SV.BarMillisAboveTen)) and "%.1f" or "%.1d", remain/1000)
+    return string.format((CombatInfo.SV.BarMillis and ((remain < CombatInfo.SV.BarMillisThreshold * 1000) or CombatInfo.SV.BarMillisAboveTen)) and "%.1f" or "%.1d", remain / 1000)
 end
 
 -- Module initialization
@@ -425,7 +422,7 @@ function CombatInfo.Initialize(enabled)
     CombatInfo.ApplyFont()
     CombatInfo.ApplyProcSound()
 
-    uiQuickSlot.label = UI.Label(QuickslotButton, {CENTER,CENTER}, nil, nil, g_potionFont, nil, true)
+    uiQuickSlot.label = UI.Label(QuickslotButton, { CENTER, CENTER }, nil, nil, g_potionFont, nil, true)
     uiQuickSlot.label:SetFont(g_potionFont)
     if CombatInfo.SV.PotionTimerColor then
         uiQuickSlot.label:SetColor(unpack(uiQuickSlot.colour))
@@ -437,7 +434,7 @@ function CombatInfo.Initialize(enabled)
     CombatInfo.ResetPotionTimerLabel() -- Set the label position
 
     -- Create Ultimate overlay labels
-    uiUltimate.LabelVal = UI.Label(ActionButton8, {BOTTOM,TOP,0,-3}, nil, {1,2}, "$(BOLD_FONT)|16|soft-shadow-thick", nil, true)
+    uiUltimate.LabelVal = UI.Label(ActionButton8, { BOTTOM, TOP, 0, -3 }, nil, { 1, 2 }, "$(BOLD_FONT)|16|soft-shadow-thick", nil, true)
     uiUltimate.LabelPct = UI.Label(ActionButton8, nil, nil, nil, g_ultimateFont, nil, true)
     local actionButton = ZO_ActionBar_GetButton(8)
     uiUltimate.LabelPct:SetAnchor(TOPLEFT, actionButton.slot)
@@ -445,7 +442,7 @@ function CombatInfo.Initialize(enabled)
 
     uiUltimate.LabelPct:SetColor(unpack(uiUltimate.colour))
     -- And buff texture
-    uiUltimate.Texture = UI.Texture(ActionButton8, {CENTER,CENTER}, {160,160}, "/esoui/art/crafting/white_burst.dds", DL_BACKGROUND, true)
+    uiUltimate.Texture = UI.Texture(ActionButton8, { CENTER, CENTER }, { 160, 160 }, "/esoui/art/crafting/white_burst.dds", DL_BACKGROUND, true)
 
     -- Create a top level window for backbar butons
     local tlw = windowManager:CreateControl("LUIE_Backbar", ACTION_BAR, CT_CONTROL)
@@ -489,32 +486,32 @@ function CombatInfo.Initialize(enabled)
     end
     if (LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVarsCI < 2) then
         -- Set ability alert default colors
-        CombatInfo.SV.alerts.colors.stunColor                   = CombatInfo.Defaults.alerts.colors.stunColor
-        CombatInfo.SV.alerts.colors.knockbackColor              = CombatInfo.Defaults.alerts.colors.knockbackColor
-        CombatInfo.SV.alerts.colors.levitateColor               = CombatInfo.Defaults.alerts.colors.levitateColor
-        CombatInfo.SV.alerts.colors.disorientColor              = CombatInfo.Defaults.alerts.colors.disorientColor
-        CombatInfo.SV.alerts.colors.fearColor                   = CombatInfo.Defaults.alerts.colors.fearColor
-        CombatInfo.SV.alerts.colors.charmColor                  = CombatInfo.Defaults.alerts.colors.charmColor
-        CombatInfo.SV.alerts.colors.silenceColor               = CombatInfo.Defaults.alerts.colors.silenceColor
-        CombatInfo.SV.alerts.colors.staggerColor                = CombatInfo.Defaults.alerts.colors.staggerColor
-        CombatInfo.SV.alerts.colors.unbreakableColor            = CombatInfo.Defaults.alerts.colors.unbreakableColor
-        CombatInfo.SV.alerts.colors.snareColor                  = CombatInfo.Defaults.alerts.colors.snareColor
-        CombatInfo.SV.alerts.colors.rootColor                   = CombatInfo.Defaults.alerts.colors.rootColor
+        CombatInfo.SV.alerts.colors.stunColor = CombatInfo.Defaults.alerts.colors.stunColor
+        CombatInfo.SV.alerts.colors.knockbackColor = CombatInfo.Defaults.alerts.colors.knockbackColor
+        CombatInfo.SV.alerts.colors.levitateColor = CombatInfo.Defaults.alerts.colors.levitateColor
+        CombatInfo.SV.alerts.colors.disorientColor = CombatInfo.Defaults.alerts.colors.disorientColor
+        CombatInfo.SV.alerts.colors.fearColor = CombatInfo.Defaults.alerts.colors.fearColor
+        CombatInfo.SV.alerts.colors.charmColor = CombatInfo.Defaults.alerts.colors.charmColor
+        CombatInfo.SV.alerts.colors.silenceColor = CombatInfo.Defaults.alerts.colors.silenceColor
+        CombatInfo.SV.alerts.colors.staggerColor = CombatInfo.Defaults.alerts.colors.staggerColor
+        CombatInfo.SV.alerts.colors.unbreakableColor = CombatInfo.Defaults.alerts.colors.unbreakableColor
+        CombatInfo.SV.alerts.colors.snareColor = CombatInfo.Defaults.alerts.colors.snareColor
+        CombatInfo.SV.alerts.colors.rootColor = CombatInfo.Defaults.alerts.colors.rootColor
         -- Set CCT default colors
-        CombatInfo.SV.cct.colors[ACTION_RESULT_STUNNED]        = CombatInfo.Defaults.cct.colors[ACTION_RESULT_STUNNED]
-        CombatInfo.SV.cct.colors[ACTION_RESULT_KNOCKBACK]      = CombatInfo.Defaults.cct.colors[ACTION_RESULT_KNOCKBACK]
-        CombatInfo.SV.cct.colors[ACTION_RESULT_LEVITATED]      = CombatInfo.Defaults.cct.colors[ACTION_RESULT_LEVITATED]
-        CombatInfo.SV.cct.colors[ACTION_RESULT_DISORIENTED]    = CombatInfo.Defaults.cct.colors[ACTION_RESULT_DISORIENTED]
-        CombatInfo.SV.cct.colors[ACTION_RESULT_FEARED]         = CombatInfo.Defaults.cct.colors[ACTION_RESULT_FEARED]
-        CombatInfo.SV.cct.colors[ACTION_RESULT_CHARMED]        = CombatInfo.Defaults.cct.colors[ACTION_RESULT_CHARMED]
-        CombatInfo.SV.cct.colors[ACTION_RESULT_SILENCED]       = CombatInfo.Defaults.cct.colors[ACTION_RESULT_SILENCED]
-        CombatInfo.SV.cct.colors[ACTION_RESULT_STAGGERED]      = CombatInfo.Defaults.cct.colors[ACTION_RESULT_STAGGERED]
-        CombatInfo.SV.cct.colors[ACTION_RESULT_IMMUNE]         = CombatInfo.Defaults.cct.colors[ACTION_RESULT_IMMUNE]
-        CombatInfo.SV.cct.colors[ACTION_RESULT_DODGED]         = CombatInfo.Defaults.cct.colors[ACTION_RESULT_DODGED]
-        CombatInfo.SV.cct.colors[ACTION_RESULT_BLOCKED]        = CombatInfo.Defaults.cct.colors[ACTION_RESULT_BLOCKED]
+        CombatInfo.SV.cct.colors[ACTION_RESULT_STUNNED] = CombatInfo.Defaults.cct.colors[ACTION_RESULT_STUNNED]
+        CombatInfo.SV.cct.colors[ACTION_RESULT_KNOCKBACK] = CombatInfo.Defaults.cct.colors[ACTION_RESULT_KNOCKBACK]
+        CombatInfo.SV.cct.colors[ACTION_RESULT_LEVITATED] = CombatInfo.Defaults.cct.colors[ACTION_RESULT_LEVITATED]
+        CombatInfo.SV.cct.colors[ACTION_RESULT_DISORIENTED] = CombatInfo.Defaults.cct.colors[ACTION_RESULT_DISORIENTED]
+        CombatInfo.SV.cct.colors[ACTION_RESULT_FEARED] = CombatInfo.Defaults.cct.colors[ACTION_RESULT_FEARED]
+        CombatInfo.SV.cct.colors[ACTION_RESULT_CHARMED] = CombatInfo.Defaults.cct.colors[ACTION_RESULT_CHARMED]
+        CombatInfo.SV.cct.colors[ACTION_RESULT_SILENCED] = CombatInfo.Defaults.cct.colors[ACTION_RESULT_SILENCED]
+        CombatInfo.SV.cct.colors[ACTION_RESULT_STAGGERED] = CombatInfo.Defaults.cct.colors[ACTION_RESULT_STAGGERED]
+        CombatInfo.SV.cct.colors[ACTION_RESULT_IMMUNE] = CombatInfo.Defaults.cct.colors[ACTION_RESULT_IMMUNE]
+        CombatInfo.SV.cct.colors[ACTION_RESULT_DODGED] = CombatInfo.Defaults.cct.colors[ACTION_RESULT_DODGED]
+        CombatInfo.SV.cct.colors[ACTION_RESULT_BLOCKED] = CombatInfo.Defaults.cct.colors[ACTION_RESULT_BLOCKED]
         CombatInfo.SV.cct.colors[ACTION_RESULT_BLOCKED_DAMAGE] = CombatInfo.Defaults.cct.colors[ACTION_RESULT_BLOCKED_DAMAGE]
-        CombatInfo.SV.cct.colors[ACTION_RESULT_AREA_EFFECT]    = CombatInfo.Defaults.cct.colors[ACTION_RESULT_AREA_EFFECT]
-        CombatInfo.SV.cct.colors.unbreakable                   = CombatInfo.Defaults.cct.colors.unbreakable
+        CombatInfo.SV.cct.colors[ACTION_RESULT_AREA_EFFECT] = CombatInfo.Defaults.cct.colors[ACTION_RESULT_AREA_EFFECT]
+        CombatInfo.SV.cct.colors.unbreakable = CombatInfo.Defaults.cct.colors.unbreakable
     end
     -- Increment so this doesn't occur again.
     LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVarsCI = 2
@@ -581,7 +578,7 @@ function CombatInfo.HookGCD()
             usable = true
         elseif (isKeyboardUltimateSlot and self.costFailureOnly and not isShowingCooldown) then
             usable = true
-        -- Fix to grey out potions
+            -- Fix to grey out potions
         elseif IsSlotItemConsumable(slotnum, hotbarCategory) and duration <= 1000 and not self.useFailure then
             usable = true
         end
@@ -641,7 +638,7 @@ function CombatInfo.HookGCD()
                         self.cooldownCompleteAnim:SetHidden(false)
                         self.cooldown:SetHidden(false)
 
-                        anim:SetImageData(16,1)
+                        anim:SetImageData(16, 1)
                         anim:SetFramerate(30)
                         anim:GetTimeline():PlayFromStart()
 
@@ -693,20 +690,20 @@ end
 -- Called on initialization and menu changes
 -- Pull data from Effects.BarHighlightOverride Tables to filter the display of Bar Highlight abilities based off menu settings.
 function CombatInfo.UpdateBarHighlightTables()
-    g_uiProcAnimation           = {}
-    g_uiCustomToggle            = {}
-    g_triggeredSlotsFront       = {}
-    g_triggeredSlotsBack        = {}
-    g_triggeredSlotsRemain      = {}
-    g_toggledSlotsFront         = {}
-    g_toggledSlotsBack          = {}
-    g_toggledSlotsRemain        = {}
-    g_toggledSlotsStack         = {}
-    g_toggledSlotsPlayer        = {}
-    g_barOverrideCI             = {}
-    g_barFakeAura               = {}
-    g_barDurationOverride       = {}
-    g_barNoRemove               = {}
+    g_uiProcAnimation = {}
+    g_uiCustomToggle = {}
+    g_triggeredSlotsFront = {}
+    g_triggeredSlotsBack = {}
+    g_triggeredSlotsRemain = {}
+    g_toggledSlotsFront = {}
+    g_toggledSlotsBack = {}
+    g_toggledSlotsRemain = {}
+    g_toggledSlotsStack = {}
+    g_toggledSlotsPlayer = {}
+    g_barOverrideCI = {}
+    g_barFakeAura = {}
+    g_barDurationOverride = {}
+    g_barNoRemove = {}
 
     local counter = 0
     for abilityId, _ in pairs(g_barOverrideCI) do
@@ -768,8 +765,8 @@ function CombatInfo.RegisterCombatInfo()
     eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE)
     eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED)
     eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOTS_ALL_HOTBARS_UPDATED)
-    eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED )
-    eventManager:UnregisterForEvent(moduleName, EVENT_ACTIVE_WEAPON_PAIR_CHANGED )
+    eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_ACTIVE_WEAPON_PAIR_CHANGED)
     eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED)
     if CombatInfo.SV.UltimateLabelEnabled or CombatInfo.SV.UltimatePctEnabled then
         eventManager:RegisterForEvent(moduleName .. "CombatEvent1", EVENT_COMBAT_EVENT, CombatInfo.OnCombatEvent)
@@ -837,7 +834,8 @@ function CombatInfo.ClearCustomList(list)
     for k, v in pairs(list) do
         list[k] = nil
     end
-    CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+    CHAT_SYSTEM:Maximize()
+    CHAT_SYSTEM.primaryContainer:FadeIn()
     printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_CLEARED), listRef), true)
 end
 
@@ -850,16 +848,19 @@ function CombatInfo.AddToCustomList(list, input)
         if name ~= nil and name ~= "" then
             local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = true
-            CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+            CHAT_SYSTEM:Maximize()
+            CHAT_SYSTEM.primaryContainer:FadeIn()
             printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_ID), icon, id, name, listRef), true)
         else
-            CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+            CHAT_SYSTEM:Maximize()
+            CHAT_SYSTEM.primaryContainer:FadeIn()
             printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_FAILED), input, listRef), true)
         end
     else
         if input ~= "" then
             list[input] = true
-            CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+            CHAT_SYSTEM:Maximize()
+            CHAT_SYSTEM.primaryContainer:FadeIn()
             printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_NAME), input, listRef), true)
         end
     end
@@ -873,12 +874,14 @@ function CombatInfo.RemoveFromCustomList(list, input)
         local name = zo_strformat("<<C:1>>", GetAbilityName(id))
         local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
         list[id] = nil
-        CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+        CHAT_SYSTEM:Maximize()
+        CHAT_SYSTEM.primaryContainer:FadeIn()
         printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_ID), icon, id, name, listRef), true)
     else
         if input ~= "" then
             list[input] = nil
-            CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+            CHAT_SYSTEM:Maximize()
+            CHAT_SYSTEM.primaryContainer:FadeIn()
             printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_NAME), input, listRef), true)
         end
     end
@@ -887,7 +890,7 @@ end
 -- Used to populate abilities icons after the user has logged on
 function CombatInfo.OnPlayerActivated(eventCode)
     -- do not call this function for the second time
-    eventManager:UnregisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED )
+    eventManager:UnregisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED)
 
     -- Manually trigger event to update stats
     g_hotbarCategory = GetActiveHotbarCategory()
@@ -942,7 +945,7 @@ function CombatInfo.OnUpdate(currentTime)
         if v < currentTime then
             if g_toggledSlotsFront[k] and g_uiCustomToggle[g_toggledSlotsFront[k]] then
                 local slotNum = g_toggledSlotsFront[k]
-        		CombatInfo.HideSlot(slotNum, k)
+                CombatInfo.HideSlot(slotNum, k)
             end
             if g_toggledSlotsBack[k] and g_uiCustomToggle[g_toggledSlotsBack[k]] then
                 local slotNum = g_toggledSlotsBack[k]
@@ -995,12 +998,15 @@ function CombatInfo.OnUpdate(currentTime)
                 uiQuickSlot.label:SetColor(unpack(color))
             end
 
-            if remain > 86400000 then -- more than 1 day
-                uiQuickSlot.label:SetText( string.format("%d d", math.floor( remain/86400000 )) )
-            elseif remain > 6000000 then -- over 100 minutes - display XXh
-                uiQuickSlot.label:SetText( string.format("%dh", math.floor( remain/3600000 )) )
-            elseif remain > 600000 then -- over 10 minutes - display XXm
-                uiQuickSlot.label:SetText( string.format("%dm", math.floor( remain/60000 )) )
+            if remain > 86400000 then
+                -- more than 1 day
+                uiQuickSlot.label:SetText(string.format("%d d", math.floor(remain / 86400000)))
+            elseif remain > 6000000 then
+                -- over 100 minutes - display XXh
+                uiQuickSlot.label:SetText(string.format("%dh", math.floor(remain / 3600000)))
+            elseif remain > 600000 then
+                -- over 10 minutes - display XXm
+                uiQuickSlot.label:SetText(string.format("%dm", math.floor(remain / 60000)))
             elseif remain > 60000 then
                 local m = math.floor(remain / 60000)
                 local s = remain / 1000 - 60 * m
@@ -1023,7 +1029,8 @@ function CombatInfo.OnUpdate(currentTime)
     -- Break castbar when block is used for certain effects.
     if not Castbar.IgnoreCastBreakingActions[castbar.id] then
         if IsBlockActive() then
-            if not IsPlayerStunned() then -- Is Block Active returns true when the player is stunned currently.
+            if not IsPlayerStunned() then
+                -- Is Block Active returns true when the player is stunned currently.
                 CombatInfo.StopCastBar()
             end
         end
@@ -1061,7 +1068,7 @@ end
 
 function CombatInfo.StopCastBar()
     local state = CombatInfo.CastBarUnlocked
-     -- Don't hide the cast bar if we have it unlocked to move.
+    -- Don't hide the cast bar if we have it unlocked to move.
     castbar.bar.name:SetHidden(true)
     castbar.bar.timer:SetHidden(true)
     castbar:SetHidden(true)
@@ -1253,10 +1260,10 @@ function CombatInfo.OnReticleTargetChanged(eventCode)
     local unitTag = "reticleover"
 
     for k, v in pairs(g_toggledSlotsRemain) do
-        if ( (g_toggledSlotsFront[k] and g_uiCustomToggle[g_toggledSlotsFront[k]]) or (g_toggledSlotsBack[k] and g_uiCustomToggle[g_toggledSlotsBack[k]]) ) and not (g_toggledSlotsPlayer[k] or g_barNoRemove[k]) then
+        if ((g_toggledSlotsFront[k] and g_uiCustomToggle[g_toggledSlotsFront[k]]) or (g_toggledSlotsBack[k] and g_uiCustomToggle[g_toggledSlotsBack[k]])) and not (g_toggledSlotsPlayer[k] or g_barNoRemove[k]) then
             if (g_toggledSlotsFront[k] and g_uiCustomToggle[g_toggledSlotsFront[k]]) then
                 local slotNum = g_toggledSlotsFront[k]
-        		CombatInfo.HideSlot(slotNum, k)
+                CombatInfo.HideSlot(slotNum, k)
             end
             if (g_toggledSlotsBack[k] and g_uiCustomToggle[g_toggledSlotsBack[k]]) then
                 local slotNum = g_toggledSlotsBack[k]
@@ -1303,9 +1310,9 @@ function CombatInfo.BarHighlightSwap(abilityId)
 
     -- If we have a fake duration assigned, use that
     if duration > 0 then
-        duration = (GetAbilityDuration(duration) - GetAbilityDuration(durationMod) )
+        duration = (GetAbilityDuration(duration) - GetAbilityDuration(durationMod))
         local timeStarted = GetGameTimeSeconds()
-        local timeEnding = timeStarted + ( duration / 1000 )
+        local timeEnding = timeStarted + (duration / 1000)
         -- Fill in set values here since we know this is a fake self aura if we have a fake duration
         CombatInfo.OnEffectChanged(nil, EFFECT_RESULT_GAINED, nil, nil, unitTag, timeStarted, timeEnding, 0, nil, nil, 1, ABILITY_TYPE_BONUS, 0, nil, nil, abilityId, 1, true)
         return
@@ -1375,9 +1382,7 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
 
     if Castbar.CastBreakOnRemoveEffect[abilityId] and changeType == EFFECT_RESULT_FADED then
         CombatInfo.StopCastBar()
-        if abilityId == 33208 then -- Devour (Werewolf)
-            return
-        end
+        if abilityId == 33208 then return end -- Devour (Werewolf)
     end
 
     -- If this effect is on the player than as long as it remains it won't fade when we mouseover another target.
@@ -1482,7 +1487,7 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                 -- Check if this is an existing mine with stacks
                 if g_mineStacks[abilityId] then
                     g_mineStacks[abilityId] = g_mineStacks[abilityId] + Effects.EffectGroundDisplay[abilityId].stackRemove
-                -- Otherwise set the count to 1
+                    -- Otherwise set the count to 1
                 else
                     g_mineStacks[abilityId] = 1
                 end
@@ -1534,8 +1539,8 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
         return
     end
 
-    if changeType == EFFECT_RESULT_FADED then -- delete Effect
-
+    -- delete Effect
+    if changeType == EFFECT_RESULT_FADED then
         -- Remove stacks when Grim Focus ends
         if isStackCounter[abilityId] then
             for k, v in pairs(isStackBaseAbility) do
@@ -1733,7 +1738,8 @@ function CombatInfo.ShowSlot(slotNum, abilityId, currentTime, desaturate)
         if g_toggledSlotsStack[abilityId] and g_toggledSlotsStack[abilityId] > 0 then
             g_uiCustomToggle[slotNum].stack:SetText(g_toggledSlotsStack[abilityId])
         elseif g_mineStacks[abilityId] and g_mineStacks[abilityId] > 0 then
-            if not Effects.HideGroundMineStacks[abilityId] then -- No stack for Time Freeze
+            -- No stack for Time Freeze
+            if not Effects.HideGroundMineStacks[abilityId] then
                 g_uiCustomToggle[slotNum].stack:SetText(g_mineStacks[abilityId])
             end
         else
@@ -1792,10 +1798,10 @@ function CombatInfo.BackbarSetupTemplate()
             end
             targetButton:ApplyAnchor(anchorTarget, style.abilitySlotOffsetX)
             targetButton:ApplyStyle(buttonTemplate)
-        -- Ultimate slot
-        --elseif i == 8 then
-        --    targetButton:ApplyStyle(ultimateTemplate)
-        --    targetButton:ApplyAnchor(lastButton.slot, style.ultimateSlotOffsetX)
+            -- Ultimate slot
+            --elseif i == 8 then
+            --    targetButton:ApplyStyle(ultimateTemplate)
+            --    targetButton:ApplyAnchor(lastButton.slot, style.ultimateSlotOffsetX)
         end
 
         lastButton = targetButton
@@ -1804,7 +1810,7 @@ function CombatInfo.BackbarSetupTemplate()
     -- Anchor the backbar to the normal action bar with spacing
     local offsetY = IsInGamepadPreferredMode() and ACTION_BAR:GetHeight() * 1.6 or ACTION_BAR:GetHeight()
     ActionButton53:ClearAnchors()
-    ActionButton53:SetAnchor(CENTER, ActionButton3, CENTER, 0, -(offsetY*0.8) )
+    ActionButton53:SetAnchor(CENTER, ActionButton3, CENTER, 0, -(offsetY * 0.8))
 end
 
 -- Called from the menu and on init
@@ -1833,7 +1839,7 @@ function CombatInfo.CreateCastBar()
 
     -- Setup Preview
     uiTlw.castBar.preview = UI.Backdrop(uiTlw.castBar, "fill", nil, nil, nil, true)
-    uiTlw.castBar.previewLabel = UI.Label(uiTlw.castBar.preview, {CENTER,CENTER}, nil, nil, "ZoFontGameMedium", "Cast Bar", false)
+    uiTlw.castBar.previewLabel = UI.Label(uiTlw.castBar.preview, { CENTER, CENTER }, nil, nil, "ZoFontGameMedium", "Cast Bar", false)
 
     -- Callback used to hide anchor coords preview label on movement start
     local tlwOnMoveStart = function(self)
@@ -1852,14 +1858,14 @@ function CombatInfo.CreateCastBar()
     uiTlw.castBar:SetHandler("OnMoveStart", tlwOnMoveStart)
     uiTlw.castBar:SetHandler("OnMoveStop", tlwOnMoveStop)
 
-    uiTlw.castBar.preview.anchorTexture = UI.Texture(uiTlw.castBar.preview, {TOPLEFT,TOPLEFT}, {16,16}, "/esoui/art/reticle/border_topleft.dds", DL_OVERLAY, false)
+    uiTlw.castBar.preview.anchorTexture = UI.Texture(uiTlw.castBar.preview, { TOPLEFT, TOPLEFT }, { 16, 16 }, "/esoui/art/reticle/border_topleft.dds", DL_OVERLAY, false)
     uiTlw.castBar.preview.anchorTexture:SetColor(1, 1, 0, 0.9)
 
-    uiTlw.castBar.preview.anchorLabel = UI.Label(uiTlw.castBar.preview, {BOTTOMLEFT,TOPLEFT,0,-1}, nil, {0,2}, "ZoFontGameSmall", "xxx, yyy", false)
-    uiTlw.castBar.preview.anchorLabel:SetColor(1, 1, 0 , 1)
+    uiTlw.castBar.preview.anchorLabel = UI.Label(uiTlw.castBar.preview, { BOTTOMLEFT, TOPLEFT, 0, -1 }, nil, { 0, 2 }, "ZoFontGameSmall", "xxx, yyy", false)
+    uiTlw.castBar.preview.anchorLabel:SetColor(1, 1, 0, 1)
     uiTlw.castBar.preview.anchorLabel:SetDrawLayer(DL_OVERLAY)
     uiTlw.castBar.preview.anchorLabel:SetDrawTier(1)
-    uiTlw.castBar.preview.anchorLabelBg = UI.Backdrop(uiTlw.castBar.preview.anchorLabel, "fill", nil, {0,0,0,1}, {0,0,0,1}, false)
+    uiTlw.castBar.preview.anchorLabelBg = UI.Backdrop(uiTlw.castBar.preview.anchorLabel, "fill", nil, { 0, 0, 0, 1 }, { 0, 0, 0, 1 }, false)
     uiTlw.castBar.preview.anchorLabelBg:SetDrawLayer(DL_OVERLAY)
     uiTlw.castBar.preview.anchorLabelBg:SetDrawTier(0)
 
@@ -1870,7 +1876,7 @@ function CombatInfo.CreateCastBar()
     sceneManager:GetScene("siegeBar"):AddFragment(fragment)
     sceneManager:GetScene("siegeBarUI"):AddFragment(fragment)
 
-    castbar = UI.Backdrop(uiTlw.castBar, nil, nil, {0,0,0,0.5}, {0,0,0,1}, false)
+    castbar = UI.Backdrop(uiTlw.castBar, nil, nil, { 0, 0, 0, 0.5 }, { 0, 0, 0, 1 }, false)
     castbar:SetAnchor(LEFT, uiTlw.castBar, LEFT)
 
     castbar.starts = 0
@@ -1884,7 +1890,7 @@ function CombatInfo.CreateCastBar()
     castbar.back:SetAnchor(BOTTOMRIGHT, castbar, BOTTOMRIGHT)
 
     castbar.iconbg = UI.Texture(castbar, nil, nil, "/esoui/art/actionbar/abilityinset.dds", DL_CONTROLS, false)
-    castbar.iconbg = UI.Backdrop(castbar, nil, nil, {0,0,0,0.9}, {0,0,0,0.9}, false)
+    castbar.iconbg = UI.Backdrop(castbar, nil, nil, { 0, 0, 0, 0.9 }, { 0, 0, 0, 0.9 }, false)
     castbar.iconbg:SetDrawLevel(DL_CONTROLS)
     castbar.iconbg:SetAnchor(TOPLEFT, castbar, TOPLEFT, 3, 3)
     castbar.iconbg:SetAnchor(BOTTOMRIGHT, castbar, BOTTOMRIGHT, -3, -3)
@@ -1894,20 +1900,20 @@ function CombatInfo.CreateCastBar()
     castbar.icon:SetAnchor(BOTTOMRIGHT, castbar, BOTTOMRIGHT, -3, -3)
 
     castbar.bar = {
-        ["backdrop"] = UI.Backdrop(castbar, nil, {CombatInfo.SV.CastBarSizeW, CombatInfo.SV.CastBarSizeH}, nil, nil, false),
-        ["bar"] = UI.StatusBar(castbar, nil, {CombatInfo.SV.CastBarSizeW-4, CombatInfo.SV.CastBarSizeH-4}, nil, false),
+        ["backdrop"] = UI.Backdrop(castbar, nil, { CombatInfo.SV.CastBarSizeW, CombatInfo.SV.CastBarSizeH }, nil, nil, false),
+        ["bar"] = UI.StatusBar(castbar, nil, { CombatInfo.SV.CastBarSizeW - 4, CombatInfo.SV.CastBarSizeH - 4 }, nil, false),
         ["name"] = UI.Label(castbar, nil, nil, nil, nil, g_castbarFont, false),
         ["timer"] = UI.Label(castbar, nil, nil, nil, nil, g_castbarFont, false),
     }
     castbar.id = 0
 
-    castbar.bar.backdrop:SetEdgeTexture("",8,2,2)
+    castbar.bar.backdrop:SetEdgeTexture("", 8, 2, 2)
     castbar.bar.backdrop:SetDrawLayer(DL_BACKDROP)
     castbar.bar.backdrop:SetDrawLevel(1)
     castbar.bar.bar:SetMinMax(0, 1)
-    castbar.bar.backdrop:SetCenterColor((0.1*.50), (0.1*.50), (0.1*.50), 0.75)
-    castbar.bar.bar:SetGradientColors(0, 47/255, 130/255, 1, 82/255, 215/255, 1, 1)
-    castbar.bar.backdrop:SetCenterColor((0.1*CombatInfo.SV.CastBarGradientC1[1]), (0.1*CombatInfo.SV.CastBarGradientC1[2]), (0.1*CombatInfo.SV.CastBarGradientC1[3]), 0.75)
+    castbar.bar.backdrop:SetCenterColor((0.1 * .50), (0.1 * .50), (0.1 * .50), 0.75)
+    castbar.bar.bar:SetGradientColors(0, 47 / 255, 130 / 255, 1, 82 / 255, 215 / 255, 1, 1)
+    castbar.bar.backdrop:SetCenterColor((0.1 * CombatInfo.SV.CastBarGradientC1[1]), (0.1 * CombatInfo.SV.CastBarGradientC1[2]), (0.1 * CombatInfo.SV.CastBarGradientC1[3]), 0.75)
     castbar.bar.bar:SetGradientColors(CombatInfo.SV.CastBarGradientC1[1], CombatInfo.SV.CastBarGradientC1[2], CombatInfo.SV.CastBarGradientC1[3], 1, CombatInfo.SV.CastBarGradientC2[1], CombatInfo.SV.CastBarGradientC2[2], CombatInfo.SV.CastBarGradientC2[3], 1)
 
     castbar.bar.backdrop:ClearAnchors()
@@ -1939,10 +1945,10 @@ function CombatInfo.ResizeCastBar()
 
     castbar:SetDimensions(CombatInfo.SV.CastBarIconSize, CombatInfo.SV.CastBarIconSize)
     castbar.bar.backdrop:SetDimensions(CombatInfo.SV.CastBarSizeW, CombatInfo.SV.CastBarSizeH)
-    castbar.bar.bar:SetDimensions(CombatInfo.SV.CastBarSizeW-4, CombatInfo.SV.CastBarSizeH-4)
+    castbar.bar.bar:SetDimensions(CombatInfo.SV.CastBarSizeW - 4, CombatInfo.SV.CastBarSizeH - 4)
 
     castbar.bar.backdrop:ClearAnchors()
-    castbar.bar.backdrop:SetAnchor(LEFT, castbar, RIGHT, 4, 0 )
+    castbar.bar.backdrop:SetAnchor(LEFT, castbar, RIGHT, 4, 0)
 
     castbar.bar.timer:ClearAnchors()
     castbar.bar.timer:SetAnchor(RIGHT, castbar.bar.backdrop, RIGHT, -4, 0)
@@ -1961,7 +1967,7 @@ function CombatInfo.UpdateCastBar()
     castbar.bar.name:SetFont(g_castbarFont)
     castbar.bar.timer:SetFont(g_castbarFont)
     castbar.bar.bar:SetTexture(LUIE.StatusbarTextures[CombatInfo.SV.CastBarTexture])
-    castbar.bar.backdrop:SetCenterColor((0.1*CombatInfo.SV.CastBarGradientC1[1]), (0.1*CombatInfo.SV.CastBarGradientC1[2]), (0.1*CombatInfo.SV.CastBarGradientC1[3]), 0.75)
+    castbar.bar.backdrop:SetCenterColor((0.1 * CombatInfo.SV.CastBarGradientC1[1]), (0.1 * CombatInfo.SV.CastBarGradientC1[2]), (0.1 * CombatInfo.SV.CastBarGradientC1[3]), 0.75)
     castbar.bar.bar:SetGradientColors(CombatInfo.SV.CastBarGradientC1[1], CombatInfo.SV.CastBarGradientC1[2], CombatInfo.SV.CastBarGradientC1[3], 1, CombatInfo.SV.CastBarGradientC2[1], CombatInfo.SV.CastBarGradientC2[2], CombatInfo.SV.CastBarGradientC2[3], 1)
 end
 
@@ -2098,7 +2104,7 @@ function CombatInfo.SoulGemResurrectionStart(eventCode, durationMs)
         castbar.bar.name:SetHidden(false)
     end
     if CombatInfo.SV.CastBarTimer then
-        castbar.bar.timer:SetText(string.format("%.1f", remain/1000))
+        castbar.bar.timer:SetText(string.format("%.1f", remain / 1000))
         castbar.bar.timer:SetHidden(false)
     end
 
@@ -2125,15 +2131,18 @@ end
 function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
     -- Track ultimate generation when we block an attack or hit a target with a light/medium/heavy attack.
     if CombatInfo.SV.UltimateGeneration and uiUltimate.NotFull and (
-        ( result == ACTION_RESULT_BLOCKED_DAMAGE and targetType == COMBAT_UNIT_TYPE_PLAYER ) or
-        ( Effects.IsWeaponAttack[abilityName] and sourceType == COMBAT_UNIT_TYPE_PLAYER and targetName ~= "" )
-        ) then
+        (result == ACTION_RESULT_BLOCKED_DAMAGE and targetType == COMBAT_UNIT_TYPE_PLAYER) or
+            (Effects.IsWeaponAttack[abilityName] and sourceType == COMBAT_UNIT_TYPE_PLAYER and targetName ~= "")
+    ) then
         uiUltimate.Texture:SetHidden(false)
         uiUltimate.FadeTime = GetGameTimeMilliseconds() + 8000
     end
 
-    -- Bail out past here if the source isn't player, cast bar is disabled, or the ability is not on the list of abilities to show the cast bar for
-    if not CombatInfo.SV.CastBarEnable or (sourceType ~= COMBAT_UNIT_TYPE_PLAYER and not Castbar.CastOverride[abilityId]) then return end
+    -- Bail out past here if the cast bar is disabled or
+    if not CombatInfo.SV.CastBarEnable or
+        ((sourceType ~= COMBAT_UNIT_TYPE_PLAYER and not Castbar.CastOverride[abilityId]) and -- source isn't the player and the ability is not on the list of abilities to show the cast bar for
+            (targetType ~= COMBAT_UNIT_TYPE_PLAYER or result ~= ACTION_RESULT_EFFECT_FADED)) -- target isn't the player with effect faded
+    then return end
 
     -- Stop when a cast breaking action is detected
     if Castbar.CastBreakingActions[abilityId] then
@@ -2198,7 +2207,7 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
 
     if duration > 0 and not g_casting then
         -- If action result is BEGIN and not channeled then start, otherwise only use GAINED
-        if (not forceChanneled and (((result == 2200 or result == 2210) and not channeled) or (result == 2240 and (Castbar.CastDurationFix[abilityId] or channeled)))) or (forceChanneled and result == 2200) then -- and CombatInfo.SV.CastBarCast
+        if (not forceChanneled and (((result == 2200 or result == 2210) and not channeled) or (result == 2240 and (Castbar.CastDurationFix[abilityId] or channeled)))) or (forceChanneled and result == 2200) then
             local currentTime = GetGameTimeMilliseconds()
             local endTime = currentTime + duration
             local remain = endTime - currentTime
@@ -2260,7 +2269,7 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
             if g_toggledSlotsFront[abilityId] or g_toggledSlotsBack[abilityId] then
                 -- Reduce stack by one
                 if g_toggledSlotsStack[abilityId] then
-                    g_toggledSlotsStack[abilityId] = g_toggledSlotsStack[abilityId] -1
+                    g_toggledSlotsStack[abilityId] = g_toggledSlotsStack[abilityId] - 1
                 end
                 if g_toggledSlotsFront[abilityId] then
                     local slotNum = g_toggledSlotsFront[abilityId]
@@ -2320,7 +2329,7 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
         if g_toggledSlotsRemain[abilityId] then
             if g_toggledSlotsFront[abilityId] and g_uiCustomToggle[g_toggledSlotsFront[abilityId]] then
                 local slotNum = g_toggledSlotsFront[abilityId]
-        		CombatInfo.HideSlot(slotNum, abilityId)
+                CombatInfo.HideSlot(slotNum, abilityId)
             end
             if g_toggledSlotsBack[abilityId] and g_uiCustomToggle[g_toggledSlotsBack[abilityId]] then
                 local slotNum = g_toggledSlotsBack[abilityId]
@@ -2458,7 +2467,7 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
         end
     elseif proc then
         triggeredSlots[proc] = slotNum
-         if g_triggeredSlotsRemain[proc] then
+        if g_triggeredSlotsRemain[proc] then
             if CombatInfo.SV.ShowTriggered then
                 CombatInfo.PlayProcAnimations(slotNum)
                 if CombatInfo.SV.BarShowLabel then
@@ -2552,14 +2561,14 @@ function CombatInfo.PlayProcAnimations(slotNum)
     if not g_uiProcAnimation[slotNum] then
         -- Don't make a highlight frame for the backbar ultimate slot since it is not created
         if slotNum == (BAR_INDEX_END + BACKBAR_INDEX_OFFSET) then
-           return
+            return
         end
         -- Otherwise make a highlight frame
         local actionButton
         if slotNum < BACKBAR_INDEX_OFFSET then
-           actionButton = ZO_ActionBar_GetButton(slotNum)
+            actionButton = ZO_ActionBar_GetButton(slotNum)
         else
-           actionButton = g_backbarButtons[slotNum]
+            actionButton = g_backbarButtons[slotNum]
         end
         local procLoopTexture = windowManager:CreateControl("$(parent)Loop_LUIE", actionButton.slot, CT_TEXTURE)
         procLoopTexture:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
@@ -2575,7 +2584,7 @@ function CombatInfo.PlayProcAnimations(slotNum)
         procLoopTexture.label:SetDrawLayer(DL_COUNT)
         procLoopTexture.label:SetDrawLevel(3)
         procLoopTexture.label:SetDrawTier(3)
-        procLoopTexture.label:SetColor(unpack(CombatInfo.SV.RemainingTextColoured and colour or {1,1,1,1}))
+        procLoopTexture.label:SetColor(unpack(CombatInfo.SV.RemainingTextColoured and colour or { 1, 1, 1, 1 }))
         procLoopTexture.label:SetHidden(false)
 
         local procLoopTimeline = ANIMATION_MANAGER:CreateTimelineFromVirtual("UltimateReadyLoop", procLoopTexture)
@@ -2618,7 +2627,7 @@ end
 -- Displays custom toggle texture
 function CombatInfo.ShowCustomToggle(slotNum)
     if not g_uiCustomToggle[slotNum] then
-         -- Don't make a highlight frame for the backbar ultimate slot since it is not created
+        -- Don't make a highlight frame for the backbar ultimate slot since it is not created
         if slotNum == (BAR_INDEX_END + BACKBAR_INDEX_OFFSET) then
             return
         end
@@ -2641,7 +2650,7 @@ function CombatInfo.ShowCustomToggle(slotNum)
             toggleFrame:SetDrawLayer(0)
             toggleFrame:SetDrawLevel(0)
             toggleFrame:SetDrawTier(2)
-            toggleFrame:SetColor(0.5,1,0.5,1)
+            toggleFrame:SetColor(0.5, 1, 0.5, 1)
             toggleFrame:SetHidden(false)
 
             toggleFrame.label = UI.Label(toggleFrame, nil, nil, nil, g_barFont, nil, false)
@@ -2650,7 +2659,7 @@ function CombatInfo.ShowCustomToggle(slotNum)
             toggleFrame.label:SetDrawLayer(DL_COUNT)
             toggleFrame.label:SetDrawLevel(1)
             toggleFrame.label:SetDrawTier(3)
-            toggleFrame.label:SetColor(unpack(CombatInfo.SV.RemainingTextColoured and colour or {1,1,1,1}))
+            toggleFrame.label:SetColor(unpack(CombatInfo.SV.RemainingTextColoured and colour or { 1, 1, 1, 1 }))
             toggleFrame.label:SetHidden(false)
 
             toggleFrame.stack = UI.Label(toggleFrame, nil, nil, nil, g_barFont, nil, false)
@@ -2662,7 +2671,7 @@ function CombatInfo.ShowCustomToggle(slotNum)
             toggleFrame.stack:SetDrawLayer(DL_COUNT)
             toggleFrame.stack:SetDrawLevel(1)
             toggleFrame.stack:SetDrawTier(3)
-            toggleFrame.stack:SetColor(unpack(CombatInfo.SV.RemainingTextColoured and colour or {1,1,1,1}))
+            toggleFrame.stack:SetColor(unpack(CombatInfo.SV.RemainingTextColoured and colour or { 1, 1, 1, 1 }))
             toggleFrame.stack:SetHidden(false)
 
             g_uiCustomToggle[slotNum] = toggleFrame
@@ -2673,14 +2682,14 @@ function CombatInfo.ShowCustomToggle(slotNum)
     end
 end
 
-function CombatInfo.OnPowerUpdatePlayer(eventCode , unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax)
+function CombatInfo.OnPowerUpdatePlayer(eventCode, unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax)
     if unitTag ~= "player" then return end
     if powerType ~= POWERTYPE_ULTIMATE then return end
 
     -- flag if ultimate is full - we"ll need it for ultimate generation texture
     uiUltimate.NotFull = (powerValue < powerMax)
     -- Calculate the percentage to activation old one and current
-    local pct = (g_ultimateCost > 0) and math.floor((powerValue / g_ultimateCost) * 100 ) or 0
+    local pct = (g_ultimateCost > 0) and math.floor((powerValue / g_ultimateCost) * 100) or 0
     -- Set max percentage label to 100%.
     if pct > 100 then
         pct = 100
@@ -2697,7 +2706,7 @@ function CombatInfo.OnPowerUpdatePlayer(eventCode , unitTag, powerIndex, powerTy
                 uiUltimate.LabelVal:SetText(powerValue .. "/" .. g_ultimateCost)
             end
             -- Pct label: show always when less then 100% and possibly if UltimateHideFull is false
-            if pct < 100  then
+            if pct < 100 then
                 -- Check Ultimate Percent Setting & if slot is used then check if the slot is currently showing a toggle
                 local setHiddenPct = not CombatInfo.SV.UltimatePctEnabled
                 if (CombatInfo.SV.ShowToggledUltimate and g_uiCustomToggle[8] and not g_uiCustomToggle[8]:IsHidden()) then

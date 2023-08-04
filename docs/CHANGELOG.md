@@ -1,3 +1,10 @@
+### Version 6.4.8
+
+Combat Info
+- Fixed Cast Bar for Fatecarver and Remedy Cascade
+
+---
+
 ### Version 6.4.7
 
 Slash Commands
