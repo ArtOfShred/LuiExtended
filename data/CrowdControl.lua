@@ -132,6 +132,12 @@ CrowdControl.aoePlayerNormal = {
     [186772] = 1, -- Abyssal Impact (Abyssal Impact)
     [183009] = 0, -- Cephaliarch's Flail (Cephaliarch's Flail)
     [186773] = 0, -- Tentacular Dread (Tentacular Dread)
+    [185840] = 0, -- Rune of Displacement (Rune of Displacement)
+    [185841] = 0, -- Rune of Displacement (Rune of Displacement)
+    [195205] = 0, -- Rune of Displacement (Rune of Displacement)
+    [195206] = 0, -- Rune of Displacement (Rune of Displacement)
+    [198413] = 0, -- Rune of Displacement (Rune of Displacement)
+    [185841] = 0, -- Rune of Displacement (Rune of Displacement)
 
     -- Destruction Staff
     [62896] = 1, -- Wall of Fire
