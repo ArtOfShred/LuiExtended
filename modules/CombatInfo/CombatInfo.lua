@@ -2161,17 +2161,20 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
     local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId)
     local forceChanneled = false
 
-    -- Override certain things to display as a channel rather than cast. Note only works for events where we override the duration.
+    -- Override certain things to display as a channel rather than cast.
+    -- Note only works for events where we override the duration.
     if Castbar.CastChannelOverride[abilityId] then channeled = true end
 
     if channeled then
-        duration = Castbar.CastDurationFix[abilityId] or (result == ACTION_RESULT_EFFECT_GAINED_DURATION) and hitValue or channelTime
+        duration = Castbar.CastDurationFix[abilityId] or result == ACTION_RESULT_EFFECT_GAINED_DURATION and hitValue or channelTime
     else
         duration = Castbar.CastDurationFix[abilityId] or castTime
     end
 
     -- End the cast bar and restart if a new begin event is detected and the effect isn't a channel or fake cast
     if result == ACTION_RESULT_BEGIN and not channeled and not Castbar.CastDurationFix[abilityId] then
+        CombatInfo.StopCastBar()
+    elseif result == ACTION_RESULT_EFFECT_GAINED_DURATION and channeled then
         CombatInfo.StopCastBar()
     elseif result == ACTION_RESULT_EFFECT_GAINED and channeled then
         CombatInfo.StopCastBar()
@@ -2207,7 +2210,12 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
 
     if duration > 0 and not g_casting then
         -- If action result is BEGIN and not channeled then start, otherwise only use GAINED
-        if (not forceChanneled and (((result == 2200 or result == 2210) and not channeled) or (result == 2240 and (Castbar.CastDurationFix[abilityId] or channeled)))) or (forceChanneled and result == 2200) then
+        if (not forceChanneled and (
+            ((result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_BEGIN_CHANNEL) and not channeled) or
+                (result == ACTION_RESULT_EFFECT_GAINED and (Castbar.CastDurationFix[abilityId] or channeled)) or
+                (result == ACTION_RESULT_EFFECT_GAINED_DURATION and (Castbar.CastDurationFix[abilityId] or channeled))
+        )) or (forceChanneled and result == ACTION_RESULT_BEGIN) then
+
             local currentTime = GetGameTimeMilliseconds()
             local endTime = currentTime + duration
             local remain = endTime - currentTime

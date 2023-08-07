@@ -1,3 +1,10 @@
+### Version 6.4.9
+
+Combat Info
+- Fixed Exhausting Fatecarver not extending the castbar
+
+---
+
 ### Version 6.4.8
 
 Combat Info
