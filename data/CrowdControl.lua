@@ -196,16 +196,10 @@ CrowdControl.aoePlayerSet = {
     [143077] = 1, -- Stone Husk (Stone Husk)
     [159275] = 1, -- Rush of Agony (Rush of Agony)
     [159277] = 1, -- Rush of Agony (Rush of Agony)
-    [159384] = 1, -- Dark Convergence (Dark Convergence)
     [159386] = 1, -- Dark Convergence (Dark Convergence)
     [159387] = 1, -- Dark Convergence (Dark Convergence)
-    [159388] = 1, -- Dark Convergence (Dark Convergence)
-    [159390] = 1, -- Dark Convergence (Dark Convergence)
     [159391] = 1, -- Dark Convergence (Dark Convergence)
     [160317] = 1, -- Dark Convergence (Dark Convergence)
-    [160862] = 1, -- Dark Convergence (Dark Convergence)
-    [161194] = 1, -- Dark Convergence (Dark Convergence)
-    [168781] = 1, -- Dark Convergence (Dark Convergence)
 
     -- Siege
     [104693] = 1, -- Meatbag Catapult
