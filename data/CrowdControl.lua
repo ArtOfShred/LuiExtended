@@ -194,13 +194,15 @@ CrowdControl.aoePlayerSet = {
     [133494] = 1, -- Aegis Caller (Aegis Caller's)
     [137526] = 1, -- Hunter's Venom (Venomous)
     [143077] = 1, -- Stone Husk (Stone Husk)
+    [167679] = 1, -- Nunatak (Nunatak)
+    [167683] = 0, -- Nunatak Immobilize (Nunatak)
+    [159277] = 0, -- Rush of Agony (Rush of Agony)
     [159275] = 1, -- Rush of Agony (Rush of Agony)
-    [159277] = 1, -- Rush of Agony (Rush of Agony)
+    [159391] = 0, -- Dark Convergence (Dark Convergence)
+    [160317] = 0, -- Dark Convergence (Dark Convergence)
     [159386] = 1, -- Dark Convergence (Dark Convergence)
     [159387] = 1, -- Dark Convergence (Dark Convergence)
-    [159391] = 1, -- Dark Convergence (Dark Convergence)
-    [160317] = 1, -- Dark Convergence (Dark Convergence)
-
+    
     -- Siege
     [104693] = 1, -- Meatbag Catapult
     [104695] = 1, -- Scattershot Catapult
