@@ -667,6 +667,9 @@ CrowdControl.IgnoreList ={
     -- Frostvault
     [109838] = true, -- End Stun (Icestalker) -- Frostvault
     [119461] = true, -- Teleport Failsafe (Border Chk) -- Frostvault
+
+    -- PVP
+    [178127] = true, -- Diseased
 }
 
 -- Not implemented - list of abilities that ACTION_RESULT_GAINED_DURATION fires in the opposite order of normal
