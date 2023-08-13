@@ -670,6 +670,7 @@ CrowdControl.IgnoreList ={
 
     -- PVP
     [178127] = true, -- Diseased
+    [178118] = true, -- Overcharged
 }
 
 -- Not implemented - list of abilities that ACTION_RESULT_GAINED_DURATION fires in the opposite order of normal
