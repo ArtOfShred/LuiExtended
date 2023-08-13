@@ -618,8 +618,13 @@ CrowdControl.LavaAlerts = {
 }
 
 CrowdControl.IgnoreList ={
+    -- PVP
+    [178127] = true, -- Diseased
+    [178118] = true, -- Overcharged
+
+    -- World
     [54363] = true, -- Halt (Guard)
-    [4197] = true, -- Recovering (NPC Duel)
+    [4197] = true,  -- Recovering (NPC Duel)
 
     -- Quests
     [34499] = true, -- Corruption Beam (The Blight of the Bosmer)
