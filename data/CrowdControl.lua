@@ -621,7 +621,8 @@ CrowdControl.IgnoreList ={
     -- PVP
     [178127] = true, -- Diseased
     [178118] = true, -- Overcharged
-
+    [21927] = true,  -- Minor Defile
+    
     -- World
     [54363] = true, -- Halt (Guard)
     [4197] = true,  -- Recovering (NPC Duel)
