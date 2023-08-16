@@ -646,6 +646,7 @@ CrowdControl.IgnoreList ={
     [178127] = true, -- Diseased
     [178118] = true, -- Overcharged
     [21927] = true,  -- Minor Defile
+    [88402] = true,  -- Minor Magickasteal
     
     -- World
     [54363] = true, -- Halt (Guard)
