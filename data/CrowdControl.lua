@@ -130,16 +130,16 @@ CrowdControl.aoePlayerNormal = {
     [20185805] = 1, -- Fatecarver (Fatecarver, Area)
     [30185805] = 1, -- Fatecarver (Fatecarver, Area)
     [40185805] = 1, -- Fatecarver (Fatecarver, Area)
-    [186366] = 0,   -- Pragmatic Fatecarver (Pragmatic Fatecarver)
+    [186366] = 1,   -- Pragmatic Fatecarver (Pragmatic Fatecarver)
     [186370] = 0,   -- Pragmatic Fatecarver (Pragmatic Fatecarver, Area)
-    [20186366] = 0, -- Pragmatic Fatecarver (Pragmatic Fatecarver, Area)
-    [30186366] = 0, -- Pragmatic Fatecarver (Pragmatic Fatecarver, Area)
-    [40186366] = 0, -- Pragmatic Fatecarver (Pragmatic Fatecarver, Area)
-    [183122] = 0,   -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
+    [20186366] = 1, -- Pragmatic Fatecarver (Pragmatic Fatecarver, Area)
+    [30186366] = 1, -- Pragmatic Fatecarver (Pragmatic Fatecarver, Area)
+    [40186366] = 1, -- Pragmatic Fatecarver (Pragmatic Fatecarver, Area)
+    [183122] = 1,   -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
     [184291] = 0,   -- Exhausting Fatecarver (Exhausting Fatecarver)
-    [20183122] = 0, -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
-    [30183122] = 0, -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
-    [40183122] = 0, -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
+    [20183122] = 1, -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
+    [30183122] = 1, -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
+    [40183122] = 1, -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
     [183123] = 0,   -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
     -- [185817] = 1,   -- Abyssal Impact (Abyssal Impact)
     [186772] = 1,   -- Abyssal Impact (Abyssal Impact)
@@ -161,7 +161,7 @@ CrowdControl.aoePlayerNormal = {
     [195205] = 0, -- Rune of Displacement (Rune of Displacement)
     [195206] = 0, -- Rune of Displacement (Rune of Displacement)
     [198413] = 0, -- Rune of Displacement (Rune of Displacement)
-    
+
     -- Destruction Staff
     [62896] = 1, -- Wall of Fire
     [62971] = 0, -- Wall of Storms
