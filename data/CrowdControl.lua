@@ -161,7 +161,8 @@ CrowdControl.aoePlayerNormal = {
     [195205] = 0, -- Rune of Displacement (Rune of Displacement)
     [195206] = 0, -- Rune of Displacement (Rune of Displacement)
     [198413] = 0, -- Rune of Displacement (Rune of Displacement)
-
+    [186832] = 0, -- Runeguard of Still Waters (Runeguard of Still Waters Immobilize)
+    
     -- Destruction Staff
     [62896] = 1, -- Wall of Fire
     [62971] = 0, -- Wall of Storms
