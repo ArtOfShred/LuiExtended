@@ -5268,7 +5268,7 @@ Effects.EffectOverride = {
     -- Bound Armor / Bound Armaments / Bound Aegis
     [24158] = { tooltip = Tooltips.Skill_Bound_Armor, tooltipValue2 = 36 }, -- Bound Armor (Bound Armor)
     [24165] = { tooltip = Tooltips.Skill_Bound_Armaments_Skill }, -- Bound Armaments (Bound Armaments)
-    [130293] = { icon = 'esoui/art/icons/ability_sorcerer_bound_armaments_proc.dds', tooltip = Tooltips.Skill_Bound_Armaments_Stack }, -- Bound Armaments (Bound Armaments)
+    [203447] = { icon = 'esoui/art/icons/ability_sorcerer_bound_armaments_proc.dds', tooltip = Tooltips.Skill_Bound_Armaments_Stack }, -- Bound Armaments (Bound Armaments)
     [108855] = { hide = true }, -- Bound Aegis (Bound Aegis)
     [24163] = { tooltip = Tooltips.Skill_Bound_Armor, tooltipValue2 = 40 }, -- Bound Aegis (Bound Aegis)
 

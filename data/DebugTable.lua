@@ -4569,7 +4569,7 @@ LUIE.DebugAuras = {
 
     [108853] = true, -- Bound Armaments Passive (Bound Armaments)
     [24165] = true, -- Bound Armaments (Bound Armaments)
-    [130293] = true, -- Bound Armaments (Bound Armaments)
+    [203447] = true, -- Bound Armaments (Bound Armaments)
     [130291] = true, -- Bound Armaments (Bound Armaments)
     [130318] = true, -- Bound Armaments (Bound Armaments)
 
