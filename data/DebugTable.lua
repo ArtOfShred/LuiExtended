@@ -4067,19 +4067,19 @@ LUIE.DebugAuras = {
     [61907] = true, -- Assassin's Will (Grim Focus)
     [122585] = true, -- Assassin's Will (Grim Focus)
     [61902] = true, -- Grim Focus (Grim Focus)
-    [61905] = true, -- Grim Focus (Grim Focus)
+    [122585] = true, -- Grim Focus (Grim Focus)
     --[105183] = true, -- Grim Focus Combat Trigger (Grim Focus)
 
     [61932] = true, -- Assassin's Scourge (Relentless Focus)
     [122587] = true, -- Assassin's Will (Assassin's Scourge)
     [61927] = true, -- Relentless Focus (Relentless Focus)
-    [61928] = true, -- Relentless Focus (Relentless Focus)
+    [122587] = true, -- Relentless Focus (Relentless Focus)
     --[105194] = true, -- RF Combat Trigger (Relentless Focus)
 
     [61930] = true, -- Assassin's Will (Merciless Resolve)
     [122586] = true, -- Assassin's Will (Merciless Resolve)
     [61919] = true, -- Merciless Resolve (Merciless Resolve)
-    [61920] = true, -- Merciless Resolve (Merciless Resolve)
+    [122586] = true, -- Merciless Resolve (Merciless Resolve)
     --[105290] = true, -- MR Combat Trigger (Merciless Resolve)
 
     [33398] = true, -- Death Stroke (Death Stroke)

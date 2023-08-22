@@ -325,9 +325,9 @@ Effects.IsBlock = {
 -- Grim Focus Id's - Used by SpellCastBuffs to track the id's for Grim Focus & its morphs - These id's are merged with the Override for stack tracking
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.IsGrimFocus = {
-    [61905] = true, -- Grim Focus
-    [61928] = true, -- Relentless Focus
-    [61920] = true, -- Merciless Resolve
+    [122585] = true, -- Grim Focus
+    [122587] = true, -- Relentless Focus
+    [122586] = true, -- Merciless Resolve
 }
 
 Effects.IsSimmeringFrenzy = {
@@ -4979,19 +4979,19 @@ Effects.EffectOverride = {
     [61902] = { tooltip = Tooltips.Skill_Grim_Focus }, -- Grim Focus (Grim Focus)
     [61907] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Will (Grim Focus)
     [122585] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Will (Grim Focus)
-    [61905] = { tooltip = Tooltips.Skill_Grim_Focus_Defense }, -- Grim Focus (Grim Focus)
+    [122585] = { tooltip = Tooltips.Skill_Grim_Focus_Defense }, -- Grim Focus (Grim Focus)
     [105183] = { hide = true }, -- Grim Focus Combat Trigger (Grim Focus)
 
     [61927] = { tooltip = Tooltips.Skill_Relentless_Focus }, -- Relentless Focus (Relentless Focus)
     [61932] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Scourge (Relentless Focus)
     [122587] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds', name = Abilities.Skill_Assassins_Scourge }, -- Assassin's Will (Relentless Focus)
-    [61928] = { tooltip = Tooltips.Skill_Grim_Focus_Defense }, -- Relentless Focus (Relentless Focus)
+    [122587] = { tooltip = Tooltips.Skill_Grim_Focus_Defense }, -- Relentless Focus (Relentless Focus)
     [105194] = { hide = true }, -- RF Combat Trigger (Relentless Focus)
 
     [61919] = { tooltip = Tooltips.Skill_Merciless_Resolve }, -- Merciless Resolve (Merciless Resolve)
     [61930] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Will (Merciless Resolve)
     [122586] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Will (Merciless Resolve)
-    [61920] = { tooltip = Tooltips.Skill_Grim_Focus_Defense }, -- Merciless Resolve (Merciless Resolve)
+    [122586] = { tooltip = Tooltips.Skill_Grim_Focus_Defense }, -- Merciless Resolve (Merciless Resolve)
     [105290] = { hide = true }, -- MR Combat Trigger (Merciless Resolve)
 
     -- Death Stroke / Incapacitating Strike / Soul Harvest
