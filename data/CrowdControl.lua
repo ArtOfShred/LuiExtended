@@ -650,6 +650,7 @@ CrowdControl.IgnoreList ={
     [88402] = true,  -- Minor Magickasteal
     [148798] = true, -- Minor Magickasteal
     [40079] = true,  -- Radiating Regeneration
+    [187942] = true, -- Minor Fortitude
     
     -- World
     [54363] = true, -- Halt (Guard)
