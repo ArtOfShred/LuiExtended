@@ -652,6 +652,11 @@ CrowdControl.IgnoreList ={
     [40079] = true,  -- Radiating Regeneration
     [187942] = true, -- Minor Fortitude
     [146697] = true, -- Minor Brittle
+    [187940] = true, -- Minor Courage
+    [178123] = true, -- Sundered
+    [62775] = true,  -- Major Breach
+    [95136] = true,  -- Chill
+    [68368] = true,  -- Minor Maim
     
     -- World
     [54363] = true, -- Halt (Guard)
