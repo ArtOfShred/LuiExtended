@@ -227,6 +227,8 @@ CrowdControl.aoePlayerSet = {
     [160317] = 0, -- Dark Convergence (Dark Convergence)
     [159386] = 1, -- Dark Convergence (Dark Convergence)
     [159387] = 1, -- Dark Convergence (Dark Convergence)
+    [188886] = 0, -- Time Disruption (Snare, Judement of Akatosh)
+    [189859] = 1, -- Time Disruption (AoE, Judement of Akatosh)
     
     -- Siege
     [104693] = 1, -- Meatbag Catapult
@@ -657,7 +659,7 @@ CrowdControl.IgnoreList ={
     [62775] = true,  -- Major Breach
     [95136] = true,  -- Chill
     [68368] = true,  -- Minor Maim
-    
+
     -- World
     [54363] = true, -- Halt (Guard)
     [4197] = true,  -- Recovering (NPC Duel)
