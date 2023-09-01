@@ -193,6 +193,10 @@ CrowdControl.aoePlayerNormal = {
 
     -- Vampire
     [38968] = 0, -- Blood Mist (Blood Mist)
+
+    -- Poison
+    [79457] = 0, --Immobilize, Poison -- Not AOE but nowhere else to put this.
+    [79459] = 0, --Immobilize, Poison -- Not AOE but nowhere else to put this.
 }
 
 CrowdControl.aoePlayerSet = {
