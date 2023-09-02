@@ -181,6 +181,7 @@ CrowdControl.aoePlayerNormal = {
     [28877] = 1, -- Volley
     [38690] = 0, -- Endless Hail
     [38696] = 0, -- Arrow Barrage
+    [38707] = 0, -- Bombard Immobilize (Bombard)
 
     -- Undaunted
     [39299] = 1, -- Necrotic Orb
