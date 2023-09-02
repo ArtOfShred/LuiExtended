@@ -665,7 +665,8 @@ CrowdControl.IgnoreList ={
     [62775] = true,  -- Major Breach
     [95136] = true,  -- Chill
     [68368] = true,  -- Minor Maim
-
+    [187941] = true, -- Minor Endurance
+    
     -- World
     [54363] = true, -- Halt (Guard)
     [4197] = true,  -- Recovering (NPC Duel)
