@@ -666,6 +666,8 @@ CrowdControl.IgnoreList ={
     [95136] = true,  -- Chill
     [68368] = true,  -- Minor Maim
     [187941] = true, -- Minor Endurance
+    [187943] = true, -- Minor Intellect
+
     
     -- World
     [54363] = true, -- Halt (Guard)
