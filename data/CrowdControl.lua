@@ -157,10 +157,11 @@ CrowdControl.aoePlayerNormal = {
     -- [30185823] = 0, -- Tentacular Dread (Tentacular Dread)
     -- [40185823] = 0, -- Tentacular Dread (Tentacular Dread)
     -- [185840] = 0, -- Rune of Displacement (Rune of Displacement, DOT)
-    [185841] = 0, -- Rune of Displacement (Rune of Displacement)
-    [195205] = 0, -- Rune of Displacement (Rune of Displacement)
+    [187526] = 0, -- Rune of Displacement (Rune of Displacement)
+    -- [185841] = 0, -- Rune of Displacement (Rune of Displacement)
+    -- [195205] = 0, -- Rune of Displacement (Rune of Displacement)
     [195206] = 0, -- Rune of Displacement (Rune of Displacement)
-    [198413] = 0, -- Rune of Displacement (Rune of Displacement)
+    -- [198413] = 0, -- Rune of Displacement (Rune of Displacement)
     [186832] = 0, -- Runeguard of Still Waters (Runeguard of Still Waters Immobilize)
     
     -- Destruction Staff
@@ -186,6 +187,11 @@ CrowdControl.aoePlayerNormal = {
     -- Undaunted
     [39299] = 1, -- Necrotic Orb
     [42029] = 1, -- Mystic Orb
+
+    -- Fighters Guild
+    [35753] = 1, -- Trap Beast Immobilize (Trap Beast)
+    [40384] = 1, -- Barbed Trap Immobilize (Barbed Trap)
+    [40374] = 1, -- Lightweight Beast Trap Immobilize (Lightweight Beast Trap)
 
     -- Assault
     [38561] = 1, -- Caltrops (Caltrops)
