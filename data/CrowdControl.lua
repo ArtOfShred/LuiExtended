@@ -87,6 +87,7 @@ CrowdControl.aoePlayerNormal = {
 
     -- Dragonknight
     [32711] = 1, -- Eruption (Eruption)
+    [61785] = 1,     -- Fossilize Immobilize (Fossilize)
 
     -- Warden
     --[130400] = 1, -- Arctic Wind (Arctic Wind)
