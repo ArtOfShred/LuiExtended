@@ -127,16 +127,16 @@ function CrowdControlTracker.UpdateAOEList()
         priority = priority + 1
     end
 
-    if CombatInfo.SV.cct.aoePlayerNormal then
-        for k, v in pairs(CrowdControl.aoePlayerNormal) do
+    if CombatInfo.SV.cct.aoePlayerSet then
+        for k, v in pairs(CrowdControl.aoePlayerSet) do
             priority = priority + v
             CrowdControlTracker.aoeTypesId[k] = priority
         end
         priority = priority + 1
     end
 
-    if CombatInfo.SV.cct.aoePlayerSet then
-        for k, v in pairs(CrowdControl.aoePlayerSet) do
+    if CombatInfo.SV.cct.aoePlayerNormal then
+        for k, v in pairs(CrowdControl.aoePlayerNormal) do
             priority = priority + v
             CrowdControlTracker.aoeTypesId[k] = priority
         end
@@ -181,8 +181,8 @@ function CrowdControlTracker.PlaySoundAoe(abilityId)
     -- I hope you like inline conditionals, because we've got them for days!
     -- If we have sound enabled for the type of AOE this ability is then fetch it.
     local playSound =  ( (CrowdControl.aoePlayerUltimate[abilityId] and CombatInfo.SV.cct.aoePlayerUltimateSoundToggle) and CombatInfo.SV.cct.aoePlayerUltimateSound )
-                    or ( (CrowdControl.aoePlayerNormal[abilityId] and CombatInfo.SV.cct.aoePlayerNormalSoundToggle) and CombatInfo.SV.cct.aoePlayerNormalSound )
                     or ( (CrowdControl.aoePlayerSet[abilityId] and CombatInfo.SV.cct.aoePlayerSetSoundToggle) and CombatInfo.SV.cct.aoePlayerSetSound )
+                    or ( (CrowdControl.aoePlayerNormal[abilityId] and CombatInfo.SV.cct.aoePlayerNormalSoundToggle) and CombatInfo.SV.cct.aoePlayerNormalSound )
                     or ( (CrowdControl.aoeTraps[abilityId] and CombatInfo.SV.cct.aoeTrapsSoundToggle) and CombatInfo.SV.cct.aoeTrapsSound )
                     or ( (CrowdControl.aoeNPCBoss[abilityId] and CombatInfo.SV.cct.aoeNPCBossSoundToggle) and CombatInfo.SV.cct.aoeNPCBossSound )
                     or ( (CrowdControl.aoeNPCElite[abilityId] and CombatInfo.SV.cct.aoeNPCEliteSoundToggle) and CombatInfo.SV.cct.aoeNPCEliteSound )

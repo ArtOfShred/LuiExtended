@@ -48,6 +48,12 @@ CrowdControl.aoePlayerUltimate = {
     -- Sorcerer
     [80435] = 1, -- Suppression Field (Suppression Field)
 
+    -- Arcanist
+    [189793] = 1, -- The Unblinking Eye (The Unblinking Eye)
+    [189839] = 0, -- The Tide King's Gaze (The Tide King's Gaze)
+    [189869] = 1, -- The Languid Eye (The Languid Eye)
+    [191889] = 1, -- The Languid Eye (The Languid Eye, Duration?)
+
     -- Destruction Staff
     [85127] = 1, --Fiery Rage
     [85131] = 0, --Thunderous Rage
@@ -81,6 +87,7 @@ CrowdControl.aoePlayerNormal = {
 
     -- Dragonknight
     [32711] = 1, -- Eruption (Eruption)
+    [61785] = 1,     -- Fossilize Immobilize (Fossilize)
 
     -- Warden
     --[130400] = 1, -- Arctic Wind (Arctic Wind)
@@ -116,6 +123,49 @@ CrowdControl.aoePlayerNormal = {
     --[118766] = 0, -- Detonating Siphon (Detonating Siphon)
     --[118011] = 0, -- Mystic Siphon (Mystic Siphon)
 
+    -- Arcanist
+    [194844] = 0,   -- Fatecarver Snare (Exhausting Fatecarver)
+    [194842] = 1,   -- Fatecarver (Fatecarver)
+    [194843] = 1,   -- Fatecarver (Fatecarver, Area)
+    [185805] = 1,   -- Fatecarver (Fatecarver, Area)
+    [20185805] = 1, -- Fatecarver (Fatecarver, Area)
+    [30185805] = 1, -- Fatecarver (Fatecarver, Area)
+    [40185805] = 1, -- Fatecarver (Fatecarver, Area)
+    [186366] = 1,   -- Pragmatic Fatecarver (Pragmatic Fatecarver)
+    [186370] = 0,   -- Pragmatic Fatecarver (Pragmatic Fatecarver, Area)
+    [20186366] = 1, -- Pragmatic Fatecarver (Pragmatic Fatecarver, Area)
+    [30186366] = 1, -- Pragmatic Fatecarver (Pragmatic Fatecarver, Area)
+    [40186366] = 1, -- Pragmatic Fatecarver (Pragmatic Fatecarver, Area)
+    [183122] = 1,   -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
+    [184291] = 0,   -- Exhausting Fatecarver (Exhausting Fatecarver)
+    [20183122] = 1, -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
+    [30183122] = 1, -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
+    [40183122] = 1, -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
+    [183123] = 0,   -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
+    -- [185817] = 1,   -- Abyssal Impact (Abyssal Impact)
+    [186772] = 1,   -- Abyssal Impact (Abyssal Impact)
+    -- [20185817] = 1, -- Abyssal Impact (Abyssal Impact)
+    -- [30185817] = 1, -- Abyssal Impact (Abyssal Impact)
+    -- [40185817] = 1, -- Abyssal Impact (Abyssal Impact)
+    -- [183006] = 0,   -- Cephaliarch's Flail (Cephaliarch's Flail)
+    [183009] = 0, -- Cephaliarch's Flail (Cephaliarch's Flail)
+    -- [20183006] = 0, -- Cephaliarch's Flail (Cephaliarch's Flail)
+    -- [30183006] = 0, -- Cephaliarch's Flail (Cephaliarch's Flail)
+    -- [40183006] = 0, -- Cephaliarch's Flail (Cephaliarch's Flail)
+    -- [185823] = 0,   -- Tentacular Dread (Tentacular Dread)
+    [186773] = 0, -- Tentacular Dread (Tentacular Dread)
+    -- [20185823] = 0, -- Tentacular Dread (Tentacular Dread)
+    -- [30185823] = 0, -- Tentacular Dread (Tentacular Dread)
+    -- [40185823] = 0, -- Tentacular Dread (Tentacular Dread)
+    -- [185840] = 0, -- Rune of Displacement (Rune of Displacement, DOT)
+    [187526] = 0, -- Rune of Displacement (Rune of Displacement)
+    -- [185841] = 0, -- Rune of Displacement (Rune of Displacement)
+    -- [195205] = 0, -- Rune of Displacement (Rune of Displacement)
+    [195206] = 0, -- Rune of Displacement (Rune of Displacement)
+    -- [195210] = 0, -- Rune of Displacement (Rune of Displacement)
+    -- [198413] = 0, -- Rune of Displacement (Rune of Displacement)
+    -- [186832] = 0, -- Runeguard of Still Waters (Runeguard of Still Waters Immobilize)
+    
     -- Destruction Staff
     [62896] = 1, -- Wall of Fire
     [62971] = 0, -- Wall of Storms
@@ -134,16 +184,28 @@ CrowdControl.aoePlayerNormal = {
     [28877] = 1, -- Volley
     [38690] = 0, -- Endless Hail
     [38696] = 0, -- Arrow Barrage
+    [38707] = 0, -- Bombard Immobilize (Bombard)
 
     -- Undaunted
     [39299] = 1, -- Necrotic Orb
     [42029] = 1, -- Mystic Orb
+
+    -- Fighters Guild
+    [35753] = 1, -- Trap Beast Immobilize (Trap Beast)
+    [40384] = 1, -- Barbed Trap Immobilize (Barbed Trap)
+    [40374] = 1, -- Lightweight Beast Trap Immobilize (Lightweight Beast Trap)
 
     -- Assault
     [38561] = 1, -- Caltrops (Caltrops)
     [40267] = 0, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
     [40252] = 0, -- Razor Caltrops (Razor Caltrops)
 
+    -- Vampire
+    [38968] = 0, -- Blood Mist (Blood Mist)
+
+    -- Poison
+    [79457] = 0, --Immobilize, Poison -- Not AOE but nowhere else to put this.
+    [79459] = 0, --Immobilize, Poison -- Not AOE but nowhere else to put this.
 }
 
 CrowdControl.aoePlayerSet = {
@@ -170,7 +232,17 @@ CrowdControl.aoePlayerSet = {
     [133494] = 1, -- Aegis Caller (Aegis Caller's)
     [137526] = 1, -- Hunter's Venom (Venomous)
     [143077] = 1, -- Stone Husk (Stone Husk)
-
+    [167679] = 1, -- Nunatak (Nunatak)
+    [167683] = 0, -- Nunatak Immobilize (Nunatak)
+    [159277] = 0, -- Rush of Agony (Rush of Agony)
+    [159275] = 1, -- Rush of Agony (Rush of Agony)
+    [159391] = 0, -- Dark Convergence (Dark Convergence)
+    [160317] = 0, -- Dark Convergence (Dark Convergence)
+    [159386] = 1, -- Dark Convergence (Dark Convergence)
+    [159387] = 1, -- Dark Convergence (Dark Convergence)
+    [188886] = 0, -- Time Disruption (Snare, Judement of Akatosh)
+    [189859] = 1, -- Time Disruption (AoE, Judement of Akatosh)
+    
     -- Siege
     [104693] = 1, -- Meatbag Catapult
     [104695] = 1, -- Scattershot Catapult
@@ -586,8 +658,28 @@ CrowdControl.LavaAlerts = {
 }
 
 CrowdControl.IgnoreList ={
+    -- PVP
+    [178127] = true, -- Diseased
+    [178118] = true, -- Overcharged
+    [21927] = true,  -- Minor Defile
+    [88402] = true,  -- Minor Magickasteal
+    [148798] = true, -- Minor Magickasteal
+    [40079] = true,  -- Radiating Regeneration
+    [57468] = true,  -- Radiating Regeneration
+    [187942] = true, -- Minor Fortitude
+    [146697] = true, -- Minor Brittle
+    [187940] = true, -- Minor Courage
+    [178123] = true, -- Sundered
+    [62775] = true,  -- Major Breach
+    [95136] = true,  -- Chill
+    [68368] = true,  -- Minor Maim
+    [187941] = true, -- Minor Endurance
+    [187943] = true, -- Minor Intellect
+
+    
+    -- World
     [54363] = true, -- Halt (Guard)
-    [4197] = true, -- Recovering (NPC Duel)
+    [4197] = true,  -- Recovering (NPC Duel)
 
     -- Quests
     [34499] = true, -- Corruption Beam (The Blight of the Bosmer)
@@ -635,6 +727,9 @@ CrowdControl.IgnoreList ={
     -- Frostvault
     [109838] = true, -- End Stun (Icestalker) -- Frostvault
     [119461] = true, -- Teleport Failsafe (Border Chk) -- Frostvault
+    
+    -- Dreadsail Reef
+    [166794] = true, -- Raging Current -- Dreadsail Reef
 }
 
 -- Not implemented - list of abilities that ACTION_RESULT_GAINED_DURATION fires in the opposite order of normal
