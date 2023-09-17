@@ -1,3 +1,8 @@
+### Version 6.5.0
+
+Combat Info
+- Added New AOEs to AOE Tracker Dataset & fixed certain effects showing up in CC tracker (thanks Anthonysc)
+
 ### Version 6.4.9
 
 Combat Info

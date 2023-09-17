@@ -6,10 +6,10 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
-    "|cFFA500LuiExtended Version 6.4.9|r",
+    "|cFFA500LuiExtended Version 6.5.0|r",
     "",
     "|cFFFF00Combat Info:|r",
-    "[*] Fixed Exhausting Fatecarver not extending the castbar",
+    "[*] Added New AOEs to AOE Tracker Dataset & fixed certain effects showing up in CC tracker (thanks Anthonysc)",
 }
 
 -- Hide toggle called by the menu or xml button
