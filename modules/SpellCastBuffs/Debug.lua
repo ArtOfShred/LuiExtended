@@ -144,7 +144,7 @@ function SpellCastBuffs.AuthorCombatDebug(eventCode, result, isError, abilityNam
     local formattedResult = LUIE.Data.DebugResults[result]
 
     if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].hide then
-        finalString = (iconFormatted .. "[" ..abilityId .. "] " .. nameFormatted.. ": HIDDEN LUI" .. cmxHIDE .. ": [S] "..source.." --> [T] "..target .. " [R] " .. formattedResult)
+        local finalString = (iconFormatted .. "[" ..abilityId .. "] " .. nameFormatted.. ": HIDDEN LUI" .. cmxHIDE .. ": [S] "..source.." --> [T] "..target .. " [R] " .. formattedResult)
         finalString = MillisecondTimestampDebug(finalString)
         if CHAT_SYSTEM.primaryContainer then
             for k, cc in ipairs(CHAT_SYSTEM.containers) do

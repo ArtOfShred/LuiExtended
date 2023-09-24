@@ -1146,10 +1146,10 @@ local function CreateCustomFrames()
             unitFrame.tlw.preview.anchorLabel = UI.Label( unitFrame.tlw.preview, {BOTTOMLEFT,TOPLEFT,0,-1}, nil, {0,2}, "ZoFontGameSmall", "xxx, yyy", false )
             unitFrame.tlw.preview.anchorLabel:SetColor(1, 1, 0 , 1)
             unitFrame.tlw.preview.anchorLabel:SetDrawLayer(DL_OVERLAY)
-            unitFrame.tlw.preview.anchorLabel:SetDrawTier(1)
+            unitFrame.tlw.preview.anchorLabel:SetDrawTier(DT_MEDIUM)
             unitFrame.tlw.preview.anchorLabelBg = UI.Backdrop( unitFrame.tlw.preview.anchorLabel, "fill", nil, {0,0,0,1}, {0,0,0,1}, false )
             unitFrame.tlw.preview.anchorLabelBg:SetDrawLayer(DL_OVERLAY)
-            unitFrame.tlw.preview.anchorLabelBg:SetDrawTier(0)
+            unitFrame.tlw.preview.anchorLabelBg:SetDrawTier(DT_LOW)
         end
 
         -- Now we have to anchor all bars to their backdrops
@@ -1361,6 +1361,7 @@ local function CreateCustomFrames()
     if UnitFrames.SV.PlayerEnablePower then
         for _, baseName in pairs( { 'player', 'reticleover', 'AvaPlayerTarget' } ) do
             local unitTag = baseName
+            local size1, size2
             if UnitFrames.CustomFrames[unitTag] then
                 if baseName == "player" then
                     size1 = UnitFrames.SV.PlayerBarWidth
@@ -3473,7 +3474,7 @@ function UnitFrames.CustomFramesSetDeadLabel( unitFrame, newValue )
         unitFrame.dead:SetText( newValue )
     end
     if newValue == "Offline" then
-        classIcon = classIcons[0]
+        local classIcon = classIcons[0]
         if unitFrame.level ~= nil then
             unitFrame.level:SetHidden( newValue ~= "Dead" or newValue ~= nil )
         end
@@ -4983,7 +4984,14 @@ function UnitFrames.CustomFramesApplyLayoutRaid(unhide)
 
     -- Create a list of players and insert the players according to their role
     local playerList = {}
-    table.foreach({ LFG_ROLE_TANK, LFG_ROLE_HEAL, LFG_ROLE_DPS, LFG_ROLE_INVALID }, function(_, value) insertRole(playerList, value) end)
+
+    -- depreciated table function
+    -- table.foreach({ LFG_ROLE_TANK, LFG_ROLE_HEAL, LFG_ROLE_DPS, LFG_ROLE_INVALID }, function(_, value) insertRole(playerList, value) end)
+    
+    local roles = { LFG_ROLE_TANK, LFG_ROLE_HEAL, LFG_ROLE_DPS, LFG_ROLE_INVALID }
+    for _, value in ipairs(roles) do
+        insertRole(playerList, value)
+    end
 
     local column = 0    -- 0,1,2,3,4,5
     local row = 0       -- 1,2,3,...,12

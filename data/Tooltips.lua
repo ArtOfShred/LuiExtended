@@ -1530,6 +1530,7 @@ LUIE.Data.Tooltips = {
 
 -- Returns dynamic tooltips when called by Tooltip function
 function LUIE.DynamicTooltip(abilityId)
+    local tooltip = {}
     -- Brace
     if abilityId == 974 then
         local _, _, mitigation = GetAdvancedStatValue(ADVANCED_STAT_DISPLAY_TYPE_BLOCK_MITIGATION)
