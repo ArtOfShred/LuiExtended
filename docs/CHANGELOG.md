@@ -1,3 +1,8 @@
+### Version 6.5.1
+
+Combat Info
+- Re-enabled ability timers again (thanks to DakJaniels)
+
 ### Version 6.5.0
 
 Combat Info
