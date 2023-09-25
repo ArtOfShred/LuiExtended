@@ -225,10 +225,10 @@ function AbilityAlerts.CreateAlertFrame()
     uiTlw.alertFrame.preview.anchorLabel = UI.Label(uiTlw.alertFrame.preview, {BOTTOMLEFT,TOPLEFT,0,-1}, nil, {0,2}, "ZoFontGameSmall", "xxx, yyy", false)
     uiTlw.alertFrame.preview.anchorLabel:SetColor(1, 1, 0 , 1)
     uiTlw.alertFrame.preview.anchorLabel:SetDrawLayer(DL_OVERLAY)
-    uiTlw.alertFrame.preview.anchorLabel:SetDrawTier(1)
+    uiTlw.alertFrame.preview.anchorLabel:SetDrawTier(DT_MEDIUM)
     uiTlw.alertFrame.preview.anchorLabelBg = UI.Backdrop(uiTlw.alertFrame.preview.anchorLabel, "fill", nil, {0,0,0,1}, {0,0,0,1}, false)
     uiTlw.alertFrame.preview.anchorLabelBg:SetDrawLayer(DL_OVERLAY)
-    uiTlw.alertFrame.preview.anchorLabelBg:SetDrawTier(0)
+    uiTlw.alertFrame.preview.anchorLabelBg:SetDrawTier(DT_LOW)
 
     local fragment = ZO_HUDFadeSceneFragment:New(uiTlw.alertFrame, 0, 0)
 

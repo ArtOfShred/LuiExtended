@@ -45,7 +45,7 @@ end
 function SpellCastBuffs.WerewolfState(eventCode, werewolf, onActivation)
     if werewolf and not SpellCastBuffs.SV.HidePlayerBuffs then
         for i = 1, 6 do
-            name, _, discovered, skillLineId = GetSkillLineInfo(SKILL_TYPE_WORLD, i)
+            local name, _, discovered, skillLineId = GetSkillLineInfo(SKILL_TYPE_WORLD, i)
             if skillLineId == 50 and discovered then
                 g_werewolfCounter = g_werewolfCounter + 1
                 if g_werewolfCounter == 3 or onActivation then

@@ -169,7 +169,7 @@ function LUIE.SetupElementMover(state)
             end)
             g_LUIE_Movers[tlw.customPositionAttr] = tlw
         end
-        tlw = g_LUIE_Movers[k:GetName()]
+        local tlw = g_LUIE_Movers[k:GetName()]
         tlw:SetMouseEnabled ( state )
         tlw:SetMovable ( state )
         tlw:SetHidden( not state )

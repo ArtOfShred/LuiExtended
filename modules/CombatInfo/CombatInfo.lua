@@ -45,7 +45,7 @@ CombatInfo.Defaults = {
     ProcSoundName = "Death Recap Killing Blow",
     ShowToggled = true,
     ShowToggledUltimate = true,
-    BarShowLabel = false, -- Temp Disabled
+    BarShowLabel = true, -- Temp Disabled
     BarLabelPosition = -20,
     BarFontFace = "Univers 67",
     BarFontStyle = "outline",
@@ -415,9 +415,9 @@ function CombatInfo.Initialize(enabled)
     CombatInfo.Enabled = true
 
     -- TODO: TEMP: Disabled due to issues
-    if CombatInfo.SV.BarShowLabel == true then
-        CombatInfo.SV.BarShowLabel = false
-    end
+    -- if CombatInfo.SV.BarShowLabel == true then
+        -- CombatInfo.SV.BarShowLabel = false
+    -- end
 
     CombatInfo.ApplyFont()
     CombatInfo.ApplyProcSound()
@@ -1184,7 +1184,7 @@ function CombatInfo.ApplyProcSound(menu)
         barProcSound = "DeathRecap_KillingBlowShown"
     end
 
-    g_procSound = barProcSound
+    local g_procSound = barProcSound
 
     if menu then
         PlaySound(g_procSound)
@@ -1864,10 +1864,10 @@ function CombatInfo.CreateCastBar()
     uiTlw.castBar.preview.anchorLabel = UI.Label(uiTlw.castBar.preview, { BOTTOMLEFT, TOPLEFT, 0, -1 }, nil, { 0, 2 }, "ZoFontGameSmall", "xxx, yyy", false)
     uiTlw.castBar.preview.anchorLabel:SetColor(1, 1, 0, 1)
     uiTlw.castBar.preview.anchorLabel:SetDrawLayer(DL_OVERLAY)
-    uiTlw.castBar.preview.anchorLabel:SetDrawTier(1)
+    uiTlw.castBar.preview.anchorLabel:SetDrawTier(DT_MEDIUM)
     uiTlw.castBar.preview.anchorLabelBg = UI.Backdrop(uiTlw.castBar.preview.anchorLabel, "fill", nil, { 0, 0, 0, 1 }, { 0, 0, 0, 1 }, false)
     uiTlw.castBar.preview.anchorLabelBg:SetDrawLayer(DL_OVERLAY)
-    uiTlw.castBar.preview.anchorLabelBg:SetDrawTier(0)
+    uiTlw.castBar.preview.anchorLabelBg:SetDrawTier(DT_LOW)
 
     local fragment = ZO_HUDFadeSceneFragment:New(uiTlw.castBar, 0, 0)
 
@@ -2583,15 +2583,15 @@ function CombatInfo.PlayProcAnimations(slotNum)
         procLoopTexture:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"))
         procLoopTexture:SetTexture("/esoui/art/actionbar/abilityhighlight_mage_med.dds")
         procLoopTexture:SetBlendMode(TEX_BLEND_MODE_ADD)
-        procLoopTexture:SetDrawLevel(2)
+        procLoopTexture:SetDrawLayer(DL_TEXT)
         procLoopTexture:SetHidden(true)
 
         procLoopTexture.label = UI.Label(procLoopTexture, nil, nil, nil, g_barFont, nil, false)
         procLoopTexture.label:SetAnchor(TOPLEFT, actionButton.slot)
         procLoopTexture.label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CombatInfo.SV.BarLabelPosition)
-        procLoopTexture.label:SetDrawLayer(DL_COUNT)
-        procLoopTexture.label:SetDrawLevel(3)
-        procLoopTexture.label:SetDrawTier(3)
+        procLoopTexture.label:SetDrawLayer(DL_CONTROLS)
+        procLoopTexture.label:SetDrawLayer(DL_OVERLAY)
+        procLoopTexture.label:SetDrawTier(DT_HIGH)
         procLoopTexture.label:SetColor(unpack(CombatInfo.SV.RemainingTextColoured and colour or { 1, 1, 1, 1 }))
         procLoopTexture.label:SetHidden(false)
 
@@ -2655,18 +2655,18 @@ function CombatInfo.ShowCustomToggle(slotNum)
             toggleFrame:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"))
             toggleFrame:SetTexture("/esoui/art/actionbar/actionslot_toggledon.dds")
             toggleFrame:SetBlendMode(TEX_BLEND_MODE_ADD)
-            toggleFrame:SetDrawLayer(0)
+            toggleFrame:SetDrawLayer(DL_BACKGROUND)
             toggleFrame:SetDrawLevel(0)
-            toggleFrame:SetDrawTier(2)
+            toggleFrame:SetDrawTier(DT_HIGH)
             toggleFrame:SetColor(0.5, 1, 0.5, 1)
             toggleFrame:SetHidden(false)
 
             toggleFrame.label = UI.Label(toggleFrame, nil, nil, nil, g_barFont, nil, false)
             toggleFrame.label:SetAnchor(TOPLEFT, actionButton.slot)
             toggleFrame.label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CombatInfo.SV.BarLabelPosition)
-            toggleFrame.label:SetDrawLayer(DL_COUNT)
+            toggleFrame.label:SetDrawLayer(DL_CONTROLS)
             toggleFrame.label:SetDrawLevel(1)
-            toggleFrame.label:SetDrawTier(3)
+            toggleFrame.label:SetDrawTier(DT_HIGH)
             toggleFrame.label:SetColor(unpack(CombatInfo.SV.RemainingTextColoured and colour or { 1, 1, 1, 1 }))
             toggleFrame.label:SetHidden(false)
 
@@ -2676,9 +2676,9 @@ function CombatInfo.ShowCustomToggle(slotNum)
             --toggleFrame.stack:SetAnchor(TOPLEFT, actionButton.slot)
             --toggleFrame.stack:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 22, -22)
 
-            toggleFrame.stack:SetDrawLayer(DL_COUNT)
+            toggleFrame.stack:SetDrawLayer(DL_CONTROLS)
             toggleFrame.stack:SetDrawLevel(1)
-            toggleFrame.stack:SetDrawTier(3)
+            toggleFrame.stack:SetDrawTier(DT_HIGH)
             toggleFrame.stack:SetColor(unpack(CombatInfo.SV.RemainingTextColoured and colour or { 1, 1, 1, 1 }))
             toggleFrame.stack:SetHidden(false)
 

@@ -166,7 +166,7 @@ function SlashCommands.SlashGuildKick(option)
     local guildNumbers = GetNumGuildMembers(guildnumber)
     local compareChar = string.lower(name)
 
-    g_guildNamesTable = { }
+    local g_guildNamesTable = { }
 
     for i = 1,guildNumbers do
         local displayName = GetGuildMemberInfo(guildnumber, i)

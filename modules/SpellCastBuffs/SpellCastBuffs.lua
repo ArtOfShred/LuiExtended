@@ -2330,6 +2330,7 @@ function SpellCastBuffs.OnCombatEventIn(eventCode, result, isError, abilityName,
             return
         end
 
+        local stack = {}
         local iconName = GetAbilityIcon(abilityId)
         local effectName
         local unbreakable
@@ -2522,7 +2523,7 @@ function SpellCastBuffs.OnCombatEventIn(eventCode, result, isError, abilityName,
         effectName = Effects.FakeExternalBuffs[abilityId].name or GetAbilityName(abilityId)
         local context = SpellCastBuffs.DetermineContextSimple("player1", abilityId, effectName)
         SpellCastBuffs.EffectsList[context][abilityId] = nil
-        overrideDuration = Effects.FakeExternalBuffs[abilityId].overrideDuration
+        local overrideDuration = Effects.FakeExternalBuffs[abilityId].overrideDuration
         duration = Effects.FakeExternalBuffs[abilityId].duration
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
@@ -2933,7 +2934,7 @@ function SpellCastBuffs.OnCombatEventOut(eventCode, result, isError, abilityName
         effectName = Effects.FakePlayerDebuffs[abilityId].name or GetAbilityName(abilityId)
         local context = "reticleover2" -- NOTE: TODO - No prominent support here and probably won't add
         duration = Effects.FakePlayerDebuffs[abilityId].duration
-        overrideDuration = Effects.FakePlayerDebuffs[abilityId].overrideDuration
+        local overrideDuration = Effects.FakePlayerDebuffs[abilityId].overrideDuration
         effectType = BUFF_EFFECT_TYPE_DEBUFF
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
@@ -3218,7 +3219,7 @@ function SpellCastBuffs.AddNameAura()
                 return
             end
 
-            stack = v.stack or 0
+            local stack = v.stack or 0
 
             local zone = v.zone
             if zone then

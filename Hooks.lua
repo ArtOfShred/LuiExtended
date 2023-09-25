@@ -204,7 +204,7 @@ function LUIE.InitializeHooks()
 
         -- Hook support for Custom Ability Icons (Helps normalize with other addons)
         LUIE.GetAbilityIcon = GetAbilityIcon -- Used only for PTS testing
-        zos_GetAbilityIcon = GetAbilityIcon
+        local zos_GetAbilityIcon = GetAbilityIcon
         GetAbilityIcon = function(abilityId)
             local icon = zos_GetAbilityIcon(abilityId)
             if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].icon then
@@ -215,7 +215,7 @@ function LUIE.InitializeHooks()
 
         -- Hook support for Custom Ability Names (Helps normalize with other addons)
         LUIE.GetAbilityName = GetAbilityName -- Used only for PTS testing
-        zos_GetAbilityName = GetAbilityName
+        local zos_GetAbilityName = GetAbilityName
         GetAbilityName = function(abilityId)
             local abilityName = zos_GetAbilityName(abilityId)
             if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].name then
@@ -226,7 +226,7 @@ function LUIE.InitializeHooks()
 
         -- Hook support for ArtificialffectId's
         LUIE.GetArtificialEffectInfo = GetArtificialEffectInfo -- Used only for PTS testing
-        zos_GetArtificialEffectInfo = GetArtificialEffectInfo
+        local zos_GetArtificialEffectInfo = GetArtificialEffectInfo
         GetArtificialEffectInfo = function(artificialEffectId)
             local displayName, iconFile, effectType, sortOrder, timeStarted, timeEnding = zos_GetArtificialEffectInfo(artificialEffectId)
             if LUIE.Data.Effects.ArtificialEffectOverride[artificialEffectId] and LUIE.Data.Effects.ArtificialEffectOverride[artificialEffectId].icon then
@@ -239,7 +239,7 @@ function LUIE.InitializeHooks()
         end
 
         -- Hook support to pull custom tooltips for ArtificialEffectId's
-        zos_GetArtificialEffectTooltipText = GetArtificialEffectTooltipText
+        local zos_GetArtificialEffectTooltipText = GetArtificialEffectTooltipText
         GetArtificialEffectTooltipText = function(artificialEffectId)
             local tooltip
             if LUIE.Data.Effects.ArtificialEffectOverride[artificialEffectId] and LUIE.Data.Effects.ArtificialEffectOverride[artificialEffectId].tooltip then

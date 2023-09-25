@@ -361,8 +361,8 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.BarShowLabel = value CombatInfo.ResetBarLabel() end,
                 width = "full",
                 default = Defaults.BarShowLabel,
-                --disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and ( Settings.ShowTriggered or Settings.ShowToggled) ) end,
-                disabled = true
+                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and ( Settings.ShowTriggered or Settings.ShowToggled) ) end,
+                --disabled = true
             },
             {
                 type = "slider",
