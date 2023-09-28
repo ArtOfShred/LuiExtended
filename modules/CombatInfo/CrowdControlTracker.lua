@@ -13,7 +13,7 @@ local CrowdControl = LUIE.Data.CrowdControl
 local eventManager = EVENT_MANAGER
 local animationManager = ANIMATION_MANAGER
 
-local PriorityOne, PriorityTwo, PriorityThree, PriorityFour, PrioritySix
+local PriorityOne, PriorityTwo, PriorityThree, PriorityFour, PrioritySix, PrioritySeven
 
 local staggerDuration = 800
 local areaDuration = 1100
@@ -32,6 +32,8 @@ local ICON_MISSING = "icon_missing"
 
 local ACTION_RESULT_AREA_EFFECT=669966
 
+LUIE.Data.CrowdControl.SnareTest = {}
+
 CrowdControlTracker.controlTypes = {
     ACTION_RESULT_STUNNED,
     ACTION_RESULT_FEARED,
@@ -40,6 +42,7 @@ CrowdControlTracker.controlTypes = {
     ACTION_RESULT_SILENCED,
     ACTION_RESULT_STAGGERED,
     ACTION_RESULT_AREA_EFFECT,
+    ACTION_RESULT_SNARED,
 }
 
 CrowdControlTracker.actionResults = {
@@ -47,7 +50,11 @@ CrowdControlTracker.actionResults = {
     [ACTION_RESULT_FEARED]            = true,
     [ACTION_RESULT_DISORIENTED]       = true,
     [ACTION_RESULT_CHARMED]           = true,
+<<<<<<< Updated upstream
     -- [ACTION_RESULT_SNARED] = true,
+=======
+    [ACTION_RESULT_SNARED]            = true,
+>>>>>>> Stashed changes
 }
 
 CrowdControlTracker.controlText = {
@@ -455,7 +462,11 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
         [ACTION_RESULT_BLOCKED_DAMAGE] = true,
         [ACTION_RESULT_DISORIENTED] = true,
         [ACTION_RESULT_CHARMED] = true,
+<<<<<<< Updated upstream
         --[ACTION_RESULT_SNARED] = true,
+=======
+        [ACTION_RESULT_SNARED] = true,
+>>>>>>> Stashed changes
     }
 
     if not validResults[result] then
@@ -574,6 +585,18 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
                     self:OnDraw(abilityId, abilityIcon, hitValue, ACTION_RESULT_DISORIENTED, abilityName, hitValue)
                 end
                 self.incomingCC = {}
+            elseif (CombatInfo.SV.cct.showSnare and abilityId == self.incomingCC[ACTION_RESULT_SNARED] and not self.aoeTypesId[abilityId]) and (currentEndTime + 200) > PriorityOne.endTime and (currentEndTime + 200) > PriorityTwo.endTime and currentEndTime > PriorityThree.endTime and currentEndTime > PriorityFour.endTime then
+                d("SNARE EVENT: " .. abilityId .. " - " .. abilityName .. " - Hit: " .. hitValue)
+                LUIE.Data.CrowdControl.SnareTest[abilityId] = abilityName
+                table.insert(self.snaresQueue, abilityId)
+                PrioritySeven= { endTime = currentEndTime, abilityId = abilityId, abilityIcon = abilityIcon,
+                    hitValue = hitValue, result = ACTION_RESULT_SNARED, abilityName = abilityName }
+                if PriorityOne.endTime == 0 and PriorityTwo.endTime == 0 and PriorityThree.endTime  == 0 and PriorityFour.endTime == 0 and PriorityFour.endTime == 0 then
+                    self.currentCC = 7
+                    zo_callLater(function() self:RemoveCC(7, currentEndTime) end, hitValue + graceTime)
+                    self:OnDraw(abilityId, abilityIcon, hitValue, ACTION_RESULT_SNARED, abilityName, hitValue)
+                end
+                self.incomingCC = {}
             else
                 table.insert(self.effectsGained,
                     {
@@ -664,7 +687,7 @@ function CrowdControlTracker:RemoveCC(ccType, currentEndTime)
         return
     end
     local currentTime = GetFrameTimeMilliseconds()
-    local secondInterval, thirdInterval, fourthInterval, sixthInterval = PriorityTwo.endTime - currentTime, PriorityThree.endTime - currentTime, PriorityFour.endTime - currentTime, PrioritySix.endTime - currentTime
+    local secondInterval, thirdInterval, fourthInterval, sixthInterval, seventhInterval = PriorityTwo.endTime - currentTime, PriorityThree.endTime - currentTime, PriorityFour.endTime - currentTime, PrioritySix.endTime - currentTime, PrioritySeven.endTime - currentTime
 ----STUN-----
     if ccType == 1 then
         if self.currentCC == 1 and PriorityOne.endTime ~= currentEndTime then
@@ -691,6 +714,11 @@ function CrowdControlTracker:RemoveCC(ccType, currentEndTime)
             zo_callLater(function() self:RemoveCC(6, PriorityFour.endTime) end, sixthInterval)
             self:OnDraw(PrioritySix.abilityId, PrioritySix.abilityIcon, PrioritySix.hitValue, PrioritySix.result, PrioritySix.abilityName, sixthInterval)
             return
+        elseif seventhInterval > 0 then
+            self.currentCC = 7
+            zo_callLater(function() self:RemoveCC(6, PriorityFour.endTime) end, seventhInterval)
+            self:OnDraw(PrioritySeven.abilityId, PrioritySeven.abilityIcon, PrioritySeven.hitValue, PrioritySeven.result, PrioritySeven.abilityName, seventhInterval)
+            return
         end
 ----FEAR----
     elseif ccType == 2 then
@@ -713,10 +741,15 @@ function CrowdControlTracker:RemoveCC(ccType, currentEndTime)
             return
         elseif sixthInterval > 0 then
             self.currentCC = 6
-            zo_callLater(function() self:RemoveCC(6, PriorityFour.endTime) end, sixthInterval)
+            zo_callLater(function() self:RemoveCC(6, PrioritySix.endTime) end, sixthInterval)
             self:OnDraw(PrioritySix.abilityId, PrioritySix.abilityIcon, PrioritySix.hitValue, PrioritySix.result, PrioritySix.abilityName, sixthInterval)
             return
         end
+        elseif seventhInterval > 0 then
+            self.currentCC = 7
+            zo_callLater(function() self:RemoveCC(7, PrioritySeven.endTime) end, seventhInterval)
+            self:OnDraw(PrioritySeven.abilityId, PrioritySeven.abilityIcon, PrioritySeven.hitValue, PrioritySeven.result, PrioritySeven.abilityName, seventhInterval)
+            return
 ----DISORIENT----
     elseif ccType == 3 then
         if (self.currentCC > 0 and self.currentCC < 4) and PriorityThree.endTime ~= currentEndTime then --d("DISORIENT discarded")
@@ -733,10 +766,15 @@ function CrowdControlTracker:RemoveCC(ccType, currentEndTime)
             return
         elseif sixthInterval > 0 then
             self.currentCC = 6
-            zo_callLater(function() self:RemoveCC(6, PriorityFour.endTime) end, sixthInterval)
+            zo_callLater(function() self:RemoveCC(6, PrioritySix.endTime) end, sixthInterval)
             self:OnDraw(PrioritySix.abilityId, PrioritySix.abilityIcon, PrioritySix.hitValue, PrioritySix.result, PrioritySix.abilityName, sixthInterval)
             return
         end
+        elseif seventhInterval > 0 then
+            self.currentCC = 7
+            zo_callLater(function() self:RemoveCC(7, PrioritySeven.endTime) end, seventhInterval)
+            self:OnDraw(PrioritySeven.abilityId, PrioritySeven.abilityIcon, PrioritySeven.hitValue, PrioritySeven.result, PrioritySeven.abilityName, seventhInterval)
+            return
 ----SILENCE----
     elseif ccType == 4 then
         if self.currentCC ~= 0 and PriorityFour.endTime ~= currentEndTime then
@@ -748,9 +786,14 @@ function CrowdControlTracker:RemoveCC(ccType, currentEndTime)
         end
         elseif sixthInterval > 0 then
             self.currentCC = 6
-            zo_callLater(function() self:RemoveCC(6, PriorityFour.endTime) end, sixthInterval)
+            zo_callLater(function() self:RemoveCC(6, PrioritySix.endTime) end, sixthInterval)
             self:OnDraw(PrioritySix.abilityId, PrioritySix.abilityIcon, PrioritySix.hitValue, PrioritySix.result, PrioritySix.abilityName, sixthInterval)
-        return
+            return
+        elseif seventhInterval > 0 then
+            self.currentCC = 7
+            zo_callLater(function() self:RemoveCC(7, PrioritySeven.endTime) end, seventhInterval)
+            self:OnDraw(PrioritySeven.abilityId, PrioritySeven.abilityIcon, PrioritySeven.hitValue, PrioritySeven.result, PrioritySeven.abilityName, seventhInterval)
+            return
 ----STAGGER----
     elseif ccType == 5 then
         if self.currentCC ~= 0 then
@@ -764,7 +807,18 @@ function CrowdControlTracker:RemoveCC(ccType, currentEndTime)
             return
         end
         PrioritySix = {endTime = 0, abilityId = 0, abilityIcon = "", hitValue = 0, result = 0, abilityName = ""}
-        if (PriorityOne.endTime > 0 and self.currentCC == 1) or (PriorityTwo.endTime > 0 and self.currentCC == 2) or (PriorityThree.endTime > 0 and self.currentCC == 3) or (PriorityFour.endTime > 0 and self.currentCC == 4) then
+        elseif seventhInterval > 0 then
+            self.currentCC = 7
+            zo_callLater(function() self:RemoveCC(6, PriorityFour.endTime) end, seventhInterval)
+            self:OnDraw(PrioritySeven.abilityId, PrioritySeven.abilityIcon, PrioritySeven.hitValue, PrioritySeven.result, PrioritySeven.abilityName, seventhInterval)
+            return
+----SNARE----
+    elseif ccType == 7 then
+        if self.currentCC ~= 0 and PrioritySeven.endTime ~= currentEndTime then
+            return
+        end
+        PrioritySeven = { endTime = 0, abilityId = 0, abilityIcon = "", hitValue = 0, result = 0, abilityName = "" }
+        if (PriorityOne.endTime > 0 and self.currentCC == 1) or (PriorityTwo.endTime > 0 and self.currentCC == 2) or (PriorityThree.endTime > 0 and self.currentCC == 3) or (PriorityFour.endTime > 0 and self.currentCC == 4) or (PrioritySix.endTime > 0 and self.currentCC == 6) then
             return
         end
     end
@@ -799,6 +853,7 @@ function CrowdControlTracker:GetDefaultIcon(ccType)
     elseif ccType == ACTION_RESULT_DODGED then return LUIE_CC_ICON_IMMUNE
     elseif ccType == ACTION_RESULT_BLOCKED then return LUIE_CC_ICON_IMMUNE
     elseif ccType == ACTION_RESULT_BLOCKED_DAMAGE then return LUIE_CC_ICON_IMMUNE
+    elseif ccType == ACTION_RESULT_SNARED then return LUIE_CC_ICON_SNARE
     end
 end
 
@@ -1073,6 +1128,7 @@ function CrowdControlTracker:CCPriority(ccType)
         elseif ccType == 3 then priority = PriorityThree
         elseif ccType == 4 then priority = PriorityFour
         elseif ccType == 6 then priority = PrioritySix
+        elseif ccType == 7 then priority = PrioritySeven
         end
     return priority
 end
@@ -1284,11 +1340,13 @@ function CrowdControlTracker:VarReset()
     self.effectsGained = {}
     self.disorientsQueue = {}
     self.fearsQueue = {}
+    self.snaresQueue = {}
     self.currentCC = 0
     PriorityOne = {endTime = 0, abilityId = 0, abilityIcon = "", hitValue = 0, result = 0, abilityName = ""}
     PriorityTwo = {endTime = 0, abilityId = 0, abilityIcon = "", hitValue = 0, result = 0, abilityName = ""}
     PriorityThree = {endTime = 0, abilityId = 0, abilityIcon = "", hitValue = 0, result = 0, abilityName = ""}
     PriorityFour = {endTime = 0, abilityId = 0, abilityIcon = "", hitValue = 0, result = 0, abilityName = ""}
     PrioritySix = {endTime = 0, abilityId = 0, abilityIcon = "", hitValue = 0, result = 0, abilityName = ""}
+    PrioritySeven = {endTime = 0, abilityId = 0, abilityIcon = "", hitValue = 0, result = 0, abilityName = ""}
     self.Timer = 0
 end

@@ -51,6 +51,8 @@ CrowdControl.aoePlayerUltimate = {
     -- Arcanist
     [189793] = 1, -- The Unblinking Eye (The Unblinking Eye)
     [189839] = 0, -- The Tide King's Gaze (The Tide King's Gaze)
+    [189837] = 0, -- The Tide King's Gaze (The Tide King's Gaze)?
+    [191367] = 0, -- The Tide King's Gaze (The Tide King's Gaze)?
     [189869] = 1, -- The Languid Eye (The Languid Eye)
     [191889] = 1, -- The Languid Eye (The Languid Eye, Duration?)
 
@@ -87,7 +89,6 @@ CrowdControl.aoePlayerNormal = {
 
     -- Dragonknight
     [32711] = 1, -- Eruption (Eruption)
-    [61785] = 1,     -- Fossilize Immobilize (Fossilize)
 
     -- Warden
     --[130400] = 1, -- Arctic Wind (Arctic Wind)
@@ -164,8 +165,11 @@ CrowdControl.aoePlayerNormal = {
     [195206] = 0, -- Rune of Displacement (Rune of Displacement)
     -- [195210] = 0, -- Rune of Displacement (Rune of Displacement)
     -- [198413] = 0, -- Rune of Displacement (Rune of Displacement)
-    -- [186832] = 0, -- Runeguard of Still Waters (Runeguard of Still Waters Immobilize)
-    
+    [186832] = 0, -- Runeguard of Still Waters (Runeguard of Still Waters Immobilize)
+    -- [191083] = 1, -- Rune of Displacement (Rune of Displacement) -- Seen in Cyrodiil 
+    -- [187526] = 1, -- Rune of Displacement (Rune of Displacement) -- Seen in Cyrodiil
+    -- [187513] = 1, -- Rune of Displacement (Rune of Displacement) -- Seen in Cyrodiil
+
     -- Destruction Staff
     [62896] = 1, -- Wall of Fire
     [62971] = 0, -- Wall of Storms
@@ -199,13 +203,11 @@ CrowdControl.aoePlayerNormal = {
     [38561] = 1, -- Caltrops (Caltrops)
     [40267] = 0, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
     [40252] = 0, -- Razor Caltrops (Razor Caltrops)
+    [113771] = 0, -- Razor Caltrops (Razor Caltrops)
 
     -- Vampire
     [38968] = 0, -- Blood Mist (Blood Mist)
 
-    -- Poison
-    [79457] = 0, --Immobilize, Poison -- Not AOE but nowhere else to put this.
-    [79459] = 0, --Immobilize, Poison -- Not AOE but nowhere else to put this.
 }
 
 CrowdControl.aoePlayerSet = {
@@ -730,6 +732,13 @@ CrowdControl.IgnoreList ={
     
     -- Dreadsail Reef
     [166794] = true, -- Raging Current -- Dreadsail Reef
+    
+    ----------------
+    -- Miscelaneous
+    ----------------
+
+    -- Snare Effects
+    [8239] = true, -- Hamstring
 }
 
 -- Not implemented - list of abilities that ACTION_RESULT_GAINED_DURATION fires in the opposite order of normal
