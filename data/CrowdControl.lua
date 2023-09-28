@@ -739,6 +739,7 @@ CrowdControl.IgnoreList ={
 
     -- Snare Effects
     [8239] = true, -- Hamstring
+
 }
 
 -- Not implemented - list of abilities that ACTION_RESULT_GAINED_DURATION fires in the opposite order of normal
