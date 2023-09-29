@@ -32,8 +32,6 @@ local ICON_MISSING = "icon_missing"
 
 local ACTION_RESULT_AREA_EFFECT=669966
 
-LUIE.Data.CrowdControl.SnareTest = {}
-
 CrowdControlTracker.controlTypes = {
     ACTION_RESULT_STUNNED,
     ACTION_RESULT_FEARED,
@@ -43,6 +41,7 @@ CrowdControlTracker.controlTypes = {
     ACTION_RESULT_STAGGERED,
     ACTION_RESULT_AREA_EFFECT,
     ACTION_RESULT_SNARED,
+    ACTION_RESULT_ROOTED
 }
 
 CrowdControlTracker.actionResults = {
@@ -51,6 +50,7 @@ CrowdControlTracker.actionResults = {
     [ACTION_RESULT_DISORIENTED]       = true,
     [ACTION_RESULT_CHARMED]           = true,
     [ACTION_RESULT_SNARED]            = true,
+    [ACTION_RESULT_ROOTED]            = true,
 }
 
 CrowdControlTracker.controlText = {
@@ -66,6 +66,7 @@ CrowdControlTracker.controlText = {
     [ACTION_RESULT_BLOCKED_DAMAGE]    = "BLOCKED",
     [ACTION_RESULT_AREA_EFFECT]       = "AREA DAMAGE",
     [ACTION_RESULT_SNARED]            = "SNARED",
+    [ACTION_RESULT_ROOTED]            = "ROOTED",
 }
 
 CrowdControlTracker.aoeHitTypes = {
@@ -81,6 +82,7 @@ CrowdControlTracker.aoeHitTypes = {
     [ACTION_RESULT_RESIST]              = true,
     [ACTION_RESULT_WRECKING_DAMAGE]     = true,
     [ACTION_RESULT_SNARED]              = true,
+    [ACTION_RESULT_ROOTED]              = true,
     [ACTION_RESULT_DOT_TICK]            = true,
     [ACTION_RESULT_DOT_TICK_CRITICAL]   = true,
 }
@@ -547,9 +549,7 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
                     self:OnDraw(abilityId, abilityIcon, hitValue, ACTION_RESULT_DISORIENTED, abilityName, hitValue)
                 end
                 self.incomingCC = {}
-            elseif (CombatInfo.SV.cct.showSnare and abilityId == self.incomingCC[ACTION_RESULT_SNARED] and not self.aoeTypesId[abilityId]) and (currentEndTime + 200) > PriorityOne.endTime and (currentEndTime + 200) > PriorityTwo.endTime and currentEndTime > PriorityThree.endTime and currentEndTime > PriorityFour.endTime then
-                d("SNARE EVENT: " .. abilityId .. " - " .. abilityName .. " - Hit: " .. hitValue)
-                LUIE.Data.CrowdControl.SnareTest[abilityId] = abilityName
+            elseif (CombatInfo.SV.cct.showSnare and (abilityId == self.incomingCC[ACTION_RESULT_SNARED] or abilityId == self.incomingCC[ACTION_RESULT_ROOTED]) and not self.aoeTypesId[abilityId]) and (currentEndTime + 200) > PriorityOne.endTime and (currentEndTime + 200) > PriorityTwo.endTime and currentEndTime > PriorityThree.endTime and currentEndTime > PriorityFour.endTime then
                 table.insert(self.snaresQueue, abilityId)
                 PrioritySeven= { endTime = currentEndTime, abilityId = abilityId, abilityIcon = abilityIcon,
                     hitValue = hitValue, result = ACTION_RESULT_SNARED, abilityName = abilityName }
