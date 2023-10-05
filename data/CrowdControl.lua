@@ -162,7 +162,7 @@ CrowdControl.aoePlayerNormal = {
     [187526] = 0, -- Rune of Displacement (Rune of Displacement)
     -- [185841] = 0, -- Rune of Displacement (Rune of Displacement)
     -- [195205] = 0, -- Rune of Displacement (Rune of Displacement)
-    [195206] = 0, -- Rune of Displacement (Rune of Displacement)
+    -- [195206] = 0, -- Rune of Displacement (Rune of Displacement, DOT)
     -- [195210] = 0, -- Rune of Displacement (Rune of Displacement)
     -- [198413] = 0, -- Rune of Displacement (Rune of Displacement)
     [186832] = 0, -- Runeguard of Still Waters (Runeguard of Still Waters Immobilize)
@@ -738,9 +738,11 @@ CrowdControl.IgnoreList ={
     ----------------
 
     -- Snare Effects
-    [8239] = true, -- Hamstring
-    [160949] = true, -- Warmth
-    [101693] = true, -- Arrow Spray
+    [8239] = true,    -- Hamstring
+    [160949] = true,  -- Warmth
+    [101693] = true,  -- Arrow Spray
+    [10650] = true,   -- Oil Drenched
+    [85656] = true,   -- Harry
 }
 
 -- Not implemented - list of abilities that ACTION_RESULT_GAINED_DURATION fires in the opposite order of normal
