@@ -27,7 +27,7 @@ function CombatTextEventViewer:ShouldUseDefaultIcon(abilityId)
         if CombatText.SV.common.defaultIconOptions == 1 then
             return true
         elseif CombatText.SV.common.defaultIconOptions == 2 then
-            return Effects.EffectOverride[abilityId].isPlayerAbility and false or true
+            return Effects.EffectOverride[abilityId].isPlayerAbility and true or false
         elseif CombatText.SV.common.defaultIconOptions == 3 then
             return Effects.EffectOverride[abilityId].isPlayerAbility and true or false
         end

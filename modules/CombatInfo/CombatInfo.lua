@@ -602,6 +602,7 @@ function CombatInfo.HookGCD()
         local showGlobalCooldownForCollectible = global and slotType == ACTION_TYPE_COLLECTIBLE and globalSlotType == ACTION_TYPE_COLLECTIBLE
         local showCooldown = isInCooldown and (CombatInfo.SV.GlobalShowGCD or not global or showGlobalCooldownForCollectible)
         local updateChromaQuickslot = slotType ~= ACTION_TYPE_ABILITY and ZO_RZCHROMA_EFFECTS
+        local NO_LEADING_EDGE = false
         self.cooldown:SetHidden(not showCooldown)
 
         if showCooldown then
@@ -808,7 +809,7 @@ function CombatInfo.RegisterCombatInfo()
     end
     if CombatInfo.SV.ShowTriggered or CombatInfo.SV.ShowToggled then
         eventManager:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED, CombatInfo.OnDeath)
-        eventManager:RegisterForEvent(moduleName, EVENT_TARGET_CHANGE, CombatInfo.OnTargetChange)
+        eventManager:RegisterForEvent(moduleName, EVENT_TARGET_CHANGED, CombatInfo.OnTargetChange)
         eventManager:RegisterForEvent(moduleName, EVENT_RETICLE_TARGET_CHANGED, CombatInfo.OnReticleTargetChanged)
         eventManager:RegisterForEvent(moduleName, EVENT_ACTIVE_WEAPON_PAIR_CHANGED, CombatInfo.OnActiveWeaponPairChanged)
         eventManager:RegisterForEvent(moduleName, EVENT_GAMEPAD_PREFERRED_MODE_CHANGED, CombatInfo.BackbarSetupTemplate)
@@ -1184,10 +1185,10 @@ function CombatInfo.ApplyProcSound(menu)
         barProcSound = "DeathRecap_KillingBlowShown"
     end
 
-    local g_procSound = barProcSound
+    g_ProcSound = barProcSound
 
     if menu then
-        PlaySound(g_procSound)
+        PlaySound(g_ProcSound)
     end
 end
 
@@ -1239,10 +1240,12 @@ end
 
 -- Resets Potion Timer label - called on initialization and menu changes
 function CombatInfo.ResetPotionTimerLabel()
+    local QSB = ACTION_BAR:GetNamedChild("QuickslotButtonButton")
     uiQuickSlot.label:ClearAnchors()
-    uiQuickSlot.label:SetAnchor(TOPLEFT, ZO_QuickSlot)
-    uiQuickSlot.label:SetAnchor(BOTTOMRIGHT, ZO_QuickSlot, nil, 0, -CombatInfo.SV.PotionTimerLabelPosition)
+    uiQuickSlot.label:SetAnchor(TOPLEFT, QSB)
+    uiQuickSlot.label:SetAnchor(BOTTOMRIGHT, QSB, nil, 0, -CombatInfo.SV.PotionTimerLabelPosition)
 end
+
 
 -- Runs on the EVENT_TARGET_CHANGE listener.
 -- This handler fires every time the someone target changes.
@@ -1611,8 +1614,8 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                     g_boundArmamentsPlayed = false
                 end
                 if stackCount == 4 and not g_boundArmamentsPlayed then
-                    PlaySound(g_procSound)
-                    PlaySound(g_procSound)
+                    PlaySound(g_ProcSound)
+                    PlaySound(g_ProcSound)
                     g_boundArmamentsPlayed = true
                 end
             end
@@ -1625,12 +1628,12 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                 if CombatInfo.SV.ProcEnableSound and unitTag == "player" and g_triggeredSlotsFront[abilityId] then
                     if abilityId == 46327 then
                         if changeType == EFFECT_RESULT_GAINED then
-                            PlaySound(g_procSound)
-                            PlaySound(g_procSound)
+                            PlaySound(g_ProcSound)
+                            PlaySound(g_ProcSound)
                         end
                     else
-                        PlaySound(g_procSound)
-                        PlaySound(g_procSound)
+                        PlaySound(g_ProcSound)
+                        PlaySound(g_ProcSound)
                     end
                 end
                 g_triggeredSlotsRemain[abilityId] = 1000 * endTime
@@ -1809,6 +1812,7 @@ function CombatInfo.BackbarSetupTemplate()
 
     -- Anchor the backbar to the normal action bar with spacing
     local offsetY = IsInGamepadPreferredMode() and ACTION_BAR:GetHeight() * 1.6 or ACTION_BAR:GetHeight()
+    local ActionButton53 = GetControl("ActionButton53")
     ActionButton53:ClearAnchors()
     ActionButton53:SetAnchor(CENTER, ActionButton3, CENTER, 0, -(offsetY * 0.8))
 end
@@ -1908,7 +1912,7 @@ function CombatInfo.CreateCastBar()
     castbar.id = 0
 
     castbar.bar.backdrop:SetEdgeTexture("", 8, 2, 2)
-    castbar.bar.backdrop:SetDrawLayer(DL_BACKDROP)
+    castbar.bar.backdrop:SetDrawLayer(DL_BACKGROUND)
     castbar.bar.backdrop:SetDrawLevel(1)
     castbar.bar.bar:SetMinMax(0, 1)
     castbar.bar.backdrop:SetCenterColor((0.1 * .50), (0.1 * .50), (0.1 * .50), 0.75)
@@ -2465,8 +2469,8 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
             CombatInfo.PlayProcAnimations(slotNum)
             if CombatInfo.SV.ProcEnableSound then
                 if not wasfullUpdate and not g_disableProcSound[slotNum] then
-                    PlaySound(g_procSound)
-                    PlaySound(g_procSound)
+                    PlaySound(g_ProcSound)
+                    PlaySound(g_ProcSound)
                     -- Only play a proc sound every 3 seconds (matches Power Lash cd)
                     g_disableProcSound[slotNum] = true
                     zo_callLater(function() g_disableProcSound[slotNum] = false end, 3000)
@@ -2567,6 +2571,7 @@ end
 
 function CombatInfo.PlayProcAnimations(slotNum)
     if not g_uiProcAnimation[slotNum] then
+        local colour = uiQuickSlot.colour -- default color in case none is found
         -- Don't make a highlight frame for the backbar ultimate slot since it is not created
         if slotNum == (BAR_INDEX_END + BACKBAR_INDEX_OFFSET) then
             return
@@ -2635,6 +2640,7 @@ end
 -- Displays custom toggle texture
 function CombatInfo.ShowCustomToggle(slotNum)
     if not g_uiCustomToggle[slotNum] then
+        local colour = uiQuickSlot.colour -- default color in case none is found
         -- Don't make a highlight frame for the backbar ultimate slot since it is not created
         if slotNum == (BAR_INDEX_END + BACKBAR_INDEX_OFFSET) then
             return

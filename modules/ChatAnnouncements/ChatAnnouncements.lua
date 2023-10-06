@@ -530,10 +530,8 @@ ChatAnnouncements.Defaults = {
         CurrencyMessageSell             = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_SELL_VALUE),
         CurrencyMessageBuy              = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_BUY_VALUE),
         CurrencyMessageBuyback          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_BUYBACK_VALUE),
-        CurrencyMessagePickpocket       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_PICKPOCKET),
         CurrencyMessageLaunder          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LAUNDER_VALUE),
         CurrencyMessageLaunderNoV       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LAUNDER),
-        CurrencyMessageConfiscate       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_CONFISCATE),
         CurrencyMessageUse              = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_USE),
         CurrencyMessageCraft            = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_CRAFT),
         CurrencyMessageExtract          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_EXTRACT),
@@ -868,7 +866,6 @@ local g_blacklistIDs = {
     [64713]  = true,    -- Laurel
     [64690]  = true,    -- Malachite Shard
     [69432]  = true,    -- Glass Style Motif Fragment
-    [134623] = true,    -- Uncracked Transmutation Geode
 
     -- Trial Plunder
     [114427] = true,    -- Undaunted Plunder
@@ -2479,7 +2476,7 @@ elseif reason == CURRENCY_CHANGE_REASON_KEEP_REPAIR or reason == CURRENCY_CHANGE
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageLost
     elseif reason == CURRENCY_CHANGE_REASON_CROWN_CRATE_DUPLICATE or reason == CURRENCY_CHANGE_REASON_ITEM_CONVERTED_TO_GEMS or reason == CURRENCY_CHANGE_REASON_CROWNS_PURCHASED then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
-    elseif reason == CURRENCY_CHANGE_REASON_PURCHASED_WITH_GEMS or reason == CURRENCY_CHANGE_REASON_PURCHASED_WITH_CROWNS2 then
+    elseif reason == CURRENCY_CHANGE_REASON_PURCHASED_WITH_GEMS or reason == CURRENCY_CHANGE_REASON_PURCHASED_WITH_CROWNS then
         if currency == CURT_STYLE_STONES or currency == CURT_EVENT_TICKETS then
             messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
         else
@@ -2507,7 +2504,7 @@ elseif reason == CURRENCY_CHANGE_REASON_KEEP_REPAIR or reason == CURRENCY_CHANGE
     elseif reason == CURRENCY_CHANGE_REASON_CONSUME_POTION then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == CURRENCY_CHANGE_REASON_HARVEST_REAGENT then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == CURRENCY_CHANGE_REASON_RESEARCH_TRAIT then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == CURRENCY_CHANGE_REASON_GUILD_STANDARD then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == CURRENCY_CHANGE_REASON_GUILD_TABARD then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == CURRENCY_CHANGE_REASON_GUILD_FORWARD_CAMP then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == CURRENCY_CHANGE_REASON_BANK_FEE then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == CURRENCY_CHANGE_REASON_CHARACTER_UPGRADE then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
@@ -3419,6 +3416,7 @@ function ChatAnnouncements.IndexBank()
         local bagitemlink = GetItemLink(BAG_BANK, i, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
         local itemId = GetItemId(BAG_BANK, i)
         local itemLink = GetItemLink(BAG_BANK, i, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+        local itemType = GetItemType(BAG_BANK, i)
         if bagitemlink ~= "" then
             g_bankStacks[i] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
         end
@@ -3429,6 +3427,7 @@ function ChatAnnouncements.IndexBank()
         local bagitemlink = GetItemLink(BAG_SUBSCRIBER_BANK, i, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
         local itemId = GetItemId(BAG_SUBSCRIBER_BANK, i)
         local itemLink = GetItemLink(BAG_SUBSCRIBER_BANK, i, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+        local itemType = GetItemType(BAG_SUBSCRIBER_BANK, i)
         if bagitemlink ~= "" then
             g_banksubStacks[i] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
         end
@@ -3459,6 +3458,7 @@ function ChatAnnouncements.IndexHouseBags()
             local bagitemlink = GetItemLink(bag, i, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
             local itemId = GetItemId(bag, i)
             local itemLink = GetItemLink(bag, i, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+            local itemType = GetItemType(bag, i)
             if bagitemlink ~= "" then
                 g_houseBags[bag][i] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
             end
@@ -4556,7 +4556,7 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                         zo_callLater(function() ChatAnnouncements.PointRespecDisplay(RESPEC_TYPE_SKILLS) end, 25)
                     end
                     -- If this is an Attribute respec scroll, manually call an announcement for it if enabled (we disable EVENT_DISPLAY_ANNOUNCEMENT for this to sync it better)
-                    if removedItemType == ITEMTYPE_CROWN_ITEM and (itemId == 64523 or itemID == 135130) then
+                    if removedItemType == ITEMTYPE_CROWN_ITEM and (itemId == 64523 or itemId == 135130) then
                         zo_callLater(function() ChatAnnouncements.PointRespecDisplay(RESPEC_TYPE_ATTRIBUTES) end, 25)
                     end
                     if ChatAnnouncements.SV.Inventory.LootShowUseMisc and (removedItemType == ITEMTYPE_RECALL_STONE or removedItemType == ITEMTYPE_TROPHY or removedItemType == ITEMTYPE_MASTER_WRIT or removedItemType == ITEMTYPE_CROWN_ITEM) then
@@ -5840,12 +5840,12 @@ function ChatAnnouncements.JusticeRemovePrint()
         local W4 = g_equippedStacks[21]
 
         -- Swap weapons depending on currently equipped pair
-        if WeaponInfo == 1 then
+        if weaponInfo == 1 then
             g_equippedStacks[4] = W3
             g_equippedStacks[5] = W4
         end
 
-        if WeaponInfo == 2 then
+        if weaponInfo == 2 then
             g_equippedStacks[20] = W1
             g_equippedStacks[21] = W2
         end
@@ -7622,7 +7622,7 @@ function ChatAnnouncements.HookFunction()
 					ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, finalText)
 				end
 				if not ChatAnnouncements.SV.Skills.SkillPointCSA then
-					PlaySound(Sound)
+					PlaySound(sound)
 				end
 		end
 		return true
@@ -9156,7 +9156,7 @@ function ChatAnnouncements.HookFunction()
     local function RaidBestScoreHook(raidName, score, isWeekly)
         -- Display CA
         if ChatAnnouncements.SV.Group.GroupRaidBestScoreCA then
-            local formattedName = zo_strformat("|cFFFFFF<<1>>|r", trialName)
+            local formattedName = zo_strformat("|cFFFFFF<<1>>|r", raidName)
             local formattedString = isWeekly and zo_strformat(SI_TRIAL_NEW_BEST_SCORE_WEEKLY, formattedName) or zo_strformat(SI_TRIAL_NEW_BEST_SCORE_LIFETIME, formattedName)
             printToChat(formattedString, true)
         end
@@ -9288,8 +9288,8 @@ function ChatAnnouncements.HookFunction()
     end
 
     local overrideDisplayAnnouncementTitle = {
-        [GetString(SI_SKILLS_FORCE_RESPEC_TITLE)] = { ca = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS) .. ".", csa = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS), announceType = "RESPEC" },
-        [GetString(SI_ATTRIBUTE_FORCE_RESPEC_TITLE)] = { ca = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES) .. ".", csa = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES), announceType = "RESPEC" },
+        [GetString(SI_RESPECTYPE_POINTSRESETTITLE0)] = { ca = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS) .. ".", csa = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS), announceType = "RESPEC" },
+        [GetString(SI_RESPECTYPE_POINTSRESETTITLE1)] = { ca = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES) .. ".", csa = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES), announceType = "RESPEC" },
         [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_C), announceType = "GROUPAREA" }, -- Entering Group Area.
         [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM), announceType = "ARENA"}, -- Maelstrom Arena
         [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1), announceType = "ROUND" }, -- Round 1
@@ -9372,20 +9372,20 @@ function ChatAnnouncements.HookFunction()
 
         local messageParams
         local message
-        if title ~= "" and description ~= "" then
+        if titleString ~= "" and descriptionString ~= "" then
             messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
-        elseif title ~= "" then
+        elseif titleString ~= "" then
             messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
-        elseif description ~= "" then
+        elseif descriptionString ~= "" then
             messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
         end
 
         if flagCA then
-            if title ~= "" and description ~= "" then
+            if titleString ~= "" and descriptionString ~= "" then
                 printToChat(titleCA .. descriptionCA)
-            elseif title ~= "" then
+            elseif titleString ~= "" then
                 printToChat(titleCA)
-            elseif description ~= "" then
+            elseif descriptionString ~= "" then
                 printToChat(descriptionCA)
             end
         end
@@ -9399,11 +9399,11 @@ function ChatAnnouncements.HookFunction()
         end
 
         if flagAlert then
-            if title ~= "" and description ~= "" then
+            if titleString ~= "" and descriptionString ~= "" then
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, (titleAlert .. descriptionAlert) )
-            elseif title ~= "" then
+            elseif titleString ~= "" then
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, titleAlert)
-            elseif description ~= "" then
+            elseif descriptionString ~= "" then
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, descriptionAlert)
             end
         end
@@ -9496,8 +9496,8 @@ function ChatAnnouncements.HookFunction()
             titleCA = overrideDisplayAnnouncementTitle[primaryText].ca
             titleCSA = overrideDisplayAnnouncementTitle[primaryText].csa
         elseif primaryText ~= "" then
-            titleCA = title
-            titleCSA = title
+            titleCA = ""
+            titleCSA = ""
         end
 
         if secondaryText ~= "" and overrideDisplayAnnouncementDescription[secondaryText] then
@@ -10027,20 +10027,22 @@ function ChatAnnouncements.HookFunction()
             self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_ADD_FRIEND), platformIcons[SI_PLAYER_TO_PLAYER_ADD_FRIEND], DISABLED, AlreadyFriendsWarning)
         else
             local function RequestFriendOption()
-                if IsConsoleUI() then
+                local isConsoleUI = IsConsoleUI()
+                if isConsoleUI then
                     ZO_ShowConsoleAddFriendDialog(currentTargetCharacterName)
                 else
-                    RequestFriend(currentTargetDisplayName, nil, true)
+                    RequestFriend(currentTargetDisplayName, nil)
                 end
-                local displayNameLink
+                
+                local displayNameLink = ZO_LinkHandler_CreateLink(currentTargetDisplayName, nil, DISPLAY_NAME_LINK_TYPE, currentTargetDisplayName)
                 if ChatAnnouncements.SV.BracketOptionCharacter == 1 then
                     displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(currentTargetDisplayName, nil, DISPLAY_NAME_LINK_TYPE, currentTargetDisplayName)
-                else
-                    displayNameLink = ZO_LinkHandler_CreateLink(currentTargetDisplayName, nil, DISPLAY_NAME_LINK_TYPE, currentTargetDisplayName)
                 end
-                printToChat(zo_strformat(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG_LINK, displayNameLink), true)
+                
+                local formattedMessage = zo_strformat(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG_LINK, displayNameLink)
+                printToChat(formattedMessage, true)
                 if ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG_LINK, currentTargetDisplayName))
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, formattedMessage)
                 end
             end
             local function FriendIgnore() AlertIgnored(SI_LUIE_IGNORE_ERROR_FRIEND) end
@@ -10373,6 +10375,7 @@ function ChatAnnouncements.HookFunction()
     local function CompleteGroupInvite(characterOrDisplayName, sentFromChat, displayInvitedMessage, isMenu)
         local isLeader = IsUnitGroupLeader("player")
         local groupSize = GetGroupSize()
+        local ALERT = true
 
         if isLeader and groupSize == SMALL_GROUP_SIZE_THRESHOLD then
             ZO_Dialogs_ShowPlatformDialog("LARGE_GROUP_INVITE_WARNING", characterOrDisplayName, { mainTextParams = { SMALL_GROUP_SIZE_THRESHOLD } })

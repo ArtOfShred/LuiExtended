@@ -288,7 +288,7 @@ function CombatText.CreateSettings()
                 name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST_TP),
                 choices = Blacklist,
-                choicesValues = BlacklistValues,
+                choicesValues = BlackListValues,
                 scrollable = true,
                 sort = "name-up",
                 getFunc = function() LUIE_BlacklistCT:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,

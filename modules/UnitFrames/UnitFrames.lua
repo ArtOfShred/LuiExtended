@@ -240,7 +240,12 @@ local g_magickaThreshold
 local g_staminaThreshold
 local g_targetUnitFrame          -- Reference to default UI target unit frame
 local playerDisplayName = GetUnitDisplayName("player")
-
+local group
+local unitTag
+local playerTlw
+local phb
+local rhb
+local shb
 local CP_BAR_COLOURS = ZO_CP_BAR_GRADIENT_COLORS
 
 local g_PendingUpdate = {
@@ -332,12 +337,12 @@ end
 local function CreateDecreasedArmorOverlay( parent, small )
     local control = UI.Control( parent, {CENTER,CENTER}, {512,32}, false )
     control.smallTex = UI.Texture(control, {CENTER,CENTER}, {512,32}, "/EsoUI/Art/UnitAttributeVisualizer/attributeBar_dynamic_decreasedArmor_small.dds", 2, false)
-    control.smallTex:SetDrawTier(HIGH)
+    control.smallTex:SetDrawTier(DT_HIGH)
     --control.smallTexGlow = UI.Texture(control, {CENTER,CENTER}, {512,32}, "/EsoUI/Art/UnitAttributeVisualizer/attributeBar_dynamic_decreasedArmor_small_glow.dds", 2, false)
     --control.smallTexGlow:SetDrawTier(HIGH)
     if not small then
         control.normalTex = UI.Texture(control, {CENTER,CENTER}, {512,32}, "/EsoUI/Art/UnitAttributeVisualizer/attributeBar_dynamic_decreasedArmor_standard.dds", 2, false)
-        control.normalTex:SetDrawTier(HIGH)
+        control.normalTex:SetDrawTier(DT_HIGH)
         --control.normalTexGlow = UI.Texture(control, {CENTER,CENTER}, {512,32}, "/EsoUI/Art/UnitAttributeVisualizer/attributeBar_dynamic_decreasedArmor_standard_glow.dds", 2, false)
         --control.normalTexGlow:SetDrawTier(HIGH)
     end
@@ -643,7 +648,7 @@ local function CreateCustomFrames()
     if UnitFrames.SV.CustomFramesPlayer then
         -- Player Frame
         local playerTlw = UI.TopLevel( nil, nil )
-        playerTlw:SetDrawLayer(DL_BACKDROP)
+        playerTlw:SetDrawLayer(DL_BACKGROUND)
         playerTlw:SetDrawTier(DT_LOW)
         playerTlw:SetDrawLevel(1)
         playerTlw.customPositionAttr = "CustomFramesPlayerFramePos"
@@ -653,13 +658,13 @@ local function CreateCustomFrames()
         local botInfo = UI.Control( player, {TOP,BOTTOM,0,2}, nil, false )
         local buffAnchor = UI.Control( player, {TOP,BOTTOM,0,2}, nil, false )
         local phb = UI.Backdrop( player, {TOP,TOP,0,0}, nil, nil, nil, false )
-        phb:SetDrawLayer(DL_BACKDROP)
+        phb:SetDrawLayer(DL_BACKGROUND)
         phb:SetDrawLevel(1)
         local pmb = UI.Backdrop( player, nil, nil, nil, nil, false )
-        pmb:SetDrawLayer(DL_BACKDROP)
+        pmb:SetDrawLayer(DL_BACKGROUND)
         pmb:SetDrawLevel(1)
         local psb = UI.Backdrop( player, nil, nil, nil, nil, false )
-        psb:SetDrawLayer(DL_BACKDROP)
+        psb:SetDrawLayer(DL_BACKGROUND)
         psb:SetDrawLevel(1)
         local alt = UI.Backdrop( botInfo, {RIGHT,RIGHT}, nil, nil , {0,0,0,1}, false )
         local pli = UI.Texture( topInfo, nil, {20,20}, nil, nil, false )
@@ -743,7 +748,7 @@ local function CreateCustomFrames()
     if UnitFrames.SV.CustomFramesTarget then
         -- Target Frame
         local targetTlw = UI.TopLevel( nil, nil )
-        targetTlw:SetDrawLayer(DL_BACKDROP)
+        targetTlw:SetDrawLayer(DL_BACKGROUND)
         targetTlw:SetDrawTier(DT_LOW)
         targetTlw:SetDrawLevel(1)
         targetTlw.customPositionAttr = "CustomFramesTargetFramePos"
@@ -754,7 +759,7 @@ local function CreateCustomFrames()
         local botInfo = UI.Control( target, {TOP,BOTTOM,0,2}, nil, false )
         local buffAnchor = UI.Control( target, {TOP,BOTTOM,0,2}, nil, false )
         local thb = UI.Backdrop(target, {TOP,TOP,0,0}, nil, nil, nil, false )
-        thb:SetDrawLayer(DL_BACKDROP)
+        thb:SetDrawLayer(DL_BACKGROUND)
         thb:SetDrawLevel(1)
         local tli = UI.Texture( topInfo, nil, {20,20}, nil, nil, false )
         local ari = UI.Texture( botInfo, {RIGHT,RIGHT,-1,0}, {20,20}, nil, nil, false )
@@ -816,7 +821,7 @@ local function CreateCustomFrames()
     if UnitFrames.SV.AvaCustFramesTarget then
         -- Target Frame
         local targetTlw = UI.TopLevel( nil, nil )
-        targetTlw:SetDrawLayer(DL_BACKDROP)
+        targetTlw:SetDrawLayer(DL_BACKGROUND)
         targetTlw:SetDrawTier(DT_LOW)
         targetTlw:SetDrawLevel(1)
         targetTlw.customPositionAttr = "AvaCustFramesTargetFramePos"
@@ -827,7 +832,7 @@ local function CreateCustomFrames()
         local botInfo = UI.Control( target, {TOP,BOTTOM,0,2}, nil, false )
         local buffAnchor = UI.Control( target, {TOP,BOTTOM,0,2}, nil, false )
         local thb = UI.Backdrop(target, {TOP,TOP,0,0}, nil, nil, nil, false )
-        thb:SetDrawLayer(DL_BACKDROP)
+        thb:SetDrawLayer(DL_BACKGROUND)
         thb:SetDrawLevel(1)
         local cn = UI.Label( botInfo, {TOP,TOP}, nil, {1,3}, nil, "Class", false )
 
@@ -881,7 +886,7 @@ local function CreateCustomFrames()
     if UnitFrames.SV.CustomFramesGroup then
         -- Group Frame
         local group = UI.TopLevel( nil, nil )
-        group:SetDrawLayer(DL_BACKDROP)
+        group:SetDrawLayer(DL_BACKGROUND)
         group:SetDrawTier(DT_LOW)
         group:SetDrawLevel(1)
         group.customPositionAttr = "CustomFramesGroupFramePos"
@@ -901,7 +906,7 @@ local function CreateCustomFrames()
             local control = UI.Control( group, nil, nil, false )
             local topInfo = UI.Control( control, {BOTTOMRIGHT,TOPRIGHT,0,-3}, nil, false )
             local ghb = UI.Backdrop( control, {TOPLEFT,TOPLEFT}, nil, nil, nil, false )
-            ghb:SetDrawLayer(DL_BACKDROP)
+            ghb:SetDrawLayer(DL_BACKGROUND)
             ghb:SetDrawLevel(1)
             local gli = UI.Texture( topInfo, nil, {20,20}, nil, nil, false )
 
@@ -940,7 +945,7 @@ local function CreateCustomFrames()
     if UnitFrames.SV.CustomFramesRaid then
         -- Raid Frame
         local raid = UI.TopLevel( nil, nil )
-        raid:SetDrawLayer(DL_BACKDROP)
+        raid:SetDrawLayer(DL_BACKGROUND)
         raid:SetDrawTier(DT_LOW)
         raid:SetDrawLevel(1)
         raid.customPositionAttr = "CustomFramesRaidFramePos"
@@ -959,7 +964,7 @@ local function CreateCustomFrames()
             local unitTag = "RaidGroup" .. i
             local control = UI.Control( raid, nil, nil, false )
             local rhb = UI.Backdrop( control, "fill", nil, nil, nil, false )
-            rhb:SetDrawLayer(DL_BACKDROP)
+            rhb:SetDrawLayer(DL_BACKGROUND)
             rhb:SetDrawLevel(1)
 
             UnitFrames.CustomFrames[unitTag] = {
@@ -991,7 +996,7 @@ local function CreateCustomFrames()
     if UnitFrames.SV.CustomFramesPet then
         -- Pet Frame
         local pet = UI.TopLevel( nil, nil )
-        pet:SetDrawLayer(DL_BACKDROP)
+        pet:SetDrawLayer(DL_BACKGROUND)
         pet:SetDrawTier(DT_LOW)
         pet:SetDrawLevel(1)
         pet.customPositionAttr = "CustomFramesPetFramePos"
@@ -1011,7 +1016,7 @@ local function CreateCustomFrames()
             local control = UI.Control( pet, nil, nil, false )
             local shb = UI.Backdrop( control, "fill", nil, nil, nil, false )
 
-            shb:SetDrawLayer(DL_BACKDROP)
+            shb:SetDrawLayer(DL_BACKGROUND)
             shb:SetDrawLevel(1)
 
             UnitFrames.CustomFrames[unitTag] = {
@@ -1035,7 +1040,7 @@ local function CreateCustomFrames()
     if UnitFrames.SV.CustomFramesCompanion then
         -- Companion Frame
         local companionTlw = UI.TopLevel( nil, nil )
-        companionTlw:SetDrawLayer(DL_BACKDROP)
+        companionTlw:SetDrawLayer(DL_BACKGROUND)
         companionTlw:SetDrawTier(DT_LOW)
         companionTlw:SetDrawLevel(1)
         companionTlw.customPositionAttr = "CustomFramesCompanionFramePos"
@@ -1052,7 +1057,7 @@ local function CreateCustomFrames()
 
         local companion = UI.Control( companionTlw, nil, nil, false )
         local shb = UI.Backdrop( companion, "fill", nil, nil, nil, false )
-        shb:SetDrawLayer(DL_BACKDROP)
+        shb:SetDrawLayer(DL_BACKGROUND)
         shb:SetDrawLevel(1)
 
         UnitFrames.CustomFrames.companion = {
@@ -1077,7 +1082,7 @@ local function CreateCustomFrames()
     if UnitFrames.SV.CustomFramesBosses then
         -- Bosses Frame
         local bosses = UI.TopLevel( nil, nil )
-        bosses:SetDrawLayer(DL_BACKDROP)
+        bosses:SetDrawLayer(DL_BACKGROUND)
         bosses:SetDrawTier(DT_LOW)
         bosses:SetDrawLevel(1)
         bosses.customPositionAttr = "CustomFramesBossesFramePos"
@@ -1096,7 +1101,7 @@ local function CreateCustomFrames()
             local unitTag = "boss" .. i
             local control = UI.Control( bosses, nil, nil, false )
             local bhb = UI.Backdrop( control, "fill", nil, nil, nil, false )
-            bhb:SetDrawLayer(DL_BACKDROP)
+            bhb:SetDrawLayer(DL_BACKGROUND)
             bhb:SetDrawLevel(1)
 
             UnitFrames.CustomFrames[unitTag] = {
@@ -1675,7 +1680,7 @@ function UnitFrames.Initialize(enabled)
     eventManager:RegisterForEvent(moduleName, EVENT_UNIT_ATTRIBUTE_VISUAL_ADDED,   UnitFrames.OnVisualizationAdded )
     eventManager:RegisterForEvent(moduleName, EVENT_UNIT_ATTRIBUTE_VISUAL_REMOVED, UnitFrames.OnVisualizationRemoved )
     eventManager:RegisterForEvent(moduleName, EVENT_UNIT_ATTRIBUTE_VISUAL_UPDATED, UnitFrames.OnVisualizationUpdated )
-    eventManager:RegisterForEvent(moduleName, EVENT_TARGET_CHANGE, UnitFrames.OnTargetChange )
+    eventManager:RegisterForEvent(moduleName, EVENT_TARGET_CHANGED, UnitFrames.OnTargetChange )
     eventManager:RegisterForEvent(moduleName, EVENT_RETICLE_TARGET_CHANGED, UnitFrames.OnReticleTargetChanged )
     eventManager:RegisterForEvent(moduleName, EVENT_DISPOSITION_UPDATE, UnitFrames.OnDispositionUpdate )
     eventManager:RegisterForEvent(moduleName, EVENT_UNIT_CREATED, UnitFrames.OnUnitCreated )

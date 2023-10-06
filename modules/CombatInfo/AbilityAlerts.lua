@@ -76,7 +76,7 @@ function AbilityAlerts.ResetAlertSize()
         alert.icon.icon:ClearAnchors()
         alert.icon.icon:SetAnchor(TOPLEFT, alert.icon, TOPLEFT, 3, 3)
         alert.icon.icon:SetAnchor(BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -3, -3)
-        alert:SetDimensions(alert.prefix:GetTextWidth() + alert.name:GetTextWidth() + alert.modifier:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth(), height)
+        alert:SetDimensions(alert.prefix:GetTextWidth() + alert.name:GetTextWidth() + alert.modifier:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth() + alert.timer:GetTextHeight())
     end
 
     uiTlw.alertFrame:SetDimensions(500, (CombatInfo.SV.alerts.toggles.alertFontSize * 2) + 4)
@@ -275,7 +275,7 @@ function AbilityAlerts.OnPlayerActivated()
     if duelState == DUEL_STATE_DUELING then
         g_inDuel = true
     end
-    UnregisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED)
 end
 
 function AbilityAlerts.ResetAlertFramePosition()
@@ -498,7 +498,7 @@ function AbilityAlerts.PreviewAlertSound(value)
 end
 
 -- Play a sound if the option is enabled and priority is set.
-function AbilityAlerts.PlayAlertSound(abilityId)
+function AbilityAlerts.PlayAlertSound(abilityId, ...)
     local Settings = CombatInfo.SV.alerts
 
     local isPlay
@@ -936,7 +936,7 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     end
 end
 
-local function CheckInterruptEvent(unitId, abilityId)
+local function CheckInterruptEvent(unitId, abilityId, resultType)
     for i = 1, 3 do
         local alert = _G["LUIE_Alert" .. i]
         if alert.data.sourceUnitId then
@@ -1232,6 +1232,7 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
     -- UNMIT
     elseif (alertType == alertTypes.UNMIT) then
         local name = Settings.toggles.mitigationAbilityName
+        local color = AbilityAlerts.AlertColors.alertColorUnmit
         if modifier ~= "" then
             modifier = (" " .. modifier)
         end

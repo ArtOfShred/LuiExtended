@@ -24,6 +24,9 @@ local staggerFont = "$(GAMEPAD_BOLD_FONT)|36|thick-outline"
 
 local iconBorder = "LuiExtended/media/combatinfo/crowdcontroltracker/border.dds"
 
+local defaultDisorientIcon
+local defaultImmuneIcon
+
 local SET_SCALE_FROM_SV = true
 local BREAK_FREE_ID = 16565
 local NEGATE_MAGIC_ID = 47158
@@ -768,7 +771,7 @@ function CrowdControlTracker:ShouldUseDefaultIcon(abilityId)
         if CombatInfo.SV.cct.defaultIconOptions == 1 then
             return true
         elseif CombatInfo.SV.cct.defaultIconOptions == 2 then
-            return Effects.EffectOverride[abilityId].isPlayerAbility and false or true
+            return Effects.EffectOverride[abilityId].isPlayerAbility and true or false
         elseif CombatInfo.SV.cct.defaultIconOptions == 3 then
             return Effects.EffectOverride[abilityId].isPlayerAbility and true or false
         end

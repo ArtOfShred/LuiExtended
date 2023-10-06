@@ -34,7 +34,7 @@ function CombatTextResourcesPotionEventListener:PotionCooldown()
             end
         else
             if inCooldown == true then
-                local slotName = zo_strformat(SI_LINK_FORMAT_ITEM_NAME, GetSlotName(slotNum))
+                local slotName = zo_strformat(SI_LINK_FORMAT_ITEM_NAME, GetSlotName())
                 self:TriggerEvent(eventType.RESOURCE, resourceType.POTION, slotName)
                 inCooldown = false
             end
