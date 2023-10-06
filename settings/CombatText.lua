@@ -14,7 +14,7 @@ local globalIconOptionsKeys = { ["All Crowd Control"] = 1, ["NPC CC Only"] = 2, 
 
 local callbackManager = CALLBACK_MANAGER
 
-local Blacklist, BlackListValues = {}
+local Blacklist, BlackListValues = {}, {}
 
 -- Create a list of abilityId's / abilityName's to use for Blacklist
 local function GenerateCustomList(input)

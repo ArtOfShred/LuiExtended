@@ -19,7 +19,7 @@ local globalAlertOptionsKeys = { ["Show All Incoming Abilities"] = 1, ["Only Sho
 local globalIconOptions = { "All Crowd Control", "NPC CC Only", "Player CC Only" }
 local globalIconOptionsKeys = { ["All Crowd Control"] = 1, ["NPC CC Only"] = 2, ["Player CC Only"] = 3 }
 
-local Blacklist, BlackListValues = {}
+local Blacklist, BlackListValues = {}, {}
 
 local ACTION_RESULT_AREA_EFFECT = 669966
 
