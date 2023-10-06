@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
-LUIE.CombatTextEventViewer = ZO_Object:Subclass()
+LUIE.CombatTextEventViewer = ZO_InitializingObject:Subclass()
 local CombatTextEventViewer = LUIE.CombatTextEventViewer
 local CombatText = LUIE.CombatText
 
@@ -16,7 +16,7 @@ CombatTextEventViewer.resourceNames = setmetatable({}, {__index = function(t, k)
 CombatTextEventViewer.damageTypes = setmetatable({}, {__index = function(t, k) t[k] = GetString('SI_DAMAGETYPE', k); return t[k] end})
 
 function CombatTextEventViewer:New(poolManager, LMP)
-    local obj = ZO_Object:New(self)
+    local obj = setmetatable({}, self)
     self.poolManager = poolManager
     self.LMP = LMP
     return obj

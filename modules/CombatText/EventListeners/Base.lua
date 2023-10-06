@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
-LUIE.CombatTextEventListener = ZO_Object:Subclass()
+LUIE.CombatTextEventListener = ZO_InitializingObject:Subclass()
 local CombatTextEventListener = LUIE.CombatTextEventListener
 
 local callbackManager = CALLBACK_MANAGER
@@ -14,7 +14,7 @@ local moduleName = LUIE.name .. "CombatText"
 local eventPostfix = 1 -- Used to create unique name when registering multiple times to the same game event
 
 function CombatTextEventListener:New()
-    local obj = ZO_Object:New(self)
+    local obj = setmetatable({}, self)
     return obj
 end
 
