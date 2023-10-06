@@ -4,8 +4,8 @@
 ## APIVersion: 101038
 ## AddOnVersion: 651
 ## Description: Provides UnitFrames, InfoPanel, Combat Text & Info, Buffs & Debuff Tracking, Chat Announcements and Slash Commands.
-## DependsOn: LibAddonMenu-2.0>=31 LibMediaProvider-1.0
-## OptionalDependsOn: LibChatMessage pChat
+## DependsOn: LibAddonMenu-2.0>=34 LibMediaProvider-1.0
+## OptionalDependsOn: LibChatMessage pChat CombatMetrics DolgubonsLazyWritCreator
 ## IsLibrary: false
 ## SavedVariables: LUIESV
 
@@ -69,6 +69,9 @@ data/Tooltips.lua
 data/UnitNamesTable.lua
 data/ZoneNamesTable.lua
 data/Effects.lua
+data/Effects.EffectOverride.lua
+data/Effects.EffectHideSCT.lua
+data/Effects.BarHighlighOverride.lua
 data/CastBarTable.lua
 data/CollectibleTables.lua
 data/CombatTextConstants.lua
