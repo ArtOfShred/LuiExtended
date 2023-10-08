@@ -865,11 +865,11 @@ function CrowdControlTracker:OnCombatTipAdded(eventCode, combatTipID)
     --[[ CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, abilityGraphic,
     abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType,
     damageType, combat_log, sourceUnitId, targetUnitId, abilityId)]]
-    CrowdControlTracker:OnCombat(eventCode, ACTION_RESULT_ROOTED, nil, "Rooted", LUIE_CC_ICON_ROOT, nil,
+    self:OnCombat(eventCode, ACTION_RESULT_ROOTED, nil, "Rooted", LUIE_CC_ICON_ROOT, nil,
         "CombatTip", "CombatTip", LUIE.PlayerNameRaw, 1, rootDuration, nil, nil, nil, 1,
         nil, 146956)
     if isRooted then
-        zo_callLater(function() CrowdControlTracker:PopRootAlert(eventCode, combatTipID) end, rootDuration + graceTime)
+        zo_callLater(function() self:PopRootAlert(eventCode, combatTipID) end, rootDuration + graceTime)
     end
 end
 
@@ -878,11 +878,11 @@ function CrowdControlTracker:PopRootAlert(eventCode, combatTipID)
     --[[ CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, abilityGraphic,
     abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType,
     damageType, combat_log, sourceUnitId, targetUnitId, abilityId)]]
-    CrowdControlTracker:OnCombat(eventCode, ACTION_RESULT_ROOTED, nil, "Rooted", LUIE_CC_ICON_ROOT, nil,
+    self:OnCombat(eventCode, ACTION_RESULT_ROOTED, nil, "Rooted", LUIE_CC_ICON_ROOT, nil,
         "CombatTip", "CombatTip", LUIE.PlayerNameRaw, 1, rootDuration, nil, nil, nil, 1,
         nil, 146956)
     if isRooted then
-        zo_callLater(function() CrowdControlTracker:PopRootAlert(eventCode, combatTipID) end, rootDuration + graceTime)
+        zo_callLater(function() self:PopRootAlert(eventCode, combatTipID) end, rootDuration + graceTime)
     end
 end
 
