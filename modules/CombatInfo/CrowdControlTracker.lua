@@ -1181,6 +1181,7 @@ function CrowdControlTracker:CCPriority(ccType)
         elseif ccType == 4 then priority = PriorityFour
         elseif ccType == 6 then priority = PrioritySix
         elseif ccType == 7 then priority = PrioritySeven
+        elseif ccType == 8 then priority = PriorityEight
         end
     return priority
 end
