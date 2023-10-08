@@ -860,7 +860,7 @@ function CrowdControlTracker:OnStunnedState(eventCode, playerStunned)
 end
 
 function CrowdControlTracker:OnCombatTipAdded(eventCode, combatTipID)
-    if not combatTipID == 19 then return end
+    if not (combatTipID == 19) then return end
     isRooted = true
     --[[ CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, abilityGraphic,
     abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType,
@@ -874,7 +874,7 @@ function CrowdControlTracker:OnCombatTipAdded(eventCode, combatTipID)
 end
 
 function CrowdControlTracker:PopRootAlert(eventCode, combatTipID)
-    if not combatTipID == 19 and not isRooted then return end
+    if not (combatTipID == 19) and not isRooted then return end
     --[[ CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, abilityGraphic,
     abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType,
     damageType, combat_log, sourceUnitId, targetUnitId, abilityId)]]
@@ -887,7 +887,7 @@ function CrowdControlTracker:PopRootAlert(eventCode, combatTipID)
 end
 
 function CrowdControlTracker:OnCombatTipRemoved(eventCode, combatTipID, result)
-    if not combatTipID == 19 then return end
+    if not (combatTipID == 19) then return end
     isRooted = false
     self:RemoveCC(7, rootEndTime)
 end

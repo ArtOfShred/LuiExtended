@@ -2348,10 +2348,10 @@ function CombatInfo.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_CCT_ROOT_TOGGLE),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_ROOT_TOGGLE_TP),
-                default = Defaults.cct.showSnare,
+                default = Defaults.cct.showRoot,
                 getFunc = function() return Settings.cct.showRoot end,
                 setFunc = function(newValue)
-                    Settings.cct.showSnare = newValue
+                    Settings.cct.showRoot = newValue
                     CrowdControlTracker:InitControls()
                 end,
                 disabled = function() return (not Settings.cct.enabled) end,
