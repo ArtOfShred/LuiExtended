@@ -2529,6 +2529,8 @@ end
 function ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type, carriedItem, carriedItemTotal)
     local messageP1  -- First part of message - Change
     local messageP2  -- Second part of the message (if enabled) - Total
+    local item
+    local name
 
     messageP1 = ("|r|c" .. currencyTypeColor .. currencyIcon .. " " .. changeType .. currencyName .. "|r|c" .. changeColor)
 
@@ -3655,7 +3657,7 @@ function ChatAnnouncements.ResolveQuestItemChange()
             local icon = questItemIndex[itemId].icon
             local formattedIcon = ( ChatAnnouncements.SV.Inventory.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
 
-            local itemlink
+            local itemLink
             if ChatAnnouncements.SV.BracketOptionItem == 1 then
                 itemLink = string.format("|H0:quest_item:" .. itemId .. "|h|h")
             else
@@ -5047,7 +5049,7 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
 
     if bagId == BAG_VIRTUAL then
         local gainOrLoss
-        local localPrefix
+        local logPrefix
         local itemLink = ChatAnnouncements.GetItemLinkFromItemId(slotId)
         local icon = GetItemLinkInfo(itemLink)
         local itemType = GetItemLinkItemType(itemLink)
@@ -6944,6 +6946,7 @@ function ChatAnnouncements.HookFunction()
 
     -- EVENT_GROUPING_TOOLS_READY_CHECK_CANCELLED (Alert Handler)
     local function GroupReadyCheckCancelAlert(reason)
+        local message
 
         if reason ~= LFG_READY_CHECK_CANCEL_REASON_NOT_IN_READY_CHECK and reason ~= LFG_READY_CHECK_CANCEL_REASON_GROUP_FORMED_SUCCESSFULLY then
             message = GetString("SI_LFGREADYCHECKCANCELREASON", reason)
@@ -7531,102 +7534,94 @@ function ChatAnnouncements.HookFunction()
     end
 
     -- EVENT_SKILL_POINTS_CHANGED (CSA Handler)
-	local function SkillPointsChangedHook(oldPoints, newPoints, oldPartialPoints, newPartialPoints, changeReason)
-		local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
-		local numSkillPointsGained = newPoints - oldPoints
-		local stringPrefix = ChatAnnouncements.SV.Skills.SkillPointSkyshard
-		local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_SKYSHARD_GAINED)
-
-		local stringPart1 -- CA
-		local stringPart2 -- CA
-		local finalMessage -- CA
-		local finalText -- Alert
-		local sound -- All
-		local flagDisplay -- Flag to display a message
-
-		-- check if the skill point change was due to skyshards
-		if oldPartialPoints ~= newPartialPoints or changeReason == SKILL_POINT_CHANGE_REASON_SKYSHARD_INSTANT_UNLOCK then
-			flagDisplay = true
-			sound = SOUNDS.SKYSHARD_GAINED
-			if numSkillPointsGained < 0 then
-				return
-			end
-			local numSkyshardsGained = (newPoints * NUM_PARTIAL_SKILL_POINTS_FOR_FULL + newPartialPoints) - (oldPoints * NUM_PARTIAL_SKILL_POINTS_FOR_FULL + oldPartialPoints)
-			local largeText = zo_strformat(csaPrefix, numSkyshardsGained)
-			-- if only the partial points changed, message out the new count of skyshard pieces
-			if newPoints == oldPoints then
-				messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_POINTS_PARTIAL_GAINED)
-				messageParams:SetText(largeText, zo_strformat(SI_SKYSHARD_GAINED_POINTS, newPartialPoints, NUM_PARTIAL_SKILL_POINTS_FOR_FULL))
-				textPart1 = (stringPrefix .. ": ")
-				finalText = zo_strformat("<<1>> (<<2>>/<<3>>)", largeText, newPartialPoints, NUM_PARTIAL_SKILL_POINTS_FOR_FULL)
-
-				if stringPrefix ~= "" then
-					if ChatAnnouncements.SV.Skills.SkillPointsPartial then
-						stringPart1 = SkillPointColorize1:Colorize(zo_strformat("<<1>><<2>><<3>> ", bracket1[ChatAnnouncements.SV.Skills.SkillPointBracket], largeText, bracket2[ChatAnnouncements.SV.Skills.SkillPointBracket]))
-					else
-						stringPart1 = SkillPointColorize1:Colorize(zo_strformat("<<1>>!", largeText))
-					end
-				else
-					stringPart1 = ""
-				end
-				if ChatAnnouncements.SV.Skills.SkillPointsPartial then
-					stringPart2 = SkillPointColorize2:Colorize(zo_strformat(SI_SKYSHARD_GAINED_POINTS, newPartialPoints, NUM_PARTIAL_SKILL_POINTS_FOR_FULL))
-				else
-					stringPart2 = ""
-				end
-				finalMessage = zo_strformat("<<1>><<2>>", stringPart1, stringPart2)
-
-			else
-				local messageText
-				-- if there are no leftover skyshard pieces, don't include them in the message
-				if newPartialPoints == 0 then
-					messageText = zo_strformat(SI_SKILL_POINT_GAINED, numSkillPointsGained)
-				else
-					messageText = zo_strformat(SI_SKILL_POINT_AND_SKYSHARD_PIECES_GAINED, numSkillPointsGained, newPartialPoints, NUM_PARTIAL_SKILL_POINTS_FOR_FULL)
-				end
-				messageParams:SetText(largeText, messageText)
-				messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_POINTS_GAINED)
-				finalText = messageText
-
-				if stringPrefix ~= "" then
-					stringPart1 = SkillPointColorize1:Colorize(zo_strformat("<<1>><<2>><<3>> ", bracket1[ChatAnnouncements.SV.Skills.SkillPointBracket], largeText, bracket2[ChatAnnouncements.SV.Skills.SkillPointBracket]))
-				else
-					stringPart1 = ""
-				end
-				stringPart2 = SkillPointColorize2:Colorize(messageText)
-				finalMessage = zo_strformat("<<1>><<2>>.", stringPart1, stringPart2)
-			end
-		elseif numSkillPointsGained > 0 then
-            if not SUPPRESS_SKILL_POINT_CSA_REASONS[changeReason] then
-    			flagDisplay = true
-    			sound = SOUNDS.SKILL_GAINED
-    			messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_POINTS_GAINED)
-    			messageParams:SetText(zo_strformat(SI_SKILL_POINT_GAINED, numSkillPointsGained))
-    			finalMessage = SkillPointColorize2:Colorize(zo_strformat(SI_SKILL_POINT_GAINED, numSkillPointsGained) .. ".")
-    			finalText = zo_strformat(SI_SKILL_POINT_GAINED, numSkillPointsGained) .. "."
+    local function SkillPointsChangedHook(oldPoints, newPoints, oldPartialPoints, newPartialPoints, changeReason)
+        local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
+        local numSkillPointsGained = newPoints - oldPoints
+        local stringPrefix = ChatAnnouncements.SV.Skills.SkillPointSkyshard
+        local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_SKYSHARD_GAINED)
+        local hasStringPrefix = stringPrefix ~= ""
+        local flagDisplay, sound, finalMessage, finalText
+    
+    	-- check if the skill point change was due to skyshards
+        if oldPartialPoints ~= newPartialPoints or changeReason == SKILL_POINT_CHANGE_REASON_SKYSHARD_INSTANT_UNLOCK then
+            flagDisplay = true
+            sound = SOUNDS.SKYSHARD_GAINED
+            if numSkillPointsGained < 0 then
+                return
             end
-		end
-		if flagDisplay then
-				if ChatAnnouncements.SV.Skills.SkillPointCA then
-					if finalMessage ~= "" then
-						g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "SKILL" }
-						g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-						eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
-					end
-				end
-				if ChatAnnouncements.SV.Skills.SkillPointCSA then
-					messageParams:SetSound(sound)
-					CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
-				end
-				if ChatAnnouncements.SV.Skills.SkillPointAlert then
-					ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, finalText)
-				end
-				if not ChatAnnouncements.SV.Skills.SkillPointCSA then
-					PlaySound(sound)
-				end
-		end
-		return true
-	end
+            local numSkyshardsGained = (newPoints * NUM_PARTIAL_SKILL_POINTS_FOR_FULL + newPartialPoints) - (oldPoints * NUM_PARTIAL_SKILL_POINTS_FOR_FULL + oldPartialPoints)
+            local largeText = zo_strformat(csaPrefix, numSkyshardsGained)
+            local stringPart1, stringPart2
+        
+    		-- if only the partial points changed, message out the new count of skyshard pieces
+            if newPoints == oldPoints then
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_POINTS_PARTIAL_GAINED)
+                local skyshardGainedPoints = zo_strformat(SI_SKYSHARD_GAINED_POINTS, newPartialPoints, NUM_PARTIAL_SKILL_POINTS_FOR_FULL)
+                messageParams:SetText(largeText, skyshardGainedPoints)
+                finalText = zo_strformat("<<1>> (<<2>>/<<3>>)", largeText, newPartialPoints, NUM_PARTIAL_SKILL_POINTS_FOR_FULL)
+                if hasStringPrefix then
+                    if ChatAnnouncements.SV.Skills.SkillPointsPartial then
+                        stringPart1 = SkillPointColorize1:Colorize(zo_strformat("<<1>><<2>><<3>> ", bracket1[ChatAnnouncements.SV.Skills.SkillPointBracket], largeText, bracket2[ChatAnnouncements.SV.Skills.SkillPointBracket]))
+                    else
+                        stringPart1 = SkillPointColorize1:Colorize(zo_strformat("<<1>>!", largeText))
+                    end
+                else
+                    stringPart1 = ""
+                end
+                if ChatAnnouncements.SV.Skills.SkillPointsPartial then
+                    stringPart2 = SkillPointColorize2:Colorize(skyshardGainedPoints)
+                else
+                    stringPart2 = ""
+                end
+                finalMessage = zo_strformat("<<1>><<2>>", stringPart1, stringPart2)
+            else
+                local messageText
+    			-- if there are no leftover skyshard pieces, don't include them in the message
+                if newPartialPoints == 0 then
+                    messageText = zo_strformat(SI_SKILL_POINT_GAINED, numSkillPointsGained)
+                else
+                    messageText = zo_strformat(SI_SKILL_POINT_AND_SKYSHARD_PIECES_GAINED, numSkillPointsGained, newPartialPoints, NUM_PARTIAL_SKILL_POINTS_FOR_FULL)
+                end
+                messageParams:SetText(largeText, messageText)
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_POINTS_GAINED)
+                finalText = messageText
+                if hasStringPrefix then
+                    stringPart1 = SkillPointColorize1:Colorize(zo_strformat("<<1>><<2>><<3>> ", bracket1[ChatAnnouncements.SV.Skills.SkillPointBracket], largeText, bracket2[ChatAnnouncements.SV.Skills.SkillPointBracket]))
+                else
+                    stringPart1 = ""
+                end
+                stringPart2 = SkillPointColorize2:Colorize(messageText)
+                finalMessage = zo_strformat("<<1>><<2>>.", stringPart1, stringPart2)
+            end
+        elseif numSkillPointsGained > 0 then
+            if not SUPPRESS_SKILL_POINT_CSA_REASONS[changeReason] then
+                flagDisplay = true
+                sound = SOUNDS.SKILL_GAINED
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_POINTS_GAINED)
+                local skillPointGained = zo_strformat(SI_SKILL_POINT_GAINED, numSkillPointsGained)
+                messageParams:SetText(skillPointGained)
+                finalMessage = SkillPointColorize2:Colorize(skillPointGained .. ".")
+                finalText = skillPointGained .. "."
+            end
+        end
+        if flagDisplay then
+            if ChatAnnouncements.SV.Skills.SkillPointCA and finalMessage ~= "" then
+                table.insert(g_queuedMessages, { message = finalMessage, type = "SKILL" })
+                eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
+            end
+            if ChatAnnouncements.SV.Skills.SkillPointCSA then
+                messageParams:SetSound(sound)
+                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
+            if ChatAnnouncements.SV.Skills.SkillPointAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, finalText)
+            end
+            if not ChatAnnouncements.SV.Skills.SkillPointCSA then
+                PlaySound(sound)
+            end
+        end
+        return true
+    end
 
     -- EVENT_SKILL_LINE_ADDED (CSA Handler) -- Hooked via csaCallbackHandlers[2]
     local function SkillLineAddedHook(skillLineData)
@@ -10918,7 +10913,7 @@ end
 function ChatAnnouncements.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previousXP, currentXP)
     if (skillType == SKILL_TYPE_GUILD) then
         local lineName, _, _, lineId = GetSkillLineInfo(skillType, skillIndex)
-        formattedName = zo_strformat("<<C:1>>", lineName)
+        local formattedName = zo_strformat("<<C:1>>", lineName)
 
         -- Bail out early if a certain type is not set to be displayed
         if lineId == 45 and not ChatAnnouncements.SV.Skills.SkillGuildFighters then
