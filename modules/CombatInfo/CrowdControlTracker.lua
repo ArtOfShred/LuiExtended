@@ -807,7 +807,7 @@ function CrowdControlTracker:RemoveCC(ccType, currentEndTime)
             return
         elseif seventhInterval > 0 then
             self.currentCC = 7
-            zo_callLater(function() self:RemoveCC(6, PrioritySix.endTime) end, seventhInterval)
+            zo_callLater(function() self:RemoveCC(7, PrioritySix.endTime) end, seventhInterval)
             self:OnDraw(PrioritySeven.abilityId, PrioritySeven.abilityIcon, PrioritySeven.hitValue, PrioritySeven.result, PrioritySeven.abilityName, seventhInterval)
             return
         elseif eighthInterval > 0 then
@@ -1402,6 +1402,6 @@ function CrowdControlTracker:VarReset()
     PriorityFour = {endTime = 0, abilityId = 0, abilityIcon = "", hitValue = 0, result = 0, abilityName = ""}
     PrioritySix = {endTime = 0, abilityId = 0, abilityIcon = "", hitValue = 0, result = 0, abilityName = ""}
     PrioritySeven = {endTime = 0, abilityId = 0, abilityIcon = "", hitValue = 0, result = 0, abilityName = ""}
-    PriorityEight = { endTime = 0, abilityId = 0, abilityIcon = "", hitValue = 0, result = 0, abilityName = "" }
+    PriorityEight = { endTime = 0, abilityId = 0, abilityIcon = "", hitValue = 0, result = 0, abilityName = ""}
     self.Timer = 0
 end
