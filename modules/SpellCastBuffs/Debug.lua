@@ -12,17 +12,9 @@ local zo_strformat = zo_strformat
 -- Add millisecond timestamp to ability debug
 local function MillisecondTimestampDebug(message)
     local currentTime = GetGameTimeMilliseconds()
-    local timestamp = FormatTimeMilliseconds(currentTime, TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_MILLISECONDS_NO_HOURS_OR_DAYS, TIME_FORMAT_DIRECTION_NONE)
-    timestamp = timestamp:gsub("HH", "")
-    timestamp = timestamp:gsub("H ", ":")
-    timestamp = timestamp:gsub("hh", "")
-    timestamp = timestamp:gsub("h ", ":")
-    timestamp = timestamp:gsub("m ", ":")
-    timestamp = timestamp:gsub("s ", ":")
-    timestamp = timestamp:gsub("A", "")
-    timestamp = timestamp:gsub("a", "")
-    timestamp = timestamp:gsub("ms", "")
-    message = string.format("|c%s[%s]|r %s", LUIE.TimeStampColorize, timestamp, message)
+    local timestamp = ZO_FormatTimeMilliseconds(currentTime, TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_MILLISECONDS_NO_HOURS_OR_DAYS, TIME_FORMAT_DIRECTION_NONE)
+    timestamp = timestamp:gsub("HH", ""):gsub("H ", ":"):gsub("hh", ""):gsub("h ", ":"):gsub("m ", ":"):gsub("s ", ":"):gsub("A", ""):gsub("a", ""):gsub("ms", "")
+    message = "|c" .. LUIE.TimeStampColorize .. "[" .. timestamp .. "]|r " .. message
     return message
 end
 
@@ -242,7 +234,7 @@ function SpellCastBuffs.TempSlashCheckRemovedAbilities()
 end
 
 local displayName = GetDisplayName()
-if displayName == "@ArtOfShredPTS" or displayName == "@ArtOfShredLegacy" or displayName == "@HammerOfGlory" then
+if displayName == "@ArtOfShredPTS" or displayName == "@ArtOfShredLegacy" or displayName == "@HammerOfGlory"  or displayName == "@dack_janiels" then
     SLASH_COMMANDS["/filter"] = SpellCastBuffs.TempSlashFilter
     SLASH_COMMANDS["/ground"] = SpellCastBuffs.TempSlashGround
     SLASH_COMMANDS["/zonecheck"] = SpellCastBuffs.TempSlashZoneCheck

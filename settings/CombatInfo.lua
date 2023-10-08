@@ -597,7 +597,7 @@ function CombatInfo.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_CASTBAR_MOVE),
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_MOVE_TP),
-                getFunc = function() return castBarMovingEnabled end,
+                getFunc = function() return castBarMovingEnable end,
                 setFunc = CombatInfo.SetMovingState,
                 width = "half",
                 default = false,

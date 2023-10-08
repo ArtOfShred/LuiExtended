@@ -138,23 +138,23 @@ function CombatTextEventViewer:GetTextAtributes(powerType, damageType, isDamage,
         end
     elseif (isEnergize) then
         fontSize = Settings.fontSizes.gainLoss
-        if (powerType == POWERTYPE_ULTIMATE) then
+        if (powerType == COMBAT_MECHANIC_FLAGS_ULTIMATE) then
             textFormat = Settings.formats.ultimateEnergize
             textColor = Settings.colors.energizeUltimate
         else
             textFormat = Settings.formats.energize
-            if (powerType == POWERTYPE_MAGICKA) then
+            if (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA) then
                 textColor = Settings.colors.energizeMagicka
-            elseif (powerType == POWERTYPE_STAMINA) then
+            elseif (powerType == COMBAT_MECHANIC_FLAGS_STAMINA) then
                 textColor = Settings.colors.energizeStamina
             end
         end
     elseif (isDrain) then
         textFormat = Settings.formats.drain
         fontSize = Settings.fontSizes.gainLoss
-        if (powerType == POWERTYPE_MAGICKA) then
+        if (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA) then
             textColor = Settings.colors.energizeMagicka
-        elseif (powerType == POWERTYPE_STAMINA) then
+        elseif (powerType == COMBAT_MECHANIC_FLAGS_STAMINA) then
             textColor = Settings.colors.energizeStamina
         end
     elseif (isDot) then

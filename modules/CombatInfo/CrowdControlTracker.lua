@@ -9,7 +9,7 @@ local CrowdControlTracker = CombatInfo.CrowdControlTracker
 
 local Effects = LUIE.Data.Effects
 local CrowdControl = LUIE.Data.CrowdControl
-
+local PVP_Alerts_Main_Table
 local eventManager = EVENT_MANAGER
 local animationManager = ANIMATION_MANAGER
 

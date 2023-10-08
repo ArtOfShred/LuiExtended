@@ -25,7 +25,7 @@ end
 function SpellCastBuffs.DisplayWerewolfIcon()
     SetWerewolfIcon()
     local context = SpellCastBuffs.DetermineContextSimple("player1", g_werewolfId, g_werewolfName)
-    local power = GetUnitPower("player", POWERTYPE_WEREWOLF)
+    local power = GetUnitPower("player", COMBAT_MECHANIC_FLAGS_WEREWOLF)
     SpellCastBuffs.EffectsList[context]["Werewolf Indicator"] = {
         target="player", type=1,
         id = g_werewolfId, name=g_werewolfName, icon=g_werewolfIcon,
@@ -51,7 +51,7 @@ function SpellCastBuffs.WerewolfState(eventCode, werewolf, onActivation)
                 if g_werewolfCounter == 3 or onActivation then
                     SpellCastBuffs.DisplayWerewolfIcon()
                     eventManager:RegisterForEvent(moduleName, EVENT_POWER_UPDATE, SpellCastBuffs.OnPowerUpdate)
-                    eventManager:AddFilterForEvent(moduleName, EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, POWERTYPE_WEREWOLF, REGISTER_FILTER_UNIT_TAG, "player")
+                    eventManager:AddFilterForEvent(moduleName, EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, COMBAT_MECHANIC_FLAGS_WEREWOLF, REGISTER_FILTER_UNIT_TAG, "player")
                     g_werewolfCounter = 0
                 end
                 return

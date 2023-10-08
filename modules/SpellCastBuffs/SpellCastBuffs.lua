@@ -219,6 +219,14 @@ SpellCastBuffs.BuffContainers = uiTlw
 
 -- Quadratic easing out - decelerating to zero velocity (For buff fade)
 local function EaseOutQuad(t, b, c, d)
+    -- protect against 1 / 0
+	if t == 0 then
+		t = 0.0001
+	end
+	if d == 0 then
+		d = 0.0001
+	end
+
     t = t / d
     return -c * t * (t - 2) + b
 end
@@ -2329,7 +2337,7 @@ function SpellCastBuffs.OnCombatEventIn(eventCode, result, isError, abilityName,
             return
         end
 
-        local stack = {}
+        local stack
         local iconName = GetAbilityIcon(abilityId)
         local effectName
         local unbreakable

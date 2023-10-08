@@ -900,13 +900,13 @@ function CombatInfo.OnPlayerActivated(eventCode)
         -- Update Bar Slots on initial load (don't want to do it normally when we do a slot update)
         CombatInfo.BarSlotUpdate(i, true, false)
     end
-    CombatInfo.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, "player", nil, POWERTYPE_ULTIMATE, GetUnitPower("player", POWERTYPE_ULTIMATE))
+    CombatInfo.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, "player", nil, COMBAT_MECHANIC_FLAGS_ULTIMATE, GetUnitPower("player", COMBAT_MECHANIC_FLAGS_ULTIMATE))
 end
 
 local savedPlayerX = 0
 local savedPlayerZ = 0
-local playerX = 0
-local playerZ = 0
+local playerX
+local playerZ
 
 -- Updates all floating labels. Called every 100ms
 function CombatInfo.OnUpdate(currentTime)
@@ -2530,7 +2530,7 @@ function CombatInfo.UpdateUltimateLabel()
     g_ultimateCost = GetSlotAbilityCost(g_ultimateSlot) or 0
 
     -- Update ultimate label
-    CombatInfo.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, "player", nil, POWERTYPE_ULTIMATE, g_ultimateCurrent, 0, 0)
+    CombatInfo.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, "player", nil, COMBAT_MECHANIC_FLAGS_ULTIMATE, g_ultimateCurrent, 0, 0)
 end
 
 function CombatInfo.InventoryItemUsed()
@@ -2698,7 +2698,7 @@ end
 
 function CombatInfo.OnPowerUpdatePlayer(eventCode, unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax)
     if unitTag ~= "player" then return end
-    if powerType ~= POWERTYPE_ULTIMATE then return end
+    if powerType ~= COMBAT_MECHANIC_FLAGS_ULTIMATE then return end
 
     -- flag if ultimate is full - we"ll need it for ultimate generation texture
     uiUltimate.NotFull = (powerValue < powerMax)
