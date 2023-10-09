@@ -526,14 +526,20 @@ function CombatInfo.SetupBackBarIcons(button, flip)
     local slotId = GetSlotBoundId(slotNum - BACKBAR_INDEX_OFFSET, hotbarCategory)
 
     -- Special case for certain skills, so the proc icon doesn't get stuck.
-    if slotId == 61907 then slotId = 61902 end -- Assassin's Will --> Grim Focus
-    if slotId == 61932 then slotId = 61927 end -- Assassin's Scourge --> Relentless Focus
-    if slotId == 61930 then slotId = 61919 end -- Assassin's Will --> Merciless Resolve
-    if slotId == 114716 then slotId = 46324 end -- Crystal Fragments --> Crystal Fragments
-    if slotId == 20824 then slotId = 20816 end -- Power Lash --> Flame Lash
-    if slotId == 35445 then slotId = 35441 end -- Shadow Image Teleport --> Shadow Image
-    if slotId == 126659 then slotId = 38910 end -- Flying Blade --> Flying Blade
-    if slotId == 130291 then slotId = 24165 end -- Bound Armaments --> Bound Armaments
+    local specialCases = {
+        [61907] = 61902, -- Assassin's Will --> Grim Focus
+        [61932] = 61927, -- Assassin's Scourge --> Relentless Focus
+        [61930] = 61919, -- Assassin's Will --> Merciless Resolve
+        [114716] = 46324, -- Crystal Fragments --> Crystal Fragments
+        [20824] = 20816, -- Power Lash --> Flame Lash
+        [35445] = 35441, -- Shadow Image Teleport --> Shadow Image
+        [126659] = 38910, -- Flying Blade --> Flying Blade
+        [130291] = 24165 -- Bound Armaments --> Bound Armaments
+    }
+
+    if specialCases[slotId] then
+        slotId = specialCases[slotId]
+    end
 
     -- Check if something is in this action bar slot and if not hide the slot
     if slotId > 0 then
@@ -542,20 +548,24 @@ function CombatInfo.SetupBackBarIcons(button, flip)
     else
         button.icon:SetHidden(true)
     end
-
+    
     if flip then
-        local desaturate
-        if g_uiCustomToggle[slotNum] then
-            desaturate = false
-            if g_uiCustomToggle[slotNum]:IsHidden() then
-                CombatInfo.BackbarHideSlot(slotNum)
-                desaturate = true
-            end
-        else
+        CombatInfo.handleFlip(slotNum)
+    end
+end
+
+function CombatInfo.handleFlip(slotNum)
+    local desaturate
+    if g_uiCustomToggle[slotNum] then
+        desaturate = false
+        if g_uiCustomToggle[slotNum]:IsHidden() then
+            CombatInfo.BackbarHideSlot(slotNum)
             desaturate = true
         end
-        CombatInfo.ToggleBackbarSaturation(slotNum, desaturate)
+    else
+        desaturate = true
     end
+    CombatInfo.ToggleBackbarSaturation(slotNum, desaturate)
 end
 
 function CombatInfo.OnActiveWeaponPairChanged()
@@ -903,71 +913,43 @@ local playerZ
 
 -- Updates all floating labels. Called every 100ms
 function CombatInfo.OnUpdate(currentTime)
-    -- Procs
+	-- Procs
     for k, v in pairs(g_triggeredSlotsRemain) do
-        local remain = g_triggeredSlotsRemain[k] - currentTime
-
-        -- If duration reaches 0 then remove effect
+        local remain = v - currentTime
+        local front = g_triggeredSlotsFront[k]
+        local back = g_triggeredSlotsBack[k]
+        local frontAnim = front and g_uiProcAnimation[front]
+        local backAnim = back and g_uiProcAnimation[back]
+		-- If duration reaches 0 then remove effect
         if v < currentTime then
-            if g_triggeredSlotsFront[k] and g_uiProcAnimation[g_triggeredSlotsFront[k]] then
-                g_uiProcAnimation[g_triggeredSlotsFront[k]]:Stop()
-            end
-            if g_triggeredSlotsBack[k] and g_uiProcAnimation[g_triggeredSlotsBack[k]] then
-                g_uiProcAnimation[g_triggeredSlotsBack[k]]:Stop()
-            end
+            if frontAnim then frontAnim:Stop() end
+            if backAnim then backAnim:Stop() end
             g_triggeredSlotsRemain[k] = nil
         end
-
-        -- Update Label (FRONT)
-        if g_triggeredSlotsFront[k] and g_uiProcAnimation[g_triggeredSlotsFront[k]] and g_triggeredSlotsRemain[k] then
-            if CombatInfo.SV.BarShowLabel then
-                g_uiProcAnimation[g_triggeredSlotsFront[k]].procLoopTexture.label:SetText(FormatDurationSeconds(remain))
-            end
-        end
-        -- Update Label (BACK)
-        if g_triggeredSlotsBack[k] and g_uiProcAnimation[g_triggeredSlotsBack[k]] and g_triggeredSlotsRemain[k] then
-            if CombatInfo.SV.BarShowLabel then
-                g_uiProcAnimation[g_triggeredSlotsBack[k]].procLoopTexture.label:SetText(FormatDurationSeconds(remain))
-            end
+		-- Update Label (FRONT)(BACK)
+        if CombatInfo.SV.BarShowLabel and remain then
+            if frontAnim then frontAnim.procLoopTexture.label:SetText(FormatDurationSeconds(remain)) end
+            if backAnim then backAnim.procLoopTexture.label:SetText(FormatDurationSeconds(remain)) end
         end
     end
-
-    -- Ability Highlight
+	-- Ability Highlight
     for k, v in pairs(g_toggledSlotsRemain) do
-        local remain = g_toggledSlotsRemain[k] - currentTime
-        -- If duration reaches 0 then remove effect
+        local remain = v - currentTime
+        local front = g_toggledSlotsFront[k]
+        local back = g_toggledSlotsBack[k]
+        local frontToggle = front and g_uiCustomToggle[front]
+        local backToggle = back and g_uiCustomToggle[back]
+		-- Update Label (FRONT)
         if v < currentTime then
-            if g_toggledSlotsFront[k] and g_uiCustomToggle[g_toggledSlotsFront[k]] then
-                local slotNum = g_toggledSlotsFront[k]
-                CombatInfo.HideSlot(slotNum, k)
-            end
-            if g_toggledSlotsBack[k] and g_uiCustomToggle[g_toggledSlotsBack[k]] then
-                local slotNum = g_toggledSlotsBack[k]
-                CombatInfo.HideSlot(slotNum, k)
-            end
+            if frontToggle then CombatInfo.HideSlot(front, k) end
+            if backToggle then CombatInfo.HideSlot(back, k) end
             g_toggledSlotsRemain[k] = nil
             g_toggledSlotsStack[k] = nil
         end
-
-        -- Update Label (FRONT)
-        if g_toggledSlotsFront[k] and g_uiCustomToggle[g_toggledSlotsFront[k]] and g_toggledSlotsRemain[k] then
-            if g_toggledSlotsFront[k] == 8 and CombatInfo.SV.UltimatePctEnabled then
-                uiUltimate.LabelPct:SetHidden(true)
-            end
-            if CombatInfo.SV.BarShowLabel then
-                if not g_uiCustomToggle[g_toggledSlotsFront[k]] then return end
-                g_uiCustomToggle[g_toggledSlotsFront[k]].label:SetText(FormatDurationSeconds(remain))
-            end
-        end
-        -- Update Label (BACK)
-        if g_toggledSlotsBack[k] and g_uiCustomToggle[g_toggledSlotsBack[k]] and g_toggledSlotsRemain[k] then
-            if g_toggledSlotsBack[k] == 8 and CombatInfo.SV.UltimatePctEnabled then
-                uiUltimate.LabelPct:SetHidden(true)
-            end
-            if CombatInfo.SV.BarShowLabel then
-                if not g_uiCustomToggle[g_toggledSlotsBack[k]] then return end
-                g_uiCustomToggle[g_toggledSlotsBack[k]].label:SetText(FormatDurationSeconds(remain))
-            end
+		-- Update Label (BACK)
+        if CombatInfo.SV.BarShowLabel and remain then
+            if frontToggle then frontToggle.label:SetText(FormatDurationSeconds(remain)) end
+            if backToggle then backToggle.label:SetText(FormatDurationSeconds(remain)) end
         end
     end
 
@@ -975,41 +957,39 @@ function CombatInfo.OnUpdate(currentTime)
     if CombatInfo.SV.PotionTimerShow then
         local slotIndex = GetCurrentQuickslot()
         local remain, duration, global = GetSlotCooldownInfo(slotIndex, HOTBAR_CATEGORY_QUICKSLOT_WHEEL)
-        -- Don't show unless potion is used - We have to counter for the GCD lockout from casting a spell here
+        local label = uiQuickSlot.label
+        local timeColours = uiQuickSlot.timeColours
         if (duration > 5000) then
-            uiQuickSlot.label:SetHidden(false)
-
+            label:SetHidden(false)
             if not CombatInfo.SV.PotionTimerColor then
-                uiQuickSlot.label:SetColor(1, 1, 1, 1)
+                label:SetColor(1, 1, 1, 1)
             else
-                local color = uiQuickSlot.colour -- default color in case none is found
-                for i = #(uiQuickSlot.timeColours), 1, -1 do
-                    if remain < uiQuickSlot.timeColours[i].remain then
-                        color = uiQuickSlot.timeColours[i].colour
+                local color = uiQuickSlot.colour
+                for i = #(timeColours), 1, -1 do
+                    if remain < timeColours[i].remain then
+                        color = timeColours[i].colour
                         break
                     end
                 end
-                uiQuickSlot.label:SetColor(unpack(color))
+                label:SetColor(unpack(color))
             end
-
+            local text
             if remain > 86400000 then
-                -- more than 1 day
-                uiQuickSlot.label:SetText(string.format("%d d", math.floor(remain / 86400000)))
+                text = math.floor(remain / 86400000) .. " d"
             elseif remain > 6000000 then
-                -- over 100 minutes - display XXh
-                uiQuickSlot.label:SetText(string.format("%dh", math.floor(remain / 3600000)))
+                text = math.floor(remain / 3600000) .. "h"
             elseif remain > 600000 then
-                -- over 10 minutes - display XXm
-                uiQuickSlot.label:SetText(string.format("%dm", math.floor(remain / 60000)))
+                text = math.floor(remain / 60000) .. "m"
             elseif remain > 60000 then
                 local m = math.floor(remain / 60000)
                 local s = remain / 1000 - 60 * m
-                uiQuickSlot.label:SetText(string.format("%d:%.2d", m, s))
+                text = m .. ":" .. string.format("%.2d", s)
             else
-                uiQuickSlot.label:SetText(string.format(CombatInfo.SV.PotionTimerMillis and "%.1f" or "%.1d", 0.001 * remain))
+                text = string.format(CombatInfo.SV.PotionTimerMillis and "%.1f" or "%.1d", 0.001 * remain)
             end
+            label:SetText(text)
         else
-            uiQuickSlot.label:SetHidden(true)
+            label:SetHidden(true)
         end
     end
 
@@ -1042,7 +1022,6 @@ function CombatInfo.OnUpdate(currentTime)
             CombatInfo.StopCastBar()
         end
     end
-
 end
 
 -- Run on the EVENT_GAME_CAMERA_UI_MODE_CHANGED handler
@@ -1103,71 +1082,37 @@ function CombatInfo.ApplyFont()
         return
     end
 
-    -- Setup Bar Font
-    local barFontName = LUIE.Fonts[CombatInfo.SV.BarFontFace]
-    if not barFontName or barFontName == "" then
-        printToChat(GetString(SI_LUIE_ERROR_FONT), true)
-        barFontName = "$(MEDIUM_FONT)"
+    local function setupFont(fontNameKey, fontStyleKey, fontSizeKey, defaultFontStyle, defaultFontSize)
+        local fontName = LUIE.Fonts[CombatInfo.SV[fontNameKey]]
+        if not fontName or fontName == "" then
+            printToChat(GetString(SI_LUIE_ERROR_FONT), true)
+            fontName = "$(MEDIUM_FONT)"
+        end
+        local fontStyle = (CombatInfo.SV[fontStyleKey] and CombatInfo.SV[fontStyleKey] ~= "") and CombatInfo.SV[fontStyleKey] or defaultFontStyle
+        local fontSize = (CombatInfo.SV[fontSizeKey] and CombatInfo.SV[fontSizeKey] > 0) and CombatInfo.SV[fontSizeKey] or defaultFontSize
+        return fontName .. "|" .. fontSize .. "|" .. fontStyle
     end
 
-    local barFontStyle = (CombatInfo.SV.BarFontStyle and CombatInfo.SV.BarFontStyle ~= "") and CombatInfo.SV.BarFontStyle or "outline"
-    local barFontSize = (CombatInfo.SV.BarFontSize and CombatInfo.SV.BarFontSize > 0) and CombatInfo.SV.BarFontSize or 17
-
-    g_barFont = barFontName .. "|" .. barFontSize .. "|" .. barFontStyle
-
+    g_barFont = setupFont("BarFontFace", "BarFontStyle", "BarFontSize", "outline", 17)
     for k, _ in pairs(g_uiProcAnimation) do
         g_uiProcAnimation[k].procLoopTexture.label:SetFont(g_barFont)
     end
-
     for k, _ in pairs(g_uiCustomToggle) do
         g_uiCustomToggle[k].label:SetFont(g_barFont)
         g_uiCustomToggle[k].stack:SetFont(g_barFont)
     end
 
-    -- Setup Potion Timer Font
-    local potionFontName = LUIE.Fonts[CombatInfo.SV.PotionTimerFontFace]
-    if not potionFontName or potionFontName == "" then
-        printToChat(GetString(SI_LUIE_ERROR_FONT), true)
-        potionFontName = "$(MEDIUM_FONT)"
-    end
-
-    local potionFontStyle = (CombatInfo.SV.PotionTimerFontStyle and CombatInfo.SV.PotionTimerFontStyle ~= "") and CombatInfo.SV.PotionTimerFontStyle or "outline"
-    local potionFontSize = (CombatInfo.SV.PotionTimerFontSize and CombatInfo.SV.PotionTimerFontSize > 0) and CombatInfo.SV.PotionTimerFontSize or 17
-
-    g_potionFont = potionFontName .. "|" .. potionFontSize .. "|" .. potionFontStyle
-
-    -- If QuickSlot is created, and we're updating font from the menu setting, set the font here.
+    g_potionFont = setupFont("PotionTimerFontFace", "PotionTimerFontStyle", "PotionTimerFontSize", "outline", 17)
     if uiQuickSlot.label then
         uiQuickSlot.label:SetFont(g_potionFont)
     end
 
-    -- Setup Ultimate Font
-    local ultimateFontName = LUIE.Fonts[CombatInfo.SV.UltimateFontFace]
-    if not ultimateFontName or ultimateFontName == "" then
-        printToChat(GetString(SI_LUIE_ERROR_FONT), true)
-        ultimateFontName = "$(MEDIUM_FONT)"
-    end
-
-    local ultimateFontStyle = (CombatInfo.SV.UltimateFontStyle and CombatInfo.SV.UltimateFontStyle ~= "") and CombatInfo.SV.UltimateFontStyle or "outline"
-    local ultimateFontSize = (CombatInfo.SV.UltimateFontSize and CombatInfo.SV.UltimateFontSize > 0) and CombatInfo.SV.UltimateFontSize or 17
-
-    g_ultimateFont = ultimateFontName .. "|" .. ultimateFontSize .. "|" .. ultimateFontStyle
-
+    g_ultimateFont = setupFont("UltimateFontFace", "UltimateFontStyle", "UltimateFontSize", "outline", 17)
     if uiUltimate.LabelPct then
         uiUltimate.LabelPct:SetFont(g_ultimateFont)
     end
 
-    -- Setup Castbar Font
-    local castbarFontName = LUIE.Fonts[CombatInfo.SV.CastBarFontFace]
-    if not castbarFontName or castbarFontName == "" then
-        printToChat(GetString(SI_LUIE_ERROR_FONT), true)
-        castbarFontName = "$(MEDIUM_FONT)"
-    end
-
-    local castbarFontStyle = (CombatInfo.SV.CastBarFontStyle and CombatInfo.SV.CastBarFontStyle ~= "") and CombatInfo.SV.CastBarFontStyle or "soft-shadow-thin"
-    local castbarFontSize = (CombatInfo.SV.CastBarFontSize and CombatInfo.SV.CastBarFontSize > 0) and CombatInfo.SV.CastBarFontSize or 16
-
-    g_castbarFont = castbarFontName .. "|" .. castbarFontSize .. "|" .. castbarFontStyle
+    g_castbarFont = setupFont("CastBarFontFace", "CastBarFontStyle", "CastBarFontSize", "soft-shadow-thin", 16)
 end
 
 -- Updates Proc Sound - called on initialization and menu changes
@@ -1742,7 +1687,6 @@ function CombatInfo.BackbarSetupTemplate()
     -- Set positions for new buttons, modified from actionbar.lua - function ApplyStyle(style) )
     local lastButton
     local buttonTemplate = ZO_GetPlatformTemplate('ZO_ActionButton')
-    local ultimateTemplate = ZO_GetPlatformTemplate('ZO_UltimateActionButton')
     for i = BAR_INDEX_START, BAR_INDEX_END do
 
         -- Get our backbar button
@@ -1756,10 +1700,6 @@ function CombatInfo.BackbarSetupTemplate()
             end
             targetButton:ApplyAnchor(anchorTarget, style.abilitySlotOffsetX)
             targetButton:ApplyStyle(buttonTemplate)
-            -- Ultimate slot
-            --elseif i == 8 then
-            --    targetButton:ApplyStyle(ultimateTemplate)
-            --    targetButton:ApplyAnchor(lastButton.slot, style.ultimateSlotOffsetX)
         end
 
         lastButton = targetButton
