@@ -17,7 +17,7 @@ function CombatTextResourcesPotionEventListener:New()
     return obj
 end
 
-function CombatTextResourcesPotionEventListener:PotionCooldown()
+function CombatTextResourcesPotionEventListener:PotionCooldown(slotNum)
     local Settings = LUIE.CombatText.SV
     if not Settings.toggles.showPotionReady then
         return

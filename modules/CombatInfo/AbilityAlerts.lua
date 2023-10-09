@@ -38,6 +38,14 @@ local alertTypes = {
 
 -- Quadratic easing out - decelerating to zero velocity (For buff fade)
 local function EaseOutQuad(t, b, c, d)
+	-- protect against 1 / 0
+	if t == 0 then
+		t = 0.0001
+	end
+	if d == 0 then
+		d = 0.0001
+	end
+
     t = t / d
     return -c * t*(t-2) + b
 end
@@ -60,6 +68,7 @@ end
 -- Called from menu when font size/face, etc is changed
 function AbilityAlerts.ResetAlertSize()
     for i = 1, 3 do
+        local height = (CombatInfo.SV.alerts.toggles.alertFontSize * 2)
         local alert = _G["LUIE_Alert" .. i]
         alert.prefix:SetFont(g_alertFont)
         alert.name:SetFont(g_alertFont)
@@ -275,7 +284,7 @@ function AbilityAlerts.OnPlayerActivated()
     if duelState == DUEL_STATE_DUELING then
         g_inDuel = true
     end
-    UnregisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED)
 end
 
 function AbilityAlerts.ResetAlertFramePosition()
@@ -498,7 +507,7 @@ function AbilityAlerts.PreviewAlertSound(value)
 end
 
 -- Play a sound if the option is enabled and priority is set.
-function AbilityAlerts.PlayAlertSound(abilityId)
+function AbilityAlerts.PlayAlertSound(abilityId, ...)
     local Settings = CombatInfo.SV.alerts
 
     local isPlay
@@ -936,7 +945,7 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     end
 end
 
-local function CheckInterruptEvent(unitId, abilityId)
+local function CheckInterruptEvent(unitId, abilityId, resultType)
     for i = 1, 3 do
         local alert = _G["LUIE_Alert" .. i]
         if alert.data.sourceUnitId then
@@ -1235,6 +1244,7 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
         if modifier ~= "" then
             modifier = (" " .. modifier)
         end
+        local color = AbilityAlerts.AlertColors.alertColorUnmit
         prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and Settings.toggles.mitigationEnemyName or ""
         if prefix ~= "" then
             name = (" " .. name)

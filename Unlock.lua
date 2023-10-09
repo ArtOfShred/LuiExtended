@@ -156,7 +156,7 @@ function LUIE.SetupElementMover(state)
 
             local tlw = UI.TopLevel( { point, relativePoint, offsetX, offsetY, relativeTo }, { k:GetWidth(), k:GetHeight() } )
 
-            tlw:SetDrawLayer(DL_BACKDROP)
+            tlw:SetDrawLayer(DL_BACKGROUND)
             tlw:SetDrawTier(DT_MEDIUM)
             tlw.customPositionAttr = k:GetName()
             tlw.preview = UI.Backdrop( tlw, "fill", nil, nil, nil, false )

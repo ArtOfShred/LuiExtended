@@ -187,7 +187,7 @@ function SlashCommands.SlashGroupRole(option)
         UpdateSelectedLFGRole(LFG_ROLE_DPS)
     end
 end
-
+local playerName, PlayerDisplayName = ZO_GetPrimaryPlayerName, ZO_GetPrimaryPlayerName
 -- Slash Command to kick someone from a group
 function SlashCommands.SlashGroupKick(option)
     local groupSize = GetGroupSize()

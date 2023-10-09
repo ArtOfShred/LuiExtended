@@ -451,7 +451,7 @@ LUIE.Data.AlertTable = {
 
     [88282] = { avoid = true, eventdetect = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 767, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Rock Stomp (Iron Atronach)
     [88261] = { block = true, eventdetect = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 800, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Lava Wave (Iron Atronach)
-    [88297] = { avoid = true, auradetect = true, priority = 2, duration = 6000, effectOnlyInterrupt, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Blast Furnace (Iron Atronach)
+    [88297] = { avoid = true, auradetect = true, priority = 2, duration = 6000, effectOnlyInterrupt = true, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Blast Furnace (Iron Atronach)
 
     -- UNDEAD
     [8569] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1300, cc = LUIE_CC_TYPE_STAGGER, sound = LUIE_ALERT_SOUND_TYPE_ST_CC }, -- Devastating Leap (Bloodfiend)
