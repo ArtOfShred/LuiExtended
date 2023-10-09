@@ -875,7 +875,7 @@ function CrowdControlTracker:OnCombatTipAdded(eventCode, combatTipID)
 end
 
 function CrowdControlTracker:PopRootAlert(eventCode, combatTipID)
-    if not (combatTipID == 19) and not isRooted then return end
+    if not (combatTipID == 19) or not isRooted then return end
     --[[ CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, abilityGraphic,
     abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType,
     damageType, combat_log, sourceUnitId, targetUnitId, abilityId)]]
