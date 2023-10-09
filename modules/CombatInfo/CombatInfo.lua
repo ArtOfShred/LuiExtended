@@ -299,7 +299,7 @@ local g_castbarFont -- Font for Castbar Label & Timer
 local g_ProcSound -- Proc Sound
 local g_boundArmamentsPlayed = false -- Specific variable to lockout Bound Armaments from playing a proc sound at 5 stacks to only once per 5 seconds.
 local g_disableProcSound = {} -- When we play a proc sound from a bar ability changing (like power lash) we put a 3 sec ICD on it so it doesn't spam when mousing on/off a target, etc
-local g_hotbarCategory  -- Set on initialization and when we swap weapons to determine the current hotbar category
+local g_hotbarCategory = GetActiveHotbarCategory() -- Set on initialization and when we swap weapons to determine the current hotbar category
 local g_backbarButtons = {} -- Table to hold backbar buttons
 local g_activeWeaponSwapInProgress = false -- Toggled on when weapon swapping, TODO: maybe not needed
 
@@ -705,13 +705,6 @@ function CombatInfo.UpdateBarHighlightTables()
     g_barFakeAura = {}
     g_barDurationOverride = {}
     g_barNoRemove = {}
-
-    local counter = 0
-    for abilityId, _ in pairs(g_barOverrideCI) do
-        counter = counter + 1
-        local eventName = (moduleName .. "CombatEventBar" .. counter)
-        eventManager:UnregisterForEvent(eventName, EVENT_COMBAT_EVENT, CombatInfo.OnCombatEventBar)
-    end
 
     if CombatInfo.SV.ShowTriggered or CombatInfo.SV.ShowToggled then
         -- Grab any aura's from the list that have on EVENT_COMBAT_EVENT AURA support
@@ -1298,67 +1291,29 @@ function CombatInfo.OnReticleTargetChanged(eventCode)
     end
 end
 
--- Iterate until we find the buff we're looking for, if it's present, then send a dummy event using the duration info from that buff but the id from the original ability.
 function CombatInfo.BarHighlightSwap(abilityId)
-    local id1 = Effects.BarHighlightCheckOnFade[abilityId].id1 or 0
-    local id2 = Effects.BarHighlightCheckOnFade[abilityId].id2 or 0
-    local id3 = Effects.BarHighlightCheckOnFade[abilityId].id3 or 0
-    local unitTag = Effects.BarHighlightCheckOnFade[abilityId].unitTag
-    local id2Tag = Effects.BarHighlightCheckOnFade[abilityId].id2Tag
-    local id3Tag = Effects.BarHighlightCheckOnFade[abilityId].id3Tag
-    local duration = Effects.BarHighlightCheckOnFade[abilityId].duration or 0
-    local durationMod = Effects.BarHighlightCheckOnFade[abilityId].durationMod or 0
-    -- If the unitTag doesn't exist, bail out here
-    if not DoesUnitExist(unitTag) then return end
+    local effect = Effects.BarHighlightCheckOnFade[abilityId]
+    local ids = {effect.id1 or 0, effect.id2 or 0, effect.id3 or 0}
+    local tags = {effect.unitTag, effect.id2Tag, effect.id3Tag}
+    local duration = effect.duration or 0
+    local durationMod = effect.durationMod or 0
 
-    -- If we have a fake duration assigned, use that
-    if duration > 0 then
-        duration = (GetAbilityDuration(duration) - GetAbilityDuration(durationMod))
-        local timeStarted = GetGameTimeSeconds()
-        local timeEnding = timeStarted + (duration / 1000)
-        -- Fill in set values here since we know this is a fake self aura if we have a fake duration
-        CombatInfo.OnEffectChanged(nil, EFFECT_RESULT_GAINED, nil, nil, unitTag, timeStarted, timeEnding, 0, nil, nil, 1, ABILITY_TYPE_BONUS, 0, nil, nil, abilityId, 1, true)
-        return
-    end
+    for i, id in ipairs(ids) do
+        local unitTag = tags[i]
+        if not DoesUnitExist(unitTag) then return end
 
-    -- Id's serve as a priority system, if we find an id then we process it and this function returns.
-    -- It's important we check that the id both exists and is castByPlayer, in the case of 2 of the same id being present with one not cast by the player.
-
-    -- Iterate through buffs and look for id1 if it exists
-    if id1 ~= 0 then
-        for i = 1, GetNumBuffs(unitTag) do
-            local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityIdNew, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, i)
-            if id1 == abilityIdNew then
-                -- Only send an event if castByPlayer is true
-                if castByPlayer == true then
-                    CombatInfo.OnEffectChanged(nil, EFFECT_RESULT_GAINED, nil, nil, unitTag, timeStarted, timeEnding, stackCount, nil, buffType, effectType, abilityType, statusEffectType, nil, nil, abilityId, 1, true)
-                    return
-                end
-            end
+        if duration > 0 then
+            duration = (GetAbilityDuration(duration) - GetAbilityDuration(durationMod))
+            local timeStarted = GetGameTimeSeconds()
+            local timeEnding = timeStarted + (duration / 1000)
+            CombatInfo.OnEffectChanged(nil, EFFECT_RESULT_GAINED, nil, nil, unitTag, timeStarted, timeEnding, 0, nil, nil, 1, ABILITY_TYPE_BONUS, 0, nil, nil, abilityId, 1, true)
+            return
         end
-    end
-    -- Swap tag here for id2 checking
-    if id2Tag then unitTag = id2Tag end
-    -- Only iterate again if there is a second ID to look for
-    if id2 ~= 0 then
-        for i = 1, GetNumBuffs(unitTag) do
-            local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityIdNew, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, i)
-            if id2 == abilityIdNew then
-                if castByPlayer == true then
-                    CombatInfo.OnEffectChanged(nil, EFFECT_RESULT_GAINED, nil, nil, unitTag, timeStarted, timeEnding, stackCount, nil, buffType, effectType, abilityType, statusEffectType, nil, nil, abilityId, 1, true)
-                    return
-                end
-            end
-        end
-    end
-    -- Swap tag here for id2 checking
-    if id3Tag then unitTag = id2Tag end
-    -- Only iterate again if there is a third ID to look for
-    if id3 ~= 0 then
-        for i = 1, GetNumBuffs(unitTag) do
-            local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityIdNew, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, i)
-            if id3 == abilityIdNew then
-                if castByPlayer == true then
+
+        if id ~= 0 then
+            for j = 1, GetNumBuffs(unitTag) do
+                local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityIdNew, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, j)
+                if id == abilityIdNew and castByPlayer then
                     CombatInfo.OnEffectChanged(nil, EFFECT_RESULT_GAINED, nil, nil, unitTag, timeStarted, timeEnding, stackCount, nil, buffType, effectType, abilityType, statusEffectType, nil, nil, abilityId, 1, true)
                     return
                 end
@@ -2374,12 +2329,15 @@ function CombatInfo.OnSlotUpdated(eventCode, slotNum)
 
 end
 
+local function removeSlotFromTable(table, slotNum)
+    for abilityId, slot in pairs(table) do
+        if (slot == slotNum) then
+            table[abilityId] = nil
+        end
+    end
+end
+
 function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
-
-    -- Handle slot update for action bars
-    -- d(string.format("%d: %s(%d)", slotNum, GetSlotName(slotNum), GetSlotBoundId(slotNum)))
-    -- Look only for action bar slots
-
     if slotNum < BACKBAR_INDEX_OFFSET then
         if CombatInfo.SV.ShowToggledUltimate then
             if slotNum < BAR_INDEX_START or slotNum > BAR_INDEX_END then
@@ -2392,54 +2350,30 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
         end
     end
 
-    -- Remove saved triggered proc information
-    for abilityId, slot in pairs(g_triggeredSlotsFront) do
-        if (slot == slotNum) then
-            g_triggeredSlotsFront[abilityId] = nil
-        end
-    end
-    for abilityId, slot in pairs(g_triggeredSlotsBack) do
-        if (slot == slotNum) then
-            g_triggeredSlotsBack[abilityId] = nil
-        end
-    end
+    removeSlotFromTable(g_triggeredSlotsFront, slotNum)
+    removeSlotFromTable(g_triggeredSlotsBack, slotNum)
 
-    -- Stop possible proc animation
     if g_uiProcAnimation[slotNum] and g_uiProcAnimation[slotNum]:IsPlaying() then
-        --g_uiProcAnimation[slotNum].procLoopTexture.label:SetText("")
         g_uiProcAnimation[slotNum]:Stop()
     end
 
     if onlyProc == false then
-        -- Remove custom toggle information and custom highlight
-        for abilityId, slot in pairs(g_toggledSlotsFront) do
-            if (slot == slotNum) then
-                g_toggledSlotsFront[abilityId] = nil
-            end
-        end
-        for abilityId, slot in pairs(g_toggledSlotsBack) do
-            if (slot == slotNum) then
-                g_toggledSlotsBack[abilityId] = nil
-            end
-        end
+        removeSlotFromTable(g_toggledSlotsFront, slotNum)
+        removeSlotFromTable(g_toggledSlotsBack, slotNum)
 
         if g_uiCustomToggle[slotNum] then
-            --g_uiCustomToggle[slotNum].label:SetText("")
             g_uiCustomToggle[slotNum]:SetHidden(true)
         end
     end
 
-    -- Bail out if slot is not used and we're not referencing a fake backbar slot.
     if slotNum < BACKBAR_INDEX_OFFSET and not IsSlotUsed(slotNum) then
         return
     end
 
-    local ability_id
+    local ability_id = GetSlotBoundId(slotNum, g_hotbarCategory)
     if slotNum > BACKBAR_INDEX_OFFSET then
         local hotbarCategory = g_hotbarCategory == HOTBAR_CATEGORY_BACKUP and HOTBAR_CATEGORY_PRIMARY or HOTBAR_CATEGORY_BACKUP
         ability_id = GetSlotBoundId(slotNum - BACKBAR_INDEX_OFFSET, hotbarCategory)
-    else
-        ability_id = GetSlotBoundId(slotNum, g_hotbarCategory)
     end
 
     if Effects.BarHighlightOverride[ability_id] then
@@ -2450,28 +2384,20 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
             ability_id = Effects.BarHighlightOverride[ability_id].newId
         end
     end
-    local abilityName = Effects.EffectOverride[ability_id] and Effects.EffectOverride[ability_id].name or GetAbilityName(ability_id) -- GetSlotName(slotNum)
-    --local _, _, channel = GetAbilityCastInfo(ability_id)
+
+    local abilityName = Effects.EffectOverride[ability_id] and Effects.EffectOverride[ability_id].name or GetAbilityName(ability_id)
     local duration = GetUpdatedAbilityDuration(ability_id)
     local currentTime = GetGameTimeMilliseconds()
 
-    local triggeredSlots
-    if slotNum > BACKBAR_INDEX_OFFSET then
-        triggeredSlots = g_triggeredSlotsBack
-    else
-        triggeredSlots = g_triggeredSlotsFront
-    end
-
-    -- Check if currently this ability is in proc state
+    local triggeredSlots = slotNum > BACKBAR_INDEX_OFFSET and g_triggeredSlotsBack or g_triggeredSlotsFront
     local proc = Effects.HasAbilityProc[abilityName]
-    if Effects.IsAbilityProc[GetSlotBoundId(slotNum, g_hotbarCategory)] then
+
+    if Effects.IsAbilityProc[ability_id] then
         if CombatInfo.SV.ShowTriggered then
             CombatInfo.PlayProcAnimations(slotNum)
             if CombatInfo.SV.ProcEnableSound then
                 if not wasfullUpdate and not g_disableProcSound[slotNum] then
                     PlaySound(g_ProcSound)
-                    PlaySound(g_ProcSound)
-                    -- Only play a proc sound every 3 seconds (matches Power Lash cd)
                     g_disableProcSound[slotNum] = true
                     zo_callLater(function() g_disableProcSound[slotNum] = false end, 3000)
                 end
@@ -2491,21 +2417,14 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
         end
     end
 
-    local toggledSlots
-    if slotNum > BACKBAR_INDEX_OFFSET then
-        toggledSlots = g_toggledSlotsBack
-    else
-        toggledSlots = g_toggledSlotsFront
-    end
+    local toggledSlots = slotNum > BACKBAR_INDEX_OFFSET and g_toggledSlotsBack or g_toggledSlotsFront
 
-    -- Check for active duration to display highlight for abilities on bar swap
     if onlyProc == false then
         if duration > 0 or Effects.AddNoDurationBarHighlight[ability_id] or Effects.MajorMinor[ability_id] then
             toggledSlots[ability_id] = slotNum
             if g_toggledSlotsRemain[ability_id] then
                 if CombatInfo.SV.ShowToggled then
                     local slotNum = toggledSlots[ability_id]
-                    -- Check the other slot here to determine if we desaturate (in case effects are running in both slots)
                     local desaturate
                     local math = slotNum > BACKBAR_INDEX_OFFSET and slotNum - BACKBAR_INDEX_OFFSET or nil
                     if math then
@@ -2522,12 +2441,12 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
             end
         end
     end
-
 end
 
 function CombatInfo.UpdateUltimateLabel()
     -- Get the currently slotted ultimate cost
-    g_ultimateCost = GetSlotAbilityCost(g_ultimateSlot) or 0
+    local bar = g_hotbarCategory
+    g_ultimateCost = GetSlotAbilityCost(g_ultimateSlot, COMBAT_MECHANIC_FLAGS_ULTIMATE, bar) or 0
 
     -- Update ultimate label
     CombatInfo.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, "player", nil, COMBAT_MECHANIC_FLAGS_ULTIMATE, g_ultimateCurrent, 0, 0)
@@ -2552,20 +2471,21 @@ function CombatInfo.OnActiveHotbarUpdate(eventCode, didActiveHotbarChange, shoul
 end
 
 function CombatInfo.OnSlotsFullUpdate(eventCode)
-    -- Handle ultimate label first
-    CombatInfo.UpdateUltimateLabel()
-
     -- Don't update bars if this full update event was from using an inventory item
     if g_potionUsed == true then return end
+
+    -- Handle ultimate label first
+    CombatInfo.UpdateUltimateLabel()
 
     -- Update action bar skills
     for i = BAR_INDEX_START, BAR_INDEX_END do
         CombatInfo.BarSlotUpdate(i, true, false)
     end
+
     for i = (BAR_INDEX_START + BACKBAR_INDEX_OFFSET), (BACKBAR_INDEX_END + BACKBAR_INDEX_OFFSET) do
         local button = g_backbarButtons[i]
         CombatInfo.SetupBackBarIcons(button)
-        --CombatInfo.BarSlotUpdate(i, true, false)
+        CombatInfo.BarSlotUpdate(i, true, false)
     end
 end
 
