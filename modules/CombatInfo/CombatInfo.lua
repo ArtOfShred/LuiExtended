@@ -548,7 +548,7 @@ function CombatInfo.SetupBackBarIcons(button, flip)
     else
         button.icon:SetHidden(true)
     end
-    
+
     if flip then
         CombatInfo.handleFlip(slotNum)
     end
@@ -2315,6 +2315,10 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
         local hotbarCategory = g_hotbarCategory == HOTBAR_CATEGORY_BACKUP and HOTBAR_CATEGORY_PRIMARY or HOTBAR_CATEGORY_BACKUP
         ability_id = GetSlotBoundId(slotNum - BACKBAR_INDEX_OFFSET, hotbarCategory)
     end
+
+    -- TODO: Removed in a previous update but this is important for displaying fake auras for abilities that need them.
+    -- Added this back commented out for now since I don't have the time to update the override tables right now.
+    --local showFakeAura = (Effects.BarHighlightOverride[ability_id] and Effects.BarHighlightOverride[ability_id].showFakeAura)
 
     if Effects.BarHighlightOverride[ability_id] then
         if Effects.BarHighlightOverride[ability_id].hide then
