@@ -2520,7 +2520,7 @@ function SpellCastBuffs.OnCombatEventIn(eventCode, result, isError, abilityName,
         if Effects.FakeExternalBuffs[abilityId].refreshOnly and (result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED) then
             return
         end
-        if Effects.FakeExternalBuffs[abilityId].ignoreFade and (result == EFFECT_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
+        if Effects.FakeExternalBuffs[abilityId].ignoreFade and (result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
         if SpellCastBuffs.SV.HidePlayerBuffs then
@@ -2560,7 +2560,7 @@ function SpellCastBuffs.OnCombatEventIn(eventCode, result, isError, abilityName,
         if Effects.FakeExternalDebuffs[abilityId].refreshOnly and (result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED) then
             return
         end
-        if Effects.FakeExternalDebuffs[abilityId].ignoreFade == true and (result == EFFECT_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
+        if Effects.FakeExternalDebuffs[abilityId].ignoreFade and (result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
         if SpellCastBuffs.SV.HidePlayerDebuffs then
@@ -2690,7 +2690,7 @@ function SpellCastBuffs.OnCombatEventIn(eventCode, result, isError, abilityName,
         if Effects.FakePlayerBuffs[abilityId].refreshOnly and (result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED) then
             return
         end
-        if Effects.FakePlayerBuffs[abilityId].ignoreFade and (result == EFFECT_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
+        if Effects.FakePlayerBuffs[abilityId].ignoreFade and (result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
         if SpellCastBuffs.SV.HidePlayerBuffs and not (SpellCastBuffs.SV.PromDebuffTable[abilityId] or SpellCastBuffs.SV.PromDebuffTable[effectName] or SpellCastBuffs.SV.PromBuffTable[abilityId] or SpellCastBuffs.SV.PromBuffTable[effectName]) then
@@ -2763,7 +2763,7 @@ function SpellCastBuffs.OnCombatEventIn(eventCode, result, isError, abilityName,
         if Effects.FakeStagger[abilityId].refreshOnly and (result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED) then
             return
         end
-        if Effects.FakeStagger[abilityId].ignoreFade and (result == EFFECT_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
+        if Effects.FakeStagger[abilityId].ignoreFade and (result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
         if SpellCastBuffs.SV.HidePlayerDebuffs then
@@ -2838,7 +2838,7 @@ function SpellCastBuffs.OnCombatEventOut(eventCode, result, isError, abilityName
         if Effects.FakePlayerOfflineAura[abilityId].refreshOnly and (result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED) then
             return
         end
-        if Effects.FakePlayerOfflineAura[abilityId].ignoreFade and (result == EFFECT_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
+        if Effects.FakePlayerOfflineAura[abilityId].ignoreFade and (result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
         if SpellCastBuffs.SV.HidePlayerBuffs and not (SpellCastBuffs.SV.PromDebuffTable[abilityId] or SpellCastBuffs.SV.PromDebuffTable[effectName] or SpellCastBuffs.SV.PromBuffTable[abilityId] or SpellCastBuffs.SV.PromBuffTable[effectName] or Effects.FakePlayerOfflineAura[abilityId].ground) then
@@ -2923,7 +2923,7 @@ function SpellCastBuffs.OnCombatEventOut(eventCode, result, isError, abilityName
         if Effects.FakePlayerDebuffs[abilityId].refreshOnly and (result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED) then
             return
         end
-        if Effects.FakePlayerDebuffs[abilityId].ignoreFade and (result == EFFECT_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
+        if Effects.FakePlayerDebuffs[abilityId].ignoreFade and (result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
         if SpellCastBuffs.SV.HideTargetDebuffs then
@@ -2992,7 +2992,7 @@ function SpellCastBuffs.OnCombatEventOut(eventCode, result, isError, abilityName
         if Effects.FakeStagger[abilityId].refreshOnly and (result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED) then
             return
         end
-        if Effects.FakeStagger[abilityId].ignoreFade and (result == EFFECT_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
+        if Effects.FakeStagger[abilityId].ignoreFade and (result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
         if SpellCastBuffs.SV.HideTargetDebuffs then
