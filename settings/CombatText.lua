@@ -14,7 +14,7 @@ local globalIconOptionsKeys = { ["All Crowd Control"] = 1, ["NPC CC Only"] = 2, 
 
 local callbackManager = CALLBACK_MANAGER
 
-local Blacklist, BlackListValues = {}, {}
+local Blacklist, BlacklistValues = {}, {}
 
 -- Create a list of abilityId's / abilityName's to use for Blacklist
 local function GenerateCustomList(input)
@@ -288,7 +288,7 @@ function CombatText.CreateSettings()
                 name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST_TP),
                 choices = Blacklist,
-                choicesValues = BlackListValues,
+                choicesValues = BlacklistValues,
                 scrollable = true,
                 sort = "name-up",
                 getFunc = function() LUIE_BlacklistCT:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,

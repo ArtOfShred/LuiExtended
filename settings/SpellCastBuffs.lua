@@ -18,7 +18,7 @@ local globalIconOptionsKeys = { ["All Crowd Control"] = 1, ["NPC CC Only"] = 2, 
 -- Variables for custom generated tables
 local PromBuffs, PromBuffsValues = {}, {}
 local PromDebuffs, PromDebuffsValues = {}, {}
-local Blacklist, BlackListValues = {}, {}
+local Blacklist, BlacklistValues = {}, {}
 
 -- Create a list of abilityId's / abilityName's to use for Blacklist
 local function GenerateCustomList(input)
@@ -2067,7 +2067,7 @@ function SpellCastBuffs.CreateSettings()
                 name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST_TP),
                 choices = Blacklist,
-                choicesValues = BlackListValues,
+                choicesValues = BlacklistValues,
                 scrollable = true,
                 sort = "name-up",
                 getFunc = function() LUIE_Blacklist:UpdateChoices(GenerateCustomList(Settings.BlacklistTable)) end,
