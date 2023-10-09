@@ -32,6 +32,7 @@ local SET_SCALE_FROM_SV = true
 local BREAK_FREE_ID = 16565
 local NEGATE_MAGIC_ID = 47158
 local NEGATE_MAGIC_1_ID = 51894
+local GENERIC_ROOT_ABILITY_ID = 146956
 local ICON_MISSING = "icon_missing"
 
 local ACTION_RESULT_AREA_EFFECT=669966
@@ -558,7 +559,7 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
                     self:OnDraw(abilityId, abilityIcon, hitValue, ACTION_RESULT_DISORIENTED, abilityName, hitValue)
                 end
                 self.incomingCC = {}
-            elseif CombatInfo.SV.cct.showRoot and abilityId == self.incomingCC[ACTION_RESULT_ROOTED] and (currentEndTime + 200) > PriorityOne.endTime and (currentEndTime + 200) > PriorityTwo.endTime and currentEndTime > PriorityThree.endTime and currentEndTime > PriorityFour.endTime then
+            elseif CombatInfo.SV.cct.showRoot and (abilityId == GENERIC_ROOT_ABILITY_ID or abilityId == self.incomingCC[ACTION_RESULT_ROOTED]) and (currentEndTime + 200) > PriorityOne.endTime and (currentEndTime + 200) > PriorityTwo.endTime and currentEndTime > PriorityThree.endTime and currentEndTime > PriorityFour.endTime then
                 -- table.insert(self.rootsQueue, abilityId)
                 PrioritySeven= { endTime = currentEndTime, abilityId = abilityId, abilityIcon = abilityIcon,
                     hitValue = hitValue, result = result, abilityName = abilityName }
@@ -867,7 +868,7 @@ function CrowdControlTracker:OnCombatTipAdded(eventCode, combatTipID)
     damageType, combat_log, sourceUnitId, targetUnitId, abilityId)]]
     self:OnCombat(eventCode, ACTION_RESULT_ROOTED, nil, "Rooted", LUIE_CC_ICON_ROOT, nil,
         "CombatTip", "CombatTip", LUIE.PlayerNameRaw, 1, rootDuration, nil, nil, nil, 1,
-        nil, 146956)
+        nil, GENERIC_ROOT_ABILITY_ID)
     if isRooted then
         zo_callLater(function() self:PopRootAlert(eventCode, combatTipID) end, rootDuration + graceTime)
     end
@@ -880,7 +881,7 @@ function CrowdControlTracker:PopRootAlert(eventCode, combatTipID)
     damageType, combat_log, sourceUnitId, targetUnitId, abilityId)]]
     self:OnCombat(eventCode, ACTION_RESULT_ROOTED, nil, "Rooted", LUIE_CC_ICON_ROOT, nil,
         "CombatTip", "CombatTip", LUIE.PlayerNameRaw, 1, rootDuration, nil, nil, nil, 1,
-        nil, 146956)
+        nil, GENERIC_ROOT_ABILITY_ID)
     if isRooted then
         zo_callLater(function() self:PopRootAlert(eventCode, combatTipID) end, rootDuration + graceTime)
     end
