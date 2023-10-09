@@ -1788,7 +1788,7 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE), GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POINT_HEADER)),
+                name = GetString(SI_LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE),
                 width = "full",
             },
             {

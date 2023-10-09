@@ -1448,7 +1448,7 @@ function CombatInfo.CreateSettings()
                 -- Levitate/Pull
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_LEVITATE),
-                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_LEVIATE_TP),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_LEVITATE_TP),
                 getFunc = function() return unpack(Settings.alerts.colors.levitateColor) end,
                 setFunc = function(r, g, b, a) Settings.alerts.colors.levitateColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
                 default = {r=Defaults.alerts.colors.levitateColor[1], g=Defaults.alerts.colors.levitateColor[2], b=Defaults.alerts.colors.levitateColor[3]},
