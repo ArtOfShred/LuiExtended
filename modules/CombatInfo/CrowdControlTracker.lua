@@ -939,6 +939,8 @@ function CrowdControlTracker:OnDraw(abilityId, abilityIcon, ccDuration, result, 
         return
     end
 
+    if (result == ACTION_RESULT_ROOTED) and not isRooted then return end
+
     --Override icon with default if enabled
     if CombatInfo.SV.cct.useDefaultIcon and result ~= ACTION_RESULT_AREA_EFFECT and self:ShouldUseDefaultIcon(abilityId) == true then
         abilityIcon = self:SetupDefaultIcon(abilityId, result)
@@ -967,7 +969,7 @@ function CrowdControlTracker:OnDraw(abilityId, abilityIcon, ccDuration, result, 
         self:SetupInfo(ccText, CombatInfo.SV.cct.colors[result], abilityIcon)
     end
 
-    if result == ACTION_RESULT_SILENCED or result == ACTION_RESULT_AREA_EFFECT then
+    if result == ACTION_RESULT_SILENCED or result == ACTION_RESULT_AREA_EFFECT or result == ACTION_RESULT_ROOTED then
         if CombatInfo.SV.cct.showOptions == "text" then
             self:OnAnimation(LUIE_CCTracker_TextFrame, "silence")
         else
