@@ -126,9 +126,9 @@ function CombatTextCombatEventListener:OnCombatIn(...)
        (isHealingCritical and togglesInOut.showHealing and ( hitValue > 0 or overheal )) or
        (isDamage and togglesInOut.showDamage and ( hitValue > 0 or overkill )) or
        (isDamageCritical and togglesInOut.showDamage and ( hitValue > 0 or overkill )) or
-       (isEnergize and togglesInOut.showEnergize and (powerType == POWERTYPE_MAGICKA or powerType == POWERTYPE_STAMINA)) or
-       (isEnergize and togglesInOut.showUltimateEnergize and powerType == POWERTYPE_ULTIMATE) or
-       (isDrain and togglesInOut.showDrain and (powerType == POWERTYPE_MAGICKA or powerType == POWERTYPE_STAMINA)) then
+       (isEnergize and togglesInOut.showEnergize and (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA)) or
+       (isEnergize and togglesInOut.showUltimateEnergize and powerType == COMBAT_MECHANIC_FLAGS_ULTIMATE) or
+       (isDrain and togglesInOut.showDrain and (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA)) then
        if overkill or overheal then
             hitValue = hitValue + overflow
        end
@@ -256,9 +256,9 @@ function CombatTextCombatEventListener:OnCombatOut(...)
        (isHealingCritical and togglesInOut.showHealing and ( hitValue > 0 or overheal )) or
        (isDamage and togglesInOut.showDamage and ( hitValue > 0 or overkill )) or
        (isDamageCritical and togglesInOut.showDamage and ( hitValue > 0 or overkill )) or
-       (isEnergize and togglesInOut.showEnergize and (powerType == POWERTYPE_MAGICKA or powerType == POWERTYPE_STAMINA)) or
-       (isEnergize and togglesInOut.showUltimateEnergize and powerType == POWERTYPE_ULTIMATE) or
-       (isDrain and togglesInOut.showDrain and (powerType == POWERTYPE_MAGICKA or powerType == POWERTYPE_STAMINA)) then
+       (isEnergize and togglesInOut.showEnergize and (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA)) or
+       (isEnergize and togglesInOut.showUltimateEnergize and powerType == COMBAT_MECHANIC_FLAGS_ULTIMATE) or
+       (isDrain and togglesInOut.showDrain and (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA)) then
        if overkill or overheal then
             hitValue = hitValue + overflow
        end
