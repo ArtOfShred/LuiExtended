@@ -308,6 +308,7 @@ local AbilityTables = {
     Set_Wilderqueens_Arch             = 34870,
     Set_Plague_Slinger                = 102113,
     Set_Ice_Furnace                   = GetString(SI_LUIE_SKILL_SET_ICE_FURNACE),
+    Set_Hand_of_Mephala               = 84355,
     Set_Tormentor                     = 67280,
     Set_Destructive_Mage              = 51315,
     Set_Healing_Mage                  = 51442,
@@ -327,7 +328,7 @@ local AbilityTables = {
     Set_Ursus_Blessing                = 112414,
     Set_Grace_of_Gloom                = 106865,
     Set_Noble_Duelist                 = GetString(SI_LUIE_SKILL_SET_NOBLE_DUELIST),
-    Set_Hand_of_Mephala               = 84353, 84355,
+    Set_Hand_of_Mephala               = 84353,
     Set_Soldier_of_Anguish            = 113460,
     Set_Affliction                    = 34787,
     Set_Sentry                        = 32807,
@@ -665,6 +666,7 @@ local AbilityTables = {
     Skill_Backstabber                 = 13739,
 
     -- Human
+    Skill_Cleave                      = 20919,
     Skill_Ignite                      = 14070,
     Skill_Shield_Rush                 = GetString(SI_LUIE_SKILL_SHIELD_RUSH),
     Skill_Shock_Aura                  = 17867,
@@ -743,6 +745,7 @@ local AbilityTables = {
     Skill_Empower_Atronach_Flame      = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME),
     Skill_Empower_Atronach_Frost      = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST),
     Skill_Empower_Atronach_Storm      = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM),
+    Skill_Headbutt                    = 54380,
     Skill_Tail_Spike                  = 4799,
     Skill_Rending_Leap                = 93745,
     Skill_Radiance                    = 4891,
@@ -776,6 +779,7 @@ local AbilityTables = {
     -- Dwemer
     Skill_Static_Shield               = 64463,
     Skill_Dart                        = 7485,
+    Skill_Split_Bolt                  = 91093,
     Skill_Turret_Mode                 = 71045,
     Skill_Overcharge                  = 27333,
 
@@ -846,6 +850,7 @@ local AbilityTables = {
     Skill_Royal_Strike                = 38729,
     Skill_Consecrate_Shrine           = GetString(SI_LUIE_SKILL_CONSECRATE_SHRINE),
     Skill_Remove_Ward                 = 18606,
+    Skill_Nova                        = 21752,
     Skill_Shock                       = 27598,
     Skill_Drink_Mead                  = 13941,
     Skill_Unstable_Portal             = GetString(SI_LUIE_SKILL_UNSTABLE_PORTAL),
@@ -892,6 +897,7 @@ local AbilityTables = {
     Skill_Lightning_Strike            = 27596,
     Skill_Push                        = 8692,
     Skill_Absorb                      = 30869,
+    Skill_Essence                     = 25337,
     Skill_Mantles_Shadow              = GetString(SI_LUIE_SKILL_MANTLES_SHADOW),
     Skill_Quaking_Stomp               = 43820,
     Skill_Projectile_Vomit            = 43827,
@@ -924,7 +930,7 @@ local AbilityTables = {
 
     -- Elsweyr Quests
     Skill_Flame_Aura                  = 124352,
-    Skill_Headbutt                    = 54380, 125270,
+    Skill_Headbutt                    = 125270,
     Skill_Star_Haven_Dragonhorn       = GetString(SI_LUIE_SKILL_STAR_HAVEN_DRAGONHORN),
     Skill_Steadfast_Ward              = 37232,
     Skill_Wing_Thrash                 = 125242,
@@ -1120,7 +1126,7 @@ local AbilityTables = {
     Skill_Shock_Form                  = 52167,
     Skill_Fire_Form                   = 52166,
     Skill_Split_Flare                 = GetString(SI_LUIE_SKILL_SPLIT_FLARE),
-    Skill_Split_Bolt                  = 91087, 91093,
+    Skill_Split_Bolt                  = 91087,
     Skill_Void_Grip                   = GetString(SI_LUIE_SKILL_VOID_GRIP),
     Skill_Fulminating_Void            = 51799,
     Skill_Skull_Volley                = GetString(SI_LUIE_SKILL_SKULL_VOLLEY),
@@ -1191,6 +1197,7 @@ local AbilityTables = {
 }
 
 -- Replace ability IDs with names
+local k, v
 for k, v in pairs(AbilityTables) do
     if type(v) == "number" then
         AbilityTables[k] = zo_strformat("<<C:1>>", GetAbilityName(v))

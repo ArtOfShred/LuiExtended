@@ -3,13 +3,13 @@
     License: The MIT License (MIT)
 --]]
 
-LUIE.CombatTextAnimation = ZO_InitializingObject:Subclass()
+LUIE.CombatTextAnimation = ZO_Object:Subclass()
 local CombatTextAnimation = LUIE.CombatTextAnimation
 
 local animationManager = ANIMATION_MANAGER
 
 function CombatTextAnimation:New()
-    local obj = setmetatable({}, self)
+    local obj = ZO_Object:New(self)
     obj.timeline = animationManager:CreateTimeline()
     obj.timeline:SetPlaybackType(0, 0)
     obj.namedSteps = {}

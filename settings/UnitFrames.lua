@@ -36,7 +36,7 @@ local formatOptions = {
     "Current + Shield (Percentage%)"
 }
 
-local Whitelist, WhitelistValues = {}, {}
+local Whitelist, WhitelistValues = {}
 
 -- Create a list of Unitnames to use for Summon Whitelist
 local function GenerateCustomList(input)

@@ -33,7 +33,7 @@ function SpellCastBuffs.DisplayMountIcon()
     local mountedState = GetTargetMountedStateInfo(name)
 
     if mountedState == MOUNTED_STATE_MOUNT_RIDER or mountedState == MOUNTED_STATE_MOUNT_PASSENGER then
-        --local name
+        local name
         local description
         local icon
         if mountedState == MOUNTED_STATE_MOUNT_RIDER then

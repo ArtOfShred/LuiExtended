@@ -6,27 +6,30 @@
 local SpellCastBuffs = LUIE.SpellCastBuffs
 
 local Effects = LUIE.Data.Effects
-local DebugAuras = LUIE.DebugAuras
-local DebugResults = LUIE.Data.DebugResults
-local zo_strformat = zo_strformat
 
-local PrintToChat = LUIE.PrintToChat
-local PlayerNameFormatted = LUIE.PlayerNameFormatted
-local TimeStampColorize = LUIE.TimeStampColorize
+local zo_strformat = zo_strformat
 
 -- Add millisecond timestamp to ability debug
 local function MillisecondTimestampDebug(message)
     local currentTime = GetGameTimeMilliseconds()
-    local timestamp = ZO_FormatTimeMilliseconds(currentTime, TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_MILLISECONDS_NO_HOURS_OR_DAYS, TIME_FORMAT_DIRECTION_NONE)
-    timestamp = timestamp:gsub("HH", ""):gsub("H ", ":"):gsub("hh", ""):gsub("h ", ":"):gsub("m ", ":"):gsub("s ", ":"):gsub("A", ""):gsub("a", ""):gsub("ms", "")
-    message = "|c" .. TimeStampColorize .. "[" .. timestamp .. "]|r " .. message
+    local timestamp = FormatTimeMilliseconds(currentTime, TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_MILLISECONDS_NO_HOURS_OR_DAYS, TIME_FORMAT_DIRECTION_NONE)
+    timestamp = timestamp:gsub("HH", "")
+    timestamp = timestamp:gsub("H ", ":")
+    timestamp = timestamp:gsub("hh", "")
+    timestamp = timestamp:gsub("h ", ":")
+    timestamp = timestamp:gsub("m ", ":")
+    timestamp = timestamp:gsub("s ", ":")
+    timestamp = timestamp:gsub("A", "")
+    timestamp = timestamp:gsub("a", "")
+    timestamp = timestamp:gsub("ms", "")
+    message = string.format("|c%s[%s]|r %s", LUIE.TimeStampColorize, timestamp, message)
     return message
 end
 
 -- Debug Display for Combat Events
 function SpellCastBuffs.EventCombatDebug(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
     -- Don't display if this aura is already added to the filter
-    if DebugAuras[abilityId] and SpellCastBuffs.SV.ShowDebugFilter then return end
+    if LUIE.DebugAuras[abilityId] and SpellCastBuffs.SV.ShowDebugFilter then return end
 
     local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
     local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
@@ -44,10 +47,10 @@ function SpellCastBuffs.EventCombatDebug(eventCode, result, isError, abilityName
     if castTime ~= 0 then
         showacasttime = (" [Cast] " .. castTime)
     end
-    if source == PlayerNameFormatted then
+    if source == LUIE.PlayerNameFormatted then
         source = "Player"
     end
-    if target == PlayerNameFormatted then
+    if target == LUIE.PlayerNameFormatted then
         target = "Player"
     end
     if source == "" and target == "" then
@@ -55,52 +58,51 @@ function SpellCastBuffs.EventCombatDebug(eventCode, result, isError, abilityName
         target = "NIL"
     end
 
-    local formattedResult = DebugResults[result]
+    local formattedResult = LUIE.Data.DebugResults[result]
 
     local finalString = (iconFormatted .. " ["..abilityId.."] "..ability..": [S] "..source.." --> [T] "..target .. " [D] " .. duration .. showachantime .. showacasttime .. " [R] " .. formattedResult)
     finalString = MillisecondTimestampDebug(finalString)
-    PrintToChat(finalString)
+    LUIE.PrintToChat(finalString)
 end
 
 -- Debug Display for Effect Events
 function SpellCastBuffs.EventEffectDebug(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
-    if (DebugAuras[abilityId] and SpellCastBuffs.SV.ShowDebugFilter) then
+    if LUIE.DebugAuras[abilityId] and SpellCastBuffs.SV.ShowDebugFilter then
         return
     end
-    
+
     local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
     local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
+
     unitName = zo_strformat("<<C:1>>", unitName)
-    
-    if unitName == PlayerNameFormatted then
+    if unitName == LUIE.PlayerNameFormatted then
         unitName = "Player"
     end
-    
     unitName = unitName .. " (" .. unitTag .. ")"
-    
-    local cmxHIDE = ""
-    
+
+    local cmxHIDE
     if CMX and CMX.CustomAbilityHide and CMX.CustomAbilityHide[abilityId] then
         cmxHIDE = " + HIDDEN CMX"
+    else
+        cmxHIDE = ""
     end
-    
+
     local finalString
-    
     if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].hide then
         finalString = (iconFormatted .. "|c00E200 [" ..abilityId .. "] " .. nameFormatted.. ": HIDDEN LUI" .. cmxHIDE .. ": [Tag] ".. unitName .. "|r")
         finalString = MillisecondTimestampDebug(finalString)
         -- Use CHAT_ROUTER to bypass some other addons modifying this string
-        PrintToChat(finalString)
+        CHAT_ROUTER:AddSystemMessage(finalString)
         return
     end
-    
+
     local duration = (endTime - beginTime) * 1000
+
     local refreshOnly = ""
-    
     if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].refreshOnly then
         refreshOnly = " |c00E200(Hidden)|r "
     end
-    
+
     if changeType == 1 then
         finalString = ("|c00E200Gained:|r " .. refreshOnly .. iconFormatted .. " [" .. abilityId .. "] " ..nameFormatted .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
     elseif changeType == 2 then
@@ -108,9 +110,8 @@ function SpellCastBuffs.EventEffectDebug(eventCode, changeType, effectSlot, effe
     else
         finalString = ("|c00E200Refreshed:|r " .. iconFormatted .. " (" .. changeType .. ") [" .. abilityId .. "] " ..nameFormatted .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
     end
-    
     finalString = MillisecondTimestampDebug(finalString)
-    PrintToChat(finalString)
+    LUIE.PrintToChat(finalString)
 end
 
 -- Account specific DEBUG for ArtOfShred (These are only registered to give me some additional debug options)
@@ -122,10 +123,10 @@ function SpellCastBuffs.AuthorCombatDebug(eventCode, result, isError, abilityNam
     local source = zo_strformat("<<C:1>>", sourceName)
     local target = zo_strformat("<<C:1>>", targetName)
     local ability = zo_strformat("<<C:1>>", nameFormatted)
-    if source == PlayerNameFormatted then
+    if source == LUIE.PlayerNameFormatted then
         source = "Player"
     end
-    if target == PlayerNameFormatted then
+    if target == LUIE.PlayerNameFormatted then
         target = "Player"
     end
     if source == "" and target == "" then
@@ -140,7 +141,7 @@ function SpellCastBuffs.AuthorCombatDebug(eventCode, result, isError, abilityNam
         cmxHIDE = ""
     end
 
-    local formattedResult = DebugResults[result]
+    local formattedResult = LUIE.Data.DebugResults[result]
 
     if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].hide then
         local finalString = (iconFormatted .. "[" ..abilityId .. "] " .. nameFormatted.. ": HIDDEN LUI" .. cmxHIDE .. ": [S] "..source.." --> [T] "..target .. " [R] " .. formattedResult)
@@ -162,7 +163,7 @@ function SpellCastBuffs.AuthorEffectDebug(eventCode, changeType, effectSlot, eff
     local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
     unitName = zo_strformat("<<C:1>>", unitName)
-    if unitName == PlayerNameFormatted then
+    if unitName == LUIE.PlayerNameFormatted then
         unitName = "Player"
     end
     unitName = unitName .. " (" .. unitTag .. ")"
@@ -224,16 +225,16 @@ end
 
 function SpellCastBuffs.TempSlashZoneCheck()
     local zoneid = GetZoneId(GetCurrentMapZoneIndex())
-    PrintToChat("Zone Id: " .. zoneid)
+    LUIE.PrintToChat("Zone Id: " .. zoneid)
     local locName = GetPlayerLocationName()
-    PrintToChat("Location: " .. locName)
+    LUIE.PrintToChat("Location: " .. locName)
     local mapName = GetMapName()
-    PrintToChat("Map: " .. mapName)
+    LUIE.PrintToChat("Map: " .. mapName)
 end
 
 function SpellCastBuffs.TempSlashCheckRemovedAbilities()
     d("Removed AbilityIds:")
-    for k, v in pairs(DebugAuras) do
+    for k, v in pairs(LUIE.DebugAuras) do
     	if not DoesAbilityExist(k) then
     		d(k)
     	end
@@ -241,7 +242,7 @@ function SpellCastBuffs.TempSlashCheckRemovedAbilities()
 end
 
 local displayName = GetDisplayName()
-if displayName == "@ArtOfShredPTS" or displayName == "@ArtOfShredLegacy" or displayName == "@HammerOfGlory"  or displayName == "@dack_janiels" then
+if displayName == "@ArtOfShredPTS" or displayName == "@ArtOfShredLegacy" or displayName == "@HammerOfGlory" then
     SLASH_COMMANDS["/filter"] = SpellCastBuffs.TempSlashFilter
     SLASH_COMMANDS["/ground"] = SpellCastBuffs.TempSlashGround
     SLASH_COMMANDS["/zonecheck"] = SpellCastBuffs.TempSlashZoneCheck

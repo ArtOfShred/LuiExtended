@@ -38,14 +38,6 @@ local alertTypes = {
 
 -- Quadratic easing out - decelerating to zero velocity (For buff fade)
 local function EaseOutQuad(t, b, c, d)
-        -- protect against 1 / 0
-	if t == 0 then
-		t = 0.0001
-	end
-	if d == 0 then
-		d = 0.0001
-	end
-
     t = t / d
     return -c * t*(t-2) + b
 end
@@ -68,6 +60,7 @@ end
 -- Called from menu when font size/face, etc is changed
 function AbilityAlerts.ResetAlertSize()
     for i = 1, 3 do
+        local height = (CombatInfo.SV.alerts.toggles.alertFontSize * 2)
         local alert = _G["LUIE_Alert" .. i]
         alert.prefix:SetFont(g_alertFont)
         alert.name:SetFont(g_alertFont)
@@ -84,7 +77,7 @@ function AbilityAlerts.ResetAlertSize()
         alert.icon.icon:ClearAnchors()
         alert.icon.icon:SetAnchor(TOPLEFT, alert.icon, TOPLEFT, 3, 3)
         alert.icon.icon:SetAnchor(BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -3, -3)
-        alert:SetDimensions(alert.prefix:GetTextWidth() + alert.name:GetTextWidth() + alert.modifier:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth() + alert.timer:GetTextHeight())
+        alert:SetDimensions(alert.prefix:GetTextWidth() + alert.name:GetTextWidth() + alert.modifier:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth(), height)
     end
 
     uiTlw.alertFrame:SetDimensions(500, (CombatInfo.SV.alerts.toggles.alertFontSize * 2) + 4)
@@ -1240,10 +1233,10 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
     -- UNMIT
     elseif (alertType == alertTypes.UNMIT) then
         local name = Settings.toggles.mitigationAbilityName
-        local color = AbilityAlerts.AlertColors.alertColorUnmit
         if modifier ~= "" then
             modifier = (" " .. modifier)
         end
+        local color = AbilityAlerts.AlertColors.alertColorUnmit
         prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and Settings.toggles.mitigationEnemyName or ""
         if prefix ~= "" then
             name = (" " .. name)

@@ -1,11 +1,11 @@
 ## Title: |cE12000L|cFFFFB0ui E|rxtended|
 ## Author: ArtOfShred, psypanda, SpellBuilder, Saenic
-## Version: 6.5.1
-## APIVersion: 101038
-## AddOnVersion: 651
+## Version: 6.5.2
+## APIVersion: 101039 101040
+## AddOnVersion: 652
 ## Description: Provides UnitFrames, InfoPanel, Combat Text & Info, Buffs & Debuff Tracking, Chat Announcements and Slash Commands.
 ## DependsOn: LibAddonMenu-2.0>=34 LibMediaProvider-1.0
-## OptionalDependsOn: LibChatMessage pChat CombatMetrics DolgubonsLazyWritCreator
+## OptionalDependsOn: LibChatMessage pChat
 ## IsLibrary: false
 ## SavedVariables: LUIESV
 
@@ -69,9 +69,6 @@ data/Tooltips.lua
 data/UnitNamesTable.lua
 data/ZoneNamesTable.lua
 data/Effects.lua
-data/Effects.EffectOverride.lua
-data/Effects.EffectHideSCT.lua
-data/Effects.BarHighlighOverride.lua
 data/CastBarTable.lua
 data/CollectibleTables.lua
 data/CombatTextConstants.lua

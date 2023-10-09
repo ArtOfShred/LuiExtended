@@ -17,7 +17,7 @@ function CombatTextResourcesPotionEventListener:New()
     return obj
 end
 
-function CombatTextResourcesPotionEventListener:PotionCooldown()
+function CombatTextResourcesPotionEventListener:PotionCooldown(slotNum)
     local Settings = LUIE.CombatText.SV
     if not Settings.toggles.showPotionReady then
         return
@@ -34,7 +34,7 @@ function CombatTextResourcesPotionEventListener:PotionCooldown()
             end
         else
             if inCooldown == true then
-                local slotName = zo_strformat(SI_LINK_FORMAT_ITEM_NAME, GetSlotName())
+                local slotName = zo_strformat(SI_LINK_FORMAT_ITEM_NAME, GetSlotName(slotNum))
                 self:TriggerEvent(eventType.RESOURCE, resourceType.POTION, slotName)
                 inCooldown = false
             end

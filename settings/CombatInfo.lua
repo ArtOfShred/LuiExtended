@@ -9,7 +9,7 @@ local AbilityAlerts = CombatInfo.AbilityAlerts
 
 local zo_strformat = zo_strformat
 
-local castBarMovingEnable = false -- Helper local flag
+local castBarMovingEnabled = false -- Helper local flag
 local alertFrameMovingEnabled = false -- Helper local flag
 
 local globalMethodOptions = { "Ascending", "Descending", "Radial" }
@@ -19,7 +19,7 @@ local globalAlertOptionsKeys = { ["Show All Incoming Abilities"] = 1, ["Only Sho
 local globalIconOptions = { "All Crowd Control", "NPC CC Only", "Player CC Only" }
 local globalIconOptionsKeys = { ["All Crowd Control"] = 1, ["NPC CC Only"] = 2, ["Player CC Only"] = 3 }
 
-local Blacklist, BlackListValues = {}, {}
+local Blacklist, BlackListValues = {}
 
 local ACTION_RESULT_AREA_EFFECT = 669966
 
@@ -597,7 +597,7 @@ function CombatInfo.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_CASTBAR_MOVE),
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_MOVE_TP),
-                getFunc = function() return castBarMovingEnable end,
+                getFunc = function() return castBarMovingEnabled end,
                 setFunc = CombatInfo.SetMovingState,
                 width = "half",
                 default = false,
@@ -1404,6 +1404,7 @@ function CombatInfo.CreateSettings()
                 tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_S_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME_TP)),
                 getFunc = function() return Settings.alerts.toggles.mitigationSummonPrefixN2 end,
                 setFunc = function(v) Settings.alerts.toggles.mitigationSummonPrefixN2 = v end,
+                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertSummon) end,
                 default = Defaults.alerts.toggles.mitigationSummonPrefixN2,
                 disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertSummon) end,
             },

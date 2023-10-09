@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
-LUIE.CombatTextEventViewer = ZO_InitializingObject:Subclass()
+LUIE.CombatTextEventViewer = ZO_Object:Subclass()
 local CombatTextEventViewer = LUIE.CombatTextEventViewer
 local CombatText = LUIE.CombatText
 
@@ -16,7 +16,7 @@ CombatTextEventViewer.resourceNames = setmetatable({}, {__index = function(t, k)
 CombatTextEventViewer.damageTypes = setmetatable({}, {__index = function(t, k) t[k] = GetString('SI_DAMAGETYPE', k); return t[k] end})
 
 function CombatTextEventViewer:New(poolManager, LMP)
-    local obj = setmetatable({}, self)
+    local obj = ZO_Object:New(self)
     self.poolManager = poolManager
     self.LMP = LMP
     return obj
@@ -138,23 +138,23 @@ function CombatTextEventViewer:GetTextAtributes(powerType, damageType, isDamage,
         end
     elseif (isEnergize) then
         fontSize = Settings.fontSizes.gainLoss
-        if (powerType == COMBAT_MECHANIC_FLAGS_ULTIMATE) then
+        if (powerType == POWERTYPE_ULTIMATE) then
             textFormat = Settings.formats.ultimateEnergize
             textColor = Settings.colors.energizeUltimate
         else
             textFormat = Settings.formats.energize
-            if (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA) then
+            if (powerType == POWERTYPE_MAGICKA) then
                 textColor = Settings.colors.energizeMagicka
-            elseif (powerType == COMBAT_MECHANIC_FLAGS_STAMINA) then
+            elseif (powerType == POWERTYPE_STAMINA) then
                 textColor = Settings.colors.energizeStamina
             end
         end
     elseif (isDrain) then
         textFormat = Settings.formats.drain
         fontSize = Settings.fontSizes.gainLoss
-        if (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA) then
+        if (powerType == POWERTYPE_MAGICKA) then
             textColor = Settings.colors.energizeMagicka
-        elseif (powerType == COMBAT_MECHANIC_FLAGS_STAMINA) then
+        elseif (powerType == POWERTYPE_STAMINA) then
             textColor = Settings.colors.energizeStamina
         end
     elseif (isDot) then
