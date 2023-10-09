@@ -9,7 +9,7 @@ local AbilityAlerts = CombatInfo.AbilityAlerts
 
 local zo_strformat = zo_strformat
 
-local castBarMovingEnable = false -- Helper local flag
+local castBarMovingEnabled = false -- Helper local flag
 local alertFrameMovingEnabled = false -- Helper local flag
 
 local globalMethodOptions = { "Ascending", "Descending", "Radial" }
@@ -19,7 +19,7 @@ local globalAlertOptionsKeys = { ["Show All Incoming Abilities"] = 1, ["Only Sho
 local globalIconOptions = { "All Crowd Control", "NPC CC Only", "Player CC Only" }
 local globalIconOptionsKeys = { ["All Crowd Control"] = 1, ["NPC CC Only"] = 2, ["Player CC Only"] = 3 }
 
-local Blacklist, BlackListValues = {}
+local Blacklist, BlackListValues = {}, {}
 
 local ACTION_RESULT_AREA_EFFECT = 669966
 
@@ -789,7 +789,7 @@ function CombatInfo.CreateSettings()
                 name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST_TP),
                 choices = Blacklist,
-                choicesValues = BlacklistValues,
+                choicesValues = BlackListValues,
                 scrollable = true,
                 sort = "name-up",
                 getFunc = function() LUIE_BlacklistCastbar:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,

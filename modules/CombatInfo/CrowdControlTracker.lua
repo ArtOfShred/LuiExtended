@@ -9,7 +9,7 @@ local CrowdControlTracker = CombatInfo.CrowdControlTracker
 
 local Effects = LUIE.Data.Effects
 local CrowdControl = LUIE.Data.CrowdControl
-
+local PVP_Alerts_Main_Table
 local eventManager = EVENT_MANAGER
 local animationManager = ANIMATION_MANAGER
 
@@ -23,6 +23,9 @@ local iconFont = "$(GAMEPAD_BOLD_FONT)|25|thick-outline"
 local staggerFont = "$(GAMEPAD_BOLD_FONT)|36|thick-outline"
 
 local iconBorder = "LuiExtended/media/combatinfo/crowdcontroltracker/border.dds"
+
+local defaultDisorientIcon
+local defaultImmuneIcon
 
 local SET_SCALE_FROM_SV = true
 local BREAK_FREE_ID = 16565
@@ -768,7 +771,7 @@ function CrowdControlTracker:ShouldUseDefaultIcon(abilityId)
         if CombatInfo.SV.cct.defaultIconOptions == 1 then
             return true
         elseif CombatInfo.SV.cct.defaultIconOptions == 2 then
-            return Effects.EffectOverride[abilityId].isPlayerAbility and false or true
+            return Effects.EffectOverride[abilityId].isPlayerAbility and true or false
         elseif CombatInfo.SV.cct.defaultIconOptions == 3 then
             return Effects.EffectOverride[abilityId].isPlayerAbility and true or false
         end

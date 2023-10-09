@@ -6,10 +6,11 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
-    "|cFFA500LuiExtended Version 6.5.1|r",
+    "|cFFA500LuiExtended Version 6.5.2|r",
     "",
     "|cFFFF00Combat Info:|r",
-    "[*] Re-enabled ability timers again (thanks to DakJaniels)",
+	"[*] Updated API",
+    "[*] Fixed Proc Sounds not regestering",
 }
 
 -- Hide toggle called by the menu or xml button

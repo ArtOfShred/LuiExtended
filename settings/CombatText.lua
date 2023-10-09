@@ -14,7 +14,7 @@ local globalIconOptionsKeys = { ["All Crowd Control"] = 1, ["NPC CC Only"] = 2, 
 
 local callbackManager = CALLBACK_MANAGER
 
-local Blacklist, BlackListValues = {}
+local Blacklist, BlackListValues = {}, {}
 
 -- Create a list of abilityId's / abilityName's to use for Blacklist
 local function GenerateCustomList(input)
@@ -288,7 +288,7 @@ function CombatText.CreateSettings()
                 name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST_TP),
                 choices = Blacklist,
-                choicesValues = BlacklistValues,
+                choicesValues = BlackListValues,
                 scrollable = true,
                 sort = "name-up",
                 getFunc = function() LUIE_BlacklistCT:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,
@@ -2194,7 +2194,7 @@ function CombatText.CreateSettings()
                 name    = GetString(SI_LUIE_LAM_CT_FONT_TEST),
                 tooltip = GetString(SI_LUIE_LAM_CT_FONT_TEST_TP),
                 func = function()
-                    callbackManager:FireCallbacks(CombatTextConstants.eventType.COMBAT, CombatTextConstants.combatType.INCOMING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
+                    callbackManager:FireCallbacks(CombatTextConstants.eventType.COMBAT, CombatTextConstants.combatType.INCOMING, COMBAT_MECHANIC_FLAGS_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
                 end,
             },
         },
@@ -2274,8 +2274,8 @@ function CombatText.CreateSettings()
                 name = GetString(SI_LUIE_LAM_CT_ANIMATION_TEST),
                 tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_TEST_TP),
                 func = function()
-                    callbackManager:FireCallbacks(CombatTextConstants.eventType.COMBAT, CombatTextConstants.combatType.INCOMING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
-                    callbackManager:FireCallbacks(CombatTextConstants.eventType.COMBAT, CombatTextConstants.combatType.OUTGOING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
+                    callbackManager:FireCallbacks(CombatTextConstants.eventType.COMBAT, CombatTextConstants.combatType.INCOMING, COMBAT_MECHANIC_FLAGS_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
+                    callbackManager:FireCallbacks(CombatTextConstants.eventType.COMBAT, CombatTextConstants.combatType.OUTGOING, COMBAT_MECHANIC_FLAGS_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
                 end,
             },
         },

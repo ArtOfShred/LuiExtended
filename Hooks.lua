@@ -6,6 +6,9 @@
 local zo_strformat = zo_strformat
 local printToChat = LUIE.PrintToChat
 
+local FORCE_SUPPRESS_COOLDOWN_SOUND = true
+local HIDE_COUNT = 0
+
 function LUIE.InitializeHooks()
 
         -- TODO: Localize
@@ -546,7 +549,7 @@ function LUIE.InitializeHooks()
         end
 
         local function GetEmperorBonusAbilityId(campaignId)
-            return GetEmperorAllianceBonusAbilityId(campaignId, GetUnitAlliance("player"))
+            return GetEmperorAllianceBonusAbilityId(campaignId)
         end
 
         local function GetEmperorBonusScore(campaignId)
@@ -622,7 +625,7 @@ function LUIE.InitializeHooks()
         }
 
         -- Hook Campaign Bonuses functions
-        ZO_CampaignBonuses_Shared.CreateDataTable = function(self)
+        ZO_CampaignBonuses_Shared.CreateDataTable = function(self, header)
             self:BuildMasterList()
 
             self.dataTable = {}
@@ -1234,7 +1237,7 @@ function LUIE.InitializeHooks()
             return keybindWidth
         end
 
-        local function SetupIndicatorsForSkill(leftIndicator, rightIndicator, skillData, showIncrease, showDecrease, showNew)
+        local function SetupIndicatorsForSkill(leftIndicator, isMorph, rightIndicator, skillData, showIncrease, showDecrease, showNew)
             local indicatorRightWidth = 0
 
             --If we don't have a left indicator then we aren't going to have a right indicator either, so exit the function

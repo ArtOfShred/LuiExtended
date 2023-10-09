@@ -4263,7 +4263,7 @@ Effects.EffectOverride = {
     [59522] = { hide = true }, -- Engine Guardian
     [59540] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_stamina.dds', tooltip = Tooltips.Set_Engine_Guardian_Stamina }, -- Robust Engine Guardian
     [59533] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_magicka.dds', tooltip = Tooltips.Set_Engine_Guardian_Magicka }, -- Arcane Engine Guardian
-    [59543] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_health.dds', tooltip = Tooltips.Generic_HoT, tooltipValue2 = 0.5 }, -- Healthy Engine Guardian
+    [59543] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_health.dds", tooltip = Tooltips.Set_Engine_Guardian_Health }, -- Healthy Engine Guardian
 
     -- The Troll King
     [80504] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_regeneration.dds', name = Abilities.Set_The_Troll_King, tooltip = Tooltips.Set_The_Troll_King }, -- The Troll King
@@ -10374,8 +10374,8 @@ Effects.EffectOverride = {
 
     [52729] = { tooltip = Tooltips.Skill_Expert_Hunter_NPC }, -- Expert Hunter (Fighters Guild Swordmaster)
 
-    [52738] = { name = Skill_Circle_of_Protection }, -- Circle of Protection (Fighters Guild Gladiator)
-    [52744] = { name = Skill_Circle_of_Protection, duration = 0, groundLabel = true, tooltip = Tooltips.Skill_Circle_of_Protection_NPC }, -- Circle of Protection (Fighters Guild Gladiator)
+    [52738] = { name = Abilities.Skill_Circle_of_Protection_NPC }, -- Circle of Protection (Fighters Guild Gladiator)
+    [52744] = { name = Abilities.Skill_Circle_of_Protection_NPC, duration = 0, groundLabel = true, tooltip = Tooltips.Skill_Circle_of_Protection_NPC }, -- Circle of Protection (Fighters Guild Gladiator)
 
     [60417] = { name = Abilities.Skill_Empowered_by_the_Light, tooltip = Tooltips.Generic_Enrage, tooltipValue2 = 50 }, -- Empowered By the Light (Fighter's Guild Gladiator)
     [82996] = { icon = 'esoui/art/icons/ability_warrior_025.dds', tooltip = Tooltips.Skill_Enrage_FG_Gladiator, duration = 0 }, -- Enrage (Fighter's Guild Gladiator)

@@ -444,6 +444,7 @@ function CombatText.Initialize(enabled)
     CombatText.ApplyFont()
 
     -- Set panels to player configured settings
+    local Combattext = GetControl("Combattext")
     for k, s in pairs(LUIE.CombatText.SV.panels) do
         if _G[k] ~= nil then
             _G[k]:ClearAnchors()

@@ -14,7 +14,7 @@ local Tooltips = LUIE.Data.Tooltips
 
 local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
-
+local displayName = GetDisplayName()
 local eventManager = EVENT_MANAGER
 local sceneManager = SCENE_MANAGER
 local windowManager = WINDOW_MANAGER
@@ -219,6 +219,14 @@ SpellCastBuffs.BuffContainers = uiTlw
 
 -- Quadratic easing out - decelerating to zero velocity (For buff fade)
 local function EaseOutQuad(t, b, c, d)
+    -- protect against 1 / 0
+	if t == 0 then
+		t = 0.0001
+	end
+	if d == 0 then
+		d = 0.0001
+	end
+
     t = t / d
     return -c * t * (t - 2) + b
 end
@@ -228,7 +236,7 @@ function SpellCastBuffs.ShouldUseDefaultIcon(abilityId)
         if SpellCastBuffs.SV.DefaultIconOptions == 1 then
             return true
         elseif SpellCastBuffs.SV.DefaultIconOptions == 2 then
-            return Effects.EffectOverride[abilityId].isPlayerAbility and false or true
+            return Effects.EffectOverride[abilityId].isPlayerAbility and true or false
         elseif SpellCastBuffs.SV.DefaultIconOptions == 3 then
             return Effects.EffectOverride[abilityId].isPlayerAbility and true or false
         end
@@ -237,7 +245,7 @@ function SpellCastBuffs.ShouldUseDefaultIcon(abilityId)
         if SpellCastBuffs.SV.DefaultIconOptions == 1 then
             return true
         elseif SpellCastBuffs.SV.DefaultIconOptions == 2 then
-            return Effects.EffectOverride[abilityId].isPlayerAbility and false or true
+            return Effects.EffectOverride[abilityId].isPlayerAbility and true or false
         elseif SpellCastBuffs.SV.DefaultIconOptions == 3 then
             return Effects.EffectOverride[abilityId].isPlayerAbility and true or false
         end
@@ -436,31 +444,30 @@ function SpellCastBuffs.Initialize(enabled)
     table.insert(fragments, fragmentP2)
 
     -- Separate container for players long term buffs
-    if true then
-        uiTlw.player_long = UI.TopLevel(nil, nil)
-        uiTlw.player_long:SetHandler("OnMoveStop", function(self)
-            if self.alignVertical then
-                SpellCastBuffs.SV.playerVOffsetX = self:GetLeft()
-                SpellCastBuffs.SV.playerVOffsetY = self:GetTop()
-            else
-                SpellCastBuffs.SV.playerHOffsetX = self:GetLeft()
-                SpellCastBuffs.SV.playerHOffsetY = self:GetTop()
-            end
-        end)
-
-        if SpellCastBuffs.SV.LongTermEffectsSeparateAlignment == 1 then
-            uiTlw.player_long.alignVertical = false
-        elseif SpellCastBuffs.SV.LongTermEffectsSeparateAlignment == 2 then
-            uiTlw.player_long.alignVertical = true
+    uiTlw.player_long = UI.TopLevel(nil, nil)
+    uiTlw.player_long:SetHandler("OnMoveStop", function(self)
+        local left = self:GetLeft()
+        local top = self:GetTop()
+        if self.alignVertical then
+            SpellCastBuffs.SV.playerVOffsetX = left
+            SpellCastBuffs.SV.playerVOffsetY = top
+        else
+            SpellCastBuffs.SV.playerHOffsetX = left
+            SpellCastBuffs.SV.playerHOffsetY = top
         end
-        uiTlw.player_long.skipUpdate = 0
-        containerRouting.player_long = "player_long"
+    end)
 
-        local fragment = ZO_HUDFadeSceneFragment:New(uiTlw.player_long, 0, 0)
-        table.insert(fragments, fragment)
-    else
-        containerRouting.player_long = containerRouting.player1
+    if SpellCastBuffs.SV.LongTermEffectsSeparateAlignment == 1 then
+        uiTlw.player_long.alignVertical = false
+    elseif SpellCastBuffs.SV.LongTermEffectsSeparateAlignment == 2 then
+        uiTlw.player_long.alignVertical = true
     end
+
+    uiTlw.player_long.skipUpdate = 0
+    containerRouting.player_long = "player_long"
+
+    local fragment = ZO_HUDFadeSceneFragment:New(uiTlw.player_long, 0, 0)
+    fragments[#fragments+1] = fragment
 
     -- Loop over table of fragments to add them to relevant UI Scenes
     for _, v in pairs(fragments) do
@@ -476,7 +483,7 @@ function SpellCastBuffs.Initialize(enabled)
     -- Loop over created controls to...
     for _, v in pairs(containerRouting) do
         -- Set Draw Priority
-        uiTlw[v]:SetDrawLayer(DL_BACKDROP)
+        uiTlw[v]:SetDrawLayer(DL_BACKGROUND)
         uiTlw[v]:SetDrawTier(DT_LOW)
         uiTlw[v]:SetDrawLevel(1)
         if uiTlw[v].preview == nil then
@@ -508,7 +515,7 @@ function SpellCastBuffs.Initialize(enabled)
     eventManager:RegisterForUpdate(moduleName, 100, SpellCastBuffs.OnUpdate)
 
     -- Target Events
-    eventManager:RegisterForEvent(moduleName, EVENT_TARGET_CHANGE, SpellCastBuffs.OnTargetChange)
+    eventManager:RegisterForEvent(moduleName, EVENT_TARGET_CHANGED, SpellCastBuffs.OnTargetChange)
     eventManager:RegisterForEvent(moduleName, EVENT_RETICLE_TARGET_CHANGED, SpellCastBuffs.OnReticleTargetChanged)
     eventManager:RegisterForEvent(moduleName .. "Disposition", EVENT_DISPOSITION_UPDATE, SpellCastBuffs.OnDispositionUpdate)
     eventManager:AddFilterForEvent(moduleName .. "Disposition", EVENT_DISPOSITION_UPDATE, REGISTER_FILTER_UNIT_TAG, "reticleover")
@@ -768,27 +775,24 @@ function SpellCastBuffs.ResetContainerOrientation()
     containerRouting.promd_player = "prominentdebuffs"
 
     -- Separate container for players long term buffs
-    if true then
-        uiTlw.player_long:SetHandler("OnMoveStop", function(self)
-            if self.alignVertical then
-                SpellCastBuffs.SV.playerVOffsetX = self:GetLeft()
-                SpellCastBuffs.SV.playerVOffsetY = self:GetTop()
-            else
-                SpellCastBuffs.SV.playerHOffsetX = self:GetLeft()
-                SpellCastBuffs.SV.playerHOffsetY = self:GetTop()
-            end
-        end)
-
-        if SpellCastBuffs.SV.LongTermEffectsSeparateAlignment == 1 then
-            uiTlw.player_long.alignVertical = false
-        elseif SpellCastBuffs.SV.LongTermEffectsSeparateAlignment == 2 then
-            uiTlw.player_long.alignVertical = true
+    uiTlw.player_long:SetHandler("OnMoveStop", function(self)
+        if self.alignVertical then
+            SpellCastBuffs.SV.playerVOffsetX = self:GetLeft()
+            SpellCastBuffs.SV.playerVOffsetY = self:GetTop()
+        else
+            SpellCastBuffs.SV.playerHOffsetX = self:GetLeft()
+            SpellCastBuffs.SV.playerHOffsetY = self:GetTop()
         end
-        uiTlw.player_long.skipUpdate = 0
-        containerRouting.player_long = "player_long"
-    else
-        containerRouting.player_long = containerRouting.player1
+    end)
+
+    if SpellCastBuffs.SV.LongTermEffectsSeparateAlignment == 1 then
+        uiTlw.player_long.alignVertical = false
+    elseif SpellCastBuffs.SV.LongTermEffectsSeparateAlignment == 2 then
+        uiTlw.player_long.alignVertical = true
     end
+
+    uiTlw.player_long.skipUpdate = 0
+    containerRouting.player_long = "player_long"
 
     -- Set Buff Container Positions
     SpellCastBuffs.SetTlwPosition()
@@ -1344,7 +1348,7 @@ function SpellCastBuffs.TooltipBottomLine(control, detailsLine, artificial)
         GameTooltip:AddLine("", "", ZO_NORMAL_TEXT:UnpackRGB())
         -- Add Ability ID Line
         if SpellCastBuffs.SV.TooltipAbilityId then
-            local labelAbilityId = control.effectId and control.effectId or "None"
+            local labelAbilityId = control.effectId or "None"
             if labelAbilityId == "Fake" then
                 artificial = true
             end
@@ -1358,7 +1362,7 @@ function SpellCastBuffs.TooltipBottomLine(control, detailsLine, artificial)
 
         -- Add Buff Type Line
         if SpellCastBuffs.SV.TooltipBuffType then
-            local buffType = control.buffType and control.buffType or LUIE_BUFF_TYPE_NONE
+            local buffType = control.buffType or LUIE_BUFF_TYPE_NONE
             local effectId = control.effectId
             if effectId and Effects.EffectOverride[effectId] and Effects.EffectOverride[effectId].unbreakable then
                 buffType = buffType + 2
@@ -1485,7 +1489,7 @@ function SpellCastBuffs.CreateSingleIcon(container, AnchorItem, effectType)
             ["bar"] = UI.StatusBar(buff, nil, { 150, 12 }, nil, false),
         }
         buff.bar.backdrop:SetEdgeTexture("", 8, 2, 2)
-        buff.bar.backdrop:SetDrawLayer(DL_BACKDROP)
+        buff.bar.backdrop:SetDrawLayer(DL_BACKGROUND)
         buff.bar.backdrop:SetDrawLevel(1)
         buff.bar.bar:SetMinMax(0, 1)
     end
@@ -1498,7 +1502,7 @@ function SpellCastBuffs.CreateSingleIcon(container, AnchorItem, effectType)
             ["bar"] = UI.StatusBar(buff, nil, { 150, 12 }, nil, false),
         }
         buff.bar.backdrop:SetEdgeTexture("", 8, 2, 2)
-        buff.bar.backdrop:SetDrawLayer(DL_BACKDROP)
+        buff.bar.backdrop:SetDrawLayer(DL_BACKGROUND)
         buff.bar.backdrop:SetDrawLevel(1)
         buff.bar.bar:SetMinMax(0, 1)
     end
@@ -2278,6 +2282,9 @@ function SpellCastBuffs.AddZoneBuffs()
         local abilityName = GetAbilityName(abilityId)
         local abilityIcon = GetAbilityIcon(abilityId)
         local beginTime = GetGameTimeMilliseconds()
+        local stack
+        local groundLabel
+        local toggle
 
         local context = SpellCastBuffs.DetermineContextSimple("player1", abilityId, abilityName)
         SpellCastBuffs.EffectsList["player1"][abilityId] = {
@@ -2330,7 +2337,7 @@ function SpellCastBuffs.OnCombatEventIn(eventCode, result, isError, abilityName,
             return
         end
 
-        local stack = {}
+        local stack
         local iconName = GetAbilityIcon(abilityId)
         local effectName
         local unbreakable
@@ -2460,6 +2467,7 @@ function SpellCastBuffs.OnCombatEventIn(eventCode, result, isError, abilityName,
     if abilityId == 92068 or abilityId == 92168 or abilityId == 92170 then
         if result == ACTION_RESULT_DAMAGE_SHIELDED then
             local context = "player1"
+            local effectName = Effects.EffectOverrideByName[abilityId]
             context = SpellCastBuffs.DetermineContext(context, abilityId, effectName)
 
             if SpellCastBuffs.EffectsList[context][abilityId] then
@@ -2512,7 +2520,7 @@ function SpellCastBuffs.OnCombatEventIn(eventCode, result, isError, abilityName,
         if Effects.FakeExternalBuffs[abilityId].refreshOnly and (result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED) then
             return
         end
-        if Effects.FakeExternalBuffs[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
+        if Effects.FakeExternalBuffs[abilityId].ignoreFade and (result == EFFECT_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
         if SpellCastBuffs.SV.HidePlayerBuffs then
@@ -2552,7 +2560,7 @@ function SpellCastBuffs.OnCombatEventIn(eventCode, result, isError, abilityName,
         if Effects.FakeExternalDebuffs[abilityId].refreshOnly and (result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED) then
             return
         end
-        if Effects.FakeExternalDebuffs[abilityId].ignoreFade == true and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
+        if Effects.FakeExternalDebuffs[abilityId].ignoreFade == true and (result == EFFECT_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
         if SpellCastBuffs.SV.HidePlayerDebuffs then
@@ -2682,7 +2690,7 @@ function SpellCastBuffs.OnCombatEventIn(eventCode, result, isError, abilityName,
         if Effects.FakePlayerBuffs[abilityId].refreshOnly and (result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED) then
             return
         end
-        if Effects.FakePlayerBuffs[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
+        if Effects.FakePlayerBuffs[abilityId].ignoreFade and (result == EFFECT_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
         if SpellCastBuffs.SV.HidePlayerBuffs and not (SpellCastBuffs.SV.PromDebuffTable[abilityId] or SpellCastBuffs.SV.PromDebuffTable[effectName] or SpellCastBuffs.SV.PromBuffTable[abilityId] or SpellCastBuffs.SV.PromBuffTable[effectName]) then
@@ -2755,7 +2763,7 @@ function SpellCastBuffs.OnCombatEventIn(eventCode, result, isError, abilityName,
         if Effects.FakeStagger[abilityId].refreshOnly and (result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED) then
             return
         end
-        if Effects.FakeStagger[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
+        if Effects.FakeStagger[abilityId].ignoreFade and (result == EFFECT_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
         if SpellCastBuffs.SV.HidePlayerDebuffs then
@@ -2830,7 +2838,7 @@ function SpellCastBuffs.OnCombatEventOut(eventCode, result, isError, abilityName
         if Effects.FakePlayerOfflineAura[abilityId].refreshOnly and (result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED) then
             return
         end
-        if Effects.FakePlayerOfflineAura[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
+        if Effects.FakePlayerOfflineAura[abilityId].ignoreFade and (result == EFFECT_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
         if SpellCastBuffs.SV.HidePlayerBuffs and not (SpellCastBuffs.SV.PromDebuffTable[abilityId] or SpellCastBuffs.SV.PromDebuffTable[effectName] or SpellCastBuffs.SV.PromBuffTable[abilityId] or SpellCastBuffs.SV.PromBuffTable[effectName] or Effects.FakePlayerOfflineAura[abilityId].ground) then
@@ -2915,7 +2923,7 @@ function SpellCastBuffs.OnCombatEventOut(eventCode, result, isError, abilityName
         if Effects.FakePlayerDebuffs[abilityId].refreshOnly and (result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED) then
             return
         end
-        if Effects.FakePlayerDebuffs[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
+        if Effects.FakePlayerDebuffs[abilityId].ignoreFade and (result == EFFECT_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
         if SpellCastBuffs.SV.HideTargetDebuffs then
@@ -2923,6 +2931,7 @@ function SpellCastBuffs.OnCombatEventOut(eventCode, result, isError, abilityName
         end
         if not DoesUnitExist("reticleover") then end
         --if GetUnitReaction("reticleover") ~= UNIT_REACTION_HOSTILE then return end
+        local unitTag = displayName
         if IsUnitDead(unitTag) then return end
         iconName = Effects.FakePlayerDebuffs[abilityId].icon or GetAbilityIcon(abilityId)
 
@@ -2983,7 +2992,7 @@ function SpellCastBuffs.OnCombatEventOut(eventCode, result, isError, abilityName
         if Effects.FakeStagger[abilityId].refreshOnly and (result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED) then
             return
         end
-        if Effects.FakeStagger[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
+        if Effects.FakeStagger[abilityId].ignoreFade and (result == EFFECT_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
         if SpellCastBuffs.SV.HideTargetDebuffs then
@@ -3234,6 +3243,7 @@ function SpellCastBuffs.AddNameAura()
 
             local buffType = v.debuff or BUFF_EFFECT_TYPE_BUFF
             local context = v.debuff and "reticleover2" or "reticleover1"
+            local abilityId = v.debuff
             context = SpellCastBuffs.DetermineContext(context, abilityId, abilityName)
             SpellCastBuffs.EffectsList[context]["Name Specific Buff" .. k] = {
                 target = SpellCastBuffs.DetermineTarget(context), type = buffType,
