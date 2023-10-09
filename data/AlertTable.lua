@@ -447,7 +447,7 @@ LUIE.Data.AlertTable = {
     [87237] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 667, cc = LUIE_CC_TYPE_STAGGER, sound = LUIE_ALERT_SOUND_TYPE_AOE_CC }, -- Spring (Hunger)
     [87252] = { power = true, refire = 400, priority = 2, auradetect = true, noSelf = true, duration = 6000, cc = LUIE_CC_TYPE_STUN, effectOnlyInterrupt = true, sound = LUIE_ALERT_SOUND_TYPE_AOE_CC }, -- Devour (Hunger)
     [84944] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 2300, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_AOE_CC }, -- Hollow (Hunger)
-    [87269] = { avoid = true, eventdetect = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 1400, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_AOE_CC }, -- Torpor (Hunger)
+    [87269] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 1400, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_AOE_CC }, -- Torpor (Hunger)
 
     [88282] = { avoid = true, eventdetect = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 767, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Rock Stomp (Iron Atronach)
     [88261] = { block = true, eventdetect = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 800, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Lava Wave (Iron Atronach)
