@@ -7541,7 +7541,7 @@ function ChatAnnouncements.HookFunction()
         local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_SKYSHARD_GAINED)
         local hasStringPrefix = stringPrefix ~= ""
         local flagDisplay, sound, finalMessage, finalText
-    
+
     	-- check if the skill point change was due to skyshards
         if oldPartialPoints ~= newPartialPoints or changeReason == SKILL_POINT_CHANGE_REASON_SKYSHARD_INSTANT_UNLOCK then
             flagDisplay = true
@@ -7552,7 +7552,7 @@ function ChatAnnouncements.HookFunction()
             local numSkyshardsGained = (newPoints * NUM_PARTIAL_SKILL_POINTS_FOR_FULL + newPartialPoints) - (oldPoints * NUM_PARTIAL_SKILL_POINTS_FOR_FULL + oldPartialPoints)
             local largeText = zo_strformat(csaPrefix, numSkyshardsGained)
             local stringPart1, stringPart2
-        
+
     		-- if only the partial points changed, message out the new count of skyshard pieces
             if newPoints == oldPoints then
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_POINTS_PARTIAL_GAINED)
@@ -7774,7 +7774,7 @@ function ChatAnnouncements.HookFunction()
 
     -- EVENT_COLLECTION_UPDATED (CSA Handler) -- Hooked via csaCallbackHandlers[1]
     local function CollectibleUnlockedHook(collectionUpdateType, collectiblesByUnlockState)
-        if collectionUpdateType == ZO_COLLECTION_UPDATE_TYPE.UNLOCK_STATE_CHANGES then
+        if collectionUpdateType == ZO_COLLECTION_UPDATE_TYPE.UNLOCK_STATE_CHANGED then
             local nowOwnedCollectibles = collectiblesByUnlockState[COLLECTIBLE_UNLOCK_STATE_UNLOCKED_OWNED]
             if nowOwnedCollectibles then
                 if #nowOwnedCollectibles > MAX_INDIVIDUAL_COLLECTIBLE_UPDATES then
@@ -10028,12 +10028,12 @@ function ChatAnnouncements.HookFunction()
                 else
                     RequestFriend(currentTargetDisplayName, nil)
                 end
-                
+
                 local displayNameLink = ZO_LinkHandler_CreateLink(currentTargetDisplayName, nil, DISPLAY_NAME_LINK_TYPE, currentTargetDisplayName)
                 if ChatAnnouncements.SV.BracketOptionCharacter == 1 then
                     displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(currentTargetDisplayName, nil, DISPLAY_NAME_LINK_TYPE, currentTargetDisplayName)
                 end
-                
+
                 local formattedMessage = zo_strformat(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG_LINK, displayNameLink)
                 printToChat(formattedMessage, true)
                 if ChatAnnouncements.SV.Social.FriendIgnoreAlert then
