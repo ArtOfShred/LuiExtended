@@ -9,7 +9,7 @@ local AbilityAlerts = CombatInfo.AbilityAlerts
 
 local zo_strformat = zo_strformat
 
-local castBarMovingEnable = false -- Helper local flag
+local castBarMovingEnabled = false -- Helper local flag
 local alertFrameMovingEnabled = false -- Helper local flag
 
 local globalMethodOptions = { "Ascending", "Descending", "Radial" }
@@ -19,7 +19,7 @@ local globalAlertOptionsKeys = { ["Show All Incoming Abilities"] = 1, ["Only Sho
 local globalIconOptions = { "All Crowd Control", "NPC CC Only", "Player CC Only" }
 local globalIconOptionsKeys = { ["All Crowd Control"] = 1, ["NPC CC Only"] = 2, ["Player CC Only"] = 3 }
 
-local Blacklist, BlackListValues = {}
+local Blacklist, BlacklistValues = {}, {}
 
 local ACTION_RESULT_AREA_EFFECT = 669966
 
@@ -1448,7 +1448,7 @@ function CombatInfo.CreateSettings()
                 -- Levitate/Pull
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_LEVITATE),
-                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_LEVIATE_TP),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_LEVITATE_TP),
                 getFunc = function() return unpack(Settings.alerts.colors.levitateColor) end,
                 setFunc = function(r, g, b, a) Settings.alerts.colors.levitateColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
                 default = {r=Defaults.alerts.colors.levitateColor[1], g=Defaults.alerts.colors.levitateColor[2], b=Defaults.alerts.colors.levitateColor[3]},

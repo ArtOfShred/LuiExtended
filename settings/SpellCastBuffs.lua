@@ -16,9 +16,9 @@ local globalIconOptions = { "All Crowd Control", "NPC CC Only", "Player CC Only"
 local globalIconOptionsKeys = { ["All Crowd Control"] = 1, ["NPC CC Only"] = 2, ["Player CC Only"] = 3 }
 
 -- Variables for custom generated tables
-local PromBuffs, PromBuffsValues = {}
-local PromDebuffs, PromDebuffsValues = {}
-local Blacklist, BlackListValues = {}
+local PromBuffs, PromBuffsValues = {}, {}
+local PromDebuffs, PromDebuffsValues = {}, {}
+local Blacklist, BlacklistValues = {}, {}
 
 -- Create a list of abilityId's / abilityName's to use for Blacklist
 local function GenerateCustomList(input)

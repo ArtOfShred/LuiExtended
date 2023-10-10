@@ -240,7 +240,12 @@ local g_magickaThreshold
 local g_staminaThreshold
 local g_targetUnitFrame          -- Reference to default UI target unit frame
 local playerDisplayName = GetUnitDisplayName("player")
-
+local group
+local unitTag
+local playerTlw
+local phb
+local rhb
+local shb
 local CP_BAR_COLOURS = ZO_CP_BAR_GRADIENT_COLORS
 
 local g_PendingUpdate = {
@@ -332,12 +337,12 @@ end
 local function CreateDecreasedArmorOverlay( parent, small )
     local control = UI.Control( parent, {CENTER,CENTER}, {512,32}, false )
     control.smallTex = UI.Texture(control, {CENTER,CENTER}, {512,32}, "/EsoUI/Art/UnitAttributeVisualizer/attributeBar_dynamic_decreasedArmor_small.dds", 2, false)
-    control.smallTex:SetDrawTier(HIGH)
+    control.smallTex:SetDrawTier(DT_HIGH)
     --control.smallTexGlow = UI.Texture(control, {CENTER,CENTER}, {512,32}, "/EsoUI/Art/UnitAttributeVisualizer/attributeBar_dynamic_decreasedArmor_small_glow.dds", 2, false)
     --control.smallTexGlow:SetDrawTier(HIGH)
     if not small then
         control.normalTex = UI.Texture(control, {CENTER,CENTER}, {512,32}, "/EsoUI/Art/UnitAttributeVisualizer/attributeBar_dynamic_decreasedArmor_standard.dds", 2, false)
-        control.normalTex:SetDrawTier(HIGH)
+        control.normalTex:SetDrawTier(DT_HIGH)
         --control.normalTexGlow = UI.Texture(control, {CENTER,CENTER}, {512,32}, "/EsoUI/Art/UnitAttributeVisualizer/attributeBar_dynamic_decreasedArmor_standard_glow.dds", 2, false)
         --control.normalTexGlow:SetDrawTier(HIGH)
     end
@@ -518,7 +523,7 @@ end
 
 function UnitFrames.AltBar_OnMouseEnterWerewolf(control)
     local function UpdateWerewolfPower()
-        local currentPower, maxPower = GetUnitPower("player", POWERTYPE_WEREWOLF)
+        local currentPower, maxPower = GetUnitPower("player", COMBAT_MECHANIC_FLAGS_WEREWOLF)
         local percentagePower = zo_floor(currentPower / maxPower * 100)
 
         InitializeTooltip(InformationTooltip, control, BOTTOM, 0, -10)
@@ -529,12 +534,12 @@ function UnitFrames.AltBar_OnMouseEnterWerewolf(control)
 
     -- Register Tooltip Update while active
     eventManager:RegisterForEvent(moduleName .. "TooltipPower", EVENT_POWER_UPDATE, UpdateWerewolfPower)
-    eventManager:AddFilterForEvent(moduleName .. "TooltipPower", EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, POWERTYPE_WEREWOLF, REGISTER_FILTER_UNIT_TAG, "player")
+    eventManager:AddFilterForEvent(moduleName .. "TooltipPower", EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, COMBAT_MECHANIC_FLAGS_WEREWOLF, REGISTER_FILTER_UNIT_TAG, "player")
 end
 
 function UnitFrames.AltBar_OnMouseEnterMounted(control)
     local function UpdateMountPower()
-        local currentPower, maxPower = GetUnitPower("player", POWERTYPE_MOUNT_STAMINA)
+        local currentPower, maxPower = GetUnitPower("player", COMBAT_MECHANIC_FLAGS_MOUNT_STAMINA)
         local percentagePower = zo_floor(currentPower / maxPower * 100)
         InitializeTooltip(InformationTooltip, control, BOTTOM, 0, -10)
 
@@ -545,12 +550,12 @@ function UnitFrames.AltBar_OnMouseEnterMounted(control)
 
     -- Register Tooltip Update while active
     eventManager:RegisterForEvent(moduleName .. "TooltipPower", EVENT_POWER_UPDATE, UpdateMountPower)
-    eventManager:AddFilterForEvent(moduleName .. "TooltipPower", EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, POWERTYPE_MOUNT_STAMINA, REGISTER_FILTER_UNIT_TAG, "player")
+    eventManager:AddFilterForEvent(moduleName .. "TooltipPower", EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, COMBAT_MECHANIC_FLAGS_MOUNT_STAMINA, REGISTER_FILTER_UNIT_TAG, "player")
 end
 
 function UnitFrames.AltBar_OnMouseEnterSiege(control)
     local function UpdateSiegePower()
-        local currentPower, maxPower = GetUnitPower("controlledsiege", POWERTYPE_HEALTH)
+        local currentPower, maxPower = GetUnitPower("controlledsiege", COMBAT_MECHANIC_FLAGS_HEALTH)
         local percentagePower = zo_floor(currentPower / maxPower * 100)
         local siegeName = GetUnitName("controlledsiege")
         InitializeTooltip(InformationTooltip, control, BOTTOM, 0, -10)
@@ -562,7 +567,7 @@ function UnitFrames.AltBar_OnMouseEnterSiege(control)
 
     -- Register Tooltip Update while active
     eventManager:RegisterForEvent(moduleName .. "TooltipPower", EVENT_POWER_UPDATE, UpdateSiegePower)
-    eventManager:AddFilterForEvent(moduleName .. "TooltipPower", EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, POWERTYPE_HEALTH, REGISTER_FILTER_UNIT_TAG, "controlledsiege")
+    eventManager:AddFilterForEvent(moduleName .. "TooltipPower", EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, COMBAT_MECHANIC_FLAGS_HEALTH, REGISTER_FILTER_UNIT_TAG, "controlledsiege")
 end
 
 function UnitFrames.AltBar_OnMouseExit(control)
@@ -578,13 +583,13 @@ local function CreateDefaultFrames()
 
     if UnitFrames.SV.DefaultFramesNewPlayer == 3 then
         default_controls.player = {
-            [POWERTYPE_HEALTH]  = ZO_PlayerAttributeHealth,
-            [POWERTYPE_MAGICKA] = ZO_PlayerAttributeMagicka,
-            [POWERTYPE_STAMINA] = ZO_PlayerAttributeStamina,
+            [COMBAT_MECHANIC_FLAGS_HEALTH]  = ZO_PlayerAttributeHealth,
+            [COMBAT_MECHANIC_FLAGS_MAGICKA] = ZO_PlayerAttributeMagicka,
+            [COMBAT_MECHANIC_FLAGS_STAMINA] = ZO_PlayerAttributeStamina,
         }
     end
     if UnitFrames.SV.DefaultFramesNewTarget == 3 then
-        default_controls.reticleover = { [POWERTYPE_HEALTH]  = ZO_TargetUnitFramereticleover, }
+        default_controls.reticleover = { [COMBAT_MECHANIC_FLAGS_HEALTH]  = ZO_TargetUnitFramereticleover, }
         -- g_DefaultFrames.reticleover should be always present to hold target classIcon and friendIcon
     else
         g_DefaultFrames.reticleover = { ["unitTag"] = "reticleover" }
@@ -601,9 +606,9 @@ local function CreateDefaultFrames()
     g_targetUnitFrame = ZO_UnitFrames_GetUnitFrame("reticleover")
 
     -- When default Target frame is enabled set the threshold value to change colour of label and add label to default fade list
-    if g_DefaultFrames.reticleover[POWERTYPE_HEALTH] then
-        g_DefaultFrames.reticleover[POWERTYPE_HEALTH].threshold = g_targetThreshold
-        table.insert( g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover[POWERTYPE_HEALTH].label )
+    if g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH] then
+        g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].threshold = g_targetThreshold
+        table.insert( g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].label )
     end
 
     -- Create classIcon and friendIcon: they should work even when default unit frames extender is disabled
@@ -643,7 +648,7 @@ local function CreateCustomFrames()
     if UnitFrames.SV.CustomFramesPlayer then
         -- Player Frame
         local playerTlw = UI.TopLevel( nil, nil )
-        playerTlw:SetDrawLayer(DL_BACKDROP)
+        playerTlw:SetDrawLayer(DL_BACKGROUND)
         playerTlw:SetDrawTier(DT_LOW)
         playerTlw:SetDrawLevel(1)
         playerTlw.customPositionAttr = "CustomFramesPlayerFramePos"
@@ -653,13 +658,13 @@ local function CreateCustomFrames()
         local botInfo = UI.Control( player, {TOP,BOTTOM,0,2}, nil, false )
         local buffAnchor = UI.Control( player, {TOP,BOTTOM,0,2}, nil, false )
         local phb = UI.Backdrop( player, {TOP,TOP,0,0}, nil, nil, nil, false )
-        phb:SetDrawLayer(DL_BACKDROP)
+        phb:SetDrawLayer(DL_BACKGROUND)
         phb:SetDrawLevel(1)
         local pmb = UI.Backdrop( player, nil, nil, nil, nil, false )
-        pmb:SetDrawLayer(DL_BACKDROP)
+        pmb:SetDrawLayer(DL_BACKGROUND)
         pmb:SetDrawLevel(1)
         local psb = UI.Backdrop( player, nil, nil, nil, nil, false )
-        psb:SetDrawLayer(DL_BACKDROP)
+        psb:SetDrawLayer(DL_BACKGROUND)
         psb:SetDrawLevel(1)
         local alt = UI.Backdrop( botInfo, {RIGHT,RIGHT}, nil, nil , {0,0,0,1}, false )
         local pli = UI.Texture( topInfo, nil, {20,20}, nil, nil, false )
@@ -676,7 +681,7 @@ local function CreateCustomFrames()
             ["unitTag"]     = "player",
             ["tlw"]         = playerTlw,
             ["control"]     = player,
-            [POWERTYPE_HEALTH] = {
+            [COMBAT_MECHANIC_FLAGS_HEALTH] = {
                 ["backdrop"]= phb,
                 ["labelOne"]= UI.Label( phb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
                 ["labelTwo"]= UI.Label( phb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
@@ -684,14 +689,14 @@ local function CreateCustomFrames()
                 ["shield"]  = UI.StatusBar( phb, nil, nil, nil, true ),
                 ["threshold"] = g_healthThreshold
             },
-            [POWERTYPE_MAGICKA] = {
+            [COMBAT_MECHANIC_FLAGS_MAGICKA] = {
                 ["backdrop"]= pmb,
                 ["labelOne"]= UI.Label( pmb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
                 ["labelTwo"]= UI.Label( pmb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
                 ["bar"]     = UI.StatusBar( pmb, nil, nil, nil, false ),
                 ["threshold"] = g_magickaThreshold
             },
-            [POWERTYPE_STAMINA] = {
+            [COMBAT_MECHANIC_FLAGS_STAMINA] = {
                 ["backdrop"]= psb,
                 ["labelOne"]= UI.Label( psb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
                 ["labelTwo"]= UI.Label( psb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
@@ -719,20 +724,20 @@ local function CreateCustomFrames()
 
         -- If Health Label is hidden in menu optins, hide the health bar labels
         if UnitFrames.SV.HideLabelHealth then
-            UnitFrames.CustomFrames.player[POWERTYPE_HEALTH].labelOne:SetHidden(true)
-            UnitFrames.CustomFrames.player[POWERTYPE_HEALTH].labelTwo:SetHidden(true)
+            UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_HEALTH].labelOne:SetHidden(true)
+            UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_HEALTH].labelTwo:SetHidden(true)
         end
 
         -- If Stamina Label is hidden in menu options, hide the stamina bar labels
         if UnitFrames.SV.HideLabelStamina then
-            UnitFrames.CustomFrames.player[POWERTYPE_STAMINA].labelOne:SetHidden(true)
-            UnitFrames.CustomFrames.player[POWERTYPE_STAMINA].labelTwo:SetHidden(true)
+            UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_STAMINA].labelOne:SetHidden(true)
+            UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_STAMINA].labelTwo:SetHidden(true)
         end
 
         -- If Magicka Label is hidden in menu options, hide the magicka bar labels
         if UnitFrames.SV.HideLabelMagicka then
-            UnitFrames.CustomFrames.player[POWERTYPE_MAGICKA].labelOne:SetHidden(true)
-            UnitFrames.CustomFrames.player[POWERTYPE_MAGICKA].labelTwo:SetHidden(true)
+            UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_MAGICKA].labelOne:SetHidden(true)
+            UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_MAGICKA].labelTwo:SetHidden(true)
         end
 
         UnitFrames.CustomFrames.controlledsiege = { -- placeholder for alternative bar when using siege weapon
@@ -743,7 +748,7 @@ local function CreateCustomFrames()
     if UnitFrames.SV.CustomFramesTarget then
         -- Target Frame
         local targetTlw = UI.TopLevel( nil, nil )
-        targetTlw:SetDrawLayer(DL_BACKDROP)
+        targetTlw:SetDrawLayer(DL_BACKGROUND)
         targetTlw:SetDrawTier(DT_LOW)
         targetTlw:SetDrawLevel(1)
         targetTlw.customPositionAttr = "CustomFramesTargetFramePos"
@@ -754,7 +759,7 @@ local function CreateCustomFrames()
         local botInfo = UI.Control( target, {TOP,BOTTOM,0,2}, nil, false )
         local buffAnchor = UI.Control( target, {TOP,BOTTOM,0,2}, nil, false )
         local thb = UI.Backdrop(target, {TOP,TOP,0,0}, nil, nil, nil, false )
-        thb:SetDrawLayer(DL_BACKDROP)
+        thb:SetDrawLayer(DL_BACKGROUND)
         thb:SetDrawLevel(1)
         local tli = UI.Texture( topInfo, nil, {20,20}, nil, nil, false )
         local ari = UI.Texture( botInfo, {RIGHT,RIGHT,-1,0}, {20,20}, nil, nil, false )
@@ -781,7 +786,7 @@ local function CreateCustomFrames()
             ["tlw"]         = targetTlw,
             ["control"]     = target,
             ["canHide"]     = true,
-            [POWERTYPE_HEALTH] = {
+            [COMBAT_MECHANIC_FLAGS_HEALTH] = {
                 ["backdrop"]= thb,
                 ["labelOne"]= UI.Label( thb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
                 ["labelTwo"]= UI.Label( thb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
@@ -816,7 +821,7 @@ local function CreateCustomFrames()
     if UnitFrames.SV.AvaCustFramesTarget then
         -- Target Frame
         local targetTlw = UI.TopLevel( nil, nil )
-        targetTlw:SetDrawLayer(DL_BACKDROP)
+        targetTlw:SetDrawLayer(DL_BACKGROUND)
         targetTlw:SetDrawTier(DT_LOW)
         targetTlw:SetDrawLevel(1)
         targetTlw.customPositionAttr = "AvaCustFramesTargetFramePos"
@@ -827,7 +832,7 @@ local function CreateCustomFrames()
         local botInfo = UI.Control( target, {TOP,BOTTOM,0,2}, nil, false )
         local buffAnchor = UI.Control( target, {TOP,BOTTOM,0,2}, nil, false )
         local thb = UI.Backdrop(target, {TOP,TOP,0,0}, nil, nil, nil, false )
-        thb:SetDrawLayer(DL_BACKDROP)
+        thb:SetDrawLayer(DL_BACKGROUND)
         thb:SetDrawLevel(1)
         local cn = UI.Label( botInfo, {TOP,TOP}, nil, {1,3}, nil, "Class", false )
 
@@ -847,7 +852,7 @@ local function CreateCustomFrames()
             ["tlw"]         = targetTlw,
             ["control"]     = target,
             ["canHide"]     = true,
-            [POWERTYPE_HEALTH] = {
+            [COMBAT_MECHANIC_FLAGS_HEALTH] = {
                 ["backdrop"]= thb,
                 ["label"]   = UI.Label( thb, {CENTER,CENTER}, nil, {1,1}, nil, "zz%", false ),
                 ["labelOne"]= UI.Label( thb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx + ss", false ),
@@ -869,9 +874,9 @@ local function CreateCustomFrames()
         }
 
         UnitFrames.CustomFrames.AvaPlayerTarget.name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
-        UnitFrames.CustomFrames.AvaPlayerTarget[POWERTYPE_HEALTH].label.fmt = "Percentage%"
-        UnitFrames.CustomFrames.AvaPlayerTarget[POWERTYPE_HEALTH].labelOne.fmt = "Current + Shield"
-        UnitFrames.CustomFrames.AvaPlayerTarget[POWERTYPE_HEALTH].labelTwo.fmt = "Max"
+        UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].label.fmt = "Percentage%"
+        UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].labelOne.fmt = "Current + Shield"
+        UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].labelTwo.fmt = "Max"
 
         -- Put in into table with secondary frames so it can be accessed by other functions in this module
         g_AvaCustFrames.reticleover = UnitFrames.CustomFrames.AvaPlayerTarget
@@ -881,7 +886,7 @@ local function CreateCustomFrames()
     if UnitFrames.SV.CustomFramesGroup then
         -- Group Frame
         local group = UI.TopLevel( nil, nil )
-        group:SetDrawLayer(DL_BACKDROP)
+        group:SetDrawLayer(DL_BACKGROUND)
         group:SetDrawTier(DT_LOW)
         group:SetDrawLevel(1)
         group.customPositionAttr = "CustomFramesGroupFramePos"
@@ -901,14 +906,14 @@ local function CreateCustomFrames()
             local control = UI.Control( group, nil, nil, false )
             local topInfo = UI.Control( control, {BOTTOMRIGHT,TOPRIGHT,0,-3}, nil, false )
             local ghb = UI.Backdrop( control, {TOPLEFT,TOPLEFT}, nil, nil, nil, false )
-            ghb:SetDrawLayer(DL_BACKDROP)
+            ghb:SetDrawLayer(DL_BACKGROUND)
             ghb:SetDrawLevel(1)
             local gli = UI.Texture( topInfo, nil, {20,20}, nil, nil, false )
 
             UnitFrames.CustomFrames[unitTag] = {
                 ["tlw"]         = group,
                 ["control"]     = control,
-                [POWERTYPE_HEALTH] = {
+                [COMBAT_MECHANIC_FLAGS_HEALTH] = {
                     ["backdrop"]= ghb,
                     ["labelOne"]= UI.Label( ghb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
                     ["labelTwo"]= UI.Label( ghb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
@@ -940,7 +945,7 @@ local function CreateCustomFrames()
     if UnitFrames.SV.CustomFramesRaid then
         -- Raid Frame
         local raid = UI.TopLevel( nil, nil )
-        raid:SetDrawLayer(DL_BACKDROP)
+        raid:SetDrawLayer(DL_BACKGROUND)
         raid:SetDrawTier(DT_LOW)
         raid:SetDrawLevel(1)
         raid.customPositionAttr = "CustomFramesRaidFramePos"
@@ -959,13 +964,13 @@ local function CreateCustomFrames()
             local unitTag = "RaidGroup" .. i
             local control = UI.Control( raid, nil, nil, false )
             local rhb = UI.Backdrop( control, "fill", nil, nil, nil, false )
-            rhb:SetDrawLayer(DL_BACKDROP)
+            rhb:SetDrawLayer(DL_BACKGROUND)
             rhb:SetDrawLevel(1)
 
             UnitFrames.CustomFrames[unitTag] = {
                 ["tlw"]         = raid,
                 ["control"]     = control,
-                [POWERTYPE_HEALTH] = {
+                [COMBAT_MECHANIC_FLAGS_HEALTH] = {
                     ["backdrop"]= rhb,
                     ["label"]   = UI.Label( rhb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
                     ["bar"]     = UI.StatusBar( rhb, nil, nil, nil, false ),
@@ -984,14 +989,14 @@ local function CreateCustomFrames()
             control:SetMouseEnabled(true)
             control:SetHandler("OnMouseUp", UnitFrames.GroupFrames_OnMouseUp)
 
-            UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].label.fmt = "Current (Percentage%)"
+            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].label.fmt = "Current (Percentage%)"
         end
     end
 
     if UnitFrames.SV.CustomFramesPet then
         -- Pet Frame
         local pet = UI.TopLevel( nil, nil )
-        pet:SetDrawLayer(DL_BACKDROP)
+        pet:SetDrawLayer(DL_BACKGROUND)
         pet:SetDrawTier(DT_LOW)
         pet:SetDrawLevel(1)
         pet.customPositionAttr = "CustomFramesPetFramePos"
@@ -1011,13 +1016,13 @@ local function CreateCustomFrames()
             local control = UI.Control( pet, nil, nil, false )
             local shb = UI.Backdrop( control, "fill", nil, nil, nil, false )
 
-            shb:SetDrawLayer(DL_BACKDROP)
+            shb:SetDrawLayer(DL_BACKGROUND)
             shb:SetDrawLevel(1)
 
             UnitFrames.CustomFrames[unitTag] = {
                 ["tlw"]         = pet,
                 ["control"]     = control,
-                [POWERTYPE_HEALTH] = {
+                [COMBAT_MECHANIC_FLAGS_HEALTH] = {
                     ["backdrop"]= shb,
                     ["label"]   = UI.Label( shb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
                     ["bar"]     = UI.StatusBar( shb, nil, nil, nil, false ),
@@ -1028,14 +1033,14 @@ local function CreateCustomFrames()
 
             }
             UnitFrames.CustomFrames[unitTag].name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
-            UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].label.fmt = "Current (Percentage%)"
+            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].label.fmt = "Current (Percentage%)"
         end
     end
 
     if UnitFrames.SV.CustomFramesCompanion then
         -- Companion Frame
         local companionTlw = UI.TopLevel( nil, nil )
-        companionTlw:SetDrawLayer(DL_BACKDROP)
+        companionTlw:SetDrawLayer(DL_BACKGROUND)
         companionTlw:SetDrawTier(DT_LOW)
         companionTlw:SetDrawLevel(1)
         companionTlw.customPositionAttr = "CustomFramesCompanionFramePos"
@@ -1052,14 +1057,14 @@ local function CreateCustomFrames()
 
         local companion = UI.Control( companionTlw, nil, nil, false )
         local shb = UI.Backdrop( companion, "fill", nil, nil, nil, false )
-        shb:SetDrawLayer(DL_BACKDROP)
+        shb:SetDrawLayer(DL_BACKGROUND)
         shb:SetDrawLevel(1)
 
         UnitFrames.CustomFrames.companion = {
             ["unitTag"]     = "companion",
             ["tlw"]         = companionTlw,
             ["control"]     = companion,
-            [POWERTYPE_HEALTH] = {
+            [COMBAT_MECHANIC_FLAGS_HEALTH] = {
                 ["backdrop"]= shb,
                 ["label"]   = UI.Label( shb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
                 ["bar"]     = UI.StatusBar( shb, nil, nil, nil, false ),
@@ -1070,14 +1075,14 @@ local function CreateCustomFrames()
 
         }
         UnitFrames.CustomFrames.companion.name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
-        UnitFrames.CustomFrames.companion[POWERTYPE_HEALTH].label.fmt = "Current (Percentage%)"
+        UnitFrames.CustomFrames.companion[COMBAT_MECHANIC_FLAGS_HEALTH].label.fmt = "Current (Percentage%)"
     end
 
     -- Loop through Bosses
     if UnitFrames.SV.CustomFramesBosses then
         -- Bosses Frame
         local bosses = UI.TopLevel( nil, nil )
-        bosses:SetDrawLayer(DL_BACKDROP)
+        bosses:SetDrawLayer(DL_BACKGROUND)
         bosses:SetDrawTier(DT_LOW)
         bosses:SetDrawLevel(1)
         bosses.customPositionAttr = "CustomFramesBossesFramePos"
@@ -1096,14 +1101,14 @@ local function CreateCustomFrames()
             local unitTag = "boss" .. i
             local control = UI.Control( bosses, nil, nil, false )
             local bhb = UI.Backdrop( control, "fill", nil, nil, nil, false )
-            bhb:SetDrawLayer(DL_BACKDROP)
+            bhb:SetDrawLayer(DL_BACKGROUND)
             bhb:SetDrawLevel(1)
 
             UnitFrames.CustomFrames[unitTag] = {
                 ["unitTag"]     = unitTag,
                 ["tlw"]         = bosses,
                 ["control"]     = control,
-                [POWERTYPE_HEALTH] = {
+                [COMBAT_MECHANIC_FLAGS_HEALTH] = {
                     ["backdrop"]= bhb,
                     ["label"]   = UI.Label( bhb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
                     ["bar"]     = UI.StatusBar( bhb, nil, nil, nil, false ),
@@ -1114,7 +1119,7 @@ local function CreateCustomFrames()
                 ["name"]        = UI.Label( bhb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, unitTag, false ),
             }
             UnitFrames.CustomFrames[unitTag].name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
-            UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].label.fmt = "Percentage%"
+            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].label.fmt = "Percentage%"
         end
     end
 
@@ -1157,7 +1162,7 @@ local function CreateCustomFrames()
         for i = 0, 24 do
             local unitTag = (i==0) and baseName or ( baseName .. i )
             if UnitFrames.CustomFrames[unitTag] then
-                for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA, "alternative"} ) do
+                for _, powerType in pairs( {COMBAT_MECHANIC_FLAGS_HEALTH, COMBAT_MECHANIC_FLAGS_MAGICKA, COMBAT_MECHANIC_FLAGS_STAMINA, "alternative"} ) do
                     local powerBar = UnitFrames.CustomFrames[unitTag][powerType]
                     if powerBar then
                         powerBar.bar:SetAnchor( TOPLEFT, powerBar.backdrop, TOPLEFT, 1, 1 )
@@ -1198,7 +1203,7 @@ local function CreateCustomFrames()
         for _, baseName in pairs( { 'player', 'reticleover', 'AvaPlayerTarget' } ) do
             local unitTag = baseName
             if UnitFrames.CustomFrames[unitTag] then
-                for _, powerType in pairs( {POWERTYPE_HEALTH} ) do
+                for _, powerType in pairs( {COMBAT_MECHANIC_FLAGS_HEALTH} ) do
                     if UnitFrames.CustomFrames[unitTag][powerType] then
                         local backdrop = UnitFrames.CustomFrames[unitTag][powerType].backdrop
                         local size1
@@ -1229,7 +1234,7 @@ local function CreateCustomFrames()
         for i = 1, 4 do
             local unitTag = 'SmallGroup' .. i
             if UnitFrames.CustomFrames[unitTag] then
-                for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA} ) do
+                for _, powerType in pairs( {COMBAT_MECHANIC_FLAGS_HEALTH, COMBAT_MECHANIC_FLAGS_MAGICKA, COMBAT_MECHANIC_FLAGS_STAMINA} ) do
                     if UnitFrames.CustomFrames[unitTag][powerType] then
                         local backdrop = UnitFrames.CustomFrames[unitTag][powerType].backdrop
                         local size1 = UnitFrames.SV.GroupBarWidth
@@ -1250,7 +1255,7 @@ local function CreateCustomFrames()
         for i = 1, 24 do
             local unitTag = 'RaidGroup' .. i
             if UnitFrames.CustomFrames[unitTag] then
-                for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA} ) do
+                for _, powerType in pairs( {COMBAT_MECHANIC_FLAGS_HEALTH, COMBAT_MECHANIC_FLAGS_MAGICKA, COMBAT_MECHANIC_FLAGS_STAMINA} ) do
                     if UnitFrames.CustomFrames[unitTag][powerType] then
                         local backdrop = UnitFrames.CustomFrames[unitTag][powerType].backdrop
                         local size1 = UnitFrames.SV.RaidBarWidth
@@ -1271,7 +1276,7 @@ local function CreateCustomFrames()
         for i = 0, 6 do
             local unitTag = 'boss' .. i
             if UnitFrames.CustomFrames[unitTag] then
-                for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA} ) do
+                for _, powerType in pairs( {COMBAT_MECHANIC_FLAGS_HEALTH, COMBAT_MECHANIC_FLAGS_MAGICKA, COMBAT_MECHANIC_FLAGS_STAMINA} ) do
                     if UnitFrames.CustomFrames[unitTag][powerType] then
                         local backdrop = UnitFrames.CustomFrames[unitTag][powerType].backdrop
                         local size1 = UnitFrames.SV.BossBarWidth
@@ -1293,12 +1298,12 @@ local function CreateCustomFrames()
         for _, baseName in pairs( { 'player', 'reticleover', 'AvaPlayerTarget' } ) do
             local unitTag = baseName
             if UnitFrames.CustomFrames[unitTag] then
-                -- Assume that unitTag DO have [POWERTYPE_HEALTH] field
-                if UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then
-                    UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {}
+                -- Assume that unitTag DO have [COMBAT_MECHANIC_FLAGS_HEALTH] field
+                if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat == nil then
+                    UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat = {}
                 end
-                local backdrop = UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
-                UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_ARMOR_RATING] = {
+                local backdrop = UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop
+                UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_ARMOR_RATING] = {
                     ["dec"] = CreateDecreasedArmorOverlay( backdrop, false ),
                     ["inc"] = UI.Texture( backdrop, {CENTER,CENTER,13,0}, {24,24}, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasearmor.dds", 2, true ),
                 }
@@ -1310,12 +1315,12 @@ local function CreateCustomFrames()
         for i = 1, 4 do
             local unitTag = 'SmallGroup' .. i
             if UnitFrames.CustomFrames[unitTag] then
-                -- Assume that unitTag DO have [POWERTYPE_HEALTH] field
-                if UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then
-                    UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {}
+                -- Assume that unitTag DO have [COMBAT_MECHANIC_FLAGS_HEALTH] field
+                if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat == nil then
+                    UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat = {}
                 end
-                local backdrop = UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
-                UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_ARMOR_RATING] = {
+                local backdrop = UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop
+                UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_ARMOR_RATING] = {
                     ["dec"] = CreateDecreasedArmorOverlay( backdrop, false ),
                     ["inc"] = UI.Texture( backdrop, {CENTER,CENTER,13,0}, {24,24}, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasearmor.dds", 2, true ),
                 }
@@ -1327,12 +1332,12 @@ local function CreateCustomFrames()
         for i = 1, 24 do
             local unitTag = 'RaidGroup' .. i
             if UnitFrames.CustomFrames[unitTag] then
-                -- Assume that unitTag DO have [POWERTYPE_HEALTH] field
-                if UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then
-                    UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {}
+                -- Assume that unitTag DO have [COMBAT_MECHANIC_FLAGS_HEALTH] field
+                if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat == nil then
+                    UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat = {}
                 end
-                local backdrop = UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
-                UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_ARMOR_RATING] = {
+                local backdrop = UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop
+                UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_ARMOR_RATING] = {
                     ["dec"] = CreateDecreasedArmorOverlay( backdrop, false ),
                     ["inc"] = UI.Texture( backdrop, {CENTER,CENTER,13,0}, {24,24}, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasearmor.dds", 2, true ),
                 }
@@ -1344,12 +1349,12 @@ local function CreateCustomFrames()
         for i = 0, 6 do
             local unitTag = 'boss' .. i
             if UnitFrames.CustomFrames[unitTag] then
-                -- Assume that unitTag DO have [POWERTYPE_HEALTH] field
-                if UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then
-                    UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {}
+                -- Assume that unitTag DO have [COMBAT_MECHANIC_FLAGS_HEALTH] field
+                if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat == nil then
+                    UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat = {}
                 end
-                local backdrop = UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
-                UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_ARMOR_RATING] = {
+                local backdrop = UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop
+                UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_ARMOR_RATING] = {
                     ["dec"] = CreateDecreasedArmorOverlay( backdrop, false ),
                     ["inc"] = UI.Texture( backdrop, {CENTER,CENTER,13,0}, {24,24}, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasearmor.dds", 2, true ),
                 }
@@ -1374,9 +1379,9 @@ local function CreateCustomFrames()
                     size2 = UnitFrames.SV.AvaTargetBarHeight
                 end
                 if size1 ~= nil and size2 ~= nil then
-                    if UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {} end
-                    local backdrop = UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
-                    UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_POWER] = {
+                    if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat == nil then UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat = {} end
+                    local backdrop = UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop
+                    UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_POWER] = {
                         ["inc"] = UI.Texture( backdrop, {CENTER,CENTER,4,0}, {size1 * 1.8, size2 * 4.0}, "/esoui/art/unitattributevisualizer/increasedpower_animatedhalo_32fr.dds", 0, true ),
                         ["dec"] = UI.Texture( backdrop, {CENTER,CENTER,0,0}, {size1 * 2.2, size2 * 3}, "/esoui/art/unitattributevisualizer/attributebar_dynamic_decreasedpower_halo.dds", 0, true ),
                     }
@@ -1389,16 +1394,16 @@ local function CreateCustomFrames()
         for i = 1, 4 do
             local unitTag = 'SmallGroup' .. i
             if UnitFrames.CustomFrames[unitTag] then
-                -- assume that unitTag DO have [POWERTYPE_HEALTH] field
+                -- assume that unitTag DO have [COMBAT_MECHANIC_FLAGS_HEALTH] field
                 local size1 = UnitFrames.SV.GroupBarWidth
                 local size2 = UnitFrames.SV.GroupBarHeight
                 --elseif baseName == "RaidGroup" then
                 --    size1 = UnitFrames.SV.RaidBarWidth
                 --    size2 = UnitFrames.SV.RaidBarHeight
                 if size1 ~= nil and size2 ~= nil then
-                    if UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {} end
-                    local backdrop = UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
-                    UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_POWER] = {
+                    if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat == nil then UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat = {} end
+                    local backdrop = UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop
+                    UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_POWER] = {
                         ["inc"] = UI.Texture( backdrop, {CENTER,CENTER,4,0}, {size1 * 1.8, size2 * 4.0}, "/esoui/art/unitattributevisualizer/increasedpower_animatedhalo_32fr.dds", 0, true ),
                         ["dec"] = UI.Texture( backdrop, {CENTER,CENTER,0,0}, {size1 * 2.2, size2 * 3}, "/esoui/art/unitattributevisualizer/attributebar_dynamic_decreasedpower_halo.dds", 0, true ),
                     }
@@ -1411,13 +1416,13 @@ local function CreateCustomFrames()
         for i = 1, 24 do
             local unitTag = 'RaidGroup' .. i
             if UnitFrames.CustomFrames[unitTag] then
-                -- assume that unitTag DO have [POWERTYPE_HEALTH] field
+                -- assume that unitTag DO have [COMBAT_MECHANIC_FLAGS_HEALTH] field
                 local size1 = UnitFrames.SV.RaidBarWidth
                 local size2 = UnitFrames.SV.RaidBarHeight
                 if size1 ~= nil and size2 ~= nil then
-                    if UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {} end
-                    local backdrop = UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
-                    UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_POWER] = {
+                    if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat == nil then UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat = {} end
+                    local backdrop = UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop
+                    UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_POWER] = {
                         ["inc"] = UI.Texture( backdrop, {CENTER,CENTER,4,0}, {size1 * 1.8, size2 * 4.0}, "/esoui/art/unitattributevisualizer/increasedpower_animatedhalo_32fr.dds", 0, true ),
                         ["dec"] = UI.Texture( backdrop, {CENTER,CENTER,0,0}, {size1 * 2.2, size2 * 3}, "/esoui/art/unitattributevisualizer/attributebar_dynamic_decreasedpower_halo.dds", 0, true ),
                     }
@@ -1430,13 +1435,13 @@ local function CreateCustomFrames()
         for i = 1, 6 do
             local unitTag = 'boss' .. i
             if UnitFrames.CustomFrames[unitTag] then
-                -- assume that unitTag DO have [POWERTYPE_HEALTH] field
+                -- assume that unitTag DO have [COMBAT_MECHANIC_FLAGS_HEALTH] field
                 local size1 = UnitFrames.SV.BossBarWidth
                 local size2 = UnitFrames.SV.BossBarHeight
                 if size1 ~= nil and size2 ~= nil then
-                    if UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {} end
-                    local backdrop = UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
-                    UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_POWER] = {
+                    if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat == nil then UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat = {} end
+                    local backdrop = UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop
+                    UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_POWER] = {
                         ["inc"] = UI.Texture( backdrop, {CENTER,CENTER,4,0}, {size1 * 1.8, size2 * 4.0}, "/esoui/art/unitattributevisualizer/increasedpower_animatedhalo_32fr.dds", 0, true ),
                         ["dec"] = UI.Texture( backdrop, {CENTER,CENTER,0,0}, {size1 * 2.2, size2 * 3}, "/esoui/art/unitattributevisualizer/attributebar_dynamic_decreasedpower_halo.dds", 0, true ),
                     }
@@ -1450,12 +1455,12 @@ local function CreateCustomFrames()
         for i = 0, 24 do
             local unitTag = (i==0) and baseName or ( baseName .. i )
             if UnitFrames.CustomFrames[unitTag] then
-                if UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH] then
-                    if UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat then
-                        if UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_POWER] then
-                            if UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_POWER].inc then
+                if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH] then
+                    if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat then
+                        if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_POWER] then
+                            if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_POWER].inc then
                                 -- Create glow animation
-                                local control = UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_POWER].inc
+                                local control = UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_POWER].inc
                                 local animation, timeline = CreateSimpleAnimation(ANIMATION_TEXTURE, control)
                                 animation:SetImageData(4, 8)
                                 animation:SetFramerate(32)
@@ -1505,21 +1510,21 @@ local defaultPos = { }
 
 function UnitFrames.CustomFramesApplyBarAlignment()
     if UnitFrames.CustomFrames["player"] then
-        local hpBar = UnitFrames.CustomFrames["player"][POWERTYPE_HEALTH]
+        local hpBar = UnitFrames.CustomFrames["player"][COMBAT_MECHANIC_FLAGS_HEALTH]
         if hpBar then
             hpBar.bar:SetBarAlignment(UnitFrames.SV.BarAlignPlayerHealth- 1 )
         end
-        local magBar = UnitFrames.CustomFrames["player"][POWERTYPE_MAGICKA]
+        local magBar = UnitFrames.CustomFrames["player"][COMBAT_MECHANIC_FLAGS_MAGICKA]
         if magBar then
             magBar.bar:SetBarAlignment(UnitFrames.SV.BarAlignPlayerMagicka - 1 )
         end
-        local stamBar = UnitFrames.CustomFrames["player"][POWERTYPE_STAMINA]
+        local stamBar = UnitFrames.CustomFrames["player"][COMBAT_MECHANIC_FLAGS_STAMINA]
         if stamBar then
             stamBar.bar:SetBarAlignment(UnitFrames.SV.BarAlignPlayerStamina - 1 )
         end
     end
     if UnitFrames.CustomFrames["reticleover"] then
-        local hpBar = UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH]
+        local hpBar = UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH]
         if hpBar then
             hpBar.bar:SetBarAlignment(UnitFrames.SV.BarAlignTarget - 1 )
         end
@@ -1675,7 +1680,7 @@ function UnitFrames.Initialize(enabled)
     eventManager:RegisterForEvent(moduleName, EVENT_UNIT_ATTRIBUTE_VISUAL_ADDED,   UnitFrames.OnVisualizationAdded )
     eventManager:RegisterForEvent(moduleName, EVENT_UNIT_ATTRIBUTE_VISUAL_REMOVED, UnitFrames.OnVisualizationRemoved )
     eventManager:RegisterForEvent(moduleName, EVENT_UNIT_ATTRIBUTE_VISUAL_UPDATED, UnitFrames.OnVisualizationUpdated )
-    eventManager:RegisterForEvent(moduleName, EVENT_TARGET_CHANGE, UnitFrames.OnTargetChange )
+    eventManager:RegisterForEvent(moduleName, EVENT_TARGET_CHANGED, UnitFrames.OnTargetChange )
     eventManager:RegisterForEvent(moduleName, EVENT_RETICLE_TARGET_CHANGED, UnitFrames.OnReticleTargetChanged )
     eventManager:RegisterForEvent(moduleName, EVENT_DISPOSITION_UPDATE, UnitFrames.OnDispositionUpdate )
     eventManager:RegisterForEvent(moduleName, EVENT_UNIT_CREATED, UnitFrames.OnUnitCreated )
@@ -1785,7 +1790,7 @@ function UnitFrames.CustomFramesFormatLabels(menu)
 
     -- Format Player Labels
     if UnitFrames.CustomFrames["player"] then
-        for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA} ) do
+        for _, powerType in pairs( {COMBAT_MECHANIC_FLAGS_HEALTH, COMBAT_MECHANIC_FLAGS_MAGICKA, COMBAT_MECHANIC_FLAGS_STAMINA} ) do
             if UnitFrames.CustomFrames["player"][powerType] then
                 if UnitFrames.CustomFrames["player"][powerType].labelOne then
                     if UnitFrames.SV.BarAlignCenterLabelPlayer then
@@ -1816,25 +1821,25 @@ function UnitFrames.CustomFramesFormatLabels(menu)
 
     -- Format Target Labels
     if UnitFrames.CustomFrames["reticleover"] then
-        if UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH] then
-            if UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].labelOne then
+        if UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH] then
+            if UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH].labelOne then
                 if UnitFrames.SV.BarAlignCenterLabelTarget then
-                    UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].labelOne.fmt = UnitFrames.SV.CustomFormatCenterLabel
-                    UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].labelOne:ClearAnchors()
-                    UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].labelOne:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
-                    UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].labelOne:SetAnchor ( CENTER, UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].backdrop, CENTER, 0, 0 )
+                    UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH].labelOne.fmt = UnitFrames.SV.CustomFormatCenterLabel
+                    UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH].labelOne:ClearAnchors()
+                    UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH].labelOne:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
+                    UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH].labelOne:SetAnchor ( CENTER, UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop, CENTER, 0, 0 )
                 else
-                    UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].labelOne.fmt = UnitFrames.SV.CustomFormatOnePT
-                    UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].labelOne:ClearAnchors()
-                    UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].labelOne:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
-                    UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].labelOne:SetAnchor ( LEFT, UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].backdrop, LEFT, 5, 0 )
+                    UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH].labelOne.fmt = UnitFrames.SV.CustomFormatOnePT
+                    UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH].labelOne:ClearAnchors()
+                    UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH].labelOne:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
+                    UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH].labelOne:SetAnchor ( LEFT, UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop, LEFT, 5, 0 )
                 end
             end
-            if UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].labelTwo then
+            if UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH].labelTwo then
                 if UnitFrames.SV.BarAlignCenterLabelTarget then
-                    UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].labelTwo.fmt = "Nothing"
+                    UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH].labelTwo.fmt = "Nothing"
                 else
-                    UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].labelTwo.fmt = UnitFrames.SV.CustomFormatTwoPT
+                    UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH].labelTwo.fmt = UnitFrames.SV.CustomFormatTwoPT
                 end
             end
         end
@@ -1845,9 +1850,9 @@ function UnitFrames.CustomFramesFormatLabels(menu)
 
     -- Format Companion Labels
     if UnitFrames.CustomFrames["companion"] then
-        if UnitFrames.CustomFrames["companion"][POWERTYPE_HEALTH] then
-            if UnitFrames.CustomFrames["companion"][POWERTYPE_HEALTH].label then
-                UnitFrames.CustomFrames["companion"][POWERTYPE_HEALTH].label.fmt = UnitFrames.SV.CustomFormatCompanion
+        if UnitFrames.CustomFrames["companion"][COMBAT_MECHANIC_FLAGS_HEALTH] then
+            if UnitFrames.CustomFrames["companion"][COMBAT_MECHANIC_FLAGS_HEALTH].label then
+                UnitFrames.CustomFrames["companion"][COMBAT_MECHANIC_FLAGS_HEALTH].label.fmt = UnitFrames.SV.CustomFormatCompanion
             end
         end
     end
@@ -1859,12 +1864,12 @@ function UnitFrames.CustomFramesFormatLabels(menu)
     for i = 1, 4 do
         local unitTag = "SmallGroup" .. i
         if UnitFrames.CustomFrames[unitTag] then
-            if UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH] then
-                if UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].labelOne then
-                    UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].labelOne.fmt = UnitFrames.SV.CustomFormatOneGroup
+            if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH] then
+                if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].labelOne then
+                    UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].labelOne.fmt = UnitFrames.SV.CustomFormatOneGroup
                 end
-                if UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].labelTwo then
-                    UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].labelTwo.fmt = UnitFrames.SV.CustomFormatTwoGroup
+                if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].labelTwo then
+                    UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].labelTwo.fmt = UnitFrames.SV.CustomFormatTwoGroup
                 end
             end
         end
@@ -1877,9 +1882,9 @@ function UnitFrames.CustomFramesFormatLabels(menu)
     for i = 1, 24 do
         local unitTag = "RaidGroup" .. i
         if UnitFrames.CustomFrames[unitTag] then
-            if UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH] then
-                if UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].label then
-                    UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].label.fmt = UnitFrames.SV.CustomFormatRaid
+            if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH] then
+                if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].label then
+                    UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].label.fmt = UnitFrames.SV.CustomFormatRaid
                 end
             end
         end
@@ -1893,9 +1898,9 @@ function UnitFrames.CustomFramesFormatLabels(menu)
     for i = 1, 6 do
         local unitTag = "boss" .. i
         if UnitFrames.CustomFrames[unitTag] then
-            if UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH] then
-                if UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].label then
-                    UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].label.fmt = UnitFrames.SV.CustomFormatBoss
+            if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH] then
+                if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].label then
+                    UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].label.fmt = UnitFrames.SV.CustomFormatBoss
                 end
             end
         end
@@ -1907,9 +1912,9 @@ function UnitFrames.CustomFramesFormatLabels(menu)
     for i = 1, 7 do
         local unitTag = "PetGroup" .. i
         if UnitFrames.CustomFrames[unitTag] then
-            if UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH] then
-                if UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].label then
-                    UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].label.fmt = UnitFrames.SV.CustomFormatPet
+            if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH] then
+                if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].label then
+                    UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].label.fmt = UnitFrames.SV.CustomFormatPet
                 end
             end
         end
@@ -1926,8 +1931,8 @@ end
 function UnitFrames.OnPlayerActivated(eventCode)
     -- Reload values for player frames
     UnitFrames.ReloadValues("player")
-    UnitFrames.UpdateRegen( "player", STAT_MAGICKA_REGEN_COMBAT, ATTRIBUTE_MAGICKA, POWERTYPE_MAGICKA )
-    UnitFrames.UpdateRegen( "player", STAT_STAMINA_REGEN_COMBAT, ATTRIBUTE_STAMINA, POWERTYPE_STAMINA )
+    UnitFrames.UpdateRegen( "player", STAT_MAGICKA_REGEN_COMBAT, ATTRIBUTE_MAGICKA, COMBAT_MECHANIC_FLAGS_MAGICKA )
+    UnitFrames.UpdateRegen( "player", STAT_STAMINA_REGEN_COMBAT, ATTRIBUTE_STAMINA, COMBAT_MECHANIC_FLAGS_STAMINA )
 
     -- Create UI elements for default group members frames
     if g_DefaultFrames.SmallGroup then
@@ -1967,7 +1972,7 @@ end
 -- This handler fires every time unit attribute changes.
 function UnitFrames.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax)
     -- Save Health value for future reference -- do it only for tracked unitTags that were defined on initialization
-    if powerType == POWERTYPE_HEALTH and g_savedHealth[unitTag] then
+    if powerType == COMBAT_MECHANIC_FLAGS_HEALTH and g_savedHealth[unitTag] then
         g_savedHealth[unitTag] = { powerValue, powerMax, powerEffectiveMax, g_savedHealth[unitTag][4] or 0 }
     end
 
@@ -1984,39 +1989,39 @@ function UnitFrames.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, pow
 
     -- Update frames ( if we manually not forbade it )
     if g_DefaultFrames[unitTag] then
-        UnitFrames.UpdateAttribute( g_DefaultFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == POWERTYPE_HEALTH) and g_savedHealth[unitTag][4] or nil, eventCode == nil )
+        UnitFrames.UpdateAttribute( g_DefaultFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == COMBAT_MECHANIC_FLAGS_HEALTH) and g_savedHealth[unitTag][4] or nil, eventCode == nil )
     end
     if UnitFrames.CustomFrames[unitTag] then
-        if unitTag == "reticleover" and powerType == POWERTYPE_HEALTH then
+        if unitTag == "reticleover" and powerType == COMBAT_MECHANIC_FLAGS_HEALTH then
             local isCritter = ( g_savedHealth.reticleover[3] <= 9 )
             local isGuard = IsUnitInvulnerableGuard("reticleover")
             if (isCritter or isGuard) and powerValue >= 1 then
                 return
             else
-                UnitFrames.UpdateAttribute( UnitFrames.CustomFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == POWERTYPE_HEALTH) and g_savedHealth[unitTag][4] or nil, eventCode == nil )
+                UnitFrames.UpdateAttribute( UnitFrames.CustomFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == COMBAT_MECHANIC_FLAGS_HEALTH) and g_savedHealth[unitTag][4] or nil, eventCode == nil )
             end
         else
-            UnitFrames.UpdateAttribute( UnitFrames.CustomFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == POWERTYPE_HEALTH) and g_savedHealth[unitTag][4] or nil, eventCode == nil )
+            UnitFrames.UpdateAttribute( UnitFrames.CustomFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == COMBAT_MECHANIC_FLAGS_HEALTH) and g_savedHealth[unitTag][4] or nil, eventCode == nil )
         end
     end
     if g_AvaCustFrames[unitTag] then
-        UnitFrames.UpdateAttribute( g_AvaCustFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == POWERTYPE_HEALTH) and g_savedHealth[unitTag][4] or nil, eventCode == nil )
+        UnitFrames.UpdateAttribute( g_AvaCustFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == COMBAT_MECHANIC_FLAGS_HEALTH) and g_savedHealth[unitTag][4] or nil, eventCode == nil )
     end
 
     -- Record state of power loss to change transparency of player frame
-    if unitTag == "player" and ( powerType == POWERTYPE_HEALTH or powerType == POWERTYPE_MAGICKA or powerType == POWERTYPE_STAMINA or powerType == POWERTYPE_MOUNT_STAMINA ) then
+    if unitTag == "player" and ( powerType == COMBAT_MECHANIC_FLAGS_HEALTH or powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA or powerType == COMBAT_MECHANIC_FLAGS_MOUNT_STAMINA ) then
         g_statFull[powerType] = ( powerValue == powerEffectiveMax )
         UnitFrames.CustomFramesApplyInCombat()
     end
 
     -- If players powerValue is zero, issue new blinking event on Custom Frames
-    if unitTag == "player" and powerValue == 0 and powerType ~= POWERTYPE_WEREWOLF then
+    if unitTag == "player" and powerValue == 0 and powerType ~= COMBAT_MECHANIC_FLAGS_WEREWOLF then
         UnitFrames.OnCombatEvent( eventCode, nil, true, nil, nil, nil, nil, COMBAT_UNIT_TYPE_PLAYER, nil, COMBAT_UNIT_TYPE_PLAYER, 0, powerType, nil, false )
     end
 
     -- Display skull icon for alive execute-level targets
     if unitTag == "reticleover" and
-        powerType == POWERTYPE_HEALTH and
+        powerType == COMBAT_MECHANIC_FLAGS_HEALTH and
         UnitFrames.CustomFrames.reticleover and
         UnitFrames.CustomFrames.reticleover.hostile then
 
@@ -2024,7 +2029,7 @@ function UnitFrames.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, pow
         if powerValue == 0 then
             UnitFrames.CustomFrames.reticleover.skull:SetHidden( true )
         -- But show for _below_threshold_ level targets
-        elseif 100*powerValue/powerEffectiveMax < UnitFrames.CustomFrames.reticleover[POWERTYPE_HEALTH].threshold then
+        elseif 100*powerValue/powerEffectiveMax < UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].threshold then
             UnitFrames.CustomFrames.reticleover.skull:SetHidden( false )
         end
     end
@@ -2189,7 +2194,7 @@ function UnitFrames.DefaultFramesCreateUnitGroupControls(unitTag)
                 -- Populate UI elements
                 g_DefaultFrames[unitTag] = {
                     ["unitTag"] = unitTag,
-                    [POWERTYPE_HEALTH] = {
+                    [COMBAT_MECHANIC_FLAGS_HEALTH] = {
                         label = UI.Label( parentBar, {TOP,BOTTOM}, nil, nil, nil, nil, false ),
                         colour = UnitFrames.SV.DefaultTextColour,
                         shield = UI.StatusBar( parentBar, {BOTTOM,BOTTOM,0,0}, {width-height,height}, {1,0.75,0,0.5}, true ),
@@ -2321,9 +2326,9 @@ function UnitFrames.OnReticleTargetChanged(eventCode)
         local isGuard = IsUnitInvulnerableGuard("reticleover")
 
         -- Hide custom label on Default Frames for critters.
-        if g_DefaultFrames.reticleover[POWERTYPE_HEALTH] then
-            g_DefaultFrames.reticleover[POWERTYPE_HEALTH].label:SetHidden( isCritter )
-            g_DefaultFrames.reticleover[POWERTYPE_HEALTH].label:SetHidden( isGuard )
+        if g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH] then
+            g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].label:SetHidden( isCritter )
+            g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].label:SetHidden( isGuard )
         end
 
         -- Update level display based off our setting for Champion Points
@@ -2342,16 +2347,16 @@ function UnitFrames.OnReticleTargetChanged(eventCode)
         -- And colour of custom target name always. Also change 'labelOne' for critters
         if UnitFrames.CustomFrames.reticleover then
             UnitFrames.CustomFrames.reticleover.hostile = ( reactionType == UNIT_REACTION_HOSTILE ) and UnitFrames.SV.TargetEnableSkull
-            UnitFrames.CustomFrames.reticleover.skull:SetHidden( not UnitFrames.CustomFrames.reticleover.hostile or ( g_savedHealth.reticleover[1] == 0 ) or ( 100*g_savedHealth.reticleover[1]/g_savedHealth.reticleover[3] > UnitFrames.CustomFrames.reticleover[POWERTYPE_HEALTH].threshold ) )
+            UnitFrames.CustomFrames.reticleover.skull:SetHidden( not UnitFrames.CustomFrames.reticleover.hostile or ( g_savedHealth.reticleover[1] == 0 ) or ( 100*g_savedHealth.reticleover[1]/g_savedHealth.reticleover[3] > UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].threshold ) )
             UnitFrames.CustomFrames.reticleover.name:SetColor( colour[1], colour[2], colour[3] )
             UnitFrames.CustomFrames.reticleover.className:SetColor( colour[1], colour[2], colour[3] )
             if isCritter then
-                UnitFrames.CustomFrames.reticleover[POWERTYPE_HEALTH].labelOne:SetText( " - Critter - " )
+                UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].labelOne:SetText( " - Critter - " )
             end
             if isGuard then
-                UnitFrames.CustomFrames.reticleover[POWERTYPE_HEALTH].labelOne:SetText( " - Invulnerable - " )
+                UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].labelOne:SetText( " - Invulnerable - " )
             end
-            UnitFrames.CustomFrames.reticleover[POWERTYPE_HEALTH].labelTwo:SetHidden( isCritter or isGuard or not UnitFrames.CustomFrames.reticleover.dead:IsHidden() )
+            UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].labelTwo:SetHidden( isCritter or isGuard or not UnitFrames.CustomFrames.reticleover.dead:IsHidden() )
 
             if IsUnitReincarnating("reticleover") then
                 UnitFrames.CustomFramesSetDeadLabel( UnitFrames.CustomFrames["reticleover"], strResSelf )
@@ -2386,8 +2391,8 @@ function UnitFrames.OnReticleTargetChanged(eventCode)
         g_savedHealth.reticleover = {1,1,1,0}
 
         --[[ Removed due to causing custom UI elements to abruptly fade out. Left here in case there is any reason to re-enable.
-        if g_DefaultFrames.reticleover[POWERTYPE_HEALTH] then
-            g_DefaultFrames.reticleover[POWERTYPE_HEALTH].label:SetHidden(true)
+        if g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH] then
+            g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].label:SetHidden(true)
         end
         g_DefaultFrames.reticleover.classIcon:SetHidden(true)
         g_DefaultFrames.reticleover.friendIcon:SetHidden(true)
@@ -2411,7 +2416,7 @@ function UnitFrames.OnReticleTargetChanged(eventCode)
     end
 
     -- Finally if user does not want to have default target frame we have to hide it here all the time
-    if not g_DefaultFrames.reticleover[POWERTYPE_HEALTH] and UnitFrames.SV.DefaultFramesNewTarget == 1 then
+    if not g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH] and UnitFrames.SV.DefaultFramesNewTarget == 1 then
         ZO_TargetUnitFramereticleover:SetHidden( true )
     end
 end
@@ -2456,7 +2461,7 @@ function UnitFrames.ReloadValues( unitTag )
     end
 
     -- Update shield value on controls; this will also update health attribute value, again.
-    local shield, _ = GetUnitAttributeVisualizerEffectInfo(unitTag, ATTRIBUTE_VISUAL_POWER_SHIELDING, STAT_MITIGATION, ATTRIBUTE_HEALTH, POWERTYPE_HEALTH)
+    local shield, _ = GetUnitAttributeVisualizerEffectInfo(unitTag, ATTRIBUTE_VISUAL_POWER_SHIELDING, STAT_MITIGATION, ATTRIBUTE_HEALTH, COMBAT_MECHANIC_FLAGS_HEALTH)
     UnitFrames.UpdateShield( unitTag, shield or 0, nil )
 
     -- Now we need to update Name labels, classIcon
@@ -2465,14 +2470,14 @@ function UnitFrames.ReloadValues( unitTag )
     UnitFrames.UpdateStaticControls( g_AvaCustFrames[unitTag] )
 
     -- Get regen/degen values
-    UnitFrames.UpdateRegen(unitTag, STAT_HEALTH_REGEN_COMBAT, ATTRIBUTE_HEALTH, POWERTYPE_HEALTH)
+    UnitFrames.UpdateRegen(unitTag, STAT_HEALTH_REGEN_COMBAT, ATTRIBUTE_HEALTH, COMBAT_MECHANIC_FLAGS_HEALTH)
 
     -- Get initial stats
-    UnitFrames.UpdateStat(unitTag, STAT_ARMOR_RATING, ATTRIBUTE_HEALTH, POWERTYPE_HEALTH)
-    UnitFrames.UpdateStat(unitTag, STAT_POWER, ATTRIBUTE_HEALTH, POWERTYPE_HEALTH)
+    UnitFrames.UpdateStat(unitTag, STAT_ARMOR_RATING, ATTRIBUTE_HEALTH, COMBAT_MECHANIC_FLAGS_HEALTH)
+    UnitFrames.UpdateStat(unitTag, STAT_POWER, ATTRIBUTE_HEALTH, COMBAT_MECHANIC_FLAGS_HEALTH)
 
     if unitTag == "player" then
-        g_statFull[POWERTYPE_HEALTH] = ( g_savedHealth.player[1] == g_savedHealth.player[3] )
+        g_statFull[COMBAT_MECHANIC_FLAGS_HEALTH] = ( g_savedHealth.player[1] == g_savedHealth.player[3] )
         UnitFrames.CustomFramesApplyInCombat()
     end
 end
@@ -2757,7 +2762,7 @@ function UnitFrames.UpdateAttribute( attributeFrame, powerValue, powerEffectiveM
     -- Update text values for this attribute. can be on up to 3 different labels
     local shield = ( shield and shield > 0 ) and shield or nil
 
-    if (UnitFrames.CustomFrames and UnitFrames.CustomFrames["reticleover"] and attributeFrame == UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH] and IsUnitInvulnerableGuard("reticleover") ) then
+    if (UnitFrames.CustomFrames and UnitFrames.CustomFrames["reticleover"] and attributeFrame == UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH] and IsUnitInvulnerableGuard("reticleover") ) then
         for _, label in pairs( { "label", "labelOne", "labelTwo" } ) do
             if attributeFrame[label] ~= nil then
                 attributeFrame[label]:SetColor( unpack( attributeFrame.colour or {1,1,1} ) )
@@ -2785,7 +2790,7 @@ function UnitFrames.UpdateAttribute( attributeFrame, powerValue, powerEffectiveM
                 -- Change text
                 attributeFrame[label]:SetText( str )
                 -- Don't update if dead
-                if (label == "labelOne" or label == "labelTwo") and UnitFrames.CustomFrames and UnitFrames.CustomFrames["reticleover"] and attributeFrame == UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH] and powerValue == 0 then
+                if (label == "labelOne" or label == "labelTwo") and UnitFrames.CustomFrames and UnitFrames.CustomFrames["reticleover"] and attributeFrame == UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH] and powerValue == 0 then
                     attributeFrame[label]:SetHidden(true)
                 end
                 -- And colour it RED if attribute value is lower then threshold
@@ -2829,16 +2834,16 @@ function UnitFrames.UpdateShield( unitTag, value, maxValue )
     local healthValue, _ , healthEffectiveMax, _ = unpack(g_savedHealth[unitTag])
     -- Update frames
     if g_DefaultFrames[unitTag] then
-        UnitFrames.UpdateAttribute( g_DefaultFrames[unitTag][POWERTYPE_HEALTH], healthValue, healthEffectiveMax, value, false )
-        UnitFrames.UpdateShieldBar( g_DefaultFrames[unitTag][POWERTYPE_HEALTH], value, healthEffectiveMax )
+        UnitFrames.UpdateAttribute( g_DefaultFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH], healthValue, healthEffectiveMax, value, false )
+        UnitFrames.UpdateShieldBar( g_DefaultFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH], value, healthEffectiveMax )
     end
     if UnitFrames.CustomFrames[unitTag] then
-        UnitFrames.UpdateAttribute( UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH], healthValue, healthEffectiveMax, value, false )
-        UnitFrames.UpdateShieldBar( UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH], value, healthEffectiveMax )
+        UnitFrames.UpdateAttribute( UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH], healthValue, healthEffectiveMax, value, false )
+        UnitFrames.UpdateShieldBar( UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH], value, healthEffectiveMax )
     end
     if g_AvaCustFrames[unitTag] then
-        UnitFrames.UpdateAttribute( g_AvaCustFrames[unitTag][POWERTYPE_HEALTH], healthValue, healthEffectiveMax, value, false )
-        UnitFrames.UpdateShieldBar( g_AvaCustFrames[unitTag][POWERTYPE_HEALTH], value, healthEffectiveMax )
+        UnitFrames.UpdateAttribute( g_AvaCustFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH], healthValue, healthEffectiveMax, value, false )
+        UnitFrames.UpdateShieldBar( g_AvaCustFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH], value, healthEffectiveMax )
     end
 end
 
@@ -2871,7 +2876,7 @@ end
 -- Reroutes call for regen/degen animation for given unit.
 -- Called from EVENT_UNIT_ATTRIBUTE_VISUAL_* listeners.
 function UnitFrames.UpdateRegen(unitTag, statType, attributeType, powerType )
-    if powerType ~= POWERTYPE_HEALTH then return end
+    if powerType ~= COMBAT_MECHANIC_FLAGS_HEALTH then return end
 
     -- Calculate actual value, and fallback to 0 if we call this function with nil parameters
     local value1 = (GetUnitAttributeVisualizerEffectInfo(unitTag, ATTRIBUTE_VISUAL_INCREASED_REGEN_POWER, statType, attributeType, powerType) or 0)
@@ -2880,24 +2885,24 @@ function UnitFrames.UpdateRegen(unitTag, statType, attributeType, powerType )
     if value2 > 0 then value2 = -1 end
     local value = value1 + value2
 
-    -- Here we assume, that every unitTag entry in tables has POWERTYPE_HEALTH key
-    if g_DefaultFrames[unitTag] and g_DefaultFrames[unitTag][POWERTYPE_HEALTH] then
-        UnitFrames.DisplayRegen( g_DefaultFrames[unitTag][POWERTYPE_HEALTH].regen1, value > 0 )
-        UnitFrames.DisplayRegen( g_DefaultFrames[unitTag][POWERTYPE_HEALTH].regen2, value > 0 )
-        UnitFrames.DisplayRegen( g_DefaultFrames[unitTag][POWERTYPE_HEALTH].degen1, value < 0 )
-        UnitFrames.DisplayRegen( g_DefaultFrames[unitTag][POWERTYPE_HEALTH].degen2, value < 0 )
+    -- Here we assume, that every unitTag entry in tables has COMBAT_MECHANIC_FLAGS_HEALTH key
+    if g_DefaultFrames[unitTag] and g_DefaultFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH] then
+        UnitFrames.DisplayRegen( g_DefaultFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].regen1, value > 0 )
+        UnitFrames.DisplayRegen( g_DefaultFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].regen2, value > 0 )
+        UnitFrames.DisplayRegen( g_DefaultFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].degen1, value < 0 )
+        UnitFrames.DisplayRegen( g_DefaultFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].degen2, value < 0 )
     end
-    if UnitFrames.CustomFrames[unitTag] and UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH] then
-        UnitFrames.DisplayRegen( UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].regen1, value > 0 )
-        UnitFrames.DisplayRegen( UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].regen2, value > 0 )
-        UnitFrames.DisplayRegen( UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].degen1, value < 0 )
-        UnitFrames.DisplayRegen( UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].degen2, value < 0 )
+    if UnitFrames.CustomFrames[unitTag] and UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH] then
+        UnitFrames.DisplayRegen( UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].regen1, value > 0 )
+        UnitFrames.DisplayRegen( UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].regen2, value > 0 )
+        UnitFrames.DisplayRegen( UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].degen1, value < 0 )
+        UnitFrames.DisplayRegen( UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].degen2, value < 0 )
     end
-    if g_AvaCustFrames[unitTag] and g_AvaCustFrames[unitTag][POWERTYPE_HEALTH] then
-        UnitFrames.DisplayRegen( g_AvaCustFrames[unitTag][POWERTYPE_HEALTH].regen1, value > 0 )
-        UnitFrames.DisplayRegen( g_AvaCustFrames[unitTag][POWERTYPE_HEALTH].regen2, value > 0 )
-        UnitFrames.DisplayRegen( g_AvaCustFrames[unitTag][POWERTYPE_HEALTH].degen1, value < 0 )
-        UnitFrames.DisplayRegen( g_AvaCustFrames[unitTag][POWERTYPE_HEALTH].degen2, value < 0 )
+    if g_AvaCustFrames[unitTag] and g_AvaCustFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH] then
+        UnitFrames.DisplayRegen( g_AvaCustFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].regen1, value > 0 )
+        UnitFrames.DisplayRegen( g_AvaCustFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].regen2, value > 0 )
+        UnitFrames.DisplayRegen( g_AvaCustFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].degen1, value < 0 )
+        UnitFrames.DisplayRegen( g_AvaCustFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].degen2, value < 0 )
     end
 end
 
@@ -3072,8 +3077,8 @@ function UnitFrames.OnDeath(eventCode, unitTag, isDead)
     end
 
     -- Manually hide regen/degen animation as well as stat-changing icons, because game does not always issue corresponding event before unit is dead
-    if isDead and UnitFrames.CustomFrames[unitTag] and UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH] then
-        local thb = UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH] -- not a backdrop
+    if isDead and UnitFrames.CustomFrames[unitTag] and UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH] then
+        local thb = UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH] -- not a backdrop
         -- 1. Regen/degen
         UnitFrames.DisplayRegen( thb.regen1, false )
         UnitFrames.DisplayRegen( thb.regen2, false )
@@ -3149,9 +3154,9 @@ function UnitFrames.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted
     local left = false
     local recenter = false
 
-    local phb = UnitFrames.CustomFrames.player[POWERTYPE_HEALTH] -- Not a backdrop
-    local pmb = UnitFrames.CustomFrames.player[POWERTYPE_MAGICKA] -- Not a backdrop
-    local psb = UnitFrames.CustomFrames.player[POWERTYPE_STAMINA] -- Not a backdrop
+    local phb = UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_HEALTH] -- Not a backdrop
+    local pmb = UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_MAGICKA] -- Not a backdrop
+    local psb = UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_STAMINA] -- Not a backdrop
     local alt = UnitFrames.CustomFrames.player.alternative
 
     if UnitFrames.SV.PlayerEnableAltbarMSW and isWerewolf then
@@ -3159,13 +3164,13 @@ function UnitFrames.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted
         center  = { 0.05, 0, 0, 0.9 }
         colour  = { 0.8,  0, 0, 0.9 }
 
-        UnitFrames.CustomFrames.player[POWERTYPE_WEREWOLF] = UnitFrames.CustomFrames.player.alternative
-        UnitFrames.CustomFrames.controlledsiege[POWERTYPE_HEALTH] = nil
-        UnitFrames.CustomFrames.player[POWERTYPE_MOUNT_STAMINA] = nil
+        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_WEREWOLF] = UnitFrames.CustomFrames.player.alternative
+        UnitFrames.CustomFrames.controlledsiege[COMBAT_MECHANIC_FLAGS_HEALTH] = nil
+        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_MOUNT_STAMINA] = nil
         UnitFrames.CustomFrames.player.ChampionXP = nil
         UnitFrames.CustomFrames.player.Experience = nil
 
-        UnitFrames.OnPowerUpdate(nil, "player", nil, POWERTYPE_WEREWOLF, GetUnitPower("player", POWERTYPE_WEREWOLF))
+        UnitFrames.OnPowerUpdate(nil, "player", nil, COMBAT_MECHANIC_FLAGS_WEREWOLF, GetUnitPower("player", COMBAT_MECHANIC_FLAGS_WEREWOLF))
 
         if UnitFrames.SV.PlayerFrameOptions ~= 1 then
             if UnitFrames.SV.ReverseResourceBars then
@@ -3186,13 +3191,13 @@ function UnitFrames.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted
         center  = { 0.05, 0, 0, 0.9 }
         colour  = { 0.8,  0, 0, 0.9 }
 
-        UnitFrames.CustomFrames.player[POWERTYPE_WEREWOLF] = nil
-        UnitFrames.CustomFrames.controlledsiege[POWERTYPE_HEALTH] = UnitFrames.CustomFrames.player.alternative
-        UnitFrames.CustomFrames.player[POWERTYPE_MOUNT_STAMINA] = nil
+        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_WEREWOLF] = nil
+        UnitFrames.CustomFrames.controlledsiege[COMBAT_MECHANIC_FLAGS_HEALTH] = UnitFrames.CustomFrames.player.alternative
+        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_MOUNT_STAMINA] = nil
         UnitFrames.CustomFrames.player.ChampionXP = nil
         UnitFrames.CustomFrames.player.Experience = nil
 
-        UnitFrames.OnPowerUpdate(nil, "controlledsiege", nil, POWERTYPE_HEALTH, GetUnitPower("controlledsiege", POWERTYPE_HEALTH))
+        UnitFrames.OnPowerUpdate(nil, "controlledsiege", nil, COMBAT_MECHANIC_FLAGS_HEALTH, GetUnitPower("controlledsiege", COMBAT_MECHANIC_FLAGS_HEALTH))
 
         recenter = true
 
@@ -3205,13 +3210,13 @@ function UnitFrames.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted
         center  = { 0.1*UnitFrames.SV.CustomColourStamina[1], 0.1*UnitFrames.SV.CustomColourStamina[2], 0.1*UnitFrames.SV.CustomColourStamina[3], 0.9 }
         colour  = { UnitFrames.SV.CustomColourStamina[1], UnitFrames.SV.CustomColourStamina[2], UnitFrames.SV.CustomColourStamina[3], 0.9 }
 
-        UnitFrames.CustomFrames.player[POWERTYPE_WEREWOLF] = nil
-        UnitFrames.CustomFrames.controlledsiege[POWERTYPE_HEALTH] = nil
-        UnitFrames.CustomFrames.player[POWERTYPE_MOUNT_STAMINA] = UnitFrames.CustomFrames.player.alternative
+        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_WEREWOLF] = nil
+        UnitFrames.CustomFrames.controlledsiege[COMBAT_MECHANIC_FLAGS_HEALTH] = nil
+        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_MOUNT_STAMINA] = UnitFrames.CustomFrames.player.alternative
         UnitFrames.CustomFrames.player.ChampionXP = nil
         UnitFrames.CustomFrames.player.Experience = nil
 
-        UnitFrames.OnPowerUpdate(nil, "player", nil, POWERTYPE_MOUNT_STAMINA, GetUnitPower("player", POWERTYPE_MOUNT_STAMINA))
+        UnitFrames.OnPowerUpdate(nil, "player", nil, COMBAT_MECHANIC_FLAGS_MOUNT_STAMINA, GetUnitPower("player", COMBAT_MECHANIC_FLAGS_MOUNT_STAMINA))
 
         if UnitFrames.SV.PlayerFrameOptions ~= 1 then
             if UnitFrames.SV.ReverseResourceBars then
@@ -3228,9 +3233,9 @@ function UnitFrames.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted
         UnitFrames.CustomFrames.player.alternative.bar:SetHandler("OnMouseExit",  UnitFrames.AltBar_OnMouseExit)
         UnitFrames.CustomFrames.player.alternative.enlightenment:SetHidden( true )
     elseif UnitFrames.SV.PlayerEnableAltbarXP and ( UnitFrames.CustomFrames.player.isLevelCap or ( UnitFrames.CustomFrames.player.isChampion )) then
-        UnitFrames.CustomFrames.player[POWERTYPE_WEREWOLF] = nil
-        UnitFrames.CustomFrames.controlledsiege[POWERTYPE_HEALTH] = nil
-        UnitFrames.CustomFrames.player[POWERTYPE_MOUNT_STAMINA] = nil
+        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_WEREWOLF] = nil
+        UnitFrames.CustomFrames.controlledsiege[COMBAT_MECHANIC_FLAGS_HEALTH] = nil
+        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_MOUNT_STAMINA] = nil
         UnitFrames.CustomFrames.player.ChampionXP = UnitFrames.CustomFrames.player.alternative
         UnitFrames.CustomFrames.player.Experience = nil
 
@@ -3263,9 +3268,9 @@ function UnitFrames.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted
         center  = { 0, 0.1, 0.1, 0.9 }
         colour  = { XP_BAR_COLOURS.r, XP_BAR_COLOURS.g, XP_BAR_COLOURS.b, 0.9 } -- { 0, 0.9, 0.9, 0.9 }
 
-        UnitFrames.CustomFrames.player[POWERTYPE_WEREWOLF] = nil
-        UnitFrames.CustomFrames.controlledsiege[POWERTYPE_HEALTH] = nil
-        UnitFrames.CustomFrames.player[POWERTYPE_MOUNT_STAMINA] = nil
+        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_WEREWOLF] = nil
+        UnitFrames.CustomFrames.controlledsiege[COMBAT_MECHANIC_FLAGS_HEALTH] = nil
+        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_MOUNT_STAMINA] = nil
         UnitFrames.CustomFrames.player.ChampionXP = nil
         UnitFrames.CustomFrames.player.Experience = UnitFrames.CustomFrames.player.alternative
 
@@ -3284,9 +3289,9 @@ function UnitFrames.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted
         UnitFrames.CustomFrames.player.alternative.bar:SetHandler("OnMouseExit",  UnitFrames.AltBar_OnMouseExit)
         UnitFrames.CustomFrames.player.alternative.enlightenment:SetHidden( true )
     else
-        UnitFrames.CustomFrames.player[POWERTYPE_WEREWOLF] = nil
-        UnitFrames.CustomFrames.controlledsiege[POWERTYPE_HEALTH] = nil
-        UnitFrames.CustomFrames.player[POWERTYPE_MOUNT_STAMINA] = nil
+        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_WEREWOLF] = nil
+        UnitFrames.CustomFrames.controlledsiege[COMBAT_MECHANIC_FLAGS_HEALTH] = nil
+        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_MOUNT_STAMINA] = nil
         UnitFrames.CustomFrames.player.ChampionXP = nil
         UnitFrames.CustomFrames.player.Experience = nil
 
@@ -3433,7 +3438,7 @@ function UnitFrames.OnCombatEvent( eventCode, result, isError, abilityName, abil
         and UnitFrames.CustomFrames.player ~= nil
         and UnitFrames.CustomFrames.player[powerType] ~= nil
         and UnitFrames.CustomFrames.player[powerType].backdrop ~= nil
-        and ( powerType == POWERTYPE_HEALTH or powerType == POWERTYPE_STAMINA or powerType == POWERTYPE_MAGICKA) then
+        and ( powerType == COMBAT_MECHANIC_FLAGS_HEALTH or powerType == COMBAT_MECHANIC_FLAGS_STAMINA or powerType == COMBAT_MECHANIC_FLAGS_MAGICKA) then
 
         if g_powerError[powerType] or IsUnitDead("player") then
             return
@@ -3443,9 +3448,9 @@ function UnitFrames.OnCombatEvent( eventCode, result, isError, abilityName, abil
         -- Save original center colour and colour to red
         local backdrop = UnitFrames.CustomFrames.player[powerType].backdrop
         local r,g,b = backdrop:GetCenterColor()
-        if powerType == POWERTYPE_STAMINA then
+        if powerType == COMBAT_MECHANIC_FLAGS_STAMINA then
             backdrop:SetCenterColor( 0, 0.2, 0, 0.9 )
-        elseif powerType == POWERTYPE_MAGICKA then
+        elseif powerType == COMBAT_MECHANIC_FLAGS_MAGICKA then
             backdrop:SetCenterColor( 0, 0.05, 0.35, 0.9 )
         else
             backdrop:SetCenterColor( 0.4, 0, 0, 0.9 )
@@ -3488,21 +3493,21 @@ function UnitFrames.CustomFramesSetDeadLabel( unitFrame, newValue )
             unitFrame.classIcon:SetTexture(classIcon)
         end
     end
-    if unitFrame[POWERTYPE_HEALTH] then
-        if unitFrame[POWERTYPE_HEALTH].bar ~= nil then
-            unitFrame[POWERTYPE_HEALTH].bar:SetHidden( newValue ~= nil )
+    if unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH] then
+        if unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH].bar ~= nil then
+            unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetHidden( newValue ~= nil )
         end
-        if unitFrame[POWERTYPE_HEALTH].label ~= nil then
-            unitFrame[POWERTYPE_HEALTH].label:SetHidden( newValue ~= nil )
+        if unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH].label ~= nil then
+            unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH].label:SetHidden( newValue ~= nil )
         end
-        if unitFrame[POWERTYPE_HEALTH].labelOne ~= nil then
-            unitFrame[POWERTYPE_HEALTH].labelOne:SetHidden( newValue ~= nil )
+        if unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH].labelOne ~= nil then
+            unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH].labelOne:SetHidden( newValue ~= nil )
         end
-        if unitFrame[POWERTYPE_HEALTH].labelTwo ~= nil then
-            unitFrame[POWERTYPE_HEALTH].labelTwo:SetHidden( newValue ~= nil )
+        if unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH].labelTwo ~= nil then
+            unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH].labelTwo:SetHidden( newValue ~= nil )
         end
-        if unitFrame[POWERTYPE_HEALTH].name ~= nil then
-            unitFrame[POWERTYPE_HEALTH].name:SetHidden ( newValue ~= nil )
+        if unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH].name ~= nil then
+            unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH].name:SetHidden ( newValue ~= nil )
         end
     end
 end
@@ -3862,7 +3867,7 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
             local unitTag = (i==0) and baseName or ( baseName .. i )
             if UnitFrames.CustomFrames[unitTag] then
                 local unitFrame = UnitFrames.CustomFrames[unitTag]
-                local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
+                local thb = unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH] -- not a backdrop
                 thb.bar:SetColor( unpack(health) )
                 thb.backdrop:SetCenterColor( unpack(health_bg) )
                 thb.shield:SetColor( unpack(shield) )
@@ -3881,7 +3886,7 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
     -- Player Companion Frame Color
     if UnitFrames.CustomFrames["companion"] then
         local unitFrame = UnitFrames.CustomFrames["companion"]
-        local shb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
+        local shb = unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH] -- not a backdrop
         if UnitFrames.SV.CompanionUseClassColor then
             local class_color
             local class_bg
@@ -3930,7 +3935,7 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
         local unitTag = "PetGroup" .. i
         if UnitFrames.CustomFrames[unitTag] then
             local unitFrame = UnitFrames.CustomFrames[unitTag]
-            local shb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
+            local shb = unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH] -- not a backdrop
             if UnitFrames.SV.PetUseClassColor then
                 local class_color
                 local class_bg
@@ -4017,7 +4022,7 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
                 local role = isBattleground and LFG_ROLE_DPS or GetGroupMemberSelectedRole(defaultUnitTag)
 
                 local unitFrame = UnitFrames.CustomFrames[unitTag]
-                local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
+                local thb = unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH] -- not a backdrop
 
                 local group = groupSize <= 4
                 local raid = groupSize > 4
@@ -4087,10 +4092,10 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
 
     -- Player frame also requires setting of magicka and stamina bars
     if UnitFrames.CustomFrames.player then
-        UnitFrames.CustomFrames.player[POWERTYPE_MAGICKA].bar:SetColor( unpack(magicka) )
-        UnitFrames.CustomFrames.player[POWERTYPE_MAGICKA].backdrop:SetCenterColor( unpack(magicka_bg) )
-        UnitFrames.CustomFrames.player[POWERTYPE_STAMINA].bar:SetColor( unpack(stamina) )
-        UnitFrames.CustomFrames.player[POWERTYPE_STAMINA].backdrop:SetCenterColor( unpack(stamina_bg) )
+        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_MAGICKA].bar:SetColor( unpack(magicka) )
+        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_MAGICKA].backdrop:SetCenterColor( unpack(magicka_bg) )
+        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_STAMINA].bar:SetColor( unpack(stamina) )
+        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_STAMINA].backdrop:SetCenterColor( unpack(stamina_bg) )
     end
 end
 
@@ -4119,7 +4124,7 @@ function UnitFrames.CustomFramesApplyColoursSingle(unitTag)
         if UnitFrames.CustomFrames[unitTag] then
             local role = GetGroupMemberSelectedRole(unitTag)
             local unitFrame = UnitFrames.CustomFrames[unitTag]
-            local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
+            local thb = unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH] -- not a backdrop
             if role == 1 then
                 thb.bar:SetColor( unpack(dps) )
                 thb.backdrop:SetCenterColor( unpack(dps_bg) )
@@ -4161,7 +4166,7 @@ function UnitFrames.CustomFramesApplyReactionColor(isPlayer)
 
         if UnitFrames.CustomFrames["reticleover"] then
             local unitFrame = UnitFrames.CustomFrames["reticleover"]
-            local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
+            local thb = unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH] -- not a backdrop
             local classcolor = classColor[GetUnitClassId("reticleover")]
             local classcolor_bg = classBackground[GetUnitClassId("reticleover")]
             thb.bar:SetColor( unpack(classcolor) )
@@ -4193,7 +4198,7 @@ function UnitFrames.CustomFramesApplyReactionColor(isPlayer)
 
         if UnitFrames.CustomFrames["reticleover"] then
             local unitFrame = UnitFrames.CustomFrames["reticleover"]
-            local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
+            local thb = unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH] -- not a backdrop
 
             local reactioncolor
             local reactioncolor_bg
@@ -4214,7 +4219,7 @@ function UnitFrames.CustomFramesApplyReactionColor(isPlayer)
 
         if UnitFrames.CustomFrames["reticleover"] then
             local unitFrame = UnitFrames.CustomFrames["reticleover"]
-            local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
+            local thb = unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH] -- not a backdrop
             thb.bar:SetColor( unpack(health) )
             thb.backdrop:SetCenterColor( unpack(health_bg) )
         end
@@ -4228,81 +4233,81 @@ function UnitFrames.CustomFramesApplyTexture()
 
     -- After texture is applied unhide frames, so player can see changes even from menu
     if UnitFrames.CustomFrames.player then
-        UnitFrames.CustomFrames.player[POWERTYPE_HEALTH].backdrop:SetCenterTexture(texture)
-        UnitFrames.CustomFrames.player[POWERTYPE_HEALTH].bar:SetTexture(texture)
-        if UnitFrames.CustomFrames.player[POWERTYPE_HEALTH].shieldbackdrop then
-            UnitFrames.CustomFrames.player[POWERTYPE_HEALTH].shieldbackdrop:SetCenterTexture(texture)
+        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_HEALTH].backdrop:SetCenterTexture(texture)
+        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetTexture(texture)
+        if UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_HEALTH].shieldbackdrop then
+            UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_HEALTH].shieldbackdrop:SetCenterTexture(texture)
         end
-        UnitFrames.CustomFrames.player[POWERTYPE_HEALTH].shield:SetTexture(texture)
-        UnitFrames.CustomFrames.player[POWERTYPE_MAGICKA].backdrop:SetCenterTexture(texture)
-        UnitFrames.CustomFrames.player[POWERTYPE_MAGICKA].bar:SetTexture(texture)
-        UnitFrames.CustomFrames.player[POWERTYPE_STAMINA].backdrop:SetCenterTexture(texture)
-        UnitFrames.CustomFrames.player[POWERTYPE_STAMINA].bar:SetTexture(texture)
+        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
+        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_MAGICKA].backdrop:SetCenterTexture(texture)
+        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_MAGICKA].bar:SetTexture(texture)
+        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_STAMINA].backdrop:SetCenterTexture(texture)
+        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_STAMINA].bar:SetTexture(texture)
         UnitFrames.CustomFrames.player.alternative.backdrop:SetCenterTexture(texture)
         UnitFrames.CustomFrames.player.alternative.bar:SetTexture(texture)
         UnitFrames.CustomFrames.player.alternative.enlightenment:SetTexture(texture)
         UnitFrames.CustomFrames.player.tlw:SetHidden( false )
     end
     if UnitFrames.CustomFrames.reticleover then
-        UnitFrames.CustomFrames.reticleover[POWERTYPE_HEALTH].backdrop:SetCenterTexture(texture)
-        UnitFrames.CustomFrames.reticleover[POWERTYPE_HEALTH].bar:SetTexture(texture)
-        if UnitFrames.CustomFrames.reticleover[POWERTYPE_HEALTH].shieldbackdrop then
-            UnitFrames.CustomFrames.reticleover[POWERTYPE_HEALTH].shieldbackdrop:SetCenterTexture(texture)
+        UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].backdrop:SetCenterTexture(texture)
+        UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetTexture(texture)
+        if UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].shieldbackdrop then
+            UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].shieldbackdrop:SetCenterTexture(texture)
         end
-        UnitFrames.CustomFrames.reticleover[POWERTYPE_HEALTH].shield:SetTexture(texture)
+        UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
         UnitFrames.CustomFrames.reticleover.tlw:SetHidden( false )
     end
     if UnitFrames.CustomFrames.AvaPlayerTarget then
-        UnitFrames.CustomFrames.AvaPlayerTarget[POWERTYPE_HEALTH].backdrop:SetCenterTexture(texture)
-        UnitFrames.CustomFrames.AvaPlayerTarget[POWERTYPE_HEALTH].bar:SetTexture(texture)
-        if UnitFrames.CustomFrames.AvaPlayerTarget[POWERTYPE_HEALTH].shieldbackdrop then
-            UnitFrames.CustomFrames.AvaPlayerTarget[POWERTYPE_HEALTH].shieldbackdrop:SetCenterTexture(texture)
+        UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].backdrop:SetCenterTexture(texture)
+        UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetTexture(texture)
+        if UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].shieldbackdrop then
+            UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].shieldbackdrop:SetCenterTexture(texture)
         end
-        UnitFrames.CustomFrames.AvaPlayerTarget[POWERTYPE_HEALTH].shield:SetTexture(texture)
+        UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
         UnitFrames.CustomFrames.AvaPlayerTarget.tlw:SetHidden( false )
     end
     if UnitFrames.CustomFrames.companion then
-        UnitFrames.CustomFrames.companion[POWERTYPE_HEALTH].backdrop:SetCenterTexture(texture)
-        UnitFrames.CustomFrames.companion[POWERTYPE_HEALTH].bar:SetTexture(texture)
-        UnitFrames.CustomFrames.companion[POWERTYPE_HEALTH].shield:SetTexture(texture)
+        UnitFrames.CustomFrames.companion[COMBAT_MECHANIC_FLAGS_HEALTH].backdrop:SetCenterTexture(texture)
+        UnitFrames.CustomFrames.companion[COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetTexture(texture)
+        UnitFrames.CustomFrames.companion[COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
         UnitFrames.CustomFrames.companion.tlw:SetHidden( false )
     end
     if UnitFrames.CustomFrames.SmallGroup1 then
         for i = 1, 4 do
             local unitTag = "SmallGroup" .. i
-            UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop:SetCenterTexture(texture)
-            UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].bar:SetTexture(texture)
-            if UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].shieldbackdrop then
-                UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].shieldbackdrop:SetCenterTexture(texture)
+            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop:SetCenterTexture(texture)
+            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetTexture(texture)
+            if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].shieldbackdrop then
+                UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].shieldbackdrop:SetCenterTexture(texture)
             end
-            UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].shield:SetTexture(texture)
+            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
         end
         UnitFrames.CustomFrames.SmallGroup1.tlw:SetHidden( false )
     end
     if UnitFrames.CustomFrames.RaidGroup1 then
         for i = 1, 24 do
             local unitTag = "RaidGroup" .. i
-            UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop:SetCenterTexture(texture)
-            UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].bar:SetTexture(texture)
-            UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].shield:SetTexture(texture)
+            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop:SetCenterTexture(texture)
+            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetTexture(texture)
+            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
         end
         UnitFrames.CustomFrames.RaidGroup1.tlw:SetHidden( false )
     end
     if UnitFrames.CustomFrames.PetGroup1 then
         for i = 1, 7 do
             local unitTag = "PetGroup" .. i
-            UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop:SetCenterTexture(texture)
-            UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].bar:SetTexture(texture)
-            UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].shield:SetTexture(texture)
+            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop:SetCenterTexture(texture)
+            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetTexture(texture)
+            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
         end
         UnitFrames.CustomFrames.PetGroup1.tlw:SetHidden ( false)
     end
     if UnitFrames.CustomFrames.boss1 then
         for i = 1, 6 do
             local unitTag = "boss" .. i
-            UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop:SetCenterTexture(texture)
-            UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].bar:SetTexture(texture)
-            UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].shield:SetTexture(texture)
+            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop:SetCenterTexture(texture)
+            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetTexture(texture)
+            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
         end
         UnitFrames.CustomFrames.boss1.tlw:SetHidden( false )
     end
@@ -4323,7 +4328,7 @@ function UnitFrames.DefaultFramesApplyFont(unitTag)
     local __applyFont = function(unitTag)
         if g_DefaultFrames[unitTag] then
             local unitFrame = g_DefaultFrames[unitTag]
-            for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA} ) do
+            for _, powerType in pairs( {COMBAT_MECHANIC_FLAGS_HEALTH, COMBAT_MECHANIC_FLAGS_MAGICKA, COMBAT_MECHANIC_FLAGS_STAMINA} ) do
                 if unitFrame[powerType] then
                     unitFrame[powerType].label:SetFont( zo_strformat( "<<1>>|<<2>>|<<3>>", fontName, fontSize, fontStyle ) )
                 end
@@ -4351,7 +4356,7 @@ function UnitFrames.DefaultFramesApplyColour()
     local __applyColour = function(unitTag)
         if g_DefaultFrames[unitTag] then
             local unitFrame = g_DefaultFrames[unitTag]
-            for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA} ) do
+            for _, powerType in pairs( {COMBAT_MECHANIC_FLAGS_HEALTH, COMBAT_MECHANIC_FLAGS_MAGICKA, COMBAT_MECHANIC_FLAGS_STAMINA} ) do
                 if unitFrame[powerType] then
                     unitFrame[powerType].colour = UnitFrames.SV.DefaultTextColour
                     unitFrame[powerType].label:SetColor( UnitFrames.SV.DefaultTextColour[1], UnitFrames.SV.DefaultTextColour[2], UnitFrames.SV.DefaultTextColour[3] )
@@ -4407,7 +4412,7 @@ function UnitFrames.CustomFramesApplyFont()
                 if unitFrame.dead then
                     unitFrame.dead:SetFont( __mkFont(sizeBars) )
                 end
-                for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA} ) do
+                for _, powerType in pairs( {COMBAT_MECHANIC_FLAGS_HEALTH, COMBAT_MECHANIC_FLAGS_MAGICKA, COMBAT_MECHANIC_FLAGS_STAMINA} ) do
                     if unitFrame[powerType] then
                         if unitFrame[powerType].label    then
                             unitFrame[powerType].label:SetFont( __mkFont(sizeBars) )
@@ -4479,9 +4484,9 @@ function UnitFrames.CustomFramesApplyLayoutPlayer(unhide)
     if UnitFrames.CustomFrames.player then
         local player = UnitFrames.CustomFrames.player
 
-        local phb = player[POWERTYPE_HEALTH]  -- Not a backdrop
-        local pmb = player[POWERTYPE_MAGICKA] -- Not a backdrop
-        local psb = player[POWERTYPE_STAMINA] -- Not a backdrop
+        local phb = player[COMBAT_MECHANIC_FLAGS_HEALTH]  -- Not a backdrop
+        local pmb = player[COMBAT_MECHANIC_FLAGS_MAGICKA] -- Not a backdrop
+        local psb = player[COMBAT_MECHANIC_FLAGS_STAMINA] -- Not a backdrop
         local alt = player.alternative        -- Not a backdrop
 
         if UnitFrames.SV.PlayerFrameOptions == 1 then
@@ -4783,7 +4788,7 @@ function UnitFrames.CustomFramesApplyLayoutPlayer(unhide)
     if UnitFrames.CustomFrames.reticleover then
         local target = UnitFrames.CustomFrames.reticleover
 
-        local thb = target[POWERTYPE_HEALTH] -- Not a backdrop
+        local thb = target[COMBAT_MECHANIC_FLAGS_HEALTH] -- Not a backdrop
 
         target.tlw:SetDimensions( UnitFrames.SV.TargetBarWidth, UnitFrames.SV.TargetBarHeight + (thb.shieldbackdrop and UnitFrames.SV.CustomShieldBarHeight or 0) )
         target.control:SetDimensions( UnitFrames.SV.TargetBarWidth, UnitFrames.SV.TargetBarHeight + (thb.shieldbackdrop and UnitFrames.SV.CustomShieldBarHeight or 0) )
@@ -4850,7 +4855,7 @@ function UnitFrames.CustomFramesApplyLayoutPlayer(unhide)
     if UnitFrames.CustomFrames.AvaPlayerTarget then
         local target = UnitFrames.CustomFrames.AvaPlayerTarget
 
-        local thb = target[POWERTYPE_HEALTH] -- Not a backdrop
+        local thb = target[COMBAT_MECHANIC_FLAGS_HEALTH] -- Not a backdrop
 
         target.tlw:SetDimensions( UnitFrames.SV.AvaTargetBarWidth, UnitFrames.SV.AvaTargetBarHeight + (thb.shieldbackdrop and UnitFrames.SV.CustomShieldBarHeight or 0) )
         target.control:SetDimensions( UnitFrames.SV.AvaTargetBarWidth, UnitFrames.SV.AvaTargetBarHeight + (thb.shieldbackdrop and UnitFrames.SV.CustomShieldBarHeight or 0) )
@@ -4896,7 +4901,7 @@ function UnitFrames.CustomFramesApplyLayoutGroup(unhide)
         local unitFrame = UnitFrames.CustomFrames["SmallGroup" .. i]
         local unitTag = GetGroupUnitTagByIndex(i)
 
-        local ghb = unitFrame[POWERTYPE_HEALTH] -- Not a backdrop
+        local ghb = unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH] -- Not a backdrop
 
         unitFrame.control:ClearAnchors()
         unitFrame.control:SetAnchor( TOPLEFT, group, TOPLEFT, 0, 0.5*UnitFrames.SV.GroupBarSpacing + (groupBarHeight + UnitFrames.SV.GroupBarSpacing)*(i-1) )
@@ -5086,7 +5091,7 @@ function UnitFrames.CustomFramesApplyLayoutRaid(unhide)
         end
 
         unitFrame.dead:SetDimensions(UnitFrames.SV.RaidBarWidth-50, UnitFrames.SV.RaidBarHeight-2)
-        unitFrame[POWERTYPE_HEALTH].label:SetDimensions(UnitFrames.SV.RaidBarWidth-50, UnitFrames.SV.RaidBarHeight-2)
+        unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH].label:SetDimensions(UnitFrames.SV.RaidBarWidth-50, UnitFrames.SV.RaidBarHeight-2)
 
         if not IsUnitOnline(unitTag) then
             unitFrame.name:SetDimensions( UnitFrames.SV.RaidBarWidth-UnitFrames.SV.RaidNameClip, UnitFrames.SV.RaidBarHeight-2 )
@@ -5114,7 +5119,7 @@ function UnitFrames.CustomFramesApplyLayoutCompanion(unhide)
     unitFrame.control:SetDimensions(UnitFrames.SV.CompanionWidth, UnitFrames.SV.CompanionHeight )
     unitFrame.name:SetDimensions( UnitFrames.SV.CompanionWidth - UnitFrames.SV.CompanionNameClip - 10, UnitFrames.SV.CompanionHeight-2 )
     unitFrame.name:SetAnchor(LEFT, shb, LEFT, 5, 0 )
-    unitFrame[POWERTYPE_HEALTH].label:SetDimensions(UnitFrames.SV.CompanionWidth-50, UnitFrames.SV.CompanionHeight - 2)
+    unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH].label:SetDimensions(UnitFrames.SV.CompanionWidth-50, UnitFrames.SV.CompanionHeight - 2)
 
     if unhide then
         companion:SetHidden (false )
@@ -5143,7 +5148,7 @@ function UnitFrames.CustomFramesApplyLayoutPet(unhide)
         unitFrame.name:SetDimensions( UnitFrames.SV.PetWidth - UnitFrames.SV.PetNameClip - 10, UnitFrames.SV.PetHeight-2 )
         unitFrame.name:SetAnchor(LEFT, shb, LEFT, 5, 0 )
 
-        unitFrame[POWERTYPE_HEALTH].label:SetDimensions(UnitFrames.SV.PetWidth-50, UnitFrames.SV.PetHeight - 2)
+        unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH].label:SetDimensions(UnitFrames.SV.PetWidth-50, UnitFrames.SV.PetHeight - 2)
     end
     if unhide then
         pet:SetHidden (false )
@@ -5170,7 +5175,7 @@ function UnitFrames.CustomFramesApplyLayoutBosses()
 
         unitFrame.name:SetDimensions( UnitFrames.SV.BossBarWidth-50, UnitFrames.SV.BossBarHeight-2 )
 
-        unitFrame[POWERTYPE_HEALTH].label:SetDimensions( UnitFrames.SV.BossBarWidth-50, UnitFrames.SV.BossBarHeight-2 )
+        unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH].label:SetDimensions( UnitFrames.SV.BossBarWidth-50, UnitFrames.SV.BossBarHeight-2 )
     end
 
     bosses:SetHidden( false )
@@ -5293,20 +5298,20 @@ end
 function UnitFrames.CustomFramesReloadExecuteMenu()
     g_targetThreshold = UnitFrames.SV.ExecutePercentage
 
-    if g_DefaultFrames.reticleover[POWERTYPE_HEALTH] then
-        g_DefaultFrames.reticleover[POWERTYPE_HEALTH].threshold = g_targetThreshold
+    if g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH] then
+        g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].threshold = g_targetThreshold
     end
-    if UnitFrames.CustomFrames["reticleover"] and UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH] then
-        UnitFrames.CustomFrames["reticleover"][POWERTYPE_HEALTH].threshold = g_targetThreshold
+    if UnitFrames.CustomFrames["reticleover"] and UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH] then
+        UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH].threshold = g_targetThreshold
     end
-    if g_AvaCustFrames["reticleover"] and g_AvaCustFrames["reticleover"][POWERTYPE_HEALTH] then
-        g_AvaCustFrames["reticleover"][POWERTYPE_HEALTH].threshold = g_targetThreshold
+    if g_AvaCustFrames["reticleover"] and g_AvaCustFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH] then
+        g_AvaCustFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH].threshold = g_targetThreshold
     end
 
     for i = 1, 6 do
         local unitTag = "boss" .. i
-        if UnitFrames.CustomFrames[unitTag] and UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH] then
-            UnitFrames.CustomFrames[unitTag][POWERTYPE_HEALTH].threshold = g_targetThreshold
+        if UnitFrames.CustomFrames[unitTag] and UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH] then
+            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].threshold = g_targetThreshold
         end
     end
 end
@@ -5316,14 +5321,14 @@ function UnitFrames.CustomFramesReloadLowResourceThreshold()
     g_magickaThreshold = UnitFrames.SV.LowResourceMagicka
     g_staminaThreshold = UnitFrames.SV.LowResourceStamina
 
-    if UnitFrames.CustomFrames["player"] and UnitFrames.CustomFrames["player"][POWERTYPE_HEALTH] then
-        UnitFrames.CustomFrames["player"][POWERTYPE_HEALTH].threshold = g_healthThreshold
+    if UnitFrames.CustomFrames["player"] and UnitFrames.CustomFrames["player"][COMBAT_MECHANIC_FLAGS_HEALTH] then
+        UnitFrames.CustomFrames["player"][COMBAT_MECHANIC_FLAGS_HEALTH].threshold = g_healthThreshold
     end
-    if UnitFrames.CustomFrames["player"] and UnitFrames.CustomFrames["player"][POWERTYPE_MAGICKA] then
-        UnitFrames.CustomFrames["player"][POWERTYPE_MAGICKA].threshold = g_magickaThreshold
+    if UnitFrames.CustomFrames["player"] and UnitFrames.CustomFrames["player"][COMBAT_MECHANIC_FLAGS_MAGICKA] then
+        UnitFrames.CustomFrames["player"][COMBAT_MECHANIC_FLAGS_MAGICKA].threshold = g_magickaThreshold
     end
-    if UnitFrames.CustomFrames["player"] and UnitFrames.CustomFrames["player"][POWERTYPE_STAMINA] then
-        UnitFrames.CustomFrames["player"][POWERTYPE_STAMINA].threshold = g_staminaThreshold
+    if UnitFrames.CustomFrames["player"] and UnitFrames.CustomFrames["player"][COMBAT_MECHANIC_FLAGS_STAMINA] then
+        UnitFrames.CustomFrames["player"][COMBAT_MECHANIC_FLAGS_STAMINA].threshold = g_staminaThreshold
     end
 end
 

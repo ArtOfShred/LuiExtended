@@ -357,7 +357,6 @@ local AbilityTables = {
     -- CHAMPION ABILITIES --------------------------------
     -- ---------------------------------------------------
 
-    Champion_Vengeance_Charge         = GetString(SI_LUIE_SKILL_VENGEANCE_CHARGE), -- Vengeance Counter
     Champion_Riposte                  = 60230,
     Champion_Expert_Evasion           = 151113,
 
@@ -436,7 +435,6 @@ local AbilityTables = {
     Skill_Unstable_Pulse              = GetString(SI_LUIE_SKILL_UNSTABLE_PULSE),
     Skill_Volatile_Pulse              = GetString(SI_LUIE_SKILL_VOLATILE_PULSE),
     Skill_Summon_Storm_Atronach       = 23634,
-    Skill_Summon_Storm_Atronachs      = GetString(SI_LUIE_SKILL_SUMMON_STORM_ATRONACHS),
     Skill_Greater_Storm_Atronach      = 23492,
     Skill_Summon_Charged_Atronach     = 23495,
     Skill_Atronach_Zap                = 23428,
@@ -1197,7 +1195,6 @@ local AbilityTables = {
 }
 
 -- Replace ability IDs with names
-local k, v
 for k, v in pairs(AbilityTables) do
     if type(v) == "number" then
         AbilityTables[k] = zo_strformat("<<C:1>>", GetAbilityName(v))
