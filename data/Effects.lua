@@ -1153,7 +1153,7 @@ Effects.BarHighlightOverride = {
     [33211] = { showFakeAura = true, noRemove = true }, -- Summon Shade
     [35434] = { showFakeAura = true, noRemove = true }, -- Dark Shade --> Summon Shade
     [35441] = { showFakeAura = true, noRemove = true }, -- Shadow Image --> Shadow
-    [35445] = { showFakeAura = true, noRemove = true }, -- Shadow Image Teleport --> Shadow
+    [35445] = { newId = 35441, showFakeAura = true, noRemove = true }, -- Shadow Image Teleport --> Shadow
 
     -- Siphoning
     [33291] = { newId = 33292 }, -- Strife
