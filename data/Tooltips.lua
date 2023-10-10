@@ -5,6 +5,25 @@
 
 local zo_strformat = zo_strformat
 
+--Params for GetAbilityDescription
+local override = nil
+local csunittag = "player"
+
+--From /esoui/lang/en_client.lua
+--SI_DAMAGETYPE0 = "None"
+--SI_DAMAGETYPE1 = "Generic"
+--SI_DAMAGETYPE2 = "Physical"
+--SI_DAMAGETYPE3 = "Flame"
+--SI_DAMAGETYPE4 = "Shock"
+--SI_DAMAGETYPE5 = "Daedric"
+--SI_DAMAGETYPE6 = "Frost"
+--SI_DAMAGETYPE7 = "Earth"
+--SI_DAMAGETYPE8 = "Magic"
+--SI_DAMAGETYPE9 = "Drowning"
+--SI_DAMAGETYPE10 = "Disease"
+--SI_DAMAGETYPE11 = "Poison"
+--SI_DAMAGETYPE12 = "Bleed"
+
 -- Local Damagetypes for easy use
 local PhysicalDamage = GetString(SI_DAMAGETYPE2) .. " Damage" -- TODO: Localize
 local FlameDamage    = GetString(SI_DAMAGETYPE3) .. " Damage" -- TODO: Localize
@@ -13,7 +32,7 @@ local FrostDamage    = GetString(SI_DAMAGETYPE6) .. " Damage" -- TODO: Localize
 local MagicDamage    = GetString(SI_DAMAGETYPE8) .. " Damage" -- TODO: Localize
 local DiseaseDamage  = GetString(SI_DAMAGETYPE10) .. " Damage" -- TODO: Localize
 local PoisonDamage   = GetString(SI_DAMAGETYPE11) .. " Damage" -- TODO: Localize
-local BleedDamage    = "Bleed Damage" -- TODO: Localize
+local BleedDamage    = GetString(SI_DAMAGETYPE12) .. " Damage" -- TODO: Localize
 local OblivionDamage = "Oblivion Damage" -- TODO: Localize
 
 LUIE.Data.Tooltips = {
@@ -436,7 +455,7 @@ LUIE.Data.Tooltips = {
 
 
     -- Mementos
-    Memento_Witchmothers_Brew                       = GetAbilityDescription(84369),
+    Memento_Witchmothers_Brew                       = GetAbilityDescription(84369, override, csunittag),
     Memento_Almalexias_Lantern                      = select(2, GetCollectibleInfo(341)),
     Memento_Bonesnap_Binding_Talisman               = select(2, GetCollectibleInfo(348)),
     Memento_Discourse_Amaranthine                   = select(2, GetCollectibleInfo(345)),
@@ -1034,7 +1053,7 @@ LUIE.Data.Tooltips = {
     Skill_Structured_Entropy                        = GetString(SI_LUIE_SKILL_STRUCTURED_ENTROPY_TP),
     Skill_Fire_Rune                                 = GetString(SI_LUIE_SKILL_FIRE_RUNE_TP),
     Skill_Volcanic_Rune                             = GetString(SI_LUIE_SKILL_VOLCANIC_RUNE_TP),
-    Skill_Scalding_Rune                             = zo_strformat(GetString(SI_LUIE_SKILL_SCALDING_RUNE_TP), (GetAbilityDuration(40468) / 1000) + GetNumPassiveSkillRanks(GetSkillLineIndicesFromSkillLineId(44), select(2, GetSkillLineIndicesFromSkillLineId(44)), 8) ),
+    Skill_Scalding_Rune                             = zo_strformat(GetString(SI_LUIE_SKILL_SCALDING_RUNE_TP), (GetAbilityDuration(40468, override, csunittag) / 1000) + GetNumPassiveSkillRanks(GetSkillLineIndicesFromSkillLineId(44), select(2, GetSkillLineIndicesFromSkillLineId(44)), 8) ),
     Skill_Equilibrium                               = GetString(SI_LUIE_SKILL_EQUILIBRIUM_TP),
     Skill_Spell_Symmetry                            = GetString(SI_LUIE_SKILL_SPELL_SYMMETRY_TP),
     Skill_Meteor                                    = GetString(SI_LUIE_SKILL_METEOR_TP),
@@ -1561,62 +1580,55 @@ function LUIE.DynamicTooltip(abilityId)
     end
     -- Unchained
     if abilityId == 98316 then
-        local duration = GetAbilityDuration(98316) / 1000
+        local duration = GetAbilityDuration(98316, override, csunittag) / 1000
         local pointsSpent = GetNumPointsSpentOnChampionSkill(64) * 1.1
         local adjustPoints = math.floor(pointsSpent * 100 + 0.5) / 100 -- Remove decimal places
         tooltip = zo_strformat(GetString(SI_LUIE_SKILL_UNCHAINED_TP), duration, adjustPoints)
     end
-
     if abilityId == 150057 then -- Medium Armor Evasion
-        -- Counter for bonus
-        local counter = 0
         -- Count the # of Medium Armor pieces equipped
+        local counter = 0
         for i = 0, 16 do
-            local itemLink = GetItemLink(BAG_WORN, i)
+            local itemLink = GetItemLink(BAG_WORN, i, LINK_STYLE_DEFAULT)
             local armorType = GetItemLinkArmorType(itemLink)
             if armorType == ARMORTYPE_MEDIUM then
                 counter = counter + 1
             end
         end
-        local counter = counter * 2
+        counter = counter * 2
         tooltip = zo_strformat(GetString(SI_LUIE_SKILL_MEDIUM_ARMOR_EVASION), counter)
     end
-
     if abilityId == 126582 then -- Unstoppable Brute
-        -- Counter for bonus
-        local counter = 0
         -- Count the # of Heavy Armor pieces equipped
+        local counter = 0
         for i = 0, 16 do
-            local itemLink = GetItemLink(BAG_WORN, i)
+            local itemLink = GetItemLink(BAG_WORN, i, LINK_STYLE_DEFAULT)
             local armorType = GetItemLinkArmorType(itemLink)
             if armorType == ARMORTYPE_HEAVY then
                 counter = counter + 1
             end
         end
-        local counter = counter * 5
-        local tooltipValue1 = GetAbilityDuration(126582) / 1000
+        counter = counter * 5
+        local tooltipValue1 = GetAbilityDuration(126582, override, csunittag) / 1000
         local tooltipValue2 = counter
         tooltip = zo_strformat(GetString(SI_LUIE_SKILL_UNSTOPPABLE_BRUTE), tooltipValue1, tooltipValue2)
     end
-
     if abilityId == 126583 then -- Immovable
-        -- Counter for bonus
-        local counter = 0
         -- Count the # of Heavy Armor pieces equipped
+        local counter = 0
         for i = 0, 16 do
-            local itemLink = GetItemLink(BAG_WORN, i)
+            local itemLink = GetItemLink(BAG_WORN, i, LINK_STYLE_DEFAULT)
             local armorType = GetItemLinkArmorType(itemLink)
             if armorType == ARMORTYPE_HEAVY then
                 counter = counter + 1
             end
         end
-        local counter = counter * 5
-        local tooltipValue1 = GetAbilityDuration(126583) / 1000
+        counter = counter * 5
+        local tooltipValue1 = GetAbilityDuration(126583, override, csunittag) / 1000
         local tooltipValue2 = counter
         local tooltipValue3 = 65 + counter
         tooltip = zo_strformat(GetString(SI_LUIE_SKILL_IMMOVABLE), tooltipValue1, tooltipValue2, tooltipValue3)
     end
-
     return tooltip
 end
 
