@@ -11,30 +11,32 @@ local pointType = LUIE.Data.CombatTextConstants.pointType
 
 function CombatTextPointsExperienceEventListener:New()
     local obj = LUIE.CombatTextEventListener:New()
-    obj:RegisterForEvent(EVENT_EXPERIENCE_UPDATE, function(...) self:OnEvent(...) end, REGISTER_FILTER_UNIT_TAG, 'player')
+    obj:RegisterForEvent(EVENT_EXPERIENCE_UPDATE, function(...)
+        self:OnEvent(...)
+    end, REGISTER_FILTER_UNIT_TAG, "player")
     self.gain = 0
     self.timeoutActive = false
-    self.isChampion = IsUnitChampion('player')
-    if (self.isChampion) then
+    self.isChampion = IsUnitChampion("player")
+    if self.isChampion then
         local earned = GetPlayerChampionPointsEarned()
         if earned < 3600 then
             self.previousXp = GetPlayerChampionXP()
             self.previousMaxXp = GetNumChampionXPInChampionPoint(earned)
         end
     end
-    self.previousXp = self.previousXp or GetUnitXP('player')
-    self.previousMaxXp = self.previousMaxXp or GetUnitXPMax('player')
+    self.previousXp = self.previousXp or GetUnitXP("player")
+    self.previousMaxXp = self.previousMaxXp or GetUnitXPMax("player")
     return obj
 end
 
 function CombatTextPointsExperienceEventListener:OnEvent(unit, currentXp, maxXp)
     if LUIE.CombatText.SV.toggles.showPointsExperience then
-        self.isChampion = IsUnitChampion('player')
-        if (self.isChampion) then
+        self.isChampion = IsUnitChampion("player")
+        if self.isChampion then
             local earned = GetPlayerChampionPointsEarned()
             if earned < 3600 then
                 maxXp = GetNumChampionXPInChampionPoint(earned)
-                if (maxXp ~= nil) then
+                if maxXp ~= nil then
                     currentXp = GetPlayerChampionXP()
                 end
             end
@@ -52,7 +54,7 @@ function CombatTextPointsExperienceEventListener:OnEvent(unit, currentXp, maxXp)
         self.previousMaxXp = maxXp
 
         -- Trigger custom event (500ms buffer)
-        if (self.gain > 0 and not self.timeoutActive) then
+        if self.gain > 0 and not self.timeoutActive then
             self.timeoutActive = true
             zo_callLater(function()
                 self:TriggerEvent(eventType.POINT, pointType.EXPERIENCE_POINTS, self.gain)

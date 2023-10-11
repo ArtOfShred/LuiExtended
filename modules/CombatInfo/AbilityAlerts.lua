@@ -2,7 +2,7 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
-
+local LUIE = LUIE
 local CombatInfo = LUIE.CombatInfo
 CombatInfo.AbilityAlerts = {}
 local AbilityAlerts = CombatInfo.AbilityAlerts
@@ -29,25 +29,25 @@ local g_alertFont -- Font for Alerts
 local g_inDuel -- Tracker for whether the player is in a duel or not
 
 local alertTypes = {
-    UNMIT    = "LUIE_ALERT_TYPE_UNMIT",
-    DESTROY  = "LUIE_ALERT_TYPE_DESTROY",
-    POWER    = "LUIE_ALERT_TYPE_POWER",
-    SUMMON   = "LUIE_ALERT_TYPE_SUMMON",
-    SHARED   = "LUIE_ALERT_TYPE_SHARED",
+    UNMIT = "LUIE_ALERT_TYPE_UNMIT",
+    DESTROY = "LUIE_ALERT_TYPE_DESTROY",
+    POWER = "LUIE_ALERT_TYPE_POWER",
+    SUMMON = "LUIE_ALERT_TYPE_SUMMON",
+    SHARED = "LUIE_ALERT_TYPE_SHARED",
 }
 
 -- Quadratic easing out - decelerating to zero velocity (For buff fade)
 local function EaseOutQuad(t, b, c, d)
-	-- protect against 1 / 0
-	if t == 0 then
-		t = 0.0001
-	end
-	if d == 0 then
-		d = 0.0001
-	end
+    -- protect against 1 / 0
+    if t == 0 then
+        t = 0.0001
+    end
+    if d == 0 then
+        d = 0.0001
+    end
 
     t = t / d
-    return -c * t*(t-2) + b
+    return -c * t * (t - 2) + b
 end
 
 -- Set Alert Colors
@@ -75,7 +75,10 @@ function AbilityAlerts.ResetAlertSize()
         alert.modifier:SetFont(g_alertFont)
         alert.mitigation:SetFont(g_alertFont)
         alert.timer:SetFont(g_alertFont)
-        alert.icon:SetDimensions(CombatInfo.SV.alerts.toggles.alertFontSize + 8, CombatInfo.SV.alerts.toggles.alertFontSize + 8)
+        alert.icon:SetDimensions(
+            CombatInfo.SV.alerts.toggles.alertFontSize + 8,
+            CombatInfo.SV.alerts.toggles.alertFontSize + 8
+        )
         alert.icon.iconbg:ClearAnchors()
         alert.icon.iconbg:SetAnchor(TOPLEFT, alert.icon, TOPLEFT, 3, 3)
         alert.icon.iconbg:SetAnchor(BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -3, -3)
@@ -85,7 +88,17 @@ function AbilityAlerts.ResetAlertSize()
         alert.icon.icon:ClearAnchors()
         alert.icon.icon:SetAnchor(TOPLEFT, alert.icon, TOPLEFT, 3, 3)
         alert.icon.icon:SetAnchor(BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -3, -3)
-        alert:SetDimensions(alert.prefix:GetTextWidth() + alert.name:GetTextWidth() + alert.modifier:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth(), height)
+        alert:SetDimensions(
+            alert.prefix:GetTextWidth()
+                + alert.name:GetTextWidth()
+                + alert.modifier:GetTextWidth()
+                + 6
+                + alert.icon:GetWidth()
+                + 6
+                + alert.mitigation:GetTextWidth()
+                + alert.timer:GetTextWidth(),
+            height
+        )
     end
 
     uiTlw.alertFrame:SetDimensions(500, (CombatInfo.SV.alerts.toggles.alertFontSize * 2) + 4)
@@ -118,17 +131,28 @@ function AbilityAlerts.ShouldUseDefaultIcon(abilityId)
 end
 
 function AbilityAlerts.GetDefaultIcon(ccType)
-    if ccType == LUIE_CC_TYPE_STUN then return LUIE_CC_ICON_STUN
-    elseif ccType == LUIE_CC_TYPE_KNOCKDOWN then return LUIE_CC_ICON_STUN
-    elseif ccType == LUIE_CC_TYPE_KNOCKBACK then return LUIE_CC_ICON_KNOCKBACK
-    elseif ccType == LUIE_CC_TYPE_PULL then return LUIE_CC_ICON_PULL
-    elseif ccType == LUIE_CC_TYPE_DISORIENT then return LUIE_CC_ICON_DISORIENT
-    elseif ccType == LUIE_CC_TYPE_FEAR then return LUIE_CC_ICON_FEAR
-    elseif ccType == LUIE_CC_TYPE_CHARM then return LUIE_CC_ICON_CHARM
-    elseif ccType == LUIE_CC_TYPE_STAGGER then return LUIE_CC_ICON_STAGGER
-    elseif ccType == LUIE_CC_TYPE_SILENCE then return LUIE_CC_ICON_SILENCE
-    elseif ccType == LUIE_CC_TYPE_SNARE then return LUIE_CC_ICON_SNARE
-    elseif ccType == LUIE_CC_TYPE_ROOT then return LUIE_CC_ICON_ROOT
+    if ccType == LUIE_CC_TYPE_STUN then
+        return LUIE_CC_ICON_STUN
+    elseif ccType == LUIE_CC_TYPE_KNOCKDOWN then
+        return LUIE_CC_ICON_STUN
+    elseif ccType == LUIE_CC_TYPE_KNOCKBACK then
+        return LUIE_CC_ICON_KNOCKBACK
+    elseif ccType == LUIE_CC_TYPE_PULL then
+        return LUIE_CC_ICON_PULL
+    elseif ccType == LUIE_CC_TYPE_DISORIENT then
+        return LUIE_CC_ICON_DISORIENT
+    elseif ccType == LUIE_CC_TYPE_FEAR then
+        return LUIE_CC_ICON_FEAR
+    elseif ccType == LUIE_CC_TYPE_CHARM then
+        return LUIE_CC_ICON_CHARM
+    elseif ccType == LUIE_CC_TYPE_STAGGER then
+        return LUIE_CC_ICON_STAGGER
+    elseif ccType == LUIE_CC_TYPE_SILENCE then
+        return LUIE_CC_ICON_SILENCE
+    elseif ccType == LUIE_CC_TYPE_SNARE then
+        return LUIE_CC_ICON_SNARE
+    elseif ccType == LUIE_CC_TYPE_ROOT then
+        return LUIE_CC_ICON_ROOT
     end
 end
 
@@ -168,16 +192,20 @@ function AbilityAlerts.CreateAlertFrame()
         alert.name:SetAnchor(LEFT, alert.prefix, RIGHT, 0, 0)
         alert.modifier:SetAnchor(LEFT, alert.name, RIGHT, 0, 0)
 
-        alert.icon = UI.Backdrop(alert.name, nil, nil, {0,0,0,0.5}, {0,0,0,1}, false)
-        alert.icon:SetDimensions(CombatInfo.SV.alerts.toggles.alertFontSize + 8, CombatInfo.SV.alerts.toggles.alertFontSize + 8)
+        alert.icon = UI.Backdrop(alert.name, nil, nil, { 0, 0, 0, 0.5 }, { 0, 0, 0, 1 }, false)
+        alert.icon:SetDimensions(
+            CombatInfo.SV.alerts.toggles.alertFontSize + 8,
+            CombatInfo.SV.alerts.toggles.alertFontSize + 8
+        )
         alert.icon:SetAnchor(LEFT, alert.modifier, RIGHT, 6, 0)
 
         alert.icon.back = UI.Texture(alert.icon, nil, nil, "/esoui/art/actionbar/abilityframe64_up.dds", nil, false)
         alert.icon.back:SetAnchor(TOPLEFT, alert.icon, TOPLEFT)
         alert.icon.back:SetAnchor(BOTTOMRIGHT, alert.icon, BOTTOMRIGHT)
 
-        alert.icon.iconbg = UI.Texture(alert.icon, nil, nil, "/esoui/art/actionbar/abilityinset.dds", DL_CONTROLS, false)
-        alert.icon.iconbg = UI.Backdrop(alert.icon, nil, nil, {0,0,0,0.9}, {0,0,0,0.9}, false)
+        alert.icon.iconbg =
+            UI.Texture(alert.icon, nil, nil, "/esoui/art/actionbar/abilityinset.dds", DL_CONTROLS, false)
+        alert.icon.iconbg = UI.Backdrop(alert.icon, nil, nil, { 0, 0, 0, 0.9 }, { 0, 0, 0, 0.9 }, false)
         alert.icon.iconbg:SetDrawLevel(DL_CONTROLS)
         alert.icon.iconbg:SetAnchor(TOPLEFT, alert.icon, TOPLEFT, 3, 3)
         alert.icon.iconbg:SetAnchor(BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -3, -3)
@@ -185,7 +213,7 @@ function AbilityAlerts.CreateAlertFrame()
         alert.icon.cd = windowManager:CreateControl(nil, alert.icon, CT_COOLDOWN)
         alert.icon.cd:SetAnchor(TOPLEFT, alert.icon, TOPLEFT, 1, 1)
         alert.icon.cd:SetAnchor(BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -1, -1)
-        alert.icon.cd:SetFillColor(0,0,0,0)
+        alert.icon.cd:SetFillColor(0, 0, 0, 0)
         alert.icon.cd:StartCooldown(0, 0, CD_TYPE_RADIAL, CD_TIME_TYPE_TIME_REMAINING, false)
         alert.icon.cd:SetDrawLayer(DL_BACKGROUND)
 
@@ -199,7 +227,17 @@ function AbilityAlerts.CreateAlertFrame()
         alert.timer = UI.Label(alert.icon, nil, nil, nil, g_alertFont, alert.data.duration, false)
         alert.timer:SetAnchor(LEFT, alert.mitigation, RIGHT, 0, 0)
 
-        alert:SetDimensions(alert.prefix:GetTextWidth() + alert.name:GetTextWidth() + alert.modifier:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth(), height)
+        alert:SetDimensions(
+            alert.prefix:GetTextWidth()
+                + alert.name:GetTextWidth()
+                + alert.modifier:GetTextWidth()
+                + 6
+                + alert.icon:GetWidth()
+                + 6
+                + alert.mitigation:GetTextWidth()
+                + alert.timer:GetTextWidth(),
+            height
+        )
         alert:SetHidden(true)
 
         anchor = { TOP, BOTTOM, 0, 0, alert }
@@ -228,14 +266,36 @@ function AbilityAlerts.CreateAlertFrame()
     uiTlw.alertFrame:SetHandler("OnMoveStart", tlwOnMoveStart)
     uiTlw.alertFrame:SetHandler("OnMoveStop", tlwOnMoveStop)
 
-    uiTlw.alertFrame.preview.anchorTexture = UI.Texture(uiTlw.alertFrame.preview, {TOPLEFT,TOPLEFT}, {16,16}, "/esoui/art/reticle/border_topleft.dds", DL_OVERLAY, false)
+    uiTlw.alertFrame.preview.anchorTexture = UI.Texture(
+        uiTlw.alertFrame.preview,
+        { TOPLEFT, TOPLEFT },
+        { 16, 16 },
+        "/esoui/art/reticle/border_topleft.dds",
+        DL_OVERLAY,
+        false
+    )
     uiTlw.alertFrame.preview.anchorTexture:SetColor(1, 1, 0, 0.9)
 
-    uiTlw.alertFrame.preview.anchorLabel = UI.Label(uiTlw.alertFrame.preview, {BOTTOMLEFT,TOPLEFT,0,-1}, nil, {0,2}, "ZoFontGameSmall", "xxx, yyy", false)
-    uiTlw.alertFrame.preview.anchorLabel:SetColor(1, 1, 0 , 1)
+    uiTlw.alertFrame.preview.anchorLabel = UI.Label(
+        uiTlw.alertFrame.preview,
+        { BOTTOMLEFT, TOPLEFT, 0, -1 },
+        nil,
+        { 0, 2 },
+        "ZoFontGameSmall",
+        "xxx, yyy",
+        false
+    )
+    uiTlw.alertFrame.preview.anchorLabel:SetColor(1, 1, 0, 1)
     uiTlw.alertFrame.preview.anchorLabel:SetDrawLayer(DL_OVERLAY)
     uiTlw.alertFrame.preview.anchorLabel:SetDrawTier(DT_MEDIUM)
-    uiTlw.alertFrame.preview.anchorLabelBg = UI.Backdrop(uiTlw.alertFrame.preview.anchorLabel, "fill", nil, {0,0,0,1}, {0,0,0,1}, false)
+    uiTlw.alertFrame.preview.anchorLabelBg = UI.Backdrop(
+        uiTlw.alertFrame.preview.anchorLabel,
+        "fill",
+        nil,
+        { 0, 0, 0, 1 },
+        { 0, 0, 0, 1 },
+        false
+    )
     uiTlw.alertFrame.preview.anchorLabelBg:SetDrawLayer(DL_OVERLAY)
     uiTlw.alertFrame.preview.anchorLabelBg:SetDrawTier(DT_LOW)
 
@@ -248,19 +308,38 @@ function AbilityAlerts.CreateAlertFrame()
 
     -- Register Events
     eventManager:RegisterForEvent(moduleName .. "Combat", EVENT_COMBAT_EVENT, AbilityAlerts.OnCombatIn)
-    eventManager:AddFilterForEvent(moduleName .. "Combat", EVENT_COMBAT_EVENT, REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER)
+    eventManager:AddFilterForEvent(
+        moduleName .. "Combat",
+        EVENT_COMBAT_EVENT,
+        REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE,
+        COMBAT_UNIT_TYPE_PLAYER
+    )
     eventManager:RegisterForEvent(moduleName .. "Effect", EVENT_EFFECT_CHANGED, AbilityAlerts.AlertEffectChanged)
 
     for abilityId, data in pairs(Alerts) do
         if data.eventdetect == true then
             eventManager:RegisterForEvent(moduleName .. abilityId, EVENT_COMBAT_EVENT, AbilityAlerts.OnCombatAlert)
-            eventManager:AddFilterForEvent(moduleName .. abilityId, EVENT_COMBAT_EVENT, REGISTER_FILTER_ABILITY_ID, abilityId, REGISTER_FILTER_IS_ERROR, false)
+            eventManager:AddFilterForEvent(
+                moduleName .. abilityId,
+                EVENT_COMBAT_EVENT,
+                REGISTER_FILTER_ABILITY_ID,
+                abilityId,
+                REGISTER_FILTER_IS_ERROR,
+                false
+            )
         end
     end
 
     for result, _ in pairs(ccResults) do
         eventManager:RegisterForEvent(moduleName .. result, EVENT_COMBAT_EVENT, AbilityAlerts.AlertInterrupt)
-        eventManager:AddFilterForEvent(moduleName .. result, EVENT_COMBAT_EVENT, REGISTER_FILTER_COMBAT_RESULT, result, REGISTER_FILTER_IS_ERROR, false)
+        eventManager:AddFilterForEvent(
+            moduleName .. result,
+            EVENT_COMBAT_EVENT,
+            REGISTER_FILTER_COMBAT_RESULT,
+            result,
+            REGISTER_FILTER_IS_ERROR,
+            false
+        )
     end
 
     eventManager:RegisterForUpdate(moduleName .. "AlertUpdate", 100, AbilityAlerts.AlertUpdate)
@@ -268,7 +347,6 @@ function AbilityAlerts.CreateAlertFrame()
     eventManager:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, AbilityAlerts.OnDuelStarted)
     eventManager:RegisterForEvent(moduleName, EVENT_DUEL_FINISHED, AbilityAlerts.OnDuelFinished)
     eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, AbilityAlerts.OnPlayerActivated)
-
 end
 
 function AbilityAlerts.OnDuelStarted()
@@ -303,14 +381,22 @@ function AbilityAlerts.SetAlertFramePosition()
         uiTlw.alertFrame:ClearAnchors()
 
         if CombatInfo.SV.AlertFrameOffsetX ~= nil and CombatInfo.SV.AlertFrameOffsetY ~= nil then
-            uiTlw.alertFrame:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, CombatInfo.SV.AlertFrameOffsetX, CombatInfo.SV.AlertFrameOffsetY)
+            uiTlw.alertFrame:SetAnchor(
+                TOPLEFT,
+                GuiRoot,
+                TOPLEFT,
+                CombatInfo.SV.AlertFrameOffsetX,
+                CombatInfo.SV.AlertFrameOffsetY
+            )
         else
             uiTlw.alertFrame:SetAnchor(CENTER, GuiRoot, CENTER, 0, -250)
         end
     end
 
     local savedPos = CombatInfo.SV.AlertFrameCustomPosition
-    uiTlw.alertFrame.preview.anchorLabel:SetText((savedPos ~= nil and #savedPos == 2) and zo_strformat("<<1>>, <<2>>", savedPos[1], savedPos[2]) or "default")
+    uiTlw.alertFrame.preview.anchorLabel:SetText(
+        (savedPos ~= nil and #savedPos == 2) and zo_strformat("<<1>>, <<2>>", savedPos[1], savedPos[2]) or "default"
+    )
 end
 
 function AbilityAlerts.SetMovingStateAlert(state)
@@ -329,17 +415,16 @@ end
 function AbilityAlerts.GenerateAlertFramePreview(state)
     for i = 1, 3 do
         local alert = _G["LUIE_Alert" .. i]
-            alert.prefix:SetText("")
-            alert.name:SetText("NAME TEST")
-            alert.name:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
-            alert.modifier:SetText("")
-            alert.icon.icon:SetTexture("/esoui/art/icons/icon_missing.dds")
-            alert.icon.cd:SetFillColor(0,0,0,0)
-            alert.icon.cd:StartCooldown(0, 0, CD_TYPE_RADIAL, CD_TIME_TYPE_TIME_REMAINING, false)
-            alert.mitigation:SetText("MITGATION TEST")
-            alert.timer:SetText(CombatInfo.SV.alerts.toggles.alertTimer and " 1.0" or "")
+        alert.prefix:SetText("")
+        alert.name:SetText("NAME TEST")
+        alert.name:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
+        alert.modifier:SetText("")
+        alert.icon.icon:SetTexture("/esoui/art/icons/icon_missing.dds")
+        alert.icon.cd:SetFillColor(0, 0, 0, 0)
+        alert.icon.cd:StartCooldown(0, 0, CD_TYPE_RADIAL, CD_TIME_TYPE_TIME_REMAINING, false)
+        alert.mitigation:SetText("MITGATION TEST")
+        alert.timer:SetText(CombatInfo.SV.alerts.toggles.alertTimer and " 1.0" or "")
         if state then
-
         end
         alert:SetHidden(not state)
     end
@@ -357,7 +442,6 @@ function AbilityAlerts.AlertUpdate(currentTime)
     for i = 1, 3 do
         local alert = _G["LUIE_Alert" .. i]
         if alert.data.duration then
-
             --[[
             if i > 1 and _G["LUIE_Alert" .. i - 1].data.available == true then
                 _G["LUIE_Alert" .. i - 1].data.duration = alert.data.duration
@@ -372,7 +456,8 @@ function AbilityAlerts.AlertUpdate(currentTime)
                 alert.data.showDuration = nil
                 i = i - 1
             end
-            ]]--
+            ]]
+            --
 
             local remain = alert.data.duration - currentTime
             local postCast = alert.data.postCast + remain
@@ -385,16 +470,17 @@ function AbilityAlerts.AlertUpdate(currentTime)
             if remain <= 0 and remain > -100 then
                 d(remain)
             end
-            ]]--
+            ]]
+            --
 
             if alert.data.showDuration then
                 alert.timer:SetText(alert.data.showDuration and string.format(" %.1f", remain / 1000) or "")
                 alert.timer:SetColor(unpack(CombatInfo.SV.alerts.colors.alertTimer))
             end
-            if (postCast) <= -1100 then
+            if postCast <= -1100 then
                 alert:SetAlpha(1)
                 alert:SetHidden(true)
-                alert.data = { }
+                alert.data = {}
                 alert.data.duration = nil
                 alert.data.postCast = nil
                 alert.data.available = true
@@ -411,8 +497,30 @@ function AbilityAlerts.AlertUpdate(currentTime)
     end
 end
 
-function AbilityAlerts.AlertInterrupt(eventCode, resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
-    if targetType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER_PET or targetType == COMBAT_UNIT_TYPE_GROUP then
+function AbilityAlerts.AlertInterrupt(
+    eventCode,
+    resultType,
+    isError,
+    abilityName,
+    abilityGraphic,
+    abilityAction_slotType,
+    sourceName,
+    sourceType,
+    targetName,
+    targetType,
+    hitValue,
+    powerType,
+    damageType,
+    log,
+    sourceUnitId,
+    targetUnitId,
+    abilityId
+)
+    if
+        targetType == COMBAT_UNIT_TYPE_PLAYER
+        or targetType == COMBAT_UNIT_TYPE_PLAYER_PET
+        or targetType == COMBAT_UNIT_TYPE_GROUP
+    then
         return
     end
     if Effects.BlockAndBashCC[abilityId] then
@@ -439,8 +547,14 @@ function AbilityAlerts.AlertInterrupt(eventCode, resultType, isError, abilityNam
                 return
             end
 
-            if (alert.data.sourceUnitId == targetUnitId or alert.data.sourceUnitId == targetName) and (not alert.data.showDuration == false or alert.data.alwaysShowInterrupt) and remain > 0 and (not alert.data.neverShowInterrupt or deathResults[resultType]) and not alert.data.effectOnlyInterrupt then
-                alert.data = { }
+            if
+                (alert.data.sourceUnitId == targetUnitId or alert.data.sourceUnitId == targetName)
+                and (not alert.data.showDuration == false or alert.data.alwaysShowInterrupt)
+                and remain > 0
+                and (not alert.data.neverShowInterrupt or deathResults[resultType])
+                and not alert.data.effectOnlyInterrupt
+            then
+                alert.data = {}
                 alert.data.available = true
                 alert.data.id = ""
                 alert.data.textMitigation = ""
@@ -512,23 +626,40 @@ function AbilityAlerts.PlayAlertSound(abilityId, ...)
 
     local isPlay
     if Alerts[abilityId].sound then
-        if Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_ST then isPlay = Settings.toggles.sound_stEnable and Settings.sounds.sound_st
-            elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_ST_CC then isPlay = Settings.toggles.sound_st_ccEnable and Settings.sounds.sound_st_cc
-            elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_AOE then isPlay = Settings.toggles.sound_aoeEnable and Settings.sounds.sound_aoe
-            elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_AOE_CC then isPlay = Settings.toggles.sound_aoe_ccEnable and Settings.sounds.sound_aoe_cc
-            elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_POWER_ATTACK then isPlay = Settings.toggles.sound_powerattackEnable and Settings.sounds.sound_powerattack
-            elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_RADIAL_AVOID then isPlay = Settings.toggles.sound_radialEnable and Settings.sounds.sound_radial
-            elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_TRAVELER then isPlay = Settings.toggles.sound_travelEnable and Settings.sounds.sound_travel
-            elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_TRAVELER_CC then isPlay = Settings.toggles.sound_travel_ccEnable and  Settings.sounds.sound_travel_cc
-            elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_GROUND then isPlay = Settings.toggles.sound_groundEnable and Settings.sounds.sound_ground
-            elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_METEOR then isPlay = Settings.toggles.sound_meteorEnable and Settings.sounds.sound_meteor
-            elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_UNMIT then isPlay = Settings.toggles.sound_unmit_stEnable and Settings.sounds.sound_unmit_st
-            elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_UNMIT_AOE then isPlay = Settings.toggles.sound_unmit_aoeEnable and Settings.sounds.sound_unmit_aoe
-            elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_POWER_DAMAGE then isPlay = Settings.toggles.sound_power_damageEnable and Settings.sounds.sound_power_damage
-            elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_POWER_DEFENSE then isPlay = Settings.toggles.sound_power_buffEnable and Settings.sounds.sound_power_buff
-            elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_SUMMON then isPlay = Settings.toggles.sound_summonEnable and Settings.sounds.sound_summon
-            elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_DESTROY then isPlay = Settings.toggles.sound_destroyEnable and Settings.sounds.sound_destroy
-            elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_HEAL then isPlay = Settings.toggles.sound_healEnable and Settings.sounds.ound_heal
+        if Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_ST then
+            isPlay = Settings.toggles.sound_stEnable and Settings.sounds.sound_st
+        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_ST_CC then
+            isPlay = Settings.toggles.sound_st_ccEnable and Settings.sounds.sound_st_cc
+        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_AOE then
+            isPlay = Settings.toggles.sound_aoeEnable and Settings.sounds.sound_aoe
+        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_AOE_CC then
+            isPlay = Settings.toggles.sound_aoe_ccEnable and Settings.sounds.sound_aoe_cc
+        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_POWER_ATTACK then
+            isPlay = Settings.toggles.sound_powerattackEnable and Settings.sounds.sound_powerattack
+        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_RADIAL_AVOID then
+            isPlay = Settings.toggles.sound_radialEnable and Settings.sounds.sound_radial
+        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_TRAVELER then
+            isPlay = Settings.toggles.sound_travelEnable and Settings.sounds.sound_travel
+        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_TRAVELER_CC then
+            isPlay = Settings.toggles.sound_travel_ccEnable and Settings.sounds.sound_travel_cc
+        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_GROUND then
+            isPlay = Settings.toggles.sound_groundEnable and Settings.sounds.sound_ground
+        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_METEOR then
+            isPlay = Settings.toggles.sound_meteorEnable and Settings.sounds.sound_meteor
+        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_UNMIT then
+            isPlay = Settings.toggles.sound_unmit_stEnable and Settings.sounds.sound_unmit_st
+        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_UNMIT_AOE then
+            isPlay = Settings.toggles.sound_unmit_aoeEnable and Settings.sounds.sound_unmit_aoe
+        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_POWER_DAMAGE then
+            isPlay = Settings.toggles.sound_power_damageEnable and Settings.sounds.sound_power_damage
+        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_POWER_DEFENSE then
+            isPlay = Settings.toggles.sound_power_buffEnable and Settings.sounds.sound_power_buff
+        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_SUMMON then
+            isPlay = Settings.toggles.sound_summonEnable and Settings.sounds.sound_summon
+        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_DESTROY then
+            isPlay = Settings.toggles.sound_destroyEnable and Settings.sounds.sound_destroy
+        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_HEAL then
+            isPlay = Settings.toggles.sound_healEnable and Settings.sounds.ound_heal
         end
     end
 
@@ -540,7 +671,23 @@ function AbilityAlerts.PlayAlertSound(abilityId, ...)
 end
 
 local drawLocation = 1
-function AbilityAlerts.SetupSingleAlertFrame(abilityId, textPrefix, textModifier, textName, textMitigation, abilityIcon, currentTime, endTime, showDuration, crowdControl, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt)
+function AbilityAlerts.SetupSingleAlertFrame(
+    abilityId,
+    textPrefix,
+    textModifier,
+    textName,
+    textMitigation,
+    abilityIcon,
+    currentTime,
+    endTime,
+    showDuration,
+    crowdControl,
+    sourceUnitId,
+    postCast,
+    alwaysShowInterrupt,
+    neverShowInterrupt,
+    effectOnlyInterrupt
+)
     local labelColor
     local borderColor
 
@@ -559,7 +706,7 @@ function AbilityAlerts.SetupSingleAlertFrame(abilityId, textPrefix, textModifier
         local alert = _G["LUIE_Alert" .. i]
         if alert.data.available then
             alert.data.id = abilityId
-            alert.data.textMitigation =  textMitigation
+            alert.data.textMitigation = textMitigation
             alert.data.textPrefix = textPrefix or ""
             alert.data.textName = textName
             alert.data.textModifier = textModifier or ""
@@ -596,7 +743,7 @@ function AbilityAlerts.SetupSingleAlertFrame(abilityId, textPrefix, textModifier
     -- If no alert frame is available, then draw over in the first spot
     local alert = _G["LUIE_Alert" .. drawLocation]
     alert.data.id = abilityId
-    alert.data.textMitigation =  textMitigation
+    alert.data.textMitigation = textMitigation
     alert.data.textPrefix = textPrefix or ""
     alert.data.textName = textName
     alert.data.textModifier = textModifier or ""
@@ -625,7 +772,7 @@ function AbilityAlerts.SetupSingleAlertFrame(abilityId, textPrefix, textModifier
     alert.data.available = false
     alert.icon.cd:SetFillColor(unpack(borderColor))
     --alert.icon.cd:SetHidden(not crowdControl)
-    drawLocation = drawLocation +1
+    drawLocation = drawLocation + 1
     if drawLocation > 3 then
         drawLocation = 1
     end
@@ -635,18 +782,34 @@ end
 function AbilityAlerts.RealignAlerts(alertNumber)
     local height = (CombatInfo.SV.alerts.toggles.alertFontSize * 2)
     local alert = _G["LUIE_Alert" .. alertNumber]
-    alert:SetDimensions(alert.prefix:GetTextWidth() + alert.name:GetTextWidth() + alert.modifier:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth(), height)
+    alert:SetDimensions(
+        alert.prefix:GetTextWidth()
+            + alert.name:GetTextWidth()
+            + alert.modifier:GetTextWidth()
+            + 6
+            + alert.icon:GetWidth()
+            + 6
+            + alert.mitigation:GetTextWidth()
+            + alert.timer:GetTextWidth(),
+        height
+    )
 end
 
 function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     local Settings = CombatInfo.SV.alerts
 
     -- Just in case
-    if not Alerts[abilityId] then return end
+    if not Alerts[abilityId] then
+        return
+    end
     -- Ignore this event if we are on refire delay (whether from delay input in the table or from a "bad" event processing)
-    if refireDelay[abilityId] then return end
+    if refireDelay[abilityId] then
+        return
+    end
     -- Ignore this event if we're dueling
-    if g_inDuel then return end
+    if g_inDuel then
+        return
+    end
 
     -- Set CC Type if applicable
     local crowdControl
@@ -657,7 +820,18 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     -- Get menu setting for filtering and bail out here depending on that setting
     local option = Settings.toggles.alertOptions
     -- Bail out if we only have CC selected and this is not CC
-    if option == 2 and crowdControl ~= LUIE_CC_TYPE_STUN and crowdControl ~= LUIE_CC_TYPE_KNOCKDOWN and crowdControl ~= LUIE_CC_TYPE_KNOCKBACK and crowdControl ~= LUIE_CC_TYPE_PULL and crowdControl ~= LUIE_CC_TYPE_DISORIENT and crowdControl ~= LUIE_CC_TYPE_FEAR and crowdControl ~= LUIE_CC_TYPE_CHARM and crowdControl ~= LUIE_CC_TYPE_STAGGER and crowdControl ~= LUIE_CC_TYPE_UNBREAKABLE then
+    if
+        option == 2
+        and crowdControl ~= LUIE_CC_TYPE_STUN
+        and crowdControl ~= LUIE_CC_TYPE_KNOCKDOWN
+        and crowdControl ~= LUIE_CC_TYPE_KNOCKBACK
+        and crowdControl ~= LUIE_CC_TYPE_PULL
+        and crowdControl ~= LUIE_CC_TYPE_DISORIENT
+        and crowdControl ~= LUIE_CC_TYPE_FEAR
+        and crowdControl ~= LUIE_CC_TYPE_CHARM
+        and crowdControl ~= LUIE_CC_TYPE_STAGGER
+        and crowdControl ~= LUIE_CC_TYPE_UNBREAKABLE
+    then
         return
     end
     -- Bail out if we only have unbreakable selected and this is not unbreakable
@@ -668,7 +842,9 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     -- Setup refire delay
     if Alerts[abilityId].refire then
         refireDelay[abilityId] = true
-        zo_callLater(function() refireDelay[abilityId] = nil end, Alerts[abilityId].refire) --buffer by X time
+        zo_callLater(function()
+            refireDelay[abilityId] = nil
+        end, Alerts[abilityId].refire) --buffer by X time
     end
 
     -- Auto refire for auras to stop events when both reticleover and the unit exist
@@ -680,7 +856,9 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
         else
             refireTime = 250
         end
-        zo_callLater(function() refireDelay[abilityId] = nil end, refireTime) --buffer by X time
+        zo_callLater(function()
+            refireDelay[abilityId] = nil
+        end, refireTime) --buffer by X time
     end
 
     -- Get Ability Name & Icon
@@ -695,8 +873,8 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
             unitName = Alerts[abilityId].fakeName
         end
     end
-    if Alerts[abilityId].bossName and DoesUnitExist('boss1') then
-        unitName = zo_strformat("<<C:1>>", GetUnitName('boss1'))
+    if Alerts[abilityId].bossName and DoesUnitExist("boss1") then
+        unitName = zo_strformat("<<C:1>>", GetUnitName("boss1"))
     end
 
     -- Handle effects that override by UnitName
@@ -756,8 +934,8 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
         if Alerts[abilityId].fakeName then
             unitName = Alerts[abilityId].fakeName
         end
-        if Alerts[abilityId].bossName and DoesUnitExist('boss1') then
-            unitName = zo_strformat("<<C:1>>", GetUnitName('boss1'))
+        if Alerts[abilityId].bossName and DoesUnitExist("boss1") then
+            unitName = zo_strformat("<<C:1>>", GetUnitName("boss1"))
         end
     end
 
@@ -768,13 +946,21 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
         if AlertsZone[abilityId][zoneName] then
             unitName = AlertsZone[abilityId][zoneName]
             -- Debug for my accounts
-            if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
+            if
+                LUIE.PlayerDisplayName == "@ArtOfShredPTS"
+                or LUIE.PlayerDisplayName == "@ArtOfShredLegacy"
+                or LUIE.PlayerDisplayName == "@HammerOfGlory"
+            then
                 d("Zone Name: " .. zoneName .. ": " .. unitName)
             end
         elseif AlertsZone[abilityId][index] then
             unitName = AlertsZone[abilityId][index]
             -- Debug for my accounts
-            if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
+            if
+                LUIE.PlayerDisplayName == "@ArtOfShredPTS"
+                or LUIE.PlayerDisplayName == "@ArtOfShredLegacy"
+                or LUIE.PlayerDisplayName == "@HammerOfGlory"
+            then
                 d(index .. ": " .. unitName)
             end
         end
@@ -785,7 +971,11 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
         if AlertsMap[abilityId][mapName] then
             unitName = AlertsMap[abilityId][mapName]
             -- Debug for my accounts
-            if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
+            if
+                LUIE.PlayerDisplayName == "@ArtOfShredPTS"
+                or LUIE.PlayerDisplayName == "@ArtOfShredLegacy"
+                or LUIE.PlayerDisplayName == "@HammerOfGlory"
+            then
                 d("Map Name: " .. mapName .. ": " .. unitName)
             end
         end
@@ -795,11 +985,15 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     if Alerts[abilityId].bossMatch then
         for x = 1, #Alerts[abilityId].bossMatch do
             for i = 1, 4 do
-                local bossName = DoesUnitExist('boss' .. i) and zo_strformat("<<C:1>>", GetUnitName('boss' .. i)) or ""
+                local bossName = DoesUnitExist("boss" .. i) and zo_strformat("<<C:1>>", GetUnitName("boss" .. i)) or ""
                 if bossName == Alerts[abilityId].bossMatch[x] then
                     unitName = Alerts[abilityId].bossMatch[x]
                     -- Debug for my accounts
-                    if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
+                    if
+                        LUIE.PlayerDisplayName == "@ArtOfShredPTS"
+                        or LUIE.PlayerDisplayName == "@ArtOfShredLegacy"
+                        or LUIE.PlayerDisplayName == "@HammerOfGlory"
+                    then
                         d("Boss Match: " .. unitName)
                     end
                 end
@@ -809,10 +1003,14 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
 
     if AlertsConvert[abilityId] then
         for i = 1, 4 do
-            local bossName = DoesUnitExist('boss' .. i) and zo_strformat("<<C:1>>", GetUnitName('boss' .. i)) or ""
+            local bossName = DoesUnitExist("boss" .. i) and zo_strformat("<<C:1>>", GetUnitName("boss" .. i)) or ""
             if AlertsConvert[abilityId][bossName] then
                 unitName = AlertsConvert[abilityId][bossName]
-                if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
+                if
+                    LUIE.PlayerDisplayName == "@ArtOfShredPTS"
+                    or LUIE.PlayerDisplayName == "@ArtOfShredLegacy"
+                    or LUIE.PlayerDisplayName == "@HammerOfGlory"
+                then
                     d("Boss Enemy with adds detected, converting name of NPC source to: " .. unitName)
                 end
             end
@@ -823,7 +1021,11 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     if Alerts[abilityId].noForcedNameOverride then
         if savedName ~= "" and savedName ~= nil then
             unitName = savedName
-            if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
+            if
+                LUIE.PlayerDisplayName == "@ArtOfShredPTS"
+                or LUIE.PlayerDisplayName == "@ArtOfShredLegacy"
+                or LUIE.PlayerDisplayName == "@HammerOfGlory"
+            then
                 d("noForcedNameOverride override detected for enemy, using default name: " .. unitName)
             end
         end
@@ -842,7 +1044,12 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
 
     local modifier = ""
     if Settings.toggles.modifierEnable then
-        if sourceUnitId ~= nil and sourceUnitId ~= 0 and not Alerts[abilityId].auradetect and not Alerts[abilityId].noDirect then
+        if
+            sourceUnitId ~= nil
+            and sourceUnitId ~= 0
+            and not Alerts[abilityId].auradetect
+            and not Alerts[abilityId].noDirect
+        then
             modifier = Settings.toggles.mitigationModifierOnYou
         end
         if Alerts[abilityId].spreadOut then
@@ -881,7 +1088,7 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     local hiddenDuration
     local postCast
 
-    if (Settings.toggles.showAlertMitigate) == true then
+    if Settings.toggles.showAlertMitigate == true then
         if Alerts[abilityId].block == true then
             if Alerts[abilityId].bs then
                 blockstagger = true
@@ -903,19 +1110,19 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
         end
     end
 
-    if Alerts[abilityId].unmit and (Settings.toggles.showAlertUnmit) == true then
+    if Alerts[abilityId].unmit and Settings.toggles.showAlertUnmit == true then
         unmit = true
     end
-    if Alerts[abilityId].power and (Settings.toggles.showAlertPower) == true then
+    if Alerts[abilityId].power and Settings.toggles.showAlertPower == true then
         power = true
     end
-    if Alerts[abilityId].destroy and (Settings.toggles.showAlertDestroy) == true then
+    if Alerts[abilityId].destroy and Settings.toggles.showAlertDestroy == true then
         destroy = true
     end
-    if Alerts[abilityId].summon and (Settings.toggles.showAlertSummon) == true then
+    if Alerts[abilityId].summon and Settings.toggles.showAlertSummon == true then
         summon = true
     end
-    if Alerts[abilityId].duration and not (notTheTarget) then
+    if Alerts[abilityId].duration and not notTheTarget then
         duration = Alerts[abilityId].duration
     end
     if Alerts[abilityId].hiddenDuration then
@@ -928,19 +1135,100 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     end
 
     if not (power == true or destroy == true or summon == true or unmit == true) then
-        AbilityAlerts.OnEvent(alertTypes.SHARED, abilityId, abilityName, abilityIcon, unitName, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, hiddenDuration, crowdControl, modifier, block, blockstagger, dodge, avoid, interrupt, shouldusecc)
-    elseif (power == true or destroy == true or summon == true or unmit == true) then
+        AbilityAlerts.OnEvent(
+            alertTypes.SHARED,
+            abilityId,
+            abilityName,
+            abilityIcon,
+            unitName,
+            sourceUnitId,
+            postCast,
+            alwaysShowInterrupt,
+            neverShowInterrupt,
+            effectOnlyInterrupt,
+            duration,
+            hiddenDuration,
+            crowdControl,
+            modifier,
+            block,
+            blockstagger,
+            dodge,
+            avoid,
+            interrupt,
+            shouldusecc
+        )
+    elseif power == true or destroy == true or summon == true or unmit == true then
         if unmit then
-            AbilityAlerts.OnEvent(alertTypes.UNMIT, abilityId, abilityName, abilityIcon, unitName, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, hiddenDuration, crowdControl, modifier)
+            AbilityAlerts.OnEvent(
+                alertTypes.UNMIT,
+                abilityId,
+                abilityName,
+                abilityIcon,
+                unitName,
+                sourceUnitId,
+                postCast,
+                alwaysShowInterrupt,
+                neverShowInterrupt,
+                effectOnlyInterrupt,
+                duration,
+                hiddenDuration,
+                crowdControl,
+                modifier
+            )
         end
         if power then
-            AbilityAlerts.OnEvent(alertTypes.POWER, abilityId, abilityName, abilityIcon, unitName, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, hiddenDuration, crowdControl, modifier)
+            AbilityAlerts.OnEvent(
+                alertTypes.POWER,
+                abilityId,
+                abilityName,
+                abilityIcon,
+                unitName,
+                sourceUnitId,
+                postCast,
+                alwaysShowInterrupt,
+                neverShowInterrupt,
+                effectOnlyInterrupt,
+                duration,
+                hiddenDuration,
+                crowdControl,
+                modifier
+            )
         end
         if destroy then
-            AbilityAlerts.OnEvent(alertTypes.DESTROY, abilityId, abilityName, abilityIcon, unitName, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, hiddenDuration, crowdControl, modifier)
+            AbilityAlerts.OnEvent(
+                alertTypes.DESTROY,
+                abilityId,
+                abilityName,
+                abilityIcon,
+                unitName,
+                sourceUnitId,
+                postCast,
+                alwaysShowInterrupt,
+                neverShowInterrupt,
+                effectOnlyInterrupt,
+                duration,
+                hiddenDuration,
+                crowdControl,
+                modifier
+            )
         end
         if summon then
-            AbilityAlerts.OnEvent(alertTypes.SUMMON, abilityId, abilityName, abilityIcon, unitName, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, hiddenDuration, crowdControl, modifier)
+            AbilityAlerts.OnEvent(
+                alertTypes.SUMMON,
+                abilityId,
+                abilityName,
+                abilityIcon,
+                unitName,
+                sourceUnitId,
+                postCast,
+                alwaysShowInterrupt,
+                neverShowInterrupt,
+                effectOnlyInterrupt,
+                duration,
+                hiddenDuration,
+                crowdControl,
+                modifier
+            )
         end
     end
 end
@@ -957,8 +1245,15 @@ local function CheckInterruptEvent(unitId, abilityId, resultType)
                 --d("EFFECT INTERRUPTED")
                 --d("Current Duration: " .. remain)
 
-                if (alert.data.sourceUnitId == unitId and (not alert.data.showDuration == false or alert.data.alwaysShowInterrupt)) and remain > 0 and (not alert.data.neverShowInterrupt or deathResults[resultType]) then
-                    alert.data = { }
+                if
+                    (
+                        alert.data.sourceUnitId == unitId
+                        and (not alert.data.showDuration == false or alert.data.alwaysShowInterrupt)
+                    )
+                    and remain > 0
+                    and (not alert.data.neverShowInterrupt or deathResults[resultType])
+                then
+                    alert.data = {}
                     alert.data.available = true
                     alert.data.id = ""
                     alert.data.textMitigation = ""
@@ -986,32 +1281,85 @@ local function CheckInterruptEvent(unitId, abilityId, resultType)
     end
 end
 
-function AbilityAlerts.AlertEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
+function AbilityAlerts.AlertEffectChanged(
+    eventCode,
+    changeType,
+    effectSlot,
+    effectName,
+    unitTag,
+    beginTime,
+    endTime,
+    stackCount,
+    iconName,
+    buffType,
+    effectType,
+    abilityType,
+    statusEffectType,
+    unitName,
+    unitId,
+    abilityId,
+    castByPlayer
+)
     -- Bail out if we're not in combat (reduce spam for nearby)
     if not IsUnitInCombat("player") then
         return
     end
-    if not Alerts[abilityId] then return end
+    if not Alerts[abilityId] then
+        return
+    end
 
     local Settings = CombatInfo.SV.alerts
 
-    if Settings.toggles.alertEnable and (Settings.toggles.mitigationAura or IsUnitInDungeon("player")) and Alerts[abilityId] and Alerts[abilityId].auradetect then
+    if
+        Settings.toggles.alertEnable
+        and (Settings.toggles.mitigationAura or IsUnitInDungeon("player"))
+        and Alerts[abilityId]
+        and Alerts[abilityId].auradetect
+    then
         if changeType == EFFECT_RESULT_FADED then
-            zo_callLater(function() CheckInterruptEvent(unitId, abilityId) end, 100)
+            zo_callLater(function()
+                CheckInterruptEvent(unitId, abilityId)
+            end, 100)
             return
         end
 
         -- Don't duplicate events if unitTag is player and in a group.
-        if Alerts[abilityId].noSelf and unitName == LUIE.PlayerNameRaw then return end
+        if Alerts[abilityId].noSelf and unitName == LUIE.PlayerNameRaw then
+            return
+        end
 
-        if changeType == EFFECT_RESULT_UPDATED and Alerts[abilityId].ignoreRefresh then return end
+        if changeType == EFFECT_RESULT_UPDATED and Alerts[abilityId].ignoreRefresh then
+            return
+        end
 
-        zo_callLater(function() AbilityAlerts.ProcessAlert(abilityId, unitName, unitId) end, 50)
+        zo_callLater(function()
+            AbilityAlerts.ProcessAlert(abilityId, unitName, unitId)
+        end, 50)
     end
 end
 
-function AbilityAlerts.OnCombatIn(eventCode, resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
-    if not Alerts[abilityId] then return end
+function AbilityAlerts.OnCombatIn(
+    eventCode,
+    resultType,
+    isError,
+    abilityName,
+    abilityGraphic,
+    abilityAction_slotType,
+    sourceName,
+    sourceType,
+    targetName,
+    targetType,
+    hitValue,
+    powerType,
+    damageType,
+    log,
+    sourceUnitId,
+    targetUnitId,
+    abilityId
+)
+    if not Alerts[abilityId] then
+        return
+    end
 
     local Settings = CombatInfo.SV.alerts
     abilityName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
@@ -1061,45 +1409,92 @@ function AbilityAlerts.OnCombatIn(eventCode, resultType, isError, abilityName, a
     -- NEW ALERTS
     if Settings.toggles.alertEnable then
         if sourceName ~= nil and sourceName ~= "" then
-
             -- Filter when only a certain event type should fire this
-            if Alerts[abilityId].result and resultType ~= Alerts[abilityId].result then return end
-            if Alerts[abilityId].eventdetect or Alerts[abilityId].auradetect then return end -- Don't create a duplicate warning if event/aura detection already handles this.
-            if Alerts[abilityId].noSelf and targetName == LUIE.PlayerNameRaw then return end -- Don't create alert for self in cases where this is true.
+            if Alerts[abilityId].result and resultType ~= Alerts[abilityId].result then
+                return
+            end
+            if Alerts[abilityId].eventdetect or Alerts[abilityId].auradetect then
+                return
+            end -- Don't create a duplicate warning if event/aura detection already handles this.
+            if Alerts[abilityId].noSelf and targetName == LUIE.PlayerNameRaw then
+                return
+            end -- Don't create alert for self in cases where this is true.
 
             -- Return if any results occur which we absolutely don't want to display alerts for & stop spam when enemy is out of line of sight, etc and trying to cast
-            if resultType == ACTION_RESULT_EFFECT_FADED
-               or resultType == ACTION_RESULT_ABILITY_ON_COOLDOWN
-               or resultType == ACTION_RESULT_BAD_TARGET
-               or resultType == ACTION_RESULT_BUSY
-               or resultType == ACTION_RESULT_FAILED
-               or resultType == ACTION_RESULT_INVALID
-               or resultType == ACTION_RESULT_CANT_SEE_TARGET
-               or resultType == ACTION_RESULT_TARGET_DEAD
-               or resultType == ACTION_RESULT_TARGET_OUT_OF_RANGE
-               or resultType == ACTION_RESULT_TARGET_TOO_CLOSE
-               or resultType == ACTION_RESULT_TARGET_NOT_IN_VIEW
+            if
+                resultType == ACTION_RESULT_EFFECT_FADED
+                or resultType == ACTION_RESULT_ABILITY_ON_COOLDOWN
+                or resultType == ACTION_RESULT_BAD_TARGET
+                or resultType == ACTION_RESULT_BUSY
+                or resultType == ACTION_RESULT_FAILED
+                or resultType == ACTION_RESULT_INVALID
+                or resultType == ACTION_RESULT_CANT_SEE_TARGET
+                or resultType == ACTION_RESULT_TARGET_DEAD
+                or resultType == ACTION_RESULT_TARGET_OUT_OF_RANGE
+                or resultType == ACTION_RESULT_TARGET_TOO_CLOSE
+                or resultType == ACTION_RESULT_TARGET_NOT_IN_VIEW
             then
                 refireDelay[abilityId] = true
-                zo_callLater(function() refireDelay[abilityId] = nil end, 1000) --buffer by X time
+                zo_callLater(function()
+                    refireDelay[abilityId] = nil
+                end, 1000) --buffer by X time
                 return
             end
 
-            if Alerts[abilityId].block or Alerts[abilityId].dodge or Alerts[abilityId].avoid or Alerts[abilityId].interrupt or Alerts[abilityId].shouldusecc or Alerts[abilityId].unmit or Alerts[abilityId].power or Alerts[abilityId].destroy or Alerts[abilityId].summon then
+            if
+                Alerts[abilityId].block
+                or Alerts[abilityId].dodge
+                or Alerts[abilityId].avoid
+                or Alerts[abilityId].interrupt
+                or Alerts[abilityId].shouldusecc
+                or Alerts[abilityId].unmit
+                or Alerts[abilityId].power
+                or Alerts[abilityId].destroy
+                or Alerts[abilityId].summon
+            then
                 -- Filter by priority
-                if (Settings.toggles.mitigationDungeon and not IsUnitInDungeon("player")) or not Settings.toggles.mitigationDungeon then
-                    if Alerts[abilityId].priority == 3 and not Settings.toggles.mitigationRank3 then return end
-                    if Alerts[abilityId].priority == 2 and not Settings.toggles.mitigationRank2 then return end
-                    if Alerts[abilityId].priority == 1 and not Settings.toggles.mitigationRank1 then return end
+                if
+                    (Settings.toggles.mitigationDungeon and not IsUnitInDungeon("player"))
+                    or not Settings.toggles.mitigationDungeon
+                then
+                    if Alerts[abilityId].priority == 3 and not Settings.toggles.mitigationRank3 then
+                        return
+                    end
+                    if Alerts[abilityId].priority == 2 and not Settings.toggles.mitigationRank2 then
+                        return
+                    end
+                    if Alerts[abilityId].priority == 1 and not Settings.toggles.mitigationRank1 then
+                        return
+                    end
                 end
 
-                zo_callLater(function() AbilityAlerts.ProcessAlert(abilityId, sourceName, sourceUnitId) end, 50)
+                zo_callLater(function()
+                    AbilityAlerts.ProcessAlert(abilityId, sourceName, sourceUnitId)
+                end, 50)
             end
         end
     end
 end
 
-function AbilityAlerts.OnCombatAlert(eventCode, resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
+function AbilityAlerts.OnCombatAlert(
+    eventCode,
+    resultType,
+    isError,
+    abilityName,
+    abilityGraphic,
+    abilityAction_slotType,
+    sourceName,
+    sourceType,
+    targetName,
+    targetType,
+    hitValue,
+    powerType,
+    damageType,
+    log,
+    sourceUnitId,
+    targetUnitId,
+    abilityId
+)
     -- Bail out if we're not in combat (reduce spam for nearby)
     if not IsUnitInCombat("player") then
         return
@@ -1108,52 +1503,84 @@ function AbilityAlerts.OnCombatAlert(eventCode, resultType, isError, abilityName
     local Settings = CombatInfo.SV.alerts
 
     -- NEW ALERTS
-    if Settings.toggles.alertEnable and (Settings.toggles.mitigationAura or sourceUnitId ~= 0 or IsUnitInDungeon("player")) then
+    if
+        Settings.toggles.alertEnable
+        and (Settings.toggles.mitigationAura or sourceUnitId ~= 0 or IsUnitInDungeon("player"))
+    then
         if not refireDelay[abilityId] then
-
             -- Filter when only a certain event type should fire this
-            if Alerts[abilityId].result and resultType ~= Alerts[abilityId].result then return end
-            if Alerts[abilityId].auradetect then return end -- Don't create a duplicate warning if aura detection already handles this.
-            if Alerts[abilityId].noSelf and targetName == LUIE.PlayerNameRaw then return end -- Don't create alert for self in cases where this is true.
+            if Alerts[abilityId].result and resultType ~= Alerts[abilityId].result then
+                return
+            end
+            if Alerts[abilityId].auradetect then
+                return
+            end -- Don't create a duplicate warning if aura detection already handles this.
+            if Alerts[abilityId].noSelf and targetName == LUIE.PlayerNameRaw then
+                return
+            end -- Don't create alert for self in cases where this is true.
 
             -- Return if any results occur which we absolutely don't want to display alerts for & stop spam when enemy is out of line of sight, etc and trying to cast
-            if resultType == ACTION_RESULT_EFFECT_FADED
-               or resultType == ACTION_RESULT_ABILITY_ON_COOLDOWN
-               or resultType == ACTION_RESULT_BAD_TARGET
-               or resultType == ACTION_RESULT_BUSY
-               or resultType == ACTION_RESULT_FAILED
-               or resultType == ACTION_RESULT_INVALID
-               or resultType == ACTION_RESULT_CANT_SEE_TARGET
-               or resultType == ACTION_RESULT_TARGET_DEAD
-               or resultType == ACTION_RESULT_TARGET_OUT_OF_RANGE
-               or resultType == ACTION_RESULT_TARGET_TOO_CLOSE
-               or resultType == ACTION_RESULT_TARGET_NOT_IN_VIEW
+            if
+                resultType == ACTION_RESULT_EFFECT_FADED
+                or resultType == ACTION_RESULT_ABILITY_ON_COOLDOWN
+                or resultType == ACTION_RESULT_BAD_TARGET
+                or resultType == ACTION_RESULT_BUSY
+                or resultType == ACTION_RESULT_FAILED
+                or resultType == ACTION_RESULT_INVALID
+                or resultType == ACTION_RESULT_CANT_SEE_TARGET
+                or resultType == ACTION_RESULT_TARGET_DEAD
+                or resultType == ACTION_RESULT_TARGET_OUT_OF_RANGE
+                or resultType == ACTION_RESULT_TARGET_TOO_CLOSE
+                or resultType == ACTION_RESULT_TARGET_NOT_IN_VIEW
             then
                 refireDelay[abilityId] = true
-                zo_callLater(function() refireDelay[abilityId] = nil end, 1000) --buffer by X time
+                zo_callLater(function()
+                    refireDelay[abilityId] = nil
+                end, 1000) --buffer by X time
                 return
             end
 
-            if Alerts[abilityId].block or Alerts[abilityId].dodge or Alerts[abilityId].avoid or Alerts[abilityId].interrupt or Alerts[abilityId].shouldusecc or Alerts[abilityId].unmit or Alerts[abilityId].power or Alerts[abilityId].destroy or Alerts[abilityId].summon then
+            if
+                Alerts[abilityId].block
+                or Alerts[abilityId].dodge
+                or Alerts[abilityId].avoid
+                or Alerts[abilityId].interrupt
+                or Alerts[abilityId].shouldusecc
+                or Alerts[abilityId].unmit
+                or Alerts[abilityId].power
+                or Alerts[abilityId].destroy
+                or Alerts[abilityId].summon
+            then
                 -- Filter by priority
-                if (Settings.toggles.mitigationDungeon and not IsUnitInDungeon("player")) or not Settings.toggles.mitigationDungeon then
-                    if Alerts[abilityId].priority == 3 and not Settings.toggles.mitigationRank3 then return end
-                    if Alerts[abilityId].priority == 2 and not Settings.toggles.mitigationRank2 then return end
-                    if Alerts[abilityId].priority == 1 and not Settings.toggles.mitigationRank1 then return end
+                if
+                    (Settings.toggles.mitigationDungeon and not IsUnitInDungeon("player"))
+                    or not Settings.toggles.mitigationDungeon
+                then
+                    if Alerts[abilityId].priority == 3 and not Settings.toggles.mitigationRank3 then
+                        return
+                    end
+                    if Alerts[abilityId].priority == 2 and not Settings.toggles.mitigationRank2 then
+                        return
+                    end
+                    if Alerts[abilityId].priority == 1 and not Settings.toggles.mitigationRank1 then
+                        return
+                    end
                 end
 
-                zo_callLater(function() AbilityAlerts.ProcessAlert(abilityId, sourceName, sourceUnitId) end, 50)
+                zo_callLater(function()
+                    AbilityAlerts.ProcessAlert(abilityId, sourceName, sourceUnitId)
+                end, 50)
             end
         end
     end
 end
 
 function AbilityAlerts.FormatAlertString(inputFormat, params)
-    return string.gsub(inputFormat, '%%.', function(x)
-        if (x == '%n') then
-            return params.source or ''
-        elseif (x == '%t') then
-            return params.ability or ''
+    return string.gsub(inputFormat, "%%.", function(x)
+        if x == "%n" then
+            return params.source or ""
+        elseif x == "%t" then
+            return params.ability or ""
         else
             return x
         end
@@ -1161,7 +1588,28 @@ function AbilityAlerts.FormatAlertString(inputFormat, params)
 end
 
 -- VIEWER
-function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, sourceName, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, hiddenDuration, crowdControl, modifier, block, blockstagger, dodge, avoid, interrupt, shouldusecc)
+function AbilityAlerts.OnEvent(
+    alertType,
+    abilityId,
+    abilityName,
+    abilityIcon,
+    sourceName,
+    sourceUnitId,
+    postCast,
+    alwaysShowInterrupt,
+    neverShowInterrupt,
+    effectOnlyInterrupt,
+    duration,
+    hiddenDuration,
+    crowdControl,
+    modifier,
+    block,
+    blockstagger,
+    dodge,
+    avoid,
+    interrupt,
+    shouldusecc
+)
     local Settings = CombatInfo.SV.alerts
 
     local labelColor = Settings.colors.alertShared
@@ -1171,7 +1619,7 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
     local textModifier
     local textMitigation
 
-    if (alertType == alertTypes.SHARED) then
+    if alertType == alertTypes.SHARED then
         local spacer = "-"
         local stringBlock
         local stringDodge
@@ -1215,7 +1663,8 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
                 stringInterrupt = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, Settings.formats.alertInterrupt, spacer)
             elseif shouldusecc then
                 local color = AbilityAlerts.AlertColors.alertColorInterrupt
-                stringInterrupt = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, Settings.formats.alertShouldUseCC, spacer)
+                stringInterrupt =
+                    zo_strformat("|c<<1>><<2>>|r <<3>> ", color, Settings.formats.alertShouldUseCC, spacer)
             else
                 stringInterrupt = ""
             end
@@ -1229,7 +1678,9 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
         if modifier ~= "" then
             modifier = (" " .. modifier)
         end
-        prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and Settings.toggles.mitigationEnemyName or ""
+        prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline")
+                and Settings.toggles.mitigationEnemyName
+            or ""
         if prefix ~= "" then
             name = (" " .. name)
         end
@@ -1237,15 +1688,26 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
         textPrefix = AbilityAlerts.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
         textName = AbilityAlerts.FormatAlertString(name, { source = sourceName, ability = abilityName })
         textModifier = modifier
-        textMitigation = Settings.toggles.showMitigation and zo_strformat(" <<1>> <<2>><<3>><<4>><<5>>", spacer, stringBlock, stringDodge, stringAvoid, stringInterrupt) or ""
+        textMitigation = Settings.toggles.showMitigation
+                and zo_strformat(
+                    " <<1>> <<2>><<3>><<4>><<5>>",
+                    spacer,
+                    stringBlock,
+                    stringDodge,
+                    stringAvoid,
+                    stringInterrupt
+                )
+            or ""
     -- UNMIT
-    elseif (alertType == alertTypes.UNMIT) then
+    elseif alertType == alertTypes.UNMIT then
         local name = Settings.toggles.mitigationAbilityName
         if modifier ~= "" then
             modifier = (" " .. modifier)
         end
         local color = AbilityAlerts.AlertColors.alertColorUnmit
-        prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and Settings.toggles.mitigationEnemyName or ""
+        prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline")
+                and Settings.toggles.mitigationEnemyName
+            or ""
         if prefix ~= "" then
             name = (" " .. name)
         end
@@ -1255,21 +1717,27 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
         textModifier = modifier
         textMitigation = zo_strformat("|c<<1>><<2>>|r", color, Settings.formats.alertUnmit)
     -- POWER
-    elseif (alertType == alertTypes.POWER) then
+    elseif alertType == alertTypes.POWER then
         local color = AbilityAlerts.AlertColors.alertColorPower
-        prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and Settings.toggles.mitigationPowerPrefixN2 or Settings.toggles.mitigationPowerPrefix2
+        prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline")
+                and Settings.toggles.mitigationPowerPrefixN2
+            or Settings.toggles.mitigationPowerPrefix2
         textName = AbilityAlerts.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
         textMitigation = zo_strformat("|c<<1>><<2>>|r", color, Settings.formats.alertPower)
     -- DESTROY
-    elseif (alertType == alertTypes.DESTROY) then
+    elseif alertType == alertTypes.DESTROY then
         local color = AbilityAlerts.AlertColors.alertColorDestroy
-        prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and Settings.toggles.mitigationDestroyPrefixN2 or Settings.toggles.mitigationDestroyPrefix2
+        prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline")
+                and Settings.toggles.mitigationDestroyPrefixN2
+            or Settings.toggles.mitigationDestroyPrefix2
         textName = AbilityAlerts.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
         textMitigation = zo_strformat("|c<<1>><<2>>|r", color, Settings.formats.alertDestroy)
     -- SUMMON
-    elseif (alertType == alertTypes.SUMMON) then
+    elseif alertType == alertTypes.SUMMON then
         local color = AbilityAlerts.AlertColors.alertColorSummon
-        prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and Settings.toggles.mitigationSummonPrefixN2 or Settings.toggles.mitigationSummonPrefix2
+        prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline")
+                and Settings.toggles.mitigationSummonPrefixN2
+            or Settings.toggles.mitigationSummonPrefix2
         textName = AbilityAlerts.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
         textMitigation = zo_strformat("|c<<1>><<2>>|r", color, Settings.formats.alertSummon)
     end
@@ -1285,7 +1753,23 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
     local currentTime = GetGameTimeMilliseconds()
     local endTime = currentTime + duration
 
-    AbilityAlerts.SetupSingleAlertFrame(abilityId, textPrefix, textModifier, textName, textMitigation, abilityIcon, currentTime, endTime, showDuration, crowdControl, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt)
+    AbilityAlerts.SetupSingleAlertFrame(
+        abilityId,
+        textPrefix,
+        textModifier,
+        textName,
+        textMitigation,
+        abilityIcon,
+        currentTime,
+        endTime,
+        showDuration,
+        crowdControl,
+        sourceUnitId,
+        postCast,
+        alwaysShowInterrupt,
+        neverShowInterrupt,
+        effectOnlyInterrupt
+    )
     AbilityAlerts.PlayAlertSound(abilityId, alertType)
 end
 
@@ -1302,8 +1786,16 @@ function AbilityAlerts.ApplyFontAlert()
         alertFontName = "$(MEDIUM_FONT)"
     end
 
-    local alertFontStyle = (CombatInfo.SV.alerts.toggles.alertFontStyle and CombatInfo.SV.alerts.toggles.alertFontStyle ~= "") and CombatInfo.SV.alerts.toggles.alertFontStyle or "soft-shadow-thin"
-    local alertFontSize = (CombatInfo.SV.alerts.toggles.alertFontSize and CombatInfo.SV.alerts.toggles.alertFontSize > 0) and CombatInfo.SV.alerts.toggles.alertFontSize or 16
+    local alertFontStyle = (
+        CombatInfo.SV.alerts.toggles.alertFontStyle and CombatInfo.SV.alerts.toggles.alertFontStyle ~= ""
+    )
+            and CombatInfo.SV.alerts.toggles.alertFontStyle
+        or "soft-shadow-thin"
+    local alertFontSize = (
+        CombatInfo.SV.alerts.toggles.alertFontSize and CombatInfo.SV.alerts.toggles.alertFontSize > 0
+    )
+            and CombatInfo.SV.alerts.toggles.alertFontSize
+        or 16
 
     g_alertFont = alertFontName .. "|" .. alertFontSize .. "|" .. alertFontStyle
 end

@@ -1,7 +1,8 @@
 --[[
     LuiExtended
     License: The MIT License (MIT)
---]] -- Data for all Zones in Western Skyrim / Blackreach & Tutorial/Quest areas, delves, etc
+--]]
+-- Data for all Zones in Western Skyrim / Blackreach & Tutorial/Quest areas, delves, etc
 local Zonenames = LUIE.Data.ZoneNames
 local Unitnames = LUIE.Data.Unitnames
 
@@ -12,9 +13,7 @@ LUIE.Data.Zones[1160] = {
 
         [70366] = { -- Slam (Great Bear)
             -- QUESTS
-            [Zonenames.Zone_Deepwood_Barrow] = Unitnames.NPC_Great_Bear -- Deepwood Vale (Greymoor Tutorial)
-        }
-
-    }
-
+            [Zonenames.Zone_Deepwood_Barrow] = Unitnames.NPC_Great_Bear, -- Deepwood Vale (Greymoor Tutorial)
+        },
+    },
 }

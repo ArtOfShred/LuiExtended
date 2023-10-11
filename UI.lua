@@ -14,18 +14,21 @@ local windowManager = WINDOW_MANAGER
 function UI.Chain(object)
     -- Setup the metatable
     local T = {}
-    setmetatable(T , { __index = function( self , func)
+    setmetatable(T, {
+        __index = function(self, func)
+            -- Know when to stop chaining
+            if func == "__END" then
+                return object
+            end
 
-        -- Know when to stop chaining
-        if func == "__END" then return object end
-
-        -- Otherwise, add the method to the parent object
-        return function(self , ...)
-            assert(object[func] , func .. " missing in object")
-            object[func](object , ...)
-            return self
-        end
-    end })
+            -- Otherwise, add the method to the parent object
+            return function(self, ...)
+                assert(object[func], func .. " missing in object")
+                object[func](object, ...)
+                return self
+            end
+        end,
+    })
 
     -- Return the metatable
     return T
@@ -52,7 +55,9 @@ end
 
 -- Creates plain CT_CONTROL UI control element
 function UI.Control(parent, anchors, dims, hidden, name)
-    if not parent then return end
+    if not parent then
+        return
+    end
 
     local name = name or nil
     local c = windowManager:CreateControl(name, parent, CT_CONTROL)
@@ -75,7 +80,9 @@ end
 
 -- Creates CT_TEXTURE UI control element
 function UI.Texture(parent, anchors, dims, texture, drawlayer, hidden)
-    if not parent then return end
+    if not parent then
+        return
+    end
 
     local t = windowManager:CreateControl(nil, parent, CT_TEXTURE)
     t:SetHidden(hidden)
@@ -105,10 +112,12 @@ end
 
 -- Creates CT_BACKDROP UI control element
 function UI.Backdrop(parent, anchors, dims, center, edge, hidden)
-    if not parent then return end
+    if not parent then
+        return
+    end
 
-    local center = (center ~= nil and #center == 4) and center or { 0,0,0,0.4 }
-    local edge = (edge ~= nil and #edge == 4) and edge or { 0,0,0,0.6 }
+    local center = (center ~= nil and #center == 4) and center or { 0, 0, 0, 0.4 }
+    local edge = (edge ~= nil and #edge == 4) and edge or { 0, 0, 0, 0.6 }
 
     local bg = windowManager:CreateControl(nil, parent, CT_BACKDROP)
 
@@ -135,9 +144,11 @@ end
 
 -- Creates CT_BACKDROP UI control element with Chat Window background style
 function UI.ChatBackdrop(parent, anchors, dims, color, edge_size, hidden)
-    if not parent then return end
+    if not parent then
+        return
+    end
 
-    local color = (color ~= nil and #color == 4) and color or { 0,0,0,1 }
+    local color = (color ~= nil and #color == 4) and color or { 0, 0, 0, 1 }
     local edge_size = (edge_size ~= nil and edge_size > 0) and edge_size or 16
 
     local bg = windowManager:CreateControl(nil, parent, CT_BACKDROP)
@@ -167,7 +178,9 @@ end
 
 -- Creates CT_STATUSBAR UI control element
 function UI.StatusBar(parent, anchors, dims, color, hidden)
-    if not parent then return end
+    if not parent then
+        return
+    end
 
     local sb = windowManager:CreateControl(nil, parent, CT_STATUSBAR)
     sb:SetHidden(hidden)
@@ -193,14 +206,16 @@ end
 
 -- Creates CT_STATUSBAR UI control element
 function UI.Label(parent, anchors, dims, align, font, text, hidden, name)
-    if not parent then return end
+    if not parent then
+        return
+    end
 
     local align = (align ~= nil and #align == 2) and align or { TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER }
 
     local name = name or nil
     local label = windowManager:CreateControl(name, parent, CT_LABEL)
 
-    label:SetFont(font or 'ZoFontGame')
+    label:SetFont(font or "ZoFontGame")
     label:SetHorizontalAlignment(align[1])
     label:SetVerticalAlignment(align[2])
     label:SetWrapMode(TEXT_WRAP_MODE_ELLIPSIS)
@@ -218,7 +233,9 @@ function UI.Label(parent, anchors, dims, align, font, text, hidden, name)
         label:SetDimensions(dims[1], dims[2])
     end
 
-    if text then label:SetText(text) end
+    if text then
+        label:SetText(text)
+    end
 
     return label
 end

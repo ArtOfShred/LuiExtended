@@ -2,7 +2,7 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
-
+local LUIE = LUIE
 -- CombatInfo namespace
 LUIE.CombatInfo = {}
 local CombatInfo = LUIE.CombatInfo
@@ -128,7 +128,6 @@ CombatInfo.Defaults = {
             sound_summonEnable = false,
             sound_destroyEnable = true,
             sound_healEnable = false,
-
         },
         colors = {
             alertShared = { 1, 1, 1, 1 },
@@ -180,7 +179,8 @@ CombatInfo.Defaults = {
             soundPower                  = "Champion Respec Accept",
             soundSummon                 = "Duel Invite Received",
             soundDestroy                = "Duel Invite Received",
-            ]]--
+            ]]
+            --
             sound_st = "Champion Respec Accept",
             sound_st_cc = "Champion Points Committed",
             sound_aoe = "Champion Respec Accept",
@@ -320,7 +320,7 @@ local uiQuickSlot = {
 
 -- Ultimate slot
 local uiUltimate = {
-    colour = { 0.941, 0.973, .957 },
+    colour = { 0.941, 0.973, 0.957 },
     pctColours = {
         [1] = { pct = 100, colour = { 0.878, 0.941, 0.251 } },
         [2] = { pct = 80, colour = { 0.941, 0.565, 0.251 } },
@@ -364,7 +364,6 @@ local isStackBaseAbility = {
 local slotsUpdated = {}
 
 local function OnSwapAnimationHalfDone(animation, button, isBackBarSlot)
-
     for i = BAR_INDEX_START, BAR_INDEX_END do
         if not slotsUpdated[i] then
             local targetButton = g_backbarButtons[i + BACKBAR_INDEX_OFFSET]
@@ -395,13 +394,21 @@ local function SetupSwapAnimation(button)
 end
 
 local function FormatDurationSeconds(remain)
-    return string.format((CombatInfo.SV.BarMillis and ((remain < CombatInfo.SV.BarMillisThreshold * 1000) or CombatInfo.SV.BarMillisAboveTen)) and "%.1f" or "%.1d", remain / 1000)
+    return string.format(
+        (
+            CombatInfo.SV.BarMillis
+            and ((remain < CombatInfo.SV.BarMillisThreshold * 1000) or CombatInfo.SV.BarMillisAboveTen)
+        )
+                and "%.1f"
+            or "%.1d",
+        remain / 1000
+    )
 end
 
 -- Module initialization
 function CombatInfo.Initialize(enabled)
     -- Load settings
-    local isCharacterSpecific = LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV
+    local isCharacterSpecific = LUIESV.Default[GetDisplayName()]["$AccountWide"].CharacterSpecificSV
     if isCharacterSpecific then
         CombatInfo.SV = ZO_SavedVars:New(LUIE.SVName, LUIE.SVVer, "CombatInfo", CombatInfo.Defaults)
     else
@@ -416,7 +423,7 @@ function CombatInfo.Initialize(enabled)
 
     -- TODO: TEMP: Disabled due to issues
     -- if CombatInfo.SV.BarShowLabel == true then
-        -- CombatInfo.SV.BarShowLabel = false
+    -- CombatInfo.SV.BarShowLabel = false
     -- end
 
     CombatInfo.ApplyFont()
@@ -434,7 +441,15 @@ function CombatInfo.Initialize(enabled)
     CombatInfo.ResetPotionTimerLabel() -- Set the label position
 
     -- Create Ultimate overlay labels
-    uiUltimate.LabelVal = UI.Label(ActionButton8, { BOTTOM, TOP, 0, -3 }, nil, { 1, 2 }, "$(BOLD_FONT)|16|soft-shadow-thick", nil, true)
+    uiUltimate.LabelVal = UI.Label(
+        ActionButton8,
+        { BOTTOM, TOP, 0, -3 },
+        nil,
+        { 1, 2 },
+        "$(BOLD_FONT)|16|soft-shadow-thick",
+        nil,
+        true
+    )
     uiUltimate.LabelPct = UI.Label(ActionButton8, nil, nil, nil, g_ultimateFont, nil, true)
     local actionButton = ZO_ActionBar_GetButton(8)
     uiUltimate.LabelPct:SetAnchor(TOPLEFT, actionButton.slot)
@@ -442,14 +457,21 @@ function CombatInfo.Initialize(enabled)
 
     uiUltimate.LabelPct:SetColor(unpack(uiUltimate.colour))
     -- And buff texture
-    uiUltimate.Texture = UI.Texture(ActionButton8, { CENTER, CENTER }, { 160, 160 }, "/esoui/art/crafting/white_burst.dds", DL_BACKGROUND, true)
+    uiUltimate.Texture = UI.Texture(
+        ActionButton8,
+        { CENTER, CENTER },
+        { 160, 160 },
+        "/esoui/art/crafting/white_burst.dds",
+        DL_BACKGROUND,
+        true
+    )
 
     -- Create a top level window for backbar butons
     local tlw = windowManager:CreateControl("LUIE_Backbar", ACTION_BAR, CT_CONTROL)
     tlw:SetParent(ACTION_BAR)
 
     for i = BAR_INDEX_START + BACKBAR_INDEX_OFFSET, BACKBAR_INDEX_END + BACKBAR_INDEX_OFFSET do
-        local button = ActionButton:New(i, ACTION_BUTTON_TYPE_VISIBLE, tlw, 'ZO_ActionButton')
+        local button = ActionButton:New(i, ACTION_BUTTON_TYPE_VISIBLE, tlw, "ZO_ActionButton")
         SetupSwapAnimation(button)
         button:SetupBounceAnimation()
         g_backbarButtons[i] = button
@@ -481,10 +503,10 @@ function CombatInfo.Initialize(enabled)
     CombatInfo.CrowdControlTracker.Initialize()
 
     -- Variable adjustment if needed
-    if not LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVarsCI then
-        LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVarsCI = 0
+    if not LUIESV.Default[GetDisplayName()]["$AccountWide"].AdjustVarsCI then
+        LUIESV.Default[GetDisplayName()]["$AccountWide"].AdjustVarsCI = 0
     end
-    if (LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVarsCI < 2) then
+    if LUIESV.Default[GetDisplayName()]["$AccountWide"].AdjustVarsCI < 2 then
         -- Set ability alert default colors
         CombatInfo.SV.alerts.colors.stunColor = CombatInfo.Defaults.alerts.colors.stunColor
         CombatInfo.SV.alerts.colors.knockbackColor = CombatInfo.Defaults.alerts.colors.knockbackColor
@@ -509,19 +531,20 @@ function CombatInfo.Initialize(enabled)
         CombatInfo.SV.cct.colors[ACTION_RESULT_IMMUNE] = CombatInfo.Defaults.cct.colors[ACTION_RESULT_IMMUNE]
         CombatInfo.SV.cct.colors[ACTION_RESULT_DODGED] = CombatInfo.Defaults.cct.colors[ACTION_RESULT_DODGED]
         CombatInfo.SV.cct.colors[ACTION_RESULT_BLOCKED] = CombatInfo.Defaults.cct.colors[ACTION_RESULT_BLOCKED]
-        CombatInfo.SV.cct.colors[ACTION_RESULT_BLOCKED_DAMAGE] = CombatInfo.Defaults.cct.colors[ACTION_RESULT_BLOCKED_DAMAGE]
+        CombatInfo.SV.cct.colors[ACTION_RESULT_BLOCKED_DAMAGE] =
+            CombatInfo.Defaults.cct.colors[ACTION_RESULT_BLOCKED_DAMAGE]
         CombatInfo.SV.cct.colors[ACTION_RESULT_AREA_EFFECT] = CombatInfo.Defaults.cct.colors[ACTION_RESULT_AREA_EFFECT]
         CombatInfo.SV.cct.colors.unbreakable = CombatInfo.Defaults.cct.colors.unbreakable
     end
     -- Increment so this doesn't occur again.
-    LUIESV.Default[GetDisplayName()]['$AccountWide'].AdjustVarsCI = 2
-
+    LUIESV.Default[GetDisplayName()]["$AccountWide"].AdjustVarsCI = 2
 end
 
 -- Called on initialization and on full update to swap icons on backbar
 function CombatInfo.SetupBackBarIcons(button, flip)
     -- Setup icons for backbar
-    local hotbarCategory = g_hotbarCategory == HOTBAR_CATEGORY_BACKUP and HOTBAR_CATEGORY_PRIMARY or HOTBAR_CATEGORY_BACKUP
+    local hotbarCategory = g_hotbarCategory == HOTBAR_CATEGORY_BACKUP and HOTBAR_CATEGORY_PRIMARY
+        or HOTBAR_CATEGORY_BACKUP
     local slotNum = button.slot.slotNum
     local slotId = GetSlotBoundId(slotNum - BACKBAR_INDEX_OFFSET, hotbarCategory)
 
@@ -534,7 +557,7 @@ function CombatInfo.SetupBackBarIcons(button, flip)
         [20824] = 20816, -- Power Lash --> Flame Lash
         [35445] = 35441, -- Shadow Image Teleport --> Shadow Image
         [126659] = 38910, -- Flying Blade --> Flying Blade
-        [130291] = 24165 -- Bound Armaments --> Bound Armaments
+        [130291] = 24165, -- Bound Armaments --> Bound Armaments
     }
 
     if specialCases[slotId] then
@@ -574,7 +597,6 @@ function CombatInfo.OnActiveWeaponPairChanged()
 end
 
 function CombatInfo.HookGCD()
-
     -- Hook to update GCD support
     ActionButton.UpdateUsable = function(self)
         local slotnum = self:GetSlot()
@@ -586,7 +608,7 @@ function CombatInfo.HookGCD()
         local usable = false
         if not self.useFailure and not isShowingCooldown then
             usable = true
-        elseif (isKeyboardUltimateSlot and self.costFailureOnly and not isShowingCooldown) then
+        elseif isKeyboardUltimateSlot and self.costFailureOnly and not isShowingCooldown then
             usable = true
             -- Fix to grey out potions
         elseif IsSlotItemConsumable(slotnum, hotbarCategory) and duration <= 1000 and not self.useFailure then
@@ -609,8 +631,11 @@ function CombatInfo.HookGCD()
         local remain, duration, global, globalSlotType = GetSlotCooldownInfo(slotnum, hotbarCategory)
         local isInCooldown = duration > 0
         local slotType = GetSlotType(slotnum, hotbarCategory)
-        local showGlobalCooldownForCollectible = global and slotType == ACTION_TYPE_COLLECTIBLE and globalSlotType == ACTION_TYPE_COLLECTIBLE
-        local showCooldown = isInCooldown and (CombatInfo.SV.GlobalShowGCD or not global or showGlobalCooldownForCollectible)
+        local showGlobalCooldownForCollectible = global
+            and slotType == ACTION_TYPE_COLLECTIBLE
+            and globalSlotType == ACTION_TYPE_COLLECTIBLE
+        local showCooldown = isInCooldown
+            and (CombatInfo.SV.GlobalShowGCD or not global or showGlobalCooldownForCollectible)
         local updateChromaQuickslot = slotType ~= ACTION_TYPE_ABILITY and ZO_RZCHROMA_EFFECTS
         local NO_LEADING_EDGE = false
         self.cooldown:SetHidden(not showCooldown)
@@ -618,7 +643,13 @@ function CombatInfo.HookGCD()
         if showCooldown then
             -- For items with a long CD we need to be sure not to hide the countdown radial timer, so if the duration is the 1 sec GCD, then we don't turn off the cooldown animation.
             if not IsSlotItemConsumable(slotnum, hotbarCategory) or duration > 1000 or CombatInfo.SV.GlobalPotion then
-                self.cooldown:StartCooldown(remain, duration, CooldownMethod[CombatInfo.SV.GlobalMethod], nil, NO_LEADING_EDGE)
+                self.cooldown:StartCooldown(
+                    remain,
+                    duration,
+                    CooldownMethod[CombatInfo.SV.GlobalMethod],
+                    nil,
+                    NO_LEADING_EDGE
+                )
                 if self.cooldownCompleteAnim.animation then
                     self.cooldownCompleteAnim.animation:GetTimeline():PlayInstantlyToStart()
                 end
@@ -633,7 +664,9 @@ function CombatInfo.HookGCD()
                     self.cooldown:SetHidden(false)
                 end
 
-                self.slot:SetHandler("OnUpdate", function() self:RefreshCooldown() end)
+                self.slot:SetHandler("OnUpdate", function()
+                    self:RefreshCooldown()
+                end)
                 if updateChromaQuickslot then
                     ZO_RZCHROMA_EFFECTS:RemoveKeybindActionEffect("ACTION_BUTTON_9")
                 end
@@ -642,8 +675,13 @@ function CombatInfo.HookGCD()
             if CombatInfo.SV.GlobalFlash then
                 if self.showingCooldown then
                     -- Stop flash from appearing on potion/ultimate if toggled off.
-                    if not IsSlotItemConsumable(slotnum, hotbarCategory) or duration > 1000 or CombatInfo.SV.GlobalPotion then
-                        self.cooldownCompleteAnim.animation = self.cooldownCompleteAnim.animation or CreateSimpleAnimation(ANIMATION_TEXTURE, self.cooldownCompleteAnim)
+                    if
+                        not IsSlotItemConsumable(slotnum, hotbarCategory)
+                        or duration > 1000
+                        or CombatInfo.SV.GlobalPotion
+                    then
+                        self.cooldownCompleteAnim.animation = self.cooldownCompleteAnim.animation
+                            or CreateSimpleAnimation(ANIMATION_TEXTURE, self.cooldownCompleteAnim)
                         local anim = self.cooldownCompleteAnim.animation
 
                         self.cooldownCompleteAnim:SetHidden(false)
@@ -755,7 +793,14 @@ function CombatInfo.UpdateBarHighlightTables()
             local eventName = (moduleName .. "CombatEventBar" .. counter)
             eventManager:RegisterForEvent(eventName, EVENT_COMBAT_EVENT, CombatInfo.OnCombatEventBar)
             -- Register filter for specific abilityId's in table only, and filter for source = player, no errors
-            eventManager:AddFilterForEvent(eventName, EVENT_COMBAT_EVENT, REGISTER_FILTER_ABILITY_ID, abilityId, REGISTER_FILTER_IS_ERROR, false)
+            eventManager:AddFilterForEvent(
+                eventName,
+                EVENT_COMBAT_EVENT,
+                REGISTER_FILTER_ABILITY_ID,
+                abilityId,
+                REGISTER_FILTER_IS_ERROR,
+                false
+            )
         end
     end
 end
@@ -774,15 +819,47 @@ function CombatInfo.RegisterCombatInfo()
     eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED)
     if CombatInfo.SV.UltimateLabelEnabled or CombatInfo.SV.UltimatePctEnabled then
         eventManager:RegisterForEvent(moduleName .. "CombatEvent1", EVENT_COMBAT_EVENT, CombatInfo.OnCombatEvent)
-        eventManager:AddFilterForEvent(moduleName .. "CombatEvent1", REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false, REGISTER_FILTER_COMBAT_RESULT, ACTION_RESULT_BLOCKED_DAMAGE)
+        eventManager:AddFilterForEvent(
+            moduleName .. "CombatEvent1",
+            REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE,
+            COMBAT_UNIT_TYPE_PLAYER,
+            REGISTER_FILTER_IS_ERROR,
+            false,
+            REGISTER_FILTER_COMBAT_RESULT,
+            ACTION_RESULT_BLOCKED_DAMAGE
+        )
         eventManager:RegisterForEvent(moduleName .. "PowerUpdate", EVENT_POWER_UPDATE, CombatInfo.OnPowerUpdatePlayer)
-        eventManager:AddFilterForEvent(moduleName .. "PowerUpdate", EVENT_POWER_UPDATE, REGISTER_FILTER_UNIT_TAG, "player")
-        eventManager:RegisterForEvent(moduleName .. "InventoryUpdate", EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CombatInfo.OnInventorySlotUpdate)
-        eventManager:AddFilterForEvent(moduleName .. "InventoryUpdate", EVENT_INVENTORY_SINGLE_SLOT_UPDATE, REGISTER_FILTER_BAG_ID, BAG_WORN, REGISTER_FILTER_INVENTORY_UPDATE_REASON, INVENTORY_UPDATE_REASON_DEFAULT, REGISTER_FILTER_IS_NEW_ITEM, false)
+        eventManager:AddFilterForEvent(
+            moduleName .. "PowerUpdate",
+            EVENT_POWER_UPDATE,
+            REGISTER_FILTER_UNIT_TAG,
+            "player"
+        )
+        eventManager:RegisterForEvent(
+            moduleName .. "InventoryUpdate",
+            EVENT_INVENTORY_SINGLE_SLOT_UPDATE,
+            CombatInfo.OnInventorySlotUpdate
+        )
+        eventManager:AddFilterForEvent(
+            moduleName .. "InventoryUpdate",
+            EVENT_INVENTORY_SINGLE_SLOT_UPDATE,
+            REGISTER_FILTER_BAG_ID,
+            BAG_WORN,
+            REGISTER_FILTER_INVENTORY_UPDATE_REASON,
+            INVENTORY_UPDATE_REASON_DEFAULT,
+            REGISTER_FILTER_IS_NEW_ITEM,
+            false
+        )
     end
     if CombatInfo.SV.UltimateLabelEnabled or CombatInfo.SV.UltimatePctEnabled or CombatInfo.SV.CastBarEnable then
         eventManager:RegisterForEvent(moduleName .. "CombatEvent2", EVENT_COMBAT_EVENT, CombatInfo.OnCombatEvent)
-        eventManager:AddFilterForEvent(moduleName .. "CombatEvent2", REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false)
+        eventManager:AddFilterForEvent(
+            moduleName .. "CombatEvent2",
+            REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE,
+            COMBAT_UNIT_TYPE_PLAYER,
+            REGISTER_FILTER_IS_ERROR,
+            false
+        )
     end
     if CombatInfo.SV.CastBarEnable then
         local counter = 0
@@ -790,11 +867,28 @@ function CombatInfo.RegisterCombatInfo()
             counter = counter + 1
             local eventName = (moduleName .. "CombatEventCC" .. counter)
             eventManager:RegisterForEvent(eventName, EVENT_COMBAT_EVENT, CombatInfo.OnCombatEventBreakCast)
-            eventManager:AddFilterForEvent(eventName, EVENT_COMBAT_EVENT, REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false, REGISTER_FILTER_COMBAT_RESULT, result)
+            eventManager:AddFilterForEvent(
+                eventName,
+                EVENT_COMBAT_EVENT,
+                REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE,
+                COMBAT_UNIT_TYPE_PLAYER,
+                REGISTER_FILTER_IS_ERROR,
+                false,
+                REGISTER_FILTER_COMBAT_RESULT,
+                result
+            )
         end
-        eventManager:RegisterForEvent(moduleName, EVENT_START_SOUL_GEM_RESURRECTION, CombatInfo.SoulGemResurrectionStart)
+        eventManager:RegisterForEvent(
+            moduleName,
+            EVENT_START_SOUL_GEM_RESURRECTION,
+            CombatInfo.SoulGemResurrectionStart
+        )
         eventManager:RegisterForEvent(moduleName, EVENT_END_SOUL_GEM_RESURRECTION, CombatInfo.SoulGemResurrectionEnd)
-        eventManager:RegisterForEvent(moduleName, EVENT_GAME_CAMERA_UI_MODE_CHANGED, CombatInfo.OnGameCameraUIModeChanged)
+        eventManager:RegisterForEvent(
+            moduleName,
+            EVENT_GAME_CAMERA_UI_MODE_CHANGED,
+            CombatInfo.OnGameCameraUIModeChanged
+        )
         eventManager:RegisterForEvent(moduleName, EVENT_END_SIEGE_CONTROL, CombatInfo.OnSiegeEnd)
         --eventManager:RegisterForEvent(moduleName, EVENT_CLIENT_INTERACT_RESULT, CombatInfo.ClientInteractResult)
         --[[counter = 0
@@ -803,10 +897,20 @@ function CombatInfo.RegisterCombatInfo()
             local eventName = (moduleName.. "LUIE_CI_CombatEventCastBreak" .. counter)
             eventManager:RegisterForEvent(eventName, EVENT_COMBAT_EVENT, CombatInfo.OnCombatEventSpecialFilters )
             eventManager:AddFilterForEvent(eventName, EVENT_COMBAT_EVENT, REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_ABILITY_ID, id, REGISTER_FILTER_IS_ERROR, false, REGISTER_FILTER_COMBAT_RESULT, ACTION_RESULT_EFFECT_FADED)
-        end]]--
+        end]]
+        --
     end
-    if CombatInfo.SV.ShowTriggered or CombatInfo.SV.ShowToggled or CombatInfo.SV.UltimateLabelEnabled or CombatInfo.SV.UltimatePctEnabled then
-        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED, CombatInfo.OnActiveHotbarUpdate)
+    if
+        CombatInfo.SV.ShowTriggered
+        or CombatInfo.SV.ShowToggled
+        or CombatInfo.SV.UltimateLabelEnabled
+        or CombatInfo.SV.UltimatePctEnabled
+    then
+        eventManager:RegisterForEvent(
+            moduleName,
+            EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED,
+            CombatInfo.OnActiveHotbarUpdate
+        )
         eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_ALL_HOTBARS_UPDATED, CombatInfo.OnSlotsFullUpdate)
         eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED, CombatInfo.OnSlotUpdated)
     end
@@ -814,7 +918,11 @@ function CombatInfo.RegisterCombatInfo()
         eventManager:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED, CombatInfo.OnDeath)
         eventManager:RegisterForEvent(moduleName, EVENT_TARGET_CHANGED, CombatInfo.OnTargetChange)
         eventManager:RegisterForEvent(moduleName, EVENT_RETICLE_TARGET_CHANGED, CombatInfo.OnReticleTargetChanged)
-        eventManager:RegisterForEvent(moduleName, EVENT_ACTIVE_WEAPON_PAIR_CHANGED, CombatInfo.OnActiveWeaponPairChanged)
+        eventManager:RegisterForEvent(
+            moduleName,
+            EVENT_ACTIVE_WEAPON_PAIR_CHANGED,
+            CombatInfo.OnActiveWeaponPairChanged
+        )
         eventManager:RegisterForEvent(moduleName, EVENT_GAMEPAD_PREFERRED_MODE_CHANGED, CombatInfo.BackbarSetupTemplate)
 
         eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED, CombatInfo.InventoryItemUsed)
@@ -823,7 +931,13 @@ function CombatInfo.RegisterCombatInfo()
         CombatInfo.UpdateBarHighlightTables()
     end
     -- Have to register EVENT_EFFECT_CHANGED for werewolf as well - Stop devour cast bar when devour fades / also handles updating Vampire Ultimate cost on stage change
-    if CombatInfo.SV.ShowTriggered or CombatInfo.SV.ShowToggled or CombatInfo.SV.CastBarEnable or CombatInfo.SV.UltimateLabelEnabled or CombatInfo.SV.UltimatePctEnabled then
+    if
+        CombatInfo.SV.ShowTriggered
+        or CombatInfo.SV.ShowToggled
+        or CombatInfo.SV.CastBarEnable
+        or CombatInfo.SV.UltimateLabelEnabled
+        or CombatInfo.SV.UltimatePctEnabled
+    then
         eventManager:RegisterForEvent(moduleName, EVENT_EFFECT_CHANGED, CombatInfo.OnEffectChanged)
     end
 
@@ -903,7 +1017,13 @@ function CombatInfo.OnPlayerActivated(eventCode)
         -- Update Bar Slots on initial load (don't want to do it normally when we do a slot update)
         CombatInfo.BarSlotUpdate(i, true, false)
     end
-    CombatInfo.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, "player", nil, COMBAT_MECHANIC_FLAGS_ULTIMATE, GetUnitPower("player", COMBAT_MECHANIC_FLAGS_ULTIMATE))
+    CombatInfo.OnPowerUpdatePlayer(
+        EVENT_POWER_UPDATE,
+        "player",
+        nil,
+        COMBAT_MECHANIC_FLAGS_ULTIMATE,
+        GetUnitPower("player", COMBAT_MECHANIC_FLAGS_ULTIMATE)
+    )
 end
 
 local savedPlayerX = 0
@@ -913,43 +1033,59 @@ local playerZ
 
 -- Updates all floating labels. Called every 100ms
 function CombatInfo.OnUpdate(currentTime)
-	-- Procs
+    -- Procs
     for k, v in pairs(g_triggeredSlotsRemain) do
         local remain = v - currentTime
         local front = g_triggeredSlotsFront[k]
         local back = g_triggeredSlotsBack[k]
         local frontAnim = front and g_uiProcAnimation[front]
         local backAnim = back and g_uiProcAnimation[back]
-		-- If duration reaches 0 then remove effect
+        -- If duration reaches 0 then remove effect
         if v < currentTime then
-            if frontAnim then frontAnim:Stop() end
-            if backAnim then backAnim:Stop() end
+            if frontAnim then
+                frontAnim:Stop()
+            end
+            if backAnim then
+                backAnim:Stop()
+            end
             g_triggeredSlotsRemain[k] = nil
         end
-		-- Update Label (FRONT)(BACK)
+        -- Update Label (FRONT)(BACK)
         if CombatInfo.SV.BarShowLabel and remain then
-            if frontAnim then frontAnim.procLoopTexture.label:SetText(FormatDurationSeconds(remain)) end
-            if backAnim then backAnim.procLoopTexture.label:SetText(FormatDurationSeconds(remain)) end
+            if frontAnim then
+                frontAnim.procLoopTexture.label:SetText(FormatDurationSeconds(remain))
+            end
+            if backAnim then
+                backAnim.procLoopTexture.label:SetText(FormatDurationSeconds(remain))
+            end
         end
     end
-	-- Ability Highlight
+    -- Ability Highlight
     for k, v in pairs(g_toggledSlotsRemain) do
         local remain = v - currentTime
         local front = g_toggledSlotsFront[k]
         local back = g_toggledSlotsBack[k]
         local frontToggle = front and g_uiCustomToggle[front]
         local backToggle = back and g_uiCustomToggle[back]
-		-- Update Label (FRONT)
+        -- Update Label (FRONT)
         if v < currentTime then
-            if frontToggle then CombatInfo.HideSlot(front, k) end
-            if backToggle then CombatInfo.HideSlot(back, k) end
+            if frontToggle then
+                CombatInfo.HideSlot(front, k)
+            end
+            if backToggle then
+                CombatInfo.HideSlot(back, k)
+            end
             g_toggledSlotsRemain[k] = nil
             g_toggledSlotsStack[k] = nil
         end
-		-- Update Label (BACK)
+        -- Update Label (BACK)
         if CombatInfo.SV.BarShowLabel and remain then
-            if frontToggle then frontToggle.label:SetText(FormatDurationSeconds(remain)) end
-            if backToggle then backToggle.label:SetText(FormatDurationSeconds(remain)) end
+            if frontToggle then
+                frontToggle.label:SetText(FormatDurationSeconds(remain))
+            end
+            if backToggle then
+                backToggle.label:SetText(FormatDurationSeconds(remain))
+            end
         end
     end
 
@@ -959,13 +1095,13 @@ function CombatInfo.OnUpdate(currentTime)
         local remain, duration, global = GetSlotCooldownInfo(slotIndex, HOTBAR_CATEGORY_QUICKSLOT_WHEEL)
         local label = uiQuickSlot.label
         local timeColours = uiQuickSlot.timeColours
-        if (duration > 5000) then
+        if duration > 5000 then
             label:SetHidden(false)
             if not CombatInfo.SV.PotionTimerColor then
                 label:SetColor(1, 1, 1, 1)
             else
                 local color = uiQuickSlot.colour
-                for i = #(timeColours), 1, -1 do
+                for i = #timeColours, 1, -1 do
                     if remain < timeColours[i].remain then
                         color = timeColours[i].colour
                         break
@@ -1088,8 +1224,11 @@ function CombatInfo.ApplyFont()
             printToChat(GetString(SI_LUIE_ERROR_FONT), true)
             fontName = "$(MEDIUM_FONT)"
         end
-        local fontStyle = (CombatInfo.SV[fontStyleKey] and CombatInfo.SV[fontStyleKey] ~= "") and CombatInfo.SV[fontStyleKey] or defaultFontStyle
-        local fontSize = (CombatInfo.SV[fontSizeKey] and CombatInfo.SV[fontSizeKey] > 0) and CombatInfo.SV[fontSizeKey] or defaultFontSize
+        local fontStyle = (CombatInfo.SV[fontStyleKey] and CombatInfo.SV[fontStyleKey] ~= "")
+                and CombatInfo.SV[fontStyleKey]
+            or defaultFontStyle
+        local fontSize = (CombatInfo.SV[fontSizeKey] and CombatInfo.SV[fontSizeKey] > 0) and CombatInfo.SV[fontSizeKey]
+            or defaultFontSize
         return fontName .. "|" .. fontSize .. "|" .. fontStyle
     end
 
@@ -1158,7 +1297,13 @@ function CombatInfo.ResetBarLabel()
         elseif g_uiProcAnimation[i] then
             g_uiProcAnimation[i].procLoopTexture.label:ClearAnchors()
             g_uiProcAnimation[i].procLoopTexture.label:SetAnchor(TOPLEFT, actionButton.slot)
-            g_uiProcAnimation[i].procLoopTexture.label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CombatInfo.SV.BarLabelPosition)
+            g_uiProcAnimation[i].procLoopTexture.label:SetAnchor(
+                BOTTOMRIGHT,
+                actionButton.slot,
+                nil,
+                0,
+                -CombatInfo.SV.BarLabelPosition
+            )
         end
 
         local backIndex = i + BACKBAR_INDEX_OFFSET
@@ -1166,13 +1311,24 @@ function CombatInfo.ResetBarLabel()
         if g_uiCustomToggle[backIndex] then
             g_uiCustomToggle[backIndex].label:ClearAnchors()
             g_uiCustomToggle[backIndex].label:SetAnchor(TOPLEFT, actionButton.slot)
-            g_uiCustomToggle[backIndex].label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CombatInfo.SV.BarLabelPosition)
+            g_uiCustomToggle[backIndex].label:SetAnchor(
+                BOTTOMRIGHT,
+                actionButton.slot,
+                nil,
+                0,
+                -CombatInfo.SV.BarLabelPosition
+            )
         elseif g_uiProcAnimation[backIndex] then
             g_uiProcAnimation[backIndex].procLoopTexture.label:ClearAnchors()
             g_uiProcAnimation[backIndex].procLoopTexture.label:SetAnchor(TOPLEFT, actionButton.slot)
-            g_uiProcAnimation[backIndex].procLoopTexture.label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CombatInfo.SV.BarLabelPosition)
+            g_uiProcAnimation[backIndex].procLoopTexture.label:SetAnchor(
+                BOTTOMRIGHT,
+                actionButton.slot,
+                nil,
+                0,
+                -CombatInfo.SV.BarLabelPosition
+            )
         end
-
     end
 end
 
@@ -1183,7 +1339,6 @@ function CombatInfo.ResetPotionTimerLabel()
     uiQuickSlot.label:SetAnchor(TOPLEFT, QSB)
     uiQuickSlot.label:SetAnchor(BOTTOMRIGHT, QSB, nil, 0, -CombatInfo.SV.PotionTimerLabelPosition)
 end
-
 
 -- Runs on the EVENT_TARGET_CHANGE listener.
 -- This handler fires every time the someone target changes.
@@ -1201,12 +1356,17 @@ function CombatInfo.OnReticleTargetChanged(eventCode)
     local unitTag = "reticleover"
 
     for k, v in pairs(g_toggledSlotsRemain) do
-        if ((g_toggledSlotsFront[k] and g_uiCustomToggle[g_toggledSlotsFront[k]]) or (g_toggledSlotsBack[k] and g_uiCustomToggle[g_toggledSlotsBack[k]])) and not (g_toggledSlotsPlayer[k] or g_barNoRemove[k]) then
-            if (g_toggledSlotsFront[k] and g_uiCustomToggle[g_toggledSlotsFront[k]]) then
+        if
+            (
+                (g_toggledSlotsFront[k] and g_uiCustomToggle[g_toggledSlotsFront[k]])
+                or (g_toggledSlotsBack[k] and g_uiCustomToggle[g_toggledSlotsBack[k]])
+            ) and not (g_toggledSlotsPlayer[k] or g_barNoRemove[k])
+        then
+            if g_toggledSlotsFront[k] and g_uiCustomToggle[g_toggledSlotsFront[k]] then
                 local slotNum = g_toggledSlotsFront[k]
                 CombatInfo.HideSlot(slotNum, k)
             end
-            if (g_toggledSlotsBack[k] and g_uiCustomToggle[g_toggledSlotsBack[k]]) then
+            if g_toggledSlotsBack[k] and g_uiCustomToggle[g_toggledSlotsBack[k]] then
                 local slotNum = g_toggledSlotsBack[k]
                 CombatInfo.HideSlot(slotNum, k)
             end
@@ -1222,7 +1382,8 @@ function CombatInfo.OnReticleTargetChanged(eventCode)
         -- Fill it again
         for i = 1, GetNumBuffs(unitTag) do
             local unitName = GetRawUnitName(unitTag)
-            local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, i)
+            local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer =
+                GetUnitBuffInfo(unitTag, i)
             -- Convert boolean to number value if cast by player
             if castByPlayer == true then
                 castByPlayer = 1
@@ -1230,7 +1391,25 @@ function CombatInfo.OnReticleTargetChanged(eventCode)
                 castByPlayer = 5
             end
             if not IsUnitDead(unitTag) then
-                CombatInfo.OnEffectChanged(0, EFFECT_RESULT_UPDATED, buffSlot, buffName, unitTag, timeStarted, timeEnding, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, unitName, 0, abilityId, castByPlayer)
+                CombatInfo.OnEffectChanged(
+                    0,
+                    EFFECT_RESULT_UPDATED,
+                    buffSlot,
+                    buffName,
+                    unitTag,
+                    timeStarted,
+                    timeEnding,
+                    stackCount,
+                    iconFilename,
+                    buffType,
+                    effectType,
+                    abilityType,
+                    statusEffectType,
+                    unitName,
+                    0,
+                    abilityId,
+                    castByPlayer
+                )
             end
         end
     end
@@ -1238,28 +1417,69 @@ end
 
 function CombatInfo.BarHighlightSwap(abilityId)
     local effect = Effects.BarHighlightCheckOnFade[abilityId]
-    local ids = {effect.id1 or 0, effect.id2 or 0, effect.id3 or 0}
-    local tags = {effect.unitTag, effect.id2Tag, effect.id3Tag}
+    local ids = { effect.id1 or 0, effect.id2 or 0, effect.id3 or 0 }
+    local tags = { effect.unitTag, effect.id2Tag, effect.id3Tag }
     local duration = effect.duration or 0
     local durationMod = effect.durationMod or 0
 
     for i, id in ipairs(ids) do
         local unitTag = tags[i]
-        if not DoesUnitExist(unitTag) then return end
+        if not DoesUnitExist(unitTag) then
+            return
+        end
 
         if duration > 0 then
             duration = (GetAbilityDuration(duration) - GetAbilityDuration(durationMod))
             local timeStarted = GetGameTimeSeconds()
             local timeEnding = timeStarted + (duration / 1000)
-            CombatInfo.OnEffectChanged(nil, EFFECT_RESULT_GAINED, nil, nil, unitTag, timeStarted, timeEnding, 0, nil, nil, 1, ABILITY_TYPE_BONUS, 0, nil, nil, abilityId, 1, true)
+            CombatInfo.OnEffectChanged(
+                nil,
+                EFFECT_RESULT_GAINED,
+                nil,
+                nil,
+                unitTag,
+                timeStarted,
+                timeEnding,
+                0,
+                nil,
+                nil,
+                1,
+                ABILITY_TYPE_BONUS,
+                0,
+                nil,
+                nil,
+                abilityId,
+                1,
+                true
+            )
             return
         end
 
         if id ~= 0 then
             for j = 1, GetNumBuffs(unitTag) do
-                local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityIdNew, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, j)
+                local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityIdNew, canClickOff, castByPlayer =
+                    GetUnitBuffInfo(unitTag, j)
                 if id == abilityIdNew and castByPlayer then
-                    CombatInfo.OnEffectChanged(nil, EFFECT_RESULT_GAINED, nil, nil, unitTag, timeStarted, timeEnding, stackCount, nil, buffType, effectType, abilityType, statusEffectType, nil, nil, abilityId, 1, true)
+                    CombatInfo.OnEffectChanged(
+                        nil,
+                        EFFECT_RESULT_GAINED,
+                        nil,
+                        nil,
+                        unitTag,
+                        timeStarted,
+                        timeEnding,
+                        stackCount,
+                        nil,
+                        buffType,
+                        effectType,
+                        abilityType,
+                        statusEffectType,
+                        nil,
+                        nil,
+                        abilityId,
+                        1,
+                        true
+                    )
                     return
                 end
             end
@@ -1267,7 +1487,26 @@ function CombatInfo.BarHighlightSwap(abilityId)
     end
 end
 
-function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer, passThrough)
+function CombatInfo.OnEffectChanged(
+    eventCode,
+    changeType,
+    effectSlot,
+    effectName,
+    unitTag,
+    beginTime,
+    endTime,
+    stackCount,
+    iconName,
+    buffType,
+    effectType,
+    abilityType,
+    statusEffectType,
+    unitName,
+    unitId,
+    abilityId,
+    castByPlayer,
+    passThrough
+)
     -- If we're displaying a fake bar highlight then bail out here (sometimes we need a fake aura that doesn't end to simulate effects that can be overwritten, such as Major/Minor buffs. Technically we don't want to stop the
     -- highlight of the original ability since we can only track one buff per slot and overwriting the buff with a longer duration buff shouldn't throw the player off by making the glow disappear earlier.
     if g_barFakeAura[abilityId] and not passThrough then
@@ -1285,7 +1524,9 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
 
     if Castbar.CastBreakOnRemoveEffect[abilityId] and changeType == EFFECT_RESULT_FADED then
         CombatInfo.StopCastBar()
-        if abilityId == 33208 then return end -- Devour (Werewolf)
+        if abilityId == 33208 then
+            return
+        end -- Devour (Werewolf)
     end
 
     -- If this effect is on the player than as long as it remains it won't fade when we mouseover another target.
@@ -1303,12 +1544,15 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
         end
 
         if changeType == EFFECT_RESULT_FADED then
-            if abilityId == 32958 then return end -- Ignore Shifting Standard
+            if abilityId == 32958 then
+                return
+            end -- Ignore Shifting Standard
             local currentTime = GetGameTimeMilliseconds()
             if not g_protectAbilityRemoval[abilityId] or g_protectAbilityRemoval[abilityId] < currentTime then
-                if (Effects.IsGroundMineAura[abilityId] or Effects.IsGroundMineStack[abilityId]) then
+                if Effects.IsGroundMineAura[abilityId] or Effects.IsGroundMineStack[abilityId] then
                     if g_mineStacks[abilityId] then
-                        g_mineStacks[abilityId] = g_mineStacks[abilityId] - Effects.EffectGroundDisplay[abilityId].stackRemove
+                        g_mineStacks[abilityId] = g_mineStacks[abilityId]
+                            - Effects.EffectGroundDisplay[abilityId].stackRemove
 
                         -- Set Stacks label if changed
                         if CombatInfo.SV.BarShowLabel then
@@ -1341,11 +1585,15 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                         -- Handle stacks reaching 0
                         if g_mineStacks[abilityId] == 0 and not g_mineNoTurnOff[abilityId] then
                             if g_toggledSlotsRemain[abilityId] then
-                                if g_toggledSlotsFront[abilityId] and g_uiCustomToggle[g_toggledSlotsFront[abilityId]] then
+                                if
+                                    g_toggledSlotsFront[abilityId] and g_uiCustomToggle[g_toggledSlotsFront[abilityId]]
+                                then
                                     local slotNum = g_toggledSlotsFront[abilityId]
                                     CombatInfo.HideSlot(slotNum, abilityId)
                                 end
-                                if g_toggledSlotsBack[abilityId] and g_uiCustomToggle[g_toggledSlotsBack[abilityId]] then
+                                if
+                                    g_toggledSlotsBack[abilityId] and g_uiCustomToggle[g_toggledSlotsBack[abilityId]]
+                                then
                                     local slotNum = g_toggledSlotsBack[abilityId]
                                     CombatInfo.HideSlot(slotNum, abilityId)
                                 end
@@ -1359,7 +1607,9 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                     end
                 else
                     -- Ignore fading event if override is true
-                    if g_barNoRemove[abilityId] then return end
+                    if g_barNoRemove[abilityId] then
+                        return
+                    end
                     -- Stop any toggle animation associated with this effect
                     if g_toggledSlotsRemain[abilityId] then
                         if g_toggledSlotsFront[abilityId] and g_uiCustomToggle[g_toggledSlotsFront[abilityId]] then
@@ -1376,7 +1626,6 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                 end
             end
         elseif changeType == EFFECT_RESULT_GAINED then
-
             if g_mineNoTurnOff[abilityId] then
                 g_mineNoTurnOff[abilityId] = nil
             end
@@ -1389,7 +1638,8 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
             elseif Effects.IsGroundMineStack[abilityId] then
                 -- Check if this is an existing mine with stacks
                 if g_mineStacks[abilityId] then
-                    g_mineStacks[abilityId] = g_mineStacks[abilityId] + Effects.EffectGroundDisplay[abilityId].stackRemove
+                    g_mineStacks[abilityId] = g_mineStacks[abilityId]
+                        + Effects.EffectGroundDisplay[abilityId].stackRemove
                     -- Otherwise set the count to 1
                 else
                     g_mineStacks[abilityId] = 1
@@ -1542,14 +1792,18 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                 if g_triggeredSlotsFront[abilityId] then
                     CombatInfo.PlayProcAnimations(g_triggeredSlotsFront[abilityId])
                     if CombatInfo.SV.BarShowLabel and g_uiProcAnimation[g_triggeredSlotsFront[abilityId]] then
-                        g_uiProcAnimation[g_triggeredSlotsFront[abilityId]].procLoopTexture.label:SetText(FormatDurationSeconds(remain))
+                        g_uiProcAnimation[g_triggeredSlotsFront[abilityId]].procLoopTexture.label:SetText(
+                            FormatDurationSeconds(remain)
+                        )
                     end
                 end
                 -- Back
                 if g_triggeredSlotsBack[abilityId] then
                     CombatInfo.PlayProcAnimations(g_triggeredSlotsBack[abilityId])
                     if CombatInfo.SV.BarShowLabel and g_uiProcAnimation[g_triggeredSlotsBack[abilityId]] then
-                        g_uiProcAnimation[g_triggeredSlotsBack[abilityId]].procLoopTexture.label:SetText(FormatDurationSeconds(remain))
+                        g_uiProcAnimation[g_triggeredSlotsBack[abilityId]].procLoopTexture.label:SetText(
+                            FormatDurationSeconds(remain)
+                        )
                     end
                 end
             end
@@ -1635,7 +1889,9 @@ function CombatInfo.ShowSlot(slotNum, abilityId, currentTime, desaturate)
         uiUltimate.LabelPct:SetHidden(true)
     end
     if CombatInfo.SV.BarShowLabel then
-        if not g_uiCustomToggle[slotNum] then return end
+        if not g_uiCustomToggle[slotNum] then
+            return
+        end
         local remain = g_toggledSlotsRemain[abilityId] - currentTime
         g_uiCustomToggle[slotNum].label:SetText(FormatDurationSeconds(remain))
         if g_toggledSlotsStack[abilityId] and g_toggledSlotsStack[abilityId] > 0 then
@@ -1682,13 +1938,12 @@ end
 -- Called on initialization and when swapping in and out of Gamepad mode
 function CombatInfo.BackbarSetupTemplate()
     local style = IsInGamepadPreferredMode() and GAMEPAD_CONSTANTS or KEYBOARD_CONSTANTS
-    local weaponSwapControl = ACTION_BAR:GetNamedChild('WeaponSwap')
+    local weaponSwapControl = ACTION_BAR:GetNamedChild("WeaponSwap")
 
     -- Set positions for new buttons, modified from actionbar.lua - function ApplyStyle(style) )
     local lastButton
-    local buttonTemplate = ZO_GetPlatformTemplate('ZO_ActionButton')
+    local buttonTemplate = ZO_GetPlatformTemplate("ZO_ActionButton")
     for i = BAR_INDEX_START, BAR_INDEX_END do
-
         -- Get our backbar button
         local targetButton = g_backbarButtons[i + BACKBAR_INDEX_OFFSET]
 
@@ -1734,11 +1989,15 @@ end
 function CombatInfo.CreateCastBar()
     uiTlw.castBar = UI.TopLevel(nil, nil)
 
-    uiTlw.castBar:SetDimensions(CombatInfo.SV.CastBarSizeW + CombatInfo.SV.CastBarIconSize + 4, CombatInfo.SV.CastBarSizeH)
+    uiTlw.castBar:SetDimensions(
+        CombatInfo.SV.CastBarSizeW + CombatInfo.SV.CastBarIconSize + 4,
+        CombatInfo.SV.CastBarSizeH
+    )
 
     -- Setup Preview
     uiTlw.castBar.preview = UI.Backdrop(uiTlw.castBar, "fill", nil, nil, nil, true)
-    uiTlw.castBar.previewLabel = UI.Label(uiTlw.castBar.preview, { CENTER, CENTER }, nil, nil, "ZoFontGameMedium", "Cast Bar", false)
+    uiTlw.castBar.previewLabel =
+        UI.Label(uiTlw.castBar.preview, { CENTER, CENTER }, nil, nil, "ZoFontGameMedium", "Cast Bar", false)
 
     -- Callback used to hide anchor coords preview label on movement start
     local tlwOnMoveStart = function(self)
@@ -1757,14 +2016,36 @@ function CombatInfo.CreateCastBar()
     uiTlw.castBar:SetHandler("OnMoveStart", tlwOnMoveStart)
     uiTlw.castBar:SetHandler("OnMoveStop", tlwOnMoveStop)
 
-    uiTlw.castBar.preview.anchorTexture = UI.Texture(uiTlw.castBar.preview, { TOPLEFT, TOPLEFT }, { 16, 16 }, "/esoui/art/reticle/border_topleft.dds", DL_OVERLAY, false)
+    uiTlw.castBar.preview.anchorTexture = UI.Texture(
+        uiTlw.castBar.preview,
+        { TOPLEFT, TOPLEFT },
+        { 16, 16 },
+        "/esoui/art/reticle/border_topleft.dds",
+        DL_OVERLAY,
+        false
+    )
     uiTlw.castBar.preview.anchorTexture:SetColor(1, 1, 0, 0.9)
 
-    uiTlw.castBar.preview.anchorLabel = UI.Label(uiTlw.castBar.preview, { BOTTOMLEFT, TOPLEFT, 0, -1 }, nil, { 0, 2 }, "ZoFontGameSmall", "xxx, yyy", false)
+    uiTlw.castBar.preview.anchorLabel = UI.Label(
+        uiTlw.castBar.preview,
+        { BOTTOMLEFT, TOPLEFT, 0, -1 },
+        nil,
+        { 0, 2 },
+        "ZoFontGameSmall",
+        "xxx, yyy",
+        false
+    )
     uiTlw.castBar.preview.anchorLabel:SetColor(1, 1, 0, 1)
     uiTlw.castBar.preview.anchorLabel:SetDrawLayer(DL_OVERLAY)
     uiTlw.castBar.preview.anchorLabel:SetDrawTier(DT_MEDIUM)
-    uiTlw.castBar.preview.anchorLabelBg = UI.Backdrop(uiTlw.castBar.preview.anchorLabel, "fill", nil, { 0, 0, 0, 1 }, { 0, 0, 0, 1 }, false)
+    uiTlw.castBar.preview.anchorLabelBg = UI.Backdrop(
+        uiTlw.castBar.preview.anchorLabel,
+        "fill",
+        nil,
+        { 0, 0, 0, 1 },
+        { 0, 0, 0, 1 },
+        false
+    )
     uiTlw.castBar.preview.anchorLabelBg:SetDrawLayer(DL_OVERLAY)
     uiTlw.castBar.preview.anchorLabelBg:SetDrawTier(DT_LOW)
 
@@ -1799,8 +2080,21 @@ function CombatInfo.CreateCastBar()
     castbar.icon:SetAnchor(BOTTOMRIGHT, castbar, BOTTOMRIGHT, -3, -3)
 
     castbar.bar = {
-        ["backdrop"] = UI.Backdrop(castbar, nil, { CombatInfo.SV.CastBarSizeW, CombatInfo.SV.CastBarSizeH }, nil, nil, false),
-        ["bar"] = UI.StatusBar(castbar, nil, { CombatInfo.SV.CastBarSizeW - 4, CombatInfo.SV.CastBarSizeH - 4 }, nil, false),
+        ["backdrop"] = UI.Backdrop(
+            castbar,
+            nil,
+            { CombatInfo.SV.CastBarSizeW, CombatInfo.SV.CastBarSizeH },
+            nil,
+            nil,
+            false
+        ),
+        ["bar"] = UI.StatusBar(
+            castbar,
+            nil,
+            { CombatInfo.SV.CastBarSizeW - 4, CombatInfo.SV.CastBarSizeH - 4 },
+            nil,
+            false
+        ),
         ["name"] = UI.Label(castbar, nil, nil, nil, nil, g_castbarFont, false),
         ["timer"] = UI.Label(castbar, nil, nil, nil, nil, g_castbarFont, false),
     }
@@ -1810,10 +2104,24 @@ function CombatInfo.CreateCastBar()
     castbar.bar.backdrop:SetDrawLayer(DL_BACKGROUND)
     castbar.bar.backdrop:SetDrawLevel(1)
     castbar.bar.bar:SetMinMax(0, 1)
-    castbar.bar.backdrop:SetCenterColor((0.1 * .50), (0.1 * .50), (0.1 * .50), 0.75)
+    castbar.bar.backdrop:SetCenterColor((0.1 * 0.50), (0.1 * 0.50), (0.1 * 0.50), 0.75)
     castbar.bar.bar:SetGradientColors(0, 47 / 255, 130 / 255, 1, 82 / 255, 215 / 255, 1, 1)
-    castbar.bar.backdrop:SetCenterColor((0.1 * CombatInfo.SV.CastBarGradientC1[1]), (0.1 * CombatInfo.SV.CastBarGradientC1[2]), (0.1 * CombatInfo.SV.CastBarGradientC1[3]), 0.75)
-    castbar.bar.bar:SetGradientColors(CombatInfo.SV.CastBarGradientC1[1], CombatInfo.SV.CastBarGradientC1[2], CombatInfo.SV.CastBarGradientC1[3], 1, CombatInfo.SV.CastBarGradientC2[1], CombatInfo.SV.CastBarGradientC2[2], CombatInfo.SV.CastBarGradientC2[3], 1)
+    castbar.bar.backdrop:SetCenterColor(
+        (0.1 * CombatInfo.SV.CastBarGradientC1[1]),
+        (0.1 * CombatInfo.SV.CastBarGradientC1[2]),
+        (0.1 * CombatInfo.SV.CastBarGradientC1[3]),
+        0.75
+    )
+    castbar.bar.bar:SetGradientColors(
+        CombatInfo.SV.CastBarGradientC1[1],
+        CombatInfo.SV.CastBarGradientC1[2],
+        CombatInfo.SV.CastBarGradientC1[3],
+        1,
+        CombatInfo.SV.CastBarGradientC2[1],
+        CombatInfo.SV.CastBarGradientC2[2],
+        CombatInfo.SV.CastBarGradientC2[3],
+        1
+    )
 
     castbar.bar.backdrop:ClearAnchors()
     castbar.bar.backdrop:SetAnchor(LEFT, castbar, RIGHT, 4, 0)
@@ -1838,7 +2146,10 @@ function CombatInfo.CreateCastBar()
 end
 
 function CombatInfo.ResizeCastBar()
-    uiTlw.castBar:SetDimensions(CombatInfo.SV.CastBarSizeW + CombatInfo.SV.CastBarIconSize + 4, CombatInfo.SV.CastBarSizeH)
+    uiTlw.castBar:SetDimensions(
+        CombatInfo.SV.CastBarSizeW + CombatInfo.SV.CastBarIconSize + 4,
+        CombatInfo.SV.CastBarSizeH
+    )
     castbar:ClearAnchors()
     castbar:SetAnchor(LEFT, uiTlw.castBar, LEFT)
 
@@ -1866,8 +2177,22 @@ function CombatInfo.UpdateCastBar()
     castbar.bar.name:SetFont(g_castbarFont)
     castbar.bar.timer:SetFont(g_castbarFont)
     castbar.bar.bar:SetTexture(LUIE.StatusbarTextures[CombatInfo.SV.CastBarTexture])
-    castbar.bar.backdrop:SetCenterColor((0.1 * CombatInfo.SV.CastBarGradientC1[1]), (0.1 * CombatInfo.SV.CastBarGradientC1[2]), (0.1 * CombatInfo.SV.CastBarGradientC1[3]), 0.75)
-    castbar.bar.bar:SetGradientColors(CombatInfo.SV.CastBarGradientC1[1], CombatInfo.SV.CastBarGradientC1[2], CombatInfo.SV.CastBarGradientC1[3], 1, CombatInfo.SV.CastBarGradientC2[1], CombatInfo.SV.CastBarGradientC2[2], CombatInfo.SV.CastBarGradientC2[3], 1)
+    castbar.bar.backdrop:SetCenterColor(
+        (0.1 * CombatInfo.SV.CastBarGradientC1[1]),
+        (0.1 * CombatInfo.SV.CastBarGradientC1[2]),
+        (0.1 * CombatInfo.SV.CastBarGradientC1[3]),
+        0.75
+    )
+    castbar.bar.bar:SetGradientColors(
+        CombatInfo.SV.CastBarGradientC1[1],
+        CombatInfo.SV.CastBarGradientC1[2],
+        CombatInfo.SV.CastBarGradientC1[3],
+        1,
+        CombatInfo.SV.CastBarGradientC2[1],
+        CombatInfo.SV.CastBarGradientC2[2],
+        CombatInfo.SV.CastBarGradientC2[3],
+        1
+    )
 end
 
 function CombatInfo.ResetCastBarPosition()
@@ -1886,14 +2211,22 @@ function CombatInfo.SetCastBarPosition()
         uiTlw.castBar:ClearAnchors()
 
         if CombatInfo.SV.CastbarOffsetX ~= nil and CombatInfo.SV.CastbarOffsetY ~= nil then
-            uiTlw.castBar:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, CombatInfo.SV.CastbarOffsetX, CombatInfo.SV.CastbarOffsetY)
+            uiTlw.castBar:SetAnchor(
+                TOPLEFT,
+                GuiRoot,
+                TOPLEFT,
+                CombatInfo.SV.CastbarOffsetX,
+                CombatInfo.SV.CastbarOffsetY
+            )
         else
             uiTlw.castBar:SetAnchor(CENTER, GuiRoot, CENTER, 0, 320)
         end
     end
 
     local savedPos = CombatInfo.SV.CastBarCustomPosition
-    uiTlw.castBar.preview.anchorLabel:SetText((savedPos ~= nil and #savedPos == 2) and zo_strformat("<<1>>, <<2>>", savedPos[1], savedPos[2]) or "default")
+    uiTlw.castBar.preview.anchorLabel:SetText(
+        (savedPos ~= nil and #savedPos == 2) and zo_strformat("<<1>>, <<2>>", savedPos[1], savedPos[2]) or "default"
+    )
 end
 
 function CombatInfo.SetMovingState(state)
@@ -1910,7 +2243,7 @@ end
 
 -- Called by CombatInfo.SetMovingState from the menu as well as by CombatInfo.OnUpdateCastbar when preview is enabled
 function CombatInfo.GenerateCastbarPreview(state)
-    local previewIcon = 'esoui/art/icons/icon_missing.dds'
+    local previewIcon = "esoui/art/icons/icon_missing.dds"
     castbar.icon:SetTexture(previewIcon)
     if CombatInfo.SV.CastBarLabel then
         local previewName = "Test"
@@ -1976,14 +2309,15 @@ function CombatInfo.ClientInteractResult(eventCode, result, interactTargetName)
     end
 
 end
-]]--
+]]
+--
 
 function CombatInfo.SoulGemResurrectionStart(eventCode, durationMs)
     -- Just in case any other casts are present - stop them first
     CombatInfo.StopCastBar()
 
     -- Set all parameters and start cast bar
-    local icon = 'esoui/art/icons/achievement_frostvault_death_challenge.dds'
+    local icon = "esoui/art/icons/achievement_frostvault_death_challenge.dds"
     local name = Abilities.Innate_Soul_Gem_Resurrection
     local duration = durationMs
 
@@ -2017,9 +2351,29 @@ function CombatInfo.SoulGemResurrectionEnd(eventCode)
 end
 
 -- Very basic handler registered to only read CC events on the player
-function CombatInfo.OnCombatEventBreakCast(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
+function CombatInfo.OnCombatEventBreakCast(
+    eventCode,
+    result,
+    isError,
+    abilityName,
+    abilityGraphic,
+    abilityActionSlotType,
+    sourceName,
+    sourceType,
+    targetName,
+    targetType,
+    hitValue,
+    powerType,
+    damageType,
+    log,
+    sourceUnitId,
+    targetUnitId,
+    abilityId
+)
     -- Some cast/channel abilities (or effects we use to simulate this) stun the player - ignore the effects of these ids when this happens.
-    if Castbar.IgnoreCastBarStun[abilityId] or Castbar.IgnoreCastBreakingActions[castbar.id] then return end
+    if Castbar.IgnoreCastBarStun[abilityId] or Castbar.IgnoreCastBreakingActions[castbar.id] then
+        return
+    end
 
     if not Castbar.IsCast[abilityId] then
         CombatInfo.StopCastBar()
@@ -2027,21 +2381,48 @@ function CombatInfo.OnCombatEventBreakCast(eventCode, result, isError, abilityNa
 end
 
 -- Listens to EVENT_COMBAT_EVENT
-function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
+function CombatInfo.OnCombatEvent(
+    eventCode,
+    result,
+    isError,
+    abilityName,
+    abilityGraphic,
+    abilityActionSlotType,
+    sourceName,
+    sourceType,
+    targetName,
+    targetType,
+    hitValue,
+    powerType,
+    damageType,
+    log,
+    sourceUnitId,
+    targetUnitId,
+    abilityId
+)
     -- Track ultimate generation when we block an attack or hit a target with a light/medium/heavy attack.
-    if CombatInfo.SV.UltimateGeneration and uiUltimate.NotFull and (
-        (result == ACTION_RESULT_BLOCKED_DAMAGE and targetType == COMBAT_UNIT_TYPE_PLAYER) or
-            (Effects.IsWeaponAttack[abilityName] and sourceType == COMBAT_UNIT_TYPE_PLAYER and targetName ~= "")
-    ) then
+    if
+        CombatInfo.SV.UltimateGeneration
+        and uiUltimate.NotFull
+        and (
+            (result == ACTION_RESULT_BLOCKED_DAMAGE and targetType == COMBAT_UNIT_TYPE_PLAYER)
+            or (Effects.IsWeaponAttack[abilityName] and sourceType == COMBAT_UNIT_TYPE_PLAYER and targetName ~= "")
+        )
+    then
         uiUltimate.Texture:SetHidden(false)
         uiUltimate.FadeTime = GetGameTimeMilliseconds() + 8000
     end
 
     -- Bail out past here if the cast bar is disabled or
-    if not CombatInfo.SV.CastBarEnable or
-        ((sourceType ~= COMBAT_UNIT_TYPE_PLAYER and not Castbar.CastOverride[abilityId]) and -- source isn't the player and the ability is not on the list of abilities to show the cast bar for
-            (targetType ~= COMBAT_UNIT_TYPE_PLAYER or result ~= ACTION_RESULT_EFFECT_FADED)) -- target isn't the player with effect faded
-    then return end
+    if
+        not CombatInfo.SV.CastBarEnable
+        or (
+            (sourceType ~= COMBAT_UNIT_TYPE_PLAYER and not Castbar.CastOverride[abilityId]) -- source isn't the player and the ability is not on the list of abilities to show the cast bar for
+            and (targetType ~= COMBAT_UNIT_TYPE_PLAYER or result ~= ACTION_RESULT_EFFECT_FADED)
+        ) -- target isn't the player with effect faded
+    then
+        return
+    end
 
     -- Stop when a cast breaking action is detected
     if Castbar.CastBreakingActions[abilityId] then
@@ -2054,7 +2435,9 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
     local name = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
     -- Return if ability not marked as cast or ability is blacklisted
-    if not Castbar.IsCast[abilityId] or CombatInfo.SV.blacklist[abilityId] or CombatInfo.SV.blacklist[name] then return end
+    if not Castbar.IsCast[abilityId] or CombatInfo.SV.blacklist[abilityId] or CombatInfo.SV.blacklist[name] then
+        return
+    end
 
     local duration
     local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId)
@@ -2062,10 +2445,14 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
 
     -- Override certain things to display as a channel rather than cast.
     -- Note only works for events where we override the duration.
-    if Castbar.CastChannelOverride[abilityId] then channeled = true end
+    if Castbar.CastChannelOverride[abilityId] then
+        channeled = true
+    end
 
     if channeled then
-        duration = Castbar.CastDurationFix[abilityId] or result == ACTION_RESULT_EFFECT_GAINED_DURATION and hitValue or channelTime
+        duration = Castbar.CastDurationFix[abilityId]
+            or result == ACTION_RESULT_EFFECT_GAINED_DURATION and hitValue
+            or channelTime
     else
         duration = Castbar.CastDurationFix[abilityId] or castTime
     end
@@ -2100,7 +2487,8 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
 
     -- Special handling for werewolf transform and transform back
     if abilityId == 39033 or abilityId == 39477 then
-        local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(32455)
+        local skillType, skillIndex, abilityIndex, morphChoice, rankIndex =
+            GetSpecificSkillAbilityKeysByAbilityId(32455)
         name, icon = GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
         if abilityId == 39477 then
             name = zo_strformat("<<1>> <<2>>", Abilities.Skill_Remove, name)
@@ -2109,12 +2497,19 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
 
     if duration > 0 and not g_casting then
         -- If action result is BEGIN and not channeled then start, otherwise only use GAINED
-        if (not forceChanneled and (
-            ((result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_BEGIN_CHANNEL) and not channeled) or
-                (result == ACTION_RESULT_EFFECT_GAINED and (Castbar.CastDurationFix[abilityId] or channeled)) or
-                (result == ACTION_RESULT_EFFECT_GAINED_DURATION and (Castbar.CastDurationFix[abilityId] or channeled))
-        )) or (forceChanneled and result == ACTION_RESULT_BEGIN) then
-
+        if
+            (
+                not forceChanneled
+                and (
+                    ((result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_BEGIN_CHANNEL) and not channeled)
+                    or (result == ACTION_RESULT_EFFECT_GAINED and (Castbar.CastDurationFix[abilityId] or channeled))
+                    or (
+                        result == ACTION_RESULT_EFFECT_GAINED_DURATION
+                        and (Castbar.CastDurationFix[abilityId] or channeled)
+                    )
+                )
+            ) or (forceChanneled and result == ACTION_RESULT_BEGIN)
+        then
             local currentTime = GetGameTimeMilliseconds()
             local endTime = currentTime + duration
             local remain = endTime - currentTime
@@ -2149,7 +2544,9 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
 
     -- Fix to lower the duration of the next cast of Profane Symbol quest ability for Scion of the Blood Matron (Vampire)
     if abilityId == 39507 then
-        zo_callLater(function() Castbar.CastDurationFix[39507] = 19500 end, 5000)
+        zo_callLater(function()
+            Castbar.CastDurationFix[39507] = 19500
+        end, 5000)
     end
 end
 
@@ -2157,9 +2554,28 @@ end
 function CombatInfo.OnCombatEventSpecialFilters(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
     CombatInfo.StopCastBar()
 end
-]]--
+]]
+--
 
-function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
+function CombatInfo.OnCombatEventBar(
+    eventCode,
+    result,
+    isError,
+    abilityName,
+    abilityGraphic,
+    abilityActionSlotType,
+    sourceName,
+    sourceType,
+    targetName,
+    targetType,
+    hitValue,
+    powerType,
+    damageType,
+    log,
+    sourceUnitId,
+    targetUnitId,
+    abilityId
+)
     -- If the source/target isn't the player then bail out now.
     if sourceType ~= COMBAT_UNIT_TYPE_PLAYER and targetType ~= COMBAT_UNIT_TYPE_PLAYER then
         return
@@ -2202,7 +2618,11 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
         end
     end
 
-    if result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED or result == ACTION_RESULT_EFFECT_GAINED_DURATION then
+    if
+        result == ACTION_RESULT_BEGIN
+        or result == ACTION_RESULT_EFFECT_GAINED
+        or result == ACTION_RESULT_EFFECT_GAINED_DURATION
+    then
         local currentTime = GetGameTimeMilliseconds()
         if g_toggledSlotsFront[abilityId] or g_toggledSlotsBack[abilityId] then
             if CombatInfo.SV.ShowToggled then
@@ -2252,7 +2672,6 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
 end
 
 function CombatInfo.OnSlotUpdated(eventCode, slotNum)
-
     -- Update ultimate label
     if slotNum == 8 then
         CombatInfo.UpdateUltimateLabel()
@@ -2260,18 +2679,16 @@ function CombatInfo.OnSlotUpdated(eventCode, slotNum)
 
     -- Update the slot if the bound id has a proc
     if slotNum >= BAR_INDEX_START and slotNum <= BAR_INDEX_END then
-
         local abilityId = GetSlotBoundId(slotNum, g_hotbarCategory)
         if Effects.IsAbilityProc[abilityId] or Effects.BaseForAbilityProc[abilityId] then
             CombatInfo.BarSlotUpdate(slotNum, false, true)
         end
     end
-
 end
 
 local function removeSlotFromTable(table, slotNum)
     for abilityId, slot in pairs(table) do
-        if (slot == slotNum) then
+        if slot == slotNum then
             table[abilityId] = nil
         end
     end
@@ -2312,12 +2729,15 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
 
     local ability_id = GetSlotBoundId(slotNum, g_hotbarCategory)
     if slotNum > BACKBAR_INDEX_OFFSET then
-        local hotbarCategory = g_hotbarCategory == HOTBAR_CATEGORY_BACKUP and HOTBAR_CATEGORY_PRIMARY or HOTBAR_CATEGORY_BACKUP
+        local hotbarCategory = g_hotbarCategory == HOTBAR_CATEGORY_BACKUP and HOTBAR_CATEGORY_PRIMARY
+            or HOTBAR_CATEGORY_BACKUP
         ability_id = GetSlotBoundId(slotNum - BACKBAR_INDEX_OFFSET, hotbarCategory)
     end
 
     -- Added this back for now but some abilities might still need updates in the override tables
-    local showFakeAura = (Effects.BarHighlightOverride[ability_id] and Effects.BarHighlightOverride[ability_id].showFakeAura)
+    local showFakeAura = (
+        Effects.BarHighlightOverride[ability_id] and Effects.BarHighlightOverride[ability_id].showFakeAura
+    )
 
     if Effects.BarHighlightOverride[ability_id] then
         if Effects.BarHighlightOverride[ability_id].hide then
@@ -2328,7 +2748,8 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
         end
     end
 
-    local abilityName = Effects.EffectOverride[ability_id] and Effects.EffectOverride[ability_id].name or GetAbilityName(ability_id)
+    local abilityName = Effects.EffectOverride[ability_id] and Effects.EffectOverride[ability_id].name
+        or GetAbilityName(ability_id)
     local duration = GetUpdatedAbilityDuration(ability_id)
     local currentTime = GetGameTimeMilliseconds()
 
@@ -2342,7 +2763,9 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
                 if not wasfullUpdate and not g_disableProcSound[slotNum] then
                     PlaySound(g_ProcSound)
                     g_disableProcSound[slotNum] = true
-                    zo_callLater(function() g_disableProcSound[slotNum] = false end, 3000)
+                    zo_callLater(function()
+                        g_disableProcSound[slotNum] = false
+                    end, 3000)
                 end
             end
         end
@@ -2352,7 +2775,9 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
             if CombatInfo.SV.ShowTriggered then
                 CombatInfo.PlayProcAnimations(slotNum)
                 if CombatInfo.SV.BarShowLabel then
-                    if not g_uiProcAnimation[slotNum] then return end
+                    if not g_uiProcAnimation[slotNum] then
+                        return
+                    end
                     local remain = g_triggeredSlotsRemain[proc] - currentTime
                     g_uiProcAnimation[slotNum].procLoopTexture.label:SetText(FormatDurationSeconds(remain))
                 end
@@ -2392,15 +2817,30 @@ function CombatInfo.UpdateUltimateLabel()
     g_ultimateCost = GetSlotAbilityCost(g_ultimateSlot, COMBAT_MECHANIC_FLAGS_ULTIMATE, bar) or 0
 
     -- Update ultimate label
-    CombatInfo.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, "player", nil, COMBAT_MECHANIC_FLAGS_ULTIMATE, g_ultimateCurrent, 0, 0)
+    CombatInfo.OnPowerUpdatePlayer(
+        EVENT_POWER_UPDATE,
+        "player",
+        nil,
+        COMBAT_MECHANIC_FLAGS_ULTIMATE,
+        g_ultimateCurrent,
+        0,
+        0
+    )
 end
 
 function CombatInfo.InventoryItemUsed()
     g_potionUsed = true
-    zo_callLater(function() g_potionUsed = false end, 200)
+    zo_callLater(function()
+        g_potionUsed = false
+    end, 200)
 end
 
-function CombatInfo.OnActiveHotbarUpdate(eventCode, didActiveHotbarChange, shouldUpdateAbilityAssignments, activeHotbarCategory)
+function CombatInfo.OnActiveHotbarUpdate(
+    eventCode,
+    didActiveHotbarChange,
+    shouldUpdateAbilityAssignments,
+    activeHotbarCategory
+)
     if didActiveHotbarChange == true or shouldUpdateAbilityAssignments == true then
         for _, physicalSlot in pairs(g_backbarButtons) do
             if physicalSlot.hotbarSwapAnimation then
@@ -2415,7 +2855,9 @@ end
 
 function CombatInfo.OnSlotsFullUpdate(eventCode)
     -- Don't update bars if this full update event was from using an inventory item
-    if g_potionUsed == true then return end
+    if g_potionUsed == true then
+        return
+    end
 
     -- Handle ultimate label first
     CombatInfo.UpdateUltimateLabel()
@@ -2466,8 +2908,12 @@ function CombatInfo.PlayProcAnimations(slotNum)
         local procLoopTimeline = ANIMATION_MANAGER:CreateTimelineFromVirtual("UltimateReadyLoop", procLoopTexture)
         procLoopTimeline.procLoopTexture = procLoopTexture
 
-        procLoopTimeline.onPlay = function(self) self.procLoopTexture:SetHidden(false) end
-        procLoopTimeline.onStop = function(self) self.procLoopTexture:SetHidden(true) end
+        procLoopTimeline.onPlay = function(self)
+            self.procLoopTexture:SetHidden(false)
+        end
+        procLoopTimeline.onStop = function(self)
+            self.procLoopTexture:SetHidden(true)
+        end
 
         procLoopTimeline:SetHandler("OnPlay", procLoopTimeline.onPlay)
         procLoopTimeline:SetHandler("OnStop", procLoopTimeline.onStop)
@@ -2489,7 +2935,8 @@ function CombatInfo.OnDeath(eventCode, unitTag, isDead)
                 g_uiCustomToggle[slotNum]:SetHidden(true)
                 --[[if slotNum == 8 and CombatInfo.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
                     uiUltimate.LabelPct:SetHidden(false)
-                end]]--
+                end]]
+                --
             end
         end
         for slotNum = BAR_INDEX_START + BACKBAR_INDEX_OFFSET, BACKBAR_INDEX_END + BACKBAR_INDEX_OFFSET do
@@ -2559,9 +3006,21 @@ function CombatInfo.ShowCustomToggle(slotNum)
     end
 end
 
-function CombatInfo.OnPowerUpdatePlayer(eventCode, unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax)
-    if unitTag ~= "player" then return end
-    if powerType ~= COMBAT_MECHANIC_FLAGS_ULTIMATE then return end
+function CombatInfo.OnPowerUpdatePlayer(
+    eventCode,
+    unitTag,
+    powerIndex,
+    powerType,
+    powerValue,
+    powerMax,
+    powerEffectiveMax
+)
+    if unitTag ~= "player" then
+        return
+    end
+    if powerType ~= COMBAT_MECHANIC_FLAGS_ULTIMATE then
+        return
+    end
 
     -- flag if ultimate is full - we"ll need it for ultimate generation texture
     uiUltimate.NotFull = (powerValue < powerMax)
@@ -2586,13 +3045,13 @@ function CombatInfo.OnPowerUpdatePlayer(eventCode, unitTag, powerIndex, powerTyp
             if pct < 100 then
                 -- Check Ultimate Percent Setting & if slot is used then check if the slot is currently showing a toggle
                 local setHiddenPct = not CombatInfo.SV.UltimatePctEnabled
-                if (CombatInfo.SV.ShowToggledUltimate and g_uiCustomToggle[8] and not g_uiCustomToggle[8]:IsHidden()) then
+                if CombatInfo.SV.ShowToggledUltimate and g_uiCustomToggle[8] and not g_uiCustomToggle[8]:IsHidden() then
                     setHiddenPct = true
                 end
                 uiUltimate.LabelPct:SetHidden(setHiddenPct)
                 -- Update Label Color
                 if CombatInfo.SV.UltimateLabelEnabled then
-                    for i = #(uiUltimate.pctColours), 1, -1 do
+                    for i = #uiUltimate.pctColours, 1, -1 do
                         if pct < uiUltimate.pctColours[i].pct then
                             uiUltimate.LabelVal:SetColor(unpack(uiUltimate.pctColours[i].colour))
                             break
@@ -2601,8 +3060,11 @@ function CombatInfo.OnPowerUpdatePlayer(eventCode, unitTag, powerIndex, powerTyp
                 end
             else
                 -- Check Ultimate Percent Setting & if slot is used then check if the slot is currently showing a toggle
-                local setHiddenPct = not (CombatInfo.SV.UltimatePctEnabled)
-                if (CombatInfo.SV.ShowToggledUltimate and g_uiCustomToggle[8] and not g_uiCustomToggle[8]:IsHidden()) or CombatInfo.SV.UltimateHideFull then
+                local setHiddenPct = not CombatInfo.SV.UltimatePctEnabled
+                if
+                    (CombatInfo.SV.ShowToggledUltimate and g_uiCustomToggle[8] and not g_uiCustomToggle[8]:IsHidden())
+                    or CombatInfo.SV.UltimateHideFull
+                then
                     setHiddenPct = true
                 end
                 uiUltimate.LabelPct:SetHidden(setHiddenPct)
@@ -2623,8 +3085,15 @@ function CombatInfo.OnPowerUpdatePlayer(eventCode, unitTag, powerIndex, powerTyp
     g_ultimateCurrent = powerValue
 end
 
-function CombatInfo.OnInventorySlotUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-
+function CombatInfo.OnInventorySlotUpdate(
+    eventCode,
+    bagId,
+    slotId,
+    isNewItem,
+    itemSoundCategory,
+    inventoryUpdateReason,
+    stackCountChange
+)
     if stackCountChange >= 0 then
         CombatInfo.UpdateUltimateLabel()
     end

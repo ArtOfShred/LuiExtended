@@ -29,21 +29,37 @@ function SpellCastBuffs.SetDisguiseItem()
     local abilityName = Abilities.Innate_Disguise
     local icon = Effects.DisguiseIcons[g_currentDisguise].icon
     local idTooltip = Effects.DisguiseIcons[g_currentDisguise].id or ""
-    local tooltip = Effects.EffectOverride[idTooltip] and Effects.EffectOverride[idTooltip].tooltip or Tooltips.Disguise_Generic
+    local tooltip = Effects.EffectOverride[idTooltip] and Effects.EffectOverride[idTooltip].tooltip
+        or Tooltips.Disguise_Generic
     -- Determine Context
     local context = SpellCastBuffs.DetermineContextSimple("player1", abilityId, abilityName)
     -- Create Buff
     SpellCastBuffs.EffectsList[context][abilityId] = {
-        target=SpellCastBuffs.DetermineTarget(context), type=1,
-        id=abilityId, name=name, icon=icon, tooltip = tooltip,
-        dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+        target = SpellCastBuffs.DetermineTarget(context),
+        type = 1,
+        id = abilityId,
+        name = name,
+        icon = icon,
+        tooltip = tooltip,
+        dur = 0,
+        starts = 1,
+        ends = nil, -- ends=nil : last buff in sorting
         forced = "long",
-        restart=true, iconNum=0
+        restart = true,
+        iconNum = 0,
     }
 end
 
 -- Called on item slot change for Disguise.
-function SpellCastBuffs.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
+function SpellCastBuffs.DisguiseItem(
+    eventCode,
+    bagId,
+    slotId,
+    isNewItem,
+    itemSoundCategory,
+    inventoryUpdateReason,
+    stackCountChange
+)
     -- If slotId isn't the disguise/tabard slot then return
     if slotId ~= EQUIP_SLOT_COSTUME or SpellCastBuffs.SV.IgnoreDisguise or SpellCastBuffs.SV.HidePlayerBuffs then
         return
@@ -59,9 +75,11 @@ end
 -- Handles disguise changes for player/reticleover
 function SpellCastBuffs.DisguiseStateChanged(eventCode, unitTag, disguiseState)
     -- Bail out if we don't have disguise or unitTag buffs enabled
-    if unitTag == "player" and ( not SpellCastBuffs.SV.DisguiseStatePlayer or SpellCastBuffs.SV.HidePlayerBuffs) then
+    if unitTag == "player" and (not SpellCastBuffs.SV.DisguiseStatePlayer or SpellCastBuffs.SV.HidePlayerBuffs) then
         return
-    elseif unitTag == "reticleover" and ( not SpellCastBuffs.SV.DisguiseStatePlayer or SpellCastBuffs.SV.HideTargetBuffs) then
+    elseif
+        unitTag == "reticleover" and (not SpellCastBuffs.SV.DisguiseStatePlayer or SpellCastBuffs.SV.HideTargetBuffs)
+    then
         return
     end
 
@@ -80,13 +98,24 @@ function SpellCastBuffs.DisguiseStateChanged(eventCode, unitTag, disguiseState)
     SpellCastBuffs.EffectsList[context][abilityId] = nil
 
     -- Add disguise icon if we are in any state of disguise
-    if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
+    if
+        disguiseState == DISGUISE_STATE_DISGUISED
+        or disguiseState == DISGUISE_STATE_DANGER
+        or disguiseState == DISGUISE_STATE_SUSPICIOUS
+        or disguiseState == DISGUISE_STATE_DISCOVERED
+    then
         SpellCastBuffs.EffectsList[context][abilityId] = {
-            target=SpellCastBuffs.DetermineTarget(context), type=1,
-            id=abilityId, name=abilityName, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
-            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+            target = SpellCastBuffs.DetermineTarget(context),
+            type = 1,
+            id = abilityId,
+            name = abilityName,
+            icon = "LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
+            dur = 0,
+            starts = 1,
+            ends = nil, -- ends=nil : last buff in sorting
             forced = "short",
-            restart=true, iconNum=0
+            restart = true,
+            iconNum = 0,
         }
     end
 end
@@ -110,7 +139,9 @@ function SpellCastBuffs.StealthStateChanged(eventCode, unitTag, stealthState)
     -- Bail out if we don't have stealth or unitTag buffs enabled
     if unitTag == "player" and (not SpellCastBuffs.SV.StealthStatePlayer or SpellCastBuffs.SV.HidePlayerBuffs) then
         return
-    elseif unitTag == "reticleover" and (not SpellCastBuffs.SV.StealthStateTarget or SpellCastBuffs.SV.HideTargetBuffs) then
+    elseif
+        unitTag == "reticleover" and (not SpellCastBuffs.SV.StealthStateTarget or SpellCastBuffs.SV.HideTargetBuffs)
+    then
         return
     end
 
@@ -126,28 +157,40 @@ function SpellCastBuffs.StealthStateChanged(eventCode, unitTag, stealthState)
     RemoveHidden(context)
 
     -- Add hidden icon if we are hidden
-    if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
+    if stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED then
         local abilityId = 20299
         local abilityName = Abilities.Innate_Sneak
         context = SpellCastBuffs.DetermineContextSimple(context, abilityId, abilityName)
         SpellCastBuffs.EffectsList[context][abilityId] = {
-            target=SpellCastBuffs.DetermineTarget(context), type=1,
-            id=abilityId, name=abilityName, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
-            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+            target = SpellCastBuffs.DetermineTarget(context),
+            type = 1,
+            id = abilityId,
+            name = abilityName,
+            icon = "LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
+            dur = 0,
+            starts = 1,
+            ends = nil, -- ends=nil : last buff in sorting
             forced = "short",
-            restart=true, iconNum=0
+            restart = true,
+            iconNum = 0,
         }
     -- Add invisible icon if we are invisible
-    elseif ( stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
+    elseif stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED then
         local abilityId = 20309
         local abilityName = Abilities.Innate_Hidden
         context = SpellCastBuffs.DetermineContextSimple(context, abilityId, abilityName)
         SpellCastBuffs.EffectsList[context][abilityId] = {
-            target=SpellCastBuffs.DetermineTarget(context), type=1,
-            id=abilityId, name=abilityName, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
-            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+            target = SpellCastBuffs.DetermineTarget(context),
+            type = 1,
+            id = abilityId,
+            name = abilityName,
+            icon = "LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
+            dur = 0,
+            starts = 1,
+            ends = nil, -- ends=nil : last buff in sorting
             forced = "short",
-            restart=true, iconNum=0
+            restart = true,
+            iconNum = 0,
         }
     end
 end

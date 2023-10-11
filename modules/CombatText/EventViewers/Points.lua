@@ -12,8 +12,10 @@ local pointTypes = LUIE.Data.CombatTextConstants.pointType
 
 function CombatTextPointEventViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
-    obj:RegisterCallback(eventType.POINT, function(...) self:OnEvent(...) end)
-    self.locationOffset = 0  -- Simple way to avoid overlapping. When number of active notes is back to 0, the offset is also reset
+    obj:RegisterCallback(eventType.POINT, function(...)
+        self:OnEvent(...)
+    end)
+    self.locationOffset = 0 -- Simple way to avoid overlapping. When number of active notes is back to 0, the offset is also reset
     self.activePoints = 0
     return obj
 end
@@ -25,32 +27,47 @@ function CombatTextPointEventViewer:OnEvent(pointType, value)
     local control, controlPoolKey = self.poolManager:GetPoolObject(poolTypes.CONTROL)
 
     local size, color, text
----------------------------------------------------------------------------------------------------------------------------------------
+    ---------------------------------------------------------------------------------------------------------------------------------------
     --//POINTS//--
----------------------------------------------------------------------------------------------------------------------------------------
-    if (pointType == pointTypes.ALLIANCE_POINTS) then
+    ---------------------------------------------------------------------------------------------------------------------------------------
+    if pointType == pointTypes.ALLIANCE_POINTS then
         color = Settings.colors.pointsAlliance
         size = Settings.fontSizes.point
-        text = self:FormatString(Settings.formats.pointsAlliance, { value = value, text = GetString(SI_LUIE_LAM_CT_SHARED_POINTS_ALLIANCE) })
-    elseif (pointType == pointTypes.EXPERIENCE_POINTS) then
+        text = self:FormatString(
+            Settings.formats.pointsAlliance,
+            { value = value, text = GetString(SI_LUIE_LAM_CT_SHARED_POINTS_ALLIANCE) }
+        )
+    elseif pointType == pointTypes.EXPERIENCE_POINTS then
         color = Settings.colors.pointsExperience
         size = Settings.fontSizes.point
-        text = self:FormatString(Settings.formats.pointsExperience, { value = value, text = GetString(SI_LUIE_LAM_CT_SHARED_POINTS_EXPERIENCE) })
-    elseif (pointType == pointTypes.CHAMPION_POINTS) then
+        text = self:FormatString(
+            Settings.formats.pointsExperience,
+            { value = value, text = GetString(SI_LUIE_LAM_CT_SHARED_POINTS_EXPERIENCE) }
+        )
+    elseif pointType == pointTypes.CHAMPION_POINTS then
         color = Settings.colors.pointsChampion
         size = Settings.fontSizes.point
-        text = self:FormatString(Settings.formats.pointsChampion, { value = value, text = GetString(SI_LUIE_LAM_CT_SHARED_POINTS_CHAMPION) })
----------------------------------------------------------------------------------------------------------------------------------------
+        text = self:FormatString(
+            Settings.formats.pointsChampion,
+            { value = value, text = GetString(SI_LUIE_LAM_CT_SHARED_POINTS_CHAMPION) }
+        )
+    ---------------------------------------------------------------------------------------------------------------------------------------
     --//COMBAT STATE//--
----------------------------------------------------------------------------------------------------------------------------------------
-    elseif (pointType == pointTypes.IN_COMBAT) then
+    ---------------------------------------------------------------------------------------------------------------------------------------
+    elseif pointType == pointTypes.IN_COMBAT then
         color = Settings.colors.inCombat
         size = Settings.fontSizes.combatState
-        text = self:FormatString(Settings.formats.inCombat, { value = value, text = GetString(SI_LUIE_CT_COMBAT_IN_DEFAULT) })
-    elseif (pointType == pointTypes.OUT_COMBAT) then
+        text = self:FormatString(
+            Settings.formats.inCombat,
+            { value = value, text = GetString(SI_LUIE_CT_COMBAT_IN_DEFAULT) }
+        )
+    elseif pointType == pointTypes.OUT_COMBAT then
         color = Settings.colors.outCombat
         size = Settings.fontSizes.combatState
-        text = self:FormatString(Settings.formats.outCombat, { value = value, text = GetString(SI_LUIE_CT_COMBAT_OUT_DEFAULT) })
+        text = self:FormatString(
+            Settings.formats.outCombat,
+            { value = value, text = GetString(SI_LUIE_CT_COMBAT_OUT_DEFAULT) }
+        )
     end
 
     self:PrepareLabel(control.label, size, color, text)
@@ -63,7 +80,7 @@ function CombatTextPointEventViewer:OnEvent(pointType, value)
 
     --Get animation
     local animationPoolType
-    if (pointType == pointTypes.IN_COMBAT or pointType == pointTypes.OUT_COMBAT) then
+    if pointType == pointTypes.IN_COMBAT or pointType == pointTypes.OUT_COMBAT then
         animationPoolType = poolTypes.ANIMATION_COMBATSTATE
     else
         animationPoolType = poolTypes.ANIMATION_POINT
@@ -77,7 +94,7 @@ function CombatTextPointEventViewer:OnEvent(pointType, value)
         self.poolManager:ReleasePoolObject(poolTypes.CONTROL, controlPoolKey)
         self.poolManager:ReleasePoolObject(animationPoolType, animationPoolKey)
         self.activePoints = self.activePoints - 1
-        if (self.activePoints == 0) then
+        if self.activePoints == 0 then
             self.locationOffset = 0
         end
     end, animation:GetDuration())

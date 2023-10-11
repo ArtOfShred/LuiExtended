@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
-LUIE.CampaignNames = { }
+LUIE.CampaignNames = {}
 
 local SlashCommands = LUIE.SlashCommands
 
@@ -17,7 +17,6 @@ end
 
 -- Slash Command to port to primary home
 function SlashCommands.SlashHome(option)
-
     -- Check option is valid if it exists
     -- Return an error message if no input is entered.
     if option and option ~= "" then
@@ -89,10 +88,11 @@ function SlashCommands.SlashHome(option)
             outside = SlashCommands.SV.SlashHomeChoice == 2 and true or false
         end
         RequestJumpToHouse(primaryHouse, outside)
-        local string = outside and GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG_OUT) or GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG_IN)
+        local string = outside and GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG_OUT)
+            or GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG_IN)
         printToChat(string, true)
         if LUIE.SV.TempAlertHome then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, (string))
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, string)
         end
     end
 end
@@ -105,7 +105,11 @@ function SlashCommands.SlashSetPrimaryHome()
             if IsPrimaryHouse(currentHouse) then
                 printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_SET_HOME_FAILED_ALREADY), houseName), true)
                 if LUIE.SV.TempAlertHome then
-                    ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (zo_strformat(GetString(SI_LUIE_SLASHCMDS_SET_HOME_FAILED_ALREADY), houseName)))
+                    ZO_Alert(
+                        UI_ALERT_CATEGORY_ERROR,
+                        nil,
+                        (zo_strformat(GetString(SI_LUIE_SLASHCMDS_SET_HOME_FAILED_ALREADY), houseName))
+                    )
                 end
                 PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
                 return
@@ -113,7 +117,11 @@ function SlashCommands.SlashSetPrimaryHome()
                 SetHousingPrimaryHouse(currentHouse)
                 printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_SET_HOME_SUCCESS_MSG), houseName), true)
                 if LUIE.SV.TempAlertHome then
-                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, (zo_strformat(GetString(SI_LUIE_SLASHCMDS_SET_HOME_SUCCESS_MSG), houseName)))
+                    ZO_Alert(
+                        UI_ALERT_CATEGORY_ALERT,
+                        nil,
+                        (zo_strformat(GetString(SI_LUIE_SLASHCMDS_SET_HOME_SUCCESS_MSG), houseName))
+                    )
                 end
             end
         else
@@ -132,7 +140,6 @@ function SlashCommands.SlashSetPrimaryHome()
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-
 end
 
 -- Slash Command to initiate a trade dialogue
@@ -140,7 +147,11 @@ function SlashCommands.SlashTrade(option)
     if option == "" or option == nil then
         printToChat(GetString(SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME), true)
         if LUIE.ChatAnnouncements.SV.Notify.NotificationTradeAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, (GetString(SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME)))
+            ZO_Alert(
+                UI_ALERT_CATEGORY_ERROR,
+                SOUNDS.GENERAL_ALERT_ERROR,
+                (GetString(SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME))
+            )
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -194,7 +205,11 @@ function SlashCommands.SlashCampaignQ(option)
             QueueForCampaign(campaignId)
             printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName), true)
             if LUIE.SV.TempAlertCampaign then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName))
+                ZO_Alert(
+                    UI_ALERT_CATEGORY_ALERT,
+                    nil,
+                    zo_strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName)
+                )
             end
             return
         else
@@ -217,7 +232,7 @@ end
 
 -- Slash Command to use collectibles based on their collectible id
 function SlashCommands.SlashCollectible(id)
-    if (id == nil or id == "" or id == 1) then
+    if id == nil or id == "" or id == 1 then
         return
     end
 
@@ -225,7 +240,11 @@ function SlashCommands.SlashCollectible(id)
     if IsInImperialCity() then
         printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_IC), GetCollectibleName(id)), true)
         if LUIE.SV.TempAlertHome then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_IC), GetCollectibleName(id)))
+            ZO_Alert(
+                UI_ALERT_CATEGORY_ERROR,
+                nil,
+                zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_IC), GetCollectibleName(id))
+            )
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -234,7 +253,11 @@ function SlashCommands.SlashCollectible(id)
     if IsPlayerInAvAWorld() then
         printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_AVA), GetCollectibleName(id)), true)
         if LUIE.SV.TempAlertHome then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_AVA), GetCollectibleName(id)))
+            ZO_Alert(
+                UI_ALERT_CATEGORY_ERROR,
+                nil,
+                zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_AVA), GetCollectibleName(id))
+            )
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -243,7 +266,11 @@ function SlashCommands.SlashCollectible(id)
     if IsActiveWorldBattleground() then
         printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_BG), GetCollectibleName(id)), true)
         if LUIE.SV.TempAlertHome then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_BG), GetCollectibleName(id)))
+            ZO_Alert(
+                UI_ALERT_CATEGORY_ERROR,
+                nil,
+                zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_BG), GetCollectibleName(id))
+            )
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -254,9 +281,16 @@ function SlashCommands.SlashCollectible(id)
     if LUIE.Data.CollectibleTables.All[id] ~= nil then
         local currentHouse = GetCurrentZoneHouseId()
         if currentHouse ~= nil and currentHouse > 0 then
-            printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_HOME), GetCollectibleName(id)), true)
+            printToChat(
+                zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_HOME), GetCollectibleName(id)),
+                true
+            )
             if LUIE.SV.TempAlertHome then
-                ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_HOME), GetCollectibleName(id)))
+                ZO_Alert(
+                    UI_ALERT_CATEGORY_ERROR,
+                    nil,
+                    zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_HOME), GetCollectibleName(id))
+                )
             end
             PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
             return
@@ -270,9 +304,16 @@ function SlashCommands.SlashCollectible(id)
             LUIE.LastMementoUsed = id
         end
     else
-        printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(id)), true)
+        printToChat(
+            zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(id)),
+            true
+        )
         if LUIE.SV.TempAlertHome then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(id)))
+            ZO_Alert(
+                UI_ALERT_CATEGORY_ERROR,
+                nil,
+                zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(id))
+            )
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -282,7 +323,7 @@ end
 function SlashCommands.SlashCompanion(option)
     if option == nil or option == "" then
         SlashCommands.SlashCollectible(SlashCommands.SV.SlashCompanionChoice)
-    elseif (companionKeys[option] ~= nil) then
+    elseif companionKeys[option] ~= nil then
         SlashCommands.SlashCollectible(companionKeys[option])
     end
 end
@@ -329,7 +370,11 @@ function SlashCommands.SlashOutfit(option)
     if valid > numOutfits then
         printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED), valid))
         if LUIE.SV.TempAlertOutfit then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, zo_strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED), valid))
+            ZO_Alert(
+                UI_ALERT_CATEGORY_ERROR,
+                nil,
+                zo_strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED), valid)
+            )
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -353,7 +398,8 @@ function SlashCommands.SlashReport(player)
     local currenttime = GetTimeString()
     local currentdate = GetDateStringFromTimestamp(GetTimeStamp())
     local server = GetWorldName()
-    local text = "I've encounterd a suspicious player.\n\nName: <<1>>\nLocation: <<2>>\nDate & Time: <<3>> <<4>>\nServer: <<5>>"
+    local text =
+        "I've encounterd a suspicious player.\n\nName: <<1>>\nLocation: <<2>>\nDate & Time: <<3>> <<4>>\nServer: <<5>>"
 
     -- Set the category to report a player
     HELP_CUSTOMER_SERVICE_ASK_FOR_HELP_KEYBOARD:SelectCategory(2)
@@ -362,7 +408,9 @@ function SlashCommands.SlashReport(player)
 
     -- Populate the reporting window name and description
     ZO_Help_Ask_For_Help_Keyboard_ControlDetailsTextLineField:SetText(player)
-    ZO_Help_Ask_For_Help_Keyboard_ControlDescriptionBodyField:SetText(zo_strformat(text, player, location, currentdate, currenttime, server))
+    ZO_Help_Ask_For_Help_Keyboard_ControlDescriptionBodyField:SetText(
+        zo_strformat(text, player, location, currentdate, currenttime, server)
+    )
 
     -- Open the reporting window
     HELP_CUSTOMER_SUPPORT_KEYBOARD:OpenScreen(HELP_CUSTOMER_SERVICE_ASK_FOR_HELP_KEYBOARD_FRAGMENT)

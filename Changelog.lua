@@ -9,14 +9,14 @@ local changelogMessages = {
     "|cFFA500LuiExtended Version 6.5.2|r",
     "",
     "|cFFFF00Combat Info:|r",
-	"[*] Updated API",
+    "[*] Updated API",
     "[*] Fixed Proc Sounds not regestering",
 }
 
 -- Hide toggle called by the menu or xml button
 function LUIE.ToggleChangelog(option)
     LUIE_Changelog:ClearAnchors()
-    LUIE_Changelog:SetAnchor(CENTER, GuiRoot, CENTER, 0, -120 )
+    LUIE_Changelog:SetAnchor(CENTER, GuiRoot, CENTER, 0, -120)
     LUIE_Changelog:SetHidden(option)
 end
 
@@ -34,10 +34,10 @@ function LUIE.ChangelogScreen()
     LUIE_Changelog_Text:SetText(changelog)
 
     -- Display the changelog if version number < current version
-    if (LUIESV.Default[GetDisplayName()]['$AccountWide'].WelcomeVersion ~= LUIE.version) then
+    if LUIESV.Default[GetDisplayName()]["$AccountWide"].WelcomeVersion ~= LUIE.version then
         LUIE_Changelog:SetHidden(false)
     end
 
     -- Set version to current version
-    LUIESV.Default[GetDisplayName()]['$AccountWide'].WelcomeVersion = LUIE.version
+    LUIESV.Default[GetDisplayName()]["$AccountWide"].WelcomeVersion = LUIE.version
 end

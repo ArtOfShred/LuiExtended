@@ -23,7 +23,7 @@ PetNames.Sorcerer = {
 -- Pet Names (Warden)
 PetNames.Warden = {
     [GetString(SI_LUIE_PET_NAME_FERAL_GUARDIAN)] = true,
-    [GetString(SI_LUIE_PET_NAME_ETERNAL_GUARDIAN )] = true,
+    [GetString(SI_LUIE_PET_NAME_ETERNAL_GUARDIAN)] = true,
     [GetString(SI_LUIE_PET_NAME_WILD_GUARDIAN)] = true,
 }
 
@@ -55,7 +55,7 @@ PetNames.Assistants = {
     [GetString(SI_LUIE_PET_NAME_ASSISTANT_TYTHIS)] = true,
     [GetString(SI_LUIE_PET_NAME_ASSISTANT_BARON)] = true,
     [GetString(SI_LUIE_PET_NAME_ASSISTANT_PEDDLER)] = true,
-	[GetString(SI_LUIE_PET_NAME_ASSISTANT_FACTOTUMB)] = true,
-	[GetString(SI_LUIE_PET_NAME_ASSISTANT_FACTOTUMM)] = true,
-	[GetString(SI_LUIE_PET_NAME_ASSISTANT_GHRASHAROG)] = true,
+    [GetString(SI_LUIE_PET_NAME_ASSISTANT_FACTOTUMB)] = true,
+    [GetString(SI_LUIE_PET_NAME_ASSISTANT_FACTOTUMM)] = true,
+    [GetString(SI_LUIE_PET_NAME_ASSISTANT_GHRASHAROG)] = true,
 }

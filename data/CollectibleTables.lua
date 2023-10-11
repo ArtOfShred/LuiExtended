@@ -55,7 +55,9 @@ CollectibleTables.Companions = {
 CollectibleTables.All = {}
 
 for name, table in pairs(CollectibleTables) do
-    if (type(table) == "table" and tostring(name) ~= "All") then
-        for k, v in pairs(table) do CollectibleTables.All[k] = v end
+    if type(table) == "table" and tostring(name) ~= "All" then
+        for k, v in pairs(table) do
+            CollectibleTables.All[k] = v
+        end
     end
 end

@@ -14,8 +14,10 @@ local alertFrameMovingEnabled = false -- Helper local flag
 
 local globalMethodOptions = { "Ascending", "Descending", "Radial" }
 local globalMethodOptionsKeys = { ["Ascending"] = 1, ["Descending"] = 2, ["Radial"] = 3 }
-local globalAlertOptions = { "Show All Incoming Abilities", "Only Show Hard CC Effects", "Only Show Unbreakable CC Effects" }
-local globalAlertOptionsKeys = { ["Show All Incoming Abilities"] = 1, ["Only Show Hard CC Effects"] = 2, ["Only Show Unbreakable CC Effects"] = 3 }
+local globalAlertOptions =
+    { "Show All Incoming Abilities", "Only Show Hard CC Effects", "Only Show Unbreakable CC Effects" }
+local globalAlertOptionsKeys =
+    { ["Show All Incoming Abilities"] = 1, ["Only Show Hard CC Effects"] = 2, ["Only Show Unbreakable CC Effects"] = 3 }
 local globalIconOptions = { "All Crowd Control", "NPC CC Only", "Player CC Only" }
 local globalIconOptionsKeys = { ["All Crowd Control"] = 1, ["NPC CC Only"] = 2, ["Player CC Only"] = 3 }
 
@@ -31,7 +33,11 @@ local function GenerateCustomList(input)
         counter = counter + 1
         -- If the input is a numeric value then we can pull this abilityId's info.
         if type(id) == "number" then
-            options[counter] = zo_iconFormat(GetAbilityIcon(id), 16, 16) .. " [" .. id .. "] " .. zo_strformat("<<C:1>>", GetAbilityName(id))
+            options[counter] = zo_iconFormat(GetAbilityIcon(id), 16, 16)
+                .. " ["
+                .. id
+                .. "] "
+                .. zo_strformat("<<C:1>>", GetAbilityName(id))
         -- If the input is not numeric then add this as a name only.
         else
             options[counter] = id
@@ -45,7 +51,10 @@ local dialogs = {
     [1] = { -- Clear Blacklist
         identifier = "LUIE_CLEAR_CASTBAR_BLACKLIST",
         title = GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR),
-        text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG), GetString(SI_LUIE_CUSTOM_LIST_CASTBAR_BLACKLIST)),
+        text = zo_strformat(
+            GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG),
+            GetString(SI_LUIE_CUSTOM_LIST_CASTBAR_BLACKLIST)
+        ),
         callback = function(dialog)
             CombatInfo.ClearCustomList(CombatInfo.SV.blacklist)
             LUIE_BlacklistCastbar:UpdateChoices(GenerateCustomList(CombatInfo.SV.blacklist))
@@ -63,7 +72,9 @@ end
 function CombatInfo.CreateSettings()
     -- Load LibAddonMenu
     local LAM = LibAddonMenu2
-    if LAM == nil then return end
+    if LAM == nil then
+        return
+    end
 
     local Defaults = CombatInfo.Defaults
     local Settings = CombatInfo.SV
@@ -101,7 +112,7 @@ function CombatInfo.CreateSettings()
         donation = LUIE.donation,
         slashCommand = "/luici",
         registerForRefresh = true,
-        registerForDefaults = true,
+        registerForDefaults = false,
     }
 
     local optionsDataCombatInfo = {}
@@ -117,7 +128,9 @@ function CombatInfo.CreateSettings()
         type = "button",
         name = GetString(SI_LUIE_LAM_RELOADUI),
         tooltip = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
-        func = function() ReloadUI("ingame") end,
+        func = function()
+            ReloadUI("ingame")
+        end,
         width = "full",
     }
 
@@ -130,55 +143,86 @@ function CombatInfo.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_GCD_SHOW),
                 tooltip = GetString(SI_LUIE_LAM_CI_GCD_SHOW_TP),
-                getFunc = function() return Settings.GlobalShowGCD end,
-                setFunc = function(value) Settings.GlobalShowGCD = value CombatInfo.HookGCD() end,
+                getFunc = function()
+                    return Settings.GlobalShowGCD
+                end,
+                setFunc = function(value)
+                    Settings.GlobalShowGCD = value
+                    CombatInfo.HookGCD()
+                end,
                 width = "full",
                 warning = GetString(SI_LUIE_LAM_CI_GCD_SHOW_WARN),
                 default = Defaults.GlobalShowGCD,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+                disabled = function()
+                    return not LUIE.SV.CombatInfo_Enabled
+                end,
             },
             {
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_QUICK)),
                 tooltip = GetString(SI_LUIE_LAM_CI_GCD_QUICK_TP),
-                getFunc = function() return Settings.GlobalPotion end,
-                setFunc = function(value) Settings.GlobalPotion = value end,
+                getFunc = function()
+                    return Settings.GlobalPotion
+                end,
+                setFunc = function(value)
+                    Settings.GlobalPotion = value
+                end,
                 width = "full",
                 default = Defaults.GlobalPotion,
-                disabled = function() return not (LUIE.SV.CombatInfo_Enabled and Settings.GlobalShowGCD) end,
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.GlobalShowGCD)
+                end,
             },
             {
                 -- Show GCD Ready Flash
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_FLASH)),
                 tooltip = GetString(SI_LUIE_LAM_CI_GCD_FLASH_TP),
-                getFunc = function() return Settings.GlobalFlash end,
-                setFunc = function(value) Settings.GlobalFlash = value end,
+                getFunc = function()
+                    return Settings.GlobalFlash
+                end,
+                setFunc = function(value)
+                    Settings.GlobalFlash = value
+                end,
                 width = "full",
                 default = Defaults.GlobalFlash,
-                disabled = function() return not (LUIE.SV.CombatInfo_Enabled and Settings.GlobalShowGCD) end,
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.GlobalShowGCD)
+                end,
             },
             {
                 -- GCD - Desaturate Icons on GCD
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_DESAT)),
                 tooltip = GetString(SI_LUIE_LAM_CI_GCD_DESAT_TP),
-                getFunc = function() return Settings.GlobalDesat end,
-                setFunc = function(value) Settings.GlobalDesat = value end,
+                getFunc = function()
+                    return Settings.GlobalDesat
+                end,
+                setFunc = function(value)
+                    Settings.GlobalDesat = value
+                end,
                 width = "full",
                 default = Defaults.GlobalDesat,
-                disabled = function() return not (LUIE.SV.CombatInfo_Enabled and Settings.GlobalShowGCD) end,
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.GlobalShowGCD)
+                end,
             },
             {
                 -- GCD - Color Slot Label Red
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CI_GCD_COLOR_TP),
-                getFunc = function() return Settings.GlobalLabelColor end,
-                setFunc = function(value) Settings.GlobalLabelColor = value end,
+                getFunc = function()
+                    return Settings.GlobalLabelColor
+                end,
+                setFunc = function(value)
+                    Settings.GlobalLabelColor = value
+                end,
                 width = "full",
                 default = Defaults.GlobalLabelColor,
-                disabled = function() return not (LUIE.SV.CombatInfo_Enabled and Settings.GlobalShowGCD) end,
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.GlobalShowGCD)
+                end,
             },
             {
                 -- GCD - Animation Method
@@ -186,11 +230,17 @@ function CombatInfo.CreateSettings()
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_ANIMATION)),
                 tooltip = GetString(SI_LUIE_LAM_CI_GCD_ANIMATION_TP),
                 choices = globalMethodOptions,
-                getFunc = function() return globalMethodOptions[Settings.GlobalMethod] end,
-                setFunc = function(value) Settings.GlobalMethod = globalMethodOptionsKeys[value] end,
+                getFunc = function()
+                    return globalMethodOptions[Settings.GlobalMethod]
+                end,
+                setFunc = function(value)
+                    Settings.GlobalMethod = globalMethodOptionsKeys[value]
+                end,
                 width = "full",
                 default = Defaults.GlobalMethod,
-                disabled = function() return not (LUIE.SV.CombatInfo_Enabled and Settings.GlobalShowGCD) end,
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.GlobalShowGCD)
+                end,
             },
         },
     }
@@ -204,32 +254,57 @@ function CombatInfo.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ULTIMATE_SHOW_VAL),
                 tooltip = GetString(SI_LUIE_LAM_CI_ULTIMATE_SHOW_VAL_TP),
-                getFunc = function() return Settings.UltimateLabelEnabled end,
-                setFunc = function(value) Settings.UltimateLabelEnabled = value CombatInfo.RegisterCombatInfo() CombatInfo.UpdateUltimateLabel() end,
+                getFunc = function()
+                    return Settings.UltimateLabelEnabled
+                end,
+                setFunc = function(value)
+                    Settings.UltimateLabelEnabled = value
+                    CombatInfo.RegisterCombatInfo()
+                    CombatInfo.UpdateUltimateLabel()
+                end,
                 width = "full",
                 default = Defaults.UltimateLabelEnabled,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+                disabled = function()
+                    return not LUIE.SV.CombatInfo_Enabled
+                end,
             },
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ULTIMATE_SHOW_PCT),
                 tooltip = GetString(SI_LUIE_LAM_CI_ULTIMATE_SHOW_PCT_TP),
-                getFunc = function() return Settings.UltimatePctEnabled end,
-                setFunc = function(value) Settings.UltimatePctEnabled = value CombatInfo.RegisterCombatInfo() CombatInfo.UpdateUltimateLabel() end,
+                getFunc = function()
+                    return Settings.UltimatePctEnabled
+                end,
+                setFunc = function(value)
+                    Settings.UltimatePctEnabled = value
+                    CombatInfo.RegisterCombatInfo()
+                    CombatInfo.UpdateUltimateLabel()
+                end,
                 width = "full",
                 default = Defaults.UltimatePctEnabled,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+                disabled = function()
+                    return not LUIE.SV.CombatInfo_Enabled
+                end,
             },
             {
                 type = "slider",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
                 tooltip = GetString(SI_LUIE_LAM_CI_SHARED_POSITION_TP),
-                min = -72, max = 40, step = 2,
-                getFunc = function() return Settings.UltimateLabelPosition end,
-                setFunc = function(value) Settings.UltimateLabelPosition = value CombatInfo.ResetUltimateLabel() end,
+                min = -72,
+                max = 40,
+                step = 2,
+                getFunc = function()
+                    return Settings.UltimateLabelPosition
+                end,
+                setFunc = function(value)
+                    Settings.UltimateLabelPosition = value
+                    CombatInfo.ResetUltimateLabel()
+                end,
                 width = "full",
                 default = Defaults.UltimateLabelPosition,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.UltimatePctEnabled ) end,
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.UltimatePctEnabled)
+                end,
             },
             {
                 type = "dropdown",
@@ -238,22 +313,38 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONT_TP),
                 choices = FontsList,
                 sort = "name-up",
-                getFunc = function() return Settings.UltimateFontFace end,
-                setFunc = function(var) Settings.UltimateFontFace = var CombatInfo.ApplyFont() end,
+                getFunc = function()
+                    return Settings.UltimateFontFace
+                end,
+                setFunc = function(var)
+                    Settings.UltimateFontFace = var
+                    CombatInfo.ApplyFont()
+                end,
                 width = "full",
                 default = Defaults.UltimateFontFace,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.UltimatePctEnabled ) end,
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.UltimatePctEnabled)
+                end,
             },
             {
                 type = "slider",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSIZE_TP),
-                min = 10, max = 30, step = 1,
-                getFunc = function() return Settings.UltimateFontSize end,
-                setFunc = function(value) Settings.UltimateFontSize = value CombatInfo.ApplyFont() end,
+                min = 10,
+                max = 30,
+                step = 1,
+                getFunc = function()
+                    return Settings.UltimateFontSize
+                end,
+                setFunc = function(value)
+                    Settings.UltimateFontSize = value
+                    CombatInfo.ApplyFont()
+                end,
                 width = "full",
                 default = Defaults.UltimateFontSize,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.UltimatePctEnabled ) end,
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.UltimatePctEnabled)
+                end,
             },
             {
                 type = "dropdown",
@@ -261,31 +352,51 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSTYLE_TP),
                 choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
                 sort = "name-up",
-                getFunc = function() return Settings.UltimateFontStyle end,
-                setFunc = function(var) Settings.UltimateFontStyle = var CombatInfo.ApplyFont() end,
+                getFunc = function()
+                    return Settings.UltimateFontStyle
+                end,
+                setFunc = function(var)
+                    Settings.UltimateFontStyle = var
+                    CombatInfo.ApplyFont()
+                end,
                 width = "full",
                 default = Defaults.UltimateFontStyle,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.UltimatePctEnabled ) end,
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.UltimatePctEnabled)
+                end,
             },
             {
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ULTIMATE_HIDEFULL)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ULTIMATE_HIDEFULL_TP),
-                getFunc = function() return Settings.UltimateHideFull end,
-                setFunc = function(value) Settings.UltimateHideFull = value CombatInfo.UpdateUltimateLabel() end,
+                getFunc = function()
+                    return Settings.UltimateHideFull
+                end,
+                setFunc = function(value)
+                    Settings.UltimateHideFull = value
+                    CombatInfo.UpdateUltimateLabel()
+                end,
                 width = "full",
                 default = Defaults.UltimateHideFull,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.UltimatePctEnabled ) end,
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.UltimatePctEnabled)
+                end,
             },
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ULTIMATE_TEXTURE),
                 tooltip = GetString(SI_LUIE_LAM_CI_ULTIMATE_TEXTURE_TP),
-                getFunc = function() return Settings.UltimateGeneration end,
-                setFunc = function(value) Settings.UltimateGeneration = value end,
+                getFunc = function()
+                    return Settings.UltimateGeneration
+                end,
+                setFunc = function(value)
+                    Settings.UltimateGeneration = value
+                end,
                 width = "full",
                 default = Defaults.UltimateGeneration,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+                disabled = function()
+                    return not LUIE.SV.CombatInfo_Enabled
+                end,
             },
         },
     }
@@ -300,22 +411,36 @@ function CombatInfo.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_BAR_PROC),
                 tooltip = GetString(SI_LUIE_LAM_CI_BAR_PROC_TP),
-                getFunc = function() return Settings.ShowTriggered end,
-                setFunc = function(value) Settings.ShowTriggered = value CombatInfo.UpdateBarHighlightTables() CombatInfo.OnSlotsFullUpdate() end,
+                getFunc = function()
+                    return Settings.ShowTriggered
+                end,
+                setFunc = function(value)
+                    Settings.ShowTriggered = value
+                    CombatInfo.UpdateBarHighlightTables()
+                    CombatInfo.OnSlotsFullUpdate()
+                end,
                 width = "full",
                 default = Defaults.ShowTriggered,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+                disabled = function()
+                    return not LUIE.SV.CombatInfo_Enabled
+                end,
             },
             {
                 -- Bar Proc Sound
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_PROCSOUND)),
                 tooltip = GetString(SI_LUIE_LAM_CI_BAR_PROCSOUND_TP),
-                getFunc = function() return Settings.ProcEnableSound end,
-                setFunc = function(value) Settings.ProcEnableSound = value end,
+                getFunc = function()
+                    return Settings.ProcEnableSound
+                end,
+                setFunc = function(value)
+                    Settings.ProcEnableSound = value
+                end,
                 width = "half",
                 default = Defaults.ProcEnableSound,
-                disabled = function() return not (Settings.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+                disabled = function()
+                    return not (Settings.ShowTriggered and LUIE.SV.CombatInfo_Enabled)
+                end,
             },
             {
                 -- Bar Proc Sound Choice
@@ -323,33 +448,56 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.ProcSoundName end,
-                setFunc = function(value) Settings.ProcSoundName = value CombatInfo.ApplyProcSound(true) end,
+                getFunc = function()
+                    return Settings.ProcSoundName
+                end,
+                setFunc = function(value)
+                    Settings.ProcSoundName = value
+                    CombatInfo.ApplyProcSound(true)
+                end,
                 width = "half",
                 default = Defaults.ProcSoundName,
-                disabled = function() return not (Settings.ShowTriggered and Settings.ProcEnableSound and LUIE.SV.CombatInfo_Enabled) end,
+                disabled = function()
+                    return not (Settings.ShowTriggered and Settings.ProcEnableSound and LUIE.SV.CombatInfo_Enabled)
+                end,
             },
             {
                 -- Highlight Ability Bar Icon for Active Effects
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_BAR_EFFECT),
                 tooltip = GetString(SI_LUIE_LAM_CI_BAR_EFFECT_TP),
-                getFunc = function() return Settings.ShowToggled end,
-                setFunc = function(value) Settings.ShowToggled = value CombatInfo.UpdateBarHighlightTables() CombatInfo.OnSlotsFullUpdate() end,
+                getFunc = function()
+                    return Settings.ShowToggled
+                end,
+                setFunc = function(value)
+                    Settings.ShowToggled = value
+                    CombatInfo.UpdateBarHighlightTables()
+                    CombatInfo.OnSlotsFullUpdate()
+                end,
                 width = "full",
                 default = Defaults.ShowToggled,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+                disabled = function()
+                    return not LUIE.SV.CombatInfo_Enabled
+                end,
             },
             {
                 -- Show Toggled Ultimate
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_ULTIMATE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_BAR_ULTIMATE_TP),
-                getFunc = function() return Settings.ShowToggledUltimate end,
-                setFunc = function(value) Settings.ShowToggledUltimate = value CombatInfo.UpdateBarHighlightTables() CombatInfo.OnSlotsFullUpdate() end,
+                getFunc = function()
+                    return Settings.ShowToggledUltimate
+                end,
+                setFunc = function(value)
+                    Settings.ShowToggledUltimate = value
+                    CombatInfo.UpdateBarHighlightTables()
+                    CombatInfo.OnSlotsFullUpdate()
+                end,
                 width = "full",
                 default = Defaults.ShowToggledUltimate,
-                disabled = function() return not (Settings.ShowToggled and LUIE.SV.CombatInfo_Enabled) end,
+                disabled = function()
+                    return not (Settings.ShowToggled and LUIE.SV.CombatInfo_Enabled)
+                end,
             },
             {
                 -- Show Label On Bar Highlight
@@ -357,23 +505,43 @@ function CombatInfo.CreateSettings()
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>> - BROKEN", GetString(SI_LUIE_LAM_CI_BAR_LABEL)),
                 tooltip = GetString(SI_LUIE_LAM_CI_BAR_LABEL_TP),
-                getFunc = function() return Settings.BarShowLabel end,
-                setFunc = function(value) Settings.BarShowLabel = value CombatInfo.ResetBarLabel() end,
+                getFunc = function()
+                    return Settings.BarShowLabel
+                end,
+                setFunc = function(value)
+                    Settings.BarShowLabel = value
+                    CombatInfo.ResetBarLabel()
+                end,
                 width = "full",
                 default = Defaults.BarShowLabel,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and ( Settings.ShowTriggered or Settings.ShowToggled) ) end,
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and (Settings.ShowTriggered or Settings.ShowToggled))
+                end,
                 --disabled = true
             },
             {
                 type = "slider",
                 name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
                 tooltip = GetString(SI_LUIE_LAM_CI_SHARED_POSITION_TP),
-                min = -72, max = 40, step = 2,
-                getFunc = function() return Settings.BarLabelPosition end,
-                setFunc = function(value) Settings.BarLabelPosition = value CombatInfo.ResetBarLabel() end,
+                min = -72,
+                max = 40,
+                step = 2,
+                getFunc = function()
+                    return Settings.BarLabelPosition
+                end,
+                setFunc = function(value)
+                    Settings.BarLabelPosition = value
+                    CombatInfo.ResetBarLabel()
+                end,
                 width = "full",
                 default = Defaults.BarLabelPosition,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.BarShowLabel and ( Settings.ShowTriggered or Settings.ShowToggled)) end,
+                disabled = function()
+                    return not (
+                        LUIE.SV.CombatInfo_Enabled
+                        and Settings.BarShowLabel
+                        and (Settings.ShowTriggered or Settings.ShowToggled)
+                    )
+                end,
             },
             {
                 type = "dropdown",
@@ -382,22 +550,46 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONT_TP),
                 choices = FontsList,
                 sort = "name-up",
-                getFunc = function() return Settings.BarFontFace end,
-                setFunc = function(var) Settings.BarFontFace = var CombatInfo.ApplyFont() end,
+                getFunc = function()
+                    return Settings.BarFontFace
+                end,
+                setFunc = function(var)
+                    Settings.BarFontFace = var
+                    CombatInfo.ApplyFont()
+                end,
                 width = "full",
                 default = Defaults.BarFontFace,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.BarShowLabel and ( Settings.ShowTriggered or Settings.ShowToggled)) end,
+                disabled = function()
+                    return not (
+                        LUIE.SV.CombatInfo_Enabled
+                        and Settings.BarShowLabel
+                        and (Settings.ShowTriggered or Settings.ShowToggled)
+                    )
+                end,
             },
             {
                 type = "slider",
                 name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSIZE_TP),
-                min = 10, max = 30, step = 1,
-                getFunc = function() return Settings.BarFontSize end,
-                setFunc = function(value) Settings.BarFontSize = value CombatInfo.ApplyFont() end,
+                min = 10,
+                max = 30,
+                step = 1,
+                getFunc = function()
+                    return Settings.BarFontSize
+                end,
+                setFunc = function(value)
+                    Settings.BarFontSize = value
+                    CombatInfo.ApplyFont()
+                end,
                 width = "full",
                 default = Defaults.BarFontSize,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.BarShowLabel and ( Settings.ShowTriggered or Settings.ShowToggled)) end,
+                disabled = function()
+                    return not (
+                        LUIE.SV.CombatInfo_Enabled
+                        and Settings.BarShowLabel
+                        and (Settings.ShowTriggered or Settings.ShowToggled)
+                    )
+                end,
             },
             {
                 type = "dropdown",
@@ -405,42 +597,84 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSTYLE_TP),
                 choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
                 sort = "name-up",
-                getFunc = function() return Settings.BarFontStyle end,
-                setFunc = function(var) Settings.BarFontStyle = var CombatInfo.ApplyFont() end,
+                getFunc = function()
+                    return Settings.BarFontStyle
+                end,
+                setFunc = function(var)
+                    Settings.BarFontStyle = var
+                    CombatInfo.ApplyFont()
+                end,
                 width = "full",
                 default = Defaults.BarFontStyle,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.BarShowLabel and ( Settings.ShowTriggered or Settings.ShowToggled)) end,
+                disabled = function()
+                    return not (
+                        LUIE.SV.CombatInfo_Enabled
+                        and Settings.BarShowLabel
+                        and (Settings.ShowTriggered or Settings.ShowToggled)
+                    )
+                end,
             },
             {
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP),
-                getFunc = function() return Settings.BarMillis end,
-                setFunc = function(value) Settings.BarMillis = value end,
+                getFunc = function()
+                    return Settings.BarMillis
+                end,
+                setFunc = function(value)
+                    Settings.BarMillis = value
+                end,
                 width = "full",
                 default = Defaults.BarMillis,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.BarShowLabel and ( Settings.ShowTriggered or Settings.ShowToggled)) end,
+                disabled = function()
+                    return not (
+                        LUIE.SV.CombatInfo_Enabled
+                        and Settings.BarShowLabel
+                        and (Settings.ShowTriggered or Settings.ShowToggled)
+                    )
+                end,
             },
             {
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWFRACTIONSTHRESHOLDVALUE)),
+                name = zo_strformat(
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<<1>>",
+                    GetString(SI_LUIE_LAM_BUFF_SHOWFRACTIONSTHRESHOLDVALUE)
+                ),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWFRACTIONSTHRESHOLDVALUE_TP),
-                min = 1, max = 30, step = 1,
-                getFunc = function() return Settings.BarMillisThreshold end,
-                setFunc = function(value) Settings.BarMillisThreshold = value CombatInfo.ApplyFont() end,
+                min = 1,
+                max = 30,
+                step = 1,
+                getFunc = function()
+                    return Settings.BarMillisThreshold
+                end,
+                setFunc = function(value)
+                    Settings.BarMillisThreshold = value
+                    CombatInfo.ApplyFont()
+                end,
                 width = "full",
                 default = Defaults.BarMillisThreshold,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.BarShowLabel and Settings.BarMillis) end,
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.BarShowLabel and Settings.BarMillis)
+                end,
             },
             {
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWFRACTIONSABOVETHRESHOLD)),
+                name = zo_strformat(
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<<1>>",
+                    GetString(SI_LUIE_LAM_BUFF_SHOWFRACTIONSABOVETHRESHOLD)
+                ),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWFRACTIONSABOVETHRESHOLD_TP),
-                getFunc = function() return Settings.BarMillisAboveTen end,
-                setFunc = function(value) Settings.BarMillisAboveTen = value end,
+                getFunc = function()
+                    return Settings.BarMillisAboveTen
+                end,
+                setFunc = function(value)
+                    Settings.BarMillisAboveTen = value
+                end,
                 width = "full",
                 default = Defaults.BarMillisAboveTen,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.BarShowLabel and Settings.BarMillis) end,
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.BarShowLabel and Settings.BarMillis)
+                end,
             },
             {
                 type = "divider",
@@ -459,44 +693,76 @@ function CombatInfo.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_BACKBAR_ENABLE),
                 tooltip = GetString(SI_LUIE_LAM_CI_BACKBAR_ENABLE_TP),
-                getFunc = function() return Settings.BarShowBack end,
-                setFunc = function(value) Settings.BarShowBack = value CombatInfo.OnSlotsFullUpdate() CombatInfo.BackbarToggleSettings() end,
+                getFunc = function()
+                    return Settings.BarShowBack
+                end,
+                setFunc = function(value)
+                    Settings.BarShowBack = value
+                    CombatInfo.OnSlotsFullUpdate()
+                    CombatInfo.BackbarToggleSettings()
+                end,
                 width = "full",
                 default = Defaults.BarShowBack,
-                disabled = function() return not (Settings.ShowToggled and LUIE.SV.CombatInfo_Enabled) end,
+                disabled = function()
+                    return not (Settings.ShowToggled and LUIE.SV.CombatInfo_Enabled)
+                end,
             },
             {
                 -- Dark Backbar
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BACKBAR_DARK)),
                 tooltip = GetString(SI_LUIE_LAM_CI_BACKBAR_DARK_TP),
-                getFunc = function() return Settings.BarDarkUnused end,
-                setFunc = function(value) Settings.BarDarkUnused = value CombatInfo.OnSlotsFullUpdate() CombatInfo.BackbarToggleSettings() end,
+                getFunc = function()
+                    return Settings.BarDarkUnused
+                end,
+                setFunc = function(value)
+                    Settings.BarDarkUnused = value
+                    CombatInfo.OnSlotsFullUpdate()
+                    CombatInfo.BackbarToggleSettings()
+                end,
                 width = "full",
                 default = Defaults.BarDarkUnused,
-                disabled = function() return not (Settings.ShowToggled and Settings.BarShowBack and LUIE.SV.CombatInfo_Enabled) end,
+                disabled = function()
+                    return not (Settings.ShowToggled and Settings.BarShowBack and LUIE.SV.CombatInfo_Enabled)
+                end,
             },
             {
                 -- Desaturate Backbar
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BACKBAR_DESATURATE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_BACKBAR_DESATURATE_TP),
-                getFunc = function() return Settings.BarDesaturateUnused end,
-                setFunc = function(value) Settings.BarDesaturateUnused = value CombatInfo.OnSlotsFullUpdate() CombatInfo.BackbarToggleSettings() end,
+                getFunc = function()
+                    return Settings.BarDesaturateUnused
+                end,
+                setFunc = function(value)
+                    Settings.BarDesaturateUnused = value
+                    CombatInfo.OnSlotsFullUpdate()
+                    CombatInfo.BackbarToggleSettings()
+                end,
                 width = "full",
                 default = Defaults.BarDesaturateUnused,
-                disabled = function() return not (Settings.ShowToggled and Settings.BarShowBack and LUIE.SV.CombatInfo_Enabled) end,
+                disabled = function()
+                    return not (Settings.ShowToggled and Settings.BarShowBack and LUIE.SV.CombatInfo_Enabled)
+                end,
             },
             {
                 -- Hide Unused Backbar
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BACKBAR_HIDE_UNUSED)),
                 tooltip = GetString(SI_LUIE_LAM_CI_BACKBAR_HIDE_UNUSED_TP),
-                getFunc = function() return Settings.BarHideUnused end,
-                setFunc = function(value) Settings.BarHideUnused = value CombatInfo.OnSlotsFullUpdate() CombatInfo.BackbarToggleSettings() end,
+                getFunc = function()
+                    return Settings.BarHideUnused
+                end,
+                setFunc = function(value)
+                    Settings.BarHideUnused = value
+                    CombatInfo.OnSlotsFullUpdate()
+                    CombatInfo.BackbarToggleSettings()
+                end,
                 width = "full",
                 default = Defaults.BarHideUnused,
-                disabled = function() return not (Settings.ShowToggled and Settings.BarShowBack and LUIE.SV.CombatInfo_Enabled) end,
+                disabled = function()
+                    return not (Settings.ShowToggled and Settings.BarShowBack and LUIE.SV.CombatInfo_Enabled)
+                end,
             },
         },
     }
@@ -511,22 +777,37 @@ function CombatInfo.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_POTION),
                 tooltip = GetString(SI_LUIE_LAM_CI_POTION_TP),
-                getFunc = function() return Settings.PotionTimerShow end,
-                setFunc = function(value) Settings.PotionTimerShow = value end,
+                getFunc = function()
+                    return Settings.PotionTimerShow
+                end,
+                setFunc = function(value)
+                    Settings.PotionTimerShow = value
+                end,
                 width = "full",
                 default = Defaults.PotionTimerShow,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+                disabled = function()
+                    return not LUIE.SV.CombatInfo_Enabled
+                end,
             },
             {
                 type = "slider",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
                 tooltip = GetString(SI_LUIE_LAM_CI_SHARED_POSITION_TP),
-                min = -72, max = 40, step = 2,
-                getFunc = function() return Settings.PotionTimerLabelPosition end,
-                setFunc = function(value) Settings.PotionTimerLabelPosition = value CombatInfo.ResetPotionTimerLabel() end,
+                min = -72,
+                max = 40,
+                step = 2,
+                getFunc = function()
+                    return Settings.PotionTimerLabelPosition
+                end,
+                setFunc = function(value)
+                    Settings.PotionTimerLabelPosition = value
+                    CombatInfo.ResetPotionTimerLabel()
+                end,
                 width = "full",
                 default = Defaults.PotionTimerLabelPosition,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow ) end,
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow)
+                end,
             },
             {
                 type = "dropdown",
@@ -535,22 +816,38 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONT_TP),
                 choices = FontsList,
                 sort = "name-up",
-                getFunc = function() return Settings.PotionTimerFontFace end,
-                setFunc = function(var) Settings.PotionTimerFontFace = var CombatInfo.ApplyFont() end,
+                getFunc = function()
+                    return Settings.PotionTimerFontFace
+                end,
+                setFunc = function(var)
+                    Settings.PotionTimerFontFace = var
+                    CombatInfo.ApplyFont()
+                end,
                 width = "full",
                 default = Defaults.PotionTimerFontFace,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow ) end,
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow)
+                end,
             },
             {
                 type = "slider",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSIZE_TP),
-                min = 10, max = 30, step = 1,
-                getFunc = function() return Settings.PotionTimerFontSize end,
-                setFunc = function(value) Settings.PotionTimerFontSize = value CombatInfo.ApplyFont() end,
+                min = 10,
+                max = 30,
+                step = 1,
+                getFunc = function()
+                    return Settings.PotionTimerFontSize
+                end,
+                setFunc = function(value)
+                    Settings.PotionTimerFontSize = value
+                    CombatInfo.ApplyFont()
+                end,
                 width = "full",
                 default = Defaults.PotionTimerFontSize,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow ) end,
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow)
+                end,
             },
             {
                 type = "dropdown",
@@ -558,31 +855,50 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSTYLE_TP),
                 choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
                 sort = "name-up",
-                getFunc = function() return Settings.PotionTimerFontStyle end,
-                setFunc = function(var) Settings.PotionTimerFontStyle = var CombatInfo.ApplyFont() end,
+                getFunc = function()
+                    return Settings.PotionTimerFontStyle
+                end,
+                setFunc = function(var)
+                    Settings.PotionTimerFontStyle = var
+                    CombatInfo.ApplyFont()
+                end,
                 width = "full",
                 default = Defaults.PotionTimerFontStyle,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow ) end,
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow)
+                end,
             },
             {
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_POTION_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CI_POTION_COLOR_TP),
-                getFunc = function() return Settings.PotionTimerColor end,
-                setFunc = function(value) Settings.PotionTimerColor = value end,
+                getFunc = function()
+                    return Settings.PotionTimerColor
+                end,
+                setFunc = function(value)
+                    Settings.PotionTimerColor = value
+                end,
                 width = "full",
                 default = Defaults.PotionTimerColor,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow ) end,
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow)
+                end,
             },
             {
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP),
-                getFunc = function() return Settings.PotionTimerMillis end,
-                setFunc = function(value) Settings.PotionTimerMillis = value end,
+                getFunc = function()
+                    return Settings.PotionTimerMillis
+                end,
+                setFunc = function(value)
+                    Settings.PotionTimerMillis = value
+                end,
                 width = "full",
                 default = Defaults.PotionTimerMillis,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow ) end,
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow)
+                end,
             },
         },
     }
@@ -597,12 +913,16 @@ function CombatInfo.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_CASTBAR_MOVE),
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_MOVE_TP),
-                getFunc = function() return castBarMovingEnabled end,
+                getFunc = function()
+                    return castBarMovingEnabled
+                end,
                 setFunc = CombatInfo.SetMovingState,
                 width = "half",
                 default = false,
                 resetFunc = CombatInfo.ResetCastBarPosition,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.CastBarEnable ) end,
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.CastBarEnable)
+                end,
             },
             -- Cast Bar Unlock Reset position
             {
@@ -611,73 +931,121 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_RESET_TP),
                 func = CombatInfo.ResetCastBarPosition,
                 width = "half",
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.CastBarEnable ) end,
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.CastBarEnable)
+                end,
             },
             {
                 -- Enable Cast Bar
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_CASTBAR_ENABLE),
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_ENABLE_TP),
-                getFunc = function() return Settings.CastBarEnable end,
-                setFunc = function(value) Settings.CastBarEnable = value CombatInfo.RegisterCombatInfo() end,
+                getFunc = function()
+                    return Settings.CastBarEnable
+                end,
+                setFunc = function(value)
+                    Settings.CastBarEnable = value
+                    CombatInfo.RegisterCombatInfo()
+                end,
                 width = "full",
                 default = Defaults.CastBarEnable,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
+                disabled = function()
+                    return not LUIE.SV.CombatInfo_Enabled
+                end,
             },
             {
                 -- Cast Bar Width
                 type = "slider",
                 name = GetString(SI_LUIE_LAM_CI_CASTBAR_SIZEW),
-                min = 100, max = 500, step = 5,
-                getFunc = function() return Settings.CastBarSizeW end,
-                setFunc = function(value) Settings.CastBarSizeW = value CombatInfo.ResizeCastBar() end,
+                min = 100,
+                max = 500,
+                step = 5,
+                getFunc = function()
+                    return Settings.CastBarSizeW
+                end,
+                setFunc = function(value)
+                    Settings.CastBarSizeW = value
+                    CombatInfo.ResizeCastBar()
+                end,
                 width = "full",
                 default = Defaults.CastBarSizeW,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
+                disabled = function()
+                    return not LUIE.SV.CombatInfo_Enabled
+                end,
             },
             {
                 -- Cast Bar Height
                 type = "slider",
                 name = GetString(SI_LUIE_LAM_CI_CASTBAR_SIZEH),
-                min = 16, max = 64, step = 2,
-                getFunc = function() return Settings.CastBarSizeH end,
-                setFunc = function(value) Settings.CastBarSizeH = value CombatInfo.ResizeCastBar() end,
+                min = 16,
+                max = 64,
+                step = 2,
+                getFunc = function()
+                    return Settings.CastBarSizeH
+                end,
+                setFunc = function(value)
+                    Settings.CastBarSizeH = value
+                    CombatInfo.ResizeCastBar()
+                end,
                 width = "full",
                 default = Defaults.CastBarSizeH,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
+                disabled = function()
+                    return not LUIE.SV.CombatInfo_Enabled
+                end,
             },
             {
                 -- Cast Bar Icon Size
                 type = "slider",
                 name = GetString(SI_LUIE_LAM_CI_CASTBAR_ICONSIZE),
-                min = 16, max = 64, step = 2,
-                getFunc = function() return Settings.CastBarIconSize end,
-                setFunc = function(value) Settings.CastBarIconSize = value CombatInfo.ResizeCastBar() end,
+                min = 16,
+                max = 64,
+                step = 2,
+                getFunc = function()
+                    return Settings.CastBarIconSize
+                end,
+                setFunc = function(value)
+                    Settings.CastBarIconSize = value
+                    CombatInfo.ResizeCastBar()
+                end,
                 width = "full",
                 default = Defaults.CastBarIconSize,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
+                disabled = function()
+                    return not LUIE.SV.CombatInfo_Enabled
+                end,
             },
             {
                 -- Display Label
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_LABEL)),
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_LABEL_TP),
-                getFunc = function() return Settings.CastBarLabel end,
-                setFunc = function(value) Settings.CastBarLabel = value end,
+                getFunc = function()
+                    return Settings.CastBarLabel
+                end,
+                setFunc = function(value)
+                    Settings.CastBarLabel = value
+                end,
                 width = "full",
                 default = Defaults.CastBarLabel,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.CastBarEnable ) end,
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.CastBarEnable)
+                end,
             },
             {
                 -- Display Timer
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_TIMER)),
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_TIMER_TP),
-                getFunc = function() return Settings.CastBarTimer end,
-                setFunc = function(value) Settings.CastBarTimer = value end,
+                getFunc = function()
+                    return Settings.CastBarTimer
+                end,
+                setFunc = function(value)
+                    Settings.CastBarTimer = value
+                end,
                 width = "full",
                 default = Defaults.CastBarTimer,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.CastBarEnable ) end,
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.CastBarEnable)
+                end,
             },
             {
                 -- Cast Bar Font Face
@@ -687,23 +1055,49 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_FONTFACE_TP),
                 choices = FontsList,
                 sort = "name-up",
-                getFunc = function() return Settings.CastBarFontFace end,
-                setFunc = function(var) Settings.CastBarFontFace = var CombatInfo.ApplyFont() CombatInfo.UpdateCastBar() end,
+                getFunc = function()
+                    return Settings.CastBarFontFace
+                end,
+                setFunc = function(var)
+                    Settings.CastBarFontFace = var
+                    CombatInfo.ApplyFont()
+                    CombatInfo.UpdateCastBar()
+                end,
                 width = "full",
                 default = Defaults.CastBarFontFace,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and Settings.CastBarEnable and (Settings.CastBarTimer or Settings.CastBarLabel) ) end,
+                disabled = function()
+                    return not (
+                        LUIE.SV.SpellCastBuff_Enable
+                        and Settings.CastBarEnable
+                        and (Settings.CastBarTimer or Settings.CastBarLabel)
+                    )
+                end,
             },
             {
                 -- Cast Bar Font Size
                 type = "slider",
                 name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_FONTSIZE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_FONTSIZE_TP),
-                min = 10, max = 30, step = 1,
-                getFunc = function() return Settings.CastBarFontSize end,
-                setFunc = function(value) Settings.CastBarFontSize = value CombatInfo.ApplyFont() CombatInfo.UpdateCastBar() end,
+                min = 10,
+                max = 30,
+                step = 1,
+                getFunc = function()
+                    return Settings.CastBarFontSize
+                end,
+                setFunc = function(value)
+                    Settings.CastBarFontSize = value
+                    CombatInfo.ApplyFont()
+                    CombatInfo.UpdateCastBar()
+                end,
                 width = "full",
                 default = Defaults.CastBarFontSize,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and Settings.CastBarEnable and (Settings.CastBarTimer or Settings.CastBarLabel) ) end,
+                disabled = function()
+                    return not (
+                        LUIE.SV.SpellCastBuff_Enable
+                        and Settings.CastBarEnable
+                        and (Settings.CastBarTimer or Settings.CastBarLabel)
+                    )
+                end,
             },
             {
                 -- Cast Bar Font Style
@@ -712,11 +1106,23 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_FONTSTYLE_TP),
                 choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
                 sort = "name-up",
-                getFunc = function() return Settings.CastBarFontStyle end,
-                setFunc = function(var) Settings.CastBarFontStyle = var CombatInfo.ApplyFont() CombatInfo.UpdateCastBar() end,
+                getFunc = function()
+                    return Settings.CastBarFontStyle
+                end,
+                setFunc = function(var)
+                    Settings.CastBarFontStyle = var
+                    CombatInfo.ApplyFont()
+                    CombatInfo.UpdateCastBar()
+                end,
                 width = "full",
                 default = Defaults.CastBarFontStyle,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and Settings.CastBarEnable and (Settings.CastBarTimer or Settings.CastBarLabel) ) end,
+                disabled = function()
+                    return not (
+                        LUIE.SV.SpellCastBuff_Enable
+                        and Settings.CastBarEnable
+                        and (Settings.CastBarTimer or Settings.CastBarLabel)
+                    )
+                end,
             },
             {
                 -- Cast Bar Texture
@@ -726,33 +1132,62 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_TEXTURE_TP),
                 choices = StatusbarTexturesList,
                 sort = "name-up",
-                getFunc = function() return Settings.CastBarTexture end,
-                setFunc = function(value) Settings.CastBarTexture = value CombatInfo.UpdateCastBar() end,
+                getFunc = function()
+                    return Settings.CastBarTexture
+                end,
+                setFunc = function(value)
+                    Settings.CastBarTexture = value
+                    CombatInfo.UpdateCastBar()
+                end,
                 width = "full",
                 default = Defaults.CastBarTexture,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.CastBarEnable ) end,
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.CastBarEnable)
+                end,
             },
             {
                 -- Cast Bar Gradient Color 1
-                type    = "colorpicker",
-                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_GRADIENTC1)),
+                type = "colorpicker",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_GRADIENTC1)),
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_GRADIENTC1_TP),
-                getFunc = function() return unpack(Settings.CastBarGradientC1) end,
-                setFunc = function(r, g, b, a) Settings.CastBarGradientC1 = { r, g, b, a } CombatInfo.UpdateCastBar() end,
+                getFunc = function()
+                    return unpack(Settings.CastBarGradientC1)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.CastBarGradientC1 = { r, g, b, a }
+                    CombatInfo.UpdateCastBar()
+                end,
                 width = "half",
-                default = {r=Settings.CastBarGradientC1[1], g=Settings.CastBarGradientC1[2], b=Settings.CastBarGradientC1[3]},
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.CastBarEnable ) end,
+                default = {
+                    r = Settings.CastBarGradientC1[1],
+                    g = Settings.CastBarGradientC1[2],
+                    b = Settings.CastBarGradientC1[3],
+                },
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.CastBarEnable)
+                end,
             },
             {
                 -- Cast Bar Gradient Color 2
-                type    = "colorpicker",
-                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_GRADIENTC2)),
+                type = "colorpicker",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_GRADIENTC2)),
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_GRADIENTC2_TP),
-                getFunc = function() return unpack(Settings.CastBarGradientC2) end,
-                setFunc = function(r, g, b, a) Settings.CastBarGradientC2 = { r, g, b, a } CombatInfo.UpdateCastBar() end,
+                getFunc = function()
+                    return unpack(Settings.CastBarGradientC2)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.CastBarGradientC2 = { r, g, b, a }
+                    CombatInfo.UpdateCastBar()
+                end,
                 width = "half",
-                default = {r=Settings.CastBarGradientC2[1], g=Settings.CastBarGradientC2[2], b=Settings.CastBarGradientC2[3]},
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and Settings.CastBarEnable ) end,
+                default = {
+                    r = Settings.CastBarGradientC2[1],
+                    g = Settings.CastBarGradientC2[2],
+                    b = Settings.CastBarGradientC2[3],
+                },
+                disabled = function()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.CastBarEnable)
+                end,
             },
 
             {
@@ -772,7 +1207,9 @@ function CombatInfo.CreateSettings()
                 type = "button",
                 name = GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR),
                 tooltip = GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_TP),
-                func = function() ZO_Dialogs_ShowDialog("LUIE_CLEAR_CASTBAR_BLACKLIST") end,
+                func = function()
+                    ZO_Dialogs_ShowDialog("LUIE_CLEAR_CASTBAR_BLACKLIST")
+                end,
                 width = "half",
             },
             {
@@ -781,7 +1218,10 @@ function CombatInfo.CreateSettings()
                 name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST_TP),
                 getFunc = function() end,
-                setFunc = function(value) CombatInfo.AddToCustomList(Settings.blacklist, value) LUIE_BlacklistCastbar:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,
+                setFunc = function(value)
+                    CombatInfo.AddToCustomList(Settings.blacklist, value)
+                    LUIE_BlacklistCastbar:UpdateChoices(GenerateCustomList(Settings.blacklist))
+                end,
             },
             {
                 -- Combat Info Castbar Blacklist (Remove)
@@ -792,11 +1232,15 @@ function CombatInfo.CreateSettings()
                 choicesValues = BlacklistValues,
                 scrollable = true,
                 sort = "name-up",
-                getFunc = function() LUIE_BlacklistCastbar:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,
-                setFunc = function(value) CombatInfo.RemoveFromCustomList(Settings.blacklist, value) LUIE_BlacklistCastbar:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,
-                reference = "LUIE_BlacklistCastbar"
+                getFunc = function()
+                    LUIE_BlacklistCastbar:UpdateChoices(GenerateCustomList(Settings.blacklist))
+                end,
+                setFunc = function(value)
+                    CombatInfo.RemoveFromCustomList(Settings.blacklist, value)
+                    LUIE_BlacklistCastbar:UpdateChoices(GenerateCustomList(Settings.blacklist))
+                end,
+                reference = "LUIE_BlacklistCastbar",
             },
-
         },
     }
 
@@ -814,12 +1258,16 @@ function CombatInfo.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_UNLOCK),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_UNLOCK_TP),
-                getFunc = function() return alertFrameMovingEnabled end,
+                getFunc = function()
+                    return alertFrameMovingEnabled
+                end,
                 setFunc = AbilityAlerts.SetMovingStateAlert,
                 width = "half",
                 default = false,
                 resetFunc = CombatInfo.ResetAlertFramePosition,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
+                disabled = function()
+                    return not LUIE.SV.CombatInfo_Enabled
+                end,
             },
             {
                 -- Reset Alert Frame
@@ -828,15 +1276,21 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_RESET_TP),
                 func = AbilityAlerts.ResetAlertFramePosition,
                 width = "half",
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
+                disabled = function()
+                    return not LUIE.SV.CombatInfo_Enabled
+                end,
             },
             {
                 -- Show Alerts
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CI_ALERT_TOGGLE),
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_TOGGLE),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_TOGGLE_TP),
-                getFunc = function() return Settings.alerts.toggles.alertEnable end,
-                setFunc = function(v) Settings.alerts.toggles.alertEnable = v end,
+                getFunc = function()
+                    return Settings.alerts.toggles.alertEnable
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.alertEnable = v
+                end,
                 default = Defaults.alerts.toggles.alertEnable,
             },
             {
@@ -847,23 +1301,41 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_FONTFACE_TP),
                 choices = FontsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.toggles.alertFontFace end,
-                setFunc = function(var) Settings.alerts.toggles.alertFontFace = var AbilityAlerts.ApplyFontAlert() AbilityAlerts.ResetAlertSize() end,
+                getFunc = function()
+                    return Settings.alerts.toggles.alertFontFace
+                end,
+                setFunc = function(var)
+                    Settings.alerts.toggles.alertFontFace = var
+                    AbilityAlerts.ApplyFontAlert()
+                    AbilityAlerts.ResetAlertSize()
+                end,
                 width = "full",
                 default = Defaults.alerts.toggles.alertFontFace,
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
-                    -- Alert Font Size
+                -- Alert Font Size
                 type = "slider",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_FONTSIZE_TP),
-                min = 16, max = 64, step = 1,
-                getFunc = function() return Settings.alerts.toggles.alertFontSize end,
-                setFunc = function(value) Settings.alerts.toggles.alertFontSize = value AbilityAlerts.ApplyFontAlert() AbilityAlerts.ResetAlertSize() end,
+                min = 16,
+                max = 64,
+                step = 1,
+                getFunc = function()
+                    return Settings.alerts.toggles.alertFontSize
+                end,
+                setFunc = function(value)
+                    Settings.alerts.toggles.alertFontSize = value
+                    AbilityAlerts.ApplyFontAlert()
+                    AbilityAlerts.ResetAlertSize()
+                end,
                 width = "full",
                 default = Defaults.alerts.toggles.alertFontSize,
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
                 -- Alert Font Style
@@ -872,41 +1344,77 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_FONTSTYLE_TP),
                 choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.toggles.alertFontStyle end,
-                setFunc = function(var) Settings.alerts.toggles.alertFontStyle = var AbilityAlerts.ApplyFontAlert() AbilityAlerts.ResetAlertSize() end,
+                getFunc = function()
+                    return Settings.alerts.toggles.alertFontStyle
+                end,
+                setFunc = function(var)
+                    Settings.alerts.toggles.alertFontStyle = var
+                    AbilityAlerts.ApplyFontAlert()
+                    AbilityAlerts.ResetAlertSize()
+                end,
                 width = "full",
                 default = Defaults.alerts.toggles.alertFontStyle,
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
                 -- Alert Timer
-                type    = "checkbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_TIMER_TOGGLE)),
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_TIMER_TOGGLE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_TIMER_TOGGLE_TP),
-                getFunc = function() return Settings.alerts.toggles.alertTimer end,
-                setFunc = function(v) Settings.alerts.toggles.alertTimer = v end,
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                getFunc = function()
+                    return Settings.alerts.toggles.alertTimer
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.alertTimer = v
+                end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
                 default = Defaults.alerts.toggles.alertTimer,
             },
             {
                 -- Shared Timer Color
-                type    = "colorpicker",
-                name    = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_TIMER_COLOR)),
+                type = "colorpicker",
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_TIMER_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_TIMER_COLOR_TP),
-                getFunc = function() return unpack(Settings.alerts.colors.alertTimer) end,
-                setFunc = function(r, g, b, a) Settings.alerts.colors.alertTimer = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.alertTimer) end,
-                default = {r=Defaults.alerts.colors.alertTimer[1], g=Defaults.alerts.colors.alertTimer[2], b=Defaults.alerts.colors.alertTimer[3]}
+                getFunc = function()
+                    return unpack(Settings.alerts.colors.alertTimer)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.alerts.colors.alertTimer = { r, g, b, a }
+                    AbilityAlerts.SetAlertColors()
+                end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.alertTimer)
+                end,
+                default = {
+                    r = Defaults.alerts.colors.alertTimer[1],
+                    g = Defaults.alerts.colors.alertTimer[2],
+                    b = Defaults.alerts.colors.alertTimer[3],
+                },
             },
             {
                 -- Shared Label Color
-                type    = "colorpicker",
-                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_COLOR_BASE)),
+                type = "colorpicker",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_COLOR_BASE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_COLOR_BASE_TP),
-                getFunc = function() return unpack(Settings.alerts.colors.alertShared) end,
-                setFunc = function(r, g, b, a) Settings.alerts.colors.alertShared = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
-                default = {r=Defaults.alerts.colors.alertShared[1], g=Defaults.alerts.colors.alertShared[2], b=Defaults.alerts.colors.alertShared[3]}
+                getFunc = function()
+                    return unpack(Settings.alerts.colors.alertShared)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.alerts.colors.alertShared = { r, g, b, a }
+                    AbilityAlerts.SetAlertColors()
+                end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
+                default = {
+                    r = Defaults.alerts.colors.alertShared[1],
+                    g = Defaults.alerts.colors.alertShared[2],
+                    b = Defaults.alerts.colors.alertShared[3],
+                },
             },
 
             {
@@ -916,52 +1424,92 @@ function CombatInfo.CreateSettings()
             },
             {
                 -- Mitigation Rank 3
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CI_ALERT_RANK3),
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_RANK3),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_RANK3_TP),
-                getFunc = function() return Settings.alerts.toggles.mitigationRank3 end,
-                setFunc = function(v) Settings.alerts.toggles.mitigationRank3 = v end,
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                getFunc = function()
+                    return Settings.alerts.toggles.mitigationRank3
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.mitigationRank3 = v
+                end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
                 default = Defaults.alerts.toggles.mitigationRank3,
             },
             {
                 -- Mitigation Rank 2
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CI_ALERT_RANK2),
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_RANK2),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_RANK2_TP),
-                getFunc = function() return Settings.alerts.toggles.mitigationRank2 end,
-                setFunc = function(v) Settings.alerts.toggles.mitigationRank2 = v end,
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                getFunc = function()
+                    return Settings.alerts.toggles.mitigationRank2
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.mitigationRank2 = v
+                end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
                 default = Defaults.alerts.toggles.mitigationRank2,
             },
             {
                 -- Mitigation Rank 1
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CI_ALERT_RANK1),
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_RANK1),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_RANK1_TP),
-                getFunc = function() return Settings.alerts.toggles.mitigationRank1 end,
-                setFunc = function(v) Settings.alerts.toggles.mitigationRank1 = v end,
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                getFunc = function()
+                    return Settings.alerts.toggles.mitigationRank1
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.mitigationRank1 = v
+                end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
                 default = Defaults.alerts.toggles.mitigationRank1,
             },
             {
                 -- Mitigation Aura
-                type    = "checkbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_AURA)),
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_AURA)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_AURA_TP),
-                getFunc = function() return Settings.alerts.toggles.mitigationAura end,
-                setFunc = function(v) Settings.alerts.toggles.mitigationAura = v end,
-                disabled = function() return not (Settings.alerts.toggles.alertEnable) or not (Settings.alerts.toggles.mitigationRank1 or Settings.alerts.toggles.mitigationRank2 or Settings.alerts.toggles.mitigationRank3) end,
+                getFunc = function()
+                    return Settings.alerts.toggles.mitigationAura
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.mitigationAura = v
+                end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                        or not (
+                            Settings.alerts.toggles.mitigationRank1
+                            or Settings.alerts.toggles.mitigationRank2
+                            or Settings.alerts.toggles.mitigationRank3
+                        )
+                end,
                 default = Defaults.alerts.toggles.mitigationAura,
             },
             {
                 -- Mitigation Dungeon
-                type    = "checkbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_DUNGEON)),
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_DUNGEON)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_DUNGEON_TP),
-                getFunc = function() return Settings.alerts.toggles.mitigationDungeon end,
-                setFunc = function(v) Settings.alerts.toggles.mitigationDungeon = v end,
-                disabled = function() return not (Settings.alerts.toggles.alertEnable) or not (Settings.alerts.toggles.mitigationRank1 or Settings.alerts.toggles.mitigationRank2 or Settings.alerts.toggles.mitigationRank3) end,
+                getFunc = function()
+                    return Settings.alerts.toggles.mitigationDungeon
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.mitigationDungeon = v
+                end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                        or not (
+                            Settings.alerts.toggles.mitigationRank1
+                            or Settings.alerts.toggles.mitigationRank2
+                            or Settings.alerts.toggles.mitigationRank3
+                        )
+                end,
                 default = Defaults.alerts.toggles.mitigationDungeon,
             },
             {
@@ -975,12 +1523,18 @@ function CombatInfo.CreateSettings()
             },
             {
                 -- MITIGATION ENABLE
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_ENABLE),
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_ENABLE),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_ENABLE_TP),
-                getFunc = function() return Settings.alerts.toggles.showAlertMitigate end,
-                setFunc = function(v) Settings.alerts.toggles.showAlertMitigate = v end,
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                getFunc = function()
+                    return Settings.alerts.toggles.showAlertMitigate
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.showAlertMitigate = v
+                end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
                 default = Defaults.alerts.toggles.showAlertMitigate,
             },
             {
@@ -989,60 +1543,96 @@ function CombatInfo.CreateSettings()
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FILTER)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FILTER_TP),
                 choices = globalAlertOptions,
-                getFunc = function() return globalAlertOptions[Settings.alerts.toggles.alertOptions] end,
-                setFunc = function(value) Settings.alerts.toggles.alertOptions = globalAlertOptionsKeys[value] end,
+                getFunc = function()
+                    return globalAlertOptions[Settings.alerts.toggles.alertOptions]
+                end,
+                setFunc = function(value)
+                    Settings.alerts.toggles.alertOptions = globalAlertOptionsKeys[value]
+                end,
                 width = "full",
-                disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable) end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable)
+                end,
                 default = Defaults.alerts.toggles.alertOptions,
             },
             {
                 -- Show Mitigation Suffix
-                type    = "checkbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_SUFFIX)),
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_SUFFIX)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_SUFFIX_TP),
-                getFunc = function() return Settings.alerts.toggles.showMitigation end,
-                setFunc = function(v) Settings.alerts.toggles.showMitigation = v end,
-                disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable) end,
+                getFunc = function()
+                    return Settings.alerts.toggles.showMitigation
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.showMitigation = v
+                end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable)
+                end,
                 default = Defaults.alerts.toggles.showMitigation,
             },
             {
                 -- Mitigation - Ability Name
-                type    = "editbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_ABILITY)),
+                type = "editbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_ABILITY)),
                 tooltip = zo_strformat("<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_ABILITY_TP)),
-                getFunc = function() return Settings.alerts.toggles.mitigationAbilityName end,
-                setFunc = function(v) Settings.alerts.toggles.mitigationAbilityName = v end,
-                disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable) end,
+                getFunc = function()
+                    return Settings.alerts.toggles.mitigationAbilityName
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.mitigationAbilityName = v
+                end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable)
+                end,
                 default = Defaults.alerts.toggles.mitigationAbilityName,
             },
             {
                 -- Mitigation - Enemy Name
-                type    = "editbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_NAME)),
+                type = "editbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_NAME)),
                 tooltip = zo_strformat("<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_NAME_TP)),
-                getFunc = function() return Settings.alerts.toggles.mitigationEnemyName end,
-                setFunc = function(v) Settings.alerts.toggles.mitigationEnemyName = v end,
-                disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable) end,
+                getFunc = function()
+                    return Settings.alerts.toggles.mitigationEnemyName
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.mitigationEnemyName = v
+                end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable)
+                end,
                 default = Defaults.alerts.toggles.mitigationEnemyName,
             },
             {
                 -- Show Crowd Control Border
-                type    = "checkbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_BORDER)),
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_BORDER)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_BORDER_TP),
-                getFunc = function() return Settings.alerts.toggles.showCrowdControlBorder end,
-                setFunc = function(v) Settings.alerts.toggles.showCrowdControlBorder = v end,
-                disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable) end,
+                getFunc = function()
+                    return Settings.alerts.toggles.showCrowdControlBorder
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.showCrowdControlBorder = v
+                end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable)
+                end,
                 default = Defaults.alerts.toggles.showCrowdControlBorder,
             },
             {
                 -- Color Ability Name by CC Type
-                type    = "checkbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_LABEL_COLOR)),
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_LABEL_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_LABEL_COLOR_TP),
-                getFunc = function() return Settings.alerts.toggles.ccLabelColor end,
-                setFunc = function(v) Settings.alerts.toggles.ccLabelColor = v end,
-                disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable) end,
+                getFunc = function()
+                    return Settings.alerts.toggles.ccLabelColor
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.ccLabelColor = v
+                end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable)
+                end,
                 default = Defaults.alerts.toggles.ccLabelColor,
             },
             {
@@ -1050,39 +1640,71 @@ function CombatInfo.CreateSettings()
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON)),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_ALERT_TP),
-                getFunc = function() return Settings.alerts.toggles.useDefaultIcon end,
-                setFunc = function(newValue) Settings.alerts.toggles.useDefaultIcon = newValue end,
-                disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable) end,
+                getFunc = function()
+                    return Settings.alerts.toggles.useDefaultIcon
+                end,
+                setFunc = function(newValue)
+                    Settings.alerts.toggles.useDefaultIcon = newValue
+                end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable)
+                end,
                 default = Defaults.alerts.toggles.useDefaultIcon,
             },
             {
                 -- Enable Modifiers
-                type    = "checkbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_ALLOW_MODIFIER)),
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_ALLOW_MODIFIER)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_ALLOW_MODIFIER_TP),
-                getFunc = function() return Settings.alerts.toggles.modifierEnable end,
-                setFunc = function(v) Settings.alerts.toggles.modifierEnable = v end,
-                disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable) end,
+                getFunc = function()
+                    return Settings.alerts.toggles.modifierEnable
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.modifierEnable = v
+                end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable)
+                end,
                 default = Defaults.alerts.toggles.modifierEnable,
             },
             {
                 -- Modifier (Directed at you)
-                type    = "editbox",
-                name    = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MODIFIER_DIRECT)),
+                type = "editbox",
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MODIFIER_DIRECT)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_MODIFIER_DIRECT_TP),
-                getFunc = function() return Settings.alerts.toggles.mitigationModifierOnYou end,
-                setFunc = function(v) Settings.alerts.toggles.mitigationModifierOnYou = v end,
-                disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.modifierEnable) end,
+                getFunc = function()
+                    return Settings.alerts.toggles.mitigationModifierOnYou
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.mitigationModifierOnYou = v
+                end,
+                disabled = function()
+                    return not (
+                        Settings.alerts.toggles.showAlertMitigate
+                        and Settings.alerts.toggles.alertEnable
+                        and Settings.alerts.toggles.modifierEnable
+                    )
+                end,
                 default = Defaults.alerts.toggles.mitigationModifierOnYou,
             },
             {
                 -- Modifier (Spread Out)
-                type    = "editbox",
-                name    = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MODIFIER_SPREAD)),
+                type = "editbox",
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MODIFIER_SPREAD)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_MODIFIER_SPREAD_TP),
-                getFunc = function() return Settings.alerts.toggles.mitigationModifierSpreadOut end,
-                setFunc = function(v) Settings.alerts.toggles.mitigationModifierSpreadOut = v end,
-                disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.modifierEnable) end,
+                getFunc = function()
+                    return Settings.alerts.toggles.mitigationModifierSpreadOut
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.mitigationModifierSpreadOut = v
+                end,
+                disabled = function()
+                    return not (
+                        Settings.alerts.toggles.showAlertMitigate
+                        and Settings.alerts.toggles.alertEnable
+                        and Settings.alerts.toggles.modifierEnable
+                    )
+                end,
                 default = Defaults.alerts.toggles.mitigationModifierSpreadOut,
             },
             {
@@ -1092,37 +1714,68 @@ function CombatInfo.CreateSettings()
             },
             {
                 -- Block Format
-                type    = "editbox",
-                width   = "half",
-                name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK)),
+                type = "editbox",
+                width = "half",
+                name = zo_strformat(
+                    "<<1>> (<<2>>)",
+                    GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                    GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK)
+                ),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_BLOCK_TP),
-                getFunc = function() return Settings.alerts.formats.alertBlock end,
-                setFunc = function(v) Settings.alerts.formats.alertBlock = v end,
+                getFunc = function()
+                    return Settings.alerts.formats.alertBlock
+                end,
+                setFunc = function(v)
+                    Settings.alerts.formats.alertBlock = v
+                end,
                 isMultiline = false,
                 default = Defaults.alerts.formats.alertBlock,
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
                 -- Block Stagger Format
-                type    = "editbox",
-                width   = "half",
-                name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK_S)),
+                type = "editbox",
+                width = "half",
+                name = zo_strformat(
+                    "<<1>> (<<2>>)",
+                    GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                    GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK_S)
+                ),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_BLOCK_S_TP),
-                getFunc = function() return Settings.alerts.formats.alertBlockStagger end,
-                setFunc = function(v) Settings.alerts.formats.alertBlockStagger = v end,
+                getFunc = function()
+                    return Settings.alerts.formats.alertBlockStagger
+                end,
+                setFunc = function(v)
+                    Settings.alerts.formats.alertBlockStagger = v
+                end,
                 isMultiline = false,
                 default = Defaults.alerts.formats.alertBlockStagger,
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
                 -- Block Color
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_BLOCK_TP),
-                getFunc = function() return unpack(Settings.alerts.colors.alertBlockA) end,
-                setFunc = function(r, g, b, a) Settings.alerts.colors.alertBlockA = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.alertBlockA[1], g=Defaults.alerts.colors.alertBlockA[2], b=Defaults.alerts.colors.alertBlockA[3]},
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                getFunc = function()
+                    return unpack(Settings.alerts.colors.alertBlockA)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.alerts.colors.alertBlockA = { r, g, b, a }
+                    AbilityAlerts.SetAlertColors()
+                end,
+                default = {
+                    r = Defaults.alerts.colors.alertBlockA[1],
+                    g = Defaults.alerts.colors.alertBlockA[2],
+                    b = Defaults.alerts.colors.alertBlockA[3],
+                },
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
                 type = "header",
@@ -1131,24 +1784,41 @@ function CombatInfo.CreateSettings()
             },
             {
                 -- Dodge  Format
-                type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_DODGE_TP),
-                getFunc = function() return Settings.alerts.formats.alertDodge end,
-                setFunc = function(v) Settings.alerts.formats.alertDodge = v end,
+                getFunc = function()
+                    return Settings.alerts.formats.alertDodge
+                end,
+                setFunc = function(v)
+                    Settings.alerts.formats.alertDodge = v
+                end,
                 isMultiline = false,
                 default = Defaults.alerts.formats.alertDodge,
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
                 -- Dodge Color
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DODGE_TP),
-                getFunc = function() return unpack(Settings.alerts.colors.alertDodgeA) end,
-                setFunc = function(r, g, b, a) Settings.alerts.colors.alertDodgeA = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.alertDodgeA[1], g=Defaults.alerts.colors.alertDodgeA[2], b=Defaults.alerts.colors.alertDodgeA[3]},
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                getFunc = function()
+                    return unpack(Settings.alerts.colors.alertDodgeA)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.alerts.colors.alertDodgeA = { r, g, b, a }
+                    AbilityAlerts.SetAlertColors()
+                end,
+                default = {
+                    r = Defaults.alerts.colors.alertDodgeA[1],
+                    g = Defaults.alerts.colors.alertDodgeA[2],
+                    b = Defaults.alerts.colors.alertDodgeA[3],
+                },
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
                 type = "header",
@@ -1157,24 +1827,41 @@ function CombatInfo.CreateSettings()
             },
             {
                 -- Avoid Format
-                type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_AVOID_TP),
-                getFunc = function() return Settings.alerts.formats.alertAvoid end,
-                setFunc = function(v) Settings.alerts.formats.alertAvoid = v end,
+                getFunc = function()
+                    return Settings.alerts.formats.alertAvoid
+                end,
+                setFunc = function(v)
+                    Settings.alerts.formats.alertAvoid = v
+                end,
                 isMultiline = false,
                 default = Defaults.alerts.formats.alertAvoid,
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
                 -- Avoid Color
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_AVOID_TP),
-                getFunc = function() return unpack(Settings.alerts.colors.alertAvoidB) end,
-                setFunc = function(r, g, b, a) Settings.alerts.colors.alertAvoidB = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.alertAvoidB[1], g=Defaults.alerts.colors.alertAvoidB[2], b=Defaults.alerts.colors.alertAvoidB[3]},
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                getFunc = function()
+                    return unpack(Settings.alerts.colors.alertAvoidB)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.alerts.colors.alertAvoidB = { r, g, b, a }
+                    AbilityAlerts.SetAlertColors()
+                end,
+                default = {
+                    r = Defaults.alerts.colors.alertAvoidB[1],
+                    g = Defaults.alerts.colors.alertAvoidB[2],
+                    b = Defaults.alerts.colors.alertAvoidB[3],
+                },
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
                 type = "header",
@@ -1183,35 +1870,58 @@ function CombatInfo.CreateSettings()
             },
             {
                 -- Interrupt Format
-                type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_INTERRUPT_TP),
-                getFunc = function() return Settings.alerts.formats.alertInterrupt end,
-                setFunc = function(v) Settings.alerts.formats.alertInterrupt = v end,
+                getFunc = function()
+                    return Settings.alerts.formats.alertInterrupt
+                end,
+                setFunc = function(v)
+                    Settings.alerts.formats.alertInterrupt = v
+                end,
                 isMultiline = false,
                 default = Defaults.alerts.formats.alertInterrupt,
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
                 -- Hard CC Format
-                type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_SHOULDUSECC),
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_SHOULDUSECC),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_SHOULDUSECC_TP),
-                getFunc = function() return Settings.alerts.formats.alertShouldUseCC end,
-                setFunc = function(v) Settings.alerts.formats.alertShouldUseCC = v end,
+                getFunc = function()
+                    return Settings.alerts.formats.alertShouldUseCC
+                end,
+                setFunc = function(v)
+                    Settings.alerts.formats.alertShouldUseCC = v
+                end,
                 isMultiline = false,
                 default = Defaults.alerts.formats.alertShouldUseCC,
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
                 -- Interrupt Color
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_INTERRUPT_TP),
-                getFunc = function() return unpack(Settings.alerts.colors.alertInterruptC) end,
-                setFunc = function(r, g, b, a) Settings.alerts.colors.alertInterruptC = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.alertInterruptC[1], g=Defaults.alerts.colors.alertInterruptC[2], b=Defaults.alerts.colors.alertInterruptC[3]},
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                getFunc = function()
+                    return unpack(Settings.alerts.colors.alertInterruptC)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.alerts.colors.alertInterruptC = { r, g, b, a }
+                    AbilityAlerts.SetAlertColors()
+                end,
+                default = {
+                    r = Defaults.alerts.colors.alertInterruptC[1],
+                    g = Defaults.alerts.colors.alertInterruptC[2],
+                    b = Defaults.alerts.colors.alertInterruptC[3],
+                },
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
                 type = "header",
@@ -1220,34 +1930,61 @@ function CombatInfo.CreateSettings()
             },
             {
                 -- Unmit Enable
-                type    = "checkbox",
-                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_UNMIT)),
+                type = "checkbox",
+                name = zo_strformat(
+                    "<<1>> <<2>>",
+                    GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY),
+                    GetString(SI_LUIE_LAM_CT_SHARED_ALERT_UNMIT)
+                ),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_UNMIT_TP),
-                getFunc = function() return Settings.alerts.toggles.showAlertUnmit end,
-                setFunc = function(v) Settings.alerts.toggles.showAlertUnmit = v end,
+                getFunc = function()
+                    return Settings.alerts.toggles.showAlertUnmit
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.showAlertUnmit = v
+                end,
                 default = Defaults.alerts.toggles.showAlertUnmit,
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
                 -- Unmit Format
-                type    = "editbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT)),
+                type = "editbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_UNMIT_TP),
-                getFunc = function() return Settings.alerts.formats.alertUnmit end,
-                setFunc = function(v) Settings.alerts.formats.alertUnmit = v end,
+                getFunc = function()
+                    return Settings.alerts.formats.alertUnmit
+                end,
+                setFunc = function(v)
+                    Settings.alerts.formats.alertUnmit = v
+                end,
                 isMultiline = false,
                 default = Defaults.alerts.formats.alertUnmit,
-                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertUnmit) end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertUnmit)
+                end,
             },
             {
                 -- Unmit Color
-                type    = "colorpicker",
-                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
+                type = "colorpicker",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_UNMIT_TP),
-                getFunc = function() return unpack(Settings.alerts.colors.alertUnmit) end,
-                setFunc = function(r, g, b, a) Settings.alerts.colors.alertUnmit = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.alertUnmit[1], g=Defaults.alerts.colors.alertUnmit[2], b=Defaults.alerts.colors.alertUnmit[3]},
-                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertUnmit) end,
+                getFunc = function()
+                    return unpack(Settings.alerts.colors.alertUnmit)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.alerts.colors.alertUnmit = { r, g, b, a }
+                    AbilityAlerts.SetAlertColors()
+                end,
+                default = {
+                    r = Defaults.alerts.colors.alertUnmit[1],
+                    g = Defaults.alerts.colors.alertUnmit[2],
+                    b = Defaults.alerts.colors.alertUnmit[3],
+                },
+                disabled = function()
+                    return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertUnmit)
+                end,
             },
             {
                 type = "header",
@@ -1256,54 +1993,109 @@ function CombatInfo.CreateSettings()
             },
             {
                 -- Power Enable
-                type    = "checkbox",
-                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_POWER)),
+                type = "checkbox",
+                name = zo_strformat(
+                    "<<1>> <<2>>",
+                    GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY),
+                    GetString(SI_LUIE_LAM_CT_SHARED_ALERT_POWER)
+                ),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_POWER_TP),
-                getFunc = function() return Settings.alerts.toggles.showAlertPower end,
-                setFunc = function(v) Settings.alerts.toggles.showAlertPower = v end,
+                getFunc = function()
+                    return Settings.alerts.toggles.showAlertPower
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.showAlertPower = v
+                end,
                 default = Defaults.alerts.toggles.showAlertPower,
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
                 -- Power Format
-                type    = "editbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT)),
+                type = "editbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_POWER_TP),
-                getFunc = function() return Settings.alerts.formats.alertPower end,
-                setFunc = function(v) Settings.alerts.formats.alertPower = v end,
+                getFunc = function()
+                    return Settings.alerts.formats.alertPower
+                end,
+                setFunc = function(v)
+                    Settings.alerts.formats.alertPower = v
+                end,
                 isMultiline = false,
                 default = Defaults.alerts.formats.alertPower,
-                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertPower) end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertPower)
+                end,
             },
             {
                 -- Prefix Power (No Name)
-                type    = "editbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_P), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME)),
-                tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_P_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME_TP)),
-                getFunc = function() return Settings.alerts.toggles.mitigationPowerPrefix2 end,
-                setFunc = function(v) Settings.alerts.toggles.mitigationPowerPrefix2 = v end,
-                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertPower) end,
+                type = "editbox",
+                name = zo_strformat(
+                    "\t\t\t\t\t<<1>> <<2>>",
+                    GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_P),
+                    GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME)
+                ),
+                tooltip = zo_strformat(
+                    "<<1>> <<2>>",
+                    GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_P_TP),
+                    GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME_TP)
+                ),
+                getFunc = function()
+                    return Settings.alerts.toggles.mitigationPowerPrefix2
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.mitigationPowerPrefix2 = v
+                end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertPower)
+                end,
                 default = Defaults.alerts.toggles.mitigationPowerPrefix2,
             },
             {
                 -- Prefix Power (Name)
-                type    = "editbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_P), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME)),
-                tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_P_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME_TP)),
-                getFunc = function() return Settings.alerts.toggles.mitigationPowerPrefixN2 end,
-                setFunc = function(v) Settings.alerts.toggles.mitigationPowerPrefixN2 = v end,
-                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertPower) end,
+                type = "editbox",
+                name = zo_strformat(
+                    "\t\t\t\t\t<<1>> <<2>>",
+                    GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_P),
+                    GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME)
+                ),
+                tooltip = zo_strformat(
+                    "<<1>> <<2>>",
+                    GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_P_TP),
+                    GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME_TP)
+                ),
+                getFunc = function()
+                    return Settings.alerts.toggles.mitigationPowerPrefixN2
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.mitigationPowerPrefixN2 = v
+                end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertPower)
+                end,
                 default = Defaults.alerts.toggles.mitigationPowerPrefixN2,
             },
             {
                 -- Power Color
-                type    = "colorpicker",
-                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
+                type = "colorpicker",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POWER_TP),
-                getFunc = function() return unpack(Settings.alerts.colors.alertPower) end,
-                setFunc = function(r, g, b, a) Settings.alerts.colors.alertPower = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.alertPower[1], g=Defaults.alerts.colors.alertPower[2], b=Defaults.alerts.colors.alertPower[3]},
-                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertPower) end,
+                getFunc = function()
+                    return unpack(Settings.alerts.colors.alertPower)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.alerts.colors.alertPower = { r, g, b, a }
+                    AbilityAlerts.SetAlertColors()
+                end,
+                default = {
+                    r = Defaults.alerts.colors.alertPower[1],
+                    g = Defaults.alerts.colors.alertPower[2],
+                    b = Defaults.alerts.colors.alertPower[3],
+                },
+                disabled = function()
+                    return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertPower)
+                end,
             },
             {
                 type = "header",
@@ -1312,54 +2104,109 @@ function CombatInfo.CreateSettings()
             },
             {
                 -- Destroy Enable
-                type    = "checkbox",
-                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DESTROY)),
+                type = "checkbox",
+                name = zo_strformat(
+                    "<<1>> <<2>>",
+                    GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY),
+                    GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DESTROY)
+                ),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_DESTROY_TP),
-                getFunc = function() return Settings.alerts.toggles.showAlertDestroy end,
-                setFunc = function(v) Settings.alerts.toggles.showAlertDestroy = v end,
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                getFunc = function()
+                    return Settings.alerts.toggles.showAlertDestroy
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.showAlertDestroy = v
+                end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
                 default = Defaults.alerts.toggles.showAlertDestroy,
             },
             {
                 -- Destroy Format
-                type    = "editbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT)),
+                type = "editbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_DESTROY_TP),
-                getFunc = function() return Settings.alerts.formats.alertDestroy end,
-                setFunc = function(v) Settings.alerts.formats.alertDestroy = v end,
+                getFunc = function()
+                    return Settings.alerts.formats.alertDestroy
+                end,
+                setFunc = function(v)
+                    Settings.alerts.formats.alertDestroy = v
+                end,
                 isMultiline = false,
                 default = Defaults.alerts.formats.alertDestroy,
-                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertDestroy) end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertDestroy)
+                end,
             },
             {
                 -- Prefix Destroy (No Name)
-                type    = "editbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_D), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME)),
-                tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_D_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME_TP)),
-                getFunc = function() return Settings.alerts.toggles.mitigationDestroyPrefix2 end,
-                setFunc = function(v) Settings.alerts.toggles.mitigationDestroyPrefix2 = v end,
-                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertDestroy) end,
+                type = "editbox",
+                name = zo_strformat(
+                    "\t\t\t\t\t<<1>> <<2>>",
+                    GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_D),
+                    GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME)
+                ),
+                tooltip = zo_strformat(
+                    "<<1>> <<2>>",
+                    GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_D_TP),
+                    GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME_TP)
+                ),
+                getFunc = function()
+                    return Settings.alerts.toggles.mitigationDestroyPrefix2
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.mitigationDestroyPrefix2 = v
+                end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertDestroy)
+                end,
                 default = Defaults.alerts.toggles.mitigationDestroyPrefix2,
             },
             {
                 -- Prefix Destroy (Name)
-                type    = "editbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_D), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME)),
-                tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_D_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME_TP)),
-                getFunc = function() return Settings.alerts.toggles.mitigationDestroyPrefixN2 end,
-                setFunc = function(v) Settings.alerts.toggles.mitigationDestroyPrefixN2 = v end,
-                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertDestroy) end,
+                type = "editbox",
+                name = zo_strformat(
+                    "\t\t\t\t\t<<1>> <<2>>",
+                    GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_D),
+                    GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME)
+                ),
+                tooltip = zo_strformat(
+                    "<<1>> <<2>>",
+                    GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_D_TP),
+                    GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME_TP)
+                ),
+                getFunc = function()
+                    return Settings.alerts.toggles.mitigationDestroyPrefixN2
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.mitigationDestroyPrefixN2 = v
+                end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertDestroy)
+                end,
                 default = Defaults.alerts.toggles.mitigationDestroyPrefixN2,
             },
             {
                 -- Destroy Color
-                type    = "colorpicker",
-                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
+                type = "colorpicker",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DESTROY_TP),
-                getFunc = function() return unpack(Settings.alerts.colors.alertDestroy) end,
-                setFunc = function(r, g, b, a) Settings.alerts.colors.alertDestroy = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.alertDestroy[1], g=Defaults.alerts.colors.alertDestroy[2], b=Defaults.alerts.colors.alertDestroy[3]},
-                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertDestroy) end,
+                getFunc = function()
+                    return unpack(Settings.alerts.colors.alertDestroy)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.alerts.colors.alertDestroy = { r, g, b, a }
+                    AbilityAlerts.SetAlertColors()
+                end,
+                default = {
+                    r = Defaults.alerts.colors.alertDestroy[1],
+                    g = Defaults.alerts.colors.alertDestroy[2],
+                    b = Defaults.alerts.colors.alertDestroy[3],
+                },
+                disabled = function()
+                    return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertDestroy)
+                end,
             },
             {
                 type = "header",
@@ -1368,55 +2215,109 @@ function CombatInfo.CreateSettings()
             },
             {
                 -- Summon Enable
-                type    = "checkbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_SUMMON)),
+                type = "checkbox",
+                name = zo_strformat(
+                    "\t\t\t\t\t<<1>> <<2>>",
+                    GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY),
+                    GetString(SI_LUIE_LAM_CT_SHARED_ALERT_SUMMON)
+                ),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_SUMMON_TP),
-                getFunc = function() return Settings.alerts.toggles.showAlertSummon end,
-                setFunc = function(v) Settings.alerts.toggles.showAlertSummon = v end,
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                getFunc = function()
+                    return Settings.alerts.toggles.showAlertSummon
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.showAlertSummon = v
+                end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
                 default = Defaults.alerts.toggles.showAlertSummon,
             },
             {
                 -- Summon Format
-                type    = "editbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT)),
+                type = "editbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_SUMMON_TP),
-                getFunc = function() return Settings.alerts.formats.alertSummon end,
-                setFunc = function(v) Settings.alerts.formats.alertSummon = v end,
+                getFunc = function()
+                    return Settings.alerts.formats.alertSummon
+                end,
+                setFunc = function(v)
+                    Settings.alerts.formats.alertSummon = v
+                end,
                 isMultiline = false,
                 default = Defaults.alerts.formats.alertSummon,
-                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertSummon) end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertSummon)
+                end,
             },
             {
                 -- Prefix Summon (No Name)
-                type    = "editbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_S), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME)),
-                tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_S_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME_TP)),
-                getFunc = function() return Settings.alerts.toggles.mitigationSummonPrefix2 end,
-                setFunc = function(v) Settings.alerts.toggles.mitigationSummonPrefix2 = v end,
-                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertSummon) end,
+                type = "editbox",
+                name = zo_strformat(
+                    "\t\t\t\t\t<<1>> <<2>>",
+                    GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_S),
+                    GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME)
+                ),
+                tooltip = zo_strformat(
+                    "<<1>> <<2>>",
+                    GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_S_TP),
+                    GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME_TP)
+                ),
+                getFunc = function()
+                    return Settings.alerts.toggles.mitigationSummonPrefix2
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.mitigationSummonPrefix2 = v
+                end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertSummon)
+                end,
                 default = Defaults.alerts.toggles.mitigationSummonPrefix2,
             },
             {
                 -- Prefix Summon (Name)
-                type    = "editbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_S), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME)),
-                tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_S_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME_TP)),
-                getFunc = function() return Settings.alerts.toggles.mitigationSummonPrefixN2 end,
-                setFunc = function(v) Settings.alerts.toggles.mitigationSummonPrefixN2 = v end,
-                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertSummon) end,
+                type = "editbox",
+                name = zo_strformat(
+                    "\t\t\t\t\t<<1>> <<2>>",
+                    GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_S),
+                    GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME)
+                ),
+                tooltip = zo_strformat(
+                    "<<1>> <<2>>",
+                    GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_S_TP),
+                    GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME_TP)
+                ),
+                getFunc = function()
+                    return Settings.alerts.toggles.mitigationSummonPrefixN2
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.mitigationSummonPrefixN2 = v
+                end,
                 default = Defaults.alerts.toggles.mitigationSummonPrefixN2,
-                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertSummon) end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertSummon)
+                end,
             },
             {
                 -- Summon Color
-                type    = "colorpicker",
-                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
+                type = "colorpicker",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_SUMMON_TP),
-                getFunc = function() return unpack(Settings.alerts.colors.alertSummon) end,
-                setFunc = function(r, g, b, a) Settings.alerts.colors.alertSummon = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.alertSummon[1], g=Defaults.alerts.colors.alertSummon[2], b=Defaults.alerts.colors.alertSummon[3]},
-                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertSummon) end,
+                getFunc = function()
+                    return unpack(Settings.alerts.colors.alertSummon)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.alerts.colors.alertSummon = { r, g, b, a }
+                    AbilityAlerts.SetAlertColors()
+                end,
+                default = {
+                    r = Defaults.alerts.colors.alertSummon[1],
+                    g = Defaults.alerts.colors.alertSummon[2],
+                    b = Defaults.alerts.colors.alertSummon[3],
+                },
+                disabled = function()
+                    return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertSummon)
+                end,
             },
 
             {
@@ -1426,113 +2327,234 @@ function CombatInfo.CreateSettings()
             },
             {
                 -- Stun
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_STUN),
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_STUN),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_STUN_TP),
-                getFunc = function() return unpack(Settings.alerts.colors.stunColor) end,
-                setFunc = function(r, g, b, a) Settings.alerts.colors.stunColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.stunColor[1], g=Defaults.alerts.colors.stunColor[2], b=Defaults.alerts.colors.stunColor[3]},
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                getFunc = function()
+                    return unpack(Settings.alerts.colors.stunColor)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.alerts.colors.stunColor = { r, g, b, a }
+                    AbilityAlerts.SetAlertColors()
+                end,
+                default = {
+                    r = Defaults.alerts.colors.stunColor[1],
+                    g = Defaults.alerts.colors.stunColor[2],
+                    b = Defaults.alerts.colors.stunColor[3],
+                },
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
                 -- Knockback
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_KNOCKBACK),
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_KNOCKBACK),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_KNOCKBACK_TP),
-                getFunc = function() return unpack(Settings.alerts.colors.knockbackColor) end,
-                setFunc = function(r, g, b, a) Settings.alerts.colors.knockbackColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.knockbackColor[1], g=Defaults.alerts.colors.knockbackColor[2], b=Defaults.alerts.colors.knockbackColor[3]},
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                getFunc = function()
+                    return unpack(Settings.alerts.colors.knockbackColor)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.alerts.colors.knockbackColor = { r, g, b, a }
+                    AbilityAlerts.SetAlertColors()
+                end,
+                default = {
+                    r = Defaults.alerts.colors.knockbackColor[1],
+                    g = Defaults.alerts.colors.knockbackColor[2],
+                    b = Defaults.alerts.colors.knockbackColor[3],
+                },
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
                 -- Levitate/Pull
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_LEVITATE),
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_LEVITATE),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_LEVITATE_TP),
-                getFunc = function() return unpack(Settings.alerts.colors.levitateColor) end,
-                setFunc = function(r, g, b, a) Settings.alerts.colors.levitateColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.levitateColor[1], g=Defaults.alerts.colors.levitateColor[2], b=Defaults.alerts.colors.levitateColor[3]},
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                getFunc = function()
+                    return unpack(Settings.alerts.colors.levitateColor)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.alerts.colors.levitateColor = { r, g, b, a }
+                    AbilityAlerts.SetAlertColors()
+                end,
+                default = {
+                    r = Defaults.alerts.colors.levitateColor[1],
+                    g = Defaults.alerts.colors.levitateColor[2],
+                    b = Defaults.alerts.colors.levitateColor[3],
+                },
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
                 -- Disorient
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_DISORIENT),
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_DISORIENT),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_DISORIENT_TP),
-                getFunc = function() return unpack(Settings.alerts.colors.disorientColor) end,
-                setFunc = function(r, g, b, a) Settings.alerts.colors.disorientColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.disorientColor[1], g=Defaults.alerts.colors.disorientColor[2], b=Defaults.alerts.colors.disorientColor[3]},
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                getFunc = function()
+                    return unpack(Settings.alerts.colors.disorientColor)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.alerts.colors.disorientColor = { r, g, b, a }
+                    AbilityAlerts.SetAlertColors()
+                end,
+                default = {
+                    r = Defaults.alerts.colors.disorientColor[1],
+                    g = Defaults.alerts.colors.disorientColor[2],
+                    b = Defaults.alerts.colors.disorientColor[3],
+                },
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
                 -- Fear
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_FEAR),
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_FEAR),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_FEAR_TP),
-                getFunc = function() return unpack(Settings.alerts.colors.fearColor) end,
-                setFunc = function(r, g, b, a) Settings.alerts.colors.fearColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.fearColor[1], g=Defaults.alerts.colors.fearColor[2], b=Defaults.alerts.colors.fearColor[3]},
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                getFunc = function()
+                    return unpack(Settings.alerts.colors.fearColor)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.alerts.colors.fearColor = { r, g, b, a }
+                    AbilityAlerts.SetAlertColors()
+                end,
+                default = {
+                    r = Defaults.alerts.colors.fearColor[1],
+                    g = Defaults.alerts.colors.fearColor[2],
+                    b = Defaults.alerts.colors.fearColor[3],
+                },
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
                 -- Charm
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_CHARM),
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_CHARM),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_CHARM_TP),
-                getFunc = function() return unpack(Settings.alerts.colors.charmColor) end,
-                setFunc = function(r, g, b, a) Settings.alerts.colors.charmColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.charmColor[1], g=Defaults.alerts.colors.charmColor[2], b=Defaults.alerts.colors.charmColor[3]},
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                getFunc = function()
+                    return unpack(Settings.alerts.colors.charmColor)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.alerts.colors.charmColor = { r, g, b, a }
+                    AbilityAlerts.SetAlertColors()
+                end,
+                default = {
+                    r = Defaults.alerts.colors.charmColor[1],
+                    g = Defaults.alerts.colors.charmColor[2],
+                    b = Defaults.alerts.colors.charmColor[3],
+                },
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
                 -- Silence
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_SILENCE),
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_SILENCE),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_SILENCE_TP),
-                getFunc = function() return unpack(Settings.alerts.colors.silenceColor) end,
-                setFunc = function(r, g, b, a) Settings.alerts.colors.silenceColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.silenceColor[1], g=Defaults.alerts.colors.silenceColor[2], b=Defaults.alerts.colors.silenceColor[3]},
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                getFunc = function()
+                    return unpack(Settings.alerts.colors.silenceColor)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.alerts.colors.silenceColor = { r, g, b, a }
+                    AbilityAlerts.SetAlertColors()
+                end,
+                default = {
+                    r = Defaults.alerts.colors.silenceColor[1],
+                    g = Defaults.alerts.colors.silenceColor[2],
+                    b = Defaults.alerts.colors.silenceColor[3],
+                },
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
                 -- Stagger
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_STAGGER),
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_STAGGER),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_STAGGER_TP),
-                getFunc = function() return unpack(Settings.alerts.colors.staggerColor) end,
-                setFunc = function(r, g, b, a) Settings.alerts.colors.staggerColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.staggerColor[1], g=Defaults.alerts.colors.staggerColor[2], b=Defaults.alerts.colors.staggerColor[3]},
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                getFunc = function()
+                    return unpack(Settings.alerts.colors.staggerColor)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.alerts.colors.staggerColor = { r, g, b, a }
+                    AbilityAlerts.SetAlertColors()
+                end,
+                default = {
+                    r = Defaults.alerts.colors.staggerColor[1],
+                    g = Defaults.alerts.colors.staggerColor[2],
+                    b = Defaults.alerts.colors.staggerColor[3],
+                },
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
                 -- Unbreakable
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_UNBREAKABLE),
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_UNBREAKABLE),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_UNBREAKABLE_TP),
-                getFunc = function() return unpack(Settings.alerts.colors.unbreakableColor) end,
-                setFunc = function(r, g, b, a) Settings.alerts.colors.unbreakableColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.unbreakableColor[1], g=Defaults.alerts.colors.unbreakableColor[2], b=Defaults.alerts.colors.unbreakableColor[3]},
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                getFunc = function()
+                    return unpack(Settings.alerts.colors.unbreakableColor)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.alerts.colors.unbreakableColor = { r, g, b, a }
+                    AbilityAlerts.SetAlertColors()
+                end,
+                default = {
+                    r = Defaults.alerts.colors.unbreakableColor[1],
+                    g = Defaults.alerts.colors.unbreakableColor[2],
+                    b = Defaults.alerts.colors.unbreakableColor[3],
+                },
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
                 -- Snare
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_SNARE),
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_SNARE),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_SNARE_TP),
-                getFunc = function() return unpack(Settings.alerts.colors.snareColor) end,
-                setFunc = function(r, g, b, a) Settings.alerts.colors.snareColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.snareColor[1], g=Defaults.alerts.colors.snareColor[2], b=Defaults.alerts.colors.snareColor[3]},
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                getFunc = function()
+                    return unpack(Settings.alerts.colors.snareColor)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.alerts.colors.snareColor = { r, g, b, a }
+                    AbilityAlerts.SetAlertColors()
+                end,
+                default = {
+                    r = Defaults.alerts.colors.snareColor[1],
+                    g = Defaults.alerts.colors.snareColor[2],
+                    b = Defaults.alerts.colors.snareColor[3],
+                },
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
             {
                 -- Root
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_ROOT),
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_ROOT),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_ROOT_TP),
-                getFunc = function() return unpack(Settings.alerts.colors.rootColor) end,
-                setFunc = function(r, g, b, a) Settings.alerts.colors.rootColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.rootColor[1], g=Defaults.alerts.colors.rootColor[2], b=Defaults.alerts.colors.rootColor[3]},
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                getFunc = function()
+                    return unpack(Settings.alerts.colors.rootColor)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.alerts.colors.rootColor = { r, g, b, a }
+                    AbilityAlerts.SetAlertColors()
+                end,
+                default = {
+                    r = Defaults.alerts.colors.rootColor[1],
+                    g = Defaults.alerts.colors.rootColor[2],
+                    b = Defaults.alerts.colors.rootColor[3],
+                },
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
             },
 
             {
@@ -1547,22 +2569,34 @@ function CombatInfo.CreateSettings()
                 name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_VOLUME),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_VOLUME_TP),
                 default = Defaults.alerts.toggles.soundVolume,
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
-                min     = 1,
-                max     = 5,
-                step    = 1,
-                getFunc = function() return Settings.alerts.toggles.soundVolume end,
-                setFunc = function(v) Settings.alerts.toggles.soundVolume = v end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
+                min = 1,
+                max = 5,
+                step = 1,
+                getFunc = function()
+                    return Settings.alerts.toggles.soundVolume
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.soundVolume = v
+                end,
             },
             {
                 -- Play Sound (Single Target)
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_TP),
-                getFunc = function() return Settings.alerts.toggles.sound_stEnable end,
-                setFunc = function(v) Settings.alerts.toggles.sound_stEnable = v end,
+                getFunc = function()
+                    return Settings.alerts.toggles.sound_stEnable
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.sound_stEnable = v
+                end,
                 width = "half",
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
                 defaults = Defaults.alerts.toggles.sound_stEnable,
             },
             {
@@ -1571,21 +2605,34 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound_st end,
-                setFunc = function(value) Settings.alerts.sounds.sound_st = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.alerts.sounds.sound_st
+                end,
+                setFunc = function(value)
+                    Settings.alerts.sounds.sound_st = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound_st,
-                disabled = function() return not (Settings.alerts.toggles.sound_stEnable and Settings.alerts.toggles.alertEnable) end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.sound_stEnable and Settings.alerts.toggles.alertEnable)
+                end,
             },
             {
                 -- Play Sound (Single Target CC)
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_CC),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_CC_TP),
-                getFunc = function() return Settings.alerts.toggles.sound_st_ccEnable end,
-                setFunc = function(v) Settings.alerts.toggles.sound_st_ccEnable = v end,
+                getFunc = function()
+                    return Settings.alerts.toggles.sound_st_ccEnable
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.sound_st_ccEnable = v
+                end,
                 width = "half",
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
                 defaults = Defaults.alerts.toggles.sound_st_ccEnable,
             },
             {
@@ -1594,21 +2641,34 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound_st_cc end,
-                setFunc = function(value) Settings.alerts.sounds.sound_st_cc = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.alerts.sounds.sound_st_cc
+                end,
+                setFunc = function(value)
+                    Settings.alerts.sounds.sound_st_cc = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound_st_cc,
-                disabled = function() return not (Settings.alerts.toggles.sound_st_ccEnable and Settings.alerts.toggles.alertEnable) end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.sound_st_ccEnable and Settings.alerts.toggles.alertEnable)
+                end,
             },
             {
                 -- Play Sound (AOE)
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_AOE),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_AOE_TP),
-                getFunc = function() return Settings.alerts.toggles.sound_aoeEnable end,
-                setFunc = function(v) Settings.alerts.toggles.sound_aoeEnable = v end,
+                getFunc = function()
+                    return Settings.alerts.toggles.sound_aoeEnable
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.sound_aoeEnable = v
+                end,
                 width = "half",
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
                 defaults = Defaults.alerts.toggles.sound_aoeEnable,
             },
             {
@@ -1617,21 +2677,34 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound_aoe end,
-                setFunc = function(value) Settings.alerts.sounds.sound_aoe = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.alerts.sounds.sound_aoe
+                end,
+                setFunc = function(value)
+                    Settings.alerts.sounds.sound_aoe = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound_aoe,
-                disabled = function() return not (Settings.alerts.toggles.sound_aoeEnable and Settings.alerts.toggles.alertEnable) end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.sound_aoeEnable and Settings.alerts.toggles.alertEnable)
+                end,
             },
             {
                 -- Play Sound (AOE CC)
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_AOE_CC),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_AOE_CC_TP),
-                getFunc = function() return Settings.alerts.toggles.sound_aoe_ccEnable end,
-                setFunc = function(v) Settings.alerts.toggles.sound_aoe_ccEnable = v end,
+                getFunc = function()
+                    return Settings.alerts.toggles.sound_aoe_ccEnable
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.sound_aoe_ccEnable = v
+                end,
                 width = "half",
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
                 defaults = Defaults.alerts.toggles.sound_aoe_ccEnable,
             },
             {
@@ -1640,21 +2713,34 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound_aoe_cc end,
-                setFunc = function(value) Settings.alerts.sounds.sound_aoe_cc = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.alerts.sounds.sound_aoe_cc
+                end,
+                setFunc = function(value)
+                    Settings.alerts.sounds.sound_aoe_cc = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound_aoe_cc,
-                disabled = function() return not (Settings.alerts.toggles.sound_aoe_ccEnable and Settings.alerts.toggles.alertEnable) end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.sound_aoe_ccEnable and Settings.alerts.toggles.alertEnable)
+                end,
             },
             {
                 -- Play Sound (POWER ATTACK)
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_POWER_ATTACK),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_POWER_ATTACK_TP),
-                getFunc = function() return Settings.alerts.toggles.sound_powerattackEnable end,
-                setFunc = function(v) Settings.alerts.toggles.sound_powerattackEnable = v end,
+                getFunc = function()
+                    return Settings.alerts.toggles.sound_powerattackEnable
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.sound_powerattackEnable = v
+                end,
                 width = "half",
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
                 defaults = Defaults.alerts.toggles.sound_powerattackEnable,
             },
             {
@@ -1663,21 +2749,34 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound_powerattack end,
-                setFunc = function(value) Settings.alerts.sounds.sound_powerattack = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.alerts.sounds.sound_powerattack
+                end,
+                setFunc = function(value)
+                    Settings.alerts.sounds.sound_powerattack = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound_powerattack,
-                disabled = function() return not (Settings.alerts.toggles.sound_powerattackEnable and Settings.alerts.toggles.alertEnable) end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.sound_powerattackEnable and Settings.alerts.toggles.alertEnable)
+                end,
             },
             {
                 -- Play Sound (RADIAL AVOID)
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_RADIAL_AVOID),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ST_RADIAL_AVOID_TP),
-                getFunc = function() return Settings.alerts.toggles.sound_radialEnable end,
-                setFunc = function(v) Settings.alerts.toggles.sound_radialEnable = v end,
+                getFunc = function()
+                    return Settings.alerts.toggles.sound_radialEnable
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.sound_radialEnable = v
+                end,
                 width = "half",
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
                 defaults = Defaults.alerts.toggles.sound_radialEnable,
             },
             {
@@ -1686,21 +2785,34 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound_radial end,
-                setFunc = function(value) Settings.alerts.sounds.sound_radial = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.alerts.sounds.sound_radial
+                end,
+                setFunc = function(value)
+                    Settings.alerts.sounds.sound_radial = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound_radial,
-                disabled = function() return not (Settings.alerts.toggles.sound_radialEnable and Settings.alerts.toggles.alertEnable) end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.sound_radialEnable and Settings.alerts.toggles.alertEnable)
+                end,
             },
             {
                 -- Play Sound (GROUND TRAVEL)
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_GROUND_TRAVEL),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_GROUND_TRAVEL_TP),
-                getFunc = function() return Settings.alerts.toggles.sound_travelEnable end,
-                setFunc = function(v) Settings.alerts.toggles.sound_travelEnable = v end,
+                getFunc = function()
+                    return Settings.alerts.toggles.sound_travelEnable
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.sound_travelEnable = v
+                end,
                 width = "half",
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
                 defaults = Defaults.alerts.toggles.sound_travelEnable,
             },
             {
@@ -1709,21 +2821,34 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound_travel end,
-                setFunc = function(value) Settings.alerts.sounds.sound_travel = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.alerts.sounds.sound_travel
+                end,
+                setFunc = function(value)
+                    Settings.alerts.sounds.sound_travel = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound_travel,
-                disabled = function() return not (Settings.alerts.toggles.sound_travelEnable and Settings.alerts.toggles.alertEnable) end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.sound_travelEnable and Settings.alerts.toggles.alertEnable)
+                end,
             },
             {
                 -- Play Sound (GROUND TRAVEL CC)
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_GROUND_TRAVEL_CC),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_GROUND_TRAVEL_CC_TP),
-                getFunc = function() return Settings.alerts.toggles.sound_travel_ccEnable end,
-                setFunc = function(v) Settings.alerts.toggles.sound_travel_ccEnable = v end,
+                getFunc = function()
+                    return Settings.alerts.toggles.sound_travel_ccEnable
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.sound_travel_ccEnable = v
+                end,
                 width = "half",
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
                 defaults = Defaults.alerts.toggles.sound_travel_ccEnable,
             },
             {
@@ -1732,21 +2857,34 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound_travel_cc end,
-                setFunc = function(value) Settings.alerts.sounds.sound_travel_cc = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.alerts.sounds.sound_travel_cc
+                end,
+                setFunc = function(value)
+                    Settings.alerts.sounds.sound_travel_cc = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound_travel_cc,
-                disabled = function() return not (Settings.alerts.toggles.sound_travel_ccEnable and Settings.alerts.toggles.alertEnable) end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.sound_travel_ccEnable and Settings.alerts.toggles.alertEnable)
+                end,
             },
             {
                 -- Play Sound (GROUND)
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_GROUND),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_GROUND_TP),
-                getFunc = function() return Settings.alerts.toggles.sound_groundEnable end,
-                setFunc = function(v) Settings.alerts.toggles.sound_groundEnable = v end,
+                getFunc = function()
+                    return Settings.alerts.toggles.sound_groundEnable
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.sound_groundEnable = v
+                end,
                 width = "half",
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
                 defaults = Defaults.alerts.toggles.sound_groundEnable,
             },
             {
@@ -1755,21 +2893,34 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound_ground end,
-                setFunc = function(value) Settings.alerts.sounds.sound_ground = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.alerts.sounds.sound_ground
+                end,
+                setFunc = function(value)
+                    Settings.alerts.sounds.sound_ground = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound_ground,
-                disabled = function() return not (Settings.alerts.toggles.sound_groundEnable and Settings.alerts.toggles.alertEnable) end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.sound_groundEnable and Settings.alerts.toggles.alertEnable)
+                end,
             },
             {
                 -- Play Sound (METEOR)
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_METEOR),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_METEOR_TP),
-                getFunc = function() return Settings.alerts.toggles.sound_meteorEnable end,
-                setFunc = function(v) Settings.alerts.toggles.sound_meteorEnable = v end,
+                getFunc = function()
+                    return Settings.alerts.toggles.sound_meteorEnable
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.sound_meteorEnable = v
+                end,
                 width = "half",
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
                 defaults = Defaults.alerts.toggles.sound_meteorEnable,
             },
             {
@@ -1778,21 +2929,34 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound_meteor end,
-                setFunc = function(value) Settings.alerts.sounds.sound_meteor = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.alerts.sounds.sound_meteor
+                end,
+                setFunc = function(value)
+                    Settings.alerts.sounds.sound_meteor = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound_meteor,
-                disabled = function() return not (Settings.alerts.toggles.sound_meteorEnable and Settings.alerts.toggles.alertEnable) end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.sound_meteorEnable and Settings.alerts.toggles.alertEnable)
+                end,
             },
             {
                 -- Play Sound (UNMIT ST)
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_UNMIT),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_UNMIT_TP),
-                getFunc = function() return Settings.alerts.toggles.sound_unmit_stEnable end,
-                setFunc = function(v) Settings.alerts.toggles.sound_unmit_stEnable = v end,
+                getFunc = function()
+                    return Settings.alerts.toggles.sound_unmit_stEnable
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.sound_unmit_stEnable = v
+                end,
                 width = "half",
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
                 defaults = Defaults.alerts.toggles.sound_unmit_stEnable,
             },
             {
@@ -1801,21 +2965,34 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound_unmit_st end,
-                setFunc = function(value) Settings.alerts.sounds.sound_unmit_st = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.alerts.sounds.sound_unmit_st
+                end,
+                setFunc = function(value)
+                    Settings.alerts.sounds.sound_unmit_st = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound_unmit_st,
-                disabled = function() return not (Settings.alerts.toggles.sound_unmit_stEnable and Settings.alerts.toggles.alertEnable) end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.sound_unmit_stEnable and Settings.alerts.toggles.alertEnable)
+                end,
             },
             {
                 -- Play Sound (UNMIT AOE)
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_UNMIT_AOE),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_UNMIT_AOE_TP),
-                getFunc = function() return Settings.alerts.toggles.sound_unmit_aoeEnable end,
-                setFunc = function(v) Settings.alerts.toggles.sound_unmit_aoeEnable = v end,
+                getFunc = function()
+                    return Settings.alerts.toggles.sound_unmit_aoeEnable
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.sound_unmit_aoeEnable = v
+                end,
                 width = "half",
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
                 defaults = Defaults.alerts.toggles.sound_unmit_aoeEnable,
             },
             {
@@ -1824,21 +3001,34 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound_unmit_aoe end,
-                setFunc = function(value) Settings.alerts.sounds.sound_unmit_aoe = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.alerts.sounds.sound_unmit_aoe
+                end,
+                setFunc = function(value)
+                    Settings.alerts.sounds.sound_unmit_aoe = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound_unmit_aoe,
-                disabled = function() return not (Settings.alerts.toggles.sound_unmit_aoeEnable and Settings.alerts.toggles.alertEnable) end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.sound_unmit_aoeEnable and Settings.alerts.toggles.alertEnable)
+                end,
             },
             {
                 -- Play Sound (POWER - DAMAGE)
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_POWER_DAMAGE),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_POWER_DAMAGE_TP),
-                getFunc = function() return Settings.alerts.toggles.sound_power_damageEnable end,
-                setFunc = function(v) Settings.alerts.toggles.sound_power_damageEnable = v end,
+                getFunc = function()
+                    return Settings.alerts.toggles.sound_power_damageEnable
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.sound_power_damageEnable = v
+                end,
                 width = "half",
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
                 defaults = Defaults.alerts.toggles.sound_power_damageEnable,
             },
             {
@@ -1847,21 +3037,36 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound_power_damage end,
-                setFunc = function(value) Settings.alerts.sounds.sound_power_damage = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.alerts.sounds.sound_power_damage
+                end,
+                setFunc = function(value)
+                    Settings.alerts.sounds.sound_power_damage = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound_power_damage,
-                disabled = function() return not (Settings.alerts.toggles.sound_power_damageEnable and Settings.alerts.toggles.alertEnable) end,
+                disabled = function()
+                    return not (
+                        Settings.alerts.toggles.sound_power_damageEnable and Settings.alerts.toggles.alertEnable
+                    )
+                end,
             },
             {
                 -- Play Sound (POWER - DEFENSE)
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_POWER_DEFENSE),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_POWER_DEFENSE_TP),
-                getFunc = function() return Settings.alerts.toggles.sound_power_buffEnable end,
-                setFunc = function(v) Settings.alerts.toggles.sound_power_buffEnable = v end,
+                getFunc = function()
+                    return Settings.alerts.toggles.sound_power_buffEnable
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.sound_power_buffEnable = v
+                end,
                 width = "half",
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
                 defaults = Defaults.alerts.toggles.sound_power_buffEnable,
             },
             {
@@ -1870,21 +3075,34 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound_power_buff end,
-                setFunc = function(value) Settings.alerts.sounds.sound_power_buff = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.alerts.sounds.sound_power_buff
+                end,
+                setFunc = function(value)
+                    Settings.alerts.sounds.sound_power_buff = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound_power_buff,
-                disabled = function() return not (Settings.alerts.toggles.sound_power_buffEnable and Settings.alerts.toggles.alertEnable) end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.sound_power_buffEnable and Settings.alerts.toggles.alertEnable)
+                end,
             },
             {
                 -- Play Sound (SUMMON)
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_SUMMON),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_SUMMON_TP),
-                getFunc = function() return Settings.alerts.toggles.sound_summonEnable end,
-                setFunc = function(v) Settings.alerts.toggles.sound_summonEnable = v end,
+                getFunc = function()
+                    return Settings.alerts.toggles.sound_summonEnable
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.sound_summonEnable = v
+                end,
                 width = "half",
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
                 defaults = Defaults.alerts.toggles.sound_summonEnable,
             },
             {
@@ -1893,21 +3111,34 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound_summon end,
-                setFunc = function(value) Settings.alerts.sounds.sound_summon = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.alerts.sounds.sound_summon
+                end,
+                setFunc = function(value)
+                    Settings.alerts.sounds.sound_summon = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound_summon,
-                disabled = function() return not (Settings.alerts.toggles.sound_summonEnable and Settings.alerts.toggles.alertEnable) end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.sound_summonEnable and Settings.alerts.toggles.alertEnable)
+                end,
             },
             {
                 -- Play Sound (DESTROY)
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_DESTROY),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_DESTROY_TP),
-                getFunc = function() return Settings.alerts.toggles.sound_destroyEnable end,
-                setFunc = function(v) Settings.alerts.toggles.sound_destroyEnable = v end,
+                getFunc = function()
+                    return Settings.alerts.toggles.sound_destroyEnable
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.sound_destroyEnable = v
+                end,
                 width = "half",
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
                 defaults = Defaults.alerts.toggles.sound_destroyEnable,
             },
             {
@@ -1916,21 +3147,34 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound_destroy end,
-                setFunc = function(value) Settings.alerts.sounds.sound_destroy = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.alerts.sounds.sound_destroy
+                end,
+                setFunc = function(value)
+                    Settings.alerts.sounds.sound_destroy = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound_destroy,
-                disabled = function() return not (Settings.alerts.toggles.sound_destroyEnable and Settings.alerts.toggles.alertEnable) end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.sound_destroyEnable and Settings.alerts.toggles.alertEnable)
+                end,
             },
             {
                 -- Play Sound (HEAL)
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_HEAL),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_HEAL_TP),
-                getFunc = function() return Settings.alerts.toggles.sound_healEnable end,
-                setFunc = function(v) Settings.alerts.toggles.sound_healEnable = v end,
+                getFunc = function()
+                    return Settings.alerts.toggles.sound_healEnable
+                end,
+                setFunc = function(v)
+                    Settings.alerts.toggles.sound_healEnable = v
+                end,
                 width = "half",
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function()
+                    return not Settings.alerts.toggles.alertEnable
+                end,
                 defaults = Defaults.alerts.toggles.sound_healEnable,
             },
             {
@@ -1939,13 +3183,19 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.alerts.sounds.sound_heal end,
-                setFunc = function(value) Settings.alerts.sounds.sound_heal = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.alerts.sounds.sound_heal
+                end,
+                setFunc = function(value)
+                    Settings.alerts.sounds.sound_heal = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound_heal,
-                disabled = function() return not (Settings.alerts.toggles.sound_healEnable and Settings.alerts.toggles.alertEnable) end,
+                disabled = function()
+                    return not (Settings.alerts.toggles.sound_healEnable and Settings.alerts.toggles.alertEnable)
+                end,
             },
-
         },
     }
 
@@ -1958,7 +3208,7 @@ function CombatInfo.CreateSettings()
             -- CCT Description
             {
                 type = "description",
-                text = GetString(SI_LUIE_LAM_CI_CCT_DESCRIPTION)
+                text = GetString(SI_LUIE_LAM_CI_CCT_DESCRIPTION),
             },
 
             {
@@ -1968,8 +3218,16 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_UNLOCK_TP),
                 default = Defaults.cct.unlock,
                 width = "half",
-                getFunc = function() return Settings.cct.unlock end,
-                setFunc = function(newValue) Settings.cct.unlock = newValue if newValue then CrowdControlTracker:SetupDisplay("draw") end CrowdControlTracker:InitControls() end,
+                getFunc = function()
+                    return Settings.cct.unlock
+                end,
+                setFunc = function(newValue)
+                    Settings.cct.unlock = newValue
+                    if newValue then
+                        CrowdControlTracker:SetupDisplay("draw")
+                    end
+                    CrowdControlTracker:InitControls()
+                end,
             },
             {
                 -- Reset CCT
@@ -1985,8 +3243,13 @@ function CombatInfo.CreateSettings()
                 name = GetString(SI_LUIE_LAM_CI_CCT_TOGGLE),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_TOGGLE_TP),
                 default = Defaults.cct.enabled,
-                getFunc = function() return Settings.cct.enabled end,
-                setFunc = function(newValue) Settings.cct.enabled = newValue CrowdControlTracker:OnOff() end,
+                getFunc = function()
+                    return Settings.cct.enabled
+                end,
+                setFunc = function(newValue)
+                    Settings.cct.enabled = newValue
+                    CrowdControlTracker:OnOff()
+                end,
             },
             {
                 -- Enable only in PVP
@@ -1994,9 +3257,16 @@ function CombatInfo.CreateSettings()
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_PVP_ONLY)),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_PVP_ONLY_TP),
                 default = Defaults.cct.enabledOnlyInCyro,
-                disabled = function() return not Settings.cct.enabled end,
-                getFunc = function() return Settings.cct.enabledOnlyInCyro end,
-                setFunc = function(newValue) Settings.cct.enabledOnlyInCyro = newValue CrowdControlTracker:OnOff() end,
+                disabled = function()
+                    return not Settings.cct.enabled
+                end,
+                getFunc = function()
+                    return Settings.cct.enabledOnlyInCyro
+                end,
+                setFunc = function(newValue)
+                    Settings.cct.enabledOnlyInCyro = newValue
+                    CrowdControlTracker:OnOff()
+                end,
             },
             {
                 -- Display Options Header
@@ -2009,28 +3279,30 @@ function CombatInfo.CreateSettings()
                 type = "dropdown",
                 name = GetString(SI_LUIE_LAM_CI_CCT_DISPLAY_STYLE),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_DISPLAY_STYLE_TP),
-                choices = {"Both icon and text", "Icon only", "Text only"},
+                choices = { "Both icon and text", "Icon only", "Text only" },
                 getFunc = function()
-                    if Settings.cct.showOptions=="all" then
+                    if Settings.cct.showOptions == "all" then
                         return "Both icon and text"
-                    elseif Settings.cct.showOptions=="icon" then
+                    elseif Settings.cct.showOptions == "icon" then
                         return "Icon only"
-                    elseif Settings.cct.showOptions=="text" then
+                    elseif Settings.cct.showOptions == "text" then
                         return "Text only"
                     end
                 end,
                 setFunc = function(newValue)
-                    if newValue=="Both icon and text" then
-                        Settings.cct.showOptions="all"
-                    elseif newValue=="Icon only" then
-                        Settings.cct.showOptions="icon"
-                    elseif newValue=="Text only" then
-                        Settings.cct.showOptions="text"
+                    if newValue == "Both icon and text" then
+                        Settings.cct.showOptions = "all"
+                    elseif newValue == "Icon only" then
+                        Settings.cct.showOptions = "icon"
+                    elseif newValue == "Text only" then
+                        Settings.cct.showOptions = "text"
                     end
-                        CrowdControlTracker:InitControls()
+                    CrowdControlTracker:InitControls()
                 end,
-                    default = "Both icon and text",
-                    disabled = function() return not Settings.cct.enabled end,
+                default = "Both icon and text",
+                disabled = function()
+                    return not Settings.cct.enabled
+                end,
             },
             {
                 -- Ability Name or CC Type
@@ -2038,9 +3310,16 @@ function CombatInfo.CreateSettings()
                 name = GetString(SI_LUIE_LAM_CI_CCT_DISPLAY_NAME),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_DISPLAY_NAME_TP),
                 default = Defaults.cct.useAbilityName,
-                disabled = function() return (not Settings.cct.enabled) or (Settings.cct.showOptions=="icon") end,
-                getFunc = function() return Settings.cct.useAbilityName end,
-                setFunc = function(newValue) Settings.cct.useAbilityName = newValue CrowdControlTracker:InitControls() end,
+                disabled = function()
+                    return (not Settings.cct.enabled) or (Settings.cct.showOptions == "icon")
+                end,
+                getFunc = function()
+                    return Settings.cct.useAbilityName
+                end,
+                setFunc = function(newValue)
+                    Settings.cct.useAbilityName = newValue
+                    CrowdControlTracker:InitControls()
+                end,
             },
             {
                 -- Use Generic Icon for CC Type
@@ -2048,9 +3327,16 @@ function CombatInfo.CreateSettings()
                 name = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_TP),
                 default = Defaults.cct.useDefaultIcon,
-                disabled = function() return (not Settings.cct.enabled) or (Settings.cct.showOptions=="icon") end,
-                getFunc = function() return Settings.cct.useDefaultIcon end,
-                setFunc = function(newValue) Settings.cct.useDefaultIcon = newValue CrowdControlTracker:InitControls() end,
+                disabled = function()
+                    return (not Settings.cct.enabled) or (Settings.cct.showOptions == "icon")
+                end,
+                getFunc = function()
+                    return Settings.cct.useDefaultIcon
+                end,
+                setFunc = function(newValue)
+                    Settings.cct.useDefaultIcon = newValue
+                    CrowdControlTracker:InitControls()
+                end,
             },
 
             {
@@ -2059,24 +3345,38 @@ function CombatInfo.CreateSettings()
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_OPTIONS)),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_OPTIONS_TP),
                 choices = globalIconOptions,
-                getFunc = function() return globalIconOptions[Settings.cct.defaultIconOptions] end,
-                setFunc = function(value) Settings.cct.defaultIconOptions = globalIconOptionsKeys[value] CrowdControlTracker:InitControls() end,
+                getFunc = function()
+                    return globalIconOptions[Settings.cct.defaultIconOptions]
+                end,
+                setFunc = function(value)
+                    Settings.cct.defaultIconOptions = globalIconOptionsKeys[value]
+                    CrowdControlTracker:InitControls()
+                end,
                 width = "full",
                 default = Defaults.cct.defaultIconOptions,
-                disabled = function() return not Settings.cct.useDefaultIcon end,
+                disabled = function()
+                    return not Settings.cct.useDefaultIcon
+                end,
             },
             {
                 -- Icon and Text Scale
                 type = "slider",
                 name = GetString(SI_LUIE_LAM_CI_CCT_SCALE),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_SCALE_TP),
-                default = tonumber(string.format("%.0f", 100*Defaults.cct.controlScale)),
-                disabled = function() return not Settings.cct.enabled end,
-                min     = 20,
-                max     = 200,
-                step    = 1,
-                getFunc = function() return tonumber(string.format("%.0f", 100*Settings.cct.controlScale)) end,
-                setFunc = function(newValue) Settings.cct.controlScale = newValue/100 CrowdControlTracker:InitControls() end,
+                default = tonumber(string.format("%.0f", 100 * Defaults.cct.controlScale)),
+                disabled = function()
+                    return not Settings.cct.enabled
+                end,
+                min = 20,
+                max = 200,
+                step = 1,
+                getFunc = function()
+                    return tonumber(string.format("%.0f", 100 * Settings.cct.controlScale))
+                end,
+                setFunc = function(newValue)
+                    Settings.cct.controlScale = newValue / 100
+                    CrowdControlTracker:InitControls()
+                end,
             },
             {
                 type = "header",
@@ -2089,11 +3389,16 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_SOUND_TP),
                 default = Defaults.cct.playSound,
                 width = "half",
-                getFunc = function() return Settings.cct.playSound end,
-                setFunc = function(newValue) Settings.cct.playSound = newValue
+                getFunc = function()
+                    return Settings.cct.playSound
+                end,
+                setFunc = function(newValue)
+                    Settings.cct.playSound = newValue
                     CrowdControlTracker:InitControls()
                 end,
-                disabled = function() return not Settings.cct.enabled end,
+                disabled = function()
+                    return not Settings.cct.enabled
+                end,
             },
 
             {
@@ -2102,11 +3407,18 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.cct.playSoundOption end,
-                setFunc = function(value) Settings.cct.playSoundOption = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.cct.playSoundOption
+                end,
+                setFunc = function(value)
+                    Settings.cct.playSoundOption = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Settings.cct.playSoundOption,
-                disabled = function() return not (Settings.cct.playSound and Settings.cct.enabled) end,
+                disabled = function()
+                    return not (Settings.cct.playSound and Settings.cct.enabled)
+                end,
             },
             {
                 -- Show Stagger (Text Only)
@@ -2114,9 +3426,14 @@ function CombatInfo.CreateSettings()
                 name = GetString(SI_LUIE_LAM_CI_CCT_STAGGER),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_STAGGER_TP),
                 default = Defaults.cct.showStaggered,
-                disabled = function() return not Settings.cct.enabled end,
-                getFunc = function() return Settings.cct.showStaggered end,
-                setFunc = function(newValue) Settings.cct.showStaggered = newValue
+                disabled = function()
+                    return not Settings.cct.enabled
+                end,
+                getFunc = function()
+                    return Settings.cct.showStaggered
+                end,
+                setFunc = function(newValue)
+                    Settings.cct.showStaggered = newValue
                     CrowdControlTracker:InitControls()
                 end,
             },
@@ -2126,9 +3443,14 @@ function CombatInfo.CreateSettings()
                 name = GetString(SI_LUIE_LAM_CI_CCT_GCD_TOGGLE),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_GCD_TOGGLE_TP),
                 default = Defaults.cct.showGCD,
-                disabled = function() return (not Settings.cct.enabled) end,
-                getFunc = function() return Settings.cct.showGCD end,
-                setFunc = function(newValue) Settings.cct.showGCD = newValue
+                disabled = function()
+                    return not Settings.cct.enabled
+                end,
+                getFunc = function()
+                    return Settings.cct.showGCD
+                end,
+                setFunc = function(newValue)
+                    Settings.cct.showGCD = newValue
                     CrowdControlTracker:InitControls()
                 end,
             },
@@ -2138,11 +3460,16 @@ function CombatInfo.CreateSettings()
                 name = GetString(SI_LUIE_LAM_CI_CCT_IMMUNE_TOGGLE),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_IMMUNE_TOGGLE_TP),
                 default = Defaults.cct.showImmune,
-                getFunc = function() return Settings.cct.showImmune end,
-                setFunc = function(newValue) Settings.cct.showImmune = newValue
+                getFunc = function()
+                    return Settings.cct.showImmune
+                end,
+                setFunc = function(newValue)
+                    Settings.cct.showImmune = newValue
                     CrowdControlTracker:InitControls()
                 end,
-                disabled = function() return (not Settings.cct.enabled) end,
+                disabled = function()
+                    return not Settings.cct.enabled
+                end,
             },
             {
                 -- Show when Immune only in Cyrodiil
@@ -2150,11 +3477,16 @@ function CombatInfo.CreateSettings()
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_IMMUNE_CYRODIIL)),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_IMMUNE_CYRODIIL_TP),
                 default = Defaults.cct.showImmuneOnlyInCyro,
-                getFunc = function() return Settings.cct.showImmuneOnlyInCyro end,
-                setFunc = function(newValue) Settings.cct.showImmuneOnlyInCyro = newValue
+                getFunc = function()
+                    return Settings.cct.showImmuneOnlyInCyro
+                end,
+                setFunc = function(newValue)
+                    Settings.cct.showImmuneOnlyInCyro = newValue
                     CrowdControlTracker:InitControls()
                 end,
-                disabled = function() return not (Settings.cct.showImmune and Settings.cct.enabled) end,
+                disabled = function()
+                    return not (Settings.cct.showImmune and Settings.cct.enabled)
+                end,
             },
             {
                 -- Set Immune Display Time (MS)
@@ -2162,12 +3494,19 @@ function CombatInfo.CreateSettings()
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_IMMUNE_TIME)),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_IMMUNE_TIME_TP),
                 default = Defaults.cct.immuneDisplayTime,
-                min     = 100,
-                max     = 1500,
-                step    = 1,
-                getFunc = function() return Settings.cct.immuneDisplayTime end,
-                setFunc = function(newValue) Settings.cct.immuneDisplayTime = newValue CrowdControlTracker:InitControls() end,
-                disabled = function() return not (Settings.cct.showImmune and Settings.cct.enabled) end,
+                min = 100,
+                max = 1500,
+                step = 1,
+                getFunc = function()
+                    return Settings.cct.immuneDisplayTime
+                end,
+                setFunc = function(newValue)
+                    Settings.cct.immuneDisplayTime = newValue
+                    CrowdControlTracker:InitControls()
+                end,
+                disabled = function()
+                    return not (Settings.cct.showImmune and Settings.cct.enabled)
+                end,
             },
             {
                 -- Crowd Control Color Options
@@ -2178,12 +3517,19 @@ function CombatInfo.CreateSettings()
                 -- Stun
                 type = "colorpicker",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_STUN),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_STUN)),
+                tooltip = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP),
+                    GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_STUN)
+                ),
                 default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_STUNNED])),
-                disabled = function() return not Settings.cct.enabled end,
-                getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_STUNNED]) end,
-                setFunc = function(r,g,b,a)
-                    Settings.cct.colors[ACTION_RESULT_STUNNED] = {r,g,b,a}
+                disabled = function()
+                    return not Settings.cct.enabled
+                end,
+                getFunc = function()
+                    return unpack(Settings.cct.colors[ACTION_RESULT_STUNNED])
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.cct.colors[ACTION_RESULT_STUNNED] = { r, g, b, a }
                     CrowdControlTracker:InitControls()
                 end,
             },
@@ -2192,12 +3538,19 @@ function CombatInfo.CreateSettings()
                 -- Knockback
                 type = "colorpicker",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_KNOCKBACK),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_KNOCKBACK)),
+                tooltip = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP),
+                    GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_KNOCKBACK)
+                ),
                 default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_KNOCKBACK])),
-                disabled = function() return not Settings.cct.enabled end,
-                getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_KNOCKBACK]) end,
-                setFunc = function(r,g,b,a)
-                    Settings.cct.colors[ACTION_RESULT_KNOCKBACK] = {r,g,b,a}
+                disabled = function()
+                    return not Settings.cct.enabled
+                end,
+                getFunc = function()
+                    return unpack(Settings.cct.colors[ACTION_RESULT_KNOCKBACK])
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.cct.colors[ACTION_RESULT_KNOCKBACK] = { r, g, b, a }
                     CrowdControlTracker:InitControls()
                 end,
             },
@@ -2206,12 +3559,19 @@ function CombatInfo.CreateSettings()
                 -- Pull & Levitate
                 type = "colorpicker",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_LEVITATE),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_LEVITATE)),
+                tooltip = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP),
+                    GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_LEVITATE)
+                ),
                 default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_LEVITATED])),
-                disabled = function() return not Settings.cct.enabled end,
-                getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_LEVITATED]) end,
-                setFunc = function(r,g,b,a)
-                    Settings.cct.colors[ACTION_RESULT_LEVITATED] = {r,g,b,a}
+                disabled = function()
+                    return not Settings.cct.enabled
+                end,
+                getFunc = function()
+                    return unpack(Settings.cct.colors[ACTION_RESULT_LEVITATED])
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.cct.colors[ACTION_RESULT_LEVITATED] = { r, g, b, a }
                     CrowdControlTracker:InitControls()
                 end,
             },
@@ -2220,12 +3580,19 @@ function CombatInfo.CreateSettings()
                 -- Disorient
                 type = "colorpicker",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_DISORIENT),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_DISORIENT)),
+                tooltip = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP),
+                    GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_DISORIENT)
+                ),
                 default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_DISORIENTED])),
-                disabled = function() return not Settings.cct.enabled end,
-                getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_DISORIENTED]) end,
-                setFunc = function(r,g,b,a)
-                    Settings.cct.colors[ACTION_RESULT_DISORIENTED] = {r,g,b,a}
+                disabled = function()
+                    return not Settings.cct.enabled
+                end,
+                getFunc = function()
+                    return unpack(Settings.cct.colors[ACTION_RESULT_DISORIENTED])
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.cct.colors[ACTION_RESULT_DISORIENTED] = { r, g, b, a }
                     CrowdControlTracker:InitControls()
                 end,
             },
@@ -2233,12 +3600,19 @@ function CombatInfo.CreateSettings()
                 -- Silence
                 type = "colorpicker",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_SILENCE),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_SILENCE)),
+                tooltip = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP),
+                    GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_SILENCE)
+                ),
                 default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_SILENCED])),
-                disabled = function() return not Settings.cct.enabled end,
-                getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_SILENCED]) end,
-                setFunc = function(r,g,b,a)
-                    Settings.cct.colors[ACTION_RESULT_SILENCED] = {r,g,b,a}
+                disabled = function()
+                    return not Settings.cct.enabled
+                end,
+                getFunc = function()
+                    return unpack(Settings.cct.colors[ACTION_RESULT_SILENCED])
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.cct.colors[ACTION_RESULT_SILENCED] = { r, g, b, a }
                     CrowdControlTracker:InitControls()
                 end,
             },
@@ -2246,12 +3620,19 @@ function CombatInfo.CreateSettings()
                 -- Fear
                 type = "colorpicker",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_FEAR),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_FEAR)),
+                tooltip = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP),
+                    GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_FEAR)
+                ),
                 default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_FEARED])),
-                disabled = function() return not Settings.cct.enabled end,
-                getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_FEARED]) end,
-                setFunc = function(r,g,b,a)
-                    Settings.cct.colors[ACTION_RESULT_FEARED] = {r,g,b,a}
+                disabled = function()
+                    return not Settings.cct.enabled
+                end,
+                getFunc = function()
+                    return unpack(Settings.cct.colors[ACTION_RESULT_FEARED])
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.cct.colors[ACTION_RESULT_FEARED] = { r, g, b, a }
                     CrowdControlTracker:InitControls()
                 end,
             },
@@ -2259,11 +3640,18 @@ function CombatInfo.CreateSettings()
                 -- Charm
                 type = "colorpicker",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_CHARM),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_CHARM)),
+                tooltip = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP),
+                    GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_CHARM)
+                ),
                 default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_CHARMED])),
-                disabled = function() return not Settings.cct.enabled end,
-                getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_CHARMED]) end,
-                setFunc = function(r,g,b,a)
+                disabled = function()
+                    return not Settings.cct.enabled
+                end,
+                getFunc = function()
+                    return unpack(Settings.cct.colors[ACTION_RESULT_CHARMED])
+                end,
+                setFunc = function(r, g, b, a)
                     Settings.cct.colors[ACTION_RESULT_CHARMED] = { r, g, b, a }
                     CrowdControlTracker:InitControls()
                 end,
@@ -2272,12 +3660,19 @@ function CombatInfo.CreateSettings()
                 -- Stagger
                 type = "colorpicker",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_STAGGER),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_STAGGER)),
+                tooltip = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP),
+                    GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_STAGGER)
+                ),
                 default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_STAGGERED])),
-                disabled = function() return not Settings.cct.enabled end,
-                getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_STAGGERED]) end,
-                setFunc = function(r,g,b,a)
-                    Settings.cct.colors[ACTION_RESULT_STAGGERED] = {r,g,b,a}
+                disabled = function()
+                    return not Settings.cct.enabled
+                end,
+                getFunc = function()
+                    return unpack(Settings.cct.colors[ACTION_RESULT_STAGGERED])
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.cct.colors[ACTION_RESULT_STAGGERED] = { r, g, b, a }
                     CrowdControlTracker:InitControls()
                 end,
             },
@@ -2285,12 +3680,19 @@ function CombatInfo.CreateSettings()
                 -- Unbreakable
                 type = "colorpicker",
                 name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_UNBREAKABLE),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_UNBREAKABLE)),
+                tooltip = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP),
+                    GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_UNBREAKABLE)
+                ),
                 default = ZO_ColorDef:New(unpack(Defaults.cct.colors.unbreakable)),
-                disabled = function() return not Settings.cct.enabled end,
-                getFunc = function() return unpack(Settings.cct.colors.unbreakable) end,
-                setFunc = function(r,g,b,a)
-                    Settings.cct.colors.unbreakable = {r,g,b,a}
+                disabled = function()
+                    return not Settings.cct.enabled
+                end,
+                getFunc = function()
+                    return unpack(Settings.cct.colors.unbreakable)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.cct.colors.unbreakable = { r, g, b, a }
                     CrowdControlTracker:InitControls()
                 end,
             },
@@ -2300,13 +3702,17 @@ function CombatInfo.CreateSettings()
                 name = GetString(SI_LUIE_LAM_CI_CCT_IMMUNE),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_CCT_IMMUNE)),
                 default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_IMMUNE])),
-                disabled = function() return not Settings.cct.enabled end,
-                getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_IMMUNE]) end,
-                setFunc = function(r,g,b,a)
-                    Settings.cct.colors[ACTION_RESULT_IMMUNE] = {r,g,b,a}
-                    Settings.cct.colors[ACTION_RESULT_DODGED] = {r,g,b,a}
-                    Settings.cct.colors[ACTION_RESULT_BLOCKED] = {r,g,b,a}
-                    Settings.cct.colors[ACTION_RESULT_BLOCKED_DAMAGE] = {r,g,b,a}
+                disabled = function()
+                    return not Settings.cct.enabled
+                end,
+                getFunc = function()
+                    return unpack(Settings.cct.colors[ACTION_RESULT_IMMUNE])
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.cct.colors[ACTION_RESULT_IMMUNE] = { r, g, b, a }
+                    Settings.cct.colors[ACTION_RESULT_DODGED] = { r, g, b, a }
+                    Settings.cct.colors[ACTION_RESULT_BLOCKED] = { r, g, b, a }
+                    Settings.cct.colors[ACTION_RESULT_BLOCKED_DAMAGE] = { r, g, b, a }
                     CrowdControlTracker:InitControls()
                 end,
             },
@@ -2320,11 +3726,16 @@ function CombatInfo.CreateSettings()
                 name = GetString(SI_LUIE_LAM_CI_CCT_AOE_TOGGLE),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_AOE_TOGGLE_TP),
                 default = Defaults.cct.showAoe,
-                getFunc = function() return Settings.cct.showAoe end,
-                setFunc = function(newValue) Settings.cct.showAoe = newValue
+                getFunc = function()
+                    return Settings.cct.showAoe
+                end,
+                setFunc = function(newValue)
+                    Settings.cct.showAoe = newValue
                     CrowdControlTracker:InitControls()
                 end,
-                disabled = function() return (not Settings.cct.enabled) end,
+                disabled = function()
+                    return not Settings.cct.enabled
+                end,
             },
             {
                 -- AOE Color
@@ -2332,42 +3743,68 @@ function CombatInfo.CreateSettings()
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_CCT_AOE_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_CCT_AOE_COLOR_TP),
                 default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_AREA_EFFECT])),
-                getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_AREA_EFFECT]) end,
-                setFunc = function(r,g,b,a)
-                    Settings.cct.colors[ACTION_RESULT_AREA_EFFECT] = {r,g,b,a}
+                getFunc = function()
+                    return unpack(Settings.cct.colors[ACTION_RESULT_AREA_EFFECT])
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.cct.colors[ACTION_RESULT_AREA_EFFECT] = { r, g, b, a }
                     CrowdControlTracker:InitControls()
                 end,
-                disabled = function() return not (Settings.cct.showAoe and Settings.cct.enabled) end,
+                disabled = function()
+                    return not (Settings.cct.showAoe and Settings.cct.enabled)
+                end,
             },
 
             {
-            type = "divider",
+                type = "divider",
             },
 
             -- AOE DISPLAY OPTIONS
             {
                 -- Show AOE - Player Ultimate
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_ULT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_ULT)),
+                name = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_ULT)
+                ),
+                tooltip = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_ULT)
+                ),
                 default = Defaults.cct.aoePlayerUltimate,
-                getFunc = function() return Settings.cct.aoePlayerUltimate end,
-                setFunc = function(newValue) Settings.cct.aoePlayerUltimate = newValue
+                getFunc = function()
+                    return Settings.cct.aoePlayerUltimate
+                end,
+                setFunc = function(newValue)
+                    Settings.cct.aoePlayerUltimate = newValue
                     CrowdControlTracker.UpdateAOEList()
                 end,
-                disabled = function() return not (Settings.cct.showAoe and Settings.cct.enabled) end,
+                disabled = function()
+                    return not (Settings.cct.showAoe and Settings.cct.enabled)
+                end,
             },
             {
                 -- Sound AOE - Player Ultimate
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_ULT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_ULT)),
+                name = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_ULT)
+                ),
+                tooltip = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_ULT)
+                ),
                 width = "half",
                 default = Defaults.cct.aoePlayerUltimateSoundToggle,
-                getFunc = function() return Settings.cct.aoePlayerUltimateSoundToggle end,
-                setFunc = function(newValue) Settings.cct.aoePlayerUltimateSoundToggle = newValue
+                getFunc = function()
+                    return Settings.cct.aoePlayerUltimateSoundToggle
                 end,
-                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoePlayerUltimate and Settings.cct.enabled) end,
+                setFunc = function(newValue)
+                    Settings.cct.aoePlayerUltimateSoundToggle = newValue
+                end,
+                disabled = function()
+                    return not (Settings.cct.showAoe and Settings.cct.aoePlayerUltimate and Settings.cct.enabled)
+                end,
             },
             {
                 -- SOUND - aoePlayerUltimate
@@ -2375,40 +3812,74 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.cct.aoePlayerUltimateSound end,
-                setFunc = function(value) Settings.cct.aoePlayerUltimateSound = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.cct.aoePlayerUltimateSound
+                end,
+                setFunc = function(value)
+                    Settings.cct.aoePlayerUltimateSound = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Settings.cct.aoePlayerUltimateSound,
-                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoePlayerUltimate and Settings.cct.aoePlayerUltimateSoundToggle and Settings.cct.enabled) end,
+                disabled = function()
+                    return not (
+                        Settings.cct.showAoe
+                        and Settings.cct.aoePlayerUltimate
+                        and Settings.cct.aoePlayerUltimateSoundToggle
+                        and Settings.cct.enabled
+                    )
+                end,
             },
 
             {
-            type = "divider",
+                type = "divider",
             },
 
             {
                 -- Show AOE - Player Normal
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_NORM)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_NORM)),
+                name = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_NORM)
+                ),
+                tooltip = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_NORM)
+                ),
                 default = Defaults.cct.aoePlayerNormal,
-                getFunc = function() return Settings.cct.aoePlayerNormal end,
-                setFunc = function(newValue) Settings.cct.aoePlayerNormal = newValue
+                getFunc = function()
+                    return Settings.cct.aoePlayerNormal
+                end,
+                setFunc = function(newValue)
+                    Settings.cct.aoePlayerNormal = newValue
                     CrowdControlTracker.UpdateAOEList()
                 end,
-                disabled = function() return not (Settings.cct.showAoe and Settings.cct.enabled) end,
+                disabled = function()
+                    return not (Settings.cct.showAoe and Settings.cct.enabled)
+                end,
             },
             {
                 -- Sound AOE - Player Normal
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_NORM)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_NORM)),
+                name = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_NORM)
+                ),
+                tooltip = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_NORM)
+                ),
                 width = "half",
                 default = Defaults.cct.aoePlayerNormalSoundToggle,
-                getFunc = function() return Settings.cct.aoePlayerNormalSoundToggle end,
-                setFunc = function(newValue) Settings.cct.aoePlayerNormalSoundToggle = newValue
+                getFunc = function()
+                    return Settings.cct.aoePlayerNormalSoundToggle
                 end,
-                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoePlayerNormal and Settings.cct.enabled) end,
+                setFunc = function(newValue)
+                    Settings.cct.aoePlayerNormalSoundToggle = newValue
+                end,
+                disabled = function()
+                    return not (Settings.cct.showAoe and Settings.cct.aoePlayerNormal and Settings.cct.enabled)
+                end,
             },
             {
                 -- SOUND - aoePlayerNormal
@@ -2416,40 +3887,74 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.cct.aoePlayerNormalSound end,
-                setFunc = function(value) Settings.cct.aoePlayerNormalSound = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.cct.aoePlayerNormalSound
+                end,
+                setFunc = function(value)
+                    Settings.cct.aoePlayerNormalSound = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Settings.cct.aoePlayerNormalSound,
-                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoePlayerNormal and Settings.cct.aoePlayerNormalSoundToggle and Settings.cct.enabled) end,
+                disabled = function()
+                    return not (
+                        Settings.cct.showAoe
+                        and Settings.cct.aoePlayerNormal
+                        and Settings.cct.aoePlayerNormalSoundToggle
+                        and Settings.cct.enabled
+                    )
+                end,
             },
 
             {
-            type = "divider",
+                type = "divider",
             },
 
             {
                 -- Show AOE - Player Set
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_SET)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_SET)),
+                name = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_SET)
+                ),
+                tooltip = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_SET)
+                ),
                 default = Defaults.cct.aoePlayerSet,
-                getFunc = function() return Settings.cct.aoePlayerSet end,
-                setFunc = function(newValue) Settings.cct.aoePlayerSet = newValue
+                getFunc = function()
+                    return Settings.cct.aoePlayerSet
+                end,
+                setFunc = function(newValue)
+                    Settings.cct.aoePlayerSet = newValue
                     CrowdControlTracker.UpdateAOEList()
                 end,
-                disabled = function() return not (Settings.cct.showAoe and Settings.cct.enabled) end,
+                disabled = function()
+                    return not (Settings.cct.showAoe and Settings.cct.enabled)
+                end,
             },
             {
                 -- Sound AOE - Player Set
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_SET)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_SET)),
+                name = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_SET)
+                ),
+                tooltip = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_SET)
+                ),
                 width = "half",
                 default = Defaults.cct.aoePlayerSetSoundToggle,
-                getFunc = function() return Settings.cct.aoePlayerSetSoundToggle end,
-                setFunc = function(newValue) Settings.cct.aoePlayerSetSoundToggle = newValue
+                getFunc = function()
+                    return Settings.cct.aoePlayerSetSoundToggle
                 end,
-                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoePlayerSet and Settings.cct.enabled) end,
+                setFunc = function(newValue)
+                    Settings.cct.aoePlayerSetSoundToggle = newValue
+                end,
+                disabled = function()
+                    return not (Settings.cct.showAoe and Settings.cct.aoePlayerSet and Settings.cct.enabled)
+                end,
             },
             {
                 -- SOUND - aoePlayerSet
@@ -2457,40 +3962,74 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.cct.aoePlayerSetSound end,
-                setFunc = function(value) Settings.cct.aoePlayerSetSound = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.cct.aoePlayerSetSound
+                end,
+                setFunc = function(value)
+                    Settings.cct.aoePlayerSetSound = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Settings.cct.aoePlayerSetSound,
-                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoePlayerSet and Settings.cct.aoePlayerSetSoundToggle and Settings.cct.enabled) end,
+                disabled = function()
+                    return not (
+                        Settings.cct.showAoe
+                        and Settings.cct.aoePlayerSet
+                        and Settings.cct.aoePlayerSetSoundToggle
+                        and Settings.cct.enabled
+                    )
+                end,
             },
 
             {
-            type = "divider",
+                type = "divider",
             },
 
             {
                 -- Show AOE - Trap
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_TRAP)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_TRAP)),
+                name = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_TRAP)
+                ),
+                tooltip = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_TRAP)
+                ),
                 default = Defaults.cct.aoeTraps,
-                getFunc = function() return Settings.cct.aoeTraps end,
-                setFunc = function(newValue) Settings.cct.aoeTraps = newValue
+                getFunc = function()
+                    return Settings.cct.aoeTraps
+                end,
+                setFunc = function(newValue)
+                    Settings.cct.aoeTraps = newValue
                     CrowdControlTracker.UpdateAOEList()
                 end,
-                disabled = function() return not (Settings.cct.showAoe and Settings.cct.enabled) end,
+                disabled = function()
+                    return not (Settings.cct.showAoe and Settings.cct.enabled)
+                end,
             },
             {
                 -- Sound AOE - Trap
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_TRAP)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_TRAP)),
+                name = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_TRAP)
+                ),
+                tooltip = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_TRAP)
+                ),
                 width = "half",
                 default = Defaults.cct.aoeTrapsSoundToggle,
-                getFunc = function() return Settings.cct.aoeTrapsSoundToggle end,
-                setFunc = function(newValue) Settings.cct.aoeTrapsSoundToggle = newValue
+                getFunc = function()
+                    return Settings.cct.aoeTrapsSoundToggle
                 end,
-                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoeTraps and Settings.cct.enabled) end,
+                setFunc = function(newValue)
+                    Settings.cct.aoeTrapsSoundToggle = newValue
+                end,
+                disabled = function()
+                    return not (Settings.cct.showAoe and Settings.cct.aoeTraps and Settings.cct.enabled)
+                end,
             },
             {
                 -- SOUND - aoeTraps
@@ -2498,40 +4037,74 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.cct.aoeTrapsSound end,
-                setFunc = function(value) Settings.cct.aoeTrapsSound = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.cct.aoeTrapsSound
+                end,
+                setFunc = function(value)
+                    Settings.cct.aoeTrapsSound = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Settings.cct.aoeTrapsSound,
-                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoeTraps and Settings.cct.aoeTrapsSoundToggle and Settings.cct.enabled) end,
+                disabled = function()
+                    return not (
+                        Settings.cct.showAoe
+                        and Settings.cct.aoeTraps
+                        and Settings.cct.aoeTrapsSoundToggle
+                        and Settings.cct.enabled
+                    )
+                end,
             },
 
             {
-            type = "divider",
+                type = "divider",
             },
 
             {
                 -- Show AOE - NPC Boss
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_BOSS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_BOSS)),
+                name = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_BOSS)
+                ),
+                tooltip = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_BOSS)
+                ),
                 default = Defaults.cct.aoeNPCBoss,
-                getFunc = function() return Settings.cct.aoeNPCBoss end,
-                setFunc = function(newValue) Settings.cct.aoeNPCBoss = newValue
+                getFunc = function()
+                    return Settings.cct.aoeNPCBoss
+                end,
+                setFunc = function(newValue)
+                    Settings.cct.aoeNPCBoss = newValue
                     CrowdControlTracker.UpdateAOEList()
                 end,
-                disabled = function() return not (Settings.cct.showAoe and Settings.cct.enabled) end,
+                disabled = function()
+                    return not (Settings.cct.showAoe and Settings.cct.enabled)
+                end,
             },
             {
                 -- Sound AOE - NPC Boss
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_BOSS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_BOSS)),
+                name = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_BOSS)
+                ),
+                tooltip = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_BOSS)
+                ),
                 width = "half",
                 default = Defaults.cct.aoeNPCBossSoundToggle,
-                getFunc = function() return Settings.cct.aoeNPCBossSoundToggle end,
-                setFunc = function(newValue) Settings.cct.aoeNPCBossSoundToggle = newValue
+                getFunc = function()
+                    return Settings.cct.aoeNPCBossSoundToggle
                 end,
-                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoeNPCBoss and Settings.cct.enabled) end,
+                setFunc = function(newValue)
+                    Settings.cct.aoeNPCBossSoundToggle = newValue
+                end,
+                disabled = function()
+                    return not (Settings.cct.showAoe and Settings.cct.aoeNPCBoss and Settings.cct.enabled)
+                end,
             },
             {
                 -- SOUND - aoeNPCBoss
@@ -2539,40 +4112,74 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.cct.aoeNPCBossSound end,
-                setFunc = function(value) Settings.cct.aoeNPCBossSound = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.cct.aoeNPCBossSound
+                end,
+                setFunc = function(value)
+                    Settings.cct.aoeNPCBossSound = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Settings.cct.aoeNPCBossSound,
-                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoeNPCBoss and Settings.cct.aoeNPCBossSoundToggle and Settings.cct.enabled) end,
+                disabled = function()
+                    return not (
+                        Settings.cct.showAoe
+                        and Settings.cct.aoeNPCBoss
+                        and Settings.cct.aoeNPCBossSoundToggle
+                        and Settings.cct.enabled
+                    )
+                end,
             },
 
             {
-            type = "divider",
+                type = "divider",
             },
 
             {
                 -- Show AOE - NPC Elite
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_ELITE)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_ELITE)),
+                name = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_ELITE)
+                ),
+                tooltip = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_ELITE)
+                ),
                 default = Defaults.cct.aoeNPCElite,
-                getFunc = function() return Settings.cct.aoeNPCElite end,
-                setFunc = function(newValue) Settings.cct.aoeNPCElite = newValue
+                getFunc = function()
+                    return Settings.cct.aoeNPCElite
+                end,
+                setFunc = function(newValue)
+                    Settings.cct.aoeNPCElite = newValue
                     CrowdControlTracker.UpdateAOEList()
                 end,
-                disabled = function() return not (Settings.cct.showAoe and Settings.cct.enabled) end,
+                disabled = function()
+                    return not (Settings.cct.showAoe and Settings.cct.enabled)
+                end,
             },
             {
                 -- Sound AOE - NPC Elite
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_ELITE)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_ELITE)),
+                name = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_ELITE)
+                ),
+                tooltip = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_ELITE)
+                ),
                 width = "half",
                 default = Defaults.cct.aoeNPCEliteSoundToggle,
-                getFunc = function() return Settings.cct.aoeNPCEliteSoundToggle end,
-                setFunc = function(newValue) Settings.cct.aoeNPCEliteSoundToggle = newValue
+                getFunc = function()
+                    return Settings.cct.aoeNPCEliteSoundToggle
                 end,
-                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoeNPCElite and Settings.cct.enabled) end,
+                setFunc = function(newValue)
+                    Settings.cct.aoeNPCEliteSoundToggle = newValue
+                end,
+                disabled = function()
+                    return not (Settings.cct.showAoe and Settings.cct.aoeNPCElite and Settings.cct.enabled)
+                end,
             },
             {
                 -- SOUND - aoeNPCElite
@@ -2580,40 +4187,74 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.cct.aoeNPCEliteSound end,
-                setFunc = function(value) Settings.cct.aoeNPCEliteSound = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.cct.aoeNPCEliteSound
+                end,
+                setFunc = function(value)
+                    Settings.cct.aoeNPCEliteSound = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Settings.cct.aoeNPCEliteSound,
-                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoeNPCElite and Settings.cct.aoeNPCEliteSoundToggle and Settings.cct.enabled) end,
+                disabled = function()
+                    return not (
+                        Settings.cct.showAoe
+                        and Settings.cct.aoeNPCElite
+                        and Settings.cct.aoeNPCEliteSoundToggle
+                        and Settings.cct.enabled
+                    )
+                end,
             },
 
             {
-            type = "divider",
+                type = "divider",
             },
 
             {
                 -- Show AOE - NPC Normal
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_NORMAL)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_NORMAL)),
+                name = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_NORMAL)
+                ),
+                tooltip = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_NORMAL)
+                ),
                 default = Defaults.cct.aoeNPCNormal,
-                getFunc = function() return Settings.cct.aoeNPCNormal end,
-                setFunc = function(newValue) Settings.cct.aoeNPCNormal = newValue
+                getFunc = function()
+                    return Settings.cct.aoeNPCNormal
+                end,
+                setFunc = function(newValue)
+                    Settings.cct.aoeNPCNormal = newValue
                     CrowdControlTracker.UpdateAOEList()
                 end,
-                disabled = function() return not (Settings.cct.showAoe and Settings.cct.enabled) end,
+                disabled = function()
+                    return not (Settings.cct.showAoe and Settings.cct.enabled)
+                end,
             },
             {
                 -- Sound AOE - NPC Normal
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_NORMAL)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_NORMAL)),
+                name = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_NORMAL)
+                ),
+                tooltip = zo_strformat(
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP),
+                    GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_NORMAL)
+                ),
                 width = "half",
                 default = Defaults.cct.aoeNPCNormalSoundToggle,
-                getFunc = function() return Settings.cct.aoeNPCNormalSoundToggle end,
-                setFunc = function(newValue) Settings.cct.aoeNPCNormalSoundToggle = newValue
+                getFunc = function()
+                    return Settings.cct.aoeNPCNormalSoundToggle
                 end,
-                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoeNPCNormal and Settings.cct.enabled) end,
+                setFunc = function(newValue)
+                    Settings.cct.aoeNPCNormalSoundToggle = newValue
+                end,
+                disabled = function()
+                    return not (Settings.cct.showAoe and Settings.cct.aoeNPCNormal and Settings.cct.enabled)
+                end,
             },
             {
                 -- SOUND - aoeNPCNormal
@@ -2621,18 +4262,30 @@ function CombatInfo.CreateSettings()
                 scrollable = true,
                 choices = SoundsList,
                 sort = "name-up",
-                getFunc = function() return Settings.cct.aoeNPCNormalSound end,
-                setFunc = function(value) Settings.cct.aoeNPCNormalSound = value AbilityAlerts.PreviewAlertSound(value) end,
+                getFunc = function()
+                    return Settings.cct.aoeNPCNormalSound
+                end,
+                setFunc = function(value)
+                    Settings.cct.aoeNPCNormalSound = value
+                    AbilityAlerts.PreviewAlertSound(value)
+                end,
                 width = "half",
                 default = Settings.cct.aoeNPCNormalSound,
-                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoeNPCNormal and Settings.cct.aoeNPCNormalSoundToggle and Settings.cct.enabled) end,
+                disabled = function()
+                    return not (
+                        Settings.cct.showAoe
+                        and Settings.cct.aoeNPCNormal
+                        and Settings.cct.aoeNPCNormalSoundToggle
+                        and Settings.cct.enabled
+                    )
+                end,
             },
         },
     }
 
     -- Register the settings panel
     if LUIE.SV.CombatInfo_Enabled then
-        LAM:RegisterAddonPanel(LUIE.name .. 'CombatInfoOptions', panelDataCombatInfo)
-        LAM:RegisterOptionControls(LUIE.name .. 'CombatInfoOptions', optionsDataCombatInfo)
+        LAM:RegisterAddonPanel(LUIE.name .. "CombatInfoOptions", panelDataCombatInfo)
+        LAM:RegisterOptionControls(LUIE.name .. "CombatInfoOptions", optionsDataCombatInfo)
     end
 end

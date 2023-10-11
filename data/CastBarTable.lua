@@ -101,7 +101,6 @@ CastBarTable.BreakSiegeOnWindowOpen = {
     [19039] = true, -- Ebonheart Forward Camp
     [19040] = true, -- Aldmeri Forward Camp
     [19041] = true, -- Daggerfall Forward Camp
-
 }
 
 CastBarTable.BreakCastOnMove = {
@@ -367,7 +366,6 @@ CastBarTable.CastChannelOverride = {
     [84528] = true, -- Flame Juggling (Castle Charm Challenge)
     [84506] = true, -- Dagger Juggling (Castle Charm Challenge)
     [84533] = true, -- Sword Swallowing (Castle Charm Challenge)
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -1124,7 +1122,6 @@ CastBarTable.IsCast = {
     [31180] = true, -- Free Ally (Selene - Selene's Web)
     [51389] = true, -- Free Ally (Ruzozuzalpamaz - Crypt of Hearts II)
     [53185] = true, -- Resist Necrosis (Nerien'eth - Crypt of Hearts II)
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -1176,7 +1173,8 @@ CastBarTable.CastBreakOnRemoveEffect = {
 -- Possibly use later if any cast removal events need to rely on EVENT_COMBAT_EVENT
 CastBarTable.CastBreakOnRemoveEvent = {
 }
-]]--
+]]
+--
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- Convert a cast time ability to channeled, since our function detects Casts/Channels automatically and tries to sort them, we need to add a forced override for certain things we want to show as a channel when it makes sense
@@ -1198,4 +1196,5 @@ CastBarTable.InteractCast = {
     }
 
 }
-]]--
+]]
+--

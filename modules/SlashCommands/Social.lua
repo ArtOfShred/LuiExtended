@@ -48,13 +48,18 @@ function SlashCommands.SlashRemoveFriend(option)
     local compareChar = string.lower(option)
     local friends = GetNumFriends()
     local g_friendIndex = {}
-    for i = 1,friends do
+    for i = 1, friends do
         local displayName = GetFriendInfo(i)
         local _, characterName = GetFriendCharacterInfo(i)
         local compareDisplay = string.lower(displayName)
         local compareCharacter = string.lower(characterName)
-        compareCharacter = string.gsub(compareCharacter,"%^%a+","")
-        g_friendIndex[i] = {displayName=displayName, characterName=characterName, compareDisplay=compareDisplay, compareCharacter=compareCharacter}
+        compareCharacter = string.gsub(compareCharacter, "%^%a+", "")
+        g_friendIndex[i] = {
+            displayName = displayName,
+            characterName = characterName,
+            compareDisplay = compareDisplay,
+            compareCharacter = compareCharacter,
+        }
     end
 
     local finalName = ""
@@ -92,15 +97,15 @@ function SlashCommands.SlashRemoveIgnore(option)
     local compareChar = string.lower(option)
     local ignore = GetNumIgnored()
     local g_ignoreIndex = {}
-    for i = 1,ignore do
+    for i = 1, ignore do
         local displayName = GetIgnoredInfo(i)
         displayName = string.lower(displayName)
-        g_ignoreIndex[i] = {displayName=displayName}
+        g_ignoreIndex[i] = { displayName = displayName }
     end
 
     local finalName = ""
 
-    for i = 1,#g_ignoreIndex do
+    for i = 1, #g_ignoreIndex do
         local comparing = g_ignoreIndex[i]
         if comparing.displayName == compareChar then
             finalName = comparing.displayName

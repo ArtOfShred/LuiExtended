@@ -22,9 +22,16 @@ function SlashCommands.SlashRegroup()
             -- Don't invite self and offline members
             if member.memberName ~= LUIE.PlayerNameFormatted then
                 GroupInviteByName(member.memberName)
-                printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberLink), true)
+                printToChat(
+                    zo_strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberLink),
+                    true
+                )
                 if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberNoLink))
+                    ZO_Alert(
+                        UI_ALERT_CATEGORY_ALERT,
+                        nil,
+                        zo_strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberNoLink)
+                    )
                 end
             end
         end
@@ -105,9 +112,26 @@ function SlashCommands.SlashRegroup()
     -- If the stack counter was less than 1 (just the player eligible for reinvite then regroup won't invite any members.)
     if flagOffline > 0 then
         if #g_regroupStacks > 1 then
-            printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG), flagOffline, flagOffline, flagOffline), true)
+            printToChat(
+                zo_strformat(
+                    GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG),
+                    flagOffline,
+                    flagOffline,
+                    flagOffline
+                ),
+                true
+            )
             if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG), flagOffline, flagOffline, flagOffline))
+                ZO_Alert(
+                    UI_ALERT_CATEGORY_ALERT,
+                    nil,
+                    zo_strformat(
+                        GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG),
+                        flagOffline,
+                        flagOffline,
+                        flagOffline
+                    )
+                )
             end
             GroupDisband()
             zo_callLater(RegroupInvite, 5000)
@@ -242,7 +266,7 @@ function SlashCommands.SlashGroupKick(option)
         return
     end
 
-    local g_partyKick = { }
+    local g_partyKick = {}
     local kickedMemberName
     local kickedAccountName
     local compareName = string.lower(option)
@@ -250,7 +274,7 @@ function SlashCommands.SlashGroupKick(option)
     local comparePlayerAccount = string.lower(PlayerDisplayName)
     local unitToKick
 
-    for i = 1,24 do
+    for i = 1, 24 do
         local memberTag = GetGroupUnitTagByIndex(i)
         -- Once we reach a nil value (aka no party member there, stop the loop)
         if memberTag == nil then
@@ -258,14 +282,18 @@ function SlashCommands.SlashGroupKick(option)
         end
         kickedMemberName = string.lower(GetUnitName(memberTag))
         kickedAccountName = string.lower(GetUnitDisplayName(memberTag))
-        g_partyKick[i] = { memberTag=memberTag, kickedMemberName=kickedMemberName, kickedAccountName=kickedAccountName }
+        g_partyKick[i] =
+            { memberTag = memberTag, kickedMemberName = kickedMemberName, kickedAccountName = kickedAccountName }
     end
 
     -- Iterate through UnitTags to get the member who just joined
-    for i = 1,#g_partyKick do
+    for i = 1, #g_partyKick do
         local kickcompare = g_partyKick[i]
         if kickcompare.kickedMemberName == compareName or kickcompare.kickedAccountName == compareName then
-            if kickcompare.kickedMemberName == comparePlayerName or kickcompare.kickedAccountName == comparePlayerAccount then
+            if
+                kickcompare.kickedMemberName == comparePlayerName
+                or kickcompare.kickedAccountName == comparePlayerAccount
+            then
                 GroupLeave()
             else
                 unitToKick = kickcompare.memberTag
@@ -332,7 +360,7 @@ function SlashCommands.SlashVoteKick(option)
         return
     end
 
-    local g_partyKick = { }
+    local g_partyKick = {}
     local kickedMemberName
     local kickedAccountName
     local compareName = string.lower(option)
@@ -340,7 +368,7 @@ function SlashCommands.SlashVoteKick(option)
     local comparePlayerAccount = string.lower(PlayerDisplayName)
     local unitToKick = ""
 
-    for i = 1,24 do
+    for i = 1, 24 do
         local memberTag = GetGroupUnitTagByIndex(i)
         -- Once we reach a nil value (aka no party member there, stop the loop)
         if memberTag == nil then
@@ -348,14 +376,18 @@ function SlashCommands.SlashVoteKick(option)
         end
         kickedMemberName = string.lower(GetUnitName(memberTag))
         kickedAccountName = string.lower(GetUnitDisplayName(memberTag))
-        g_partyKick[i] = { memberTag=memberTag, kickedMemberName=kickedMemberName, kickedAccountName=kickedAccountName }
+        g_partyKick[i] =
+            { memberTag = memberTag, kickedMemberName = kickedMemberName, kickedAccountName = kickedAccountName }
     end
 
     -- Iterate through UnitTags to get the member who just joined
-    for i = 1,#g_partyKick do
+    for i = 1, #g_partyKick do
         local kickcompare = g_partyKick[i]
         if kickcompare.kickedMemberName == compareName or kickcompare.kickedAccountName == compareName then
-            if kickcompare.kickedMemberName == comparePlayerName or kickcompare.kickedAccountName == comparePlayerAccount then
+            if
+                kickcompare.kickedMemberName == comparePlayerName
+                or kickcompare.kickedAccountName == comparePlayerAccount
+            then
                 unitToKick = kickcompare.memberTag
                 break
             else
@@ -400,9 +432,16 @@ function SlashCommands.SlashInvite(option)
     local groupSize = GetGroupSize()
 
     if groupSize > 1 and not IsUnitGroupLeader("player") then
-        printToChat(zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE)), true)
+        printToChat(
+            zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE)),
+            true
+        )
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE)))
+            ZO_Alert(
+                UI_ALERT_CATEGORY_ERROR,
+                nil,
+                zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE))
+            )
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -420,6 +459,10 @@ function SlashCommands.SlashInvite(option)
     GroupInviteByName(option)
     printToChat(zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), option), true)
     if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), option))
+        ZO_Alert(
+            UI_ALERT_CATEGORY_ALERT,
+            nil,
+            zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), option)
+        )
     end
 end

@@ -13,7 +13,9 @@ local crowdControlTypes = LUIE.Data.CombatTextConstants.crowdControlType
 
 function CombatTextCrowdControlEventViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
-    obj:RegisterCallback(eventType.CROWDCONTROL, function(...) self:OnEvent(...) end)
+    obj:RegisterCallback(eventType.CROWDCONTROL, function(...)
+        self:OnEvent(...)
+    end)
     self.locationOffset = { [combatType.OUTGOING] = 0, [combatType.INCOMING] = 0 }
     self.activeCrowdControls = { [combatType.OUTGOING] = 0, [combatType.INCOMING] = 0 }
     return obj
@@ -27,32 +29,32 @@ function CombatTextCrowdControlEventViewer:OnEvent(crowdControlType, combatType)
 
     local size, color, text
     --Disoriented
-    if (crowdControlType == crowdControlTypes.DISORIENTED) then
+    if crowdControlType == crowdControlTypes.DISORIENTED then
         color = Settings.colors.disoriented
         size = Settings.fontSizes.crowdControl
         text = self:FormatString(Settings.formats.disoriented, { text = GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED) })
     --Feared
-    elseif (crowdControlType == crowdControlTypes.FEARED) then
+    elseif crowdControlType == crowdControlTypes.FEARED then
         color = Settings.colors.feared
         size = Settings.fontSizes.crowdControl
         text = self:FormatString(Settings.formats.feared, { text = GetString(SI_LUIE_LAM_CT_SHARED_FEARED) })
     --Off Balanced
-    elseif (crowdControlType == crowdControlTypes.OFFBALANCED) then
+    elseif crowdControlType == crowdControlTypes.OFFBALANCED then
         color = Settings.colors.offBalanced
         size = Settings.fontSizes.crowdControl
         text = self:FormatString(Settings.formats.offBalanced, { text = GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE) })
     --Silenced
-    elseif (crowdControlType == crowdControlTypes.SILENCED) then
+    elseif crowdControlType == crowdControlTypes.SILENCED then
         color = Settings.colors.silenced
         size = Settings.fontSizes.crowdControl
         text = self:FormatString(Settings.formats.silenced, { text = GetString(SI_LUIE_LAM_CT_SHARED_SILENCED) })
     --Stunned
-    elseif (crowdControlType == crowdControlTypes.STUNNED) then
+    elseif crowdControlType == crowdControlTypes.STUNNED then
         color = Settings.colors.stunned
         size = Settings.fontSizes.crowdControl
         text = self:FormatString(Settings.formats.stunned, { text = GetString(SI_LUIE_LAM_CT_SHARED_STUNNED) })
     --Charmed
-    elseif (crowdControlType == crowdControlTypes.CHARMED) then
+    elseif crowdControlType == crowdControlTypes.CHARMED then
         color = Settings.colors.charmed
         size = Settings.fontSizes.crowdControl
         text = self:FormatString(Settings.formats.charmed, { text = GetString(SI_LUIE_LAM_CT_SHARED_CHARMED) })
@@ -63,21 +65,33 @@ function CombatTextCrowdControlEventViewer:OnEvent(crowdControlType, combatType)
 
     --Control setup
     local panel, point, relativePoint = LUIE_CombatText_Outgoing, TOP, BOTTOM
-    if (combatType == combatType.INCOMING) then
+    if combatType == combatType.INCOMING then
         panel = LUIE_CombatText_Incoming
-        if (Settings.animation.incoming.directionType == 'down') then
+        if Settings.animation.incoming.directionType == "down" then
             point, relativePoint = BOTTOM, TOP
         end
     else
-        if (Settings.animation.outgoing.directionType == 'down') then
+        if Settings.animation.outgoing.directionType == "down" then
             point, relativePoint = BOTTOM, TOP
         end
     end
 
-    if (point == TOP) then
-        control:SetAnchor(point, panel, relativePoint, 0, -(self.locationOffset[combatType] * (Settings.fontSizes.crowdControl + 5)))
+    if point == TOP then
+        control:SetAnchor(
+            point,
+            panel,
+            relativePoint,
+            0,
+            -(self.locationOffset[combatType] * (Settings.fontSizes.crowdControl + 5))
+        )
     else
-        control:SetAnchor(point, panel, relativePoint, 0, self.locationOffset[combatType] * (Settings.fontSizes.crowdControl + 5))
+        control:SetAnchor(
+            point,
+            panel,
+            relativePoint,
+            0,
+            self.locationOffset[combatType] * (Settings.fontSizes.crowdControl + 5)
+        )
     end
 
     self.locationOffset[combatType] = self.locationOffset[combatType] + 1
@@ -94,7 +108,7 @@ function CombatTextCrowdControlEventViewer:OnEvent(crowdControlType, combatType)
         self.poolManager:ReleasePoolObject(poolTypes.CONTROL, controlPoolKey)
         self.poolManager:ReleasePoolObject(animationPoolType, animationPoolKey)
         self.activeCrowdControls[combatType] = self.activeCrowdControls[combatType] - 1
-        if (self.activeCrowdControls[combatType] == 0) then
+        if self.activeCrowdControls[combatType] == 0 then
             self.locationOffset[combatType] = 0
         end
     end, animation:GetDuration())

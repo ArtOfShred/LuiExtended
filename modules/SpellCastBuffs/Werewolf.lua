@@ -27,12 +27,18 @@ function SpellCastBuffs.DisplayWerewolfIcon()
     local context = SpellCastBuffs.DetermineContextSimple("player1", g_werewolfId, g_werewolfName)
     local power = GetUnitPower("player", COMBAT_MECHANIC_FLAGS_WEREWOLF)
     SpellCastBuffs.EffectsList[context]["Werewolf Indicator"] = {
-        target="player", type=1,
-        id = g_werewolfId, name=g_werewolfName, icon=g_werewolfIcon,
-        dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+        target = "player",
+        type = 1,
+        id = g_werewolfId,
+        name = g_werewolfName,
+        icon = g_werewolfIcon,
+        dur = 0,
+        starts = 1,
+        ends = nil, -- ends=nil : last buff in sorting
         forced = "short",
-        restart=true, iconNum=0,
-        werewolf = power / 1000
+        restart = true,
+        iconNum = 0,
+        werewolf = power / 1000,
     }
 end
 
@@ -51,7 +57,14 @@ function SpellCastBuffs.WerewolfState(eventCode, werewolf, onActivation)
                 if g_werewolfCounter == 3 or onActivation then
                     SpellCastBuffs.DisplayWerewolfIcon()
                     eventManager:RegisterForEvent(moduleName, EVENT_POWER_UPDATE, SpellCastBuffs.OnPowerUpdate)
-                    eventManager:AddFilterForEvent(moduleName, EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, COMBAT_MECHANIC_FLAGS_WEREWOLF, REGISTER_FILTER_UNIT_TAG, "player")
+                    eventManager:AddFilterForEvent(
+                        moduleName,
+                        EVENT_POWER_UPDATE,
+                        REGISTER_FILTER_POWER_TYPE,
+                        COMBAT_MECHANIC_FLAGS_WEREWOLF,
+                        REGISTER_FILTER_UNIT_TAG,
+                        "player"
+                    )
                     g_werewolfCounter = 0
                 end
                 return
@@ -69,13 +82,22 @@ function SpellCastBuffs.WerewolfState(eventCode, werewolf, onActivation)
         eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
         g_werewolfCounter = 0
         -- Delay resetting this value - as the quest werewolf transform event causes werewolf true, false, true in succession.
-        zo_callLater(function() g_werewolfQuest = 0 end, 5000)
+        zo_callLater(function()
+            g_werewolfQuest = 0
+        end, 5000)
     end
 end
 
 -- EVENT_POWER_UPDATE handler for Werewolf Buff Tracker
-function SpellCastBuffs.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax)
-
+function SpellCastBuffs.OnPowerUpdate(
+    eventCode,
+    unitTag,
+    powerIndex,
+    powerType,
+    powerValue,
+    powerMax,
+    powerEffectiveMax
+)
     if powerValue > 0 then
         SpellCastBuffs.DisplayWerewolfIcon()
     else
@@ -89,6 +111,8 @@ function SpellCastBuffs.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType,
         eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
         g_werewolfCounter = 0
         -- Delay resetting this value - as the quest werewolf transform event causes werewolf true, false, true in succession.
-        zo_callLater(function() g_werewolfQuest = 0 end, 5000)
+        zo_callLater(function()
+            g_werewolfQuest = 0
+        end, 5000)
     end
 end

@@ -20,7 +20,9 @@ end
 -- Load additional fonts and status bar textures from LMP
 local function LoadMedia()
     local LMP = LibMediaProvider
-    if LMP == nil then return end
+    if LMP == nil then
+        return
+    end
 
     -- Update Fonts
     for _, f in pairs(LMP:List(LMP.MediaType.FONT)) do
@@ -51,7 +53,10 @@ local function LoadScreen()
     LUIE.SetElementPosition()
 
     if not LUIE.SV.StartupInfo then
-        LUIE.PrintToChat(zo_strformat("|cFFFFFF<<1>> by|r |c00C000<<2>>|r |cFFFFFFv<<3>>|r", LUIE.name, LUIE.author, LUIE.version), true)
+        LUIE.PrintToChat(
+            zo_strformat("|cFFFFFF<<1>> by|r |c00C000<<2>>|r |cFFFFFFv<<3>>|r", LUIE.name, LUIE.author, LUIE.version),
+            true
+        )
     end
 end
 
@@ -60,8 +65,16 @@ local function RegisterEvents()
     -- Keep track of guilds for the /ginvite commands & Chat Announcement EVENT_GUILD_SELF_LEFT_GUILD handler
     if LUIE.SV.SlashCommands_Enable or LUIE.SV.ChatAnnouncements_Enable then
         LUIE.UpdateGuildData()
-        eventManager:RegisterForEvent(LUIE.name .. "ChatAnnouncements", EVENT_GUILD_SELF_JOINED_GUILD, LUIE.UpdateGuildData)
-        eventManager:RegisterForEvent(LUIE.name .. "ChatAnnouncements", EVENT_GUILD_SELF_LEFT_GUILD, LUIE.UpdateGuildData)
+        eventManager:RegisterForEvent(
+            LUIE.name .. "ChatAnnouncements",
+            EVENT_GUILD_SELF_JOINED_GUILD,
+            LUIE.UpdateGuildData
+        )
+        eventManager:RegisterForEvent(
+            LUIE.name .. "ChatAnnouncements",
+            EVENT_GUILD_SELF_LEFT_GUILD,
+            LUIE.UpdateGuildData
+        )
     end
 end
 
