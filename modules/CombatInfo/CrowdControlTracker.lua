@@ -869,7 +869,7 @@ function CrowdControlTracker:OnCombatTipAdded(eventCode, combatTipID)
     --[[ CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, abilityGraphic,
     abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType,
     damageType, combat_log, sourceUnitId, targetUnitId, abilityId)]]
-    self:OnCombat(eventCode, ACTION_RESULT_ROOTED, nil, "Rooted", LUIE_CC_ICON_ROOT, nil,
+    self:OnCombat(eventCode, ACTION_RESULT_EFFECT_GAINED_DURATION, nil, "Rooted", LUIE_CC_ICON_ROOT, nil,
         "CombatTip", "CombatTip", LUIE.PlayerNameRaw, 1, rootDuration, nil, nil, nil, 1,
         nil, GENERIC_ROOT_ABILITY_ID)
     if isRooted then
@@ -882,7 +882,7 @@ function CrowdControlTracker:PopRootAlert(eventCode, combatTipID)
     --[[ CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, abilityGraphic,
     abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType,
     damageType, combat_log, sourceUnitId, targetUnitId, abilityId)]]
-    self:OnCombat(eventCode, ACTION_RESULT_ROOTED, nil, "Rooted", LUIE_CC_ICON_ROOT, nil,
+    self:OnCombat(eventCode, ACTION_RESULT_EFFECT_GAINED_DURATION, nil, "Rooted", LUIE_CC_ICON_ROOT, nil,
         "CombatTip", "CombatTip", LUIE.PlayerNameRaw, 1, rootDuration, nil, nil, nil, 1,
         nil, GENERIC_ROOT_ABILITY_ID)
     if isRooted then
