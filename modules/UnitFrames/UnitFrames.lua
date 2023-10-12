@@ -454,6 +454,11 @@ function UnitFrames.GroupFrames_OnMouseUp(self, button, upInside)
             AddMenuItem(GetString(SI_SOCIAL_MENU_VISIT_HOUSE), function()
                 JumpToHouse(accountName)
             end)
+            if not ZO_IsTributeLocked() then
+                AddMenuItem(GetString(SI_SOCIAL_MENU_TRIBUTE_INVITE), function()
+                    InviteToTributeByDisplayName(accountName)
+                end)
+            end
             AddMenuItem(GetString(SI_SOCIAL_MENU_JUMP_TO_PLAYER), function()
                 JumpToGroupMember(accountName)
             end)
