@@ -985,8 +985,15 @@ function CrowdControlTracker:OnDraw(abilityId, abilityIcon, ccDuration, result, 
     end
 
     if (result == ACTION_RESULT_ROOTED) and isRooted then
-        self:OnProc(ccDuration, interval)
+        if CombatInfo.SV.cct.playSound then
+            local playSound = CombatInfo.SV.cct.playSoundOption
+            if playSound then
+                PlaySound(LUIE.Sounds[playSound])
+                PlaySound(LUIE.Sounds[playSound])
+            end
+        end
     end
+    
 end
 
 function CrowdControlTracker:IconHidden(hidden)
