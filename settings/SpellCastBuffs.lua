@@ -28,11 +28,7 @@ local function GenerateCustomList(input)
         counter = counter + 1
         -- If the input is a numeric value then we can pull this abilityId's info.
         if type(id) == "number" then
-            options[counter] = zo_iconFormat(GetAbilityIcon(id), 16, 16)
-                .. " ["
-                .. id
-                .. "] "
-                .. zo_strformat("<<C:1>>", GetAbilityName(id))
+            options[counter] = zo_iconFormat(GetAbilityIcon(id), 16, 16) .. " [" .. id .. "] " .. zo_strformat("<<C:1>>", GetAbilityName(id))
         -- If the input is not numeric then add this as a name only.
         else
             options[counter] = id
@@ -46,10 +42,7 @@ local dialogs = {
     [1] = { -- Clear Blacklist
         identifier = "LUIE_CLEAR_ABILITY_BLACKLIST",
         title = GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR),
-        text = zo_strformat(
-            GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG),
-            GetString(SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST)
-        ),
+        text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG), GetString(SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST)),
         callback = function(_)
             SpellCastBuffs.ClearCustomList(SpellCastBuffs.SV.BlacklistTable)
             LUIE_Blacklist:UpdateChoices(GenerateCustomList(SpellCastBuffs.SV.BlacklistTable))
@@ -58,10 +51,7 @@ local dialogs = {
     [2] = { -- Clear Prominent Buffs
         identifier = "LUIE_CLEAR_PROMINENT_BUFFS",
         title = GetString(SI_LUIE_LAM_UF_PROMINENT_CLEAR_BUFFS),
-        text = zo_strformat(
-            GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST),
-            GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)
-        ),
+        text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
         callback = function(_)
             SpellCastBuffs.ClearCustomList(SpellCastBuffs.SV.PromBuffTable)
             LUIE_Prominent_Buffs_List:UpdateChoices(GenerateCustomList(SpellCastBuffs.SV.PromBuffTable))
@@ -70,10 +60,7 @@ local dialogs = {
     [3] = { -- Clear Prominent Debuffs
         identifier = "LUIE_CLEAR_PROMINENT_DEBUFFS",
         title = GetString(SI_LUIE_LAM_UF_PROMINENT_CLEAR_DEBUFFS),
-        text = zo_strformat(
-            GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST),
-            GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)
-        ),
+        text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
         callback = function(_)
             SpellCastBuffs.ClearCustomList(SpellCastBuffs.SV.PromDebuffTable)
             LUIE_Prominent_Debuffs_List:UpdateChoices(GenerateCustomList(SpellCastBuffs.SV.PromDebuffTable))
@@ -83,10 +70,7 @@ local dialogs = {
     [4] = { -- Clear Priority Buffs
         identifier = "LUIE_CLEAR_PRIORITY_BUFFS",
         title = GetString(SI_LUIE_LAM_UF_PRIORITY_CLEAR_BUFFS),
-        text = zo_strformat(
-            GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST),
-            GetString(SI_LUIE_CUSTOM_LIST_PRIORITY_BUFFS)
-        ),
+        text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST), GetString(SI_LUIE_CUSTOM_LIST_PRIORITY_BUFFS)),
         callback = function(_)
             SpellCastBuffs.ClearCustomList(SpellCastBuffs.SV.PriorityBuffTable)
             LUIE_Priority_Buffs_List:UpdateChoices(GenerateCustomList(SpellCastBuffs.SV.PriorityBuffTable))
@@ -95,10 +79,7 @@ local dialogs = {
     [5] = { -- Clear Priority Debuffs
         identifier = "LUIE_CLEAR_PRIORITY_DEBUFFS",
         title = GetString(SI_LUIE_LAM_UF_PRIORITY_CLEAR_DEBUFFS),
-        text = zo_strformat(
-            GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST),
-            GetString(SI_LUIE_CUSTOM_LIST_PRIORITY_DEBUFFS)
-        ),
+        text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST), GetString(SI_LUIE_CUSTOM_LIST_PRIORITY_DEBUFFS)),
         callback = function(_)
             SpellCastBuffs.ClearCustomList(SpellCastBuffs.SV.PriorityDebuffTable)
             LUIE_Priority_Debuffs_List:UpdateChoices(GenerateCustomList(SpellCastBuffs.SV.PriorityDebuffTable))
@@ -763,10 +744,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreDisguise,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -784,10 +762,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreAssistant,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -805,10 +780,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnorePet,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -844,10 +816,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreMountPlayer,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -898,10 +867,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreMundusPlayer,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -920,10 +886,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreMundusTarget,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -942,10 +905,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreFoodPlayer,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -964,10 +924,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreFoodTarget,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -986,10 +943,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreExperiencePlayer,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -1008,10 +962,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreExperienceTarget,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
 
@@ -1031,10 +982,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreAllianceXPPlayer,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -1053,10 +1001,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreAllianceXPTarget,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
 
@@ -1076,10 +1021,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreVampPlayer,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -1098,10 +1040,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreVampTarget,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -1120,10 +1059,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreLycanPlayer,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -1142,10 +1078,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreLycanTarget,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -1164,10 +1097,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreDiseasePlayer,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -1186,10 +1116,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreDiseaseTarget,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -1208,10 +1135,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreBitePlayer,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -1230,10 +1154,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreBiteTarget,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -1253,10 +1174,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreBattleSpiritPlayer,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -1275,10 +1193,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreBattleSpiritTarget,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -1297,10 +1212,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreCyrodiilPlayer,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -1319,10 +1231,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreCyrodiilTarget,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -1341,10 +1250,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreEsoPlusPlayer,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -1363,10 +1269,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreEsoPlusTarget,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -1385,10 +1288,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreSoulSummonsPlayer,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
             {
@@ -1407,10 +1307,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = not Defaults.IgnoreSoulSummonsTarget,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable
-                        and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.LongTermEffects_Player or Settings.LongTermEffects_Target))
                 end,
             },
         },
@@ -2085,14 +1982,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Alignment (BuffsPlayer)
                 type = "dropdown",
-                name = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)
-                ),
-                tooltip = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN_TP),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)
-                ),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)),
                 choices = { "Left", "Centered", "Right" },
                 getFunc = function()
                     return Settings.AlignmentBuffsPlayer
@@ -2108,14 +1999,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Sort Direction (BuffsPlayer)
                 type = "dropdown",
-                name = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_GENERIC),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)
-                ),
-                tooltip = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_GENERIC_TP),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)
-                ),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_GENERIC), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_GENERIC_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)),
                 choices = { "Left to Right", "Right to Left" },
                 getFunc = function()
                     return Settings.SortBuffsPlayer
@@ -2131,14 +2016,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Alignment (DebuffsPlayer)
                 type = "dropdown",
-                name = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)
-                ),
-                tooltip = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN_TP),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)
-                ),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)),
                 choices = { "Left", "Centered", "Right" },
                 getFunc = function()
                     return Settings.AlignmentDebuffsPlayer
@@ -2154,14 +2033,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Sort Direction (DebuffsPlayer)
                 type = "dropdown",
-                name = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_GENERIC),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)
-                ),
-                tooltip = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_GENERIC_TP),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)
-                ),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_GENERIC), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_GENERIC_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)),
                 choices = { "Left to Right", "Right to Left" },
                 getFunc = function()
                     return Settings.SortDebuffsPlayer
@@ -2177,14 +2050,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Alignment (BuffsTarget)
                 type = "dropdown",
-                name = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS)
-                ),
-                tooltip = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN_TP),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS)
-                ),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS)),
                 choices = { "Left", "Centered", "Right" },
                 getFunc = function()
                     return Settings.AlignmentBuffsTarget
@@ -2200,14 +2067,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Sort Direction (BuffsTarget)
                 type = "dropdown",
-                name = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_GENERIC),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS)
-                ),
-                tooltip = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_GENERIC_TP),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS)
-                ),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_GENERIC), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_GENERIC_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS)),
                 choices = { "Left to Right", "Right to Left" },
                 getFunc = function()
                     return Settings.SortBuffsTarget
@@ -2223,14 +2084,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Alignment (DebuffsTarget)
                 type = "dropdown",
-                name = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)
-                ),
-                tooltip = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN_TP),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)
-                ),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)),
                 choices = { "Left", "Centered", "Right" },
                 getFunc = function()
                     return Settings.AlignmentDebuffsTarget
@@ -2246,14 +2101,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Sort Direction (DebuffsTarget)
                 type = "dropdown",
-                name = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_GENERIC),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)
-                ),
-                tooltip = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_GENERIC_TP),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)
-                ),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_GENERIC), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_GENERIC_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)),
                 choices = { "Left to Right", "Right to Left" },
                 getFunc = function()
                     return Settings.SortDebuffsTarget
@@ -2293,14 +2142,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Horizontal Long Term Icons Alignment
                 type = "dropdown",
-                name = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_HORIZONTAL_ALIGN),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)
-                ),
-                tooltip = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_HORIZONTAL_ALIGN_TP),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)
-                ),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_HORIZONTAL_ALIGN), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_HORIZONTAL_ALIGN_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)),
                 choices = { "Left", "Centered", "Right" },
                 getFunc = function()
                     return Settings.AlignmentLongHorz
@@ -2319,14 +2162,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Horizontal Long Term Sort
                 type = "dropdown",
-                name = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_HORIZONTAL),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)
-                ),
-                tooltip = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_HORIZONTAL_TP),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)
-                ),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_HORIZONTAL), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_HORIZONTAL_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)),
                 choices = { "Left to Right", "Right to Left" },
                 getFunc = function()
                     return Settings.SortLongHorz
@@ -2345,14 +2182,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Vertical Long Term Icons Alignment
                 type = "dropdown",
-                name = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_VERTICAL_ALIGN),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)
-                ),
-                tooltip = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_VERTICAL_ALIGN_TP),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)
-                ),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_VERTICAL_ALIGN), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_VERTICAL_ALIGN_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)),
                 choices = { "Top", "Centered", "Bottom" },
                 getFunc = function()
                     return Settings.AlignmentLongVert
@@ -2371,14 +2202,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Vertical Long Term Sort
                 type = "dropdown",
-                name = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_VERTICAL),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)
-                ),
-                tooltip = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_VERTICAL_TP),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)
-                ),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_VERTICAL), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_VERTICAL_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)),
                 choices = { "Bottom to Top", "Top to Bottom" },
                 getFunc = function()
                     return Settings.SortLongVert
@@ -2422,14 +2247,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Horizontal Prominent Buffs Icons Alignment
                 type = "dropdown",
-                name = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_HORIZONTAL_ALIGN),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)
-                ),
-                tooltip = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_HORIZONTAL_ALIGN_TP),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)
-                ),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_HORIZONTAL_ALIGN), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_HORIZONTAL_ALIGN_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
                 choices = { "Left", "Centered", "Right" },
                 getFunc = function()
                     return Settings.AlignmentPromBuffsHorz
@@ -2448,14 +2267,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Horizontal Prominent Buffs Sort
                 type = "dropdown",
-                name = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_HORIZONTAL),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)
-                ),
-                tooltip = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_HORIZONTAL_TP),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)
-                ),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_HORIZONTAL), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_HORIZONTAL_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
                 choices = { "Left to Right", "Right to Left" },
                 getFunc = function()
                     return Settings.SortPromBuffsHorz
@@ -2474,14 +2287,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Vertical Prominent Buffs Icons Alignment
                 type = "dropdown",
-                name = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_VERTICAL_ALIGN),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)
-                ),
-                tooltip = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_VERTICAL_ALIGN_TP),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)
-                ),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_VERTICAL_ALIGN), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_VERTICAL_ALIGN_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
                 choices = { "Top", "Centered", "Bottom" },
                 getFunc = function()
                     return Settings.AlignmentPromBuffsVert
@@ -2500,14 +2307,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Vertical Prominent Buffs Sort
                 type = "dropdown",
-                name = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_VERTICAL),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)
-                ),
-                tooltip = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_VERTICAL_TP),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)
-                ),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_VERTICAL), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_VERTICAL_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
                 choices = { "Bottom to Top", "Top to Bottom" },
                 getFunc = function()
                     return Settings.SortPromBuffsVert
@@ -2546,14 +2347,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Horizontal Prominent Debuffs Icons Alignment
                 type = "dropdown",
-                name = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_HORIZONTAL_ALIGN),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)
-                ),
-                tooltip = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_HORIZONTAL_ALIGN_TP),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)
-                ),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_HORIZONTAL_ALIGN), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_HORIZONTAL_ALIGN_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
                 choices = { "Left", "Centered", "Right" },
                 getFunc = function()
                     return Settings.AlignmentPromDebuffsHorz
@@ -2572,14 +2367,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Horizontal Prominent Debuffs Sort
                 type = "dropdown",
-                name = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_HORIZONTAL),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)
-                ),
-                tooltip = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_HORIZONTAL_TP),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)
-                ),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_HORIZONTAL), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_HORIZONTAL_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
                 choices = { "Left to Right", "Right to Left" },
                 getFunc = function()
                     return Settings.SortPromDebuffsHorz
@@ -2598,14 +2387,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Vertical Prominent Debuffs Icons Alignment
                 type = "dropdown",
-                name = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_VERTICAL_ALIGN),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)
-                ),
-                tooltip = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_VERTICAL_ALIGN_TP),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)
-                ),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_VERTICAL_ALIGN), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_VERTICAL_ALIGN_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
                 choices = { "Top", "Centered", "Bottom" },
                 getFunc = function()
                     return Settings.AlignmentPromDebuffsVert
@@ -2624,14 +2407,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Vertical Prominent Debuffs Sort
                 type = "dropdown",
-                name = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_VERTICAL),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)
-                ),
-                tooltip = zo_strformat(
-                    GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_VERTICAL_TP),
-                    GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)
-                ),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_VERTICAL), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_VERTICAL_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
                 choices = { "Bottom to Top", "Top to Bottom" },
                 getFunc = function()
                     return Settings.SortPromDebuffsVert
@@ -3165,9 +2942,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = Defaults.ProminentBuffLabelDirection,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable and (Settings.ProminentLabel or Settings.ProminentProgress)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.ProminentLabel or Settings.ProminentProgress))
                 end,
             },
             {
@@ -3187,9 +2962,7 @@ function SpellCastBuffs.CreateSettings()
                 width = "full",
                 default = Defaults.ProminentDebuffLabelDirection,
                 disabled = function()
-                    return not (
-                        LUIE.SV.SpellCastBuff_Enable and (Settings.ProminentLabel or Settings.ProminentProgress)
-                    )
+                    return not (LUIE.SV.SpellCastBuff_Enable and (Settings.ProminentLabel or Settings.ProminentProgress))
                 end,
             },
             {
