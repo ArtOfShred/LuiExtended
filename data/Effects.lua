@@ -1658,49 +1658,48 @@ Effects.BarHighlightOverride = {
     -- Destruction Staff ------
     ---------------------------
 
-    [46340] = { newId = 100306 }, -- force shock (vAS destro)
-    [46348] = { newId = 100306 }, -- crushing shock (vAS destro)
-    [46356] = { newId = 100306 }, -- force pulse (vAS destro)
-
-    [28807] = { newId = 28807 }, -- wall of fire
-    [28854] = { newId = 28854 }, -- wall of shock
-    [28849] = { newId = 28849 }, -- wall of ice
-    [39053] = { newId = 39053 }, -- unstable wall of fire
-    [39073] = { newId = 39073 }, -- unstable wall of storms
-    [39067] = { newId = 39067 }, -- unstable wall of frost
-    [39012] = { newId = 39012 }, -- blockade of fire
-    [39018] = { newId = 39018 }, -- blockade of shock
-    [39028] = { newId = 39028 }, -- blockade of ice
-    [29073] = { newId = 62648 }, -- flame touch
-    [29089] = { newId = 62722 }, -- shock touch
-    [29078] = { newId = 62692 }, -- frost touch
-    [38985] = { newId = 140334 }, -- flame clench (master destro)
-    [38993] = { newId = 140334 }, -- shock clench (master destro)
-    [38989] = { newId = 38254 }, -- frost clench (taunt)
-    [38944] = { newId = 62682 }, -- flame reach
-    [38978] = { newId = 62745 }, -- shock reach
-    [38970] = { newId = 62712 }, -- frost reach
-    [29173] = { newId = 61743 }, -- weaknees to elements
-    [39089] = { newId = 39089 }, -- elemental susceptibility
-    [39095] = { newId = 61743 }, -- elemental drain (minor magickasteal)
-    [28794] = { newId = 115003 }, -- fire impulse (BRP destro)
-    [28799] = { newId = 115003 }, -- shock impulse (BRP destro)
-    [28798] = { newId = 115003 }, -- frost impulse (BRP destro)
-    [39145] = { newId = 115003 }, -- fire ring (BRP destro)
-    [39147] = { newId = 115003 }, -- shock ring (BRP destro)
-    [39146] = { newId = 115003 }, -- frost ring (BRP destro)
-    [39162] = { newId = 115003 }, -- flame pulsar (BRP destro)
-    [39167] = { newId = 115003 }, -- shock pulsar (BRP destro)
-    [39163] = { newId = 115003 }, -- frost pulsar (BRP destro)
-    [83625] = { newId = 83625 }, -- fire storm
-    [83630] = { newId = 83630 }, -- thunder storm
-    [83628] = { newId = 83628 }, -- icy storm
-    [83682] = { newId = 83682 }, -- fiery eye of the storm
-    [83686] = { newId = 83686 }, -- shock
-    [83684] = { newId = 83684 }, -- ice
-    [85126] = { newId = 85126 }, -- fiery rage
-    [85130] = { newId = 85130 }, -- thunderous rage
-    [85128] = { newId = 85128 }, -- icy rage
+    [46340] = { newId = 100306 }, -- Force Shock --> Concentrated Force (*VAS Destro*)
+    [46348] = { newId = 100306 }, -- Crushing Shock --> Concentrated Force (*VAS Destro*)
+    [46356] = { newId = 100306 }, -- Force Pulse --> Concentrated Force (*VAS Destro*)
+    --[28807] = { newId = 28807 }, -- Wall of Fire
+    --[28854] = { newId = 28854 }, -- Wall of Storms
+    --[28849] = { newId = 28849 }, -- Wall of Frost
+    --[39053] = { newId = 39053 }, -- Unstable Wall of Fire
+    --[39073] = { newId = 39073 }, -- Unstable Wall of Storms
+    --[39067] = { newId = 39067 }, -- Unstable Wall of Frost
+    --[39012] = { newId = 39012 }, -- Blockade of Fire
+    --[39018] = { newId = 39018 }, -- Blockade of Storms
+    --[39028] = { newId = 39028 }, -- Blockade of Frost
+    [29073] = { newId = 62648 }, -- Flame Touch
+    [29089] = { newId = 62722 }, -- Shock Touch
+    [29078] = { newId = 62692 }, -- Frost Touch
+    [38985] = { newId = 140334 }, -- Flame Clench --> Destructive Impact (*Master Destro*)
+    [38993] = { newId = 140334 }, -- Shock Clench --> Destructive Impact (*Master Destro*)
+    [38989] = { newId = 38254 }, -- Frost Clench --> Taunt
+    [38944] = { newId = 62682 }, -- Flame Reach
+    [38978] = { newId = 62745 }, -- Shock Reach
+    [38970] = { newId = 62712 }, -- Frost Reach
+    [29173] = { newId = 61743 }, -- Weakness to Elements --> Major Breach
+    [39089] = { newId = 39089 }, -- Elemental Susceptibility
+    [39095] = { newId = 61743 }, -- Elemental Drain --> Major Breach
+    [28794] = { newId = 115003 }, -- Fire Impulse --> Wild Impulse (*BRP Destro*)
+    [28799] = { newId = 115003 }, -- Shock Impulse --> Wild Impulse (*BRP Destro*)
+    [28798] = { newId = 115003 }, -- Frost Impulse --> Wild Impulse (*BRP Destro*)
+    [39145] = { newId = 115003 }, -- Fire Ring --> Wild Impulse (*BRP Destro*)
+    [39147] = { newId = 115003 }, -- Shock Ring --> Wild Impulse (*BRP Destro*)
+    [39146] = { newId = 115003 }, -- Frost Ring --> Wild Impulse (*BRP Destro*)
+    [39162] = { newId = 115003 }, -- Flame Pulsar --> Wild Impulse (*BRP Destro*)
+    [39167] = { newId = 115003 }, -- Storm Pulsar --> Wild Impulse (*BRP Destro*)
+    [39163] = { newId = 115003 }, -- Frost Pulsar --> Wild Impulse (*BRP Destro*)
+    [83625] = { newId = 83625 }, -- Fire Storm
+    [83630] = { newId = 83630 }, -- Thunder Storm
+    [83628] = { newId = 83628 }, -- Icy Storm
+    [83682] = { newId = 83682 }, -- Eye of Flame
+    [83686] = { newId = 83686 }, -- Eye of Lightning
+    [83684] = { newId = 83684 }, -- Eye of Frost
+    [85126] = { newId = 85126 }, -- Fiery Rage
+    [85130] = { newId = 85130 }, -- Thunderous Rage
+    [85128] = { newId = 85128 }, -- Icy Rage
 
     ---------------------------
     -- Restoration Staff ------
