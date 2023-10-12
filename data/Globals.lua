@@ -33,7 +33,7 @@ LUIE_CC_TYPE_ROOT = 10 -- Immobilize
 LUIE_CC_TYPE_UNBREAKABLE = 11 -- Unbreakable CC
 LUIE_CC_TYPE_TRAP = 12 -- Trap
 LUIE_CC_TYPE_ENVIRONMENTAL = 13 -- Environmental Hazard (I.E. Lava)
-LUIE_CC_TYPE_CHARM = 14         -- Charm
+LUIE_CC_TYPE_CHARM = 14 -- Charm
 
 -- LUIE_BUFF_TYPE
 LUIE_BUFF_TYPE_BUFF = 1 -- Buff
@@ -59,8 +59,8 @@ LUIE_BUFF_TYPE_NONE = 11
 [7] = "Environmental Buff"
 [8] = "Environmental Debuff"
 [9] = "None",
-]]--
-
+]]
+--
 
 -- LUIE_COMBAT_ALERT_TYPE
 LUIE_COMBAT_ALERT_TYPE_UNMIT = 1
