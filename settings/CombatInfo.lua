@@ -2312,35 +2312,6 @@ function CombatInfo.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CI_CCT_AOE_HEADER),
-            },
-            {
-                -- AOE SHOW
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_CCT_AOE_TOGGLE),
-                tooltip = GetString(SI_LUIE_LAM_CI_CCT_AOE_TOGGLE_TP),
-                default = Defaults.cct.showAoe,
-                getFunc = function() return Settings.cct.showAoe end,
-                setFunc = function(newValue) Settings.cct.showAoe = newValue
-                    CrowdControlTracker:InitControls()
-                end,
-                disabled = function() return (not Settings.cct.enabled) end,
-            },
-            {
-                -- AOE Color
-                type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_CCT_AOE_COLOR)),
-                tooltip = GetString(SI_LUIE_LAM_CT_CCT_AOE_COLOR_TP),
-                default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_AREA_EFFECT])),
-                getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_AREA_EFFECT]) end,
-                setFunc = function(r,g,b,a)
-                    Settings.cct.colors[ACTION_RESULT_AREA_EFFECT] = {r,g,b,a}
-                    CrowdControlTracker:InitControls()
-                end,
-                disabled = function() return not (Settings.cct.showAoe and Settings.cct.enabled) end,
-            },
-            {
-                type = "header",
                 name = GetString(SI_LUIE_LAM_CI_CCT_ROOT_HEADER),
             },
             {
@@ -2368,6 +2339,35 @@ function CombatInfo.CreateSettings()
                     CrowdControlTracker:InitControls()
                 end,
                 disabled = function() return not (Settings.cct.showRoot and Settings.cct.enabled) end,
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CI_CCT_AOE_HEADER),
+            },
+            {
+                -- AOE SHOW
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_CCT_AOE_TOGGLE),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_AOE_TOGGLE_TP),
+                default = Defaults.cct.showAoe,
+                getFunc = function() return Settings.cct.showAoe end,
+                setFunc = function(newValue) Settings.cct.showAoe = newValue
+                    CrowdControlTracker:InitControls()
+                end,
+                disabled = function() return (not Settings.cct.enabled) end,
+            },
+            {
+                -- AOE Color
+                type = "colorpicker",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_CCT_AOE_COLOR)),
+                tooltip = GetString(SI_LUIE_LAM_CT_CCT_AOE_COLOR_TP),
+                default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_AREA_EFFECT])),
+                getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_AREA_EFFECT]) end,
+                setFunc = function(r,g,b,a)
+                    Settings.cct.colors[ACTION_RESULT_AREA_EFFECT] = {r,g,b,a}
+                    CrowdControlTracker:InitControls()
+                end,
+                disabled = function() return not (Settings.cct.showAoe and Settings.cct.enabled) end,
             },
             {
                 type = "header",
