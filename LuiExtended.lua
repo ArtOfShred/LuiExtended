@@ -10,7 +10,7 @@ end
 
 LUIE.tag = "LUIE"
 LUIE.name = "LuiExtended"
-LUIE.version = "6.5.2"
+LUIE.version = "6.5.3"
 LUIE.author = "ArtOfShred, psypanda, SpellBuilder & Saenic"
 LUIE.website = "https://www.esoui.com/downloads/info818-LuiExtended.html"
 LUIE.github = "https://github.com/ArtOfShred/LuiExtended"
