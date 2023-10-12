@@ -983,6 +983,10 @@ function CrowdControlTracker:OnDraw(abilityId, abilityIcon, ccDuration, result, 
     else
         self:OnProc(ccDuration, interval)
     end
+
+    if (result == ACTION_RESULT_ROOTED) and isRooted then
+        self:OnProc(ccDuration, interval)
+    end
 end
 
 function CrowdControlTracker:IconHidden(hidden)
