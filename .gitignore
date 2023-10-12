@@ -14,6 +14,5 @@ $RECYCLE.BIN/
 ~$*
 *~
 .vscode/settings.json
-Data/DebugTable.lua
 *.editorconfig
 stylua.toml

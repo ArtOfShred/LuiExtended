@@ -66,10 +66,7 @@ local dialogs = {
     [1] = { -- Clear Whitelist
         identifier = "LUIE_CLEAR_PET_WHITELIST",
         title = GetString(SI_LUIE_LAM_UF_WHITELIST_CLEAR),
-        text = zo_strformat(
-            GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG),
-            GetString(SI_LUIE_CUSTOM_LIST_UF_WHITELIST)
-        ),
+        text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG), GetString(SI_LUIE_CUSTOM_LIST_UF_WHITELIST)),
         callback = function(dialog)
             UnitFrames.ClearCustomList(UnitFrames.SV.whitelist)
             LUIE_WhitelistUF:UpdateChoices(GenerateCustomList(UnitFrames.SV.whitelist))
@@ -743,9 +740,7 @@ function UnitFrames.CreateSettings()
                 type = "colorpicker",
                 name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_SHIELD),
                 getFunc = function()
-                    return Settings.CustomColourShield[1],
-                        Settings.CustomColourShield[2],
-                        Settings.CustomColourShield[3]
+                    return Settings.CustomColourShield[1], Settings.CustomColourShield[2], Settings.CustomColourShield[3]
                 end,
                 setFunc = function(r, g, b, a)
                     Settings.CustomColourShield = { r, g, b }
@@ -1404,9 +1399,7 @@ function UnitFrames.CreateSettings()
                 width = "full",
                 default = Defaults.PlayerOocAlpha,
                 disabled = function()
-                    return not (
-                        LUIE.SV.UnitFrames_Enabled and (Settings.CustomFramesPlayer or Settings.CustomFramesTarget)
-                    )
+                    return not (LUIE.SV.UnitFrames_Enabled and (Settings.CustomFramesPlayer or Settings.CustomFramesTarget))
                 end,
             },
             {
@@ -1428,9 +1421,7 @@ function UnitFrames.CreateSettings()
                 width = "full",
                 default = Defaults.PlayerIncAlpha,
                 disabled = function()
-                    return not (
-                        LUIE.SV.UnitFrames_Enabled and (Settings.CustomFramesPlayer or Settings.CustomFramesTarget)
-                    )
+                    return not (LUIE.SV.UnitFrames_Enabled and (Settings.CustomFramesPlayer or Settings.CustomFramesTarget))
                 end,
             },
             {
@@ -1448,9 +1439,7 @@ function UnitFrames.CreateSettings()
                 width = "full",
                 default = Defaults.HideBuffsPlayerOoc,
                 disabled = function()
-                    return not (
-                        LUIE.SV.UnitFrames_Enabled and (Settings.CustomFramesPlayer or Settings.CustomFramesTarget)
-                    )
+                    return not (LUIE.SV.UnitFrames_Enabled and (Settings.CustomFramesPlayer or Settings.CustomFramesTarget))
                 end,
             },
             {
@@ -1525,11 +1514,7 @@ function UnitFrames.CreateSettings()
                 width = "full",
                 default = Defaults.PlayerChampionColour,
                 disabled = function()
-                    return not (
-                        LUIE.SV.UnitFrames_Enabled
-                        and Settings.CustomFramesPlayer
-                        and Settings.PlayerEnableAltbarXP
-                    )
+                    return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer and Settings.PlayerEnableAltbarXP)
                 end,
             },
             {
@@ -1654,9 +1639,7 @@ function UnitFrames.CreateSettings()
                 width = "full",
                 default = Defaults.TargetOocAlpha,
                 disabled = function()
-                    return not (
-                        LUIE.SV.UnitFrames_Enabled and (Settings.CustomFramesPlayer or Settings.CustomFramesTarget)
-                    )
+                    return not (LUIE.SV.UnitFrames_Enabled and (Settings.CustomFramesPlayer or Settings.CustomFramesTarget))
                 end,
             },
             {
@@ -1678,9 +1661,7 @@ function UnitFrames.CreateSettings()
                 width = "full",
                 default = Defaults.TargetIncAlpha,
                 disabled = function()
-                    return not (
-                        LUIE.SV.UnitFrames_Enabled and (Settings.CustomFramesPlayer or Settings.CustomFramesTarget)
-                    )
+                    return not (LUIE.SV.UnitFrames_Enabled and (Settings.CustomFramesPlayer or Settings.CustomFramesTarget))
                 end,
             },
             {
@@ -1698,9 +1679,7 @@ function UnitFrames.CreateSettings()
                 width = "full",
                 default = Defaults.HideBuffsTargetOoc,
                 disabled = function()
-                    return not (
-                        LUIE.SV.UnitFrames_Enabled and (Settings.CustomFramesPlayer or Settings.CustomFramesTarget)
-                    )
+                    return not (LUIE.SV.UnitFrames_Enabled and (Settings.CustomFramesPlayer or Settings.CustomFramesTarget))
                 end,
             },
             {
@@ -1847,12 +1826,7 @@ function UnitFrames.CreateSettings()
                 width = "full",
                 default = Defaults.TargetTitlePriority,
                 disabled = function()
-                    return not (
-                        LUIE.SV.UnitFrames_Enabled
-                        and Settings.CustomFramesPlayer
-                        and Settings.TargetEnableRank
-                        and Settings.TargetEnableTitle
-                    )
+                    return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer and Settings.TargetEnableRank and Settings.TargetEnableTitle)
                 end,
             },
             {
@@ -1888,9 +1862,7 @@ function UnitFrames.CreateSettings()
                 default = Defaults.PlayerEnableArmor,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 disabled = function()
-                    return not (
-                        LUIE.SV.UnitFrames_Enabled and (Settings.CustomFramesPlayer or Settings.CustomFramesTarget)
-                    )
+                    return not (LUIE.SV.UnitFrames_Enabled and (Settings.CustomFramesPlayer or Settings.CustomFramesTarget))
                 end,
             },
             {
@@ -1908,9 +1880,7 @@ function UnitFrames.CreateSettings()
                 default = Defaults.PlayerEnablePower,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 disabled = function()
-                    return not (
-                        LUIE.SV.UnitFrames_Enabled and (Settings.CustomFramesPlayer or Settings.CustomFramesTarget)
-                    )
+                    return not (LUIE.SV.UnitFrames_Enabled and (Settings.CustomFramesPlayer or Settings.CustomFramesTarget))
                 end,
             },
             {
@@ -1946,9 +1916,7 @@ function UnitFrames.CreateSettings()
                 width = "full",
                 default = Defaults.CustomOocAlphaPower,
                 disabled = function()
-                    return not (
-                        LUIE.SV.UnitFrames_Enabled and (Settings.CustomFramesPlayer or Settings.CustomFramesTarget)
-                    )
+                    return not (LUIE.SV.UnitFrames_Enabled and (Settings.CustomFramesPlayer or Settings.CustomFramesTarget))
                 end,
             },
         },
@@ -2140,11 +2108,7 @@ function UnitFrames.CreateSettings()
                 width = "full",
                 default = Defaults.AdjustStaminaHPos,
                 disabled = function()
-                    return not (
-                        LUIE.SV.UnitFrames_Enabled
-                        and Settings.CustomFramesPlayer
-                        and Settings.PlayerFrameOptions == 2
-                    )
+                    return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer and Settings.PlayerFrameOptions == 2)
                 end,
             },
             {
@@ -2165,11 +2129,7 @@ function UnitFrames.CreateSettings()
                 width = "full",
                 default = Defaults.AdjustStaminaVPos,
                 disabled = function()
-                    return not (
-                        LUIE.SV.UnitFrames_Enabled
-                        and Settings.CustomFramesPlayer
-                        and Settings.PlayerFrameOptions == 2
-                    )
+                    return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer and Settings.PlayerFrameOptions == 2)
                 end,
             },
             {
@@ -2190,11 +2150,7 @@ function UnitFrames.CreateSettings()
                 width = "full",
                 default = Defaults.AdjustMagickaHPos,
                 disabled = function()
-                    return not (
-                        LUIE.SV.UnitFrames_Enabled
-                        and Settings.CustomFramesPlayer
-                        and Settings.PlayerFrameOptions == 2
-                    )
+                    return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer and Settings.PlayerFrameOptions == 2)
                 end,
             },
             {
@@ -2215,11 +2171,7 @@ function UnitFrames.CreateSettings()
                 width = "full",
                 default = Defaults.AdjustMagickaVPos,
                 disabled = function()
-                    return not (
-                        LUIE.SV.UnitFrames_Enabled
-                        and Settings.CustomFramesPlayer
-                        and Settings.PlayerFrameOptions == 2
-                    )
+                    return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer and Settings.PlayerFrameOptions == 2)
                 end,
             },
             {
@@ -2240,11 +2192,7 @@ function UnitFrames.CreateSettings()
                 width = "full",
                 default = Defaults.PlayerBarSpacing,
                 disabled = function()
-                    return not (
-                        LUIE.SV.UnitFrames_Enabled
-                        and Settings.CustomFramesPlayer
-                        and (Settings.PlayerFrameOptions == 1 or Settings.PlayerFrameOptions == 3)
-                    )
+                    return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer and (Settings.PlayerFrameOptions == 1 or Settings.PlayerFrameOptions == 3))
                 end,
             },
             {
@@ -2318,11 +2266,7 @@ function UnitFrames.CreateSettings()
                 default = Defaults.HideBarMagicka,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 disabled = function()
-                    return not (
-                        LUIE.SV.UnitFrames_Enabled
-                        and Settings.CustomFramesPlayer
-                        and Settings.HideLabelMagicka
-                    )
+                    return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer and Settings.HideLabelMagicka)
                 end,
             },
             {
@@ -2359,11 +2303,7 @@ function UnitFrames.CreateSettings()
                 default = Defaults.HideBarStamina,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 disabled = function()
-                    return not (
-                        LUIE.SV.UnitFrames_Enabled
-                        and Settings.CustomFramesPlayer
-                        and Settings.HideLabelStamina
-                    )
+                    return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer and Settings.HideLabelStamina)
                 end,
             },
             {
