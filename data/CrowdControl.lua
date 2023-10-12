@@ -740,6 +740,7 @@ CrowdControl.IgnoreList ={
     -- Snare Effects
     [8239] = true,    -- Hamstring
     [160949] = true,  -- Warmth
+    [127795] = true,  -- Living Dark
     [101693] = true,  -- Arrow Spray
     [10650] = true,   -- Oil Drenched
     [85656] = true,   -- Harry
