@@ -1658,34 +1658,49 @@ Effects.BarHighlightOverride = {
 	-- Destruction Staff ------
 	---------------------------
 
-	--[46348] = { newId = 48011 }, -- Crushing Shock --> Uber Attack
-	[46340] = { newId = 100306 }, -- Force Shock --> Concentrated Force
-	[46348] = { newId = 100306 }, -- Crushing Shock --> Concentrated Force
-	[46356] = { newId = 100306 }, -- Force Pulse --> Concentrated Force
+	[46340] = { newId = 100306 }, -- force shock (vAS destro)
+	[46348] = { newId = 100306 }, -- crushing shock (vAS destro)
+	[46356] = { newId = 100306 }, -- force pulse (vAS destro)
 
-	[29073] = { newId = 62648 }, -- Flame Touch (Destructive Touch)
-	[29089] = { newId = 62722 }, -- Shock Touch (Destructive Touch)
-	[29078] = { newId = 62692 }, -- Frost Touch (Destructive Touch)
-
-	[38985] = { newId = 38987 }, -- Flame Clench (Destructive Clench)
-	[38989] = { newId = 38990 }, -- Frost Clench (Destructive Clench)
-
-	[38944] = { newId = 62682 }, -- Flame Reach (Destructive Reach)
-	[38978] = { newId = 62745 }, -- Shock Reach (Destructive Reach)
-	[38970] = { newId = 62712 }, -- Frost Reach (Destructive Reach)
-	[29173] = { newId = 61743 }, -- Weakness to Elements (Weakness to Elements)
-	[39089] = { newId = 61743 }, -- Elemental Susceptibility (Elemental Susceptibility)
-	[39095] = { newId = 61743 }, -- Elemental Drain (Elemental Drain)
-
-	[28794] = { newId = 115003 }, -- Fire Impulse --> Wild Impulse
-	[28799] = { newId = 115003 }, -- Shock Impulse --> Wild Impulse
-	[28798] = { newId = 115003 }, -- Frost Impulse --> Wild Impulse
-	[39145] = { newId = 115003 }, -- Fire Ring --> Wild Impulse
-	[39147] = { newId = 115003 }, -- Shock Ring --> Wild Impulse
-	[39146] = { newId = 115003 }, -- Frost Ring --> Wild Impulse
-	[39162] = { newId = 115003 }, -- Flame Pulsar --> Wild Impulse -- TODO: Maybe track Minor Mangle here too
-	[39167] = { newId = 115003 }, -- Storm Pulsar --> Wild Impulse -- TODO: Maybe track Minor Mangle here too
-	[39163] = { newId = 115003 }, -- Frost Pulsar --> Wild Impulse -- TODO: Maybe track Minor Mangle here too
+	[28807] = { newId = 28807 }, -- wall of fire
+	[28854] = { newId = 28854 }, -- wall of shock
+	[28849] = { newId = 28849 }, -- wall of ice
+	[39053] = { newId = 39053 }, -- unstable wall of fire
+	[39073] = { newId = 39073 }, -- unstable wall of storms
+	[39067] = { newId = 39067 }, -- unstable wall of frost
+	[39012] = { newId = 39012 }, -- blockade of fire
+	[39018] = { newId = 39018 }, -- blockade of shock
+	[39028] = { newId = 39028 }, -- blockade of ice
+	[29073] = { newId = 62648 }, -- flame touch
+	[29089] = { newId = 62722 }, -- shock touch
+	[29078] = { newId = 62692 }, -- frost touch
+	[38985] = { newId = 140334 }, -- flame clench (master destro)
+	[38993] = { newId = 140334 }, -- shock clench (master destro)
+	[38989] = { newId = 38254 }, -- frost clench (taunt)
+	[38944] = { newId = 62682 }, -- flame reach
+	[38978] = { newId = 62745 }, -- shock reach
+	[38970] = { newId = 62712 }, -- frost reach
+	[29173] = { newId = 61743 }, -- weaknees to elements
+	[39089] = { newId = 39089 }, -- elemental susceptibility
+	[39095] = { newId = 61743 }, -- elemental drain (minor magickasteal)
+	[28794] = { newId = 115003 }, -- fire impulse (BRP destro)
+	[28799] = { newId = 115003 }, -- shock impulse (BRP destro)
+	[28798] = { newId = 115003 }, -- frost impulse (BRP destro)
+	[39145] = { newId = 115003 }, -- fire ring (BRP destro)
+	[39147] = { newId = 115003 }, -- shock ring (BRP destro)
+	[39146] = { newId = 115003 }, -- frost ring (BRP destro)
+	[39162] = { newId = 115003 }, -- flame pulsar (BRP destro)
+	[39167] = { newId = 115003 }, -- shock pulsar (BRP destro)
+	[39163] = { newId = 115003 }, -- frost pulsar (BRP destro)
+	[83625] = { newId = 83625 }, -- fire storm
+	[83630] = { newId = 83630 }, -- thunder storm
+	[83628] = { newId = 83628 }, -- icy storm
+	[83682] = { newId = 83682 }, -- fiery eye of the storm
+	[83686] = { newId = 83686 }, -- shock
+	[83684] = { newId = 83684 }, -- ice
+	[85126] = { newId = 85126 }, -- fiery rage
+	[85130] = { newId = 85130 }, -- thunderous rage
+	[85128] = { newId = 85128 }, -- icy rage
 
 	---------------------------
 	-- Restoration Staff ------
@@ -1792,10 +1807,24 @@ Effects.BarHighlightOverride = {
 	---------------------------
 	-- Undaunted --------------
 	---------------------------
-
-	[39475] = { newId = 38541 }, -- Inner Fire --> Taunt	why are these extra{{newId = 41942,}}
-	[42056] = { newId = 38541 }, -- Inner Rage --> Taunt	why are these extra{{newId = 42059,}}
-	[42060] = { newId = 42062 }, -- Inner Beast				why are these extra{{newId = 42062,}}
+	[39489] = { newId = 39489 }, -- blood altar
+	[41967] = { newId = 41967 }, -- sanguine altar
+	[41958] = { newId = 41958 }, -- overflowing altar
+	[39425] = { newId = 39425 }, -- trapping webs
+	[41990] = { newId = 41990 }, -- shadow silk
+	[42012] = { newId = 42012 }, -- tangling webs
+	[39475] = { newId = 38254 }, -- inner fire (taunt)
+	[42056] = { newId = 38254 }, -- inner rage (taunt)
+	[42060] = { newId = 42062 }, -- inner beast
+	[39369] = { newId = 39369 }, -- bone shield
+	[42138] = { newId = 42138 }, -- spiked bone shield
+	[42176] = { newId = 42176 }, -- bone surge
+	[39298] = { newId = 39298 }, -- necrotic orb
+	[42028] = { newId = 42028 }, -- mystic orb
+	[42038] = { newId = 42038 }, -- energy orb
+	-- [39475] = { newId = 38541 }, -- Inner Fire --> Taunt	why are these extra{{newId = 41942,}}
+	-- [42056] = { newId = 38541 }, -- Inner Rage --> Taunt	why are these extra{{newId = 42059,}}
+	-- [42060] = { newId = 42062 }, -- Inner Beast				why are these extra{{newId = 42062,}}
 
 	---------------------------
 	-- Assault ----------------
