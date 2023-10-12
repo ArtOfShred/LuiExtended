@@ -1111,13 +1111,13 @@ function CombatInfo.OnUpdate(currentTime)
             end
             local text
             if remain > 86400000 then
-                text = math.floor(remain / 86400000) .. " d"
+                text = zo_floor(remain / 86400000) .. " d"
             elseif remain > 6000000 then
-                text = math.floor(remain / 3600000) .. "h"
+                text = zo_floor(remain / 3600000) .. "h"
             elseif remain > 600000 then
-                text = math.floor(remain / 60000) .. "m"
+                text = zo_floor(remain / 60000) .. "m"
             elseif remain > 60000 then
-                local m = math.floor(remain / 60000)
+                local m = zo_floor(remain / 60000)
                 local s = remain / 1000 - 60 * m
                 text = m .. ":" .. string.format("%.2d", s)
             else
@@ -3025,7 +3025,7 @@ function CombatInfo.OnPowerUpdatePlayer(
     -- flag if ultimate is full - we"ll need it for ultimate generation texture
     uiUltimate.NotFull = (powerValue < powerMax)
     -- Calculate the percentage to activation old one and current
-    local pct = (g_ultimateCost > 0) and math.floor((powerValue / g_ultimateCost) * 100) or 0
+    local pct = (g_ultimateCost > 0) and zo_floor((powerValue / g_ultimateCost) * 100) or 0
     -- Set max percentage label to 100%.
     if pct > 100 then
         pct = 100

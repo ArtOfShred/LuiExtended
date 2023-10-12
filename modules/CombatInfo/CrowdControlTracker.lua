@@ -244,7 +244,7 @@ function CrowdControlTracker:OnUpdate(control)
         return
     end
 
-    local timeLeft = math.ceil(CrowdControlTracker.Timer - GetFrameTimeSeconds())
+    local timeLeft = zo_ceil(CrowdControlTracker.Timer - GetFrameTimeSeconds())
     if timeLeft > 0 then
         LUIE_CCTracker_Timer_Label:SetText(timeLeft)
     end
@@ -415,7 +415,7 @@ function CrowdControlTracker:OnCombat(
         return
     end
     local function StringEnd(String, End)
-        return End == "" or string.sub(String, -string.len(End)) == End
+        return End == "" or zo_strsub(String, -zo_strlen(End)) == End
     end
 
     -- Adjust duration of Player Vampire bite stun

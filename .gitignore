@@ -14,3 +14,4 @@ $RECYCLE.BIN/
 ~$*
 *~
 .vscode/settings.json
+Data/DebugTable.lua

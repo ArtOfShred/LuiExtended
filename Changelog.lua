@@ -6,7 +6,7 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
-    "|cFFA500LuiExtended Version 6.5.2|r",
+    "|cFFA500LuiExtended Version 6.5.3|r",
     "",
     "|cFFFF00Combat Info:|r",
     "[*] Updated API",
@@ -25,7 +25,7 @@ function LUIE.ChangelogScreen()
     -- concat messages into one string
     local changelog = table.concat(changelogMessages, "\n")
     -- If text start with '*' replace it with bullet texture
-    changelog = string.gsub(changelog, "%[%*%]", "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t")
+    changelog = zo_strgsub(changelog, "%[%*%]", "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t")
     -- Set the window title
     LUIE_Changelog_Title:SetText(zo_strformat("<<1>> Changelog", LUIE.name))
     -- Set the about string
