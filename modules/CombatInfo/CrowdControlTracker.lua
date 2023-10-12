@@ -893,7 +893,7 @@ end
 function CrowdControlTracker:OnCombatTipRemoved(eventCode, combatTipID, result)
     if not (combatTipID == 19) then return end
     isRooted = false
-    self:RemoveCC(7, rootEndTime)
+    self:RemoveCC(6, rootEndTime)
 end
 
 function CrowdControlTracker:GetDefaultIcon(ccType)
