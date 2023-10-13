@@ -221,6 +221,8 @@ CombatInfo.Defaults = {
         aoeNPCBoss = true,
         aoeNPCElite = true,
         aoeNPCNormal = true,
+        showRoot = true,
+        showSnare = true,
 
         aoePlayerUltimateSoundToggle = true,
         aoePlayerNormalSoundToggle = true,
@@ -258,6 +260,8 @@ CombatInfo.Defaults = {
             [ACTION_RESULT_BLOCKED] = { 1, 1, 1, 1 },
             [ACTION_RESULT_BLOCKED_DAMAGE] = { 1, 1, 1, 1 },
             [ACTION_RESULT_AREA_EFFECT] = { 1, 242 / 255, 32 / 255, 1 },
+            [ACTION_RESULT_ROOTED] = { 1, 150 / 255, 32 / 255, 1 },
+            [ACTION_RESULT_SNARED] = { 1, 242 / 255, 32 / 255, 1 },
             unbreakable = { 224 / 255, 224 / 255, 1, 1 },
         },
     },
