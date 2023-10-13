@@ -22,9 +22,9 @@ function SlashCommands.SlashGuildInvite(option)
 
     -- Parse input
     local options = {}
-    local searchResult = { string.match(option,"^(%S*)%s*(.-)$") }
-    for i,v in pairs(searchResult) do
-        if (v ~= nil and v ~= "") then
+    local searchResult = { zo_strmatch(option, "^(%S*)%s*(.-)$") }
+    for i, v in pairs(searchResult) do
+        if v ~= nil and v ~= "" then
             options[i] = v
         end
     end
@@ -57,7 +57,7 @@ function SlashCommands.SlashGuildInvite(option)
         if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV)))
         end
-            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
 
@@ -113,9 +113,9 @@ function SlashCommands.SlashGuildKick(option)
 
     -- Parse input
     local options = {}
-    local searchResult = { string.match(option,"^(%S*)%s*(.-)$") }
-    for i,v in pairs(searchResult) do
-        if (v ~= nil and v ~= "") then
+    local searchResult = { zo_strmatch(option, "^(%S*)%s*(.-)$") }
+    for i, v in pairs(searchResult) do
+        if v ~= nil and v ~= "" then
             options[i] = v
         end
     end
@@ -166,17 +166,22 @@ function SlashCommands.SlashGuildKick(option)
     local guildNumbers = GetNumGuildMembers(guildnumber)
     local compareChar = string.lower(name)
 
-    local g_guildNamesTable = { }
+    local g_guildNamesTable = {}
 
-    for i = 1,guildNumbers do
+    for i = 1, guildNumbers do
         local displayName = GetGuildMemberInfo(guildnumber, i)
         local _, characterName = GetGuildMemberCharacterInfo(guildnumber, i)
         local compareDisplay = string.lower(displayName)
         local compareCharacter = string.lower(characterName)
 
-        compareCharacter = string.gsub(compareCharacter,"%^%a+","")
+        compareCharacter = zo_strgsub(compareCharacter, "%^%a+", "")
 
-        g_guildNamesTable[i] = { displayName=displayName, characterName=characterName, compareDisplay=compareDisplay, compareCharacter=compareCharacter}
+        g_guildNamesTable[i] = {
+            displayName = displayName,
+            characterName = characterName,
+            compareDisplay = compareDisplay,
+            compareCharacter = compareCharacter,
+        }
         --d(compareDisplay .. compareCharacter)
         --d("comparing vs... " .. compareChar)
     end

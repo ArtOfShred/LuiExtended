@@ -5,126 +5,130 @@
 
 -- For debug function - convert result reason codes to string value
 LUIE.Data.DebugResults = {
-    [2080]          = "ON CD",
-    [2120]          = "ABSORB",
-    [2040]          = "BAD TARGET",
-    [3180]          = "STANDARD ALREADY EXISTS",
-    [3160]          = "STANDARD LIMIT",
-    [3200]          = "STANDARD NO PERMISSION",
-    [3170]          = "STANDARD MISMATCH",
-    [3190]          = "STANDARD TOO CLOSE",
-    [3210]          = "STANDARDS DISABLED",
-    [2210]          = "CHANNEL",
-    [2200]          = "BEGIN",
-    [2360]          = "BLADETURN",
-    [2151]          = "BLOCK DMG",
-    [2150]          = "BLOCK",
-    [2030]          = "BUSY",
-    [2290]          = "CAN'T USE",
-    [2330]          = "OUT OF LOS",
-    [3410]          = "CAN'T SWAP",
-    [2060]          = "CASTER DEAD",
-    [2]             = "DMG!",
-    [32]            = "HEAL!",
-    [2460]          = "SHIELD",
-    [1]             = "DMG",
-    [2190]          = "DEFEND",
-    [2262]          = "DIED XP",
-    [2260]          = "DIED",
-    [2430]          = "DISARMED",
-    [2340]          = "DISORIENT",
-    [2140]          = "DODGE",
-    [1073741826]    = "DOT!",
-    [1073741825]    = "DOT",
-    [2250]          = "FADE",
-    [2245]          = "GAIN DUR",
-    [2240]          = "GAIN",
-    [2310]          = "FAILED REQ",
-    [3100]          = "FAILED SEIGE REQ",
-    [2110]          = "FAILED",
-    [2420]          = "FALL DMG",
-    [2500]          = "FALLING",
-    [2320]          = "FEAR",
-    [3230]          = "CAMP EXISTS",
-    [3240]          = "CAMP NO PERMISSION",
-    [3220]          = "CAMP TABARD MISMATCH",
-    [3080]          = "GRAVEYARD DISALLOWED IN INSTANCE",
-    [3030]          = "GRAVEYARD TOO CLOSE",
-    [16]            = "HEAL",
-    [1073741856]    = "HOT!",
-    [1073741840]    = "HOT",
-    [2000]          = "IMMUNE",
-    [2510]          = "IN AIR",
-    [2300]          = "IN COMBAT",
-    [2610]          = "IN ENEMY KEEP",
-    [2613]          = "IN ENEMY OUTPOST",
-    [2612]          = "IN ENEMY RESOURCE",
-    [2611]          = "IN ENEMY TOWN",
-    [3440]          = "IN HIDEYHOLE",
-    [2090]          = "OUT OF RESOURCE",
-    [2410]          = "INTERCEPT",
-    [2230]          = "INTERRUPT",
-    [2810]          = "INVALID FIXTURE",
-    [3420]          = "INVALID JUSTICE TARGET",
-    [2800]          = "INVALID TERRAIN",
-    [-1]            = "INVALID",
-    [3130]          = "KILLED BY SUBZONE",
-    [2265]          = "KB",
-    [2475]          = "KNOCKBACK",
-    [2400]          = "LEVITATE",
-    [2392]          = "LINKED CAST",
-    [3140]          = "MERC LIMIT",
-    [2180]          = "MISS",
-    [3040]          = "NO EMPTY SOUL GEM",
-    [3060]          = "NO FILLED SOUL GEM",
-    [3150]          = "MOBILE GRAVEYARD LIMIT",
-    [3070]          = "MOUNTED",
-    [2630]          = "MUST BE IN OWN KEEP",
-    [2700]          = "NO LOCATION",
-    [2910]          = "NO RAM TARGET WITHIN RANGE",
-    [3400]          = "NO WEP SWAP",
-    [3050]          = "NOT ENOUGH SPACE SOUL GEM",
-    [3430]          = "NOT ENOUGH SPACE",
-    [3090]          = "NOT ENOUG SPACE SIEGE",
-    [2640]          = "TOO CLOSE",
-    [2440]          = "OFF BALANCE",
-    [2390]          = "PACIFY",
-    [2130]          = "PARRY",
-    [2170]          = "PART RESIST",
-    [64]            = "POWER (-)",
-    [128]           = "POWER (+)",
-    [4]             = "PRECISE DAMAGE",
-    [2350]          = "QUEUED",
-    [3120]          = "ALL TARGETS DESTROYED",
-    [3110]          = "ALL TARGETS OCCUPIED",
-    [2520]          = "RECALL",
-    [2111]          = "REFLECT",
-    [3020]          = "REINCARNATE",
-    [2160]          = "RESIST",
-    [2490]          = "RESURRECT",
-    [2480]          = "ROOT",
-    [2620]          = "SIEGE LIMIT",
-    [2605]          = "SIEGE NOT ALLOWED IN ZONE",
-    [2600]          = "SIEGE TOO CLOSE",
-    [2010]          = "SILENCE",
-    [2025]          = "SNARE",
-    [3000]          = "SPRINT",
-    [2470]          = "STAGGER",
-    [2020]          = "STUN",
-    [3010]          = "SWIMMING",
-    [2050]          = "TARGET DEAD",
-    [2070]          = "TARGET NOT IN VIEW",
-    [2391]          = "TARGET NOT PVP FLAGGED",
-    [2100]          = "TARGET OUT OF RANGE",
-    [2370]          = "TARGET TOO CLOSE",
-    [2900]          = "UNEVEN TERRAIN",
-    [2450]          = "WEAPON SWAP",
-    [8]             = "WRECKING DAMAGE",
-    [2380]          = "WRONG WEAPON",
-    [3450]          = "CANT SWAP HOTBAR IS OVERRIDDEN",
-    [3460]          = "SOUL GEM RESURRECTION ACCEPTED",
-    [3470]          = "HEAL ABSORBED",
-    [3480]          = "DIED COMPANION XP",
+    [-1] = "INVALID",
+    [1] = "DMG",
+    [2] = "DMG!",
+    [4] = "PRECISE DAMAGE",
+    [8] = "WRECKING DAMAGE",
+    [16] = "HEAL",
+    [32] = "HEAL!",
+    [64] = "POWER (-)",
+    [128] = "POWER (+)",
+    [2000] = "IMMUNE",
+    [2010] = "SILENCE",
+    [2020] = "STUN",
+    [2025] = "SNARE",
+    [2030] = "BUSY",
+    [2040] = "BAD TARGET",
+    [2050] = "TARGET DEAD",
+    [2060] = "CASTER DEAD",
+    [2070] = "TARGET NOT IN VIEW",
+    [2080] = "ON CD",
+    [2090] = "OUT OF RESOURCE",
+    [2100] = "TARGET OUT OF RANGE",
+    [2110] = "FAILED",
+    [2111] = "REFLECT",
+    [2120] = "ABSORB",
+    [2130] = "PARRY",
+    [2140] = "DODGE",
+    [2150] = "BLOCK",
+    [2151] = "BLOCK DMG",
+    [2160] = "RESIST",
+    [2170] = "PART RESIST",
+    [2180] = "MISS",
+    [2190] = "DEFEND",
+    [2200] = "BEGIN",
+    [2210] = "CHANNEL",
+    [2230] = "INTERRUPT",
+    [2240] = "GAIN",
+    [2245] = "GAIN DUR",
+    [2250] = "FADE",
+    [2260] = "DIED",
+    [2262] = "DIED XP",
+    [2265] = "KB",
+    [2290] = "CAN'T USE",
+    [2300] = "IN COMBAT",
+    [2310] = "FAILED REQ",
+    [2320] = "FEAR",
+    [2330] = "OUT OF LOS",
+    [2340] = "DISORIENT",
+    [2350] = "QUEUED",
+    [2360] = "BLADETURN",
+    [2370] = "TARGET TOO CLOSE",
+    [2380] = "WRONG WEAPON",
+    [2390] = "PACIFY",
+    [2391] = "TARGET NOT PVP FLAGGED",
+    [2392] = "LINKED CAST",
+    [2400] = "LEVITATE",
+    [2410] = "INTERCEPT",
+    [2420] = "FALL DMG",
+    [2430] = "DISARMED",
+    [2440] = "OFF BALANCE",
+    [2450] = "WEAPON SWAP",
+    [2460] = "SHIELD",
+    [2470] = "STAGGER",
+    [2475] = "KNOCKBACK",
+    [2480] = "ROOT",
+    [2490] = "RESURRECT",
+    [2500] = "FALLING",
+    [2510] = "IN AIR",
+    [2520] = "RECALL",
+    [2600] = "SIEGE TOO CLOSE",
+    [2605] = "SIEGE NOT ALLOWED IN ZONE",
+    [2610] = "IN ENEMY KEEP",
+    [2611] = "IN ENEMY TOWN",
+    [2612] = "IN ENEMY RESOURCE",
+    [2613] = "IN ENEMY OUTPOST",
+    [2620] = "SIEGE LIMIT",
+    [2630] = "MUST BE IN OWN KEEP",
+    [2640] = "TOO CLOSE",
+    [2700] = "NO LOCATION",
+    [2800] = "INVALID TERRAIN",
+    [2810] = "INVALID FIXTURE",
+    [2900] = "UNEVEN TERRAIN",
+    [2910] = "NO RAM TARGET WITHIN RANGE",
+    [3000] = "SPRINT",
+    [3010] = "SWIMMING",
+    [3020] = "REINCARNATE",
+    [3030] = "GRAVEYARD TOO CLOSE",
+    [3040] = "NO EMPTY SOUL GEM",
+    [3050] = "NOT ENOUGH SPACE SOUL GEM",
+    [3060] = "NO FILLED SOUL GEM",
+    [3070] = "MOUNTED",
+    [3080] = "GRAVEYARD DISALLOWED IN INSTANCE",
+    [3090] = "NOT ENOUG SPACE SIEGE",
+    [3100] = "FAILED SEIGE REQ",
+    [3110] = "ALL TARGETS OCCUPIED",
+    [3120] = "ALL TARGETS DESTROYED",
+    [3130] = "KILLED BY SUBZONE",
+    [3140] = "MERC LIMIT",
+    [3150] = "MOBILE GRAVEYARD LIMIT",
+    [3160] = "STANDARD LIMIT",
+    [3170] = "STANDARD MISMATCH",
+    [3180] = "STANDARD ALREADY EXISTS",
+    [3190] = "STANDARD TOO CLOSE",
+    [3200] = "STANDARD NO PERMISSION",
+    [3210] = "STANDARDS DISABLED",
+    [3220] = "CAMP TABARD MISMATCH",
+    [3230] = "CAMP EXISTS",
+    [3240] = "CAMP NO PERMISSION",
+    [3400] = "NO WEP SWAP",
+    [3410] = "CAN'T SWAP",
+    [3420] = "INVALID JUSTICE TARGET",
+    [3430] = "NOT ENOUGH SPACE",
+    [3440] = "IN HIDEYHOLE",
+    [3450] = "CANT SWAP HOTBAR IS OVERRIDDEN",
+    [3460] = "SOUL GEM RESURRECTION ACCEPTED",
+    [3461] = "KILLED BY DAEDRIC WEAPON",
+    [3470] = "HEAL ABSORBED",
+    [3480] = "DIED COMPANION XP",
+    [3490] = "SELF PLAYING TRIBUTE",
+    [3500] = "TARGET PLAYING TRIBUTE",
+    [3510] = "CHARMED",
+    [1073741825] = "DOT",
+    [1073741826] = "DOT!",
+    [1073741840] = "HOT",
+    [1073741856] = "HOT!",
 }
 
 -- List of all abilityId's that have been processed so far
@@ -4988,9 +4992,9 @@ LUIE.DebugAuras = {
     [69118] = true, -- Radiant Glory Heal (Radiant Glory)
     [63956] = true, -- Radiant Glory (Radiant Glory)
 
-    [63046] =  true, -- Radiant Oppression (Radiant Oppression)
-    [104549] =  true, -- Radiant Oppression (Radiant Oppression)
-    [63961] =  true, -- Radiant Oppression (Radiant Oppression)
+    [63046] = true, -- Radiant Oppression (Radiant Oppression)
+    [104549] = true, -- Radiant Oppression (Radiant Oppression)
+    [63961] = true, -- Radiant Oppression (Radiant Oppression)
 
     [108822] = true, -- Synergy Damage Bonus (Nova - Supernova Synergy)
     [48939] = true, -- Supernova (Nova - Supernova Synergy)
@@ -6073,8 +6077,8 @@ LUIE.DebugAuras = {
     -- ONE HAND AND SHIELD ACTIVES ------
     -------------------------------------
 
-    [28306] =  true, -- Puncture (Puncture)
-    [28307] =  true, -- Major Breach (Puncture)
+    [28306] = true, -- Puncture (Puncture)
+    [28307] = true, -- Major Breach (Puncture)
 
     [38256] = true, -- Ransack (Ransack)
     [62474] = true, -- Major Breach (Ransack)
@@ -6247,7 +6251,6 @@ LUIE.DebugAuras = {
     [126658] = true, -- Flying Blade (Flying Blade)
     [126655] = true, -- Stagger (Flying Blade)
     [126654] = true, -- Flying Blade (Flying Blade)
-
 
     [83600] = true, -- Lacerate (Lacerate)
     [85156] = true, -- Lacerate (Lacerate)
@@ -6946,7 +6949,6 @@ LUIE.DebugAuras = {
     [135223] = true, -- Unnatural Movement (Rank 2)
     [135226] = true, -- Unnatural Movement (Rank 2)
     [135225] = true, -- Unnatural Movement (Rank 2)
-
 
     -------------------------------------
     -- VAMPIRE ACTIVES ------------------
@@ -7742,11 +7744,11 @@ LUIE.DebugAuras = {
     [80107] = true, -- Shadow Silk (Shadow Silk)
     [41991] = true, -- Shadow Silk (Shadow Silk)
 
-    [108792] = true,  -- Synergy Damage Bonus (Tangling Webs - Arachnophobia Synergy)
-    [42016] = true,  -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
-    [42019] = true,  -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
-    [42023] = true,  -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
-    [42020] = true,  -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
+    [108792] = true, -- Synergy Damage Bonus (Tangling Webs - Arachnophobia Synergy)
+    [42016] = true, -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
+    [42019] = true, -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
+    [42023] = true, -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
+    [42020] = true, -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
 
     [42012] = true, -- Tangling Webs (Tangling Webs)
     [80127] = true, -- Tangling Webs (Tangling Webs)
@@ -8157,7 +8159,6 @@ LUIE.DebugAuras = {
     [36155] = true, -- Red Diamond (Rank 1)
     [45291] = true, -- Red Diamond (Rank 2)
     [45293] = true, -- Red Diamond (Rank 3)
-
 
     -------------------------------------
     -- CRAFTING  ------------------------
@@ -11233,12 +11234,12 @@ LUIE.DebugAuras = {
     -------------------------------------
 
     [55831] = true, -- Found Recommended Ore (Blacksmith Certification)
-	[56061]	= true, -- Found Recommended Jute (Clothier Certification)
-	[55965]	= true, -- Found Recommended Maple (Woodworker Certification)
-	[56266]	= true, -- Found Recommended Solvent and (Alchemist Certification)
-	[56256]	= true, -- Found Recommended Runestones (Enchanter Certification)
-	[55983]	= true, -- Found Recommended Ingredients (Provisioner Certification)
-	[103376] = true, -- Found Recommended Dust (Jewelry Crafting Certification)
+    [56061] = true, -- Found Recommended Jute (Clothier Certification)
+    [55965] = true, -- Found Recommended Maple (Woodworker Certification)
+    [56266] = true, -- Found Recommended Solvent and (Alchemist Certification)
+    [56256] = true, -- Found Recommended Runestones (Enchanter Certification)
+    [55983] = true, -- Found Recommended Ingredients (Provisioner Certification)
+    [103376] = true, -- Found Recommended Dust (Jewelry Crafting Certification)
 
     -------------------------------------
     -- MAIN QUEST -----------------------
@@ -16616,7 +16617,6 @@ LUIE.DebugAuras = {
     [25138] = true, -- VF_Boss1_StaffHold (Quintus Verres)
     [29452] = true, -- Dummy (Quintus Verres)
 
-    [25142] = true, -- Burning Groud (Quintus Verres)
     [32081] = true, -- Nova (Quintus Verres)
     [25142] = true, -- Burning Groud (Quintus Verres)
     [25420] = true, -- Burning Groud (Quintus Verres)
@@ -16624,7 +16624,6 @@ LUIE.DebugAuras = {
     [25151] = true, -- Summon Wraith (Quintus Verres)
     [25149] = true, -- Firebolt (Quintus Verres)
     [25167] = true, -- Stagger (Quintus Verres)
-
 
     [25299] = true, -- Dummy (Quintus Verres)
     [25189] = true, -- VF_Boss1_Transferbeam (Quintus Verres)
@@ -16635,7 +16634,6 @@ LUIE.DebugAuras = {
     [46313] = true, -- Fire Backlash (Quintus Verres)
     [46314] = true, -- CON_Knockback&Knockdown (Quintus Verres)
     [29456] = true, -- Death (Quintus Verres)
-
 
     [25218] = true, -- Double Swipe (Monstrous Gargoyle)
     [25219] = true, -- Double Swipe (Monstrous Gargoyle)
@@ -17275,5 +17273,4 @@ LUIE.DebugAuras = {
     [120977] = true, -- COWERJusticeDragon2
     [120980] = true, -- JusticeDragon-Flee
     [120981] = true, -- JusticeDragon-Flee
-
 }

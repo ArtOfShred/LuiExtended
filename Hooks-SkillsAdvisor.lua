@@ -6,7 +6,6 @@
 -- Just a copy of esoui/ingame/skillsadvisor/gamepad/skillsadvisor_suggestions_gamepad.lua, this is the easiest way to override for custom ability icons.
 
 function LUIE.InitializeHooksSkillAdvisor()
-
     --------------
     --Initialize--
     --------------
@@ -22,21 +21,27 @@ function LUIE.InitializeHooksSkillAdvisor()
 
     function SkillsAdvisorSuggestions_Gamepad:Initialize(control)
         ZO_SortFilterList_Gamepad.Initialize(self, control)
-        ZO_ScrollList_AddDataType(self.list, SKILLS_ADVISOR_SUGGESTIONS_DATA, "ZO_SkillsAdvisorSuggestion_Gamepad_SkillRow", 60, function(...) self:GamepadSingleLineAbilityEntryTemplateSetup(...) end)
-        ZO_ScrollList_AddDataType(self.list, SKILLS_ADVISOR_SUGGESTIONS_HEADER_DATA, "ZO_SkillsAdvisorSuggestions_Gamepad_MenuEntryHeader", 50, function(...) self:SkillsAdvisorSuggestionsTextDisplayTemplateSetup(...) end)
-        ZO_ScrollList_AddDataType(self.list, SKILLS_ADVISOR_SUGGESTIONS_TEXT, "ZO_SkillsAdvisorSuggestions_Gamepad_MenuEntryText", 100, function(...) self:SkillsAdvisorSuggestionsTextDisplayTemplateSetup(...) end)
+        ZO_ScrollList_AddDataType(self.list, SKILLS_ADVISOR_SUGGESTIONS_DATA, "ZO_SkillsAdvisorSuggestion_Gamepad_SkillRow", 60, function(...)
+            self:GamepadSingleLineAbilityEntryTemplateSetup(...)
+        end)
+        ZO_ScrollList_AddDataType(self.list, SKILLS_ADVISOR_SUGGESTIONS_HEADER_DATA, "ZO_SkillsAdvisorSuggestions_Gamepad_MenuEntryHeader", 50, function(...)
+            self:SkillsAdvisorSuggestionsTextDisplayTemplateSetup(...)
+        end)
+        ZO_ScrollList_AddDataType(self.list, SKILLS_ADVISOR_SUGGESTIONS_TEXT, "ZO_SkillsAdvisorSuggestions_Gamepad_MenuEntryText", 100, function(...)
+            self:SkillsAdvisorSuggestionsTextDisplayTemplateSetup(...)
+        end)
         ZO_ScrollList_SetTypeSelectable(self.list, SKILLS_ADVISOR_SUGGESTIONS_HEADER_DATA, false)
         ZO_ScrollList_SetTypeCategoryHeader(self.list, SKILLS_ADVISOR_SUGGESTIONS_HEADER_DATA, true)
         ZO_ScrollList_SetTypeSelectable(self.list, SKILLS_ADVISOR_SUGGESTIONS_TEXT, false)
 
         SKILLS_ADVISOR_SUGGESTIONS_GAMEPAD_FRAGMENT = ZO_FadeSceneFragment:New(control)
         SKILLS_ADVISOR_SUGGESTIONS_GAMEPAD_FRAGMENT:RegisterCallback("StateChange", function(oldState, newState)
-                                                                        if newState == SCENE_FRAGMENT_SHOWING then
-                                                                            self:OnShowing()
-                                                                        elseif newState == SCENE_FRAGMENT_HIDDEN then
-                                                                            self:OnHidden()
-                                                                        end
-                                                                    end)
+            if newState == SCENE_FRAGMENT_SHOWING then
+                self:OnShowing()
+            elseif newState == SCENE_FRAGMENT_HIDDEN then
+                self:OnHidden()
+            end
+        end)
 
         self:InitializeKeybinds()
     end
@@ -81,15 +86,14 @@ function LUIE.InitializeHooksSkillAdvisor()
     end
 
     function SkillsAdvisorSuggestions_Gamepad:InitializeKeybinds()
-        self.keybindStripDescriptor =
-        {
+        self.keybindStripDescriptor = {
             alignment = KEYBIND_STRIP_ALIGN_LEFT,
             {
                 name = GetString(SI_GAMEPAD_SELECT_OPTION),
                 keybind = "UI_SHORTCUT_PRIMARY",
-                callback =  function()
+                callback = function()
                     ZO_SKILLS_ADVISOR_SINGLETON:OnRequestSelectSkillLine()
-                end
+                end,
             },
             {
                 --Ethereal binds show no text, the name field is used to help identify the keybind when debugging. This text does not have to be localized.
@@ -101,7 +105,7 @@ function LUIE.InitializeHooksSkillAdvisor()
                         ZO_ScrollList_SelectFirstIndexInCategory(self.list, ZO_SCROLL_SELECT_CATEGORY_PREVIOUS)
                         PlaySound(ZO_PARAMETRIC_SCROLL_MOVEMENT_SOUNDS[ZO_PARAMETRIC_MOVEMENT_TYPES.JUMP_PREVIOUS])
                     end
-                end
+                end,
             },
             {
                 --Ethereal binds show no text, the name field is used to help identify the keybind when debugging. This text does not have to be localized.
@@ -113,7 +117,7 @@ function LUIE.InitializeHooksSkillAdvisor()
                         ZO_ScrollList_SelectFirstIndexInCategory(self.list, ZO_SCROLL_SELECT_CATEGORY_NEXT)
                         PlaySound(ZO_PARAMETRIC_SCROLL_MOVEMENT_SOUNDS[ZO_PARAMETRIC_MOVEMENT_TYPES.JUMP_NEXT])
                     end
-                end
+                end,
             },
         }
 
@@ -126,18 +130,19 @@ function LUIE.InitializeHooksSkillAdvisor()
         local keybindCount = #self.keybindStripDescriptor
         ZO_Gamepad_AddBackNavigationKeybindDescriptors(self.keybindStripDescriptor, GAME_NAVIGATION_TYPE_BUTTON, Back)
 
-        self.keybindStripRightDescriptor =
-        {
+        self.keybindStripRightDescriptor = {
             alignment = KEYBIND_STRIP_ALIGN_RIGHT,
             {
                 name = GetString(SI_SKILLS_ADVISOR_GAMEPAD_OPEN_ADVISOR_SETTINGS),
                 keybind = "UI_SHORTCUT_LEFT_STICK",
                 sound = SOUNDS.SKILLS_ADVISOR_SELECT,
-                visible =  function() return true end,
+                visible = function()
+                    return true
+                end,
                 callback = function()
                     SCENE_MANAGER:Push("gamepad_skills_advisor_build_selection_root")
                 end,
-            }
+            },
         }
     end
 
@@ -257,5 +262,4 @@ function LUIE.InitializeHooksSkillAdvisor()
     function ZO_SkillsAdvisorSuggestions_Gamepad_OnInitialized(control)
         ZO_GAMEPAD_SKILLS_ADVISOR_SUGGESTIONS_WINDOW = SkillsAdvisorSuggestions_Gamepad:New(control)
     end
-
 end

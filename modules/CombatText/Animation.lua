@@ -3,13 +3,13 @@
     License: The MIT License (MIT)
 --]]
 
-LUIE.CombatTextAnimation = ZO_Object:Subclass()
+LUIE.CombatTextAnimation = ZO_InitializingObject:Subclass()
 local CombatTextAnimation = LUIE.CombatTextAnimation
 
 local animationManager = ANIMATION_MANAGER
 
 function CombatTextAnimation:New()
-    local obj = ZO_Object:New(self)
+    local obj = setmetatable({}, self)
     obj.timeline = animationManager:CreateTimeline()
     obj.timeline:SetPlaybackType(0, 0)
     obj.namedSteps = {}
@@ -45,7 +45,7 @@ function CombatTextAnimation:Alpha(stepName, startAlpha, endAlpha, duration, del
     step:SetAlphaValues(startAlpha, endAlpha)
     step:SetDuration(duration)
     step:SetEasingFunction(easingFunc or ZO_LinearEase)
-    if (stepName ~= nil and stepName ~= '') then
+    if stepName ~= nil and stepName ~= "" then
         self.namedSteps[stepName] = step
     end
     return step
@@ -56,7 +56,7 @@ function CombatTextAnimation:Scale(stepName, startScale, endScale, duration, del
     step:SetScaleValues(startScale, endScale)
     step:SetDuration(duration)
     step:SetEasingFunction(easingFunc or ZO_LinearEase)
-    if (stepName ~= nil and stepName ~= '') then
+    if stepName ~= nil and stepName ~= "" then
         self.namedSteps[stepName] = step
     end
     return step
@@ -67,7 +67,7 @@ function CombatTextAnimation:Move(stepName, offsetX, offsetY, duration, delay, e
     step:SetTranslateDeltas(offsetX, offsetY)
     step:SetDuration(duration)
     step:SetEasingFunction(easingFunc or ZO_LinearEase)
-    if (stepName ~= nil and stepName ~= '') then
+    if stepName ~= nil and stepName ~= "" then
         self.namedSteps[stepName] = step
     end
     return step
@@ -86,7 +86,7 @@ function CombatTextAnimation:GetStep(i)
 end
 
 function CombatTextAnimation:GetStepByName(stepName)
-    if (stepName ~= nil and stepName ~= '') then
+    if stepName ~= nil and stepName ~= "" then
         return self.namedSteps[stepName]
     end
 end

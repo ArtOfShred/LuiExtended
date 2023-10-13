@@ -12,7 +12,9 @@ local resourceTypes = LUIE.Data.CombatTextConstants.resourceType
 
 function CombatTextResourceEventViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
-    obj:RegisterCallback(eventType.RESOURCE, function(...) self:OnEvent(...) end)
+    obj:RegisterCallback(eventType.RESOURCE, function(...)
+        self:OnEvent(...)
+    end)
     self.locationOffset = 0 -- Simple way to avoid overlapping. When number of active notes is back to 0, the offset is also reset
     self.activeResources = 0
     return obj
@@ -26,27 +28,27 @@ function CombatTextResourceEventViewer:OnEvent(resourceType, value)
 
     local size, color, text
     --Low Health
-    if (resourceType == resourceTypes.LOW_HEALTH) then
+    if resourceType == resourceTypes.LOW_HEALTH then
         color = Settings.colors.lowHealth
         size = Settings.fontSizes.resource
         text = self:FormatString(Settings.formats.resourceHealth, { value = value, text = GetString(SI_LUIE_LAM_CT_SHARED_LOW_HEALTH) })
     --Low Magicka
-    elseif (resourceType == resourceTypes.LOW_MAGICKA) then
+    elseif resourceType == resourceTypes.LOW_MAGICKA then
         color = Settings.colors.lowMagicka
         size = Settings.fontSizes.resource
         text = self:FormatString(Settings.formats.resourceMagicka, { value = value, text = GetString(SI_LUIE_LAM_CT_SHARED_LOW_MAGICKA) })
     --Low Stamina
-    elseif (resourceType == resourceTypes.LOW_STAMINA) then
+    elseif resourceType == resourceTypes.LOW_STAMINA then
         color = Settings.colors.lowStamina
         size = Settings.fontSizes.resource
         text = self:FormatString(Settings.formats.resourceStamina, { value = value, text = GetString(SI_LUIE_LAM_CT_SHARED_LOW_STAMINA) })
     --Ultimate Ready
-    elseif (resourceType == resourceTypes.ULTIMATE) then
+    elseif resourceType == resourceTypes.ULTIMATE then
         color = Settings.colors.ultimateReady
         size = Settings.fontSizes.readylabel
         text = self:FormatString(Settings.formats.ultimateReady, { text = GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY) })
     -- Potion Ready
-    elseif (resourceType == resourceTypes.POTION) then
+    elseif resourceType == resourceTypes.POTION then
         color = Settings.colors.potionReady
         size = Settings.fontSizes.readylabel
         text = self:FormatString(Settings.formats.potionReady, { text = GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY) })
@@ -65,7 +67,7 @@ function CombatTextResourceEventViewer:OnEvent(resourceType, value)
 
     --Get animation
     local animationPoolType = poolTypes.ANIMATION_RESOURCE
-    if (resourceType == resourceTypes.LOW_HEALTH or resourceType == resourceTypes.LOW_MAGICKA or resourceType == resourceTypes.LOW_STAMINA) then
+    if resourceType == resourceTypes.LOW_HEALTH or resourceType == resourceTypes.LOW_MAGICKA or resourceType == resourceTypes.LOW_STAMINA then
         animationPoolType = poolTypes.ANIMATION_RESOURCE
     end
     local animation, animationPoolKey = self.poolManager:GetPoolObject(animationPoolType)
@@ -75,7 +77,7 @@ function CombatTextResourceEventViewer:OnEvent(resourceType, value)
     --Warning sound
     if Settings.toggles.warningSound then
         if resourceType == resourceTypes.LOW_HEALTH or resourceType == resourceTypes.LOW_STAMINA or resourceType == resourceTypes.LOW_MAGICKA then
-            PlaySound('Quest_StepFailed')
+            PlaySound("Quest_StepFailed")
         end
     end
 
@@ -84,7 +86,7 @@ function CombatTextResourceEventViewer:OnEvent(resourceType, value)
         self.poolManager:ReleasePoolObject(poolTypes.CONTROL, controlPoolKey)
         self.poolManager:ReleasePoolObject(animationPoolType, animationPoolKey)
         self.activeResources = self.activeResources - 1
-        if (self.activeResources == 0) then
+        if self.activeResources == 0 then
             self.locationOffset = 0
         end
     end, animation:GetDuration())

@@ -2,7 +2,7 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
-
+local LUIE = LUIE
 -- StatPanel namespace
 LUIE.CombatInfo.StatPanel = {}
 local StatPanel = LUIE.CombatInfo.StatPanel
@@ -19,7 +19,8 @@ function StatPanel.ToggleStatPanel(option)
     LUIE_StatPanel:SetAnchor(BOTTOM, GuiRoot, CENTER )
     LUIE_StatPanel:SetHidden(option)
 end
-]]--
+]]
+--
 
 local statType = {
     weaponDamage = STAT_POWER,
@@ -104,9 +105,9 @@ function StatPanel.Recovery(resourceType)
     return recovery
 end
 
-EVENT_MANAGER:RegisterForUpdate(moduleName .. 'Damage', 450 , StatPanel.Damage)
-EVENT_MANAGER:RegisterForUpdate(moduleName .. 'CriticalDamage', 450 , StatPanel.CriticalDamage)
-EVENT_MANAGER:RegisterForUpdate(moduleName .. 'Penetration', 450 , StatPanel.Penetration)
-EVENT_MANAGER:RegisterForUpdate(moduleName .. 'SpellResistance', 450 , StatPanel.SpellResistance)
-EVENT_MANAGER:RegisterForUpdate(moduleName .. 'PhysicalResistance', 450 , StatPanel.PhysicalResistance)
-EVENT_MANAGER:RegisterForUpdate(moduleName .. 'CriticalResistance', 450 , StatPanel.CriticalResistance)
+EVENT_MANAGER:RegisterForUpdate(moduleName .. "Damage", 450, StatPanel.Damage)
+EVENT_MANAGER:RegisterForUpdate(moduleName .. "CriticalDamage", 450, StatPanel.CriticalDamage)
+EVENT_MANAGER:RegisterForUpdate(moduleName .. "Penetration", 450, StatPanel.Penetration)
+EVENT_MANAGER:RegisterForUpdate(moduleName .. "SpellResistance", 450, StatPanel.SpellResistance)
+EVENT_MANAGER:RegisterForUpdate(moduleName .. "PhysicalResistance", 450, StatPanel.PhysicalResistance)
+EVENT_MANAGER:RegisterForUpdate(moduleName .. "CriticalResistance", 450, StatPanel.CriticalResistance)

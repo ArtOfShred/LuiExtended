@@ -77,7 +77,6 @@ CrowdControl.aoePlayerUltimate = {
 
     -- Volendrung
     [116669] = 1, -- Ebony Cyclone (Ruinous Cyclone)
-
 }
 
 CrowdControl.aoePlayerNormal = {
@@ -125,26 +124,26 @@ CrowdControl.aoePlayerNormal = {
     --[118011] = 0, -- Mystic Siphon (Mystic Siphon)
 
     -- Arcanist
-    [194844] = 0,   -- Fatecarver Snare (Exhausting Fatecarver)
-    [194842] = 1,   -- Fatecarver (Fatecarver)
-    [194843] = 1,   -- Fatecarver (Fatecarver, Area)
-    [185805] = 1,   -- Fatecarver (Fatecarver, Area)
+    [194844] = 0, -- Fatecarver Snare (Exhausting Fatecarver)
+    [194842] = 1, -- Fatecarver (Fatecarver)
+    [194843] = 1, -- Fatecarver (Fatecarver, Area)
+    [185805] = 1, -- Fatecarver (Fatecarver, Area)
     [20185805] = 1, -- Fatecarver (Fatecarver, Area)
     [30185805] = 1, -- Fatecarver (Fatecarver, Area)
     [40185805] = 1, -- Fatecarver (Fatecarver, Area)
-    [186366] = 1,   -- Pragmatic Fatecarver (Pragmatic Fatecarver)
-    [186370] = 0,   -- Pragmatic Fatecarver (Pragmatic Fatecarver, Area)
+    [186366] = 1, -- Pragmatic Fatecarver (Pragmatic Fatecarver)
+    [186370] = 0, -- Pragmatic Fatecarver (Pragmatic Fatecarver, Area)
     [20186366] = 1, -- Pragmatic Fatecarver (Pragmatic Fatecarver, Area)
     [30186366] = 1, -- Pragmatic Fatecarver (Pragmatic Fatecarver, Area)
     [40186366] = 1, -- Pragmatic Fatecarver (Pragmatic Fatecarver, Area)
-    [183122] = 1,   -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
-    [184291] = 0,   -- Exhausting Fatecarver (Exhausting Fatecarver)
+    [183122] = 1, -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
+    [184291] = 0, -- Exhausting Fatecarver (Exhausting Fatecarver)
     [20183122] = 1, -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
     [30183122] = 1, -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
     [40183122] = 1, -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
-    [183123] = 0,   -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
+    [183123] = 0, -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
     -- [185817] = 1,   -- Abyssal Impact (Abyssal Impact)
-    [186772] = 1,   -- Abyssal Impact (Abyssal Impact)
+    [186772] = 1, -- Abyssal Impact (Abyssal Impact)
     -- [20185817] = 1, -- Abyssal Impact (Abyssal Impact)
     -- [30185817] = 1, -- Abyssal Impact (Abyssal Impact)
     -- [40185817] = 1, -- Abyssal Impact (Abyssal Impact)
@@ -244,14 +243,13 @@ CrowdControl.aoePlayerSet = {
     [159387] = 1, -- Dark Convergence (Dark Convergence)
     [188886] = 0, -- Time Disruption (Snare, Judement of Akatosh)
     [189859] = 1, -- Time Disruption (AoE, Judement of Akatosh)
-    
+
     -- Siege
     [104693] = 1, -- Meatbag Catapult
     [104695] = 1, -- Scattershot Catapult
     [138556] = 1, -- Shock Lancer
     [138434] = 1, -- Fire Lancer
     [138552] = 1, -- Frost Lancer
-
 }
 
 CrowdControl.aoeTraps = {
@@ -325,7 +323,6 @@ CrowdControl.aoeTraps = {
 
     -- City of Ash II
     [56068] = 0, -- Slag Geyser (Lava Pool)
-
 }
 
 CrowdControl.aoeNPCBoss = {
@@ -478,7 +475,6 @@ CrowdControl.aoeNPCBoss = {
     [25677] = 1, -- Flame Burst (Boilbite)
     [44113] = 1, -- Barrage Function (The Guardian's Spark)
     [25213] = 1, -- Whirlwind Function (The Guardian's Strength)
-
 }
 
 CrowdControl.aoeNPCElite = {
@@ -525,7 +521,6 @@ CrowdControl.aoeNPCElite = {
     -- Maelstrom Arena
     [72159] = 1, -- Static Field (Dwarven Spider)
     [72203] = 1, -- Overcharge (Scavenger Thunder-Smith)
-
 }
 
 CrowdControl.aoeNPCNormal = {
@@ -587,9 +582,7 @@ CrowdControl.aoeNPCNormal = {
     [103862] = 1, -- Deluge (Yaghra Spewer)
     [103992] = 1, -- Luminescent Burn (Yaghra Spewer)
     [121644] = 1, -- Defiled Ground (Euraxian Necromancer)
-
 }
-
 
 -- List of effects sourced by the player that damage self that should be shown
 CrowdControl.LavaAlerts = {
@@ -659,29 +652,28 @@ CrowdControl.LavaAlerts = {
     [49052] = true, -- Pellingare Prison (Allene Pellingare)
 }
 
-CrowdControl.IgnoreList ={
+CrowdControl.IgnoreList = {
     -- PVP
     [178127] = true, -- Diseased
     [178118] = true, -- Overcharged
-    [21927] = true,  -- Minor Defile
-    [88402] = true,  -- Minor Magickasteal
+    [21927] = true, -- Minor Defile
+    [88402] = true, -- Minor Magickasteal
     [148798] = true, -- Minor Magickasteal
-    [40079] = true,  -- Radiating Regeneration
-    [57468] = true,  -- Radiating Regeneration
+    [40079] = true, -- Radiating Regeneration
+    [57468] = true, -- Radiating Regeneration
     [187942] = true, -- Minor Fortitude
     [146697] = true, -- Minor Brittle
     [187940] = true, -- Minor Courage
     [178123] = true, -- Sundered
-    [62775] = true,  -- Major Breach
-    [95136] = true,  -- Chill
-    [68368] = true,  -- Minor Maim
+    [62775] = true, -- Major Breach
+    [95136] = true, -- Chill
+    [68368] = true, -- Minor Maim
     [187941] = true, -- Minor Endurance
     [187943] = true, -- Minor Intellect
 
-    
     -- World
     [54363] = true, -- Halt (Guard)
-    [4197] = true,  -- Recovering (NPC Duel)
+    [4197] = true, -- Recovering (NPC Duel)
 
     -- Quests
     [34499] = true, -- Corruption Beam (The Blight of the Bosmer)
@@ -729,7 +721,7 @@ CrowdControl.IgnoreList ={
     -- Frostvault
     [109838] = true, -- End Stun (Icestalker) -- Frostvault
     [119461] = true, -- Teleport Failsafe (Border Chk) -- Frostvault
-    
+
     -- Dreadsail Reef
     [166794] = true, -- Raging Current -- Dreadsail Reef
     

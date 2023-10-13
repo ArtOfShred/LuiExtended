@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
-LUIE.CampaignNames = { }
+LUIE.CampaignNames = {}
 
 local SlashCommands = LUIE.SlashCommands
 
@@ -17,7 +17,6 @@ end
 
 -- Slash Command to port to primary home
 function SlashCommands.SlashHome(option)
-
     -- Check option is valid if it exists
     -- Return an error message if no input is entered.
     if option and option ~= "" then
@@ -92,7 +91,7 @@ function SlashCommands.SlashHome(option)
         local string = outside and GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG_OUT) or GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG_IN)
         printToChat(string, true)
         if LUIE.SV.TempAlertHome then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, (string))
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, string)
         end
     end
 end
@@ -132,7 +131,6 @@ function SlashCommands.SlashSetPrimaryHome()
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-
 end
 
 -- Slash Command to initiate a trade dialogue
@@ -217,7 +215,7 @@ end
 
 -- Slash Command to use collectibles based on their collectible id
 function SlashCommands.SlashCollectible(id)
-    if (id == nil or id == "" or id == 1) then
+    if id == nil or id == "" or id == 1 then
         return
     end
 
@@ -282,7 +280,7 @@ end
 function SlashCommands.SlashCompanion(option)
     if option == nil or option == "" then
         SlashCommands.SlashCollectible(SlashCommands.SV.SlashCompanionChoice)
-    elseif (companionKeys[option] ~= nil) then
+    elseif companionKeys[option] ~= nil then
         SlashCommands.SlashCollectible(companionKeys[option])
     end
 end

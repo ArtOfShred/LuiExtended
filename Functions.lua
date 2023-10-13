@@ -22,16 +22,16 @@ function LUIE.CreateTimestamp(timeStr, formatStr)
     -- Split up default timestamp
     local hours, minutes, seconds = timeStr:match("([^%:]+):([^%:]+):([^%:]+)")
     local hoursNoLead = tonumber(hours) -- Hours without leading zero
-    local hours12NoLead = (hoursNoLead - 1)%12 + 1
+    local hours12NoLead = (hoursNoLead - 1) % 12 + 1
     local hours12
-    if (hours12NoLead < 10) then
+    if hours12NoLead < 10 then
         hours12 = "0" .. hours12NoLead
     else
         hours12 = hours12NoLead
     end
     local pUp = "AM"
     local pLow = "am"
-    if (hoursNoLead >= 12) then
+    if hoursNoLead >= 12 then
         pUp = "PM"
         pLow = "pm"
     end
@@ -39,13 +39,13 @@ function LUIE.CreateTimestamp(timeStr, formatStr)
     -- Create new one
     local timestamp = formatStr
     timestamp = timestamp:gsub("HH", hours)
-    timestamp = timestamp:gsub("H",  hoursNoLead)
+    timestamp = timestamp:gsub("H", hoursNoLead)
     timestamp = timestamp:gsub("hh", hours12)
-    timestamp = timestamp:gsub("h",  hours12NoLead)
-    timestamp = timestamp:gsub("m",  minutes)
-    timestamp = timestamp:gsub("s",  seconds)
-    timestamp = timestamp:gsub("A",  pUp)
-    timestamp = timestamp:gsub("a",  pLow)
+    timestamp = timestamp:gsub("h", hours12NoLead)
+    timestamp = timestamp:gsub("m", minutes)
+    timestamp = timestamp:gsub("s", seconds)
+    timestamp = timestamp:gsub("A", pUp)
+    timestamp = timestamp:gsub("a", pLow)
 
     return timestamp
 end
@@ -63,9 +63,9 @@ end
 
 -- Hide all controls if needed
 function LUIE.ToggleVisibility(hidden)
-	for _, control in pairs( LUIE.Components ) do
-		control:SetHidden( hidden )
-	end
+    for _, control in pairs(LUIE.Components) do
+        control:SetHidden(hidden)
+    end
 end
 
 -- Easy Print to Chat
@@ -169,26 +169,21 @@ end
 
 -- Takes an input with a name identifier, title, text, and callback function to create a dialogue button
 function LUIE.RegisterDialogueButton(identifier, title, text, callback)
-    ESO_Dialogs[identifier] =
-    {
-        gamepadInfo =
-        {
+    ESO_Dialogs[identifier] = {
+        gamepadInfo = {
             dialogType = GAMEPAD_DIALOGS.BASIC,
         },
         canQueue = true,
-        title =
-        {
-            text = title
+        title = {
+            text = title,
         },
-        mainText =
-        {
-            text = text
+        mainText = {
+            text = text,
         },
-        buttons =
-        {
+        buttons = {
             {
                 text = SI_DIALOG_CONFIRM,
-                callback = callback
+                callback = callback,
             },
             {
                 text = SI_DIALOG_CANCEL,
@@ -201,17 +196,17 @@ end
 function LUIE.UpdateGuildData()
     local GuildsIndex = GetNumGuilds()
     LUIE.GuildIndexData = {}
-    for i = 1,GuildsIndex do
+    for i = 1, GuildsIndex do
         local id = GetGuildId(i)
         local name = GetGuildName(id)
         local guildAlliance = GetGuildAlliance(id)
-        LUIE.GuildIndexData[i] = {id=id, name=name, guildAlliance=guildAlliance}
+        LUIE.GuildIndexData[i] = { id = id, name = name, guildAlliance = guildAlliance }
     end
 end
 
 -- Simple function to check veteran difficult (VMA isn't considered being in a Veteran Dungeon so we have to do some filtering)
 function LUIE.ResolveVeteranDifficulty()
-    if GetGroupSize() <= 1 and IsUnitUsingVeteranDifficulty('player') then
+    if GetGroupSize() <= 1 and IsUnitUsingVeteranDifficulty("player") then
         return true
     elseif GetCurrentZoneDungeonDifficulty() == 2 or IsGroupUsingVeteranDifficulty() == true then
         return true
@@ -222,7 +217,7 @@ end
 
 -- Simple function that checks if player is in a PVP zone.
 function LUIE.ResolvePVPZone()
-    if IsUnitPvPFlagged('player') then
+    if IsUnitPvPFlagged("player") then
         return true
     else
         return false
@@ -238,9 +233,9 @@ end
 
 -- Pull the icon for the current morph of a skill
 function LUIE.GetSkillMorphIcon(abilityId)
-        local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
-        local abilityIcon = select(2, GetSkillAbilityInfo(skillType, skillIndex, abilityIndex))
-        return abilityIcon
+    local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
+    local abilityIcon = select(2, GetSkillAbilityInfo(skillType, skillIndex, abilityIndex))
+    return abilityIcon
 end
 
 -- Pull the AbilityId for the current morph of a skill
@@ -254,11 +249,11 @@ end
 function LUIE.UpdateMundusTooltipSyntax(abilityId, tooltipText)
     -- Update syntax for The Lady, The Lover, and the Thief Mundus stones since they aren't consistent with other buffs.
     if abilityId == 13976 or abilityId == 13981 then -- The Lady / The Lover
-        tooltipText = string.gsub(tooltipText, GetString(SI_LUIE_SKILL_MUNDUS_SUB_RES_PEN), GetString(SI_LUIE_SKILL_MUNDUS_SUB_RES_PEN_REPLACE))
+        tooltipText = zo_strgsub(tooltipText, GetString(SI_LUIE_SKILL_MUNDUS_SUB_RES_PEN), GetString(SI_LUIE_SKILL_MUNDUS_SUB_RES_PEN_REPLACE))
     elseif abilityId == 13975 then -- The Thief
-        tooltipText = string.gsub(tooltipText, GetString(SI_LUIE_SKILL_MUNDUS_SUB_THIEF), GetString(SI_LUIE_SKILL_MUNDUS_SUB_THIEF_REPLACE))
+        tooltipText = zo_strgsub(tooltipText, GetString(SI_LUIE_SKILL_MUNDUS_SUB_THIEF), GetString(SI_LUIE_SKILL_MUNDUS_SUB_THIEF_REPLACE))
     end
     -- Replace "Increases your" with "Increase"
-    tooltipText = string.gsub(tooltipText, GetString(SI_LUIE_SKILL_MUNDUS_STRING), GetString(SI_LUIE_SKILL_DRINK_INCREASE))
+    tooltipText = zo_strgsub(tooltipText, GetString(SI_LUIE_SKILL_MUNDUS_STRING), GetString(SI_LUIE_SKILL_DRINK_INCREASE))
     return tooltipText
 end

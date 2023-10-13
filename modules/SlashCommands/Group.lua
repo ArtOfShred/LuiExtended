@@ -242,7 +242,7 @@ function SlashCommands.SlashGroupKick(option)
         return
     end
 
-    local g_partyKick = { }
+    local g_partyKick = {}
     local kickedMemberName
     local kickedAccountName
     local compareName = string.lower(option)
@@ -250,7 +250,7 @@ function SlashCommands.SlashGroupKick(option)
     local comparePlayerAccount = string.lower(PlayerDisplayName)
     local unitToKick
 
-    for i = 1,24 do
+    for i = 1, 24 do
         local memberTag = GetGroupUnitTagByIndex(i)
         -- Once we reach a nil value (aka no party member there, stop the loop)
         if memberTag == nil then
@@ -258,11 +258,11 @@ function SlashCommands.SlashGroupKick(option)
         end
         kickedMemberName = string.lower(GetUnitName(memberTag))
         kickedAccountName = string.lower(GetUnitDisplayName(memberTag))
-        g_partyKick[i] = { memberTag=memberTag, kickedMemberName=kickedMemberName, kickedAccountName=kickedAccountName }
+        g_partyKick[i] = { memberTag = memberTag, kickedMemberName = kickedMemberName, kickedAccountName = kickedAccountName }
     end
 
     -- Iterate through UnitTags to get the member who just joined
-    for i = 1,#g_partyKick do
+    for i = 1, #g_partyKick do
         local kickcompare = g_partyKick[i]
         if kickcompare.kickedMemberName == compareName or kickcompare.kickedAccountName == compareName then
             if kickcompare.kickedMemberName == comparePlayerName or kickcompare.kickedAccountName == comparePlayerAccount then
@@ -332,7 +332,7 @@ function SlashCommands.SlashVoteKick(option)
         return
     end
 
-    local g_partyKick = { }
+    local g_partyKick = {}
     local kickedMemberName
     local kickedAccountName
     local compareName = string.lower(option)
@@ -340,7 +340,7 @@ function SlashCommands.SlashVoteKick(option)
     local comparePlayerAccount = string.lower(PlayerDisplayName)
     local unitToKick = ""
 
-    for i = 1,24 do
+    for i = 1, 24 do
         local memberTag = GetGroupUnitTagByIndex(i)
         -- Once we reach a nil value (aka no party member there, stop the loop)
         if memberTag == nil then
@@ -348,11 +348,11 @@ function SlashCommands.SlashVoteKick(option)
         end
         kickedMemberName = string.lower(GetUnitName(memberTag))
         kickedAccountName = string.lower(GetUnitDisplayName(memberTag))
-        g_partyKick[i] = { memberTag=memberTag, kickedMemberName=kickedMemberName, kickedAccountName=kickedAccountName }
+        g_partyKick[i] = { memberTag = memberTag, kickedMemberName = kickedMemberName, kickedAccountName = kickedAccountName }
     end
 
     -- Iterate through UnitTags to get the member who just joined
-    for i = 1,#g_partyKick do
+    for i = 1, #g_partyKick do
         local kickcompare = g_partyKick[i]
         if kickcompare.kickedMemberName == compareName or kickcompare.kickedAccountName == compareName then
             if kickcompare.kickedMemberName == comparePlayerName or kickcompare.kickedAccountName == comparePlayerAccount then
