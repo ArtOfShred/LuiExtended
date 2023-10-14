@@ -834,7 +834,7 @@ function CrowdControlTracker:RemoveCC(ccType, currentEndTime)
         elseif seventhInterval > 0 then
             self.currentCC = 7
             zo_callLater(function() self:RemoveCC(7, PriorityFour.endTime) end, seventhInterval)
-            self:OnDraw(PrioritySeven.abilityId, PrioritySix.abilityIcon, PrioritySeven.hitValue, PrioritySeven.result, PrioritySeven.abilityName, seventhInterval)
+            self:OnDraw(PrioritySeven.abilityId, PrioritySeven.abilityIcon, PrioritySeven.hitValue, PrioritySeven.result, PrioritySeven.abilityName, seventhInterval)
             return
         elseif eighthInterval > 0 then
             self.currentCC = 8
