@@ -531,6 +531,7 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
                 -- self.incomingCC[ACTION_RESULT_STUNNED] = nil
                 -- callbackManager:RegisterCallback("OnIncomingStun", function()
                 if self.breakFreePlaying then
+                    if isRooted then isRooted = false end
                     return
                 end
                 PriorityOne = {
