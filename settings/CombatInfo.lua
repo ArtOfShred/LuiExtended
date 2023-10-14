@@ -3552,6 +3552,36 @@ function CombatInfo.CreateSettings()
             },
             {
                 type = "header",
+                name = GetString(SI_LUIE_LAM_CI_CCT_ROOT_HEADER),
+            },
+            {
+                -- ROOT SHOW
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_CCT_ROOT_TOGGLE),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_ROOT_TOGGLE_TP),
+                default = Defaults.cct.showRoot,
+                getFunc = function() return Settings.cct.showRoot end,
+                setFunc = function(newValue)
+                    Settings.cct.showRoot = newValue
+                    CrowdControlTracker:InitControls()
+                end,
+                disabled = function() return (not Settings.cct.enabled) end,
+            },
+            {
+                -- Root Color
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_ROOT),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_ROOT)),
+                default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_ROOTED])),
+                getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_ROOTED]) end,
+                setFunc = function(r, g, b, a)
+                    Settings.cct.colors[ACTION_RESULT_ROOTED] = { r, g, b, a }
+                    CrowdControlTracker:InitControls()
+                end,
+                disabled = function() return not (Settings.cct.showRoot and Settings.cct.enabled) end,
+            },
+            {
+                type = "header",
                 name = GetString(SI_LUIE_LAM_CI_CCT_AOE_HEADER),
             },
             {
@@ -3588,7 +3618,36 @@ function CombatInfo.CreateSettings()
                     return not (Settings.cct.showAoe and Settings.cct.enabled)
                 end,
             },
-
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CI_CCT_SNARE_HEADER),
+            },
+            {
+                -- SNARE SHOW
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_CCT_SNARE_TOGGLE),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_SNARE_TOGGLE_TP),
+                default = Defaults.cct.showSnare,
+                getFunc = function() return Settings.cct.showSnare end,
+                setFunc = function(newValue)
+                    Settings.cct.showSnare = newValue
+                    CrowdControlTracker:InitControls()
+                end,
+                disabled = function() return (not Settings.cct.enabled) end,
+            },
+            {
+                -- Snare Color
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_SNARE),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_SNARE)),
+                default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_SNARED])),
+                getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_SNARED]) end,
+                setFunc = function(r, g, b, a)
+                    Settings.cct.colors[ACTION_RESULT_SNARED] = { r, g, b, a }
+                    CrowdControlTracker:InitControls()
+                end,
+                disabled = function() return not (Settings.cct.showSnare and Settings.cct.enabled) end,
+            },
             {
                 type = "divider",
             },
