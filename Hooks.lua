@@ -32,7 +32,7 @@ function LUIE.InitializeHooks()
     local zos_GetSkillAbilityInfo = GetSkillAbilityInfo
     GetSkillAbilityInfo = function(skillType, skillIndex, abilityIndex)
         local name, texture, earnedRank, passive, ultimate, purchased, progressionIndex, rankIndex = zos_GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
-        local abilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex)
+        local abilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex, true)
         if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].icon then
             texture = LUIE.Data.Effects.EffectOverride[abilityId].icon
         end
@@ -46,7 +46,7 @@ function LUIE.InitializeHooks()
     local zos_GetSkillAbilityNextUpgradeInfo = GetSkillAbilityNextUpgradeInfo
     GetSkillAbilityNextUpgradeInfo = function(skillType, skillIndex, abilityIndex)
         local name, texture, earnedRank = zos_GetSkillAbilityNextUpgradeInfo(skillType, skillIndex, abilityIndex)
-        local abilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex)
+        local abilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex, true)
         if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].icon then
             texture = LUIE.Data.Effects.EffectOverride[abilityId].icon
         end
@@ -77,19 +77,45 @@ function LUIE.InitializeHooks()
     local zos_GetKillingAttackInfo = GetKillingAttackInfo
     local zos_DoesKillingAttackHaveAttacker = DoesKillingAttackHaveAttacker
 
-    DoesKillingAttackHaveAttacker = function(index)
-        local hasAttacker = zos_DoesKillingAttackHaveAttacker
-        local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
+    local function orgDoesKillingAttackHaveAttacker(index, ...)
+        local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackInfo(index)
+        local battlegroundAlliance = GetKillingAttackerBattlegroundAlliance(index)
 
-        if LUIE.Data.Effects.EffectSourceOverride[abilityId] then
-            if LUIE.Data.Effects.EffectSourceOverride[abilityId].addSource then
-                hasAttacker = true
+        local attackerNameLine
+        if isPlayer then
+            local nameToShow
+            if showBothPlayerNames then
+                nameToShow = ZO_GetPrimaryPlayerNameWithSecondary(attackerDisplayName, attackerRawName)
+            else
+                nameToShow = ZO_GetPrimaryPlayerName(attackerDisplayName, attackerRawName)
+            end
+
+            if battlegroundAlliance == BATTLEGROUND_ALLIANCE_NONE then
+                local coloredRankIconMarkup = ZO_GetColoredAvARankIconMarkup(attackerAvARank, alliance, 32)
+                if minionName == "" then
+                    attackerNameLine = zo_strformat(SI_DEATH_RECAP_RANK_ATTACKER_NAME, coloredRankIconMarkup, attackerAvARank, nameToShow)
+                else
+                    attackerNameLine = zo_strformat(SI_DEATH_RECAP_RANK_ATTACKER_NAME_MINION, coloredRankIconMarkup, attackerAvARank, nameToShow, minionName)
+                end
+            else
+                local battlegroundAllianceIconMarkup = ZO_GetBattlegroundIconMarkup(battlegroundAlliance, 32)
+                if minionName == "" then
+                    attackerNameLine = zo_strformat(SI_DEATH_RECAP_BATTLEGROUND_ALLIANCE_ATTACKER_NAME, battlegroundAllianceIconMarkup, nameToShow)
+                else
+                    attackerNameLine = zo_strformat(SI_DEATH_RECAP_BATTLEGROUND_ALLIANCE_ATTACKER_NAME_MINION, battlegroundAllianceIconMarkup, nameToShow, minionName)
+                end
+            end
+        else
+            if minionName == "" then
+                attackerNameLine = zo_strformat(SI_DEATH_RECAP_ATTACKER_NAME, attackerRawName)
+            else
+                attackerNameLine = zo_strformat(SI_DEATH_RECAP_ATTACKER_NAME_MINION, attackerRawName, minionName)
             end
         end
-
-        return hasAttacker
+        zos_DoesKillingAttackHaveAttacker(index, ...)
     end
 
+    DoesKillingAttackHaveAttacker = orgDoesKillingAttackHaveAttacker
     GetKillingAttackerInfo = function(index)
         local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index)
         local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
@@ -657,7 +683,7 @@ function LUIE.InitializeHooks()
     end
 
     -- Hook Campaign Bonuses functions
-    ZO_CampaignBonuses_Shared.BuildMasterList = function(self)
+    ZO_CampaignBonuses_Shared.BuildMasterList = function(self, overrideRank, casterUnitTag)
         self.masterList = {}
 
         for bonusType, info in ipairs(BONUS_SECTION_DATA) do
@@ -678,19 +704,19 @@ function LUIE.InitializeHooks()
                 local abilityId = info.abilityFunction(i)
                 local name = GetAbilityName(abilityId)
                 local icon = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon) and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon or GetAbilityIcon(abilityId) -- Get Updated LUIE AbilityIcon here
-                local description = GetAbilityDescription(abilityId)
+                local description = GetAbilityDescription(abilityId, overrideRank, casterUnitTag)
 
                 local scoreIndex = i - startIndex + 1
                 local countText = scoreIndex
                 if info.countText then
                     if info.countText == HIDE_COUNT then
-                        countText = nil
+                        countText = 0 or nil
                     else
                         countText = info.countText
                     end
                 end
 
-                local data = {
+                local data1 = {
                     index = i,
                     abilityId = abilityId, -- Add AbilityId here for LUIE functions
                     isHeader = false,
@@ -704,7 +730,7 @@ function LUIE.InitializeHooks()
                     description = description,
                 }
 
-                self.masterList[#self.masterList + 1] = data
+                self.masterList[#self.masterList + 1] = data1
             end
         end
 
@@ -1192,7 +1218,7 @@ function LUIE.InitializeHooks()
                     bindingText = ZO_Keybindings_GetHighestPriorityBindingStringFromAction(actionName, KEYBIND_TEXT_OPTIONS_FULL_NAME, KEYBIND_TEXTURE_OPTIONS_EMBED_MARKUP, GAMEPAD_MODE)
                     local layerIndex, categoryIndex, actionIndex = GetActionIndicesFromName(actionName)
                     if layerIndex then
-                        local key = GetActionBindingInfo(layerIndex, categoryIndex, actionIndex, 1)
+                        local key, mod1, mod2, mod3, mod4 = GetActionBindingInfo(layerIndex, categoryIndex, actionIndex, 1)
                         if IsKeyCodeChordKey(key) then
                             keybindWidth = 90 --width minus double keybind width (RB+LB)
                         else

@@ -415,6 +415,7 @@ end
 function UnitFrames.SetDefaultFramesSetting(frame, value)
     local key = "DefaultFramesNew" .. tostring(frame)
     if value == g_DefaultFramesOptions[3] then
+        ---@diagnostic disable-next-line: missing-parameter
         SetSetting(SETTING_TYPE_UI, UI_SETTING_RESOURCE_NUMBERS, 0)
         UnitFrames.SV[key] = 3
     elseif value == g_DefaultFramesOptions[2] then
@@ -438,7 +439,7 @@ function UnitFrames.GroupFrames_OnMouseUp(self, button, upInside)
         ClearMenu()
         local isPlayer = AreUnitsEqual(unitTag, "player") -- Flag Player
         local isLFG = DoesGroupModificationRequireVote() -- Flag if we're in an LFG Group
-        local accountName = zo_strformat("<<C:1>>", GetUnitDisplayName(unitTag))
+        local accountName = tostring(zo_strformat("<<C:1>>", GetUnitDisplayName(unitTag)))
         local isOnline = IsUnitOnline(unitTag)
 
         if isPlayer then
@@ -490,6 +491,7 @@ function UnitFrames.GroupFrames_OnMouseUp(self, button, upInside)
             --Cannot vote for yourself
             if isLFG and not isPlayer then
                 AddMenuItem(GetString(SI_GROUP_LIST_MENU_VOTE_KICK_FROM_GROUP), function()
+                    ---@diagnostic disable-next-line: missing-parameter
                     BeginGroupElection(GROUP_ELECTION_TYPE_KICK_MEMBER, ZO_GROUP_ELECTION_DESCRIPTORS.NONE, unitTag)
                 end)
             end
@@ -1956,7 +1958,7 @@ function UnitFrames.CustomFramesFormatLabels(menu)
                 end
             end
         end
-        local baseTag = GetGroupUnitTagByIndex(i)
+        local baseTag = tostring(GetGroupUnitTagByIndex(i))
         if menu and DoesUnitExist(baseTag) then
             UnitFrames.ReloadValues(baseTag)
         end
@@ -2849,7 +2851,11 @@ function UnitFrames.UpdateAttribute(attributeFrame, powerValue, powerEffectiveMa
             if attributeFrame[label] ~= nil then
                 -- Format specific to selected label
                 local fmt = tostring(attributeFrame[label].fmt or UnitFrames.SV.Format)
-                local str = fmt:gsub("Percentage", tostring(pct)):gsub("Max", AbbreviateNumber(powerEffectiveMax, UnitFrames.SV.ShortenNumbers, true)):gsub("Current", AbbreviateNumber(powerValue, UnitFrames.SV.ShortenNumbers, true)):gsub("+ Shield", shield and ("+ " .. AbbreviateNumber(shield, UnitFrames.SV.ShortenNumbers, true)) or ""):gsub("Nothing", "")
+                local str = zo_strgsub(fmt, "Percentage", tostring(pct))
+                str = zo_strgsub(str, "Max", AbbreviateNumber(powerEffectiveMax, UnitFrames.SV.ShortenNumbers, true))
+                str = zo_strgsub(str, "Current", AbbreviateNumber(powerValue, UnitFrames.SV.ShortenNumbers, true))
+                str = zo_strgsub(str, "+ Shield", shield and ("+ " .. AbbreviateNumber(shield, UnitFrames.SV.ShortenNumbers, true)) or "")
+                str = zo_strgsub(str, "Nothing", "")
                 -- Change text
                 attributeFrame[label]:SetText(str)
                 -- Don't update if dead
@@ -3273,7 +3279,7 @@ function UnitFrames.CustomFramesSetupAlternative(isWerewolf, isSiege, isMounted)
         colour = { 0.8, 0, 0, 0.9 }
 
         UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_WEREWOLF] = nil
-        UnitFrames.CustomFrames.controlledsiege[COMBAT_MECHANIC_FLAGS_HEALTH] = UnitFrames.CustomFrames.player.alternative
+        UnitFrames.CustomFrames.controlledsiege[COMBAT_MECHANIC_FLAGS_HEALTH] = table.concat(UnitFrames.CustomFrames.player.alternative)
         UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_MOUNT_STAMINA] = nil
         UnitFrames.CustomFrames.player.ChampionXP = nil
         UnitFrames.CustomFrames.player.Experience = nil
@@ -4258,7 +4264,7 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
                 if i > 4 then
                     break
                 end
-                local defaultUnitTag = GetGroupUnitTagByIndex(i)
+                local defaultUnitTag = tostring(GetGroupUnitTagByIndex(i))
                 if AreUnitsEqual(defaultUnitTag, "player") then
                     incrementMarker = i
                 end
@@ -4274,12 +4280,12 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
                 local defaultUnitTag
                 -- Set default frame reference to +1 if Player Frame is hidden and we reach that index, otherwise, proceed as normal
                 if increment then
-                    defaultUnitTag = GetGroupUnitTagByIndex(i + 1)
+                    defaultUnitTag = tostring(GetGroupUnitTagByIndex(i + 1))
                     if i + 1 > 4 and baseName == "SmallGroup" then
                         break
                     end -- Bail out if we're at the end of the small group list
                 else
-                    defaultUnitTag = GetGroupUnitTagByIndex(i)
+                    defaultUnitTag = tostring(GetGroupUnitTagByIndex(i))
                 end
 
                 -- Also update control for Right Click Menu
@@ -5391,7 +5397,7 @@ function UnitFrames.CustomFramesApplyLayoutGroup(unhide)
 
     for i = 1, 4 do
         local unitFrame = UnitFrames.CustomFrames["SmallGroup" .. i]
-        local unitTag = GetGroupUnitTagByIndex(i)
+        local unitTag = tostring(GetGroupUnitTagByIndex(i))
 
         local ghb = unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH] -- Not a backdrop
 
@@ -5468,7 +5474,7 @@ function UnitFrames.CustomFramesApplyLayoutRaid(unhide)
     -- Insert player into list if it matches the currentRole
     local function insertRole(list, currentRole)
         for index = 1, GetGroupSize() do
-            local playerRole = GetGroupMemberSelectedRole(GetGroupUnitTagByIndex(index))
+            local playerRole = GetGroupMemberSelectedRole(tostring(GetGroupUnitTagByIndex(index)))
             if playerRole == currentRole then
                 table.insert(list, index)
             end
@@ -5498,7 +5504,7 @@ function UnitFrames.CustomFramesApplyLayoutRaid(unhide)
 
         local index = UnitFrames.SV.SortRoleRaid and playerList[i] or i
         local unitFrame = UnitFrames.CustomFrames["RaidGroup" .. index]
-        local unitTag = GetGroupUnitTagByIndex(index)
+        local unitTag = tostring(GetGroupUnitTagByIndex(index))
 
         unitFrame.control:ClearAnchors()
         unitFrame.control:SetAnchor(TOPLEFT, raid, TOPLEFT, UnitFrames.SV.RaidBarWidth * column, UnitFrames.SV.RaidBarHeight * (row - 1) + (UnitFrames.SV.RaidSpacers and spacerHeight * (zo_floor((i - 1) / 4) - zo_floor(column * itemsPerColumn / 4)) or 0))

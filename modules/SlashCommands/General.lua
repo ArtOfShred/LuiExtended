@@ -189,7 +189,8 @@ function SlashCommands.SlashCampaignQ(option)
         local campaignName = GetCampaignName(campaignId)
 
         if GetAssignedCampaignId() == campaignId or GetGuestCampaignId() == campaignId then
-            QueueForCampaign(campaignId)
+            --QueueForCampaign(campaignId: integer, queueAsGroup: boolean)
+            QueueForCampaign(campaignId, false) --Does it need the queueasgroup parameter?
             printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName), true)
             if LUIE.SV.TempAlertCampaign then
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName))
@@ -262,7 +263,7 @@ function SlashCommands.SlashCollectible(id)
     end
 
     if IsCollectibleUnlocked(id) then
-        UseCollectible(id)
+        UseCollectible(id, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
         LUIE.SlashCollectibleOverride = true
         if LUIE.Data.CollectibleTables.All[id] == nil then
             LUIE.LastMementoUsed = id

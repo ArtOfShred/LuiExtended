@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-parameter
 --[[
     LuiExtended
     License: The MIT License (MIT)

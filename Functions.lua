@@ -20,54 +20,47 @@ end
 ---@param formatStr string
 ---@return string timestamp
 local function CreateTimestamp(timeStr, formatStr)
-    formatStr = formatStr or LUIE.ChatAnnouncements.SV.TimeStampFormat
-    -- Check if pChat is active
-    local pChatActive = SYSTEMS:GetSystem("pChat")
+    local formatStr = formatStr or LUIE.ChatAnnouncements.SV.TimeStampFormat
 
-    if pChatActive then
-        -- pChat is active, do not format the timestamp
-        return timeStr
+    -- Split up default timestamp
+    local hours, minutes, seconds = timeStr:match("([^%:]+):([^%:]+):([^%:]+)")
+    local hoursNoLead = tonumber(hours) -- hours without leading zero
+    local hours12NoLead = (hoursNoLead - 1) % 12 + 1
+    local hours12
+    if hours12NoLead < 10 then
+        hours12 = "0" .. hours12NoLead
     else
-        -- pChat is not active, format the timestamp
-        local hours, minutes, seconds = timeStr:match("([^%:]+):([^%:]+):([^%:]+)")
-        local hoursNoLead = tonumber(hours) -- hours without leading zero
-        local hours12NoLead = (hoursNoLead - 1) % 12 + 1
-        local hours12
-        if hours12NoLead < 10 then
-            hours12 = "0" .. hours12NoLead
-        else
-            hours12 = hours12NoLead
-        end
-        local pUp = "AM"
-        local pLow = "am"
-        if hoursNoLead >= 12 then
-            pUp = "PM"
-            pLow = "pm"
-        end
-        -- create new one
-        local timestamp = formatStr
-        timestamp = zo_strgsub(timestamp, "HH", hours)
-        timestamp = zo_strgsub(timestamp, "H", hoursNoLead)
-        timestamp = zo_strgsub(timestamp, "hh", hours12)
-        timestamp = zo_strgsub(timestamp, "h", hours12NoLead)
-        timestamp = zo_strgsub(timestamp, "m", minutes)
-        timestamp = zo_strgsub(timestamp, "s", seconds)
-        timestamp = zo_strgsub(timestamp, "A", pUp)
-        timestamp = zo_strgsub(timestamp, "a", pLow)
-        return tostring(timestamp)
+        hours12 = hours12NoLead
     end
+    local pUp = "AM"
+    local pLow = "am"
+    if hoursNoLead >= 12 then
+        pUp = "PM"
+        pLow = "pm"
+    end
+    -- create new one
+    local timestamp = formatStr
+    timestamp = zo_strgsub(timestamp, "HH", hours)
+    timestamp = zo_strgsub(timestamp, "H", hoursNoLead)
+    timestamp = zo_strgsub(timestamp, "hh", hours12)
+    timestamp = zo_strgsub(timestamp, "h", hours12NoLead)
+    timestamp = zo_strgsub(timestamp, "m", minutes)
+    timestamp = zo_strgsub(timestamp, "s", seconds)
+    timestamp = zo_strgsub(timestamp, "A", pUp)
+    timestamp = zo_strgsub(timestamp, "a", pLow)
+    return tostring(timestamp)
 end
 
 -- Create access to local function
 LUIE.CreateTimestamp = CreateTimestamp
 
 -- FormatMessage helper function
-local function FormatMessage(msg, doTimestamp)
+local function FormatMessage(msg, doTimestamp, ...)
     local msg = msg or ""
     if doTimestamp then
         local timestring = GetTimeString()
         -- Color Code to match pChat default
-        msg = string.format("|c%s[%s]|r %s", LUIE.TimeStampColorize, LUIE.CreateTimestamp(timestring), msg)
+        msg = string.format("|c%s[%s]|r %s", LUIE.TimeStampColorize, LUIE.CreateTimestamp(timestring, ...), msg)
     end
     return msg
 end
@@ -136,6 +129,10 @@ end
 
 -- Returns a formatted number with commas
 -- Function no comma to be added in a later date.
+---@param number any
+---@param shorten any
+---@param comma any
+---@return string|nil
 function LUIE.AbbreviateNumber(number, shorten, comma)
     if number > 0 and shorten then
         local value
