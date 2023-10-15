@@ -16,3 +16,7 @@ $RECYCLE.BIN/
 .vscode/settings.json
 *.editorconfig
 stylua.toml
+*/devstuff/
+*/devstuff/teststrings
+*/devstuff/doc.json
+*/devstuff/doc.md
