@@ -5027,22 +5027,10 @@ Effects.EffectOverride = {
     [89977] = { hide = true }, -- Target Skeleton (Target Dummy)
 
     -- Attunable Crafting Station
-    [89469] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_create_station_blacksmith.dds",
-        name = Abilities.Innate_Create_Station_Blacksmith,
-    }, -- 68235 Stun
-    [89645] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_create_station_clothing.dds",
-        name = Abilities.Innate_Create_Station_Clothing,
-    }, -- 68235 Stun
-    [105217] = {
+    [206063] = {
         icon = "LuiExtended/media/icons/abilities/ability_item_create_station_jewelry.dds",
-        name = Abilities.Innate_Create_Station_Jewelry,
-    }, -- 68235 Stun
-    [89654] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_create_station_woodwork.dds",
-        name = Abilities.Innate_Create_Station_Woodwork,
-    }, -- 68235 Stun
+        name = Abilities.Innate_Create_Station,
+    }, -- CreateAttunableStation (Attunable Crafting Station)
 
     ----------------------------------------------------------------
     -- Target Iron Atronach, Trial
@@ -8661,7 +8649,6 @@ Effects.EffectOverride = {
     [44391] = { icon = "esoui/art/icons/ability_templar_breath_of_life.dds" }, -- Breath of Life (Breath of Life)
 
     -- Healing Ritual
-    [22331] = { icon = "esoui/art/icons/ability_templar_ritual_of_rebirth.dds" }, -- Ritual of Rebirth (Ritual of Rebirth)
     [88456] = { icon = "esoui/art/icons/ability_templar_ritual_of_rebirth.dds" }, -- Ritual of Rebirth (Ritual of Rebirth)
 
     -- Restoring Aura / Radiant Aura / Cleansing Ritual
@@ -8969,7 +8956,6 @@ Effects.EffectOverride = {
         tooltip = Tooltips.Skill_Crystallized_Slab,
         stack = 3,
     }, -- Crystalized Slab (Crystallized Slab)
-    [88766] = { icon = "esoui/art/icons/ability_warden_002_a.dds", name = Abilities.Skill_Crystallized_Slab }, -- Crystalized Slab (Crystallized Slab)
     [93175] = { hide = true }, -- Crystallized Slab (Crystallized Slab)
     [86143] = { hide = true }, -- Shimmering Shield (Shimmering Shield)
     [92170] = {

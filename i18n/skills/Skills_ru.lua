@@ -76,10 +76,7 @@ local strings = {
     SI_LUIE_SKILL_GLYPH_WEAKENING_TP = "Reduce Weapon and Spell Damage for |cFFFFFF<<1>>|r seconds.",
 
     -- Crafting Station Creation
-    SI_LUIE_SKILL_CRAFTING_STATION_JEWELRY = "Настройка Ювелирной станции",
-    SI_LUIE_SKILL_CRAFTING_STATION_BLACKSMITH = "Настройка Кузницы",
-    SI_LUIE_SKILL_CRAFTING_STATION_CLOTHING = "Настройка Портняжного станка",
-    SI_LUIE_SKILL_CRAFTING_STATION_WOODWORK = "Настройка Столярного верстака",
+    SI_LUIE_SKILL_CRAFTING_STATION = "Attune Crafting Station",
 
     -- Consumable / Food / Drink
     SI_LUIE_SKILL_POISON_STEALTH_DRAIN = "Яд скрытности",

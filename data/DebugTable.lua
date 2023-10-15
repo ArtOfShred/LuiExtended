@@ -1360,14 +1360,7 @@ LUIE.DebugAuras = {
     --[15954] = true, -- Boss (Target Dummy)
 
     -- Attunable Crafting Station
-    [89445] = true, -- Create Blacksmithing Set Stati (Attunable Blacksmithing Station)
-    [89469] = true, -- 68235 Stun (Attunable Blacksmithing Station)
-    [89643] = true, -- Create Clothier Set Stati (Attunable Clothier Station)
-    [89645] = true, -- 68235 Stun (Attunable Clothier Station)
-    [105215] = true, -- Create Jewelry Set Station (Attunable Jewelry Crafting Station)
-    [105217] = true, -- 68235 Stun (Attunable Jewelry Crafting Station)
-    [89652] = true, -- Create Woodworking Set Stati (Attunable Woodworking Station)
-    [89654] = true, -- 68235 Stun (Attunable Woodworking Station)
+    [206063] = true, -- CreateAttunableStation (Attunable Crafting Station)
 
     -------------------------------------
     -- TARGET IRON ATRONACH, TRIAL
@@ -3702,7 +3695,6 @@ LUIE.DebugAuras = {
     [34117] = true, -- Off Balance (Flame Lash)
     [20824] = true, -- Power Lash (Flame Lash)
     [23105] = true, -- Power Lash (Flame Lash)
-    [105196] = true, -- Power Lash (Flame Lash)
 
     [20657] = true, -- Searing Strike (Searing Strike)
     [44363] = true, -- Searing Strike (Searing Strike)
@@ -4574,8 +4566,6 @@ LUIE.DebugAuras = {
 
     [48078] = true, -- Major Berserk (Summon Storm Atronach - Charged Lightning Synergy)
     [62195] = true, -- Major Berserk (Summon Storm Atronach - Charged Lightning Synergy)
-    [121059] = true, -- Charged Lightning (Summon Storm Atronach - Charged Lightning Synergy)
-    [121065] = true, -- Major Berserk (Summon Storm Atronach - Charged Lightning Synergy)
     [48076] = true, -- Charged Lightning (Summon Storm Atronach - Charged Lightning Synergy)
     [48085] = true, -- Charged Lightning Cooldown (Summon Storm Atronach - Charged Lightning Synergy)
 
@@ -4895,7 +4885,6 @@ LUIE.DebugAuras = {
 
     [22144] = true, -- Empowering Sweep (Empowering Sweep)
     [122288] = true, -- Empowering Sweep (Empowering Sweep)
-    [55214] = true, -- Empower (Empowering Sweep)
     [62599] = true, -- Empowering Sweep (Empowering Sweep)
     [62598] = true, -- Empowering Sweep (Empowering Sweep)
 
@@ -4983,7 +4972,6 @@ LUIE.DebugAuras = {
     [63956] = true, -- Radiant Glory (Radiant Glory)
 
     [63046] = true, -- Radiant Oppression (Radiant Oppression)
-    [104549] = true, -- Radiant Oppression (Radiant Oppression)
     [63961] = true, -- Radiant Oppression (Radiant Oppression)
 
     [108822] = true, -- Synergy Damage Bonus (Nova - Supernova Synergy)
@@ -5031,7 +5019,6 @@ LUIE.DebugAuras = {
     [22304] = true, -- Healing Ritual (Healing Ritual)
 
     [22327] = true, -- Ritual of Rebirth (Ritual of Rebirth)
-    [22331] = true, -- Ritual of Rebirth (Ritual of Rebirth)
     [88456] = true, -- Ritual of Rebirth (Ritual of Rebirth)
 
     [22314] = true, -- Hasty Prayer (Hasty Prayer)
@@ -5416,7 +5403,6 @@ LUIE.DebugAuras = {
     [86139] = true, -- Crystallized Slab (Crystallized Slab)
     [92168] = true, -- Crystalized Slab (Crystallized Slab)
     [88769] = true, -- Crystalized Slab Stack Counter (Crystallized Slab)
-    [88766] = true, -- Crystalized Slab (Crystallized Slab)
     [88768] = true, -- Crystalized Slab (Crystallized Slab)
     [93175] = true, -- Crystallized Slab (Crystallized Slab)
 
@@ -5994,7 +5980,6 @@ LUIE.DebugAuras = {
     [28302] = true, -- Reverse Slash (Reverse Slash)
 
     [38823] = true, -- Reverse Slice (Reverse Slice)
-    [38826] = true, -- Reverse Slice (Reverse Slice)
     [38827] = true, -- Reverse Slice (Reverse Slice)
 
     [38819] = true, -- Executioner (Executioner)

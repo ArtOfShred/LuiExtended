@@ -392,10 +392,7 @@ CastBarTable.CastDurationFix = {
     [4197] = 4000, -- Recovering (NPC Duel)
 
     -- Misc Items
-    [89469] = 5000, -- 68235 Stun (Create crafting station)
-    [89645] = 5000, -- 68235 Stun (Create crafting station)
-    [105217] = 5000, -- 68235 Stun (Create crafting station)
-    [89654] = 5000, -- 68235 Stun (Create crafting station)
+    [206063] = 11000, -- CreateAttunableStation (Attunable Crafting Station)
     [113432] = 8000, -- 68235 Stun (Nascent Indrik)
     [130394] = 5000, -- 68235 Stun (Spectral Indrik)
     [131536] = 5000, -- Generic Stun & Combine (Sovereign Sow)
@@ -637,10 +634,7 @@ CastBarTable.IsCast = {
     [47270] = true, -- Ritual of Mara
 
     -- Misc Items
-    [89469] = true, -- 68235 Stun (Create furniture station)
-    [89645] = true, -- 68235 Stun (Create furniture station)
-    [105217] = true, -- 68235 Stun (Create furniture station)
-    [89654] = true, -- 68235 Stun (Create furniture station)
+    [206063] = true, -- CreateAttunableStation (Attunable Crafting Station)
     [113432] = true, -- 68235 Stun (Nascent Indrik)
     [130394] = true, -- 68235 Stun (Spectral Indrik)
     [131536] = true, -- Generic Stun & Combine (Sovereign Sow)

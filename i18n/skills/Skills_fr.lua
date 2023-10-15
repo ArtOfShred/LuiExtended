@@ -76,10 +76,7 @@ local strings = {
     SI_LUIE_SKILL_GLYPH_WEAKENING_TP = "Réduit les dégâts des armes et magiques pendant |cFFFFFF<<1>>|r secondes.",
 
     -- Crafting Station Creation
-    SI_LUIE_SKILL_CRAFTING_STATION_JEWELRY = "Attune Jewelry Crafting Station",
-    SI_LUIE_SKILL_CRAFTING_STATION_BLACKSMITH = "Attune Blacksmithing Station",
-    SI_LUIE_SKILL_CRAFTING_STATION_CLOTHING = "Attune Clothing Station",
-    SI_LUIE_SKILL_CRAFTING_STATION_WOODWORK = "Attune Woodworking Station",
+    SI_LUIE_SKILL_CRAFTING_STATION = "Attune Crafting Station",
 
     -- Consumable / Food / Drink
     SI_LUIE_SKILL_POISON_STEALTH_DRAIN = "Stealth-Draining Poison",

@@ -55,10 +55,7 @@ local AbilityTables = {
     Innate_Stagger = 1834, -- Stagger
     Innate_Revive = 5823, -- Revive
 
-    Innate_Create_Station_Jewelry = GetString(SI_LUIE_SKILL_CRAFTING_STATION_JEWELRY),
-    Innate_Create_Station_Blacksmith = GetString(SI_LUIE_SKILL_CRAFTING_STATION_BLACKSMITH),
-    Innate_Create_Station_Clothing = GetString(SI_LUIE_SKILL_CRAFTING_STATION_CLOTHING),
-    Innate_Create_Station_Woodwork = GetString(SI_LUIE_SKILL_CRAFTING_STATION_WOODWORK),
+    Innate_Create_Station = GetString(SI_LUIE_SKILL_CRAFTING_STATION),
     Innate_Summon = 29585,
     Innate_Indrik_Nascent = GetCollectibleName(5710),
     Innate_Indrik_Spectral = GetCollectibleName(6942),
