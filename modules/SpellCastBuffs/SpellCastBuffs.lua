@@ -2530,7 +2530,7 @@ function SpellCastBuffs.OnCombatEventIn(eventCode, result, isError, abilityName,
     end
 
     -- Special handling for Crystallized Shield + Morphs
-    if abilityId == 92068 or abilityId == 92168 or abilityId == 92170 then
+    if abilityId == 86135 or abilityId == 86139 or abilityId == 86143 then
         if result == ACTION_RESULT_DAMAGE_SHIELDED then
             local context = "player1"
             local effectName = Effects.EffectOverrideByName[abilityId]
@@ -3938,6 +3938,11 @@ end
 function SpellCastBuffs.UpdateContextHideList()
     hidePlayerEffects = {}
     hideTargetEffects = {}
+
+    -- Hide Warden Crystallized Shield & morphs from effects on the player (we use fake buffs to track this so that the stack count can be displayed)
+    hidePlayerEffects[86135] = true
+    hidePlayerEffects[86139] = true
+    hidePlayerEffects[86143] = true
 
     if SpellCastBuffs.SV.IgnoreMundusPlayer then
         for k, v in pairs(Effects.IsBoon) do

@@ -449,21 +449,9 @@ CastBarTable.CastDurationFix = {
     [108336] = 5000, -- 68235 Stun (Psijic Glowglobe's Updated Instructionals)
     [108340] = 5000, -- 68235 Stun (Psijic Glowglobe's Wisp Animus)
 
-    [92381] = 5000, -- 68235 Stun (Sixth House Incense of Toolwork)
-    [92393] = 5000, -- 68235 Stun (Sixth House Ornamental Fasteners)
-    [92389] = 5000, -- 68235 Stun (Sixth House Patterned Belt)
-    [92397] = 5000, -- 68235 Stun (Sixth House Tailor's Belt)
-    [92385] = 5000, -- 68235 Stun (Sixth House Tailor's Hammer)
-    [92373] = 5000, -- 68235 Stun (Sixth House Tailor's Shears)
-    [92377] = 5000, -- 68235 Stun (Sixth House Writhing Thread)
+    -- TODO: Sixth House Robe Casts replaced - check later
 
-    [92365] = 5000, -- 68235 Stun (Dwarven Theodolite Chassis)
-    [92361] = 5000, -- 68235 Stun (Dwarven Theodolite Eye)
-    [92357] = 5000, -- 68235 Stun (Dwarven Theodolite Head)
-    [92353] = 5000, -- 68235 Stun (Dwarven Theodolite Neck)
-    [92349] = 5000, -- 68235 Stun (Dwarven Theodolite Shoulder)
-    [92345] = 5000, -- 68235 Stun (Dwarven Theodolite Torso)
-    [92341] = 5000, -- 68235 Stun (Dwarven Theodolite Wheels)
+    -- TODO: Dwarven Theodolite Casts replaced - check later
 
     [111190] = 5000, -- 68235 Stun (Arena Gladiator's Exultation)
     [115064] = 5000, -- 68235 Stun (Arena Gladiator's Mockery)
@@ -696,21 +684,9 @@ CastBarTable.IsCast = {
     [108336] = true, -- 68235 Stun (Psijic Glowglobe's Updated Instructionals)
     [108340] = true, -- 68235 Stun (Psijic Glowglobe's Wisp Animus)
 
-    [92381] = true, -- 68235 Stun (Sixth House Incense of Toolwork)
-    [92393] = true, -- 68235 Stun (Sixth House Ornamental Fasteners)
-    [92389] = true, -- 68235 Stun (Sixth House Patterned Belt)
-    [92397] = true, -- 68235 Stun (Sixth House Tailor's Belt)
-    [92385] = true, -- 68235 Stun (Sixth House Tailor's Hammer)
-    [92373] = true, -- 68235 Stun (Sixth House Tailor's Shears)
-    [92377] = true, -- 68235 Stun (Sixth House Writhing Thread)
+    -- TODO: Sixth House Robe Casts replaced - check later
 
-    [92365] = true, -- 68235 Stun (Dwarven Theodolite Chassis)
-    [92361] = true, -- 68235 Stun (Dwarven Theodolite Eye)
-    [92357] = true, -- 68235 Stun (Dwarven Theodolite Head)
-    [92353] = true, -- 68235 Stun (Dwarven Theodolite Neck)
-    [92349] = true, -- 68235 Stun (Dwarven Theodolite Shoulder)
-    [92345] = true, -- 68235 Stun (Dwarven Theodolite Torso)
-    [92341] = true, -- 68235 Stun (Dwarven Theodolite Wheels)
+    -- TODO: Dwarven Theodolite Casts replaced - check later
 
     [111190] = true, -- 68235 Stun (Arena Gladiator's Exultation)
     [115064] = true, -- 68235 Stun (Arena Gladiator's Mockery)

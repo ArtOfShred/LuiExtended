@@ -2202,7 +2202,7 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
     end
 
     -- Special handling for Crystallized Shield + Morphs
-    if abilityId == 92068 or abilityId == 92168 or abilityId == 92170 then
+    if abilityId == 86135 or abilityId == 86139 or abilityId == 86143 then
         -- Make sure this event occured on the player only. If we hit another Warden's shield we don't want to change stack count.
         if result == ACTION_RESULT_DAMAGE_SHIELDED and targetType == COMBAT_UNIT_TYPE_PLAYER then
             if g_toggledSlotsFront[abilityId] or g_toggledSlotsBack[abilityId] then
@@ -2242,7 +2242,7 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
                 local endTime = currentTime + duration
                 g_toggledSlotsRemain[abilityId] = endTime
                 -- Handling for Crystallized Shield + Morphs
-                if abilityId == 92068 or abilityId == 92168 or abilityId == 92170 then
+                if abilityId == 86135 or abilityId == 86139 or abilityId == 86143 then
                     g_toggledSlotsStack[abilityId] = 3
                 end
                 -- Toggle highlight on

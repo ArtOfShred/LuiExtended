@@ -927,15 +927,14 @@ LUIE.Data.AlertTable = {
     }, -- Empower Atronach (Fire-Binder) (Morrowind)
 
     [76621] = {
-        block = true,
         avoid = true,
         interrupt = true,
         priority = 3,
         result = ACTION_RESULT_BEGIN,
         duration = 1500,
-        cc = LUIE_CC_TYPE_STUN,
+        cc = LUIE_CC_TYPE_SNARE,
         eventdetect = true,
-        sound = LUIE_ALERT_SOUND_TYPE_TRAVELER_CC,
+        sound = LUIE_ALERT_SOUND_TYPE_TRAVELER,
         noDirect = true,
     }, -- Shadeway (Voidbringer) (Morrowind)
     [76619] = {

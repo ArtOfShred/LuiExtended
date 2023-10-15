@@ -460,8 +460,6 @@ local AbilityTables = {
     Skill_Natures_Grasp = 85564,
     Skill_Bursting_Vines = 85859,
     Skill_Natures_Embrace = 85858,
-    Skill_Crystallized_Shield = 86135,
-    Skill_Crystallized_Slab = 86139,
     Skill_Shimmering_Shield = 86143,
     Skill_Frozen_Device = 86179,
 

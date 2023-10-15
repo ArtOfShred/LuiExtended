@@ -287,7 +287,6 @@ Effects.IsExperienceBuff = {
 
     -- Event
     [91369] = true, -- The Pie of Misrule (Jester's Experience Boost Pie)
-    [91449] = true, -- Breda's Magnificent Mead
     [77123] = true, -- Anniversary EXP Buff
     [118985] = true, -- Anniversary EXP Buff
     [136348] = true, -- Anniversary EXP Buff
@@ -304,9 +303,6 @@ Effects.IsAllianceXPBuff = {
     [147687] = true, -- Alliance Skill Gain 50% Boost (Colovian War Torte)
     [147733] = true, -- Alliance Skill Gain 100% Boost (Molten War Torte)
     [147734] = true, -- Alliance Skill Gain 150% Boost (White-Gold War Torte)
-
-    -- Event
-    [92232] = true, -- Pelinal's Ferocity
 
     -- World
     [66282] = true, -- Blessing of War
@@ -394,8 +390,6 @@ Effects.IsGroundMineStack = {
 -- Linked id's for tracking ground mine explosions - These id's all all merged into one and considered for the purpose of reducing the stack count of certain mine abilities
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.LinkedGroundMine = {
-    [76631] = 37475, -- Manifestation of Terror (Nightblade)
-
     [24832] = 24830, -- Daedric Mines (Daedric Mines)
     [24833] = 24830, -- Daedric Mines (Daedric Mines)
 
@@ -937,7 +931,7 @@ Effects.EffectGroundDisplay = {
     [38528] = { name = Abilities.Skill_Shadow_Image, buff = true, debuff = false, ground = false }, -- Shadow (Shadow Image)
     [88696] = { name = Abilities.Skill_Shadow_Image, buff = true, debuff = false, ground = false }, -- Shadow (Shadow Image) -- Khajiit
     [88697] = { name = Abilities.Skill_Shadow_Image, buff = true, debuff = false, ground = false }, -- Shadow (Shadow Image) -- Argonian
-    [37475] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 2 }, -- Manifestation of Terror (Nightblade)
+    [37475] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 }, -- Manifestation of Terror (Nightblade)
     [25411] = { buff = true, debuff = false, ground = false }, -- Consuming Darkness (Consuming Darkness)
     [36493] = { buff = true, debuff = false, ground = false }, -- Bolstering Darkness (Bolstering Darkness)
     [36485] = { buff = true, debuff = false, ground = false }, -- Veil of Blades (Veil of Blades)
@@ -1515,9 +1509,9 @@ Effects.BarHighlightOverride = {
     [86152] = { newId = 90835 }, -- Polar Wind
     [86156] = { newId = 90834 }, -- Arctic Blast --> Arctic Blast Stun
 
-    [86135] = { newId = 92068, showFakeAura = true }, -- Crystallized Shield --> Crystalized Shield
-    [86139] = { newId = 92168, showFakeAura = true }, -- Crystallized Slab --> Crystalized Slab
-    [86143] = { newId = 92170, showFakeAura = true }, -- Shimmering Shield --> Shimmering Shield
+    [86135] = { showFakeAura = true }, -- Crystallized Shield --> Crystalized Shield
+    [86139] = { showFakeAura = true }, -- Crystallized Slab --> Crystalized Slab
+    [86143] = { showFakeAura = true }, -- Shimmering Shield --> Shimmering Shield
 
     ---------------------------
     -- Necromancer ------------
@@ -1582,9 +1576,9 @@ Effects.BarHighlightOverride = {
     -- One Hand and Shield ----
     ---------------------------
 
-    [28306] = { newId = 38541 }, -- Puncture --> Major Breach
-    [38256] = { newId = 38541 }, -- Ransack --> Major Breach
-    [38250] = { newId = 38541 }, -- Pierce Armor --> Major Breach
+    [28306] = { newId = 38254 }, -- Puncture --> Major Breach
+    [38256] = { newId = 38254 }, -- Ransack --> Major Breach
+    [38250] = { newId = 38254 }, -- Pierce Armor --> Major Breach
     [28304] = { newId = 61723 }, -- Low Slash --> Minor Maim
     [38268] = { newId = 61723 }, -- Deep Slash --> Minor Maim
     [38264] = { newId = 61723 }, -- Heroic Slash --> Minor Maim
@@ -1799,18 +1793,15 @@ Effects.BarHighlightOverride = {
     [39425] = { newId = 39425 }, -- trapping webs
     [41990] = { newId = 41990 }, -- shadow silk
     [42012] = { newId = 42012 }, -- tangling webs
-    [39475] = { newId = 38254 }, -- inner fire (taunt)
-    [42056] = { newId = 38254 }, -- inner rage (taunt)
-    [42060] = { newId = 42062 }, -- inner beast
+    [39475] = { newId = 38254 }, -- Inner Fire --> Taunt
+    [42056] = { newId = 38254 }, -- Inner Rage --> Taunt
+    [42060] = { newId = 42062 }, -- Inner Beast
     [39369] = { newId = 39369 }, -- bone shield
     [42138] = { newId = 42138 }, -- spiked bone shield
     [42176] = { newId = 42176 }, -- bone surge
     [39298] = { newId = 39298 }, -- necrotic orb
     [42028] = { newId = 42028 }, -- mystic orb
     [42038] = { newId = 42038 }, -- energy orb
-    -- [39475] = { newId = 38541 }, -- Inner Fire --> Taunt	why are these extra{{newId = 41942,}}
-    -- [42056] = { newId = 38541 }, -- Inner Rage --> Taunt	why are these extra{{newId = 42059,}}
-    -- [42060] = { newId = 42062 }, -- Inner Beast				why are these extra{{newId = 42062,}}
 
     ---------------------------
     -- Assault ----------------
@@ -3803,7 +3794,6 @@ Effects.EffectOverride = {
         name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Sneak, Abilities.Innate_Stun),
         tooltip = Tooltips.Generic_Stun,
     }, -- Slam Stun (Stun from crouch attack)
-    [72902] = { hide = true }, -- Hidden
 
     -- Mount
     [37059] = { icon = "LuiExtended/media/icons/abilities/ability_innate_mounted.dds" }, -- Mount Up (Mount)
@@ -3903,8 +3893,7 @@ Effects.EffectOverride = {
     [38117] = { hide = true }, -- Crowd Control Immunity
 
     -- Taunt Effects
-    [38254] = { icon = "esoui/art/icons/ability_warrior_010.dds" }, -- Taunt
-    [38541] = { icon = "esoui/art/icons/ability_warrior_010.dds", tooltip = Tooltips.Innate_Taunt }, -- Taunt
+    [38254] = { icon = "esoui/art/icons/ability_warrior_010.dds", tooltip = Tooltips.Innate_Taunt }, -- Taunt
 
     -- Disguise Effects
     [50602] = {
@@ -5106,34 +5095,12 @@ Effects.EffectOverride = {
         name = Abilities.Innate_Chef_Arquitius_Lost_Thesis,
     }, -- 88449 Stun (Chef Arquitius's Lost Thesis)
 
-    [92365] = {
+    --[[ -- TODO: Dwarven Theodolite Casts replaced - check later
+    [-----] = {
         icon = "LuiExtended/media/icons/abilities/ability_item_dwarven_theodolite.dds",
         name = Abilities.Innate_Dwarven_Theodolite,
-    }, -- 68235 Stun (Dwarven Theodolite Chassis)
-    [92361] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_dwarven_theodolite.dds",
-        name = Abilities.Innate_Dwarven_Theodolite,
-    }, -- 68235 Stun (Dwarven Theodolite Eye)
-    [92357] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_dwarven_theodolite.dds",
-        name = Abilities.Innate_Dwarven_Theodolite,
-    }, -- 68235 Stun (Dwarven Theodolite Head)
-    [92353] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_dwarven_theodolite.dds",
-        name = Abilities.Innate_Dwarven_Theodolite,
-    }, -- 68235 Stun (Dwarven Theodolite Neck)
-    [92349] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_dwarven_theodolite.dds",
-        name = Abilities.Innate_Dwarven_Theodolite,
-    }, -- 68235 Stun (Dwarven Theodolite Shoulder)
-    [92345] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_dwarven_theodolite.dds",
-        name = Abilities.Innate_Dwarven_Theodolite,
-    }, -- 68235 Stun (Dwarven Theodolite Torso)
-    [92341] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_dwarven_theodolite.dds",
-        name = Abilities.Innate_Dwarven_Theodolite,
-    }, -- 68235 Stun (Dwarven Theodolite Wheels)
+    },
+    ]]
 
     [117532] = {
         icon = "LuiExtended/media/icons/abilities/ability_item_guar_stomp.dds",
@@ -5238,34 +5205,12 @@ Effects.EffectOverride = {
         name = Abilities.Innate_Psijic_Glowglobe,
     }, -- 68235 Stun (Psijic Glowglobe's Wisp Animus)
 
-    [92381] = {
+    --[[ -- TODO: Sixth House Robe Casts replaced - check later
+    [-----] = {
         icon = "LuiExtended/media/icons/abilities/ability_item_sixth_house_robe.dds",
         name = Abilities.Innate_Sixth_House_Robe,
-    }, -- 68235 Stun (Sixth House Incense of Toolwork)
-    [92393] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_sixth_house_robe.dds",
-        name = Abilities.Innate_Sixth_House_Robe,
-    }, -- 68235 Stun (Sixth House Ornamental Fasteners)
-    [92389] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_sixth_house_robe.dds",
-        name = Abilities.Innate_Sixth_House_Robe,
-    }, -- 68235 Stun (Sixth House Patterned Belt)
-    [92397] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_sixth_house_robe.dds",
-        name = Abilities.Innate_Sixth_House_Robe,
-    }, -- 68235 Stun (Sixth House Tailor's Belt)
-    [92385] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_sixth_house_robe.dds",
-        name = Abilities.Innate_Sixth_House_Robe,
-    }, -- 68235 Stun (Sixth House Tailor's Hammer)
-    [92373] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_sixth_house_robe.dds",
-        name = Abilities.Innate_Sixth_House_Robe,
-    }, -- 68235 Stun (Sixth House Tailor's Shears)
-    [92377] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_sixth_house_robe.dds",
-        name = Abilities.Innate_Sixth_House_Robe,
-    }, -- 68235 Stun (Sixth House Writhing Thread)
+    },
+    ]]--
 
     [140542] = { hide = true }, -- Stone Warrior Target Dummy (Stone Husk Fragment)
     [140544] = {
@@ -5477,11 +5422,13 @@ Effects.EffectOverride = {
     [116944] = { tooltip = Tooltips.Event_Revelry_Pie, stack = 0, unbreakable = 1 }, -- Covered in Pie (Revelry Pie)
     [116943] = { tooltip = Tooltips.Event_Revelry_Pie, stack = 0, unbreakable = 1 }, -- Covered in Pie (Revelry Pie)
 
+    --[[ -- TODO: Removed at some point, did this get replaced with another ID?
     [92232] = {
         icon = "LuiExtended/media/icons/mementos/memento_pelinals_ferocity.dds",
         tooltip = Tooltips.Experience_Seasonal_Pelinal,
         forcedContainer = "long",
     }, -- Pelinal's Ferocity (Scroll of Pelinal's Ferocity)
+    ]]--
 
     ----------------------------------------------------------------
     -- MEMENTOS ----------------------------------------------------
@@ -5551,11 +5498,13 @@ Effects.EffectOverride = {
     }, -- Jester's Experience Boost Pie (The Pie of Misrule)
 
     -- New Life Festival
-    [91449] = {
+    --[[ -- TODO: Removed at some point, see if there is a new ID
+    [-----] = {
         icon = "LuiExtended/media/icons/mementos/memento_bredas_magnificent_mead.dds",
         tooltip = Tooltips.Experience_Seasonal_Event,
         forcedContainer = "long",
     }, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)
+    ]]--
     [85355] = {
         icon = "LuiExtended/media/icons/mementos/memento_fire_breathers_torches.dds",
         name = Abilities.Memento_Fire_Breathers_Torches,
@@ -7825,9 +7774,6 @@ Effects.EffectOverride = {
     [20253] = { hideReduce = true, tooltip = Tooltips.Skill_Burning_Talons }, -- Burning Talons (Burning Talons)
     [20528] = { tooltip = Tooltips.Generic_Immobilize }, -- Choking Talons (Choking Talons)
 
-    -- Dragon Blood / Green Dragon Blood / Coagulating Blood
-    [61891] = { hide = true }, -- Coagulating Blood Bonus Heal (Coagulating Blood)
-
     -- Protective Scale / Protective Plate / Dragon Fire Scale
     [21007] = { tooltip = Tooltips.Skill_Protective_Scale }, -- Protective Scale (Protective Scale)
     [21014] = { tooltip = Tooltips.Skill_Protective_Plate }, -- Protective Plate (Protective Plate)
@@ -8046,7 +7992,6 @@ Effects.EffectOverride = {
     [37470] = { tooltip = Tooltips.Generic_Fear }, -- Mass Hysteria (Mass Hysteria)
     [37475] = { tooltip = Tooltips.Skill_Manifestation_of_Terror }, -- Manifestation of Terror (Manifestation of Terror)
     [76639] = { tooltip = Tooltips.Generic_Fear }, -- Manifestation of Terror (Manifestation of Terror)
-    [76629] = { hide = true }, -- Remove Trap (Manifestation of Terror)
     [76635] = { hide = true }, -- Remove Trap (Manifestation of Terror)
     [38208] = { hide = true }, -- Birth Manifestation of Terror (Manifestation of Terror)
     [76632] = { hide = true }, -- Manifestation of Terror (Manifestation of Terror)
@@ -8209,10 +8154,8 @@ Effects.EffectOverride = {
 
     [46331] = { tooltip = Tooltips.Skill_Crystal_Weapon }, -- Crystal Weapon (Crystal Weapon)
     [143808] = { tooltip = Tooltips.Generic_Reduce_Physical_Spell_Resist_Value, tooltipValue2 = 1000 }, -- Crystal Weapon (Crystal Weapon)
-    [143806] = { tooltip = Tooltips.Skill_Crystal_Weaver }, -- Crystal Weaver (Crystal Weapon)
 
     [46327] = { name = Abilities.Skill_Crystal_Fragments, tooltip = Tooltips.Skill_Crystal_Fragments }, -- Crystal Fragments Proc (Crystal Fragments)
-    [143747] = { tooltip = Tooltips.Skill_Crystal_Weaver }, -- Crystal Weaver (Crystal Fragments)
 
     -- Encase / Shattering Prison / Restraining Prison
     [28025] = { tooltip = Tooltips.Generic_Immobilize }, -- Encase (Encase)
@@ -8446,12 +8389,6 @@ Effects.EffectOverride = {
     [31757] = { icon = "esoui/art/icons/ability_templar_032.dds" }, -- Sacred Ground
     [45207] = { icon = "esoui/art/icons/ability_templar_032.dds" }, -- Sacred Ground
     [31759] = {
-        icon = "LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds",
-        forcedContainer = "short",
-        groundLabel = true,
-        tooltip = Tooltips.Skill_Sacred_Ground,
-    }, -- Minor Mending (Sacred Ground - Rank 1 & 2)
-    [77082] = {
         icon = "LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds",
         forcedContainer = "short",
         groundLabel = true,
@@ -8695,15 +8632,11 @@ Effects.EffectOverride = {
 
     -- Animal Companions
     [86064] = { name = Abilities.Passive_Bond_with_Nature }, -- Bond With Nature (Bond With Nature - Rank 1)
-    [88986] = {
-        icon = "LuiExtended/media/icons/abilities/ability_warden_bond_with_nature.dds",
-        name = Abilities.Passive_Bond_with_Nature,
-    }, -- Bond With Nature (Bond With Nature - Rank 1)
     [86065] = { name = Abilities.Passive_Bond_with_Nature }, -- Bond With Nature (Bond With Nature - Rank 2)
-    [88988] = {
+    [88515] = {
         icon = "LuiExtended/media/icons/abilities/ability_warden_bond_with_nature.dds",
         name = Abilities.Passive_Bond_with_Nature,
-    }, -- Bond With Nature (Bond With Nature - Rank 2)
+    }, -- Bond With Nature Trigger
     [88512] = {
         icon = "LuiExtended/media/icons/abilities/ability_warden_savage_beast.dds",
         name = Abilities.Passive_Savage_Beast,
@@ -8896,28 +8829,11 @@ Effects.EffectOverride = {
     [130409] = { icon = "esoui/art/icons/ability_warden_003_b.dds", tooltip = Tooltips.Generic_Stun }, -- Arctic Blast (Arctic Blast)
 
     -- Crystallized Shield / Crystallized Slab / Shimmering Shield
-    [86135] = { hide = true }, -- Crystallized Shield (Crystallized Shield)
-    [92068] = {
-        icon = "esoui/art/icons/ability_warden_002.dds",
-        name = Abilities.Skill_Crystallized_Shield,
-        tooltip = Tooltips.Skill_Crystallized_Shield,
-        stack = 3,
-    }, -- Crystalized Shield (Crystallized Shield)
+    [86135] = { stack = 3, tooltip = Tooltips.Skill_Crystallized_Shield }, -- Crystallized Shield (Crystallized Shield)
     [87224] = { icon = "esoui/art/icons/ability_warden_002.dds" }, -- Combat Restore Crystalized Shi (Crystallized Shield)
-    [86139] = { hide = true }, -- Crystallized Slab (Crystallized Slab)
-    [92168] = {
-        icon = "esoui/art/icons/ability_warden_002_a.dds",
-        name = Abilities.Skill_Crystallized_Slab,
-        tooltip = Tooltips.Skill_Crystallized_Slab,
-        stack = 3,
-    }, -- Crystalized Slab (Crystallized Slab)
+    [86139] = { stack = 3, tooltip = Tooltips.Skill_Crystallized_Slab }, -- Crystallized Slab (Crystallized Slab)
     [93175] = { hide = true }, -- Crystallized Slab (Crystallized Slab)
-    [86143] = { hide = true }, -- Shimmering Shield (Shimmering Shield)
-    [92170] = {
-        icon = "esoui/art/icons/ability_warden_002_b.dds",
-        tooltip = Tooltips.Skill_Shimmering_Shield,
-        stack = 3,
-    }, -- Shimmering Shield (Shimmering Shield)
+    [86143] = { stack = 3, Tooltips.Skill_Shimmering_Shield }, -- Shimmering Shield (Shimmering Shield)
     [88771] = { icon = "esoui/art/icons/ability_warden_002_b.dds", name = Abilities.Skill_Shimmering_Shield }, -- Shimmering Shield Restore (Shimmering Shield)
 
     -- Frozen Gate / Frozen Device / Frozen Retreat
@@ -9065,7 +8981,6 @@ Effects.EffectOverride = {
     -- BONE TYRANT
 
     -- Death Scythe / Ruinous Scythe / Hungry Scythe
-    [125749] = { tooltip = Tooltips.Skill_Ruinous_Scythe, forcedContainer = "short" }, -- Ruinous Scythe (Ruinous Scythe)
     [125750] = { tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off Balance (Ruinous Scythe)
     [122625] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Hungry Scythe (Hungry Scythe)
 
@@ -12425,12 +12340,6 @@ Effects.EffectOverride = {
     [68826] = { name = Abilities.Innate_Stagger, hide = true, tooltip = Tooltips.Generic_Stagger }, -- Staggered (Flesh Colossus - Block Sweep)
     [67842] = { icon = "LuiExtended/media/icons/abilities/ability_spell_shockwave.dds", hide = true }, -- Sweep Shockwave (Flesh Colossus)
     [76129] = { icon = "LuiExtended/media/icons/abilities/ability_fleshcolossus_stumble_forward.dds" }, -- Stumble Forward (Flesh Colossus)
-    [76134] = {
-        icon = "esoui/art/icons/ability_debuff_stagger.dds",
-        name = Abilities.Innate_Stagger,
-        hide = true,
-        tooltip = Tooltips.Generic_Stagger,
-    }, -- Stumble Forward (Flesh Colossus)
     [65755] = {
         icon = "esoui/art/icons/ability_debuff_stagger.dds",
         name = Abilities.Innate_Stagger,
@@ -12450,8 +12359,6 @@ Effects.EffectOverride = {
     [76140] = { hide = true }, -- Stumble Forward (Flesh Colossus)
     [76130] = { hide = true }, -- Stumble Forward (Flesh Colossus)
     [76131] = { hide = true }, -- Stumble Forward (Flesh Colossus)
-    [76143] = { hide = true }, -- Stumble Forward (Flesh Colossus)
-    [76146] = { hide = true }, -- Stumble Forward (Flesh Colossus) (Buff on Player)
     [67772] = { icon = "esoui/art/icons/ability_warrior_025.dds", name = Abilities.Skill_Enrage, hide = true }, -- Enraged (Flesh Colossus)
 
     -- Flesh Atronach
@@ -13185,10 +13092,6 @@ Effects.EffectOverride = {
     }, -- Bite (Kotu Gava Spawn)
     [76581] = { hide = true }, -- Bite (Kotu Gava Spawn)
     [73199] = { icon = "LuiExtended/media/icons/abilities/ability_kotugava_swarmburst.dds" }, -- Swarmburst (Kotu Gava Broodmother)
-    [73200] = { hide = true }, -- Swarmburst (Kotu Gava Broodmother)
-    [73195] = { hide = true }, -- Swarmburst (Kotu Gava Spawn)
-    [73196] = { hide = true }, -- Swarmburst (Kotu Gava Spawn)
-    [73197] = { hide = true }, -- Swarmburst (Kotu Gava Spawn)
     [73194] = {
         icon = "LuiExtended/media/icons/abilities/ability_spell_gtaoe_slime_snare_alt.dds",
         tooltip = Tooltips.Generic_Snare,
@@ -14030,19 +13933,13 @@ Effects.EffectOverride = {
     [81545] = { icon = "LuiExtended/media/icons/abilities/ability_spell_fright_force.dds", hide = true }, -- Fright Force (Malacath Voidbringer)
     [76621] = { icon = "LuiExtended/media/icons/abilities/ability_spell_shadeway_red.dds" }, -- Shadeway (Malacath Voidbringer)
     [76784] = { icon = "LuiExtended/media/icons/abilities/ability_spell_shadeway_red.dds", hide = true }, -- Shadeway (Malacath Voidbringer)
-    [76843] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_shadeway_red.dds",
-        tooltip = Tooltips.Generic_Stun,
-    }, -- Shadeway (Malacath Voidbringer)
     [76619] = { icon = "LuiExtended/media/icons/abilities/ability_spell_pool_of_shadow_red.dds", hide = true }, -- Pool of Shadow (Malacath Voidbringer)
-    [76730] = { icon = "LuiExtended/media/icons/abilities/ability_spell_pool_of_shadow_red.dds" }, -- Pool of Shadow (Malacath Voidbringer)
     [76624] = {
         icon = "LuiExtended/media/icons/abilities/ability_spell_pool_of_shadow_red.dds",
         groundLabel = true,
         tooltip = Tooltips.Generic_AOE_Magic,
         tooltipValue2 = 0.5,
     }, -- Pool of Shadow (Malacath Voidbringer)
-    [76729] = { icon = "LuiExtended/media/icons/abilities/ability_spell_pool_of_shadow_red.dds" }, -- Pool of Shadow (Malacath Voidbringer)
     [76728] = {
         icon = "LuiExtended/media/icons/abilities/ability_spell_pool_of_shadow_red.dds",
         groundLabel = true,
@@ -14055,12 +13952,6 @@ Effects.EffectOverride = {
         tooltip = Tooltips.Skill_Shadowy_Duplicate,
     }, -- Shadowy Duplicate (Malacath Voidbringer)
     [76995] = { hide = true }, -- Shadowy Duplicate (Malacath Voidbringer)
-    [76969] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_shadowy_barrier_red.dds",
-        name = Abilities.Skill_Shadowy_Barrier,
-        duration = 295,
-        tooltip = Tooltips.Skill_Shadowy_Barrier,
-    }, -- Shadowy Duplicate (Malacath Voidbringer)
     [76955] = { hide = true }, -- Shadowy Duplicate (Malacath Voidbringer)
     [76996] = { hide = true }, -- Shadowy Duplicate (Malacath Voidbringer)
     [76985] = { icon = "LuiExtended/media/icons/abilities/ability_spell_shadowy_barrier_red.dds" }, -- Shadowy Duplicate (Malacath Voidbringer)
@@ -14092,14 +13983,9 @@ Effects.EffectOverride = {
     [77020] = { hide = true }, -- Basilisk Powder (Tracker)
     [77089] = { icon = "LuiExtended/media/icons/abilities/ability_spell_basilisk_powder.dds" }, -- Basilisk Powder (Tracker)
     [77087] = { icon = "LuiExtended/media/icons/abilities/ability_spell_basilisk_powder.dds", hide = true }, -- Basilisk Powder (Tracker)
-    [77086] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_basilisk_powder.dds",
-        tooltip = Tooltips.Skill_Basilisk_Powder,
-    }, -- Basilisk Powder (Tracker)
     [79954] = {
         icon = "LuiExtended/media/icons/abilities/ability_spell_basilisk_powder.dds",
-        tooltip = Tooltips.Skill_Basilisk_Powder,
-        hideReduce = true,
+        tooltip = Tooltips.Generic_Stun,
     }, -- Basilisk Powder (Tracker)
     [77019] = { icon = "LuiExtended/media/icons/abilities/ability_spell_pin.dds", hide = true }, -- Pin (Tracker)
     [77030] = {
@@ -14686,10 +14572,12 @@ Effects.EffectOverride = {
         tooltip = Tooltips.Skill_Meatbag_Catapult_AOE,
         groundLabel = true,
     }, -- Meatbag Catapult (Meatbag Catapult)
+    --[[ -- TODO: Removed at some point - did this ID get replaced?
     [32036] = {
         icon = "LuiExtended/media/icons/abilities/ability_ava_siege_meatbag_catapult.dds",
         tooltip = Tooltips.Skill_Meatbag_Catapult,
     }, -- Meatbag Catapult (Meatbag Catapult)
+    ]]--
     [36408] = {
         icon = "LuiExtended/media/icons/abilities/ability_ava_siege_meatbag_catapult.dds",
         type = BUFF_EFFECT_TYPE_DEBUFF,
@@ -21399,6 +21287,7 @@ Effects.EffectOverride = {
     [109802] = { icon = "LuiExtended/media/icons/abilities/ability_troll_lope.dds" }, -- Leaping Crush (Icestalker)
     [109804] = { icon = "LuiExtended/media/icons/abilities/ability_troll_lope.dds" }, -- Leaping Crush (Icestalker)
     [109805] = { icon = "LuiExtended/media/icons/abilities/ability_troll_lope.dds" }, -- Leaping Crush (Icestalker)
+    --[[ -- TODO: Removed at some point - did these get replaced by new ID's?
     [116667] = {
         icon = "LuiExtended/media/icons/abilities/ability_troll_lope.dds",
         name = Abilities.Skill_Leaping_Crush,
@@ -21410,13 +21299,10 @@ Effects.EffectOverride = {
         type = BUFF_EFFECT_TYPE_DEBUFF,
         unbreakable = 1,
     }, -- Skeletal Smash (Icestalker)
+    ]]--
 
     [109827] = { icon = "LuiExtended/media/icons/abilities/ability_spell_boulder_toss.dds" }, -- Boulder Toss (Icestalker)
     [109828] = { icon = "LuiExtended/media/icons/abilities/ability_spell_boulder_toss.dds" }, -- Boulder Toss (Icestalker)
-    [109831] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_boulder_toss.dds",
-        tooltip = Tooltips.Generic_Knockdown,
-    }, -- Boulder Toss (Icestalker)
 
     [109811] = { icon = "LuiExtended/media/icons/abilities/ability_spell_shockwave.dds" }, -- Ground Slam (Icestalker)
     [109819] = { icon = "LuiExtended/media/icons/abilities/ability_spell_shockwave.dds" }, -- Ground Slam (Icestalker)
@@ -21882,9 +21768,9 @@ Effects.FakePlayerBuffs = {
     [88758] = { duration = "GET", onlyExtended = true, shiftId = 86126 }, -- Major Resolve (Expansive Frost Cloak)
     [88761] = { duration = "GET", onlyExtra = true, shiftId = 86130 }, -- Major Resolve (Ice Fortress)
 
-    [92068] = { duration = "GET" }, -- Crystalized Shield (Crystallized Shield)
-    [92168] = { duration = "GET" }, -- Crystalized Slab (Crystallized Slab)
-    [92170] = { duration = "GET" }, -- Shimmering Shield (Shimmering Shield)
+    [86135] = { duration = "GET" }, -- Crystalized Shield (Crystallized Shield)
+    [86139] = { duration = "GET" }, -- Crystalized Slab (Crystallized Slab)
+    [86143] = { duration = "GET" }, -- Shimmering Shield (Shimmering Shield)
 
     -- Two Handed
     [28297] = { duration = "GET", onlyExtra = true }, -- Momentum
@@ -22038,7 +21924,6 @@ Effects.FakeStagger = {
     [32698] = { duration = 433 }, -- Pulverize (Lurcher - Pulverize)
     [5349] = { duration = 433 }, -- Stagger (Ogre - Shockwave)
     [49405] = { duration = 433 }, -- Rear Up (Mantikora)
-    [76134] = { duration = 600 }, -- Stumble Forward (Flesh Colossus)
     [76133] = { duration = 433 }, -- Stumble Forward (Flesh Colossus - Blocked)
     [65755] = { duration = 600 }, -- Staggered (Flesh Colossus - Block Pin)
     [68826] = { duration = 600 }, -- Staggered (Flesh Colossus - Block Sweep)
