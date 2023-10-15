@@ -5,7 +5,7 @@
 ## AddOnVersion: 653
 ## Description: Provides UnitFrames, InfoPanel, Combat Text & Info, Buffs & Debuff Tracking, Chat Announcements and Slash Commands.
 ## DependsOn: LibAddonMenu-2.0>=34 LibMediaProvider-1.0
-## OptionalDependsOn: LibChatMessage>=105 pChat CombatMetrics DolgubonsLazyWritCreator
+## OptionalDependsOn: LibChatMessage>=105 pChat CombatMetrics DolgubonsLazyWritCreator LibLazyCrafting LootLog
 ## IsLibrary: false
 ## SavedVariables: LUIESV
 
@@ -41,6 +41,14 @@
 # THE SOFTWARE.
 
 LuiExtended.lua
+data/Globals.lua
+i18n/en.lua
+i18n/$(language).lua
+i18n/settings/Settings_en.lua
+i18n/settings/Settings_$(language).lua
+i18n/skills/Skills_en.lua
+i18n/skills/Skills_$(language).lua
+
 Functions.lua
 Hooks-SkillsAdvisor.lua
 Hooks.lua
@@ -54,16 +62,8 @@ frontend/CombatText.xml
 frontend/CrowdControlTracker.xml
 # frontend/StatPanel.xml
 
-i18n/en.lua
-i18n/$(language).lua
-i18n/settings/Settings_en.lua
-i18n/settings/Settings_$(language).lua
-i18n/skills/Skills_en.lua
-i18n/skills/Skills_$(language).lua
-
 Unlock.lua
 
-data/Globals.lua
 data/AbilityTables.lua
 data/Tooltips.lua
 data/UnitNamesTable.lua

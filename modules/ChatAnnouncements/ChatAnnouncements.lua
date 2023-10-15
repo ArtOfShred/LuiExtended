@@ -676,21 +676,21 @@ local g_disableRankMessage = false -- Variable is toggled to true when the playe
 local g_achievementLastPercentage = {} -- Here we will store last displayed percentage for achievement
 
 -- Collectible Usage Tracking
-local currentAssistant = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
-local currentCompanion = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
-local currentVanity = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
-local currentSpecial = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ABILITY_SKIN)
-local currentHat = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_HAT)
-local currentHair = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_HAIR)
-local currentHeadMark = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_HEAD_MARKING)
-local currentFacialHair = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_FACIAL_HAIR_HORNS)
-local currentMajorAdorn = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_FACIAL_ACCESSORY)
-local currentMinorAdorn = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_PIERCING_JEWELRY)
-local currentCostume = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME)
-local currentBodyMarking = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_BODY_MARKING)
-local currentSkin = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_SKIN)
-local currentPersonality = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_PERSONALITY)
-local currentPolymorph = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH)
+local currentAssistant = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+local currentCompanion = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+local currentVanity = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+local currentSpecial = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ABILITY_SKIN, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+local currentHat = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_HAT, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+local currentHair = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_HAIR, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+local currentHeadMark = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_HEAD_MARKING, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+local currentFacialHair = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_FACIAL_HAIR_HORNS, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+local currentMajorAdorn = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_FACIAL_ACCESSORY, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+local currentMinorAdorn = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_PIERCING_JEWELRY, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+local currentCostume = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+local currentBodyMarking = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_BODY_MARKING, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+local currentSkin = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_SKIN, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+local currentPersonality = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_PERSONALITY, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+local currentPolymorph = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
 local lastCollectibleUsed = 0
 
 -- Quest
@@ -760,6 +760,7 @@ local SkillGuildColorizeMG
 local SkillGuildColorizeUD
 local SkillGuildColorizeTG
 local SkillGuildColorizeDB
+local SkillGuildColorizePO
 
 -- Collectibles
 local CollectibleColorize1
@@ -902,35 +903,19 @@ local guildAllianceColors = {
 local g_firstLoad = true
 
 local ChatEventFormattersDelete = {
-    [EVENT_GROUP_TYPE_CHANGED] = true,
+    [EVENT_BATTLEGROUND_INACTIVITY_WARNING] = true,
+    [EVENT_BROADCAST] = true,
+    [EVENT_FRIEND_PLAYER_STATUS_CHANGED] = true,
     [EVENT_GROUP_INVITE_RESPONSE] = true,
     [EVENT_GROUP_MEMBER_LEFT] = true,
-    [EVENT_SOCIAL_ERROR] = true,
-    [EVENT_FRIEND_PLAYER_STATUS_CHANGED] = true,
+    [EVENT_GROUP_TYPE_CHANGED] = true,
     [EVENT_IGNORE_ADDED] = true,
     [EVENT_IGNORE_REMOVED] = true,
+    [EVENT_SOCIAL_ERROR] = true,
+    [EVENT_TRIAL_FEATURE_RESTRICTED] = true,
 }
 
--- function ChatAnnouncements.SlayChatHandlers()
---     -- Unregister ZOS handlers for events we need to modify
---     for eventCode, _ in pairs (ChatEventFormattersDelete) do
---         EVENT_MANAGER:UnregisterForEvent("ChatRouter", eventCode)
---     end
-
---     -- Slay these events in case LibChatMessage is active and hooks them
---     local ChatEventFormatters = ZO_ChatSystem_GetEventHandlers()
---     for eventType, _ in pairs (ChatEventFormattersDelete) do
---         ChatEventFormatters[eventType] = nil
---     end
--- end
-
-local current
-local function NoOp() end
-
 function ChatAnnouncements.SlayChatHandlers()
-    -- Disable hooks
-    current = NoOp
-
     -- Unregister ZOS handlers for events we need to modify
     for eventCode, _ in pairs(ChatEventFormattersDelete) do
         EVENT_MANAGER:UnregisterForEvent("ChatRouter", eventCode)
@@ -942,11 +927,6 @@ function ChatAnnouncements.SlayChatHandlers()
         ChatEventFormatters[eventType] = nil
     end
 end
-
-current = ChatAnnouncements.SlayChatHandlers
-ZO_PostHook("ChatRouter", function(...)
-    return current(...)
-end)
 
 function ChatAnnouncements.Initialize(enabled)
     -- Load settings
@@ -1027,52 +1007,58 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
+function ChatAnnouncements.CreateColorDef(...)
+    return ZO_ColorDef:New(unpack({ ... }))
+end
+
 function ChatAnnouncements.RegisterColorEvents()
-    CurrencyColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyColor))
-    CurrencyUpColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyColorUp))
-    CurrencyDownColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyColorDown))
-    CollectibleColorize1 = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Collectibles.CollectibleColor1))
-    CollectibleColorize2 = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Collectibles.CollectibleColor2))
-    CollectibleUseColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Collectibles.CollectibleUseColor))
-    CurrencyGoldColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyGoldColor))
-    CurrencyAPColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyAPColor))
-    CurrencyTVColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyTVColor))
-    CurrencyWVColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyWVColor))
-    CurrencyOutfitTokenColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyOutfitTokenColor))
-    CurrencyUndauntedColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyUndauntedColor))
-    CurrencyTransmuteColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyTransmuteColor))
-    CurrencyEventColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyEventColor))
-    CurrencyCrownsColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyCrownsColor))
-    CurrencyCrownGemsColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyCrownGemsColor))
-    CurrencyEndeavorsColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyEndeavorsColor))
-    DisguiseAlertColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Notify.DisguiseAlertColor))
-    AchievementColorize1 = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Achievement.AchievementColor1))
-    AchievementColorize2 = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Achievement.AchievementColor2))
-    LorebookColorize1 = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Lorebooks.LorebookColor1))
-    LorebookColorize2 = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Lorebooks.LorebookColor2))
-    ExperienceMessageColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.XP.ExperienceColorMessage)):ToHex()
-    ExperienceNameColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.XP.ExperienceColorName)):ToHex()
-    ExperienceLevelUpColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.XP.ExperienceLevelUpColor))
-    SkillPointColorize1 = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Skills.SkillPointColor1))
-    SkillPointColorize2 = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Skills.SkillPointColor2))
-    SkillLineColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Skills.SkillLineColor))
-    SkillGuildColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Skills.SkillGuildColor)):ToHex()
-    SkillGuildColorizeFG = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Skills.SkillGuildColorFG)):ToHex()
-    SkillGuildColorizeMG = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Skills.SkillGuildColorMG)):ToHex()
-    SkillGuildColorizeUD = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Skills.SkillGuildColorUD)):ToHex()
-    SkillGuildColorizeTG = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Skills.SkillGuildColorTG)):ToHex()
-    SkillGuildColorizeDB = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Skills.SkillGuildColorDB)):ToHex()
-    SkillGuildColorizePO = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Skills.SkillGuildColorPO)):ToHex()
-    QuestColorLocNameColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Quests.QuestColorLocName)):ToHex()
-    QuestColorLocDescriptionColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Quests.QuestColorLocDescription)):ToHex()
-    QuestColorQuestNameColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Quests.QuestColorName))
-    QuestColorQuestDescriptionColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Quests.QuestColorDescription)):ToHex()
-    StorageRidingColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Notify.StorageRidingColor))
-    StorageRidingBookColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Notify.StorageRidingBookColor))
-    StorageBagColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Notify.StorageBagColor))
-    --NotificationColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Notify.NotificationColor))
-    GuildColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Social.GuildColor))
-    AntiquityColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Antiquities.AntiquityColor))
+    local SV = ChatAnnouncements.SV -- store the SV table in a local variable for better performance
+
+    CurrencyColorize = ChatAnnouncements.CreateColorDef(SV.Currency.CurrencyColor)
+    CurrencyUpColorize = ChatAnnouncements.CreateColorDef(SV.Currency.CurrencyColorUp)
+    CurrencyDownColorize = ChatAnnouncements.CreateColorDef(SV.Currency.CurrencyColorDown)
+    CollectibleColorize1 = ChatAnnouncements.CreateColorDef(SV.Collectibles.CollectibleColor1)
+    CollectibleColorize2 = ChatAnnouncements.CreateColorDef(SV.Collectibles.CollectibleColor2)
+    CollectibleUseColorize = ChatAnnouncements.CreateColorDef(SV.Collectibles.CollectibleUseColor)
+    CurrencyGoldColorize = ChatAnnouncements.CreateColorDef(SV.Currency.CurrencyGoldColor)
+    CurrencyAPColorize = ChatAnnouncements.CreateColorDef(SV.Currency.CurrencyAPColor)
+    CurrencyTVColorize = ChatAnnouncements.CreateColorDef(SV.Currency.CurrencyTVColor)
+    CurrencyWVColorize = ChatAnnouncements.CreateColorDef(SV.Currency.CurrencyWVColor)
+    CurrencyOutfitTokenColorize = ChatAnnouncements.CreateColorDef(SV.Currency.CurrencyOutfitTokenColor)
+    CurrencyUndauntedColorize = ChatAnnouncements.CreateColorDef(SV.Currency.CurrencyUndauntedColor)
+    CurrencyTransmuteColorize = ChatAnnouncements.CreateColorDef(SV.Currency.CurrencyTransmuteColor)
+    CurrencyEventColorize = ChatAnnouncements.CreateColorDef(SV.Currency.CurrencyEventColor)
+    CurrencyCrownsColorize = ChatAnnouncements.CreateColorDef(SV.Currency.CurrencyCrownsColor)
+    CurrencyCrownGemsColorize = ChatAnnouncements.CreateColorDef(SV.Currency.CurrencyCrownGemsColor)
+    CurrencyEndeavorsColorize = ChatAnnouncements.CreateColorDef(SV.Currency.CurrencyEndeavorsColor)
+    DisguiseAlertColorize = ChatAnnouncements.CreateColorDef(SV.Notify.DisguiseAlertColor)
+    AchievementColorize1 = ChatAnnouncements.CreateColorDef(SV.Achievement.AchievementColor1)
+    AchievementColorize2 = ChatAnnouncements.CreateColorDef(SV.Achievement.AchievementColor2)
+    LorebookColorize1 = ChatAnnouncements.CreateColorDef(SV.Lorebooks.LorebookColor1)
+    LorebookColorize2 = ChatAnnouncements.CreateColorDef(SV.Lorebooks.LorebookColor2)
+    ExperienceMessageColorize = ChatAnnouncements.CreateColorDef(SV.XP.ExperienceColorMessage):ToHex()
+    ExperienceNameColorize = ChatAnnouncements.CreateColorDef(SV.XP.ExperienceColorName):ToHex()
+    ExperienceLevelUpColorize = ChatAnnouncements.CreateColorDef(SV.XP.ExperienceLevelUpColor)
+    SkillPointColorize1 = ChatAnnouncements.CreateColorDef(SV.Skills.SkillPointColor1)
+    SkillPointColorize2 = ChatAnnouncements.CreateColorDef(SV.Skills.SkillPointColor2)
+    SkillLineColorize = ChatAnnouncements.CreateColorDef(SV.Skills.SkillLineColor)
+    SkillGuildColorize = ChatAnnouncements.CreateColorDef(SV.Skills.SkillGuildColor):ToHex()
+    SkillGuildColorizeFG = ChatAnnouncements.CreateColorDef(SV.Skills.SkillGuildColorFG):ToHex()
+    SkillGuildColorizeMG = ChatAnnouncements.CreateColorDef(SV.Skills.SkillGuildColorMG):ToHex()
+    SkillGuildColorizeUD = ChatAnnouncements.CreateColorDef(SV.Skills.SkillGuildColorUD):ToHex()
+    SkillGuildColorizeTG = ChatAnnouncements.CreateColorDef(SV.Skills.SkillGuildColorTG):ToHex()
+    SkillGuildColorizeDB = ChatAnnouncements.CreateColorDef(SV.Skills.SkillGuildColorDB):ToHex()
+    SkillGuildColorizePO = ChatAnnouncements.CreateColorDef(SV.Skills.SkillGuildColorPO):ToHex()
+    QuestColorLocNameColorize = ChatAnnouncements.CreateColorDef(SV.Quests.QuestColorLocName):ToHex()
+    QuestColorLocDescriptionColorize = ChatAnnouncements.CreateColorDef(SV.Quests.QuestColorLocDescription):ToHex()
+    QuestColorQuestNameColorize = ChatAnnouncements.CreateColorDef(SV.Quests.QuestColorName)
+    QuestColorQuestDescriptionColorize = ChatAnnouncements.CreateColorDef(SV.Quests.QuestColorDescription):ToHex()
+    StorageRidingColorize = ChatAnnouncements.CreateColorDef(SV.Notify.StorageRidingColor)
+    StorageRidingBookColorize = ChatAnnouncements.CreateColorDef(SV.Notify.StorageRidingBookColor)
+    StorageBagColorize = ChatAnnouncements.CreateColorDef(SV.Notify.StorageBagColor)
+    --NotificationColorize = ChatAnnouncements.CreateColorDef(SV.Notify.NotificationColor)
+    GuildColorize = ChatAnnouncements.CreateColorDef(SV.Social.GuildColor)
+    AntiquityColorize = ChatAnnouncements.CreateColorDef(SV.Antiquities.AntiquityColor)
 end
 
 function ChatAnnouncements.RegisterSocialEvents()
@@ -1091,7 +1077,7 @@ function ChatAnnouncements.RegisterQuestEvents()
         if IsValidQuestIndex(i) then
             local name = GetJournalQuestName(i)
             local questType = GetJournalQuestType(i)
-            local instanceDisplayType = GetJournalQuestInstanceDisplayType(i)
+            local instanceDisplayType = GetJournalQuestInstanceDisplayType(i) --TODO: Removed in Update 40
 
             if name == "" then
                 name = GetString(SI_QUEST_JOURNAL_UNKNOWN_QUEST_NAME)
@@ -1828,10 +1814,10 @@ end
 
 -- EVENT_GROUPING_TOOLS_LFG_JOINED
 function ChatAnnouncements.GroupingToolsLFGJoined(eventCode, locationName)
-    -- Get the name of the current activityId that is generated on initialization.
-    local currentActivityName = GetActivityName(g_currentActivityId)
     -- Update the current activity id with the one we are in now.
     g_currentActivityId = GetCurrentLFGActivityId()
+    -- Get the name of the current activityId that is generated on initialization.
+    local currentActivityName = GetActivityName(g_currentActivityId)
     -- If the locationName is different thant the saved currentActivityName we have entered a new LFG instance, so display this message.
     if locationName ~= currentActivityName then
         if ChatAnnouncements.SV.Group.GroupLFGCA then
@@ -3706,14 +3692,16 @@ function ChatAnnouncements.OnPackSiege()
     eventManager:RegisterForUpdate(moduleName .. "ResetPackSiege", 4000, ResetPackSiege)
 end
 
+-- Copied from LLC internals
+local function getItemLinkFromItemId(itemId)
+    return GetItemLinkName("|H1:item:" .. itemId .. ":0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
+end
+
 -- Helper function for Craft Bag
 function ChatAnnouncements.GetItemLinkFromItemId(itemId)
-    local name = GetItemLinkName(ZO_LinkHandler_CreateLink("Test Trash", nil, ITEM_LINK_TYPE, itemId, 1, 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 10000, 0))
-    if ChatAnnouncements.SV.BracketOptionItem == 1 then
-        return ZO_LinkHandler_CreateLinkWithoutBrackets(zo_strformat("<<t:1>>", name), nil, ITEM_LINK_TYPE, itemId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    else
-        return ZO_LinkHandler_CreateLink(zo_strformat("<<t:1>>", name), nil, ITEM_LINK_TYPE, itemId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    end
+    local name = getItemLinkFromItemId(itemId)
+    local linkCreationFunc = ChatAnnouncements.SV.BracketOptionItem == 1 and ZO_LinkHandler_CreateLinkWithoutBrackets or ZO_LinkHandler_CreateLink
+    return linkCreationFunc(zo_strformat("<<t:1>>", name), nil, ITEM_LINK_TYPE, itemId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 end
 
 local questItemIndex = {}
@@ -4054,13 +4042,13 @@ end
 
 -- If filter is true, we run the item through this function to determine if we should display it. Filter only gets set to true for group loot and relevant loot functions. Mail, trade, stores, etc don't apply the filter.
 function ChatAnnouncements.ItemFilter(itemType, itemId, itemLink, groupLoot)
-    if ChatAnnouncements.SV.Inventory.LootBlacklist and g_blacklistIDs[itemId] then
+    if ChatAnnouncements.SV.Inventory.LootBlacklist and g_blacklistIDs[itemId] or LootLog.name then
         return false
     end
 
     local _, specializedItemType = GetItemLinkItemType(itemLink)
     local itemQuality = GetItemLinkQuality(itemLink)
-    local itemIsSet = GetItemLinkSetInfo(itemLink)
+    local itemIsSet = GetItemLinkSetInfo(itemLink, false)
 
     local itemIsKeyFragment = (itemType == ITEMTYPE_TROPHY) and (specializedItemType == SPECIALIZED_ITEMTYPE_TROPHY_KEY_FRAGMENT)
     local itemIsSpecial = (itemType == ITEMTYPE_TROPHY and not itemIsKeyFragment) or (itemType == ITEMTYPE_COLLECTIBLE) or IsItemLinkConsumable(itemLink)
@@ -4790,7 +4778,7 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
         if g_weAreInADig then
             logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageExcavate
         end
-        local itemLink = ChatAnnouncements.GetItemLinkFromItemId(slotId)
+        local itemLink = tostring(ChatAnnouncements.GetItemLinkFromItemId(slotId))
         local icon = GetItemLinkInfo(itemLink)
         local itemType = GetItemLinkItemType(itemLink)
         local itemId = slotId
@@ -4848,37 +4836,49 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
     end
 
     local function ResolveCraftingUsed(itemType)
-        if (GetCraftingInteractionType() == CRAFTING_TYPE_BLACKSMITHING or GetCraftingInteractionType() == CRAFTING_TYPE_CLOTHIER or GetCraftingInteractionType() == CRAFTING_TYPE_WOODWORKING or GetCraftingInteractionType() == CRAFTING_TYPE_JEWELRYCRAFTING) and g_smithing.GetMode() == 4 then
-            if
-                itemType == ITEMTYPE_ADDITIVE
-                or itemType == ITEMTYPE_ARMOR_BOOSTER
-                or itemType == ITEMTYPE_ARMOR_TRAIT
-                or itemType == ITEMTYPE_BLACKSMITHING_BOOSTER
-                or itemType == ITEMTYPE_BLACKSMITHING_MATERIAL
-                or itemType == ITEMTYPE_CLOTHIER_BOOSTER
-                or itemType == ITEMTYPE_CLOTHIER_MATERIAL
-                or itemType == ITEMTYPE_ENCHANTING_RUNE_ASPECT
-                or itemType == ITEMTYPE_ENCHANTING_RUNE_ESSENCE
-                or itemType == ITEMTYPE_ENCHANTING_RUNE_POTENCY
-                or itemType == ITEMTYPE_ENCHANTMENT_BOOSTER
-                or itemType == ITEMTYPE_JEWELRYCRAFTING_BOOSTER
-                or itemType == ITEMTYPE_JEWELRYCRAFTING_MATERIAL
-                or itemType == ITEMTYPE_INGREDIENT
-                or itemType == ITEMTYPE_POISON_BASE
-                or itemType == ITEMTYPE_POTION_BASE
-                or itemType == ITEMTYPE_REAGENT
-                or itemType == ITEMTYPE_STYLE_MATERIAL
-                or itemType == ITEMTYPE_WEAPON_BOOSTER
-                or itemType == ITEMTYPE_WEAPON_TRAIT
-                or itemType == ITEMTYPE_JEWELRY_TRAIT
-                or itemType == ITEMTYPE_WOODWORKING_BOOSTER
-                or itemType == ITEMTYPE_WOODWORKING_MATERIAL
-                or itemType == ITEMTYPE_GLYPH_ARMOR
-                or itemType == ITEMTYPE_GLYPH_JEWELRY
-                or itemType == ITEMTYPE_GLYPH_WEAPON
-            then
-                return true
-            end
+        local craftingType = GetCraftingInteractionType()
+        local smithingMode = g_smithing.GetMode()
+
+        local validItemTypes = {
+            [ITEMTYPE_ADDITIVE] = true,
+            [ITEMTYPE_ARMOR_BOOSTER] = true,
+            [ITEMTYPE_ARMOR_TRAIT] = true,
+            [ITEMTYPE_BLACKSMITHING_BOOSTER] = true,
+            [ITEMTYPE_BLACKSMITHING_MATERIAL] = true,
+            [ITEMTYPE_BLACKSMITHING_RAW_MATERIAL] = true,
+            [ITEMTYPE_CLOTHIER_BOOSTER] = true,
+            [ITEMTYPE_CLOTHIER_MATERIAL] = true,
+            [ITEMTYPE_CLOTHIER_RAW_MATERIAL] = true,
+            [ITEMTYPE_ENCHANTING_RUNE_ASPECT] = true,
+            [ITEMTYPE_ENCHANTING_RUNE_ESSENCE] = true,
+            [ITEMTYPE_ENCHANTING_RUNE_POTENCY] = true,
+            [ITEMTYPE_ENCHANTMENT_BOOSTER] = true,
+            [ITEMTYPE_GLYPH_ARMOR] = true,
+            [ITEMTYPE_GLYPH_JEWELRY] = true,
+            [ITEMTYPE_GLYPH_WEAPON] = true,
+            [ITEMTYPE_GROUP_REPAIR] = true,
+            [ITEMTYPE_INGREDIENT] = true,
+            [ITEMTYPE_JEWELRYCRAFTING_BOOSTER] = true,
+            [ITEMTYPE_JEWELRYCRAFTING_MATERIAL] = true,
+            [ITEMTYPE_JEWELRYCRAFTING_RAW_BOOSTER] = true,
+            [ITEMTYPE_JEWELRYCRAFTING_RAW_MATERIAL] = true,
+            [ITEMTYPE_JEWELRY_RAW_TRAIT] = true,
+            [ITEMTYPE_JEWELRY_TRAIT] = true,
+            [ITEMTYPE_POISON_BASE] = true,
+            [ITEMTYPE_POTION_BASE] = true,
+            [ITEMTYPE_RAW_MATERIAL] = true,
+            [ITEMTYPE_REAGENT] = true,
+            [ITEMTYPE_STYLE_MATERIAL] = true,
+            [ITEMTYPE_WEAPON] = true,
+            [ITEMTYPE_WEAPON_BOOSTER] = true,
+            [ITEMTYPE_WEAPON_TRAIT] = true,
+            [ITEMTYPE_WOODWORKING_BOOSTER] = true,
+            [ITEMTYPE_WOODWORKING_MATERIAL] = true,
+            [ITEMTYPE_WOODWORKING_RAW_MATERIAL] = true,
+        }
+
+        if (craftingType == CRAFTING_TYPE_BLACKSMITHING or craftingType == CRAFTING_TYPE_CLOTHIER or craftingType == CRAFTING_TYPE_WOODWORKING or craftingType == CRAFTING_TYPE_JEWELRYCRAFTING) and smithingMode == 4 then
+            return validItemTypes[itemType] or false
         end
     end
 
@@ -5199,7 +5199,7 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
     if bagId == BAG_VIRTUAL then
         local gainOrLoss
         local logPrefix
-        local itemLink = ChatAnnouncements.GetItemLinkFromItemId(slotId)
+        local itemLink = tostring(ChatAnnouncements.GetItemLinkFromItemId(slotId))
         local icon = GetItemLinkInfo(itemLink)
         local itemType = GetItemLinkItemType(itemLink)
         local itemId = slotId
@@ -5569,7 +5569,7 @@ function ChatAnnouncements.InventoryUpdateBank(eventCode, bagId, slotId, isNewIt
         local gainOrLoss
         local stack
         local logPrefix
-        local itemLink = ChatAnnouncements.GetItemLinkFromItemId(slotId)
+        local itemLink = tostring(ChatAnnouncements.GetItemLinkFromItemId(slotId))
         local icon = GetItemLinkInfo(itemLink)
         local itemType = GetItemLinkItemType(itemLink)
         local itemId = slotId
@@ -5689,7 +5689,7 @@ function ChatAnnouncements.InventoryUpdateGuildBank(eventCode, bagId, slotId, is
         local gainOrLoss
         local stack
         local logPrefix
-        local itemLink = ChatAnnouncements.GetItemLinkFromItemId(slotId)
+        local itemLink = tostring(ChatAnnouncements.GetItemLinkFromItemId(slotId))
         local icon = GetItemLinkInfo(itemLink)
         local itemType = GetItemLinkItemType(itemLink)
         local itemId = slotId
@@ -5775,7 +5775,7 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
                     local parts = { ZO_LinkHandler_ParseLink(itemLink) }
                     parts[22] = "1"
                     parts = table.concat(parts, ":"):sub(2, -1)
-                    itemLink = zo_strformat("|H<<1>>|h|h", parts)
+                    itemLink = tostring(zo_strformat("|H<<1>>|h|h", parts))
 
                     local formattedIcon = (ChatAnnouncements.SV.Inventory.LootIcons and icon and icon ~= "") and ("|t16:16:" .. icon .. "|t ") or ""
                     local itemCount = stack > 1 and (" |cFFFFFFx" .. stack .. "|r") or ""
@@ -5833,7 +5833,7 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
                     local parts = { ZO_LinkHandler_ParseLink(itemLink) }
                     parts[22] = "1"
                     parts = table.concat(parts, ":"):sub(2, -1)
-                    itemLink = zo_strformat("|H<<1>>|h|h", parts)
+                    itemLink = tostring(zo_strformat("|H<<1>>|h|h", parts))
 
                     local formattedIcon = (ChatAnnouncements.SV.Inventory.LootIcons and icon and icon ~= "") and ("|t16:16:" .. icon .. "|t ") or ""
                     local itemCount = stack > 1 and (" |cFFFFFFx" .. stack .. "|r") or ""
@@ -5897,7 +5897,7 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
             local parts = { ZO_LinkHandler_ParseLink(itemLink) }
             parts[22] = "1"
             parts = table.concat(parts, ":"):sub(2, -1)
-            itemLink = zo_strformat("|H<<1>>|h|h", parts)
+            itemLink = tostring(zo_strformat("|H<<1>>|h|h", parts))
 
             local formattedIcon = (ChatAnnouncements.SV.Inventory.LootIcons and icon and icon ~= "") and ("|t16:16:" .. icon .. "|t ") or ""
             local itemCount = stackCountChange > 1 and (" |cFFFFFFx" .. stackCountChange .. "|r") or ""
@@ -8005,7 +8005,8 @@ function ChatAnnouncements.HookFunction()
                         local icon = collectibleData:GetIcon()
                         local categoryData = collectibleData:GetCategoryData()
                         local majorCategory = categoryData:GetId()
-                        local majorCategoryTopLevelIndex = GetCategoryInfoFromCollectibleCategoryId(majorCategory)
+                        local majorCategoryTopLevelIndex = tonumber(GetCategoryInfoFromCollectibleCategoryId(majorCategory))
+                        assert(type(majorCategoryTopLevelIndex) == "number", "Value is not a number")
                         local majorCategoryName = GetCollectibleCategoryInfo(majorCategoryTopLevelIndex)
                         local categoryName = categoryData:GetName()
                         local collectibleId = collectibleData:GetId()
@@ -8560,7 +8561,7 @@ function ChatAnnouncements.HookFunction()
                     end
                 else
                     for conditionIndex = 1, conditionCount do
-                        local conditionText, curCount, maxCount, isFailCondition, isConditionComplete, _, isVisible = GetJournalQuestConditionInfo(questIndex, stepIndex, conditionIndex)
+                        local conditionText, curCount, maxCount, isFailCondition, isConditionComplete, _, isVisible = GetJournalQuestConditionInfo(questIndex, stepIndex, conditionIndex, false)
 
                         if not (isFailCondition or isConditionComplete) and isVisible then
                             if ChatAnnouncements.SV.Quests.QuestObjUpdateCA then
@@ -10590,7 +10591,8 @@ function ChatAnnouncements.HookFunction()
     end
 
     -- Hook Gamepad mail name function
-    ZO_MailSend_Gamepad.IsMailValid = function(self)
+    local orgIsMailValid = ZO_MailSend_Gamepad.IsMailValid
+    local IsMailValid = function(self, ...)
         local to = self.mailView:GetAddress()
         if (not to) or (to == "") then
             return false
@@ -10616,9 +10618,10 @@ function ChatAnnouncements.HookFunction()
         local hasSubject = subject and (subject ~= "")
         local body = self.mailView:GetBody()
         local hasBody = body and (body ~= "")
+        orgIsMailValid(self, ...)
         return hasSubject or hasBody or (GetQueuedMoneyAttachment() > 0) or IsAnyItemAttached()
     end
-
+    ZO_MailSend_Gamepad.IsMailValid = IsMailValid
     -- Hook MAIL_SEND.Send to get name of player we send to.
     MAIL_SEND.Send = function(self)
         windowManager:SetFocusByName("")
@@ -11540,21 +11543,21 @@ end
 function ChatAnnouncements.CollectibleResult()
     ChatAnnouncements.AnnounceMemento()
 
-    local newAssistant = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
-    local newCompanion = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
-    local newVanity = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
-    local newSpecial = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ABILITY_SKIN)
-    local newHat = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_HAT)
-    local newHair = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_HAIR)
-    local newHeadMark = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_HEAD_MARKING)
-    local newFacialHair = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_FACIAL_HAIR_HORNS)
-    local newMajorAdorn = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_FACIAL_ACCESSORY)
-    local newMinorAdorn = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_PIERCING_JEWELRY)
-    local newCostume = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME)
-    local newBodyMarking = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_BODY_MARKING)
-    local newSkin = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_SKIN)
-    local newPersonality = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_PERSONALITY)
-    local newPolymorph = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH)
+    local newAssistant = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+    local newCompanion = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+    local newVanity = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+    local newSpecial = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ABILITY_SKIN, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+    local newHat = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_HAT, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+    local newHair = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_HAIR, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+    local newHeadMark = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_HEAD_MARKING, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+    local newFacialHair = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_FACIAL_HAIR_HORNS, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+    local newMajorAdorn = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_FACIAL_ACCESSORY, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+    local newMinorAdorn = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_PIERCING_JEWELRY, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+    local newCostume = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+    local newBodyMarking = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_BODY_MARKING, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+    local newSkin = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_SKIN, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+    local newPersonality = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_PERSONALITY, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
+    local newPolymorph = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
 
     if newAssistant ~= currentAssistant then
         if newAssistant == 0 then
@@ -11703,7 +11706,7 @@ function ChatAnnouncements.CollectibleResult()
 
     -- Vanity
     if collectibleType == COLLECTIBLE_CATEGORY_TYPE_VANITY_PET and (ChatAnnouncements.SV.Collectibles.CollectibleUseCategory10 or LUIE.SlashCollectibleOverride) then
-        if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0 then
+        if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET, GAMEPLAY_ACTOR_CATEGORY_PLAYER) > 0 then
             if ChatAnnouncements.SV.Collectibles.CollectibleUsePetNickname and nickname then
                 message = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_SUMMON_NN), link, nickname, formattedIcon)
                 alert = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_SUMMON_NN), name, nickname, "")
@@ -11724,10 +11727,10 @@ function ChatAnnouncements.CollectibleResult()
 
     -- Assistants / Companions
     if (collectibleType == COLLECTIBLE_CATEGORY_TYPE_ASSISTANT or collectibleType == COLLECTIBLE_CATEGORY_TYPE_COMPANION) and (ChatAnnouncements.SV.Collectibles.CollectibleUseCategory7 or LUIE.SlashCollectibleOverride) then
-        if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0 then
+        if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT, GAMEPLAY_ACTOR_CATEGORY_PLAYER) > 0 then
             message = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_SUMMON), link, formattedIcon)
             alert = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_SUMMON), name, "")
-        elseif GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION) > 0 then
+        elseif GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION, GAMEPLAY_ACTOR_CATEGORY_PLAYER) > 0 then
             message = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_SUMMON), link, formattedIcon)
             alert = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_SUMMON), name, "")
         else
@@ -11752,7 +11755,7 @@ function ChatAnnouncements.CollectibleResult()
             or (collectibleType == COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) and GetString(SI_COLLECTIBLECATEGORYTYPE12)
 
         if collectibleType == (COLLECTIBLE_CATEGORY_TYPE_ABILITY_SKIN and (ChatAnnouncements.SV.Collectibles.CollectibleUseCategory12 or LUIE.SlashCollectibleOverride)) or (collectibleType ~= COLLECTIBLE_CATEGORY_TYPE_ABILITY_SKIN and (ChatAnnouncements.SV.Collectibles.CollectibleUseCategory3 or LUIE.SlashCollectibleOverride)) then
-            if GetActiveCollectibleByType(GetCollectibleCategoryType(lastCollectibleUsed)) > 0 then
+            if GetActiveCollectibleByType(GetCollectibleCategoryType(lastCollectibleUsed), GAMEPLAY_ACTOR_CATEGORY_PLAYER) > 0 then
                 message = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_USE_CATEGORY), categoryString, link, formattedIcon)
                 alert = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_USE_CATEGORY), categoryString, name, "")
             else
