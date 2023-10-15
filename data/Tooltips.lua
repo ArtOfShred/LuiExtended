@@ -930,7 +930,6 @@ LUIE.Data.Tooltips = {
     Skill_Hawk_Eye_Rank_1 = zo_strformat(GetString(SI_LUIE_SKILL_HAWK_EYE_TP), 2),
     Skill_Hawk_Eye_Rank_2 = zo_strformat(GetString(SI_LUIE_SKILL_HAWK_EYE_TP), 5),
     Skill_Volley = GetString(SI_LUIE_SKILL_VOLLEY_TP),
-    Skill_Bombard = GetString(SI_LUIE_SKILL_BOMBARD_TP),
     Skill_Poison_Injection = GetString(SI_LUIE_SKILL_POISON_INJECTION_TP),
     Skill_Ballista = GetString(SI_LUIE_SKILL_BALLISTA_TP),
 

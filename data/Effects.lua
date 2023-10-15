@@ -288,7 +288,6 @@ Effects.IsExperienceBuff = {
     -- Event
     [91369] = true, -- The Pie of Misrule (Jester's Experience Boost Pie)
     [91449] = true, -- Breda's Magnificent Mead
-    [86075] = true, -- Breda's Magnificent Mead
     [77123] = true, -- Anniversary EXP Buff
     [118985] = true, -- Anniversary EXP Buff
     [136348] = true, -- Anniversary EXP Buff
@@ -1217,7 +1216,6 @@ Effects.BarHighlightExtraId = {
 
     -- Bow
     [38707] = 100302, -- Bombard --> Piercing Spray
-    [38706] = 100302, -- Bombard --> Piercing Spray
     [38703] = 100302, -- Acid Spray --> Piercing Spray
 
     [28887] = 113627, -- Virulent Shot --> Scatter Shot
@@ -1283,7 +1281,7 @@ Effects.BarHighlightCheckOnFade = {
     [126667] = { id1 = 61665, unitTag = "player" }, -- Flying Blade --> Major Bruality
 
     -- Bow
-    --[100302] = { id1 = 38707, id2 = 38706, id3 = 100302, unitTag = "reticleover" }, -- Piercing Spray --> Bombard / Bombard / Piercing Spray
+    --[100302] = { id1 = 38707, id2 = 100302, unitTag = "reticleover" }, -- Piercing Spray --> Bombard / Bombard / Piercing Spray
     [100302] = { id1 = 38703, id2 = 100302, unitTag = "reticleover" }, -- Piercing Spray --> Acid Spray / Piercing Spray
 
     --113627] = { id1 = 28887, id2 = 113627, unitTag = "reticleover" }, -- Virulent Shot --> Scatter Shot / Virulent Shot
@@ -1391,7 +1389,7 @@ Effects.BarHighlightOverride = {
 
     -- Shadow
     [25255] = { newId = 33185 }, -- Veiled Strike
-    [25260] = { newId = 34732 }, -- Surprise Attack
+    [25260] = { newId = 34733 }, -- Surprise Attack
     [25267] = { newId = 34736 }, -- Concealed Weapon
     [25375] = { newId = 25376 }, -- Shadow Cloak
     [25380] = { newId = 62141 }, -- Shadowy Disguise
@@ -5586,11 +5584,6 @@ Effects.EffectOverride = {
         tooltip = Tooltips.Experience_Seasonal_Event,
         forcedContainer = "long",
     }, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)
-    [86075] = {
-        icon = "LuiExtended/media/icons/mementos/memento_bredas_magnificent_mead.dds",
-        tooltip = Tooltips.Experience_Seasonal_Event,
-        forcedContainer = "long",
-    }, -- Breda's Magnificent Mead (Breda's Magnificent Mead)
     [85355] = {
         icon = "LuiExtended/media/icons/mementos/memento_fire_breathers_torches.dds",
         name = Abilities.Memento_Fire_Breathers_Torches,
@@ -8074,7 +8067,6 @@ Effects.EffectOverride = {
     [25256] = { tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off Balance (Veiled Strike)
     [33185] = { tooltip = Tooltips.Generic_Stun }, -- Veiled Strike (Veiled Strike)
     [34733] = { tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off Balance (Surprise Attack)
-    [34732] = { tooltip = Tooltips.Generic_Stun }, -- Surprise Attack (Surprise Attack)
     [34737] = { tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off Balance (Concealed Weapon)
     [34736] = { tooltip = Tooltips.Generic_Stun }, -- Concealed Weapon (Concealed Weapon)
 
@@ -8669,7 +8661,6 @@ Effects.EffectOverride = {
     [44391] = { icon = "esoui/art/icons/ability_templar_breath_of_life.dds" }, -- Breath of Life (Breath of Life)
 
     -- Healing Ritual
-    [22307] = { icon = "esoui/art/icons/ability_templar_healing_ritual.dds" }, -- Healing Ritual (Healing Ritual)
     [22331] = { icon = "esoui/art/icons/ability_templar_ritual_of_rebirth.dds" }, -- Ritual of Rebirth (Ritual of Rebirth)
     [88456] = { icon = "esoui/art/icons/ability_templar_ritual_of_rebirth.dds" }, -- Ritual of Rebirth (Ritual of Rebirth)
 
@@ -9601,8 +9592,7 @@ Effects.EffectOverride = {
     [80764] = { name = Abilities.Skill_Draining_Shot }, -- Draining Shot Heal (Draining Shot)
 
     -- Arrow Spray / Bombarb / Acid Spray
-    [38707] = { tooltip = Tooltips.Skill_Bombard, hideReduce = true }, -- Bombard (Bombard)
-    [38706] = { icon = "esoui/art/icons/ability_bow_005_a.dds", tooltip = Tooltips.Skill_Bombard }, -- Bombard (Bombard)
+    [38707] = { tooltip = Tooltips.Generic_Immobilize }, -- Bombard (Bombard)
     [38703] = { tooltip = Tooltips.Generic_Poison, tooltipValue2 = 1 }, -- Acid Spray (Acid Spray)
 
     -- Poison Arrow / Venom Arrow / Poison Injection
@@ -10294,7 +10284,6 @@ Effects.EffectOverride = {
         tooltip = Tooltips.Skill_Spell_Orb,
     }, -- Spell Orb (Spell Orb - Rank 2)
     [103880] = { icon = "LuiExtended/media/icons/abilities/ability_psijic_spell_orb.dds", hide = true }, -- Spell Orb (Spell Orb - Rank 2)
-    [103881] = { icon = "LuiExtended/media/icons/abilities/ability_psijic_spell_orb.dds", hide = true }, -- Spell Orb (Spell Orb - Rank 2)
     [103923] = {
         icon = "LuiExtended/media/icons/abilities/ability_psijic_concentrated_barrier.dds",
         forcedContainer = "short",
@@ -11674,7 +11663,6 @@ Effects.EffectOverride = {
     [77750] = { hide = true }, -- 'Til Death (Bodyguard) (DB DLC)
     [79534] = { hide = true }, -- Shard Shield (Bodyguard) (DB DLC)
     [83620] = { hide = true }, -- Shard Shield (Bodyguard) (DB DLC)
-    [83624] = { hide = true }, -- Shard Shield (Bodyguard) (DB DLC)
     [77838] = { hide = true }, -- Shield Charge (Bodyguard) (DB DLC)
     [77602] = { hide = true }, -- Shard Shield (Bodyguard) (DB DLC)
     [77672] = {
@@ -12510,11 +12498,6 @@ Effects.EffectOverride = {
     [67636] = { icon = "LuiExtended/media/icons/abilities/ability_spell_falling_debris.dds" }, -- Falling Debris (Flesh Colossus)
     [66869] = { icon = "LuiExtended/media/icons/abilities/ability_fleshcolossus_pin.dds" }, -- Pin (Flesh Colossus)
     [65709] = { icon = "LuiExtended/media/icons/abilities/ability_fleshcolossus_pin.dds" }, -- Pin (Flesh Colossus)
-    [49820] = {
-        icon = "LuiExtended/media/icons/abilities/ability_fleshcolossus_pin.dds",
-        name = Abilities.Skill_Pin,
-        tooltip = Tooltips.Generic_Knockdown,
-    }, -- Stunned (Flesh Colossus)
     [65735] = { hide = true }, -- Miasma Channel (Flesh Colossus)
     [53233] = {
         icon = "LuiExtended/media/icons/abilities/ability_spell_gtaoe_disease_damage.dds",

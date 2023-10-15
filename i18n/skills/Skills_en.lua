@@ -624,7 +624,6 @@ local strings = {
     -- Bow
     SI_LUIE_SKILL_HAWK_EYE_TP = "Increase the damage of your Bow abilities by |cFFFFFF<<1>>|r% for |cFFFFFF5|r seconds, stacking up to |cFFFFFF5|r times.",
     SI_LUIE_SKILL_VOLLEY_TP = "Arrows rain down from the sky, dealing Physical Damage to enemies in the target |cFFFFFF<<1>>|r meter radius every |cFFFFFF1|r second.",
-    SI_LUIE_SKILL_BOMBARD_TP = "Immobilized and Movement Speed reduced by |cFFFFFF40|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_POISON_INJECTION_TP = "Afflicted with Poison Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nDeals up to |cFFFFFF100|r% more damage in proportion to your missing health under |cFFFFFF50|r%.",
     SI_LUIE_SKILL_BALLISTA_TP = "Your ballista turret unleashes a barrage of arrows, dealing Physical Damage over |cFFFFFF<<1>>|r seconds.",
 

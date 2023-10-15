@@ -37,6 +37,5 @@ BlacklistPresets.Warden = {
 
 -- Necromancer
 BlacklistPresets.Necromancer = {
-    [118014] = true, -- Mystic Siphon (Mystic Siphon)
     [123233] = true, -- Mortal Coil (Mortal Coil)
 }

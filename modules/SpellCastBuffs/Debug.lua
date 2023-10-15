@@ -243,7 +243,7 @@ function SpellCastBuffs.TempSlashCheckRemovedAbilities()
 end
 
 local displayName = GetDisplayName()
-if displayName == "@ArtOfShredPTS" or displayName == "@ArtOfShredLegacy" or displayName == "@HammerOfGlory" or displayName == "@dack_janiels" then
+if displayName == "@ArtOfShred" or displayName == "@ArtOfShredPTS" or displayName == "@ArtOfShredLegacy" or displayName == "@HammerOfGlory" or displayName == "@dack_janiels" then
     SLASH_COMMANDS["/filter"] = SpellCastBuffs.TempSlashFilter
     SLASH_COMMANDS["/ground"] = SpellCastBuffs.TempSlashGround
     SLASH_COMMANDS["/zonecheck"] = SpellCastBuffs.TempSlashZoneCheck

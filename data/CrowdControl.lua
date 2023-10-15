@@ -165,7 +165,7 @@ CrowdControl.aoePlayerNormal = {
     -- [195210] = 0, -- Rune of Displacement (Rune of Displacement)
     -- [198413] = 0, -- Rune of Displacement (Rune of Displacement)
     -- [186832] = 0, -- Runeguard of Still Waters (Runeguard of Still Waters Immobilize)
-    -- [191083] = 1, -- Rune of Displacement (Rune of Displacement) -- Seen in Cyrodiil 
+    -- [191083] = 1, -- Rune of Displacement (Rune of Displacement) -- Seen in Cyrodiil
     -- [187526] = 1, -- Rune of Displacement (Rune of Displacement) -- Seen in Cyrodiil
     -- [187513] = 1, -- Rune of Displacement (Rune of Displacement) -- Seen in Cyrodiil
 
@@ -187,7 +187,7 @@ CrowdControl.aoePlayerNormal = {
     [28877] = 1, -- Volley
     [38690] = 0, -- Endless Hail
     [38696] = 0, -- Arrow Barrage
-    [38707] = 0, -- Bombard Immobilize (Bombard)
+    [38707] = 0, -- Bombard
 
     -- Undaunted
     [39299] = 1, -- Necrotic Orb
@@ -724,7 +724,7 @@ CrowdControl.IgnoreList = {
 
     -- Dreadsail Reef
     [166794] = true, -- Raging Current -- Dreadsail Reef
-    
+
     ----------------
     -- Miscelaneous
     ----------------

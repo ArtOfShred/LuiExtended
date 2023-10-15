@@ -335,7 +335,6 @@ LUIE.DebugAuras = {
     [45982] = true, -- Bash Stun
 
     -- Off-Balance Exploit
-    [20172] = true, -- Off-Balance Exploit
     [18793] = true, -- Off-Balance Exploit
     [16825] = true, -- Off-Balance Exploit
 
@@ -906,7 +905,6 @@ LUIE.DebugAuras = {
     [79133] = true, -- Drain Health (Drain Health Poison)
     [79134] = true, -- Restore Health (Drain Health Poison)
     [79025] = true, -- Ravage Health (Damage Health Poison)
-    [82667] = true, -- Ravage Health (Damage Health Poison)
     [79137] = true, -- Drain Magicka (Drain Magicka Poison)
     [79138] = true, -- Restore Magicka (Drain Magicka Poison)
     [79037] = true, -- Ravage Magicka (Damage Magicka Poison)
@@ -1679,7 +1677,6 @@ LUIE.DebugAuras = {
     [91451] = true, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)
     [91453] = true, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)
     [91449] = true, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)
-    [86075] = true, -- Breda's Magnificent Mead (Breda's Magnificent Mead)
 
     [85355] = true, -- Flame Juggling (Fire-Breather's Torches)
 
@@ -2130,7 +2127,6 @@ LUIE.DebugAuras = {
 
     -- Malubeth
     [59564] = true, -- Scourge Harvester (Malubeth)
-    [85658] = true, -- Scourge Harvest (Malubeth)
     [59568] = true, -- Scourge Harvest (Malubeth)
     [61275] = true, -- Major Vitality (Malubeth)
     [59573] = true, -- Scourge Harvest (Malubeth)
@@ -4111,7 +4107,6 @@ LUIE.DebugAuras = {
 
     [25260] = true, -- Surprise Attack (Surprise Attack)
     [34733] = true, -- Off Balance (Surprise Attack)
-    [34732] = true, -- Surprise Attack (Surprise Attack)
 
     [34738] = true, -- Concealed Weapon Passive (Concealed Weapon)
     [61155] = true, -- Concealed Weapon (Concealed Weapon)
@@ -4137,7 +4132,6 @@ LUIE.DebugAuras = {
     [63982] = true, -- Path of Darkness (Path of Darkness)
     [33198] = true, -- Path of Darkness (Path of Darkness)
     [33197] = true, -- Path of Darkness (Path of Darkness)
-    [33210] = true, -- Major Expedition (Path of Darkness)
 
     [36049] = true, -- Twisting Path (Twisting Path)
     [37381] = true, -- Summon Shade (Twisting Path)
@@ -4211,19 +4205,16 @@ LUIE.DebugAuras = {
     [77769] = true, -- Clairvoyance Fx (Consuming Darkness - Hidden Refresh Synergy)
 
     [25411] = true, -- Consuming Darkness (Consuming Darkness)
-    [102438] = true, -- Hidden Refresh Anchor (Consuming Darkness)
     [44871] = true, -- Major Protection (Consuming Darkness)
     [25412] = true, -- Consuming Darkness (Consuming Darkness)
     [25444] = true, -- Consuming Darkness (Consuming Darkness)
 
     [36493] = true, -- Bolstering Darkness (Bolstering Darkness)
-    [102442] = true, -- Hidden Refresh Anchor (Bolstering Darkness)
     [44862] = true, -- Major Protection (Bolstering Darkness)
     [36495] = true, -- Bolstering Darkness (Bolstering Darkness)
     [36496] = true, -- Bolstering Darkness (Bolstering Darkness)
 
     [36485] = true, -- Veil of Blades (Veil of Blades)
-    [102446] = true, -- Hidden Refresh Anchor (Veil of Blades)
     [44854] = true, -- Major Protection (Veil of Blades)
     [36490] = true, -- Veil of Blades (Veil of Blades)
     [36487] = true, -- Veil of Blades (Veil of Blades)
@@ -4789,7 +4780,6 @@ LUIE.DebugAuras = {
     [45207] = true, -- Sacred Ground (Rank 2)
     [31759] = true, -- Sacred Ground
     [77082] = true, -- Sacred Ground
-    [134626] = true, -- Minor Mending
     [134627] = true, -- Minor Mending
 
     [31760] = true, -- Light Weaver (Rank 1)
@@ -4805,7 +4795,6 @@ LUIE.DebugAuras = {
     -------------------------------------
 
     [26114] = true, -- Puncturing Strikes (Puncturing Strikes)
-    [102904] = true, -- Puncturing Strikes (Puncturing Strikes)
     [26116] = true, -- Puncturing Strikes (Puncturing Strikes)
     [44426] = true, -- Puncturing Strikes (Puncturing Strikes)
     [76908] = true, -- Puncturing Strikes (Puncturing Strikes)
@@ -5040,7 +5029,6 @@ LUIE.DebugAuras = {
     [44391] = true, -- Breath of Life (Breath of Life)
 
     [22304] = true, -- Healing Ritual (Healing Ritual)
-    [22307] = true, -- Healing Ritual (Healing Ritual)
 
     [22327] = true, -- Ritual of Rebirth (Ritual of Rebirth)
     [22331] = true, -- Ritual of Rebirth (Ritual of Rebirth)
@@ -5091,7 +5079,6 @@ LUIE.DebugAuras = {
     [22236] = true, -- Major Resolve (Rune Focus)
     [22234] = true, -- Rune Focus (Rune Focus)
     [33516] = true, -- Summon Shade (Rune Focus)
-    [101649] = true, -- Rune Focus (Rune Focus)
     [112145] = true, -- Rune Focus Circle Bonus (Rune Focus)
 
     [44828] = true, -- Major Resolve (Channeled Focus)
@@ -5314,7 +5301,6 @@ LUIE.DebugAuras = {
 
     [85840] = true, -- Budding Seeds (Budding Seeds)
     [85842] = true, -- Budding Seeds Dummy (Budding Seeds)
-    [85844] = true, -- Budding Seeds Synergy (Budding Seeds)
     [85843] = true, -- Harvest (Budding Seeds)
     [85841] = true, -- Budding Seeds (Budding Seeds)
     [85922] = true, -- Budding Seeds (Budding Seeds)
@@ -5322,7 +5308,6 @@ LUIE.DebugAuras = {
 
     [85845] = true, -- Corrupting Pollen (Corrupting Pollen)
     [85847] = true, -- Corrupting Pollen Dummy (Corrupting Pollen)
-    [85849] = true, -- Corrupting Pollen Synergy Tick (Corrupting Pollen)
     [85848] = true, -- Harvest (Corrupting Pollen)
     [85846] = true, -- Corrupting Pollen (Corrupting Pollen)
     [85944] = true, -- Major Defile (Corrupting Pollen)
@@ -5663,7 +5648,6 @@ LUIE.DebugAuras = {
     [118008] = true, -- Mystic Siphon (Mystic Siphon)
     [118009] = true, -- Mystic Siphon (Mystic Siphon)
     [118011] = true, -- Mystic Siphon (Mystic Siphon)
-    [118014] = true, -- Mystic Siphon (Mystic Siphon)
 
     [122174] = true, -- Frozen Colossus (Frozen Colossus)
     [122380] = true, -- Frozen Colossus (Frozen Colossus)
@@ -5902,7 +5886,6 @@ LUIE.DebugAuras = {
     [118070] = true, -- Braided Tether (Braided Tether)
     [118071] = true, -- Braided Tether (Braided Tether)
     [118073] = true, -- Braided Tether (Braided Tether)
-    [118074] = true, -- Braided Tether (Braided Tether)
 
     [118122] = true, -- Mortal Coil (Mortal Coil)
     [118123] = true, -- Mortal Coil (Mortal Coil)
@@ -6339,7 +6322,6 @@ LUIE.DebugAuras = {
     [38705] = true, -- Bombard (Bombard)
     [38723] = true, -- Bombard (Bombard)
     [38707] = true, -- Bombard (Bombard)
-    [38706] = true, -- Bombard (Bombard)
 
     [38701] = true, -- Acid Spray (Acid Spray)
     [38724] = true, -- Acid Spray (Acid Spray)
@@ -6394,7 +6376,6 @@ LUIE.DebugAuras = {
 
     [30948] = true, -- Tri Focus -- Rank 1
     [69774] = true, -- Tri Focus
-    [34498] = true, -- Tri Focus
     [30951] = true, -- Tri Focus
     [45500] = true, -- Tri Focus -- Rank 2
     [69773] = true, -- Tri Focus
@@ -7336,20 +7317,17 @@ LUIE.DebugAuras = {
     [80271] = true, -- Minor Endurance (Circle of Protection)
     [35739] = true, -- Minor Protection (Circle of Protection)
     [35738] = true, -- Circle of Protection (Circle of Protection)
-    [101696] = true, -- Circle of Protection (Circle of Protection)
 
     [40181] = true, -- Turn Evil (Turn Evil)
     [80276] = true, -- Minor Endurance (Turn Evil)
     [40185] = true, -- Minor Protection (Turn Evil)
     [40184] = true, -- Turn Evil (Turn Evil)
     [40187] = true, -- Turn Evil (Turn Evil)
-    [101697] = true, -- Turn Evil (Turn Evil)
 
     [40169] = true, -- Ring of Preservation (Ring of Preservation)
     [80284] = true, -- Minor Endurance (Ring of Preservation)
     [40171] = true, -- Minor Protection (Ring of Preservation)
     [80293] = true, -- Ring of Preservation (Ring of Preservation)
-    [101699] = true, -- Ring of Protection (Ring of Preservation)
     [40170] = true, -- Ring of Preservation (Ring of Preservation)
 
     [35765] = true, -- Sense Evil (Expert Hunter - All Ranks)
@@ -7366,7 +7344,6 @@ LUIE.DebugAuras = {
     [80471] = true, -- Minor Berserk (Camouflaged Hunter)
 
     [35750] = true, -- Trap Beast (Trap Beast)
-    [37050] = true, -- Trap Beast (Trap Beast)
     [35757] = true, -- Trap Beast (Trap Beast)
     [35754] = true, -- Trap Beast (Trap Beast)
     [35756] = true, -- Trap Beast (Trap Beast)
@@ -7525,7 +7502,6 @@ LUIE.DebugAuras = {
     [103878] = true, -- Spell Orb (Spell Orb - Rank 2)
     [103879] = true, -- Spell Orb
     [103880] = true, -- Spell Orb
-    [103881] = true, -- Spell Orb
 
     [103888] = true, -- Concentrated Barrier (Concentrated Barrier - Rank 1)
     [103923] = true, -- Concentrated Barrier
@@ -9198,9 +9174,7 @@ LUIE.DebugAuras = {
     [54027] = true, -- Divine Leap -- Vosh Rakh Devoted (DLC)
     [65183] = true, -- Divine Leap Target -- Vosh Rakh Devoted (DLC)
     [67272] = true, -- Invisible No Target -- Vosh Rakh Devoted (DLC)
-    [67273] = true, -- End No Target -- Vosh Rakh Devoted (DLC)
     [54028] = true, -- Divine Leap -- Vosh Rakh Devoted (DLC)
-    [82752] = true, -- Divine Leap -- Vosh Rakh Devoted (DLC)
     [67593] = true, -- Divine Leap Stagger -- Vosh Rakh Devoted (DLC)
     [54050] = true, -- Divine Leap Stun -- Vosh Rakh Devoted (DLC)
 
@@ -9262,7 +9236,6 @@ LUIE.DebugAuras = {
     [77555] = true, -- Shard Shield -- Bodyguard (DB DLC)
     [79534] = true, -- Shard Shield -- Bodyguard (DB DLC)
     [83620] = true, -- Shard Shield -- Bodyguard (DB DLC)
-    [83624] = true, -- Shard Shield -- Bodyguard (DB DLC)
     [77562] = true, -- Shard Shield -- Bodyguard (DB DLC)
     [77609] = true, -- Shard Shield -- Bodyguard (DB DLC)
     [77602] = true, -- Shard Shield -- Bodyguard (DB DLC)
@@ -9932,7 +9905,6 @@ LUIE.DebugAuras = {
     [66869] = true, -- Pin -- Flesh Colossus
     [67076] = true, -- Self Snare -- Flesh Colossus
     [65709] = true, -- Pin -- Flesh Colossus
-    [49820] = true, -- Stunned -- Flesh Colossus
     [65735] = true, -- Maisma Channel -- Flesh Colossus
     [65747] = true, -- Miasmic Cloud Target -- Flesh Colossus
     [50341] = true, -- Miasma Pool -- Flesh Colossus
@@ -13728,7 +13700,6 @@ LUIE.DebugAuras = {
     [53240] = true, -- Brawler (Yavni Frost-Skin)
     [53241] = true, -- Brawler (Yavni Frost-Skin)
     [53242] = true, -- Brawler (Yavni Frost-Skin)
-    [53245] = true, -- Brawler (Yavni Frost-Skin)
     [53243] = true, -- Brawler (Yavni Frost-Skin)
 
     [53250] = true, -- Wrecking Blow (Yavni Frost-Skin)
