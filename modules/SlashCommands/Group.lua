@@ -375,6 +375,7 @@ function SlashCommands.SlashVoteKick(option)
         return
     end
 
+    ---@diagnostic disable-next-line: missing-parameter
     BeginGroupElection(GROUP_ELECTION_TYPE_KICK_MEMBER, ZO_GROUP_ELECTION_DESCRIPTORS.NONE, unitToKick)
     -- EVENT HANDLER takes care of the error messages here.
 end

@@ -4273,7 +4273,7 @@ function ChatAnnouncements.ResolveItemMessage(message, formattedRecipient, color
 
     local finalMessage = string.format("|c%s%s|r%s", color, formattedMessageP2, totalString)
 
-    LUIE.SV.DummyDumpString = finalMessage
+    --LUIE.SV.DummyDumpString = finalMessage
 
     printToChat(finalMessage)
 

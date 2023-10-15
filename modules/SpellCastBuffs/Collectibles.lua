@@ -39,7 +39,7 @@ function SpellCastBuffs.DisplayMountIcon()
         if mountedState == MOUNTED_STATE_MOUNT_RIDER then
             if SpellCastBuffs.SV.MountDetail then
                 -- Get detailed collectible information for the player
-                local collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_MOUNT)
+                local collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_MOUNT, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
                 local nickname = GetCollectibleNickname(collectible)
                 name, description, icon = GetCollectibleInfo(collectible)
 
@@ -122,8 +122,8 @@ function SpellCastBuffs.CollectibleBuff()
     end
 
     -- Pets
-    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0 and not SpellCastBuffs.SV.IgnorePet then
-        local collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
+    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET, GAMEPLAY_ACTOR_CATEGORY_PLAYER) > 0 and not SpellCastBuffs.SV.IgnorePet then
+        local collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
         local name
         local description
         local icon
@@ -163,8 +163,8 @@ function SpellCastBuffs.CollectibleBuff()
     end
 
     -- Assistants
-    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0 and not SpellCastBuffs.SV.IgnoreAssistant then
-        local collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
+    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT, GAMEPLAY_ACTOR_CATEGORY_PLAYER) > 0 and not SpellCastBuffs.SV.IgnoreAssistant then
+        local collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
         local name, description = GetCollectibleInfo(collectible)
         local iconAssistant = AssistantIcons[name] or ""
 
