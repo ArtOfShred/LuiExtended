@@ -18,6 +18,4 @@ $RECYCLE.BIN/
 stylua.toml
 devstuff/
 devstuff/teststrings
-devstuff/doc.json
-devstuff/doc.md
 devstuff/luieglobals.lua
