@@ -15,8 +15,11 @@ local Castbar = LUIE.Data.CastBarTable
 local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
 
+---@class EventManager
 local eventManager = EVENT_MANAGER
+---@class SceneManager
 local sceneManager = SCENE_MANAGER
+---@class WindowManager
 local windowManager = WINDOW_MANAGER
 
 local moduleName = LUIE.name .. "CombatInfo"
@@ -577,7 +580,8 @@ end
 
 function CombatInfo.HookGCD()
     -- Hook to update GCD support
-    ActionButton.UpdateUsable = function(self)
+    local orgUpdateUsable = ActionButton.UpdateUsable
+    local UpdateUsable = function(self, ...)
         local slotnum = self:GetSlot()
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or g_hotbarCategory
         local isGamepad = IsInGamepadPreferredMode()
@@ -601,10 +605,12 @@ function CombatInfo.HookGCD()
         -- Have to move this out of conditional to fix desaturation from getting stuck on icons.
         local useDesaturation = (isShowingCooldown and CombatInfo.SV.GlobalDesat)
         ZO_ActionSlot_SetUnusable(self.icon, not usable, useDesaturation)
+        orgUpdateUsable(self, ...)
     end
-
+    ActionButton.UpdateUsable = UpdateUsable
     -- Hook to update GCD support
-    ActionButton.UpdateCooldown = function(self, options)
+    local orgUpdateCooldown = ActionButton.UpdateCooldown
+    local UpdateCooldown = function(self, options, ...)
         local slotnum = self:GetSlot()
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or g_hotbarCategory
         local remain, duration, global, globalSlotType = GetSlotCooldownInfo(slotnum, hotbarCategory)
@@ -692,7 +698,9 @@ function CombatInfo.HookGCD()
 
         self.isGlobalCooldown = global
         self:UpdateUsable()
+        orgUpdateCooldown(self, options, ...)
     end
+    ActionButton.UpdateCooldown = UpdateCooldown
 end
 
 -- Helper function to get override ability duration.
@@ -2484,6 +2492,7 @@ function CombatInfo.PlayProcAnimations(slotNum)
         else
             actionButton = g_backbarButtons[slotNum]
         end
+        ---@class procLoopTexture
         local procLoopTexture = windowManager:CreateControl("$(parent)Loop_LUIE", actionButton.slot, CT_TEXTURE)
         procLoopTexture:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
         procLoopTexture:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"))
@@ -2500,7 +2509,7 @@ function CombatInfo.PlayProcAnimations(slotNum)
         procLoopTexture.label:SetDrawTier(DT_HIGH)
         procLoopTexture.label:SetColor(unpack(CombatInfo.SV.RemainingTextColoured and colour or { 1, 1, 1, 1 }))
         procLoopTexture.label:SetHidden(false)
-
+        ---@class procLoopTimeline
         local procLoopTimeline = ANIMATION_MANAGER:CreateTimelineFromVirtual("UltimateReadyLoop", procLoopTexture)
         procLoopTimeline.procLoopTexture = procLoopTexture
 
@@ -2561,6 +2570,7 @@ function CombatInfo.ShowCustomToggle(slotNum)
         local name = "ActionButton" .. slotNum .. "Toggle_LUIE"
         local window = windowManager:GetControlByName(name) -- Check to see if this frame already exists, don't create it if it does.
         if window == nil then
+            ---@class toggleFrame
             local toggleFrame = windowManager:CreateControl("$(parent)Toggle_LUIE", actionButton.slot, CT_TEXTURE)
             --toggleFrame.back = UI.Texture(toggleFrame, nil, nil, "/esoui/art/actionbar/actionslot_toggledon.dds")
             toggleFrame:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
