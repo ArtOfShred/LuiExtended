@@ -17,5 +17,5 @@ $RECYCLE.BIN/
 *.editorconfig
 stylua.toml
 devstuff/
-devstuff/teststrings
-devstuff/luieglobals.lua
+/devstuff/teststrings/
+/devstuff/luieglobals.lua
