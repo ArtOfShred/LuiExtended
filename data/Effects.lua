@@ -1768,7 +1768,7 @@ Effects.BarHighlightOverride = {
     [40195] = { noRemove = true }, -- Camouflaged Hunter
 
     [35750] = { noRemove = true }, -- Trap Beast
-    [40382] = { noRemove = true }, -- Barbed Trap
+    [40382] = { newId = 61746, noRemove = true }, -- Barbed Trap
     [40372] = { noRemove = true }, -- Lightweight Beast Trap
 
     [35713] = { newId = 62305 }, -- Dawnbreaker
@@ -3550,8 +3550,10 @@ Effects.TooltipUseDefault = {
 -- NEVER use a base skill line ability here, ALWAYS use alternate id's as replacements, we don't want to mess with skills in the skill window, ability bar, etc...
 --------------------------------------------------------------------------------------------------------------------------------
 function Effects.UpdateEffectOnSkillUpdate()
+    local overrideRank = nil
+    local casterUnitTag = "player"
     -- Mages Guild
-    Effects.EffectOverride[40465].tooltip = zo_strformat(GetString(SI_LUIE_SKILL_SCALDING_RUNE_TP), (GetAbilityDuration(40468) / 1000) + GetNumPassiveSkillRanks(GetSkillLineIndicesFromSkillLineId(44), select(2, GetSkillLineIndicesFromSkillLineId(44)), 8))
+    Effects.EffectOverride[40465].tooltip = zo_strformat(GetString(SI_LUIE_SKILL_SCALDING_RUNE_TP), (GetAbilityDuration(40468, overrideRank, casterUnitTag) / 1000) + GetNumPassiveSkillRanks(GetSkillLineIndicesFromSkillLineId(44), select(2, GetSkillLineIndicesFromSkillLineId(44)), 8))
 end
 
 Effects.KeepUpgradeOverride = {

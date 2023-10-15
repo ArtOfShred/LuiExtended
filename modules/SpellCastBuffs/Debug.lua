@@ -8,26 +8,27 @@ local SpellCastBuffs = LUIE.SpellCastBuffs
 local Effects = LUIE.Data.Effects
 
 local zo_strformat = zo_strformat
+local zo_strgsub = zo_strgsub
 
 -- Add millisecond timestamp to ability debug
 local function MillisecondTimestampDebug(message)
     local currentTime = GetGameTimeMilliseconds()
     local timestamp = FormatTimeMilliseconds(currentTime, TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_MILLISECONDS_NO_HOURS_OR_DAYS, TIME_FORMAT_DIRECTION_NONE)
-    timestamp = timestamp:gsub("HH", "")
-    timestamp = timestamp:gsub("H ", ":")
-    timestamp = timestamp:gsub("hh", "")
-    timestamp = timestamp:gsub("h ", ":")
-    timestamp = timestamp:gsub("m ", ":")
-    timestamp = timestamp:gsub("s ", ":")
-    timestamp = timestamp:gsub("A", "")
-    timestamp = timestamp:gsub("a", "")
-    timestamp = timestamp:gsub("ms", "")
+    timestamp = zo_strgsub(timestamp, "HH", "")
+    timestamp = zo_strgsub(timestamp, "H ", ":")
+    timestamp = zo_strgsub(timestamp, "hh", "")
+    timestamp = zo_strgsub(timestamp, "h ", ":")
+    timestamp = zo_strgsub(timestamp, "m ", ":")
+    timestamp = zo_strgsub(timestamp, "s ", ":")
+    timestamp = zo_strgsub(timestamp, "A", "")
+    timestamp = zo_strgsub(timestamp, "a", "")
+    timestamp = zo_strgsub(timestamp, "ms", "")
     message = string.format("|c%s[%s]|r %s", LUIE.TimeStampColorize, timestamp, message)
     return message
 end
 
 -- Debug Display for Combat Events
-function SpellCastBuffs.EventCombatDebug(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
+function SpellCastBuffs.EventCombatDebug(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overrideRank, casterUnitTag)
     -- Don't display if this aura is already added to the filter
     if LUIE.DebugAuras[abilityId] and SpellCastBuffs.SV.ShowDebugFilter then
         return
@@ -39,10 +40,10 @@ function SpellCastBuffs.EventCombatDebug(eventCode, result, isError, abilityName
     local source = zo_strformat("<<C:1>>", sourceName)
     local target = zo_strformat("<<C:1>>", targetName)
     local ability = zo_strformat("<<C:1>>", nameFormatted)
-    local duration = GetAbilityDuration(abilityId)
-    local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId)
-    local showacasttime = ""
-    local showachantime = ""
+    local duration = GetAbilityDuration(abilityId, overrideRank, casterUnitTag)
+    local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId, overrideRank, casterUnitTag)
+    local showacasttime = "" or GetString(SI_ABILITY_TOOLTIP_CHANNEL_TIME_LABEL)
+    local showachantime = "" or GetString(SI_ABILITY_TOOLTIP_CAST_TIME_LABEL)
     if channeled then
         showachantime = (" [Chan] " .. channelTime)
     end

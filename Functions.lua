@@ -16,39 +16,50 @@ end
 
 -- Return a formatted time
 -- Stolen from pChat, thanks @Ayantir
-function LUIE.CreateTimestamp(timeStr, formatStr)
-    local formatStr = formatStr or LUIE.ChatAnnouncements.SV.TimeStampFormat
+---@param timeStr string
+---@param formatStr string
+---@return string timestamp
+local function CreateTimestamp(timeStr, formatStr)
+    formatStr = formatStr or LUIE.ChatAnnouncements.SV.TimeStampFormat
+    -- Check if pChat is active
+    local pChatActive = SYSTEMS:GetSystem("pChat")
 
-    -- Split up default timestamp
-    local hours, minutes, seconds = timeStr:match("([^%:]+):([^%:]+):([^%:]+)")
-    local hoursNoLead = tonumber(hours) -- Hours without leading zero
-    local hours12NoLead = (hoursNoLead - 1) % 12 + 1
-    local hours12
-    if hours12NoLead < 10 then
-        hours12 = "0" .. hours12NoLead
+    if pChatActive then
+        -- pChat is active, do not format the timestamp
+        return timeStr
     else
-        hours12 = hours12NoLead
+        -- pChat is not active, format the timestamp
+        local hours, minutes, seconds = timeStr:match("([^%:]+):([^%:]+):([^%:]+)")
+        local hoursNoLead = tonumber(hours) -- hours without leading zero
+        local hours12NoLead = (hoursNoLead - 1) % 12 + 1
+        local hours12
+        if hours12NoLead < 10 then
+            hours12 = "0" .. hours12NoLead
+        else
+            hours12 = hours12NoLead
+        end
+        local pUp = "AM"
+        local pLow = "am"
+        if hoursNoLead >= 12 then
+            pUp = "PM"
+            pLow = "pm"
+        end
+        -- create new one
+        local timestamp = formatStr
+        timestamp = zo_strgsub(timestamp, "HH", hours)
+        timestamp = zo_strgsub(timestamp, "H", hoursNoLead)
+        timestamp = zo_strgsub(timestamp, "hh", hours12)
+        timestamp = zo_strgsub(timestamp, "h", hours12NoLead)
+        timestamp = zo_strgsub(timestamp, "m", minutes)
+        timestamp = zo_strgsub(timestamp, "s", seconds)
+        timestamp = zo_strgsub(timestamp, "A", pUp)
+        timestamp = zo_strgsub(timestamp, "a", pLow)
+        return tostring(timestamp)
     end
-    local pUp = "AM"
-    local pLow = "am"
-    if hoursNoLead >= 12 then
-        pUp = "PM"
-        pLow = "pm"
-    end
-
-    -- Create new one
-    local timestamp = formatStr
-    timestamp = timestamp:gsub("HH", hours)
-    timestamp = timestamp:gsub("H", hoursNoLead)
-    timestamp = timestamp:gsub("hh", hours12)
-    timestamp = timestamp:gsub("h", hours12NoLead)
-    timestamp = timestamp:gsub("m", minutes)
-    timestamp = timestamp:gsub("s", seconds)
-    timestamp = timestamp:gsub("A", pUp)
-    timestamp = timestamp:gsub("a", pLow)
-
-    return timestamp
 end
+
+-- Create access to local function
+LUIE.CreateTimestamp = CreateTimestamp
 
 -- FormatMessage helper function
 local function FormatMessage(msg, doTimestamp)
@@ -68,6 +79,12 @@ function LUIE.ToggleVisibility(hidden)
     end
 end
 
+local function AddSystemMessage(...)
+    return CHAT_ROUTER:AddSystemMessage(...)
+end
+
+LUIE.AddSystemMessage = AddSystemMessage
+
 -- Easy Print to Chat
 function LUIE.PrintToChat(msg, isSystem)
     if CHAT_SYSTEM.primaryContainer then
@@ -75,9 +92,9 @@ function LUIE.PrintToChat(msg, isSystem)
             if not LUIE.ChatAnnouncements.SV.ChatBypassFormat and CHAT_SYSTEM.primaryContainer then
                 -- Add timestamps if bypass is not enabled
                 local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
-                CHAT_ROUTER:AddSystemMessage(msg)
+                LUIE.AddSystemMessage(msg)
             else
-                CHAT_ROUTER:AddSystemMessage(msg)
+                LUIE.AddSystemMessage(msg)
             end
         else
             -- If we have system messages sent to display in all windows then just print to all windows at once, otherwise send messages to individual tabs.
@@ -85,9 +102,9 @@ function LUIE.PrintToChat(msg, isSystem)
                 if not LUIE.ChatAnnouncements.SV.ChatBypassFormat then
                     -- Add timestamps if bypass is not enabled
                     local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
-                    CHAT_ROUTER:AddSystemMessage(msg)
+                    LUIE.AddSystemMessage(msg)
                 else
-                    CHAT_ROUTER:AddSystemMessage(msg)
+                    LUIE.AddSystemMessage(msg)
                 end
             else
                 for k, cc in ipairs(CHAT_SYSTEM.containers) do
@@ -241,8 +258,8 @@ end
 -- Pull the AbilityId for the current morph of a skill
 function LUIE.GetSkillMorphAbilityId(abilityId)
     local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
-    local abilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex, false)
-    return abilityId
+    local morphAbilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex, false)
+    return morphAbilityId --renamed local(abilityId) to avoid naming conflicts with parameter
 end
 
 -- Function to update the syntax for default Mundus Stone tooltips we pull (in order to retain scaling)

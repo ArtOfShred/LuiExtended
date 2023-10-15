@@ -1,3 +1,4 @@
+---@diagnostic disable: duplicate-index
 --[[
     LuiExtended
     License: The MIT License (MIT)
