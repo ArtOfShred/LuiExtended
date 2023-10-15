@@ -683,12 +683,6 @@ Effects.EffectGroundDisplay = {
         debuff = false,
         ground = false,
     }, -- Imperial Prison Item Set (Bogdan the Nightflame)
-    [97901] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_domihaus_stone.dds",
-        buff = true,
-        debuff = false,
-        ground = true,
-    }, -- Domihaus (Domihaus)
     [97882] = {
         icon = "LuiExtended/media/icons/abilities/ability_set_domihaus_fire.dds",
         buff = true,
@@ -1229,11 +1223,6 @@ Effects.BarHighlightExtraId = {
     -- Psijic Order
     [104085] = 104079, -- Time Freeze
 
-    -- Soul Magic
-    [126890] = 126891, -- Soul Trap
-    [126895] = 126894, -- Soul Splitting Trap
-    [126897] = 126898, -- Consuming Trap
-
     -- Werewolf
     [32633] = 137257, -- Roar --> Off Balance
     [39114] = 137312, --> Deafening Roar --> Off Balance -- TODO: Could possibly track Major Breach/Minor Maim
@@ -1388,8 +1377,8 @@ Effects.BarHighlightOverride = {
     [36514] = { newId = 61400 }, -- Soul Harvest --> Damage Taken Increased
 
     -- Shadow
-    [25255] = { newId = 33185 }, -- Veiled Strike
-    [25260] = { newId = 34733 }, -- Surprise Attack
+    [25255] = { newId = 34733 }, -- Veiled Strike --> Off-Balance
+    [25260] = { newId = 34733 }, -- Surprise Attack --> Off-Balance
     [25267] = { newId = 34736 }, -- Concealed Weapon
     [25375] = { newId = 25376 }, -- Shadow Cloak
     [25380] = { newId = 62141 }, -- Shadowy Disguise
@@ -1725,9 +1714,9 @@ Effects.BarHighlightOverride = {
     -- Soul Magic -------------
     ---------------------------
 
-    [26768] = { newId = 126891 }, -- Soul Trap (Soul Trap)
-    [40328] = { newId = 126894 }, -- Soul Splitting Trap (Soul Splitting Trap)
-    [40317] = { newId = 126898 }, -- Consuming Trap (Consuming Trap)
+    [26768] = { newId = 126890 }, -- Soul Trap (Soul Trap)
+    [40328] = { newId = 126895 }, -- Soul Splitting Trap (Soul Splitting Trap)
+    [40317] = { newId = 126897 }, -- Consuming Trap (Consuming Trap)
 
     --[39270] = { newId = 55131, showFakeAura = true, duration = 5000 }, -- Soul Strike --> CC Immunity
     --[40420] = { newId = 55131, showFakeAura = true, duration = 6000 }, -- Soul Assault --> CC Immunity
@@ -4453,11 +4442,6 @@ Effects.EffectOverride = {
         tooltip = Tooltips.Generic_Poison,
         tooltipValue2 = 1,
     }, -- Drain Health (Gradual Health Drain Poison) DEBUFF
-    [81348] = {
-        icon = "LuiExtended/media/icons/poisons/poison_2_orange_r.dds",
-        tooltip = Tooltips.Generic_Poison,
-        tooltipValue2 = 1,
-    }, -- Drain Health (Gradual Health Drain Poison) DEBUFF
     [79702] = {
         icon = "LuiExtended/media/icons/poisons/poison_2_orange_g.dds",
         tooltip = Tooltips.Generic_HoT,
@@ -6185,36 +6169,26 @@ Effects.EffectOverride = {
     }, -- Chokethorn (Chokethorn)
 
     -- Domihaus
-    [97901] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_domihaus_stone.dds",
-        tooltip = Tooltips.Set_Domihaus_Stamina_Damage,
-    }, -- Domihaus (Domihaus)
-    [97900] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_domihaus_stone.dds",
+    [97882] = {
+        icon = "LuiExtended/media/icons/abilities/ability_set_domihaus_fire.dds",
+        tooltip = Tooltips.Set_Domihaus_Damage,
+    }, -- Domihaus (Domihaus) -- TODO: Make a combined icon for this set (possibly)
+    [97896] = {
+        icon = "LuiExtended/media/icons/abilities/ability_set_domihaus_fire.dds",
         forcedContainer = "short",
         groundLabel = true,
-        tooltip = Tooltips.Set_Domihaus_Stamina_Buff,
+        tooltip = Tooltips.Set_Domihaus_Buff,
+    }, -- Domihaus (Domihaus) -- TODO: Make a combined icon for this set (possibly)
+    [97883] = {
+        icon = "LuiExtended/media/icons/abilities/ability_set_domihaus_fire.dds",
+        groundLabel = true,
+        tooltip = Tooltips.Generic_AOE_Fire,
+        tooltipValue2 = 1,
     }, -- Domihaus (Domihaus)
     [97899] = {
         icon = "LuiExtended/media/icons/abilities/ability_set_domihaus_stone.dds",
         groundLabel = true,
         tooltip = Tooltips.Generic_AOE_Physical,
-        tooltipValue2 = 1,
-    }, -- Domihaus (Domihaus)
-    [97882] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_domihaus_fire.dds",
-        tooltip = Tooltips.Set_Domihaus_Magicka_Damage,
-    }, -- Domihaus (Domihaus)
-    [97896] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_domihaus_fire.dds",
-        forcedContainer = "short",
-        groundLabel = true,
-        tooltip = Tooltips.Set_Domihaus_Magicka_Buff,
-    }, -- Domihaus (Domihaus)
-    [97883] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_domihaus_fire.dds",
-        groundLabel = true,
-        tooltip = Tooltips.Generic_AOE_Fire,
         tooltipValue2 = 1,
     }, -- Domihaus (Domihaus)
 
@@ -7754,16 +7728,11 @@ Effects.EffectOverride = {
     [45011] = { icon = "LuiExtended/media/icons/abilities/passive_dragonknight_combustion.dds" }, -- Combustion (Combustion - Rank 2)
     [108816] = { icon = "LuiExtended/media/icons/abilities/ability_dragonknight_combustion.dds" }, -- Combustion (Combustion - Rank 2)
     [108815] = { icon = "LuiExtended/media/icons/abilities/ability_dragonknight_combustion.dds" }, -- Combustion (Combustion - Rank 2)
-    [29436] = {
-        icon = "LuiExtended/media/icons/abilities/ability_dragonknight_warmth.dds",
-        tooltip = Tooltips.Generic_Snare,
-        tooltipValue2 = 15,
-    }, -- Warmth (Warmth - Rank 1)
-    [45016] = {
+    [160949] = {
         icon = "LuiExtended/media/icons/abilities/ability_dragonknight_warmth.dds",
         tooltip = Tooltips.Generic_Snare,
         tooltipValue2 = 30,
-    }, -- Warmth (Warmth - Rank 2)
+    }, -- Warmth -- TODO: Maybe find a way to determine rank for the 15% or 30% snare tooltip
 
     [29455] = { icon = "esoui/art/icons/passive_dragonknight_007.dds" }, -- Iron Skin (Iron Skin - Rank 1)
     [44922] = { icon = "esoui/art/icons/passive_dragonknight_007.dds" }, -- Iron Skin (Iron Skin - Rank 2)
@@ -8053,7 +8022,6 @@ Effects.EffectOverride = {
 
     -- Veiled Strike / Surprised Attack / Concealed Weapon
     [25256] = { tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off Balance (Veiled Strike)
-    [33185] = { tooltip = Tooltips.Generic_Stun }, -- Veiled Strike (Veiled Strike)
     [34733] = { tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off Balance (Surprise Attack)
     [34737] = { tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off Balance (Concealed Weapon)
     [34736] = { tooltip = Tooltips.Generic_Stun }, -- Concealed Weapon (Concealed Weapon)
@@ -8463,9 +8431,7 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Aedric Spear
-    [31720] = { icon = "LuiExtended/media/icons/abilities/ability_templar_burning_light.dds" }, -- Burning Light (Burning Light - Rank 1)
     [80153] = { icon = "LuiExtended/media/icons/abilities/ability_templar_burning_light.dds" }, -- Burning Light (Burning Light - Rank 1)
-    [44731] = { icon = "LuiExtended/media/icons/abilities/ability_templar_burning_light.dds" }, -- Burning Light (Burning Light - Rank 2)
     [80170] = { icon = "LuiExtended/media/icons/abilities/ability_templar_burning_light.dds" }, -- Burning Light (Burning Light - Rank 2)
     [31565] = { icon = "LuiExtended/media/icons/abilities/passive_templar_balanced_warrior.dds" }, -- Balanced Warrior
     [44732] = { icon = "LuiExtended/media/icons/abilities/passive_templar_balanced_warrior.dds" }, -- Balanced Warrior
@@ -8918,20 +8884,9 @@ Effects.EffectOverride = {
     [88802] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 30 }, -- Winter's Revenge (Winter's Revenge)
 
     -- Arctic Wind / Polar Wind / Arctic Blast
-    [90833] = { tooltip = Tooltips.Skill_Arctic_Wind }, -- Arctic Wind (Arctic Wind)
-    [130400] = {
-        icon = "esoui/art/icons/ability_warden_003.dds",
-        tooltip = Tooltips.Generic_AOE_Frost,
-        tooltipValue2 = 1,
-        groundLabel = true,
-    }, -- Arctic Wind (Arctic Wind)
-    [90835] = { tooltip = Tooltips.Skill_Arctic_Wind }, -- Polar Wind (Polar Wind)
-    [130402] = {
-        icon = "esoui/art/icons/ability_warden_003_a.dds",
-        tooltip = Tooltips.Generic_AOE_Frost,
-        tooltipValue2 = 1,
-        groundLabel = true,
-    }, -- Polar Wind (Polar Wind)
+    [90833] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Arctic Wind (Arctic Wind)
+    [90835] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Polar Wind (Polar Wind)
+    [176422] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Polar Wind (Polar Wind)
     [90834] = { tooltip = Tooltips.Skill_Arctic_Blast }, -- Arctic Blast (Arctic Blast)
     [130406] = {
         icon = "esoui/art/icons/ability_warden_003_b.dds",
@@ -9800,23 +9755,16 @@ Effects.EffectOverride = {
     -- SOUL MAGIC ACTIVES ------------------------------------------
     ----------------------------------------------------------------
 
-    [126891] = { tooltip = Tooltips.Skill_Soul_Trap_Physical }, -- Soul Trap (Soul Trap)
-    [126890] = { tooltip = Tooltips.Skill_Soul_Trap_Magic }, -- Soul Trap (Soul Trap)
+    [126890] = { tooltip = Tooltips.Skill_Soul_Trap }, -- Soul Trap (Soul Trap)
     [26769] = { hide = true }, -- Soul Trap (Soul Trap)
 
-    [126894] = { icon = "esoui/art/icons/ability_otherclass_001_a.dds", tooltip = Tooltips.Skill_Soul_Trap_Physical }, -- Soul Splitting Trap (Soul Splitting Trap)
-    [126895] = { icon = "esoui/art/icons/ability_otherclass_001_a.dds", tooltip = Tooltips.Skill_Soul_Trap_Magic }, -- Soul Splitting Trap (Soul Splitting Trap)
+    [126895] = { icon = "esoui/art/icons/ability_otherclass_001_a.dds", tooltip = Tooltips.Skill_Soul_Trap }, -- Soul Splitting Trap (Soul Splitting Trap)
     [40329] = { hide = true }, -- Soul Splitting Trap (Soul Splitting Trap)
 
-    [126898] = {
-        icon = "esoui/art/icons/ability_otherclass_001_b.dds",
-        name = Abilities.Skill_Consuming_Trap,
-        tooltip = Tooltips.Skill_Consuming_Trap_Physical,
-    }, -- Consuming Trap (Consuming Trap)
     [126897] = {
         icon = "esoui/art/icons/ability_otherclass_001_b.dds",
         name = Abilities.Skill_Consuming_Trap,
-        tooltip = Tooltips.Skill_Consuming_Trap_Magic,
+        tooltip = Tooltips.Skill_Consuming_Trap,
     }, -- Consuming Trap (Consuming Trap)
 
     [40319] = { hide = true }, -- Consuming Trap (Consuming Trap)
@@ -10264,7 +10212,6 @@ Effects.EffectOverride = {
         tooltip = Tooltips.Skill_Spell_Orb,
     }, -- Spell Orb (Spell Orb - Rank 1)
     [103827] = { icon = "LuiExtended/media/icons/abilities/ability_psijic_spell_orb.dds", hide = true }, -- Spell Orb (Spell Orb - Rank 1)
-    [103828] = { icon = "LuiExtended/media/icons/abilities/ability_psijic_spell_orb.dds", hide = true }, -- Spell Orb (Spell Orb - Rank 1)
     [103879] = {
         icon = "LuiExtended/media/icons/abilities/ability_psijic_spell_orb.dds",
         tooltip = Tooltips.Skill_Spell_Orb,
@@ -10381,7 +10328,6 @@ Effects.EffectOverride = {
     [77245] = { icon = "LuiExtended/media/icons/abilities/ability_undaunted_bite.dds" }, -- Bite (Trapping Webs - Spawn Broodling Synergy)
     [39425] = { tooltip = Tooltips.Skill_Trapping_Webs }, -- Trapping Webs (Trapping Webs)
     [80079] = { duration = 0, tooltip = Tooltips.Skill_Trapping_Webs_Snare, groundLabel = true }, -- Trapping Webs (Trapping Webs)
-    [108791] = { hide = true }, -- Synergy Damage Bonus (Shadow Silk - Black Widow Synergy)
 
     [41994] = { icon = "esoui/art/icons/ability_undaunted_003_a.dds" }, -- Black Widow (Shadow Silk - Black Widow Synergy)
     [41998] = { icon = "esoui/art/icons/ability_undaunted_003_a.dds", tooltip = Tooltips.Skill_Spawn_Broodling }, -- Spawn Broodling (Shadow Silk - Black Widow Synergy)
@@ -10400,7 +10346,6 @@ Effects.EffectOverride = {
     }, -- Shadow Silk (Shadow Silk)
     [126720] = { icon = "esoui/art/icons/ability_undaunted_003_a.dds" }, -- Shadow Silk (Shadow Silk)
     [80107] = { icon = "esoui/art/icons/ability_undaunted_003_a.dds" }, -- Shadow Silk (Shadow Silk)
-    [108792] = { hide = true }, -- Synergy Damage Bonus (Tangling Webs - Arachnophobia Synergy)
     [42016] = { icon = "esoui/art/icons/ability_undaunted_003_b.dds" }, -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
     [42023] = { icon = "esoui/art/icons/ability_undaunted_003_b.dds", tooltip = Tooltips.Generic_Fear }, -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
     [42020] = { tooltip = Tooltips.Skill_Spawn_Broodling }, -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
@@ -11623,34 +11568,14 @@ Effects.EffectOverride = {
         duration = 863700,
         tooltip = Tooltips.Skill_Shard_Shield,
     }, -- Shard Shield (Bodyguard) (DB DLC)
-    [77562] = { icon = "LuiExtended/media/icons/abilities/ability_warrior_shard_shield.dds", hide = true }, -- Shard Shield (Bodyguard) (DB DLC)
-    [77609] = {
-        icon = "LuiExtended/media/icons/abilities/ability_warrior_shard_shield.dds",
-        tooltip = Tooltips.Generic_Stun,
-    }, -- Shard Shield (Bodyguard) (DB DLC)
     [77473] = { icon = "esoui/art/icons/ability_1handed_003.dds" }, -- Shield Charge (Bodyguard) (DB DLC)
     [77815] = { icon = "esoui/art/icons/ability_1handed_003.dds" }, -- Shield Charge (Bodyguard) (DB DLC)
     [77927] = { name = Abilities.Innate_Stagger, hide = true, tooltip = Tooltips.Generic_Stagger }, -- Staggered (Bodyguard) (DB DLC)
-    [77474] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_sentry.dds",
-        tooltip = Tooltips.Skill_Dutiful_Fury,
-    }, -- Dutiful Fury (Bodyguard) (DB DLC)
-    [77475] = { hide = true }, -- Dutiful Fury (Bodyguard) (DB DLC)
-    [77476] = { hide = true }, -- Dutiful Fury (Bodyguard) (DB DLC)
-    [77477] = {
-        icon = "esoui/art/icons/ability_warrior_025.dds",
-        name = Abilities.Skill_Enrage,
-        tooltip = Tooltips.Skill_Dutiful_Fury_Proc,
-    }, -- Dutiful Fury (Bodyguard) (DB DLC)
-    [77489] = { hide = true }, -- Dutiful Fury (Bodyguard) (DB DLC)
     [77748] = { hide = true }, -- 'Til Death (Bodyguard) (DB DLC)
     [77778] = { hide = true }, -- 'Til Death (Bodyguard) (DB DLC)
     [77765] = { hide = true }, -- 'Til Death (Bodyguard) (DB DLC)
     [77750] = { hide = true }, -- 'Til Death (Bodyguard) (DB DLC)
-    [79534] = { hide = true }, -- Shard Shield (Bodyguard) (DB DLC)
-    [83620] = { hide = true }, -- Shard Shield (Bodyguard) (DB DLC)
     [77838] = { hide = true }, -- Shield Charge (Bodyguard) (DB DLC)
-    [77602] = { hide = true }, -- Shard Shield (Bodyguard) (DB DLC)
     [77672] = {
         icon = "LuiExtended/media/icons/abilities/ability_innate_recover.dds",
         name = Abilities.Skill_Recover,
@@ -12476,10 +12401,6 @@ Effects.EffectOverride = {
     [50215] = { icon = "LuiExtended/media/icons/abilities/ability_spell_combustion.dds" }, -- Combustion (Flame Atronach)
 
     -- Flesh Colossus
-    [67870] = {
-        icon = "LuiExtended/media/icons/abilities/ability_fleshcolossus_tremor.dds",
-        name = Abilities.Skill_Tremor,
-    }, -- Tremor AOE (Flesh Colossus)
     [67123] = { icon = "LuiExtended/media/icons/abilities/ability_fleshcolossus_tremor.dds" }, -- Tremor (Flesh Colossus)
     [67636] = { icon = "LuiExtended/media/icons/abilities/ability_spell_falling_debris.dds" }, -- Falling Debris (Flesh Colossus)
     [66869] = { icon = "LuiExtended/media/icons/abilities/ability_fleshcolossus_pin.dds" }, -- Pin (Flesh Colossus)
@@ -12530,8 +12451,6 @@ Effects.EffectOverride = {
     [76130] = { hide = true }, -- Stumble Forward (Flesh Colossus)
     [76131] = { hide = true }, -- Stumble Forward (Flesh Colossus)
     [76143] = { hide = true }, -- Stumble Forward (Flesh Colossus)
-    [79001] = { hide = true }, -- Stumble Forward (Flesh Colossus)
-    [76145] = { hide = true }, -- Stumble Forward (Flesh Colossus)
     [76146] = { hide = true }, -- Stumble Forward (Flesh Colossus) (Buff on Player)
     [67772] = { icon = "esoui/art/icons/ability_warrior_025.dds", name = Abilities.Skill_Enrage, hide = true }, -- Enraged (Flesh Colossus)
 
@@ -12653,7 +12572,6 @@ Effects.EffectOverride = {
         tooltipValue2 = 35,
     }, -- Stomp (Ogrim)
     [91855] = { icon = "LuiExtended/media/icons/abilities/ability_spell_boulder_toss.dds" }, -- Boulder Toss (Ogrim)
-    [127629] = { hide = true }, -- Boulder Toss (Ogrim)
     [127630] = { icon = "LuiExtended/media/icons/abilities/ability_spell_boulder_toss.dds" }, -- Boulder Toss (Ogrim)
 
     -- Scamp
@@ -14132,7 +14050,6 @@ Effects.EffectOverride = {
         tooltipValue2 = 0.5,
     }, -- Pool of Shadow (Malacath Voidbringer)
     [77005] = { hide = true }, -- Shadowy Duplicate (Malacath Voidbringer)
-    [80211] = { hide = true }, -- Shadowy Duplicate (Malacath Voidbringer)
     [76979] = {
         icon = "LuiExtended/media/icons/abilities/ability_spell_shadowy_duplicate_red.dds",
         tooltip = Tooltips.Skill_Shadowy_Duplicate,
@@ -17122,7 +17039,6 @@ Effects.EffectOverride = {
     [86575] = { icon = "esoui/art/icons/ability_1handed_003.dds" }, -- Shield Charge (Renduril the Hammer)
     [86570] = { icon = "esoui/art/icons/ability_1handed_003.dds" }, -- Shield Charge (Renduril the Hammer)
     [86576] = { name = Abilities.Innate_Stagger, hide = true }, -- Staggered (Renduril the Hammer)
-    [95731] = { hide = true }, -- Dutiful Fury -- Renduril the Hammer
     [86574] = { hide = true }, -- Shield Charge -- Renduril the Hammer
     [51634] = { icon = "LuiExtended/media/icons/abilities/ability_dwarvenspider_shocking_touch.dds" }, -- Shocking Touch (Steamreaver - Nchuleftingth)
     [86680] = { hide = true }, -- Auditory Signal (Steamreaver)
@@ -22222,8 +22138,8 @@ Effects.AddGroundDamageAura = {
 
     -- Sets
     [59591] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Bogdan Totem (Bogdan the Nightflame)
-    [97899] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Domihaus (Domihaus)
     [97883] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Domihaus (Domihaus)
+    [97899] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Domihaus (Domihaus)
     [97857] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Earthgore (Earthgore)
     [84502] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Grothdarr (Grothdarr)
     [80526] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Ilambris
@@ -22281,8 +22197,6 @@ Effects.AddGroundDamageAura = {
     [21759] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Solar Disturbance
 
     -- Warden
-    [130400] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Arctic Wind (Arctic Wind)
-    [130402] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Polar Wind (Polar Wind)
     [130406] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Arctic Blast (Arctic Blast)
 
     [129434] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Budding Seeds (Budding Seeds)

@@ -352,7 +352,6 @@ LUIE.DebugAuras = {
 
     -- Basic Attacks
     --[16593] = true, -- Melee Snare
-    [64842] = true, -- Critter Smash
     [48532] = true, -- Charge Snare
     [41952] = true, -- Cower
     [55080] = true, -- Pet Hidden
@@ -938,7 +937,6 @@ LUIE.DebugAuras = {
     [79368] = true, -- Major Expedition (Speed-Draining Poison)
     [79094] = true, -- Hindrance (Hindering Poison)
     [79699] = true, -- Drain Health (Gradual Health Drain Poison)
-    [81351] = true, -- Drain Health (Gradual Health Drain Poison)
     [79700] = true, -- Restore Health (Gradual Health Drain Poison)
     [79707] = true, -- Creeping Ravage Health (Gradual Ravage Health Poison)
     [79723] = true, -- Minor Vulnerability (Protection-Reversing Poison)
@@ -989,7 +987,6 @@ LUIE.DebugAuras = {
     [79370] = true, -- Major Expedition (Speed-Draining Poison)
     [79102] = true, -- Minor Hindrance (Hindering Poison)
     [79701] = true, --  Creeping Drain Health (Gradual Health Drain Poison)
-    [81348] = true, -- Creeping Drain Helath (Gradual Health Drain Poison)
     [79702] = true, -- Lingering Restore Health (Gradual Health Drain Poison)
     [79708] = true, -- Creeping Ravage Health (Gradual Ravage Health Poison)
     [79726] = true, -- Minor Vulnerability (Protection-Reversing Poison)
@@ -2043,12 +2040,10 @@ LUIE.DebugAuras = {
 
     -- Domihaus
     [97879] = true, -- Domihaus
-    [97901] = true, -- Domihaus
-    [97900] = true, -- Domihaus
-    [97899] = true, -- Domihaus
     [97882] = true, -- Domihaus
     [97896] = true, -- Domihaus
     [97883] = true, -- Domihaus
+    [97899] = true, -- Domihaus
 
     -- Earthgore
     [97854] = true, -- Earthgore
@@ -2283,10 +2278,8 @@ LUIE.DebugAuras = {
     [80488] = true, -- Hoarvor Mask
     [80856] = true, -- Hoarvor Mask
     [80864] = true, -- Hoarvor Mask
-    [80489] = true, -- Hoarvor Mask
     [80490] = true, -- Velidreth
     [80859] = true, -- Hoarvor Mask
-    [80863] = true, -- Hoarvor Mask
 
     -- Vykosa
     [111352] = true, -- Vykosa
@@ -2409,7 +2402,6 @@ LUIE.DebugAuras = {
     [69685] = true, -- Major Evasion (of the Spectre's Eye)
 
     [60457] = true, -- Twice-Born Star (the Twice-Born Star)
-    [61584] = true, -- Prep To Remove Mundus (the Twice-Born Star)
 
     [32782] = true, -- Willow's Path (the Willow's Path)
 
@@ -2440,7 +2432,6 @@ LUIE.DebugAuras = {
     [113092] = true, -- Sload's Projectile (Sload's)
 
     [113180] = true, -- Grave-Stake Collector (Grave-Stake Collector)
-    [113183] = true, -- Grave-Stake Collector (Grave-Stake Collector)
     [113181] = true, -- Grave-Stake Collector (Grave-Stake Collector)
     [113259] = true, -- Grave-Stake Collector (Grave-Stake Collector)
     [113185] = true, -- Grave-Stake Collector (Grave-Stake Collector)
@@ -2800,7 +2791,6 @@ LUIE.DebugAuras = {
     [67093] = true, -- Overwhelming Surge (Overwhelming)
     [67129] = true, -- Overwhelming Surge (Overwhelming)
     [67136] = true, -- Overwhelming Surge (Overwhelming)
-    [127134] = true, -- Damage Holder (Overwhelming)
     [127131] = true, -- Overwhelming Surge (Overwhelming)
 
     [29099] = true, -- Prayer Shawl (of Prayer)
@@ -2982,7 +2972,6 @@ LUIE.DebugAuras = {
     [126629] = true, -- Azureblight Reaper (Azureblight)
     [126631] = true, -- Blight Seed (Azureblight)
     [126633] = true, -- Blight Seed (Azureblight)
-    [126638] = true, -- Azureblight Reaper Cooldown (Azureblight)
 
     [133490] = true, -- Aegis Caller (Aegis Caller's)
     [133493] = true, -- Lesser Aegis (Aegis Caller's)
@@ -3040,7 +3029,6 @@ LUIE.DebugAuras = {
     [85620] = true, -- Knight-Errant's Mail (Knight-Errant's)
 
     [67202] = true, -- Leeching Plate (of Leeching)
-    [69346] = true, -- Leeching Plate (of Leeching)
     [67205] = true, -- Leeching Plate (of Leeching)
     [69345] = true, -- Leeching Plate (of Leeching)
     [67204] = true, -- Leeching Plate (of Leeching)
@@ -3089,7 +3077,6 @@ LUIE.DebugAuras = {
     [111443] = true, -- Haven of Ursus (Haven of Ursus)
     [112414] = true, -- Ursus's Blessing (Haven of Ursus)
     [111440] = true, -- Ursus CD (Haven of Ursus)
-    [146244] = true, -- Synergy Damage Bonus (Haven of Ursus)
     --[113423] = true, -- Checker (Haven of Ursus)
 
     [111220] = true, -- Jailer's Tenacity (Jailer's Tenacity)
@@ -3309,7 +3296,6 @@ LUIE.DebugAuras = {
 
     [79419] = true, -- Galerion's Revenge (Galerion's)
     [79421] = true, -- Mark of Revenge (Galerion's)
-    [79770] = true, -- U10 AVA MA/LA 1 (Galerion's)
     --[79771] = true, -- U10 AVA MA/LA 1 (Galerion's)
     [79420] = true, -- Galerion's Revenge (Galerion's)
 
@@ -3336,7 +3322,6 @@ LUIE.DebugAuras = {
 
     [79464] = true, -- Vicecanon of Venom
     [79469] = true, -- Deadly Venom
-    [79470] = true, -- Vicecanon of Venom Heal
     [79471] = true, -- Venom Heal
 
     -- Cyrodiil Sets (Light)
@@ -3638,9 +3623,8 @@ LUIE.DebugAuras = {
     [108816] = true, -- Combustion
     [108815] = true, -- Combustion
     [29430] = true, -- Warmth (Rank 1)
-    [29436] = true, -- Warmth
     [45012] = true, -- Warmth (Rank 2)
-    [45016] = true, -- Warmth
+    [160949] = true, -- Warmth
     [29439] = true, -- Searing Heat (Rank 1)
     [45023] = true, -- Searing Heat (Rank 2)
     [29451] = true, -- World in Ruin (Rank 1)
@@ -3703,8 +3687,6 @@ LUIE.DebugAuras = {
     [44369] = true, -- Venomous Claw (Venomous Claw)
     [31810] = true, -- Venomous Claw (Venomous Claw)
 
-    [32019] = true, -- Burning Embers (Burning Embers)
-    [32018] = true, -- Burning Embers (Burning Embers)
     [20660] = true, -- Burning Embers (Burning Embers)
     [44373] = true, -- Burning Embers (Burning Embers)
     [31815] = true, -- Burning Embers (Burning Embers)
@@ -4095,13 +4077,11 @@ LUIE.DebugAuras = {
 
     [25255] = true, -- Veiled Strike (Veiled Strike)
     [25256] = true, -- Off Balance (Veiled Strike)
-    [33185] = true, -- Veiled Strike (Veiled Strike)
 
     [25260] = true, -- Surprise Attack (Surprise Attack)
     [34733] = true, -- Off Balance (Surprise Attack)
 
     [34738] = true, -- Concealed Weapon Passive (Concealed Weapon)
-    [61155] = true, -- Concealed Weapon (Concealed Weapon)
     [34739] = true, -- Concealed Weapon (Concealed Weapon)
     [25267] = true, -- Concealed Weapon (Concealed Weapon)
     [34737] = true, -- Off Balance (Concealed Weapon)
@@ -4564,13 +4544,11 @@ LUIE.DebugAuras = {
     [108855] = true, -- Bound Aegis Passive (Bound Aegis)
     [24163] = true, -- Bound Aegis (Bound Aegis)
 
-    [48078] = true, -- Major Berserk (Summon Storm Atronach - Charged Lightning Synergy)
     [62195] = true, -- Major Berserk (Summon Storm Atronach - Charged Lightning Synergy)
     [48076] = true, -- Charged Lightning (Summon Storm Atronach - Charged Lightning Synergy)
     [48085] = true, -- Charged Lightning Cooldown (Summon Storm Atronach - Charged Lightning Synergy)
 
     [25312] = true, -- Storm Atronach (Summon Storm Atronach - All Morphs)
-    [31409] = true, -- Killed Trigger (Summon Storm Atronach - All Morphs)
     [77454] = true, -- Break Free (Atronach) (Summon Storm Atronach - All Morphs)
     [70122] = true, -- Change Target (Summon Storm Atronach - All Morphs)
     [77456] = true, -- Guard CC Break Timer (Summon Storm Atronach - All Morphs)
@@ -4630,7 +4608,6 @@ LUIE.DebugAuras = {
     [19109] = true, -- Endless Fury (Endless Fury)
     [19118] = true, -- Endless Fury (Endless Fury)
     [114764] = true, -- Endless Fury (Endless Fury)
-    [114762] = true, -- Endless Fury (Endless Fury)
     [114763] = true, -- Endless Fury (Endless Fury)
     [19120] = true, -- Endless Fury (Endless Fury)
     [44491] = true, -- Endless Fury (Endless Fury)
@@ -4740,11 +4717,9 @@ LUIE.DebugAuras = {
     [114841] = true, -- Minor Protetion (Spear Wall)
     [31718] = true, -- Burning Light (Rank 1)
     [144021] = true, -- Burning Light
-    [31720] = true, -- Burning Light
     [80153] = true, -- Burning Light
     [44730] = true, -- Burning Light (Rank 2)
     [144028] = true, -- Burning Light
-    [44731] = true, -- Burning Light
     [80170] = true, -- Burning Light
     [31565] = true, -- Balanced Warrior (Rank 1)
     [44732] = true, -- Balanced Warrior (Rank 2)
@@ -4845,7 +4820,6 @@ LUIE.DebugAuras = {
     [26192] = true, -- Spear Shards (Spear Shards)
     [95931] = true, -- Spear Shards (Spear Shards)
 
-    [108821] = true, -- Synergy Damage Bonus (Luminous Shards - All Ranks)
     [95926] = true, -- Holy Shards (Luminous Shards - All Ranks)
     [95925] = true, -- Holy Shards (Luminous Shards - All Ranks)
     [95924] = true, -- Spear Shards / Necrotic Orb CD (Luminous Shards - All Ranks)
@@ -4966,7 +4940,6 @@ LUIE.DebugAuras = {
     [63029] = true, -- Radiant Destruction (Radiant Destruction)
     [63952] = true, -- Radiant Destruction (Radiant Destruction)
 
-    [69119] = true, -- Radiant Test! (Radiant Glory)
     [63044] = true, -- Radiant Glory (Radiant Glory)
     [69118] = true, -- Radiant Glory Heal (Radiant Glory)
     [63956] = true, -- Radiant Glory (Radiant Glory)
@@ -4974,7 +4947,6 @@ LUIE.DebugAuras = {
     [63046] = true, -- Radiant Oppression (Radiant Oppression)
     [63961] = true, -- Radiant Oppression (Radiant Oppression)
 
-    [108822] = true, -- Synergy Damage Bonus (Nova - Supernova Synergy)
     [48939] = true, -- Supernova (Nova - Supernova Synergy)
     [31540] = true, -- Supernova (Nova - Supernova Synergy)
     [31562] = true, -- Supernova (Nova - Supernova Synergy)
@@ -5022,7 +4994,6 @@ LUIE.DebugAuras = {
     [88456] = true, -- Ritual of Rebirth (Ritual of Rebirth)
 
     [22314] = true, -- Hasty Prayer (Hasty Prayer)
-    [22318] = true, -- Hasty Prayer (Hasty Prayer)
     [108935] = true, -- Minor Expedition (Hasty Prayer)
 
     [26207] = true, -- Restoring Aura Passive (Restoring Aura - All Morphs)
@@ -5167,11 +5138,7 @@ LUIE.DebugAuras = {
     [94441] = true, -- Subterranean Assault (Subterranean Assault)
     [94442] = true, -- Subterranean Assault (Subterranean Assault)
     [94445] = true, -- Subterranean Assault (Subterranean Assault)
-
     [146919] = true, -- Subterranean Assault (Subterranean Assault)
-    [146916] = true, -- Subterranean Assault (Subterranean Assault)
-    [146917] = true, -- Subterranean Assault (Subterranean Assault)
-    [146915] = true, -- Subterranean Assault (Subterranean Assault)
 
     [86015] = true, -- Deep Fissure (Deep Fissure)
     [94421] = true, -- Deep Fissure (Deep Fissure)
@@ -5282,7 +5249,6 @@ LUIE.DebugAuras = {
     [85577] = true, -- Harvest (Healing Seed - Harvest Synergy)
     [85578] = true, -- Healing Seed (Healing Seed)
     [85585] = true, -- Healing Seed Dummy (Healing Seed)
-    [85584] = true, -- Healing Seed Synergy Tick (Healing Seed)
     [85583] = true, -- Harvest (Healing Seed)
     [85582] = true, -- Healing Seed (Healing Seed)
 
@@ -5381,17 +5347,15 @@ LUIE.DebugAuras = {
 
     [86148] = true, -- Arctic Wind (Arctic Wind)
     [90833] = true, -- Arctic Wind (Arctic Wind)
-    [130400] = true, -- Arctic Wind (Arctic Wind)
 
     [86152] = true, -- Polar Wind (Polar Wind)
     [90835] = true, -- Polar Wind (Polar Wind)
-    [130402] = true, -- Polar Wind (Polar Wind)
     [88776] = true, -- Polar Wind (Polar Wind)
+    [176422] = true, -- Polar Wind (Polar Wind)
 
     [86156] = true, -- Arctic Blast (Arctic Blast)
     [90834] = true, -- Arctic Blast (Arctic Blast)
     [130406] = true, -- Arctic Blast (Arctic Blast)
-    [130410] = true, -- Arctic Blast (Arctic Blast)
     [130409] = true, -- Arctic Blast (Arctic Blast)
 
     [86135] = true, -- Crystallized Shield (Crystallized Shield)
@@ -6153,8 +6117,6 @@ LUIE.DebugAuras = {
 
     [38846] = true, -- Bloodthirst (Bloodthirst)
     [81378] = true, -- Bloodthirst (Bloodthirst)
-    [81380] = true, -- Bloodthirst (Bloodthirst)
-    [81379] = true, -- Bloodthirst (Bloodthirst)
     [38853] = true, -- Bloodthirst (Bloodthirst)
     [81381] = true, -- Bloodthirst (Bloodthirst)
 
@@ -6364,7 +6326,6 @@ LUIE.DebugAuras = {
     [30951] = true, -- Tri Focus
     [45500] = true, -- Tri Focus -- Rank 2
     [69773] = true, -- Tri Focus
-    [45502] = true, -- Tri Focus
     [45505] = true, -- Tri Focus
 
     [30957] = true, -- Penetrating Magic -- Rank 1
@@ -6413,18 +6374,15 @@ LUIE.DebugAuras = {
 
     [28858] = true, -- Wall of Elements (Wall of Elements)
     [28807] = true, -- Wall of Fire (Wall of Elements) -- Fire
-    [62898] = true, -- Unstable Wall of Fire (Wall of Elements) -- Fire
     [62897] = true, -- Unstable Wall of Fire (Wall of Elements) -- Fire
     [62895] = true, -- Unstable Wall of Fire (Wall of Elements) -- Fire
     [62896] = true, -- Wall of Fire (Wall of Elements) -- Fire
     [28854] = true, -- Wall of Storms (Wall of Elements) -- Storm
-    [62969] = true, -- Wall of Storms (Wall of Elements) -- Storm
     [62970] = true, -- Wall of Storms (Wall of Elements) -- Storm
     [62967] = true, -- Wall of Storms (Wall of Elements) -- Storm
     [62971] = true, -- Wall of Storms (Wall of Elements) -- Storm
     [62968] = true, -- Off Balance (Wall of Elements) -- Storm
     [28849] = true, -- Wall of Frost (Wall of Elements) -- Frost
-    [62930] = true, -- Unstable Wall of Fire (Wall of Elements) -- Frost
     [62929] = true, -- Unstable Wall of Frost (Wall of Elements) -- Frost
     [146029] = true, -- Unstable Wall of Frost (Wall of Elements) -- Frost
     [146169] = true, -- Frost Shield (Wall of Elements) -- Frost
@@ -6432,27 +6390,21 @@ LUIE.DebugAuras = {
 
     [39052] = true, -- Unstable Wall of Elements (Unstable Wall of Elements)
     [39053] = true, -- Unstable Wall of Fire (Unstable Wall of Elements) -- Fire
-    [62813] = true, -- Unstable Wall of Fire (Unstable Wall of Elements) -- Fire
     [39057] = true, -- Unstable Wall of Fire (Unstable Wall of Elements) -- Fire
     [39055] = true, -- Unstable Wall of Fire (Unstable Wall of Elements) -- Fire
-    [45694] = true, -- Unstable Wall (Unstable Wall of Elements) -- Fire
     [114880] = true, -- Summon Shade
     [39054] = true, -- Unstable Wall of Fire (Unstable Wall of Elements) -- Fire
     [39056] = true, -- Unstable Wall of Fire (Unstable Wall of Elements) -- Fire
     [39073] = true, -- Unstable Wall of Storms (Unstable Wall of Elements) -- Shock
-    [62868] = true, -- Unstable Wall of Fire (Unstable Wall of Elements) -- Shock
     [39081] = true, -- Unstable Wall of Storms (Unstable Wall of Elements) -- Shock
     [39078] = true, -- Unstable Wall of Storms (Unstable Wall of Elements) -- Shock
-    [62866] = true, -- Unstable Wall (Unstable Wall of Elements) -- Shock
     [114883] = true, -- Summon Shade
     [39079] = true, -- Unstable Wall of Storms (Unstable Wall of Elements) -- Shock
     [39080] = true, -- Unstable Wall of Storms (Unstable Wall of Elements) -- Shock
     [39077] = true, -- Off Balance (Unstable Wall of Elements) -- Shock
     [39067] = true, -- Unstable Wall of Frost (Unstable Wall of Elements) -- Frost
-    [62840] = true, -- Unstable Wall of Fire (Unstable Wall of Elements) -- Frost
     [39069] = true, -- Unstable Wall of Frost (Unstable Wall of Elements) -- Frost
     [39070] = true, -- Unstable Wall of Frost (Unstable Wall of Elements) -- Frost
-    [62838] = true, -- Unstable Wall (Unstable Wall of Elements) -- Frost
     [114886] = true, -- Summon Shade (Unstable Wall of Elements) -- Frost
     [146276] = true, -- Unstable Frost Shield (Unstable Wall of Elements) -- Frost
     [146279] = true, -- Unstable Frost Shield (Unstable Wall of Elements) -- Frost
@@ -6461,20 +6413,17 @@ LUIE.DebugAuras = {
 
     [39011] = true, -- Elemental Blockade (Elemental Blockade)
     [39012] = true, -- Blockade of Fire (Elemental Blockade) -- Fire
-    [62914] = true, -- Unstable Wall of Fire (Elemental Blockade) -- Fire
     [62913] = true, -- Unstable Wall of Fire (Elemental Blockade) -- Fire
     [62911] = true, -- Unstable Wall of Fire (Elemental Blockade) -- Fire
     [114881] = true, -- Summon Shade
     [62912] = true, -- Blockade of Fire (Elemental Blockade) -- Fire
     [39018] = true, -- Blockade of Storms (Elemental Blockade) -- Storm
-    [62991] = true, -- Blockade of Storms (Elemental Blockade) -- Storm
     [62989] = true, -- Blockade of Storms (Elemental Blockade) -- Storm
     [62987] = true, -- Blockade of Storms (Elemental Blockade) -- Storm
     [114884] = true, -- Summon Shade
     [62990] = true, -- Blockade of Storms (Elemental Blockade) -- Storm
     [62988] = true, -- Blockade of Storms (Elemental Blockade) -- Storm
     [39028] = true, -- Blockade of Frost (Elemental Blockade) -- Frost
-    [62950] = true, -- Unstable Wall of Fire (Elemental Blockade) -- Frost
     [62949] = true, -- Unstable Wall of Frost (Elemental Blockade) -- Frost
     [62947] = true, -- Unstable Wall of Frost (Elemental Blockade) -- Frost
     [114885] = true, -- Summon Shade
@@ -6532,7 +6481,6 @@ LUIE.DebugAuras = {
     [146586] = true, -- Ring Afterburn (Fire Ring)
     [39147] = true, -- Elemental Ring (Shock Ring)
     [146610] = true, -- Shock Impulse (Shock Ring)
-    [146613] = true, -- Shock Impulse (Shock Ring)
     [146609] = true, -- Shock Impulse (Shock Ring)
     [39153] = true, -- Elemental Ring (Shock Ring)
     [39146] = true, -- Elemental Ring (Frost Ring)
@@ -6836,17 +6784,14 @@ LUIE.DebugAuras = {
     -------------------------------------
 
     [26768] = true, -- Soul Trap (Soul Trap)
-    [126891] = true, -- Soul Trap (Soul Trap)
     [126890] = true, -- Soul Trap (Soul Trap)
     [26769] = true, -- Soul Trap (Soul Trap)
 
     [40328] = true, -- Soul Splitting Trap (Soul Splitting Trap)
-    [126894] = true, -- Soul Splitting Trap (Soul Splitting Trap)
     [126895] = true, -- Soul Splitting Trap (Soul Splitting Trap)
     [40329] = true, -- Soul Splitting Trap (Soul Splitting Trap)
 
     [40317] = true, -- Consuming Trap (Consuming Trap)
-    [126898] = true, -- Consuming Trap (Consuming Trap)
     [126897] = true, -- Consuming Trap (Consuming Trap)
     [40319] = true, -- Consuming Trap (Consuming Trap)
     [40323] = true, -- Consuming Trap (Consuming Trap)
@@ -7483,7 +7428,6 @@ LUIE.DebugAuras = {
     [103819] = true, -- Spell Orb (Spell Orb - Rank 1)
     [103820] = true, -- Spell Orb
     [103827] = true, -- Spell Orb
-    [103828] = true, -- Spell Orb
     [103878] = true, -- Spell Orb (Spell Orb - Rank 2)
     [103879] = true, -- Spell Orb
     [103880] = true, -- Spell Orb
@@ -7690,7 +7634,6 @@ LUIE.DebugAuras = {
     [80083] = true, -- Trapping Webs (Trapping Webs)
     [80078] = true, -- Trapping Webs (Trapping Webs)
 
-    [108791] = true, -- Synergy Damage Bonus (Shadow Silk - Black Widows Synergy)
     [41994] = true, -- Black Widow (Shadow Silk - Black Widows Synergy)
     [41997] = true, -- Black Widow (Shadow Silk - Black Widows Synergy)
     [41998] = true, -- Black Widow (Shadow Silk - Black Widows Synergy)
@@ -7706,7 +7649,6 @@ LUIE.DebugAuras = {
     [80107] = true, -- Shadow Silk (Shadow Silk)
     [41991] = true, -- Shadow Silk (Shadow Silk)
 
-    [108792] = true, -- Synergy Damage Bonus (Tangling Webs - Arachnophobia Synergy)
     [42016] = true, -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
     [42019] = true, -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
     [42023] = true, -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
@@ -7741,7 +7683,6 @@ LUIE.DebugAuras = {
     [42063] = true, -- Inner Rage (Inner Beast)
     [42061] = true, -- Inner Rage (Inner Beast)
 
-    [108794] = true, -- Synergy Damage Bonus (Bone Shield - Bone Wall Synergy)
     [39379] = true, -- Bone Wall (Bone Shield - Bone Wall Synergy)
     [39424] = true, -- Bone Wall (Bone Shield - Bone Wall Synergy)
 
@@ -7754,7 +7695,6 @@ LUIE.DebugAuras = {
     [42140] = true, -- Spiked Bone Shield (Spiked Bone Shield)
     [42139] = true, -- Spiked Bone Shield (Spiked Bone Shield)
 
-    [108797] = true, -- Synergy Damage Bonus (Bone Surge - Spinal Surge Synergy)
     [42198] = true, -- Spinal Surge (Bone Surge - Spinal Surge Synergy)
     [42197] = true, -- Major Vitality (Bone Surge - Spinal Surge Synergy)
     [42196] = true, -- Spinal Surge (Bone Surge - Spinal Surge Synergy)
@@ -7763,7 +7703,6 @@ LUIE.DebugAuras = {
     [42193] = true, -- Bone Surge (Bone Surge)
     [42192] = true, -- Bone Surge (Bone Surge)
 
-    [108799] = true, -- Synergy Damage Bonus (Necrotic Orb - Combustion Synergy)
     [39301] = true, -- Combustion (Necrotic Orb - Combustion Synergy)
     [85434] = true, -- Spear Shards / Necrotic Orb CD (Necrotic Orb - Combustion Synergy)
     [95039] = true, -- Combustion (Necrotic Orb - Combustion Synergy)
@@ -8659,7 +8598,6 @@ LUIE.DebugAuras = {
 
     [75810] = true, -- Trap Regen Stopper (Gas Blossom) -- Housing
     [110416] = true, -- Putrid Cloud (Gas Blossom) -- Housing
-    [110571] = true, -- Putrid Cloud (Gas Blossom) -- Housing
 
     [110541] = true, -- Stunted Current (Static Pitcher) -- Housing
     [110542] = true, -- Stunted Current (Static Pitcher) -- Housing
@@ -9199,12 +9137,6 @@ LUIE.DebugAuras = {
     [74621] = true, -- Revealed -- Archer (TG DLC)
     [74620] = true, -- Flare Trap REM -- Archer (TG DLC)
 
-    [77474] = true, -- Dutiful Fury -- Bodyguard (DB DLC)
-    [77475] = true, -- Dutiful Fury -- Bodyguard (DB DLC)
-    [77477] = true, -- Dutiful Fury -- Bodyguard (DB DLC)
-    [77476] = true, -- Dutiful Fury -- Bodyguard (DB DLC)
-    [77489] = true, -- Dutiful Fury -- Bodyguard (DB DLC)
-    [105606] = true, -- Dutiful Fury -- Bodyguard (DB DLC)
     [81360] = true, -- 'Til Death -- Bodyguard (DB DLC)
     [77472] = true, -- 'Til Death -- Bodyguard (DB DLC)
     [79523] = true, -- 'Til Death -- Bodyguard (DB DLC)
@@ -9219,11 +9151,6 @@ LUIE.DebugAuras = {
     [77738] = true, -- 'Til Death -- Bodyguard (DB DLC)
     [77554] = true, -- Shard Shield -- Bodyguard (DB DLC)
     [77555] = true, -- Shard Shield -- Bodyguard (DB DLC)
-    [79534] = true, -- Shard Shield -- Bodyguard (DB DLC)
-    [83620] = true, -- Shard Shield -- Bodyguard (DB DLC)
-    [77562] = true, -- Shard Shield -- Bodyguard (DB DLC)
-    [77609] = true, -- Shard Shield -- Bodyguard (DB DLC)
-    [77602] = true, -- Shard Shield -- Bodyguard (DB DLC)
     [77473] = true, -- Shield Charge -- Bodyguard (DB DLC)
     [77838] = true, -- Shield Charge -- Bodyguard (DB DLC)
     [77815] = true, -- Shield Charge -- Bodyguard (DB DLC)
@@ -9319,7 +9246,6 @@ LUIE.DebugAuras = {
     [76821] = true, -- SHA Deepest Shadow BON (Voidbringer)
     [76620] = true, -- Shadowy Duplicate (Voidbringer)
     [77005] = true, -- Shadowy Duplicate (Voidbringer)
-    [80211] = true, -- Shadowy Duplicate (Voidbringer)
     [76967] = true, -- Shadowy Duplicate (Voidbringer)
     [76979] = true, -- Shadowy Duplicate (Voidbringer)
     [76995] = true, -- Shadowy Duplicate (Voidbringer)
@@ -9879,7 +9805,6 @@ LUIE.DebugAuras = {
     [27326] = true, -- Unyielding Mace -- Flesh Atronach
     [23077] = true, -- Bleeding -- Flesh Atronach
 
-    [67870] = true, -- Tremor AOE -- Flesh Colossus
     [67123] = true, -- Tremor -- Flesh Colossus
     [67637] = true, -- Falling Debris Projectile -- Flesh Colossus
     [67636] = true, -- Falling Debris -- Flesh Colossus
@@ -9909,8 +9834,6 @@ LUIE.DebugAuras = {
     [76130] = true, -- Stumble Forward -- Flesh Colossus
     [76131] = true, -- Stumble Forward -- Flesh Colossus
     [76143] = true, -- Stumble Forward -- Flesh Colossus
-    [79001] = true, -- Stumble Forward -- Flesh Colossus
-    [76145] = true, -- Stumble Forward -- Flesh Colossus
     [76146] = true, -- Stumble Forward -- Flesh Colossus
     [76129] = true, -- Stumble Forward -- Flesh Colossus
     [76134] = true, -- Stumble Forward -- Flesh Colossus
@@ -10002,7 +9925,6 @@ LUIE.DebugAuras = {
     [91850] = true, -- Stomp -- Ogrim
     [91851] = true, -- Stomp -- Ogrim
     [91855] = true, -- Boulder Toss -- Ogrim
-    [127629] = true, -- Boulder Toss -- Ogrim
     [127630] = true, -- Boulder Toss -- Ogrim
 
     [6158] = true, -- Flare -- Scamp
@@ -13267,7 +13189,6 @@ LUIE.DebugAuras = {
     [71919] = true, -- Turret Occupied
     [71920] = true, -- Turret Mode
 
-    [95731] = true, -- Dutiful Fury
     [86567] = true, -- Fire Runes
     [86568] = true, -- Fire Runes
     [86569] = true, -- Fire Runes

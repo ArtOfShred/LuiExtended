@@ -743,7 +743,6 @@ local AbilityTables = {
     Skill_Rending_Leap = 93745,
     Skill_Radiance = 4891,
     Skill_Unyielding_Mace = 4817,
-    Skill_Tremor = 67123,
     Skill_Pin = 65709,
     Skill_Sweep = 67872,
     Skill_Enrage = 71696,

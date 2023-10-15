@@ -499,10 +499,8 @@ LUIE.Data.Tooltips = {
     -- Monster Helms
     Set_Balorgh = GetString(SI_LUIE_SKILL_SET_BALORGH),
     Set_Bogdan_the_Nightflame = GetString(SI_LUIE_SKILL_SET_BOGDAN),
-    Set_Domihaus_Stamina_Buff = GetString(SI_LUIE_SKILL_SET_DOMIHAUS_BUFF_STAMINA),
-    Set_Domihaus_Stamina_Damage = GetString(SI_LUIE_SKILL_SET_DOMIHAUS_DAMAGE_STAMINA),
-    Set_Domihaus_Magicka_Buff = GetString(SI_LUIE_SKILL_SET_DOMIHAUS_BUFF_MAGICKA),
-    Set_Domihaus_Magicka_Damage = GetString(SI_LUIE_SKILL_SET_DOMIHAUS_DAMAGE_MAGICKA),
+    Set_Domihaus_Buff = GetString(SI_LUIE_SKILL_SET_DOMIHAUS_BUFF),
+    Set_Domihaus_Damage = GetString(SI_LUIE_SKILL_SET_DOMIHAUS_DAMAGE),
     Set_Earthgore = GetString(SI_LUIE_SKILL_SET_EARTHGORE),
     Set_Grothdarr = GetString(SI_LUIE_SKILL_SET_GROTHDARR),
     Set_Iceheart = GetString(SI_LUIE_SKILL_SET_ICEHEART),
@@ -845,7 +843,6 @@ LUIE.Data.Tooltips = {
     Skill_Sleet_Storm = GetString(SI_LUIE_SKILL_SLEET_STORM_TP),
     Skill_Permafrost = GetString(SI_LUIE_SKILL_PERMAFROST_TP),
     Skill_Permafrost_Ground = GetString(SI_LUIE_SKILL_PERMAFROST_GROUND_TP),
-    Skill_Arctic_Wind = GetString(SI_LUIE_SKILL_ARCTIC_WIND_TP),
     Skill_Arctic_Blast = GetString(SI_LUIE_SKILL_ARCTIC_BLAST_TP),
     Skill_Arctic_Blast_Ground = GetString(SI_LUIE_SKILL_ARCTIC_BLAST_GROUND_TP),
 
@@ -983,10 +980,8 @@ LUIE.Data.Tooltips = {
 
     -- Soul Magic
     Skill_Soul_Summons = GetString(SI_LUIE_SKILL_SOUL_SUMMONS_TP),
-    Skill_Soul_Trap_Magic = zo_strgsub(GetString(SI_LUIE_SKILL_SOUL_TRAP), "SUBSTRING", MagicDamage),
-    Skill_Soul_Trap_Physical = zo_strgsub(GetString(SI_LUIE_SKILL_SOUL_TRAP), "SUBSTRING", PhysicalDamage),
-    Skill_Consuming_Trap_Magic = zo_strgsub(GetString(SI_LUIE_SKILL_CONSUMING_TRAP), "SUBSTRING", MagicDamage),
-    Skill_Consuming_Trap_Physical = zo_strgsub(GetString(SI_LUIE_SKILL_CONSUMING_TRAP), "SUBSTRING", PhysicalDamage),
+    Skill_Soul_Trap = GetString(SI_LUIE_SKILL_SOUL_TRAP),
+    Skill_Consuming_Trap = GetString(SI_LUIE_SKILL_CONSUMING_TRAP),
 
     -- Vampire
     Skill_Noxiphilic_Sanguivoria = GetString(SI_LUIE_SKILL_NOXIPHILIC_SANGUIVORIA_TP),
@@ -1234,8 +1229,6 @@ LUIE.Data.Tooltips = {
     Skill_Shard_Shield = GetString(SI_LUIE_SKILL_SHARD_SHIELD_TP),
     Skill_Til_Death = GetString(SI_LUIE_SKILL_TIL_DEATH_TP),
     Skill_Til_Death_Self = GetString(SI_LUIE_SKILL_TIL_DEATH_SELF_TP),
-    Skill_Dutiful_Fury = GetString(SI_LUIE_SKILL_DUTIFUL_FURY_TP),
-    Skill_Dutiful_Fury_Proc = GetString(SI_LUIE_SKILL_DUTIFUL_FURY_PROC_TP),
 
     -- Insects
     Skill_Hardened_Carapace = zo_strformat(GetString(SI_LUIE_SKILL_HARDENED_CARAPACE_TP), 15),

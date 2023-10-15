@@ -2083,8 +2083,7 @@ LUIE.Data.AlertTable = {
         cc = LUIE_CC_TYPE_STUN,
         sound = LUIE_ALERT_SOUND_TYPE_ST_CC,
     }, -- Unyielding Mace (Flesh Atronach)
-
-    [67870] = {
+    --[[[67870] = {
         block = true,
         dodge = true,
         priority = 2,
@@ -2093,7 +2092,7 @@ LUIE.Data.AlertTable = {
         duration = 1700,
         cc = LUIE_CC_TYPE_STAGGER,
         sound = LUIE_ALERT_SOUND_TYPE_AOE_CC,
-    }, -- Tremor AOE (Flesh Colossus) -- TODO: Is this AOE?
+    }, -- Tremor AOE (Flesh Colossus) ]]--TODO: Removed (also - is this AOE?)
     [66869] = {
         block = true,
         dodge = true,

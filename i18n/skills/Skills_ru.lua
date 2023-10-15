@@ -540,7 +540,6 @@ local strings = {
     SI_LUIE_SKILL_SLEET_STORM_TP = "Enemies in the |cFFFFFF10|r meter radius of the storm take Frost Damage and have their movement speed reduced by |cFFFFFF40|r% every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_PERMAFROST_TP = "Enemies in the |cFFFFFF10|r meter radius of the storm take Frost Damage and have their movement speed reduced by |cFFFFFF70|r% every |cFFFFFF1|r second.\n\nEach hit applies the Chilled status effect.",
     SI_LUIE_SKILL_PERMAFROST_GROUND_TP = "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF70|r%.\n\nEach time you take damage you are afflicted with the Chilled status effect.",
-    SI_LUIE_SKILL_ARCTIC_WIND_TP = "Healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nWhile the effect persists, the winds pulse outwards, dealing Frost Damage every |cFFFFFF1|r second to enemies within |cFFFFFF6|r meters.",
     SI_LUIE_SKILL_ARCTIC_BLAST_TP = "Healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nWhile the effect persists, the winds pulse outwards, dealing Frost Damage every |cFFFFFF1|r second to enemies within |cFFFFFF6|r meters. Enemies hit by this effect |cFFFFFF3|r times are stunned for |cFFFFFF4|r seconds.",
     SI_LUIE_SKILL_ARCTIC_BLAST_GROUND_TP = "Taking Frost Damage every |cFFFFFF1|r second.\n\nIf you take damage from Arctic Blast |cFFFFFF3|r times, you will be stunned for |cFFFFFF4|r seconds.",
 
@@ -672,9 +671,9 @@ local strings = {
     ----------------------------------------------------------------
 
     -- Soul Magic
-    SI_LUIE_SKILL_SOUL_SUMMONS_TP = "Вы недавно воскресли без затрат Камня душ и не можете воскреснуть сова не потратив камня душ в течение |cFFFFFF<<1>>|r час.", -- TODO: Check Translation
-    SI_LUIE_SKILL_SOUL_TRAP = "Afflicted with SUBSTRING every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker fills a soul gem if you die under this effect.",
-    SI_LUIE_SKILL_CONSUMING_TRAP = "Afflicted with SUBSTRING every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker fills a soul gem and restores Health, Magicka, and Stamina if you die under this effect.",
+    SI_LUIE_SKILL_SOUL_SUMMONS_TP = "You have recently revived without spending a soul gem and may not do so again.",
+    SI_LUIE_SKILL_SOUL_TRAP = "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker fills a soul gem if you die under this effect.",
+    SI_LUIE_SKILL_CONSUMING_TRAP = "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker fills a soul gem and restores Health, Magicka, and Stamina if you die under this effect.",
 
     -- Werewolf
     SI_LUIE_SKILL_SANIES_LUPINUS_TP = "Вы были укушены Оборотнем и заразились Гнойным люпинусом.",
@@ -912,10 +911,8 @@ local strings = {
     -- Monster Helms
     SI_LUIE_SKILL_SET_BALORGH = "Increase Weapon and Spell Damage equal to the cost of your last Ultimate used and Physical and Spell Penetration equal to |cFFFFFF23|r times the amount for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_BOGDAN = "You and allies within |cFFFFFF5|r meters of the totem are healed every |cFFFFFF1|r second.",
-    SI_LUIE_SKILL_SET_DOMIHAUS_BUFF_STAMINA = "Increase Weapon Damage by |cFFFFFF300|r while standing within the ring.",
-    SI_LUIE_SKILL_SET_DOMIHAUS_DAMAGE_STAMINA = "Enemies on the edge of the ring take Physical Damage every |cFFFFFF1|r second.\n\nIncrease Weapon Damage by |cFFFFFF300|r while standing within the ring.",
-    SI_LUIE_SKILL_SET_DOMIHAUS_BUFF_MAGICKA = "Increase Spell Damage by |cFFFFFF300|r while standing within the ring.",
-    SI_LUIE_SKILL_SET_DOMIHAUS_DAMAGE_MAGICKA = "Enemies on the edge of the ring take Flame Damage every |cFFFFFF1|r second.\n\nIncrease Spell Damage by |cFFFFFF300|r while standing within the ring.",
+    SI_LUIE_SKILL_SET_DOMIHAUS_BUFF = "Increase Weapon and Spell Damage by |cFFFFFF300|r while standing within the ring.",
+    SI_LUIE_SKILL_SET_DOMIHAUS_DAMAGE = "Enemies on the edge of the ring take Flame Damage and Physical Damage every |cFFFFFF1|r second.\n\nIncrease Weapon and Spell Damage by |cFFFFFF300|r while standing within the ring.",
     SI_LUIE_SKILL_SET_EARTHGORE = "Healing the lowest Health group member in the |cFFFFFF7|r meter pool every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_SET_GROTHDARR = "Enemies within |cFFFFFF8|r meters take Flame Damage every |cFFFFFF1|r секунду в течение |cFFFFFF5|r секунд.",
     SI_LUIE_SKILL_SET_ICEHEART = "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nEnemies within |cFFFFFF5|r meters take Frost Damage every |cFFFFFF1|r second while the damage shield holds.",
@@ -1211,8 +1208,6 @@ local strings = {
     SI_LUIE_SKILL_SHARD_SHIELD_TP = "Absorbing damage for |cFFFFFF5|r minutes.\n\nWhen the shield takes damage, as long as absorption remains, your attacker takes Physical Damage and is stunned for |cFFFFFF1.2|r seconds.",
     SI_LUIE_SKILL_TIL_DEATH_TP = "Protected from death by a bodyguard. When you take lethal damage the bodyguard will swap places with you and absorb the killing blow, providing you with immunity to damage and all negative effects for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_TIL_DEATH_SELF_TP = "Protecting a nearby ally from death. When your ally takes lethal damage, swap places with them and absorb the killing blow, providing you with immunity to damage and all negative effects for |cFFFFFF3|r seconds.",
-    SI_LUIE_SKILL_DUTIFUL_FURY_TP = "When a nearby ally takes damage, you enrage, causing your next attack to deal |cFFFFFF5|r% additional damage.",
-    SI_LUIE_SKILL_DUTIFUL_FURY_PROC_TP = "Your next attack deals |cFFFFFF5|r% additional damage.",
     SI_LUIE_SKILL_ELEMENTAL_WEAPON_NPC_TP = "Augment your next |cFFFFFF3|r uses of Chop or Cleave for |cFFFFFF40|r seconds.\n\nChop creates an elemental pool on the ground that deals Flame Damage every |cFFFFFF0.7|r seconds for |cFFFFFF5.5|r seconds.\n\nCleave fires |cFFFFFF3|r elemental waves, dealing Flame Damage to enemies in the path.",
     SI_LUIE_SKILL_BALEFUL_CALL_TP = "Increase Max Health and damage done by |cFFFFFF33|r%.",
     SI_LUIE_SKILL_REGENERATION_TROLL_TP = "Regenerating Health every |cFFFFFF2.5|r seconds.",
