@@ -429,6 +429,7 @@ ChatAnnouncements.Defaults = {
     -- Loot
     Inventory = {
         Loot = true,
+        LootLogOverride = false,
         LootBank = true,
         LootBlacklist = false,
         LootTotal = false,
@@ -4066,7 +4067,7 @@ end
 
 -- If filter is true, we run the item through this function to determine if we should display it. Filter only gets set to true for group loot and relevant loot functions. Mail, trade, stores, etc don't apply the filter.
 function ChatAnnouncements.ItemFilter(itemType, itemId, itemLink, groupLoot)
-    if ChatAnnouncements.SV.Inventory.LootBlacklist and g_blacklistIDs[itemId] or (LootLog and LootLog.name) then
+    if ChatAnnouncements.SV.Inventory.LootBlacklist and g_blacklistIDs[itemId] or (ChatAnnouncements.SV.Inventory.LootLogOverride and LootLog) then
         return false
     end
 

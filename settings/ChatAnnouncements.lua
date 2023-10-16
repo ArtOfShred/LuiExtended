@@ -1616,6 +1616,23 @@ function ChatAnnouncements.CreateSettings()
                 default = Defaults.Inventory.Loot,
             },
             {
+                -- Disable display of loot if LootLog is enabled
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTLOGDISABLE)),
+                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTLOGDISABLE_TP),
+                getFunc = function()
+                    return Settings.Inventory.LootLogOverride
+                end,
+                setFunc = function(value)
+                    Settings.Inventory.LootLogOverride = value
+                end,
+                width = "full",
+                disabled = function()
+                    return not (Settings.Inventory.Loot and LUIE.SV.ChatAnnouncements_Enable)
+                end,
+                default = Defaults.Inventory.LootLogOverride,
+            },
+            {
                 -- Show notable loot
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_SHOWNOTABLE)),
