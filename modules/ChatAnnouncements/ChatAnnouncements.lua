@@ -1412,6 +1412,30 @@ end
 ]]
 --
 
+-- Copied from Writ Creator for CSA handling purposes - Only called when WritCreater is detected so shouldn't cause issues
+local function isQuestWritQuest(questId)
+	local writs = WritCreater.writSearch()
+	for k, v in pairs(writs) do
+		if v == questId then
+			return true
+		end
+	end
+end
+
+-- Copied from Writ Creator for CSA handling purposes - Only called when WritCreater is detected so shouldn't cause issues
+local function rejectQuest(questIndex)
+	for itemLink, _ in pairs(WritCreater:GetSettings().skipItemQuests) do
+		if not WritCreater:GetSettings().skipItemQuests[itemLink] then
+			for i = 1, GetJournalQuestNumConditions(questIndex) do
+				if DoesItemLinkFulfillJournalQuestCondition(itemLink, questIndex, 1, i)  then
+					return itemLink
+				end
+			end
+		end
+	end
+	return false
+end
+
 function ChatAnnouncements.GuildRanksSaved(eventCode, guildId)
     local guildName = GetGuildName(guildId)
     local guildAlliance = GetGuildAlliance(guildId)
@@ -8521,6 +8545,11 @@ function ChatAnnouncements.HookFunction()
     -- EVENT_QUEST_ADVANCED (Registered through CSA_MiscellaneousHandlers)
     -- Note: Quest Advancement displays all the "appropriate" conditions that the player needs to do to advance the current step
     local function OnQuestAdvanced(eventId, questIndex, questName, isPushed, isComplete, mainStepChanged, soundOverride)
+        -- Check if WritCreater is enabled & then call a copy of a local function from WritCreater to check if this is a Writ Quest
+        if WritCreater and WritCreater:GetSettings().suppressQuestAnnouncements and isQuestWritQuest(questIndex) then
+            return
+        end
+
         if not mainStepChanged then
             return
         end
@@ -8599,6 +8628,20 @@ function ChatAnnouncements.HookFunction()
 
     -- EVENT_QUEST_ADDED (Registered through CSA_MiscellaneousHandlers)
     local function OnQuestAdded(eventId, questIndex)
+        -- Copied from Writ Creator, abandons a quest if it requires a mat that is disabled in Writ Creator setttings
+        if WritCreater then
+            local rejectedMat = rejectQuest(questIndex)
+        	if rejectedMat then
+        		d("Writ Crafter abandoned the "..GetJournalQuestName(questIndex).." because it requires "..rejectedMat.." which was disallowed for use in the settings")
+        		zo_callLater(function() AbandonQuest(questIndex) end , 500)
+        		return
+        	end
+        end
+        -- Check if WritCreater is enabled & then call a copy of a local function from WritCreater to check if this is a Writ Quest
+        if WritCreater and WritCreater:GetSettings().suppressQuestAnnouncements and isQuestWritQuest(questIndex) then
+            return
+        end
+
         OnQuestAdvanced(EVENT_QUEST_ADVANCED, questIndex, nil, nil, nil, true, true)
     end
 
