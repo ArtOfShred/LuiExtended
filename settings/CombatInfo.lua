@@ -3570,7 +3570,7 @@ function CombatInfo.CreateSettings()
             {
                 -- Root Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_ROOT),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_ROOT_COLOR)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_ROOT)),
                 default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_ROOTED])),
                 getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_ROOTED]) end,
@@ -3638,7 +3638,7 @@ function CombatInfo.CreateSettings()
             {
                 -- Snare Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_SNARE),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_SNARE_COLOR)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_SNARE)),
                 default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_SNARED])),
                 getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_SNARED]) end,
@@ -3648,8 +3648,10 @@ function CombatInfo.CreateSettings()
                 end,
                 disabled = function() return not (Settings.cct.showSnare and Settings.cct.enabled) end,
             },
+
             {
-                type = "divider",
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_HEADER_SHARED),
             },
 
             -- AOE DISPLAY OPTIONS
