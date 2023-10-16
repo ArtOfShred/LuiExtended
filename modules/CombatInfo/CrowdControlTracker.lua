@@ -152,60 +152,24 @@ function CrowdControlTracker.UpdateAOEList()
     local priority = 0 -- Counter for priority, we increment by one for each active category added
     CrowdControlTracker.aoeTypesId = {}
 
-    if CombatInfo.SV.cct.aoePlayerUltimate then
-        for k, v in pairs(CrowdControl.aoePlayerUltimate) do
-            priority = priority + v
-            CrowdControlTracker.aoeTypesId[k] = priority
-        end
-        priority = priority + 1
-    end
+    local aoeTables = {
+        CrowdControl.aoePlayerUltimate,
+        CrowdControl.aoePlayerSet,
+        CrowdControl.aoePlayerNormal,
+        CrowdControl.aoeTraps,
+        CrowdControl.aoeNPCBoss,
+        CrowdControl.aoeNPCElite,
+        CrowdControl.aoeNPCNormal,
+    }
 
-    if CombatInfo.SV.cct.aoePlayerSet then
-        for k, v in pairs(CrowdControl.aoePlayerSet) do
-            priority = priority + v
-            CrowdControlTracker.aoeTypesId[k] = priority
+    for _, aoeTable in ipairs(aoeTables) do
+        if CombatInfo.SV.cct[aoeTable] then
+            for k, v in pairs(aoeTable) do
+                priority = priority + v
+                CrowdControlTracker.aoeTypesId[k] = priority
+            end
+            priority = priority + 1
         end
-        priority = priority + 1
-    end
-
-    if CombatInfo.SV.cct.aoePlayerNormal then
-        for k, v in pairs(CrowdControl.aoePlayerNormal) do
-            priority = priority + v
-            CrowdControlTracker.aoeTypesId[k] = priority
-        end
-        priority = priority + 1
-    end
-
-    if CombatInfo.SV.cct.aoeTraps then
-        for k, v in pairs(CrowdControl.aoeTraps) do
-            priority = priority + v
-            CrowdControlTracker.aoeTypesId[k] = priority
-        end
-        priority = priority + 1
-    end
-
-    if CombatInfo.SV.cct.aoeNPCBoss then
-        for k, v in pairs(CrowdControl.aoeNPCBoss) do
-            priority = priority + v
-            CrowdControlTracker.aoeTypesId[k] = priority
-        end
-        priority = priority + 1
-    end
-
-    if CombatInfo.SV.cct.aoeNPCElite then
-        for k, v in pairs(CrowdControl.aoeNPCElite) do
-            priority = priority + v
-            CrowdControlTracker.aoeTypesId[k] = priority
-        end
-        priority = priority + 1
-    end
-
-    if CombatInfo.SV.cct.aoeNPCNormal then
-        for k, v in pairs(CrowdControl.aoeNPCNormal) do
-            priority = priority + v
-            CrowdControlTracker.aoeTypesId[k] = priority
-        end
-        priority = priority + 1
     end
 end
 
@@ -981,6 +945,12 @@ function CrowdControlTracker:OnStunnedState(eventCode, playerStunned)
 end
 
 function CrowdControlTracker:OnCombatTipAdded(eventCode, combatTipID)
+
+    -- Break roots when another CC type hits since there is some oddity with the tip removal event when a hard CC hits
+    if combatTipID == 18 then
+        isRooted = false
+    end
+
     if not (combatTipID == 19) then
         return
     end
@@ -1073,6 +1043,12 @@ function CrowdControlTracker:SetupDefaultIcon(abilityId, ccType)
 end
 
 function CrowdControlTracker:OnDraw(abilityId, abilityIcon, ccDuration, result, abilityName, interval)
+
+    -- Error prevention
+    if result == ACTION_RESULT_EFFECT_GAINED_DURATION then
+        return
+    end
+
     if result == ACTION_RESULT_STAGGERED then
         self:OnAnimation(LUIE_CCTracker, "stagger")
         return
