@@ -9,7 +9,6 @@ local CrowdControlTracker = CombatInfo.CrowdControlTracker
 
 local Effects = LUIE.Data.Effects
 local CrowdControl = LUIE.Data.CrowdControl
-local PVP_Alerts_Main_Table
 local eventManager = EVENT_MANAGER
 local animationManager = ANIMATION_MANAGER
 
@@ -473,8 +472,10 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
     --------------------------------------------------------
 
     -------------IMMUNE EVENT TRIGGER-----------------------
-    if CombatInfo.SV.cct.showImmune and (result == ACTION_RESULT_IMMUNE or (PVP_Alerts_Main_Table and (result == ACTION_RESULT_DODGED or result == ACTION_RESULT_BLOCKED or result == ACTION_RESULT_BLOCKED_DAMAGE) and PVP_Alerts_Main_Table.snipeId[abilityId])) and not (CombatInfo.SV.cct.showImmuneOnlyInCyro and not LUIE.ResolvePVPZone()) and not self.currentlyPlaying and self.currentCC == 0 and GetAbilityIcon(abilityId) ~= nil then
-        self:OnDraw(abilityId, abilityIcon, CombatInfo.SV.cct.immuneDisplayTime, result, abilityName, CombatInfo.SV.cct.immuneDisplayTime)
+    if CombatInfo.SV.cct.showImmune and result == ACTION_RESULT_IMMUNE and (result == ACTION_RESULT_DODGED or result == ACTION_RESULT_BLOCKED or result == ACTION_RESULT_BLOCKED_DAMAGE) and not (CombatInfo.SV.cct.showImmuneOnlyInCyro and not LUIE.ResolvePVPZone()) and not self.currentlyPlaying and self.currentCC == 0 then
+        if abilityIcon ~= nil then
+            self:OnDraw(abilityId, abilityIcon, CombatInfo.SV.cct.immuneDisplayTime, result, abilityName, CombatInfo.SV.cct.immuneDisplayTime)
+        end
     end
     -------------------------------------------------------
 
