@@ -221,8 +221,8 @@ CombatInfo.Defaults = {
         aoeNPCBoss = true,
         aoeNPCElite = true,
         aoeNPCNormal = true,
-        showRoot = true,
-        showSnare = true,
+        showRoot = false,
+        showSnare = false,
 
         aoePlayerUltimateSoundToggle = true,
         aoePlayerNormalSoundToggle = true,
@@ -1063,6 +1063,7 @@ function CombatInfo.OnGameCameraUIModeChanged(eventCode)
     -- This buffer fixes this issue
     g_castbarWorldMapFix = true
     eventManager:RegisterForUpdate(moduleName .. "CastBarFix", 500, CastBarWorldMapFix)
+    -- Break Siege Deployment casts when opening UI windows
     if Castbar.BreakSiegeOnWindowOpen[castbar.id] then
         CombatInfo.StopCastBar()
     end

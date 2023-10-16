@@ -1,3 +1,25 @@
+### Version 6.6.0
+
+General
+- Tons of code optimization and cleanup thanks to DakJaniels.
+- Crystallized Shield & its morphs are now correctly tracked on Combat Info - Bar Highlight and Buffs & Debuffs (Note: the stack count only displays for the player as the ability doesn't return any information to the API about the stack count).
+
+Chat Announcements
+- Fixed issues caused by LUIE with "Dolgubon's Lazy Writ Crafter." The auto-abandon quest option in Writ Crafter now works properly and Quest Center Screen Announcements will now follow the "Hide Writ Quest Announcements" setting in Writ Crafter.
+- Added a toggleable option to hide the display of loot when the addon "Loot Log" is active.
+- Fixed an issue where Collectible Chat Announcements weren't displaying correctly.
+
+Combat Info
+- Added the option to track Immobilize & Snare effects to the Crowd Control Tracker (thanks to ACastanza). These options are disabled by default. Immobilization tracking requires the base game menu setting under Combat for Active Combat Tips to be enabled. Immobilization effects will display as snares if the setting for Immobilized Warnings is disabled.
+- Fixed an issue where the cast bar for Recall would be interrupted when teleporting to a Wayshrine in a different zone."
+- Fixed Bar Highlight tracking for some abilities.
+- Fixed Proc Sounds not working (Note: Grim Focus is going to require some work due to the changes to the ability).
+
+Unit Frames
+- Added the option to play Tales of Tribute with a group member to the Right Click Menu for Group Frames.
+
+---
+
 ### Version 6.5.1
 
 Combat Info
