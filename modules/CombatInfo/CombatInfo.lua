@@ -306,6 +306,7 @@ local g_disableProcSound = {} -- When we play a proc sound from a bar ability ch
 local g_hotbarCategory = GetActiveHotbarCategory() -- Set on initialization and when we swap weapons to determine the current hotbar category
 local g_backbarButtons = {} -- Table to hold backbar buttons
 local g_activeWeaponSwapInProgress = false -- Toggled on when weapon swapping, TODO: maybe not needed
+local g_castbarWorldMapFix = false -- Fix for viewing the World Map changing the player coordinates for some reason
 
 local ACTION_BAR = ZO_ActionBar1
 local BAR_INDEX_START = 3
@@ -1034,18 +1035,34 @@ function CombatInfo.OnUpdate(currentTime)
     savedPlayerX = playerX
     savedPlayerZ = playerZ
     playerX, playerZ = GetMapPlayerPosition("player")
-
     if savedPlayerX == playerX and savedPlayerZ == playerZ then
         return
     else
-        if Castbar.BreakCastOnMove[castbar.id] then
-            CombatInfo.StopCastBar()
+        -- Fix if the player clicks on a Wayshrine in the World Map
+        if g_castbarWorldMapFix == false then
+            if Castbar.BreakCastOnMove[castbar.id] then
+                CombatInfo.StopCastBar()
+                -- TODO: Note probably should make StopCastBar event clear the id on it too. Not doing this right now due to not wanting to troubleshoot possible issues before update release.
+            end
+        end
+        -- Only have this enabled for 1 tick max (the players coordinates only update 1 time after the World Map is closed so if the player moves before 500 ms we want to cancel the cast bar still)
+        if g_castbarWorldMapFix == true then
+            g_castbarWorldMapFix = false
         end
     end
 end
 
+local function CastBarWorldMapFix()
+    g_castbarWorldMapFix = false
+    eventManager:UnregisterForEvent(moduleName .. "CastBarFix")
+end
+
 -- Run on the EVENT_GAME_CAMERA_UI_MODE_CHANGED handler
 function CombatInfo.OnGameCameraUIModeChanged(eventCode)
+    -- Changing zones in the World Map for some reason changes the player coordinates so when the player clicks on a Wayshrine to teleport the cast gets interrupted
+    -- This buffer fixes this issue
+    g_castbarWorldMapFix = true
+    eventManager:RegisterForUpdate(moduleName .. "CastBarFix", 500, CastBarWorldMapFix)
     if Castbar.BreakSiegeOnWindowOpen[castbar.id] then
         CombatInfo.StopCastBar()
     end
