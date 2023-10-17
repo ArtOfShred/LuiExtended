@@ -7,9 +7,9 @@ local zo_strformat = zo_strformat
 
 local changelogMessages = {
     "|cFFA500LuiExtended Version 6.6.1|r",
-    "[*] Fixed issues causing UI errors with Gamepad Mode Skills Window.",
+    "",
     "|cFFFF00General:|r",
-    "[*] Tons of code optimization and cleanup thanks to DakJaniels.",
+    "[*] Fixed issues causing UI errors with Gamepad Mode Skills Window.",
     "",
     "|cFFA500LuiExtended Version 6.6.0|r",
     "",
