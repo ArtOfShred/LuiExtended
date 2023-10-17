@@ -1,3 +1,10 @@
+### Version 6.6.1
+
+General
+- Fixed issues causing UI errors with Gamepad Mode Skills Window.
+
+---
+
 ### Version 6.6.0
 
 General

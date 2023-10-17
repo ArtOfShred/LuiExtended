@@ -180,6 +180,14 @@ function LUIE.InitializeHooksSkillAdvisor()
             local icon = GetAbilityIcon(skillProgressionData.abilityId) -- Pull custom ability icon
             local entryData = ZO_GamepadEntryData:New(name, icon)
             entryData.skillProgressionData = skillProgressionData
+            entryData.narrationText = function()
+                local narrations = {}
+                if entryData.headerNarrationText then
+                    ZO_AppendNarration(narrations, SCREEN_NARRATION_MANAGER:CreateNarratableObject(entryData.headerNarrationText))
+                end
+                ZO_AppendNarration(narrations, SCREEN_NARRATION_MANAGER:CreateNarratableObject(name))
+                return narrations
+            end
             table.insert(scrollData, ZO_ScrollList_CreateDataEntry(SKILLS_ADVISOR_SUGGESTIONS_DATA, entryData))
             return entryData
         end
@@ -197,8 +205,12 @@ function LUIE.InitializeHooksSkillAdvisor()
 
             local availableAbilities = ZO_SKILLS_ADVISOR_SINGLETON:GetAvailableAbilityList()
             if #availableAbilities > 0 then
-                for _, skillProgressionData in ipairs(availableAbilities) do
+                for i, skillProgressionData in ipairs(availableAbilities) do
                     local entryData = AddEntry(scrollData, skillProgressionData)
+                    -- Since the heading itself can't be selected, include the heading text as part of the narration for the first entry in this section
+                    if i == 1 then
+                        entryData.headerNarrationText = GetString(SI_SKILLS_ADVISOR_ADVISED_TITLE)
+                    end
                     if previouslySelectedSkillProgressionData == skillProgressionData then
                         reselectData = entryData
                     end
@@ -213,8 +225,12 @@ function LUIE.InitializeHooksSkillAdvisor()
                 local purchasedHeaderData = ZO_GamepadEntryData:New(GetString(SI_SKILLS_ADVISOR_PURCHASED_TITLE))
                 table.insert(scrollData, ZO_ScrollList_CreateDataEntry(SKILLS_ADVISOR_SUGGESTIONS_HEADER_DATA, purchasedHeaderData))
 
-                for _, skillProgressionData in ipairs(purchasedAbilities) do
+                for i, skillProgressionData in ipairs(purchasedAbilities) do
                     local entryData = AddEntry(scrollData, skillProgressionData)
+                    -- Since the heading itself can't be selected, include the heading text as part of the narration for the first entry in this section
+                    if i == 1 then
+                        entryData.headerNarrationText = GetString(SI_SKILLS_ADVISOR_PURCHASED_TITLE)
+                    end
                     if previouslySelectedSkillProgressionData == skillProgressionData then
                         reselectData = entryData
                     end
@@ -224,12 +240,12 @@ function LUIE.InitializeHooksSkillAdvisor()
             ZO_ScrollList_Commit(self.list)
 
             if reselectData then
-                ZO_ScrollList_SelectData(self.list, reselectData)
+                ZO_ScrollList_SelectDataAndScrollIntoView(self.list, reselectData)
             end
         end
     end
 
-    function SkillsAdvisorSuggestions_Gamepad:GamepadSingleLineAbilityEntryTemplateSetup(control, data, selected, reselectingDuringRebuild, enabled, active, activated)
+    function SkillsAdvisorSuggestions_Gamepad:GamepadSingleLineAbilityEntryTemplateSetup(control, data, selected, reselectingDuringRebuild, enabled, active)
         ZO_SharedGamepadEntry_OnSetup(control, data, selected, reselectingDuringRebuild, enabled, active)
         ZO_GamepadSkillEntryTemplate_Setup(control, data, selected, activated, ZO_SKILL_ABILITY_DISPLAY_VIEW)
     end
@@ -244,6 +260,18 @@ function LUIE.InitializeHooksSkillAdvisor()
 
     function SkillsAdvisorSuggestions_Gamepad:GetSelectSkillData()
         return self.selectSkillData
+    end
+
+    -- Overridden from base
+    function SkillsAdvisorSuggestions_Gamepad:GetHeaderNarration()
+        return SCREEN_NARRATION_MANAGER:CreateNarratableObject(GetString(SI_SKILLS_ADVISOR_TITLE))
+    end
+
+    function SkillsAdvisorSuggestions_Gamepad:GetNarrationText()
+        local selectedData = self:GetSelectedData()
+        if selectedData and selectedData.narrationText then
+            return selectedData.narrationText(selectedData)
+        end
     end
 
     -----------------------------
