@@ -6,6 +6,11 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
+    "|cFFA500LuiExtended Version 6.6.2|r",
+    "",
+    "|cFFFF00Chat Announcements:|r",
+    "[*] Fixed an issue where the colors for Chat Announcement messages were not showing properly.",
+    "",
     "|cFFA500LuiExtended Version 6.6.1|r",
     "",
     "|cFFFF00General:|r",

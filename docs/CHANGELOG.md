@@ -1,3 +1,10 @@
+### Version 6.6.2
+
+Chat Announcements
+- Fixed an issue where the colors for Chat Announcement messages were not showing properly.
+
+---
+
 ### Version 6.6.1
 
 General

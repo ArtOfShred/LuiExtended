@@ -95,7 +95,7 @@ function CombatInfo.CreateSettings()
         type = "panel",
         name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_CI)),
         displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(SI_LUIE_LAM_CI)),
-        author = LUIE.author,
+        author = LUIE.author .. "\n",
         version = LUIE.version,
         website = LUIE.website,
         feedback = LUIE.feedback,

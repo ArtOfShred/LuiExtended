@@ -21,7 +21,7 @@ function InfoPanel.CreateSettings()
         type = "panel",
         name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_PNL)),
         displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(SI_LUIE_LAM_PNL)),
-        author = LUIE.author,
+        author = LUIE.author .. "\n",
         version = LUIE.version,
         website = LUIE.website,
         feedback = LUIE.feedback,

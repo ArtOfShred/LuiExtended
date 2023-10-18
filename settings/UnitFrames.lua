@@ -111,7 +111,7 @@ function UnitFrames.CreateSettings()
         type = "panel",
         name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_UF)),
         displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(SI_LUIE_LAM_UF)),
-        author = LUIE.author,
+        author = LUIE.author .. "\n",
         version = LUIE.version,
         website = LUIE.website,
         feedback = LUIE.feedback,

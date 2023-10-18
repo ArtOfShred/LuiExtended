@@ -117,7 +117,7 @@ function LUIE.CreateSettings()
         type = "panel",
         name = LUIE.name,
         displayName = LUIE.name,
-        author = LUIE.author,
+        author = LUIE.author .. "\n",
         version = LUIE.version,
         website = LUIE.website,
         feedback = LUIE.feedback,

@@ -123,7 +123,7 @@ function SpellCastBuffs.CreateSettings()
         type = "panel",
         name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_BUFFSDEBUFFS)),
         displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(SI_LUIE_LAM_BUFFSDEBUFFS)),
-        author = LUIE.author,
+        author = LUIE.author .. "\n",
         version = LUIE.version,
         website = LUIE.website,
         feedback = LUIE.feedback,
