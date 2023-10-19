@@ -60,7 +60,6 @@ Bindings.xml
 frontend/Changelog.xml
 frontend/CombatText.xml
 frontend/CrowdControlTracker.xml
-# frontend/StatPanel.xml
 
 Unlock.lua
 
@@ -108,7 +107,6 @@ modules/CombatText/EventViewers/Resources.lua
 modules/CombatInfo/CombatInfo.lua
 modules/CombatInfo/AbilityAlerts.lua
 modules/CombatInfo/CrowdControlTracker.lua
-# modules/CombatInfo/StatPanel.lua
 
 modules/InfoPanel/InfoPanel.lua
 
