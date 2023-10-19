@@ -2375,7 +2375,7 @@ function SpellCastBuffs.AddZoneBuffs()
 end
 
 -- Combat Event (Target = Player)
-function SpellCastBuffs.OnCombatEventIn(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
+function SpellCastBuffs.OnCombatEventIn(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overrideRank, casterUnitTag)
     if not (Effects.FakeExternalBuffs[abilityId] or Effects.FakeExternalDebuffs[abilityId] or Effects.FakePlayerBuffs[abilityId] or Effects.FakeStagger[abilityId] or Effects.AddGroundDamageAura[abilityId]) then
         return
     end
@@ -2810,7 +2810,7 @@ function SpellCastBuffs.OnCombatEventIn(eventCode, result, isError, abilityName,
         effectName = Effects.FakePlayerBuffs[abilityId].name or GetAbilityName(abilityId)
         duration = Effects.FakePlayerBuffs[abilityId].duration
         if duration == "GET" then
-            duration = GetAbilityDuration(abilityId)
+            duration = GetAbilityDuration(abilityId, overrideRank, casterUnitTag)
         end
         local finalId = Effects.FakePlayerBuffs[abilityId].shiftId or abilityId
         if Effects.FakePlayerBuffs[abilityId].shiftId then
@@ -2893,7 +2893,7 @@ function SpellCastBuffs.OnCombatEventIn(eventCode, result, isError, abilityName,
 end
 
 -- Combat Event (Source = Player)
-function SpellCastBuffs.OnCombatEventOut(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
+function SpellCastBuffs.OnCombatEventOut(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overrideRank, casterUnitTag)
     if targetType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER_PET then
         return
     end
@@ -2973,7 +2973,7 @@ function SpellCastBuffs.OnCombatEventOut(eventCode, result, isError, abilityName
         effectName = Effects.FakePlayerOfflineAura[abilityId].name or GetAbilityName(abilityId)
         duration = Effects.FakePlayerOfflineAura[abilityId].duration
         if duration == "GET" then
-            duration = GetAbilityDuration(abilityId)
+            duration = GetAbilityDuration(abilityId, overrideRank, casterUnitTag)
         end
         local finalId = Effects.FakePlayerOfflineAura[abilityId].shiftId or abilityId
         if Effects.FakePlayerOfflineAura[abilityId].shiftId then
@@ -4073,16 +4073,16 @@ function SpellCastBuffs.UpdateDisplayOverrideIdList()
             debuffDisplayOverrideId[k] = v
         end
     end
+
     -- Always show NPC self applied debuffs
     for k, v in pairs(Effects.DebuffDisplayOverrideIdAlways) do
         debuffDisplayOverrideId[k] = v
     end
+
     -- Major/Minor
     if SpellCastBuffs.SV.ShowSharedMajorMinor then
         for k, v in pairs(Effects.DebuffDisplayOverrideMajorMinor) do
-            for k, v in pairs(Effects.DebuffDisplayOverrideMajorMinor) do
-                debuffDisplayOverrideId[k] = v
-            end
+            debuffDisplayOverrideId[k] = v
         end
     end
 end

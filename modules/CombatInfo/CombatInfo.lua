@@ -578,6 +578,7 @@ end
 
 function CombatInfo.HookGCD()
     -- Hook to update GCD support
+---@diagnostic disable-next-line: duplicate-set-field
     ActionButton.UpdateUsable = function(self)
         local slotnum = self:GetSlot()
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or g_hotbarCategory
@@ -605,6 +606,7 @@ function CombatInfo.HookGCD()
     end
 
     -- Hook to update GCD support
+---@diagnostic disable-next-line: duplicate-set-field
     ActionButton.UpdateCooldown = function(self, options)
         local slotnum = self:GetSlot()
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or g_hotbarCategory
@@ -697,8 +699,8 @@ function CombatInfo.HookGCD()
 end
 
 -- Helper function to get override ability duration.
-local function GetUpdatedAbilityDuration(abilityId)
-    local duration = g_barDurationOverride[abilityId] or GetAbilityDuration(abilityId)
+local function GetUpdatedAbilityDuration(abilityId, overrideRank, casterUnitTag)
+    local duration = g_barDurationOverride[abilityId] or GetAbilityDuration(abilityId, overrideRank, casterUnitTag)
     return duration
 end
 
@@ -1054,6 +1056,7 @@ end
 
 local function CastBarWorldMapFix()
     g_castbarWorldMapFix = false
+    ---@diagnostic disable-next-line: missing-parameter
     eventManager:UnregisterForEvent(moduleName .. "CastBarFix")
 end
 
@@ -1272,7 +1275,7 @@ function CombatInfo.OnReticleTargetChanged(eventCode)
     end
 end
 
-function CombatInfo.BarHighlightSwap(abilityId)
+function CombatInfo.BarHighlightSwap(abilityId, overrideRank, casterUnitTag)
     local effect = Effects.BarHighlightCheckOnFade[abilityId]
     local ids = { effect.id1 or 0, effect.id2 or 0, effect.id3 or 0 }
     local tags = { effect.unitTag, effect.id2Tag, effect.id3Tag }
@@ -1286,7 +1289,7 @@ function CombatInfo.BarHighlightSwap(abilityId)
         end
 
         if duration > 0 then
-            duration = (GetAbilityDuration(duration) - GetAbilityDuration(durationMod))
+            duration = (GetAbilityDuration(duration, overrideRank, casterUnitTag) - GetAbilityDuration(durationMod, overrideRank, casterUnitTag))
             local timeStarted = GetGameTimeSeconds()
             local timeEnding = timeStarted + (duration / 1000)
             CombatInfo.OnEffectChanged(nil, EFFECT_RESULT_GAINED, nil, nil, unitTag, timeStarted, timeEnding, 0, nil, nil, 1, ABILITY_TYPE_BONUS, 0, nil, nil, abilityId, 1, true)
@@ -2074,7 +2077,7 @@ function CombatInfo.OnCombatEventBreakCast(eventCode, result, isError, abilityNa
 end
 
 -- Listens to EVENT_COMBAT_EVENT
-function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
+function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overrideRank, casterUnitTag)
     -- Track ultimate generation when we block an attack or hit a target with a light/medium/heavy attack.
     if CombatInfo.SV.UltimateGeneration and uiUltimate.NotFull and ((result == ACTION_RESULT_BLOCKED_DAMAGE and targetType == COMBAT_UNIT_TYPE_PLAYER) or (Effects.IsWeaponAttack[abilityName] and sourceType == COMBAT_UNIT_TYPE_PLAYER and targetName ~= "")) then
         uiUltimate.Texture:SetHidden(false)
@@ -2107,7 +2110,7 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
     end
 
     local duration
-    local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId)
+    local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId, overrideRank, casterUnitTag)
     local forceChanneled = false
 
     -- Override certain things to display as a channel rather than cast.

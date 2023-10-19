@@ -1411,26 +1411,26 @@ end
 
 -- Copied from Writ Creator for CSA handling purposes - Only called when WritCreater is detected so shouldn't cause issues
 local function isQuestWritQuest(questId)
-	local writs = WritCreater.writSearch()
-	for k, v in pairs(writs) do
-		if v == questId then
-			return true
-		end
-	end
+    local writs = WritCreater.writSearch()
+    for k, v in pairs(writs) do
+        if v == questId then
+            return true
+        end
+    end
 end
 
 -- Copied from Writ Creator for CSA handling purposes - Only called when WritCreater is detected so shouldn't cause issues
 local function rejectQuest(questIndex)
-	for itemLink, _ in pairs(WritCreater:GetSettings().skipItemQuests) do
-		if not WritCreater:GetSettings().skipItemQuests[itemLink] then
-			for i = 1, GetJournalQuestNumConditions(questIndex) do
-				if DoesItemLinkFulfillJournalQuestCondition(itemLink, questIndex, 1, i)  then
-					return itemLink
-				end
-			end
-		end
-	end
-	return false
+    for itemLink, _ in pairs(WritCreater:GetSettings().skipItemQuests) do
+        if not WritCreater:GetSettings().skipItemQuests[itemLink] then
+            for i = 1, GetJournalQuestNumConditions(questIndex) do
+                if DoesItemLinkFulfillJournalQuestCondition(itemLink, questIndex, 1, i) then
+                    return itemLink
+                end
+            end
+        end
+    end
+    return false
 end
 
 function ChatAnnouncements.GuildRanksSaved(eventCode, guildId)
@@ -3348,8 +3348,35 @@ local function AchievementPctToColour(pct)
     return pct == 1 and "71DE73" or pct < 0.33 and "F27C7C" or pct < 0.66 and "EDE858" or "CCF048"
 end
 
+---@param achievementId any
+---@return number|nil
+local function GetCategoryInfoFromAchievementIdDetailed(achievementId)
+    -- If the user is selecting from the recent achievements list, there
+    --  will not be an open category id, so attempt to get the category
+    --  from the achievement.
+    local categoryId = GetCategoryInfoFromAchievementId(achievementId)
+    if categoryId then
+        return categoryId
+    end
+
+    -- Some achievements cannot find their category id properly, so try
+    --  walking the achievement chain and look for one that has a category
+    --  id.
+    local tryAchievementId = GetFirstAchievementInLine(achievementId)
+    while tryAchievementId ~= 0 do
+        categoryId = GetCategoryInfoFromAchievementId(tryAchievementId)
+        if categoryId then
+            return categoryId
+        end
+        tryAchievementId = GetNextAchievementInLine(tryAchievementId)
+    end
+
+    -- We were unable to determine the correct category id.
+    return nil
+end
+
 function ChatAnnouncements.OnAchievementUpdated(eventCode, id)
-    local topLevelIndex, categoryIndex, achievementIndex = GetCategoryInfoFromAchievementId(id)
+    local topLevelIndex, categoryIndex, achievementIndex = GetCategoryInfoFromAchievementIdDetailed(id)
     -- Bail out if this achievement comes from unwanted category
     if ChatAnnouncements.SV.Achievement.AchievementCategoryIgnore[topLevelIndex] then
         return
@@ -7987,91 +8014,77 @@ function ChatAnnouncements.HookFunction()
         if collectionUpdateType == ZO_COLLECTION_UPDATE_TYPE.UNLOCK_STATE_CHANGED then
             local nowOwnedCollectibles = collectiblesByUnlockState[COLLECTIBLE_UNLOCK_STATE_UNLOCKED_OWNED]
             if nowOwnedCollectibles then
-                if #nowOwnedCollectibles > MAX_INDIVIDUAL_COLLECTIBLE_UPDATES then
+                local numOwnedCollectibles = #nowOwnedCollectibles
+                if numOwnedCollectibles > MAX_INDIVIDUAL_COLLECTIBLE_UPDATES then
                     local stringPrefix = ChatAnnouncements.SV.Collectibles.CollectiblePrefix
                     local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_TITLE)
-
                     if ChatAnnouncements.SV.Collectibles.CollectibleCA then
-                        local string1
+                        local string1 = ""
                         if stringPrefix ~= "" then
                             string1 = CollectibleColorize1:Colorize(zo_strformat("<<1>><<2>><<3>> ", bracket1[ChatAnnouncements.SV.Collectibles.CollectibleBracket], stringPrefix, bracket2[ChatAnnouncements.SV.Collectibles.CollectibleBracket]))
-                        else
-                            string1 = ""
                         end
-                        local string2 = CollectibleColorize2:Colorize(zo_strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, #nowOwnedCollectibles) .. ".")
+                        local string2 = CollectibleColorize2:Colorize(zo_strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numOwnedCollectibles) .. ".")
                         local finalString = zo_strformat("<<1>><<2>>", string1, string2)
-                        g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "COLLECTIBLE" }
-                        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                        local message = { message = finalString, type = "COLLECTIBLE" }
+                        ChatAnnouncements.PrintQueuedMessages(message)
                         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                     end
-
                     -- Set message params even if CSA is disabled, we just send a dummy event so the callback handler works correctly.
                     -- Note: This also means we don't need to Play Sound if the CSA isn't enabled since a blank one is always sent if the CSA is disabled.
                     local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.COLLECTIBLE_UNLOCKED)
                     if ChatAnnouncements.SV.Collectibles.CollectibleCSA then
-                        messageParams:SetText(csaPrefix, zo_strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, #nowOwnedCollectibles))
+                        messageParams:SetText(csaPrefix, zo_strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numOwnedCollectibles))
                         messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COLLECTIBLES_UPDATED)
                         CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
                     end
-
                     if ChatAnnouncements.SV.Collectibles.CollectibleAlert then
-                        local text = zo_strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, #nowOwnedCollectibles) .. "."
+                        local text = zo_strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numOwnedCollectibles) .. "."
                         ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
                     end
                     return true
                 else
-                    --local messageParamsObjects = {}
+                    local stringPrefix = ChatAnnouncements.SV.Collectibles.CollectiblePrefix
+                    local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_TITLE)
+                    local useCategorySubcategory = ChatAnnouncements.SV.Collectibles.CollectibleCategory or ChatAnnouncements.SV.Collectibles.CollectibleSubcategory
                     for _, collectibleData in ipairs(nowOwnedCollectibles) do
                         local collectibleName = collectibleData:GetName()
                         local icon = collectibleData:GetIcon()
                         local categoryData = collectibleData:GetCategoryData()
                         local majorCategory = categoryData:GetId()
-                        local majorCategoryTopLevelIndex = tonumber(GetCategoryInfoFromCollectibleCategoryId(majorCategory))
-                        assert(type(majorCategoryTopLevelIndex) == "number", "Value is not a number")
+                        local majorCategoryTopLevelIndex = GetCategoryInfoFromCollectibleCategoryId(majorCategory)
                         local majorCategoryName = GetCollectibleCategoryInfo(majorCategoryTopLevelIndex)
                         local categoryName = categoryData:GetName()
                         local collectibleId = collectibleData:GetId()
-
-                        local stringPrefix = ChatAnnouncements.SV.Collectibles.CollectiblePrefix
-                        local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_TITLE)
-
-                        if ChatAnnouncements.SV.Collectibles.CollectibleCA then
-                            local link = GetCollectibleLink(collectibleId, linkBrackets[ChatAnnouncements.SV.BracketOptionCollectible])
-                            local formattedIcon = ChatAnnouncements.SV.Collectibles.CollectibleIcon and string.format("|t16:16:%s|t ", icon) or ""
-
-                            local string1
-                            if stringPrefix ~= "" then
-                                string1 = CollectibleColorize1:Colorize(zo_strformat("<<1>><<2>><<3>> ", bracket1[ChatAnnouncements.SV.Collectibles.CollectibleBracket], stringPrefix, bracket2[ChatAnnouncements.SV.Collectibles.CollectibleBracket]))
-                            else
-                                string1 = ""
-                            end
-                            local string2
-                            if ChatAnnouncements.SV.Collectibles.CollectibleCategory or ChatAnnouncements.SV.Collectibles.CollectibleSubcategory then
-                                local categoryString
-                                if ChatAnnouncements.SV.Collectibles.CollectibleCategory and ChatAnnouncements.SV.Collectibles.CollectibleSubcategory then
-                                    categoryString = (majorCategoryName .. " - " .. categoryName)
-                                elseif ChatAnnouncements.SV.Collectibles.CollectibleCategory then
-                                    categoryString = majorCategoryName
-                                else
-                                    categoryString = categoryName
-                                end
-                                string2 = CollectibleColorize2:Colorize(zo_strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, link, categoryString) .. ".")
-                            else
-                                string2 = link
-                            end
-                            local finalString = zo_strformat("<<1>><<2>><<3>>", string1, formattedIcon, string2)
-                            g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "COLLECTIBLE" }
-                            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
+                        local string1 = ""
+                        if stringPrefix ~= "" then
+                            string1 = CollectibleColorize1:Colorize(zo_strformat("<<1>><<2>><<3>> ", bracket1[ChatAnnouncements.SV.Collectibles.CollectibleBracket], stringPrefix, bracket2[ChatAnnouncements.SV.Collectibles.CollectibleBracket]))
                         end
-
+                        local link = GetCollectibleLink(collectibleId, linkBrackets[ChatAnnouncements.SV.BracketOptionCollectible])
+                        local formattedIcon = ChatAnnouncements.SV.Collectibles.CollectibleIcon and string.format("|t16:16:%s|t ", icon) or ""
+                        local string2
+                        if useCategorySubcategory then
+                            local categoryString
+                            if ChatAnnouncements.SV.Collectibles.CollectibleCategory and ChatAnnouncements.SV.Collectibles.CollectibleSubcategory then
+                                categoryString = (majorCategoryName .. " - " .. categoryName)
+                            elseif ChatAnnouncements.SV.Collectibles.CollectibleCategory then
+                                categoryString = majorCategoryName
+                            else
+                                categoryString = categoryName
+                            end
+                            string2 = CollectibleColorize2:Colorize(zo_strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, link, categoryString) .. ".")
+                        else
+                            string2 = link
+                        end
+                        local finalString = zo_strformat("<<1>><<2>><<3>>", string1, formattedIcon, string2)
+                        local message = { message = finalString, type = "COLLECTIBLE" }
+                        ChatAnnouncements.PrintQueuedMessages(message)
+                        eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                         -- Set message params even if CSA is disabled, we just send a dummy event so the callback handler works correctly.
                         -- Note: This also means we don't need to Play Sound if the CSA isn't enabled since a blank one is always sent if the CSA is disabled.
                         local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.COLLECTIBLE_UNLOCKED)
-                        local csaString
                         if ChatAnnouncements.SV.Collectibles.CollectibleCSA then
                             local csaString
-                            if ChatAnnouncements.SV.Collectibles.CollectibleCategory or ChatAnnouncements.SV.Collectibles.CollectibleSubcategory then
+                            if useCategorySubcategory then
                                 local categoryString
                                 if ChatAnnouncements.SV.Collectibles.CollectibleCategory and ChatAnnouncements.SV.Collectibles.CollectibleSubcategory then
                                     categoryString = (majorCategoryName .. " - " .. categoryName)
@@ -8089,10 +8102,9 @@ function ChatAnnouncements.HookFunction()
                             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SINGLE_COLLECTIBLE_UPDATED)
                             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
                         end
-
                         if ChatAnnouncements.SV.Collectibles.CollectibleAlert then
                             local alertString
-                            if ChatAnnouncements.SV.Collectibles.CollectibleCategory or ChatAnnouncements.SV.Collectibles.CollectibleSubcategory then
+                            if useCategorySubcategory then
                                 local categoryString
                                 if ChatAnnouncements.SV.Collectibles.CollectibleCategory and ChatAnnouncements.SV.Collectibles.CollectibleSubcategory then
                                     categoryString = (majorCategoryName .. " - " .. categoryName)
@@ -8628,11 +8640,13 @@ function ChatAnnouncements.HookFunction()
         -- Copied from Writ Creator, abandons a quest if it requires a mat that is disabled in Writ Creator setttings
         if WritCreater then
             local rejectedMat = rejectQuest(questIndex)
-        	if rejectedMat then
-        		d("Writ Crafter abandoned the "..GetJournalQuestName(questIndex).." because it requires "..rejectedMat.." which was disallowed for use in the settings")
-        		zo_callLater(function() AbandonQuest(questIndex) end , 500)
-        		return
-        	end
+            if rejectedMat then
+                d("Writ Crafter abandoned the " .. GetJournalQuestName(questIndex) .. " because it requires " .. rejectedMat .. " which was disallowed for use in the settings")
+                zo_callLater(function()
+                    AbandonQuest(questIndex)
+                end, 500)
+                return
+            end
         end
         -- Check if WritCreater is enabled & then call a copy of a local function from WritCreater to check if this is a Writ Quest
         if WritCreater and WritCreater:GetSettings().suppressQuestAnnouncements and isQuestWritQuest(questIndex) then
@@ -11382,7 +11396,7 @@ function ChatAnnouncements.ResetStackSplit()
     eventManager:UnregisterForUpdate(moduleName .. "StackTracker")
 end
 
-function ChatAnnouncements.PrintQueuedMessages()
+function ChatAnnouncements.PrintQueuedMessages(...)
     -- Resolve notification messages first
     for i = 1, #g_queuedMessages do
         if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "NOTIFICATION" then

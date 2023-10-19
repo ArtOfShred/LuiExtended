@@ -17,3 +17,4 @@ $RECYCLE.BIN/
 *.editorconfig
 stylua.toml
 devstuff/
+/.vscode/.ignore
