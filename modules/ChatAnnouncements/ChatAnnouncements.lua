@@ -1411,26 +1411,26 @@ end
 
 -- Copied from Writ Creator for CSA handling purposes - Only called when WritCreater is detected so shouldn't cause issues
 local function isQuestWritQuest(questId)
-	local writs = WritCreater.writSearch()
-	for k, v in pairs(writs) do
-		if v == questId then
-			return true
-		end
-	end
+    local writs = WritCreater.writSearch()
+    for k, v in pairs(writs) do
+        if v == questId then
+            return true
+        end
+    end
 end
 
 -- Copied from Writ Creator for CSA handling purposes - Only called when WritCreater is detected so shouldn't cause issues
 local function rejectQuest(questIndex)
-	for itemLink, _ in pairs(WritCreater:GetSettings().skipItemQuests) do
-		if not WritCreater:GetSettings().skipItemQuests[itemLink] then
-			for i = 1, GetJournalQuestNumConditions(questIndex) do
-				if DoesItemLinkFulfillJournalQuestCondition(itemLink, questIndex, 1, i)  then
-					return itemLink
-				end
-			end
-		end
-	end
-	return false
+    for itemLink, _ in pairs(WritCreater:GetSettings().skipItemQuests) do
+        if not WritCreater:GetSettings().skipItemQuests[itemLink] then
+            for i = 1, GetJournalQuestNumConditions(questIndex) do
+                if DoesItemLinkFulfillJournalQuestCondition(itemLink, questIndex, 1, i) then
+                    return itemLink
+                end
+            end
+        end
+    end
+    return false
 end
 
 function ChatAnnouncements.GuildRanksSaved(eventCode, guildId)
@@ -3348,8 +3348,35 @@ local function AchievementPctToColour(pct)
     return pct == 1 and "71DE73" or pct < 0.33 and "F27C7C" or pct < 0.66 and "EDE858" or "CCF048"
 end
 
+---@param achievementId any
+---@return number|nil
+local function GetCategoryInfoFromAchievementIdDetailed(achievementId)
+    -- If the user is selecting from the recent achievements list, there
+    --  will not be an open category id, so attempt to get the category
+    --  from the achievement.
+    local categoryId = GetCategoryInfoFromAchievementId(achievementId)
+    if categoryId then
+        return categoryId
+    end
+
+    -- Some achievements cannot find their category id properly, so try
+    --  walking the achievement chain and look for one that has a category
+    --  id.
+    local tryAchievementId = GetFirstAchievementInLine(achievementId)
+    while tryAchievementId ~= 0 do
+        categoryId = GetCategoryInfoFromAchievementId(tryAchievementId)
+        if categoryId then
+            return categoryId
+        end
+        tryAchievementId = GetNextAchievementInLine(tryAchievementId)
+    end
+
+    -- We were unable to determine the correct category id.
+    return nil
+end
+
 function ChatAnnouncements.OnAchievementUpdated(eventCode, id)
-    local topLevelIndex, categoryIndex, achievementIndex = GetCategoryInfoFromAchievementId(id)
+    local topLevelIndex, categoryIndex, achievementIndex = GetCategoryInfoFromAchievementIdDetailed(id)
     -- Bail out if this achievement comes from unwanted category
     if ChatAnnouncements.SV.Achievement.AchievementCategoryIgnore[topLevelIndex] then
         return
@@ -8628,11 +8655,13 @@ function ChatAnnouncements.HookFunction()
         -- Copied from Writ Creator, abandons a quest if it requires a mat that is disabled in Writ Creator setttings
         if WritCreater then
             local rejectedMat = rejectQuest(questIndex)
-        	if rejectedMat then
-        		d("Writ Crafter abandoned the "..GetJournalQuestName(questIndex).." because it requires "..rejectedMat.." which was disallowed for use in the settings")
-        		zo_callLater(function() AbandonQuest(questIndex) end , 500)
-        		return
-        	end
+            if rejectedMat then
+                d("Writ Crafter abandoned the " .. GetJournalQuestName(questIndex) .. " because it requires " .. rejectedMat .. " which was disallowed for use in the settings")
+                zo_callLater(function()
+                    AbandonQuest(questIndex)
+                end, 500)
+                return
+            end
         end
         -- Check if WritCreater is enabled & then call a copy of a local function from WritCreater to check if this is a Writ Quest
         if WritCreater and WritCreater:GetSettings().suppressQuestAnnouncements and isQuestWritQuest(questIndex) then
