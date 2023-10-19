@@ -32,7 +32,7 @@ function LUIE.InitializeHooks()
     local zos_GetSkillAbilityInfo = GetSkillAbilityInfo
     GetSkillAbilityInfo = function(skillType, skillIndex, abilityIndex)
         local name, texture, earnedRank, passive, ultimate, purchased, progressionIndex, rankIndex = zos_GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
-        local abilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex)
+        local abilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex, true)
         if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].icon then
             texture = LUIE.Data.Effects.EffectOverride[abilityId].icon
         end
@@ -46,7 +46,7 @@ function LUIE.InitializeHooks()
     local zos_GetSkillAbilityNextUpgradeInfo = GetSkillAbilityNextUpgradeInfo
     GetSkillAbilityNextUpgradeInfo = function(skillType, skillIndex, abilityIndex)
         local name, texture, earnedRank = zos_GetSkillAbilityNextUpgradeInfo(skillType, skillIndex, abilityIndex)
-        local abilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex)
+        local abilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex, true)
         if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].icon then
             texture = LUIE.Data.Effects.EffectOverride[abilityId].icon
         end
@@ -253,6 +253,7 @@ function LUIE.InitializeHooks()
     end
 
     -- Hook synergy popup Icon/Name (to fix inconsistencies and add custom icons for some Quest/Encounter based Synergies)
+    ---@diagnostic disable-next-line: duplicate-set-field
     ZO_Synergy.OnSynergyAbilityChanged = function(self)
         local synergyName, iconFilename = GetSynergyInfo()
 
@@ -311,6 +312,7 @@ function LUIE.InitializeHooks()
     end
 
     -- Hook Skills Advisor (Keyboard) and use this variable to refresh the abilityData one time on initialization. We don't want to reload any more after that.
+    ---@diagnostic disable-next-line: duplicate-set-field
     ZO_SkillsAdvisor_Suggestions_Keyboard.SetupAbilityEntry = function(self, control, skillProgressionData)
         local skillData = skillProgressionData:GetSkillData()
         local isPassive = skillData:IsPassive()
@@ -405,6 +407,7 @@ function LUIE.InitializeHooks()
     }
 
     -- Hook to make Activation Highlight Effect play indefinitely instead of animation only once
+    ---@diagnostic disable-next-line: duplicate-set-field
     ActionButton.UpdateActivationHighlight = function(self)
         local slotnum = self:GetSlot()
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or self.button.hotbarCategory
@@ -444,6 +447,7 @@ function LUIE.InitializeHooks()
     end
 
     -- Hook to add AVA Guard Ability + Morphs into Toggle Highlights
+    ---@diagnostic disable-next-line: duplicate-set-field
     ActionButton.UpdateState = function(self)
         local slotnum = self:GetSlot()
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or self.button.hotbarCategory
@@ -624,6 +628,7 @@ function LUIE.InitializeHooks()
     }
 
     -- Hook Campaign Bonuses functions
+    ---@diagnostic disable-next-line: duplicate-set-field
     ZO_CampaignBonuses_Shared.CreateDataTable = function(self, header)
         self:BuildMasterList()
 
@@ -657,6 +662,7 @@ function LUIE.InitializeHooks()
     end
 
     -- Hook Campaign Bonuses functions
+    ---@diagnostic disable-next-line: duplicate-set-field
     ZO_CampaignBonuses_Shared.BuildMasterList = function(self)
         self.masterList = {}
 
@@ -677,8 +683,10 @@ function LUIE.InitializeHooks()
             for i = startIndex, count do
                 local abilityId = info.abilityFunction(i)
                 local name = GetAbilityName(abilityId)
+                local overrideRank = nil
+                local casterUnitTag = "player"
                 local icon = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon) and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon or GetAbilityIcon(abilityId) -- Get Updated LUIE AbilityIcon here
-                local description = GetAbilityDescription(abilityId)
+                local description = GetAbilityDescription(abilityId, overrideRank, casterUnitTag)
 
                 local scoreIndex = i - startIndex + 1
                 local countText = scoreIndex
@@ -784,6 +792,7 @@ function LUIE.InitializeHooks()
     end
 
     -- Hook AVA Keep Upgrade
+    ---@diagnostic disable-next-line: duplicate-set-field
     ZO_MapKeepUpgrade_Shared.RefreshLevels = function(self)
         self.levelsGridList:ClearGridList()
 
@@ -1233,6 +1242,7 @@ function LUIE.InitializeHooks()
 
         --Increase (Morph, Purchase, Increase Rank) Icon
         local increaseAction = ZO_SKILL_POINT_ACTION.NONE
+        local isMorph = ZO_ActiveSkillProgressionData:IsMorph()
         if showIncrease then
             increaseAction = skillPointAllocator:GetIncreaseSkillAction()
         elseif isMorph then
