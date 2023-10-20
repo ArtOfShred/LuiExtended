@@ -970,7 +970,7 @@ function CombatInfo.OnUpdate(currentTime)
     -- Quickslot cooldown
     if CombatInfo.SV.PotionTimerShow then
         local slotIndex = GetCurrentQuickslot()
-        local remain, duration, global = GetSlotCooldownInfo(slotIndex, HOTBAR_CATEGORY_QUICKSLOT_WHEEL)
+        local remain, duration, _ = GetSlotCooldownInfo(slotIndex, HOTBAR_CATEGORY_QUICKSLOT_WHEEL)
         local label = uiQuickSlot.label
         local timeColours = uiQuickSlot.timeColours
         if duration > 5000 then
