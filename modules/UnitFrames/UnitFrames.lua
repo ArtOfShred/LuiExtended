@@ -635,7 +635,6 @@ local function CreateDefaultFrames()
 
     -- When default Target frame is enabled set the threshold value to change colour of label and add label to default fade list
     if g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH] then
-        ---@diagnostic disable-next-line: inject-field
         g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].threshold = g_targetThreshold
         table.insert(g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].label)
     end
@@ -3379,7 +3378,6 @@ function UnitFrames.CustomFramesSetupAlternative(isWerewolf, isSiege, isMounted)
         colour = { 0.8, 0, 0, 0.9 }
 
         UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_WEREWOLF] = nil
-        ---@diagnostic disable-next-line: assign-type-mismatch
         UnitFrames.CustomFrames.controlledsiege[COMBAT_MECHANIC_FLAGS_HEALTH] = UnitFrames.CustomFrames.player.alternative
         UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_MOUNT_STAMINA] = nil
         UnitFrames.CustomFrames.player.ChampionXP = nil
@@ -5908,7 +5906,6 @@ function UnitFrames.CustomFramesReloadExecuteMenu()
     g_targetThreshold = UnitFrames.SV.ExecutePercentage
 
     if g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH] then
-        ---@diagnostic disable-next-line: inject-field
         g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].threshold = g_targetThreshold
     end
     if UnitFrames.CustomFrames["reticleover"] and UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH] then

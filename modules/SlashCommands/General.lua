@@ -189,7 +189,6 @@ function SlashCommands.SlashCampaignQ(option)
         local campaignName = GetCampaignName(campaignId)
 
         if GetAssignedCampaignId() == campaignId or GetGuestCampaignId() == campaignId then
-            ---@diagnostic disable-next-line: missing-parameter
             QueueForCampaign(campaignId)
             printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName), true)
             if LUIE.SV.TempAlertCampaign then
