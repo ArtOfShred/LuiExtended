@@ -4014,23 +4014,22 @@ LUIE.DebugAuras = {
     [36975] = true, -- Reaper's Mark (Reaper's Mark)
     [36973] = true, -- Major Berserk (Reaper's Mark)
 
-    [61907] = true, -- Assassin's Will (Grim Focus)
-    [122585] = true, -- Assassin's Will (Grim Focus)
-    [61902] = true, -- Grim Focus (Grim Focus)
+    [61907] = true, -- Grim Focus (Grim Focus)
     [122585] = true, -- Grim Focus (Grim Focus)
-    --[105183] = true, -- Grim Focus Combat Trigger (Grim Focus)
+    [61902] = true, -- Grim Focus (Grim Focus)
+    [61905] = true, -- Grim Focus (Grim Focus)
 
-    [61932] = true, -- Assassin's Scourge (Relentless Focus)
-    [122587] = true, -- Assassin's Will (Assassin's Scourge)
-    [61927] = true, -- Relentless Focus (Relentless Focus)
+    [61932] = true, -- Relentless Focus (Relentless Focus)
     [122587] = true, -- Relentless Focus (Relentless Focus)
-    --[105194] = true, -- RF Combat Trigger (Relentless Focus)
+    [61927] = true, -- Relentless Focus (Relentless Focus)
+    --[61928] = true, -- Relentless Focus (Relentless Focus)
+    [107054] = true, -- Relentless Focus (Relentless Focus)
 
-    [61930] = true, -- Assassin's Will (Merciless Resolve)
-    [122586] = true, -- Assassin's Will (Merciless Resolve)
-    [61919] = true, -- Merciless Resolve (Merciless Resolve)
+    [61930] = true, -- Merciless Resolve (Merciless Resolve)
     [122586] = true, -- Merciless Resolve (Merciless Resolve)
-    --[105290] = true, -- MR Combat Trigger (Merciless Resolve)
+    [61919] = true, -- Merciless Resolve (Merciless Resolve)
+    --[61920] = true, -- Merciless Resolve (Merciless Resolve)
+    [107055] = true, -- Merciless Resolve (Merciless Resolve)
 
     [33398] = true, -- Death Stroke (Death Stroke)
     [61389] = true, -- Damage Taken Increased (Death Stroke)
@@ -4499,11 +4498,12 @@ LUIE.DebugAuras = {
     [108849] = true, -- Bound Armor Passive (Bound Armor)
     [24158] = true, -- Bound Armor (Bound Armor)
 
-    [108853] = true, -- Bound Armaments Passive (Bound Armaments)
     [24165] = true, -- Bound Armaments (Bound Armaments)
+    --[108853] = true, -- Bound Armaments (Bound Armaments)
     [203447] = true, -- Bound Armaments (Bound Armaments)
-    [130291] = true, -- Bound Armaments (Bound Armaments)
-    [130318] = true, -- Bound Armaments (Bound Armaments)
+    [130293] = true, -- Bound Armaments (Bound Armaments)
+    --[130291] = true, -- Bound Armaments (Bound Armaments)
+    --[130318] = true, -- Bound Armaments (Bound Armaments)
 
     [108855] = true, -- Bound Aegis Passive (Bound Aegis)
     [24163] = true, -- Bound Aegis (Bound Aegis)
@@ -6820,6 +6820,7 @@ LUIE.DebugAuras = {
     [81491] = true, -- Arterial Burst
 
     [132141] = true, -- Blood Frenzy
+    [172418] = true, -- Blood Frenzy
     [142464] = true, -- Blood Frenzy
 
     [134160] = true, -- Simmering Frenzy
@@ -6827,6 +6828,7 @@ LUIE.DebugAuras = {
     [134165] = true, -- Simmering Frenzy
 
     [135841] = true, -- Sated Fury
+    [172648] = true, -- Sated Fury
     [135847] = true, -- Sated Fury
     [142495] = true, -- Sated Fury
     [135846] = true, -- Sated Fury

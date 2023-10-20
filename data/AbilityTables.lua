@@ -409,7 +409,6 @@ local AbilityTables = {
     Skill_Molten_Weapons = 29043,
 
     -- Nightblade
-    Skill_Assassins_Scourge = 61932,
     Skill_Death_Stroke = 33398,
     Skill_Incapacitating_Strike = 36508,
     Skill_Soul_Harvest = 36514,

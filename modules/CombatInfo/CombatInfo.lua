@@ -301,7 +301,7 @@ local g_potionFont -- Font for Potion Timer Label
 local g_ultimateFont -- Font for Ultimate Percentage Label
 local g_castbarFont -- Font for Castbar Label & Timer
 local g_ProcSound -- Proc Sound
-local g_boundArmamentsPlayed = false -- Specific variable to lockout Bound Armaments from playing a proc sound at 5 stacks to only once per 5 seconds.
+local g_boundArmamentsPlayed = false -- Specific variable to lockout Bound Armaments/Grim Focus from playing a proc sound at 5 stacks to only once per 5 seconds.
 local g_disableProcSound = {} -- When we play a proc sound from a bar ability changing (like power lash) we put a 3 sec ICD on it so it doesn't spam when mousing on/off a target, etc
 local g_hotbarCategory = GetActiveHotbarCategory() -- Set on initialization and when we swap weapons to determine the current hotbar category
 local g_backbarButtons = {} -- Table to hold backbar buttons
@@ -350,20 +350,6 @@ local GAMEPAD_CONSTANTS = {
 local KEYBOARD_CONSTANTS = {
     abilitySlotOffsetX = 2,
     ultimateSlotOffsetX = 62,
-}
-
-local isStackCounter = {
-    [61905] = true, -- Grim Focus
-    [61928] = true, -- Relentless Focus
-    [61920] = true, -- Merciless Resolve
-    [130293] = true, -- Bound Armaments
-}
-
-local isStackBaseAbility = {
-    --[61902] = true, -- Grim Focus
-    --[61927] = true, -- Relentless Focus
-    --[61919] = true, -- Merciless Resolve
-    [24165] = true, -- Bound Armaments
 }
 
 local slotsUpdated = {}
@@ -530,14 +516,10 @@ function CombatInfo.SetupBackBarIcons(button, flip)
 
     -- Special case for certain skills, so the proc icon doesn't get stuck.
     local specialCases = {
-        [61907] = 61902, -- Assassin's Will --> Grim Focus
-        [61932] = 61927, -- Assassin's Scourge --> Relentless Focus
-        [61930] = 61919, -- Assassin's Will --> Merciless Resolve
         [114716] = 46324, -- Crystal Fragments --> Crystal Fragments
         [20824] = 20816, -- Power Lash --> Flame Lash
         [35445] = 35441, -- Shadow Image Teleport --> Shadow Image
         [126659] = 38910, -- Flying Blade --> Flying Blade
-        [130291] = 24165, -- Bound Armaments --> Bound Armaments
     }
 
     if specialCases[slotId] then
@@ -920,7 +902,7 @@ local playerZ
 
 -- Hide duration label if the ability is Grim Focus or one of its morphs
 local function SetBarRemainLabel(remain, abilityId)
-    if Effects.IsGrimFocus[abilityId] then
+    if Effects.IsGrimFocus[abilityId] or Effects.IsBloodFrenzy[abilityId] then
         return ""
     else
         return FormatDurationSeconds(remain)
@@ -1499,29 +1481,6 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
 
     -- delete Effect
     if changeType == EFFECT_RESULT_FADED then
-        -- Remove stacks when Grim Focus ends
-        if isStackCounter[abilityId] then
-            for k, v in pairs(isStackBaseAbility) do
-                g_toggledSlotsStack[k] = nil
-                if g_toggledSlotsFront[k] or g_toggledSlotsBack[k] then
-                    if CombatInfo.SV.ShowToggled and CombatInfo.SV.BarShowLabel then
-                        if g_toggledSlotsFront[k] then
-                            local slotNum = g_toggledSlotsFront[k]
-                            if g_uiCustomToggle[slotNum] then
-                                g_uiCustomToggle[slotNum].stack:SetText("")
-                            end
-                        end
-                        if g_toggledSlotsBack[k] then
-                            local slotNum = g_toggledSlotsBack[k]
-                            if g_uiCustomToggle[slotNum] then
-                                g_uiCustomToggle[slotNum].stack:SetText("")
-                            end
-                        end
-                    end
-                end
-            end
-        end
-
         -- Ignore fading event if override is true
         if g_barNoRemove[abilityId] then
             if Effects.BarHighlightCheckOnFade[abilityId] then
@@ -1551,10 +1510,7 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                 CombatInfo.HideSlot(slotNum, abilityId)
             end
             g_toggledSlotsRemain[abilityId] = nil
-            -- Don't modify stacks for Grim Focus since we use the actual stack ids to handle this
-            if not isStackBaseAbility[abilityId] then
-                g_toggledSlotsStack[abilityId] = nil
-            end
+            g_toggledSlotsStack[abilityId] = nil
         end
 
         if Effects.BarHighlightCheckOnFade[abilityId] then
@@ -1562,26 +1518,14 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
         end
     else
         -- Also create visual enhancements from skill bar
-        -- Handle proc sound for Bound Armaments
-        if abilityId == 130293 then
+        -- Handle proc sound for Bound Armaments / Grim Focus
+        if abilityId == 203447 or Effects.IsGrimFocus[abilityId] then
             if CombatInfo.SV.ShowTriggered and CombatInfo.SV.ProcEnableSound then
-                if stackCount ~= 4 then
+                local stack = Effects.IsGrimFocus[abilityId] and 5 or 4
+                if stackCount ~= stack then
                     g_boundArmamentsPlayed = false
                 end
-                if stackCount == 4 and not g_boundArmamentsPlayed then
-                    PlaySound(g_ProcSound)
-                    PlaySound(g_ProcSound)
-                    g_boundArmamentsPlayed = true
-                end
-            end
-        end
-        -- Handle proc sound for Grim Focus
-        if Effects.IsGrimFocus[abilityId] then
-            if CombatInfo.SV.ShowTriggered and CombatInfo.SV.ProcEnableSound then
-                if stackCount ~= 5 then
-                    g_boundArmamentsPlayed = false
-                end
-                if stackCount == 5 and not g_boundArmamentsPlayed then
+                if stackCount == stack and not g_boundArmamentsPlayed then
                     PlaySound(g_ProcSound)
                     PlaySound(g_ProcSound)
                     g_boundArmamentsPlayed = true
@@ -1627,15 +1571,12 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
             local currentTime = GetGameTimeMilliseconds()
             if CombatInfo.SV.ShowToggled then
                 -- Add fake duration to Grim Focus so the highlight stays
-                if Effects.IsGrimFocus[abilityId] then
-                    g_toggledSlotsRemain[abilityId] = currentTime + 900000
+                if Effects.IsGrimFocus[abilityId] or Effects.IsBloodFrenzy[abilityId] then
+                    g_toggledSlotsRemain[abilityId] = currentTime + 90000000
                 else
                     g_toggledSlotsRemain[abilityId] = 1000 * endTime
                 end
-                -- Don't modify stacks for Grim Focus since we use the actual stack ids to handle this
-                if not isStackBaseAbility[abilityId] then
-                    g_toggledSlotsStack[abilityId] = stackCount
-                end
+                g_toggledSlotsStack[abilityId] = stackCount
                 if g_toggledSlotsFront[abilityId] then
                     local slotNum = g_toggledSlotsFront[abilityId]
                     CombatInfo.ShowSlot(slotNum, abilityId, currentTime, false)
@@ -1643,40 +1584,6 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                 if g_toggledSlotsBack[abilityId] then
                     local slotNum = g_toggledSlotsBack[abilityId]
                     CombatInfo.ShowSlot(slotNum, abilityId, currentTime, false)
-                end
-            end
-        end
-
-        -- Set stack count when Grim Focus duration buff changes
-        if isStackCounter[abilityId] then
-            for i = 1, GetNumBuffs(unitTag) do
-                local _, _, _, _, _, _, _, _, _, _, abilityId = GetUnitBuffInfo(unitTag, i)
-                if isStackBaseAbility[abilityId] then
-                    g_toggledSlotsStack[abilityId] = stackCount
-                    if g_toggledSlotsFront[abilityId] or g_toggledSlotsBack[abilityId] then
-                        if CombatInfo.SV.ShowToggled and CombatInfo.SV.BarShowLabel then
-                            if g_toggledSlotsFront[abilityId] then
-                                local slotNum = g_toggledSlotsFront[abilityId]
-                                if g_uiCustomToggle[slotNum] then
-                                    if g_toggledSlotsStack[abilityId] and g_toggledSlotsStack[abilityId] > 0 then
-                                        g_uiCustomToggle[slotNum].stack:SetText(g_toggledSlotsStack[abilityId])
-                                    else
-                                        g_uiCustomToggle[slotNum].stack:SetText("")
-                                    end
-                                end
-                            end
-                            if g_toggledSlotsBack[abilityId] then
-                                local slotNum = g_toggledSlotsBack[abilityId]
-                                if g_uiCustomToggle[slotNum] then
-                                    if g_toggledSlotsStack[abilityId] and g_toggledSlotsStack[abilityId] > 0 then
-                                        g_uiCustomToggle[slotNum].stack:SetText(g_toggledSlotsStack[abilityId])
-                                    else
-                                        g_uiCustomToggle[slotNum].stack:SetText("")
-                                    end
-                                end
-                            end
-                        end
-                    end
                 end
             end
         end
@@ -2336,14 +2243,6 @@ function CombatInfo.OnSlotUpdated(eventCode, slotNum)
     if slotNum == 8 then
         CombatInfo.UpdateUltimateLabel()
     end
-
-    -- Update the slot if the bound id has a proc
-    if slotNum >= BAR_INDEX_START and slotNum <= BAR_INDEX_END then
-        local abilityId = GetSlotBoundId(slotNum, g_hotbarCategory)
-        if Effects.IsAbilityProc[abilityId] or Effects.BaseForAbilityProc[abilityId] then
-            CombatInfo.BarSlotUpdate(slotNum, false, true)
-        end
-    end
 end
 
 local function removeSlotFromTable(table, slotNum)
@@ -2412,20 +2311,7 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
     local triggeredSlots = slotNum > BACKBAR_INDEX_OFFSET and g_triggeredSlotsBack or g_triggeredSlotsFront
     local proc = Effects.HasAbilityProc[abilityName]
 
-    if Effects.IsAbilityProc[ability_id] then
-        if CombatInfo.SV.ShowTriggered then
-            CombatInfo.PlayProcAnimations(slotNum)
-            if CombatInfo.SV.ProcEnableSound then
-                if not wasfullUpdate and not g_disableProcSound[slotNum] then
-                    PlaySound(g_ProcSound)
-                    g_disableProcSound[slotNum] = true
-                    zo_callLater(function()
-                        g_disableProcSound[slotNum] = false
-                    end, 3000)
-                end
-            end
-        end
-    elseif proc then
+    if proc then
         triggeredSlots[proc] = slotNum
         if g_triggeredSlotsRemain[proc] then
             if CombatInfo.SV.ShowTriggered then
@@ -2444,7 +2330,7 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
     local toggledSlots = slotNum > BACKBAR_INDEX_OFFSET and g_toggledSlotsBack or g_toggledSlotsFront
 
     if onlyProc == false then
-        if duration > 0 or Effects.AddNoDurationBarHighlight[ability_id] or Effects.MajorMinor[ability_id] then
+        if duration > 0 or Effects.AddNoDurationBarHighlight[ability_id] or Effects.IsGrimFocus[ability_id] or Effects.IsBloodFrenzy[ability_id] or Effects.MajorMinor[ability_id] then
             toggledSlots[ability_id] = slotNum
             if g_toggledSlotsRemain[ability_id] then
                 if CombatInfo.SV.ShowToggled then

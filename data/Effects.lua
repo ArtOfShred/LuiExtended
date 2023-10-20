@@ -88,33 +88,15 @@ Effects.IsToggle = {
     [80983] = true, -- Stalwart Guard (Stalwart Guard)
 
     -- Vampire
-    [132141] = true, -- Blood Frenzy
-    [134160] = true, -- Simmering Frenzy
-    [135841] = true, -- Sated Fury
+    [172418] = true, -- Blood Frenzy
+    [134166] = true, -- Simmering Frenzy
+    [172648] = true, -- Sated Fury
     [32986] = true, -- Mist Form
     [38963] = true, -- Elusive Mist
     [38965] = true, -- Blood Mist
 
     -- NPC Abilities
     [44258] = true, -- Magelight (Soulbrander)
-}
-
---------------------------------------------------------------------------------------------------------------------------------
--- List of abilities flagged to display a Proc highlight / sound notification in Combat Info when the Ability Bar is updated with a matching id.
---------------------------------------------------------------------------------------------------------------------------------
-Effects.IsAbilityProc = {
-    [20824] = true, -- Power Lash (Flame Lash)
-    [61907] = true, -- Assassin's Will (Grim Focus)
-    [61932] = true, -- Assassin's Scourge (Relentless Focus)
-    [61930] = true, -- Assassin's Will (Merciless Resolve)
-}
-
--- Flagged to update on a bar slot update
-Effects.BaseForAbilityProc = {
-    [20816] = true, -- Flash Lash
-    [61902] = true, -- Grim Focus
-    [61927] = true, -- Relentless Focus
-    [61919] = true, -- Merciless Resolve
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -312,32 +294,6 @@ Effects.IsAllianceXPBuff = {
 Effects.IsBlock = {
     [29761] = true, -- Brace
     [40165] = true, -- Scene Choreo Brace
-}
-
---------------------------------------------------------------------------------------------------------------------------------
--- Grim Focus Id's - Used by SpellCastBuffs to track the id's for Grim Focus & its morphs - These id's are merged with the Override for stack tracking
---------------------------------------------------------------------------------------------------------------------------------
-Effects.IsGrimFocus = {
-    [122585] = true, -- Grim Focus
-    [122587] = true, -- Relentless Focus
-    [122586] = true, -- Merciless Resolve
-}
-
-Effects.IsSimmeringFrenzy = {
-    [134166] = true, -- Simmering Frenzy
-}
-
---------------------------------------------------------------------------------------------------------------------------------
--- Grim Focus Override Id's - Used by SpellCastBuffs to track the id's for Grim Focus & its morphs - These id's are merged with the base buff for stack tracking
---------------------------------------------------------------------------------------------------------------------------------
-Effects.IsGrimFocusOverride = {
-    [61902] = true, -- Grim Focus
-    [61927] = true, -- Relentless Focus
-    [61919] = true, -- Merciless Resolve
-}
-
-Effects.IsSimmeringFrenzyOverride = {
-    [134160] = true, -- Simmering Frenzy
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -1177,9 +1133,18 @@ Effects.AddNoDurationBarHighlight = {
     [124193] = true, -- Necrotic Potency
     [118814] = true, -- Enduring Undeath
 
-    -- Grim Focus
-    [122585] = true, -- Grim Focus
+}
 
+Effects.IsGrimFocus = {
+    [122585] = true, -- Grim Focus
+    [122587] = true, -- Relentless Focus
+    [122586] = true, -- Merciless Resolve
+}
+
+Effects.IsBloodFrenzy = {
+    [172418] = true, -- Blood Frenzy
+    [134166] = true, -- Simmering Frenzy
+    [172648] = true, -- Sated Fury
 }
 
 -- Also track this id on bar highlight
@@ -1244,9 +1209,6 @@ Effects.BarHighlightCheckOnFade = {
 
     -- Nightblade
     [125314] = { duration = 90620, durationMod = 125314, unitTag = "player" }, -- Phantasmal Escape --> Major Evasion
-
-    -- Sorcerer
-    [24165] = { id1 = 24165, unitTag = "player" }, -- Bound Armaments
 
     -- Warden
     [130139] = { id1 = 130140, id2 = 130139, unitTag = "reticleover" }, -- Off-Balance --> Cutting Dive / Off-Balance
@@ -1322,8 +1284,8 @@ Effects.BarHighlightOverride = {
     -- Ardent Flame
     [23806] = { newId = 23808 }, -- Lava Whip --> Off Balance
     [20805] = { newId = 122658 }, -- Molten Whip --> Seething Fury
-    [20816] = { newId = 34117 }, -- Flame Lash --> Off Balance
-    [20824] = { newId = 34117 }, -- Flame Lash --> Off Balance
+    [20816] = { newId = 164731 }, -- Flame Lash --> Off Balance
+    [20824] = { newId = 164731 }, -- Flame Lash --> Off Balance
     [20657] = { newId = 44363 }, -- Searing Strike
     [20668] = { newId = 44369 }, -- Venomous Claw
     [20660] = { newId = 44373 }, -- Burning Embers
@@ -1367,9 +1329,9 @@ Effects.BarHighlightOverride = {
     [33375] = { newId = 61716 }, -- Blur --> Major Evasion
     [35414] = { newId = 61716 }, -- Mirage --> Major Evasion
     [35419] = { newId = 125314, noRemove = true }, -- Phantasmal Escape --> Major Evasion
-    [61902] = { newId = 122585 }, -- Grim Focus --> Assassin's Will
-    [61932] = { newId = 61927 }, -- Relentless Focus --> Assassin's Scourge
-    [61930] = { newId = 61919 }, -- Merciless Resolve --> Assassin's Will
+    [61902] = { newId = 122585 }, -- Grim Focus
+    [61927] = { newId = 122587 }, -- Relentless Focus
+    [61919] = { newId = 122586 }, -- Merciless Resolve
     [33398] = { newId = 61389 }, -- Death Stroke --> Damage Taken Increased
     [36508] = { newId = 61393 }, -- Incapacitating Strike --> Damage Taken Increased
     [36514] = { newId = 61400 }, -- Soul Harvest --> Damage Taken Increased
@@ -1424,7 +1386,7 @@ Effects.BarHighlightOverride = {
     [23634] = { newId = 80459 }, -- Summon Storm Atronach
     [23492] = { newId = 80463 }, -- Greater Storm Atronach
     [23495] = { newId = 80468 }, -- Summon Charged Atronach
-    [130291] = { newId = 24165 }, -- Bound Armaments
+    [24165] = { newId = 203447 }, -- Bound Armaments
 
     -- Storm Calling
     [18718] = { newId = 18746 }, -- Mages' Fury
@@ -1723,6 +1685,10 @@ Effects.BarHighlightOverride = {
     ---------------------------
     -- Vampire ----------------
     ---------------------------
+
+    [132141] = { newId = 172418 }, -- Blood Frenzy
+    [134160] = { newId = 134166 }, -- Simmering Frenzy
+    [135841] = { newId = 172648 }, -- Sated Fury
 
     [128709] = { newId = 128712 }, -- Mesmerize
     [137861] = { newId = 137865 }, -- Hypnosis
@@ -2509,9 +2475,6 @@ Effects.BarIdOverride = {
     [20824] = "LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds", -- Power Lash (Flame Lash)
 
     -- Nightblade
-    [61907] = "LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds", -- Assassin's Will (Grim Focus)
-    [61932] = "LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds", -- Assassin's Scourge (Relentless Focus)
-    [61930] = "LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds", -- Assassin's Will (Merciless Resolve)
     [35445] = "LuiExtended/media/icons/abilities/ability_nightblade_shadow_image_teleport.dds", -- Shadow Image Teleport (Shadow Image)
 
     -- Dual Wield
@@ -2539,6 +2502,9 @@ Effects.IsAbilityActiveHighlight = {
 }
 
 Effects.IsAbilityActiveGlow = {
+
+    [20824] = true, -- Power Lash (Flame Lash)
+
     [126659] = true, -- Flying Blade (Flying Blade)
 
     [137156] = true, -- Carnage (Pounce)
@@ -7722,11 +7688,7 @@ Effects.EffectOverride = {
     }, -- Seething Fury (Molten Whip)
     [34117] = { tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off Balance (Flame Lash)
     [20824] = { icon = "LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds" }, -- Power Lash (Flame Lash)
-    [23105] = {
-        icon = "LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds",
-        tooltip = Tooltips.Generic_HoT,
-        tooltipValue2 = 1,
-    }, -- Power Lash (Flame Lash)
+    [23105] = { icon = "LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds" }, -- Power Lash (Flame Lash)
 
     -- Searing Strike / Venomous Claw /Burning Embers
     [44363] = { tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Searing Strike (Searing Strike)
@@ -7922,31 +7884,14 @@ Effects.EffectOverride = {
     [36975] = { icon = "esoui/art/icons/ability_nightblade_014_a.dds" }, -- Reaper's Mark (Reaper's Mark)
 
     -- Grim Focus / Relentless Focus / Merciless Resolve
-    [61902] = { tooltip = Tooltips.Skill_Grim_Focus }, -- Grim Focus (Grim Focus)
-    [61907] = { icon = "LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds" }, -- Assassin's Will (Grim Focus)
-    [122585] = {
-        icon = "LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds",
-        tooltip = Tooltips.Skill_Grim_Focus_Defense,
-    }, -- Assassin's Will (Grim Focus)
-    [105183] = { hide = true }, -- Grim Focus Combat Trigger (Grim Focus)
+    [61905] = { icon = "esoui/art/icons/ability_nightblade_005.dds" }, -- Grim Focus (Grim Focus)
+    [122585] = { tooltip = Tooltips.Skill_Grim_Focus_Defense }, -- Grim Focus (Grim Focus)
 
-    [61927] = { tooltip = Tooltips.Skill_Relentless_Focus }, -- Relentless Focus (Relentless Focus)
-    [61932] = { icon = "LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds" }, -- Assassin's Scourge (Relentless Focus)
-    [122587] = {
-        icon = "LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds",
-        name = Abilities.Skill_Assassins_Scourge,
-        tooltip = Tooltips.Skill_Grim_Focus_Defense,
-    }, -- Assassin's Will (Relentless Focus)
+    [107054] = { icon = "esoui/art/icons/ability_nightblade_005_a.dds" }, -- Relentless Focus (Relentless Focus)
+    [122587] = { tooltip = Tooltips.Skill_Grim_Focus_Defense }, -- Relentless Focus (Relentless Focus)
 
-    [105194] = { hide = true }, -- RF Combat Trigger (Relentless Focus)
-
-    [61919] = { tooltip = Tooltips.Skill_Merciless_Resolve }, -- Merciless Resolve (Merciless Resolve)
-    [61930] = { icon = "LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds" }, -- Assassin's Will (Merciless Resolve)
-    [122586] = {
-        icon = "LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds",
-        tooltip = Tooltips.Skill_Grim_Focus_Defense,
-    }, -- Merciless Resolve (Merciless Resolve)
-    [105290] = { hide = true }, -- MR Combat Trigger (Merciless Resolve)
+    [107055] = { icon = "esoui/art/icons/ability_nightblade_005_b.dds" }, -- Merciless Resolve (Merciless Resolve)
+    [122586] = { tooltip = Tooltips.Skill_Grim_Focus_Defense }, -- Merciless Resolve (Merciless Resolve)
 
     -- Death Stroke / Incapacitating Strike / Soul Harvest
     [61389] = {
@@ -8296,10 +8241,7 @@ Effects.EffectOverride = {
     -- Bound Armor / Bound Armaments / Bound Aegis
     [24158] = { tooltip = Tooltips.Skill_Bound_Armor, tooltipValue2 = 36 }, -- Bound Armor (Bound Armor)
     [24165] = { tooltip = Tooltips.Skill_Bound_Armaments_Skill }, -- Bound Armaments (Bound Armaments)
-    [203447] = {
-        icon = "esoui/art/icons/ability_sorcerer_bound_armaments_proc.dds",
-        tooltip = Tooltips.Skill_Bound_Armaments_Stack,
-    }, -- Bound Armaments (Bound Armaments)
+    [203447] = { tooltip = Tooltips.Skill_Bound_Armaments_Stack }, -- Bound Armaments (Bound Armaments)
     [108855] = { hide = true }, -- Bound Aegis (Bound Aegis)
     [24163] = { tooltip = Tooltips.Skill_Bound_Armor, tooltipValue2 = 40 }, -- Bound Aegis (Bound Aegis)
 
@@ -9757,10 +9699,9 @@ Effects.EffectOverride = {
     }, -- Blood for Blood (Blood for Blood)
 
     -- Blood Frenzy/Simmering Frenzy/Sated Fury
-    [132141] = { forcedContainer = "short", tooltip = Tooltips.Skill_Blood_Frenzy }, -- Blood Frenzy (Blood Frenzy)
-    [134160] = { forcedContainer = "short", tooltip = Tooltips.Skill_Simmering_Frenzy }, -- Simmering Frenzy (Simmering Frenzy)
-    [134166] = { hide = true }, -- Simmering Frenzy (Simmering Frenzy)
-    [135841] = { forcedContainer = "short", tooltip = Tooltips.Skill_Sated_Fury }, -- Sated Fury (Sated Fury)
+    [172418] = { forcedContainer = "short", tooltip = Tooltips.Skill_Blood_Frenzy }, -- Blood Frenzy (Blood Frenzy)
+    [134166] = { forcedContainer = "short", tooltip = Tooltips.Skill_Simmering_Frenzy }, -- Simmering Frenzy (Simmering Frenzy)
+    [172648] = { forcedContainer = "short", tooltip = Tooltips.Skill_Sated_Fury }, -- Sated Fury (Sated Fury)
 
     -- Vampiric Drain/Drain Vigor/Exhilarating Drain
     [134583] = { tooltip = Tooltips.Skill_Vampiric_Drain }, -- Vampiric Drain (Vampiric Drain)
