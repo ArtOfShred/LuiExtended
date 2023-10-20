@@ -2321,7 +2321,7 @@ function UnitFrames.OnVisualizationUpdated(eventCode, unitTag, unitAttributeVisu
     if unitAttributeVisual == ATTRIBUTE_VISUAL_POWER_SHIELDING then
         UnitFrames.UpdateShield(unitTag, newValue, newMaxValue)
     elseif unitAttributeVisual == ATTRIBUTE_VISUAL_TRAUMA then
-        UnitFrames.UpdateTrauma(unitTag, newValue, maxMaxValue)
+        UnitFrames.UpdateTrauma(unitTag, newValue, newMaxValue)
     elseif unitAttributeVisual == ATTRIBUTE_VISUAL_INCREASED_REGEN_POWER or unitAttributeVisual == ATTRIBUTE_VISUAL_DECREASED_REGEN_POWER then
         UnitFrames.UpdateRegen(unitTag, statType, attributeType, powerType)
     elseif unitAttributeVisual == ATTRIBUTE_VISUAL_INCREASED_STAT or unitAttributeVisual == ATTRIBUTE_VISUAL_DECREASED_STAT then
