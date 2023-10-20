@@ -52,7 +52,7 @@ UnitFrames.Defaults = {
     DefaultFramesNewTarget = 1,
     DefaultFramesNewGroup = 1,
     DefaultFramesNewBoss = 2,
-    Format = "Current + Shield (Percentage%)",
+    Format = "Current + Shield - Trauma (Percentage%)",
     DefaultFontFace = "Univers 67",
     DefaultFontStyle = "soft-shadow-thick",
     DefaultFontSize = 16,
@@ -60,8 +60,8 @@ UnitFrames.Defaults = {
     TargetShowClass = true,
     TargetShowFriend = true,
     TargetColourByReaction = false,
-    CustomFormatOnePT = "Current + Shield / Max", -- TODO: localization
-    CustomFormatOneGroup = "Current + Shield / Max", -- TODO: localization
+    CustomFormatOnePT = "Current + Shield - Trauma / Max", -- TODO: localization
+    CustomFormatOneGroup = "Current + Shield - Trauma / Max", -- TODO: localization
     CustomFormatTwoPT = "Percentage%",
     CustomFormatTwoGroup = "Percentage%",
     CustomFormatRaid = "Current (Percentage%)", -- TODO: localization
@@ -218,7 +218,7 @@ UnitFrames.Defaults = {
     BarAlignTarget = 1,
     BarAlignCenterLabelPlayer = false,
     BarAlignCenterLabelTarget = false,
-    CustomFormatCenterLabel = "Current + Shield / Max (Percentage%)", -- TODO: localization
+    CustomFormatCenterLabel = "Current + Shield - Trauma / Max (Percentage%)", -- TODO: localization
 }
 UnitFrames.SV = nil
 
@@ -2894,7 +2894,8 @@ function UnitFrames.UpdateAttribute(unitTag, powerType, attributeFrame, powerVal
             if attributeFrame[label] ~= nil then
                 -- Format specific to selected label
                 local fmt = tostring(attributeFrame[label].fmt or UnitFrames.SV.Format)
-                local str = fmt:gsub("Percentage", tostring(pct)):gsub("Max", AbbreviateNumber(powerEffectiveMax, UnitFrames.SV.ShortenNumbers, true)):gsub("Current", AbbreviateNumber(powerValue, UnitFrames.SV.ShortenNumbers, true)):gsub("+ Shield", shield and ("+ " .. AbbreviateNumber(shield, UnitFrames.SV.ShortenNumbers, true)) or ""):gsub("Nothing", "")
+                local str = fmt:gsub("Percentage", tostring(pct)):gsub("Max", AbbreviateNumber(powerEffectiveMax, UnitFrames.SV.ShortenNumbers, true)):gsub("Current", AbbreviateNumber(powerValue, UnitFrames.SV.ShortenNumbers, true)):gsub(" + Shield", shield
+                and ("+ " .. AbbreviateNumber(shield, UnitFrames.SV.ShortenNumbers, true)) or ""):gsub(" - Trauma", trauma and ("- (" .. AbbreviateNumber(trauma, UnitFrames.SV.ShortenNumbers, true) .. ")" ) or ""):gsub("Nothing", "")
                 -- Change text
                 attributeFrame[label]:SetText(str)
                 -- Don't update if dead

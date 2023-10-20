@@ -38,14 +38,22 @@ local formatOptions = {
     "Nothing",
     "Current",
     "Current + Shield",
+    "Current - Trauma",
+    "Current + Shield - Trauma",
     "Max",
     "Percentage%",
     "Current / Max",
     "Current + Shield / Max",
+    "Current - Trauma / Max",
+    "Current + Shield - Trauma / Max",
     "Current / Max (Percentage%)",
     "Current + Shield / Max (Percentage%)",
+    "Current - Trauma / Max (Percentage%)",
+    "Current + Shield - Trauma / Max (Percentage%)",
     "Current (Percentage%)",
     "Current + Shield (Percentage%)",
+    "Current - Trauma (Percentage%)",
+    "Current + Shield - Trauma (Percentage%)",
 }
 
 local Whitelist, WhitelistValues = {}, {}
