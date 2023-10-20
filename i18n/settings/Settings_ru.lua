@@ -203,7 +203,7 @@ local strings = {
     SI_LUIE_LAM_BUFF_SORTING_SORT_VERTICAL = "<<1>> Vertical Sorting",
     SI_LUIE_LAM_BUFF_SORTING_SORT_VERTICAL_TP = "Choose the vertical direction icons are sorted in the <<1>> container.",
     SI_LUIE_LAM_BUFF_SORTING_UNANCHORED_HEADER = "Player/Target (Unachored Frames Only)",
-    SI_LUIE_LAM_BUFF_SORTING_UNANCHORED_DESCRIPTION = "Customization options for the Player/Target Buff & Debuff Frames when the option to Anchor the Buff & Debuff Frames to custom player frames is disabled.\nNote: You can set the \"Width\" field to the lowest value to make the icons stack vertically.",
+    SI_LUIE_LAM_BUFF_SORTING_UNANCHORED_DESCRIPTION = 'Customization options for the Player/Target Buff & Debuff Frames when the option to Anchor the Buff & Debuff Frames to custom player frames is disabled.\nNote: You can set the "Width" field to the lowest value to make the icons stack vertically.',
     SI_LUIE_LAM_BUFF_SORTING_LONGTERM_HEADER = "Long Term Player Buffs",
     SI_LUIE_LAM_BUFF_SORTING_PROMINET_HEADER = "Prominent Buffs & Debuffs",
 
