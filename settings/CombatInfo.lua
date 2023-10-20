@@ -464,6 +464,12 @@ function CombatInfo.CreateSettings()
                     Settings.ShowToggled = value
                     CombatInfo.UpdateBarHighlightTables()
                     CombatInfo.OnSlotsFullUpdate()
+                    -- Disable back bar if Toggled is not enabled
+                    if not (Settings.ShowToggled) then
+                        Settings.BarShowBack = false
+                        CombatInfo.OnSlotsFullUpdate()
+                        CombatInfo.BackbarToggleSettings()
+                    end
                 end,
                 width = "full",
                 default = Defaults.ShowToggled,
@@ -492,9 +498,8 @@ function CombatInfo.CreateSettings()
             },
             {
                 -- Show Label On Bar Highlight
-                -- TODO: Reimplement when fixed
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>> - BROKEN", GetString(SI_LUIE_LAM_CI_BAR_LABEL)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_LABEL)),
                 tooltip = GetString(SI_LUIE_LAM_CI_BAR_LABEL_TP),
                 getFunc = function()
                     return Settings.BarShowLabel
@@ -508,7 +513,6 @@ function CombatInfo.CreateSettings()
                 disabled = function()
                     return not (LUIE.SV.CombatInfo_Enabled and (Settings.ShowTriggered or Settings.ShowToggled))
                 end,
-                --disabled = true
             },
             {
                 type = "slider",
@@ -622,7 +626,7 @@ function CombatInfo.CreateSettings()
                 width = "full",
                 default = Defaults.BarMillisThreshold,
                 disabled = function()
-                    return not (LUIE.SV.CombatInfo_Enabled and Settings.BarShowLabel and Settings.BarMillis)
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.BarShowLabel and Settings.BarMillis and (Settings.ShowTriggered or Settings.ShowToggled))
                 end,
             },
             {
@@ -638,7 +642,7 @@ function CombatInfo.CreateSettings()
                 width = "full",
                 default = Defaults.BarMillisAboveTen,
                 disabled = function()
-                    return not (LUIE.SV.CombatInfo_Enabled and Settings.BarShowLabel and Settings.BarMillis)
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.BarShowLabel and Settings.BarMillis and (Settings.ShowTriggered or Settings.ShowToggled))
                 end,
             },
             {
