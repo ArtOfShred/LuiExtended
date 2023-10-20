@@ -89,6 +89,14 @@ SpellCastBuffs.Defaults = {
     SortPromDebuffsHorz = "Left to Right",
     AlignmentPromDebuffsVert = "Bottom",
     SortPromDebuffsVert = "Bottom to Top",
+    StackPlayerBuffs = "Down",
+    StackPlayerDebuffs = "Up",
+    StackTargetBuffs = "Down",
+    StackTargetDebuffs = "Up",
+    WidthPlayerBuffs = 1920,
+    WidthPlayerDebuffs = 1920,
+    WidthTargetBuffs = 1920,
+    WidthTargetDebuffs = 1920,
     GlowIcons = false,
     RemainingText = true,
     RemainingTextColoured = false,
@@ -519,7 +527,7 @@ function SpellCastBuffs.Initialize(enabled)
             uiTlw[v].prevIconsCount = 0
             -- We need this container only for icons that are aligned in one row/column automatically.
             -- Thus we do not create containers for player and target buffs/debuffs on custom frames
-            if v ~= "player1" and v ~= "player2" and v ~= "target1" and v ~= "target2" then
+            if v ~= "player1" and v ~= "player2" and v ~= "target1" and v ~= "target2" and v ~= "playerb" and v ~= "playerd" and v ~= "targetb" and v ~= "targetd" then
                 uiTlw[v].iconHolder = UI.Control(uiTlw[v], nil, nil, false)
             end
             -- Create table to store created contols for icons
@@ -813,13 +821,13 @@ function SpellCastBuffs.SetupContainerAlignment()
     g_alignmentDirection = {}
 
     g_alignmentDirection.player1 = SpellCastBuffs.SV.AlignmentBuffsPlayer -- No icon holder for anchored buffs/debuffs - This value gets passed to SpellCastBuffs.updateIcons()
-    g_alignmentDirection.playerb = SpellCastBuffs.SV.AlignmentBuffsPlayer
+    g_alignmentDirection.playerb = SpellCastBuffs.SV.AlignmentBuffsPlayer -- No icon holder for anchored buffs/debuffs - This value gets passed to SpellCastBuffs.updateIcons()
     g_alignmentDirection.player2 = SpellCastBuffs.SV.AlignmentDebuffsPlayer -- No icon holder for anchored buffs/debuffs - This value gets passed to SpellCastBuffs.updateIcons()
-    g_alignmentDirection.playerd = SpellCastBuffs.SV.AlignmentDebuffsPlayer
+    g_alignmentDirection.playerd = SpellCastBuffs.SV.AlignmentDebuffsPlayer -- No icon holder for anchored buffs/debuffs - This value gets passed to SpellCastBuffs.updateIcons()
     g_alignmentDirection.target1 = SpellCastBuffs.SV.AlignmentBuffsTarget -- No icon holder for anchored buffs/debuffs - This value gets passed to SpellCastBuffs.updateIcons()
-    g_alignmentDirection.targetb = SpellCastBuffs.SV.AlignmentBuffsTarget
+    g_alignmentDirection.targetb = SpellCastBuffs.SV.AlignmentBuffsTarget -- No icon holder for anchored buffs/debuffs - This value gets passed to SpellCastBuffs.updateIcons()
     g_alignmentDirection.target2 = SpellCastBuffs.SV.AlignmentDebuffsTarget -- No icon holder for anchored buffs/debuffs - This value gets passed to SpellCastBuffs.updateIcons()
-    g_alignmentDirection.targetd = SpellCastBuffs.SV.AlignmentDebuffsTarget
+    g_alignmentDirection.targetd = SpellCastBuffs.SV.AlignmentDebuffsTarget -- No icon holder for anchored buffs/debuffs - This value gets passed to SpellCastBuffs.updateIcons()
 
     -- Set Long Term Effects Alignment
     if SpellCastBuffs.SV.LongTermEffectsSeparateAlignment == 1 then
@@ -1097,8 +1105,10 @@ function SpellCastBuffs.Reset()
     -- Set size of top level window
     -- Player
     if uiTlw.playerb and uiTlw.playerb:GetType() == CT_TOPLEVELCONTROL then
-        uiTlw.playerb:SetDimensions(500, SpellCastBuffs.SV.IconSize + 6)
-        uiTlw.playerd:SetDimensions(500, SpellCastBuffs.SV.IconSize + 6)
+        uiTlw.playerb:SetDimensions(SpellCastBuffs.SV.WidthPlayerBuffs, SpellCastBuffs.SV.IconSize + 6)
+        uiTlw.playerd:SetDimensions(SpellCastBuffs.SV.WidthPlayerDebuffs, SpellCastBuffs.SV.IconSize + 6)
+        uiTlw.playerb.maxIcons = zo_floor((uiTlw.playerb:GetWidth() - 4 * g_padding) / (SpellCastBuffs.SV.IconSize + g_padding))
+        uiTlw.playerd.maxIcons = zo_floor((uiTlw.playerd:GetWidth() - 4 * g_padding) / (SpellCastBuffs.SV.IconSize + g_padding))
     else
         uiTlw.player2:SetHeight(SpellCastBuffs.SV.IconSize)
         uiTlw.player2.firstAnchor = { TOPLEFT, TOP }
@@ -1111,8 +1121,10 @@ function SpellCastBuffs.Reset()
 
     -- Target
     if uiTlw.targetb and uiTlw.targetb:GetType() == CT_TOPLEVELCONTROL then
-        uiTlw.targetb:SetDimensions(500, SpellCastBuffs.SV.IconSize + 6)
-        uiTlw.targetd:SetDimensions(500, SpellCastBuffs.SV.IconSize + 6)
+        uiTlw.targetb:SetDimensions(SpellCastBuffs.SV.WidthTargetBuffs, SpellCastBuffs.SV.IconSize + 6)
+        uiTlw.targetd:SetDimensions(SpellCastBuffs.SV.WidthTargetDebuffs, SpellCastBuffs.SV.IconSize + 6)
+        uiTlw.targetb.maxIcons = zo_floor((uiTlw.playerb:GetWidth() - 4 * g_padding) / (SpellCastBuffs.SV.IconSize + g_padding))
+        uiTlw.targetd.maxIcons = zo_floor((uiTlw.playerd:GetWidth() - 4 * g_padding) / (SpellCastBuffs.SV.IconSize + g_padding))
     else
         uiTlw.target2:SetHeight(SpellCastBuffs.SV.IconSize)
         uiTlw.target2.firstAnchor = { TOPLEFT, TOP }
@@ -3633,6 +3645,14 @@ function SpellCastBuffs.updateIcons(currentTime, sortedList, container)
                         -- If debuffs then stack up
                     elseif container == "player2" or container == "target2" then
                         row = row - 1
+                    elseif container == "playerb" then
+                        row = row + (SpellCastBuffs.SV.StackPlayerBuffs == "Down" and 1 or -1)
+                    elseif container == "playerd" then
+                        row = row + (SpellCastBuffs.SV.StackPlayerDebuffs == "Down" and 1 or -1)
+                    elseif container == "targetb" then
+                        row = row + (SpellCastBuffs.SV.StackTargetBuffs == "Down" and 1 or -1)
+                    elseif container == "targetd" then
+                        row = row + (SpellCastBuffs.SV.StackTargetDebuffs == "Down" and 1 or -1)
                     end
                     next_row_break = next_row_break + uiTlw[container].maxIcons
                 end

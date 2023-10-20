@@ -2116,6 +2116,165 @@ function SpellCastBuffs.CreateSettings()
                 default = Defaults.SortDebuffsTarget,
             },
 
+            -- Unanchored Player / Target Buff Options
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_BUFF_SORTING_UNANCHORED_HEADER),
+                width = "full",
+            },
+            {
+                type = "description",
+                text = GetString(SI_LUIE_LAM_BUFF_SORTING_UNANCHORED_DESCRIPTION),
+            },
+
+            {
+                -- Buff Width - Player Buffs
+                type = "slider",
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_WIDTH_GENERIC), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_WIDTH_GENERIC_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)),
+                min = 40,
+                max = 1920,
+                step = 10,
+                getFunc = function()
+                    return Settings.WidthPlayerBuffs
+                end,
+                setFunc = function(value)
+                    Settings.WidthPlayerBuffs = value
+                    SpellCastBuffs.Reset()
+                end,
+                width = "half",
+                default = Defaults.WidthPlayerBuffs,
+            },
+
+            {
+                -- Buff Stack Direction - Player Buffs
+                type = "dropdown",
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_STACK_GENERIC), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_STACK_GENERIC_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)),
+                choices = { "Down", "Up" },
+                getFunc = function()
+                    return Settings.StackPlayerBuffs
+                end,
+                setFunc = function(value)
+                    Settings.StackPlayerBuffs = value
+                    SpellCastBuffs.SetupContainerAlignment()
+                    SpellCastBuffs.SetupContainerSort()
+                end,
+                width = "half",
+                default = Defaults.StackPlayerBuffs,
+            },
+
+            {
+                -- Buff Width - Player Debuffs
+                type = "slider",
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_WIDTH_GENERIC), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_WIDTH_GENERIC_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)),
+                min = 40,
+                max = 1920,
+                step = 10,
+                getFunc = function()
+                    return Settings.WidthPlayerDebuffs
+                end,
+                setFunc = function(value)
+                    Settings.WidthPlayerDebuffs = value
+                    SpellCastBuffs.Reset()
+                end,
+                width = "half",
+                default = Defaults.WidthPlayerDebuffs,
+            },
+
+            {
+                -- Buff Stack Direction - Player Debuffs
+                type = "dropdown",
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_STACK_GENERIC), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_STACK_GENERIC_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)),
+                choices = { "Down", "Up" },
+                getFunc = function()
+                    return Settings.StackPlayerDebuffs
+                end,
+                setFunc = function(value)
+                    Settings.StackPlayerDebuffs = value
+                    SpellCastBuffs.SetupContainerAlignment()
+                    SpellCastBuffs.SetupContainerSort()
+                end,
+                width = "half",
+                default = Defaults.StackPlayerDebuffs,
+            },
+
+            {
+                -- Buff Width - Target Buffs
+                type = "slider",
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_WIDTH_GENERIC), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_WIDTH_GENERIC_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS)),
+                min = 40,
+                max = 1920,
+                step = 10,
+                getFunc = function()
+                    return Settings.WidthTargetBuffs
+                end,
+                setFunc = function(value)
+                    Settings.WidthTargetBuffs = value
+                    SpellCastBuffs.Reset()
+                end,
+                width = "half",
+                default = Defaults.WidthTargetBuffs,
+            },
+
+            {
+                -- Buff Stack Direction - Target Buffs
+                type = "dropdown",
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_STACK_GENERIC), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_STACK_GENERIC_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS)),
+                choices = { "Down", "Up" },
+                getFunc = function()
+                    return Settings.StackTargetBuffs
+                end,
+                setFunc = function(value)
+                    Settings.StackTargetBuffs = value
+                    SpellCastBuffs.SetupContainerAlignment()
+                    SpellCastBuffs.SetupContainerSort()
+                end,
+                width = "half",
+                default = Defaults.StackTargetBuffs,
+            },
+
+            {
+                -- Buff Width - Target Debuffs
+                type = "slider",
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_WIDTH_GENERIC), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_WIDTH_GENERIC_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)),
+                min = 40,
+                max = 1920,
+                step = 10,
+                getFunc = function()
+                    return Settings.WidthTargetDebuffs
+                end,
+                setFunc = function(value)
+                    Settings.WidthTargetDebuffs = value
+                    SpellCastBuffs.Reset()
+                end,
+                width = "half",
+                default = Defaults.WidthTargetDebuffs,
+            },
+
+            {
+                -- Buff Stack Direction - Target Debuffs
+                type = "dropdown",
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_STACK_GENERIC), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_STACK_GENERIC_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)),
+                choices = { "Down", "Up" },
+                getFunc = function()
+                    return Settings.StackTargetDebuffs
+                end,
+                setFunc = function(value)
+                    Settings.StackTargetDebuffs = value
+                    SpellCastBuffs.SetupContainerAlignment()
+                    SpellCastBuffs.SetupContainerSort()
+                end,
+                width = "half",
+                default = Defaults.StackTargetDebuffs,
+            },
+
             -- Long Term Alignment & Sorting
             {
                 type = "header",
