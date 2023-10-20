@@ -3404,11 +3404,19 @@ function ChatAnnouncements.OnAchievementUpdated(eventCode, id)
             end
         end
 
+        -- TODO: Resume debug later
+        --d(totalCmp)
+        --d(totalReq)
+        --d(showInfo)
+
         if not showInfo then
-            -- Achievement completed
-            -- This is the first numCompleted value
-            -- Show every time
-            if (totalCmp == totalReq) or (totalCmp == 1) or (ChatAnnouncements.SV.Achievement.AchievementStep == 0) then
+            -- If the progress is 100%, return (sometimes happens)
+            if totalCmp == totalReq then
+                return
+            end
+
+            -- This is the first progress step, show every time
+            if totalCmp == 1 or (ChatAnnouncements.SV.Achievement.AchievementStep == 0) then
                 showInfo = true
             else
                 -- Achievement step hit
