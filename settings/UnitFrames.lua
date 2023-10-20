@@ -757,6 +757,27 @@ function UnitFrames.CreateSettings()
                 end,
             },
             {
+                -- Custom Unit Frames Trauma Bar Color
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_TRAUMA),
+                getFunc = function()
+                    return Settings.CustomColourTrauma[1], Settings.CustomColourTrauma[2], Settings.CustomColourTrauma[3]
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.CustomColourTrauma = { r, g, b }
+                    UnitFrames.CustomFramesApplyColours(true)
+                end,
+                width = "full",
+                default = {
+                    r = Defaults.CustomColourTrauma[1],
+                    g = Defaults.CustomColourTrauma[2],
+                    b = Defaults.CustomColourTrauma[3],
+                },
+                disabled = function()
+                    return not LUIE.SV.UnitFrames_Enabled
+                end,
+            },
+            {
                 -- Custom Unit Frames Magicka Bar Color
                 type = "colorpicker",
                 name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_MAGICKA),

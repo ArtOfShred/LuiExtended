@@ -83,6 +83,7 @@ UnitFrames.Defaults = {
     CustomOocAlphaPower = true,
     CustomColourHealth = { 202 / 255, 20 / 255, 0 },
     CustomColourShield = { 1, 192 / 255, 0 }, -- .a=0.5 for overlay and .a = 1 for separate
+    CustomColourTrauma = { 64, 0, 0 }, -- .a=0.5 for overlay and .a = 1 for separate
     CustomColourMagicka = { 0, 83 / 255, 209 / 255 },
     CustomColourStamina = { 28 / 255, 177 / 255, 0 },
     CustomColourDPS = { 130 / 255, 99 / 255, 65 / 255 },
@@ -715,6 +716,7 @@ local function CreateCustomFrames()
                 ["labelTwo"] = UI.Label(phb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
                 ["bar"] = UI.StatusBar(phb, nil, nil, nil, false),
                 ["shield"] = UI.StatusBar(phb, nil, nil, nil, true),
+                ["trauma"] = UI.StatusBar(phb, nil, nil, nil, true),
                 ["threshold"] = g_healthThreshold,
             },
             [COMBAT_MECHANIC_FLAGS_MAGICKA] = {
@@ -820,6 +822,7 @@ local function CreateCustomFrames()
                 ["labelTwo"] = UI.Label(thb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
                 ["bar"] = UI.StatusBar(thb, nil, nil, nil, false),
                 ["shield"] = UI.StatusBar(thb, nil, nil, nil, true),
+                ["trauma"] = UI.StatusBar(thb, nil, nil, nil, true),
                 ["threshold"] = g_targetThreshold,
             },
             ["topInfo"] = topInfo,
@@ -887,6 +890,7 @@ local function CreateCustomFrames()
                 ["labelTwo"] = UI.Label(thb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "yy", false),
                 ["bar"] = UI.StatusBar(thb, nil, nil, nil, false),
                 ["shield"] = UI.StatusBar(thb, nil, nil, nil, true),
+                ["trauma"] = UI.StatusBar(thb, nil, nil, nil, true),
                 ["threshold"] = g_targetThreshold,
             },
             ["topInfo"] = topInfo,
@@ -947,6 +951,7 @@ local function CreateCustomFrames()
                     ["labelTwo"] = UI.Label(ghb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
                     ["bar"] = UI.StatusBar(ghb, nil, nil, nil, false),
                     ["shield"] = UI.StatusBar(ghb, nil, nil, nil, true),
+                    ["trauma"] = UI.StatusBar(ghb, nil, nil, nil, true),
                 },
                 ["topInfo"] = topInfo,
                 ["name"] = UI.Label(topInfo, { BOTTOMLEFT, BOTTOMLEFT }, nil, { 0, 4 }, nil, unitTag, false),
@@ -1003,6 +1008,7 @@ local function CreateCustomFrames()
                     ["label"] = UI.Label(rhb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
                     ["bar"] = UI.StatusBar(rhb, nil, nil, nil, false),
                     ["shield"] = UI.StatusBar(rhb, nil, nil, nil, true),
+                    ["trauma"] = UI.StatusBar(rhb, nil, nil, nil, true),
                 },
                 ["name"] = UI.Label(rhb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, unitTag, false),
                 ["roleIcon"] = UI.Texture(rhb, { LEFT, LEFT, 4, 0 }, { 16, 16 }, nil, 2, false),
@@ -1054,6 +1060,7 @@ local function CreateCustomFrames()
                     ["label"] = UI.Label(shb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
                     ["bar"] = UI.StatusBar(shb, nil, nil, nil, false),
                     ["shield"] = UI.StatusBar(shb, nil, nil, nil, true),
+                    ["trauma"] = UI.StatusBar(shb, nil, nil, nil, true),
                 },
                 ["dead"] = UI.Label(shb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "Status", true),
                 ["name"] = UI.Label(shb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, unitTag, false),
@@ -1095,6 +1102,7 @@ local function CreateCustomFrames()
                 ["label"] = UI.Label(shb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
                 ["bar"] = UI.StatusBar(shb, nil, nil, nil, false),
                 ["shield"] = UI.StatusBar(shb, nil, nil, nil, true),
+                ["trauma"] = UI.StatusBar(shb, nil, nil, nil, true),
             },
             ["dead"] = UI.Label(shb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "Status", true),
             ["name"] = UI.Label(shb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, unitTag, false),
@@ -1138,6 +1146,7 @@ local function CreateCustomFrames()
                     ["label"] = UI.Label(bhb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
                     ["bar"] = UI.StatusBar(bhb, nil, nil, nil, false),
                     ["shield"] = UI.StatusBar(bhb, nil, nil, nil, true),
+                    ["trauma"] = UI.StatusBar(bhb, nil, nil, nil, true),
                     ["threshold"] = g_targetThreshold,
                 },
                 ["dead"] = UI.Label(bhb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "Status", true),
@@ -1211,6 +1220,11 @@ local function CreateCustomFrames()
                         if powerBar.enlightenment then
                             powerBar.enlightenment:SetAnchor(TOPLEFT, powerBar.backdrop, TOPLEFT, 1, 1)
                             powerBar.enlightenment:SetAnchor(BOTTOMRIGHT, powerBar.backdrop, BOTTOMRIGHT, -1, -1)
+                        end
+
+                        if powerBar.trauma then
+                            powerBar.trauma:SetAnchor(TOPLEFT, powerBar.backdrop, TOPLEFT, 1, 1)
+                            powerBar.trauma:SetAnchor(BOTTOMRIGHT, powerBar.backdrop, BOTTOMRIGHT, -1, -1)
                         end
 
                         if powerBar.shield then
@@ -1679,19 +1693,19 @@ function UnitFrames.Initialize(enabled)
     UnitFrames.Enabled = true
 
     -- Even if used do not want to use neither DefaultFrames nor CustomFrames, let us still create tables to hold health and shield values
-    -- { powerValue, powerMax, powerEffectiveMax, shield }
-    g_savedHealth.player = { 1, 1, 1, 0 }
-    g_savedHealth.controlledsiege = { 1, 1, 1, 0 }
-    g_savedHealth.reticleover = { 1, 1, 1, 0 }
-    g_savedHealth.companion = { 1, 1, 1, 0 }
+    -- { powerValue, powerMax, powerEffectiveMax, shield, trauma }
+    g_savedHealth.player = { 1, 1, 1, 0, 0 }
+    g_savedHealth.controlledsiege = { 1, 1, 1, 0, 0 }
+    g_savedHealth.reticleover = { 1, 1, 1, 0, 0 }
+    g_savedHealth.companion = { 1, 1, 1, 0, 0 }
     for i = 1, 24 do
-        g_savedHealth["group" .. i] = { 1, 1, 1, 0 }
+        g_savedHealth["group" .. i] = { 1, 1, 1, 0, 0 }
     end
     for i = 1, 6 do
-        g_savedHealth["boss" .. i] = { 1, 1, 1, 0 }
+        g_savedHealth["boss" .. i] = { 1, 1, 1, 0, 0 }
     end
     for i = 1, 6 do
-        g_savedHealth["playerpet" .. i] = { 1, 1, 1, 0 }
+        g_savedHealth["playerpet" .. i] = { 1, 1, 1, 0, 0 }
     end
 
     -- Get execute threshold percentage
@@ -2041,7 +2055,7 @@ end
 function UnitFrames.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax)
     -- Save Health value for future reference -- do it only for tracked unitTags that were defined on initialization
     if powerType == COMBAT_MECHANIC_FLAGS_HEALTH and g_savedHealth[unitTag] then
-        g_savedHealth[unitTag] = { powerValue, powerMax, powerEffectiveMax, g_savedHealth[unitTag][4] or 0 }
+        g_savedHealth[unitTag] = { powerValue, powerMax, powerEffectiveMax, g_savedHealth[unitTag][4] or 0, g_savedHealth[unitTag][5] or 0 }
     end
 
     --[[ DEBUG code. Normally should be commented out because it is redundant
@@ -2057,7 +2071,7 @@ function UnitFrames.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, pow
 
     -- Update frames ( if we manually not forbade it )
     if g_DefaultFrames[unitTag] then
-        UnitFrames.UpdateAttribute(g_DefaultFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == COMBAT_MECHANIC_FLAGS_HEALTH) and g_savedHealth[unitTag][4] or nil, eventCode == nil)
+        UnitFrames.UpdateAttribute(g_DefaultFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == COMBAT_MECHANIC_FLAGS_HEALTH) and g_savedHealth[unitTag][4] or nil, g_savedHealth[unitTag][5] or nil, eventCode == nil)
     end
     if UnitFrames.CustomFrames[unitTag] then
         if unitTag == "reticleover" and powerType == COMBAT_MECHANIC_FLAGS_HEALTH then
@@ -2066,14 +2080,14 @@ function UnitFrames.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, pow
             if (isCritter or isGuard) and powerValue >= 1 then
                 return
             else
-                UnitFrames.UpdateAttribute(UnitFrames.CustomFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == COMBAT_MECHANIC_FLAGS_HEALTH) and g_savedHealth[unitTag][4] or nil, eventCode == nil)
+                UnitFrames.UpdateAttribute(UnitFrames.CustomFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == COMBAT_MECHANIC_FLAGS_HEALTH) and g_savedHealth[unitTag][4] or nil, g_savedHealth[unitTag][5] or nil, eventCode == nil)
             end
         else
-            UnitFrames.UpdateAttribute(UnitFrames.CustomFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == COMBAT_MECHANIC_FLAGS_HEALTH) and g_savedHealth[unitTag][4] or nil, eventCode == nil)
+            UnitFrames.UpdateAttribute(UnitFrames.CustomFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == COMBAT_MECHANIC_FLAGS_HEALTH) and g_savedHealth[unitTag][4] or nil, g_savedHealth[unitTag][5] or nil, eventCode == nil)
         end
     end
     if g_AvaCustFrames[unitTag] then
-        UnitFrames.UpdateAttribute(g_AvaCustFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == COMBAT_MECHANIC_FLAGS_HEALTH) and g_savedHealth[unitTag][4] or nil, eventCode == nil)
+        UnitFrames.UpdateAttribute(g_AvaCustFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == COMBAT_MECHANIC_FLAGS_HEALTH) and g_savedHealth[unitTag][4] or nil, g_savedHealth[unitTag][5] or nil, eventCode == nil)
     end
 
     -- Record state of power loss to change transparency of player frame
@@ -2277,6 +2291,8 @@ end
 function UnitFrames.OnVisualizationAdded(eventCode, unitTag, unitAttributeVisual, statType, attributeType, powerType, value, maxValue)
     if unitAttributeVisual == ATTRIBUTE_VISUAL_POWER_SHIELDING then
         UnitFrames.UpdateShield(unitTag, value, maxValue)
+    elseif unitAttributeVisual == ATTRIBUTE_VISUAL_TRAUMA then
+        UnitFrames.UpdateTrauma(unitTag, value, maxValue)
     elseif unitAttributeVisual == ATTRIBUTE_VISUAL_INCREASED_REGEN_POWER or unitAttributeVisual == ATTRIBUTE_VISUAL_DECREASED_REGEN_POWER then
         UnitFrames.UpdateRegen(unitTag, statType, attributeType, powerType)
     elseif unitAttributeVisual == ATTRIBUTE_VISUAL_INCREASED_STAT or unitAttributeVisual == ATTRIBUTE_VISUAL_DECREASED_STAT then
@@ -2288,6 +2304,8 @@ end
 function UnitFrames.OnVisualizationRemoved(eventCode, unitTag, unitAttributeVisual, statType, attributeType, powerType, value, maxValue)
     if unitAttributeVisual == ATTRIBUTE_VISUAL_POWER_SHIELDING then
         UnitFrames.UpdateShield(unitTag, 0, maxValue)
+    elseif unitAttributeVisual == ATTRIBUTE_VISUAL_TRAUMA then
+        UnitFrames.UpdateTrauma(unitTag, 0, maxValue)
     elseif unitAttributeVisual == ATTRIBUTE_VISUAL_INCREASED_REGEN_POWER or unitAttributeVisual == ATTRIBUTE_VISUAL_DECREASED_REGEN_POWER then
         UnitFrames.UpdateRegen(unitTag, statType, attributeType, powerType)
     elseif unitAttributeVisual == ATTRIBUTE_VISUAL_INCREASED_STAT or unitAttributeVisual == ATTRIBUTE_VISUAL_DECREASED_STAT then
@@ -2299,6 +2317,8 @@ end
 function UnitFrames.OnVisualizationUpdated(eventCode, unitTag, unitAttributeVisual, statType, attributeType, powerType, oldValue, newValue, oldMaxValue, newMaxValue)
     if unitAttributeVisual == ATTRIBUTE_VISUAL_POWER_SHIELDING then
         UnitFrames.UpdateShield(unitTag, newValue, newMaxValue)
+    elseif unitAttributeVisual == ATTRIBUTE_VISUAL_TRAUMA then
+        UnitFrames.UpdateTrauma(unitTag, newValue, maxMaxValue)
     elseif unitAttributeVisual == ATTRIBUTE_VISUAL_INCREASED_REGEN_POWER or unitAttributeVisual == ATTRIBUTE_VISUAL_DECREASED_REGEN_POWER then
         UnitFrames.UpdateRegen(unitTag, statType, attributeType, powerType)
     elseif unitAttributeVisual == ATTRIBUTE_VISUAL_INCREASED_STAT or unitAttributeVisual == ATTRIBUTE_VISUAL_DECREASED_STAT then
@@ -2454,7 +2474,7 @@ function UnitFrames.OnReticleTargetChanged(eventCode)
 
     -- Target is invalid: reset stored values to defaults
     else
-        g_savedHealth.reticleover = { 1, 1, 1, 0 }
+        g_savedHealth.reticleover = { 1, 1, 1, 0, 0 }
 
         --[[ Removed due to causing custom UI elements to abruptly fade out. Left here in case there is any reason to re-enable.
         if g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH] then
@@ -2530,6 +2550,10 @@ function UnitFrames.ReloadValues(unitTag)
     -- Update shield value on controls; this will also update health attribute value, again.
     local shield, _ = GetUnitAttributeVisualizerEffectInfo(unitTag, ATTRIBUTE_VISUAL_POWER_SHIELDING, STAT_MITIGATION, ATTRIBUTE_HEALTH, COMBAT_MECHANIC_FLAGS_HEALTH)
     UnitFrames.UpdateShield(unitTag, shield or 0, nil)
+
+    -- Update trauma value on controls
+    local trauma, _ = GetUnitAttributeVisualizerEffectInfo(unitTag, ATTRIBUTE_VISUAL_TRAUMA, STAT_MITIGATION, ATTRIBUTE_HEALTH, COMBAT_MECHANIC_FLAGS_HEALTH)
+    UnitFrames.UpdateTrauma(unitTag, trauma or 0, nil)
 
     -- Now we need to update Name labels, classIcon
     UnitFrames.UpdateStaticControls(g_DefaultFrames[unitTag])
@@ -2820,7 +2844,7 @@ end
 
 -- Updates single attribute.
 -- Usually called from OnPowerUpdate handler.
-function UnitFrames.UpdateAttribute(attributeFrame, powerValue, powerEffectiveMax, shield, forceInit)
+function UnitFrames.UpdateAttribute(attributeFrame, powerValue, powerEffectiveMax, shield, trauma, forceInit)
     if attributeFrame == nil then
         return
     end
@@ -2829,6 +2853,7 @@ function UnitFrames.UpdateAttribute(attributeFrame, powerValue, powerEffectiveMa
 
     -- Update text values for this attribute. can be on up to 3 different labels
     local shield = (shield and shield > 0) and shield or nil
+    local trauma = (trauma and trauma > 0) and trauma or nil
 
     if UnitFrames.CustomFrames and UnitFrames.CustomFrames["reticleover"] and attributeFrame == UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH] and IsUnitInvulnerableGuard("reticleover") then
         for _, label in pairs({ "label", "labelOne", "labelTwo" }) do
@@ -2900,16 +2925,42 @@ function UnitFrames.UpdateShield(unitTag, value, maxValue)
     local healthValue, _, healthEffectiveMax, _ = unpack(g_savedHealth[unitTag])
     -- Update frames
     if g_DefaultFrames[unitTag] then
-        UnitFrames.UpdateAttribute(g_DefaultFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH], healthValue, healthEffectiveMax, value, false)
+        UnitFrames.UpdateAttribute(g_DefaultFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH], healthValue, healthEffectiveMax, value, g_savedHealth[unitTag][5] or nil, false)
         UnitFrames.UpdateShieldBar(g_DefaultFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH], value, healthEffectiveMax)
     end
     if UnitFrames.CustomFrames[unitTag] then
-        UnitFrames.UpdateAttribute(UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH], healthValue, healthEffectiveMax, value, false)
+        UnitFrames.UpdateAttribute(UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH], healthValue, healthEffectiveMax, value, g_savedHealth[unitTag][5] or nil, false)
         UnitFrames.UpdateShieldBar(UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH], value, healthEffectiveMax)
     end
     if g_AvaCustFrames[unitTag] then
-        UnitFrames.UpdateAttribute(g_AvaCustFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH], healthValue, healthEffectiveMax, value, false)
+        UnitFrames.UpdateAttribute(g_AvaCustFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH], healthValue, healthEffectiveMax, value, g_savedHealth[unitTag][5] or nil, false)
         UnitFrames.UpdateShieldBar(g_AvaCustFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH], value, healthEffectiveMax)
+    end
+end
+
+-- Updates trauma value for given unit.
+-- Called from EVENT_UNIT_ATTRIBUTE_VISUAL_* listeners.
+function UnitFrames.UpdateTrauma(unitTag, value, maxValue)
+    if g_savedHealth[unitTag] == nil then
+        --d( "LUIE DEBUG: Stored health is nil: ", unitTag )
+        return
+    end
+
+    g_savedHealth[unitTag][5] = value
+
+    local healthValue, _, healthEffectiveMax, _ = unpack(g_savedHealth[unitTag])
+    -- Update frames
+    if g_DefaultFrames[unitTag] then
+        UnitFrames.UpdateAttribute(g_DefaultFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH], healthValue, healthEffectiveMax, g_savedHealth[unitTag][4] or nil, value, false)
+        UnitFrames.UpdateTraumaBar(g_DefaultFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH], value, healthEffectiveMax)
+    end
+    if UnitFrames.CustomFrames[unitTag] then
+        UnitFrames.UpdateAttribute(UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH], healthValue, healthEffectiveMax, g_savedHealth[unitTag][4] or nil, value, false)
+        UnitFrames.UpdateTraumaBar(UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH], value, healthEffectiveMax)
+    end
+    if g_AvaCustFrames[unitTag] then
+        UnitFrames.UpdateAttribute(g_AvaCustFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH], healthValue, healthEffectiveMax, g_savedHealth[unitTag][4] or nil, value, false)
+        UnitFrames.UpdateTraumaBar(g_AvaCustFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH], value, healthEffectiveMax)
     end
 end
 
@@ -2937,6 +2988,29 @@ function UnitFrames.UpdateShieldBar(attributeFrame, shieldValue, healthEffective
     if attributeFrame.shieldbackdrop then
         attributeFrame.shieldbackdrop:SetHidden(hideShield)
     end
+end
+
+-- Here actual update of trauma bar on attribute is done
+function UnitFrames.UpdateTraumaBar(attributeFrame, traumaValue, healthEffectiveMax)
+    if attributeFrame == nil or attributeFrame.trauma == nil then
+        return
+    end
+
+    local hideTrauma = not (traumaValue > 0)
+
+    if hideTrauma then
+        attributeFrame.trauma:SetValue(0)
+    else
+        if UnitFrames.SV.CustomSmoothBar then
+            -- Make it twice faster then default UI ones: last argument .085
+            ZO_StatusBar_SmoothTransition(attributeFrame.trauma, traumaValue, healthEffectiveMax, false, nil, 250)
+        else
+            attributeFrame.trauma:SetMinMax(0, healthEffectiveMax)
+            attributeFrame.trauma:SetValue(traumaValue)
+        end
+    end
+
+    attributeFrame.trauma:SetHidden(hideTrauma)
 end
 
 -- Reroutes call for regen/degen animation for given unit.
@@ -3937,6 +4011,12 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
         UnitFrames.SV.CustomColourShield[2],
         UnitFrames.SV.CustomColourShield[3],
         0,
+    }
+    local trauma = {
+        UnitFrames.SV.CustomColourTrauma[1],
+        UnitFrames.SV.CustomColourTrauma[2],
+        UnitFrames.SV.CustomColourTrauma[3],
+        0.9,
     } -- .a value will be fixed in the loop
     local magicka = {
         UnitFrames.SV.CustomColourMagicka[1],
@@ -4136,6 +4216,7 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
                 thb.bar:SetColor(unpack(health))
                 thb.backdrop:SetCenterColor(unpack(health_bg))
                 thb.shield:SetColor(unpack(shield))
+                thb.trauma:SetColor(unpack(trauma))
                 if thb.shieldbackdrop then
                     thb.shieldbackdrop:SetCenterColor(unpack(shield_bg))
                 end
@@ -4187,6 +4268,7 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
             shb.backdrop:SetCenterColor(unpack(petcolor_bg))
         end
         shb.shield:SetColor(unpack(shield))
+        shb.trauma:SetColor(unpack(trauma))
         if shb.shieldbackdrop then
             shb.shieldbackdrop:SetCenterColor(unpack(shield_bg))
         end
@@ -4236,6 +4318,7 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
                 shb.backdrop:SetCenterColor(unpack(companioncolor_bg))
             end
             shb.shield:SetColor(unpack(shield))
+            shb.trauma:SetColor(unpack(trauma))
             if shb.shieldbackdrop then
                 shb.shieldbackdrop:SetCenterColor(unpack(shield_bg))
             end
@@ -4352,6 +4435,7 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
                     thb.backdrop:SetCenterColor(unpack(health_bg))
                 end
                 thb.shield:SetColor(unpack(shield))
+                thb.trauma:SetColor(unpack(trauma))
                 if thb.shieldbackdrop then
                     thb.shieldbackdrop:SetCenterColor(unpack(shield_bg))
                 end
@@ -4710,6 +4794,7 @@ function UnitFrames.CustomFramesApplyTexture()
             UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_HEALTH].shieldbackdrop:SetCenterTexture(texture)
         end
         UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
+        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_HEALTH].trauma:SetTexture(texture)
         UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_MAGICKA].backdrop:SetCenterTexture(texture)
         UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_MAGICKA].bar:SetTexture(texture)
         UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_STAMINA].backdrop:SetCenterTexture(texture)
@@ -4726,6 +4811,7 @@ function UnitFrames.CustomFramesApplyTexture()
             UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].shieldbackdrop:SetCenterTexture(texture)
         end
         UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
+        UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].trauma:SetTexture(texture)
         UnitFrames.CustomFrames.reticleover.tlw:SetHidden(false)
     end
     if UnitFrames.CustomFrames.AvaPlayerTarget then
@@ -4735,12 +4821,14 @@ function UnitFrames.CustomFramesApplyTexture()
             UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].shieldbackdrop:SetCenterTexture(texture)
         end
         UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
+        UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].trauma:SetTexture(texture)
         UnitFrames.CustomFrames.AvaPlayerTarget.tlw:SetHidden(false)
     end
     if UnitFrames.CustomFrames.companion then
         UnitFrames.CustomFrames.companion[COMBAT_MECHANIC_FLAGS_HEALTH].backdrop:SetCenterTexture(texture)
         UnitFrames.CustomFrames.companion[COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetTexture(texture)
         UnitFrames.CustomFrames.companion[COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
+        UnitFrames.CustomFrames.companion[COMBAT_MECHANIC_FLAGS_HEALTH].trauma:SetTexture(texture)
         UnitFrames.CustomFrames.companion.tlw:SetHidden(false)
     end
     if UnitFrames.CustomFrames.SmallGroup1 then
@@ -4752,6 +4840,7 @@ function UnitFrames.CustomFramesApplyTexture()
                 UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].shieldbackdrop:SetCenterTexture(texture)
             end
             UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
+            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].trauma:SetTexture(texture)
         end
         UnitFrames.CustomFrames.SmallGroup1.tlw:SetHidden(false)
     end
@@ -4761,6 +4850,7 @@ function UnitFrames.CustomFramesApplyTexture()
             UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop:SetCenterTexture(texture)
             UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetTexture(texture)
             UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
+            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].trauma:SetTexture(texture)
         end
         UnitFrames.CustomFrames.RaidGroup1.tlw:SetHidden(false)
     end
@@ -4770,6 +4860,7 @@ function UnitFrames.CustomFramesApplyTexture()
             UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop:SetCenterTexture(texture)
             UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetTexture(texture)
             UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
+            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].trauma:SetTexture(texture)
         end
         UnitFrames.CustomFrames.PetGroup1.tlw:SetHidden(false)
     end
@@ -4779,6 +4870,7 @@ function UnitFrames.CustomFramesApplyTexture()
             UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop:SetCenterTexture(texture)
             UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetTexture(texture)
             UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
+            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].trauma:SetTexture(texture)
         end
         UnitFrames.CustomFrames.boss1.tlw:SetHidden(false)
     end

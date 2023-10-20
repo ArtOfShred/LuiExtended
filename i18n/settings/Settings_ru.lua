@@ -1423,6 +1423,7 @@ local strings = {
     SI_LUIE_LAM_UF_CFRAMES_COLOR_HEADER = "Цвета настраиваемых фреймов юнитов",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_HEALTH = "Цвет полоски ЗДОРОВЬЯ",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_SHIELD = "Цвет полоски ЩИТА",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_TRAUMA = "Trauma Bar Color",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_MAGICKA = "Цвет полоски МАГИИ",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_STAMINA = "Цвет полоски ЗАПАСА СИЛ",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_DPS = "Цвет Бойца",

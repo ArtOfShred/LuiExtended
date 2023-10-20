@@ -1423,6 +1423,7 @@ local strings = {
     SI_LUIE_LAM_UF_CFRAMES_COLOR_HEADER = "Custom Unit Frame Color Options",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_HEALTH = "Health Bar Color",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_SHIELD = "Shield Bar Color",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_TRAUMA = "Trauma Bar Color",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_MAGICKA = "Magicka Bar Color",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_STAMINA = "Stamina Bar Color",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_DPS = "DPS Role Color",
