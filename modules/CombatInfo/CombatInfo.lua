@@ -560,7 +560,7 @@ end
 
 function CombatInfo.HookGCD()
     -- Hook to update GCD support
----@diagnostic disable-next-line: duplicate-set-field
+    ---@diagnostic disable-next-line: duplicate-set-field
     ActionButton.UpdateUsable = function(self)
         local slotnum = self:GetSlot()
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or g_hotbarCategory
@@ -588,7 +588,7 @@ function CombatInfo.HookGCD()
     end
 
     -- Hook to update GCD support
----@diagnostic disable-next-line: duplicate-set-field
+    ---@diagnostic disable-next-line: duplicate-set-field
     ActionButton.UpdateCooldown = function(self, options)
         local slotnum = self:GetSlot()
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or g_hotbarCategory
@@ -970,7 +970,7 @@ function CombatInfo.OnUpdate(currentTime)
     -- Quickslot cooldown
     if CombatInfo.SV.PotionTimerShow then
         local slotIndex = GetCurrentQuickslot()
-        local remain, duration, global = GetSlotCooldownInfo(slotIndex, HOTBAR_CATEGORY_QUICKSLOT_WHEEL)
+        local remain, duration, _ = GetSlotCooldownInfo(slotIndex, HOTBAR_CATEGORY_QUICKSLOT_WHEEL)
         local label = uiQuickSlot.label
         local timeColours = uiQuickSlot.timeColours
         if duration > 5000 then
@@ -1047,7 +1047,6 @@ end
 
 local function CastBarWorldMapFix()
     g_castbarWorldMapFix = false
-    ---@diagnostic disable-next-line: missing-parameter
     eventManager:UnregisterForEvent(moduleName .. "CastBarFix")
 end
 

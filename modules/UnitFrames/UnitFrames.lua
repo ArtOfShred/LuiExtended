@@ -635,7 +635,6 @@ local function CreateDefaultFrames()
 
     -- When default Target frame is enabled set the threshold value to change colour of label and add label to default fade list
     if g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH] then
-        ---@diagnostic disable-next-line: inject-field
         g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].threshold = g_targetThreshold
         table.insert(g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].label)
     end
@@ -2894,15 +2893,23 @@ function UnitFrames.UpdateAttribute(unitTag, powerType, attributeFrame, powerVal
             if attributeFrame[label] ~= nil then
                 -- Format specific to selected label
                 local fmt = tostring(attributeFrame[label].fmt or UnitFrames.SV.Format)
-                local str = fmt:gsub("Percentage", tostring(pct)):gsub("Max", AbbreviateNumber(powerEffectiveMax, UnitFrames.SV.ShortenNumbers, true)):gsub("Current", AbbreviateNumber(powerValue, UnitFrames.SV.ShortenNumbers, true)):gsub("+ Shield", shield
-                and ("+ " .. AbbreviateNumber(shield, UnitFrames.SV.ShortenNumbers, true)) or ""):gsub("- Trauma", trauma and ("- (" .. AbbreviateNumber(trauma, UnitFrames.SV.ShortenNumbers, true) .. ")" ) or ""):gsub("Nothing", ""):gsub("  ", " ")
+                local str = zo_strgsub(fmt, "Percentage", tostring(pct))
+                str = zo_strgsub(str, "Max", AbbreviateNumber(powerEffectiveMax, UnitFrames.SV.ShortenNumbers, true))
+                str = zo_strgsub(str, "Current", AbbreviateNumber(powerValue, UnitFrames.SV.ShortenNumbers, true))
+                str = zo_strgsub(str, "+ Shield", shield and ("+ " .. AbbreviateNumber(shield, UnitFrames.SV.ShortenNumbers, true)) or "")
+                str = zo_strgsub(str, "- Trauma", trauma and ("- (" .. AbbreviateNumber(trauma, UnitFrames.SV.ShortenNumbers, true) .. ")") or "")
+                str = zo_strgsub(str, "Nothing", "")
+                str = zo_strgsub(str, "  ", " ")
+
                 -- Change text
                 attributeFrame[label]:SetText(str)
+
                 -- Don't update if dead
                 if (label == "labelOne" or label == "labelTwo") and UnitFrames.CustomFrames and UnitFrames.CustomFrames["reticleover"] and attributeFrame == UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH] and powerValue == 0 then
                     attributeFrame[label]:SetHidden(true)
                 end
-                -- And colour it RED if attribute value is lower then threshold
+
+                -- And colour it RED if attribute value is lower than the threshold
                 attributeFrame[label]:SetColor(unpack((pct < (attributeFrame.threshold or g_defaultThreshold)) and { 1, 0.25, 0.38 } or attributeFrame.colour or { 1, 1, 1 }))
             end
         end
@@ -3371,7 +3378,6 @@ function UnitFrames.CustomFramesSetupAlternative(isWerewolf, isSiege, isMounted)
         colour = { 0.8, 0, 0, 0.9 }
 
         UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_WEREWOLF] = nil
-        ---@diagnostic disable-next-line: assign-type-mismatch
         UnitFrames.CustomFrames.controlledsiege[COMBAT_MECHANIC_FLAGS_HEALTH] = UnitFrames.CustomFrames.player.alternative
         UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_MOUNT_STAMINA] = nil
         UnitFrames.CustomFrames.player.ChampionXP = nil
@@ -5900,7 +5906,6 @@ function UnitFrames.CustomFramesReloadExecuteMenu()
     g_targetThreshold = UnitFrames.SV.ExecutePercentage
 
     if g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH] then
-        ---@diagnostic disable-next-line: inject-field
         g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].threshold = g_targetThreshold
     end
     if UnitFrames.CustomFrames["reticleover"] and UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH] then

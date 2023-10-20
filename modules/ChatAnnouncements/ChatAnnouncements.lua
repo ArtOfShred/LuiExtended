@@ -1074,7 +1074,7 @@ function ChatAnnouncements.RegisterQuestEvents()
         if IsValidQuestIndex(i) then
             local name = GetJournalQuestName(i)
             local questType = GetJournalQuestType(i)
-            local instanceDisplayType = GetJournalQuestInstanceDisplayType(i) --TODO: Removed in Update 40
+            local instanceDisplayType = GetJournalInstanceDisplayType(i) --TODO: Removed in Update 40
 
             if name == "" then
                 name = GetString(SI_QUEST_JOURNAL_UNKNOWN_QUEST_NAME)

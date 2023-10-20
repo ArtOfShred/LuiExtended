@@ -28,7 +28,6 @@ local raidIconOptionsKeys = {
 }
 local playerFrameOptions = { "Vertical Stacked Frames", "Separated Horizontal Frames", "Pyramid" }
 local playerFrameOptionsKeys = { ["Vertical Stacked Frames"] = 1, ["Separated Horizontal Frames"] = 2, ["Pyramid"] = 3 }
-local championOptions = { "Show Above Cap", "Limit to Cap" }
 local resolutionOptions = { "1080p", "1440p", "4K" }
 local resolutionOptionsKeys = { ["1080p"] = 1, ["1440p"] = 2, ["4K"] = 3 }
 local alignmentOptions = { "Left to Right (Default)", "Right to Left", "Center" }
@@ -362,6 +361,7 @@ function UnitFrames.CreateSettings()
                 name = GetString(SI_LUIE_LAM_UF_DFRAMES_LABEL),
                 tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_LABEL_TP),
                 choices = formatOptions,
+                sort = "name-up",
                 getFunc = function()
                     return Settings.Format
                 end,
@@ -1257,6 +1257,7 @@ function UnitFrames.CreateSettings()
                 name = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_PLAYER),
                 tooltip = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_PLAYER_TP),
                 choices = nameDisplayOptions,
+                sort = "name-up",
                 getFunc = function()
                     return nameDisplayOptions[Settings.DisplayOptionsPlayer]
                 end,
@@ -1276,6 +1277,7 @@ function UnitFrames.CreateSettings()
                 name = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_TARGET),
                 tooltip = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_TARGET_TP),
                 choices = nameDisplayOptions,
+                sort = "name-up",
                 getFunc = function()
                     return nameDisplayOptions[Settings.DisplayOptionsTarget]
                 end,
@@ -1295,6 +1297,7 @@ function UnitFrames.CreateSettings()
                 name = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_LEFT),
                 tooltip = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_LEFT_TP),
                 choices = formatOptions,
+                sort = "name-up",
                 getFunc = function()
                     return Settings.CustomFormatOnePT
                 end,
@@ -1315,6 +1318,7 @@ function UnitFrames.CreateSettings()
                 name = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_RIGHT),
                 tooltip = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_RIGHT_TP),
                 choices = formatOptions,
+                sort = "name-up",
                 getFunc = function()
                     return Settings.CustomFormatTwoPT
                 end,

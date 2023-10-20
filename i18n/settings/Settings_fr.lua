@@ -203,7 +203,7 @@ local strings = {
     SI_LUIE_LAM_BUFF_SORTING_SORT_VERTICAL = "<<1>> Tri vertical",
     SI_LUIE_LAM_BUFF_SORTING_SORT_VERTICAL_TP = "Choisir la direction horizontale dans laquelle les icônes sont triées dans le conteneur <<1>>.",
     SI_LUIE_LAM_BUFF_SORTING_UNANCHORED_HEADER = "Player/Target (Unachored Frames Only)",
-    SI_LUIE_LAM_BUFF_SORTING_UNANCHORED_DESCRIPTION = "Customization options for the Player/Target Buff & Debuff Frames when the option to Anchor the Buff & Debuff Frames to custom player frames is disabled.\nNote: You can set the \"Width\" field to the lowest value to make the icons stack vertically.",
+    SI_LUIE_LAM_BUFF_SORTING_UNANCHORED_DESCRIPTION = 'Customization options for the Player/Target Buff & Debuff Frames when the option to Anchor the Buff & Debuff Frames to custom player frames is disabled.\nNote: You can set the "Width" field to the lowest value to make the icons stack vertically.',
     SI_LUIE_LAM_BUFF_SORTING_LONGTERM_HEADER = "Bonus du joueur à effet long",
     SI_LUIE_LAM_BUFF_SORTING_PROMINET_HEADER = "Bonus & Malus importants",
 
