@@ -191,6 +191,7 @@ UnitFrames.Defaults = {
     LowResourceStamina = 25,
     LowResourceMagicka = 25,
     ShieldAlpha = 50,
+    TraumaAlpha = 50,
     ResolutionOptions = 1,
     ReverseResourceBars = false,
     CustomFramesPet = true,
@@ -1595,6 +1596,7 @@ function UnitFrames.CustomFramesApplyBarAlignment()
         local hpBar = UnitFrames.CustomFrames["player"][COMBAT_MECHANIC_FLAGS_HEALTH]
         if hpBar then
             hpBar.bar:SetBarAlignment(UnitFrames.SV.BarAlignPlayerHealth - 1)
+            hpBar.trauma:SetBarAlignment(UnitFrames.SV.BarAlignPlayerHealth - 1)
         end
         local magBar = UnitFrames.CustomFrames["player"][COMBAT_MECHANIC_FLAGS_MAGICKA]
         if magBar then
@@ -1609,6 +1611,7 @@ function UnitFrames.CustomFramesApplyBarAlignment()
         local hpBar = UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH]
         if hpBar then
             hpBar.bar:SetBarAlignment(UnitFrames.SV.BarAlignTarget - 1)
+            hpBar.trauma:SetBarAlignment(UnitFrames.SV.BarAlignTarget - 1)
         end
     end
 end
@@ -4208,6 +4211,7 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
     -- After colour is applied unhide frames, so player can see changes even from menu
     for _, baseName in pairs({ "player", "reticleover", "boss", "AvaPlayerTarget" }) do
         shield[4] = (UnitFrames.SV.CustomShieldBarSeparate and not (baseName == "boss")) and 0.9 or (UnitFrames.SV.ShieldAlpha / 100)
+        trauma[4] = UnitFrames.SV.ShieldAlpha / 100
         for i = 0, 6 do
             local unitTag = (i == 0) and baseName or (baseName .. i)
             if UnitFrames.CustomFrames[unitTag] then
@@ -4335,6 +4339,7 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
     local incrementMarker = 0 -- Marker -- Once we reach this value in iteration, we have to add +1 to default unitTag index for all other units.
     for _, baseName in pairs({ "SmallGroup", "RaidGroup" }) do
         shield[4] = (UnitFrames.SV.CustomShieldBarSeparate and not (baseName == "RaidGroup")) and 0.9 or (UnitFrames.SV.ShieldAlpha / 100)
+        trauma[4] = UnitFrames.SV.ShieldAlpha / 100
 
         -- Extra loop if player is excluded in Small Group Frames
         if UnitFrames.SV.GroupExcludePlayer and not (baseName == "RaidGroup") then
