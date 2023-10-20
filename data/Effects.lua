@@ -1176,6 +1176,10 @@ Effects.AddNoDurationBarHighlight = {
     [124165] = true, -- Deaden Pain
     [124193] = true, -- Necrotic Potency
     [118814] = true, -- Enduring Undeath
+
+    -- Grim Focus
+    [122585] = true, -- Grim Focus
+
 }
 
 -- Also track this id on bar highlight
@@ -1363,7 +1367,7 @@ Effects.BarHighlightOverride = {
     [33375] = { newId = 61716 }, -- Blur --> Major Evasion
     [35414] = { newId = 61716 }, -- Mirage --> Major Evasion
     [35419] = { newId = 125314, noRemove = true }, -- Phantasmal Escape --> Major Evasion
-    [61907] = { newId = 61902 }, -- Grim Focus --> Assassin's Will
+    [61902] = { newId = 122585 }, -- Grim Focus --> Assassin's Will
     [61932] = { newId = 61927 }, -- Relentless Focus --> Assassin's Scourge
     [61930] = { newId = 61919 }, -- Merciless Resolve --> Assassin's Will
     [33398] = { newId = 61389 }, -- Death Stroke --> Damage Taken Increased

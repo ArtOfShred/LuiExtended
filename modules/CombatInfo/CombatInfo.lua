@@ -360,9 +360,9 @@ local isStackCounter = {
 }
 
 local isStackBaseAbility = {
-    [61902] = true, -- Grim Focus
-    [61927] = true, -- Relentless Focus
-    [61919] = true, -- Merciless Resolve
+    --[61902] = true, -- Grim Focus
+    --[61927] = true, -- Relentless Focus
+    --[61919] = true, -- Merciless Resolve
     [24165] = true, -- Bound Armaments
 }
 
@@ -918,6 +918,15 @@ local savedPlayerZ = 0
 local playerX
 local playerZ
 
+-- Hide duration label if the ability is Grim Focus or one of its morphs
+local function SetBarRemainLabel(remain, abilityId)
+    if Effects.IsGrimFocus[abilityId] then
+        return ""
+    else
+        return FormatDurationSeconds(remain)
+    end
+end
+
 -- Updates all floating labels. Called every 100ms
 function CombatInfo.OnUpdate(currentTime)
     -- Procs
@@ -940,10 +949,10 @@ function CombatInfo.OnUpdate(currentTime)
         -- Update Label (FRONT)(BACK)
         if CombatInfo.SV.BarShowLabel and remain then
             if frontAnim then
-                frontAnim.procLoopTexture.label:SetText(FormatDurationSeconds(remain))
+                frontAnim.procLoopTexture.label:SetText(SetBarRemainLabel(remain, k))
             end
             if backAnim then
-                backAnim.procLoopTexture.label:SetText(FormatDurationSeconds(remain))
+                backAnim.procLoopTexture.label:SetText(SetBarRemainLabel(remain, k))
             end
         end
     end
@@ -968,10 +977,10 @@ function CombatInfo.OnUpdate(currentTime)
         -- Update Label (BACK)
         if CombatInfo.SV.BarShowLabel and remain then
             if frontToggle then
-                frontToggle.label:SetText(FormatDurationSeconds(remain))
+                frontToggle.label:SetText(SetBarRemainLabel(remain, k))
             end
             if backToggle then
-                backToggle.label:SetText(FormatDurationSeconds(remain))
+                backToggle.label:SetText(SetBarRemainLabel(remain, k))
             end
         end
     end
@@ -1566,6 +1575,19 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                 end
             end
         end
+        -- Handle proc sound for Grim Focus
+        if Effects.IsGrimFocus[abilityId] then
+            if CombatInfo.SV.ShowTriggered and CombatInfo.SV.ProcEnableSound then
+                if stackCount ~= 5 then
+                    g_boundArmamentsPlayed = false
+                end
+                if stackCount == 5 and not g_boundArmamentsPlayed then
+                    PlaySound(g_ProcSound)
+                    PlaySound(g_ProcSound)
+                    g_boundArmamentsPlayed = true
+                end
+            end
+        end
         -- start any proc animation associated with this effect
         if g_triggeredSlotsFront[abilityId] or g_triggeredSlotsBack[abilityId] then
             local currentTime = GetGameTimeMilliseconds()
@@ -1588,14 +1610,14 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                 if g_triggeredSlotsFront[abilityId] then
                     CombatInfo.PlayProcAnimations(g_triggeredSlotsFront[abilityId])
                     if CombatInfo.SV.BarShowLabel and g_uiProcAnimation[g_triggeredSlotsFront[abilityId]] then
-                        g_uiProcAnimation[g_triggeredSlotsFront[abilityId]].procLoopTexture.label:SetText(FormatDurationSeconds(remain))
+                        g_uiProcAnimation[g_triggeredSlotsFront[abilityId]].procLoopTexture.label:SetText(SetBarRemainLabel(remain, abilityId))
                     end
                 end
                 -- Back
                 if g_triggeredSlotsBack[abilityId] then
                     CombatInfo.PlayProcAnimations(g_triggeredSlotsBack[abilityId])
                     if CombatInfo.SV.BarShowLabel and g_uiProcAnimation[g_triggeredSlotsBack[abilityId]] then
-                        g_uiProcAnimation[g_triggeredSlotsBack[abilityId]].procLoopTexture.label:SetText(FormatDurationSeconds(remain))
+                        g_uiProcAnimation[g_triggeredSlotsBack[abilityId]].procLoopTexture.label:SetText(SetBarRemainLabel(remain, abilityId))
                     end
                 end
             end
@@ -1604,7 +1626,12 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
         if g_toggledSlotsFront[abilityId] or g_toggledSlotsBack[abilityId] then
             local currentTime = GetGameTimeMilliseconds()
             if CombatInfo.SV.ShowToggled then
-                g_toggledSlotsRemain[abilityId] = 1000 * endTime
+                -- Add fake duration to Grim Focus so the highlight stays
+                if Effects.IsGrimFocus[abilityId] then
+                    g_toggledSlotsRemain[abilityId] = currentTime + 900000
+                else
+                    g_toggledSlotsRemain[abilityId] = 1000 * endTime
+                end
                 -- Don't modify stacks for Grim Focus since we use the actual stack ids to handle this
                 if not isStackBaseAbility[abilityId] then
                     g_toggledSlotsStack[abilityId] = stackCount
@@ -1685,7 +1712,7 @@ function CombatInfo.ShowSlot(slotNum, abilityId, currentTime, desaturate)
             return
         end
         local remain = g_toggledSlotsRemain[abilityId] - currentTime
-        g_uiCustomToggle[slotNum].label:SetText(FormatDurationSeconds(remain))
+        g_uiCustomToggle[slotNum].label:SetText(SetBarRemainLabel(remain, abilityId))
         if g_toggledSlotsStack[abilityId] and g_toggledSlotsStack[abilityId] > 0 then
             g_uiCustomToggle[slotNum].stack:SetText(g_toggledSlotsStack[abilityId])
         elseif g_mineStacks[abilityId] and g_mineStacks[abilityId] > 0 then
@@ -2408,7 +2435,7 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
                         return
                     end
                     local remain = g_triggeredSlotsRemain[proc] - currentTime
-                    g_uiProcAnimation[slotNum].procLoopTexture.label:SetText(FormatDurationSeconds(remain))
+                    g_uiProcAnimation[slotNum].procLoopTexture.label:SetText(SetBarRemainLabel(remain, ability_id))
                 end
             end
         end
