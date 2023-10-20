@@ -83,7 +83,7 @@ UnitFrames.Defaults = {
     CustomOocAlphaPower = true,
     CustomColourHealth = { 202 / 255, 20 / 255, 0 },
     CustomColourShield = { 1, 192 / 255, 0 }, -- .a=0.5 for overlay and .a = 1 for separate
-    CustomColourTrauma = { 100 / 255, 0, 0 }, -- .a=0.5 for overlay and .a = 1 for separate
+    CustomColourTrauma = { 48 / 255, 0, 99 / 255 }, -- .a=0.5 for overlay and .a = 1 for separate
     CustomColourMagicka = { 0, 83 / 255, 209 / 255 },
     CustomColourStamina = { 28 / 255, 177 / 255, 0 },
     CustomColourDPS = { 130 / 255, 99 / 255, 65 / 255 },
