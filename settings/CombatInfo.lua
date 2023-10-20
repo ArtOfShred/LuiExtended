@@ -464,12 +464,6 @@ function CombatInfo.CreateSettings()
                     Settings.ShowToggled = value
                     CombatInfo.UpdateBarHighlightTables()
                     CombatInfo.OnSlotsFullUpdate()
-                    -- Disable back bar if Toggled is not enabled
-                    if not (Settings.ShowToggled) then
-                        Settings.BarShowBack = false
-                        CombatInfo.OnSlotsFullUpdate()
-                        CombatInfo.BackbarToggleSettings()
-                    end
                 end,
                 width = "full",
                 default = Defaults.ShowToggled,
@@ -673,7 +667,7 @@ function CombatInfo.CreateSettings()
                 width = "full",
                 default = Defaults.BarShowBack,
                 disabled = function()
-                    return not (Settings.ShowToggled and LUIE.SV.CombatInfo_Enabled)
+                    return not LUIE.SV.CombatInfo_Enabled
                 end,
             },
             {
@@ -692,7 +686,7 @@ function CombatInfo.CreateSettings()
                 width = "full",
                 default = Defaults.BarDarkUnused,
                 disabled = function()
-                    return not (Settings.ShowToggled and Settings.BarShowBack and LUIE.SV.CombatInfo_Enabled)
+                    return not (Settings.BarShowBack and LUIE.SV.CombatInfo_Enabled)
                 end,
             },
             {
@@ -711,7 +705,7 @@ function CombatInfo.CreateSettings()
                 width = "full",
                 default = Defaults.BarDesaturateUnused,
                 disabled = function()
-                    return not (Settings.ShowToggled and Settings.BarShowBack and LUIE.SV.CombatInfo_Enabled)
+                    return not (Settings.BarShowBack and LUIE.SV.CombatInfo_Enabled)
                 end,
             },
             {
@@ -730,7 +724,7 @@ function CombatInfo.CreateSettings()
                 width = "full",
                 default = Defaults.BarHideUnused,
                 disabled = function()
-                    return not (Settings.ShowToggled and Settings.BarShowBack and LUIE.SV.CombatInfo_Enabled)
+                    return not (Settings.BarShowBack and LUIE.SV.CombatInfo_Enabled)
                 end,
             },
         },
