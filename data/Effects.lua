@@ -2501,6 +2501,13 @@ Effects.IsAbilityActiveHighlight = {
     [81420] = true, -- Stalwart Guard (Stalwart Guard)
 }
 
+Effects.RemoveAbilityActiveHighlight = {
+    -- Vampire
+    [132141] = true, -- Blood Frenzy
+    [134160] = true, -- Simmering Frenzy
+    [135841] = true, -- Sated Fury
+}
+
 Effects.IsAbilityActiveGlow = {
 
     [20824] = true, -- Power Lash (Flame Lash)

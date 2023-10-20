@@ -460,8 +460,15 @@ function LUIE.InitializeHooks()
         self:UpdateUseFailure()
 
         local hidden = true
-        if IsSlotToggled(slotnum, hotbarCategory) == true or LUIE.Data.Effects.IsAbilityActiveHighlight[abilityId] == true then
+
+        -- Add toggle highlight for abilites that need it (Guard + morphs)
+        if IsSlotToggled(slotnum, hotbarCategory) == true or LUIE.Data.Effects.IsAbilityActiveHighlight[abilityId] then
             hidden = false
+        end
+
+        -- If LUIE Bar Highlight is enabled, hide certain "Toggle effects" (aka Blood Frenzy + morphs)
+        if IsSlotToggled(slotnum, hotbarCategory) == true and LUIE.Data.Effects.RemoveAbilityActiveHighlight[abilityId] and LUIE.CombatInfo.SV.ShowToggled then
+            hidden = true
         end
 
         self.status:SetHidden(hidden)
