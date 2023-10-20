@@ -38,14 +38,22 @@ local formatOptions = {
     "Nothing",
     "Current",
     "Current + Shield",
+    "Current - Trauma",
+    "Current + Shield - Trauma",
     "Max",
     "Percentage%",
     "Current / Max",
     "Current + Shield / Max",
+    "Current - Trauma / Max",
+    "Current + Shield - Trauma / Max",
     "Current / Max (Percentage%)",
     "Current + Shield / Max (Percentage%)",
+    "Current - Trauma / Max (Percentage%)",
+    "Current + Shield - Trauma / Max (Percentage%)",
     "Current (Percentage%)",
     "Current + Shield (Percentage%)",
+    "Current - Trauma (Percentage%)",
+    "Current + Shield - Trauma (Percentage%)",
 }
 
 local Whitelist, WhitelistValues = {}, {}
@@ -688,27 +696,6 @@ function UnitFrames.CreateSettings()
                 default = Defaults.ShieldAlpha,
                 disabled = function()
                     return not (LUIE.SV.UnitFrames_Enabled and not Settings.CustomShieldBarSeparate)
-                end,
-            },
-            {
-                -- Trauma Transparency
-                type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_TRAUMA_ALPHA),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_TRAUMA_ALPHA_TP),
-                min = 0,
-                max = 100,
-                step = 1,
-                getFunc = function()
-                    return Settings.TraumaAlpha
-                end,
-                setFunc = function(value)
-                    Settings.TraumaAlpha = value
-                    UnitFrames.CustomFramesApplyColours(true)
-                end,
-                width = "full",
-                default = Defaults.TraumaAlpha,
-                disabled = function()
-                    return not LUIE.SV.UnitFrames_Enabled
                 end,
             },
             {
