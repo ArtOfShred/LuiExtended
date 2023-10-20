@@ -2894,8 +2894,8 @@ function UnitFrames.UpdateAttribute(unitTag, powerType, attributeFrame, powerVal
             if attributeFrame[label] ~= nil then
                 -- Format specific to selected label
                 local fmt = tostring(attributeFrame[label].fmt or UnitFrames.SV.Format)
-                local str = fmt:gsub("Percentage", tostring(pct)):gsub("Max", AbbreviateNumber(powerEffectiveMax, UnitFrames.SV.ShortenNumbers, true)):gsub("Current", AbbreviateNumber(powerValue, UnitFrames.SV.ShortenNumbers, true)):gsub(" + Shield", shield
-                and ("+ " .. AbbreviateNumber(shield, UnitFrames.SV.ShortenNumbers, true)) or ""):gsub(" - Trauma", trauma and ("- (" .. AbbreviateNumber(trauma, UnitFrames.SV.ShortenNumbers, true) .. ")" ) or ""):gsub("Nothing", "")
+                local str = fmt:gsub("Percentage", tostring(pct)):gsub("Max", AbbreviateNumber(powerEffectiveMax, UnitFrames.SV.ShortenNumbers, true)):gsub("Current", AbbreviateNumber(powerValue, UnitFrames.SV.ShortenNumbers, true)):gsub("+ Shield", shield
+                and ("+ " .. AbbreviateNumber(shield, UnitFrames.SV.ShortenNumbers, true)) or ""):gsub("- Trauma", trauma and ("- (" .. AbbreviateNumber(trauma, UnitFrames.SV.ShortenNumbers, true) .. ")" ) or ""):gsub("Nothing", ""):gsub("  ", " ")
                 -- Change text
                 attributeFrame[label]:SetText(str)
                 -- Don't update if dead
