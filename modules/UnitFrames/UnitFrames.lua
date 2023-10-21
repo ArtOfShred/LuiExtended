@@ -1611,21 +1611,21 @@ function UnitFrames.CustomFramesApplyBarAlignment()
     end
 end
 
+-- Define a function to extract the anchor information
+local function GetAnchorInfo(frame)
+    local isValidAnchor, point, relativeTo, relativePoint, offsetX, offsetY = frame:GetAnchor()
+    return { point, relativeTo, relativePoint, offsetX, offsetY }
+end
+
 -- Save default frame positions
 function UnitFrames.SaveDefaultFramePositions()
     -- Get Default Positions
-    local isValidAnchor, point, relativeTo, relativePoint, offsetX, offsetY = ZO_PlayerAttributeHealth:GetAnchor()
-    defaultPos.health = { point, relativeTo, relativePoint, offsetX, offsetY }
-    local isValidAnchor, point, relativeTo, relativePoint, offsetX, offsetY = ZO_PlayerAttributeMagicka:GetAnchor()
-    defaultPos.magicka = { point, relativeTo, relativePoint, offsetX, offsetY }
-    local isValidAnchor, point, relativeTo, relativePoint, offsetX, offsetY = ZO_PlayerAttributeStamina:GetAnchor()
-    defaultPos.stamina = { point, relativeTo, relativePoint, offsetX, offsetY }
-    local isValidAnchor, point, relativeTo, relativePoint, offsetX, offsetY = ZO_PlayerAttributeSiegeHealth:GetAnchor()
-    defaultPos.siege = { point, relativeTo, relativePoint, offsetX, offsetY }
-    local isValidAnchor, point, relativeTo, relativePoint, offsetX, offsetY = ZO_RAM.control:GetAnchor()
-    defaultPos.ram = { point, relativeTo, relativePoint, offsetX, offsetY }
-    local isValidAnchor, point, relativeTo, relativePoint, offsetX, offsetY = ZO_SmallGroupAnchorFrame:GetAnchor()
-    defaultPos.smallGroup = { point, relativeTo, relativePoint, offsetX, offsetY }
+    defaultPos.health = GetAnchorInfo(ZO_PlayerAttributeHealth)
+    defaultPos.magicka = GetAnchorInfo(ZO_PlayerAttributeMagicka)
+    defaultPos.stamina = GetAnchorInfo(ZO_PlayerAttributeStamina)
+    defaultPos.siege = GetAnchorInfo(ZO_PlayerAttributeSiegeHealth)
+    defaultPos.ram = GetAnchorInfo(ZO_RAM.control)
+    defaultPos.smallGroup = GetAnchorInfo(ZO_SmallGroupAnchorFrame)
 end
 
 -- Adjust default frame position.
@@ -2174,10 +2174,10 @@ function UnitFrames.CustomPetUpdate()
         return x.unitName < y.unitName
     end)
 
-    local n = 0
+    local o = 0
     for _, v in ipairs(petList) do
-        n = n + 1
-        UnitFrames.CustomFrames[v.unitTag] = UnitFrames.CustomFrames["PetGroup" .. n]
+        o = o + 1
+        UnitFrames.CustomFrames[v.unitTag] = UnitFrames.CustomFrames["PetGroup" .. o]
         if UnitFrames.CustomFrames[v.unitTag] then
             UnitFrames.CustomFrames[v.unitTag].control:SetHidden(false)
             UnitFrames.CustomFrames[v.unitTag].unitTag = v.unitTag
@@ -3804,11 +3804,11 @@ function UnitFrames.CustomFramesGroupUpdate()
     --end
 
     -- Loop through sorted list and put unitTag references into CustomFrames table
-    local n = 0
+    local m = 0
     for _, v in ipairs(groupList) do
         -- Increase local counter
-        n = n + 1
-        UnitFrames.CustomFrames[v.unitTag] = UnitFrames.CustomFrames[(raid and "RaidGroup" or "SmallGroup") .. n]
+        m = m + 1
+        UnitFrames.CustomFrames[v.unitTag] = UnitFrames.CustomFrames[(raid and "RaidGroup" or "SmallGroup") .. m]
         if UnitFrames.CustomFrames[v.unitTag] then
             UnitFrames.CustomFrames[v.unitTag].control:SetHidden(false)
 
