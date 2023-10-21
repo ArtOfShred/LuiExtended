@@ -3440,7 +3440,7 @@ function ChatAnnouncements.OnAchievementUpdated(eventCode, id)
         if ChatAnnouncements.SV.Achievement.AchievementUpdateCA then
             local catName = GetAchievementCategoryInfo(topLevelIndex)
             local subcatName = categoryIndex ~= nil and GetAchievementSubCategoryInfo(topLevelIndex, categoryIndex) or "General"
-            local _, _, _, icon = GetAchievementInfo(id)
+            local _, _, icon, _ = GetAchievementInfo(id)
             icon = ChatAnnouncements.SV.Achievement.AchievementIcon and ("|t16:16:" .. icon .. "|t ") or ""
 
             local stringpart1 = AchievementColorize1:Colorize(string.format("%s%s%s %s%s", bracket1[ChatAnnouncements.SV.Achievement.AchievementBracketOptions], ChatAnnouncements.SV.Achievement.AchievementProgressMsg, bracket2[ChatAnnouncements.SV.Achievement.AchievementBracketOptions], icon, link))
