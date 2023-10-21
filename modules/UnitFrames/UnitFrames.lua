@@ -243,9 +243,6 @@ local playerDisplayName = GetUnitDisplayName("player")
 local group
 local unitTag
 local playerTlw
-local phb
-local rhb
-local shb
 local CP_BAR_COLOURS = ZO_CP_BAR_GRADIENT_COLORS
 
 local g_PendingUpdate = {
@@ -5517,6 +5514,7 @@ function UnitFrames.CustomFramesApplyLayoutGroup(unhide)
         local unitTag = GetGroupUnitTagByIndex(i)
 
         local ghb = unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH] -- Not a backdrop
+        local phb = nil -- TODO: Not sure what changing the anchors below to the proper "ghb" would do so leaving this here (everything already works)
 
         unitFrame.control:ClearAnchors()
         unitFrame.control:SetAnchor(TOPLEFT, group, TOPLEFT, 0, 0.5 * UnitFrames.SV.GroupBarSpacing + (groupBarHeight + UnitFrames.SV.GroupBarSpacing) * (i - 1))
@@ -5581,6 +5579,7 @@ function UnitFrames.CustomFramesApplyLayoutRaid(unhide)
     local itemsPerColumn = (UnitFrames.SV.RaidLayout == "6 x 2") and 2 or (UnitFrames.SV.RaidLayout == "3 x 4") and 4 or (UnitFrames.SV.RaidLayout == "2 x 6") and 6 or 12
 
     local raid = UnitFrames.CustomFrames.RaidGroup1.tlw
+    local rhb = nil  -- TODO: Not sure what changing the anchors below to the proper "rhb" would do so leaving this here (everything already works)
     raid:SetDimensions(UnitFrames.SV.RaidBarWidth * (12 / itemsPerColumn) + (UnitFrames.SV.RaidSpacers and spacerHeight * (itemsPerColumn / 4) or 0), UnitFrames.SV.RaidBarHeight * itemsPerColumn)
 
     local groupWidth = UnitFrames.SV.RaidBarWidth * (zo_floor(0.5 + 12 / itemsPerColumn))
@@ -5728,7 +5727,6 @@ function UnitFrames.CustomFramesApplyLayoutCompanion(unhide)
     unitFrame.control:SetAnchorFill()
     unitFrame.control:SetDimensions(UnitFrames.SV.CompanionWidth, UnitFrames.SV.CompanionHeight)
     unitFrame.name:SetDimensions(UnitFrames.SV.CompanionWidth - UnitFrames.SV.CompanionNameClip - 10, UnitFrames.SV.CompanionHeight - 2)
-    unitFrame.name:SetAnchor(LEFT, shb, LEFT, 5, 0)
     unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH].label:SetDimensions(UnitFrames.SV.CompanionWidth - 50, UnitFrames.SV.CompanionHeight - 2)
 
     if unhide then
@@ -5742,23 +5740,19 @@ function UnitFrames.CustomFramesApplyLayoutPet(unhide)
         return
     end
 
-    local petBarHeight = UnitFrames.SV.PetHeight
-
     local pet = UnitFrames.CustomFrames.PetGroup1.tlw
-    pet:SetDimensions(UnitFrames.SV.PetWidth, petBarHeight * 7 + 21)
+    pet:SetDimensions(UnitFrames.SV.PetWidth, UnitFrames.SV.PetHeight * 7 + 21)
 
     for i = 1, 7 do
         local unitFrame = UnitFrames.CustomFrames["PetGroup" .. i]
 
         unitFrame.control:ClearAnchors()
-        unitFrame.control:SetAnchor(TOPLEFT, pet, TOPLEFT, 0, (petBarHeight + 3) * (i - 1))
-        unitFrame.control:SetDimensions(UnitFrames.SV.PetWidth, petBarHeight)
-
+        unitFrame.control:SetAnchor(TOPLEFT, pet, TOPLEFT, 0, (UnitFrames.SV.PetHeight + 3) * (i - 1))
+        unitFrame.control:SetDimensions(UnitFrames.SV.PetWidth, UnitFrames.SV.PetHeight)
         unitFrame.name:SetDimensions(UnitFrames.SV.PetWidth - UnitFrames.SV.PetNameClip - 10, UnitFrames.SV.PetHeight - 2)
-        unitFrame.name:SetAnchor(LEFT, shb, LEFT, 5, 0)
-
         unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH].label:SetDimensions(UnitFrames.SV.PetWidth - 50, UnitFrames.SV.PetHeight - 2)
     end
+
     if unhide then
         pet:SetHidden(false)
     end
