@@ -107,15 +107,15 @@ end
 local function RemoveSneak(context)
     local abilityId = 20299
     local abilityName = Abilities.Innate_Sneak
-    local context = SpellCastBuffs.DetermineContextSimple(context, abilityId, abilityName)
-    SpellCastBuffs.EffectsList[context][abilityId] = nil
+    local contexta = SpellCastBuffs.DetermineContextSimple(context, abilityId, abilityName)
+    SpellCastBuffs.EffectsList[contexta][abilityId] = nil
 end
 
 local function RemoveHidden(context)
     local abilityId = 20309
     local abilityName = Abilities.Innate_Hidden
-    local context = SpellCastBuffs.DetermineContextSimple(context, abilityId, abilityName)
-    SpellCastBuffs.EffectsList[context][abilityId] = nil
+    local contextb = SpellCastBuffs.DetermineContextSimple(context, abilityId, abilityName)
+    SpellCastBuffs.EffectsList[contextb][abilityId] = nil
 end
 
 -- Handles stealth state changes for player/reticleover
