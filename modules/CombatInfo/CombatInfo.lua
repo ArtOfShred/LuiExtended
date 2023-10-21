@@ -1193,15 +1193,15 @@ function CombatInfo.ResetBarLabel()
         end
 
         local backIndex = i + BACKBAR_INDEX_OFFSET
-        local actionButton = g_backbarButtons[backIndex]
+        local actionButtonBB = g_backbarButtons[backIndex]
         if g_uiCustomToggle[backIndex] then
             g_uiCustomToggle[backIndex].label:ClearAnchors()
-            g_uiCustomToggle[backIndex].label:SetAnchor(TOPLEFT, actionButton.slot)
-            g_uiCustomToggle[backIndex].label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CombatInfo.SV.BarLabelPosition)
+            g_uiCustomToggle[backIndex].label:SetAnchor(TOPLEFT, actionButtonBB.slot)
+            g_uiCustomToggle[backIndex].label:SetAnchor(BOTTOMRIGHT, actionButtonBB.slot, nil, 0, -CombatInfo.SV.BarLabelPosition)
         elseif g_uiProcAnimation[backIndex] then
             g_uiProcAnimation[backIndex].procLoopTexture.label:ClearAnchors()
-            g_uiProcAnimation[backIndex].procLoopTexture.label:SetAnchor(TOPLEFT, actionButton.slot)
-            g_uiProcAnimation[backIndex].procLoopTexture.label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CombatInfo.SV.BarLabelPosition)
+            g_uiProcAnimation[backIndex].procLoopTexture.label:SetAnchor(TOPLEFT, actionButtonBB.slot)
+            g_uiProcAnimation[backIndex].procLoopTexture.label:SetAnchor(BOTTOMRIGHT, actionButtonBB.slot, nil, 0, -CombatInfo.SV.BarLabelPosition)
         end
     end
 end
@@ -1442,17 +1442,17 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
             if CombatInfo.SV.ShowToggled then
                 -- We set this to true but never set remove it, this is effectively an on the fly way to create an indentifier for ground effects that shouldn't be removed on reticle target change, only on fade.
                 g_toggledSlotsPlayer[abilityId] = true
-                local currentTime = GetGameTimeMilliseconds()
+                local currentTimeST = GetGameTimeMilliseconds()
                 if g_toggledSlotsFront[abilityId] or g_toggledSlotsBack[abilityId] then
                     g_toggledSlotsRemain[abilityId] = 1000 * endTime
                     g_toggledSlotsStack[abilityId] = stackCount
                     if g_toggledSlotsFront[abilityId] then
                         local slotNum = g_toggledSlotsFront[abilityId]
-                        CombatInfo.ShowSlot(slotNum, abilityId, currentTime, false)
+                        CombatInfo.ShowSlot(slotNum, abilityId, currentTimeST, false)
                     end
                     if g_toggledSlotsBack[abilityId] then
                         local slotNum = g_toggledSlotsBack[abilityId]
-                        CombatInfo.ShowSlot(slotNum, abilityId, currentTime, false)
+                        CombatInfo.ShowSlot(slotNum, abilityId, currentTimeST, false)
                     end
                 end
             end
@@ -2386,19 +2386,19 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
             toggledSlots[ability_id] = slotNum
             if g_toggledSlotsRemain[ability_id] then
                 if CombatInfo.SV.ShowToggled then
-                    local slotNum = toggledSlots[ability_id]
+                    local slotNumST = toggledSlots[ability_id]
                     local desaturate
-                    local math = slotNum > BACKBAR_INDEX_OFFSET and slotNum - BACKBAR_INDEX_OFFSET or nil
+                    local math = slotNumST > BACKBAR_INDEX_OFFSET and slotNumST - BACKBAR_INDEX_OFFSET or nil
                     if math then
                         if g_uiCustomToggle[math] then
                             desaturate = false
                             if g_uiCustomToggle[math]:IsHidden() then
-                                CombatInfo.BackbarHideSlot(slotNum)
+                                CombatInfo.BackbarHideSlot(slotNumST)
                                 desaturate = true
                             end
                         end
                     end
-                    CombatInfo.ShowSlot(slotNum, ability_id, currentTime, desaturate)
+                    CombatInfo.ShowSlot(slotNumST, ability_id, currentTime, desaturate)
                 end
             end
         end
