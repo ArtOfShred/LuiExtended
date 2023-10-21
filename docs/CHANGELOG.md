@@ -1,3 +1,25 @@
+### Version 6.6.3
+
+General
+- Updated Bar Highlight & Buff Tracking for these abilities and their morphs: Trap Beast (Fighters Guild), Scorch (Warden), Grim Focus (Nightblade), Bound Armaments (Sorcerer), Blood Frenzy (Vampire)
+- Abilities that "echo" now display a stack counter (for Bar Highlight & Buff Tracking) to serve as a counter - so far this includes Scorch & Haunting Curse.
+
+Buffs & Debuffs
+- Added options for row stacking for the Player/Target Buff & Debuff frames when the option to anchor the frames to the Custom Unit Frames is DISABLED. You can customize how wide the containers are and the direction the rows stack (up or down).
+
+Chat Announcements
+- Fixed an issue where the Collectible messages/announcements could throw UI errors.
+
+Combat Info
+- Fixed an issue where the Ultimate Label would not correctly update if Bar Highlight tracking was disabled.
+- You can now display the back bar without Bar Highlight tracking enabled if you just want to add the back bar to see it.
+- Flame Lash (Dragonknight) ability icon on the ability bar now glows when Power Lash is available (targeting an enemy that is rooted or Off-Balance).
+
+Unit Frames
+- Unit Frames now display the "Trauma" effect (healing absorption) - this has a customizable color and will display on all bars. You can also display the value on the bars but this must be configured in the settings menu (the dropdowns for the format now include options for adding the Trauma value).
+
+---
+
 ### Version 6.6.2
 
 Chat Announcements
