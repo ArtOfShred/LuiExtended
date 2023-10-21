@@ -1259,7 +1259,7 @@ function CombatInfo.OnReticleTargetChanged(eventCode)
                 castByPlayer = 5
             end
             if not IsUnitDead(unitTag) then
-                CombatInfo.OnEffectChanged(0, EFFECT_RESULT_UPDATED, buffSlot, buffName, unitTag, timeStarted, timeEnding, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, unitName, 0, abilityId, castByPlayer)
+                CombatInfo.OnEffectChanged(0, EFFECT_RESULT_UPDATED, buffSlot, buffName, unitTag, timeStarted, timeEnding, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, unitName, 0, abilityId, castByPlayer, false)
             end
         end
     end
@@ -1290,7 +1290,8 @@ function CombatInfo.BarHighlightSwap(abilityId, overrideRank, casterUnitTag)
             for j = 1, GetNumBuffs(unitTag) do
                 local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityIdNew, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, j)
                 if id == abilityIdNew and castByPlayer then
-                    CombatInfo.OnEffectChanged(nil, EFFECT_RESULT_GAINED, nil, nil, unitTag, timeStarted, timeEnding, stackCount, nil, buffType, effectType, abilityType, statusEffectType, nil, nil, abilityId, 1, true)
+                    -- Custom stack count for certain abilities
+                    CombatInfo.OnEffectChanged(nil, EFFECT_RESULT_GAINED, nil, nil, unitTag, timeStarted, timeEnding, stackCount, nil, buffType, effectType, abilityType, statusEffectType, nil, nil, abilityId, 1, true, abilityIdNew)
                     return
                 end
             end
@@ -1298,7 +1299,8 @@ function CombatInfo.BarHighlightSwap(abilityId, overrideRank, casterUnitTag)
     end
 end
 
-function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer, passThrough)
+-- Extra returns here - passThrough & savedId
+function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer, passThrough, savedId)
     -- If we're displaying a fake bar highlight then bail out here (sometimes we need a fake aura that doesn't end to simulate effects that can be overwritten, such as Major/Minor buffs. Technically we don't want to stop the
     -- highlight of the original ability since we can only track one buff per slot and overwriting the buff with a longer duration buff shouldn't throw the player off by making the glow disappear earlier.
     if g_barFakeAura[abilityId] and not passThrough then
@@ -1455,6 +1457,14 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                 end
             end
         end
+    end
+
+    -- Custom stack count for certain abilities
+    if savedId and Effects.BarHighlightStack[savedId] then
+        -- Grab the stack count from the saved id if this is a "BarHighlightCheckOnFade"
+        stackCount = Effects.BarHighlightStack[savedId]
+    elseif Effects.BarHighlightStack[abilityId] then
+        stackCount = Effects.BarHighlightStack[abilityId]
     end
 
     -- Hijack the abilityId here if we have it in the override for extra bar highlights

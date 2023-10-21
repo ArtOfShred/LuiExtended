@@ -1213,6 +1213,10 @@ Effects.BarHighlightCheckOnFade = {
     -- Warden
     [130139] = { id1 = 130140, id2 = 130139, unitTag = "reticleover" }, -- Off-Balance --> Cutting Dive / Off-Balance
 
+    [86009] = { id1 = 178020, unitTag = "player" }, -- Scorch
+    [86019] = { id1 = 146919, unitTag = "player" }, -- Subterranean Assault
+    [86015] = { id1 = 178028, unitTag = "player" }, -- Deep Fissure
+
     [85552] = { id1 = 85552, unitTag = "player" }, -- Living Vines (If player mouses over target with this ability and mouses off and has this ability on themselves, we want to resume that)
     [85850] = { id1 = 85850, unitTag = "player" }, -- Leeching Vines (If player mouses over target with this ability and mouses off and has this ability on themselves, we want to resume that)
     [85851] = { id1 = 85851, unitTag = "player" }, -- Living Trellis (If player mouses over target with this ability and mouses off and has this ability on themselves, we want to resume that)
@@ -1264,6 +1268,22 @@ Effects.BarHighlightCheckOnFade = {
 
     -- Volendrung
     [116366] = { duration = 116374, durationMod = 116366, unitTag = "player" }, -- Pariah's Resolve
+}
+
+Effects.BarHighlightStack = {
+
+    -- Sorcerer
+    [24330] = 2, -- Haunting Curse (Haunting Curse)
+    [89491] = 1, -- Haunting Curse (Haunting Curse)
+
+    -- Warden
+    [86009] = 2, -- Scorch (Scorch)
+    [178020] = 1, -- Scorch (Scorch)
+    [86019] = 2, -- Subterranean Assault
+    [146919] = 1, -- Subterranean Assault
+    [86015] = 2, -- Deep Fissure
+    [178028] = 1, -- Deep Fissure
+
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -1451,8 +1471,6 @@ Effects.BarHighlightOverride = {
     [85995] = { newId = 130129 }, -- Dive --> Off-Balance
     [85999] = { newId = 130139 }, -- Cutting Dive --> Off-Balance
     [86003] = { newId = 130145 }, -- Screaming Cliff Racer --> Off-Balance
-
-    [86019] = { showFakeAura = true, duration = 6000, noRemove = true }, -- Subterranean Assault
 
     [86023] = { newId = 101703 }, -- Swarm
     [86027] = { newId = 101904 }, -- Fetcher Infection
