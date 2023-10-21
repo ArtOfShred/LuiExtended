@@ -1343,6 +1343,7 @@ local strings = {
     SI_LUIE_LAM_PNL_SHOWARMORDURABILITY = "Afficher l'usage de l'armure",
     SI_LUIE_LAM_PNL_SHOWBAGSPACE = "Afficher le remplissage des sacs",
     SI_LUIE_LAM_PNL_SHOWCLOCK = "Afficher l'heure",
+    SI_LUIE_LAM_PNL_CLOCKFORMAT = "Clock Format",
     SI_LUIE_LAM_PNL_SHOWEAPONCHARGES = "Afficher les charges des armes",
     SI_LUIE_LAM_PNL_SHOWFPS = "Afficher les FPS",
     SI_LUIE_LAM_PNL_SHOWLATENCY = "Afficher la latence",

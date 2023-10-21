@@ -27,6 +27,9 @@ local colors = {
 --local fakeControl   = {}
 
 InfoPanel.Enabled = false
+InfoPanel.Defaults = {
+    ClockFormat = "HH:m:s",
+}
 InfoPanel.SV = nil
 InfoPanel.panelUnlocked = false
 
@@ -442,9 +445,14 @@ function InfoPanel.DoBagUpdate()
     uiGems.label:SetText((fullCount > 9) and fullText or (fullText .. "/" .. emptyCount))
 end
 
+local function FormatClock(clockFormat)
+    local timestring = GetTimeString()
+    return LUIE.CreateTimestamp(timestring, clockFormat)
+end
+
 function InfoPanel.OnUpdate01()
     -- Update time
-    uiClock.label:SetText(GetTimeString())
+    uiClock.label:SetText(FormatClock(InfoPanel.SV.ClockFormat))
 
     -- Update fps
     local fps = GetFramerate()

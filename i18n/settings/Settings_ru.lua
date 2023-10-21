@@ -1343,6 +1343,7 @@ local strings = {
     SI_LUIE_LAM_PNL_SHOWARMORDURABILITY = "Прочность брони",
     SI_LUIE_LAM_PNL_SHOWBAGSPACE = "Сумка",
     SI_LUIE_LAM_PNL_SHOWCLOCK = "Часы",
+    SI_LUIE_LAM_PNL_CLOCKFORMAT = "Clock Format",
     SI_LUIE_LAM_PNL_SHOWEAPONCHARGES = "Заряд оружия",
     SI_LUIE_LAM_PNL_SHOWFPS = "FPS",
     SI_LUIE_LAM_PNL_SHOWLATENCY = "Задержка",

@@ -15,6 +15,7 @@ function InfoPanel.CreateSettings()
         return
     end
 
+    local Defaults = InfoPanel.Defaults
     local Settings = InfoPanel.SV
 
     local panelDataInfoPanel = {
@@ -139,6 +140,24 @@ function InfoPanel.CreateSettings()
                 default = true,
                 disabled = function()
                     return not LUIE.SV.InfoPanel_Enabled
+                end,
+            },
+            {
+                -- Timestamp Format
+                type = "editbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_PNL_CLOCKFORMAT)),
+                tooltip = GetString(SI_LUIE_LAM_CA_TIMESTAMPFORMAT_TP),
+                getFunc = function()
+                    return Settings.ClockFormat
+                end,
+                setFunc = function(value)
+                    Settings.ClockFormat = value
+                    InfoPanel.RearrangePanel()
+                end,
+                width = "full",
+                default = Defaults.ClockFormat,
+                disabled = function()
+                    return not (LUIE.SV.InfoPanel_Enabled and not Settings.HideClock)
                 end,
             },
             {
