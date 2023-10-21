@@ -8230,8 +8230,8 @@ Effects.EffectOverride = {
     -- Daedric Curse / Daedric Prey / Haunting Curse
     [24326] = { tooltip = Tooltips.Skill_Daedric_Curse }, -- Daedric Curse (Daedric Curse)
     [24328] = { tooltip = Tooltips.Skill_Daedric_Prey }, -- Daedric Prey (Daedric Prey)
-    [24330] = { tooltip = Tooltips.Skill_Haunting_Curse }, -- Haunting Curse (Haunting Curse)
-    [89491] = { tooltip = Tooltips.Skill_Haunting_Curse }, -- Haunting Curse (Haunting Curse)
+    [24330] = { tooltip = Tooltips.Skill_Haunting_Curse, stack = 2 }, -- Haunting Curse (Haunting Curse)
+    [89491] = { tooltip = Tooltips.Skill_Haunting_Curse, stack = 1 }, -- Haunting Curse (Haunting Curse)
 
     -- Summon Winged Twilight / Summon Twilight Tormentor / Summon Twilight Matriarch
     [24617] = { icon = "LuiExtended/media/icons/abilities/ability_sorcerer_zap.dds", name = Abilities.Skill_Zap }, -- Zap (Summon Winged Twilight - All Morphs)
@@ -8642,10 +8642,12 @@ Effects.EffectOverride = {
     [130140] = { tooltip = Tooltips.Skill_Cutting_Dive }, -- Cutting Dive (Cutting Dive)
 
     -- Scorch / Subterranean Assault / Deep Fissure
-    [86009] = { tooltip = Tooltips.Skill_Scorch }, -- Scorch (Scorch)
-    [86019] = { tooltip = Tooltips.Skill_Subterranean_Assault_Echo }, -- Subterranean Assault (Subterranean Assault)
-    [146919] = { tooltip = Tooltips.Skill_Subterranean_Assault }, -- Subterranean Assault (Subterranean Assault)
-    [86015] = { tooltip = Tooltips.Skill_Deep_Fissure }, -- Deep Fissure (Deep Fissure)
+    [86009] = { tooltip = Tooltips.Skill_Scorch, stack = 2 }, -- Scorch (Scorch)
+    [178020] = { tooltip = Tooltips.Skill_Scorch, stack = 1 }, -- Scorch (Scorch)
+    [86019] = { tooltip = Tooltips.Skill_Subterranean_Assault_Echo, stack = 2 }, -- Subterranean Assault (Subterranean Assault)
+    [146919] = { tooltip = Tooltips.Skill_Subterranean_Assault, stack = 1 }, -- Subterranean Assault (Subterranean Assault)
+    [86015] = { tooltip = Tooltips.Skill_Deep_Fissure, stack = 2 }, -- Deep Fissure (Deep Fissure)
+    [178028] = { tooltip = Tooltips.Skill_Deep_Fissure, stack = 1 }, -- Deep Fissure (Deep Fissure)
     [94424] = { icon = "esoui/art/icons/ability_warden_015_a.dds" }, -- Deep Fissure (Deep Fissure)
 
     -- Swarm / Fetcher Infection / Growing Swarm
