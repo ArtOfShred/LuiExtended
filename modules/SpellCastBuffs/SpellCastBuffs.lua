@@ -2827,6 +2827,23 @@ function SpellCastBuffs.OnCombatEventIn(eventCode, result, isError, abilityName,
     end
 end
 
+local function isValidDamageResult(result)
+    if result == ACTION_RESULT_BLOCKED or
+    result == ACTION_RESULT_BLOCKED_DAMAGE or
+    result == ACTION_RESULT_CRITICAL_DAMAGE or
+    result == ACTION_RESULT_DAMAGE or
+    result == ACTION_RESULT_DAMAGE_SHIELDED or
+    result == ACTION_RESULT_IMMUNE or
+    result == ACTION_RESULT_MISS or
+    result == ACTION_RESULT_PARTIAL_RESIST or
+    result == ACTION_RESULT_REFLECTED or
+    result == ACTION_RESULT_RESIST or
+    result == ACTION_RESULT_WRECKING_DAMAGE or
+    result == ACTION_RESULT_DODGED then
+        return true
+    end
+end
+
 -- Combat Event (Source = Player)
 function SpellCastBuffs.OnCombatEventOut(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overrideRank, casterUnitTag)
     if targetType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER_PET then
@@ -2838,8 +2855,37 @@ function SpellCastBuffs.OnCombatEventOut(eventCode, result, isError, abilityName
         return
     end
 
-    if not (Effects.FakePlayerOfflineAura[abilityId] or Effects.FakePlayerDebuffs[abilityId] or Effects.FakeStagger[abilityId]) then
+    if not (Effects.FakePlayerOfflineAura[abilityId] or Effects.FakePlayerDebuffs[abilityId] or Effects.FakeStagger[abilityId] or Effects.IsGroundMineDamage[abilityId]) then
         return
+    end
+
+    -- Handling for Trap Beast
+    if Effects.IsGroundMineDamage[abilityId] and sourceType == COMBAT_UNIT_TYPE_PLAYER then
+        if isValidDamageResult(result) then
+            local compareId
+            if abilityId == 35754 then
+                compareId = 35750
+            elseif abilityId == 40389 then
+                compareId = 40382
+            elseif abilityId == 40376 then
+                compareId = 40372
+            end
+            if compareId then
+                -- Remove mine buff if damage is triggered
+                local context
+                if Effects.FakePlayerOfflineAura[compareId].ground then
+                    context = "ground"
+                else
+                    context = "player1"
+                end
+                if SpellCastBuffs.SV.PromDebuffTable[compareId] or SpellCastBuffs.SV.PromDebuffTable[effectName] then
+                    context = "promd_player"
+                elseif SpellCastBuffs.SV.PromBuffTable[compareId] or SpellCastBuffs.SV.PromBuffTable[effectName] then
+                    context = "promb_player"
+                end
+                SpellCastBuffs.EffectsList[context][compareId] = nil
+            end
+        end
     end
 
     -- If the action result isn't a starting/ending event then we ignore it.

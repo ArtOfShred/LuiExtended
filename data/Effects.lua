@@ -322,6 +322,13 @@ Effects.IsGroundMineAura = {
     [104079] = true, -- Time Freeze (Time Freeze)
 }
 
+Effects.IsGroundMineDamage = {
+    -- Fighter's Guild
+    [35754] = true, -- Trap Beast (Trap Beast)
+    [40389] = true, -- Barbed Trap (Barbed Trap)
+    [40376] = true, -- Lightweight Beast Trap (Lightweight Beast Trap)
+}
+
 --------------------------------------------------------------------------------------------------------------------------------
 -- Effects in this category will not have their stack count for mines display (This is effectively used for creating fake mines) for the purpose of some effects
 --------------------------------------------------------------------------------------------------------------------------------
@@ -1041,9 +1048,6 @@ Effects.EffectGroundDisplay = {
     [35737] = { buff = true, debuff = false, ground = false }, -- Circle of Protection (Circle of Protection)
     [40181] = { buff = true, debuff = false, ground = false }, -- Turn Evil (Turn Evil)
     [40169] = { buff = true, debuff = false, ground = false }, -- Ring of Preservation (Ring of Preservation)
-    [35750] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 }, -- Trap Beast (Trap Beast)
-    [40382] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 }, -- Barbed Trap (Barbed Trap)
-    [40372] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 }, -- Lightweight Beast Trap (Lightweight Beast Trap)
 
     ---------------------------
     -- Mages Guild ------------
@@ -1250,7 +1254,6 @@ Effects.BarHighlightCheckOnFade = {
     [126583] = { duration = 63119, durationMod = 126583, unitTag = "player" }, -- Immovable --> Major Resolve
 
     -- Werewolf
-
     [137257] = { id1 = 137257, id2 = 32633, unitTag = "reticleover" }, -- Off Balance --> Roar / Off Balance
     [137312] = { id1 = 137312, id2 = 39114, unitTag = "reticleover" }, -- Off Balance --> Deafening Roar / Off Balance
 
@@ -1736,9 +1739,9 @@ Effects.BarHighlightOverride = {
     [40336] = { newId = 40340 }, -- Silver Leash
     [40195] = { noRemove = true }, -- Camouflaged Hunter
 
-    [35750] = { noRemove = true }, -- Trap Beast
-    [40382] = { newId = 61746, noRemove = true }, -- Barbed Trap
-    [40372] = { noRemove = true }, -- Lightweight Beast Trap
+    [35750] = { showFakeAura = true, noRemove = true }, -- Trap Beast
+    [40382] = { showFakeAura = true, noRemove = true }, -- Barbed Trap
+    [40372] = { showFakeAura = true, noRemove = true }, -- Lightweight Beast Trap
 
     [35713] = { newId = 62305 }, -- Dawnbreaker
     [40161] = { newId = 126312 }, -- Flawless Dawnbreaker
@@ -9987,15 +9990,15 @@ Effects.EffectOverride = {
     }, -- Camouflaged Hunter (Camouflaged Hunter)
 
     -- Trap Beast / Barbed Trap / Lightweight Beast Trap
-    [35750] = { tooltip = Tooltips.Skill_Trap_Beast }, -- Trap Beast (Trap Beast)
+    [35750] = { tooltip = Tooltips.Skill_Trap_Beast, stack = 1 }, -- Trap Beast (Trap Beast)
     [35756] = { tooltip = Tooltips.Skill_Trap_Beast_Debuff }, -- Trap Beast (Trap Beast)
     [35753] = { hideReduce = true, tooltip = Tooltips.Skill_Trap_Beast_Debuff }, -- Trap Beast (Trap Beast)
 
-    [40382] = { tooltip = Tooltips.Skill_Barbed_Trap }, -- Barbed Trap (Barbed Trap)
+    [40382] = { tooltip = Tooltips.Skill_Barbed_Trap, stack = 1 }, -- Barbed Trap (Barbed Trap)
     [40385] = { tooltip = Tooltips.Skill_Barbed_Trap_Debuff }, -- Barbed Trap (Barbed Trap)
     [40384] = { hideReduce = true, tooltip = Tooltips.Skill_Barbed_Trap_Debuff }, -- Barbed Trap (Barbed Trap)
 
-    [40372] = { tooltip = Tooltips.Skill_Trap_Beast }, -- Lightweight Beast Trap (Lightweight Beast Trap)
+    [40372] = { tooltip = Tooltips.Skill_Trap_Beast, stack = 1 }, -- Lightweight Beast Trap (Lightweight Beast Trap)
     [40375] = { tooltip = Tooltips.Skill_Trap_Beast_Debuff }, -- Lightweight Beast Trap (Lightweight Beast Trap)
     [40374] = { hideReduce = true, tooltip = Tooltips.Skill_Trap_Beast_Debuff }, -- Lightweight Beast Trap (Lightweight Beast Trap)
 
@@ -21827,7 +21830,6 @@ Effects.FakePlayerBuffs = {
 -- ground == true - Set the target to ground instead of player.
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.FakePlayerOfflineAura = {
-
     -- Sets
     [75814] = { duration = "GET" }, -- Lunar Bastion (Lunar Bastion)
 
@@ -21835,6 +21837,11 @@ Effects.FakePlayerOfflineAura = {
     [22265] = { duration = "GET" }, -- Cleansing Ritual (Cleansing Ritual)
     [22259] = { duration = "GET" }, -- Ritual of Retribution (Ritual of Retribution)
     [22262] = { duration = "GET" }, -- Extended Ritual (Extended Ritual)
+
+    -- Fighter's Guild
+    [35750] = { duration = "GET" }, -- Trap Beast (Trap Beast)
+    [40382] = { duration = "GET" }, -- Barbed Trap (Barbed Trap)
+    [40372] = { duration = "GET" }, -- Lightweight Beast Trap (Lightweight Beast Trap)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------

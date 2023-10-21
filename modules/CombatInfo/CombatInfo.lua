@@ -2019,12 +2019,51 @@ function CombatInfo.OnCombatEventBreakCast(eventCode, result, isError, abilityNa
     end
 end
 
+local function isValidDamageResult(result)
+    if result == ACTION_RESULT_BLOCKED or
+    result == ACTION_RESULT_BLOCKED_DAMAGE or
+    result == ACTION_RESULT_CRITICAL_DAMAGE or
+    result == ACTION_RESULT_DAMAGE or
+    result == ACTION_RESULT_DAMAGE_SHIELDED or
+    result == ACTION_RESULT_IMMUNE or
+    result == ACTION_RESULT_MISS or
+    result == ACTION_RESULT_PARTIAL_RESIST or
+    result == ACTION_RESULT_REFLECTED or
+    result == ACTION_RESULT_RESIST or
+    result == ACTION_RESULT_WRECKING_DAMAGE or
+    result == ACTION_RESULT_DODGED then
+        return true
+    end
+end
+
 -- Listens to EVENT_COMBAT_EVENT
 function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overrideRank, casterUnitTag)
     -- Track ultimate generation when we block an attack or hit a target with a light/medium/heavy attack.
     if CombatInfo.SV.UltimateGeneration and uiUltimate.NotFull and ((result == ACTION_RESULT_BLOCKED_DAMAGE and targetType == COMBAT_UNIT_TYPE_PLAYER) or (Effects.IsWeaponAttack[abilityName] and sourceType == COMBAT_UNIT_TYPE_PLAYER and targetName ~= "")) then
         uiUltimate.Texture:SetHidden(false)
         uiUltimate.FadeTime = GetGameTimeMilliseconds() + 8000
+    end
+
+    -- Trap Beast aura removal helper function since there is no aura for it
+    if Effects.IsGroundMineDamage[abilityId] then
+        if isValidDamageResult(result) then
+            local compareId
+            if abilityId == 35754 then
+                compareId = 35750
+            elseif abilityId == 40389 then
+                compareId = 40382
+            elseif abilityId == 40376 then
+                compareId = 40372
+            end
+            if compareId then
+                if g_barNoRemove[compareId] then
+                    if Effects.BarHighlightCheckOnFade[compareId] then
+                        CombatInfo.BarHighlightSwap(compareId)
+                    end
+                    return
+                end
+            end
+        end
     end
 
     -- Bail out past here if the cast bar is disabled or
@@ -2208,6 +2247,10 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
                 -- Handling for Crystallized Shield + Morphs
                 if abilityId == 86135 or abilityId == 86139 or abilityId == 86143 then
                     g_toggledSlotsStack[abilityId] = 3
+                end
+                -- Handling for Trap Beast
+                if abilityId == 35750 or abilityId == 40382 or abilityId == 40372 then
+                    g_toggledSlotsStack[abilityId] = 1
                 end
                 -- Toggle highlight on
                 if g_toggledSlotsFront[abilityId] then
