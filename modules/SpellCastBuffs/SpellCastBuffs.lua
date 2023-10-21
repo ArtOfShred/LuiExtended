@@ -1549,6 +1549,23 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
         -- Tooltip Debug
         -- GameTooltip:SetAbilityId(117391)
 
+        -- Debug show default Tooltip on my account
+        if LUIE.PlayerDisplayName == "@ArtOfShred" then
+            GameTooltip:AddLine("Default Tooltip Below:", "", colorText:UnpackRGBA())
+
+            if GetAbilityEffectDescription(control.buffSlot) ~= "" then
+                tooltipText = GetAbilityEffectDescription(control.buffSlot)
+                tooltipText = LUIE.UpdateMundusTooltipSyntax(control.effectId, tooltipText)
+            end
+            GameTooltip:AddLine(tooltipTitle, "ZoFontHeader2", 1, 1, 1, nil)
+            if tooltipText ~= "" and tooltipText ~= nil then
+                GameTooltip:SetVerticalPadding(1)
+                ZO_Tooltip_AddDivider(GameTooltip)
+                GameTooltip:SetVerticalPadding(5)
+                GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
+            end
+        end
+
     end
 end
 
@@ -2985,9 +3002,9 @@ function SpellCastBuffs.OnCombatEventOut(eventCode, result, isError, abilityName
                 else
                     context = "player1"
                 end
-                if SpellCastBuffs.SV.PromDebuffTable[compareId] or SpellCastBuffs.SV.PromDebuffTable[effectName] then
+                if SpellCastBuffs.SV.PromDebuffTable[compareId] then
                     context = "promd_player"
-                elseif SpellCastBuffs.SV.PromBuffTable[compareId] or SpellCastBuffs.SV.PromBuffTable[effectName] then
+                elseif SpellCastBuffs.SV.PromBuffTable[compareId] then
                     context = "promb_player"
                 end
                 SpellCastBuffs.EffectsList[context][compareId] = nil
