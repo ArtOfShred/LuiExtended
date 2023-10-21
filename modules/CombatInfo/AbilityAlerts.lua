@@ -1217,10 +1217,56 @@ function AbilityAlerts.FormatAlertString(inputFormat, params)
     end)
 end
 
+local function generateMitigationString(Settings, avoid, block, dodge, blockstagger, interrupt, shouldusecc, spacer)
+    local stringBlock = ""
+    local stringDodge = ""
+    local stringAvoid = ""
+    local stringInterrupt = ""
+
+    if avoid then
+        local color = AbilityAlerts.AlertColors.alertColorAvoid
+        stringAvoid = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, Settings.formats.alertAvoid, spacer)
+    else
+        stringAvoid = ""
+    end
+
+    if block then
+        local color = AbilityAlerts.AlertColors.alertColorBlock
+        stringBlock = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, Settings.formats.alertBlock, spacer)
+    end
+
+    if dodge then
+        local color = AbilityAlerts.AlertColors.alertColorDodge
+        stringDodge = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, Settings.formats.alertDodge, spacer)
+    else
+        stringDodge = ""
+    end
+
+    if blockstagger then
+        local color = AbilityAlerts.AlertColors.alertColorBlock
+        stringBlock = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, Settings.formats.alertBlockStagger, spacer)
+    end
+
+    if interrupt then
+        local color = AbilityAlerts.AlertColors.alertColorInterrupt
+        stringInterrupt = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, Settings.formats.alertInterrupt, spacer)
+    elseif shouldusecc then
+        local color = AbilityAlerts.AlertColors.alertColorInterrupt
+        stringInterrupt = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, Settings.formats.alertShouldUseCC, spacer)
+    else
+        stringInterrupt = ""
+    end
+
+    if not block and not blockstagger then
+        stringBlock = ""
+    end
+
+    return stringBlock, stringDodge, stringAvoid, stringInterrupt
+end
+
 -- VIEWER
 function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, sourceName, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, hiddenDuration, crowdControl, modifier, block, blockstagger, dodge, avoid, interrupt, shouldusecc)
     local Settings = CombatInfo.SV.alerts
-
     local labelColor = Settings.colors.alertShared
     local prefix
     local textPrefix
@@ -1243,50 +1289,17 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
         end
 
         if Settings.toggles.showMitigation then
-            if avoid then
-                local color = AbilityAlerts.AlertColors.alertColorAvoid
-                stringAvoid = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, Settings.formats.alertAvoid, spacer)
-            else
-                stringAvoid = ""
-            end
-
-            if block then
-                local color = AbilityAlerts.AlertColors.alertColorBlock
-                stringBlock = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, Settings.formats.alertBlock, spacer)
-            end
-
-            if dodge then
-                local color = AbilityAlerts.AlertColors.alertColorDodge
-                stringDodge = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, Settings.formats.alertDodge, spacer)
-            else
-                stringDodge = ""
-            end
-
-            if blockstagger then
-                local color = AbilityAlerts.AlertColors.alertColorBlock
-                stringBlock = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, Settings.formats.alertBlockStagger, spacer)
-            end
-
-            if interrupt then
-                local color = AbilityAlerts.AlertColors.alertColorInterrupt
-                stringInterrupt = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, Settings.formats.alertInterrupt, spacer)
-            elseif shouldusecc then
-                local color = AbilityAlerts.AlertColors.alertColorInterrupt
-                stringInterrupt = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, Settings.formats.alertShouldUseCC, spacer)
-            else
-                stringInterrupt = ""
-            end
-
-            if not block and not blockstagger then
-                stringBlock = ""
-            end
+            stringBlock, stringDodge, stringAvoid, stringInterrupt = generateMitigationString(Settings, avoid, block, dodge, blockstagger, interrupt, shouldusecc, spacer)
         end
 
         local name = Settings.toggles.mitigationAbilityName
+
         if modifier ~= "" then
             modifier = (" " .. modifier)
         end
+
         prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and Settings.toggles.mitigationEnemyName or ""
+
         if prefix ~= "" then
             name = (" " .. name)
         end
@@ -1295,14 +1308,17 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
         textName = AbilityAlerts.FormatAlertString(name, { source = sourceName, ability = abilityName })
         textModifier = modifier
         textMitigation = Settings.toggles.showMitigation and zo_strformat(" <<1>> <<2>><<3>><<4>><<5>>", spacer, stringBlock, stringDodge, stringAvoid, stringInterrupt) or ""
-    -- UNMIT
+        -- UNMIT
     elseif alertType == alertTypes.UNMIT then
         local name = Settings.toggles.mitigationAbilityName
+
         if modifier ~= "" then
             modifier = (" " .. modifier)
         end
+
         local color = AbilityAlerts.AlertColors.alertColorUnmit
         prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and Settings.toggles.mitigationEnemyName or ""
+
         if prefix ~= "" then
             name = (" " .. name)
         end
@@ -1311,19 +1327,19 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
         textName = AbilityAlerts.FormatAlertString(name, { source = sourceName, ability = abilityName })
         textModifier = modifier
         textMitigation = zo_strformat("|c<<1>><<2>>|r", color, Settings.formats.alertUnmit)
-    -- POWER
+        -- POWER
     elseif alertType == alertTypes.POWER then
         local color = AbilityAlerts.AlertColors.alertColorPower
         prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and Settings.toggles.mitigationPowerPrefixN2 or Settings.toggles.mitigationPowerPrefix2
         textName = AbilityAlerts.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
         textMitigation = zo_strformat("|c<<1>><<2>>|r", color, Settings.formats.alertPower)
-    -- DESTROY
+        -- DESTROY
     elseif alertType == alertTypes.DESTROY then
         local color = AbilityAlerts.AlertColors.alertColorDestroy
         prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and Settings.toggles.mitigationDestroyPrefixN2 or Settings.toggles.mitigationDestroyPrefix2
         textName = AbilityAlerts.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
         textMitigation = zo_strformat("|c<<1>><<2>>|r", color, Settings.formats.alertDestroy)
-    -- SUMMON
+        -- SUMMON
     elseif alertType == alertTypes.SUMMON then
         local color = AbilityAlerts.AlertColors.alertColorSummon
         prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and Settings.toggles.mitigationSummonPrefixN2 or Settings.toggles.mitigationSummonPrefix2
@@ -1332,6 +1348,7 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
     end
 
     local showDuration = duration and true or false
+
     if not duration then
         if hiddenDuration then
             duration = hiddenDuration
@@ -1339,6 +1356,7 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
             duration = 4000
         end
     end
+
     local currentTime = GetGameTimeMilliseconds()
     local endTime = currentTime + duration
 
