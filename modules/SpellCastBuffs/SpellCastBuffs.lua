@@ -1414,35 +1414,142 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
     local detailsLine
     local colorText = ZO_NORMAL_TEXT
     local tooltipTitle = zo_strformat(SI_ABILITY_TOOLTIP_NAME, control.effectName)
-
-    if not SpellCastBuffs.SV.TooltipEnable then
-        GameTooltip:AddLine(tooltipTitle, "ZoFontHeader2", 1, 1, 1, nil)
+    if control.isArtificial then
+        tooltipText = GetArtificialEffectTooltipText(control.effectId)
+        GameTooltip:AddLine(tooltipTitle, "ZoFontHeader2",1,1,1, nil)
         detailsLine = 3
+        if SpellCastBuffs.SV.TooltipEnable then
+            GameTooltip:SetVerticalPadding(1)
+            ZO_Tooltip_AddDivider(GameTooltip)
+            GameTooltip:SetVerticalPadding(5)
+            GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
+            detailsLine = 5
+        end
+        SpellCastBuffs.TooltipBottomLine(control, detailsLine, true)
+    else
+        if not SpellCastBuffs.SV.TooltipEnable then
+            GameTooltip:AddLine(tooltipTitle, "ZoFontHeader2",1,1,1, nil)
+            detailsLine = 3
+            SpellCastBuffs.TooltipBottomLine(control, detailsLine)
+            return
+        end
+
+        if control.tooltip then
+            tooltipText = control.tooltip
+        else
+            local duration
+            if type(control.effectId) == "number" then
+                duration = control.duration / 1000
+                local value2
+                local value3
+                if Effects.EffectOverride[control.effectId] then
+                    if Effects.EffectOverride[control.effectId].tooltipValue2 then
+                        value2 = Effects.EffectOverride[control.effectId].tooltipValue2
+                    elseif Effects.EffectOverride[control.effectId].tooltipValue2Mod then
+                        value2 = math.floor( duration + Effects.EffectOverride[control.effectId].tooltipValue2Mod + 0.5 )
+                    elseif Effects.EffectOverride[control.effectId].tooltipValue2Id then
+                        value2 = math.floor(GetAbilityDuration(Effects.EffectOverride[control.effectId].tooltipValue2Id) + 0.5) / 1000
+                    else
+                        value2 = 0
+                    end
+                else
+                    value2 = 0
+                end
+                if Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltipValue3 then
+                    value3 = Effects.EffectOverride[control.effectId].tooltipValue3
+                else
+                    value3 = 0
+                end
+                duration = math.floor((duration * 10) + 0.5) / 10
+
+                tooltipText = (Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltip) and zo_strformat(Effects.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
+
+                -- Use separate Veteran difficulty tooltip if applicable.
+                if LUIE.ResolveVeteranDifficulty() == true and Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltipVet then
+                    tooltipText = zo_strformat(Effects.EffectOverride[control.effectId].tooltipVet, duration, value2, value3)
+                end
+                -- Use separate Ground tooltip if applicable (only applies to buffs not debuffs)
+                if Effects.EffectGroundDisplay[control.effectId] and Effects.EffectGroundDisplay[control.effectId].tooltip and control.buffType == BUFF_EFFECT_TYPE_BUFF then
+                    tooltipText = zo_strformat(Effects.EffectGroundDisplay[control.effectId].tooltip, duration, value2, value3)
+                end
+
+                -- Display Default Tooltip Description if no custom tooltip is present
+                if tooltipText == "" or tooltipText == nil then
+                    if GetAbilityEffectDescription(control.buffSlot) ~= "" then
+                        tooltipText = GetAbilityEffectDescription(control.buffSlot)
+                    end
+                end
+
+                -- Display Default Description if no internal effect description is present
+                if tooltipText == "" or tooltipText == nil then
+                    if GetAbilityDescription(control.effectId) ~= "" then
+                        tooltipText = GetAbilityDescription(control.effectId)
+                    end
+                end
+
+                -- Dynamic Tooltip if present
+                if Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].dynamicTooltip then
+                    tooltipText = LUIE.DynamicTooltip(control.effectId)
+                end
+
+            else
+                duration = 0
+            end
+        end
+
+        if Effects.TooltipUseDefault[control.effectId] then
+            if GetAbilityEffectDescription(control.buffSlot) ~= "" then
+                tooltipText = GetAbilityEffectDescription(control.buffSlot)
+                tooltipText = LUIE.UpdateMundusTooltipSyntax(control.effectId, tooltipText)
+            end
+        end
+
+        local thirdLine
+        local duration = control.duration / 1000
+        if Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltipDurFix then
+            duration = duration + Effects.EffectOverride[control.effectId].tooltipDurFix
+        end
+        --[[
+        if Effects.TooltipNameOverride[control.effectName] then
+            thirdLine = zo_strformat(Effects.TooltipNameOverride[control.effectName], duration)
+        end
+        if Effects.TooltipNameOverride[control.effectId] then
+            thirdLine = zo_strformat(Effects.TooltipNameOverride[control.effectId], duration)
+        end
+        ]]--
+        -- Have to trim trailing spaces on the end of tooltips
+        if tooltipText ~= "" then
+            tooltipText = string.match(tooltipText, ".*%S")
+        end
+        if thirdLine ~="" and thirdLine ~= nil then
+            colorText = control.buffType == BUFF_EFFECT_TYPE_DEBUFF and ZO_ERROR_COLOR or ZO_SUCCEEDED_TEXT
+        end
+
+        detailsLine = 5
+
+        GameTooltip:AddLine(tooltipTitle, "ZoFontHeader2",1,1,1, nil)
+        if tooltipText ~= "" and tooltipText ~= nil then
+            GameTooltip:SetVerticalPadding(1)
+            ZO_Tooltip_AddDivider(GameTooltip)
+            GameTooltip:SetVerticalPadding(5)
+            GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
+        end
+        if thirdLine ~="" and thirdLine ~= nil then
+            if tooltipText == "" or tooltipText == nil then
+                GameTooltip:SetVerticalPadding(1)
+                ZO_Tooltip_AddDivider(GameTooltip)
+                GameTooltip:SetVerticalPadding(5)
+            end
+            detailsLine = 7
+            GameTooltip:AddLine(thirdLine, "", ZO_NORMAL_TEXT:UnpackRGB())
+        end
+
         SpellCastBuffs.TooltipBottomLine(control, detailsLine)
-        return
+
+        -- Tooltip Debug
+        -- GameTooltip:SetAbilityId(117391)
+
     end
-
-    if GetAbilityEffectDescription(control.buffSlot) ~= "" then
-        tooltipText = GetAbilityEffectDescription(control.buffSlot)
-        tooltipText = LUIE.UpdateMundusTooltipSyntax(control.effectId, tooltipText)
-    end
-
-    -- Have to trim trailing spaces on the end of tooltips
-    if tooltipText ~= "" then
-        tooltipText = zo_strmatch(tooltipText, ".*%S")
-    end
-
-    detailsLine = 5
-
-    GameTooltip:AddLine(tooltipTitle, "ZoFontHeader2", 1, 1, 1, nil)
-    if tooltipText ~= "" and tooltipText ~= nil then
-        GameTooltip:SetVerticalPadding(1)
-        ZO_Tooltip_AddDivider(GameTooltip)
-        GameTooltip:SetVerticalPadding(5)
-        GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
-    end
-
-    SpellCastBuffs.TooltipBottomLine(control, detailsLine)
 end
 
 -- OnMouseExit for Buff Tooltips

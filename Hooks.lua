@@ -282,6 +282,504 @@ function LUIE.InitializeHooks()
         self.lastSynergyName = synergyName
     end
 
+    -- Hook STATS Screen Buffs & Debuffs to hide buffs not needed, update icons, names, durations, and tooltips
+    local function EffectsRowComparator(left, right)
+        local leftIsArtificial, rightIsArtificial = left.isArtificial, right.isArtificial
+        if leftIsArtificial ~= rightIsArtificial then
+            -- Artificial before real
+            return leftIsArtificial
+        else
+            if leftIsArtificial then
+                -- Both artificial, use def defined sort order
+                return left.sortOrder < right.sortOrder
+            else
+                -- Both real, use time
+                return left.time.endTime < right.time.endTime
+            end
+        end
+    end
+
+    STATS.AddLongTermEffects = function(self, container, effectsRowPool)
+        local function UpdateEffects()
+            if not container:IsHidden() then
+                effectsRowPool:ReleaseAllObjects()
+
+                local effectsRows = {}
+
+                --Artificial effects--
+                for effectId in ZO_GetNextActiveArtificialEffectIdIter do
+                    local displayName, iconFile, effectType, sortOrder, startTime, endTime = GetArtificialEffectInfo(effectId)
+                    local effectsRow = effectsRowPool:AcquireObject()
+                    effectsRow.name:SetText(zo_strformat(SI_ABILITY_TOOLTIP_NAME, displayName))
+                    effectsRow.icon:SetTexture(iconFile)
+                    effectsRow.effectType = effectType
+                    local duration = startTime - endTime
+                    effectsRow.time:SetHidden(duration == 0)
+                    effectsRow.time.endTime = endTime
+                    effectsRow.sortOrder = sortOrder
+                    effectsRow.tooltipTitle = zo_strformat(SI_ABILITY_TOOLTIP_NAME, displayName)
+                    effectsRow.effectId = effectId
+                    effectsRow.isArtificial = true
+                    effectsRow.isArtificialTooltip = true
+
+                    -- TODO: This may no longer be needed, check (the section above is current on live server before Blackwood PTS too)
+                    if effectId == 3 then -- Battleground Deserter Penalty
+                        startTime = GetFrameTimeSeconds()
+                        local cooldown = GetLFGCooldownTimeRemainingSeconds(LFG_COOLDOWN_BATTLEGROUND_DESERTED)
+                        endTime = startTime + cooldown
+                        duration = startTime - endTime
+                        effectsRow.time:SetHidden(duration == 0)
+                        effectsRow.time.endTime = endTime
+                        effectsRow.isArtificial = false -- Sort with normal buffs
+                    end
+                    table.insert(effectsRows, effectsRow)
+                end
+
+                local counter = 1
+                local trackBuffs = { }
+                for i = 1, GetNumBuffs("player") do
+                    local buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId = GetUnitBuffInfo("player", i)
+                    trackBuffs[counter] = {
+                        buffName = buffName,
+                        startTime = startTime,
+                        endTime = endTime,
+                        buffSlot = buffSlot,
+                        stackCount = stackCount,
+                        iconFile = iconFile,
+                        buffType = buffType,
+                        effectType = effectType,
+                        abilityType = abilityType,
+                        statusEffectType = statusEffectType,
+                        abilityId = abilityId
+                    }
+                    counter = counter + 1
+                end
+
+                -- Heavy handed - but functional way to mark duplicate abilities to not display by only displaying the one with the latest end time.
+                for i = 1, #trackBuffs do
+                    local compareId = trackBuffs[i].abilityId
+                    local compareTime = trackBuffs[i].endTime
+                    -- Only re-iterate and compare if this ability is on the override table, this way we avoid as much of this double loop as possible.
+                    if LUIE.Data.Effects.EffectOverride[compareId] and LUIE.Data.Effects.EffectOverride[compareId].noDuplicate then
+                        for k, v in pairs(trackBuffs) do
+                            -- Only remove the lower duration effects that were cast previously or simultaneously.
+                            if v.abilityId == compareId and v.endTime < compareTime then
+                                v.markForRemove = true
+                            end
+                        end
+                    end
+                end
+
+                for i = 1, #trackBuffs do
+                    local buffName = trackBuffs[i].buffName
+                    local startTime =  trackBuffs[i].startTime
+                    local endTime =  trackBuffs[i].endTime
+                    local buffSlot =  trackBuffs[i].buffSlot
+                    local stackCount =  trackBuffs[i].stackCount
+                    local iconFile =  trackBuffs[i].iconFile
+                    local buffType =  trackBuffs[i].buffType
+                    local effectType =  trackBuffs[i].effectType
+                    local abilityType =  trackBuffs[i].abilityType
+                    local statusEffectType =  trackBuffs[i].statusEffectType
+                    local abilityId =  trackBuffs[i].abilityId
+                    local markForRemove = trackBuffs[i].markForRemove or false
+
+                    local timer = endTime - startTime
+                    local value2
+                    local value3
+                    if LUIE.Data.Effects.EffectOverride[abilityId] then
+                        if LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2 then
+                            value2 = LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2
+                        elseif LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Mod then
+                            value2 = math.floor( timer + E.EffectOverride[abilityId].tooltipValue2Mod + 0.5 )
+                        elseif LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id then
+                            value2 =  math.floor(GetAbilityDuration(LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id) + 0.5) / 1000
+                        else
+                            value2 = 0
+                        end
+                    else
+                        value2 = 0
+                    end
+                    if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue3 then
+                        value3 = LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue3
+                    else
+                        value3 = 0
+                    end
+                    timer = math.floor((timer * 10) + 0.5) / 10
+
+                    local tooltipText
+
+                    -- Use separate Veteran difficulty tooltip if applicable.
+                    if LUIE.ResolveVeteranDifficulty() == true and LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltipVet then
+                        tooltipText = zo_strformat(LUIE.Data.Effects.EffectOverride[abilityId].tooltipVet, timer, value2, value3)
+                    else
+                        tooltipText = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltip) and zo_strformat(LUIE.Data.Effects.EffectOverride[abilityId].tooltip, timer, value2, value3) or GetAbilityDescription(abilityId)
+                    end
+
+                    -- Display Default Tooltip Description if no custom tooltip is present
+                    if tooltipText == "" or tooltipText == nil then
+                        if GetAbilityEffectDescription(buffSlot) ~= "" then
+                            tooltipText = GetAbilityEffectDescription(buffSlot)
+                        end
+                    end
+
+                    -- Override custom tooltip with default tooltip if this ability is flagged to do so (scaling buffs like Mundus Stones)
+                    if LUIE.Data.Effects.TooltipUseDefault[abilityId] then
+                        if GetAbilityEffectDescription(buffSlot) ~= "" then
+                            tooltipText = GetAbilityEffectDescription(buffSlot)
+                            tooltipText = LUIE.UpdateMundusTooltipSyntax(abilityId, tooltipText)
+                        end
+                    end
+
+                    -- Dynamic Tooltip if present
+                    if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].dynamicTooltip then
+                        tooltipText = LUIE.DynamicTooltip(abilityId)
+                    end
+
+                    if tooltipText ~= "" then
+                        tooltipText = string.match(tooltipText, ".*%S")
+                    end
+                    local thirdLine
+                    local timer2 = (endTime - startTime)
+                    if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltipDurFix then
+                        timer2 = timer2 + LUIE.Data.Effects.EffectOverride[abilityId].tooltipDurFix
+                    end
+                    --[[
+                    if LUIE.Data.Effects.TooltipNameOverride[buffName] then
+                        thirdLine = zo_strformat(LUIE.Data.Effects.TooltipNameOverride[buffName], timer2)
+                    end
+                    if LUIE.Data.Effects.TooltipNameOverride[abilityId] then
+                        thirdLine = zo_strformat(LUIE.Data.Effects.TooltipNameOverride[abilityId], timer2)
+                    end
+                    ]]--
+
+                    -- Change effect type if needed
+                    if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].type then effectType = LUIE.Data.Effects.EffectOverride[abilityId].type end
+
+                    if buffSlot > 0 and buffName ~= "" and not (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].hide) and not markForRemove then
+                        if (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].hideReduce and not LUIE.SpellCastBuffs.SV.HideReduce) or not (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].hideReduce) then
+                            local effectsRow = effectsRowPool:AcquireObject()
+                            effectsRow.name:SetText(zo_strformat(SI_ABILITY_TOOLTIP_NAME, buffName))
+                            effectsRow.icon:SetTexture(iconFile)
+                            effectsRow.tooltipTitle = zo_strformat(SI_ABILITY_TOOLTIP_NAME, buffName)
+                            effectsRow.tooltipText = tooltipText
+                            effectsRow.thirdLine = thirdLine
+                            local duration = startTime - endTime
+                            effectsRow.time:SetHidden(duration == 0)
+                            effectsRow.time.endTime = endTime
+                            effectsRow.effectType = effectType
+                            effectsRow.buffSlot = buffSlot
+                            effectsRow.isArtificial = false
+                            effectsRow.effectId = abilityId
+
+                            table.insert(effectsRows, effectsRow)
+                        end
+                    end
+                end
+
+                table.sort(effectsRows, EffectsRowComparator)
+                local prevRow
+                for i, effectsRow in ipairs(effectsRows) do
+                    if prevRow then
+                        effectsRow:SetAnchor(TOPLEFT, prevRow, BOTTOMLEFT)
+                    else
+                        effectsRow:SetAnchor(TOPLEFT, nil, TOPLEFT, 5, 0)
+                    end
+                    effectsRow:SetHidden(false)
+
+                    prevRow = effectsRow
+                end
+            end
+        end
+
+
+        local function OnEffectChanged(eventCode, changeType, buffSlot, buffName, unitTag)
+            UpdateEffects()
+        end
+
+        container:RegisterForEvent(EVENT_EFFECT_CHANGED, OnEffectChanged)
+        container:AddFilterForEvent(EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "player")
+        container:RegisterForEvent(EVENT_EFFECTS_FULL_UPDATE, UpdateEffects)
+        container:RegisterForEvent(EVENT_ARTIFICIAL_EFFECT_ADDED, UpdateEffects)
+        container:RegisterForEvent(EVENT_ARTIFICIAL_EFFECT_REMOVED, UpdateEffects)
+        container:SetHandler("OnEffectivelyShown", UpdateEffects)
+    end
+
+    local GAMEPAD_STATS_DISPLAY_MODE =
+    {
+        CHARACTER = 1,
+        ATTRIBUTES = 2,
+        EFFECTS = 3,
+        TITLE = 4,
+        OUTFIT = 5,
+        LEVEL_UP_REWARDS = 6,
+        UPCOMING_LEVEL_UP_REWARDS = 7,
+        ADVANCED_ATTRIBUTES = 8,
+    }
+
+    local function ArtificialEffectsRowComparator(left, right)
+        return left.sortOrder < right.sortOrder
+    end
+
+    -- Hook GAMEPAD Stats List
+    GAMEPAD_STATS.RefreshMainList = function(self)
+        if self.currentTitleDropdown and self.currentTitleDropdown:IsDropdownVisible() then
+            self.refreshMainListOnDropdownClose = true
+            return
+        end
+
+        self.mainList:Clear()
+
+        --Level Up Reward
+        if HasPendingLevelUpReward() then
+            self.mainList:AddEntry("ZO_GamepadNewMenuEntryTemplate", self.claimRewardsEntry)
+        elseif HasUpcomingLevelUpReward() then
+            self.mainList:AddEntry("ZO_GamepadMenuEntryTemplate", self.upcomingRewardsEntry)
+        end
+
+        --Title
+        self.mainList:AddEntryWithHeader("ZO_GamepadStatTitleRow", self.titleEntry)
+
+        -- Attributes
+        for index, attributeEntry in ipairs(self.attributeEntries) do
+            if index == 1 then
+                self.mainList:AddEntryWithHeader("ZO_GamepadStatAttributeRow", attributeEntry)
+            else
+                self.mainList:AddEntry("ZO_GamepadStatAttributeRow", attributeEntry)
+            end
+        end
+
+        -- Character Info
+        self.mainList:AddEntryWithHeader("ZO_GamepadMenuEntryTemplate", self.advancedStatsEntry)
+        self.mainList:AddEntry("ZO_GamepadMenuEntryTemplate", self.characterEntry)
+
+        -- Active Effects--
+        self.numActiveEffects = 0
+
+        --Artificial effects
+        local sortedArtificialEffectsTable = {}
+        for effectId in ZO_GetNextActiveArtificialEffectIdIter do
+            local displayName, iconFile, effectType, sortOrder, startTime, endTime = GetArtificialEffectInfo(effectId)
+
+            local data = ZO_GamepadEntryData:New(zo_strformat(SI_ABILITY_TOOLTIP_NAME, displayName), iconFile)
+            data.displayMode = GAMEPAD_STATS_DISPLAY_MODE.EFFECTS
+            data.canClickOff = false
+            data.artificialEffectId = effectId
+            data.tooltipTitle = displayName
+            data.sortOrder = sortOrder
+            data.isArtificial = true
+
+            local duration = endTime - startTime
+            if duration > 0 then
+                local timeLeft = (endTime * 1000.0) - GetFrameTimeMilliseconds()
+                data:SetCooldown(timeLeft, duration * 1000.0)
+            end
+
+            table.insert(sortedArtificialEffectsTable, data)
+        end
+
+        table.sort(sortedArtificialEffectsTable, ArtificialEffectsRowComparator)
+
+        for i, data in ipairs(sortedArtificialEffectsTable) do
+            self:AddActiveEffectData(data)
+        end
+
+        --Real Effects
+        local numBuffs = GetNumBuffs("player")
+        local hasActiveEffects = numBuffs > 0
+        if hasActiveEffects then
+            for i = 1, numBuffs do
+                local buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff = GetUnitBuffInfo("player", i)
+
+                if buffSlot > 0 and buffName ~= "" then
+                    local data = ZO_GamepadEntryData:New(zo_strformat(SI_ABILITY_TOOLTIP_NAME, buffName), iconFile)
+                    data.displayMode = GAMEPAD_STATS_DISPLAY_MODE.EFFECTS
+                    data.buffIndex = i
+                    data.buffSlot = buffSlot
+                    data.canClickOff = canClickOff
+                    data.isArtificial = false
+
+                    local duration = endTime - startTime
+                    if duration > 0 then
+                        local timeLeft = (endTime * 1000.0) - GetFrameTimeMilliseconds()
+                        data:SetCooldown(timeLeft, duration * 1000.0)
+                    end
+
+                    -- Hide effects if they are set to hide on the override.
+                    if not (LUIE.Data.Effects.EffectOverride[abilityId]) or (LUIE.Data.Effects.EffectOverride[abilityId] and not LUIE.Data.Effects.EffectOverride[abilityId].hide) then
+                        self:AddActiveEffectData(data)
+                    end
+                end
+            end
+        end
+
+        if self.numActiveEffects == 0 then
+            local data = ZO_GamepadEntryData:New(GetString(SI_STAT_GAMEPAD_EFFECTS_NONE_ACTIVE))
+            data.displayMode = GAMEPAD_STATS_DISPLAY_MODE.EFFECTS
+            data:SetHeader(GetString(SI_STATS_ACTIVE_EFFECTS))
+
+            self.mainList:AddEntryWithHeader("ZO_GamepadEffectAttributeRow", data)
+        end
+
+        self.mainList:Commit()
+
+        KEYBIND_STRIP:UpdateKeybindButtonGroup(self.keybindStripDescriptor)
+    end
+
+    -- Hook GAMEPAD Stats Refresh
+    GAMEPAD_STATS.RefreshCharacterEffects = function(self)
+        local selectedData = self.mainList:GetTargetData()
+
+        local contentTitle, contentDescription, contentStartTime, contentEndTime, _
+
+        local buffSlot, abilityId, buffType
+        if selectedData.isArtificial then
+            abilityId = selectedData.artificialEffectId
+            buffType = BUFF_EFFECT_TYPE_BUFF
+            contentTitle, _, _, _, contentStartTime, contentEndTime = GetArtificialEffectInfo(selectedData.artificialEffectId)
+            contentDescription = GetArtificialEffectTooltipText(selectedData.artificialEffectId)
+        else
+            contentTitle, contentStartTime, contentEndTime, buffSlot, _, _, _, buffType, _, _, abilityId = GetUnitBuffInfo("player", selectedData.buffIndex)
+
+            if DoesAbilityExist(abilityId) then
+                contentDescription = GetAbilityEffectDescription(buffSlot)
+
+                local timer = contentEndTime - contentStartTime
+                local value2
+                local value3
+                if LUIE.Data.Effects.EffectOverride[abilityId] then
+                    if LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2 then
+                        value2 = LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2
+                    elseif LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Mod then
+                        value2 = math.floor( timer + E.EffectOverride[abilityId].tooltipValue2Mod + 0.5 )
+                    elseif LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id then
+                        value2 =  math.floor(GetAbilityDuration(LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id) + 0.5) / 1000
+                    else
+                        value2 = 0
+                    end
+                else
+                    value2 = 0
+                end
+                if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue3 then
+                    value3 = LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue3
+                else
+                    value3 = 0
+                end
+                timer = math.floor((timer * 10) + 0.5) / 10
+
+                local tooltipText
+                if LUIE.ResolveVeteranDifficulty() == true and LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltipVet then
+                    tooltipText = zo_strformat(LUIE.Data.Effects.EffectOverride[abilityId].tooltipVet, timer, value2, value3)
+                else
+                    tooltipText = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltip) and zo_strformat(LUIE.Data.Effects.EffectOverride[abilityId].tooltip, timer, value2, value3) or ""
+                end
+
+                -- Display Default Tooltip Description if no custom tooltip is present
+                if tooltipText == "" or tooltipText == nil then
+                    if GetAbilityEffectDescription(buffSlot) ~= "" then
+                        tooltipText = GetAbilityEffectDescription(buffSlot)
+                    end
+                end
+
+                -- Display Default Description if no internal effect description is present
+                if tooltipText == "" or tooltipText == nil then
+                    if GetAbilityDescription(abilityId) ~= "" then
+                        tooltipText = GetAbilityDescription(abilityId)
+                    end
+                end
+
+                -- Override custom tooltip with default tooltip if this ability is flagged to do so (scaling buffs like Mundus Stones)
+                if LUIE.Data.Effects.TooltipUseDefault[abilityId] then
+                    if GetAbilityEffectDescription(buffSlot) ~= "" then
+                        tooltipText = GetAbilityEffectDescription(buffSlot)
+                        tooltipText = LUIE.UpdateMundusTooltipSyntax(abilityId, tooltipText)
+                    end
+                end
+
+                if tooltipText ~= "" then
+                    tooltipText = string.match(tooltipText, ".*%S")
+                end
+                local thirdLine
+                local timer2 = (contentEndTime - contentStartTime)
+                if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltipDurFix then
+                    timer2 = timer2 + LUIE.Data.Effects.EffectOverride[abilityId].tooltipDurFix
+                end
+                --[[
+                if LUIE.Data.Effects.TooltipNameOverride[contentTitle] then
+                    thirdLine = zo_strformat(LUIE.Data.Effects.TooltipNameOverride[contentTitle], timer2)
+                end
+                if LUIE.Data.Effects.TooltipNameOverride[abilityId] then
+                    thirdLine = zo_strformat(LUIE.Data.Effects.TooltipNameOverride[abilityId], timer2)
+                end
+                ]]--
+
+                contentDescription = tooltipText
+                if thirdLine ~= "" and thirdLine ~= nil then
+                    contentDescription = thirdLine
+                end
+            end
+        end
+
+        -- Add Ability ID / Buff Type Lines
+        if LUIE.SpellCastBuffs.SV.TooltipAbilityId or LUIE.SpellCastBuffs.SV.TooltipBuffType then
+            -- Add Ability ID Line
+            if LUIE.SpellCastBuffs.SV.TooltipAbilityId then
+                local labelAbilityId = abilityId and abilityId or "None"
+                if labelAbilityId == "Fake" then
+                    artificial = true
+                end
+                if selectedData.isArtificial then
+                    -- Change id for Battle Spirit to match the one we track in SCB to avoid confusion
+                    if abilityId == 0 or abilityId == 2 then
+                        labelAbilityId = 999014
+                    else
+                        labelAbilityId = "Artificial"
+                    end
+                end
+                contentDescription = contentDescription .. "\n\nAbility ID: " .. labelAbilityId
+            end
+
+            -- Add Buff Type Line
+            if LUIE.SpellCastBuffs.SV.TooltipBuffType then
+                buffType = buffType or LUIE_BUFF_TYPE_NONE
+                if abilityId and LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].unbreakable then
+                    buffType = buffType + 2
+                end
+
+                -- Setup tooltips for player aoe trackers
+                if abilityId and LUIE.Data.Effects.EffectGroundDisplay[abilityId] then
+                    buffType = buffType + 4
+                end
+
+                -- Setup tooltips for ground buff/debuff effects
+                if abilityId and (LUIE.Data.Effects.AddGroundDamageAura[abilityId] or (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].groundLabel) ) then
+                    buffType = buffType + 6
+                end
+
+                local endLine = buffTypes[buffType]
+                contentDescription = contentDescription .. "\nType: " .. endLine
+            end
+        end
+
+        local contentDuration = contentEndTime - contentStartTime
+        if contentDuration > 0 then
+            local function OnTimerUpdate()
+                local timeLeft = contentEndTime - (GetFrameTimeMilliseconds() / 1000.0)
+
+                local timeLeftText = ZO_FormatTime(timeLeft, TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_TWELVE_HOUR)
+
+                self:RefreshContentHeader(contentTitle, GetString(SI_STAT_GAMEPAD_TIME_REMAINING), timeLeftText)
+            end
+
+            self.effectDesc:SetHandler("OnUpdate", OnTimerUpdate)
+        else
+            self.effectDesc:SetHandler("OnUpdate", nil)
+        end
+
+        self.effectDesc:SetText(contentDescription)
+        self:RefreshContentHeader(contentTitle)
+    end
+
     -- Hook for request friend so menu option also displays invite message
     -- Menu is true if this request is sent from the Player to Player interaction menu
     local zos_RequestFriend = RequestFriend
