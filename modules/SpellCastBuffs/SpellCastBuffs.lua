@@ -14,7 +14,7 @@ local Tooltips = LUIE.Data.Tooltips
 
 local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
-local displayName = GetDisplayName()
+--local displayName = GetDisplayName()
 local eventManager = EVENT_MANAGER
 local sceneManager = SCENE_MANAGER
 local windowManager = WINDOW_MANAGER
@@ -2072,8 +2072,8 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
 
         -- If this effect doesn't properly display stacks - then add them.
         if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].displayStacks then
-            for context, effectsList in pairs(SpellCastBuffs.EffectsList) do
-                for k, v in pairs(effectsList) do
+            for _, effectsList in pairs(SpellCastBuffs.EffectsList) do
+                for _, v in pairs(effectsList) do
                     -- Add stacks
                     if v.id == abilityId then
                         stackCount = v.stack + 1
@@ -2115,53 +2115,54 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
     end
 end
 
+-- Define a function to handle Battle Spirit effect IDs
+local function handleBattleSpiritEffectId(effectId)
+    local tooltip = nil
+    local artificial = true
+    if effectId == 0 or effectId == 2 then
+        if effectId == 0 then
+            tooltip = Tooltips.Innate_Battle_Spirit
+        else
+            tooltip = Tooltips.Innate_Battle_Spirit_Imperial_City
+        end
+        effectId = 999014
+        artificial = false
+    end
+    return effectId, tooltip, artificial
+end
+
 -- Runs on the EVENT_ARTIFICIAL_EFFECT_ADDED / EVENT_ARTIFICIAL_EFFECT_REMOVED listener.
 -- This handler fires whenever an ArtificialEffectId is added or removed
 function SpellCastBuffs.ArtificialEffectUpdate(eventCode, effectId)
     if SpellCastBuffs.SV.HidePlayerBuffs then
         return
     end
-
     if effectId then
         local removeEffect = effectId
-        -- Battle Spirit handling, set this id to a fake id so it matches the target display
+        -- Handle Battle Spirit effect ID
         if effectId == 0 or effectId == 2 then
             removeEffect = 999014
         end
+        local displayName = GetDisplayName()
         local context = SpellCastBuffs.DetermineContextSimple("player1", removeEffect, displayName)
         SpellCastBuffs.EffectsList[context][removeEffect] = nil
     end
-
-    for effectId in ZO_GetNextActiveArtificialEffectIdIter do
+    for activeEffectId in ZO_GetNextActiveArtificialEffectIdIter do
         -- Bail out if we don't have Battle Spirit display for the player on
-        if (effectId == 0 or effectId == 2) and SpellCastBuffs.SV.IgnoreBattleSpiritPlayer then
+        if (activeEffectId == 0 or activeEffectId == 2) and SpellCastBuffs.SV.IgnoreBattleSpiritPlayer then
             return
         end
-
-        local displayName, iconFile, effectType, _, startTime = GetArtificialEffectInfo(effectId)
+        local displayName, iconFile, effectType, _, startTime = GetArtificialEffectInfo(activeEffectId)
         local duration = 0
         local endTime = nil
-
-        if effectId == 3 then
+        if activeEffectId == 3 then
             duration = 300000
             startTime = GetGameTimeMilliseconds()
             endTime = startTime + (GetLFGCooldownTimeRemainingSeconds(LFG_COOLDOWN_BATTLEGROUND_DESERTED) * 1000)
             effectType = BUFF_EFFECT_TYPE_BUFF -- Set to buff so it shows in long duration effects
         end
-
-        local tooltip = nil
-        local artificial = true
-        -- Battle Spirit handling, set this id to a fake id so it matches the target display
-        if effectId == 0 or effectId == 2 then
-            if effectId == 0 then
-                tooltip = Tooltips.Innate_Battle_Spirit
-            else
-                tooltip = Tooltips.Innate_Battle_Spirit_Imperial_City
-            end
-            effectId = 999014
-            artificial = false
-        end
-
+        local tooltip, artificial
+        effectId, tooltip, artificial = handleBattleSpiritEffectId(activeEffectId)
         local context = SpellCastBuffs.DetermineContextSimple("player1", effectId, displayName)
         SpellCastBuffs.EffectsList[context][effectId] = {
             target = SpellCastBuffs.DetermineTarget(context),
@@ -2982,6 +2983,7 @@ function SpellCastBuffs.OnCombatEventOut(eventCode, result, isError, abilityName
         if not DoesUnitExist("reticleover") then
         end
         --if GetUnitReaction("reticleover") ~= UNIT_REACTION_HOSTILE then return end
+        local displayName = GetDisplayName()
         local unitTag = displayName
         if IsUnitDead(unitTag) then
             return
@@ -3317,8 +3319,8 @@ function SpellCastBuffs.AddNameAura()
             local zone = v.zone
             if zone then
                 local flag = false
-                for k, v in pairs(zone) do
-                    if GetZoneId(GetCurrentMapZoneIndex()) == k then
+                for i, j in pairs(zone) do
+                    if GetZoneId(GetCurrentMapZoneIndex()) == i then
                         flag = true
                     end
                 end
