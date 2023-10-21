@@ -2144,6 +2144,9 @@ function SpellCastBuffs.CreateSettings()
                 end,
                 width = "half",
                 default = Defaults.WidthPlayerBuffs,
+                disabled = function()
+                    return Settings.lockPositionToUnitFrames
+                end,
             },
 
             {
@@ -2162,6 +2165,9 @@ function SpellCastBuffs.CreateSettings()
                 end,
                 width = "half",
                 default = Defaults.StackPlayerBuffs,
+                disabled = function()
+                    return Settings.lockPositionToUnitFrames
+                end,
             },
 
             {
@@ -2181,6 +2187,9 @@ function SpellCastBuffs.CreateSettings()
                 end,
                 width = "half",
                 default = Defaults.WidthPlayerDebuffs,
+                disabled = function()
+                    return Settings.lockPositionToUnitFrames
+                end,
             },
 
             {
@@ -2199,6 +2208,9 @@ function SpellCastBuffs.CreateSettings()
                 end,
                 width = "half",
                 default = Defaults.StackPlayerDebuffs,
+                disabled = function()
+                    return Settings.lockPositionToUnitFrames
+                end,
             },
 
             {
@@ -2218,6 +2230,9 @@ function SpellCastBuffs.CreateSettings()
                 end,
                 width = "half",
                 default = Defaults.WidthTargetBuffs,
+                disabled = function()
+                    return Settings.lockPositionToUnitFrames
+                end,
             },
 
             {
@@ -2236,6 +2251,9 @@ function SpellCastBuffs.CreateSettings()
                 end,
                 width = "half",
                 default = Defaults.StackTargetBuffs,
+                disabled = function()
+                    return Settings.lockPositionToUnitFrames
+                end,
             },
 
             {
@@ -2255,6 +2273,9 @@ function SpellCastBuffs.CreateSettings()
                 end,
                 width = "half",
                 default = Defaults.WidthTargetDebuffs,
+                disabled = function()
+                    return Settings.lockPositionToUnitFrames
+                end,
             },
 
             {
@@ -2273,6 +2294,9 @@ function SpellCastBuffs.CreateSettings()
                 end,
                 width = "half",
                 default = Defaults.StackTargetDebuffs,
+                disabled = function()
+                    return Settings.lockPositionToUnitFrames
+                end,
             },
 
             -- Long Term Alignment & Sorting
