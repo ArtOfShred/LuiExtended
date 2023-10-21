@@ -3,6 +3,12 @@
     License: The MIT License (MIT)
 --]]
 
+local function ToInteger(number)
+    return zo_floor(tonumber(number) or error("Could not cast '" .. tostring(number) .. "' to number.'"))
+end
+-- Create access to local function
+LUIE.ToInteger = ToInteger
+
 -- Called from the menu and on initialization to update timestamp color when changed.
 LUIE.TimeStampColorize = nil
 function LUIE.UpdateTimeStampColor()
@@ -16,46 +22,35 @@ end
 
 -- Return a formatted time
 -- Stolen from pChat, thanks @Ayantir
----@param timeStr string
----@param formatStr string
----@return string timestamp
 local function CreateTimestamp(timeStr, formatStr)
     formatStr = formatStr or LUIE.ChatAnnouncements.SV.TimeStampFormat
-    -- Check if pChat is active
-    local pChatActive = SYSTEMS:GetSystem("pChat")
 
-    if pChatActive then
-        -- pChat is active, do not format the timestamp
-        return timeStr
+    local hours, minutes, seconds = zo_strmatch(timeStr, "([^%:]+):([^%:]+):([^%:]+)")
+    local hoursNoLead = ToInteger(hours) -- hours without leading zero
+    local hours12NoLead = (hoursNoLead - 1) % 12 + 1
+    local hours12
+    if hours12NoLead < 10 then
+        hours12 = "0" .. hours12NoLead
     else
-        -- pChat is not active, format the timestamp
-        local hours, minutes, seconds = timeStr:match("([^%:]+):([^%:]+):([^%:]+)")
-        local hoursNoLead = tonumber(hours) -- hours without leading zero
-        local hours12NoLead = (hoursNoLead - 1) % 12 + 1
-        local hours12
-        if hours12NoLead < 10 then
-            hours12 = "0" .. hours12NoLead
-        else
-            hours12 = hours12NoLead
-        end
-        local pUp = "AM"
-        local pLow = "am"
-        if hoursNoLead >= 12 then
-            pUp = "PM"
-            pLow = "pm"
-        end
-        -- create new one
-        local timestamp = formatStr
-        timestamp = zo_strgsub(timestamp, "HH", hours)
-        timestamp = zo_strgsub(timestamp, "H", hoursNoLead)
-        timestamp = zo_strgsub(timestamp, "hh", hours12)
-        timestamp = zo_strgsub(timestamp, "h", hours12NoLead)
-        timestamp = zo_strgsub(timestamp, "m", minutes)
-        timestamp = zo_strgsub(timestamp, "s", seconds)
-        timestamp = zo_strgsub(timestamp, "A", pUp)
-        timestamp = zo_strgsub(timestamp, "a", pLow)
-        return tostring(timestamp)
+        hours12 = hours12NoLead
     end
+    local pUp = "AM"
+    local pLow = "am"
+    if hoursNoLead >= 12 then
+        pUp = "PM"
+        pLow = "pm"
+    end
+    -- create new one
+    local timestamp = formatStr
+    timestamp = zo_strgsub(timestamp, "HH", hours)
+    timestamp = zo_strgsub(timestamp, "H", hoursNoLead)
+    timestamp = zo_strgsub(timestamp, "hh", hours12)
+    timestamp = zo_strgsub(timestamp, "h", hours12NoLead)
+    timestamp = zo_strgsub(timestamp, "m", minutes)
+    timestamp = zo_strgsub(timestamp, "s", seconds)
+    timestamp = zo_strgsub(timestamp, "A", pUp)
+    timestamp = zo_strgsub(timestamp, "a", pLow)
+    return timestamp
 end
 
 -- Create access to local function
@@ -63,13 +58,13 @@ LUIE.CreateTimestamp = CreateTimestamp
 
 -- FormatMessage helper function
 local function FormatMessage(msg, doTimestamp)
-    local msg = msg or ""
+    local formattedMsg = msg or ""
     if doTimestamp then
         local timestring = GetTimeString()
         -- Color Code to match pChat default
-        msg = string.format("|c%s[%s]|r %s", LUIE.TimeStampColorize, LUIE.CreateTimestamp(timestring), msg)
+        formattedMsg = string.format("|c%s[%s]|r %s", LUIE.TimeStampColorize, LUIE.CreateTimestamp(timestring), formattedMsg)
     end
-    return msg
+    return formattedMsg
 end
 
 -- Hide all controls if needed
@@ -79,11 +74,9 @@ function LUIE.ToggleVisibility(hidden)
     end
 end
 
-local function AddSystemMessage(...)
+function LUIE.AddSystemMessage(...)
     return CHAT_ROUTER:AddSystemMessage(...)
 end
-
-LUIE.AddSystemMessage = AddSystemMessage
 
 -- Easy Print to Chat
 function LUIE.PrintToChat(msg, isSystem)
@@ -91,8 +84,8 @@ function LUIE.PrintToChat(msg, isSystem)
         if LUIE.ChatAnnouncements.SV.ChatMethod == "Print to All Tabs" then
             if not LUIE.ChatAnnouncements.SV.ChatBypassFormat and CHAT_SYSTEM.primaryContainer then
                 -- Add timestamps if bypass is not enabled
-                local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
-                LUIE.AddSystemMessage(msg)
+                local formattedMsg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
+                LUIE.AddSystemMessage(formattedMsg)
             else
                 LUIE.AddSystemMessage(msg)
             end
@@ -101,8 +94,8 @@ function LUIE.PrintToChat(msg, isSystem)
             if isSystem and LUIE.ChatAnnouncements.SV.ChatSystemAll then
                 if not LUIE.ChatAnnouncements.SV.ChatBypassFormat then
                     -- Add timestamps if bypass is not enabled
-                    local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
-                    LUIE.AddSystemMessage(msg)
+                    local formattedMsg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
+                    LUIE.AddSystemMessage(formattedMsg)
                 else
                     LUIE.AddSystemMessage(msg)
                 end
@@ -113,7 +106,7 @@ function LUIE.PrintToChat(msg, isSystem)
                             local chatContainer = cc
                             if chatContainer then
                                 local chatWindow = cc.windows[i]
-                                local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
+                                local formattedMsg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
 
                                 -- Don't print into the Combat Metrics Log window if CMX is enabled.
                                 local flagHide = false
@@ -123,7 +116,7 @@ function LUIE.PrintToChat(msg, isSystem)
                                     end
                                 end
                                 if not flagHide then
-                                    chatContainer:AddEventMessageToWindow(chatWindow, msg, CHAT_CATEGORY_SYSTEM)
+                                    chatContainer:AddEventMessageToWindow(chatWindow, formattedMsg, CHAT_CATEGORY_SYSTEM)
                                 end
                             end
                         end
