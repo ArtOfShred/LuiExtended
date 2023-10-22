@@ -6,11 +6,6 @@
 LUIE.Data.CombatTextBlacklistPresets = {}
 local BlacklistPresets = LUIE.Data.CombatTextBlacklistPresets
 
--- Crouch Drain
-BlacklistPresets.CrouchDrain = {
-    [20301] = true, -- Crouch Drain
-}
-
 -- Sets
 BlacklistPresets.Sets = {
     [135919] = true, -- Spell Parasite (Spell Parasite's)

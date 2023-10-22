@@ -252,18 +252,6 @@ function CombatText.CreateSettings()
                 type = "description",
                 text = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_DESCRIPT),
             },
-
-            -- Blacklist Button - Crouch Drain
-            {
-                type = "button",
-                name = GetString(SI_LUIE_LAM_CT_BLACKLIST_ADD_CROUCH),
-                tooltip = GetString(SI_LUIE_LAM_CT_BLACKLIST_ADD_CROUCH_TP),
-                func = function()
-                    CombatText.AddBulkToCustomList(Settings.blacklist, BlacklistPresets.CrouchDrain)
-                    LUIE_BlacklistCT:UpdateChoices(GenerateCustomList(Settings.blacklist))
-                end,
-                width = "half",
-            },
             -- Blacklist Button - Sets
             {
                 type = "button",

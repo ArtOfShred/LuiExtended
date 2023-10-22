@@ -1553,16 +1553,16 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
         if LUIE.PlayerDisplayName == "@ArtOfShred" then
             GameTooltip:AddLine("Default Tooltip Below:", "", colorText:UnpackRGBA())
 
+            local newtooltipText
+
             if GetAbilityEffectDescription(control.buffSlot) ~= "" then
-                tooltipText = GetAbilityEffectDescription(control.buffSlot)
-                tooltipText = LUIE.UpdateMundusTooltipSyntax(control.effectId, tooltipText)
+                newtooltipText = GetAbilityEffectDescription(control.buffSlot)
             end
-            GameTooltip:AddLine(tooltipTitle, "ZoFontHeader2", 1, 1, 1, nil)
-            if tooltipText ~= "" and tooltipText ~= nil then
+            if newtooltipText ~= "" and newtooltipText ~= nil then
                 GameTooltip:SetVerticalPadding(1)
                 ZO_Tooltip_AddDivider(GameTooltip)
                 GameTooltip:SetVerticalPadding(5)
-                GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
+                GameTooltip:AddLine(newtooltipText, "", colorText:UnpackRGBA())
             end
         end
 

@@ -192,9 +192,9 @@ LUIE.DebugAuras = {
     [61726] = true, -- Minor Defile
     [61727] = true, -- Major Defile
     [88401] = true, -- Minor Magickasteal
-    [88402] = true, -- Minor Magickasteal -- Steal
+    --[88402] = true, -- Minor Magickasteal
     [86304] = true, -- Minor Lifesteal
-    [86305] = true, -- Minor Lifesteal -- Steal
+    --[86305] = true, -- Minor Lifesteal
     [79907] = true, -- Minor Enervation
     [79895] = true, -- Minor Uncertainty
     [79867] = true, -- Minor Cowardice
@@ -202,14 +202,14 @@ LUIE.DebugAuras = {
     [61733] = true, -- Minor Mangle
     [140699] = true, -- Minor Timidity
     [145975] = true, -- Minor Brittle
-    [145977] = true, -- Major Brittle (Unused)
+    [145977] = true, -- Major Brittle
 
     -- Major / Minor Aegis & Slayer
     [76618] = true, -- Minor Aegis
-    [147225] = true, -- Minor Aegis -- Dummy
+    [147225] = true, -- Minor Aegis
     [93123] = true, -- Major Aegis
     [76617] = true, -- Minor Slayer
-    [147226] = true, -- Minor Slayer -- Dummy
+    [147226] = true, -- Minor Slayer
     [93109] = true, -- Major Slayer
 
     -- Empower
@@ -221,38 +221,41 @@ LUIE.DebugAuras = {
 
     -- Magic Status Effects
     [18084] = true, -- Burning (Fire Status Effect)
-    [130804] = true, -- Burning (Fire Status Effect - Siege)
+    --[130804] = true, -- Burning (Fire Status Effect - Siege)
     [21481] = true, -- Chill (Frost Status Effect)
     [68368] = true, -- Minor Maim (Frost Status Effect)
     [95136] = true, -- Chill (Frost Status Effect)
-    [130814] = true, -- Chill (Frost Status Effect - Siege)
-    [130815] = true, -- Minor Maim (Frost Status Effect - Siege)
-    [130816] = true, -- Chill (Frost Status Effect - Siege)
+    --[130814] = true, -- Chill (Frost Status Effect - Siege)
+    --[130815] = true, -- Minor Maim (Frost Status Effect - Siege)
+    --[130816] = true, -- Chill (Frost Status Effect - Siege)
     [21487] = true, -- Concussion (Shock Status Effect)
     [68359] = true, -- Minor Maim (Shock Status Effect)
     [95134] = true, -- Concussion (Shock Status Effect)
-    [130808] = true, -- Concussion (Shock Status Effect - Siege)
-    [130809] = true, -- Minor Maim (Shock Status Effect - Siege)
-    [130810] = true, -- Concussion (Shock Status Effect - Siege)
+    --[130808] = true, -- Concussion (Shock Status Effect - Siege)
+    --[130809] = true, -- Minor Maim (Shock Status Effect - Siege)
+    --[130810] = true, -- Concussion (Shock Status Effect - Siege)
     [148797] = true, -- Overcharged (Magic Status Effect)
     [148798] = true, -- Minor Magickasteal (Magic Status Effect)
+    [178118] = true, -- Overcharged (Magic Status Effect)
 
     -- Martial Status Effects
     [21925] = true, -- Diseased (Disease Status Effect)
     [21927] = true, -- Major Defile (Disease Status Effect)
+    [178127] = true, -- Diseased (Disease Status Effect)
     [148801] = true, -- Hemorrhaging (Bleed Status Effect)
     [148808] = true, -- Minor Mangle (Bleed Status Effect)
     [21929] = true, -- Poisoned (Poison Status Effect)
     [148800] = true, -- Sundered (Physical Status Effect)
     [148803] = true, -- Minor Breach (Physical Status Effect)
-    [149573] = true, -- Sundered (Physical Status Effect - Siege)
-    [149576] = true, -- Minor Breach (Physical Status Effect - Siege)
+    [178123] = true, -- Sundered (Physical Status Effect)
+    --[149573] = true, -- Sundered (Physical Status Effect - Siege)
+    --[149576] = true, -- Minor Breach (Physical Status Effect - Siege)
 
     -------------------------------------
     -- MUNDUS STONE
     -------------------------------------
 
-    -- Stone Use
+    -- Mundus Stone Interaction
     [14031] = true, -- Mundus Use
 
     -- Boons
@@ -282,28 +285,28 @@ LUIE.DebugAuras = {
 
     -- Crouch
     [20299] = true, -- Sneak
-    [20304] = true, -- Crouch Slow
+    --[20304] = true, -- Crouch Slow
     [76463] = true, -- Clairvoyance Fx
-    [20309] = true, -- Hidden
     [20307] = true, -- Trying to Hide
-    [20301] = true, -- Crouch Drain
+    [20309] = true, -- Hidden
+    --[20301] = true, -- Crouch Drain
     [38127] = true, -- Remove Sprint
-    [29177] = true, -- Flee
-    [64420] = true, -- Remove Pet Stealth
-    [26245] = true, -- Slam Stun
+    --[29177] = true, -- Flee
+    --[64420] = true, -- Remove Pet Stealth
     [49547] = true, -- Bonus limiter
+    [26245] = true, -- Slam Stun
 
     -- Mount
-    [36010] = true, -- Mount Up
-    [37059] = true, -- Mount Up
-    [37139] = true, -- Mount Up
-    [36434] = true, -- Mount Up
-    [42399] = true, -- Remove on Dismount
-    [36432] = true, -- Dismount
-    [36417] = true, -- Dismount
-    [36419] = true, -- Dismount
-    [46697] = true, -- Pause Mount Stamina Regen
-    [115607] = true, -- Hard Dismount
+    --[36010] = true, -- Mount Up
+    --[37059] = true, -- Mount Up
+    --[37139] = true, -- Mount Up
+    --[36434] = true, -- Mount Up
+    --[42399] = true, -- Remove on Dismount
+    --[36432] = true, -- Dismount
+    --[36417] = true, -- Dismount
+    --[36419] = true, -- Dismount
+    --[46697] = true, -- Pause Mount Stamina Regen
+    --[115607] = true, -- Hard Dismount
 
     -- Passenger Mount
     [140996] = true, -- Mount Up Passenger
@@ -1403,14 +1406,6 @@ LUIE.DebugAuras = {
     [88449] = true, -- Create Super Psijic Ambrosia (Aetheric Cipher)
     [88451] = true, -- 88449 Stun (Aetheric Cipher)
 
-    --[108312] = true, -- 68235 Stun (Big-Eared Ginger Kitten's "Care and Feeding" Guide)
-    --[108300] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Bait Mouse)
-    --[108283] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Collar)
-    --[108308] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Feather Toy)
-    --[108304] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Milk Saucer)
-    --[108296] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Sleeping-Basket)
-    --[108292] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Tag)
-
     [148050] = true, -- Alliance Breton Terrier (Breton Terrier Mammoth Bone)
     [148052] = true, -- 68235 Stun (Breton Terrier Mammoth Bone)
 
@@ -1441,14 +1436,6 @@ LUIE.DebugAuras = {
     [68275] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment V)
     [68279] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment VI)
     [68283] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment VII)
-
-    --[108316] = true, -- 68235 Stun (Psijic Glowglobe's Ancient Texts)
-    --[108320] = true, -- 68235 Stun (Psijic Glowglobe's Conjectural Writings)
-    --[108324] = true, -- 68235 Stun (Psijic Glowglobe's Crystal Ball)
-    --[108328] = true, -- 68235 Stun (Psijic Glowglobe's Meteoric Glass)
-    --[108332] = true, -- 68235 Stun (Psijic Glowglobe's Purified Glow Dust)
-    --[108336] = true, -- 68235 Stun (Psijic Glowglobe's Updated Instructionals)
-    --[108340] = true, -- 68235 Stun (Psijic Glowglobe's Wisp Animus)
 
     [140542] = true, -- Stone Warrior Target Dummy (Stone Husk Fragment)
     [140544] = true, -- 68235 Stun (Stone Husk Fragment)
@@ -6436,7 +6423,6 @@ LUIE.DebugAuras = {
     [39161] = true, -- Pulsar (Pulsar)
     [39162] = true, -- Flame Pulsar (Pulsar)
     [146585] = true, -- Pulsar Afterburn (Pulsar)
-    --[89837] = true, -- Fiery Pulsar (Pulsar)
     [39168] = true, -- Minor Mangle (Pulsar)
 
     [39167] = true, -- Storm Pulsar (Pulsar)
@@ -6446,7 +6432,6 @@ LUIE.DebugAuras = {
     [39181] = true, -- Minor Mangle (Pulsar)
 
     [39163] = true, -- Frost Pulsar (Pulsar)
-    --[89840] = true, -- Frost Pulsar (Pulsar)
     [39180] = true, -- Minor Mangle (Pulsar)
     [146797] = true, -- Minor Protection (Pulsar)
 
@@ -9773,7 +9758,6 @@ LUIE.DebugAuras = {
     [67772] = true, -- Enraged -- Flesh Colossus
     [49430] = true, -- Smash -- Flesh Colossus
     [49429] = true, -- Claw -- Flesh Colossus
-    --[65744] = true, -- Staggered -- Flesh Colossus
 
     [17069] = true, -- Ice Spear -- Frost Atronach
     [5009] = true, -- Ice Shards -- Frost Atronach

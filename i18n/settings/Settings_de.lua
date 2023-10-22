@@ -1807,8 +1807,6 @@ local strings = {
     SI_LUIE_LAM_CT_OUTGOING_STUNNED_TP = "Show when you stun an enemy.",
     SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_STATE = "Combat State",
 
-    SI_LUIE_LAM_CT_BLACKLIST_ADD_CROUCH = "Add Sneak",
-    SI_LUIE_LAM_CT_BLACKLIST_ADD_CROUCH_TP = "Add Sneak stamina drain to the blacklist.",
     SI_LUIE_LAM_CT_BLACKLIST_ADD_SETS = "Add Set Regen",
     SI_LUIE_LAM_CT_BLACKLIST_ADD_SETS_TP = "Add sets that have spammy resource restore/drain to the blacklist.",
     SI_LUIE_LAM_CT_BLACKLIST_ADD_SORCERER = "Add Sorcerer Regen",

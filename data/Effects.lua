@@ -3325,9 +3325,6 @@ Effects.EffectHideSCT = {
     [68719] = true, -- Frozen (Wall of Elements)
     [104825] = true, -- Icy Rage (Elemental Rage)
 
-    [89837] = true, -- Fiery Pulsar (Pulsar)
-    [89840] = true, -- Frost Pulsar (Pulsar)
-
     ----------------------------
     -- Vampire Quest
     ----------------------------
@@ -3671,9 +3668,7 @@ Effects.EffectOverride = {
     [61726] = { tooltip = Tooltips.Skill_Minor_Defile }, -- Minor Defile
     [61727] = { tooltip = Tooltips.Skill_Major_Defile }, -- Major Defile
     [88401] = { tooltip = Tooltips.Skill_Minor_Magickasteal }, -- Minor Magickasteal
-    [88402] = { icon = "esoui/art/icons/ability_buff_minor_magickasteal.dds" }, -- Minor Magickasteal
     [86304] = { tooltip = Tooltips.Skill_Minor_Lifesteal }, -- Minor Lifesteal
-    [86305] = { icon = "esoui/art/icons/ability_buff_minor_lifesteal.dds" }, -- Minor Lifesteal
     [79907] = { tooltip = Tooltips.Skill_Minor_Enveration }, -- Minor Enervation
     [79895] = { tooltip = Tooltips.Skill_Minor_Uncertainty }, -- Minor Uncertainty
     [79867] = { tooltip = Tooltips.Skill_Minor_Cowardice }, -- Minor Cowardice
@@ -3681,7 +3676,7 @@ Effects.EffectOverride = {
     [61733] = { tooltip = Tooltips.Skill_Minor_Mangle }, -- Minor Mangle
     [140699] = { tooltip = Tooltips.Skill_Minor_Timidity }, -- Minor Timidity
     [145975] = { tooltip = Tooltips.Skill_Minor_Brittle }, -- Minor Brittle
-    [145977] = { tooltip = Tooltips.Skill_Major_Brittle }, -- Major Brittle (Unused)
+    [145977] = { tooltip = Tooltips.Skill_Major_Brittle }, -- Major Brittle
 
     -- Slayer / Aegis
     [76618] = { tooltip = Tooltips.Skill_Minor_Aegis }, -- Minor Aegis
@@ -3732,7 +3727,7 @@ Effects.EffectOverride = {
     -- MUNDUS STONE
     ----------------------------------------------------------------
 
-    -- Stone Use
+    -- Mundus Stone Interaction
     [14031] = {
         icon = "LuiExtended/media/icons/abilities/ability_innate_mundus_use.dds",
         name = Abilities.Innate_Receiving_Boon,
@@ -3775,9 +3770,6 @@ Effects.EffectOverride = {
         type = BUFF_EFFECT_TYPE_DEBUFF,
         unbreakable = 1,
         tooltip = Tooltips.Innate_Dodge_Fatigue,
-        displayStacks = true,
-        stack = 1,
-        maxStacks = 100,
     }, -- Dodge Fatigue
 
     -- Crouch
@@ -3786,11 +3778,11 @@ Effects.EffectOverride = {
         icon = "LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
         tooltip = Tooltips.Innate_Invisible,
     }, -- Hidden
-    [20301] = { icon = "LuiExtended/media/icons/abilities/ability_innate_hidden.dds", name = Abilities.Innate_Sneak }, -- Crouch Drain
     [26245] = {
         icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds",
         name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Sneak, Abilities.Innate_Stun),
         tooltip = Tooltips.Generic_Stun,
+        cc = LUIE_CC_TYPE_STUN
     }, -- Slam Stun (Stun from crouch attack)
 
     -- Mount
@@ -5046,34 +5038,12 @@ Effects.EffectOverride = {
         name = Abilities.Innate_Aetheric_Cipher,
     }, -- 88449 Stun (Aetheric Cipher)
 
-    [108312] = {
+    --[[ -- TODO: Big-Eared Ginger Kitten Casts replaced - check later
+    [-----] = {
         icon = "LuiExtended/media/icons/abilities/ability_item_big_eared_ginger_kitten.dds",
         name = Abilities.Innate_Big_Eared_Ginger_Kitten,
-    }, -- 68235 Stun (Big-Eared Ginger Kitten's "Care and Feeding" Guide)
-    [108300] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_big_eared_ginger_kitten.dds",
-        name = Abilities.Innate_Big_Eared_Ginger_Kitten,
-    }, -- 68235 Stun (Big-Eared Ginger Kitten's Bait Mouse)
-    [108283] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_big_eared_ginger_kitten.dds",
-        name = Abilities.Innate_Big_Eared_Ginger_Kitten,
-    }, -- 68235 Stun (Big-Eared Ginger Kitten's Collar)
-    [108308] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_big_eared_ginger_kitten.dds",
-        name = Abilities.Innate_Big_Eared_Ginger_Kitten,
-    }, -- 68235 Stun (Big-Eared Ginger Kitten's Feather Toy)
-    [108304] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_big_eared_ginger_kitten.dds",
-        name = Abilities.Innate_Big_Eared_Ginger_Kitten,
-    }, -- 68235 Stun (Big-Eared Ginger Kitten's Milk Saucer)
-    [108296] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_big_eared_ginger_kitten.dds",
-        name = Abilities.Innate_Big_Eared_Ginger_Kitten,
-    }, -- 68235 Stun (Big-Eared Ginger Kitten's Sleeping-Basket)
-    [108292] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_big_eared_ginger_kitten.dds",
-        name = Abilities.Innate_Big_Eared_Ginger_Kitten,
-    }, -- 68235 Stun (Big-Eared Ginger Kitten's Tag)
+    },
+    ]]
 
     [148050] = { hide = true }, -- Alliance Breton Terrier (Breton Terrier Mammoth Bone)
     [148052] = {
@@ -5174,34 +5144,12 @@ Effects.EffectOverride = {
         name = Abilities.Innate_Create_Psijic_Ambrosia_Recipe,
     }, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment VII)
 
-    [108316] = {
+    --[[ -- TODO: Psijic Glowglobe Casts replaced - check later
+    [-----] = {
         icon = "LuiExtended/media/icons/abilities/ability_item_psijic_glowglobe.dds",
         name = Abilities.Innate_Psijic_Glowglobe,
-    }, -- 68235 Stun (Psijic Glowglobe's Ancient Texts)
-    [108320] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_psijic_glowglobe.dds",
-        name = Abilities.Innate_Psijic_Glowglobe,
-    }, -- 68235 Stun (Psijic Glowglobe's Conjectural Writings)
-    [108324] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_psijic_glowglobe.dds",
-        name = Abilities.Innate_Psijic_Glowglobe,
-    }, -- 68235 Stun (Psijic Glowglobe's Crystal Ball)
-    [108328] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_psijic_glowglobe.dds",
-        name = Abilities.Innate_Psijic_Glowglobe,
-    }, -- 68235 Stun (Psijic Glowglobe's Meteoric Glass)
-    [108332] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_psijic_glowglobe.dds",
-        name = Abilities.Innate_Psijic_Glowglobe,
-    }, -- 68235 Stun (Psijic Glowglobe's Purified Glow Dust)
-    [108336] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_psijic_glowglobe.dds",
-        name = Abilities.Innate_Psijic_Glowglobe,
-    }, -- 68235 Stun (Psijic Glowglobe's Updated Instructionals)
-    [108340] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_psijic_glowglobe.dds",
-        name = Abilities.Innate_Psijic_Glowglobe,
-    }, -- 68235 Stun (Psijic Glowglobe's Wisp Animus)
+    },
+    ]]
 
     --[[ -- TODO: Sixth House Robe Casts replaced - check later
     [-----] = {

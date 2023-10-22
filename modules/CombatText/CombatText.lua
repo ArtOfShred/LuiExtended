@@ -499,14 +499,16 @@ function CombatText.Initialize(enabled)
     if not LUIESV.Default[GetDisplayName()]["$AccountWide"].AdjustVarsCT then
         LUIESV.Default[GetDisplayName()]["$AccountWide"].AdjustVarsCT = 0
     end
-    if LUIESV.Default[GetDisplayName()]["$AccountWide"].AdjustVarsCT < 1 then
-        -- Blacklist sneak drain by default
-        CombatText.SV.blacklist[20301] = true
-    end
     if LUIESV.Default[GetDisplayName()]["$AccountWide"].AdjustVarsCT < 2 then
         -- Set color for bleed damage to red
         CombatText.SV.colors.damage[DAMAGE_TYPE_BLEED] = CombatText.Defaults.colors.damage[DAMAGE_TYPE_BLEED]
     end
+    if LUIESV.Default[GetDisplayName()]["$AccountWide"].AdjustVarsCT < 3 then
+        -- Remove sneak drain from CT blacklist since it is no longer in the game
+        if CombatText.SV.blacklist[20301] then
+            CombatText.SV.blacklist[20301] = nil
+        end
+    end
     -- Increment so this doesn't occur again.
-    LUIESV.Default[GetDisplayName()]["$AccountWide"].AdjustVarsCT = 2
+    LUIESV.Default[GetDisplayName()]["$AccountWide"].AdjustVarsCT = 3
 end

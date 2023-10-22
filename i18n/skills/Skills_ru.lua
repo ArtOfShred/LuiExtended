@@ -136,12 +136,12 @@ local strings = {
     SI_LUIE_SKILL_MAJOR_INTELLECT_TP = "Повышает восстановление магии на |cFFFFFF30|r%.",
     SI_LUIE_SKILL_MINOR_SORCERY_TP = "Повышает урон от заклинаний на |cFFFFFF10|r%.",
     SI_LUIE_SKILL_MAJOR_SORCERY_TP = "Повышает урон от заклинаний на |cFFFFFF20|r%.",
-    SI_LUIE_SKILL_MINOR_PROPHECY_TP = "Повышает рейтинг критического удара заклинаниями на |cFFFFFF1320|r.",
-    SI_LUIE_SKILL_MAJOR_PROPHECY_TP = "Повышает рейтинг критического удара заклинаниями на |cFFFFFF2629|r.",
+    SI_LUIE_SKILL_MINOR_PROPHECY_TP = "Increase Spell Critical rating by |cFFFFFF1314|r, increasing your Spell Critical chance by |cFFFFFF6|r%.",
+    SI_LUIE_SKILL_MAJOR_PROPHECY_TP = "Increase Spell Critical rating by |cFFFFFF2629|r, increasing your Spell Critical chance by |cFFFFFF12|r%.",
     SI_LUIE_SKILL_MINOR_BRUTALITY_TP = "Повышает урон от оружия на |cFFFFFF10|r%.",
     SI_LUIE_SKILL_MAJOR_BRUTALITY_TP = "Повышает урон от оружия на |cFFFFFF20|r%.",
-    SI_LUIE_SKILL_MINOR_SAVAGERY_TP = "Повышает рейтинг критического удара оружием на |cFFFFFF1320|r.",
-    SI_LUIE_SKILL_MAJOR_SAVAGERY_TP = "Повышает рейтинг критического удара оружием на |cFFFFFF2629|r.",
+    SI_LUIE_SKILL_MINOR_SAVAGERY_TP = "Increase Weapon Critical rating by |cFFFFFF1314|r, increasing your Weapon Critical chance by |cFFFFFF6|r%.",
+    SI_LUIE_SKILL_MAJOR_SAVAGERY_TP = "Increase Weapon Critical rating by |cFFFFFF2629|r, increasing your Weapon Critical chance by |cFFFFFF12|r%.",
     SI_LUIE_SKILL_MINOR_BERSERK_TP = "Повышает наносимый урон на |cFFFFFF5|r%.",
     SI_LUIE_SKILL_MAJOR_BERSERK_TP = "Повышает наносимый урон на |cFFFFFF10|r%.",
     SI_LUIE_SKILL_MINOR_FORCE_TP = "Повышает критический урон на |cFFFFFF10|r%.",
@@ -176,11 +176,11 @@ local strings = {
     SI_LUIE_SKILL_MINOR_MAGICKASTEAL_TP = "Восстанавливает |cFFFFFF168|r магии каждую |cFFFFFF1|r секунду, при получении урона.",
     SI_LUIE_SKILL_MINOR_LIFESTEAL_TP = "Восстанавливает |cFFFFFF600|r здоровья каждую |cFFFFFF1|r секунду, при получении урона.",
     SI_LUIE_SKILL_MINOR_ENERVATION_TP = "Снижает критический урон на |cFFFFFF10|r%.",
-    SI_LUIE_SKILL_MINOR_UNCERTAINTY_TP = "Снижает рейтинг критического удара оружием и заклинаниями на |cFFFFFF1320|r.",
+    SI_LUIE_SKILL_MINOR_UNCERTAINTY_TP = "Reduce Weapon Critical and Spell Critical by |cFFFFFF1314|r.",
     SI_LUIE_SKILL_MINOR_COWARDICE_TP = "Reduce Weapon and Spell Damage by |cFFFFFF215|r.",
     SI_LUIE_SKILL_MAJOR_COWARDICE_TP = "Reduce Weapon and Spell Damage by |cFFFFFF430|r.",
     SI_LUIE_SKILL_MINOR_MANGLE_TP = "Снижает макс. здоровье на |cFFFFFF10|r%.",
-    SI_LUIE_SKILL_MINOR_TIMIDITY_TP = "Consume |cFFFFFF1|r Ultimate every |cFFFFFF1.5|r seconds while in combat.",
+    SI_LUIE_SKILL_MINOR_TIMIDITY_TP = "Drain |cFFFFFF1|r Ultimate every |cFFFFFF1.5|r seconds while in combat.",
     SI_LUIE_SKILL_MINOR_BRITTLE_TP = "Increase Critical Damage taken by |cFFFFFF10|r%.",
     SI_LUIE_SKILL_MAJOR_BRITTLE_TP = "Increase Critical Damage taken by |cFFFFFF20|r%.",
 
@@ -191,7 +191,7 @@ local strings = {
     SI_LUIE_SKILL_MAJOR_AEGIS_TP = "Вы получаете на |cFFFFFF10|r% меньше урона от противников в Подземельях, Испытаниях и на Аренах.",
 
     -- Empower
-    SI_LUIE_SKILL_EMPOWER_TP = "Increase Light and Heavy Attack damage by |cFFFFFF40|r%.",
+    SI_LUIE_SKILL_EMPOWER_TP = "Increase damage done with Heavy Attacks against monsters by |cFFFFFF70|r%.",
 
     -- Potions
     SI_LUIE_SKILL_SPELL_RESISTANCE_POTION_TP = "Increase Spell Resistance by |cFFFFFF5280|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",

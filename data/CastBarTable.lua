@@ -433,21 +433,9 @@ CastBarTable.CastDurationFix = {
     [117562] = 5000, -- 68235 Stun (Guar Stomp Skeletal Reconstruction)
     [117541] = 5000, -- 68235 Stun (Guar Stomp Steps-Practice Rug)
 
-    [108312] = 5000, -- 68235 Stun (Big-Eared Ginger Kitten's "Care and Feeding" Guide)
-    [108300] = 5000, -- 68235 Stun (Big-Eared Ginger Kitten's Bait Mouse)
-    [108283] = 5000, -- 68235 Stun (Big-Eared Ginger Kitten's Collar)
-    [108308] = 5000, -- 68235 Stun (Big-Eared Ginger Kitten's Feather Toy)
-    [108304] = 5000, -- 68235 Stun (Big-Eared Ginger Kitten's Milk Saucer)
-    [108296] = 5000, -- 68235 Stun (Big-Eared Ginger Kitten's Sleeping-Basket)
-    [108292] = 5000, -- 68235 Stun (Big-Eared Ginger Kitten's Tag)
+    -- TODO: Big-Eared Ginger Kitten Casts replaced - check later
 
-    [108316] = 5000, -- 68235 Stun (Psijic Glowglobe's Ancient Texts)
-    [108320] = 5000, -- 68235 Stun (Psijic Glowglobe's Conjectural Writings)
-    [108324] = 5000, -- 68235 Stun (Psijic Glowglobe's Crystal Ball)
-    [108328] = 5000, -- 68235 Stun (Psijic Glowglobe's Meteoric Glass)
-    [108332] = 5000, -- 68235 Stun (Psijic Glowglobe's Purified Glow Dust)
-    [108336] = 5000, -- 68235 Stun (Psijic Glowglobe's Updated Instructionals)
-    [108340] = 5000, -- 68235 Stun (Psijic Glowglobe's Wisp Animus)
+    -- TODO: Psijic Glowglobe Casts replaced - check later
 
     -- TODO: Sixth House Robe Casts replaced - check later
 
@@ -668,21 +656,9 @@ CastBarTable.IsCast = {
     [117562] = true, -- 68235 Stun (Guar Stomp Skeletal Reconstruction)
     [117541] = true, -- 68235 Stun (Guar Stomp Steps-Practice Rug)
 
-    [108312] = true, -- 68235 Stun (Big-Eared Ginger Kitten's "Care and Feeding" Guide)
-    [108300] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Bait Mouse)
-    [108283] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Collar)
-    [108308] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Feather Toy)
-    [108304] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Milk Saucer)
-    [108296] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Sleeping-Basket)
-    [108292] = true, -- 68235 Stun (Big-Eared Ginger Kitten's Tag)
+    -- TODO: Big-Eared Ginger Kitten Casts replaced - check later
 
-    [108316] = true, -- 68235 Stun (Psijic Glowglobe's Ancient Texts)
-    [108320] = true, -- 68235 Stun (Psijic Glowglobe's Conjectural Writings)
-    [108324] = true, -- 68235 Stun (Psijic Glowglobe's Crystal Ball)
-    [108328] = true, -- 68235 Stun (Psijic Glowglobe's Meteoric Glass)
-    [108332] = true, -- 68235 Stun (Psijic Glowglobe's Purified Glow Dust)
-    [108336] = true, -- 68235 Stun (Psijic Glowglobe's Updated Instructionals)
-    [108340] = true, -- 68235 Stun (Psijic Glowglobe's Wisp Animus)
+    -- TODO: Psijic Glowglobe Casts replaced - check later
 
     -- TODO: Sixth House Robe Casts replaced - check later
 

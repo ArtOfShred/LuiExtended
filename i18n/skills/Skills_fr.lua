@@ -136,12 +136,12 @@ local strings = {
     SI_LUIE_SKILL_MAJOR_INTELLECT_TP = "Augmente la récupération de magie de |cFFFFFF30|r%.",
     SI_LUIE_SKILL_MINOR_SORCERY_TP = "Augmente les dégâts des sorts de |cFFFFFF10|r%.",
     SI_LUIE_SKILL_MAJOR_SORCERY_TP = "Augmente les dégâts des sorts de |cFFFFFF20|r%.",
-    SI_LUIE_SKILL_MINOR_PROPHECY_TP = "Augmente les dégâts critiques des sorts de |cFFFFFF1320|r.",
-    SI_LUIE_SKILL_MAJOR_PROPHECY_TP = "Augmente les dégâts critiques des sorts de |cFFFFFF2629|r.",
+    SI_LUIE_SKILL_MINOR_PROPHECY_TP = "Increase Spell Critical rating by |cFFFFFF1314|r, increasing your Spell Critical chance by |cFFFFFF6|r%.",
+    SI_LUIE_SKILL_MAJOR_PROPHECY_TP = "Increase Spell Critical rating by |cFFFFFF2629|r, increasing your Spell Critical chance by |cFFFFFF12|r%.",
     SI_LUIE_SKILL_MINOR_BRUTALITY_TP = "Augmente les dégâts des armes de |cFFFFFF10|r%.",
     SI_LUIE_SKILL_MAJOR_BRUTALITY_TP = "Augmente les dégâts des armes de |cFFFFFF20|r%.",
-    SI_LUIE_SKILL_MINOR_SAVAGERY_TP = "Augmente les dégâts critiques des armes de |cFFFFFF1320|r.",
-    SI_LUIE_SKILL_MAJOR_SAVAGERY_TP = "Augmente les dégâts critiques des armes de |cFFFFFF2629|r.",
+    SI_LUIE_SKILL_MINOR_SAVAGERY_TP = "Increase Weapon Critical rating by |cFFFFFF1314|r, increasing your Weapon Critical chance by |cFFFFFF6|r%.",
+    SI_LUIE_SKILL_MAJOR_SAVAGERY_TP = "Increase Weapon Critical rating by |cFFFFFF2629|r, increasing your Weapon Critical chance by |cFFFFFF12|r%.",
     SI_LUIE_SKILL_MINOR_BERSERK_TP = "Augmente les dégâts réalisés de |cFFFFFF5|r%.",
     SI_LUIE_SKILL_MAJOR_BERSERK_TP = "Augmente les dégâts réalisés de |cFFFFFF10|r%.",
     SI_LUIE_SKILL_MINOR_FORCE_TP = "Augmente les dégâts critiques de |cFFFFFF10|r%.",
@@ -176,11 +176,11 @@ local strings = {
     SI_LUIE_SKILL_MINOR_MAGICKASTEAL_TP = "Récupère |cFFFFFF168|r de magie chaque |cFFFFFF1|r seconde quand blessé.",
     SI_LUIE_SKILL_MINOR_LIFESTEAL_TP = "Récupère |cFFFFFF600|r de santé Health chaque |cFFFFFF1|r seconde quand blessé.",
     SI_LUIE_SKILL_MINOR_ENERVATION_TP = "Réduit les dégâts critiques de |cFFFFFF10|r%.",
-    SI_LUIE_SKILL_MINOR_UNCERTAINTY_TP = "Réduit les chances de critiques des armes et des sorts de |cFFFFFF1320|r.",
+    SI_LUIE_SKILL_MINOR_UNCERTAINTY_TP = "Reduce Weapon Critical and Spell Critical by |cFFFFFF1314|r.",
     SI_LUIE_SKILL_MINOR_COWARDICE_TP = "Réduit les dégâts des armes et des sorts de |cFFFFFF215|r.",
     SI_LUIE_SKILL_MAJOR_COWARDICE_TP = "Réduit les dégâts des armes et des sorts de |cFFFFFF430|r.",
     SI_LUIE_SKILL_MINOR_MANGLE_TP = "Réduit la santé maximale de |cFFFFFF10|r%.",
-    SI_LUIE_SKILL_MINOR_TIMIDITY_TP = "Consomme |cFFFFFF1|r Points d'Ultime toutes les |cFFFFFF1.5|r secondes en combat.",
+    SI_LUIE_SKILL_MINOR_TIMIDITY_TP = "Drain |cFFFFFF1|r Ultimate every |cFFFFFF1.5|r seconds while in combat.",
     SI_LUIE_SKILL_MINOR_BRITTLE_TP = "Augmente les dégâts critiques reçus de |cFFFFFF10|r%.",
     SI_LUIE_SKILL_MAJOR_BRITTLE_TP = "Augmente les dégâts critiques reçus de |cFFFFFF20|r%.",
 
@@ -191,7 +191,7 @@ local strings = {
     SI_LUIE_SKILL_MAJOR_AEGIS_TP = "Vous recevez |cFFFFFF10|r% de dégâts en moins de la part des ennemis des donjons, raids et arènes.",
 
     -- Empower
-    SI_LUIE_SKILL_EMPOWER_TP = "Augmente les dégâts des attaques légères et puissantes de |cFFFFFF40|r%.",
+    SI_LUIE_SKILL_EMPOWER_TP = "Increase damage done with Heavy Attacks against monsters by |cFFFFFF70|r%.",
 
     -- Potions
     SI_LUIE_SKILL_SPELL_RESISTANCE_POTION_TP = "Augmente la résistance aux sorts de |cFFFFFF5280|r pendant |cFFFFFF<<1>>|r <<1[seconde/secondes]>>.",

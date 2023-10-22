@@ -1520,7 +1520,7 @@ LUIE.Data.Tooltips = {
 -- Returns dynamic tooltips when called by Tooltip function
 function LUIE.DynamicTooltip(abilityId)
     local tooltip = {}
-    -- Brace
+    -- Brace (TODO: Check if still used)
     if abilityId == 974 then
         local _, _, mitigation = GetAdvancedStatValue(ADVANCED_STAT_DISPLAY_TYPE_BLOCK_MITIGATION)
         local _, _, speed = GetAdvancedStatValue(ADVANCED_STAT_DISPLAY_TYPE_BLOCK_SPEED)
@@ -1560,7 +1560,7 @@ function LUIE.DynamicTooltip(abilityId)
             tooltip = zo_strformat(GetString(SI_LUIE_SKILL_HIDDEN_TP), finalSpeed, cost)
         end
     end
-    -- Unchained
+    -- Unchained (TODO: Check if still used)
     if abilityId == 98316 then
         local duration = GetAbilityDuration(98316, override, csunittag) / 1000
         local pointsSpent = GetNumPointsSpentOnChampionSkill(64) * 1.1
