@@ -9808,9 +9808,71 @@ function ChatAnnouncements.HookFunction()
         end
     end
 
+    local g_previousEndlessDungeonProgression = {0, 0, 0} -- Stage, Cycle, Arc
+
+    local function GetEndlessDungeonProgressMessageParams()
+        local stage, cycle, arc = ENDLESS_DUNGEON_MANAGER:GetProgression()
+        local previousStage, previousCycle, previousArc = unpack(g_previousEndlessDungeonProgression)
+        if stage == 1 and cycle == 1 and arc == 1 then
+            -- Force the initial CSA to roll over from all 0s to all 1s.
+            previousStage, previousCycle, previousArc = 0, 0, 0
+        end
+
+        local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_ROLLING_METER_PROGRESS_TEXT)
+        local stageIcon, cycleIcon, arcIcon = ZO_EndlessDungeonManager.GetProgressionIcons()
+        local stageNarration, cycleNarration, arcNarration = ZO_EndlessDungeonManager.GetProgressionNarrationDescriptions(stage, cycle, arc)
+        local progressData =
+        {
+            {
+                iconTexture = arcIcon,
+                narrationDescription = arcNarration,
+                initialValue = previousArc,
+                finalValue = arc,
+            },
+            {
+                iconTexture = cycleIcon,
+                narrationDescription = cycleNarration,
+                initialValue = previousCycle,
+                finalValue = cycle,
+            },
+            {
+                iconTexture = stageIcon,
+                narrationDescription = stageNarration,
+                initialValue = previousStage,
+                finalValue = stage,
+            },
+        }
+        messageParams:SetRollingMeterProgressData(progressData)
+
+        -- Update the previous progression values.
+        g_previousEndlessDungeonProgression[1] = stage
+        g_previousEndlessDungeonProgression[2] = cycle
+        g_previousEndlessDungeonProgression[3] = arc
+
+        return messageParams
+    end
+
+    local function RefreshEndlessDungeonProgressionState()
+        local stage, cycle, arc = ENDLESS_DUNGEON_MANAGER:GetProgression()
+        g_previousEndlessDungeonProgression[1] = stage
+        g_previousEndlessDungeonProgression[2] = cycle
+        g_previousEndlessDungeonProgression[3] = arc
+    end
+
+    ENDLESS_DUNGEON_MANAGER:RegisterCallback("StateChanged", RefreshEndlessDungeonProgressionState)
+
+    local function UpdateEndlessDungeonTrackers()
+        ENDLESS_DUNGEON_HUD_TRACKER:UpdateProgress()
+        ENDLESS_DUNGEON_BUFF_TRACKER_GAMEPAD:UpdateProgress()
+        if ENDLESS_DUNGEON_BUFF_TRACKER_KEYBOARD then
+            ENDLESS_DUNGEON_BUFF_TRACKER_KEYBOARD:UpdateProgress()
+        end
+    end
+
     -- EVENT_DISPLAY_ANNOUNCEMENT (CSA Handler)
     -- TODO: This needs ALOT of work
-    local function DisplayAnnouncementHook(primaryText, secondaryText)
+    -- TODO: Use zoneIds to determine message filtering instead of message text
+    local function DisplayAnnouncementHook(primaryText, secondaryText, icon, soundId, lifespanMS, category)
         if ((primaryText ~= "" and not overrideDisplayAnnouncementTitle[primaryText]) or (secondaryText ~= "" and not overrideDisplayAnnouncementDescription[secondaryText])) and ChatAnnouncements.SV.DisplayAnnouncements.Debug then
             d("EVENT_DISPLAY_ANNOUNCEMENT")
             d("If you see this message please post a screenshot and context for the event on the LUI Extended ESOUI page.")
@@ -9823,22 +9885,48 @@ function ChatAnnouncements.HookFunction()
             return true
         end
 
-        -- Let unfiltered messages pass through the normal function
+        -- Let unfiltered messages pass through the normal function & use default behavior if not in the override table
         if (primaryText ~= "" and not overrideDisplayAnnouncementTitle[primaryText]) or (secondaryText ~= "" and not overrideDisplayAnnouncementDescription[secondaryText]) then
-            -- Use default behavior if not in the override table
-            local messageParams
-            if primaryText ~= "" and secondaryText ~= "" then
-                messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
-            elseif primaryText ~= "" then
-                messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
-            elseif secondaryText ~= "" then
-                messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
-            end
+            soundId = soundId == "" and SOUNDS.DISPLAY_ANNOUNCEMENT or soundId
 
-            if messageParams then
-                messageParams:SetText(primaryText, secondaryText)
+            local messageParams
+            if category == CSA_CATEGORY_ENDLESS_DUNGEON_STAGE_STARTED_TEXT then
+                -- Endless Dungeon Progression CSA special case
+                messageParams = GetEndlessDungeonProgressMessageParams()
+                if not messageParams then
+                    -- The progression did not change; this should never happen.
+                    return
+                end
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_ENDLESS_DUNGEON_PROGRESS)
+                messageParams:SetOnDisplayCallback(UpdateEndlessDungeonTrackers)
+            else
+                -- Standard Display Announcement
+                messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(category, soundId)
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_DISPLAY_ANNOUNCEMENT)
             end
+
+            if soundId then
+                messageParams:SetSound(soundId)
+            end
+
+            if icon ~= ZO_NO_TEXTURE_FILE then
+                messageParams:SetIconData(icon)
+            end
+
+            if lifespanMS > 0 then
+                messageParams:SetLifespanMS(lifespanMS)
+            end
+
+            -- Sanitize text.
+            if primaryText == "" then
+                primaryText = nil
+            end
+            if secondaryText == "" then
+                secondaryText = nil
+            end
+
+            messageParams:SetText(primaryText, secondaryText)
+
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             return true
         end
