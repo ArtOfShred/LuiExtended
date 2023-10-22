@@ -3795,6 +3795,7 @@ Effects.EffectOverride = {
         icon = "LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds",
         unbreakable = 1,
         tooltip = Tooltips.Generic_Knockdown,
+        cc = LUIE_CC_TYPE_KNOCKDOWN,
     }, -- Hard Dismount (Mount)
 
     -- Passenger Mount
@@ -3803,6 +3804,7 @@ Effects.EffectOverride = {
         icon = "LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds",
         unbreakable = 1,
         tooltip = Tooltips.Generic_Knockdown,
+        cc = LUIE_CC_TYPE_KNOCKDOWN,
     }, -- Hard Dismount (Passenger Mount)
 
     -- Block
@@ -3816,16 +3818,19 @@ Effects.EffectOverride = {
         name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Block, Abilities.Innate_Stun),
         hide = true,
         tooltip = Tooltips.Generic_Stagger,
+        cc = LUIE_CC_TYPE_STAGGER,
     }, -- Stagger (Player blocks NPC charged attack)
     [86309] = {
         icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds",
         name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Block, Abilities.Innate_Stun),
         tooltip = Tooltips.Generic_Stun,
+        cc = LUIE_CC_TYPE_STUN,
     }, -- Stun (Player blocks NPC charged attack)
     [86312] = {
         icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds",
         name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Block, Abilities.Innate_Stun),
         tooltip = Tooltips.Generic_Stun,
+        cc = LUIE_CC_TYPE_STUN,
     }, -- Stun (Player blocks Ogrim Body Slam)
     [45902] = { name = Abilities.Skill_Off_Balance, tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off-Balance
 

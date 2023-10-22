@@ -297,28 +297,28 @@ LUIE.DebugAuras = {
     [26245] = true, -- Slam Stun
 
     -- Mount
-    --[36010] = true, -- Mount Up
-    --[37059] = true, -- Mount Up
-    --[37139] = true, -- Mount Up
-    --[36434] = true, -- Mount Up
-    --[42399] = true, -- Remove on Dismount
-    --[36432] = true, -- Dismount
-    --[36417] = true, -- Dismount
-    --[36419] = true, -- Dismount
-    --[46697] = true, -- Pause Mount Stamina Regen
-    --[115607] = true, -- Hard Dismount
+    [36010] = true, -- Mount Up
+    [37059] = true, -- Mount Up
+    [37139] = true, -- Mount Up
+    [36434] = true, -- Mount Up
+    [42399] = true, -- Remove on Dismount
+    [36432] = true, -- Dismount
+    [36417] = true, -- Dismount
+    [36419] = true, -- Dismount
+    [46697] = true, -- Pause Mount Stamina Regen
+    [115607] = true, -- Hard Dismount
 
     -- Passenger Mount
-    [140996] = true, -- Mount Up Passenger
-    [141013] = true, -- Mount Up
-    [141012] = true, -- Mount Up
-    [141001] = true, -- Mount Up
-    [141011] = true, -- Remove on Dismount
-    [141008] = true, -- Dismount
-    [141002] = true, -- Dismount
-    [140998] = true, -- Dismount
-    [141003] = true, -- Pause Mount Stamina Regen
-    [141004] = true, -- Hard Dismount
+    --[140996] = true, -- Mount Up Passenger
+    --[141013] = true, -- Mount Up
+    --[141012] = true, -- Mount Up
+    --[141001] = true, -- Mount Up
+    --[141011] = true, -- Remove on Dismount
+    --[141008] = true, -- Dismount
+    --[141002] = true, -- Dismount
+    --[140998] = true, -- Dismount
+    --[141003] = true, -- Pause Mount Stamina Regen
+    --[141004] = true, -- Hard Dismount
 
     -- Block
     --[86311] = true, -- Block FX
