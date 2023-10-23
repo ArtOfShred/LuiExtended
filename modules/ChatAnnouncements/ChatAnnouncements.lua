@@ -9855,13 +9855,13 @@ function ChatAnnouncements.HookFunction()
 
     if GetAPIVersion() < 101039 then
         ENDLESS_DUNGEON_MANAGER:RegisterCallback("StateChanged", RefreshEndlessDungeonProgressionState)
+    end
 
-        local function UpdateEndlessDungeonTrackers()
-            ENDLESS_DUNGEON_HUD_TRACKER:UpdateProgress()
-            ENDLESS_DUNGEON_BUFF_TRACKER_GAMEPAD:UpdateProgress()
-            if ENDLESS_DUNGEON_BUFF_TRACKER_KEYBOARD then
-                ENDLESS_DUNGEON_BUFF_TRACKER_KEYBOARD:UpdateProgress()
-            end
+    local function UpdateEndlessDungeonTrackers()
+        ENDLESS_DUNGEON_HUD_TRACKER:UpdateProgress()
+        ENDLESS_DUNGEON_BUFF_TRACKER_GAMEPAD:UpdateProgress()
+        if ENDLESS_DUNGEON_BUFF_TRACKER_KEYBOARD then
+            ENDLESS_DUNGEON_BUFF_TRACKER_KEYBOARD:UpdateProgress()
         end
     end
 
