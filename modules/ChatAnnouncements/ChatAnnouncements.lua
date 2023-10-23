@@ -546,7 +546,7 @@ ChatAnnouncements.Defaults = {
 
     DisplayAnnouncements = {
         Debug = false, -- Display EVENT_DISPLAY_ANNOUNCEMENT debug messages
-        Generic = {
+        General = {
             CA = false,
             CSA = true,
             Alert = false,
@@ -9779,7 +9779,7 @@ function ChatAnnouncements.HookFunction()
             settings = ResolveDisplayAnnouncementMessages(type)
             debugDisable = true
         else
-            settings = LUIE.ChatAnnouncements.SV.DisplayAnnouncements.Generic
+            settings = LUIE.ChatAnnouncements.SV.DisplayAnnouncements.General
         end
 
         -- Debug function
