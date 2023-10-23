@@ -90,12 +90,6 @@ ChatAnnouncements.Defaults = {
         GroupRaidReviveCA = false,
         GroupRaidReviveCSA = true,
         GroupRaidReviveAlert = false,
-        GroupRaidArenaCA = false,
-        GroupRaidArenaCSA = true,
-        GroupRaidArenaAlert = false,
-        GroupRaidArenaRoundCA = false,
-        GroupRaidArenaRoundCSA = true,
-        GroupRaidArenaRoundAlert = false,
     },
 
     -- Social
@@ -152,12 +146,6 @@ ChatAnnouncements.Defaults = {
         NotificationMailErrorAlert = false,
         NotificationTradeCA = true,
         NotificationTradeAlert = false,
-        NotificationRespecCA = true,
-        NotificationRespecCSA = true,
-        NotificationRespecAlert = false,
-        NotificationGroupAreaCA = false,
-        NotificationGroupAreaCSA = true,
-        NotificationGroupAreaAlert = false,
 
         -- Disguise
         DisguiseCA = false,
@@ -252,13 +240,6 @@ ChatAnnouncements.Defaults = {
         QuestLocDiscoveryCA = true,
         QuestLocDiscoveryCSA = true,
         QuestLocDiscoveryAlert = false,
-        QuestICDiscoveryCA = false,
-        QuestICDiscoveryCSA = true,
-        QuestICDiscoveryAlert = false,
-        QuestICDescription = true,
-        QuestCraglornBuffCA = false,
-        QuestCraglornBuffCSA = true,
-        QuestCraglornBuffAlert = false,
         QuestLocObjectiveCA = true,
         QuestLocObjectiveCSA = true,
         QuestLocObjectiveAlert = false,
@@ -2172,13 +2153,13 @@ function ChatAnnouncements.PointRespecDisplay(respecType)
     local message = LUIE_AttributeDisplayType[respecType] .. "."
     local messageCSA = LUIE_AttributeDisplayType[respecType]
 
-    if ChatAnnouncements.SV.Notify.NotificationRespecCA then
+    if ChatAnnouncements.SV.DisplayAnnouncements.Respec.CA then
         g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE", isSystem = true }
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
     end
 
-    if ChatAnnouncements.SV.Notify.NotificationRespecCSA then
+    if ChatAnnouncements.SV.DisplayAnnouncements.Respec.CSA then
         local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
         messageParams:SetText(messageCSA)
         messageParams:SetSound(SOUNDS.DISPLAY_ANNOUNCEMENT)
@@ -2186,7 +2167,7 @@ function ChatAnnouncements.PointRespecDisplay(respecType)
         CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
     end
 
-    if ChatAnnouncements.SV.Notify.NotificationRespecAlert then
+    if ChatAnnouncements.SV.DisplayAnnouncements.Respec.Alert then
         ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
     end
 end
@@ -8276,6 +8257,14 @@ function ChatAnnouncements.HookFunction()
 
         local questJournalObject = SYSTEMS:GetObject("questJournal")
         local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
+
+        -- TODO: Fix
+        --[[
+        local questType = GetJournalQuestType(journalIndex)
+        local instanceDisplayType = GetJournalInstanceDisplayType(journalIndex)
+        local questJournalObject = SYSTEMS:GetObject("questJournal")
+        local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
+        ]]
 
         if ChatAnnouncements.SV.Quests.QuestCompleteCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.QUEST_COMPLETED)

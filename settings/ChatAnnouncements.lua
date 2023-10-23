@@ -7850,7 +7850,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Display Announcement DEBUG
                 type = "checkbox",
-                name = "*** Show Display Announcement Debug Message ***",
+                name = "* Show Display Announcement Debug Message *",
                 tooltip = "Display a debug message when a Display Announcement that has not yet been added to LUIE is triggered. Enable this option if you'd like to help out with the addon by posting the messages you receive from this event. Do not enable if you are not using the English client.",
                 getFunc = function()
                     return Settings.DisplayAnnouncements.Debug
