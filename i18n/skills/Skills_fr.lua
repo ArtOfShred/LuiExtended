@@ -211,7 +211,8 @@ local strings = {
 
     -- Warfare
     SI_LUIE_SKILL_ENLIVENING_OVERFLOW_TP = "Augmente la récupération de santé, de magie et de vigueur de |cFFFFFF0.5|r% de votre maximum de magie, avec une limite de |cFFFFFF150|r, pendant |cFFFFFF<<1>>|r <<1[seconde/secondes]>>.",
-    SI_LUIE_SKILL_FORESIGHT_TP = "Réduit les coûts en magie et vigueur de vos compétences de soins de |cFFFFFF75|r% pendant |cFFFFFF<<1>>|r secondes.",
+    SI_LUIE_SKILL_FORESIGHT_TP = "Réduit les coûts en magie et vigueur de vos compétences de soins de |cFFFFFF75|r% pendant |cFFFFFF<<1>>|r <<1[seconde/secondes]>>.",
+    SI_LUIE_SKILL_RIPOSTE_TP = "Your next direct damage attack used within |cFFFFFF<<1>>|r <<1[second/seconds]>> deals |cFFFFFF33|r% additional damage.",
 
     -- Fitness
     SI_LUIE_SKILL_EXPERT_EVASION_TP = "Vous avez récemment bénéficié d'une esquive gratuite et ne pouvez plus le faire pendant |cFFFFFF<<1>>|r <<1[seconde/secondes]>>.",

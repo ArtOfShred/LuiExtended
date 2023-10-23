@@ -4003,7 +4003,6 @@ Effects.EffectOverride = {
 
     -- Craft
     [152360] = { hide = true }, -- Friends in Low Places
-    [151861] = { icon = "LuiExtended/media/icons/abilities/ability_champion_craft_shadowstrike.dds" }, -- Shadowstrike
     [151860] = {
         icon = "LuiExtended/media/icons/abilities/ability_champion_craft_shadowstrike.dds",
         tooltip = Tooltips.Champion_Shadowstrike,
@@ -4011,19 +4010,22 @@ Effects.EffectOverride = {
 
     -- Warfare
     [155981] = { icon = "LuiExtended/media/icons/abilities/ability_champion_warfare_salve_of_renewal.dds" }, -- Salve of Renewal
-    [156012] = {
-        icon = "LuiExtended/media/icons/abilities/ability_champion_warfare_enlivening_overflow.dds",
-        tooltip = Tooltips.Champion_Enlivening_Overflow,
-    }, -- Enlivening Overflow
     [156020] = {
         icon = "LuiExtended/media/icons/abilities/ability_champion_warfare_from_the_brink.dds",
         tooltip = Tooltips.Generic_Damage_Shield_Duration,
     }, -- From the Brink
+    [156012] = {
+        icon = "LuiExtended/media/icons/abilities/ability_champion_warfare_enlivening_overflow.dds",
+        tooltip = Tooltips.Champion_Enlivening_Overflow,
+    }, -- Enlivening Overflow
     [59530] = {
         icon = "LuiExtended/media/icons/abilities/ability_champion_warfare_foresight.dds",
         tooltip = Tooltips.Champion_Foresight,
     }, -- Foresight
-    [60230] = { icon = "LuiExtended/media/icons/abilities/ability_champion_warfare_riposte.dds" }, -- Riposte
+    [60230] = {
+        icon = "LuiExtended/media/icons/abilities/ability_champion_warfare_riposte.dds",
+        tooltip = Tooltips.Champion_Riposte,
+    }, -- Riposte
     [135653] = {
         icon = "LuiExtended/media/icons/abilities/ability_champion_warfare_reinforced.dds",
         tooltip = Tooltips.Generic_Damage_Shield_Duration,

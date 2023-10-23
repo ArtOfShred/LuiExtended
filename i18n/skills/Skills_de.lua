@@ -211,7 +211,8 @@ local strings = {
 
     -- Warfare
     SI_LUIE_SKILL_ENLIVENING_OVERFLOW_TP = "Increase Health, Magicka, and Stamina Recovery by |cFFFFFF0.5|r% of the casters Max Magicka, up to a cap of |cFFFFFF150|r, for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
-    SI_LUIE_SKILL_FORESIGHT_TP = "Reduce the cost of your Magicka and Stamina healing abilities by |cFFFFFF75|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_FORESIGHT_TP = "Reduce the cost of your Magicka and Stamina healing abilities by |cFFFFFF75|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_RIPOSTE_TP = "Your next direct damage attack used within |cFFFFFF<<1>>|r <<1[second/seconds]>> deals |cFFFFFF33|r% additional damage.",
 
     -- Fitness
     SI_LUIE_SKILL_EXPERT_EVASION_TP = "You have recently benefitted from a free Roll Dodge and may not do so again for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",

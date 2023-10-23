@@ -340,6 +340,7 @@ LUIE.Data.Tooltips = {
     -- Warfare
     Champion_Enlivening_Overflow = GetString(SI_LUIE_SKILL_ENLIVENING_OVERFLOW_TP),
     Champion_Foresight = GetString(SI_LUIE_SKILL_FORESIGHT_TP),
+    Champion_Riposte = GetString(SI_LUIE_SKILL_RIPOSTE_TP),
 
     -- Fitness
     Champion_Expert_Evasion = GetString(SI_LUIE_SKILL_EXPERT_EVASION_TP),
@@ -1561,11 +1562,14 @@ function LUIE.DynamicTooltip(abilityId)
             tooltip = zo_strformat(GetString(SI_LUIE_SKILL_HIDDEN_TP), finalSpeed, cost)
         end
     end
-    -- Unchained (TODO: Check if still used)
+    -- Unchained
     if abilityId == 98316 then
         local duration = GetAbilityDuration(98316, override, csunittag) / 1000
         local pointsSpent = GetNumPointsSpentOnChampionSkill(64) * 1.1
         local adjustPoints = zo_floor(pointsSpent * 100 + 0.5) / 100 -- Remove decimal places
+        if pointsSpent == 0 then
+            adjustPoints = 55
+        end
         tooltip = zo_strformat(GetString(SI_LUIE_SKILL_UNCHAINED_TP), duration, adjustPoints)
     end
     if abilityId == 150057 then -- Medium Armor Evasion
