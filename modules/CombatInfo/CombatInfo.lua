@@ -2,7 +2,7 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
-local LUIE = LUIE
+
 -- CombatInfo namespace
 LUIE.CombatInfo = {}
 local CombatInfo = LUIE.CombatInfo

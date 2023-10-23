@@ -2,7 +2,7 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
-local LUIE = LUIE
+
 local CombatInfo = LUIE.CombatInfo
 CombatInfo.CrowdControlTracker = {}
 local CrowdControlTracker = CombatInfo.CrowdControlTracker
@@ -946,7 +946,6 @@ function CrowdControlTracker:OnStunnedState(eventCode, playerStunned)
 end
 
 function CrowdControlTracker:OnCombatTipAdded(eventCode, combatTipID)
-
     -- Break roots when another CC type hits since there is some oddity with the tip removal event when a hard CC hits
     if combatTipID == 18 then
         isRooted = false
@@ -1044,7 +1043,6 @@ function CrowdControlTracker:SetupDefaultIcon(abilityId, ccType)
 end
 
 function CrowdControlTracker:OnDraw(abilityId, abilityIcon, ccDuration, result, abilityName, interval)
-
     -- Error prevention
     if result == ACTION_RESULT_EFFECT_GAINED_DURATION then
         return
