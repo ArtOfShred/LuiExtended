@@ -7575,8 +7575,11 @@ function ChatAnnouncements.HookFunction()
 
     ZO_PreHook(alertHandlers, EVENT_GROUP_MEMBER_JOINED, OnGroupMemberJoined)
 
+    -- This function isn't needed if CA isn't enabled so only load it if CA is enabled
+    if ChatAnnouncements.Enabled then
+        eventManager:RegisterForEvent(moduleName, EVENT_GROUP_TYPE_CHANGED, ChatAnnouncements.OnGroupTypeChanged)
+    end
     eventManager:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED, ChatAnnouncements.OnGroupInviteReceived)
-    eventManager:RegisterForEvent(moduleName, EVENT_GROUP_TYPE_CHANGED, ChatAnnouncements.OnGroupTypeChanged)
     eventManager:RegisterForEvent(moduleName, EVENT_GROUP_ELECTION_NOTIFICATION_ADDED, ChatAnnouncements.VoteNotify)
     eventManager:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_NO_LONGER_LFG, ChatAnnouncements.LFGLeft)
     eventManager:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_LFG_JOINED, ChatAnnouncements.GroupingToolsLFGJoined)
@@ -9696,8 +9699,6 @@ function ChatAnnouncements.HookFunction()
     end
 
     -- EVENT_DISPLAY_ANNOUNCEMENT (CSA Handler)
-    -- TODO: This needs ALOT of work
-    -- TODO: Use zoneIds to determine message filtering instead of message text
     local function DisplayAnnouncementHook(primaryText, secondaryText, icon, soundId, lifespanMS, category)
 
         -- Disable Respec Display Announcement since we handle this from loot announcements (using Respec scroll)
