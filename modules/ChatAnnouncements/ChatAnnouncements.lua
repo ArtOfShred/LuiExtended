@@ -1504,14 +1504,14 @@ function ChatAnnouncements.GuildRankSaved(eventCode, guildId, rankIndex)
     end
 
     local icon = GetGuildRankIconIndex(guildId, rankIndex)
-    local icon = GetGuildRankLargeIcon(icon)
+    local icon1 = GetGuildRankLargeIcon(icon)
     local guildName = GetGuildName(guildId)
     local guildAlliance = GetGuildAlliance(guildId)
     local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
     local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
     local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
-    local rankSyntax = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankName)) or (guildColor:Colorize(rankName))
-    local rankSyntaxAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", rankName) or rankName
+    local rankSyntax = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon1, 16, 16), rankName)) or (guildColor:Colorize(rankName))
+    local rankSyntaxAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(icon1, "100%", "100%", rankName) or rankName
 
     if ChatAnnouncements.SV.Social.GuildManageCA then
         printToChat(zo_strformat(GetString(SI_LUIE_CA_GUILD_RANK_UPDATE), rankSyntax, guildNameAlliance), true)
@@ -3986,8 +3986,8 @@ function ChatAnnouncements.ResolveQuestItemChange()
                                 else
                                     comma = i > 1 and " and " or ""
                                 end
-                                local icon = GetQuestItemIcon(Quests.QuestItemMerge[itemId][i])
-                                local formattedIcon = (ChatAnnouncements.SV.Inventory.LootIcons and icon and icon ~= "") and ("|t16:16:" .. icon .. "|t ") or ""
+                                local icon2 = GetQuestItemIcon(Quests.QuestItemMerge[itemId][i])
+                                local formattedIcon1 = (ChatAnnouncements.SV.Inventory.LootIcons and icon2 and icon2 ~= "") and ("|t16:16:" .. icon2 .. "|t ") or ""
                                 local usedId = Quests.QuestItemMerge[itemId][i]
                                 local usedLink = ""
                                 if ChatAnnouncements.SV.BracketOptionItem == 1 then
@@ -3995,7 +3995,7 @@ function ChatAnnouncements.ResolveQuestItemChange()
                                 else
                                     usedLink = string.format("|H1:quest_item:" .. usedId .. "|h|h")
                                 end
-                                line = (line .. comma .. "|r" .. formattedIcon .. usedLink .. quantity .. "|c" .. color)
+                                line = (line .. comma .. "|r" .. formattedIcon1 .. usedLink .. quantity .. "|c" .. color)
                             end
 
                             formattedMessageP2 = string.format(logPrefix, line, formattedMessageP1)
@@ -5703,16 +5703,16 @@ function ChatAnnouncements.InventoryUpdateGuildBank(eventCode, bagId, slotId, is
         local removed
 
         if not g_inventoryStacks[slotId] then -- NEW ITEM
-            local icon, stack = GetItemInfo(bagId, slotId)
+            local icon1, stack1 = GetItemInfo(bagId, slotId)
             itemType = GetItemType(bagId, slotId)
             itemId = GetItemId(bagId, slotId)
             itemLink = GetItemLink(bagId, slotId, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
-            g_inventoryStacks[slotId] = { icon = icon, stack = stack, itemId = itemId, itemType = itemType, itemLink = itemLink }
+            g_inventoryStacks[slotId] = { icon = icon1, stack = stack1, itemId = itemId, itemType = itemType, itemLink = itemLink }
             gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
             logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdrawGuild
             g_guildBankCarry = {}
-            g_guildBankCarry.icon = icon
-            g_guildBankCarry.stack = stack
+            g_guildBankCarry.icon = icon1
+            g_guildBankCarry.stack = stack1
             g_guildBankCarry.gainOrLoss = gainOrLoss
             g_guildBankCarry.logPrefix = logPrefix
             g_guildBankCarry.receivedBy = receivedBy
@@ -6374,17 +6374,17 @@ function LUIE.HandleClickEvent(rawLink, mouseButton, linkText, linkStyle, linkTy
         return true
     end
     if linkType == "LINK_TYPE_LUIANTIQUITY" then
-        local categoryIndex = tonumber(categoryIndex)
+        local categoryIndex1 = tonumber(categoryIndex)
         -- Open the codex
         if IsInGamepadPreferredMode() then
             local DONT_PUSH = false
-            local antiquityData = ANTIQUITY_DATA_MANAGER:GetAntiquityData(categoryIndex)
+            local antiquityData = ANTIQUITY_DATA_MANAGER:GetAntiquityData(categoryIndex1)
             internalassert(antiquityData ~= nil)
             if antiquityData then
                 ANTIQUITY_LORE_GAMEPAD:ShowAntiquityOrSet(antiquityData, DONT_PUSH)
             end
         else
-            ANTIQUITY_LORE_KEYBOARD:ShowAntiquity(categoryIndex)
+            ANTIQUITY_LORE_KEYBOARD:ShowAntiquity(categoryIndex1)
         end
         return true
     end
@@ -8207,11 +8207,6 @@ function ChatAnnouncements.HookFunction()
         local questJournalObject = SYSTEMS:GetObject("questJournal")
         local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
 
-        local questType = GetJournalQuestType(journalIndex)
-        local instanceDisplayType = GetJournalInstanceDisplayType(journalIndex)
-        local questJournalObject = SYSTEMS:GetObject("questJournal")
-        local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
-
         -- Add quest to index
         g_questIndex[questName] = {
             questType = questType,
@@ -9632,8 +9627,7 @@ function ChatAnnouncements.HookFunction()
         local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_ROLLING_METER_PROGRESS_TEXT)
         local stageIcon, cycleIcon, arcIcon = ZO_EndlessDungeonManager.GetProgressionIcons()
         local stageNarration, cycleNarration, arcNarration = ZO_EndlessDungeonManager.GetProgressionNarrationDescriptions(stage, cycle, arc)
-        local progressData =
-        {
+        local progressData = {
             {
                 iconTexture = arcIcon,
                 narrationDescription = arcNarration,
@@ -9670,7 +9664,9 @@ function ChatAnnouncements.HookFunction()
         g_previousEndlessDungeonProgression[3] = arc
     end
 
-    ENDLESS_DUNGEON_MANAGER:RegisterCallback("StateChanged", RefreshEndlessDungeonProgressionState)
+    if GetAPIVersion() < 101039 then
+        ENDLESS_DUNGEON_MANAGER:RegisterCallback("StateChanged", RefreshEndlessDungeonProgressionState)
+    end
 
     local function UpdateEndlessDungeonTrackers()
         ENDLESS_DUNGEON_HUD_TRACKER:UpdateProgress()

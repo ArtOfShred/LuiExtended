@@ -2,7 +2,7 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
-local LUIE = LUIE
+
 local CombatInfo = LUIE.CombatInfo
 CombatInfo.AbilityAlerts = {}
 local AbilityAlerts = CombatInfo.AbilityAlerts

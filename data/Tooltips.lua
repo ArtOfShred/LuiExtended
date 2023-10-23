@@ -1613,38 +1613,3 @@ function LUIE.DynamicTooltip(abilityId)
     end
     return tooltip
 end
-
---[[
-function LUIE.ProcessTooltipType(input, tooltip)
-    -- dummy func, maybe use
-end
-
-LUIE.DynamicTooltips           = { }
-
-local DT           = LUIE.DynamicTooltips
-
-DT[20299]                                     = function()
-                                                local skillType, skillIndex, abilityIndex           = GetSpecificSkillAbilityKeysByAbilityId(45038)
-                                                local _, _, _, _, _, purchased, _, rankIndex           = GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
-                                                local duration           = 2
-                                                if purchased then
-                                                    duration           = duration + rankIndex
-                                                end
-
-                                                local tooltip           = zo_strformat(GetString(SI_LUIE_SKILL_HIDDEN_TP), duration)
-
-                                                return tooltip
-                                    end
-
-if DT[abilityId] then
-DT[abilityId]()
-]]
---
-
---[[
-    local itemLink           = '|H1:item:71252:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'
-    local abilityDescription           = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71252:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-    d(abilityDescription)
-    zo_strformat(GetString(SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST), zo_strsub( GetAbilityDescription(75745):gsub("[^0-9]", ""), 0, -3) )
-]]
---
