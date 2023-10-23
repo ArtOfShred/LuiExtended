@@ -7867,8 +7867,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Respec Notification (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_RESPEC), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_RESPEC_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function()
                     return Settings.DisplayAnnouncements.Respec.CA
                 end,
@@ -7884,8 +7884,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Respec Notification (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_RESPEC), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_RESPEC_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function()
                     return Settings.DisplayAnnouncements.Respec.CSA
                 end,
@@ -7901,8 +7901,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Respec Notification (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_RESPEC), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_RESPEC_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function()
                     return Settings.DisplayAnnouncements.Respec.Alert
                 end,
@@ -7918,8 +7918,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Display Group Area Message (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_GROUPAREA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function()
                     return Settings.DisplayAnnouncements.GroupArea.CA
                 end,
@@ -7935,8 +7935,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Display Group Area Message (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_GROUPAREA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function()
                     return Settings.DisplayAnnouncements.GroupArea.CSA
                 end,
@@ -7952,8 +7952,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Display Group Area Message (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function()
                     return Settings.DisplayAnnouncements.GroupArea.Alert
                 end,
@@ -7969,8 +7969,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Arena Notifications (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ARENA_MAELSTROM), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ARENA_MAELSTROM_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function()
                     return Settings.DisplayAnnouncements.ArenaMaelstrom.CA
                 end,
@@ -7986,8 +7986,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Arena Notifications (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ARENA_MAELSTROM), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ARENA_MAELSTROM_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function()
                     return Settings.DisplayAnnouncements.ArenaMaelstrom.CSA
                 end,
@@ -8003,8 +8003,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Arena Notifications (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ARENA_MAELSTROM), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ARENA_MAELSTROM_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function()
                     return Settings.DisplayAnnouncements.ArenaMaelstrom.Alert
                 end,
@@ -8021,8 +8021,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Dragonstar Arena Notifications (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ARENA_MAELSTROM), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ARENA_MAELSTROM_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function()
                     return Settings.DisplayAnnouncements.ArenaDragonstar.CA
                 end,
@@ -8038,8 +8038,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Dragonstar Arena Notifications (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ARENA_MAELSTROM), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ARENA_MAELSTROM_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function()
                     return Settings.DisplayAnnouncements.ArenaDragonstar.CSA
                 end,
@@ -8055,8 +8055,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Dragonstar Arena Notifications (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ARENA_MAELSTROM), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ARENA_MAELSTROM_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function()
                     return Settings.DisplayAnnouncements.ArenaDragonstar.Alert
                 end,
@@ -8074,8 +8074,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Endless Archive Notifications (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_DUNGEON_ENDLESS), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_DUNGEON_ENDLESS_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function()
                     return Settings.DisplayAnnouncements.DungeonEndlessArchive.CA
                 end,
@@ -8091,8 +8091,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Endless Archive Notifications (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_DUNGEON_ENDLESS), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_DUNGEON_ENDLESS_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function()
                     return Settings.DisplayAnnouncements.DungeonEndlessArchive.CSA
                 end,
@@ -8108,8 +8108,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Endless Archive Notifications (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_DUNGEON_ENDLESS), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_DUNGEON_ENDLESS_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function()
                     return Settings.DisplayAnnouncements.DungeonEndlessArchive.Alert
                 end,
@@ -8125,8 +8125,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Imperial City Display Announcement (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function()
                     return Settings.DisplayAnnouncements.ZoneIC.CA
                 end,
@@ -8142,8 +8142,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Imperial City Display Announcement (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function()
                     return Settings.DisplayAnnouncements.ZoneIC.CSA
                 end,
@@ -8159,8 +8159,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Imperial City Display Announcement (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function()
                     return Settings.DisplayAnnouncements.ZoneIC.Alert
                 end,
@@ -8176,8 +8176,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Imperial City Display Description
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION)),
-                tooltip = GetString(SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC_DESCRIPTION)),
+                tooltip = GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC_DESCRIPTION_TP),
                 getFunc = function()
                     return Settings.DisplayAnnouncements.ZoneIC.Description
                 end,
@@ -8193,8 +8193,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Craglorn Buff (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function()
                     return Settings.DisplayAnnouncements.ZoneCraglorn.CA
                 end,
@@ -8210,8 +8210,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Craglorn Buff (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function()
                     return Settings.DisplayAnnouncements.ZoneCraglorn.CSA
                 end,
@@ -8227,8 +8227,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Craglorn Buff (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function()
                     return Settings.DisplayAnnouncements.ZoneCraglorn.Alert
                 end,
