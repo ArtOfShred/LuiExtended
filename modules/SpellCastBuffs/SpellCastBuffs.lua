@@ -1464,6 +1464,19 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
 
                 tooltipText = (Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltip) and zo_strformat(Effects.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
 
+                -- If there is a special tooltip to use for targets only, then set this now
+                local containerContext = control.container
+                if containerContext == "target1" or
+                containerContext == "target2" or
+                containerContext == "targetb" or
+                containerContext == "targetd" or
+                containerContext == "promb_target" or
+                containerContext == "promd_target" then
+                    if Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltipOther then
+                        tooltipText = zo_strformat(Effects.EffectOverride[control.effectId].tooltipOther, duration, value2, value3)
+                    end
+                end
+
                 -- Use separate Veteran difficulty tooltip if applicable.
                 if LUIE.ResolveVeteranDifficulty() == true and Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltipVet then
                     tooltipText = zo_strformat(Effects.EffectOverride[control.effectId].tooltipVet, duration, value2, value3)
@@ -3844,6 +3857,7 @@ function SpellCastBuffs.updateIcons(currentTime, sortedList, container)
             buff.buffSlot = effect.buffSlot
             buff.tooltip = effect.tooltip
             buff.duration = effect.dur or 0
+            buff.container = container
 
             if effect.backdrop then
                 buff.drop:SetHidden(false)

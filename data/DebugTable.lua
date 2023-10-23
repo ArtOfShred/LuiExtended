@@ -333,8 +333,8 @@ LUIE.DebugAuras = {
     [21973] = true, -- Bash
     [21972] = true, -- Stagger
     [21971] = true, -- Bash Stun
-    [48416] = true, -- Uber Attack
-    [45982] = true, -- Bash Stun
+    --[48416] = true, -- Uber Attack
+    --[45982] = true, -- Bash Stun
 
     -- Off-Balance Exploit
     [18793] = true, -- Off-Balance Exploit
@@ -347,51 +347,51 @@ LUIE.DebugAuras = {
     -- Death/Resurrection
     [14644] = true, -- Revive (Death Dialog)
     [14646] = true, -- Recently Revived
-    [26770] = true, -- Resurrect
-    [55406] = true, -- Resurrect Trigger
-    [123969] = true, -- Lesser Reincarnate
-    [123970] = true, -- Lesser Reincarnate
+    --[26770] = true, -- Resurrect
+    --[55406] = true, -- Resurrect Trigger
+    --[123969] = true, -- Lesser Reincarnate
+    --[123970] = true, -- Lesser Reincarnate
 
     -- Basic Attacks
     --[16593] = true, -- Melee Snare
-    [48532] = true, -- Charge Snare
-    [41952] = true, -- Cower
+    --[48532] = true, -- Charge Snare
+    --[41952] = true, -- Cower
     [55080] = true, -- Pet Hidden
     [16566] = true, -- CC Immunity
     [28301] = true, -- Crowd Control Immunity
-    [38117] = true, -- Crowd Control Immunity
+    --[38117] = true, -- Crowd Control Immunity
 
     -- Taunt Effects
     [38254] = true, -- Taunt
     [52790] = true, -- Taunt Counter
     [38541] = true, -- Taunt
-    [38542] = true, -- Taunt
+    --[38542] = true, -- Taunt
 
     -- Disguise Effects
-    [50602] = true, -- Disguised
+    [25602] = true, -- Suspicious
     [26237] = true, -- Disguise Warning Area
+    [50602] = true, -- Disguised
     [26238] = true, -- Disguise Warning Area
     [25584] = true, -- Discovered
     [25582] = true, -- Remove Disguise
     [26472] = true, -- Remove Disguise
-    [25602] = true, -- Suspicious
     [25603] = true, -- Begin
     [25604] = true, -- Interact Complete
     [26223] = true, -- Remove Suspicious
-    --[13371] = true, -- Acting Suspicious
+    [13371] = true, -- Acting Suspicious
     [13372] = true, -- Spotted
 
     -- Pet Effects
     [28609] = true, -- Dummy Target Setter
     [43958] = true, -- Player Pet Defenses
     [70116] = true, -- Player Pet Battle Spirit
+    [126366] = true, -- Pet Battle Spirit
     [71904] = true, -- Player Pet Speed
     [62197] = true, -- Player Pet Critical Chance
     [43963] = true, -- Player Pet Threat
     [62201] = true, -- Taunt
     [63795] = true, -- Taunt
     [63794] = true, -- Taunt
-    [126366] = true, -- Pet Battle Spirit
 
     -- Death Achieve Check (Veteran Dungeons)
     [55883] = true, -- Death Achieve Check

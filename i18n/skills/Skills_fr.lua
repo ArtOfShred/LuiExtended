@@ -61,6 +61,7 @@ local strings = {
     SI_LUIE_SKILL_BRACE_TP = "Préparé à l'attaque, réduit les dégâts reçus de |cFFFFFF<<1>>|r% et la vitesse de déplacement de |cFFFFFF<<2>>|r% tout en accordant une immunité aux effets d'étourdissement et de recul.\n\nDrains |cFFFFFF<<3>>|r <<4>> sur un blocage réussi.",
     SI_LUIE_SKILL_RESURRECTION_IMMUNITY_TP = "Réssuscité. Insensible aux dégâts et à tous les effets négatifs.",
     SI_LUIE_SKILL_TAUNT_TP = "Provoqué.",
+    SI_LUIE_SKILL_TAUNT_OTHER_TP = "This enemy is taunted and will concentrate all attacks on you for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_DISGUISE_TP = "Une fois déguisé, vous poouvez être détecté par les sentinelles ou en effectuant des actions suspectes.\n\nSubir des dégâts autres que par chute détruira votre déguisement.",
     SI_LUIE_SKILL_BATTLE_SPIRIT_TP = "• Réduit les dégâts reçus de |cFFFFFF44|r%\n• Réduit la puissance du bouclier de dégâts de |cFFFFFF50|r%\n• Réduit les soins reçus et la récupération de santé de |cFFFFFF50|r%\n• Augmente la portée des compétences avec une portée supérieure à |cFFFFFF28|r mètres de |cFFFFFF8|r mètres",
     SI_LUIE_SKILL_BATTLE_SPIRIT_IMPERIAL_CITY_TP = "• Réduit les dégâts reçus de |cFFFFFF44|r%\n• Réduit la puissance du bouclier de dégâts de |cFFFFFF50|r%\n• Réduit les soins reçus et la récupération de santé de |cFFFFFF50|r%",

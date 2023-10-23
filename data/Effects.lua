@@ -3837,10 +3837,16 @@ Effects.EffectOverride = {
     -- Bash
     [21970] = { icon = "LuiExtended/media/icons/abilities/ability_innate_bash.dds" }, -- Bash
     [21973] = { icon = "" }, -- Bash (Hides icon for interrupt)
-    [21972] = { tooltip = Tooltips.Generic_Stagger }, -- Stagger
+    [21972] = {
+        icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds",
+        name = Abilities.Innate_Bash_Stun,
+        tooltip = Tooltips.Generic_Stagger,
+        cc = LUIE_CC_TYPE_STAGGER
+    }, -- Stagger
     [21971] = {
         icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds",
         tooltip = Tooltips.Generic_Stun,
+        cc = LUIE_CC_TYPE_STUN
     }, -- Bash Stun (Stun from bashing cast)
     [48416] = {
         icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds",
@@ -3849,12 +3855,14 @@ Effects.EffectOverride = {
     [45982] = {
         icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds",
         tooltip = Tooltips.Generic_Stun,
+        cc = LUIE_CC_TYPE_STUN
     }, -- Bash Stun (Stun from bashing cast when NPC is pinned against an obstacle)
 
     -- Off-Balance Exploit
     [16825] = {
         icon = "LuiExtended/media/icons/abilities/ability_innate_off-balance_exploit.dds",
         tooltip = Tooltips.Generic_Knockdown,
+        cc = LUIE_CC_TYPE_KNOCKDOWN
     }, -- Off-Balance Exploit
 
     -- Death/Resurrection
@@ -3878,6 +3886,7 @@ Effects.EffectOverride = {
         icon = "LuiExtended/media/icons/abilities/ability_spell_pin.dds",
         tooltip = Tooltips.Generic_Snare,
         tooltipValue2 = 25,
+        cc = LUIE_CC_TYPE_SNARE
     }, -- Melee Snare
     [48532] = { icon = "LuiExtended/media/icons/abilities/ability_spell_pin.dds", hide = true }, -- Charge Snare
     [55080] = { hide = true }, -- Pet Hidden
@@ -3888,7 +3897,7 @@ Effects.EffectOverride = {
     [38117] = { hide = true }, -- Crowd Control Immunity
 
     -- Taunt Effects
-    [38254] = { icon = "esoui/art/icons/ability_warrior_010.dds", tooltip = Tooltips.Innate_Taunt }, -- Taunt
+    [38254] = { icon = "esoui/art/icons/ability_warrior_010.dds", tooltip = Tooltips.Innate_Taunt, tooltipOther = Tooltips.Innate_Taunt_Other }, -- Taunt
 
     -- Disguise Effects
     [50602] = {
@@ -3899,8 +3908,8 @@ Effects.EffectOverride = {
     [999020] = { icon = "LuiExtended/media/icons/disguises/disguise_generic.dds", name = Abilities.Innate_Disguise }, -- Disguise FAKE
 
     -- Pet Effects
-    [63794] = { hide = true }, -- Taunt
     [43963] = { hide = true }, -- Player Pet Threat
+    [63794] = { hide = true }, -- Taunt
 
     -- Death Achieve Check (Veteran Dungeons)
     [55883] = { hide = true }, -- Death Achieve Check
@@ -3918,6 +3927,7 @@ Effects.EffectOverride = {
     [999018] = { icon = "LuiExtended/media/icons/abilities/ability_innate_pet.dds", name = Abilities.Innate_Vanity_Pet }, -- Pet FAKE BUFf
     [999019] = { icon = "LuiExtended/media/icons/assistants/assistant_nuzhimeh.dds", name = Abilities.Innate_Assistant }, -- Assistant FAKE BUFF
     [999014] = { icon = "esoui/art/icons/artificialeffect_battle-spirit.dds", name = Abilities.Skill_Battle_Spirit }, -- Battle Spirit FAKE
+
     [15594] = { hide = true }, -- Bonus vs off Balance
     [10950] = {
         icon = "LuiExtended/media/icons/abilities/ability_innate_fall_snare.dds",
@@ -21896,7 +21906,7 @@ Effects.FakeStagger = {
 
     -- On Target
     [86310] = { icon = "esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 500 }, -- Stagger (Player Blocks charged NPC attack)
-    [21972] = { duration = 500 }, -- Stagger (Player interrupts NPC cast)
+    [21972] = { icon = "esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 500 }, -- Stagger (Player interrupts NPC cast)
 
     -- Dragonstar Arena
     [53290] = { icon = "esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 433 }, -- Stagger (Sovngarde Icemage)

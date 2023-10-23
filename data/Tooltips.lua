@@ -293,6 +293,7 @@ LUIE.Data.Tooltips = {
     --Innate_Gallop                                   = GetString(SI_LUIE_SKILL_GALLOP_TP),
     Innate_Resurrection_Immunity = GetString(SI_LUIE_SKILL_RESURRECTION_IMMUNITY_TP),
     Innate_Taunt = GetString(SI_LUIE_SKILL_TAUNT_TP),
+    Innate_Taunt_Other = GetString(SI_LUIE_SKILL_TAUNT_OTHER_TP),
     Innate_Disguised = GetString(SI_LUIE_SKILL_DISGUISE_TP),
     Innate_Battle_Spirit = GetString(SI_LUIE_SKILL_BATTLE_SPIRIT_TP),
     Innate_Battle_Spirit_Imperial_City = GetString(SI_LUIE_SKILL_BATTLE_SPIRIT_IMPERIAL_CITY_TP),
