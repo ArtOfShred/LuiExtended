@@ -26,8 +26,7 @@ CastBarTable.CastBreakingStatus = {
 --------------------------------------------------------------------------------------------------------------------------------
 CastBarTable.CastBreakingActions = {
     [28549] = true, -- Roll Dodge
-    [55146] = true, -- Interrupt Bonus (when player bashes it can interrupt a channel - note that it won't succesfully go off until after the cast if it can't be stopped by bashing so this is safe to apply to everything)
-    --[20309] = true, -- Hidden -- Shouldn't break any casts or channels (or is unable to be using during one)
+    [55146] = true, -- Interrupt Bonus (when player bashes it can interrupt a channel - note that it won't successfully go off until after the cast if it can't be stopped by bashing so this is safe to apply to everything)
 }
 
 -- Used to break Siege Weapon deployment/stoy when the player opens their inventory or another window or tabs out of the game.

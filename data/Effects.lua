@@ -46,8 +46,6 @@ Effects.IsWeaponAttack = {
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.IsToggle = {
     -- Innate
-    [20299] = true, -- Sneak -- Used for hidden
-    [20309] = true, -- Hidden -- Used for invisibility
     [40165] = true, -- Scene Choreo Brace (Monster Fight))
     [29761] = true, -- Brace (Guard)
 
@@ -460,8 +458,9 @@ Effects.DebuffDisplayOverrideIdAlways = {
     -- BASIC -----------------------------------------------
     ----------------------------------------------------------------
 
+    [2727] = true, -- Off-Balance
     [134599] = true, -- Off Balance Immunity
-    --[132831] = true, -- Major Vulnerability Invulnerability -- TODO: Likely remove
+    [132831] = true, -- Major Vulnerability Invulnerability
 
     ----------------------------------------------------------------
     -- NPC ABILITIES -----------------------------------------------
@@ -3589,7 +3588,7 @@ Effects.EffectOverride = {
     -- name = '' -- Change Name
     -- tooltip = '' -- Set a custom tooltip to display for this ability
     -- hide = true -- Hide this aura from appearing
-    -- type = 1 or BUFF_EFFECT_TYPE_DEBUFF -- Adjust this effect to be a debuff or not a debuff to fix API errors (Commonly used as most undispellable debuffs show as a buff)
+    -- type = BUFF_EFFECT_TYPE_BUFF or BUFF_EFFECT_TYPE_DEBUFF -- Adjust this effect to be a debuff or not a debuff to fix API errors (Commonly used as most undispellable debuffs show as a buff)
     -- duration = # modify the duration display of this effect. Option 1 - Set a negative value - to subtract x seconds from the duration of the effect. Option 2 - Set to 0 to display the buff for an unlimited amount of time until an action result of fade occurs.
     -- unbreakable = 1 -- flag this aura as unremoveable and change border color to grey for debuffs or cyan for buffs
     -- forcedContainer = 'short' or 'long' - Forces a buff to appear in one of these containers
@@ -3946,7 +3945,6 @@ Effects.EffectOverride = {
     [32346] = {
         icon = "LuiExtended/media/icons/abilities/ability_innate_absorbing_skyshard.dds",
         name = Abilities.Innate_Absorbing_Skyshard,
-        unbreakable = 1,
     }, -- Skyshard Collect
     [63601] = {
         icon = "LuiExtended/media/icons/abilities/ability_innate_eso_plus_member.dds",
@@ -3960,10 +3958,15 @@ Effects.EffectOverride = {
     }, -- Off-Balance
     [134599] = {
         icon = "LuiExtended/media/icons/abilities/ability_innate_off_balance_immunity.dds",
-        type = 1,
+        type = BUFF_EFFECT_TYPE_BUFF,
         tooltip = Tooltips.Generic_Off_Balance_Immunity,
     }, -- Off Balance Immunity
-    --[132831] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_major_vulnerability_immunity.dds', name = Abilities.Skill_Major_Vulnerability_Immunity, type = 1, tooltip = Tooltips.Generic_Major_Vulnerability_Immunity }, -- Major Vulnerability Invulnerability -- TODO: Likely remove
+    [132831] = {
+        icon = 'LuiExtended/media/icons/abilities/ability_innate_major_vulnerability_immunity.dds',
+        name = Abilities.Skill_Major_Vulnerability_Immunity,
+        type = BUFF_EFFECT_TYPE_BUFF,
+        tooltip = Tooltips.Generic_Major_Vulnerability_Immunity,
+    }, -- Major Vulnerability Invulnerability
     [85701] = { hide = true }, -- Dueling Flag
     [21263] = {
         icon = "LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds",
@@ -21667,8 +21670,6 @@ Effects.FakePlayerBuffs = {
 
     -- Player (Basic)
     [123970] = { duration = 3000 }, -- Lesser Reincarnate
-    --[32346] = {icon = 'esoui/art/icons/achievement_u24_smallzone_skyshard.dds', name = Abilities.Innate_Absorbing_Skyshard, duration = 5800}, -- Skyshard Collect
-    --[14031] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_mundus_use.dds', name = Abilities.Innate_Receiving_Boon, duration = 5000}, -- Mundus Use
 
     -----------------
     -- Class --------

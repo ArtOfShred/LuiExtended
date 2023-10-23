@@ -407,17 +407,17 @@ LUIE.DebugAuras = {
 
     -- Misc Effects
     [15594] = true, -- Bonus vs off Balance
-    [28541] = true, -- Swap Weapons
+    --[28541] = true, -- Swap Weapons
     [25166] = true, -- Clumsy
     [10950] = true, -- Fall Snare
     [6811] = true, -- Recall
     [31221] = true, -- Skyshard Collect
     [32346] = true, -- Skyshard Collect
-    [63601] = true, -- ESO Plus Member
+    --[63601] = true, -- ESO Plus Member
     --[2727] = true, -- Off-Balance
     [134599] = true, -- Off Balance Immunity
     --[132831] = true, -- Major Vulnerability Invulnerability
-    [85701] = true, -- Dueling Flag
+    --[85701] = true, -- Dueling Flag
     [21263] = true, -- Ayleid Health Bonus
     [100862] = true, -- Fortified Ayleid Health Bonus
 
@@ -429,21 +429,21 @@ LUIE.DebugAuras = {
     [151934] = true, -- Aetherial Well Restore (Aetherial Well)
 
     [45819] = true, -- Remove Werevamp
-    [51064] = true, -- Weakness
-    [39405] = true, -- Weakness
+    --[51064] = true, -- Weakness
+    --[39405] = true, -- Weakness
 
     -- Dummy Effects
-    [37079] = true, -- remove
-    [20311] = true, -- Remove Sprint
-    [20303] = true, -- Remove Sprint
-    [70379] = true, -- Remove
-    [70385] = true, -- Remove
-    [38519] = true, -- Hiding
-    [39046] = true, -- Add Guild Rep
+    --[37079] = true, -- remove
+    --[20311] = true, -- Remove Sprint
+    --[20303] = true, -- Remove Sprint
+    --[70379] = true, -- Remove
+    --[70385] = true, -- Remove
+    --[38519] = true, -- Hiding
+    --[39046] = true, -- Add Guild Rep
     [62797] = true, -- Weapon Swap Cooldown Timer
     [62798] = true, -- Weapon Swap Cooldown Timer
-    [61874] = true, -- Swap to Weapon Set 1
-    [61875] = true, -- Swap to Weapon Set 2
+    --[61874] = true, -- Swap to Weapon Set 1
+    --[61875] = true, -- Swap to Weapon Set 2
 
     -------------------------------------
     -- CHAMPION POINTS ------------------
