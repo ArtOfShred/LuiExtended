@@ -811,6 +811,105 @@ function LUIE.InitializeHooks()
         end
     end
 
+    -- Used to update Tooltips for Active Effects Window
+    local function TooltipBottomLine(control, detailsLine)
+        -- Add bottom divider and info if present:
+        if LUIE.SpellCastBuffs.SV.TooltipAbilityId or LUIE.SpellCastBuffs.SV.TooltipBuffType then
+            ZO_Tooltip_AddDivider(GameTooltip)
+            GameTooltip:SetVerticalPadding(4)
+            GameTooltip:AddLine("", "", ZO_NORMAL_TEXT:UnpackRGB())
+            -- Add Ability ID Line
+            if LUIE.SpellCastBuffs.SV.TooltipAbilityId then
+                local labelAbilityId = control.effectId and control.effectId or "None"
+                if labelAbilityId == "Fake" then
+                    artificial = true
+                end
+                if control.isArtificial then
+                    -- Change id for Battle Spirit to match the one we track in SCB to avoid confusion
+                    if control.effectId == 0 or control.effectId == 2 then
+                        labelAbilityId = 999014
+                    else
+                        labelAbilityId = "Artificial"
+                    end
+                end
+                GameTooltip:AddHeaderLine("Ability ID", "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_LEFT, ZO_NORMAL_TEXT:UnpackRGB())
+                GameTooltip:AddHeaderLine(labelAbilityId, "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_RIGHT, 1, 1, 1)
+                detailsLine = detailsLine + 1
+            end
+
+            -- Add Buff Type Line
+            if LUIE.SpellCastBuffs.SV.TooltipBuffType then
+                local buffType = control.effectType and control.effectType or LUIE_BUFF_TYPE_NONE
+                local effectId = control.effectId
+                if effectId and LUIE.Data.Effects.EffectOverride[effectId] and LUIE.Data.Effects.EffectOverride[effectId].unbreakable then
+                    buffType = buffType + 2
+                end
+
+                -- Setup tooltips for player aoe trackers
+                if effectId and LUIE.Data.Effects.EffectGroundDisplay[effectId] then
+                    buffType = buffType + 4
+                end
+
+                -- Setup tooltips for ground buff/debuff effects
+                if effectId and (LUIE.Data.Effects.AddGroundDamageAura[effectId] or (LUIE.Data.Effects.EffectOverride[effectId] and LUIE.Data.Effects.EffectOverride[effectId].groundLabel) ) then
+                    buffType = buffType + 6
+                end
+
+                GameTooltip:AddHeaderLine("Type", "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_LEFT, ZO_NORMAL_TEXT:UnpackRGB())
+                GameTooltip:AddHeaderLine(buffTypes[buffType], "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_RIGHT, 1, 1, 1)
+                detailsLine = detailsLine + 1
+            end
+        end
+    end
+
+    -- Hook Tooltip Generation for STATS Screen Buffs & Debuffs
+    ZO_StatsActiveEffect_OnMouseEnter = function(control)
+        InitializeTooltip(GameTooltip, control, RIGHT, -15)
+
+        local detailsLine
+        local colorText = ZO_NORMAL_TEXT
+        if control.thirdLine ~= "" and control.thirdLine ~= nil then
+            colorText = control.effectType == BUFF_EFFECT_TYPE_DEBUFF and ZO_ERROR_COLOR or ZO_SUCCEEDED_TEXT
+        end
+
+        if control.isArtificialTooltip then
+            local tooltipText = GetArtificialEffectTooltipText(control.effectId)
+            GameTooltip:AddLine(control.tooltipTitle, "ZoFontHeader2",1,1,1, nil)
+            GameTooltip:SetVerticalPadding(1)
+            ZO_Tooltip_AddDivider(GameTooltip)
+            GameTooltip:SetVerticalPadding(5)
+            GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
+            detailsLine = 5
+        else
+            detailsLine = 3
+            GameTooltip:AddLine(control.tooltipTitle, "ZoFontHeader2",1,1,1, nil)
+            if control.tooltipText ~= "" and control.tooltipText ~= nil then
+                GameTooltip:SetVerticalPadding(1)
+                ZO_Tooltip_AddDivider(GameTooltip)
+                GameTooltip:SetVerticalPadding(5)
+                GameTooltip:AddLine(control.tooltipText, "", colorText:UnpackRGBA())
+                detailsLine = 5
+            end
+            if control.thirdLine ~= "" and control.thirdLine ~= nil then
+                if control.tooltipText == "" or control.tooltipText == nil then
+                    GameTooltip:SetVerticalPadding(1)
+                    ZO_Tooltip_AddDivider(GameTooltip)
+                    GameTooltip:SetVerticalPadding(5)
+                end
+                detailsLine = 7
+                GameTooltip:AddLine(control.thirdLine, "", ZO_NORMAL_TEXT:UnpackRGB())
+            end
+        end
+
+        TooltipBottomLine(control, detailsLine)
+
+        if not control.animation then
+            control.animation = ANIMATION_MANAGER:CreateTimelineFromVirtual("ShowOnMouseOverLabelAnimation", control:GetNamedChild("Highlight"))
+        end
+        control.animation:PlayForward()
+    end
+
+
     -- Hook Skills Advisor (Keyboard) and use this variable to refresh the abilityData one time on initialization. We don't want to reload any more after that.
     ---@diagnostic disable-next-line: duplicate-set-field
     ZO_SkillsAdvisor_Suggestions_Keyboard.SetupAbilityEntry = function(self, control, skillProgressionData)
