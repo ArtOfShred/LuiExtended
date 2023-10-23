@@ -359,13 +359,13 @@ LUIE.DebugAuras = {
     [55080] = true, -- Pet Hidden
     [16566] = true, -- CC Immunity
     [28301] = true, -- Crowd Control Immunity
-    --[38117] = true, -- Crowd Control Immunity
+    [38117] = true, -- Crowd Control Immunity
 
     -- Taunt Effects
     [38254] = true, -- Taunt
     [52790] = true, -- Taunt Counter
     [38541] = true, -- Taunt
-    --[38542] = true, -- Taunt
+    --[38542] = true, -- Update
 
     -- Disguise Effects
     [25602] = true, -- Suspicious

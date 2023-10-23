@@ -3894,7 +3894,10 @@ Effects.EffectOverride = {
         icon = "LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds",
         tooltip = Tooltips.Generic_CC_Immunity,
     }, -- Crowd Control Immunity
-    [38117] = { hide = true }, -- Crowd Control Immunity
+    [38117] = {
+        icon = "LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds",
+        tooltip = Tooltips.Generic_CC_Immunity,
+    }, -- Crowd Control Immunity
 
     -- Taunt Effects
     [38254] = { icon = "esoui/art/icons/ability_warrior_010.dds", tooltip = Tooltips.Innate_Taunt, tooltipOther = Tooltips.Innate_Taunt_Other }, -- Taunt
