@@ -240,9 +240,9 @@ local g_magickaThreshold
 local g_staminaThreshold
 local g_targetUnitFrame -- Reference to default UI target unit frame
 local playerDisplayName = GetUnitDisplayName("player")
-local group
-local unitTag
-local playerTlw
+-- local group
+-- local unitTag
+-- local playerTlw
 local CP_BAR_COLOURS = ZO_CP_BAR_GRADIENT_COLORS
 
 local g_PendingUpdate = {
@@ -1030,7 +1030,7 @@ local function CreateCustomFrames()
         pet:SetDrawLevel(1)
         pet.customPositionAttr = "CustomFramesPetFramePos"
         pet.preview = UI.Backdrop(pet, "fill", nil, nil, nil, true)
-        pet.previewLabel = UI.Label(pet.preview, { BOTTOM, TOP, 0, -1, group }, nil, nil, "ZoFontGameMedium", "Player Pets", false)
+        pet.previewLabel = UI.Label(pet.preview, { BOTTOM, TOP, 0, -1, nil }, nil, nil, "ZoFontGameMedium", "Player Pets", false)
 
         local fragment = ZO_HUDFadeSceneFragment:New(pet, 0, 0)
 
@@ -1074,7 +1074,7 @@ local function CreateCustomFrames()
         companionTlw:SetDrawLevel(1)
         companionTlw.customPositionAttr = "CustomFramesCompanionFramePos"
         companionTlw.preview = UI.Backdrop(companionTlw, "fill", nil, nil, nil, true)
-        companionTlw.previewLabel = UI.Label(companionTlw.preview, { BOTTOM, TOP, 0, -1, group }, nil, nil, "ZoFontGameMedium", "Player Companion", false)
+        companionTlw.previewLabel = UI.Label(companionTlw.preview, { BOTTOM, TOP, 0, -1, nil }, nil, nil, "ZoFontGameMedium", "Player Companion", false)
 
         local fragment = ZO_HUDFadeSceneFragment:New(companionTlw, 0, 0)
 
@@ -1101,7 +1101,7 @@ local function CreateCustomFrames()
                 ["shield"] = UI.StatusBar(shb, nil, nil, nil, true),
             },
             ["dead"] = UI.Label(shb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "Status", true),
-            ["name"] = UI.Label(shb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, unitTag, false),
+            ["name"] = UI.Label(shb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, nil, false),
         }
         UnitFrames.CustomFrames.companion.name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
         UnitFrames.CustomFrames.companion[COMBAT_MECHANIC_FLAGS_HEALTH].label.fmt = "Current (Percentage%)"
@@ -3564,14 +3564,14 @@ function UnitFrames.CustomFramesSetupAlternative(isWerewolf, isSiege, isMounted)
         --alt.icon:ClearAnchors()
     elseif recenter then
         if UnitFrames.SV.PlayerFrameOptions == 1 then
-            UnitFrames.CustomFrames.player.botInfo:SetAnchor(TOP, playerTlw, BOTTOM, 0, 2)
+            UnitFrames.CustomFrames.player.botInfo:SetAnchor(TOP, nil, BOTTOM, 0, 2)
             alt.backdrop:ClearAnchors()
             alt.backdrop:SetAnchor(CENTER, UnitFrames.CustomFrames.player.botInfo, CENTER, padding * 0.5 + 1, 0)
             alt.backdrop:SetWidth(altW)
             alt.icon:ClearAnchors()
             alt.icon:SetAnchor(RIGHT, alt.backdrop, LEFT, -2, 0)
         elseif UnitFrames.SV.PlayerFrameOptions == 2 then
-            UnitFrames.CustomFrames.player.botInfo:SetAnchor(TOP, playerTlw, BOTTOM, 0, 2)
+            UnitFrames.CustomFrames.player.botInfo:SetAnchor(TOP, nil, BOTTOM, 0, 2)
             alt.backdrop:ClearAnchors()
             alt.backdrop:SetAnchor(CENTER, UnitFrames.CustomFrames.player.botInfo, CENTER, padding * 0.5 + 1, 0)
             alt.backdrop:SetWidth(altW)
@@ -3579,7 +3579,7 @@ function UnitFrames.CustomFramesSetupAlternative(isWerewolf, isSiege, isMounted)
             alt.icon:SetAnchor(RIGHT, alt.backdrop, LEFT, -2, 0)
         elseif UnitFrames.SV.PlayerFrameOptions == 3 then
             if UnitFrames.SV.HideBarStamina and UnitFrames.SV.HideBarMagicka then
-                UnitFrames.CustomFrames.player.botInfo:SetAnchor(TOP, playerTlw, BOTTOM, 0, 2)
+                UnitFrames.CustomFrames.player.botInfo:SetAnchor(TOP, nil, BOTTOM, 0, 2)
             elseif UnitFrames.SV.HideBarStamina and not UnitFrames.SV.HideBarMagicka then
                 if UnitFrames.SV.ReverseResourceBars then
                     UnitFrames.CustomFrames.player.botInfo:SetAnchor(TOP, pmb.backdrop, BOTTOMLEFT, 0, 2)
@@ -3599,7 +3599,7 @@ function UnitFrames.CustomFramesSetupAlternative(isWerewolf, isSiege, isMounted)
             alt.icon:ClearAnchors()
             alt.icon:SetAnchor(RIGHT, alt.backdrop, LEFT, -2, 0)
         else
-            UnitFrames.CustomFrames.player.botInfo:SetAnchor(TOP, playerTlw, BOTTOM, 0, 2)
+            UnitFrames.CustomFrames.player.botInfo:SetAnchor(TOP, nil, BOTTOM, 0, 2)
         end
     end
 end
@@ -4914,7 +4914,7 @@ function UnitFrames.DefaultFramesApplyFont(unitTag)
     local fontStyle = (UnitFrames.SV.DefaultFontStyle and UnitFrames.SV.DefaultFontStyle ~= "") and UnitFrames.SV.DefaultFontStyle or "soft-shadow-thick"
     local fontSize = (UnitFrames.SV.DefaultFontSize and UnitFrames.SV.DefaultFontSize > 0) and UnitFrames.SV.DefaultFontSize or 16
 
-    local __applyFont = function(unitTag)
+    local __applyFont = function(...)
         if g_DefaultFrames[unitTag] then
             local unitFrame = g_DefaultFrames[unitTag]
             for _, powerType in pairs({
@@ -5579,7 +5579,7 @@ function UnitFrames.CustomFramesApplyLayoutRaid(unhide)
     local itemsPerColumn = (UnitFrames.SV.RaidLayout == "6 x 2") and 2 or (UnitFrames.SV.RaidLayout == "3 x 4") and 4 or (UnitFrames.SV.RaidLayout == "2 x 6") and 6 or 12
 
     local raid = UnitFrames.CustomFrames.RaidGroup1.tlw
-    local rhb = nil  -- TODO: Not sure what changing the anchors below to the proper "rhb" would do so leaving this here (everything already works)
+    local rhb = nil -- TODO: Not sure what changing the anchors below to the proper "rhb" would do so leaving this here (everything already works)
     raid:SetDimensions(UnitFrames.SV.RaidBarWidth * (12 / itemsPerColumn) + (UnitFrames.SV.RaidSpacers and spacerHeight * (itemsPerColumn / 4) or 0), UnitFrames.SV.RaidBarHeight * itemsPerColumn)
 
     local groupWidth = UnitFrames.SV.RaidBarWidth * (zo_floor(0.5 + 12 / itemsPerColumn))
