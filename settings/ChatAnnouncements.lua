@@ -7916,6 +7916,12 @@ function ChatAnnouncements.CreateSettings()
                 default = Defaults.DisplayAnnouncements.General.Alert,
             },
             {
+                -- Misc Notifications Header
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CA_DISPLAY_HEADER_MISC),
+                width = "full",
+            },
+            {
                 -- Respec Notification (ChatAnnouncements)
                 type = "checkbox",
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_RESPEC), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
@@ -8004,7 +8010,7 @@ function ChatAnnouncements.CreateSettings()
                 -- Display Group Area Message (Alert)
                 type = "checkbox",
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_GROUPAREA_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function()
                     return Settings.DisplayAnnouncements.GroupArea.Alert
                 end,
@@ -8016,6 +8022,137 @@ function ChatAnnouncements.CreateSettings()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
                 default = Defaults.DisplayAnnouncements.GroupArea.Alert,
+            },
+            {
+                -- Zone Notifications Header
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CA_DISPLAY_HEADER_ZONE),
+                width = "full",
+            },
+            {
+                -- Craglorn Buff (ChatAnnouncements)
+                type = "checkbox",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                getFunc = function()
+                    return Settings.DisplayAnnouncements.ZoneCraglorn.CA
+                end,
+                setFunc = function(value)
+                    Settings.DisplayAnnouncements.ZoneCraglorn.CA = value
+                end,
+                width = "full",
+                disabled = function()
+                    return not LUIE.SV.ChatAnnouncements_Enable
+                end,
+                default = Defaults.DisplayAnnouncements.ZoneCraglorn.CA,
+            },
+            {
+                -- Craglorn Buff (CSA)
+                type = "checkbox",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                getFunc = function()
+                    return Settings.DisplayAnnouncements.ZoneCraglorn.CSA
+                end,
+                setFunc = function(value)
+                    Settings.DisplayAnnouncements.ZoneCraglorn.CSA = value
+                end,
+                width = "full",
+                disabled = function()
+                    return not LUIE.SV.ChatAnnouncements_Enable
+                end,
+                default = Defaults.DisplayAnnouncements.ZoneCraglorn.CSA,
+            },
+            {
+                -- Craglorn Buff (Alert)
+                type = "checkbox",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                getFunc = function()
+                    return Settings.DisplayAnnouncements.ZoneCraglorn.Alert
+                end,
+                setFunc = function(value)
+                    Settings.DisplayAnnouncements.ZoneCraglorn.Alert = value
+                end,
+                width = "full",
+                disabled = function()
+                    return not LUIE.SV.ChatAnnouncements_Enable
+                end,
+                default = Defaults.DisplayAnnouncements.ZoneCraglorn.Alert,
+            },
+            {
+                -- Imperial City Display Announcement (ChatAnnouncements)
+                type = "checkbox",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                getFunc = function()
+                    return Settings.DisplayAnnouncements.ZoneIC.CA
+                end,
+                setFunc = function(value)
+                    Settings.DisplayAnnouncements.ZoneIC.CA = value
+                end,
+                width = "full",
+                disabled = function()
+                    return not LUIE.SV.ChatAnnouncements_Enable
+                end,
+                default = Defaults.DisplayAnnouncements.ZoneIC.CA,
+            },
+            {
+                -- Imperial City Display Description
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC_DESCRIPTION)),
+                tooltip = GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC_DESCRIPTION_TP),
+                getFunc = function()
+                    return Settings.DisplayAnnouncements.ZoneIC.Description
+                end,
+                setFunc = function(value)
+                    Settings.DisplayAnnouncements.ZoneIC.Description = value
+                end,
+                width = "full",
+                disabled = function()
+                    return not (LUIE.SV.ChatAnnouncements_Enable and (Settings.DisplayAnnouncements.ZoneIC.CA or Settings.DisplayAnnouncements.ZoneIC.CSA or Settings.DisplayAnnouncements.ZoneIC.Alert))
+                end,
+                default = Defaults.DisplayAnnouncements.ZoneIC.Description,
+            },
+            {
+                -- Imperial City Display Announcement (CSA)
+                type = "checkbox",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                getFunc = function()
+                    return Settings.DisplayAnnouncements.ZoneIC.CSA
+                end,
+                setFunc = function(value)
+                    Settings.DisplayAnnouncements.ZoneIC.CSA = value
+                end,
+                width = "full",
+                disabled = function()
+                    return not LUIE.SV.ChatAnnouncements_Enable
+                end,
+                default = Defaults.DisplayAnnouncements.ZoneIC.CSA,
+            },
+            {
+                -- Imperial City Display Announcement (Alert)
+                type = "checkbox",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                getFunc = function()
+                    return Settings.DisplayAnnouncements.ZoneIC.Alert
+                end,
+                setFunc = function(value)
+                    Settings.DisplayAnnouncements.ZoneIC.Alert = value
+                end,
+                width = "full",
+                disabled = function()
+                    return not LUIE.SV.ChatAnnouncements_Enable
+                end,
+                default = Defaults.DisplayAnnouncements.ZoneIC.Alert,
+            },
+            {
+                -- Arena Notifications Header
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CA_DISPLAY_HEADER_ARENA),
+                width = "full",
             },
             {
                 -- Maelstrom Arena Notifications (ChatAnnouncements)
@@ -8068,7 +8205,6 @@ function ChatAnnouncements.CreateSettings()
                 end,
                 default = Defaults.DisplayAnnouncements.ArenaMaelstrom.Alert,
             },
-
             {
                 -- Dragonstar Arena Notifications (ChatAnnouncements)
                 type = "checkbox",
@@ -8120,8 +8256,12 @@ function ChatAnnouncements.CreateSettings()
                 end,
                 default = Defaults.DisplayAnnouncements.ArenaDragonstar.Alert,
             },
-
-
+            {
+                -- Dungeon Notifications Header
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CA_DISPLAY_HEADER_DUNGEON),
+                width = "full",
+            },
             {
                 -- Endless Archive Notifications (ChatAnnouncements)
                 type = "checkbox",
@@ -8172,125 +8312,6 @@ function ChatAnnouncements.CreateSettings()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
                 default = Defaults.DisplayAnnouncements.DungeonEndlessArchive.Alert,
-            },
-            {
-                -- Imperial City Display Announcement (ChatAnnouncements)
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
-                getFunc = function()
-                    return Settings.DisplayAnnouncements.ZoneIC.CA
-                end,
-                setFunc = function(value)
-                    Settings.DisplayAnnouncements.ZoneIC.CA = value
-                end,
-                width = "full",
-                disabled = function()
-                    return not LUIE.SV.ChatAnnouncements_Enable
-                end,
-                default = Defaults.DisplayAnnouncements.ZoneIC.CA,
-            },
-            {
-                -- Imperial City Display Announcement (CSA)
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
-                getFunc = function()
-                    return Settings.DisplayAnnouncements.ZoneIC.CSA
-                end,
-                setFunc = function(value)
-                    Settings.DisplayAnnouncements.ZoneIC.CSA = value
-                end,
-                width = "full",
-                disabled = function()
-                    return not LUIE.SV.ChatAnnouncements_Enable
-                end,
-                default = Defaults.DisplayAnnouncements.ZoneIC.CSA,
-            },
-            {
-                -- Imperial City Display Announcement (Alert)
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
-                getFunc = function()
-                    return Settings.DisplayAnnouncements.ZoneIC.Alert
-                end,
-                setFunc = function(value)
-                    Settings.DisplayAnnouncements.ZoneIC.Alert = value
-                end,
-                width = "full",
-                disabled = function()
-                    return not LUIE.SV.ChatAnnouncements_Enable
-                end,
-                default = Defaults.DisplayAnnouncements.ZoneIC.Alert,
-            },
-            {
-                -- Imperial City Display Description
-                type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC_DESCRIPTION)),
-                tooltip = GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC_DESCRIPTION_TP),
-                getFunc = function()
-                    return Settings.DisplayAnnouncements.ZoneIC.Description
-                end,
-                setFunc = function(value)
-                    Settings.DisplayAnnouncements.ZoneIC.Description = value
-                end,
-                width = "full",
-                disabled = function()
-                    return not (LUIE.SV.ChatAnnouncements_Enable and (Settings.DisplayAnnouncements.ZoneIC.CA or Settings.DisplayAnnouncements.ZoneIC.CSA or Settings.DisplayAnnouncements.ZoneIC.Alert))
-                end,
-                default = Defaults.DisplayAnnouncements.ZoneIC.Description,
-            },
-            {
-                -- Craglorn Buff (ChatAnnouncements)
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
-                getFunc = function()
-                    return Settings.DisplayAnnouncements.ZoneCraglorn.CA
-                end,
-                setFunc = function(value)
-                    Settings.DisplayAnnouncements.ZoneCraglorn.CA = value
-                end,
-                width = "full",
-                disabled = function()
-                    return not LUIE.SV.ChatAnnouncements_Enable
-                end,
-                default = Defaults.DisplayAnnouncements.ZoneCraglorn.CA,
-            },
-            {
-                -- Craglorn Buff (CSA)
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
-                getFunc = function()
-                    return Settings.DisplayAnnouncements.ZoneCraglorn.CSA
-                end,
-                setFunc = function(value)
-                    Settings.DisplayAnnouncements.ZoneCraglorn.CSA = value
-                end,
-                width = "full",
-                disabled = function()
-                    return not LUIE.SV.ChatAnnouncements_Enable
-                end,
-                default = Defaults.DisplayAnnouncements.ZoneCraglorn.CSA,
-            },
-            {
-                -- Craglorn Buff (Alert)
-                type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
-                getFunc = function()
-                    return Settings.DisplayAnnouncements.ZoneCraglorn.Alert
-                end,
-                setFunc = function(value)
-                    Settings.DisplayAnnouncements.ZoneCraglorn.Alert = value
-                end,
-                width = "full",
-                disabled = function()
-                    return not LUIE.SV.ChatAnnouncements_Enable
-                end,
-                default = Defaults.DisplayAnnouncements.ZoneCraglorn.Alert,
             },
         },
     }
