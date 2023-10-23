@@ -565,6 +565,47 @@ ChatAnnouncements.Defaults = {
 
     DisplayAnnouncements = {
         Debug = false, -- Display EVENT_DISPLAY_ANNOUNCEMENT debug messages
+        Generic = {
+            CA = false,
+            CSA = true,
+            Alert = false,
+        },
+        GroupArea = {
+            CA = false,
+            CSA = true,
+            Alert = false,
+        },
+        Respec = {
+            CA = true,
+            CSA = true,
+            Alert = false,
+        },
+        ZoneIC = {
+            CA = true,
+            CSA = true,
+            Alert = false,
+            Description = true -- For 2nd line of Display Announcements
+        },
+        ZoneCraglorn = {
+            CA = false,
+            CSA = true,
+            Alert = false,
+        },
+        ArenaMaelstrom = {
+            CA = true,
+            CSA = true,
+            Alert = false,
+        },
+        ArenaDragonstar = {
+            CA = true,
+            CSA = true,
+            Alert = false,
+        },
+        DungeonEndlessArchive = {
+            CA = true,
+            CSA = true,
+            Alert = false,
+        },
     },
 }
 
@@ -9573,237 +9614,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    local overrideDisplayAnnouncementTitle = {
-        [GetString(SI_RESPECTYPE_POINTSRESETTITLE0)] = {
-            ca = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS) .. ".",
-            csa = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS),
-            announceType = "RESPEC",
-        },
-        [GetString(SI_RESPECTYPE_POINTSRESETTITLE1)] = {
-            ca = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES) .. ".",
-            csa = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES),
-            announceType = "RESPEC",
-        },
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D)] = {
-            ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D),
-            csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_C),
-            announceType = "GROUPAREA",
-        }, -- Entering Group Area.
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM)] = {
-            ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM_CA),
-            csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM),
-            announceType = "ARENA",
-        }, -- Maelstrom Arena
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1)] = {
-            ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1_CA),
-            csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1),
-            announceType = "ROUND",
-        }, -- Round 1
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND2)] = {
-            ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND2_CA),
-            csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND2),
-            announceType = "ROUND",
-        }, -- Round 2
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND3)] = {
-            ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND3_CA),
-            csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND3),
-            announceType = "ROUND",
-        }, -- Round 3
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND4)] = {
-            ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND4_CA),
-            csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND4),
-            announceType = "ROUND",
-        }, -- Round 4
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5)] = {
-            ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5_CA),
-            csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5),
-            announceType = "ROUND",
-        }, -- Round 5
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF)] = {
-            ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF_CA),
-            csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF),
-            announceType = "ROUND",
-        }, -- Final Round
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA)] = {
-            ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_CA),
-            csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA),
-            announceType = "ARENA",
-        }, -- Dragonstar Arena
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE1)] = { number = 1 }, -- IC (DC 1)
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE2)] = { number = 2 }, -- IC (DC 2)
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE3)] = { number = 3 }, -- IC (DC 3)
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE4)] = { number = 4 }, -- IC (DC 4)
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE5)] = { number = 5 }, -- IC (AD 1)
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE6)] = { number = 6 }, -- IC (AD 2)
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE7)] = { number = 7 }, -- IC (AD 3)
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE8)] = { number = 8 }, -- IC (AD 4)
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE9)] = { number = 9 }, -- IC (EP 1)
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE10)] = { number = 10 }, -- IC (EP 2)
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE11)] = { number = 11 }, -- IC (EP 3)
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE12)] = { number = 12 }, -- IC (EP 4)
-    }
-
-    local overrideDisplayAnnouncementDescription = {
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_D)] = {
-            ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_D),
-            csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_C),
-            announceType = "GROUPAREA",
-        }, -- Leaving Group Area.
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE1)] = {
-            ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE1),
-            csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE1),
-            announceType = "ARENA",
-        }, -- Vale of the Surreal
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE2)] = {
-            ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE2),
-            csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE2),
-            announceType = "ARENA",
-        }, -- Seht's Balcony
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE3)] = {
-            ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE3),
-            csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE3),
-            announceType = "ARENA",
-        }, -- Drome of Toxic Shock
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE4)] = {
-            ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE4),
-            csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE4),
-            announceType = "ARENA",
-        }, -- Seht's Flywheel
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE5)] = {
-            ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE5),
-            csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE5),
-            announceType = "ARENA",
-        }, -- Rink of Frozen Blood
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE6)] = {
-            ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE6),
-            csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE6),
-            announceType = "ARENA",
-        }, -- Spiral Shadows
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE7)] = {
-            ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE7),
-            csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE7),
-            announceType = "ARENA",
-        }, -- Vault of Umbrage
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE8)] = {
-            ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE8),
-            csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE8),
-            announceType = "ARENA",
-        }, -- Igneous Cistern
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE9)] = {
-            ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE9),
-            csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE9),
-            announceType = "ARENA",
-        }, -- Theater of Despair
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_DESC)] = {
-            ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_DESC),
-            csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_DESC),
-            announceType = "ARENA",
-        }, -- The arena will begin in 30 seconds!
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_SR)] = {
-            ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_SR_CA),
-            csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_SR_CA),
-            announceType = "CRAGLORN",
-        }, -- Spell Resistance Increased
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PR)] = {
-            ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PR_CA),
-            csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PR_CA),
-            announceType = "CRAGLORN",
-        }, -- Physical Resistance Increased
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PI)] = {
-            ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PI_CA),
-            csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PI_CA),
-            announceType = "CRAGLORN",
-        }, -- Power Increased
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC1)] = { number = 1 }, -- IC (DC 1)
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC2)] = { number = 2 }, -- IC (DC 2)
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC3)] = { number = 3 }, -- IC (DC 3)
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC4)] = { number = 4 }, -- IC (DC 4)
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC5)] = { number = 5 }, -- IC (AD 1)
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC6)] = { number = 6 }, -- IC (AD 2)
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC7)] = { number = 7 }, -- IC (AD 3)
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC8)] = { number = 8 }, -- IC (AD 4)
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC9)] = { number = 9 }, -- IC (EP 1)
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC10)] = { number = 10 }, -- IC (EP 2)
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC11)] = { number = 11 }, -- IC (EP 3)
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC12)] = { number = 12 }, -- IC (EP 4)
-    }
-
-    local function DisplayAnnouncementIC(number)
-        -- Don't print the message if display spam is turned off
-        if g_stopDisplaySpam == true then
-            return
-        end
-
-        -- Stop messages from spamming if the player bounces around the same trigger multiple times
-        if g_stopDisplaySpam == false then
-            g_stopDisplaySpam = true
-            zo_callLater(function()
-                g_stopDisplaySpam = false
-            end, 5000)
-        end
-
-        local flagCA = ChatAnnouncements.SV.Quests.QuestICDiscoveryCA and true or false
-        local flagCSA = ChatAnnouncements.SV.Quests.QuestICDiscoveryCSA and true or false
-        local flagAlert = ChatAnnouncements.SV.Quests.QuestICDiscoveryAlert and true or false
-
-        -- Setup Strings
-        local titleString = number == 8 and GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE8_EDIT) or GetString("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE", number)
-        local descriptionString = GetString("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC", number)
-        local formatLine1 = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_PREFIX)
-        local formatLine2 = GetString("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_", number)
-
-        -- Setup final strings to display
-        local titleCA = ChatAnnouncements.SV.Quests.QuestICDescription and string.format("%s|c%s%s: |r", formatLine1, QuestColorLocNameColorize, formatLine2) or string.format("%s|c%s%s|r", formatLine1, QuestColorLocNameColorize, formatLine2)
-        local titleAlert = titleCA
-        local titleCSA = titleString
-        local descriptionCA = ChatAnnouncements.SV.Quests.QuestICDescription and string.format("|c%s%s|r", QuestColorLocDescriptionColorize, descriptionString) or ""
-        local descriptionAlert = ChatAnnouncements.SV.Quests.QuestICDescription and descriptionString or ""
-        local descriptionCSA = descriptionString
-
-        local messageParams
-        local message
-        if titleString ~= "" and descriptionString ~= "" then
-            messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
-        elseif titleString ~= "" then
-            messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
-        elseif descriptionString ~= "" then
-            messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
-        end
-
-        if flagCA then
-            if titleString ~= "" and descriptionString ~= "" then
-                printToChat(titleCA .. descriptionCA)
-            elseif titleString ~= "" then
-                printToChat(titleCA)
-            elseif descriptionString ~= "" then
-                printToChat(descriptionCA)
-            end
-        end
-
-        if flagCSA then
-            if messageParams then
-                messageParams:SetText(titleCSA, descriptionCSA)
-                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_DISPLAY_ANNOUNCEMENT)
-                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
-            end
-        end
-
-        if flagAlert then
-            if titleString ~= "" and descriptionString ~= "" then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, (titleAlert .. descriptionAlert))
-            elseif titleString ~= "" then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, titleAlert)
-            elseif descriptionString ~= "" then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, descriptionAlert)
-            end
-        end
-
-        if (flagCA or flagAlert) and not flagCSA then
-            PlaySound(SOUNDS.DISPLAY_ANNOUNCEMENT)
-        end
-    end
-
-    local g_previousEndlessDungeonProgression = { 0, 0, 0 } -- Stage, Cycle, Arc
+    local g_previousEndlessDungeonProgression = {0, 0, 0} -- Stage, Cycle, Arc
 
     local function GetEndlessDungeonProgressMessageParams()
         local stage, cycle, arc = ENDLESS_DUNGEON_MANAGER:GetProgression()
@@ -9865,172 +9676,193 @@ function ChatAnnouncements.HookFunction()
         end
     end
 
+    local ZoneIds = {
+        [1436] = "Endless Archive", -- Dungeon - Endless Archive
+        [888] = "Craglorn", -- Zone - Craglorn
+        [584] = "Imperial City", -- Imperial City (Overland)
+        [643] = "Imperial City", -- Imperial City (Sewers)
+        [635] = "Dragonstar Arena", -- Dragonstar Arena
+    }
+
+    local MapIds = {
+        [988] = "Maelstrom Arena", -- Vale of the Surreal (Maelstrom Arena - Stage 1)
+        [963] = "Maelstrom Arena", -- Seht's Balcony (Maelstrom Arena - Stage 2)
+        -- TODO - Need MapIds for Stage 3-9
+    }
+
+    local function ResolveDisplayAnnouncementMessages(type)
+        local settings
+        if type == "Imperial City" then
+            settings = LUIE.ChatAnnouncements.SV.DisplayAnnouncements.ZoneIC
+        elseif type == "Craglorn" then
+            settings = LUIE.ChatAnnouncements.SV.DisplayAnnouncements.ZoneCraglorn
+        elseif type == "Maelstrom Arena" then
+            settings = LUIE.ChatAnnouncements.SV.DisplayAnnouncements.ArenaMaelstrom
+        elseif type == "Dragonstar Arena" then
+            settings = LUIE.ChatAnnouncements.SV.DisplayAnnouncements.ArenaDragonstar
+        elseif type == "Endless Archive" then
+            settings = LUIE.ChatAnnouncements.SV.DisplayAnnouncements.DungeonEndlessArchive
+        end
+        return settings
+    end
+
     -- EVENT_DISPLAY_ANNOUNCEMENT (CSA Handler)
     -- TODO: This needs ALOT of work
     -- TODO: Use zoneIds to determine message filtering instead of message text
     local function DisplayAnnouncementHook(primaryText, secondaryText, icon, soundId, lifespanMS, category)
-        if ((primaryText ~= "" and not overrideDisplayAnnouncementTitle[primaryText]) or (secondaryText ~= "" and not overrideDisplayAnnouncementDescription[secondaryText])) and ChatAnnouncements.SV.DisplayAnnouncements.Debug then
-            d("EVENT_DISPLAY_ANNOUNCEMENT")
-            d("If you see this message please post a screenshot and context for the event on the LUI Extended ESOUI page.")
-            d("Primary Text: " .. primaryText)
-            d("Secondary Text: " .. secondaryText)
-        end
 
-        -- TODO: Maybe change this eventually, for now should work
+        -- Disable Respec Display Announcement since we handle this from loot announcements (using Respec scroll)
         if primaryText == GetString(SI_RESPECTYPE_POINTSRESETTITLE1) then
             return true
         end
 
-        -- Let unfiltered messages pass through the normal function & use default behavior if not in the override table
-        if (primaryText ~= "" and not overrideDisplayAnnouncementTitle[primaryText]) or (secondaryText ~= "" and not overrideDisplayAnnouncementDescription[secondaryText]) then
-            soundId = soundId == "" and SOUNDS.DISPLAY_ANNOUNCEMENT or soundId
-
-            local messageParams
-            if category == CSA_CATEGORY_ENDLESS_DUNGEON_STAGE_STARTED_TEXT then
-                -- Endless Dungeon Progression CSA special case
-                messageParams = GetEndlessDungeonProgressMessageParams()
-                if not messageParams then
-                    -- The progression did not change; this should never happen.
-                    return
-                end
-                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_ENDLESS_DUNGEON_PROGRESS)
-                messageParams:SetOnDisplayCallback(UpdateEndlessDungeonTrackers)
-            else
-                -- Standard Display Announcement
-                messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(category, soundId)
-                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_DISPLAY_ANNOUNCEMENT)
-            end
-
-            if soundId then
-                messageParams:SetSound(soundId)
-            end
-
-            if icon ~= ZO_NO_TEXTURE_FILE then
-                messageParams:SetIconData(icon)
-            end
-
-            if lifespanMS > 0 then
-                messageParams:SetLifespanMS(lifespanMS)
-            end
-
-            -- Sanitize text.
-            if primaryText == "" then
-                primaryText = nil
-            end
-            if secondaryText == "" then
-                secondaryText = nil
-            end
-
-            messageParams:SetText(primaryText, secondaryText)
-
-            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
-            return true
-        end
-
-        local flagCA
-        local flagCSA
-        local flagAlert
-
-        -- Resolve whether flags are true
-        -- Temporary double conditional here until we resolve all Display Announcement types
-        if (primaryText ~= "" and overrideDisplayAnnouncementTitle[primaryText]) or (secondaryText ~= "" and overrideDisplayAnnouncementDescription[secondaryText]) then
-            local reference
-            -- If this is an IC announcement then pass it over to the IC Announcement handler to display
-            if (primaryText ~= "" and overrideDisplayAnnouncementTitle[primaryText] and overrideDisplayAnnouncementTitle[primaryText].number) or (secondaryText ~= "" and overrideDisplayAnnouncementDescription[secondaryText] and overrideDisplayAnnouncementDescription[secondaryText].number) then
-                DisplayAnnouncementIC(overrideDisplayAnnouncementTitle[primaryText].number)
-                return
-            end
-            if primaryText ~= "" and overrideDisplayAnnouncementTitle[primaryText] then
-                reference = overrideDisplayAnnouncementTitle[primaryText].announceType
-            end
-            if secondaryText ~= "" and overrideDisplayAnnouncementDescription[secondaryText] then
-                reference = overrideDisplayAnnouncementDescription[secondaryText].announceType
-            end
-            if reference == "RESPEC" then
-                flagCA = ChatAnnouncements.SV.Notify.NotificationRespecCA and true or false
-                flagCSA = ChatAnnouncements.SV.Notify.NotificationRespecCSA and true or false
-                flagAlert = ChatAnnouncements.SV.Notify.NotificationRespecAlert and true or false
-            elseif reference == "GROUPAREA" then
-                flagCA = ChatAnnouncements.SV.Notify.NotificationGroupAreaCA and true or false
-                flagCSA = ChatAnnouncements.SV.Notify.NotificationGroupAreaCSA and true or false
-                flagAlert = ChatAnnouncements.SV.Notify.NotificationGroupAreaAlert and true or false
-            elseif reference == "ARENA" then
-                flagCA = ChatAnnouncements.SV.Group.GroupRaidArenaCA and true or false
-                flagCSA = ChatAnnouncements.SV.Group.GroupRaidArenaCSA and true or false
-                flagAlert = ChatAnnouncements.SV.Group.GroupRaidArenaAlert and true or false
-            elseif reference == "ROUND" then
-                flagCA = ChatAnnouncements.SV.Group.GroupRaidArenaRoundCA and true or false
-                flagCSA = ChatAnnouncements.SV.Group.GroupRaidArenaRoundCSA and true or false
-                flagAlert = ChatAnnouncements.SV.Group.GroupRaidArenaRoundAlert and true or false
-            elseif reference == "CRAGLORN" then
-                flagCA = ChatAnnouncements.SV.Quests.QuestCraglornBuffCA and true or false
-                flagCSA = ChatAnnouncements.SV.Quests.QuestCraglornBuffCSA and true or false
-                flagAlert = ChatAnnouncements.SV.Quests.QuestCraglornBuffAlert and true or false
-            end
-        end
-
-        local titleCA
-        local titleCSA
-        local descriptionCA
-        local descriptionCSA
-
-        -- Replace message text when needed
-        if primaryText ~= "" and overrideDisplayAnnouncementTitle[primaryText] then
-            titleCA = overrideDisplayAnnouncementTitle[primaryText].ca
-            titleCSA = overrideDisplayAnnouncementTitle[primaryText].csa
-        elseif primaryText ~= "" then
-            titleCA = ""
-            titleCSA = ""
-        end
-
-        if secondaryText ~= "" and overrideDisplayAnnouncementDescription[secondaryText] then
-            descriptionCA = overrideDisplayAnnouncementDescription[secondaryText].ca
-            descriptionCSA = overrideDisplayAnnouncementDescription[secondaryText].csa
-        elseif secondaryText ~= "" then
-            descriptionCA = primaryText
-            descriptionCSA = primaryText
-        end
+        -- Setup CSA with default function (don't display CSA here yet, we filter to check)
+        soundId = soundId == "" and SOUNDS.DISPLAY_ANNOUNCEMENT or soundId
 
         local messageParams
-        local message
-        if primaryText ~= "" and secondaryText ~= "" then
-            messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
-        elseif primaryText ~= "" then
-            messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
-        elseif secondaryText ~= "" then
-            messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
+        if category == CSA_CATEGORY_ENDLESS_DUNGEON_STAGE_STARTED_TEXT then
+            -- Endless Dungeon Progression CSA special case
+            messageParams = GetEndlessDungeonProgressMessageParams()
+            if not messageParams then
+                -- The progression did not change; this should never happen.
+                return
+            end
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_ENDLESS_DUNGEON_PROGRESS)
+            messageParams:SetOnDisplayCallback(UpdateEndlessDungeonTrackers)
+        else
+            -- Standard Display Announcement
+            messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(category, soundId)
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_DISPLAY_ANNOUNCEMENT)
         end
 
-        if flagCA then
-            if primaryText ~= "" and secondaryText ~= "" then
-                printToChat(titleCA .. descriptionCA)
-            elseif primaryText ~= "" then
-                printToChat(titleCA)
-            elseif secondaryText ~= "" then
-                printToChat(descriptionCA)
+        if soundId then
+            messageParams:SetSound(soundId)
+        end
+
+        if icon ~= ZO_NO_TEXTURE_FILE then
+            messageParams:SetIconData(icon)
+        end
+
+        if lifespanMS > 0 then
+            messageParams:SetLifespanMS(lifespanMS)
+        end
+
+        -- Sanitize text.
+        if primaryText == "" then
+            primaryText = nil
+        end
+        if secondaryText == "" then
+            secondaryText = nil
+        end
+
+        -- No message so return
+        if primaryText == nil and secondaryText == nil then
+            return
+        end
+
+        -- Check zoneId or mapId if needed
+        local zoneId = GetZoneId(GetCurrentMapZoneIndex())
+        local mapId = GetCurrentMapId() -- Some areas don't have proper zoneIds (Maelstrom Arena)
+        local type
+        if ZoneIds[zoneId] then
+            type = ZoneIds[zoneId]
+        elseif MapIds[mapId] then
+            type = MapIds[mapId]
+        end
+
+        local settings -- local variable for pulling SV
+        local debugDisable -- flag to disable debug when its enabled
+
+        -- Settings either use the subcategory settings or the generic settings if no subcategory
+        if primaryText == GetString(SI_RESPECTYPE_POINTSRESETTITLE0) or primaryText == GetString(SI_RESPECTYPE_POINTSRESETTITLE1) then
+            settings = LUIE.ChatAnnouncements.SV.DisplayAnnouncements.Respec
+            debugDisable = true
+            -- Update message syntax here
+            if primaryText == GetString(SI_RESPECTYPE_POINTSRESETTITLE0) then primaryText = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS) end
+            if primaryText == GetString(SI_RESPECTYPE_POINTSRESETTITLE1) then primaryText = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES) end
+        elseif primaryText == GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D) or primaryText == GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_D) then
+            settings = LUIE.ChatAnnouncements.SV.DisplayAnnouncements.GroupArea
+            debugDisable = true
+            -- Update message syntax here
+            if primaryText == GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D) then primaryText = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_C) end
+            if primaryText == GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_D) then primaryText = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_C) end
+        elseif type then
+            settings = ResolveDisplayAnnouncementMessages(type)
+            debugDisable = true
+        else
+            settings = LUIE.ChatAnnouncements.SV.DisplayAnnouncements.Generic
+        end
+
+        -- Debug function
+        if ChatAnnouncements.SV.DisplayAnnouncements.Debug and not debugDisable then
+            d("EVENT_DISPLAY_ANNOUNCEMENT: If you see this message please post a screenshot and context for the event on the LUI Extended ESOUI page.")
+            d("Primary Text: " .. primaryText)
+            d("Secondary Text: " .. secondaryText)
+            local zoneid = GetZoneId(GetCurrentMapZoneIndex())
+            d("Zone Id: " .. zoneid)
+            local mapid = GetCurrentMapId()
+            d("Map Id: " .. mapid)
+        end
+
+        -- Display CA if enabled
+        if settings.CA then
+            -- Some formatting may be needed for CA:
+            local caPrimary = primaryText
+            local caSecondary = secondaryText
+            local language = GetCVar("language.2")
+            -- Extra formatting in Imperial City: Remove "Entered: " and format it and add it back on and color the message.
+            -- Note we don't want to mess with strings outside of EN localization for now (TODO)
+            -- Custom formatting for IC messages
+            if settings == LUIE.ChatAnnouncements.SV.DisplayAnnouncements.ZoneIC and language == "en" then
+                local prefix = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_PREFIX)
+                caPrimary = zo_strgsub(primaryText, prefix, "")
+                caPrimary = settings.Description and string.format("%s|c%s%s: |r", prefix, QuestColorLocNameColorize, caPrimary) or string.format("%s|c%s%s|r", prefix, QuestColorLocNameColorize, caPrimary)
+                caSecondary = settings.Description and string.format("|c%s%s|r", QuestColorLocDescriptionColorize, caSecondary) or ""
+                printToChat(caPrimary .. caSecondary)
+            -- Add an "!" to the CA for Craglorn buffs
+            elseif settings == LUIE.ChatAnnouncements.SV.DisplayAnnouncements.ZoneCraglorn and language == "en" then
+                caPrimary = primaryText .. "!"
+                printToChat(caPrimary)
+            -- Add an "!" to the Maelstrom Arena Round CA messages (VMA messages have two lines other then the rounds)
+            elseif settings == LUIE.ChatAnnouncements.SV.DisplayAnnouncements.ArenaMaelstrom and secondaryText == nil then
+                caPrimary = primaryText .. "!"
+                printToChat(caPrimary)
+            else
+                if primaryText and secondaryText then
+                    printToChat(caPrimary .. ": " .. caSecondary)
+                elseif primaryText then
+                    printToChat(caPrimary)
+                elseif secondaryText then
+                    printToChat(caSecondary)
+                end
             end
         end
 
-        if flagCSA then
-            if messageParams then
-                messageParams:SetText(titleCSA, descriptionCSA)
-                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_DISPLAY_ANNOUNCEMENT)
-                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+        -- Display CSA if enabled
+        if settings.CSA then
+            messageParams:SetText(primaryText, secondaryText)
+            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+        end
+
+        -- Display Alert if enabled
+        if settings.Alert then
+            if primaryText and secondaryText then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, (primaryText .. ": " .. secondaryText))
+            elseif primaryText then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, primaryText)
+            elseif secondaryText then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, secondaryText)
             end
         end
 
-        if flagAlert then
-            if primaryText ~= "" and secondaryText ~= "" then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, (titleCA .. descriptionCA))
-            elseif primaryText ~= "" then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, titleCA)
-            elseif secondaryText ~= "" then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, descriptionCA)
+        -- If the CSA is disabled, play a sound if Chat Announcement or Alert are enabled
+        if (settings.CA or settings.Alert) and not settings.CSA then
+            if soundId then
+                PlaySound(SOUNDS.soundId)
+            -- Fallback sound if no soundId
+            else
+                PlaySound(SOUNDS.DISPLAY_ANNOUNCEMENT)
             end
-        end
-
-        if (flagCA or flagAlert) and not flagCSA then
-            PlaySound(SOUNDS.DISPLAY_ANNOUNCEMENT)
         end
 
         return true
