@@ -7870,16 +7870,16 @@ function ChatAnnouncements.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function()
-                    return Settings.Notify.NotificationRespecCA
+                    return Settings.DisplayAnnouncements.Respec.CA
                 end,
                 setFunc = function(value)
-                    Settings.Notify.NotificationRespecCA = value
+                    Settings.DisplayAnnouncements.Respec.CA = value
                 end,
                 width = "full",
                 disabled = function()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
-                default = Defaults.Notify.NotificationRespecCA,
+                default = Defaults.DisplayAnnouncements.Respec.CA,
             },
             {
                 -- Respec Notification (CSA)
@@ -7887,16 +7887,16 @@ function ChatAnnouncements.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function()
-                    return Settings.Notify.NotificationRespecCSA
+                    return Settings.DisplayAnnouncements.Respec.CSA
                 end,
                 setFunc = function(value)
-                    Settings.Notify.NotificationRespecCSA = value
+                    Settings.DisplayAnnouncements.Respec.CSA = value
                 end,
                 width = "full",
                 disabled = function()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
-                default = Defaults.Notify.NotificationRespecCSA,
+                default = Defaults.DisplayAnnouncements.Respec.CSA,
             },
             {
                 -- Respec Notification (Alert)
@@ -7904,16 +7904,16 @@ function ChatAnnouncements.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function()
-                    return Settings.Notify.NotificationRespecAlert
+                    return Settings.DisplayAnnouncements.Respec.Alert
                 end,
                 setFunc = function(value)
-                    Settings.Notify.NotificationRespecAlert = value
+                    Settings.DisplayAnnouncements.Respec.Alert = value
                 end,
                 width = "full",
                 disabled = function()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
-                default = Defaults.Notify.NotificationRespecAlert,
+                default = Defaults.DisplayAnnouncements.Respec.Alert,
             },
             {
                 -- Display Group Area Message (ChatAnnouncements)
@@ -7921,16 +7921,16 @@ function ChatAnnouncements.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function()
-                    return Settings.Notify.NotificationGroupAreaCA
+                    return Settings.DisplayAnnouncements.GroupArea.CA
                 end,
                 setFunc = function(value)
-                    Settings.Notify.NotificationGroupAreaCA = value
+                    Settings.DisplayAnnouncements.GroupArea.CA = value
                 end,
                 width = "full",
                 disabled = function()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
-                default = Defaults.Notify.NotificationGroupAreaCA,
+                default = Defaults.DisplayAnnouncements.GroupArea.CA,
             },
             {
                 -- Display Group Area Message (CSA)
@@ -7938,16 +7938,16 @@ function ChatAnnouncements.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function()
-                    return Settings.Notify.NotificationGroupAreaCSA
+                    return Settings.DisplayAnnouncements.GroupArea.CSA
                 end,
                 setFunc = function(value)
-                    Settings.Notify.NotificationGroupAreaCSA = value
+                    Settings.DisplayAnnouncements.GroupArea.CSA = value
                 end,
                 width = "full",
                 disabled = function()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
-                default = Defaults.Notify.NotificationGroupAreaCSA,
+                default = Defaults.DisplayAnnouncements.GroupArea.CSA,
             },
             {
                 -- Display Group Area Message (Alert)
@@ -7955,16 +7955,16 @@ function ChatAnnouncements.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function()
-                    return Settings.Notify.NotificationGroupAreaAlert
+                    return Settings.DisplayAnnouncements.GroupArea.Alert
                 end,
                 setFunc = function(value)
-                    Settings.Notify.NotificationGroupAreaAlert = value
+                    Settings.DisplayAnnouncements.GroupArea.Alert = value
                 end,
                 width = "full",
                 disabled = function()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
-                default = Defaults.Notify.NotificationGroupAreaAlert,
+                default = Defaults.DisplayAnnouncements.GroupArea.Alert,
             },
             {
                 -- Arena Notifications (ChatAnnouncements)
@@ -7972,16 +7972,16 @@ function ChatAnnouncements.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function()
-                    return Settings.Group.GroupRaidArenaCA
+                    return Settings.DisplayAnnouncements.ArenaMaelstrom.CA
                 end,
                 setFunc = function(value)
-                    Settings.Group.GroupRaidArenaCA = value
+                    Settings.DisplayAnnouncements.ArenaMaelstrom.CA = value
                 end,
                 width = "full",
                 disabled = function()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
-                default = Defaults.Group.GroupRaidArenaCA,
+                default = Defaults.DisplayAnnouncements.ArenaMaelstrom.CA,
             },
             {
                 -- Arena Notifications (CSA)
@@ -7989,16 +7989,16 @@ function ChatAnnouncements.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function()
-                    return Settings.Group.GroupRaidArenaCSA
+                    return Settings.DisplayAnnouncements.ArenaMaelstrom.CSA
                 end,
                 setFunc = function(value)
-                    Settings.Group.GroupRaidArenaCSA = value
+                    Settings.DisplayAnnouncements.ArenaMaelstrom.CSA = value
                 end,
                 width = "full",
                 disabled = function()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
-                default = Defaults.Group.GroupRaidArenaCSA,
+                default = Defaults.DisplayAnnouncements.ArenaMaelstrom.CSA,
             },
             {
                 -- Arena Notifications (Alert)
@@ -8006,67 +8006,121 @@ function ChatAnnouncements.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function()
-                    return Settings.Group.GroupRaidArenaAlert
+                    return Settings.DisplayAnnouncements.ArenaMaelstrom.Alert
                 end,
                 setFunc = function(value)
-                    Settings.Group.GroupRaidArenaAlert = value
+                    Settings.DisplayAnnouncements.ArenaMaelstrom.Alert = value
                 end,
                 width = "full",
                 disabled = function()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
-                default = Defaults.Group.GroupRaidArenaAlert,
+                default = Defaults.DisplayAnnouncements.ArenaMaelstrom.Alert,
+            },
+
+            {
+                -- Dragonstar Arena Notifications (ChatAnnouncements)
+                type = "checkbox",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                getFunc = function()
+                    return Settings.DisplayAnnouncements.ArenaDragonstar.CA
+                end,
+                setFunc = function(value)
+                    Settings.DisplayAnnouncements.ArenaDragonstar.CA = value
+                end,
+                width = "full",
+                disabled = function()
+                    return not LUIE.SV.ChatAnnouncements_Enable
+                end,
+                default = Defaults.DisplayAnnouncements.ArenaDragonstar.CA,
             },
             {
-                -- Arena Round Notifications (ChatAnnouncements)
+                -- Dragonstar Arena Notifications (CSA)
+                type = "checkbox",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                getFunc = function()
+                    return Settings.DisplayAnnouncements.ArenaDragonstar.CSA
+                end,
+                setFunc = function(value)
+                    Settings.DisplayAnnouncements.ArenaDragonstar.CSA = value
+                end,
+                width = "full",
+                disabled = function()
+                    return not LUIE.SV.ChatAnnouncements_Enable
+                end,
+                default = Defaults.DisplayAnnouncements.ArenaDragonstar.CSA,
+            },
+            {
+                -- Dragonstar Arena Notifications (Alert)
+                type = "checkbox",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                getFunc = function()
+                    return Settings.DisplayAnnouncements.ArenaDragonstar.Alert
+                end,
+                setFunc = function(value)
+                    Settings.DisplayAnnouncements.ArenaDragonstar.Alert = value
+                end,
+                width = "full",
+                disabled = function()
+                    return not LUIE.SV.ChatAnnouncements_Enable
+                end,
+                default = Defaults.DisplayAnnouncements.ArenaDragonstar.Alert,
+            },
+
+
+            {
+                -- Endless Archive Notifications (ChatAnnouncements)
                 type = "checkbox",
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function()
-                    return Settings.Group.GroupRaidArenaRoundCA
+                    return Settings.DisplayAnnouncements.DungeonEndlessArchive.CA
                 end,
                 setFunc = function(value)
-                    Settings.Group.GroupRaidArenaRoundCA = value
+                    Settings.DisplayAnnouncements.DungeonEndlessArchive.CA = value
                 end,
                 width = "full",
                 disabled = function()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
-                default = Defaults.Group.GroupRaidArenaRoundCA,
+                default = Defaults.DisplayAnnouncements.DungeonEndlessArchive.CA,
             },
             {
-                -- Arena Round Notifications (CSA)
+                -- Endless Archive Notifications (CSA)
                 type = "checkbox",
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function()
-                    return Settings.Group.GroupRaidArenaRoundCSA
+                    return Settings.DisplayAnnouncements.DungeonEndlessArchive.CSA
                 end,
                 setFunc = function(value)
-                    Settings.Group.GroupRaidArenaRoundCSA = value
+                    Settings.DisplayAnnouncements.DungeonEndlessArchive.CSA = value
                 end,
                 width = "full",
                 disabled = function()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
-                default = Defaults.Group.GroupRaidArenaRoundCSA,
+                default = Defaults.DisplayAnnouncements.DungeonEndlessArchive.CSA,
             },
             {
-                -- Arena Round Notifications (Alert)
+                -- Endless Archive Notifications (Alert)
                 type = "checkbox",
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function()
-                    return Settings.Group.GroupRaidArenaRoundAlert
+                    return Settings.DisplayAnnouncements.DungeonEndlessArchive.Alert
                 end,
                 setFunc = function(value)
-                    Settings.Group.GroupRaidArenaRoundAlert = value
+                    Settings.DisplayAnnouncements.DungeonEndlessArchive.Alert = value
                 end,
                 width = "full",
                 disabled = function()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
-                default = Defaults.Group.GroupRaidArenaRoundAlert,
+                default = Defaults.DisplayAnnouncements.DungeonEndlessArchive.Alert,
             },
             {
                 -- Imperial City Display Announcement (ChatAnnouncements)
@@ -8074,16 +8128,16 @@ function ChatAnnouncements.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function()
-                    return Settings.Quests.QuestICDiscoveryCA
+                    return Settings.DisplayAnnouncements.ZoneIC.CA
                 end,
                 setFunc = function(value)
-                    Settings.Quests.QuestICDiscoveryCA = value
+                    Settings.DisplayAnnouncements.ZoneIC.CA = value
                 end,
                 width = "full",
                 disabled = function()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
-                default = Defaults.Quests.QuestICDiscoveryCA,
+                default = Defaults.DisplayAnnouncements.ZoneIC.CA,
             },
             {
                 -- Imperial City Display Announcement (CSA)
@@ -8091,16 +8145,16 @@ function ChatAnnouncements.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function()
-                    return Settings.Quests.QuestICDiscoveryCSA
+                    return Settings.DisplayAnnouncements.ZoneIC.CSA
                 end,
                 setFunc = function(value)
-                    Settings.Quests.QuestICDiscoveryCSA = value
+                    Settings.DisplayAnnouncements.ZoneIC.CSA = value
                 end,
                 width = "full",
                 disabled = function()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
-                default = Defaults.Quests.QuestICDiscoveryCSA,
+                default = Defaults.DisplayAnnouncements.ZoneIC.CSA,
             },
             {
                 -- Imperial City Display Announcement (Alert)
@@ -8108,16 +8162,16 @@ function ChatAnnouncements.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function()
-                    return Settings.Quests.QuestICDiscoveryAlert
+                    return Settings.DisplayAnnouncements.ZoneIC.Alert
                 end,
                 setFunc = function(value)
-                    Settings.Quests.QuestICDiscoveryAlert = value
+                    Settings.DisplayAnnouncements.ZoneIC.Alert = value
                 end,
                 width = "full",
                 disabled = function()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
-                default = Defaults.Quests.QuestICDiscoveryAlert,
+                default = Defaults.DisplayAnnouncements.ZoneIC.Alert,
             },
             {
                 -- Imperial City Display Description
@@ -8125,16 +8179,16 @@ function ChatAnnouncements.CreateSettings()
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION)),
                 tooltip = GetString(SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION_TP),
                 getFunc = function()
-                    return Settings.Quests.QuestICDescription
+                    return Settings.DisplayAnnouncements.ZoneIC.Description
                 end,
                 setFunc = function(value)
-                    Settings.Quests.QuestICDescription = value
+                    Settings.DisplayAnnouncements.ZoneIC.Description = value
                 end,
                 width = "full",
                 disabled = function()
-                    return not (LUIE.SV.ChatAnnouncements_Enable and (Settings.Quests.QuestICDiscoveryCA or Settings.Quests.QuestICDiscoveryCSA or Settings.Quests.QuestICDiscoveryAlert))
+                    return not (LUIE.SV.ChatAnnouncements_Enable and (Settings.DisplayAnnouncements.ZoneIC.CA or Settings.DisplayAnnouncements.ZoneIC.CSA or Settings.DisplayAnnouncements.ZoneIC.Alert))
                 end,
-                default = Defaults.Quests.QuestICDiscoveryAlert,
+                default = Defaults.DisplayAnnouncements.ZoneIC.Description,
             },
             {
                 -- Craglorn Buff (ChatAnnouncements)
@@ -8142,16 +8196,16 @@ function ChatAnnouncements.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function()
-                    return Settings.Quests.QuestCraglornBuffCA
+                    return Settings.DisplayAnnouncements.ZoneCraglorn.CA
                 end,
                 setFunc = function(value)
-                    Settings.Quests.QuestCraglornBuffCA = value
+                    Settings.DisplayAnnouncements.ZoneCraglorn.CA = value
                 end,
                 width = "full",
                 disabled = function()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
-                default = Defaults.Quests.QuestCraglornBuffCA,
+                default = Defaults.DisplayAnnouncements.ZoneCraglorn.CA,
             },
             {
                 -- Craglorn Buff (CSA)
@@ -8159,16 +8213,16 @@ function ChatAnnouncements.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function()
-                    return Settings.Quests.QuestCraglornBuffCSA
+                    return Settings.DisplayAnnouncements.ZoneCraglorn.CSA
                 end,
                 setFunc = function(value)
-                    Settings.Quests.QuestCraglornBuffCSA = value
+                    Settings.DisplayAnnouncements.ZoneCraglorn.CSA = value
                 end,
                 width = "full",
                 disabled = function()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
-                default = Defaults.Quests.QuestCraglornBuffCSA,
+                default = Defaults.DisplayAnnouncements.ZoneCraglorn.CSA,
             },
             {
                 -- Craglorn Buff (Alert)
@@ -8176,16 +8230,16 @@ function ChatAnnouncements.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function()
-                    return Settings.Quests.QuestCraglornBuffAlert
+                    return Settings.DisplayAnnouncements.ZoneCraglorn.Alert
                 end,
                 setFunc = function(value)
-                    Settings.Quests.QuestCraglornBuffAlert = value
+                    Settings.DisplayAnnouncements.ZoneCraglorn.Alert = value
                 end,
                 width = "full",
                 disabled = function()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
-                default = Defaults.Quests.QuestCraglornBuffAlert,
+                default = Defaults.DisplayAnnouncements.ZoneCraglorn.Alert,
             },
         },
     }

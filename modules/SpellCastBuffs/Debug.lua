@@ -225,12 +225,30 @@ function SpellCastBuffs.TempSlashGround()
 end
 
 function SpellCastBuffs.TempSlashZoneCheck()
+    LUIE.PrintToChat("--------------------")
+    LUIE.PrintToChat("ZONE & MAP INFO:")
+    LUIE.PrintToChat("--------------------")
     local zoneid = GetZoneId(GetCurrentMapZoneIndex())
     LUIE.PrintToChat("Zone Id: " .. zoneid)
     local locName = GetPlayerLocationName()
-    LUIE.PrintToChat("Location: " .. locName)
-    local mapName = GetMapName()
-    LUIE.PrintToChat("Map: " .. mapName)
+    LUIE.PrintToChat("Location Name: " .. locName)
+    LUIE.PrintToChat("--------------------")
+    local mapid = GetCurrentMapId()
+    LUIE.PrintToChat("Map Id: " .. mapid)
+    local mapindex = GetCurrentMapIndex()
+    if mapindex then -- this value can return nil
+        LUIE.PrintToChat("Map Index: " .. mapindex)
+    else
+        LUIE.PrintToChat("Map Index: nil")
+    end
+    LUIE.PrintToChat("--------------------")
+    local name, mapType, mapContentType, zoneIndex, description = GetMapInfoById(mapid)
+    LUIE.PrintToChat("Map Name: " .. name)
+    LUIE.PrintToChat("Map Type: " .. mapType)
+    LUIE.PrintToChat("Map Content Type: " .. mapContentType)
+    LUIE.PrintToChat("Zone Index: " .. zoneIndex)
+    LUIE.PrintToChat("Description: " .. description)
+    LUIE.PrintToChat("--------------------")
 end
 
 function SpellCastBuffs.TempSlashCheckRemovedAbilities()
