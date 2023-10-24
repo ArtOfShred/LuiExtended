@@ -565,7 +565,7 @@ ChatAnnouncements.Defaults = {
             CA = true,
             CSA = true,
             Alert = false,
-            Description = true -- For 2nd line of Display Announcements
+            Description = true, -- For 2nd line of Display Announcements
         },
         ZoneCraglorn = {
             CA = false,
@@ -9606,7 +9606,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    local g_previousEndlessDungeonProgression = {0, 0, 0} -- Stage, Cycle, Arc
+    local g_previousEndlessDungeonProgression = { 0, 0, 0 } -- Stage, Cycle, Arc
 
     local function GetEndlessDungeonProgressMessageParams()
         local stage, cycle, arc = ENDLESS_DUNGEON_MANAGER:GetProgression()
@@ -9700,7 +9700,6 @@ function ChatAnnouncements.HookFunction()
 
     -- EVENT_DISPLAY_ANNOUNCEMENT (CSA Handler)
     local function DisplayAnnouncementHook(primaryText, secondaryText, icon, soundId, lifespanMS, category)
-
         -- Disable Respec Display Announcement since we handle this from loot announcements (using Respec scroll)
         if primaryText == GetString(SI_RESPECTYPE_POINTSRESETTITLE1) then
             return true
@@ -9768,14 +9767,22 @@ function ChatAnnouncements.HookFunction()
             settings = LUIE.ChatAnnouncements.SV.DisplayAnnouncements.Respec
             debugDisable = true
             -- Update message syntax here
-            if primaryText == GetString(SI_RESPECTYPE_POINTSRESETTITLE0) then primaryText = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS) end
-            if primaryText == GetString(SI_RESPECTYPE_POINTSRESETTITLE1) then primaryText = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES) end
+            if primaryText == GetString(SI_RESPECTYPE_POINTSRESETTITLE0) then
+                primaryText = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS)
+            end
+            if primaryText == GetString(SI_RESPECTYPE_POINTSRESETTITLE1) then
+                primaryText = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES)
+            end
         elseif primaryText == GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D) or primaryText == GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_D) then
             settings = LUIE.ChatAnnouncements.SV.DisplayAnnouncements.GroupArea
             debugDisable = true
             -- Update message syntax here
-            if primaryText == GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D) then primaryText = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_C) end
-            if primaryText == GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_D) then primaryText = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_C) end
+            if primaryText == GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D) then
+                primaryText = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_C)
+            end
+            if primaryText == GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_D) then
+                primaryText = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_C)
+            end
         elseif type then
             settings = ResolveDisplayAnnouncementMessages(type)
             debugDisable = true
@@ -10361,8 +10368,8 @@ function ChatAnnouncements.HookFunction()
         self:AddMenuEntry(GetString(SI_CHAT_PLAYER_CONTEXT_REPORT), platformIcons[SI_CHAT_PLAYER_CONTEXT_REPORT], ENABLED, ReportCallback)
 
         --Duel--
-        local duelState, partnerCharacterName, partnerDisplayName = GetDuelInfo()
-        if duelState ~= DUEL_STATE_IDLE then
+        local duelStateI, partnerCharacterName, partnerDisplayName = GetDuelInfo()
+        if duelStateI ~= DUEL_STATE_IDLE then
             local function AlreadyDuelingWarning(duelState, characterName, displayName)
                 return function()
                     local userFacingPartnerName = ZO_GetPrimaryPlayerNameWithSecondary(displayName, characterName)
@@ -10371,7 +10378,7 @@ function ChatAnnouncements.HookFunction()
                     ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, statusString)
                 end
             end
-            self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_INVITE_DUEL), platformIcons[SI_PLAYER_TO_PLAYER_INVITE_DUEL], DISABLED, AlreadyDuelingWarning(duelState, partnerCharacterName, partnerDisplayName))
+            self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_INVITE_DUEL), platformIcons[SI_PLAYER_TO_PLAYER_INVITE_DUEL], DISABLED, AlreadyDuelingWarning(duelStateI, partnerCharacterName, partnerDisplayName))
         else
             local function DuelInviteOption()
                 ChallengeTargetToDuel(currentTargetCharacterName)
@@ -10383,8 +10390,8 @@ function ChatAnnouncements.HookFunction()
         end
 
         -- Play Tribute --
-        local tributeInviteState, partnerCharacterName, partnerDisplayName = GetTributeInviteInfo()
-        if tributeInviteState ~= TRIBUTE_INVITE_STATE_NONE then
+        local tributeInviteStateI, partnerCharacterNameI, partnerDisplayNameI = GetTributeInviteInfo()
+        if tributeInviteStateI ~= TRIBUTE_INVITE_STATE_NONE then
             local function TributeInviteFailWarning(tributeInviteState, characterName, displayName)
                 return function()
                     local userFacingPartnerName = ZO_GetPrimaryPlayerNameWithSecondary(displayName, characterName)
@@ -10393,7 +10400,7 @@ function ChatAnnouncements.HookFunction()
                     ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, statusString)
                 end
             end
-            self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_INVITE_TRIBUTE), platformIcons[SI_PLAYER_TO_PLAYER_INVITE_TRIBUTE], DISABLED, TributeInviteFailWarning(tributeInviteState, partnerCharacterName, partnerDisplayName))
+            self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_INVITE_TRIBUTE), platformIcons[SI_PLAYER_TO_PLAYER_INVITE_TRIBUTE], DISABLED, TributeInviteFailWarning(tributeInviteStateI, partnerCharacterNameI, partnerDisplayNameI))
         else
             local function TributeInviteOption()
                 ChallengeTargetToTribute(currentTargetCharacterName)

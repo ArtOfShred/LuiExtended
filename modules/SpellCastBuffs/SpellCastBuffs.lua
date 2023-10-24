@@ -1416,7 +1416,7 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
     local tooltipTitle = zo_strformat(SI_ABILITY_TOOLTIP_NAME, control.effectName)
     if control.isArtificial then
         tooltipText = GetArtificialEffectTooltipText(control.effectId)
-        GameTooltip:AddLine(tooltipTitle, "ZoFontHeader2",1,1,1, nil)
+        GameTooltip:AddLine(tooltipTitle, "ZoFontHeader2", 1, 1, 1, nil)
         detailsLine = 3
         if SpellCastBuffs.SV.TooltipEnable then
             GameTooltip:SetVerticalPadding(1)
@@ -1428,7 +1428,7 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
         SpellCastBuffs.TooltipBottomLine(control, detailsLine, true)
     else
         if not SpellCastBuffs.SV.TooltipEnable then
-            GameTooltip:AddLine(tooltipTitle, "ZoFontHeader2",1,1,1, nil)
+            GameTooltip:AddLine(tooltipTitle, "ZoFontHeader2", 1, 1, 1, nil)
             detailsLine = 3
             SpellCastBuffs.TooltipBottomLine(control, detailsLine)
             return
@@ -1446,7 +1446,7 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
                     if Effects.EffectOverride[control.effectId].tooltipValue2 then
                         value2 = Effects.EffectOverride[control.effectId].tooltipValue2
                     elseif Effects.EffectOverride[control.effectId].tooltipValue2Mod then
-                        value2 = math.floor( duration + Effects.EffectOverride[control.effectId].tooltipValue2Mod + 0.5 )
+                        value2 = math.floor(duration + Effects.EffectOverride[control.effectId].tooltipValue2Mod + 0.5)
                     elseif Effects.EffectOverride[control.effectId].tooltipValue2Id then
                         value2 = math.floor(GetAbilityDuration(Effects.EffectOverride[control.effectId].tooltipValue2Id) + 0.5) / 1000
                     else
@@ -1466,12 +1466,7 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
 
                 -- If there is a special tooltip to use for targets only, then set this now
                 local containerContext = control.container
-                if containerContext == "target1" or
-                containerContext == "target2" or
-                containerContext == "targetb" or
-                containerContext == "targetd" or
-                containerContext == "promb_target" or
-                containerContext == "promd_target" then
+                if containerContext == "target1" or containerContext == "target2" or containerContext == "targetb" or containerContext == "targetd" or containerContext == "promb_target" or containerContext == "promd_target" then
                     if Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltipOther then
                         tooltipText = zo_strformat(Effects.EffectOverride[control.effectId].tooltipOther, duration, value2, value3)
                     end
@@ -1504,7 +1499,6 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
                 if Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].dynamicTooltip then
                     tooltipText = LUIE.DynamicTooltip(control.effectId)
                 end
-
             else
                 duration = 0
             end
@@ -1529,25 +1523,26 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
         if Effects.TooltipNameOverride[control.effectId] then
             thirdLine = zo_strformat(Effects.TooltipNameOverride[control.effectId], duration)
         end
-        ]]--
+        ]]
+        --
         -- Have to trim trailing spaces on the end of tooltips
         if tooltipText ~= "" then
             tooltipText = string.match(tooltipText, ".*%S")
         end
-        if thirdLine ~="" and thirdLine ~= nil then
+        if thirdLine ~= "" and thirdLine ~= nil then
             colorText = control.buffType == BUFF_EFFECT_TYPE_DEBUFF and ZO_ERROR_COLOR or ZO_SUCCEEDED_TEXT
         end
 
         detailsLine = 5
 
-        GameTooltip:AddLine(tooltipTitle, "ZoFontHeader2",1,1,1, nil)
+        GameTooltip:AddLine(tooltipTitle, "ZoFontHeader2", 1, 1, 1, nil)
         if tooltipText ~= "" and tooltipText ~= nil then
             GameTooltip:SetVerticalPadding(1)
             ZO_Tooltip_AddDivider(GameTooltip)
             GameTooltip:SetVerticalPadding(5)
             GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
         end
-        if thirdLine ~="" and thirdLine ~= nil then
+        if thirdLine ~= "" and thirdLine ~= nil then
             if tooltipText == "" or tooltipText == nil then
                 GameTooltip:SetVerticalPadding(1)
                 ZO_Tooltip_AddDivider(GameTooltip)
@@ -1578,7 +1573,6 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
                 GameTooltip:AddLine(newtooltipText, "", colorText:UnpackRGBA())
             end
         end
-
     end
 end
 
@@ -2965,18 +2959,7 @@ function SpellCastBuffs.OnCombatEventIn(eventCode, result, isError, abilityName,
 end
 
 local function isValidDamageResult(result)
-    if result == ACTION_RESULT_BLOCKED or
-    result == ACTION_RESULT_BLOCKED_DAMAGE or
-    result == ACTION_RESULT_CRITICAL_DAMAGE or
-    result == ACTION_RESULT_DAMAGE or
-    result == ACTION_RESULT_DAMAGE_SHIELDED or
-    result == ACTION_RESULT_IMMUNE or
-    result == ACTION_RESULT_MISS or
-    result == ACTION_RESULT_PARTIAL_RESIST or
-    result == ACTION_RESULT_REFLECTED or
-    result == ACTION_RESULT_RESIST or
-    result == ACTION_RESULT_WRECKING_DAMAGE or
-    result == ACTION_RESULT_DODGED then
+    if result == ACTION_RESULT_BLOCKED or result == ACTION_RESULT_BLOCKED_DAMAGE or result == ACTION_RESULT_CRITICAL_DAMAGE or result == ACTION_RESULT_DAMAGE or result == ACTION_RESULT_DAMAGE_SHIELDED or result == ACTION_RESULT_IMMUNE or result == ACTION_RESULT_MISS or result == ACTION_RESULT_PARTIAL_RESIST or result == ACTION_RESULT_REFLECTED or result == ACTION_RESULT_RESIST or result == ACTION_RESULT_WRECKING_DAMAGE or result == ACTION_RESULT_DODGED then
         return true
     end
 end

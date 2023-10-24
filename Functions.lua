@@ -2,6 +2,7 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
+local LUIE = LUIE
 
 local function ToInteger(number)
     return zo_floor(tonumber(number) or error("Could not cast '" .. tostring(number) .. "' to number.'"))

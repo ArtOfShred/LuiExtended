@@ -8,6 +8,7 @@ if LUIE == nil then
     LUIE = {}
 end
 
+local LUIE = LUIE
 LUIE.tag = "LUIE"
 LUIE.name = "LuiExtended"
 LUIE.version = "6.6.3"
