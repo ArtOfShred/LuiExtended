@@ -4180,6 +4180,11 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
         formattedQuantity = ""
     end
 
+    -- Error handling
+    if not formattedRecipient then
+        formattedRecipient = ""
+    end
+
     local armorType = GetItemLinkArmorType(itemLink) -- Get Armor Type of item
     formattedArmorType = (ChatAnnouncements.SV.Inventory.LootShowArmorType and armorType ~= ARMORTYPE_NONE and logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgrade and logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgradeFail) and string.format(" |cFFFFFF(%s)|r", GetString("SI_ARMORTYPE", armorType)) or ""
 
