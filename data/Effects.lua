@@ -4054,6 +4054,7 @@ Effects.EffectOverride = {
         icon = "LuiExtended/media/icons/abilities/ability_champion_fitness_unchained.dds",
         dynamicTooltip = true,
     }, -- Unchained
+    [160201] = { icon = "LuiExtended/media/icons/abilities/ability_champion_fitness_soothing_shield.dds" }, -- Soothing Shield
 
     ----------------------------------------------------------------
     -- ITEMS -------------------------------------------------------
