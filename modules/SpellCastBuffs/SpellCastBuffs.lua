@@ -1123,8 +1123,8 @@ function SpellCastBuffs.Reset()
     if uiTlw.targetb and uiTlw.targetb:GetType() == CT_TOPLEVELCONTROL then
         uiTlw.targetb:SetDimensions(SpellCastBuffs.SV.WidthTargetBuffs, SpellCastBuffs.SV.IconSize + 6)
         uiTlw.targetd:SetDimensions(SpellCastBuffs.SV.WidthTargetDebuffs, SpellCastBuffs.SV.IconSize + 6)
-        uiTlw.targetb.maxIcons = zo_floor((uiTlw.playerb:GetWidth() - 4 * g_padding) / (SpellCastBuffs.SV.IconSize + g_padding))
-        uiTlw.targetd.maxIcons = zo_floor((uiTlw.playerd:GetWidth() - 4 * g_padding) / (SpellCastBuffs.SV.IconSize + g_padding))
+        uiTlw.targetb.maxIcons = zo_floor((uiTlw.targetb:GetWidth() - 4 * g_padding) / (SpellCastBuffs.SV.IconSize + g_padding))
+        uiTlw.targetd.maxIcons = zo_floor((uiTlw.targetd:GetWidth() - 4 * g_padding) / (SpellCastBuffs.SV.IconSize + g_padding))
     else
         uiTlw.target2:SetHeight(SpellCastBuffs.SV.IconSize)
         uiTlw.target2.firstAnchor = { TOPLEFT, TOP }

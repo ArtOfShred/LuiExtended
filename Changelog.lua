@@ -6,6 +6,14 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
+    "|cFFA500LuiExtended Version 6.6.4|r",
+    "",
+    "|cFFFF00Buffs & Debuffs:|r",
+    "[*] Fixed an issue where having unanchored buff frames could throw UI errors under certain conditions.",
+    "",
+    "|cFFFF00Chat Announcements:|r",
+    "[*] Added error prevention for item chat messages throwing a UI error under certain conditions.",
+    "",
     "|cFFA500LuiExtended Version 6.6.3|r",
     "",
     "|cFFFF00General:|r",

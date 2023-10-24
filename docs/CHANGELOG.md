@@ -1,3 +1,13 @@
+### Version 6.6.4
+
+Buffs & Debuffs
+- Fixed an issue where having unanchored buff frames could throw UI errors under certain conditions.
+
+Chat Announcements
+- Added error prevention for item chat messages throwing a UI error under certain conditions.
+
+---
+
 ### Version 6.6.3
 
 General
