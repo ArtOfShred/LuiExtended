@@ -1135,7 +1135,6 @@ Effects.AddNoDurationBarHighlight = {
     [124165] = true, -- Deaden Pain
     [124193] = true, -- Necrotic Potency
     [118814] = true, -- Enduring Undeath
-
 }
 
 Effects.IsGrimFocus = {
@@ -1285,7 +1284,6 @@ Effects.BarHighlightStack = {
     [146919] = 1, -- Subterranean Assault
     [86015] = 2, -- Deep Fissure
     [178028] = 1, -- Deep Fissure
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -3781,7 +3779,7 @@ Effects.EffectOverride = {
         icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds",
         name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Sneak, Abilities.Innate_Stun),
         tooltip = Tooltips.Generic_Stun,
-        cc = LUIE_CC_TYPE_STUN
+        cc = LUIE_CC_TYPE_STUN,
     }, -- Slam Stun (Stun from crouch attack)
 
     -- Mount
@@ -3840,12 +3838,12 @@ Effects.EffectOverride = {
         icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds",
         name = Abilities.Innate_Bash_Stun,
         tooltip = Tooltips.Generic_Stagger,
-        cc = LUIE_CC_TYPE_STAGGER
+        cc = LUIE_CC_TYPE_STAGGER,
     }, -- Stagger
     [21971] = {
         icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds",
         tooltip = Tooltips.Generic_Stun,
-        cc = LUIE_CC_TYPE_STUN
+        cc = LUIE_CC_TYPE_STUN,
     }, -- Bash Stun (Stun from bashing cast)
     [48416] = {
         icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds",
@@ -3854,14 +3852,14 @@ Effects.EffectOverride = {
     [45982] = {
         icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds",
         tooltip = Tooltips.Generic_Stun,
-        cc = LUIE_CC_TYPE_STUN
+        cc = LUIE_CC_TYPE_STUN,
     }, -- Bash Stun (Stun from bashing cast when NPC is pinned against an obstacle)
 
     -- Off-Balance Exploit
     [16825] = {
         icon = "LuiExtended/media/icons/abilities/ability_innate_off-balance_exploit.dds",
         tooltip = Tooltips.Generic_Knockdown,
-        cc = LUIE_CC_TYPE_KNOCKDOWN
+        cc = LUIE_CC_TYPE_KNOCKDOWN,
     }, -- Off-Balance Exploit
 
     -- Death/Resurrection
@@ -3885,7 +3883,7 @@ Effects.EffectOverride = {
         icon = "LuiExtended/media/icons/abilities/ability_spell_pin.dds",
         tooltip = Tooltips.Generic_Snare,
         tooltipValue2 = 25,
-        cc = LUIE_CC_TYPE_SNARE
+        cc = LUIE_CC_TYPE_SNARE,
     }, -- Melee Snare
     [48532] = { icon = "LuiExtended/media/icons/abilities/ability_spell_pin.dds", hide = true }, -- Charge Snare
     [55080] = { hide = true }, -- Pet Hidden
@@ -3962,7 +3960,7 @@ Effects.EffectOverride = {
         tooltip = Tooltips.Generic_Off_Balance_Immunity,
     }, -- Off Balance Immunity
     [132831] = {
-        icon = 'LuiExtended/media/icons/abilities/ability_innate_major_vulnerability_immunity.dds',
+        icon = "LuiExtended/media/icons/abilities/ability_innate_major_vulnerability_immunity.dds",
         name = Abilities.Skill_Major_Vulnerability_Immunity,
         type = BUFF_EFFECT_TYPE_BUFF,
         tooltip = Tooltips.Generic_Major_Vulnerability_Immunity,
@@ -5180,7 +5178,8 @@ Effects.EffectOverride = {
         icon = "LuiExtended/media/icons/abilities/ability_item_sixth_house_robe.dds",
         name = Abilities.Innate_Sixth_House_Robe,
     },
-    ]]--
+    ]]
+    --
 
     [140542] = { hide = true }, -- Stone Warrior Target Dummy (Stone Husk Fragment)
     [140544] = {
@@ -5398,7 +5397,8 @@ Effects.EffectOverride = {
         tooltip = Tooltips.Experience_Seasonal_Pelinal,
         forcedContainer = "long",
     }, -- Pelinal's Ferocity (Scroll of Pelinal's Ferocity)
-    ]]--
+    ]]
+    --
 
     ----------------------------------------------------------------
     -- MEMENTOS ----------------------------------------------------
@@ -5474,7 +5474,8 @@ Effects.EffectOverride = {
         tooltip = Tooltips.Experience_Seasonal_Event,
         forcedContainer = "long",
     }, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)
-    ]]--
+    ]]
+    --
     [85355] = {
         icon = "LuiExtended/media/icons/mementos/memento_fire_breathers_torches.dds",
         name = Abilities.Memento_Fire_Breathers_Torches,
@@ -14549,7 +14550,8 @@ Effects.EffectOverride = {
         icon = "LuiExtended/media/icons/abilities/ability_ava_siege_meatbag_catapult.dds",
         tooltip = Tooltips.Skill_Meatbag_Catapult,
     }, -- Meatbag Catapult (Meatbag Catapult)
-    ]]--
+    ]]
+    --
     [36408] = {
         icon = "LuiExtended/media/icons/abilities/ability_ava_siege_meatbag_catapult.dds",
         type = BUFF_EFFECT_TYPE_DEBUFF,
@@ -21271,7 +21273,8 @@ Effects.EffectOverride = {
         type = BUFF_EFFECT_TYPE_DEBUFF,
         unbreakable = 1,
     }, -- Skeletal Smash (Icestalker)
-    ]]--
+    ]]
+    --
 
     [109827] = { icon = "LuiExtended/media/icons/abilities/ability_spell_boulder_toss.dds" }, -- Boulder Toss (Icestalker)
     [109828] = { icon = "LuiExtended/media/icons/abilities/ability_spell_boulder_toss.dds" }, -- Boulder Toss (Icestalker)
