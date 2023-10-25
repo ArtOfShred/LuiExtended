@@ -14190,8 +14190,33 @@ Effects.EffectOverride = {
     [39671] = {
         icon = "esoui/art/icons/achievement_ic_024.dds",
         passiveIcon = "LuiExtended/media/icons/abilities/passive_cyrodiil_emperorship_alliance_bonus.dds",
-        tooltip = Tooltips.Skill_Emperorship_Alliance_Bonus,
-    }, -- Emperorship Alliance Bonus
+        tooltip = Tooltips.Skill_Emperorship_Alliance_Bonus_I,
+    }, -- Emperorship Alliance Bonus I
+    [182782] = {
+        icon = "esoui/art/icons/achievement_ic_024.dds",
+        passiveIcon = "LuiExtended/media/icons/abilities/passive_cyrodiil_emperorship_alliance_bonus.dds",
+        tooltip = Tooltips.Skill_Emperorship_Alliance_Bonus_II,
+    }, -- Emperorship Alliance Bonus II
+    [182783] = {
+        icon = "esoui/art/icons/achievement_ic_024.dds",
+        passiveIcon = "LuiExtended/media/icons/abilities/passive_cyrodiil_emperorship_alliance_bonus.dds",
+        tooltip = Tooltips.Skill_Emperorship_Alliance_Bonus_III,
+    }, -- Emperorship Alliance Bonus III
+    [182784] = {
+        icon = "esoui/art/icons/achievement_ic_024.dds",
+        passiveIcon = "LuiExtended/media/icons/abilities/passive_cyrodiil_emperorship_alliance_bonus.dds",
+        tooltip = Tooltips.Skill_Emperorship_Alliance_Bonus_IV,
+    }, -- Emperorship Alliance Bonus IV
+    [182785] = {
+        icon = "esoui/art/icons/achievement_ic_024.dds",
+        passiveIcon = "LuiExtended/media/icons/abilities/passive_cyrodiil_emperorship_alliance_bonus.dds",
+        tooltip = Tooltips.Skill_Emperorship_Alliance_Bonus_V,
+    }, -- Emperorship Alliance Bonus V
+    [182786] = {
+        icon = "esoui/art/icons/achievement_ic_024.dds",
+        passiveIcon = "LuiExtended/media/icons/abilities/passive_cyrodiil_emperorship_alliance_bonus.dds",
+        tooltip = Tooltips.Skill_Emperorship_Alliance_Bonus_VI,
+    }, -- Emperorship Alliance Bonus VI
     [11346] = {
         icon = "LuiExtended/media/icons/abilities/ability_cyrodiil_home_keep_bonus.dds",
         passiveIcon = "LuiExtended/media/icons/abilities/passive_cyrodiil_home_keep_bonus.dds",
