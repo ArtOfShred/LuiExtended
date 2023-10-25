@@ -639,7 +639,7 @@ function CombatInfo.CreateSettings()
                     return not (LUIE.SV.CombatInfo_Enabled and Settings.BarShowLabel and Settings.BarMillis and (Settings.ShowTriggered or Settings.ShowToggled))
                 end,
             },
-            { type = "description", title = "[ |cffdf80Enemy Markers|r ]", text = "yes.. I completely stole this from Untaunted.", width = "full" },
+            { type = "description", title = "Enemy Markers", width = "full" },
             {
                 type = "checkbox",
                 name = "Show Enemy Markers",
