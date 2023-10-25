@@ -639,6 +639,10 @@ function CombatInfo.CreateSettings()
                     return not (LUIE.SV.CombatInfo_Enabled and Settings.BarShowLabel and Settings.BarMillis and (Settings.ShowTriggered or Settings.ShowToggled))
                 end,
             },
+            {
+                type = "divider",
+                width = "full",
+            },
             { type = "description", title = "Enemy Markers", width = "full" },
             {
                 type = "checkbox",

@@ -3243,45 +3243,104 @@ function ChatAnnouncements.OnMailCloseBox(eventCode)
 end
 
 -- Sends results of the trade to the Item Log print function and clears variables so they are reset for next trade interactions
+-- function ChatAnnouncements.OnMailSuccess(eventCode)
+--     if g_postageAmount > 0 then
+--         local type = "LUIE_CURRENCY_POSTAGE"
+--         local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1))
+--         local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+--         local changeType = ZO_LocalizeDecimalNumber(g_postageAmount)
+--         local currencyTypeColor = CurrencyGoldColorize:ToHex()
+--         local currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
+--         local currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyGoldName, g_postageAmount)
+--         local currencyTotal = ChatAnnouncements.SV.Currency.CurrencyGoldShowTotal
+--         local messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalGold
+--         local messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessagePostage
+--         ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
+--     end
+
+--     if not g_mailCODPresent then
+--         if g_mailAmount > 0 then
+--             local type = "LUIE_CURRENCY_MAIL"
+--             local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1))
+--             local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+--             local changeType = ZO_LocalizeDecimalNumber(g_mailAmount)
+--             local currencyTypeColor = CurrencyGoldColorize:ToHex()
+--             local currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
+--             local currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyGoldName, g_mailAmount)
+--             local currencyTotal = ChatAnnouncements.SV.Currency.CurrencyGoldShowTotal
+--             local messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalGold
+--             local messageChange = g_mailTarget ~= "" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOut or ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOutNoName
+--             ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
+--         end
+--     end
+
+--     if ChatAnnouncements.SV.Notify.NotificationMailSendCA or ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
+--         local mailString
+--         if not g_mailCODPresent then
+--             if g_mailCOD > 1 then
+--                 mailString = GetString(SI_LUIE_CA_MAIL_SENT_COD)
+--             else
+--                 mailString = GetString(SI_LUIE_CA_MAIL_SENT)
+--             end
+--         end
+--         if mailString then
+--             if ChatAnnouncements.SV.Notify.NotificationMailSendCA then
+--                 g_queuedMessages[g_queuedMessagesCounter] = { message = mailString, type = "NOTIFICATION", isSystem = true }
+--                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+--                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
+--             end
+--             if ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
+--                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, mailString)
+--             end
+--         end
+--     end
+
+--     if ChatAnnouncements.SV.Inventory.LootMail then
+--         for mailIndex = 1, 6 do -- Have to iterate through all 6 possible mail attachments, otherwise nil values will bump later items off the list potentially.
+--             if g_mailStacksOut[mailIndex] ~= nil then
+--                 local gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+--                 local logPrefix = g_mailTarget ~= "" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOut or ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOutNoName
+--                 local item = g_mailStacksOut[mailIndex]
+--                 ChatAnnouncements.ItemCounterDelayOut(item.icon, item.stack, item.itemType, item.itemId, item.itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
+--             end
+--         end
+--     end
+
+--     g_mailCODPresent = false
+--     g_mailCOD = 0
+--     g_postageAmount = 0
+--     g_mailAmount = 0
+--     g_mailStacksOut = {}
+-- end
+
 function ChatAnnouncements.OnMailSuccess(eventCode)
+    local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1))
+    local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+    local currencyTypeColor = CurrencyGoldColorize:ToHex()
+    local currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
+    local currencyTotal = ChatAnnouncements.SV.Currency.CurrencyGoldShowTotal
+    local messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalGold
+
     if g_postageAmount > 0 then
         local type = "LUIE_CURRENCY_POSTAGE"
-        local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1))
-        local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
         local changeType = ZO_LocalizeDecimalNumber(g_postageAmount)
-        local currencyTypeColor = CurrencyGoldColorize:ToHex()
-        local currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
         local currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyGoldName, g_postageAmount)
-        local currencyTotal = ChatAnnouncements.SV.Currency.CurrencyGoldShowTotal
-        local messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalGold
         local messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessagePostage
         ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
     end
 
-    if not g_mailCODPresent then
-        if g_mailAmount > 0 then
-            local type = "LUIE_CURRENCY_MAIL"
-            local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1))
-            local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
-            local changeType = ZO_LocalizeDecimalNumber(g_mailAmount)
-            local currencyTypeColor = CurrencyGoldColorize:ToHex()
-            local currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
-            local currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyGoldName, g_mailAmount)
-            local currencyTotal = ChatAnnouncements.SV.Currency.CurrencyGoldShowTotal
-            local messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalGold
-            local messageChange = g_mailTarget ~= "" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOut or ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOutNoName
-            ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
-        end
+    if not g_mailCODPresent and g_mailAmount > 0 then
+        local type = "LUIE_CURRENCY_MAIL"
+        local changeType = ZO_LocalizeDecimalNumber(g_mailAmount)
+        local currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyGoldName, g_mailAmount)
+        local messageChange = g_mailTarget ~= "" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOut or ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOutNoName
+        ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
     end
 
     if ChatAnnouncements.SV.Notify.NotificationMailSendCA or ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
         local mailString
         if not g_mailCODPresent then
-            if g_mailCOD > 1 then
-                mailString = GetString(SI_LUIE_CA_MAIL_SENT_COD)
-            else
-                mailString = GetString(SI_LUIE_CA_MAIL_SENT)
-            end
+            mailString = g_mailCOD > 1 and GetString(SI_LUIE_CA_MAIL_SENT_COD) or GetString(SI_LUIE_CA_MAIL_SENT)
         end
         if mailString then
             if ChatAnnouncements.SV.Notify.NotificationMailSendCA then
@@ -3296,20 +3355,20 @@ function ChatAnnouncements.OnMailSuccess(eventCode)
     end
 
     if ChatAnnouncements.SV.Inventory.LootMail then
-        for mailIndex = 1, 6 do -- Have to iterate through all 6 possible mail attachments, otherwise nil values will bump later items off the list potentially.
-            if g_mailStacksOut[mailIndex] ~= nil then
+        for mailIndex = 1, 6 do
+            local item = g_mailStacksOut[mailIndex]
+            if item ~= nil then
                 local gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                 local logPrefix = g_mailTarget ~= "" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOut or ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOutNoName
-                local item = g_mailStacksOut[mailIndex]
                 ChatAnnouncements.ItemCounterDelayOut(item.icon, item.stack, item.itemType, item.itemId, item.itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
             end
         end
     end
 
     g_mailCODPresent = false
-    g_mailCOD = {}
-    g_postageAmount = {}
-    g_mailAmount = {}
+    g_mailCOD = 0
+    g_postageAmount = 0
+    g_mailAmount = 0
     g_mailStacksOut = {}
 end
 

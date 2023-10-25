@@ -1621,7 +1621,7 @@ function CombatInfo.HideSlot(slotNum, abilityId)
             CombatInfo.ToggleBackbarSaturation(slotNum, CombatInfo.SV.BarDarkUnused)
         end
     end
-    if slotNum == g_ultimateSlot and CombatInfo.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
+    if slotNum == g_ultimateSlot and CombatInfo.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot, g_hotbarCategory) then
         uiUltimate.LabelPct:SetHidden(false)
     end
 end
@@ -2337,7 +2337,7 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
         end
     end
 
-    if slotNum < BACKBAR_INDEX_OFFSET and not IsSlotUsed(slotNum) then
+    if slotNum < BACKBAR_INDEX_OFFSET and not IsSlotUsed(slotNum, g_hotbarCategory) then
         return
     end
 
@@ -2607,7 +2607,7 @@ function CombatInfo.OnPowerUpdatePlayer(eventCode, unitTag, powerIndex, powerTyp
         pct = 100
     end
     -- Update the tooltip only when the slot is used and percentage is enabled
-    if IsSlotUsed(g_ultimateSlot) then
+    if IsSlotUsed(g_ultimateSlot, g_hotbarCategory) then
         if CombatInfo.SV.UltimateLabelEnabled or CombatInfo.SV.UltimatePctEnabled then
             -- Set % value
             if CombatInfo.SV.UltimatePctEnabled then
