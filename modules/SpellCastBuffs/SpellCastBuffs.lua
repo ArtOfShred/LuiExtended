@@ -1368,10 +1368,8 @@ function SpellCastBuffs.TooltipBottomLine(control, detailsLine, artificial)
         -- Add Ability ID Line
         if SpellCastBuffs.SV.TooltipAbilityId then
             local labelAbilityId = control.effectId or "None"
-            if labelAbilityId == "Fake" then
-                artificial = true
-            end
-            if artificial then
+            local isArtificial = labelAbilityId == "Fake" and true or artificial
+            if isArtificial then
                 labelAbilityId = "Artificial"
             end
             GameTooltip:AddHeaderLine("Ability ID", "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_LEFT, ZO_NORMAL_TEXT:UnpackRGB())
