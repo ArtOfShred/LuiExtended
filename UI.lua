@@ -36,9 +36,9 @@ function UI.Chain(object)
 end
 
 -- Creates empty CT_TOPLEVELCONTROL window
----@param anchors any
----@param dims any
----@return table
+--@param anchors any
+--@param dims any
+--@return table
 function UI.TopLevel(anchors, dims)
     local tlw = windowManager:CreateTopLevelWindow()
     tlw:SetClampedToScreen(true)
@@ -58,12 +58,12 @@ function UI.TopLevel(anchors, dims)
 end
 
 -- Creates plain CT_CONTROL UI control element
----@param parent any
----@param anchors any
----@param dims any
----@param hidden any
----@param name any
----@return table
+--@param parent any
+--@param anchors any
+--@param dims any
+--@param hidden any
+--@param name any
+--@return table
 function UI.Control(parent, anchors, dims, hidden, name)
     if not parent then
         return
@@ -85,13 +85,13 @@ function UI.Control(parent, anchors, dims, hidden, name)
 end
 
 -- Creates CT_TEXTURE UI control element
----@param parent any
----@param anchors any
----@param dims any
----@param texture any
----@param drawlayer any
----@param hidden any
----@return table
+--@param parent any
+--@param anchors any
+--@param dims any
+--@param texture any
+--@param drawlayer any
+--@param hidden any
+--@return table
 function UI.Texture(parent, anchors, dims, texture, drawlayer, hidden)
     if not parent then
         return
@@ -124,13 +124,13 @@ function UI.Texture(parent, anchors, dims, texture, drawlayer, hidden)
 end
 
 -- Creates CT_BACKDROP UI control element
----@param parent any
----@param anchors any
----@param dims any
----@param center any
----@param edge any
----@param hidden any
----@return table
+--@param parent any
+--@param anchors any
+--@param dims any
+--@param center any
+--@param edge any
+--@param hidden any
+--@return table
 function UI.Backdrop(parent, anchors, dims, center, edge, hidden)
     if not parent then
         return
@@ -157,13 +157,13 @@ function UI.Backdrop(parent, anchors, dims, center, edge, hidden)
 end
 
 -- Creates CT_BACKDROP UI control element with Chat Window background style
----@param parent any
----@param anchors any
----@param dims any
----@param color any
----@param edge_size any
----@param hidden any
----@return table
+--@param parent any
+--@param anchors any
+--@param dims any
+--@param color any
+--@param edge_size any
+--@param hidden any
+--@return table
 function UI.ChatBackdrop(parent, anchors, dims, color, edge_size, hidden)
     if not parent then
         return
@@ -192,12 +192,12 @@ function UI.ChatBackdrop(parent, anchors, dims, color, edge_size, hidden)
 end
 
 -- Creates CT_STATUSBAR UI control element
----@param parent any
----@param anchors any
----@param dims any
----@param color any
----@param hidden any
----@return table
+--@param parent any
+--@param anchors any
+--@param dims any
+--@param color any
+--@param hidden any
+--@return table
 function UI.StatusBar(parent, anchors, dims, color, hidden)
     if not parent then
         return
@@ -226,15 +226,15 @@ function UI.StatusBar(parent, anchors, dims, color, hidden)
 end
 
 -- Creates CT_STATUSBAR UI control element
----@param parent any
----@param anchors any
----@param dims any
----@param align any
----@param font any
----@param text any
----@param hidden any
----@param name any
----@return table
+--@param parent any
+--@param anchors any
+--@param dims any
+--@param align any
+--@param font any
+--@param text any
+--@param hidden any
+--@param name any
+--@return table
 function UI.Label(parent, anchors, dims, align, font, text, hidden, name)
     if not parent then
         return
