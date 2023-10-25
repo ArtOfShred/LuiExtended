@@ -1273,53 +1273,71 @@ function LUIE.InitializeHooks()
         self.masterList = {}
 
         for bonusType, info in ipairs(BONUS_SECTION_DATA) do
-            local data = {
+            local infoData = info.infoData
+            if type(info.infoData) == "function" then
+                infoData = info.infoData(self.campaignId)
+            end
+
+            local infoText = ""
+            if infoData then
+                infoText = GetFormattedBonusString(infoData)
+            end
+
+            local detailsText = info.detailsText
+            if type(info.detailsText) == "function" then
+                detailsText = info.detailsText(self.campaignId)
+            end
+
+            local headerData =
+            {
                 isHeader = true,
                 headerString = info.headerText,
-                infoString = type(info.infoText) == "function" and info.infoText(self.campaignId) or info.infoText,
+                infoString = infoText,
+                detailsString = detailsText or "",
                 bonusType = bonusType,
             }
 
-            self.masterList[#self.masterList + 1] = data
+            self.masterList[#self.masterList + 1] = headerData
 
-            local count = type(info.count) == "function" and info.count(self.campaignId) or info.count
             local startIndex = info.startIndex or 1
             local score = info.scoreFunction(self.campaignId)
+            local index = score and score ~= 0 and score + startIndex - 1 or startIndex
+            -- Code only supports 10 bonuses even though the player's alliance could have acquired up to 12 keeps
+            -- so cap the keep index to the max count allowed by the bonus data info
+            local count = type(info.count) == "function" and info.count(self.campaignId) or info.count
+            index = zo_min(index, count)
+            local scoreIndex = index - startIndex + 1
+            local countText = scoreIndex
+            local abilityId = info.abilityFunction(index, self.campaignId)
+            local name = GetAbilityName(abilityId)
+            local icon = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon) and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon or GetAbilityIcon(abilityId) -- Get Updated LUIE AbilityIcon here
+            local description = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltip) and LUIE.Data.Effects.EffectOverride[abilityId].tooltip or GetAbilityDescription(abilityId)
 
-            for i = startIndex, count do
-                local abilityId = info.abilityFunction(i)
-                local name = GetAbilityName(abilityId)
-                local overrideRank = nil
-                local casterUnitTag = "player"
-                local icon = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon) and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon or GetAbilityIcon(abilityId) -- Get Updated LUIE AbilityIcon here
-                local description = GetAbilityDescription(abilityId, overrideRank, casterUnitTag)
-
-                local scoreIndex = i - startIndex + 1
-                local countText = scoreIndex
-                if info.countText then
-                    if info.countText == HIDE_COUNT then
-                        countText = nil
-                    else
-                        countText = info.countText
-                    end
+            if info.countText then
+                if info.countText == HIDE_COUNT then
+                    countText = nil
+                else
+                    countText = info.countText
                 end
-
-                local data1 = {
-                    index = i,
-                    abilityId = abilityId, -- Add AbilityId here for LUIE functions
-                    isHeader = false,
-                    typeIcon = info.typeIcon,
-                    typeIconGamepad = info.typeIconGamepad,
-                    countText = countText,
-                    name = zo_strformat(SI_CAMPAIGN_BONUSES_ENTRY_ROW_FORMATTER, name),
-                    icon = icon,
-                    active = score and score >= scoreIndex,
-                    bonusType = bonusType,
-                    description = description,
-                }
-
-                self.masterList[#self.masterList + 1] = data1
             end
+
+            local data =
+            {
+                index = index,
+                isHeader = false,
+                typeIcon = info.typeIcon,
+                typeIconGamepad = info.typeIconGamepad,
+                countText = countText,
+                name = zo_strformat(SI_CAMPAIGN_BONUSES_ENTRY_ROW_FORMATTER, name),
+                icon = icon,
+                active = score and score >= scoreIndex,
+                bonusType = bonusType,
+                description = description,
+                infoData = infoData,
+                detailsText = detailsText or "",
+            }
+
+            self.masterList[#self.masterList + 1] = data
         end
 
         return self.masterList
