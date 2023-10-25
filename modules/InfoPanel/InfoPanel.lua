@@ -92,24 +92,6 @@ local uiBags = {
     },
 }
 
-local delayBuffer = {}
--- Delay Buffer
-local function DelayBuffer(key, buffer, currentTime)
-    if key == nil then
-        return
-    end
-    buffer = buffer or 10 -- Remove the duplicate local declaration
-    local now = currentTime or GetFrameTimeMilliseconds()
-    if delayBuffer[key] == nil then
-        delayBuffer[key] = now
-        return true -- For the first call of DelayBuffer, we should return true
-    end
-    local eval = (now - delayBuffer[key]) >= buffer
-    if eval then
-        delayBuffer[key] = now
-    end
-    return eval
-end
 local panelFragment
 
 function InfoPanel.SetDisplayOnMap()
