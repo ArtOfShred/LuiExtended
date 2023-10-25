@@ -268,14 +268,3 @@ function LUIE.UpdateMundusTooltipSyntax(abilityId, tooltipText)
     tooltipText = zo_strgsub(tooltipText, GetString(SI_LUIE_SKILL_MUNDUS_STRING), GetString(SI_LUIE_SKILL_DRINK_INCREASE))
     return tooltipText
 end
-
-function LUIE.SetMarker(...)
-    if LUIE.CombatInfo.SV.showMarker ~= true then
-        return
-    end
-
-    local LUIE_MARKER = "/LuiExtended/media/combatinfo/floatingicon/redarrow.dds"
-    local _
-    SetFloatingMarkerInfo(MAP_PIN_TYPE_AGGRO, LUIE.CombatInfo.SV.markerSize, LUIE_MARKER, _, _, _)
-    SetFloatingMarkerGlobalAlpha(1)
-end

@@ -43,7 +43,8 @@ CombatInfo.Defaults = {
     ShowTriggered = true,
     ProcEnableSound = true,
     ProcSoundName = "Death Recap Killing Blow",
-    showMarker =false,
+    showMarker = false,
+    markerSize = 26,
     ShowToggled = true,
     ShowToggledUltimate = true,
     BarShowLabel = true, -- Temp Disabled
@@ -351,20 +352,18 @@ local GAMEPAD_CONSTANTS = {
 local KEYBOARD_CONSTANTS = {
     abilitySlotOffsetX = 2,
     ultimateSlotOffsetX = 62,
-    quickslotOffsetXFromCompanionUltimate = 18,
-    quickslotOffsetXFromFirstSlot = 5,
-    backRowSlotOffsetY = -17,
-    backRowUltimateSlotOffsetY = -20,
-    anchor = ZO_Anchor:New(BOTTOM, GuiRoot, BOTTOM, 0, 0),
-    width = 483,
-    showNormalBindingTextOnUltimate = true,
-    showKeybindBG = true,
-    showWeaponSwapButton = true,
-    weaponSwapOffsetX = 59,
-    weaponSwapOffsetY = -4,
 }
 
+function CombatInfo.SetMarker(...)
+    if CombatInfo.SV.showMarker ~= true then
+        return
+    end
 
+    local LUIE_MARKER = "/LuiExtended/media/combatinfo/floatingicon/redarrow.dds"
+    local _
+    SetFloatingMarkerInfo(MAP_PIN_TYPE_AGGRO, CombatInfo.SV.markerSize, LUIE_MARKER, _, _, _)
+    SetFloatingMarkerGlobalAlpha(1)
+end
 
 local slotsUpdated = {}
 
@@ -422,7 +421,7 @@ function CombatInfo.Initialize(enabled)
     -- if CombatInfo.SV.BarShowLabel == true then
     -- CombatInfo.SV.BarShowLabel = false
     -- end
-
+    CombatInfo.SetMarker()
     CombatInfo.ApplyFont()
     CombatInfo.ApplyProcSound()
 

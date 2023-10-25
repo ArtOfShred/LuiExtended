@@ -639,7 +639,6 @@ function CombatInfo.CreateSettings()
                     return not (LUIE.SV.CombatInfo_Enabled and Settings.BarShowLabel and Settings.BarMillis and (Settings.ShowTriggered or Settings.ShowToggled))
                 end,
             },
-            --============[	Enemy Markers	]=======================
             { type = "description", title = "[ |cffdf80Enemy Markers|r ]", text = "yes.. I completely stole this from Untaunted.", width = "full" },
             {
                 type = "checkbox",
@@ -657,7 +656,7 @@ function CombatInfo.CreateSettings()
             {
                 type = "slider",
                 name = "Enemy Marker Size",
-                default = 30,
+                default = Settings.markerSize,
                 min = 10,
                 max = 90,
                 getFunc = function()
@@ -665,11 +664,10 @@ function CombatInfo.CreateSettings()
                 end,
                 setFunc = function(value)
                     Settings.markerSize = value
-                    LUIE.SetMarker(value)
+                    CombatInfo.SetMarker(value)
                 end,
                 width = "half",
             },
-            { type = "divider" },
 
             {
                 type = "divider",
