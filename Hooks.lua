@@ -1537,6 +1537,7 @@ function LUIE.InitializeHooks()
                 local levelHeaderText = zo_strformat(SI_KEEP_UPGRADE_LEVEL_SECTION_HEADER, currentLevel)
                 for i = 1, numUpgrades do
                     local name, description, icon, atPercent, isActive = self.keepUpgradeObject:GetLevelUpgradeInfo(currentLevel, i)
+
                     -- Override with custom icons here.
                     if LUIE.Data.Effects.KeepUpgradeOverride[name] then
                         icon = LUIE.Data.Effects.KeepUpgradeOverride[name]
@@ -1582,10 +1583,11 @@ function LUIE.InitializeHooks()
         InitializeTooltip(KeepUpgradeTooltip, control, TOPLEFT, 5, 0)
 
         local data = control.dataEntry.data:GetDataSource()
+
+        -- Create a custom Tooltip matching the format of the default Keep Upgrade Tooltips
         local level = zo_strformat("<<1>> <<2>>", GetString(SI_ITEM_FORMAT_STR_LEVEL), data.level)
         local name = zo_strformat("<<1>>", data.name)
         local description = data.description
-
         KeepUpgradeTooltip:SetVerticalPadding(16)
         KeepUpgradeTooltip:AddLine(name, "ZoFontHeader3", 1, 1, 1, nil, MODIFY_TEXT_TYPE_UPPERCASE, TEXT_ALIGN_CENTER)
         KeepUpgradeTooltip:SetVerticalPadding(0)
