@@ -43,6 +43,7 @@ CombatInfo.Defaults = {
     ShowTriggered = true,
     ProcEnableSound = true,
     ProcSoundName = "Death Recap Killing Blow",
+    showMarker =false,
     ShowToggled = true,
     ShowToggledUltimate = true,
     BarShowLabel = true, -- Temp Disabled
@@ -303,7 +304,7 @@ local g_castbarFont -- Font for Castbar Label & Timer
 local g_ProcSound -- Proc Sound
 local g_boundArmamentsPlayed = false -- Specific variable to lockout Bound Armaments/Grim Focus from playing a proc sound at 5 stacks to only once per 5 seconds.
 local g_disableProcSound = {} -- When we play a proc sound from a bar ability changing (like power lash) we put a 3 sec ICD on it so it doesn't spam when mousing on/off a target, etc
-local g_hotbarCategory = GetActiveHotbarCategory() -- Set on initialization and when we swap weapons to determine the current hotbar category
+local g_hotbarCategory = {} -- Set on initialization and when we swap weapons to determine the current hotbar category
 local g_backbarButtons = {} -- Table to hold backbar buttons
 local g_activeWeaponSwapInProgress = false -- Toggled on when weapon swapping, TODO: maybe not needed
 local g_castbarWorldMapFix = false -- Fix for viewing the World Map changing the player coordinates for some reason
@@ -350,7 +351,20 @@ local GAMEPAD_CONSTANTS = {
 local KEYBOARD_CONSTANTS = {
     abilitySlotOffsetX = 2,
     ultimateSlotOffsetX = 62,
+    quickslotOffsetXFromCompanionUltimate = 18,
+    quickslotOffsetXFromFirstSlot = 5,
+    backRowSlotOffsetY = -17,
+    backRowUltimateSlotOffsetY = -20,
+    anchor = ZO_Anchor:New(BOTTOM, GuiRoot, BOTTOM, 0, 0),
+    width = 483,
+    showNormalBindingTextOnUltimate = true,
+    showKeybindBG = true,
+    showWeaponSwapButton = true,
+    weaponSwapOffsetX = 59,
+    weaponSwapOffsetY = -4,
 }
+
+
 
 local slotsUpdated = {}
 
@@ -540,16 +554,17 @@ function CombatInfo.SetupBackBarIcons(button, flip)
 end
 
 function CombatInfo.handleFlip(slotNum)
-    local desaturate
-    if g_uiCustomToggle[slotNum] then
+    local desaturate = true
+
+    if g_uiCustomToggle and g_uiCustomToggle[slotNum] then
         desaturate = false
+
         if g_uiCustomToggle[slotNum]:IsHidden() then
             CombatInfo.BackbarHideSlot(slotNum)
             desaturate = true
         end
-    else
-        desaturate = true
     end
+
     CombatInfo.ToggleBackbarSaturation(slotNum, desaturate)
 end
 
