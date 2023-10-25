@@ -4961,9 +4961,10 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
             [ITEMTYPE_WOODWORKING_BOOSTER] = true,
             [ITEMTYPE_WOODWORKING_MATERIAL] = true,
             [ITEMTYPE_WOODWORKING_RAW_MATERIAL] = true,
+            [ITEMTYPE_FISH] = true,
         }
 
-        if (craftingType == CRAFTING_TYPE_BLACKSMITHING or craftingType == CRAFTING_TYPE_CLOTHIER or craftingType == CRAFTING_TYPE_WOODWORKING or craftingType == CRAFTING_TYPE_JEWELRYCRAFTING) and smithingMode == 4 then
+        if (craftingType == CRAFTING_TYPE_BLACKSMITHING or craftingType == CRAFTING_TYPE_CLOTHIER or craftingType == CRAFTING_TYPE_WOODWORKING or craftingType == CRAFTING_TYPE_PROVISIONING or craftingType == CRAFTING_TYPE_JEWELRYCRAFTING) and smithingMode == 4 then
             return validItemTypes[itemType] or false
         end
     end
