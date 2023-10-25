@@ -3307,9 +3307,9 @@ function ChatAnnouncements.OnMailSuccess(eventCode)
     end
 
     g_mailCODPresent = false
-    g_mailCOD = 0
-    g_postageAmount = 0
-    g_mailAmount = 0
+    g_mailCOD = {}
+    g_postageAmount = {}
+    g_mailAmount = {}
     g_mailStacksOut = {}
 end
 

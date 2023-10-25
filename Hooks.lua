@@ -813,6 +813,7 @@ function LUIE.InitializeHooks()
 
     -- Used to update Tooltips for Active Effects Window
     local function TooltipBottomLine(control, detailsLine)
+        local artificial
         -- Add bottom divider and info if present:
         if LUIE.SpellCastBuffs.SV.TooltipAbilityId or LUIE.SpellCastBuffs.SV.TooltipBuffType then
             ZO_Tooltip_AddDivider(GameTooltip)
@@ -1209,8 +1210,6 @@ function LUIE.InitializeHooks()
         return 0
     end
 
-    local HIDE_COUNT = 0
-
     local BONUS_SECTION_DATA =
     {
         [ZO_CAMPAIGN_BONUS_TYPE_HOME_KEEPS] =
@@ -1414,6 +1413,7 @@ function LUIE.InitializeHooks()
     end
 
     -- Hook Campaign Bonuses Manager (we add abilityId, name, and the description to the control to carry over to the OnMouseEnter tooltip function)
+---@diagnostic disable-next-line: duplicate-set-field
     function ZO_CampaignBonusesManager:SetupBonusesEntry(control, data)
         ZO_SortFilterList.SetupRow(self, control, data)
 
