@@ -16631,7 +16631,12 @@ LUIE.DebugAuras = {
     -------------------------------------
 
     [109844] = true, -- Reach
-    [39671] = true, -- Emperorship Alliance Bonus
+    [39671] = true, -- Emperorship Alliance Bonus I
+    --[182782] = true, -- Emperorship Alliance Bonus II
+    --[182783] = true, -- Emperorship Alliance Bonus III
+    --[182784] = true, -- Emperorship Alliance Bonus IV
+    --[182785] = true, -- Emperorship Alliance Bonus V
+    --[182786] = true, -- Emperorship Alliance Bonus VI
     [11346] = true, -- Home Keep Bonus
     [11341] = true, -- Enemy Keep Bonus I
     [11343] = true, -- Enemy Keep Bonus II
