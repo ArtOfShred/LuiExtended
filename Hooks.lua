@@ -1077,13 +1077,26 @@ function LUIE.InitializeHooks()
     end
 
     -- Hook campaign screen to fix icons
-    local function GetHomeKeepBonusString(campaignId)
+    local function GetFormattedBonusString(data)
+        if data and data.stringId then
+            if data.value then
+                return zo_strformat(SI_CAMPAIGN_BONUSES_INFO_FORMATTER, GetString(data.stringId), ZO_SELECTED_TEXT:Colorize(data.value))
+            else
+                return GetString(data.stringId)
+            end
+        end
+        return ""
+    end
+
+    local function GetHomeKeepBonusData(campaignId)
+        local data = {}
         local allHomeKeepsHeld = GetAvAKeepScore(campaignId, GetUnitAlliance("player"))
         if allHomeKeepsHeld then
-            return GetString(SI_CAMPAIGN_BONUSES_HOME_KEEP_PASS_INFO)
+            data.stringId = SI_CAMPAIGN_BONUSES_HOME_KEEP_PASS_INFO
         else
-            return GetString(SI_CAMPAIGN_BONUSES_HOME_KEEP_FAIL_INFO)
+            data.stringId = SI_CAMPAIGN_BONUSES_HOME_KEEP_FAIL_INFO
         end
+        return data
     end
 
     local function GetHomeKeepBonusScore(campaignId)
@@ -1091,9 +1104,14 @@ function LUIE.InitializeHooks()
         return allHomeKeepsHeld and 1 or 0
     end
 
-    local function GetKeepBonusString(campaignId)
+    local function GetKeepBonusData(campaignId)
         local _, enemyKeepsHeld = GetAvAKeepScore(campaignId, GetUnitAlliance("player"))
-        return zo_strformat(SI_CAMPAIGN_BONUSES_ENEMY_KEEP_INFO, enemyKeepsHeld)
+        local data =
+        {
+            stringId = SI_CAMPAIGN_BONUSES_ENEMY_KEEP_INFO,
+            value = enemyKeepsHeld,
+        }
+        return data
     end
 
     local function GetKeepBonusScore(campaignId)
@@ -1105,13 +1123,23 @@ function LUIE.InitializeHooks()
         return select(5, GetAvAKeepScore(campaignId, GetUnitAlliance("player")))
     end
 
-    local function GetEdgeKeepBonusString(campaignId)
-        return zo_strformat(SI_CAMPAIGN_BONUSES_EDGE_KEEP_INFO, GetEdgeKeepBonusScore(campaignId))
+    local function GetEdgeKeepBonusData(campaignId)
+        local data =
+        {
+            stringId = SI_CAMPAIGN_BONUSES_EDGE_KEEP_INFO,
+            value = GetEdgeKeepBonusScore(campaignId),
+        }
+        return data
     end
 
-    local function GetDefensiveBonusString(campaignId)
+    local function GetDefensiveBonusData(campaignId)
         local _, enemyScrollsHeld = GetAvAArtifactScore(campaignId, GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_DEFENSIVE)
-        return zo_strformat(SI_CAMPAIGN_BONUSES_ENEMY_SCROLL_INFO, enemyScrollsHeld)
+        local data =
+        {
+            stringId = SI_CAMPAIGN_BONUSES_ENEMY_SCROLL_INFO,
+            value = enemyScrollsHeld,
+        }
+        return data
     end
 
     local function GetDefensiveBonusCount()
@@ -1127,9 +1155,14 @@ function LUIE.InitializeHooks()
         return allHomeScrollsHeld and enemyScrollsHeld or 0
     end
 
-    local function GetOffensiveBonusString(campaignId)
+    local function GetOffensiveBonusData(campaignId)
         local _, enemyScrollsHeld = GetAvAArtifactScore(campaignId, GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_OFFENSIVE)
-        return zo_strformat(SI_CAMPAIGN_BONUSES_ENEMY_SCROLL_INFO, enemyScrollsHeld)
+        local data =
+        {
+            stringId = SI_CAMPAIGN_BONUSES_ENEMY_SCROLL_INFO,
+            value = enemyScrollsHeld,
+        }
+        return data
     end
 
     local function GetOffensiveBonusCount()
@@ -1145,21 +1178,24 @@ function LUIE.InitializeHooks()
         return allHomeScrollsHeld and enemyScrollsHeld or 0
     end
 
-    local function GetEmperorBonusString(campaignId)
+    local function GetEmperorBonusData(campaignId)
+        local data = {}
         if DoesCampaignHaveEmperor(campaignId) then
             local alliance = GetCampaignEmperorInfo(campaignId)
             if alliance == GetUnitAlliance("player") then
-                return GetString(SI_CAMPAIGN_BONUSES_EMPEROR_PASS_INFO)
+                data.stringId = SI_CAMPAIGN_BONUSES_EMPEROR_PASS_INFO
             else
-                return GetString(SI_CAMPAIGN_BONUSES_EMPEROR_FAIL_INFO)
+                data.stringId = SI_CAMPAIGN_BONUSES_EMPEROR_FAIL_INFO
             end
         else
-            return GetString(SI_CAMPAIGN_BONUSES_EMPEROR_NONE_INFO)
+            data.stringId = SI_CAMPAIGN_BONUSES_EMPEROR_NONE_INFO
         end
+        return data
     end
 
-    local function GetEmperorBonusAbilityId(campaignId)
-        return GetEmperorAllianceBonusAbilityId(campaignId)
+    local function GetEmperorBonusAbilityId(index, campaignId)
+        local emperorBonusRank = ZO_CampaignBonuses_GetEmperorBonusRank(campaignId)
+        return GetEmperorAllianceBonusAbilityId(emperorBonusRank)
     end
 
     local function GetEmperorBonusScore(campaignId)
@@ -1173,67 +1209,79 @@ function LUIE.InitializeHooks()
         return 0
     end
 
-    local BONUS_SECTION_DATA = {
-        [ZO_CAMPAIGN_BONUS_TYPE_HOME_KEEPS] = {
+    local HIDE_COUNT = 0
+
+    local BONUS_SECTION_DATA =
+    {
+        [ZO_CAMPAIGN_BONUS_TYPE_HOME_KEEPS] =
+        {
             typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
             typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
             headerText = GetString(SI_CAMPAIGN_BONUSES_HOME_KEEP_HEADER),
-            infoText = GetHomeKeepBonusString,
+            infoData = GetHomeKeepBonusData,
             count = 1,
             countText = GetString(SI_CAMPAIGN_BONUSES_HOME_KEEP_ALL),
             abilityFunction = GetKeepScoreBonusAbilityId,
             scoreFunction = GetHomeKeepBonusScore,
         },
-        [ZO_CAMPAIGN_BONUS_TYPE_ENEMY_KEEPS] = {
-            typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
-            typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
-            headerText = GetString(SI_CAMPAIGN_BONUSES_ENEMY_KEEP_HEADER),
-            infoText = GetKeepBonusString,
-            count = GetNumKeepScoreBonuses,
-            startIndex = 2,
-            abilityFunction = GetKeepScoreBonusAbilityId,
-            scoreFunction = GetKeepBonusScore,
-        },
-        [ZO_CAMPAIGN_BONUS_TYPE_DEFENSIVE_SCROLLS] = {
-            typeIcon = "EsoUI/Art/Campaign/campaignBonus_scrollIcon.dds",
-            typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_scrolls.dds",
-            headerText = GetString(SI_CAMPAIGN_BONUSES_DEFENSIVE_SCROLL_HEADER),
-            infoText = GetDefensiveBonusString,
-            count = GetDefensiveBonusCount,
-            abilityFunction = GetDefensiveBonusAbilityId,
-            scoreFunction = GetDefensiveBonusScore,
-        },
-        [ZO_CAMPAIGN_BONUS_TYPE_OFFENSIVE_SCROLLS] = {
-            typeIcon = "EsoUI/Art/Campaign/campaignBonus_scrollIcon.dds",
-            typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_scrolls.dds",
-            headerText = GetString(SI_CAMPAIGN_BONUSES_OFFENSIVE_SCROLL_HEADER),
-            infoText = GetOffensiveBonusString,
-            count = GetOffensiveBonusCount,
-            abilityFunction = GetOffensiveBonusAbilityId,
-            scoreFunction = GetOffensiveBonusScore,
-        },
-        [ZO_CAMPAIGN_BONUS_TYPE_EMPEROR] = {
-            typeIcon = "EsoUI/Art/Campaign/campaignBonus_emporershipIcon.dds",
+        [ZO_CAMPAIGN_BONUS_TYPE_EMPEROR] =
+        {
+            typeIcon = "EsoUI/Art/Campaign/campaignBonus_emperorshipIcon.dds",
             typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_emperor.dds",
             headerText = GetString(SI_CAMPAIGN_BONUSES_EMPERORSHIP_HEADER),
-            infoText = GetEmperorBonusString,
+            infoData = GetEmperorBonusData,
             count = 1,
             countText = HIDE_COUNT,
             abilityFunction = GetEmperorBonusAbilityId,
             scoreFunction = GetEmperorBonusScore,
         },
-        [ZO_CAMPAIGN_BONUS_TYPE_EDGE_KEEPS] = {
+        [ZO_CAMPAIGN_BONUS_TYPE_ENEMY_KEEPS] =
+        {
+            typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
+            typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
+            headerText = GetString(SI_CAMPAIGN_BONUSES_ENEMY_KEEP_HEADER),
+            infoData = GetKeepBonusData,
+            detailsText = GetString(SI_CAMPAIGN_BONUSES_KEEP_REQUIRE_HOME_KEEP),
+            count = GetNumKeepScoreBonuses,
+            startIndex = 2,
+            abilityFunction = GetKeepScoreBonusAbilityId,
+            scoreFunction = GetKeepBonusScore,
+        },
+        [ZO_CAMPAIGN_BONUS_TYPE_DEFENSIVE_SCROLLS] =
+        {
+            typeIcon = "EsoUI/Art/Campaign/campaignBonus_scrollIcon.dds",
+            typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_scrolls.dds",
+            headerText = GetString(SI_CAMPAIGN_BONUSES_DEFENSIVE_SCROLL_HEADER),
+            infoData = GetDefensiveBonusData,
+            detailsText = GetString(SI_CAMPAIGN_BONUSES_KEEP_REQUIRE_HOME_SCROLLS),
+            count = GetDefensiveBonusCount,
+            abilityFunction = GetDefensiveBonusAbilityId,
+            scoreFunction = GetDefensiveBonusScore,
+        },
+        [ZO_CAMPAIGN_BONUS_TYPE_OFFENSIVE_SCROLLS] =
+        {
+            typeIcon = "EsoUI/Art/Campaign/campaignBonus_scrollIcon.dds",
+            typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_scrolls.dds",
+            headerText = GetString(SI_CAMPAIGN_BONUSES_OFFENSIVE_SCROLL_HEADER),
+            infoData = GetOffensiveBonusData,
+            detailsText = GetString(SI_CAMPAIGN_BONUSES_KEEP_REQUIRE_HOME_SCROLLS),
+            count = GetOffensiveBonusCount,
+            abilityFunction = GetOffensiveBonusAbilityId,
+            scoreFunction = GetOffensiveBonusScore,
+        },
+        [ZO_CAMPAIGN_BONUS_TYPE_EDGE_KEEPS] =
+        {
             typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
             typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
             headerText = GetString(SI_CAMPAIGN_BONUSES_EDGE_KEEP_HEADER),
-            infoText = GetEdgeKeepBonusString,
+            infoData = GetEdgeKeepBonusData,
             count = GetNumEdgeKeepBonuses,
             abilityFunction = GetEdgeKeepBonusAbilityId,
             scoreFunction = GetEdgeKeepBonusScore,
         },
     }
 
-    -- Hook Campaign Bonuses functions
+    -- Hook Campaign Bonuses Data Table
     ---@diagnostic disable-next-line: duplicate-set-field
     ZO_CampaignBonuses_Shared.CreateDataTable = function(self, header)
         self:BuildMasterList()
@@ -1267,7 +1315,7 @@ function LUIE.InitializeHooks()
         end
     end
 
-    -- Hook Campaign Bonuses functions
+    -- Hook Campaign Bonuses Build Master List
     ---@diagnostic disable-next-line: duplicate-set-field
     ZO_CampaignBonuses_Shared.BuildMasterList = function(self)
         self.masterList = {}
@@ -1311,7 +1359,7 @@ function LUIE.InitializeHooks()
             local abilityId = info.abilityFunction(index, self.campaignId)
             local name = GetAbilityName(abilityId)
             local icon = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon) and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon or GetAbilityIcon(abilityId) -- Get Updated LUIE AbilityIcon here
-            local description = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltip) and LUIE.Data.Effects.EffectOverride[abilityId].tooltip or GetAbilityDescription(abilityId)
+            local description = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltip) and LUIE.Data.Effects.EffectOverride[abilityId].tooltip or GetAbilityDescription(abilityId) -- Get Updated LUIE Tooltip here
 
             if info.countText then
                 if info.countText == HIDE_COUNT then
@@ -1343,7 +1391,7 @@ function LUIE.InitializeHooks()
         return self.masterList
     end
 
-    -- Hook Gamepad Campaign Bonuses tooltip
+    -- Hook Gamepad Campaign Bonuses Tooltip
     CAMPAIGN_BONUSES_GAMEPAD.UpdateToolTip = function(self)
         GAMEPAD_TOOLTIPS:ClearLines(GAMEPAD_RIGHT_TOOLTIP)
         if self.abilityList:IsActive() then
@@ -1365,20 +1413,20 @@ function LUIE.InitializeHooks()
         self:SetTooltipHidden(true)
     end
 
-    -- Hook Campaign Bonuses
-    CAMPAIGN_BONUSES.SetupBonusesEntry = function(self, control, data)
+    -- Hook Campaign Bonuses Manager (we add abilityId, name, and the description to the control to carry over to the OnMouseEnter tooltip function)
+    function ZO_CampaignBonusesManager:SetupBonusesEntry(control, data)
         ZO_SortFilterList.SetupRow(self, control, data)
 
-        control.typeIcon = GetControl(control, "TypeIcon")
-        control.count = GetControl(control, "Count")
-        control.ability = GetControl(control, "Ability")
-        control.icon = GetControl(control.ability, "Icon")
-        control.nameLabel = GetControl(control, "Name")
+        control.typeIcon = control:GetNamedChild("TypeIcon")
+        control.count = control:GetNamedChild("Count")
+        control.ability = control:GetNamedChild("Ability")
+        control.icon = control.ability:GetNamedChild("Icon")
+        control.nameLabel = control:GetNamedChild("Name")
         control.ability.index = data.index
         control.ability.bonusType = data.bonusType
-        control.ability.abilityId = data.abilityId -- Add AbilityId here
-        control.ability.name = data.name -- Add AbilityName here
-        control.ability.description = data.description -- Add tooltip here
+        control.ability.abilityId = data.abilityId -- Add AbilityId here to carry over to OnMouseEnter tooltip function
+        control.ability.name = data.name -- Add AbilityName here to carry over to OnMouseEnter tooltip function
+        control.ability.description = data.description -- Add Tooltip here to carry over to OnMouseEnter tooltip function
 
         control.ability:SetEnabled(data.active)
         ZO_ActionSlot_SetUnusable(control.icon, not data.active)
@@ -1394,17 +1442,78 @@ function LUIE.InitializeHooks()
         control.icon:SetTexture(data.icon)
     end
 
+    -- Generates extra lines for the Tooltips to show if the criteria for activating the passive is met (matches base functionality)
+    local function KeepTooltipExtra(bonusType, tooltip)
+        -- Get Campaign ID
+        local campaignId = GetCurrentCampaignId()
+        -- Local fields
+        local r1, b1, g1
+        local r2, b2, g2
+        local tooltipLine2
+        local tooltipLine3
+        local showLine3
+
+        -- Set text color
+        local function SetAVATooltipColor(criteriaMet)
+            local color = criteriaMet and ZO_SUCCEEDED_TEXT or ZO_ERROR_COLOR
+            local r, g, b = color:UnpackRGB()
+            return r, g, b
+        end
+
+        -- Check Defensive Scroll Bonuses
+        local function DefensiveScrolls(campaignId)
+            local allHomeScrollsHeld, enemyScrollsHeld = GetAvAArtifactScore(campaignId, GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_DEFENSIVE)
+            return allHomeScrollsHeld, enemyScrollsHeld
+        end
+
+        -- Check Offensive Scroll Bonuses
+        local function OffensiveScrolls(campaignId)
+            local allHomeScrollsHeld, enemyScrollsHeld = GetAvAArtifactScore(campaignId, GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_OFFENSIVE)
+            return allHomeScrollsHeld, enemyScrollsHeld
+        end
+
+        -- Conditional handling
+        if bonusType == ZO_CAMPAIGN_BONUS_TYPE_DEFENSIVE_SCROLLS then
+            tooltipLine2 = GetString(SI_CAMPAIGN_BONUSES_TOOLTIP_REQUIRES_DEFENSIVE_SCROLL)
+            tooltipLine3 = GetString(SI_CAMPAIGN_BONUSES_TOOLTIP_REQUIRES_ALL_HOME_SCROLLS)
+            local allHomeScrollsHeld, enemyScrollsHeld = DefensiveScrolls(campaignId)
+            r1, b1, g1 = SetAVATooltipColor(enemyScrollsHeld > 0)
+            r2, b2, g2 = SetAVATooltipColor(allHomeScrollsHeld)
+            showLine3 = true
+        elseif bonusType == ZO_CAMPAIGN_BONUS_TYPE_OFFENSIVE_SCROLLS then
+            tooltipLine2 = GetString(SI_CAMPAIGN_BONUSES_TOOLTIP_REQUIRES_OFFENSIVE_SCROLL)
+            tooltipLine3 = GetString(SI_CAMPAIGN_BONUSES_TOOLTIP_REQUIRES_ALL_HOME_SCROLLS)
+            local allHomeScrollsHeld, enemyScrollsHeld = OffensiveScrolls(campaignId)
+            r1, b1, g1 = SetAVATooltipColor(enemyScrollsHeld > 0)
+            r2, b2, g2 = SetAVATooltipColor(allHomeScrollsHeld)
+            showLine3 = true
+        elseif bonusType == ZO_CAMPAIGN_BONUS_TYPE_EMPEROR then
+            tooltipLine2 = GetString(SI_CAMPAIGN_BONUSES_TOOLTIP_REQUIRES_EMPEROR_ALLIANCE)
+            local isEmperor = GetEmperorBonusScore(campaignId)
+            r1, b1, g1 = SetAVATooltipColor(isEmperor == 1)
+        elseif bonusType== ZO_CAMPAIGN_BONUS_TYPE_EDGE_KEEPS then
+            tooltipLine2 = GetString(SI_CAMPAIGN_BONUSES_TOOLTIP_REQUIRES_NUM_EDGE_KEEPS)
+            local edgeKeepBonus = GetEdgeKeepBonusScore(campaignId)
+            r1, b1, g1 = SetAVATooltipColor(edgeKeepBonus > 0)
+        else
+            tooltipLine2 = GetString(SI_CAMPAIGN_BONUSES_TOOLTIP_REQUIRES_ALL_HOME_KEEPS)
+            local allHomeKeepsHeld = GetHomeKeepBonusScore(campaignId)
+            r1, b1, g1 = SetAVATooltipColor(allHomeKeepsHeld > 0)
+        end
+
+        -- Display Tooltip
+        tooltip:AddLine(tooltipLine2, "", r1, b1, g1, nil, MODIFY_TEXT_TYPE_NONE, TEXT_ALIGN_CENTER)
+        if showLine3 then
+            tooltip:AddLine(tooltipLine3, "", r2, b2, g2, nil, MODIFY_TEXT_TYPE_NONE, TEXT_ALIGN_CENTER)
+        end
+    end
+
     -- Hook Campaign Bonuses Tooltip
     function ZO_CampaignBonuses_AbilitySlot_OnMouseEnter(control)
         local abilityId = control.abilityId
         local name = control.name
         local description = control.description
-
-        -- Replace tooltip
-        if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltip then
-            description = LUIE.Data.Effects.EffectOverride[abilityId].tooltip
-        end
-
+        -- Create a Tooltip matching the default Campaign Bonuses Tooltip
         InitializeTooltip(SkillTooltip, control, TOPLEFT, 5, -5, TOPRIGHT)
         SkillTooltip:SetVerticalPadding(16)
         SkillTooltip:AddLine(name, "ZoFontHeader3", 1, 1, 1, nil, MODIFY_TEXT_TYPE_UPPERCASE, TEXT_ALIGN_CENTER)
@@ -1413,6 +1522,8 @@ function LUIE.InitializeHooks()
         SkillTooltip:SetVerticalPadding(8)
         local r, b, g = ZO_NORMAL_TEXT:UnpackRGB()
         SkillTooltip:AddLine(description, "", r, b, g, nil, MODIFY_TEXT_TYPE_NONE, TEXT_ALIGN_CENTER)
+        -- Setup extra tooltip information
+        KeepTooltipExtra(control.bonusType, SkillTooltip)
     end
 
     -- Hook AVA Keep Upgrade
