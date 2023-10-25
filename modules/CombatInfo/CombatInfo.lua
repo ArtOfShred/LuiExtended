@@ -2020,18 +2020,7 @@ function CombatInfo.OnCombatEventBreakCast(eventCode, result, isError, abilityNa
 end
 
 local function isValidDamageResult(result)
-    if result == ACTION_RESULT_BLOCKED or
-    result == ACTION_RESULT_BLOCKED_DAMAGE or
-    result == ACTION_RESULT_CRITICAL_DAMAGE or
-    result == ACTION_RESULT_DAMAGE or
-    result == ACTION_RESULT_DAMAGE_SHIELDED or
-    result == ACTION_RESULT_IMMUNE or
-    result == ACTION_RESULT_MISS or
-    result == ACTION_RESULT_PARTIAL_RESIST or
-    result == ACTION_RESULT_REFLECTED or
-    result == ACTION_RESULT_RESIST or
-    result == ACTION_RESULT_WRECKING_DAMAGE or
-    result == ACTION_RESULT_DODGED then
+    if result == ACTION_RESULT_BLOCKED or result == ACTION_RESULT_BLOCKED_DAMAGE or result == ACTION_RESULT_CRITICAL_DAMAGE or result == ACTION_RESULT_DAMAGE or result == ACTION_RESULT_DAMAGE_SHIELDED or result == ACTION_RESULT_IMMUNE or result == ACTION_RESULT_MISS or result == ACTION_RESULT_PARTIAL_RESIST or result == ACTION_RESULT_REFLECTED or result == ACTION_RESULT_RESIST or result == ACTION_RESULT_WRECKING_DAMAGE or result == ACTION_RESULT_DODGED then
         return true
     end
 end
@@ -2544,7 +2533,7 @@ function CombatInfo.ShowCustomToggle(slotNum)
             actionButton = g_backbarButtons[slotNum]
         end
         local name = "ActionButton" .. slotNum .. "Toggle_LUIE"
-        local window = windowManager:GetControlByName(name) -- Check to see if this frame already exists, don't create it if it does.
+        local window = windowManager:GetControlByName(name, "") -- Check to see if this frame already exists, don't create it if it does.
         if window == nil then
             local toggleFrame = windowManager:CreateControl("$(parent)Toggle_LUIE", actionButton.slot, CT_TEXTURE)
             --toggleFrame.back = UI.Texture(toggleFrame, nil, nil, "/esoui/art/actionbar/actionslot_toggledon.dds")
