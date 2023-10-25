@@ -4176,10 +4176,8 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
     -- 3 = Gain no color, 4 = Loss no color (differentiation only exists for Crafting Strings)
     elseif gainOrLoss == 3 or gainOrLoss == 4 then
         color = CurrencyColorize:ToHex()
-    end
-
-    -- Error prevention, make sure color is always set.
-    if not color then
+    -- Fallback if gainOrLoss is nil or an invalid number for some reason
+    else
         color = CurrencyColorize:ToHex()
     end
 
@@ -4194,6 +4192,11 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
         formattedRecipient = ""
     else
         formattedRecipient = receivedBy
+    end
+
+    -- Error handling
+    if not formattedRecipient then
+        formattedRecipient = ""
     end
 
     if stack > 1 then
