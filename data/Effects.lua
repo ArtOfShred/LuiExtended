@@ -3393,57 +3393,25 @@ Effects.EffectOverride = {
 
     -- Craft
     [152360] = { hide = true }, -- Friends in Low Places
-    [151860] = {
-        icon = "LuiExtended/media/icons/abilities/ability_champion_craft_shadowstrike.dds",
-        tooltip = Tooltips.Champion_Shadowstrike,
-    }, -- Shadowstrike
+    [151860] = { icon = "LuiExtended/media/icons/abilities/ability_champion_craft_shadowstrike.dds", tooltip = Tooltips.Champion_Shadowstrike }, -- Shadowstrike
 
     -- Warfare
     [155981] = { icon = "LuiExtended/media/icons/abilities/ability_champion_warfare_salve_of_renewal.dds" }, -- Salve of Renewal
-    [156020] = {
-        icon = "LuiExtended/media/icons/abilities/ability_champion_warfare_from_the_brink.dds",
-        tooltip = Tooltips.Generic_Damage_Shield_Duration,
-    }, -- From the Brink
-    [156012] = {
-        icon = "LuiExtended/media/icons/abilities/ability_champion_warfare_enlivening_overflow.dds",
-        tooltip = Tooltips.Champion_Enlivening_Overflow,
-    }, -- Enlivening Overflow
-    [59530] = {
-        icon = "LuiExtended/media/icons/abilities/ability_champion_warfare_foresight.dds",
-        tooltip = Tooltips.Champion_Foresight,
-    }, -- Foresight
-    [60230] = {
-        icon = "LuiExtended/media/icons/abilities/ability_champion_warfare_riposte.dds",
-        tooltip = Tooltips.Champion_Riposte,
-    }, -- Riposte
-    [135653] = {
-        icon = "LuiExtended/media/icons/abilities/ability_champion_warfare_reinforced.dds",
-        tooltip = Tooltips.Generic_Damage_Shield_Duration,
-    }, -- Reinforced
+    [156020] = { icon = "LuiExtended/media/icons/abilities/ability_champion_warfare_from_the_brink.dds", tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- From the Brink
+    [156012] = { icon = "LuiExtended/media/icons/abilities/ability_champion_warfare_enlivening_overflow.dds", tooltip = Tooltips.Champion_Enlivening_Overflow }, -- Enlivening Overflow
+    [59530] = { icon = "LuiExtended/media/icons/abilities/ability_champion_warfare_foresight.dds", tooltip = Tooltips.Champion_Foresight }, -- Foresight
+    [60230] = { icon = "LuiExtended/media/icons/abilities/ability_champion_warfare_riposte.dds", tooltip = Tooltips.Champion_Riposte }, -- Riposte
+    [135653] = { icon = "LuiExtended/media/icons/abilities/ability_champion_warfare_reinforced.dds", tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Reinforced
     [142013] = { icon = "LuiExtended/media/icons/abilities/ability_champion_warfare_cutting_defense.dds" }, -- Cutting Defense
     [142008] = { icon = "LuiExtended/media/icons/abilities/ability_champion_warfare_reaving_blows.dds" }, -- Reaving Blows
     [142011] = { icon = "esoui/art/icons/ability_mage_013.dds" }, -- Occult Overload
 
     -- Fitness
-    [151113] = {
-        icon = "LuiExtended/media/icons/abilities/ability_champion_fitness_expert_evasion.dds",
-        name = zo_strformat("<<1>> <<2>>", Abilities.Champion_Expert_Evasion, Abilities.Set_Cooldown),
-        tooltip = Tooltips.Champion_Expert_Evasion,
-        type = BUFF_EFFECT_TYPE_DEBUFF,
-        unbreakable = 1,
-    }, -- Expert Evasion
+    [151113] = { icon = "LuiExtended/media/icons/abilities/ability_champion_fitness_expert_evasion.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Champion_Expert_Evasion, Abilities.Set_Cooldown), tooltip = Tooltips.Champion_Expert_Evasion, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Expert Evasion
     [141994] = { icon = "LuiExtended/media/icons/abilities/ability_champion_fitness_bloody_renewal.dds" }, -- Bloody Renewal
     [141992] = { icon = "LuiExtended/media/icons/abilities/ability_champion_fitness_siphoning_spells.dds" }, -- Siphoning Spells
-    [134254] = {
-        icon = "LuiExtended/media/icons/abilities/ability_champion_fitness_winded.dds",
-        tooltip = Tooltips.Champion_Winded,
-        type = BUFF_EFFECT_TYPE_DEBUFF,
-        unbreakable = 1,
-    }, -- Winded
-    [98316] = {
-        icon = "LuiExtended/media/icons/abilities/ability_champion_fitness_unchained.dds",
-        dynamicTooltip = true,
-    }, -- Unchained
+    [134254] = { icon = "LuiExtended/media/icons/abilities/ability_champion_fitness_winded.dds", tooltip = Tooltips.Champion_Winded, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Winded
+    [98316] = { icon = "LuiExtended/media/icons/abilities/ability_champion_fitness_unchained.dds", dynamicTooltip = true }, -- Unchained
     [160201] = { icon = "LuiExtended/media/icons/abilities/ability_champion_fitness_soothing_shield.dds" }, -- Soothing Shield
 
     ----------------------------------------------------------------
@@ -3464,138 +3432,58 @@ Effects.EffectOverride = {
     [46744] = { icon = "LuiExtended/media/icons/glyphs/glyph_absorb_magicka.dds" }, -- Absorb Magicka (Glyph of Absorb Magicka)
     [46746] = { icon = "LuiExtended/media/icons/glyphs/glyph_absorb_stamina.dds" }, -- Absorb Stamina (Glyph of Absorb Stamina)
     [46747] = { icon = "LuiExtended/media/icons/glyphs/glyph_absorb_stamina.dds" }, -- Absorb Stamina (Glyph of Absorb Stamina)
-    [17906] = {
-        icon = "LuiExtended/media/icons/glyphs/glyph_crushing.dds",
-        tooltip = Tooltips.Generic_Reduce_Physical_Spell_Resist,
-    }, -- Crusher (Glyph of Crushing)
+    [17906] = { icon = "LuiExtended/media/icons/glyphs/glyph_crushing.dds", tooltip = Tooltips.Generic_Reduce_Physical_Spell_Resist }, -- Crusher (Glyph of Crushing)
     [46749] = { icon = "LuiExtended/media/icons/glyphs/glyph_decrease_health.dds" }, -- Decrease Health (Glyph of Decrease Health)
     [17895] = { icon = "LuiExtended/media/icons/glyphs/glyph_flame.dds" }, -- Fiery Weapon (Glyph of Flame)
     [17904] = { icon = "LuiExtended/media/icons/glyphs/glyph_foulness.dds" }, -- Befouled Weapon (Glyph of Foulness)
     [17897] = { icon = "LuiExtended/media/icons/glyphs/glyph_frost.dds" }, -- Frozen Weapon (Glyph of Frost)
-    [21578] = {
-        icon = "LuiExtended/media/icons/glyphs/glyph_hardening.dds",
-        tooltip = Tooltips.Generic_Damage_Shield_Duration,
-    }, -- Hardening (Glyph of Hardening)
+    [21578] = { icon = "LuiExtended/media/icons/glyphs/glyph_hardening.dds", tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Hardening (Glyph of Hardening)
     [17902] = { icon = "LuiExtended/media/icons/glyphs/glyph_poison.dds" }, -- Poisoned Weapon (Glyph of Poison)
     [40337] = { icon = "LuiExtended/media/icons/glyphs/glyph_prismatic.dds" }, -- Primatic Weapon (Glyph of Prismatic Onslaught)
     [17899] = { icon = "LuiExtended/media/icons/glyphs/glyph_shock.dds" }, -- Charged Weapon (Glyph of Shock)
-    [17945] = {
-        icon = "LuiExtended/media/icons/glyphs/glyph_weakening.dds",
-        type = BUFF_EFFECT_TYPE_DEBUFF,
-        tooltip = Tooltips.Item_Glyph_of_Weakening,
-    }, -- Weakening (Glyph of Weakening)
-    [21230] = {
-        icon = "LuiExtended/media/icons/glyphs/glyph_weapon_damage.dds",
-        name = Abilities.Item_Glyph_of_Weapon_Damage,
-        tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration,
-    }, -- Berserker (Glyph of Weapon Damage) (Added in case ever needed)
+    [17945] = { icon = "LuiExtended/media/icons/glyphs/glyph_weakening.dds", type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = Tooltips.Item_Glyph_of_Weakening }, -- Weakening (Glyph of Weakening)
+    [21230] = { icon = "LuiExtended/media/icons/glyphs/glyph_weapon_damage.dds", name = Abilities.Item_Glyph_of_Weapon_Damage, tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration }, -- Berserker (Glyph of Weapon Damage) (Added in case ever needed)
 
     ----------------------------------------------------------------
     -- POTIONS
     ----------------------------------------------------------------
 
     -- Crafted Potions (2 Traits)
-    [64564] = {
-        icon = "LuiExtended/media/icons/potions/potion_007.dds",
-        tooltip = Tooltips.Skill_Physical_Resistance_Potion,
-    }, -- of Armor (Physical Resistance Potion)
-    [79709] = {
-        icon = "LuiExtended/media/icons/potions/potion_014r.dds",
-        tooltip = Tooltips.Generic_Gradual_Ravage_Health_Potion,
-    }, -- of Creeping Ravage Health (Creeping Ravage Health)
-    [45236] = {
-        icon = "LuiExtended/media/icons/abilities/ability_buff_detection.dds",
-        tooltip = Tooltips.Generic_Detection,
-    }, -- of Detection (Increase Detection)
+    [64564] = { icon = "LuiExtended/media/icons/potions/potion_007.dds", tooltip = Tooltips.Skill_Physical_Resistance_Potion }, -- of Armor (Physical Resistance Potion)
+    [79709] = { icon = "LuiExtended/media/icons/potions/potion_014r.dds", tooltip = Tooltips.Generic_Gradual_Ravage_Health_Potion }, -- of Creeping Ravage Health (Creeping Ravage Health)
+    [45236] = { icon = "LuiExtended/media/icons/abilities/ability_buff_detection.dds", tooltip = Tooltips.Generic_Detection }, -- of Detection (Increase Detection)
     [45221] = { icon = "LuiExtended/media/icons/potions/potion_001.dds" }, -- .. of Health (Restore Health)
-    [45237] = {
-        icon = "LuiExtended/media/icons/potions/potion_011.dds",
-        name = Abilities.Potion_Invisiblity,
-        tooltip = Tooltips.Generic_Invisibility,
-    }, -- of Invisibility (Vanish)
-    [79705] = {
-        icon = "LuiExtended/media/icons/potions/potion_014.dds",
-        tooltip = Tooltips.Generic_HoT,
-        tooltipValue2 = 1,
-    }, -- of Lingering Health (Lingering Restore Health)
+    [45237] = { icon = "LuiExtended/media/icons/potions/potion_011.dds", name = Abilities.Potion_Invisiblity, tooltip = Tooltips.Generic_Invisibility }, -- of Invisibility (Vanish)
+    [79705] = { icon = "LuiExtended/media/icons/potions/potion_014.dds", tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- of Lingering Health (Lingering Restore Health)
     [45223] = { icon = "LuiExtended/media/icons/potions/potion_002.dds" }, -- of Magicka (Restore Magicka)
     [46208] = { icon = "LuiExtended/media/icons/potions/potion_021.dds", tooltip = Tooltips.Skill_Ravage_Armor_Potion }, -- of Ravage Armor (Physical Resistance Reduction)
     [46111] = { icon = "LuiExtended/media/icons/potions/potion_015.dds" }, -- of Ravage Health (Ravage Health)
-    [46113] = {
-        icon = "LuiExtended/media/icons/potions/potion_015.dds",
-        name = Abilities.Potion_Ravage_Health,
-        tooltip = Tooltips.Generic_Ravage_Health_Potion,
-    }, -- of Ravage Health (Health Potion Poison)
-    [46193] = {
-        icon = "LuiExtended/media/icons/potions/potion_016.dds",
-        tooltip = Tooltips.Generic_Ravage_Magicka_Poison,
-    }, -- of Ravage Magicka (Ravage Magicka)
-    [46206] = {
-        icon = "LuiExtended/media/icons/potions/potion_018.dds",
-        tooltip = Tooltips.Skill_Ravage_Spell_Protection_Potion,
-    }, -- of Ravage Spell Protection (Spell Resistance Reduction)
-    [46199] = {
-        icon = "LuiExtended/media/icons/potions/potion_017.dds",
-        tooltip = Tooltips.Generic_Ravage_Stamina_Poison,
-    }, -- of Ravage Stamina (Ravage Stamina)
+    [46113] = { icon = "LuiExtended/media/icons/potions/potion_015.dds", name = Abilities.Potion_Ravage_Health, tooltip = Tooltips.Generic_Ravage_Health_Potion }, -- of Ravage Health (Health Potion Poison)
+    [46193] = { icon = "LuiExtended/media/icons/potions/potion_016.dds", tooltip = Tooltips.Generic_Ravage_Magicka_Poison }, -- of Ravage Magicka (Ravage Magicka)
+    [46206] = { icon = "LuiExtended/media/icons/potions/potion_018.dds", tooltip = Tooltips.Skill_Ravage_Spell_Protection_Potion }, -- of Ravage Spell Protection (Spell Resistance Reduction)
+    [46199] = { icon = "LuiExtended/media/icons/potions/potion_017.dds", tooltip = Tooltips.Generic_Ravage_Stamina_Poison }, -- of Ravage Stamina (Ravage Stamina)
     [46210] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- of Hindering (Hindrance)
-    [64562] = {
-        icon = "LuiExtended/media/icons/potions/potion_004.dds",
-        tooltip = Tooltips.Skill_Spell_Resistance_Potion,
-    }, -- of Spell Protection (Spell Resistance Potion)
+    [64562] = { icon = "LuiExtended/media/icons/potions/potion_004.dds", tooltip = Tooltips.Skill_Spell_Resistance_Potion }, -- of Spell Protection (Spell Resistance Potion)
     [45225] = { icon = "LuiExtended/media/icons/potions/potion_003.dds" }, -- of Stamina (Restore Stamina)
     [68565] = { icon = "LuiExtended/media/icons/potions/potion_015.dds", tooltip = Tooltips.Generic_Stun }, -- of Entrapment (Stun)
 
     -- Crafted Potions (3 Traits)
-    [64565] = {
-        icon = "LuiExtended/media/icons/potions/potion_007.dds",
-        tooltip = Tooltips.Skill_Physical_Resistance_Potion,
-    }, -- of Armor (Physical Resistance Potion)
-    [79710] = {
-        icon = "LuiExtended/media/icons/potions/potion_014r.dds",
-        tooltip = Tooltips.Generic_Gradual_Ravage_Health_Potion,
-    }, -- of Creeping Ravage Health (Creeping Ravage Health)
+    [64565] = { icon = "LuiExtended/media/icons/potions/potion_007.dds", tooltip = Tooltips.Skill_Physical_Resistance_Potion }, -- of Armor (Physical Resistance Potion)
+    [79710] = { icon = "LuiExtended/media/icons/potions/potion_014r.dds", tooltip = Tooltips.Generic_Gradual_Ravage_Health_Potion }, -- of Creeping Ravage Health (Creeping Ravage Health)
     [45382] = { icon = "LuiExtended/media/icons/potions/potion_001.dds" }, -- of Health (Restore Health)
-    [45458] = {
-        icon = "LuiExtended/media/icons/abilities/ability_buff_detection.dds",
-        tooltip = Tooltips.Generic_Detection,
-    }, -- of Detection (Increase Detection)
-    [45460] = {
-        icon = "LuiExtended/media/icons/potions/potion_011.dds",
-        name = Abilities.Potion_Invisiblity,
-        tooltip = Tooltips.Generic_Invisibility,
-    }, -- of Invisibility (Vanish)
-    [79706] = {
-        icon = "LuiExtended/media/icons/potions/potion_014.dds",
-        tooltip = Tooltips.Generic_HoT,
-        tooltipValue2 = 1,
-    }, -- of Lingering Health (Lingering Restore Health)
+    [45458] = { icon = "LuiExtended/media/icons/abilities/ability_buff_detection.dds", tooltip = Tooltips.Generic_Detection }, -- of Detection (Increase Detection)
+    [45460] = { icon = "LuiExtended/media/icons/potions/potion_011.dds", name = Abilities.Potion_Invisiblity, tooltip = Tooltips.Generic_Invisibility }, -- of Invisibility (Vanish)
+    [79706] = { icon = "LuiExtended/media/icons/potions/potion_014.dds", tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- of Lingering Health (Lingering Restore Health)
     [45385] = { icon = "LuiExtended/media/icons/potions/potion_002.dds" }, -- of Magicka (Restore Magicka)
     [46250] = { icon = "LuiExtended/media/icons/potions/potion_021.dds", tooltip = Tooltips.Skill_Ravage_Armor_Potion }, -- of Ravage Armor (Physical Resistance Reduction)
     [46215] = { icon = "LuiExtended/media/icons/potions/potion_015.dds", name = Abilities.Potion_Ravage_Health }, -- of Ravage Health (Damage Health)
-    [46217] = {
-        icon = "LuiExtended/media/icons/potions/potion_015.dds",
-        name = Abilities.Potion_Ravage_Health,
-        tooltip = Tooltips.Generic_Ravage_Health_Potion,
-    }, -- of Ravage Health (Health Potion Linger Effect) (Different name than 2 trait)
-    [46237] = {
-        icon = "LuiExtended/media/icons/potions/potion_016.dds",
-        tooltip = Tooltips.Generic_Ravage_Magicka_Poison,
-    }, -- of Ravage Magicka (Ravage Magicka)
+    [46217] = { icon = "LuiExtended/media/icons/potions/potion_015.dds", name = Abilities.Potion_Ravage_Health, tooltip = Tooltips.Generic_Ravage_Health_Potion }, -- of Ravage Health (Health Potion Linger Effect) (Different name than 2 trait)
+    [46237] = { icon = "LuiExtended/media/icons/potions/potion_016.dds", tooltip = Tooltips.Generic_Ravage_Magicka_Poison }, -- of Ravage Magicka (Ravage Magicka)
     -- No ... of Ravage Spell Critical
-    [46248] = {
-        icon = "LuiExtended/media/icons/potions/potion_018.dds",
-        tooltip = Tooltips.Skill_Ravage_Spell_Protection_Potion,
-    }, -- of Ravage Spell Protection (Spell Resistance Reduction)
-    [46240] = {
-        icon = "LuiExtended/media/icons/potions/potion_017.dds",
-        tooltip = Tooltips.Generic_Ravage_Stamina_Poison,
-    }, -- of Ravage Stamina (Ravage Stamina)
+    [46248] = { icon = "LuiExtended/media/icons/potions/potion_018.dds", tooltip = Tooltips.Skill_Ravage_Spell_Protection_Potion }, -- of Ravage Spell Protection (Spell Resistance Reduction)
+    [46240] = { icon = "LuiExtended/media/icons/potions/potion_017.dds", tooltip = Tooltips.Generic_Ravage_Stamina_Poison }, -- of Ravage Stamina (Ravage Stamina)
     [46252] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- of Hindering (Hindrance)
-    [64563] = {
-        icon = "LuiExtended/media/icons/potions/potion_004.dds",
-        tooltip = Tooltips.Skill_Spell_Resistance_Potion,
-    }, -- of Spell Protection (Spell Resistance Potion)
+    [64563] = { icon = "LuiExtended/media/icons/potions/potion_004.dds", tooltip = Tooltips.Skill_Spell_Resistance_Potion }, -- of Spell Protection (Spell Resistance Potion)
     [45388] = { icon = "LuiExtended/media/icons/potions/potion_003.dds" }, -- of Stamina (Restore Stamina)
     -- No ... of Stun
 
@@ -3606,41 +3494,22 @@ Effects.EffectOverride = {
     [72934] = { icon = "LuiExtended/media/icons/potions/potion_ava_green.dds" }, -- Restore Stamina (Alliance Battle Draught)
     [72927] = { icon = "LuiExtended/media/icons/potions/potion_ava_red.dds" }, -- Restore Health (Alliance Health Draught)
     [72930] = { icon = "LuiExtended/media/icons/potions/potion_ava_red.dds", tooltip = Tooltips.Generic_CC_Immunity }, -- Alliance Health Draught (Unstoppable )
-    [137002] = {
-        icon = "LuiExtended/media/icons/potions/potion_ava_purple.dds",
-        tooltip = Tooltips.Generic_Invisibility,
-    }, -- Alliance Health Draught (Invisibility)
+    [137002] = { icon = "LuiExtended/media/icons/potions/potion_ava_purple.dds", tooltip = Tooltips.Generic_Invisibility }, -- Alliance Health Draught (Invisibility)
     [72931] = { icon = "LuiExtended/media/icons/potions/potion_ava_blue.dds" }, -- Restore Magicka (Alliance Spell Draught)
     [78053] = { icon = "LuiExtended/media/icons/potions/potion_ava_green.dds" }, -- Restore Stamina (Roguish Stealth Draught)
-    [78058] = {
-        icon = "LuiExtended/media/icons/potions/potion_ava_purple.dds",
-        name = Abilities.Potion_Invisiblity,
-        tooltip = Tooltips.Generic_Invisibility,
-    }, -- Roguish Stealth Draught (Vanish)
+    [78058] = { icon = "LuiExtended/media/icons/potions/potion_ava_purple.dds", name = Abilities.Potion_Invisiblity, tooltip = Tooltips.Generic_Invisibility }, -- Roguish Stealth Draught (Vanish)
     [78079] = { icon = "LuiExtended/media/icons/potions/potion_ava_green.dds" }, -- Restore Stamina (Roguish Escape Draught)
 
     -- Crown Store Potions
     [68401] = { icon = "LuiExtended/media/icons/potions/potion_crown_red.dds", name = Abilities.Potion_Restore_Health }, -- Restore All Resources (Crown Tri-Restoration Potion)
     [68407] = { icon = "LuiExtended/media/icons/potions/potion_crown_blue.dds" }, -- Restore Magicka (Crown Tri-Restoration Potion)
     [68409] = { icon = "LuiExtended/media/icons/potions/potion_crown_green.dds" }, -- Restore Stamina (Crown Tri-Restoration Potion)
-    [86780] = {
-        icon = "LuiExtended/media/icons/potions/potion_crown_pink.dds",
-        tooltip = Tooltips.Generic_Invisibility,
-    }, -- Crown Invisibility Potion (Invisibility)
-    [86682] = {
-        icon = "LuiExtended/media/icons/potions/potion_crown_blue.dds",
-        name = Abilities.Potion_Restore_Magicka,
-    }, -- Gold Coast Spellcaster Elixir (Gold Coast Spellcaster Elixir)
+    [86780] = { icon = "LuiExtended/media/icons/potions/potion_crown_pink.dds", tooltip = Tooltips.Generic_Invisibility }, -- Crown Invisibility Potion (Invisibility)
+    [86682] = { icon = "LuiExtended/media/icons/potions/potion_crown_blue.dds", name = Abilities.Potion_Restore_Magicka }, -- Gold Coast Spellcaster Elixir (Gold Coast Spellcaster Elixir)
     [86696] = { icon = "LuiExtended/media/icons/potions/potion_crown_red.dds", name = Abilities.Potion_Restore_Health }, -- Gold Coast Survivor Elixir (Gold Coast Survivor Elixir)
     [86698] = { icon = "LuiExtended/media/icons/potions/potion_crown_red.dds", tooltip = Tooltips.Generic_CC_Immunity }, -- Gold Coast Survivor Elixir (Unstoppable)
-    [86699] = {
-        icon = "LuiExtended/media/icons/potions/potion_crown_pink_alt.dds",
-        tooltip = Tooltips.Generic_Invisibility,
-    }, -- Gold Coast Survivor Elixir (Invisibility)
-    [86692] = {
-        icon = "LuiExtended/media/icons/potions/potion_crown_green.dds",
-        name = Abilities.Potion_Restore_Stamina,
-    }, -- Gold Coast Warrior Elixir (Gold Coast Warrior Elixir)
+    [86699] = { icon = "LuiExtended/media/icons/potions/potion_crown_pink_alt.dds", tooltip = Tooltips.Generic_Invisibility }, -- Gold Coast Survivor Elixir (Invisibility)
+    [86692] = { icon = "LuiExtended/media/icons/potions/potion_crown_green.dds", name = Abilities.Potion_Restore_Stamina }, -- Gold Coast Warrior Elixir (Gold Coast Warrior Elixir)
     [92414] = { icon = "LuiExtended/media/icons/potions/potion_crown_red.dds", name = Abilities.Potion_Restore_Health }, -- Gold Coast Survivor Elixir (Gold Coast Swift Survivor Elixir)
     [92416] = { icon = "LuiExtended/media/icons/potions/potion_crown_red.dds", tooltip = Tooltips.Generic_CC_Immunity }, -- Unstoppable (Gold Coast Swift Survivor Elixir)
 
@@ -3649,103 +3518,31 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Crafted Poisons (2 Traits)
-    [79133] = {
-        icon = "LuiExtended/media/icons/poisons/poison_2_red_r.dds",
-        tooltip = Tooltips.Generic_Poison,
-        tooltipValue2 = 1,
-    }, -- Drain Health (Drain Health Poison) DEBUFF
-    [79134] = {
-        icon = "LuiExtended/media/icons/poisons/poison_2_red_g.dds",
-        tooltip = Tooltips.Generic_HoT,
-        tooltipValue2 = 1,
-    }, -- Restore Health (Drain Health Poison) BUFF
-    [79025] = {
-        icon = "LuiExtended/media/icons/poisons/poison_1_red_r.dds",
-        tooltip = Tooltips.Generic_Poison,
-        tooltipValue2 = 1,
-    }, -- Ravage Health (Damage Health Poison) DEBUFF
-    [79137] = {
-        icon = "LuiExtended/media/icons/poisons/poison_2_blue_r.dds",
-        tooltip = Tooltips.Generic_Ravage_Magicka_Poison,
-    }, -- Drain Magicka (Drain Magicka Poison) DEBUFF
-    [79138] = {
-        icon = "LuiExtended/media/icons/poisons/poison_2_blue_g.dds",
-        tooltip = Tooltips.Generic_Magicka_Regen,
-        tooltipValue2 = 1,
-    }, -- Restore Magicka (Drain Magicka Poison) BUFF
-    [79037] = {
-        icon = "LuiExtended/media/icons/poisons/poison_1_blue_r.dds",
-        tooltip = Tooltips.Generic_Ravage_Magicka_Poison,
-    }, -- Ravage Magicka (Damage Magicka Poison) DEBUFF
-    [79141] = {
-        icon = "LuiExtended/media/icons/poisons/poison_2_green_r.dds",
-        tooltip = Tooltips.Generic_Ravage_Stamina_Poison,
-    }, -- Drain Stamina (Drain Stamina Poison) DEBUFF
-    [79142] = {
-        icon = "LuiExtended/media/icons/poisons/poison_2_green_g.dds",
-        tooltip = Tooltips.Generic_Stamina_Regen,
-        tooltipValue2 = 1,
-    }, -- Restore Stamina (Drain Stamina Poison) BUFF
-    [79045] = {
-        icon = "LuiExtended/media/icons/poisons/poison_1_green_r.dds",
-        tooltip = Tooltips.Generic_Ravage_Stamina_Poison,
-    }, -- Ravage Stamina (Damage Stamina Poison) DEBUFF
-    [79284] = {
-        icon = "LuiExtended/media/icons/poisons/poison_2_violet_r.dds",
-        tooltip = Tooltips.Skill_Ravage_Spell_Protection_Potion,
-    }, -- Spell Resistance Reduction (Ward-Draining Poison) DEBUFF
-    [79285] = {
-        icon = "LuiExtended/media/icons/poisons/poison_2_violet_g.dds",
-        tooltip = Tooltips.Skill_Spell_Resistance_Poison,
-    }, -- Spell Resistance (Ward-Draining Poison) BUFF
-    [79087] = {
-        icon = "LuiExtended/media/icons/poisons/poison_1_violet_r.dds",
-        tooltip = Tooltips.Skill_Ravage_Spell_Protection_Potion,
-    }, -- Spell Resistance Reduction (Breaching Poison) DEBUFF
-    [79309] = {
-        icon = "LuiExtended/media/icons/poisons/poison_2_orange_r.dds",
-        tooltip = Tooltips.Skill_Ravage_Armor_Potion,
-    }, -- Physical Resistance Reduction (Resolve-Draining Poison) DEBUFF
-    [79310] = {
-        icon = "LuiExtended/media/icons/poisons/poison_2_orange_g.dds",
-        tooltip = Tooltips.Skill_Physical_Resistance_Poison,
-    }, -- Physical Resistance (Resolve-Draining Poison) BUFF
-    [79090] = {
-        icon = "LuiExtended/media/icons/poisons/poison_1_orange_r.dds",
-        tooltip = Tooltips.Skill_Ravage_Armor_Potion,
-    }, -- Physical Resistance Reduction (Fracturing Poison) DEBUFF
+    [79133] = { icon = "LuiExtended/media/icons/poisons/poison_2_red_r.dds", tooltip = Tooltips.Generic_Poison, tooltipValue2 = 1 }, -- Drain Health (Drain Health Poison) DEBUFF
+    [79134] = { icon = "LuiExtended/media/icons/poisons/poison_2_red_g.dds", tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Restore Health (Drain Health Poison) BUFF
+    [79025] = { icon = "LuiExtended/media/icons/poisons/poison_1_red_r.dds", tooltip = Tooltips.Generic_Poison, tooltipValue2 = 1 }, -- Ravage Health (Damage Health Poison) DEBUFF
+    [79137] = { icon = "LuiExtended/media/icons/poisons/poison_2_blue_r.dds", tooltip = Tooltips.Generic_Ravage_Magicka_Poison }, -- Drain Magicka (Drain Magicka Poison) DEBUFF
+    [79138] = { icon = "LuiExtended/media/icons/poisons/poison_2_blue_g.dds", tooltip = Tooltips.Generic_Magicka_Regen, tooltipValue2 = 1 }, -- Restore Magicka (Drain Magicka Poison) BUFF
+    [79037] = { icon = "LuiExtended/media/icons/poisons/poison_1_blue_r.dds", tooltip = Tooltips.Generic_Ravage_Magicka_Poison }, -- Ravage Magicka (Damage Magicka Poison) DEBUFF
+    [79141] = { icon = "LuiExtended/media/icons/poisons/poison_2_green_r.dds", tooltip = Tooltips.Generic_Ravage_Stamina_Poison }, -- Drain Stamina (Drain Stamina Poison) DEBUFF
+    [79142] = { icon = "LuiExtended/media/icons/poisons/poison_2_green_g.dds", tooltip = Tooltips.Generic_Stamina_Regen, tooltipValue2 = 1 }, -- Restore Stamina (Drain Stamina Poison) BUFF
+    [79045] = { icon = "LuiExtended/media/icons/poisons/poison_1_green_r.dds", tooltip = Tooltips.Generic_Ravage_Stamina_Poison }, -- Ravage Stamina (Damage Stamina Poison) DEBUFF
+    [79284] = { icon = "LuiExtended/media/icons/poisons/poison_2_violet_r.dds", tooltip = Tooltips.Skill_Ravage_Spell_Protection_Potion }, -- Spell Resistance Reduction (Ward-Draining Poison) DEBUFF
+    [79285] = { icon = "LuiExtended/media/icons/poisons/poison_2_violet_g.dds", tooltip = Tooltips.Skill_Spell_Resistance_Poison }, -- Spell Resistance (Ward-Draining Poison) BUFF
+    [79087] = { icon = "LuiExtended/media/icons/poisons/poison_1_violet_r.dds", tooltip = Tooltips.Skill_Ravage_Spell_Protection_Potion }, -- Spell Resistance Reduction (Breaching Poison) DEBUFF
+    [79309] = { icon = "LuiExtended/media/icons/poisons/poison_2_orange_r.dds", tooltip = Tooltips.Skill_Ravage_Armor_Potion }, -- Physical Resistance Reduction (Resolve-Draining Poison) DEBUFF
+    [79310] = { icon = "LuiExtended/media/icons/poisons/poison_2_orange_g.dds", tooltip = Tooltips.Skill_Physical_Resistance_Poison }, -- Physical Resistance (Resolve-Draining Poison) BUFF
+    [79090] = { icon = "LuiExtended/media/icons/poisons/poison_1_orange_r.dds", tooltip = Tooltips.Skill_Ravage_Armor_Potion }, -- Physical Resistance Reduction (Fracturing Poison) DEBUFF
     [79457] = { icon = "LuiExtended/media/icons/poisons/poison_2_red_r.dds", tooltip = Tooltips.Generic_Immobilize }, -- Immobilize (Escapist's Poison) DEBUFF
     [79458] = { icon = "LuiExtended/media/icons/poisons/poison_2_red_g.dds", tooltip = Tooltips.Generic_CC_Immunity }, -- Unstoppable (Escapist's Poison) BUFF
     [79122] = { icon = "LuiExtended/media/icons/poisons/poison_1_red_r.dds", tooltip = Tooltips.Generic_Immobilize }, -- Immobilize (Entrapping Poison) DEBUFF
-    [79996] = {
-        icon = "esoui/art/icons/ability_debuff_reveal.dds",
-        name = Abilities.Skill_Revealed,
-        tooltip = Tooltips.Generic_Reveal,
-    }, -- Revealing Poison (Stealth-Draining Poison) DEBUFF
-    [80003] = {
-        icon = "LuiExtended/media/icons/abilities/ability_debuff_marked.dds",
-        name = Abilities.Skill_Marked,
-        tooltip = Tooltips.Generic_Marked,
-    }, -- Marking Poison (Conspicuous Poison) DEBUFF
+    [79996] = { icon = "esoui/art/icons/ability_debuff_reveal.dds", name = Abilities.Skill_Revealed, tooltip = Tooltips.Generic_Reveal }, -- Revealing Poison (Stealth-Draining Poison) DEBUFF
+    [80003] = { icon = "LuiExtended/media/icons/abilities/ability_debuff_marked.dds", name = Abilities.Skill_Marked, tooltip = Tooltips.Generic_Marked }, -- Marking Poison (Conspicuous Poison) DEBUFF
     [79367] = { name = Abilities.Skill_Hindrance, tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Minor Hindrance (Speed-Draining Poison) DEBUFF
     [79094] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Hindrance (Hindering Poison) DEBUFF
-    [79699] = {
-        icon = "LuiExtended/media/icons/poisons/poison_2_orange_r.dds",
-        name = Abilities.Poison_Creeping_Drain_Health,
-        tooltip = Tooltips.Generic_Poison,
-        tooltipValue2 = 1,
-    }, -- Drain Health (Gradual Health Drain Poison) DEBUFF
-    [79700] = {
-        icon = "LuiExtended/media/icons/poisons/poison_2_orange_g.dds",
-        name = Abilities.Poison_Lingering_Restore_Health,
-        tooltip = Tooltips.Generic_HoT,
-        tooltipValue2 = 1,
-    }, -- Restore Health (Gradual Health Drain Poison) BUFF
-    [79707] = {
-        icon = "LuiExtended/media/icons/poisons/poison_1_orange_r.dds",
-        tooltip = Tooltips.Generic_Poison,
-        tooltipValue2 = 1,
-    }, -- Creeping Ravage Health (Gradual Ravage Health Poison) DEBUFF
+    [79699] = { icon = "LuiExtended/media/icons/poisons/poison_2_orange_r.dds", name = Abilities.Poison_Creeping_Drain_Health, tooltip = Tooltips.Generic_Poison, tooltipValue2 = 1 }, -- Drain Health (Gradual Health Drain Poison) DEBUFF
+    [79700] = { icon = "LuiExtended/media/icons/poisons/poison_2_orange_g.dds", name = Abilities.Poison_Lingering_Restore_Health, tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Restore Health (Gradual Health Drain Poison) BUFF
+    [79707] = { icon = "LuiExtended/media/icons/poisons/poison_1_orange_r.dds", tooltip = Tooltips.Generic_Poison, tooltipValue2 = 1 }, -- Creeping Ravage Health (Gradual Ravage Health Poison) DEBUFF
     [125203] = { icon = "LuiExtended/media/icons/poisons/poison_1_violet_r.dds", tooltip = Tooltips.Generic_Trauma }, -- Trauma (Traumatic Poison) DEBUFF
 
     -- Crafted Poisons (3 Traits)
