@@ -3133,7 +3133,13 @@ end
 function ChatAnnouncements.MailMoneyChanged(eventCode)
     g_mailCOD = 0
     g_postageAmount = GetQueuedMailPostage()
-    g_mailAmount = GetQueuedMoneyAttachment()
+    local getMailAmount = GetQueuedMoneyAttachment()
+    -- If we send more then half of the gold in our bags for some reason this event fires again so this is a workaround
+    if getMailAmount == GetCurrencyAmount(CURT_MONEY, CURRENCY_LOCATION_CHARACTER) then
+        return
+    else
+        g_mailAmount = getMailAmount
+    end
 end
 
 function ChatAnnouncements.MailCODChanged(eventCode)
