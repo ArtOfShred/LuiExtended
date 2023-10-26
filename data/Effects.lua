@@ -609,261 +609,53 @@ Effects.EffectGroundDisplay = {
     --noRemove = true -- Do not end this aura on EFFECT_RESULT_FADED
 
     -- Cyrodiil
-    [88714] = {
-        icon = "LuiExtended/media/icons/abilities/ability_ava_siege_meatbag_catapult.dds",
-        name = Abilities.Skill_Meatbag_Catapult,
-        buff = false,
-        debuff = false,
-        ground = true,
-    }, -- Meatbag (Meatbag Catapult)
-    [104700] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_gtaoe_oil_snare.dds",
-        name = Abilities.Skill_Oil_Catapult,
-        buff = false,
-        debuff = false,
-        ground = true,
-    }, -- Twisting Path (Oil Catapult)
-    [104690] = {
-        icon = "LuiExtended/media/icons/abilities/ability_ava_siege_scattershot_catapult.dds",
-        name = Abilities.Skill_Scattershot_Catapult,
-        buff = false,
-        debuff = false,
-        ground = true,
-    }, -- Twisting Path (Scattershot Catapult)
+    [88714] = { icon = "LuiExtended/media/icons/abilities/ability_ava_siege_meatbag_catapult.dds", name = Abilities.Skill_Meatbag_Catapult, buff = false, debuff = false, ground = true }, -- Meatbag (Meatbag Catapult)
+    [104700] = { icon = "LuiExtended/media/icons/abilities/ability_spell_gtaoe_oil_snare.dds", name = Abilities.Skill_Oil_Catapult, buff = false, debuff = false, ground = true }, -- Twisting Path (Oil Catapult)
+    [104690] = { icon = "LuiExtended/media/icons/abilities/ability_ava_siege_scattershot_catapult.dds", name = Abilities.Skill_Scattershot_Catapult, buff = false, debuff = false, ground = true }, -- Twisting Path (Scattershot Catapult)
 
     -- Monster Sets
-    [59590] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_bogdan.dds",
-        name = Abilities.Set_Bogdan_the_Nightflame,
-        buff = true,
-        debuff = false,
-        ground = false,
-    }, -- Imperial Prison Item Set (Bogdan the Nightflame)
-    [97882] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_domihaus_fire.dds",
-        buff = true,
-        debuff = false,
-        ground = true,
-    }, -- Domihaus (Domihaus)
-    [97855] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_monster_earthgore.dds",
-        buff = true,
-        debuff = false,
-        ground = false,
-    }, -- Earthgore (Earthgore)
-    [80527] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_ilambris.dds",
-        buff = false,
-        debuff = false,
-        ground = true,
-    }, -- Ilambris (Ilambris)
-    [59587] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_monster_lord_warden.dds",
-        name = Abilities.Set_Lord_Warden_Dusk,
-        buff = true,
-        debuff = false,
-        ground = false,
-    }, -- Lord Warden (Lord Warden)
-    [59568] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds",
-        name = Abilities.Set_Scourge_Harvester,
-        buff = true,
-        debuff = false,
-        ground = false,
-        tooltip = Tooltips.Set_Malubeth_Heal,
-    }, -- Scourge Harvest (Malubeth)
-    [59508] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_maw_of_the_infernal.dds",
-        name = Abilities.Set_Maw_of_the_Infernal,
-        buff = true,
-        debuff = false,
-        ground = false,
-    }, -- Banished Cells Item Set (Maw of the Infernal)
-    [81036] = {
-        icon = "LuiExtended/media/icons/abilities/ability_dwarvenspider_heal.dds",
-        buff = true,
-        debuff = false,
-        ground = false,
-    }, -- Sentinel of Rkugamz
-    [80954] = {
-        icon = "LuiExtended/media/icons/abilities/ability_summon_shadow_proxy.dds",
-        name = Abilities.Set_Shadowrend,
-        buff = true,
-        debuff = false,
-        ground = false,
-    }, -- Shadowrend Summon (Shadowrend)
-    [59497] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_web_white.dds",
-        buff = false,
-        debuff = false,
-        ground = true,
-    }, -- Spawn of Mephala (Spawn of Mephala)
-    [80523] = {
-        icon = "LuiExtended/media/icons/abilities/ability_stormatronach_enervating_stone.dds",
-        buff = false,
-        debuff = false,
-        ground = true,
-    }, -- Stormfist (Stormfist)
-    [102093] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds",
-        buff = false,
-        debuff = false,
-        ground = true,
-    }, -- Thurvokun
-    [59594] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_soul_rupture.dds",
-        name = Abilities.Set_Nerieneth,
-        buff = false,
-        debuff = false,
-        ground = true,
-    }, -- Crypt of Hearts Item Set (Nerien'eth)
-    [80545] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_sellistrix.dds",
-        buff = false,
-        debuff = false,
-        ground = true,
-    }, -- Sellistrix (Sellistrix)
+    [59590] = { icon = "LuiExtended/media/icons/abilities/ability_set_bogdan.dds", name = Abilities.Set_Bogdan_the_Nightflame, buff = true, debuff = false, ground = false }, -- Imperial Prison Item Set (Bogdan the Nightflame)
+    [97882] = { icon = "LuiExtended/media/icons/abilities/ability_set_domihaus_fire.dds", buff = true, debuff = false, ground = true }, -- Domihaus (Domihaus)
+    [97855] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_earthgore.dds", buff = true, debuff = false, ground = false }, -- Earthgore (Earthgore)
+    [80527] = { icon = "LuiExtended/media/icons/abilities/ability_set_ilambris.dds", buff = false, debuff = false, ground = true }, -- Ilambris (Ilambris)
+    [59587] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_lord_warden.dds", name = Abilities.Set_Lord_Warden_Dusk, buff = true, debuff = false, ground = false }, -- Lord Warden (Lord Warden)
+    [59568] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds", name = Abilities.Set_Scourge_Harvester, buff = true, debuff = false, ground = false, tooltip = Tooltips.Set_Malubeth_Heal }, -- Scourge Harvest (Malubeth)
+    [59508] = { icon = "LuiExtended/media/icons/abilities/ability_set_maw_of_the_infernal.dds", name = Abilities.Set_Maw_of_the_Infernal, buff = true, debuff = false, ground = false }, -- Banished Cells Item Set (Maw of the Infernal)
+    [81036] = { icon = "LuiExtended/media/icons/abilities/ability_dwarvenspider_heal.dds", buff = true, debuff = false, ground = false }, -- Sentinel of Rkugamz
+    [80954] = { icon = "LuiExtended/media/icons/abilities/ability_summon_shadow_proxy.dds", name = Abilities.Set_Shadowrend, buff = true, debuff = false, ground = false }, -- Shadowrend Summon (Shadowrend)
+    [59497] = { icon = "LuiExtended/media/icons/abilities/ability_innate_web_white.dds", buff = false, debuff = false, ground = true }, -- Spawn of Mephala (Spawn of Mephala)
+    [80523] = { icon = "LuiExtended/media/icons/abilities/ability_stormatronach_enervating_stone.dds", buff = false, debuff = false, ground = true }, -- Stormfist (Stormfist)
+    [102093] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds", buff = false, debuff = false, ground = true }, -- Thurvokun
+    [59594] = { icon = "LuiExtended/media/icons/abilities/ability_spell_soul_rupture.dds", name = Abilities.Set_Nerieneth, buff = false, debuff = false, ground = true }, -- Crypt of Hearts Item Set (Nerien'eth)
+    [80545] = { icon = "LuiExtended/media/icons/abilities/ability_set_sellistrix.dds", buff = false, debuff = false, ground = true }, -- Sellistrix (Sellistrix)
     --[102136] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_zaan.dds', buff = true, debuff = false, ground = false }, -- Zaan -- Buff icon for Zaan, may reimplement if I add a way to override tooltips for these.
 
     -- Crafted Sets
-    [75930] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds",
-        name = Abilities.Set_Eternal_Hunt,
-        buff = false,
-        debuff = false,
-        ground = true,
-        stackAdd = 1,
-        stackRemove = 1,
-        stackReset = 7,
-    }, -- Daedric Mines (Eternal Hunt)
-    [71671] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_morkuldin_summon.dds",
-        buff = true,
-        debuff = false,
-        ground = false,
-    }, -- Morkuldin (Morkuldin)
+    [75930] = { icon = "LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds", name = Abilities.Set_Eternal_Hunt, buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 7 }, -- Daedric Mines (Eternal Hunt)
+    [71671] = { icon = "LuiExtended/media/icons/abilities/ability_set_morkuldin_summon.dds", buff = true, debuff = false, ground = false }, -- Morkuldin (Morkuldin)
     [113181] = { icon = "esoui/art/icons/mm_teaser.dds", buff = true, debuff = false, ground = false }, -- Grave-Stake Collector (Grave-Stake Collector)
-    [121915] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_honors_scorn.dds",
-        name = Abilities.Set_Honors_Scorn,
-        buff = false,
-        debuff = false,
-        ground = true,
-    }, -- Coldharbour's Favorite (Coldharbour's Favorite)
-    [121912] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_honors_love.dds",
-        name = Abilities.Set_Honors_Love,
-        buff = true,
-        debuff = false,
-        ground = false,
-    }, -- Coldharbour's Favorite (Coldharbour's Favorite)
+    [121915] = { icon = "LuiExtended/media/icons/abilities/ability_set_honors_scorn.dds", name = Abilities.Set_Honors_Scorn, buff = false, debuff = false, ground = true }, -- Coldharbour's Favorite (Coldharbour's Favorite)
+    [121912] = { icon = "LuiExtended/media/icons/abilities/ability_set_honors_love.dds", name = Abilities.Set_Honors_Love, buff = true, debuff = false, ground = false }, -- Coldharbour's Favorite (Coldharbour's Favorite)
 
     -- Overland Sets
-    [75691] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_snare.dds",
-        buff = false,
-        debuff = false,
-        ground = true,
-    }, -- Bahraha's Curse
-    [71664] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_trinimacs_valor.dds",
-        buff = false,
-        debuff = false,
-        ground = true,
-    }, -- Trinimac's Valor
-    [135659] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_winters_respite.dds",
-        buff = true,
-        debuff = false,
-        ground = false,
-    }, -- Winter's Respite (of Winter's Respite)
-
+    [75691] = { icon = "LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_snare.dds", buff = false, debuff = false, ground = true }, -- Bahraha's Curse
+    [71664] = { icon = "LuiExtended/media/icons/abilities/ability_set_trinimacs_valor.dds", buff = false, debuff = false, ground = true }, -- Trinimac's Valor
+    [135659] = { icon = "LuiExtended/media/icons/abilities/ability_set_winters_respite.dds", buff = true, debuff = false, ground = false }, -- Winter's Respite (of Winter's Respite)
     -- Dungeon Sets
-    [97538] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_draugrs_rest.dds",
-        buff = true,
-        debuff = false,
-        ground = false,
-    }, -- Draugr's Rest
-    [102106] = {
-        icon = "esoui/art/icons/achievement_bossflavoreasy.dds",
-        name = Abilities.Set_Plague_Slinger,
-        buff = false,
-        debuff = false,
-        ground = true,
-    }, -- Skeever Corpse
-    [97908] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_hagravens_garden.dds",
-        buff = true,
-        debuff = false,
-        ground = false,
-    }, -- Hagraven's Garden (Hagraven's)
-    [67205] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_leeching_plate.dds",
-        buff = false,
-        debuff = false,
-        ground = true,
-    }, -- Leeching Plate (of Leeching)
-    [84354] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_web_green.dds",
-        buff = false,
-        debuff = false,
-        ground = true,
-    }, -- Hand of Mephala (of Mephala's Hand)
-    [126924] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_hollowfang.dds",
-        buff = true,
-        debuff = false,
-        ground = false,
-    }, -- Hollowfang Thirst (Hollowfang Thirst)
-    [133493] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_aegis_caller.dds",
-        name = Abilities.Set_Aegis_Caller,
-        buff = false,
-        debuff = false,
-        ground = true,
-    }, -- Aegis Caller (Aegis Caller's)
-
+    [97538] = { icon = "LuiExtended/media/icons/abilities/ability_set_draugrs_rest.dds", buff = true, debuff = false, ground = false }, -- Draugr's Rest
+    [102106] = { icon = "esoui/art/icons/achievement_bossflavoreasy.dds", name = Abilities.Set_Plague_Slinger, buff = false, debuff = false, ground = true }, -- Skeever Corpse
+    [97908] = { icon = "LuiExtended/media/icons/abilities/ability_set_hagravens_garden.dds", buff = true, debuff = false, ground = false }, -- Hagraven's Garden (Hagraven's)
+    [67205] = { icon = "LuiExtended/media/icons/abilities/ability_set_leeching_plate.dds", buff = false, debuff = false, ground = true }, -- Leeching Plate (of Leeching)
+    [84354] = { icon = "LuiExtended/media/icons/abilities/ability_innate_web_green.dds", buff = false, debuff = false, ground = true }, -- Hand of Mephala (of Mephala's Hand)
+    [126924] = { icon = "LuiExtended/media/icons/abilities/ability_set_hollowfang.dds", buff = true, debuff = false, ground = false }, -- Hollowfang Thirst (Hollowfang Thirst)
+    [133493] = { icon = "LuiExtended/media/icons/abilities/ability_set_aegis_caller.dds", name = Abilities.Set_Aegis_Caller, buff = false, debuff = false, ground = true }, -- Aegis Caller (Aegis Caller's)
     -- Trial Sets
-    [107141] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_olorime.dds",
-        name = Abilities.Set_Vestment_of_Olorime,
-        buff = true,
-        debuff = false,
-        ground = false,
-    }, -- Vestment of Olirime (Olorime's)
-    [109084] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_olorime.dds",
-        name = Abilities.Set_Vestment_of_Olorime,
-        buff = true,
-        debuff = false,
-        ground = false,
-    }, -- Ideal Vestment of Olirime (Olorime's Perfect)
-    [107095] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_mantle_of_siroria.dds",
-        buff = true,
-        debuff = false,
-        ground = false,
-    }, -- Mantle of Siroria (Siroria's)
-    [109081] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_mantle_of_siroria.dds",
-        name = Abilities.Set_Mantle_of_Siroria,
-        buff = true,
-        debuff = false,
-        ground = false,
-    }, -- Ideal Mantle of Siroria (Perfect Siroria's)
-    [136098] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds",
-        buff = true,
-        debuff = false,
-        ground = false,
-    }, -- Kyne's Blessing (of Kyne's Wind)
-    [137995] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds",
-        buff = true,
-        debuff = false,
-        ground = false,
-    }, -- Kyne's Blessing (of Kyne's Wind (Perfect))
+    [107141] = { icon = "LuiExtended/media/icons/abilities/ability_set_olorime.dds", name = Abilities.Set_Vestment_of_Olorime, buff = true, debuff = false, ground = false }, -- Vestment of Olirime (Olorime's)
+    [109084] = { icon = "LuiExtended/media/icons/abilities/ability_set_olorime.dds", name = Abilities.Set_Vestment_of_Olorime, buff = true, debuff = false, ground = false }, -- Ideal Vestment of Olirime (Olorime's Perfect)
+    [107095] = { icon = "LuiExtended/media/icons/abilities/ability_set_mantle_of_siroria.dds", buff = true, debuff = false, ground = false }, -- Mantle of Siroria (Siroria's)
+    [109081] = { icon = "LuiExtended/media/icons/abilities/ability_set_mantle_of_siroria.dds", name = Abilities.Set_Mantle_of_Siroria, buff = true, debuff = false, ground = false }, -- Ideal Mantle of Siroria (Perfect Siroria's)
+    [136098] = { icon = "LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds", buff = true, debuff = false, ground = false }, -- Kyne's Blessing (of Kyne's Wind)
+    [137995] = { icon = "LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds", buff = true, debuff = false, ground = false }, -- Kyne's Blessing (of Kyne's Wind (Perfect)) }
 
     -- Used only to flag abilities for Tooltips
     [75814] = { buff = false, debuff = false, ground = false }, -- Lunar Bastion (Lunar Bastion)
@@ -899,48 +691,16 @@ Effects.EffectGroundDisplay = {
     [36485] = { buff = true, debuff = false, ground = false }, -- Veil of Blades (Veil of Blades)
 
     -- Sorcerer
-    [24830] = {
-        buff = false,
-        debuff = false,
-        ground = true,
-        stackAdd = 1,
-        stackRemove = 1,
-        stackReset = 3,
-        icon = "esoui/art/icons/ability_sorcerer_daedric_mines.dds",
-    }, -- Daedric Mines (Daedric Mines)
-    [24847] = {
-        buff = false,
-        debuff = false,
-        ground = true,
-        stackAdd = 1,
-        stackRemove = 1,
-        stackReset = 3,
-        icon = "esoui/art/icons/ability_sorcerer_daedric_tomb.dds",
-        name = Abilities.Skill_Daedric_Tomb,
-    }, -- Daedric Mines (Daedric Tomb)
-    [25158] = {
-        buff = false,
-        debuff = false,
-        ground = true,
-        stackAdd = 1,
-        stackRemove = 1,
-        stackReset = 5,
-        icon = "esoui/art/icons/ability_sorcerer_daedric_minefield.dds",
-        name = Abilities.Skill_Daedric_Minefield,
-    }, -- Daedric Mines (Daedric Minefield)
+    [24830] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 3, icon = "esoui/art/icons/ability_sorcerer_daedric_mines.dds" }, -- Daedric Mines (Daedric Mines)
+    [24847] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 3, icon = "esoui/art/icons/ability_sorcerer_daedric_tomb.dds", name = Abilities.Skill_Daedric_Tomb }, -- Daedric Mines (Daedric Tomb)
+    [25158] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 5, icon = "esoui/art/icons/ability_sorcerer_daedric_minefield.dds", name = Abilities.Skill_Daedric_Minefield }, -- Daedric Mines (Daedric Minefield)
     [27706] = { buff = false, debuff = false, ground = true }, -- Negate Magic (Negate Magic)
     [28341] = { buff = false, debuff = false, ground = true }, -- Suppression Field (Suppression Field)
     [28348] = { buff = false, debuff = false, ground = true }, -- Absorption Field (Absorption Field)
     [23182] = { buff = false, debuff = false, ground = true }, -- Lightning Splash (Lightning Splash)
     [23200] = { buff = false, debuff = false, ground = true }, -- Liquid Lightning (Liquid Lightning)
     [23205] = { buff = false, debuff = false, ground = true }, -- Lightning Flood (Lightning Flood)
-    [23279] = {
-        icon = "LuiExtended/media/icons/abilities/ability_sorcerer_intercept.dds",
-        name = Abilities.Skill_Intercept,
-        buff = true,
-        debuff = false,
-        ground = false,
-    }, -- Ball of Lightning (Ball of Lightning)
+    [23279] = { icon = "LuiExtended/media/icons/abilities/ability_sorcerer_intercept.dds", name = Abilities.Skill_Intercept, buff = true, debuff = false, ground = false }, -- Ball of Lightning (Ball of Lightning)
 
     -- Templar
     [95933] = { icon = "esoui/art/icons/ability_templar_sun_strike.dds", buff = false, debuff = false, ground = true }, -- Spear Shards (Spear Shards)
@@ -948,12 +708,7 @@ Effects.EffectGroundDisplay = {
     [26880] = { icon = "esoui/art/icons/ability_templarsun_thrust.dds", buff = false, debuff = false, ground = true }, -- Blazing Spear (Blazing Spear)
     [21976] = { icon = "esoui/art/icons/ability_templar_nova.dds", buff = false, debuff = false, ground = true }, -- Nova (Nova)
     [22003] = { icon = "esoui/art/icons/ability_templar_solar_prison.dds", buff = false, debuff = false, ground = true }, -- Solar Prison (Solar Prison)
-    [22001] = {
-        icon = "esoui/art/icons/ability_templar_solar_disturbance.dds",
-        buff = false,
-        debuff = false,
-        ground = true,
-    }, -- Solar Disturbance (Solar Disturbance)
+    [22001] = { icon = "esoui/art/icons/ability_templar_solar_disturbance.dds", buff = false, debuff = false, ground = true }, -- Solar Disturbance (Solar Disturbance)
 
     [22234] = { buff = true, debuff = false, ground = false }, -- Rune Focus (Rune Focus)
 
@@ -1086,13 +841,7 @@ Effects.EffectGroundDisplay = {
 
     [38549] = { icon = "esoui/art/icons/ability_ava_001.dds", buff = false, debuff = false, ground = true }, -- Caltrops (Caltrops)
     [40265] = { icon = "esoui/art/icons/ability_ava_001_a.dds", buff = false, debuff = false, ground = true }, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
-    [40251] = {
-        icon = "esoui/art/icons/ability_ava_001_b.dds",
-        name = Abilities.Skill_Razor_Caltrops,
-        buff = false,
-        debuff = false,
-        ground = true,
-    }, -- Caltrops (Razor Caltrops)
+    [40251] = { icon = "esoui/art/icons/ability_ava_001_b.dds", name = Abilities.Skill_Razor_Caltrops, buff = false, debuff = false, ground = true }, -- Caltrops (Razor Caltrops)
 
     ---------------------------
     -- Support ----------------
@@ -1833,188 +1582,44 @@ Effects.DisguiseIcons = {
     -- description = '' -- String to use for description when equipped (used by Chat Announcements)
     -- id = # -- Ability id to pull a tooltip description from
 
-    [2571] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_midnight_union_disguise.dds",
-        description = "as a Midnight Union thief.",
-        id = 35607,
-    },
-    [27266] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_vanguard_uniform.dds",
-        description = "as a soldier in Tanval's Vanguard.",
-        id = 50177,
-    },
-    [29536] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_stormfist_disguise.dds",
-        description = "as a Stormfist soldier.",
-        id = 19086,
-    },
-    [40283] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_keepers_garb.dds",
-        description = "as a Keeper of the Shell.",
-        id = 31118,
-    },
-    [40286] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_seadrake_disguise.dds",
-        description = "as a Seadrake pirate.",
-        id = 27457,
-    },
-    [40294] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_pirate_disguise.dds",
-        description = "as a Blackheart Haven pirate.",
-        id = 29986,
-    },
-    [40296] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_red_rook_disguise.dds",
-        description = "as a Red Rook bandit.",
-        id = 28076,
-    },
-    [42413] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_colovian_uniform.dds",
-        description = "as a Colovian soldier.",
-        id = 31766,
-    },
-    [42736] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_servants_robes.dds",
-        description = "as a servant of Headman Bhosek.",
-        id = 32045,
-    },
-    [43046] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_forebear_dishdasha.dds",
-        description = "as a member of the Forebears.",
-        id = 33220,
-    },
-    [43047] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_crown_dishdasha.dds",
-        description = "as a member of the Crowns.",
-        id = 33221,
-    },
-    [43508] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_generic.dds",
-        description = "in a Seaside Sanctuary disguise.",
-        id = nil,
-    }, -- NO ICON (Probably doesn't exist)
-    [43511] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_sea_viper_armor.dds",
-        description = "as a Maormer soldier.",
-        id = 33534,
-    }, -- NO ICON
-    [43515] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_imperial_disguise.dds",
-        description = "as an Imperial soldier.",
-        id = 34267,
-    },
-    [44448] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_frostedge_bandit_disguise.dds",
-        description = "as a Frostedge bandit.",
-        id = 38167,
-    },
-    [44580] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_hollow_moon_garb.dds",
-        description = "as a member of the Hollow Moon.",
-        id = nil,
-    },
-    [44587] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_northwind_disguise.dds",
-        description = "as a Stonetalon clan member.",
-        id = 38878,
-    },
-    [44697] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_hallins_stand_seventh_legion_disguise.dds",
-        description = "as a member of the Seventh Legion.",
-        id = 39295,
-    },
-    [45006] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_phaer_mercenary_disguise.dds",
-        description = "as a Phaer Mercenary.",
-        id = 43716,
-    },
-    [45007] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_quendeluun_veiled_heritance_disguise.dds",
-        description = "as a member of the invading Ebonheart Pact forces.",
-        id = 43719,
-    },
-    [45008] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_vulkhel_guard_marine_disguise.dds",
-        description = "as a First Auridon Marine.",
-        id = 43722,
-    },
-    [45781] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_kollopi_essence.dds",
-        description = "by the Kollopi Essence.",
-        id = 30879,
-    },
-    [45803] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_bloodthorn_disguise.dds",
-        description = "as a Bloodthorn Cultist.",
-        id = 46281,
-    },
-    [54332] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_fort_amol_guard_disguise.dds",
-        description = "as a Fort Amol guard.",
-        id = 47574,
-    },
-    [54380] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_steel_shrike_uniform.dds",
-        description = "as a member of the Steel Shrikes.",
-        id = 19013,
-    },
-    [54483] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_courier_uniform.dds",
-        description = "as a Gold Coast mercenary courier.",
-        id = 48429,
-    },
-    [54994] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_shadowsilk_gem.dds",
-        description = "as a Shadowsilk Goblin.",
-        id = 51906,
-    },
-    [55014] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_generic.dds",
-        description = "as a member of Wolfbane Watch.",
-        id = nil,
-    }, -- (Not sure it exists)
-    [64260] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_generic.dds",
-        description = "in colorful Dark Elf clothing.",
-        id = 20175,
-    }, -- NO ICON (Not sure it exists)
-    [71090] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_servants_outfit.dds",
-        description = "as a servant of the Iron Wheel.",
-        id = 27649,
-    }, -- TODO: Check this ID is right
-    [71541] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_generic.dds",
-        description = "as a Castle Kvatch sentinel.",
-        id = nil,
-    }, -- NO ICON (Not sure it exists)
-    [71789] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_generic.dds",
-        description = "as a Castle Kvatch sentinel.",
-        id = nil,
-    }, -- NO ICON (Not sure it exists)
+    [2571] = { icon = "LuiExtended/media/icons/disguises/disguise_midnight_union_disguise.dds", description = "as a Midnight Union thief.", id = 35607 },
+    [27266] = { icon = "LuiExtended/media/icons/disguises/disguise_vanguard_uniform.dds", description = "as a soldier in Tanval's Vanguard.", id = 50177 },
+    [29536] = { icon = "LuiExtended/media/icons/disguises/disguise_stormfist_disguise.dds", description = "as a Stormfist soldier.", id = 19086 },
+    [40283] = { icon = "LuiExtended/media/icons/disguises/disguise_keepers_garb.dds", description = "as a Keeper of the Shell.", id = 31118 },
+    [40286] = { icon = "LuiExtended/media/icons/disguises/disguise_seadrake_disguise.dds", description = "as a Seadrake pirate.", id = 27457 },
+    [40294] = { icon = "LuiExtended/media/icons/disguises/disguise_pirate_disguise.dds", description = "as a Blackheart Haven pirate.", id = 29986 },
+    [40296] = { icon = "LuiExtended/media/icons/disguises/disguise_red_rook_disguise.dds", description = "as a Red Rook bandit.", id = 28076 },
+    [42413] = { icon = "LuiExtended/media/icons/disguises/disguise_colovian_uniform.dds", description = "as a Colovian soldier.", id = 31766 },
+    [42736] = { icon = "LuiExtended/media/icons/disguises/disguise_servants_robes.dds", description = "as a servant of Headman Bhosek.", id = 32045 },
+    [43046] = { icon = "LuiExtended/media/icons/disguises/disguise_forebear_dishdasha.dds", description = "as a member of the Forebears.", id = 33220 },
+    [43047] = { icon = "LuiExtended/media/icons/disguises/disguise_crown_dishdasha.dds", description = "as a member of the Crowns.", id = 33221 },
+    [43508] = { icon = "LuiExtended/media/icons/disguises/disguise_generic.dds", description = "in a Seaside Sanctuary disguise.", id = nil }, -- NO ICON (Probably doesn't exist)
+    [43511] = { icon = "LuiExtended/media/icons/disguises/disguise_sea_viper_armor.dds", description = "as a Maormer soldier.", id = 33534 }, -- NO ICON
+    [43515] = { icon = "LuiExtended/media/icons/disguises/disguise_imperial_disguise.dds", description = "as an Imperial soldier.", id = 34267 },
+    [44448] = { icon = "LuiExtended/media/icons/disguises/disguise_frostedge_bandit_disguise.dds", description = "as a Frostedge bandit.", id = 38167 },
+    [44580] = { icon = "LuiExtended/media/icons/disguises/disguise_hollow_moon_garb.dds", description = "as a member of the Hollow Moon.", id = nil },
+    [44587] = { icon = "LuiExtended/media/icons/disguises/disguise_northwind_disguise.dds", description = "as a Stonetalon clan member.", id = 38878 },
+    [44697] = { icon = "LuiExtended/media/icons/disguises/disguise_hallins_stand_seventh_legion_disguise.dds", description = "as a member of the Seventh Legion.", id = 39295 },
+    [45006] = { icon = "LuiExtended/media/icons/disguises/disguise_phaer_mercenary_disguise.dds", description = "as a Phaer Mercenary.", id = 43716 },
+    [45007] = { icon = "LuiExtended/media/icons/disguises/disguise_quendeluun_veiled_heritance_disguise.dds", description = "as a member of the invading Ebonheart Pact forces.", id = 43719 },
+    [45008] = { icon = "LuiExtended/media/icons/disguises/disguise_vulkhel_guard_marine_disguise.dds", description = "as a First Auridon Marine.", id = 43722 },
+    [45781] = { icon = "LuiExtended/media/icons/disguises/disguise_kollopi_essence.dds", description = "by the Kollopi Essence.", id = 30879 },
+    [45803] = { icon = "LuiExtended/media/icons/disguises/disguise_bloodthorn_disguise.dds", description = "as a Bloodthorn Cultist.", id = 46281 },
+    [54332] = { icon = "LuiExtended/media/icons/disguises/disguise_fort_amol_guard_disguise.dds", description = "as a Fort Amol guard.", id = 47574 },
+    [54380] = { icon = "LuiExtended/media/icons/disguises/disguise_steel_shrike_uniform.dds", description = "as a member of the Steel Shrikes.", id = 19013 },
+    [54483] = { icon = "LuiExtended/media/icons/disguises/disguise_courier_uniform.dds", description = "as a Gold Coast mercenary courier.", id = 48429 },
+    [54994] = { icon = "LuiExtended/media/icons/disguises/disguise_shadowsilk_gem.dds", description = "as a Shadowsilk Goblin.", id = 51906 },
+    [55014] = { icon = "LuiExtended/media/icons/disguises/disguise_generic.dds", description = "as a member of Wolfbane Watch.", id = nil }, -- (Not sure it exists)
+    [64260] = { icon = "LuiExtended/media/icons/disguises/disguise_generic.dds", description = "in colorful Dark Elf clothing.", id = 20175 }, -- NO ICON (Not sure it exists)
+    [71090] = { icon = "LuiExtended/media/icons/disguises/disguise_servants_outfit.dds", description = "as a servant of the Iron Wheel.", id = 27649 }, -- TODO: Check this ID is right
+    [71541] = { icon = "LuiExtended/media/icons/disguises/disguise_generic.dds", description = "as a Castle Kvatch sentinel.", id = nil }, -- NO ICON (Not sure it exists)
+    [71789] = { icon = "LuiExtended/media/icons/disguises/disguise_generic.dds", description = "as a Castle Kvatch sentinel.", id = nil }, -- NO ICON (Not sure it exists)
     --[79332] = { icon = 'LuiExtended/media/icons/disguises/disguise_monks_disguise.dds', description = 'as a monk.' }, -- HAS AN AURA SO NOT NECESSARY (Note - we make an exception to HIDE this itemId to prevent errors)
-    [79505] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_generic.dds",
-        description = "as a Sentinel Guard.",
-        id = nil,
-    }, -- NO ICON (Not sure it exists)
-    [94209] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_scarlet_judges_regalia.dds",
-        description = "as The Scarlet Judge.",
-        id = 85204,
-    },
+    [79505] = { icon = "LuiExtended/media/icons/disguises/disguise_generic.dds", description = "as a Sentinel Guard.", id = nil }, -- NO ICON (Not sure it exists)
+    [94209] = { icon = "LuiExtended/media/icons/disguises/disguise_scarlet_judges_regalia.dds", description = "as The Scarlet Judge.", id = 85204 },
 
-    [0] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_generic.dds",
-        description = "by the Earring of Disguise.",
-        id = nil,
-    }, -- Generic Disguise override - at least the Arenthia quest in Reaper's March applies a disguise without utilizing an item
-    [55262] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_generic.dds",
-        description = "by the Earring of Disguise.",
-        id = nil,
-    }, -- Compatibility - for Arenthia quest is player is wearing a Guild Tabard
+    [0] = { icon = "LuiExtended/media/icons/disguises/disguise_generic.dds", description = "by the Earring of Disguise.", id = nil }, -- Generic Disguise override - at least the Arenthia quest in Reaper's March applies a disguise without utilizing an item
+    [55262] = { icon = "LuiExtended/media/icons/disguises/disguise_generic.dds", description = "by the Earring of Disguise.", id = nil }, -- Compatibility - for Arenthia quest is player is wearing a Guild Tabard
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -2425,13 +2030,8 @@ Effects.AddNameAura = {
 }
 
 Effects.AddNameOnBossEngaged = {
-
-    [Unitnames.Boss_Razor_Master_Erthas] = {
-        [Unitnames.NPC_Flame_Atronach] = 33097, -- Scary Immunities --> Razor Master Erthas --> Flame Atronach (City of Ash I)
-    },
-    [Unitnames.Boss_Ilambris_Amalgam] = {
-        [Unitnames.NPC_Skeleton] = 33097, -- Scary Immunities --> Ilambris Amalgam --> Skeleton (Crypt of Hearts II)
-    },
+    [Unitnames.Boss_Razor_Master_Erthas] = { [Unitnames.NPC_Flame_Atronach] = 33097 }, -- Scary Immunities --> Razor Master Erthas --> Flame Atronach (City of Ash I)
+    [Unitnames.Boss_Ilambris_Amalgam] = { [Unitnames.NPC_Skeleton] = 33097 }, -- Scary Immunities --> Ilambris Amalgam --> Skeleton (Crypt of Hearts II)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -2466,16 +2066,11 @@ Effects.ZoneBuffs = {
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.SynergyNameOverride = {
     ["Tonal Inverter"] = { icon = "LuiExtended/media/icons/abilities/ability_quest_tonal_inverter.dds" }, -- Tonal Inverter (Divine Intervention)
-    [Abilities.Skill_Blade_of_Woe] = {
-        icon = "LuiExtended/media/icons/abilities/ability_darkbrotherhood_blade_of_woe.dds",
-    }, -- Blade of Woe (Dark Brotherhood)
+    [Abilities.Skill_Blade_of_Woe] = { icon = "LuiExtended/media/icons/abilities/ability_darkbrotherhood_blade_of_woe.dds" }, -- Blade of Woe (Dark Brotherhood)
     [Abilities.Skill_Black_Widow] = { icon = "esoui/art/icons/ability_undaunted_003_a.dds" }, -- Black Widow (Undaunted)
     [Abilities.Skill_Arachnophobia] = { icon = "esoui/art/icons/ability_undaunted_003_b.dds" }, -- Arachnophobia (Undaunted)
     [Abilities.Skill_Devour] = { icon = "LuiExtended/media/icons/abilities/ability_werewolf_devour.dds" }, -- Devour (Werewolf)
-    [Abilities.Set_Shield_of_Ursus] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_haven_of_ursus.dds",
-        name = Abilities.Set_Ursus_Blessing,
-    }, -- Ursus's Blessing (Haven of Ursus)
+    [Abilities.Set_Shield_of_Ursus] = { icon = "LuiExtended/media/icons/abilities/ability_set_haven_of_ursus.dds", name = Abilities.Set_Ursus_Blessing }, -- Ursus's Blessing (Haven of Ursus)
     -- World Bosses
     [Abilities.Skill_Remove_Bolt] = { icon = "LuiExtended/media/icons/abilities/ability_spell_trapping_bolt.dds" }, -- Remove Bolt (Trapjaw)
     -- Dungeons
@@ -2545,87 +2140,47 @@ Effects.EffectOverrideByName = {
         [Unitnames.NPC_Xivilai] = { icon = "LuiExtended/media/icons/abilities/ability_spell_axe_xivilai_light.dds" }, -- Xivilai
 
         -- QUESTS
-        [Unitnames.Elite_Vaekar_the_Forgemaster] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spell_mace_1h_light.dds",
-        }, -- Vaekar the Forgemaster (Soul Shriven in Coldharbour)
-        [Unitnames.NPC_Dremora_Caitiff] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spell_sword_2h_light.dds",
-        }, -- Dremora Caitiff (Soul Shriven in Coldharbour)
+        [Unitnames.Elite_Vaekar_the_Forgemaster] = { icon = "LuiExtended/media/icons/abilities/ability_spell_mace_1h_light.dds" }, -- Vaekar the Forgemaster (Soul Shriven in Coldharbour)
+        [Unitnames.NPC_Dremora_Caitiff] = { icon = "LuiExtended/media/icons/abilities/ability_spell_sword_2h_light.dds" }, -- Dremora Caitiff (Soul Shriven in Coldharbour)
         [Unitnames.NPC_Skeletal_Ravager] = { icon = "LuiExtended/media/icons/abilities/ability_spell_axe_2h_light.dds" }, -- Skeletal Ravager (Soul Shriven in Coldharbour)
-        [Unitnames.NPC_Dremora_Baunekyn] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spell_mace_2h_light.dds",
-        }, -- Dremora Baunekyn (Soul Shriven in Coldharbour)ability_spell_mace_2h_light.dds
+        [Unitnames.NPC_Dremora_Baunekyn] = { icon = "LuiExtended/media/icons/abilities/ability_spell_mace_2h_light.dds" }, -- Dremora Baunekyn (Soul Shriven in Coldharbour)ability_spell_mace_2h_light.dds
 
         -- Vvardenfell
-        [Unitnames.Elite_First_Mate_Ulveni] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spell_mace_1h_light.dds",
-        }, -- First Mate Ulveni (Broken Bonds)
+        [Unitnames.Elite_First_Mate_Ulveni] = { icon = "LuiExtended/media/icons/abilities/ability_spell_mace_1h_light.dds" }, -- First Mate Ulveni (Broken Bonds)
 
-        [Unitnames.Elite_Amuur] = {
-            icon = "LuiExtended/media/icons/abilities/ability_weapon_melee_cleaver_attack_light.dds",
-        }, -- Amuur (Auridon - The First Patient)
+        [Unitnames.Elite_Amuur] = { icon = "LuiExtended/media/icons/abilities/ability_weapon_melee_cleaver_attack_light.dds" }, -- Amuur (Auridon - The First Patient)
 
         -- Daggerfall Covenant
         [Unitnames.Elite_Gornog] = { icon = "LuiExtended/media/icons/abilities/ability_spell_sword_2h_light.dds" }, -- Gornog (Stros M'Kai - Innocent Scoundrel)
         [Unitnames.NPC_Drake_Brigand] = { icon = "LuiExtended/media/icons/abilities/ability_spell_axe_2h_light.dds" }, -- Drake Brigand (Stros M'Kai)
 
         -- Elsweyr
-        [Unitnames.Elite_Captain_Carvain] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spell_mace_1h_light.dds",
-        }, -- Captain Carvain (Elsweyr - Bright Moons, Warm Sands)
+        [Unitnames.Elite_Captain_Carvain] = { icon = "LuiExtended/media/icons/abilities/ability_spell_mace_1h_light.dds" }, -- Captain Carvain (Elsweyr - Bright Moons, Warm Sands)
 
         -- Greymoor
-        [Unitnames.Elite_Vitrus_the_Bloody] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spell_axe_2h_light.dds",
-        }, -- Vitrus the Bloody (Greymoor - Bound in Blood)
+        [Unitnames.Elite_Vitrus_the_Bloody] = { icon = "LuiExtended/media/icons/abilities/ability_spell_axe_2h_light.dds" }, -- Vitrus the Bloody (Greymoor - Bound in Blood)
         [Unitnames.NPC_Icereach_Brute] = { icon = "LuiExtended/media/icons/abilities/ability_spell_axe_1h_light.dds" }, -- Icereach Brute (Greymoor - Bound in Blood)
-        [Unitnames.NPC_Icereach_Charger] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spell_hammer_2h_light.dds",
-        }, -- Icereach Charger (Greymoor - Bound in Blood)
+        [Unitnames.NPC_Icereach_Charger] = { icon = "LuiExtended/media/icons/abilities/ability_spell_hammer_2h_light.dds" }, -- Icereach Charger (Greymoor - Bound in Blood)
 
         -- DUNGEONS
-        [Unitnames.NPC_Darkfern_Mauler] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spell_axe_1h_light_reach.dds",
-        }, -- Darkfern Mauler (Elden Hollow I)
-        [Unitnames.Boss_Nenesh_gro_Mal] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spell_club2h_light_attack.dds",
-        }, -- Nenesh gro Mal (Elden Hollow I)
-        [Unitnames.NPC_Dremora_Berserker] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spell_axe_1h_light.dds",
-        }, -- Dremora Berserker (City of Ash I)
-        [Unitnames.Boss_The_Mage_Master] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spell_sword_2h_light.dds",
-        }, -- The Mage Master (Crypt of Hearts I)
-        [Unitnames.Boss_Dogas_the_Berserker] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spell_axe_1h_light.dds",
-        }, -- Dogas the Berserker (Crypt of Hearts I)
+        [Unitnames.NPC_Darkfern_Mauler] = { icon = "LuiExtended/media/icons/abilities/ability_spell_axe_1h_light_reach.dds" }, -- Darkfern Mauler (Elden Hollow I)
+        [Unitnames.Boss_Nenesh_gro_Mal] = { icon = "LuiExtended/media/icons/abilities/ability_spell_club2h_light_attack.dds" }, -- Nenesh gro Mal (Elden Hollow I)
+        [Unitnames.NPC_Dremora_Berserker] = { icon = "LuiExtended/media/icons/abilities/ability_spell_axe_1h_light.dds" }, -- Dremora Berserker (City of Ash I)
+        [Unitnames.Boss_The_Mage_Master] = { icon = "LuiExtended/media/icons/abilities/ability_spell_sword_2h_light.dds" }, -- The Mage Master (Crypt of Hearts I)
+        [Unitnames.Boss_Dogas_the_Berserker] = { icon = "LuiExtended/media/icons/abilities/ability_spell_axe_1h_light.dds" }, -- Dogas the Berserker (Crypt of Hearts I)
         [Unitnames.NPC_Dremora_Kynval] = { icon = "LuiExtended/media/icons/abilities/ability_spell_mace_1h_light.dds" }, -- Dremora Kynval (City of Ash I)
         [Unitnames.Boss_Rukhan] = { icon = "LuiExtended/media/icons/abilities/ability_spell_mace_2h_light.dds" }, -- Rukhan (City of Ash I)
         [Unitnames.NPC_Xivilai_Ravager] = { icon = "LuiExtended/media/icons/abilities/ability_spell_mace_2h_light.dds" }, -- Xivilai Ravager (City of Ash I)
         [Unitnames.NPC_Fire_Ravager] = { icon = "LuiExtended/media/icons/abilities/ability_spell_mace_2h_light.dds" }, -- Fire Ravager (City of Ash I)
         [Unitnames.NPC_Xivilai_Boltaic] = { icon = "LuiExtended/media/icons/abilities/ability_spell_mace_2h_light.dds" }, -- Fire Ravager (City of Ash I)
-        [Unitnames.NPC_Sea_Viper_Strongarm] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spell_axe_1h_light.dds",
-        }, -- Sea Viper Strongarm (Tempest Island)
-        [Unitnames.NPC_Sea_Viper_Berserker] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spell_axe_1h_light.dds",
-        }, -- Sea Viper Berserker (Tempest Island)
-        [Unitnames.NPC_Sea_Viper_Charger] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spell_mace_2h_light.dds",
-        }, -- Sea Viper Charger (Tempest Island)
-        [Unitnames.Boss_Commodore_Ohmanil] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spell_axe_2h_light.dds",
-        }, -- Commodore Ohmanil (Tempest Island)
+        [Unitnames.NPC_Sea_Viper_Strongarm] = { icon = "LuiExtended/media/icons/abilities/ability_spell_axe_1h_light.dds" }, -- Sea Viper Strongarm (Tempest Island)
+        [Unitnames.NPC_Sea_Viper_Berserker] = { icon = "LuiExtended/media/icons/abilities/ability_spell_axe_1h_light.dds" }, -- Sea Viper Berserker (Tempest Island)
+        [Unitnames.NPC_Sea_Viper_Charger] = { icon = "LuiExtended/media/icons/abilities/ability_spell_mace_2h_light.dds" }, -- Sea Viper Charger (Tempest Island)
+        [Unitnames.Boss_Commodore_Ohmanil] = { icon = "LuiExtended/media/icons/abilities/ability_spell_axe_2h_light.dds" }, -- Commodore Ohmanil (Tempest Island)
         [Unitnames.Boss_Ibelgast] = { icon = "LuiExtended/media/icons/abilities/ability_spell_sword_2h_light.dds" }, -- Ibelgast (Crypt of Hearts II)
-        [Unitnames.NPC_Spiderkith_Venifex] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spell_sword_2h_light.dds",
-        }, -- Spiderkith Venifex (Crypt of Hearts II)
-        [Unitnames.NPC_Spiderkith_Warper] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spell_dagger_1h_light.dds",
-        }, -- Spiderkith Warper (Crypt of Hearts II)
-        [Unitnames.Boss_Chamber_Guardian] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spell_axe_2h_light.dds",
-        }, -- Chamber Guardian (Crypt of Hearts II)
+        [Unitnames.NPC_Spiderkith_Venifex] = { icon = "LuiExtended/media/icons/abilities/ability_spell_sword_2h_light.dds" }, -- Spiderkith Venifex (Crypt of Hearts II)
+        [Unitnames.NPC_Spiderkith_Warper] = { icon = "LuiExtended/media/icons/abilities/ability_spell_dagger_1h_light.dds" }, -- Spiderkith Warper (Crypt of Hearts II)
+        [Unitnames.Boss_Chamber_Guardian] = { icon = "LuiExtended/media/icons/abilities/ability_spell_axe_2h_light.dds" }, -- Chamber Guardian (Crypt of Hearts II)
     },
 
     [29035] = { -- Quick Strike (Rogue/Skirmisher)
@@ -3580,26 +3135,27 @@ Effects.KeepUpgradeTooltip = {
 --------------------------------------------------------------------------------------------------------------------------------
 -- Override various information displayed for Effect auras
 --------------------------------------------------------------------------------------------------------------------------------
+--[[
+    Optional:
+    - icon: Change Icon
+    - name: Change Name
+    - tooltip: Set a custom tooltip to display for this ability
+    - hide: Hide this aura from appearing
+    - type: Adjust this effect to be a debuff or not a debuff to fix API errors (Commonly used as most undispellable debuffs show as a buff)
+    - duration: Modify the duration display of this effect. Option 1 - Set a negative value - to subtract x seconds from the duration of the effect. Option 2 - Set to 0 to display the buff for an unlimited amount of time until an action result of fade occurs.
+    - unbreakable: Flag this aura as unremovable and change border color to grey for debuffs or cyan for buffs
+    - forcedContainer: Forces a buff to appear in one of these containers
+    - groundLabel: Display a "G" ground label on this effect to indicate it is the result of standing in a ground aura
+    - noDuplicate: Adds to a table that uses an expensive function - in some cases effects like Shuffle add a new aura every time the effect is cast. This will flag the effect to only show the latest casted one and hide the others.
+    - hideReduce: Hide this aura if the "HIDE PAIRED AURAS" menu setting is enabled. Merging similar effects so as not to clutter the UI such as the Sun Fire effect with its snare.
+    - tooltipValue2Mod: Needed in some cases to derive a value on an ability tooltip. This value is used for effects like the snare from Sun Fire, when the duration needs to be derived from either buff since one can potentially be hidden.
+    - refreshOnly: Only show this effect when the duration is updated/refreshed - Toggle this to hide some goofy effects that have a travel time aura for their projectile before the actual effect applies.
+    - hideGround: Hide this effect if ground effect damaging auras are set to show - we want damage to always prioritize so that the aura always shows even if the player is immune to the snare or other effect of the ability.
+    - cc: Used to determine the type of CC
+    - ccMergedType: Shows this type of CC if "merged" effects are enabled on
+    - isPlayerAbility: This is a player ability for the purposes of CC icon normalization
+--]]
 Effects.EffectOverride = {
-    -- Optional:
-    -- icon = '' -- Change Icon
-    -- name = '' -- Change Name
-    -- tooltip = '' -- Set a custom tooltip to display for this ability
-    -- hide = true -- Hide this aura from appearing
-    -- type = BUFF_EFFECT_TYPE_BUFF or BUFF_EFFECT_TYPE_DEBUFF -- Adjust this effect to be a debuff or not a debuff to fix API errors (Commonly used as most undispellable debuffs show as a buff)
-    -- duration = # modify the duration display of this effect. Option 1 - Set a negative value - to subtract x seconds from the duration of the effect. Option 2 - Set to 0 to display the buff for an unlimited amount of time until an action result of fade occurs.
-    -- unbreakable = 1 -- flag this aura as unremoveable and change border color to grey for debuffs or cyan for buffs
-    -- forcedContainer = 'short' or 'long' - Forces a buff to appear in one of these containers
-    -- groundLabel = true -- "Display a "G" ground label on this effect to indicate it is the result of standing in a ground aura
-    -- noDuplicate = true -- Adds to a table that uses an expensive function - in some cases effects like Shuffle add a new aura every time the effect is cast. This will flag the effect to only show the latest casted one and hide the others.
-    -- hideReduce = true -- Hide this aura if the "HIDE PAIRED AURAS" menu setting is enabled. Merging similar effects so as not to clutter the UI such as the Sun Fire effect with its snare.
-    -- tooltipValue2Mod = # -- Needed in some cases to derive a value on an ability tooltip. This value is used for effects like the snare from Sun Fire, when the duration needs to be derived from either buff since one can potentially be hidden.
-    -- refreshOnly = true -- Only show this effect when the duration is updated/refreshed - Toggle this to hide some goofy effects that have a travel time aura for their projectile before the actual effect applies.
-    -- hideGround = true -- Hide this effect if ground effect damaging auras are set to show - we want damage to always prioritize so that the aura always shows even if the player is immune to the snare or other effect of the ability.
-
-    --cc = LUIE_CC_TYPE -- Used to determine type of CC
-    --ccMergedType = LUIE_CC_TYPE -- Shows this type of CC if "merged" effects are enabled on
-    --isPlayerAbility = true -- This is a player ability for the purposes of CC icon normalization
 
     -- TEMP MOVE LATER
     [54119] = { forcedContainer = "short" }, -- Remembrance (The Anger of a King)
@@ -3689,16 +3245,8 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Magic Status Effects
-    [18084] = {
-        icon = "LuiExtended/media/icons/abilities/ability_proc_burning.dds",
-        tooltip = Tooltips.Generic_Burn,
-        tooltipValue2 = 2,
-    }, -- Burning (Fire Status Effect)
-    [130804] = {
-        icon = "LuiExtended/media/icons/abilities/ability_proc_burning.dds",
-        tooltip = Tooltips.Generic_Burn,
-        tooltipValue2 = 2,
-    }, -- Burning (Fire Status Effect - Siege)
+    [18084] = { icon = "LuiExtended/media/icons/abilities/ability_proc_burning.dds", tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Burning (Fire Status Effect)
+    [130804] = { icon = "LuiExtended/media/icons/abilities/ability_proc_burning.dds", tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Burning (Fire Status Effect - Siege)
     [21481] = { icon = "LuiExtended/media/icons/abilities/ability_proc_chill.dds", name = Abilities.Proc_Chilled }, -- Chill (Frost Status Effect)
     [130814] = { icon = "LuiExtended/media/icons/abilities/ability_proc_chill.dds", name = Abilities.Proc_Chilled }, -- Chill (Frost Status Effect)
     [21487] = { icon = "LuiExtended/media/icons/abilities/ability_proc_concussion.dds" }, -- Concussion (Shock Status Effect)
@@ -3707,16 +3255,8 @@ Effects.EffectOverride = {
 
     -- Martial Status Effects
     [21925] = { icon = "LuiExtended/media/icons/abilities/ability_proc_diseased.dds" }, -- Diseased (Disease Status Effect)
-    [148801] = {
-        icon = "LuiExtended/media/icons/abilities/ability_proc_hemorrhaging.dds",
-        tooltip = Tooltips.Generic_Bleed,
-        tooltipValue2 = 2,
-    }, -- Hemorrhaging (Bleed Status Effect)
-    [21929] = {
-        icon = "LuiExtended/media/icons/abilities/ability_proc_poisoned.dds",
-        tooltip = Tooltips.Generic_Poison,
-        tooltipValue2 = 2,
-    }, -- Poisoned (Poison Status Effect)
+    [148801] = { icon = "LuiExtended/media/icons/abilities/ability_proc_hemorrhaging.dds", tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 2 }, -- Hemorrhaging (Bleed Status Effect)
+    [21929] = { icon = "LuiExtended/media/icons/abilities/ability_proc_poisoned.dds", tooltip = Tooltips.Generic_Poison, tooltipValue2 = 2, }, -- Poisoned (Poison Status Effect)
     [148800] = { icon = "LuiExtended/media/icons/abilities/ability_proc_sundered.dds" }, -- Sundered (Physical Status Effect)
     [149573] = { icon = "LuiExtended/media/icons/abilities/ability_proc_sundered.dds" }, -- Sundered (Physical Status Effect - Siege)
 
@@ -3725,11 +3265,7 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Mundus Stone Interaction
-    [14031] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_mundus_use.dds",
-        name = Abilities.Innate_Receiving_Boon,
-        unbreakable = 1,
-    }, -- Mundus Use
+    [14031] = { icon = "LuiExtended/media/icons/abilities/ability_innate_mundus_use.dds", name = Abilities.Innate_Receiving_Boon, unbreakable = 1, }, -- Mundus Use
 
     -- Boons
     [13940] = { tooltip = Tooltips.Boon_Warrior }, -- Boon: The Warrior
@@ -22734,34 +22270,11 @@ Effects.ZoneDataOverride = {
 }
 
 Effects.MapDataOverride = {
-
-    [70355] = {
-        [Zonenames.Zone_Deepwood_Barrow] = { icon = "LuiExtended/media/icons/abilities/ability_bear_bite_w.dds" }, -- Bite (Great Bear)
-    },
-    [70357] = {
-        [Zonenames.Zone_Deepwood_Barrow] = { icon = "LuiExtended/media/icons/abilities/ability_bear_lunge_white.dds" }, -- Lunge (Great Bear)
-    },
-    [70359] = {
-        [Zonenames.Zone_Deepwood_Barrow] = { icon = "LuiExtended/media/icons/abilities/ability_bear_lunge_white.dds" }, -- Lunge (Great Bear)
-    },
-    [70366] = {
-        [Zonenames.Zone_Deepwood_Barrow] = {
-            icon = "LuiExtended/media/icons/abilities/ability_bear_crushing_swipe_white.dds",
-        }, -- Slam (Great Bear)
-    },
-    [89189] = {
-        [Zonenames.Zone_Deepwood_Barrow] = {
-            icon = "LuiExtended/media/icons/abilities/ability_bear_crushing_swipe_white.dds",
-        }, -- Slam (Great Bear)
-    },
-    [69073] = {
-        [Zonenames.Zone_Deepwood_Barrow] = {
-            icon = "LuiExtended/media/icons/abilities/ability_bear_crushing_swipe_white.dds",
-        }, -- Knockdown (Great Bear)
-    },
-    [70374] = {
-        [Zonenames.Zone_Deepwood_Barrow] = {
-            icon = "LuiExtended/media/icons/abilities/ability_bear_ferocity_white.dds",
-        }, -- Ferocity (Great Bear)
-    },
+    [70355] = { [Zonenames.Zone_Deepwood_Barrow] = { icon = "LuiExtended/media/icons/abilities/ability_bear_bite_w.dds" } }, -- Bite (Great Bear)
+    [70357] = { [Zonenames.Zone_Deepwood_Barrow] = { icon = "LuiExtended/media/icons/abilities/ability_bear_lunge_white.dds" } }, -- Lunge (Great Bear)
+    [70359] = { [Zonenames.Zone_Deepwood_Barrow] = { icon = "LuiExtended/media/icons/abilities/ability_bear_lunge_white.dds" } }, -- Lunge (Great Bear)
+    [70366] = { [Zonenames.Zone_Deepwood_Barrow] = { icon = "LuiExtended/media/icons/abilities/ability_bear_crushing_swipe_white.dds" } }, -- Slam (Great Bear)
+    [89189] = { [Zonenames.Zone_Deepwood_Barrow] = { icon = "LuiExtended/media/icons/abilities/ability_bear_crushing_swipe_white.dds" } }, -- Slam (Great Bear)
+    [69073] = { [Zonenames.Zone_Deepwood_Barrow] = { icon = "LuiExtended/media/icons/abilities/ability_bear_crushing_swipe_white.dds" } }, -- Knockdown (Great Bear)
+    [70374] = { [Zonenames.Zone_Deepwood_Barrow] = { icon = "LuiExtended/media/icons/abilities/ability_bear_ferocity_white.dds" } }, -- Ferocity (Great Bear)
 }
