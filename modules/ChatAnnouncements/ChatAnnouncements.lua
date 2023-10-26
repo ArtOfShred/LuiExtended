@@ -394,6 +394,10 @@ ChatAnnouncements.Defaults = {
         CurrencyUndauntedColor = { 1, 1, 1, 1 },
         CurrencyUndauntedName = GetString(SI_LUIE_CA_CURRENCY_UNDAUNTED),
         CurrencyUndauntedShowTotal = false,
+        CurrencyEndlessChange = true,
+        CurrencyEndlessColor = { 1, 1, 1, 1 },
+        CurrencyEndlessName = GetString(SI_LUIE_CA_CURRENCY_ENDLESS),
+        CurrencyEndlessTotal = false,
         CurrencyMessageTotalAP = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALAP),
         CurrencyMessageTotalGold = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGOLD),
         CurrencyMessageTotalTV = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTV),
@@ -405,6 +409,7 @@ ChatAnnouncements.Defaults = {
         CurrencyMessageTotalEndeavors = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALENDEAVORS),
         CurrencyMessageTotalOutfitToken = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALOUTFITTOKENS),
         CurrencyMessageTotalUndaunted = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALUNDAUNTED),
+        CurrencyMessageTotalEndless = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALENDLESS),
     },
 
     -- Loot
@@ -758,6 +763,7 @@ local CurrencyEventColorize
 local CurrencyCrownsColorize
 local CurrencyCrownGemsColorize
 local CurrencyEndeavorsColorize
+local CurrencyEndlessColorize
 
 -- Disguise
 local DisguiseAlertColorize
@@ -1050,6 +1056,7 @@ function ChatAnnouncements.RegisterColorEvents()
     CurrencyCrownsColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyCrownsColor))
     CurrencyCrownGemsColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyCrownGemsColor))
     CurrencyEndeavorsColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyEndeavorsColor))
+    CurrencyEndlessColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyEndlessColor))
     DisguiseAlertColorize = ZO_ColorDef:New(unpack(SV.Notify.DisguiseAlertColor))
     AchievementColorize1 = ZO_ColorDef:New(unpack(SV.Achievement.AchievementColor1))
     AchievementColorize2 = ZO_ColorDef:New(unpack(SV.Achievement.AchievementColor2))
@@ -2370,6 +2377,15 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyEndeavorsName, UpOrDown)
         currencyTotal = ChatAnnouncements.SV.Currency.CurrencyEndeavorsShowTotal
         messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalEndeavors
+    elseif currency == CURT_ENDLESS_DUNGEON then -- Archival Fortunes
+        if not ChatAnnouncements.SV.Currency.CurrencyEndlessChange then
+            return
+        end
+        currencyTypeColor = CurrencyEndlessColorize:ToHex()
+        currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:esoui/art/currency/archivalfragments_mipmaps.dds|t" or ""
+        currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyEndlessName, UpOrDown)
+        currencyTotal = ChatAnnouncements.SV.Currency.CurrencyEndlessShowTotal
+        messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalEndless
     else -- If for some reason there is no currency type, end the function now
         return
     end

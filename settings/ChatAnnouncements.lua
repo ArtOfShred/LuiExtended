@@ -935,6 +935,95 @@ function ChatAnnouncements.CreateSettings()
                 default = Defaults.Currency.CurrencyMessageTotalUndaunted,
             },
             {
+                -- Show Endless Keys
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDLESS),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDLESS_TP),
+                getFunc = function()
+                    return Settings.Currency.CurrencyEndlessChange
+                end,
+                setFunc = function(value)
+                    Settings.Currency.CurrencyEndlessChange = value
+                end,
+                width = "full",
+                disabled = function()
+                    return not LUIE.SV.ChatAnnouncements_Enable
+                end,
+                default = Defaults.Currency.CurrencyEndlessChange,
+            },
+            {
+                -- Show Endless Keys Color
+                type = "colorpicker",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDLESSCOLOR)),
+                getFunc = function()
+                    return unpack(Settings.Currency.CurrencyEndlessColor)
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.Currency.CurrencyEndlessColor = { r, g, b, a }
+                    ChatAnnouncements.RegisterColorEvents()
+                end,
+                width = "full",
+                disabled = function()
+                    return not (Settings.Currency.CurrencyEndlessChange and LUIE.SV.ChatAnnouncements_Enable)
+                end,
+                default = {
+                    r = Defaults.Currency.CurrencyEndlessColor[1],
+                    g = Defaults.Currency.CurrencyEndlessColor[2],
+                    b = Defaults.Currency.CurrencyEndlessColor[3],
+                },
+            },
+            {
+                -- Show Endless Keys Name
+                type = "editbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDLESSNAME)),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDLESSNAME_TP),
+                getFunc = function()
+                    return Settings.Currency.CurrencyEndlessName
+                end,
+                setFunc = function(value)
+                    Settings.Currency.CurrencyEndlessName = value
+                end,
+                width = "full",
+                disabled = function()
+                    return not (Settings.Currency.CurrencyEndlessChange and LUIE.SV.ChatAnnouncements_Enable)
+                end,
+                default = Defaults.Currency.CurrencyEndlessName,
+            },
+            {
+                -- Show Endless Keys Total
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDLESSTOTAL)),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDLESSTOTAL_TP),
+                getFunc = function()
+                    return Settings.Currency.CurrencyEndlessShowTotal
+                end,
+                setFunc = function(value)
+                    Settings.Currency.CurrencyEndlessShowTotal = value
+                end,
+                width = "full",
+                disabled = function()
+                    return not (Settings.Currency.CurrencyEndlessChange and LUIE.SV.ChatAnnouncements_Enable)
+                end,
+                default = Defaults.Currency.CurrencyEndlessShowTotal,
+            },
+            {
+                -- Total Currency Message (Endless Keys)
+                type = "editbox",
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_ENDLESSTOTAL_MSG)),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_ENDLESSTOTAL_MSG_TP),
+                getFunc = function()
+                    return Settings.Currency.CurrencyMessageTotalEndless
+                end,
+                setFunc = function(value)
+                    Settings.Currency.CurrencyMessageTotalEndless = value
+                end,
+                width = "full",
+                disabled = function()
+                    return not (LUIE.SV.ChatAnnouncements_Enable and Settings.Currency.CurrencyEndlessChange and Settings.Currency.CurrencyEndlessShowTotal)
+                end,
+                default = Defaults.Currency.CurrencyMessageTotalEndless,
+            },
+            {
                 -- Show Outfit Tokens
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENS),
