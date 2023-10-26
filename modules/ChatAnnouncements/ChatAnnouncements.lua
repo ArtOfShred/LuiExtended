@@ -3133,7 +3133,13 @@ end
 function ChatAnnouncements.MailMoneyChanged(eventCode)
     g_mailCOD = 0
     g_postageAmount = GetQueuedMailPostage()
-    g_mailAmount = GetQueuedMoneyAttachment()
+    local getMailAmount = GetQueuedMoneyAttachment()
+    -- If we send more then half of the gold in our bags for some reason this event fires again so this is a workaround
+    if getMailAmount == GetCurrencyAmount(CURT_MONEY, CURRENCY_LOCATION_CHARACTER) then
+        return
+    else
+        g_mailAmount = getMailAmount
+    end
 end
 
 function ChatAnnouncements.MailCODChanged(eventCode)
@@ -9861,8 +9867,12 @@ function ChatAnnouncements.HookFunction()
         -- Debug function
         if ChatAnnouncements.SV.DisplayAnnouncements.Debug and not debugDisable then
             d("EVENT_DISPLAY_ANNOUNCEMENT: If you see this message please post a screenshot and context for the event on the LUI Extended ESOUI page.")
-            d("Primary Text: " .. primaryText)
-            d("Secondary Text: " .. secondaryText)
+            if primaryText then
+                d("Primary Text: " .. primaryText)
+            end
+            if secondaryText then
+                d("Secondary Text: " .. secondaryText)
+            end
             local zoneid = GetZoneId(GetCurrentMapZoneIndex())
             d("Zone Id: " .. zoneid)
             local mapid = GetCurrentMapId()
