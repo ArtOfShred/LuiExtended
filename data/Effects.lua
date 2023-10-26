@@ -3713,485 +3713,103 @@ Effects.EffectOverride = {
 
     -- Crafted Food
     [61256] = { hide = true }, -- Magicka Consumable (Health + Stamina Food)
-    [61259] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_food_green.dds",
-        tooltip = Tooltips.Food_Crafted_Health,
-        forcedContainer = "long",
-    }, -- Health Food
-    [61260] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_food_green.dds",
-        tooltip = Tooltips.Food_Crafted_Magicka,
-        forcedContainer = "long",
-    }, -- Magicka Food
-    [61261] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_food_green.dds",
-        tooltip = Tooltips.Food_Crafted_Stamina,
-        forcedContainer = "long",
-    }, -- Stamina Food
-    [61294] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_food_blue.dds",
-        tooltip = Tooltips.Food_Crafted_Magicka_Stamina,
-        forcedContainer = "long",
-    }, -- Magicka + Stamina Food
-    [61255] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_food_blue.dds",
-        tooltip = Tooltips.Food_Crafted_Health_Stamina,
-        forcedContainer = "long",
-    }, -- Health + Stamina Food
-    [61257] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_food_blue.dds",
-        tooltip = Tooltips.Food_Crafted_Health_Magicka,
-        forcedContainer = "long",
-    }, -- Health + Magicka Food
-    [61218] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_food_purple.dds",
-        tooltip = Tooltips.Food_Crafted_Triple,
-        forcedContainer = "long",
-    }, -- Triple Food
-    [72819] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_orzorga_tripe_trifle_pocket.dds",
-        name = Abilities.Food_Orzorgas_Tripe_Trifle_Pocket,
-        tooltip = Tooltips.Food_Crafted_Orzorgas_Tripe,
-        forcedContainer = "long",
-    }, -- Orzorga's Tripe Trifle Pocket
-    [72822] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_orzorga_blood_price_pie.dds",
-        name = Abilities.Food_Orzorgas_Blood_Price_Pie,
-        tooltip = Tooltips.Food_Crafted_Orzorgas_Blood_Price,
-        forcedContainer = "long",
-    }, -- Orzorga's Blood Price Pie
-    [72824] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_orzorga_bear_haunch.dds",
-        name = Abilities.Food_Orzorgas_Smoked_Bear_Haunch,
-        tooltip = Tooltips.Food_Crafted_Orzorgas_Smoked_Bear,
-        forcedContainer = "long",
-    }, -- Orzorga's Smoked Bear Haunch
-    [100502] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_deregulated_mushroom_stew.dds",
-        tooltip = Tooltips.Food_Crafted_Deregulated_Mushroom_Stew,
-        forcedContainer = "long",
-    }, -- Deregulated Mushroom Stew
-    [100498] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_clockwork_citrus_filet.dds",
-        tooltip = Tooltips.Food_Crafted_Clockwork_Citrus_Filet,
-        forcedContainer = "long",
-    }, -- Clockwork Citrus Filet
-    [107789] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_artaeum_takeaway_broth.dds",
-        tooltip = Tooltips.Food_Crafted_Artaeum_Takeaway_Broth,
-        forcedContainer = "long",
-    }, -- Artaeum Takeaway Broth
-    [107748] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_artaeum_pickled_fish_bowl.dds",
-        name = Abilities.Food_Artaeum_Pickled_Fish_Bowl,
-        tooltip = Tooltips.Food_Crafted_Artaeum_Pickled_Fish_Bowl,
-        forcedContainer = "long",
-    }, -- Lure Allure (Artaeum Pickled Fish Bowl)
-
-    -- Crafted Drink
-    [61322] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_drink_green.dds",
-        name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Health_Recovery),
-        tooltip = Tooltips.Drink_Crafted_Health,
-        forcedContainer = "long",
-    }, -- Health Drink
+    [61259] = { icon = "LuiExtended/media/icons/consumables/consumable_food_green.dds", tooltip = Tooltips.Food_Crafted_Health, forcedContainer = "long" }, -- Health Food
+    [61260] = { icon = "LuiExtended/media/icons/consumables/consumable_food_green.dds", tooltip = Tooltips.Food_Crafted_Magicka, forcedContainer = "long" }, -- Magicka Food
+    [61261] = { icon = "LuiExtended/media/icons/consumables/consumable_food_green.dds", tooltip = Tooltips.Food_Crafted_Stamina, forcedContainer = "long" }, -- Stamina Food
+    [61294] = { icon = "LuiExtended/media/icons/consumables/consumable_food_blue.dds", tooltip = Tooltips.Food_Crafted_Magicka_Stamina, forcedContainer = "long" }, -- Magicka + Stamina Food
+    [61255] = { icon = "LuiExtended/media/icons/consumables/consumable_food_blue.dds", tooltip = Tooltips.Food_Crafted_Health_Stamina, forcedContainer = "long" }, -- Health + Stamina Food
+    [61257] = { icon = "LuiExtended/media/icons/consumables/consumable_food_blue.dds", tooltip = Tooltips.Food_Crafted_Health_Magicka, forcedContainer = "long" }, -- Health + Magicka Food
+    [61218] = { icon = "LuiExtended/media/icons/consumables/consumable_food_purple.dds", tooltip = Tooltips.Food_Crafted_Triple, forcedContainer = "long" }, -- Triple Food
+    [72819] = { icon = "LuiExtended/media/icons/consumables/consumable_orzorga_tripe_trifle_pocket.dds", name = Abilities.Food_Orzorgas_Tripe_Trifle_Pocket, tooltip = Tooltips.Food_Crafted_Orzorgas_Tripe, forcedContainer = "long" }, -- Orzorga's Tripe Trifle Pocket
+    [72822] = { icon = "LuiExtended/media/icons/consumables/consumable_orzorga_blood_price_pie.dds", name = Abilities.Food_Orzorgas_Blood_Price_Pie, tooltip = Tooltips.Food_Crafted_Orzorgas_Blood_Price, forcedContainer = "long" }, -- Orzorga's Blood Price Pie
+    [72824] = { icon = "LuiExtended/media/icons/consumables/consumable_orzorga_bear_haunch.dds", name = Abilities.Food_Orzorgas_Smoked_Bear_Haunch, tooltip = Tooltips.Food_Crafted_Orzorgas_Smoked_Bear, forcedContainer = "long" }, -- Orzorga's Smoked Bear Haunch
+    [100502] = { icon = "LuiExtended/media/icons/consumables/consumable_deregulated_mushroom_stew.dds", tooltip = Tooltips.Food_Crafted_Deregulated_Mushroom_Stew, forcedContainer = "long" }, -- Deregulated Mushroom Stew
+    [100498] = { icon = "LuiExtended/media/icons/consumables/consumable_clockwork_citrus_filet.dds", tooltip = Tooltips.Food_Crafted_Clockwork_Citrus_Filet, forcedContainer = "long" }, -- Clockwork Citrus Filet
+    [107789] = { icon = "LuiExtended/media/icons/consumables/consumable_artaeum_takeaway_broth.dds", tooltip = Tooltips.Food_Crafted_Artaeum_Takeaway_Broth, forcedContainer = "long" }, -- Artaeum Takeaway Broth
+    [107748] = { icon = "LuiExtended/media/icons/consumables/consumable_artaeum_pickled_fish_bowl.dds", name = Abilities.Food_Artaeum_Pickled_Fish_Bowl, tooltip = Tooltips.Food_Crafted_Artaeum_Pickled_Fish_Bowl, forcedContainer = "long" }, -- Lure Allure (Artaeum Pickled Fish Bowl)-- Crafted Drink
+    [61322] = { icon = "LuiExtended/media/icons/consumables/consumable_drink_green.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Health_Recovery), tooltip = Tooltips.Drink_Crafted_Health, forcedContainer = "long" }, -- Health Drink
     [61323] = { hide = true }, -- Well Fed
-    [61325] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_drink_green.dds",
-        name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Magicka_Recovery),
-        tooltip = Tooltips.Drink_Crafted_Magicka,
-        forcedContainer = "long",
-    }, -- Magicka Drink
+    [61325] = { icon = "LuiExtended/media/icons/consumables/consumable_drink_green.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Magicka_Recovery), tooltip = Tooltips.Drink_Crafted_Magicka, forcedContainer = "long" }, -- Magicka Drink
     [61326] = { hide = true }, -- Well Fed
-    [61328] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_drink_green.dds",
-        name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Stamina_Recovery),
-        tooltip = Tooltips.Drink_Crafted_Stamina,
-        forcedContainer = "long",
-    }, -- Stamina Drink
+    [61328] = { icon = "LuiExtended/media/icons/consumables/consumable_drink_green.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Stamina_Recovery), tooltip = Tooltips.Drink_Crafted_Stamina, forcedContainer = "long" }, -- Stamina Drink
     [61329] = { hide = true }, -- Well Fed
-    [61345] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_drink_blue.dds",
-        name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Magicka_Stamina_Recovery),
-        tooltip = Tooltips.Drink_Crafted_Magicka_Stamina,
-        forcedContainer = "long",
-    }, -- Magicka + Stamina Drink
+    [61345] = { icon = "LuiExtended/media/icons/consumables/consumable_drink_blue.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Magicka_Stamina_Recovery), tooltip = Tooltips.Drink_Crafted_Magicka_Stamina, forcedContainer = "long" }, -- Magicka + Stamina Drink
     [61346] = { hide = true }, -- Well Fed
     [61348] = { hide = true }, -- Well Fed
-    [61340] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_drink_blue.dds",
-        name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Health_Stamina_Recovery),
-        tooltip = Tooltips.Drink_Crafted_Health_Stamina,
-        forcedContainer = "long",
-    }, -- Health + Stamina Drink
+    [61340] = { icon = "LuiExtended/media/icons/consumables/consumable_drink_blue.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Health_Stamina_Recovery), tooltip = Tooltips.Drink_Crafted_Health_Stamina, forcedContainer = "long" }, -- Health + Stamina Drink
     [61341] = { hide = true }, -- Well Fed
     [61344] = { hide = true }, -- Well Fed
-    [61335] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_drink_blue.dds",
-        name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Health_Magicka_Recovery),
-        tooltip = Tooltips.Drink_Crafted_Health_Magicka,
-        forcedContainer = "long",
-    }, -- Health + Magicka Drink
+    [61335] = { icon = "LuiExtended/media/icons/consumables/consumable_drink_blue.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Health_Magicka_Recovery), tooltip = Tooltips.Drink_Crafted_Health_Magicka, forcedContainer = "long" }, -- Health + Magicka Drink
     [61336] = { hide = true }, -- Well Fed
     [61339] = { hide = true }, -- Well Fed
-    [61350] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_drink_purple.dds",
-        name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Primary_Stat_Recovery),
-        tooltip = Tooltips.Drink_Crafted_Triple,
-        forcedContainer = "long",
-    }, -- Triple Drink
-    [72816] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_orzorga_red_frothgar.dds",
-        name = Abilities.Drink_Orzorgas_Red_Frothgar,
-        tooltip = Tooltips.Drink_Crafted_Orzorgas_Red_Frothgar,
-        forcedContainer = "long",
-    }, -- Orzorga's Red Frothgar
+    [61350] = { icon = "LuiExtended/media/icons/consumables/consumable_drink_purple.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Primary_Stat_Recovery), tooltip = Tooltips.Drink_Crafted_Triple, forcedContainer = "long" }, -- Triple Drink
+    [72816] = { icon = "LuiExtended/media/icons/consumables/consumable_orzorga_red_frothgar.dds", name = Abilities.Drink_Orzorgas_Red_Frothgar, tooltip = Tooltips.Drink_Crafted_Orzorgas_Red_Frothgar, forcedContainer = "long" }, -- Orzorga's Red Frothgar
     [61354] = { hide = true }, -- Well Fed: Magicka Regen
-    [100488] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_spring-loaded_infusion.dds",
-        tooltip = Tooltips.Drink_Crafted_Spring_Loaded_Infusion,
-        forcedContainer = "long",
-    }, -- Spring-Loaded Infusion
+    [100488] = { icon = "LuiExtended/media/icons/consumables/consumable_spring-loaded_infusion.dds", tooltip = Tooltips.Drink_Crafted_Spring_Loaded_Infusion, forcedContainer = "long" }, -- Spring-Loaded Infusion
     [100490] = { hide = true }, -- Magicka Consumable
-    [100489] = { hide = true }, -- Stamina Consumable
-
-    -- Crafted Seasonal Food
-    [84681] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_event_crisp_and_crunchy_pumpkin.dds",
-        name = Abilities.Food_Pumpkin_Snack_Skewer,
-        tooltip = Tooltips.Food_Crafted_Pumpkin_Snack_Skewer,
-        forcedContainer = "long",
-    }, -- Crisp and Crunchy Pumpkin Snack Skewer
-    [84709] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_event_crunchy_spider_skewer.dds",
-        tooltip = Tooltips.Food_Crafted_Crunchy_Spider_Skewer,
-        forcedContainer = "long",
-    }, -- Crunchy Spider Skewer
-    [84725] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_event_frosted_brains.dds",
-        name = Abilities.Food_Frosted_Brains,
-        tooltip = Tooltips.Food_Crafted_Frosted_Brains,
-        forcedContainer = "long",
-    }, -- Frosted Brains
-    [84678] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_food_green.dds",
-        tooltip = Tooltips.Food_Crafted_Sweet_Sanguine_Apples,
-        forcedContainer = "long",
-    }, -- Sweet Sanguine Apples (Generic shared id for other seasonal magicka food)
-    [86789] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_event_alcaire_festival_sword-pie.dds",
-        tooltip = Tooltips.Food_Crafted_Alcaire_Festival_Sword_Pie,
-        forcedContainer = "long",
-    }, -- Alcaire Festival Sword-Pie
-    [86749] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_event_jagga-drenched_mud_ball.dds",
-        name = Abilities.Food_Jagga_Drenched_Mud_Ball,
-        tooltip = Tooltips.Food_Crafted_Jagga_Drenched_Mud_Ball,
-        forcedContainer = "long",
-    }, -- Jagga-Drenched "Mud Ball"
-    [86673] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_event_lava_foot_soup-and-saltrice.dds",
-        name = Abilities.Food_Lava_Foot_Soup,
-        tooltip = Tooltips.Food_Crafted_Lava_Foot_Soup,
-        forcedContainer = "long",
-    }, -- Lava Foot Soup-and-Saltrice
-    [86787] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_event_rajhins_sugar_claws.dds",
-        tooltip = Tooltips.Food_Crafted_Rajhins_Sugar_Claws,
-        forcedContainer = "long",
-    }, -- Rajhin's Sugar Claws
-    [89955] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_event_candied_jesters_coins.dds",
-        tooltip = Tooltips.Food_Crafted_Candied_Jesters_Coins,
-        forcedContainer = "long",
-    }, -- Candied Jester's Coins
-    [89971] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_event_jewels_of_misrule.dds",
-        tooltip = Tooltips.Food_Crafted_Jewels_of_Misrule,
-        forcedContainer = "long",
-    }, -- Jewels of Misrule
-    [127596] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_event_bewitched_sugar_skulls.dds",
-        tooltip = Tooltips.Food_Crafted_Bewitched_Sugar_Skulls,
-        forcedContainer = "long",
-    }, -- Bewitched Sugar Skulls
-
-    -- Crafted Seasonal Drink
-    [84700] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_event_bowl_of_peeled_eyeballs.dds",
-        name = Abilities.Drink_Bowl_of_Peeled_Eyeballs,
-        tooltip = Tooltips.Drink_Crafted_Bowl_of_Peeled_Eyeballs,
-        forcedContainer = "long",
-    }, -- Bowl of "Peeled Eyeballs"
-    [84735] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_event_purifying_bloody_mara.dds",
-        tooltip = Tooltips.Drink_Double_Bloody_Mara,
-        forcedContainer = "long",
-    }, -- Purifying Bloody Mara
-    [84720] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_event_ghastly_eye_bowl.dds",
-        name = Abilities.Drink_Ghastly_Eye_Bowl,
-        tooltip = Tooltips.Drink_Crafted_Ghastly_Eye_Bowl,
-        forcedContainer = "long",
-    }, -- Ghastly Eye Bowl
-    [84704] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_event_witchmothers_party_punch.dds",
-        tooltip = Tooltips.Drink_Crafted_Witchmothers_Party_Punch,
-        forcedContainer = "long",
-    }, -- Witchmother's Party Punch
-    [84731] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_event_witchmothers_potent_brew.dds",
-        tooltip = Tooltips.Drink_Crafted_Witchmothers_Potent_Brew,
-        forcedContainer = "long",
-    }, -- Witchmother's Potent Brew
-    [86677] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_event_bergama_warning_fire.dds",
-        name = Abilities.Drink_Bergama_Warning_Fire,
-        tooltip = Tooltips.Drink_Crafted_Bergama_Warning_Fire,
-        forcedContainer = "long",
-    }, -- Bergama Warning Fire
-    [86746] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_event_betnikh_twice-spiked_ale.dds",
-        name = Abilities.Drink_Betnikh_Twice_Spiked_Ale,
-        tooltip = Tooltips.Drink_Crafted_Betnikh_Twice_Spiked_Ale,
-        forcedContainer = "long",
-    }, -- Betnikh Twice-Spiked Ale
-    [86559] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_event_hissmir_fish-eye_rye.dds",
-        name = Abilities.Drink_Hissmir_Fish_Eye_Rye,
-        tooltip = Tooltips.Drink_Hissmir,
-        forcedContainer = "long",
-    }, -- Hissmir Fish-Eye Rye
-    [86791] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_event_snow_bear_glow-wine.dds",
-        name = Abilities.Drink_Snow_Bear_Glow_Wine,
-        tooltip = Tooltips.Drink_Crafted_Snow_Bear_Glow_Wine,
-        forcedContainer = "long",
-    }, -- Snow Bear Glow-Wine
-    [89957] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_event_dubious_camoran_throne.dds",
-        tooltip = Tooltips.Drink_Crafted_Dubious_Camoran_Throne,
-        forcedContainer = "long",
-    }, -- Dubious Camoran Throne
-    [127531] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_event_corrupting_bloody_mara.dds",
-        tooltip = Tooltips.Drink_Crafted_Disastrously_Bloody_Mara,
-        forcedContainer = "long",
-    }, -- Corrupting Bloody Mara
-    [127572] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_event_pack_leaders_bone_broth.dds",
-        tooltip = Tooltips.Drink_Crafted_Pack_Leaders_Bone_Broth,
-        forcedContainer = "long",
-    }, -- Pack Leader's Bone Broth
-
-    -- Vendor Food & Drink
-    [66551] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_food_white.dds",
-        tooltip = Tooltips.Food_Vendor_Health,
-        forcedContainer = "long",
-    }, -- Vendor Health Food
-    [66568] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_food_white.dds",
-        tooltip = Tooltips.Food_Vendor_Magicka,
-        forcedContainer = "long",
-    }, -- Vendor Magicka Food
-    [66576] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_food_white.dds",
-        tooltip = Tooltips.Food_Vendor_Stamina,
-        forcedContainer = "long",
-    }, -- Vendor Stamina Food
-    [66586] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_drink_white.dds",
-        name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Health_Recovery),
-        tooltip = Tooltips.Drink_Vendor_Health,
-        forcedContainer = "long",
-    }, -- Vendor Health Drink
-    [66590] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_drink_white.dds",
-        name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Magicka_Recovery),
-        tooltip = Tooltips.Drink_Vendor_Magicka,
-        forcedContainer = "long",
-    }, -- Vendor Magicka Drink
-    [66594] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_drink_white.dds",
-        name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Stamina_Recovery),
-        tooltip = Tooltips.Drink_Vendor_Stamina,
-        forcedContainer = "long",
-    }, -- Vendor Stamina Drink
-
-    -- AVA Food & Drink
-    [72961] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_ava_field_bar.dds",
-        name = Abilities.Food_Magicka_Stamina_Increase,
-        tooltip = Tooltips.Food_Cyrodilic_Field_Bar,
-        forcedContainer = "long",
-    }, -- Cyrodilic Field Bar
-    [72956] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_ava_field_tack.dds",
-        name = Abilities.Food_Health_Stamina_Increase,
-        tooltip = Tooltips.Food_Cyrodilic_Field_Tack,
-        forcedContainer = "long",
-    }, -- Cyrodilic Field Tack
-    [72959] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_ava_field_treat.dds",
-        name = Abilities.Food_Health_Magicka_Increase,
-        tooltip = Tooltips.Food_Cyrodilic_Field_Treat,
-        forcedContainer = "long",
-    }, -- Cyrodilic Field Treat
-    [72971] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_ava_field_tonic.dds",
-        name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Magicka_Stamina_Recovery),
-        tooltip = Tooltips.Drink_Cyrodilic_Field_Tonic,
-        forcedContainer = "long",
-    }, -- Cyrodilic Field Tonic
-    [72965] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_ava_field_brew.dds",
-        name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Health_Stamina_Recovery),
-        tooltip = Tooltips.Drink_Cyrodilic_Field_Brew,
-        forcedContainer = "long",
-    }, -- Cyrodilic Field Brew
-    [72968] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_ava_field_tea.dds",
-        name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Health_Magicka_Recovery),
-        tooltip = Tooltips.Drink_Cyrodilic_Field_Tea,
-        forcedContainer = "long",
-    }, -- Cyrodilic Field Tea
-
-    -- Crown Food & Drink
-    [85484] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_crown_crate_food.dds",
-        name = Abilities.Food_Crown_Crate_Meal,
-        tooltip = Tooltips.Food_Crown_Crate_Meal,
-        forcedContainer = "long",
-    }, -- Crown Crate Fortifying Meal
-    [68411] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_crown_food.dds",
-        name = Abilities.Food_Crown_Meal,
-        tooltip = Tooltips.Food_Crown_Meal,
-        forcedContainer = "long",
-    }, -- Crown Fortifying Meal
-    [85497] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_crown_crate_drink.dds",
-        name = Abilities.Drink_Crown_Crate_Drink,
-        tooltip = Tooltips.Drink_Crown_Crate_Drink,
-        forcedContainer = "long",
-    }, -- Crown Crate Refreshing Drink
-    [68416] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_crown_drink.dds",
-        name = Abilities.Drink_Crown_Drink,
-        tooltip = Tooltips.Drink_Crown_Drink,
-        forcedContainer = "long",
-    }, -- Crown Refreshing Drink
-    [92435] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_crowncrate_magickahealth_food.dds",
-        name = Abilities.Food_Crown_Combat_Mystics_Stew,
-        tooltip = Tooltips.Food_Crown_Combat_Mystics_Stew,
-        forcedContainer = "long",
-    }, -- Crown Combat Mystic's Stew
-    [92474] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_crowncrate_staminahealth_food.dds",
-        name = Abilities.Food_Crown_Vigorous_Ragout,
-        tooltip = Tooltips.Food_Crown_Vigorous_Ragout,
-        forcedContainer = "long",
-    }, -- Crown Vigorous Ragout
-    [92433] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_crowncrate_magickahealth_drink.dds",
-        name = Abilities.Drink_Crown_Stout_Magic_Liqueur,
-        tooltip = Tooltips.Drink_Crown_Stout_Magic_Liqueur,
-        forcedContainer = "long",
-    }, -- Crown Stout Magic Liqueur
-    [92476] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_crowncrate_staminahealth_drink.dds",
-        name = Abilities.Drink_Crown_Vigorous_Tincture,
-        tooltip = Tooltips.Drink_Crown_Vigorous_Tincture,
-        forcedContainer = "long",
-    }, -- Crown Vigorous Tincture
-
+    [100489] = { hide = true }, -- Stamina Consumable-- Crafted Seasonal Food
+    [84681] = { icon = "LuiExtended/media/icons/consumables/consumable_event_crisp_and_crunchy_pumpkin.dds", name = Abilities.Food_Pumpkin_Snack_Skewer, tooltip = Tooltips.Food_Crafted_Pumpkin_Snack_Skewer, forcedContainer = "long" }, -- Crisp and Crunchy Pumpkin Snack Skewer
+    [84709] = { icon = "LuiExtended/media/icons/consumables/consumable_event_crunchy_spider_skewer.dds", tooltip = Tooltips.Food_Crafted_Crunchy_Spider_Skewer, forcedContainer = "long" }, -- Crunchy Spider Skewer
+    [84725] = { icon = "LuiExtended/media/icons/consumables/consumable_event_frosted_brains.dds", name = Abilities.Food_Frosted_Brains, tooltip = Tooltips.Food_Crafted_Frosted_Brains, forcedContainer = "long" }, -- Frosted Brains
+    [84678] = { icon = "LuiExtended/media/icons/consumables/consumable_food_green.dds", tooltip = Tooltips.Food_Crafted_Sweet_Sanguine_Apples, forcedContainer = "long" }, -- Sweet Sanguine Apples (Generic shared id for other seasonal magicka food)
+    [86789] = { icon = "LuiExtended/media/icons/consumables/consumable_event_alcaire_festival_sword-pie.dds", tooltip = Tooltips.Food_Crafted_Alcaire_Festival_Sword_Pie, forcedContainer = "long" }, -- Alcaire Festival Sword-Pie
+    [86749] = { icon = "LuiExtended/media/icons/consumables/consumable_event_jagga-drenched_mud_ball.dds", name = Abilities.Food_Jagga_Drenched_Mud_Ball, tooltip = Tooltips.Food_Crafted_Jagga_Drenched_Mud_Ball, forcedContainer = "long" }, -- Jagga-Drenched "Mud Ball"
+    [86673] = { icon = "LuiExtended/media/icons/consumables/consumable_event_lava_foot_soup-and-saltrice.dds", name = Abilities.Food_Lava_Foot_Soup, tooltip = Tooltips.Food_Crafted_Lava_Foot_Soup, forcedContainer = "long" }, -- Lava Foot Soup-and-Saltrice
+    [86787] = { icon = "LuiExtended/media/icons/consumables/consumable_event_rajhins_sugar_claws.dds", tooltip = Tooltips.Food_Crafted_Rajhins_Sugar_Claws, forcedContainer = "long" }, -- Rajhin's Sugar Claws
+    [89955] = { icon = "LuiExtended/media/icons/consumables/consumable_event_candied_jesters_coins.dds", tooltip = Tooltips.Food_Crafted_Candied_Jesters_Coins, forcedContainer = "long" }, -- Candied Jester's Coins
+    [89971] = { icon = "LuiExtended/media/icons/consumables/consumable_event_jewels_of_misrule.dds", tooltip = Tooltips.Food_Crafted_Jewels_of_Misrule, forcedContainer = "long" }, -- Jewels of Misrule
+    [127596] = { icon = "LuiExtended/media/icons/consumables/consumable_event_bewitched_sugar_skulls.dds", tooltip = Tooltips.Food_Crafted_Bewitched_Sugar_Skulls, forcedContainer = "long" }, -- Bewitched Sugar Skulls-- Crafted Seasonal Drink
+    [84700] = { icon = "LuiExtended/media/icons/consumables/consumable_event_bowl_of_peeled_eyeballs.dds", name = Abilities.Drink_Bowl_of_Peeled_Eyeballs, tooltip = Tooltips.Drink_Crafted_Bowl_of_Peeled_Eyeballs, forcedContainer = "long" }, -- Bowl of "Peeled Eyeballs"
+    [84735] = { icon = "LuiExtended/media/icons/consumables/consumable_event_purifying_bloody_mara.dds", tooltip = Tooltips.Drink_Double_Bloody_Mara, forcedContainer = "long" }, -- Purifying Bloody Mara
+    [84720] = { icon = "LuiExtended/media/icons/consumables/consumable_event_ghastly_eye_bowl.dds", name = Abilities.Drink_Ghastly_Eye_Bowl, tooltip = Tooltips.Drink_Crafted_Ghastly_Eye_Bowl, forcedContainer = "long" }, -- Ghastly Eye Bowl
+    [84704] = { icon = "LuiExtended/media/icons/consumables/consumable_event_witchmothers_party_punch.dds", tooltip = Tooltips.Drink_Crafted_Witchmothers_Party_Punch, forcedContainer = "long" }, -- Witchmother's Party Punch
+    [84731] = { icon = "LuiExtended/media/icons/consumables/consumable_event_witchmothers_potent_brew.dds", tooltip = Tooltips.Drink_Crafted_Witchmothers_Potent_Brew, forcedContainer = "long" }, -- Witchmother's Potent Brew
+    [86677] = { icon = "LuiExtended/media/icons/consumables/consumable_event_bergama_warning_fire.dds", name = Abilities.Drink_Bergama_Warning_Fire, tooltip = Tooltips.Drink_Crafted_Bergama_Warning_Fire, forcedContainer = "long" }, -- Bergama Warning Fire
+    [86746] = { icon = "LuiExtended/media/icons/consumables/consumable_event_betnikh_twice-spiked_ale.dds", name = Abilities.Drink_Betnikh_Twice_Spiked_Ale, tooltip = Tooltips.Drink_Crafted_Betnikh_Twice_Spiked_Ale, forcedContainer = "long" }, -- Betnikh Twice-Spiked Ale
+    [86559] = { icon = "LuiExtended/media/icons/consumables/consumable_event_hissmir_fish-eye_rye.dds", name = Abilities.Drink_Hissmir_Fish_Eye_Rye, tooltip = Tooltips.Drink_Hissmir, forcedContainer = "long" }, -- Hissmir Fish-Eye Rye
+    [86791] = { icon = "LuiExtended/media/icons/consumables/consumable_event_snow_bear_glow-wine.dds", name = Abilities.Drink_Snow_Bear_Glow_Wine, tooltip = Tooltips.Drink_Crafted_Snow_Bear_Glow_Wine, forcedContainer = "long" }, -- Snow Bear Glow-Wine
+    [89957] = { icon = "LuiExtended/media/icons/consumables/consumable_event_dubious_camoran_throne.dds", tooltip = Tooltips.Drink_Crafted_Dubious_Camoran_Throne, forcedContainer = "long" }, -- Dubious Camoran Throne
+    [127531] = { icon = "LuiExtended/media/icons/consumables/consumable_event_corrupting_bloody_mara.dds", tooltip = Tooltips.Drink_Crafted_Disastrously_Bloody_Mara, forcedContainer = "long" }, -- Corrupting Bloody Mara
+    [127572] = { icon = "LuiExtended/media/icons/consumables/consumable_event_pack_leaders_bone_broth.dds", tooltip = Tooltips.Drink_Crafted_Pack_Leaders_Bone_Broth, forcedContainer = "long" }, -- Pack Leader's Bone Broth-- Vendor Food & Drink
+    [66551] = { icon = "LuiExtended/media/icons/consumables/consumable_food_white.dds", tooltip = Tooltips.Food_Vendor_Health, forcedContainer = "long" }, -- Vendor Health Food
+    [66568] = { icon = "LuiExtended/media/icons/consumables/consumable_food_white.dds", tooltip = Tooltips.Food_Vendor_Magicka, forcedContainer = "long" }, -- Vendor Magicka Food
+    [66576] = { icon = "LuiExtended/media/icons/consumables/consumable_food_white.dds", tooltip = Tooltips.Food_Vendor_Stamina, forcedContainer = "long" }, -- Vendor Stamina Food
+    [66586] = { icon = "LuiExtended/media/icons/consumables/consumable_drink_white.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Health_Recovery), tooltip = Tooltips.Drink_Vendor_Health, forcedContainer = "long" }, -- Vendor Health Drink
+    [66590] = { icon = "LuiExtended/media/icons/consumables/consumable_drink_white.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Magicka_Recovery), tooltip = Tooltips.Drink_Vendor_Magicka, forcedContainer = "long" }, -- Vendor Magicka Drink
+    [66594] = { icon = "LuiExtended/media/icons/consumables/consumable_drink_white.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Stamina_Recovery), tooltip = Tooltips.Drink_Vendor_Stamina, forcedContainer = "long" }, -- Vendor Stamina Drink-- AVA Food & Drink
+    [72961] = { icon = "LuiExtended/media/icons/consumables/consumable_ava_field_bar.dds", name = Abilities.Food_Magicka_Stamina_Increase, tooltip = Tooltips.Food_Cyrodilic_Field_Bar, forcedContainer = "long" }, -- Cyrodilic Field Bar
+    [72956] = { icon = "LuiExtended/media/icons/consumables/consumable_ava_field_tack.dds", name = Abilities.Food_Health_Stamina_Increase, tooltip = Tooltips.Food_Cyrodilic_Field_Tack, forcedContainer = "long" }, -- Cyrodilic Field Tack
+    [72959] = { icon = "LuiExtended/media/icons/consumables/consumable_ava_field_treat.dds", name = Abilities.Food_Health_Magicka_Increase, tooltip = Tooltips.Food_Cyrodilic_Field_Treat, forcedContainer = "long" }, -- Cyrodilic Field Treat
+    [72971] = { icon = "LuiExtended/media/icons/consumables/consumable_ava_field_tonic.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Magicka_Stamina_Recovery), tooltip = Tooltips.Drink_Cyrodilic_Field_Tonic, forcedContainer = "long" }, -- Cyrodilic Field Tonic
+    [72965] = { icon = "LuiExtended/media/icons/consumables/consumable_ava_field_brew.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Health_Stamina_Recovery), tooltip = Tooltips.Drink_Cyrodilic_Field_Brew, forcedContainer = "long" }, -- Cyrodilic Field Brew
+    [72968] = { icon = "LuiExtended/media/icons/consumables/consumable_ava_field_tea.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Drink_Increase, Abilities.Drink_Health_Magicka_Recovery), tooltip = Tooltips.Drink_Cyrodilic_Field_Tea, forcedContainer = "long" }, -- Cyrodilic Field Tea-- Crown Food & Drink
+    [85484] = { icon = "LuiExtended/media/icons/consumables/consumable_crown_crate_food.dds", name = Abilities.Food_Crown_Crate_Meal, tooltip = Tooltips.Food_Crown_Crate_Meal, forcedContainer = "long" }, -- Crown Crate Fortifying Meal
+    [68411] = { icon = "LuiExtended/media/icons/consumables/consumable_crown_food.dds", name = Abilities.Food_Crown_Meal, tooltip = Tooltips.Food_Crown_Meal, forcedContainer = "long" }, -- Crown Fortifying Meal
+    [85497] = { icon = "LuiExtended/media/icons/consumables/consumable_crown_crate_drink.dds", name = Abilities.Drink_Crown_Crate_Drink, tooltip = Tooltips.Drink_Crown_Crate_Drink, forcedContainer = "long" }, -- Crown Crate Refreshing Drink
+    [68416] = { icon = "LuiExtended/media/icons/consumables/consumable_crown_drink.dds", name = Abilities.Drink_Crown_Drink, tooltip = Tooltips.Drink_Crown_Drink, forcedContainer = "long" }, -- Crown Refreshing Drink
+    [92435] = { icon = "LuiExtended/media/icons/consumables/consumable_crowncrate_magickahealth_food.dds", name = Abilities.Food_Crown_Combat_Mystics_Stew, tooltip = Tooltips.Food_Crown_Combat_Mystics_Stew, forcedContainer = "long" }, -- Crown Combat Mystic's Stew
+    [92474] = { icon = "LuiExtended/media/icons/consumables/consumable_crowncrate_staminahealth_food.dds", name = Abilities.Food_Crown_Vigorous_Ragout, tooltip = Tooltips.Food_Crown_Vigorous_Ragout, forcedContainer = "long" }, -- Crown Vigorous Ragout
+    [92433] = { icon = "LuiExtended/media/icons/consumables/consumable_crowncrate_magickahealth_drink.dds", name = Abilities.Drink_Crown_Stout_Magic_Liqueur, tooltip = Tooltips.Drink_Crown_Stout_Magic_Liqueur, forcedContainer = "long" }, -- Crown Stout Magic Liqueur
+    [92476] = { icon = "LuiExtended/media/icons/consumables/consumable_crowncrate_staminahealth_drink.dds", name = Abilities.Drink_Crown_Vigorous_Tincture, tooltip = Tooltips.Drink_Crown_Vigorous_Tincture, forcedContainer = "long" }, -- Crown Vigorous Tincture
     ----------------------------------------------------------------
     -- Experience Consunables
     ----------------------------------------------------------------
 
     -- Experience Bonuses
-    [64210] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_xp_psijic_ambrosia.dds",
-        name = Abilities.Experience_Psijic_Ambrosia,
-        tooltip = Tooltips.Experience_Psijic_Ambrosia,
-        forcedContainer = "long",
-    }, -- Psijic Ambrosia
-    [89683] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_xp_aetherial_ambrosia.dds",
-        name = Abilities.Experience_Aetherial_Ambrosia,
-        tooltip = Tooltips.Experience_Aetherial_Ambrosia,
-        forcedContainer = "long",
-    }, -- Aetherial Ambrosia
-    [88445] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_xp_mythic_aetherial_ambrosia.dds",
-        name = Abilities.Experience_Mythic_Ambrosia,
-        tooltip = Tooltips.Experience_Mythic_Aetherial_Ambrosia,
-        forcedContainer = "long",
-    }, -- Mythic Aetherial Ambrosia
-    [66776] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_xp_scroll.dds",
-        name = Abilities.Experience_Crown_Scroll,
-        tooltip = Tooltips.Experience_Crown,
-        forcedContainer = "long",
-    }, -- Crown Experience Scroll
-    [85501] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_xp_cratescroll_1.dds",
-        name = Abilities.Experience_Crown_Crate_Scroll_1,
-        tooltip = Tooltips.Experience_Gold_Coast,
-        forcedContainer = "long",
-    }, -- Gold Coast Experience Scroll
-    [85502] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_xp_cratescroll_2.dds",
-        name = Abilities.Experience_Crown_Crate_Scroll_2,
-        tooltip = Tooltips.Experience_Major_Gold_Coast,
-        forcedContainer = "long",
-    }, -- Major Gold Coast Experience Scroll
-    [85503] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_xp_cratescroll_3.dds",
-        name = Abilities.Experience_Crown_Crate_Scroll_3,
-        tooltip = Tooltips.Experience_Grand_Gold_Coast,
-        forcedContainer = "long",
-    }, -- Grand Gold Coast Experience Scroll
 
-    -- Alliance War Bonuses
-    [147466] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_xp_alliance_war_1.dds",
-        name = Abilities.Experience_Alliance_War_Skill_1,
-        tooltip = Tooltips.Experience_Alliance_War_Skill,
-        forcedContainer = "long",
-    }, -- Alliance Skill Gain (Alliance War Skill Line Scroll)
-    [137733] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_xp_alliance_war_2.dds",
-        name = Abilities.Experience_Alliance_War_Skill_2,
-        tooltip = Tooltips.Experience_Alliance_War_Skill_Major,
-        forcedContainer = "long",
-    }, -- Alliance Skill Gain (Alliance War Skill Line Scroll, Major)
-    [147467] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_xp_alliance_war_3.dds",
-        name = Abilities.Experience_Alliance_War_Skill_3,
-        tooltip = Tooltips.Experience_Alliance_War_Skill_Grand,
-        forcedContainer = "long",
-    }, -- Alliance Skill Gain (Alliance War Skill Line Scroll, Grand)
-    [147687] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_xp_alliance_war_torte_1.dds",
-        name = Abilities.Experience_Alliance_War_Torte_1,
-        tooltip = Tooltips.Experience_Colovian_War_Torte,
-        forcedContainer = "long",
-    }, -- Alliance Skill Gain 50% Boost (Colovian War Torte)
-    [147733] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_xp_alliance_war_torte_2.dds",
-        name = Abilities.Experience_Alliance_War_Torte_2,
-        tooltip = Tooltips.Experience_Molten_War_Torte,
-        forcedContainer = "long",
-    }, -- Alliance Skill Gain 100% Boost (Molten War Torte)
-    [147734] = {
-        icon = "LuiExtended/media/icons/consumables/consumable_xp_alliance_war_torte_3.dds",
-        name = Abilities.Experience_Alliance_War_Torte_3,
-        tooltip = Tooltips.Experience_White_Gold_War_Torte,
-        forcedContainer = "long",
-    }, -- Alliance Skill Gain 150% Boost (White-Gold War Torte)
+    [64210] = { icon = "LuiExtended/media/icons/consumables/consumable_xp_psijic_ambrosia.dds", name = Abilities.Experience_Psijic_Ambrosia, tooltip = Tooltips.Experience_Psijic_Ambrosia, forcedContainer = "long" }, -- Psijic Ambrosia
+    [89683] = { icon = "LuiExtended/media/icons/consumables/consumable_xp_aetherial_ambrosia.dds", name = Abilities.Experience_Aetherial_Ambrosia, tooltip = Tooltips.Experience_Aetherial_Ambrosia, forcedContainer = "long" }, -- Aetherial Ambrosia
+    [88445] = { icon = "LuiExtended/media/icons/consumables/consumable_xp_mythic_aetherial_ambrosia.dds", name = Abilities.Experience_Mythic_Ambrosia, tooltip = Tooltips.Experience_Mythic_Aetherial_Ambrosia, forcedContainer = "long" }, -- Mythic Aetherial Ambrosia
+    [66776] = { icon = "LuiExtended/media/icons/consumables/consumable_xp_scroll.dds", name = Abilities.Experience_Crown_Scroll, tooltip = Tooltips.Experience_Crown, forcedContainer = "long" }, -- Crown Experience Scroll
+    [85501] = { icon = "LuiExtended/media/icons/consumables/consumable_xp_cratescroll_1.dds", name = Abilities.Experience_Crown_Crate_Scroll_1, tooltip = Tooltips.Experience_Gold_Coast, forcedContainer = "long" }, -- Gold Coast Experience Scroll
+    [85502] = { icon = "LuiExtended/media/icons/consumables/consumable_xp_cratescroll_2.dds", name = Abilities.Experience_Crown_Crate_Scroll_2, tooltip = Tooltips.Experience_Major_Gold_Coast, forcedContainer = "long" }, -- Major Gold Coast Experience Scroll
+    [85503] = { icon = "LuiExtended/media/icons/consumables/consumable_xp_cratescroll_3.dds", name = Abilities.Experience_Crown_Crate_Scroll_3, tooltip = Tooltips.Experience_Grand_Gold_Coast, forcedContainer = "long" }, -- Grand Gold Coast Experience Scroll-- Alliance War Bonuses
+    [147466] = { icon = "LuiExtended/media/icons/consumables/consumable_xp_alliance_war_1.dds", name = Abilities.Experience_Alliance_War_Skill_1, tooltip = Tooltips.Experience_Alliance_War_Skill, forcedContainer = "long" }, -- Alliance Skill Gain (Alliance War Skill Line Scroll)
+    [137733] = { icon = "LuiExtended/media/icons/consumables/consumable_xp_alliance_war_2.dds", name = Abilities.Experience_Alliance_War_Skill_2, tooltip = Tooltips.Experience_Alliance_War_Skill_Major, forcedContainer = "long" }, -- Alliance Skill Gain (Alliance War Skill Line Scroll, Major)
+    [147467] = { icon = "LuiExtended/media/icons/consumables/consumable_xp_alliance_war_3.dds", name = Abilities.Experience_Alliance_War_Skill_3, tooltip = Tooltips.Experience_Alliance_War_Skill_Grand, forcedContainer = "long" }, -- Alliance Skill Gain (Alliance War Skill Line Scroll, Grand)
+    [147687] = { icon = "LuiExtended/media/icons/consumables/consumable_xp_alliance_war_torte_1.dds", name = Abilities.Experience_Alliance_War_Torte_1, tooltip = Tooltips.Experience_Colovian_War_Torte, forcedContainer = "long" }, -- Alliance Skill Gain 50% Boost (Colovian War Torte)
+    [147733] = { icon = "LuiExtended/media/icons/consumables/consumable_xp_alliance_war_torte_2.dds", name = Abilities.Experience_Alliance_War_Torte_2, tooltip = Tooltips.Experience_Molten_War_Torte, forcedContainer = "long" }, -- Alliance Skill Gain 100% Boost (Molten War Torte)
+    [147734] = { icon = "LuiExtended/media/icons/consumables/consumable_xp_alliance_war_torte_3.dds", name = Abilities.Experience_Alliance_War_Torte_3, tooltip = Tooltips.Experience_White_Gold_War_Torte, forcedContainer = "long" }, -- Alliance Skill Gain 150% Boost (White-Gold War Torte)
 
     ----------------------------------------------------------------
     -- Housing Items
@@ -4201,304 +3819,111 @@ Effects.EffectOverride = {
     [89977] = { hide = true }, -- Target Skeleton (Target Dummy)
 
     -- Attunable Crafting Station
-    [206063] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_create_station_jewelry.dds",
-        name = Abilities.Innate_Create_Station,
-    }, -- CreateAttunableStation (Attunable Crafting Station)
+    [206063] = { icon = "LuiExtended/media/icons/abilities/ability_item_create_station_jewelry.dds", name = Abilities.Innate_Create_Station }, -- CreateAttunableStation (Attunable Crafting Station)
 
     ----------------------------------------------------------------
     -- Target Iron Atronach, Trial
     ----------------------------------------------------------------
 
     -- Debuffs
-    [120007] = {
-        icon = "LuiExtended/media/icons/glyphs/glyph_crushing.dds",
-        tooltip = Tooltips.Generic_Reduce_Physical_Spell_Resist_No_Dur,
-    }, -- Crusher (Target Iron Atronach, Trial)
+    [120007] = { icon = "LuiExtended/media/icons/glyphs/glyph_crushing.dds", tooltip = Tooltips.Generic_Reduce_Physical_Spell_Resist_No_Dur }, -- Crusher (Target Iron Atronach, Trial)
     [120011] = { tooltip = Tooltips.Skill_Engulfing_Flames_Dummy }, -- Engulfing Flames (Target Iron Atronach, Trial)
-    [120018] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_alkosh.dds",
-        name = Abilities.Set_Line_Breaker,
-        tooltip = Tooltips.Generic_Reduce_Physical_Spell_Resist_No_Dur_Value,
-        tooltipValue2 = 3010,
-    }, -- Roar of Alkosh (Target Iron Atronach, Trial)
-    [120014] = { tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off Balance (Target Iron Atronach, Trial)
-
-    -- Buffs
+    [120018] = { icon = "LuiExtended/media/icons/abilities/ability_set_alkosh.dds", name = Abilities.Set_Line_Breaker, tooltip = Tooltips.Generic_Reduce_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 3010 }, -- Roar of Alkosh (Target Iron Atronach, Trial)
+    [120014] = { tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off Balance (Target Iron Atronach, Trial)-- Buffs
     [120020] = { hide = true }, -- Minor Toughness (Target Iron Atronach, Trial)
     [120021] = { tooltip = Tooltips.Skill_War_Horn_Dummy }, -- Aggressive Horn (Target Iron Atronach, Trial)
-    [120024] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_worm_cult.dds",
-        tooltip = Tooltips.Generic_Increase_Magicka_Recovery_No_Dur,
-        tooltipValue2 = 145,
-    }, -- Worm's Raiment (Target Iron Atronach, Trial)
-    [120026] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_hircine.dds",
-        tooltip = Tooltips.Generic_Increase_Stamina_Recovery_No_Dur,
-        tooltipValue2 = 145,
-    }, -- Hircine's Veneer (Target Iron Atronach, Trial)
-
+    [120024] = { icon = "LuiExtended/media/icons/abilities/ability_set_worm_cult.dds", tooltip = Tooltips.Generic_Increase_Magicka_Recovery_No_Dur, tooltipValue2 = 145 }, -- Worm's Raiment (Target Iron Atronach, Trial)
+    [120026] = { icon = "LuiExtended/media/icons/abilities/ability_set_hircine.dds", tooltip = Tooltips.Generic_Increase_Stamina_Recovery_No_Dur, tooltipValue2 = 145 }, -- Hircine's Veneer (Target Iron Atronach, Trial)
     ----------------------------------------------------------------
     -- Misc Items
     ----------------------------------------------------------------
 
     -- Item Combination
     [88449] = { hide = true }, -- Create Super Psijic Ambrosia (Aetheric Cipher)
-    [88451] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_aetheric_cipher.dds",
-        name = Abilities.Innate_Aetheric_Cipher,
-    }, -- 88449 Stun (Aetheric Cipher)
+    [88451] = { icon = "LuiExtended/media/icons/abilities/ability_item_aetheric_cipher.dds", name = Abilities.Innate_Aetheric_Cipher }, -- 88449 Stun (Aetheric Cipher)
 
     --[[ -- TODO: Big-Eared Ginger Kitten Casts replaced - check later
-    [-----] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_big_eared_ginger_kitten.dds",
-        name = Abilities.Innate_Big_Eared_Ginger_Kitten,
-    },
+    [-----] = { icon = "LuiExtended/media/icons/abilities/ability_item_big_eared_ginger_kitten.dds", name = Abilities.Innate_Big_Eared_Ginger_Kitten, },
     ]]
 
     [148050] = { hide = true }, -- Alliance Breton Terrier (Breton Terrier Mammoth Bone)
-    [148052] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_breton_terrier_mammoth_bone.dds",
-        name = Abilities.Innate_Breton_Terrier_Mammoth_Bone,
-    }, -- 68235 Stun (Breton Terrier Mammoth Bone)
-
+    [148052] = { icon = "LuiExtended/media/icons/abilities/ability_item_breton_terrier_mammoth_bone.dds", name = Abilities.Innate_Breton_Terrier_Mammoth_Bone }, -- 68235 Stun (Breton Terrier Mammoth Bone)
     [147793] = { hide = true }, -- Create 100% AvA Skill Boost R (Chef Arquitius's Torte Dissertation)
-    [147795] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_chef_arquitius_torte_dissertation.dds",
-        name = Abilities.Innate_Chef_Arquitius_Torte_Dissertation,
-    }, -- 88449 Stun (Chef Arquitius's Torte Dissertation)
-
+    [147795] = { icon = "LuiExtended/media/icons/abilities/ability_item_chef_arquitius_torte_dissertation.dds", name = Abilities.Innate_Chef_Arquitius_Torte_Dissertation }, -- 88449 Stun (Chef Arquitius's Torte Dissertation)
     [147841] = { hide = true }, -- Create 150% AvA Skill Boost R (Chef Arquitius's Lost Thesis)
-    [147850] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_chef_arquitius_lost_thesis.dds",
-        name = Abilities.Innate_Chef_Arquitius_Lost_Thesis,
-    }, -- 88449 Stun (Chef Arquitius's Lost Thesis)
+    [147850] = { icon = "LuiExtended/media/icons/abilities/ability_item_chef_arquitius_lost_thesis.dds", name = Abilities.Innate_Chef_Arquitius_Lost_Thesis }, -- 88449 Stun (Chef Arquitius's Lost Thesis)
 
     --[[ -- TODO: Dwarven Theodolite Casts replaced - check later
-    [-----] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_dwarven_theodolite.dds",
-        name = Abilities.Innate_Dwarven_Theodolite,
-    },
+    [-----] = { icon = "LuiExtended/media/icons/abilities/ability_item_dwarven_theodolite.dds", name = Abilities.Innate_Dwarven_Theodolite, },
     ]]
 
-    [117532] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_guar_stomp.dds",
-        name = Abilities.Innate_Guar_Stomp,
-    }, -- 68235 Stun (Guar Stomp Elucidating Hand-Sculpture)
-    [117558] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_guar_stomp.dds",
-        name = Abilities.Innate_Guar_Stomp,
-    }, -- 68235 Stun (Guar Stomp History in Street Theatre)
-    [117554] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_guar_stomp.dds",
-        name = Abilities.Innate_Guar_Stomp,
-    }, -- 68235 Stun (Guar Stomp Illustrated Reports)
-    [117550] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_guar_stomp.dds",
-        name = Abilities.Innate_Guar_Stomp,
-    }, -- 68235 Stun (Guar Stomp Noise Reports)
-    [117545] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_guar_stomp.dds",
-        name = Abilities.Innate_Guar_Stomp,
-    }, -- 68235 Stun (Guar Stomp Rehearsal Tuning Fork)
-    [117562] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_guar_stomp.dds",
-        name = Abilities.Innate_Guar_Stomp,
-    }, -- 68235 Stun (Guar Stomp Skeletal Reconstruction)
-    [117541] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_guar_stomp.dds",
-        name = Abilities.Innate_Guar_Stomp,
-    }, -- 68235 Stun (Guar Stomp Steps-Practice Rug)
-
+    [117532] = { icon = "LuiExtended/media/icons/abilities/ability_item_guar_stomp.dds", name = Abilities.Innate_Guar_Stomp }, -- 68235 Stun (Guar Stomp Elucidating Hand-Sculpture)
+    [117558] = { icon = "LuiExtended/media/icons/abilities/ability_item_guar_stomp.dds", name = Abilities.Innate_Guar_Stomp }, -- 68235 Stun (Guar Stomp History in Street Theatre)
+    [117554] = { icon = "LuiExtended/media/icons/abilities/ability_item_guar_stomp.dds", name = Abilities.Innate_Guar_Stomp }, -- 68235 Stun (Guar Stomp Illustrated Reports)
+    [117550] = { icon = "LuiExtended/media/icons/abilities/ability_item_guar_stomp.dds", name = Abilities.Innate_Guar_Stomp }, -- 68235 Stun (Guar Stomp Noise Reports)
+    [117545] = { icon = "LuiExtended/media/icons/abilities/ability_item_guar_stomp.dds", name = Abilities.Innate_Guar_Stomp }, -- 68235 Stun (Guar Stomp Rehearsal Tuning Fork)
+    [117562] = { icon = "LuiExtended/media/icons/abilities/ability_item_guar_stomp.dds", name = Abilities.Innate_Guar_Stomp }, -- 68235 Stun (Guar Stomp Skeletal Reconstruction)
+    [117541] = { icon = "LuiExtended/media/icons/abilities/ability_item_guar_stomp.dds", name = Abilities.Innate_Guar_Stomp }, -- 68235 Stun (Guar Stomp Steps-Practice Rug)
     [70582] = { hide = true }, -- Roll 1d1000 (Merethic Restorative Resin)
-    [70584] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_merethic_restorative_resin.dds",
-        name = Abilities.Innate_Merethic_Restorative_Resin,
-    }, -- 68235 Stun (Merethic Restorative Resin)
-
-    [123110] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_mummified_alfiq_parts.dds",
-        name = Abilities.Innate_Mummified_Alfiq_Parts,
-    }, -- 68235 Stun (Mummified Alfiq Parts)
-
-    [123115] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_plague_drenched_fabric.dds",
-        name = Abilities.Innate_Plague_Drenched_Fabric,
-    }, -- 68235 Stun (Plague-Drenched Fabric)
-
-    [68259] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_psijic_ambrosia_fragment.dds",
-        name = Abilities.Innate_Create_Psijic_Ambrosia_Recipe,
-    }, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I)
-    [68263] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_psijic_ambrosia_fragment.dds",
-        name = Abilities.Innate_Create_Psijic_Ambrosia_Recipe,
-    }, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment II)
-    [68267] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_psijic_ambrosia_fragment.dds",
-        name = Abilities.Innate_Create_Psijic_Ambrosia_Recipe,
-    }, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment III)
-    [68271] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_psijic_ambrosia_fragment.dds",
-        name = Abilities.Innate_Create_Psijic_Ambrosia_Recipe,
-    }, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment IV)
-    [68275] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_psijic_ambrosia_fragment.dds",
-        name = Abilities.Innate_Create_Psijic_Ambrosia_Recipe,
-    }, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment V)
-    [68279] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_psijic_ambrosia_fragment.dds",
-        name = Abilities.Innate_Create_Psijic_Ambrosia_Recipe,
-    }, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment VI)
-    [68283] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_psijic_ambrosia_fragment.dds",
-        name = Abilities.Innate_Create_Psijic_Ambrosia_Recipe,
-    }, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment VII)
-
+    [70584] = { icon = "LuiExtended/media/icons/abilities/ability_item_merethic_restorative_resin.dds", name = Abilities.Innate_Merethic_Restorative_Resin }, -- 68235 Stun (Merethic Restorative Resin)
+    [123110] = { icon = "LuiExtended/media/icons/abilities/ability_item_mummified_alfiq_parts.dds", name = Abilities.Innate_Mummified_Alfiq_Parts }, -- 68235 Stun (Mummified Alfiq Parts)
+    [123115] = { icon = "LuiExtended/media/icons/abilities/ability_item_plague_drenched_fabric.dds", name = Abilities.Innate_Plague_Drenched_Fabric }, -- 68235 Stun (Plague-Drenched Fabric)
+    [68259] = { icon = "LuiExtended/media/icons/abilities/ability_item_psijic_ambrosia_fragment.dds", name = Abilities.Innate_Create_Psijic_Ambrosia_Recipe }, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I)
+    [68263] = { icon = "LuiExtended/media/icons/abilities/ability_item_psijic_ambrosia_fragment.dds", name = Abilities.Innate_Create_Psijic_Ambrosia_Recipe }, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment II)
+    [68267] = { icon = "LuiExtended/media/icons/abilities/ability_item_psijic_ambrosia_fragment.dds", name = Abilities.Innate_Create_Psijic_Ambrosia_Recipe }, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment III)
+    [68271] = { icon = "LuiExtended/media/icons/abilities/ability_item_psijic_ambrosia_fragment.dds", name = Abilities.Innate_Create_Psijic_Ambrosia_Recipe }, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment IV)
+    [68275] = { icon = "LuiExtended/media/icons/abilities/ability_item_psijic_ambrosia_fragment.dds", name = Abilities.Innate_Create_Psijic_Ambrosia_Recipe }, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment V)
+    [68279] = { icon = "LuiExtended/media/icons/abilities/ability_item_psijic_ambrosia_fragment.dds", name = Abilities.Innate_Create_Psijic_Ambrosia_Recipe }, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment VI)
+    [68283] = { icon = "LuiExtended/media/icons/abilities/ability_item_psijic_ambrosia_fragment.dds", name = Abilities.Innate_Create_Psijic_Ambrosia_Recipe }, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment VII)
     --[[ -- TODO: Psijic Glowglobe Casts replaced - check later
-    [-----] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_psijic_glowglobe.dds",
-        name = Abilities.Innate_Psijic_Glowglobe,
-    },
+    [-----] = { icon = "LuiExtended/media/icons/abilities/ability_item_psijic_glowglobe.dds", name = Abilities.Innate_Psijic_Glowglobe, },
     ]]
 
     --[[ -- TODO: Sixth House Robe Casts replaced - check later
-    [-----] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_sixth_house_robe.dds",
-        name = Abilities.Innate_Sixth_House_Robe,
-    },
+    [-----] = { icon = "LuiExtended/media/icons/abilities/ability_item_sixth_house_robe.dds", name = Abilities.Innate_Sixth_House_Robe, },
     ]]
     --
 
     [140542] = { hide = true }, -- Stone Warrior Target Dummy (Stone Husk Fragment)
-    [140544] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_stone_husk_fragment.dds",
-        name = Abilities.Innate_Stone_Husk_Fragment,
-    }, -- 68235 Stun (Stone Husk Fragment)
-
-    [111141] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_swamp_jelly.dds",
-        name = Abilities.Innate_Swamp_Jelly,
-    }, -- 68235 Stun (Swamp Jelly Carrying Jar)
-    [111129] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_swamp_jelly.dds",
-        name = Abilities.Innate_Swamp_Jelly,
-    }, -- 68235 Stun (Swamp Jelly Fine-Mesh Net)
-    [111153] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_swamp_jelly.dds",
-        name = Abilities.Innate_Swamp_Jelly,
-    }, -- 68235 Stun (Swamp Jelly Hunter's Lense)
-    [111133] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_swamp_jelly.dds",
-        name = Abilities.Innate_Swamp_Jelly,
-    }, -- 68235 Stun (Swamp Jelly Luminous Fishmeal)
-    [111137] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_swamp_jelly.dds",
-        name = Abilities.Innate_Swamp_Jelly,
-    }, -- 68235 Stun (Swamp Jelly Luring Flute)
-    [111149] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_swamp_jelly.dds",
-        name = Abilities.Innate_Swamp_Jelly,
-    }, -- 68235 Stun (Swamp Jelly Moss Bedding)
-    [111145] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_swamp_jelly.dds",
-        name = Abilities.Innate_Swamp_Jelly,
-    }, -- 68235 Stun (Swamp Jelly Spawning Mud)
-
+    [140544] = { icon = "LuiExtended/media/icons/abilities/ability_item_stone_husk_fragment.dds", name = Abilities.Innate_Stone_Husk_Fragment }, -- 68235 Stun (Stone Husk Fragment)
+    [111141] = { icon = "LuiExtended/media/icons/abilities/ability_item_swamp_jelly.dds", name = Abilities.Innate_Swamp_Jelly }, -- 68235 Stun (Swamp Jelly Carrying Jar)
+    [111129] = { icon = "LuiExtended/media/icons/abilities/ability_item_swamp_jelly.dds", name = Abilities.Innate_Swamp_Jelly }, -- 68235 Stun (Swamp Jelly Fine-Mesh Net)
+    [111153] = { icon = "LuiExtended/media/icons/abilities/ability_item_swamp_jelly.dds", name = Abilities.Innate_Swamp_Jelly }, -- 68235 Stun (Swamp Jelly Hunter's Lense)
+    [111133] = { icon = "LuiExtended/media/icons/abilities/ability_item_swamp_jelly.dds", name = Abilities.Innate_Swamp_Jelly }, -- 68235 Stun (Swamp Jelly Luminous Fishmeal)
+    [111137] = { icon = "LuiExtended/media/icons/abilities/ability_item_swamp_jelly.dds", name = Abilities.Innate_Swamp_Jelly }, -- 68235 Stun (Swamp Jelly Luring Flute)
+    [111149] = { icon = "LuiExtended/media/icons/abilities/ability_item_swamp_jelly.dds", name = Abilities.Innate_Swamp_Jelly }, -- 68235 Stun (Swamp Jelly Moss Bedding)
+    [111145] = { icon = "LuiExtended/media/icons/abilities/ability_item_swamp_jelly.dds", name = Abilities.Innate_Swamp_Jelly }, -- 68235 Stun (Swamp Jelly Spawning Mud)
     [110871] = { hide = true }, -- Roll 1d10000 (Welkynar Binding)
-    [110890] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_welkynar_binding.dds",
-        name = Abilities.Innate_Welkynar_Binding,
-    }, -- 68235 Stun (Welkynar Binding)
-
-    -- Collectible Fragment Combination
-    [151843] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_deadlands_firewalker.dds",
-        name = Abilities.Innate_Deadlands_Firewalker,
-    }, -- 68235 Stun (Deadlands Firewalker)
-
-    [113432] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_indrik_nascent.dds",
-        name = Abilities.Innate_Indrik_Nascent,
-    }, -- 68235 Stun (Nascent Indrik)
-
-    [130394] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_indrik_spectral.dds",
-        name = Abilities.Innate_Indrik_Spectral,
-    }, -- 68235 Stun (Spectral Indrik)
-    [131536] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_pet_sovereign_sow.dds",
-        name = Abilities.Innate_Sovereign_Sow,
-    }, -- Generic Stun & Combine (Sovereign Sow)
-
-    [148079] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_unstable_morpholith.dds",
-        name = Abilities.Innate_Unstable_Morpholith,
-    }, -- 68235 Stun (Unstable Morpholith)
-
-    -- Item Combination - Arena Gladiator's Proofs
+    [110890] = { icon = "LuiExtended/media/icons/abilities/ability_item_welkynar_binding.dds", name = Abilities.Innate_Welkynar_Binding }, -- 68235 Stun (Welkynar Binding)-- Collectible Fragment Combination
+    [151843] = { icon = "LuiExtended/media/icons/abilities/ability_item_deadlands_firewalker.dds", name = Abilities.Innate_Deadlands_Firewalker }, -- 68235 Stun (Deadlands Firewalker)
+    [113432] = { icon = "LuiExtended/media/icons/abilities/ability_item_indrik_nascent.dds", name = Abilities.Innate_Indrik_Nascent }, -- 68235 Stun (Nascent Indrik)
+    [130394] = { icon = "LuiExtended/media/icons/abilities/ability_item_indrik_spectral.dds", name = Abilities.Innate_Indrik_Spectral }, -- 68235 Stun (Spectral Indrik)
+    [131536] = { icon = "LuiExtended/media/icons/abilities/ability_item_pet_sovereign_sow.dds", name = Abilities.Innate_Sovereign_Sow }, -- Generic Stun & Combine (Sovereign Sow)
+    [148079] = { icon = "LuiExtended/media/icons/abilities/ability_item_unstable_morpholith.dds", name = Abilities.Innate_Unstable_Morpholith }, -- 68235 Stun (Unstable Morpholith)-- Item Combination - Arena Gladiator's Proofs
     [111188] = { hide = true }, -- Arena Gladiator Costume (Arena Gladiator's Exultation)
-    [111190] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds",
-        name = Abilities.Innate_Arena_Gladiators_Exultation,
-    }, -- 68235 Stun (Arena Gladiator's Exultation)
+    [111190] = { icon = "LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds", name = Abilities.Innate_Arena_Gladiators_Exultation }, -- 68235 Stun (Arena Gladiator's Exultation)
     [115062] = { hide = true }, -- Arena Gladiator Emote (Arena Gladiator's Mockery)
-    [115064] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds",
-        name = Abilities.Innate_Arena_Gladiators_Mockery,
-    }, -- 68235 Stun (Arena Gladiator's Mockery)
+    [115064] = { icon = "LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds", name = Abilities.Innate_Arena_Gladiators_Mockery }, -- 68235 Stun (Arena Gladiator's Mockery)
     [106173] = { hide = true }, -- Arena Gladiator Helm (Arena Gladiator's Recognition)
-    [106174] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds",
-        name = Abilities.Innate_Arena_Gladiators_Recognition,
-    }, -- 68235 Stun (Arena Gladiator's Recognition)
+    [106174] = { icon = "LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds", name = Abilities.Innate_Arena_Gladiators_Recognition }, -- 68235 Stun (Arena Gladiator's Recognition)
     [116414] = { hide = true }, -- Arena Gladiator Pet (Arena Gladiator's Roar)
-    [116416] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds",
-        name = Abilities.Innate_Arena_Gladiators_Roar,
-    }, -- 68235 Stun (Arena Gladiator's Roar)
+    [116416] = { icon = "LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds", name = Abilities.Innate_Arena_Gladiators_Roar }, -- 68235 Stun (Arena Gladiator's Roar)
     [134882] = { hide = true }, -- Knights of the Circle Weapon Style Page (Knight's Rebuke)
-    [134883] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds",
-        name = Abilities.Innate_Knights_Rebuke,
-    }, -- 68235 Stun (Knight's Rebuke)
+    [134883] = { icon = "LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds", name = Abilities.Innate_Knights_Rebuke }, -- 68235 Stun (Knight's Rebuke)
     [134850] = { hide = true }, -- Knights of the Circle Armor Style Page (Knight's Resolve)
-    [134851] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds",
-        name = Abilities.Innate_Knights_Resolve,
-    }, -- 68235 Stun (Knight's Resolve)
+    [134851] = { icon = "LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds", name = Abilities.Innate_Knights_Resolve }, -- 68235 Stun (Knight's Resolve)
     [140620] = { hide = true }, -- Reach-Mage Ceremonial Skullcap (Reach-Mage's Ferocity)
-    [140622] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds",
-        name = Abilities.Innate_Reach_Mages_Ferocity,
-    }, -- 68235 Stun (Reach-Mage's Ferocity)
+    [140622] = { icon = "LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds", name = Abilities.Innate_Reach_Mages_Ferocity }, -- 68235 Stun (Reach-Mage's Ferocity)
     [124622] = { hide = true }, -- Alliance Standard-Bearer Emote (Alliance Standard-Bearer's License)
-    [124624] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds",
-        name = Abilities.Innate_Alliance_Standard_Bearers,
-    }, -- 68235 Stun (Alliance Standard-Bearer's License)
-
-    -- Item Combination - Siege of Cyrodiil Merits
+    [124624] = { icon = "LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds", name = Abilities.Innate_Alliance_Standard_Bearers }, -- 68235 Stun (Alliance Standard-Bearer's License)-- Item Combination - Siege of Cyrodiil Merits
     [148419] = { hide = true }, -- Reachman Emote (Siege of Cyrodiil Commendation)
-    [148421] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds",
-        name = Abilities.Innate_Siege_of_Cyrodiil_Commendation,
-    }, -- 68235 Stun (Siege of Cyrodiil Commendation)
+    [148421] = { icon = "LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds", name = Abilities.Innate_Siege_of_Cyrodiil_Commendation }, -- 68235 Stun (Siege of Cyrodiil Commendation)
     [145214] = { hide = true }, -- Siegemaster Costume (Siege of Cyrodiil Distinction)
-    [145216] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds",
-        name = Abilities.Innate_Siege_of_Cyrodiil_Distinction,
-    }, -- 68235 Stun (Siege of Cyrodiil Distinction)
+    [145216] = { icon = "LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds", name = Abilities.Innate_Siege_of_Cyrodiil_Distinction }, -- 68235 Stun (Siege of Cyrodiil Distinction)
     [124788] = { hide = true }, -- Arena Gladiator Helm (Siege of Cyrodiil Recognition)
-    [124789] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds",
-        name = Abilities.Innate_Siege_of_Cyrodiil_Recognition,
-    }, -- 68235 Stun (Siege of Cyrodiil Recognition)
+    [124789] = { icon = "LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds", name = Abilities.Innate_Siege_of_Cyrodiil_Recognition }, -- 68235 Stun (Siege of Cyrodiil Recognition)
     [126708] = { hide = true }, -- Siegemaster Costume (Siege of Cyrodiil Recommendation)
-    [126710] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds",
-        name = Abilities.Innate_Siege_of_Cyrodiil_Recommendation,
-    }, -- 68235 Stun (Siege of Cyrodiil Recommendation)
+    [126710] = { icon = "LuiExtended/media/icons/abilities/ability_item_arena_gladiator.dds", name = Abilities.Innate_Siege_of_Cyrodiil_Recommendation }, -- 68235 Stun (Siege of Cyrodiil Recommendation)
 
     -- Key Fragments
     [65947] = { hide = true }, -- Tooth Key (Bone Shard Trophy Vault)
@@ -4516,76 +3941,27 @@ Effects.EffectOverride = {
     [115175] = { hide = true }, -- Murkmire Furniture Tome (Murkmire Furniture Plan Book)
 
     -- Other Items
-    [63427] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_fillet_fish.dds",
-        name = Abilities.Innate_Fillet_Fish,
-    }, -- Clean Fish
-    [78052] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_pardon_edict_low.dds",
-        name = Abilities.Innate_Pardon_Edict_Low,
-    }, -- Minor Pardon
-    [76350] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_pardon_edict_medium.dds",
-        name = Abilities.Innate_Pardon_Edict_Medium,
-    }, -- Moderate Pardon
-    [76349] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_pardon_edict_high.dds",
-        name = Abilities.Innate_Pardon_Edict_High,
-    }, -- Full Pardon
+    [63427] = { icon = "LuiExtended/media/icons/abilities/ability_item_fillet_fish.dds", name = Abilities.Innate_Fillet_Fish }, -- Clean Fish
+    [78052] = { icon = "LuiExtended/media/icons/abilities/ability_item_pardon_edict_low.dds", name = Abilities.Innate_Pardon_Edict_Low }, -- Minor Pardon
+    [76350] = { icon = "LuiExtended/media/icons/abilities/ability_item_pardon_edict_medium.dds", name = Abilities.Innate_Pardon_Edict_Medium }, -- Moderate Pardon
+    [76349] = { icon = "LuiExtended/media/icons/abilities/ability_item_pardon_edict_high.dds", name = Abilities.Innate_Pardon_Edict_High }, -- Full Pardon
     [69293] = { icon = "LuiExtended/media/icons/abilities/ability_innate_recall.dds", name = Abilities.Innate_Recall }, -- Sigil of Imperial Retreat
-    [47270] = { icon = "LuiExtended/media/icons/abilities/ability_innate_ritual_of_mara.dds", hide = true }, -- Ritual of Mara
-
-    -- Seasonal Event Items
-    [86792] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_festival_mints.dds",
-        name = Abilities.Consumable_Festival_Mints,
-    }, -- Eating (High Hrothgar Festival Mints)
-    [86794] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_festival_mints.dds",
-        name = Abilities.Consumable_Festival_Mints,
-        tooltip = Tooltips.Event_Festival_Mints,
-        unbreakable = 1,
-    }, -- Very Cold (High Hrothgar Festival Mints)
-    [86739] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_festival_grog.dds",
-        name = Abilities.Consumable_Sailors_Grog,
-    }, -- Drinking (Sailor's Warning Festival Grog)
-    [86740] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_festival_grog.dds",
-        name = Abilities.Consumable_Sailors_Grog,
-        tooltip = Tooltips.Event_Festival_Grog,
-        unbreakable = 1,
-    }, -- Very Drunk (Sailor's Warning Festival Grog)
-
-    [87964] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_dazzler_1.dds",
-        name = Abilities.Consumable_Sparkwreath_Dazzler,
-    }, -- Jester's Festival Illusion Daz (Sparkwreath Dazzler)
-    [87965] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_dazzler_1.dds",
-        name = Abilities.Consumable_Plume_Dazzler,
-    }, -- Jester's Festival Illusion Daz (Plume Dazzler)
-    [87966] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_dazzler_1.dds",
-        name = Abilities.Consumable_Spiral_Dazzler,
-    }, -- Jester's Festival Illusion Daz (Spiral Dazzler)
-    [88374] = {
-        icon = "LuiExtended/media/icons/abilities/ability_item_dazzler_2.dds",
-        name = Abilities.Skill_Sparkly_Hat_Dazzler,
-    }, -- Jester's Festival Illusion Daz (Sparkly Hat Dazzler)
-
+    [47270] = { icon = "LuiExtended/media/icons/abilities/ability_innate_ritual_of_mara.dds", hide = true }, -- Ritual of Mara-- Seasonal Event Items
+    [86792] = { icon = "LuiExtended/media/icons/abilities/ability_item_festival_mints.dds", name = Abilities.Consumable_Festival_Mints }, -- Eating (High Hrothgar Festival Mints)
+    [86794] = { icon = "LuiExtended/media/icons/abilities/ability_item_festival_mints.dds", name = Abilities.Consumable_Festival_Mints, tooltip = Tooltips.Event_Festival_Mints, unbreakable = 1 }, -- Very Cold (High Hrothgar Festival Mints)
+    [86739] = { icon = "LuiExtended/media/icons/abilities/ability_item_festival_grog.dds", name = Abilities.Consumable_Sailors_Grog }, -- Drinking (Sailor's Warning Festival Grog)
+    [86740] = { icon = "LuiExtended/media/icons/abilities/ability_item_festival_grog.dds", name = Abilities.Consumable_Sailors_Grog, tooltip = Tooltips.Event_Festival_Grog, unbreakable = 1 }, -- Very Drunk (Sailor's Warning Festival Grog)
+    [87964] = { icon = "LuiExtended/media/icons/abilities/ability_item_dazzler_1.dds", name = Abilities.Consumable_Sparkwreath_Dazzler }, -- Jester's Festival Illusion Daz (Sparkwreath Dazzler)
+    [87965] = { icon = "LuiExtended/media/icons/abilities/ability_item_dazzler_1.dds", name = Abilities.Consumable_Plume_Dazzler }, -- Jester's Festival Illusion Daz (Plume Dazzler)
+    [87966] = { icon = "LuiExtended/media/icons/abilities/ability_item_dazzler_1.dds", name = Abilities.Consumable_Spiral_Dazzler }, -- Jester's Festival Illusion Daz (Spiral Dazzler)
+    [88374] = { icon = "LuiExtended/media/icons/abilities/ability_item_dazzler_2.dds", name = Abilities.Skill_Sparkly_Hat_Dazzler }, -- Jester's Festival Illusion Daz (Sparkly Hat Dazzler)
     [116879] = { icon = "esoui/art/icons/event_jestersday_pie1.dds", name = Abilities.Consumable_Revelry_Pie }, -- Alliance Pie (Revelry Pie)
     [116933] = { hide = true }, -- Covered in Pie (Revelry Pie)
     [116942] = { tooltip = Tooltips.Event_Revelry_Pie, stack = 0, unbreakable = 1 }, -- Covered in Pie (Revelry Pie)
     [116944] = { tooltip = Tooltips.Event_Revelry_Pie, stack = 0, unbreakable = 1 }, -- Covered in Pie (Revelry Pie)
     [116943] = { tooltip = Tooltips.Event_Revelry_Pie, stack = 0, unbreakable = 1 }, -- Covered in Pie (Revelry Pie)
-
     --[[ -- TODO: Removed at some point, did this get replaced with another ID?
-    [92232] = {
-        icon = "LuiExtended/media/icons/mementos/memento_pelinals_ferocity.dds",
-        tooltip = Tooltips.Experience_Seasonal_Pelinal,
-        forcedContainer = "long",
-    }, -- Pelinal's Ferocity (Scroll of Pelinal's Ferocity)
+    [92232] = { icon = "LuiExtended/media/icons/mementos/memento_pelinals_ferocity.dds", tooltip = Tooltips.Experience_Seasonal_Pelinal, forcedContainer = "long", }, -- Pelinal's Ferocity (Scroll of Pelinal's Ferocity)
     ]]
     --
 
@@ -4601,252 +3977,69 @@ Effects.EffectOverride = {
     [77027] = { hide = true }, -- Anniversary Cake - Forreals (Jubilee Cake)
     [87998] = { hide = true }, -- Anniversary Cake (2nd Annual Jubilee Cake)
     [102009] = { hide = true }, -- Anniversary Cake (3rd Annual Jubilee Cake)
-    [77123] = {
-        icon = "LuiExtended/media/icons/mementos/memento_jubilee_cake.dds",
-        name = Abilities.Memento_Jubliee_Cake,
-        tooltip = Tooltips.Experience_Seasonal_Event,
-        forcedContainer = "long",
-    }, -- Anniversary EXP Buff (Other Jubilee Cake)
-    [118985] = {
-        icon = "LuiExtended/media/icons/mementos/memento_jubilee_cake.dds",
-        name = Abilities.Memento_Jubliee_Cake,
-        tooltip = Tooltips.Experience_Seasonal_Event,
-        forcedContainer = "long",
-    }, -- Anniversary EXP Buff (Jubilee Cake 2019)
-    [136348] = {
-        icon = "LuiExtended/media/icons/mementos/memento_jubilee_cake.dds",
-        name = Abilities.Memento_Jubliee_Cake,
-        tooltip = Tooltips.Experience_Seasonal_Event,
-        forcedContainer = "long",
-    }, -- Anniversary EXP Buff (Jubilee Cake 2020)
-    [152514] = {
-        icon = "LuiExtended/media/icons/mementos/memento_jubilee_cake.dds",
-        name = Abilities.Memento_Jubliee_Cake,
-        tooltip = Tooltips.Experience_Seasonal_Event,
-        forcedContainer = "long",
-    }, -- Anniversary EXP Buff (Jubilee Cake 2021)
-
-    -- Jester's Festival
-    [87963] = {
-        icon = "LuiExtended/media/icons/mementos/memento_cherry_blossom_branch.dds",
-        name = Abilities.Memento_Cherry_Blossom_Branch,
-    }, -- Bestowed Cherry Blossoms (Cherry Blossom Branch)
-
-    [115681] = {
-        icon = "esoui/art/icons/achievement_jestersfestival_memento_noisemaker.dds",
-        name = Abilities.Memento_Festive_Noise_Maker,
-    }, -- Party Noise Maker (Festive Noise Maker)
-    [129550] = {
-        icon = "esoui/art/icons/achievement_jestersfestival_memento_popper.dds",
-        name = Abilities.Memento_Jesters_Festival_Joke_Popper,
-    }, -- Stunned (Jester's Festival Joke Popper)
-
-    [102077] = {
-        icon = "LuiExtended/media/icons/mementos/memento_jesters_scintillator.dds",
-        name = Abilities.Memento_Jesters_Scintillator,
-        unbreakable = 1,
-    }, -- Jester's Festival Scintillator (Jester's Scintillator)
-
+    [77123] = { icon = "LuiExtended/media/icons/mementos/memento_jubilee_cake.dds", name = Abilities.Memento_Jubliee_Cake, tooltip = Tooltips.Experience_Seasonal_Event, forcedContainer = "long" }, -- Anniversary EXP Buff (Other Jubilee Cake)
+    [118985] = { icon = "LuiExtended/media/icons/mementos/memento_jubilee_cake.dds", name = Abilities.Memento_Jubliee_Cake, tooltip = Tooltips.Experience_Seasonal_Event, forcedContainer = "long" }, -- Anniversary EXP Buff (Jubilee Cake 2019)
+    [136348] = { icon = "LuiExtended/media/icons/mementos/memento_jubilee_cake.dds", name = Abilities.Memento_Jubliee_Cake, tooltip = Tooltips.Experience_Seasonal_Event, forcedContainer = "long" }, -- Anniversary EXP Buff (Jubilee Cake 2020)
+    [152514] = { icon = "LuiExtended/media/icons/mementos/memento_jubilee_cake.dds", name = Abilities.Memento_Jubliee_Cake, tooltip = Tooltips.Experience_Seasonal_Event, forcedContainer = "long" }, -- Anniversary EXP Buff (Jubilee Cake 2021)-- Jester's Festival
+    [87963] = { icon = "LuiExtended/media/icons/mementos/memento_cherry_blossom_branch.dds", name = Abilities.Memento_Cherry_Blossom_Branch }, -- Bestowed Cherry Blossoms (Cherry Blossom Branch)
+    [115681] = { icon = "esoui/art/icons/achievement_jestersfestival_memento_noisemaker.dds", name = Abilities.Memento_Festive_Noise_Maker }, -- Party Noise Maker (Festive Noise Maker)
+    [129550] = { icon = "esoui/art/icons/achievement_jestersfestival_memento_popper.dds", name = Abilities.Memento_Jesters_Festival_Joke_Popper }, -- Stunned (Jester's Festival Joke Popper)
+    [102077] = { icon = "LuiExtended/media/icons/mementos/memento_jesters_scintillator.dds", name = Abilities.Memento_Jesters_Scintillator, unbreakable = 1 }, -- Jester's Festival Scintillator (Jester's Scintillator)
     [149874] = { icon = "LuiExtended/media/icons/mementos/memento_playful_pranksters_surprise_box.dds" }, -- Playful Prankster's Surprise Box (Playful Prankster's Surprise Box)
-
-    [91369] = {
-        icon = "LuiExtended/media/icons/mementos/memento_the_pie_of_misrule.dds",
-        name = Abilities.Memento_The_Pie_of_Misrule,
-        tooltip = Tooltips.Experience_Seasonal_Event,
-        forcedContainer = "long",
-    }, -- Jester's Experience Boost Pie (The Pie of Misrule)
-
+    [91369] = { icon = "LuiExtended/media/icons/mementos/memento_the_pie_of_misrule.dds", name = Abilities.Memento_The_Pie_of_Misrule, tooltip = Tooltips.Experience_Seasonal_Event, forcedContainer = "long" }, -- Jester's Experience Boost Pie (The Pie of Misrule)
     -- New Life Festival
     --[[ -- TODO: Removed at some point, see if there is a new ID
-    [-----] = {
-        icon = "LuiExtended/media/icons/mementos/memento_bredas_magnificent_mead.dds",
-        tooltip = Tooltips.Experience_Seasonal_Event,
-        forcedContainer = "long",
-    }, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)
+    [-----] = { icon = "LuiExtended/media/icons/mementos/memento_bredas_magnificent_mead.dds", tooltip = Tooltips.Experience_Seasonal_Event, forcedContainer = "long", }, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)
     ]]
     --
-    [85355] = {
-        icon = "LuiExtended/media/icons/mementos/memento_fire_breathers_torches.dds",
-        name = Abilities.Memento_Fire_Breathers_Torches,
-        unbreakable = 1,
-    }, -- Flame Juggling (Fire-Breather's Torches)
-    [85354] = {
-        icon = "LuiExtended/media/icons/mementos/memento_jugglers_knives.dds",
-        name = Abilities.Memento_Jugglers_Knives,
-        unbreakable = 1,
-    }, -- Dagger Juggling (Juggler's Knives)
+    [85355] = { icon = "LuiExtended/media/icons/mementos/memento_fire_breathers_torches.dds", name = Abilities.Memento_Fire_Breathers_Torches, unbreakable = 1 }, -- Flame Juggling (Fire-Breather's Torches)
+    [85354] = { icon = "LuiExtended/media/icons/mementos/memento_jugglers_knives.dds", name = Abilities.Memento_Jugglers_Knives, unbreakable = 1 }, -- Dagger Juggling (Juggler's Knives)
     [86774] = { icon = "esoui/art/icons/achievement_newlifefestival_001.dds", name = Abilities.Memento_Mud_Ball }, -- Mudball (Mud Ball Pouch)
-    [85353] = {
-        icon = "LuiExtended/media/icons/mementos/memento_sword_swallowers_blade.dds",
-        name = Abilities.Memento_Sword_Swallowers_Blade,
-        unbreakable = 1,
-    }, -- Sword Swallowing (Sword-Swallower's Blade)
-
-    -- Tribunal Celebration Event
-    [146657] = {
-        icon = "LuiExtended/media/icons/mementos/memento_thetys_ramarys_bait_kit.dds",
-        name = Abilities.Memento_Thetys_Ramarys_Bait_Kit,
-    }, -- Memento Cliff Racer Bait (Thetys Ramary's Bait Kit)
-    [147634] = { hide = true }, -- Anchor (Thetys Ramary's Bait Kit)
-
-    -- Witches Festival
+    [85353] = { icon = "LuiExtended/media/icons/mementos/memento_sword_swallowers_blade.dds", name = Abilities.Memento_Sword_Swallowers_Blade, unbreakable = 1 }, -- Sword Swallowing (Sword-Swallower's Blade)-- Tribunal Celebration Event
+    [146657] = { icon = "LuiExtended/media/icons/mementos/memento_thetys_ramarys_bait_kit.dds", name = Abilities.Memento_Thetys_Ramarys_Bait_Kit }, -- Memento Cliff Racer Bait (Thetys Ramary's Bait Kit)
+    [147634] = { hide = true }, -- Anchor (Thetys Ramary's Bait Kit)-- Witches Festival
     [111458] = { icon = "LuiExtended/media/icons/mementos/memento_apple_bobbing_cauldron.dds" }, -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
     [111459] = { icon = "LuiExtended/media/icons/mementos/memento_apple_bobbing_cauldron.dds" }, -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
-    [125820] = {
-        icon = "LuiExtended/media/icons/mementos/memento_skeletal_marionette.dds",
-        name = Abilities.Memento_Skeletal_Marionette,
-    }, -- Witches Festival 2019 Marionette (Skeletal Marionette)
-
-    [144790] = {
-        icon = "LuiExtended/media/icons/mementos/memento_throwing_bones.dds",
-        name = Abilities.Memento_Throwing_Bones,
-    }, --  Throw Bones (Throwing Bones)
-    [144791] = {
-        icon = "LuiExtended/media/icons/mementos/memento_throwing_bones.dds",
-        name = Abilities.Memento_Throwing_Bones,
-    }, --  Throw Bones (Throwing Bones)
-
-    [81575] = {
-        icon = "LuiExtended/media/icons/mementos/memento_witchmothers_whistle.dds",
-        name = Abilities.Memento_Witchmothers_Whistle,
-        hide = true,
-    }, -- Event - WitchFest Cauldron (Witchmother's Whistle)
-    [96118] = {
-        icon = "LuiExtended/media/icons/mementos/memento_witchmothers_brew.dds",
-        tooltip = Tooltips.Experience_Seasonal_Event,
-        forcedContainer = "long",
-    }, -- Witchmother's Boon (Witchmother's Whistle)
-    [84364] = {
-        icon = "esoui/art/icons/achievement_witchesfestival_01.dds",
-        unbreakable = 1,
-        forcedContainer = "long",
-        tooltip = Tooltips.Memento_Witchmothers_Brew,
-    }, -- Witchmother's Brew (Witchmother's Whistle)
-    [84365] = {
-        icon = "esoui/art/icons/achievement_witchesfestival_01.dds",
-        unbreakable = 1,
-        forcedContainer = "long",
-        tooltip = Tooltips.Memento_Witchmothers_Brew,
-    }, -- Witchmother's Brew (Witchmother's Whistle)
-    [84366] = {
-        icon = "esoui/art/icons/achievement_witchesfestival_01.dds",
-        unbreakable = 1,
-        forcedContainer = "long",
-        tooltip = Tooltips.Memento_Witchmothers_Brew,
-    }, -- Witchmother's Brew (Witchmother's Whistle)
-    [84367] = {
-        icon = "esoui/art/icons/achievement_witchesfestival_01.dds",
-        unbreakable = 1,
-        forcedContainer = "long",
-        tooltip = Tooltips.Memento_Witchmothers_Brew,
-    }, -- Witchmother's Brew (Witchmother's Whistle)
-    [84368] = {
-        icon = "esoui/art/icons/achievement_witchesfestival_01.dds",
-        unbreakable = 1,
-        forcedContainer = "long",
-        tooltip = Tooltips.Memento_Witchmothers_Brew,
-    }, -- Witchmother's Brew (Witchmother's Whistle)
-    [84369] = {
-        icon = "esoui/art/icons/achievement_witchesfestival_01.dds",
-        unbreakable = 1,
-        forcedContainer = "long",
-        tooltip = Tooltips.Memento_Witchmothers_Brew,
-    }, -- Witchmother's Brew (Witchmother's Whistle)
+    [125820] = { icon = "LuiExtended/media/icons/mementos/memento_skeletal_marionette.dds", name = Abilities.Memento_Skeletal_Marionette }, -- Witches Festival 2019 Marionette (Skeletal Marionette)
+    [144790] = { icon = "LuiExtended/media/icons/mementos/memento_throwing_bones.dds", name = Abilities.Memento_Throwing_Bones }, --  Throw Bones (Throwing Bones)
+    [144791] = { icon = "LuiExtended/media/icons/mementos/memento_throwing_bones.dds", name = Abilities.Memento_Throwing_Bones }, --  Throw Bones (Throwing Bones)
+    [81575] = { icon = "LuiExtended/media/icons/mementos/memento_witchmothers_whistle.dds", name = Abilities.Memento_Witchmothers_Whistle, hide = true }, -- Event - WitchFest Cauldron (Witchmother's Whistle)
+    [96118] = { icon = "LuiExtended/media/icons/mementos/memento_witchmothers_brew.dds", tooltip = Tooltips.Experience_Seasonal_Event, forcedContainer = "long" }, -- Witchmother's Boon (Witchmother's Whistle)
+    [84364] = { icon = "esoui/art/icons/achievement_witchesfestival_01.dds", unbreakable = 1, forcedContainer = "long", tooltip = Tooltips.Memento_Witchmothers_Brew }, -- Witchmother's Brew (Witchmother's Whistle)
+    [84365] = { icon = "esoui/art/icons/achievement_witchesfestival_01.dds", unbreakable = 1, forcedContainer = "long", tooltip = Tooltips.Memento_Witchmothers_Brew }, -- Witchmother's Brew (Witchmother's Whistle)
+    [84366] = { icon = "esoui/art/icons/achievement_witchesfestival_01.dds", unbreakable = 1, forcedContainer = "long", tooltip = Tooltips.Memento_Witchmothers_Brew }, -- Witchmother's Brew (Witchmother's Whistle)
+    [84367] = { icon = "esoui/art/icons/achievement_witchesfestival_01.dds", unbreakable = 1, forcedContainer = "long", tooltip = Tooltips.Memento_Witchmothers_Brew }, -- Witchmother's Brew (Witchmother's Whistle)
+    [84368] = { icon = "esoui/art/icons/achievement_witchesfestival_01.dds", unbreakable = 1, forcedContainer = "long", tooltip = Tooltips.Memento_Witchmothers_Brew }, -- Witchmother's Brew (Witchmother's Whistle)
+    [84369] = { icon = "esoui/art/icons/achievement_witchesfestival_01.dds", unbreakable = 1, forcedContainer = "long", tooltip = Tooltips.Memento_Witchmothers_Brew }, -- Witchmother's Brew (Witchmother's Whistle)
 
     ----------------------------------------------------------------
     -- FACTION & PROLOGUE QUESTS
     ----------------------------------------------------------------
 
     -- Aldmeri Dominion
-    [39245] = {
-        icon = "LuiExtended/media/icons/mementos/memento_discourse_amaranthine.dds",
-        name = Abilities.Memento_Discourse_Amaranthine,
-        unbreakable = 1,
-        tooltip = Tooltips.Memento_Discourse_Amaranthine,
-    }, -- Glimpse of the Forbidden (Discourse Amaranthine)
+    [39245] = { icon = "LuiExtended/media/icons/mementos/memento_discourse_amaranthine.dds", name = Abilities.Memento_Discourse_Amaranthine, unbreakable = 1, tooltip = Tooltips.Memento_Discourse_Amaranthine }, -- Glimpse of the Forbidden (Discourse Amaranthine)
     [41948] = { icon = "LuiExtended/media/icons/mementos/memento_glanirs_smoke_bomb.dds" }, -- Glanir's Smoke Bomb (Glanir's Smoke Bomb)
     [42105] = { icon = "LuiExtended/media/icons/mementos/memento_nanwens_sword.dds" }, -- Nanwen's Sword (Nanwen's Sword)
-    [42008] = {
-        icon = "LuiExtended/media/icons/mementos/memento_token_of_root_sunder.dds",
-        name = Abilities.Memento_Token_of_Root_Sunder,
-        unbreakable = 1,
-        tooltip = Tooltips.Memento_Token_of_Root_Sunder,
-    }, -- Blessing of Root Sunder (Token of Root Sunder)
-
-    -- Daggerfall Covenant
-    [41988] = {
-        icon = "LuiExtended/media/icons/mementos/memento_bonesnap_binding_stone.dds",
-        unbreakable = 1,
-        tooltip = Tooltips.Memento_Bonesnap_Binding_Talisman,
-    }, -- Bonesnap Binding Stone (Bonesnap Binding Stone)
-    [41950] = {
-        icon = "LuiExtended/media/icons/mementos/memento_fetish_of_anger.dds",
-        tooltip = Tooltips.Memento_Fetish_of_Anger,
-        unbreakable = 1,
-    }, -- Fetish of Anger (Fetish of Anger)
-    [21226] = {
-        icon = "LuiExtended/media/icons/mementos/memento_finvirs_trinket.dds",
-        tooltip = Tooltips.Memento_Finvirs_Trinket,
-        unbreakable = 1,
-    }, -- Finvir's Trinket (Finvir's Trinket)
-    [42053] = {
-        icon = "LuiExtended/media/icons/mementos/memento_yokudan_totem.dds",
-        name = Abilities.Memento_Yokudan_Totem,
-        unbreakable = 1,
-    }, -- Yokudan Salute (Yokudan Totem)
-
-    -- Ebonheart Pact
-    [26829] = {
-        icon = "LuiExtended/media/icons/mementos/memento_almalexias_enchanted_lantern.dds",
-        name = Abilities.Memento_Almalexias_Lantern,
-        unbreakable = 1,
-        tooltip = Tooltips.Memento_Almalexias_Lantern,
-    }, -- Light of the Tribunal (Almalexia's Enchanted Lantern)
+    [42008] = { icon = "LuiExtended/media/icons/mementos/memento_token_of_root_sunder.dds", name = Abilities.Memento_Token_of_Root_Sunder, unbreakable = 1, tooltip = Tooltips.Memento_Token_of_Root_Sunder }, -- Blessing of Root Sunder (Token of Root Sunder)-- Daggerfall Covenant
+    [41988] = { icon = "LuiExtended/media/icons/mementos/memento_bonesnap_binding_stone.dds", unbreakable = 1, tooltip = Tooltips.Memento_Bonesnap_Binding_Talisman }, -- Bonesnap Binding Stone (Bonesnap Binding Stone)
+    [41950] = { icon = "LuiExtended/media/icons/mementos/memento_fetish_of_anger.dds", tooltip = Tooltips.Memento_Fetish_of_Anger, unbreakable = 1 }, -- Fetish of Anger (Fetish of Anger)
+    [21226] = { icon = "LuiExtended/media/icons/mementos/memento_finvirs_trinket.dds", tooltip = Tooltips.Memento_Finvirs_Trinket, unbreakable = 1 }, -- Finvir's Trinket (Finvir's Trinket)
+    [42053] = { icon = "LuiExtended/media/icons/mementos/memento_yokudan_totem.dds", name = Abilities.Memento_Yokudan_Totem, unbreakable = 1 }, -- Yokudan Salute (Yokudan Totem)-- Ebonheart Pact
+    [26829] = { icon = "LuiExtended/media/icons/mementos/memento_almalexias_enchanted_lantern.dds", name = Abilities.Memento_Almalexias_Lantern, unbreakable = 1, tooltip = Tooltips.Memento_Almalexias_Lantern }, -- Light of the Tribunal (Almalexia's Enchanted Lantern)
     [16846] = { icon = "LuiExtended/media/icons/mementos/memento_blackfeather_court_whistle.dds", hide = true }, -- Blackfeather Court Whistle (Blackfeather Court Whistle)
     [25703] = { hide = true }, -- Justal's Falcon (Justal's Falcon)
-    [43700] = {
-        hide = true,
-        icon = "LuiExtended/media/icons/mementos/memento_lenas_wand_of_finding.dds",
-        name = Abilities.Menento_Lenas_Wand_of_Finding,
-    }, -- Wand of Finding (Lena's Wand of Finding)
+    [43700] = { hide = true, icon = "LuiExtended/media/icons/mementos/memento_lenas_wand_of_finding.dds", name = Abilities.Menento_Lenas_Wand_of_Finding }, -- Wand of Finding (Lena's Wand of Finding)
     [43702] = { hide = true }, -- Invis Chicken Delay (Lena's Wind of Finding)
     [43703] = { hide = true }, -- Extracting... (Lena's Wind of Finding)
     [43704] = { hide = true }, -- Extracting... (Lena's Wind of Finding)
     [43701] = { hide = true }, -- Extracting... (Lena's Wind of Finding)
-    [26339] = {
-        icon = "LuiExtended/media/icons/mementos/memento_questionable_meat_sack.dds",
-        name = Abilities.Memento_Mystery_Meat,
-        unbreakable = 1,
-        tooltip = Tooltips.Memento_Mystery_Meat,
-    }, -- Questionable Meat Sack (Questionable Meat Sack)
-    [25369] = {
-        icon = "LuiExtended/media/icons/mementos/memento_sanguines_goblet.dds",
-        name = Abilities.Memento_Sanguines_Goblet,
-        unbreakable = 1,
-        tooltip = Tooltips.Memento_Sanguines_Goblet,
-    }, -- Sanguine's Goblet (Sanguine's Goblet)
-
-    -- Coldharbour
-    [42076] = {
-        icon = "LuiExtended/media/icons/mementos/memento_mezha-dros_sealing_amulet.dds",
-        name = Abilities.Memento_Sealing_Amulet,
-        unbreakable = 1,
-    }, -- Tear (Mezha-dro's Sealing Amulet)
-
-    -- Cyrodiil
-    [34578] = { icon = "LuiExtended/media/icons/mementos/memento_nirnroot_wine.dds", unbreakable = 1 }, -- Nirnroot Wine (Nirnroot Wine)
-
-    -- Prologue Quests
+    [26339] = { icon = "LuiExtended/media/icons/mementos/memento_questionable_meat_sack.dds", name = Abilities.Memento_Mystery_Meat, unbreakable = 1, tooltip = Tooltips.Memento_Mystery_Meat }, -- Questionable Meat Sack (Questionable Meat Sack)
+    [25369] = { icon = "LuiExtended/media/icons/mementos/memento_sanguines_goblet.dds", name = Abilities.Memento_Sanguines_Goblet, unbreakable = 1, tooltip = Tooltips.Memento_Sanguines_Goblet }, -- Sanguine's Goblet (Sanguine's Goblet)-- Coldharbour
+    [42076] = { icon = "LuiExtended/media/icons/mementos/memento_mezha-dros_sealing_amulet.dds", name = Abilities.Memento_Sealing_Amulet, unbreakable = 1 }, -- Tear (Mezha-dro's Sealing Amulet)-- Cyrodiil
+    [34578] = { icon = "LuiExtended/media/icons/mementos/memento_nirnroot_wine.dds", unbreakable = 1 }, -- Nirnroot Wine (Nirnroot Wine)-- Prologue Quests
     [149879] = { icon = "LuiExtended/media/icons/mementos/memento_daedric_unwarding_amulet.dds" }, -- Daedric Unwarding Amulet (Daedric Unwarding Amulet)
-    [125817] = {
-        icon = "LuiExtended/media/icons/mementos/memento_dragonhorn_curio.dds",
-        name = Abilities.Memento_Dragonhorn_Curio,
-    }, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
-    [89550] = {
-        icon = "LuiExtended/media/icons/mementos/memento_twilight_shard.dds",
-        name = Abilities.Memento_Twilight_Shard,
-        unbreakable = 1,
-    }, -- TROPHY Azura's Light (Twilight Shard)
+    [125817] = { icon = "LuiExtended/media/icons/mementos/memento_dragonhorn_curio.dds", name = Abilities.Memento_Dragonhorn_Curio }, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
+    [89550] = { icon = "LuiExtended/media/icons/mementos/memento_twilight_shard.dds", name = Abilities.Memento_Twilight_Shard, unbreakable = 1 }, -- TROPHY Azura's Light (Twilight Shard)
     [143495] = { icon = "LuiExtended/media/icons/mementos/memento_reliquary_of_dark_designs.dds" }, -- Reliquary of Dark Designs (Reliquary of Dark Designs)
     [144417] = { hide = true }, -- Reliquary of Dark Designs (Reliquary of Dark Designs)
 
@@ -4856,78 +4049,24 @@ Effects.EffectOverride = {
 
     -- Orsinium
     [73685] = { hide = true }, -- Rkindaleft Trophy (Hidden Pressure Vent)
-    [74151] = {
-        icon = "LuiExtended/media/icons/mementos/memento_hidden_pressure_vent.dds",
-        name = Abilities.Memento_Hidden_Pressure_Vent,
-        unbreakable = 1,
-    }, -- Stun (Hidden Pressure Vent)
-    [73686] = {
-        hide = true,
-        icon = "LuiExtended/media/icons/mementos/memento_malacaths_wrathful_flame.dds",
-        name = Abilities.Memento_Malacaths_Wrathful_Flame,
-    }, -- Old Orsinium Trophy (Malacath's Wrathful Flame)
-    [74232] = { hide = true }, -- Stun (Malacath's Wrathful Flame)
-
-    -- Thieves Guild
+    [74151] = { icon = "LuiExtended/media/icons/mementos/memento_hidden_pressure_vent.dds", name = Abilities.Memento_Hidden_Pressure_Vent, unbreakable = 1 }, -- Stun (Hidden Pressure Vent)
+    [73686] = { hide = true, icon = "LuiExtended/media/icons/mementos/memento_malacaths_wrathful_flame.dds", name = Abilities.Memento_Malacaths_Wrathful_Flame }, -- Old Orsinium Trophy (Malacath's Wrathful Flame)
+    [74232] = { hide = true }, -- Stun (Malacath's Wrathful Flame)-- Thieves Guild
     [77785] = { hide = true }, -- Rain of Coins (Coin of Illusory Riches)
-    [77786] = {
-        icon = "LuiExtended/media/icons/mementos/memento_coin_of_illusory_riches.dds",
-        name = Abilities.Memento_Coin_of_Illusory_Riches,
-        unbreakable = 1,
-    }, -- Stun (Coin of Illusory Riches)
-
-    -- Dark Brotherhood
-    [79510] = {
-        icon = "LuiExtended/media/icons/mementos/memento_blade_of_the_blood_oath.dds",
-        name = Abilities.Memento_Blade_of_the_Blood_Oath,
-        unbreakable = 1,
-    }, -- TROPHY Blood Oath (Blade of the Blood Oath)
-
-    -- Morrowind
-    [92862] = {
-        hide = true,
-        icon = "LuiExtended/media/icons/mementos/memento_dreamers_chime.dds",
-        name = Abilities.Memento_Dreamers_Chime,
-        unbreakable = 1,
-    }, -- Dreamers Chime (Ringing Bell)
-    [92863] = { hide = true }, -- Dreamers Chime (Stun)
-
-    -- Elsweyr
+    [77786] = { icon = "LuiExtended/media/icons/mementos/memento_coin_of_illusory_riches.dds", name = Abilities.Memento_Coin_of_Illusory_Riches, unbreakable = 1 }, -- Stun (Coin of Illusory Riches)-- Dark Brotherhood
+    [79510] = { icon = "LuiExtended/media/icons/mementos/memento_blade_of_the_blood_oath.dds", name = Abilities.Memento_Blade_of_the_Blood_Oath, unbreakable = 1 }, -- TROPHY Blood Oath (Blade of the Blood Oath)-- Morrowind
+    [92862] = { hide = true, icon = "LuiExtended/media/icons/mementos/memento_dreamers_chime.dds", name = Abilities.Memento_Dreamers_Chime, unbreakable = 1 }, -- Dreamers Chime (Ringing Bell)
+    [92863] = { hide = true }, -- Dreamers Chime (Stun)-- Elsweyr
     [119099] = { icon = "LuiExtended/media/icons/mementos/memento_brittle_burial_urn.dds" }, -- Brittle Burial Urn (Brittle Burial Urn)
-    [119107] = {
-        icon = "LuiExtended/media/icons/mementos/memento_winnowing_plague_decoction.dds",
-        hide = true,
-        name = Abilities.Memento_Winnowing_Plague_Decoction,
-    }, -- NAME ME Infect Brew (Winnowing Plague Decoction)
-
-    -- Scalebreaker
-    [125816] = {
-        icon = "LuiExtended/media/icons/mementos/memento_corruption_of_maarselok.dds",
-        name = Abilities.Memento_Corruption_of_Maarselok,
-    }, -- Maarselok Corruption Memento (Corruption of Maarselok)
-
-    -- Greymoor
-    [136120] = { icon = "LuiExtended/media/icons/mementos/memento_ritual_circle_totem.dds" }, -- Ritual Circle Totem (Ritual Circle Totem)
-
-    -- Stonethorn
-    [137919] = {
-        icon = "LuiExtended/media/icons/mementos/memento_mostly_stable_juggling_potions.dds",
-        name = Abilities.Memento_Mostly_Stable_Juggling_Potions,
-    }, -- Juggling Potion Bottles (Mostly Stable Juggling Potions)
-
-    -- Markarth
+    [119107] = { icon = "LuiExtended/media/icons/mementos/memento_winnowing_plague_decoction.dds", hide = true, name = Abilities.Memento_Winnowing_Plague_Decoction }, -- NAME ME Infect Brew (Winnowing Plague Decoction)-- Scalebreaker
+    [125816] = { icon = "LuiExtended/media/icons/mementos/memento_corruption_of_maarselok.dds", name = Abilities.Memento_Corruption_of_Maarselok }, -- Maarselok Corruption Memento (Corruption of Maarselok)-- Greymoor
+    [136120] = { icon = "LuiExtended/media/icons/mementos/memento_ritual_circle_totem.dds" }, -- Ritual Circle Totem (Ritual Circle Totem)-- Stonethorn
+    [137919] = { icon = "LuiExtended/media/icons/mementos/memento_mostly_stable_juggling_potions.dds", name = Abilities.Memento_Mostly_Stable_Juggling_Potions }, -- Juggling Potion Bottles (Mostly Stable Juggling Potions)-- Markarth
     [147598] = { icon = "LuiExtended/media/icons/mementos/memento_void_shard.dds" }, --  Void Shard (Void Shard)
-    [147688] = { hide = true }, -- Void Shard (Void Shard)
-
-    -- Flames of Ambition
+    [147688] = { hide = true }, -- Void Shard (Void Shard)-- Flames of Ambition
     [149881] = { icon = "LuiExtended/media/icons/mementos/memento_illusory_salamander_stone.dds" }, -- Illusory Salamander Stone (Illusory Salamander Stone)
-    [151256] = { hide = true }, -- Illusory Salamander Stone (Illusory Salamander Stone)
-
-    -- Blackwood
-    [153758] = {
-        icon = "LuiExtended/media/icons/mementos/memento_full_scale_golden_anvil_replica.dds",
-        name = Abilities.Memento_Full_Scale_Golden_Anvil_Replica,
-    }, -- Golden Anvil Replica (Full-Scale Golden Anvil Replica)
+    [151256] = { hide = true }, -- Illusory Salamander Stone (Illusory Salamander Stone)-- Blackwood
+    [153758] = { icon = "LuiExtended/media/icons/mementos/memento_full_scale_golden_anvil_replica.dds", name = Abilities.Memento_Full_Scale_Golden_Anvil_Replica }, -- Golden Anvil Replica (Full-Scale Golden Anvil Replica)
     [146744] = { icon = "LuiExtended/media/icons/mementos/memento_temperamental_grimoire.dds" }, -- Temperamental Grimoire (Temperamental Grimoire)
     [153760] = { icon = "LuiExtended/media/icons/mementos/memento_wilting_weed_killer_phial.dds" }, -- Wilting Weed Killer Phial (Wilting Weed Killer Phial)
 
@@ -4936,153 +4075,39 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Crown Crates - Storm Atronach Crate
-    [85344] = {
-        icon = "LuiExtended/media/icons/mementos/memento_storm_atronach_aura.dds",
-        name = Abilities.Memento_Storm_Atronach_Aura,
-        tooltip = Tooltips.Memento_Storm_Atronach_Aura,
-        unbreakable = 1,
-    }, -- Atronach Aura (Storm Atronach Aura)
-    [85349] = {
-        icon = "LuiExtended/media/icons/mementos/memento_storm_atronach_transform.dds",
-        name = Abilities.Memento_Storm_Atronach_Transform,
-        tooltip = Tooltips.Memento_Storm_Atronach_Transform,
-        unbreakable = 1,
-    }, -- Storm Atronach Transform (Atronach Transformation)
-    [85347] = {
-        icon = "LuiExtended/media/icons/mementos/memento_storm_atronach_juggle.dds",
-        name = Abilities.Memento_Storm_Orb_Juggle,
-        unbreakable = 1,
-    }, -- Storm Orb Juggle (Atronach Juggling)
-
-    -- Crown Crates - Wild Hunt Crate
-    [86976] = {
-        icon = "LuiExtended/media/icons/mementos/memento_wild_hunt_leaf-dance_aura.dds",
-        name = Abilities.Memento_Wild_Hunt_Aura,
-        tooltip = Tooltips.Memento_Wild_Hunt_Leaf_Dance_Aura,
-        unbreakable = 1,
-    }, -- Spriggan Aura (Wild Hunt Leaf-Dance Aura)
-    [86977] = {
-        icon = "LuiExtended/media/icons/mementos/memento_wild_hunt_transform.dds",
-        name = Abilities.Memento_Wild_Hunt_Transform,
-        tooltip = Tooltips.Memento_Wild_Hunt_Transform,
-        unbreakable = 1,
-    }, -- Spriggan Transformation (Wild Hunt Transform)
-    [86978] = {
-        icon = "LuiExtended/media/icons/mementos/memento_floral_swirl_aura.dds",
-        name = Abilities.Memento_Floral_Swirl_Aura,
-        tooltip = Tooltips.Memento_Floral_Swirl_Aura,
-        unbreakable = 1,
-    }, -- Grand Spriggan Aura (Floral Swirl Aura)
-
+    [85344] = { icon = "LuiExtended/media/icons/mementos/memento_storm_atronach_aura.dds", name = Abilities.Memento_Storm_Atronach_Aura, tooltip = Tooltips.Memento_Storm_Atronach_Aura, unbreakable = 1 }, -- Atronach Aura (Storm Atronach Aura)
+    [85349] = { icon = "LuiExtended/media/icons/mementos/memento_storm_atronach_transform.dds", name = Abilities.Memento_Storm_Atronach_Transform, tooltip = Tooltips.Memento_Storm_Atronach_Transform, unbreakable = 1 }, -- Storm Atronach Transform (Atronach Transformation)
+    [85347] = { icon = "LuiExtended/media/icons/mementos/memento_storm_atronach_juggle.dds", name = Abilities.Memento_Storm_Orb_Juggle, unbreakable = 1 }, -- Storm Orb Juggle (Atronach Juggling)-- Crown Crates - Wild Hunt Crate
+    [86976] = { icon = "LuiExtended/media/icons/mementos/memento_wild_hunt_leaf-dance_aura.dds", name = Abilities.Memento_Wild_Hunt_Aura, tooltip = Tooltips.Memento_Wild_Hunt_Leaf_Dance_Aura, unbreakable = 1 }, -- Spriggan Aura (Wild Hunt Leaf-Dance Aura)
+    [86977] = { icon = "LuiExtended/media/icons/mementos/memento_wild_hunt_transform.dds", name = Abilities.Memento_Wild_Hunt_Transform, tooltip = Tooltips.Memento_Wild_Hunt_Transform, unbreakable = 1 }, -- Spriggan Transformation (Wild Hunt Transform)
+    [86978] = { icon = "LuiExtended/media/icons/mementos/memento_floral_swirl_aura.dds", name = Abilities.Memento_Floral_Swirl_Aura, tooltip = Tooltips.Memento_Floral_Swirl_Aura, unbreakable = 1 }, -- Grand Spriggan Aura (Floral Swirl Aura)
     -- Crown Crates - Dwarven Crate
-    [92866] = {
-        icon = "LuiExtended/media/icons/mementos/memento_dwarven_puzzle_orb.dds",
-        name = Abilities.Memento_Dwarven_Puzzle_Orb,
-        unbreakable = 1,
-        tooltip = Tooltips.Memento_Dwarven_Puzzle_Orb,
-    }, -- Dwarven Globe (Dwarven Puzzle Orb)
-    [92867] = {
-        icon = "LuiExtended/media/icons/mementos/memento_dwarven_tonal_forks.dds",
-        name = Abilities.Memento_Dwarven_Tonal_Forks,
-        unbreakable = 1,
-        tooltip = Tooltips.Memento_Dwarven_Tonal_Forks,
-    }, -- Dwarven Tuning Forks (Dwarven Tonal Forks)
-    [92868] = {
-        icon = "LuiExtended/media/icons/mementos/memento_dwemervamidium_mirage.dds",
-        name = Abilities.Memento_Dwemervamidium_Mirage,
-        unbreakable = 1,
-        tooltip = Tooltips.Memento_Dwemervamidium_Mirage,
-    }, -- Dwarven Transformation (Dwemervamidium Mirage)
-
+    [92866] = { icon = "LuiExtended/media/icons/mementos/memento_dwarven_puzzle_orb.dds", name = Abilities.Memento_Dwarven_Puzzle_Orb, unbreakable = 1, tooltip = Tooltips.Memento_Dwarven_Puzzle_Orb }, -- Dwarven Globe (Dwarven Puzzle Orb)
+    [92867] = { icon = "LuiExtended/media/icons/mementos/memento_dwarven_tonal_forks.dds", name = Abilities.Memento_Dwarven_Tonal_Forks, unbreakable = 1, tooltip = Tooltips.Memento_Dwarven_Tonal_Forks }, -- Dwarven Tuning Forks (Dwarven Tonal Forks)
+    [92868] = { icon = "LuiExtended/media/icons/mementos/memento_dwemervamidium_mirage.dds", name = Abilities.Memento_Dwemervamidium_Mirage, unbreakable = 1, tooltip = Tooltips.Memento_Dwemervamidium_Mirage }, -- Dwarven Transformation (Dwemervamidium Mirage)
     -- Crown Crates - Reaper's Harvest Crate
-    [97273] = {
-        icon = "LuiExtended/media/icons/mementos/memento_crows_calling.dds",
-        name = Abilities.Memento_Crows_Calling,
-        unbreakable = 1,
-    }, -- TROPHY Death Crate Mem 1 (Crow's Calling)
-    [97274] = {
-        icon = "esoui/art/icons/achievement_update16_017.dds",
-        name = Abilities.Memento_Swarm_of_Crows,
-        unbreakable = 1,
-        tooltip = Tooltips.Memento_Swarm_of_Crows,
-    }, -- Swarm of Crows (Swarm of Crows)
-    [98378] = { hide = true }, -- Murderous Strike (Murderous Strike)
-
-    -- Crown Crates - Flame Atronach Crate
-    [99318] = {
-        icon = "LuiExtended/media/icons/mementos/memento_fiery_orb.dds",
-        name = Abilities.Memento_Fiery_Orb,
-        unbreakable = 1,
-    }, -- TROPHY Flame Crate Mem 1 (Fiery Orb)
-    [99319] = {
-        icon = "LuiExtended/media/icons/mementos/memento_flame_pixie.dds",
-        name = Abilities.Memento_Flame_Pixie,
-        unbreakable = 1,
-    }, -- Flame Crate Memento 2 (Flame Pixie)
-    [99320] = {
-        icon = "LuiExtended/media/icons/mementos/memento_flame_eruption.dds",
-        name = Abilities.Memento_Flame_Eruption,
-        unbreakable = 1,
-    }, -- TROPHY Flame Crate Mem 3 (Flame Eruption)
-
+    [97273] = { icon = "LuiExtended/media/icons/mementos/memento_crows_calling.dds", name = Abilities.Memento_Crows_Calling, unbreakable = 1 }, -- TROPHY Death Crate Mem 1 (Crow's Calling)
+    [97274] = { icon = "esoui/art/icons/achievement_update16_017.dds", name = Abilities.Memento_Swarm_of_Crows, unbreakable = 1, tooltip = Tooltips.Memento_Swarm_of_Crows }, -- Swarm of Crows (Swarm of Crows)
+    [98378] = { hide = true }, -- Murderous Strike (Murderous Strike)-- Crown Crates - Flame Atronach Crate
+    [99318] = { icon = "LuiExtended/media/icons/mementos/memento_fiery_orb.dds", name = Abilities.Memento_Fiery_Orb, unbreakable = 1 }, -- TROPHY Flame Crate Mem 1 (Fiery Orb)
+    [99319] = { icon = "LuiExtended/media/icons/mementos/memento_flame_pixie.dds", name = Abilities.Memento_Flame_Pixie, unbreakable = 1 }, -- Flame Crate Memento 2 (Flame Pixie)
+    [99320] = { icon = "LuiExtended/media/icons/mementos/memento_flame_eruption.dds", name = Abilities.Memento_Flame_Eruption, unbreakable = 1 }, -- TROPHY Flame Crate Mem 3 (Flame Eruption)
     -- Crown Crates - Scalecaller Crate
-    [101874] = {
-        icon = "LuiExtended/media/icons/mementos/memento_scalecaller_frost_shard.dds",
-        name = Abilities.Memento_Frost_Shard,
-        unbreakable = 1,
-    }, -- _CRWN Dragon Priest Mem2 Ice T (Scalecaller Frost Shard)
-    [101877] = {
-        icon = "LuiExtended/media/icons/mementos/memento_scalecaller_rune_of_levitation.dds",
-        name = Abilities.Memento_Rune_of_Levitation,
-        unbreakable = 1,
-    }, -- _CRWN Dragon Priest Mem1 Fl/St (Scalecaller Rune of Levitation)
-    [101872] = {
-        icon = "LuiExtended/media/icons/mementos/memento_bone_dragon_summons_focus.dds",
-        name = Abilities.Memento_Dragon_Summons_Focus,
-        unbreakable = 1,
-    }, -- _CRWN Dragon Priest Memento3 (Bone Dragon Summons Focus)
-
+    [101874] = { icon = "LuiExtended/media/icons/mementos/memento_scalecaller_frost_shard.dds", name = Abilities.Memento_Frost_Shard, unbreakable = 1 }, -- _CRWN Dragon Priest Mem2 Ice T (Scalecaller Frost Shard)
+    [101877] = { icon = "LuiExtended/media/icons/mementos/memento_scalecaller_rune_of_levitation.dds", name = Abilities.Memento_Rune_of_Levitation, unbreakable = 1 }, -- _CRWN Dragon Priest Mem1 Fl/St (Scalecaller Rune of Levitation)
+    [101872] = { icon = "LuiExtended/media/icons/mementos/memento_bone_dragon_summons_focus.dds", name = Abilities.Memento_Dragon_Summons_Focus, unbreakable = 1 }, -- _CRWN Dragon Priest Memento3 (Bone Dragon Summons Focus)
     -- Crown Crates - Psijic Vault Crate
-    [104324] = {
-        icon = "LuiExtended/media/icons/mementos/memento_psijic_celestial_orb.dds",
-        name = Abilities.Memento_Psijic_Celestial_Orb,
-        unbreakable = 1,
-    }, -- Psijic Pearl Summon (Psijic Celestial Orb)
-    [104323] = {
-        icon = "LuiExtended/media/icons/mementos/memento_psijic_tautology_glass.dds",
-        name = Abilities.Memento_Psijic_Tautology_Glass,
-        unbreakable = 1,
-    }, -- Psijic Hourglass (Psijic Tautology Glass)
-    [104325] = {
-        icon = "LuiExtended/media/icons/mementos/memento_sapiarchic_discorporation_lens.dds",
-        name = Abilities.Memento_Sapiarchic_Discorporation,
-        unbreakable = 1,
-        hide = true,
-    }, -- Psijic Disintegrate (Sapiarchic Discorporation Lens)
-
+    [104324] = { icon = "LuiExtended/media/icons/mementos/memento_psijic_celestial_orb.dds", name = Abilities.Memento_Psijic_Celestial_Orb, unbreakable = 1 }, -- Psijic Pearl Summon (Psijic Celestial Orb)
+    [104323] = { icon = "LuiExtended/media/icons/mementos/memento_psijic_tautology_glass.dds", name = Abilities.Memento_Psijic_Tautology_Glass, unbreakable = 1 }, -- Psijic Hourglass (Psijic Tautology Glass)
+    [104325] = { icon = "LuiExtended/media/icons/mementos/memento_sapiarchic_discorporation_lens.dds", name = Abilities.Memento_Sapiarchic_Discorporation, unbreakable = 1, hide = true }, -- Psijic Disintegrate (Sapiarchic Discorporation Lens)
     -- Crown Crates - Hollowjack Crate
     [110482] = { icon = "LuiExtended/media/icons/mementos/memento_rind_renewing_pumpkin.dds", unbreakable = 1 }, -- Rind-Renewing Pumpkin (Rind-Renewing Pumpkin)
     [116543] = { icon = "LuiExtended/media/icons/mementos/memento_gourd_gallows_stump.dds", unbreakable = 1 }, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [110481] = { icon = "LuiExtended/media/icons/mementos/memento_gourd_gallows_stump.dds", unbreakable = 1 }, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
-    [110483] = {
-        icon = "LuiExtended/media/icons/mementos/memento_ghost_lantern.dds",
-        name = Abilities.Memento_Ghost_Lantern,
-        unbreakable = 1,
-        tooltip = Tooltips.Memento_Ghost_Lantern,
-    }, -- Ghost Lantern (Ghost Lantern)
-
+    [110483] = { icon = "LuiExtended/media/icons/mementos/memento_ghost_lantern.dds", name = Abilities.Memento_Ghost_Lantern, unbreakable = 1, tooltip = Tooltips.Memento_Ghost_Lantern }, -- Ghost Lantern (Ghost Lantern)
     -- Crown Crates - Xanmeer Crate
-    [113288] = {
-        icon = "LuiExtended/media/icons/mementos/memento_mire_drum.dds",
-        name = Abilities.Memento_Mire_Drum,
-        unbreakable = 1,
-    }, -- U20 Crown Memento 1 (Mire Drum)
-    [113291] = {
-        icon = "LuiExtended/media/icons/mementos/memento_vossa_satl.dds",
-        name = Abilities.Memento_Vossa_Satl,
-        unbreakable = 1,
-    }, -- U20 Crown Memento 2 (Vossa-satl)
-
+    [113288] = { icon = "LuiExtended/media/icons/mementos/memento_mire_drum.dds", name = Abilities.Memento_Mire_Drum, unbreakable = 1 }, -- U20 Crown Memento 1 (Mire Drum)
+    [113291] = { icon = "LuiExtended/media/icons/mementos/memento_vossa_satl.dds", name = Abilities.Memento_Vossa_Satl, unbreakable = 1 }, -- U20 Crown Memento 2 (Vossa-satl)
     -- Crown Crates - Ayleid Crate
     [151489] = { icon = "LuiExtended/media/icons/mementos/memento_painters_easel_and_canvas.dds" }, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
     [151490] = { icon = "LuiExtended/media/icons/mementos/memento_painters_easel_and_canvas.dds" }, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
@@ -5120,121 +4145,47 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Asylum Weapons
-    [100474] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_chaotic_whirlwind.dds",
-        tooltip = Tooltips.Set_Asylum_Dual_Wield,
-    }, -- Chaotic Whirlwind (Asylum Dual Wield)
+    [100474] = { icon = "LuiExtended/media/icons/abilities/ability_set_chaotic_whirlwind.dds", tooltip = Tooltips.Set_Asylum_Dual_Wield }, -- Chaotic Whirlwind (Asylum Dual Wield)
     [140223] = { icon = "LuiExtended/media/icons/abilities/ability_set_chaotic_whirlwind.dds" }, -- Chaotic Whirlwind (Asylum Dual Wield)
-    [100302] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_asylum_piercing_spray.dds",
-        tooltip = Tooltips.Set_Asylum_Bow,
-    }, -- Piercing Spray (Asylum Bow)
+    [100302] = { icon = "LuiExtended/media/icons/abilities/ability_set_asylum_piercing_spray.dds", tooltip = Tooltips.Set_Asylum_Bow }, -- Piercing Spray (Asylum Bow)
     [100294] = { icon = "LuiExtended/media/icons/abilities/ability_set_asylum_disciplined_slash.dds" }, -- Disciplined Slash (Asylum 2H)
     [100462] = { icon = "LuiExtended/media/icons/abilities/ability_set_asylum_defensive_position.dds" }, -- Defensive Position (Asylum 1H + Shield)
     [100464] = { icon = "LuiExtended/media/icons/abilities/ability_set_asylum_defensive_position.dds" }, -- Defensive Position (Asylum 1H + Shield)
-    [100308] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_asylum_timeless_blessing.dds",
-        tooltip = Tooltips.Set_Aslyum_Restoration_Staff,
-    }, -- Timeless Blessing (Asylum Restoration Staff)
-    [100306] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_asylum_concentrated_force.dds",
-        tooltip = Tooltips.Set_Asylum_Destruction_Staff,
-    }, -- Concentrated Force (Asylum Destruction Staff)
-
-    -- Maelstrom Weapons
-    [99806] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_maelstrom_cruel_flurry.dds",
-        tooltip = Tooltips.Set_Maelstrom_DW,
-    }, -- Cruel Flurry (Maelstrom Dual Wield)
+    [100308] = { icon = "LuiExtended/media/icons/abilities/ability_set_asylum_timeless_blessing.dds", tooltip = Tooltips.Set_Aslyum_Restoration_Staff }, -- Timeless Blessing (Asylum Restoration Staff)
+    [100306] = { icon = "LuiExtended/media/icons/abilities/ability_set_asylum_concentrated_force.dds", tooltip = Tooltips.Set_Asylum_Destruction_Staff }, -- Concentrated Force (Asylum Destruction Staff)-- Maelstrom Weapons
+    [99806] = { icon = "LuiExtended/media/icons/abilities/ability_set_maelstrom_cruel_flurry.dds", tooltip = Tooltips.Set_Maelstrom_DW }, -- Cruel Flurry (Maelstrom Dual Wield)
     [99851] = { hide = true }, -- Thunderous Volley (Maelstrom Bow)
-    [99789] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_maelstrom_merciless_charge.dds",
-        tooltip = Tooltips.Set_Maelstrom_2H,
-    }, -- Merciless Charge (Maelstrom 2H)
-    [100588] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_maelstrom_rampaging_slash.dds",
-        tooltip = Tooltips.Set_Maelstrom_1H,
-    }, -- Rampaging Slash (Maelstrom 1H + Shield)
+    [99789] = { icon = "LuiExtended/media/icons/abilities/ability_set_maelstrom_merciless_charge.dds", tooltip = Tooltips.Set_Maelstrom_2H }, -- Merciless Charge (Maelstrom 2H)
+    [100588] = { icon = "LuiExtended/media/icons/abilities/ability_set_maelstrom_rampaging_slash.dds", tooltip = Tooltips.Set_Maelstrom_1H }, -- Rampaging Slash (Maelstrom 1H + Shield)
     [100587] = { icon = "LuiExtended/media/icons/abilities/ability_set_maelstrom_rampaging_slash.dds" }, -- Rampaging Slash (Maelstrom 1H + Shield)
     [100589] = { icon = "LuiExtended/media/icons/abilities/ability_set_maelstrom_rampaging_slash.dds" }, -- Rampaging Slash (Maelstrom 1H + Shield)
-    [99887] = { icon = "LuiExtended/media/icons/abilities/ability_set_maelstrom_precise_regeneration.dds" }, -- Precise Regeneration (Maelstrom Restoration Staff)
-
-    -- Master Weapons
+    [99887] = { icon = "LuiExtended/media/icons/abilities/ability_set_maelstrom_precise_regeneration.dds" }, -- Precise Regeneration (Maelstrom Restoration Staff)-- Master Weapons
     [99761] = { icon = "LuiExtended/media/icons/abilities/ability_set_master_puncturing_remedy.dds" }, -- Puncturing Remedy (Master 1H + shield)
-    [100575] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_master_puncturing_remedy.dds",
-        tooltip = Tooltips.Set_Master_1H,
-    }, -- Puncturing Remedy (Master 1H + shield)
-    [140334] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_master_destructive_impact.dds",
-        tooltip = Tooltips.Generic_Spell_Damage_Duration_Value,
-        tooltipValue2 = 600,
-    }, -- Destructive Impact (Master Destruction Staff)
-    [99781] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_master_grand_rejuvenation.dds",
-        tooltip = Tooltips.Set_Master_Resto,
-    }, -- Grand Rejuvenation (Master Restoration Staff)
-    [131489] = { icon = "LuiExtended/media/icons/abilities/ability_set_master_grand_rejuvenation.dds" }, -- Grand Rejuvenation (Master Restoration Staff)
-
-    -- Blackrose Weapons
-    [113617] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_spectral_cloak.dds",
-        tooltip = Tooltips.Set_Blackrose_Dual_Wield,
-    }, -- Spectral Cloak (Blackrose DW)
+    [100575] = { icon = "LuiExtended/media/icons/abilities/ability_set_master_puncturing_remedy.dds", tooltip = Tooltips.Set_Master_1H }, -- Puncturing Remedy (Master 1H + shield)
+    [140334] = { icon = "LuiExtended/media/icons/abilities/ability_set_master_destructive_impact.dds", tooltip = Tooltips.Generic_Spell_Damage_Duration_Value, tooltipValue2 = 600 }, -- Destructive Impact (Master Destruction Staff)
+    [99781] = { icon = "LuiExtended/media/icons/abilities/ability_set_master_grand_rejuvenation.dds", tooltip = Tooltips.Set_Master_Resto }, -- Grand Rejuvenation (Master Restoration Staff)
+    [131489] = { icon = "LuiExtended/media/icons/abilities/ability_set_master_grand_rejuvenation.dds" }, -- Grand Rejuvenation (Master Restoration Staff)-- Blackrose Weapons
+    [113617] = { icon = "LuiExtended/media/icons/abilities/ability_set_spectral_cloak.dds", tooltip = Tooltips.Set_Blackrose_Dual_Wield }, -- Spectral Cloak (Blackrose DW)
     [113619] = { hide = true }, -- Virulent Shot (Blackrose Bow) -- SHOWS ONLY ON TARGET PLAYERS
-    [113627] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_virulent_shot.dds",
-        tooltip = Tooltips.Generic_Poison,
-        tooltipValue2 = 2,
-    }, -- Virulent Shot (Blackrose Bow)
+    [113627] = { icon = "LuiExtended/media/icons/abilities/ability_set_virulent_shot.dds", tooltip = Tooltips.Generic_Poison, tooltipValue2 = 2 }, -- Virulent Shot (Blackrose Bow)
     [113553] = { icon = "LuiExtended/media/icons/abilities/ability_set_radial_uppercut.dds" }, -- Radial Uppercut (Blackrose 2H)
-    [113608] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_gallant_charge.dds",
-        tooltip = Tooltips.Set_Blackrose_1H,
-    }, -- Gallant Charge (Blackrose 1H)
-    [115003] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_wild_impulse.dds",
-        tooltip = Tooltips.Set_Blackrose_Destro_Staff,
-    }, -- Wild Impulse (Blackrose Destruction Staff)
+    [113608] = { icon = "LuiExtended/media/icons/abilities/ability_set_gallant_charge.dds", tooltip = Tooltips.Set_Blackrose_1H }, -- Gallant Charge (Blackrose 1H)
+    [115003] = { icon = "LuiExtended/media/icons/abilities/ability_set_wild_impulse.dds", tooltip = Tooltips.Set_Blackrose_Destro_Staff }, -- Wild Impulse (Blackrose Destruction Staff)
     [114988] = { icon = "LuiExtended/media/icons/abilities/ability_set_wild_impulse.dds" }, -- Wild Impulse (Blackrose Destruction Staff)
     [115005] = { icon = "LuiExtended/media/icons/abilities/ability_set_wild_impulse.dds" }, -- Wild Impulse (Blackrose Destruction Staff)
-    [115006] = { icon = "LuiExtended/media/icons/abilities/ability_set_wild_impulse.dds" }, -- Wild Impulse (Blackrose Destruction Staff)
-
-    -- Vateshran Weapons
+    [115006] = { icon = "LuiExtended/media/icons/abilities/ability_set_wild_impulse.dds" }, -- Wild Impulse (Blackrose Destruction Staff)-- Vateshran Weapons
     [149423] = { icon = "LuiExtended/media/icons/abilities/ability_set_executioners_blade.dds" }, -- Executioner's Blade (Vateshran Dual Wield)
-    [147701] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_frenzied_momentum.dds",
-        tooltip = Tooltips.Set_Vateshran_2H,
-    }, -- Frenzied Momentum (Vateshran 2H)
+    [147701] = { icon = "LuiExtended/media/icons/abilities/ability_set_frenzied_momentum.dds", tooltip = Tooltips.Set_Vateshran_2H }, -- Frenzied Momentum (Vateshran 2H)
     [147703] = { icon = "LuiExtended/media/icons/abilities/ability_set_frenzied_momentum.dds" }, -- Frenzied Momentum (Vateshran 2H)
-    [147747] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_void_bash.dds",
-        tooltip = Tooltips.Set_Vateshran_1H,
-    }, -- Call of the Void (Vateshran 1H)
+    [147747] = { icon = "LuiExtended/media/icons/abilities/ability_set_void_bash.dds", tooltip = Tooltips.Set_Vateshran_1H }, -- Call of the Void (Vateshran 1H)
     [147744] = { icon = "LuiExtended/media/icons/abilities/ability_set_void_bash.dds" }, -- Void Bash (Vateshran 1H)
     [147743] = { icon = "LuiExtended/media/icons/abilities/ability_set_void_bash.dds" }, -- Void Bash (Vateshran 1H)
-    [147843] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_wrath_of_elements.dds",
-        tooltip = Tooltips.Set_Vateshran_Destro_Staff,
-        type = BUFF_EFFECT_TYPE_DEBUFF,
-        unbreakable = 1,
-    }, -- Wrath of Elements (Vateshran Destruction Staff)
-    [149413] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_wrath_of_elements.dds",
-        tooltip = Tooltips.Set_Vateshran_Destro_Staff_Buff,
-        stackAdd = 1,
-        stackRemove = 1,
-        stackReset = 20,
-    }, -- Wrath of Elements (Vateshran Destruction Staff)
+    [147843] = { icon = "LuiExtended/media/icons/abilities/ability_set_wrath_of_elements.dds", tooltip = Tooltips.Set_Vateshran_Destro_Staff, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Wrath of Elements (Vateshran Destruction Staff)
+    [149413] = { icon = "LuiExtended/media/icons/abilities/ability_set_wrath_of_elements.dds", tooltip = Tooltips.Set_Vateshran_Destro_Staff_Buff, stackAdd = 1, stackRemove = 1, stackReset = 20 }, -- Wrath of Elements (Vateshran Destruction Staff)
     [147847] = { icon = "LuiExtended/media/icons/abilities/ability_set_wrath_of_elements.dds" }, -- Wrath of Elements (Vateshran Destruction Staff)
     [147844] = { icon = "LuiExtended/media/icons/abilities/ability_set_wrath_of_elements.dds" }, -- Wrath of Elements (Vateshran Destruction Staff)
     [147846] = { icon = "LuiExtended/media/icons/abilities/ability_set_wrath_of_elements.dds" }, -- Wrath of Elements (Vateshran Destruction Staff)
-    [147872] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_force_overflow.dds",
-        tooltip = Tooltips.Set_Vateshran_Resto_Staff,
-        type = BUFF_EFFECT_TYPE_DEBUFF,
-        unbreakable = 1,
-    }, -- Force Overflow (Vateshran Restoration Staff)
+    [147872] = { icon = "LuiExtended/media/icons/abilities/ability_set_force_overflow.dds", tooltip = Tooltips.Set_Vateshran_Resto_Staff, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Force Overflow (Vateshran Restoration Staff)
     [149878] = { icon = "LuiExtended/media/icons/abilities/ability_set_force_overflow.dds" }, -- Force Overflow (Vateshran Restoration Staff)
     [149877] = { icon = "LuiExtended/media/icons/abilities/ability_set_force_overflow.dds" }, -- Force Overflow (Vateshran Restoration Staff)
     [147873] = { icon = "LuiExtended/media/icons/abilities/ability_set_force_overflow.dds" }, -- Force Overflow (Vateshran Restoration Staff)
@@ -5246,202 +4197,71 @@ Effects.EffectOverride = {
 
     -- Balorgh
     [111505] = { icon = "LuiExtended/media/icons/abilities/ability_set_balorgh.dds", tooltip = Tooltips.Set_Balorgh }, -- Balorgh (Balorgh)
-
     -- Blood Spawn
-    [59517] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_monster_blood_spawn.dds",
-        tooltip = Tooltips.Generic_Physical_Spell_Resist_Value,
-        tooltipValue2 = 3731,
-    }, -- Blood Spawn (Blood Spawn)
+    [59517] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_blood_spawn.dds", tooltip = Tooltips.Generic_Physical_Spell_Resist_Value, tooltipValue2 = 3731 }, -- Blood Spawn (Blood Spawn)
     [61274] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_blood_spawn.dds" }, -- Blood Spawn (Blood Spawn)
-
     -- Bogdan the Nightflame
-    [59590] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_bogdan.dds",
-        name = Abilities.Set_Bogdan_the_Nightflame,
-        tooltip = Tooltips.Set_Bogdan_the_Nightflame,
-    }, -- Imperial Prison Item Set (Bogdan the Nightflame)
-    [59591] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_bogdan.dds",
-        name = Abilities.Set_Bogdan_the_Nightflame,
-        groundLabel = true,
-        tooltip = Tooltips.Generic_AOE_Heal,
-        tooltipValue2 = 1,
-    }, -- Bogdan Totem (Bogdan the Nightflame)
-
+    [59590] = { icon = "LuiExtended/media/icons/abilities/ability_set_bogdan.dds", name = Abilities.Set_Bogdan_the_Nightflame, tooltip = Tooltips.Set_Bogdan_the_Nightflame }, -- Imperial Prison Item Set (Bogdan the Nightflame)
+    [59591] = { icon = "LuiExtended/media/icons/abilities/ability_set_bogdan.dds", name = Abilities.Set_Bogdan_the_Nightflame, groundLabel = true, tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Bogdan Totem (Bogdan the Nightflame)
     -- Chokethorn
     [81069] = { hide = true }, -- Chokethorn (Chokethorn)
-    [81077] = {
-        icon = "esoui/art/icons/mh_hedgeguardian_strang.dds",
-        tooltip = Tooltips.Generic_HoT_Channel,
-        tooltipValue2 = 1,
-    }, -- Chokethorn (Chokethorn)
-
+    [81077] = { icon = "esoui/art/icons/mh_hedgeguardian_strang.dds", tooltip = Tooltips.Generic_HoT_Channel, tooltipValue2 = 1 }, -- Chokethorn (Chokethorn)
     -- Domihaus
-    [97882] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_domihaus_fire.dds",
-        tooltip = Tooltips.Set_Domihaus_Damage,
-    }, -- Domihaus (Domihaus) -- TODO: Make a combined icon for this set (possibly)
-    [97896] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_domihaus_fire.dds",
-        forcedContainer = "short",
-        groundLabel = true,
-        tooltip = Tooltips.Set_Domihaus_Buff,
-    }, -- Domihaus (Domihaus) -- TODO: Make a combined icon for this set (possibly)
-    [97883] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_domihaus_fire.dds",
-        groundLabel = true,
-        tooltip = Tooltips.Generic_AOE_Fire,
-        tooltipValue2 = 1,
-    }, -- Domihaus (Domihaus)
-    [97899] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_domihaus_stone.dds",
-        groundLabel = true,
-        tooltip = Tooltips.Generic_AOE_Physical,
-        tooltipValue2 = 1,
-    }, -- Domihaus (Domihaus)
-
+    [97882] = { icon = "LuiExtended/media/icons/abilities/ability_set_domihaus_fire.dds", tooltip = Tooltips.Set_Domihaus_Damage }, -- Domihaus (Domihaus) -- TODO: Make a combined icon for this set (possibly)
+    [97896] = { icon = "LuiExtended/media/icons/abilities/ability_set_domihaus_fire.dds", forcedContainer = "short", groundLabel = true, tooltip = Tooltips.Set_Domihaus_Buff }, -- Domihaus (Domihaus) -- TODO: Make a combined icon for this set (possibly)
+    [97883] = { icon = "LuiExtended/media/icons/abilities/ability_set_domihaus_fire.dds", groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1 }, -- Domihaus (Domihaus)
+    [97899] = { icon = "LuiExtended/media/icons/abilities/ability_set_domihaus_stone.dds", groundLabel = true, tooltip = Tooltips.Generic_AOE_Physical, tooltipValue2 = 1 }, -- Domihaus (Domihaus)
     -- Earthgore
-    [97855] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_monster_earthgore.dds",
-        tooltip = Tooltips.Set_Earthgore,
-    }, -- Earthgore (Earthgore)
-    [97857] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_monster_earthgore.dds",
-        groundLabel = true,
-        tooltip = Tooltips.Generic_AOE_Heal,
-        tooltipValue2 = 1,
-    }, -- Earthgore (Earthgore)
-
+    [97855] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_earthgore.dds", tooltip = Tooltips.Set_Earthgore }, -- Earthgore (Earthgore)
+    [97857] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_earthgore.dds", groundLabel = true, tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Earthgore (Earthgore)
     -- Grothdarr
-    [84504] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_monster_grothdarr.dds",
-        tooltip = Tooltips.Set_Grothdarr,
-    }, -- Grothdarr (Grothdarr)
-    [84502] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_monster_grothdarr.dds",
-        groundLabel = true,
-        tooltip = Tooltips.Generic_AOE_Fire,
-        tooltipValue2 = 1,
-    }, -- Grothdarr (Grothdarr)
-
+    [84504] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_grothdarr.dds", tooltip = Tooltips.Set_Grothdarr }, -- Grothdarr (Grothdarr)
+    [84502] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_grothdarr.dds", groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1 }, -- Grothdarr (Grothdarr)
     -- Grundwulf
     [126529] = { icon = "LuiExtended/media/icons/abilities/ability_set_grundwulf_stamina.dds" }, -- Grundwulf (Grundwulf)
     [126687] = { icon = "LuiExtended/media/icons/abilities/ability_set_grundwulf_magicka.dds" }, -- Grundwulf (Grundwulf)
     [126688] = { icon = "LuiExtended/media/icons/abilities/ability_set_grundwulf_stamina.dds" }, -- Grundwulf (Grundwulf)
     [126528] = { icon = "LuiExtended/media/icons/abilities/ability_set_grundwulf_magicka.dds" }, -- Grundwulf (Grundwulf)
-
     -- Iceheart
-    [80562] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_monster_iceheart.dds",
-        tooltip = Tooltips.Set_Iceheart,
-    }, -- Iceheart (Iceheart)
-    [80561] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_iceheart.dds" }, -- Iceheart (Iceheart)
-
-    -- Ilambris
+    [80562] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_iceheart.dds", tooltip = Tooltips.Set_Iceheart }, -- Iceheart (Iceheart)
+    [80561] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_iceheart.dds" }, -- Iceheart (Iceheart)-- Ilambris
     [80527] = { icon = "LuiExtended/media/icons/abilities/ability_set_ilambris.dds", tooltip = Tooltips.Set_Ilambris }, -- Ilambris (Ilambris)
-    [80526] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_ilambris.dds",
-        groundLabel = true,
-        tooltip = Tooltips.Set_Ilambris_Ground,
-        tooltipValue2 = 1,
-    }, -- Ilambris (Ilambris)
+    [80526] = { icon = "LuiExtended/media/icons/abilities/ability_set_ilambris.dds", groundLabel = true, tooltip = Tooltips.Set_Ilambris_Ground, tooltipValue2 = 1 }, -- Ilambris (Ilambris)
     [80525] = { icon = "LuiExtended/media/icons/abilities/ability_set_ilambris.dds" }, -- Ilambris (Ilambris)
-
     -- Infernal Guardian
     [83405] = { icon = "LuiExtended/media/icons/abilities/ability_set_infernal_guardian.dds", hide = true }, -- Infernal Guardian (Infernal Guardian)
     [83409] = { icon = "LuiExtended/media/icons/abilities/ability_set_infernal_guardian.dds" }, -- Infernal Guardian (Infernal Guardian)
-
     -- Kjalnar's Nightmare
-    [133505] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_kjalnars_nightmare_bone.dds",
-        tooltip = Tooltips.Set_Kjalnars_Nightmare,
-    }, -- Bone (Kjalnar's Nightmare)
+    [133505] = { icon = "LuiExtended/media/icons/abilities/ability_set_kjalnars_nightmare_bone.dds", tooltip = Tooltips.Set_Kjalnars_Nightmare }, -- Bone (Kjalnar's Nightmare)
     [133538] = { icon = "LuiExtended/media/icons/abilities/ability_set_kjalnars_nightmare.dds" }, -- Kjalnar's Nightmare (Kjalnar's Nightmare)
     [134908] = { icon = "LuiExtended/media/icons/abilities/ability_set_kjalnars_nightmare.dds" }, -- Kjalnar's Nightmare (Kjalnar's Nightmare)
-    [133506] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_kjalnars_nightmare.dds",
-        tooltip = Tooltips.Generic_Knockdown,
-    }, -- Kjalnar's Nightmare (Kjalnar's Nightmare)
-
+    [133506] = { icon = "LuiExtended/media/icons/abilities/ability_set_kjalnars_nightmare.dds", tooltip = Tooltips.Generic_Knockdown }, -- Kjalnar's Nightmare (Kjalnar's Nightmare)
     -- Kra'gh
     [80566] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_kragh.dds", hide = true }, -- Kra'gh (Kra'gh)
     [80565] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_kragh.dds" }, -- Kra'gh (Kra'gh)
-
     -- Lady Thorn
     [142305] = { icon = "LuiExtended/media/icons/abilities/ability_set_hollowfang.dds" }, -- Sanguine Burst (Lady Thorn)
-
     -- Lord Warden
-    [59586] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_monster_lord_warden.dds",
-        name = Abilities.Set_Lord_Warden_Dusk,
-        duration = 0,
-        forcedContainer = "short",
-        groundLabel = true,
-        tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur_Value,
-        tooltipValue2 = 3180,
-    }, -- Lord Warden (Lord Warden)
-    [59587] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_monster_lord_warden.dds",
-        name = Abilities.Set_Lord_Warden_Dusk,
-        tooltip = Tooltips.Set_Lord_Warden_Buff,
-    }, -- Lord Warden (Lord Warden)
-
+    [59586] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_lord_warden.dds", name = Abilities.Set_Lord_Warden_Dusk, duration = 0, forcedContainer = "short", groundLabel = true, tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 3180 }, -- Lord Warden (Lord Warden)
+    [59587] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_lord_warden.dds", name = Abilities.Set_Lord_Warden_Dusk, tooltip = Tooltips.Set_Lord_Warden_Buff }, -- Lord Warden (Lord Warden)
     -- Malubeth
-    [59568] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds",
-        name = Abilities.Set_Scourge_Harvester,
-        tooltip = Tooltips.Set_Malubeth_Damage,
-    }, -- Scourge Harvest (Malubeth)
-    [59573] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds",
-        name = Abilities.Set_Scourge_Harvester,
-    }, -- Scourge Harvest (Malubeth)
-
-    -- Maarselok
-    [126941] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_monster_maarselok.dds",
-        tooltip = Tooltips.Set_Maarselok,
-    }, -- Maarselok (Maarselok)
-
+    [59568] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds", name = Abilities.Set_Scourge_Harvester, tooltip = Tooltips.Set_Malubeth_Damage }, -- Scourge Harvest (Malubeth)
+    [59573] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds", name = Abilities.Set_Scourge_Harvester }, -- Scourge Harvest (Malubeth)-- Maarselok
+    [126941] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_maarselok.dds", tooltip = Tooltips.Set_Maarselok }, -- Maarselok (Maarselok)
     -- Maw of the Infernal
-    [59508] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_maw_of_the_infernal.dds",
-        name = Abilities.Set_Maw_of_the_Infernal,
-        tooltip = Tooltips.Set_Maw_of_the_Infernal,
-    }, -- Banished Cells Item Set (Maw of the Infernal)
+    [59508] = { icon = "LuiExtended/media/icons/abilities/ability_set_maw_of_the_infernal.dds", name = Abilities.Set_Maw_of_the_Infernal, tooltip = Tooltips.Set_Maw_of_the_Infernal }, -- Banished Cells Item Set (Maw of the Infernal)
     [60974] = { icon = "LuiExtended/media/icons/abilities/ability_daedroth_jagged_claw_fire.dds" }, -- Jagged Claw (Maw of the Infernal)
     [60972] = { icon = "LuiExtended/media/icons/abilities/ability_daedroth_fiery_breath.dds" }, -- Fiery Breath (Maw of the Infernal)
     [60973] = { icon = "LuiExtended/media/icons/abilities/ability_daedroth_fiery_jaws.dds" }, -- Fiery Jaws (Maw of the Infernal)
-
     -- Molag Kena
-    [66808] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_molag_kena.dds",
-        tooltip = Tooltips.Set_Molag_Kena,
-    }, -- Molag Kena (Molag Kena)
-    [66812] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_molag_kena.dds",
-        tooltip = Tooltips.Set_Molag_Kena_Overkill,
-    }, -- Overkill (Molag Kena)
-
+    [66808] = { icon = "LuiExtended/media/icons/abilities/ability_set_molag_kena.dds", tooltip = Tooltips.Set_Molag_Kena }, -- Molag Kena (Molag Kena)
+    [66812] = { icon = "LuiExtended/media/icons/abilities/ability_set_molag_kena.dds", tooltip = Tooltips.Set_Molag_Kena_Overkill }, -- Overkill (Molag Kena)
     -- Mother Ciannait
-    [133381] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_mother_ciannait.dds",
-        tooltip = Tooltips.Generic_Damage_Shield_Duration,
-    }, -- Mother Ciannait (Mother Ciannait)
+    [133381] = { icon = "LuiExtended/media/icons/abilities/ability_set_mother_ciannait.dds", tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Mother Ciannait (Mother Ciannait)
     [137313] = { icon = "LuiExtended/media/icons/abilities/ability_set_mother_ciannait.dds" }, -- Mother Ciannait (Mother Ciannait)
-
     -- Nerien'eth
-    [59594] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_soul_rupture.dds",
-        name = Abilities.Set_Nerieneth,
-        tooltip = Tooltips.Set_Nerieneth,
-    }, -- Crypt of Hearts Item Set (Nerien'eth)
-    [59593] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_soul_rupture.dds",
-        name = Abilities.Set_Nerieneth,
-    }, -- Lich Crystal (Nerien'eth)
-
+    [59594] = { icon = "LuiExtended/media/icons/abilities/ability_spell_soul_rupture.dds", name = Abilities.Set_Nerieneth, tooltip = Tooltips.Set_Nerieneth }, -- Crypt of Hearts Item Set (Nerien'eth)
+    [59593] = { icon = "LuiExtended/media/icons/abilities/ability_spell_soul_rupture.dds", name = Abilities.Set_Nerieneth }, -- Lich Crystal (Nerien'eth)
     -- Pirate Skeleton
     [98421] = { icon = "esoui/art/icons/achievement_housing_038.dds", tooltip = Tooltips.Set_Pirate_Skeleton }, -- Pirate Skeleton
     [98419] = { icon = "esoui/art/icons/achievement_housing_038.dds", tooltip = Tooltips.Set_Pirate_Skeleton }, -- Pirate Skeleton
@@ -5449,192 +4269,69 @@ Effects.EffectOverride = {
     [81675] = { icon = "esoui/art/icons/achievement_housing_038.dds", tooltip = Tooltips.Set_Pirate_Skeleton }, -- Pirate Skeleton
     [83288] = { icon = "esoui/art/icons/achievement_housing_038.dds", tooltip = Tooltips.Set_Pirate_Skeleton }, -- Pirate Skeleton
     [83287] = { icon = "esoui/art/icons/achievement_housing_038.dds", tooltip = Tooltips.Set_Pirate_Skeleton }, -- Pirate Skeleton
-
     -- Selene
     [80606] = { icon = "LuiExtended/media/icons/abilities/ability_spell_primal_maul.dds" }, -- Selene (Selene)
     [80607] = { hide = true }, -- Dummy (Selene)
-    [80609] = { hide = true }, -- Dummy (Selene)
-
-    -- Sellistrix
-    [80545] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_sellistrix.dds",
-        tooltip = Tooltips.Set_Sellistrix,
-    }, -- Sellistrix (Sellistrix)
+    [80609] = { hide = true }, -- Dummy (Selene)-- Sellistrix
+    [80545] = { icon = "LuiExtended/media/icons/abilities/ability_set_sellistrix.dds", tooltip = Tooltips.Set_Sellistrix }, -- Sellistrix (Sellistrix)
     [80544] = { icon = "LuiExtended/media/icons/abilities/ability_set_sellistrix.dds" }, -- Sellistrix (Sellistrix)
     [80549] = { icon = "LuiExtended/media/icons/abilities/ability_set_sellistrix.dds", tooltip = Tooltips.Generic_Stun }, -- Sellistrix (Sellistrix)
-
     -- Sentinel of Rkugamz
-    [81036] = {
-        icon = "LuiExtended/media/icons/abilities/ability_dwarvenspider_heal.dds",
-        hide = true,
-        tooltip = Tooltips.Set_Sentinel_of_Rkugamz,
-    }, -- Sentinel of Rkugamz
-    [81038] = {
-        icon = "LuiExtended/media/icons/abilities/ability_dwarvenspider_heal.dds",
-        groundLabel = true,
-        tooltip = Tooltips.Set_Sentinel_of_Rkugamz_Ground,
-    }, -- Sentinel of Rkugamz
+    [81036] = { icon = "LuiExtended/media/icons/abilities/ability_dwarvenspider_heal.dds", hide = true, tooltip = Tooltips.Set_Sentinel_of_Rkugamz }, -- Sentinel of Rkugamz
+    [81038] = { icon = "LuiExtended/media/icons/abilities/ability_dwarvenspider_heal.dds", groundLabel = true, tooltip = Tooltips.Set_Sentinel_of_Rkugamz_Ground }, -- Sentinel of Rkugamz
     [81041] = { icon = "LuiExtended/media/icons/abilities/ability_dwarvenspider_heal.dds" }, -- Sentinel of Rkugamz
     [133239] = { icon = "LuiExtended/media/icons/abilities/ability_dwarvenspider_heal.dds" }, -- Sentinel of Rkugamz
-
     -- Shadowrend
     [80955] = { hide = true }, -- Shadowrend (Shadowrend)
-    [80954] = {
-        icon = "LuiExtended/media/icons/abilities/ability_summon_shadow_proxy.dds",
-        name = Abilities.Set_Shadowrend,
-        hide = true,
-        tooltip = Tooltips.Set_Shadowrend,
-    }, -- Shadowrend Summon (Shadowrend)
-    [80980] = {
-        icon = "LuiExtended/media/icons/abilities/ability_clannfear_headbutt_shadowrend.dds",
-        name = Abilities.Skill_Headbutt,
-    }, -- Shadowrend (Shadowrend)
-    [80990] = {
-        icon = "LuiExtended/media/icons/abilities/ability_summon_shadow_proxy.dds",
-        tooltip = Tooltips.Generic_Reduce_Damage_Done,
-        tooltipValue2 = 5,
-    }, -- Shadowrend (Shadowrend)
-    [80989] = {
-        icon = "LuiExtended/media/icons/abilities/ability_clannfear_tail_spike_shadowrend.dds",
-        name = Abilities.Skill_Tail_Spike,
-    }, -- Shadowrend (Shadowrend)
-    [81034] = {
-        icon = "LuiExtended/media/icons/abilities/ability_summon_shadow_proxy.dds",
-        tooltip = Tooltips.Generic_Reduce_Damage_Done,
-        tooltipValue2 = 5,
-    }, -- Shadowrend (Shadowrend)
-
+    [80954] = { icon = "LuiExtended/media/icons/abilities/ability_summon_shadow_proxy.dds", name = Abilities.Set_Shadowrend, hide = true, tooltip = Tooltips.Set_Shadowrend }, -- Shadowrend Summon (Shadowrend)
+    [80980] = { icon = "LuiExtended/media/icons/abilities/ability_clannfear_headbutt_shadowrend.dds", name = Abilities.Skill_Headbutt }, -- Shadowrend (Shadowrend)
+    [80990] = { icon = "LuiExtended/media/icons/abilities/ability_summon_shadow_proxy.dds", tooltip = Tooltips.Generic_Reduce_Damage_Done, tooltipValue2 = 5 }, -- Shadowrend (Shadowrend)
+    [80989] = { icon = "LuiExtended/media/icons/abilities/ability_clannfear_tail_spike_shadowrend.dds", name = Abilities.Skill_Tail_Spike }, -- Shadowrend (Shadowrend)
+    [81034] = { icon = "LuiExtended/media/icons/abilities/ability_summon_shadow_proxy.dds", tooltip = Tooltips.Generic_Reduce_Damage_Done, tooltipValue2 = 5 }, -- Shadowrend (Shadowrend)
     -- Spawn of Mephala
-    [59497] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_web_white.dds",
-        tooltip = Tooltips.Set_Spawn_of_Mephala,
-    }, -- Spawn of Mephala (Spawn of Mephala)
-    [59498] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_web_white.dds",
-        name = Abilities.Set_Spawn_of_Mephala,
-        groundLabel = true,
-        tooltip = Tooltips.Generic_AOE_Snare_Poison,
-        tooltipValue2 = 1,
-        tooltipValue3 = 50,
-    }, -- Mephala's Web (Spawn of Mephala)
-    [59499] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_web_white.dds",
-        name = Abilities.Set_Spawn_of_Mephala,
-        duration = 0,
-        groundLabel = true,
-        tooltip = Tooltips.Generic_AOE_Snare_Poison,
-        tooltipValue2 = 1,
-        tooltipValue3 = 50,
-        hideGround = true,
-    }, -- Mephala's Web (Spawn of Mephala)
-
+    [59497] = { icon = "LuiExtended/media/icons/abilities/ability_innate_web_white.dds", tooltip = Tooltips.Set_Spawn_of_Mephala }, -- Spawn of Mephala (Spawn of Mephala)
+    [59498] = { icon = "LuiExtended/media/icons/abilities/ability_innate_web_white.dds", name = Abilities.Set_Spawn_of_Mephala, groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Poison, tooltipValue2 = 1, tooltipValue3 = 50 }, -- Mephala's Web (Spawn of Mephala)
+    [59499] = { icon = "LuiExtended/media/icons/abilities/ability_innate_web_white.dds", name = Abilities.Set_Spawn_of_Mephala, duration = 0, groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Poison, tooltipValue2 = 1, tooltipValue3 = 50, hideGround = true }, -- Mephala's Web (Spawn of Mephala)
     -- Stonekeeper
-    [116839] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_stonekeeper.dds",
-        name = Abilities.Set_Energy_Charge,
-        tooltip = Tooltips.Set_Energy_Charge,
-    }, -- Charging (Stonekeeper)
+    [116839] = { icon = "LuiExtended/media/icons/abilities/ability_set_stonekeeper.dds", name = Abilities.Set_Energy_Charge, tooltip = Tooltips.Set_Energy_Charge }, -- Charging (Stonekeeper)
     [116847] = { icon = "LuiExtended/media/icons/abilities/ability_set_stonekeeper.dds" }, -- Stonekeeper (Stonekeeper)
     [116877] = { icon = "LuiExtended/media/icons/abilities/ability_set_stonekeeper.dds" }, -- Stonekeeper (Stonekeeper)
     [116878] = { icon = "LuiExtended/media/icons/abilities/ability_set_stonekeeper.dds" }, -- Stonekeeper (Stonekeeper)
     [116880] = { hide = true }, -- Stonekeeper (Stonekeeper)
-
     -- Stone Husk
-    [143032] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_stone_husk.dds",
-        tooltip = Tooltips.Set_Stone_Husk_DOT,
-        type = BUFF_EFFECT_TYPE_DEBUFF,
-        unbreakable = 1,
-    }, -- Stone Husk (Stone Husk)
+    [143032] = { icon = "LuiExtended/media/icons/abilities/ability_set_stone_husk.dds", tooltip = Tooltips.Set_Stone_Husk_DOT, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Stone Husk (Stone Husk)
     [143077] = { icon = "LuiExtended/media/icons/abilities/ability_set_stone_husk.dds" }, -- Stone Husk (Stone Husk)
-    [145199] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_stone_husk.dds",
-        tooltip = Tooltips.Set_Stone_Husk_Drain,
-        forcedContainer = "short",
-    }, -- Husk Drain (Stone Husk)
-    [144908] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_stone_husk.dds",
-        tooltip = Tooltips.Set_Stone_Husk_Buff,
-    }, -- Stone Husk (Stone Husk)
-
+    [145199] = { icon = "LuiExtended/media/icons/abilities/ability_set_stone_husk.dds", tooltip = Tooltips.Set_Stone_Husk_Drain, forcedContainer = "short" }, -- Husk Drain (Stone Husk)
+    [144908] = { icon = "LuiExtended/media/icons/abilities/ability_set_stone_husk.dds", tooltip = Tooltips.Set_Stone_Husk_Buff }, -- Stone Husk (Stone Husk)
     -- Stormfist
-    [80523] = {
-        icon = "LuiExtended/media/icons/abilities/ability_stormatronach_enervating_stone.dds",
-        tooltip = Tooltips.Set_Stormfist,
-    }, -- Stormfist (Stormfist)
-    [80522] = {
-        icon = "LuiExtended/media/icons/abilities/ability_stormatronach_enervating_stone.dds",
-        groundLabel = true,
-        tooltip = Tooltips.Skill_Stormfist_Ground,
-    }, -- Stormfist (Stormfist)
+    [80523] = { icon = "LuiExtended/media/icons/abilities/ability_stormatronach_enervating_stone.dds", tooltip = Tooltips.Set_Stormfist }, -- Stormfist (Stormfist)
+    [80522] = { icon = "LuiExtended/media/icons/abilities/ability_stormatronach_enervating_stone.dds", groundLabel = true, tooltip = Tooltips.Skill_Stormfist_Ground }, -- Stormfist (Stormfist)
     [80521] = { icon = "LuiExtended/media/icons/abilities/ability_stormatronach_enervating_stone.dds" }, -- Stormfist (Stormfist)
-
     -- Swarm Mother
-    [84419] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_grappling_web.dds",
-        name = Abilities.Set_Swarm_Mother,
-    }, -- Swarm Mother Mask (Swarm Mother)
-    [80593] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_grappling_web.dds",
-        name = Abilities.Set_Swarm_Mother,
-    }, -- Swarm Mother Mask (Swarm Mother)
-
+    [84419] = { icon = "LuiExtended/media/icons/abilities/ability_spell_grappling_web.dds", name = Abilities.Set_Swarm_Mother }, -- Swarm Mother Mask (Swarm Mother)
+    [80593] = { icon = "LuiExtended/media/icons/abilities/ability_spell_grappling_web.dds", name = Abilities.Set_Swarm_Mother }, -- Swarm Mother Mask (Swarm Mother)
     -- Symphony of Blades
-    [117111] = {
-        icon = "esoui/art/icons/achievement_depthsofmalatar_killmonstersb.dds",
-        tooltip = Tooltips.Set_Meridias_Favor,
-    }, -- Meridia's Favor (Symphony of Blades)
+    [117111] = { icon = "esoui/art/icons/achievement_depthsofmalatar_killmonstersb.dds", tooltip = Tooltips.Set_Meridias_Favor }, -- Meridia's Favor (Symphony of Blades)
     [117118] = { icon = "esoui/art/icons/achievement_depthsofmalatar_killmonstersb.dds" }, -- Meridia's Favor (Symphony of Blades)
     [117119] = { icon = "esoui/art/icons/achievement_depthsofmalatar_killmonstersb.dds" }, -- Meridia's Favor (Symphony of Blades)
-
     -- The Engine Guardian
     [59522] = { hide = true }, -- Engine Guardian
-    [59540] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_stamina.dds",
-        tooltip = Tooltips.Set_Engine_Guardian_Stamina,
-    }, -- Robust Engine Guardian
-    [59533] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_magicka.dds",
-        tooltip = Tooltips.Set_Engine_Guardian_Magicka,
-    }, -- Arcane Engine Guardian
-    [59543] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_health.dds",
-        tooltip = Tooltips.Set_Engine_Guardian_Health,
-    }, -- Healthy Engine Guardian
-
+    [59540] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_stamina.dds", tooltip = Tooltips.Set_Engine_Guardian_Stamina }, -- Robust Engine Guardian
+    [59533] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_magicka.dds", tooltip = Tooltips.Set_Engine_Guardian_Magicka }, -- Arcane Engine Guardian
+    [59543] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_health.dds", tooltip = Tooltips.Set_Engine_Guardian_Health }, -- Healthy Engine Guardian
     -- The Troll King
-    [80504] = {
-        icon = "LuiExtended/media/icons/abilities/ability_troll_regeneration.dds",
-        name = Abilities.Set_The_Troll_King,
-        tooltip = Tooltips.Set_The_Troll_King,
-    }, -- The Troll King
-
+    [80504] = { icon = "LuiExtended/media/icons/abilities/ability_troll_regeneration.dds", name = Abilities.Set_The_Troll_King, tooltip = Tooltips.Set_The_Troll_King }, -- The Troll King
     -- Thurvokun
-    [102094] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds",
-        groundLabel = true,
-        tooltip = Tooltips.Set_Thurvokun_Ground,
-    }, -- Thurvokun
-    [102093] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds",
-        tooltip = Tooltips.Set_Thurvokun,
-    }, -- Thurvokun (Thurvokun)
-
+    [102094] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds", groundLabel = true, tooltip = Tooltips.Set_Thurvokun_Ground }, -- Thurvokun
+    [102093] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds", tooltip = Tooltips.Set_Thurvokun }, -- Thurvokun (Thurvokun)
     -- Tremorscale
     [80865] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds" }, -- Tremorscale
-    [80866] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds",
-        tooltip = Tooltips.Generic_Reduce_Physical_Resist_Value,
-        tooltipValue2 = 2395,
-    }, -- Tremorscale
-
+    [80866] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds", tooltip = Tooltips.Generic_Reduce_Physical_Resist_Value, tooltipValue2 = 2395 }, -- Tremorscale
     -- Valkyn Skoria
     [59596] = { icon = "LuiExtended/media/icons/abilities/ability_spell_meteor.dds" }, -- Valkyn Skoria
     [61273] = { icon = "LuiExtended/media/icons/abilities/ability_spell_meteor.dds" }, -- Valkyn Skoria
-
     -- Velidreth
     [80490] = { icon = "LuiExtended/media/icons/abilities/ability_set_velidreth.dds" }, -- Velidreth
-
     -- Zaan
     [102136] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_zaan.dds", tooltip = Tooltips.Set_Zaan }, -- Zaan
     [102142] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_zaan.dds", hide = true }, -- Zaan
@@ -5643,18 +4340,9 @@ Effects.EffectOverride = {
     -- Mythic Items
     ----------------------------------------------------------------
 
-    [139552] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_snow_treaders.dds",
-        tooltip = Tooltips.Set_Snow_Treaders,
-    }, -- Snow Treaders (Snow Treaders)
-    [139903] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_bloodlords_embrace.dds",
-        tooltip = Tooltips.Set_Bloodlords_Embrace,
-    }, -- Blood Curse (Bloodlord's Embrace)
-    [139914] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_bloodlords_embrace.dds",
-        name = Abilities.Set_Blood_Curse,
-    }, -- Bloodlord's Embrace (Bloodlord's Embrace)
+    [139552] = { icon = "LuiExtended/media/icons/abilities/ability_set_snow_treaders.dds", tooltip = Tooltips.Set_Snow_Treaders }, -- Snow Treaders (Snow Treaders)
+    [139903] = { icon = "LuiExtended/media/icons/abilities/ability_set_bloodlords_embrace.dds", tooltip = Tooltips.Set_Bloodlords_Embrace }, -- Blood Curse (Bloodlord's Embrace)
+    [139914] = { icon = "LuiExtended/media/icons/abilities/ability_set_bloodlords_embrace.dds", name = Abilities.Set_Blood_Curse }, -- Bloodlord's Embrace (Bloodlord's Embrace)
     [136123] = { tooltip = Tooltips.Set_Thrassian_Stranglers }, -- Sload's Call (Thrassian Stranglers)
     [147415] = { icon = "LuiExtended/media/icons/abilities/ability_set_ring_of_the_pale_order.dds" }, -- Ring of the Pale Order (Ring of the Pale Order)
     [147462] = { icon = "LuiExtended/media/icons/abilities/ability_set_pearls_of_ehlnofey.dds" }, -- Pearls of Ehlnofey (Pearls of Ehlnofey)
@@ -5665,281 +4353,95 @@ Effects.EffectOverride = {
 
     -- Crafted Sets
     [34502] = { icon = "LuiExtended/media/icons/abilities/ability_set_ashen_grip.dds" }, -- Ashen Grip
-    [34592] = {
-        icon = "LuiExtended/media/icons/abilities/ability_debuff_weakness.dds",
-        tooltip = Tooltips.Generic_Reduce_Weapon_Damage_Duration_Value,
-        tooltipValue2 = 300,
-    }, -- Alessia's Bulwark
-    [75746] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_clever_alchemist.dds",
-        tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration_Value,
-        tooltipValue2 = 675,
-    }, -- Clever Alchemist
-    [33764] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_deaths_wind.dds",
-        cc = LUIE_CC_TYPE_KNOCKBACK,
-        isPlayerAbility = true,
-    }, -- Death's Wind
-    [52289] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_deaths_wind.dds",
-        tooltip = Tooltips.Generic_Knockback,
-        cc = LUIE_CC_TYPE_KNOCKBACK,
-        isPlayerAbility = true,
-    }, -- Death's Wind
-    [75930] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds",
-        name = Abilities.Set_Eternal_Hunt,
-        tooltip = Tooltips.Set_Eternal_Hunt,
-    }, -- Eternal Hunt
+    [34592] = { icon = "LuiExtended/media/icons/abilities/ability_debuff_weakness.dds", tooltip = Tooltips.Generic_Reduce_Weapon_Damage_Duration_Value, tooltipValue2 = 300 }, -- Alessia's Bulwark
+    [75746] = { icon = "LuiExtended/media/icons/abilities/ability_set_clever_alchemist.dds", tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration_Value, tooltipValue2 = 675 }, -- Clever Alchemist
+    [33764] = { icon = "LuiExtended/media/icons/abilities/ability_set_deaths_wind.dds", cc = LUIE_CC_TYPE_KNOCKBACK, isPlayerAbility = true }, -- Death's Wind
+    [52289] = { icon = "LuiExtended/media/icons/abilities/ability_set_deaths_wind.dds", tooltip = Tooltips.Generic_Knockback, cc = LUIE_CC_TYPE_KNOCKBACK, isPlayerAbility = true }, -- Death's Wind
+    [75930] = { icon = "LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds", name = Abilities.Set_Eternal_Hunt, tooltip = Tooltips.Set_Eternal_Hunt }, -- Eternal Hunt
     [75929] = { icon = "LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds" }, -- Eternal Hunt
-    [76533] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds",
-        tooltip = Tooltips.Generic_Immobilize,
-    }, -- Eternal Hunt
+    [76533] = { icon = "LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds", tooltip = Tooltips.Generic_Immobilize }, -- Eternal Hunt
     [57207] = { icon = "LuiExtended/media/icons/abilities/ability_set_kagrenacs_hope.dds", hide = true }, -- Kagrenac's Hope
     [99204] = { icon = "esoui/art/icons/achievement_update16_003.dds", tooltip = Tooltips.Set_Mechanical_Acuity }, -- Mechanical Acuity (of Mechanical Acuity)
-    [71671] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_morkuldin_summon.dds",
-        hide = true,
-        tooltip = Tooltips.Set_Morkuldin,
-    }, -- Morkuldin (Morkuldin)
+    [71671] = { icon = "LuiExtended/media/icons/abilities/ability_set_morkuldin_summon.dds", hide = true, tooltip = Tooltips.Set_Morkuldin }, -- Morkuldin (Morkuldin)
     [71678] = { icon = "LuiExtended/media/icons/abilities/ability_set_morkuldin_light_attack.dds" }, -- Morkuldin (Morkuldin)
     [71679] = { icon = "LuiExtended/media/icons/abilities/ability_set_morkuldin_cleave.dds" }, -- Morkuldin Cleave (Morkuldin)
-    [148882] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_oblivion_blue.dds",
-        tooltip = Tooltips.Generic_Magic,
-        tooltipValue2 = 2,
-    }, -- Oblivion's Foe (of Oblivion's Foe)
+    [148882] = { icon = "LuiExtended/media/icons/abilities/ability_spell_oblivion_blue.dds", tooltip = Tooltips.Generic_Magic, tooltipValue2 = 2 }, -- Oblivion's Foe (of Oblivion's Foe)
     [61784] = { icon = "LuiExtended/media/icons/abilities/ability_set_redistributor.dds", hide = true }, -- Redistributor (Redistribution)
     [49126] = { icon = "LuiExtended/media/icons/abilities/ability_set_shalidors_curse.dds" }, -- Shalidor's Curse
-    [75726] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_tavas_favor.dds",
-        tooltip = Tooltips.Set_Tavas_Favor,
-    }, -- Tava's Favor
+    [75726] = { icon = "LuiExtended/media/icons/abilities/ability_set_tavas_favor.dds", tooltip = Tooltips.Set_Tavas_Favor }, -- Tava's Favor
     [61851] = { hide = true }, -- Armor Master (the Armor Master)
-    [61870] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_armor_master.dds",
-        tooltip = Tooltips.Generic_Physical_Spell_Resist_Value,
-        tooltipValue2 = 5940,
-    }, -- Armor Master (the Armor Master)
-    [61781] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_nobles_conquest.dds",
-        tooltip = Tooltips.Generic_HoT,
-        tooltipValue2 = 2,
-    }, -- Noble's Conquest
+    [61870] = { icon = "LuiExtended/media/icons/abilities/ability_set_armor_master.dds", tooltip = Tooltips.Generic_Physical_Spell_Resist_Value, tooltipValue2 = 5940 }, -- Armor Master (the Armor Master)
+    [61781] = { icon = "LuiExtended/media/icons/abilities/ability_set_nobles_conquest.dds", tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Noble's Conquest
     [34587] = { icon = "LuiExtended/media/icons/abilities/ability_set_song_of_lamae.dds" }, -- Song of Lamae
     [34588] = { icon = "LuiExtended/media/icons/abilities/ability_set_song_of_lamae.dds" }, -- Song of Lamae
-    [79089] = {
-        icon = "esoui/art/icons/achievement_ic_survival.dds",
-        name = Abilities.Set_Varens_Legacy,
-        tooltip = Tooltips.Set_Varens_Legacy,
-    }, -- Varen's Wall (Varen's Legacy)
+    [79089] = { icon = "esoui/art/icons/achievement_ic_survival.dds", name = Abilities.Set_Varens_Legacy, tooltip = Tooltips.Set_Varens_Legacy }, -- Varen's Wall (Varen's Legacy)
     [79093] = { hide = true }, -- Remove Trigger (Varen's Legacy)
-    [57170] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_vampires_kiss.dds",
-        tooltip = Tooltips.Generic_HoT,
-        tooltipValue2 = 2,
-    }, -- Vampire's Kiss
-    [49236] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_whitestrake.dds",
-        tooltip = Tooltips.Generic_Damage_Shield_Duration,
-    }, -- Whitestake's Retribution (Whitestrake's)
+    [57170] = { icon = "LuiExtended/media/icons/abilities/ability_set_vampires_kiss.dds", tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Vampire's Kiss
+    [49236] = { icon = "LuiExtended/media/icons/abilities/ability_set_whitestrake.dds", tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Whitestake's Retribution (Whitestrake's)
     [106804] = { name = Abilities.Set_Nocturnals_Favor, tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Nocturnal's Heal (Nocturnal's Favor)
     [106798] = { icon = "esoui/art/icons/achievement_su_mainquest_2.dds", tooltip = Tooltips.Set_Sloads }, -- Sload's Semblance (Sload's)
     [113092] = { icon = "esoui/art/icons/achievement_su_mainquest_2.dds", name = Abilities.Set_Sloads_Semblance }, -- Sload's Projectile (Sloads)
     [113181] = { icon = "esoui/art/icons/mm_teaser.dds", tooltip = Tooltips.Set_Grave_Stake_Collector }, -- Grave-Stake Collector (Grave-Stake Collector)
     [113185] = { icon = "esoui/art/icons/mm_teaser.dds" }, -- Grave-Stake Collector (Grave-Stake Collector)
-    [113237] = { icon = "esoui/art/icons/mm_teaser.dds" }, -- Grave-Stake Collector (Grave-Stake Collector)
-    --[124303] = { icon = 'esoui/art/icons/achievement_els_lrgzone_groupboss4.dds', tooltip = Tooltips.Set_Senche_Rahts_Grit }, -- Senche-Raht's Grit (Senche-Raht's)
-    [121915] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_honors_scorn.dds",
-        name = Abilities.Set_Honors_Scorn,
-        tooltip = Tooltips.Set_Coldharbours_Favorite_Damage,
-    }, -- Coldharbour's Favorite (Coldharbour's Favorite)
-    [121917] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_honors_scorn.dds",
-        tooltip = Tooltips.Generic_Magic,
-        tooltipValue2 = 1,
-    }, -- Honor's Scorn (Coldharbour's Favorite)
-    [121912] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_honors_love.dds",
-        name = Abilities.Set_Honors_Love,
-        tooltip = Tooltips.Set_Coldharbours_Favorite_Heal,
-    }, -- Coldharbour's Favorite (Coldharbour's Favorite)
-    [121913] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_honors_love.dds",
-        tooltip = Tooltips.Generic_HoT,
-        tooltipValue2 = 1,
-    }, -- Honor's Love (Coldharbour's Favorite)
-    [123717] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_vastaries_tutelage.dds",
-        tooltip = Tooltips.Set_Vastaries_Tutelage,
-    }, -- Vastarie's Tutelage (Vastarie's Tutelage)
-    [123715] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_vastaries_tutelage.dds",
-        tooltip = Tooltips.Set_Vastaries_Tutelage,
-    }, -- Vastarie's Tutelage (Vastarie's Tutelage)
-
-    [141916] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_stuhns_favor.dds",
-        tooltip = Tooltips.Set_Stuhns_Favor,
-        tooltipValue2 = 5312,
-    }, -- Stuhn's Favor (Stuhn's)
+    [113237] = { icon = "esoui/art/icons/mm_teaser.dds" }, -- Grave-Stake Collector (Grave-Stake Collector)--
+    [124303] = { icon = "esoui/art/icons/achievement_els_lrgzone_groupboss4.dds", tooltip = Tooltips.Set_Senche_Rahts_Grit }, -- Senche-Raht's Grit (Senche-Raht's)
+    [121915] = { icon = "LuiExtended/media/icons/abilities/ability_set_honors_scorn.dds", name = Abilities.Set_Honors_Scorn, tooltip = Tooltips.Set_Coldharbours_Favorite_Damage }, -- Coldharbour's Favorite (Coldharbour's Favorite)
+    [121917] = { icon = "LuiExtended/media/icons/abilities/ability_set_honors_scorn.dds", tooltip = Tooltips.Generic_Magic, tooltipValue2 = 1 }, -- Honor's Scorn (Coldharbour's Favorite)
+    [121912] = { icon = "LuiExtended/media/icons/abilities/ability_set_honors_love.dds", name = Abilities.Set_Honors_Love, tooltip = Tooltips.Set_Coldharbours_Favorite_Heal }, -- Coldharbour's Favorite (Coldharbour's Favorite)
+    [121913] = { icon = "LuiExtended/media/icons/abilities/ability_set_honors_love.dds", tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Honor's Love (Coldharbour's Favorite)
+    [123717] = { icon = "LuiExtended/media/icons/abilities/ability_set_vastaries_tutelage.dds", tooltip = Tooltips.Set_Vastaries_Tutelage }, -- Vastarie's Tutelage (Vastarie's Tutelage)
+    [123715] = { icon = "LuiExtended/media/icons/abilities/ability_set_vastaries_tutelage.dds", tooltip = Tooltips.Set_Vastaries_Tutelage }, -- Vastarie's Tutelage (Vastarie's Tutelage)
+    [141916] = { icon = "LuiExtended/media/icons/abilities/ability_set_stuhns_favor.dds", tooltip = Tooltips.Set_Stuhns_Favor, tooltipValue2 = 5312 }, -- Stuhn's Favor (Stuhn's)
     [135919] = { icon = "esoui/art/icons/crownstore_skillline_vampire.dds" }, -- Spell Parasite (Spell Parasite's)
-
-    [137126] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_dragons_appetite.dds",
-        tooltip = Tooltips.Set_Dragons_Appetite,
-        forcedContainer = "short",
-    }, -- Dragon's Appetite (of Dragon's Appetite)
+    [137126] = { icon = "LuiExtended/media/icons/abilities/ability_set_dragons_appetite.dds", tooltip = Tooltips.Set_Dragons_Appetite, forcedContainer = "short" }, -- Dragon's Appetite (of Dragon's Appetite)
     [135878] = { icon = "LuiExtended/media/icons/abilities/ability_set_dragons_appetite.dds" }, -- Dragon's Appetite (of Dragon's Appetite)
-
-    [147390] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_legacy_of_karth.dds",
-        name = Abilities.Set_Legacy_of_Karth,
-    }, -- Karth's Rot (Karth's)
-
-    -- Overland Sets (Light)
-    [135938] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_queens_elegance.dds",
-        tooltip = Tooltips.Set_Queens_Elegance_LA,
-    }, -- Queen's Elegance (Elegant)
-    [135939] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_queens_elegance.dds",
-        tooltip = Tooltips.Set_Queens_Elegance_HA,
-    }, -- Queen's Elegance (Elegant)
-    [75691] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_snare.dds",
-        tooltip = Tooltips.Set_Bahrahas_Curse,
-    }, -- Bahraha's Curse
+    [147390] = { icon = "LuiExtended/media/icons/abilities/ability_set_legacy_of_karth.dds", name = Abilities.Set_Legacy_of_Karth }, -- Karth's Rot (Karth's)-- Overland Sets (Light)
+    [135938] = { icon = "LuiExtended/media/icons/abilities/ability_set_queens_elegance.dds", tooltip = Tooltips.Set_Queens_Elegance_LA }, -- Queen's Elegance (Elegant)
+    [135939] = { icon = "LuiExtended/media/icons/abilities/ability_set_queens_elegance.dds", tooltip = Tooltips.Set_Queens_Elegance_HA }, -- Queen's Elegance (Elegant)
+    [75691] = { icon = "LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_snare.dds", tooltip = Tooltips.Set_Bahrahas_Curse }, -- Bahraha's Curse
     [75707] = { icon = "LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_snare.dds" }, -- Bahraha's Curse
-    [75692] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_snare.dds",
-        groundLabel = true,
-        tooltip = Tooltips.Skill_Bahrahas_Curse_Ground,
-    }, -- Bahraha's Curse
-    [75706] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_snare.dds",
-        tooltip = Tooltips.Skill_Bahrahas_Curse_Ground,
-        groundLabel = true,
-        hideGround = true,
-    }, -- Bahraha's Curse
+    [75692] = { icon = "LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_snare.dds", groundLabel = true, tooltip = Tooltips.Skill_Bahrahas_Curse_Ground }, -- Bahraha's Curse
+    [75706] = { icon = "LuiExtended/media/icons/abilities/ability_spell_gtaoe_necrotic_snare.dds", tooltip = Tooltips.Skill_Bahrahas_Curse_Ground, groundLabel = true, hideGround = true }, -- Bahraha's Curse
     [34522] = { icon = "LuiExtended/media/icons/abilities/ability_set_bloodthorns_touch.dds" }, -- Bloodthorn's Touch (Bloodthorn)
     [57177] = { icon = "LuiExtended/media/icons/abilities/ability_set_bloodthorns_touch.dds" }, -- Bloodthorn's Touch (Bloodthorn)
     [31213] = { icon = "LuiExtended/media/icons/abilities/ability_set_dreamers_mantle.dds" }, -- Dreamer's Mantle (Dreamer's)
-    [48913] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_dreamers_mantle.dds",
-        tooltip = Tooltips.Generic_Knockback,
-    }, -- Dreamer's Mantle (Dreamer's)
+    [48913] = { icon = "LuiExtended/media/icons/abilities/ability_set_dreamers_mantle.dds", tooltip = Tooltips.Generic_Knockback }, -- Dreamer's Mantle (Dreamer's)
     [57133] = { icon = "LuiExtended/media/icons/abilities/ability_set_dreamers_mantle.dds" }, -- Dreamer's Mantle (Dreamer's)
-    [85776] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_robes_of_the_hist.dds",
-        tooltip = Tooltips.Generic_HoT,
-        tooltipValue2 = 1,
-    }, -- Robes of the Hist (of Hist Sap)
-    [127070] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_martial_knowledge.dds",
-        tooltip = Tooltips.Generic_Increase_Damage_Taken,
-        tooltipValue2 = 8,
-    }, -- Way of Martial Knowledge (of Martial Knowledge)
+    [85776] = { icon = "LuiExtended/media/icons/abilities/ability_set_robes_of_the_hist.dds", tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Robes of the Hist (of Hist Sap)
+    [127070] = { icon = "LuiExtended/media/icons/abilities/ability_set_martial_knowledge.dds", tooltip = Tooltips.Generic_Increase_Damage_Taken, tooltipValue2 = 8 }, -- Way of Martial Knowledge (of Martial Knowledge)
     [85825] = { icon = "LuiExtended/media/icons/abilities/ability_set_prisoners_rags.dds" }, -- Prisoner's Rags (Prisoner's)
     [34506] = { icon = "LuiExtended/media/icons/abilities/ability_set_syrabane.dds" }, -- Syrabane's Grip (of Syrabane)
     [122755] = { icon = "LuiExtended/media/icons/abilities/ability_set_withered_hand.dds" }, -- Robes of the Withered Hand
     [122756] = { icon = "LuiExtended/media/icons/abilities/ability_set_withered_hand.dds" }, -- Robes of the Withered Hand
     [71657] = { icon = "LuiExtended/media/icons/abilities/ability_set_trinimacs_valor.dds" }, -- Trinimac's Valor
-    [71664] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_trinimacs_valor.dds",
-        tooltip = Tooltips.Set_Trinimacs_Valor,
-    }, -- Trinimac's Valor
+    [71664] = { icon = "LuiExtended/media/icons/abilities/ability_set_trinimacs_valor.dds", tooltip = Tooltips.Set_Trinimacs_Valor }, -- Trinimac's Valor
     [71658] = { icon = "LuiExtended/media/icons/abilities/ability_set_trinimacs_valor.dds" }, -- Trinimac's Valor
     [93026] = { hide = true }, -- Mad Tinkerer (Mad Tinkerer's)
     [92982] = { hide = true }, -- Mad Tinkerer (Mad Tinkerer's)
     [93002] = { icon = "esoui/art/icons/achievement_update16_029.dds" }, -- Mad Tinkerer (Mad Tinkerer's)
     [93003] = { icon = "esoui/art/icons/achievement_update16_029.dds", hide = true }, -- Mad Tinkerer (Mad Tinkerer's)
     [93001] = { icon = "esoui/art/icons/achievement_update16_029.dds", tooltip = Tooltips.Generic_Knockback }, -- Mad Tinkerer (Mad Tinkerer's)
-    [129389] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_marauders_haste.dds",
-        tooltip = Tooltips.Generic_Movement_Speed,
-        tooltipValue2 = 20,
-    }, -- Marauder's Haste (Marauder's Haste)
-    [135659] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_winters_respite.dds",
-        tooltip = Tooltips.Set_Winters_Respite,
-    }, -- Winter's Respite (of Winter's Respite)
-    [135658] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_winters_respite.dds",
-        groundLabel = true,
-        tooltip = Tooltips.Generic_AOE_Heal,
-        tooltipValue2 = 1,
-    }, -- Winter's Respite (of Winter's Respite)
-
-    [147141] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_voidcaller.dds",
-        tooltip = Tooltips.Set_Voidcaller,
-    }, -- Voidcaller (of the Voidcaller)
-    [147140] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_voidcaller.dds",
-        tooltip = Tooltips.Set_Voidcaller,
-    }, -- Voidcaller (of the Voidcaller)
-
-    -- Overland Sets (Medium)
+    [129389] = { icon = "LuiExtended/media/icons/abilities/ability_set_marauders_haste.dds", tooltip = Tooltips.Generic_Movement_Speed, tooltipValue2 = 20 }, -- Marauder's Haste (Marauder's Haste)
+    [135659] = { icon = "LuiExtended/media/icons/abilities/ability_set_winters_respite.dds", tooltip = Tooltips.Set_Winters_Respite }, -- Winter's Respite (of Winter's Respite)
+    [135658] = { icon = "LuiExtended/media/icons/abilities/ability_set_winters_respite.dds", groundLabel = true, tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Winter's Respite (of Winter's Respite)
+    [147141] = { icon = "LuiExtended/media/icons/abilities/ability_set_voidcaller.dds", tooltip = Tooltips.Set_Voidcaller }, -- Voidcaller (of the Voidcaller)
+    [147140] = { icon = "LuiExtended/media/icons/abilities/ability_set_voidcaller.dds", tooltip = Tooltips.Set_Voidcaller }, -- Voidcaller (of the Voidcaller)-- Overland Sets (Medium)
     [71106] = { icon = "LuiExtended/media/icons/abilities/ability_set_briarheart.dds" }, -- Briarheart
-    [71107] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_briarheart.dds",
-        tooltip = Tooltips.Set_Briarheart,
-    }, -- Briarheart
+    [71107] = { icon = "LuiExtended/media/icons/abilities/ability_set_briarheart.dds", tooltip = Tooltips.Set_Briarheart }, -- Briarheart
     [93308] = { hide = true }, -- Defiler
     [93307] = { icon = "LuiExtended/media/icons/abilities/ability_hunger_torpor.dds" }, -- Defiler
     [93305] = { icon = "LuiExtended/media/icons/abilities/ability_hunger_torpor.dds", tooltip = Tooltips.Generic_Stun }, -- Defiler
     [34875] = { icon = "LuiExtended/media/icons/abilities/ability_set_night_terror.dds" }, -- Night Terror (of Night Terror)
-    [127192] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_senches_bite.dds",
-        tooltip = Tooltips.Generic_Critical_Damage,
-        tooltipValue2 = 15,
-    }, -- Senche's Bite (Senche's)
-    [144480] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_stygian.dds",
-        tooltip = Tooltips.Generic_Spell_Damage_Duration_Value,
-        tooltipValue2 = 369,
-    }, -- Stygian (Stygian)
-    [76344] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_syvarras_scales.dds",
-        name = Abilities.Set_Syvarras_Scales,
-        hide = true,
-    }, -- Serpent's Spirit (Syvarra's Scales)
-    [75718] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_syvarras_scales.dds",
-        name = Abilities.Set_Syvarras_Scales,
-        tooltip = Tooltips.Generic_Poison,
-        tooltipValue2 = 1,
-    }, -- Serpent's Spirit (Syvarra's Scales)
-    [52709] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_razor_flourish.dds",
-        tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration_Value,
-        tooltipValue2 = 391,
-    }, -- Way of Air (of the Air)
+    [127192] = { icon = "LuiExtended/media/icons/abilities/ability_set_senches_bite.dds", tooltip = Tooltips.Generic_Critical_Damage, tooltipValue2 = 15 }, -- Senche's Bite (Senche's)
+    [144480] = { icon = "LuiExtended/media/icons/abilities/ability_set_stygian.dds", tooltip = Tooltips.Generic_Spell_Damage_Duration_Value, tooltipValue2 = 369 }, -- Stygian (Stygian)
+    [76344] = { icon = "LuiExtended/media/icons/abilities/ability_set_syvarras_scales.dds", name = Abilities.Set_Syvarras_Scales, hide = true }, -- Serpent's Spirit (Syvarra's Scales)
+    [75718] = { icon = "LuiExtended/media/icons/abilities/ability_set_syvarras_scales.dds", name = Abilities.Set_Syvarras_Scales, tooltip = Tooltips.Generic_Poison, tooltipValue2 = 1 }, -- Serpent's Spirit (Syvarra's Scales)
+    [52709] = { icon = "LuiExtended/media/icons/abilities/ability_spell_razor_flourish.dds", tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration_Value, tooltipValue2 = 391 }, -- Way of Air (of the Air)
     [34383] = { icon = "LuiExtended/media/icons/abilities/ability_trap_lava_trap.dds" }, -- Shadow of the Red Mountain (of the Red Mountain)
-    [34817] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_twin_sisters.dds",
-        name = Abilities.Set_Twin_Sisters,
-        tooltip = Tooltips.Generic_Bleed,
-        tooltipValue2 = 2,
-    }, -- Twin Sisters Bleed
-    [34870] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_wilderqueen.dds",
-        tooltip = Tooltips.Generic_Snare,
-        tooltipValue2 = 15,
-    }, -- Wilderqueen's Arch (of the Wilderqueen)
-    [141867] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_wilderqueen.dds",
-        name = Abilities.Set_Wilderqueens_Arch,
-        tooltip = Tooltips.Generic_Movement_Speed,
-        tooltipValue2 = 15,
-    }, -- Marauder's Haste (of the Wilderqueen)
-    [99268] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_unfathomable_darkness.dds",
-        tooltip = Tooltips.Set_Unfathomable_Darknesss,
-    }, -- Unfathomable Darkness (of Unfathomable Darkness)
+    [34817] = { icon = "LuiExtended/media/icons/abilities/ability_set_twin_sisters.dds", name = Abilities.Set_Twin_Sisters, tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 2 }, -- Twin Sisters Bleed
+    [34870] = { icon = "LuiExtended/media/icons/abilities/ability_set_wilderqueen.dds", tooltip = Tooltips.Generic_Snare, tooltipValue2 = 15 }, -- Wilderqueen's Arch (of the Wilderqueen)
+    [141867] = { icon = "LuiExtended/media/icons/abilities/ability_set_wilderqueen.dds", name = Abilities.Set_Wilderqueens_Arch, tooltip = Tooltips.Generic_Movement_Speed, tooltipValue2 = 15 }, -- Marauder's Haste (of the Wilderqueen)
+    [99268] = { icon = "LuiExtended/media/icons/abilities/ability_set_unfathomable_darkness.dds", tooltip = Tooltips.Set_Unfathomable_Darknesss }, -- Unfathomable Darkness (of Unfathomable Darkness)
     [99267] = { icon = "LuiExtended/media/icons/abilities/ability_set_unfathomable_darkness.dds", hide = true }, -- Unfathomable Darkness (of Unfathomable Darkness)
     [34508] = { icon = "esoui/art/icons/crownstore_skillline_werewolf.dds" }, -- Hide of the Werewolf (Werewolf Hide)
     [18993] = { icon = "LuiExtended/media/icons/abilities/ability_set_bloodthorns_touch.dds" }, -- Witchman Armor (Witchman's)
@@ -5949,823 +4451,259 @@ Effects.EffectOverride = {
     [121615] = { icon = "LuiExtended/media/icons/abilities/ability_set_darloc_brae.dds" }, -- Vesture of Darloc Brae (Darloc Brae's)
     [121602] = { icon = "LuiExtended/media/icons/abilities/ability_set_darloc_brae.dds" }, -- Vesture of Darloc Brae (Darloc Brae's)
     [121618] = { icon = "LuiExtended/media/icons/abilities/ability_set_darloc_brae.dds" }, -- Vesture of Darloc Brae (Darloc Brae's)
-    [129407] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_dragonguard_tactics.dds",
-        tooltip = Tooltips.Set_Dragonguard_Tactics,
-    }, -- Dragonguard Tactics (Dragonguard Elite's)
-    [135690] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_hunters_venom.dds",
-        tooltip = Tooltips.Set_Hunters_Venom,
-    }, -- Hunter's Venom (Venomous)
-    [137526] = { icon = "LuiExtended/media/icons/abilities/ability_set_hunters_venom.dds" }, -- Hunter's Venom (Venomous)
-
-    -- Overland Sets (Heavy)
-    [34711] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_meridias.dds",
-        tooltip = Tooltips.Set_Meridias_Blessed_Armor,
-    }, -- Meridia's Blessed Armor (Blessed)
+    [129407] = { icon = "LuiExtended/media/icons/abilities/ability_set_dragonguard_tactics.dds", tooltip = Tooltips.Set_Dragonguard_Tactics }, -- Dragonguard Tactics (Dragonguard Elite's)
+    [135690] = { icon = "LuiExtended/media/icons/abilities/ability_set_hunters_venom.dds", tooltip = Tooltips.Set_Hunters_Venom }, -- Hunter's Venom (Venomous)
+    [137526] = { icon = "LuiExtended/media/icons/abilities/ability_set_hunters_venom.dds" }, -- Hunter's Venom (Venomous)-- Overland Sets (Heavy)
+    [34711] = { icon = "LuiExtended/media/icons/abilities/ability_set_meridias.dds", tooltip = Tooltips.Set_Meridias_Blessed_Armor }, -- Meridia's Blessed Armor (Blessed)
     [57298] = { icon = "LuiExtended/media/icons/abilities/ability_set_draugrs_heritage.dds" }, -- Draugr's Heritage
-    [57296] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_draugrs_heritage.dds",
-        tooltip = Tooltips.Generic_Knockback,
-    }, -- Draugr's Heritage
+    [57296] = { icon = "LuiExtended/media/icons/abilities/ability_set_draugrs_heritage.dds", tooltip = Tooltips.Generic_Knockback }, -- Draugr's Heritage
     [57297] = { icon = "LuiExtended/media/icons/abilities/ability_set_draugrs_heritage.dds" }, -- Draugr's Heritage
     [99286] = { icon = "LuiExtended/media/icons/abilities/ability_set_livewire.dds" }, -- Livewire
     [79123] = { icon = "LuiExtended/media/icons/abilities/ability_set_morihaus.dds" }, -- Hide of Morihaus (of Morihaus)
-    [79112] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_morihaus.dds",
-        tooltip = Tooltips.Generic_Knockdown,
-    }, -- Hide of Morihaus (of Morihaus)
-    [127270] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_seventh_legion.dds",
-        tooltip = Tooltips.Set_Seventh_Legion,
-    }, -- Seventh Legion Brute (Seventh Legion)
-    [144478] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_soulshine.dds",
-        tooltip = Tooltips.Generic_Spell_Damage_Duration_Value,
-        tooltipValue2 = 369,
-    }, -- Soulshine (of Soulshine)
+    [79112] = { icon = "LuiExtended/media/icons/abilities/ability_set_morihaus.dds", tooltip = Tooltips.Generic_Knockdown }, -- Hide of Morihaus (of Morihaus)
+    [127270] = { icon = "LuiExtended/media/icons/abilities/ability_set_seventh_legion.dds", tooltip = Tooltips.Set_Seventh_Legion }, -- Seventh Legion Brute (Seventh Legion)
+    [144478] = { icon = "LuiExtended/media/icons/abilities/ability_set_soulshine.dds", tooltip = Tooltips.Generic_Spell_Damage_Duration_Value, tooltipValue2 = 369 }, -- Soulshine (of Soulshine)
     [52711] = { icon = "LuiExtended/media/icons/abilities/ability_set_way_of_fire.dds" }, -- Way of Fire (Way of Fire)
-    [112523] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_hatchlings_shell.dds",
-        tooltip = Tooltips.Set_Hatchlings_Shell,
-    }, -- Hatchling's Shell (of the Hatchling's Shell)
-    [57210] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_storm_knight.dds",
-        tooltip = Tooltips.Set_Storm_Knight,
-    }, -- Storm Knight's Plate (of the Storm Knight)
+    [112523] = { icon = "LuiExtended/media/icons/abilities/ability_set_hatchlings_shell.dds", tooltip = Tooltips.Set_Hatchlings_Shell }, -- Hatchling's Shell (of the Hatchling's Shell)
+    [57210] = { icon = "LuiExtended/media/icons/abilities/ability_set_storm_knight.dds", tooltip = Tooltips.Set_Storm_Knight }, -- Storm Knight's Plate (of the Storm Knight)
     [57209] = { icon = "LuiExtended/media/icons/abilities/ability_set_storm_knight.dds" }, -- Storm Knight's Plate (of the Storm Knight)
-    [127275] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_veiled_heritance.dds",
-        tooltip = Tooltips.Generic_Weapon_Damage_Duration_Value,
-        tooltipValue2 = 516,
-    }, -- Armor of the Veiled Heritance (of the Veiled Heritance)
+    [127275] = { icon = "LuiExtended/media/icons/abilities/ability_set_veiled_heritance.dds", tooltip = Tooltips.Generic_Weapon_Damage_Duration_Value, tooltipValue2 = 516 }, -- Armor of the Veiled Heritance (of the Veiled Heritance)
     [33497] = { icon = "LuiExtended/media/icons/abilities/ability_set_thunderbug.dds" }, -- Thunderbug's Carapace (Thunderbug's)
-    [106867] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_grace_of_gloom.dds",
-        name = Abilities.Set_Grace_of_Gloom,
-        tooltip = Tooltips.Generic_HoT,
-        tooltipValue2 = 2,
-    }, -- Major Evasion (Gloom-Graced)
+    [106867] = { icon = "LuiExtended/media/icons/abilities/ability_set_grace_of_gloom.dds", name = Abilities.Set_Grace_of_Gloom, tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Major Evasion (Gloom-Graced)
     [106868] = { icon = "LuiExtended/media/icons/abilities/ability_set_grace_of_gloom.dds" }, -- Grace of Gloom (Gloom-Graced)
-    [129442] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_senchals_duty.dds",
-        tooltip = Tooltips.Set_Senchals_Duty,
-        forcedContainer = "short",
-    }, -- Senchal's Duty (Senchal Defender's)
-    [129509] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_senchals_duty.dds",
-        name = Abilities.Set_Senchals_Duty,
-    }, -- Senchal Defender (Senchal Defender's)
-    [129523] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_senchals_duty.dds",
-        name = Abilities.Set_Senchals_Duty,
-    }, -- Senchal Defender (Senchal Defender's)
-    [147221] = { icon = "LuiExtended/media/icons/abilities/ability_set_radiant_bastion.dds", hide = true }, -- Radiant Bastion (of the Radiant Bastion)
-
-    -- Dungeon Sets (Light)
-    [61459] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_burning_spellweave.dds",
-        tooltip = Tooltips.Generic_Spell_Damage_Duration_Value,
-        tooltipValue2 = 490,
-    }, -- Burning Spellweave
+    [129442] = { icon = "LuiExtended/media/icons/abilities/ability_set_senchals_duty.dds", tooltip = Tooltips.Set_Senchals_Duty, forcedContainer = "short" }, -- Senchal's Duty (Senchal Defender's)
+    [129509] = { icon = "LuiExtended/media/icons/abilities/ability_set_senchals_duty.dds", name = Abilities.Set_Senchals_Duty }, -- Senchal Defender (Senchal Defender's)
+    [129523] = { icon = "LuiExtended/media/icons/abilities/ability_set_senchals_duty.dds", name = Abilities.Set_Senchals_Duty }, -- Senchal Defender (Senchal Defender's)
+    [147221] = { icon = "LuiExtended/media/icons/abilities/ability_set_radiant_bastion.dds", hide = true }, -- Radiant Bastion (of the Radiant Bastion)-- Dungeon Sets (Light)
+    [61459] = { icon = "LuiExtended/media/icons/abilities/ability_set_burning_spellweave.dds", tooltip = Tooltips.Generic_Spell_Damage_Duration_Value, tooltipValue2 = 490 }, -- Burning Spellweave
     [102027] = { icon = "LuiExtended/media/icons/abilities/ability_spell_ranged_fire.dds", hide = true }, -- Caluurion's Legacy (Fire)
     [102032] = { icon = "LuiExtended/media/icons/abilities/ability_spell_ranged_frost.dds", hide = true }, -- Caluurion's Legacy (Frost)
     [102033] = { icon = "LuiExtended/media/icons/abilities/ability_spell_ranged_slime.dds", hide = true }, -- Caluurion's Legacy (Disease)
     [102034] = { icon = "LuiExtended/media/icons/abilities/ability_spell_ranged_shock.dds", hide = true }, -- Caluurion's Legacy (Shock)
-    [97538] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_draugrs_rest.dds",
-        tooltip = Tooltips.Set_Draugrs_Rest,
-    }, -- Draugr's Rest (Draugr's Rest)
-    [97539] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_draugrs_rest.dds",
-        groundLabel = true,
-        tooltip = Tooltips.Generic_AOE_Heal,
-        tooltipValue2 = 1,
-    }, -- Draugr's Rest
+    [97538] = { icon = "LuiExtended/media/icons/abilities/ability_set_draugrs_rest.dds", tooltip = Tooltips.Set_Draugrs_Rest }, -- Draugr's Rest (Draugr's Rest)
+    [97539] = { icon = "LuiExtended/media/icons/abilities/ability_set_draugrs_rest.dds", groundLabel = true, tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Draugr's Rest
     [97574] = { icon = "LuiExtended/media/icons/abilities/ability_spell_flame_blossom.dds" }, -- Flame Blossom
     [85610] = { icon = "LuiExtended/media/icons/abilities/ability_set_song_of_lamae.dds" }, -- Lamia's Song (Lamia's)
     [143097] = { icon = "LuiExtended/media/icons/abilities/ability_set_song_of_lamae.dds" }, -- Lamia's Song (Lamia's)
     [143098] = { icon = "LuiExtended/media/icons/abilities/ability_set_song_of_lamae.dds" }, -- Lamia's Song (Lamia's)
-    [67129] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_overwhelming.dds",
-        tooltip = Tooltips.Set_Overwhelming_Surge,
-    }, -- Overwhelming Surge (Overwhelming)
+    [67129] = { icon = "LuiExtended/media/icons/abilities/ability_set_overwhelming.dds", tooltip = Tooltips.Set_Overwhelming_Surge }, -- Overwhelming Surge (Overwhelming)
     [67136] = { icon = "LuiExtended/media/icons/abilities/ability_set_overwhelming.dds" }, -- Overwhelming Surge (Overwhelming)
     [127131] = { icon = "LuiExtended/media/icons/abilities/ability_set_overwhelming.dds" }, -- Overwhelming Surge (Overwhelming)
-    [34504] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_prayer.dds",
-        tooltip = Tooltips.Generic_Damage_Shield_Duration,
-    }, -- Prayer Shawl (of Prayer)
-    [32834] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_hircine.dds",
-        tooltip = Tooltips.Generic_Increase_Healing_Received_No_Dur,
-        tooltipValue2 = 10,
-    }, -- Sanctuary (of Sanctuary)
-    [67098] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_combat_physician.dds",
-        tooltip = Tooltips.Generic_Damage_Shield_Duration,
-    }, -- Combat Physician (of the Combat Physician)
-    [57164] = {
-        icon = "LuiExtended/media/icons/abilities/ability_lich_teleport.dds",
-        tooltip = Tooltips.Generic_Magicka_Recovery_Duration_Value,
-        tooltipValue2 = 1032,
-    }, -- Shroud of the Lich (of the Lich)
+    [34504] = { icon = "LuiExtended/media/icons/abilities/ability_set_prayer.dds", tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Prayer Shawl (of Prayer)
+    [32834] = { icon = "LuiExtended/media/icons/abilities/ability_set_hircine.dds", tooltip = Tooltips.Generic_Increase_Healing_Received_No_Dur, tooltipValue2 = 10 }, -- Sanctuary (of Sanctuary)
+    [67098] = { icon = "LuiExtended/media/icons/abilities/ability_set_combat_physician.dds", tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Combat Physician (of the Combat Physician)
+    [57164] = { icon = "LuiExtended/media/icons/abilities/ability_lich_teleport.dds", tooltip = Tooltips.Generic_Magicka_Recovery_Duration_Value, tooltipValue2 = 1032 }, -- Shroud of the Lich (of the Lich)
     [34813] = { icon = "LuiExtended/media/icons/abilities/ability_set_magicka_furnace.dds" }, -- Magicka Furnace (of the Magicka Furnace)
-    [34373] = {
-        name = Abilities.Set_Noble_Duelist,
-        tooltip = Tooltips.Generic_LA_HA_Damage_Duration_Value,
-        tooltipValue2 = 1811,
-    }, -- Noble Duelist's Silks (Noble Duelist)
-    [67288] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_scathing_mage.dds",
-        tooltip = Tooltips.Generic_Spell_Damage_Duration_Value,
-        tooltipValue2 = 516,
-    }, -- Scathing Mage (of the Scathing Mage)
-    [59676] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_undaunted_unweaver.dds",
-        tooltip = Tooltips.Generic_LA_HA_Damage_Duration_Value,
-        tooltipValue2 = 1685,
-    }, -- Undaunted Unweaver (of the Undaunted Unweaver)
+    [34373] = { name = Abilities.Set_Noble_Duelist, tooltip = Tooltips.Generic_LA_HA_Damage_Duration_Value, tooltipValue2 = 1811 }, -- Noble Duelist's Silks (Noble Duelist)
+    [67288] = { icon = "LuiExtended/media/icons/abilities/ability_set_scathing_mage.dds", tooltip = Tooltips.Generic_Spell_Damage_Duration_Value, tooltipValue2 = 516 }, -- Scathing Mage (of the Scathing Mage)
+    [59676] = { icon = "LuiExtended/media/icons/abilities/ability_set_undaunted_unweaver.dds", tooltip = Tooltips.Generic_LA_HA_Damage_Duration_Value, tooltipValue2 = 1685 }, -- Undaunted Unweaver (of the Undaunted Unweaver)
     [57163] = { icon = "LuiExtended/media/icons/abilities/ability_set_warlock.dds" }, -- Robes of the Warlock (of the Warlock)
-    [47367] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_worm_cult.dds",
-        tooltip = Tooltips.Generic_Increase_Magicka_Recovery_No_Dur,
-        tooltipValue2 = 145,
-    }, -- Worm's Raiment (of the Worm Cult)
-    [111204] = {
-        icon = "esoui/art/icons/achievement_thievesguild_003.dds",
-        tooltip = Tooltips.Generic_Spell_Damage_Duration_Value,
-        tooltipValue2 = 547,
-    }, -- Moon Hunter (Moon Hunter)
+    [47367] = { icon = "LuiExtended/media/icons/abilities/ability_set_worm_cult.dds", tooltip = Tooltips.Generic_Increase_Magicka_Recovery_No_Dur, tooltipValue2 = 145 }, -- Worm's Raiment (of the Worm Cult)
+    [111204] = { icon = "esoui/art/icons/achievement_thievesguild_003.dds", tooltip = Tooltips.Generic_Spell_Damage_Duration_Value, tooltipValue2 = 547 }, -- Moon Hunter (Moon Hunter)
     [117666] = { icon = "LuiExtended/media/icons/abilities/ability_set_icy_conjuror.dds" }, -- Icy Conjuror
-    [116727] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_icy_conjuror.dds",
-        tooltip = Tooltips.Generic_Freeze,
-        tooltipValue2 = 1,
-    }, -- Icy Conjuror (Icy Conjuror)
-    [116884] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_aurorans_thunder.dds",
-        tooltip = Tooltips.Set_Aurorans_Thunder,
-    }, -- Auroran's Thunder (Auroran's Thunder)
+    [116727] = { icon = "LuiExtended/media/icons/abilities/ability_set_icy_conjuror.dds", tooltip = Tooltips.Generic_Freeze, tooltipValue2 = 1 }, -- Icy Conjuror (Icy Conjuror)
+    [116884] = { icon = "LuiExtended/media/icons/abilities/ability_set_aurorans_thunder.dds", tooltip = Tooltips.Set_Aurorans_Thunder }, -- Auroran's Thunder (Auroran's Thunder)
     [116920] = { icon = "LuiExtended/media/icons/abilities/ability_set_aurorans_thunder.dds" }, -- Auroran's Thunder (Auroran's Thunder)
-    [126924] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_hollowfang.dds",
-        tooltip = Tooltips.Set_Hollowfang_Thirst,
-    }, -- Hollowfang Thirst (Hollowfang Thirst)
+    [126924] = { icon = "LuiExtended/media/icons/abilities/ability_set_hollowfang.dds", tooltip = Tooltips.Set_Hollowfang_Thirst }, -- Hollowfang Thirst (Hollowfang Thirst)
     [126938] = { icon = "LuiExtended/media/icons/abilities/ability_set_hollowfang.dds" }, -- Hollowfang Thirst (Hollowfang Thirst)
-    [126597] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_touch_of_zen.dds",
-        tooltip = Tooltips.Set_Touch_of_Zen,
-    }, -- Touch of Z'en (Z'en's)
-
+    [126597] = { icon = "LuiExtended/media/icons/abilities/ability_set_touch_of_zen.dds", tooltip = Tooltips.Set_Touch_of_Zen }, -- Touch of Z'en (Z'en's)
     [133210] = { icon = "LuiExtended/media/icons/abilities/ability_set_hiti.dds", tooltip = Tooltips.Set_Hitis_Hearth }, -- Warming Aura (Hiti's)
     [133211] = { icon = "LuiExtended/media/icons/abilities/ability_set_hiti.dds", name = Abilities.Set_Warming_Aura }, -- Hiti's Hearth (Hiti's)
-    [135130] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_hiti.dds",
-        name = Abilities.Set_Warming_Aura,
-        forcedContainer = "short",
-        groundLabel = true,
-        tooltip = Tooltips.Set_Hitis_Hearth_Ground,
-    }, -- Hiti's Hearth (Hiti's)
-
-    [133406] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_draugrkins_grip.dds",
-        tooltip = Tooltips.Set_Draugrkin,
-    }, -- Draugrkin's Grip (Draugrkin)
-
-    [142610] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_sword_fire.dds",
-        tooltip = Tooltips.Set_Elemental_Catalyst,
-    }, -- Flame Weakness (of the Catalyst)
-    [142652] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_sword_frost.dds",
-        tooltip = Tooltips.Set_Elemental_Catalyst,
-    }, -- Frost Weakness (of the Catalyst)
-    [142653] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_sword_shock.dds",
-        tooltip = Tooltips.Set_Elemental_Catalyst,
-    }, -- Shock Weakness (of the Catalyst)
+    [135130] = { icon = "LuiExtended/media/icons/abilities/ability_set_hiti.dds", name = Abilities.Set_Warming_Aura, forcedContainer = "short", groundLabel = true, tooltip = Tooltips.Set_Hitis_Hearth_Ground }, -- Hiti's Hearth (Hiti's)
+    [133406] = { icon = "LuiExtended/media/icons/abilities/ability_set_draugrkins_grip.dds", tooltip = Tooltips.Set_Draugrkin }, -- Draugrkin's Grip (Draugrkin)
+    [142610] = { icon = "LuiExtended/media/icons/abilities/ability_spell_sword_fire.dds", tooltip = Tooltips.Set_Elemental_Catalyst }, -- Flame Weakness (of the Catalyst)
+    [142652] = { icon = "LuiExtended/media/icons/abilities/ability_spell_sword_frost.dds", tooltip = Tooltips.Set_Elemental_Catalyst }, -- Frost Weakness (of the Catalyst)
+    [142653] = { icon = "LuiExtended/media/icons/abilities/ability_spell_sword_shock.dds", tooltip = Tooltips.Set_Elemental_Catalyst }, -- Shock Weakness (of the Catalyst)
 
     -- Dungeon Sets (Medium)
     [85977] = { icon = "LuiExtended/media/icons/abilities/ability_set_barkskin.dds" }, -- Barkskin
     [85978] = { icon = "LuiExtended/media/icons/abilities/ability_set_barkskin.dds" }, -- Barkskin
-    [47365] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_hircine.dds",
-        tooltip = Tooltips.Generic_Increase_Stamina_Recovery_No_Dur,
-        tooltipValue2 = 145,
-    }, -- Hircine's Veneer (Hircine's)
+    [47365] = { icon = "LuiExtended/media/icons/abilities/ability_set_hircine.dds", tooltip = Tooltips.Generic_Increase_Stamina_Recovery_No_Dur, tooltipValue2 = 145 }, -- Hircine's Veneer (Hircine's)
     [34612] = { hide = true }, -- Oblivion's Edge (of Oblivion)
     [57206] = { icon = "LuiExtended/media/icons/abilities/ability_spell_oblivion_blue.dds" }, -- Oblivion's Edge (of Oblivion)
     [97716] = { icon = "LuiExtended/media/icons/abilities/ability_set_pillar_of_nirn.dds" }, -- Pillar of Nirn
-    [97743] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_pillar_of_nirn.dds",
-        tooltip = Tooltips.Generic_Bleed,
-        tooltipValue2 = 2,
-    }, -- Pillar of Nirn
-    [102106] = {
-        icon = "esoui/art/icons/achievement_bossflavoreasy.dds",
-        name = Abilities.Set_Plague_Slinger,
-        tooltip = Tooltips.Set_Plague_Slinger,
-    }, -- Skeever Corpse (Plague Slinger)
+    [97743] = { icon = "LuiExtended/media/icons/abilities/ability_set_pillar_of_nirn.dds", tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 2 }, -- Pillar of Nirn
+    [102106] = { icon = "esoui/art/icons/achievement_bossflavoreasy.dds", name = Abilities.Set_Plague_Slinger, tooltip = Tooltips.Set_Plague_Slinger }, -- Skeever Corpse (Plague Slinger)
     [102113] = { icon = "LuiExtended/media/icons/abilities/ability_set_plague_slinger.dds" }, -- Plague Slinger
-    [67141] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_sheer_venom.dds",
-        tooltip = Tooltips.Set_Sheer_Venom,
-    }, -- Sheer Venom
-    [60060] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_sunderflame.dds",
-        tooltip = Tooltips.Generic_Burn,
-        tooltipValue2 = 1,
-    }, -- Sunderflame
+    [67141] = { icon = "LuiExtended/media/icons/abilities/ability_set_sheer_venom.dds", tooltip = Tooltips.Set_Sheer_Venom }, -- Sheer Venom
+    [60060] = { icon = "LuiExtended/media/icons/abilities/ability_set_sunderflame.dds", tooltip = Tooltips.Generic_Burn, tooltipValue2 = 1 }, -- Sunderflame
     [85635] = { icon = "LuiExtended/media/icons/abilities/ability_set_spelunker.dds" }, -- Spelunker (Spelunker's)
     [143136] = { icon = "LuiExtended/media/icons/abilities/ability_set_spelunker.dds" }, -- Spelunker (Spelunker's)
-    [70298] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_sword_shock.dds",
-        tooltip = Tooltips.Generic_LA_HA_Damage_Duration_Value,
-        tooltipValue2 = 1542,
-    }, -- Storm Master (Storm Master's)
+    [70298] = { icon = "LuiExtended/media/icons/abilities/ability_spell_sword_shock.dds", tooltip = Tooltips.Generic_LA_HA_Damage_Duration_Value, tooltipValue2 = 1542 }, -- Storm Master (Storm Master's)
     [49220] = { hide = true }, -- Extra dodge (of the Crusader)
-    [67334] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_essence_thief.dds",
-        tooltip = Tooltips.Generic_Enrage,
-        tooltipValue2 = 10,
-    }, -- Essence Thief (of the Essence Thief)
+    [67334] = { icon = "LuiExtended/media/icons/abilities/ability_set_essence_thief.dds", tooltip = Tooltips.Generic_Enrage, tooltipValue2 = 10 }, -- Essence Thief (of the Essence Thief)
     [70284] = { icon = "LuiExtended/media/icons/abilities/ability_set_essence_thief.dds" }, -- Essence Thief (of the Essence Thief)
     [70290] = { icon = "LuiExtended/media/icons/abilities/ability_set_essence_thief.dds" }, -- Essence Thief (of the Essence Thief)
-    [59667] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_undaunted_infiltrator.dds",
-        tooltip = Tooltips.Generic_LA_HA_Damage_Duration_Value,
-        tooltipValue2 = 1685,
-    }, -- Undaunted Infiltrator (of the Undaunted Infiltrator)
-    [33691] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_vipers_sting.dds",
-        tooltip = Tooltips.Generic_Poison,
-        tooltipValue2 = 1,
-    }, -- Viper's Sting
+    [59667] = { icon = "LuiExtended/media/icons/abilities/ability_set_undaunted_infiltrator.dds", tooltip = Tooltips.Generic_LA_HA_Damage_Duration_Value, tooltipValue2 = 1685 }, -- Undaunted Infiltrator (of the Undaunted Infiltrator)
+    [33691] = { icon = "LuiExtended/media/icons/abilities/ability_set_vipers_sting.dds", tooltip = Tooltips.Generic_Poison, tooltipValue2 = 1 }, -- Viper's Sting
     [101970] = { icon = "LuiExtended/media/icons/abilities/ability_set_invigoration.dds" }, -- Trappings of Invigoration
-    [84350] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_velidreth.dds",
-        tooltip = Tooltips.Generic_Poison,
-        tooltipValue2 = 1,
-    }, -- Widowmaker
+    [84350] = { icon = "LuiExtended/media/icons/abilities/ability_set_velidreth.dds", tooltip = Tooltips.Generic_Poison, tooltipValue2 = 1 }, -- Widowmaker
     [111387] = { icon = "esoui/art/icons/mos_dagrund_upheavel.dds", tooltip = Tooltips.Set_Blood_Moon_Scent }, -- Blood Scent (Blood Moon)
-    [111386] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_frenzied.dds",
-        tooltip = Tooltips.Set_Blood_Moon_Frenzied,
-    }, -- Frenzied (Blood Moon)
-    [111216] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_bleed.dds",
-        tooltip = Tooltips.Generic_Bleed,
-        tooltipValue2 = 1,
-    }, -- Savage Werewolf (Savage Werewolf)
-    [116742] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_tzogvins_warband.dds",
-        tooltip = Tooltips.Set_Tzogvins_Warband,
-    }, -- Precision (Tzogvin's Warband)
+    [111386] = { icon = "LuiExtended/media/icons/abilities/ability_set_frenzied.dds", tooltip = Tooltips.Set_Blood_Moon_Frenzied }, -- Frenzied (Blood Moon)
+    [111216] = { icon = "LuiExtended/media/icons/abilities/ability_innate_bleed.dds", tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Savage Werewolf (Savage Werewolf)
+    [116742] = { icon = "LuiExtended/media/icons/abilities/ability_set_tzogvins_warband.dds", tooltip = Tooltips.Set_Tzogvins_Warband }, -- Precision (Tzogvin's Warband)
     [116954] = { hide = true }, -- Stalked (Scavenging Demise)
-    [116991] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_scavenging_demise.dds",
-        name = Abilities.Set_Scavenging_Demise,
-    }, -- Stalked (Scavenging Demise)
-
-    [126631] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_blight_seed.dds",
-        tooltip = Tooltips.Set_Blight_Seed,
-        unbreakable = 1,
-    }, -- Blight Seed (Azureblight)
-    [126633] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_blight_seed.dds",
-        tooltip = Tooltips.Set_Blight_Seed,
-    }, -- Blight Seed (Azureblight)
-
-    [133493] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_aegis_caller.dds",
-        name = Abilities.Set_Aegis_Caller,
-        tooltip = Tooltips.Set_Aegis_Caller,
-    }, -- Lesser Aegis (Aegis Caller's)
-    [133494] = {
-        icon = "LuiExtended/media/icons/abilities/ability_defiledaegis_symphony_of_blades.dds",
-        groundLabel = true,
-        tooltip = Tooltips.Generic_AOE_Bleed,
-        tooltipValue2 = 1,
-    }, -- Aegis Caller (Aegis Caller's)
-
+    [116991] = { icon = "LuiExtended/media/icons/abilities/ability_set_scavenging_demise.dds", name = Abilities.Set_Scavenging_Demise }, -- Stalked (Scavenging Demise)
+    [126631] = { icon = "LuiExtended/media/icons/abilities/ability_set_blight_seed.dds", tooltip = Tooltips.Set_Blight_Seed, unbreakable = 1 }, -- Blight Seed (Azureblight)
+    [126633] = { icon = "LuiExtended/media/icons/abilities/ability_set_blight_seed.dds", tooltip = Tooltips.Set_Blight_Seed }, -- Blight Seed (Azureblight)
+    [133493] = { icon = "LuiExtended/media/icons/abilities/ability_set_aegis_caller.dds", name = Abilities.Set_Aegis_Caller, tooltip = Tooltips.Set_Aegis_Caller }, -- Lesser Aegis (Aegis Caller's)
+    [133494] = { icon = "LuiExtended/media/icons/abilities/ability_defiledaegis_symphony_of_blades.dds", groundLabel = true, tooltip = Tooltips.Generic_AOE_Bleed, tooltipValue2 = 1 }, -- Aegis Caller (Aegis Caller's)
     [142816] = { name = Abilities.Set_Heed_the_Call }, -- Kraglen's Howl (Kraglen's)
-    [141204] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_unleashed_terror.dds",
-        tooltip = Tooltips.Generic_Bleed,
-        tooltipValue2 = 1,
-    }, -- Unleashed Terror (Terror)
-
-    -- Dungeon Sets (Heavy)
+    [141204] = { icon = "LuiExtended/media/icons/abilities/ability_set_unleashed_terror.dds", tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Unleashed Terror (Terror)-- Dungeon Sets (Heavy)
     [102023] = { icon = "LuiExtended/media/icons/abilities/ability_set_curse_of_doylemish.dds" }, -- Curse of Doylemish
-    [134930] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_dunerippers_scales.dds",
-        tooltip = Tooltips.Set_Dunerippers_Scales,
-    }, -- Duneripper's Scales
+    [134930] = { icon = "LuiExtended/media/icons/abilities/ability_set_dunerippers_scales.dds", tooltip = Tooltips.Set_Dunerippers_Scales }, -- Duneripper's Scales
     [47362] = { icon = "LuiExtended/media/icons/abilities/ability_set_ebon.dds", tooltip = Tooltips.Set_Ebon_Armory }, -- Ebon Armory (Ebon)
-    [59695] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_embershield.dds",
-        tooltip = Tooltips.Set_Embershield,
-    }, -- Embershield (Embershield)
+    [59695] = { icon = "LuiExtended/media/icons/abilities/ability_set_embershield.dds", tooltip = Tooltips.Set_Embershield }, -- Embershield (Embershield)
     [59696] = { icon = "LuiExtended/media/icons/abilities/ability_set_embershield.dds" }, -- Embershield (Embershield)
-    [97908] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_hagravens_garden.dds",
-        tooltip = Tooltips.Set_Hagravens_Garden,
-    }, -- Hagraven's Garden (Hagraven's)
-    [34404] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_ice_furnace.dds",
-        name = Abilities.Set_Ice_Furnace,
-    }, -- Frostfire (Ice Furnace)
+    [97908] = { icon = "LuiExtended/media/icons/abilities/ability_set_hagravens_garden.dds", tooltip = Tooltips.Set_Hagravens_Garden }, -- Hagraven's Garden (Hagraven's)
+    [34404] = { icon = "LuiExtended/media/icons/abilities/ability_set_ice_furnace.dds", name = Abilities.Set_Ice_Furnace }, -- Frostfire (Ice Furnace)
     [97627] = { icon = "LuiExtended/media/icons/abilities/ability_set_ironblood.dds", tooltip = Tooltips.Set_Ironblood }, -- Ironblood
-    [67078] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_jolting_arms.dds",
-        tooltip = Tooltips.Set_Jolting_Arms,
-    }, -- Jolting Arms (Jolting)
+    [67078] = { icon = "LuiExtended/media/icons/abilities/ability_set_jolting_arms.dds", tooltip = Tooltips.Set_Jolting_Arms }, -- Jolting Arms (Jolting)
     [85620] = { icon = "LuiExtended/media/icons/abilities/ability_set_knight_errant.dds" }, -- Knight-Errant's Mail (Knight-Errant's)
-    [67205] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_leeching_plate.dds",
-        tooltip = Tooltips.Set_Leeching_Plate,
-    }, -- Leeching Plate (of Leeching)
+    [67205] = { icon = "LuiExtended/media/icons/abilities/ability_set_leeching_plate.dds", tooltip = Tooltips.Set_Leeching_Plate }, -- Leeching Plate (of Leeching)
     [69345] = { icon = "LuiExtended/media/icons/abilities/ability_set_leeching_plate.dds" }, -- Leeching Plate (of Leeching)
-    [67204] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_leeching_plate.dds",
-        groundLabel = true,
-        tooltip = Tooltips.Skill_Leeching_Plate_Ground,
-    }, -- Leeching Plate (of Leeching)
+    [67204] = { icon = "LuiExtended/media/icons/abilities/ability_set_leeching_plate.dds", groundLabel = true, tooltip = Tooltips.Skill_Leeching_Plate_Ground }, -- Leeching Plate (of Leeching)
     [84277] = { icon = "LuiExtended/media/icons/abilities/ability_set_aspect_of_mazzatun.dds" }, -- Aspect of Mazzatun (of Mazzatun)
     [84278] = { icon = "LuiExtended/media/icons/abilities/ability_set_aspect_of_mazzatun.dds" }, -- Aspect of Mazzatun (of Mazzatun)
     [84279] = { icon = "LuiExtended/media/icons/abilities/ability_set_aspect_of_mazzatun.dds" }, -- Aspect of Mazzatun (of Mazzatun)
-    [84354] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_web_green.dds",
-        tooltip = Tooltips.Set_Hand_of_Mephala,
-    }, -- Hand of Mephala (Mephala's Hand)
-    [84357] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_web_green.dds",
-        name = Abilities.Set_Hand_of_Mephala,
-        duration = 0,
-        tooltip = Tooltips.Skill_Hand_of_Mephala_Ground,
-        groundLabel = true,
-    }, -- Hand of Mephala Webbing (of Mephala's Hand)
+    [84354] = { icon = "LuiExtended/media/icons/abilities/ability_innate_web_green.dds", tooltip = Tooltips.Set_Hand_of_Mephala }, -- Hand of Mephala (Mephala's Hand)
+    [84357] = { icon = "LuiExtended/media/icons/abilities/ability_innate_web_green.dds", name = Abilities.Set_Hand_of_Mephala, duration = 0, tooltip = Tooltips.Skill_Hand_of_Mephala_Ground, groundLabel = true }, -- Hand of Mephala Webbing (of Mephala's Hand)
     [84355] = { icon = "LuiExtended/media/icons/abilities/ability_innate_web_green.dds" }, -- Hand of Mephala (of Mephala's Hand)
     [32735] = { hide = true }, -- Major Brutality (Dreugh King Slayer)
-    [66887] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_imperium.dds",
-        tooltip = Tooltips.Generic_Damage_Shield_Duration,
-    }, -- Brands of the Imperium (of the Imperium)
-    [67283] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_tormentor.dds",
-        name = Abilities.Set_Tormentor,
-        tooltip = Tooltips.Generic_Physical_Spell_Resist_Value,
-        tooltipValue2 = 3642,
-    }, -- Tormentor Resistance (of the Tormentor)
-    [61200] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_undaunted_bastion.dds",
-        tooltip = Tooltips.Generic_Damage_Shield_Duration,
-    }, -- Undaunted Bastion (of the Undaunted Bastion)
-    [86070] = {
-        icon = "esoui/art/icons/achievement_thievesguild_034.dds",
-        tooltip = Tooltips.Generic_Weapon_Damage_Duration_Value,
-        tooltipValue2 = 460,
-    }, -- Armor of Truth (of Truth)
-    [112414] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_haven_of_ursus.dds",
-        tooltip = Tooltips.Generic_Damage_Shield_Duration,
-    }, -- Ursus's Blessing (Haven of Ursus)
+    [66887] = { icon = "LuiExtended/media/icons/abilities/ability_set_imperium.dds", tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Brands of the Imperium (of the Imperium)
+    [67283] = { icon = "LuiExtended/media/icons/abilities/ability_set_tormentor.dds", name = Abilities.Set_Tormentor, tooltip = Tooltips.Generic_Physical_Spell_Resist_Value, tooltipValue2 = 3642 }, -- Tormentor Resistance (of the Tormentor)
+    [61200] = { icon = "LuiExtended/media/icons/abilities/ability_set_undaunted_bastion.dds", tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Undaunted Bastion (of the Undaunted Bastion)
+    [86070] = { icon = "esoui/art/icons/achievement_thievesguild_034.dds", tooltip = Tooltips.Generic_Weapon_Damage_Duration_Value, tooltipValue2 = 460 }, -- Armor of Truth (of Truth)
+    [112414] = { icon = "LuiExtended/media/icons/abilities/ability_set_haven_of_ursus.dds", tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Ursus's Blessing (Haven of Ursus)
     [117082] = { icon = "esoui/art/icons/ability_wrothgar_bitingcold.dds", tooltip = Tooltips.Set_Frozen_Watcher }, -- Frozen Watcher (Frozen Watcher)
     [117060] = { icon = "esoui/art/icons/ability_wrothgar_bitingcold.dds" }, -- Frozen Watcher (Frozen Watcher)
-
-    [126535] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_renalds_resolve.dds",
-        tooltip = Tooltips.Set_Renalds_Resolve,
-    }, -- Resolve (Renald's)
-
-    [126682] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_dragons_defilement.dds",
-        tooltip = Tooltips.Set_Dragons_Defilement,
-    }, -- Dragon's Defilement (Defiled Dragon's)
-
-    [135554] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_grave_guardian.dds",
-        tooltip = Tooltips.Set_Grave_Guardian,
-    }, -- Grave Guardian (Grave Guardian's)
-    [133451] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_grave_guardian.dds",
-        groundLabel = true,
-        tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur_Value,
-        tooltipValue2 = 4430,
-        forcedContainer = "short",
-    }, -- Grave Guardian (Grave Guardian's)
-
-    [141638] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_crimson_twilight.dds",
-        tooltip = Tooltips.Set_Crimson_Twilight,
-    }, -- Crimson Twilight (Crimson)
+    [126535] = { icon = "LuiExtended/media/icons/abilities/ability_set_renalds_resolve.dds", tooltip = Tooltips.Set_Renalds_Resolve }, -- Resolve (Renald's)
+    [126682] = { icon = "LuiExtended/media/icons/abilities/ability_set_dragons_defilement.dds", tooltip = Tooltips.Set_Dragons_Defilement }, -- Dragon's Defilement (Defiled Dragon's)
+    [135554] = { icon = "LuiExtended/media/icons/abilities/ability_set_grave_guardian.dds", tooltip = Tooltips.Set_Grave_Guardian }, -- Grave Guardian (Grave Guardian's)
+    [133451] = { icon = "LuiExtended/media/icons/abilities/ability_set_grave_guardian.dds", groundLabel = true, tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 4430, forcedContainer = "short" }, -- Grave Guardian (Grave Guardian's)
+    [141638] = { icon = "LuiExtended/media/icons/abilities/ability_set_crimson_twilight.dds", tooltip = Tooltips.Set_Crimson_Twilight }, -- Crimson Twilight (Crimson)
     [141642] = { icon = "LuiExtended/media/icons/abilities/ability_set_crimson_twilight.dds" }, -- Crimson Twilight (Crimson)
     [141865] = { icon = "LuiExtended/media/icons/abilities/ability_set_crimson_twilight.dds" }, -- Crimson Twilight (Crimson)
-
     [142660] = { icon = "LuiExtended/media/icons/abilities/ability_set_arkasis.dds", hide = true }, -- Arkasis' Genius (Arkasis)
 
     -- Trial Sets (Hel Ra Citadel)
-    [50978] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_berserking_warrior.dds",
-        tooltip = Tooltips.Set_Berserking_Warrior,
-    }, -- Berserking Warrior (Advancing Yokeda)
-    [129477] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_immortal_warrior_icd.dds",
-        name = zo_strformat("<<1>> <<2>>", Abilities.Set_Immortal_Warrior, Abilities.Set_Cooldown),
-        tooltip = Tooltips.Generic_Set_ICD,
-        tooltipValue2 = Abilities.Set_Immortal_Warrior,
-        unbreakable = 1,
-    }, -- Major Protection (Immortal Yokeda)
+    [50978] = { icon = "LuiExtended/media/icons/abilities/ability_set_berserking_warrior.dds", tooltip = Tooltips.Set_Berserking_Warrior }, -- Berserking Warrior (Advancing Yokeda)
+    [129477] = { icon = "LuiExtended/media/icons/abilities/ability_set_immortal_warrior_icd.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Set_Immortal_Warrior, Abilities.Set_Cooldown), tooltip = Tooltips.Generic_Set_ICD, tooltipValue2 = Abilities.Set_Immortal_Warrior, unbreakable = 1 }, -- Major Protection (Immortal Yokeda)
     [86907] = { icon = "LuiExtended/media/icons/abilities/ability_set_defending_warrior.dds" }, -- Defending Warrior (Resilient Yokeda)
     [50992] = { icon = "LuiExtended/media/icons/abilities/ability_set_defending_warrior.dds" }, -- Defending Warrior (Resilient Yokeda)
     [127235] = { icon = "LuiExtended/media/icons/abilities/ability_set_eternal_warrior.dds" }, -- Eternal Warrior (Eternal Yokeda)
     [127236] = { icon = "LuiExtended/media/icons/abilities/ability_set_eternal_warrior.dds" }, -- Eternal Warrior (Eternal Yokeda)
-
     -- Trial Sets (Aetherian Archive)
-    [51315] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_destructive_mage.dds",
-        type = BUFF_EFFECT_TYPE_DEBUFF,
-        unbreakable = 1,
-        tooltip = Tooltips.Set_Destructive_Mage,
-    }, -- Destructive Mage (Aether... of Destruction)
-    [51320] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_destructive_mage.dds",
-        name = Abilities.Set_Destructive_Mage,
-    }, -- Mage Destruction Bomb (Aether... of Destruction)
-
+    [51315] = { icon = "LuiExtended/media/icons/abilities/ability_set_destructive_mage.dds", type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Set_Destructive_Mage }, -- Destructive Mage (Aether... of Destruction)
+    [51320] = { icon = "LuiExtended/media/icons/abilities/ability_set_destructive_mage.dds", name = Abilities.Set_Destructive_Mage }, -- Mage Destruction Bomb (Aether... of Destruction)
     -- Trial Sets (Sanctum Ophidia)
     [51241] = { icon = "LuiExtended/media/icons/abilities/ability_set_vipers_sting.dds" }, -- Poisonous Serpent (Ophidian ... of Venom)
-    [51176] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_twice_fanged_serpent.dds",
-        tooltip = Tooltips.Set_Twice_Fanged_Serpent,
-    }, -- Twice-Fanged Serpent (of the Two-Fanged Snake)
+    [51176] = { icon = "LuiExtended/media/icons/abilities/ability_set_twice_fanged_serpent.dds", tooltip = Tooltips.Set_Twice_Fanged_Serpent }, -- Twice-Fanged Serpent (of the Two-Fanged Snake)
     [57159] = { icon = "LuiExtended/media/icons/abilities/ability_set_quick_serpent.dds" }, -- Quick Serpent (Ophidian.. of Celerity)
     [81522] = { icon = "LuiExtended/media/icons/abilities/ability_set_vicious_serpent.dds" }, -- Vicious Serpent (of the Vicious Ophidian)
-
     -- Trial Sets (Maw of Lorkhaj)
-    [75801] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_moondancer_lunar.dds",
-        tooltip = Tooltips.Generic_Magicka_Recovery_Duration_Value,
-        tooltipValue2 = 474,
-    }, -- Lunar Blessing (Moondancer)
-    [75804] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_moondancer_shadow.dds",
-        tooltip = Tooltips.Generic_Spell_Damage_Duration_Value,
-        tooltipValue2 = 474,
-    }, -- Shadow Blessing (Moondancer)
+    [75801] = { icon = "LuiExtended/media/icons/abilities/ability_set_moondancer_lunar.dds", tooltip = Tooltips.Generic_Magicka_Recovery_Duration_Value, tooltipValue2 = 474 }, -- Lunar Blessing (Moondancer)
+    [75804] = { icon = "LuiExtended/media/icons/abilities/ability_set_moondancer_shadow.dds", tooltip = Tooltips.Generic_Spell_Damage_Duration_Value, tooltipValue2 = 474 }, -- Shadow Blessing (Moondancer)
     [75752] = { icon = "LuiExtended/media/icons/abilities/ability_set_alkosh.dds" }, -- Roar of Alkosh (of Alkosh)
-    [75753] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_alkosh.dds",
-        tooltip = Tooltips.Set_Roar_of_Alkosh,
-    }, -- Line Breaker (of Alkosh)
-    [76667] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_alkosh.dds",
-        tooltip = Tooltips.Generic_Physical,
-        tooltipValue2 = 1,
-    }, -- Roar of Alkosh (of Alkosh)
-    [75814] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_lunar_bastion.dds",
-        tooltip = Tooltips.Set_Lunar_Bastion,
-    }, -- Lunar Bastion (of the Lunar Bastion)
-    [75815] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_lunar_bastion.dds",
-        tooltip = Tooltips.Set_Lunar_Bastion_Ground,
-    }, -- Lunar Bastion (of the Lunar Bastion)
-    [75770] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_twilight_remedy.dds",
-        tooltip = Tooltips.Generic_HoT,
-        tooltipValue2 = 1,
-    }, -- Twilight Remedy (of Twilight Remedy)
-
+    [75753] = { icon = "LuiExtended/media/icons/abilities/ability_set_alkosh.dds", tooltip = Tooltips.Set_Roar_of_Alkosh }, -- Line Breaker (of Alkosh)
+    [76667] = { icon = "LuiExtended/media/icons/abilities/ability_set_alkosh.dds", tooltip = Tooltips.Generic_Physical, tooltipValue2 = 1 }, -- Roar of Alkosh (of Alkosh)
+    [75814] = { icon = "LuiExtended/media/icons/abilities/ability_set_lunar_bastion.dds", tooltip = Tooltips.Set_Lunar_Bastion }, -- Lunar Bastion (of the Lunar Bastion)
+    [75815] = { icon = "LuiExtended/media/icons/abilities/ability_set_lunar_bastion.dds", tooltip = Tooltips.Set_Lunar_Bastion_Ground }, -- Lunar Bastion (of the Lunar Bastion)
+    [75770] = { icon = "LuiExtended/media/icons/abilities/ability_set_twilight_remedy.dds", tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Twilight Remedy (of Twilight Remedy)
     -- Trial Sets (Cloudrest)
-    [107141] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_olorime.dds",
-        name = Abilities.Set_Vestment_of_Olorime,
-        tooltip = Tooltips.Set_Vestment_of_Olorime,
-    }, -- Vestment of Olirime (Olorime's)
-    [109084] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_olorime.dds",
-        name = Abilities.Set_Vestment_of_Olorime,
-        tooltip = Tooltips.Set_Vestment_of_Olorime,
-    }, -- Ideal Vestment of Olirime (Olorime's Perfect)
-    [107095] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_mantle_of_siroria.dds",
-        tooltip = Tooltips.Set_Mantle_of_Siroria,
-    }, -- Mantle of Siroria (Siroria's)
-    [110118] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_fire_ring.dds",
-        tooltip = Tooltips.Set_Sirorias_Boon,
-    }, -- Siroria's Boon (Siroria's)
-    [109081] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_mantle_of_siroria.dds",
-        name = Abilities.Set_Mantle_of_Siroria,
-        tooltip = Tooltips.Set_Mantle_of_Siroria,
-    }, -- Ideal Mantle of Siroria (Siroria's)
-    [110142] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_fire_ring.dds",
-        tooltip = Tooltips.Set_Sirorias_Boon,
-    }, -- Siroria's Boon (Perfect Siroria's)
-    [110504] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds",
-        name = Abilities.Set_Harmful_Winds,
-        tooltip = Tooltips.Set_Relequen,
-    }, -- Arms of Relequen (Perfect Relequen's)
-    [107203] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds",
-        name = Abilities.Set_Harmful_Winds,
-    }, -- Arms of Relequen (Perfect Relequen's)
-    [110512] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds",
-        name = Abilities.Set_Harmful_Winds,
-        tooltip = Tooltips.Set_Relequen,
-    }, -- Ideal Arms of Relequen (Relequen's)
-    [109086] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds",
-        name = Abilities.Set_Harmful_Winds,
-    }, -- Ideal Arms of Relequen (Relequen's)
-
+    [107141] = { icon = "LuiExtended/media/icons/abilities/ability_set_olorime.dds", name = Abilities.Set_Vestment_of_Olorime, tooltip = Tooltips.Set_Vestment_of_Olorime }, -- Vestment of Olirime (Olorime's)
+    [109084] = { icon = "LuiExtended/media/icons/abilities/ability_set_olorime.dds", name = Abilities.Set_Vestment_of_Olorime, tooltip = Tooltips.Set_Vestment_of_Olorime }, -- Ideal Vestment of Olirime (Olorime's Perfect)
+    [107095] = { icon = "LuiExtended/media/icons/abilities/ability_set_mantle_of_siroria.dds", tooltip = Tooltips.Set_Mantle_of_Siroria }, -- Mantle of Siroria (Siroria's)
+    [110118] = { icon = "LuiExtended/media/icons/abilities/ability_spell_fire_ring.dds", tooltip = Tooltips.Set_Sirorias_Boon }, -- Siroria's Boon (Siroria's)
+    [109081] = { icon = "LuiExtended/media/icons/abilities/ability_set_mantle_of_siroria.dds", name = Abilities.Set_Mantle_of_Siroria, tooltip = Tooltips.Set_Mantle_of_Siroria }, -- Ideal Mantle of Siroria (Siroria's)
+    [110142] = { icon = "LuiExtended/media/icons/abilities/ability_spell_fire_ring.dds", tooltip = Tooltips.Set_Sirorias_Boon }, -- Siroria's Boon (Perfect Siroria's)
+    [110504] = { icon = "LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds", name = Abilities.Set_Harmful_Winds, tooltip = Tooltips.Set_Relequen }, -- Arms of Relequen (Perfect Relequen's)
+    [107203] = { icon = "LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds", name = Abilities.Set_Harmful_Winds }, -- Arms of Relequen (Perfect Relequen's)
+    [110512] = { icon = "LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds", name = Abilities.Set_Harmful_Winds, tooltip = Tooltips.Set_Relequen }, -- Ideal Arms of Relequen (Relequen's)
+    [109086] = { icon = "LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds", name = Abilities.Set_Harmful_Winds }, -- Ideal Arms of Relequen (Relequen's)
     -- Trial Sets (Sunspire)
     [121829] = { icon = "LuiExtended/media/icons/abilities/ability_set_false_gods_devotion.dds" }, -- False God's Devotion (False God's Devotion)
-    [124800] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_false_gods_devotion.dds",
-        name = Abilities.Set_False_Gods_Devotion,
-    }, -- False God's Devotion (Perfected False God's Devotion)
-    [121898] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_eye_of_nahviintaas.dds",
-        tooltip = Tooltips.Set_Eye_of_Nahviintaas,
-    }, -- Eye of Nahviintaas (Nahviintaas')
-    [122812] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_eye_of_nahviintaas.dds",
-        tooltip = Tooltips.Set_Eye_of_Nahviintaas,
-    }, -- Eye of Nahviintaas (Nahviintaas')
-
+    [124800] = { icon = "LuiExtended/media/icons/abilities/ability_set_false_gods_devotion.dds", name = Abilities.Set_False_Gods_Devotion }, -- False God's Devotion (Perfected False God's Devotion)
+    [121898] = { icon = "LuiExtended/media/icons/abilities/ability_set_eye_of_nahviintaas.dds", tooltip = Tooltips.Set_Eye_of_Nahviintaas }, -- Eye of Nahviintaas (Nahviintaas')
+    [122812] = { icon = "LuiExtended/media/icons/abilities/ability_set_eye_of_nahviintaas.dds", tooltip = Tooltips.Set_Eye_of_Nahviintaas }, -- Eye of Nahviintaas (Nahviintaas')
     -- Trial Sets (Kyne's Aegis)
-    [136098] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds",
-        tooltip = Tooltips.Set_Kynes_Blessing,
-    }, -- Kyne's Blessing (of Kyne's Wind)
-    [136101] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds",
-        name = Abilities.Set_Kynes_Blessing,
-    }, -- Kyne's Wind (of Kyne's Wind)
-    [136099] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds",
-        name = Abilities.Set_Kynes_Blessing,
-    }, -- Kyne's Wind (of Kyne's Wind)
-
-    [137995] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds",
-        tooltip = Tooltips.Set_Kynes_Blessing,
-    }, -- Kyne's Blessing (of Kyne's Wind (Perfect))
-    [137996] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds",
-        name = Abilities.Set_Kynes_Blessing,
-    }, -- Kyne's Blessing (of Kyne's Wind (Perfect))
-    [137993] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds",
-        name = Abilities.Set_Kynes_Blessing,
-    }, -- Kyne's Blessing (of Kyne's Wind (Perfect))
-
-    [135950] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_giants_endurance.dds",
-        tooltip = Tooltips.Set_Giants_Endurance,
-        forcedContainer = "short",
-    }, -- Giant's Endurance (Yandir's)
-    [135951] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_giants_might.dds",
-        tooltip = Tooltips.Set_Giants_Might,
-    }, -- Giant's Might (Yandir's)
-    [138013] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_giants_endurance.dds",
-        tooltip = Tooltips.Set_Giants_Endurance,
-        forcedContainer = "short",
-    }, -- Giant's Endurance (Yandir's Perfect)
-    [138019] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_giants_might.dds",
-        tooltip = Tooltips.Set_Giants_Might,
-    }, -- Giant's Might (Yandir's Perfect)
-
+    [136098] = { icon = "LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds", tooltip = Tooltips.Set_Kynes_Blessing }, -- Kyne's Blessing (of Kyne's Wind)
+    [136101] = { icon = "LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds", name = Abilities.Set_Kynes_Blessing }, -- Kyne's Wind (of Kyne's Wind)
+    [136099] = { icon = "LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds", name = Abilities.Set_Kynes_Blessing }, -- Kyne's Wind (of Kyne's Wind)
+    [137995] = { icon = "LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds", tooltip = Tooltips.Set_Kynes_Blessing }, -- Kyne's Blessing (of Kyne's Wind (Perfect))
+    [137996] = { icon = "LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds", name = Abilities.Set_Kynes_Blessing }, -- Kyne's Blessing (of Kyne's Wind (Perfect))
+    [137993] = { icon = "LuiExtended/media/icons/abilities/ability_set_kynes_blessing.dds", name = Abilities.Set_Kynes_Blessing }, -- Kyne's Blessing (of Kyne's Wind (Perfect))
+    [135950] = { icon = "LuiExtended/media/icons/abilities/ability_set_giants_endurance.dds", tooltip = Tooltips.Set_Giants_Endurance, forcedContainer = "short" }, -- Giant's Endurance (Yandir's)
+    [135951] = { icon = "LuiExtended/media/icons/abilities/ability_set_giants_might.dds", tooltip = Tooltips.Set_Giants_Might }, -- Giant's Might (Yandir's)
+    [138013] = { icon = "LuiExtended/media/icons/abilities/ability_set_giants_endurance.dds", tooltip = Tooltips.Set_Giants_Endurance, forcedContainer = "short" }, -- Giant's Endurance (Yandir's Perfect)
+    [138019] = { icon = "LuiExtended/media/icons/abilities/ability_set_giants_might.dds", tooltip = Tooltips.Set_Giants_Might }, -- Giant's Might (Yandir's Perfect)
     -- Set ICD's (Fake Id's)
-    [999010] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_eternal_warrior_icd.dds",
-        name = zo_strformat("<<1>> <<2>>", Abilities.Set_Eternal_Warrior, Abilities.Set_Cooldown),
-        tooltip = Tooltips.Generic_Set_ICD_Minutes,
-        tooltipValue2 = Abilities.Set_Eternal_Warrior,
-        tooltipValue3 = 1,
-        unbreakable = 1,
-    }, -- Eternal Warrior (Fake Id)
-    [999011] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_phoenix_icd.dds",
-        name = zo_strformat("<<1>> <<2>>", Abilities.Set_Phoenix, Abilities.Set_Cooldown),
-        tooltip = Tooltips.Generic_Set_ICD_Minutes,
-        tooltipValue2 = Abilities.Set_Phoenix,
-        tooltipValue3 = 1,
-        unbreakable = 1,
-    }, -- Phoenix (Fake Id)
-    [999012] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_the_juggernaut_icd.dds",
-        name = zo_strformat("<<1>> <<2>>", Abilities.Set_Juggernaut, Abilities.Set_Cooldown),
-        tooltip = Tooltips.Generic_Set_ICD_Minutes,
-        tooltipValue2 = Abilities.Set_Juggernaut,
-        tooltipValue3 = 1,
-        unbreakable = 1,
-    }, -- Juggernaut (Fake Id)
-
+    [999010] = { icon = "LuiExtended/media/icons/abilities/ability_set_eternal_warrior_icd.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Set_Eternal_Warrior, Abilities.Set_Cooldown), tooltip = Tooltips.Generic_Set_ICD_Minutes, tooltipValue2 = Abilities.Set_Eternal_Warrior, tooltipValue3 = 1, unbreakable = 1 }, -- Eternal Warrior (Fake Id)
+    [999011] = { icon = "LuiExtended/media/icons/abilities/ability_set_phoenix_icd.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Set_Phoenix, Abilities.Set_Cooldown), tooltip = Tooltips.Generic_Set_ICD_Minutes, tooltipValue2 = Abilities.Set_Phoenix, tooltipValue3 = 1, unbreakable = 1 }, -- Phoenix (Fake Id)
+    [999012] = { icon = "LuiExtended/media/icons/abilities/ability_set_the_juggernaut_icd.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Set_Juggernaut, Abilities.Set_Cooldown), tooltip = Tooltips.Generic_Set_ICD_Minutes, tooltipValue2 = Abilities.Set_Juggernaut, tooltipValue3 = 1, unbreakable = 1 }, -- Juggernaut (Fake Id)
     -- Battleground Sets
     [93104] = { icon = "LuiExtended/media/icons/abilities/ability_spell_oblivion_purple.dds" }, -- Knight Slayer
-    [92916] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_vanguards_challenge.dds",
-        tooltip = Tooltips.Set_Vanguards_Challenge,
-    }, -- Vanguard's Challenge
-
+    [92916] = { icon = "LuiExtended/media/icons/abilities/ability_set_vanguards_challenge.dds", tooltip = Tooltips.Set_Vanguards_Challenge }, -- Vanguard's Challenge
     -- Imperial City Sets
-    [79421] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_galerions_revenge.dds",
-        tooltip = Tooltips.Set_Galerions_Revenge,
-    }, -- Mark of Revenge (Galerion's)
+    [79421] = { icon = "LuiExtended/media/icons/abilities/ability_set_galerions_revenge.dds", tooltip = Tooltips.Set_Galerions_Revenge }, -- Mark of Revenge (Galerion's)
     [79420] = { icon = "LuiExtended/media/icons/abilities/ability_set_galerions_revenge.dds" }, -- Galerion's Revenge (Galerion's)
-    [65706] = {
-        icon = "esoui/art/icons/crownstore_skillline_alliancewar_support.dds",
-        tooltip = Tooltips.Generic_Physical_Spell_Resist_Value,
-        tooltipValue2 = 3540,
-    }, -- Meritorious Service (of Meritorious Service)
-    [61771] = {
-        icon = "esoui/art/icons/crownstore_skillline_alliancewar_assault.dds",
-        tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration_Value,
-        tooltipValue2 = 307,
-    }, -- Powerful Assault (of the Powerful Assault)
+    [65706] = { icon = "esoui/art/icons/crownstore_skillline_alliancewar_support.dds", tooltip = Tooltips.Generic_Physical_Spell_Resist_Value, tooltipValue2 = 3540 }, -- Meritorious Service (of Meritorious Service)
+    [61771] = { icon = "esoui/art/icons/crownstore_skillline_alliancewar_assault.dds", tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration_Value, tooltipValue2 = 307 }, -- Powerful Assault (of the Powerful Assault)
     [79363] = { icon = "esoui/art/icons/achievement_029.dds" }, -- Thews of the Harbinger (of the Harbinger)
-    [79469] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_vicecanon_of_venom.dds",
-        name = Abilities.Set_Vicecannon_of_Venom,
-        tooltip = Tooltips.Set_Vicecanon_of_Venom,
-    }, -- Deadly Venom (the Vicecanon's)
-    [79471] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_vicecanon_of_venom.dds",
-        name = Abilities.Set_Vicecannon_of_Venom,
-    }, -- Deadly Venom (the Vicecanon's)
-
-    [127032] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_phoenix.dds",
-        tooltip = Tooltips.Generic_Damage_Shield_Duration,
-    }, -- Phoenix (of the Phoenix)
+    [79469] = { icon = "LuiExtended/media/icons/abilities/ability_set_vicecanon_of_venom.dds", name = Abilities.Set_Vicecannon_of_Venom, tooltip = Tooltips.Set_Vicecanon_of_Venom }, -- Deadly Venom (the Vicecanon's)
+    [79471] = { icon = "LuiExtended/media/icons/abilities/ability_set_vicecanon_of_venom.dds", name = Abilities.Set_Vicecannon_of_Venom }, -- Deadly Venom (the Vicecanon's)
+    [127032] = { icon = "LuiExtended/media/icons/abilities/ability_set_phoenix.dds", tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Phoenix (of the Phoenix)
     [127036] = { icon = "LuiExtended/media/icons/abilities/ability_set_phoenix.dds", name = Abilities.Set_Phoenix }, -- Phoenix's Flame (of the Phoenix)
-
-    [69567] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_reactive_armor.dds",
-        name = Abilities.Set_Reactive_Armor,
-        tooltip = Tooltips.Generic_Reduce_Damage_Taken,
-        tooltipValue2 = 33,
-    }, -- Reactive Armor Effects (Reactive)
-
+    [69567] = { icon = "LuiExtended/media/icons/abilities/ability_set_reactive_armor.dds", name = Abilities.Set_Reactive_Armor, tooltip = Tooltips.Generic_Reduce_Damage_Taken, tooltipValue2 = 33 }, -- Reactive Armor Effects (Reactive)
     -- Cyrodiil Sets (Light)
-    [34605] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_almalexias_mercy.dds",
-        tooltip = Tooltips.Generic_HoT,
-        tooltipValue2 = 1,
-    }, -- Almalexia's Mercy (of Almalexia's Mercy)
-    [70392] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_arch-mage.dds",
-        tooltip = Tooltips.Generic_Magicka_Recovery_Duration_Value,
-        tooltipValue2 = 506,
-    }, -- The Arch-Mage (of the Arch-Mage)
-
+    [34605] = { icon = "LuiExtended/media/icons/abilities/ability_set_almalexias_mercy.dds", tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Almalexia's Mercy (of Almalexia's Mercy)
+    [70392] = { icon = "LuiExtended/media/icons/abilities/ability_set_arch-mage.dds", tooltip = Tooltips.Generic_Magicka_Recovery_Duration_Value, tooltipValue2 = 506 }, -- The Arch-Mage (of the Arch-Mage)
     [117359] = { icon = "LuiExtended/media/icons/abilities/ability_set_curse_eater.dds" }, -- Curse-Eater (Curse-Eating)
-
-    [111550] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_light_of_cyrodiil.dds",
-        tooltip = Tooltips.Set_Light_of_Cyrodiil,
-    }, -- Light of Cyrodiil (of Cyrodiil's Light)
+    [111550] = { icon = "LuiExtended/media/icons/abilities/ability_set_light_of_cyrodiil.dds", tooltip = Tooltips.Set_Light_of_Cyrodiil }, -- Light of Cyrodiil (of Cyrodiil's Light)
     [33498] = { icon = "LuiExtended/media/icons/abilities/ability_set_desert_rose.dds" }, -- Desert Rose (of the Desert Rose)
-
     -- Cyrodiil Sets (Medium)
     [34509] = { icon = "LuiExtended/media/icons/abilities/ability_set_kynes_kiss.dds" }, -- Kyne's Kiss (of Kyne's Kiss)
     [70492] = { icon = "LuiExtended/media/icons/abilities/ability_set_kynes_kiss.dds" }, -- Kyne's Kiss (of Kyne's Kiss)
-    [34384] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_morag_tong.dds",
-        tooltip = Tooltips.Set_Morag_Tong,
-    }, -- The Morag Tong (of the Morag Tong)
-
+    [34384] = { icon = "LuiExtended/media/icons/abilities/ability_set_morag_tong.dds", tooltip = Tooltips.Set_Morag_Tong }, -- The Morag Tong (of the Morag Tong)
     [117391] = { icon = "LuiExtended/media/icons/abilities/ability_set_sentry.dds", tooltip = Tooltips.Set_Sentry }, -- Sentry (of the Sentry)
-    [117397] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_sentry_icd.dds",
-        name = zo_strformat("<<1>> <<2>>", Abilities.Set_Sentry, Abilities.Set_Cooldown),
-        tooltip = Tooltips.Generic_Set_ICD,
-        tooltipValue2 = Abilities.Set_Sentry,
-        type = BUFF_EFFECT_TYPE_DEBUFF,
-        unbreakable = 1,
-    }, -- Exhausted Sentry (of the Sentry)
-
+    [117397] = { icon = "LuiExtended/media/icons/abilities/ability_set_sentry_icd.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Set_Sentry, Abilities.Set_Cooldown), tooltip = Tooltips.Generic_Set_ICD, tooltipValue2 = Abilities.Set_Sentry, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Exhausted Sentry (of the Sentry)
     [57180] = { icon = "esoui/art/icons/achievement_thievesguild_011.dds" }, -- Shadow Walker (of the Shadow Walker)
     [57181] = { icon = "esoui/art/icons/achievement_thievesguild_011.dds" }, -- Shadow Walker (of the Shadow Walker)
     [47358] = { icon = "LuiExtended/media/icons/abilities/ability_set_vengeance_leech.dds" }, -- Vengeance Leech (of Vengeance Leech)
     [47359] = { icon = "LuiExtended/media/icons/abilities/ability_set_vengeance_leech.dds" }, -- Vengeance Leech (of Vengeance Leech)
     [47360] = { icon = "LuiExtended/media/icons/abilities/ability_set_vengeance_leech.dds" }, -- Vengeance Leech (of Vengeance Leech)
-
     -- Cyrodiil Sets (Heavy)
     [34787] = { icon = "LuiExtended/media/icons/abilities/ability_set_affliction.dds" }, -- Affliction (Afflicted)
-    [29122] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_beckoning_steel.dds",
-        tooltip = Tooltips.Set_Beckoning_Steel,
-    }, -- Beckoning Steel (Beckoning Steel)
-
+    [29122] = { icon = "LuiExtended/media/icons/abilities/ability_set_beckoning_steel.dds", tooltip = Tooltips.Set_Beckoning_Steel }, -- Beckoning Steel (Beckoning Steel)
     [111575] = { icon = "LuiExtended/media/icons/abilities/ability_set_crest_of_cyrodiil.dds" }, -- Crest of Cyrodiil (Cyrodiil's Crest)
-
-    [127280] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_the_ravager.dds",
-        tooltip = Tooltips.Set_Ravager,
-    }, -- The Ravager (Ravaging)
-    [127284] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_the_ravager.dds",
-        tooltip = Tooltips.Set_Ravager,
-    }, -- The Ravager (Ravaging)
+    [127280] = { icon = "LuiExtended/media/icons/abilities/ability_set_the_ravager.dds", tooltip = Tooltips.Set_Ravager }, -- The Ravager (Ravaging)
+    [127284] = { icon = "LuiExtended/media/icons/abilities/ability_set_the_ravager.dds", tooltip = Tooltips.Set_Ravager }, -- The Ravager (Ravaging)
     [34512] = { icon = "LuiExtended/media/icons/abilities/ability_set_the_juggernaut.dds" }, -- The Juggernaut (of the Juggernaut)
-    [142401] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_the_juggernaut.dds",
-        tooltip = Tooltips.Generic_Physical_Spell_Resist_Value,
-        tooltipValue2 = 20000,
-    }, -- The Juggernaut (of the Juggernaut)
-
+    [142401] = { icon = "LuiExtended/media/icons/abilities/ability_set_the_juggernaut.dds", tooltip = Tooltips.Generic_Physical_Spell_Resist_Value, tooltipValue2 = 20000 }, -- The Juggernaut (of the Juggernaut)
     -- Rewards for the Worthy Sets
     [113523] = { icon = "LuiExtended/media/icons/abilities/ability_set_battalion_defender.dds" }, -- Battalion Defender (Battalion Defender)
-    [113461] = {
-        icon = "esoui/art/icons/achievement_murkmire_rescue_villagers.dds",
-        name = Abilities.Set_Soldier_of_Anguish,
-        tooltip = Tooltips.Set_Soldier_of_Anguish,
-    }, -- Heal Absorption (Soldier of Anguish)
+    [113461] = { icon = "esoui/art/icons/achievement_murkmire_rescue_villagers.dds", name = Abilities.Set_Soldier_of_Anguish, tooltip = Tooltips.Set_Soldier_of_Anguish }, -- Heal Absorption (Soldier of Anguish)
     [113382] = { icon = "esoui/art/icons/achievement_blackrose_boss_5.dds", tooltip = Tooltips.Set_Spell_Strategist }, -- Spell Strategist (Spell Strategist)
     [113417] = { hide = true }, -- Spell Strategist (Spell Strategist)
-
-    [76950] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_warriors_fury.dds",
-        tooltip = Tooltips.Set_Warriors_Fury,
-    }, -- Warrior's Fury (of Fury)
-    [128494] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_warriors_fury.dds",
-        tooltip = Tooltips.Set_Warriors_Fury,
-    }, -- Warrior's Fury (of Fury)
-    [76936] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_transmutation.dds",
-        tooltip = Tooltips.Set_Robes_of_Transmutation,
-    }, -- Transmutation (of Transmutation)
+    [76950] = { icon = "LuiExtended/media/icons/abilities/ability_set_warriors_fury.dds", tooltip = Tooltips.Set_Warriors_Fury }, -- Warrior's Fury (of Fury)
+    [128494] = { icon = "LuiExtended/media/icons/abilities/ability_set_warriors_fury.dds", tooltip = Tooltips.Set_Warriors_Fury }, -- Warrior's Fury (of Fury)
+    [76936] = { icon = "LuiExtended/media/icons/abilities/ability_set_transmutation.dds", tooltip = Tooltips.Set_Robes_of_Transmutation }, -- Transmutation (of Transmutation)
     [76938] = { icon = "LuiExtended/media/icons/abilities/ability_set_vicious_death.dds" }, -- Vicious Death (of Vicious Death)
-
     -- Maelstrom Arena Sets
-    [127081] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_sword_fire.dds",
-        tooltip = Tooltips.Set_Succession_Flame,
-    }, -- Flame Succession (of Succession)
-    [127084] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_sword_shock.dds",
-        tooltip = Tooltips.Set_Succession_Shock,
-    }, -- Shock Succession (of Succession)
-    [127088] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_sword_frost.dds",
-        tooltip = Tooltips.Set_Succession_Frost,
-    }, -- Frost Succession (of Succession)
-    [73296] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_ice_pillar.dds",
-        name = Abilities.Set_Winterborn,
-        duration = 0,
-        groundLabel = true,
-        tooltip = Tooltips.Generic_Snare_No_Dur,
-        tooltipValue2 = 50,
-    }, -- Winterborn Snare (Winterborn)
+    [127081] = { icon = "LuiExtended/media/icons/abilities/ability_spell_sword_fire.dds", tooltip = Tooltips.Set_Succession_Flame }, -- Flame Succession (of Succession)
+    [127084] = { icon = "LuiExtended/media/icons/abilities/ability_spell_sword_shock.dds", tooltip = Tooltips.Set_Succession_Shock }, -- Shock Succession (of Succession)
+    [127088] = { icon = "LuiExtended/media/icons/abilities/ability_spell_sword_frost.dds", tooltip = Tooltips.Set_Succession_Frost }, -- Frost Succession (of Succession)
+    [73296] = { icon = "LuiExtended/media/icons/abilities/ability_spell_ice_pillar.dds", name = Abilities.Set_Winterborn, duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 50 }, -- Winterborn Snare (Winterborn)
     [71646] = { icon = "LuiExtended/media/icons/abilities/ability_spell_ice_pillar.dds" }, -- Winterborn (Winterborn)
-    [71188] = {
-        icon = "esoui/art/icons/ability_rogue_019.dds",
-        name = Abilities.Set_Glorious_Defender,
-        tooltip = Tooltips.Set_Glorious_Defender,
-    }, -- Glorious Defense (of Glory)
+    [71188] = { icon = "esoui/art/icons/ability_rogue_019.dds", name = Abilities.Set_Glorious_Defender, tooltip = Tooltips.Set_Glorious_Defender }, -- Glorious Defense (of Glory)
     [71605] = { icon = "LuiExtended/media/icons/abilities/ability_summon_beast_bear.dds" }, -- Hunt Leader (of the Hunt)
     [74106] = { icon = "LuiExtended/media/icons/abilities/ability_summon_beast_bear.dds" }, -- Hunt Leader (of the Hunt)
-    [71193] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_para_bellum.dds",
-        name = Abilities.Set_Para_Bellum,
-        tooltip = Tooltips.Set_Para_Bellum,
-    }, -- Para Bellum Shield (Para Bellum)
-
+    [71193] = { icon = "LuiExtended/media/icons/abilities/ability_set_para_bellum.dds", name = Abilities.Set_Para_Bellum, tooltip = Tooltips.Set_Para_Bellum }, -- Para Bellum Shield (Para Bellum)
     -- Vatesharn Hollows Sets
-    [147675] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_hex_siphon.dds",
-        tooltip = Tooltips.Set_Hex_Siphon,
-    }, -- Hex Siphon (Hex Siphoner's)
+    [147675] = { icon = "LuiExtended/media/icons/abilities/ability_set_hex_siphon.dds", tooltip = Tooltips.Set_Hex_Siphon }, -- Hex Siphon (Hex Siphoner's)
     [147677] = { icon = "LuiExtended/media/icons/abilities/ability_set_hex_siphon.dds" }, -- Hex Siphon (Hex Siphoner's)
-    [147686] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_pestilent_host.dds",
-        tooltip = Tooltips.Generic_Bleed,
-        tooltipValue2 = 1,
-    }, -- Pestilent Host (of the Pestilent Host)
-
-    [147692] = {
-        icon = "LuiExtended/media/icons/abilities/ability_set_explosive_rebuke.dds",
-        type = BUFF_EFFECT_TYPE_DEBUFF,
-        unbreakable = 1,
-        tooltip = Tooltips.Set_Explosive_Rebuke,
-    }, -- Explosive Rebuke (of Explosive Rebuke)
+    [147686] = { icon = "LuiExtended/media/icons/abilities/ability_set_pestilent_host.dds", tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Pestilent Host (of the Pestilent Host)
+    [147692] = { icon = "LuiExtended/media/icons/abilities/ability_set_explosive_rebuke.dds", type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Set_Explosive_Rebuke }, -- Explosive Rebuke (of Explosive Rebuke)
     [147694] = { icon = "LuiExtended/media/icons/abilities/ability_set_explosive_rebuke.dds" }, -- Explosive Rebuke (of Explosive Rebuke)
 
     -- Disguises
@@ -6777,52 +4715,25 @@ Effects.EffectOverride = {
     [27457] = { tooltip = Tooltips.Disguise_Seadrake }, -- Seadrake Disguise (Seadrake Disguise)
     [32045] = { tooltip = Tooltips.Disguise_Servants_Robes }, -- Servant Costume (Servant's Robes)
     [43722] = { tooltip = Tooltips.Disguise_Vulkhel_Guard }, -- First Auridon Marine Disguise (Vulkhel Guard Marcine Disguise)
-
-    [82631] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_monks_disguise.dds",
-        name = Abilities.Disguise_Monks_Disguise,
-    }, -- Monk Disguise Timer (Monk's Disguise)
+    [82631] = { icon = "LuiExtended/media/icons/disguises/disguise_monks_disguise.dds", name = Abilities.Disguise_Monks_Disguise }, -- Monk Disguise Timer (Monk's Disguise)
 
     ----------------------------------------------------------------
     -- WORLD EVENTS  -----------------------------------------------
     ----------------------------------------------------------------
 
     -- Dark Anchor
-    [86717] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_anchor_drop.dds",
-        name = Abilities.Innate_Anchor_Drop,
-    }, -- Drop Anchor
+    [86717] = { icon = "LuiExtended/media/icons/abilities/ability_spell_anchor_drop.dds", name = Abilities.Innate_Anchor_Drop }, -- Drop Anchor
     [46690] = { hide = true }, -- Power of the Daedra
-    [46689] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_power_of_the_daedra.dds",
-        name = Abilities.Innate_Power_of_the_Daedra,
-    }, -- Vitality of the Daedra
-    [51632] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_power_of_the_daedra.dds",
-        name = Abilities.Innate_Power_of_the_Daedra,
-    }, -- Vitality of the Daedra
-    [51633] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_power_of_the_daedra.dds",
-        name = Abilities.Innate_Power_of_the_Daedra,
-    }, -- Vitality of the Daedra
+    [46689] = { icon = "LuiExtended/media/icons/abilities/ability_spell_power_of_the_daedra.dds", name = Abilities.Innate_Power_of_the_Daedra }, -- Vitality of the Daedra
+    [51632] = { icon = "LuiExtended/media/icons/abilities/ability_spell_power_of_the_daedra.dds", name = Abilities.Innate_Power_of_the_Daedra }, -- Vitality of the Daedra
+    [51633] = { icon = "LuiExtended/media/icons/abilities/ability_spell_power_of_the_daedra.dds", name = Abilities.Innate_Power_of_the_Daedra }, -- Vitality of the Daedra
     [95820] = { icon = "LuiExtended/media/icons/abilities/ability_spell_static_charge.dds" }, -- Static Charge
     [95841] = { icon = "LuiExtended/media/icons/abilities/ability_spell_static_charge.dds" }, -- Static Charge
-    [95813] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_static_charge.dds",
-        type = BUFF_EFFECT_TYPE_DEBUFF,
-        duration = 0,
-        unbreakable = 1,
-        tooltip = Tooltips.Skill_Static_Charge,
-        groundLabel = true,
-    }, -- Static Charge
+    [95813] = { icon = "LuiExtended/media/icons/abilities/ability_spell_static_charge.dds", type = BUFF_EFFECT_TYPE_DEBUFF, duration = 0, unbreakable = 1, tooltip = Tooltips.Skill_Static_Charge, groundLabel = true }, -- Static Charge
     [46291] = { hide = true }, -- Rain of Doom
-    [46293] = { hide = true }, -- Stun
-
-    -- Dark Anchor Bosses
+    [46293] = { hide = true }, -- Stun-- Dark Anchor Bosses
     [89249] = { hide = true }, -- Summon Daedra (Ozozzachar)
-    [89251] = { hide = true }, -- Summon Daedra (Ozozzachar)
-
-    -- Misc World + Theater
+    [89251] = { hide = true }, -- Summon Daedra (Ozozzachar)-- Misc World + Theater
     [822] = { hide = true }, -- Ward
     [48899] = { icon = "esoui/art/icons/achievement_newlifefestival_007.dds", tooltip = Tooltips.Innate_Firelight }, -- Firelight
 
@@ -6837,11 +4748,7 @@ Effects.EffectOverride = {
     [45011] = { icon = "LuiExtended/media/icons/abilities/passive_dragonknight_combustion.dds" }, -- Combustion (Combustion - Rank 2)
     [108816] = { icon = "LuiExtended/media/icons/abilities/ability_dragonknight_combustion.dds" }, -- Combustion (Combustion - Rank 2)
     [108815] = { icon = "LuiExtended/media/icons/abilities/ability_dragonknight_combustion.dds" }, -- Combustion (Combustion - Rank 2)
-    [160949] = {
-        icon = "LuiExtended/media/icons/abilities/ability_dragonknight_warmth.dds",
-        tooltip = Tooltips.Generic_Snare,
-        tooltipValue2 = 30,
-    }, -- Warmth -- TODO: Maybe find a way to determine rank for the 15% or 30% snare tooltip
+    [160949] = { icon = "LuiExtended/media/icons/abilities/ability_dragonknight_warmth.dds", tooltip = Tooltips.Generic_Snare, tooltipValue2 = 30 }, -- Warmth -- TODO: Maybe find a way to determine rank for the 15% or 30% snare tooltip
 
     [29455] = { icon = "esoui/art/icons/passive_dragonknight_007.dds" }, -- Iron Skin (Iron Skin - Rank 1)
     [44922] = { icon = "esoui/art/icons/passive_dragonknight_007.dds" }, -- Iron Skin (Iron Skin - Rank 2)
@@ -6872,10 +4779,7 @@ Effects.EffectOverride = {
     -- Lava Whip / Molten Whip / Flame Lash
     [23808] = { tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off Balance (Lava Whip)
     [20806] = { tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off Balance (Molten Whip)
-    [122658] = {
-        icon = "LuiExtended/media/icons/abilities/ability_dragonknight_seething_fury.dds",
-        tooltip = Tooltips.Skill_Seething_Fury,
-    }, -- Seething Fury (Molten Whip)
+    [122658] = { icon = "LuiExtended/media/icons/abilities/ability_dragonknight_seething_fury.dds", tooltip = Tooltips.Skill_Seething_Fury }, -- Seething Fury (Molten Whip)
     [34117] = { tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off Balance (Flame Lash)
     [20824] = { icon = "LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds" }, -- Power Lash (Flame Lash)
     [23105] = { icon = "LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds" }, -- Power Lash (Flame Lash)
@@ -6906,11 +4810,7 @@ Effects.EffectOverride = {
     [32958] = { tooltip = Tooltips.Skill_Shifting_Standard }, -- Shifting Standard (Shifting Standard)
     [70735] = { hide = true }, -- Shifting Standard (Shifting Standard)
     [32947] = { tooltip = Tooltips.Skill_Dragonknight_Standard }, -- Standard of Might (Standard of Might)
-    [32956] = {
-        icon = "esoui/art/icons/ability_dragonknight_006_b.dds",
-        tooltip = Tooltips.Skill_Standard_of_Might_Buff,
-        groundLabel = true,
-    }, -- Standard of Might (Standard of Might)
+    [32956] = { icon = "esoui/art/icons/ability_dragonknight_006_b.dds", tooltip = Tooltips.Skill_Standard_of_Might_Buff, groundLabel = true }, -- Standard of Might (Standard of Might)
 
     [28995] = { groundLabel = true, tooltip = Tooltips.Skill_Dragonknight_Standard_Ground, tooltipValue2 = 1 }, -- Dragonknight Standard
     [32960] = { groundLabel = true, tooltip = Tooltips.Skill_Dragonknight_Standard_Ground, tooltipValue2 = 1 }, -- Shifting Standard
@@ -6986,14 +4886,7 @@ Effects.EffectOverride = {
     [20779] = { tooltip = Tooltips.Skill_Ash_Cloud }, -- Cinder Storm (Cinder Storm)
     [20780] = { duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 70 }, -- Cinder Storm (Cinder Storm)
     [32710] = { tooltip = Tooltips.Skill_Eruption }, -- Eruption (Eruption)
-    [32712] = {
-        duration = 0,
-        groundLabel = true,
-        tooltip = Tooltips.Generic_AOE_Snare_Fire,
-        tooltipValue2 = 1,
-        tooltipValue3 = 70,
-        hideGround = true,
-    }, -- Eruption (Eruption)
+    [32712] = { duration = 0, groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Fire, tooltipValue2 = 1, tooltipValue3 = 70, hideGround = true }, -- Eruption (Eruption)
 
     [61772] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Ash Cloud (Ash Cloud)
     [34791] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Cinder Storm (Cinder Storm)
@@ -7064,11 +4957,7 @@ Effects.EffectOverride = {
     [33357] = { tooltip = Tooltips.Skill_Mark_Target }, -- Mark Target (Mark Target)
     [33373] = { icon = "esoui/art/icons/ability_nightblade_014.dds" }, -- Mark Target (Mark Target)
     [36968] = { tooltip = Tooltips.Skill_Mark_Target }, -- Piercing Mark (Piercing Mark)
-    [36994] = {
-        icon = "LuiExtended/media/icons/abilities/ability_debuff_marked.dds",
-        name = Abilities.Skill_Marked,
-        tooltip = Tooltips.Generic_Marked,
-    }, -- Piercing Mark (Piercing Mark)
+    [36994] = { icon = "LuiExtended/media/icons/abilities/ability_debuff_marked.dds", name = Abilities.Skill_Marked, tooltip = Tooltips.Generic_Marked }, -- Piercing Mark (Piercing Mark)
     [36983] = { icon = "esoui/art/icons/ability_nightblade_014_b.dds" }, -- Mark Target (Piercing Mark)
     [36967] = { tooltip = Tooltips.Skill_Reapers_Mark }, -- Reaper's Mark (Reaper's Mark)
     [36975] = { icon = "esoui/art/icons/ability_nightblade_014_a.dds" }, -- Reaper's Mark (Reaper's Mark)
@@ -7084,24 +4973,12 @@ Effects.EffectOverride = {
     [122586] = { tooltip = Tooltips.Skill_Grim_Focus_Defense }, -- Merciless Resolve (Merciless Resolve)
 
     -- Death Stroke / Incapacitating Strike / Soul Harvest
-    [61389] = {
-        icon = "esoui/art/icons/ability_nightblade_007.dds",
-        name = Abilities.Skill_Death_Stroke,
-        tooltip = Tooltips.Skill_Death_Stroke_Debuff,
-    }, -- Damage Taken Increased (Death Stroke)
+    [61389] = { icon = "esoui/art/icons/ability_nightblade_007.dds", name = Abilities.Skill_Death_Stroke, tooltip = Tooltips.Skill_Death_Stroke_Debuff }, -- Damage Taken Increased (Death Stroke)
     [125922] = { icon = "esoui/art/icons/ability_nightblade_007_a.dds" }, -- Reave (Incapacitating Strike)
     [125923] = { icon = "esoui/art/icons/ability_nightblade_007_a.dds" }, -- Reave (Incapacitating Strike)
     [61393] = { name = Abilities.Skill_Incapacitating_Strike, tooltip = Tooltips.Skill_Death_Stroke_Debuff }, -- Damage Taken Increased (Incapacitating Strike)
-    [113107] = {
-        icon = "esoui/art/icons/ability_nightblade_007_c.dds",
-        name = Abilities.Skill_Incapacitating_Strike,
-        tooltip = Tooltips.Skill_Incapacitating_Strike,
-    }, -- Damage Taken Increased (Incapacitating Strike)
-    [126444] = {
-        icon = "esoui/art/icons/ability_nightblade_007_c.dds",
-        tooltip = Tooltips.Skill_Incapacitating_Strike,
-        hideReduce = true,
-    }, -- Incapacitating Strike (Incapacitating Strike)
+    [113107] = { icon = "esoui/art/icons/ability_nightblade_007_c.dds", name = Abilities.Skill_Incapacitating_Strike, tooltip = Tooltips.Skill_Incapacitating_Strike }, -- Damage Taken Increased (Incapacitating Strike)
+    [126444] = { icon = "esoui/art/icons/ability_nightblade_007_c.dds", tooltip = Tooltips.Skill_Incapacitating_Strike, hideReduce = true }, -- Incapacitating Strike (Incapacitating Strike)
     [61400] = { name = Abilities.Skill_Soul_Harvest, tooltip = Tooltips.Skill_Death_Stroke_Debuff }, -- Damage Taken Increased (Soul Harvest)
     [36519] = { icon = "esoui/art/icons/ability_nightblade_007_b.dds", name = Abilities.Skill_Soul_Harvest }, -- Rapid Stroke Passive (Soul Harvest)
 
@@ -7145,14 +5022,8 @@ Effects.EffectOverride = {
     [35438] = { hide = true, tooltip = Tooltips.Skill_Dark_Shade }, -- Summon Shade (Dark Shade)
     [88677] = { hide = true, tooltip = Tooltips.Skill_Dark_Shade }, -- Summon Shade (Dark Shade) -- Khajiit
     [88678] = { hide = true, tooltip = Tooltips.Skill_Dark_Shade }, -- Summon Shade (Dark Shade) -- Argonian
-    [123945] = {
-        icon = "LuiExtended/media/icons/abilities/ability_nightblade_corrode.dds",
-        name = Abilities.Skill_Corrosive_Strike,
-    }, -- Corrosive Flurry (Dark Shade)
-    [108936] = {
-        icon = "LuiExtended/media/icons/abilities/ability_nightblade_whirlwind.dds",
-        name = Abilities.Skill_Corrosive_Spin,
-    }, -- Corrosive Slash (Dark Shade)
+    [123945] = { icon = "LuiExtended/media/icons/abilities/ability_nightblade_corrode.dds", name = Abilities.Skill_Corrosive_Strike }, -- Corrosive Flurry (Dark Shade)
+    [108936] = { icon = "LuiExtended/media/icons/abilities/ability_nightblade_whirlwind.dds", name = Abilities.Skill_Corrosive_Spin }, -- Corrosive Slash (Dark Shade)
 
     [38528] = { name = Abilities.Skill_Shadow_Image, hide = true, tooltip = Tooltips.Skill_Shadow_Image }, -- Shadow (Shadow Image)
     [88696] = { name = Abilities.Skill_Shadow_Image, hide = true, tooltip = Tooltips.Skill_Shadow_Image }, -- Shadow (Shadow Image) -- Khajiit
@@ -7169,13 +5040,7 @@ Effects.EffectOverride = {
     [36495] = { tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 70, groundLabel = true }, -- Bolstering Darkness (Bolstering Darkness)
     [36485] = { tooltip = Tooltips.Skill_Veil_of_Blades }, -- Veil of Blades (Veil of Blades)
     [36490] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Magic, tooltipValue2 = 1, tooltipValue3 = 70 }, -- Veil of Blades (Veil of Blades)
-    [36487] = {
-        tooltip = Tooltips.Generic_AOE_Snare_Magic,
-        tooltipValue2 = 1,
-        tooltipValue3 = 70,
-        groundLabel = true,
-        hideGround = true,
-    }, -- Veil of Blades (Veil of Blades)
+    [36487] = { tooltip = Tooltips.Generic_AOE_Snare_Magic, tooltipValue2 = 1, tooltipValue3 = 70, groundLabel = true, hideGround = true }, -- Veil of Blades (Veil of Blades)
 
     -- Strife / Funnel Health / Swallow Soul
     [33292] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Strife (Strife)
@@ -7189,25 +5054,11 @@ Effects.EffectOverride = {
 
     -- Cripple / Debilitate / Crippling Grasp
     [33333] = { tooltip = Tooltips.Skill_Cripple, tooltipValue2 = 30 }, -- Cripple (Cripple)
-    [33327] = {
-        icon = "esoui/art/icons/ability_nightblade_006.dds",
-        tooltip = Tooltips.Skill_Cripple,
-        tooltipValue2 = 30,
-        hideReduce = true,
-    }, -- Cripple (Cripple)
+    [33327] = { icon = "esoui/art/icons/ability_nightblade_006.dds", tooltip = Tooltips.Skill_Cripple, tooltipValue2 = 30, hideReduce = true }, -- Cripple (Cripple)
     [36947] = { tooltip = Tooltips.Skill_Debilitate, tooltipValue2 = 50 }, -- Debilitate (Debilitate)
-    [36945] = {
-        icon = "esoui/art/icons/ability_nightblade_006_a.dds",
-        tooltip = Tooltips.Skill_Debilitate,
-        tooltipValue2 = 50,
-        hideReduce = true,
-    }, -- Debilitate (Debilitate)
+    [36945] = { icon = "esoui/art/icons/ability_nightblade_006_a.dds", tooltip = Tooltips.Skill_Debilitate, tooltipValue2 = 50, hideReduce = true }, -- Debilitate (Debilitate)
     [36960] = { tooltip = Tooltips.Skill_Crippling_Grasp }, -- Crippling Grasp (Crippling Grasp)
-    [36958] = {
-        icon = "esoui/art/icons/ability_nightblade_006_b.dds",
-        tooltip = Tooltips.Skill_Crippling_Grasp,
-        hideReduce = true,
-    }, -- Crippling Grasp (Crippling Grasp)
+    [36958] = { icon = "esoui/art/icons/ability_nightblade_006_b.dds", tooltip = Tooltips.Skill_Crippling_Grasp, hideReduce = true }, -- Crippling Grasp (Crippling Grasp)
     [36963] = { icon = "esoui/art/icons/ability_nightblade_006_b.dds" }, -- Crippling Grasp (Crippling Grasp)
     [36964] = { tooltip = Tooltips.Skill_Crippling_Grasp, hideReduce = true }, -- Crippling Grasp (Crippling Grasp)
 
@@ -7242,16 +5093,8 @@ Effects.EffectOverride = {
 
     [31378] = { icon = "esoui/art/icons/ability_sorcerer_024.dds" }, -- Persistance
     [45165] = { icon = "esoui/art/icons/ability_sorcerer_024.dds" }, -- Persistance
-    [108858] = {
-        icon = "LuiExtended/media/icons/abilities/ability_sorcerer_persistence.dds",
-        name = Abilities.Passive_Persistence,
-        tooltip = Tooltips.Skill_Persistence_Rank_1,
-    }, -- Persistance Cost Reduction (Persistence - Rank 1)
-    [108862] = {
-        icon = "LuiExtended/media/icons/abilities/ability_sorcerer_persistence.dds",
-        name = Abilities.Passive_Persistence,
-        tooltip = Tooltips.Skill_Persistence_Rank_2,
-    }, -- Persistance Cost Reduction (Persistence - Rank 2)
+    [108858] = { icon = "LuiExtended/media/icons/abilities/ability_sorcerer_persistence.dds", name = Abilities.Passive_Persistence, tooltip = Tooltips.Skill_Persistence_Rank_1 }, -- Persistance Cost Reduction (Persistence - Rank 1)
+    [108862] = { icon = "LuiExtended/media/icons/abilities/ability_sorcerer_persistence.dds", name = Abilities.Passive_Persistence, tooltip = Tooltips.Skill_Persistence_Rank_2 }, -- Persistance Cost Reduction (Persistence - Rank 2)
 
     [31384] = { icon = "LuiExtended/media/icons/abilities/ability_sorcerer_blood_magic.dds" }, -- Blood Magic (Blood Magic - Rank 1)
     [45173] = { icon = "LuiExtended/media/icons/abilities/ability_sorcerer_blood_magic.dds" }, -- Blood Magic (Blood Magic - Rank 2)
@@ -7323,17 +5166,9 @@ Effects.EffectOverride = {
     -- Daedric Mines / Daedric Tomb / Daedric Minefield
     [24830] = { icon = "esoui/art/icons/ability_sorcerer_daedric_mines.dds", tooltip = Tooltips.Skill_Daedric_Mines }, -- Daedric Mines (Daedric Mines)
     [27935] = { tooltip = Tooltips.Generic_Immobilize }, -- Daedric Mines (Daedric Mines)
-    [24847] = {
-        icon = "esoui/art/icons/ability_sorcerer_daedric_tomb.dds",
-        name = Abilities.Skill_Daedric_Tomb,
-        tooltip = Tooltips.Skill_Daedric_Mines,
-    }, -- Daedric Mines (Daedric Tomb)
+    [24847] = { icon = "esoui/art/icons/ability_sorcerer_daedric_tomb.dds", name = Abilities.Skill_Daedric_Tomb, tooltip = Tooltips.Skill_Daedric_Mines }, -- Daedric Mines (Daedric Tomb)
     [28452] = { tooltip = Tooltips.Generic_Immobilize }, -- Daedric Tomb (Daedric Tomb)
-    [25158] = {
-        icon = "esoui/art/icons/ability_sorcerer_daedric_minefield.dds",
-        name = Abilities.Skill_Daedric_Minefield,
-        tooltip = Tooltips.Skill_Daedric_Mines,
-    }, -- Daedric Mines (Daedric Minefield)
+    [25158] = { icon = "esoui/art/icons/ability_sorcerer_daedric_minefield.dds", name = Abilities.Skill_Daedric_Minefield, tooltip = Tooltips.Skill_Daedric_Mines }, -- Daedric Mines (Daedric Minefield)
     [28454] = { tooltip = Tooltips.Generic_Immobilize }, -- Daedric Minefield (Daedric Minefield)
 
     -- Negate Magic / Suppression Field / Absorption Field
@@ -7341,12 +5176,7 @@ Effects.EffectOverride = {
     [29824] = { duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Silence_No_Dur }, -- Negate Magic (Negate Magic)
     [47147] = { duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Stun_No_Dur }, -- Negate Magic (Negate Magic)
     [28341] = { tooltip = Tooltips.Skill_Suppression_Field }, -- Suppression Field (Suppression Field)
-    [47160] = {
-        duration = 0,
-        groundLabel = true,
-        tooltip = Tooltips.Skill_Suppression_Field_Silence,
-        hideGround = true,
-    }, -- Suppression Field (Suppression Field)
+    [47160] = { duration = 0, groundLabel = true, tooltip = Tooltips.Skill_Suppression_Field_Silence, hideGround = true }, -- Suppression Field (Suppression Field)
     [47159] = { duration = 0, groundLabel = true, tooltip = Tooltips.Skill_Suppression_Field_Stun }, -- Suppression Field (Suppression Field)
     [80435] = { groundLabel = true, tooltip = Tooltips.Skill_Suppression_Field_Silence }, -- Suppression Field (Suppression Field)
     [28348] = { tooltip = Tooltips.Skill_Absorption_Field }, -- Absorption Field (Absorption Field)
@@ -7357,40 +5187,20 @@ Effects.EffectOverride = {
     -- Summon Unstable Familiar / Summon Unstable Clannfear / Summon Volatile Familiar
     [27287] = { hide = true }, -- Birth Unstable Familiar (Summon Unstable Familiar - All Morphs)
     [23304] = { tooltip = Tooltips.Skill_Unstable_Familiar }, -- Summon Unstable Familiar (Summon Unstable Familiar)
-    [27850] = {
-        icon = "LuiExtended/media/icons/abilities/ability_sorcerer_familiar_melee.dds",
-        name = Abilities.Skill_Entropic_Touch,
-    }, -- Familiar Melee (Summon Unstable Familiar + Summon Volatile Familiar)
+    [27850] = { icon = "LuiExtended/media/icons/abilities/ability_sorcerer_familiar_melee.dds", name = Abilities.Skill_Entropic_Touch }, -- Familiar Melee (Summon Unstable Familiar + Summon Volatile Familiar)
     [108840] = { icon = "esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds" }, -- Summon Unstable Familiar (Summon Unstable Familiar)
-    [108842] = {
-        name = Abilities.Skill_Unstable_Pulse,
-        tooltip = Tooltips.Skill_Familiar_Damage_Pulse,
-        icon = "esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds",
-    }, -- Volatile Familiar Damage Pulsi (Summon Unstable Familiar)
-    [108843] = {
-        name = Abilities.Skill_Unstable_Pulse,
-        tooltip = Tooltips.Skill_Familiar_Damage_Pulse_Self,
-        icon = "esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds",
-    }, -- Volatile Familiar (Summon Unstable Familiar)
-    [108844] = {
-        name = Abilities.Skill_Unstable_Pulse,
-        icon = "esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds",
-    }, -- Familiar Damage Pulse (Summon Unstable Familiar)
+    [108842] = { name = Abilities.Skill_Unstable_Pulse, tooltip = Tooltips.Skill_Familiar_Damage_Pulse, icon = "esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds" }, -- Volatile Familiar Damage Pulsi (Summon Unstable Familiar)
+    [108843] = { name = Abilities.Skill_Unstable_Pulse, tooltip = Tooltips.Skill_Familiar_Damage_Pulse_Self, icon = "esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds" }, -- Volatile Familiar (Summon Unstable Familiar)
+    [108844] = { name = Abilities.Skill_Unstable_Pulse, icon = "esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds" }, -- Familiar Damage Pulse (Summon Unstable Familiar)
     [23319] = { tooltip = Tooltips.Skill_Unstable_Clannfear }, -- Summon Unstable Clannfear (Summon Unstable Clannfear)
-    [29528] = {
-        icon = "LuiExtended/media/icons/abilities/ability_sorcerer_headbutt.dds",
-        name = Abilities.Skill_Headbutt,
-    }, -- Claw (Summon Unstable Clannfear)
+    [29528] = { icon = "LuiExtended/media/icons/abilities/ability_sorcerer_headbutt.dds", name = Abilities.Skill_Headbutt }, -- Claw (Summon Unstable Clannfear)
     [29529] = { icon = "LuiExtended/media/icons/abilities/ability_sorcerer_tail_spike.dds" }, -- Tail Spike (Summon Unstable Clannfear)
     [23316] = { tooltip = Tooltips.Skill_Volatile_Familiar }, -- Summon Volatile Familiar (Summon Volatile Familiar)
     [77187] = { name = Abilities.Skill_Volatile_Pulse, tooltip = Tooltips.Skill_Familiar_Stun_Pulse }, -- Volatile Familiar Damage Pulsi (Summon Volatile Familiar)
     [88933] = { name = Abilities.Skill_Volatile_Pulse, tooltip = Tooltips.Skill_Familiar_Stun_Pulse_Self }, -- Volatile Familiar (Summon Volatile Familiar)
     [77186] = { name = Abilities.Skill_Volatile_Pulse }, -- Familiar Damage Pulse (Summon Volatile Familiar)
     [77243] = { tooltip = Tooltips.Generic_Stun, name = Abilities.Skill_Volatile_Pulse }, -- Volatile Familiar Stun (Summon Volatile Familiar)
-    [117255] = {
-        icon = "LuiExtended/media/icons/abilities/ability_sorcerer_familiar_melee.dds",
-        name = Abilities.Skill_Entropic_Touch,
-    }, -- Volatile Familiar Melee (Summon Volatile Familiar)
+    [117255] = { icon = "LuiExtended/media/icons/abilities/ability_sorcerer_familiar_melee.dds", name = Abilities.Skill_Entropic_Touch }, -- Volatile Familiar Melee (Summon Volatile Familiar)
 
     -- Daedric Curse / Daedric Prey / Haunting Curse
     [24326] = { tooltip = Tooltips.Skill_Daedric_Curse }, -- Daedric Curse (Daedric Curse)
@@ -7436,11 +5246,7 @@ Effects.EffectOverride = {
     [24163] = { tooltip = Tooltips.Skill_Bound_Armor, tooltipValue2 = 40 }, -- Bound Aegis (Bound Aegis)
 
     -- Summon Storm Atronach / Greater Storm Atronach / Summon Charged Atronach
-    [23428] = {
-        icon = "LuiExtended/media/icons/abilities/ability_sorcerer_atronach_zap.dds",
-        tooltip = Tooltips.Generic_Shock,
-        tooltipValue2 = 1,
-    }, -- Atronach Zap (Summon Storm Atronach - All Morphs)
+    [23428] = { icon = "LuiExtended/media/icons/abilities/ability_sorcerer_atronach_zap.dds", tooltip = Tooltips.Generic_Shock, tooltipValue2 = 1 }, -- Atronach Zap (Summon Storm Atronach - All Morphs)
     [23636] = { tooltip = Tooltips.Skill_Storm_Atronach }, -- Summon Storm Atronach (Summon Storm Atronach)
     [80459] = { tooltip = Tooltips.Skill_Storm_Atronach }, -- Summon Storm Atronach (Summon Storm Atronach)
     [23659] = { name = Abilities.Skill_Summon_Storm_Atronach }, -- Storm Atronach Impact (Summon Storm Atronach)
@@ -7490,12 +5296,7 @@ Effects.EffectOverride = {
     [132946] = { tooltip = Tooltips.Generic_Stun }, -- Streak (Streak)
     [131383] = { tooltip = Tooltips.Innate_Snare_Immobilize_Immunity }, -- Ball of Lightning (Ball of Lightning)
     [23283] = { hide = true }, -- Summoned Ball of Lightning (Ball of Lightning)
-    [23279] = {
-        icon = "LuiExtended/media/icons/abilities/ability_sorcerer_intercept.dds",
-        name = Abilities.Skill_Intercept,
-        hide = true,
-        tooltip = Tooltips.Skill_Intercept,
-    }, -- Ball of Lightning (Ball of Lightning)
+    [23279] = { icon = "LuiExtended/media/icons/abilities/ability_sorcerer_intercept.dds", name = Abilities.Skill_Intercept, hide = true, tooltip = Tooltips.Skill_Intercept }, -- Ball of Lightning (Ball of Lightning)
 
     -- Overload / Power Overload / Energy Overload
     [24785] = { tooltip = Tooltips.Skill_Overload }, -- Overload (Overload)
@@ -7524,21 +5325,13 @@ Effects.EffectOverride = {
     -- Restoring Light
     [31757] = { icon = "esoui/art/icons/ability_templar_032.dds" }, -- Sacred Ground
     [45207] = { icon = "esoui/art/icons/ability_templar_032.dds" }, -- Sacred Ground
-    [31759] = {
-        icon = "LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds",
-        forcedContainer = "short",
-        groundLabel = true,
-        tooltip = Tooltips.Skill_Sacred_Ground,
-    }, -- Minor Mending (Sacred Ground - Rank 1 & 2)
+    [31759] = { icon = "LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds", forcedContainer = "short", groundLabel = true, tooltip = Tooltips.Skill_Sacred_Ground }, -- Minor Mending (Sacred Ground - Rank 1 & 2)
     --[80195] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 40 }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
     --[80230] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 40 }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
     --[80261] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 40 }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
     [31760] = { icon = "esoui/art/icons/ability_templar_014.dds" }, -- Light Weaver
     [45208] = { icon = "esoui/art/icons/ability_templar_014.dds" }, -- Light Weaver
-    [52703] = {
-        icon = "LuiExtended/media/icons/abilities/ability_templar_light_weaver.dds",
-        name = Abilities.Passive_Light_Weaver,
-    }, -- Light Weaver Ultimate (Light Weaver - Rank 1 & 2)
+    [52703] = { icon = "LuiExtended/media/icons/abilities/ability_templar_light_weaver.dds", name = Abilities.Passive_Light_Weaver }, -- Light Weaver Ultimate (Light Weaver - Rank 1 & 2)
 
     ----------------------------------------------------------------
     -- TEMPLAR ACTIVE ABILITIES ------------------------------------
@@ -7548,10 +5341,7 @@ Effects.EffectOverride = {
     [76908] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Puncturing Strikes (Puncturing Strikes)
     [76912] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Biting Jabs (Biting Jabs)
     [55183] = { icon = "esoui/art/icons/ability_templar_reckless_attacks.dds", name = Abilities.Skill_Puncturing_Sweep }, -- Puncturing Sweep Heal (Puncturing Sweep)
-    [144127] = {
-        icon = "esoui/art/icons/ability_templar_reckless_attacks.dds",
-        name = Abilities.Skill_Puncturing_Sweep,
-    }, -- Puncturing Sweep Heal (Puncturing Sweep)
+    [144127] = { icon = "esoui/art/icons/ability_templar_reckless_attacks.dds", name = Abilities.Skill_Puncturing_Sweep }, -- Puncturing Sweep Heal (Puncturing Sweep)
     [76916] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Puncturing Sweep (Puncturing Sweep)
 
     -- Piercing Javelin / Aurora Javelin / Binding Javelin
@@ -7570,19 +5360,9 @@ Effects.EffectOverride = {
 
     -- Spear Shards / Luminous Shards / Blazing Spear
     [95933] = { icon = "esoui/art/icons/ability_templar_sun_strike.dds", tooltip = Tooltips.Skill_Spear_Shards }, -- Spear Shards (Spear Shards)
-    [95931] = {
-        icon = "esoui/art/icons/ability_templar_sun_strike.dds",
-        groundLabel = true,
-        tooltip = Tooltips.Generic_AOE_Magic,
-        tooltipValue2 = 1,
-    }, -- Spear Shards (Spear Shards)
+    [95931] = { icon = "esoui/art/icons/ability_templar_sun_strike.dds", groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1 }, -- Spear Shards (Spear Shards)
     [95957] = { icon = "esoui/art/icons/ability_templar_light_strike.dds", tooltip = Tooltips.Skill_Luminous_Shards }, -- Luminous Shards (Luminous Shards)
-    [95955] = {
-        icon = "esoui/art/icons/ability_templar_light_strike.dds",
-        groundLabel = true,
-        tooltip = Tooltips.Generic_AOE_Magic,
-        tooltipValue2 = 1,
-    }, -- Luminous Shards (Luminous Shards)
+    [95955] = { icon = "esoui/art/icons/ability_templar_light_strike.dds", groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1 }, -- Luminous Shards (Luminous Shards)
     [26880] = { icon = "esoui/art/icons/ability_templarsun_thrust.dds", tooltip = Tooltips.Skill_Spear_Shards }, -- Blazing Spear (Blazing Spear)
     [26879] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1 }, -- Blazing Spear
 
@@ -7598,11 +5378,7 @@ Effects.EffectOverride = {
     -- Radial Sweep /  Empowering Sweep / Crescent Sweep
     [62593] = { tooltip = Tooltips.Skill_Radial_Sweep }, -- Radial Sweep (Radial Sweep)
     [62599] = { tooltip = Tooltips.Skill_Radial_Sweep }, -- Empowering Sweep (Empowering Sweep)
-    [62607] = {
-        icon = "esoui/art/icons/ability_templar_crescent_sweep.dds",
-        name = Abilities.Skill_Crescent_Sweep,
-        tooltip = Tooltips.Skill_Radial_Sweep,
-    }, -- Crescent Sweep (Crescent Sweep)
+    [62607] = { icon = "esoui/art/icons/ability_templar_crescent_sweep.dds", name = Abilities.Skill_Crescent_Sweep, tooltip = Tooltips.Skill_Radial_Sweep }, -- Crescent Sweep (Crescent Sweep)
     [62606] = { icon = "esoui/art/icons/ability_templar_crescent_sweep.dds" }, -- Radial Sweep (Crescent Sweep)
 
     -- Dawn's Wrath
@@ -7610,12 +5386,7 @@ Effects.EffectOverride = {
     -- Sun Fire / Vampire's Bane / Reflective Light
     [21728] = { tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Sun Fire (Sun Fire)
     [21731] = { tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Vampire's Bane (Vampire's Bane)
-    [21733] = {
-        icon = "esoui/art/icons/ability_templar_reflective_light.dds",
-        tooltip = Tooltips.Skill_Sun_Fire_Snare,
-        tooltipValue2Mod = 7,
-        hideReduce = true,
-    }, -- Reflective Light (Reflective Light)
+    [21733] = { icon = "esoui/art/icons/ability_templar_reflective_light.dds", tooltip = Tooltips.Skill_Sun_Fire_Snare, tooltipValue2Mod = 7, hideReduce = true }, -- Reflective Light (Reflective Light)
     [21734] = { tooltip = Tooltips.Skill_Sun_Fire, tooltipValue2Mod = -7 }, -- Reflective Light (Reflective Light)
 
     -- Solar Flare / Dark Flare / Solar Barrage
@@ -7629,32 +5400,14 @@ Effects.EffectOverride = {
 
     -- Eclipse / Total Dark / Unstable Core
     [21776] = { tooltip = Tooltips.Skill_Eclipse }, -- Eclipse (Eclipse)
-    [127769] = {
-        icon = "LuiExtended/media/icons/abilities/ability_templar_snare.dds",
-        tooltip = Tooltips.Generic_Snare,
-        tooltipValue2 = 30,
-    }, -- Eclipse (Eclipse)
-    [127771] = {
-        icon = "LuiExtended/media/icons/abilities/ability_templar_root.dds",
-        tooltip = Tooltips.Generic_Immobilize,
-    }, -- Eclipse (Eclipse)
+    [127769] = { icon = "LuiExtended/media/icons/abilities/ability_templar_snare.dds", tooltip = Tooltips.Generic_Snare, tooltipValue2 = 30 }, -- Eclipse (Eclipse)
+    [127771] = { icon = "LuiExtended/media/icons/abilities/ability_templar_root.dds", tooltip = Tooltips.Generic_Immobilize }, -- Eclipse (Eclipse)
     [127772] = { icon = "LuiExtended/media/icons/abilities/ability_templar_stun.dds", tooltip = Tooltips.Generic_Stun }, -- Eclipse (Eclipse)
     [22006] = { tooltip = Tooltips.Skill_Living_Dark }, -- Living Dark (Living Dark)
-    [127795] = {
-        icon = "LuiExtended/media/icons/abilities/ability_templar_snare.dds",
-        tooltip = Tooltips.Generic_Snare,
-        tooltipValue2 = 60,
-    }, -- Living Dark (Living Dark)
+    [127795] = { icon = "LuiExtended/media/icons/abilities/ability_templar_snare.dds", tooltip = Tooltips.Generic_Snare, tooltipValue2 = 60 }, -- Living Dark (Living Dark)
     [22004] = { tooltip = Tooltips.Skill_Unstable_Core }, -- Unstable Core (Unstable Core)
-    [127787] = {
-        icon = "LuiExtended/media/icons/abilities/ability_templar_snare.dds",
-        tooltip = Tooltips.Generic_Snare,
-        tooltipValue2 = 30,
-    }, -- Unstable Core (Unstable Core)
-    [127790] = {
-        icon = "LuiExtended/media/icons/abilities/ability_templar_root.dds",
-        tooltip = Tooltips.Generic_Immobilize,
-    }, -- Unstable Core (Unstable Core)
+    [127787] = { icon = "LuiExtended/media/icons/abilities/ability_templar_snare.dds", tooltip = Tooltips.Generic_Snare, tooltipValue2 = 30 }, -- Unstable Core (Unstable Core)
+    [127790] = { icon = "LuiExtended/media/icons/abilities/ability_templar_root.dds", tooltip = Tooltips.Generic_Immobilize }, -- Unstable Core (Unstable Core)
     [127788] = { icon = "LuiExtended/media/icons/abilities/ability_templar_stun.dds", tooltip = Tooltips.Generic_Stun }, -- Unstable Core (Unstable Core)
 
     -- Radiant Destruction / Radiant Glory / Radiant Oppression
@@ -7672,11 +5425,7 @@ Effects.EffectOverride = {
     [34443] = { tooltip = Tooltips.Generic_Stun }, -- Gravity Crush (Solar Prison - Gravity Crush Synergy)
     [22003] = { icon = "esoui/art/icons/ability_templar_solar_prison.dds", tooltip = Tooltips.Skill_Solar_Prison }, -- Solar Prison (Solar Prison)
     [21757] = { hide = true }, -- Solar Prison (Solar Prison)
-    [22001] = {
-        icon = "esoui/art/icons/ability_templar_solar_disturbance.dds",
-        tooltip = Tooltips.Skill_Solar_Disturbance,
-        tooltipValue2Id = 21760,
-    }, -- Solar Disturbance (Solar Disturbance)
+    [22001] = { icon = "esoui/art/icons/ability_templar_solar_disturbance.dds", tooltip = Tooltips.Skill_Solar_Disturbance, tooltipValue2Id = 21760 }, -- Solar Disturbance (Solar Disturbance)
     [21760] = { hide = true }, -- Solar Disturbance (Solar Disturbance)
 
     [21753] = { groundLabel = true, tooltip = Tooltips.Skill_Nova_Ground }, -- Nova
@@ -7696,71 +5445,28 @@ Effects.EffectOverride = {
 
     -- Cleansing Ritual / Ritual of Retribution / Extended Ritual
     [44013] = { icon = "esoui/art/icons/ability_templar_cleansing_ritual.dds" }, -- Purify (Cleansing Ritual - Purify Synergy)
-    [26286] = {
-        name = Abilities.Skill_Cleansing_Ritual,
-        groundLabel = true,
-        tooltip = Tooltips.Generic_AOE_Heal,
-        tooltipValue2 = 2,
-    }, -- Healing Ritual (Cleansing Ritual)
+    [26286] = { name = Abilities.Skill_Cleansing_Ritual, groundLabel = true, tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 2 }, -- Healing Ritual (Cleansing Ritual)
     [22265] = { tooltip = Tooltips.Skill_Cleansing_Ritual }, -- Cleansing Ritual (Cleansing Ritual)
-    [80172] = {
-        icon = "esoui/art/icons/ability_templar_purifying_ritual.dds",
-        groundLabel = true,
-        tooltip = Tooltips.Generic_AOE_Magic,
-        tooltipValue2 = 2,
-    }, -- Ritual of Retribution (Ritual of Retribution)
+    [80172] = { icon = "esoui/art/icons/ability_templar_purifying_ritual.dds", groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 2 }, -- Ritual of Retribution (Ritual of Retribution)
     [22259] = { tooltip = Tooltips.Skill_Ritual_of_Retribution }, -- Ritual of Retribution (Ritual of Retribution)
-    [26303] = {
-        icon = "esoui/art/icons/ability_templar_extended_ritual.dds",
-        groundLabel = true,
-        tooltip = Tooltips.Generic_AOE_Heal,
-        tooltipValue2 = 2,
-    }, -- Extended Ritual (Extended Ritual)
+    [26303] = { icon = "esoui/art/icons/ability_templar_extended_ritual.dds", groundLabel = true, tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 2 }, -- Extended Ritual (Extended Ritual)
     [22262] = { tooltip = Tooltips.Skill_Cleansing_Ritual }, -- Extended Ritual (Extended Ritual)
 
     -- Rune Focus / Channeled Focus / Restoring Focus
     [22234] = { tooltip = Tooltips.Skill_Rune_Focus }, -- Rune Focus (Rune Focus)
     [112145] = { tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1, forcedContainer = "short", groundLabel = true }, -- Rune Focus (Rune Focus)
     [37009] = { tooltip = Tooltips.Skill_Channeled_Focus }, -- Channeled Focus (Channeled Focus)
-    [112166] = {
-        icon = "esoui/art/icons/ability_templar_channeled_focus.dds",
-        tooltip = Tooltips.Generic_AOE_Heal,
-        tooltipValue2 = 1,
-        forcedContainer = "short",
-        groundLabel = true,
-    }, -- Channeled Focus (Channeled Focus)
+    [112166] = { icon = "esoui/art/icons/ability_templar_channeled_focus.dds", tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1, forcedContainer = "short", groundLabel = true }, -- Channeled Focus (Channeled Focus)
     [114842] = { tooltip = Tooltips.Skill_Restoring_Focus }, -- Restoring Focus (Restoring Focus)
-    [112167] = {
-        icon = "esoui/art/icons/ability_templar_uninterrupted_focus.dds",
-        name = Abilities.Skill_Restoring_Focus,
-        tooltip = Tooltips.Generic_AOE_Heal,
-        tooltipValue2 = 1,
-        forcedContainer = "short",
-        groundLabel = true,
-    }, -- Rune Focus Circle Bonus (Restoring Focus)
+    [112167] = { icon = "esoui/art/icons/ability_templar_uninterrupted_focus.dds", name = Abilities.Skill_Restoring_Focus, tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Restoring Focus)
 
     -- Rite of Passage / Remembrance / Practiced Incantation
     [22223] = { tooltip = Tooltips.Skill_Rite_of_Passage }, -- Rite of Passage (Rite of Passage)
-    [22225] = {
-        icon = "esoui/art/icons/ability_templar_rite_of_passage.dds",
-        tooltip = Tooltips.Generic_AOE_Heal,
-        tooltipValue2 = 1,
-        groundLabel = true,
-    }, -- Rite of Passage (Rite of Passage)
+    [22225] = { icon = "esoui/art/icons/ability_templar_rite_of_passage.dds", tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1, groundLabel = true }, -- Rite of Passage (Rite of Passage)
     [22229] = { tooltip = Tooltips.Skill_Rite_of_Passage }, -- Remembrance (Remembrance)
-    [22231] = {
-        icon = "esoui/art/icons/ability_templar_remembrance.dds",
-        tooltip = Tooltips.Generic_AOE_Heal,
-        tooltipValue2 = 1,
-        groundLabel = true,
-    }, -- Remembrance (Remembrance)
+    [22231] = { icon = "esoui/art/icons/ability_templar_remembrance.dds", tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1, groundLabel = true }, -- Remembrance (Remembrance)
     [22226] = { tooltip = Tooltips.Skill_Rite_of_Passage }, -- Practiced Incantation (Practiced Incantation)
-    [22228] = {
-        icon = "esoui/art/icons/ability_templar_practiced_incantation.dds",
-        tooltip = Tooltips.Generic_AOE_Heal,
-        tooltipValue2 = 1,
-        groundLabel = true,
-    }, -- Practiced Incantation (Practiced Incantation)
+    [22228] = { icon = "esoui/art/icons/ability_templar_practiced_incantation.dds", tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1, groundLabel = true }, -- Practiced Incantation (Practiced Incantation)
 
     ----------------------------------------------------------------
     -- WARDEN PASSIVE ABILITIES ------------------------------------
@@ -7769,29 +5475,14 @@ Effects.EffectOverride = {
     -- Animal Companions
     [86064] = { name = Abilities.Passive_Bond_with_Nature }, -- Bond With Nature (Bond With Nature - Rank 1)
     [86065] = { name = Abilities.Passive_Bond_with_Nature }, -- Bond With Nature (Bond With Nature - Rank 2)
-    [88515] = {
-        icon = "LuiExtended/media/icons/abilities/ability_warden_bond_with_nature.dds",
-        name = Abilities.Passive_Bond_with_Nature,
-    }, -- Bond With Nature Trigger
-    [88512] = {
-        icon = "LuiExtended/media/icons/abilities/ability_warden_savage_beast.dds",
-        name = Abilities.Passive_Savage_Beast,
-    }, -- Savage Beast Ultimate (Savage Beast - Rank 1)
-    [88513] = {
-        icon = "LuiExtended/media/icons/abilities/ability_warden_savage_beast.dds",
-        name = Abilities.Passive_Savage_Beast,
-    }, -- Transfer (Savage Beast - Rank 2)
+    [88515] = { icon = "LuiExtended/media/icons/abilities/ability_warden_bond_with_nature.dds", name = Abilities.Passive_Bond_with_Nature }, -- Bond With Nature Trigger
+    [88512] = { icon = "LuiExtended/media/icons/abilities/ability_warden_savage_beast.dds", name = Abilities.Passive_Savage_Beast }, -- Savage Beast Ultimate (Savage Beast - Rank 1)
+    [88513] = { icon = "LuiExtended/media/icons/abilities/ability_warden_savage_beast.dds", name = Abilities.Passive_Savage_Beast }, -- Transfer (Savage Beast - Rank 2)
 
     -- Green Balance
-    [88483] = {
-        icon = "LuiExtended/media/icons/abilities/ability_warden_natures_gift.dds",
-        name = Abilities.Passive_Natures_Gift,
-    }, -- Nature's Give (Nature's Gift - Rank 1)
+    [88483] = { icon = "LuiExtended/media/icons/abilities/ability_warden_natures_gift.dds", name = Abilities.Passive_Natures_Gift }, -- Nature's Give (Nature's Gift - Rank 1)
     [93054] = { icon = "LuiExtended/media/icons/abilities/ability_warden_natures_gift.dds" }, -- Nature's Gift (Nature's Gift - Rank 1)
-    [93072] = {
-        icon = "LuiExtended/media/icons/abilities/ability_warden_natures_gift.dds",
-        name = Abilities.Passive_Natures_Gift,
-    }, -- Nature's Give (Nature's Gift - Rank 2)
+    [93072] = { icon = "LuiExtended/media/icons/abilities/ability_warden_natures_gift.dds", name = Abilities.Passive_Natures_Gift }, -- Nature's Give (Nature's Gift - Rank 2)
     [93073] = { icon = "LuiExtended/media/icons/abilities/ability_warden_natures_gift.dds" }, -- Nature's Gift (Nature's Gift - Rank 2)
 
     ----------------------------------------------------------------
@@ -7830,45 +5521,26 @@ Effects.EffectOverride = {
     [114853] = { icon = "esoui/art/icons/ability_warden_017_b.dds" }, -- Bull Netch (Bull Netch)
 
     -- Feral Guardian / Eternal Guardian / Wild Guardian
-    [101438] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds",
-        name = Abilities.Innate_CC_Immunity,
-        tooltip = Tooltips.Generic_CC_Immunity,
-    }, -- Bear Immunity (Feral Guardian - All Morphs)
+    [101438] = { icon = "LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds", name = Abilities.Innate_CC_Immunity, tooltip = Tooltips.Generic_CC_Immunity }, -- Bear Immunity (Feral Guardian - All Morphs)
     [85982] = { tooltip = Tooltips.Skill_Feral_Guardian }, -- Feral Guardian (Feral Guardian)
     [89135] = { icon = "LuiExtended/media/icons/abilities/ability_warden_swipe.dds", name = Abilities.Skill_Bite }, -- Swipe (Feral Guardian)
     [89128] = { icon = "LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds" }, -- Crushing Swipe (Feral Guardian)
-    [89129] = {
-        icon = "LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds",
-        tooltip = Tooltips.Generic_Knockdown,
-    }, -- Crushing Swipe (Feral Guardian)
+    [89129] = { icon = "LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds", tooltip = Tooltips.Generic_Knockdown }, -- Crushing Swipe (Feral Guardian)
     [90284] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Guardians_Wrath }, -- Guardian's Wrath (Feral Guardian)
     [93144] = { hide = true }, -- Guardian's Wrath Trigger (Feral Guardian)
     [85986] = { tooltip = Tooltips.Skill_Eternal_Guardian }, -- Eternal Guardian (Eternal Guardian)
     [109982] = { hide = true }, -- Eternal Guardian (Eternal Guardian)
     [105906] = { icon = "LuiExtended/media/icons/abilities/ability_warden_swipe.dds", name = Abilities.Skill_Bite }, -- Swipe (Eternal Guardian)
     [105907] = { icon = "LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds" }, -- Crushing Swipe (Eternal Guardian)
-    [105908] = {
-        icon = "LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds",
-        tooltip = Tooltips.Generic_Knockdown,
-    }, -- Crushing Swipe (Eternal Guardian)
+    [105908] = { icon = "LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds", tooltip = Tooltips.Generic_Knockdown }, -- Crushing Swipe (Eternal Guardian)
     [94625] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Guardians_Wrath }, -- Guardian's Wrath (Eternal Guardian)
     [94626] = { hide = true }, -- Guardian's Wrath Trigger (Eternal Guardian)
     [109983] = { hide = true }, -- Eternal Guardian Revive (Eternal Guardian)
-    [110384] = {
-        icon = "LuiExtended/media/icons/abilities/ability_warden_eternal_guardian_icd.dds",
-        name = zo_strformat("<<1>> <<2>>", Abilities.Skill_Eternal_Guardian, Abilities.Set_Cooldown),
-        tooltip = Tooltips.Skill_Eternal_Guardian_Cooldown,
-        type = BUFF_EFFECT_TYPE_DEBUFF,
-        unbreakable = 1,
-    }, -- Eternal Guardian (Eternal Guardian)
+    [110384] = { icon = "LuiExtended/media/icons/abilities/ability_warden_eternal_guardian_icd.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Skill_Eternal_Guardian, Abilities.Set_Cooldown), tooltip = Tooltips.Skill_Eternal_Guardian_Cooldown, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Eternal Guardian (Eternal Guardian)
     [85990] = { tooltip = Tooltips.Skill_Wild_Guardian }, -- Wild Guardian (Wild Guardian)
     [89219] = { icon = "LuiExtended/media/icons/abilities/ability_warden_swipe.dds", name = Abilities.Skill_Bite }, -- Swipe (Wild Guardian)
     [89220] = { icon = "LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds" }, -- Crushing Swipe (Wild Guardian)
-    [92666] = {
-        icon = "LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds",
-        tooltip = Tooltips.Generic_Knockdown,
-    }, -- Crushing Swipe (Wild Guardian)
+    [92666] = { icon = "LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds", tooltip = Tooltips.Generic_Knockdown }, -- Crushing Swipe (Wild Guardian)
     [92163] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Guardians_Savagery }, -- Guardian's Savagery (Wild Guardian)
     [93233] = { hide = true }, -- Guardian's Savagery Trigger (Wild Guardian)
 
@@ -7918,37 +5590,12 @@ Effects.EffectOverride = {
 
     -- Impaling Shards / Gripping Shards / Winter's Revenge
     [86161] = { tooltip = Tooltips.Skill_Impaling_Shards }, -- Impaling Shards (Impaling Shards)
-    [86238] = {
-        tooltip = Tooltips.Generic_AOE_Snare_Frost,
-        tooltipValue2 = 1,
-        tooltipValue3 = 30,
-        duration = 0,
-        groundLabel = true,
-        hideGround = true,
-    }, -- Impaling Shards (Impaling Shards)
+    [86238] = { tooltip = Tooltips.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 30, duration = 0, groundLabel = true, hideGround = true }, -- Impaling Shards (Impaling Shards)
     [86165] = { tooltip = Tooltips.Skill_Impaling_Shards }, -- Gripping Shards (Gripping Shards)
-    [87443] = {
-        icon = "LuiExtended/media/icons/abilities/ability_warden_root_frost.dds",
-        name = Abilities.Skill_Frozen,
-        tooltip = Tooltips.Generic_Immobilize,
-    }, -- Gripping Shards (Gripping Shards)
-    [87448] = {
-        tooltip = Tooltips.Generic_AOE_Snare_Frost,
-        tooltipValue2 = 1,
-        tooltipValue3 = 30,
-        duration = 0,
-        groundLabel = true,
-        hideGround = true,
-    }, -- Gripping Shards (Gripping Shards)
+    [87443] = { icon = "LuiExtended/media/icons/abilities/ability_warden_root_frost.dds", name = Abilities.Skill_Frozen, tooltip = Tooltips.Generic_Immobilize }, -- Gripping Shards (Gripping Shards)
+    [87448] = { tooltip = Tooltips.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 30, duration = 0, groundLabel = true, hideGround = true }, -- Gripping Shards (Gripping Shards)
     [86169] = { tooltip = Tooltips.Skill_Impaling_Shards }, -- Winter's Revenge (Winter's Revenge)
-    [88801] = {
-        tooltip = Tooltips.Generic_AOE_Snare_Frost,
-        tooltipValue2 = 1,
-        tooltipValue3 = 30,
-        duration = 0,
-        groundLabel = true,
-        hideGround = true,
-    }, -- Winter's Revenge (Winter's Revenge)
+    [88801] = { tooltip = Tooltips.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 30, duration = 0, groundLabel = true, hideGround = true }, -- Winter's Revenge (Winter's Revenge)
 
     [88783] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 30 }, -- Impaling Shards (Impaling Shards)
     [88791] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 30 }, -- Gripping Shards (Gripping Shards)
@@ -7959,11 +5606,7 @@ Effects.EffectOverride = {
     [90835] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Polar Wind (Polar Wind)
     [176422] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Polar Wind (Polar Wind)
     [90834] = { tooltip = Tooltips.Skill_Arctic_Blast }, -- Arctic Blast (Arctic Blast)
-    [130406] = {
-        icon = "esoui/art/icons/ability_warden_003_b.dds",
-        tooltip = Tooltips.Skill_Arctic_Blast_Ground,
-        groundLabel = true,
-    }, -- Arctic Blast (Arctic Blast)
+    [130406] = { icon = "esoui/art/icons/ability_warden_003_b.dds", tooltip = Tooltips.Skill_Arctic_Blast_Ground, groundLabel = true, }, -- Arctic Blast (Arctic Blast)
     [130409] = { icon = "esoui/art/icons/ability_warden_003_b.dds", tooltip = Tooltips.Generic_Stun }, -- Arctic Blast (Arctic Blast)
 
     -- Crystallized Shield / Crystallized Slab / Shimmering Shield
@@ -7984,24 +5627,10 @@ Effects.EffectOverride = {
 
     -- Sleet Storm / Northern Storm / Permafrost
     [86109] = { tooltip = Tooltips.Skill_Sleet_Storm }, -- Sleet Storm (Sleet Storm)
-    [86250] = {
-        duration = 0,
-        groundLabel = true,
-        tooltip = Tooltips.Generic_AOE_Snare_Frost,
-        tooltipValue2 = 1,
-        tooltipValue3 = 40,
-        hideGround = true,
-    }, -- Sleet Storm (Sleet Storm)
+    [86250] = { duration = 0, groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 40, hideGround = true, }, -- Sleet Storm (Sleet Storm)
     [86113] = { tooltip = Tooltips.Skill_Sleet_Storm }, -- Northern Storm (Northern Storm)
     [132429] = { tooltip = Tooltips.Generic_Increase_Max_Magicka_Duration_Percentage, tooltipValue2 = 15 }, -- Northern Storm (Northern Storm)
-    [88858] = {
-        duration = 0,
-        groundLabel = true,
-        tooltip = Tooltips.Generic_AOE_Snare_Frost,
-        tooltipValue2 = 1,
-        tooltipValue3 = 40,
-        hideGround = true,
-    }, -- Northern Storm (Northern Storm)
+    [88858] = { duration = 0, groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 40, hideGround = true, }, -- Northern Storm (Northern Storm)
     [86117] = { tooltip = Tooltips.Skill_Permafrost }, -- Permafrost (Permafrost)
     [88861] = { duration = 0, groundLabel = true, tooltip = Tooltips.Skill_Permafrost_Ground, hideGround = true }, -- Permafrost (Permafrost)
 
@@ -8014,14 +5643,8 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Grave Lord
-    [116187] = {
-        icon = "LuiExtended/media/icons/abilities/ability_necromancer_reusable_parts.dds",
-        tooltip = Tooltips.Skill_Reusable_Parts_Rank_1,
-    }, -- Reusable Parts (Reusable Parts - Rank 1)
-    [116189] = {
-        icon = "LuiExtended/media/icons/abilities/ability_necromancer_reusable_parts.dds",
-        tooltip = Tooltips.Skill_Reusable_Parts_Rank_2,
-    }, -- Reusable Parts (Reusable Parts - Rank 2)
+    [116187] = { icon = "LuiExtended/media/icons/abilities/ability_necromancer_reusable_parts.dds", tooltip = Tooltips.Skill_Reusable_Parts_Rank_1, }, -- Reusable Parts (Reusable Parts - Rank 1)
+    [116189] = { icon = "LuiExtended/media/icons/abilities/ability_necromancer_reusable_parts.dds", tooltip = Tooltips.Skill_Reusable_Parts_Rank_2, , -- Reusable Parts (Reusable Parts - Rank 2)
 
     -- Bone Tyrant
     [119156] = { icon = "LuiExtended/media/icons/abilities/ability_necromancer_death_gleaning.dds" }, -- Death Gleaning (Death Gleaning - Rank 1)
@@ -8040,16 +5663,8 @@ Effects.EffectOverride = {
     -- GRAVE LORD
 
     -- Flame Skull / Venom Skull / Ricochet Skull
-    [114131] = {
-        tooltip = Tooltips.Skill_Flame_Skull,
-        tooltipValue2 = GetAbilityName(114108),
-        forcedContainer = "short",
-    }, -- Flame Skull (Flame Skull)
-    [117625] = {
-        tooltip = Tooltips.Skill_Flame_Skull,
-        tooltipValue2 = GetAbilityName(117629),
-        forcedContainer = "short",
-    }, -- Venom Skull (Venom Skull)
+    [114131] = { tooltip = Tooltips.Skill_Flame_Skull, tooltipValue2 = GetAbilityName(114108), forcedContainer = "short", }, -- Flame Skull (Flame Skull)
+    [117625] = { tooltip = Tooltips.Skill_Flame_Skull, tooltipValue2 = GetAbilityName(117629), forcedContainer = "short", }, -- Venom Skull (Venom Skull)
     [117638] = { tooltip = Tooltips.Skill_Ricochet_Skull, forcedContainer = "short" }, -- Ricochet Skull (Ricochet Skull)
 
     -- Blastbones / Blighted Blastbones / Stalking Blastbones
@@ -8076,21 +5691,13 @@ Effects.EffectOverride = {
 
     -- Skeletal Mage / Skeletal Archer / Skeletal Arcanist
     [114317] = { tooltip = Tooltips.Skill_Skeletal_Mage }, -- Skeletal Mage (Skeletal Mage)
-    [114322] = {
-        icon = "esoui/art/icons/ability_necromancer_003.dds",
-        name = Abilities.Skill_Skeletal_Mage,
-        tooltip = Tooltips.Skill_Skeletal_Mage,
-    }, -- Skeletal Mage Summon (Skeletal Mage)
+    [114322] = { icon = "esoui/art/icons/ability_necromancer_003.dds", name = Abilities.Skill_Skeletal_Mage, tooltip = Tooltips.Skill_Skeletal_Mage, }, -- Skeletal Mage Summon (Skeletal Mage)
     [114461] = { icon = "LuiExtended/media/icons/abilities/ability_necromancer_deathbolt.dds" }, -- Deathbolt (Skeletal Mage)
     [118680] = { tooltip = Tooltips.Skill_Skeletal_Archer }, -- Skeletal Archer (Skeletal Archer)
     [118681] = { icon = "esoui/art/icons/ability_necromancer_003_a.dds", tooltip = Tooltips.Skill_Skeletal_Archer }, -- Skeletal Archer (Skeletal Archer)
     [122774] = { icon = "LuiExtended/media/icons/abilities/ability_necromancer_deathbolt_archer.dds" }, -- Deathbolt (Skeletal Archer)
     [118726] = { tooltip = Tooltips.Skill_Skeletal_Arcanist }, -- Skeletal Arcanist (Skeletal Arcanist)
-    [118738] = {
-        icon = "esoui/art/icons/ability_necromancer_003_b.dds",
-        name = Abilities.Skill_Skeletal_Arcanist,
-        tooltip = Tooltips.Skill_Skeletal_Arcanist,
-    }, -- Exploding Mage (Skeletal Arcanist)
+    [118738] = { icon = "esoui/art/icons/ability_necromancer_003_b.dds", name = Abilities.Skill_Skeletal_Arcanist, tooltip = Tooltips.Skill_Skeletal_Arcanist, }, -- Exploding Mage (Skeletal Arcanist)
     [118746] = { icon = "LuiExtended/media/icons/abilities/ability_necromancer_deathbolt.dds" }, -- Deathbolt (Skeletal Arcanist)
     [124468] = { icon = "LuiExtended/media/icons/abilities/ability_necromancer_deathbolt.dds" }, -- Deathbolt (Skeletal Arcanist)
 
@@ -8137,11 +5744,7 @@ Effects.EffectOverride = {
 
     -- Bitter Harvest / Deaden Pain / Necrotic Potency
     [124136] = { icon = "esoui/art/icons/ability_necromancer_011.dds", name = Abilities.Skill_Bitter_Harvest }, -- Necrotic Potency (Bitter Harvest)
-    [115240] = {
-        icon = "esoui/art/icons/ability_necromancer_011.dds",
-        tooltip = Tooltips.Generic_HoT,
-        tooltipValue2 = 1,
-    }, -- Bitter Harvest (Bitter Harvest)
+    [115240] = { icon = "esoui/art/icons/ability_necromancer_011.dds", tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1, }, -- Bitter Harvest (Bitter Harvest)
     [124166] = { icon = "esoui/art/icons/ability_necromancer_011_a.dds", name = Abilities.Skill_Deaden_Pain }, -- Necrotic Potency (Deaden Pain)
     [124165] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Deaden Pain (Deaden Pain)
     [124192] = { icon = "esoui/art/icons/ability_necromancer_011_b.dds" }, -- Necrotic Potency (Necrotic Potency)
@@ -8161,33 +5764,19 @@ Effects.EffectOverride = {
     [143915] = { icon = "esoui/art/icons/ability_necromancer_009.dds", tooltip = Tooltips.Generic_Immobilize }, -- Grave Grasp (Grave Grasp)
     [143917] = { icon = "esoui/art/icons/ability_necromancer_009.dds", tooltip = Tooltips.Generic_Stun }, -- Grave Grasp (Grave Grasp)
 
-    [118309] = {
-        icon = "esoui/art/icons/ability_necromancer_009_b.dds",
-        tooltip = Tooltips.Generic_Snare,
-        tooltipValue2 = 30,
-    }, -- Ghostly Embrace (Ghostly Embrace)
+    [118309] = { icon = "esoui/art/icons/ability_necromancer_009_b.dds", tooltip = Tooltips.Generic_Snare, tooltipValue2 = 30, }, -- Ghostly Embrace (Ghostly Embrace)
     [118325] = { icon = "esoui/art/icons/ability_necromancer_009_b.dds", tooltip = Tooltips.Generic_Immobilize }, -- Ghostly Embrace (Ghostly Embrace)
     [143945] = { icon = "esoui/art/icons/ability_necromancer_009_b.dds", tooltip = Tooltips.Generic_Stun }, -- Ghostly Embrace (Ghostly Embrace)
 
     [118369] = { icon = "esoui/art/icons/ability_necromancer_009_a.dds", hide = true }, -- Empowering Grasp (Empowering Grasp)
-    [118354] = {
-        icon = "esoui/art/icons/ability_necromancer_009_a.dds",
-        tooltip = Tooltips.Generic_Snare,
-        tooltipValue2 = 30,
-    }, -- Empowering Grasp (Empowering Grasp)
+    [118354] = { icon = "esoui/art/icons/ability_necromancer_009_a.dds", tooltip = Tooltips.Generic_Snare, tooltipValue2 = 30, }, -- Empowering Grasp (Empowering Grasp)
     [143948] = { tooltip = Tooltips.Generic_Immobilize }, -- Empowering Grasp (Empowering Grasp)
     [143949] = { tooltip = Tooltips.Generic_Stun }, -- Empowering Grasp (Empowering Grasp)
 
     -- Bone Goliath Transformation / Pummeling Goliath / Ravenous Goliath
     [115001] = { tooltip = Tooltips.Skill_Bone_Goliath_Transformation }, -- Bone Goliath Transformation (Bone Goliath Transformation)
-    [115286] = {
-        icon = "esoui/art/icons/ability_necromancer_012.dds",
-        name = Abilities.Skill_Bone_Goliath_Transformation,
-    }, -- Bone Goliath (Bone Goliath Transformation)
-    [115478] = {
-        icon = "esoui/art/icons/ability_necromancer_012.dds",
-        name = Abilities.Skill_Bone_Goliath_Transformation,
-    }, -- Bone Goliath Self Snare (Bone Goliath Transformation)
+    [115286] = { icon = "esoui/art/icons/ability_necromancer_012.dds", name = Abilities.Skill_Bone_Goliath_Transformation, }, -- Bone Goliath (Bone Goliath Transformation)
+    [115478] = { icon = "esoui/art/icons/ability_necromancer_012.dds", name = Abilities.Skill_Bone_Goliath_Transformation, }, -- Bone Goliath Self Snare (Bone Goliath Transformation)
     [118664] = { tooltip = Tooltips.Skill_Pummeling_Goliath }, -- Pummeling Goliath (Pummeling Goliath)
     [118665] = { icon = "esoui/art/icons/ability_necromancer_012_a.dds" }, -- Pummeling Goliath (Pummeling Goliath)
     [118673] = { icon = "esoui/art/icons/ability_necromancer_012_a.dds", name = Abilities.Skill_Pummeling_Goliath }, -- Pummeling Goliath Self Snare (Pummeling Goliath)
@@ -8199,11 +5788,7 @@ Effects.EffectOverride = {
     [118287] = { icon = "esoui/art/icons/ability_necromancer_012_b.dds", name = Abilities.Skill_Ravenous_Goliath }, -- Ravenous Goliath Self Snare (Ravenous Goliath)
     [118281] = { icon = "esoui/art/icons/ability_necromancer_012_b.dds" }, -- Ravenous Goliath (Ravenous Goliath)
     [118282] = { icon = "esoui/art/icons/ability_necromancer_012_b.dds" }, -- Ravenous Goliath (Ravenous Goliath)
-    [118289] = {
-        icon = "esoui/art/icons/ability_necromancer_012_b.dds",
-        groundLabel = true,
-        tooltip = Tooltips.Skill_Ravenous_Goliath_Ground,
-    }, -- Ravenous Goliath (Ravenous Goliath)
+    [118289] = { icon = "esoui/art/icons/ability_necromancer_012_b.dds", groundLabel = true, tooltip = Tooltips.Skill_Ravenous_Goliath_Ground, }, -- Ravenous Goliath (Ravenous Goliath)
     [118292] = { icon = "esoui/art/icons/ability_necromancer_012_b.dds" }, -- Ravenous Goliath (Ravenous Goliath)
 
     -- LIVING DEATH
