@@ -3256,7 +3256,7 @@ Effects.EffectOverride = {
     -- Martial Status Effects
     [21925] = { icon = "LuiExtended/media/icons/abilities/ability_proc_diseased.dds" }, -- Diseased (Disease Status Effect)
     [148801] = { icon = "LuiExtended/media/icons/abilities/ability_proc_hemorrhaging.dds", tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 2 }, -- Hemorrhaging (Bleed Status Effect)
-    [21929] = { icon = "LuiExtended/media/icons/abilities/ability_proc_poisoned.dds", tooltip = Tooltips.Generic_Poison, tooltipValue2 = 2, }, -- Poisoned (Poison Status Effect)
+    [21929] = { icon = "LuiExtended/media/icons/abilities/ability_proc_poisoned.dds", tooltip = Tooltips.Generic_Poison, tooltipValue2 = 2 }, -- Poisoned (Poison Status Effect)
     [148800] = { icon = "LuiExtended/media/icons/abilities/ability_proc_sundered.dds" }, -- Sundered (Physical Status Effect)
     [149573] = { icon = "LuiExtended/media/icons/abilities/ability_proc_sundered.dds" }, -- Sundered (Physical Status Effect - Siege)
 
@@ -3265,7 +3265,7 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Mundus Stone Interaction
-    [14031] = { icon = "LuiExtended/media/icons/abilities/ability_innate_mundus_use.dds", name = Abilities.Innate_Receiving_Boon, unbreakable = 1, }, -- Mundus Use
+    [14031] = { icon = "LuiExtended/media/icons/abilities/ability_innate_mundus_use.dds", name = Abilities.Innate_Receiving_Boon, unbreakable = 1 }, -- Mundus Use
 
     -- Boons
     [13940] = { tooltip = Tooltips.Boon_Warrior }, -- Boon: The Warrior
@@ -3290,156 +3290,59 @@ Effects.EffectOverride = {
     [16415] = { tooltip = Tooltips.Generic_Test }, -- Test
 
     -- Roll Dodge
-    [29721] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_roll_dodge.dds",
-        tooltip = Tooltips.Innate_Immobilize_Immunity,
-    }, -- Immobilize Immunity
-    [119068] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_roll_dodge.dds",
-        tooltip = Tooltips.Innate_Immobilize_Immunity,
-    }, -- Immobilize Immunity
-    [69143] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_dodge_fatigue.dds",
-        type = BUFF_EFFECT_TYPE_DEBUFF,
-        unbreakable = 1,
-        tooltip = Tooltips.Innate_Dodge_Fatigue,
-    }, -- Dodge Fatigue
+    [29721] = { icon = "LuiExtended/media/icons/abilities/ability_innate_roll_dodge.dds", tooltip = Tooltips.Innate_Immobilize_Immunity }, -- Immobilize Immunity
+    [119068] = { icon = "LuiExtended/media/icons/abilities/ability_innate_roll_dodge.dds", tooltip = Tooltips.Innate_Immobilize_Immunity }, -- Immobilize Immunity
+    [69143] = { icon = "LuiExtended/media/icons/abilities/ability_innate_dodge_fatigue.dds", type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Innate_Dodge_Fatigue }, -- Dodge Fatigue
 
     -- Crouch
     [20299] = { icon = "LuiExtended/media/icons/abilities/ability_innate_hidden.dds", dynamicTooltip = true }, -- Sneak
-    [20309] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
-        tooltip = Tooltips.Innate_Invisible,
-    }, -- Hidden
-    [26245] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds",
-        name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Sneak, Abilities.Innate_Stun),
-        tooltip = Tooltips.Generic_Stun,
-        cc = LUIE_CC_TYPE_STUN,
-    }, -- Slam Stun (Stun from crouch attack)
+    [20309] = { icon = "LuiExtended/media/icons/abilities/ability_innate_invisible.dds", tooltip = Tooltips.Innate_Invisible }, -- Hidden
+    [26245] = { icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Sneak, Abilities.Innate_Stun), tooltip = Tooltips.Generic_Stun, cc = LUIE_CC_TYPE_STUN }, -- Slam Stun (Stun from crouch attack)
 
     -- Mount
     [37059] = { icon = "LuiExtended/media/icons/abilities/ability_innate_mounted.dds" }, -- Mount Up (Mount)
-    [999017] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_mounted.dds",
-        name = Abilities.Innate_Mounted,
-    }, -- Mounted FAKE
-    [115607] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds",
-        unbreakable = 1,
-        tooltip = Tooltips.Generic_Knockdown,
-        cc = LUIE_CC_TYPE_KNOCKDOWN,
-    }, -- Hard Dismount (Mount)
+    [999017] = { icon = "LuiExtended/media/icons/abilities/ability_innate_mounted.dds", name = Abilities.Innate_Mounted }, -- Mounted FAKE
+    [115607] = { icon = "LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds", unbreakable = 1, tooltip = Tooltips.Generic_Knockdown, cc = LUIE_CC_TYPE_KNOCKDOWN }, -- Hard Dismount (Mount)
 
     -- Passenger Mount
     [141013] = { icon = "LuiExtended/media/icons/abilities/ability_innate_mounted.dds" }, -- Mount Up (Passenger Mount)
-    [141004] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds",
-        unbreakable = 1,
-        tooltip = Tooltips.Generic_Knockdown,
-        cc = LUIE_CC_TYPE_KNOCKDOWN,
-    }, -- Hard Dismount (Passenger Mount)
+    [141004] = { icon = "LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds", unbreakable = 1, tooltip = Tooltips.Generic_Knockdown, cc = LUIE_CC_TYPE_KNOCKDOWN }, -- Hard Dismount (Passenger Mount)
 
     -- Block
-    [974] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_block.dds",
-        name = Abilities.Innate_Brace,
-        dynamicTooltip = true,
-    }, -- Brace
-    [86310] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds",
-        name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Block, Abilities.Innate_Stun),
-        hide = true,
-        tooltip = Tooltips.Generic_Stagger,
-        cc = LUIE_CC_TYPE_STAGGER,
-    }, -- Stagger (Player blocks NPC charged attack)
-    [86309] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds",
-        name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Block, Abilities.Innate_Stun),
-        tooltip = Tooltips.Generic_Stun,
-        cc = LUIE_CC_TYPE_STUN,
-    }, -- Stun (Player blocks NPC charged attack)
-    [86312] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds",
-        name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Block, Abilities.Innate_Stun),
-        tooltip = Tooltips.Generic_Stun,
-        cc = LUIE_CC_TYPE_STUN,
-    }, -- Stun (Player blocks Ogrim Body Slam)
+    [974] = { icon = "LuiExtended/media/icons/abilities/ability_innate_block.dds", name = Abilities.Innate_Brace, dynamicTooltip = true }, -- Brace
+    [86310] = { icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Block, Abilities.Innate_Stun), hide = true, tooltip = Tooltips.Generic_Stagger, cc = LUIE_CC_TYPE_STAGGER }, -- Stagger (Player blocks NPC charged attack)
+    [86309] = { icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Block, Abilities.Innate_Stun), tooltip = Tooltips.Generic_Stun, cc = LUIE_CC_TYPE_STUN }, -- Stun (Player blocks NPC charged attack)
+    [86312] = { icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Innate_Block, Abilities.Innate_Stun), tooltip = Tooltips.Generic_Stun, cc = LUIE_CC_TYPE_STUN }, -- Stun (Player blocks Ogrim Body Slam)
     [45902] = { name = Abilities.Skill_Off_Balance, tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off-Balance
 
     -- Bash
     [21970] = { icon = "LuiExtended/media/icons/abilities/ability_innate_bash.dds" }, -- Bash
     [21973] = { icon = "" }, -- Bash (Hides icon for interrupt)
-    [21972] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds",
-        name = Abilities.Innate_Bash_Stun,
-        tooltip = Tooltips.Generic_Stagger,
-        cc = LUIE_CC_TYPE_STAGGER,
-    }, -- Stagger
-    [21971] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds",
-        tooltip = Tooltips.Generic_Stun,
-        cc = LUIE_CC_TYPE_STUN,
-    }, -- Bash Stun (Stun from bashing cast)
-    [48416] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds",
-        name = Abilities.Innate_Bash_Stun,
-    }, -- Uber Attack (3 sec duration but no aura - when bashing cast when NPC is pinned against an obstacle)
-    [45982] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds",
-        tooltip = Tooltips.Generic_Stun,
-        cc = LUIE_CC_TYPE_STUN,
-    }, -- Bash Stun (Stun from bashing cast when NPC is pinned against an obstacle)
+    [21972] = { icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds", name = Abilities.Innate_Bash_Stun, tooltip = Tooltips.Generic_Stagger, cc = LUIE_CC_TYPE_STAGGER }, -- Stagger
+    [21971] = { icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds", tooltip = Tooltips.Generic_Stun, cc = LUIE_CC_TYPE_STUN }, -- Bash Stun (Stun from bashing cast)
+    [48416] = { icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds", name = Abilities.Innate_Bash_Stun }, -- Uber Attack (3 sec duration but no aura - when bashing cast when NPC is pinned against an obstacle)
+    [45982] = { icon = "LuiExtended/media/icons/abilities/ability_innate_block_stun.dds", tooltip = Tooltips.Generic_Stun, cc = LUIE_CC_TYPE_STUN }, -- Bash Stun (Stun from bashing cast when NPC is pinned against an obstacle)
 
     -- Off-Balance Exploit
-    [16825] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_off-balance_exploit.dds",
-        tooltip = Tooltips.Generic_Knockdown,
-        cc = LUIE_CC_TYPE_KNOCKDOWN,
-    }, -- Off-Balance Exploit
+    [16825] = { icon = "LuiExtended/media/icons/abilities/ability_innate_off-balance_exploit.dds", tooltip = Tooltips.Generic_Knockdown, cc = LUIE_CC_TYPE_KNOCKDOWN }, -- Off-Balance Exploit
 
     -- Death/Resurrection
-    [14644] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds",
-        name = Abilities.Innate_Revive,
-    }, -- Revive (Death Dialogue)
-    [14646] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds",
-        name = Abilities.Innate_Resurrection_Immunity,
-        tooltip = Tooltips.Innate_Resurrection_Immunity,
-    }, -- Recently Revived
-    [123970] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds",
-        name = Abilities.Innate_Resurrection_Immunity,
-        tooltip = Tooltips.Innate_Resurrection_Immunity,
-    }, -- Lesser Reincarnate
+    [14644] = { icon = "LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds", name = Abilities.Innate_Revive }, -- Revive (Death Dialogue)
+    [14646] = { icon = "LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds", name = Abilities.Innate_Resurrection_Immunity, tooltip = Tooltips.Innate_Resurrection_Immunity }, -- Recently Revived
+    [123970] = { icon = "LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds", name = Abilities.Innate_Resurrection_Immunity, tooltip = Tooltips.Innate_Resurrection_Immunity }, -- Lesser Reincarnate
 
     -- Basic Attacks
-    [16593] = {
-        icon = "LuiExtended/media/icons/abilities/ability_spell_pin.dds",
-        tooltip = Tooltips.Generic_Snare,
-        tooltipValue2 = 25,
-        cc = LUIE_CC_TYPE_SNARE,
-    }, -- Melee Snare
+    [16593] = { icon = "LuiExtended/media/icons/abilities/ability_spell_pin.dds", tooltip = Tooltips.Generic_Snare, tooltipValue2 = 25, cc = LUIE_CC_TYPE_SNARE }, -- Melee Snare
     [48532] = { icon = "LuiExtended/media/icons/abilities/ability_spell_pin.dds", hide = true }, -- Charge Snare
     [55080] = { hide = true }, -- Pet Hidden
-    [28301] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds",
-        tooltip = Tooltips.Generic_CC_Immunity,
-    }, -- Crowd Control Immunity
-    [38117] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds",
-        tooltip = Tooltips.Generic_CC_Immunity,
-    }, -- Crowd Control Immunity
+    [28301] = { icon = "LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds", tooltip = Tooltips.Generic_CC_Immunity }, -- Crowd Control Immunity
+    [38117] = { icon = "LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds", tooltip = Tooltips.Generic_CC_Immunity }, -- Crowd Control Immunity
 
     -- Taunt Effects
     [38254] = { icon = "esoui/art/icons/ability_warrior_010.dds", tooltip = Tooltips.Innate_Taunt, tooltipOther = Tooltips.Innate_Taunt_Other }, -- Taunt
 
     -- Disguise Effects
-    [50602] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
-        tooltip = Tooltips.Innate_Disguised,
-    }, -- Disguised
+    [50602] = { icon = "LuiExtended/media/icons/abilities/ability_innate_disguised.dds", tooltip = Tooltips.Innate_Disguised }, -- Disguised
     [13371] = { hide = true }, -- Acting Suspicious
     [999020] = { icon = "LuiExtended/media/icons/disguises/disguise_generic.dds", name = Abilities.Innate_Disguise }, -- Disguise FAKE
 
@@ -3465,71 +3368,24 @@ Effects.EffectOverride = {
     [999014] = { icon = "esoui/art/icons/artificialeffect_battle-spirit.dds", name = Abilities.Skill_Battle_Spirit }, -- Battle Spirit FAKE
 
     [15594] = { hide = true }, -- Bonus vs off Balance
-    [10950] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_fall_snare.dds",
-        name = Abilities.Innate_Fall_Damage,
-    }, -- Fall Snare
-    [999016] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_recall_cooldown.dds",
-        name = Abilities.Innate_Recall_Penalty,
-        tooltip = Tooltips.Innate_Recall_Penalty,
-    }, -- Recall Penalty FAKE
+    [10950] = { icon = "LuiExtended/media/icons/abilities/ability_innate_fall_snare.dds", name = Abilities.Innate_Fall_Damage }, -- Fall Snare
+    [999016] = { icon = "LuiExtended/media/icons/abilities/ability_innate_recall_cooldown.dds", name = Abilities.Innate_Recall_Penalty, tooltip = Tooltips.Innate_Recall_Penalty }, -- Recall Penalty FAKE
     [6811] = { icon = "LuiExtended/media/icons/abilities/ability_innate_recall.dds" }, -- Recall
     [31221] = { hide = true }, -- Skyshard Collect (Aura on Skyshard when player collects it)
-    [32346] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_absorbing_skyshard.dds",
-        name = Abilities.Innate_Absorbing_Skyshard,
-    }, -- Skyshard Collect
-    [63601] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_eso_plus_member.dds",
-        tooltip = Tooltips.Innate_ESO_Plus,
-    }, -- ESO Plus Member
-    [2727] = {
-        icon = "esoui/art/icons/ability_debuff_offbalance.dds",
-        name = Abilities.Skill_Off_Balance,
-        tooltip = Tooltips.Generic_Off_Balance,
-        unbreakable = 1,
-    }, -- Off-Balance
-    [134599] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_off_balance_immunity.dds",
-        type = BUFF_EFFECT_TYPE_BUFF,
-        tooltip = Tooltips.Generic_Off_Balance_Immunity,
-    }, -- Off Balance Immunity
-    [132831] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_major_vulnerability_immunity.dds",
-        name = Abilities.Skill_Major_Vulnerability_Immunity,
-        type = BUFF_EFFECT_TYPE_BUFF,
-        tooltip = Tooltips.Generic_Major_Vulnerability_Immunity,
-    }, -- Major Vulnerability Invulnerability
+    [32346] = { icon = "LuiExtended/media/icons/abilities/ability_innate_absorbing_skyshard.dds", name = Abilities.Innate_Absorbing_Skyshard }, -- Skyshard Collect
+    [63601] = { icon = "LuiExtended/media/icons/abilities/ability_innate_eso_plus_member.dds", tooltip = Tooltips.Innate_ESO_Plus }, -- ESO Plus Member
+    [2727] = { icon = "esoui/art/icons/ability_debuff_offbalance.dds", name = Abilities.Skill_Off_Balance, tooltip = Tooltips.Generic_Off_Balance, unbreakable = 1 }, -- Off-Balance
+    [134599] = { icon = "LuiExtended/media/icons/abilities/ability_innate_off_balance_immunity.dds", type = BUFF_EFFECT_TYPE_BUFF, tooltip = Tooltips.Generic_Off_Balance_Immunity }, -- Off Balance Immunity
+    [132831] = { icon = "LuiExtended/media/icons/abilities/ability_innate_major_vulnerability_immunity.dds", name = Abilities.Skill_Major_Vulnerability_Immunity, type = BUFF_EFFECT_TYPE_BUFF, tooltip = Tooltips.Generic_Major_Vulnerability_Immunity }, -- Major Vulnerability Invulnerability
     [85701] = { hide = true }, -- Dueling Flag
-    [21263] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds",
-        name = Abilities.Innate_Ayleid_Well,
-        tooltip = Tooltips.Innate_Ayleid_Well,
-    }, -- Ayleid Health Bonus
-    [100862] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds",
-        name = Abilities.Innate_Ayleid_Well_Fortified,
-        tooltip = Tooltips.Innate_Ayleid_Well_Fortified,
-    }, -- Ayleid Health Bonus
+    [21263] = { icon = "LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds", name = Abilities.Innate_Ayleid_Well, tooltip = Tooltips.Innate_Ayleid_Well }, -- Ayleid Health Bonus
+    [100862] = { icon = "LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds", name = Abilities.Innate_Ayleid_Well_Fortified, tooltip = Tooltips.Innate_Ayleid_Well_Fortified }, -- Ayleid Health Bonus
 
     [151928] = { icon = "LuiExtended/media/icons/abilities/ability_innate_aetherial_well.dds" }, -- Aetherial Well (Aetherial Well)
-    [151935] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_aetherial_well.dds",
-        name = Abilities.Innate_Aetherial_Well,
-    }, -- Aetherial Well Restore (Aetherial Well)
-    [151942] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_aetherial_well.dds",
-        name = Abilities.Innate_Aetherial_Well,
-    }, -- Aetherial Well Restore (Aetherial Well)
-    [151931] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_aetherial_well.dds",
-        name = Abilities.Innate_Aetherial_Well,
-    }, -- Aetherial Well Restore (Aetherial Well)
-    [151934] = {
-        icon = "LuiExtended/media/icons/abilities/ability_innate_aetherial_well.dds",
-        name = Abilities.Innate_Aetherial_Well,
-    }, -- Aetherial Well Restore (Aetherial Well)
+    [151935] = { icon = "LuiExtended/media/icons/abilities/ability_innate_aetherial_well.dds", name = Abilities.Innate_Aetherial_Well }, -- Aetherial Well Restore (Aetherial Well)
+    [151942] = { icon = "LuiExtended/media/icons/abilities/ability_innate_aetherial_well.dds", name = Abilities.Innate_Aetherial_Well }, -- Aetherial Well Restore (Aetherial Well)
+    [151931] = { icon = "LuiExtended/media/icons/abilities/ability_innate_aetherial_well.dds", name = Abilities.Innate_Aetherial_Well }, -- Aetherial Well Restore (Aetherial Well)
+    [151934] = { icon = "LuiExtended/media/icons/abilities/ability_innate_aetherial_well.dds", name = Abilities.Innate_Aetherial_Well }, -- Aetherial Well Restore (Aetherial Well)
 
     ----------------------------------------------------------------
     -- CHAMPION POINTS ---------------------------------------------
