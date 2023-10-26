@@ -18,3 +18,4 @@ $RECYCLE.BIN/
 stylua.toml
 devstuff/
 /.vscode/.ignore
+.vscode/doc.json

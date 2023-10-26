@@ -183,9 +183,9 @@ function SlashCommands.SlashCampaignQ(option)
     end
 
     -- If input is valid and the name is in the campaign table, try to queue for the campaign.
-    local option = string.lower(option)
-    if LUIE.CampaignNames[option] then
-        local campaignId = LUIE.CampaignNames[option]
+    local optionLower  = string.lower(option)
+    if LUIE.CampaignNames[optionLower ] then
+        local campaignId = LUIE.CampaignNames[optionLower ]
         local campaignName = GetCampaignName(campaignId)
 
         if GetAssignedCampaignId() == campaignId or GetGuestCampaignId() == campaignId then

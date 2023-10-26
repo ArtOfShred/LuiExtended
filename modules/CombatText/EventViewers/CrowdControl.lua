@@ -21,39 +21,44 @@ function CombatTextCrowdControlEventViewer:New(...)
     return obj
 end
 
-function CombatTextCrowdControlEventViewer:OnEvent(crowdControlType, combatType)
+function CombatTextCrowdControlEventViewer:OnEvent(crowdControlType, eventCombatType)
+    local combatTypeConstant = LUIE.Data.CombatTextConstants.combatType
     local Settings = LUIE.CombatText.SV
-
-    --Label setup
+    -- Label setup
     local control, controlPoolKey = self.poolManager:GetPoolObject(poolTypes.CONTROL)
-
     local size, color, text
-    --Disoriented
+
+    -- Disoriented
     if crowdControlType == crowdControlTypes.DISORIENTED then
         color = Settings.colors.disoriented
         size = Settings.fontSizes.crowdControl
         text = self:FormatString(Settings.formats.disoriented, { text = GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED) })
-    --Feared
+
+    -- Feared
     elseif crowdControlType == crowdControlTypes.FEARED then
         color = Settings.colors.feared
         size = Settings.fontSizes.crowdControl
         text = self:FormatString(Settings.formats.feared, { text = GetString(SI_LUIE_LAM_CT_SHARED_FEARED) })
-    --Off Balanced
+
+    -- Off Balanced
     elseif crowdControlType == crowdControlTypes.OFFBALANCED then
         color = Settings.colors.offBalanced
         size = Settings.fontSizes.crowdControl
         text = self:FormatString(Settings.formats.offBalanced, { text = GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE) })
-    --Silenced
+
+    -- Silenced
     elseif crowdControlType == crowdControlTypes.SILENCED then
         color = Settings.colors.silenced
         size = Settings.fontSizes.crowdControl
         text = self:FormatString(Settings.formats.silenced, { text = GetString(SI_LUIE_LAM_CT_SHARED_SILENCED) })
-    --Stunned
+
+    -- Stunned
     elseif crowdControlType == crowdControlTypes.STUNNED then
         color = Settings.colors.stunned
         size = Settings.fontSizes.crowdControl
         text = self:FormatString(Settings.formats.stunned, { text = GetString(SI_LUIE_LAM_CT_SHARED_STUNNED) })
-    --Charmed
+
+    -- Charmed
     elseif crowdControlType == crowdControlTypes.CHARMED then
         color = Settings.colors.charmed
         size = Settings.fontSizes.crowdControl
@@ -63,10 +68,12 @@ function CombatTextCrowdControlEventViewer:OnEvent(crowdControlType, combatType)
     self:PrepareLabel(control.label, size, color, text)
     self:ControlLayout(control)
 
-    --Control setup
+    -- Control setup
     local panel, point, relativePoint = LUIE_CombatText_Outgoing, TOP, BOTTOM
-    if combatType == combatType.INCOMING then
+
+    if eventCombatType == combatTypeConstant.INCOMING then
         panel = LUIE_CombatText_Incoming
+
         if Settings.animation.incoming.directionType == "down" then
             point, relativePoint = BOTTOM, TOP
         end
@@ -77,27 +84,28 @@ function CombatTextCrowdControlEventViewer:OnEvent(crowdControlType, combatType)
     end
 
     if point == TOP then
-        control:SetAnchor(point, panel, relativePoint, 0, -(self.locationOffset[combatType] * (Settings.fontSizes.crowdControl + 5)))
+        control:SetAnchor(point, panel, relativePoint, 0, -(self.locationOffset[eventCombatType] * (Settings.fontSizes.crowdControl + 5)))
     else
-        control:SetAnchor(point, panel, relativePoint, 0, self.locationOffset[combatType] * (Settings.fontSizes.crowdControl + 5))
+        control:SetAnchor(point, panel, relativePoint, 0, self.locationOffset[eventCombatType] * (Settings.fontSizes.crowdControl + 5))
     end
 
-    self.locationOffset[combatType] = self.locationOffset[combatType] + 1
-    self.activeCrowdControls[combatType] = self.activeCrowdControls[combatType] + 1
+    self.locationOffset[eventCombatType] = self.locationOffset[eventCombatType] + 1
+    self.activeCrowdControls[eventCombatType] = self.activeCrowdControls[eventCombatType] + 1
 
-    --Get animation
+    -- Get animation
     local animationPoolType = poolTypes.ANIMATION_SCROLL_CRITICAL
     local animation, animationPoolKey = self.poolManager:GetPoolObject(animationPoolType)
     animation:Apply(control)
     animation:Play()
 
-    --Add items back into pool after animation
+    -- Add items back into pool after animation
     zo_callLater(function()
         self.poolManager:ReleasePoolObject(poolTypes.CONTROL, controlPoolKey)
         self.poolManager:ReleasePoolObject(animationPoolType, animationPoolKey)
-        self.activeCrowdControls[combatType] = self.activeCrowdControls[combatType] - 1
-        if self.activeCrowdControls[combatType] == 0 then
-            self.locationOffset[combatType] = 0
+        self.activeCrowdControls[eventCombatType] = self.activeCrowdControls[eventCombatType] - 1
+
+        if self.activeCrowdControls[eventCombatType] == 0 then
+            self.locationOffset[eventCombatType] = 0
         end
     end, animation:GetDuration())
 end

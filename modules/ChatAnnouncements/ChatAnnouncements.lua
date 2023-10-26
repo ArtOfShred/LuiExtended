@@ -565,7 +565,7 @@ ChatAnnouncements.Defaults = {
             CA = true,
             CSA = true,
             Alert = false,
-            Description = true -- For 2nd line of Display Announcements
+            Description = true, -- For 2nd line of Display Announcements
         },
         ZoneCraglorn = {
             CA = false,
@@ -3243,45 +3243,104 @@ function ChatAnnouncements.OnMailCloseBox(eventCode)
 end
 
 -- Sends results of the trade to the Item Log print function and clears variables so they are reset for next trade interactions
+-- function ChatAnnouncements.OnMailSuccess(eventCode)
+--     if g_postageAmount > 0 then
+--         local type = "LUIE_CURRENCY_POSTAGE"
+--         local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1))
+--         local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+--         local changeType = ZO_LocalizeDecimalNumber(g_postageAmount)
+--         local currencyTypeColor = CurrencyGoldColorize:ToHex()
+--         local currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
+--         local currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyGoldName, g_postageAmount)
+--         local currencyTotal = ChatAnnouncements.SV.Currency.CurrencyGoldShowTotal
+--         local messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalGold
+--         local messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessagePostage
+--         ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
+--     end
+
+--     if not g_mailCODPresent then
+--         if g_mailAmount > 0 then
+--             local type = "LUIE_CURRENCY_MAIL"
+--             local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1))
+--             local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+--             local changeType = ZO_LocalizeDecimalNumber(g_mailAmount)
+--             local currencyTypeColor = CurrencyGoldColorize:ToHex()
+--             local currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
+--             local currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyGoldName, g_mailAmount)
+--             local currencyTotal = ChatAnnouncements.SV.Currency.CurrencyGoldShowTotal
+--             local messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalGold
+--             local messageChange = g_mailTarget ~= "" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOut or ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOutNoName
+--             ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
+--         end
+--     end
+
+--     if ChatAnnouncements.SV.Notify.NotificationMailSendCA or ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
+--         local mailString
+--         if not g_mailCODPresent then
+--             if g_mailCOD > 1 then
+--                 mailString = GetString(SI_LUIE_CA_MAIL_SENT_COD)
+--             else
+--                 mailString = GetString(SI_LUIE_CA_MAIL_SENT)
+--             end
+--         end
+--         if mailString then
+--             if ChatAnnouncements.SV.Notify.NotificationMailSendCA then
+--                 g_queuedMessages[g_queuedMessagesCounter] = { message = mailString, type = "NOTIFICATION", isSystem = true }
+--                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+--                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
+--             end
+--             if ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
+--                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, mailString)
+--             end
+--         end
+--     end
+
+--     if ChatAnnouncements.SV.Inventory.LootMail then
+--         for mailIndex = 1, 6 do -- Have to iterate through all 6 possible mail attachments, otherwise nil values will bump later items off the list potentially.
+--             if g_mailStacksOut[mailIndex] ~= nil then
+--                 local gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+--                 local logPrefix = g_mailTarget ~= "" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOut or ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOutNoName
+--                 local item = g_mailStacksOut[mailIndex]
+--                 ChatAnnouncements.ItemCounterDelayOut(item.icon, item.stack, item.itemType, item.itemId, item.itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
+--             end
+--         end
+--     end
+
+--     g_mailCODPresent = false
+--     g_mailCOD = 0
+--     g_postageAmount = 0
+--     g_mailAmount = 0
+--     g_mailStacksOut = {}
+-- end
+
 function ChatAnnouncements.OnMailSuccess(eventCode)
+    local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1))
+    local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+    local currencyTypeColor = CurrencyGoldColorize:ToHex()
+    local currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
+    local currencyTotal = ChatAnnouncements.SV.Currency.CurrencyGoldShowTotal
+    local messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalGold
+
     if g_postageAmount > 0 then
         local type = "LUIE_CURRENCY_POSTAGE"
-        local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1))
-        local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
         local changeType = ZO_LocalizeDecimalNumber(g_postageAmount)
-        local currencyTypeColor = CurrencyGoldColorize:ToHex()
-        local currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
         local currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyGoldName, g_postageAmount)
-        local currencyTotal = ChatAnnouncements.SV.Currency.CurrencyGoldShowTotal
-        local messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalGold
         local messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessagePostage
         ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
     end
 
-    if not g_mailCODPresent then
-        if g_mailAmount > 0 then
-            local type = "LUIE_CURRENCY_MAIL"
-            local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1))
-            local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
-            local changeType = ZO_LocalizeDecimalNumber(g_mailAmount)
-            local currencyTypeColor = CurrencyGoldColorize:ToHex()
-            local currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
-            local currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyGoldName, g_mailAmount)
-            local currencyTotal = ChatAnnouncements.SV.Currency.CurrencyGoldShowTotal
-            local messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalGold
-            local messageChange = g_mailTarget ~= "" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOut or ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOutNoName
-            ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
-        end
+    if not g_mailCODPresent and g_mailAmount > 0 then
+        local type = "LUIE_CURRENCY_MAIL"
+        local changeType = ZO_LocalizeDecimalNumber(g_mailAmount)
+        local currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyGoldName, g_mailAmount)
+        local messageChange = g_mailTarget ~= "" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOut or ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOutNoName
+        ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
     end
 
     if ChatAnnouncements.SV.Notify.NotificationMailSendCA or ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
         local mailString
         if not g_mailCODPresent then
-            if g_mailCOD > 1 then
-                mailString = GetString(SI_LUIE_CA_MAIL_SENT_COD)
-            else
-                mailString = GetString(SI_LUIE_CA_MAIL_SENT)
-            end
+            mailString = g_mailCOD > 1 and GetString(SI_LUIE_CA_MAIL_SENT_COD) or GetString(SI_LUIE_CA_MAIL_SENT)
         end
         if mailString then
             if ChatAnnouncements.SV.Notify.NotificationMailSendCA then
@@ -3296,11 +3355,11 @@ function ChatAnnouncements.OnMailSuccess(eventCode)
     end
 
     if ChatAnnouncements.SV.Inventory.LootMail then
-        for mailIndex = 1, 6 do -- Have to iterate through all 6 possible mail attachments, otherwise nil values will bump later items off the list potentially.
-            if g_mailStacksOut[mailIndex] ~= nil then
+        for mailIndex = 1, 6 do
+            local item = g_mailStacksOut[mailIndex]
+            if item ~= nil then
                 local gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                 local logPrefix = g_mailTarget ~= "" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOut or ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOutNoName
-                local item = g_mailStacksOut[mailIndex]
                 ChatAnnouncements.ItemCounterDelayOut(item.icon, item.stack, item.itemType, item.itemId, item.itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
             end
         end
@@ -4961,9 +5020,10 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
             [ITEMTYPE_WOODWORKING_BOOSTER] = true,
             [ITEMTYPE_WOODWORKING_MATERIAL] = true,
             [ITEMTYPE_WOODWORKING_RAW_MATERIAL] = true,
+            [ITEMTYPE_FISH] = true,
         }
 
-        if (craftingType == CRAFTING_TYPE_BLACKSMITHING or craftingType == CRAFTING_TYPE_CLOTHIER or craftingType == CRAFTING_TYPE_WOODWORKING or craftingType == CRAFTING_TYPE_JEWELRYCRAFTING) and smithingMode == 4 then
+        if (craftingType == CRAFTING_TYPE_BLACKSMITHING or craftingType == CRAFTING_TYPE_CLOTHIER or craftingType == CRAFTING_TYPE_WOODWORKING or craftingType == CRAFTING_TYPE_PROVISIONING or craftingType == CRAFTING_TYPE_JEWELRYCRAFTING) and smithingMode == 4 then
             return validItemTypes[itemType] or false
         end
     end
@@ -9614,7 +9674,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    local g_previousEndlessDungeonProgression = {0, 0, 0} -- Stage, Cycle, Arc
+    local g_previousEndlessDungeonProgression = { 0, 0, 0 } -- Stage, Cycle, Arc
 
     local function GetEndlessDungeonProgressMessageParams()
         local stage, cycle, arc = ENDLESS_DUNGEON_MANAGER:GetProgression()
@@ -9708,7 +9768,6 @@ function ChatAnnouncements.HookFunction()
 
     -- EVENT_DISPLAY_ANNOUNCEMENT (CSA Handler)
     local function DisplayAnnouncementHook(primaryText, secondaryText, icon, soundId, lifespanMS, category)
-
         -- Disable Respec Display Announcement since we handle this from loot announcements (using Respec scroll)
         if primaryText == GetString(SI_RESPECTYPE_POINTSRESETTITLE1) then
             return true
@@ -9776,14 +9835,22 @@ function ChatAnnouncements.HookFunction()
             settings = LUIE.ChatAnnouncements.SV.DisplayAnnouncements.Respec
             debugDisable = true
             -- Update message syntax here
-            if primaryText == GetString(SI_RESPECTYPE_POINTSRESETTITLE0) then primaryText = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS) end
-            if primaryText == GetString(SI_RESPECTYPE_POINTSRESETTITLE1) then primaryText = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES) end
+            if primaryText == GetString(SI_RESPECTYPE_POINTSRESETTITLE0) then
+                primaryText = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS)
+            end
+            if primaryText == GetString(SI_RESPECTYPE_POINTSRESETTITLE1) then
+                primaryText = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES)
+            end
         elseif primaryText == GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D) or primaryText == GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_D) then
             settings = LUIE.ChatAnnouncements.SV.DisplayAnnouncements.GroupArea
             debugDisable = true
             -- Update message syntax here
-            if primaryText == GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D) then primaryText = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_C) end
-            if primaryText == GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_D) then primaryText = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_C) end
+            if primaryText == GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D) then
+                primaryText = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_C)
+            end
+            if primaryText == GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_D) then
+                primaryText = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_C)
+            end
         elseif type then
             settings = ResolveDisplayAnnouncementMessages(type)
             debugDisable = true
@@ -10373,8 +10440,8 @@ function ChatAnnouncements.HookFunction()
         self:AddMenuEntry(GetString(SI_CHAT_PLAYER_CONTEXT_REPORT), platformIcons[SI_CHAT_PLAYER_CONTEXT_REPORT], ENABLED, ReportCallback)
 
         --Duel--
-        local duelState, partnerCharacterName, partnerDisplayName = GetDuelInfo()
-        if duelState ~= DUEL_STATE_IDLE then
+        local duelStateI, partnerCharacterName, partnerDisplayName = GetDuelInfo()
+        if duelStateI ~= DUEL_STATE_IDLE then
             local function AlreadyDuelingWarning(duelState, characterName, displayName)
                 return function()
                     local userFacingPartnerName = ZO_GetPrimaryPlayerNameWithSecondary(displayName, characterName)
@@ -10383,7 +10450,7 @@ function ChatAnnouncements.HookFunction()
                     ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, statusString)
                 end
             end
-            self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_INVITE_DUEL), platformIcons[SI_PLAYER_TO_PLAYER_INVITE_DUEL], DISABLED, AlreadyDuelingWarning(duelState, partnerCharacterName, partnerDisplayName))
+            self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_INVITE_DUEL), platformIcons[SI_PLAYER_TO_PLAYER_INVITE_DUEL], DISABLED, AlreadyDuelingWarning(duelStateI, partnerCharacterName, partnerDisplayName))
         else
             local function DuelInviteOption()
                 ChallengeTargetToDuel(currentTargetCharacterName)
@@ -10395,8 +10462,8 @@ function ChatAnnouncements.HookFunction()
         end
 
         -- Play Tribute --
-        local tributeInviteState, partnerCharacterName, partnerDisplayName = GetTributeInviteInfo()
-        if tributeInviteState ~= TRIBUTE_INVITE_STATE_NONE then
+        local tributeInviteStateI, partnerCharacterNameI, partnerDisplayNameI = GetTributeInviteInfo()
+        if tributeInviteStateI ~= TRIBUTE_INVITE_STATE_NONE then
             local function TributeInviteFailWarning(tributeInviteState, characterName, displayName)
                 return function()
                     local userFacingPartnerName = ZO_GetPrimaryPlayerNameWithSecondary(displayName, characterName)
@@ -10405,7 +10472,7 @@ function ChatAnnouncements.HookFunction()
                     ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, statusString)
                 end
             end
-            self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_INVITE_TRIBUTE), platformIcons[SI_PLAYER_TO_PLAYER_INVITE_TRIBUTE], DISABLED, TributeInviteFailWarning(tributeInviteState, partnerCharacterName, partnerDisplayName))
+            self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_INVITE_TRIBUTE), platformIcons[SI_PLAYER_TO_PLAYER_INVITE_TRIBUTE], DISABLED, TributeInviteFailWarning(tributeInviteStateI, partnerCharacterNameI, partnerDisplayNameI))
         else
             local function TributeInviteOption()
                 ChallengeTargetToTribute(currentTargetCharacterName)

@@ -643,6 +643,40 @@ function CombatInfo.CreateSettings()
                 type = "divider",
                 width = "full",
             },
+            { type = "description", title = "Enemy Markers", width = "full" },
+            {
+                type = "checkbox",
+                name = "Show Enemy Markers",
+                tooltip = "Display a red arrow over the head of enemies you are currently in combat with.",
+                default = Settings.showMarker,
+                getFunc = function()
+                    return Settings.showMarker
+                end,
+                setFunc = function(value)
+                    Settings.showMarker = value or false
+                end,
+                width = "half",
+            },
+            {
+                type = "slider",
+                name = "Enemy Marker Size",
+                default = Settings.markerSize,
+                min = 10,
+                max = 90,
+                getFunc = function()
+                    return Settings.markerSize
+                end,
+                setFunc = function(value)
+                    Settings.markerSize = value
+                    CombatInfo.SetMarker(value)
+                end,
+                width = "half",
+            },
+
+            {
+                type = "divider",
+                width = "full",
+            },
             {
                 type = "header",
                 name = GetString(SI_LUIE_LAM_CI_BACKBAR_HEADER),
@@ -3558,12 +3592,16 @@ function CombatInfo.CreateSettings()
                 name = GetString(SI_LUIE_LAM_CI_CCT_ROOT_TOGGLE),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_ROOT_TOGGLE_TP),
                 default = Defaults.cct.showRoot,
-                getFunc = function() return Settings.cct.showRoot end,
+                getFunc = function()
+                    return Settings.cct.showRoot
+                end,
                 setFunc = function(newValue)
                     Settings.cct.showRoot = newValue
                     CrowdControlTracker:InitControls()
                 end,
-                disabled = function() return (not Settings.cct.enabled) end,
+                disabled = function()
+                    return not Settings.cct.enabled
+                end,
             },
             {
                 -- Root Color
@@ -3571,12 +3609,16 @@ function CombatInfo.CreateSettings()
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_ROOT_COLOR)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_ROOT)),
                 default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_ROOTED])),
-                getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_ROOTED]) end,
+                getFunc = function()
+                    return unpack(Settings.cct.colors[ACTION_RESULT_ROOTED])
+                end,
                 setFunc = function(r, g, b, a)
                     Settings.cct.colors[ACTION_RESULT_ROOTED] = { r, g, b, a }
                     CrowdControlTracker:InitControls()
                 end,
-                disabled = function() return not (Settings.cct.showRoot and Settings.cct.enabled) end,
+                disabled = function()
+                    return not (Settings.cct.showRoot and Settings.cct.enabled)
+                end,
             },
             {
                 type = "header",
@@ -3626,12 +3668,16 @@ function CombatInfo.CreateSettings()
                 name = GetString(SI_LUIE_LAM_CI_CCT_SNARE_TOGGLE),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_SNARE_TOGGLE_TP),
                 default = Defaults.cct.showSnare,
-                getFunc = function() return Settings.cct.showSnare end,
+                getFunc = function()
+                    return Settings.cct.showSnare
+                end,
                 setFunc = function(newValue)
                     Settings.cct.showSnare = newValue
                     CrowdControlTracker:InitControls()
                 end,
-                disabled = function() return (not Settings.cct.enabled) end,
+                disabled = function()
+                    return not Settings.cct.enabled
+                end,
             },
             {
                 -- Snare Color
@@ -3639,12 +3685,16 @@ function CombatInfo.CreateSettings()
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_SNARE_COLOR)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_SNARE)),
                 default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_SNARED])),
-                getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_SNARED]) end,
+                getFunc = function()
+                    return unpack(Settings.cct.colors[ACTION_RESULT_SNARED])
+                end,
                 setFunc = function(r, g, b, a)
                     Settings.cct.colors[ACTION_RESULT_SNARED] = { r, g, b, a }
                     CrowdControlTracker:InitControls()
                 end,
-                disabled = function() return not (Settings.cct.showSnare and Settings.cct.enabled) end,
+                disabled = function()
+                    return not (Settings.cct.showSnare and Settings.cct.enabled)
+                end,
             },
 
             {

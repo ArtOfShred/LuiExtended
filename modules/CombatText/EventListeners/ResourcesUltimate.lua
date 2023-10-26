@@ -43,5 +43,5 @@ function CombatTextResourcesUltimateEventListener:OnEvent(unit, powerPoolIndex, 
 end
 
 function CombatTextResourcesUltimateEventListener:UpdateMaximum()
-    self.powerInfo.maximum = GetSlotAbilityCost(ACTION_BAR_ULTIMATE_SLOT_INDEX + 1)
+    self.powerInfo.maximum = GetSlotAbilityCost(ACTION_BAR_ULTIMATE_SLOT_INDEX + 1, COMBAT_MECHANIC_FLAGS_ULTIMATE, ZO_UtilityWheel_Shared:GetHotbarCategory())
 end

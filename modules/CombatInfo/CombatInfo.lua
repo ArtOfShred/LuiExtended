@@ -43,6 +43,8 @@ CombatInfo.Defaults = {
     ShowTriggered = true,
     ProcEnableSound = true,
     ProcSoundName = "Death Recap Killing Blow",
+    showMarker = false,
+    markerSize = 26,
     ShowToggled = true,
     ShowToggledUltimate = true,
     BarShowLabel = true, -- Temp Disabled
@@ -303,7 +305,7 @@ local g_castbarFont -- Font for Castbar Label & Timer
 local g_ProcSound -- Proc Sound
 local g_boundArmamentsPlayed = false -- Specific variable to lockout Bound Armaments/Grim Focus from playing a proc sound at 5 stacks to only once per 5 seconds.
 local g_disableProcSound = {} -- When we play a proc sound from a bar ability changing (like power lash) we put a 3 sec ICD on it so it doesn't spam when mousing on/off a target, etc
-local g_hotbarCategory = GetActiveHotbarCategory() -- Set on initialization and when we swap weapons to determine the current hotbar category
+local g_hotbarCategory = {} -- Set on initialization and when we swap weapons to determine the current hotbar category
 local g_backbarButtons = {} -- Table to hold backbar buttons
 local g_activeWeaponSwapInProgress = false -- Toggled on when weapon swapping, TODO: maybe not needed
 local g_castbarWorldMapFix = false -- Fix for viewing the World Map changing the player coordinates for some reason
@@ -351,6 +353,17 @@ local KEYBOARD_CONSTANTS = {
     abilitySlotOffsetX = 2,
     ultimateSlotOffsetX = 62,
 }
+
+function CombatInfo.SetMarker(...)
+    if CombatInfo.SV.showMarker ~= true then
+        return
+    end
+
+    local LUIE_MARKER = "/LuiExtended/media/combatinfo/floatingicon/redarrow.dds"
+    local _
+    SetFloatingMarkerInfo(MAP_PIN_TYPE_AGGRO, CombatInfo.SV.markerSize, LUIE_MARKER, _, _, _)
+    SetFloatingMarkerGlobalAlpha(1)
+end
 
 local slotsUpdated = {}
 
@@ -408,7 +421,7 @@ function CombatInfo.Initialize(enabled)
     -- if CombatInfo.SV.BarShowLabel == true then
     -- CombatInfo.SV.BarShowLabel = false
     -- end
-
+    CombatInfo.SetMarker()
     CombatInfo.ApplyFont()
     CombatInfo.ApplyProcSound()
 
@@ -540,16 +553,17 @@ function CombatInfo.SetupBackBarIcons(button, flip)
 end
 
 function CombatInfo.handleFlip(slotNum)
-    local desaturate
-    if g_uiCustomToggle[slotNum] then
+    local desaturate = true
+
+    if g_uiCustomToggle and g_uiCustomToggle[slotNum] then
         desaturate = false
+
         if g_uiCustomToggle[slotNum]:IsHidden() then
             CombatInfo.BackbarHideSlot(slotNum)
             desaturate = true
         end
-    else
-        desaturate = true
     end
+
     CombatInfo.ToggleBackbarSaturation(slotNum, desaturate)
 end
 
@@ -1607,7 +1621,7 @@ function CombatInfo.HideSlot(slotNum, abilityId)
             CombatInfo.ToggleBackbarSaturation(slotNum, CombatInfo.SV.BarDarkUnused)
         end
     end
-    if slotNum == g_ultimateSlot and CombatInfo.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
+    if slotNum == g_ultimateSlot and CombatInfo.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot, g_hotbarCategory) then
         uiUltimate.LabelPct:SetHidden(false)
     end
 end
@@ -2020,18 +2034,7 @@ function CombatInfo.OnCombatEventBreakCast(eventCode, result, isError, abilityNa
 end
 
 local function isValidDamageResult(result)
-    if result == ACTION_RESULT_BLOCKED or
-    result == ACTION_RESULT_BLOCKED_DAMAGE or
-    result == ACTION_RESULT_CRITICAL_DAMAGE or
-    result == ACTION_RESULT_DAMAGE or
-    result == ACTION_RESULT_DAMAGE_SHIELDED or
-    result == ACTION_RESULT_IMMUNE or
-    result == ACTION_RESULT_MISS or
-    result == ACTION_RESULT_PARTIAL_RESIST or
-    result == ACTION_RESULT_REFLECTED or
-    result == ACTION_RESULT_RESIST or
-    result == ACTION_RESULT_WRECKING_DAMAGE or
-    result == ACTION_RESULT_DODGED then
+    if result == ACTION_RESULT_BLOCKED or result == ACTION_RESULT_BLOCKED_DAMAGE or result == ACTION_RESULT_CRITICAL_DAMAGE or result == ACTION_RESULT_DAMAGE or result == ACTION_RESULT_DAMAGE_SHIELDED or result == ACTION_RESULT_IMMUNE or result == ACTION_RESULT_MISS or result == ACTION_RESULT_PARTIAL_RESIST or result == ACTION_RESULT_REFLECTED or result == ACTION_RESULT_RESIST or result == ACTION_RESULT_WRECKING_DAMAGE or result == ACTION_RESULT_DODGED then
         return true
     end
 end
@@ -2334,7 +2337,7 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
         end
     end
 
-    if slotNum < BACKBAR_INDEX_OFFSET and not IsSlotUsed(slotNum) then
+    if slotNum < BACKBAR_INDEX_OFFSET and not IsSlotUsed(slotNum, g_hotbarCategory) then
         return
     end
 
@@ -2544,7 +2547,7 @@ function CombatInfo.ShowCustomToggle(slotNum)
             actionButton = g_backbarButtons[slotNum]
         end
         local name = "ActionButton" .. slotNum .. "Toggle_LUIE"
-        local window = windowManager:GetControlByName(name) -- Check to see if this frame already exists, don't create it if it does.
+        local window = windowManager:GetControlByName(name, "") -- Check to see if this frame already exists, don't create it if it does.
         if window == nil then
             local toggleFrame = windowManager:CreateControl("$(parent)Toggle_LUIE", actionButton.slot, CT_TEXTURE)
             --toggleFrame.back = UI.Texture(toggleFrame, nil, nil, "/esoui/art/actionbar/actionslot_toggledon.dds")
@@ -2604,7 +2607,7 @@ function CombatInfo.OnPowerUpdatePlayer(eventCode, unitTag, powerIndex, powerTyp
         pct = 100
     end
     -- Update the tooltip only when the slot is used and percentage is enabled
-    if IsSlotUsed(g_ultimateSlot) then
+    if IsSlotUsed(g_ultimateSlot, g_hotbarCategory) then
         if CombatInfo.SV.UltimateLabelEnabled or CombatInfo.SV.UltimatePctEnabled then
             -- Set % value
             if CombatInfo.SV.UltimatePctEnabled then
