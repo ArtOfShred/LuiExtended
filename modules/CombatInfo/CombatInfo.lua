@@ -305,7 +305,7 @@ local g_castbarFont -- Font for Castbar Label & Timer
 local g_ProcSound -- Proc Sound
 local g_boundArmamentsPlayed = false -- Specific variable to lockout Bound Armaments/Grim Focus from playing a proc sound at 5 stacks to only once per 5 seconds.
 local g_disableProcSound = {} -- When we play a proc sound from a bar ability changing (like power lash) we put a 3 sec ICD on it so it doesn't spam when mousing on/off a target, etc
-local g_hotbarCategory = {} -- Set on initialization and when we swap weapons to determine the current hotbar category
+local g_hotbarCategory = GetActiveHotbarCategory() -- Set on initialization and when we swap weapons to determine the current hotbar category
 local g_backbarButtons = {} -- Table to hold backbar buttons
 local g_activeWeaponSwapInProgress = false -- Toggled on when weapon swapping, TODO: maybe not needed
 local g_castbarWorldMapFix = false -- Fix for viewing the World Map changing the player coordinates for some reason
@@ -526,6 +526,17 @@ function CombatInfo.SetupBackBarIcons(button, flip)
     local hotbarCategory = g_hotbarCategory == HOTBAR_CATEGORY_BACKUP and HOTBAR_CATEGORY_PRIMARY or HOTBAR_CATEGORY_BACKUP
     local slotNum = button.slot.slotNum
     local slotId = GetSlotBoundId(slotNum - BACKBAR_INDEX_OFFSET, hotbarCategory)
+
+    -- Check backbar weapon type
+    local weaponSlot = g_hotbarCategory == HOTBAR_CATEGORY_BACKUP and 4 or 20
+    local weaponType = GetItemWeaponType(BAG_WORN, weaponSlot)
+
+    -- Fix tracking for Staff Backbar
+    if weaponType == WEAPONTYPE_FIRE_STAFF or weaponType == WEAPONTYPE_FROST_STAFF or weaponType == WEAPONTYPE_LIGHTNING_STAFF then
+        if Effects.BarHighlightDestroFix[slotId] and Effects.BarHighlightDestroFix[slotId][weaponType] then
+            slotId = Effects.BarHighlightDestroFix[slotId][weaponType]
+        end
+    end
 
     -- Special case for certain skills, so the proc icon doesn't get stuck.
     local specialCases = {
@@ -2345,6 +2356,17 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
     if slotNum > BACKBAR_INDEX_OFFSET then
         local hotbarCategory = g_hotbarCategory == HOTBAR_CATEGORY_BACKUP and HOTBAR_CATEGORY_PRIMARY or HOTBAR_CATEGORY_BACKUP
         ability_id = GetSlotBoundId(slotNum - BACKBAR_INDEX_OFFSET, hotbarCategory)
+
+        -- Check backbar weapon type
+        local weaponSlot = g_hotbarCategory == HOTBAR_CATEGORY_BACKUP and 4 or 20
+        local weaponType = GetItemWeaponType(BAG_WORN, weaponSlot)
+
+        -- Fix tracking for Staff Backbar
+        if weaponType == WEAPONTYPE_FIRE_STAFF or weaponType == WEAPONTYPE_FROST_STAFF or weaponType == WEAPONTYPE_LIGHTNING_STAFF then
+            if Effects.BarHighlightDestroFix[ability_id] and Effects.BarHighlightDestroFix[ability_id][weaponType] then
+                ability_id = Effects.BarHighlightDestroFix[ability_id][weaponType]
+            end
+        end
     end
 
     -- Added this back for now but some abilities might still need updates in the override tables
