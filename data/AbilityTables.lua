@@ -1180,26 +1180,12 @@ local AbilityTables = {
     Keep_Upgrade_Food_Guard_Abilities = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_ABILITIES),
 }
 
--- -- Replace ability IDs with names
--- for k, v in pairs(AbilityTables) do
---     if type(v) == "number" then
---         AbilityTables[k] = zo_strformat("<<C:1>>", GetAbilityName(v))
---     end
--- end
-
--- -- Export string data to global namespace
--- LUIE.Data.Abilities = AbilityTables
-
-
 -- Replace ability IDs with names
 for k, v in pairs(AbilityTables) do
     if type(v) == "number" then
         AbilityTables[k] = zo_strformat("<<C:1>>", GetAbilityName(v))
     end
 end
-
--- Cache table length
-local length = #AbilityTables
 
 -- Export string data to global namespace
 LUIE.Data.Abilities = AbilityTables
