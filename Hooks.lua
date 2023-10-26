@@ -726,7 +726,7 @@ function LUIE.InitializeHooks()
         if LUIE.SpellCastBuffs.SV.TooltipAbilityId or LUIE.SpellCastBuffs.SV.TooltipBuffType then
             -- Add Ability ID Line
             if LUIE.SpellCastBuffs.SV.TooltipAbilityId then
-                local labelAbilityId = abilityId and abilityId or "None"
+                local labelAbilityId = abilityId or "None"
                 if labelAbilityId == "Fake" then
                     artificial = true
                 end
@@ -821,7 +821,7 @@ function LUIE.InitializeHooks()
             GameTooltip:AddLine("", "", ZO_NORMAL_TEXT:UnpackRGB())
             -- Add Ability ID Line
             if LUIE.SpellCastBuffs.SV.TooltipAbilityId then
-                local labelAbilityId = control.effectId and control.effectId or "None"
+                local labelAbilityId = control.effectId or "None"
                 if labelAbilityId == "Fake" then
                     artificial = true
                 end
@@ -840,7 +840,7 @@ function LUIE.InitializeHooks()
 
             -- Add Buff Type Line
             if LUIE.SpellCastBuffs.SV.TooltipBuffType then
-                local buffType = control.effectType and control.effectType or LUIE_BUFF_TYPE_NONE
+                local buffType = control.effectType or LUIE_BUFF_TYPE_NONE
                 local effectId = control.effectId
                 if effectId and LUIE.Data.Effects.EffectOverride[effectId] and LUIE.Data.Effects.EffectOverride[effectId].unbreakable then
                     buffType = buffType + 2
