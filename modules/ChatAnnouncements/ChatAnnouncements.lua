@@ -9794,8 +9794,12 @@ function ChatAnnouncements.HookFunction()
         -- Debug function
         if ChatAnnouncements.SV.DisplayAnnouncements.Debug and not debugDisable then
             d("EVENT_DISPLAY_ANNOUNCEMENT: If you see this message please post a screenshot and context for the event on the LUI Extended ESOUI page.")
-            d("Primary Text: " .. primaryText)
-            d("Secondary Text: " .. secondaryText)
+            if primaryText then
+                d("Primary Text: " .. primaryText)
+            end
+            if secondaryText then
+                d("Secondary Text: " .. secondaryText)
+            end
             local zoneid = GetZoneId(GetCurrentMapZoneIndex())
             d("Zone Id: " .. zoneid)
             local mapid = GetCurrentMapId()

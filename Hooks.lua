@@ -1588,6 +1588,7 @@ function LUIE.InitializeHooks()
         local level = zo_strformat("<<1>> <<2>>", GetString(SI_ITEM_FORMAT_STR_LEVEL), data.level)
         local name = zo_strformat("<<1>>", data.name)
         local description = data.description
+        
         KeepUpgradeTooltip:SetVerticalPadding(16)
         KeepUpgradeTooltip:AddLine(name, "ZoFontHeader3", 1, 1, 1, nil, MODIFY_TEXT_TYPE_UPPERCASE, TEXT_ALIGN_CENTER)
         KeepUpgradeTooltip:SetVerticalPadding(0)
