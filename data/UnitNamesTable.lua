@@ -3,6 +3,10 @@
     License: The MIT License (MIT)
 --]]
 
+if LUIE.Data.UnitNames == nil then
+    LUIE.Data.UnitNames = {}
+end
+
 LUIE.Data.UnitNames = {
 
     ----------------------------------------------------------------

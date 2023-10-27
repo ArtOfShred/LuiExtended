@@ -7,7 +7,11 @@ local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
 local Abilities = LUIE.Data.Abilities
 
-LUIE.Data.ZoneTable = {
+if LUIE.Data.ZoneTable == nil then
+    LUIE.Data.ZoneTable = {}
+end
+
+local ZoneTable = {
 
     [63157] = {
         block = true,
@@ -42,7 +46,13 @@ LUIE.Data.ZoneTable = {
     }, -- Flame Shard (Justice Guard 2H)
 }
 
-LUIE.Data.AlertTable = {
+LUIE.Data.ZoneTable = ZoneTable
+
+if LUIE.Data.AlertTable == nil then
+    LUIE.Data.AlertTable = {}
+end
+
+local AlertTable = {
 
     -- SET A PRIORITY
     -- priority = 1-3: (1 = ARENA/DUNGEON/TRIAL, 2 = ELITE NPC/QUEST BOSS, 3 = NORMAL NPC)
@@ -2091,7 +2101,8 @@ LUIE.Data.AlertTable = {
         duration = 1700,
         cc = LUIE_CC_TYPE_STAGGER,
         sound = LUIE_ALERT_SOUND_TYPE_AOE_CC,
-    }, -- Tremor AOE (Flesh Colossus) ]]--TODO: Removed (also - is this AOE?)
+    }, -- Tremor AOE (Flesh Colossus) ]]
+    --TODO: Removed (also - is this AOE?)
     [66869] = {
         block = true,
         dodge = true,
@@ -5941,8 +5952,13 @@ LUIE.Data.AlertTable = {
     [83430] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Skeletal Smash (Ice Wraith)
 }
 
+LUIE.Data.AlertTable = AlertTable
+
+if LUIE.Data.AlertBossNameConvert == nil then
+    LUIE.Data.AlertBossNameConvert = {}
+end
 -- When a certain boss in in range if this id is cast, use the specified name as the source (There are some cases where bosses have uniquely named abilities as other enemies in the dungeon so this is a way to have both show properly).
-LUIE.Data.AlertBossNameConvert = {
+local AlertBossNameConvert = {
 
     [57534] = { -- Focused Healing (Healer)
 
@@ -6010,7 +6026,12 @@ LUIE.Data.AlertBossNameConvert = {
     },
 }
 
-LUIE.Data.AlertZoneOverride = {
+LUIE.Data.AlertBossNameConvert = AlertBossNameConvert
+
+if LUIE.Data.AlertZoneOverride == nil then
+    LUIE.Data.AlertZoneOverride = {}
+end
+local AlertZoneOverride = {
 
     [7835] = { -- Convalescence (Lamia)
         [131] = Unitnames.NPC_Lamia_Curare, -- Tempest Island
@@ -6835,11 +6856,18 @@ LUIE.Data.AlertZoneOverride = {
     },
 }
 
+LUIE.Data.AlertZoneOverride = AlertZoneOverride
+
+if LUIE.Data.AlertMapOverride == nil then
+    LUIE.Data.AlertMapOverride = {}
+end
 -- Map Name override - Sometimes we need to use GetMapName() instead of Location Name or ZoneId
-LUIE.Data.AlertMapOverride = {
+local AlertMapOverride = {
 
     [70366] = { -- Slam (Great Bear)
         -- QUESTS
         [Zonenames.Zone_Deepwood_Barrow] = Unitnames.NPC_Great_Bear, -- Deepwood Vale (Greymoor Tutorial)
     },
 }
+
+LUIE.Data.AlertMapOverride = AlertMapOverride

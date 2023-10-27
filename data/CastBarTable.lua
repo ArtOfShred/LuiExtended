@@ -3,8 +3,11 @@
     License: The MIT License (MIT)
 --]]
 
--- Cast Bar Table namespace
-LUIE.Data.CastBarTable = {}
+-- CastBarTable namespace
+if LUIE.Data.CastBarTable == nil then
+    LUIE.Data.CastBarTable = {}
+end
+
 local CastBarTable = LUIE.Data.CastBarTable
 local Abilities = LUIE.Data.Abilities
 

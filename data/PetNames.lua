@@ -3,8 +3,11 @@
     License: The MIT License (MIT)
 --]]
 
--- Quests namespace
-LUIE.Data.PetNames = {}
+-- PetNames namespace
+if LUIE.Data.PetNames == nil then
+    LUIE.Data.PetNames = {}
+end
+
 local PetNames = LUIE.Data.PetNames
 
 -- Pet Names (Sorcerer)

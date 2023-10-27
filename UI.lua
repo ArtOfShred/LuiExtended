@@ -4,7 +4,10 @@
 --]]
 
 -- UI namespace
-LUIE.UI = {}
+if LUIE.UI == nil then
+    LUIE.UI = {}
+end
+
 local UI = LUIE.UI
 
 local windowManager = WINDOW_MANAGER

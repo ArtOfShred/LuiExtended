@@ -3,7 +3,10 @@
     License: The MIT License (MIT)
 --]]
 
-LUIE.Data.AbilityBlacklistPresets = {}
+if LUIE.Data.AbilityBlacklistPresets == nil then
+    LUIE.Data.AbilityBlacklistPresets = {}
+end
+
 local BlacklistPresets = LUIE.Data.AbilityBlacklistPresets
 
 -- Minor Buffs

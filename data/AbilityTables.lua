@@ -2,7 +2,9 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
-
+if LUIE.Data.Abilities == nil then
+    LUIE.Data.Abilities = {}
+end
 -- AbilityTables namespace
 local AbilityTables = {
     -- ---------------------------------------------------
