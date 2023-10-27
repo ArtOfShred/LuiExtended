@@ -1,4 +1,16 @@
-# Version 6.6.3
+# Version 6.6.4
+
+Buffs & Debuffs
+
+- Fixed an issue where having unanchored buff frames could throw UI errors under certain conditions.
+
+Chat Announcements
+
+- Added error prevention for item chat messages throwing a UI error under certain conditions.
+
+---
+
+## Version 6.6.3
 
 General
 
@@ -25,7 +37,7 @@ Unit Frames
 
 ---
 
-## Version 6.6.2
+### Version 6.6.2
 
 Chat Announcements
 
@@ -33,7 +45,7 @@ Chat Announcements
 
 ---
 
-## Version 6.6.1
+### Version 6.6.1
 
 General
 
@@ -41,7 +53,7 @@ General
 
 ---
 
-## Version 6.6.0
+### Version 6.6.0
 
 General
 
@@ -67,19 +79,19 @@ Unit Frames
 
 ---
 
-## Version 6.5.1
+### Version 6.5.1
 
 Combat Info
 
 - Re-enabled ability timers again (thanks to DakJaniels)
 
-## Version 6.5.0
+### Version 6.5.0
 
 Combat Info
 
 - Added New AOEs to AOE Tracker Dataset & fixed certain effects showing up in CC tracker (thanks Anthonysc)
 
-## Version 6.4.9
+### Version 6.4.9
 
 Combat Info
 
@@ -87,7 +99,7 @@ Combat Info
 
 ---
 
-## Version 6.4.8
+### Version 6.4.8
 
 Combat Info
 
@@ -95,7 +107,7 @@ Combat Info
 
 ---
 
-## Version 6.4.7
+### Version 6.4.7
 
 Slash Commands
 
@@ -108,7 +120,7 @@ Combat Info
 
 ---
 
-## Version 6.4.6
+### Version 6.4.6
 
 General
 
@@ -116,7 +128,7 @@ General
 
 ---
 
-## Version 6.4.5
+### Version 6.4.5
 
 Slash Commands
 
@@ -129,7 +141,7 @@ Chat Announcements
 
 ---
 
-## Version 6.4.4
+### Version 6.4.4
 
 Slash Commands
 
@@ -143,7 +155,7 @@ Unit Frames
 
 ---
 
-## Version 6.4.3
+### Version 6.4.3
 
 General
 
@@ -161,7 +173,7 @@ Unit Frames
 
 ---
 
-## Version 6.4.2
+### Version 6.4.2
 
 General
 
@@ -178,7 +190,7 @@ Combat Info
 
 ---
 
-## Version 6.4.1
+### Version 6.4.1
 
 General
 
@@ -186,7 +198,7 @@ General
 
 ---
 
-## Version 6.4.0
+### Version 6.4.0
 
 General
 
@@ -201,7 +213,7 @@ Unit Frames
 
 ---
 
-## Version 6.3.2
+### Version 6.3.2
 
 General
 
@@ -209,7 +221,7 @@ General
 
 ---
 
-## Version 6.3.1
+### Version 6.3.1
 
 General
 
@@ -223,7 +235,7 @@ Combat Info
 
 ---
 
-## Version 6.3.0
+### Version 6.3.0
 
 General
 
@@ -248,7 +260,7 @@ Slash Commands
 
 ---
 
-## Version 6.2.9
+### Version 6.2.9
 
 Buffs & Debuffs
 
@@ -277,7 +289,7 @@ Unit Frames
 
 ---
 
-## Version 6.2.8
+### Version 6.2.8
 
 Slash Commands
 
@@ -290,7 +302,7 @@ Unit Frames
 
 ---
 
-## Version 6.2.7
+### Version 6.2.7
 
 Known Issues
 
@@ -349,7 +361,7 @@ Unit Frames
 
 ---
 
-## Version 6.2.6
+### Version 6.2.6
 
 General
 
@@ -389,7 +401,7 @@ Combat Text
 
 ---
 
-## Version 6.2.5
+### Version 6.2.5
 
 Buffs & Debuffs
 
@@ -422,7 +434,7 @@ Unit Frames
 
 ---
 
-## Version 6.2.4
+### Version 6.2.4
 
 General
 
@@ -431,7 +443,7 @@ General
 
 ---
 
-## Version 6.2.3
+### Version 6.2.3
 
 General
 
@@ -443,7 +455,7 @@ General
 
 ---
 
-## Version 6.2.2
+### Version 6.2.2
 
 Known Issues
 
@@ -469,7 +481,7 @@ Combat Info
 
 ---
 
-## Version 6.2.1
+### Version 6.2.1
 
 Known Issues
 
@@ -496,7 +508,7 @@ Combat Info:
 
 ---
 
-## Version 6.2.0
+### Version 6.2.0
 
 General
 
@@ -539,7 +551,7 @@ Unit Frames
 
 ---
 
-## Version 6.1.2
+### Version 6.1.2
 
 General
 
@@ -572,7 +584,7 @@ Combat Info
 
 ---
 
-## Version 6.1.1
+### Version 6.1.1
 
 General
 
@@ -612,7 +624,7 @@ Unit Frames
 
 ---
 
-## Version 6.1.0
+### Version 6.1.0
 
 General
 
@@ -658,7 +670,7 @@ Slash Commands
 
 ---
 
-## Version 6.0.9
+### Version 6.0.9
 
 General
 
@@ -687,7 +699,7 @@ Combat Info
 
 ---
 
-## Version 6.0.8
+### Version 6.0.8
 
 General
 
@@ -711,7 +723,7 @@ Unit Frames
 
 ---
 
-## Version 6.0.7
+### Version 6.0.7
 
 Unit Frames
 
@@ -721,7 +733,7 @@ Unit Frames
 
 ---
 
-## Version 6.0.6
+### Version 6.0.6
 
 General
 
@@ -756,7 +768,7 @@ Unit Frames
 
 ---
 
-## Version 6.0.5
+### Version 6.0.5
 
 General
 
@@ -777,7 +789,7 @@ Slash Commands
 
 ---
 
-## Version 6.0.4
+### Version 6.0.4
 
 General
 
@@ -796,7 +808,7 @@ Combat Info
 
 ---
 
-## Version 6.0.3
+### Version 6.0.3
 
 Slash Commands
 
@@ -805,7 +817,7 @@ Slash Commands
 
 ---
 
-## Version 6.0.2
+### Version 6.0.2
 
 General
 
@@ -820,7 +832,7 @@ Chat Announcements
 
 ---
 
-## Version 6.0.1
+### Version 6.0.1
 
 General
 
@@ -830,7 +842,7 @@ General
 
 ---
 
-## Version 6.0.0
+### Version 6.0.0
 
 General
 
@@ -925,7 +937,7 @@ Art Assets
 
 ---
 
-## Version 5.9.4
+### Version 5.9.4
 
 General
 
@@ -947,7 +959,7 @@ Combat Info
 
 ---
 
-## Version 5.9.3
+### Version 5.9.3
 
 General
 
@@ -986,7 +998,7 @@ Unit Frames
 
 ---
 
-## Version 5.9.2
+### Version 5.9.2
 
 General
 
@@ -999,7 +1011,7 @@ Combat Info
 
 ---
 
-## Version 5.9.1
+### Version 5.9.1
 
 General
 
@@ -1011,7 +1023,7 @@ Buffs & Debuffs
 
 ---
 
-## Version 5.9.0
+### Version 5.9.0
 
 General
 
@@ -1058,7 +1070,7 @@ Known Issues:
 
 ---
 
-## Version 5.8.1
+### Version 5.8.1
 
 General
 
@@ -1088,7 +1100,7 @@ Slash Commands
 
 ---
 
-## Version 5.8.0
+### Version 5.8.0
 
 General
 
@@ -1126,7 +1138,7 @@ Unit Frames
 
 ---
 
-## Version 5.7.3
+### Version 5.7.3
 
 General
 
@@ -1142,7 +1154,7 @@ Combat Info
 
 ---
 
-## Version 5.7.2
+### Version 5.7.2
 
 General
 
@@ -1170,7 +1182,7 @@ Combat Text
 
 ---
 
-## Version 5.7.1
+### Version 5.7.1
 
 Unit Frames
 
@@ -1178,7 +1190,7 @@ Unit Frames
 
 ---
 
-## Version 5.7.0
+### Version 5.7.0
 
 General
 
@@ -1253,7 +1265,7 @@ Unit Frames
 
 ---
 
-## Version 5.6.1
+### Version 5.6.1
 
 Combat Info
 
@@ -1265,7 +1277,7 @@ Unit Frames
 
 ---
 
-## Version 5.6.0
+### Version 5.6.0
 
 General
 
@@ -1328,7 +1340,7 @@ Unit Frames
 
 ---
 
-## Version 5.5.2
+### Version 5.5.2
 
 Combat Info
 
@@ -1346,7 +1358,7 @@ Buffs & Debuffs
 
 ---
 
-## Version 5.5.1
+### Version 5.5.1
 
 Combat Info
 
@@ -1359,7 +1371,7 @@ Buffs & Debuffs:
 
 ---
 
-## Version 5.5
+### Version 5.5
 
 General Components
 
@@ -1412,7 +1424,7 @@ Slash Commands
 
 ---
 
-## Version 5.4
+### Version 5.4
 
 General
 
@@ -1483,7 +1495,7 @@ Unit Frames
 
 ---
 
-## Version 5.3.2
+### Version 5.3.2
 
 General
 
@@ -1518,7 +1530,7 @@ Unit Frames
 
 ---
 
-## Version 5.3.1
+### Version 5.3.1
 
 Buffs and Debuffs
 
@@ -1527,7 +1539,7 @@ Buffs and Debuffs
 
 ---
 
-## Version 5.3
+### Version 5.3
 
 General
 
@@ -1582,7 +1594,7 @@ Version 5.2.8
 
 - Unit Frames - Fixed issue with Regen Arrows animation throwing errors if one of the few abilities in game that properly tries to apply a magicka or stamina regen animation is used. Now if the regeneration type isn't Health the function will end.
 
-## Version 5.2.7
+### Version 5.2.7
 
 General
 
@@ -1624,7 +1636,7 @@ Unit Frames
 
 ---
 
-## Version 5.2.6
+### Version 5.2.6
 
 Unit Frames
 
@@ -1635,7 +1647,7 @@ Unit Frames
 
 ---
 
-## Version 5.2.5
+### Version 5.2.5
 
 Combat Info
 
@@ -1666,7 +1678,7 @@ Unit Frames
 
 ---
 
-## Version 5.2.4
+### Version 5.2.4
 
 Unit Frames
 
@@ -1682,7 +1694,7 @@ Unit Frames
 
 ---
 
-## Version 5.2.3
+### Version 5.2.3
 
 Buffs and Debuffs
 
@@ -1705,7 +1717,7 @@ Unit Frames
 
 ---
 
-## Version 5.2.2
+### Version 5.2.2
 
 General
 
@@ -1717,7 +1729,7 @@ Chat Announcements
 
 ---
 
-## Version 5.2.1
+### Version 5.2.1
 
 Buffs and Debuffs
 
@@ -1739,7 +1751,7 @@ Combat Text
 
 ---
 
-## Version 5.2
+### Version 5.2
 
 General
 
@@ -1874,7 +1886,7 @@ Unit Frames
 
 ---
 
-## Version 5.1.2
+### Version 5.1.2
 
 General
 
@@ -1888,7 +1900,7 @@ Buffs and Debuffs
 
 ---
 
-## Version 5.1.1
+### Version 5.1.1
 
 Buffs and Debuffs
 
@@ -1902,7 +1914,7 @@ Chat Announcements
 
 ---
 
-## Version 5.1
+### Version 5.1
 
 General
 
@@ -1952,7 +1964,7 @@ Chat Announcements
 
 ---
 
-## Version 5.03
+### Version 5.03
 
 General
 
@@ -1969,7 +1981,7 @@ Chat Announcements
 
 ---
 
-## Version 5.02
+### Version 5.02
 
 Buffs and Debuffs
 
@@ -1978,7 +1990,7 @@ Buffs and Debuffs
 
 ---
 
-## Version 5.01
+### Version 5.01
 
 General
 
@@ -1990,7 +2002,7 @@ Chat Announcements
 
 ---
 
-## Version 5.00
+### Version 5.00
 
 General
 
@@ -2077,7 +2089,7 @@ Unit Frames
 
 ---
 
-## Version 4.99f
+### Version 4.99f
 
 Unit Frames
 
@@ -2094,7 +2106,7 @@ Chat Announcements
 
 ---
 
-## Version 4.99e
+### Version 4.99e
 
 General
 
@@ -2107,7 +2119,7 @@ Chat Announcements
 
 ---
 
-## Version 4.99d
+### Version 4.99d
 
 Chat Announcements
 
@@ -2119,7 +2131,7 @@ Buffs and Debuffs
 
 ---
 
-## Version 4.99c
+### Version 4.99c
 
 Unit Frames
 
@@ -2138,7 +2150,7 @@ Chat Announcements
 
 ---
 
-## Version 4.99b
+### Version 4.99b
 
 Buffs and Debuffs
 
@@ -2158,7 +2170,7 @@ Chat Announcements
 
 ---
 
-## Version 4.99a
+### Version 4.99a
 
 General
 
@@ -2172,7 +2184,7 @@ Buffs and Debuffs
 
 ---
 
-## Version 4.99
+### Version 4.99
 
 General
 

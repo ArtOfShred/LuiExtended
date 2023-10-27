@@ -6,11 +6,19 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
+    "|cFFA500LuiExtended Version 6.6.4|r",
+    "",
+    "|cFFFF00Buffs & Debuffs:|r",
+    "[*] Fixed an issue where having unanchored buff frames could throw UI errors under certain conditions.",
+    "",
+    "|cFFFF00Chat Announcements:|r",
+    "[*] Added error prevention for item chat messages throwing a UI error under certain conditions.",
+    "",
     "|cFFA500LuiExtended Version 6.6.3|r",
     "",
     "|cFFFF00General:|r",
     "[*] Updated Bar Highlight & Buff Tracking for these abilities and their morphs: Trap Beast (Fighters Guild), Scorch (Warden), Grim Focus (Nightblade), Bound Armaments (Sorcerer), Blood Frenzy (Vampire).",
-    "[*] Abilities that \"echo\" now display a stack counter (for Bar Highlight & Buff Tracking) to serve as a counter - so far this includes Scorch & Haunting Curse.",
+    '[*] Abilities that "echo" now display a stack counter (for Bar Highlight & Buff Tracking) to serve as a counter - so far this includes Scorch & Haunting Curse.',
     "",
     "|cFFFF00Buffs & Debuffs:|r",
     "[*] Added options for row stacking for the Player/Target Buff & Debuff frames when the option to anchor the frames to the Custom Unit Frames is DISABLED. You can customize how wide the containers are and the direction the rows stack (up or down).",
@@ -24,7 +32,7 @@ local changelogMessages = {
     "[*] Flame Lash (Dragonknight) ability icon on the ability bar now glows when Power Lash is available (targeting an enemy that is rooted or Off-Balance).",
     "",
     "|cFFFF00Unit Frames:|r",
-    "[*] Unit Frames now display the \"Trauma\" effect (healing absorption) - this has a customizable color and will display on all bars. You can also display the value on the bars but this must be configured in the settings menu (the dropdowns for the format now include options for adding the Trauma value).",
+    '[*] Unit Frames now display the "Trauma" effect (healing absorption) - this has a customizable color and will display on all bars. You can also display the value on the bars but this must be configured in the settings menu (the dropdowns for the format now include options for adding the Trauma value).',
     "",
 }
 
