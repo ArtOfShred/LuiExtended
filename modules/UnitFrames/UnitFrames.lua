@@ -86,7 +86,7 @@ UnitFrames.Defaults = {
     CustomColourTrauma = { 90 / 255, 0, 99 / 255 }, -- .a=0.5 for overlay and .a = 1 for separate
     CustomColourMagicka = { 0, 83 / 255, 209 / 255 },
     CustomColourStamina = { 28 / 255, 177 / 255, 0 },
-    CustomColourInvulnerable = { 120 / 255, 100 / 255, 85 / 255 },
+    CustomColourInvulnerable = { 95 / 255, 70 / 255, 60 / 255 },
     CustomColourDPS = { 130 / 255, 99 / 255, 65 / 255 },
     CustomColourHealer = { 117 / 255, 077 / 255, 135 / 255 },
     CustomColourTank = { 133 / 255, 018 / 255, 013 / 255 },
@@ -186,7 +186,7 @@ UnitFrames.Defaults = {
     CustomColourFriendly = { 0, 1, 0 },
     CustomColourHostile = { 1, 0, 0 },
     CustomColourNeutral = { 150 / 255, 150 / 255, 150 / 255 },
-    CustomColourGuard = { 120 / 255, 100 / 255, 85 / 255 },
+    CustomColourGuard = { 95 / 255, 70 / 255, 60 / 255 },
     CustomColourCompanionFrame = { 0, 1, 0 },
     LowResourceHealth = 25,
     LowResourceStamina = 25,
