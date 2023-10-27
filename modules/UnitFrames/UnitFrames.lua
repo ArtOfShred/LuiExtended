@@ -86,6 +86,7 @@ UnitFrames.Defaults = {
     CustomColourTrauma = { 90 / 255, 0, 99 / 255 }, -- .a=0.5 for overlay and .a = 1 for separate
     CustomColourMagicka = { 0, 83 / 255, 209 / 255 },
     CustomColourStamina = { 28 / 255, 177 / 255, 0 },
+    CustomColourInvulnerable = { 95 / 255, 70 / 255, 60 / 255 },
     CustomColourDPS = { 130 / 255, 99 / 255, 65 / 255 },
     CustomColourHealer = { 117 / 255, 077 / 255, 135 / 255 },
     CustomColourTank = { 133 / 255, 018 / 255, 013 / 255 },
@@ -185,7 +186,7 @@ UnitFrames.Defaults = {
     CustomColourFriendly = { 0, 1, 0 },
     CustomColourHostile = { 1, 0, 0 },
     CustomColourNeutral = { 150 / 255, 150 / 255, 150 / 255 },
-    CustomColourGuard = { 95 / 255, 65 / 255, 54 / 255 },
+    CustomColourGuard = { 95 / 255, 70 / 255, 60 / 255 },
     CustomColourCompanionFrame = { 0, 1, 0 },
     LowResourceHealth = 25,
     LowResourceStamina = 25,
@@ -818,6 +819,8 @@ local function CreateCustomFrames()
                 ["labelTwo"] = UI.Label(thb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
                 ["trauma"] = UI.StatusBar(thb, nil, nil, nil, true),
                 ["bar"] = UI.StatusBar(thb, nil, nil, nil, false),
+                ["invulnerable"] = UI.StatusBar(thb, nil, nil, nil, false),
+                ["invulnerableInlay"] = UI.StatusBar(thb, nil, nil, nil, false),
                 ["shield"] = UI.StatusBar(thb, nil, nil, nil, true),
                 ["threshold"] = g_targetThreshold,
             },
@@ -886,6 +889,8 @@ local function CreateCustomFrames()
                 ["labelTwo"] = UI.Label(thb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "yy", false),
                 ["trauma"] = UI.StatusBar(thb, nil, nil, nil, true),
                 ["bar"] = UI.StatusBar(thb, nil, nil, nil, false),
+                ["invulnerable"] = UI.StatusBar(thb, nil, nil, nil, false),
+                ["invulnerableInlay"] = UI.StatusBar(thb, nil, nil, nil, false),
                 ["shield"] = UI.StatusBar(thb, nil, nil, nil, true),
                 ["threshold"] = g_targetThreshold,
             },
@@ -1142,6 +1147,8 @@ local function CreateCustomFrames()
                     ["label"] = UI.Label(bhb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
                     ["trauma"] = UI.StatusBar(bhb, nil, nil, nil, true),
                     ["bar"] = UI.StatusBar(bhb, nil, nil, nil, false),
+                    ["invulnerable"] = UI.StatusBar(bhb, nil, nil, nil, false),
+                    ["invulnerableInlay"] = UI.StatusBar(bhb, nil, nil, nil, false),
                     ["shield"] = UI.StatusBar(bhb, nil, nil, nil, true),
                     ["threshold"] = g_targetThreshold,
                 },
@@ -1221,6 +1228,13 @@ local function CreateCustomFrames()
                         if powerBar.trauma then
                             powerBar.trauma:SetAnchor(TOPLEFT, powerBar.backdrop, TOPLEFT, 1, 1)
                             powerBar.trauma:SetAnchor(BOTTOMRIGHT, powerBar.backdrop, BOTTOMRIGHT, -1, -1)
+                        end
+
+                        if powerBar.invulnerable then
+                            powerBar.invulnerable:SetAnchor(TOPLEFT, powerBar.backdrop, TOPLEFT, 1, 1)
+                            powerBar.invulnerable:SetAnchor(BOTTOMRIGHT, powerBar.backdrop, BOTTOMRIGHT, -1, -1)
+                            powerBar.invulnerableInlay:SetAnchor(TOPLEFT, powerBar.backdrop, TOPLEFT, 3, 3)
+                            powerBar.invulnerableInlay:SetAnchor(BOTTOMRIGHT, powerBar.backdrop, BOTTOMRIGHT, -3, -3)
                         end
 
                         if powerBar.shield then
@@ -1607,6 +1621,8 @@ function UnitFrames.CustomFramesApplyBarAlignment()
         if hpBar then
             hpBar.bar:SetBarAlignment(UnitFrames.SV.BarAlignTarget - 1)
             hpBar.trauma:SetBarAlignment(UnitFrames.SV.BarAlignTarget - 1)
+            hpBar.invulnerable:SetBarAlignment(UnitFrames.SV.BarAlignTarget - 1)
+            hpBar.invulnerableInlay:SetBarAlignment(UnitFrames.SV.BarAlignTarget - 1)
         end
     end
 end
@@ -2295,6 +2311,8 @@ function UnitFrames.OnVisualizationAdded(eventCode, unitTag, unitAttributeVisual
         UnitFrames.UpdateRegen(unitTag, statType, attributeType, powerType)
     elseif unitAttributeVisual == ATTRIBUTE_VISUAL_INCREASED_STAT or unitAttributeVisual == ATTRIBUTE_VISUAL_DECREASED_STAT then
         UnitFrames.UpdateStat(unitTag, statType, attributeType, powerType)
+    elseif unitAttributeVisual == ATTRIBUTE_VISUAL_UNWAVERING_POWER then
+        UnitFrames.UpdateInvulnerable(unitTag, statType, attributeType, powerType)
     end
 end
 
@@ -2308,6 +2326,8 @@ function UnitFrames.OnVisualizationRemoved(eventCode, unitTag, unitAttributeVisu
         UnitFrames.UpdateRegen(unitTag, statType, attributeType, powerType)
     elseif unitAttributeVisual == ATTRIBUTE_VISUAL_INCREASED_STAT or unitAttributeVisual == ATTRIBUTE_VISUAL_DECREASED_STAT then
         UnitFrames.UpdateStat(unitTag, statType, attributeType, powerType)
+    elseif unitAttributeVisual == ATTRIBUTE_VISUAL_UNWAVERING_POWER then
+        UnitFrames.UpdateInvulnerable(unitTag, statType, attributeType, powerType)
     end
 end
 
@@ -2321,6 +2341,8 @@ function UnitFrames.OnVisualizationUpdated(eventCode, unitTag, unitAttributeVisu
         UnitFrames.UpdateRegen(unitTag, statType, attributeType, powerType)
     elseif unitAttributeVisual == ATTRIBUTE_VISUAL_INCREASED_STAT or unitAttributeVisual == ATTRIBUTE_VISUAL_DECREASED_STAT then
         UnitFrames.UpdateStat(unitTag, statType, attributeType, powerType)
+    elseif unitAttributeVisual == ATTRIBUTE_VISUAL_UNWAVERING_POWER then
+        UnitFrames.UpdateInvulnerable(unitTag, statType, attributeType, powerType)
     end
 end
 
@@ -2852,6 +2874,8 @@ function UnitFrames.UpdateAttribute(unitTag, powerType, attributeFrame, powerVal
     -- Update Shield / Trauma values IF this is the health bar
     local shield = (powerType == COMBAT_MECHANIC_FLAGS_HEALTH and g_savedHealth[unitTag][4] > 0) and g_savedHealth[unitTag][4] or nil
     local trauma = (powerType == COMBAT_MECHANIC_FLAGS_HEALTH and g_savedHealth[unitTag][5] > 0) and g_savedHealth[unitTag][5] or nil
+    local isUnwaveringPower = (GetUnitAttributeVisualizerEffectInfo(unitTag, ATTRIBUTE_VISUAL_UNWAVERING_POWER, STAT_MITIGATION, ATTRIBUTE_HEALTH, COMBAT_MECHANIC_FLAGS_HEALTH) or 0)
+    local isGuard = (UnitFrames.CustomFrames and UnitFrames.CustomFrames["reticleover"] and attributeFrame == UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH] and IsUnitInvulnerableGuard("reticleover"))
 
     -- Adjust health bar value to subtract the trauma bar value
     local adjustedBarValue = powerValue
@@ -2862,73 +2886,77 @@ function UnitFrames.UpdateAttribute(unitTag, powerType, attributeFrame, powerVal
         end
     end
 
-    if UnitFrames.CustomFrames and UnitFrames.CustomFrames["reticleover"] and attributeFrame == UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH] and IsUnitInvulnerableGuard("reticleover") then
-        for _, label in pairs({ "label", "labelOne", "labelTwo" }) do
-            if attributeFrame[label] ~= nil then
-                attributeFrame[label]:SetColor(unpack(attributeFrame.colour or { 1, 1, 1 }))
-            end
-        end
+    for _, label in pairs({ "label", "labelOne", "labelTwo" }) do
+        if attributeFrame[label] ~= nil then
+            -- Format specific to selected label
+            local fmt = tostring(attributeFrame[label].fmt or UnitFrames.SV.Format)
+            local str = zo_strgsub(fmt, "Percentage", tostring(pct))
+            str = zo_strgsub(str, "Max", AbbreviateNumber(powerEffectiveMax, UnitFrames.SV.ShortenNumbers, true))
+            str = zo_strgsub(str, "Current", AbbreviateNumber(powerValue, UnitFrames.SV.ShortenNumbers, true))
+            str = zo_strgsub(str, "+ Shield", shield and ("+ " .. AbbreviateNumber(shield, UnitFrames.SV.ShortenNumbers, true)) or "")
+            str = zo_strgsub(str, "- Trauma", trauma and ("- (" .. AbbreviateNumber(trauma, UnitFrames.SV.ShortenNumbers, true) .. ")") or "")
+            str = zo_strgsub(str, "Nothing", "")
+            str = zo_strgsub(str, "  ", " ")
 
-        if attributeFrame.bar ~= nil then
-            if UnitFrames.SV.CustomSmoothBar and not isTraumaFlag then
-                -- Make it twice faster then default UI ones: last argument .085
-                ZO_StatusBar_SmoothTransition(attributeFrame.bar, adjustedBarValue, powerEffectiveMax, forceInit, nil, 250)
-                if trauma then
-                    ZO_StatusBar_SmoothTransition(attributeFrame.trauma, powerValue, powerEffectiveMax, forceInit, nil, 250)
-                end
+            -- Change text
+            if isUnwaveringPower == 1 and powerValue > 0 and (label == "label" or label == "labelOne") then
+                local strModify = ("- Invulnerable - (" .. str .. ")")
+                attributeFrame[label]:SetText(strModify)
+            elseif isGuard and label == "labelOne" then
+                attributeFrame[label]:SetText(" - Invulnerable - ")
             else
-                attributeFrame.bar:SetMinMax(0, powerEffectiveMax)
-                attributeFrame.bar:SetValue(adjustedBarValue)
-                if trauma then
-                    attributeFrame.trauma:SetMinMax(0, powerEffectiveMax)
-                    attributeFrame.trauma:SetValue(powerValue)
-                end
-            end
-        end
-    else
-        for _, label in pairs({ "label", "labelOne", "labelTwo" }) do
-            if attributeFrame[label] ~= nil then
-                -- Format specific to selected label
-                local fmt = tostring(attributeFrame[label].fmt or UnitFrames.SV.Format)
-                local str = zo_strgsub(fmt, "Percentage", tostring(pct))
-                str = zo_strgsub(str, "Max", AbbreviateNumber(powerEffectiveMax, UnitFrames.SV.ShortenNumbers, true))
-                str = zo_strgsub(str, "Current", AbbreviateNumber(powerValue, UnitFrames.SV.ShortenNumbers, true))
-                str = zo_strgsub(str, "+ Shield", shield and ("+ " .. AbbreviateNumber(shield, UnitFrames.SV.ShortenNumbers, true)) or "")
-                str = zo_strgsub(str, "- Trauma", trauma and ("- (" .. AbbreviateNumber(trauma, UnitFrames.SV.ShortenNumbers, true) .. ")") or "")
-                str = zo_strgsub(str, "Nothing", "")
-                str = zo_strgsub(str, "  ", " ")
-
-                -- Change text
                 attributeFrame[label]:SetText(str)
+            end
 
-                -- Don't update if dead
-                if (label == "labelOne" or label == "labelTwo") and UnitFrames.CustomFrames and UnitFrames.CustomFrames["reticleover"] and attributeFrame == UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH] and powerValue == 0 then
-                    attributeFrame[label]:SetHidden(true)
-                end
-
+            -- Don't update if dead
+            if (label == "labelOne" or label == "labelTwo") and UnitFrames.CustomFrames and UnitFrames.CustomFrames["reticleover"] and attributeFrame == UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH] and powerValue == 0 then
+                attributeFrame[label]:SetHidden(true)
+            end
+            -- If the unit is Invulnerable or a Guard show don't show a low HP color
+            if (isUnwaveringPower == 1 and powerValue > 0) or isGuard then
+                attributeFrame[label]:SetColor(unpack(attributeFrame.colour or { 1, 1, 1 }))
+            else
                 -- And colour it RED if attribute value is lower than the threshold
                 attributeFrame[label]:SetColor(unpack((pct < (attributeFrame.threshold or g_defaultThreshold)) and { 1, 0.25, 0.38 } or attributeFrame.colour or { 1, 1, 1 }))
             end
         end
+    end
 
-        -- If attribute has also custom statusBar, update its value
-        if attributeFrame.bar ~= nil then
-            if UnitFrames.SV.CustomSmoothBar and not isTraumaFlag then
-                -- Make it twice faster then default UI ones: last argument .085
-                ZO_StatusBar_SmoothTransition(attributeFrame.bar, adjustedBarValue, powerEffectiveMax, forceInit, nil, 250)
-                if trauma then
-                    ZO_StatusBar_SmoothTransition(attributeFrame.trauma, powerValue, powerEffectiveMax, forceInit, nil, 250)
-                end
+    -- If attribute has also custom statusBar, update its value
+    if attributeFrame.bar ~= nil then
+        if UnitFrames.SV.CustomSmoothBar and not isTraumaFlag then
+            -- Make it twice faster then default UI ones: last argument .085
+            ZO_StatusBar_SmoothTransition(attributeFrame.bar, adjustedBarValue, powerEffectiveMax, forceInit, nil, 250)
+            if trauma then
+                ZO_StatusBar_SmoothTransition(attributeFrame.trauma, powerValue, powerEffectiveMax, forceInit, nil, 250)
+            end
+        else
+            attributeFrame.bar:SetMinMax(0, powerEffectiveMax)
+            attributeFrame.bar:SetValue(adjustedBarValue)
+            if trauma then
+                attributeFrame.trauma:SetMinMax(0, powerEffectiveMax)
+                attributeFrame.trauma:SetValue(powerValue)
+            end
+        end
+
+        -- If there is an invulnerable bar on this frame, then modify it if based on if Unwavering Power is active on the frame
+        if attributeFrame.invulnerable then
+            if (isUnwaveringPower == 1 and powerValue > 0) or isGuard then
+                attributeFrame.invulnerable:SetMinMax(0, powerEffectiveMax)
+                attributeFrame.invulnerable:SetValue(powerValue)
+                attributeFrame.invulnerable:SetHidden(false)
+                attributeFrame.invulnerableInlay:SetMinMax(0, powerEffectiveMax)
+                attributeFrame.invulnerableInlay:SetValue(powerValue)
+                attributeFrame.invulnerableInlay:SetHidden(false)
+                attributeFrame.bar:SetHidden(true)
             else
-                attributeFrame.bar:SetMinMax(0, powerEffectiveMax)
-                attributeFrame.bar:SetValue(adjustedBarValue)
-                if trauma then
-                    attributeFrame.trauma:SetMinMax(0, powerEffectiveMax)
-                    attributeFrame.trauma:SetValue(powerValue)
-                end
+                attributeFrame.invulnerable:SetHidden(true)
+                attributeFrame.invulnerableInlay:SetHidden(true)
+                attributeFrame.bar:SetHidden(false)
             end
         end
     end
+
 end
 
 -- Updates title for unit if changed, and also re-anchors buffs or toggles display on/off if the unitTag had no title selected previously
@@ -2941,6 +2969,27 @@ function UnitFrames.TitleUpdate(eventCode, unitTag)
     UnitFrames.UpdateStaticControls(g_DefaultFrames[unitTag])
     UnitFrames.UpdateStaticControls(UnitFrames.CustomFrames[unitTag])
     UnitFrames.UpdateStaticControls(g_AvaCustFrames[unitTag])
+end
+
+-- Updates Invulnerable Overlay for given unit.
+-- Called from EVENT_UNIT_ATTRIBUTE_VISUAL_* listeners.
+function UnitFrames.UpdateInvulnerable(unitTag, value, maxValue)
+    if g_savedHealth[unitTag] == nil then
+        --d( "LUIE DEBUG: Stored health is nil: ", unitTag )
+        return
+    end
+
+    local healthValue, _, healthEffectiveMax, _ = unpack(g_savedHealth[unitTag])
+    -- Update frames
+    if g_DefaultFrames[unitTag] then
+        UnitFrames.UpdateAttribute(unitTag, COMBAT_MECHANIC_FLAGS_HEALTH, g_DefaultFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH], healthValue, healthEffectiveMax, false, false)
+    end
+    if UnitFrames.CustomFrames[unitTag] then
+        UnitFrames.UpdateAttribute(unitTag, COMBAT_MECHANIC_FLAGS_HEALTH, UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH], healthValue, healthEffectiveMax, false, false)
+    end
+    if g_AvaCustFrames[unitTag] then
+        UnitFrames.UpdateAttribute(unitTag, COMBAT_MECHANIC_FLAGS_HEALTH, g_AvaCustFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH], healthValue, healthEffectiveMax, false, false)
+    end
 end
 
 -- Updates shield value for given unit.
@@ -3683,7 +3732,11 @@ function UnitFrames.CustomFramesSetDeadLabel(unitFrame, newValue)
     end
     if unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH] then
         if unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH].bar ~= nil then
-            unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetHidden(newValue ~= nil)
+            local isUnwaveringPower = (GetUnitAttributeVisualizerEffectInfo(unitFrame.unitTag, ATTRIBUTE_VISUAL_UNWAVERING_POWER, STAT_MITIGATION, ATTRIBUTE_HEALTH, COMBAT_MECHANIC_FLAGS_HEALTH) or 0)
+            -- Don't unhide the HP bar if this unit is invulnerable
+            if isUnwaveringPower == 0 then
+                unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetHidden(newValue ~= nil)
+            end
         end
         if unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH].label ~= nil then
             unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH].label:SetHidden(newValue ~= nil)
@@ -4228,6 +4281,18 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
         0.1 * UnitFrames.SV.CustomColourCompanionFrame[3],
         0.9,
     } -- Companion
+    local invulnerablecolor = {
+        UnitFrames.SV.CustomColourInvulnerable[1],
+        UnitFrames.SV.CustomColourInvulnerable[2],
+        UnitFrames.SV.CustomColourInvulnerable[3],
+        0.9,
+    } -- Invulnerable
+    local invulnerablecolor_inlay = {
+        UnitFrames.SV.CustomColourInvulnerable[1],
+        UnitFrames.SV.CustomColourInvulnerable[2],
+        UnitFrames.SV.CustomColourInvulnerable[3],
+        0.9,
+    }
 
     local isBattleground = IsActiveWorldBattleground()
 
@@ -4243,6 +4308,12 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
                 thb.backdrop:SetCenterColor(unpack(health_bg))
                 thb.shield:SetColor(unpack(shield))
                 thb.trauma:SetColor(unpack(trauma))
+                if thb.invulnerable then
+                    thb.invulnerable:SetColor(unpack(invulnerablecolor))
+                end
+                if thb.invulnerableInlay then
+                    thb.invulnerableInlay:SetColor(unpack(invulnerablecolor_inlay))
+                end
                 if thb.shieldbackdrop then
                     thb.shieldbackdrop:SetCenterColor(unpack(shield_bg))
                 end
@@ -4838,6 +4909,8 @@ function UnitFrames.CustomFramesApplyTexture()
         end
         UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
         UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].trauma:SetTexture(texture)
+        UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].invulnerable:SetTexture(texture)
+        UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].invulnerableInlay:SetTexture("/esoui/art/unitattributevisualizer/attributebar_dynamic_invulnerable_munge.dds")
         UnitFrames.CustomFrames.reticleover.tlw:SetHidden(false)
     end
     if UnitFrames.CustomFrames.AvaPlayerTarget then
@@ -4848,6 +4921,8 @@ function UnitFrames.CustomFramesApplyTexture()
         end
         UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
         UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].trauma:SetTexture(texture)
+        UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].invulnerable:SetTexture(texture)
+        UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].invulnerableInlay:SetTexture("/esoui/art/unitattributevisualizer/attributebar_dynamic_invulnerable_munge.dds")
         UnitFrames.CustomFrames.AvaPlayerTarget.tlw:SetHidden(false)
     end
     if UnitFrames.CustomFrames.companion then
@@ -4897,6 +4972,8 @@ function UnitFrames.CustomFramesApplyTexture()
             UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetTexture(texture)
             UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
             UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].trauma:SetTexture(texture)
+            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].invulnerable:SetTexture(texture)
+            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].invulnerableInlay:SetTexture("/esoui/art/unitattributevisualizer/attributebar_dynamic_invulnerable_munge.dds")
         end
         UnitFrames.CustomFrames.boss1.tlw:SetHidden(false)
     end

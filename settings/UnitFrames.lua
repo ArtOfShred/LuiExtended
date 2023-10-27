@@ -828,6 +828,27 @@ function UnitFrames.CreateSettings()
                 end,
             },
             {
+                -- Custom Unit Frames Invulnerable Bar Color
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_INVULNERABLE),
+                getFunc = function()
+                    return Settings.CustomColourInvulnerable[1], Settings.CustomColourInvulnerable[2], Settings.CustomColourInvulnerable[3]
+                end,
+                setFunc = function(r, g, b, a)
+                    Settings.CustomColourInvulnerable = { r, g, b }
+                    UnitFrames.CustomFramesApplyColours(true)
+                end,
+                width = "full",
+                default = {
+                    r = Defaults.CustomColourInvulnerable[1],
+                    g = Defaults.CustomColourInvulnerable[2],
+                    b = Defaults.CustomColourInvulnerable[3],
+                },
+                disabled = function()
+                    return not LUIE.SV.UnitFrames_Enabled
+                end,
+            },
+            {
                 -- Custom Unit Frames DPS Role Color
                 type = "colorpicker",
                 name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_DPS),
