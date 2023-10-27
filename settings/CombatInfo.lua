@@ -643,40 +643,6 @@ function CombatInfo.CreateSettings()
                 type = "divider",
                 width = "full",
             },
-            { type = "description", title = "Enemy Markers", width = "full" },
-            {
-                type = "checkbox",
-                name = "Show Enemy Markers",
-                tooltip = "Display a red arrow over the head of enemies you are currently in combat with.",
-                default = Settings.showMarker,
-                getFunc = function()
-                    return Settings.showMarker
-                end,
-                setFunc = function(value)
-                    Settings.showMarker = value or false
-                end,
-                width = "half",
-            },
-            {
-                type = "slider",
-                name = "Enemy Marker Size",
-                default = Settings.markerSize,
-                min = 10,
-                max = 90,
-                getFunc = function()
-                    return Settings.markerSize
-                end,
-                setFunc = function(value)
-                    Settings.markerSize = value
-                    CombatInfo.SetMarker(value)
-                end,
-                width = "half",
-            },
-
-            {
-                type = "divider",
-                width = "full",
-            },
             {
                 type = "header",
                 name = GetString(SI_LUIE_LAM_CI_BACKBAR_HEADER),
@@ -896,6 +862,41 @@ function CombatInfo.CreateSettings()
                 disabled = function()
                     return not (LUIE.SV.CombatInfo_Enabled and Settings.PotionTimerShow)
                 end,
+            },
+        },
+    }
+    -- Combat Info - Floating Markers Option Submenu
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "submenu",
+        name = GetString(SI_LUIE_LAM_CI_ENEMY_MARKER_HEADER),
+        controls = {
+            {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_ENEMY_MARKER),
+                tooltip = GetString(SI_LUIE_LAM_CI_ENEMY_MARKER_TP),
+                default = Settings.showMarker,
+                getFunc = function()
+                    return Settings.showMarker
+                end,
+                setFunc = function(value)
+                    Settings.showMarker = value or false
+                end,
+                width = "half",
+            },
+            {
+                type = "slider",
+                name = GetString(SI_LUIE_LAM_CI_ENEMY_MARKER_SIZE),
+                default = Settings.markerSize,
+                min = 10,
+                max = 90,
+                getFunc = function()
+                    return Settings.markerSize
+                end,
+                setFunc = function(value)
+                    Settings.markerSize = value
+                    CombatInfo.SetMarker(value)
+                end,
+                width = "half",
             },
         },
     }
