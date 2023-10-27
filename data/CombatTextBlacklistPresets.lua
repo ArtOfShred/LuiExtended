@@ -3,7 +3,11 @@
     License: The MIT License (MIT)
 --]]
 
-LUIE.Data.CombatTextBlacklistPresets = {}
+-- CombatTextBlacklistPresets namespace
+if LUIE.Data.CombatTextBlacklistPresets == nil then
+    LUIE.Data.CombatTextBlacklistPresets = {}
+end
+
 local BlacklistPresets = LUIE.Data.CombatTextBlacklistPresets
 
 -- Sets

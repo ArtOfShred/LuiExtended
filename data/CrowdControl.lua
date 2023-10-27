@@ -3,8 +3,11 @@
     License: The MIT License (MIT)
 --]]
 
--- Effects namespace
-LUIE.Data.CrowdControl = {}
+-- CrowdControl namespace
+if LUIE.Data.CrowdControl == nil then
+    LUIE.Data.CrowdControl = {}
+end
+
 local CrowdControl = LUIE.Data.CrowdControl
 
 -- CrowdControl.aoePlayerUltimate

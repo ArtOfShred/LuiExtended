@@ -3,7 +3,11 @@
     License: The MIT License (MIT)
 --]]
 
-LUIE.Data.CollectibleTables = {}
+-- CollectibleTables namespace
+if LUIE.Data.CollectibleTables == nil then
+    LUIE.Data.CollectibleTables = {}
+end
+
 local CollectibleTables = LUIE.Data.CollectibleTables
 
 -- Banker

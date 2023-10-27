@@ -3,7 +3,11 @@
     License: The MIT License (MIT)
 --]]
 
-LUIE.Data.ZoneNames = {
+if LUIE.Data.ZoneNames == nil then
+    LUIE.Data.ZoneNames = {}
+end
+
+local ZoneNames = {
 
     ----------------------------------------------------------------
     -- ALDMERI DOMINION --------------------------------------------
@@ -55,3 +59,5 @@ LUIE.Data.ZoneNames = {
 
     Zone_Tempest_Island = "Tempest Island",
 }
+
+LUIE.Data.ZoneNames = ZoneNames
