@@ -262,7 +262,7 @@ function SlashCommands.SlashCollectible(id)
     end
 
     if IsCollectibleUnlocked(id) then
-        UseCollectible(id)
+        UseCollectible(id, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
         LUIE.SlashCollectibleOverride = true
         if LUIE.Data.CollectibleTables.All[id] == nil then
             LUIE.LastMementoUsed = id

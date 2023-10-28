@@ -2312,7 +2312,7 @@ function UnitFrames.OnVisualizationAdded(eventCode, unitTag, unitAttributeVisual
     elseif unitAttributeVisual == ATTRIBUTE_VISUAL_INCREASED_STAT or unitAttributeVisual == ATTRIBUTE_VISUAL_DECREASED_STAT then
         UnitFrames.UpdateStat(unitTag, statType, attributeType, powerType)
     elseif unitAttributeVisual == ATTRIBUTE_VISUAL_UNWAVERING_POWER then
-        UnitFrames.UpdateInvulnerable(unitTag, statType, attributeType, powerType)
+        UnitFrames.UpdateInvulnerable(unitTag)
     end
 end
 
@@ -2327,7 +2327,7 @@ function UnitFrames.OnVisualizationRemoved(eventCode, unitTag, unitAttributeVisu
     elseif unitAttributeVisual == ATTRIBUTE_VISUAL_INCREASED_STAT or unitAttributeVisual == ATTRIBUTE_VISUAL_DECREASED_STAT then
         UnitFrames.UpdateStat(unitTag, statType, attributeType, powerType)
     elseif unitAttributeVisual == ATTRIBUTE_VISUAL_UNWAVERING_POWER then
-        UnitFrames.UpdateInvulnerable(unitTag, statType, attributeType, powerType)
+        UnitFrames.UpdateInvulnerable(unitTag)
     end
 end
 
@@ -2342,7 +2342,7 @@ function UnitFrames.OnVisualizationUpdated(eventCode, unitTag, unitAttributeVisu
     elseif unitAttributeVisual == ATTRIBUTE_VISUAL_INCREASED_STAT or unitAttributeVisual == ATTRIBUTE_VISUAL_DECREASED_STAT then
         UnitFrames.UpdateStat(unitTag, statType, attributeType, powerType)
     elseif unitAttributeVisual == ATTRIBUTE_VISUAL_UNWAVERING_POWER then
-        UnitFrames.UpdateInvulnerable(unitTag, statType, attributeType, powerType)
+        UnitFrames.UpdateInvulnerable(unitTag)
     end
 end
 
@@ -2972,7 +2972,7 @@ end
 
 -- Updates Invulnerable Overlay for given unit.
 -- Called from EVENT_UNIT_ATTRIBUTE_VISUAL_* listeners.
-function UnitFrames.UpdateInvulnerable(unitTag, value, maxValue)
+function UnitFrames.UpdateInvulnerable(unitTag)
     if g_savedHealth[unitTag] == nil then
         --d( "LUIE DEBUG: Stored health is nil: ", unitTag )
         return
