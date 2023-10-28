@@ -145,7 +145,6 @@ function LUIE.SetupElementMover(state)
             if k == ZO_AlertTextNotification then
                 local frameName = k:GetName()
                 if not LUIE.SV[frameName] then
-                    isValidAnchor = true
                     point = TOPRIGHT
                     relativeTo = GuiRoot
                     relativePoint = TOPRIGHT
@@ -154,7 +153,7 @@ function LUIE.SetupElementMover(state)
                 end
             end
 
-            local tlw = UI.TopLevel({ isValidAnchor, point, relativePoint, offsetX, offsetY, relativeTo }, { k:GetWidth(), k:GetHeight() })
+            local tlw = UI.TopLevel({ point, relativePoint, offsetX, offsetY, relativeTo }, { k:GetWidth(), k:GetHeight() })
 
             tlw:SetDrawLayer(DL_BACKGROUND)
             tlw:SetDrawTier(DT_MEDIUM)
