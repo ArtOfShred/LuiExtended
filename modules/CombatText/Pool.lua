@@ -36,7 +36,6 @@ function CombatTextPool:New(poolType)
 end
 
 function CombatTextPool:CreateNewControl()
-    ---@class control
     local control = CreateControlFromVirtual("LUIE_CombatText_Virtual_Instance", LUIE_CombatText, "LUIE_CombatText_Virtual", self:GetNextControlId())
     control.label = control:GetNamedChild("_Amount")
     control.icon = control:GetNamedChild("_Icon")
