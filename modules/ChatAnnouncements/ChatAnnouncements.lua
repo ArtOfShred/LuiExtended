@@ -12,7 +12,6 @@ local Effects = LUIE.Data.Effects
 local Quests = LUIE.Data.Quests
 
 local printToChat = LUIE.PrintToChat
-local zo_strformat = zo_strformat
 
 local eventManager = EVENT_MANAGER
 local windowManager = WINDOW_MANAGER
@@ -3852,16 +3851,14 @@ function ChatAnnouncements.OnPackSiege()
     eventManager:RegisterForUpdate(moduleName .. "ResetPackSiege", 4000, ResetPackSiege)
 end
 
--- Copied from LLC internals
-local function getItemLinkFromItemId(itemId)
-    return GetItemLinkName("|H1:item:" .. itemId .. ":0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
-end
-
 -- Helper function for Craft Bag
 function ChatAnnouncements.GetItemLinkFromItemId(itemId)
-    local name = getItemLinkFromItemId(itemId)
-    local linkCreationFunc = ChatAnnouncements.SV.BracketOptionItem == 1 and ZO_LinkHandler_CreateLinkWithoutBrackets or ZO_LinkHandler_CreateLink
-    return linkCreationFunc(zo_strformat("<<t:1>>", name), nil, ITEM_LINK_TYPE, itemId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    local name = GetItemLinkName(ZO_LinkHandler_CreateLink("Test Trash", nil, ITEM_LINK_TYPE,itemId, 1, 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 10000, 0))
+    if ChatAnnouncements.SV.BracketOptionItem == 1 then
+        return ZO_LinkHandler_CreateLinkWithoutBrackets(zo_strformat("<<t:1>>", name), nil, ITEM_LINK_TYPE,itemId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    else
+        return ZO_LinkHandler_CreateLink(zo_strformat("<<t:1>>", name), nil, ITEM_LINK_TYPE,itemId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    end
 end
 
 local questItemIndex = {}
