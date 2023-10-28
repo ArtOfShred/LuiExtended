@@ -10,7 +10,7 @@ local eventType = LUIE.Data.CombatTextConstants.eventType
 
 function CombatTextDeathListener:New()
     local obj = LUIE.CombatTextEventListener:New()
-    obj:RegisterForEvent(EVENT_UNIT_DEATH_STATE_CHANGED, function(...)
+    obj:RegisterForEvent(EVENT_UNIT_DEATH_STATE_CHANGED, function (...)
         self:OnEvent(...)
     end, REGISTER_FILTER_UNIT_TAG_PREFIX, "group")
     return obj

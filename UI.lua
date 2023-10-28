@@ -18,7 +18,7 @@ function UI.Chain(object)
     -- Setup the metatable
     local T = {}
     setmetatable(T, {
-        __index = function(self, func)
+        __index = function (self, func)
             -- Know when to stop chaining
             if func == "__END" then
                 return object
@@ -26,7 +26,7 @@ function UI.Chain(object)
 
             -- Otherwise, add the method to the parent object
             ---@diagnostic disable-next-line: redefined-local
-            return function(self, ...)
+            return function (self, ...)
                 assert(object[func], func .. " missing in object")
                 object[func](object, ...)
                 return self

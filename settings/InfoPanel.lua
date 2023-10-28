@@ -36,63 +36,63 @@ function InfoPanel.CreateSettings()
     local optionsDataInfoPanel = {}
 
     -- Info Panel description
-    optionsDataInfoPanel[#optionsDataInfoPanel + 1] = {
+    optionsDataInfoPanel[#optionsDataInfoPanel+1] = {
         type = "description",
         text = GetString(SI_LUIE_LAM_PNL_DESCRIPTION),
     }
 
     -- ReloadUI Button
-    optionsDataInfoPanel[#optionsDataInfoPanel + 1] = {
+    optionsDataInfoPanel[#optionsDataInfoPanel+1] = {
         type = "button",
         name = GetString(SI_LUIE_LAM_RELOADUI),
         tooltip = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
-        func = function()
+        func = function ()
             ReloadUI("ingame")
         end,
         width = "full",
     }
 
     -- Unlock InfoPanel
-    optionsDataInfoPanel[#optionsDataInfoPanel + 1] = {
+    optionsDataInfoPanel[#optionsDataInfoPanel+1] = {
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_PNL_UNLOCKPANEL),
         tooltip = GetString(SI_LUIE_LAM_PNL_UNLOCKPANEL_TP),
-        getFunc = function()
+        getFunc = function ()
             return InfoPanel.panelUnlocked
         end,
         setFunc = InfoPanel.SetMovingState,
         width = "half",
         default = false,
-        disabled = function()
+        disabled = function ()
             return not LUIE.SV.InfoPanel_Enabled
         end,
         resetFunc = InfoPanel.ResetPosition,
     }
 
     -- InfoPanel scale
-    optionsDataInfoPanel[#optionsDataInfoPanel + 1] = {
+    optionsDataInfoPanel[#optionsDataInfoPanel+1] = {
         type = "slider",
         name = GetString(SI_LUIE_LAM_PNL_PANELSCALE),
         tooltip = GetString(SI_LUIE_LAM_PNL_PANELSCALE_TP),
         min = 100,
         max = 300,
         step = 10,
-        getFunc = function()
+        getFunc = function ()
             return Settings.panelScale
         end,
-        setFunc = function(value)
+        setFunc = function (value)
             Settings.panelScale = value
             InfoPanel.SetScale()
         end,
         width = "full",
         default = 100,
-        disabled = function()
+        disabled = function ()
             return not LUIE.SV.InfoPanel_Enabled
         end,
     }
 
     -- Reset InfoPanel position
-    optionsDataInfoPanel[#optionsDataInfoPanel + 1] = {
+    optionsDataInfoPanel[#optionsDataInfoPanel+1] = {
         type = "button",
         name = GetString(SI_LUIE_LAM_RESETPOSITION),
         tooltip = GetString(SI_LUIE_LAM_PNL_RESETPOSITION_TP),
@@ -101,7 +101,7 @@ function InfoPanel.CreateSettings()
     }
 
     -- Info Panel Options Submenu
-    optionsDataInfoPanel[#optionsDataInfoPanel + 1] = {
+    optionsDataInfoPanel[#optionsDataInfoPanel+1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_PNL_HEADER),
         controls = {
@@ -113,32 +113,32 @@ function InfoPanel.CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_PNL_SHOWLATENCY),
-                getFunc = function()
+                getFunc = function ()
                     return not Settings.HideLatency
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.HideLatency = not value
                     InfoPanel.RearrangePanel()
                 end,
                 width = "full",
                 default = true,
-                disabled = function()
+                disabled = function ()
                     return not LUIE.SV.InfoPanel_Enabled
                 end,
             },
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_PNL_SHOWCLOCK),
-                getFunc = function()
+                getFunc = function ()
                     return not Settings.HideClock
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.HideClock = not value
                     InfoPanel.RearrangePanel()
                 end,
                 width = "full",
                 default = true,
-                disabled = function()
+                disabled = function ()
                     return not LUIE.SV.InfoPanel_Enabled
                 end,
             },
@@ -147,32 +147,32 @@ function InfoPanel.CreateSettings()
                 type = "editbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_PNL_CLOCKFORMAT)),
                 tooltip = GetString(SI_LUIE_LAM_CA_TIMESTAMPFORMAT_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.ClockFormat
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.ClockFormat = value
                     InfoPanel.RearrangePanel()
                 end,
                 width = "full",
                 default = Defaults.ClockFormat,
-                disabled = function()
+                disabled = function ()
                     return not (LUIE.SV.InfoPanel_Enabled and not Settings.HideClock)
                 end,
             },
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_PNL_SHOWFPS),
-                getFunc = function()
+                getFunc = function ()
                     return not Settings.HideFPS
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.HideFPS = not value
                     InfoPanel.RearrangePanel()
                 end,
                 width = "full",
                 default = true,
-                disabled = function()
+                disabled = function ()
                     return not LUIE.SV.InfoPanel_Enabled
                 end,
             },
@@ -180,80 +180,80 @@ function InfoPanel.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_PNL_SHOWMOUNTTIMER),
                 tooltip = GetString(SI_LUIE_LAM_PNL_SHOWMOUNTTIMER_TP),
-                getFunc = function()
+                getFunc = function ()
                     return not Settings.HideMountFeed
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.HideMountFeed = not value
                     InfoPanel.RearrangePanel()
                 end,
                 width = "full",
                 default = true,
-                disabled = function()
+                disabled = function ()
                     return not LUIE.SV.InfoPanel_Enabled
                 end,
             },
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_PNL_SHOWARMORDURABILITY),
-                getFunc = function()
+                getFunc = function ()
                     return not Settings.HideArmour
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.HideArmour = not value
                     InfoPanel.RearrangePanel()
                 end,
                 width = "full",
                 default = true,
-                disabled = function()
+                disabled = function ()
                     return not LUIE.SV.InfoPanel_Enabled
                 end,
             },
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_PNL_SHOWEAPONCHARGES),
-                getFunc = function()
+                getFunc = function ()
                     return not Settings.HideWeapons
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.HideWeapons = not value
                     InfoPanel.RearrangePanel()
                 end,
                 width = "full",
                 default = true,
-                disabled = function()
+                disabled = function ()
                     return not LUIE.SV.InfoPanel_Enabled
                 end,
             },
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_PNL_SHOWBAGSPACE),
-                getFunc = function()
+                getFunc = function ()
                     return not Settings.HideBags
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.HideBags = not value
                     InfoPanel.RearrangePanel()
                 end,
                 width = "full",
                 default = true,
-                disabled = function()
+                disabled = function ()
                     return not LUIE.SV.InfoPanel_Enabled
                 end,
             },
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_PNL_SHOWSOULGEMS),
-                getFunc = function()
+                getFunc = function ()
                     return not Settings.HideGems
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.HideGems = not value
                     InfoPanel.RearrangePanel()
                 end,
                 width = "full",
                 default = true,
-                disabled = function()
+                disabled = function ()
                     return not LUIE.SV.InfoPanel_Enabled
                 end,
             },
@@ -266,16 +266,16 @@ function InfoPanel.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_PNL_DISPLAYONWORLDMAP),
                 tooltip = GetString(SI_LUIE_LAM_PNL_DISPLAYONWORLDMAP_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.DisplayOnWorldMap
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.DisplayOnWorldMap = value
                     InfoPanel.SetDisplayOnMap()
                 end,
                 width = "full",
                 default = false,
-                disabled = function()
+                disabled = function ()
                     return not LUIE.SV.InfoPanel_Enabled
                 end,
             },
@@ -283,15 +283,15 @@ function InfoPanel.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_PNL_DISABLECOLORSRO),
                 tooltip = GetString(SI_LUIE_LAM_PNL_DISABLECOLORSRO_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.DisableInfoColours
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.DisableInfoColours = value
                 end,
                 width = "full",
                 default = false,
-                disabled = function()
+                disabled = function ()
                     return not LUIE.SV.InfoPanel_Enabled
                 end,
             },

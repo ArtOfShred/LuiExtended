@@ -21,8 +21,8 @@ local windowManager = WINDOW_MANAGER
 
 local moduleName = LUIE.name .. "SpellCastBuffs"
 
-local hidePlayerEffects = {} -- Table of Effects to hide on Player - generated on load or updated from Menu
-local hideTargetEffects = {} -- Table of Effects to hide on Target - generated on load or updated from Menu
+local hidePlayerEffects = {}       -- Table of Effects to hide on Player - generated on load or updated from Menu
+local hideTargetEffects = {}       -- Table of Effects to hide on Target - generated on load or updated from Menu
 local debuffDisplayOverrideId = {} -- Table of Effects (by id) that should show on the target regardless of who applied them.
 
 local windowTitles = {
@@ -218,22 +218,22 @@ SpellCastBuffs.EffectsList = {
     promd_ground = {},
     promd_target = {},
     promd_player = {},
-} -- Saved Effects
+}                                  -- Saved Effects
 
-local uiTlw = {} -- GUI
-local containerRouting = {} -- Routing for Auras
-local g_alignmentDirection = {} -- Holds alignment direction for all containers
-local g_sortDirection = {} -- Holds sorting direction for all containers
+local uiTlw = {}                   -- GUI
+local containerRouting = {}        -- Routing for Auras
+local g_alignmentDirection = {}    -- Holds alignment direction for all containers
+local g_sortDirection = {}         -- Holds sorting direction for all containers
 
-local g_playerActive = false -- Player Active State
-local g_playerDead = false -- Player Dead State
+local g_playerActive = false       -- Player Active State
+local g_playerDead = false         -- Player Dead State
 local g_playerResurrectStage = nil -- Player resurrection sequence state
 
-local g_buffsFont -- Buff font
-local g_prominentFont -- Prominent buffs label font
-local g_padding = 0 -- Padding between icons
+local g_buffsFont                  -- Buff font
+local g_prominentFont              -- Prominent buffs label font
+local g_padding = 0                -- Padding between icons
 local g_protectAbilityRemoval = {} -- AbilityId's set to a timestamp here to prevent removal of ground effects when refreshing ground auras from causing the aura to fade.
-local g_ignoreAbilityId = {} -- Ignored abilityId's on EVENT_COMBAT_EVENT, some events fire twice and we need to ignore every other one.
+local g_ignoreAbilityId = {}       -- Ignored abilityId's on EVENT_COMBAT_EVENT, some events fire twice and we need to ignore every other one.
 
 -- Add buff containers into LUIE namespace
 SpellCastBuffs.BuffContainers = uiTlw
@@ -383,12 +383,12 @@ function SpellCastBuffs.Initialize(enabled)
         containerRouting.player2 = "player2"
     else
         uiTlw.playerb = UI.TopLevel(nil, nil)
-        uiTlw.playerb:SetHandler("OnMoveStop", function(self)
+        uiTlw.playerb:SetHandler("OnMoveStop", function (self)
             SpellCastBuffs.SV.playerbOffsetX = self:GetLeft()
             SpellCastBuffs.SV.playerbOffsetY = self:GetTop()
         end)
         uiTlw.playerd = UI.TopLevel(nil, nil)
-        uiTlw.playerd:SetHandler("OnMoveStop", function(self)
+        uiTlw.playerd:SetHandler("OnMoveStop", function (self)
             SpellCastBuffs.SV.playerdOffsetX = self:GetLeft()
             SpellCastBuffs.SV.playerdOffsetY = self:GetTop()
         end)
@@ -410,12 +410,12 @@ function SpellCastBuffs.Initialize(enabled)
         containerRouting.ground = "target2"
     else
         uiTlw.targetb = UI.TopLevel(nil, nil)
-        uiTlw.targetb:SetHandler("OnMoveStop", function(self)
+        uiTlw.targetb:SetHandler("OnMoveStop", function (self)
             SpellCastBuffs.SV.targetbOffsetX = self:GetLeft()
             SpellCastBuffs.SV.targetbOffsetY = self:GetTop()
         end)
         uiTlw.targetd = UI.TopLevel(nil, nil)
-        uiTlw.targetd:SetHandler("OnMoveStop", function(self)
+        uiTlw.targetd:SetHandler("OnMoveStop", function (self)
             SpellCastBuffs.SV.targetdOffsetX = self:GetLeft()
             SpellCastBuffs.SV.targetdOffsetY = self:GetTop()
         end)
@@ -431,7 +431,7 @@ function SpellCastBuffs.Initialize(enabled)
 
     -- Create TopLevelWindows for Prominent Buffs
     uiTlw.prominentbuffs = UI.TopLevel(nil, nil)
-    uiTlw.prominentbuffs:SetHandler("OnMoveStop", function(self)
+    uiTlw.prominentbuffs:SetHandler("OnMoveStop", function (self)
         if self.alignVertical then
             SpellCastBuffs.SV.prominentbVOffsetX = self:GetLeft()
             SpellCastBuffs.SV.prominentbVOffsetY = self:GetTop()
@@ -441,7 +441,7 @@ function SpellCastBuffs.Initialize(enabled)
         end
     end)
     uiTlw.prominentdebuffs = UI.TopLevel(nil, nil)
-    uiTlw.prominentdebuffs:SetHandler("OnMoveStop", function(self)
+    uiTlw.prominentdebuffs:SetHandler("OnMoveStop", function (self)
         if self.alignVertical then
             SpellCastBuffs.SV.prominentdVOffsetX = self:GetLeft()
             SpellCastBuffs.SV.prominentdVOffsetY = self:GetTop()
@@ -476,7 +476,7 @@ function SpellCastBuffs.Initialize(enabled)
 
     -- Separate container for players long term buffs
     uiTlw.player_long = UI.TopLevel(nil, nil)
-    uiTlw.player_long:SetHandler("OnMoveStop", function(self)
+    uiTlw.player_long:SetHandler("OnMoveStop", function (self)
         local left = self:GetLeft()
         local top = self:GetTop()
         if self.alignVertical then
@@ -498,7 +498,7 @@ function SpellCastBuffs.Initialize(enabled)
     containerRouting.player_long = "player_long"
 
     local fragment = ZO_HUDFadeSceneFragment:New(uiTlw.player_long, 0, 0)
-    fragments[#fragments + 1] = fragment
+    fragments[#fragments+1] = fragment
 
     -- Loop over table of fragments to add them to relevant UI Scenes
     for _, v in pairs(fragments) do
@@ -573,8 +573,8 @@ function SpellCastBuffs.Initialize(enabled)
     eventManager:RegisterForEvent(moduleName .. "Event1", EVENT_COMBAT_EVENT, SpellCastBuffs.OnCombatEventIn)
     eventManager:RegisterForEvent(moduleName .. "Event2", EVENT_COMBAT_EVENT, SpellCastBuffs.OnCombatEventOut)
     eventManager:RegisterForEvent(moduleName .. "Event3", EVENT_COMBAT_EVENT, SpellCastBuffs.OnCombatEventOut)
-    eventManager:AddFilterForEvent(moduleName .. "Event1", EVENT_COMBAT_EVENT, REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false) -- Target -> Player
-    eventManager:AddFilterForEvent(moduleName .. "Event2", EVENT_COMBAT_EVENT, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false) -- Player -> Target
+    eventManager:AddFilterForEvent(moduleName .. "Event1", EVENT_COMBAT_EVENT, REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false)     -- Target -> Player
+    eventManager:AddFilterForEvent(moduleName .. "Event2", EVENT_COMBAT_EVENT, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false)     -- Player -> Target
     eventManager:AddFilterForEvent(moduleName .. "Event3", EVENT_COMBAT_EVENT, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER_PET, REGISTER_FILTER_IS_ERROR, false) -- Player Pet -> Target
     for k, v in pairs(Effects.AddNameOnEvent) do
         eventManager:RegisterForEvent(moduleName .. "Event4" .. k, EVENT_COMBAT_EVENT, SpellCastBuffs.OnCombatAddNameEvent)
@@ -755,7 +755,7 @@ end
 
 function SpellCastBuffs.ResetContainerOrientation()
     -- Create TopLevelWindows for Prominent Buffs
-    uiTlw.prominentbuffs:SetHandler("OnMoveStop", function(self)
+    uiTlw.prominentbuffs:SetHandler("OnMoveStop", function (self)
         if self.alignVertical then
             SpellCastBuffs.SV.prominentbVOffsetX = self:GetLeft()
             SpellCastBuffs.SV.prominentbVOffsetY = self:GetTop()
@@ -764,7 +764,7 @@ function SpellCastBuffs.ResetContainerOrientation()
             SpellCastBuffs.SV.prominentbHOffsetY = self:GetTop()
         end
     end)
-    uiTlw.prominentdebuffs:SetHandler("OnMoveStop", function(self)
+    uiTlw.prominentdebuffs:SetHandler("OnMoveStop", function (self)
         if self.alignVertical then
             SpellCastBuffs.SV.prominentdVOffsetX = self:GetLeft()
             SpellCastBuffs.SV.prominentdVOffsetY = self:GetTop()
@@ -793,7 +793,7 @@ function SpellCastBuffs.ResetContainerOrientation()
     containerRouting.promd_player = "prominentdebuffs"
 
     -- Separate container for players long term buffs
-    uiTlw.player_long:SetHandler("OnMoveStop", function(self)
+    uiTlw.player_long:SetHandler("OnMoveStop", function (self)
         if self.alignVertical then
             SpellCastBuffs.SV.playerVOffsetX = self:GetLeft()
             SpellCastBuffs.SV.playerVOffsetY = self:GetTop()
@@ -820,12 +820,12 @@ end
 function SpellCastBuffs.SetupContainerAlignment()
     g_alignmentDirection = {}
 
-    g_alignmentDirection.player1 = SpellCastBuffs.SV.AlignmentBuffsPlayer -- No icon holder for anchored buffs/debuffs - This value gets passed to SpellCastBuffs.updateIcons()
-    g_alignmentDirection.playerb = SpellCastBuffs.SV.AlignmentBuffsPlayer -- No icon holder for anchored buffs/debuffs - This value gets passed to SpellCastBuffs.updateIcons()
+    g_alignmentDirection.player1 = SpellCastBuffs.SV.AlignmentBuffsPlayer   -- No icon holder for anchored buffs/debuffs - This value gets passed to SpellCastBuffs.updateIcons()
+    g_alignmentDirection.playerb = SpellCastBuffs.SV.AlignmentBuffsPlayer   -- No icon holder for anchored buffs/debuffs - This value gets passed to SpellCastBuffs.updateIcons()
     g_alignmentDirection.player2 = SpellCastBuffs.SV.AlignmentDebuffsPlayer -- No icon holder for anchored buffs/debuffs - This value gets passed to SpellCastBuffs.updateIcons()
     g_alignmentDirection.playerd = SpellCastBuffs.SV.AlignmentDebuffsPlayer -- No icon holder for anchored buffs/debuffs - This value gets passed to SpellCastBuffs.updateIcons()
-    g_alignmentDirection.target1 = SpellCastBuffs.SV.AlignmentBuffsTarget -- No icon holder for anchored buffs/debuffs - This value gets passed to SpellCastBuffs.updateIcons()
-    g_alignmentDirection.targetb = SpellCastBuffs.SV.AlignmentBuffsTarget -- No icon holder for anchored buffs/debuffs - This value gets passed to SpellCastBuffs.updateIcons()
+    g_alignmentDirection.target1 = SpellCastBuffs.SV.AlignmentBuffsTarget   -- No icon holder for anchored buffs/debuffs - This value gets passed to SpellCastBuffs.updateIcons()
+    g_alignmentDirection.targetb = SpellCastBuffs.SV.AlignmentBuffsTarget   -- No icon holder for anchored buffs/debuffs - This value gets passed to SpellCastBuffs.updateIcons()
     g_alignmentDirection.target2 = SpellCastBuffs.SV.AlignmentDebuffsTarget -- No icon holder for anchored buffs/debuffs - This value gets passed to SpellCastBuffs.updateIcons()
     g_alignmentDirection.targetd = SpellCastBuffs.SV.AlignmentDebuffsTarget -- No icon holder for anchored buffs/debuffs - This value gets passed to SpellCastBuffs.updateIcons()
 
@@ -3779,7 +3779,7 @@ function SpellCastBuffs.updateIcons(currentTime, sortedList, container)
         -- Perform manual alignment
         if not uiTlw[container].iconHolder then
             if
-                iconsNum ~= uiTlw[container].prevIconsCount and index == next_row_break --[[and horizontal orientation of container]]
+            iconsNum ~= uiTlw[container].prevIconsCount and index == next_row_break --[[and horizontal orientation of container]]
             then
                 -- Padding of first icon in a row
                 local anchor, leftPadding
@@ -3941,21 +3941,21 @@ function SpellCastBuffs.OnPlayerActivated(eventCode)
 
     -- Resolve Mounted icon
     if not SpellCastBuffs.SV.IgnoreMountPlayer and IsMounted() then
-        zo_callLater(function()
+        zo_callLater(function ()
             SpellCastBuffs.MountStatus("", true)
         end, 50)
     end
 
     -- Resolve Disguise Icon
     if not SpellCastBuffs.SV.IgnoreDisguise then
-        zo_callLater(function()
+        zo_callLater(function ()
             SpellCastBuffs.DisguiseItem(nil, BAG_WORN, 10)
         end, 50)
     end
 
     -- Resolve Assistant Icon
     if not SpellCastBuffs.SV.IgnorePet or not SpellCastBuffs.SV.IgnoreAssistant then
-        zo_callLater(function()
+        zo_callLater(function ()
             SpellCastBuffs.CollectibleBuff()
         end, 50)
     end

@@ -6,10 +6,12 @@ Please always work with the "develop" branch on the [LuiExtended GitHub project 
 
 If you are unfamiliar with GitHub, feel free to reach out to me via email at [artofshred@artofshred.net][3], or you can directly send me your modified .lua file or specific strings through a file upload service or pastebin.
 
-Status
+## Status
+
 ------
 
 ### Main Addon
+
 This is the translation for the main addon strings consisting of most text displayed outside of the settings menu.
 
 | File       | Status     |
@@ -21,6 +23,7 @@ This is the translation for the main addon strings consisting of most text displ
 | `jp.lua`   | 0% done    |
 
 ### Skills
+
 This is the translation for ability names and tooltips.
 
 | File              | Status     |
@@ -32,6 +35,7 @@ This is the translation for ability names and tooltips.
 | `Skills_jp.lua`   | 0% done    |
 
 ### Settings  
+
 This is the translation for the AddOn Settings Menu.
 
 | File                | Status     |

@@ -30,14 +30,14 @@ local csunittag = "player"
 
 -- Local Damagetypes for easy use
 local PhysicalDamage = GetString(SI_DAMAGETYPE2) .. " Damage" -- TODO: Localize
-local FlameDamage = GetString(SI_DAMAGETYPE3) .. " Damage" -- TODO: Localize
-local ShockDamage = GetString(SI_DAMAGETYPE4) .. " Damage" -- TODO: Localize
-local FrostDamage = GetString(SI_DAMAGETYPE6) .. " Damage" -- TODO: Localize
-local MagicDamage = GetString(SI_DAMAGETYPE8) .. " Damage" -- TODO: Localize
+local FlameDamage = GetString(SI_DAMAGETYPE3) .. " Damage"    -- TODO: Localize
+local ShockDamage = GetString(SI_DAMAGETYPE4) .. " Damage"    -- TODO: Localize
+local FrostDamage = GetString(SI_DAMAGETYPE6) .. " Damage"    -- TODO: Localize
+local MagicDamage = GetString(SI_DAMAGETYPE8) .. " Damage"    -- TODO: Localize
 local DiseaseDamage = GetString(SI_DAMAGETYPE10) .. " Damage" -- TODO: Localize
-local PoisonDamage = GetString(SI_DAMAGETYPE11) .. " Damage" -- TODO: Localize
-local BleedDamage = GetString(SI_DAMAGETYPE12) .. " Damage" -- TODO: Localize
-local OblivionDamage = "Oblivion Damage" -- TODO: Localize
+local PoisonDamage = GetString(SI_DAMAGETYPE11) .. " Damage"  -- TODO: Localize
+local BleedDamage = GetString(SI_DAMAGETYPE12) .. " Damage"   -- TODO: Localize
+local OblivionDamage = "Oblivion Damage"                      -- TODO: Localize
 
 local Tooltips = {
     ----------------------------------------------------------------
@@ -176,7 +176,7 @@ local Tooltips = {
     Generic_Reduce_Physical_Spell_Resist_No_Dur = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_TP),
     Generic_Reduce_Physical_Spell_Resist_No_Dur_Value = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_VALUE_TP),
     Generic_Reduce_Physical_Spell_Damage_Percentage = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_WEP_SPELL_DMG_PERCENTAGE_TP), -- TODO: Unused
-    Generic_Reduce_Physical_Spell_Damage_Value = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_WEP_SPELL_DMG_VALUE_TP), -- TODO: Unused
+    Generic_Reduce_Physical_Spell_Damage_Value = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_WEP_SPELL_DMG_VALUE_TP),           -- TODO: Unused
 
     Generic_Reduce_Physical_Resist_Value = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHYSICAL_RESIST_VALUE_TP),
 
@@ -452,8 +452,8 @@ local Tooltips = {
     Experience_Alliance_War_Skill_Major = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HOUR_TP), "100"),
     Experience_Alliance_War_Skill_Grand = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HOUR_TP), "150"),
 
-    Experience_Colovian_War_Torte = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HALF_HOUR_TP), "50"), -- Colovian War Torte
-    Experience_Molten_War_Torte = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HALF_HOUR_TP), "100"), -- Molten War Torte
+    Experience_Colovian_War_Torte = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HALF_HOUR_TP), "50"),    -- Colovian War Torte
+    Experience_Molten_War_Torte = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HALF_HOUR_TP), "100"),     -- Molten War Torte
     Experience_White_Gold_War_Torte = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HALF_HOUR_TP), "150"), -- White-Gold War Torte
 
     -- Mementos

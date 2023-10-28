@@ -125,26 +125,26 @@ CrowdControl.aoePlayerNormal = {
     --[118011] = 0, -- Mystic Siphon (Mystic Siphon)
 
     -- Arcanist
-    [194844] = 0, -- Fatecarver Snare (Exhausting Fatecarver)
-    [194842] = 1, -- Fatecarver (Fatecarver)
-    [194843] = 1, -- Fatecarver (Fatecarver, Area)
-    [185805] = 1, -- Fatecarver (Fatecarver, Area)
+    [194844] = 0,   -- Fatecarver Snare (Exhausting Fatecarver)
+    [194842] = 1,   -- Fatecarver (Fatecarver)
+    [194843] = 1,   -- Fatecarver (Fatecarver, Area)
+    [185805] = 1,   -- Fatecarver (Fatecarver, Area)
     [20185805] = 1, -- Fatecarver (Fatecarver, Area)
     [30185805] = 1, -- Fatecarver (Fatecarver, Area)
     [40185805] = 1, -- Fatecarver (Fatecarver, Area)
-    [186366] = 1, -- Pragmatic Fatecarver (Pragmatic Fatecarver)
-    [186370] = 0, -- Pragmatic Fatecarver (Pragmatic Fatecarver, Area)
+    [186366] = 1,   -- Pragmatic Fatecarver (Pragmatic Fatecarver)
+    [186370] = 0,   -- Pragmatic Fatecarver (Pragmatic Fatecarver, Area)
     [20186366] = 1, -- Pragmatic Fatecarver (Pragmatic Fatecarver, Area)
     [30186366] = 1, -- Pragmatic Fatecarver (Pragmatic Fatecarver, Area)
     [40186366] = 1, -- Pragmatic Fatecarver (Pragmatic Fatecarver, Area)
-    [183122] = 1, -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
-    [184291] = 0, -- Exhausting Fatecarver (Exhausting Fatecarver)
+    [183122] = 1,   -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
+    [184291] = 0,   -- Exhausting Fatecarver (Exhausting Fatecarver)
     [20183122] = 1, -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
     [30183122] = 1, -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
     [40183122] = 1, -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
-    [183123] = 0, -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
+    [183123] = 0,   -- Exhausting Fatecarver (Exhausting Fatecarver, Area)
     -- [185817] = 1,   -- Abyssal Impact (Abyssal Impact)
-    [186772] = 1, -- Abyssal Impact (Abyssal Impact)
+    [186772] = 1,   -- Abyssal Impact (Abyssal Impact)
     -- [20185817] = 1, -- Abyssal Impact (Abyssal Impact)
     -- [30185817] = 1, -- Abyssal Impact (Abyssal Impact)
     -- [40185817] = 1, -- Abyssal Impact (Abyssal Impact)
@@ -200,9 +200,9 @@ CrowdControl.aoePlayerNormal = {
     [40374] = 1, -- Lightweight Beast Trap Immobilize (Lightweight Beast Trap)
 
     -- Assault
-    [38561] = 1, -- Caltrops (Caltrops)
-    [40267] = 0, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
-    [40252] = 0, -- Razor Caltrops (Razor Caltrops)
+    [38561] = 1,  -- Caltrops (Caltrops)
+    [40267] = 0,  -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
+    [40252] = 0,  -- Razor Caltrops (Razor Caltrops)
     [113771] = 0, -- Razor Caltrops (Razor Caltrops)
 
     -- Vampire
@@ -214,21 +214,21 @@ CrowdControl.aoePlayerSet = {
 
     -- Sets
     [102136] = 0, -- Zaan
-    [59568] = 1, -- Malubeth
-    [80522] = 1, -- Stormfist
-    [59498] = 1, -- Mephala's Web (Spawm of Mephala)
-    [60972] = 1, -- Fiery Breath (Maw of the Infernal)
-    [80526] = 1, -- Ilambris
-    [84502] = 1, -- Grothdarr
-    [80561] = 1, -- Iceheart
-    [97883] = 1, -- Domihaus
-    [97899] = 0, -- Domihaus
-    [80565] = 1, -- Kra'gh
-    [75692] = 1, -- Bahraha's Curse (of Bahraha's Curse)
-    [57209] = 1, -- Storm Knight's Plate (of the Storm Knight)
-    [67136] = 1, -- Overwhelming Surge (Overwhelming)
-    [59696] = 1, -- Embershield (Embershield)
-    [67204] = 1, -- Leeching Plate (of Leeching)
+    [59568] = 1,  -- Malubeth
+    [80522] = 1,  -- Stormfist
+    [59498] = 1,  -- Mephala's Web (Spawm of Mephala)
+    [60972] = 1,  -- Fiery Breath (Maw of the Infernal)
+    [80526] = 1,  -- Ilambris
+    [84502] = 1,  -- Grothdarr
+    [80561] = 1,  -- Iceheart
+    [97883] = 1,  -- Domihaus
+    [97899] = 0,  -- Domihaus
+    [80565] = 1,  -- Kra'gh
+    [75692] = 1,  -- Bahraha's Curse (of Bahraha's Curse)
+    [57209] = 1,  -- Storm Knight's Plate (of the Storm Knight)
+    [67136] = 1,  -- Overwhelming Surge (Overwhelming)
+    [59696] = 1,  -- Embershield (Embershield)
+    [67204] = 1,  -- Leeching Plate (of Leeching)
     [102094] = 1, -- Thurvokun (Thurvokun)
     [116920] = 1, -- Auroran's Thunder (Auroran's Thunder)
     [133494] = 1, -- Aegis Caller (Aegis Caller's)
@@ -255,53 +255,53 @@ CrowdControl.aoePlayerSet = {
 
 CrowdControl.aoeTraps = {
 
-    [87949] = 0, -- Lava (Foyada Quarry)
-    [44034] = 0, -- Slaughterfish Attack (Stirk)
+    [87949] = 0,  -- Lava (Foyada Quarry)
+    [44034] = 0,  -- Slaughterfish Attack (Stirk)
     [113082] = 0, -- Slaughterfish Attack (Cyrodiil)
-    [19224] = 0, -- In Lava (Halls of Torment)
-    [11338] = 0, -- In Lava (The Earth Forge)
-    [56277] = 0, -- Lava (City of Ash II)
-    [5140] = 0, -- Lava (Dragonstar Arena)
+    [19224] = 0,  -- In Lava (Halls of Torment)
+    [11338] = 0,  -- In Lava (The Earth Forge)
+    [56277] = 0,  -- Lava (City of Ash II)
+    [5140] = 0,   -- Lava (Dragonstar Arena)
 
-    [62770] = 0, -- Coldharbour Flames (Flame Trap) - Soul Shriven in Coldharbour
-    [21943] = 0, -- Spike Trap (Spike Trap)
-    [53169] = 0, -- Spike Trap (Spike Trap) - Dragonstar Arena
-    [26531] = 0, -- Bear Trap (Bear Trap)
-    [31086] = 0, -- Trap (Trap) - Selene's Web
-    [20260] = 0, -- Rune Burst (Sigil of Frost)
-    [33594] = 0, -- Fire (Fire) -- Greenshade - Throne of the Wilderking
+    [62770] = 0,  -- Coldharbour Flames (Flame Trap) - Soul Shriven in Coldharbour
+    [21943] = 0,  -- Spike Trap (Spike Trap)
+    [53169] = 0,  -- Spike Trap (Spike Trap) - Dragonstar Arena
+    [26531] = 0,  -- Bear Trap (Bear Trap)
+    [31086] = 0,  -- Trap (Trap) - Selene's Web
+    [20260] = 0,  -- Rune Burst (Sigil of Frost)
+    [33594] = 0,  -- Fire (Fire) -- Greenshade - Throne of the Wilderking
 
-    [17314] = 0, -- Fire Trap (Player)
-    [72888] = 0, -- Fire Attack 1 (Fire) -- Banished Cells II
-    [72889] = 0, -- Fire Attack 2 (Fire) -- Banished Cells II
+    [17314] = 0,  -- Fire Trap (Player)
+    [72888] = 0,  -- Fire Attack 1 (Fire) -- Banished Cells II
+    [72889] = 0,  -- Fire Attack 2 (Fire) -- Banished Cells II
 
-    [27940] = 0, -- Laser Damage (Generic Flame Wave Shooter) -- Stros M'Kai
-    [32245] = 0, -- Searing Steam (Steam Trap) -- Stros M'Kai
+    [27940] = 0,  -- Laser Damage (Generic Flame Wave Shooter) -- Stros M'Kai
+    [32245] = 0,  -- Searing Steam (Steam Trap) -- Stros M'Kai
 
-    [26040] = 0, -- Steam Blast (Steam Vent) -- Volenfell
-    [26089] = 0, -- Steam Blast (Steam Vent) -- Volenfell
-    [26077] = 1, -- Steam Blast (Steam Vent) -- Volenfell
-    [26091] = 1, -- Steam Blast (Steam Vent) -- Volenfell
+    [26040] = 0,  -- Steam Blast (Steam Vent) -- Volenfell
+    [26089] = 0,  -- Steam Blast (Steam Vent) -- Volenfell
+    [26077] = 1,  -- Steam Blast (Steam Vent) -- Volenfell
+    [26091] = 1,  -- Steam Blast (Steam Vent) -- Volenfell
 
     [110416] = 1, -- Putrid Cloud (Gas Blossom) -- Housing
     [110542] = 1, -- Stunted Current (Static Pitcher) -- Housing
     [111258] = 1, -- Surprise Attack (Lantern Mantis) -- Housing
     [111261] = 1, -- Surprise Attack (Lantern Mantis) -- Housing
 
-    [92757] = 0, -- Spinning Blade (Ald Carac)
+    [92757] = 0,  -- Spinning Blade (Ald Carac)
 
     [117508] = 0, -- Shock Wall (Lightning Trap - Elinhir Private Arena)
     [117622] = 0, -- Shock Wall (Lightning Trap - Elinhir Private Arena)
     [117598] = 0, -- Shock Wall (Lightning Trap - Elinhir Private Arena)
     [117139] = 0, -- Spinning Blade (Blade Trap - Elinhir Private Arena)
 
-    [92150] = 0, -- Fire Trap (Vvardenfell -- Divine Delusions)
-    [87102] = 0, -- Spinning Blade (Vvardenfell -- Divine Restoration)
-    [92284] = 0, -- Planar Shear (Vvardenfell -- Divine Restoration)
-    [86743] = 0, -- Accelerated Transposition (Vvardenfell -- Like Blood from a Stone)
-    [84527] = 0, -- Searing Steam (Vvardenfell - Nchuleftingth)
-    [90271] = 0, -- Charge-Wire Shock (Vvardenfell - Nchuleftingth)
-    [92138] = 0, -- Laser Damage (Vvardenfell - Nchuleftingth)
+    [92150] = 0,  -- Fire Trap (Vvardenfell -- Divine Delusions)
+    [87102] = 0,  -- Spinning Blade (Vvardenfell -- Divine Restoration)
+    [92284] = 0,  -- Planar Shear (Vvardenfell -- Divine Restoration)
+    [86743] = 0,  -- Accelerated Transposition (Vvardenfell -- Like Blood from a Stone)
+    [84527] = 0,  -- Searing Steam (Vvardenfell - Nchuleftingth)
+    [90271] = 0,  -- Charge-Wire Shock (Vvardenfell - Nchuleftingth)
+    [92138] = 0,  -- Laser Damage (Vvardenfell - Nchuleftingth)
 
     -- Quests
     [31970] = 1, -- Wrath (Tears of the Two Moons)
@@ -423,7 +423,7 @@ CrowdControl.aoeNPCBoss = {
 
     -- Tempest Island
     [26619] = 1, -- Shock (Sudden Storm)
-    [6108] = 1, -- Lightning Storm (Yalorasse the Speaker)
+    [6108] = 1,  -- Lightning Storm (Yalorasse the Speaker)
     [26752] = 1, -- Enervating Stone (Stormfist)
     [26517] = 1, -- Electrical Shock (Twister)
 
@@ -490,7 +490,7 @@ CrowdControl.aoeNPCElite = {
     [52866] = 1, -- Volley (Cyrodiil Archer)
     [54258] = 1, -- Upgraded Volley (Cyrodiil Archer)
     [10271] = 1, -- Quake (Gargoyle)
-    [9011] = 1, -- Tremor (Troll)
+    [9011] = 1,  -- Tremor (Troll)
     [48297] = 1, -- Consuming Omen (Troll - Ranged)
     [19061] = 1, -- Rain of Wisps (Wispmother)
     [75928] = 1, -- Elemental Pool (Minotaur)
@@ -526,58 +526,58 @@ CrowdControl.aoeNPCElite = {
 
 CrowdControl.aoeNPCNormal = {
 
-    [37131] = 0, -- Ice Cage (Battlemage)
-    [10813] = 1, -- Ignite (Synergy - Fire Mage)
-    [38260] = 0, -- Ignite (Synergy - Fire Mage)
-    [28629] = 1, -- Volley (Archer)
-    [47102] = 1, -- Fire Rune (Fire Mage)
-    [14068] = 1, -- Ignite (Synergy - Archer)
-    [70414] = 0, -- Ignite (Synergy - Cyrodiil Archer)
-    [38125] = 1, -- Caltrops  (Faction NPCs)
-    [76624] = 1, -- Pool of Shadow (Voidbringer)
-    [76728] = 0, -- Pool of Shadow (Voidbringer)
-    [88336] = 0, -- Pool of Shadow (Skaafin Masquer)
-    [88330] = 0, -- Pool of Shadow (Skaafin Masquer)
-    [88335] = 0, -- Pool of Shadow (Skaafin Masquer)
-    [88334] = 0, -- Pool of Shadow (Skaafin Masquer)
-    [84837] = 1, -- Broken Pact (Skaafin Witchling)
-    [87902] = 1, -- Bombard (Arbalest)
-    [62502] = 1, -- Fiery Wind (Justice Mage)
-    [46819] = 1, -- Storm Damage (Cyrodiil Mage)
-    [7883] = 1, -- Guardian Storm (Cyrodiil Mage)
-    [8604] = 1, -- Vigorous Swipe (Mammoth)
-    [27100] = 1, -- Shocking Rake (Dreugh)
-    [16698] = 1, -- Poisonbloom (Netch)
-    [90778] = 1, -- Acid Pool (Nix-Ox)
-    [90815] = 0, -- Acid Pool (Nix-Ox)
-    [85421] = 1, -- Retch (Cliff Strider)
-    [85391] = 1, -- Slash (Cliff Strider)
-    [13680] = 1, -- Acid Blood (Assassin Beetle)
-    [61374] = 1, -- Infectious Swarm (Necrotic Hoarvor)
-    [10947] = 1, -- Fiery Breath (Shalk)
-    [5265] = 1, -- Burning Ground (Shalk)
-    [8088] = 1, -- Poison Spray (Giant Spider)
-    [87126] = 1, -- Heat Vents (Fetcherfly Nest)
-    [51282] = 1, -- Flame Tornado (Air Atronach - Flame)
-    [9749] = 1, -- Envelop (Banekin)
-    [73437] = 1, -- Soul Flame (Daedric Titan)
-    [4772] = 1, -- Fiery Breath (Daedroth)
-    [91938] = 1, -- Burst of Embers (Daedroth)
-    [51645] = 1, -- Frozen Ground (Frost Atronach)
-    [6162] = 1, -- Rain of Fire (Scamp)
-    [88323] = 1, -- Blast Furnace (Iron Atronach)
-    [69950] = 1, -- Desecrated Ground (Undead Synergy)
-    [73937] = 1, -- Soul Cage (Lich)
-    [73929] = 0, -- Soul Cage (Lich)
-    [20812] = 1, -- Defiled Ground (Lich)
-    [72996] = 1, -- Symphony of Blades (Defiled Aegis)
-    [8628] = 1, -- Charged Ground (Harpy)
-    [4769] = 1, -- Choking Pollen (Lurcher)
-    [16040] = 1, -- Hurricane (Nereid)
-    [19997] = 1, -- Static Field (Dwemer Spider - Synergy)
-    [91094] = 1, -- Split Bolt (Dwemer Arquebus)
-    [91095] = 0, -- Split Bolt (Dwemer Arquebus)
-    [91096] = 0, -- Split Bolt (Dwemer Arquebus)
+    [37131] = 0,  -- Ice Cage (Battlemage)
+    [10813] = 1,  -- Ignite (Synergy - Fire Mage)
+    [38260] = 0,  -- Ignite (Synergy - Fire Mage)
+    [28629] = 1,  -- Volley (Archer)
+    [47102] = 1,  -- Fire Rune (Fire Mage)
+    [14068] = 1,  -- Ignite (Synergy - Archer)
+    [70414] = 0,  -- Ignite (Synergy - Cyrodiil Archer)
+    [38125] = 1,  -- Caltrops  (Faction NPCs)
+    [76624] = 1,  -- Pool of Shadow (Voidbringer)
+    [76728] = 0,  -- Pool of Shadow (Voidbringer)
+    [88336] = 0,  -- Pool of Shadow (Skaafin Masquer)
+    [88330] = 0,  -- Pool of Shadow (Skaafin Masquer)
+    [88335] = 0,  -- Pool of Shadow (Skaafin Masquer)
+    [88334] = 0,  -- Pool of Shadow (Skaafin Masquer)
+    [84837] = 1,  -- Broken Pact (Skaafin Witchling)
+    [87902] = 1,  -- Bombard (Arbalest)
+    [62502] = 1,  -- Fiery Wind (Justice Mage)
+    [46819] = 1,  -- Storm Damage (Cyrodiil Mage)
+    [7883] = 1,   -- Guardian Storm (Cyrodiil Mage)
+    [8604] = 1,   -- Vigorous Swipe (Mammoth)
+    [27100] = 1,  -- Shocking Rake (Dreugh)
+    [16698] = 1,  -- Poisonbloom (Netch)
+    [90778] = 1,  -- Acid Pool (Nix-Ox)
+    [90815] = 0,  -- Acid Pool (Nix-Ox)
+    [85421] = 1,  -- Retch (Cliff Strider)
+    [85391] = 1,  -- Slash (Cliff Strider)
+    [13680] = 1,  -- Acid Blood (Assassin Beetle)
+    [61374] = 1,  -- Infectious Swarm (Necrotic Hoarvor)
+    [10947] = 1,  -- Fiery Breath (Shalk)
+    [5265] = 1,   -- Burning Ground (Shalk)
+    [8088] = 1,   -- Poison Spray (Giant Spider)
+    [87126] = 1,  -- Heat Vents (Fetcherfly Nest)
+    [51282] = 1,  -- Flame Tornado (Air Atronach - Flame)
+    [9749] = 1,   -- Envelop (Banekin)
+    [73437] = 1,  -- Soul Flame (Daedric Titan)
+    [4772] = 1,   -- Fiery Breath (Daedroth)
+    [91938] = 1,  -- Burst of Embers (Daedroth)
+    [51645] = 1,  -- Frozen Ground (Frost Atronach)
+    [6162] = 1,   -- Rain of Fire (Scamp)
+    [88323] = 1,  -- Blast Furnace (Iron Atronach)
+    [69950] = 1,  -- Desecrated Ground (Undead Synergy)
+    [73937] = 1,  -- Soul Cage (Lich)
+    [73929] = 0,  -- Soul Cage (Lich)
+    [20812] = 1,  -- Defiled Ground (Lich)
+    [72996] = 1,  -- Symphony of Blades (Defiled Aegis)
+    [8628] = 1,   -- Charged Ground (Harpy)
+    [4769] = 1,   -- Choking Pollen (Lurcher)
+    [16040] = 1,  -- Hurricane (Nereid)
+    [19997] = 1,  -- Static Field (Dwemer Spider - Synergy)
+    [91094] = 1,  -- Split Bolt (Dwemer Arquebus)
+    [91095] = 0,  -- Split Bolt (Dwemer Arquebus)
+    [91096] = 0,  -- Split Bolt (Dwemer Arquebus)
     [103862] = 1, -- Deluge (Yaghra Spewer)
     [103992] = 1, -- Luminescent Burn (Yaghra Spewer)
     [121644] = 1, -- Defiled Ground (Euraxian Necromancer)
@@ -599,14 +599,14 @@ CrowdControl.LavaAlerts = {
     [87949] = true, -- Lava (Foyada Quarry)
 
     -- Traps & World
-    [44034] = true, -- Slaughterfish Attack (Stirk)
+    [44034] = true,  -- Slaughterfish Attack (Stirk)
     [113082] = true, -- Slaughterfish Attack (Cyrodiil)
-    [19224] = true, -- In Lava (Halls of Torment)
-    [11338] = true, -- In Lava (The Earth Forge)
-    [56277] = true, -- Lava (City of Ash II)
-    [5140] = true, -- Lava (Dragonstar Arena)
+    [19224] = true,  -- In Lava (Halls of Torment)
+    [11338] = true,  -- In Lava (The Earth Forge)
+    [56277] = true,  -- Lava (City of Ash II)
+    [5140] = true,   -- Lava (Dragonstar Arena)
 
-    [17314] = true, -- Fire Trap (Player)
+    [17314] = true,  -- Fire Trap (Player)
 
     -- Quests
     [31502] = true, -- MGQ2 Asakala Sahdina Barrier (Simply Misplaced)
@@ -655,24 +655,24 @@ CrowdControl.IgnoreList = {
     -- PVP
     [178127] = true, -- Diseased
     [178118] = true, -- Overcharged
-    [21927] = true, -- Minor Defile
+    [21927] = true,  -- Minor Defile
     --[88402] = true, -- Minor Magickasteal -- TODO: This id isn't the heal anymore so don't think this is needed here
     [148798] = true, -- Minor Magickasteal
-    [40079] = true, -- Radiating Regeneration
-    [57468] = true, -- Radiating Regeneration
+    [40079] = true,  -- Radiating Regeneration
+    [57468] = true,  -- Radiating Regeneration
     [187942] = true, -- Minor Fortitude
     [146697] = true, -- Minor Brittle
     [187940] = true, -- Minor Courage
     [178123] = true, -- Sundered
-    [62775] = true, -- Major Breach
-    [95136] = true, -- Chill
-    [68368] = true, -- Minor Maim
+    [62775] = true,  -- Major Breach
+    [95136] = true,  -- Chill
+    [68368] = true,  -- Minor Maim
     [187941] = true, -- Minor Endurance
     [187943] = true, -- Minor Intellect
 
     -- World
     [54363] = true, -- Halt (Guard)
-    [4197] = true, -- Recovering (NPC Duel)
+    [4197] = true,  -- Recovering (NPC Duel)
 
     -- Quests
     [34499] = true, -- Corruption Beam (The Blight of the Bosmer)
@@ -729,12 +729,12 @@ CrowdControl.IgnoreList = {
     ----------------
 
     -- Snare Effects
-    [8239] = true,    -- Hamstring
-    [160949] = true,  -- Warmth
-    [127795] = true,  -- Living Dark
-    [101693] = true,  -- Arrow Spray
-    [10650] = true,   -- Oil Drenched
-    [85656] = true,   -- Harry
+    [8239] = true,   -- Hamstring
+    [160949] = true, -- Warmth
+    [127795] = true, -- Living Dark
+    [101693] = true, -- Arrow Spray
+    [10650] = true,  -- Oil Drenched
+    [85656] = true,  -- Harry
 }
 
 -- Not implemented - list of abilities that ACTION_RESULT_GAINED_DURATION fires in the opposite order of normal

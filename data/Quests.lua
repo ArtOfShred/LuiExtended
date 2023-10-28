@@ -161,65 +161,65 @@ Quests.QuestItemMaxQuantityAdd = {
 
 -- Call specific functions to add/remove table entries for funky quest items. This will trigger when a certain quest item is added.
 Quests.QuestItemModifyOnAdd = {
-    [3278] = function()
+    [3278] = function ()
         Quests.QuestItemHideLoot[3280] = true
     end, -- Rune of Xarxes (The Mallari-Mora)
-    [3279] = function()
+    [3279] = function ()
         Quests.QuestItemHideLoot[3281] = true
     end, -- Rune of Magnus (The Mallari-Mora)
-    [3532] = function()
+    [3532] = function ()
         Quests.QuestItemHideLoot[3491] = true
     end, -- Crystal (Preventative Measure)
-    [3769] = function()
+    [3769] = function ()
         Quests.QuestItemHideLoot[3415] = true
     end, -- Teleport Scroll (Depths of Madness)
-    [4485] = function()
+    [4485] = function ()
         Quests.QuestItemHideRemove[4485] = true
     end, -- Rajhin's Mantle (A Lasting Winter)
-    [4492] = function()
+    [4492] = function ()
         Quests.QuestItemHideLoot[4485] = true
     end, -- Rajhin's Mantle (A Lasting Winter)
-    [3597] = function()
+    [3597] = function ()
         Quests.QuestItemHideLoot[3596] = true
     end, -- Rahkaz's Blade (The Enemy Within)
 
     -- Daggerfall Covenant
-    [3818] = function()
+    [3818] = function ()
         Quests.QuestItemHideLoot[3818] = true
     end, -- Dwemer Device (Tip of the Spearhead)
 }
 
 -- Call specific functions to add/remove table entries for funky quest items. This will trigger when a certain quest item is removed.
 Quests.QuestItemModifyOnRemove = {
-    [3532] = function()
+    [3532] = function ()
         Quests.QuestItemHideRemove[3491] = nil
     end, -- Crystal (Preventative Measure)
-    [4492] = function()
-        zo_callLater(function()
+    [4492] = function ()
+        zo_callLater(function ()
             Quests.QuestItemHideRemove[4485] = nil
         end, 2000)
     end, -- Rajhin's Mantle (A Lasting Winter)
-    [4645] = function()
-        zo_callLater(function()
+    [4645] = function ()
+        zo_callLater(function ()
             Quests.QuestItemHideRemove[4596] = nil
         end, 2000)
     end, -- Rahjin's Mantle (The Orrery of Elden Root)
-    [4411] = function()
+    [4411] = function ()
         Quests.QuestItemHideRemove[4411] = nil
     end, -- Bone Scepter (The Unquiet Dead)
-    [4479] = function()
+    [4479] = function ()
         Quests.QuestItemHideLoot[4479] = true
         Quests.QuestItemHideRemove[4479] = false
     end, -- Loriasel Tablet Notes (Eyes of Azura)
-    [4442] = function()
+    [4442] = function ()
         Quests.QuestItemHideRemove[4433] = nil
     end, -- Sigil Geode (Eyes of Azura)
-    [3597] = function()
+    [3597] = function ()
         Quests.QuestItemHideRemove[3596] = nil
     end, -- Rahkaz's Blade (The Enemy Within)
 
     -- Daggerfall Covenant
-    [3818] = function()
+    [3818] = function ()
         Quests.QuestItemHideRemove[3818] = true
     end, -- Dwemer Device (Tip of the Spearhead)
 }
@@ -227,7 +227,7 @@ Quests.QuestItemModifyOnRemove = {
 -- When this item is gained display the "material" quest items used to make it.
 Quests.QuestItemMerge = {
 
-    [3360] = { 3368, 3369 }, -- Volatile Fire Mixture (The Serpent's Beacon) -- Kindlepitch, Fire Salts
+    [3360] = { 3368, 3369 },       -- Volatile Fire Mixture (The Serpent's Beacon) -- Kindlepitch, Fire Salts
     [3402] = { 3403, 3404, 3405 }, -- Spore Potion (The Depths of Madness) -- Bloodcrown Spores, Lavendercap Mushrooms, Gleamcap Spores
 
     -- Vvardenfell
@@ -247,17 +247,17 @@ Quests.QuestItemMerge = {
 Quests.ItemRemovedMessage = {
 
     -- Jester's Festival
-    [6163] = LUIE_QUEST_MESSAGE_OFFER, -- Mudcrab Apples (A Noble Guest)
+    [6163] = LUIE_QUEST_MESSAGE_OFFER,   -- Mudcrab Apples (A Noble Guest)
     [6145] = LUIE_QUEST_MESSAGE_DISCARD, -- Petal Pelters (Springtime Flair)
-    [6186] = LUIE_QUEST_MESSAGE_TURNIN, -- Glowing Ayleid Bone Dust (Royal Revelry)
-    [6187] = LUIE_QUEST_MESSAGE_TURNIN, -- Dragonfire Dust (Royal Revelry)
+    [6186] = LUIE_QUEST_MESSAGE_TURNIN,  -- Glowing Ayleid Bone Dust (Royal Revelry)
+    [6187] = LUIE_QUEST_MESSAGE_TURNIN,  -- Dragonfire Dust (Royal Revelry)
     [6192] = LUIE_QUEST_MESSAGE_EXHAUST, -- Burst Dazzler (Royal Revelry)
     [6193] = LUIE_QUEST_MESSAGE_EXHAUST, -- Flash Dazzler (Royal Revelry)
     [6191] = LUIE_QUEST_MESSAGE_EXHAUST, -- Sparkle Dazzler (Royal Revelry)
     [7628] = LUIE_QUEST_MESSAGE_DISCARD, -- Special Arena Pass (The King's Spoils)
-    [7617] = LUIE_QUEST_MESSAGE_PLACE, -- Slime Prank Kit (Prankster's Carnival)
-    [7614] = LUIE_QUEST_MESSAGE_PLACE, -- Glitter Prank Kit (Prankster's Carnival)
-    [7616] = LUIE_QUEST_MESSAGE_PLACE, -- Stinkpot Prank Kit (Prankster's Carnival)
+    [7617] = LUIE_QUEST_MESSAGE_PLACE,   -- Slime Prank Kit (Prankster's Carnival)
+    [7614] = LUIE_QUEST_MESSAGE_PLACE,   -- Glitter Prank Kit (Prankster's Carnival)
+    [7616] = LUIE_QUEST_MESSAGE_PLACE,   -- Stinkpot Prank Kit (Prankster's Carnival)
 
     -- Werewolf / Vampire
     [5475] = LUIE_QUEST_MESSAGE_OFFER, -- Tribute (Hircine's Gift)
@@ -265,34 +265,34 @@ Quests.ItemRemovedMessage = {
     -- Auridon (MSQ)
     [5434] = LUIE_QUEST_MESSAGE_CONFISCATE, -- Deployment Plans (A Hostile Situation)
     [5435] = LUIE_QUEST_MESSAGE_CONFISCATE, -- Poisoned Meat (A Hostile Situation)
-    [3470] = LUIE_QUEST_MESSAGE_TURNIN, -- Fistalle's Note (Putting the Pieces Together) -- TODO: Not sure if needed anymore
-    [3434] = LUIE_QUEST_MESSAGE_TURNIN, -- Armament Inventory (Putting the Pieces Together) -- TODO: Not sure if needed anymore
-    [3435] = LUIE_QUEST_MESSAGE_TURNIN, -- Heritance Officer's Uniform (Putting the Pieces Together) -- TODO: Not sure if needed anymore
-    [3534] = LUIE_QUEST_MESSAGE_TURNIN, -- Royal Blade (Lifting the Veil)
-    [3556] = LUIE_QUEST_MESSAGE_EXHAUST, -- Earring of Altmer Nobility (The Veil Falls)
+    [3470] = LUIE_QUEST_MESSAGE_TURNIN,     -- Fistalle's Note (Putting the Pieces Together) -- TODO: Not sure if needed anymore
+    [3434] = LUIE_QUEST_MESSAGE_TURNIN,     -- Armament Inventory (Putting the Pieces Together) -- TODO: Not sure if needed anymore
+    [3435] = LUIE_QUEST_MESSAGE_TURNIN,     -- Heritance Officer's Uniform (Putting the Pieces Together) -- TODO: Not sure if needed anymore
+    [3534] = LUIE_QUEST_MESSAGE_TURNIN,     -- Royal Blade (Lifting the Veil)
+    [3556] = LUIE_QUEST_MESSAGE_EXHAUST,    -- Earring of Altmer Nobility (The Veil Falls)
 
-    [3544] = LUIE_QUEST_MESSAGE_TURNIN, -- Wedding Ring (Through the Ashes)
-    [3548] = LUIE_QUEST_MESSAGE_DISCARD, -- Missing Citizens (Through the Ashes)
-    [3543] = LUIE_QUEST_MESSAGE_DISCARD, -- Pendant (Through the Ashes)
+    [3544] = LUIE_QUEST_MESSAGE_TURNIN,     -- Wedding Ring (Through the Ashes)
+    [3548] = LUIE_QUEST_MESSAGE_DISCARD,    -- Missing Citizens (Through the Ashes)
+    [3543] = LUIE_QUEST_MESSAGE_DISCARD,    -- Pendant (Through the Ashes)
 
     -- Stros M'Kai
     [3782] = LUIE_QUEST_MESSAGE_CONFISCATE, -- Giant Red Gemstone (Innocent Scoundrel)
-    [3703] = LUIE_QUEST_MESSAGE_EXHAUST, -- Neramo's Control Rod (Buried Secrets)
-    [3888] = LUIE_QUEST_MESSAGE_EXHAUST, -- Sea Drake Clothing Bundle (Like Moths to a Candle)
-    [3780] = LUIE_QUEST_MESSAGE_DISCARD, -- Storeroom Key (Like Moths to a Candle)
-    [3781] = LUIE_QUEST_MESSAGE_DISCARD, -- Antidote (Like Moths to a Candle)
-    [3816] = LUIE_QUEST_MESSAGE_USE, -- Headman Bhosek's Key (Tip of the Spearhead)
-    [3818] = LUIE_QUEST_MESSAGE_USE, -- Dwemer Device (Tip of the Spearhead)
-    [3800] = LUIE_QUEST_MESSAGE_DISCARD, -- Shovel (Izad's Treasure)
-    [3803] = LUIE_QUEST_MESSAGE_OPEN, -- The Clues, Damn Your Eyes (Izad's Treasure)
-    [3819] = LUIE_QUEST_MESSAGE_DISCARD, -- Captain Izad's Letter (Izad's Treasure)
+    [3703] = LUIE_QUEST_MESSAGE_EXHAUST,    -- Neramo's Control Rod (Buried Secrets)
+    [3888] = LUIE_QUEST_MESSAGE_EXHAUST,    -- Sea Drake Clothing Bundle (Like Moths to a Candle)
+    [3780] = LUIE_QUEST_MESSAGE_DISCARD,    -- Storeroom Key (Like Moths to a Candle)
+    [3781] = LUIE_QUEST_MESSAGE_DISCARD,    -- Antidote (Like Moths to a Candle)
+    [3816] = LUIE_QUEST_MESSAGE_USE,        -- Headman Bhosek's Key (Tip of the Spearhead)
+    [3818] = LUIE_QUEST_MESSAGE_USE,        -- Dwemer Device (Tip of the Spearhead)
+    [3800] = LUIE_QUEST_MESSAGE_DISCARD,    -- Shovel (Izad's Treasure)
+    [3803] = LUIE_QUEST_MESSAGE_OPEN,       -- The Clues, Damn Your Eyes (Izad's Treasure)
+    [3819] = LUIE_QUEST_MESSAGE_DISCARD,    -- Captain Izad's Letter (Izad's Treasure)
 
     -- Vvardenfell
     [6116] = LUIE_QUEST_MESSAGE_USE, -- Fire Bomb (Broken Bonds)
 
     -- Elsweyr
     [7032] = LUIE_QUEST_MESSAGE_DISCARD, -- Letter from Abnur Tharn (Bright Moons, Warm Sands)
-    [6929] = LUIE_QUEST_MESSAGE_USE, -- Room Key (Bright Moons, Warm Sands)
+    [6929] = LUIE_QUEST_MESSAGE_USE,     -- Room Key (Bright Moons, Warm Sands)
 
     -- Greymoor
     [7161] = LUIE_QUEST_MESSAGE_TURNIN, -- Fennorian's Flask (Bound in Blood)
@@ -315,11 +315,11 @@ Quests.ItemReceivedMessage = {
 
     -- Jester's Festival
     [6163] = LUIE_QUEST_MESSAGE_STEAL, -- Mudcrab Apples (A Noble Guest)
-    [6192] = LUIE_QUEST_MESSAGE_LOOT, -- Burst Dazzler (Royal Revelry)
-    [6193] = LUIE_QUEST_MESSAGE_LOOT, -- Flash Dazzler (Royal Revelry)
-    [6191] = LUIE_QUEST_MESSAGE_LOOT, -- Sparkle Dazzler (Royal Revelry)
-    [7533] = LUIE_QUEST_MESSAGE_LOOT, -- King Boar Invitational (A Foe Most Porcine)
-    [7566] = LUIE_QUEST_MESSAGE_LOOT, -- Fermented Mudcrab Apples (The King's Spoils)
+    [6192] = LUIE_QUEST_MESSAGE_LOOT,  -- Burst Dazzler (Royal Revelry)
+    [6193] = LUIE_QUEST_MESSAGE_LOOT,  -- Flash Dazzler (Royal Revelry)
+    [6191] = LUIE_QUEST_MESSAGE_LOOT,  -- Sparkle Dazzler (Royal Revelry)
+    [7533] = LUIE_QUEST_MESSAGE_LOOT,  -- King Boar Invitational (A Foe Most Porcine)
+    [7566] = LUIE_QUEST_MESSAGE_LOOT,  -- Fermented Mudcrab Apples (The King's Spoils)
 
     -- Auridon (MSQ)
     [3429] = LUIE_QUEST_MESSAGE_LOOT, -- Deployment Plans (Ensuring Security)

@@ -183,9 +183,9 @@ function SlashCommands.SlashCampaignQ(option)
     end
 
     -- If input is valid and the name is in the campaign table, try to queue for the campaign.
-    local optionLower  = string.lower(option)
-    if LUIE.CampaignNames[optionLower ] then
-        local campaignId = LUIE.CampaignNames[optionLower ]
+    local optionLower = string.lower(option)
+    if LUIE.CampaignNames[optionLower] then
+        local campaignId = LUIE.CampaignNames[optionLower]
         local campaignName = GetCampaignName(campaignId)
 
         if GetAssignedCampaignId() == campaignId or GetGuestCampaignId() == campaignId then
@@ -367,15 +367,15 @@ function SlashCommands.SlashReport(player)
 end
 
 local petIds = {
-    [23304] = "[Familiar]", -- Summon Unstable Familiar (Sorcerer)
-    [23319] = "[Clannfear]", -- Summon Unstable Clannfear (Sorcerer)
-    [23316] = "[Volatile Familiar]", -- Summon Volatile Familiar (Sorcerer)
-    [24613] = "[Winged Twilight]", -- Summon Winged Twilight (Sorcerer)
+    [23304] = "[Familiar]",           -- Summon Unstable Familiar (Sorcerer)
+    [23319] = "[Clannfear]",          -- Summon Unstable Clannfear (Sorcerer)
+    [23316] = "[Volatile Familiar]",  -- Summon Volatile Familiar (Sorcerer)
+    [24613] = "[Winged Twilight]",    -- Summon Winged Twilight (Sorcerer)
     [24636] = "[Twilight Tormentor]", -- Summon Twilight Tormentor (Sorcerer)
     [24639] = "[Twilight Matriarch]", -- Summon Twilight Matriarch (Sorcerer)
-    [85982] = "[Feral Guardian]", -- Feral Guardian (Warden)
-    [85986] = "[Eternal Guardian]", -- Eternal Guardian (Warden)
-    [85990] = "[Wild Guardian]", -- Wild Guardian (Warden)
+    [85982] = "[Feral Guardian]",     -- Feral Guardian (Warden)
+    [85986] = "[Eternal Guardian]",   -- Eternal Guardian (Warden)
+    [85990] = "[Wild Guardian]",      -- Wild Guardian (Warden)
 }
 
 -- Slash Command to dismiss pets and optionally non-combat pets

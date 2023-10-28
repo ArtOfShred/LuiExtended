@@ -274,41 +274,41 @@ CombatInfo.AlertColors = {}
 CombatInfo.CastBarUnlocked = false
 CombatInfo.AlertFrameUnlocked = false
 
-local uiTlw = {} -- GUI
-local castbar = {} -- castbar
-local g_casting = false -- Toggled when casting - prevents additional events from creating a cast bar until finished
-local g_ultimateCost = 0 -- Cost of ultimate Ability in Slot
-local g_ultimateCurrent = 0 -- Current ultimate value
+local uiTlw = {}                                          -- GUI
+local castbar = {}                                        -- castbar
+local g_casting = false                                   -- Toggled when casting - prevents additional events from creating a cast bar until finished
+local g_ultimateCost = 0                                  -- Cost of ultimate Ability in Slot
+local g_ultimateCurrent = 0                               -- Current ultimate value
 local g_ultimateSlot = ACTION_BAR_ULTIMATE_SLOT_INDEX + 1 -- Ultimate slot number
-local g_uiProcAnimation = {} -- Animation for bar slots
-local g_uiCustomToggle = {} -- Toggle slots for bar Slots
-local g_triggeredSlotsFront = {} -- Triggered bar highlight slots
-local g_triggeredSlotsBack = {} -- Triggered bar highlight slots
-local g_triggeredSlotsRemain = {} -- Table of remaining durations on proc abilities
-local g_toggledSlotsBack = {} -- Toggled bar highlight slots
-local g_toggledSlotsFront = {} -- Toggled bar highlight slots
-local g_toggledSlotsRemain = {} -- Table of remaining durations on active abilities
-local g_toggledSlotsStack = {} -- Table of stacks for active abilities
-local g_toggledSlotsPlayer = {} -- Table of abilities that target the player (bar highlight doesn't fade on reticleover change)
-local g_potionUsed = false -- Toggled on when a potion is used to prevent OnSlotsFullUpdate from updating timers.
-local g_barOverrideCI = {} -- Table for storing abilityId's from Effects.BarHighlightOverride that should show as an aura
-local g_barFakeAura = {} -- Table for storing abilityId's that only display a fakeaura
-local g_barDurationOverride = {} -- Table for storing abilitiyId's that ignore ending event
-local g_barNoRemove = {} -- Table of abilities we don't remove from bar highlight
-local g_protectAbilityRemoval = {} -- AbilityId's set to a timestamp here to prevent removal of bar highlight when refreshing ground auras from causing the highlight to fade.
-local g_mineStacks = {} -- Individual AbilityId ground mine stack information
-local g_mineNoTurnOff = {} -- When this variable is true for an abilityId - don't remove the bar highlight for a mine (We we have reticleover target and the mine effect applies on the enemy)
-local g_barFont -- Font for Ability Highlight Label
-local g_potionFont -- Font for Potion Timer Label
-local g_ultimateFont -- Font for Ultimate Percentage Label
-local g_castbarFont -- Font for Castbar Label & Timer
-local g_ProcSound -- Proc Sound
-local g_boundArmamentsPlayed = false -- Specific variable to lockout Bound Armaments/Grim Focus from playing a proc sound at 5 stacks to only once per 5 seconds.
-local g_disableProcSound = {} -- When we play a proc sound from a bar ability changing (like power lash) we put a 3 sec ICD on it so it doesn't spam when mousing on/off a target, etc
-local g_hotbarCategory = GetActiveHotbarCategory() -- Set on initialization and when we swap weapons to determine the current hotbar category
-local g_backbarButtons = {} -- Table to hold backbar buttons
-local g_activeWeaponSwapInProgress = false -- Toggled on when weapon swapping, TODO: maybe not needed
-local g_castbarWorldMapFix = false -- Fix for viewing the World Map changing the player coordinates for some reason
+local g_uiProcAnimation = {}                              -- Animation for bar slots
+local g_uiCustomToggle = {}                               -- Toggle slots for bar Slots
+local g_triggeredSlotsFront = {}                          -- Triggered bar highlight slots
+local g_triggeredSlotsBack = {}                           -- Triggered bar highlight slots
+local g_triggeredSlotsRemain = {}                         -- Table of remaining durations on proc abilities
+local g_toggledSlotsBack = {}                             -- Toggled bar highlight slots
+local g_toggledSlotsFront = {}                            -- Toggled bar highlight slots
+local g_toggledSlotsRemain = {}                           -- Table of remaining durations on active abilities
+local g_toggledSlotsStack = {}                            -- Table of stacks for active abilities
+local g_toggledSlotsPlayer = {}                           -- Table of abilities that target the player (bar highlight doesn't fade on reticleover change)
+local g_potionUsed = false                                -- Toggled on when a potion is used to prevent OnSlotsFullUpdate from updating timers.
+local g_barOverrideCI = {}                                -- Table for storing abilityId's from Effects.BarHighlightOverride that should show as an aura
+local g_barFakeAura = {}                                  -- Table for storing abilityId's that only display a fakeaura
+local g_barDurationOverride = {}                          -- Table for storing abilitiyId's that ignore ending event
+local g_barNoRemove = {}                                  -- Table of abilities we don't remove from bar highlight
+local g_protectAbilityRemoval = {}                        -- AbilityId's set to a timestamp here to prevent removal of bar highlight when refreshing ground auras from causing the highlight to fade.
+local g_mineStacks = {}                                   -- Individual AbilityId ground mine stack information
+local g_mineNoTurnOff = {}                                -- When this variable is true for an abilityId - don't remove the bar highlight for a mine (We we have reticleover target and the mine effect applies on the enemy)
+local g_barFont                                           -- Font for Ability Highlight Label
+local g_potionFont                                        -- Font for Potion Timer Label
+local g_ultimateFont                                      -- Font for Ultimate Percentage Label
+local g_castbarFont                                       -- Font for Castbar Label & Timer
+local g_ProcSound                                         -- Proc Sound
+local g_boundArmamentsPlayed = false                      -- Specific variable to lockout Bound Armaments/Grim Focus from playing a proc sound at 5 stacks to only once per 5 seconds.
+local g_disableProcSound = {}                             -- When we play a proc sound from a bar ability changing (like power lash) we put a 3 sec ICD on it so it doesn't spam when mousing on/off a target, etc
+local g_hotbarCategory = GetActiveHotbarCategory()        -- Set on initialization and when we swap weapons to determine the current hotbar category
+local g_backbarButtons = {}                               -- Table to hold backbar buttons
+local g_activeWeaponSwapInProgress = false                -- Toggled on when weapon swapping, TODO: maybe not needed
+local g_castbarWorldMapFix = false                        -- Fix for viewing the World Map changing the player coordinates for some reason
 
 local ACTION_BAR = ZO_ActionBar1
 local BAR_INDEX_START = 3
@@ -541,8 +541,8 @@ function CombatInfo.SetupBackBarIcons(button, flip)
     -- Special case for certain skills, so the proc icon doesn't get stuck.
     local specialCases = {
         [114716] = 46324, -- Crystal Fragments --> Crystal Fragments
-        [20824] = 20816, -- Power Lash --> Flame Lash
-        [35445] = 35441, -- Shadow Image Teleport --> Shadow Image
+        [20824] = 20816,  -- Power Lash --> Flame Lash
+        [35445] = 35441,  -- Shadow Image Teleport --> Shadow Image
         [126659] = 38910, -- Flying Blade --> Flying Blade
     }
 
@@ -586,7 +586,7 @@ end
 function CombatInfo.HookGCD()
     -- Hook to update GCD support
     ---@diagnostic disable-next-line: duplicate-set-field
-    ActionButton.UpdateUsable = function(self)
+    ActionButton.UpdateUsable = function (self)
         local slotnum = self:GetSlot()
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or g_hotbarCategory
         local isGamepad = IsInGamepadPreferredMode()
@@ -614,7 +614,7 @@ function CombatInfo.HookGCD()
 
     -- Hook to update GCD support
     ---@diagnostic disable-next-line: duplicate-set-field
-    ActionButton.UpdateCooldown = function(self, options)
+    ActionButton.UpdateCooldown = function (self, options)
         local slotnum = self:GetSlot()
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or g_hotbarCategory
         local remain, duration, global, globalSlotType = GetSlotCooldownInfo(slotnum, hotbarCategory)
@@ -644,7 +644,7 @@ function CombatInfo.HookGCD()
                     self.cooldown:SetHidden(false)
                 end
 
-                self.slot:SetHandler("OnUpdate", function()
+                self.slot:SetHandler("OnUpdate", function ()
                     self:RefreshCooldown()
                 end)
                 if updateChromaQuickslot then
@@ -1756,13 +1756,13 @@ function CombatInfo.CreateCastBar()
     uiTlw.castBar.previewLabel = UI.Label(uiTlw.castBar.preview, { CENTER, CENTER }, nil, nil, "ZoFontGameMedium", "Cast Bar", false)
 
     -- Callback used to hide anchor coords preview label on movement start
-    local tlwOnMoveStart = function(self)
-        eventManager:RegisterForUpdate(moduleName .. "PreviewMove", 200, function()
+    local tlwOnMoveStart = function (self)
+        eventManager:RegisterForUpdate(moduleName .. "PreviewMove", 200, function ()
             self.preview.anchorLabel:SetText(zo_strformat("<<1>>, <<2>>", self:GetLeft(), self:GetTop()))
         end)
     end
     -- Callback used to save new position of frames
-    local tlwOnMoveStop = function(self)
+    local tlwOnMoveStop = function (self)
         eventManager:UnregisterForUpdate(moduleName .. "PreviewMove")
         CombatInfo.SV.CastbarOffsetX = self:GetLeft()
         CombatInfo.SV.CastbarOffsetY = self:GetTop()
@@ -2082,10 +2082,10 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
 
     -- Bail out past here if the cast bar is disabled or
     if
-        not CombatInfo.SV.CastBarEnable or (
-            (sourceType ~= COMBAT_UNIT_TYPE_PLAYER and not Castbar.CastOverride[abilityId]) -- source isn't the player and the ability is not on the list of abilities to show the cast bar for
-            and (targetType ~= COMBAT_UNIT_TYPE_PLAYER or result ~= ACTION_RESULT_EFFECT_FADED)
-        ) -- target isn't the player with effect faded
+    not CombatInfo.SV.CastBarEnable or (
+        (sourceType ~= COMBAT_UNIT_TYPE_PLAYER and not Castbar.CastOverride[abilityId]) -- source isn't the player and the ability is not on the list of abilities to show the cast bar for
+        and (targetType ~= COMBAT_UNIT_TYPE_PLAYER or result ~= ACTION_RESULT_EFFECT_FADED)
+    )                                                                                   -- target isn't the player with effect faded
     then
         return
     end
@@ -2195,7 +2195,7 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
 
     -- Fix to lower the duration of the next cast of Profane Symbol quest ability for Scion of the Blood Matron (Vampire)
     if abilityId == 39507 then
-        zo_callLater(function()
+        zo_callLater(function ()
             Castbar.CastDurationFix[39507] = 19500
         end, 5000)
     end
@@ -2441,7 +2441,7 @@ end
 
 function CombatInfo.InventoryItemUsed()
     g_potionUsed = true
-    zo_callLater(function()
+    zo_callLater(function ()
         g_potionUsed = false
     end, 200)
 end
@@ -2514,10 +2514,10 @@ function CombatInfo.PlayProcAnimations(slotNum)
         local procLoopTimeline = ANIMATION_MANAGER:CreateTimelineFromVirtual("UltimateReadyLoop", procLoopTexture)
         procLoopTimeline.procLoopTexture = procLoopTexture
 
-        procLoopTimeline.onPlay = function(self)
+        procLoopTimeline.onPlay = function (self)
             self.procLoopTexture:SetHidden(false)
         end
-        procLoopTimeline.onStop = function(self)
+        procLoopTimeline.onStop = function (self)
             self.procLoopTexture:SetHidden(true)
         end
 

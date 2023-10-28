@@ -19,7 +19,7 @@ function CombatTextEventListener:New()
 end
 
 function CombatTextEventListener:RegisterForEvent(event, func, ...)
-    eventManager:RegisterForEvent(moduleName .. "Event" .. event .. "_" .. eventPostfix, event, function(eventCode, ...)
+    eventManager:RegisterForEvent(moduleName .. "Event" .. event .. "_" .. eventPostfix, event, function (eventCode, ...)
         func(...)
     end)
 

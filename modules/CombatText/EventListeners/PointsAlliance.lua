@@ -11,7 +11,7 @@ local pointType = LUIE.Data.CombatTextConstants.pointType
 
 function CombatTextPointsAllianceEventListener:New()
     local obj = LUIE.CombatTextEventListener:New()
-    obj:RegisterForEvent(EVENT_ALLIANCE_POINT_UPDATE, function(...)
+    obj:RegisterForEvent(EVENT_ALLIANCE_POINT_UPDATE, function (...)
         self:OnEvent(...)
     end)
     return obj

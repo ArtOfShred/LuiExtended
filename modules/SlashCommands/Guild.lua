@@ -143,7 +143,7 @@ function SlashCommands.SlashGuildKick(option)
         guildnumber = LUIE.GuildIndexData[4].id
     elseif guildnumber == "5" and LUIE.GuildIndexData[5] then
         guildnumber = LUIE.GuildIndexData[5].id
-    -- If we enter anything outside of the range of 1-5, display an error and end.
+        -- If we enter anything outside of the range of 1-5, display an error and end.
     else
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK), true)
         if LUIE.ChatAnnouncements.SV.Social.GuildAlert then

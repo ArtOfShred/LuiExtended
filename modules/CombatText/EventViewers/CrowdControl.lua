@@ -13,7 +13,7 @@ local crowdControlTypes = LUIE.Data.CombatTextConstants.crowdControlType
 
 function CombatTextCrowdControlEventViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
-    obj:RegisterCallback(eventType.CROWDCONTROL, function(...)
+    obj:RegisterCallback(eventType.CROWDCONTROL, function (...)
         self:OnEvent(...)
     end)
     self.locationOffset = { [combatType.OUTGOING] = 0, [combatType.INCOMING] = 0 }
@@ -34,31 +34,31 @@ function CombatTextCrowdControlEventViewer:OnEvent(crowdControlType, eventCombat
         size = Settings.fontSizes.crowdControl
         text = self:FormatString(Settings.formats.disoriented, { text = GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED) })
 
-    -- Feared
+        -- Feared
     elseif crowdControlType == crowdControlTypes.FEARED then
         color = Settings.colors.feared
         size = Settings.fontSizes.crowdControl
         text = self:FormatString(Settings.formats.feared, { text = GetString(SI_LUIE_LAM_CT_SHARED_FEARED) })
 
-    -- Off Balanced
+        -- Off Balanced
     elseif crowdControlType == crowdControlTypes.OFFBALANCED then
         color = Settings.colors.offBalanced
         size = Settings.fontSizes.crowdControl
         text = self:FormatString(Settings.formats.offBalanced, { text = GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE) })
 
-    -- Silenced
+        -- Silenced
     elseif crowdControlType == crowdControlTypes.SILENCED then
         color = Settings.colors.silenced
         size = Settings.fontSizes.crowdControl
         text = self:FormatString(Settings.formats.silenced, { text = GetString(SI_LUIE_LAM_CT_SHARED_SILENCED) })
 
-    -- Stunned
+        -- Stunned
     elseif crowdControlType == crowdControlTypes.STUNNED then
         color = Settings.colors.stunned
         size = Settings.fontSizes.crowdControl
         text = self:FormatString(Settings.formats.stunned, { text = GetString(SI_LUIE_LAM_CT_SHARED_STUNNED) })
 
-    -- Charmed
+        -- Charmed
     elseif crowdControlType == crowdControlTypes.CHARMED then
         color = Settings.colors.charmed
         size = Settings.fontSizes.crowdControl
@@ -99,7 +99,7 @@ function CombatTextCrowdControlEventViewer:OnEvent(crowdControlType, eventCombat
     animation:Play()
 
     -- Add items back into pool after animation
-    zo_callLater(function()
+    zo_callLater(function ()
         self.poolManager:ReleasePoolObject(poolTypes.CONTROL, controlPoolKey)
         self.poolManager:ReleasePoolObject(animationPoolType, animationPoolKey)
         self.activeCrowdControls[eventCombatType] = self.activeCrowdControls[eventCombatType] - 1

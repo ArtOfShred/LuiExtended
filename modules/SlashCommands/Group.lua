@@ -9,7 +9,7 @@ local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
 
 -- Slash Command to perform a group regroup
-local g_regroupStacks = {} -- Character stack for Regroup reinvites
+local g_regroupStacks = {}     -- Character stack for Regroup reinvites
 local g_pendingRegroup = false -- Toggled when a regroup is in progress to prevent additional regroup attempts from firing
 function SlashCommands.SlashRegroup()
     local function RegroupInvite()
@@ -29,7 +29,7 @@ function SlashCommands.SlashRegroup()
             end
         end
         g_pendingRegroup = false -- Allow Regroup command to be used again
-        g_regroupStacks = {} -- Allow index to be used again.
+        g_regroupStacks = {}     -- Allow index to be used again.
     end
 
     local groupSize = GetGroupSize()
@@ -117,7 +117,7 @@ function SlashCommands.SlashRegroup()
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_ALL_OFF_MSG))
             end
             g_pendingRegroup = false -- Allow Regroup command to be used again
-            g_regroupStacks = {} -- Allow index to be used again.
+            g_regroupStacks = {}     -- Allow index to be used again.
         end
     else
         printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG), true)
@@ -187,6 +187,7 @@ function SlashCommands.SlashGroupRole(option)
         UpdateSelectedLFGRole(LFG_ROLE_DPS)
     end
 end
+
 local playerName, PlayerDisplayName = ZO_GetPrimaryPlayerName, ZO_GetPrimaryPlayerName
 -- Slash Command to kick someone from a group
 function SlashCommands.SlashGroupKick(option)

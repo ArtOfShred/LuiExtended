@@ -24,7 +24,7 @@ BlacklistPresets.Sorcerer = {
 
 -- Templar
 BlacklistPresets.Templar = {
-    [37009] = true, -- Channeled Focus (Channeled Focus)
+    [37009] = true,  -- Channeled Focus (Channeled Focus)
     [114842] = true, -- Restoring Focus (Restoring Focus)
 }
 

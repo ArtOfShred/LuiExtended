@@ -21,19 +21,19 @@ local isWarned = {
 
 function CombatTextCombatEventListener:New()
     local obj = LUIE.CombatTextEventListener:New()
-    obj:RegisterForEvent(EVENT_PLAYER_ACTIVATED, function()
+    obj:RegisterForEvent(EVENT_PLAYER_ACTIVATED, function ()
         self:OnPlayerActivated()
     end)
-    obj:RegisterForEvent(EVENT_COMBAT_EVENT, function(...)
+    obj:RegisterForEvent(EVENT_COMBAT_EVENT, function (...)
         self:OnCombatIn(...)
     end, REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER) -- Target -> Player
-    obj:RegisterForEvent(EVENT_COMBAT_EVENT, function(...)
+    obj:RegisterForEvent(EVENT_COMBAT_EVENT, function (...)
         self:OnCombatOut(...)
     end, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER) -- Player -> Target
-    obj:RegisterForEvent(EVENT_COMBAT_EVENT, function(...)
+    obj:RegisterForEvent(EVENT_COMBAT_EVENT, function (...)
         self:OnCombatOut(...)
     end, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER_PET) -- Player Pet -> Target
-    obj:RegisterForEvent(EVENT_PLAYER_COMBAT_STATE, function()
+    obj:RegisterForEvent(EVENT_PLAYER_COMBAT_STATE, function ()
         self:CombatState()
     end)
 
@@ -114,30 +114,30 @@ function CombatTextCombatEventListener:OnCombatIn(...)
     --//COMBAT TRIGGERS//--
     ---------------------------------------------------------------------------------------------------------------------------------------
     if
-        (isDodged and togglesInOut.showDodged)
-        or (isMiss and togglesInOut.showMiss)
-        or (isImmune and togglesInOut.showImmune)
-        or (isReflected and togglesInOut.showReflected)
-        or (isDamageShield and togglesInOut.showDamageShield)
-        or (isParried and togglesInOut.showParried)
-        or (isBlocked and togglesInOut.showBlocked)
-        or (isInterrupted and togglesInOut.showInterrupted)
-        or (isDot and togglesInOut.showDot and (hitValue > 0 or overkill))
-        or (isDotCritical and togglesInOut.showDot and (hitValue > 0 or overkill))
-        or (isHot and togglesInOut.showHot and (hitValue > 0 or overheal))
-        or (isHotCritical and togglesInOut.showHot and (hitValue > 0 or overheal))
-        or (isHealing and togglesInOut.showHealing and (hitValue > 0 or overheal))
-        or (isHealingCritical and togglesInOut.showHealing and (hitValue > 0 or overheal))
-        or (isDamage and togglesInOut.showDamage and (hitValue > 0 or overkill))
-        or (isDamageCritical and togglesInOut.showDamage and (hitValue > 0 or overkill))
-        or (isEnergize and togglesInOut.showEnergize and (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA))
-        or (isEnergize and togglesInOut.showUltimateEnergize and powerType == COMBAT_MECHANIC_FLAGS_ULTIMATE)
-        or (isDrain and togglesInOut.showDrain and (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA))
+       (isDodged and togglesInOut.showDodged)
+    or (isMiss and togglesInOut.showMiss)
+    or (isImmune and togglesInOut.showImmune)
+    or (isReflected and togglesInOut.showReflected)
+    or (isDamageShield and togglesInOut.showDamageShield)
+    or (isParried and togglesInOut.showParried)
+    or (isBlocked and togglesInOut.showBlocked)
+    or (isInterrupted and togglesInOut.showInterrupted)
+    or (isDot and togglesInOut.showDot and (hitValue > 0 or overkill))
+    or (isDotCritical and togglesInOut.showDot and (hitValue > 0 or overkill))
+    or (isHot and togglesInOut.showHot and (hitValue > 0 or overheal))
+    or (isHotCritical and togglesInOut.showHot and (hitValue > 0 or overheal))
+    or (isHealing and togglesInOut.showHealing and (hitValue > 0 or overheal))
+    or (isHealingCritical and togglesInOut.showHealing and (hitValue > 0 or overheal))
+    or (isDamage and togglesInOut.showDamage and (hitValue > 0 or overkill))
+    or (isDamageCritical and togglesInOut.showDamage and (hitValue > 0 or overkill))
+    or (isEnergize and togglesInOut.showEnergize and (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA))
+    or (isEnergize and togglesInOut.showUltimateEnergize and powerType == COMBAT_MECHANIC_FLAGS_ULTIMATE)
+    or (isDrain and togglesInOut.showDrain and (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA))
     then
         if overkill or overheal then
             hitValue = hitValue + overflow
         end
-        if not Effects.EffectHideSCT[abilityId] then -- Check if ability is on the hide list
+        if not Effects.EffectHideSCT[abilityId] then                                                         -- Check if ability is on the hide list
             if (Settings.toggles.inCombatOnly and isWarned.combat) or not Settings.toggles.inCombatOnly then -- Check if 'in combat only' is ticked
                 self:TriggerEvent(CombatTextConstants.eventType.COMBAT, combatType, powerType, hitValue, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
             end
@@ -154,7 +154,7 @@ function CombatTextCombatEventListener:OnCombatIn(...)
             else
                 self:TriggerEvent(CombatTextConstants.eventType.CROWDCONTROL, CombatTextConstants.crowdControlType.DISORIENTED, combatType)
                 isWarned.disoriented = true
-                zo_callLater(function()
+                zo_callLater(function ()
                     isWarned.disoriented = false
                 end, 1000)
             end --1 second buffer
@@ -166,7 +166,7 @@ function CombatTextCombatEventListener:OnCombatIn(...)
             else
                 self:TriggerEvent(CombatTextConstants.eventType.CROWDCONTROL, CombatTextConstants.crowdControlType.FEARED, combatType)
                 isWarned.feared = true
-                zo_callLater(function()
+                zo_callLater(function ()
                     isWarned.feared = false
                 end, 1000)
             end --1 second buffer
@@ -178,7 +178,7 @@ function CombatTextCombatEventListener:OnCombatIn(...)
             else
                 self:TriggerEvent(CombatTextConstants.eventType.CROWDCONTROL, CombatTextConstants.crowdControlType.OFFBALANCED, combatType)
                 isWarned.offBalanced = true
-                zo_callLater(function()
+                zo_callLater(function ()
                     isWarned.offBalanced = false
                 end, 1000)
             end --1 second buffer
@@ -190,7 +190,7 @@ function CombatTextCombatEventListener:OnCombatIn(...)
             else
                 self:TriggerEvent(CombatTextConstants.eventType.CROWDCONTROL, CombatTextConstants.crowdControlType.SILENCED, combatType)
                 isWarned.silenced = true
-                zo_callLater(function()
+                zo_callLater(function ()
                     isWarned.silenced = false
                 end, 1000)
             end --1 second buffer
@@ -202,7 +202,7 @@ function CombatTextCombatEventListener:OnCombatIn(...)
             else
                 self:TriggerEvent(CombatTextConstants.eventType.CROWDCONTROL, CombatTextConstants.crowdControlType.STUNNED, combatType)
                 isWarned.stunned = true
-                zo_callLater(function()
+                zo_callLater(function ()
                     isWarned.stunned = false
                 end, 1000)
             end --1 second buffer
@@ -214,7 +214,7 @@ function CombatTextCombatEventListener:OnCombatIn(...)
             else
                 self:TriggerEvent(CombatTextConstants.eventType.CROWDCONTROL, CombatTextConstants.crowdControlType.CHARMED, combatType)
                 isWarned.charmed = true
-                zo_callLater(function()
+                zo_callLater(function ()
                     isWarned.charmed = false
                 end, 1000)
             end --1 second buffer
@@ -259,30 +259,30 @@ function CombatTextCombatEventListener:OnCombatOut(...)
     ---------------------------------------------------------------------------------------------------------------------------------------
 
     if
-        (isDodged and togglesInOut.showDodged)
-        or (isMiss and togglesInOut.showMiss)
-        or (isImmune and togglesInOut.showImmune)
-        or (isReflected and togglesInOut.showReflected)
-        or (isDamageShield and togglesInOut.showDamageShield)
-        or (isParried and togglesInOut.showParried)
-        or (isBlocked and togglesInOut.showBlocked)
-        or (isInterrupted and togglesInOut.showInterrupted)
-        or (isDot and togglesInOut.showDot and (hitValue > 0 or overkill))
-        or (isDotCritical and togglesInOut.showDot and (hitValue > 0 or overkill))
-        or (isHot and togglesInOut.showHot and (hitValue > 0 or overheal))
-        or (isHotCritical and togglesInOut.showHot and (hitValue > 0 or overheal))
-        or (isHealing and togglesInOut.showHealing and (hitValue > 0 or overheal))
-        or (isHealingCritical and togglesInOut.showHealing and (hitValue > 0 or overheal))
-        or (isDamage and togglesInOut.showDamage and (hitValue > 0 or overkill))
-        or (isDamageCritical and togglesInOut.showDamage and (hitValue > 0 or overkill))
-        or (isEnergize and togglesInOut.showEnergize and (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA))
-        or (isEnergize and togglesInOut.showUltimateEnergize and powerType == COMBAT_MECHANIC_FLAGS_ULTIMATE)
-        or (isDrain and togglesInOut.showDrain and (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA))
+       (isDodged and togglesInOut.showDodged)
+    or (isMiss and togglesInOut.showMiss)
+    or (isImmune and togglesInOut.showImmune)
+    or (isReflected and togglesInOut.showReflected)
+    or (isDamageShield and togglesInOut.showDamageShield)
+    or (isParried and togglesInOut.showParried)
+    or (isBlocked and togglesInOut.showBlocked)
+    or (isInterrupted and togglesInOut.showInterrupted)
+    or (isDot and togglesInOut.showDot and (hitValue > 0 or overkill))
+    or (isDotCritical and togglesInOut.showDot and (hitValue > 0 or overkill))
+    or (isHot and togglesInOut.showHot and (hitValue > 0 or overheal))
+    or (isHotCritical and togglesInOut.showHot and (hitValue > 0 or overheal))
+    or (isHealing and togglesInOut.showHealing and (hitValue > 0 or overheal))
+    or (isHealingCritical and togglesInOut.showHealing and (hitValue > 0 or overheal))
+    or (isDamage and togglesInOut.showDamage and (hitValue > 0 or overkill))
+    or (isDamageCritical and togglesInOut.showDamage and (hitValue > 0 or overkill))
+    or (isEnergize and togglesInOut.showEnergize and (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA))
+    or (isEnergize and togglesInOut.showUltimateEnergize and powerType == COMBAT_MECHANIC_FLAGS_ULTIMATE)
+    or (isDrain and togglesInOut.showDrain and (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA))
     then
         if overkill or overheal then
             hitValue = hitValue + overflow
         end
-        if not Effects.EffectHideSCT[abilityId] then -- Check if ability is on the hide list
+        if not Effects.EffectHideSCT[abilityId] then                                                         -- Check if ability is on the hide list
             if (Settings.toggles.inCombatOnly and isWarned.combat) or not Settings.toggles.inCombatOnly then --Check if 'in combat only' is ticked
                 self:TriggerEvent(CombatTextConstants.eventType.COMBAT, combatType, powerType, hitValue, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
             end
@@ -299,7 +299,7 @@ function CombatTextCombatEventListener:OnCombatOut(...)
             else
                 self:TriggerEvent(CombatTextConstants.eventType.CROWDCONTROL, CombatTextConstants.crowdControlType.DISORIENTED, combatType)
                 isWarned.disoriented = true
-                zo_callLater(function()
+                zo_callLater(function ()
                     isWarned.disoriented = false
                 end, 1000)
             end --1 second buffer
@@ -311,7 +311,7 @@ function CombatTextCombatEventListener:OnCombatOut(...)
             else
                 self:TriggerEvent(CombatTextConstants.eventType.CROWDCONTROL, CombatTextConstants.crowdControlType.FEARED, combatType)
                 isWarned.feared = true
-                zo_callLater(function()
+                zo_callLater(function ()
                     isWarned.feared = false
                 end, 1000)
             end --1 second buffer
@@ -323,7 +323,7 @@ function CombatTextCombatEventListener:OnCombatOut(...)
             else
                 self:TriggerEvent(CombatTextConstants.eventType.CROWDCONTROL, CombatTextConstants.crowdControlType.OFFBALANCED, combatType)
                 isWarned.offBalanced = true
-                zo_callLater(function()
+                zo_callLater(function ()
                     isWarned.offBalanced = false
                 end, 1000)
             end --1 second buffer
@@ -335,7 +335,7 @@ function CombatTextCombatEventListener:OnCombatOut(...)
             else
                 self:TriggerEvent(CombatTextConstants.eventType.CROWDCONTROL, CombatTextConstants.crowdControlType.SILENCED, combatType)
                 isWarned.silenced = true
-                zo_callLater(function()
+                zo_callLater(function ()
                     isWarned.silenced = false
                 end, 1000)
             end --1 second buffer
@@ -347,7 +347,7 @@ function CombatTextCombatEventListener:OnCombatOut(...)
             else
                 self:TriggerEvent(CombatTextConstants.eventType.CROWDCONTROL, CombatTextConstants.crowdControlType.STUNNED, combatType)
                 isWarned.stunned = true
-                zo_callLater(function()
+                zo_callLater(function ()
                     isWarned.stunned = false
                 end, 1000)
             end --1 second buffer
@@ -359,7 +359,7 @@ function CombatTextCombatEventListener:OnCombatOut(...)
             else
                 self:TriggerEvent(CombatTextConstants.eventType.CROWDCONTROL, CombatTextConstants.crowdControlType.CHARMED, combatType)
                 isWarned.charmed = true
-                zo_callLater(function()
+                zo_callLater(function ()
                     isWarned.charmed = false
                 end, 1000)
             end --1 second buffer

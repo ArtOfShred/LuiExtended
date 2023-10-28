@@ -10,8 +10,11 @@
 
 local NOP = {}
 function NOP:Debug(...) end
+
 function NOP:Info(...) end
+
 function NOP:Warn(...) end
+
 function NOP:Error(...) end
 
 LUIE.log_to_chat = false

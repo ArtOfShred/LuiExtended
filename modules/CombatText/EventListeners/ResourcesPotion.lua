@@ -13,7 +13,7 @@ local inCooldown = false
 
 function CombatTextResourcesPotionEventListener:New()
     local obj = LUIE.CombatTextEventListener:New()
-    obj:RegisterForUpdate("PotionCooldown", 100, function()
+    obj:RegisterForUpdate("PotionCooldown", 100, function ()
         self:PotionCooldown()
     end)
     return obj

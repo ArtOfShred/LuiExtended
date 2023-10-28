@@ -30,7 +30,7 @@ function LUIE.InitializeHooks()
 
     -- Hook for Icon/Name changes
     local zos_GetSkillAbilityInfo = GetSkillAbilityInfo
-    GetSkillAbilityInfo = function(skillType, skillIndex, abilityIndex)
+    GetSkillAbilityInfo = function (skillType, skillIndex, abilityIndex)
         local name, texture, earnedRank, passive, ultimate, purchased, progressionIndex, rankIndex = zos_GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
         local abilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex, true)
         if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].icon then
@@ -44,7 +44,7 @@ function LUIE.InitializeHooks()
 
     -- Hook for Icon/Name changes
     local zos_GetSkillAbilityNextUpgradeInfo = GetSkillAbilityNextUpgradeInfo
-    GetSkillAbilityNextUpgradeInfo = function(skillType, skillIndex, abilityIndex)
+    GetSkillAbilityNextUpgradeInfo = function (skillType, skillIndex, abilityIndex)
         local name, texture, earnedRank = zos_GetSkillAbilityNextUpgradeInfo(skillType, skillIndex, abilityIndex)
         local abilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex, true)
         if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].icon then
@@ -58,7 +58,7 @@ function LUIE.InitializeHooks()
 
     -- Hook for Icon/Name changes
     local zos_GetUnitBuffInfo = GetUnitBuffInfo
-    GetUnitBuffInfo = function(unitTag, buffIndex)
+    GetUnitBuffInfo = function (unitTag, buffIndex)
         local buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = zos_GetUnitBuffInfo(unitTag, buffIndex)
         if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].name then
             buffName = LUIE.Data.Effects.EffectOverride[abilityId].name
@@ -77,7 +77,7 @@ function LUIE.InitializeHooks()
     local zos_GetKillingAttackInfo = GetKillingAttackInfo
     local zos_DoesKillingAttackHaveAttacker = DoesKillingAttackHaveAttacker
 
-    DoesKillingAttackHaveAttacker = function(index)
+    DoesKillingAttackHaveAttacker = function (index)
         local hasAttacker = zos_DoesKillingAttackHaveAttacker
         local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
 
@@ -90,7 +90,7 @@ function LUIE.InitializeHooks()
         return hasAttacker
     end
 
-    GetKillingAttackerInfo = function(index)
+    GetKillingAttackerInfo = function (index)
         local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index)
         local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
 
@@ -123,7 +123,7 @@ function LUIE.InitializeHooks()
         return attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName
     end
 
-    GetKillingAttackInfo = function(index)
+    GetKillingAttackInfo = function (index)
         local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index)
         local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
 
@@ -206,7 +206,7 @@ function LUIE.InitializeHooks()
     -- Hook support for Custom Ability Icons (Helps normalize with other addons)
     LUIE.GetAbilityIcon = GetAbilityIcon -- Used only for PTS testing
     local zos_GetAbilityIcon = GetAbilityIcon
-    GetAbilityIcon = function(abilityId)
+    GetAbilityIcon = function (abilityId)
         local icon = zos_GetAbilityIcon(abilityId)
         if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].icon then
             icon = LUIE.Data.Effects.EffectOverride[abilityId].icon
@@ -217,7 +217,7 @@ function LUIE.InitializeHooks()
     -- Hook support for Custom Ability Names (Helps normalize with other addons)
     LUIE.GetAbilityName = GetAbilityName -- Used only for PTS testing
     local zos_GetAbilityName = GetAbilityName
-    GetAbilityName = function(abilityId)
+    GetAbilityName = function (abilityId)
         local abilityName = zos_GetAbilityName(abilityId)
         if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].name then
             abilityName = LUIE.Data.Effects.EffectOverride[abilityId].name
@@ -228,7 +228,7 @@ function LUIE.InitializeHooks()
     -- Hook support for ArtificialffectId's
     LUIE.GetArtificialEffectInfo = GetArtificialEffectInfo -- Used only for PTS testing
     local zos_GetArtificialEffectInfo = GetArtificialEffectInfo
-    GetArtificialEffectInfo = function(artificialEffectId)
+    GetArtificialEffectInfo = function (artificialEffectId)
         local displayName, iconFile, effectType, sortOrder, timeStarted, timeEnding = zos_GetArtificialEffectInfo(artificialEffectId)
         if LUIE.Data.Effects.ArtificialEffectOverride[artificialEffectId] and LUIE.Data.Effects.ArtificialEffectOverride[artificialEffectId].icon then
             iconFile = LUIE.Data.Effects.ArtificialEffectOverride[artificialEffectId].icon
@@ -241,7 +241,7 @@ function LUIE.InitializeHooks()
 
     -- Hook support to pull custom tooltips for ArtificialEffectId's
     local zos_GetArtificialEffectTooltipText = GetArtificialEffectTooltipText
-    GetArtificialEffectTooltipText = function(artificialEffectId)
+    GetArtificialEffectTooltipText = function (artificialEffectId)
         local tooltip
         if LUIE.Data.Effects.ArtificialEffectOverride[artificialEffectId] and LUIE.Data.Effects.ArtificialEffectOverride[artificialEffectId].tooltip then
             tooltip = LUIE.Data.Effects.ArtificialEffectOverride[artificialEffectId].tooltip
@@ -254,7 +254,7 @@ function LUIE.InitializeHooks()
 
     -- Hook synergy popup Icon/Name (to fix inconsistencies and add custom icons for some Quest/Encounter based Synergies)
     ---@diagnostic disable-next-line: duplicate-set-field
-    ZO_Synergy.OnSynergyAbilityChanged = function(self)
+    ZO_Synergy.OnSynergyAbilityChanged = function (self)
         local synergyName, iconFilename = GetSynergyInfo()
 
         if LUIE.Data.Effects.SynergyNameOverride[synergyName] then
@@ -299,7 +299,7 @@ function LUIE.InitializeHooks()
         end
     end
 
-    STATS.AddLongTermEffects = function(self, container, effectsRowPool)
+    STATS.AddLongTermEffects = function (self, container, effectsRowPool)
         local function UpdateEffects()
             if not container:IsHidden() then
                 effectsRowPool:ReleaseAllObjects()
@@ -523,7 +523,7 @@ function LUIE.InitializeHooks()
     end
 
     -- Hook GAMEPAD Stats List
-    GAMEPAD_STATS.RefreshMainList = function(self)
+    GAMEPAD_STATS.RefreshMainList = function (self)
         if self.currentTitleDropdown and self.currentTitleDropdown:IsDropdownVisible() then
             self.refreshMainListOnDropdownClose = true
             return
@@ -628,7 +628,7 @@ function LUIE.InitializeHooks()
     end
 
     -- Hook GAMEPAD Stats Refresh
-    GAMEPAD_STATS.RefreshCharacterEffects = function(self)
+    GAMEPAD_STATS.RefreshCharacterEffects = function (self)
         local selectedData = self.mainList:GetTargetData()
 
         local artificial, contentTitle, contentDescription, contentStartTime, contentEndTime, _
@@ -785,7 +785,7 @@ function LUIE.InitializeHooks()
     -- Hook for request friend so menu option also displays invite message
     -- Menu is true if this request is sent from the Player to Player interaction menu
     local zos_RequestFriend = RequestFriend
-    RequestFriend = function(option1, option2, menu)
+    RequestFriend = function (option1, option2, menu)
         zos_RequestFriend(option1, option2)
         if not menu then
             local message = zo_strformat(GetString(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG), option1)
@@ -798,7 +798,7 @@ function LUIE.InitializeHooks()
 
     -- Hook for request ignore to handle error message if account name is already ignored
     local zos_AddIgnore = AddIgnore
-    AddIgnore = function(option)
+    AddIgnore = function (option)
         zos_AddIgnore(option)
 
         if IsIgnored(option) then -- Only lists account names, unfortunately
@@ -852,7 +852,7 @@ function LUIE.InitializeHooks()
                 end
 
                 -- Setup tooltips for ground buff/debuff effects
-                if effectId and (LUIE.Data.Effects.AddGroundDamageAura[effectId] or (LUIE.Data.Effects.EffectOverride[effectId] and LUIE.Data.Effects.EffectOverride[effectId].groundLabel) ) then
+                if effectId and (LUIE.Data.Effects.AddGroundDamageAura[effectId] or (LUIE.Data.Effects.EffectOverride[effectId] and LUIE.Data.Effects.EffectOverride[effectId].groundLabel)) then
                     buffType = buffType + 6
                 end
 
@@ -864,7 +864,7 @@ function LUIE.InitializeHooks()
     end
 
     -- Hook Tooltip Generation for STATS Screen Buffs & Debuffs
-    ZO_StatsActiveEffect_OnMouseEnter = function(control)
+    ZO_StatsActiveEffect_OnMouseEnter = function (control)
         InitializeTooltip(GameTooltip, control, RIGHT, -15)
 
         local detailsLine
@@ -875,7 +875,7 @@ function LUIE.InitializeHooks()
 
         if control.isArtificialTooltip then
             local tooltipText = GetArtificialEffectTooltipText(control.effectId)
-            GameTooltip:AddLine(control.tooltipTitle, "ZoFontHeader2",1,1,1, nil)
+            GameTooltip:AddLine(control.tooltipTitle, "ZoFontHeader2", 1, 1, 1, nil)
             GameTooltip:SetVerticalPadding(1)
             ZO_Tooltip_AddDivider(GameTooltip)
             GameTooltip:SetVerticalPadding(5)
@@ -883,7 +883,7 @@ function LUIE.InitializeHooks()
             detailsLine = 5
         else
             detailsLine = 3
-            GameTooltip:AddLine(control.tooltipTitle, "ZoFontHeader2",1,1,1, nil)
+            GameTooltip:AddLine(control.tooltipTitle, "ZoFontHeader2", 1, 1, 1, nil)
             if control.tooltipText ~= "" and control.tooltipText ~= nil then
                 GameTooltip:SetVerticalPadding(1)
                 ZO_Tooltip_AddDivider(GameTooltip)
@@ -913,7 +913,7 @@ function LUIE.InitializeHooks()
 
     -- Hook Skills Advisor (Keyboard) and use this variable to refresh the abilityData one time on initialization. We don't want to reload any more after that.
     ---@diagnostic disable-next-line: duplicate-set-field
-    ZO_SkillsAdvisor_Suggestions_Keyboard.SetupAbilityEntry = function(self, control, skillProgressionData)
+    ZO_SkillsAdvisor_Suggestions_Keyboard.SetupAbilityEntry = function (self, control, skillProgressionData)
         local skillData = skillProgressionData:GetSkillData()
         local isPassive = skillData:IsPassive()
 
@@ -935,7 +935,7 @@ function LUIE.InitializeHooks()
         else
             detailedName = skillProgressionData:GetFormattedName()
         end
-        detailedName = detailedName:gsub("With", "with") -- Easiest way to fix the capitalization of the skill "Bond With Nature"
+        detailedName = detailedName:gsub("With", "with")               -- Easiest way to fix the capitalization of the skill "Bond With Nature"
         detailedName = detailedName:gsub("Blessing Of", "Blessing of") -- Easiest way to fix the capitalization of the skill "Blessing of Restoration"
         control.nameLabel:SetText(detailedName)
         control.nameLabel:SetColor(PURCHASED_COLOR:UnpackRGBA())
@@ -1008,7 +1008,7 @@ function LUIE.InitializeHooks()
 
     -- Hook to make Activation Highlight Effect play indefinitely instead of animation only once
     ---@diagnostic disable-next-line: duplicate-set-field
-    ActionButton.UpdateActivationHighlight = function(self)
+    ActionButton.UpdateActivationHighlight = function (self)
         local slotnum = self:GetSlot()
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or self.button.hotbarCategory
         local slotType = GetSlotType(slotnum, hotbarCategory)
@@ -1048,7 +1048,7 @@ function LUIE.InitializeHooks()
 
     -- Hook to add AVA Guard Ability + Morphs into Toggle Highlights
     ---@diagnostic disable-next-line: duplicate-set-field
-    ActionButton.UpdateState = function(self)
+    ActionButton.UpdateState = function (self)
         local slotnum = self:GetSlot()
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or self.button.hotbarCategory
         local slotType = GetSlotType(slotnum, hotbarCategory)
@@ -1282,7 +1282,7 @@ function LUIE.InitializeHooks()
 
     -- Hook Campaign Bonuses Data Table
     ---@diagnostic disable-next-line: duplicate-set-field
-    ZO_CampaignBonuses_Shared.CreateDataTable = function(self, header)
+    ZO_CampaignBonuses_Shared.CreateDataTable = function (self, header)
         self:BuildMasterList()
 
         self.dataTable = {}
@@ -1316,7 +1316,7 @@ function LUIE.InitializeHooks()
 
     -- Hook Campaign Bonuses Build Master List
     ---@diagnostic disable-next-line: duplicate-set-field
-    ZO_CampaignBonuses_Shared.BuildMasterList = function(self)
+    ZO_CampaignBonuses_Shared.BuildMasterList = function (self)
         self.masterList = {}
 
         for bonusType, info in ipairs(BONUS_SECTION_DATA) do
@@ -1344,7 +1344,7 @@ function LUIE.InitializeHooks()
                 bonusType = bonusType,
             }
 
-            self.masterList[#self.masterList + 1] = headerData
+            self.masterList[#self.masterList+1] = headerData
 
             local startIndex = info.startIndex or 1
             local score = info.scoreFunction(self.campaignId)
@@ -1357,7 +1357,7 @@ function LUIE.InitializeHooks()
             local countText = scoreIndex
             local abilityId = info.abilityFunction(index, self.campaignId)
             local name = GetAbilityName(abilityId)
-            local icon = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon) and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon or GetAbilityIcon(abilityId) -- Get Updated LUIE AbilityIcon here
+            local icon = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon) and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon or GetAbilityIcon(abilityId)       -- Get Updated LUIE AbilityIcon here
             local description = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltip) and LUIE.Data.Effects.EffectOverride[abilityId].tooltip or GetAbilityDescription(abilityId) -- Get Updated LUIE Tooltip here
 
             if info.countText then
@@ -1384,14 +1384,14 @@ function LUIE.InitializeHooks()
                 detailsText = detailsText or "",
             }
 
-            self.masterList[#self.masterList + 1] = data
+            self.masterList[#self.masterList+1] = data
         end
 
         return self.masterList
     end
 
     -- Hook Gamepad Campaign Bonuses Tooltip
-    CAMPAIGN_BONUSES_GAMEPAD.UpdateToolTip = function(self)
+    CAMPAIGN_BONUSES_GAMEPAD.UpdateToolTip = function (self)
         GAMEPAD_TOOLTIPS:ClearLines(GAMEPAD_RIGHT_TOOLTIP)
         if self.abilityList:IsActive() then
             local targetData = self.abilityList:GetTargetData()
@@ -1413,7 +1413,7 @@ function LUIE.InitializeHooks()
     end
 
     -- Hook Campaign Bonuses Manager (we add abilityId, name, and the description to the control to carry over to the OnMouseEnter tooltip function)
----@diagnostic disable-next-line: duplicate-set-field
+    ---@diagnostic disable-next-line: duplicate-set-field
     function ZO_CampaignBonusesManager:SetupBonusesEntry(control, data)
         ZO_SortFilterList.SetupRow(self, control, data)
 
@@ -1424,8 +1424,8 @@ function LUIE.InitializeHooks()
         control.nameLabel = control:GetNamedChild("Name")
         control.ability.index = data.index
         control.ability.bonusType = data.bonusType
-        control.ability.abilityId = data.abilityId -- Add AbilityId here to carry over to OnMouseEnter tooltip function
-        control.ability.name = data.name -- Add AbilityName here to carry over to OnMouseEnter tooltip function
+        control.ability.abilityId = data.abilityId     -- Add AbilityId here to carry over to OnMouseEnter tooltip function
+        control.ability.name = data.name               -- Add AbilityName here to carry over to OnMouseEnter tooltip function
         control.ability.description = data.description -- Add Tooltip here to carry over to OnMouseEnter tooltip function
 
         control.ability:SetEnabled(data.active)
@@ -1491,7 +1491,7 @@ function LUIE.InitializeHooks()
             tooltipLine2 = GetString(SI_CAMPAIGN_BONUSES_TOOLTIP_REQUIRES_EMPEROR_ALLIANCE)
             local isEmperor = GetEmperorBonusScore(campaignId)
             r1, b1, g1 = SetAVATooltipColor(isEmperor == 1)
-        elseif bonusType== ZO_CAMPAIGN_BONUS_TYPE_EDGE_KEEPS then
+        elseif bonusType == ZO_CAMPAIGN_BONUS_TYPE_EDGE_KEEPS then
             tooltipLine2 = GetString(SI_CAMPAIGN_BONUSES_TOOLTIP_REQUIRES_NUM_EDGE_KEEPS)
             local edgeKeepBonus = GetEdgeKeepBonusScore(campaignId)
             r1, b1, g1 = SetAVATooltipColor(edgeKeepBonus > 0)
@@ -1528,7 +1528,7 @@ function LUIE.InitializeHooks()
 
     -- Hook AVA Keep Upgrade
     ---@diagnostic disable-next-line: duplicate-set-field
-    ZO_MapKeepUpgrade_Shared.RefreshLevels = function(self)
+    ZO_MapKeepUpgrade_Shared.RefreshLevels = function (self)
         self.levelsGridList:ClearGridList()
 
         for currentLevel = 0, GetKeepMaxUpgradeLevel(self.keepUpgradeObject:GetKeep()) do
@@ -1579,7 +1579,7 @@ function LUIE.InitializeHooks()
     end
 
     -- Hook Keep Upgrade Tooltip (Keyboard)
-    WORLD_MAP_KEEP_UPGRADE.Button_OnMouseEnter = function(self, control)
+    WORLD_MAP_KEEP_UPGRADE.Button_OnMouseEnter = function (self, control)
         InitializeTooltip(KeepUpgradeTooltip, control, TOPLEFT, 5, 0)
 
         local data = control.dataEntry.data:GetDataSource()
@@ -1588,7 +1588,7 @@ function LUIE.InitializeHooks()
         local level = zo_strformat("<<1>> <<2>>", GetString(SI_ITEM_FORMAT_STR_LEVEL), data.level)
         local name = zo_strformat("<<1>>", data.name)
         local description = data.description
-        
+
         KeepUpgradeTooltip:SetVerticalPadding(16)
         KeepUpgradeTooltip:AddLine(name, "ZoFontHeader3", 1, 1, 1, nil, MODIFY_TEXT_TYPE_UPPERCASE, TEXT_ALIGN_CENTER)
         KeepUpgradeTooltip:SetVerticalPadding(0)
@@ -1676,7 +1676,7 @@ function LUIE.InitializeHooks()
 
         -- name
         local detailedName = skillProgressionData:GetDetailedName()
-        detailedName = detailedName:gsub("With", "with") -- Easiest way to fix the capitalization of the skill "Bond With Nature"
+        detailedName = detailedName:gsub("With", "with")               -- Easiest way to fix the capitalization of the skill "Bond With Nature"
         detailedName = detailedName:gsub("Blessing Of", "Blessing of") -- Easiest way to fix the capitalization of the skill "Blessing of Restoration"
         control.nameLabel:SetText(detailedName)
         local offsetY = showXPBar and -10 or 0
@@ -1788,7 +1788,7 @@ function LUIE.InitializeHooks()
                 [1] = {
                     control = confirmDialogControl:GetNamedChild("Confirm"),
                     text = SI_SKILLS_UNLOCK_CONFIRM,
-                    callback = function(dialog)
+                    callback = function (dialog)
                         local skillProgressionData = dialog.data
                         local skillPointAllocator = skillProgressionData:GetSkillData():GetPointAllocator()
                         skillPointAllocator:Purchase()
@@ -1857,7 +1857,7 @@ function LUIE.InitializeHooks()
                 [1] = {
                     control = upgradeDialogControl:GetNamedChild("Confirm"),
                     text = SI_SKILLS_UPGRADE_CONFIRM,
-                    callback = function(dialog)
+                    callback = function (dialog)
                         local skillData = dialog.data
                         local skillPointAllocator = skillData:GetPointAllocator()
                         skillPointAllocator:IncreaseRank()
@@ -1937,7 +1937,7 @@ function LUIE.InitializeHooks()
 
                 local keybindWidth = 50 -- width assuming a single keybind
                 if ACTION_BAR_ASSIGNMENT_MANAGER:IsUltimateSlot(actionSlotIndex) then
-                    keybindWidth = 90 -- double keybind width (RB+LB)
+                    keybindWidth = 90   -- double keybind width (RB+LB)
                 end
 
                 keybindLabel:SetHidden(false)
