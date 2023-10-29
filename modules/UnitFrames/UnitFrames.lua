@@ -2899,10 +2899,7 @@ function UnitFrames.UpdateAttribute(unitTag, powerType, attributeFrame, powerVal
             str = zo_strgsub(str, "  ", " ")
 
             -- Change text
-            if isUnwaveringPower == 1 and powerValue > 0 and (label == "label" or label == "labelOne") then
-                local strModify = ("- Invulnerable - (" .. str .. ")")
-                attributeFrame[label]:SetText(strModify)
-            elseif isGuard and label == "labelOne" then
+            if isGuard and label == "labelOne" then
                 attributeFrame[label]:SetText(" - Invulnerable - ")
             else
                 attributeFrame[label]:SetText(str)
