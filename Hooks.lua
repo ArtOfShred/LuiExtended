@@ -454,6 +454,12 @@ function LUIE.InitializeHooks()
                     ]]
                     --
 
+                    -- Set the Tooltip to be default if custom tooltips aren't enabled
+                    if not LUIE.SpellCastBuffs.SV.TooltipCustom then
+                        tooltipText = GetAbilityEffectDescription(buffSlot)
+                        tooltipText = zo_strgsub(tooltipText, "\n$", "") -- Remove blank end line
+                    end
+
                     -- Change effect type if needed
                     if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].type then
                         effectType = LUIE.Data.Effects.EffectOverride[abilityId].type
@@ -695,6 +701,11 @@ function LUIE.InitializeHooks()
                         tooltipText = GetAbilityEffectDescription(buffSlot)
                         tooltipText = LUIE.UpdateMundusTooltipSyntax(abilityId, tooltipText)
                     end
+                end
+
+                -- Set the Tooltip to be default if custom tooltips aren't enabled
+                if not LUIE.SpellCastBuffs.SV.TooltipCustom then
+                    tooltipText = GetAbilityEffectDescription(buffSlot)
                 end
 
                 if tooltipText ~= "" then

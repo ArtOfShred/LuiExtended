@@ -1515,6 +1515,12 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
             end
         end
 
+        -- Set the Tooltip to be default if custom tooltips aren't enabled
+        if not LUIE.SpellCastBuffs.SV.TooltipCustom then
+            tooltipText = GetAbilityEffectDescription(control.buffSlot)
+            tooltipText = zo_strgsub(tooltipText, "\n$", "") -- Remove blank end line
+        end
+
         local thirdLine
         local duration = control.duration / 1000
         if Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltipDurFix then
