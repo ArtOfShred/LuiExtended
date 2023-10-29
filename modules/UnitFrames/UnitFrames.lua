@@ -4909,7 +4909,7 @@ function UnitFrames.CustomFramesApplyTexture()
         UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
         UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].trauma:SetTexture(texture)
         UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].invulnerable:SetTexture(texture)
-        UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].invulnerableInlay:SetTexture("/esoui/art/unitattributevisualizer/attributebar_dynamic_invulnerable_munge.dds")
+        UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].invulnerableInlay:SetTexture("LuiExtended/media/unitframes/invulnerable_munge.dds")
         UnitFrames.CustomFrames.reticleover.tlw:SetHidden(false)
     end
     if UnitFrames.CustomFrames.AvaPlayerTarget then
@@ -4921,7 +4921,7 @@ function UnitFrames.CustomFramesApplyTexture()
         UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
         UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].trauma:SetTexture(texture)
         UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].invulnerable:SetTexture(texture)
-        UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].invulnerableInlay:SetTexture("/esoui/art/unitattributevisualizer/attributebar_dynamic_invulnerable_munge.dds")
+        UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].invulnerableInlay:SetTexture("LuiExtended/media/unitframes/invulnerable_munge.dds")
         UnitFrames.CustomFrames.AvaPlayerTarget.tlw:SetHidden(false)
     end
     if UnitFrames.CustomFrames.companion then
@@ -4972,7 +4972,7 @@ function UnitFrames.CustomFramesApplyTexture()
             UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
             UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].trauma:SetTexture(texture)
             UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].invulnerable:SetTexture(texture)
-            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].invulnerableInlay:SetTexture("/esoui/art/unitattributevisualizer/attributebar_dynamic_invulnerable_munge.dds")
+            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].invulnerableInlay:SetTexture("LuiExtended/media/unitframes/invulnerable_munge.dds")
         end
         UnitFrames.CustomFrames.boss1.tlw:SetHidden(false)
     end
