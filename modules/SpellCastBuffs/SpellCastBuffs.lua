@@ -195,6 +195,7 @@ SpellCastBuffs.Defaults = {
     PromDebuffTable = {},
     BlacklistTable = {},
     TooltipEnable = true,
+    TooltipCustom = false,
     TooltipSticky = 0,
     TooltipAbilityId = false,
     TooltipBuffType = false,

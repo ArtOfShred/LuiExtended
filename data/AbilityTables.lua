@@ -1144,21 +1144,6 @@ local AbilityTables = {
     Skill_Frozen_Aura = 109806,
 
     -- ---------------------------------------------------
-    -- OTHER EFFECTS -------------------------------------
-    -- ---------------------------------------------------
-
-    -- Sanctum Ophidia
-    Effect_Magicka_Bomb = 59036,
-
-    -- vMOL Debuffs
-    Effect_Colossal_Mark = 75672,
-    Effect_Shattered = 75071,
-    Effect_Shattered2 = 73250,
-    Effect_Grip_of_Lorkaj = 57517,
-    Effect_Unstable_Void = 74488,
-    Effect_Curse_Duration = 25000,
-
-    -- ---------------------------------------------------
     -- KEEP UPGRADE --------------------------------------
     -- ---------------------------------------------------
 

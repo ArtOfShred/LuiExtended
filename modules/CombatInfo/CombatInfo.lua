@@ -271,7 +271,6 @@ CombatInfo.Defaults = {
 }
 
 CombatInfo.SV = nil
-CombatInfo.AlertColors = {}
 CombatInfo.CastBarUnlocked = false
 CombatInfo.AlertFrameUnlocked = false
 

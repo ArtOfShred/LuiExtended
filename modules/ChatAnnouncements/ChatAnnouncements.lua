@@ -8339,14 +8339,6 @@ function ChatAnnouncements.HookFunction()
         local questJournalObject = SYSTEMS:GetObject("questJournal")
         local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
 
-        -- TODO: Fix
-        --[[
-        local questType = GetJournalQuestType(journalIndex)
-        local instanceDisplayType = GetJournalInstanceDisplayType(journalIndex)
-        local questJournalObject = SYSTEMS:GetObject("questJournal")
-        local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
-        ]]
-
         if ChatAnnouncements.SV.Quests.QuestCompleteCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.QUEST_COMPLETED)
             if iconTexture then
@@ -8466,7 +8458,7 @@ function ChatAnnouncements.HookFunction()
         end
 
         -- Debug for my account - TODO: Remove
-        if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
+        if LUIE.PlayerDisplayName == "ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
             d(conditionType)
         end
 

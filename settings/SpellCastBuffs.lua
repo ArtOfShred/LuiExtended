@@ -2633,6 +2633,23 @@ function SpellCastBuffs.CreateSettings()
                 end,
             },
             {
+                -- Tooltip Enable
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_CUSTOM),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_CUSTOM_TP),
+                getFunc = function ()
+                    return Settings.TooltipCustom
+                end,
+                setFunc = function (value)
+                    Settings.TooltipCustom = value
+                end,
+                width = "full",
+                default = Defaults.TooltipCustom,
+                disabled = function ()
+                    return not LUIE.SV.SpellCastBuff_Enable
+                end,
+            },
+            {
                 -- Tooltip Ability Id
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_ABILITY_ID),
