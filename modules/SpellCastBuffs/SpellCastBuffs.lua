@@ -252,6 +252,11 @@ local function EaseOutQuad(t, b, c, d)
     return -c * t * (t - 2) + b
 end
 
+local function UpdateEffectOnSkillUpdate(overrideRank, casterUnitTag)
+    -- Mages Guild
+    Effects.EffectOverride[40465].tooltip = zo_strformat(GetString(SI_LUIE_SKILL_SCALDING_RUNE_TP), (GetAbilityDuration(40468, overrideRank, casterUnitTag) / 1000) + GetNumPassiveSkillRanks(GetSkillLineIndicesFromSkillLineId(44), select(2, GetSkillLineIndicesFromSkillLineId(44)), 8))
+end
+
 function SpellCastBuffs.ShouldUseDefaultIcon(abilityId)
     if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].cc then
         if SpellCastBuffs.SV.DefaultIconOptions == 1 then
@@ -516,7 +521,7 @@ function SpellCastBuffs.Initialize(enabled)
         -- Set Draw Priority
         uiTlw[v]:SetDrawLayer(DL_BACKGROUND)
         uiTlw[v]:SetDrawTier(DT_LOW)
-        uiTlw[v]:SetDrawLevel(1)
+        uiTlw[v]:SetDrawLevel(DL_CONTROLS)
         if uiTlw[v].preview == nil then
             -- Create background areas for preview position purposes
             --uiTlw[v].preview = UI.Backdrop( uiTlw[v], "fill", nil, nil, nil, true )
@@ -619,7 +624,7 @@ function SpellCastBuffs.Initialize(enabled)
     eventManager:RegisterForEvent(moduleName, EVENT_DUEL_FINISHED, SpellCastBuffs.DuelEnd)
 
     -- Register event to update icons/names/tooltips for some abilities where we pull information from the currently learned morph
-    eventManager:RegisterForEvent(moduleName, EVENT_SKILLS_FULL_UPDATE, Effects.UpdateEffectOnSkillUpdate)
+    eventManager:RegisterForEvent(moduleName, EVENT_SKILLS_FULL_UPDATE, UpdateEffectOnSkillUpdate)
 
     -- Werewolf
     SpellCastBuffs.RegisterWerewolfEvents()
@@ -1638,7 +1643,7 @@ function SpellCastBuffs.CreateSingleIcon(container, AnchorItem, effectType)
         }
         buff.bar.backdrop:SetEdgeTexture("", 8, 2, 2)
         buff.bar.backdrop:SetDrawLayer(DL_BACKGROUND)
-        buff.bar.backdrop:SetDrawLevel(1)
+        buff.bar.backdrop:SetDrawLevel(DL_CONTROLS)
         buff.bar.bar:SetMinMax(0, 1)
     end
 
@@ -1651,7 +1656,7 @@ function SpellCastBuffs.CreateSingleIcon(container, AnchorItem, effectType)
         }
         buff.bar.backdrop:SetEdgeTexture("", 8, 2, 2)
         buff.bar.backdrop:SetDrawLayer(DL_BACKGROUND)
-        buff.bar.backdrop:SetDrawLevel(1)
+        buff.bar.backdrop:SetDrawLevel(DL_CONTROLS)
         buff.bar.bar:SetMinMax(0, 1)
     end
 

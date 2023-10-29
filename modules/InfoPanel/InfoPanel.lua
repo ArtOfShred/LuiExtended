@@ -106,7 +106,7 @@ local function CreateUIControls()
     uiPanel = UI.TopLevel(nil, { 240, 48 })
     uiPanel:SetDrawLayer(DL_BACKGROUND)
     uiPanel:SetDrawTier(DT_LOW)
-    uiPanel:SetDrawLevel(1)
+    uiPanel:SetDrawLevel(DL_CONTROLS)
     --uiPanel.bg = UI.Backdrop( uiPanel, "fill", nil, nil, nil, false )
 
     panelFragment = ZO_HUDFadeSceneFragment:New(uiPanel, 0, 0)
