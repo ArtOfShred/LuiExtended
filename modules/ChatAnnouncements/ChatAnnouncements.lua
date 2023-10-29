@@ -7084,8 +7084,6 @@ function ChatAnnouncements.HookFunction()
         g_currentGroupLeaderRawName = GetRawUnitName(GetGroupLeaderUnitTag())
         g_currentGroupLeaderDisplayName = GetUnitDisplayName(GetGroupLeaderUnitTag())
 
-        d("EVENT_GROUP_MEMBER_JOINED")
-
         -- Determine if the member that joined a group is the player or another member.
         if isLocalPlayer then
             zo_callLater(ChatAnnouncements.CheckLFGStatusJoin, 100)
@@ -11153,16 +11151,7 @@ function ChatAnnouncements.CheckLFGStatusLeave(WasKicked)
         g_leaveLFGOverride = false
         return
     end
-    if not g_leaveLFGOverride then
-        if WasKicked then
-            if ChatAnnouncements.SV.Group.GroupCA then
-                printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF), true)
-            end
-            if ChatAnnouncements.SV.Group.GroupAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF))
-            end
-        end
-    elseif g_leaveLFGOverride and GetGroupSize() == 0 then
+    if g_leaveLFGOverride and GetGroupSize() == 0 then
         if ChatAnnouncements.SV.Group.GroupCA then
             printToChat(GetString(SI_LUIE_CA_GROUP_QUIT_LFG), true)
         end
