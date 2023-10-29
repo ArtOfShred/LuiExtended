@@ -332,9 +332,6 @@ function SlashCommands.SlashVoteKick(option)
         return
     end
 
-    d(option)
-    d(zo_strlower(option))
-
     local g_partyKick = {}
     local kickedMemberName
     local kickedAccountName
