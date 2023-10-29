@@ -7084,6 +7084,8 @@ function ChatAnnouncements.HookFunction()
         g_currentGroupLeaderRawName = GetRawUnitName(GetGroupLeaderUnitTag())
         g_currentGroupLeaderDisplayName = GetUnitDisplayName(GetGroupLeaderUnitTag())
 
+        d("EVENT_GROUP_MEMBER_JOINED")
+
         -- Determine if the member that joined a group is the player or another member.
         if isLocalPlayer then
             zo_callLater(ChatAnnouncements.CheckLFGStatusJoin, 100)

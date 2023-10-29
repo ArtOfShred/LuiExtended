@@ -188,7 +188,6 @@ function SlashCommands.SlashGroupRole(option)
     end
 end
 
-local playerName, PlayerDisplayName = ZO_GetPrimaryPlayerName, ZO_GetPrimaryPlayerName
 -- Slash Command to kick someone from a group
 function SlashCommands.SlashGroupKick(option)
     local groupSize = GetGroupSize()
@@ -248,7 +247,7 @@ function SlashCommands.SlashGroupKick(option)
     local kickedAccountName
     local compareName = zo_strlower(option)
     local comparePlayerName = zo_strlower(LUIE.PlayerNameFormatted)
-    local comparePlayerAccount = zo_strlower(PlayerDisplayName)
+    local comparePlayerAccount = zo_strlower(LUIE.PlayerDisplayName)
     local unitToKick
 
     for i = 1, 24 do
@@ -333,12 +332,15 @@ function SlashCommands.SlashVoteKick(option)
         return
     end
 
+    d(option)
+    d(zo_strlower(option))
+
     local g_partyKick = {}
     local kickedMemberName
     local kickedAccountName
     local compareName = zo_strlower(option)
-    local comparePlayerName = zo_strlower(playerName)
-    local comparePlayerAccount = zo_strlower(PlayerDisplayName)
+    local comparePlayerName = zo_strlower(LUIE.PlayerNameFormatted)
+    local comparePlayerAccount = zo_strlower(LUIE.PlayerDisplayName)
     local unitToKick = ""
 
     for i = 1, 24 do
