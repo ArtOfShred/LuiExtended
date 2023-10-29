@@ -391,9 +391,9 @@ function LUIE.InitializeHooks()
                         if LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2 then
                             value2 = LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2
                         elseif LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Mod then
-                            value2 = math.floor(timer + LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Mod + 0.5)
+                            value2 = zo_floor(timer + LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Mod + 0.5)
                         elseif LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id then
-                            value2 = math.floor(GetAbilityDuration(LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id) + 0.5) / 1000
+                            value2 = zo_floor(GetAbilityDuration(LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id) + 0.5) / 1000
                         else
                             value2 = 0
                         end
@@ -405,7 +405,7 @@ function LUIE.InitializeHooks()
                     else
                         value3 = 0
                     end
-                    timer = math.floor((timer * 10) + 0.5) / 10
+                    timer = zo_floor((timer * 10) + 0.5) / 10
 
                     local tooltipText
 
@@ -437,7 +437,7 @@ function LUIE.InitializeHooks()
                     end
 
                     if tooltipText ~= "" then
-                        tooltipText = string.match(tooltipText, ".*%S")
+                        tooltipText = zo_strmatch(tooltipText, ".*%S")
                     end
                     local thirdLine
                     local timer2 = (endTime - startTime)
@@ -652,9 +652,9 @@ function LUIE.InitializeHooks()
                     if LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2 then
                         value2 = LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2
                     elseif LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Mod then
-                        value2 = math.floor(timer + LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Mod + 0.5)
+                        value2 = zo_floor(timer + LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Mod + 0.5)
                     elseif LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id then
-                        value2 = math.floor(GetAbilityDuration(LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id) + 0.5) / 1000
+                        value2 = zo_floor(GetAbilityDuration(LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id) + 0.5) / 1000
                     else
                         value2 = 0
                     end
@@ -666,7 +666,7 @@ function LUIE.InitializeHooks()
                 else
                     value3 = 0
                 end
-                timer = math.floor((timer * 10) + 0.5) / 10
+                timer = zo_floor((timer * 10) + 0.5) / 10
 
                 local tooltipText
                 if LUIE.ResolveVeteranDifficulty() == true and LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltipVet then
@@ -698,7 +698,7 @@ function LUIE.InitializeHooks()
                 end
 
                 if tooltipText ~= "" then
-                    tooltipText = string.match(tooltipText, ".*%S")
+                    tooltipText = zo_strmatch(tooltipText, ".*%S")
                 end
                 local thirdLine
                 local timer2 = (contentEndTime - contentStartTime)
@@ -935,8 +935,8 @@ function LUIE.InitializeHooks()
         else
             detailedName = skillProgressionData:GetFormattedName()
         end
-        detailedName = detailedName:gsub("With", "with")               -- Easiest way to fix the capitalization of the skill "Bond With Nature"
-        detailedName = detailedName:gsub("Blessing Of", "Blessing of") -- Easiest way to fix the capitalization of the skill "Blessing of Restoration"
+        detailedName = zo_strgsub(detailedName, "With", "with")               -- Easiest way to fix the capitalization of the skill "Bond With Nature"
+        detailedName = zo_strgsub(detailedName, "Blessing Of", "Blessing of") -- Easiest way to fix the capitalization of the skill "Blessing of Restoration"
         control.nameLabel:SetText(detailedName)
         control.nameLabel:SetColor(PURCHASED_COLOR:UnpackRGBA())
     end
@@ -1676,8 +1676,8 @@ function LUIE.InitializeHooks()
 
         -- name
         local detailedName = skillProgressionData:GetDetailedName()
-        detailedName = detailedName:gsub("With", "with")               -- Easiest way to fix the capitalization of the skill "Bond With Nature"
-        detailedName = detailedName:gsub("Blessing Of", "Blessing of") -- Easiest way to fix the capitalization of the skill "Blessing of Restoration"
+        detailedName = zo_strgsub(detailedName, "With", "with")               -- Easiest way to fix the capitalization of the skill "Bond With Nature"
+        detailedName = zo_strgsub(detailedName, "Blessing Of", "Blessing of") -- Easiest way to fix the capitalization of the skill "Blessing of Restoration"
         control.nameLabel:SetText(detailedName)
         local offsetY = showXPBar and -10 or 0
         control.nameLabel:SetAnchor(LEFT, control.slot, RIGHT, 10, offsetY)

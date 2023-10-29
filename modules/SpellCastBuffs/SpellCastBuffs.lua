@@ -1449,9 +1449,9 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
                     if Effects.EffectOverride[control.effectId].tooltipValue2 then
                         value2 = Effects.EffectOverride[control.effectId].tooltipValue2
                     elseif Effects.EffectOverride[control.effectId].tooltipValue2Mod then
-                        value2 = math.floor(duration + Effects.EffectOverride[control.effectId].tooltipValue2Mod + 0.5)
+                        value2 = zo_floor(duration + Effects.EffectOverride[control.effectId].tooltipValue2Mod + 0.5)
                     elseif Effects.EffectOverride[control.effectId].tooltipValue2Id then
-                        value2 = math.floor(GetAbilityDuration(Effects.EffectOverride[control.effectId].tooltipValue2Id) + 0.5) / 1000
+                        value2 = zo_floor(GetAbilityDuration(Effects.EffectOverride[control.effectId].tooltipValue2Id) + 0.5) / 1000
                     else
                         value2 = 0
                     end
@@ -1463,7 +1463,7 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
                 else
                     value3 = 0
                 end
-                duration = math.floor((duration * 10) + 0.5) / 10
+                duration = zo_floor((duration * 10) + 0.5) / 10
 
                 tooltipText = (Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltip) and zo_strformat(Effects.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
 

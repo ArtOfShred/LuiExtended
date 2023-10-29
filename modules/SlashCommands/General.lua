@@ -175,7 +175,7 @@ function SlashCommands.SlashCampaignQ(option)
         firstRun = false
         for i = 1, 200 do
             -- TODO: Find a way to determine # of campaigns dynamically instead of iterating.
-            local campaignName = string.lower(GetCampaignName(i))
+            local campaignName = zo_strlower(GetCampaignName(i))
             if campaignName ~= "" and campaignName ~= nil then
                 LUIE.CampaignNames[campaignName] = i
             end
@@ -183,7 +183,7 @@ function SlashCommands.SlashCampaignQ(option)
     end
 
     -- If input is valid and the name is in the campaign table, try to queue for the campaign.
-    local optionLower = string.lower(option)
+    local optionLower = zo_strlower(option)
     if LUIE.CampaignNames[optionLower] then
         local campaignId = LUIE.CampaignNames[optionLower]
         local campaignName = GetCampaignName(campaignId)

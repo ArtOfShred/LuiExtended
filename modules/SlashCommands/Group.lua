@@ -246,9 +246,9 @@ function SlashCommands.SlashGroupKick(option)
     local g_partyKick = {}
     local kickedMemberName
     local kickedAccountName
-    local compareName = string.lower(option)
-    local comparePlayerName = string.lower(LUIE.PlayerNameFormatted)
-    local comparePlayerAccount = string.lower(PlayerDisplayName)
+    local compareName = zo_strlower(option)
+    local comparePlayerName = zo_strlower(LUIE.PlayerNameFormatted)
+    local comparePlayerAccount = zo_strlower(PlayerDisplayName)
     local unitToKick
 
     for i = 1, 24 do
@@ -257,8 +257,8 @@ function SlashCommands.SlashGroupKick(option)
         if memberTag == nil then
             break
         end
-        kickedMemberName = string.lower(GetUnitName(memberTag))
-        kickedAccountName = string.lower(GetUnitDisplayName(memberTag))
+        kickedMemberName = zo_strlower(GetUnitName(memberTag))
+        kickedAccountName = zo_strlower(GetUnitDisplayName(memberTag))
         g_partyKick[i] = { memberTag = memberTag, kickedMemberName = kickedMemberName, kickedAccountName = kickedAccountName }
     end
 
@@ -336,9 +336,9 @@ function SlashCommands.SlashVoteKick(option)
     local g_partyKick = {}
     local kickedMemberName
     local kickedAccountName
-    local compareName = string.lower(option)
-    local comparePlayerName = string.lower(playerName)
-    local comparePlayerAccount = string.lower(PlayerDisplayName)
+    local compareName = zo_strlower(option)
+    local comparePlayerName = zo_strlower(playerName)
+    local comparePlayerAccount = zo_strlower(PlayerDisplayName)
     local unitToKick = ""
 
     for i = 1, 24 do
@@ -347,8 +347,8 @@ function SlashCommands.SlashVoteKick(option)
         if memberTag == nil then
             break
         end
-        kickedMemberName = string.lower(GetUnitName(memberTag))
-        kickedAccountName = string.lower(GetUnitDisplayName(memberTag))
+        kickedMemberName = zo_strlower(GetUnitName(memberTag))
+        kickedAccountName = zo_strlower(GetUnitDisplayName(memberTag))
         g_partyKick[i] = { memberTag = memberTag, kickedMemberName = kickedMemberName, kickedAccountName = kickedAccountName }
     end
 

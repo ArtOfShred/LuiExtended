@@ -164,15 +164,15 @@ function SlashCommands.SlashGuildKick(option)
 
     -- Index guild members so we can use character name as a kick option
     local guildNumbers = GetNumGuildMembers(guildnumber)
-    local compareChar = string.lower(name)
+    local compareChar = zo_strlower(name)
 
     local g_guildNamesTable = {}
 
     for i = 1, guildNumbers do
         local displayName = GetGuildMemberInfo(guildnumber, i)
         local _, characterName = GetGuildMemberCharacterInfo(guildnumber, i)
-        local compareDisplay = string.lower(displayName)
-        local compareCharacter = string.lower(characterName)
+        local compareDisplay = zo_strlower(displayName)
+        local compareCharacter = zo_strlower(characterName)
 
         compareCharacter = zo_strgsub(compareCharacter, "%^%a+", "")
 

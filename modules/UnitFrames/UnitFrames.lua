@@ -2165,10 +2165,10 @@ function UnitFrames.CustomPetUpdate()
         if DoesUnitExist(unitTag) then
             -- Compare whitelist entries and only add this pet to the list if it is whitelisted.
             local unitName = GetUnitName(unitTag)
-            local compareWhitelist = string.lower(unitName)
+            local compareWhitelist = zo_strlower(unitName)
             local addPet
             for k, _ in pairs(UnitFrames.SV.whitelist) do
-                k = string.lower(k)
+                k = zo_strlower(k)
                 if compareWhitelist == k then
                     addPet = true
                 end
@@ -2680,7 +2680,7 @@ function UnitFrames.UpdateStaticControls(unitFrame)
         local className = GetUnitClass(unitFrame.unitTag)
         local showClass = unitFrame.isPlayer and className ~= nil and UnitFrames.SV.TargetEnableClass
         if showClass then
-            unitFrame.className:SetText(className:gsub("%^%a+", ""))
+            unitFrame.className:SetText(zo_strgsub(className, "%^%a+", ""))
         end
         -- this condition is somehow extra, but let keep it to be in consistency with all others
         if unitFrame.unitTag == "player" then
@@ -2772,7 +2772,7 @@ function UnitFrames.UpdateStaticControls(unitFrame)
             end
         end
         title = title or ""
-        unitFrame.title:SetText(title:gsub("%^%a+", ""))
+        unitFrame.title:SetText(zo_strgsub(title, "%^%a+", ""))
         if unitFrame.unitTag == "reticleover" then
             unitFrame.title:SetHidden(not UnitFrames.SV.TargetEnableRank and not UnitFrames.SV.TargetEnableTitle)
         end

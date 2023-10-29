@@ -2881,7 +2881,7 @@ function ChatAnnouncements.OnBuybackItem(eventCode, itemName, quantity, money, i
     if ChatAnnouncements.SV.BracketOptionItem == 1 then
         carriedItem = (formattedIcon .. itemName .. itemCount)
     else
-        carriedItem = (formattedIcon .. itemName:gsub("^|H0", "|H1", 1) .. itemCount)
+        carriedItem = (formattedIcon .. zo_strgsub(itemName, "^|H0", "|H1", 1) .. itemCount)
     end
 
     local carriedItemTotal = ""
@@ -3009,7 +3009,7 @@ function ChatAnnouncements.OnBuyItem(eventCode, itemName, entryType, quantity, m
     if ChatAnnouncements.SV.BracketOptionItem == 1 then
         carriedItem = (formattedIcon .. itemName .. itemCount)
     else
-        carriedItem = (formattedIcon .. itemName:gsub("^|H0", "|H1", 1) .. itemCount)
+        carriedItem = (formattedIcon .. zo_strgsub(itemName, "^|H0", "|H1", 1) .. itemCount)
     end
 
     local carriedItemTotal = ""
@@ -3058,7 +3058,7 @@ function ChatAnnouncements.OnSellItem(eventCode, itemName, quantity, money)
     if ChatAnnouncements.SV.BracketOptionItem == 1 then
         carriedItem = (formattedIcon .. itemName .. itemCount)
     else
-        carriedItem = (formattedIcon .. itemName:gsub("^|H0", "|H1", 1) .. itemCount)
+        carriedItem = (formattedIcon .. zo_strgsub(itemName, "^|H0", "|H1", 1) .. itemCount)
     end
 
     local carriedItemTotal = ""
@@ -3115,7 +3115,7 @@ function ChatAnnouncements.TradingHouseResponseReceived(eventCode, TradingHouseR
     if ChatAnnouncements.SV.BracketOptionItem == 1 then
         carriedItem = (formattedIcon .. itemName .. itemCount)
     else
-        carriedItem = (formattedIcon .. itemName:gsub("^|H0", "|H1", 1) .. itemCount)
+        carriedItem = (formattedIcon .. zo_strgsub(itemName, "^|H0", "|H1", 1) .. itemCount)
     end
 
     local carriedItemTotal = ""
@@ -4148,7 +4148,7 @@ function ChatAnnouncements.OnLootReceived(eventCode, receivedBy, itemLink, quant
         if ChatAnnouncements.SV.BracketOptionItem == 1 then
             formattedItemLink = itemLink
         else
-            formattedItemLink = (itemLink:gsub("^|H0", "|H1", 1))
+            formattedItemLink = zo_strgsub(itemLink, "^|H0", "|H1", 1)
         end
 
         local formatName = zo_strformat("<<C:1>>", receivedBy)

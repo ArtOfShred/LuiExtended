@@ -1269,7 +1269,7 @@ function CrowdControlTracker:StopDrawBreakFree()
     self:VarReset()
     self.breakFreePlaying = true
 
-    if not currentCCIcon:find(ICON_MISSING) then
+    if not zo_strfind(currentCCIcon, ICON_MISSING) then
         breakFreeIcon = currentCCIcon
     else
         self:VarReset()
