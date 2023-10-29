@@ -1177,6 +1177,30 @@ function CombatInfo.CreateSettings()
             },
 
             {
+                -- Combat Info Filters
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CI_CASTBAR_FILTERS_HEADER),
+                width = "full",
+            },
+            {
+                -- Display Heavy Attacks
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_HEAVY_ATTACKS)),
+                tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_HEAVY_ATTACKS_TP),
+                getFunc = function ()
+                    return Settings.CastBarHeavy
+                end,
+                setFunc = function (value)
+                    Settings.CastBarHeavy = value
+                end,
+                width = "full",
+                default = Defaults.CastBarHeavy,
+                disabled = function ()
+                    return not (LUIE.SV.CombatInfo_Enabled and Settings.CastBarEnable)
+                end,
+            },
+
+            {
                 -- Combat Info Castbar Blacklist Header
                 type = "header",
                 name = GetString(SI_LUIE_CUSTOM_LIST_CASTBAR_BLACKLIST),

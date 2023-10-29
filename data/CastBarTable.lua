@@ -12,6 +12,22 @@ local CastBarTable = LUIE.Data.CastBarTable
 local Abilities = LUIE.Data.Abilities
 
 --------------------------------------------------------------------------------------------------------------------------------
+-- Id's for Heavy Attacks to ignore if the menu setting is off
+--------------------------------------------------------------------------------------------------------------------------------
+CastBarTable.IsHeavy = {
+    -- Weapon Attacks
+    [15279] = true, -- One Handed
+    [16420] = true, -- Dual Wield
+    [16041] = true, -- Two Handed
+    [16691] = true, -- Bow
+    [16212] = true, -- Restoration
+    [15383] = true, -- Inferno
+    [16261] = true, -- Ice
+    [18396] = true, -- Lightning
+    [18429] = true, -- Unarmed
+}
+
+--------------------------------------------------------------------------------------------------------------------------------
 -- When a hard CC effect is successfully applied to the player, instantly stop any in progress Casts
 --------------------------------------------------------------------------------------------------------------------------------
 CastBarTable.CastBreakingStatus = {
@@ -610,6 +626,17 @@ CastBarTable.IsCast = {
     [32346] = true,  -- Skyshard Collect
     [151928] = true, -- Aetherial Well (Aetherial Well)
     [47270] = true,  -- Ritual of Mara
+
+    -- Weapon Attacks
+    [15279] = true, -- One Handed
+    [16420] = true, -- Dual Wield
+    [16041] = true, -- Two Handed
+    [16691] = true, -- Bow
+    [16212] = true, -- Restoration
+    [15383] = true, -- Inferno
+    [16261] = true, -- Ice
+    [18396] = true, -- Lightning
+    [18429] = true, -- Unarmed
 
     -- Misc Items
     [206063] = true, -- CreateAttunableStation (Attunable Crafting Station)

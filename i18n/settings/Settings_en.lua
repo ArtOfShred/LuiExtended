@@ -1287,6 +1287,9 @@ local strings = {
     SI_LUIE_LAM_CI_CASTBAR_GRADIENTC1_TP = "Choose the start gradient color for the cast bar.",
     SI_LUIE_LAM_CI_CASTBAR_GRADIENTC2 = "Gradient Color (End)",
     SI_LUIE_LAM_CI_CASTBAR_GRADIENTC2_TP = "Choose the end gradient color for the cast bar.",
+    SI_LUIE_LAM_CI_CASTBAR_FILTERS_HEADER = "Cast Bar Filters",
+    SI_LUIE_LAM_CI_CASTBAR_HEAVY_ATTACKS = "Show Casts for Heavy Attacks",
+    SI_LUIE_LAM_CI_CASTBAR_HEAVY_ATTACKS_TP = "Show a cast bar when using heavy attacks with weapons.",
 
     -- CI CCT
     SI_LUIE_LAM_CI_CCT_HEADER = "Crowd Control Tracker",

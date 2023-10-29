@@ -78,6 +78,7 @@ CombatInfo.Defaults = {
     CastBarFontSize = 16,
     CastBarGradientC1 = { 0, 47 / 255, 130 / 255 },
     CastBarGradientC2 = { 82 / 255, 215 / 255, 1 },
+    CastBarHeavy = false,
     alerts = {
         toggles = {
             alertEnable = true,
@@ -785,6 +786,7 @@ function CombatInfo.RegisterCombatInfo()
     eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED)
     eventManager:UnregisterForEvent(moduleName, EVENT_ACTIVE_WEAPON_PAIR_CHANGED)
     eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOT_ABILITY_USED)
     if CombatInfo.SV.UltimateLabelEnabled or CombatInfo.SV.UltimatePctEnabled then
         eventManager:RegisterForEvent(moduleName .. "CombatEvent1", EVENT_COMBAT_EVENT, CombatInfo.OnCombatEvent)
         eventManager:AddFilterForEvent(moduleName .. "CombatEvent1", REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false, REGISTER_FILTER_COMBAT_RESULT, ACTION_RESULT_BLOCKED_DAMAGE)
@@ -809,6 +811,7 @@ function CombatInfo.RegisterCombatInfo()
         eventManager:RegisterForEvent(moduleName, EVENT_END_SOUL_GEM_RESURRECTION, CombatInfo.SoulGemResurrectionEnd)
         eventManager:RegisterForEvent(moduleName, EVENT_GAME_CAMERA_UI_MODE_CHANGED, CombatInfo.OnGameCameraUIModeChanged)
         eventManager:RegisterForEvent(moduleName, EVENT_END_SIEGE_CONTROL, CombatInfo.OnSiegeEnd)
+        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_ABILITY_USED, CombatInfo.OnAbilityUsed)
         --eventManager:RegisterForEvent(moduleName, EVENT_CLIENT_INTERACT_RESULT, CombatInfo.ClientInteractResult)
         --[[counter = 0
         for id, _ in pairs (Effects.CastBreakOnRemoveEvent) do
@@ -1093,6 +1096,13 @@ function CombatInfo.OnSiegeEnd(eventCode)
     if castbar.id == 12256 then
         CombatInfo.StopCastBar()
     end
+end
+
+-- Stops Attack Cast when releasing heavy attacks
+function CombatInfo.OnAbilityUsed(eventCode, actionSlotIndex)
+	if actionSlotIndex == 2 then
+		LUIE.CombatInfo.StopCastBar()
+	end
 end
 
 function CombatInfo.StopCastBar()
@@ -2102,6 +2112,11 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
 
     -- Return if ability not marked as cast or ability is blacklisted
     if not Castbar.IsCast[abilityId] or CombatInfo.SV.blacklist[abilityId] or CombatInfo.SV.blacklist[name] then
+        return
+    end
+
+    -- Don't show heavy attacks if the option is disabled
+    if Castbar.IsHeavy[abilityId] and not CombatInfo.SV.CastBarHeavy then
         return
     end
 

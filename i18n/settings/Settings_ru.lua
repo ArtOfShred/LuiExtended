@@ -1287,6 +1287,9 @@ local strings = {
     SI_LUIE_LAM_CI_CASTBAR_GRADIENTC1_TP = "Выберите начальный цвет градиента на кастбаре.",
     SI_LUIE_LAM_CI_CASTBAR_GRADIENTC2 = "Цвет градиента (Конец)",
     SI_LUIE_LAM_CI_CASTBAR_GRADIENTC2_TP = "Выберите конечный цвет градиента на кастбаре.",
+    SI_LUIE_LAM_CI_CASTBAR_FILTERS_HEADER = "Cast Bar Filters",
+    SI_LUIE_LAM_CI_CASTBAR_HEAVY_ATTACKS = "Show Casts for Heavy Attacks",
+    SI_LUIE_LAM_CI_CASTBAR_HEAVY_ATTACKS_TP = "Show a cast bar when using heavy attacks with weapons.",
 
     -- CI CCT
     SI_LUIE_LAM_CI_CCT_HEADER = "Трекер контроля толпы",

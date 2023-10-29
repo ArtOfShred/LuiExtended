@@ -13180,32 +13180,16 @@ Effects.ZoneDataOverride = {
     },
 
     [21582] = { -- Nature's Swarm (Spriggan)
-        [Zonenames.Zone_Hectahame] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds",
-        }, -- Hectahame
-        [Zonenames.Zone_Hectahame_Armory] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds",
-        }, -- Hectahame Armory
-        [Zonenames.Zone_Hectahame_Arboretum] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds",
-        }, -- Hectahame Arboretum
-        [Zonenames.Zone_Hectahame_Ritual_Chamber] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds",
-        },      -- Hectahame Ritual Chamber
+        [Zonenames.Zone_Hectahame] = { icon = "LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds", }, -- Hectahame
+        [Zonenames.Zone_Hectahame_Armory] = { icon = "LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds", }, -- Hectahame Armory
+        [Zonenames.Zone_Hectahame_Arboretum] = { icon = "LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds", }, -- Hectahame Arboretum
+        [Zonenames.Zone_Hectahame_Ritual_Chamber] = { icon = "LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds", }, -- Hectahame Ritual Chamber
     },
     [31699] = { -- Nature's Swarm (Spriggan)
-        [Zonenames.Zone_Hectahame] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds",
-        }, -- Hectahame
-        [Zonenames.Zone_Hectahame_Armory] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds",
-        }, -- Hectahame Armory
-        [Zonenames.Zone_Hectahame_Arboretum] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds",
-        }, -- Hectahame Arboretum
-        [Zonenames.Zone_Hectahame_Ritual_Chamber] = {
-            icon = "LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds",
-        },      -- Hectahame Ritual Chamber
+        [Zonenames.Zone_Hectahame] = { icon = "LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds", }, -- Hectahame
+        [Zonenames.Zone_Hectahame_Armory] = { icon = "LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds", }, -- Hectahame Armory
+        [Zonenames.Zone_Hectahame_Arboretum] = { icon = "LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds", }, -- Hectahame Arboretum
+        [Zonenames.Zone_Hectahame_Ritual_Chamber] = { icon = "LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm_red.dds", }, -- Hectahame Ritual Chamber
     },
     [13475] = { -- Healing Salve (Spriggan)
         [Zonenames.Zone_Hectahame] = {
