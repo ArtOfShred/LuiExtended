@@ -4246,11 +4246,6 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
         color = CurrencyColorize:ToHex()
     end
 
-    -- Error prevention, make sure color is always set.
-    if not color then
-        color = CurrencyColorize:ToHex()
-    end
-
     local formattedRecipient
     local formattedQuantity
     local formattedTrait
