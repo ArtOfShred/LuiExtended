@@ -4251,6 +4251,11 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
         color = CurrencyColorize:ToHex()
     end
 
+    -- Error prevention, make sure color is always set.
+    if not color then
+        color = CurrencyColorize:ToHex()
+    end
+
     local formattedRecipient
     local formattedQuantity
     local formattedTrait
@@ -4273,6 +4278,11 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
         formattedQuantity = string.format(" |cFFFFFFx%d|r", stack)
     else
         formattedQuantity = ""
+    end
+
+    -- Error handling
+    if not formattedRecipient then
+        formattedRecipient = ""
     end
 
     local armorType = GetItemLinkArmorType(itemLink) -- Get Armor Type of item
