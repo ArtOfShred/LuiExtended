@@ -1,4 +1,4 @@
-# Version 6.6.x
+# Version 6.6.5
 
 General
 
@@ -24,7 +24,7 @@ Combat Info
 
 Info Panel
 
-- Added an option to change the Clock Formatting (similar to chat stamp formatting you can customize how the clock displays). Default settings match the current behavior of the Info Panel clock.
+- Added an option to change the Clock Formatting (similar to chat timestamp formatting you can customize how the clock displays). Default settings match the current behavior of the Info Panel clock.
 
 Unit Frames
 

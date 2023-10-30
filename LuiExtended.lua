@@ -11,7 +11,7 @@ end
 LUIE = {
     tag = "LUIE",
     name = "LuiExtended",
-    version = "6.6.4",
+    version = "6.6.5",
     author = "ArtOfShred, DakJaniels, psypanda, Saenic & SpellBuilder",
     website = "https://www.esoui.com/downloads/info818-LuiExtended.html",
     github = "https://github.com/ArtOfShred/LuiExtended",

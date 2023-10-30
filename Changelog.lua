@@ -6,7 +6,7 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
-    "|cFFA500LuiExtended Version 6.6.x|r",
+    "|cFFA500LuiExtended Version 6.6.5|r",
     "",
     "|cFFFF00General:|r",
     "[*] Updated the hooks for Campaign Bonuses in Cryodiil - fixes a default UI issue with the display of the Emperorship Alliance Bonus passive.",
@@ -27,7 +27,7 @@ local changelogMessages = {
     "[*] Fixed an issue where AOE Damage tracking on Crowd Control Tracker wasn't working.",
     "",
     "|cFFFF00Info Panel:|r",
-    "[*] Added an option to change the Clock Formatting (similar to chat stamp formatting you can customize how the clock displays). Default settings match the current behavior of the Info Panel clock.",
+    "[*] Added an option to change the Clock Formatting (similar to chat timestamp formatting you can customize how the clock displays). Default settings match the current behavior of the Info Panel clock.",
     "",
     "|cFFFF00Unit Frames:|r",
     "[*] Added effects to the Unit Frames when a unit becomes Invulnerable (boss invulnerability phases, etc...).",
