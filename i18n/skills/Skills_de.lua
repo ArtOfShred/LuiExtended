@@ -60,7 +60,8 @@ local strings = {
     --SI_LUIE_SKILL_GALLOP_TP =                            "Gallopieren, ierhöht die Bewegungsgeschwindigkeit um |cFFFFFF30|r%.\n\nEntzieht Reitausdauer während der Bewegung.",
     SI_LUIE_SKILL_BRACE_TP = "Brace for attack, reducing damage taken by |cFFFFFF<<1>>|r% and movement speed by |cFFFFFF<<2>>|r% while granting immunity to Stun and Knockback effects.\n\nDrains |cFFFFFF<<3>>|r <<4>> on a successful block.",
     SI_LUIE_SKILL_RESURRECTION_IMMUNITY_TP = "Wiederbeleben. Immun gegen Schaden und alle negativen Effekte.",
-    SI_LUIE_SKILL_TAUNT_TP = "Verspottet. Dieser Gegner konzentriert alle Angriffe auf Euch.",
+    SI_LUIE_SKILL_TAUNT_TP = "Verspottet.",
+    SI_LUIE_SKILL_TAUNT_OTHER_TP = "This enemy is taunted and will concentrate all attacks on you for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_DISGUISE_TP = "Disguised. You can be revealed by sentries or performing suspicious activity.\n\nTaking any damage other than fall damage will destroy your disguise.",
     SI_LUIE_SKILL_BATTLE_SPIRIT_TP = "• Reduce damage taken by |cFFFFFF44|r%\n• Reduce damage shield strength by |cFFFFFF50|r%\n• Reduce healing received and Health Recovery by |cFFFFFF50|r%\n• Increase the range of abilities with a range greater than |cFFFFFF28|r meters by |cFFFFFF8|r meters",
     SI_LUIE_SKILL_BATTLE_SPIRIT_IMPERIAL_CITY_TP = "• Reduce damage taken by |cFFFFFF44|r%\n• Reduce damage shield strength by |cFFFFFF50|r%\n• Reduce healing received and Health Recovery by |cFFFFFF50|r%",
@@ -82,16 +83,16 @@ local strings = {
     SI_LUIE_SKILL_POISON_STEALTH_DRAIN = "Stealth-Draining Poison",
     SI_LUIE_SKILL_POISON_CONSPICUOUS = "Conspicuous Poison",
     SI_LUIE_SKILL_DRINK_INCREASE = "Increase",
-    SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL = "These effects are scaled based on your level.", -- Note this needs to be an exact match to the description in Crown Crate food/drink items for it to be correctly removed in each localization.
-    SI_LUIE_SKILL_REMOVE_TOOLTIP_DOUBLE_BLOODY_MARA = "If you are a vampire, the blood in this drink will also purify you, reducing your Stage by 1.\nThese effects are scaled based on your level.", -- Must be exact match in each localization
+    SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL = "These effects are scaled based on your level.",                                                                                                                                               -- Note this needs to be an exact match to the description in Crown Crate food/drink items for it to be correctly removed in each localization.
+    SI_LUIE_SKILL_REMOVE_TOOLTIP_DOUBLE_BLOODY_MARA = "If you are a vampire, the blood in this drink will also purify you, reducing your Stage by 1.\nThese effects are scaled based on your level.",                                          -- Must be exact match in each localization
     SI_LUIE_SKILL_REMOVE_TOOLTIP_HISSMIR = "This drink will also grant you insights into what manner of fish spawn in various bodies of water, as well as alertness for nearby fish activity.\nThese effects are scaled based on your level.", -- Must be exact match in each localization
     SI_LUIE_SKILL_ADD_TOOLTIP_HISSMIR = "\n\nThis drink will also grant you insights into what manner of fish spawn in various bodies of water, as well as alertness for nearby fish activity.",
-    SI_LUIE_SKILL_REMOVE_TOOLTIP_ARTAEUM_BOWL = "Also increases", -- Must be exact match in each localization
+    SI_LUIE_SKILL_REMOVE_TOOLTIP_ARTAEUM_BOWL = "Also increases",                                                                                                                                                                              -- Must be exact match in each localization
     SI_LUIE_SKILL_ADD_TOOLTIP_ARTAEUM_BOWL = "\n\nAlso increases",
-    SI_LUIE_SKILL_REMOVE_TOOLTIP_TWICE_SPIKED_ALE = "This drink is very gassy.\nThese effects are scaled based on your level.", -- Must be exact match in each localization
-    SI_LUIE_SKILL_REMOVE_TOOLTIP_PACK_LEADERS_BROTH = "If you are a werewolf, the rich marrow will also slightly ease your transformation.\nThese effects are scaled based on your level.", -- Must be exact match in each localization
+    SI_LUIE_SKILL_REMOVE_TOOLTIP_TWICE_SPIKED_ALE = "This drink is very gassy.\nThese effects are scaled based on your level.",                                                                                                                -- Must be exact match in each localization
+    SI_LUIE_SKILL_REMOVE_TOOLTIP_PACK_LEADERS_BROTH = "If you are a werewolf, the rich marrow will also slightly ease your transformation.\nThese effects are scaled based on your level.",                                                    -- Must be exact match in each localization
     SI_LUIE_SKILL_ADD_TOOLTIP_PACK_LEADERS_BROTH = "\nIf you are a werewolf, the rich marrow will also slightly ease your transformation.",
-    SI_LUIE_SKILL_REMOVE_TOOLTIP_DISASTROUSLY_BLOODY = "If you are a vampire, the tainted blood in this drink will corrupt you, increasing your Stage to 4.\nThese effects are scaled based on your level.", -- Must be exact match in each localization
+    SI_LUIE_SKILL_REMOVE_TOOLTIP_DISASTROUSLY_BLOODY = "If you are a vampire, the tainted blood in this drink will corrupt you, increasing your Stage to 4.\nThese effects are scaled based on your level.",                                   -- Must be exact match in each localization
     SI_LUIE_SKILL_ESO_PLUS_TP = "Increase Experience, Gold, and Inspiration Points earned by |cFFFFFF10|r%.\nIncrease Trait Research speed by |cFFFFFF10|r%.",
 
     -- Collectible
@@ -136,12 +137,12 @@ local strings = {
     SI_LUIE_SKILL_MAJOR_INTELLECT_TP = "Increase Magicka Recovery by |cFFFFFF30|r%.",
     SI_LUIE_SKILL_MINOR_SORCERY_TP = "Increase Spell Damage by |cFFFFFF10|r%.",
     SI_LUIE_SKILL_MAJOR_SORCERY_TP = "Increase Spell Damage by |cFFFFFF20|r%.",
-    SI_LUIE_SKILL_MINOR_PROPHECY_TP = "Increase Spell Critical by |cFFFFFF1320|r.",
-    SI_LUIE_SKILL_MAJOR_PROPHECY_TP = "Increase Spell Critical by |cFFFFFF2629|r.",
+    SI_LUIE_SKILL_MINOR_PROPHECY_TP = "Increase Spell Critical rating by |cFFFFFF1314|r, increasing your Spell Critical chance by |cFFFFFF6|r%.",
+    SI_LUIE_SKILL_MAJOR_PROPHECY_TP = "Increase Spell Critical rating by |cFFFFFF2629|r, increasing your Spell Critical chance by |cFFFFFF12|r%.",
     SI_LUIE_SKILL_MINOR_BRUTALITY_TP = "Increase Weapon Damage by |cFFFFFF10|r%.",
     SI_LUIE_SKILL_MAJOR_BRUTALITY_TP = "Increase Weapon Damage by |cFFFFFF20|r%.",
-    SI_LUIE_SKILL_MINOR_SAVAGERY_TP = "Increase Weapon Critical by |cFFFFFF1320|r.",
-    SI_LUIE_SKILL_MAJOR_SAVAGERY_TP = "Increase Weapon Critical by |cFFFFFF2629|r.",
+    SI_LUIE_SKILL_MINOR_SAVAGERY_TP = "Increase Weapon Critical rating by |cFFFFFF1314|r, increasing your Weapon Critical chance by |cFFFFFF6|r%.",
+    SI_LUIE_SKILL_MAJOR_SAVAGERY_TP = "Increase Weapon Critical rating by |cFFFFFF2629|r, increasing your Weapon Critical chance by |cFFFFFF12|r%.",
     SI_LUIE_SKILL_MINOR_BERSERK_TP = "Increase damage done by |cFFFFFF5|r%.",
     SI_LUIE_SKILL_MAJOR_BERSERK_TP = "Increase damage done by |cFFFFFF10|r%.",
     SI_LUIE_SKILL_MINOR_FORCE_TP = "Increase Critical Damage by |cFFFFFF10|r%.",
@@ -176,11 +177,11 @@ local strings = {
     SI_LUIE_SKILL_MINOR_MAGICKASTEAL_TP = "Restore |cFFFFFF168|r Magicka every |cFFFFFF1|r second when damaged.",
     SI_LUIE_SKILL_MINOR_LIFESTEAL_TP = "Restore |cFFFFFF600|r Health every |cFFFFFF1|r second when damaged.",
     SI_LUIE_SKILL_MINOR_ENERVATION_TP = "Reduce Critical Damage by |cFFFFFF10|r%.",
-    SI_LUIE_SKILL_MINOR_UNCERTAINTY_TP = "Reduce Weapon Critical and Spell Critical by |cFFFFFF1320|r.",
+    SI_LUIE_SKILL_MINOR_UNCERTAINTY_TP = "Reduce Weapon Critical and Spell Critical by |cFFFFFF1314|r.",
     SI_LUIE_SKILL_MINOR_COWARDICE_TP = "Reduce Weapon and Spell Damage by |cFFFFFF215|r.",
     SI_LUIE_SKILL_MAJOR_COWARDICE_TP = "Reduce Weapon and Spell Damage by |cFFFFFF430|r.",
     SI_LUIE_SKILL_MINOR_MANGLE_TP = "Reduce Max Health by |cFFFFFF10|r%.",
-    SI_LUIE_SKILL_MINOR_TIMIDITY_TP = "Consume |cFFFFFF1|r Ultimate every |cFFFFFF1.5|r seconds while in combat.",
+    SI_LUIE_SKILL_MINOR_TIMIDITY_TP = "Drain |cFFFFFF1|r Ultimate every |cFFFFFF1.5|r seconds while in combat.",
     SI_LUIE_SKILL_MINOR_BRITTLE_TP = "Increase Critical Damage taken by |cFFFFFF10|r%.",
     SI_LUIE_SKILL_MAJOR_BRITTLE_TP = "Increase Critical Damage taken by |cFFFFFF20|r%.",
 
@@ -191,7 +192,7 @@ local strings = {
     SI_LUIE_SKILL_MAJOR_AEGIS_TP = "You take |cFFFFFF10|r% less damage from Dungeon, Trial, and Arena enemies.",
 
     -- Empower
-    SI_LUIE_SKILL_EMPOWER_TP = "Increase Light and Heavy Attack damage by |cFFFFFF40|r%.",
+    SI_LUIE_SKILL_EMPOWER_TP = "Increase damage done with Heavy Attacks against monsters by |cFFFFFF70|r%.",
 
     -- Potions
     SI_LUIE_SKILL_SPELL_RESISTANCE_POTION_TP = "Increase Spell Resistance by |cFFFFFF5280|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
@@ -210,7 +211,8 @@ local strings = {
 
     -- Warfare
     SI_LUIE_SKILL_ENLIVENING_OVERFLOW_TP = "Increase Health, Magicka, and Stamina Recovery by |cFFFFFF0.5|r% of the casters Max Magicka, up to a cap of |cFFFFFF150|r, for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
-    SI_LUIE_SKILL_FORESIGHT_TP = "Reduce the cost of your Magicka and Stamina healing abilities by |cFFFFFF75|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_FORESIGHT_TP = "Reduce the cost of your Magicka and Stamina healing abilities by |cFFFFFF75|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_RIPOSTE_TP = "Your next direct damage attack used within |cFFFFFF<<1>>|r <<1[second/seconds]>> deals |cFFFFFF33|r% additional damage.",
 
     -- Fitness
     SI_LUIE_SKILL_EXPERT_EVASION_TP = "You have recently benefitted from a free Roll Dodge and may not do so again for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
@@ -834,7 +836,7 @@ local strings = {
     SI_LUIE_SKILL_EDGE_KEEP_BONUS_TP = "Increase Alliance Points earned by |cFFFFFF<<1>>|r%.",
     SI_LUIE_SKILL_DEFENSIVE_SCROLL_BONUS_TP = "Increase Physical and Spell Resistance by |cFFFFFF<<1>>|r%.",
     SI_LUIE_SKILL_OFFENSIVE_SCROLL_BONUS_TP = "Increase Weapon and Spell Damage by |cFFFFFF<<1>>|r%.",
-    SI_LUIE_SKILL_EMPERORSHIP_ALLIANCE_BONUS_TP = "Increase Max Health by |cFFFFFF35|r per character level.",
+    SI_LUIE_SKILL_EMPERORSHIP_ALLIANCE_BONUS_TP = "Increase Max Health based on the amount of Home Keeps owned.\n\nCurrect Bonus: |cFFFFFF<<1>>|r",
     SI_LUIE_SKILL_RAZOR_ARMOR_TP = "Reduce damage taken by |cFFFFFF30|r% for |cFFFFFF<<1>>|r seconds.\n\nWhile active the armor returns Physical Damage to attackers.",
     SI_LUIE_SKILL_UNSTABLE_CORE_CYRODIIL_TP = "Your single target ranged abilities are reflected back on you for |cFFFFFF<<1>>|r seconds.\n\nThe core explodes when this effect ends, dealing Magic Damage.",
     SI_LUIE_SKILL_SHATTERING_PRISON_CYRODIIL_TP = "Disoriented for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThe prison shatters when this effect ends, dealing Magic Damage.",

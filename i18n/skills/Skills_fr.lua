@@ -61,6 +61,7 @@ local strings = {
     SI_LUIE_SKILL_BRACE_TP = "Préparé à l'attaque, réduit les dégâts reçus de |cFFFFFF<<1>>|r% et la vitesse de déplacement de |cFFFFFF<<2>>|r% tout en accordant une immunité aux effets d'étourdissement et de recul.\n\nDrains |cFFFFFF<<3>>|r <<4>> sur un blocage réussi.",
     SI_LUIE_SKILL_RESURRECTION_IMMUNITY_TP = "Réssuscité. Insensible aux dégâts et à tous les effets négatifs.",
     SI_LUIE_SKILL_TAUNT_TP = "Provoqué.",
+    SI_LUIE_SKILL_TAUNT_OTHER_TP = "This enemy is taunted and will concentrate all attacks on you for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_DISGUISE_TP = "Une fois déguisé, vous poouvez être détecté par les sentinelles ou en effectuant des actions suspectes.\n\nSubir des dégâts autres que par chute détruira votre déguisement.",
     SI_LUIE_SKILL_BATTLE_SPIRIT_TP = "• Réduit les dégâts reçus de |cFFFFFF44|r%\n• Réduit la puissance du bouclier de dégâts de |cFFFFFF50|r%\n• Réduit les soins reçus et la récupération de santé de |cFFFFFF50|r%\n• Augmente la portée des compétences avec une portée supérieure à |cFFFFFF28|r mètres de |cFFFFFF8|r mètres",
     SI_LUIE_SKILL_BATTLE_SPIRIT_IMPERIAL_CITY_TP = "• Réduit les dégâts reçus de |cFFFFFF44|r%\n• Réduit la puissance du bouclier de dégâts de |cFFFFFF50|r%\n• Réduit les soins reçus et la récupération de santé de |cFFFFFF50|r%",
@@ -136,12 +137,12 @@ local strings = {
     SI_LUIE_SKILL_MAJOR_INTELLECT_TP = "Augmente la récupération de magie de |cFFFFFF30|r%.",
     SI_LUIE_SKILL_MINOR_SORCERY_TP = "Augmente les dégâts des sorts de |cFFFFFF10|r%.",
     SI_LUIE_SKILL_MAJOR_SORCERY_TP = "Augmente les dégâts des sorts de |cFFFFFF20|r%.",
-    SI_LUIE_SKILL_MINOR_PROPHECY_TP = "Augmente les dégâts critiques des sorts de |cFFFFFF1320|r.",
-    SI_LUIE_SKILL_MAJOR_PROPHECY_TP = "Augmente les dégâts critiques des sorts de |cFFFFFF2629|r.",
+    SI_LUIE_SKILL_MINOR_PROPHECY_TP = "Increase Spell Critical rating by |cFFFFFF1314|r, increasing your Spell Critical chance by |cFFFFFF6|r%.",
+    SI_LUIE_SKILL_MAJOR_PROPHECY_TP = "Increase Spell Critical rating by |cFFFFFF2629|r, increasing your Spell Critical chance by |cFFFFFF12|r%.",
     SI_LUIE_SKILL_MINOR_BRUTALITY_TP = "Augmente les dégâts des armes de |cFFFFFF10|r%.",
     SI_LUIE_SKILL_MAJOR_BRUTALITY_TP = "Augmente les dégâts des armes de |cFFFFFF20|r%.",
-    SI_LUIE_SKILL_MINOR_SAVAGERY_TP = "Augmente les dégâts critiques des armes de |cFFFFFF1320|r.",
-    SI_LUIE_SKILL_MAJOR_SAVAGERY_TP = "Augmente les dégâts critiques des armes de |cFFFFFF2629|r.",
+    SI_LUIE_SKILL_MINOR_SAVAGERY_TP = "Increase Weapon Critical rating by |cFFFFFF1314|r, increasing your Weapon Critical chance by |cFFFFFF6|r%.",
+    SI_LUIE_SKILL_MAJOR_SAVAGERY_TP = "Increase Weapon Critical rating by |cFFFFFF2629|r, increasing your Weapon Critical chance by |cFFFFFF12|r%.",
     SI_LUIE_SKILL_MINOR_BERSERK_TP = "Augmente les dégâts réalisés de |cFFFFFF5|r%.",
     SI_LUIE_SKILL_MAJOR_BERSERK_TP = "Augmente les dégâts réalisés de |cFFFFFF10|r%.",
     SI_LUIE_SKILL_MINOR_FORCE_TP = "Augmente les dégâts critiques de |cFFFFFF10|r%.",
@@ -176,11 +177,11 @@ local strings = {
     SI_LUIE_SKILL_MINOR_MAGICKASTEAL_TP = "Récupère |cFFFFFF168|r de magie chaque |cFFFFFF1|r seconde quand blessé.",
     SI_LUIE_SKILL_MINOR_LIFESTEAL_TP = "Récupère |cFFFFFF600|r de santé Health chaque |cFFFFFF1|r seconde quand blessé.",
     SI_LUIE_SKILL_MINOR_ENERVATION_TP = "Réduit les dégâts critiques de |cFFFFFF10|r%.",
-    SI_LUIE_SKILL_MINOR_UNCERTAINTY_TP = "Réduit les chances de critiques des armes et des sorts de |cFFFFFF1320|r.",
+    SI_LUIE_SKILL_MINOR_UNCERTAINTY_TP = "Reduce Weapon Critical and Spell Critical by |cFFFFFF1314|r.",
     SI_LUIE_SKILL_MINOR_COWARDICE_TP = "Réduit les dégâts des armes et des sorts de |cFFFFFF215|r.",
     SI_LUIE_SKILL_MAJOR_COWARDICE_TP = "Réduit les dégâts des armes et des sorts de |cFFFFFF430|r.",
     SI_LUIE_SKILL_MINOR_MANGLE_TP = "Réduit la santé maximale de |cFFFFFF10|r%.",
-    SI_LUIE_SKILL_MINOR_TIMIDITY_TP = "Consomme |cFFFFFF1|r Points d'Ultime toutes les |cFFFFFF1.5|r secondes en combat.",
+    SI_LUIE_SKILL_MINOR_TIMIDITY_TP = "Drain |cFFFFFF1|r Ultimate every |cFFFFFF1.5|r seconds while in combat.",
     SI_LUIE_SKILL_MINOR_BRITTLE_TP = "Augmente les dégâts critiques reçus de |cFFFFFF10|r%.",
     SI_LUIE_SKILL_MAJOR_BRITTLE_TP = "Augmente les dégâts critiques reçus de |cFFFFFF20|r%.",
 
@@ -191,7 +192,7 @@ local strings = {
     SI_LUIE_SKILL_MAJOR_AEGIS_TP = "Vous recevez |cFFFFFF10|r% de dégâts en moins de la part des ennemis des donjons, raids et arènes.",
 
     -- Empower
-    SI_LUIE_SKILL_EMPOWER_TP = "Augmente les dégâts des attaques légères et puissantes de |cFFFFFF40|r%.",
+    SI_LUIE_SKILL_EMPOWER_TP = "Increase damage done with Heavy Attacks against monsters by |cFFFFFF70|r%.",
 
     -- Potions
     SI_LUIE_SKILL_SPELL_RESISTANCE_POTION_TP = "Augmente la résistance aux sorts de |cFFFFFF5280|r pendant |cFFFFFF<<1>>|r <<1[seconde/secondes]>>.",
@@ -210,7 +211,8 @@ local strings = {
 
     -- Warfare
     SI_LUIE_SKILL_ENLIVENING_OVERFLOW_TP = "Augmente la récupération de santé, de magie et de vigueur de |cFFFFFF0.5|r% de votre maximum de magie, avec une limite de |cFFFFFF150|r, pendant |cFFFFFF<<1>>|r <<1[seconde/secondes]>>.",
-    SI_LUIE_SKILL_FORESIGHT_TP = "Réduit les coûts en magie et vigueur de vos compétences de soins de |cFFFFFF75|r% pendant |cFFFFFF<<1>>|r secondes.",
+    SI_LUIE_SKILL_FORESIGHT_TP = "Réduit les coûts en magie et vigueur de vos compétences de soins de |cFFFFFF75|r% pendant |cFFFFFF<<1>>|r <<1[seconde/secondes]>>.",
+    SI_LUIE_SKILL_RIPOSTE_TP = "Your next direct damage attack used within |cFFFFFF<<1>>|r <<1[second/seconds]>> deals |cFFFFFF33|r% additional damage.",
 
     -- Fitness
     SI_LUIE_SKILL_EXPERT_EVASION_TP = "Vous avez récemment bénéficié d'une esquive gratuite et ne pouvez plus le faire pendant |cFFFFFF<<1>>|r <<1[seconde/secondes]>>.",
@@ -834,7 +836,7 @@ local strings = {
     SI_LUIE_SKILL_EDGE_KEEP_BONUS_TP = "Increase Alliance Points earned by |cFFFFFF<<1>>|r%.",
     SI_LUIE_SKILL_DEFENSIVE_SCROLL_BONUS_TP = "Increase Physical and Spell Resistance by |cFFFFFF<<1>>|r%.",
     SI_LUIE_SKILL_OFFENSIVE_SCROLL_BONUS_TP = "Increase Weapon and Spell Damage by |cFFFFFF<<1>>|r%.",
-    SI_LUIE_SKILL_EMPERORSHIP_ALLIANCE_BONUS_TP = "Increase Max Health by |cFFFFFF35|r per character level.",
+    SI_LUIE_SKILL_EMPERORSHIP_ALLIANCE_BONUS_TP = "Increase Max Health based on the amount of Home Keeps owned.\n\nCurrect Bonus: |cFFFFFF<<1>>|r",
     SI_LUIE_SKILL_RAZOR_ARMOR_TP = "Reduce damage taken by |cFFFFFF30|r% for |cFFFFFF<<1>>|r seconds.\n\nWhile active the armor returns Physical Damage to attackers.",
     SI_LUIE_SKILL_UNSTABLE_CORE_CYRODIIL_TP = "Your single target ranged abilities are reflected back on you for |cFFFFFF<<1>>|r seconds.\n\nThe core explodes when this effect ends, dealing Magic Damage.",
     SI_LUIE_SKILL_SHATTERING_PRISON_CYRODIIL_TP = "Disoriented for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThe prison shatters when this effect ends, dealing Magic Damage.",

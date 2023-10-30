@@ -3,13 +3,12 @@
     License: The MIT License (MIT)
 --]]
 
-LUIE.Data.CombatTextBlacklistPresets = {}
-local BlacklistPresets = LUIE.Data.CombatTextBlacklistPresets
+-- CombatTextBlacklistPresets namespace
+if LUIE.Data.CombatTextBlacklistPresets == nil then
+    LUIE.Data.CombatTextBlacklistPresets = {}
+end
 
--- Crouch Drain
-BlacklistPresets.CrouchDrain = {
-    [20301] = true, -- Crouch Drain
-}
+local BlacklistPresets = LUIE.Data.CombatTextBlacklistPresets
 
 -- Sets
 BlacklistPresets.Sets = {
@@ -25,7 +24,7 @@ BlacklistPresets.Sorcerer = {
 
 -- Templar
 BlacklistPresets.Templar = {
-    [37009] = true, -- Channeled Focus (Channeled Focus)
+    [37009] = true,  -- Channeled Focus (Channeled Focus)
     [114842] = true, -- Restoring Focus (Restoring Focus)
 }
 

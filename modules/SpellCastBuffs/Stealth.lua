@@ -148,6 +148,7 @@ function SpellCastBuffs.StealthStateChanged(eventCode, unitTag, stealthState)
             type = 1,
             id = abilityId,
             name = abilityName,
+            toggle = true,
             icon = "LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
             dur = 0,
             starts = 1,
@@ -156,7 +157,7 @@ function SpellCastBuffs.StealthStateChanged(eventCode, unitTag, stealthState)
             restart = true,
             iconNum = 0,
         }
-    -- Add invisible icon if we are invisible
+        -- Add invisible icon if we are invisible
     elseif stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED then
         local abilityId = 20309
         local abilityName = Abilities.Innate_Hidden
@@ -166,6 +167,7 @@ function SpellCastBuffs.StealthStateChanged(eventCode, unitTag, stealthState)
             type = 1,
             id = abilityId,
             name = abilityName,
+            toggle = true,
             icon = "LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
             dur = 0,
             starts = 1,

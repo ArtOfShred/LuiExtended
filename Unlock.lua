@@ -27,9 +27,9 @@ local defaultPanels = {
     [ZO_PlayerToPlayerAreaPromptContainer] = { GetString(SI_LUIE_DEFAULT_FRAME_PLAYER_INTERACTION), nil, 30 },
     [ZO_SynergyTopLevelContainer] = { GetString(SI_LUIE_DEFAULT_FRAME_SYNERGY) },
     [ZO_AlertTextNotification] = { GetString(SI_LUIE_DEFAULT_FRAME_ALERTS), 600, 56 },
-    [ZO_CompassFrame] = { GetString(SI_LUIE_DEFAULT_FRAME_COMPASS) }, -- Needs custom template applied
+    [ZO_CompassFrame] = { GetString(SI_LUIE_DEFAULT_FRAME_COMPASS) },                            -- Needs custom template applied
     [ZO_ActiveCombatTipsTip] = { GetString(SI_LUIE_DEFAULT_FRAME_ACTIVE_COMBAT_TIPS), 250, 20 }, -- Needs custom template applied
-    [ZO_PlayerProgress] = { GetString(SI_LUIE_DEFAULT_FRAME_PLAYER_PROGRESS) }, -- Needs custom template applied
+    [ZO_PlayerProgress] = { GetString(SI_LUIE_DEFAULT_FRAME_PLAYER_PROGRESS) },                  -- Needs custom template applied
     --[ZO_CenterScreenAnnounce] = { GetString(SI_LUIE_DEFAULT_FRAME_CSA), nil, 100 }, -- Needs custom template applied
 }
 
@@ -41,9 +41,9 @@ local g_framesUnlocked = false
 -- Concept for template replacement function thanks to Phinix (Azurah).
 local function ReplaceDefaultTemplate(object, functionName, frameName)
     local zos_function = object[functionName]
-    object[functionName] = function(self)
+    object[functionName] = function (self)
         local result = zos_function(self) -- Get Original Function results
-        local frame = LUIE.SV[frameName] -- Get LUIE Saved Frame Data
+        local frame = LUIE.SV[frameName]  -- Get LUIE Saved Frame Data
         -- Apply positional setup
         if frame then
             local x = LUIE.SV[frameName][1]
@@ -162,7 +162,7 @@ function LUIE.SetupElementMover(state)
             tlw.preview:SetAnchorFill()
             tlw.previewLabel = UI.Label(tlw.preview, { CENTER, CENTER }, nil, nil, "ZoFontGameMedium", v[1], false)
             -- Setup handlers to set the custom position SV and call LUIE.SetElementPosition() to apply this positioning
-            tlw:SetHandler("OnMoveStop", function(self)
+            tlw:SetHandler("OnMoveStop", function (self)
                 LUIE.SV[self.customPositionAttr] = { self:GetLeft(), self:GetTop() }
                 LUIE.SetElementPosition()
             end)

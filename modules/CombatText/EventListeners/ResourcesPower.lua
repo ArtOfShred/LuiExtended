@@ -11,7 +11,7 @@ local resourceType = LUIE.Data.CombatTextConstants.resourceType
 
 function CombatTextResourcesPowerEventListener:New()
     local obj = LUIE.CombatTextEventListener:New()
-    obj:RegisterForEvent(EVENT_POWER_UPDATE, function(...)
+    obj:RegisterForEvent(EVENT_POWER_UPDATE, function (...)
         self:OnEvent(...)
     end)
     self.powerInfo = {

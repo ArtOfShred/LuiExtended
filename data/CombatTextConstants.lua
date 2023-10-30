@@ -3,7 +3,12 @@
     License: The MIT License (MIT)
 --]]
 
-LUIE.Data.CombatTextConstants = {
+-- CombatTextConstants namespace
+if LUIE.Data.CombatTextConstants == nil then
+    LUIE.Data.CombatTextConstants = {}
+end
+
+local CombatTextConstants = {
     -- Damage & Healing
     isDamage = {
         [ACTION_RESULT_DAMAGE] = true,
@@ -167,3 +172,5 @@ LUIE.Data.CombatTextConstants = {
     directionType = { "up", "down" },
     iconSide = { "none", "left", "right" },
 }
+
+LUIE.Data.CombatTextConstants = CombatTextConstants

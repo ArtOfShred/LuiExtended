@@ -2,7 +2,9 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
-
+if LUIE.Data.Abilities == nil then
+    LUIE.Data.Abilities = {}
+end
 -- AbilityTables namespace
 local AbilityTables = {
     -- ---------------------------------------------------
@@ -24,36 +26,36 @@ local AbilityTables = {
 
     -- Simulated Auras
     Innate_Recall = 6811,
-    Innate_Recall_Penalty = GetString(SI_LUIE_SKILL_RECALL_PENALTY), -- Recall Penalty
+    Innate_Recall_Penalty = GetString(SI_LUIE_SKILL_RECALL_PENALTY),               -- Recall Penalty
     Innate_Resurrection_Immunity = GetString(SI_LUIE_SKILL_RESURRECTION_IMMUNITY), -- Resurrection Immunity
     Innate_Soul_Gem_Resurrection = GetString(SI_LUIE_SKILL_SOUL_GEM_RESURRECTION), -- Soul Gem Resurrection
 
     -- Player Basic
     Innate_Immobilize_Immunity = 29721,
-    Innate_Stun = 14756, -- Stun
-    Innate_Disguise = 31287, -- Disguise
+    Innate_Stun = 14756,      -- Stun
+    Innate_Disguise = 31287,  -- Disguise
     Innate_Disguised = 23553, -- Disguised
-    Innate_Sneak = 20299, -- Sneak
-    Innate_Hidden = 20309, -- Hidden
+    Innate_Sneak = 20299,     -- Sneak
+    Innate_Hidden = 20309,    -- Hidden
     Innate_Mounted = GetString(SI_LUIE_SKILL_MOUNTED),
     Innate_Mounted_Passenger = GetString(SI_LUIE_SKILL_MOUNTED_PASSENGER),
     Innate_Vanity_Pet = GetString(SI_COLLECTIBLECATEGORYTYPE3),
     Innate_Assistant = GetString(SI_COLLECTIBLECATEGORYTYPE8),
     --Innate_Sprint                     = 15614, -- Sprint
     --Innate_Gallop                     = GetString(SI_LUIE_SKILL_MOUNT_SPRINT), -- Gallop
-    Innate_Brace = 29761, -- Brace
-    Innate_Block = 2890, -- Block
-    Innate_Bash = 21970, -- Bash
-    Innate_Bash_Stun = 21971, -- Bash Stun
-    Innate_Fall_Damage = GetString(SI_LUIE_SKILL_FALL_DAMAGE), -- Fall Damage
-    Innate_Absorbing_Skyshard = GetString(SI_LUIE_SKILL_ABSORBING_SKYSHARD), -- Absorbing Skyshard
-    Innate_Receiving_Boon = GetString(SI_LUIE_SKILL_RECEIVING_BOON), -- Receiving Boon
-    Innate_Ayleid_Well = GetString(SI_LUIE_SKILL_AYLEID_WELL), -- Ayleid Well
+    Innate_Brace = 29761,                                                          -- Brace
+    Innate_Block = 2890,                                                           -- Block
+    Innate_Bash = 21970,                                                           -- Bash
+    Innate_Bash_Stun = 21971,                                                      -- Bash Stun
+    Innate_Fall_Damage = GetString(SI_LUIE_SKILL_FALL_DAMAGE),                     -- Fall Damage
+    Innate_Absorbing_Skyshard = GetString(SI_LUIE_SKILL_ABSORBING_SKYSHARD),       -- Absorbing Skyshard
+    Innate_Receiving_Boon = GetString(SI_LUIE_SKILL_RECEIVING_BOON),               -- Receiving Boon
+    Innate_Ayleid_Well = GetString(SI_LUIE_SKILL_AYLEID_WELL),                     -- Ayleid Well
     Innate_Ayleid_Well_Fortified = GetString(SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED), -- Ayleid Well
     Innate_Aetherial_Well = 151928,
-    Innate_CC_Immunity = 38117, -- CC Immunity
-    Innate_Stagger = 1834, -- Stagger
-    Innate_Revive = 5823, -- Revive
+    Innate_CC_Immunity = 38117,                                                    -- CC Immunity
+    Innate_Stagger = 1834,                                                         -- Stagger
+    Innate_Revive = 5823,                                                          -- Revive
 
     Innate_Create_Station = GetString(SI_LUIE_SKILL_CRAFTING_STATION),
     Innate_Summon = 29585,
@@ -99,33 +101,33 @@ local AbilityTables = {
     Innate_Siege_of_Cyrodiil_Distinction = GetItemLinkName("|H0:item:167303:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
 
     -- World
-    Innate_Drop_Anchor = 86717, -- Drop Anchor
+    Innate_Drop_Anchor = 86717,                                -- Drop Anchor
     Innate_Anchor_Drop = GetString(SI_LUIE_SKILL_ANCHOR_DROP), -- Anchor Drop
-    Innate_Power_of_the_Daedra = 46690, -- Power of the Daedra
+    Innate_Power_of_the_Daedra = 46690,                        -- Power of the Daedra
 
     -- Weapon Attacks
-    Skill_Light_Attack = 39088, -- Light Attack
-    Skill_Medium_Attack = 39097, -- Medium Attack
-    Skill_Heavy_Attack = 39101, -- Heavy Attack
+    Skill_Light_Attack = 39088,             -- Light Attack
+    Skill_Medium_Attack = 39097,            -- Medium Attack
+    Skill_Heavy_Attack = 39101,             -- Heavy Attack
 
-    Skill_Light_Attack_Unarmed = 23604, -- Light Attack (Unarmed)
-    Skill_Heavy_Attack_Unarmed = 18429, -- Heavy Attack (Unarmed)
+    Skill_Light_Attack_Unarmed = 23604,     -- Light Attack (Unarmed)
+    Skill_Heavy_Attack_Unarmed = 18429,     -- Heavy Attack (Unarmed)
 
-    Skill_Light_Attack_Two_Handed = 16037, -- Light Attack (Two Handed)
-    Skill_Heavy_Attack_Two_Handed = 16041, -- Heavy Attack (Two Handed)
-    Skill_Light_Attack_One_Handed = 15435, -- Light Attack (One Handed)
-    Skill_Heavy_Attack_One_Handed = 15279, -- Heavy Attack (One Handed)
-    Skill_Light_Attack_Dual_Wield = 16499, -- Light Attack (Dual Wield)
-    Skill_Heavy_Attack_Dual_Wield = 16420, -- Heavy Attack (Dual Wield)
-    Skill_Light_Attack_Bow = 16688, -- Light Attack (Bow)
-    Skill_Heavy_Attack_Bow = 16691, -- Heavy Attack (Bow)
+    Skill_Light_Attack_Two_Handed = 16037,  -- Light Attack (Two Handed)
+    Skill_Heavy_Attack_Two_Handed = 16041,  -- Heavy Attack (Two Handed)
+    Skill_Light_Attack_One_Handed = 15435,  -- Light Attack (One Handed)
+    Skill_Heavy_Attack_One_Handed = 15279,  -- Heavy Attack (One Handed)
+    Skill_Light_Attack_Dual_Wield = 16499,  -- Light Attack (Dual Wield)
+    Skill_Heavy_Attack_Dual_Wield = 16420,  -- Heavy Attack (Dual Wield)
+    Skill_Light_Attack_Bow = 16688,         -- Light Attack (Bow)
+    Skill_Heavy_Attack_Bow = 16691,         -- Heavy Attack (Bow)
 
-    Skill_Light_Attack_Ice = 16277, -- Light Attack (Ice)
-    Skill_Heavy_Attack_Ice = 16261, -- Heavy Attack (Ice)
-    Skill_Light_Attack_Inferno = 16165, -- Light Attack (Inferno)
-    Skill_Heavy_Attack_Inferno = 15383, -- Heavy Attack (Inferno)
-    Skill_Light_Attack_Lightning = 18350, -- Light Attack (Lightning)
-    Skill_Heavy_Attack_Lightning = 18396, -- Heavy Attack (Lightning)
+    Skill_Light_Attack_Ice = 16277,         -- Light Attack (Ice)
+    Skill_Heavy_Attack_Ice = 16261,         -- Heavy Attack (Ice)
+    Skill_Light_Attack_Inferno = 16165,     -- Light Attack (Inferno)
+    Skill_Heavy_Attack_Inferno = 15383,     -- Heavy Attack (Inferno)
+    Skill_Light_Attack_Lightning = 18350,   -- Light Attack (Lightning)
+    Skill_Heavy_Attack_Lightning = 18396,   -- Heavy Attack (Lightning)
 
     Skill_Light_Attack_Restoration = 16145, -- Light Attack (Restoration)
     Skill_Heavy_Attack_Restoration = 16212, -- Heavy Attack (Restoration)
@@ -133,8 +135,8 @@ local AbilityTables = {
     Skill_Light_Attack_Volendrung = 116762, -- Light Attack (Volendrung)
     Skill_Heavy_Attack_Volendrung = 116763, -- Heavy Attack (Volendrung)
 
-    Skill_Light_Attack_Werewolf = 32464, -- Light Attack (Werewolf)
-    Skill_Heavy_Attack_Werewolf = 32477, -- Heavy Attack (Werewolf)
+    Skill_Light_Attack_Werewolf = 32464,    -- Light Attack (Werewolf)
+    Skill_Heavy_Attack_Werewolf = 32477,    -- Heavy Attack (Werewolf)
 
     -- ---------------------------------------------------
     -- COMSUMABLES & ITEMS -------------------------------
@@ -194,10 +196,10 @@ local AbilityTables = {
     Drink_Crown_Vigorous_Tincture = GetItemLinkName("|H0:item:124678:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
 
     -- Experience Consumables
-    Experience_Psijic_Ambrosia = GetItemLinkName("|H0:item:64221:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Psijic Ambrosia
-    Experience_Aetherial_Ambrosia = GetItemLinkName("|H0:item:120076:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Aetherial Ambrosia
-    Experience_Mythic_Ambrosia = GetItemLinkName("|H0:item:115027:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Mythic Aetherial Ambrosia
-    Experience_Crown_Scroll = GetItemLinkName("|H0:item:64537:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h"), -- Crown Experience Scroll
+    Experience_Psijic_Ambrosia = GetItemLinkName("|H0:item:64221:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),       -- Psijic Ambrosia
+    Experience_Aetherial_Ambrosia = GetItemLinkName("|H0:item:120076:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),   -- Aetherial Ambrosia
+    Experience_Mythic_Ambrosia = GetItemLinkName("|H0:item:115027:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),      -- Mythic Aetherial Ambrosia
+    Experience_Crown_Scroll = GetItemLinkName("|H0:item:64537:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h"),         -- Crown Experience Scroll
     Experience_Crown_Crate_Scroll_1 = GetItemLinkName("|H0:item:94439:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h"), -- Gold Coast Experience Scroll
     Experience_Crown_Crate_Scroll_2 = GetItemLinkName("|H0:item:94440:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h"), -- Major Gold Coast Experience Scroll
     Experience_Crown_Crate_Scroll_3 = GetItemLinkName("|H0:item:94441:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h"), -- Grand Gold Coast Experience Scroll
@@ -212,13 +214,13 @@ local AbilityTables = {
     Experience_Alliance_War_Torte_3 = GetItemLinkName("|H0:item:171432:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h"), -- White-Gold War Torte
 
     -- Misc Consumables
-    Consumable_Festival_Mints = GetItemLinkName("|H0:item:112442:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- High Hrothgar Festival Mints
-    Consumable_Sailors_Grog = GetItemLinkName("|H0:item:112441:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Sailor's Warning Festival Grog
+    Consumable_Festival_Mints = GetItemLinkName("|H0:item:112442:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),      -- High Hrothgar Festival Mints
+    Consumable_Sailors_Grog = GetItemLinkName("|H0:item:112441:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),        -- Sailor's Warning Festival Grog
     Consumable_Sparkwreath_Dazzler = GetItemLinkName("|H0:item:114946:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Sparkwreath Dazzler
-    Consumable_Plume_Dazzler = GetItemLinkName("|H0:item:114947:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Plume Dazzler
-    Consumable_Spiral_Dazzler = GetItemLinkName("|H0:item:114948:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Spiral Dazzler
-    Skill_Sparkly_Hat_Dazzler = GetItemLinkName("|H0:item:120891:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Sparkly Hat Dazzler
-    Consumable_Revelry_Pie = GetItemLinkName("|H0:item:147300:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Revelry Pie
+    Consumable_Plume_Dazzler = GetItemLinkName("|H0:item:114947:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),       -- Plume Dazzler
+    Consumable_Spiral_Dazzler = GetItemLinkName("|H0:item:114948:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),      -- Spiral Dazzler
+    Skill_Sparkly_Hat_Dazzler = GetItemLinkName("|H0:item:120891:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),      -- Sparkly Hat Dazzler
+    Consumable_Revelry_Pie = GetItemLinkName("|H0:item:147300:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),         -- Revelry Pie
 
     -- Mementos
     Memento_Almalexias_Lantern = GetCollectibleName(341),
@@ -626,15 +628,15 @@ local AbilityTables = {
     Skill_Flaming_Oil = 15774,
     Skill_Battering_Ram = 15197,
 
-    Skill_Siege_Repair_Kit = GetItemLinkName("|H0:item:27112:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h"), -- Siege Repair Kit
-    Skill_Keep_Wall_Repair_Kit = GetItemLinkName("|H0:item:27138:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h"), -- Keep Wall Masonry Repair Kit
-    Skill_Keep_Door_Repair_Kit = GetItemLinkName("|H0:item:27962:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h"), -- Keep Door Woodwork Repair Kit
-    Skill_Bridge_Repair_Kit = GetItemLinkName("|H0:item:142133:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h"), -- Bridge and Milegate Repair Kit
+    Skill_Siege_Repair_Kit = GetItemLinkName("|H0:item:27112:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h"),          -- Siege Repair Kit
+    Skill_Keep_Wall_Repair_Kit = GetItemLinkName("|H0:item:27138:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h"),      -- Keep Wall Masonry Repair Kit
+    Skill_Keep_Door_Repair_Kit = GetItemLinkName("|H0:item:27962:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h"),      -- Keep Door Woodwork Repair Kit
+    Skill_Bridge_Repair_Kit = GetItemLinkName("|H0:item:142133:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h"),        -- Bridge and Milegate Repair Kit
     Skill_Practice_Siege_Repair_Kit = GetItemLinkName("|H0:item:43056:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h"), -- Practice Siege Repair Kit
 
-    Skill_Pact_Forward_Camp = GetItemLinkName("|H0:item:29534:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Pact Foward Camp
-    Skill_Dominion_Forward_Camp = GetItemLinkName("|H0:item:29533:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Dominion Forward Camp
-    Skill_Covenant_Forward_Camp = GetItemLinkName("|H0:item:29535:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Covenant Forward Camp
+    Skill_Pact_Forward_Camp = GetItemLinkName("|H0:item:29534:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),          -- Pact Foward Camp
+    Skill_Dominion_Forward_Camp = GetItemLinkName("|H0:item:29533:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),      -- Dominion Forward Camp
+    Skill_Covenant_Forward_Camp = GetItemLinkName("|H0:item:29535:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),      -- Covenant Forward Camp
 
     Skill_Razor_Armor = 36304,
 
@@ -1140,21 +1142,6 @@ local AbilityTables = {
     Skill_Lifting_Strike = 109834,
     Skill_Frenzied_Pummeling = 118489,
     Skill_Frozen_Aura = 109806,
-
-    -- ---------------------------------------------------
-    -- OTHER EFFECTS -------------------------------------
-    -- ---------------------------------------------------
-
-    -- Sanctum Ophidia
-    Effect_Magicka_Bomb = 59036,
-
-    -- vMOL Debuffs
-    Effect_Colossal_Mark = 75672,
-    Effect_Shattered = 75071,
-    Effect_Shattered2 = 73250,
-    Effect_Grip_of_Lorkaj = 57517,
-    Effect_Unstable_Void = 74488,
-    Effect_Curse_Duration = 25000,
 
     -- ---------------------------------------------------
     -- KEEP UPGRADE --------------------------------------

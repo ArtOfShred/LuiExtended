@@ -251,15 +251,15 @@ CombatText.Defaults = {
         death = { 1, 0, 0, 1 },
 
         -- Points
-        pointsAlliance = { 0.235294, 0.784314, 0.313725, 1 }, --RGB(60, 200, 80)
+        pointsAlliance = { 0.235294, 0.784314, 0.313725, 1 },   --RGB(60, 200, 80)
         pointsExperience = { 0.588235, 0.705882, 0.862745, 1 }, --RGB(150, 180, 220)
-        pointsChampion = { 0.784314, 0.784314, 0.627451, 1 }, --RGB(200, 200, 160)
+        pointsChampion = { 0.784314, 0.784314, 0.627451, 1 },   --RGB(200, 200, 160)
 
         -- Resources
-        lowHealth = { 0.901961, 0.196078, 0.098039, 1 }, --RGB(230, 50, 25)
-        lowMagicka = { 0.137255, 0.588235, 0.784314, 1 }, --RGB(35, 150, 200)
-        lowStamina = { 0.235294, 0.784314, 0.313725, 1 }, --RGB(60, 200, 80)
-        ultimateReady = { 0.862745, 1, 0.313725, 1 }, --RGB(220, 255, 80)
+        lowHealth = { 0.901961, 0.196078, 0.098039, 1 },   --RGB(230, 50, 25)
+        lowMagicka = { 0.137255, 0.588235, 0.784314, 1 },  --RGB(35, 150, 200)
+        lowStamina = { 0.235294, 0.784314, 0.313725, 1 },  --RGB(60, 200, 80)
+        ultimateReady = { 0.862745, 1, 0.313725, 1 },      --RGB(220, 255, 80)
         potionReady = { 0.470588, 0.156863, 0.745098, 1 }, --RGB(120, 40, 190)
     },
     -- Format defaults
@@ -499,14 +499,16 @@ function CombatText.Initialize(enabled)
     if not LUIESV.Default[GetDisplayName()]["$AccountWide"].AdjustVarsCT then
         LUIESV.Default[GetDisplayName()]["$AccountWide"].AdjustVarsCT = 0
     end
-    if LUIESV.Default[GetDisplayName()]["$AccountWide"].AdjustVarsCT < 1 then
-        -- Blacklist sneak drain by default
-        CombatText.SV.blacklist[20301] = true
-    end
     if LUIESV.Default[GetDisplayName()]["$AccountWide"].AdjustVarsCT < 2 then
         -- Set color for bleed damage to red
         CombatText.SV.colors.damage[DAMAGE_TYPE_BLEED] = CombatText.Defaults.colors.damage[DAMAGE_TYPE_BLEED]
     end
+    if LUIESV.Default[GetDisplayName()]["$AccountWide"].AdjustVarsCT < 3 then
+        -- Remove sneak drain from CT blacklist since it is no longer in the game
+        if CombatText.SV.blacklist[20301] then
+            CombatText.SV.blacklist[20301] = nil
+        end
+    end
     -- Increment so this doesn't occur again.
-    LUIESV.Default[GetDisplayName()]["$AccountWide"].AdjustVarsCT = 2
+    LUIESV.Default[GetDisplayName()]["$AccountWide"].AdjustVarsCT = 3
 end

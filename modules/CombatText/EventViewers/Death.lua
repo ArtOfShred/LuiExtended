@@ -13,7 +13,7 @@ local zo_strformat = zo_strformat
 
 function CombatTextDeathViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
-    obj:RegisterCallback(eventType.DEATH, function(...)
+    obj:RegisterCallback(eventType.DEATH, function (...)
         self:OnEvent(...)
     end)
     self.locationOffset = 0 -- Simple way to avoid overlapping. When number of active notes is back to 0, the offset is also reset
@@ -58,7 +58,7 @@ function CombatTextDeathViewer:OnEvent(unitTag)
     animation:Play()
 
     --Add items back into pool after animation
-    zo_callLater(function()
+    zo_callLater(function ()
         self.poolManager:ReleasePoolObject(poolTypes.CONTROL, controlPoolKey)
         self.poolManager:ReleasePoolObject(animationPoolType, animationPoolKey)
         self.activePoints = self.activePoints - 1

@@ -27,6 +27,9 @@ local colors = {
 --local fakeControl   = {}
 
 InfoPanel.Enabled = false
+InfoPanel.Defaults = {
+    ClockFormat = "HH:m:s",
+}
 InfoPanel.SV = nil
 InfoPanel.panelUnlocked = false
 
@@ -89,27 +92,6 @@ local uiBags = {
     },
 }
 
-local delayBuffer = {}
--- Delay Buffer
-local function DelayBuffer(key, buffer, currentTime)
-    if key == nil then
-        return
-    end
-
-    local buffer = buffer or 10
-    local now = currentTime or GetFrameTimeMilliseconds()
-
-    if delayBuffer[key] == nil then
-        delayBuffer[key] = now
-        return true -- For first call of DelayBuffer we should return true
-    end
-    local eval = (now - delayBuffer[key]) >= buffer
-    if eval then
-        delayBuffer[key] = now
-    end
-    return eval
-end
-
 local panelFragment
 
 function InfoPanel.SetDisplayOnMap()
@@ -124,7 +106,7 @@ local function CreateUIControls()
     uiPanel = UI.TopLevel(nil, { 240, 48 })
     uiPanel:SetDrawLayer(DL_BACKGROUND)
     uiPanel:SetDrawTier(DT_LOW)
-    uiPanel:SetDrawLevel(1)
+    uiPanel:SetDrawLevel(DL_CONTROLS)
     --uiPanel.bg = UI.Backdrop( uiPanel, "fill", nil, nil, nil, false )
 
     panelFragment = ZO_HUDFadeSceneFragment:New(uiPanel, 0, 0)
@@ -193,116 +175,101 @@ function InfoPanel.RearrangePanel()
     if not InfoPanel.Enabled then
         return
     end
-
     -- Reset scale of panel
     uiPanel:SetScale(1)
-
     -- Top row
-    local anchor = nil
-    local size = 0
-
+    local anchorTop = nil -- Rename the variable to anchorTop
+    local sizeTop = 0     -- Rename the variable to sizeTop
     -- Latency
     if InfoPanel.SV.HideLatency then
         uiLatency.control:SetHidden(true)
     else
         uiLatency.control:ClearAnchors()
-        uiLatency.control:SetAnchor(LEFT, anchor or uiTopRow, (anchor == nil) and LEFT or RIGHT, 0, 0)
+        uiLatency.control:SetAnchor(LEFT, anchorTop or uiTopRow, (anchorTop == nil) and LEFT or RIGHT, 0, 0)
         uiLatency.control:SetHidden(false)
-        size = size + uiLatency.control:GetWidth()
-        anchor = uiLatency.control
+        sizeTop = sizeTop + uiLatency.control:GetWidth() -- Update the variable name
+        anchorTop = uiLatency.control                    -- Update the variable name
     end
-
     -- FPS
     if InfoPanel.SV.HideFPS then
         uiFps.control:SetHidden(true)
     else
         uiFps.control:ClearAnchors()
-        uiFps.control:SetAnchor(LEFT, anchor or uiTopRow, (anchor == nil) and LEFT or RIGHT, 0, 0)
+        uiFps.control:SetAnchor(LEFT, anchorTop or uiTopRow, (anchorTop == nil) and LEFT or RIGHT, 0, 0)
         uiFps.control:SetHidden(false)
-        size = size + uiFps.control:GetWidth()
-        anchor = uiFps.control
+        sizeTop = sizeTop + uiFps.control:GetWidth() -- Update the variable name
+        anchorTop = uiFps.control                    -- Update the variable name
     end
-
     -- Time
     if InfoPanel.SV.HideClock then
         uiClock.control:SetHidden(true)
     else
         uiClock.control:ClearAnchors()
-        uiClock.control:SetAnchor(LEFT, anchor or uiTopRow, (anchor == nil) and LEFT or RIGHT, 0, 0)
+        uiClock.control:SetAnchor(LEFT, anchorTop or uiTopRow, (anchorTop == nil) and LEFT or RIGHT, 0, 0)
         uiClock.control:SetHidden(false)
-        size = size + uiClock.control:GetWidth()
-        anchor = uiClock.control
+        sizeTop = sizeTop + uiClock.control:GetWidth() -- Update the variable name
+        anchorTop = uiClock.control                    -- Update the variable name
     end
-
     -- Soulgems
     if InfoPanel.SV.HideGems then
         uiGems.control:SetHidden(true)
     else
         uiGems.control:ClearAnchors()
-        uiGems.control:SetAnchor(LEFT, anchor or uiBotRow, (anchor == nil) and LEFT or RIGHT, 0, 0)
+        uiGems.control:SetAnchor(LEFT, anchorTop or uiBotRow, (anchorTop == nil) and LEFT or RIGHT, 0, 0)
         uiGems.control:SetHidden(false)
-        size = size + uiGems.control:GetWidth()
-        anchor = uiGems.control
+        sizeTop = sizeTop + uiGems.control:GetWidth() -- Update the variable name
+        anchorTop = uiGems.control                    -- Update the variable name
     end
-
     -- Set row size
-    uiTopRow:SetWidth((size > 0) and size or 10)
-
+    uiTopRow:SetWidth((sizeTop > 0) and sizeTop or 10) -- Update the variable name
     -- Bottom row
-    local anchor = nil
-    local size = 0
-
+    local anchorBot = nil                              -- Rename the variable to anchorBot
+    local sizeBot = 0                                  -- Rename the variable to sizeBot
     -- Feed timer
     if InfoPanel.SV.HideMountFeed or uiFeedTimer.hideLocally then
         uiFeedTimer.control:SetHidden(true)
-        size = size - (uiFeedTimer.control:GetWidth() * 0.15)
+        sizeBot = sizeBot - (uiFeedTimer.control:GetWidth() * 0.15) -- Update the variable name
     else
         uiFeedTimer.control:ClearAnchors()
-        uiFeedTimer.control:SetAnchor(LEFT, anchor or uiBotRow, (anchor == nil) and LEFT or RIGHT, 0, 0)
+        uiFeedTimer.control:SetAnchor(LEFT, anchorBot or uiBotRow, (anchorBot == nil) and LEFT or RIGHT, 0, 0)
         uiFeedTimer.control:SetHidden(false)
-        size = size + uiFeedTimer.control:GetWidth()
-        anchor = uiFeedTimer.control
+        sizeBot = sizeBot + uiFeedTimer.control:GetWidth() -- Update the variable name
+        anchorBot = uiFeedTimer.control                    -- Update the variable name
     end
-
     -- Durability
     if InfoPanel.SV.HideArmour then
         uiArmour.control:SetHidden(true)
     else
         uiArmour.control:ClearAnchors()
-        uiArmour.control:SetAnchor(LEFT, anchor or uiBotRow, (anchor == nil) and LEFT or RIGHT, 0, 0)
+        uiArmour.control:SetAnchor(LEFT, anchorBot or uiBotRow, (anchorBot == nil) and LEFT or RIGHT, 0, 0)
         uiArmour.control:SetHidden(false)
-        size = size + uiArmour.control:GetWidth()
-        anchor = uiArmour.control
+        sizeBot = sizeBot + uiArmour.control:GetWidth() -- Update the variable name
+        anchorBot = uiArmour.control                    -- Update the variable name
     end
-
     -- Charges
     if InfoPanel.SV.HideWeapons then
         uiWeapons.control:SetHidden(true)
     else
         uiWeapons.control:ClearAnchors()
-        uiWeapons.control:SetAnchor(LEFT, anchor or uiBotRow, (anchor == nil) and LEFT or RIGHT, 0, 0)
+        uiWeapons.control:SetAnchor(LEFT, anchorBot or uiBotRow, (anchorBot == nil) and LEFT or RIGHT, 0, 0)
         uiWeapons.control:SetHidden(false)
-        size = size + uiWeapons.control:GetWidth()
-        anchor = uiWeapons.control
+        sizeBot = sizeBot + uiWeapons.control:GetWidth() -- Update the variable name
+        anchorBot = uiWeapons.control                    -- Update the variable name
     end
-
     -- Bags
     if InfoPanel.SV.HideBags then
         uiBags.control:SetHidden(true)
     else
         uiBags.control:ClearAnchors()
-        uiBags.control:SetAnchor(LEFT, anchor or uiBotRow, (anchor == nil) and LEFT or RIGHT, 0, 0)
+        uiBags.control:SetAnchor(LEFT, anchorBot or uiBotRow, (anchorBot == nil) and LEFT or RIGHT, 0, 0)
         uiBags.control:SetHidden(false)
-        size = size + uiBags.control:GetWidth()
-        anchor = uiBags.control
+        sizeBot = sizeBot + uiBags.control:GetWidth() -- Update the variable name
+        anchorBot = uiBags.control                    -- Update the variable name
     end
-
     -- Set row size
-    uiBotRow:SetWidth((size > 0) and size or 10)
-
+    uiBotRow:SetWidth((sizeBot > 0) and sizeBot or 10) -- Update the variable name
     -- Set size of panel
     uiPanel:SetWidth(zo_max(uiTopRow:GetWidth(), uiBotRow:GetWidth(), 39 * 6))
-
     -- Set scale of panel again
     InfoPanel.SetScale()
     uiPanel:SetHidden(false)
@@ -337,7 +304,7 @@ function InfoPanel.Initialize(enabled)
     end
 
     -- Dragging
-    uiPanel.OnMoveStop = function(self)
+    uiPanel.OnMoveStop = function (self)
         InfoPanel.SV.position = { self:GetCenter() }
     end
     uiPanel:SetHandler("OnMoveStop", uiPanel.OnMoveStop)
@@ -442,9 +409,14 @@ function InfoPanel.DoBagUpdate()
     uiGems.label:SetText((fullCount > 9) and fullText or (fullText .. "/" .. emptyCount))
 end
 
+local function FormatClock(clockFormat)
+    local timestring = GetTimeString()
+    return LUIE.CreateTimestamp(timestring, clockFormat)
+end
+
 function InfoPanel.OnUpdate01()
     -- Update time
-    uiClock.label:SetText(GetTimeString())
+    uiClock.label:SetText(FormatClock(InfoPanel.SV.ClockFormat))
 
     -- Update fps
     local fps = GetFramerate()

@@ -2,7 +2,7 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
-local LUIE = LUIE
+
 -- CombatInfo namespace
 LUIE.CombatInfo = {}
 local CombatInfo = LUIE.CombatInfo
@@ -43,6 +43,8 @@ CombatInfo.Defaults = {
     ShowTriggered = true,
     ProcEnableSound = true,
     ProcSoundName = "Death Recap Killing Blow",
+    showMarker = false,
+    markerSize = 26,
     ShowToggled = true,
     ShowToggledUltimate = true,
     BarShowLabel = true, -- Temp Disabled
@@ -76,6 +78,7 @@ CombatInfo.Defaults = {
     CastBarFontSize = 16,
     CastBarGradientC1 = { 0, 47 / 255, 130 / 255 },
     CastBarGradientC2 = { 82 / 255, 215 / 255, 1 },
+    CastBarHeavy = false,
     alerts = {
         toggles = {
             alertEnable = true,
@@ -268,45 +271,44 @@ CombatInfo.Defaults = {
 }
 
 CombatInfo.SV = nil
-CombatInfo.AlertColors = {}
 CombatInfo.CastBarUnlocked = false
 CombatInfo.AlertFrameUnlocked = false
 
-local uiTlw = {} -- GUI
-local castbar = {} -- castbar
-local g_casting = false -- Toggled when casting - prevents additional events from creating a cast bar until finished
-local g_ultimateCost = 0 -- Cost of ultimate Ability in Slot
-local g_ultimateCurrent = 0 -- Current ultimate value
+local uiTlw = {}                                          -- GUI
+local castbar = {}                                        -- castbar
+local g_casting = false                                   -- Toggled when casting - prevents additional events from creating a cast bar until finished
+local g_ultimateCost = 0                                  -- Cost of ultimate Ability in Slot
+local g_ultimateCurrent = 0                               -- Current ultimate value
 local g_ultimateSlot = ACTION_BAR_ULTIMATE_SLOT_INDEX + 1 -- Ultimate slot number
-local g_uiProcAnimation = {} -- Animation for bar slots
-local g_uiCustomToggle = {} -- Toggle slots for bar Slots
-local g_triggeredSlotsFront = {} -- Triggered bar highlight slots
-local g_triggeredSlotsBack = {} -- Triggered bar highlight slots
-local g_triggeredSlotsRemain = {} -- Table of remaining durations on proc abilities
-local g_toggledSlotsBack = {} -- Toggled bar highlight slots
-local g_toggledSlotsFront = {} -- Toggled bar highlight slots
-local g_toggledSlotsRemain = {} -- Table of remaining durations on active abilities
-local g_toggledSlotsStack = {} -- Table of stacks for active abilities
-local g_toggledSlotsPlayer = {} -- Table of abilities that target the player (bar highlight doesn't fade on reticleover change)
-local g_potionUsed = false -- Toggled on when a potion is used to prevent OnSlotsFullUpdate from updating timers.
-local g_barOverrideCI = {} -- Table for storing abilityId's from Effects.BarHighlightOverride that should show as an aura
-local g_barFakeAura = {} -- Table for storing abilityId's that only display a fakeaura
-local g_barDurationOverride = {} -- Table for storing abilitiyId's that ignore ending event
-local g_barNoRemove = {} -- Table of abilities we don't remove from bar highlight
-local g_protectAbilityRemoval = {} -- AbilityId's set to a timestamp here to prevent removal of bar highlight when refreshing ground auras from causing the highlight to fade.
-local g_mineStacks = {} -- Individual AbilityId ground mine stack information
-local g_mineNoTurnOff = {} -- When this variable is true for an abilityId - don't remove the bar highlight for a mine (We we have reticleover target and the mine effect applies on the enemy)
-local g_barFont -- Font for Ability Highlight Label
-local g_potionFont -- Font for Potion Timer Label
-local g_ultimateFont -- Font for Ultimate Percentage Label
-local g_castbarFont -- Font for Castbar Label & Timer
-local g_ProcSound -- Proc Sound
-local g_boundArmamentsPlayed = false -- Specific variable to lockout Bound Armaments/Grim Focus from playing a proc sound at 5 stacks to only once per 5 seconds.
-local g_disableProcSound = {} -- When we play a proc sound from a bar ability changing (like power lash) we put a 3 sec ICD on it so it doesn't spam when mousing on/off a target, etc
-local g_hotbarCategory = GetActiveHotbarCategory() -- Set on initialization and when we swap weapons to determine the current hotbar category
-local g_backbarButtons = {} -- Table to hold backbar buttons
-local g_activeWeaponSwapInProgress = false -- Toggled on when weapon swapping, TODO: maybe not needed
-local g_castbarWorldMapFix = false -- Fix for viewing the World Map changing the player coordinates for some reason
+local g_uiProcAnimation = {}                              -- Animation for bar slots
+local g_uiCustomToggle = {}                               -- Toggle slots for bar Slots
+local g_triggeredSlotsFront = {}                          -- Triggered bar highlight slots
+local g_triggeredSlotsBack = {}                           -- Triggered bar highlight slots
+local g_triggeredSlotsRemain = {}                         -- Table of remaining durations on proc abilities
+local g_toggledSlotsBack = {}                             -- Toggled bar highlight slots
+local g_toggledSlotsFront = {}                            -- Toggled bar highlight slots
+local g_toggledSlotsRemain = {}                           -- Table of remaining durations on active abilities
+local g_toggledSlotsStack = {}                            -- Table of stacks for active abilities
+local g_toggledSlotsPlayer = {}                           -- Table of abilities that target the player (bar highlight doesn't fade on reticleover change)
+local g_potionUsed = false                                -- Toggled on when a potion is used to prevent OnSlotsFullUpdate from updating timers.
+local g_barOverrideCI = {}                                -- Table for storing abilityId's from Effects.BarHighlightOverride that should show as an aura
+local g_barFakeAura = {}                                  -- Table for storing abilityId's that only display a fakeaura
+local g_barDurationOverride = {}                          -- Table for storing abilitiyId's that ignore ending event
+local g_barNoRemove = {}                                  -- Table of abilities we don't remove from bar highlight
+local g_protectAbilityRemoval = {}                        -- AbilityId's set to a timestamp here to prevent removal of bar highlight when refreshing ground auras from causing the highlight to fade.
+local g_mineStacks = {}                                   -- Individual AbilityId ground mine stack information
+local g_mineNoTurnOff = {}                                -- When this variable is true for an abilityId - don't remove the bar highlight for a mine (We we have reticleover target and the mine effect applies on the enemy)
+local g_barFont                                           -- Font for Ability Highlight Label
+local g_potionFont                                        -- Font for Potion Timer Label
+local g_ultimateFont                                      -- Font for Ultimate Percentage Label
+local g_castbarFont                                       -- Font for Castbar Label & Timer
+local g_ProcSound                                         -- Proc Sound
+local g_boundArmamentsPlayed = false                      -- Specific variable to lockout Bound Armaments/Grim Focus from playing a proc sound at 5 stacks to only once per 5 seconds.
+local g_disableProcSound = {}                             -- When we play a proc sound from a bar ability changing (like power lash) we put a 3 sec ICD on it so it doesn't spam when mousing on/off a target, etc
+local g_hotbarCategory = GetActiveHotbarCategory()        -- Set on initialization and when we swap weapons to determine the current hotbar category
+local g_backbarButtons = {}                               -- Table to hold backbar buttons
+local g_activeWeaponSwapInProgress = false                -- Toggled on when weapon swapping, TODO: maybe not needed
+local g_castbarWorldMapFix = false                        -- Fix for viewing the World Map changing the player coordinates for some reason
 
 local ACTION_BAR = ZO_ActionBar1
 local BAR_INDEX_START = 3
@@ -351,6 +353,17 @@ local KEYBOARD_CONSTANTS = {
     abilitySlotOffsetX = 2,
     ultimateSlotOffsetX = 62,
 }
+
+function CombatInfo.SetMarker(...)
+    if CombatInfo.SV.showMarker ~= true then
+        return
+    end
+
+    local LUIE_MARKER = "/LuiExtended/media/combatinfo/floatingicon/redarrow.dds"
+    local _
+    SetFloatingMarkerInfo(MAP_PIN_TYPE_AGGRO, CombatInfo.SV.markerSize, LUIE_MARKER, _, _, _)
+    SetFloatingMarkerGlobalAlpha(1)
+end
 
 local slotsUpdated = {}
 
@@ -408,7 +421,7 @@ function CombatInfo.Initialize(enabled)
     -- if CombatInfo.SV.BarShowLabel == true then
     -- CombatInfo.SV.BarShowLabel = false
     -- end
-
+    CombatInfo.SetMarker()
     CombatInfo.ApplyFont()
     CombatInfo.ApplyProcSound()
 
@@ -514,11 +527,22 @@ function CombatInfo.SetupBackBarIcons(button, flip)
     local slotNum = button.slot.slotNum
     local slotId = GetSlotBoundId(slotNum - BACKBAR_INDEX_OFFSET, hotbarCategory)
 
+    -- Check backbar weapon type
+    local weaponSlot = g_hotbarCategory == HOTBAR_CATEGORY_BACKUP and 4 or 20
+    local weaponType = GetItemWeaponType(BAG_WORN, weaponSlot)
+
+    -- Fix tracking for Staff Backbar
+    if weaponType == WEAPONTYPE_FIRE_STAFF or weaponType == WEAPONTYPE_FROST_STAFF or weaponType == WEAPONTYPE_LIGHTNING_STAFF then
+        if Effects.BarHighlightDestroFix[slotId] and Effects.BarHighlightDestroFix[slotId][weaponType] then
+            slotId = Effects.BarHighlightDestroFix[slotId][weaponType]
+        end
+    end
+
     -- Special case for certain skills, so the proc icon doesn't get stuck.
     local specialCases = {
         [114716] = 46324, -- Crystal Fragments --> Crystal Fragments
-        [20824] = 20816, -- Power Lash --> Flame Lash
-        [35445] = 35441, -- Shadow Image Teleport --> Shadow Image
+        [20824] = 20816,  -- Power Lash --> Flame Lash
+        [35445] = 35441,  -- Shadow Image Teleport --> Shadow Image
         [126659] = 38910, -- Flying Blade --> Flying Blade
     }
 
@@ -540,16 +564,17 @@ function CombatInfo.SetupBackBarIcons(button, flip)
 end
 
 function CombatInfo.handleFlip(slotNum)
-    local desaturate
-    if g_uiCustomToggle[slotNum] then
+    local desaturate = true
+
+    if g_uiCustomToggle and g_uiCustomToggle[slotNum] then
         desaturate = false
+
         if g_uiCustomToggle[slotNum]:IsHidden() then
             CombatInfo.BackbarHideSlot(slotNum)
             desaturate = true
         end
-    else
-        desaturate = true
     end
+
     CombatInfo.ToggleBackbarSaturation(slotNum, desaturate)
 end
 
@@ -561,7 +586,7 @@ end
 function CombatInfo.HookGCD()
     -- Hook to update GCD support
     ---@diagnostic disable-next-line: duplicate-set-field
-    ActionButton.UpdateUsable = function(self)
+    ActionButton.UpdateUsable = function (self)
         local slotnum = self:GetSlot()
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or g_hotbarCategory
         local isGamepad = IsInGamepadPreferredMode()
@@ -589,7 +614,7 @@ function CombatInfo.HookGCD()
 
     -- Hook to update GCD support
     ---@diagnostic disable-next-line: duplicate-set-field
-    ActionButton.UpdateCooldown = function(self, options)
+    ActionButton.UpdateCooldown = function (self, options)
         local slotnum = self:GetSlot()
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or g_hotbarCategory
         local remain, duration, global, globalSlotType = GetSlotCooldownInfo(slotnum, hotbarCategory)
@@ -619,7 +644,7 @@ function CombatInfo.HookGCD()
                     self.cooldown:SetHidden(false)
                 end
 
-                self.slot:SetHandler("OnUpdate", function()
+                self.slot:SetHandler("OnUpdate", function ()
                     self:RefreshCooldown()
                 end)
                 if updateChromaQuickslot then
@@ -760,6 +785,7 @@ function CombatInfo.RegisterCombatInfo()
     eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED)
     eventManager:UnregisterForEvent(moduleName, EVENT_ACTIVE_WEAPON_PAIR_CHANGED)
     eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOT_ABILITY_USED)
     if CombatInfo.SV.UltimateLabelEnabled or CombatInfo.SV.UltimatePctEnabled then
         eventManager:RegisterForEvent(moduleName .. "CombatEvent1", EVENT_COMBAT_EVENT, CombatInfo.OnCombatEvent)
         eventManager:AddFilterForEvent(moduleName .. "CombatEvent1", REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false, REGISTER_FILTER_COMBAT_RESULT, ACTION_RESULT_BLOCKED_DAMAGE)
@@ -784,6 +810,7 @@ function CombatInfo.RegisterCombatInfo()
         eventManager:RegisterForEvent(moduleName, EVENT_END_SOUL_GEM_RESURRECTION, CombatInfo.SoulGemResurrectionEnd)
         eventManager:RegisterForEvent(moduleName, EVENT_GAME_CAMERA_UI_MODE_CHANGED, CombatInfo.OnGameCameraUIModeChanged)
         eventManager:RegisterForEvent(moduleName, EVENT_END_SIEGE_CONTROL, CombatInfo.OnSiegeEnd)
+        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_ABILITY_USED, CombatInfo.OnAbilityUsed)
         --eventManager:RegisterForEvent(moduleName, EVENT_CLIENT_INTERACT_RESULT, CombatInfo.ClientInteractResult)
         --[[counter = 0
         for id, _ in pairs (Effects.CastBreakOnRemoveEvent) do
@@ -1068,6 +1095,13 @@ function CombatInfo.OnSiegeEnd(eventCode)
     if castbar.id == 12256 then
         CombatInfo.StopCastBar()
     end
+end
+
+-- Stops Attack Cast when releasing heavy attacks
+function CombatInfo.OnAbilityUsed(eventCode, actionSlotIndex)
+	if actionSlotIndex == 2 then
+		LUIE.CombatInfo.StopCastBar()
+	end
 end
 
 function CombatInfo.StopCastBar()
@@ -1607,7 +1641,7 @@ function CombatInfo.HideSlot(slotNum, abilityId)
             CombatInfo.ToggleBackbarSaturation(slotNum, CombatInfo.SV.BarDarkUnused)
         end
     end
-    if slotNum == g_ultimateSlot and CombatInfo.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
+    if slotNum == g_ultimateSlot and CombatInfo.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot, g_hotbarCategory) then
         uiUltimate.LabelPct:SetHidden(false)
     end
 end
@@ -1731,13 +1765,13 @@ function CombatInfo.CreateCastBar()
     uiTlw.castBar.previewLabel = UI.Label(uiTlw.castBar.preview, { CENTER, CENTER }, nil, nil, "ZoFontGameMedium", "Cast Bar", false)
 
     -- Callback used to hide anchor coords preview label on movement start
-    local tlwOnMoveStart = function(self)
-        eventManager:RegisterForUpdate(moduleName .. "PreviewMove", 200, function()
+    local tlwOnMoveStart = function (self)
+        eventManager:RegisterForUpdate(moduleName .. "PreviewMove", 200, function ()
             self.preview.anchorLabel:SetText(zo_strformat("<<1>>, <<2>>", self:GetLeft(), self:GetTop()))
         end)
     end
     -- Callback used to save new position of frames
-    local tlwOnMoveStop = function(self)
+    local tlwOnMoveStop = function (self)
         eventManager:UnregisterForUpdate(moduleName .. "PreviewMove")
         CombatInfo.SV.CastbarOffsetX = self:GetLeft()
         CombatInfo.SV.CastbarOffsetY = self:GetTop()
@@ -1798,7 +1832,7 @@ function CombatInfo.CreateCastBar()
 
     castbar.bar.backdrop:SetEdgeTexture("", 8, 2, 2)
     castbar.bar.backdrop:SetDrawLayer(DL_BACKGROUND)
-    castbar.bar.backdrop:SetDrawLevel(1)
+    castbar.bar.backdrop:SetDrawLevel(DL_CONTROLS)
     castbar.bar.bar:SetMinMax(0, 1)
     castbar.bar.backdrop:SetCenterColor((0.1 * 0.50), (0.1 * 0.50), (0.1 * 0.50), 0.75)
     castbar.bar.bar:SetGradientColors(0, 47 / 255, 130 / 255, 1, 82 / 255, 215 / 255, 1, 1)
@@ -2020,18 +2054,7 @@ function CombatInfo.OnCombatEventBreakCast(eventCode, result, isError, abilityNa
 end
 
 local function isValidDamageResult(result)
-    if result == ACTION_RESULT_BLOCKED or
-    result == ACTION_RESULT_BLOCKED_DAMAGE or
-    result == ACTION_RESULT_CRITICAL_DAMAGE or
-    result == ACTION_RESULT_DAMAGE or
-    result == ACTION_RESULT_DAMAGE_SHIELDED or
-    result == ACTION_RESULT_IMMUNE or
-    result == ACTION_RESULT_MISS or
-    result == ACTION_RESULT_PARTIAL_RESIST or
-    result == ACTION_RESULT_REFLECTED or
-    result == ACTION_RESULT_RESIST or
-    result == ACTION_RESULT_WRECKING_DAMAGE or
-    result == ACTION_RESULT_DODGED then
+    if result == ACTION_RESULT_BLOCKED or result == ACTION_RESULT_BLOCKED_DAMAGE or result == ACTION_RESULT_CRITICAL_DAMAGE or result == ACTION_RESULT_DAMAGE or result == ACTION_RESULT_DAMAGE_SHIELDED or result == ACTION_RESULT_IMMUNE or result == ACTION_RESULT_MISS or result == ACTION_RESULT_PARTIAL_RESIST or result == ACTION_RESULT_REFLECTED or result == ACTION_RESULT_RESIST or result == ACTION_RESULT_WRECKING_DAMAGE or result == ACTION_RESULT_DODGED then
         return true
     end
 end
@@ -2068,10 +2091,10 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
 
     -- Bail out past here if the cast bar is disabled or
     if
-        not CombatInfo.SV.CastBarEnable or (
-            (sourceType ~= COMBAT_UNIT_TYPE_PLAYER and not Castbar.CastOverride[abilityId]) -- source isn't the player and the ability is not on the list of abilities to show the cast bar for
-            and (targetType ~= COMBAT_UNIT_TYPE_PLAYER or result ~= ACTION_RESULT_EFFECT_FADED)
-        ) -- target isn't the player with effect faded
+    not CombatInfo.SV.CastBarEnable or (
+        (sourceType ~= COMBAT_UNIT_TYPE_PLAYER and not Castbar.CastOverride[abilityId]) -- source isn't the player and the ability is not on the list of abilities to show the cast bar for
+        and (targetType ~= COMBAT_UNIT_TYPE_PLAYER or result ~= ACTION_RESULT_EFFECT_FADED)
+    )                                                                                   -- target isn't the player with effect faded
     then
         return
     end
@@ -2088,6 +2111,11 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
 
     -- Return if ability not marked as cast or ability is blacklisted
     if not Castbar.IsCast[abilityId] or CombatInfo.SV.blacklist[abilityId] or CombatInfo.SV.blacklist[name] then
+        return
+    end
+
+    -- Don't show heavy attacks if the option is disabled
+    if Castbar.IsHeavy[abilityId] and not CombatInfo.SV.CastBarHeavy then
         return
     end
 
@@ -2181,7 +2209,7 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
 
     -- Fix to lower the duration of the next cast of Profane Symbol quest ability for Scion of the Blood Matron (Vampire)
     if abilityId == 39507 then
-        zo_callLater(function()
+        zo_callLater(function ()
             Castbar.CastDurationFix[39507] = 19500
         end, 5000)
     end
@@ -2334,7 +2362,7 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
         end
     end
 
-    if slotNum < BACKBAR_INDEX_OFFSET and not IsSlotUsed(slotNum) then
+    if slotNum < BACKBAR_INDEX_OFFSET and not IsSlotUsed(slotNum, g_hotbarCategory) then
         return
     end
 
@@ -2342,6 +2370,17 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
     if slotNum > BACKBAR_INDEX_OFFSET then
         local hotbarCategory = g_hotbarCategory == HOTBAR_CATEGORY_BACKUP and HOTBAR_CATEGORY_PRIMARY or HOTBAR_CATEGORY_BACKUP
         ability_id = GetSlotBoundId(slotNum - BACKBAR_INDEX_OFFSET, hotbarCategory)
+
+        -- Check backbar weapon type
+        local weaponSlot = g_hotbarCategory == HOTBAR_CATEGORY_BACKUP and 4 or 20
+        local weaponType = GetItemWeaponType(BAG_WORN, weaponSlot)
+
+        -- Fix tracking for Staff Backbar
+        if weaponType == WEAPONTYPE_FIRE_STAFF or weaponType == WEAPONTYPE_FROST_STAFF or weaponType == WEAPONTYPE_LIGHTNING_STAFF then
+            if Effects.BarHighlightDestroFix[ability_id] and Effects.BarHighlightDestroFix[ability_id][weaponType] then
+                ability_id = Effects.BarHighlightDestroFix[ability_id][weaponType]
+            end
+        end
     end
 
     -- Added this back for now but some abilities might still need updates in the override tables
@@ -2416,7 +2455,7 @@ end
 
 function CombatInfo.InventoryItemUsed()
     g_potionUsed = true
-    zo_callLater(function()
+    zo_callLater(function ()
         g_potionUsed = false
     end, 200)
 end
@@ -2489,10 +2528,10 @@ function CombatInfo.PlayProcAnimations(slotNum)
         local procLoopTimeline = ANIMATION_MANAGER:CreateTimelineFromVirtual("UltimateReadyLoop", procLoopTexture)
         procLoopTimeline.procLoopTexture = procLoopTexture
 
-        procLoopTimeline.onPlay = function(self)
+        procLoopTimeline.onPlay = function (self)
             self.procLoopTexture:SetHidden(false)
         end
-        procLoopTimeline.onStop = function(self)
+        procLoopTimeline.onStop = function (self)
             self.procLoopTexture:SetHidden(true)
         end
 
@@ -2544,7 +2583,7 @@ function CombatInfo.ShowCustomToggle(slotNum)
             actionButton = g_backbarButtons[slotNum]
         end
         local name = "ActionButton" .. slotNum .. "Toggle_LUIE"
-        local window = windowManager:GetControlByName(name) -- Check to see if this frame already exists, don't create it if it does.
+        local window = windowManager:GetControlByName(name, "") -- Check to see if this frame already exists, don't create it if it does.
         if window == nil then
             local toggleFrame = windowManager:CreateControl("$(parent)Toggle_LUIE", actionButton.slot, CT_TEXTURE)
             --toggleFrame.back = UI.Texture(toggleFrame, nil, nil, "/esoui/art/actionbar/actionslot_toggledon.dds")
@@ -2553,7 +2592,7 @@ function CombatInfo.ShowCustomToggle(slotNum)
             toggleFrame:SetTexture("/esoui/art/actionbar/actionslot_toggledon.dds")
             toggleFrame:SetBlendMode(TEX_BLEND_MODE_ADD)
             toggleFrame:SetDrawLayer(DL_BACKGROUND)
-            toggleFrame:SetDrawLevel(0)
+            toggleFrame:SetDrawLevel(DL_BACKGROUND)
             toggleFrame:SetDrawTier(DT_HIGH)
             toggleFrame:SetColor(0.5, 1, 0.5, 1)
             toggleFrame:SetHidden(false)
@@ -2562,7 +2601,7 @@ function CombatInfo.ShowCustomToggle(slotNum)
             toggleFrame.label:SetAnchor(TOPLEFT, actionButton.slot)
             toggleFrame.label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CombatInfo.SV.BarLabelPosition)
             toggleFrame.label:SetDrawLayer(DL_CONTROLS)
-            toggleFrame.label:SetDrawLevel(1)
+            toggleFrame.label:SetDrawLevel(DL_CONTROLS)
             toggleFrame.label:SetDrawTier(DT_HIGH)
             toggleFrame.label:SetColor(unpack(CombatInfo.SV.RemainingTextColoured and colour or { 1, 1, 1, 1 }))
             toggleFrame.label:SetHidden(false)
@@ -2574,7 +2613,7 @@ function CombatInfo.ShowCustomToggle(slotNum)
             --toggleFrame.stack:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 22, -22)
 
             toggleFrame.stack:SetDrawLayer(DL_CONTROLS)
-            toggleFrame.stack:SetDrawLevel(1)
+            toggleFrame.stack:SetDrawLevel(DL_CONTROLS)
             toggleFrame.stack:SetDrawTier(DT_HIGH)
             toggleFrame.stack:SetColor(unpack(CombatInfo.SV.RemainingTextColoured and colour or { 1, 1, 1, 1 }))
             toggleFrame.stack:SetHidden(false)
@@ -2604,7 +2643,7 @@ function CombatInfo.OnPowerUpdatePlayer(eventCode, unitTag, powerIndex, powerTyp
         pct = 100
     end
     -- Update the tooltip only when the slot is used and percentage is enabled
-    if IsSlotUsed(g_ultimateSlot) then
+    if IsSlotUsed(g_ultimateSlot, g_hotbarCategory) then
         if CombatInfo.SV.UltimateLabelEnabled or CombatInfo.SV.UltimatePctEnabled then
             -- Set % value
             if CombatInfo.SV.UltimatePctEnabled then

@@ -21,13 +21,13 @@ function LUIE.InitializeHooksSkillAdvisor()
 
     function SkillsAdvisorSuggestions_Gamepad:Initialize(control)
         ZO_SortFilterList_Gamepad.Initialize(self, control)
-        ZO_ScrollList_AddDataType(self.list, SKILLS_ADVISOR_SUGGESTIONS_DATA, "ZO_SkillsAdvisorSuggestion_Gamepad_SkillRow", 60, function(...)
+        ZO_ScrollList_AddDataType(self.list, SKILLS_ADVISOR_SUGGESTIONS_DATA, "ZO_SkillsAdvisorSuggestion_Gamepad_SkillRow", 60, function (...)
             self:GamepadSingleLineAbilityEntryTemplateSetup(...)
         end)
-        ZO_ScrollList_AddDataType(self.list, SKILLS_ADVISOR_SUGGESTIONS_HEADER_DATA, "ZO_SkillsAdvisorSuggestions_Gamepad_MenuEntryHeader", 50, function(...)
+        ZO_ScrollList_AddDataType(self.list, SKILLS_ADVISOR_SUGGESTIONS_HEADER_DATA, "ZO_SkillsAdvisorSuggestions_Gamepad_MenuEntryHeader", 50, function (...)
             self:SkillsAdvisorSuggestionsTextDisplayTemplateSetup(...)
         end)
-        ZO_ScrollList_AddDataType(self.list, SKILLS_ADVISOR_SUGGESTIONS_TEXT, "ZO_SkillsAdvisorSuggestions_Gamepad_MenuEntryText", 100, function(...)
+        ZO_ScrollList_AddDataType(self.list, SKILLS_ADVISOR_SUGGESTIONS_TEXT, "ZO_SkillsAdvisorSuggestions_Gamepad_MenuEntryText", 100, function (...)
             self:SkillsAdvisorSuggestionsTextDisplayTemplateSetup(...)
         end)
         ZO_ScrollList_SetTypeSelectable(self.list, SKILLS_ADVISOR_SUGGESTIONS_HEADER_DATA, false)
@@ -35,7 +35,7 @@ function LUIE.InitializeHooksSkillAdvisor()
         ZO_ScrollList_SetTypeSelectable(self.list, SKILLS_ADVISOR_SUGGESTIONS_TEXT, false)
 
         SKILLS_ADVISOR_SUGGESTIONS_GAMEPAD_FRAGMENT = ZO_FadeSceneFragment:New(control)
-        SKILLS_ADVISOR_SUGGESTIONS_GAMEPAD_FRAGMENT:RegisterCallback("StateChange", function(oldState, newState)
+        SKILLS_ADVISOR_SUGGESTIONS_GAMEPAD_FRAGMENT:RegisterCallback("StateChange", function (oldState, newState)
             if newState == SCENE_FRAGMENT_SHOWING then
                 self:OnShowing()
             elseif newState == SCENE_FRAGMENT_HIDDEN then
@@ -91,7 +91,7 @@ function LUIE.InitializeHooksSkillAdvisor()
             {
                 name = GetString(SI_GAMEPAD_SELECT_OPTION),
                 keybind = "UI_SHORTCUT_PRIMARY",
-                callback = function()
+                callback = function ()
                     ZO_SKILLS_ADVISOR_SINGLETON:OnRequestSelectSkillLine()
                 end,
             },
@@ -100,7 +100,7 @@ function LUIE.InitializeHooksSkillAdvisor()
                 name = "Gamepad Skill Advisor Previous Category",
                 keybind = "UI_SHORTCUT_LEFT_TRIGGER",
                 ethereal = true,
-                callback = function()
+                callback = function ()
                     if ZO_ScrollList_CanScrollUp(self.list) then
                         ZO_ScrollList_SelectFirstIndexInCategory(self.list, ZO_SCROLL_SELECT_CATEGORY_PREVIOUS)
                         PlaySound(ZO_PARAMETRIC_SCROLL_MOVEMENT_SOUNDS[ZO_PARAMETRIC_MOVEMENT_TYPES.JUMP_PREVIOUS])
@@ -112,7 +112,7 @@ function LUIE.InitializeHooksSkillAdvisor()
                 name = "Gamepad Skill Advisor Next Category",
                 keybind = "UI_SHORTCUT_RIGHT_TRIGGER",
                 ethereal = true,
-                callback = function()
+                callback = function ()
                     if ZO_ScrollList_CanScrollDown(self.list) then
                         ZO_ScrollList_SelectFirstIndexInCategory(self.list, ZO_SCROLL_SELECT_CATEGORY_NEXT)
                         PlaySound(ZO_PARAMETRIC_SCROLL_MOVEMENT_SOUNDS[ZO_PARAMETRIC_MOVEMENT_TYPES.JUMP_NEXT])
@@ -136,10 +136,10 @@ function LUIE.InitializeHooksSkillAdvisor()
                 name = GetString(SI_SKILLS_ADVISOR_GAMEPAD_OPEN_ADVISOR_SETTINGS),
                 keybind = "UI_SHORTCUT_LEFT_STICK",
                 sound = SOUNDS.SKILLS_ADVISOR_SELECT,
-                visible = function()
+                visible = function ()
                     return true
                 end,
-                callback = function()
+                callback = function ()
                     SCENE_MANAGER:Push("gamepad_skills_advisor_build_selection_root")
                 end,
             },
@@ -180,7 +180,7 @@ function LUIE.InitializeHooksSkillAdvisor()
             local icon = GetAbilityIcon(skillProgressionData.abilityId) -- Pull custom ability icon
             local entryData = ZO_GamepadEntryData:New(name, icon)
             entryData.skillProgressionData = skillProgressionData
-            entryData.narrationText = function()
+            entryData.narrationText = function ()
                 local narrations = {}
                 if entryData.headerNarrationText then
                     ZO_AppendNarration(narrations, SCREEN_NARRATION_MANAGER:CreateNarratableObject(entryData.headerNarrationText))
@@ -247,7 +247,6 @@ function LUIE.InitializeHooksSkillAdvisor()
 
     function SkillsAdvisorSuggestions_Gamepad:GamepadSingleLineAbilityEntryTemplateSetup(control, data, selected, reselectingDuringRebuild, enabled, active)
         ZO_SharedGamepadEntry_OnSetup(control, data, selected, reselectingDuringRebuild, enabled, active)
-        ---@diagnostic disable-next-line: undefined-global
         ZO_GamepadSkillEntryTemplate_Setup(control, data, selected, activated, ZO_SKILL_ABILITY_DISPLAY_VIEW)
     end
 

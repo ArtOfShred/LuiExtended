@@ -3,6 +3,10 @@
     License: The MIT License (MIT)
 --]]
 
+if LUIE.Data.Tooltips == nil then
+    LUIE.Data.Tooltips = {}
+end
+
 local zo_strformat = zo_strformat
 
 --Params for GetAbilityDescription
@@ -26,16 +30,16 @@ local csunittag = "player"
 
 -- Local Damagetypes for easy use
 local PhysicalDamage = GetString(SI_DAMAGETYPE2) .. " Damage" -- TODO: Localize
-local FlameDamage = GetString(SI_DAMAGETYPE3) .. " Damage" -- TODO: Localize
-local ShockDamage = GetString(SI_DAMAGETYPE4) .. " Damage" -- TODO: Localize
-local FrostDamage = GetString(SI_DAMAGETYPE6) .. " Damage" -- TODO: Localize
-local MagicDamage = GetString(SI_DAMAGETYPE8) .. " Damage" -- TODO: Localize
+local FlameDamage = GetString(SI_DAMAGETYPE3) .. " Damage"    -- TODO: Localize
+local ShockDamage = GetString(SI_DAMAGETYPE4) .. " Damage"    -- TODO: Localize
+local FrostDamage = GetString(SI_DAMAGETYPE6) .. " Damage"    -- TODO: Localize
+local MagicDamage = GetString(SI_DAMAGETYPE8) .. " Damage"    -- TODO: Localize
 local DiseaseDamage = GetString(SI_DAMAGETYPE10) .. " Damage" -- TODO: Localize
-local PoisonDamage = GetString(SI_DAMAGETYPE11) .. " Damage" -- TODO: Localize
-local BleedDamage = GetString(SI_DAMAGETYPE12) .. " Damage" -- TODO: Localize
-local OblivionDamage = "Oblivion Damage" -- TODO: Localize
+local PoisonDamage = GetString(SI_DAMAGETYPE11) .. " Damage"  -- TODO: Localize
+local BleedDamage = GetString(SI_DAMAGETYPE12) .. " Damage"   -- TODO: Localize
+local OblivionDamage = "Oblivion Damage"                      -- TODO: Localize
 
-LUIE.Data.Tooltips = {
+local Tooltips = {
     ----------------------------------------------------------------
     -- MAJOR / MINOR BUFFS & DEBUFFS -------------------------------
     ----------------------------------------------------------------
@@ -172,7 +176,7 @@ LUIE.Data.Tooltips = {
     Generic_Reduce_Physical_Spell_Resist_No_Dur = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_TP),
     Generic_Reduce_Physical_Spell_Resist_No_Dur_Value = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_VALUE_TP),
     Generic_Reduce_Physical_Spell_Damage_Percentage = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_WEP_SPELL_DMG_PERCENTAGE_TP), -- TODO: Unused
-    Generic_Reduce_Physical_Spell_Damage_Value = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_WEP_SPELL_DMG_VALUE_TP), -- TODO: Unused
+    Generic_Reduce_Physical_Spell_Damage_Value = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_WEP_SPELL_DMG_VALUE_TP),           -- TODO: Unused
 
     Generic_Reduce_Physical_Resist_Value = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHYSICAL_RESIST_VALUE_TP),
 
@@ -293,6 +297,7 @@ LUIE.Data.Tooltips = {
     --Innate_Gallop                                   = GetString(SI_LUIE_SKILL_GALLOP_TP),
     Innate_Resurrection_Immunity = GetString(SI_LUIE_SKILL_RESURRECTION_IMMUNITY_TP),
     Innate_Taunt = GetString(SI_LUIE_SKILL_TAUNT_TP),
+    Innate_Taunt_Other = GetString(SI_LUIE_SKILL_TAUNT_OTHER_TP),
     Innate_Disguised = GetString(SI_LUIE_SKILL_DISGUISE_TP),
     Innate_Battle_Spirit = GetString(SI_LUIE_SKILL_BATTLE_SPIRIT_TP),
     Innate_Battle_Spirit_Imperial_City = GetString(SI_LUIE_SKILL_BATTLE_SPIRIT_IMPERIAL_CITY_TP),
@@ -339,6 +344,7 @@ LUIE.Data.Tooltips = {
     -- Warfare
     Champion_Enlivening_Overflow = GetString(SI_LUIE_SKILL_ENLIVENING_OVERFLOW_TP),
     Champion_Foresight = GetString(SI_LUIE_SKILL_FORESIGHT_TP),
+    Champion_Riposte = GetString(SI_LUIE_SKILL_RIPOSTE_TP),
 
     -- Fitness
     Champion_Expert_Evasion = GetString(SI_LUIE_SKILL_EXPERT_EVASION_TP),
@@ -446,8 +452,8 @@ LUIE.Data.Tooltips = {
     Experience_Alliance_War_Skill_Major = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HOUR_TP), "100"),
     Experience_Alliance_War_Skill_Grand = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HOUR_TP), "150"),
 
-    Experience_Colovian_War_Torte = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HALF_HOUR_TP), "50"), -- Colovian War Torte
-    Experience_Molten_War_Torte = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HALF_HOUR_TP), "100"), -- Molten War Torte
+    Experience_Colovian_War_Torte = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HALF_HOUR_TP), "50"),    -- Colovian War Torte
+    Experience_Molten_War_Torte = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HALF_HOUR_TP), "100"),     -- Molten War Torte
     Experience_White_Gold_War_Torte = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_ALLIANCE_HALF_HOUR_TP), "150"), -- White-Gold War Torte
 
     -- Mementos
@@ -1144,7 +1150,12 @@ LUIE.Data.Tooltips = {
     Skill_Defensive_Scroll_Bonus_II = zo_strformat(GetString(SI_LUIE_SKILL_DEFENSIVE_SCROLL_BONUS_TP), 5),
     Skill_Offensive_Scroll_Bonus_I = zo_strformat(GetString(SI_LUIE_SKILL_OFFENSIVE_SCROLL_BONUS_TP), 2),
     Skill_Offensive_Scroll_Bonus_II = zo_strformat(GetString(SI_LUIE_SKILL_OFFENSIVE_SCROLL_BONUS_TP), 5),
-    Skill_Emperorship_Alliance_Bonus = GetString(SI_LUIE_SKILL_EMPERORSHIP_ALLIANCE_BONUS_TP),
+    Skill_Emperorship_Alliance_Bonus_I = zo_strformat(GetString(SI_LUIE_SKILL_EMPERORSHIP_ALLIANCE_BONUS_TP), 900),
+    Skill_Emperorship_Alliance_Bonus_II = zo_strformat(GetString(SI_LUIE_SKILL_EMPERORSHIP_ALLIANCE_BONUS_TP), 1050),
+    Skill_Emperorship_Alliance_Bonus_III = zo_strformat(GetString(SI_LUIE_SKILL_EMPERORSHIP_ALLIANCE_BONUS_TP), 1250),
+    Skill_Emperorship_Alliance_Bonus_IV = zo_strformat(GetString(SI_LUIE_SKILL_EMPERORSHIP_ALLIANCE_BONUS_TP), 1400),
+    Skill_Emperorship_Alliance_Bonus_V = zo_strformat(GetString(SI_LUIE_SKILL_EMPERORSHIP_ALLIANCE_BONUS_TP), 1600),
+    Skill_Emperorship_Alliance_Bonus_VI = zo_strformat(GetString(SI_LUIE_SKILL_EMPERORSHIP_ALLIANCE_BONUS_TP), 1750),
     Skill_Razor_Armor = GetString(SI_LUIE_SKILL_RAZOR_ARMOR_TP),
     Skill_Unstable_Core_Cyrodiil = GetString(SI_LUIE_SKILL_UNSTABLE_CORE_CYRODIIL_TP),
     Skill_Shattering_Prison_Cyrodiil = GetString(SI_LUIE_SKILL_SHATTERING_PRISON_CYRODIIL_TP),
@@ -1517,10 +1528,26 @@ LUIE.Data.Tooltips = {
     Keep_Upgrade_Food_Guard_Abilities = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_ABILITIES_TP),
 }
 
+LUIE.Data.Tooltips = Tooltips
+
+---@param armorType any
+---@return integer counter
+local function GetEquippedArmorPieces(armorType)
+    local counter = 0
+    for i = 0, 16 do
+        local itemLink = GetItemLink(BAG_WORN, i, LINK_STYLE_DEFAULT)
+        if GetItemLinkArmorType(itemLink) == armorType then
+            counter = counter + 1
+        end
+    end
+    return counter
+end
+
 -- Returns dynamic tooltips when called by Tooltip function
 function LUIE.DynamicTooltip(abilityId)
-    local tooltip = {}
-    -- Brace
+    local tooltip
+
+    -- Brace (TODO: Check if still used)
     if abilityId == 974 then
         local _, _, mitigation = GetAdvancedStatValue(ADVANCED_STAT_DISPLAY_TYPE_BLOCK_MITIGATION)
         local _, _, speed = GetAdvancedStatValue(ADVANCED_STAT_DISPLAY_TYPE_BLOCK_SPEED)
@@ -1549,6 +1576,7 @@ function LUIE.DynamicTooltip(abilityId)
         mitigation = zo_floor(mitigation * 100 + 0.5) / 100 -- Remove decimal places -- TODO: Recheck this if they ever update the function itself to round
         tooltip = zo_strformat(GetString(SI_LUIE_SKILL_BRACE_TP), mitigation, finalSpeed, cost, resourceType)
     end
+
     -- Crouch
     if abilityId == 20299 then
         local _, _, speed = GetAdvancedStatValue(ADVANCED_STAT_DISPLAY_TYPE_SNEAK_SPEED_REDUCTION)
@@ -1560,91 +1588,42 @@ function LUIE.DynamicTooltip(abilityId)
             tooltip = zo_strformat(GetString(SI_LUIE_SKILL_HIDDEN_TP), finalSpeed, cost)
         end
     end
+
     -- Unchained
     if abilityId == 98316 then
-        local duration = GetAbilityDuration(98316, override, csunittag) / 1000
+        local duration = GetAbilityDuration(98316) / 1000
         local pointsSpent = GetNumPointsSpentOnChampionSkill(64) * 1.1
         local adjustPoints = zo_floor(pointsSpent * 100 + 0.5) / 100 -- Remove decimal places
+
+        if pointsSpent == 0 then
+            adjustPoints = 55
+        end
+
         tooltip = zo_strformat(GetString(SI_LUIE_SKILL_UNCHAINED_TP), duration, adjustPoints)
     end
-    if abilityId == 150057 then -- Medium Armor Evasion
-        -- Count the # of Medium Armor pieces equipped
-        local counter = 0
-        for i = 0, 16 do
-            local itemLink = GetItemLink(BAG_WORN, i, LINK_STYLE_DEFAULT)
-            local armorType = GetItemLinkArmorType(itemLink)
-            if armorType == ARMORTYPE_MEDIUM then
-                counter = counter + 1
-            end
-        end
-        counter = counter * 2
+
+    -- Medium Armor Evasion
+    if abilityId == 150057 then
+        local counter = GetEquippedArmorPieces(ARMORTYPE_MEDIUM) * 2
         tooltip = zo_strformat(GetString(SI_LUIE_SKILL_MEDIUM_ARMOR_EVASION), counter)
     end
-    if abilityId == 126582 then -- Unstoppable Brute
-        -- Count the # of Heavy Armor pieces equipped
-        local counter = 0
-        for i = 0, 16 do
-            local itemLink = GetItemLink(BAG_WORN, i, LINK_STYLE_DEFAULT)
-            local armorType = GetItemLinkArmorType(itemLink)
-            if armorType == ARMORTYPE_HEAVY then
-                counter = counter + 1
-            end
-        end
-        counter = counter * 5
-        local tooltipValue1 = GetAbilityDuration(126582, override, csunittag) / 1000
+
+    -- Unstoppable Brute
+    if abilityId == 126582 then
+        local counter = GetEquippedArmorPieces(ARMORTYPE_HEAVY) * 5
+        local tooltipValue1 = GetAbilityDuration(126582) / 1000
         local tooltipValue2 = counter
         tooltip = zo_strformat(GetString(SI_LUIE_SKILL_UNSTOPPABLE_BRUTE), tooltipValue1, tooltipValue2)
     end
-    if abilityId == 126583 then -- Immovable
-        -- Count the # of Heavy Armor pieces equipped
-        local counter = 0
-        for i = 0, 16 do
-            local itemLink = GetItemLink(BAG_WORN, i, LINK_STYLE_DEFAULT)
-            local armorType = GetItemLinkArmorType(itemLink)
-            if armorType == ARMORTYPE_HEAVY then
-                counter = counter + 1
-            end
-        end
-        counter = counter * 5
-        local tooltipValue1 = GetAbilityDuration(126583, override, csunittag) / 1000
+
+    -- Immovable
+    if abilityId == 126583 then
+        local counter = GetEquippedArmorPieces(ARMORTYPE_HEAVY) * 5
+        local tooltipValue1 = GetAbilityDuration(126583) / 1000
         local tooltipValue2 = counter
         local tooltipValue3 = 65 + counter
         tooltip = zo_strformat(GetString(SI_LUIE_SKILL_IMMOVABLE), tooltipValue1, tooltipValue2, tooltipValue3)
     end
+
     return tooltip
 end
-
---[[
-function LUIE.ProcessTooltipType(input, tooltip)
-    -- dummy func, maybe use
-end
-
-LUIE.DynamicTooltips           = { }
-
-local DT           = LUIE.DynamicTooltips
-
-DT[20299]                                     = function()
-                                                local skillType, skillIndex, abilityIndex           = GetSpecificSkillAbilityKeysByAbilityId(45038)
-                                                local _, _, _, _, _, purchased, _, rankIndex           = GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
-                                                local duration           = 2
-                                                if purchased then
-                                                    duration           = duration + rankIndex
-                                                end
-
-                                                local tooltip           = zo_strformat(GetString(SI_LUIE_SKILL_HIDDEN_TP), duration)
-
-                                                return tooltip
-                                    end
-
-if DT[abilityId] then
-DT[abilityId]()
-]]
---
-
---[[
-    local itemLink           = '|H1:item:71252:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'
-    local abilityDescription           = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71252:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-    d(abilityDescription)
-    zo_strformat(GetString(SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST), zo_strsub( GetAbilityDescription(75745):gsub("[^0-9]", ""), 0, -3) )
-]]
---

@@ -23,10 +23,10 @@ local windowManager = WINDOW_MANAGER
 
 local moduleName = LUIE.name .. "CombatInfo"
 
-local uiTlw = {} -- GUI
+local uiTlw = {}  -- GUI
 local refireDelay = {}
 local g_alertFont -- Font for Alerts
-local g_inDuel -- Tracker for whether the player is in a duel or not
+local g_inDuel    -- Tracker for whether the player is in a duel or not
 
 local alertTypes = {
     UNMIT = "LUIE_ALERT_TYPE_UNMIT",
@@ -222,14 +222,14 @@ function AbilityAlerts.CreateAlertFrame()
     uiTlw.alertFrame.preview = LUIE.UI.Backdrop(uiTlw.alertFrame, "fill", nil, nil, nil, true)
 
     -- Callback used to hide anchor coords preview label on movement start
-    local tlwOnMoveStart = function(self)
-        eventManager:RegisterForUpdate(moduleName .. "PreviewMove", 200, function()
+    local tlwOnMoveStart = function (self)
+        eventManager:RegisterForUpdate(moduleName .. "PreviewMove", 200, function ()
             self.preview.anchorLabel:SetText(zo_strformat("<<1>>, <<2>>", self:GetLeft(), self:GetTop()))
         end)
     end
 
     -- Callback used to save new position of frames
-    local tlwOnMoveStop = function(self)
+    local tlwOnMoveStop = function (self)
         eventManager:UnregisterForUpdate(moduleName .. "PreviewMove")
         CombatInfo.SV.AlertFrameOffsetX = self:GetLeft()
         CombatInfo.SV.AlertFrameOffsetY = self:GetTop()
@@ -479,25 +479,25 @@ end
 function AbilityAlerts.CrowdControlColorSetup(crowdControl, isBorder)
     if crowdControl == LUIE_CC_TYPE_STUN or crowdControl == LUIE_CC_TYPE_KNOCKDOWN then -- Stun/Knockdown
         return CombatInfo.SV.alerts.colors.stunColor
-    elseif crowdControl == LUIE_CC_TYPE_KNOCKBACK then -- Knockback
+    elseif crowdControl == LUIE_CC_TYPE_KNOCKBACK then                                  -- Knockback
         return CombatInfo.SV.alerts.colors.knockbackColor
-    elseif crowdControl == LUIE_CC_TYPE_PULL then -- Pull/Levitate
+    elseif crowdControl == LUIE_CC_TYPE_PULL then                                       -- Pull/Levitate
         return CombatInfo.SV.alerts.colors.levitateColor
-    elseif crowdControl == LUIE_CC_TYPE_DISORIENT then -- Disorient
+    elseif crowdControl == LUIE_CC_TYPE_DISORIENT then                                  -- Disorient
         return CombatInfo.SV.alerts.colors.disorientColor
-    elseif crowdControl == LUIE_CC_TYPE_FEAR then -- Fear
+    elseif crowdControl == LUIE_CC_TYPE_FEAR then                                       -- Fear
         return CombatInfo.SV.alerts.colors.fearColor
-    elseif crowdControl == LUIE_CC_TYPE_CHARM then -- Charm
+    elseif crowdControl == LUIE_CC_TYPE_CHARM then                                      -- Charm
         return CombatInfo.SV.alerts.colors.charmColor
-    elseif crowdControl == LUIE_CC_TYPE_SILENCE then -- Silence
+    elseif crowdControl == LUIE_CC_TYPE_SILENCE then                                    -- Silence
         return CombatInfo.SV.alerts.colors.silenceColor
-    elseif crowdControl == LUIE_CC_TYPE_STAGGER then -- Stagger
+    elseif crowdControl == LUIE_CC_TYPE_STAGGER then                                    -- Stagger
         return CombatInfo.SV.alerts.colors.staggerColor
-    elseif crowdControl == LUIE_CC_TYPE_UNBREAKABLE then -- Unbreakable
+    elseif crowdControl == LUIE_CC_TYPE_UNBREAKABLE then                                -- Unbreakable
         return CombatInfo.SV.alerts.colors.unbreakableColor
-    elseif crowdControl == LUIE_CC_TYPE_SNARE then -- Snare
+    elseif crowdControl == LUIE_CC_TYPE_SNARE then                                      -- Snare
         return CombatInfo.SV.alerts.colors.snareColor
-    elseif crowdControl == LUIE_CC_TYPE_ROOT then -- Immobilize
+    elseif crowdControl == LUIE_CC_TYPE_ROOT then                                       -- Immobilize
         return CombatInfo.SV.alerts.colors.rootColor
     else
         if isBorder then
@@ -701,7 +701,7 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     -- Setup refire delay
     if Alerts[abilityId].refire then
         refireDelay[abilityId] = true
-        zo_callLater(function()
+        zo_callLater(function ()
             refireDelay[abilityId] = nil
         end, Alerts[abilityId].refire) --buffer by X time
     end
@@ -715,7 +715,7 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
         else
             refireTime = 250
         end
-        zo_callLater(function()
+        zo_callLater(function ()
             refireDelay[abilityId] = nil
         end, refireTime) --buffer by X time
     end
@@ -1036,7 +1036,7 @@ function AbilityAlerts.AlertEffectChanged(eventCode, changeType, effectSlot, eff
 
     if Settings.toggles.alertEnable and (Settings.toggles.mitigationAura or IsUnitInDungeon("player")) and Alerts[abilityId] and Alerts[abilityId].auradetect then
         if changeType == EFFECT_RESULT_FADED then
-            zo_callLater(function()
+            zo_callLater(function ()
                 CheckInterruptEvent(unitId, abilityId)
             end, 100)
             return
@@ -1051,7 +1051,7 @@ function AbilityAlerts.AlertEffectChanged(eventCode, changeType, effectSlot, eff
             return
         end
 
-        zo_callLater(function()
+        zo_callLater(function ()
             AbilityAlerts.ProcessAlert(abilityId, unitName, unitId)
         end, 50)
     end
@@ -1124,7 +1124,7 @@ function AbilityAlerts.OnCombatIn(eventCode, resultType, isError, abilityName, a
             -- Return if any results occur which we absolutely don't want to display alerts for & stop spam when enemy is out of line of sight, etc and trying to cast
             if resultType == ACTION_RESULT_EFFECT_FADED or resultType == ACTION_RESULT_ABILITY_ON_COOLDOWN or resultType == ACTION_RESULT_BAD_TARGET or resultType == ACTION_RESULT_BUSY or resultType == ACTION_RESULT_FAILED or resultType == ACTION_RESULT_INVALID or resultType == ACTION_RESULT_CANT_SEE_TARGET or resultType == ACTION_RESULT_TARGET_DEAD or resultType == ACTION_RESULT_TARGET_OUT_OF_RANGE or resultType == ACTION_RESULT_TARGET_TOO_CLOSE or resultType == ACTION_RESULT_TARGET_NOT_IN_VIEW then
                 refireDelay[abilityId] = true
-                zo_callLater(function()
+                zo_callLater(function ()
                     refireDelay[abilityId] = nil
                 end, 1000) --buffer by X time
                 return
@@ -1144,7 +1144,7 @@ function AbilityAlerts.OnCombatIn(eventCode, resultType, isError, abilityName, a
                     end
                 end
 
-                zo_callLater(function()
+                zo_callLater(function ()
                     AbilityAlerts.ProcessAlert(abilityId, sourceName, sourceUnitId)
                 end, 50)
             end
@@ -1177,7 +1177,7 @@ function AbilityAlerts.OnCombatAlert(eventCode, resultType, isError, abilityName
             -- Return if any results occur which we absolutely don't want to display alerts for & stop spam when enemy is out of line of sight, etc and trying to cast
             if resultType == ACTION_RESULT_EFFECT_FADED or resultType == ACTION_RESULT_ABILITY_ON_COOLDOWN or resultType == ACTION_RESULT_BAD_TARGET or resultType == ACTION_RESULT_BUSY or resultType == ACTION_RESULT_FAILED or resultType == ACTION_RESULT_INVALID or resultType == ACTION_RESULT_CANT_SEE_TARGET or resultType == ACTION_RESULT_TARGET_DEAD or resultType == ACTION_RESULT_TARGET_OUT_OF_RANGE or resultType == ACTION_RESULT_TARGET_TOO_CLOSE or resultType == ACTION_RESULT_TARGET_NOT_IN_VIEW then
                 refireDelay[abilityId] = true
-                zo_callLater(function()
+                zo_callLater(function ()
                     refireDelay[abilityId] = nil
                 end, 1000) --buffer by X time
                 return
@@ -1197,7 +1197,7 @@ function AbilityAlerts.OnCombatAlert(eventCode, resultType, isError, abilityName
                     end
                 end
 
-                zo_callLater(function()
+                zo_callLater(function ()
                     AbilityAlerts.ProcessAlert(abilityId, sourceName, sourceUnitId)
                 end, 50)
             end
@@ -1206,7 +1206,7 @@ function AbilityAlerts.OnCombatAlert(eventCode, resultType, isError, abilityName
 end
 
 function AbilityAlerts.FormatAlertString(inputFormat, params)
-    return zo_strgsub(inputFormat, "%%.", function(x)
+    return zo_strgsub(inputFormat, "%%.", function (x)
         if x == "%n" then
             return params.source or ""
         elseif x == "%t" then

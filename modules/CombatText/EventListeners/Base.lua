@@ -18,11 +18,7 @@ function CombatTextEventListener:New()
     return obj
 end
 
-function CombatTextEventListener:RegisterForEvent(event, func, ...)
-    eventManager:RegisterForEvent(moduleName .. "Event" .. event .. "_" .. eventPostfix, event, function(eventCode, ...)
-        func(...)
-    end)
-
+function CombatTextEventListener:AddFilters(event, ...)
     -- vararg ... is a list of event filters in format filterType1, filterArg1, filterType2, filterArg2, etc.
     -- example: obj:RegisterForEvent(EVENT_POWER_UPDATE, func, REGISTER_FILTER_UNIT_TAG, 'player', REGISTER_FILTER_POWER_TYPE, COMBAT_MECHANIC_FLAGS_ULTIMATE)
     local filtersCount = select("#", ...)
@@ -30,7 +26,13 @@ function CombatTextEventListener:RegisterForEvent(event, func, ...)
     for i = 1, filtersCount, 2 do
         eventManager:AddFilterForEvent(moduleName .. "Event" .. event .. "_" .. eventPostfix, event, filters[i], filters[i + 1])
     end
+end
 
+function CombatTextEventListener:RegisterForEvent(event, func, ...)
+    eventManager:RegisterForEvent(moduleName .. "Event" .. event .. "_" .. eventPostfix, event, function (eventCode, ...)
+        func(...)
+    end)
+    self:AddFilters(event, ...)
     eventPostfix = eventPostfix + 1
 end
 

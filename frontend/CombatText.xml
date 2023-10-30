@@ -2,13 +2,11 @@
       LuiExtended
       License: The MIT License (MIT)
 -->
-
 <GuiXml>
     <Controls>
         <TopLevelControl name="LUIE_CombatText" mouseEnabled="false" clampedToScreen="true" movable="false" layer="0" level="0" tier="0">
             <Anchor point="TOPLEFT" relativeTo="GuiRoot" relativePoint="TOPLEFT" offsetX="0" offsetY="0"/>
             <Anchor point="BOTTOMRIGHT" relativeTo="GuiRoot" relativePoint="BOTTOMRIGHT" offsetX="0" offsetY="0"/>
-
             <Controls>
                 <Control name="$(parent)_Outgoing" clampedToScreen="true">
                     <Anchor point="CENTER" relativeTo="$(parent)" relativePoint="CENTER" offsetX="0" offsetY="- GuiRoot:GetHeight() / 4" />
@@ -21,7 +19,6 @@
                         </Label>
                     </Controls>
                 </Control>
-
                 <Control name="$(parent)_Incoming" clampedToScreen="true">
                     <Anchor point="CENTER" relativeTo="$(parent)" relativePoint="CENTER" offsetX="0" offsetY="GuiRoot:GetHeight() / 4" />
                     <Dimensions x="400" y="100" />
@@ -33,7 +30,6 @@
                         </Label>
                     </Controls>
                 </Control>
-
                 <Control name="$(parent)_Alert" clampedToScreen="true">
                     <Anchor point="CENTER" relativeTo="$(parent)" relativePoint="CENTER" offsetX="GuiRoot:GetWidth() / 5" offsetY="0" />
                     <Dimensions x="400" y="100" />
@@ -44,7 +40,6 @@
                         </Label>
                     </Controls>
                 </Control>
-
                 <Control name="$(parent)_Point" clampedToScreen="true">
                     <Anchor point="CENTER" relativeTo="$(parent)" relativePoint="CENTER" offsetX="GuiRoot:GetWidth() / 3.2" offsetY="- GuiRoot:GetHeight() / 2.65" />
                     <Dimensions x="400" y="100" />
@@ -55,7 +50,6 @@
                         </Label>
                     </Controls>
                 </Control>
-
                 <Control name="$(parent)_Resource" clampedToScreen="true">
                     <Anchor point="CENTER" relativeTo="$(parent)" relativePoint="CENTER" offsetX="GuiRoot:GetWidth() / 5" offsetY="0" />
                     <Dimensions x="400" y="100" />
@@ -66,10 +60,8 @@
                         </Label>
                     </Controls>
                 </Control>
-
             </Controls>
         </TopLevelControl>
-
         <!-- Virtual / Template -->
         <Control name="LUIE_CombatText_Virtual" virtual="true">
             <Controls>

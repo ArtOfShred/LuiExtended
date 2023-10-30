@@ -9,7 +9,7 @@ local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
 
 -- Slash Command to perform a group regroup
-local g_regroupStacks = {} -- Character stack for Regroup reinvites
+local g_regroupStacks = {}     -- Character stack for Regroup reinvites
 local g_pendingRegroup = false -- Toggled when a regroup is in progress to prevent additional regroup attempts from firing
 function SlashCommands.SlashRegroup()
     local function RegroupInvite()
@@ -29,7 +29,7 @@ function SlashCommands.SlashRegroup()
             end
         end
         g_pendingRegroup = false -- Allow Regroup command to be used again
-        g_regroupStacks = {} -- Allow index to be used again.
+        g_regroupStacks = {}     -- Allow index to be used again.
     end
 
     local groupSize = GetGroupSize()
@@ -117,7 +117,7 @@ function SlashCommands.SlashRegroup()
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_ALL_OFF_MSG))
             end
             g_pendingRegroup = false -- Allow Regroup command to be used again
-            g_regroupStacks = {} -- Allow index to be used again.
+            g_regroupStacks = {}     -- Allow index to be used again.
         end
     else
         printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG), true)
@@ -187,7 +187,7 @@ function SlashCommands.SlashGroupRole(option)
         UpdateSelectedLFGRole(LFG_ROLE_DPS)
     end
 end
-local playerName, PlayerDisplayName = ZO_GetPrimaryPlayerName, ZO_GetPrimaryPlayerName
+
 -- Slash Command to kick someone from a group
 function SlashCommands.SlashGroupKick(option)
     local groupSize = GetGroupSize()
@@ -245,9 +245,9 @@ function SlashCommands.SlashGroupKick(option)
     local g_partyKick = {}
     local kickedMemberName
     local kickedAccountName
-    local compareName = string.lower(option)
-    local comparePlayerName = string.lower(LUIE.PlayerNameFormatted)
-    local comparePlayerAccount = string.lower(PlayerDisplayName)
+    local compareName = zo_strlower(option)
+    local comparePlayerName = zo_strlower(LUIE.PlayerNameFormatted)
+    local comparePlayerAccount = zo_strlower(LUIE.PlayerDisplayName)
     local unitToKick
 
     for i = 1, 24 do
@@ -256,8 +256,8 @@ function SlashCommands.SlashGroupKick(option)
         if memberTag == nil then
             break
         end
-        kickedMemberName = string.lower(GetUnitName(memberTag))
-        kickedAccountName = string.lower(GetUnitDisplayName(memberTag))
+        kickedMemberName = zo_strlower(GetUnitName(memberTag))
+        kickedAccountName = zo_strlower(GetUnitDisplayName(memberTag))
         g_partyKick[i] = { memberTag = memberTag, kickedMemberName = kickedMemberName, kickedAccountName = kickedAccountName }
     end
 
@@ -335,9 +335,9 @@ function SlashCommands.SlashVoteKick(option)
     local g_partyKick = {}
     local kickedMemberName
     local kickedAccountName
-    local compareName = string.lower(option)
-    local comparePlayerName = string.lower(playerName)
-    local comparePlayerAccount = string.lower(PlayerDisplayName)
+    local compareName = zo_strlower(option)
+    local comparePlayerName = zo_strlower(LUIE.PlayerNameFormatted)
+    local comparePlayerAccount = zo_strlower(LUIE.PlayerDisplayName)
     local unitToKick = ""
 
     for i = 1, 24 do
@@ -346,8 +346,8 @@ function SlashCommands.SlashVoteKick(option)
         if memberTag == nil then
             break
         end
-        kickedMemberName = string.lower(GetUnitName(memberTag))
-        kickedAccountName = string.lower(GetUnitDisplayName(memberTag))
+        kickedMemberName = zo_strlower(GetUnitName(memberTag))
+        kickedAccountName = zo_strlower(GetUnitDisplayName(memberTag))
         g_partyKick[i] = { memberTag = memberTag, kickedMemberName = kickedMemberName, kickedAccountName = kickedAccountName }
     end
 
@@ -366,7 +366,7 @@ function SlashCommands.SlashVoteKick(option)
     end
 
     -- If we try to kick ourself then display an error message.
-    if GetUnitName(unitToKick) == playerName then
+    if GetUnitName(unitToKick) == LUIE.PlayerNameFormatted then
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_SELF), true)
         if LUIE.ChatAnnouncements.SV.Group.GroupLFGAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_SELF)))

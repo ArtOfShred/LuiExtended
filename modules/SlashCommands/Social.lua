@@ -45,14 +45,14 @@ function SlashCommands.SlashRemoveFriend(option)
         return
     end
 
-    local compareChar = string.lower(option)
+    local compareChar = zo_strlower(option)
     local friends = GetNumFriends()
     local g_friendIndex = {}
     for i = 1, friends do
         local displayName = GetFriendInfo(i)
         local _, characterName = GetFriendCharacterInfo(i)
-        local compareDisplay = string.lower(displayName)
-        local compareCharacter = string.lower(characterName)
+        local compareDisplay = zo_strlower(displayName)
+        local compareCharacter = zo_strlower(characterName)
         compareCharacter = zo_strgsub(compareCharacter, "%^%a+", "")
         g_friendIndex[i] = {
             displayName = displayName,
@@ -94,12 +94,12 @@ function SlashCommands.SlashRemoveIgnore(option)
         return
     end
 
-    local compareChar = string.lower(option)
+    local compareChar = zo_strlower(option)
     local ignore = GetNumIgnored()
     local g_ignoreIndex = {}
     for i = 1, ignore do
         local displayName = GetIgnoredInfo(i)
-        displayName = string.lower(displayName)
+        displayName = zo_strlower(displayName)
         g_ignoreIndex[i] = { displayName = displayName }
     end
 

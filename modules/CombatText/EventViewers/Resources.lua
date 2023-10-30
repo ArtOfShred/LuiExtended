@@ -12,7 +12,7 @@ local resourceTypes = LUIE.Data.CombatTextConstants.resourceType
 
 function CombatTextResourceEventViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
-    obj:RegisterCallback(eventType.RESOURCE, function(...)
+    obj:RegisterCallback(eventType.RESOURCE, function (...)
         self:OnEvent(...)
     end)
     self.locationOffset = 0 -- Simple way to avoid overlapping. When number of active notes is back to 0, the offset is also reset
@@ -32,22 +32,22 @@ function CombatTextResourceEventViewer:OnEvent(resourceType, value)
         color = Settings.colors.lowHealth
         size = Settings.fontSizes.resource
         text = self:FormatString(Settings.formats.resourceHealth, { value = value, text = GetString(SI_LUIE_LAM_CT_SHARED_LOW_HEALTH) })
-    --Low Magicka
+        --Low Magicka
     elseif resourceType == resourceTypes.LOW_MAGICKA then
         color = Settings.colors.lowMagicka
         size = Settings.fontSizes.resource
         text = self:FormatString(Settings.formats.resourceMagicka, { value = value, text = GetString(SI_LUIE_LAM_CT_SHARED_LOW_MAGICKA) })
-    --Low Stamina
+        --Low Stamina
     elseif resourceType == resourceTypes.LOW_STAMINA then
         color = Settings.colors.lowStamina
         size = Settings.fontSizes.resource
         text = self:FormatString(Settings.formats.resourceStamina, { value = value, text = GetString(SI_LUIE_LAM_CT_SHARED_LOW_STAMINA) })
-    --Ultimate Ready
+        --Ultimate Ready
     elseif resourceType == resourceTypes.ULTIMATE then
         color = Settings.colors.ultimateReady
         size = Settings.fontSizes.readylabel
         text = self:FormatString(Settings.formats.ultimateReady, { text = GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY) })
-    -- Potion Ready
+        -- Potion Ready
     elseif resourceType == resourceTypes.POTION then
         color = Settings.colors.potionReady
         size = Settings.fontSizes.readylabel
@@ -82,7 +82,7 @@ function CombatTextResourceEventViewer:OnEvent(resourceType, value)
     end
 
     --Add items back into pool after animation
-    zo_callLater(function()
+    zo_callLater(function ()
         self.poolManager:ReleasePoolObject(poolTypes.CONTROL, controlPoolKey)
         self.poolManager:ReleasePoolObject(animationPoolType, animationPoolKey)
         self.activeResources = self.activeResources - 1

@@ -143,7 +143,7 @@ function SlashCommands.SlashGuildKick(option)
         guildnumber = LUIE.GuildIndexData[4].id
     elseif guildnumber == "5" and LUIE.GuildIndexData[5] then
         guildnumber = LUIE.GuildIndexData[5].id
-    -- If we enter anything outside of the range of 1-5, display an error and end.
+        -- If we enter anything outside of the range of 1-5, display an error and end.
     else
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK), true)
         if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
@@ -164,15 +164,15 @@ function SlashCommands.SlashGuildKick(option)
 
     -- Index guild members so we can use character name as a kick option
     local guildNumbers = GetNumGuildMembers(guildnumber)
-    local compareChar = string.lower(name)
+    local compareChar = zo_strlower(name)
 
     local g_guildNamesTable = {}
 
     for i = 1, guildNumbers do
         local displayName = GetGuildMemberInfo(guildnumber, i)
         local _, characterName = GetGuildMemberCharacterInfo(guildnumber, i)
-        local compareDisplay = string.lower(displayName)
-        local compareCharacter = string.lower(characterName)
+        local compareDisplay = zo_strlower(displayName)
+        local compareCharacter = zo_strlower(characterName)
 
         compareCharacter = zo_strgsub(compareCharacter, "%^%a+", "")
 

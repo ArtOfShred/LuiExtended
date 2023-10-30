@@ -9,11 +9,11 @@ local eventManager = EVENT_MANAGER
 
 local moduleName = LUIE.name .. "SpellCastBuffs"
 
-local g_werewolfName = "" -- Name for current Werewolf Transformation morph
-local g_werewolfIcon = "" -- Icon for current Werewolf Transformation morph
-local g_werewolfId = "" -- AbilityId for Werewolf Transformation morph
+local g_werewolfName = ""   -- Name for current Werewolf Transformation morph
+local g_werewolfIcon = ""   -- Icon for current Werewolf Transformation morph
+local g_werewolfId = ""     -- AbilityId for Werewolf Transformation morph
 local g_werewolfCounter = 0 -- Counter for Werewolf transformation events
-local g_werewolfQuest = 0 -- Counter for Werewolf transformation events (Quest)
+local g_werewolfQuest = 0   -- Counter for Werewolf transformation events (Quest)
 
 -- Function to pull Werewolf Cast Bar / Buff Aura Icon based off the players morph choice
 local function SetWerewolfIcon()
@@ -75,7 +75,7 @@ function SpellCastBuffs.WerewolfState(eventCode, werewolf, onActivation)
         eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
         g_werewolfCounter = 0
         -- Delay resetting this value - as the quest werewolf transform event causes werewolf true, false, true in succession.
-        zo_callLater(function()
+        zo_callLater(function ()
             g_werewolfQuest = 0
         end, 5000)
     end
@@ -96,7 +96,7 @@ function SpellCastBuffs.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType,
         eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
         g_werewolfCounter = 0
         -- Delay resetting this value - as the quest werewolf transform event causes werewolf true, false, true in succession.
-        zo_callLater(function()
+        zo_callLater(function ()
             g_werewolfQuest = 0
         end, 5000)
     end

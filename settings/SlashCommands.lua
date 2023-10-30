@@ -109,24 +109,24 @@ function SlashCommands.CreateSettings()
     local optionsDataSlashCommands = {}
 
     -- Slash Commands description
-    optionsDataSlashCommands[#optionsDataSlashCommands + 1] = {
+    optionsDataSlashCommands[#optionsDataSlashCommands+1] = {
         type = "description",
         text = GetString(SI_LUIE_LAM_SLASHCMDS_DESCRIPTION),
     }
 
     -- ReloadUI Button
-    optionsDataSlashCommands[#optionsDataSlashCommands + 1] = {
+    optionsDataSlashCommands[#optionsDataSlashCommands+1] = {
         type = "button",
         name = GetString(SI_LUIE_LAM_RELOADUI),
         tooltip = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
-        func = function()
+        func = function ()
             ReloadUI("ingame")
         end,
         width = "full",
     }
 
     -- Slash Commands - General Commands Submenu
-    optionsDataSlashCommands[#optionsDataSlashCommands + 1] = {
+    optionsDataSlashCommands[#optionsDataSlashCommands+1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GENERAL),
         controls = {
@@ -135,10 +135,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_TRADE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_TRADE_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashTrade
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashTrade = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -151,10 +151,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_HOME),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_HOME_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashHome
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashHome = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -167,15 +167,15 @@ function SlashCommands.CreateSettings()
                 type = "dropdown",
                 name = "\t\t\t\t\tChoose Inside or Outside for /home",
                 choices = homeOptions,
-                getFunc = function()
+                getFunc = function ()
                     return homeOptions[Settings.SlashHomeChoice]
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashHomeChoice = homeOptionsKeys[value]
                 end,
                 width = "full",
                 default = Defaults.SlashHomeChoice,
-                disabled = function()
+                disabled = function ()
                     return not Settings.SlashHome
                 end,
             },
@@ -184,10 +184,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_HOME_SET_PRIMARY),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_HOME_SET_PRIMARY_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashSetPrimaryHome
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashSetPrimaryHome = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -200,10 +200,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_CAMPAIGN),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_CAMPAIGN_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashCampaignQ
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashCampaignQ = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -216,17 +216,17 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_COMPANION),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_COMPANION_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashCompanion
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashCompanion = value
                     SlashCommands.RegisterSlashCommands()
                 end,
                 width = "full",
                 default = Defaults.SlashCompanion,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
-                disabled = function()
+                disabled = function ()
                     return #companionOptions == 0
                 end,
             },
@@ -235,15 +235,15 @@ function SlashCommands.CreateSettings()
                 type = "dropdown",
                 name = "\t\t\t\t\tChoose Companion to Summon",
                 choices = companionOptions,
-                getFunc = function()
+                getFunc = function ()
                     return GetFormattedCollectibleName(Settings.SlashCompanionChoice)
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashCompanionChoice = companionOptionsKeys[value]
                 end,
                 width = "full",
                 default = Defaults.SlashCompanionChoice,
-                disabled = function()
+                disabled = function ()
                     return not Settings.SlashCompanion
                 end,
             },
@@ -252,17 +252,17 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_BANKER),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_BANKER_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashBanker
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashBanker = value
                     SlashCommands.RegisterSlashCommands()
                 end,
                 width = "full",
                 default = Defaults.SlashBanker,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
-                disabled = function()
+                disabled = function ()
                     return #bankerOptions == 0
                 end,
             },
@@ -271,15 +271,15 @@ function SlashCommands.CreateSettings()
                 type = "dropdown",
                 name = "\t\t\t\t\tChoose Banker to Summon",
                 choices = bankerOptions,
-                getFunc = function()
+                getFunc = function ()
                     return GetFormattedCollectibleName(Settings.SlashBankerChoice)
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashBankerChoice = bankerOptionsKeys[value]
                 end,
                 width = "full",
                 default = Defaults.SlashBankerChoice,
-                disabled = function()
+                disabled = function ()
                     return not Settings.SlashBanker
                 end,
             },
@@ -288,17 +288,17 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_MERCHANT),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_MERCHANT_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashMerchant
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashMerchant = value
                     SlashCommands.RegisterSlashCommands()
                 end,
                 width = "full",
                 default = Defaults.SlashMerchant,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
-                disabled = function()
+                disabled = function ()
                     return #merchantOptions == 0
                 end,
             },
@@ -307,15 +307,15 @@ function SlashCommands.CreateSettings()
                 type = "dropdown",
                 name = "\t\t\t\t\tChoose Merchant to Summon",
                 choices = merchantOptions,
-                getFunc = function()
+                getFunc = function ()
                     return GetFormattedCollectibleName(Settings.SlashMerchantChoice)
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashMerchantChoice = merchantOptionsKeys[value]
                 end,
                 width = "full",
                 default = Defaults.SlashMerchantChoice,
-                disabled = function()
+                disabled = function ()
                     return not Settings.SlashMerchant
                 end,
             },
@@ -324,17 +324,17 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_ARMORY),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_ARMORY_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashArmory
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashArmory = value
                     SlashCommands.RegisterSlashCommands()
                 end,
                 width = "full",
                 default = Defaults.SlashArmory,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
-                disabled = function()
+                disabled = function ()
                     return #armoryOptions == 0
                 end,
             },
@@ -343,15 +343,15 @@ function SlashCommands.CreateSettings()
                 type = "dropdown",
                 name = "\t\t\t\t\tChoose Armory Assistant to Summon",
                 choices = armoryOptions,
-                getFunc = function()
+                getFunc = function ()
                     return GetFormattedCollectibleName(Settings.SlashArmoryChoice)
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashArmoryChoice = armoryOptionsKeys[value]
                 end,
                 width = "full",
                 default = Defaults.SlashArmoryChoice,
-                disabled = function()
+                disabled = function ()
                     return not Settings.SlashArmory
                 end,
             },
@@ -360,17 +360,17 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_DECON),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_SLASHCMDS_DECON_TP), GetCollectibleName(10184)),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashDecon
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashDecon = value
                     SlashCommands.RegisterSlashCommands()
                 end,
                 width = "full",
                 default = Defaults.SlashDecon,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
-                disabled = function()
+                disabled = function ()
                     return #deconOptions == 0
                 end,
             },
@@ -379,15 +379,15 @@ function SlashCommands.CreateSettings()
                 type = "dropdown",
                 name = "\t\t\t\t\tChoose Deconstruction Assistant to Summon",
                 choices = deconOptions,
-                getFunc = function()
+                getFunc = function ()
                     return GetFormattedCollectibleName(Settings.SlashDeconChoice)
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashDeconChoice = deconOptionsKeys[value]
                 end,
                 width = "full",
                 default = Defaults.SlashDeconChoice,
-                disabled = function()
+                disabled = function ()
                     return not Settings.SlashDecon
                 end,
             },
@@ -396,10 +396,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_FENCE),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_SLASHCMDS_FENCE_TP), GetCollectibleName(300)),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashFence
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashFence = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -412,10 +412,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_EYE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_EYE_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashEye
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashEye = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -428,10 +428,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_PET),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_PET_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashPet
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashPet = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -444,10 +444,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_SLASHCMDS_PET_MESSAGE)),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_PET_MESSAGE_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashPetMessage
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashPetMessage = value
                 end,
                 width = "full",
@@ -458,10 +458,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_OUTFIT),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_OUTFIT_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashOutfit
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashOutfit = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -474,10 +474,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_REPORT),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_REPORT_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashReport
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashReport = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -490,10 +490,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = "/home Results - Show Alert (Temp Setting)",
                 tooltip = "Display an alert when the /home command is used.\nNote: This setting will be deprecated in the future when Social Errors Events are implemented in Chat Announcements.",
-                getFunc = function()
+                getFunc = function ()
                     return LUIE.SV.TempAlertHome
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     LUIE.SV.TempAlertHome = value
                 end,
                 width = "full",
@@ -504,10 +504,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = "/Campaign Results - Show Alert (Temp Setting)",
                 tooltip = "Display an alert when the /campaign command is used.\nNote: This setting will be deprecated in the future when Campaign Queue Events are implemented in Chat Announcements.",
-                getFunc = function()
+                getFunc = function ()
                     return LUIE.SV.TempAlertCampaign
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     LUIE.SV.TempAlertCampaign = value
                 end,
                 width = "full",
@@ -518,10 +518,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = "/Outfit - Show Alert (Temp Setting)",
                 tooltip = "Display an alert when the /outfit command is used.\nNote: This setting will be deprecated in the future when Outfit Alerts are implemented in Chat Announcements.",
-                getFunc = function()
+                getFunc = function ()
                     return LUIE.SV.TempAlertOutfit
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     LUIE.SV.TempAlertOutfit = value
                 end,
                 width = "full",
@@ -531,7 +531,7 @@ function SlashCommands.CreateSettings()
     }
 
     -- Slash Commands - Group Commands Options Submenu
-    optionsDataSlashCommands[#optionsDataSlashCommands + 1] = {
+    optionsDataSlashCommands[#optionsDataSlashCommands+1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GROUP),
         controls = {
@@ -540,10 +540,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_READYCHECK),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_READYCHECK_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashReadyCheck
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashReadyCheck = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -556,10 +556,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_REGROUP),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_REGROUP_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashRegroup
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashRegroup = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -572,10 +572,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_DISBAND),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_DISBAND_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashDisband
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashDisband = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -588,10 +588,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_LEAVE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_LEAVE_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashGroupLeave
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashGroupLeave = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -604,10 +604,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_KICK),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_KICK_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashGroupKick
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashGroupKick = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -620,10 +620,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_ROLE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_ROLE_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashGroupRole
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashGroupRole = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -636,10 +636,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_VOTEKICK),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_VOTEKICK_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashVoteKick
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashVoteKick = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -651,7 +651,7 @@ function SlashCommands.CreateSettings()
     }
 
     -- Slash Commands - Guild Commands Options Submenu
-    optionsDataSlashCommands[#optionsDataSlashCommands + 1] = {
+    optionsDataSlashCommands[#optionsDataSlashCommands+1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GUILD),
         controls = {
@@ -660,10 +660,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDINVITE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDINVITE_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashGuildInvite
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashGuildInvite = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -676,10 +676,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDQUIT),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDQUIT_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashGuildQuit
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashGuildQuit = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -692,10 +692,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDKICK),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDKICK_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashGuildKick
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashGuildKick = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -707,7 +707,7 @@ function SlashCommands.CreateSettings()
     }
 
     -- Slash Commands - Social Commands Options Submenu
-    optionsDataSlashCommands[#optionsDataSlashCommands + 1] = {
+    optionsDataSlashCommands[#optionsDataSlashCommands+1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER_SOCIAL),
         controls = {
@@ -716,10 +716,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_FRIEND),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_FRIEND_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashFriend
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashFriend = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -732,10 +732,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_IGNORE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_IGNORE_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashIgnore
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashIgnore = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -748,10 +748,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashRemoveFriend
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashRemoveFriend = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -764,10 +764,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashRemoveIgnore
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashRemoveIgnore = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -779,7 +779,7 @@ function SlashCommands.CreateSettings()
     }
 
     -- Slash Commands - Holiday XP Events Commands Options Submenu
-    optionsDataSlashCommands[#optionsDataSlashCommands + 1] = {
+    optionsDataSlashCommands[#optionsDataSlashCommands+1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER_HOLIDAY),
         controls = {
@@ -788,10 +788,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_CAKE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_CAKE_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashCake
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashCake = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -804,10 +804,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_PIE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_PIE_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashPie
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashPie = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -820,10 +820,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_MEAD),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_MEAD_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashMead
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashMead = value
                     SlashCommands.RegisterSlashCommands()
                 end,
@@ -836,10 +836,10 @@ function SlashCommands.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_WITCH),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_WITCH_TP),
-                getFunc = function()
+                getFunc = function ()
                     return Settings.SlashWitch
                 end,
-                setFunc = function(value)
+                setFunc = function (value)
                     Settings.SlashWitch = value
                     SlashCommands.RegisterSlashCommands()
                 end,

@@ -175,7 +175,7 @@ function SlashCommands.SlashCampaignQ(option)
         firstRun = false
         for i = 1, 200 do
             -- TODO: Find a way to determine # of campaigns dynamically instead of iterating.
-            local campaignName = string.lower(GetCampaignName(i))
+            local campaignName = zo_strlower(GetCampaignName(i))
             if campaignName ~= "" and campaignName ~= nil then
                 LUIE.CampaignNames[campaignName] = i
             end
@@ -183,9 +183,9 @@ function SlashCommands.SlashCampaignQ(option)
     end
 
     -- If input is valid and the name is in the campaign table, try to queue for the campaign.
-    local option = string.lower(option)
-    if LUIE.CampaignNames[option] then
-        local campaignId = LUIE.CampaignNames[option]
+    local optionLower = zo_strlower(option)
+    if LUIE.CampaignNames[optionLower] then
+        local campaignId = LUIE.CampaignNames[optionLower]
         local campaignName = GetCampaignName(campaignId)
 
         if GetAssignedCampaignId() == campaignId or GetGuestCampaignId() == campaignId then
@@ -262,7 +262,7 @@ function SlashCommands.SlashCollectible(id)
     end
 
     if IsCollectibleUnlocked(id) then
-        UseCollectible(id)
+        UseCollectible(id, GAMEPLAY_ACTOR_CATEGORY_PLAYER)
         LUIE.SlashCollectibleOverride = true
         if LUIE.Data.CollectibleTables.All[id] == nil then
             LUIE.LastMementoUsed = id
@@ -367,15 +367,15 @@ function SlashCommands.SlashReport(player)
 end
 
 local petIds = {
-    [23304] = "[Familiar]", -- Summon Unstable Familiar (Sorcerer)
-    [23319] = "[Clannfear]", -- Summon Unstable Clannfear (Sorcerer)
-    [23316] = "[Volatile Familiar]", -- Summon Volatile Familiar (Sorcerer)
-    [24613] = "[Winged Twilight]", -- Summon Winged Twilight (Sorcerer)
+    [23304] = "[Familiar]",           -- Summon Unstable Familiar (Sorcerer)
+    [23319] = "[Clannfear]",          -- Summon Unstable Clannfear (Sorcerer)
+    [23316] = "[Volatile Familiar]",  -- Summon Volatile Familiar (Sorcerer)
+    [24613] = "[Winged Twilight]",    -- Summon Winged Twilight (Sorcerer)
     [24636] = "[Twilight Tormentor]", -- Summon Twilight Tormentor (Sorcerer)
     [24639] = "[Twilight Matriarch]", -- Summon Twilight Matriarch (Sorcerer)
-    [85982] = "[Feral Guardian]", -- Feral Guardian (Warden)
-    [85986] = "[Eternal Guardian]", -- Eternal Guardian (Warden)
-    [85990] = "[Wild Guardian]", -- Wild Guardian (Warden)
+    [85982] = "[Feral Guardian]",     -- Feral Guardian (Warden)
+    [85986] = "[Eternal Guardian]",   -- Eternal Guardian (Warden)
+    [85990] = "[Wild Guardian]",      -- Wild Guardian (Warden)
 }
 
 -- Slash Command to dismiss pets and optionally non-combat pets
