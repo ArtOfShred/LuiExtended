@@ -5923,10 +5923,10 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
                     end
                     local type = "LUIE_CURRENCY_VENDOR"
 
-                    local parts = { ZO_LinkHandler_ParseLink(itemLink) }
+                    local parts = {ZO_LinkHandler_ParseLink(itemLink)}
                     parts[22] = "1"
-                    local partsString = table.concat(parts, ":")
-                    itemLink = zo_strformat("|H<<1>>|h|h", partsString)
+                    parts = table.concat(parts, ":"):sub(2, -1)
+                    itemLink = zo_strformat("|H<<1>>|h|h", parts)
 
                     local formattedIcon = (ChatAnnouncements.SV.Inventory.LootIcons and icon and icon ~= "") and ("|t16:16:" .. icon .. "|t ") or ""
                     local itemCount = stack > 1 and (" |cFFFFFFx" .. stack .. "|r") or ""
@@ -5981,10 +5981,10 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
                     end
                     local type = "LUIE_CURRENCY_VENDOR"
 
-                    local parts = { ZO_LinkHandler_ParseLink(itemLink) }
+                    local parts = {ZO_LinkHandler_ParseLink(itemLink)}
                     parts[22] = "1"
-                    local partsString = table.concat(parts, ":")
-                    itemLink = zo_strformat("|H<<1>>|h|h", partsString)
+                    parts = table.concat(parts, ":"):sub(2, -1)
+                    itemLink = zo_strformat("|H<<1>>|h|h", parts)
 
                     local formattedIcon = (ChatAnnouncements.SV.Inventory.LootIcons and icon and icon ~= "") and ("|t16:16:" .. icon .. "|t ") or ""
                     local itemCount = stack > 1 and (" |cFFFFFFx" .. stack .. "|r") or ""
@@ -6045,10 +6045,10 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
             end
             local type = "LUIE_CURRENCY_VENDOR"
 
-            local parts = { ZO_LinkHandler_ParseLink(itemLink) }
+            local parts = {ZO_LinkHandler_ParseLink(itemLink)}
             parts[22] = "1"
-            local partsString = table.concat(parts, ":")
-            itemLink = zo_strformat("|H<<1>>|h|h", partsString)
+            parts = table.concat(parts, ":"):sub(2, -1)
+            itemLink = zo_strformat("|H<<1>>|h|h", parts)
 
             local formattedIcon = (ChatAnnouncements.SV.Inventory.LootIcons and icon and icon ~= "") and ("|t16:16:" .. icon .. "|t ") or ""
             local itemCount = stackCountChange > 1 and (" |cFFFFFFx" .. stackCountChange .. "|r") or ""
