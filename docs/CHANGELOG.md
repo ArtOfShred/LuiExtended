@@ -1,3 +1,9 @@
+# Version 6.6.6
+
+Chat Announcements
+
+- Fixed an issue where Chat Announcements for fencing items were displaying incorrectly.
+
 # Version 6.6.5
 
 General

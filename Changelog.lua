@@ -6,6 +6,11 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
+    "|cFFA500LuiExtended Version 6.6.6|r",
+    "",
+    "|cFFFF00Chat Announcements:|r",
+    "[*] Fixed an issue where Chat Announcements for fencing items were displaying incorrectly.",
+    "",
     "|cFFA500LuiExtended Version 6.6.5|r",
     "",
     "|cFFFF00General:|r",
