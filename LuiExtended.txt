@@ -1,56 +1,33 @@
 ## Title: |cE12000L|cFFFFB0ui E|rxtended|
 ## Author: ArtOfShred, DakJaniels, psypanda, Saenic & SpellBuilder
 ## Version: 6.6.5
-## APIVersion: 101039 101040
+## APIVersion: 101040
 ## AddOnVersion: 665
 ## Description: Provides UnitFrames, InfoPanel, Combat Text & Info, Buffs & Debuff Tracking, Chat Announcements and Slash Commands.
-## DependsOn: LibAddonMenu-2.0>=34 LibMediaProvider-1.0
+## DependsOn: LibAddonMenu-2.0>=34 LibMediaProvider-1.0>=27
 ## OptionalDependsOn: LibChatMessage>=105 pChat>=10000309 CombatMetrics>=10515
-## OptionalDependsOn: LibDebugLogger>=263 DolgubonsLazyWritCreator LibLazyCrafting>=3000 LootLog
+## OptionalDependsOn: LibDebugLogger>=263 DolgubonsLazyWritCreator LibLazyCrafting>=3086 LootLog
 ## IsLibrary: false
 ## SavedVariables: LUIESV
 
-# This Add-on is not created by, affiliated with or sponsored by ZeniMax Media Inc. or its affiliates.
-# The Elder Scrolls® and related logos are registered trademarks or trademarks of ZeniMax Media Inc. in the United States and/or other countries.
-# All rights reserved
-#
-# You can read the full terms at https://account.elderscrollsonline.com/add-on-terms
-
-# The MIT License (MIT)
-#
-# Copyright (c) 2017-2019 - LuiExtended - ArtOfShred <esoui.com>
-# Copyright (c) 2015-2016 - LuiExtended - SpellBuilder and Upularity <esoui.com>
-# Copyright (c) 2016-2018 - Miat's CC Tracker - dorrino <esoui.com>
-# Copyright (c) 2014 - CombatCloud - Samantha James
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-# THE SOFTWARE.
-
-LuiExtended.lua
-LuiExtended_Log.lua
+#Load addon constant values
 data/Globals.lua
+
+#Load addon language strings
 i18n/en.lua
 i18n/$(language).lua
+
+#Load addon settings strings
 i18n/settings/Settings_en.lua
 i18n/settings/Settings_$(language).lua
+
+#Load addon skills strings
 i18n/skills/Skills_en.lua
 i18n/skills/Skills_$(language).lua
 
+#Addon base functions and code
+LuiExtended.lua
+LuiExtended_Log.lua
 Functions.lua
 Hooks-SkillsAdvisor.lua
 Hooks.lua
@@ -135,3 +112,34 @@ settings/InfoPanel.lua
 settings/SlashCommands.lua
 settings/SpellCastBuffs.lua
 settings/UnitFrames.lua
+
+# This Add-on is not created by, affiliated with or sponsored by ZeniMax Media Inc. or its affiliates.
+# The Elder Scrolls® and related logos are registered trademarks or trademarks of ZeniMax Media Inc. in the United States and/or other countries.
+# All rights reserved
+#
+# You can read the full terms at https://account.elderscrollsonline.com/add-on-terms
+
+# The MIT License (MIT)
+#
+# Copyright (c) 2017-2019 - LuiExtended - ArtOfShred <esoui.com>
+# Copyright (c) 2015-2016 - LuiExtended - SpellBuilder and Upularity <esoui.com>
+# Copyright (c) 2016-2018 - Miat's CC Tracker - dorrino <esoui.com>
+# Copyright (c) 2014 - CombatCloud - Samantha James
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
