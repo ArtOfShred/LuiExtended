@@ -880,6 +880,7 @@ function CombatInfo.CreateSettings()
                 end,
                 setFunc = function (value)
                     Settings.showMarker = value or false
+                    CombatInfo.SetMarker()
                 end,
                 width = "half",
             },

@@ -2633,7 +2633,7 @@ function SpellCastBuffs.CreateSettings()
                 end,
             },
             {
-                -- Tooltip Enable
+                -- Tooltip Custom
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_CUSTOM),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_CUSTOM_TP),
