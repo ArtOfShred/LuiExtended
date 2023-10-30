@@ -9722,9 +9722,8 @@ function ChatAnnouncements.HookFunction()
         g_previousEndlessDungeonProgression[3] = arc
     end
 
-    if GetAPIVersion() < 101039 then
-        ENDLESS_DUNGEON_MANAGER:RegisterCallback("StateChanged", RefreshEndlessDungeonProgressionState)
-    end
+
+    ENDLESS_DUNGEON_MANAGER:RegisterCallback("StateChanged", RefreshEndlessDungeonProgressionState)
 
     local function UpdateEndlessDungeonTrackers()
         ENDLESS_DUNGEON_HUD_TRACKER:UpdateProgress()
