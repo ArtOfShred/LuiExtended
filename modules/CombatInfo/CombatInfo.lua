@@ -14,7 +14,7 @@ local Castbar = LUIE.Data.CastBarTable
 
 local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
-
+local strfmat = string.format
 local eventManager = EVENT_MANAGER
 local sceneManager = SCENE_MANAGER
 local windowManager = WINDOW_MANAGER
@@ -398,7 +398,7 @@ local function SetupSwapAnimation(button)
 end
 
 local function FormatDurationSeconds(remain)
-    return string.format((CombatInfo.SV.BarMillis and ((remain < CombatInfo.SV.BarMillisThreshold * 1000) or CombatInfo.SV.BarMillisAboveTen)) and "%.1f" or "%.1d", remain / 1000)
+    return strfmat((CombatInfo.SV.BarMillis and ((remain < CombatInfo.SV.BarMillisThreshold * 1000) or CombatInfo.SV.BarMillisAboveTen)) and "%.1f" or "%.1d", remain / 1000)
 end
 
 -- Module initialization
@@ -1024,9 +1024,9 @@ function CombatInfo.OnUpdate(currentTime)
             elseif remain > 60000 then
                 local m = zo_floor(remain / 60000)
                 local s = remain / 1000 - 60 * m
-                text = m .. ":" .. string.format("%.2d", s)
+                text = m .. ":" .. strfmat("%.2d", s)
             else
-                text = string.format(CombatInfo.SV.PotionTimerMillis and "%.1f" or "%.1d", 0.001 * remain)
+                text = strfmat(CombatInfo.SV.PotionTimerMillis and "%.1f" or "%.1d", 0.001 * remain)
             end
             label:SetText(text)
         else
@@ -1131,7 +1131,7 @@ function CombatInfo.OnUpdateCastbar(currentTime)
         CombatInfo.StopCastBar()
     else
         if CombatInfo.SV.CastBarTimer then
-            castbar.bar.timer:SetText(string.format("%.1f", remain / 1000))
+            castbar.bar.timer:SetText(strfmat("%.1f", remain / 1000))
         end
         if castbar.type == 1 then
             castbar.bar.bar:SetValue((currentTime - castStarts) / (castEnds - castStarts))
@@ -1942,7 +1942,7 @@ function CombatInfo.GenerateCastbarPreview(state)
         castbar.bar.name:SetHidden(not state)
     end
     if CombatInfo.SV.CastBarTimer then
-        castbar.bar.timer:SetText(string.format("1.0"))
+        castbar.bar.timer:SetText(strfmat("1.0"))
         castbar.bar.timer:SetHidden(not state)
     end
     castbar.bar.bar:SetValue(1)
@@ -1973,7 +1973,7 @@ function CombatInfo.ClientInteractResult(eventCode, result, interactTargetName)
             castbar.bar.name:SetHidden(false)
         end
         if CombatInfo.SV.CastBarTimer then
-            castbar.bar.timer:SetText(string.format("%.1f", remain/1000))
+            castbar.bar.timer:SetText(strfmat("%.1f", remain/1000))
             castbar.bar.timer:SetHidden(false)
         end
 
@@ -2028,7 +2028,7 @@ function CombatInfo.SoulGemResurrectionStart(eventCode, durationMs)
         castbar.bar.name:SetHidden(false)
     end
     if CombatInfo.SV.CastBarTimer then
-        castbar.bar.timer:SetText(string.format("%.1f", remain / 1000))
+        castbar.bar.timer:SetText(strfmat("%.1f", remain / 1000))
         castbar.bar.timer:SetHidden(false)
     end
 
@@ -2197,7 +2197,7 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
                 castbar.bar.name:SetHidden(false)
             end
             if CombatInfo.SV.CastBarTimer then
-                castbar.bar.timer:SetText(string.format("%.1f", remain / 1000))
+                castbar.bar.timer:SetText(strfmat("%.1f", remain / 1000))
                 castbar.bar.timer:SetHidden(false)
             end
 

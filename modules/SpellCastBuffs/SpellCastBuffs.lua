@@ -11,7 +11,7 @@ local UI = LUIE.UI
 local Effects = LUIE.Data.Effects
 local Abilities = LUIE.Data.Abilities
 local Tooltips = LUIE.Data.Tooltips
-
+local strfmat = string.format
 local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
 --local displayName = GetDisplayName()
@@ -3880,7 +3880,7 @@ function SpellCastBuffs.updateIcons(currentTime, sortedList, container)
         end
 
         if effect.stack and effect.stack > 0 then
-            buff.stack:SetText(string.format("%s", effect.stack))
+            buff.stack:SetText(strfmat("%s", effect.stack))
             buff.stack:SetHidden(false)
         else
             buff.stack:SetHidden(true)
@@ -3890,19 +3890,19 @@ function SpellCastBuffs.updateIcons(currentTime, sortedList, container)
         if remain and not effect.fakeDuration then
             if remain > 86400000 then
                 -- more then 1 day
-                buff.label:SetText(string.format("%d d", zo_floor(remain / 86400000)))
+                buff.label:SetText(strfmat("%d d", zo_floor(remain / 86400000)))
             elseif remain > 6000000 then
                 -- over 100 minutes - display XXh
-                buff.label:SetText(string.format("%dh", zo_floor(remain / 3600000)))
+                buff.label:SetText(strfmat("%dh", zo_floor(remain / 3600000)))
             elseif remain > 600000 then
                 -- over 10 minutes - display XXm
-                buff.label:SetText(string.format("%dm", zo_floor(remain / 60000)))
+                buff.label:SetText(strfmat("%dm", zo_floor(remain / 60000)))
             elseif remain > 60000 or container == "player_long" then
                 local m = zo_floor(remain / 60000)
                 local s = remain / 1000 - 60 * m
-                buff.label:SetText(string.format("%d:%.2d", m, s))
+                buff.label:SetText(strfmat("%d:%.2d", m, s))
             else
-                buff.label:SetText(string.format(SpellCastBuffs.SV.RemainingTextMillis and "%.1f" or "%.1d", remain / 1000))
+                buff.label:SetText(strfmat(SpellCastBuffs.SV.RemainingTextMillis and "%.1f" or "%.1d", remain / 1000))
             end
         end
         if effect.restart and buff.cd ~= nil then

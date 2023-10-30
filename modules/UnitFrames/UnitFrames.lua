@@ -11,7 +11,7 @@ local UI = LUIE.UI
 
 local AbbreviateNumber = LUIE.AbbreviateNumber
 local printToChat = LUIE.PrintToChat
-
+local strfmat = string.format
 local zo_strformat = zo_strformat
 
 local eventManager = EVENT_MANAGER
@@ -2220,7 +2220,7 @@ end
 -- Runs on the EVENT_UNIT_CREATED listener.
 -- Used to create DefaultFrames UI controls and request delayed CustomFrames group frame update
 function UnitFrames.OnUnitCreated(eventCode, unitTag)
-    --d( string.format("[%s] OnUnitCreated: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
+    --d( strfmat("[%s] OnUnitCreated: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
     -- Create on-fly UI controls for default UI group member and reread his values
     if g_DefaultFrames.SmallGroup then
         UnitFrames.DefaultFramesCreateUnitGroupControls(unitTag)
@@ -2252,7 +2252,7 @@ end
 -- Runs on the EVENT_UNIT_DESTROYED listener.
 -- Used to request delayed CustomFrames group frame update
 function UnitFrames.OnUnitDestroyed(eventCode, unitTag)
-    --d( string.format("[%s] OnUnitDestroyed: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
+    --d( strfmat("[%s] OnUnitDestroyed: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
     -- Make sure we do not try to update bars on this unitTag before full group update is complete
     if "group" == zo_strsub(unitTag, 0, 5) then
         UnitFrames.CustomFrames[unitTag] = nil
@@ -3263,7 +3263,7 @@ end
 
 -- Runs on the EVENT_GROUP_MEMBER_CONNECTED_STATUS listener.
 function UnitFrames.OnGroupMemberConnectedStatus(eventCode, unitTag, isOnline)
-    --d( string.format("DC: %s - %s", unitTag, isOnline and "Online" or "Offline" ) )
+    --d( strfmat("DC: %s - %s", unitTag, isOnline and "Online" or "Offline" ) )
     if UnitFrames.CustomFrames[unitTag] and UnitFrames.CustomFrames[unitTag].dead then
         UnitFrames.CustomFramesSetDeadLabel(UnitFrames.CustomFrames[unitTag], isOnline and nil or strOffline)
     end
@@ -3292,7 +3292,7 @@ end
 -- Runs on the EVENT_UNIT_DEATH_STATE_CHANGED listener.
 -- This handler fires every time a valid unitTag dies or is resurrected
 function UnitFrames.OnDeath(eventCode, unitTag, isDead)
-    --d( string.format("%s - %s", unitTag, isDead and "Dead" or "Alive" ) )
+    --d( strfmat("%s - %s", unitTag, isDead and "Dead" or "Alive" ) )
     if UnitFrames.CustomFrames[unitTag] and UnitFrames.CustomFrames[unitTag].dead then
         UnitFrames.ResurrectionMonitor(unitTag)
     end
@@ -3751,7 +3751,7 @@ end
 
 -- Repopulate group members, but try to update only those, that require it
 function UnitFrames.CustomFramesGroupUpdate()
-    --d( string.format("[%s] GroupUpdate", GetTimeString()) )
+    --d( strfmat("[%s] GroupUpdate", GetTimeString()) )
     -- Unregister update function and clear local flag
     eventManager:UnregisterForUpdate(g_PendingUpdate.Group.name)
     g_PendingUpdate.Group.flag = false

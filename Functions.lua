@@ -3,6 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
+local strfmat = string.format
+
 local function ToInteger(number)
     return zo_floor(tonumber(number) or error("Could not cast '" .. tostring(number) .. "' to number.'"))
 end
@@ -62,7 +64,7 @@ local function FormatMessage(msg, doTimestamp)
     if doTimestamp then
         local timestring = GetTimeString()
         -- Color Code to match pChat default
-        formattedMsg = string.format("|c%s[%s]|r %s", LUIE.TimeStampColorize, LUIE.CreateTimestamp(timestring), formattedMsg)
+        formattedMsg = strfmat("|c%s[%s]|r %s", LUIE.TimeStampColorize, LUIE.CreateTimestamp(timestring), formattedMsg)
     end
     return formattedMsg
 end
@@ -156,9 +158,9 @@ function LUIE.AbbreviateNumber(number, shorten, comma)
                 return number
             end
         elseif value >= 100 or suffix == nil then
-            value = string.format("%d", value)
+            value = strfmat("%d", value)
         else
-            value = string.format("%.1f", value)
+            value = strfmat("%.1f", value)
         end
 
         if suffix ~= nil then

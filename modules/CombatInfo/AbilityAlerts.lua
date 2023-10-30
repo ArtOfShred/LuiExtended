@@ -16,7 +16,7 @@ local AlertsConvert = LUIE.Data.AlertBossNameConvert
 
 local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
-
+local strfmat = string.format
 local eventManager = EVENT_MANAGER
 local sceneManager = SCENE_MANAGER
 local windowManager = WINDOW_MANAGER
@@ -398,7 +398,7 @@ function AbilityAlerts.AlertUpdate(currentTime)
             --
 
             if alert.data.showDuration then
-                alert.timer:SetText(alert.data.showDuration and string.format(" %.1f", remain / 1000) or "")
+                alert.timer:SetText(alert.data.showDuration and strfmat(" %.1f", remain / 1000) or "")
                 alert.timer:SetColor(unpack(CombatInfo.SV.alerts.colors.alertTimer))
             end
             if postCast <= -1100 then
@@ -607,7 +607,7 @@ function AbilityAlerts.SetupSingleAlertFrame(abilityId, textPrefix, textModifier
             alert.modifier:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
             alert.mitigation:SetText(textMitigation)
             alert.mitigation:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
-            alert.timer:SetText(alert.data.showDuration and string.format(" %.1f", remain / 1000) or "")
+            alert.timer:SetText(alert.data.showDuration and strfmat(" %.1f", remain / 1000) or "")
             alert.timer:SetColor(unpack(CombatInfo.SV.alerts.colors.alertTimer))
             alert.icon:SetHidden(false)
             alert:SetHidden(false)
@@ -644,7 +644,7 @@ function AbilityAlerts.SetupSingleAlertFrame(abilityId, textPrefix, textModifier
     alert.modifier:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
     alert.mitigation:SetText(textMitigation)
     alert.mitigation:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
-    alert.timer:SetText(alert.data.showDuration and string.format(" %.1f", remain / 1000) or "")
+    alert.timer:SetText(alert.data.showDuration and strfmat(" %.1f", remain / 1000) or "")
     alert.timer:SetColor(unpack(CombatInfo.SV.alerts.colors.alertTimer))
     alert.icon:SetHidden(false)
     alert:SetHidden(false)

@@ -6,7 +6,7 @@
 local SpellCastBuffs = LUIE.SpellCastBuffs
 
 local Effects = LUIE.Data.Effects
-
+local strfmat = string.format
 local zo_strformat = zo_strformat
 local zo_strgsub = zo_strgsub
 
@@ -23,7 +23,7 @@ local function MillisecondTimestampDebug(message)
     timestamp = zo_strgsub(timestamp, "A", "")
     timestamp = zo_strgsub(timestamp, "a", "")
     timestamp = zo_strgsub(timestamp, "ms", "")
-    message = string.format("|c%s[%s]|r %s", LUIE.TimeStampColorize, timestamp, message)
+    message = strfmat("|c%s[%s]|r %s", LUIE.TimeStampColorize, timestamp, message)
     return message
 end
 

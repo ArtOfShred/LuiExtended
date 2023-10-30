@@ -8,7 +8,7 @@ local CrowdControlTracker = CombatInfo.CrowdControlTracker
 local AbilityAlerts = CombatInfo.AbilityAlerts
 
 local zo_strformat = zo_strformat
-
+local strfmat = string.format
 local castBarMovingEnabled = false    -- Helper local flag
 local alertFrameMovingEnabled = false -- Helper local flag
 
@@ -3282,7 +3282,7 @@ function CombatInfo.CreateSettings()
                 type = "slider",
                 name = GetString(SI_LUIE_LAM_CI_CCT_SCALE),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_SCALE_TP),
-                default = tonumber(string.format("%.0f", 100 * Defaults.cct.controlScale)),
+                default = tonumber(strfmat("%.0f", 100 * Defaults.cct.controlScale)),
                 disabled = function ()
                     return not Settings.cct.enabled
                 end,
@@ -3290,7 +3290,7 @@ function CombatInfo.CreateSettings()
                 max = 200,
                 step = 1,
                 getFunc = function ()
-                    return tonumber(string.format("%.0f", 100 * Settings.cct.controlScale))
+                    return tonumber(strfmat("%.0f", 100 * Settings.cct.controlScale))
                 end,
                 setFunc = function (newValue)
                     Settings.cct.controlScale = newValue / 100
