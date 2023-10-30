@@ -366,6 +366,7 @@ function SlashCommands.SlashVoteKick(option)
     end
 
     -- If we try to kick ourself then display an error message.
+    local playerName = GetRawUnitName("player")
     if GetUnitName(unitToKick) == playerName then
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_SELF), true)
         if LUIE.ChatAnnouncements.SV.Group.GroupLFGAlert then
