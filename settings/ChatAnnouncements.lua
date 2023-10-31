@@ -32,8 +32,8 @@ function ChatAnnouncements.CreateSettings()
 
     local panelDataChatAnnouncements = {
         type = "panel",
-        name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_CA)),
-        displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(SI_LUIE_LAM_CA)),
+        name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(LUIE_STRING_LAM_CA)),
+        displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(LUIE_STRING_LAM_CA)),
         author = LUIE.author .. "\n",
         version = LUIE.version,
         website = LUIE.website,
@@ -50,14 +50,14 @@ function ChatAnnouncements.CreateSettings()
     -- Chat Announcements Module Description
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
         type = "description",
-        text = GetString(SI_LUIE_LAM_CA_DESCRIPTION),
+        text = GetString(LUIE_STRING_LAM_CA_DESCRIPTION),
     }
 
     -- ReloadUI Button
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
         type = "button",
-        name = GetString(SI_LUIE_LAM_RELOADUI),
-        tooltip = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
+        name = GetString(LUIE_STRING_LAM_RELOADUI),
+        tooltip = GetString(LUIE_STRING_LAM_RELOADUI_BUTTON),
         func = function ()
             ReloadUI("ingame")
         end,
@@ -67,13 +67,13 @@ function ChatAnnouncements.CreateSettings()
     -- Chat Announcements - Chat Message Settings Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_CA_CHATHEADER),
+        name = GetString(LUIE_STRING_LAM_CA_CHATHEADER),
         controls = {
             {
                 -- Player Name Display Method
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD),
-                tooltip = GetString(SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TP),
+                name = GetString(LUIE_STRING_LAM_CA_NAMEDISPLAYMETHOD),
+                tooltip = GetString(LUIE_STRING_LAM_CA_NAMEDISPLAYMETHOD_TP),
                 choices = chatNameDisplayOptions,
                 getFunc = function ()
                     return chatNameDisplayOptions[Settings.ChatPlayerDisplayOptions]
@@ -91,8 +91,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Character Name Bracket
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_CHARACTER),
-                tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_CHARACTER_TP),
+                name = GetString(LUIE_STRING_LAM_CA_BRACKET_OPTION_CHARACTER),
+                tooltip = GetString(LUIE_STRING_LAM_CA_BRACKET_OPTION_CHARACTER_TP),
                 choices = linkBracketDisplayOptions,
                 getFunc = function ()
                     return linkBracketDisplayOptions[Settings.BracketOptionCharacter]
@@ -127,8 +127,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Bypass LUIE to use other chat addons
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_CHATBYPASS),
-                tooltip = GetString(SI_LUIE_LAM_CA_CHATBYPASS_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CHATBYPASS),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CHATBYPASS_TP),
                 getFunc = function ()
                     return Settings.ChatBypassFormat
                 end,
@@ -144,8 +144,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Choose Chat Print Method
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_CA_CHATMETHOD),
-                tooltip = GetString(SI_LUIE_LAM_CA_CHATMETHOD_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CHATMETHOD),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CHATMETHOD_TP),
                 choices = { "Print to All Tabs", "Print to Specific Tabs" },
                 getFunc = function ()
                     return Settings.ChatMethod
@@ -160,8 +160,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Print Chat Announcements & Messages to Tab 1
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "1"),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "1"),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_CHATTAB), "1"),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_CHATTAB_TP), "1"),
                 getFunc = function ()
                     return Settings.ChatTab[1]
                 end,
@@ -177,8 +177,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Print Chat Announcements & Messages to Tab 2
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "2"),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "2"),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_CHATTAB), "2"),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_CHATTAB_TP), "2"),
                 getFunc = function ()
                     return Settings.ChatTab[2]
                 end,
@@ -194,8 +194,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Print Chat Announcements & Messages to Tab 3
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "3"),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "3"),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_CHATTAB), "3"),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_CHATTAB_TP), "3"),
                 getFunc = function ()
                     return Settings.ChatTab[3]
                 end,
@@ -211,8 +211,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Print Chat Announcements & Messages to Tab 4
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "4"),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "4"),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_CHATTAB), "4"),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_CHATTAB_TP), "4"),
                 getFunc = function ()
                     return Settings.ChatTab[4]
                 end,
@@ -228,8 +228,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Print Chat Announcements & Messages to Tab 5
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "5"),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "5"),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_CHATTAB), "5"),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_CHATTAB_TP), "5"),
                 getFunc = function ()
                     return Settings.ChatTab[5]
                 end,
@@ -245,8 +245,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Display System & Notifications in all Tabs
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CHATTABSYSTEMALL)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CHATTABSYSTEMALL_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CHATTABSYSTEMALL)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CHATTABSYSTEMALL_TP),
                 getFunc = function ()
                     return Settings.ChatSystemAll
                 end,
@@ -262,8 +262,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Include Timestamp
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_TIMESTAMP),
-                tooltip = GetString(SI_LUIE_LAM_CA_TIMESTAMP_TP),
+                name = GetString(LUIE_STRING_LAM_CA_TIMESTAMP),
+                tooltip = GetString(LUIE_STRING_LAM_CA_TIMESTAMP_TP),
                 getFunc = function ()
                     return Settings.TimeStamp
                 end,
@@ -276,8 +276,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Timestamp Format
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_TIMESTAMPFORMAT)),
-                tooltip = GetString(SI_LUIE_LAM_CA_TIMESTAMPFORMAT_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_TIMESTAMPFORMAT)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_TIMESTAMPFORMAT_TP),
                 getFunc = function ()
                     return Settings.TimeStampFormat
                 end,
@@ -293,8 +293,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Timestamp Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_TIMESTAMPCOLOR)),
-                tooltip = GetString(SI_LUIE_LAM_CA_TIMESTAMPCOLOR_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_TIMESTAMPCOLOR)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_TIMESTAMPCOLOR_TP),
                 getFunc = function ()
                     return unpack(Settings.TimeStampColor)
                 end,
@@ -318,13 +318,13 @@ function ChatAnnouncements.CreateSettings()
     -- Chat Announcements - Currency Announcements Options Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_CA_CURRENCY_HEADER),
+        name = GetString(LUIE_STRING_LAM_CA_CURRENCY_HEADER),
         controls = {
             {
                 -- Show Currency Icons
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWICONS),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWICONS_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWICONS),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWICONS_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyIcon
                 end,
@@ -340,8 +340,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Gold
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_GOLD),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_GOLD_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_GOLD),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_GOLD_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyGoldChange
                 end,
@@ -358,7 +358,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Gold Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDCOLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_GOLDCOLOR)),
                 getFunc = function ()
                     return unpack(Settings.Currency.CurrencyGoldColor)
                 end,
@@ -379,8 +379,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Gold Name
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDNAME)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDNAME_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_GOLDNAME)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_GOLDNAME_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyGoldName
                 end,
@@ -396,8 +396,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Gold Total Amount
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDTOTAL)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDTOTAL_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_GOLDTOTAL)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_GOLDTOTAL_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyGoldShowTotal
                 end,
@@ -413,8 +413,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Total Currency Message (Gold)
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDTOTAL_MSG)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDTOTAL_MSG_TP),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_GOLDTOTAL_MSG)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_GOLDTOTAL_MSG_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyMessageTotalGold
                 end,
@@ -430,8 +430,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Gold Threshold
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDTHRESHOLD)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDTHRESHOLD_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_GOLDTHRESHOLD)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_GOLDTHRESHOLD_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyGoldFilter
                 end,
@@ -450,8 +450,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Throttle Gold Looted
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDTHROTTLE)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDTHROTTLE_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_GOLDTHROTTLE)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_GOLDTHROTTLE_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyGoldThrottle
                 end,
@@ -467,8 +467,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Hide Gold Spent on AH (Listing)
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHLIST)),
-                tooltip = zo_strformat("<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHLIST_TP)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_HIDEGOLDAHLIST)),
+                tooltip = zo_strformat("<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_HIDEGOLDAHLIST_TP)),
                 getFunc = function ()
                     return Settings.Currency.CurrencyGoldHideListingAH
                 end,
@@ -484,8 +484,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Hide Gold Spent on AH (Purchase)
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT)),
-                tooltip = zo_strformat("<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_TP)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_HIDEGOLDAHSPENT)),
+                tooltip = zo_strformat("<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_TP)),
                 getFunc = function ()
                     return Settings.Currency.CurrencyGoldHideAH
                 end,
@@ -501,8 +501,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Alliance Points
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAP),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAP_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWAP),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWAP_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyAPShowChange
                 end,
@@ -518,7 +518,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Alliance Points Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPCOLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWAPCOLOR)),
                 getFunc = function ()
                     return unpack(Settings.Currency.CurrencyAPColor)
                 end,
@@ -539,8 +539,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Alliance Points Name
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPNAME)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPNAME_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWAPNAME)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWAPNAME_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyAPName
                 end,
@@ -556,8 +556,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Alliance Points Total
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTOTAL)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTOTAL_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWAPTOTAL)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWAPTOTAL_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyAPShowTotal
                 end,
@@ -573,8 +573,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Total Currency Message (Alliance Points)
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_APTOTAL_MSG)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_APTOTAL_MSG_TP),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_APTOTAL_MSG)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_APTOTAL_MSG_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyMessageTotalAP
                 end,
@@ -590,8 +590,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Alliance Points Threshold
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHRESHOLD)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHRESHOLD_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWAPTHRESHOLD)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWAPTHRESHOLD_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyAPFilter
                 end,
@@ -610,8 +610,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Throttle Alliance Points Earned
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHROTTLE)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHROTTLE_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWAPTHROTTLE)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWAPTHROTTLE_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyAPThrottle
                 end,
@@ -630,8 +630,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Tel Var
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTV),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTV_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTV),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTV_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyTVChange
                 end,
@@ -647,7 +647,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Tel Var Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVCOLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTVCOLOR)),
                 getFunc = function ()
                     return unpack(Settings.Currency.CurrencyTVColor)
                 end,
@@ -668,8 +668,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Tel Var Name
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVNAME)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVNAME_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTVNAME)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTVNAME_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyTVName
                 end,
@@ -685,8 +685,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Tel Var Total
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTOTAL)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTOTAL_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTVTOTAL)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTVTOTAL_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyTVShowTotal
                 end,
@@ -702,8 +702,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Total Currency Message (Tel Var)
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_TVTOTAL_MSG)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_TVTOTAL_MSG_TP),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_TVTOTAL_MSG)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_TVTOTAL_MSG_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyMessageTotalTV
                 end,
@@ -719,8 +719,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Tel Var Stones Threshold
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHRESHOLD)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHRESHOLD_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTVTHRESHOLD)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTVTHRESHOLD_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyTVFilter
                 end,
@@ -739,8 +739,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Throttle Tel Var Stones Looted
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHROTTLE)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHROTTLE_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTVTHROTTLE)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTVTHROTTLE_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyTVThrottle
                 end,
@@ -759,8 +759,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Writ Vouchers
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHER),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHER_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWVOUCHER),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWVOUCHER_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyWVChange
                 end,
@@ -776,7 +776,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Writ Vouchers Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERCOLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWVOUCHERCOLOR)),
                 getFunc = function ()
                     return unpack(Settings.Currency.CurrencyWVColor)
                 end,
@@ -797,8 +797,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Writ Vouchers Name
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERNAME)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERNAME_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWVOUCHERNAME)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWVOUCHERNAME_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyWVName
                 end,
@@ -814,8 +814,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Writ Vouchers Total
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyWVShowTotal
                 end,
@@ -831,8 +831,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Total Currency Message (Writ Vouchers)
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_WVTOTAL_MSG)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_WVTOTAL_MSG_TP),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_WVTOTAL_MSG)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_WVTOTAL_MSG_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyMessageTotalWV
                 end,
@@ -848,8 +848,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Undaunted Keys
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWUNDAUNTED),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWUNDAUNTED_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWUNDAUNTED),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWUNDAUNTED_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyUndauntedChange
                 end,
@@ -865,7 +865,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Undaunted Keys Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWUNDAUNTEDCOLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWUNDAUNTEDCOLOR)),
                 getFunc = function ()
                     return unpack(Settings.Currency.CurrencyUndauntedColor)
                 end,
@@ -886,8 +886,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Undaunted Keys Name
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWUNDAUNTEDNAME)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWUNDAUNTEDNAME_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWUNDAUNTEDNAME)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWUNDAUNTEDNAME_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyUndauntedName
                 end,
@@ -903,8 +903,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Undaunted Keys Total
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWUNDAUNTEDTOTAL)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWUNDAUNTEDTOTAL_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWUNDAUNTEDTOTAL)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWUNDAUNTEDTOTAL_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyUndauntedShowTotal
                 end,
@@ -920,8 +920,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Total Currency Message (Undaunted Keys)
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_UNDAUNTEDTOTAL_MSG)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_UNDAUNTEDTOTAL_MSG_TP),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_UNDAUNTEDTOTAL_MSG)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_UNDAUNTEDTOTAL_MSG_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyMessageTotalUndaunted
                 end,
@@ -937,8 +937,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Endless Keys
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDLESS),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDLESS_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWENDLESS),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWENDLESS_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyEndlessChange
                 end,
@@ -954,7 +954,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Endless Keys Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDLESSCOLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWENDLESSCOLOR)),
                 getFunc = function ()
                     return unpack(Settings.Currency.CurrencyEndlessColor)
                 end,
@@ -975,8 +975,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Endless Keys Name
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDLESSNAME)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDLESSNAME_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWENDLESSNAME)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWENDLESSNAME_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyEndlessName
                 end,
@@ -992,8 +992,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Endless Keys Total
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDLESSTOTAL)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDLESSTOTAL_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWENDLESSTOTAL)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWENDLESSTOTAL_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyEndlessShowTotal
                 end,
@@ -1009,8 +1009,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Total Currency Message (Endless Keys)
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_ENDLESSTOTAL_MSG)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_ENDLESSTOTAL_MSG_TP),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_ENDLESSTOTAL_MSG)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_ENDLESSTOTAL_MSG_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyMessageTotalEndless
                 end,
@@ -1026,8 +1026,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Outfit Tokens
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENS),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENS_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTOKENS),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTOKENS_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyOutfitTokenChange
                 end,
@@ -1043,7 +1043,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Outfit Tokens Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSCOLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTOKENSCOLOR)),
                 getFunc = function ()
                     return unpack(Settings.Currency.CurrencyOutfitTokenColor)
                 end,
@@ -1064,8 +1064,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Outfit Tokens Name
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSNAME)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSNAME_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTOKENSNAME)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTOKENSNAME_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyOutfitTokenName
                 end,
@@ -1081,8 +1081,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Outfit Tokens Total
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSTOTAL)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSTOTAL_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTOKENSTOTAL)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTOKENSTOTAL_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyOutfitTokenShowTotal
                 end,
@@ -1098,8 +1098,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Total Currency Message (Outfit Tokens)
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_TOKENSTOTAL_MSG)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_TOKENSTOTAL_MSG_TP),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_TOKENSTOTAL_MSG)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_TOKENSTOTAL_MSG_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyMessageTotalOutfitToken
                 end,
@@ -1115,8 +1115,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Transmute Crystals
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTRANSMUTE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTRANSMUTE_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyTransmuteChange
                 end,
@@ -1132,7 +1132,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Transmute Crystals Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTECOLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTRANSMUTECOLOR)),
                 getFunc = function ()
                     return unpack(Settings.Currency.CurrencyTransmuteColor)
                 end,
@@ -1153,8 +1153,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Transmute Crystals Name
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTENAME)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTENAME_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTRANSMUTENAME)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTRANSMUTENAME_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyTransmuteName
                 end,
@@ -1170,8 +1170,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Transmute Crystals Total
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTETOTAL)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTETOTAL_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTRANSMUTETOTAL)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWTRANSMUTETOTAL_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyTransmuteShowTotal
                 end,
@@ -1187,8 +1187,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Total Currency Message (Transmute Crystals)
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_TRANSMUTETOTAL_MSG)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_TRANSMUTETOTAL_MSG_TP),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_TRANSMUTETOTAL_MSG)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_TRANSMUTETOTAL_MSG_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyMessageTotalTransmute
                 end,
@@ -1204,8 +1204,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Event Tickets
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWEVENT),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWEVENT_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWEVENT),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWEVENT_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyEventChange
                 end,
@@ -1221,7 +1221,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Event Tickets Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTCOLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWEVENTCOLOR)),
                 getFunc = function ()
                     return unpack(Settings.Currency.CurrencyEventColor)
                 end,
@@ -1242,8 +1242,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Event Tickets Name
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTNAME)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTNAME_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWEVENTNAME)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWEVENTNAME_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyEventName
                 end,
@@ -1259,8 +1259,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Event Tickets Total
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTTOTAL)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTTOTAL_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWEVENTTOTAL)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWEVENTTOTAL_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyEventShowTotal
                 end,
@@ -1276,8 +1276,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Total Currency Message (Event Tickets)
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_EVENTTOTAL_MSG)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_EVENTTOTAL_MSG_TP),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_EVENTTOTAL_MSG)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_EVENTTOTAL_MSG_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyMessageTotalEvent
                 end,
@@ -1293,8 +1293,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Crowns
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNS),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNS_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWCROWNS),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWCROWNS_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyCrownsChange
                 end,
@@ -1310,7 +1310,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Crowns Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSCOLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWCROWNSCOLOR)),
                 getFunc = function ()
                     return unpack(Settings.Currency.CurrencyCrownsColor)
                 end,
@@ -1331,8 +1331,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Crowns Name
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSNAME)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSNAME_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWCROWNSNAME)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWCROWNSNAME_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyCrownsName
                 end,
@@ -1348,8 +1348,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Crowns Total
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSTOTAL)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSTOTAL_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWCROWNSTOTAL)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWCROWNSTOTAL_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyCrownsShowTotal
                 end,
@@ -1365,8 +1365,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Total Currency Message (Crowns)
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_CROWNSTOTAL_MSG)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_CROWNSTOTAL_MSG_TP),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_CROWNSTOTAL_MSG)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_CROWNSTOTAL_MSG_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyMessageTotalCrowns
                 end,
@@ -1382,8 +1382,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Crown Gems
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMS),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMS_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWCROWNGEMS),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWCROWNGEMS_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyCrownGemsChange
                 end,
@@ -1399,7 +1399,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Crown Gems Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSCOLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWCROWNGEMSCOLOR)),
                 getFunc = function ()
                     return unpack(Settings.Currency.CurrencyCrownGemsColor)
                 end,
@@ -1420,8 +1420,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Crown Gems Name
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSNAME)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSNAME_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWCROWNGEMSNAME)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWCROWNGEMSNAME_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyCrownGemsName
                 end,
@@ -1437,8 +1437,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Crown Gems Total
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSTOTAL)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSTOTAL_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWCROWNGEMSTOTAL)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWCROWNGEMSTOTAL_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyCrownGemsShowTotal
                 end,
@@ -1454,8 +1454,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Total Currency Message (Crown Gems)
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_CROWNGEMSTOTAL_MSG)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_CROWNGEMSTOTAL_MSG_TP),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_CROWNGEMSTOTAL_MSG)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_CROWNGEMSTOTAL_MSG_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyMessageTotalCrownGems
                 end,
@@ -1472,8 +1472,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Endeavors
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDEAVORS),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDEAVORS_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWENDEAVORS),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWENDEAVORS_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyEndeavorsChange
                 end,
@@ -1489,7 +1489,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Endeavors Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDEAVORSCOLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWENDEAVORSCOLOR)),
                 getFunc = function ()
                     return unpack(Settings.Currency.CurrencyEndeavorsColor)
                 end,
@@ -1510,8 +1510,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Endeavors Name
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDEAVORSNAME)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDEAVORSNAME_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWENDEAVORSNAME)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWENDEAVORSNAME_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyEndeavorsName
                 end,
@@ -1527,8 +1527,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Endeavors Total
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDEAVORSTOTAL)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWENDEAVORSTOTAL_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWENDEAVORSTOTAL)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_SHOWENDEAVORSTOTAL_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyEndeavorsShowTotal
                 end,
@@ -1544,8 +1544,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Total Currency Message (Endeavors)
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_ENDEAVORSTOTAL_MSG)),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_ENDEAVORSTOTAL_MSG_TP),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_ENDEAVORSTOTAL_MSG)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_ENDEAVORSTOTAL_MSG_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyMessageTotalEndeavors
                 end,
@@ -1564,13 +1564,13 @@ function ChatAnnouncements.CreateSettings()
     -- Chat Announcements - Loot Announcements Options Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_CA_LOOT_HEADER),
+        name = GetString(LUIE_STRING_LAM_CA_LOOT_HEADER),
         controls = {
             {
                 -- Item Link Bracket
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_ITEM),
-                tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_ITEM_TP),
+                name = GetString(LUIE_STRING_LAM_CA_BRACKET_OPTION_ITEM),
+                tooltip = GetString(LUIE_STRING_LAM_CA_BRACKET_OPTION_ITEM_TP),
                 choices = linkBracketDisplayOptions,
                 getFunc = function ()
                     return linkBracketDisplayOptions[Settings.BracketOptionItem]
@@ -1587,8 +1587,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show looted item icons
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWICONS),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWICONS_TP),
+                name = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWICONS),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWICONS_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootIcons
                 end,
@@ -1604,8 +1604,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Armor Type
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWARMORTYPE),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWARMORTYPE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWARMORTYPE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWARMORTYPE_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootShowArmorType
                 end,
@@ -1621,8 +1621,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Item Style
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWITEMSTYLE),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWITEMSTYLE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWITEMSTYLE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWITEMSTYLE_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootShowStyle
                 end,
@@ -1638,8 +1638,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Item Trait
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWITEMTRAIT),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWITEMTRAIT_TP),
+                name = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWITEMTRAIT),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWITEMTRAIT_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootShowTrait
                 end,
@@ -1655,8 +1655,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show loot total
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_LOOT_TOTAL),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_TOTAL_TP),
+                name = GetString(LUIE_STRING_LAM_CA_LOOT_TOTAL),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_TOTAL_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootTotal
                 end,
@@ -1672,8 +1672,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot total string
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_TOTALSTRING)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_TOTALSTRING_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_TOTALSTRING)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_TOTALSTRING_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootTotalString
                 end,
@@ -1689,8 +1689,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show looted items
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWITEMS),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWITEMS_TP),
+                name = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWITEMS),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWITEMS_TP),
                 getFunc = function ()
                     return Settings.Inventory.Loot
                 end,
@@ -1707,8 +1707,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Disable display of loot if LootLog is enabled
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTLOGDISABLE)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTLOGDISABLE_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_LOOTLOGDISABLE)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_LOOTLOGDISABLE_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootLogOverride
                 end,
@@ -1724,8 +1724,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show notable loot
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_SHOWNOTABLE)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWNOTABLE_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_SHOWNOTABLE)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWNOTABLE_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootOnlyNotable
                 end,
@@ -1741,8 +1741,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show group loot
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_SHOWGRPLOOT)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWGRPLOOT_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_SHOWGRPLOOT)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWGRPLOOT_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootGroup
                 end,
@@ -1758,8 +1758,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Hide annoying items
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_HIDEANNOYINGITEMS)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_HIDEANNOYINGITEMS_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_HIDEANNOYINGITEMS)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_HIDEANNOYINGITEMS_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootBlacklist
                 end,
@@ -1767,7 +1767,7 @@ function ChatAnnouncements.CreateSettings()
                     Settings.Inventory.LootBlacklist = value
                 end,
                 width = "full",
-                warning = GetString(SI_LUIE_LAM_CA_LOOT_HIDEANNOYINGITEMS_WARNING),
+                warning = GetString(LUIE_STRING_LAM_CA_LOOT_HIDEANNOYINGITEMS_WARNING),
                 disabled = function ()
                     return not (Settings.Inventory.Loot and LUIE.SV.ChatAnnouncements_Enable)
                 end,
@@ -1776,8 +1776,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Hide Trash Quality Items
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_HIDETRASH)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_HIDETRASH_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_HIDETRASH)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_HIDETRASH_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootNotTrash
                 end,
@@ -1793,8 +1793,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Confiscated Items
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTCONFISCATED)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTCONFISCATED_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_LOOTCONFISCATED)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_LOOTCONFISCATED_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootConfiscate
                 end,
@@ -1811,8 +1811,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Container Items Removed
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWCONTAINER)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWCONTAINER_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWCONTAINER)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWCONTAINER_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootShowContainer
                 end,
@@ -1829,8 +1829,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Destroyed Items
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWDESTROYED)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWDESTROYED_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWDESTROYED)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWDESTROYED_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootShowDestroy
                 end,
@@ -1847,8 +1847,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Removed Items
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWREMOVED)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWREMOVED_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWREMOVED)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWREMOVED_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootShowRemove
                 end,
@@ -1865,8 +1865,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show List Items
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWLIST)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWLIST_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWLIST)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWLIST_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootShowList
                 end,
@@ -1883,8 +1883,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Turnin Items
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWTURNIN)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWTURNIN_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWTURNIN)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWTURNIN_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootShowTurnIn
                 end,
@@ -1901,8 +1901,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Use Potion
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWUSE_POTION)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWUSE_POTION_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWUSE_POTION)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWUSE_POTION_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootShowUsePotion
                 end,
@@ -1919,8 +1919,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Use Food
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWUSE_FOOD)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWUSE_FOOD_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWUSE_FOOD)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWUSE_FOOD_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootShowUseFood
                 end,
@@ -1937,8 +1937,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Use Drink
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWUSE_DRINK)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWUSE_DRINK_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWUSE_DRINK)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWUSE_DRINK_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootShowUseDrink
                 end,
@@ -1955,8 +1955,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Use Repair Kit
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWUSE_REPAIR_KIT)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWUSE_REPAIR_KIT_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWUSE_REPAIR_KIT)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWUSE_REPAIR_KIT_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootShowUseRepairKit
                 end,
@@ -1973,8 +1973,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Use Soul Gem
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWUSE_SOUL_GEM)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWUSE_SOUL_GEM_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWUSE_SOUL_GEM)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWUSE_SOUL_GEM_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootShowUseSoulGem
                 end,
@@ -1991,8 +1991,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Use Siege Deploy
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWUSE_SIEGE)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWUSE_SIEGE_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWUSE_SIEGE)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWUSE_SIEGE_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootShowUseSiege
                 end,
@@ -2009,8 +2009,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Use Misc
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWUSE_MISC)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWUSE_MISC_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWUSE_MISC)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWUSE_MISC_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootShowUseMisc
                 end,
@@ -2027,8 +2027,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Lockpick Break
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWLOCKPICK)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWLOCKPICK_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWLOCKPICK)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWLOCKPICK_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootShowLockpick
                 end,
@@ -2045,8 +2045,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Use RECIPE
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTRECIPE)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTRECIPE_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_LOOTRECIPE)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_LOOTRECIPE_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootShowRecipe
                 end,
@@ -2063,8 +2063,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Use MOTIF
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTMOTIF)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTMOTIF_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_LOOTMOTIF)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_LOOTMOTIF_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootShowMotif
                 end,
@@ -2081,8 +2081,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Use STYLE
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSTYLE)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSTYLE_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSTYLE)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSTYLE_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootShowStylePage
                 end,
@@ -2099,8 +2099,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Hide Recipe Alert
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_HIDE_RECIPE_ALERT)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_HIDE_RECIPE_ALERT_TP),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_HIDE_RECIPE_ALERT)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_HIDE_RECIPE_ALERT_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootRecipeHideAlert
                 end,
@@ -2117,8 +2117,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Quest Loot (Add)
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWQUESTADD),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWQUESTADD_TP),
+                name = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWQUESTADD),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWQUESTADD_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootQuestAdd
                 end,
@@ -2136,8 +2136,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Quest Loot (Remove)
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWQUESTREM),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWQUESTREM_TP),
+                name = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWQUESTREM),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWQUESTREM_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootQuestRemove
                 end,
@@ -2155,8 +2155,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Vendor Inventory Changes
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWVENDOR),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWVENDOR_TP),
+                name = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWVENDOR),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWVENDOR_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootVendor
                 end,
@@ -2173,8 +2173,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Merge Currency & Loot Message
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_VENDOR_MERGE)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_VENDOR_MERGE_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_VENDOR_MERGE)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_VENDOR_MERGE_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootVendorCurrency
                 end,
@@ -2190,8 +2190,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Vendor Total Items
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALITEMS)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALITEMS_TP),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_VENDOR_TOTALITEMS)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_VENDOR_TOTALITEMS_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootVendorTotalItems
                 end,
@@ -2207,8 +2207,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Vendor Total Currency
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALCURRENCY)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALCURRENCY_TP),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_VENDOR_TOTALCURRENCY)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_VENDOR_TOTALCURRENCY_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootVendorTotalCurrency
                 end,
@@ -2224,8 +2224,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Bank Inventory Changes
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWBANK),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWBANK_TP),
+                name = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWBANK),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWBANK_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootBank
                 end,
@@ -2242,8 +2242,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Craft
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWCRAFT),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWCRAFT_TP),
+                name = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWCRAFT),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWCRAFT_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootCraft
                 end,
@@ -2260,8 +2260,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Materials consumed when crafting
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_SHOWCRAFT_MATERIALS)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWCRAFT_MATERIALS_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_SHOWCRAFT_MATERIALS)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWCRAFT_MATERIALS_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootShowCraftUse
                 end,
@@ -2277,8 +2277,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Mail Inventory Changes
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWMAIL),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWMAIL_TP),
+                name = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWMAIL),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWMAIL_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootMail
                 end,
@@ -2295,8 +2295,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Trade
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWTRADE),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWTRADE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWTRADE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_SHOWTRADE_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootTrade
                 end,
@@ -2313,8 +2313,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Disguise Equip
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWDISGUISE),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWDISGUISE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWDISGUISE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWDISGUISE_TP),
                 getFunc = function ()
                     return Settings.Inventory.LootShowDisguise
                 end,
@@ -2334,12 +2334,12 @@ function ChatAnnouncements.CreateSettings()
     -- Chat Announcements - Shared Currency/Loot Options Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_CA_CURRENCY_CONTEXT_MENU),
+        name = GetString(LUIE_STRING_LAM_CA_CURRENCY_CONTEXT_MENU),
         controls = {
             {
                 -- Currency/Loot Message Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_COLOR),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_COLOR),
                 getFunc = function ()
                     return unpack(Settings.Currency.CurrencyColor)
                 end,
@@ -2360,8 +2360,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Use Context Color for Currency/Loot Messages
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_COLOR_CONTEXT),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_COLOR_CONTEXT_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_COLOR_CONTEXT),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_COLOR_CONTEXT_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyContextColor
                 end,
@@ -2377,7 +2377,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Positive Change Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_COLORUP)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_COLORUP)),
                 getFunc = function ()
                     return unpack(Settings.Currency.CurrencyColorUp)
                 end,
@@ -2398,7 +2398,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Negative Change Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_COLORDOWN)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_CURRENCY_COLORDOWN)),
                 getFunc = function ()
                     return unpack(Settings.Currency.CurrencyColorDown)
                 end,
@@ -2419,8 +2419,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Use Generic Color for Merged Transactions
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_COLOR_CONTEXT_MERGED),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_COLOR_CONTEXT_MERGED_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_COLOR_CONTEXT_MERGED),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_COLOR_CONTEXT_MERGED_TP),
                 getFunc = function ()
                     return Settings.Currency.CurrencyContextMergedColor
                 end,
@@ -2437,14 +2437,14 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Context Messages Header
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_CONTEXT_HEADER),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_CONTEXT_HEADER),
                 width = "full",
             },
             {
                 -- Loot Message (Loot)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOOT),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOOT_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_LOOT),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_LOOT_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageLoot
                 end,
@@ -2460,8 +2460,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Receive)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_RECEIVE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_RECEIVE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_RECEIVE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_RECEIVE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageReceive
                 end,
@@ -2477,8 +2477,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Earned Message
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EARN),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EARN_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_EARN),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_EARN_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageEarn
                 end,
@@ -2494,8 +2494,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Steal)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STEAL),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STEAL_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_STEAL),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_STEAL_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageSteal
                 end,
@@ -2511,8 +2511,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Pickpocket)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_PICKPOCKET),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_PICKPOCKET_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_PICKPOCKET),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_PICKPOCKET_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessagePickpocket
                 end,
@@ -2528,8 +2528,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Confiscate)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CONFISCATE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CONFISCATE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_CONFISCATE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_CONFISCATE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageConfiscate
                 end,
@@ -2545,8 +2545,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Spend)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SPEND),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SPEND_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_SPEND),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_SPEND_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageSpend
                 end,
@@ -2562,8 +2562,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Pay)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_PAY),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_PAY_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_PAY),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_PAY_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessagePay
                 end,
@@ -2579,8 +2579,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Use) - Repair Kit, etc...
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_USEKIT),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_USEKIT_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_USEKIT),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_USEKIT_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageUseKit
                 end,
@@ -2596,8 +2596,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Potion)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_POTION),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_POTION_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_POTION),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_POTION_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessagePotion
                 end,
@@ -2613,8 +2613,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Food)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FOOD),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FOOD_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_FOOD),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_FOOD_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageFood
                 end,
@@ -2630,8 +2630,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Drink)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DRINK),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DRINK_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_DRINK),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_DRINK_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageDrink
                 end,
@@ -2647,8 +2647,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Deploy)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPLOY),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPLOY_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_DEPLOY),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_DEPLOY_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageDeploy
                 end,
@@ -2664,8 +2664,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Stow)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STOW),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STOW_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_STOW),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_STOW_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageStow
                 end,
@@ -2681,8 +2681,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Learn Recipe)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LEARN_RECIPE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LEARN_RECIPE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_LEARN_RECIPE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_LEARN_RECIPE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageLearnRecipe
                 end,
@@ -2698,8 +2698,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Learn Motif)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LEARN_MOTIF),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LEARN_MOTIF_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_LEARN_MOTIF),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_LEARN_MOTIF_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageLearnMotif
                 end,
@@ -2715,8 +2715,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Learn Style)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LEARN_STYLE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LEARN_STYLE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_LEARN_STYLE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_LEARN_STYLE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageLearnStyle
                 end,
@@ -2732,8 +2732,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Excavate)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EXCAVATE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EXCAVATE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_EXCAVATE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_EXCAVATE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageExcavate
                 end,
@@ -2749,8 +2749,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (TradeIn)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEIN),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEIN_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_TRADEIN),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_TRADEIN_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageTradeIn
                 end,
@@ -2766,8 +2766,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (TradeIn)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEIN_NO_NAME),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEIN_NO_NAME_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_TRADEIN_NO_NAME),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_TRADEIN_NO_NAME_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageTradeInNoName
                 end,
@@ -2783,8 +2783,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (TradeOut)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEOUT),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEOUT_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_TRADEOUT),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_TRADEOUT_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageTradeOut
                 end,
@@ -2800,8 +2800,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (TradeOut)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEOUT_NO_NAME),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEOUT_NO_NAME_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_TRADEOUT_NO_NAME),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_TRADEOUT_NO_NAME_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageTradeOutNoName
                 end,
@@ -2817,8 +2817,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (MailIn)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILIN),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILIN_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_MAILIN),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_MAILIN_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageMailIn
                 end,
@@ -2834,8 +2834,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (MailIn)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILIN_NO_NAME),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILIN_NO_NAME_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_MAILIN_NO_NAME),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_MAILIN_NO_NAME_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageMailInNoName
                 end,
@@ -2851,8 +2851,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (MailOut)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILOUT),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILOUT_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_MAILOUT),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_MAILOUT_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageMailOut
                 end,
@@ -2868,8 +2868,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (MailOut)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILOUT_NO_NAME),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILOUT_NO_NAME_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_MAILOUT_NO_NAME),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_MAILOUT_NO_NAME_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageMailOutNoName
                 end,
@@ -2885,8 +2885,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Deposit)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSIT),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSIT_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_DEPOSIT),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_DEPOSIT_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageDeposit
                 end,
@@ -2902,8 +2902,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Withdraw)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAW),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAW_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_WITHDRAW),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_WITHDRAW_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageWithdraw
                 end,
@@ -2919,8 +2919,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Deposit Guild)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSITGUILD),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSITGUILD_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_DEPOSITGUILD),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_DEPOSITGUILD_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageDepositGuild
                 end,
@@ -2936,8 +2936,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Withdraw Guild)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAWGUILD),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAWGUILD_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_WITHDRAWGUILD),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_WITHDRAWGUILD_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageWithdrawGuild
                 end,
@@ -2953,8 +2953,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Deposit)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSITSTORAGE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSITSTORAGE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_DEPOSITSTORAGE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_DEPOSITSTORAGE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageDepositStorage
                 end,
@@ -2970,8 +2970,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Withdraw)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAWSTORAGE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAWSTORAGE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_WITHDRAWSTORAGE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_WITHDRAWSTORAGE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageWithdrawStorage
                 end,
@@ -2987,8 +2987,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Lost Message
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOST),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOST_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_LOST),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_LOST_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageLost
                 end,
@@ -3004,8 +3004,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Bounty Message
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BOUNTY),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BOUNTY_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_BOUNTY),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_BOUNTY_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageBounty
                 end,
@@ -3021,8 +3021,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Repair Message
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REPAIR),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REPAIR_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_REPAIR),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_REPAIR_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageRepair
                 end,
@@ -3038,8 +3038,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Trader Message
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADER),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADER_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_TRADER),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_TRADER_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageTrader
                 end,
@@ -3055,8 +3055,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Listing Message CURRENCY
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LISTING),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LISTING_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_LISTING),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_LISTING_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageListing
                 end,
@@ -3072,8 +3072,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Listing Message ITEM
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LIST),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LIST_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_LIST),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_LIST_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageList
                 end,
@@ -3090,8 +3090,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Listing Message (Combined)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LISTING_VALUE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LISTING_VALUE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_LISTING_VALUE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_LISTING_VALUE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageListingValue
                 end,
@@ -3108,8 +3108,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Buy)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUY_VALUE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUY_VALUE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_BUY_VALUE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_BUY_VALUE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageBuy
                 end,
@@ -3125,8 +3125,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Buy) No Value
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUY),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUY_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_BUY),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_BUY_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageBuyNoV
                 end,
@@ -3142,8 +3142,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Buyback)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUYBACK_VALUE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUYBACK_VALUE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_BUYBACK_VALUE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_BUYBACK_VALUE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageBuyback
                 end,
@@ -3159,8 +3159,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Buyback) No Value
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUYBACK),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUYBACK_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_BUYBACK),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_BUYBACK_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageBuybackNoV
                 end,
@@ -3176,8 +3176,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Sell)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SELL_VALUE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SELL_VALUE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_SELL_VALUE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_SELL_VALUE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageSell
                 end,
@@ -3193,8 +3193,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Sell) No Value
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SELL),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SELL_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_SELL),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_SELL_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageSellNoV
                 end,
@@ -3210,8 +3210,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Fence)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FENCE_VALUE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FENCE_VALUE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_FENCE_VALUE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_FENCE_VALUE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageFence
                 end,
@@ -3227,8 +3227,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Fence)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FENCE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FENCE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_FENCE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_FENCE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageFenceNoV
                 end,
@@ -3244,8 +3244,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Launder)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LAUNDER_VALUE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LAUNDER_VALUE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_LAUNDER_VALUE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_LAUNDER_VALUE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageLaunder
                 end,
@@ -3261,8 +3261,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Launder)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LAUNDER),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LAUNDER_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_LAUNDER),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_LAUNDER_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageLaunderNoV
                 end,
@@ -3278,8 +3278,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Stable Message
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STABLE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STABLE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_STABLE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_STABLE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageStable
                 end,
@@ -3295,8 +3295,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Storage Message
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STORAGE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STORAGE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_STORAGE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_STORAGE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageStorage
                 end,
@@ -3312,8 +3312,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Wayshrine Message
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WAYSHRINE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WAYSHRINE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_WAYSHRINE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_WAYSHRINE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageWayshrine
                 end,
@@ -3329,8 +3329,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Unstuck Message
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UNSTUCK),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UNSTUCK_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_UNSTUCK),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_UNSTUCK_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageUnstuck
                 end,
@@ -3346,8 +3346,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Attributes Message
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_ATTRIBUTES),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_ATTRIBUTES_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_ATTRIBUTES),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_ATTRIBUTES_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageAttributes
                 end,
@@ -3363,8 +3363,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Champion Message
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CHAMPION),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CHAMPION_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_CHAMPION),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_CHAMPION_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageChampion
                 end,
@@ -3380,8 +3380,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Morphs Message
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MORPHS),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MORPHS_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_MORPHS),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_MORPHS_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageMorphs
                 end,
@@ -3397,8 +3397,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Skills Message
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SKILLS),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SKILLS_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_SKILLS),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_SKILLS_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageSkills
                 end,
@@ -3414,8 +3414,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Campaign Message
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CAMPAIGN),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CAMPAIGN_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_CAMPAIGN),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_CAMPAIGN_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageCampaign
                 end,
@@ -3431,8 +3431,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Use)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_USE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_USE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_USE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_USE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageUse
                 end,
@@ -3448,8 +3448,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Craft)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CRAFT),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CRAFT_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_CRAFT),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_CRAFT_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageCraft
                 end,
@@ -3465,8 +3465,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Extract)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EXTRACT),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EXTRACT_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_EXTRACT),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_EXTRACT_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageExtract
                 end,
@@ -3482,8 +3482,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Upgrade)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UPGRADE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UPGRADE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_UPGRADE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_UPGRADE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageUpgrade
                 end,
@@ -3499,8 +3499,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Upgrade)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UPGRADE_FAIL),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UPGRADE_FAIL_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_UPGRADE_FAIL),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_UPGRADE_FAIL_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageUpgradeFail
                 end,
@@ -3516,8 +3516,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Refine)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REFINE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REFINE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_REFINE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_REFINE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageRefine
                 end,
@@ -3533,8 +3533,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Deconstruct)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DECONSTRUCT),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DECONSTRUCT_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_DECONSTRUCT),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_DECONSTRUCT_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageDeconstruct
                 end,
@@ -3550,8 +3550,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Research)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_RESEARCH),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_RESEARCH_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_RESEARCH),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_RESEARCH_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageResearch
                 end,
@@ -3567,8 +3567,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Destroy)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DESTROY),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DESTROY_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_DESTROY),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_DESTROY_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageDestroy
                 end,
@@ -3584,8 +3584,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Container)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CONTAINER),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CONTAINER_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_CONTAINER),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_CONTAINER_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageContainer
                 end,
@@ -3601,8 +3601,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Lockpick)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOCKPICK),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOCKPICK_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_LOCKPICK),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_LOCKPICK_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageLockpick
                 end,
@@ -3618,8 +3618,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message Removed (Quest)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REMOVE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REMOVE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_REMOVE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_REMOVE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageRemove
                 end,
@@ -3636,8 +3636,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message Turn In (Quest)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TURNIN),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TURNIN_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_TURNIN),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_TURNIN_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageQuestTurnIn
                 end,
@@ -3653,8 +3653,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message Use (Quest)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_QUESTUSE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_QUESTUSE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_QUESTUSE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_QUESTUSE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageQuestUse
                 end,
@@ -3670,8 +3670,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message Exhaust (Quest)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EXHAUST),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EXHAUST_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_EXHAUST),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_EXHAUST_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageQuestExhaust
                 end,
@@ -3687,8 +3687,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message Offer (Quest)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_OFFER),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_OFFER_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_OFFER),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_OFFER_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageQuestOffer
                 end,
@@ -3704,8 +3704,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message Discard (Quest)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISCARD),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISCARD_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_DISCARD),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_DISCARD_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageQuestDiscard
                 end,
@@ -3721,8 +3721,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message Open (Quest)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_QUESTOPEN),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_QUESTOPEN_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_QUESTOPEN),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_QUESTOPEN_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageQuestOpen
                 end,
@@ -3738,8 +3738,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message Confiscate (Quest)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_QUESTCONFISCATE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_QUESTCONFISCATE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_QUESTCONFISCATE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_QUESTCONFISCATE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageQuestConfiscate
                 end,
@@ -3756,8 +3756,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message Administer (Quest)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_QUESTADMINISTER),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_QUESTADMINISTER_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_QUESTADMINISTER),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_QUESTADMINISTER_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageQuestAdminister
                 end,
@@ -3773,8 +3773,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message Place (Quest)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_QUESTPLACE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_QUESTPLACE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_QUESTPLACE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_QUESTPLACE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageQuestPlace
                 end,
@@ -3791,8 +3791,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message Combine (Quest)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_COMBINE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_COMBINE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_COMBINE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_COMBINE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageQuestCombine
                 end,
@@ -3808,8 +3808,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message Mix (Quest)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MIX),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MIX_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_MIX),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_MIX_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageQuestMix
                 end,
@@ -3825,8 +3825,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message Bundle (Quest)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUNDLE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUNDLE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_BUNDLE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_BUNDLE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageQuestBundle
                 end,
@@ -3843,8 +3843,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message Group
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_GROUP),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_GROUP_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_GROUP),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_GROUP_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageGroup
                 end,
@@ -3860,8 +3860,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Disguise Equip)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_EQUIP),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_EQUIP_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_DISGUISE_EQUIP),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_DISGUISE_EQUIP_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageDisguiseEquip
                 end,
@@ -3877,8 +3877,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Disguise Remove)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_REMOVE),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_REMOVE_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_DISGUISE_REMOVE),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_DISGUISE_REMOVE_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageDisguiseRemove
                 end,
@@ -3894,8 +3894,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Loot Message (Disguise Destroy)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_DESTROY),
-                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_DESTROY_TP),
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_DISGUISE_DESTROY),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_DISGUISE_DESTROY_TP),
                 getFunc = function ()
                     return Settings.ContextMessages.CurrencyMessageDisguiseDestroy
                 end,
@@ -3914,18 +3914,18 @@ function ChatAnnouncements.CreateSettings()
     -- Chat Announcements - Experience Announcements Options Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_CA_EXP_HEADER),
+        name = GetString(LUIE_STRING_LAM_CA_EXP_HEADER),
         controls = {
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CA_EXP_HEADER_ENLIGHTENED),
+                name = GetString(LUIE_STRING_LAM_CA_EXP_HEADER_ENLIGHTENED),
                 width = "full",
             },
             {
                 -- Enlightenment (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_ENLIGHTENED), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_ENLIGHTENED_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_EXP_ENLIGHTENED), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_EXP_ENLIGHTENED_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.XP.ExperienceEnlightenedCA
                 end,
@@ -3942,8 +3942,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Enlightenment (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_ENLIGHTENED), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_ENLIGHTENED_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_EXP_ENLIGHTENED), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_EXP_ENLIGHTENED_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.XP.ExperienceEnlightenedCSA
                 end,
@@ -3960,8 +3960,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Enlightenment (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_ENLIGHTENED), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_ENLIGHTENED_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_EXP_ENLIGHTENED), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_EXP_ENLIGHTENED_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.XP.ExperienceEnlightenedAlert
                 end,
@@ -3977,14 +3977,14 @@ function ChatAnnouncements.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CA_EXP_HEADER_LEVELUP),
+                name = GetString(LUIE_STRING_LAM_CA_EXP_HEADER_LEVELUP),
                 width = "full",
             },
             {
                 -- Level Up (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_LEVELUP), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_LEVELUP_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_EXP_LEVELUP), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_EXP_LEVELUP_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.XP.ExperienceLevelUpCA
                 end,
@@ -4001,8 +4001,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Level Up (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_LEVELUP), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_LEVELUP_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_EXP_LEVELUP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_EXP_LEVELUP_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.XP.ExperienceLevelUpCSA
                 end,
@@ -4019,8 +4019,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Level Up CSA Expanded
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_LEVELUP_CSAEXPAND)),
-                tooltip = GetString(SI_LUIE_LAM_CA_EXP_LEVELUP_CSAEXPAND_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_EXP_LEVELUP_CSAEXPAND)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_EXP_LEVELUP_CSAEXPAND_TP),
                 getFunc = function ()
                     return Settings.XP.ExperienceLevelUpCSAExpand
                 end,
@@ -4037,8 +4037,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Level Up (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_LEVELUP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_LEVELUP_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_EXP_LEVELUP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_EXP_LEVELUP_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.XP.ExperienceLevelUpAlert
                 end,
@@ -4055,8 +4055,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Level Icon on Level Up
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_LVLUPICON)),
-                tooltip = GetString(SI_LUIE_LAM_CA_EXP_LVLUPICON_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_EXP_LVLUPICON)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_EXP_LVLUPICON_TP),
                 getFunc = function ()
                     return Settings.XP.ExperienceLevelUpIcon
                 end,
@@ -4072,7 +4072,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Experience Level Up Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXPERIENCE_LEVELUP_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_EXPERIENCE_LEVELUP_COLOR)),
                 getFunc = function ()
                     return unpack(Settings.XP.ExperienceLevelUpColor)
                 end,
@@ -4093,8 +4093,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Color Level by Context
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_COLORLVLBYCONTEXT)),
-                tooltip = GetString(SI_LUIE_LAM_CA_EXP_COLORLVLBYCONTEXT_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_EXP_COLORLVLBYCONTEXT)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_EXP_COLORLVLBYCONTEXT_TP),
                 getFunc = function ()
                     return Settings.XP.ExperienceLevelColorByLevel
                 end,
@@ -4111,14 +4111,14 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Experience Points Header
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CA_EXP_HEADER_EXPERIENCEGAIN),
+                name = GetString(LUIE_STRING_LAM_CA_EXP_HEADER_EXPERIENCEGAIN),
                 width = "full",
             },
             {
                 -- Show Experience Gain
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_EXP_SHOWEXPGAIN),
-                tooltip = GetString(SI_LUIE_LAM_CA_EXP_SHOWEXPGAIN_TP),
+                name = GetString(LUIE_STRING_LAM_CA_EXP_SHOWEXPGAIN),
+                tooltip = GetString(LUIE_STRING_LAM_CA_EXP_SHOWEXPGAIN_TP),
                 getFunc = function ()
                     return Settings.XP.Experience
                 end,
@@ -4135,8 +4135,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Experience Icon
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_SHOWEXPICON)),
-                tooltip = GetString(SI_LUIE_LAM_CA_EXP_SHOWEXPICON_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_EXP_SHOWEXPICON)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_EXP_SHOWEXPICON_TP),
                 getFunc = function ()
                     return Settings.XP.ExperienceIcon
                 end,
@@ -4152,7 +4152,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Experience Message Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXPERIENCE_COLORMESSAGE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_EXPERIENCE_COLORMESSAGE)),
                 getFunc = function ()
                     return unpack(Settings.XP.ExperienceColorMessage)
                 end,
@@ -4173,7 +4173,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Experience Name Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXPERIENCE_COLORNAME)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_EXPERIENCE_COLORNAME)),
                 getFunc = function ()
                     return unpack(Settings.XP.ExperienceColorName)
                 end,
@@ -4194,8 +4194,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Context Name for Experience Gain
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_MESSAGE)),
-                tooltip = GetString(SI_LUIE_LAM_CA_EXP_MESSAGE_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_EXP_MESSAGE)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_EXP_MESSAGE_TP),
                 getFunc = function ()
                     return Settings.XP.ExperienceMessage
                 end,
@@ -4211,8 +4211,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Name for Experience Gain
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_NAME)),
-                tooltip = GetString(SI_LUIE_LAM_CA_EXP_NAME_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_EXP_NAME)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_EXP_NAME_TP),
                 getFunc = function ()
                     return Settings.XP.ExperienceName
                 end,
@@ -4228,8 +4228,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Hide Experience from Kills
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_HIDEEXPKILLS)),
-                tooltip = GetString(SI_LUIE_LAM_CA_EXP_HIDEEXPKILLS_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_EXP_HIDEEXPKILLS)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_EXP_HIDEEXPKILLS_TP),
                 getFunc = function ()
                     return Settings.XP.ExperienceHideCombat
                 end,
@@ -4246,8 +4246,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Combat Experience Gain Filter Threshold
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_EXPGAINTHRESHOLD)),
-                tooltip = GetString(SI_LUIE_LAM_CA_EXP_EXPGAINTHRESHOLD_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_EXP_EXPGAINTHRESHOLD)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_EXP_EXPGAINTHRESHOLD_TP),
                 getFunc = function ()
                     return Settings.XP.ExperienceFilter
                 end,
@@ -4266,8 +4266,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Throttle Experience gained in combat
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT)),
-                tooltip = GetString(SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_EXP_THROTTLEEXPINCOMBAT)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_EXP_THROTTLEEXPINCOMBAT_TP),
                 getFunc = function ()
                     return Settings.XP.ExperienceThrottle
                 end,
@@ -4286,14 +4286,14 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Skill Points Header
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CA_EXP_HEADER_SKILL_POINTS),
+                name = GetString(LUIE_STRING_LAM_CA_EXP_HEADER_SKILL_POINTS),
                 width = "full",
             },
             {
                 -- Show Skill Points Updated ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SKILLPOINT_UPDATED), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SKILLPOINT_UPDATED_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Skills.SkillPointCA
                 end,
@@ -4310,8 +4310,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Skill Points Updated CSA
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SKILLPOINT_UPDATED), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SKILLPOINT_UPDATED_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Skills.SkillPointCSA
                 end,
@@ -4328,8 +4328,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Skill Points Updated Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SKILLPOINT_UPDATED), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SKILLPOINT_UPDATED_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Skills.SkillPointAlert
                 end,
@@ -4346,7 +4346,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Skill Point Color 1
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_COLOR1)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_SKILLPOINT_COLOR1)),
                 getFunc = function ()
                     return unpack(Settings.Skills.SkillPointColor1)
                 end,
@@ -4367,7 +4367,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Skill Point Color 2
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_COLOR2)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_SKILLPOINT_COLOR2)),
                 getFunc = function ()
                     return unpack(Settings.Skills.SkillPointColor2)
                 end,
@@ -4388,8 +4388,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Skyshard Prefix
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_PARTIALPREFIX)),
-                tooltip = GetString(SI_LUIE_LAM_CA_SKILLPOINT_PARTIALPREFIX_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_SKILLPOINT_PARTIALPREFIX)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_SKILLPOINT_PARTIALPREFIX_TP),
                 getFunc = function ()
                     return Settings.Skills.SkillPointSkyshard
                 end,
@@ -4406,8 +4406,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Skyshard Brackets
                 type = "dropdown",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_PARTIALBRACKET)),
-                tooltip = GetString(SI_LUIE_LAM_CA_SKILLPOINT_PARTIALBRACKET_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_SKILLPOINT_PARTIALBRACKET)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_SKILLPOINT_PARTIALBRACKET_TP),
                 choices = bracketOptions5,
                 getFunc = function ()
                     return bracketOptions5[Settings.Skills.SkillPointBracket]
@@ -4424,8 +4424,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Skill Points Updated Partial
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATEDPARTIAL)),
-                tooltip = GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATEDPARTIAL_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_SKILLPOINT_UPDATEDPARTIAL)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_SKILLPOINT_UPDATEDPARTIAL_TP),
                 getFunc = function ()
                     return Settings.Skills.SkillPointsPartial
                 end,
@@ -4442,14 +4442,14 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Skill Lines Header
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CA_EXP_HEADER_SKILL_LINES),
+                name = GetString(LUIE_STRING_LAM_CA_EXP_HEADER_SKILL_LINES),
                 width = "full",
             },
             {
                 -- Skill Line Unlocked ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_UNLOCKED), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_UNLOCKED_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SKILL_LINE_UNLOCKED), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SKILL_LINE_UNLOCKED_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Skills.SkillLineUnlockCA
                 end,
@@ -4465,8 +4465,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Skill Line Unlocked CSA
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_UNLOCKED), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_UNLOCKED_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SKILL_LINE_UNLOCKED), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SKILL_LINE_UNLOCKED_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Skills.SkillLineUnlockCSA
                 end,
@@ -4482,8 +4482,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Skill Line Unlocked Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_UNLOCKED), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_UNLOCKED_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SKILL_LINE_UNLOCKED), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SKILL_LINE_UNLOCKED_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Skills.SkillLineUnlockAlert
                 end,
@@ -4499,8 +4499,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Skill Line Icon
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILL_LINE_ICON)),
-                tooltip = GetString(SI_LUIE_LAM_CA_SKILL_LINE_ICON_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_SKILL_LINE_ICON)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_SKILL_LINE_ICON_TP),
                 getFunc = function ()
                     return Settings.Skills.SkillLineIcon
                 end,
@@ -4516,8 +4516,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Skill Line Progression ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_PROGRESS), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_PROGRESS_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SKILL_LINE_PROGRESS), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SKILL_LINE_PROGRESS_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Skills.SkillLineCA
                 end,
@@ -4533,8 +4533,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Skill Line Progression CSA
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_PROGRESS), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_PROGRESS_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SKILL_LINE_PROGRESS), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SKILL_LINE_PROGRESS_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Skills.SkillLineCSA
                 end,
@@ -4550,8 +4550,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Skill Line Progression Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_PROGRESS), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_PROGRESS_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SKILL_LINE_PROGRESS), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SKILL_LINE_PROGRESS_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Skills.SkillLineAlert
                 end,
@@ -4567,8 +4567,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Skill Ability Progression ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_ABILITY), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_ABILITY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SKILL_LINE_ABILITY), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SKILL_LINE_ABILITY_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Skills.SkillAbilityCA
                 end,
@@ -4584,8 +4584,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Skill Ability Progression CSA
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_ABILITY), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_ABILITY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SKILL_LINE_ABILITY), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SKILL_LINE_ABILITY_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Skills.SkillAbilityCSA
                 end,
@@ -4601,8 +4601,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Skill Ability Progression Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_ABILITY), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_ABILITY_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SKILL_LINE_ABILITY), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SKILL_LINE_ABILITY_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Skills.SkillAbilityAlert
                 end,
@@ -4618,7 +4618,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Skill Line Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILL_LINE_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_SKILL_LINE_COLOR)),
                 getFunc = function ()
                     return unpack(Settings.Skills.SkillLineColor)
                 end,
@@ -4639,14 +4639,14 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Guild Reputation Header
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CA_EXP_HEADER_GUILDREP),
+                name = GetString(LUIE_STRING_LAM_CA_EXP_HEADER_GUILDREP),
                 width = "full",
             },
             {
                 -- Display Guild Icon
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_GUILDREP_ICON),
-                tooltip = GetString(SI_LUIE_LAM_CA_GUILDREP_ICON_TP),
+                name = GetString(LUIE_STRING_LAM_CA_GUILDREP_ICON),
+                tooltip = GetString(LUIE_STRING_LAM_CA_GUILDREP_ICON_TP),
                 getFunc = function ()
                     return Settings.Skills.SkillGuildIcon
                 end,
@@ -4662,7 +4662,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Guild Reputation Message Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CA_GUILDREP_MESSAGECOLOR),
+                name = GetString(LUIE_STRING_LAM_CA_GUILDREP_MESSAGECOLOR),
                 getFunc = function ()
                     return unpack(Settings.Skills.SkillGuildColor)
                 end,
@@ -4683,8 +4683,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Guild Reputation Message Format
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_GUILDREP_MESSAGEFORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CA_GUILDREP_MESSAGEFORMAT_TP),
+                name = GetString(LUIE_STRING_LAM_CA_GUILDREP_MESSAGEFORMAT),
+                tooltip = GetString(LUIE_STRING_LAM_CA_GUILDREP_MESSAGEFORMAT_TP),
                 getFunc = function ()
                     return Settings.Skills.SkillGuildMsg
                 end,
@@ -4701,8 +4701,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Guild Reputation Points Name
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_GUILDREP_MESSAGENAME),
-                tooltip = GetString(SI_LUIE_LAM_CA_GUILDREP_MESSAGENAME_TP),
+                name = GetString(LUIE_STRING_LAM_CA_GUILDREP_MESSAGENAME),
+                tooltip = GetString(LUIE_STRING_LAM_CA_GUILDREP_MESSAGENAME_TP),
                 getFunc = function ()
                     return Settings.Skills.SkillGuildRepName
                 end,
@@ -4719,8 +4719,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Skill Fighters Guild
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_GUILDREP_FG),
-                tooltip = GetString(SI_LUIE_LAM_CA_GUILDREP_FG_TP),
+                name = GetString(LUIE_STRING_LAM_CA_GUILDREP_FG),
+                tooltip = GetString(LUIE_STRING_LAM_CA_GUILDREP_FG_TP),
                 getFunc = function ()
                     return Settings.Skills.SkillGuildFighters
                 end,
@@ -4736,7 +4736,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Guild Skill Point Color FG
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_FG_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_GUILDREP_FG_COLOR)),
                 getFunc = function ()
                     return unpack(Settings.Skills.SkillGuildColorFG)
                 end,
@@ -4757,8 +4757,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Fighter's Guild Threshold
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_THRESHOLD)),
-                tooltip = GetString(SI_LUIE_LAM_CA_GUILDREP_THRESHOLD_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_GUILDREP_THRESHOLD)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_GUILDREP_THRESHOLD_TP),
                 getFunc = function ()
                     return Settings.Skills.SkillGuildThreshold
                 end,
@@ -4777,8 +4777,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Fighter's Guild Throttle
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_THROTTLE)),
-                tooltip = GetString(SI_LUIE_LAM_CA_GUILDREP_THROTTLE_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_GUILDREP_THROTTLE)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_GUILDREP_THROTTLE_TP),
                 getFunc = function ()
                     return Settings.Skills.SkillGuildThrottle
                 end,
@@ -4797,8 +4797,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Skill Mages Guild
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_GUILDREP_MG),
-                tooltip = GetString(SI_LUIE_LAM_CA_GUILDREP_MG_TP),
+                name = GetString(LUIE_STRING_LAM_CA_GUILDREP_MG),
+                tooltip = GetString(LUIE_STRING_LAM_CA_GUILDREP_MG_TP),
                 getFunc = function ()
                     return Settings.Skills.SkillGuildMages
                 end,
@@ -4814,7 +4814,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Guild Skill Point Color MG
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_MG_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_GUILDREP_MG_COLOR)),
                 getFunc = function ()
                     return unpack(Settings.Skills.SkillGuildColorMG)
                 end,
@@ -4835,8 +4835,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Skill Undaunted
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_GUILDREP_UD),
-                tooltip = GetString(SI_LUIE_LAM_CA_GUILDREP_UD_TP),
+                name = GetString(LUIE_STRING_LAM_CA_GUILDREP_UD),
+                tooltip = GetString(LUIE_STRING_LAM_CA_GUILDREP_UD_TP),
                 getFunc = function ()
                     return Settings.Skills.SkillGuildUndaunted
                 end,
@@ -4852,7 +4852,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Guild Skill Point Color UD
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_UD_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_GUILDREP_UD_COLOR)),
                 getFunc = function ()
                     return unpack(Settings.Skills.SkillGuildColorUD)
                 end,
@@ -4873,8 +4873,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Skill Thieves Guild
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_GUILDREP_TG),
-                tooltip = GetString(SI_LUIE_LAM_CA_GUILDREP_TG_TP),
+                name = GetString(LUIE_STRING_LAM_CA_GUILDREP_TG),
+                tooltip = GetString(LUIE_STRING_LAM_CA_GUILDREP_TG_TP),
                 getFunc = function ()
                     return Settings.Skills.SkillGuildThieves
                 end,
@@ -4890,7 +4890,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Guild Skill Point Color TG
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_TG_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_GUILDREP_TG_COLOR)),
                 getFunc = function ()
                     return unpack(Settings.Skills.SkillGuildColorTG)
                 end,
@@ -4911,8 +4911,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Skill Dark Brotherhood
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_GUILDREP_DB),
-                tooltip = GetString(SI_LUIE_LAM_CA_GUILDREP_DB_TP),
+                name = GetString(LUIE_STRING_LAM_CA_GUILDREP_DB),
+                tooltip = GetString(LUIE_STRING_LAM_CA_GUILDREP_DB_TP),
                 getFunc = function ()
                     return Settings.Skills.SkillGuildDarkBrotherhood
                 end,
@@ -4928,7 +4928,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Guild Skill Point Color DB
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_DB_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_GUILDREP_DB_COLOR)),
                 getFunc = function ()
                     return unpack(Settings.Skills.SkillGuildColorDB)
                 end,
@@ -4949,8 +4949,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Skill Psijic Order
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_GUILDREP_PO),
-                tooltip = GetString(SI_LUIE_LAM_CA_GUILDREP_PO_TP),
+                name = GetString(LUIE_STRING_LAM_CA_GUILDREP_PO),
+                tooltip = GetString(LUIE_STRING_LAM_CA_GUILDREP_PO_TP),
                 getFunc = function ()
                     return Settings.Skills.SkillGuildPsijicOrder
                 end,
@@ -4966,7 +4966,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Guild Skill Point Color PO
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_PO_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_GUILDREP_PO_COLOR)),
                 getFunc = function ()
                     return unpack(Settings.Skills.SkillGuildColorPO)
                 end,
@@ -4987,8 +4987,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Skill Guild Alert
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_GUILDREP_ALERT),
-                tooltip = GetString(SI_LUIE_LAM_CA_GUILDREP_ALERT_TP),
+                name = GetString(LUIE_STRING_LAM_CA_GUILDREP_ALERT),
+                tooltip = GetString(LUIE_STRING_LAM_CA_GUILDREP_ALERT_TP),
                 getFunc = function ()
                     return Settings.Skills.SkillGuildAlert
                 end,
@@ -5007,19 +5007,19 @@ function ChatAnnouncements.CreateSettings()
     -- Chat Announcements - Collectible/Lorebooks Announcements Options Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_HEADER),
+        name = GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_HEADER),
         controls = {
             {
                 --
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_COL_HEADER),
+                name = GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_COL_HEADER),
                 width = "full",
             },
             {
                 -- Show Collectibles Unlocked ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_ENABLE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_ENABLE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Collectibles.CollectibleCA
                 end,
@@ -5035,8 +5035,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Collectibles Unlocked CSA
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_ENABLE), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_ENABLE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Collectibles.CollectibleCSA
                 end,
@@ -5052,8 +5052,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Collectibles Unlocked Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_ENABLE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_ENABLE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Collectibles.CollectibleAlert
                 end,
@@ -5069,8 +5069,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Collectible Icon
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ICON)),
-                tooltip = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ICON_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_ICON)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_ICON_TP),
                 getFunc = function ()
                     return Settings.Collectibles.CollectibleIcon
                 end,
@@ -5086,8 +5086,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Collectible Bracket
                 type = "dropdown",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_COLLECTIBLE)),
-                tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_COLLECTIBLE_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_BRACKET_OPTION_COLLECTIBLE)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_BRACKET_OPTION_COLLECTIBLE_TP),
                 choices = linkBracketDisplayOptions,
                 getFunc = function ()
                     return linkBracketDisplayOptions[Settings.BracketOptionCollectible]
@@ -5104,7 +5104,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Collectible Color 1
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_COLLECTIBLE_COLOR_ONE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_COLOR_ONE)),
                 getFunc = function ()
                     return unpack(Settings.Collectibles.CollectibleColor1)
                 end,
@@ -5125,7 +5125,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Collectible Color 2
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_COLLECTIBLE_COLOR_TWO)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_COLOR_TWO)),
                 getFunc = function ()
                     return unpack(Settings.Collectibles.CollectibleColor2)
                 end,
@@ -5146,8 +5146,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Collectible Message Prefix
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_COLLECTIBLE_MESSAGEPREFIX)),
-                tooltip = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_MESSAGEPREFIX_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_MESSAGEPREFIX)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_MESSAGEPREFIX_TP),
                 getFunc = function ()
                     return Settings.Collectibles.CollectiblePrefix
                 end,
@@ -5163,8 +5163,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Collectible Bracket Options
                 type = "dropdown",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_COLLECTIBLE_BRACKET)),
-                tooltip = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_BRACKET_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_BRACKET)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_BRACKET_TP),
                 choices = bracketOptions5,
                 getFunc = function ()
                     return bracketOptions5[Settings.Collectibles.CollectibleBracket]
@@ -5181,8 +5181,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Collectible Category
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_COLLECTIBLE_CATEGORY)),
-                tooltip = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_CATEGORY_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_CATEGORY)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_CATEGORY_TP),
                 getFunc = function ()
                     return Settings.Collectibles.CollectibleCategory
                 end,
@@ -5198,8 +5198,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Collectible Subcategory
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_COLLECTIBLE_SUBCATEGORY)),
-                tooltip = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_SUBCATEGORY_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_SUBCATEGORY)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_SUBCATEGORY_TP),
                 getFunc = function ()
                     return Settings.Collectibles.CollectibleSubcategory
                 end,
@@ -5215,14 +5215,14 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Collectible Usage
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_HEADER),
+                name = GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_USE_HEADER),
                 width = "full",
             },
             {
                 -- Collectible Used CA
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_USE_ENABLE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_USE_ENABLE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Collectibles.CollectibleUseCA
                 end,
@@ -5238,8 +5238,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Collectible Used Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_USE_ENABLE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_USE_ENABLE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Collectibles.CollectibleUseAlert
                 end,
@@ -5255,8 +5255,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Collectible Pet Nickname
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_PET_NICKNAME)),
-                tooltip = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_PET_NICKNAME_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_USE_PET_NICKNAME)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_USE_PET_NICKNAME_TP),
                 getFunc = function ()
                     return Settings.Collectibles.CollectibleUsePetNickname
                 end,
@@ -5272,8 +5272,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Collectible Icon
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ICON)),
-                tooltip = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_ICON_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_ICON)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_USE_ICON_TP),
                 getFunc = function ()
                     return Settings.Collectibles.CollectibleUseIcon
                 end,
@@ -5289,8 +5289,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Collectible Bracket
                 type = "dropdown",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_COLLECTIBLE)),
-                tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_COLLECTIBLE_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_BRACKET_OPTION_COLLECTIBLE)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_BRACKET_OPTION_COLLECTIBLE_TP),
                 choices = linkBracketDisplayOptions,
                 getFunc = function ()
                     return linkBracketDisplayOptions[Settings.BracketOptionCollectibleUse]
@@ -5307,7 +5307,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Collectible Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_COLLECTIBLE_COLOR_ONE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_COLOR_ONE)),
                 getFunc = function ()
                     return unpack(Settings.Collectibles.CollectibleUseColor)
                 end,
@@ -5332,8 +5332,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Enables collectible tracking in %s category
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_CATEGORY), GetCollectibleCategoryInfo(3)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_CATEGORY_TP), GetCollectibleCategoryInfo(3)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_USE_CATEGORY), GetCollectibleCategoryInfo(3)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_USE_CATEGORY_TP), GetCollectibleCategoryInfo(3)),
                 getFunc = function ()
                     return Settings.Collectibles.CollectibleUseCategory3
                 end,
@@ -5349,8 +5349,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Enables collectible tracking in %s category
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_CATEGORY), GetCollectibleCategoryInfo(7)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_CATEGORY_TP), GetCollectibleCategoryInfo(7)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_USE_CATEGORY), GetCollectibleCategoryInfo(7)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_USE_CATEGORY_TP), GetCollectibleCategoryInfo(7)),
                 getFunc = function ()
                     return Settings.Collectibles.CollectibleUseCategory7
                 end,
@@ -5367,8 +5367,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Enables collectible tracking in %s category
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_CATEGORY), GetCollectibleCategoryInfo(8)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_CATEGORY_TP), GetCollectibleCategoryInfo(8)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_USE_CATEGORY), GetCollectibleCategoryInfo(8)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_USE_CATEGORY_TP), GetCollectibleCategoryInfo(8)),
                 getFunc = function() return Settings.Collectibles.CollectibleUseCategory8 end,
                 setFunc = function(value) Settings.Collectibles.CollectibleUseCategory8 = value end,
                 width = "full",
@@ -5380,8 +5380,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Enables collectible tracking in %s category
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_CATEGORY), GetCollectibleCategoryInfo(10)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_CATEGORY_TP), GetCollectibleCategoryInfo(10)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_USE_CATEGORY), GetCollectibleCategoryInfo(10)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_USE_CATEGORY_TP), GetCollectibleCategoryInfo(10)),
                 getFunc = function ()
                     return Settings.Collectibles.CollectibleUseCategory10
                 end,
@@ -5397,8 +5397,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Enables collectible tracking in %s category
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_CATEGORY), GetCollectibleCategoryInfo(12)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_CATEGORY_TP), GetCollectibleCategoryInfo(12)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_USE_CATEGORY), GetCollectibleCategoryInfo(12)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_USE_CATEGORY_TP), GetCollectibleCategoryInfo(12)),
                 getFunc = function ()
                     return Settings.Collectibles.CollectibleUseCategory12
                 end,
@@ -5413,14 +5413,14 @@ function ChatAnnouncements.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_LORE_HEADER),
+                name = GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_LORE_HEADER),
                 width = "full",
             },
             {
                 -- Lorebook Bracket
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_LOREBOOK),
-                tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_LOREBOOK_TP),
+                name = GetString(LUIE_STRING_LAM_CA_BRACKET_OPTION_LOREBOOK),
+                tooltip = GetString(LUIE_STRING_LAM_CA_BRACKET_OPTION_LOREBOOK_TP),
                 choices = linkBracketDisplayOptions,
                 getFunc = function ()
                     return linkBracketDisplayOptions[Settings.BracketOptionLorebook]
@@ -5437,8 +5437,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Lorebooks (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_LOREBOOK_ENABLE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_LOREBOOK_ENABLE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Lorebooks.LorebookCA
                 end,
@@ -5454,8 +5454,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Lorebooks (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_LOREBOOK_ENABLE), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_LOREBOOK_ENABLE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Lorebooks.LorebookCSA
                 end,
@@ -5472,8 +5472,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Lorebooks (CSA - Lore Category Only))
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOREBOOK_CSA_LOREONLY)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_CSA_LOREONLY_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOREBOOK_CSA_LOREONLY)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOREBOOK_CSA_LOREONLY_TP),
                 getFunc = function ()
                     return Settings.Lorebooks.LorebookCSALoreOnly
                 end,
@@ -5490,8 +5490,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Lorebooks (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_LOREBOOK_ENABLE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_LOREBOOK_ENABLE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Lorebooks.LorebookAlert
                 end,
@@ -5507,8 +5507,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Lorebook Collection Complete (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_COLLECTION), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_COLLECTION_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_LOREBOOK_COLLECTION), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_LOREBOOK_COLLECTION_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Lorebooks.LorebookCollectionCA
                 end,
@@ -5524,8 +5524,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Lorebook Collection Complete (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_COLLECTION), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_COLLECTION_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_LOREBOOK_COLLECTION), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_LOREBOOK_COLLECTION_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Lorebooks.LorebookCollectionCSA
                 end,
@@ -5541,8 +5541,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Lorebook Collection Complete (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_COLLECTION), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_COLLECTION_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_LOREBOOK_COLLECTION), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_LOREBOOK_COLLECTION_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Lorebooks.LorebookCollectionAlert
                 end,
@@ -5558,8 +5558,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Lorebooks Icon
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOREBOOK_ICON)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_ICON_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOREBOOK_ICON)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOREBOOK_ICON_TP),
                 getFunc = function ()
                     return Settings.Lorebooks.LorebookIcon
                 end,
@@ -5575,7 +5575,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Lorebooks Color 1
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOREBOOK_COLOR1)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOREBOOK_COLOR1)),
                 getFunc = function ()
                     return unpack(Settings.Lorebooks.LorebookColor1)
                 end,
@@ -5596,7 +5596,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Lorebooks Color 2
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOREBOOK_COLOR2)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOREBOOK_COLOR2)),
                 getFunc = function ()
                     return unpack(Settings.Lorebooks.LorebookColor2)
                 end,
@@ -5617,8 +5617,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Lorebooks Prefix 1
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX1)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX1_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOREBOOK_PREFIX1)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOREBOOK_PREFIX1_TP),
                 getFunc = function ()
                     return Settings.Lorebooks.LorebookPrefix1
                 end,
@@ -5634,8 +5634,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Lorebooks Prefix 2
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX2)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX2_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOREBOOK_PREFIX2)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOREBOOK_PREFIX2_TP),
                 getFunc = function ()
                     return Settings.Lorebooks.LorebookPrefix2
                 end,
@@ -5651,8 +5651,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Lorebooks Collection Prefix
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX_COLLECTION)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX_COLLECTION_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOREBOOK_PREFIX_COLLECTION)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOREBOOK_PREFIX_COLLECTION_TP),
                 getFunc = function ()
                     return Settings.Lorebooks.LorebookCollectionPrefix
                 end,
@@ -5668,9 +5668,9 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Lorebooks Bracket Options
                 type = "dropdown",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_BRACKET)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOREBOOK_CATEGORY_BRACKET)),
                 choices = bracketOptions5,
-                tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_BRACKET_TP),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOREBOOK_CATEGORY_BRACKET_TP),
                 getFunc = function ()
                     return bracketOptions5[Settings.Lorebooks.LorebookBracket]
                 end,
@@ -5686,8 +5686,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Lorebooks Category
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOREBOOK_CATEGORY)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOREBOOK_CATEGORY_TP),
                 getFunc = function ()
                     return Settings.Lorebooks.LorebookCategory
                 end,
@@ -5703,8 +5703,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show hidden books
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOREBOOK_NOSHOWHIDE)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOREBOOK_NOSHOWHIDE_TP),
                 getFunc = function ()
                     return Settings.Lorebooks.LorebookShowHidden
                 end,
@@ -5723,19 +5723,19 @@ function ChatAnnouncements.CreateSettings()
     -- Chat Announcements - Antiquities Announcements Options Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_CA_ANTIQUITY_HEADER),
+        name = GetString(LUIE_STRING_LAM_CA_ANTIQUITY_HEADER),
         controls = {
             {
                 -- Sub Header Antiquity Leads
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CA_ANTIQUITY_LEAD_HEADER),
+                name = GetString(LUIE_STRING_LAM_CA_ANTIQUITY_LEAD_HEADER),
                 width = "full",
             },
             {
                 -- Show Antiquities (CA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ANTIQUITY_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ANTIQUITY_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_ANTIQUITY_ENABLE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_ANTIQUITY_ENABLE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Antiquities.AntiquityCA
                 end,
@@ -5751,8 +5751,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Antiquities (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ANTIQUITY_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ANTIQUITY_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_ANTIQUITY_ENABLE), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_ANTIQUITY_ENABLE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Antiquities.AntiquityCSA
                 end,
@@ -5768,8 +5768,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Antiquities (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ANTIQUITY_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ANTIQUITY_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_ANTIQUITY_ENABLE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_ANTIQUITY_ENABLE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Antiquities.AntiquityAlert
                 end,
@@ -5785,8 +5785,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Antiquities Item Bracket
                 type = "dropdown",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_ANTIQUITY_BRACKET)),
-                tooltip = GetString(SI_LUIE_LAM_CA_ANTIQUITY_BRACKET_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_ANTIQUITY_BRACKET)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_ANTIQUITY_BRACKET_TP),
                 choices = linkBracketDisplayOptions,
                 getFunc = function ()
                     return linkBracketDisplayOptions[Settings.Antiquities.AntiquityBracket]
@@ -5803,8 +5803,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Antiquities Icon
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_ANTIQUITY_ICON)),
-                tooltip = GetString(SI_LUIE_LAM_CA_ANTIQUITY_ICON_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_ANTIQUITY_ICON)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_ANTIQUITY_ICON_TP),
                 getFunc = function ()
                     return Settings.Antiquities.AntiquityIcon
                 end,
@@ -5820,7 +5820,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Antiquities Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_ANTIQUITY_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_ANTIQUITY_COLOR)),
                 getFunc = function ()
                     return unpack(Settings.Antiquities.AntiquityColor)
                 end,
@@ -5841,8 +5841,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Antiquities Prefix
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_ANTIQUITY_PREFIX)),
-                tooltip = GetString(SI_LUIE_LAM_CA_ANTIQUITY_PREFIX_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_ANTIQUITY_PREFIX)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_ANTIQUITY_PREFIX_TP),
                 getFunc = function ()
                     return Settings.Antiquities.AntiquityPrefix
                 end,
@@ -5858,9 +5858,9 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Antiquities Prefix Bracket Options
                 type = "dropdown",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_ANTIQUITY_PREFIX_BRACKET)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_ANTIQUITY_PREFIX_BRACKET)),
                 choices = bracketOptions5,
-                tooltip = GetString(SI_LUIE_LAM_CA_ANTIQUITY_PREFIX_BRACKET_TP),
+                tooltip = GetString(LUIE_STRING_LAM_CA_ANTIQUITY_PREFIX_BRACKET_TP),
                 getFunc = function ()
                     return bracketOptions5[Settings.Antiquities.AntiquityPrefixBracket]
                 end,
@@ -5876,8 +5876,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Antiquities Suffix
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_ANTIQUITY_SUFFIX)),
-                tooltip = GetString(SI_LUIE_LAM_CA_ANTIQUITY_SUFFIX_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_ANTIQUITY_SUFFIX)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_ANTIQUITY_SUFFIX_TP),
                 getFunc = function ()
                     return Settings.Antiquities.AntiquitySuffix
                 end,
@@ -5896,13 +5896,13 @@ function ChatAnnouncements.CreateSettings()
     -- Chat Announcements - Achievements Announcements Options Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_CA_ACHIEVE_HEADER),
+        name = GetString(LUIE_STRING_LAM_CA_ACHIEVE_HEADER),
         controls = {
             {
                 -- Show Achievement Update ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_UPDATE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_UPDATE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_ACHIEVE_UPDATE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_ACHIEVE_UPDATE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Achievement.AchievementUpdateCA
                 end,
@@ -5919,8 +5919,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Achievement Update Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_UPDATE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_UPDATE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_ACHIEVE_UPDATE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_ACHIEVE_UPDATE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Achievement.AchievementUpdateAlert
                 end,
@@ -5937,8 +5937,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Detailed Achievement Info
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_ACHIEVE_DETAILINFO)),
-                tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_DETAILINFO_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_ACHIEVE_DETAILINFO)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_ACHIEVE_DETAILINFO_TP),
                 getFunc = function ()
                     return Settings.Achievement.AchievementDetails
                 end,
@@ -5954,8 +5954,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Achievements Step Size
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_ACHIEVE_STEPSIZE)),
-                tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_STEPSIZE_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_ACHIEVE_STEPSIZE)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_ACHIEVE_STEPSIZE_TP),
                 min = 0,
                 max = 50,
                 step = 1,
@@ -5974,8 +5974,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Enable Achievement Complete ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_ACHIEVE_COMPLETE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_ACHIEVE_COMPLETE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Achievement.AchievementCompleteCA
                 end,
@@ -5992,8 +5992,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Enable Achievement Complete CSA
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_ACHIEVE_COMPLETE), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_ACHIEVE_COMPLETE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Achievement.AchievementCompleteCSA
                 end,
@@ -6010,8 +6010,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Enable Achievement Complete Always Show CSA
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE_CSA_ALWAYS)),
-                tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE_CSA_ALWAYS_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_ACHIEVE_COMPLETE_CSA_ALWAYS)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_ACHIEVE_COMPLETE_CSA_ALWAYS_TP),
                 getFunc = function ()
                     return Settings.Achievement.AchievementCompleteAlwaysCSA
                 end,
@@ -6028,8 +6028,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Enable Achievement Complete Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_ACHIEVE_COMPLETE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_ACHIEVE_COMPLETE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Achievement.AchievementCompleteAlert
                 end,
@@ -6046,8 +6046,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show 100% Completion on complete event
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETEPERCENT),
-                tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETEPERCENT_TP),
+                name = GetString(LUIE_STRING_LAM_CA_ACHIEVE_COMPLETEPERCENT),
+                tooltip = GetString(LUIE_STRING_LAM_CA_ACHIEVE_COMPLETEPERCENT_TP),
                 getFunc = function ()
                     return Settings.Achievement.AchievementCompPercentage
                 end,
@@ -6063,8 +6063,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Achievement Icon
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_ACHIEVE_ICON),
-                tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_ICON_TP),
+                name = GetString(LUIE_STRING_LAM_CA_ACHIEVE_ICON),
+                tooltip = GetString(LUIE_STRING_LAM_CA_ACHIEVE_ICON_TP),
                 getFunc = function ()
                     return Settings.Achievement.AchievementIcon
                 end,
@@ -6080,8 +6080,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Achievement Bracket
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_ACHIEVEMENT),
-                tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_ACHIEVEMENT_TP),
+                name = GetString(LUIE_STRING_LAM_CA_BRACKET_OPTION_ACHIEVEMENT),
+                tooltip = GetString(LUIE_STRING_LAM_CA_BRACKET_OPTION_ACHIEVEMENT_TP),
                 choices = linkBracketDisplayOptions,
                 getFunc = function ()
                     return linkBracketDisplayOptions[Settings.BracketOptionAchievement]
@@ -6098,7 +6098,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Achievement Message Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CA_ACHIEVE_COLOR1),
+                name = GetString(LUIE_STRING_LAM_CA_ACHIEVE_COLOR1),
                 getFunc = function ()
                     return unpack(Settings.Achievement.AchievementColor1)
                 end,
@@ -6119,7 +6119,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Achievement Message Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CA_ACHIEVE_COLOR2),
+                name = GetString(LUIE_STRING_LAM_CA_ACHIEVE_COLOR2),
                 getFunc = function ()
                     return unpack(Settings.Achievement.AchievementColor2)
                 end,
@@ -6140,8 +6140,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Context Name for Achievement Progress
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_ACHIEVE_PROGMSG),
-                tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_PROGMSG_TP),
+                name = GetString(LUIE_STRING_LAM_CA_ACHIEVE_PROGMSG),
+                tooltip = GetString(LUIE_STRING_LAM_CA_ACHIEVE_PROGMSG_TP),
                 getFunc = function ()
                     return Settings.Achievement.AchievementProgressMsg
                 end,
@@ -6157,8 +6157,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Context Name for Achievement Completion
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETEMSG),
-                tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETEMSG_TP),
+                name = GetString(LUIE_STRING_LAM_CA_ACHIEVE_COMPLETEMSG),
+                tooltip = GetString(LUIE_STRING_LAM_CA_ACHIEVE_COMPLETEMSG_TP),
                 getFunc = function ()
                     return Settings.Achievement.AchievementCompleteMsg
                 end,
@@ -6174,8 +6174,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Achievement Category
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_ACHIEVE_SHOWCATEGORY),
-                tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_SHOWCATEGORY_TP),
+                name = GetString(LUIE_STRING_LAM_CA_ACHIEVE_SHOWCATEGORY),
+                tooltip = GetString(LUIE_STRING_LAM_CA_ACHIEVE_SHOWCATEGORY_TP),
                 getFunc = function ()
                     return Settings.Achievement.AchievementCategory
                 end,
@@ -6191,8 +6191,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Achievement Subcategory
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_ACHIEVE_SHOWSUBCATEGORY),
-                tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_SHOWSUBCATEGORY_TP),
+                name = GetString(LUIE_STRING_LAM_CA_ACHIEVE_SHOWSUBCATEGORY),
+                tooltip = GetString(LUIE_STRING_LAM_CA_ACHIEVE_SHOWSUBCATEGORY_TP),
                 getFunc = function ()
                     return Settings.Achievement.AchievementSubcategory
                 end,
@@ -6208,8 +6208,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Prefix Bracket
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_CA_ACHIEVE_BRACKET),
-                tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_BRACKET_TP),
+                name = GetString(LUIE_STRING_LAM_CA_ACHIEVE_BRACKET),
+                tooltip = GetString(LUIE_STRING_LAM_CA_ACHIEVE_BRACKET_TP),
                 choices = bracketOptions5,
                 getFunc = function ()
                     return bracketOptions5[Settings.Achievement.AchievementBracketOptions]
@@ -6226,8 +6226,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Category & Subcategory Bracket Options
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORYBRACKET),
-                tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORYBRACKET_TP),
+                name = GetString(LUIE_STRING_LAM_CA_ACHIEVE_CATEGORYBRACKET),
+                tooltip = GetString(LUIE_STRING_LAM_CA_ACHIEVE_CATEGORYBRACKET_TP),
                 choices = bracketOptions4,
                 getFunc = function ()
                     return bracketOptions4[Settings.Achievement.AchievementCatBracketOptions]
@@ -6244,8 +6244,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Color Achievement Progress
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_ACHIEVE_COLORPROGRESS),
-                tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_COLORPROGRESS_TP),
+                name = GetString(LUIE_STRING_LAM_CA_ACHIEVE_COLORPROGRESS),
+                tooltip = GetString(LUIE_STRING_LAM_CA_ACHIEVE_COLORPROGRESS_TP),
                 getFunc = function ()
                     return Settings.Achievement.AchievementColorProgress
                 end,
@@ -6260,15 +6260,15 @@ function ChatAnnouncements.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_HEADER),
+                name = GetString(LUIE_STRING_LAM_CA_ACHIEVE_CATEGORY_HEADER),
                 width = "full",
             },
         },
     }
 
     for i = 1, GetNumAchievementCategories() do
-        local name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(i))
-        local tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(i))
+        local name = zo_strformat(GetString(LUIE_STRING_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(i))
+        local tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(i))
         local checkbox = {
             type = "checkbox",
             name = name,
@@ -6296,13 +6296,13 @@ function ChatAnnouncements.CreateSettings()
     -- Chat Announcements - Quest Announcements Options Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_CA_QUEST_HEADER),
+        name = GetString(LUIE_STRING_LAM_CA_QUEST_HEADER),
         controls = {
             {
                 -- Show Quest Share ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_SHOWQUESTSHARE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_SHOWQUESTSHARE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Quests.QuestShareCA
                 end,
@@ -6318,8 +6318,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Quest Share Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_SHOWQUESTSHARE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_SHOWQUESTSHARE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Quests.QuestShareAlert
                 end,
@@ -6335,8 +6335,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Location Discovery (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_LOCATION_DISCOVERY), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_LOCATION_DISCOVERY_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Quests.QuestLocDiscoveryCA
                 end,
@@ -6352,8 +6352,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Location Discovery (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_LOCATION_DISCOVERY), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_LOCATION_DISCOVERY_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Quests.QuestLocDiscoveryCSA
                 end,
@@ -6369,8 +6369,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Location Discovery (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_LOCATION_DISCOVERY), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_LOCATION_DISCOVERY_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Quests.QuestLocDiscoveryAlert
                 end,
@@ -6386,8 +6386,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Location Objective (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_POI_OBJECTIVE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_POI_OBJECTIVE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Quests.QuestLocObjectiveCA
                 end,
@@ -6403,8 +6403,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Location Objective (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_POI_OBJECTIVE), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_POI_OBJECTIVE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Quests.QuestLocObjectiveCSA
                 end,
@@ -6420,8 +6420,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Location Objective (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_POI_OBJECTIVE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_POI_OBJECTIVE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Quests.QuestLocObjectiveAlert
                 end,
@@ -6437,8 +6437,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Location Complete (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_POI_COMPLETE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_POI_COMPLETE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Quests.QuestLocCompleteCA
                 end,
@@ -6454,8 +6454,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Location Complete (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_POI_COMPLETE), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_POI_COMPLETE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Quests.QuestLocCompleteCSA
                 end,
@@ -6471,8 +6471,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Location Complete (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_POI_COMPLETE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_POI_COMPLETE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Quests.QuestLocCompleteAlert
                 end,
@@ -6488,8 +6488,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Quest Accept (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_ACCEPT), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_ACCEPT_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_ACCEPT), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_ACCEPT_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Quests.QuestAcceptCA
                 end,
@@ -6505,8 +6505,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Quest Accept (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_ACCEPT), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_ACCEPT_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_ACCEPT), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_ACCEPT_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Quests.QuestAcceptCSA
                 end,
@@ -6522,8 +6522,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Quest Accept (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_ACCEPT), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_ACCEPT_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_ACCEPT), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_ACCEPT_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Quests.QuestAcceptAlert
                 end,
@@ -6539,8 +6539,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Quest Complete (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_COMPLETE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_COMPLETE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Quests.QuestCompleteCA
                 end,
@@ -6556,8 +6556,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Quest Complete (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_COMPLETE), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_COMPLETE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Quests.QuestCompleteCSA
                 end,
@@ -6573,8 +6573,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Quest Complete (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_COMPLETE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_COMPLETE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Quests.QuestCompleteAlert
                 end,
@@ -6590,8 +6590,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Quest Abandon (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_ABANDON), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_ABANDON_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_ABANDON), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_ABANDON_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Quests.QuestAbandonCA
                 end,
@@ -6607,8 +6607,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Quest Abandon (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_ABANDON), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_ABANDON_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_ABANDON), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_ABANDON_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Quests.QuestAbandonCSA
                 end,
@@ -6624,8 +6624,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Quest Abandon (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_ABANDON), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_ABANDON_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_ABANDON), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_ABANDON_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Quests.QuestAbandonAlert
                 end,
@@ -6641,8 +6641,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Quest Failure (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_OBJECTIVE_FAILURE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_OBJECTIVE_FAILURE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Quests.QuestFailCA
                 end,
@@ -6658,8 +6658,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Quest Failure (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_OBJECTIVE_FAILURE), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_OBJECTIVE_FAILURE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Quests.QuestFailCSA
                 end,
@@ -6675,8 +6675,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Quest Failure (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_OBJECTIVE_FAILURE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_OBJECTIVE_FAILURE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Quests.QuestFailAlert
                 end,
@@ -6692,8 +6692,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Quest Objective Updates (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_OBJECTIVE_UPDATE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_OBJECTIVE_UPDATE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Quests.QuestObjUpdateCA
                 end,
@@ -6709,8 +6709,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Quest Objective Updates (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_OBJECTIVE_UPDATE), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_OBJECTIVE_UPDATE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Quests.QuestObjUpdateCSA
                 end,
@@ -6726,8 +6726,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Quest Objective Updates (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_OBJECTIVE_UPDATE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_OBJECTIVE_UPDATE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Quests.QuestObjUpdateAlert
                 end,
@@ -6743,8 +6743,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Quest Objective Complete (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_OBJECTIVE_COMPLETE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_OBJECTIVE_COMPLETE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Quests.QuestObjCompleteCA
                 end,
@@ -6760,8 +6760,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Quest Objective Complete (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_OBJECTIVE_COMPLETE), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_OBJECTIVE_COMPLETE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Quests.QuestObjCompleteCSA
                 end,
@@ -6777,8 +6777,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Quest Objective Complete (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_OBJECTIVE_COMPLETE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_QUEST_OBJECTIVE_COMPLETE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Quests.QuestObjCompleteAlert
                 end,
@@ -6794,8 +6794,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Quest Icon
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTICON)),
-                tooltip = GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTICON_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_QUEST_SHOWQUESTICON)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_QUEST_SHOWQUESTICON_TP),
                 getFunc = function ()
                     return Settings.Quests.QuestIcon
                 end,
@@ -6811,7 +6811,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Location Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_COLOR1)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_QUEST_COLOR1)),
                 getFunc = function ()
                     return unpack(Settings.Quests.QuestColorLocName)
                 end,
@@ -6832,7 +6832,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Location Description Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_COLOR2)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_QUEST_COLOR2)),
                 getFunc = function ()
                     return unpack(Settings.Quests.QuestColorLocDescription)
                 end,
@@ -6853,7 +6853,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Quest Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_COLOR3)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_QUEST_COLOR3)),
                 getFunc = function ()
                     return unpack(Settings.Quests.QuestColorName)
                 end,
@@ -6874,7 +6874,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Quest Description Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_COLOR4)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_QUEST_COLOR4)),
                 getFunc = function ()
                     return unpack(Settings.Quests.QuestColorDescription)
                 end,
@@ -6895,8 +6895,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Quest Long String
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTLONG)),
-                tooltip = GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTLONG_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_QUEST_SHOWQUESTLONG)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_QUEST_SHOWQUESTLONG_TP),
                 getFunc = function ()
                     return Settings.Quests.QuestLong
                 end,
@@ -6912,8 +6912,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show POI Completed Long String
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG)),
-                tooltip = GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG_TP),
                 getFunc = function ()
                     return Settings.Quests.QuestLocLong
                 end,
@@ -6932,18 +6932,18 @@ function ChatAnnouncements.CreateSettings()
     -- Chat Announcements - Social Announcements Options Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_CA_SOCIAL_HEADER),
+        name = GetString(LUIE_STRING_LAM_CA_SOCIAL_HEADER),
         controls = {
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_HEADER),
+                name = GetString(LUIE_STRING_LAM_CA_SOCIAL_FRIENDS_HEADER),
                 width = "full",
             },
             {
                 -- Show Friend/Ignore Events ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_FRIENDS), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_FRIENDS_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Social.FriendIgnoreCA
                 end,
@@ -6959,8 +6959,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Friend/Ignore Events Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_FRIENDS), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_FRIENDS_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Social.FriendIgnoreAlert
                 end,
@@ -6976,8 +6976,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Friend Online/Offline ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_ONOFF), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_ONOFF_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_FRIENDS_ONOFF), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_FRIENDS_ONOFF_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Social.FriendStatusCA
                 end,
@@ -6993,8 +6993,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Friend Online/Offline Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_ONOFF), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_ONOFF_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_FRIENDS_ONOFF), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_FRIENDS_ONOFF_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Social.FriendStatusAlert
                 end,
@@ -7009,14 +7009,14 @@ function ChatAnnouncements.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_HEADER),
+                name = GetString(LUIE_STRING_LAM_CA_SOCIAL_GUILD_HEADER),
                 width = "full",
             },
             {
                 -- Show Guild Events ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_GUILD), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_GUILD_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Social.GuildCA
                 end,
@@ -7032,8 +7032,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Guild Events Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_GUILD), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_GUILD_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Social.GuildAlert
                 end,
@@ -7049,8 +7049,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Guild Rank Events ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_RANK), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_RANK_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_GUILD_RANK), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_GUILD_RANK_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Social.GuildRankCA
                 end,
@@ -7066,8 +7066,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Guild Rank Events Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_RANK), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_RANK_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_GUILD_RANK), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_GUILD_RANK_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Social.GuildRankAlert
                 end,
@@ -7083,8 +7083,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Guild Rank Events Display Options
                 type = "dropdown",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_RANKOPTIONS)),
-                tooltip = GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_RANKOPTIONS_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_SOCIAL_GUILD_RANKOPTIONS)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_SOCIAL_GUILD_RANKOPTIONS_TP),
                 choices = guildRankDisplayOptions,
                 getFunc = function ()
                     return guildRankDisplayOptions[Settings.Social.GuildRankDisplayOptions]
@@ -7101,8 +7101,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Guild Management ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_GUILD_ADMIN), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_GUILD_ADMIN_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Social.GuildManageCA
                 end,
@@ -7118,8 +7118,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Guild Management Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_GUILD_ADMIN), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_GUILD_ADMIN_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Social.GuildManageAlert
                 end,
@@ -7135,8 +7135,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Guild Icons
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ICONS)),
-                tooltip = GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ICONS_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_SOCIAL_GUILD_ICONS)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_SOCIAL_GUILD_ICONS_TP),
                 getFunc = function ()
                     return Settings.Social.GuildIcon
                 end,
@@ -7152,7 +7152,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Guild Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_SOCIAL_GUILD_COLOR)),
                 getFunc = function ()
                     return unpack(Settings.Social.GuildColor)
                 end,
@@ -7173,8 +7173,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Use Alliance Color for Guild
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_COLOR_ALLIANCE)),
-                tooltip = GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_COLOR_ALLIANCE_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_SOCIAL_GUILD_COLOR_ALLIANCE)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_SOCIAL_GUILD_COLOR_ALLIANCE_TP),
                 getFunc = function ()
                     return Settings.Social.GuildAllianceColor
                 end,
@@ -7189,14 +7189,14 @@ function ChatAnnouncements.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CA_SOCIAL_TRADE_HEADER),
+                name = GetString(LUIE_STRING_LAM_CA_SOCIAL_TRADE_HEADER),
                 width = "full",
             },
             {
                 -- Show Trade Events
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_TRADE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_TRADE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_TRADE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_TRADE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Notify.NotificationTradeCA
                 end,
@@ -7212,8 +7212,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Trade Events
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_TRADE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_TRADE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_TRADE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_TRADE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Notify.NotificationTradeAlert
                 end,
@@ -7228,14 +7228,14 @@ function ChatAnnouncements.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CA_SOCIAL_DUEL_HEADER),
+                name = GetString(LUIE_STRING_LAM_CA_SOCIAL_DUEL_HEADER),
                 width = "full",
             },
             {
                 -- Show Duel Events (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUEL), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUEL_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_DUEL), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_DUEL_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Social.DuelCA
                 end,
@@ -7251,8 +7251,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Duel Events (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUEL), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUEL_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_DUEL), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_DUEL_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Social.DuelAlert
                 end,
@@ -7268,8 +7268,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Duel Start ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_DUELSTART), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_DUELSTART_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Social.DuelStartCA
                 end,
@@ -7285,8 +7285,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Duel Start CSA
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART_TPCSA), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_DUELSTART), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_DUELSTART_TPCSA), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Social.DuelStartCSA
                 end,
@@ -7302,8 +7302,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Duel Start Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_DUELSTART), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_DUELSTART_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Social.DuelStartAlert
                 end,
@@ -7319,8 +7319,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Duel Start Options
                 type = "dropdown",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART_OPTION)),
-                tooltip = GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART_OPTION_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_SOCIAL_DUELSTART_OPTION)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_SOCIAL_DUELSTART_OPTION_TP),
                 choices = duelStartOptions,
                 getFunc = function ()
                     return duelStartOptions[Settings.Social.DuelStartOptions]
@@ -7337,8 +7337,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Duel Won ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_DUELCOMPLETE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_DUELCOMPLETE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Social.DuelWonCA
                 end,
@@ -7354,8 +7354,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Duel Won CSA
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_DUELCOMPLETE), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_DUELCOMPLETE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Social.DuelWonCSA
                 end,
@@ -7371,8 +7371,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Duel Won Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_DUELCOMPLETE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_DUELCOMPLETE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Social.DuelWonAlert
                 end,
@@ -7388,8 +7388,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Duel Boundary ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_DUELBOUNDARY), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_DUELBOUNDARY_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Social.DuelBoundaryCA
                 end,
@@ -7405,8 +7405,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Duel Boundary CSA
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_DUELBOUNDARY), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_DUELBOUNDARY_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Social.DuelBoundaryCSA
                 end,
@@ -7422,8 +7422,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Duel Boundary Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_DUELBOUNDARY), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_SOCIAL_DUELBOUNDARY_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Social.DuelBoundaryAlert
                 end,
@@ -7438,14 +7438,14 @@ function ChatAnnouncements.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CA_SOCIAL_MARA_HEADER),
+                name = GetString(LUIE_STRING_LAM_CA_SOCIAL_MARA_HEADER),
                 width = "full",
             },
             {
                 -- Show Pledge of Mara ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_MARA), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_MARA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_MARA), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_MARA_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Social.PledgeOfMaraCA
                 end,
@@ -7461,8 +7461,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Pledge of Mara CSA
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_MARA), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_MARA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_MARA), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_MARA_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Social.PledgeOfMaraCSA
                 end,
@@ -7478,8 +7478,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Pledge of Mara Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_MARA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_MARA_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_MARA), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_MARA_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Social.PledgeOfMaraAlert
                 end,
@@ -7495,8 +7495,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Pledge of Mara (Alert Only on Failure)
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_MARA_ALERT)),
-                tooltip = GetString(SI_LUIE_LAM_CA_MISC_MARA_ALERT_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_MISC_MARA_ALERT)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_MISC_MARA_ALERT_TP),
                 getFunc = function ()
                     return Settings.Social.PledgeOfMaraAlertOnlyFail
                 end,
@@ -7515,18 +7515,18 @@ function ChatAnnouncements.CreateSettings()
     -- Chat Announcements - Group Announcements Options Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_CA_GROUP_HEADER),
+        name = GetString(LUIE_STRING_LAM_CA_GROUP_HEADER),
         controls = {
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CA_GROUP_BASE_HEADER),
+                name = GetString(LUIE_STRING_LAM_CA_GROUP_BASE_HEADER),
                 width = "full",
             },
             {
                 -- Show Group ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_BASE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_BASE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_BASE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_BASE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Group.GroupCA
                 end,
@@ -7542,8 +7542,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Group Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_BASE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_BASE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_BASE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_BASE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Group.GroupAlert
                 end,
@@ -7558,14 +7558,14 @@ function ChatAnnouncements.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CA_GROUP_LFG_HEADER),
+                name = GetString(LUIE_STRING_LAM_CA_GROUP_LFG_HEADER),
                 width = "full",
             },
             {
                 -- Show Group LFG ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGREADY), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGREADY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_LFGREADY), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_LFGREADY_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Group.GroupLFGCA
                 end,
@@ -7581,8 +7581,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Group LFG Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGREADY), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGREADY_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_LFGREADY), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_LFGREADY_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Group.GroupLFGAlert
                 end,
@@ -7598,8 +7598,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Group LFG ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGQUEUE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGQUEUE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_LFGQUEUE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_LFGQUEUE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Group.GroupLFGQueueCA
                 end,
@@ -7615,8 +7615,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Group LFG Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGQUEUE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGQUEUE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_LFGQUEUE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_LFGQUEUE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Group.GroupLFGQueueAlert
                 end,
@@ -7632,8 +7632,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Group Vote ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGVOTE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGVOTE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_LFGVOTE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_LFGVOTE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Group.GroupVoteCA
                 end,
@@ -7649,8 +7649,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Group Vote Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGVOTE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGVOTE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_LFGVOTE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_LFGVOTE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Group.GroupVoteAlert
                 end,
@@ -7666,8 +7666,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show LFG Activity Completed ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_LFGCOMPLETE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_LFGCOMPLETE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Group.GroupLFGCompleteCA
                 end,
@@ -7683,8 +7683,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show LFG Activity Completed CSA
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_LFGCOMPLETE), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_LFGCOMPLETE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Group.GroupLFGCompleteCSA
                 end,
@@ -7700,8 +7700,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show LFG Activity Completed Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_LFGCOMPLETE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_LFGCOMPLETE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Group.GroupLFGCompleteAlert
                 end,
@@ -7716,14 +7716,14 @@ function ChatAnnouncements.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CA_GROUP_RAID_HEADER),
+                name = GetString(LUIE_STRING_LAM_CA_GROUP_RAID_HEADER),
                 width = "full",
             },
             {
                 -- Raid Announcements ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BASE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BASE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_RAID_BASE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_RAID_BASE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Group.GroupRaidCA
                 end,
@@ -7739,8 +7739,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Raid Announcements CSA
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BASE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BASE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_RAID_BASE), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_RAID_BASE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Group.GroupRaidCSA
                 end,
@@ -7756,8 +7756,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Raid Announcements Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BASE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BASE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_RAID_BASE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_RAID_BASE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Group.GroupRaidAlert
                 end,
@@ -7773,8 +7773,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Raid Score ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_SCORE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_SCORE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_RAID_SCORE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_RAID_SCORE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Group.GroupRaidScoreCA
                 end,
@@ -7790,8 +7790,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Raid Score CSA
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_SCORE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_SCORE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_RAID_SCORE), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_RAID_SCORE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Group.GroupRaidScoreCSA
                 end,
@@ -7807,8 +7807,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Raid Score Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_SCORE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_SCORE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_RAID_SCORE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_RAID_SCORE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Group.GroupRaidScoreAlert
                 end,
@@ -7824,8 +7824,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Raid Best Score ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_RAID_BESTSCORE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_RAID_BESTSCORE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Group.GroupRaidBestScoreCA
                 end,
@@ -7841,8 +7841,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Raid Best Score CSA
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_RAID_BESTSCORE), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_RAID_BESTSCORE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Group.GroupRaidBestScoreCSA
                 end,
@@ -7858,8 +7858,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Raid Best Score Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_RAID_BESTSCORE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_RAID_BESTSCORE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Group.GroupRaidBestScoreAlert
                 end,
@@ -7875,8 +7875,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Raid Revive Counter ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_REVIVE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_REVIVE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_RAID_REVIVE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_RAID_REVIVE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Group.GroupRaidReviveCA
                 end,
@@ -7892,8 +7892,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Raid Revive Counter CSA
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_REVIVE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_REVIVE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_RAID_REVIVE), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_RAID_REVIVE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Group.GroupRaidReviveCSA
                 end,
@@ -7909,8 +7909,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Raid Revive Counter Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_REVIVE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_REVIVE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_RAID_REVIVE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_GROUP_RAID_REVIVE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Group.GroupRaidReviveAlert
                 end,
@@ -7929,12 +7929,12 @@ function ChatAnnouncements.CreateSettings()
     -- Chat Announcements - Display Announcements Options Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_CA_DISPLAY_HEADER),
+        name = GetString(LUIE_STRING_LAM_CA_DISPLAY_HEADER),
         controls = {
             {
                 -- Display Announcements Header
                 type = "description",
-                text = GetString(SI_LUIE_LAM_CA_DISPLAY_DESCRIPTION),
+                text = GetString(LUIE_STRING_LAM_CA_DISPLAY_DESCRIPTION),
             },
             {
                 -- Display Announcement DEBUG
@@ -7956,8 +7956,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- General Notifications (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_GENERAL), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_GENERAL_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_MISC_GENERAL), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_MISC_GENERAL_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.General.CA
                 end,
@@ -7973,8 +7973,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- General Notifications (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_GENERAL), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_GENERAL_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_MISC_GENERAL), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_MISC_GENERAL_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.General.CSA
                 end,
@@ -7990,8 +7990,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- General Notifications (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_GENERAL), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_GENERAL_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_MISC_GENERAL), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_MISC_GENERAL_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.General.Alert
                 end,
@@ -8007,14 +8007,14 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Misc Notifications Header
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CA_DISPLAY_HEADER_MISC),
+                name = GetString(LUIE_STRING_LAM_CA_DISPLAY_HEADER_MISC),
                 width = "full",
             },
             {
                 -- Respec Notification (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_RESPEC), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_RESPEC_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_MISC_RESPEC), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_MISC_RESPEC_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.Respec.CA
                 end,
@@ -8030,8 +8030,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Respec Notification (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_RESPEC), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_RESPEC_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_MISC_RESPEC), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_MISC_RESPEC_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.Respec.CSA
                 end,
@@ -8047,8 +8047,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Respec Notification (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_RESPEC), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_RESPEC_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_MISC_RESPEC), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_MISC_RESPEC_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.Respec.Alert
                 end,
@@ -8064,8 +8064,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Display Group Area Message (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_GROUPAREA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_MISC_GROUPAREA), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_MISC_GROUPAREA_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.GroupArea.CA
                 end,
@@ -8081,8 +8081,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Display Group Area Message (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_GROUPAREA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_MISC_GROUPAREA), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_MISC_GROUPAREA_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.GroupArea.CSA
                 end,
@@ -8098,8 +8098,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Display Group Area Message (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_MISC_GROUPAREA_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_MISC_GROUPAREA), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_MISC_GROUPAREA_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.GroupArea.Alert
                 end,
@@ -8115,14 +8115,14 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Zone Notifications Header
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CA_DISPLAY_HEADER_ZONE),
+                name = GetString(LUIE_STRING_LAM_CA_DISPLAY_HEADER_ZONE),
                 width = "full",
             },
             {
                 -- Craglorn Buff (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_ZONE_CRAGLORN), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_ZONE_CRAGLORN_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.ZoneCraglorn.CA
                 end,
@@ -8138,8 +8138,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Craglorn Buff (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_ZONE_CRAGLORN), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_ZONE_CRAGLORN_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.ZoneCraglorn.CSA
                 end,
@@ -8155,8 +8155,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Craglorn Buff (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_ZONE_CRAGLORN), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_ZONE_CRAGLORN_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.ZoneCraglorn.Alert
                 end,
@@ -8172,8 +8172,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Imperial City Display Announcement (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_ZONE_IC), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_ZONE_IC_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.ZoneIC.CA
                 end,
@@ -8189,8 +8189,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Imperial City Display Description
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC_DESCRIPTION)),
-                tooltip = GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC_DESCRIPTION_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_DISPLAY_ZONE_IC_DESCRIPTION)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_DISPLAY_ZONE_IC_DESCRIPTION_TP),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.ZoneIC.Description
                 end,
@@ -8206,8 +8206,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Imperial City Display Announcement (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_ZONE_IC), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_ZONE_IC_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.ZoneIC.CSA
                 end,
@@ -8223,8 +8223,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Imperial City Display Announcement (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ZONE_IC_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_ZONE_IC), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_ZONE_IC_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.ZoneIC.Alert
                 end,
@@ -8240,14 +8240,14 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Arena Notifications Header
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CA_DISPLAY_HEADER_ARENA),
+                name = GetString(LUIE_STRING_LAM_CA_DISPLAY_HEADER_ARENA),
                 width = "full",
             },
             {
                 -- Maelstrom Arena Notifications (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ARENA_MAELSTROM), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ARENA_MAELSTROM_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_ARENA_MAELSTROM), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_ARENA_MAELSTROM_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.ArenaMaelstrom.CA
                 end,
@@ -8263,8 +8263,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Maelstrom Arena Notifications (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ARENA_MAELSTROM), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ARENA_MAELSTROM_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_ARENA_MAELSTROM), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_ARENA_MAELSTROM_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.ArenaMaelstrom.CSA
                 end,
@@ -8280,8 +8280,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Maelstrom Arena Notifications (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ARENA_MAELSTROM), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ARENA_MAELSTROM_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_ARENA_MAELSTROM), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_ARENA_MAELSTROM_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.ArenaMaelstrom.Alert
                 end,
@@ -8297,8 +8297,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Dragonstar Arena Notifications (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ARENA_DRAGONSTAR), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ARENA_DRAGONSTAR_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_ARENA_DRAGONSTAR), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_ARENA_DRAGONSTAR_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.ArenaDragonstar.CA
                 end,
@@ -8314,8 +8314,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Dragonstar Arena Notifications (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ARENA_DRAGONSTAR), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ARENA_DRAGONSTAR_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_ARENA_DRAGONSTAR), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_ARENA_DRAGONSTAR_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.ArenaDragonstar.CSA
                 end,
@@ -8331,8 +8331,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Dragonstar Arena Notifications (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ARENA_DRAGONSTAR), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_ARENA_DRAGONSTAR_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_ARENA_DRAGONSTAR), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_ARENA_DRAGONSTAR_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.ArenaDragonstar.Alert
                 end,
@@ -8348,14 +8348,14 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Dungeon Notifications Header
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CA_DISPLAY_HEADER_DUNGEON),
+                name = GetString(LUIE_STRING_LAM_CA_DISPLAY_HEADER_DUNGEON),
                 width = "full",
             },
             {
                 -- Endless Archive Notifications (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_DUNGEON_ENDLESS), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_DUNGEON_ENDLESS_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_DUNGEON_ENDLESS), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_DUNGEON_ENDLESS_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.DungeonEndlessArchive.CA
                 end,
@@ -8371,8 +8371,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Endless Archive Notifications (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_DUNGEON_ENDLESS), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_DUNGEON_ENDLESS_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_DUNGEON_ENDLESS), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_DUNGEON_ENDLESS_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.DungeonEndlessArchive.CSA
                 end,
@@ -8388,8 +8388,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Endless Archive Notifications (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_DUNGEON_ENDLESS), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_DUNGEON_ENDLESS_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_DUNGEON_ENDLESS), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_DISPLAY_DUNGEON_ENDLESS_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.DisplayAnnouncements.DungeonEndlessArchive.Alert
                 end,
@@ -8408,13 +8408,13 @@ function ChatAnnouncements.CreateSettings()
     -- Chat Announcements - Miscellaneous Announcements Options Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_CA_MISC_HEADER),
+        name = GetString(LUIE_STRING_LAM_CA_MISC_HEADER),
         controls = {
             {
                 -- Mail (Send/Recieve - CA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWMAIL), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWMAIL_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Notify.NotificationMailSendCA
                 end,
@@ -8431,8 +8431,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Mail (Send/Recieve - Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWMAIL), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWMAIL_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Notify.NotificationMailSendAlert
                 end,
@@ -8450,8 +8450,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Mail (Send/Recieve - CA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAILERROR), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAILERROR_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWMAILERROR), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWMAILERROR_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Notify.NotificationMailErrorCA
                 end,
@@ -8468,8 +8468,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Mail (Send/Recieve - Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAILERROR), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAILERROR_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWMAILERROR), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWMAILERROR_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Notify.NotificationMailErrorAlert
                 end,
@@ -8487,8 +8487,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Lockpick Events ChatAnnouncements
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWLOCKPICK), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWLOCKPICK_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Notify.NotificationLockpickCA
                 end,
@@ -8505,8 +8505,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Lockpick Events Alert
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWLOCKPICK), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWLOCKPICK_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Notify.NotificationLockpickAlert
                 end,
@@ -8523,8 +8523,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Justice Confiscate (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWJUSTICE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWJUSTICE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWJUSTICE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWJUSTICE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Notify.NotificationConfiscateCA
                 end,
@@ -8541,8 +8541,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Justice Confiscate (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWJUSTICE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWJUSTICE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWJUSTICE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWJUSTICE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Notify.NotificationConfiscateAlert
                 end,
@@ -8559,8 +8559,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Bag/Bank Upgrade (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWBANKBAG), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWBANKBAG_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Notify.StorageBagCA
                 end,
@@ -8576,8 +8576,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Bag/Bank Upgrade (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWBANKBAG), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWBANKBAG_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Notify.StorageBagCSA
                 end,
@@ -8593,8 +8593,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Bag/Bank Upgrade (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWBANKBAG), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWBANKBAG_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Notify.StorageBagAlert
                 end,
@@ -8610,7 +8610,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Bag/Bank Upgrade Message Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_MISC_SHOWBANKBAG_COLOR)),
                 getFunc = function ()
                     return unpack(Settings.Notify.StorageBagColor)
                 end,
@@ -8631,8 +8631,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Mount Upgrade (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWRIDING), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWRIDING_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Notify.StorageRidingCA
                 end,
@@ -8648,8 +8648,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Mount Upgrade (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWRIDING), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWRIDING_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Notify.StorageRidingCSA
                 end,
@@ -8665,8 +8665,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Mount Upgrade (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWRIDING), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_SHOWRIDING_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Notify.StorageRidingAlert
                 end,
@@ -8682,7 +8682,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Mount Upgrade Message Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_MISC_SHOWRIDING_COLOR)),
                 getFunc = function ()
                     return unpack(Settings.Notify.StorageRidingColor)
                 end,
@@ -8703,7 +8703,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Mount Upgrade Message Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING_COLOR_BOOK)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_MISC_SHOWRIDING_COLOR_BOOK)),
                 getFunc = function ()
                     return unpack(Settings.Notify.StorageRidingBookColor)
                 end,
@@ -8724,8 +8724,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Disguise Events (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_LOOTSHOWDISGUISE), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_LOOTSHOWDISGUISE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Notify.DisguiseCA
                 end,
@@ -8742,8 +8742,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Disguise Events (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_LOOTSHOWDISGUISE), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_LOOTSHOWDISGUISE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Notify.DisguiseCSA
                 end,
@@ -8760,8 +8760,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Disguise Events (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_LOOTSHOWDISGUISE), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_LOOTSHOWDISGUISE_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Notify.DisguiseAlert
                 end,
@@ -8778,8 +8778,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Disguise Warning (ChatAnnouncements)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_LOOTSHOWDISGUISEALERT), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_LOOTSHOWDISGUISEALERT_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA)),
                 getFunc = function ()
                     return Settings.Notify.DisguiseWarnCA
                 end,
@@ -8795,8 +8795,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Disguise Warning (CSA)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_LOOTSHOWDISGUISEALERT), GetString(LUIE_STRING_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_LOOTSHOWDISGUISEALERT_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CSA)),
                 getFunc = function ()
                     return Settings.Notify.DisguiseWarnCSA
                 end,
@@ -8812,8 +8812,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Show Disguise Warning (Alert)
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_LOOTSHOWDISGUISEALERT), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_LOOTSHOWDISGUISEALERT_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT)),
                 getFunc = function ()
                     return Settings.Notify.DisguiseWarnAlert
                 end,
@@ -8829,8 +8829,8 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Disguise Alert Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERTCOLOR)),
-                tooltip = GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERTCOLOR_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_MISC_LOOTSHOWDISGUISEALERTCOLOR)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_MISC_LOOTSHOWDISGUISEALERTCOLOR_TP),
                 getFunc = function ()
                     return unpack(Settings.Notify.DisguiseAlertColor)
                 end,

@@ -2,7 +2,7 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
-local LUIE = LUIE
+
 local CombatInfo = LUIE.CombatInfo
 CombatInfo.AbilityAlerts = {}
 local AbilityAlerts = CombatInfo.AbilityAlerts
@@ -1373,7 +1373,7 @@ function AbilityAlerts.ApplyFontAlert()
     -- Setup Alerts Font
     local alertFontName = LUIE.Fonts[CombatInfo.SV.alerts.toggles.alertFontFace]
     if not alertFontName or alertFontName == "" then
-        printToChat(GetString(SI_LUIE_ERROR_FONT), true)
+        printToChat(GetString(LUIE_STRING_ERROR_FONT), true)
         alertFontName = "$(MEDIUM_FONT)"
     end
 

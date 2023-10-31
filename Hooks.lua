@@ -194,7 +194,7 @@ function LUIE.InitializeHooks()
             end
         end
 
-        if attackName == GetString(SI_LUIE_SKILL_FALL_DAMAGE) then
+        if attackName == GetString(LUIE_STRING_SKILL_FALL_DAMAGE) then
             if LUIE.Data.Effects.EffectOverride[10950] then
                 attackIcon = LUIE.Data.Effects.EffectOverride[10950].icon
             end
@@ -799,7 +799,7 @@ function LUIE.InitializeHooks()
     RequestFriend = function (option1, option2, menu)
         zos_RequestFriend(option1, option2)
         if not menu then
-            local message = zo_strformat(GetString(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG), option1)
+            local message = zo_strformat(GetString(LUIE_STRING_SLASHCMDS_FRIEND_INVITE_MSG), option1)
             printToChat(message, true)
             if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
                 ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, message)
@@ -813,9 +813,9 @@ function LUIE.InitializeHooks()
         zos_AddIgnore(option)
 
         if IsIgnored(option) then -- Only lists account names, unfortunately
-            printToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE), true)
+            printToChat(GetString(LUIE_STRING_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE), true)
             if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE)))
+                ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(LUIE_STRING_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE)))
             end
             PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
             return

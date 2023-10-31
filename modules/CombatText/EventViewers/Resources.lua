@@ -31,27 +31,27 @@ function CombatTextResourceEventViewer:OnEvent(resourceType, value)
     if resourceType == resourceTypes.LOW_HEALTH then
         color = Settings.colors.lowHealth
         size = Settings.fontSizes.resource
-        text = self:FormatString(Settings.formats.resourceHealth, { value = value, text = GetString(SI_LUIE_LAM_CT_SHARED_LOW_HEALTH) })
+        text = self:FormatString(Settings.formats.resourceHealth, { value = value, text = GetString(LUIE_STRING_LAM_CT_SHARED_LOW_HEALTH) })
         --Low Magicka
     elseif resourceType == resourceTypes.LOW_MAGICKA then
         color = Settings.colors.lowMagicka
         size = Settings.fontSizes.resource
-        text = self:FormatString(Settings.formats.resourceMagicka, { value = value, text = GetString(SI_LUIE_LAM_CT_SHARED_LOW_MAGICKA) })
+        text = self:FormatString(Settings.formats.resourceMagicka, { value = value, text = GetString(LUIE_STRING_LAM_CT_SHARED_LOW_MAGICKA) })
         --Low Stamina
     elseif resourceType == resourceTypes.LOW_STAMINA then
         color = Settings.colors.lowStamina
         size = Settings.fontSizes.resource
-        text = self:FormatString(Settings.formats.resourceStamina, { value = value, text = GetString(SI_LUIE_LAM_CT_SHARED_LOW_STAMINA) })
+        text = self:FormatString(Settings.formats.resourceStamina, { value = value, text = GetString(LUIE_STRING_LAM_CT_SHARED_LOW_STAMINA) })
         --Ultimate Ready
     elseif resourceType == resourceTypes.ULTIMATE then
         color = Settings.colors.ultimateReady
         size = Settings.fontSizes.readylabel
-        text = self:FormatString(Settings.formats.ultimateReady, { text = GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY) })
+        text = self:FormatString(Settings.formats.ultimateReady, { text = GetString(LUIE_STRING_LAM_CT_SHARED_ULTIMATE_READY) })
         -- Potion Ready
     elseif resourceType == resourceTypes.POTION then
         color = Settings.colors.potionReady
         size = Settings.fontSizes.readylabel
-        text = self:FormatString(Settings.formats.potionReady, { text = GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY) })
+        text = self:FormatString(Settings.formats.potionReady, { text = GetString(LUIE_STRING_LAM_CT_SHARED_POTION_READY) })
     end
 
     self:PrepareLabel(control.label, size, color, text)
