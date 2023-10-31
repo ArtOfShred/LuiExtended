@@ -360,8 +360,8 @@ function CombatInfo.SetMarker(...)
     end
 
     local LUIE_MARKER = "/LuiExtended/media/combatinfo/floatingicon/redarrow.dds"
-    local _
-    SetFloatingMarkerInfo(MAP_PIN_TYPE_AGGRO, CombatInfo.SV.markerSize, LUIE_MARKER, _, _, _)
+    --*function SetFloatingMarkerInfo(markerType: string, size: number, primaryTexturePath: string, secondaryTexturePath: string, primaryPulses: boolean, secondaryPulses: boolean)
+    SetFloatingMarkerInfo(MAP_PIN_TYPE_AGGRO, CombatInfo.SV.markerSize, LUIE_MARKER, LUIE_MARKER, true, false)
     SetFloatingMarkerGlobalAlpha(1)
 end
 
@@ -421,7 +421,7 @@ function CombatInfo.Initialize(enabled)
     -- if CombatInfo.SV.BarShowLabel == true then
     -- CombatInfo.SV.BarShowLabel = false
     -- end
-    CombatInfo.SetMarker()
+
     CombatInfo.ApplyFont()
     CombatInfo.ApplyProcSound()
 
@@ -460,7 +460,7 @@ function CombatInfo.Initialize(enabled)
 
     CombatInfo.BackbarSetupTemplate()
     CombatInfo.BackbarToggleSettings()
-
+    CombatInfo.SetMarker()
     -------------------------------------------------------------------------------------
 
     CombatInfo.RegisterCombatInfo()
