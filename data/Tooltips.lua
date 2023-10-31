@@ -545,7 +545,7 @@ local Tooltips = {
 
     Set_Stone_Husk_DOT = GetString(LUIE_STRING_SET_STONE_HUSK_DOT_TP),
     Set_Stone_Husk_Drain = GetString(LUIE_STRING_SET_STONE_HUSK_HUSK_DRAIN_TP),
-    Set_Stone_Husk_Buff = GetString(SI_LUEI_SET_STONE_HUSK_BUFF_TP),
+    Set_Stone_Husk_Buff = GetString(LUIE_STRING_SET_STONE_HUSK_BUFF_TP),
 
     -- Mythic Items
     Set_Snow_Treaders = GetString(LUIE_STRING_SKILL_SET_SNOW_TREADERS_TP),
