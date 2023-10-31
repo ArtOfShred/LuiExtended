@@ -6,6 +6,11 @@
 local zo_strformat = zo_strformat
 
 local changelogMessages = {
+    "|cFFA500LuiExtended Version 6.6.7|r",
+    "",
+    "|cFFFF00Unit Frames:|r",
+    "[*] Fixed an issue where the font selection for default Unit Frames (with the extender option enabled) wasn't working correctly.",
+    "",
     "|cFFA500LuiExtended Version 6.6.6|r",
     "",
     "|cFFFF00Chat Announcements:|r",

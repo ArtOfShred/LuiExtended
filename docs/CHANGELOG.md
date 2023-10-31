@@ -1,3 +1,11 @@
+# Version 6.6.7
+
+Unit Frames
+
+- Fixed an issue where the font selection for default Unit Frames (with the extender option enabled) wasn't working correctly.",
+
+---
+
 # Version 6.6.6
 
 Chat Announcements
