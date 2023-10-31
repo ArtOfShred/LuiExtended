@@ -26,17 +26,17 @@ local hideTargetEffects = {}       -- Table of Effects to hide on Target - gener
 local debuffDisplayOverrideId = {} -- Table of Effects (by id) that should show on the target regardless of who applied them.
 
 local windowTitles = {
-    playerb = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS),
-    playerd = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS),
-    player1 = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS),
-    player2 = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS),
-    player_long = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS),
-    targetb = GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS),
-    targetd = GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS),
-    target1 = GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS),
-    target2 = GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS),
-    prominentbuffs = GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS),
-    prominentdebuffs = GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS),
+    playerb = GetString(LUIE_STRING_SCB_WINDOWTITLE_PLAYERBUFFS),
+    playerd = GetString(LUIE_STRING_SCB_WINDOWTITLE_PLAYERDEBUFFS),
+    player1 = GetString(LUIE_STRING_SCB_WINDOWTITLE_PLAYERBUFFS),
+    player2 = GetString(LUIE_STRING_SCB_WINDOWTITLE_PLAYERDEBUFFS),
+    player_long = GetString(LUIE_STRING_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS),
+    targetb = GetString(LUIE_STRING_SCB_WINDOWTITLE_TARGETBUFFS),
+    targetd = GetString(LUIE_STRING_SCB_WINDOWTITLE_TARGETDEBUFFS),
+    target1 = GetString(LUIE_STRING_SCB_WINDOWTITLE_TARGETBUFFS),
+    target2 = GetString(LUIE_STRING_SCB_WINDOWTITLE_TARGETDEBUFFS),
+    prominentbuffs = GetString(LUIE_STRING_SCB_WINDOWTITLE_PROMINENTBUFFS),
+    prominentdebuffs = GetString(LUIE_STRING_SCB_WINDOWTITLE_PROMINENTDEBUFFS),
 }
 
 SpellCastBuffs.Enabled = false
@@ -255,7 +255,7 @@ end
 
 local function UpdateEffectOnSkillUpdate(overrideRank, casterUnitTag)
     -- Mages Guild
-    Effects.EffectOverride[40465].tooltip = zo_strformat(GetString(SI_LUIE_SKILL_SCALDING_RUNE_TP), (GetAbilityDuration(40468, overrideRank, casterUnitTag) / 1000) + GetNumPassiveSkillRanks(GetSkillLineIndicesFromSkillLineId(44), select(2, GetSkillLineIndicesFromSkillLineId(44)), 8))
+    Effects.EffectOverride[40465].tooltip = zo_strformat(GetString(LUIE_STRING_SKILL_SCALDING_RUNE_TP), (GetAbilityDuration(40468, overrideRank, casterUnitTag) / 1000) + GetNumPassiveSkillRanks(GetSkillLineIndicesFromSkillLineId(44), select(2, GetSkillLineIndicesFromSkillLineId(44)), 8))
 end
 
 function SpellCastBuffs.ShouldUseDefaultIcon(abilityId)
@@ -699,20 +699,20 @@ function SpellCastBuffs.AddBulkToCustomList(list, table)
 end
 
 function SpellCastBuffs.ClearCustomList(list)
-    local listRef = list == SpellCastBuffs.SV.PromBuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS) or list == SpellCastBuffs.SV.PromDebuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS) or list == SpellCastBuffs.SV.PriorityBuffTable and GetString(SI_LUIE_CUSTOM_LIST_PRIORITY_BUFFS) or list == SpellCastBuffs.SV.PriorityDebuffTable and GetString(SI_LUIE_CUSTOM_LIST_PRIORITY_DEBUFFS) or list == SpellCastBuffs.SV.BlacklistTable and GetString(SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST) or ""
+    local listRef = list == SpellCastBuffs.SV.PromBuffTable and GetString(LUIE_STRING_SCB_WINDOWTITLE_PROMINENTBUFFS) or list == SpellCastBuffs.SV.PromDebuffTable and GetString(LUIE_STRING_SCB_WINDOWTITLE_PROMINENTDEBUFFS) or list == SpellCastBuffs.SV.PriorityBuffTable and GetString(LUIE_STRING_CUSTOM_LIST_PRIORITY_BUFFS) or list == SpellCastBuffs.SV.PriorityDebuffTable and GetString(LUIE_STRING_CUSTOM_LIST_PRIORITY_DEBUFFS) or list == SpellCastBuffs.SV.BlacklistTable and GetString(LUIE_STRING_CUSTOM_LIST_AURA_BLACKLIST) or ""
     for k, v in pairs(list) do
         list[k] = nil
     end
     CHAT_SYSTEM:Maximize()
     CHAT_SYSTEM.primaryContainer:FadeIn()
-    printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_CLEARED), listRef), true)
+    printToChat(zo_strformat(GetString(LUIE_STRING_CUSTOM_LIST_CLEARED), listRef), true)
     SpellCastBuffs.ReloadEffects("player")
 end
 
 -- List Handling (Add) for Prominent Auras & Blacklist
 function SpellCastBuffs.AddToCustomList(list, input)
     local id = tonumber(input)
-    local listRef = list == SpellCastBuffs.SV.PromBuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS) or list == SpellCastBuffs.SV.PromDebuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS) or list == SpellCastBuffs.SV.PriorityBuffTable and GetString(SI_LUIE_CUSTOM_LIST_PRIORITY_BUFFS) or list == SpellCastBuffs.SV.PriorityDebuffTable and GetString(SI_LUIE_CUSTOM_LIST_PRIORITY_DEBUFFS) or list == SpellCastBuffs.SV.BlacklistTable and GetString(SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST) or ""
+    local listRef = list == SpellCastBuffs.SV.PromBuffTable and GetString(LUIE_STRING_SCB_WINDOWTITLE_PROMINENTBUFFS) or list == SpellCastBuffs.SV.PromDebuffTable and GetString(LUIE_STRING_SCB_WINDOWTITLE_PROMINENTDEBUFFS) or list == SpellCastBuffs.SV.PriorityBuffTable and GetString(LUIE_STRING_CUSTOM_LIST_PRIORITY_BUFFS) or list == SpellCastBuffs.SV.PriorityDebuffTable and GetString(LUIE_STRING_CUSTOM_LIST_PRIORITY_DEBUFFS) or list == SpellCastBuffs.SV.BlacklistTable and GetString(LUIE_STRING_CUSTOM_LIST_AURA_BLACKLIST) or ""
     if id and id > 0 then
         local name = zo_strformat("<<C:1>>", GetAbilityName(id))
         if name ~= nil and name ~= "" then
@@ -720,18 +720,18 @@ function SpellCastBuffs.AddToCustomList(list, input)
             list[id] = true
             CHAT_SYSTEM:Maximize()
             CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_ID), icon, id, name, listRef), true)
+            printToChat(zo_strformat(GetString(LUIE_STRING_CUSTOM_LIST_ADDED_ID), icon, id, name, listRef), true)
         else
             CHAT_SYSTEM:Maximize()
             CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_FAILED), input, listRef), true)
+            printToChat(zo_strformat(GetString(LUIE_STRING_CUSTOM_LIST_ADDED_FAILED), input, listRef), true)
         end
     else
         if input ~= "" then
             list[input] = true
             CHAT_SYSTEM:Maximize()
             CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_NAME), input, listRef), true)
+            printToChat(zo_strformat(GetString(LUIE_STRING_CUSTOM_LIST_ADDED_NAME), input, listRef), true)
         end
     end
     SpellCastBuffs.ReloadEffects("player")
@@ -740,20 +740,20 @@ end
 -- List Handling (Remove) for Prominent Auras & Blacklist
 function SpellCastBuffs.RemoveFromCustomList(list, input)
     local id = tonumber(input)
-    local listRef = list == SpellCastBuffs.SV.PromBuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS) or list == SpellCastBuffs.SV.PromDebuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS) or list == SpellCastBuffs.SV.PriorityBuffTable and GetString(SI_LUIE_CUSTOM_LIST_PRIORITY_BUFFS) or list == SpellCastBuffs.SV.PriorityDebuffTable and GetString(SI_LUIE_CUSTOM_LIST_PRIORITY_DEBUFFS) or list == SpellCastBuffs.SV.BlacklistTable and GetString(SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST) or ""
+    local listRef = list == SpellCastBuffs.SV.PromBuffTable and GetString(LUIE_STRING_SCB_WINDOWTITLE_PROMINENTBUFFS) or list == SpellCastBuffs.SV.PromDebuffTable and GetString(LUIE_STRING_SCB_WINDOWTITLE_PROMINENTDEBUFFS) or list == SpellCastBuffs.SV.PriorityBuffTable and GetString(LUIE_STRING_CUSTOM_LIST_PRIORITY_BUFFS) or list == SpellCastBuffs.SV.PriorityDebuffTable and GetString(LUIE_STRING_CUSTOM_LIST_PRIORITY_DEBUFFS) or list == SpellCastBuffs.SV.BlacklistTable and GetString(LUIE_STRING_CUSTOM_LIST_AURA_BLACKLIST) or ""
     if id and id > 0 then
         local name = zo_strformat("<<C:1>>", GetAbilityName(id))
         local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
         list[id] = nil
         CHAT_SYSTEM:Maximize()
         CHAT_SYSTEM.primaryContainer:FadeIn()
-        printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_ID), icon, id, name, listRef), true)
+        printToChat(zo_strformat(GetString(LUIE_STRING_CUSTOM_LIST_REMOVED_ID), icon, id, name, listRef), true)
     else
         if input ~= "" then
             list[input] = nil
             CHAT_SYSTEM:Maximize()
             CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_NAME), input, listRef), true)
+            printToChat(zo_strformat(GetString(LUIE_STRING_CUSTOM_LIST_REMOVED_NAME), input, listRef), true)
         end
     end
     SpellCastBuffs.ReloadEffects("player")
@@ -1770,7 +1770,7 @@ function SpellCastBuffs.ApplyFont()
     -- Font setup for standard Buffs & Debuffs
     local fontName = LUIE.Fonts[SpellCastBuffs.SV.BuffFontFace]
     if not fontName or fontName == "" then
-        printToChat(GetString(SI_LUIE_ERROR_FONT), true)
+        printToChat(GetString(LUIE_STRING_ERROR_FONT), true)
         fontName = "$(MEDIUM_FONT)"
     end
     local fontStyle = (SpellCastBuffs.SV.BuffFontStyle and SpellCastBuffs.SV.BuffFontStyle ~= "") and SpellCastBuffs.SV.BuffFontStyle or "outline"
@@ -1780,7 +1780,7 @@ function SpellCastBuffs.ApplyFont()
     -- Font Setup for Prominent Buffs & Debuffs
     local prominentName = LUIE.Fonts[SpellCastBuffs.SV.ProminentLabelFontFace]
     if not prominentName or prominentName == "" then
-        printToChat(GetString(SI_LUIE_ERROR_FONT), true)
+        printToChat(GetString(LUIE_STRING_ERROR_FONT), true)
         prominentName = "$(MEDIUM_FONT)"
     end
     local prominentStyle = (SpellCastBuffs.SV.ProminentLabelFontStyle and SpellCastBuffs.SV.ProminentLabelFontStyle ~= "") and SpellCastBuffs.SV.ProminentLabelFontStyle or "outline"
