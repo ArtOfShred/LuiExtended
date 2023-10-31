@@ -32,37 +32,37 @@ function CombatTextCrowdControlEventViewer:OnEvent(crowdControlType, eventCombat
     if crowdControlType == crowdControlTypes.DISORIENTED then
         color = Settings.colors.disoriented
         size = Settings.fontSizes.crowdControl
-        text = self:FormatString(Settings.formats.disoriented, { text = GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED) })
+        text = self:FormatString(Settings.formats.disoriented, { text = GetString(LUIE_STRING_LAM_CT_SHARED_DISORIENTED) })
 
         -- Feared
     elseif crowdControlType == crowdControlTypes.FEARED then
         color = Settings.colors.feared
         size = Settings.fontSizes.crowdControl
-        text = self:FormatString(Settings.formats.feared, { text = GetString(SI_LUIE_LAM_CT_SHARED_FEARED) })
+        text = self:FormatString(Settings.formats.feared, { text = GetString(LUIE_STRING_LAM_CT_SHARED_FEARED) })
 
         -- Off Balanced
     elseif crowdControlType == crowdControlTypes.OFFBALANCED then
         color = Settings.colors.offBalanced
         size = Settings.fontSizes.crowdControl
-        text = self:FormatString(Settings.formats.offBalanced, { text = GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE) })
+        text = self:FormatString(Settings.formats.offBalanced, { text = GetString(LUIE_STRING_LAM_CT_SHARED_OFF_BALANCE) })
 
         -- Silenced
     elseif crowdControlType == crowdControlTypes.SILENCED then
         color = Settings.colors.silenced
         size = Settings.fontSizes.crowdControl
-        text = self:FormatString(Settings.formats.silenced, { text = GetString(SI_LUIE_LAM_CT_SHARED_SILENCED) })
+        text = self:FormatString(Settings.formats.silenced, { text = GetString(LUIE_STRING_LAM_CT_SHARED_SILENCED) })
 
         -- Stunned
     elseif crowdControlType == crowdControlTypes.STUNNED then
         color = Settings.colors.stunned
         size = Settings.fontSizes.crowdControl
-        text = self:FormatString(Settings.formats.stunned, { text = GetString(SI_LUIE_LAM_CT_SHARED_STUNNED) })
+        text = self:FormatString(Settings.formats.stunned, { text = GetString(LUIE_STRING_LAM_CT_SHARED_STUNNED) })
 
         -- Charmed
     elseif crowdControlType == crowdControlTypes.CHARMED then
         color = Settings.colors.charmed
         size = Settings.fontSizes.crowdControl
-        text = self:FormatString(Settings.formats.charmed, { text = GetString(SI_LUIE_LAM_CT_SHARED_CHARMED) })
+        text = self:FormatString(Settings.formats.charmed, { text = GetString(LUIE_STRING_LAM_CT_SHARED_CHARMED) })
     end
 
     self:PrepareLabel(control.label, size, color, text)

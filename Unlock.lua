@@ -13,24 +13,24 @@ local savedHiddenStates = {}
 -- Table of UI elements to unlock for moving.
 -- Constraints for some of these elements need to be adjusted - using values from Azurah.
 local defaultPanels = {
-    [ZO_HUDInfamyMeter] = { GetString(SI_LUIE_DEFAULT_FRAME_INFAMY_METER) },
-    [ZO_HUDTelvarMeter] = { GetString(SI_LUIE_DEFAULT_FRAME_TEL_VAR_METER) },
-    [ZO_HUDDaedricEnergyMeter] = { GetString(SI_LUIE_DEFAULT_FRAME_VOLENDRUNG_METER) },
-    [ZO_HUDEquipmentStatus] = { GetString(SI_LUIE_DEFAULT_FRAME_EQUIPMENT_STATUS) },
-    [ZO_FocusedQuestTrackerPanel] = { GetString(SI_LUIE_DEFAULT_FRAME_QUEST_LOG), nil, 200 },
-    [ZO_LootHistoryControl_Keyboard] = { GetString(SI_LUIE_DEFAULT_FRAME_LOOT_HISTORY), 280, 400 },
-    [ZO_BattlegroundHUDFragmentTopLevel] = { GetString(SI_LUIE_DEFAULT_FRAME_BATTLEGROUND_SCORE) },
-    [ZO_ActionBar1] = { GetString(SI_LUIE_DEFAULT_FRAME_ACTION_BAR) },
-    [ZO_Subtitles] = { GetString(SI_LUIE_DEFAULT_FRAME_SUBTITLES), 256, 80 },
-    [ZO_TutorialHudInfoTipKeyboard] = { GetString(SI_LUIE_DEFAULT_FRAME_TUTORIALS) },
-    [ZO_ObjectiveCaptureMeter] = { GetString(SI_LUIE_DEFAULT_FRAME_OBJECTIVE_METER), 128, 128 },
-    [ZO_PlayerToPlayerAreaPromptContainer] = { GetString(SI_LUIE_DEFAULT_FRAME_PLAYER_INTERACTION), nil, 30 },
-    [ZO_SynergyTopLevelContainer] = { GetString(SI_LUIE_DEFAULT_FRAME_SYNERGY) },
-    [ZO_AlertTextNotification] = { GetString(SI_LUIE_DEFAULT_FRAME_ALERTS), 600, 56 },
-    [ZO_CompassFrame] = { GetString(SI_LUIE_DEFAULT_FRAME_COMPASS) },                            -- Needs custom template applied
-    [ZO_ActiveCombatTipsTip] = { GetString(SI_LUIE_DEFAULT_FRAME_ACTIVE_COMBAT_TIPS), 250, 20 }, -- Needs custom template applied
-    [ZO_PlayerProgress] = { GetString(SI_LUIE_DEFAULT_FRAME_PLAYER_PROGRESS) },                  -- Needs custom template applied
-    --[ZO_CenterScreenAnnounce] = { GetString(SI_LUIE_DEFAULT_FRAME_CSA), nil, 100 }, -- Needs custom template applied
+    [ZO_HUDInfamyMeter] = { GetString(LUIE_STRING_DEFAULT_FRAME_INFAMY_METER) },
+    [ZO_HUDTelvarMeter] = { GetString(LUIE_STRING_DEFAULT_FRAME_TEL_VAR_METER) },
+    [ZO_HUDDaedricEnergyMeter] = { GetString(LUIE_STRING_DEFAULT_FRAME_VOLENDRUNG_METER) },
+    [ZO_HUDEquipmentStatus] = { GetString(LUIE_STRING_DEFAULT_FRAME_EQUIPMENT_STATUS) },
+    [ZO_FocusedQuestTrackerPanel] = { GetString(LUIE_STRING_DEFAULT_FRAME_QUEST_LOG), nil, 200 },
+    [ZO_LootHistoryControl_Keyboard] = { GetString(LUIE_STRING_DEFAULT_FRAME_LOOT_HISTORY), 280, 400 },
+    [ZO_BattlegroundHUDFragmentTopLevel] = { GetString(LUIE_STRING_DEFAULT_FRAME_BATTLEGROUND_SCORE) },
+    [ZO_ActionBar1] = { GetString(LUIE_STRING_DEFAULT_FRAME_ACTION_BAR) },
+    [ZO_Subtitles] = { GetString(LUIE_STRING_DEFAULT_FRAME_SUBTITLES), 256, 80 },
+    [ZO_TutorialHudInfoTipKeyboard] = { GetString(LUIE_STRING_DEFAULT_FRAME_TUTORIALS) },
+    [ZO_ObjectiveCaptureMeter] = { GetString(LUIE_STRING_DEFAULT_FRAME_OBJECTIVE_METER), 128, 128 },
+    [ZO_PlayerToPlayerAreaPromptContainer] = { GetString(LUIE_STRING_DEFAULT_FRAME_PLAYER_INTERACTION), nil, 30 },
+    [ZO_SynergyTopLevelContainer] = { GetString(LUIE_STRING_DEFAULT_FRAME_SYNERGY) },
+    [ZO_AlertTextNotification] = { GetString(LUIE_STRING_DEFAULT_FRAME_ALERTS), 600, 56 },
+    [ZO_CompassFrame] = { GetString(LUIE_STRING_DEFAULT_FRAME_COMPASS) },                            -- Needs custom template applied
+    [ZO_ActiveCombatTipsTip] = { GetString(LUIE_STRING_DEFAULT_FRAME_ACTIVE_COMBAT_TIPS), 250, 20 }, -- Needs custom template applied
+    [ZO_PlayerProgress] = { GetString(LUIE_STRING_DEFAULT_FRAME_PLAYER_PROGRESS) },                  -- Needs custom template applied
+    --[ZO_CenterScreenAnnounce] = { GetString(LUIE_STRING_DEFAULT_FRAME_CSA), nil, 100 }, -- Needs custom template applied
 }
 
 -- Our custom mover frames

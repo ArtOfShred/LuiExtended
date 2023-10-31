@@ -258,10 +258,10 @@ local defaultLabelFont = "/LuiExtended/media/fonts/Fontin/fontin_sans_sc.otf|15|
 local strDead = GetString(SI_UNIT_FRAME_STATUS_DEAD)
 local strOffline = GetString(SI_UNIT_FRAME_STATUS_OFFLINE)
 local strResCast = GetString(SI_PLAYER_TO_PLAYER_RESURRECT_BEING_RESURRECTED)
-local strResSelf = GetString(SI_LUIE_UF_DEAD_STATUS_REVIVING)
+local strResSelf = GetString(LUIE_STRING_UF_DEAD_STATUS_REVIVING)
 local strResPending = GetString(SI_PLAYER_TO_PLAYER_RESURRECT_HAS_RESURRECT_PENDING)
-local strResCastRaid = GetString(SI_LUIE_UF_DEAD_STATUS_RES_SHORTHAND)
-local strResPendingRaid = GetString(SI_LUIE_UF_DEAD_STATUS_RES_PENDING_SHORTHAND)
+local strResCastRaid = GetString(LUIE_STRING_UF_DEAD_STATUS_RES_SHORTHAND)
+local strResPendingRaid = GetString(LUIE_STRING_UF_DEAD_STATUS_RES_PENDING_SHORTHAND)
 
 -- Following settings will be used in options menu to define DefaultFrames behaviour
 -- TODO: localization
@@ -370,34 +370,34 @@ function UnitFrames.AddBulkToCustomList(list, table)
 end
 
 function UnitFrames.ClearCustomList(list)
-    local listRef = list == UnitFrames.SV.whitelist and GetString(SI_LUIE_CUSTOM_LIST_UF_WHITELIST) or ""
+    local listRef = list == UnitFrames.SV.whitelist and GetString(LUIE_STRING_CUSTOM_LIST_UF_WHITELIST) or ""
     for k, v in pairs(list) do
         list[k] = nil
     end
     CHAT_SYSTEM:Maximize()
     CHAT_SYSTEM.primaryContainer:FadeIn()
-    printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_CLEARED), listRef), true)
+    printToChat(zo_strformat(GetString(LUIE_STRING_CUSTOM_LIST_CLEARED), listRef), true)
 end
 
 -- List Handling (Add) Pet Whitelist
 function UnitFrames.AddToCustomList(list, input)
-    local listRef = list == UnitFrames.SV.whitelist and GetString(SI_LUIE_CUSTOM_LIST_UF_WHITELIST) or ""
+    local listRef = list == UnitFrames.SV.whitelist and GetString(LUIE_STRING_CUSTOM_LIST_UF_WHITELIST) or ""
     if input ~= "" then
         list[input] = true
         CHAT_SYSTEM:Maximize()
         CHAT_SYSTEM.primaryContainer:FadeIn()
-        printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_NAME), input, listRef), true)
+        printToChat(zo_strformat(GetString(LUIE_STRING_CUSTOM_LIST_ADDED_NAME), input, listRef), true)
     end
 end
 
 -- List Handling (Remove) Pet Whitelist
 function UnitFrames.RemoveFromCustomList(list, input)
-    local listRef = list == UnitFrames.SV.whitelist and GetString(SI_LUIE_CUSTOM_LIST_UF_WHITELIST) or ""
+    local listRef = list == UnitFrames.SV.whitelist and GetString(LUIE_STRING_CUSTOM_LIST_UF_WHITELIST) or ""
     if input ~= "" then
         list[input] = nil
         CHAT_SYSTEM:Maximize()
         CHAT_SYSTEM.primaryContainer:FadeIn()
-        printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_NAME), input, listRef), true)
+        printToChat(zo_strformat(GetString(LUIE_STRING_CUSTOM_LIST_REMOVED_NAME), input, listRef), true)
     end
 end
 
@@ -551,7 +551,7 @@ function UnitFrames.AltBar_OnMouseEnterWerewolf(control)
 
         InitializeTooltip(InformationTooltip, control, BOTTOM, 0, -10)
         SetTooltipText(InformationTooltip, zo_strformat(SI_MONSTERSOCIALCLASS45))
-        InformationTooltip:AddLine(zo_strformat(SI_LUIE_UF_WEREWOLF_POWER, currentPower, maxPower, percentagePower))
+        InformationTooltip:AddLine(zo_strformat(LUIE_STRING_UF_WEREWOLF_POWER, currentPower, maxPower, percentagePower))
     end
     UpdateWerewolfPower()
 
@@ -566,8 +566,8 @@ function UnitFrames.AltBar_OnMouseEnterMounted(control)
         local percentagePower = zo_floor(currentPower / maxPower * 100)
         InitializeTooltip(InformationTooltip, control, BOTTOM, 0, -10)
 
-        SetTooltipText(InformationTooltip, zo_strformat(SI_LUIE_SKILL_MOUNTED))
-        InformationTooltip:AddLine(zo_strformat(SI_LUIE_UF_MOUNT_POWER, currentPower, maxPower, percentagePower))
+        SetTooltipText(InformationTooltip, zo_strformat(LUIE_STRING_SKILL_MOUNTED))
+        InformationTooltip:AddLine(zo_strformat(LUIE_STRING_UF_MOUNT_POWER, currentPower, maxPower, percentagePower))
     end
     UpdateMountPower()
 
@@ -584,7 +584,7 @@ function UnitFrames.AltBar_OnMouseEnterSiege(control)
         InitializeTooltip(InformationTooltip, control, BOTTOM, 0, -10)
 
         SetTooltipText(InformationTooltip, zo_strformat("<<C:1>>", siegeName))
-        InformationTooltip:AddLine(zo_strformat(SI_LUIE_UF_SIEGE_POWER, ZO_CommaDelimitNumber(currentPower), ZO_CommaDelimitNumber(maxPower), percentagePower))
+        InformationTooltip:AddLine(zo_strformat(LUIE_STRING_UF_SIEGE_POWER, ZO_CommaDelimitNumber(currentPower), ZO_CommaDelimitNumber(maxPower), percentagePower))
     end
     UpdateSiegePower()
 
@@ -4980,7 +4980,7 @@ function UnitFrames.DefaultFramesApplyFont(unitTag)
     -- First try selecting font face
     local fontName = LUIE.Fonts[UnitFrames.SV.DefaultFontFace]
     if not fontName or fontName == "" then
-        printToChat(GetString(SI_LUIE_ERROR_FONT), true)
+        printToChat(GetString(LUIE_STRING_ERROR_FONT), true)
         fontName = "$(BOLD_FONT)"
     end
 
@@ -5048,7 +5048,7 @@ function UnitFrames.CustomFramesApplyFont()
     -- First try selecting font face
     local fontName = LUIE.Fonts[UnitFrames.SV.CustomFontFace]
     if not fontName or fontName == "" then
-        printToChat(GetString(SI_LUIE_ERROR_FONT), true)
+        printToChat(GetString(LUIE_STRING_ERROR_FONT), true)
         fontName = "$(MEDIUM_FONT)"
     end
 

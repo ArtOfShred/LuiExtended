@@ -20,8 +20,8 @@ function InfoPanel.CreateSettings()
 
     local panelDataInfoPanel = {
         type = "panel",
-        name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_PNL)),
-        displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(SI_LUIE_LAM_PNL)),
+        name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(LUIE_STRING_LAM_PNL)),
+        displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(LUIE_STRING_LAM_PNL)),
         author = LUIE.author .. "\n",
         version = LUIE.version,
         website = LUIE.website,
@@ -38,14 +38,14 @@ function InfoPanel.CreateSettings()
     -- Info Panel description
     optionsDataInfoPanel[#optionsDataInfoPanel+1] = {
         type = "description",
-        text = GetString(SI_LUIE_LAM_PNL_DESCRIPTION),
+        text = GetString(LUIE_STRING_LAM_PNL_DESCRIPTION),
     }
 
     -- ReloadUI Button
     optionsDataInfoPanel[#optionsDataInfoPanel+1] = {
         type = "button",
-        name = GetString(SI_LUIE_LAM_RELOADUI),
-        tooltip = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
+        name = GetString(LUIE_STRING_LAM_RELOADUI),
+        tooltip = GetString(LUIE_STRING_LAM_RELOADUI_BUTTON),
         func = function ()
             ReloadUI("ingame")
         end,
@@ -55,8 +55,8 @@ function InfoPanel.CreateSettings()
     -- Unlock InfoPanel
     optionsDataInfoPanel[#optionsDataInfoPanel+1] = {
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_PNL_UNLOCKPANEL),
-        tooltip = GetString(SI_LUIE_LAM_PNL_UNLOCKPANEL_TP),
+        name = GetString(LUIE_STRING_LAM_PNL_UNLOCKPANEL),
+        tooltip = GetString(LUIE_STRING_LAM_PNL_UNLOCKPANEL_TP),
         getFunc = function ()
             return InfoPanel.panelUnlocked
         end,
@@ -72,8 +72,8 @@ function InfoPanel.CreateSettings()
     -- InfoPanel scale
     optionsDataInfoPanel[#optionsDataInfoPanel+1] = {
         type = "slider",
-        name = GetString(SI_LUIE_LAM_PNL_PANELSCALE),
-        tooltip = GetString(SI_LUIE_LAM_PNL_PANELSCALE_TP),
+        name = GetString(LUIE_STRING_LAM_PNL_PANELSCALE),
+        tooltip = GetString(LUIE_STRING_LAM_PNL_PANELSCALE_TP),
         min = 100,
         max = 300,
         step = 10,
@@ -94,8 +94,8 @@ function InfoPanel.CreateSettings()
     -- Reset InfoPanel position
     optionsDataInfoPanel[#optionsDataInfoPanel+1] = {
         type = "button",
-        name = GetString(SI_LUIE_LAM_RESETPOSITION),
-        tooltip = GetString(SI_LUIE_LAM_PNL_RESETPOSITION_TP),
+        name = GetString(LUIE_STRING_LAM_RESETPOSITION),
+        tooltip = GetString(LUIE_STRING_LAM_PNL_RESETPOSITION_TP),
         func = InfoPanel.ResetPosition,
         width = "half",
     }
@@ -103,16 +103,16 @@ function InfoPanel.CreateSettings()
     -- Info Panel Options Submenu
     optionsDataInfoPanel[#optionsDataInfoPanel+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_PNL_HEADER),
+        name = GetString(LUIE_STRING_LAM_PNL_HEADER),
         controls = {
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_PNL_ELEMENTS_HEADER),
+                name = GetString(LUIE_STRING_LAM_PNL_ELEMENTS_HEADER),
                 width = "full",
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_PNL_SHOWLATENCY),
+                name = GetString(LUIE_STRING_LAM_PNL_SHOWLATENCY),
                 getFunc = function ()
                     return not Settings.HideLatency
                 end,
@@ -128,7 +128,7 @@ function InfoPanel.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_PNL_SHOWCLOCK),
+                name = GetString(LUIE_STRING_LAM_PNL_SHOWCLOCK),
                 getFunc = function ()
                     return not Settings.HideClock
                 end,
@@ -145,8 +145,8 @@ function InfoPanel.CreateSettings()
             {
                 -- Timestamp Format
                 type = "editbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_PNL_CLOCKFORMAT)),
-                tooltip = GetString(SI_LUIE_LAM_CA_TIMESTAMPFORMAT_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_PNL_CLOCKFORMAT)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_TIMESTAMPFORMAT_TP),
                 getFunc = function ()
                     return Settings.ClockFormat
                 end,
@@ -162,7 +162,7 @@ function InfoPanel.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_PNL_SHOWFPS),
+                name = GetString(LUIE_STRING_LAM_PNL_SHOWFPS),
                 getFunc = function ()
                     return not Settings.HideFPS
                 end,
@@ -178,8 +178,8 @@ function InfoPanel.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_PNL_SHOWMOUNTTIMER),
-                tooltip = GetString(SI_LUIE_LAM_PNL_SHOWMOUNTTIMER_TP),
+                name = GetString(LUIE_STRING_LAM_PNL_SHOWMOUNTTIMER),
+                tooltip = GetString(LUIE_STRING_LAM_PNL_SHOWMOUNTTIMER_TP),
                 getFunc = function ()
                     return not Settings.HideMountFeed
                 end,
@@ -195,7 +195,7 @@ function InfoPanel.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_PNL_SHOWARMORDURABILITY),
+                name = GetString(LUIE_STRING_LAM_PNL_SHOWARMORDURABILITY),
                 getFunc = function ()
                     return not Settings.HideArmour
                 end,
@@ -211,7 +211,7 @@ function InfoPanel.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_PNL_SHOWEAPONCHARGES),
+                name = GetString(LUIE_STRING_LAM_PNL_SHOWEAPONCHARGES),
                 getFunc = function ()
                     return not Settings.HideWeapons
                 end,
@@ -227,7 +227,7 @@ function InfoPanel.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_PNL_SHOWBAGSPACE),
+                name = GetString(LUIE_STRING_LAM_PNL_SHOWBAGSPACE),
                 getFunc = function ()
                     return not Settings.HideBags
                 end,
@@ -243,7 +243,7 @@ function InfoPanel.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_PNL_SHOWSOULGEMS),
+                name = GetString(LUIE_STRING_LAM_PNL_SHOWSOULGEMS),
                 getFunc = function ()
                     return not Settings.HideGems
                 end,
@@ -264,8 +264,8 @@ function InfoPanel.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_PNL_DISPLAYONWORLDMAP),
-                tooltip = GetString(SI_LUIE_LAM_PNL_DISPLAYONWORLDMAP_TP),
+                name = GetString(LUIE_STRING_LAM_PNL_DISPLAYONWORLDMAP),
+                tooltip = GetString(LUIE_STRING_LAM_PNL_DISPLAYONWORLDMAP_TP),
                 getFunc = function ()
                     return Settings.DisplayOnWorldMap
                 end,
@@ -281,8 +281,8 @@ function InfoPanel.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_PNL_DISABLECOLORSRO),
-                tooltip = GetString(SI_LUIE_LAM_PNL_DISABLECOLORSRO_TP),
+                name = GetString(LUIE_STRING_LAM_PNL_DISABLECOLORSRO),
+                tooltip = GetString(LUIE_STRING_LAM_PNL_DISABLECOLORSRO_TP),
                 getFunc = function ()
                     return Settings.DisableInfoColours
                 end,
