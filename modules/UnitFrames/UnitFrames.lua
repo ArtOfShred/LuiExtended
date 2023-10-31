@@ -4987,7 +4987,7 @@ function UnitFrames.DefaultFramesApplyFont(unitTag)
     local fontStyle = (UnitFrames.SV.DefaultFontStyle and UnitFrames.SV.DefaultFontStyle ~= "") and UnitFrames.SV.DefaultFontStyle or "soft-shadow-thick"
     local fontSize = (UnitFrames.SV.DefaultFontSize and UnitFrames.SV.DefaultFontSize > 0) and UnitFrames.SV.DefaultFontSize or 16
 
-    local __applyFont = function (...)
+    local applyDefaultFont = function(unitTag)
         if g_DefaultFrames[unitTag] then
             local unitFrame = g_DefaultFrames[unitTag]
             for _, powerType in pairs({
@@ -5004,14 +5004,14 @@ function UnitFrames.DefaultFramesApplyFont(unitTag)
 
     -- Apply setting only for one requested unitTag
     if unitTag then
-        __applyFont(unitTag)
+        applyDefaultFont(unitTag)
 
         -- Otherwise do it for all possible unitTags
     else
-        __applyFont("player")
-        __applyFont("reticleover")
+        applyDefaultFont("player")
+        applyDefaultFont("reticleover")
         for i = 0, 24 do
-            __applyFont("group" .. i)
+            applyDefaultFont("group" .. i)
         end
     end
 end
@@ -5019,7 +5019,7 @@ end
 -- Reapplies colour for default unit frames extender module labels
 function UnitFrames.DefaultFramesApplyColour()
     -- Helper function
-    local __applyColour = function (unitTag)
+    local applyDefaultColor = function(unitTag)
         if g_DefaultFrames[unitTag] then
             local unitFrame = g_DefaultFrames[unitTag]
             for _, powerType in pairs({
@@ -5036,10 +5036,10 @@ function UnitFrames.DefaultFramesApplyColour()
     end
 
     -- Apply setting for all possible unitTags
-    __applyColour("player")
-    __applyColour("reticleover")
+    applyDefaultColor("player")
+    applyDefaultColor("reticleover")
     for i = 0, 24 do
-        __applyColour("group" .. i)
+        applyDefaultColor("group" .. i)
     end
 end
 
