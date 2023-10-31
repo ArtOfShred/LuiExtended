@@ -60,11 +60,11 @@ UnitFrames.Defaults = {
     TargetShowClass = true,
     TargetShowFriend = true,
     TargetColourByReaction = false,
-    CustomFormatOnePT = "Current + Shield - Trauma / Max",    -- TODO: localization
-    CustomFormatOneGroup = "Current + Shield - Trauma / Max", -- TODO: localization
+    CustomFormatOnePT = "Current + Shield - Trauma / Max",
+    CustomFormatOneGroup = "Current + Shield - Trauma / Max",
     CustomFormatTwoPT = "Percentage%",
     CustomFormatTwoGroup = "Percentage%",
-    CustomFormatRaid = "Current (Percentage%)", -- TODO: localization
+    CustomFormatRaid = "Current (Percentage%)",
     CustomFormatBoss = "Percentage%",
     CustomFontFace = "Univers 67",
     CustomFontStyle = "soft-shadow-thin",
@@ -82,8 +82,8 @@ UnitFrames.Defaults = {
     BossIncAlpha = 85,
     CustomOocAlphaPower = true,
     CustomColourHealth = { 202 / 255, 20 / 255, 0 },
-    CustomColourShield = { 1, 192 / 255, 0 },       -- .a=0.5 for overlay and .a = 1 for separate
-    CustomColourTrauma = { 90 / 255, 0, 99 / 255 }, -- .a=0.5 for overlay and .a = 1 for separate
+    CustomColourShield = { 1, 192 / 255, 0 },
+    CustomColourTrauma = { 90 / 255, 0, 99 / 255 },
     CustomColourMagicka = { 0, 83 / 255, 209 / 255 },
     CustomColourStamina = { 28 / 255, 177 / 255, 0 },
     CustomColourInvulnerable = { 95 / 255, 70 / 255, 60 / 255 },
@@ -202,7 +202,7 @@ UnitFrames.Defaults = {
     PetUseClassColor = false,
     PetIncAlpha = 85,
     PetOocAlpha = 85,
-    whitelist = {}, -- whitelist for pet names
+    whitelist = {}, -- Whitelist for pet names
     PetNameClip = 88,
     CustomFramesCompanion = true,
     CustomFormatCompanion = "Current (Percentage%)",
@@ -219,7 +219,7 @@ UnitFrames.Defaults = {
     BarAlignTarget = 1,
     BarAlignCenterLabelPlayer = false,
     BarAlignCenterLabelTarget = false,
-    CustomFormatCenterLabel = "Current + Shield - Trauma / Max (Percentage%)", -- TODO: localization
+    CustomFormatCenterLabel = "Current + Shield - Trauma / Max (Percentage%)",
 }
 UnitFrames.SV = nil
 
