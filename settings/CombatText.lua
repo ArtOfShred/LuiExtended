@@ -37,8 +37,8 @@ end
 local dialogs = {
     [1] = { -- Clear Blacklist
         identifier = "LUIE_CLEAR_CT_BLACKLIST",
-        title = GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR),
-        text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG), GetString(SI_LUIE_LAM_CT_BLACKLIST_HEADER)),
+        title = GetString(LUIE_LAM_UF_BLACKLIST_CLEAR),
+        text = zo_strformat(GetString(LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG), GetString(LUIE_LAM_CT_BLACKLIST_HEADER)),
         callback = function (dialog)
             CombatText.ClearCustomList(CombatText.SV.blacklist)
             LUIE_BlacklistCT:UpdateChoices(GenerateCustomList(CombatText.SV.blacklist))
@@ -80,8 +80,8 @@ function CombatText.CreateSettings()
 
     local panelDataCombatText = {
         type = "panel",
-        name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_CT)),
-        displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(SI_LUIE_LAM_CT)),
+        name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(LUIE_LAM_CT)),
+        displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(LUIE_LAM_CT)),
         author = LUIE.author .. "\n",
         version = LUIE.version,
         website = LUIE.website,
@@ -98,14 +98,14 @@ function CombatText.CreateSettings()
     -- Combat Text Description
     optionsDataCombatText[#optionsDataCombatText+1] = {
         type = "description",
-        text = GetString(SI_LUIE_LAM_CT_DESCRIPTION),
+        text = GetString(LUIE_LAM_CT_DESCRIPTION),
     }
 
     -- ReloadUI Button
     optionsDataCombatText[#optionsDataCombatText+1] = {
         type = "button",
-        name = GetString(SI_LUIE_LAM_RELOADUI),
-        tooltip = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
+        name = GetString(LUIE_LAM_RELOADUI),
+        tooltip = GetString(LUIE_LAM_RELOADUI_BUTTON),
         func = function ()
             ReloadUI("ingame")
         end,
@@ -116,8 +116,8 @@ function CombatText.CreateSettings()
     optionsDataCombatText[#optionsDataCombatText+1] = {
         type = "checkbox",
         width = "half",
-        name = GetString(SI_LUIE_LAM_CT_UNLOCK),
-        tooltip = GetString(SI_LUIE_LAM_CT_UNLOCK_TP),
+        name = GetString(LUIE_LAM_CT_UNLOCK),
+        tooltip = GetString(LUIE_LAM_CT_UNLOCK_TP),
         default = Defaults.unlocked,
         getFunc = function ()
             return Settings.unlocked
@@ -136,13 +136,13 @@ function CombatText.CreateSettings()
     -- Combat Text - Common Options
     optionsDataCombatText[#optionsDataCombatText+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_UF_COMMON_HEADER),
+        name = GetString(LUIE_LAM_UF_COMMON_HEADER),
         controls = {
             {
                 -- In Combat Only
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CT_IC_ONLY),
-                tooltip = GetString(SI_LUIE_LAM_CT_IC_ONLY_TP),
+                name = GetString(LUIE_LAM_CT_IC_ONLY),
+                tooltip = GetString(LUIE_LAM_CT_IC_ONLY_TP),
                 getFunc = function ()
                     return Settings.toggles.inCombatOnly
                 end,
@@ -154,8 +154,8 @@ function CombatText.CreateSettings()
             {
                 -- Transparency
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_CT_TRANSPARENCY),
-                tooltip = GetString(SI_LUIE_LAM_CT_TRANSPARENCY_TP),
+                name = GetString(LUIE_LAM_CT_TRANSPARENCY),
+                tooltip = GetString(LUIE_LAM_CT_TRANSPARENCY_TP),
                 min = 0,
                 max = 100,
                 getFunc = function ()
@@ -170,8 +170,8 @@ function CombatText.CreateSettings()
             {
                 -- overkill
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CT_OVERKILL),
-                tooltip = GetString(SI_LUIE_LAM_CT_OVERKILL_TP),
+                name = GetString(LUIE_LAM_CT_OVERKILL),
+                tooltip = GetString(LUIE_LAM_CT_OVERKILL_TP),
                 getFunc = function ()
                     return Settings.common.overkill
                 end,
@@ -184,8 +184,8 @@ function CombatText.CreateSettings()
             {
                 -- overhealing
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CT_OVERHEAL),
-                tooltip = GetString(SI_LUIE_LAM_CT_OVERHEAL_TP),
+                name = GetString(LUIE_LAM_CT_OVERHEAL),
+                tooltip = GetString(LUIE_LAM_CT_OVERHEAL_TP),
                 getFunc = function ()
                     return Settings.common.overheal
                 end,
@@ -198,8 +198,8 @@ function CombatText.CreateSettings()
             {
                 -- Abbreviate Numbers
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CT_ABBREVIATE),
-                tooltip = GetString(SI_LUIE_LAM_CT_ABBREVIATE_TP),
+                name = GetString(LUIE_LAM_CT_ABBREVIATE),
+                tooltip = GetString(LUIE_LAM_CT_ABBREVIATE_TP),
                 getFunc = function ()
                     return Settings.common.abbreviateNumbers
                 end,
@@ -212,8 +212,8 @@ function CombatText.CreateSettings()
             {
                 -- Use Generic Icon for CC Type
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON),
-                tooltip = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_TP),
+                name = GetString(LUIE_LAM_CI_CCT_DEFAULT_ICON),
+                tooltip = GetString(LUIE_LAM_CI_CCT_DEFAULT_ICON_TP),
                 getFunc = function ()
                     return Settings.common.useDefaultIcon
                 end,
@@ -225,8 +225,8 @@ function CombatText.CreateSettings()
             {
                 -- Generic Icon Options
                 type = "dropdown",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_OPTIONS)),
-                tooltip = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_OPTIONS_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_CI_CCT_DEFAULT_ICON_OPTIONS)),
+                tooltip = GetString(LUIE_LAM_CI_CCT_DEFAULT_ICON_OPTIONS_TP),
                 choices = globalIconOptions,
                 getFunc = function ()
                     return globalIconOptions[Settings.common.defaultIconOptions]
@@ -245,18 +245,18 @@ function CombatText.CreateSettings()
 
     optionsDataCombatText[#optionsDataCombatText+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_CT_BLACKLIST_HEADER),
+        name = GetString(LUIE_LAM_CT_BLACKLIST_HEADER),
         controls = {
             {
                 -- Combat Text Blacklist Description
                 type = "description",
-                text = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_DESCRIPT),
+                text = GetString(LUIE_LAM_BUFF_BLACKLIST_DESCRIPT),
             },
             -- Blacklist Button - Sets
             {
                 type = "button",
-                name = GetString(SI_LUIE_LAM_CT_BLACKLIST_ADD_SETS),
-                tooltip = GetString(SI_LUIE_LAM_CT_BLACKLIST_ADD_SETS_TP),
+                name = GetString(LUIE_LAM_CT_BLACKLIST_ADD_SETS),
+                tooltip = GetString(LUIE_LAM_CT_BLACKLIST_ADD_SETS_TP),
                 func = function ()
                     CombatText.AddBulkToCustomList(Settings.blacklist, BlacklistPresets.Sets)
                     LUIE_BlacklistCT:UpdateChoices(GenerateCustomList(Settings.blacklist))
@@ -266,8 +266,8 @@ function CombatText.CreateSettings()
             -- Blacklist Button - Sorcerer
             {
                 type = "button",
-                name = GetString(SI_LUIE_LAM_CT_BLACKLIST_ADD_SORCERER),
-                tooltip = GetString(SI_LUIE_LAM_CT_BLACKLIST_ADD_SORCERER_TP),
+                name = GetString(LUIE_LAM_CT_BLACKLIST_ADD_SORCERER),
+                tooltip = GetString(LUIE_LAM_CT_BLACKLIST_ADD_SORCERER_TP),
                 func = function ()
                     CombatText.AddBulkToCustomList(Settings.blacklist, BlacklistPresets.Sorcerer)
                     LUIE_BlacklistCT:UpdateChoices(GenerateCustomList(Settings.blacklist))
@@ -277,8 +277,8 @@ function CombatText.CreateSettings()
             -- Blacklist Button - Templar
             {
                 type = "button",
-                name = GetString(SI_LUIE_LAM_CT_BLACKLIST_ADD_TEMPLAR),
-                tooltip = GetString(SI_LUIE_LAM_CT_BLACKLIST_ADD_TEMPLAR_TP),
+                name = GetString(LUIE_LAM_CT_BLACKLIST_ADD_TEMPLAR),
+                tooltip = GetString(LUIE_LAM_CT_BLACKLIST_ADD_TEMPLAR_TP),
                 func = function ()
                     CombatText.AddBulkToCustomList(Settings.blacklist, BlacklistPresets.Templar)
                     LUIE_BlacklistCT:UpdateChoices(GenerateCustomList(Settings.blacklist))
@@ -288,8 +288,8 @@ function CombatText.CreateSettings()
             -- Blacklist Button - Warden
             {
                 type = "button",
-                name = GetString(SI_LUIE_LAM_CT_BLACKLIST_ADD_WARDEN),
-                tooltip = GetString(SI_LUIE_LAM_CT_BLACKLIST_ADD_WARDEN_TP),
+                name = GetString(LUIE_LAM_CT_BLACKLIST_ADD_WARDEN),
+                tooltip = GetString(LUIE_LAM_CT_BLACKLIST_ADD_WARDEN_TP),
                 func = function ()
                     CombatText.AddBulkToCustomList(Settings.blacklist, BlacklistPresets.Warden)
                     LUIE_BlacklistCT:UpdateChoices(GenerateCustomList(Settings.blacklist))
@@ -299,8 +299,8 @@ function CombatText.CreateSettings()
             -- Blacklist Button - Necromancer
             {
                 type = "button",
-                name = GetString(SI_LUIE_LAM_CT_BLACKLIST_ADD_NECROMANCER),
-                tooltip = GetString(SI_LUIE_LAM_CT_BLACKLIST_ADD_NECROMANCER_TP),
+                name = GetString(LUIE_LAM_CT_BLACKLIST_ADD_NECROMANCER),
+                tooltip = GetString(LUIE_LAM_CT_BLACKLIST_ADD_NECROMANCER_TP),
                 func = function ()
                     CombatText.AddBulkToCustomList(Settings.blacklist, BlacklistPresets.Necromancer)
                     LUIE_BlacklistCT:UpdateChoices(GenerateCustomList(Settings.blacklist))
@@ -311,8 +311,8 @@ function CombatText.CreateSettings()
             {
                 -- Clear Blacklist
                 type = "button",
-                name = GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR),
-                tooltip = GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_TP),
+                name = GetString(LUIE_LAM_UF_BLACKLIST_CLEAR),
+                tooltip = GetString(LUIE_LAM_UF_BLACKLIST_CLEAR_TP),
                 func = function ()
                     ZO_Dialogs_ShowDialog("LUIE_CLEAR_CT_BLACKLIST")
                 end,
@@ -321,8 +321,8 @@ function CombatText.CreateSettings()
             {
                 -- Combat Text Blacklist (Add)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST_TP),
+                name = GetString(LUIE_LAM_BUFF_BLACKLIST_ADDLIST),
+                tooltip = GetString(LUIE_LAM_BUFF_BLACKLIST_ADDLIST_TP),
                 getFunc = function () end,
                 setFunc = function (value)
                     CombatText.AddToCustomList(Settings.blacklist, value)
@@ -332,8 +332,8 @@ function CombatText.CreateSettings()
             {
                 -- Combat Text Blacklist (Remove)
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST_TP),
+                name = GetString(LUIE_LAM_BUFF_BLACKLIST_REMLIST),
+                tooltip = GetString(LUIE_LAM_BUFF_BLACKLIST_REMLIST_TP),
                 choices = Blacklist,
                 choicesValues = BlacklistValues,
                 scrollable = true,
@@ -353,23 +353,23 @@ function CombatText.CreateSettings()
     -- Combat Text - Damage & Healing Options
     optionsDataCombatText[#optionsDataCombatText+1] = {
         type = "submenu",
-        name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_DAMAGE_AND_HEALING), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
+        name = zo_strformat("<<1>> <<2>>", GetString(LUIE_LAM_CT_HEADER_DAMAGE_AND_HEALING), GetString(LUIE_LAM_CT_SHARED_OPTIONS)),
         controls = {
             {
                 type = "description",
-                text = GetString(SI_LUIE_LAM_CT_FORMAT_DESCRIPTION),
+                text = GetString(LUIE_LAM_CT_FORMAT_DESCRIPTION),
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE),
+                name = GetString(LUIE_LAM_CT_SHARED_DAMAGE),
                 width = "full",
             },
             {
                 -- Damage (Incoming)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DAMAGE_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_DAMAGE), GetString(LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(LUIE_LAM_CT_INCOMING_DAMAGE_TP),
                 getFunc = function ()
                     return Settings.toggles.incoming.showDamage
                 end,
@@ -382,8 +382,8 @@ function CombatText.CreateSettings()
                 -- Damage (Outgoing)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DAMAGE_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_DAMAGE), GetString(LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(LUIE_LAM_CT_OUTGOING_DAMAGE_TP),
                 getFunc = function ()
                     return Settings.toggles.outgoing.showDamage
                 end,
@@ -396,8 +396,8 @@ function CombatText.CreateSettings()
                 -- Damage Format
                 type = "editbox",
                 width = "half",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_TP),
                 getFunc = function ()
                     return Settings.formats.damage
                 end,
@@ -411,8 +411,8 @@ function CombatText.CreateSettings()
                 -- Damage Critical Format
                 type = "editbox",
                 width = "half",
-                name = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_CRITICAL_TP),
+                name = zo_strformat("<<1>> (<<2>>)", GetString(LUIE_LAM_CT_SHARED_FORMAT), GetString(LUIE_LAM_CT_SHARED_CRITICAL)),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_CRITICAL_TP),
                 getFunc = function ()
                     return Settings.formats.damagecritical
                 end,
@@ -426,8 +426,8 @@ function CombatText.CreateSettings()
                 -- Damage Font Size
                 type = "slider",
                 width = "half",
-                name = GetString(SI_LUIE_LAM_FONT_SIZE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_DAMAGE_TP),
+                name = GetString(LUIE_LAM_FONT_SIZE),
+                tooltip = GetString(LUIE_LAM_CT_FONT_COMBAT_DAMAGE_TP),
                 min = 8,
                 max = 72,
                 step = 1,
@@ -443,8 +443,8 @@ function CombatText.CreateSettings()
                 -- Damage Critical Font Size
                 type = "slider",
                 width = "half",
-                name = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_FONT_SIZE), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_DAMAGE_CRITICAL_TP),
+                name = zo_strformat("<<1>> (<<2>>)", GetString(LUIE_LAM_FONT_SIZE), GetString(LUIE_LAM_CT_SHARED_CRITICAL)),
+                tooltip = GetString(LUIE_LAM_CT_FONT_COMBAT_DAMAGE_CRITICAL_TP),
                 min = 8,
                 max = 72,
                 step = 1,
@@ -458,15 +458,15 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_DOT),
+                name = GetString(LUIE_LAM_CT_SHARED_DOT),
                 width = "full",
             },
             {
                 -- Damage over Time (Incoming)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DOT_ABV), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DOT_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_DOT_ABV), GetString(LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(LUIE_LAM_CT_INCOMING_DOT_TP),
                 getFunc = function ()
                     return Settings.toggles.incoming.showDot
                 end,
@@ -479,8 +479,8 @@ function CombatText.CreateSettings()
                 -- Damage over Time (Outgoing)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DOT_ABV), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DOT_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_DOT_ABV), GetString(LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(LUIE_LAM_CT_OUTGOING_DOT_TP),
                 getFunc = function ()
                     return Settings.toggles.outgoing.showDot
                 end,
@@ -493,8 +493,8 @@ function CombatText.CreateSettings()
                 -- Damage over Time Format
                 type = "editbox",
                 width = "half",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DOT_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_DOT_TP),
                 getFunc = function ()
                     return Settings.formats.dot
                 end,
@@ -508,8 +508,8 @@ function CombatText.CreateSettings()
                 -- Damage over Time Critical Format
                 type = "editbox",
                 width = "half",
-                name = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DOT_CRITICAL_TP),
+                name = zo_strformat("<<1>> (<<2>>)", GetString(LUIE_LAM_CT_SHARED_FORMAT), GetString(LUIE_LAM_CT_SHARED_CRITICAL)),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_DOT_CRITICAL_TP),
                 getFunc = function ()
                     return Settings.formats.dotcritical
                 end,
@@ -523,8 +523,8 @@ function CombatText.CreateSettings()
                 -- Damage over Time Font Size
                 type = "slider",
                 width = "half",
-                name = GetString(SI_LUIE_LAM_FONT_SIZE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_DOT_TP),
+                name = GetString(LUIE_LAM_FONT_SIZE),
+                tooltip = GetString(LUIE_LAM_CT_FONT_COMBAT_DOT_TP),
                 min = 8,
                 max = 72,
                 step = 1,
@@ -540,8 +540,8 @@ function CombatText.CreateSettings()
                 -- Damage over Time Critical Font Size
                 type = "slider",
                 width = "half",
-                name = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_FONT_SIZE), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_DOT_CRITICAL_TP),
+                name = zo_strformat("<<1>> (<<2>>)", GetString(LUIE_LAM_FONT_SIZE), GetString(LUIE_LAM_CT_SHARED_CRITICAL)),
+                tooltip = GetString(LUIE_LAM_CT_FONT_COMBAT_DOT_CRITICAL_TP),
                 min = 8,
                 max = 72,
                 step = 1,
@@ -556,14 +556,14 @@ function CombatText.CreateSettings()
             {
                 -- Damage Color Options
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_HEADER_DAMAGE_COLOR),
+                name = GetString(LUIE_LAM_CT_HEADER_DAMAGE_COLOR),
                 width = "full",
             },
             {
                 -- None
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_NONE),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_NONE_TP),
+                name = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_NONE),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_NONE_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.damage[0])
                 end,
@@ -579,8 +579,8 @@ function CombatText.CreateSettings()
             {
                 -- Generic
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_GENERIC),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_GENERIC_TP),
+                name = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_GENERIC),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_GENERIC_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.damage[1])
                 end,
@@ -596,8 +596,8 @@ function CombatText.CreateSettings()
             {
                 -- Physical
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_PHYSICAL),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_PHYSICAL_TP),
+                name = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_PHYSICAL),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_PHYSICAL_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.damage[2])
                 end,
@@ -613,8 +613,8 @@ function CombatText.CreateSettings()
             {
                 -- Bleed
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_BLEED),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_BLEED_TP),
+                name = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_BLEED),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_BLEED_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.damage[12])
                 end,
@@ -630,8 +630,8 @@ function CombatText.CreateSettings()
             {
                 -- Fire
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_FIRE),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_FIRE_TP),
+                name = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_FIRE),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_FIRE_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.damage[3])
                 end,
@@ -647,8 +647,8 @@ function CombatText.CreateSettings()
             {
                 -- Shock
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_SHOCK),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_SHOCK_TP),
+                name = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_SHOCK),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_SHOCK_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.damage[4])
                 end,
@@ -664,8 +664,8 @@ function CombatText.CreateSettings()
             {
                 -- Oblivion
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OBLIVION),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OBLIVION_TP),
+                name = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OBLIVION),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OBLIVION_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.damage[5])
                 end,
@@ -681,8 +681,8 @@ function CombatText.CreateSettings()
             {
                 -- Cold
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_COLD),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_COLD_TP),
+                name = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_COLD),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_COLD_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.damage[6])
                 end,
@@ -698,8 +698,8 @@ function CombatText.CreateSettings()
             {
                 -- Eearth
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_EARTH),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_EARTH_TP),
+                name = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_EARTH),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_EARTH_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.damage[7])
                 end,
@@ -715,8 +715,8 @@ function CombatText.CreateSettings()
             {
                 -- Magic
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_MAGIC),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_MAGIC_TP),
+                name = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_MAGIC),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_MAGIC_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.damage[8])
                 end,
@@ -732,8 +732,8 @@ function CombatText.CreateSettings()
             {
                 -- Drown
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DROWN),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DROWN_TP),
+                name = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DROWN),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DROWN_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.damage[9])
                 end,
@@ -749,8 +749,8 @@ function CombatText.CreateSettings()
             {
                 -- Disease
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DISEASE),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DISEASE_TP),
+                name = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DISEASE),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DISEASE_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.damage[10])
                 end,
@@ -766,8 +766,8 @@ function CombatText.CreateSettings()
             {
                 -- Poison
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_POISON),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_POISON_TP),
+                name = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_POISON),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_POISON_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.damage[11])
                 end,
@@ -783,8 +783,8 @@ function CombatText.CreateSettings()
             {
                 -- Checkbox Critical Damage Override
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OVERRIDE),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OVERRIDE_TP),
+                name = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OVERRIDE),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OVERRIDE_TP),
                 getFunc = function ()
                     return Settings.toggles.criticalDamageOverride
                 end,
@@ -796,8 +796,8 @@ function CombatText.CreateSettings()
             {
                 -- Color Critical Damage Override
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_DAMAGE_COLOR)),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_DAMAGE_COLOR_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_CT_COLOR_COMBAT_CRIT_DAMAGE_COLOR)),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_CRIT_DAMAGE_COLOR_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.criticalDamageOverride)
                 end,
@@ -813,8 +813,8 @@ function CombatText.CreateSettings()
             {
                 -- Checkbox Incoming Damage Override
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_OVERRIDE),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_OVERRIDE_TP),
+                name = GetString(LUIE_LAM_CT_COLOR_COMBAT_INCOMING_OVERRIDE),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_INCOMING_OVERRIDE_TP),
                 getFunc = function ()
                     return Settings.toggles.incomingDamageOverride
                 end,
@@ -826,8 +826,8 @@ function CombatText.CreateSettings()
             {
                 -- Color Incoming Damage Override
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_COLOR)),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_COLOR_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_CT_COLOR_COMBAT_INCOMING_COLOR)),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_INCOMING_COLOR_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.incomingDamageOverride)
                 end,
@@ -842,15 +842,15 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_HEALING),
+                name = GetString(LUIE_LAM_CT_SHARED_HEALING),
                 width = "full",
             },
             {
                 -- Healing (Incoming)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_HEALING), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_HEALING_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_HEALING), GetString(LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(LUIE_LAM_CT_INCOMING_HEALING_TP),
                 getFunc = function ()
                     return Settings.toggles.incoming.showHealing
                 end,
@@ -863,8 +863,8 @@ function CombatText.CreateSettings()
                 -- Healing (Outgoing)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_HEALING), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_HEALING_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_HEALING), GetString(LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(LUIE_LAM_CT_OUTGOING_HEALING_TP),
                 getFunc = function ()
                     return Settings.toggles.outgoing.showHealing
                 end,
@@ -877,8 +877,8 @@ function CombatText.CreateSettings()
                 -- Healing Format
                 type = "editbox",
                 width = "half",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_HEALING_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_HEALING_TP),
                 getFunc = function ()
                     return Settings.formats.healing
                 end,
@@ -892,8 +892,8 @@ function CombatText.CreateSettings()
                 -- Healing Critical Format
                 type = "editbox",
                 width = "half",
-                name = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_HEALING_CRITICAL_TP),
+                name = zo_strformat("<<1>> (<<2>>)", GetString(LUIE_LAM_CT_SHARED_FORMAT), GetString(LUIE_LAM_CT_SHARED_CRITICAL)),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_HEALING_CRITICAL_TP),
                 getFunc = function ()
                     return Settings.formats.healingcritical
                 end,
@@ -907,8 +907,8 @@ function CombatText.CreateSettings()
                 -- Healing Font Size
                 type = "slider",
                 width = "half",
-                name = GetString(SI_LUIE_LAM_FONT_SIZE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_HEALING_TP),
+                name = GetString(LUIE_LAM_FONT_SIZE),
+                tooltip = GetString(LUIE_LAM_CT_FONT_COMBAT_HEALING_TP),
                 min = 8,
                 max = 72,
                 step = 1,
@@ -924,8 +924,8 @@ function CombatText.CreateSettings()
                 -- Healing Critical Font Size
                 type = "slider",
                 width = "half",
-                name = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_FONT_SIZE), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_HEALING_CRITICAL_TP),
+                name = zo_strformat("<<1>> (<<2>>)", GetString(LUIE_LAM_FONT_SIZE), GetString(LUIE_LAM_CT_SHARED_CRITICAL)),
+                tooltip = GetString(LUIE_LAM_CT_FONT_COMBAT_HEALING_CRITICAL_TP),
                 min = 8,
                 max = 72,
                 step = 1,
@@ -939,15 +939,15 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_HOT),
+                name = GetString(LUIE_LAM_CT_SHARED_HOT),
                 width = "full",
             },
             {
                 -- Healing over Time (Incoming)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_HOT_ABV), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_HOT_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_HOT_ABV), GetString(LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(LUIE_LAM_CT_INCOMING_HOT_TP),
                 getFunc = function ()
                     return Settings.toggles.incoming.showHot
                 end,
@@ -960,8 +960,8 @@ function CombatText.CreateSettings()
                 -- Healing over Time (Outgoing)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_HOT_ABV), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_HOT_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_HOT_ABV), GetString(LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(LUIE_LAM_CT_OUTGOING_HOT_TP),
                 getFunc = function ()
                     return Settings.toggles.outgoing.showHot
                 end,
@@ -974,8 +974,8 @@ function CombatText.CreateSettings()
                 -- Healing over Time Format
                 type = "editbox",
                 width = "half",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_HOT_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_HOT_TP),
                 getFunc = function ()
                     return Settings.formats.hot
                 end,
@@ -989,8 +989,8 @@ function CombatText.CreateSettings()
                 -- Healing over Time Critical Format
                 type = "editbox",
                 width = "half",
-                name = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_HOT_CRITICAL_TP),
+                name = zo_strformat("<<1>> (<<2>>)", GetString(LUIE_LAM_CT_SHARED_FORMAT), GetString(LUIE_LAM_CT_SHARED_CRITICAL)),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_HOT_CRITICAL_TP),
                 getFunc = function ()
                     return Settings.formats.hotcritical
                 end,
@@ -1004,8 +1004,8 @@ function CombatText.CreateSettings()
                 -- Healing over Time Font Size
                 type = "slider",
                 width = "half",
-                name = GetString(SI_LUIE_LAM_FONT_SIZE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_HOT_TP),
+                name = GetString(LUIE_LAM_FONT_SIZE),
+                tooltip = GetString(LUIE_LAM_CT_FONT_COMBAT_HOT_TP),
                 min = 8,
                 max = 72,
                 step = 1,
@@ -1021,8 +1021,8 @@ function CombatText.CreateSettings()
                 -- Healing over Time Critical Font Size
                 type = "slider",
                 width = "half",
-                name = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_FONT_SIZE), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_HOT_CRITICAL_TP),
+                name = zo_strformat("<<1>> (<<2>>)", GetString(LUIE_LAM_FONT_SIZE), GetString(LUIE_LAM_CT_SHARED_CRITICAL)),
+                tooltip = GetString(LUIE_LAM_CT_FONT_COMBAT_HOT_CRITICAL_TP),
                 min = 8,
                 max = 72,
                 step = 1,
@@ -1037,14 +1037,14 @@ function CombatText.CreateSettings()
             {
                 -- Healing Color Options
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_HEADER_HEALING_COLOR),
+                name = GetString(LUIE_LAM_CT_HEADER_HEALING_COLOR),
                 width = "full",
             },
             {
                 -- Healing
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING_TP),
+                name = GetString(LUIE_LAM_CT_COLOR_COMBAT_HEALING),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_HEALING_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.healing)
                 end,
@@ -1060,8 +1060,8 @@ function CombatText.CreateSettings()
             {
                 -- Checkbox Critical Healing Override
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING_OVERRIDE),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING_OVERRIDE_TP),
+                name = GetString(LUIE_LAM_CT_COLOR_COMBAT_HEALING_OVERRIDE),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_HEALING_OVERRIDE_TP),
                 getFunc = function ()
                     return Settings.toggles.criticalHealingOverride
                 end,
@@ -1073,8 +1073,8 @@ function CombatText.CreateSettings()
             {
                 -- Color Critical Healing Override
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_HEALING_COLOR)),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_HEALING_COLOR_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_CT_COLOR_COMBAT_CRIT_HEALING_COLOR)),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_CRIT_HEALING_COLOR_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.criticalHealingOverride)
                 end,
@@ -1093,22 +1093,22 @@ function CombatText.CreateSettings()
     -- Combat Text - Resource Gain & Drain Options
     optionsDataCombatText[#optionsDataCombatText+1] = {
         type = "submenu",
-        name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_RESOURCE_GAIN_DRAIN), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
+        name = zo_strformat("<<1>> <<2>>", GetString(LUIE_LAM_CT_HEADER_RESOURCE_GAIN_DRAIN), GetString(LUIE_LAM_CT_SHARED_OPTIONS)),
         controls = {
             {
                 type = "description",
-                text = GetString(SI_LUIE_LAM_CT_FORMAT_DESCRIPTION),
+                text = GetString(LUIE_LAM_CT_FORMAT_DESCRIPTION),
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE),
+                name = GetString(LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE),
                 width = "full",
             },
             {
                 -- Gain Loss Font Size
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_FONT_SIZE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_GAIN_LOSS_TP),
+                name = GetString(LUIE_LAM_FONT_SIZE),
+                tooltip = GetString(LUIE_LAM_CT_FONT_COMBAT_GAIN_LOSS_TP),
                 min = 8,
                 max = 72,
                 step = 1,
@@ -1122,15 +1122,15 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE),
+                name = GetString(LUIE_LAM_CT_SHARED_ENERGIZE),
                 width = "full",
             },
             {
                 -- Resource Gain (Incoming)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_ENERGIZE_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_ENERGIZE), GetString(LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(LUIE_LAM_CT_INCOMING_ENERGIZE_TP),
                 getFunc = function ()
                     return Settings.toggles.incoming.showEnergize
                 end,
@@ -1143,8 +1143,8 @@ function CombatText.CreateSettings()
                 -- Resource Gain (Outgoing)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_ENERGIZE_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_ENERGIZE), GetString(LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(LUIE_LAM_CT_OUTGOING_ENERGIZE_TP),
                 getFunc = function ()
                     return Settings.toggles.outgoing.showEnergize
                 end,
@@ -1156,8 +1156,8 @@ function CombatText.CreateSettings()
             {
                 -- Resource Gain Format
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_ENERGIZE_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_ENERGIZE_TP),
                 getFunc = function ()
                     return Settings.formats.energize
                 end,
@@ -1171,8 +1171,8 @@ function CombatText.CreateSettings()
                 -- Gain Magicka Color
                 type = "colorpicker",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_MAGICKA), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_MAGICKA_TP),
+                name = zo_strformat("<<1>> <<2>>", GetString(LUIE_LAM_CT_SHARED_MAGICKA), GetString(LUIE_LAM_CT_SHARED_COLOR)),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_MAGICKA_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.energizeMagicka)
                 end,
@@ -1189,8 +1189,8 @@ function CombatText.CreateSettings()
                 -- Gain Stamina Color
                 type = "colorpicker",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_STAMINA), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_STAMINA_TP),
+                name = zo_strformat("<<1>> <<2>>", GetString(LUIE_LAM_CT_SHARED_STAMINA), GetString(LUIE_LAM_CT_SHARED_COLOR)),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_STAMINA_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.energizeStamina)
                 end,
@@ -1205,15 +1205,15 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE_ULTIMATE),
+                name = GetString(LUIE_LAM_CT_SHARED_ENERGIZE_ULTIMATE),
                 width = "full",
             },
             {
                 -- Ultimate Gain (Incoming)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE_ULTIMATE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_ENERGIZE_ULTIMATE_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_ENERGIZE_ULTIMATE), GetString(LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(LUIE_LAM_CT_INCOMING_ENERGIZE_ULTIMATE_TP),
                 getFunc = function ()
                     return Settings.toggles.incoming.showUltimateEnergize
                 end,
@@ -1226,8 +1226,8 @@ function CombatText.CreateSettings()
                 -- Ultimate Gain (Outgoing)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE_ULTIMATE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_ENERGIZE_ULTIMATE_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_ENERGIZE_ULTIMATE), GetString(LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(LUIE_LAM_CT_OUTGOING_ENERGIZE_ULTIMATE_TP),
                 getFunc = function ()
                     return Settings.toggles.outgoing.showUltimateEnergize
                 end,
@@ -1239,8 +1239,8 @@ function CombatText.CreateSettings()
             {
                 -- Ultimate Gain Format
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_ENERGIZE_ULTIMATE_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_ENERGIZE_ULTIMATE_TP),
                 getFunc = function ()
                     return Settings.formats.ultimateEnergize
                 end,
@@ -1253,8 +1253,8 @@ function CombatText.CreateSettings()
             {
                 -- Gain Ultimate Color
                 type = "colorpicker",
-                name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_ULTIMATE_TP),
+                name = zo_strformat("<<1>> <<2>>", GetString(LUIE_LAM_CT_SHARED_ULTIMATE), GetString(LUIE_LAM_CT_SHARED_COLOR)),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_ULTIMATE_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.energizeUltimate)
                 end,
@@ -1269,15 +1269,15 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_DRAIN),
+                name = GetString(LUIE_LAM_CT_SHARED_DRAIN),
                 width = "full",
             },
             {
                 -- Resource Drain (Incoming)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DRAIN), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DRAIN_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_DRAIN), GetString(LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(LUIE_LAM_CT_INCOMING_DRAIN_TP),
                 getFunc = function ()
                     return Settings.toggles.incoming.showDrain
                 end,
@@ -1290,8 +1290,8 @@ function CombatText.CreateSettings()
                 -- Resource Drain (Outgoing)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DRAIN), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DRAIN_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_DRAIN), GetString(LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(LUIE_LAM_CT_OUTGOING_DRAIN_TP),
                 getFunc = function ()
                     return Settings.toggles.outgoing.showDrain
                 end,
@@ -1303,8 +1303,8 @@ function CombatText.CreateSettings()
             {
                 -- Resource Damage Format
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DRAIN_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_DRAIN_TP),
                 getFunc = function ()
                     return Settings.formats.drain
                 end,
@@ -1318,8 +1318,8 @@ function CombatText.CreateSettings()
                 -- Drain Magicka Color
                 type = "colorpicker",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_MAGICKA), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_MAGICKA_TP),
+                name = zo_strformat("<<1>> <<2>>", GetString(LUIE_LAM_CT_SHARED_MAGICKA), GetString(LUIE_LAM_CT_SHARED_COLOR)),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_DRAIN_MAGICKA_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.drainMagicka)
                 end,
@@ -1336,8 +1336,8 @@ function CombatText.CreateSettings()
                 -- Drain Stamina Color
                 type = "colorpicker",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_STAMINA), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_STAMINA_TP),
+                name = zo_strformat("<<1>> <<2>>", GetString(LUIE_LAM_CT_SHARED_STAMINA), GetString(LUIE_LAM_CT_SHARED_COLOR)),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_DRAIN_STAMINA_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.drainStamina)
                 end,
@@ -1356,22 +1356,22 @@ function CombatText.CreateSettings()
     -- Combat Text - Mitigation Options
     optionsDataCombatText[#optionsDataCombatText+1] = {
         type = "submenu",
-        name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_MITIGATION), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
+        name = zo_strformat("<<1>> <<2>>", GetString(LUIE_LAM_CT_HEADER_MITIGATION), GetString(LUIE_LAM_CT_SHARED_OPTIONS)),
         controls = {
             {
                 type = "description",
-                text = GetString(SI_LUIE_LAM_CT_FORMAT_DESCRIPTION),
+                text = GetString(LUIE_LAM_CT_FORMAT_DESCRIPTION),
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE),
+                name = GetString(LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE),
                 width = "full",
             },
             {
                 -- Mitigation Font Size
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_FONT_SIZE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_MITIGATION_TP),
+                name = GetString(LUIE_LAM_FONT_SIZE),
+                tooltip = GetString(LUIE_LAM_CT_FONT_COMBAT_MITIGATION_TP),
                 min = 8,
                 max = 72,
                 step = 1,
@@ -1385,15 +1385,15 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_MISS),
+                name = GetString(LUIE_LAM_CT_SHARED_MISS),
                 width = "full",
             },
             {
                 -- Missed (Incoming)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_MISS), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_MISS_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_MISS), GetString(LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(LUIE_LAM_CT_INCOMING_MISS_TP),
                 getFunc = function ()
                     return Settings.toggles.incoming.showMiss
                 end,
@@ -1406,8 +1406,8 @@ function CombatText.CreateSettings()
                 -- Missed (Outgoing)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_MISS), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_MISS_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_MISS), GetString(LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(LUIE_LAM_CT_OUTGOING_MISS_TP),
                 getFunc = function ()
                     return Settings.toggles.outgoing.showMiss
                 end,
@@ -1419,8 +1419,8 @@ function CombatText.CreateSettings()
             {
                 -- Missed (Format)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_MISS_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_MISS_TP),
                 getFunc = function ()
                     return Settings.formats.miss
                 end,
@@ -1433,8 +1433,8 @@ function CombatText.CreateSettings()
             {
                 -- Missed (Color)
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_MISS_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_MISS_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.miss)
                 end,
@@ -1445,15 +1445,15 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_IMMUNE),
+                name = GetString(LUIE_LAM_CT_SHARED_IMMUNE),
                 width = "full",
             },
             {
                 -- Immune (Incoming)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_IMMUNE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_IMMUNE_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_IMMUNE), GetString(LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(LUIE_LAM_CT_INCOMING_IMMUNE_TP),
                 getFunc = function ()
                     return Settings.toggles.incoming.showImmune
                 end,
@@ -1466,8 +1466,8 @@ function CombatText.CreateSettings()
                 -- Immune (Outgoing)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_IMMUNE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_IMMUNE_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_IMMUNE), GetString(LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(LUIE_LAM_CT_OUTGOING_IMMUNE_TP),
                 getFunc = function ()
                     return Settings.toggles.outgoing.showImmune
                 end,
@@ -1479,8 +1479,8 @@ function CombatText.CreateSettings()
             {
                 -- Immune (Format)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_IMMUNE_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_IMMUNE_TP),
                 getFunc = function ()
                     return Settings.formats.immune
                 end,
@@ -1493,8 +1493,8 @@ function CombatText.CreateSettings()
             {
                 -- Immune (Color)
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_IMMUNE_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_IMMUNE_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.immune)
                 end,
@@ -1509,15 +1509,15 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_PARRIED),
+                name = GetString(LUIE_LAM_CT_SHARED_PARRIED),
                 width = "full",
             },
             {
                 -- Parried (Incoming)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_PARRIED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_PARRIED_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_PARRIED), GetString(LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(LUIE_LAM_CT_INCOMING_PARRIED_TP),
                 getFunc = function ()
                     return Settings.toggles.incoming.showParried
                 end,
@@ -1530,8 +1530,8 @@ function CombatText.CreateSettings()
                 -- Parried (Outgoing)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_PARRIED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_PARRIED_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_PARRIED), GetString(LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(LUIE_LAM_CT_OUTGOING_PARRIED_TP),
                 getFunc = function ()
                     return Settings.toggles.outgoing.showParried
                 end,
@@ -1543,8 +1543,8 @@ function CombatText.CreateSettings()
             {
                 -- Parried (Format)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_PARRIED_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_PARRIED_TP),
                 getFunc = function ()
                     return Settings.formats.parried
                 end,
@@ -1557,8 +1557,8 @@ function CombatText.CreateSettings()
             {
                 -- Parried (Color)
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_PARRIED_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_PARRIED_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.parried)
                 end,
@@ -1573,15 +1573,15 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_REFLECTED),
+                name = GetString(LUIE_LAM_CT_SHARED_REFLECTED),
                 width = "full",
             },
             {
                 -- Reflected (Incoming)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_REFLECTED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_REFLECTED_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_REFLECTED), GetString(LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(LUIE_LAM_CT_INCOMING_REFLECTED_TP),
                 getFunc = function ()
                     return Settings.toggles.incoming.showReflected
                 end,
@@ -1594,8 +1594,8 @@ function CombatText.CreateSettings()
                 -- Reflected (Outgoing)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_REFLECTED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_REFLECTED_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_REFLECTED), GetString(LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(LUIE_LAM_CT_OUTGOING_REFLECTED_TP),
                 getFunc = function ()
                     return Settings.toggles.outgoing.showReflected
                 end,
@@ -1607,8 +1607,8 @@ function CombatText.CreateSettings()
             {
                 -- Reflected (Format)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_REFLECTED_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_REFLECTED_TP),
                 getFunc = function ()
                     return Settings.formats.reflected
                 end,
@@ -1621,8 +1621,8 @@ function CombatText.CreateSettings()
             {
                 -- Reflected (Color)
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_REFLETCED_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_REFLETCED_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.reflected)
                 end,
@@ -1637,15 +1637,15 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE_SHIELD),
+                name = GetString(LUIE_LAM_CT_SHARED_DAMAGE_SHIELD),
                 width = "full",
             },
             {
                 -- Damage Shielded (Incoming)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE_SHIELD), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DAMAGE_SHIELD_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_DAMAGE_SHIELD), GetString(LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(LUIE_LAM_CT_INCOMING_DAMAGE_SHIELD_TP),
                 getFunc = function ()
                     return Settings.toggles.incoming.showDamageShield
                 end,
@@ -1658,8 +1658,8 @@ function CombatText.CreateSettings()
                 -- Damage Shielded (Outgoing)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE_SHIELD), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DAMAGE_SHIELD_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_DAMAGE_SHIELD), GetString(LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(LUIE_LAM_CT_OUTGOING_DAMAGE_SHIELD_TP),
                 getFunc = function ()
                     return Settings.toggles.outgoing.showDamageShield
                 end,
@@ -1671,8 +1671,8 @@ function CombatText.CreateSettings()
             {
                 -- Damage Shielded (Format)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_SHIELD_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_SHIELD_TP),
                 getFunc = function ()
                     return Settings.formats.damageShield
                 end,
@@ -1685,8 +1685,8 @@ function CombatText.CreateSettings()
             {
                 -- Damage Shielded (Color)
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_SHIELD_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_SHIELD_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.damageShield)
                 end,
@@ -1701,15 +1701,15 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_DODGED),
+                name = GetString(LUIE_LAM_CT_SHARED_DODGED),
                 width = "full",
             },
             {
                 -- Dodged (Incoming)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DODGED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DODGED_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_DODGED), GetString(LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(LUIE_LAM_CT_INCOMING_DODGED_TP),
                 getFunc = function ()
                     return Settings.toggles.incoming.showDodged
                 end,
@@ -1722,8 +1722,8 @@ function CombatText.CreateSettings()
                 -- Dodged (Outgoing)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DODGED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DODGED_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_DODGED), GetString(LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(LUIE_LAM_CT_OUTGOING_DODGED_TP),
                 getFunc = function ()
                     return Settings.toggles.outgoing.showDodged
                 end,
@@ -1735,8 +1735,8 @@ function CombatText.CreateSettings()
             {
                 -- Dodged (Format)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DODGED_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_DODGED_TP),
                 getFunc = function ()
                     return Settings.formats.dodged
                 end,
@@ -1749,8 +1749,8 @@ function CombatText.CreateSettings()
             {
                 -- Dodged (Color)
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DODGED_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_DODGED_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.dodged)
                 end,
@@ -1765,15 +1765,15 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_BLOCKED),
+                name = GetString(LUIE_LAM_CT_SHARED_BLOCKED),
                 width = "full",
             },
             {
                 -- Blocked (Incoming)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_BLOCKED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_BLOCKED_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_BLOCKED), GetString(LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(LUIE_LAM_CT_INCOMING_BLOCKED_TP),
                 getFunc = function ()
                     return Settings.toggles.incoming.showBlocked
                 end,
@@ -1786,8 +1786,8 @@ function CombatText.CreateSettings()
                 -- Blocked (Outgoing)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_BLOCKED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_BLOCKED_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_BLOCKED), GetString(LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(LUIE_LAM_CT_OUTGOING_BLOCKED_TP),
                 getFunc = function ()
                     return Settings.toggles.outgoing.showBlocked
                 end,
@@ -1799,8 +1799,8 @@ function CombatText.CreateSettings()
             {
                 -- Blocked (Format)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_BLOCKED_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_BLOCKED_TP),
                 getFunc = function ()
                     return Settings.formats.blocked
                 end,
@@ -1813,8 +1813,8 @@ function CombatText.CreateSettings()
             {
                 -- Blocked (Color)
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_BLOCKED_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_BLOCKED_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.blocked)
                 end,
@@ -1829,15 +1829,15 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_INTERRUPTED),
+                name = GetString(LUIE_LAM_CT_SHARED_INTERRUPTED),
                 width = "full",
             },
             {
                 -- Interrupted (Incoming)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_INTERRUPTED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_INTERRUPTED_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_INTERRUPTED), GetString(LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(LUIE_LAM_CT_INCOMING_INTERRUPTED_TP),
                 getFunc = function ()
                     return Settings.toggles.incoming.showInterrupted
                 end,
@@ -1850,8 +1850,8 @@ function CombatText.CreateSettings()
                 -- Interrupted (Outgoing)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_INTERRUPTED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_INTERRUPTED_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_INTERRUPTED), GetString(LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(LUIE_LAM_CT_OUTGOING_INTERRUPTED_TP),
                 getFunc = function ()
                     return Settings.toggles.outgoing.showInterrupted
                 end,
@@ -1863,8 +1863,8 @@ function CombatText.CreateSettings()
             {
                 -- Interrupted (Format)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_INTERRUPTED_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_INTERRUPTED_TP),
                 getFunc = function ()
                     return Settings.formats.interrupted
                 end,
@@ -1877,8 +1877,8 @@ function CombatText.CreateSettings()
             {
                 -- Interrupted (Color)
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_INTERRUPTED_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_INTERRUPTED_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.interrupted)
                 end,
@@ -1897,22 +1897,22 @@ function CombatText.CreateSettings()
     -- Combat Text - Crowd Control Options
     optionsDataCombatText[#optionsDataCombatText+1] = {
         type = "submenu",
-        name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_CROWD_CONTROL), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
+        name = zo_strformat("<<1>> <<2>>", GetString(LUIE_LAM_CT_HEADER_CROWD_CONTROL), GetString(LUIE_LAM_CT_SHARED_OPTIONS)),
         controls = {
             {
                 type = "description",
-                text = GetString(SI_LUIE_LAM_CT_FORMAT_DESCRIPTION),
+                text = GetString(LUIE_LAM_CT_FORMAT_DESCRIPTION),
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE),
+                name = GetString(LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE),
                 width = "full",
             },
             {
                 -- Crowd Control Font Size
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_FONT_SIZE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_CROWD_CONTROL_TP),
+                name = GetString(LUIE_LAM_FONT_SIZE),
+                tooltip = GetString(LUIE_LAM_CT_FONT_COMBAT_CROWD_CONTROL_TP),
                 min = 8,
                 max = 72,
                 step = 1,
@@ -1926,15 +1926,15 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED),
+                name = GetString(LUIE_LAM_CT_SHARED_DISORIENTED),
                 width = "full",
             },
             {
                 -- Disoriented (Incoming)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DISORIENTED_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_DISORIENTED), GetString(LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(LUIE_LAM_CT_INCOMING_DISORIENTED_TP),
                 getFunc = function ()
                     return Settings.toggles.incoming.showDisoriented
                 end,
@@ -1947,8 +1947,8 @@ function CombatText.CreateSettings()
                 -- Disoriented (Outgoing)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DISORIENTED_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_DISORIENTED), GetString(LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(LUIE_LAM_CT_OUTGOING_DISORIENTED_TP),
                 getFunc = function ()
                     return Settings.toggles.outgoing.showDisoriented
                 end,
@@ -1960,8 +1960,8 @@ function CombatText.CreateSettings()
             {
                 -- Disoriented (Format)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DISORIENTED_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_DISORIENTED_TP),
                 getFunc = function ()
                     return Settings.formats.disoriented
                 end,
@@ -1974,8 +1974,8 @@ function CombatText.CreateSettings()
             {
                 -- Disoriented (Color)
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DISORIENTED_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_DISORIENTED_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.disoriented)
                 end,
@@ -1990,15 +1990,15 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FEARED),
+                name = GetString(LUIE_LAM_CT_SHARED_FEARED),
                 width = "full",
             },
             {
                 -- Feared (Incoming)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_FEARED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_FEARED_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_FEARED), GetString(LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(LUIE_LAM_CT_INCOMING_FEARED_TP),
                 getFunc = function ()
                     return Settings.toggles.incoming.showFeared
                 end,
@@ -2011,8 +2011,8 @@ function CombatText.CreateSettings()
                 -- Feared (Outgoing)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_FEARED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_FEARED_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_FEARED), GetString(LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(LUIE_LAM_CT_OUTGOING_FEARED_TP),
                 getFunc = function ()
                     return Settings.toggles.outgoing.showFeared
                 end,
@@ -2024,8 +2024,8 @@ function CombatText.CreateSettings()
             {
                 -- Feared (Format)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_FEARED_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_FEARED_TP),
                 getFunc = function ()
                     return Settings.formats.feared
                 end,
@@ -2038,8 +2038,8 @@ function CombatText.CreateSettings()
             {
                 -- Feared (Color)
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_FEARED_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_FEARED_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.feared)
                 end,
@@ -2054,15 +2054,15 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE),
+                name = GetString(LUIE_LAM_CT_SHARED_OFF_BALANCE),
                 width = "full",
             },
             {
                 -- Off-Balance (Incoming)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_OFF_BALANCE_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_OFF_BALANCE), GetString(LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(LUIE_LAM_CT_INCOMING_OFF_BALANCE_TP),
                 getFunc = function ()
                     return Settings.toggles.incoming.showOffBalanced
                 end,
@@ -2075,8 +2075,8 @@ function CombatText.CreateSettings()
                 -- Off-Balance (Outgoing)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_OFF_BALANCE_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_OFF_BALANCE), GetString(LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(LUIE_LAM_CT_OUTGOING_OFF_BALANCE_TP),
                 getFunc = function ()
                     return Settings.toggles.outgoing.showOffBalanced
                 end,
@@ -2088,8 +2088,8 @@ function CombatText.CreateSettings()
             {
                 -- Off-Balanced (Format)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_OFF_BALANCE_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_OFF_BALANCE_TP),
                 getFunc = function ()
                     return Settings.formats.offBalanced
                 end,
@@ -2102,8 +2102,8 @@ function CombatText.CreateSettings()
             {
                 -- Off-Balanced (Color)
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_OFF_BALANCE_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_OFF_BALANCE_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.offBalanced)
                 end,
@@ -2118,15 +2118,15 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_SILENCED),
+                name = GetString(LUIE_LAM_CT_SHARED_SILENCED),
                 width = "full",
             },
             {
                 -- Silenced (Incoming)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_SILENCED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_SILENCED_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_SILENCED), GetString(LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(LUIE_LAM_CT_INCOMING_SILENCED_TP),
                 getFunc = function ()
                     return Settings.toggles.incoming.showSilenced
                 end,
@@ -2139,8 +2139,8 @@ function CombatText.CreateSettings()
                 -- Silenced (Outgoing)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_SILENCED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_SILENCED_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_SILENCED), GetString(LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(LUIE_LAM_CT_OUTGOING_SILENCED_TP),
                 getFunc = function ()
                     return Settings.toggles.outgoing.showSilenced
                 end,
@@ -2152,8 +2152,8 @@ function CombatText.CreateSettings()
             {
                 -- Silenced (Format)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_SILENCED_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_SILENCED_TP),
                 getFunc = function ()
                     return Settings.formats.silenced
                 end,
@@ -2166,8 +2166,8 @@ function CombatText.CreateSettings()
             {
                 -- Silenced (Color)
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_SILENCED_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_SILENCED_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.silenced)
                 end,
@@ -2182,15 +2182,15 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_STUNNED),
+                name = GetString(LUIE_LAM_CT_SHARED_STUNNED),
                 width = "full",
             },
             {
                 -- Stunned (Incoming)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_STUNNED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_STUNNED_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_STUNNED), GetString(LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(LUIE_LAM_CT_INCOMING_STUNNED_TP),
                 getFunc = function ()
                     return Settings.toggles.incoming.showStunned
                 end,
@@ -2203,8 +2203,8 @@ function CombatText.CreateSettings()
                 -- Stunned (Outgoing)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_STUNNED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_STUNNED_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_STUNNED), GetString(LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(LUIE_LAM_CT_OUTGOING_STUNNED_TP),
                 getFunc = function ()
                     return Settings.toggles.outgoing.showStunned
                 end,
@@ -2216,8 +2216,8 @@ function CombatText.CreateSettings()
             {
                 -- Stunned (Format)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_STUNNED_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_STUNNED_TP),
                 getFunc = function ()
                     return Settings.formats.stunned
                 end,
@@ -2230,8 +2230,8 @@ function CombatText.CreateSettings()
             {
                 -- Stunned (Color)
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_STUNNED_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_STUNNED_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.stunned)
                 end,
@@ -2246,15 +2246,15 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_CHARMED),
+                name = GetString(LUIE_LAM_CT_SHARED_CHARMED),
                 width = "full",
             },
             {
                 -- Charmed (Incoming)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_CHARMED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_CHARMED_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_CHARMED), GetString(LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(LUIE_LAM_CT_INCOMING_CHARMED_TP),
                 getFunc = function ()
                     return Settings.toggles.incoming.showCharmed
                 end,
@@ -2267,8 +2267,8 @@ function CombatText.CreateSettings()
                 -- Charmed (Outgoing)
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_CHARMED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_CHARMED_TP),
+                name = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_CHARMED), GetString(LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(LUIE_LAM_CT_OUTGOING_CHARMED_TP),
                 getFunc = function ()
                     return Settings.toggles.outgoing.showCharmed
                 end,
@@ -2280,8 +2280,8 @@ function CombatText.CreateSettings()
             {
                 -- Charmed (Format)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_CHARMED_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_COMBAT_CHARMED_TP),
                 getFunc = function ()
                     return Settings.formats.charmed
                 end,
@@ -2294,8 +2294,8 @@ function CombatText.CreateSettings()
             {
                 -- Charmed (Color)
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_CHARMED_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_COMBAT_CHARMED_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.charmed)
                 end,
@@ -2314,23 +2314,23 @@ function CombatText.CreateSettings()
     -- Combat Text -- Notification Options
     optionsDataCombatText[#optionsDataCombatText+1] = {
         type = "submenu",
-        name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_NOTIFICATION), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
+        name = zo_strformat("<<1>> <<2>>", GetString(LUIE_LAM_CT_HEADER_NOTIFICATION), GetString(LUIE_LAM_CT_SHARED_OPTIONS)),
         controls = {
             {
                 type = "description",
-                text = GetString(SI_LUIE_LAM_CT_FORMAT_DESCRIPTION),
+                text = GetString(LUIE_LAM_CT_FORMAT_DESCRIPTION),
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_STATE),
+                name = GetString(LUIE_LAM_CT_NOTIFICATION_COMBAT_STATE),
                 width = "full",
             },
             {
                 -- In Combat
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_IN)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_IN_TP),
+                name = zo_strformat("<<1>> (<<2>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_COMBAT_IN)),
+                tooltip = GetString(LUIE_LAM_CT_NOTIFICATION_COMBAT_IN_TP),
                 getFunc = function ()
                     return Settings.toggles.showInCombat
                 end,
@@ -2343,8 +2343,8 @@ function CombatText.CreateSettings()
                 -- Out of Combat
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_OUT)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_OUT_TP),
+                name = zo_strformat("<<1>> (<<2>>)", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_COMBAT_OUT)),
+                tooltip = GetString(LUIE_LAM_CT_NOTIFICATION_COMBAT_OUT_TP),
                 getFunc = function ()
                     return Settings.toggles.showOutCombat
                 end,
@@ -2357,8 +2357,8 @@ function CombatText.CreateSettings()
                 -- In Combat
                 type = "editbox",
                 width = "half",
-                name = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_IN)),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_COMBAT_IN_TP),
+                name = zo_strformat("<<1>> (<<2>>)", GetString(LUIE_LAM_CT_SHARED_FORMAT), GetString(LUIE_LAM_CT_SHARED_COMBAT_IN)),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_NOTIFICATION_COMBAT_IN_TP),
                 getFunc = function ()
                     return Settings.formats.inCombat
                 end,
@@ -2372,8 +2372,8 @@ function CombatText.CreateSettings()
                 -- Out Combat
                 type = "editbox",
                 width = "half",
-                name = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_OUT)),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_COMBAT_OUT_TP),
+                name = zo_strformat("<<1>> (<<2>>)", GetString(LUIE_LAM_CT_SHARED_FORMAT), GetString(LUIE_LAM_CT_SHARED_COMBAT_OUT)),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_NOTIFICATION_COMBAT_OUT_TP),
                 getFunc = function ()
                     return Settings.formats.outCombat
                 end,
@@ -2386,8 +2386,8 @@ function CombatText.CreateSettings()
             {
                 -- Combat State Font Size
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_FONT_SIZE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_NOTIFICATION_COMBAT_STATE_TP),
+                name = GetString(LUIE_LAM_FONT_SIZE),
+                tooltip = GetString(LUIE_LAM_CT_FONT_NOTIFICATION_COMBAT_STATE_TP),
                 min = 8,
                 max = 72,
                 step = 1,
@@ -2403,8 +2403,8 @@ function CombatText.CreateSettings()
                 -- In Combat
                 type = "colorpicker",
                 width = "half",
-                name = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_COLOR), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_IN)),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_IN_TP),
+                name = zo_strformat("<<1>> (<<2>>)", GetString(LUIE_LAM_CT_SHARED_COLOR), GetString(LUIE_LAM_CT_SHARED_COMBAT_IN)),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_IN_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.inCombat)
                 end,
@@ -2421,8 +2421,8 @@ function CombatText.CreateSettings()
                 -- Out Combat
                 type = "colorpicker",
                 width = "half",
-                name = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_COLOR), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_OUT)),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_OUT_TP),
+                name = zo_strformat("<<1>> (<<2>>)", GetString(LUIE_LAM_CT_SHARED_COLOR), GetString(LUIE_LAM_CT_SHARED_COMBAT_OUT)),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_OUT_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.outCombat)
                 end,
@@ -2437,14 +2437,14 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_DEATH_HEADER),
+                name = GetString(LUIE_LAM_CT_DEATH_HEADER),
                 width = "full",
             },
             {
                 -- Death Toggle
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CT_DEATH_NOTIFICATION),
-                tooltip = GetString(SI_LUIE_LAM_CT_DEATH_NOTIFICATION_TP),
+                name = GetString(LUIE_LAM_CT_DEATH_NOTIFICATION),
+                tooltip = GetString(LUIE_LAM_CT_DEATH_NOTIFICATION_TP),
                 getFunc = function ()
                     return Settings.toggles.showDeath
                 end,
@@ -2456,8 +2456,8 @@ function CombatText.CreateSettings()
             {
                 -- Death Format
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_DEATH_FORMAT_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_DEATH_FORMAT_TP),
                 getFunc = function ()
                     return Settings.formats.death
                 end,
@@ -2470,8 +2470,8 @@ function CombatText.CreateSettings()
             {
                 -- Death Font Size
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_FONT_SIZE),
-                tooltip = GetString(SI_LUIE_LAM_CT_DEATH_FONT_SIZE_TP),
+                name = GetString(LUIE_LAM_FONT_SIZE),
+                tooltip = GetString(LUIE_LAM_CT_DEATH_FONT_SIZE_TP),
                 min = 8,
                 max = 72,
                 step = 1,
@@ -2486,8 +2486,8 @@ function CombatText.CreateSettings()
             {
                 -- Death Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_CT_DEATH_COLOR_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(LUIE_LAM_CT_DEATH_COLOR_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.death)
                 end,
@@ -2498,14 +2498,14 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE),
+                name = GetString(LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE),
                 width = "full",
             },
             {
                 -- Points Font Size
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_FONT_SIZE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_NOTIFICATION_POINTS_TP),
+                name = GetString(LUIE_LAM_FONT_SIZE),
+                tooltip = GetString(LUIE_LAM_CT_FONT_NOTIFICATION_POINTS_TP),
                 min = 8,
                 max = 72,
                 step = 1,
@@ -2519,14 +2519,14 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_POINTS_ALLIANCE),
+                name = GetString(LUIE_LAM_CT_SHARED_POINTS_ALLIANCE),
                 width = "full",
             },
             {
                 -- Alliance Points
                 type = "checkbox",
-                name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_POINTS_ALLIANCE)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POINTS_ALLIANCE_TP),
+                name = zo_strformat("<<1>> <<2>>", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_POINTS_ALLIANCE)),
+                tooltip = GetString(LUIE_LAM_CT_NOTIFICATION_POINTS_ALLIANCE_TP),
                 getFunc = function ()
                     return Settings.toggles.showPointsAlliance
                 end,
@@ -2538,8 +2538,8 @@ function CombatText.CreateSettings()
             {
                 -- Alliance Points
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_ALLIANCE_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_NOTIFICATION_ALLIANCE_TP),
                 getFunc = function ()
                     return Settings.formats.pointsAlliance
                 end,
@@ -2552,8 +2552,8 @@ function CombatText.CreateSettings()
             {
                 -- Alliance Points Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ALLIANCE_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_NOTIFICATION_ALLIANCE_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.pointsAlliance)
                 end,
@@ -2568,14 +2568,14 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_POINTS_EXPERIENCE),
+                name = GetString(LUIE_LAM_CT_SHARED_POINTS_EXPERIENCE),
                 width = "full",
             },
             {
                 -- Experience Points
                 type = "checkbox",
-                name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_POINTS_EXPERIENCE)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POINTS_EXPERIENCE_TP),
+                name = zo_strformat("<<1>> <<2>>", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_POINTS_EXPERIENCE)),
+                tooltip = GetString(LUIE_LAM_CT_NOTIFICATION_POINTS_EXPERIENCE_TP),
                 getFunc = function ()
                     return Settings.toggles.showPointsExperience
                 end,
@@ -2587,8 +2587,8 @@ function CombatText.CreateSettings()
             {
                 -- Experience Points
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXPERIENCE_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_NOTIFICATION_EXPERIENCE_TP),
                 getFunc = function ()
                     return Settings.formats.pointsExperience
                 end,
@@ -2601,8 +2601,8 @@ function CombatText.CreateSettings()
             {
                 -- Experience Points Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXPERIENCE_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_NOTIFICATION_EXPERIENCE_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.pointsExperience)
                 end,
@@ -2617,14 +2617,14 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_POINTS_CHAMPION),
+                name = GetString(LUIE_LAM_CT_SHARED_POINTS_CHAMPION),
                 width = "full",
             },
             {
                 -- Champion Points
                 type = "checkbox",
-                name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_POINTS_CHAMPION)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POINTS_CHAMPION_TP),
+                name = zo_strformat("<<1>> <<2>>", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_POINTS_CHAMPION)),
+                tooltip = GetString(LUIE_LAM_CT_NOTIFICATION_POINTS_CHAMPION_TP),
                 getFunc = function ()
                     return Settings.toggles.showPointsChampion
                 end,
@@ -2636,8 +2636,8 @@ function CombatText.CreateSettings()
             {
                 -- Champion Points
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_CHAMPION_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_NOTIFICATION_CHAMPION_TP),
                 getFunc = function ()
                     return Settings.formats.pointsChampion
                 end,
@@ -2650,8 +2650,8 @@ function CombatText.CreateSettings()
             {
                 -- Champion Points Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_CHAMPION_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_NOTIFICATION_CHAMPION_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.pointsChampion)
                 end,
@@ -2666,14 +2666,14 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_AND_POTION_READY),
+                name = GetString(LUIE_LAM_CT_SHARED_ULTIMATE_AND_POTION_READY),
                 width = "full",
             },
             {
                 -- Font Size Ready
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_NOTIFICATION_RESOURCE_TP),
+                name = GetString(LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE),
+                tooltip = GetString(LUIE_LAM_CT_FONT_NOTIFICATION_RESOURCE_TP),
                 min = 8,
                 max = 72,
                 step = 1,
@@ -2689,8 +2689,8 @@ function CombatText.CreateSettings()
                 -- Ultimate Ready Enable
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ULTIMATE_READY_TP),
+                name = zo_strformat("<<1>> <<2>>", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_ULTIMATE_READY)),
+                tooltip = GetString(LUIE_LAM_CT_NOTIFICATION_ULTIMATE_READY_TP),
                 getFunc = function ()
                     return Settings.toggles.showUltimate
                 end,
@@ -2703,8 +2703,8 @@ function CombatText.CreateSettings()
                 -- Potion Ready Enable
                 type = "checkbox",
                 width = "half",
-                name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POTION_READY_TP),
+                name = zo_strformat("<<1>> <<2>>", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_POTION_READY)),
+                tooltip = GetString(LUIE_LAM_CT_NOTIFICATION_POTION_READY_TP),
                 getFunc = function ()
                     return Settings.toggles.showPotionReady
                 end,
@@ -2717,8 +2717,8 @@ function CombatText.CreateSettings()
                 -- Ultimate Ready Format
                 type = "editbox",
                 width = "half",
-                name = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY)),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_ULTIMATE_TP),
+                name = zo_strformat("<<1>> (<<2>>)", GetString(LUIE_LAM_CT_SHARED_FORMAT), GetString(LUIE_LAM_CT_SHARED_ULTIMATE_READY)),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_NOTIFICATION_ULTIMATE_TP),
                 getFunc = function ()
                     return Settings.formats.ultimateReady
                 end,
@@ -2732,8 +2732,8 @@ function CombatText.CreateSettings()
                 -- Potion Ready Format
                 type = "editbox",
                 width = "half",
-                name = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY)),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_POTION_TP),
+                name = zo_strformat("<<1>> (<<2>>)", GetString(LUIE_LAM_CT_SHARED_FORMAT), GetString(LUIE_LAM_CT_SHARED_POTION_READY)),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_NOTIFICATION_POTION_TP),
                 getFunc = function ()
                     return Settings.formats.potionReady
                 end,
@@ -2747,8 +2747,8 @@ function CombatText.CreateSettings()
                 -- Ultimate Ready Color
                 type = "colorpicker",
                 width = "half",
-                name = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_COLOR), GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY)),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ULTIMATE_TP),
+                name = zo_strformat("<<1>> (<<2>>)", GetString(LUIE_LAM_CT_SHARED_COLOR), GetString(LUIE_LAM_CT_SHARED_ULTIMATE_READY)),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_NOTIFICATION_ULTIMATE_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.ultimateReady)
                 end,
@@ -2765,8 +2765,8 @@ function CombatText.CreateSettings()
                 -- Potion Ready Color
                 type = "colorpicker",
                 width = "half",
-                name = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_COLOR), GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY)),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POTION_TP),
+                name = zo_strformat("<<1>> (<<2>>)", GetString(LUIE_LAM_CT_SHARED_COLOR), GetString(LUIE_LAM_CT_SHARED_POTION_READY)),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_NOTIFICATION_POTION_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.potionReady)
                 end,
@@ -2785,22 +2785,22 @@ function CombatText.CreateSettings()
     -- Combat Text - Low Resource Options
     optionsDataCombatText[#optionsDataCombatText+1] = {
         type = "submenu",
-        name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_LOW_RESOURCE), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
+        name = zo_strformat("<<1>> <<2>>", GetString(LUIE_LAM_CT_HEADER_LOW_RESOURCE), GetString(LUIE_LAM_CT_SHARED_OPTIONS)),
         controls = {
             {
                 type = "description",
-                text = GetString(SI_LUIE_LAM_CT_FORMAT_DESCRIPTION),
+                text = GetString(LUIE_LAM_CT_FORMAT_DESCRIPTION),
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_HEADER_SHARED_RESOURCE_OPTIONS),
+                name = GetString(LUIE_LAM_CT_HEADER_SHARED_RESOURCE_OPTIONS),
                 width = "full",
             },
             {
                 -- Low Resource Font Size
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_FONT_SIZE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_NOTIFICATION_RESOURCE_TP),
+                name = GetString(LUIE_LAM_FONT_SIZE),
+                tooltip = GetString(LUIE_LAM_CT_FONT_NOTIFICATION_RESOURCE_TP),
                 min = 8,
                 max = 72,
                 step = 1,
@@ -2815,8 +2815,8 @@ function CombatText.CreateSettings()
             {
                 -- Low Resource Warning Sound
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_SOUND),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_SOUND_TP),
+                name = GetString(LUIE_LAM_CT_NOTIFICATION_WARNING_SOUND),
+                tooltip = GetString(LUIE_LAM_CT_NOTIFICATION_WARNING_SOUND_TP),
                 getFunc = function ()
                     return Settings.toggles.warningSound
                 end,
@@ -2830,14 +2830,14 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_LOW_HEALTH),
+                name = GetString(LUIE_LAM_CT_SHARED_LOW_HEALTH),
                 width = "full",
             },
             {
                 -- Low Health
                 type = "checkbox",
-                name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_LOW_HEALTH)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_LOW_HEALTH_TP),
+                name = zo_strformat("<<1>> <<2>>", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_LOW_HEALTH)),
+                tooltip = GetString(LUIE_LAM_CT_NOTIFICATION_LOW_HEALTH_TP),
                 getFunc = function ()
                     return Settings.toggles.showLowHealth
                 end,
@@ -2849,8 +2849,8 @@ function CombatText.CreateSettings()
             {
                 -- Low Health Warning Threshold Slider
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_HEALTH)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_HEALTH_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_CT_NOTIFICATION_WARNING_HEALTH)),
+                tooltip = GetString(LUIE_LAM_CT_NOTIFICATION_WARNING_HEALTH_TP),
                 min = 15,
                 max = 50,
                 step = 1,
@@ -2868,8 +2868,8 @@ function CombatText.CreateSettings()
             {
                 -- Low Health Format
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_RESOURCE_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_NOTIFICATION_RESOURCE_TP),
                 getFunc = function ()
                     return Settings.formats.resourceHealth
                 end,
@@ -2882,8 +2882,8 @@ function CombatText.CreateSettings()
             {
                 -- Low Health Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_HEALTH_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_HEALTH_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.lowHealth)
                 end,
@@ -2898,14 +2898,14 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_LOW_MAGICKA),
+                name = GetString(LUIE_LAM_CT_SHARED_LOW_MAGICKA),
                 width = "full",
             },
             {
                 -- Low Magicka
                 type = "checkbox",
-                name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_LOW_MAGICKA)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_LOW_MAGICKA_TP),
+                name = zo_strformat("<<1>> <<2>>", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_LOW_MAGICKA)),
+                tooltip = GetString(LUIE_LAM_CT_NOTIFICATION_LOW_MAGICKA_TP),
                 getFunc = function ()
                     return Settings.toggles.showLowMagicka
                 end,
@@ -2917,8 +2917,8 @@ function CombatText.CreateSettings()
             {
                 -- Low Magicka Warning Threshold Slider
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_MAGICKA)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_MAGICKA_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_CT_NOTIFICATION_WARNING_MAGICKA)),
+                tooltip = GetString(LUIE_LAM_CT_NOTIFICATION_WARNING_MAGICKA_TP),
                 min = 15,
                 max = 50,
                 step = 1,
@@ -2936,8 +2936,8 @@ function CombatText.CreateSettings()
             {
                 -- Low Magicka Format
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_RESOURCE_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_NOTIFICATION_RESOURCE_TP),
                 getFunc = function ()
                     return Settings.formats.resourceMagicka
                 end,
@@ -2950,8 +2950,8 @@ function CombatText.CreateSettings()
             {
                 -- Low Magicka Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_MAGICKA_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_MAGICKA_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.lowMagicka)
                 end,
@@ -2966,14 +2966,14 @@ function CombatText.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_LOW_STAMINA),
+                name = GetString(LUIE_LAM_CT_SHARED_LOW_STAMINA),
                 width = "full",
             },
             {
                 -- Low Stamina
                 type = "checkbox",
-                name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_LOW_STAMINA)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_LOW_STAMINA_TP),
+                name = zo_strformat("<<1>> <<2>>", GetString(LUIE_LAM_CT_SHARED_DISPLAY), GetString(LUIE_LAM_CT_SHARED_LOW_STAMINA)),
+                tooltip = GetString(LUIE_LAM_CT_NOTIFICATION_LOW_STAMINA_TP),
                 getFunc = function ()
                     return Settings.toggles.showLowStamina
                 end,
@@ -2985,8 +2985,8 @@ function CombatText.CreateSettings()
             {
                 -- Low Stamina Warning Threshold Slider
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_STAMINA)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_STAMINA_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_CT_NOTIFICATION_WARNING_STAMINA)),
+                tooltip = GetString(LUIE_LAM_CT_NOTIFICATION_WARNING_STAMINA_TP),
                 min = 15,
                 max = 50,
                 step = 1,
@@ -3004,8 +3004,8 @@ function CombatText.CreateSettings()
             {
                 -- Low Stamina Format
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_RESOURCE_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(LUIE_LAM_CT_FORMAT_NOTIFICATION_RESOURCE_TP),
                 getFunc = function ()
                     return Settings.formats.resourceStamina
                 end,
@@ -3018,8 +3018,8 @@ function CombatText.CreateSettings()
             {
                 -- Low Stamina Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_STAMINA_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_STAMINA_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.lowStamina)
                 end,
@@ -3038,14 +3038,14 @@ function CombatText.CreateSettings()
     -- Combat Text - Font Format Options Submenu
     optionsDataCombatText[#optionsDataCombatText+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_CT_FONT_HEADER),
+        name = GetString(LUIE_LAM_CT_FONT_HEADER),
         controls = {
             {
                 -- Font Face Dropdown
                 type = "dropdown",
                 scrollable = true,
-                name = GetString(SI_LUIE_LAM_CT_FONT_FACE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_FACE_TP),
+                name = GetString(LUIE_LAM_CT_FONT_FACE),
+                tooltip = GetString(LUIE_LAM_CT_FONT_FACE_TP),
                 choices = FontsList,
                 sort = "name-up",
                 getFunc = function ()
@@ -3060,8 +3060,8 @@ function CombatText.CreateSettings()
             {
                 -- Font Outline Dropdown
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_CT_FONT_OUTLINE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_OUTLINE_TP),
+                name = GetString(LUIE_LAM_CT_FONT_OUTLINE),
+                tooltip = GetString(LUIE_LAM_CT_FONT_OUTLINE_TP),
                 choices = CombatTextConstants.outlineType,
                 getFunc = function ()
                     return Settings.fontOutline
@@ -3075,10 +3075,10 @@ function CombatText.CreateSettings()
             {
                 -- Test Font Button
                 type = "button",
-                name = GetString(SI_LUIE_LAM_CT_FONT_TEST),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_TEST_TP),
+                name = GetString(LUIE_LAM_CT_FONT_TEST),
+                tooltip = GetString(LUIE_LAM_CT_FONT_TEST_TP),
                 func = function ()
-                    callbackManager:FireCallbacks(CombatTextConstants.eventType.COMBAT, CombatTextConstants.combatType.INCOMING, COMBAT_MECHANIC_FLAGS_STAMINA, zo_random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
+                    callbackManager:FireCallbacks(CombatTextConstants.eventType.COMBAT, CombatTextConstants.combatType.INCOMING, COMBAT_MECHANIC_FLAGS_STAMINA, zo_random(7, 777), GetString(LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
                 end,
             },
         },
@@ -3087,13 +3087,13 @@ function CombatText.CreateSettings()
     -- Combat Text - Animation Options Submenu
     optionsDataCombatText[#optionsDataCombatText+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_CT_ANIMATION_HEADER),
+        name = GetString(LUIE_LAM_CT_ANIMATION_HEADER),
         controls = {
             {
                 -- Animation Type
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_CT_ANIMATION_TYPE),
-                tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_TYPE_TP),
+                name = GetString(LUIE_LAM_CT_ANIMATION_TYPE),
+                tooltip = GetString(LUIE_LAM_CT_ANIMATION_TYPE_TP),
                 choices = CombatTextConstants.animationType,
                 getFunc = function ()
                     return Settings.animation.animationType
@@ -3106,9 +3106,9 @@ function CombatText.CreateSettings()
             {
                 -- Animation Duration
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_CT_ANIMATION_DURATION),
-                tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_DURATION_TP),
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                name = GetString(LUIE_LAM_CT_ANIMATION_DURATION),
+                tooltip = GetString(LUIE_LAM_CT_ANIMATION_DURATION_TP),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 getFunc = function ()
                     return Settings.animation.animationDuration
                 end,
@@ -3123,8 +3123,8 @@ function CombatText.CreateSettings()
             {
                 -- Incoming Direction
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_CT_ANIMATION_DIRECTION_IN),
-                tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_DIRECTION_IN_TP),
+                name = GetString(LUIE_LAM_CT_ANIMATION_DIRECTION_IN),
+                tooltip = GetString(LUIE_LAM_CT_ANIMATION_DIRECTION_IN_TP),
                 choices = CombatTextConstants.directionType,
                 getFunc = function ()
                     return Settings.animation.incoming.directionType
@@ -3137,8 +3137,8 @@ function CombatText.CreateSettings()
             {
                 -- Incoming Icon Position
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_CT_ANIMATION_ICON_IN),
-                tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_ICON_IN_TP),
+                name = GetString(LUIE_LAM_CT_ANIMATION_ICON_IN),
+                tooltip = GetString(LUIE_LAM_CT_ANIMATION_ICON_IN_TP),
                 choices = CombatTextConstants.iconSide,
                 getFunc = function ()
                     return Settings.animation.incomingIcon
@@ -3151,8 +3151,8 @@ function CombatText.CreateSettings()
             {
                 -- Outgoing Direction
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_CT_ANIMATION_DIRECTION_OUT),
-                tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_DIRECTION_OUT_TP),
+                name = GetString(LUIE_LAM_CT_ANIMATION_DIRECTION_OUT),
+                tooltip = GetString(LUIE_LAM_CT_ANIMATION_DIRECTION_OUT_TP),
                 choices = CombatTextConstants.directionType,
                 getFunc = function ()
                     return Settings.animation.outgoing.directionType
@@ -3165,8 +3165,8 @@ function CombatText.CreateSettings()
             {
                 -- Outgoing Icon Position
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_CT_ANIMATION_ICON_OUT),
-                tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_ICON_OUT_TP),
+                name = GetString(LUIE_LAM_CT_ANIMATION_ICON_OUT),
+                tooltip = GetString(LUIE_LAM_CT_ANIMATION_ICON_OUT_TP),
                 choices = CombatTextConstants.iconSide,
                 getFunc = function ()
                     return Settings.animation.outgoingIcon
@@ -3179,11 +3179,11 @@ function CombatText.CreateSettings()
             {
                 -- Test Button
                 type = "button",
-                name = GetString(SI_LUIE_LAM_CT_ANIMATION_TEST),
-                tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_TEST_TP),
+                name = GetString(LUIE_LAM_CT_ANIMATION_TEST),
+                tooltip = GetString(LUIE_LAM_CT_ANIMATION_TEST_TP),
                 func = function ()
-                    callbackManager:FireCallbacks(CombatTextConstants.eventType.COMBAT, CombatTextConstants.combatType.INCOMING, COMBAT_MECHANIC_FLAGS_STAMINA, zo_random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
-                    callbackManager:FireCallbacks(CombatTextConstants.eventType.COMBAT, CombatTextConstants.combatType.OUTGOING, COMBAT_MECHANIC_FLAGS_STAMINA, zo_random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
+                    callbackManager:FireCallbacks(CombatTextConstants.eventType.COMBAT, CombatTextConstants.combatType.INCOMING, COMBAT_MECHANIC_FLAGS_STAMINA, zo_random(7, 777), GetString(LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
+                    callbackManager:FireCallbacks(CombatTextConstants.eventType.COMBAT, CombatTextConstants.combatType.OUTGOING, COMBAT_MECHANIC_FLAGS_STAMINA, zo_random(7, 777), GetString(LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
                 end,
             },
         },
@@ -3192,17 +3192,17 @@ function CombatText.CreateSettings()
     -- Combat Text - Throttle Options (Combat) Options Submenu
     optionsDataCombatText[#optionsDataCombatText+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_CT_THROTTLE_HEADER),
+        name = GetString(LUIE_LAM_CT_THROTTLE_HEADER),
         controls = {
             {
                 type = "description",
-                text = GetString(SI_LUIE_LAM_CT_THROTTLE_DESCRIPTION),
+                text = GetString(LUIE_LAM_CT_THROTTLE_DESCRIPTION),
             },
             {
                 -- Damage
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE),
-                tooltip = GetString(SI_LUIE_LAM_CT_THROTTLE_DAMAGE_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_DAMAGE),
+                tooltip = GetString(LUIE_LAM_CT_THROTTLE_DAMAGE_TP),
                 min = 0,
                 max = 500,
                 step = 50,
@@ -3217,8 +3217,8 @@ function CombatText.CreateSettings()
             {
                 -- Damage over Time
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_DOT),
-                tooltip = GetString(SI_LUIE_LAM_CT_THROTTLE_DOT_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_DOT),
+                tooltip = GetString(LUIE_LAM_CT_THROTTLE_DOT_TP),
                 min = 0,
                 max = 500,
                 step = 50,
@@ -3233,8 +3233,8 @@ function CombatText.CreateSettings()
             {
                 -- Healing
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_HEALING),
-                tooltip = GetString(SI_LUIE_LAM_CT_THROTTLE_HEALING_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_HEALING),
+                tooltip = GetString(LUIE_LAM_CT_THROTTLE_HEALING_TP),
                 min = 0,
                 max = 500,
                 step = 50,
@@ -3249,8 +3249,8 @@ function CombatText.CreateSettings()
             {
                 -- Healing over Time
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_HOT),
-                tooltip = GetString(SI_LUIE_LAM_CT_THROTTLE_HOT_TP),
+                name = GetString(LUIE_LAM_CT_SHARED_HOT),
+                tooltip = GetString(LUIE_LAM_CT_THROTTLE_HOT_TP),
                 min = 0,
                 max = 500,
                 step = 50,
@@ -3265,8 +3265,8 @@ function CombatText.CreateSettings()
             {
                 -- Throttle Trailer
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CT_THROTTLE_TRAILER),
-                tooltip = GetString(SI_LUIE_LAM_CT_THROTTLE_TRAILER_TP),
+                name = GetString(LUIE_LAM_CT_THROTTLE_TRAILER),
+                tooltip = GetString(LUIE_LAM_CT_THROTTLE_TRAILER_TP),
                 getFunc = function ()
                     return Settings.toggles.showThrottleTrailer
                 end,
@@ -3278,8 +3278,8 @@ function CombatText.CreateSettings()
             {
                 -- Crits
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_THROTTLE_CRITICAL)),
-                tooltip = GetString(SI_LUIE_LAM_CT_THROTTLE_CRITICAL_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_CT_THROTTLE_CRITICAL)),
+                tooltip = GetString(LUIE_LAM_CT_THROTTLE_CRITICAL_TP),
                 getFunc = function ()
                     return Settings.toggles.throttleCriticals
                 end,

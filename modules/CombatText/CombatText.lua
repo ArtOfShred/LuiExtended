@@ -16,11 +16,11 @@ local LMP = LibMediaProvider
 local moduleName = LUIE.name .. "CombatText"
 
 local panelTitles = {
-    LUIE_CombatText_Outgoing = GetString(SI_LUIE_CT_PANEL_OUTGOING),
-    LUIE_CombatText_Incoming = GetString(SI_LUIE_CT_PANEL_INCOMING),
-    LUIE_CombatText_Point = GetString(SI_LUIE_CT_PANEL_POINT),
-    LUIE_CombatText_Alert = GetString(SI_LUIE_CT_PANEL_ALERT),
-    LUIE_CombatText_Resource = GetString(SI_LUIE_CT_PANEL_RESOURCE),
+    LUIE_CombatText_Outgoing = GetString(LUIE_CT_PANEL_OUTGOING),
+    LUIE_CombatText_Incoming = GetString(LUIE_CT_PANEL_INCOMING),
+    LUIE_CombatText_Point = GetString(LUIE_CT_PANEL_POINT),
+    LUIE_CombatText_Alert = GetString(LUIE_CT_PANEL_ALERT),
+    LUIE_CombatText_Resource = GetString(LUIE_CT_PANEL_RESOURCE),
 }
 
 CombatText.Enabled = false
@@ -278,27 +278,27 @@ CombatText.Defaults = {
         hotcritical = "%t %a!",
 
         -- Mitigation
-        miss = GetString(SI_LUIE_CT_MISS_DEFAULT),
-        immune = GetString(SI_LUIE_CT_IMMUNE_DEFAULT),
-        parried = GetString(SI_LUIE_CT_PARRIED_DEFAULT),
-        reflected = GetString(SI_LUIE_CT_REFLECTED_DEFAULT),
+        miss = GetString(LUIE_CT_MISS_DEFAULT),
+        immune = GetString(LUIE_CT_IMMUNE_DEFAULT),
+        parried = GetString(LUIE_CT_PARRIED_DEFAULT),
+        reflected = GetString(LUIE_CT_REFLECTED_DEFAULT),
         damageShield = "(%a) %t",
-        dodged = GetString(SI_LUIE_CT_DODGED_DEFAULT),
+        dodged = GetString(LUIE_CT_DODGED_DEFAULT),
         blocked = "*%t %a",
-        interrupted = GetString(SI_LUIE_CT_INTERRUPTED_DEFAULT),
+        interrupted = GetString(LUIE_CT_INTERRUPTED_DEFAULT),
 
         -- Crowd Control
-        disoriented = GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED),
-        feared = GetString(SI_LUIE_LAM_CT_SHARED_FEARED),
-        offBalanced = GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE),
-        silenced = GetString(SI_LUIE_LAM_CT_SHARED_SILENCED),
-        stunned = GetString(SI_LUIE_LAM_CT_SHARED_STUNNED),
-        charmed = GetString(SI_LUIE_LAM_CT_SHARED_CHARMED),
+        disoriented = GetString(LUIE_LAM_CT_SHARED_DISORIENTED),
+        feared = GetString(LUIE_LAM_CT_SHARED_FEARED),
+        offBalanced = GetString(LUIE_LAM_CT_SHARED_OFF_BALANCE),
+        silenced = GetString(LUIE_LAM_CT_SHARED_SILENCED),
+        stunned = GetString(LUIE_LAM_CT_SHARED_STUNNED),
+        charmed = GetString(LUIE_LAM_CT_SHARED_CHARMED),
 
         -- Combat State
-        inCombat = GetString(SI_LUIE_CT_COMBAT_IN_DEFAULT),
-        outCombat = GetString(SI_LUIE_CT_COMBAT_OUT_DEFAULT),
-        death = GetString(SI_LUIE_CT_DEATH_DEFAULT),
+        inCombat = GetString(LUIE_CT_COMBAT_IN_DEFAULT),
+        outCombat = GetString(LUIE_CT_COMBAT_OUT_DEFAULT),
+        death = GetString(LUIE_CT_DEATH_DEFAULT),
 
         -- Points
         pointsAlliance = "%a AP",
@@ -309,8 +309,8 @@ CombatText.Defaults = {
         resourceHealth = "%t! (%a)",
         resourceMagicka = "%t! (%a)",
         resourceStamina = "%t! (%a)",
-        ultimateReady = GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY),
-        potionReady = GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY),
+        ultimateReady = GetString(LUIE_LAM_CT_SHARED_ULTIMATE_READY),
+        potionReady = GetString(LUIE_LAM_CT_SHARED_POTION_READY),
     },
 
     -- Animation defaults
@@ -364,19 +364,19 @@ function CombatText.AddBulkToCustomList(list, table)
 end
 
 function CombatText.ClearCustomList(list)
-    local listRef = list == CombatText.SV.blacklist and GetString(SI_LUIE_CUSTOM_LIST_CT_BLACKLIST) or ""
+    local listRef = list == CombatText.SV.blacklist and GetString(LUIE_CUSTOM_LIST_CT_BLACKLIST) or ""
     for k, v in pairs(list) do
         list[k] = nil
     end
     CHAT_SYSTEM:Maximize()
     CHAT_SYSTEM.primaryContainer:FadeIn()
-    printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_CLEARED), listRef), true)
+    printToChat(zo_strformat(GetString(LUIE_CUSTOM_LIST_CLEARED), listRef), true)
 end
 
 -- List Handling (Add) for Prominent Auras & Blacklist
 function CombatText.AddToCustomList(list, input)
     local id = tonumber(input)
-    local listRef = list == CombatText.SV.blacklist and GetString(SI_LUIE_CUSTOM_LIST_CT_BLACKLIST) or ""
+    local listRef = list == CombatText.SV.blacklist and GetString(LUIE_CUSTOM_LIST_CT_BLACKLIST) or ""
     if id and id > 0 then
         local name = zo_strformat("<<C:1>>", GetAbilityName(id))
         if name ~= nil and name ~= "" then
@@ -384,18 +384,18 @@ function CombatText.AddToCustomList(list, input)
             list[id] = true
             CHAT_SYSTEM:Maximize()
             CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_ID), icon, id, name, listRef), true)
+            printToChat(zo_strformat(GetString(LUIE_CUSTOM_LIST_ADDED_ID), icon, id, name, listRef), true)
         else
             CHAT_SYSTEM:Maximize()
             CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_FAILED), input, listRef), true)
+            printToChat(zo_strformat(GetString(LUIE_CUSTOM_LIST_ADDED_FAILED), input, listRef), true)
         end
     else
         if input ~= "" then
             list[input] = true
             CHAT_SYSTEM:Maximize()
             CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_NAME), input, listRef), true)
+            printToChat(zo_strformat(GetString(LUIE_CUSTOM_LIST_ADDED_NAME), input, listRef), true)
         end
     end
 end
@@ -403,20 +403,20 @@ end
 -- List Handling (Remove) for Prominent Auras & Blacklist
 function CombatText.RemoveFromCustomList(list, input)
     local id = tonumber(input)
-    local listRef = list == CombatText.SV.blacklist and GetString(SI_LUIE_CUSTOM_LIST_CT_BLACKLIST) or ""
+    local listRef = list == CombatText.SV.blacklist and GetString(LUIE_CUSTOM_LIST_CT_BLACKLIST) or ""
     if id and id > 0 then
         local name = zo_strformat("<<C:1>>", GetAbilityName(id))
         local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
         list[id] = nil
         CHAT_SYSTEM:Maximize()
         CHAT_SYSTEM.primaryContainer:FadeIn()
-        printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_ID), icon, id, name, listRef), true)
+        printToChat(zo_strformat(GetString(LUIE_CUSTOM_LIST_REMOVED_ID), icon, id, name, listRef), true)
     else
         if input ~= "" then
             list[input] = nil
             CHAT_SYSTEM:Maximize()
             CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_NAME), input, listRef), true)
+            printToChat(zo_strformat(GetString(LUIE_CUSTOM_LIST_REMOVED_NAME), input, listRef), true)
         end
     end
 end
@@ -425,7 +425,7 @@ function CombatText.ApplyFont()
     local fontName = LUIE.Fonts[LUIE.CombatText.SV.fontFace]
     LUIE.CombatText.SV.fontFaceApplied = fontName
     if not fontName or fontName == "" then
-        printToChat(GetString(SI_LUIE_ERROR_FONT), true)
+        printToChat(GetString(LUIE_ERROR_FONT), true)
         LUIE.CombatText.SV.fontFaceApplied = "$(MEDIUM_FONT)"
     end
 end

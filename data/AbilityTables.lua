@@ -17,7 +17,7 @@ local AbilityTables = {
     -- Generic
     Skill_Off_Balance = 14062,
     Skill_Off_Balace_Immunity = 134599,
-    Skill_Major_Vulnerability_Immunity = GetString(SI_LUIE_SKILL_GENERIC_MAJOR_VULNERABILITY_IMMUNITY),
+    Skill_Major_Vulnerability_Immunity = GetString(LUIE_SKILL_GENERIC_MAJOR_VULNERABILITY_IMMUNITY),
     Skill_Hindrance = 46210,
 
     -- ---------------------------------------------------
@@ -26,9 +26,9 @@ local AbilityTables = {
 
     -- Simulated Auras
     Innate_Recall = 6811,
-    Innate_Recall_Penalty = GetString(SI_LUIE_SKILL_RECALL_PENALTY),               -- Recall Penalty
-    Innate_Resurrection_Immunity = GetString(SI_LUIE_SKILL_RESURRECTION_IMMUNITY), -- Resurrection Immunity
-    Innate_Soul_Gem_Resurrection = GetString(SI_LUIE_SKILL_SOUL_GEM_RESURRECTION), -- Soul Gem Resurrection
+    Innate_Recall_Penalty = GetString(LUIE_SKILL_RECALL_PENALTY),               -- Recall Penalty
+    Innate_Resurrection_Immunity = GetString(LUIE_SKILL_RESURRECTION_IMMUNITY), -- Resurrection Immunity
+    Innate_Soul_Gem_Resurrection = GetString(LUIE_SKILL_SOUL_GEM_RESURRECTION), -- Soul Gem Resurrection
 
     -- Player Basic
     Innate_Immobilize_Immunity = 29721,
@@ -37,37 +37,37 @@ local AbilityTables = {
     Innate_Disguised = 23553, -- Disguised
     Innate_Sneak = 20299,     -- Sneak
     Innate_Hidden = 20309,    -- Hidden
-    Innate_Mounted = GetString(SI_LUIE_SKILL_MOUNTED),
-    Innate_Mounted_Passenger = GetString(SI_LUIE_SKILL_MOUNTED_PASSENGER),
+    Innate_Mounted = GetString(LUIE_SKILL_MOUNTED),
+    Innate_Mounted_Passenger = GetString(LUIE_SKILL_MOUNTED_PASSENGER),
     Innate_Vanity_Pet = GetString(SI_COLLECTIBLECATEGORYTYPE3),
     Innate_Assistant = GetString(SI_COLLECTIBLECATEGORYTYPE8),
     --Innate_Sprint                     = 15614, -- Sprint
-    --Innate_Gallop                     = GetString(SI_LUIE_SKILL_MOUNT_SPRINT), -- Gallop
+    --Innate_Gallop                     = GetString(LUIE_SKILL_MOUNT_SPRINT), -- Gallop
     Innate_Brace = 29761,                                                          -- Brace
     Innate_Block = 2890,                                                           -- Block
     Innate_Bash = 21970,                                                           -- Bash
     Innate_Bash_Stun = 21971,                                                      -- Bash Stun
-    Innate_Fall_Damage = GetString(SI_LUIE_SKILL_FALL_DAMAGE),                     -- Fall Damage
-    Innate_Absorbing_Skyshard = GetString(SI_LUIE_SKILL_ABSORBING_SKYSHARD),       -- Absorbing Skyshard
-    Innate_Receiving_Boon = GetString(SI_LUIE_SKILL_RECEIVING_BOON),               -- Receiving Boon
-    Innate_Ayleid_Well = GetString(SI_LUIE_SKILL_AYLEID_WELL),                     -- Ayleid Well
-    Innate_Ayleid_Well_Fortified = GetString(SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED), -- Ayleid Well
+    Innate_Fall_Damage = GetString(LUIE_SKILL_FALL_DAMAGE),                     -- Fall Damage
+    Innate_Absorbing_Skyshard = GetString(LUIE_SKILL_ABSORBING_SKYSHARD),       -- Absorbing Skyshard
+    Innate_Receiving_Boon = GetString(LUIE_SKILL_RECEIVING_BOON),               -- Receiving Boon
+    Innate_Ayleid_Well = GetString(LUIE_SKILL_AYLEID_WELL),                     -- Ayleid Well
+    Innate_Ayleid_Well_Fortified = GetString(LUIE_SKILL_AYLEID_WELL_FORTIFIED), -- Ayleid Well
     Innate_Aetherial_Well = 151928,
     Innate_CC_Immunity = 38117,                                                    -- CC Immunity
     Innate_Stagger = 1834,                                                         -- Stagger
     Innate_Revive = 5823,                                                          -- Revive
 
-    Innate_Create_Station = GetString(SI_LUIE_SKILL_CRAFTING_STATION),
+    Innate_Create_Station = GetString(LUIE_SKILL_CRAFTING_STATION),
     Innate_Summon = 29585,
     Innate_Indrik_Nascent = GetCollectibleName(5710),
     Innate_Indrik_Spectral = GetCollectibleName(6942),
     Innate_Sovereign_Sow = GetCollectibleName(7270),
     Innate_Deadlands_Firewalker = GetCollectibleName(774),
     Innate_Unstable_Morpholith = GetCollectibleName(8124),
-    Innate_Fillet_Fish = GetString(SI_LUIE_SKILL_FILLET_FISH),
-    Innate_Pardon_Edict_Low = GetString(SI_LUIE_SKILL_COUNTERFEIT_PARDON_EDICT),
-    Innate_Pardon_Edict_Medium = GetString(SI_LUIE_SKILL_LENIENCY_EDICT),
-    Innate_Pardon_Edict_High = GetString(SI_LUIE_SKILL_GRAND_AMNESTY_EDICT),
+    Innate_Fillet_Fish = GetString(LUIE_SKILL_FILLET_FISH),
+    Innate_Pardon_Edict_Low = GetString(LUIE_SKILL_COUNTERFEIT_PARDON_EDICT),
+    Innate_Pardon_Edict_Medium = GetString(LUIE_SKILL_LENIENCY_EDICT),
+    Innate_Pardon_Edict_High = GetString(LUIE_SKILL_GRAND_AMNESTY_EDICT),
 
     Innate_Merethic_Restorative_Resin = GetItemLinkName("|H0:item:69434:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Innate_Aetheric_Cipher = GetItemLinkName("|H0:item:115028:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
@@ -102,7 +102,7 @@ local AbilityTables = {
 
     -- World
     Innate_Drop_Anchor = 86717,                                -- Drop Anchor
-    Innate_Anchor_Drop = GetString(SI_LUIE_SKILL_ANCHOR_DROP), -- Anchor Drop
+    Innate_Anchor_Drop = GetString(LUIE_SKILL_ANCHOR_DROP), -- Anchor Drop
     Innate_Power_of_the_Daedra = 46690,                        -- Power of the Daedra
 
     -- Weapon Attacks
@@ -156,8 +156,8 @@ local AbilityTables = {
     Potion_Restore_Stamina = 45225,
     Poison_Creeping_Drain_Health = 79701,
     Poison_Lingering_Restore_Health = 79702,
-    Poison_Stealth_Draining_Poison = GetString(SI_LUIE_SKILL_POISON_STEALTH_DRAIN),
-    Poison_Conspicuous_Poison = GetString(SI_LUIE_SKILL_POISON_CONSPICUOUS),
+    Poison_Stealth_Draining_Poison = GetString(LUIE_SKILL_POISON_STEALTH_DRAIN),
+    Poison_Conspicuous_Poison = GetString(LUIE_SKILL_POISON_CONSPICUOUS),
 
     -- Food/Drink
     Food_Magicka_Stamina_Increase = 61294,
@@ -182,7 +182,7 @@ local AbilityTables = {
     Drink_Health_Stamina_Recovery = 61340,
     Drink_Health_Magicka_Recovery = 61335,
     Drink_Primary_Stat_Recovery = 61350,
-    Drink_Increase = GetString(SI_LUIE_SKILL_DRINK_INCREASE),
+    Drink_Increase = GetString(LUIE_SKILL_DRINK_INCREASE),
     Drink_Orzorgas_Red_Frothgar = GetItemLinkName("|H0:item:71056:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Drink_Bowl_of_Peeled_Eyeballs = GetItemLinkName("|H0:item:87687:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Drink_Ghastly_Eye_Bowl = GetItemLinkName("|H0:item:87695:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
@@ -229,7 +229,7 @@ local AbilityTables = {
     Memento_Discourse_Amaranthine = GetCollectibleName(345),
     Menento_Lenas_Wand_of_Finding = GetCollectibleName(340),
     Memento_Nirnroot_Wine = GetCollectibleName(344),
-    Memento_Mystery_Meat = GetString(SI_LUIE_SKILL_COLLECTIBLE_MYSTERY_MEAT),
+    Memento_Mystery_Meat = GetString(LUIE_SKILL_COLLECTIBLE_MYSTERY_MEAT),
     Memento_Sanguines_Goblet = GetCollectibleName(338),
     Memento_Token_of_Root_Sunder = GetCollectibleName(349),
     Memento_Storm_Atronach_Transform = GetCollectibleName(596),
@@ -290,30 +290,30 @@ local AbilityTables = {
     -- ITEM SETS -----------------------------------------
     -- ---------------------------------------------------
 
-    Set_Bogdan_the_Nightflame = GetString(SI_LUIE_SKILL_SET_BOGDAN_THE_NIGHTFLAME),
-    Set_Lord_Warden_Dusk = GetString(SI_LUIE_SKILL_SET_LORD_WARDEN_DUSK),
+    Set_Bogdan_the_Nightflame = GetString(LUIE_SKILL_SET_BOGDAN_THE_NIGHTFLAME),
+    Set_Lord_Warden_Dusk = GetString(LUIE_SKILL_SET_LORD_WARDEN_DUSK),
     Set_Scourge_Harvester = 59564,
     Set_Maw_of_the_Infernal = 59507,
     Set_Nerieneth = 59592,
     Set_Shadowrend = 80989,
     Set_Spawn_of_Mephala = 59497,
     Set_Swarm_Mother = 80592,
-    Set_The_Troll_King = GetString(SI_LUIE_SKILL_SET_TROLL_KING),
-    Set_Energy_Charge = GetString(SI_LUIE_SKILL_SET_ENERGY_CHARGE),
+    Set_The_Troll_King = GetString(LUIE_SKILL_SET_TROLL_KING),
+    Set_Energy_Charge = GetString(LUIE_SKILL_SET_ENERGY_CHARGE),
     Set_Scavenging_Demise = 116947,
     Set_Varens_Legacy = 79029,
     Set_Syvarras_Scales = 75717,
     Set_Twin_Sisters = 32828,
     Set_Wilderqueens_Arch = 34870,
     Set_Plague_Slinger = 102113,
-    Set_Ice_Furnace = GetString(SI_LUIE_SKILL_SET_ICE_FURNACE),
+    Set_Ice_Furnace = GetString(LUIE_SKILL_SET_ICE_FURNACE),
     Set_Hand_of_Mephala = { 84353, 84355 },
     Set_Tormentor = 67280,
     Set_Destructive_Mage = 51315,
     Set_Healing_Mage = 51442,
     Set_Vicious_Serpent = 61440,
     Set_Vicecannon_of_Venom = 79464,
-    Set_Cooldown = GetString(SI_LUIE_SKILL_SET_COOLDOWN),
+    Set_Cooldown = GetString(LUIE_SKILL_SET_COOLDOWN),
     Set_Eternal_Hunt = 75927,
     Set_Glorious_Defender = 71180,
     Set_Para_Bellum = 71191,
@@ -321,12 +321,12 @@ local AbilityTables = {
     Set_Nocturnals_Favor = 106803,
     Set_Vestment_of_Olorime = 107117,
     Set_Mantle_of_Siroria = 107093,
-    Set_Harmful_Winds = GetString(SI_LUIE_SKILL_SET_HARMFUL_WINDS),
+    Set_Harmful_Winds = GetString(LUIE_SKILL_SET_HARMFUL_WINDS),
     Set_Sloads_Semblance = 106797,
     Set_Shield_of_Ursus = 111437,
     Set_Ursus_Blessing = 112414,
     Set_Grace_of_Gloom = 106865,
-    Set_Noble_Duelist = GetString(SI_LUIE_SKILL_SET_NOBLE_DUELIST),
+    Set_Noble_Duelist = GetString(LUIE_SKILL_SET_NOBLE_DUELIST),
     Set_Soldier_of_Anguish = 113460,
     Set_Affliction = 34787,
     Set_Sentry = 32807,
@@ -349,7 +349,7 @@ local AbilityTables = {
     Set_Heed_the_Call = 142780,
     Set_Legacy_of_Karth = 147388,
 
-    Disguise_Monks_Disguise = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE),
+    Disguise_Monks_Disguise = GetString(LUIE_SKILL_DISGUISE_MONKS_DISGUISE),
 
     -- ---------------------------------------------------
     -- CHAMPION ABILITIES --------------------------------
@@ -369,7 +369,7 @@ local AbilityTables = {
     Passive_Light_Weaver = 31760,
 
     -- Warden
-    Passive_Bond_with_Nature = GetString(SI_LUIE_SKILL_BOND_WITH_NATURE),
+    Passive_Bond_with_Nature = GetString(LUIE_SKILL_BOND_WITH_NATURE),
     Passive_Savage_Beast = 86062,
     Passive_Natures_Gift = 93054,
 
@@ -415,7 +415,7 @@ local AbilityTables = {
     Skill_Incapacitating_Strike = 36508,
     Skill_Soul_Harvest = 36514,
     Skill_Corrosive_Strike = 33219,
-    Skill_Corrosive_Spin = GetString(SI_LUIE_SKILL_CORROSIVE_SPIN_TP),
+    Skill_Corrosive_Spin = GetString(LUIE_SKILL_CORROSIVE_SPIN_TP),
     Skill_Summon_Shade = 33211,
     Skill_Shade = 38508,
     Skill_Dark_Shade = 35434,
@@ -429,8 +429,8 @@ local AbilityTables = {
     Skill_Crystal_Fragments = 46324,
     Skill_Daedric_Tomb = 24842,
     Skill_Daedric_Minefield = 24834,
-    Skill_Unstable_Pulse = GetString(SI_LUIE_SKILL_UNSTABLE_PULSE),
-    Skill_Volatile_Pulse = GetString(SI_LUIE_SKILL_VOLATILE_PULSE),
+    Skill_Unstable_Pulse = GetString(LUIE_SKILL_UNSTABLE_PULSE),
+    Skill_Volatile_Pulse = GetString(LUIE_SKILL_VOLATILE_PULSE),
     Skill_Summon_Storm_Atronach = 23634,
     Skill_Greater_Storm_Atronach = 23492,
     Skill_Summon_Charged_Atronach = 23495,
@@ -478,7 +478,7 @@ local AbilityTables = {
     -- ---------------------------------------------------
 
     -- Restoration Staff
-    Skill_Blessing_of_Restoration = GetString(SI_LUIE_SKILL_BLESSING_OF_RESTORATION),
+    Skill_Blessing_of_Restoration = GetString(LUIE_SKILL_BLESSING_OF_RESTORATION),
 
     -- Destruction Staff
     Skill_Crushing_Shock = 46348,
@@ -532,8 +532,8 @@ local AbilityTables = {
     -- ---------------------------------------------------
 
     Skill_Feed = 33152,
-    Skill_Vampirism = GetString(SI_LUIE_SKILL_VAMPIRISM),
-    Skill_Profane_Symbol = GetString(SI_LUIE_SKILL_PROFANE_SYMBOL),
+    Skill_Vampirism = GetString(LUIE_SKILL_VAMPIRISM),
+    Skill_Profane_Symbol = GetString(LUIE_SKILL_PROFANE_SYMBOL),
     Skill_Blood_Scion = 32624,
     Skill_Swarming_Scion = 38932,
     Skill_Perfect_Scion = 38931,
@@ -595,20 +595,20 @@ local AbilityTables = {
     -- CYRODIIL ------------------------------------------
     -- ---------------------------------------------------
 
-    Skill_Battle_Spirit = GetString(SI_LUIE_SKILL_BATTLE_SPIRIT),
-    Skill_Edge_Keep_Bonus_I = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_SKILL_EDGE_KEEP_BONUS), "I"),
-    Skill_Edge_Keep_Bonus_II = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_SKILL_EDGE_KEEP_BONUS), "II"),
-    Skill_Edge_Keep_Bonus_III = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_SKILL_EDGE_KEEP_BONUS), "III"),
-    Skill_Guard_Detection = GetString(SI_LUIE_SKILL_GUARD_DETECTION),
+    Skill_Battle_Spirit = GetString(LUIE_SKILL_BATTLE_SPIRIT),
+    Skill_Edge_Keep_Bonus_I = zo_strformat("<<1>> <<2>>", GetString(LUIE_SKILL_EDGE_KEEP_BONUS), "I"),
+    Skill_Edge_Keep_Bonus_II = zo_strformat("<<1>> <<2>>", GetString(LUIE_SKILL_EDGE_KEEP_BONUS), "II"),
+    Skill_Edge_Keep_Bonus_III = zo_strformat("<<1>> <<2>>", GetString(LUIE_SKILL_EDGE_KEEP_BONUS), "III"),
+    Skill_Guard_Detection = GetString(LUIE_SKILL_GUARD_DETECTION),
 
-    Skill_Stow_Siege_Weapon = GetString(SI_LUIE_SKILL_STOW_SIEGE_WEAPON),
-    Skill_Deploy = GetString(SI_LUIE_SKILL_DEPLOY),
-    Skill_Pact = GetString(SI_LUIE_SKILL_PACT),
-    Skill_Covenant = GetString(SI_LUIE_SKILL_COVENANT),
-    Skill_Dominion = GetString(SI_LUIE_SKILL_DOMINION),
+    Skill_Stow_Siege_Weapon = GetString(LUIE_SKILL_STOW_SIEGE_WEAPON),
+    Skill_Deploy = GetString(LUIE_SKILL_DEPLOY),
+    Skill_Pact = GetString(LUIE_SKILL_PACT),
+    Skill_Covenant = GetString(LUIE_SKILL_COVENANT),
+    Skill_Dominion = GetString(LUIE_SKILL_DOMINION),
     Skill_Ballista = 68205,
     Skill_Fire_Ballista = 35049,
-    Skill_Lightning_Ballista = GetString(SI_LUIE_SKILL_LIGHTNING_BALLISTA),
+    Skill_Lightning_Ballista = GetString(LUIE_SKILL_LIGHTNING_BALLISTA),
 
     Skill_Stone_Trebuchet = 14159,
     Skill_Iceball_Trebuchet = 13551,
@@ -621,9 +621,9 @@ local AbilityTables = {
     Skill_Fire_Lancer = 138426,
     Skill_Frost_Lancer = 138551,
 
-    Skill_Cold_Stone_Trebuchet = GetString(SI_LUIE_SKILL_COLD_STONE_TREBUCHET),
-    Skill_Cold_Fire_Trebuchet = GetString(SI_LUIE_SKILL_COLD_FIRE_TREBUCHET),
-    Skill_Cold_Fire_Ballista = GetString(SI_LUIE_SKILL_COLD_FIRE_BALLISTA),
+    Skill_Cold_Stone_Trebuchet = GetString(LUIE_SKILL_COLD_STONE_TREBUCHET),
+    Skill_Cold_Fire_Trebuchet = GetString(LUIE_SKILL_COLD_FIRE_TREBUCHET),
+    Skill_Cold_Fire_Ballista = GetString(LUIE_SKILL_COLD_FIRE_BALLISTA),
 
     Skill_Flaming_Oil = 15774,
     Skill_Battering_Ram = 15197,
@@ -640,7 +640,7 @@ local AbilityTables = {
 
     Skill_Razor_Armor = 36304,
 
-    Skill_Consume_Lifeforce = GetString(SI_LUIE_SKILL_CONSUME_LIFEFORCE),
+    Skill_Consume_Lifeforce = GetString(LUIE_SKILL_CONSUME_LIFEFORCE),
     Skill_Wall_of_Souls = 21677,
 
     -- ---------------------------------------------------
@@ -655,63 +655,63 @@ local AbilityTables = {
 
     -- Shared/Basic
     Skill_Hamstring = 70068,
-    Skill_Boss_CC_Immunity = GetString(SI_LUIE_SKILL_BOSS_CC_IMMUNITY),
+    Skill_Boss_CC_Immunity = GetString(LUIE_SKILL_BOSS_CC_IMMUNITY),
     Skill_Backstabber = 13739,
 
     -- Human
     Skill_Ignite = 14070,
-    Skill_Shield_Rush = GetString(SI_LUIE_SKILL_SHIELD_RUSH),
+    Skill_Shield_Rush = GetString(LUIE_SKILL_SHIELD_RUSH),
     Skill_Shock_Aura = 17867,
     Skill_Shock_Blast = 85255,
-    Skill_Improved = GetString(SI_LUIE_SKILL_IMPROVED),
+    Skill_Improved = GetString(LUIE_SKILL_IMPROVED),
     Skill_Knockback = 77905,
     Skill_Weakness = 8705,
     Skill_Staff_Strike = 2901,
     Skill_Ice_Barrier = 14178,
     Skill_Vanish = 24687,
     Skill_Bone_Cage = 35387,
-    Skill_Defensive_Ward = GetString(SI_LUIE_SKILL_DEFENSIVE_WARD),
+    Skill_Defensive_Ward = GetString(LUIE_SKILL_DEFENSIVE_WARD),
     Skill_Divine_Leap = 54027,
-    Skill_Inspire = GetString(SI_LUIE_SKILL_INSPIRE),
-    Skill_Hide_in_Shadows = GetString(SI_LUIE_SKILL_HIDE_IN_SHADOWS),
+    Skill_Inspire = GetString(LUIE_SKILL_INSPIRE),
+    Skill_Hide_in_Shadows = GetString(LUIE_SKILL_HIDE_IN_SHADOWS),
     Skill_Recover = 42905,
     Skill_Clobber = 24671,
-    Skill_Shadowy_Barrier = GetString(SI_LUIE_SKILL_SHADOWY_BARRIER),
+    Skill_Shadowy_Barrier = GetString(LUIE_SKILL_SHADOWY_BARRIER),
     Skill_Flare_Trap = 74628,
     Skill_Bear_Trap = 39058,
     Skill_Void_Burst = 36987,
 
     -- Justice
     Skill_Heavy_Blow = 63157,
-    Skill_Mighty_Charge = GetString(SI_LUIE_SKILL_MIGHTY_CHARGE),
+    Skill_Mighty_Charge = GetString(LUIE_SKILL_MIGHTY_CHARGE),
     Skill_Throw_Dagger = 28499,
-    Skill_Detection = GetString(SI_LUIE_SKILL_DETECTION),
+    Skill_Detection = GetString(LUIE_SKILL_DETECTION),
 
     -- Cyrodiil
     Skill_Shock_Torrent = 46726,
-    Skill_Improved_Shock_Torrent = GetString(SI_LUIE_SKILL_IMPROVED_SHOCK_TORRENT),
+    Skill_Improved_Shock_Torrent = GetString(LUIE_SKILL_IMPROVED_SHOCK_TORRENT),
     Skill_Lasting_Storm = 46818,
     Skill_Bleeding_Strike = 46830,
     Skill_Telekinetic_Prison = 21636,
     Skill_Shattering_Prison = 46905,
-    Skill_Siege_Barrier = GetString(SI_LUIE_SKILL_SIEGE_BARRIER),
-    Skill_Fire_Torrent = GetString(SI_LUIE_SKILL_FIRE_TORRENT),
+    Skill_Siege_Barrier = GetString(LUIE_SKILL_SIEGE_BARRIER),
+    Skill_Fire_Torrent = GetString(LUIE_SKILL_FIRE_TORRENT),
     Skill_Improved_Fire_Torrent = 46990,
-    Skill_Puncturing_Chains = GetString(SI_LUIE_SKILL_PUNCTURING_CHAINS),
-    Skill_Improved_Volley = GetString(SI_LUIE_SKILL_IMPROVED_VOLLEY),
+    Skill_Puncturing_Chains = GetString(LUIE_SKILL_PUNCTURING_CHAINS),
+    Skill_Improved_Volley = GetString(LUIE_SKILL_IMPROVED_VOLLEY),
 
     -- Animals
     Skill_Lacerate = 5452,
     Skill_Bite = 17957,
     Skill_Savage_Blow = 139956,
     Skill_Slam = 70366,
-    Skill_Rip_and_Tear = GetString(SI_LUIE_SKILL_RIP_AND_TEAR),
+    Skill_Rip_and_Tear = GetString(LUIE_SKILL_RIP_AND_TEAR),
     Skill_Rush = 14380,
     Skill_Vigorus_Swipes = 75634,
-    Skill_Barreling_Charge = GetString(SI_LUIE_SKILL_BARRELING_CHARGE),
+    Skill_Barreling_Charge = GetString(LUIE_SKILL_BARRELING_CHARGE),
     Skill_Storm_Bound = 55864,
     Skill_Swipe = 2850,
-    Skill_Blitz = GetString(SI_LUIE_SKILL_BLITZ),
+    Skill_Blitz = GetString(LUIE_SKILL_BLITZ),
     Skill_Toxic_Mucus = 72793,
     Skill_Gore = 85202,
     Skill_Bile_Spit = 64559,
@@ -720,23 +720,23 @@ local AbilityTables = {
     Skill_Paralyze = 6756,
     Skill_Web = 58521,
     Skill_Inject_Larva = 9229,
-    Skill_Zoom = GetString(SI_LUIE_SKILL_ZOOM),
+    Skill_Zoom = GetString(LUIE_SKILL_ZOOM),
     Skill_Vile_Bite = 61243,
     Skill_Infectious_Swarm = 61360,
     Skill_Necrotic_Explosion = 61427,
     Skill_Contagion = 47838,
-    Skill_Plow = GetString(SI_LUIE_SKILL_PLOW),
+    Skill_Plow = GetString(LUIE_SKILL_PLOW),
     Skill_Zap = 8429,
-    Skill_Leeching_Bite = GetString(SI_LUIE_SKILL_LEECHING_BITE),
-    Skill_Fetcherfly_Colony = GetString(SI_LUIE_SKILL_FETCHERFLY_COLONY),
-    Skill_Fetcherfly_Swarm = GetString(SI_LUIE_SKILL_FETCHERFLY_SWARM),
+    Skill_Leeching_Bite = GetString(LUIE_SKILL_LEECHING_BITE),
+    Skill_Fetcherfly_Colony = GetString(LUIE_SKILL_FETCHERFLY_COLONY),
+    Skill_Fetcherfly_Swarm = GetString(LUIE_SKILL_FETCHERFLY_SWARM),
     Skill_Call_Scribs = 38545,
 
     -- Daedra
     Skill_Summon_Daedric_Arch = 65404,
-    Skill_Empower_Atronach_Flame = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME),
-    Skill_Empower_Atronach_Frost = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST),
-    Skill_Empower_Atronach_Storm = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM),
+    Skill_Empower_Atronach_Flame = GetString(LUIE_SKILL_EMPOWER_ATRONACH_FLAME),
+    Skill_Empower_Atronach_Frost = GetString(LUIE_SKILL_EMPOWER_ATRONACH_FROST),
+    Skill_Empower_Atronach_Storm = GetString(LUIE_SKILL_EMPOWER_ATRONACH_STORM),
     Skill_Headbutt = 54380,
     Skill_Tail_Spike = 4799,
     Skill_Rending_Leap = 93745,
@@ -754,7 +754,7 @@ local AbilityTables = {
 
     -- Undead
     Skill_Desecrated_Ground = 38828,
-    Skill_Colossal_Stomp = GetString(SI_LUIE_SKILL_COLOSSAL_STOMP),
+    Skill_Colossal_Stomp = GetString(LUIE_SKILL_COLOSSAL_STOMP),
     Skill_Defiled_Ground = 22521,
     Skill_Soul_Rupture = 73931,
 
@@ -778,21 +778,21 @@ local AbilityTables = {
     -- TRAPS ---------------------------------------------
     -- ---------------------------------------------------
 
-    Trap_Cold_Fire_Trap = GetString(SI_LUIE_SKILL_COLD_FIRE_TRAP),
+    Trap_Cold_Fire_Trap = GetString(LUIE_SKILL_COLD_FIRE_TRAP),
     Trap_Falling_Rocks = 20886,
     Trap_Fire_Trap = 17198,
     Trap_Spike_Trap = 21940,
     Trap_Sigil_of_Frost = 20258,
 
-    Trap_Lava_Trap = GetString(SI_LUIE_SKILL_LAVA_TRAP),
-    Trap_Lightning_Trap = GetString(SI_LUIE_SKILL_LIGHTNING_TRAP),
+    Trap_Lava_Trap = GetString(LUIE_SKILL_LAVA_TRAP),
+    Trap_Lightning_Trap = GetString(LUIE_SKILL_LIGHTNING_TRAP),
     Trap_Blade_Trap = 66793,
 
     Trap_Slaughterfish = zo_strformat("<<C:1>>", GetItemLinkName("|H0:item:42861:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")),
     Trap_Lava = 5139,
 
-    Trap_Charge_Wire = GetString(SI_LUIE_SKILL_CHARGE_WIRE),
-    Trap_Steam_Vent = GetString(SI_LUIE_SKILL_STEAM_VENT),
+    Trap_Charge_Wire = GetString(LUIE_SKILL_CHARGE_WIRE),
+    Trap_Steam_Vent = GetString(LUIE_SKILL_STEAM_VENT),
 
     Trap_Static_Pitcher = GetItemLinkName("|H0:item:145491:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Trap_Gas_Blossom = GetItemLinkName("|H0:item:145492:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
@@ -806,7 +806,7 @@ local AbilityTables = {
 
     Skill_Ferocious_Charge = 83033,
     Skill_Molten_Impact = 83203,
-    Skill_Molten_Pillar_Incalescence = GetString(SI_LUIE_SKILL_MOLTEN_PILLAR_INCALESCENCE),
+    Skill_Molten_Pillar_Incalescence = GetString(LUIE_SKILL_MOLTEN_PILLAR_INCALESCENCE),
     Skill_Trapping_Bolt = 83925,
     Skill_Remove_Bolt = 25763,
     Skill_Poison_Spit = 21708,
@@ -817,9 +817,9 @@ local AbilityTables = {
     -- ---------------------------------------------------
 
     -- Seasonal
-    Skill_Lava_Foot_Stomp = GetString(SI_LUIE_SKILL_LAVA_FOOT_STOMP),
-    Skill_Knife_Juggling = GetString(SI_LUIE_SKILL_KNIFE_JUGGLING),
-    Skill_Torch_Juggling = GetString(SI_LUIE_SKILL_TORCH_JUGGLING),
+    Skill_Lava_Foot_Stomp = GetString(LUIE_SKILL_LAVA_FOOT_STOMP),
+    Skill_Knife_Juggling = GetString(LUIE_SKILL_KNIFE_JUGGLING),
+    Skill_Torch_Juggling = GetString(LUIE_SKILL_TORCH_JUGGLING),
     Skill_Sword_Swallowing = 84533,
     Skill_Celebratory_Belch = 84847,
     Event_Petal_Pelters = GetQuestItemNameFromLink("|H0:quest_item:6145|h|h"),
@@ -833,82 +833,82 @@ local AbilityTables = {
     Skill_Thrash = 144340,
 
     -- MSQ
-    Skill_Wall_of_Flames = GetString(SI_LUIE_SKILL_WALL_OF_FLAMES),
+    Skill_Wall_of_Flames = GetString(LUIE_SKILL_WALL_OF_FLAMES),
     Skill_Necrotic = 41852,
     Skill_Barrier = 38573,
     Skill_Swordstorm = 36858,
     Skill_Flame_Shield = 37173,
     Skill_Royal_Strike = 38729,
-    Skill_Consecrate_Shrine = GetString(SI_LUIE_SKILL_CONSECRATE_SHRINE),
+    Skill_Consecrate_Shrine = GetString(LUIE_SKILL_CONSECRATE_SHRINE),
     Skill_Remove_Ward = 18606,
     Skill_Shock = 27598,
     Skill_Drink_Mead = 13941,
-    Skill_Unstable_Portal = GetString(SI_LUIE_SKILL_UNSTABLE_PORTAL),
-    Skill_Stabilize_Portal = GetString(SI_LUIE_SKILL_STABILIZE_PORTAL),
-    Skill_Close_Unstable_Rift = GetString(SI_LUIE_SKILL_CLOSE_UNSTABLE_RIFT),
+    Skill_Unstable_Portal = GetString(LUIE_SKILL_UNSTABLE_PORTAL),
+    Skill_Stabilize_Portal = GetString(LUIE_SKILL_STABILIZE_PORTAL),
+    Skill_Close_Unstable_Rift = GetString(LUIE_SKILL_CLOSE_UNSTABLE_RIFT),
 
     -- Fighters Guild
     Skill_Palolels_Rage = 39577,
     Skill_Prismatic_Light = 25981,
     Skill_Quick_Strike = 10618,
     Skill_Quick_Shot = 12437,
-    Skill_Flame_Blossom = GetString(SI_LUIE_SKILL_FLAME_BLOSSOM),
+    Skill_Flame_Blossom = GetString(LUIE_SKILL_FLAME_BLOSSOM),
 
     -- Mages Guild
     Skill_Rock = 26775,
     Skill_Essence = 25337,
-    Skill_Sahdinas_Essence = GetString(SI_LUIE_SKILL_SAHDINAS_ESSENCE),
-    Skill_Rashomtas_Essence = GetString(SI_LUIE_SKILL_RASHOMTAS_ESSENCE),
-    Skill_Polymorph_Skeleton = GetString(SI_LUIE_SKILL_POLYMORPH_SKELETON),
+    Skill_Sahdinas_Essence = GetString(LUIE_SKILL_SAHDINAS_ESSENCE),
+    Skill_Rashomtas_Essence = GetString(LUIE_SKILL_RASHOMTAS_ESSENCE),
+    Skill_Polymorph_Skeleton = GetString(LUIE_SKILL_POLYMORPH_SKELETON),
     Skill_Drain_Vitality = 8787,
     Skill_Ungulate_Ordnance = 39393,
 
     -- Aldmeri Dominion
-    Skill_Drain_Energy = GetString(SI_LUIE_SKILL_DRAIN_ENERGY),
+    Skill_Drain_Energy = GetString(LUIE_SKILL_DRAIN_ENERGY),
     Skill_Blessing = 33029,
-    Skill_Beckon_Gathwen = GetString(SI_LUIE_SKILL_BECKON_GATHWEN),
+    Skill_Beckon_Gathwen = GetString(LUIE_SKILL_BECKON_GATHWEN),
     Skill_Summon = 29585,
     Skill_Ancestral_Spirit = 48921,
     Skill_Drinking = 23527,
     Skill_Disruption = 31321,
     Skill_Voice_to_Wake_the_Dead = 5030,
-    Skill_Barrier_Rebuke = GetString(SI_LUIE_SKILL_BARRIER_REBUKE),
+    Skill_Barrier_Rebuke = GetString(LUIE_SKILL_BARRIER_REBUKE),
     Skill_Dispel = 8490,
-    Skill_Teleport_Scroll = GetString(SI_LUIE_SKILL_TELEPORT_SCROLL),
+    Skill_Teleport_Scroll = GetString(LUIE_SKILL_TELEPORT_SCROLL),
     Skill_Purify = 22260,
-    Skill_Bind_Hands = GetString(SI_LUIE_SKILL_BIND_HANDS),
-    Skill_Bind_Bear = GetString(SI_LUIE_SKILL_BIND_BEAR),
-    Skill_Aetherial_Shift = GetString(SI_LUIE_SKILL_AETHERIAL_SHIFT),
-    Skill_Free_Spirit = GetString(SI_LUIE_SKILL_FREE_SPIRIT),
-    Skill_Unbind = GetString(SI_LUIE_SKILL_UNBIND),
+    Skill_Bind_Hands = GetString(LUIE_SKILL_BIND_HANDS),
+    Skill_Bind_Bear = GetString(LUIE_SKILL_BIND_BEAR),
+    Skill_Aetherial_Shift = GetString(LUIE_SKILL_AETHERIAL_SHIFT),
+    Skill_Free_Spirit = GetString(LUIE_SKILL_FREE_SPIRIT),
+    Skill_Unbind = GetString(LUIE_SKILL_UNBIND),
     Skill_Crystal = 67121,
-    Skill_Backfire = GetString(SI_LUIE_SKILL_BACKFIRE),
+    Skill_Backfire = GetString(LUIE_SKILL_BACKFIRE),
     Skill_Close_Portal = 23370,
     Skill_Lightning_Strike = 27596,
     Skill_Push = 8692,
     Skill_Absorb = 30869,
-    Skill_Mantles_Shadow = GetString(SI_LUIE_SKILL_MANTLES_SHADOW),
+    Skill_Mantles_Shadow = GetString(LUIE_SKILL_MANTLES_SHADOW),
     Skill_Quaking_Stomp = 43820,
     Skill_Projectile_Vomit = 43827,
     Skill_Call_for_Help = 53430,
-    Skill_Throw_Water = GetString(SI_LUIE_SKILL_THROW_WATER),
+    Skill_Throw_Water = GetString(LUIE_SKILL_THROW_WATER),
     Skill_Snake_Scales = 36713,
     Skill_Wolfs_Pelt = 36843,
     Skill_Tigers_Fur = 36828,
     Skill_Feedback = 32063,
     Skill_Soul_Binding = 21171,
-    Skill_Empower_Heart = GetString(SI_LUIE_SKILL_EMPOWER_TWILIT_HEART),
-    Skill_Restricting_Vines = GetString(SI_LUIE_SKILL_RESTRICTING_VINES),
-    Skill_Change_Clothes = GetString(SI_LUIE_SKILL_CHANGE_CLOTHES),
-    Skill_Fancy_Clothing = GetString(SI_LUIE_SKILL_FANCY_CLOTHING),
+    Skill_Empower_Heart = GetString(LUIE_SKILL_EMPOWER_TWILIT_HEART),
+    Skill_Restricting_Vines = GetString(LUIE_SKILL_RESTRICTING_VINES),
+    Skill_Change_Clothes = GetString(LUIE_SKILL_CHANGE_CLOTHES),
+    Skill_Fancy_Clothing = GetString(LUIE_SKILL_FANCY_CLOTHING),
     Skill_Flames = 64704,
     Skill_Burrow = 8974,
     Skill_Emerge = 20746,
-    Skill_Serpent_Spit = GetString(SI_LUIE_SKILL_SERPENT_SPIT),
-    Skill_Shadow_Wood = GetString(SI_LUIE_SKILL_SHADOW_WOOD),
-    Skill_Disperse_Corruption = GetString(SI_LUIE_SKILL_DISPERSE_CORRUPTION),
+    Skill_Serpent_Spit = GetString(LUIE_SKILL_SERPENT_SPIT),
+    Skill_Shadow_Wood = GetString(LUIE_SKILL_SHADOW_WOOD),
+    Skill_Disperse_Corruption = GetString(LUIE_SKILL_DISPERSE_CORRUPTION),
     Skill_Undead_Legion = 35809,
-    Skill_Call_Corrupt_Lurchers = GetString(SI_LUIE_SKILL_CALL_CORRUPT_LURCHERS),
+    Skill_Call_Corrupt_Lurchers = GetString(LUIE_SKILL_CALL_CORRUPT_LURCHERS),
 
     -- Daggerfall Covenant
     Skill_Neramos_Control_Rod = GetQuestItemName(3703),
@@ -919,15 +919,15 @@ local AbilityTables = {
 
     -- Elsweyr Quests
     Skill_Flame_Aura = 124352,
-    Skill_Star_Haven_Dragonhorn = GetString(SI_LUIE_SKILL_STAR_HAVEN_DRAGONHORN),
+    Skill_Star_Haven_Dragonhorn = GetString(LUIE_SKILL_STAR_HAVEN_DRAGONHORN),
     Skill_Steadfast_Ward = 37232,
     Skill_Wing_Thrash = 125242,
 
     -- Greymoor Quests
-    Skill_Piercing_Dagger = GetString(SI_LUIE_SKILL_PIERCING_DAGGER),
+    Skill_Piercing_Dagger = GetString(LUIE_SKILL_PIERCING_DAGGER),
     Skill_Frostbolt = 119222,
-    Skill_Freezing_Vines = GetString(SI_LUIE_SKILL_FREEZING_VINES),
-    Skill_Freezing_Vineburst = GetString(SI_LUIE_SKILL_FREEZING_VINEBURST),
+    Skill_Freezing_Vines = GetString(LUIE_SKILL_FREEZING_VINES),
+    Skill_Freezing_Vineburst = GetString(LUIE_SKILL_FREEZING_VINEBURST),
 
     -- ---------------------------------------------------
     -- ARENA EFFECTS -----------------------------------
@@ -940,40 +940,40 @@ local AbilityTables = {
     Skill_Poison_Cloud = 21411,
     Skill_Flurry = 28607,
     Skill_Mages_Wrath = 19123,
-    Skill_Caustic_Armor = GetString(SI_LUIE_SKILL_CAUSTIC_ARMOR),
+    Skill_Caustic_Armor = GetString(LUIE_SKILL_CAUSTIC_ARMOR),
     Skill_Enslavement = 83774,
     Skill_Cinder_Storm = 20779,
     Skill_Petrify = 29037,
     Skill_Celestial_Ward = 54315,
     Skill_Draining_Poison = 60442,
-    Skill_Natures_Blessing = GetString(SI_LUIE_SKILL_NATURES_BLESSING),
-    Skill_Reflective_Scale = GetString(SI_LUIE_SKILL_REFLECTIVE_SCALE),
+    Skill_Natures_Blessing = GetString(LUIE_SKILL_NATURES_BLESSING),
+    Skill_Reflective_Scale = GetString(LUIE_SKILL_REFLECTIVE_SCALE),
     Skill_Summon_Scamp = 39555,
     Skill_Summon_Harvester = 58054,
-    Skill_Summon_Daedric_Titan = GetString(SI_LUIE_SKILL_SUMMON_DAEDRIC_TITAN),
+    Skill_Summon_Daedric_Titan = GetString(LUIE_SKILL_SUMMON_DAEDRIC_TITAN),
     Skill_Suppression_Field = 28341,
     Skill_Sucked_Under = 55221,
     Skill_Spirit_Shield = 56985,
     Skill_Blazing_Fire = 34959,
-    Skill_Empowered_by_the_Light = GetString(SI_LUIE_SKILL_EMPOWERED_BY_THE_LIGHT),
+    Skill_Empowered_by_the_Light = GetString(LUIE_SKILL_EMPOWERED_BY_THE_LIGHT),
     Skill_Warmth = 29430,
-    Skill_Arena_Torch = GetString(SI_LUIE_SKILL_ARENA_TORCH),
+    Skill_Arena_Torch = GetString(LUIE_SKILL_ARENA_TORCH),
     Skill_Biting_Cold = 53341,
 
     -- Maelstrom Arena
     Skill_Sigil_of_Healing = 66920,
     Skill_Defiled_Grave = 70893,
     Skill_Overload = 72690,
-    Skill_Energize = GetString(SI_LUIE_SKILL_ENERGIZE),
-    Skill_Defensive_Protocol = GetString(SI_LUIE_SKILL_DEFENSIVE_PROTOCOL),
+    Skill_Energize = GetString(LUIE_SKILL_ENERGIZE),
+    Skill_Defensive_Protocol = GetString(LUIE_SKILL_DEFENSIVE_PROTOCOL),
 
     Skill_Electrified_Water = 69913,
     Skill_Call_Lightning = 73881,
     Skill_Spit = 76094,
-    Skill_Venting_Flames = GetString(SI_LUIE_SKILL_VENTING_FLAMES),
+    Skill_Venting_Flames = GetString(LUIE_SKILL_VENTING_FLAMES),
     Skill_Voltaic_Overload = 109059,
     Skill_Cold_Snap = 72705,
-    Skill_Summon_Deathless_Wolf = GetString(SI_LUIE_SKILL_SUMMON_DEATHLESS_WOLF),
+    Skill_Summon_Deathless_Wolf = GetString(LUIE_SKILL_SUMMON_DEATHLESS_WOLF),
     Skill_Iceberg_Calving = 71702,
     Skill_Frigid_Waters = 67805,
 
@@ -987,32 +987,32 @@ local AbilityTables = {
     Skill_Overpower = 52997,
 
     -- Banished Cells II
-    Skill_Pool_of_Fire = GetString(SI_LUIE_SKILL_POOL_OF_FIRE),
-    Skill_Sisters_Bond = GetString(SI_LUIE_SKILL_SISTERS_BOND),
+    Skill_Pool_of_Fire = GetString(LUIE_SKILL_POOL_OF_FIRE),
+    Skill_Sisters_Bond = GetString(LUIE_SKILL_SISTERS_BOND),
     Skill_Levitate = 28570,
     Skill_Essence_Siphon = 28750,
-    Skill_Daedric_Chaos = GetString(SI_LUIE_SKILL_DAEDRIC_CHAOS),
-    Skill_Chaotic_Dispersion = GetString(SI_LUIE_SKILL_CHAOTIC_DISPERSION),
-    Skill_Chaotic_Return = GetString(SI_LUIE_SKILL_CHAOTIC_RETURN),
+    Skill_Daedric_Chaos = GetString(LUIE_SKILL_DAEDRIC_CHAOS),
+    Skill_Chaotic_Dispersion = GetString(LUIE_SKILL_CHAOTIC_DISPERSION),
+    Skill_Chaotic_Return = GetString(LUIE_SKILL_CHAOTIC_RETURN),
     Skill_Summon_Daedroth = 69356,
-    Skill_Resilience = GetString(SI_LUIE_SKILL_RESILIENCE),
+    Skill_Resilience = GetString(LUIE_SKILL_RESILIENCE),
 
     -- Elden Hollow I
     Skill_Executioners_Strike = 16834,
-    Skill_Whirling_Axe = GetString(SI_LUIE_SKILL_WHIRLING_AXE),
+    Skill_Whirling_Axe = GetString(LUIE_SKILL_WHIRLING_AXE),
     Skill_Crushing_Blow = 33189, -- TODO: Move to the first instance of this rename being neccesary
     Skill_Measured_Uppercut = 34607,
-    Skill_Heal_Spores = GetString(SI_LUIE_SKILL_HEAL_SPORES),
-    Skill_Summon_Saplings = GetString(SI_LUIE_SKILL_SUMMON_STRANGLER_SAPLINGS),
-    Skill_Reanimate_Skeletons = GetString(SI_LUIE_SKILL_REANIMATE_SKELETONS),
+    Skill_Heal_Spores = GetString(LUIE_SKILL_HEAL_SPORES),
+    Skill_Summon_Saplings = GetString(LUIE_SKILL_SUMMON_STRANGLER_SAPLINGS),
+    Skill_Reanimate_Skeletons = GetString(LUIE_SKILL_REANIMATE_SKELETONS),
 
     -- Elden Hollow II
     Skill_Fortified_Ground = 32648,
     Skill_Empowered_Ground = 32647,
-    Skill_Siphon_Magicka = GetString(SI_LUIE_SKILL_SIPHON_MAGICKA),
-    Skill_Siphon_Stamina = GetString(SI_LUIE_SKILL_SIPHON_STAMINA),
-    Skill_Shadow_Tendril = GetString(SI_LUIE_SKILL_SHADOW_TENDRIL),
-    Skill_Nova_Tendril = GetString(SI_LUIE_SKILL_NOVA_TENDRIL),
+    Skill_Siphon_Magicka = GetString(LUIE_SKILL_SIPHON_MAGICKA),
+    Skill_Siphon_Stamina = GetString(LUIE_SKILL_SIPHON_STAMINA),
+    Skill_Shadow_Tendril = GetString(LUIE_SKILL_SHADOW_TENDRIL),
+    Skill_Nova_Tendril = GetString(LUIE_SKILL_NOVA_TENDRIL),
 
     -- City of Ash I
     Skill_Steel_Cyclone = 5843,
@@ -1022,58 +1022,58 @@ local AbilityTables = {
     Skill_Blazing_Arrow = 34901,
     Skill_Blazing_Embers = 34953,
     Skill_Summon_Flame_Atronach = 34623,
-    Skill_Summon_Flame_Atronachs = GetString(SI_LUIE_SKILL_SUMMON_FLAME_ATRONACHS),
-    Skill_Oblivion_Gate = GetString(SI_LUIE_SKILL_OBLIVION_GATE),
+    Skill_Summon_Flame_Atronachs = GetString(LUIE_SKILL_SUMMON_FLAME_ATRONACHS),
+    Skill_Oblivion_Gate = GetString(LUIE_SKILL_OBLIVION_GATE),
 
     -- City of Ash II
-    Skill_Trail_of_Flames = GetString(SI_LUIE_SKILL_TRAIL_OF_FLAMES),
+    Skill_Trail_of_Flames = GetString(LUIE_SKILL_TRAIL_OF_FLAMES),
     Skill_Pyroclasm = 92269,
     Skill_Fire_Rune = 47102,
     Skill_Seismic_Tremor = 55203,
-    Skill_Enraged_Fortitude = GetString(SI_LUIE_SKILL_ENRAGED_FORTITUDE),
+    Skill_Enraged_Fortitude = GetString(LUIE_SKILL_ENRAGED_FORTITUDE),
     Skill_Wing_Gust = 26554,
-    Skill_Flame_Tsunami = GetString(SI_LUIE_SKILL_FLAME_TSUNAMI),
-    Skill_Ignore_Pain = GetString(SI_LUIE_SKILL_IGNORE_PAIN),
+    Skill_Flame_Tsunami = GetString(LUIE_SKILL_FLAME_TSUNAMI),
+    Skill_Ignore_Pain = GetString(LUIE_SKILL_IGNORE_PAIN),
     Skill_Flame_Bolt = 55513,
     Skill_Call_the_Flames = 55514,
     Skill_Slag_Geyser = 56068,
     Skill_Platform_Detonation = 56548,
-    Skill_Volcanic_Shield = GetString(SI_LUIE_SKILL_VOLCANIC_SHIELD),
-    Skill_Meteoric_Strike = GetString(SI_LUIE_SKILL_METEORIC_STRIKE),
-    Skill_Flame_Barrier = GetString(SI_LUIE_SKILL_FLAME_BARRIER),
-    Skill_Call_Storm_Atronach = GetString(SI_LUIE_SKILL_CALL_STORM_ATRONACH),
-    Skill_Call_Storm_Atronachs = GetString(SI_LUIE_SKILL_CALL_STORM_ATRONACHS),
+    Skill_Volcanic_Shield = GetString(LUIE_SKILL_VOLCANIC_SHIELD),
+    Skill_Meteoric_Strike = GetString(LUIE_SKILL_METEORIC_STRIKE),
+    Skill_Flame_Barrier = GetString(LUIE_SKILL_FLAME_BARRIER),
+    Skill_Call_Storm_Atronach = GetString(LUIE_SKILL_CALL_STORM_ATRONACH),
+    Skill_Call_Storm_Atronachs = GetString(LUIE_SKILL_CALL_STORM_ATRONACHS),
 
     -- Tempest Island
     Skill_Sonic_Scream = 46732,
-    Skill_Sudden_Storm = GetString(SI_LUIE_SKILL_SUDDEN_STORM),
+    Skill_Sudden_Storm = GetString(LUIE_SKILL_SUDDEN_STORM),
     Skill_Shadowstep = 18190,
     Skill_Poisoned_Blade = 29063,
     Skill_Stormfist = 80520,
     Skill_Wind_Charge = 26746,
     Skill_Twister = 26514,
     Skill_Heavy_Slash = 51993,
-    Skill_Precision_Strike = GetString(SI_LUIE_SKILL_PRECISION_STRIKE),
+    Skill_Precision_Strike = GetString(LUIE_SKILL_PRECISION_STRIKE),
 
     -- Selene's Web
-    Skill_Primal_Swarm = GetString(SI_LUIE_SKILL_PRIMAL_SWARM),
+    Skill_Primal_Swarm = GetString(LUIE_SKILL_PRIMAL_SWARM),
     Skill_Volley = 28876,
-    Skill_Senche_Spirit = GetString(SI_LUIE_SKILL_SENCHE_SPIRIT),
+    Skill_Senche_Spirit = GetString(LUIE_SKILL_SENCHE_SPIRIT),
     Skill_Lash = 5240,
     Skill_Vicious_Maul = 30996,
     Skill_Trampling_Charge = 30987,
-    Skill_Selenes_Rose = GetString(SI_LUIE_SKILL_SELENES_ROSE),
+    Skill_Selenes_Rose = GetString(LUIE_SKILL_SELENES_ROSE),
     Skill_Free_Ally = 31180,
-    Skill_Primal_Maul = GetString(SI_LUIE_SKILL_PRIMAL_MAUL),
+    Skill_Primal_Maul = GetString(LUIE_SKILL_PRIMAL_MAUL),
     Skill_Primal_Leap = 30901,
-    Skill_Root_Guard = GetString(SI_LUIE_SKILL_ROOT_GUARD),
-    Skill_Earth_Mender = GetString(SI_LUIE_SKILL_EARTH_MENDER),
-    Skill_True_Shot = GetString(SI_LUIE_SKILL_TRUE_SHOT),
+    Skill_Root_Guard = GetString(LUIE_SKILL_ROOT_GUARD),
+    Skill_Earth_Mender = GetString(LUIE_SKILL_EARTH_MENDER),
+    Skill_True_Shot = GetString(LUIE_SKILL_TRUE_SHOT),
 
     -- Spindleclutch I
     Skill_Summon_Swarm = 51408,
     Skill_Arachnid_Leap = 17960,
-    Skill_Spawn_Hatchlings = GetString(SI_LUIE_SKILL_SPAWN_HATCHLINGS),
+    Skill_Spawn_Hatchlings = GetString(LUIE_SKILL_SPAWN_HATCHLINGS),
     Skill_Web_Blast = 18078,
     Skill_Grappling_Web = 35572,
     Skill_Daedric_Explosion = 18058,
@@ -1084,7 +1084,7 @@ local AbilityTables = {
     Skill_Cave_In = 27995,
     Skill_Praxins_Nightmare = 47122,
     Skill_Harrowing_Ring = 27703,
-    Skill_Wracking_Pain = GetString(SI_LUIE_SKILL_WRACKING_PAIN),
+    Skill_Wracking_Pain = GetString(LUIE_SKILL_WRACKING_PAIN),
 
     -- Wayrest Sewers I
     Skill_Dark_Lance = 9441,
@@ -1094,18 +1094,18 @@ local AbilityTables = {
     -- Wayrest Sewers II
     Skill_Scourging_Spark = 36613,
     Skill_Necromantic_Implosion = 17207,
-    Skill_Escaped_Souls = GetString(SI_LUIE_SKILL_ESCAPED_SOULS),
+    Skill_Escaped_Souls = GetString(LUIE_SKILL_ESCAPED_SOULS),
     Skill_Overhead_Smash = 20915,
 
     -- Crypt of Hearts I
     Skill_Trample = 46947,
     Skill_Immolate = 46679,
     Skill_Electric_Prison = 22432,
-    Skill_Overwhelming_Blow = GetString(SI_LUIE_SKILL_OVERWHELMING_BLOW),
+    Skill_Overwhelming_Blow = GetString(LUIE_SKILL_OVERWHELMING_BLOW),
 
     -- Crypt of Hearts II
-    Skill_Summon_Spiderkith = GetString(SI_LUIE_SKILL_SUMMON_SPIDERKITH),
-    Skill_Summon_Death_Spider = GetString(SI_LUIE_SKILL_SUMMON_DEATH_SPIDER),
+    Skill_Summon_Spiderkith = GetString(LUIE_SKILL_SUMMON_SPIDERKITH),
+    Skill_Summon_Death_Spider = GetString(LUIE_SKILL_SUMMON_DEATH_SPIDER),
     Skill_Summon_Atronach = 52040,
     Skill_Chattering_Web = 51381,
     Skill_Spider_Swarm = 51410,
@@ -1113,25 +1113,25 @@ local AbilityTables = {
     Skill_Fire_Stomp = 61611,
     Skill_Shock_Form = 52167,
     Skill_Fire_Form = 52166,
-    Skill_Split_Flare = GetString(SI_LUIE_SKILL_SPLIT_FLARE),
-    Skill_Void_Grip = GetString(SI_LUIE_SKILL_VOID_GRIP),
+    Skill_Split_Flare = GetString(LUIE_SKILL_SPLIT_FLARE),
+    Skill_Void_Grip = GetString(LUIE_SKILL_VOID_GRIP),
     Skill_Fulminating_Void = 51799,
-    Skill_Skull_Volley = GetString(SI_LUIE_SKILL_SKULL_VOLLEY),
+    Skill_Skull_Volley = GetString(LUIE_SKILL_SKULL_VOLLEY),
     Skill_Daedric_Step = 46581,
     Skill_Soul_Pulse = 51853,
     Skill_Cold_Strike = 53123,
-    Skill_Chilling_Bolt = GetString(SI_LUIE_SKILL_CHILLING_BOLT),
+    Skill_Chilling_Bolt = GetString(LUIE_SKILL_CHILLING_BOLT),
     Skill_Soul_Sacrifice = 51969,
-    Skill_Draw_the_Ebony_Blade = GetString(SI_LUIE_SKILL_DRAW_THE_EBONY_BLADE),
-    Skill_Ebony_Shield = GetString(SI_LUIE_SKILL_EBONY_SHIELD),
+    Skill_Draw_the_Ebony_Blade = GetString(LUIE_SKILL_DRAW_THE_EBONY_BLADE),
+    Skill_Ebony_Shield = GetString(LUIE_SKILL_EBONY_SHIELD),
     Skill_Resist_Necrosis = 53185,
     Skill_Lethal_Stab = 51988,
 
     -- Volenfell
-    Skill_Mighty_Swing = GetString(SI_LUIE_SKILL_MIGHTY_SWING),
-    Skill_Flame_Wraith = GetString(SI_LUIE_SKILL_FLAME_WRAITH),
+    Skill_Mighty_Swing = GetString(LUIE_SKILL_MIGHTY_SWING),
+    Skill_Flame_Wraith = GetString(LUIE_SKILL_FLAME_WRAITH),
     Skill_Burning_Ground = 25143,
-    Skill_Gargoyle_Leap = GetString(SI_LUIE_SKILL_GARGOYLE_LEAP),
+    Skill_Gargoyle_Leap = GetString(LUIE_SKILL_GARGOYLE_LEAP),
     Skill_Explosive_Bolt = 25655,
     Skill_Tail_Swipe = 24777,
     Skill_Rupture = 29164,
@@ -1147,24 +1147,24 @@ local AbilityTables = {
     -- KEEP UPGRADE --------------------------------------
     -- ---------------------------------------------------
 
-    Keep_Upgrade_Food_Guard_Range = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_RANGE),
-    Keep_Upgrade_Food_Heartier_Guards = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_HEARTIER_GUARDS),
-    Keep_Upgrade_Food_Resistant_Guards = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_RESISTANT_GUARDS),
-    Keep_Upgrade_Food_Stronger_Guards = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_STRONGER_GUARDS),
-    Keep_Upgrade_Ore_Armored_Guards = GetString(SI_LUIE_KEEP_UPGRADE_ORE_ARMORED_GUARDS),
-    Keep_Upgrade_Ore_Corner_Build = GetString(SI_LUIE_KEEP_UPGRADE_ORE_CORNER_BUILD),
-    Keep_Upgrade_Ore_Siege_Platform = GetString(SI_LUIE_KEEP_UPGRADE_ORE_SIEGE_PLATFORM),
-    Keep_Upgrade_Ore_Stronger_Walls = GetString(SI_LUIE_KEEP_UPGRADE_ORE_STRONGER_WALLS),
-    Keep_Upgrade_Ore_Wall_Regeneration = GetString(SI_LUIE_KEEP_UPGRADE_ORE_WALL_REGENERATION),
-    Keep_Upgrade_Wood_Archer_Guard = GetString(SI_LUIE_KEEP_UPGRADE_WOOD_ARCHER_GUARD),
-    Keep_Upgrade_Wood_Door_Regeneration = GetString(SI_LUIE_KEEP_UPGRADE_WOOD_DOOR_REGENERATION),
-    Keep_Upgrade_Wood_Siege_Cap = GetString(SI_LUIE_KEEP_UPGRADE_WOOD_SIEGE_CAP),
-    Keep_Upgrade_Wood_Stronger_Doors = GetString(SI_LUIE_KEEP_UPGRADE_WOOD_STRONGER_DOORS),
-    Keep_Upgrade_Food_Mender_Abilities = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_MENDER_ABILITIES),
-    Keep_Upgrade_Food_Honor_Guard_Abilities = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_HONOR_GUARD_ABILITIES),
-    Keep_Upgrade_Food_Mage_Abilities = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_MAGE_ABILITIES),
-    Keep_Upgrade_Food_Mage_Abilities_Fix = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_MAGE_ABILITIES_FIX),
-    Keep_Upgrade_Food_Guard_Abilities = GetString(SI_LUIE_KEEP_UPGRADE_FOOD_GUARD_ABILITIES),
+    Keep_Upgrade_Food_Guard_Range = GetString(LUIE_KEEP_UPGRADE_FOOD_GUARD_RANGE),
+    Keep_Upgrade_Food_Heartier_Guards = GetString(LUIE_KEEP_UPGRADE_FOOD_HEARTIER_GUARDS),
+    Keep_Upgrade_Food_Resistant_Guards = GetString(LUIE_KEEP_UPGRADE_FOOD_RESISTANT_GUARDS),
+    Keep_Upgrade_Food_Stronger_Guards = GetString(LUIE_KEEP_UPGRADE_FOOD_STRONGER_GUARDS),
+    Keep_Upgrade_Ore_Armored_Guards = GetString(LUIE_KEEP_UPGRADE_ORE_ARMORED_GUARDS),
+    Keep_Upgrade_Ore_Corner_Build = GetString(LUIE_KEEP_UPGRADE_ORE_CORNER_BUILD),
+    Keep_Upgrade_Ore_Siege_Platform = GetString(LUIE_KEEP_UPGRADE_ORE_SIEGE_PLATFORM),
+    Keep_Upgrade_Ore_Stronger_Walls = GetString(LUIE_KEEP_UPGRADE_ORE_STRONGER_WALLS),
+    Keep_Upgrade_Ore_Wall_Regeneration = GetString(LUIE_KEEP_UPGRADE_ORE_WALL_REGENERATION),
+    Keep_Upgrade_Wood_Archer_Guard = GetString(LUIE_KEEP_UPGRADE_WOOD_ARCHER_GUARD),
+    Keep_Upgrade_Wood_Door_Regeneration = GetString(LUIE_KEEP_UPGRADE_WOOD_DOOR_REGENERATION),
+    Keep_Upgrade_Wood_Siege_Cap = GetString(LUIE_KEEP_UPGRADE_WOOD_SIEGE_CAP),
+    Keep_Upgrade_Wood_Stronger_Doors = GetString(LUIE_KEEP_UPGRADE_WOOD_STRONGER_DOORS),
+    Keep_Upgrade_Food_Mender_Abilities = GetString(LUIE_KEEP_UPGRADE_FOOD_MENDER_ABILITIES),
+    Keep_Upgrade_Food_Honor_Guard_Abilities = GetString(LUIE_KEEP_UPGRADE_FOOD_HONOR_GUARD_ABILITIES),
+    Keep_Upgrade_Food_Mage_Abilities = GetString(LUIE_KEEP_UPGRADE_FOOD_MAGE_ABILITIES),
+    Keep_Upgrade_Food_Mage_Abilities_Fix = GetString(LUIE_KEEP_UPGRADE_FOOD_MAGE_ABILITIES_FIX),
+    Keep_Upgrade_Food_Guard_Abilities = GetString(LUIE_KEEP_UPGRADE_FOOD_GUARD_ABILITIES),
 }
 
 -- Replace ability IDs with names

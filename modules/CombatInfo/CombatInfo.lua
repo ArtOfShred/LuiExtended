@@ -90,13 +90,13 @@ CombatInfo.Defaults = {
             mitigationAbilityName = "%t",
             mitigationEnemyName = "%n -",
             modifierEnable = true,
-            mitigationModifierOnYou = GetString(SI_LUIE_CI_MITIGATION_MODIFIER_ON_YOU),
-            mitigationModifierSpreadOut = GetString(SI_LUIE_CI_MITIGATION_MODIFIER_SPREAD_OUT),
+            mitigationModifierOnYou = GetString(LUIE_CI_MITIGATION_MODIFIER_ON_YOU),
+            mitigationModifierSpreadOut = GetString(LUIE_CI_MITIGATION_MODIFIER_SPREAD_OUT),
             showCrowdControlBorder = true,
             ccLabelColor = false,
             useDefaultIcon = false,
             mitigationPowerPrefix2 = "%t",
-            mitigationPowerPrefixN2 = GetString(SI_LUIE_CI_MITIGATION_FORMAT_POWER_N),
+            mitigationPowerPrefixN2 = GetString(LUIE_CI_MITIGATION_FORMAT_POWER_N),
             mitigationDestroyPrefix2 = "%t",
             mitigationDestroyPrefixN2 = "%t",
             mitigationSummonPrefix2 = "%t",
@@ -156,16 +156,16 @@ CombatInfo.Defaults = {
             rootColor = { 1, 165 / 255, 0, 1 },
         },
         formats = {
-            alertBlock = GetString(SI_LUIE_CI_BLOCK_DEFAULT),
-            alertBlockStagger = GetString(SI_LUIE_CI_BLOCKSTAGGER_DEFAULT),
-            alertInterrupt = GetString(SI_LUIE_CI_INTERRUPT_DEFAULT),
-            alertShouldUseCC = GetString(SI_LUIE_CI_SHOULDUSECC_DEFAULT),
-            alertUnmit = GetString(SI_LUIE_CI_UNMIT_DEFAULT),
-            alertDodge = GetString(SI_LUIE_CI_DODGE_DEFAULT),
-            alertAvoid = GetString(SI_LUIE_CI_AVOID_DEFAULT),
-            alertPower = GetString(SI_LUIE_CI_POWER_DEFAULT),
-            alertDestroy = GetString(SI_LUIE_CI_DESTROY_DEFAULT),
-            alertSummon = GetString(SI_LUIE_CI_SUMMON_DEFAULT),
+            alertBlock = GetString(LUIE_CI_BLOCK_DEFAULT),
+            alertBlockStagger = GetString(LUIE_CI_BLOCKSTAGGER_DEFAULT),
+            alertInterrupt = GetString(LUIE_CI_INTERRUPT_DEFAULT),
+            alertShouldUseCC = GetString(LUIE_CI_SHOULDUSECC_DEFAULT),
+            alertUnmit = GetString(LUIE_CI_UNMIT_DEFAULT),
+            alertDodge = GetString(LUIE_CI_DODGE_DEFAULT),
+            alertAvoid = GetString(LUIE_CI_AVOID_DEFAULT),
+            alertPower = GetString(LUIE_CI_POWER_DEFAULT),
+            alertDestroy = GetString(LUIE_CI_DESTROY_DEFAULT),
+            alertSummon = GetString(LUIE_CI_SUMMON_DEFAULT),
         },
         sounds = {
             --[[ Old Sounds here for reference
@@ -850,19 +850,19 @@ function CombatInfo.RegisterCombatInfo()
 end
 
 function CombatInfo.ClearCustomList(list)
-    local listRef = list == CombatInfo.SV.blacklist and GetString(SI_LUIE_CUSTOM_LIST_CASTBAR_BLACKLIST) or ""
+    local listRef = list == CombatInfo.SV.blacklist and GetString(LUIE_CUSTOM_LIST_CASTBAR_BLACKLIST) or ""
     for k, v in pairs(list) do
         list[k] = nil
     end
     CHAT_SYSTEM:Maximize()
     CHAT_SYSTEM.primaryContainer:FadeIn()
-    printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_CLEARED), listRef), true)
+    printToChat(zo_strformat(GetString(LUIE_CUSTOM_LIST_CLEARED), listRef), true)
 end
 
 -- List Handling (Add) for Prominent Auras & Blacklist
 function CombatInfo.AddToCustomList(list, input)
     local id = tonumber(input)
-    local listRef = list == CombatInfo.SV.blacklist and GetString(SI_LUIE_CUSTOM_LIST_CASTBAR_BLACKLIST) or ""
+    local listRef = list == CombatInfo.SV.blacklist and GetString(LUIE_CUSTOM_LIST_CASTBAR_BLACKLIST) or ""
     if id and id > 0 then
         local name = zo_strformat("<<C:1>>", GetAbilityName(id))
         if name ~= nil and name ~= "" then
@@ -870,18 +870,18 @@ function CombatInfo.AddToCustomList(list, input)
             list[id] = true
             CHAT_SYSTEM:Maximize()
             CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_ID), icon, id, name, listRef), true)
+            printToChat(zo_strformat(GetString(LUIE_CUSTOM_LIST_ADDED_ID), icon, id, name, listRef), true)
         else
             CHAT_SYSTEM:Maximize()
             CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_FAILED), input, listRef), true)
+            printToChat(zo_strformat(GetString(LUIE_CUSTOM_LIST_ADDED_FAILED), input, listRef), true)
         end
     else
         if input ~= "" then
             list[input] = true
             CHAT_SYSTEM:Maximize()
             CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_NAME), input, listRef), true)
+            printToChat(zo_strformat(GetString(LUIE_CUSTOM_LIST_ADDED_NAME), input, listRef), true)
         end
     end
 end
@@ -889,20 +889,20 @@ end
 -- List Handling (Remove) for Prominent Auras & Blacklist
 function CombatInfo.RemoveFromCustomList(list, input)
     local id = tonumber(input)
-    local listRef = list == CombatInfo.SV.blacklist and GetString(SI_LUIE_CUSTOM_LIST_CASTBAR_BLACKLIST) or ""
+    local listRef = list == CombatInfo.SV.blacklist and GetString(LUIE_CUSTOM_LIST_CASTBAR_BLACKLIST) or ""
     if id and id > 0 then
         local name = zo_strformat("<<C:1>>", GetAbilityName(id))
         local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
         list[id] = nil
         CHAT_SYSTEM:Maximize()
         CHAT_SYSTEM.primaryContainer:FadeIn()
-        printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_ID), icon, id, name, listRef), true)
+        printToChat(zo_strformat(GetString(LUIE_CUSTOM_LIST_REMOVED_ID), icon, id, name, listRef), true)
     else
         if input ~= "" then
             list[input] = nil
             CHAT_SYSTEM:Maximize()
             CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_NAME), input, listRef), true)
+            printToChat(zo_strformat(GetString(LUIE_CUSTOM_LIST_REMOVED_NAME), input, listRef), true)
         end
     end
 end
@@ -1150,7 +1150,7 @@ function CombatInfo.ApplyFont()
     local function setupFont(fontNameKey, fontStyleKey, fontSizeKey, defaultFontStyle, defaultFontSize)
         local fontName = LUIE.Fonts[CombatInfo.SV[fontNameKey]]
         if not fontName or fontName == "" then
-            printToChat(GetString(SI_LUIE_ERROR_FONT), true)
+            printToChat(GetString(LUIE_ERROR_FONT), true)
             fontName = "$(MEDIUM_FONT)"
         end
         local fontStyle = (CombatInfo.SV[fontStyleKey] and CombatInfo.SV[fontStyleKey] ~= "") and CombatInfo.SV[fontStyleKey] or defaultFontStyle
@@ -1184,7 +1184,7 @@ end
 function CombatInfo.ApplyProcSound(menu)
     local barProcSound = LUIE.Sounds[CombatInfo.SV.ProcSoundName]
     if not barProcSound or barProcSound == "" then
-        printToChat(GetString(SI_LUIE_ERROR_SOUND), true)
+        printToChat(GetString(LUIE_ERROR_SOUND), true)
         barProcSound = "DeathRecap_KillingBlowShown"
     end
 

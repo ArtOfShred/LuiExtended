@@ -72,8 +72,8 @@ end
 local dialogs = {
     [1] = { -- Clear Whitelist
         identifier = "LUIE_CLEAR_PET_WHITELIST",
-        title = GetString(SI_LUIE_LAM_UF_WHITELIST_CLEAR),
-        text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG), GetString(SI_LUIE_CUSTOM_LIST_UF_WHITELIST)),
+        title = GetString(LUIE_LAM_UF_WHITELIST_CLEAR),
+        text = zo_strformat(GetString(LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG), GetString(LUIE_CUSTOM_LIST_UF_WHITELIST)),
         callback = function (dialog)
             UnitFrames.ClearCustomList(UnitFrames.SV.whitelist)
             LUIE_WhitelistUF:UpdateChoices(GenerateCustomList(UnitFrames.SV.whitelist))
@@ -116,8 +116,8 @@ function UnitFrames.CreateSettings()
 
     local panelDataUnitFrames = {
         type = "panel",
-        name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_UF)),
-        displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(SI_LUIE_LAM_UF)),
+        name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(LUIE_LAM_UF)),
+        displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(LUIE_LAM_UF)),
         author = LUIE.author .. "\n",
         version = LUIE.version,
         website = LUIE.website,
@@ -134,14 +134,14 @@ function UnitFrames.CreateSettings()
     -- Unit Frames module description
     optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
         type = "description",
-        text = GetString(SI_LUIE_LAM_UF_DESCRIPTION),
+        text = GetString(LUIE_LAM_UF_DESCRIPTION),
     }
 
     -- ReloadUI Button
     optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
         type = "button",
-        name = GetString(SI_LUIE_LAM_RELOADUI),
-        tooltip = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
+        name = GetString(LUIE_LAM_RELOADUI),
+        tooltip = GetString(LUIE_LAM_RELOADUI_BUTTON),
         func = function ()
             ReloadUI("ingame")
         end,
@@ -151,8 +151,8 @@ function UnitFrames.CreateSettings()
     -- Resolution Options
     optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
         type = "dropdown",
-        name = GetString(SI_LUIE_LAM_UF_RESOLUTION),
-        tooltip = GetString(SI_LUIE_LAM_UF_RESOLUTION_TP),
+        name = GetString(LUIE_LAM_UF_RESOLUTION),
+        tooltip = GetString(LUIE_LAM_UF_RESOLUTION_TP),
         choices = resolutionOptions,
         getFunc = function ()
             return resolutionOptions[Settings.ResolutionOptions]
@@ -171,8 +171,8 @@ function UnitFrames.CreateSettings()
     -- Custom Unit Frames Unlock
     optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMES_UNLOCK),
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_UNLOCK_TP),
+        name = GetString(LUIE_LAM_UF_CFRAMES_UNLOCK),
+        tooltip = GetString(LUIE_LAM_UF_CFRAMES_UNLOCK_TP),
         getFunc = function ()
             return g_FramesMovingEnabled
         end,
@@ -190,8 +190,8 @@ function UnitFrames.CreateSettings()
     -- Custom Unit Frames Reset position
     optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
         type = "button",
-        name = GetString(SI_LUIE_LAM_RESETPOSITION),
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_RESETPOSIT_TP),
+        name = GetString(LUIE_LAM_RESETPOSITION),
+        tooltip = GetString(LUIE_LAM_UF_CFRAMES_RESETPOSIT_TP),
         func = function ()
             UnitFrames.CustomFramesResetPosition(false)
         end,
@@ -201,12 +201,12 @@ function UnitFrames.CreateSettings()
     -- Unit Frames - Default Unit Frames Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_UF_DFRAMES_HEADER),
+        name = GetString(LUIE_LAM_UF_DFRAMES_HEADER),
         controls = {
             {
                 -- Default PLAYER frame
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_DFRAMES_PLAYER),
+                name = GetString(LUIE_LAM_UF_DFRAMES_PLAYER),
                 choices = UnitFrames.GetDefaultFramesOptions("Player"),
                 getFunc = function ()
                     return UnitFrames.GetDefaultFramesSetting("Player")
@@ -218,13 +218,13 @@ function UnitFrames.CreateSettings()
                 disabled = function ()
                     return not LUIE.SV.UnitFrames_Enabled
                 end,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 default = UnitFrames.GetDefaultFramesSetting("Player", true),
             },
             {
                 -- Default TARGET frame
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_DFRAMES_TARGET),
+                name = GetString(LUIE_LAM_UF_DFRAMES_TARGET),
                 choices = UnitFrames.GetDefaultFramesOptions("Target"),
                 getFunc = function ()
                     return UnitFrames.GetDefaultFramesSetting("Target")
@@ -236,13 +236,13 @@ function UnitFrames.CreateSettings()
                 disabled = function ()
                     return not LUIE.SV.UnitFrames_Enabled
                 end,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 default = UnitFrames.GetDefaultFramesSetting("Target", true),
             },
             {
                 -- Default small GROUP frame
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_DFRAMES_GROUPSMALL),
+                name = GetString(LUIE_LAM_UF_DFRAMES_GROUPSMALL),
                 choices = UnitFrames.GetDefaultFramesOptions("Group"),
                 getFunc = function ()
                     return UnitFrames.GetDefaultFramesSetting("Group")
@@ -254,13 +254,13 @@ function UnitFrames.CreateSettings()
                 disabled = function ()
                     return not LUIE.SV.UnitFrames_Enabled
                 end,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 default = UnitFrames.GetDefaultFramesSetting("Group", true),
             },
             {
                 -- Compass Boss Bar
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_DFRAMES_BOSS_COMPASS),
+                name = GetString(LUIE_LAM_UF_DFRAMES_BOSS_COMPASS),
                 choices = UnitFrames.GetDefaultFramesOptions("Boss"),
                 getFunc = function ()
                     return UnitFrames.GetDefaultFramesSetting("Boss")
@@ -273,14 +273,14 @@ function UnitFrames.CreateSettings()
                 disabled = function ()
                     return not LUIE.SV.UnitFrames_Enabled
                 end,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 default = UnitFrames.GetDefaultFramesSetting("Boss", true),
             },
             {
                 -- Reposition default player bars
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_DFRAMES_REPOSIT),
-                tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_REPOSIT_TP),
+                name = GetString(LUIE_LAM_UF_DFRAMES_REPOSIT),
+                tooltip = GetString(LUIE_LAM_UF_DFRAMES_REPOSIT_TP),
                 getFunc = function ()
                     return Settings.RepositionFrames
                 end,
@@ -297,8 +297,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Reposition frames adjust Y Coordinates
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_DFRAMES_VERT),
-                tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_VERT_TP),
+                name = GetString(LUIE_LAM_UF_DFRAMES_VERT),
+                tooltip = GetString(LUIE_LAM_UF_DFRAMES_VERT_TP),
                 min = -150,
                 max = 300,
                 step = 5,
@@ -318,8 +318,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Out-of-Combat bars transparency
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_DFRAMES_OOCTRANS),
-                tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_OOCTRANS_TP),
+                name = GetString(LUIE_LAM_UF_DFRAMES_OOCTRANS),
+                tooltip = GetString(LUIE_LAM_UF_DFRAMES_OOCTRANS_TP),
                 min = 0,
                 max = 100,
                 step = 5,
@@ -338,8 +338,8 @@ function UnitFrames.CreateSettings()
             {
                 -- In-Combat bars transparency
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_DFRAMES_INCTRANS),
-                tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_INCTRANS_TP),
+                name = GetString(LUIE_LAM_UF_DFRAMES_INCTRANS),
+                tooltip = GetString(LUIE_LAM_UF_DFRAMES_INCTRANS_TP),
                 min = 0,
                 max = 100,
                 step = 5,
@@ -358,8 +358,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Format label text
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_DFRAMES_LABEL),
-                tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_LABEL_TP),
+                name = GetString(LUIE_LAM_UF_DFRAMES_LABEL),
+                tooltip = GetString(LUIE_LAM_UF_DFRAMES_LABEL_TP),
                 choices = formatOptions,
                 sort = "name-up",
                 getFunc = function ()
@@ -378,8 +378,8 @@ function UnitFrames.CreateSettings()
                 -- DefaultFrames Font
                 type = "dropdown",
                 scrollable = true,
-                name = GetString(SI_LUIE_LAM_FONT),
-                tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_FONT_TP),
+                name = GetString(LUIE_LAM_FONT),
+                tooltip = GetString(LUIE_LAM_UF_DFRAMES_FONT_TP),
                 choices = FontsList,
                 sort = "name-up",
                 getFunc = function ()
@@ -398,8 +398,8 @@ function UnitFrames.CreateSettings()
             {
                 -- DefaultFrames Font Size
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_FONT_SIZE),
-                tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_FONT_SIZE_TP),
+                name = GetString(LUIE_LAM_FONT_SIZE),
+                tooltip = GetString(LUIE_LAM_UF_DFRAMES_FONT_SIZE_TP),
                 min = 10,
                 max = 30,
                 step = 1,
@@ -419,8 +419,8 @@ function UnitFrames.CreateSettings()
             {
                 -- DefaultFrames Font Style
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_FONT_STYLE),
-                tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_FONT_STYLE_TP),
+                name = GetString(LUIE_LAM_FONT_STYLE),
+                tooltip = GetString(LUIE_LAM_UF_DFRAMES_FONT_STYLE_TP),
                 choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
                 sort = "name-up",
                 getFunc = function ()
@@ -439,7 +439,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Color of text labels
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_DFRAMES_LABEL_COLOR),
+                name = GetString(LUIE_LAM_UF_DFRAMES_LABEL_COLOR),
                 getFunc = function ()
                     return unpack(Settings.DefaultTextColour)
                 end,
@@ -460,8 +460,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Color target name by reaction
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_TARGET_COLOR_REACTION),
-                tooltip = GetString(SI_LUIE_LAM_UF_TARGET_COLOR_REACTION_TP),
+                name = GetString(LUIE_LAM_UF_TARGET_COLOR_REACTION),
+                tooltip = GetString(LUIE_LAM_UF_TARGET_COLOR_REACTION_TP),
                 getFunc = function ()
                     return Settings.TargetColourByReaction
                 end,
@@ -475,8 +475,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Target class icon
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_TARGET_ICON_CLASS),
-                tooltip = GetString(SI_LUIE_LAM_UF_TARGET_ICON_CLASS_TP),
+                name = GetString(LUIE_LAM_UF_TARGET_ICON_CLASS),
+                tooltip = GetString(LUIE_LAM_UF_TARGET_ICON_CLASS_TP),
                 getFunc = function ()
                     return Settings.TargetShowClass
                 end,
@@ -492,8 +492,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Target ignore/friend/guild icon
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_TARGET_ICON_GFI),
-                tooltip = GetString(SI_LUIE_LAM_UF_TARGET_ICON_GFI_TP),
+                name = GetString(LUIE_LAM_UF_TARGET_ICON_GFI),
+                tooltip = GetString(LUIE_LAM_UF_TARGET_ICON_GFI_TP),
                 getFunc = function ()
                     return Settings.TargetShowFriend
                 end,
@@ -512,14 +512,14 @@ function UnitFrames.CreateSettings()
     -- Unit Frames - Custom Unit Frames Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMES_HEADER),
+        name = GetString(LUIE_LAM_UF_CFRAMES_HEADER),
         controls = {
             {
                 -- Custom Unit Frames Font
                 type = "dropdown",
                 scrollable = true,
-                name = GetString(SI_LUIE_LAM_FONT),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FONT_TP),
+                name = GetString(LUIE_LAM_FONT),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMES_FONT_TP),
                 choices = FontsList,
                 sort = "name-up",
                 getFunc = function ()
@@ -538,8 +538,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Font size labels
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_FONT_SIZE_LABELS),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FONT_SIZE_LABELS_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMES_FONT_SIZE_LABELS),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMES_FONT_SIZE_LABELS_TP),
                 min = 10,
                 max = 30,
                 step = 1,
@@ -559,8 +559,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Font size bars
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_FONT_SIZE_BARS),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FONT_SIZE_BARS_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMES_FONT_SIZE_BARS),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMES_FONT_SIZE_BARS_TP),
                 min = 10,
                 max = 30,
                 step = 1,
@@ -580,8 +580,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Font style
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_FONT_STYLE),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FONT_STYLE_TP),
+                name = GetString(LUIE_LAM_FONT_STYLE),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMES_FONT_STYLE_TP),
                 choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
                 sort = "name-up",
                 getFunc = function ()
@@ -601,8 +601,8 @@ function UnitFrames.CreateSettings()
                 -- Custom Unit Frames Texture
                 type = "dropdown",
                 scrollable = true,
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_TEXTURE),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_TEXTURE_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMES_TEXTURE),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMES_TEXTURE_TP),
                 choices = StatusbarTexturesList,
                 sort = "name-up",
                 getFunc = function ()
@@ -621,8 +621,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Separate Shield Bar
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPARATE),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPARATE_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMES_SHIELD_SEPARATE),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMES_SHIELD_SEPARATE_TP),
                 getFunc = function ()
                     return Settings.CustomShieldBarSeparate
                 end,
@@ -631,7 +631,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.CustomShieldBarSeparate,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not LUIE.SV.UnitFrames_Enabled
                 end,
@@ -639,8 +639,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Shield Bar Height
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPARATE_HEIGHT)),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPARATE_HEIGHT_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_UF_CFRAMES_SHIELD_SEPARATE_HEIGHT)),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMES_SHIELD_SEPARATE_HEIGHT_TP),
                 min = 4,
                 max = 12,
                 step = 1,
@@ -654,7 +654,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.CustomShieldBarHeight,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not (LUIE.SV.UnitFrames_Enabled and not Settings.CustomShieldBarFull)
                 end,
@@ -662,8 +662,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Overlay Full Height Shield Bar
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_OVERLAY),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_OVERLAY_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMES_SHIELD_OVERLAY),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMES_SHIELD_OVERLAY_TP),
                 getFunc = function ()
                     return Settings.CustomShieldBarFull
                 end,
@@ -672,7 +672,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.CustomShieldBarFull,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not (LUIE.SV.UnitFrames_Enabled and not Settings.CustomShieldBarSeparate)
                 end,
@@ -680,8 +680,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Shield Transparency
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_ALPHA),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_ALPHA_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMES_SHIELD_ALPHA),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMES_SHIELD_ALPHA_TP),
                 min = 0,
                 max = 100,
                 step = 1,
@@ -701,8 +701,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Smooth Bar Transition
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_SMOOTHBARTRANS),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_SMOOTHBARTRANS_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMES_SMOOTHBARTRANS),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMES_SMOOTHBARTRANS_TP),
                 getFunc = function ()
                     return Settings.CustomSmoothBar
                 end,
@@ -720,12 +720,12 @@ function UnitFrames.CreateSettings()
     -- Unit Frames - Custom Unit Frame Color Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_HEADER),
+        name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_HEADER),
         controls = {
             {
                 -- Custom Unit Frames Health Bar Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_HEALTH),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_HEALTH),
                 getFunc = function ()
                     return unpack(Settings.CustomColourHealth)
                 end,
@@ -746,7 +746,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Shield Bar Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_SHIELD),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_SHIELD),
                 getFunc = function ()
                     return Settings.CustomColourShield[1], Settings.CustomColourShield[2], Settings.CustomColourShield[3]
                 end,
@@ -767,7 +767,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Trauma Bar Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_TRAUMA),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_TRAUMA),
                 getFunc = function ()
                     return Settings.CustomColourTrauma[1], Settings.CustomColourTrauma[2], Settings.CustomColourTrauma[3]
                 end,
@@ -788,7 +788,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Magicka Bar Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_MAGICKA),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_MAGICKA),
                 getFunc = function ()
                     return unpack(Settings.CustomColourMagicka)
                 end,
@@ -809,7 +809,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Stamina Bar Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_STAMINA),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_STAMINA),
                 getFunc = function ()
                     return unpack(Settings.CustomColourStamina)
                 end,
@@ -830,7 +830,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Invulnerable Bar Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_INVULNERABLE),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_INVULNERABLE),
                 getFunc = function ()
                     return Settings.CustomColourInvulnerable[1], Settings.CustomColourInvulnerable[2], Settings.CustomColourInvulnerable[3]
                 end,
@@ -851,7 +851,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames DPS Role Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_DPS),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_DPS),
                 getFunc = function ()
                     return unpack(Settings.CustomColourDPS)
                 end,
@@ -872,7 +872,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Healer Role Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_HEALER),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_HEALER),
                 getFunc = function ()
                     return unpack(Settings.CustomColourHealer)
                 end,
@@ -893,7 +893,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Tank Role Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_TANK),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_TANK),
                 getFunc = function ()
                     return unpack(Settings.CustomColourTank)
                 end,
@@ -914,7 +914,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Dragonknight Role Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_DK),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_DK),
                 getFunc = function ()
                     return unpack(Settings.CustomColourDragonknight)
                 end,
@@ -935,7 +935,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Nightblade Role Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_NB),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_NB),
                 getFunc = function ()
                     return unpack(Settings.CustomColourNightblade)
                 end,
@@ -956,7 +956,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Sorcerer Role Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_SORC),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_SORC),
                 getFunc = function ()
                     return unpack(Settings.CustomColourSorcerer)
                 end,
@@ -977,7 +977,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Templar Role Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_TEMP),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_TEMP),
                 getFunc = function ()
                     return unpack(Settings.CustomColourTemplar)
                 end,
@@ -998,7 +998,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Warden Role Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_WARD),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_WARD),
                 getFunc = function ()
                     return unpack(Settings.CustomColourWarden)
                 end,
@@ -1019,7 +1019,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Necromancer Role Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_NECRO),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_NECRO),
                 getFunc = function ()
                     return unpack(Settings.CustomColourNecromancer)
                 end,
@@ -1040,7 +1040,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Arcanist Role Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_ARCA),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_ARCA),
                 getFunc = function ()
                     return unpack(Settings.CustomColourArcanist)
                 end,
@@ -1062,7 +1062,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Reaction color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_PLAYER),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_PLAYER),
                 getFunc = function ()
                     return unpack(Settings.CustomColourPlayer)
                 end,
@@ -1083,7 +1083,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Reaction color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_FRIENDLY),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_FRIENDLY),
                 getFunc = function ()
                     return unpack(Settings.CustomColourFriendly)
                 end,
@@ -1104,7 +1104,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Reaction color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_COMPANION),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_COMPANION),
                 getFunc = function ()
                     return unpack(Settings.CustomColourCompanion)
                 end,
@@ -1125,7 +1125,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Reaction color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_HOSTILE),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_HOSTILE),
                 getFunc = function ()
                     return unpack(Settings.CustomColourHostile)
                 end,
@@ -1146,7 +1146,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Reaction color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_NEUTRAL),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_NEUTRAL),
                 getFunc = function ()
                     return unpack(Settings.CustomColourNeutral)
                 end,
@@ -1167,7 +1167,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Reaction color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_GUARD),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_GUARD),
                 getFunc = function ()
                     return unpack(Settings.CustomColourGuard)
                 end,
@@ -1188,7 +1188,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Pet Bar Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPET_COLOR),
+                name = GetString(LUIE_LAM_UF_CFRAMESPET_COLOR),
                 getFunc = function ()
                     return unpack(Settings.CustomColourPet)
                 end,
@@ -1210,7 +1210,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Companion Bar Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPET_COLOR),
+                name = GetString(LUIE_LAM_UF_CFRAMESPET_COLOR),
                 getFunc = function ()
                     return unpack(Settings.CustomColourCompanionFrame)
                 end,
@@ -1234,13 +1234,13 @@ function UnitFrames.CreateSettings()
     -- Unit Frames - Custom Unit Frames (Player & Target) Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_HEADER),
+        name = GetString(LUIE_LAM_UF_CFRAMESPT_HEADER),
         controls = {
             {
                 -- Enable LUIE PLAYER frame
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_PLAYER),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_PLAYER_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_ENABLE_PLAYER),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_ENABLE_PLAYER_TP),
                 getFunc = function ()
                     return Settings.CustomFramesPlayer
                 end,
@@ -1249,7 +1249,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.CustomFramesPlayer,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not LUIE.SV.UnitFrames_Enabled
                 end,
@@ -1257,8 +1257,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Enable LUIE Target frame
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_TARGET),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_TARGET_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_ENABLE_TARGET),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_ENABLE_TARGET_TP),
                 getFunc = function ()
                     return Settings.CustomFramesTarget
                 end,
@@ -1267,7 +1267,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.CustomFramesTarget,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not LUIE.SV.UnitFrames_Enabled
                 end,
@@ -1275,8 +1275,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Player Name Display Method (Player)
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_PLAYER),
-                tooltip = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_PLAYER_TP),
+                name = GetString(LUIE_LAM_UF_COMMON_NAMEDISPLAY_PLAYER),
+                tooltip = GetString(LUIE_LAM_UF_COMMON_NAMEDISPLAY_PLAYER_TP),
                 choices = nameDisplayOptions,
                 sort = "name-up",
                 getFunc = function ()
@@ -1295,8 +1295,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Player Name Display Method (Target)
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_TARGET),
-                tooltip = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_TARGET_TP),
+                name = GetString(LUIE_LAM_UF_COMMON_NAMEDISPLAY_TARGET),
+                tooltip = GetString(LUIE_LAM_UF_COMMON_NAMEDISPLAY_TARGET_TP),
                 choices = nameDisplayOptions,
                 sort = "name-up",
                 getFunc = function ()
@@ -1315,8 +1315,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames format left label
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_LEFT),
-                tooltip = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_LEFT_TP),
+                name = GetString(LUIE_LAM_UF_SHARED_LABEL_LEFT),
+                tooltip = GetString(LUIE_LAM_UF_SHARED_LABEL_LEFT_TP),
                 choices = formatOptions,
                 sort = "name-up",
                 getFunc = function ()
@@ -1336,8 +1336,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames format right label
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_RIGHT),
-                tooltip = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_RIGHT_TP),
+                name = GetString(LUIE_LAM_UF_SHARED_LABEL_RIGHT),
+                tooltip = GetString(LUIE_LAM_UF_SHARED_LABEL_RIGHT_TP),
                 choices = formatOptions,
                 sort = "name-up",
                 getFunc = function ()
@@ -1357,7 +1357,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Player Bars Width
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_WIDTH),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_WIDTH),
                 min = 200,
                 max = 500,
                 step = 5,
@@ -1377,7 +1377,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Player Health Bar Height
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_HP_HIGHT),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_HP_HIGHT),
                 min = 20,
                 max = 70,
                 step = 1,
@@ -1397,7 +1397,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Player Magicka Bar Height
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_HIGHT),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_HIGHT),
                 min = 20,
                 max = 70,
                 step = 1,
@@ -1417,7 +1417,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Player Stamina Bar Height
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_HIGHT),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_HIGHT),
                 min = 20,
                 max = 70,
                 step = 1,
@@ -1437,8 +1437,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Out-of-Combat frame opacity
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_OOCPACITY),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_OOCPACITY_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_OOCPACITY),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_OOCPACITY_TP),
                 min = 0,
                 max = 100,
                 step = 5,
@@ -1459,8 +1459,8 @@ function UnitFrames.CreateSettings()
             {
                 -- In-Combat frame opacity
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_ICPACITY),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_ICPACITY_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_ICPACITY),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_ICPACITY_TP),
                 min = 0,
                 max = 100,
                 step = 5,
@@ -1481,8 +1481,8 @@ function UnitFrames.CreateSettings()
             {
                 -- HIDE BUFFS OOC - PLAYER
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_BuFFS_PLAYER),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_BuFFS_PLAYER_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_BuFFS_PLAYER),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_BuFFS_PLAYER_TP),
                 getFunc = function ()
                     return Settings.HideBuffsPlayerOoc
                 end,
@@ -1499,8 +1499,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Display self name on Player Frame
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_NAMESELF),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_NAMESELF_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_NAMESELF),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_NAMESELF_TP),
                 getFunc = function ()
                     return Settings.PlayerEnableYourname
                 end,
@@ -1517,8 +1517,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Display Mount/Siege/Werewolf Bar
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_MOUNTSIEGEWWBAR),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_MOUNTSIEGEWWBAR_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_MOUNTSIEGEWWBAR),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_MOUNTSIEGEWWBAR_TP),
                 getFunc = function ()
                     return Settings.PlayerEnableAltbarMSW
                 end,
@@ -1536,8 +1536,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Display XP/Champion XP Bar
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_XPCPBAR),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_XPCPBAR_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_XPCPBAR),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_XPCPBAR_TP),
                 getFunc = function ()
                     return Settings.PlayerEnableAltbarXP
                 end,
@@ -1555,8 +1555,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Champion XP Bar Point-Type Color
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR)),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR)),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR_TP),
                 getFunc = function ()
                     return Settings.PlayerChampionColour
                 end,
@@ -1574,8 +1574,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Low Health Warning
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_LOWRESOURCE_HEALTH),
-                tooltip = GetString(SI_LUIE_LAM_UF_LOWRESOURCE_HEALTH_TP),
+                name = GetString(LUIE_LAM_UF_LOWRESOURCE_HEALTH),
+                tooltip = GetString(LUIE_LAM_UF_LOWRESOURCE_HEALTH_TP),
                 min = 0,
                 max = 50,
                 step = 1,
@@ -1595,8 +1595,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Low Magicka Warning
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_LOWRESOURCE_MAGICKA),
-                tooltip = GetString(SI_LUIE_LAM_UF_LOWRESOURCE_MAGICKA_TP),
+                name = GetString(LUIE_LAM_UF_LOWRESOURCE_MAGICKA),
+                tooltip = GetString(LUIE_LAM_UF_LOWRESOURCE_MAGICKA_TP),
                 min = 0,
                 max = 50,
                 step = 1,
@@ -1616,8 +1616,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Low Stamina Warning
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_LOWRESOURCE_STAMINA),
-                tooltip = GetString(SI_LUIE_LAM_UF_LOWRESOURCE_STAMINA_TP),
+                name = GetString(LUIE_LAM_UF_LOWRESOURCE_STAMINA),
+                tooltip = GetString(LUIE_LAM_UF_LOWRESOURCE_STAMINA_TP),
                 min = 0,
                 max = 50,
                 step = 1,
@@ -1637,7 +1637,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Target Bars Width
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGET_WIDTH),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_TARGET_WIDTH),
                 min = 200,
                 max = 500,
                 step = 5,
@@ -1657,7 +1657,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Target Bars Height
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGET_HEIGHT),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_TARGET_HEIGHT),
                 min = 20,
                 max = 70,
                 step = 1,
@@ -1677,8 +1677,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Out-of-Combat frame opacity
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGET_OOCPACITY),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGET_OOCPACITY_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_TARGET_OOCPACITY),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_TARGET_OOCPACITY_TP),
                 min = 0,
                 max = 100,
                 step = 5,
@@ -1699,8 +1699,8 @@ function UnitFrames.CreateSettings()
             {
                 -- In-Combat frame opacity
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGET_ICPACITY),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGET_ICPACITY_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_TARGET_ICPACITY),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_TARGET_ICPACITY_TP),
                 min = 0,
                 max = 100,
                 step = 5,
@@ -1721,8 +1721,8 @@ function UnitFrames.CreateSettings()
             {
                 -- HIDE BUFFS OOC - TARGET
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_BUFFS_TARGET),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_BUFFS_TARGET_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_BUFFS_TARGET),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_BUFFS_TARGET_TP),
                 getFunc = function ()
                     return Settings.HideBuffsTargetOoc
                 end,
@@ -1739,8 +1739,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Color Target by Reaction
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_REACTION_TARGET),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_REACTION_TARGET_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_REACTION_TARGET),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_REACTION_TARGET_TP),
                 getFunc = function ()
                     return Settings.FrameColorReaction
                 end,
@@ -1757,8 +1757,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Color Target by Class
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_CLASS_TARGET),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_CLASS_TARGET_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_CLASS_TARGET),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_CLASS_TARGET_TP),
                 getFunc = function ()
                     return Settings.FrameColorClass
                 end,
@@ -1775,8 +1775,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Display Target Class Label
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGET_CLASSLABEL),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGET_CLASSLABEL_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_TARGET_CLASSLABEL),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_TARGET_CLASSLABEL_TP),
                 getFunc = function ()
                     return Settings.TargetEnableClass
                 end,
@@ -1793,8 +1793,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Execute Health % Threshold
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_EXETHRESHOLD),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_EXETHRESHOLD_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_EXETHRESHOLD),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_EXETHRESHOLD_TP),
                 min = 0,
                 max = 50,
                 step = 5,
@@ -1814,8 +1814,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Display Skull Execute Texture
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_EXETEXTURE),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_EXETEXTURE_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_EXETEXTURE),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_EXETEXTURE_TP),
                 getFunc = function ()
                     return Settings.TargetEnableSkull
                 end,
@@ -1831,8 +1831,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Display title on target frame
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TITLE),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TITLE_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_TITLE),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_TITLE_TP),
                 getFunc = function ()
                     return Settings.TargetEnableTitle
                 end,
@@ -1849,8 +1849,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Display rank name on target frame
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_RANK),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_RANK_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_RANK),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_RANK_TP),
                 getFunc = function ()
                     return Settings.TargetEnableRank
                 end,
@@ -1867,8 +1867,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Prioritize Title or AvA Rank
                 type = "dropdown",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_RANK_TITLE_PRIORITY)),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_RANK_TITLE_PRIORITY_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_UF_CFRAMESPT_RANK_TITLE_PRIORITY)),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_RANK_TITLE_PRIORITY_TP),
                 choices = { "AVA Rank", "Title" },
                 getFunc = function ()
                     return Settings.TargetTitlePriority
@@ -1886,8 +1886,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Display rank icon on target frame
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_RANKICON),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_RANKICON_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_RANKICON),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_RANKICON_TP),
                 getFunc = function ()
                     return Settings.TargetEnableRankIcon
                 end,
@@ -1904,8 +1904,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Display Armor stat change
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_UF_SHARED_ARMOR), GetString(SI_LUIE_LAM_UF_SHARED_PT)),
-                tooltip = GetString(SI_LUIE_LAM_UF_SHARED_ARMOR_TP),
+                name = zo_strformat(GetString(LUIE_LAM_UF_SHARED_ARMOR), GetString(LUIE_LAM_UF_SHARED_PT)),
+                tooltip = GetString(LUIE_LAM_UF_SHARED_ARMOR_TP),
                 getFunc = function ()
                     return Settings.PlayerEnableArmor
                 end,
@@ -1914,7 +1914,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.PlayerEnableArmor,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not (LUIE.SV.UnitFrames_Enabled and (Settings.CustomFramesPlayer or Settings.CustomFramesTarget))
                 end,
@@ -1922,8 +1922,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Display Power stat change
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_UF_SHARED_POWER), GetString(SI_LUIE_LAM_UF_SHARED_PT)),
-                tooltip = GetString(SI_LUIE_LAM_UF_SHARED_POWER_TP),
+                name = zo_strformat(GetString(LUIE_LAM_UF_SHARED_POWER), GetString(LUIE_LAM_UF_SHARED_PT)),
+                tooltip = GetString(LUIE_LAM_UF_SHARED_POWER_TP),
                 getFunc = function ()
                     return Settings.PlayerEnablePower
                 end,
@@ -1932,7 +1932,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.PlayerEnablePower,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not (LUIE.SV.UnitFrames_Enabled and (Settings.CustomFramesPlayer or Settings.CustomFramesTarget))
                 end,
@@ -1940,8 +1940,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Display HoT / DoT Animations
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_UF_SHARED_REGEN), GetString(SI_LUIE_LAM_UF_SHARED_PT)),
-                tooltip = GetString(SI_LUIE_LAM_UF_SHARED_REGEN_TP),
+                name = zo_strformat(GetString(LUIE_LAM_UF_SHARED_REGEN), GetString(LUIE_LAM_UF_SHARED_PT)),
+                tooltip = GetString(LUIE_LAM_UF_SHARED_REGEN_TP),
                 getFunc = function ()
                     return Settings.PlayerEnableRegen
                 end,
@@ -1950,7 +1950,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.PlayerEnableRegen,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not LUIE.SV.UnitFrames_Enabled
                 end,
@@ -1958,8 +1958,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Treat Missing Power as In-Combat
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_MISSPOWERCOMBAT),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_MISSPOWERCOMBAT_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_MISSPOWERCOMBAT),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_MISSPOWERCOMBAT_TP),
                 getFunc = function ()
                     return Settings.CustomOocAlphaPower
                 end,
@@ -1979,13 +1979,13 @@ function UnitFrames.CreateSettings()
     -- Unit Frames -- Custom Unit Frames Bar Alignment
     optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_HEADER),
+        name = GetString(LUIE_LAM_UF_CFRAMES_ALIGN_HEADER),
         controls = {
             {
                 -- Alignment Player Health Bar
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_PLAYER_HEALTH),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_PLAYER_HEALTH_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMES_ALIGN_PLAYER_HEALTH),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMES_ALIGN_PLAYER_HEALTH_TP),
                 choices = alignmentOptions,
                 getFunc = function ()
                     return alignmentOptions[Settings.BarAlignPlayerHealth]
@@ -2003,8 +2003,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Alignment Player Magicka Bar
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_PLAYER_MAGICKA),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_PLAYER_MAGICKA_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMES_ALIGN_PLAYER_MAGICKA),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMES_ALIGN_PLAYER_MAGICKA_TP),
                 choices = alignmentOptions,
                 getFunc = function ()
                     return alignmentOptions[Settings.BarAlignPlayerMagicka]
@@ -2022,8 +2022,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Alignment Player Stamina Bar
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_PLAYER_STAMINA),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_PLAYER_STAMINA_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMES_ALIGN_PLAYER_STAMINA),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMES_ALIGN_PLAYER_STAMINA_TP),
                 choices = alignmentOptions,
                 getFunc = function ()
                     return alignmentOptions[Settings.BarAlignPlayerStamina]
@@ -2041,8 +2041,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Alignment Target Health Bar
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_TARGET),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_TARGET_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMES_ALIGN_TARGET),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMES_ALIGN_TARGET_TP),
                 choices = alignmentOptions,
                 getFunc = function ()
                     return alignmentOptions[Settings.BarAlignTarget]
@@ -2061,8 +2061,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Center Label for Player Bars
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_LABEL_PLAYER),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_LABEL_PLAYER_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMES_ALIGN_LABEL_PLAYER),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMES_ALIGN_LABEL_PLAYER_TP),
                 getFunc = function ()
                     return Settings.BarAlignCenterLabelPlayer
                 end,
@@ -2080,8 +2080,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Center Label for Target Bar
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_LABEL_TARGET),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_LABEL_TARGET_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMES_ALIGN_LABEL_TARGET),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMES_ALIGN_LABEL_TARGET_TP),
                 getFunc = function ()
                     return Settings.BarAlignCenterLabelTarget
                 end,
@@ -2099,8 +2099,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames format left label
                 type = "dropdown",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_LABEL_CENTER_FORM)),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_ALIGN_LABEL_CENTER_FORM),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_UF_CFRAMES_ALIGN_LABEL_CENTER_FORM)),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMES_ALIGN_LABEL_CENTER_FORM),
                 choices = formatOptions,
                 getFunc = function ()
                     return Settings.CustomFormatCenterLabel
@@ -2122,13 +2122,13 @@ function UnitFrames.CreateSettings()
     -- Unit Frames - Additional Player Frame Display Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_OPTIONS_HEADER),
+        name = GetString(LUIE_LAM_UF_CFRAMESPT_OPTIONS_HEADER),
         controls = {
             {
                 -- Player Frames Display Method
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_METHOD),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_METHOD_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_METHOD),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_METHOD_TP),
                 choices = playerFrameOptions,
                 getFunc = function ()
                     return playerFrameOptions[Settings.PlayerFrameOptions]
@@ -2138,7 +2138,7 @@ function UnitFrames.CreateSettings()
                     UnitFrames.MenuUpdatePlayerFrameOptions(Settings.PlayerFrameOptions)
                 end,
                 width = "full",
-                warning = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_METHOD_WARN),
+                warning = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_METHOD_WARN),
                 default = Defaults.PlayerFrameOptions,
                 disabled = function ()
                     return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer)
@@ -2147,8 +2147,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Position Adjust Horizontal
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_S_HORIZ_ADJUST)),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_S_HORIZ_ADJUST_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_UF_CFRAMESPT_S_HORIZ_ADJUST)),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_S_HORIZ_ADJUST_TP),
                 min = 0,
                 max = 500,
                 step = 5,
@@ -2168,8 +2168,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Position Adjust Vertical
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_S_VERT_ADJUST)),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_S_VERT_ADJUST_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_UF_CFRAMESPT_S_VERT_ADJUST)),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_S_VERT_ADJUST_TP),
                 min = -250,
                 max = 250,
                 step = 5,
@@ -2189,8 +2189,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Position Adjust
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_M_HORIZ_ADJUST)),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_M_HORIZ_ADJUST_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_UF_CFRAMESPT_M_HORIZ_ADJUST)),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_M_HORIZ_ADJUST_TP),
                 min = 0,
                 max = 500,
                 step = 5,
@@ -2210,8 +2210,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Position Adjust
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_M_VERT_ADJUST)),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_M_VERT_ADJUST_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_UF_CFRAMESPT_M_VERT_ADJUST)),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_M_VERT_ADJUST_TP),
                 min = -250,
                 max = 250,
                 step = 5,
@@ -2231,8 +2231,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Spacing between Player Bars
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_SPACING)),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_SPACING_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_SPACING)),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_SPACING_TP),
                 min = -1,
                 max = 4,
                 step = 1,
@@ -2252,8 +2252,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Hide Player Health Bar Label
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_HP_NOLABEL),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_HP_NOLABEL_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_HP_NOLABEL),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_HP_NOLABEL_TP),
                 getFunc = function ()
                     return Settings.HideLabelHealth
                 end,
@@ -2263,7 +2263,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.HideLabelHealth,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer)
                 end,
@@ -2271,8 +2271,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Hide Player Health Bar
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_HP_NOBAR)),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_HP_NOBAR_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_HP_NOBAR)),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_HP_NOBAR_TP),
                 getFunc = function ()
                     return Settings.HideBarHealth
                 end,
@@ -2281,7 +2281,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.HideBarHealth,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer and Settings.HideLabelHealth)
                 end,
@@ -2289,8 +2289,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Hide Player Magicka Bar Label
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL_TP),
                 getFunc = function ()
                     return Settings.HideLabelMagicka
                 end,
@@ -2300,7 +2300,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.HideLabelMagicka,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer)
                 end,
@@ -2308,8 +2308,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Hide Player Magicka Bar
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR)),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR)),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR_TP),
                 getFunc = function ()
                     return Settings.HideBarMagicka
                 end,
@@ -2318,7 +2318,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.HideBarMagicka,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer and Settings.HideLabelMagicka)
                 end,
@@ -2326,8 +2326,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Hide Player Stamina Bar Label
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOLABEL),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOLABEL_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOLABEL),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOLABEL_TP),
                 getFunc = function ()
                     return Settings.HideLabelStamina
                 end,
@@ -2337,7 +2337,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.HideLabelStamina,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer)
                 end,
@@ -2345,8 +2345,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Hide Player Stamina Bar
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR)),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR)),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR_TP),
                 getFunc = function ()
                     return Settings.HideBarStamina
                 end,
@@ -2355,7 +2355,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.HideBarStamina,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer and Settings.HideLabelStamina)
                 end,
@@ -2363,8 +2363,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Reverse Player Magicka and Stamina
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_REVERSE_RES),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_REVERSE_RES_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_REVERSE_RES),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPT_PLAYER_REVERSE_RES_TP),
                 getFunc = function ()
                     return Settings.ReverseResourceBars
                 end,
@@ -2373,7 +2373,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.ReverseResourceBars,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesPlayer)
                 end,
@@ -2384,13 +2384,13 @@ function UnitFrames.CreateSettings()
     -- Unit Frames - Custom Unit Frames (Group) Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMESG_HEADER),
+        name = GetString(LUIE_LAM_UF_CFRAMESG_HEADER),
         controls = {
             {
                 -- Enable Group Frames
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESG_LUIEFRAMESENABLE),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESG_LUIEFRAMESENABLE_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESG_LUIEFRAMESENABLE),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESG_LUIEFRAMESENABLE_TP),
                 getFunc = function ()
                     return Settings.CustomFramesGroup
                 end,
@@ -2399,7 +2399,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.CustomFramesGroup,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not LUIE.SV.UnitFrames_Enabled
                 end,
@@ -2407,8 +2407,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Player Name Display Method (Group/Raid)
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_GROUPRAID),
-                tooltip = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_GROUPRAID_TP),
+                name = GetString(LUIE_LAM_UF_COMMON_NAMEDISPLAY_GROUPRAID),
+                tooltip = GetString(LUIE_LAM_UF_COMMON_NAMEDISPLAY_GROUPRAID_TP),
                 choices = nameDisplayOptions,
                 getFunc = function ()
                     return nameDisplayOptions[Settings.DisplayOptionsGroupRaid]
@@ -2426,8 +2426,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames format left label
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_LEFT),
-                tooltip = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_LEFT_TP),
+                name = GetString(LUIE_LAM_UF_SHARED_LABEL_LEFT),
+                tooltip = GetString(LUIE_LAM_UF_SHARED_LABEL_LEFT_TP),
                 choices = formatOptions,
                 getFunc = function ()
                     return Settings.CustomFormatOneGroup
@@ -2446,8 +2446,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames format right label
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_RIGHT),
-                tooltip = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_RIGHT_TP),
+                name = GetString(LUIE_LAM_UF_SHARED_LABEL_RIGHT),
+                tooltip = GetString(LUIE_LAM_UF_SHARED_LABEL_RIGHT_TP),
                 choices = formatOptions,
                 getFunc = function ()
                     return Settings.CustomFormatTwoGroup
@@ -2466,7 +2466,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Group Bars Width
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESG_WIDTH),
+                name = GetString(LUIE_LAM_UF_CFRAMESG_WIDTH),
                 min = 100,
                 max = 400,
                 step = 5,
@@ -2486,7 +2486,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Group Bars Height
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESG_HEIGHT),
+                name = GetString(LUIE_LAM_UF_CFRAMESG_HEIGHT),
                 min = 20,
                 max = 70,
                 step = 1,
@@ -2506,8 +2506,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Group / Raid ALPHA
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_SHARED_GROUPRAID_OPACITY),
-                tooltip = GetString(SI_LUIE_LAM_UF_SHARED_GROUPRAID_OPACITY_TP),
+                name = GetString(LUIE_LAM_UF_SHARED_GROUPRAID_OPACITY),
+                tooltip = GetString(LUIE_LAM_UF_SHARED_GROUPRAID_OPACITY_TP),
                 min = 0,
                 max = 100,
                 step = 5,
@@ -2528,7 +2528,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Spacing between Group Bars
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESG_SPACING),
+                name = GetString(LUIE_LAM_UF_CFRAMESG_SPACING),
                 min = 20,
                 max = 80,
                 step = 2,
@@ -2548,8 +2548,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Include Player in Group Frame
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESG_INCPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESG_INCPLAYER_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESG_INCPLAYER),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESG_INCPLAYER_TP),
                 getFunc = function ()
                     return not Settings.GroupExcludePlayer
                 end,
@@ -2568,8 +2568,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Show Role Icon on Group Frames
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESG_ROLEICON),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESG_ROLEICON_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESG_ROLEICON),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESG_ROLEICON_TP),
                 getFunc = function ()
                     return Settings.RoleIconSmallGroup
                 end,
@@ -2586,8 +2586,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Group Color Class
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYCLASS),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYCLASS_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYCLASS),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYCLASS_TP),
                 getFunc = function ()
                     return Settings.ColorClassGroup
                 end,
@@ -2604,8 +2604,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Group Color Player Role
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYROLE),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYROLE_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYROLE),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYROLE_TP),
                 getFunc = function ()
                     return Settings.ColorRoleGroup
                 end,
@@ -2622,8 +2622,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Display Armor stat change
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_UF_SHARED_ARMOR), GetString(SI_LUIE_LAM_UF_SHARED_GROUP)),
-                tooltip = GetString(SI_LUIE_LAM_UF_SHARED_ARMOR_TP),
+                name = zo_strformat(GetString(LUIE_LAM_UF_SHARED_ARMOR), GetString(LUIE_LAM_UF_SHARED_GROUP)),
+                tooltip = GetString(LUIE_LAM_UF_SHARED_ARMOR_TP),
                 getFunc = function ()
                     return Settings.GroupEnableArmor
                 end,
@@ -2632,7 +2632,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.GroupEnableArmor,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesGroup)
                 end,
@@ -2640,8 +2640,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Display Power stat change
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_UF_SHARED_POWER), GetString(SI_LUIE_LAM_UF_SHARED_GROUP)),
-                tooltip = GetString(SI_LUIE_LAM_UF_SHARED_POWER_TP),
+                name = zo_strformat(GetString(LUIE_LAM_UF_SHARED_POWER), GetString(LUIE_LAM_UF_SHARED_GROUP)),
+                tooltip = GetString(LUIE_LAM_UF_SHARED_POWER_TP),
                 getFunc = function ()
                     return Settings.GroupEnablePower
                 end,
@@ -2650,7 +2650,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.GroupEnablePower,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesGroup)
                 end,
@@ -2658,8 +2658,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Display Regen Arrows
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_UF_SHARED_REGEN), GetString(SI_LUIE_LAM_UF_SHARED_GROUP)),
-                tooltip = GetString(SI_LUIE_LAM_UF_SHARED_REGEN_TP),
+                name = zo_strformat(GetString(LUIE_LAM_UF_SHARED_REGEN), GetString(LUIE_LAM_UF_SHARED_GROUP)),
+                tooltip = GetString(LUIE_LAM_UF_SHARED_REGEN_TP),
                 getFunc = function ()
                     return Settings.GroupEnableRegen
                 end,
@@ -2668,7 +2668,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.GroupEnableRegen,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesGroup)
                 end,
@@ -2679,13 +2679,13 @@ function UnitFrames.CreateSettings()
     -- Unit Frames - Custom Unit Frames (Raid) Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMESR_HEADER),
+        name = GetString(LUIE_LAM_UF_CFRAMESR_HEADER),
         controls = {
             {
                 -- Enable Raid Frames
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESR_LUIEFRAMESENABLE),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_LUIEFRAMESENABLE_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESR_LUIEFRAMESENABLE),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESR_LUIEFRAMESENABLE_TP),
                 getFunc = function ()
                     return Settings.CustomFramesRaid
                 end,
@@ -2694,7 +2694,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.CustomFramesRaid,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not LUIE.SV.UnitFrames_Enabled
                 end,
@@ -2702,8 +2702,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Player Name Display Method (Group/Raid)
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_GROUPRAID),
-                tooltip = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_GROUPRAID_TP),
+                name = GetString(LUIE_LAM_UF_COMMON_NAMEDISPLAY_GROUPRAID),
+                tooltip = GetString(LUIE_LAM_UF_COMMON_NAMEDISPLAY_GROUPRAID_TP),
                 choices = nameDisplayOptions,
                 getFunc = function ()
                     return nameDisplayOptions[Settings.DisplayOptionsGroupRaid]
@@ -2721,8 +2721,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Raid HP Bar Format
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_SHARED_LABEL),
-                tooltip = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_TP),
+                name = GetString(LUIE_LAM_UF_SHARED_LABEL),
+                tooltip = GetString(LUIE_LAM_UF_SHARED_LABEL_TP),
                 choices = formatOptions,
                 getFunc = function ()
                     return Settings.CustomFormatRaid
@@ -2741,7 +2741,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Raid Bars Width
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESR_WIDTH),
+                name = GetString(LUIE_LAM_UF_CFRAMESR_WIDTH),
                 min = 100,
                 max = 500,
                 step = 5,
@@ -2761,7 +2761,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Raid Bars Height
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESR_HEIGHT),
+                name = GetString(LUIE_LAM_UF_CFRAMESR_HEIGHT),
                 min = 20,
                 max = 70,
                 step = 1,
@@ -2781,8 +2781,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Group / Raid ALPHA
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_SHARED_GROUPRAID_OPACITY),
-                tooltip = GetString(SI_LUIE_LAM_UF_SHARED_GROUPRAID_OPACITY_TP),
+                name = GetString(LUIE_LAM_UF_SHARED_GROUPRAID_OPACITY),
+                tooltip = GetString(LUIE_LAM_UF_SHARED_GROUPRAID_OPACITY_TP),
                 min = 0,
                 max = 100,
                 step = 5,
@@ -2803,8 +2803,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Raid Frame Layout
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESR_LAYOUT),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_LAYOUT_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESR_LAYOUT),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESR_LAYOUT_TP),
                 choices = { "1 x 12", "2 x 6", "3 x 4", "6 x 2" },
                 -- sort = "name-up",
                 getFunc = function ()
@@ -2823,8 +2823,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Add Spacer for every 4 members
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESR_SPACER),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_SPACER_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESR_SPACER),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESR_SPACER_TP),
                 getFunc = function ()
                     return Settings.RaidSpacers
                 end,
@@ -2841,8 +2841,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Raid Name Clip
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESR_NAMECLIP),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_NAMECLIP_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESR_NAMECLIP),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESR_NAMECLIP_TP),
                 min = 0,
                 max = 200,
                 step = 1,
@@ -2862,8 +2862,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Class / Role Icon on Raid Frames Setting
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESR_ROLEICON),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_ROLEICON_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESR_ROLEICON),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESR_ROLEICON_TP),
                 choices = raidIconOptions,
                 getFunc = function ()
                     return raidIconOptions[Settings.RaidIconOptions]
@@ -2881,8 +2881,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Raid Color Player Class
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYCLASS),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYCLASS_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYCLASS),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYCLASS_TP),
                 getFunc = function ()
                     return Settings.ColorClassRaid
                 end,
@@ -2899,8 +2899,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Raid Color Player Role
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYROLE),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYROLE_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYROLE),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYROLE_TP),
                 getFunc = function ()
                     return Settings.ColorRoleRaid
                 end,
@@ -2917,8 +2917,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Custom Unit Frames Raid Sort by role
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESSORT),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESSORT_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESSORT),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESSORT_TP),
                 getFunc = function ()
                     return Settings.SortRoleRaid
                 end,
@@ -2935,8 +2935,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Display Armor stat change
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_UF_SHARED_ARMOR), GetString(SI_LUIE_LAM_UF_SHARED_RAID)),
-                tooltip = GetString(SI_LUIE_LAM_UF_SHARED_ARMOR_TP),
+                name = zo_strformat(GetString(LUIE_LAM_UF_SHARED_ARMOR), GetString(LUIE_LAM_UF_SHARED_RAID)),
+                tooltip = GetString(LUIE_LAM_UF_SHARED_ARMOR_TP),
                 getFunc = function ()
                     return Settings.RaidEnableArmor
                 end,
@@ -2945,7 +2945,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.RaidEnableArmor,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesRaid)
                 end,
@@ -2953,8 +2953,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Display Power stat change
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_UF_SHARED_POWER), GetString(SI_LUIE_LAM_UF_SHARED_RAID)),
-                tooltip = GetString(SI_LUIE_LAM_UF_SHARED_POWER_TP),
+                name = zo_strformat(GetString(LUIE_LAM_UF_SHARED_POWER), GetString(LUIE_LAM_UF_SHARED_RAID)),
+                tooltip = GetString(LUIE_LAM_UF_SHARED_POWER_TP),
                 getFunc = function ()
                     return Settings.RaidEnablePower
                 end,
@@ -2963,7 +2963,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.RaidEnablePower,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesRaid)
                 end,
@@ -2971,8 +2971,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Display Regen Arrows
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_UF_SHARED_REGEN), GetString(SI_LUIE_LAM_UF_SHARED_RAID)),
-                tooltip = GetString(SI_LUIE_LAM_UF_SHARED_REGEN_TP),
+                name = zo_strformat(GetString(LUIE_LAM_UF_SHARED_REGEN), GetString(LUIE_LAM_UF_SHARED_RAID)),
+                tooltip = GetString(LUIE_LAM_UF_SHARED_REGEN_TP),
                 getFunc = function ()
                     return Settings.RaidEnableRegen
                 end,
@@ -2981,7 +2981,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.RaidEnableRegen,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesRaid)
                 end,
@@ -2992,13 +2992,13 @@ function UnitFrames.CreateSettings()
     -- Unit Frames - Custom Unit Frames (Companion) Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_HEADER),
+        name = GetString(LUIE_LAM_UF_CFRAMESCOMPANION_HEADER),
         controls = {
             {
                 -- Enable Companion Frames
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_ENABLE),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_ENABLE_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESCOMPANION_ENABLE),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESCOMPANION_ENABLE_TP),
                 getFunc = function ()
                     return Settings.CustomFramesCompanion
                 end,
@@ -3007,7 +3007,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.CustomFramesCompanion,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not LUIE.SV.UnitFrames_Enabled
                 end,
@@ -3015,8 +3015,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Companion HP Bar Format
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_SHARED_LABEL),
-                tooltip = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_TP),
+                name = GetString(LUIE_LAM_UF_SHARED_LABEL),
+                tooltip = GetString(LUIE_LAM_UF_SHARED_LABEL_TP),
                 choices = formatOptions,
                 getFunc = function ()
                     return Settings.CustomFormatCompanion
@@ -3035,7 +3035,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Companion Bars Width
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_WIDTH),
+                name = GetString(LUIE_LAM_UF_CFRAMESCOMPANION_WIDTH),
                 min = 100,
                 max = 500,
                 step = 5,
@@ -3055,7 +3055,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Companion Bars Height
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_HEIGHT),
+                name = GetString(LUIE_LAM_UF_CFRAMESCOMPANION_HEIGHT),
                 min = 20,
                 max = 70,
                 step = 1,
@@ -3075,8 +3075,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Companion - Out-of-Combat frame opacity
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_OOCPACITY),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_OOCPACITY_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESCOMPANION_OOCPACITY),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESCOMPANION_OOCPACITY_TP),
                 min = 0,
                 max = 100,
                 step = 5,
@@ -3097,8 +3097,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Companion - In-Combat frame opacity
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_ICPACITY),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_ICPACITY_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESCOMPANION_ICPACITY),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESCOMPANION_ICPACITY_TP),
                 min = 0,
                 max = 100,
                 step = 5,
@@ -3119,8 +3119,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Companion Name Clip
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_NAMECLIP),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_NAMECLIP_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESCOMPANION_NAMECLIP),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESCOMPANION_NAMECLIP_TP),
                 min = 0,
                 max = 200,
                 step = 1,
@@ -3140,8 +3140,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Companion - Color Target by Class
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_USE_CLASS_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESCOMPANION_USE_CLASS_COLOR_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESCOMPANION_USE_CLASS_COLOR),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESCOMPANION_USE_CLASS_COLOR_TP),
                 getFunc = function ()
                     return Settings.CompanionUseClassColor
                 end,
@@ -3161,13 +3161,13 @@ function UnitFrames.CreateSettings()
     -- Unit Frames - Custom Unit Frames (Pet) Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMESPET_HEADER),
+        name = GetString(LUIE_LAM_UF_CFRAMESPET_HEADER),
         controls = {
             {
                 -- Enable Pet Frames
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPET_ENABLE),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPET_ENABLE_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPET_ENABLE),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPET_ENABLE_TP),
                 getFunc = function ()
                     return Settings.CustomFramesPet
                 end,
@@ -3176,7 +3176,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.CustomFramesPet,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not LUIE.SV.UnitFrames_Enabled
                 end,
@@ -3184,8 +3184,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Pet HP Bar Format
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_SHARED_LABEL),
-                tooltip = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_TP),
+                name = GetString(LUIE_LAM_UF_SHARED_LABEL),
+                tooltip = GetString(LUIE_LAM_UF_SHARED_LABEL_TP),
                 choices = formatOptions,
                 getFunc = function ()
                     return Settings.CustomFormatPet
@@ -3204,7 +3204,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Pet Bars Width
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPET_WIDTH),
+                name = GetString(LUIE_LAM_UF_CFRAMESPET_WIDTH),
                 min = 100,
                 max = 500,
                 step = 5,
@@ -3224,7 +3224,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Pet Bars Height
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPET_HEIGHT),
+                name = GetString(LUIE_LAM_UF_CFRAMESPET_HEIGHT),
                 min = 20,
                 max = 70,
                 step = 1,
@@ -3244,8 +3244,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Pet - Out-of-Combat frame opacity
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPET_OOCPACITY),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPET_OOCPACITY_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPET_OOCPACITY),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPET_OOCPACITY_TP),
                 min = 0,
                 max = 100,
                 step = 5,
@@ -3266,8 +3266,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Pet - In-Combat frame opacity
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPET_ICPACITY),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPET_ICPACITY_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPET_ICPACITY),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPET_ICPACITY_TP),
                 min = 0,
                 max = 100,
                 step = 5,
@@ -3288,8 +3288,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Pet Name Clip
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPET_NAMECLIP),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPET_NAMECLIP_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPET_NAMECLIP),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPET_NAMECLIP_TP),
                 min = 0,
                 max = 200,
                 step = 1,
@@ -3309,8 +3309,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Pet - Color Target by Class
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPET_USE_CLASS_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPET_USE_CLASS_COLOR_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPET_USE_CLASS_COLOR),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPET_USE_CLASS_COLOR_TP),
                 getFunc = function ()
                     return Settings.PetUseClassColor
                 end,
@@ -3327,18 +3327,18 @@ function UnitFrames.CreateSettings()
             {
                 -- Unit Frames Pet Whitelist Header
                 type = "header",
-                name = GetString(SI_LUIE_CUSTOM_LIST_UF_WHITELIST),
+                name = GetString(LUIE_CUSTOM_LIST_UF_WHITELIST),
             },
             {
                 -- Unit Frames Pet Whitelist Description
                 type = "description",
-                text = GetString(SI_LUIE_LAM_UF_BLACKLIST_DESCRIPT),
+                text = GetString(LUIE_LAM_UF_BLACKLIST_DESCRIPT),
             },
             -- Add Pet Names - Necromancer
             {
                 type = "button",
-                name = GetString(SI_LUIE_LAM_UF_WHITELIST_ADD_NECROMANCER),
-                tooltip = GetString(SI_LUIE_LAM_UF_WHITELIST_ADD_NECROMANCER_TP),
+                name = GetString(LUIE_LAM_UF_WHITELIST_ADD_NECROMANCER),
+                tooltip = GetString(LUIE_LAM_UF_WHITELIST_ADD_NECROMANCER_TP),
                 func = function ()
                     UnitFrames.AddBulkToCustomList(Settings.whitelist, PetNames.Necromancer)
                     LUIE_WhitelistUF:UpdateChoices(GenerateCustomList(Settings.whitelist))
@@ -3349,8 +3349,8 @@ function UnitFrames.CreateSettings()
             -- Add Pet Names - Sorcerer
             {
                 type = "button",
-                name = GetString(SI_LUIE_LAM_UF_WHITELIST_ADD_SORCERER),
-                tooltip = GetString(SI_LUIE_LAM_UF_WHITELIST_ADD_SORCERER_TP),
+                name = GetString(LUIE_LAM_UF_WHITELIST_ADD_SORCERER),
+                tooltip = GetString(LUIE_LAM_UF_WHITELIST_ADD_SORCERER_TP),
                 func = function ()
                     UnitFrames.AddBulkToCustomList(Settings.whitelist, PetNames.Sorcerer)
                     LUIE_WhitelistUF:UpdateChoices(GenerateCustomList(Settings.whitelist))
@@ -3361,8 +3361,8 @@ function UnitFrames.CreateSettings()
             -- Add Pet Names - Warden
             {
                 type = "button",
-                name = GetString(SI_LUIE_LAM_UF_WHITELIST_ADD_WARDEN),
-                tooltip = GetString(SI_LUIE_LAM_UF_WHITELIST_ADD_WARDEN_TP),
+                name = GetString(LUIE_LAM_UF_WHITELIST_ADD_WARDEN),
+                tooltip = GetString(LUIE_LAM_UF_WHITELIST_ADD_WARDEN_TP),
                 func = function ()
                     UnitFrames.AddBulkToCustomList(Settings.whitelist, PetNames.Warden)
                     LUIE_WhitelistUF:UpdateChoices(GenerateCustomList(Settings.whitelist))
@@ -3373,8 +3373,8 @@ function UnitFrames.CreateSettings()
             -- Add Pet Names - Sets
             {
                 type = "button",
-                name = GetString(SI_LUIE_LAM_UF_WHITELIST_ADD_SETS),
-                tooltip = GetString(SI_LUIE_LAM_UF_WHITELIST_ADD_SETS_TP),
+                name = GetString(LUIE_LAM_UF_WHITELIST_ADD_SETS),
+                tooltip = GetString(LUIE_LAM_UF_WHITELIST_ADD_SETS_TP),
                 func = function ()
                     UnitFrames.AddBulkToCustomList(Settings.whitelist, PetNames.Sets)
                     LUIE_WhitelistUF:UpdateChoices(GenerateCustomList(Settings.whitelist))
@@ -3385,8 +3385,8 @@ function UnitFrames.CreateSettings()
             -- Add Pet Names - Assistants
             {
                 type = "button",
-                name = GetString(SI_LUIE_LAM_UF_WHITELIST_ADD_ASSISTANTS),
-                tooltip = GetString(SI_LUIE_LAM_UF_WHITELIST_ADD_ASSISTANTS_TP),
+                name = GetString(LUIE_LAM_UF_WHITELIST_ADD_ASSISTANTS),
+                tooltip = GetString(LUIE_LAM_UF_WHITELIST_ADD_ASSISTANTS_TP),
                 func = function ()
                     UnitFrames.AddBulkToCustomList(Settings.whitelist, PetNames.Assistants)
                     LUIE_WhitelistUF:UpdateChoices(GenerateCustomList(Settings.whitelist))
@@ -3398,8 +3398,8 @@ function UnitFrames.CreateSettings()
             -- Add All Currently Active Pets
             {
                 type = "button",
-                name = GetString(SI_LUIE_LAM_UF_WHITELIST_ADD_CURRENT),
-                tooltip = GetString(SI_LUIE_LAM_UF_WHITELIST_ADD_CURRENT_TP),
+                name = GetString(LUIE_LAM_UF_WHITELIST_ADD_CURRENT),
+                tooltip = GetString(LUIE_LAM_UF_WHITELIST_ADD_CURRENT_TP),
                 func = function ()
                     UnitFrames.AddCurrentPetsToCustomList(Settings.whitelist)
                     LUIE_WhitelistUF:UpdateChoices(GenerateCustomList(Settings.whitelist))
@@ -3411,8 +3411,8 @@ function UnitFrames.CreateSettings()
             -- Clear Whitelist
             {
                 type = "button",
-                name = GetString(SI_LUIE_LAM_UF_WHITELIST_CLEAR),
-                tooltip = GetString(SI_LUIE_LAM_UF_WHITELIST_CLEAR_TP),
+                name = GetString(LUIE_LAM_UF_WHITELIST_CLEAR),
+                tooltip = GetString(LUIE_LAM_UF_WHITELIST_CLEAR_TP),
                 func = function ()
                     ZO_Dialogs_ShowDialog("LUIE_CLEAR_PET_WHITELIST")
                 end,
@@ -3422,8 +3422,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Unit Frames Pet Whitelist (Add)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_UF_BLACKLIST_ADDLIST),
-                tooltip = GetString(SI_LUIE_LAM_UF_BLACKLIST_ADDLIST_TP),
+                name = GetString(LUIE_LAM_UF_BLACKLIST_ADDLIST),
+                tooltip = GetString(LUIE_LAM_UF_BLACKLIST_ADDLIST_TP),
                 getFunc = function () end,
                 setFunc = function (value)
                     UnitFrames.AddToCustomList(Settings.whitelist, value)
@@ -3434,8 +3434,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Unit Frames Pet (Remove)
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_BLACKLIST_REMLIST),
-                tooltip = GetString(SI_LUIE_LAM_UF_BLACKLIST_REMLIST_TP),
+                name = GetString(LUIE_LAM_UF_BLACKLIST_REMLIST),
+                tooltip = GetString(LUIE_LAM_UF_BLACKLIST_REMLIST_TP),
                 choices = Whitelist,
                 choicesValues = WhitelistValues,
                 scrollable = true,
@@ -3456,13 +3456,13 @@ function UnitFrames.CreateSettings()
     -- Unit Frames - Custom Unit Frames (Boss) Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMESB_HEADER),
+        name = GetString(LUIE_LAM_UF_CFRAMESB_HEADER),
         controls = {
             {
                 -- Enable This Addon BOSS frames
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESB_LUIEFRAMESENABLE),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESB_LUIEFRAMESENABLE_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESB_LUIEFRAMESENABLE),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESB_LUIEFRAMESENABLE_TP),
                 getFunc = function ()
                     return Settings.CustomFramesBosses
                 end,
@@ -3471,7 +3471,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.CustomFramesBosses,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not LUIE.SV.UnitFrames_Enabled
                 end,
@@ -3479,8 +3479,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Boss HP Bar Format
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_UF_SHARED_LABEL),
-                tooltip = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_TP),
+                name = GetString(LUIE_LAM_UF_SHARED_LABEL),
+                tooltip = GetString(LUIE_LAM_UF_SHARED_LABEL_TP),
                 choices = formatOptions,
                 getFunc = function ()
                     return Settings.CustomFormatBoss
@@ -3498,7 +3498,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Boss Bars Width
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESB_WIDTH),
+                name = GetString(LUIE_LAM_UF_CFRAMESB_WIDTH),
                 min = 100,
                 max = 500,
                 step = 5,
@@ -3518,7 +3518,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Boss Bars Height
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESB_HEIGHT),
+                name = GetString(LUIE_LAM_UF_CFRAMESB_HEIGHT),
                 min = 20,
                 max = 70,
                 step = 1,
@@ -3538,8 +3538,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Out-of-Combat frame opacity
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESB_OPACITYOOC),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESB_OPACITYOOC_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESB_OPACITYOOC),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESB_OPACITYOOC_TP),
                 min = 0,
                 max = 100,
                 step = 5,
@@ -3559,8 +3559,8 @@ function UnitFrames.CreateSettings()
             {
                 -- In-Combat frame opacity
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESB_OPACITYIC),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESB_OPACITYIC_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESB_OPACITYIC),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESB_OPACITYIC_TP),
                 min = 0,
                 max = 100,
                 step = 5,
@@ -3580,8 +3580,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Display Armor stat change
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_UF_SHARED_ARMOR), GetString(SI_LUIE_LAM_UF_SHARED_BOSS)),
-                tooltip = GetString(SI_LUIE_LAM_UF_SHARED_ARMOR_TP),
+                name = zo_strformat(GetString(LUIE_LAM_UF_SHARED_ARMOR), GetString(LUIE_LAM_UF_SHARED_BOSS)),
+                tooltip = GetString(LUIE_LAM_UF_SHARED_ARMOR_TP),
                 getFunc = function ()
                     return Settings.BossEnableArmor
                 end,
@@ -3590,7 +3590,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.BossEnableArmor,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesBosses)
                 end,
@@ -3598,8 +3598,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Display Power stat change
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_UF_SHARED_POWER), GetString(SI_LUIE_LAM_UF_SHARED_BOSS)),
-                tooltip = GetString(SI_LUIE_LAM_UF_SHARED_POWER_TP),
+                name = zo_strformat(GetString(LUIE_LAM_UF_SHARED_POWER), GetString(LUIE_LAM_UF_SHARED_BOSS)),
+                tooltip = GetString(LUIE_LAM_UF_SHARED_POWER_TP),
                 getFunc = function ()
                     return Settings.BossEnablePower
                 end,
@@ -3608,7 +3608,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.BossEnablePower,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesBosses)
                 end,
@@ -3616,8 +3616,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Display Regen Arrows
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_UF_SHARED_REGEN), GetString(SI_LUIE_LAM_UF_SHARED_BOSS)),
-                tooltip = GetString(SI_LUIE_LAM_UF_SHARED_REGEN_TP),
+                name = zo_strformat(GetString(LUIE_LAM_UF_SHARED_REGEN), GetString(LUIE_LAM_UF_SHARED_BOSS)),
+                tooltip = GetString(LUIE_LAM_UF_SHARED_REGEN_TP),
                 getFunc = function ()
                     return Settings.BossEnableRegen
                 end,
@@ -3626,7 +3626,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.BossEnableRegen,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not (LUIE.SV.UnitFrames_Enabled and Settings.CustomFramesBosses)
                 end,
@@ -3637,13 +3637,13 @@ function UnitFrames.CreateSettings()
     -- Unit Frames - Custom Unit Frames (PvP Target Frame) Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMESPVP_HEADER),
+        name = GetString(LUIE_LAM_UF_CFRAMESPVP_HEADER),
         controls = {
             {
                 -- Enable additional PvP Target frame
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME_TP),
+                name = GetString(LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME),
+                tooltip = GetString(LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME_TP),
                 getFunc = function ()
                     return Settings.AvaCustFramesTarget
                 end,
@@ -3652,7 +3652,7 @@ function UnitFrames.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.AvaCustFramesTarget,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_WARNING),
                 disabled = function ()
                     return not LUIE.SV.UnitFrames_Enabled
                 end,
@@ -3660,7 +3660,7 @@ function UnitFrames.CreateSettings()
             {
                 -- PvP Target Bars Width
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME_WIDTH),
+                name = GetString(LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME_WIDTH),
                 min = 300,
                 max = 700,
                 step = 5,
@@ -3680,7 +3680,7 @@ function UnitFrames.CreateSettings()
             {
                 -- PvP Target Bars Height
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME_HEIGHT),
+                name = GetString(LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME_HEIGHT),
                 min = 20,
                 max = 70,
                 step = 1,
@@ -3703,13 +3703,13 @@ function UnitFrames.CreateSettings()
     -- Unit Frames - Common Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_UF_COMMON_HEADER),
+        name = GetString(LUIE_LAM_UF_COMMON_HEADER),
         controls = {
             {
                 -- Shorten numbers
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_SHORTNUMBERS),
-                tooltip = GetString(SI_LUIE_LAM_UF_SHORTNUMBERS_TP),
+                name = GetString(LUIE_LAM_UF_SHORTNUMBERS),
+                tooltip = GetString(LUIE_LAM_UF_SHORTNUMBERS_TP),
                 getFunc = function ()
                     return Settings.ShortenNumbers
                 end,
@@ -3726,7 +3726,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Default Caption Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_COMMON_CAPTIONCOLOR),
+                name = GetString(LUIE_LAM_UF_COMMON_CAPTIONCOLOR),
                 getFunc = function ()
                     return unpack(Settings.Target_FontColour)
                 end,
@@ -3746,7 +3746,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Friendly NPC Font Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_COMMON_NPCFONTCOLOR),
+                name = GetString(LUIE_LAM_UF_COMMON_NPCFONTCOLOR),
                 getFunc = function ()
                     return unpack(Settings.Target_FontColour_FriendlyNPC)
                 end,
@@ -3766,7 +3766,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Friendly Player Font Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_COMMON_PLAYERFONTCOLOR),
+                name = GetString(LUIE_LAM_UF_COMMON_PLAYERFONTCOLOR),
                 getFunc = function ()
                     return unpack(Settings.Target_FontColour_FriendlyPlayer)
                 end,
@@ -3786,7 +3786,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Hostile Font Color
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_UF_COMMON_HOSTILEFONTCOLOR),
+                name = GetString(LUIE_LAM_UF_COMMON_HOSTILEFONTCOLOR),
                 getFunc = function ()
                     return unpack(Settings.Target_FontColour_Hostile)
                 end,
@@ -3806,8 +3806,8 @@ function UnitFrames.CreateSettings()
             {
                 -- Apply same settings to reticle
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_COMMON_RETICLECOLOR),
-                tooltip = GetString(SI_LUIE_LAM_UF_COMMON_RETICLECOLOR_TP),
+                name = GetString(LUIE_LAM_UF_COMMON_RETICLECOLOR),
+                tooltip = GetString(LUIE_LAM_UF_COMMON_RETICLECOLOR_TP),
                 getFunc = function ()
                     return Settings.ReticleColourByReaction
                 end,
@@ -3821,7 +3821,7 @@ function UnitFrames.CreateSettings()
             {
                 -- Interactible Reticle Color
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_COMMON_RETICLECOLORINTERACT)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_UF_COMMON_RETICLECOLORINTERACT)),
                 getFunc = function ()
                     return unpack(Settings.ReticleColour_Interact)
                 end,
