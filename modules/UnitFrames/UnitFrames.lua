@@ -244,7 +244,7 @@ local playerDisplayName = GetUnitDisplayName("player")
 -- local group
 -- local unitTag
 -- local playerTlw
-local CP_BAR_COLOURS = ZO_CP_BAR_GRADIENT_COLORS
+local CP_BAR_COLORS = ZO_CP_BAR_GRADIENT_COLORS
 
 local g_PendingUpdate = {
     Group = { flag = false, delay = 200, name = moduleName .. "PendingGroupUpdate" },
@@ -623,7 +623,7 @@ local function CreateDefaultFrames()
         for powerType, parent in pairs(fields) do
             g_DefaultFrames[unitTag][powerType] = {
                 ["label"] = UI.Label(parent, { CENTER, CENTER }, nil, nil, nil, nil, false),
-                ["colour"] = UnitFrames.SV.DefaultTextColour,
+                ["color"] = UnitFrames.SV.DefaultTextColour,
             }
         end
     end
@@ -631,7 +631,7 @@ local function CreateDefaultFrames()
     -- Reference to target unit frame. this is not an UI control! Used to add custom controls to existing fade-out components table
     g_targetUnitFrame = ZO_UnitFrames_GetUnitFrame("reticleover")
 
-    -- When default Target frame is enabled set the threshold value to change colour of label and add label to default fade list
+    -- When default Target frame is enabled set the threshold value to change color of label and add label to default fade list
     if g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH] then
         g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].threshold = g_targetThreshold
         table.insert(g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].label)
@@ -1826,9 +1826,9 @@ function UnitFrames.Initialize(enabled)
 
     g_defaultTargetNameLabel = ZO_TargetUnitFramereticleoverName
 
-    -- Initialize colouring. This is actually needed when user does NOT want those features
-    UnitFrames.TargetColourByReaction()
-    UnitFrames.ReticleColourByReaction()
+    -- Initialize coloring. This is actually needed when user does NOT want those features
+    UnitFrames.TargetColorByReaction()
+    UnitFrames.ReticleColorByReaction()
 end
 
 -- Sets out-of-combat transparency values for default user-frames
@@ -1854,24 +1854,24 @@ function UnitFrames.SetDefaultFramesTransparency(min_pct_value, max_pct_value)
     ZO_PlayerAttributeMagicka:SetAlpha(inCombat and max_value or min_value)
 end
 
--- Update selection for target name colouring
-function UnitFrames.TargetColourByReaction(value)
+-- Update selection for target name coloring
+function UnitFrames.TargetColorByReaction(value)
     -- If we have a parameter, save it
     if value ~= nil then
         UnitFrames.SV.TargetColourByReaction = value
     end
-    -- If this Target name colouring is not required, revert it back to white
+    -- If this Target name coloring is not required, revert it back to white
     if not value then
         g_defaultTargetNameLabel:SetColor(1, 1, 1, 1)
     end
 end
 
--- Update selection for target name colouring
-function UnitFrames.ReticleColourByReaction(value)
+-- Update selection for target name coloring
+function UnitFrames.ReticleColorByReaction(value)
     if value ~= nil then
         UnitFrames.SV.ReticleColourByReaction = value
     end
-    -- If this Reticle colouring is not required, revert it back to white
+    -- If this Reticle coloring is not required, revert it back to white
     if not value then
         ZO_ReticleContainerReticle:SetColor(1, 1, 1)
     end
@@ -2061,7 +2061,7 @@ function UnitFrames.OnPlayerActivated(eventCode)
     UnitFrames.CustomFramesSetupAlternative()
 
     -- Apply bar colors here, has to be after player init to get group roles
-    UnitFrames.CustomFramesApplyColours(false)
+    UnitFrames.CustomFramesApplyColors(false)
 end
 
 -- Runs on the EVENT_POWER_UPDATE listener.
@@ -2288,7 +2288,7 @@ function UnitFrames.DefaultFramesCreateUnitGroupControls(unitTag)
                     ["unitTag"] = unitTag,
                     [COMBAT_MECHANIC_FLAGS_HEALTH] = {
                         label = UI.Label(parentBar, { TOP, BOTTOM }, nil, nil, nil, nil, false),
-                        colour = UnitFrames.SV.DefaultTextColour,
+                        color = UnitFrames.SV.DefaultTextColour,
                         shield = UI.StatusBar(parentBar, { BOTTOM, BOTTOM, 0, 0 }, { width - height, height }, { 1, 0.75, 0, 0.5 }, true),
                     },
                     ["classIcon"] = UI.Texture(parentName, { RIGHT, LEFT, -4, 2 }, { 24, 24 }, nil, nil, true),
@@ -2393,35 +2393,35 @@ function UnitFrames.OnReticleTargetChanged(eventCode)
 
         local isWithinRange = IsUnitInGroupSupportRange("reticleover")
 
-        -- Now select appropriate custom colour to target name and (possibly) reticle
-        local colour, reticle_colour
+        -- Now select appropriate custom color to target name and (possibly) reticle
+        local color, reticle_color
         local interactableCheck = false
         local reactionType = GetUnitReaction("reticleover")
         local attackable = IsUnitAttackable("reticleover")
-        -- Select colour accordingly to reactionType, attackable and interactable
+        -- Select color accordingly to reactionType, attackable and interactable
         if reactionType == UNIT_REACTION_HOSTILE then
-            colour = UnitFrames.SV.Target_FontColour_Hostile
-            reticle_colour = attackable and UnitFrames.SV.Target_FontColour_Hostile or UnitFrames.SV.Target_FontColour
+            color = UnitFrames.SV.Target_FontColour_Hostile
+            reticle_color = attackable and UnitFrames.SV.Target_FontColour_Hostile or UnitFrames.SV.Target_FontColour
             interactableCheck = true
         elseif reactionType == UNIT_REACTION_PLAYER_ALLY then
-            colour = UnitFrames.SV.Target_FontColour_FriendlyPlayer
-            reticle_colour = UnitFrames.SV.Target_FontColour_FriendlyPlayer
+            color = UnitFrames.SV.Target_FontColour_FriendlyPlayer
+            reticle_color = UnitFrames.SV.Target_FontColour_FriendlyPlayer
         elseif attackable and reactionType ~= UNIT_REACTION_HOSTILE then -- those are neutral targets that can become hostile on attack
-            colour = UnitFrames.SV.Target_FontColour
-            reticle_colour = colour
+            color = UnitFrames.SV.Target_FontColour
+            reticle_color = color
         else
             -- Rest cases are ally/friendly/npc, and with possibly interactable
-            colour = (reactionType == UNIT_REACTION_FRIENDLY or reactionType == UNIT_REACTION_NPC_ALLY) and UnitFrames.SV.Target_FontColour_FriendlyNPC or UnitFrames.SV.Target_FontColour
-            reticle_colour = colour
+            color = (reactionType == UNIT_REACTION_FRIENDLY or reactionType == UNIT_REACTION_NPC_ALLY) and UnitFrames.SV.Target_FontColour_FriendlyNPC or UnitFrames.SV.Target_FontColour
+            reticle_color = color
             interactableCheck = true
         end
 
-        -- Here we need to check if interaction is possible, and then rewrite reticle_colour variable
+        -- Here we need to check if interaction is possible, and then rewrite reticle_color variable
         if interactableCheck then
             local interactableAction = GetGameCameraInteractableActionInfo()
             -- Action, interactableName, interactionBlocked, isOwned, additionalInfo, context
             if interactableAction ~= nil then
-                reticle_colour = UnitFrames.SV.ReticleColour_Interact
+                reticle_color = UnitFrames.SV.ReticleColour_Interact
             end
         end
 
@@ -2440,20 +2440,20 @@ function UnitFrames.OnReticleTargetChanged(eventCode)
             UnitFrames.UpdateDefaultLevelTarget()
         end
 
-        -- Update colour of default target if requested
+        -- Update color of default target if requested
         if UnitFrames.SV.TargetColourByReaction then
-            g_defaultTargetNameLabel:SetColor(colour[1], colour[2], colour[3], isWithinRange and 1 or 0.5)
+            g_defaultTargetNameLabel:SetColor(color[1], color[2], color[3], isWithinRange and 1 or 0.5)
         end
         if UnitFrames.SV.ReticleColourByReaction then
-            ZO_ReticleContainerReticle:SetColor(reticle_colour[1], reticle_colour[2], reticle_colour[3])
+            ZO_ReticleContainerReticle:SetColor(reticle_color[1], reticle_color[2], reticle_color[3])
         end
 
-        -- And colour of custom target name always. Also change 'labelOne' for critters
+        -- And color of custom target name always. Also change 'labelOne' for critters
         if UnitFrames.CustomFrames.reticleover then
             UnitFrames.CustomFrames.reticleover.hostile = (reactionType == UNIT_REACTION_HOSTILE) and UnitFrames.SV.TargetEnableSkull
             UnitFrames.CustomFrames.reticleover.skull:SetHidden(not UnitFrames.CustomFrames.reticleover.hostile or (g_savedHealth.reticleover[1] == 0) or (100 * g_savedHealth.reticleover[1] / g_savedHealth.reticleover[3] > UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].threshold))
-            UnitFrames.CustomFrames.reticleover.name:SetColor(colour[1], colour[2], colour[3])
-            UnitFrames.CustomFrames.reticleover.className:SetColor(colour[1], colour[2], colour[3])
+            UnitFrames.CustomFrames.reticleover.name:SetColor(color[1], color[2], color[3])
+            UnitFrames.CustomFrames.reticleover.className:SetColor(color[1], color[2], color[3])
             if isCritter then
                 UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].labelOne:SetText(" - Critter - ")
             end
@@ -2516,7 +2516,7 @@ function UnitFrames.OnReticleTargetChanged(eventCode)
             UnitFrames.CustomFrames.AvaPlayerTarget.control:SetHidden(true) --UnitFrames.CustomFrames.AvaPlayerTarget.canHide )
         end
 
-        -- Revert back the colour of reticle to white
+        -- Revert back the color of reticle to white
         if UnitFrames.SV.ReticleColourByReaction then
             ZO_ReticleContainerReticle:SetColor(1, 1, 1)
         end
@@ -2786,8 +2786,8 @@ function UnitFrames.UpdateStaticControls(unitFrame)
         if unitFrame.isPlayer then
             unitFrame.avaRankIcon:SetTexture(GetAvARankIcon(unitFrame.avaRankValue))
             local alliance = GetUnitAlliance(unitFrame.unitTag)
-            local colour = GetAllianceColor(alliance)
-            unitFrame.avaRankIcon:SetColor(colour.r, colour.g, colour.b)
+            local color = GetAllianceColor(alliance)
+            unitFrame.avaRankIcon:SetColor(color.r, color.g, color.b)
 
             if unitFrame.unitTag == "reticleover" and UnitFrames.SV.TargetEnableRankIcon then
                 unitFrame.avaRank:SetText(tostring(unitFrame.avaRankValue))
@@ -2911,10 +2911,10 @@ function UnitFrames.UpdateAttribute(unitTag, powerType, attributeFrame, powerVal
             end
             -- If the unit is Invulnerable or a Guard show don't show a low HP color
             if (isUnwaveringPower == 1 and powerValue > 0) or isGuard then
-                attributeFrame[label]:SetColor(unpack(attributeFrame.colour or { 1, 1, 1 }))
+                attributeFrame[label]:SetColor(unpack(attributeFrame.color or { 1, 1, 1 }))
             else
-                -- And colour it RED if attribute value is lower than the threshold
-                attributeFrame[label]:SetColor(unpack((pct < (attributeFrame.threshold or g_defaultThreshold)) and { 1, 0.25, 0.38 } or attributeFrame.colour or { 1, 1, 1 }))
+                -- And color it RED if attribute value is lower than the threshold
+                attributeFrame[label]:SetColor(unpack((pct < (attributeFrame.threshold or g_defaultThreshold)) and { 1, 0.25, 0.38 } or attributeFrame.color or { 1, 1, 1 }))
             end
         end
     end
@@ -3268,14 +3268,14 @@ function UnitFrames.OnGroupMemberConnectedStatus(eventCode, unitTag, isOnline)
         UnitFrames.CustomFramesSetDeadLabel(UnitFrames.CustomFrames[unitTag], isOnline and nil or strOffline)
     end
     if isOnline and (UnitFrames.SV.ColorRoleGroup or UnitFrames.SV.ColorRoleRaid) then
-        UnitFrames.CustomFramesApplyColours(false)
+        UnitFrames.CustomFramesApplyColors(false)
     end
 end
 
 function UnitFrames.OnGroupMemberRoleChange(eventCode, unitTag, dps, healer, tank)
     if UnitFrames.CustomFrames[unitTag] then
         if UnitFrames.SV.ColorRoleGroup or UnitFrames.SV.ColorRoleRaid then
-            UnitFrames.CustomFramesApplyColoursSingle(unitTag)
+            UnitFrames.CustomFramesApplyColorsSingle(unitTag)
         end
         UnitFrames.ReloadValues(unitTag)
         UnitFrames.CustomFramesApplyLayoutGroup(false)
@@ -3285,7 +3285,7 @@ end
 
 function UnitFrames.OnGroupMemberChange(eventCode, memberName)
     zo_callLater(function ()
-        UnitFrames.CustomFramesApplyColours(false)
+        UnitFrames.CustomFramesApplyColors(false)
     end, 200)
 end
 
@@ -3360,7 +3360,7 @@ end
 
 -- This function is used to setup alternative bar for player
 -- Priority order: Werewolf -> Siege -> Mount -> ChampionXP / Experience
-local XP_BAR_COLOURS = ZO_XP_BAR_GRADIENT_COLORS[2]
+local XP_BAR_COLORS = ZO_XP_BAR_GRADIENT_COLORS[2]
 function UnitFrames.CustomFramesSetupAlternative(isWerewolf, isSiege, isMounted)
     if not UnitFrames.CustomFrames.player then
         return
@@ -3376,7 +3376,7 @@ function UnitFrames.CustomFramesSetupAlternative(isWerewolf, isSiege, isMounted)
         isMounted = IsMounted()
     end
 
-    local center, colour, icon
+    local center, color, icon
     local hidden = false
     local right = false
     local left = false
@@ -3390,7 +3390,7 @@ function UnitFrames.CustomFramesSetupAlternative(isWerewolf, isSiege, isMounted)
     if UnitFrames.SV.PlayerEnableAltbarMSW and isWerewolf then
         icon = "LuiExtended/media/unitframes/unitframes_bar_werewolf.dds"
         center = { 0.05, 0, 0, 0.9 }
-        colour = { 0.8, 0, 0, 0.9 }
+        color = { 0.8, 0, 0, 0.9 }
 
         UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_WEREWOLF] = UnitFrames.CustomFrames.player.alternative
         UnitFrames.CustomFrames.controlledsiege[COMBAT_MECHANIC_FLAGS_HEALTH] = nil
@@ -3417,7 +3417,7 @@ function UnitFrames.CustomFramesSetupAlternative(isWerewolf, isSiege, isMounted)
     elseif UnitFrames.SV.PlayerEnableAltbarMSW and isSiege then
         icon = "LuiExtended/media/unitframes/unitframes_bar_siege.dds"
         center = { 0.05, 0, 0, 0.9 }
-        colour = { 0.8, 0, 0, 0.9 }
+        color = { 0.8, 0, 0, 0.9 }
 
         UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_WEREWOLF] = nil
         UnitFrames.CustomFrames.controlledsiege[COMBAT_MECHANIC_FLAGS_HEALTH] = UnitFrames.CustomFrames.player.alternative
@@ -3441,7 +3441,7 @@ function UnitFrames.CustomFramesSetupAlternative(isWerewolf, isSiege, isMounted)
             0.1 * UnitFrames.SV.CustomColourStamina[3],
             0.9,
         }
-        colour = {
+        color = {
             UnitFrames.SV.CustomColourStamina[1],
             UnitFrames.SV.CustomColourStamina[2],
             UnitFrames.SV.CustomColourStamina[3],
@@ -3477,7 +3477,7 @@ function UnitFrames.CustomFramesSetupAlternative(isWerewolf, isSiege, isMounted)
         UnitFrames.CustomFrames.player.ChampionXP = UnitFrames.CustomFrames.player.alternative
         UnitFrames.CustomFrames.player.Experience = nil
 
-        UnitFrames.OnChampionPointGained() -- Setup bar colour and proper icon
+        UnitFrames.OnChampionPointGained() -- Setup bar color and proper icon
 
         local enlightenedPool = 4 * GetEnlightenedPool()
         local xp = GetPlayerChampionXP()
@@ -3506,7 +3506,7 @@ function UnitFrames.CustomFramesSetupAlternative(isWerewolf, isSiege, isMounted)
     elseif UnitFrames.SV.PlayerEnableAltbarXP then
         icon = "LuiExtended/media/unitframes/unitframes_level_normal.dds"
         center = { 0, 0.1, 0.1, 0.9 }
-        colour = { XP_BAR_COLOURS.r, XP_BAR_COLOURS.g, XP_BAR_COLOURS.b, 0.9 } -- { 0, 0.9, 0.9, 0.9 }
+        color = { XP_BAR_COLORS.r, XP_BAR_COLORS.g, XP_BAR_COLORS.b, 0.9 } -- { 0, 0.9, 0.9, 0.9 }
 
         UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_WEREWOLF] = nil
         UnitFrames.CustomFrames.controlledsiege[COMBAT_MECHANIC_FLAGS_HEALTH] = nil
@@ -3540,12 +3540,12 @@ function UnitFrames.CustomFramesSetupAlternative(isWerewolf, isSiege, isMounted)
         UnitFrames.CustomFrames.player.alternative.enlightenment:SetHidden(true)
     end
 
-    -- Setup of bar colours and icon
+    -- Setup of bar colors and icon
     if center then
         UnitFrames.CustomFrames.player.alternative.backdrop:SetCenterColor(unpack(center))
     end
-    if colour then
-        UnitFrames.CustomFrames.player.alternative.bar:SetColor(unpack(colour))
+    if color then
+        UnitFrames.CustomFrames.player.alternative.bar:SetColor(unpack(color))
     end
     if icon then
         UnitFrames.CustomFrames.player.alternative.icon:SetTexture(icon)
@@ -3660,11 +3660,11 @@ function UnitFrames.OnChampionPointGained(eventCode)
         else
             attribute = GetChampionPointPoolForRank(championPoints + 1)
         end
-        local colour = (UnitFrames.SV.PlayerChampionColour and CP_BAR_COLOURS[attribute]) and CP_BAR_COLOURS[attribute][2] or XP_BAR_COLOURS
-        local colour2 = (UnitFrames.SV.PlayerChampionColour and CP_BAR_COLOURS[attribute]) and CP_BAR_COLOURS[attribute][1] or XP_BAR_COLOURS
-        UnitFrames.CustomFrames.player.ChampionXP.backdrop:SetCenterColor(0.1 * colour.r, 0.1 * colour.g, 0.1 * colour.b, 0.9)
-        UnitFrames.CustomFrames.player.ChampionXP.enlightenment:SetColor(colour2.r, colour2.g, colour2.b, 0.40)
-        UnitFrames.CustomFrames.player.ChampionXP.bar:SetColor(colour.r, colour.g, colour.b, 0.9)
+        local color = (UnitFrames.SV.PlayerChampionColour and CP_BAR_COLORS[attribute]) and CP_BAR_COLORS[attribute][2] or XP_BAR_COLORS
+        local color2 = (UnitFrames.SV.PlayerChampionColour and CP_BAR_COLORS[attribute]) and CP_BAR_COLORS[attribute][1] or XP_BAR_COLORS
+        UnitFrames.CustomFrames.player.ChampionXP.backdrop:SetCenterColor(0.1 * color.r, 0.1 * color.g, 0.1 * color.b, 0.9)
+        UnitFrames.CustomFrames.player.ChampionXP.enlightenment:SetColor(color2.r, color2.g, color2.b, 0.40)
+        UnitFrames.CustomFrames.player.ChampionXP.bar:SetColor(color.r, color.g, color.b, 0.9)
         local disciplineData = CHAMPION_DATA_MANAGER:FindChampionDisciplineDataByType(attribute)
         UnitFrames.CustomFrames.player.ChampionXP.icon:SetTexture(disciplineData:GetHUDIcon())
     end
@@ -3678,7 +3678,7 @@ function UnitFrames.OnCombatEvent(eventCode, result, isError, abilityName, abili
         end
 
         g_powerError[powerType] = true
-        -- Save original center colour and colour to red
+        -- Save original center color and color to red
         local backdrop = UnitFrames.CustomFrames.player[powerType].backdrop
         local r, g, b = backdrop:GetCenterColor()
         if powerType == COMBAT_MECHANIC_FLAGS_STAMINA then
@@ -3689,7 +3689,7 @@ function UnitFrames.OnCombatEvent(eventCode, result, isError, abilityName, abili
             backdrop:SetCenterColor(0.4, 0, 0, 0.9)
         end
 
-        -- Make a delayed call to return original colour
+        -- Make a delayed call to return original color
         local uniqueId = moduleName .. "PowerError" .. powerType
         local firstRun = true
 
@@ -4073,8 +4073,8 @@ function UnitFrames.CustomFramesSetMovingState(state)
     end
 end
 
--- Apply selected colours for all known bars on custom unit frames
-function UnitFrames.CustomFramesApplyColours(isMenu)
+-- Apply selected colors for all known bars on custom unit frames
+function UnitFrames.CustomFramesApplyColors(isMenu)
     local health = {
         UnitFrames.SV.CustomColourHealth[1],
         UnitFrames.SV.CustomColourHealth[2],
@@ -4292,7 +4292,7 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
 
     local isBattleground = IsActiveWorldBattleground()
 
-    -- After colour is applied unhide frames, so player can see changes even from menu
+    -- After color is applied unhide frames, so player can see changes even from menu
     for _, baseName in pairs({ "player", "reticleover", "boss", "AvaPlayerTarget" }) do
         shield[4] = (UnitFrames.SV.CustomShieldBarSeparate and not (baseName == "boss")) and 0.9 or (UnitFrames.SV.ShieldAlpha / 100)
         for i = 0, 6 do
@@ -4548,7 +4548,7 @@ function UnitFrames.CustomFramesApplyColours(isMenu)
     end
 end
 
-function UnitFrames.CustomFramesApplyColoursSingle(unitTag)
+function UnitFrames.CustomFramesApplyColorsSingle(unitTag)
     local health = {
         UnitFrames.SV.CustomColourHealth[1],
         UnitFrames.SV.CustomColourHealth[2],
@@ -5016,8 +5016,8 @@ function UnitFrames.DefaultFramesApplyFont(unitTag)
     end
 end
 
--- Reapplies colour for default unit frames extender module labels
-function UnitFrames.DefaultFramesApplyColour()
+-- Reapplies color for default unit frames extender module labels
+function UnitFrames.DefaultFramesApplyColor()
     -- Helper function
     local applyDefaultColor = function(unitTag)
         if g_DefaultFrames[unitTag] then
@@ -5028,7 +5028,7 @@ function UnitFrames.DefaultFramesApplyColour()
                 COMBAT_MECHANIC_FLAGS_STAMINA,
             }) do
                 if unitFrame[powerType] then
-                    unitFrame[powerType].colour = UnitFrames.SV.DefaultTextColour
+                    unitFrame[powerType].color = UnitFrames.SV.DefaultTextColour
                     unitFrame[powerType].label:SetColor(UnitFrames.SV.DefaultTextColour[1], UnitFrames.SV.DefaultTextColour[2], UnitFrames.SV.DefaultTextColour[3])
                 end
             end

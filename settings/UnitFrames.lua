@@ -445,7 +445,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.DefaultTextColour = { r, g, b }
-                    UnitFrames.DefaultFramesApplyColour()
+                    UnitFrames.DefaultFramesApplyColor()
                 end,
                 width = "full",
                 default = {
@@ -465,7 +465,7 @@ function UnitFrames.CreateSettings()
                 getFunc = function ()
                     return Settings.TargetColourByReaction
                 end,
-                setFunc = UnitFrames.TargetColourByReaction,
+                setFunc = UnitFrames.TargetColorByReaction,
                 width = "full",
                 default = Defaults.TargetColourByReaction,
                 disabled = function ()
@@ -690,7 +690,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (value)
                     Settings.ShieldAlpha = value
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = Defaults.ShieldAlpha,
@@ -731,7 +731,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.CustomColourHealth = { r, g, b }
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = {
@@ -752,7 +752,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.CustomColourShield = { r, g, b }
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = {
@@ -773,7 +773,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.CustomColourTrauma = { r, g, b }
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = {
@@ -794,7 +794,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.CustomColourMagicka = { r, g, b }
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = {
@@ -815,7 +815,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.CustomColourStamina = { r, g, b }
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = {
@@ -836,7 +836,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.CustomColourInvulnerable = { r, g, b }
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = {
@@ -857,7 +857,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.CustomColourDPS = { r, g, b }
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = {
@@ -878,7 +878,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.CustomColourHealer = { r, g, b }
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = {
@@ -899,7 +899,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.CustomColourTank = { r, g, b }
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = {
@@ -920,7 +920,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.CustomColourDragonknight = { r, g, b }
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = {
@@ -941,7 +941,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.CustomColourNightblade = { r, g, b }
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = {
@@ -962,7 +962,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.CustomColourSorcerer = { r, g, b }
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = {
@@ -983,7 +983,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.CustomColourTemplar = { r, g, b }
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = {
@@ -1004,7 +1004,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.CustomColourWarden = { r, g, b }
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = {
@@ -1025,7 +1025,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.CustomColourNecromancer = { r, g, b }
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = {
@@ -1046,7 +1046,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.CustomColourArcanist = { r, g, b }
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = {
@@ -1068,7 +1068,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.CustomColourPlayer = { r, g, b }
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = {
@@ -1089,7 +1089,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.CustomColourFriendly = { r, g, b }
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = {
@@ -1110,7 +1110,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.CustomColourCompanion = { r, g, b }
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = {
@@ -1131,7 +1131,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.CustomColourHostile = { r, g, b }
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = {
@@ -1152,7 +1152,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.CustomColourNeutral = { r, g, b }
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = {
@@ -1173,7 +1173,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.CustomColourGuard = { r, g, b }
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = {
@@ -1194,7 +1194,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.CustomColourPet = { r, g, b }
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = {
@@ -1216,7 +1216,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (r, g, b, a)
                     Settings.CustomColourCompanionFrame = { r, g, b }
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = {
@@ -2557,7 +2557,7 @@ function UnitFrames.CreateSettings()
                     Settings.GroupExcludePlayer = not value
                     UnitFrames.CustomFramesGroupUpdate()
                     UnitFrames.CustomFramesApplyLayoutGroup(true)
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = not Defaults.GroupExcludePlayer,
@@ -2593,7 +2593,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (value)
                     Settings.ColorClassGroup = value
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = Defaults.ColorClassGroup,
@@ -2611,7 +2611,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (value)
                     Settings.ColorRoleGroup = value
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = Defaults.ColorRoleGroup,
@@ -2888,7 +2888,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (value)
                     Settings.ColorClassRaid = value
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = Defaults.ColorClassRaid,
@@ -2906,7 +2906,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (value)
                     Settings.ColorRoleRaid = value
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = Defaults.ColorRoleRaid,
@@ -3147,7 +3147,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (value)
                     Settings.CompanionUseClassColor = value
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = Defaults.CompanionUseClassColor,
@@ -3316,7 +3316,7 @@ function UnitFrames.CreateSettings()
                 end,
                 setFunc = function (value)
                     Settings.PetUseClassColor = value
-                    UnitFrames.CustomFramesApplyColours(true)
+                    UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
                 default = Defaults.PetUseClassColor,
@@ -3811,7 +3811,7 @@ function UnitFrames.CreateSettings()
                 getFunc = function ()
                     return Settings.ReticleColourByReaction
                 end,
-                setFunc = UnitFrames.ReticleColourByReaction,
+                setFunc = UnitFrames.ReticleColorByReaction,
                 width = "full",
                 default = Defaults.ReticleColourByReaction,
                 disabled = function ()

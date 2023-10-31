@@ -70,9 +70,9 @@ local uiFeedTimer = {
 
 local uiArmour = {
     color = {
-        [1] = { dura = 25, color = colors.RED, iconcolour = colors.WHITE },
-        [2] = { dura = 50, color = colors.YELLOW, iconcolour = colors.WHITE },
-        [3] = { color = colors.GREEN, iconcolour = colors.WHITE },
+        [1] = { dura = 25, color = colors.RED, iconcolor = colors.WHITE },
+        [2] = { dura = 50, color = colors.YELLOW, iconcolor = colors.WHITE },
+        [3] = { color = colors.GREEN, iconcolor = colors.WHITE },
     },
 }
 
@@ -487,17 +487,17 @@ function InfoPanel.OnUpdate60()
         end
         local duraPercentage = (slotCount == 0) and 0 or duraSum / slotCount
         local color = uiArmour.color[#uiArmour.color].color
-        local iconcolour = uiArmour.color[#uiArmour.color].iconcolour
+        local iconcolor = uiArmour.color[#uiArmour.color].iconcolor
         for i = 1, #uiArmour.color - 1 do
             if duraPercentage < uiArmour.color[i].dura then
                 color = uiArmour.color[i].color
-                iconcolour = uiArmour.color[i].iconcolour
+                iconcolor = uiArmour.color[i].iconcolor
                 break
             end
         end
         uiArmour.label:SetText(strfmat("%d%%", duraPercentage))
         uiArmour.label:SetColor(color.r, color.g, color.b, 1)
-        uiArmour.icon:SetColor(iconcolour.r, iconcolour.g, iconcolour.b, 1)
+        uiArmour.icon:SetColor(iconcolor.r, iconcolor.g, iconcolor.b, 1)
     end
 
     -- Get charges information

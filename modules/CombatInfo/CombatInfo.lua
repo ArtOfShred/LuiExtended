@@ -318,20 +318,20 @@ local BACKBAR_INDEX_OFFSET = 50
 
 -- Quickslot
 local uiQuickSlot = {
-    colour = { 0.941, 0.565, 0.251 },
-    timeColours = {
-        [1] = { remain = 15000, colour = { 0.878, 0.941, 0.251 } },
-        [2] = { remain = 5000, colour = { 0.251, 0.941, 0.125 } },
+    color = { 0.941, 0.565, 0.251 },
+    timeColors = {
+        [1] = { remain = 15000, color = { 0.878, 0.941, 0.251 } },
+        [2] = { remain = 5000, color = { 0.251, 0.941, 0.125 } },
     },
 }
 
 -- Ultimate slot
 local uiUltimate = {
-    colour = { 0.941, 0.973, 0.957 },
-    pctColours = {
-        [1] = { pct = 100, colour = { 0.878, 0.941, 0.251 } },
-        [2] = { pct = 80, colour = { 0.941, 0.565, 0.251 } },
-        [3] = { pct = 50, colour = { 0.941, 0.251, 0.125 } },
+    color = { 0.941, 0.973, 0.957 },
+    pctColors = {
+        [1] = { pct = 100, color = { 0.878, 0.941, 0.251 } },
+        [2] = { pct = 80, color = { 0.941, 0.565, 0.251 } },
+        [3] = { pct = 50, color = { 0.941, 0.251, 0.125 } },
     },
     FadeTime = 0,
     NotFull = false,
@@ -428,7 +428,7 @@ function CombatInfo.Initialize(enabled)
     uiQuickSlot.label = UI.Label(QuickslotButton, { CENTER, CENTER }, nil, nil, g_potionFont, nil, true)
     uiQuickSlot.label:SetFont(g_potionFont)
     if CombatInfo.SV.PotionTimerColor then
-        uiQuickSlot.label:SetColor(unpack(uiQuickSlot.colour))
+        uiQuickSlot.label:SetColor(unpack(uiQuickSlot.color))
     else
         uiQuickSlot.label:SetColor(1, 1, 1, 1)
     end
@@ -443,7 +443,7 @@ function CombatInfo.Initialize(enabled)
     uiUltimate.LabelPct:SetAnchor(TOPLEFT, actionButton.slot)
     uiUltimate.LabelPct:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CombatInfo.SV.UltimateLabelPosition)
 
-    uiUltimate.LabelPct:SetColor(unpack(uiUltimate.colour))
+    uiUltimate.LabelPct:SetColor(unpack(uiUltimate.color))
     -- And buff texture
     uiUltimate.Texture = UI.Texture(ActionButton8, { CENTER, CENTER }, { 160, 160 }, "/esoui/art/crafting/white_burst.dds", DL_BACKGROUND, true)
 
@@ -999,16 +999,16 @@ function CombatInfo.OnUpdate(currentTime)
         local slotIndex = GetCurrentQuickslot()
         local remain, duration, _ = GetSlotCooldownInfo(slotIndex, HOTBAR_CATEGORY_QUICKSLOT_WHEEL)
         local label = uiQuickSlot.label
-        local timeColours = uiQuickSlot.timeColours
+        local timeColors = uiQuickSlot.timeColors
         if duration > 5000 then
             label:SetHidden(false)
             if not CombatInfo.SV.PotionTimerColor then
                 label:SetColor(1, 1, 1, 1)
             else
-                local color = uiQuickSlot.colour
-                for i = #timeColours, 1, -1 do
-                    if remain < timeColours[i].remain then
-                        color = timeColours[i].colour
+                local color = uiQuickSlot.color
+                for i = #timeColors, 1, -1 do
+                    if remain < timeColors[i].remain then
+                        color = timeColors[i].color
                         break
                     end
                 end
@@ -2496,7 +2496,7 @@ end
 
 function CombatInfo.PlayProcAnimations(slotNum)
     if not g_uiProcAnimation[slotNum] then
-        local colour = uiQuickSlot.colour -- default color in case none is found
+        local color = uiQuickSlot.color -- default color in case none is found
         -- Don't make a highlight frame for the backbar ultimate slot since it is not created
         if slotNum == (BAR_INDEX_END + BACKBAR_INDEX_OFFSET) then
             return
@@ -2522,7 +2522,7 @@ function CombatInfo.PlayProcAnimations(slotNum)
         procLoopTexture.label:SetDrawLayer(DL_CONTROLS)
         procLoopTexture.label:SetDrawLayer(DL_OVERLAY)
         procLoopTexture.label:SetDrawTier(DT_HIGH)
-        procLoopTexture.label:SetColor(unpack(CombatInfo.SV.RemainingTextColoured and colour or { 1, 1, 1, 1 }))
+        procLoopTexture.label:SetColor(unpack(CombatInfo.SV.RemainingTextColoured and color or { 1, 1, 1, 1 }))
         procLoopTexture.label:SetHidden(false)
 
         local procLoopTimeline = ANIMATION_MANAGER:CreateTimelineFromVirtual("UltimateReadyLoop", procLoopTexture)
@@ -2570,7 +2570,7 @@ end
 -- Displays custom toggle texture
 function CombatInfo.ShowCustomToggle(slotNum)
     if not g_uiCustomToggle[slotNum] then
-        local colour = uiQuickSlot.colour -- default color in case none is found
+        local color = uiQuickSlot.color -- default color in case none is found
         -- Don't make a highlight frame for the backbar ultimate slot since it is not created
         if slotNum == (BAR_INDEX_END + BACKBAR_INDEX_OFFSET) then
             return
@@ -2603,7 +2603,7 @@ function CombatInfo.ShowCustomToggle(slotNum)
             toggleFrame.label:SetDrawLayer(DL_CONTROLS)
             toggleFrame.label:SetDrawLevel(DL_CONTROLS)
             toggleFrame.label:SetDrawTier(DT_HIGH)
-            toggleFrame.label:SetColor(unpack(CombatInfo.SV.RemainingTextColoured and colour or { 1, 1, 1, 1 }))
+            toggleFrame.label:SetColor(unpack(CombatInfo.SV.RemainingTextColoured and color or { 1, 1, 1, 1 }))
             toggleFrame.label:SetHidden(false)
 
             toggleFrame.stack = UI.Label(toggleFrame, nil, nil, nil, g_barFont, nil, false)
@@ -2615,7 +2615,7 @@ function CombatInfo.ShowCustomToggle(slotNum)
             toggleFrame.stack:SetDrawLayer(DL_CONTROLS)
             toggleFrame.stack:SetDrawLevel(DL_CONTROLS)
             toggleFrame.stack:SetDrawTier(DT_HIGH)
-            toggleFrame.stack:SetColor(unpack(CombatInfo.SV.RemainingTextColoured and colour or { 1, 1, 1, 1 }))
+            toggleFrame.stack:SetColor(unpack(CombatInfo.SV.RemainingTextColoured and color or { 1, 1, 1, 1 }))
             toggleFrame.stack:SetHidden(false)
 
             g_uiCustomToggle[slotNum] = toggleFrame
@@ -2663,9 +2663,9 @@ function CombatInfo.OnPowerUpdatePlayer(eventCode, unitTag, powerIndex, powerTyp
                 uiUltimate.LabelPct:SetHidden(setHiddenPct)
                 -- Update Label Color
                 if CombatInfo.SV.UltimateLabelEnabled then
-                    for i = #uiUltimate.pctColours, 1, -1 do
-                        if pct < uiUltimate.pctColours[i].pct then
-                            uiUltimate.LabelVal:SetColor(unpack(uiUltimate.pctColours[i].colour))
+                    for i = #uiUltimate.pctColors, 1, -1 do
+                        if pct < uiUltimate.pctColors[i].pct then
+                            uiUltimate.LabelVal:SetColor(unpack(uiUltimate.pctColors[i].color))
                             break
                         end
                     end
@@ -2679,7 +2679,7 @@ function CombatInfo.OnPowerUpdatePlayer(eventCode, unitTag, powerIndex, powerTyp
                 uiUltimate.LabelPct:SetHidden(setHiddenPct)
                 -- Update Label Color
                 if CombatInfo.SV.UltimateLabelEnabled then
-                    uiUltimate.LabelVal:SetColor(unpack(uiUltimate.colour))
+                    uiUltimate.LabelVal:SetColor(unpack(uiUltimate.color))
                 end
             end
             -- Set label hidden or showing
