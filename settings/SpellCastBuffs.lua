@@ -41,8 +41,8 @@ end
 local dialogs = {
     [1] = { -- Clear Blacklist
         identifier = "LUIE_CLEAR_ABILITY_BLACKLIST",
-        title = GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR),
-        text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG), GetString(SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST)),
+        title = GetString(LUIE_LAM_UF_BLACKLIST_CLEAR),
+        text = zo_strformat(GetString(LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG), GetString(LUIE_CUSTOM_LIST_AURA_BLACKLIST)),
         callback = function (_)
             SpellCastBuffs.ClearCustomList(SpellCastBuffs.SV.BlacklistTable)
             LUIE_Blacklist:UpdateChoices(GenerateCustomList(SpellCastBuffs.SV.BlacklistTable))
@@ -50,8 +50,8 @@ local dialogs = {
     },
     [2] = { -- Clear Prominent Buffs
         identifier = "LUIE_CLEAR_PROMINENT_BUFFS",
-        title = GetString(SI_LUIE_LAM_UF_PROMINENT_CLEAR_BUFFS),
-        text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
+        title = GetString(LUIE_LAM_UF_PROMINENT_CLEAR_BUFFS),
+        text = zo_strformat(GetString(LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST), GetString(LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
         callback = function (_)
             SpellCastBuffs.ClearCustomList(SpellCastBuffs.SV.PromBuffTable)
             LUIE_Prominent_Buffs_List:UpdateChoices(GenerateCustomList(SpellCastBuffs.SV.PromBuffTable))
@@ -59,8 +59,8 @@ local dialogs = {
     },
     [3] = { -- Clear Prominent Debuffs
         identifier = "LUIE_CLEAR_PROMINENT_DEBUFFS",
-        title = GetString(SI_LUIE_LAM_UF_PROMINENT_CLEAR_DEBUFFS),
-        text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
+        title = GetString(LUIE_LAM_UF_PROMINENT_CLEAR_DEBUFFS),
+        text = zo_strformat(GetString(LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST), GetString(LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
         callback = function (_)
             SpellCastBuffs.ClearCustomList(SpellCastBuffs.SV.PromDebuffTable)
             LUIE_Prominent_Debuffs_List:UpdateChoices(GenerateCustomList(SpellCastBuffs.SV.PromDebuffTable))
@@ -69,8 +69,8 @@ local dialogs = {
 
     [4] = { -- Clear Priority Buffs
         identifier = "LUIE_CLEAR_PRIORITY_BUFFS",
-        title = GetString(SI_LUIE_LAM_UF_PRIORITY_CLEAR_BUFFS),
-        text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST), GetString(SI_LUIE_CUSTOM_LIST_PRIORITY_BUFFS)),
+        title = GetString(LUIE_LAM_UF_PRIORITY_CLEAR_BUFFS),
+        text = zo_strformat(GetString(LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST), GetString(LUIE_CUSTOM_LIST_PRIORITY_BUFFS)),
         callback = function (_)
             SpellCastBuffs.ClearCustomList(SpellCastBuffs.SV.PriorityBuffTable)
             LUIE_Priority_Buffs_List:UpdateChoices(GenerateCustomList(SpellCastBuffs.SV.PriorityBuffTable))
@@ -78,8 +78,8 @@ local dialogs = {
     },
     [5] = { -- Clear Priority Debuffs
         identifier = "LUIE_CLEAR_PRIORITY_DEBUFFS",
-        title = GetString(SI_LUIE_LAM_UF_PRIORITY_CLEAR_DEBUFFS),
-        text = zo_strformat(GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST), GetString(SI_LUIE_CUSTOM_LIST_PRIORITY_DEBUFFS)),
+        title = GetString(LUIE_LAM_UF_PRIORITY_CLEAR_DEBUFFS),
+        text = zo_strformat(GetString(LUIE_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST), GetString(LUIE_CUSTOM_LIST_PRIORITY_DEBUFFS)),
         callback = function (_)
             SpellCastBuffs.ClearCustomList(SpellCastBuffs.SV.PriorityDebuffTable)
             LUIE_Priority_Debuffs_List:UpdateChoices(GenerateCustomList(SpellCastBuffs.SV.PriorityDebuffTable))
@@ -121,8 +121,8 @@ function SpellCastBuffs.CreateSettings()
 
     local panelDataBuffsDebuffs = {
         type = "panel",
-        name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_BUFFSDEBUFFS)),
-        displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(SI_LUIE_LAM_BUFFSDEBUFFS)),
+        name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(LUIE_LAM_BUFFSDEBUFFS)),
+        displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(LUIE_LAM_BUFFSDEBUFFS)),
         author = LUIE.author .. "\n",
         version = LUIE.version,
         website = LUIE.website,
@@ -139,14 +139,14 @@ function SpellCastBuffs.CreateSettings()
     -- Buffs & Debuffs Description
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
         type = "description",
-        text = GetString(SI_LUIE_LAM_BUFFS_DESCRIPTION),
+        text = GetString(LUIE_LAM_BUFFS_DESCRIPTION),
     }
 
     -- ReloadUI Button
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
         type = "button",
-        name = GetString(SI_LUIE_LAM_RELOADUI),
-        tooltip = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
+        name = GetString(LUIE_LAM_RELOADUI),
+        tooltip = GetString(LUIE_LAM_RELOADUI_BUTTON),
         func = function ()
             ReloadUI("ingame")
         end,
@@ -156,8 +156,8 @@ function SpellCastBuffs.CreateSettings()
     -- Buffs Window Unlock
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_BUFF_UNLOCKWINDOW),
-        tooltip = GetString(SI_LUIE_LAM_BUFF_UNLOCKWINDOW_TP),
+        name = GetString(LUIE_LAM_BUFF_UNLOCKWINDOW),
+        tooltip = GetString(LUIE_LAM_BUFF_UNLOCKWINDOW_TP),
         getFunc = function ()
             return g_BuffsMovingEnabled
         end,
@@ -173,16 +173,16 @@ function SpellCastBuffs.CreateSettings()
     -- Buffs Window Reset position
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
         type = "button",
-        name = GetString(SI_LUIE_LAM_RESETPOSITION),
-        tooltip = GetString(SI_LUIE_LAM_BUFF_RESETPOSITION_TP),
+        name = GetString(LUIE_LAM_RESETPOSITION),
+        tooltip = GetString(LUIE_LAM_BUFF_RESETPOSITION_TP),
         func = SpellCastBuffs.ResetTlwPosition,
         width = "half",
     }
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
         -- Hard-Lock Position to Unit Frames
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_BUFF_HARDLOCK),
-        tooltip = GetString(SI_LUIE_LAM_BUFF_HARDLOCK_TP),
+        name = GetString(LUIE_LAM_BUFF_HARDLOCK),
+        tooltip = GetString(LUIE_LAM_BUFF_HARDLOCK_TP),
         getFunc = function ()
             return Settings.lockPositionToUnitFrames
         end,
@@ -190,19 +190,19 @@ function SpellCastBuffs.CreateSettings()
             Settings.lockPositionToUnitFrames = value
         end,
         width = "full",
-        warning = GetString(SI_LUIE_LAM_BUFF_HARDLOCK_WARNING),
+        warning = GetString(LUIE_LAM_BUFF_HARDLOCK_WARNING),
         default = Defaults.lockPositionToUnitFrames,
     }
 
     -- Buffs&Debuffs - Position and Display Options Submenu
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_BUFF_HEADER_POSITION),
+        name = GetString(LUIE_LAM_BUFF_HEADER_POSITION),
         controls = {
             {
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SHOWPLAYERBUFF)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWPLAYERBUFF_TP),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SHOWPLAYERBUFF)),
+                tooltip = GetString(LUIE_LAM_BUFF_SHOWPLAYERBUFF_TP),
                 getFunc = function ()
                     return not Settings.HidePlayerBuffs
                 end,
@@ -218,8 +218,8 @@ function SpellCastBuffs.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SHOWPLAYERDEBUFF)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWPLAYERDEBUFF_TP),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SHOWPLAYERDEBUFF)),
+                tooltip = GetString(LUIE_LAM_BUFF_SHOWPLAYERDEBUFF_TP),
                 getFunc = function ()
                     return not Settings.HidePlayerDebuffs
                 end,
@@ -235,8 +235,8 @@ function SpellCastBuffs.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SHOWTARGETBUFF)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWTARGETBUFF_TP),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SHOWTARGETBUFF)),
+                tooltip = GetString(LUIE_LAM_BUFF_SHOWTARGETBUFF_TP),
                 getFunc = function ()
                     return not Settings.HideTargetBuffs
                 end,
@@ -251,8 +251,8 @@ function SpellCastBuffs.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SHOWTARGETDEBUFF)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWTARGETDEBUFF_TP),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SHOWTARGETDEBUFF)),
+                tooltip = GetString(LUIE_LAM_BUFF_SHOWTARGETDEBUFF_TP),
                 getFunc = function ()
                     return not Settings.HideTargetDebuffs
                 end,
@@ -267,8 +267,8 @@ function SpellCastBuffs.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SHOWGROUNDBUFFDEBUFF)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWGROUNDBUFFDEBUFF_TP),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SHOWGROUNDBUFFDEBUFF)),
+                tooltip = GetString(LUIE_LAM_BUFF_SHOWGROUNDBUFFDEBUFF_TP),
                 getFunc = function ()
                     return not Settings.HideGroundEffects
                 end,
@@ -285,8 +285,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Ground Damage Auras
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SHOW_GROUND_DAMAGE)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOW_GROUND_DAMAGE_TP),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SHOW_GROUND_DAMAGE)),
+                tooltip = GetString(LUIE_LAM_BUFF_SHOW_GROUND_DAMAGE_TP),
                 getFunc = function ()
                     return Settings.GroundDamageAura
                 end,
@@ -306,8 +306,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Add Extra
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_ADD_EXTRA_BUFFS)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_ADD_EXTRA_BUFFS_TP),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_ADD_EXTRA_BUFFS)),
+                tooltip = GetString(LUIE_LAM_BUFF_ADD_EXTRA_BUFFS_TP),
                 getFunc = function ()
                     return Settings.ExtraBuffs
                 end,
@@ -324,8 +324,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Extra Expanded
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_EXTEND_EXTRA)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_EXTEND_EXTRA_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_BUFF_EXTEND_EXTRA)),
+                tooltip = GetString(LUIE_LAM_BUFF_EXTEND_EXTRA_TP),
                 getFunc = function ()
                     return Settings.ExtraExpanded
                 end,
@@ -345,8 +345,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Reduce
                 type = "checkbox",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_REDUCE)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_REDUCE_TP),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_REDUCE)),
+                tooltip = GetString(LUIE_LAM_BUFF_REDUCE_TP),
                 getFunc = function ()
                     return Settings.HideReduce
                 end,
@@ -364,8 +364,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Always Show Shared Debuffs
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_ALWAYS_SHARED_EFFECTS),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_ALWAYS_SHARED_EFFECTS_TP),
+                name = GetString(LUIE_LAM_BUFF_ALWAYS_SHARED_EFFECTS),
+                tooltip = GetString(LUIE_LAM_BUFF_ALWAYS_SHARED_EFFECTS_TP),
                 getFunc = function ()
                     return Settings.ShowSharedEffects
                 end,
@@ -384,8 +384,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Always Show Major/Minor Debuffs
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_ALWAYS_MAJOR_MINOR_EFFECTS),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_ALWAYS_MAJOR_MINOR_EFFECTS_TP),
+                name = GetString(LUIE_LAM_BUFF_ALWAYS_MAJOR_MINOR_EFFECTS),
+                tooltip = GetString(LUIE_LAM_BUFF_ALWAYS_MAJOR_MINOR_EFFECTS_TP),
                 getFunc = function ()
                     return Settings.ShowSharedMajorMinor
                 end,
@@ -406,12 +406,12 @@ function SpellCastBuffs.CreateSettings()
     -- Buffs&Debuffs - Long & Short Term Effects Filters
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_BUFF_LONG_SHORT_HEADER),
+        name = GetString(LUIE_LAM_BUFF_LONG_SHORT_HEADER),
         controls = {
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_SHORTTERM_SELF),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_SHORTTERM_SELF_TP),
+                name = GetString(LUIE_LAM_BUFF_SHORTTERM_SELF),
+                tooltip = GetString(LUIE_LAM_BUFF_SHORTTERM_SELF_TP),
                 getFunc = function ()
                     return Settings.ShortTermEffects_Player
                 end,
@@ -427,8 +427,8 @@ function SpellCastBuffs.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_SHORTTERM_TARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_SHORTTERM_TARGET_TP),
+                name = GetString(LUIE_LAM_BUFF_SHORTTERM_TARGET),
+                tooltip = GetString(LUIE_LAM_BUFF_SHORTTERM_TARGET_TP),
                 getFunc = function ()
                     return Settings.ShortTermEffects_Target
                 end,
@@ -444,8 +444,8 @@ function SpellCastBuffs.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SELF),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SELF_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_SELF),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_SELF_TP),
                 getFunc = function ()
                     return Settings.LongTermEffects_Player
                 end,
@@ -462,8 +462,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Separate control for player effects
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_SEPCTRL)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SEPCTRL_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_BUFF_LONGTERM_SEPCTRL)),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_SEPCTRL_TP),
                 getFunc = function ()
                     return Settings.LongTermEffectsSeparate
                 end,
@@ -479,8 +479,8 @@ function SpellCastBuffs.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_TARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_TARGET_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_TARGET),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_TARGET_TP),
                 getFunc = function ()
                     return Settings.LongTermEffects_Target
                 end,
@@ -497,7 +497,7 @@ function SpellCastBuffs.CreateSettings()
 
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_HEADER),
+                name = GetString(LUIE_LAM_BUFF_MISC_HEADER),
                 width = "full",
             },
 
@@ -505,8 +505,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Show Sprint Icon
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSPRINT),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSPRINT_TP),
+                name = GetString(LUIE_LAM_BUFF_MISC_SHOWSPRINT),
+                tooltip = GetString(LUIE_LAM_BUFF_MISC_SHOWSPRINT_TP),
                 getFunc = function() return Settings.ShowSprint end,
                 setFunc = function(value) Settings.ShowSprint = value end,
                 width = "full",
@@ -516,8 +516,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Show Gallop Icon
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWGALLOP),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWGALLOP_TP),
+                name = GetString(LUIE_LAM_BUFF_MISC_SHOWGALLOP),
+                tooltip = GetString(LUIE_LAM_BUFF_MISC_SHOWGALLOP_TP),
                 getFunc = function() return Settings.ShowGallop end,
                 setFunc = function(value) Settings.ShowGallop = value end,
                 width = "full",
@@ -529,8 +529,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Show Rezz Immunity Icon
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWREZZ),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWREZZ_TP),
+                name = GetString(LUIE_LAM_BUFF_MISC_SHOWREZZ),
+                tooltip = GetString(LUIE_LAM_BUFF_MISC_SHOWREZZ_TP),
                 getFunc = function ()
                     return Settings.ShowResurrectionImmunity
                 end,
@@ -547,8 +547,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Show Recall Cooldown Icon
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWRECALL),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWRECALL_TP),
+                name = GetString(LUIE_LAM_BUFF_MISC_SHOWRECALL),
+                tooltip = GetString(LUIE_LAM_BUFF_MISC_SHOWRECALL_TP),
                 getFunc = function ()
                     return Settings.ShowRecall
                 end,
@@ -565,8 +565,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Show Werewolf Timer Icon
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWWEREWOLF),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWWEREWOLF_TP),
+                name = GetString(LUIE_LAM_BUFF_MISC_SHOWWEREWOLF),
+                tooltip = GetString(LUIE_LAM_BUFF_MISC_SHOWWEREWOLF_TP),
                 getFunc = function ()
                     return Settings.ShowWerewolf
                 end,
@@ -584,8 +584,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Short Term - Set ICD - Player
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER_TP),
                 getFunc = function ()
                     return not Settings.IgnoreSetICDPlayer
                 end,
@@ -602,8 +602,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Short Term - Ability ICD - Player
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ABILITYICDPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ABILITYICDPLAYER_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_ABILITYICDPLAYER),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_ABILITYICDPLAYER_TP),
                 getFunc = function ()
                     return not Settings.IgnoreAbilityICDPlayer
                 end,
@@ -621,8 +621,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Show Block Player Icon
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKPLAYER_TP),
+                name = GetString(LUIE_LAM_BUFF_MISC_SHOWBLOCKPLAYER),
+                tooltip = GetString(LUIE_LAM_BUFF_MISC_SHOWBLOCKPLAYER_TP),
                 getFunc = function() return Settings.ShowBlockPlayer end,
                 setFunc = function(value) Settings.ShowBlockPlayer = value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
                 width = "full",
@@ -634,8 +634,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Show Block Target Icon
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKTARGET_TP),
+                name = GetString(LUIE_LAM_BUFF_MISC_SHOWBLOCKTARGET),
+                tooltip = GetString(LUIE_LAM_BUFF_MISC_SHOWBLOCKTARGET_TP),
                 getFunc = function ()
                     return Settings.ShowBlockTarget
                 end,
@@ -653,8 +653,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Show Stealth Player Icon
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHPLAYER_TP),
+                name = GetString(LUIE_LAM_BUFF_MISC_SHOWSTEALTHPLAYER),
+                tooltip = GetString(LUIE_LAM_BUFF_MISC_SHOWSTEALTHPLAYER_TP),
                 getFunc = function ()
                     return Settings.StealthStatePlayer
                 end,
@@ -671,8 +671,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Show Stealth Target Icon
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHTARGET_TP),
+                name = GetString(LUIE_LAM_BUFF_MISC_SHOWSTEALTHTARGET),
+                tooltip = GetString(LUIE_LAM_BUFF_MISC_SHOWSTEALTHTARGET_TP),
                 getFunc = function ()
                     return Settings.StealthStateTarget
                 end,
@@ -689,8 +689,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Show Disguise Player Icon
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISEPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISEPLAYER_TP),
+                name = GetString(LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISEPLAYER),
+                tooltip = GetString(LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISEPLAYER_TP),
                 getFunc = function ()
                     return Settings.DisguiseStatePlayer
                 end,
@@ -707,8 +707,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Show Disguise Target Icon
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISETARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISETARGET_TP),
+                name = GetString(LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISETARGET),
+                tooltip = GetString(LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISETARGET_TP),
                 getFunc = function ()
                     return Settings.DisguiseStateTarget
                 end,
@@ -725,15 +725,15 @@ function SpellCastBuffs.CreateSettings()
 
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_HEADER),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_HEADER),
                 width = "full",
             },
 
             {
                 -- Long Term - Disguises
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_DISGUISE),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_DISGUISE_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_DISGUISE),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_DISGUISE_TP),
                 getFunc = function ()
                     return not Settings.IgnoreDisguise
                 end,
@@ -750,8 +750,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Assistants
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ASSISTANT),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ASSISTANT_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_ASSISTANT),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_ASSISTANT_TP),
                 getFunc = function ()
                     return not Settings.IgnoreAssistant
                 end,
@@ -768,8 +768,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Pets
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_PET),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_PET_TP),
                 getFunc = function ()
                     return not Settings.IgnorePet
                 end,
@@ -786,8 +786,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Use Generic Pet Icon
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET_ICON)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET_ICON_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_BUFF_LONGTERM_PET_ICON)),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_PET_ICON_TP),
                 getFunc = function ()
                     return Settings.PetDetail
                 end,
@@ -804,8 +804,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Mounts (Player)
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_PLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_PLAYER_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_MOUNT_PLAYER),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_MOUNT_PLAYER_TP),
                 getFunc = function ()
                     return not Settings.IgnoreMountPlayer
                 end,
@@ -822,8 +822,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Use Generic Mount Icon
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_ICON)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_ICON_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_BUFF_LONGTERM_MOUNT_ICON)),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_MOUNT_ICON_TP),
                 getFunc = function ()
                     return Settings.MountDetail
                 end,
@@ -841,8 +841,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Mounts (Target)
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_TARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_TARGET_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_MOUNT_TARGET),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_MOUNT_TARGET_TP),
                 getFunc = function() return not Settings.IgnoreMountTarget end,
                 setFunc = function(value) Settings.IgnoreMountTarget = not value end,
                 width = "full",
@@ -854,8 +854,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Mundus - Player
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSPLAYER_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_MUNDUSPLAYER),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_MUNDUSPLAYER_TP),
                 getFunc = function ()
                     return not Settings.IgnoreMundusPlayer
                 end,
@@ -873,8 +873,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Mundus - Target
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSTARGET_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_MUNDUSTARGET),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_MUNDUSTARGET_TP),
                 getFunc = function ()
                     return not Settings.IgnoreMundusTarget
                 end,
@@ -892,8 +892,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Food & Drink - Player
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_FOODPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_FOODPLAYER_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_FOODPLAYER),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_FOODPLAYER_TP),
                 getFunc = function ()
                     return not Settings.IgnoreFoodPlayer
                 end,
@@ -911,8 +911,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Food & Drink - Target
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_FOODTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_FOODTARGET_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_FOODTARGET),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_FOODTARGET_TP),
                 getFunc = function ()
                     return not Settings.IgnoreFoodTarget
                 end,
@@ -930,8 +930,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Experience - Player
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_EXPERIENCEPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_EXPERIENCEPLAYER_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_EXPERIENCEPLAYER),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_EXPERIENCEPLAYER_TP),
                 getFunc = function ()
                     return not Settings.IgnoreExperiencePlayer
                 end,
@@ -949,8 +949,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Experience - Target
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_EXPERIENCETARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_EXPERIENCETARGET_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_EXPERIENCETARGET),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_EXPERIENCETARGET_TP),
                 getFunc = function ()
                     return not Settings.IgnoreExperienceTarget
                 end,
@@ -969,8 +969,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Alliance XP - Player
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ALLIANCEXPPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ALLIANCEXPPLAYER_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_ALLIANCEXPPLAYER),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_ALLIANCEXPPLAYER_TP),
                 getFunc = function ()
                     return not Settings.IgnoreAllianceXPPlayer
                 end,
@@ -988,8 +988,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Alliance XP - Target
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ALLIANCEXPTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ALLIANCEXPTARGET_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_ALLIANCEXPTARGET),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_ALLIANCEXPTARGET_TP),
                 getFunc = function ()
                     return not Settings.IgnoreAllianceXPTarget
                 end,
@@ -1008,8 +1008,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Vamp Stage - Player
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGEPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGEPLAYER_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_VAMPSTAGEPLAYER),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_VAMPSTAGEPLAYER_TP),
                 getFunc = function ()
                     return not Settings.IgnoreVampPlayer
                 end,
@@ -1027,8 +1027,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Vamp Stage - Target
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGETARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGETARGET_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_VAMPSTAGETARGET),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_VAMPSTAGETARGET_TP),
                 getFunc = function ()
                     return not Settings.IgnoreVampTarget
                 end,
@@ -1046,8 +1046,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Lycanthrophy - Player
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_LYCANPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_LYCANPLAYER_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_LYCANPLAYER),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_LYCANPLAYER_TP),
                 getFunc = function ()
                     return not Settings.IgnoreLycanPlayer
                 end,
@@ -1065,8 +1065,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Lycanthrophy - Target
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_LYCANTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_LYCANTARGET_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_LYCANTARGET),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_LYCANTARGET_TP),
                 getFunc = function ()
                     return not Settings.IgnoreLycanTarget
                 end,
@@ -1084,8 +1084,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Bite Disease - Player
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPWWPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPWWPLAYER_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_VAMPWWPLAYER),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_VAMPWWPLAYER_TP),
                 getFunc = function ()
                     return not Settings.IgnoreDiseasePlayer
                 end,
@@ -1103,8 +1103,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Bite Disease - Target
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPWWTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPWWTARGET_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_VAMPWWTARGET),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_VAMPWWTARGET_TP),
                 getFunc = function ()
                     return not Settings.IgnoreDiseaseTarget
                 end,
@@ -1122,8 +1122,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Bite Timers - Player
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BITEPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BITEPLAYER_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_BITEPLAYER),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_BITEPLAYER_TP),
                 getFunc = function ()
                     return not Settings.IgnoreBitePlayer
                 end,
@@ -1141,8 +1141,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Bite Timers - Target
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BITETARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BITETARGET_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_BITETARGET),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_BITETARGET_TP),
                 getFunc = function ()
                     return not Settings.IgnoreBiteTarget
                 end,
@@ -1160,8 +1160,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Battle Spirit - Player
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITPLAYER_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_BSPIRITPLAYER),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_BSPIRITPLAYER_TP),
                 getFunc = function ()
                     return not Settings.IgnoreBattleSpiritPlayer
                 end,
@@ -1180,8 +1180,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Battle Spirit - Target
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITTARGET_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_BSPIRITTARGET),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_BSPIRITTARGET_TP),
                 getFunc = function ()
                     return not Settings.IgnoreBattleSpiritTarget
                 end,
@@ -1199,8 +1199,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Cyrodiil - Player
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROPLAYER_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_CYROPLAYER),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_CYROPLAYER_TP),
                 getFunc = function ()
                     return not Settings.IgnoreCyrodiilPlayer
                 end,
@@ -1218,8 +1218,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Crodiil - Target
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROTARGET_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_CYROTARGET),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_CYROTARGET_TP),
                 getFunc = function ()
                     return not Settings.IgnoreCyrodiilTarget
                 end,
@@ -1237,8 +1237,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - ESO Plus - Player
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSPLAYER_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_ESOPLUSPLAYER),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_ESOPLUSPLAYER_TP),
                 getFunc = function ()
                     return not Settings.IgnoreEsoPlusPlayer
                 end,
@@ -1256,8 +1256,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - ESO Plus - Target
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSTARGET_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_ESOPLUSTARGET),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_ESOPLUSTARGET_TP),
                 getFunc = function ()
                     return not Settings.IgnoreEsoPlusTarget
                 end,
@@ -1275,8 +1275,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Soul Summons - Player
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSPLAYER_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSPLAYER),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSPLAYER_TP),
                 getFunc = function ()
                     return not Settings.IgnoreSoulSummonsPlayer
                 end,
@@ -1294,8 +1294,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Long Term - Soul Summons - Target
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSTARGET_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSTARGET),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSTARGET_TP),
                 getFunc = function ()
                     return not Settings.IgnoreSoulSummonsTarget
                 end,
@@ -1316,13 +1316,13 @@ function SpellCastBuffs.CreateSettings()
     -- Buffs&Debuffs - Icon Options Submenu
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_BUFF_ICON_HEADER),
+        name = GetString(LUIE_LAM_BUFF_ICON_HEADER),
         controls = {
             {
                 -- Buff Icon Size
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_BUFF_ICONSIZE),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_ICONSIZE_TP),
+                name = GetString(LUIE_LAM_BUFF_ICONSIZE),
+                tooltip = GetString(LUIE_LAM_BUFF_ICONSIZE_TP),
                 min = 30,
                 max = 60,
                 step = 2,
@@ -1342,8 +1342,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Show Remaining Time Label
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_SHOWREMAINTIMELABEL),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWREMAINTIMELABEL_TP),
+                name = GetString(LUIE_LAM_BUFF_SHOWREMAINTIMELABEL),
+                tooltip = GetString(LUIE_LAM_BUFF_SHOWREMAINTIMELABEL_TP),
                 getFunc = function ()
                     return Settings.RemainingText
                 end,
@@ -1360,8 +1360,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Label Position
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LABEL_POSITION_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_CI_SHARED_POSITION)),
+                tooltip = GetString(LUIE_LAM_BUFF_LABEL_POSITION_TP),
                 min = -64,
                 max = 64,
                 step = 2,
@@ -1382,8 +1382,8 @@ function SpellCastBuffs.CreateSettings()
                 -- Buff Label Font
                 type = "dropdown",
                 scrollable = true,
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_FONT_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_FONT)),
+                tooltip = GetString(LUIE_LAM_BUFF_FONT_TP),
                 choices = FontsList,
                 sort = "name-up",
                 getFunc = function ()
@@ -1402,8 +1402,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Font Size
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_FONTSIZE_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_FONT_SIZE)),
+                tooltip = GetString(LUIE_LAM_BUFF_FONTSIZE_TP),
                 min = 10,
                 max = 30,
                 step = 1,
@@ -1423,8 +1423,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Font Style
                 type = "dropdown",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_FONTSTYLE_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_FONT_STYLE)),
+                tooltip = GetString(LUIE_LAM_BUFF_FONTSTYLE_TP),
                 choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
                 sort = "name-up",
                 getFunc = function ()
@@ -1443,8 +1443,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Colored Label
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_POTION_COLOR)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LABELCOLOR_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_CI_POTION_COLOR)),
+                tooltip = GetString(LUIE_LAM_BUFF_LABELCOLOR_TP),
                 getFunc = function ()
                     return Settings.RemainingTextColoured
                 end,
@@ -1461,8 +1461,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Show Seconds Fractions
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_BUFF_SHOWSECONDFRACTIONS)),
+                tooltip = GetString(LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP),
                 getFunc = function ()
                     return Settings.RemainingTextMillis
                 end,
@@ -1478,8 +1478,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Glow Icon Border
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_GLOWICONBORDER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_GLOWICONBORDER_TP),
+                name = GetString(LUIE_LAM_BUFF_GLOWICONBORDER),
+                tooltip = GetString(LUIE_LAM_BUFF_GLOWICONBORDER_TP),
                 getFunc = function ()
                     return Settings.GlowIcons
                 end,
@@ -1496,8 +1496,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Show Border Cooldown
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_SHOWBORDERCOOLDOWN),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWBORDERCOOLDOWN_TP),
+                name = GetString(LUIE_LAM_BUFF_SHOWBORDERCOOLDOWN),
+                tooltip = GetString(LUIE_LAM_BUFF_SHOWBORDERCOOLDOWN_TP),
                 getFunc = function ()
                     return Settings.RemainingCooldown
                 end,
@@ -1514,8 +1514,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Fade Expiring Icon
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_FADEEXPIREICON),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_FADEEXPIREICON_TP),
+                name = GetString(LUIE_LAM_BUFF_FADEEXPIREICON),
+                tooltip = GetString(LUIE_LAM_BUFF_FADEEXPIREICON_TP),
                 getFunc = function ()
                     return Settings.FadeOutIcons
                 end,
@@ -1532,14 +1532,14 @@ function SpellCastBuffs.CreateSettings()
             -- Icon Normalization Options
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_BUFF_NORMALIZE_HEADER),
+                name = GetString(LUIE_LAM_BUFF_NORMALIZE_HEADER),
                 width = "full",
             },
             {
                 -- Use Generic Icon for CC Type
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON),
-                tooltip = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_TP),
+                name = GetString(LUIE_LAM_CI_CCT_DEFAULT_ICON),
+                tooltip = GetString(LUIE_LAM_CI_CCT_DEFAULT_ICON_TP),
                 getFunc = function ()
                     return Settings.UseDefaultIcon
                 end,
@@ -1554,8 +1554,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Generic Icon Options
                 type = "dropdown",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_OPTIONS)),
-                tooltip = GetString(SI_LUIE_LAM_CI_CCT_DEFAULT_ICON_OPTIONS_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_CI_CCT_DEFAULT_ICON_OPTIONS)),
+                tooltip = GetString(LUIE_LAM_CI_CCT_DEFAULT_ICON_OPTIONS_TP),
                 choices = globalIconOptions,
                 getFunc = function ()
                     return globalIconOptions[Settings.DefaultIconOptions]
@@ -1575,19 +1575,19 @@ function SpellCastBuffs.CreateSettings()
     -- Buffs&Debuffs - Color Options Submenu
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_BUFF_COLOR_HEADER),
+        name = GetString(LUIE_LAM_BUFF_COLOR_HEADER),
         controls = {
             {
                 -- Basic Color Options
                 type = "header",
-                name = GetString(SI_LUIE_LAM_BUFF_COLOR_HEADER_BASIC),
+                name = GetString(LUIE_LAM_BUFF_COLOR_HEADER_BASIC),
                 width = "full",
             },
             {
                 -- buff
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_BUFF_COLOR_BUFF),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_BUFF_TP),
+                name = GetString(LUIE_LAM_BUFF_COLOR_BUFF),
+                tooltip = GetString(LUIE_LAM_BUFF_COLOR_BUFF_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.buff)
                 end,
@@ -1600,8 +1600,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- debuff
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_BUFF_COLOR_DEBUFF),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_DEBUFF_TP),
+                name = GetString(LUIE_LAM_BUFF_COLOR_DEBUFF),
+                tooltip = GetString(LUIE_LAM_BUFF_COLOR_DEBUFF_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.debuff)
                 end,
@@ -1618,8 +1618,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- prioritybuff
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_BUFF_COLOR_PRIORITYBUFF),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_PRIORITYBUFF_TP),
+                name = GetString(LUIE_LAM_BUFF_COLOR_PRIORITYBUFF),
+                tooltip = GetString(LUIE_LAM_BUFF_COLOR_PRIORITYBUFF_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.prioritybuff)
                 end,
@@ -1636,8 +1636,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- prioritydebuff
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_BUFF_COLOR_PRIORITYDEBUFF),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_PRIORITYDEBUFF_TP),
+                name = GetString(LUIE_LAM_BUFF_COLOR_PRIORITYDEBUFF),
+                tooltip = GetString(LUIE_LAM_BUFF_COLOR_PRIORITYDEBUFF_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.prioritydebuff)
                 end,
@@ -1654,14 +1654,14 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Unbreakable & Cosmetic Header
                 type = "header",
-                name = GetString(SI_LUIE_LAM_BUFF_COLOR_HEADER_UNBREAKABLE),
+                name = GetString(LUIE_LAM_BUFF_COLOR_HEADER_UNBREAKABLE),
                 width = "full",
             },
             {
                 -- Unbreakable Toggle
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_COLOR_UNBREAKABLE_TOGGLE),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_UNBREAKABLE_TOGGLE_TP),
+                name = GetString(LUIE_LAM_BUFF_COLOR_UNBREAKABLE_TOGGLE),
+                tooltip = GetString(LUIE_LAM_BUFF_COLOR_UNBREAKABLE_TOGGLE_TP),
                 getFunc = function ()
                     return Settings.ColorUnbreakable
                 end,
@@ -1678,8 +1678,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- unbreakable
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_COLOR_UNBREAKABLE)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_UNBREAKABLE_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_BUFF_COLOR_UNBREAKABLE)),
+                tooltip = GetString(LUIE_LAM_BUFF_COLOR_UNBREAKABLE_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.unbreakable)
                 end,
@@ -1699,8 +1699,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Cosmetic Toggle
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_COLOR_COSMETIC_TOGGLE),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_COSMETIC_TOGGLE_TP),
+                name = GetString(LUIE_LAM_BUFF_COLOR_COSMETIC_TOGGLE),
+                tooltip = GetString(LUIE_LAM_BUFF_COLOR_COSMETIC_TOGGLE_TP),
                 getFunc = function ()
                     return Settings.ColorCosmetic
                 end,
@@ -1717,8 +1717,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- cosmetic
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_COLOR_COSMETIC)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_COSMETIC_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_BUFF_COLOR_COSMETIC)),
+                tooltip = GetString(LUIE_LAM_BUFF_COLOR_COSMETIC_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.cosmetic)
                 end,
@@ -1737,14 +1737,14 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Crowd Control Header
                 type = "header",
-                name = GetString(SI_LUIE_LAM_BUFF_COLOR_HEADER_CROWD_CONTROL),
+                name = GetString(LUIE_LAM_BUFF_COLOR_HEADER_CROWD_CONTROL),
                 width = "full",
             },
             {
                 -- CC Toggle
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_COLOR_BY_CC),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_BY_CC_TP),
+                name = GetString(LUIE_LAM_BUFF_COLOR_BY_CC),
+                tooltip = GetString(LUIE_LAM_BUFF_COLOR_BY_CC_TP),
                 getFunc = function ()
                     return Settings.ColorCC
                 end,
@@ -1761,8 +1761,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- nocc
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_BUFF_COLOR_NOCC),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_NOCC_TP),
+                name = GetString(LUIE_LAM_BUFF_COLOR_NOCC),
+                tooltip = GetString(LUIE_LAM_BUFF_COLOR_NOCC_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.nocc)
                 end,
@@ -1778,8 +1778,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- stun
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_BUFF_COLOR_STUN),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_STUN_TP),
+                name = GetString(LUIE_LAM_BUFF_COLOR_STUN),
+                tooltip = GetString(LUIE_LAM_BUFF_COLOR_STUN_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.stun)
                 end,
@@ -1795,8 +1795,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- knockback
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_BUFF_COLOR_KNOCKBACK),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_KNOCKBACK_TP),
+                name = GetString(LUIE_LAM_BUFF_COLOR_KNOCKBACK),
+                tooltip = GetString(LUIE_LAM_BUFF_COLOR_KNOCKBACK_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.knockback)
                 end,
@@ -1816,8 +1816,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- levitate
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_BUFF_COLOR_LEVITATE),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_LEVITATE_TP),
+                name = GetString(LUIE_LAM_BUFF_COLOR_LEVITATE),
+                tooltip = GetString(LUIE_LAM_BUFF_COLOR_LEVITATE_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.levitate)
                 end,
@@ -1837,8 +1837,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- disorient
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_BUFF_COLOR_DISORIENT),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_DISORIENT_TP),
+                name = GetString(LUIE_LAM_BUFF_COLOR_DISORIENT),
+                tooltip = GetString(LUIE_LAM_BUFF_COLOR_DISORIENT_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.disorient)
                 end,
@@ -1858,8 +1858,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- fear
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_BUFF_COLOR_FEAR),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_FEAR_TP),
+                name = GetString(LUIE_LAM_BUFF_COLOR_FEAR),
+                tooltip = GetString(LUIE_LAM_BUFF_COLOR_FEAR_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.fear)
                 end,
@@ -1875,8 +1875,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- charm
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_BUFF_COLOR_CHARM),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_CHARM_TP),
+                name = GetString(LUIE_LAM_BUFF_COLOR_CHARM),
+                tooltip = GetString(LUIE_LAM_BUFF_COLOR_CHARM_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.charm)
                 end,
@@ -1892,8 +1892,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- stagger
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_BUFF_COLOR_STAGGER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_STAGGER_TP),
+                name = GetString(LUIE_LAM_BUFF_COLOR_STAGGER),
+                tooltip = GetString(LUIE_LAM_BUFF_COLOR_STAGGER_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.stagger)
                 end,
@@ -1913,8 +1913,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- silence
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_BUFF_COLOR_SILENCE),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_SILENCE_TP),
+                name = GetString(LUIE_LAM_BUFF_COLOR_SILENCE),
+                tooltip = GetString(LUIE_LAM_BUFF_COLOR_SILENCE_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.silence)
                 end,
@@ -1934,8 +1934,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- snare
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_BUFF_COLOR_SNARE),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_SNARE_TP),
+                name = GetString(LUIE_LAM_BUFF_COLOR_SNARE),
+                tooltip = GetString(LUIE_LAM_BUFF_COLOR_SNARE_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.snare)
                 end,
@@ -1951,8 +1951,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- root
                 type = "colorpicker",
-                name = GetString(SI_LUIE_LAM_BUFF_COLOR_ROOT),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOR_ROOT_TP),
+                name = GetString(LUIE_LAM_BUFF_COLOR_ROOT),
+                tooltip = GetString(LUIE_LAM_BUFF_COLOR_ROOT_TP),
                 getFunc = function ()
                     return unpack(Settings.colors.root)
                 end,
@@ -1971,19 +1971,19 @@ function SpellCastBuffs.CreateSettings()
     -- Buffs&Debuffs - Alignment & Sorting Options Submenu
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_BUFF_SORTING_HEADER),
+        name = GetString(LUIE_LAM_BUFF_SORTING_HEADER),
         controls = {
             -- Buffs/Debuffs Alignment & Sorting
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_BUFF_SORTING_NORMAL_HEADER),
+                name = GetString(LUIE_LAM_BUFF_SORTING_NORMAL_HEADER),
                 width = "full",
             },
             {
                 -- Buff Alignment (BuffsPlayer)
                 type = "dropdown",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN), GetString(LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN_TP), GetString(LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)),
                 choices = { "Left", "Centered", "Right" },
                 getFunc = function ()
                     return Settings.AlignmentBuffsPlayer
@@ -1999,8 +1999,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Sort Direction (BuffsPlayer)
                 type = "dropdown",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_GENERIC), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_GENERIC_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_SORT_GENERIC), GetString(LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_SORT_GENERIC_TP), GetString(LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)),
                 choices = { "Left to Right", "Right to Left" },
                 getFunc = function ()
                     return Settings.SortBuffsPlayer
@@ -2016,8 +2016,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Alignment (DebuffsPlayer)
                 type = "dropdown",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN), GetString(LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN_TP), GetString(LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)),
                 choices = { "Left", "Centered", "Right" },
                 getFunc = function ()
                     return Settings.AlignmentDebuffsPlayer
@@ -2033,8 +2033,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Sort Direction (DebuffsPlayer)
                 type = "dropdown",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_GENERIC), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_GENERIC_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_SORT_GENERIC), GetString(LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_SORT_GENERIC_TP), GetString(LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)),
                 choices = { "Left to Right", "Right to Left" },
                 getFunc = function ()
                     return Settings.SortDebuffsPlayer
@@ -2050,8 +2050,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Alignment (BuffsTarget)
                 type = "dropdown",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN), GetString(LUIE_SCB_WINDOWTITLE_TARGETBUFFS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN_TP), GetString(LUIE_SCB_WINDOWTITLE_TARGETBUFFS)),
                 choices = { "Left", "Centered", "Right" },
                 getFunc = function ()
                     return Settings.AlignmentBuffsTarget
@@ -2067,8 +2067,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Sort Direction (BuffsTarget)
                 type = "dropdown",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_GENERIC), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_GENERIC_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_SORT_GENERIC), GetString(LUIE_SCB_WINDOWTITLE_TARGETBUFFS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_SORT_GENERIC_TP), GetString(LUIE_SCB_WINDOWTITLE_TARGETBUFFS)),
                 choices = { "Left to Right", "Right to Left" },
                 getFunc = function ()
                     return Settings.SortBuffsTarget
@@ -2084,8 +2084,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Alignment (DebuffsTarget)
                 type = "dropdown",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN), GetString(LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_GENERIC_ALIGN_TP), GetString(LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)),
                 choices = { "Left", "Centered", "Right" },
                 getFunc = function ()
                     return Settings.AlignmentDebuffsTarget
@@ -2101,8 +2101,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Sort Direction (DebuffsTarget)
                 type = "dropdown",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_GENERIC), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_GENERIC_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_SORT_GENERIC), GetString(LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_SORT_GENERIC_TP), GetString(LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)),
                 choices = { "Left to Right", "Right to Left" },
                 getFunc = function ()
                     return Settings.SortDebuffsTarget
@@ -2119,19 +2119,19 @@ function SpellCastBuffs.CreateSettings()
             -- Unanchored Player / Target Buff Options
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_BUFF_SORTING_UNANCHORED_HEADER),
+                name = GetString(LUIE_LAM_BUFF_SORTING_UNANCHORED_HEADER),
                 width = "full",
             },
             {
                 type = "description",
-                text = GetString(SI_LUIE_LAM_BUFF_SORTING_UNANCHORED_DESCRIPTION),
+                text = GetString(LUIE_LAM_BUFF_SORTING_UNANCHORED_DESCRIPTION),
             },
 
             {
                 -- Buff Width - Player Buffs
                 type = "slider",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_WIDTH_GENERIC), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_WIDTH_GENERIC_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_WIDTH_GENERIC), GetString(LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_WIDTH_GENERIC_TP), GetString(LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)),
                 min = 40,
                 max = 1920,
                 step = 10,
@@ -2152,8 +2152,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Stack Direction - Player Buffs
                 type = "dropdown",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_STACK_GENERIC), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_STACK_GENERIC_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_STACK_GENERIC), GetString(LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_STACK_GENERIC_TP), GetString(LUIE_SCB_WINDOWTITLE_PLAYERBUFFS)),
                 choices = { "Down", "Up" },
                 getFunc = function ()
                     return Settings.StackPlayerBuffs
@@ -2173,8 +2173,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Width - Player Debuffs
                 type = "slider",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_WIDTH_GENERIC), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_WIDTH_GENERIC_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_WIDTH_GENERIC), GetString(LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_WIDTH_GENERIC_TP), GetString(LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)),
                 min = 40,
                 max = 1920,
                 step = 10,
@@ -2195,8 +2195,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Stack Direction - Player Debuffs
                 type = "dropdown",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_STACK_GENERIC), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_STACK_GENERIC_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_STACK_GENERIC), GetString(LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_STACK_GENERIC_TP), GetString(LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS)),
                 choices = { "Down", "Up" },
                 getFunc = function ()
                     return Settings.StackPlayerDebuffs
@@ -2216,8 +2216,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Width - Target Buffs
                 type = "slider",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_WIDTH_GENERIC), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_WIDTH_GENERIC_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_WIDTH_GENERIC), GetString(LUIE_SCB_WINDOWTITLE_TARGETBUFFS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_WIDTH_GENERIC_TP), GetString(LUIE_SCB_WINDOWTITLE_TARGETBUFFS)),
                 min = 40,
                 max = 1920,
                 step = 10,
@@ -2238,8 +2238,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Stack Direction - Target Buffs
                 type = "dropdown",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_STACK_GENERIC), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_STACK_GENERIC_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_STACK_GENERIC), GetString(LUIE_SCB_WINDOWTITLE_TARGETBUFFS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_STACK_GENERIC_TP), GetString(LUIE_SCB_WINDOWTITLE_TARGETBUFFS)),
                 choices = { "Down", "Up" },
                 getFunc = function ()
                     return Settings.StackTargetBuffs
@@ -2259,8 +2259,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Width - Target Debuffs
                 type = "slider",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_WIDTH_GENERIC), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_WIDTH_GENERIC_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_WIDTH_GENERIC), GetString(LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_WIDTH_GENERIC_TP), GetString(LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)),
                 min = 40,
                 max = 1920,
                 step = 10,
@@ -2281,8 +2281,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buff Stack Direction - Target Debuffs
                 type = "dropdown",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_STACK_GENERIC), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_STACK_GENERIC_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_STACK_GENERIC), GetString(LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_STACK_GENERIC_TP), GetString(LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS)),
                 choices = { "Down", "Up" },
                 getFunc = function ()
                     return Settings.StackTargetDebuffs
@@ -2302,14 +2302,14 @@ function SpellCastBuffs.CreateSettings()
             -- Long Term Alignment & Sorting
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_BUFF_SORTING_LONGTERM_HEADER),
+                name = GetString(LUIE_LAM_BUFF_SORTING_LONGTERM_HEADER),
                 width = "full",
             },
             {
                 -- Container Orientation (Long Term)
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CONTAINER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CONTAINER_TP),
+                name = GetString(LUIE_LAM_BUFF_LONGTERM_CONTAINER),
+                tooltip = GetString(LUIE_LAM_BUFF_LONGTERM_CONTAINER_TP),
                 choices = rotationOptions,
                 getFunc = function ()
                     return rotationOptions[Settings.LongTermEffectsSeparateAlignment]
@@ -2325,8 +2325,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Horizontal Long Term Icons Alignment
                 type = "dropdown",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_HORIZONTAL_ALIGN), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_HORIZONTAL_ALIGN_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_HORIZONTAL_ALIGN), GetString(LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_HORIZONTAL_ALIGN_TP), GetString(LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)),
                 choices = { "Left", "Centered", "Right" },
                 getFunc = function ()
                     return Settings.AlignmentLongHorz
@@ -2345,8 +2345,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Horizontal Long Term Sort
                 type = "dropdown",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_HORIZONTAL), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_HORIZONTAL_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_SORT_HORIZONTAL), GetString(LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_SORT_HORIZONTAL_TP), GetString(LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)),
                 choices = { "Left to Right", "Right to Left" },
                 getFunc = function ()
                     return Settings.SortLongHorz
@@ -2365,8 +2365,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Vertical Long Term Icons Alignment
                 type = "dropdown",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_VERTICAL_ALIGN), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_VERTICAL_ALIGN_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_VERTICAL_ALIGN), GetString(LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_VERTICAL_ALIGN_TP), GetString(LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)),
                 choices = { "Top", "Centered", "Bottom" },
                 getFunc = function ()
                     return Settings.AlignmentLongVert
@@ -2385,8 +2385,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Vertical Long Term Sort
                 type = "dropdown",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_VERTICAL), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_VERTICAL_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_SORT_VERTICAL), GetString(LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_SORT_VERTICAL_TP), GetString(LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS)),
                 choices = { "Bottom to Top", "Top to Bottom" },
                 getFunc = function ()
                     return Settings.SortLongVert
@@ -2406,15 +2406,15 @@ function SpellCastBuffs.CreateSettings()
             -- Prominent Alignment & Sorting
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_BUFF_SORTING_PROMINET_HEADER),
+                name = GetString(LUIE_LAM_BUFF_SORTING_PROMINET_HEADER),
                 width = "full",
             },
 
             {
                 -- Prominent Buff Container Orientation
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_BUFF_PROM_BUFFCONTAINER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_BUFFCONTAINER_TP),
+                name = GetString(LUIE_LAM_BUFF_PROM_BUFFCONTAINER),
+                tooltip = GetString(LUIE_LAM_BUFF_PROM_BUFFCONTAINER_TP),
                 choices = rotationOptions,
                 getFunc = function ()
                     return rotationOptions[Settings.ProminentBuffContainerAlignment]
@@ -2430,8 +2430,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Horizontal Prominent Buffs Icons Alignment
                 type = "dropdown",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_HORIZONTAL_ALIGN), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_HORIZONTAL_ALIGN_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_HORIZONTAL_ALIGN), GetString(LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_HORIZONTAL_ALIGN_TP), GetString(LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
                 choices = { "Left", "Centered", "Right" },
                 getFunc = function ()
                     return Settings.AlignmentPromBuffsHorz
@@ -2450,8 +2450,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Horizontal Prominent Buffs Sort
                 type = "dropdown",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_HORIZONTAL), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_HORIZONTAL_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_SORT_HORIZONTAL), GetString(LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_SORT_HORIZONTAL_TP), GetString(LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
                 choices = { "Left to Right", "Right to Left" },
                 getFunc = function ()
                     return Settings.SortPromBuffsHorz
@@ -2470,8 +2470,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Vertical Prominent Buffs Icons Alignment
                 type = "dropdown",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_VERTICAL_ALIGN), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_VERTICAL_ALIGN_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_VERTICAL_ALIGN), GetString(LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_VERTICAL_ALIGN_TP), GetString(LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
                 choices = { "Top", "Centered", "Bottom" },
                 getFunc = function ()
                     return Settings.AlignmentPromBuffsVert
@@ -2490,8 +2490,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Vertical Prominent Buffs Sort
                 type = "dropdown",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_VERTICAL), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_VERTICAL_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_SORT_VERTICAL), GetString(LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_SORT_VERTICAL_TP), GetString(LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS)),
                 choices = { "Bottom to Top", "Top to Bottom" },
                 getFunc = function ()
                     return Settings.SortPromBuffsVert
@@ -2513,8 +2513,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Prominent Debuff Container Orientation
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFFCONTAINER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFFCONTAINER_TP),
+                name = GetString(LUIE_LAM_BUFF_PROM_DEBUFFCONTAINER),
+                tooltip = GetString(LUIE_LAM_BUFF_PROM_DEBUFFCONTAINER_TP),
                 choices = rotationOptions,
                 getFunc = function ()
                     return rotationOptions[Settings.ProminentDebuffContainerAlignment]
@@ -2530,8 +2530,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Horizontal Prominent Debuffs Icons Alignment
                 type = "dropdown",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_HORIZONTAL_ALIGN), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_HORIZONTAL_ALIGN_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_HORIZONTAL_ALIGN), GetString(LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_HORIZONTAL_ALIGN_TP), GetString(LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
                 choices = { "Left", "Centered", "Right" },
                 getFunc = function ()
                     return Settings.AlignmentPromDebuffsHorz
@@ -2550,8 +2550,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Horizontal Prominent Debuffs Sort
                 type = "dropdown",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_HORIZONTAL), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_HORIZONTAL_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_SORT_HORIZONTAL), GetString(LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_SORT_HORIZONTAL_TP), GetString(LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
                 choices = { "Left to Right", "Right to Left" },
                 getFunc = function ()
                     return Settings.SortPromDebuffsHorz
@@ -2570,8 +2570,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Vertical Prominent Debuffs Icons Alignment
                 type = "dropdown",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_VERTICAL_ALIGN), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_VERTICAL_ALIGN_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_VERTICAL_ALIGN), GetString(LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_VERTICAL_ALIGN_TP), GetString(LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
                 choices = { "Top", "Centered", "Bottom" },
                 getFunc = function ()
                     return Settings.AlignmentPromDebuffsVert
@@ -2590,8 +2590,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Vertical Prominent Debuffs Sort
                 type = "dropdown",
-                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_VERTICAL), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SORTING_SORT_VERTICAL_TP), GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
+                name = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_SORT_VERTICAL), GetString(LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
+                tooltip = zo_strformat(GetString(LUIE_LAM_BUFF_SORTING_SORT_VERTICAL_TP), GetString(LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
                 choices = { "Bottom to Top", "Top to Bottom" },
                 getFunc = function ()
                     return Settings.SortPromDebuffsVert
@@ -2613,13 +2613,13 @@ function SpellCastBuffs.CreateSettings()
     -- Buffs&Debuffs - Tooltip Options Submenu
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_HEADER),
+        name = GetString(LUIE_LAM_BUFF_TOOLTIP_HEADER),
         controls = {
             {
                 -- Tooltip Enable
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_ENABLE),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_ENABLE_TP),
+                name = GetString(LUIE_LAM_BUFF_TOOLTIP_ENABLE),
+                tooltip = GetString(LUIE_LAM_BUFF_TOOLTIP_ENABLE_TP),
                 getFunc = function ()
                     return Settings.TooltipEnable
                 end,
@@ -2635,8 +2635,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Tooltip Custom
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_CUSTOM),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_CUSTOM_TP),
+                name = GetString(LUIE_LAM_BUFF_TOOLTIP_CUSTOM),
+                tooltip = GetString(LUIE_LAM_BUFF_TOOLTIP_CUSTOM_TP),
                 getFunc = function ()
                     return Settings.TooltipCustom
                 end,
@@ -2652,8 +2652,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Tooltip Ability Id
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_ABILITY_ID),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_ABILITY_ID_TP),
+                name = GetString(LUIE_LAM_BUFF_TOOLTIP_ABILITY_ID),
+                tooltip = GetString(LUIE_LAM_BUFF_TOOLTIP_ABILITY_ID_TP),
                 getFunc = function ()
                     return Settings.TooltipAbilityId
                 end,
@@ -2669,8 +2669,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Tooltip Buff Type
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_BUFF_TYPE),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_BUFF_TYPE_TP),
+                name = GetString(LUIE_LAM_BUFF_TOOLTIP_BUFF_TYPE),
+                tooltip = GetString(LUIE_LAM_BUFF_TOOLTIP_BUFF_TYPE_TP),
                 getFunc = function ()
                     return Settings.TooltipBuffType
                 end,
@@ -2686,8 +2686,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Sticky Tooltip Slider
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_STICKY),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_STICKY_TP),
+                name = GetString(LUIE_LAM_BUFF_TOOLTIP_STICKY),
+                tooltip = GetString(LUIE_LAM_BUFF_TOOLTIP_STICKY_TP),
                 min = 0,
                 max = 5000,
                 step = 100,
@@ -2709,25 +2709,25 @@ function SpellCastBuffs.CreateSettings()
     -- Buffs&Debuffs - Priority Buffs & Debuffs Options Submenu
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_BUFF_PRIORITY_HEADER),
+        name = GetString(LUIE_LAM_BUFF_PRIORITY_HEADER),
         controls = {
             {
                 -- Prominent Buffs & Debuffs Description
                 type = "description",
-                text = GetString(SI_LUIE_LAM_BUFF_PRIORITY_DESCRIPTION),
+                text = GetString(LUIE_LAM_BUFF_PRIORITY_DESCRIPTION),
             },
             {
                 type = "divider",
             },
             {
                 type = "description",
-                text = GetString(SI_LUIE_LAM_BUFF_PRIORITY_DIALOGUE_DESCRIPT),
+                text = GetString(LUIE_LAM_BUFF_PRIORITY_DIALOGUE_DESCRIPT),
             },
             {
                 -- Priority Buffs List (Add)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_BUFF_PRIORITY_BUFF_ADDLIST),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PRIORITY_BUFF_ADDLIST_TP),
+                name = GetString(LUIE_LAM_BUFF_PRIORITY_BUFF_ADDLIST),
+                tooltip = GetString(LUIE_LAM_BUFF_PRIORITY_BUFF_ADDLIST_TP),
                 getFunc = function () end,
                 setFunc = function (value)
                     SpellCastBuffs.AddToCustomList(Settings.PriorityBuffTable, value)
@@ -2740,8 +2740,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Priority Buffs List (Remove)
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_BUFF_PRIORITY_BUFF_REMLIST),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PRIORITY_BUFF_REMLIST_TP),
+                name = GetString(LUIE_LAM_BUFF_PRIORITY_BUFF_REMLIST),
+                tooltip = GetString(LUIE_LAM_BUFF_PRIORITY_BUFF_REMLIST_TP),
                 choices = PromBuffs,
                 choicesValues = PromBuffsValues,
                 scrollable = true,
@@ -2761,8 +2761,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Clear Priority Buffs
                 type = "button",
-                name = GetString(SI_LUIE_LAM_UF_PRIORITY_CLEAR_BUFFS),
-                tooltip = GetString(SI_LUIE_LAM_UF_PRIORITY_CLEAR_BUFFS_TP),
+                name = GetString(LUIE_LAM_UF_PRIORITY_CLEAR_BUFFS),
+                tooltip = GetString(LUIE_LAM_UF_PRIORITY_CLEAR_BUFFS_TP),
                 func = function ()
                     ZO_Dialogs_ShowDialog("LUIE_CLEAR_PRIORITY_BUFFS")
                 end,
@@ -2771,8 +2771,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Priority Debuffs List (Add)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_BUFF_PRIORITY_DEBUFF_ADDLIST),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PRIORITY_DEBUFF_ADDLIST_TP),
+                name = GetString(LUIE_LAM_BUFF_PRIORITY_DEBUFF_ADDLIST),
+                tooltip = GetString(LUIE_LAM_BUFF_PRIORITY_DEBUFF_ADDLIST_TP),
                 getFunc = function () end,
                 setFunc = function (value)
                     SpellCastBuffs.AddToCustomList(Settings.PriorityDebuffTable, value)
@@ -2785,8 +2785,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Priority Debuffs List (Remove)
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_BUFF_PRIORITY_DEBUFF_REMLIST),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PRIORITY_DEBUFF_REMLIST_TP),
+                name = GetString(LUIE_LAM_BUFF_PRIORITY_DEBUFF_REMLIST),
+                tooltip = GetString(LUIE_LAM_BUFF_PRIORITY_DEBUFF_REMLIST_TP),
                 choices = PromDebuffs,
                 choicesValues = PromDebuffsValues,
                 scrollable = true,
@@ -2806,8 +2806,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Clear Priority Debuffs
                 type = "button",
-                name = GetString(SI_LUIE_LAM_UF_PRIORITY_CLEAR_DEBUFFS),
-                tooltip = GetString(SI_LUIE_LAM_UF_PRIORITY_CLEAR_DEBUFFS_TP),
+                name = GetString(LUIE_LAM_UF_PRIORITY_CLEAR_DEBUFFS),
+                tooltip = GetString(LUIE_LAM_UF_PRIORITY_CLEAR_DEBUFFS_TP),
                 func = function ()
                     ZO_Dialogs_ShowDialog("LUIE_CLEAR_PRIORITY_DEBUFFS")
                 end,
@@ -2819,18 +2819,18 @@ function SpellCastBuffs.CreateSettings()
     -- Buffs&Debuffs - Prominent Buffs & Debuffs Options Submenu
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_BUFF_PROM_HEADER),
+        name = GetString(LUIE_LAM_BUFF_PROM_HEADER),
         controls = {
             {
                 -- Prominent Buffs & Debuffs Description
                 type = "description",
-                text = GetString(SI_LUIE_LAM_BUFF_PROM_DESCRIPTION),
+                text = GetString(LUIE_LAM_BUFF_PROM_DESCRIPTION),
             },
             {
                 -- Prominent Buffs Label Toggle
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_PROM_LABEL),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_LABEL_TP),
+                name = GetString(LUIE_LAM_BUFF_PROM_LABEL),
+                tooltip = GetString(LUIE_LAM_BUFF_PROM_LABEL_TP),
                 getFunc = function ()
                     return Settings.ProminentLabel
                 end,
@@ -2848,8 +2848,8 @@ function SpellCastBuffs.CreateSettings()
                 -- Prominent Buffs Label Font Face
                 type = "dropdown",
                 scrollable = true,
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_FONTFACE)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_FONTFACE_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_BUFF_PROM_FONTFACE)),
+                tooltip = GetString(LUIE_LAM_BUFF_PROM_FONTFACE_TP),
                 choices = FontsList,
                 sort = "name-up",
                 getFunc = function ()
@@ -2868,8 +2868,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Prominent Buffs Label Font Size
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_FONTSIZE)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_FONTSIZE_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_BUFF_PROM_FONTSIZE)),
+                tooltip = GetString(LUIE_LAM_BUFF_PROM_FONTSIZE_TP),
                 min = 10,
                 max = 30,
                 step = 1,
@@ -2889,8 +2889,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Prominent Buffs Label Font Style
                 type = "dropdown",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_FONTSTYLE)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_FONTSTYLE_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_BUFF_PROM_FONTSTYLE)),
+                tooltip = GetString(LUIE_LAM_BUFF_PROM_FONTSTYLE_TP),
                 choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
                 sort = "name-up",
                 getFunc = function ()
@@ -2909,8 +2909,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Prominent Buffs Progress Bar
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR_TP),
+                name = GetString(LUIE_LAM_BUFF_PROM_PROGRESSBAR),
+                tooltip = GetString(LUIE_LAM_BUFF_PROM_PROGRESSBAR_TP),
                 getFunc = function ()
                     return Settings.ProminentProgress
                 end,
@@ -2928,8 +2928,8 @@ function SpellCastBuffs.CreateSettings()
                 -- Prominent Buffs Progress Bar Texture
                 type = "dropdown",
                 scrollable = true,
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR_TEXTURE)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR_TEXTURE_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_BUFF_PROM_PROGRESSBAR_TEXTURE)),
+                tooltip = GetString(LUIE_LAM_BUFF_PROM_PROGRESSBAR_TEXTURE_TP),
                 choices = StatusbarTexturesList,
                 sort = "name-up",
                 getFunc = function ()
@@ -2948,8 +2948,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Prominent Buffs Gradient Color 1
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFF1)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFF1_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_BUFF_PROM_COLORBUFF1)),
+                tooltip = GetString(LUIE_LAM_BUFF_PROM_COLORBUFF1_TP),
                 getFunc = function ()
                     return unpack(Settings.ProminentProgressBuffC1)
                 end,
@@ -2970,8 +2970,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Prominent Buffs Gradient Color 2
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFF2)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFF2_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_BUFF_PROM_COLORBUFF2)),
+                tooltip = GetString(LUIE_LAM_BUFF_PROM_COLORBUFF2_TP),
                 getFunc = function ()
                     return unpack(Settings.ProminentProgressBuffC2)
                 end,
@@ -2993,8 +2993,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Prominent Buffs Gradient Color 1 (Priority)
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFFPRIORITY1)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFFPRIORITY1_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_BUFF_PROM_COLORBUFFPRIORITY1)),
+                tooltip = GetString(LUIE_LAM_BUFF_PROM_COLORBUFFPRIORITY1_TP),
                 getFunc = function ()
                     return unpack(Settings.ProminentProgressBuffPriorityC1)
                 end,
@@ -3015,8 +3015,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Prominent Buffs Gradient Color 2 (Priority)
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFFPRIORITY2)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFFPRIORITY2_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_BUFF_PROM_COLORBUFFPRIORITY2)),
+                tooltip = GetString(LUIE_LAM_BUFF_PROM_COLORBUFFPRIORITY2_TP),
                 getFunc = function ()
                     return unpack(Settings.ProminentProgressBuffPriorityC2)
                 end,
@@ -3038,8 +3038,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Prominent Debuffs Gradient Color 1
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF1)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF1_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_BUFF_PROM_COLORDEBUFF1)),
+                tooltip = GetString(LUIE_LAM_BUFF_PROM_COLORDEBUFF1_TP),
                 getFunc = function ()
                     return unpack(Settings.ProminentProgressDebuffC1)
                 end,
@@ -3060,8 +3060,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Prominent Debuffs Gradient Color 2
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF2)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF2_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_BUFF_PROM_COLORDEBUFF2)),
+                tooltip = GetString(LUIE_LAM_BUFF_PROM_COLORDEBUFF2_TP),
                 getFunc = function ()
                     return unpack(Settings.ProminentProgressDebuffC2)
                 end,
@@ -3083,8 +3083,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Prominent Debuffs Gradient Color 1 (Priority)
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFFPRIORITY1)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFFPRIORITY1_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_BUFF_PROM_COLORDEBUFFPRIORITY1)),
+                tooltip = GetString(LUIE_LAM_BUFF_PROM_COLORDEBUFFPRIORITY1_TP),
                 getFunc = function ()
                     return unpack(Settings.ProminentProgressDebuffPriorityC1)
                 end,
@@ -3105,8 +3105,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Prominent Debuffs Gradient Color 2 (Priority)
                 type = "colorpicker",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFFPRIORITY2)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFFPRIORITY2_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_BUFF_PROM_COLORDEBUFFPRIORITY2)),
+                tooltip = GetString(LUIE_LAM_BUFF_PROM_COLORDEBUFFPRIORITY2_TP),
                 getFunc = function ()
                     return unpack(Settings.ProminentProgressDebuffPriorityC2)
                 end,
@@ -3128,8 +3128,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Prominent Buffs Label/Progress Bar Direction
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_BUFF_PROM_BUFFLABELDIRECTION),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_BUFFLABELDIRECTION_TP),
+                name = GetString(LUIE_LAM_BUFF_PROM_BUFFLABELDIRECTION),
+                tooltip = GetString(LUIE_LAM_BUFF_PROM_BUFFLABELDIRECTION_TP),
                 choices = { "Right", "Left" },
                 sort = "name-up",
                 getFunc = function ()
@@ -3148,8 +3148,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Prominent Debuffs Label/Progress Bar Direction
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFFLABELDIRECTION),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFFLABELDIRECTION_TP),
+                name = GetString(LUIE_LAM_BUFF_PROM_DEBUFFLABELDIRECTION),
+                tooltip = GetString(LUIE_LAM_BUFF_PROM_DEBUFFLABELDIRECTION_TP),
                 choices = { "Right", "Left" },
                 sort = "name-up",
                 getFunc = function ()
@@ -3170,13 +3170,13 @@ function SpellCastBuffs.CreateSettings()
             },
             {
                 type = "description",
-                text = GetString(SI_LUIE_LAM_BUFF_PROM_DIALOGUE_DESCRIPT),
+                text = GetString(LUIE_LAM_BUFF_PROM_DIALOGUE_DESCRIPT),
             },
             {
                 -- Prominent Buffs List (Add)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_BUFF_PROM_BUFF_ADDLIST),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_BUFF_ADDLIST_TP),
+                name = GetString(LUIE_LAM_BUFF_PROM_BUFF_ADDLIST),
+                tooltip = GetString(LUIE_LAM_BUFF_PROM_BUFF_ADDLIST_TP),
                 getFunc = function () end,
                 setFunc = function (value)
                     SpellCastBuffs.AddToCustomList(Settings.PromBuffTable, value)
@@ -3189,8 +3189,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Prominent Buffs List (Remove)
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_BUFF_PROM_BUFF_REMLIST),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_BUFF_REMLIST_TP),
+                name = GetString(LUIE_LAM_BUFF_PROM_BUFF_REMLIST),
+                tooltip = GetString(LUIE_LAM_BUFF_PROM_BUFF_REMLIST_TP),
                 choices = PromBuffs,
                 choicesValues = PromBuffsValues,
                 scrollable = true,
@@ -3210,8 +3210,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Clear Prominent Buffs
                 type = "button",
-                name = GetString(SI_LUIE_LAM_UF_PROMINENT_CLEAR_BUFFS),
-                tooltip = GetString(SI_LUIE_LAM_UF_PROMINENT_CLEAR_BUFFS_TP),
+                name = GetString(LUIE_LAM_UF_PROMINENT_CLEAR_BUFFS),
+                tooltip = GetString(LUIE_LAM_UF_PROMINENT_CLEAR_BUFFS_TP),
                 func = function ()
                     ZO_Dialogs_ShowDialog("LUIE_CLEAR_PROMINENT_BUFFS")
                 end,
@@ -3220,8 +3220,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Prominent Debuffs List (Add)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFF_ADDLIST),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFF_ADDLIST_TP),
+                name = GetString(LUIE_LAM_BUFF_PROM_DEBUFF_ADDLIST),
+                tooltip = GetString(LUIE_LAM_BUFF_PROM_DEBUFF_ADDLIST_TP),
                 getFunc = function () end,
                 setFunc = function (value)
                     SpellCastBuffs.AddToCustomList(Settings.PromDebuffTable, value)
@@ -3234,8 +3234,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Prominent Debuffs List (Remove)
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFF_REMLIST),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFF_REMLIST_TP),
+                name = GetString(LUIE_LAM_BUFF_PROM_DEBUFF_REMLIST),
+                tooltip = GetString(LUIE_LAM_BUFF_PROM_DEBUFF_REMLIST_TP),
                 choices = PromDebuffs,
                 choicesValues = PromDebuffsValues,
                 scrollable = true,
@@ -3255,8 +3255,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Clear Prominent Debuffs
                 type = "button",
-                name = GetString(SI_LUIE_LAM_UF_PROMINENT_CLEAR_DEBUFFS),
-                tooltip = GetString(SI_LUIE_LAM_UF_PROMINENT_CLEAR_DEBUFFS_TP),
+                name = GetString(LUIE_LAM_UF_PROMINENT_CLEAR_DEBUFFS),
+                tooltip = GetString(LUIE_LAM_UF_PROMINENT_CLEAR_DEBUFFS_TP),
                 func = function ()
                     ZO_Dialogs_ShowDialog("LUIE_CLEAR_PROMINENT_DEBUFFS")
                 end,
@@ -3267,18 +3267,18 @@ function SpellCastBuffs.CreateSettings()
 
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_HEADER),
+        name = GetString(LUIE_LAM_BUFF_BLACKLIST_HEADER),
         controls = {
             {
                 -- Buffs & Debuffs Blacklist Description
                 type = "description",
-                text = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_DESCRIPT),
+                text = GetString(LUIE_LAM_BUFF_BLACKLIST_DESCRIPT),
             },
             -- Add Minor Buffs
             {
                 type = "button",
-                name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MINOR_BUFF),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MINOR_BUFF_TP),
+                name = GetString(LUIE_LAM_BUFF_BLACKLIST_ADD_MINOR_BUFF),
+                tooltip = GetString(LUIE_LAM_BUFF_BLACKLIST_ADD_MINOR_BUFF_TP),
                 func = function ()
                     SpellCastBuffs.AddBulkToCustomList(Settings.BlacklistTable, BlacklistPresets.MinorBuffs)
                     LUIE_Blacklist:UpdateChoices(GenerateCustomList(Settings.BlacklistTable))
@@ -3291,8 +3291,8 @@ function SpellCastBuffs.CreateSettings()
             -- Add Major Buffs
             {
                 type = "button",
-                name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MAJOR_BUFF),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MAJOR_BUFF_TP),
+                name = GetString(LUIE_LAM_BUFF_BLACKLIST_ADD_MAJOR_BUFF),
+                tooltip = GetString(LUIE_LAM_BUFF_BLACKLIST_ADD_MAJOR_BUFF_TP),
                 func = function ()
                     SpellCastBuffs.AddBulkToCustomList(Settings.BlacklistTable, BlacklistPresets.MajorBuffs)
                     LUIE_Blacklist:UpdateChoices(GenerateCustomList(Settings.BlacklistTable))
@@ -3305,8 +3305,8 @@ function SpellCastBuffs.CreateSettings()
             -- Add Minor Debuffs
             {
                 type = "button",
-                name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MINOR_DEBUFF),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MINOR_DEBUFF_TP),
+                name = GetString(LUIE_LAM_BUFF_BLACKLIST_ADD_MINOR_DEBUFF),
+                tooltip = GetString(LUIE_LAM_BUFF_BLACKLIST_ADD_MINOR_DEBUFF_TP),
                 func = function ()
                     SpellCastBuffs.AddBulkToCustomList(Settings.BlacklistTable, BlacklistPresets.MinorDebuffs)
                     LUIE_Blacklist:UpdateChoices(GenerateCustomList(Settings.BlacklistTable))
@@ -3319,8 +3319,8 @@ function SpellCastBuffs.CreateSettings()
             -- Add Major Debuffs
             {
                 type = "button",
-                name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MAJOR_DEBUFF),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADD_MAJOR_DEBUFF_TP),
+                name = GetString(LUIE_LAM_BUFF_BLACKLIST_ADD_MAJOR_DEBUFF),
+                tooltip = GetString(LUIE_LAM_BUFF_BLACKLIST_ADD_MAJOR_DEBUFF_TP),
                 func = function ()
                     SpellCastBuffs.AddBulkToCustomList(Settings.BlacklistTable, BlacklistPresets.MajorDebuffs)
                     LUIE_Blacklist:UpdateChoices(GenerateCustomList(Settings.BlacklistTable))
@@ -3333,8 +3333,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Clear Blacklist
                 type = "button",
-                name = GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR),
-                tooltip = GetString(SI_LUIE_LAM_UF_BLACKLIST_CLEAR_TP),
+                name = GetString(LUIE_LAM_UF_BLACKLIST_CLEAR),
+                tooltip = GetString(LUIE_LAM_UF_BLACKLIST_CLEAR_TP),
                 func = function ()
                     ZO_Dialogs_ShowDialog("LUIE_CLEAR_ABILITY_BLACKLIST")
                 end,
@@ -3343,8 +3343,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buffs & Debuffs Blacklist (Add)
                 type = "editbox",
-                name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST_TP),
+                name = GetString(LUIE_LAM_BUFF_BLACKLIST_ADDLIST),
+                tooltip = GetString(LUIE_LAM_BUFF_BLACKLIST_ADDLIST_TP),
                 getFunc = function () end,
                 setFunc = function (value)
                     SpellCastBuffs.AddToCustomList(Settings.BlacklistTable, value)
@@ -3357,8 +3357,8 @@ function SpellCastBuffs.CreateSettings()
             {
                 -- Buffs & Debuffs Blacklist (Remove)
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST_TP),
+                name = GetString(LUIE_LAM_BUFF_BLACKLIST_REMLIST),
+                tooltip = GetString(LUIE_LAM_BUFF_BLACKLIST_REMLIST_TP),
                 choices = Blacklist,
                 choicesValues = BlacklistValues,
                 scrollable = true,

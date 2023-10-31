@@ -261,11 +261,11 @@ end
 function LUIE.UpdateMundusTooltipSyntax(abilityId, tooltipText)
     -- Update syntax for The Lady, The Lover, and the Thief Mundus stones since they aren't consistent with other buffs.
     if abilityId == 13976 or abilityId == 13981 then -- The Lady / The Lover
-        tooltipText = zo_strgsub(tooltipText, GetString(SI_LUIE_SKILL_MUNDUS_SUB_RES_PEN), GetString(SI_LUIE_SKILL_MUNDUS_SUB_RES_PEN_REPLACE))
+        tooltipText = zo_strgsub(tooltipText, GetString(LUIE_SKILL_MUNDUS_SUB_RES_PEN), GetString(LUIE_SKILL_MUNDUS_SUB_RES_PEN_REPLACE))
     elseif abilityId == 13975 then                   -- The Thief
-        tooltipText = zo_strgsub(tooltipText, GetString(SI_LUIE_SKILL_MUNDUS_SUB_THIEF), GetString(SI_LUIE_SKILL_MUNDUS_SUB_THIEF_REPLACE))
+        tooltipText = zo_strgsub(tooltipText, GetString(LUIE_SKILL_MUNDUS_SUB_THIEF), GetString(LUIE_SKILL_MUNDUS_SUB_THIEF_REPLACE))
     end
     -- Replace "Increases your" with "Increase"
-    tooltipText = zo_strgsub(tooltipText, GetString(SI_LUIE_SKILL_MUNDUS_STRING), GetString(SI_LUIE_SKILL_DRINK_INCREASE))
+    tooltipText = zo_strgsub(tooltipText, GetString(LUIE_SKILL_MUNDUS_STRING), GetString(LUIE_SKILL_DRINK_INCREASE))
     return tooltipText
 end

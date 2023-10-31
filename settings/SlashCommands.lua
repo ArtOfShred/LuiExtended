@@ -93,8 +93,8 @@ function SlashCommands.CreateSettings()
 
     local panelDataSlashCommands = {
         type = "panel",
-        name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_SLASHCMDS)),
-        displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(SI_LUIE_LAM_SLASHCMDS)),
+        name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(LUIE_LAM_SLASHCMDS)),
+        displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(LUIE_LAM_SLASHCMDS)),
         author = LUIE.author .. "\n",
         version = LUIE.version,
         website = LUIE.website,
@@ -111,14 +111,14 @@ function SlashCommands.CreateSettings()
     -- Slash Commands description
     optionsDataSlashCommands[#optionsDataSlashCommands+1] = {
         type = "description",
-        text = GetString(SI_LUIE_LAM_SLASHCMDS_DESCRIPTION),
+        text = GetString(LUIE_LAM_SLASHCMDS_DESCRIPTION),
     }
 
     -- ReloadUI Button
     optionsDataSlashCommands[#optionsDataSlashCommands+1] = {
         type = "button",
-        name = GetString(SI_LUIE_LAM_RELOADUI),
-        tooltip = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
+        name = GetString(LUIE_LAM_RELOADUI),
+        tooltip = GetString(LUIE_LAM_RELOADUI_BUTTON),
         func = function ()
             ReloadUI("ingame")
         end,
@@ -128,13 +128,13 @@ function SlashCommands.CreateSettings()
     -- Slash Commands - General Commands Submenu
     optionsDataSlashCommands[#optionsDataSlashCommands+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GENERAL),
+        name = GetString(LUIE_LAM_SLASHCMDSHEADER_GENERAL),
         controls = {
             {
                 -- SlashTrade
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_TRADE),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_TRADE_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_TRADE),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_TRADE_TP),
                 getFunc = function ()
                     return Settings.SlashTrade
                 end,
@@ -144,13 +144,13 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashTrade,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashHome
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_HOME),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_HOME_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_HOME),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_HOME_TP),
                 getFunc = function ()
                     return Settings.SlashHome
                 end,
@@ -160,7 +160,7 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashHome,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- Choose Home Option
@@ -182,8 +182,8 @@ function SlashCommands.CreateSettings()
             {
                 -- SlashSetPrimaryHome
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_HOME_SET_PRIMARY),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_HOME_SET_PRIMARY_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_HOME_SET_PRIMARY),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_HOME_SET_PRIMARY_TP),
                 getFunc = function ()
                     return Settings.SlashSetPrimaryHome
                 end,
@@ -193,13 +193,13 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashSetPrimaryHome,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashCampaignQ
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_CAMPAIGN),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_CAMPAIGN_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_CAMPAIGN),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_CAMPAIGN_TP),
                 getFunc = function ()
                     return Settings.SlashCampaignQ
                 end,
@@ -209,13 +209,13 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashCampaignQ,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashCompanion
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_COMPANION),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_COMPANION_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_COMPANION),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_COMPANION_TP),
                 getFunc = function ()
                     return Settings.SlashCompanion
                 end,
@@ -225,7 +225,7 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashCompanion,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
                 disabled = function ()
                     return #companionOptions == 0
                 end,
@@ -250,8 +250,8 @@ function SlashCommands.CreateSettings()
             {
                 -- SlashBanker
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_BANKER),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_BANKER_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_BANKER),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_BANKER_TP),
                 getFunc = function ()
                     return Settings.SlashBanker
                 end,
@@ -261,7 +261,7 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashBanker,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
                 disabled = function ()
                     return #bankerOptions == 0
                 end,
@@ -286,8 +286,8 @@ function SlashCommands.CreateSettings()
             {
                 -- SlashMerchant
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_MERCHANT),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_MERCHANT_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_MERCHANT),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_MERCHANT_TP),
                 getFunc = function ()
                     return Settings.SlashMerchant
                 end,
@@ -297,7 +297,7 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashMerchant,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
                 disabled = function ()
                     return #merchantOptions == 0
                 end,
@@ -322,8 +322,8 @@ function SlashCommands.CreateSettings()
             {
                 -- SlashArmory
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_ARMORY),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_ARMORY_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_ARMORY),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_ARMORY_TP),
                 getFunc = function ()
                     return Settings.SlashArmory
                 end,
@@ -333,7 +333,7 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashArmory,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
                 disabled = function ()
                     return #armoryOptions == 0
                 end,
@@ -358,8 +358,8 @@ function SlashCommands.CreateSettings()
             {
                 -- SlashDecon
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_DECON),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_SLASHCMDS_DECON_TP), GetCollectibleName(10184)),
+                name = GetString(LUIE_LAM_SLASHCMDS_DECON),
+                tooltip = zo_strformat(GetString(LUIE_LAM_SLASHCMDS_DECON_TP), GetCollectibleName(10184)),
                 getFunc = function ()
                     return Settings.SlashDecon
                 end,
@@ -369,7 +369,7 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashDecon,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
                 disabled = function ()
                     return #deconOptions == 0
                 end,
@@ -394,8 +394,8 @@ function SlashCommands.CreateSettings()
             {
                 -- SlashFence
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_FENCE),
-                tooltip = zo_strformat(GetString(SI_LUIE_LAM_SLASHCMDS_FENCE_TP), GetCollectibleName(300)),
+                name = GetString(LUIE_LAM_SLASHCMDS_FENCE),
+                tooltip = zo_strformat(GetString(LUIE_LAM_SLASHCMDS_FENCE_TP), GetCollectibleName(300)),
                 getFunc = function ()
                     return Settings.SlashFence
                 end,
@@ -405,13 +405,13 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashFence,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashEye
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_EYE),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_EYE_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_EYE),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_EYE_TP),
                 getFunc = function ()
                     return Settings.SlashEye
                 end,
@@ -421,13 +421,13 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashEye,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashPet
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_PET),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_PET_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_PET),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_PET_TP),
                 getFunc = function ()
                     return Settings.SlashPet
                 end,
@@ -437,13 +437,13 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashPet,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashPet Message
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_SLASHCMDS_PET_MESSAGE)),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_PET_MESSAGE_TP),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_LAM_SLASHCMDS_PET_MESSAGE)),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_PET_MESSAGE_TP),
                 getFunc = function ()
                     return Settings.SlashPetMessage
                 end,
@@ -456,8 +456,8 @@ function SlashCommands.CreateSettings()
             {
                 -- SlashOutfit
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_OUTFIT),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_OUTFIT_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_OUTFIT),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_OUTFIT_TP),
                 getFunc = function ()
                     return Settings.SlashOutfit
                 end,
@@ -467,13 +467,13 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashOutfit,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashReport
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_REPORT),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_REPORT_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_REPORT),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_REPORT_TP),
                 getFunc = function ()
                     return Settings.SlashReport
                 end,
@@ -483,7 +483,7 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashReport,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- /home Alert -- TODO
@@ -533,13 +533,13 @@ function SlashCommands.CreateSettings()
     -- Slash Commands - Group Commands Options Submenu
     optionsDataSlashCommands[#optionsDataSlashCommands+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GROUP),
+        name = GetString(LUIE_LAM_SLASHCMDSHEADER_GROUP),
         controls = {
             {
                 -- SlashReadyCheck
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_READYCHECK),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_READYCHECK_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_READYCHECK),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_READYCHECK_TP),
                 getFunc = function ()
                     return Settings.SlashReadyCheck
                 end,
@@ -549,13 +549,13 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashReadyCheck,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashRegroup
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_REGROUP),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_REGROUP_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_REGROUP),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_REGROUP_TP),
                 getFunc = function ()
                     return Settings.SlashRegroup
                 end,
@@ -565,13 +565,13 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashRegroup,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashDisband
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_DISBAND),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_DISBAND_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_DISBAND),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_DISBAND_TP),
                 getFunc = function ()
                     return Settings.SlashDisband
                 end,
@@ -581,13 +581,13 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashDisband,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashGroupLeave
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_LEAVE),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_LEAVE_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_LEAVE),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_LEAVE_TP),
                 getFunc = function ()
                     return Settings.SlashGroupLeave
                 end,
@@ -597,13 +597,13 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashGroupLeave,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashGroupKick
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_KICK),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_KICK_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_KICK),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_KICK_TP),
                 getFunc = function ()
                     return Settings.SlashGroupKick
                 end,
@@ -613,13 +613,13 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashGroupKick,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashGroupRole
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_ROLE),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_ROLE_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_ROLE),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_ROLE_TP),
                 getFunc = function ()
                     return Settings.SlashGroupRole
                 end,
@@ -629,13 +629,13 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashGroupRole,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashVoteKick
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_VOTEKICK),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_VOTEKICK_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_VOTEKICK),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_VOTEKICK_TP),
                 getFunc = function ()
                     return Settings.SlashVoteKick
                 end,
@@ -645,7 +645,7 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashVoteKick,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
         },
     }
@@ -653,13 +653,13 @@ function SlashCommands.CreateSettings()
     -- Slash Commands - Guild Commands Options Submenu
     optionsDataSlashCommands[#optionsDataSlashCommands+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GUILD),
+        name = GetString(LUIE_LAM_SLASHCMDSHEADER_GUILD),
         controls = {
             {
                 -- SlashGuildInvite
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDINVITE),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDINVITE_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_GUILDINVITE),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_GUILDINVITE_TP),
                 getFunc = function ()
                     return Settings.SlashGuildInvite
                 end,
@@ -669,13 +669,13 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashGuildInvite,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashGuildQuit
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDQUIT),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDQUIT_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_GUILDQUIT),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_GUILDQUIT_TP),
                 getFunc = function ()
                     return Settings.SlashGuildQuit
                 end,
@@ -685,13 +685,13 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashGuildQuit,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashGuildKick
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDKICK),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDKICK_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_GUILDKICK),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_GUILDKICK_TP),
                 getFunc = function ()
                     return Settings.SlashGuildKick
                 end,
@@ -701,7 +701,7 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashGuildKick,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
         },
     }
@@ -709,13 +709,13 @@ function SlashCommands.CreateSettings()
     -- Slash Commands - Social Commands Options Submenu
     optionsDataSlashCommands[#optionsDataSlashCommands+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER_SOCIAL),
+        name = GetString(LUIE_LAM_SLASHCMDSHEADER_SOCIAL),
         controls = {
             {
                 -- SlashFriend
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_FRIEND),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_FRIEND_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_FRIEND),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_FRIEND_TP),
                 getFunc = function ()
                     return Settings.SlashFriend
                 end,
@@ -725,13 +725,13 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashFriend,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashIgnore
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_IGNORE),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_IGNORE_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_IGNORE),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_IGNORE_TP),
                 getFunc = function ()
                     return Settings.SlashIgnore
                 end,
@@ -741,13 +741,13 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashIgnore,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashRemoveFriend
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_REMOVEFRIEND),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_REMOVEFRIEND_TP),
                 getFunc = function ()
                     return Settings.SlashRemoveFriend
                 end,
@@ -757,13 +757,13 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashRemoveFriend,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashRemoveIgnore
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_REMOVEIGNORE),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_REMOVEIGNORE_TP),
                 getFunc = function ()
                     return Settings.SlashRemoveIgnore
                 end,
@@ -773,7 +773,7 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashRemoveIgnore,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
         },
     }
@@ -781,13 +781,13 @@ function SlashCommands.CreateSettings()
     -- Slash Commands - Holiday XP Events Commands Options Submenu
     optionsDataSlashCommands[#optionsDataSlashCommands+1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER_HOLIDAY),
+        name = GetString(LUIE_LAM_SLASHCMDSHEADER_HOLIDAY),
         controls = {
             {
                 -- SlashCake
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_CAKE),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_CAKE_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_CAKE),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_CAKE_TP),
                 getFunc = function ()
                     return Settings.SlashCake
                 end,
@@ -797,13 +797,13 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashCake,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashPie
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_PIE),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_PIE_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_PIE),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_PIE_TP),
                 getFunc = function ()
                     return Settings.SlashPie
                 end,
@@ -813,13 +813,13 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashPie,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashMead
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_MEAD),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_MEAD_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_MEAD),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_MEAD_TP),
                 getFunc = function ()
                     return Settings.SlashMead
                 end,
@@ -829,13 +829,13 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashMead,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
             {
                 -- SlashWitch
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_SLASHCMDS_WITCH),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_WITCH_TP),
+                name = GetString(LUIE_LAM_SLASHCMDS_WITCH),
+                tooltip = GetString(LUIE_LAM_SLASHCMDS_WITCH_TP),
                 getFunc = function ()
                     return Settings.SlashWitch
                 end,
@@ -845,7 +845,7 @@ function SlashCommands.CreateSettings()
                 end,
                 width = "full",
                 default = Defaults.SlashWitch,
-                warning = GetString(SI_LUIE_LAM_RELOADUI_SLASH_WARNING),
+                warning = GetString(LUIE_LAM_RELOADUI_SLASH_WARNING),
             },
         },
     }

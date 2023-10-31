@@ -149,7 +149,7 @@ local function CreateUIControls()
 
     uiFeedTimer.control = UI.Control(uiBotRow, nil, { 96, 20 }, false)
     uiFeedTimer.icon = UI.Texture(uiFeedTimer.control, { LEFT, LEFT }, { 28, 28 }, "/esoui/art/mounts/tabicon_mounts_up.dds", nil, false)
-    uiFeedTimer.label = UI.Label(uiFeedTimer.control, { LEFT, RIGHT, 0, 0, uiFeedTimer.icon }, { 68, 20 }, { 0, 1 }, g_infoPanelFont, GetString(SI_LUIE_PNL_TRAINNOW), false)
+    uiFeedTimer.label = UI.Label(uiFeedTimer.control, { LEFT, RIGHT, 0, 0, uiFeedTimer.icon }, { 68, 20 }, { 0, 1 }, g_infoPanelFont, GetString(LUIE_PNL_TRAINNOW), false)
     --uiFeedTimer.bg = UI.Backdrop( uiFeedTimer.control, "fill", nil, nil, nil, false )
 
     uiArmour.control = UI.Control(uiBotRow, nil, { 55, 20 }, false)
@@ -455,12 +455,12 @@ function InfoPanel.OnUpdate60()
     -- Update mountfeedtimer
     if not InfoPanel.SV.HideMountFeed and not uiFeedTimer.hideLocally then
         local mountFeedTimer, mountFeedTotalTime = GetTimeUntilCanBeTrained()
-        local mountFeedMessage = GetString(SI_LUIE_PNL_MAXED)
+        local mountFeedMessage = GetString(LUIE_PNL_MAXED)
         if mountFeedTimer ~= nil then
             if mountFeedTimer == 0 then
                 local inventoryBonus, maxInventoryBonus, staminaBonus, maxStaminaBonus, speedBonus, maxSpeedBonus = GetRidingStats()
                 if inventoryBonus ~= maxInventoryBonus or staminaBonus ~= maxStaminaBonus or speedBonus ~= maxSpeedBonus then
-                    mountFeedMessage = GetString(SI_LUIE_PNL_TRAINNOW)
+                    mountFeedMessage = GetString(LUIE_PNL_TRAINNOW)
                 else
                     uiFeedTimer.hideLocally = true
                     InfoPanel.RearrangePanel()
