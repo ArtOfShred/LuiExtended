@@ -25,7 +25,6 @@ function UI.Chain(object)
             end
 
             -- Otherwise, add the method to the parent object
-            ---@diagnostic disable-next-line: redefined-local
             return function (self, ...)
                 assert(object[func], func .. " missing in object")
                 object[func](object, ...)

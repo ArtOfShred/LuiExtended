@@ -832,7 +832,10 @@ function LUIE.InitializeHooks()
             GameTooltip:AddLine("", "", ZO_NORMAL_TEXT:UnpackRGB())
             -- Add Ability ID Line
             if LUIE.SpellCastBuffs.SV.TooltipAbilityId then
-                local labelAbilityId = control.effectId or "None"
+                local labelAbilityId = control.effectId
+                if labelAbilityId == nil or false then
+                    labelAbilityId = "None"
+                end
                 if labelAbilityId == "Fake" then
                     artificial = true
                 end
