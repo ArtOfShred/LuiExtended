@@ -91,6 +91,7 @@ function LUIE.CreateSettings()
             return
         else
             CopyTable(sourceCharacter, targetCharacter)
+            ReloadUI("ingame")
         end
     end
 
