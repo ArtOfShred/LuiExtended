@@ -41,6 +41,7 @@ local strings = {
     LUIE_STRING_DEFAULT_FRAME_ALERTS = "Textes d'alertes",
     LUIE_STRING_DEFAULT_FRAME_COMPASS = "Fenêtre de la boussole",
     LUIE_STRING_DEFAULT_FRAME_PLAYER_PROGRESS = "Barre de points d'Expérience/de Champion",
+    LUIE_STRING_DEFAULT_FRAME_ENDLESS_DUNGEON_TRACKER = "Endless Archive Tracker",
     LUIE_STRING_DEFAULT_FRAME_CSA = "Fenêtre centrale d'annonces",
     LUIE_STRING_DISMISS_PET = "|cBFBFBFVous renvoyez |r<<1>>|cBFBFBF.|r",
 

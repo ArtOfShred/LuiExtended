@@ -41,6 +41,7 @@ local strings = {
     LUIE_STRING_DEFAULT_FRAME_ALERTS = "Alert Text",
     LUIE_STRING_DEFAULT_FRAME_COMPASS = "Compass Frame",
     LUIE_STRING_DEFAULT_FRAME_PLAYER_PROGRESS = "Experience/Champion Bar",
+    LUIE_STRING_DEFAULT_FRAME_ENDLESS_DUNGEON_TRACKER = "Endless Archive Tracker",
     LUIE_STRING_DEFAULT_FRAME_CSA = "Center Screen Announcements",
     LUIE_STRING_DISMISS_PET = "|cBFBFBFВы отозвали |r<<1>>|cBFBFBF.|r",
 

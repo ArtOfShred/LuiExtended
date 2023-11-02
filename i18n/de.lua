@@ -41,6 +41,7 @@ local strings = {
     LUIE_STRING_DEFAULT_FRAME_ALERTS = "Warnungstext",
     LUIE_STRING_DEFAULT_FRAME_COMPASS = "Kompass",
     LUIE_STRING_DEFAULT_FRAME_PLAYER_PROGRESS = "Erfahrungsleiste",
+    LUIE_STRING_DEFAULT_FRAME_ENDLESS_DUNGEON_TRACKER = "Endless Archive Tracker",
     LUIE_STRING_DEFAULT_FRAME_CSA = "Bildschirm-Benachrichtigungen",
     LUIE_STRING_DISMISS_PET = "|cBFBFBFDu verabschiedest |r<<1>>|cBFBFBF.|r",
 
