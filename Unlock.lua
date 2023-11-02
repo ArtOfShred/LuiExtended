@@ -31,7 +31,7 @@ local defaultPanels = {
     [ZO_ActiveCombatTipsTip] = { GetString(LUIE_STRING_DEFAULT_FRAME_ACTIVE_COMBAT_TIPS), 250, 20 },    -- Needs custom template applied
     [ZO_PlayerProgress] = { GetString(LUIE_STRING_DEFAULT_FRAME_PLAYER_PROGRESS) },                     -- Needs custom template applied
     --[ZO_CenterScreenAnnounce] = { GetString(LUIE_STRING_DEFAULT_FRAME_CSA), nil, 100 }, -- Needs custom template applied
-    [ZO_EndDunHUDTracker] = { GetString(LUIE_STRING_DEFAULT_FRAME_ENDLESS_DUNGEON_TRACKER), nil, 100 }, -- Needs custom template applied
+    [ZO_EndDunHUDTrackerContainer] = { GetString(LUIE_STRING_DEFAULT_FRAME_ENDLESS_DUNGEON_TRACKER), 230, 100 }, -- Needs custom template applied
 }
 
 -- Our custom mover frames
@@ -127,7 +127,7 @@ function LUIE.SetElementPosition()
         --ReplaceDefaultTemplate(CENTER_SCREEN_ANNOUNCE, 'ApplyStyle', 'ZO_CenterScreenAnnounce')
         ReplaceDefaultTemplate(COMPASS_FRAME, "ApplyStyle", "ZO_CompassFrame")
         ReplaceDefaultTemplate(PLAYER_PROGRESS_BAR, "RefreshTemplate", "ZO_PlayerProgress")
-        ReplaceDefaultTemplate(ENDLESS_DUNGEON_HUD_TRACKER, "OnShown", "ZO_EndDunHUDTracker")
+        ReplaceDefaultTemplate(ZO_HUDTracker_Base, "RefreshAnchors", "ZO_EndDunHUDTrackerContainer")
     end
 end
 
