@@ -92,36 +92,36 @@ local function setAnchor(k, frameName)
         k:ClearAnchors()
         k:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, x, y)
     end
+    -- Fix the Objective Capture Meter fill alignment.
+    if k == ZO_ObjectiveCaptureMeter then
+        ZO_ObjectiveCaptureMeterFrame:SetAnchor(BOTTOM, ZO_ObjectiveCaptureMeter, BOTTOM, 0, 0)
+    end
+    -- Setup Alert Text to anchor properly.
+    -- Thanks to Phinix (Azurah) for this method of adjusting the fadingControlBuffer anchor to reposition the alert text.
+    if k == ZO_AlertTextNotification then
+        -- Throw a dummy alert just in case so alert text exists.
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, " ")
+        local alertText
+        if not IsInGamepadPreferredMode() then
+            alertText = ZO_AlertTextNotification:GetChild(1)
+        else
+            alertText = ZO_AlertTextNotificationGamepad:GetChild(1)
+        end
+        -- Only adjust this if a custom position is set.
+        if x ~= nil and y ~= nil then
+            -- Anchor to the Top Right corner of the Alerts frame.
+            alertText.fadingControlBuffer.anchor = ZO_Anchor:New(TOPRIGHT, ZO_AlertTextNotification, TOPRIGHT)
+        end
+    end
 end
 
 -- Called when an element mover is adjusted and on initialization to update all positions.
-function LUIE.SetElementPosition(x, y)
+function LUIE.SetElementPosition()
     for k, v in pairs(defaultPanels) do
         local frameName = k:GetName()
         if LUIE.SV[frameName] then
             adjustElement(k, v)
             setAnchor(k, frameName)
-            -- Fix the Objective Capture Meter fill alignment.
-            if k == ZO_ObjectiveCaptureMeter then
-                ZO_ObjectiveCaptureMeterFrame:SetAnchor(BOTTOM, ZO_ObjectiveCaptureMeter, BOTTOM, 0, 0)
-            end
-            -- Setup Alert Text to anchor properly.
-            -- Thanks to Phinix (Azurah) for this method of adjusting the fadingControlBuffer anchor to reposition the alert text.
-            if k == ZO_AlertTextNotification then
-                -- Throw a dummy alert just in case so alert text exists.
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, " ")
-                local alertText
-                if not IsInGamepadPreferredMode() then
-                    alertText = ZO_AlertTextNotification:GetChild(1)
-                else
-                    alertText = ZO_AlertTextNotificationGamepad:GetChild(1)
-                end
-                -- Only adjust this if a custom position is set.
-                if x ~= nil and y ~= nil then
-                    -- Anchor to the Top Right corner of the Alerts frame.
-                    alertText.fadingControlBuffer.anchor = ZO_Anchor:New(TOPRIGHT, ZO_AlertTextNotification, TOPRIGHT)
-                end
-            end
         end
         ReplaceDefaultTemplate(ACTIVE_COMBAT_TIP_SYSTEM, "ApplyStyle", "ZO_ActiveCombatTips")
         --ReplaceDefaultTemplate(CENTER_SCREEN_ANNOUNCE, 'ApplyStyle', 'ZO_CenterScreenAnnounce')
