@@ -95,7 +95,7 @@ local function setAnchor(k, frameName)
 end
 
 -- Called when an element mover is adjusted and on initialization to update all positions.
-function LUIE.SetElementPosition()
+function LUIE.SetElementPosition(x, y)
     for k, v in pairs(defaultPanels) do
         local frameName = k:GetName()
         if LUIE.SV[frameName] then
