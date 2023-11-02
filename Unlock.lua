@@ -27,9 +27,9 @@ local defaultPanels = {
     [ZO_PlayerToPlayerAreaPromptContainer] = { GetString(LUIE_STRING_DEFAULT_FRAME_PLAYER_INTERACTION), nil, 30 },
     [ZO_SynergyTopLevelContainer] = { GetString(LUIE_STRING_DEFAULT_FRAME_SYNERGY) },
     [ZO_AlertTextNotification] = { GetString(LUIE_STRING_DEFAULT_FRAME_ALERTS), 600, 56 },
-    [ZO_CompassFrame] = { GetString(LUIE_STRING_DEFAULT_FRAME_COMPASS) },                            -- Needs custom template applied
-    [ZO_ActiveCombatTipsTip] = { GetString(LUIE_STRING_DEFAULT_FRAME_ACTIVE_COMBAT_TIPS), 250, 20 }, -- Needs custom template applied
-    [ZO_PlayerProgress] = { GetString(LUIE_STRING_DEFAULT_FRAME_PLAYER_PROGRESS) },                  -- Needs custom template applied
+    [ZO_CompassFrame] = { GetString(LUIE_STRING_DEFAULT_FRAME_COMPASS) },                               -- Needs custom template applied
+    [ZO_ActiveCombatTipsTip] = { GetString(LUIE_STRING_DEFAULT_FRAME_ACTIVE_COMBAT_TIPS), 250, 20 },    -- Needs custom template applied
+    [ZO_PlayerProgress] = { GetString(LUIE_STRING_DEFAULT_FRAME_PLAYER_PROGRESS) },                     -- Needs custom template applied
     --[ZO_CenterScreenAnnounce] = { GetString(LUIE_STRING_DEFAULT_FRAME_CSA), nil, 100 }, -- Needs custom template applied
     [ZO_EndDunHUDTracker] = { GetString(LUIE_STRING_DEFAULT_FRAME_ENDLESS_DUNGEON_TRACKER), nil, 100 }, -- Needs custom template applied
 }
@@ -58,17 +58,16 @@ end
 
 -- Run when the UI scene changes to hide the unlocked elements if we're in the Addon Settings Menu.
 local function sceneChange(oldState, newState)
-    if newState == SCENE_SHOWN then
-        if g_framesUnlocked then
-            for k, v in pairs(g_LUIE_Movers) do
-                v:SetHidden(true)
-            end
+    if g_framesUnlocked then
+        local isHidden = false
+        if (newState == SCENE_SHOWN) then
+            isHidden = true
+        elseif (newState == SCENE_HIDDEN) then
+            isHidden = false
         end
-    elseif newState == SCENE_HIDDEN then
-        if g_framesUnlocked then
-            for k, v in pairs(g_LUIE_Movers) do
-                v:SetHidden(false)
-            end
+
+        for k, v in pairs(g_LUIE_Movers) do
+            v:SetHidden(isHidden)
         end
     end
 end
@@ -125,8 +124,21 @@ function LUIE.SetElementPosition()
     end
 end
 
+-- Helper function to create a top level window
+local function createTopLevelWindow(k, v, point, relativePoint, offsetX, offsetY, relativeTo)
+    local tlw = UI.TopLevel({ point, relativePoint, offsetX, offsetY, relativeTo }, { k:GetWidth(), k:GetHeight() })
+
+    tlw:SetDrawLayer(DL_BACKGROUND)
+    tlw:SetDrawTier(DT_MEDIUM)
+    tlw.customPositionAttr = k:GetName()
+    tlw.preview = UI.Backdrop(tlw, "fill", nil, nil, nil, false)
+    tlw.preview:SetAnchorFill()
+    tlw.previewLabel = UI.Label(tlw.preview, { CENTER, CENTER }, nil, nil, "ZoFontGameMedium", v[1], false)
+
+    return tlw
+end
+
 -- Setup Movers for Elements, called by the menu unlock settings.
--- Movers don't need to be set unless the menu unlock is called, when an element is moved, this function saves variables for custom positions that LUIE.SetElementPosition() uses to set positions on the first run EVENT_PLAYER_ACTIVATED
 function LUIE.SetupElementMover(state)
     g_framesUnlocked = state
     for k, v in pairs(defaultPanels) do
@@ -143,7 +155,6 @@ function LUIE.SetupElementMover(state)
             local isValidAnchor, point, relativeTo, relativePoint, offsetX, offsetY = k:GetAnchor()
 
             -- Default Alert text doesn't really align with the frame so we just move this visually on initial setup.
-            -- If the frame position isn't adjusted then the default Alert Text does its normal thing of being aligned to the TOPRIGHT corner of the screen, if it then our function aligns it to the TOPRIGHT of this bounding box.
             if k == ZO_AlertTextNotification then
                 local frameName = k:GetName()
                 if not LUIE.SV[frameName] then
@@ -155,14 +166,8 @@ function LUIE.SetupElementMover(state)
                 end
             end
 
-            local tlw = UI.TopLevel({ point, relativePoint, offsetX, offsetY, relativeTo }, { k:GetWidth(), k:GetHeight() })
+            local tlw = createTopLevelWindow(k, v, point, relativePoint, offsetX, offsetY, relativeTo)
 
-            tlw:SetDrawLayer(DL_BACKGROUND)
-            tlw:SetDrawTier(DT_MEDIUM)
-            tlw.customPositionAttr = k:GetName()
-            tlw.preview = UI.Backdrop(tlw, "fill", nil, nil, nil, false)
-            tlw.preview:SetAnchorFill()
-            tlw.previewLabel = UI.Label(tlw.preview, { CENTER, CENTER }, nil, nil, "ZoFontGameMedium", v[1], false)
             -- Setup handlers to set the custom position SV and call LUIE.SetElementPosition() to apply this positioning
             tlw:SetHandler("OnMoveStop", function (self)
                 LUIE.SV[self.customPositionAttr] = { self:GetLeft(), self:GetTop() }
