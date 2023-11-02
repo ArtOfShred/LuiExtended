@@ -360,7 +360,6 @@ function CombatInfo.SetMarker(...)
     end
 
     local LUIE_MARKER = "/LuiExtended/media/combatinfo/floatingicon/redarrow.dds"
-    --*function SetFloatingMarkerInfo(markerType: string, size: number, primaryTexturePath: string, secondaryTexturePath: string, primaryPulses: boolean, secondaryPulses: boolean)
     SetFloatingMarkerInfo(MAP_PIN_TYPE_AGGRO, CombatInfo.SV.markerSize, LUIE_MARKER, LUIE_MARKER, true, false)
     SetFloatingMarkerGlobalAlpha(1)
 end
