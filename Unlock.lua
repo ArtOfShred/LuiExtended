@@ -43,14 +43,15 @@ local g_framesUnlocked = false
 local function ReplaceDefaultTemplate(object, functionName, frameName)
     local zos_function = object[functionName]
     object[functionName] = function (self)
-        local result = zos_function(self) -- Get Original Function results
-        local frame = LUIE.SV[frameName]  -- Get LUIE Saved Frame Data
+        local result = zos_function(self)    -- Get Original Function results
+        local frameData = LUIE.SV[frameName] -- Get LUIE Saved Frame Data
         -- Apply positional setup
-        if frame then
-            local x = LUIE.SV[frameName][1]
-            local y = LUIE.SV[frameName][2]
-            _G[frameName]:ClearAnchors()
-            _G[frameName]:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, x, y)
+        if frameData then
+            local x = frameData[1]
+            local y = frameData[2]
+            local frame = _G[frameName]
+            frame:ClearAnchors()
+            frame:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, x, y)
         end
         return result
     end
@@ -72,31 +73,38 @@ local function sceneChange(oldState, newState)
     end
 end
 
+-- Helper function to adjust element
+local function adjustElement(k, v)
+    k:SetClampedToScreen(true)
+    if v[2] then
+        k:SetWidth(v[2])
+    end
+    if v[3] then
+        k:SetHeight(v[3])
+    end
+end
+
+-- Helper function to set anchor
+local function setAnchor(k, frameName)
+    local x = LUIE.SV[frameName][1]
+    local y = LUIE.SV[frameName][2]
+    if x ~= nil and y ~= nil then
+        k:ClearAnchors()
+        k:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, x, y)
+    end
+end
+
 -- Called when an element mover is adjusted and on initialization to update all positions.
 function LUIE.SetElementPosition()
     for k, v in pairs(defaultPanels) do
         local frameName = k:GetName()
         if LUIE.SV[frameName] then
-            k:SetClampedToScreen(true)
-            -- Adjust constraints so we can move elements.
-            if v[2] then
-                k:SetWidth(v[2])
-            end
-            if v[3] then
-                k:SetHeight(v[3])
-            end
-            local x = LUIE.SV[frameName][1]
-            local y = LUIE.SV[frameName][2]
-            if x ~= nil and y ~= nil then
-                k:ClearAnchors()
-                k:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, x, y)
-            end
-
+            adjustElement(k, v)
+            setAnchor(k, frameName)
             -- Fix the Objective Capture Meter fill alignment.
             if k == ZO_ObjectiveCaptureMeter then
                 ZO_ObjectiveCaptureMeterFrame:SetAnchor(BOTTOM, ZO_ObjectiveCaptureMeter, BOTTOM, 0, 0)
             end
-
             -- Setup Alert Text to anchor properly.
             -- Thanks to Phinix (Azurah) for this method of adjusting the fadingControlBuffer anchor to reposition the alert text.
             if k == ZO_AlertTextNotification then
@@ -115,7 +123,6 @@ function LUIE.SetElementPosition()
                 end
             end
         end
-
         ReplaceDefaultTemplate(ACTIVE_COMBAT_TIP_SYSTEM, "ApplyStyle", "ZO_ActiveCombatTips")
         --ReplaceDefaultTemplate(CENTER_SCREEN_ANNOUNCE, 'ApplyStyle', 'ZO_CenterScreenAnnounce')
         ReplaceDefaultTemplate(COMPASS_FRAME, "ApplyStyle", "ZO_CompassFrame")
