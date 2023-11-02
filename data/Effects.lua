@@ -2814,7 +2814,6 @@ Effects.EffectMergeId = {
 Effects.EffectHideSCT = {
     -- Player - Basic
     [45982] = true, -- Bash Stun
-    [16825] = true, -- Off-Balance Exploit
 
     -- Champion Points
     [151861] = true, -- Shadowstrike
@@ -3260,8 +3259,8 @@ Effects.EffectOverride = {
     [61725] = { tooltip = Tooltips.Skill_Major_Maim },           -- Major Maim
     [61726] = { tooltip = Tooltips.Skill_Minor_Defile },         -- Minor Defile
     [61727] = { tooltip = Tooltips.Skill_Major_Defile },         -- Major Defile
-    [88401] = { tooltip = Tooltips.Skill_Minor_Magickasteal },   -- Minor Magickasteal
-    [86304] = { tooltip = Tooltips.Skill_Minor_Lifesteal },      -- Minor Lifesteal
+    [88401] = { tooltip = Tooltips.Skill_Minor_Magickasteal, tooltipOther = Tooltips.Skill_Minor_Magickasteal_Other },   -- Minor Magickasteal
+    [86304] = { tooltip = Tooltips.Skill_Minor_Lifesteal, tooltipOther = Tooltips.Skill_Minor_Lifesteal_Other },      -- Minor Lifesteal
     [79907] = { tooltip = Tooltips.Skill_Minor_Enveration },     -- Minor Enervation
     [79895] = { tooltip = Tooltips.Skill_Minor_Uncertainty },    -- Minor Uncertainty
     [79867] = { tooltip = Tooltips.Skill_Minor_Cowardice },      -- Minor Cowardice

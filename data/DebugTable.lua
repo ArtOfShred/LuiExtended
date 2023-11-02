@@ -354,8 +354,8 @@ local DebugAuras = {
     -- Death/Resurrection
     [14644] = true, -- Revive (Death Dialog)
     [14646] = true, -- Recently Revived
-    --[26770] = true, -- Resurrect
-    --[55406] = true, -- Resurrect Trigger
+    [26770] = true, -- Resurrect
+    [55406] = true, -- Resurrect Trigger
     --[123969] = true, -- Lesser Reincarnate
     --[123970] = true, -- Lesser Reincarnate
 
@@ -372,7 +372,7 @@ local DebugAuras = {
     [38254] = true, -- Taunt
     [52790] = true, -- Taunt Counter
     [38541] = true, -- Taunt
-    --[38542] = true, -- Update
+    [38542] = true, -- Update
 
     -- Disguise Effects
     [25602] = true, -- Suspicious
@@ -424,7 +424,7 @@ local DebugAuras = {
     --[2727] = true, -- Off-Balance
     [134599] = true, -- Off Balance Immunity
     --[132831] = true, -- Major Vulnerability Invulnerability
-    --[85701] = true, -- Dueling Flag
+    [85701] = true, -- Dueling Flag
     [21263] = true,  -- Ayleid Health Bonus
     [100862] = true, -- Fortified Ayleid Health Bonus
 
@@ -442,7 +442,7 @@ local DebugAuras = {
     -- Dummy Effects
     --[37079] = true, -- remove
     --[20311] = true, -- Remove Sprint
-    --[20303] = true, -- Remove Sprint
+    [20303] = true, -- Remove Sprint
     --[70379] = true, -- Remove
     --[70385] = true, -- Remove
     --[38519] = true, -- Hiding
