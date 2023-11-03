@@ -10680,7 +10680,7 @@ Effects.EffectOverride = {
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
--- If this abilityId is up, then pull the duration from another active ability Id to set its duration (Unused - Might be useful in the future)
+-- If this abilityId is up, then pull the duration from another active ability Id to set its duration (Unused - Might be useful in the future - Note this is supported in code)
 --------------------------------------------------------------------------------------------------------------------------------
 --[[
 Effects.EffectPullDuration = {
@@ -10693,11 +10693,14 @@ Effects.EffectPullDuration = {
 
 -- icon = '' -- Set an icon to use
 -- name = '' -- Set a name to use
--- duration = # -- Set the duration of the effect
--- ignoreFade = true -- Don't remove this effect when it fades.
--- ignoreBegin = true -- Ignore effect begin and only apply on refresh - Emulates the same functionality as refreshOnly in Effects.EffectOverride. For stopping auras from being created for travel times.
+-- duration = # -- Set the duration of the effect (Note "GET" will pull the value from the API)
+-- ignoreFade = true -- Ignore ACTION_RESULT_EFFECT_FADED
+-- ignoreBegin = true -- Ignore ACTION_RESULT_BEGIN - Emulates the same functionality as refreshOnly in Effects.EffectOverride. For stopping auras from being created for travel times.
+-- refreshOnly = -- Ignore ACTION_RESULT_BEGIN & ACTION_RESULT_EFFECT_GAINED
 -- shiftId = # -- Shift the ability id displayed to use this id instead, for tooltip compatibility in some cases.
 -- overrideDuration = true -- Set duration to display as 0, but preserve the correct duration so this effect doesn't fade improperly.
+-- debuff = true -- Set this to display as a debuff
+-- long = Force buff to display in the "long" container if it exists (only compatible with BUFFS)
 
 --------------------------------------------------------------------------------------------------------------------------------
 
@@ -11152,20 +11155,8 @@ Effects.FakePlayerBuffs = {
     [26581] = { duration = 0 }, -- MG2 Captured Rashomta Essence
 
     -- Aldmeri Dominion Quests
-    [33066] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_fancy_clothing.dds",
-        name = Abilities.Skill_Fancy_Clothing,
-        duration = 0,
-        long = true,
-        ignoreBegin = true,
-    }, -- Q4586_ChangeClothes
-    [34842] = {
-        icon = "LuiExtended/media/icons/disguises/disguise_fancy_clothing_female.dds",
-        name = Abilities.Skill_Fancy_Clothing,
-        duration = 0,
-        long = true,
-        ignoreBegin = true,
-    }, -- Q4586_ChangeClothesFEMALE
+    [33066] = { icon = "LuiExtended/media/icons/disguises/disguise_fancy_clothing.dds", name = Abilities.Skill_Fancy_Clothing, duration = 0, long = true, ignoreBegin = true }, -- Q4586_ChangeClothes
+    [34842] = { icon = "LuiExtended/media/icons/disguises/disguise_fancy_clothing_female.dds", name = Abilities.Skill_Fancy_Clothing, duration = 0, long = true, ignoreBegin = true }, -- Q4586_ChangeClothesFEMALE
     --[29504] = { duration = 0, long = true }, -- Q4546 Shade Layer
     --[34597] = { duration = 0, long = true }, -- Q4690 Forest Spirit Layer
 
@@ -11340,6 +11331,9 @@ Effects.FakeStagger = {
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- Fake Ground Damaging Effect Auras - We use EffectOverride to pull information for these unlike the other tables above.
+-- duration = duration of the effect
+-- type = BUFF_EFFECT_TYPE_BUFF or BUFF_EFFECT_TYPE_DEBUFF
+-- merge = Simple merge functionality for id's - these will be considered the same ID so as not to display multiple auras (for effects that have consecutive hits with different id's like Pestilent Colossus)
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.AddGroundDamageAura = {
 
