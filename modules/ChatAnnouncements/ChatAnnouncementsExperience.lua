@@ -165,6 +165,16 @@ local function GetGuildColor(lineId)
     return GUILD_SKILL_COLOR_TABLE[lineId]
 end
 
+-- TODO: Check if there is an equivalency in one of the handlers for this
+local GUILD_SKILL_ICONS = {
+    [45] = "esoui/art/icons/mapkey/mapkey_fightersguild.dds",
+    [44] = "esoui/art/icons/mapkey/mapkey_magesguild.dds",
+    [55] = "esoui/art/icons/mapkey/mapkey_undaunted.dds",
+    [117] = "esoui/art/icons/mapkey/mapkey_thievesguild.dds",
+    [118] = "esoui/art/icons/mapkey/mapkey_darkbrotherhood.dds",
+    [130] = "LuiExtended/media/unitframes/mapkey_psijicorder.dds",
+}
+
 -- Print Guild Rep Gain
 function ChatAnnouncements.PrintGuildRep(change, lineName, lineId, priority)
     local icon = zo_iconFormatInheritColor(GUILD_SKILL_ICONS[lineId], 16, 16)
