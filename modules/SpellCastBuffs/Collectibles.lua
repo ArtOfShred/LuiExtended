@@ -9,6 +9,7 @@ local Abilities = LUIE.Data.Abilities
 local Tooltips = LUIE.Data.Tooltips
 local AssistantIcons = LUIE.Data.Effects.AssistantIcons
 
+local pairs = pairs
 local zo_strformat = zo_strformat
 
 -- Called by SpellCastBuffs.MountStatus to display mount icon

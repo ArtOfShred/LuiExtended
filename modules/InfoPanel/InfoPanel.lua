@@ -11,7 +11,10 @@ local UI = LUIE.UI
 
 local eventManager = EVENT_MANAGER
 local sceneManager = SCENE_MANAGER
+
+local pairs = pairs
 local string_format = string.format
+
 local moduleName = LUIE.name .. "InfoPanel"
 
 local colors = {

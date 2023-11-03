@@ -5,7 +5,7 @@
 
 local UnitFrames = LUIE.UnitFrames
 local PetNames = LUIE.Data.PetNames
-
+local pairs = pairs
 local zo_strformat = zo_strformat
 local table_insert = table.insert
 local g_FramesMovingEnabled = false -- Helper local flag

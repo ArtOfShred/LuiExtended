@@ -10,6 +10,8 @@ local string_format = string.format
 local Effects = LUIE.Data.Effects
 local CombatTextConstants = LUIE.Data.CombatTextConstants
 
+local pairs = pairs
+
 local callbackManager = CALLBACK_MANAGER
 
 CombatTextEventViewer.resourceNames = setmetatable({}, {

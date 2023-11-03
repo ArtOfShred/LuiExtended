@@ -13,6 +13,7 @@ local eventManager = EVENT_MANAGER
 local animationManager = ANIMATION_MANAGER
 local table_insert = table.insert
 local table_remove = table.remove
+local pairs = pairs
 
 local PriorityOne, PriorityTwo, PriorityThree, PriorityFour, PrioritySix, PrioritySeven, PriorityEight
 

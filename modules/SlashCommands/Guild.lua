@@ -8,6 +8,8 @@ local SlashCommands = LUIE.SlashCommands
 local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
 
+local pairs = pairs
+
 -- Slash Command to invite someone to a guild
 function SlashCommands.SlashGuildInvite(option)
     -- If no input was entered, display an error and end.

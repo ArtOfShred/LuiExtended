@@ -14,6 +14,7 @@ local AlertsZone = LUIE.Data.AlertZoneOverride
 local AlertsMap = LUIE.Data.AlertMapOverride
 local AlertsConvert = LUIE.Data.AlertBossNameConvert
 
+local pairs = pairs
 local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
 local string_format = string.format

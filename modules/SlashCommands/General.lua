@@ -9,6 +9,7 @@ local SlashCommands = LUIE.SlashCommands
 
 local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
+local pairs = pairs
 
 local companionKeys = {}
 for id, name in pairs(LUIE.Data.CollectibleTables.Companions) do

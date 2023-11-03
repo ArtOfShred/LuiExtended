@@ -6,6 +6,8 @@
 local CombatText = LUIE.CombatText
 local CombatTextConstants = LUIE.Data.CombatTextConstants
 local BlacklistPresets = LUIE.Data.CombatTextBlacklistPresets
+
+local type, pairs = type, pairs
 local table_insert = table.insert
 local zo_strformat = zo_strformat
 

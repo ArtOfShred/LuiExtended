@@ -5,6 +5,7 @@
 
 local g_ElementMovingEnabled
 
+local pairs = pairs
 local table_concat = table.concat
 
 -- Create Settings Menu

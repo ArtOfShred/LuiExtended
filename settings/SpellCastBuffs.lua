@@ -6,8 +6,10 @@
 local SpellCastBuffs = LUIE.SpellCastBuffs
 local BlacklistPresets = LUIE.Data.AbilityBlacklistPresets
 
+local type, pairs = type, pairs
 local zo_strformat = zo_strformat
 local table_insert = table.insert
+
 local g_BuffsMovingEnabled = false -- Helper local flag
 
 local rotationOptions = { "Horizontal", "Vertical" }

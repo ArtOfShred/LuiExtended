@@ -7,6 +7,7 @@ local CombatInfo = LUIE.CombatInfo
 local CrowdControlTracker = CombatInfo.CrowdControlTracker
 local AbilityAlerts = CombatInfo.AbilityAlerts
 
+local type, pairs = type, pairs
 local table_insert = table.insert
 local zo_strformat = zo_strformat
 local string_format = string.format

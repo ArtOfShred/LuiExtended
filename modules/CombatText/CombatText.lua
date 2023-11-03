@@ -9,6 +9,7 @@ local CombatText = LUIE.CombatText
 
 local CombatTextConstants = LUIE.Data.CombatTextConstants
 
+local pairs = pairs
 local printToChat = LUIE.PrintToChat
 
 local LMP = LibMediaProvider

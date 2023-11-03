@@ -12,6 +12,8 @@ local Effects = LUIE.Data.Effects
 local Abilities = LUIE.Data.Abilities
 local Castbar = LUIE.Data.CastBarTable
 
+local pairs = pairs
+local ipairs = ipairs
 local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
 local string_format = string.format

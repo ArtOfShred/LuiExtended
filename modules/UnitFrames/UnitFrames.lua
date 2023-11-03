@@ -11,6 +11,8 @@ local UI = LUIE.UI
 
 local AbbreviateNumber = LUIE.AbbreviateNumber
 local printToChat = LUIE.PrintToChat
+
+local type, pairs, ipairs = type, pairs, ipairs
 local table_insert = table.insert
 local table_sort = table.sort
 local table_remove = table.remove

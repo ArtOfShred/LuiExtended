@@ -6,6 +6,8 @@
 local SpellCastBuffs = LUIE.SpellCastBuffs
 
 local Effects = LUIE.Data.Effects
+
+local pairs = pairs
 local string_format = string.format
 local zo_strformat = zo_strformat
 local zo_strgsub = zo_strgsub

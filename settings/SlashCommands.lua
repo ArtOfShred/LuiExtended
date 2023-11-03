@@ -5,6 +5,8 @@
 
 local SlashCommands = LUIE.SlashCommands
 local CollectibleTables = LUIE.Data.CollectibleTables
+
+local pairs =pairs
 local table_insert = table.insert
 local zo_strformat = zo_strformat
 
