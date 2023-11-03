@@ -59,6 +59,7 @@ data/AbilityBlacklistPresets.lua
 data/CombatTextBlacklistPresets.lua
 
 modules/ChatAnnouncements/ChatAnnouncements.lua
+modules/ChatAnnouncements/ChatAnnouncementsExperience.lua
 
 modules/CombatText/CombatText.lua
 modules/CombatText/Animation.lua

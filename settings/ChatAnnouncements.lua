@@ -108,18 +108,6 @@ function ChatAnnouncements.CreateSettings()
                 end,
                 default = Defaults.BracketOptionCharacter,
             },
-            --[[{
-                -- Notification Color
-                type = "colorpicker",
-                name = "Notification Color (Unimplemented)",
-                tooltip = "This message will be used to colorize various generic notification messages that are not Social/Guild related or error messages.",
-                getFunc = function() return unpack(Settings.Notify.NotificationColor) end,
-                setFunc = function(r, g, b, a) Settings.Notify.NotificationColor = { r, g, b, a } ChatAnnouncements.RegisterColorEvents() end,
-                width = "full",
-                disabled = function() return not LUIE.TodoLater end,
-                default = {r=Defaults.Notify.NotificationColor[1], g=Defaults.Notify.NotificationColor[2], b=Defaults.Notify.NotificationColor[3]}
-            },]]
-            --
             {
                 -- TODO: Temporary
                 type = "description",
