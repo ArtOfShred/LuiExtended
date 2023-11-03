@@ -12,6 +12,9 @@ local ChatAnnouncements = LUIE.ChatAnnouncements
 ChatAnnouncements.QueuedMessages = {}
 ChatAnnouncements.QueuedMessagesCounter = 1
 
+-- Setup Color Table
+ChatAnnouncements.Colors = {}
+
 local Effects = LUIE.Data.Effects
 local Quests = LUIE.Data.Quests
 
@@ -599,81 +602,6 @@ ChatAnnouncements.Defaults = {
             Alert = false,
         },
     },
-}
-
-------------------------------------------------
--- COLORIZE VALUES -----------------------------
-------------------------------------------------
-
-ChatAnnouncements.Colors = {
-    -- Guild
-    GuildColorize,
-
-    -- Currency
-    CurrencyColorize,
-    CurrencyUpColorize,
-    CurrencyDownColorize,
-    CurrencyGoldColorize,
-    CurrencyAPColorize,
-    CurrencyTVColorize,
-    CurrencyWVColorize,
-    CurrencyOutfitTokenColorize,
-    CurrencyUndauntedColorize,
-    CurrencyTransmuteColorize,
-    CurrencyEventColorize,
-    CurrencyCrownsColorize,
-    CurrencyCrownGemsColorize,
-    CurrencyEndeavorsColorize,
-    CurrencyEndlessColorize,
-
-    -- Disguise
-    DisguiseAlertColorize,
-
-    -- Achievements
-    AchievementColorize1,
-    AchievementColorize2,
-
-    -- Experience
-    ExperienceMessageColorize,
-    ExperienceNameColorize,
-    ExperienceLevelUpColorize,
-
-    -- Skill Point/Lines
-    SkillPointColorize1,
-    SkillPointColorize2,
-    SkillLineColorize,
-
-    -- Guild Skills
-    SkillGuildColorize,
-    SkillGuildColorizeFG,
-    SkillGuildColorizeMG,
-    SkillGuildColorizeUD,
-    SkillGuildColorizeTG,
-    SkillGuildColorizeDB,
-    SkillGuildColorizePO,
-
-    -- Collectibles
-    CollectibleColorize1,
-    CollectibleColorize2,
-    CollectibleUseColorize,
-
-    -- Lorebooks
-    LorebookColorize1,
-    LorebookColorize2,
-
-    -- Quests
-    QuestColorLocNameColorize,
-    QuestColorLocDescriptionColorize,
-    QuestColorQuestNameColorize,
-    QuestColorQuestDescriptionColorize,
-
-    -- Storage
-    StorageRidingColorize,
-    StorageRidingBookColorize,
-    StorageBagColorize,
-
-    -- Antiquities
-    AntiquityColorize,
 }
 
 ------------------------------------------------
