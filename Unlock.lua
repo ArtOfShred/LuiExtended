@@ -201,5 +201,5 @@ function LUIE.ResetElementPosition()
         local frameName = k:GetName()
         LUIE.SV[frameName] = nil
     end
-    ReloadUI()
+    ReloadUI("ingame")
 end

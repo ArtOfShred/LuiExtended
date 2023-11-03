@@ -8,7 +8,7 @@ local CombatTextCombatScrollEventViewer = LUIE.CombatTextCombatScrollEventViewer
 
 local CombatTextConstants = LUIE.Data.CombatTextConstants
 local AbbreviateNumber = LUIE.AbbreviateNumber
-local strfmat = string.format
+local string_format = string.format
 function CombatTextCombatScrollEventViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
     obj:RegisterCallback(CombatTextConstants.eventType.COMBAT, function (...)
@@ -29,7 +29,7 @@ function CombatTextCombatScrollEventViewer:OnEvent(combatType, powerType, value,
     if (isDamageCritical or isHealingCritical or isDotCritical or isHotCritical) and not Settings.toggles.throttleCriticals then
         self:View(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted, 1)
     else
-        local eventKey = strfmat("%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s", combatType, powerType, abilityName, abilityId, damageType, sourceName, tostring(isDamage), tostring(isDamageCritical), tostring(isHealing), tostring(isHealingCritical), tostring(isEnergize), tostring(isDrain), tostring(isDot), tostring(isDotCritical), tostring(isHot), tostring(isHotCritical), tostring(isMiss), tostring(isImmune), tostring(isParried), tostring(isReflected), tostring(isDamageShield), tostring(isDodged), tostring(isBlocked), tostring(isInterrupted))
+        local eventKey = string_format("%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s", combatType, powerType, abilityName, abilityId, damageType, sourceName, tostring(isDamage), tostring(isDamageCritical), tostring(isHealing), tostring(isHealingCritical), tostring(isEnergize), tostring(isDrain), tostring(isDot), tostring(isDotCritical), tostring(isHot), tostring(isHotCritical), tostring(isMiss), tostring(isImmune), tostring(isParried), tostring(isReflected), tostring(isDamageShield), tostring(isDodged), tostring(isBlocked), tostring(isInterrupted))
         if self.eventBuffer[eventKey] == nil then
             self.eventBuffer[eventKey] = { value = value, hits = 1 }
             local throttleTime = 0
@@ -78,7 +78,7 @@ function CombatTextCombatScrollEventViewer:View(combatType, powerType, value, ab
 
     local textFormat, fontSize, textColor = self:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
     if hits > 1 and Settings.toggles.showThrottleTrailer then
-        value = strfmat("%s (%d)", value, hits)
+        value = string_format("%s (%d)", value, hits)
     end
     if (combatType == CombatTextConstants.combatType.INCOMING) and Settings.toggles.incomingDamageOverride and (isDamage or isDamageCritical) then
         textColor = Settings.colors.incomingDamageOverride

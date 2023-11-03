@@ -435,9 +435,9 @@ function CombatText.Initialize(enabled)
     -- Load settings
     local isCharacterSpecific = LUIESV.Default[GetDisplayName()]["$AccountWide"].CharacterSpecificSV
     if isCharacterSpecific then
-        CombatText.SV = ZO_SavedVars:New(LUIE.SVName, LUIE.SVVer, "CombatText", CombatText.Defaults)
+        CombatText.SV = ZO_SavedVars:New(LUIE.SVName, LUIE.SVVer, moduleName, CombatText.Defaults)
     else
-        CombatText.SV = ZO_SavedVars:NewAccountWide(LUIE.SVName, LUIE.SVVer, "CombatText", CombatText.Defaults)
+        CombatText.SV = ZO_SavedVars:NewAccountWide(LUIE.SVName, LUIE.SVVer, moduleName, CombatText.Defaults)
     end
 
     -- Disable module if setting not toggled on

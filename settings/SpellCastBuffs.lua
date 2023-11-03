@@ -7,7 +7,7 @@ local SpellCastBuffs = LUIE.SpellCastBuffs
 local BlacklistPresets = LUIE.Data.AbilityBlacklistPresets
 
 local zo_strformat = zo_strformat
-
+local table_insert = table.insert
 local g_BuffsMovingEnabled = false -- Helper local flag
 
 local rotationOptions = { "Horizontal", "Vertical" }
@@ -107,13 +107,13 @@ function SpellCastBuffs.CreateSettings()
     -- Get fonts
     local FontsList = {}
     for f in pairs(LUIE.Fonts) do
-        table.insert(FontsList, f)
+        table_insert(FontsList, f)
     end
 
     -- Get statusbar textures
     local StatusbarTexturesList = {}
     for key, _ in pairs(LUIE.StatusbarTextures) do
-        table.insert(StatusbarTexturesList, key)
+        table_insert(StatusbarTexturesList, key)
     end
 
     -- Load Dialog Buttons

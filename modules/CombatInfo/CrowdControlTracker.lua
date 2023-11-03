@@ -11,6 +11,8 @@ local Effects = LUIE.Data.Effects
 local CrowdControl = LUIE.Data.CrowdControl
 local eventManager = EVENT_MANAGER
 local animationManager = ANIMATION_MANAGER
+local table_insert = table.insert
+local table_remove = table.remove
 
 local PriorityOne, PriorityTwo, PriorityThree, PriorityFour, PrioritySix, PrioritySeven, PriorityEight
 
@@ -378,7 +380,7 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
                 end
             end
             if found_k then
-                table.remove(self.fearsQueue, found_k)
+                table_remove(self.fearsQueue, found_k)
                 if #self.fearsQueue == 0 then
                     self:RemoveCC(2, PriorityTwo.endTime)
                 end
@@ -392,7 +394,7 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
                 end
             end
             if found_k then
-                table.remove(self.disorientsQueue, found_k)
+                table_remove(self.disorientsQueue, found_k)
                 if #self.disorientsQueue == 0 then
                     self:RemoveCC(3, PriorityThree.endTime)
                 end
@@ -534,7 +536,7 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
                 -- zo_callLater(function() callbackManager:UnregisterAllCallbacks("OnIncomingStun") end, 1)
                 self.incomingCC = {}
             elseif abilityId == self.incomingCC[ACTION_RESULT_FEARED] and (currentEndTime + 200) > PriorityOne.endTime and (currentEndTime + 200) > PriorityTwo.endTime then
-                table.insert(self.fearsQueue, abilityId)
+                table_insert(self.fearsQueue, abilityId)
                 PriorityTwo = {
                     endTime = currentEndTime,
                     abilityId = abilityId,
@@ -552,7 +554,7 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
                 end
                 self.incomingCC = {}
             elseif abilityId == self.incomingCC[ACTION_RESULT_CHARMED] and (currentEndTime + 200) > PriorityOne.endTime and (currentEndTime + 200) > PriorityTwo.endTime then
-                table.insert(self.fearsQueue, abilityId)
+                table_insert(self.fearsQueue, abilityId)
                 PriorityTwo = {
                     endTime = currentEndTime,
                     abilityId = abilityId,
@@ -571,7 +573,7 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
                 self.incomingCC = {}
             elseif abilityId == self.incomingCC[ACTION_RESULT_DISORIENTED] and (currentEndTime + 200) > PriorityOne.endTime and (currentEndTime + 200) > PriorityTwo.endTime and currentEndTime > PriorityThree.endTime then
                 -- self.incomingCC[ACTION_RESULT_DISORIENTED] == nil
-                table.insert(self.disorientsQueue, abilityId)
+                table_insert(self.disorientsQueue, abilityId)
                 PriorityThree = {
                     endTime = currentEndTime,
                     abilityId = abilityId,
@@ -589,7 +591,7 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
                 end
                 self.incomingCC = {}
             elseif CombatInfo.SV.cct.showRoot and (abilityId == GENERIC_ROOT_ABILITY_ID or abilityId == self.incomingCC[ACTION_RESULT_ROOTED]) and (currentEndTime + 200) > PriorityOne.endTime and (currentEndTime + 200) > PriorityTwo.endTime and currentEndTime > PriorityThree.endTime and currentEndTime > PriorityFour.endTime then
-                -- table.insert(self.rootsQueue, abilityId)
+                -- table_insert(self.rootsQueue, abilityId)
                 PrioritySix = { endTime = currentEndTime, abilityId = abilityId, abilityIcon = abilityIcon, hitValue = hitValue, result = result, abilityName = abilityName }
                 if PriorityOne.endTime == 0 and PriorityTwo.endTime == 0 and PriorityThree.endTime == 0 and PriorityFour.endTime == 0 then
                     self.currentCC = 6
@@ -601,7 +603,7 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
                 end
                 self.incomingCC = {}
             elseif (CombatInfo.SV.cct.showSnare and abilityId == self.incomingCC[ACTION_RESULT_SNARED] and not self.aoeTypesId[abilityId]) and (currentEndTime + 200) > PriorityOne.endTime and (currentEndTime + 200) > PriorityTwo.endTime and currentEndTime > PriorityThree.endTime and currentEndTime > PriorityFour.endTime then
-                -- table.insert(self.snaresQueue, abilityId)
+                -- table_insert(self.snaresQueue, abilityId)
                 PriorityEight = { endTime = currentEndTime, abilityId = abilityId, abilityIcon = abilityIcon, hitValue = hitValue, result = result, abilityName = abilityName }
                 if PriorityOne.endTime == 0 and PriorityTwo.endTime == 0 and PriorityThree.endTime == 0 and PriorityFour.endTime == 0 and PrioritySeven.endTime == 0 then
                     self.currentCC = 8
@@ -612,7 +614,7 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
                 end
                 self.incomingCC = {}
             else
-                table.insert(self.effectsGained, {
+                table_insert(self.effectsGained, {
                     abilityId = abilityId,
                     hitValue = hitValue,
                     sourceUnitId = sourceUnitId,
@@ -629,7 +631,7 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
             local currentEndTime = currentTime + foundValue.hitValue
 
             if (result == ACTION_RESULT_FEARED or result == ACTION_RESULT_CHARMED) and (currentEndTime + 200) > PriorityOne.endTime and (currentEndTime + 200) > PriorityTwo.endTime then
-                table.insert(self.fearsQueue, abilityId)
+                table_insert(self.fearsQueue, abilityId)
                 PriorityTwo = {
                     endTime = currentEndTime,
                     abilityId = abilityId,
@@ -679,7 +681,7 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
     -- zo_callLater(function() callbackManager:UnregisterAllCallbacks("OnIncomingStun") end, 1)
 
     -- elseif result==ACTION_RESULT_FEARED and (currentEndTime+200)>PriorityOne.endTime and (currentEndTime+200)>PriorityTwo.endTime then
-    -- table.insert(self.fearsQueue, abilityId)
+    -- table_insert(self.fearsQueue, abilityId)
     -- PriorityTwo = {endTime=currentEndTime, abilityId=abilityId, hitValue=foundValue.hitValue, result=result, abilityName=abilityName}
     -- if PriorityOne.endTime==0 then
     -- self.currentCC=2
@@ -688,7 +690,7 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
     -- end
 
     -- elseif result==ACTION_RESULT_DISORIENTED and (currentEndTime+200)>PriorityOne.endTime and (currentEndTime+200)>PriorityTwo.endTime and currentEndTime>PriorityThree.endTime then
-    -- table.insert(self.disorientsQueue, abilityId)
+    -- table_insert(self.disorientsQueue, abilityId)
     -- PriorityThree = {endTime=currentEndTime, abilityId=abilityId, hitValue=foundValue.hitValue, result=result, abilityName=abilityName}
     -- if PriorityOne.endTime==0 and PriorityTwo.endTime==0 then
     -- self.currentCC=3

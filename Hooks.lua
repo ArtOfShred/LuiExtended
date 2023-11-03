@@ -5,6 +5,8 @@
 
 local zo_strformat = zo_strformat
 local printToChat = LUIE.PrintToChat
+local table_insert = table.insert
+local table_sort = table.sort
 
 local FORCE_SUPPRESS_COOLDOWN_SOUND = true
 local HIDE_COUNT = 0
@@ -332,7 +334,7 @@ function LUIE.InitializeHooks()
                         effectsRow.time.endTime = endTime
                         effectsRow.isArtificial = false -- Sort with normal buffs
                     end
-                    table.insert(effectsRows, effectsRow)
+                    table_insert(effectsRows, effectsRow)
                 end
 
                 local counter = 1
@@ -481,12 +483,12 @@ function LUIE.InitializeHooks()
                             effectsRow.isArtificial = false
                             effectsRow.effectId = abilityId
 
-                            table.insert(effectsRows, effectsRow)
+                            table_insert(effectsRows, effectsRow)
                         end
                     end
                 end
 
-                table.sort(effectsRows, EffectsRowComparator)
+                table_sort(effectsRows, EffectsRowComparator)
                 local prevRow
                 for i, effectsRow in ipairs(effectsRows) do
                     if prevRow then
@@ -582,10 +584,10 @@ function LUIE.InitializeHooks()
                 data:SetCooldown(timeLeft, duration * 1000.0)
             end
 
-            table.insert(sortedArtificialEffectsTable, data)
+            table_insert(sortedArtificialEffectsTable, data)
         end
 
-        table.sort(sortedArtificialEffectsTable, ArtificialEffectsRowComparator)
+        table_sort(sortedArtificialEffectsTable, ArtificialEffectsRowComparator)
 
         for i, data in ipairs(sortedArtificialEffectsTable) do
             self:AddActiveEffectData(data)

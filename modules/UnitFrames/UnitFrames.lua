@@ -11,7 +11,10 @@ local UI = LUIE.UI
 
 local AbbreviateNumber = LUIE.AbbreviateNumber
 local printToChat = LUIE.PrintToChat
-local strfmat = string.format
+local table_insert = table.insert
+local table_sort = table.sort
+local table_remove = table.remove
+local string_format = string.format
 local zo_strformat = zo_strformat
 
 local eventManager = EVENT_MANAGER
@@ -405,7 +408,7 @@ function UnitFrames.GetDefaultFramesOptions(frame)
     local retval = {}
     for k, v in pairs(g_DefaultFramesOptions) do
         if not (frame == "Boss" and k == 3) then
-            table.insert(retval, v)
+            table_insert(retval, v)
         end
     end
     return retval
@@ -634,7 +637,7 @@ local function CreateDefaultFrames()
     -- When default Target frame is enabled set the threshold value to change color of label and add label to default fade list
     if g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH] then
         g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].threshold = g_targetThreshold
-        table.insert(g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].label)
+        table_insert(g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].label)
     end
 
     -- Create classIcon and friendIcon: they should work even when default unit frames extender is disabled
@@ -642,8 +645,8 @@ local function CreateDefaultFrames()
     g_DefaultFrames.reticleover.friendIcon = UI.Texture(g_targetUnitFrame.frame, nil, { 32, 32 }, nil, nil, true)
     g_DefaultFrames.reticleover.friendIcon:SetAnchor(TOPLEFT, ZO_TargetUnitFramereticleoverTextArea, TOPRIGHT, 30, -4)
     -- add those 2 icons to automatic fade list, so fading will be done automatically by game
-    table.insert(g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover.classIcon)
-    table.insert(g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover.friendIcon)
+    table_insert(g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover.classIcon)
+    table_insert(g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover.friendIcon)
 
     -- When default Group frame in use, then create dummy boolean field, so this setting remain constant between /reloadui calls
     if UnitFrames.SV.DefaultFramesNewGroup == 3 then
@@ -2174,7 +2177,7 @@ function UnitFrames.CustomPetUpdate()
                 end
             end
             if addPet then
-                table.insert(petList, { ["unitTag"] = unitTag, ["unitName"] = unitName })
+                table_insert(petList, { ["unitTag"] = unitTag, ["unitName"] = unitName })
                 -- CustomFrames
                 n = n + 1
             end
@@ -2186,7 +2189,7 @@ function UnitFrames.CustomPetUpdate()
 
     UnitFrames.CustomFramesUnreferencePetControl(n)
 
-    table.sort(petList, function (x, y)
+    table_sort(petList, function (x, y)
         return x.unitName < y.unitName
     end)
 
@@ -2220,7 +2223,7 @@ end
 -- Runs on the EVENT_UNIT_CREATED listener.
 -- Used to create DefaultFrames UI controls and request delayed CustomFrames group frame update
 function UnitFrames.OnUnitCreated(eventCode, unitTag)
-    --d( strfmat("[%s] OnUnitCreated: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
+    --d( string_format("[%s] OnUnitCreated: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
     -- Create on-fly UI controls for default UI group member and reread his values
     if g_DefaultFrames.SmallGroup then
         UnitFrames.DefaultFramesCreateUnitGroupControls(unitTag)
@@ -2252,7 +2255,7 @@ end
 -- Runs on the EVENT_UNIT_DESTROYED listener.
 -- Used to request delayed CustomFrames group frame update
 function UnitFrames.OnUnitDestroyed(eventCode, unitTag)
-    --d( strfmat("[%s] OnUnitDestroyed: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
+    --d( string_format("[%s] OnUnitDestroyed: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
     -- Make sure we do not try to update bars on this unitTag before full group update is complete
     if "group" == zo_strsub(unitTag, 0, 5) then
         UnitFrames.CustomFrames[unitTag] = nil
@@ -3151,10 +3154,10 @@ function UnitFrames.UpdateStat(unitTag, statType, attributeType, powerType)
     local statControls = {}
 
     if UnitFrames.CustomFrames[unitTag] and UnitFrames.CustomFrames[unitTag][powerType] and UnitFrames.CustomFrames[unitTag][powerType].stat and UnitFrames.CustomFrames[unitTag][powerType].stat[statType] then
-        table.insert(statControls, UnitFrames.CustomFrames[unitTag][powerType].stat[statType])
+        table_insert(statControls, UnitFrames.CustomFrames[unitTag][powerType].stat[statType])
     end
     if g_AvaCustFrames[unitTag] and g_AvaCustFrames[unitTag][powerType] and g_AvaCustFrames[unitTag][powerType].stat and g_AvaCustFrames[unitTag][powerType].stat[statType] then
-        table.insert(statControls, g_AvaCustFrames[unitTag][powerType].stat[statType])
+        table_insert(statControls, g_AvaCustFrames[unitTag][powerType].stat[statType])
     end
 
     -- If we have a control, proceed next
@@ -3263,7 +3266,7 @@ end
 
 -- Runs on the EVENT_GROUP_MEMBER_CONNECTED_STATUS listener.
 function UnitFrames.OnGroupMemberConnectedStatus(eventCode, unitTag, isOnline)
-    --d( strfmat("DC: %s - %s", unitTag, isOnline and "Online" or "Offline" ) )
+    --d( string_format("DC: %s - %s", unitTag, isOnline and "Online" or "Offline" ) )
     if UnitFrames.CustomFrames[unitTag] and UnitFrames.CustomFrames[unitTag].dead then
         UnitFrames.CustomFramesSetDeadLabel(UnitFrames.CustomFrames[unitTag], isOnline and nil or strOffline)
     end
@@ -3292,7 +3295,7 @@ end
 -- Runs on the EVENT_UNIT_DEATH_STATE_CHANGED listener.
 -- This handler fires every time a valid unitTag dies or is resurrected
 function UnitFrames.OnDeath(eventCode, unitTag, isDead)
-    --d( strfmat("%s - %s", unitTag, isDead and "Dead" or "Alive" ) )
+    --d( string_format("%s - %s", unitTag, isDead and "Dead" or "Alive" ) )
     if UnitFrames.CustomFrames[unitTag] and UnitFrames.CustomFrames[unitTag].dead then
         UnitFrames.ResurrectionMonitor(unitTag)
     end
@@ -3751,7 +3754,7 @@ end
 
 -- Repopulate group members, but try to update only those, that require it
 function UnitFrames.CustomFramesGroupUpdate()
-    --d( strfmat("[%s] GroupUpdate", GetTimeString()) )
+    --d( string_format("[%s] GroupUpdate", GetTimeString()) )
     -- Unregister update function and clear local flag
     eventManager:UnregisterForUpdate(g_PendingUpdate.Group.name)
     g_PendingUpdate.Group.flag = false
@@ -3781,7 +3784,7 @@ function UnitFrames.CustomFramesGroupUpdate()
         local unitTag = "group" .. i
         if DoesUnitExist(unitTag) then
             -- Save this member for later sorting
-            table.insert(groupList, { ["unitTag"] = unitTag, ["unitName"] = GetUnitName(unitTag) })
+            table_insert(groupList, { ["unitTag"] = unitTag, ["unitName"] = GetUnitName(unitTag) })
             -- CustomFrames
             n = n + 1
         else
@@ -3832,7 +3835,7 @@ function UnitFrames.CustomFramesGroupUpdate()
                 -- Dereference game unitTag from CustomFrames table
                 UnitFrames.CustomFrames[groupList[i].unitTag] = nil
                 -- Remove element from saved table
-                table.remove(groupList, i)
+                table_remove(groupList, i)
                 -- Also remove last used (not removed on previous step) SmallGroup unitTag
                 -- Variable 'n' is still holding total number of group members
                 -- Thus we need to remove n-th one
@@ -3847,7 +3850,7 @@ function UnitFrames.CustomFramesGroupUpdate()
     -- Now we have local list with valid units and we are ready to sort it
     -- FIXME: Sorting is again hardcoded to be done always
     --if not raid or UnitFrames.SV.RaidSort then
-    table.sort(groupList, function (x, y)
+    table_sort(groupList, function (x, y)
         return x.unitName < y.unitName
     end)
     --end
@@ -5665,7 +5668,7 @@ function UnitFrames.CustomFramesApplyLayoutRaid(unhide)
         for index = 1, GetGroupSize() do
             local playerRole = GetGroupMemberSelectedRole(GetGroupUnitTagByIndex(index))
             if playerRole == currentRole then
-                table.insert(list, index)
+                table_insert(list, index)
             end
         end
     end

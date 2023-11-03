@@ -6,6 +6,7 @@
 local ChatAnnouncements = LUIE.ChatAnnouncements
 
 local zo_strformat = zo_strformat
+local table_insert = table.insert
 
 local chatNameDisplayOptions = { "@UserID", "Character Name", "Character Name @UserID" }
 local chatNameDisplayOptionsKeys = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
@@ -6290,7 +6291,7 @@ function ChatAnnouncements.CreateSettings()
             end,
         }
         -- Add a hardcoded panel for achievement tracking options
-        table.insert(optionsDataChatAnnouncements[#optionsDataChatAnnouncements].controls, checkbox)
+        table_insert(optionsDataChatAnnouncements[#optionsDataChatAnnouncements].controls, checkbox)
     end
 
     -- Chat Announcements - Quest Announcements Options Submenu

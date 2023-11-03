@@ -7,7 +7,7 @@
 -- local Error = LUIE.Error
 -- local Warn = LUIE.Warn
 
-local strfmat = string.format
+local string_format = string.format
 local NOP = {}
 function NOP:Debug(...) end
 
@@ -34,7 +34,7 @@ end
 
 function LUIE.Log(color, ...)
     if LUIE.log_to_chat then
-        d("|c" .. color .. LUIE.name .. ": " .. strfmat(...) .. "|r")
+        d("|c" .. color .. LUIE.name .. ": " .. string_format(...) .. "|r")
     end
 end
 

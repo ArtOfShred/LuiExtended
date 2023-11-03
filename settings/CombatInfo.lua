@@ -7,8 +7,9 @@ local CombatInfo = LUIE.CombatInfo
 local CrowdControlTracker = CombatInfo.CrowdControlTracker
 local AbilityAlerts = CombatInfo.AbilityAlerts
 
+local table_insert = table.insert
 local zo_strformat = zo_strformat
-local strfmat = string.format
+local string_format = string.format
 local castBarMovingEnabled = false    -- Helper local flag
 local alertFrameMovingEnabled = false -- Helper local flag
 
@@ -73,19 +74,19 @@ function CombatInfo.CreateSettings()
     -- Get fonts
     local FontsList = {}
     for f in pairs(LUIE.Fonts) do
-        table.insert(FontsList, f)
+        table_insert(FontsList, f)
     end
 
     -- Get sounds
     local SoundsList = {}
     for sound, _ in pairs(LUIE.Sounds) do
-        table.insert(SoundsList, sound)
+        table_insert(SoundsList, sound)
     end
 
     -- Get statusbar textures
     local StatusbarTexturesList = {}
     for key, _ in pairs(LUIE.StatusbarTextures) do
-        table.insert(StatusbarTexturesList, key)
+        table_insert(StatusbarTexturesList, key)
     end
 
     -- Load Dialog Buttons
@@ -3282,7 +3283,7 @@ function CombatInfo.CreateSettings()
                 type = "slider",
                 name = GetString(LUIE_STRING_LAM_CI_CCT_SCALE),
                 tooltip = GetString(LUIE_STRING_LAM_CI_CCT_SCALE_TP),
-                default = tonumber(strfmat("%.0f", 100 * Defaults.cct.controlScale)),
+                default = tonumber(string_format("%.0f", 100 * Defaults.cct.controlScale)),
                 disabled = function ()
                     return not Settings.cct.enabled
                 end,
@@ -3290,7 +3291,7 @@ function CombatInfo.CreateSettings()
                 max = 200,
                 step = 1,
                 getFunc = function ()
-                    return tonumber(strfmat("%.0f", 100 * Settings.cct.controlScale))
+                    return tonumber(string_format("%.0f", 100 * Settings.cct.controlScale))
                 end,
                 setFunc = function (newValue)
                     Settings.cct.controlScale = newValue / 100

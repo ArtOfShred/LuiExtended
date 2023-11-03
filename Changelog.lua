@@ -4,6 +4,7 @@
 --]]
 
 local zo_strformat = zo_strformat
+local table_concat = table.concat
 
 local changelogMessages = {
     "|cFFA500LuiExtended Version 6.6.7|r",
@@ -54,7 +55,7 @@ end
 -- Called on initialize
 function LUIE.ChangelogScreen()
     -- concat messages into one string
-    local changelog = table.concat(changelogMessages, "\n")
+    local changelog = table_concat(changelogMessages, "\n")
     -- If text start with '*' replace it with bullet texture
     changelog = zo_strgsub(changelog, "%[%*%]", "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t")
     -- Set the window title

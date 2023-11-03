@@ -6,7 +6,7 @@
 LUIE.CombatTextEventViewer = ZO_InitializingObject:Subclass()
 local CombatTextEventViewer = LUIE.CombatTextEventViewer
 local CombatText = LUIE.CombatText
-local strfmat = string.format
+local string_format = string.format
 local Effects = LUIE.Data.Effects
 local CombatTextConstants = LUIE.Data.CombatTextConstants
 
@@ -299,7 +299,7 @@ function CombatTextEventViewer:PrepareLabel(label, fontSize, color, text)
     local Settings = LUIE.CombatText.SV
     label:SetText(text)
     label:SetColor(unpack(color))
-    label:SetFont(strfmat("%s|%d|%s", Settings.fontFaceApplied, fontSize, Settings.fontOutline))
+    label:SetFont(string_format("%s|%d|%s", Settings.fontFaceApplied, fontSize, Settings.fontOutline))
     label:SetAlpha(Settings.common.transparencyValue / 100)
 end
 

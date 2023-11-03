@@ -11,9 +11,11 @@ local UI = LUIE.UI
 local Effects = LUIE.Data.Effects
 local Abilities = LUIE.Data.Abilities
 local Tooltips = LUIE.Data.Tooltips
-local strfmat = string.format
+local string_format = string.format
 local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
+local table_insert = table.insert
+local table_sort = table.sort
 --local displayName = GetDisplayName()
 local eventManager = EVENT_MANAGER
 local sceneManager = SCENE_MANAGER
@@ -403,8 +405,8 @@ function SpellCastBuffs.Initialize(enabled)
 
         local fragment1 = ZO_HUDFadeSceneFragment:New(uiTlw.playerb, 0, 0)
         local fragment2 = ZO_HUDFadeSceneFragment:New(uiTlw.playerd, 0, 0)
-        table.insert(fragments, fragment1)
-        table.insert(fragments, fragment2)
+        table_insert(fragments, fragment1)
+        table_insert(fragments, fragment2)
     end
 
     -- Create TopLevelWindows for buff frames when NOT locked to Custom Unit Frames
@@ -431,8 +433,8 @@ function SpellCastBuffs.Initialize(enabled)
 
         local fragment1 = ZO_HUDFadeSceneFragment:New(uiTlw.targetb, 0, 0)
         local fragment2 = ZO_HUDFadeSceneFragment:New(uiTlw.targetd, 0, 0)
-        table.insert(fragments, fragment1)
-        table.insert(fragments, fragment2)
+        table_insert(fragments, fragment1)
+        table_insert(fragments, fragment2)
     end
 
     -- Create TopLevelWindows for Prominent Buffs
@@ -477,8 +479,8 @@ function SpellCastBuffs.Initialize(enabled)
 
     local fragmentP1 = ZO_HUDFadeSceneFragment:New(uiTlw.prominentbuffs, 0, 0)
     local fragmentP2 = ZO_HUDFadeSceneFragment:New(uiTlw.prominentdebuffs, 0, 0)
-    table.insert(fragments, fragmentP1)
-    table.insert(fragments, fragmentP2)
+    table_insert(fragments, fragmentP1)
+    table_insert(fragments, fragmentP2)
 
     -- Separate container for players long term buffs
     uiTlw.player_long = UI.TopLevel(nil, nil)
@@ -3620,24 +3622,24 @@ function SpellCastBuffs.OnUpdate(currentTime)
                     -- Filter Effects
                     -- Always show prominent effects
                     if v.target == "prominent" then
-                        table.insert(buffsSorted[container], v)
+                        table_insert(buffsSorted[container], v)
                         -- If the effect is not flagged as long or 0 duration and flagged to display in short container, then display normally.
                     elseif v.type == BUFF_EFFECT_TYPE_DEBUFF or v.forced == "short" or not (v.forced == "long" or v.ends == nil or v.dur == 0) then
                         if v.target == "reticleover" and SpellCastBuffs.SV.ShortTermEffects_Target then
-                            table.insert(buffsSorted[container], v)
+                            table_insert(buffsSorted[container], v)
                         elseif v.target == "player" and SpellCastBuffs.SV.ShortTermEffects_Player then
-                            table.insert(buffsSorted[container], v)
+                            table_insert(buffsSorted[container], v)
                         end
                         -- If the effect is a long term effect on the target then use Long Term Target settings.
                     elseif v.target == "reticleover" and SpellCastBuffs.SV.LongTermEffects_Target then
-                        table.insert(buffsSorted[container], v)
+                        table_insert(buffsSorted[container], v)
                         -- If the effect is a long term effect on the player then use Long Term Player settings.
                     elseif v.target == "player" and SpellCastBuffs.SV.LongTermEffects_Player then
                         -- Choose container for long-term player buffs
                         if SpellCastBuffs.SV.LongTermEffectsSeparate and not (container == "prominentbuffs" or container == "prominentdebuffs") then
-                            table.insert(buffsSorted.player_long, v)
+                            table_insert(buffsSorted.player_long, v)
                         else
-                            table.insert(buffsSorted[container], v)
+                            table_insert(buffsSorted[container], v)
                         end
                     end
                 end
@@ -3648,7 +3650,7 @@ function SpellCastBuffs.OnUpdate(currentTime)
     -- Sort effects in container and draw them on screen
     for _, container in pairs(containerRouting) do
         if needs_update[container] then
-            table.sort(buffsSorted[container], buffSort)
+            table_sort(buffsSorted[container], buffSort)
             SpellCastBuffs.updateIcons(currentTime, buffsSorted[container], container)
         end
         needs_update[container] = false
@@ -3880,7 +3882,7 @@ function SpellCastBuffs.updateIcons(currentTime, sortedList, container)
         end
 
         if effect.stack and effect.stack > 0 then
-            buff.stack:SetText(strfmat("%s", effect.stack))
+            buff.stack:SetText(string_format("%s", effect.stack))
             buff.stack:SetHidden(false)
         else
             buff.stack:SetHidden(true)
@@ -3890,19 +3892,19 @@ function SpellCastBuffs.updateIcons(currentTime, sortedList, container)
         if remain and not effect.fakeDuration then
             if remain > 86400000 then
                 -- more then 1 day
-                buff.label:SetText(strfmat("%d d", zo_floor(remain / 86400000)))
+                buff.label:SetText(string_format("%d d", zo_floor(remain / 86400000)))
             elseif remain > 6000000 then
                 -- over 100 minutes - display XXh
-                buff.label:SetText(strfmat("%dh", zo_floor(remain / 3600000)))
+                buff.label:SetText(string_format("%dh", zo_floor(remain / 3600000)))
             elseif remain > 600000 then
                 -- over 10 minutes - display XXm
-                buff.label:SetText(strfmat("%dm", zo_floor(remain / 60000)))
+                buff.label:SetText(string_format("%dm", zo_floor(remain / 60000)))
             elseif remain > 60000 or container == "player_long" then
                 local m = zo_floor(remain / 60000)
                 local s = remain / 1000 - 60 * m
-                buff.label:SetText(strfmat("%d:%.2d", m, s))
+                buff.label:SetText(string_format("%d:%.2d", m, s))
             else
-                buff.label:SetText(strfmat(SpellCastBuffs.SV.RemainingTextMillis and "%.1f" or "%.1d", remain / 1000))
+                buff.label:SetText(string_format(SpellCastBuffs.SV.RemainingTextMillis and "%.1f" or "%.1d", remain / 1000))
             end
         end
         if effect.restart and buff.cd ~= nil then

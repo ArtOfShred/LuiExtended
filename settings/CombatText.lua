@@ -6,7 +6,7 @@
 local CombatText = LUIE.CombatText
 local CombatTextConstants = LUIE.Data.CombatTextConstants
 local BlacklistPresets = LUIE.Data.CombatTextBlacklistPresets
-
+local table_insert = table.insert
 local zo_strformat = zo_strformat
 
 local globalIconOptions = { "All Crowd Control", "NPC CC Only", "Player CC Only" }
@@ -72,7 +72,7 @@ function CombatText.CreateSettings()
     -- Get fonts
     local FontsList = {}
     for f in pairs(LUIE.Fonts) do
-        table.insert(FontsList, f)
+        table_insert(FontsList, f)
     end
 
     -- Load Dialog Buttons

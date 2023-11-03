@@ -5,6 +5,8 @@
 
 local g_ElementMovingEnabled
 
+local table_concat = table.concat
+
 -- Create Settings Menu
 function LUIE.CreateSettings()
     -- Load LibAddonMenu
@@ -50,7 +52,7 @@ function LUIE.CreateSettings()
     local function DeleteCurrentProfile(account)
         local deleteProfile
         if account then
-            deleteProfile = table.concat({ "$AccountWide (", GetDisplayName(), ")" })
+            deleteProfile = table_concat({ "$AccountWide (", GetDisplayName(), ")" })
         else
             deleteProfile = GetUnitName("player")
         end
