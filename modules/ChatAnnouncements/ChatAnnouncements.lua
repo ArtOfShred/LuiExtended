@@ -5795,7 +5795,7 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
                     end
                     local type = "LUIE_CURRENCY_VENDOR"
 
-                    local parts = {ZO_LinkHandler_ParseLink(itemLink)}
+                    local parts = { ZO_LinkHandler_ParseLink(itemLink) }
                     parts[22] = "1"
                     parts = table_concat(parts, ":"):sub(2, -1)
                     itemLink = zo_strformat("|H<<1>>|h|h", parts)
@@ -5853,7 +5853,7 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
                     end
                     local type = "LUIE_CURRENCY_VENDOR"
 
-                    local parts = {ZO_LinkHandler_ParseLink(itemLink)}
+                    local parts = { ZO_LinkHandler_ParseLink(itemLink) }
                     parts[22] = "1"
                     parts = table_concat(parts, ":"):sub(2, -1)
                     itemLink = zo_strformat("|H<<1>>|h|h", parts)
@@ -5917,7 +5917,7 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
             end
             local type = "LUIE_CURRENCY_VENDOR"
 
-            local parts = {ZO_LinkHandler_ParseLink(itemLink)}
+            local parts = { ZO_LinkHandler_ParseLink(itemLink) }
             parts[22] = "1"
             parts = table_concat(parts, ":"):sub(2, -1)
             itemLink = zo_strformat("|H<<1>>|h|h", parts)
