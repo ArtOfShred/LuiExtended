@@ -3,6 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
+local type, pairs, ipairs = type, pairs, ipairs
 local zo_strformat = zo_strformat
 local printToChat = LUIE.PrintToChat
 local table_insert = table.insert
