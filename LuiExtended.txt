@@ -47,6 +47,7 @@ data/Tooltips.lua
 data/UnitNamesTable.lua
 data/ZoneNamesTable.lua
 data/Effects.lua
+data/EffectsBarHighlight.lua
 data/CastBarTable.lua
 data/CollectibleTables.lua
 data/CombatTextConstants.lua
