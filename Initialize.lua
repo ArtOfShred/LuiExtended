@@ -17,33 +17,53 @@ local function LoadSavedVars()
     end
 end
 
--- Load additional fonts and status bar textures from LMP
-local function LoadMedia()
+
+-- Load additional fonts from LMP
+local function UpdateFonts()
     local LMP = LibMediaProvider
     if LMP == nil then
         return
     end
-
-    -- Update Fonts
     for _, f in pairs(LMP:List(LMP.MediaType.FONT)) do
         if not LUIE.Fonts[f] then
             LUIE.Fonts[f] = LMP:Fetch(LMP.MediaType.FONT, f)
         end
     end
+end
 
-    -- Update StatusBar textures
+-- Load additional status bar textures from LMP
+local function UpdateStatusbarTextures()
+    local LMP = LibMediaProvider
+    if LMP == nil then
+        return
+    end
     for _, s in pairs(LMP:List(LMP.MediaType.STATUSBAR)) do
         if not LUIE.StatusbarTextures[s] then
             LUIE.StatusbarTextures[s] = LMP:Fetch(LMP.MediaType.STATUSBAR, s)
         end
     end
+end
 
+-- Load additional sounds from LMP
+local function UpdateSounds()
+    local LMP = LibMediaProvider
+    if LMP == nil then
+        return
+    end
     for _, a in pairs(LMP:List(LMP.MediaType.SOUND)) do
-        if not LUIE.StatusbarTextures[a] then
+        if not LUIE.Sounds[a] then
             LUIE.Sounds[a] = LMP:Fetch(LMP.MediaType.SOUND, a)
         end
     end
 end
+
+-- Load additional media from LMP
+local function LoadMedia()
+    UpdateFonts()
+    UpdateStatusbarTextures()
+    UpdateSounds()
+end
+
 
 -- Startup Info string
 local function LoadScreen()
