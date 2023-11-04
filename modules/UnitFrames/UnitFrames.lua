@@ -3671,7 +3671,8 @@ function UnitFrames.OnChampionPointGained(eventCode)
         UnitFrames.CustomFrames.player.ChampionXP.enlightenment:SetColor(color2.r, color2.g, color2.b, 0.40)
         UnitFrames.CustomFrames.player.ChampionXP.bar:SetColor(color.r, color.g, color.b, 0.9)
         local disciplineData = CHAMPION_DATA_MANAGER:FindChampionDisciplineDataByType(attribute)
-        UnitFrames.CustomFrames.player.ChampionXP.icon:SetTexture(disciplineData:GetHUDIcon())
+        local icon = disciplineData:GetHUDIcon()
+        UnitFrames.CustomFrames.player.ChampionXP.icon:SetTexture(icon)
     end
 end
 
