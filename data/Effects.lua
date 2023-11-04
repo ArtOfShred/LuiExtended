@@ -1591,24 +1591,36 @@ Effects.KeepUpgradeTooltip = {
 -- Override various information displayed for Effect auras
 --------------------------------------------------------------------------------------------------------------------------------
 --[[
-    Optional:
-    - icon: Change Icon
-    - name: Change Name
-    - tooltip: Set a custom tooltip to display for this ability
-    - hide: Hide this aura from appearing
-    - type: Adjust this effect to be a debuff or not a debuff to fix API errors (Commonly used as most undispellable debuffs show as a buff)
-    - duration: Modify the duration display of this effect. Option 1 - Set a negative value - to subtract x seconds from the duration of the effect. Option 2 - Set to 0 to display the buff for an unlimited amount of time until an action result of fade occurs.
-    - unbreakable: Flag this aura as unremovable and change border color to grey for debuffs or cyan for buffs
-    - forcedContainer: Forces a buff to appear in one of these containers
-    - groundLabel: Display a "G" ground label on this effect to indicate it is the result of standing in a ground aura
-    - noDuplicate: Adds to a table that uses an expensive function - in some cases effects like Shuffle add a new aura every time the effect is cast. This will flag the effect to only show the latest casted one and hide the others.
-    - hideReduce: Hide this aura if the "HIDE PAIRED AURAS" menu setting is enabled. Merging similar effects so as not to clutter the UI such as the Sun Fire effect with its snare.
-    - tooltipValue2Mod: Needed in some cases to derive a value on an ability tooltip. This value is used for effects like the snare from Sun Fire, when the duration needs to be derived from either buff since one can potentially be hidden.
-    - refreshOnly: Only show this effect when the duration is updated/refreshed - Toggle this to hide some goofy effects that have a travel time aura for their projectile before the actual effect applies.
-    - hideGround: Hide this effect if ground effect damaging auras are set to show - we want damage to always prioritize so that the aura always shows even if the player is immune to the snare or other effect of the ability.
-    - cc: Used to determine the type of CC
-    - ccMergedType: Shows this type of CC if "merged" effects are enabled on
-    - isPlayerAbility: This is a player ability for the purposes of CC icon normalization
+    Basic Changes:
+    - icon = "iconpath.dds" -- Change icon
+    - name = Abilities.AbilityName -- Change name
+    - type = BUFF_EFFECT_TYPE_BUFF or BUFF_EFFECT_TYPE_DEBUFF -- Fix/change effect type (Mostly used for making undispellable debuffs show properly)
+    - unbreakable = 1 -- Set this effect to display as unbreakable (unremoveable debuff)
+    - forcedContainer = "short" or "long" -- Forces this buff to appear in one of these containers (long only applies when the long container exists)
+    - groundLabel = "true" -- Display a "G" ground label on this effect to indicate it is the result of standing in a ground aura
+
+    Hide Effect:
+    - hide = true -- Hide this aura from displaying
+    - hideGround = true -- Hide this aura from displaying if ground effect damaging aurs are set to show - we want damage to always prioritize so that the aura always shows even if the player is immune to a snare or other effect of the ability
+    - hideReduce = true -- Hide this aura if the "HIDE PAIRED AURAS" menu setting is enabled. Merging similar effects so as not to clutter the UI such as the snare from the NPC Throw Dagger ability
+
+    Duration or Modification:
+    - duration = *number* -- Modify the duration display of this effect. Option 1 - Set a negative value - to subtract x seconds from the duration of the effect. Option 2 - Set to 0 to display the buff for an unlimited amount of time until an action result of fade occurs.
+    - noDuplicate = true -- Adds to a table that uses an expensive function - in some cases effects like Shuffle add a new aura every time the effect is cast. This will flag the effect to only show the latest casted one and hide the others.
+    - refreshOnly = true -- Only show this effect when the duration is updated/refreshed - Toggle this to hide some goofy effects that have a travel time aura for their projectile before the actual effect applies.
+
+    Tooltip Functionality:
+    - tooltip = Tooltips.AbilityName -- Set a custom tooltip to display for this ability
+    - tooltipOther = Tooltips.AbilityName -- Set a custom tooltip for display for this ability when this effect is NOT on the player
+    - tooltipVeteran = Tooltips.AbilityName -- Set a custom tooltip to use for this ability on Veteran Difficulty only (for abilities that are shared in dungeons and apply additional or different effects on Veteran Difficulty)
+    - tooltipValue2 = *number* or *string* -- Set a value to use for the 2nd input field of a tooltip that has a 2nd input field
+    - tooltipValue3 = *number* or *string* -- Set a value to use for the 2nd input field of a tooltip that has a 3rd input field
+    - tooltipValue2Mod = *number* -- Needed in some cases to derive a value on an ability tooltip. This value is used for effects like the snare from Sun Fire, when the duration needs to be derived from either buff since one can potentially be hidden.
+
+    CC Icon Functionality:
+    - cc = LUIE_CC_TYPE_* -- Set a CC type for this ability
+    - ccMergedType = LUIE_CC_TYPE_* -- Set this ability to show this CC type ONLY when "merged" (hideReduce) effects are enabled. This would mean for example the dot for throw dagger would show as a snare since the effects are merged.
+    - isPlayerAbility = true -- Set this ability to be a "Player Ability" for the purpose of determining if a generic CC icon should be used for the ability
 --]]
 Effects.EffectOverride = {
 
