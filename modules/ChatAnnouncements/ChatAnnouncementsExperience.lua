@@ -9,6 +9,10 @@ local ChatAnnouncements = LUIE.ChatAnnouncements
 local Effects = LUIE.Data.Effects
 local Quests = LUIE.Data.Quests
 
+local QueuedMessages = ChatAnnouncements.QueuedMessages
+local QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter
+local ColorizeColors = ChatAnnouncements.Colors
+
 local printToChat = LUIE.PrintToChat
 local string_format = string.format
 local table_insert = table.insert
@@ -68,12 +72,12 @@ end
 function ChatAnnouncements.PrintExperienceGain(change)
     local icon = ChatAnnouncements.SV.XP.ExperienceIcon and "|t16:16:/esoui/art/icons/icon_experience.dds|t " or ""
     local xpName = zo_strformat(ChatAnnouncements.SV.XP.ExperienceName, change)
-    local messageP1 = ("|r|c" .. ChatAnnouncements.Colors.ExperienceNameColorize .. icon .. ZO_LocalizeDecimalNumber(change) .. " " .. xpName .. "|r|c" .. ChatAnnouncements.Colors.ExperienceMessageColorize)
+    local messageP1 = ("|r|c" .. ColorizeColors.ExperienceNameColorize .. icon .. ZO_LocalizeDecimalNumber(change) .. " " .. xpName .. "|r|c" .. ColorizeColors.ExperienceMessageColorize)
     local formattedMessageP1 = (string_format(ChatAnnouncements.SV.XP.ExperienceMessage, messageP1))
-    local finalMessage = string_format("|c%s%s|r", ChatAnnouncements.Colors.ExperienceMessageColorize, formattedMessageP1)
+    local finalMessage = string_format("|c%s%s|r", ColorizeColors.ExperienceMessageColorize, formattedMessageP1)
 
-    ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "EXPERIENCE" }
-    ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
+    QueuedMessages[QueuedMessagesCounter] = { message = finalMessage, type = "EXPERIENCE" }
+    QueuedMessagesCounter = QueuedMessagesCounter + 1
     eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
 end
 
@@ -155,12 +159,12 @@ end
 -- Helper function to get the color for the Guild
 local function GetGuildColor(lineId)
     local GUILD_SKILL_COLOR_TABLE = {
-        [45] = ChatAnnouncements.Colors.SkillGuildColorizeFG,
-        [44] = ChatAnnouncements.Colors.SkillGuildColorizeMG,
-        [55] = ChatAnnouncements.Colors.SkillGuildColorizeUD,
-        [117] = ChatAnnouncements.Colors.SkillGuildColorizeTG,
-        [118] = ChatAnnouncements.Colors.SkillGuildColorizeDB,
-        [130] = ChatAnnouncements.Colors.SkillGuildColorizePO,
+        [45] = ColorizeColors.SkillGuildColorizeFG,
+        [44] = ColorizeColors.SkillGuildColorizeMG,
+        [55] = ColorizeColors.SkillGuildColorizeUD,
+        [117] = ColorizeColors.SkillGuildColorizeTG,
+        [118] = ColorizeColors.SkillGuildColorizeDB,
+        [130] = ColorizeColors.SkillGuildColorizePO,
     }
     return GUILD_SKILL_COLOR_TABLE[lineId]
 end
@@ -182,13 +186,13 @@ function ChatAnnouncements.PrintGuildRep(change, lineName, lineId, priority)
 
     local guildString = zo_strformat(ChatAnnouncements.SV.Skills.SkillGuildRepName, change)
     local colorize = GetGuildColor(lineId)
-    local messageP1 = ("|r|c" .. colorize .. formattedIcon .. change .. " " .. lineName .. " " .. guildString .. "|r|c" .. ChatAnnouncements.Colors.SkillGuildColorize)
+    local messageP1 = ("|r|c" .. colorize .. formattedIcon .. change .. " " .. lineName .. " " .. guildString .. "|r|c" .. ColorizeColors.SkillGuildColorize)
     local formattedMessageP1 = (string_format(ChatAnnouncements.SV.Skills.SkillGuildMsg, messageP1))
-    local finalMessage = string_format("|c%s%s|r", ChatAnnouncements.Colors.SkillGuildColorize, formattedMessageP1)
+    local finalMessage = string_format("|c%s%s|r", ColorizeColors.SkillGuildColorize, formattedMessageP1)
 
     -- We set this to skill gain, so as to avoid creating an entire additional chat message category (we want it to show after XP but before any other skill gains or level up so we place it on top of the level up priority).
-    ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = priority }
-    ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
+    QueuedMessages[QueuedMessagesCounter] = { message = finalMessage, type = priority }
+    QueuedMessagesCounter = QueuedMessagesCounter + 1
     eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
 end
 
