@@ -1599,6 +1599,11 @@ Effects.KeepUpgradeTooltip = {
     - forcedContainer = "short" or "long" -- Forces this buff to appear in one of these containers (long only applies when the long container exists)
     - groundLabel = "true" -- Display a "G" ground label on this effect to indicate it is the result of standing in a ground aura
 
+    Stack Tracking:
+    - stack = *number* -- Set a static stack count (or starting stack count - if the values below are also set)
+    - stackAdd = *number* -- When this effect triggers add a stack to its count (this can start at the value of "stack = *number*" or otherwise will start at & increment by this value)
+    - stackMax = *number* -- Cap the stacks of this effect at this value
+
     Hide Effect:
     - hide = true -- Hide this aura from displaying
     - hideGround = true -- Hide this aura from displaying if ground effect damaging aurs are set to show - we want damage to always prioritize so that the aura always shows even if the player is immune to a snare or other effect of the ability
@@ -1616,6 +1621,7 @@ Effects.KeepUpgradeTooltip = {
     - tooltipValue2 = *number* or *string* -- Set a value to use for the 2nd input field of a tooltip that has a 2nd input field
     - tooltipValue3 = *number* or *string* -- Set a value to use for the 2nd input field of a tooltip that has a 3rd input field
     - tooltipValue2Mod = *number* -- Needed in some cases to derive a value on an ability tooltip. This value is used for effects like the snare from Sun Fire, when the duration needs to be derived from either buff since one can potentially be hidden.
+    - dynamicTooltip = true -- This uses a custom dynamic tooltip function for this ability id (note that a dynamic function for this AbilityId needs to exist and no other tooltip data should be set on this id)
 
     CC Icon Functionality:
     - cc = LUIE_CC_TYPE_* -- Set a CC type for this ability
@@ -2648,7 +2654,7 @@ Effects.EffectOverride = {
     [147744] = { icon = "LuiExtended/media/icons/abilities/ability_set_void_bash.dds" },                                                                                                             -- Void Bash (Vateshran 1H)
     [147743] = { icon = "LuiExtended/media/icons/abilities/ability_set_void_bash.dds" },                                                                                                             -- Void Bash (Vateshran 1H)
     [147843] = { icon = "LuiExtended/media/icons/abilities/ability_set_wrath_of_elements.dds", tooltip = Tooltips.Set_Vateshran_Destro_Staff, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 },     -- Wrath of Elements (Vateshran Destruction Staff)
-    [149413] = { icon = "LuiExtended/media/icons/abilities/ability_set_wrath_of_elements.dds", tooltip = Tooltips.Set_Vateshran_Destro_Staff_Buff, stackAdd = 1, stackRemove = 1, stackReset = 20 }, -- Wrath of Elements (Vateshran Destruction Staff)
+    [149413] = { icon = "LuiExtended/media/icons/abilities/ability_set_wrath_of_elements.dds", tooltip = Tooltips.Set_Vateshran_Destro_Staff_Buff, stackAdd = 1, stackMax = 20 }, -- Wrath of Elements (Vateshran Destruction Staff)
     [147847] = { icon = "LuiExtended/media/icons/abilities/ability_set_wrath_of_elements.dds" },                                                                                                     -- Wrath of Elements (Vateshran Destruction Staff)
     [147844] = { icon = "LuiExtended/media/icons/abilities/ability_set_wrath_of_elements.dds" },                                                                                                     -- Wrath of Elements (Vateshran Destruction Staff)
     [147846] = { icon = "LuiExtended/media/icons/abilities/ability_set_wrath_of_elements.dds" },                                                                                                     -- Wrath of Elements (Vateshran Destruction Staff)
