@@ -13,11 +13,4 @@ $RECYCLE.BIN/
 # Others
 ~$*
 *~
-.vscode/settings.json
-*.editorconfig
-stylua.toml
-devstuff/
-.vscode/.ignore
-.vscode/doc.json
-.vscode/test.py
-.vscode/Effects.lua
+
