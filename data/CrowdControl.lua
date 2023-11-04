@@ -725,6 +725,8 @@ CrowdControl.IgnoreList = {
     [166794] = true, -- Raging Current -- Dreadsail Reef
 
     -- Endless Archive
+    [192956] = true, -- Enter the Endless
+    [194570] = true, -- Enter the Endless
     [192972] = true, -- Enter the Endless
     [194571] = true, -- Enter the Endless
     [203125] = true, --- Verse Select
