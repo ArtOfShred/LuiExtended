@@ -22,41 +22,45 @@ function LUIE.SetupAlertFrameVisibility()
     ZO_AlertTextNotification:SetHidden(LUIE.SV.HideAlertFrame)
 end
 
--- Return a formatted time
--- Stolen from pChat, thanks @Ayantir
-local function CreateTimestamp(timeStr, formatStr)
-    formatStr = formatStr or LUIE.ChatAnnouncements.SV.TimeStampFormat
+do
+    -- Return a formatted time
+    -- Stolen from pChat, thanks @Ayantir
+    local function CreateTimestamp(timeStr, formatStr)
+        formatStr = formatStr or LUIE.ChatAnnouncements.SV.TimeStampFormat
 
-    local hours, minutes, seconds = zo_strmatch(timeStr, "([^%:]+):([^%:]+):([^%:]+)")
-    local hoursNoLead = ToInteger(hours) -- hours without leading zero
-    local hours12NoLead = (hoursNoLead - 1) % 12 + 1
-    local hours12
-    if hours12NoLead < 10 then
-        hours12 = "0" .. hours12NoLead
-    else
-        hours12 = hours12NoLead
+        -- split up default timestamp
+        local hours, minutes, seconds = zo_strmatch(timeStr, "([^%:]+):([^%:]+):([^%:]+)")
+        local hoursNoLead = ToInteger(hours) -- hours without leading zero
+        local hours12NoLead = (hoursNoLead - 1) % 12 + 1
+        local hours12
+        if (hours12NoLead < 10) then
+            hours12 = "0" .. hours12NoLead
+        else
+            hours12 = hours12NoLead
+        end
+        local pUp = "AM"
+        local pLow = "am"
+        if (hoursNoLead >= 12) then
+            pUp = "PM"
+            pLow = "pm"
+        end
+
+        -- create new one
+        local timestamp = formatStr
+        timestamp = zo_strgsub(timestamp, "HH", hours)
+        timestamp = zo_strgsub(timestamp, "H", hoursNoLead)
+        timestamp = zo_strgsub(timestamp, "hh", hours12)
+        timestamp = zo_strgsub(timestamp, "h", hours12NoLead)
+        timestamp = zo_strgsub(timestamp, "m", minutes)
+        timestamp = zo_strgsub(timestamp, "s", seconds)
+        timestamp = zo_strgsub(timestamp, "A", pUp)
+        timestamp = zo_strgsub(timestamp, "a", pLow)
+        return timestamp
     end
-    local pUp = "AM"
-    local pLow = "am"
-    if hoursNoLead >= 12 then
-        pUp = "PM"
-        pLow = "pm"
-    end
-    -- create new one
-    local timestamp = formatStr
-    timestamp = zo_strgsub(timestamp, "HH", hours)
-    timestamp = zo_strgsub(timestamp, "H", hoursNoLead)
-    timestamp = zo_strgsub(timestamp, "hh", hours12)
-    timestamp = zo_strgsub(timestamp, "h", hours12NoLead)
-    timestamp = zo_strgsub(timestamp, "m", minutes)
-    timestamp = zo_strgsub(timestamp, "s", seconds)
-    timestamp = zo_strgsub(timestamp, "A", pUp)
-    timestamp = zo_strgsub(timestamp, "a", pLow)
-    return timestamp
+
+    LUIE.CreateTimestamp = CreateTimestamp
 end
 
--- Create access to local function
-LUIE.CreateTimestamp = CreateTimestamp
 
 -- FormatMessage helper function
 local function FormatMessage(msg, doTimestamp)
