@@ -724,6 +724,12 @@ CrowdControl.IgnoreList = {
     -- Dreadsail Reef
     [166794] = true, -- Raging Current -- Dreadsail Reef
 
+    -- Endless Archive
+    [192972] = true, -- Enter the Endless
+    [203125] = true, --- Verse Select
+    [203101] = true, -- Vision Select
+    [211431] = true, -- Side Content Transporter
+    
     ----------------
     -- Miscelaneous
     ----------------
