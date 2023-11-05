@@ -877,24 +877,17 @@ function CombatInfo.CreateSettings()
                 name = GetString(LUIE_STRING_LAM_CI_ENEMY_MARKER),
                 tooltip = GetString(LUIE_STRING_LAM_CI_ENEMY_MARKER_TP),
                 default = Settings.showMarker,
-                getFunc = function ()
-                    return Settings.showMarker
-                end,
-                setFunc = function (value)
-                    Settings.showMarker = value or false
-                    CombatInfo.SetMarker()
-                end,
+                getFunc = function () return Settings.showMarker end,
+                setFunc = function (value) Settings.showMarker = value or false end,
                 width = "half",
             },
             {
                 type = "slider",
                 name = GetString(LUIE_STRING_LAM_CI_ENEMY_MARKER_SIZE),
-                default = Settings.markerSize,
+                default = Settings.markerSize or 26,
                 min = 10,
                 max = 90,
-                getFunc = function ()
-                    return Settings.markerSize
-                end,
+                getFunc = function () return Settings.markerSize end,
                 setFunc = function (value)
                     Settings.markerSize = value
                     CombatInfo.SetMarker(value)

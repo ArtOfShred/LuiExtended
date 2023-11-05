@@ -462,7 +462,6 @@ function CombatInfo.Initialize(enabled)
 
     CombatInfo.BackbarSetupTemplate()
     CombatInfo.BackbarToggleSettings()
-    CombatInfo.SetMarker()
     -------------------------------------------------------------------------------------
 
     CombatInfo.RegisterCombatInfo()
@@ -470,6 +469,9 @@ function CombatInfo.Initialize(enabled)
     if CombatInfo.SV.GlobalShowGCD then
         CombatInfo.HookGCD()
     end
+
+    -- Setup Floating Marker
+    CombatInfo.SetMarker()
 
     -- Create and update Cast Bar
     CombatInfo.CreateCastBar()
