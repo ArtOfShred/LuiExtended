@@ -228,19 +228,19 @@ local DebugAuras = {
 
     -- Magic Status Effects
     [18084] = true, -- Burning (Fire Status Effect)
-    --[130804] = true, -- Burning (Fire Status Effect - Siege)
+    [130804] = true, -- Burning (Fire Status Effect - Siege)
     [21481] = true, -- Chill (Frost Status Effect)
     [68368] = true, -- Minor Maim (Frost Status Effect)
     [95136] = true, -- Chill (Frost Status Effect)
-    --[130814] = true, -- Chill (Frost Status Effect - Siege)
-    --[130815] = true, -- Minor Maim (Frost Status Effect - Siege)
-    --[130816] = true, -- Chill (Frost Status Effect - Siege)
+    [130814] = true, -- Chill (Frost Status Effect - Siege)
+    [130815] = true, -- Minor Maim (Frost Status Effect - Siege)
+    [130816] = true, -- Chill (Frost Status Effect - Siege)
     [21487] = true, -- Concussion (Shock Status Effect)
     [68359] = true, -- Minor Maim (Shock Status Effect)
     [95134] = true, -- Concussion (Shock Status Effect)
-    --[130808] = true, -- Concussion (Shock Status Effect - Siege)
-    --[130809] = true, -- Minor Maim (Shock Status Effect - Siege)
-    --[130810] = true, -- Concussion (Shock Status Effect - Siege)
+    [130808] = true, -- Concussion (Shock Status Effect - Siege)
+    [130809] = true, -- Minor Maim (Shock Status Effect - Siege)
+    [130810] = true, -- Concussion (Shock Status Effect - Siege)
     [148797] = true, -- Overcharged (Magic Status Effect)
     [148798] = true, -- Minor Magickasteal (Magic Status Effect)
     [178118] = true, -- Overcharged (Magic Status Effect)
@@ -255,8 +255,8 @@ local DebugAuras = {
     [148800] = true, -- Sundered (Physical Status Effect)
     [148803] = true, -- Minor Breach (Physical Status Effect)
     [178123] = true, -- Sundered (Physical Status Effect)
-    --[149573] = true, -- Sundered (Physical Status Effect - Siege)
-    --[149576] = true, -- Minor Breach (Physical Status Effect - Siege)
+    [149573] = true, -- Sundered (Physical Status Effect - Siege)
+    [149576] = true, -- Minor Breach (Physical Status Effect - Siege)
 
     -------------------------------------
     -- MUNDUS STONE
@@ -16747,6 +16747,7 @@ local DebugAuras = {
     [88714] = true,  -- Meatbag
     [14774] = true,  -- Meatbag Catapult
     [104693] = true, -- Meatbag Catapult
+    [32035] = true,  -- Meatbag Catapult
     [36408] = true,  -- Meatbag Catapult
 
     [30614] = true,  -- Create Catapult Oil Jar... (Oil Catapult)

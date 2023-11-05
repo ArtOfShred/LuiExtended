@@ -1127,7 +1127,6 @@ local Tooltips = {
 
     Skill_AvA_Sanctuary = GetString(LUIE_STRING_SKILL_AVA_SANCTUARY_TP),
     Skill_Lightning_Ballista_Bolt = GetString(LUIE_STRING_SKILL_LIGHTNING_BALLISTA_BOLT_TP),
-    Skill_Meatbag_Catapult = GetString(LUIE_STRING_SKILL_MEATBAG_CATAPULT_TP),
     Skill_Meatbag_Catapult_AOE = GetString(LUIE_STRING_SKILL_MEATBAG_CATAPULT_AOE_TP),
     Skill_Meatbag_Catapult_Ground = GetString(LUIE_STRING_SKILL_MEATBAG_CATAPULT_GROUND_TP),
     Skill_Oil_Catapult_Ground = GetString(LUIE_STRING_SKILL_OIL_CATAPULT_GROUND_TP),
