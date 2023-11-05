@@ -772,6 +772,15 @@ function LUIE.InitializeHooks()
                     buffType = buffType + 6
                 end
 
+                -- Setup tooltips for Fake Player Offline Auras
+                if abilityId and LUIE.Data.Effects.FakePlayerOfflineAura[abilityId] then
+                    if LUIE.Data.Effects.FakePlayerOfflineAura[abilityId].ground then
+                        buffType = 6
+                    else
+                        buffType = 5
+                    end
+                end
+
                 local endLine = buffTypes[buffType]
                 contentDescription = contentDescription .. "\nType: " .. endLine
             end

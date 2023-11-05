@@ -1403,6 +1403,15 @@ function SpellCastBuffs.TooltipBottomLine(control, detailsLine, artificial)
                 buffType = buffType + 6
             end
 
+            -- Setup tooltips for Fake Player Offline Auras
+            if effectId and Effects.FakePlayerOfflineAura[effectId] then
+                if Effects.FakePlayerOfflineAura[effectId].ground then
+                    buffType = 6
+                else
+                    buffType = 5
+                end
+            end
+
             GameTooltip:AddHeaderLine("Type", "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_LEFT, ZO_NORMAL_TEXT:UnpackRGB())
             GameTooltip:AddHeaderLine(buffTypes[buffType], "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_RIGHT, 1, 1, 1)
             detailsLine = detailsLine + 1

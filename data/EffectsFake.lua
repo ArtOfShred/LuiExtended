@@ -771,9 +771,9 @@ Effects.FakePlayerOfflineAura = {
     [22262] = { duration = "GET" }, -- Extended Ritual (Extended Ritual)
 
     -- Fighter's Guild
-    [35750] = { duration = "GET" }, -- Trap Beast (Trap Beast)
-    [40382] = { duration = "GET" }, -- Barbed Trap (Barbed Trap)
-    [40372] = { duration = "GET" }, -- Lightweight Beast Trap (Lightweight Beast Trap)
+    [35750] = { duration = "GET", ground = true }, -- Trap Beast (Trap Beast)
+    [40382] = { duration = "GET", ground = true }, -- Barbed Trap (Barbed Trap)
+    [40372] = { duration = "GET", ground = true }, -- Lightweight Beast Trap (Lightweight Beast Trap)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
