@@ -145,9 +145,6 @@ local AbilityTables = {
     -- Glyphs
     Item_Glyph_of_Weapon_Damage = 17910,
 
-    -- Elemental Status Effect
-    Proc_Chilled = 7145,
-
     -- Potions/Poisons
     Potion_Invisiblity = 3668,
     Potion_Ravage_Health = 46111,
