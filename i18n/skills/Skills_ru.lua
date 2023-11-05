@@ -317,6 +317,7 @@ local strings = {
     LUIE_STRING_SKILL_GENERIC_FLYING_IMMUNITIES_TP = "Immune to movement imparing effects.",
     LUIE_STRING_SKILL_SET_GENERIC_IMMUNITY_TP = "Immune to damage and all negative effects for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     LUIE_STRING_SKILL_GENERIC_IMMUNITY_PERMANENT_TP = "Immune to damage and all negative effects.",
+    LUIE_STRING_SKILL_GENERIC_DAMAGE_IMMUNITY_PERMANENT_TP = "Immune to damage.",
     LUIE_STRING_SKILL_GENERIC_DISORIENT_TP = "Disoriented for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     LUIE_STRING_SKILL_GENERIC_DISORIENT_NO_DUR_TP = "Disoriented.",
 
@@ -1422,7 +1423,7 @@ local strings = {
     LUIE_STRING_SKILL_GARGOYLE_LEAP = "Gargoyle Leap",
     LUIE_STRING_SKILL_EXPLOSIVE_BOLT_TP = "After |cFFFFFF<<1>>|r <<1[second/seconds]>>, the explosive bolt detonates, dealing Flame Damage to you and allies within |cFFFFFF5|r meters.",
     LUIE_STRING_SKILL_HEMORRHAGING_TEAR_TP = "Afflicted with Bleed Damage every |cFFFFFF<<2>>|r <<2[second/seconds]>> for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nStacks up to |cFFFFFF3|r times, dealing |cFFFFFF50|r% more damage for each stack above the initial application.",
-    LUIE_STRING_SKILL_WALL_OF_SOULS_TP = "A wall of souls protects you from death.\n\nIf any enemy crosses the threshold of the wall they are killed instantly.",
+    LUIE_STRING_SKILL_WALL_OF_SOULS_TP = "A wall of souls protects you from death.\n\nIf any enemy crosses the threshold they take massive damage.",
     LUIE_STRING_SKILL_EYE_OF_THE_SENTINEL_TP = "You are paralyzed by the gaze of the Coldharbour Sentinel.",
 
     -- Mounted

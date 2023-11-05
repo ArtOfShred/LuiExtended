@@ -120,6 +120,7 @@ local Tooltips = {
 
     Generic_Immunity = GetString(LUIE_STRING_SKILL_SET_GENERIC_IMMUNITY_TP),
     Generic_Immunity_Permanent = GetString(LUIE_STRING_SKILL_GENERIC_IMMUNITY_PERMANENT_TP),
+    Generic_Damage_Immunity_Permanent = GetString(LUIE_STRING_SKILL_GENERIC_DAMAGE_IMMUNITY_PERMANENT_TP),
 
     Generic_Snare = GetString(LUIE_STRING_SKILL_GENERIC_SNARE_TP),
     Generic_Snare_No_Dur = GetString(LUIE_STRING_SKILL_GENERIC_SNARE_NO_DUR_TP),
