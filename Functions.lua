@@ -133,13 +133,16 @@ function LUIE.PrintToChat(msg, isSystem)
     end
 end
 
--- Returns a formatted number with commas
--- Function no comma to be added in a later date.
+--- Returns a formatted number with commas.
+--- Function no comma to be added in a later date.
+--- @param number number The number to be abbreviated.
+--- @param shorten boolean Whether to shorten the number or not.
+--- @param comma boolean Whether to add commas or not.
+--- @return number|string The formatted number with commas.
 function LUIE.AbbreviateNumber(number, shorten, comma)
     if number > 0 and shorten then
         local value
         local suffix
-
         if number >= 1000000000 then
             value = number / 1000000000
             suffix = "G"
@@ -153,7 +156,7 @@ function LUIE.AbbreviateNumber(number, shorten, comma)
             value = number
         end
 
-        -- If we could not conver even to "G", return full number
+        -- If we could not convert even to "G", return full number
         if value >= 1000 then
             if comma then
                 value = ZO_LocalizeDecimalNumber(number)
@@ -240,28 +243,37 @@ function LUIE.ResolvePVPZone()
     end
 end
 
--- Pull the name for the current morph of a skill
+--- Pulls the name for the current morph of a skill.
+--- @param abilityId number The AbilityId of the skill.
+--- @return string - The name of the current morph of the skill.
 function LUIE.GetSkillMorphName(abilityId)
     local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
     local abilityName = GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
     return abilityName
 end
 
--- Pull the icon for the current morph of a skill
+--- Pulls the icon for the current morph of a skill.
+--- @param abilityId number The AbilityId of the skill.
+--- @return string - The icon path of the current morph of the skill.
 function LUIE.GetSkillMorphIcon(abilityId)
     local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
     local abilityIcon = select(2, GetSkillAbilityInfo(skillType, skillIndex, abilityIndex))
     return abilityIcon
 end
 
--- Pull the AbilityId for the current morph of a skill
+--- Pulls the AbilityId for the current morph of a skill.
+--- @param abilityId number The AbilityId of the skill.
+--- @return number - The AbilityId of the current morph of the skill.
 function LUIE.GetSkillMorphAbilityId(abilityId)
     local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
     local morphAbilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex, false)
-    return morphAbilityId --renamed local(abilityId) to avoid naming conflicts with parameter
+    return morphAbilityId -- renamed local (abilityId) to avoid naming conflicts with the parameter
 end
 
--- Function to update the syntax for default Mundus Stone tooltips we pull (in order to retain scaling)
+--- Function to update the syntax for default Mundus Stone tooltips we pull (in order to retain scaling).
+--- @param abilityId number The ID of the ability.
+--- @param tooltipText string The original tooltip text.
+--- @return string - The updated tooltip text.
 function LUIE.UpdateMundusTooltipSyntax(abilityId, tooltipText)
     -- Update syntax for The Lady, The Lover, and the Thief Mundus stones since they aren't consistent with other buffs.
     if abilityId == 13976 or abilityId == 13981 then -- The Lady / The Lover
@@ -269,7 +281,9 @@ function LUIE.UpdateMundusTooltipSyntax(abilityId, tooltipText)
     elseif abilityId == 13975 then                   -- The Thief
         tooltipText = zo_strgsub(tooltipText, GetString(LUIE_STRING_SKILL_MUNDUS_SUB_THIEF), GetString(LUIE_STRING_SKILL_MUNDUS_SUB_THIEF_REPLACE))
     end
+
     -- Replace "Increases your" with "Increase"
     tooltipText = zo_strgsub(tooltipText, GetString(LUIE_STRING_SKILL_MUNDUS_STRING), GetString(LUIE_STRING_SKILL_DRINK_INCREASE))
+
     return tooltipText
 end
