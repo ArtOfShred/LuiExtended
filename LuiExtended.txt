@@ -26,21 +26,21 @@ i18n/skills/Skills_en.lua
 i18n/skills/Skills_$(language).lua
 
 #Addon base functions and code
-LuiExtended.lua
-LuiExtended_Log.lua
-Functions.lua
-Hooks-SkillsAdvisor.lua
-Hooks.lua
-Initialize.lua
-UI.lua
-Changelog.lua
-Bindings.xml
+src/LuiExtended.lua
+src/LuiExtended_Log.lua
+src/Functions.lua
+src/Hooks-SkillsAdvisor.lua
+src/Hooks.lua
+src/Initialize.lua
+src/UI.lua
+src/Changelog.lua
+bindings/Bindings.xml
 
 frontend/Changelog.xml
 frontend/CombatText.xml
 frontend/CrowdControlTracker.xml
 
-Unlock.lua
+src/Unlock.lua
 
 data/AbilityTables.lua
 data/Tooltips.lua

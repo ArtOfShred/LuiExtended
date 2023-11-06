@@ -38,7 +38,7 @@ local alertTypes = {
 }
 
 -- Quadratic easing out - decelerating to zero velocity (For buff fade)
-local function EaseOutQuad(t, b, c, d)
+local EaseOutQuad = function(t, b, c, d)
     -- protect against 1 / 0
     if t == 0 then
         t = 0.0001
@@ -52,7 +52,7 @@ local function EaseOutQuad(t, b, c, d)
 end
 
 -- Set Alert Colors
-function AbilityAlerts.SetAlertColors()
+AbilityAlerts.SetAlertColors = function()
     local colors = CombatInfo.SV.alerts.colors
     AbilityAlerts.AlertColors = {
         alertColorBlock = ZO_ColorDef:New(unpack(colors.alertBlockA)):ToHex(),
@@ -67,7 +67,7 @@ function AbilityAlerts.SetAlertColors()
 end
 
 -- Called from menu when font size/face, etc is changed
-function AbilityAlerts.ResetAlertSize()
+AbilityAlerts.ResetAlertSize = function()
     for i = 1, 3 do
         local height = (CombatInfo.SV.alerts.toggles.alertFontSize * 2)
         local alert = _G["LUIE_Alert" .. i]
@@ -112,13 +112,13 @@ local deathResults = {
     [ACTION_RESULT_DIED_XP] = true,
 }
 
-function AbilityAlerts.ShouldUseDefaultIcon(abilityId)
+AbilityAlerts.ShouldUseDefaultIcon = function(abilityId)
     if Alerts[abilityId] and Alerts[abilityId].cc then
         return true
     end
 end
 
-function AbilityAlerts.GetDefaultIcon(ccType)
+AbilityAlerts.GetDefaultIcon = function(ccType)
     if ccType == LUIE_CC_TYPE_STUN then
         return LUIE_CC_ICON_STUN
     elseif ccType == LUIE_CC_TYPE_KNOCKDOWN then
@@ -145,7 +145,7 @@ function AbilityAlerts.GetDefaultIcon(ccType)
 end
 
 -- Create Alert Frame - basic setup for now
-function AbilityAlerts.CreateAlertFrame()
+AbilityAlerts.CreateAlertFrame = function()
     -- Apply font for alerts
     AbilityAlerts.ApplyFontAlert()
 
@@ -282,15 +282,15 @@ function AbilityAlerts.CreateAlertFrame()
     eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, AbilityAlerts.OnPlayerActivated)
 end
 
-function AbilityAlerts.OnDuelStarted()
+AbilityAlerts.OnDuelStarted = function()
     g_inDuel = true
 end
 
-function AbilityAlerts.OnDuelFinished()
+AbilityAlerts.OnDuelFinished = function()
     g_inDuel = false
 end
 
-function AbilityAlerts.OnPlayerActivated()
+AbilityAlerts.OnPlayerActivated = function()
     local duelState = GetDuelInfo()
     if duelState == DUEL_STATE_DUELING then
         g_inDuel = true
@@ -298,7 +298,7 @@ function AbilityAlerts.OnPlayerActivated()
     eventManager:UnregisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED)
 end
 
-function AbilityAlerts.ResetAlertFramePosition()
+AbilityAlerts.ResetAlertFramePosition = function()
     if not CombatInfo.Enabled then
         return
     end
@@ -309,7 +309,7 @@ function AbilityAlerts.ResetAlertFramePosition()
     AbilityAlerts.SetMovingStateAlert(false)
 end
 
-function AbilityAlerts.SetAlertFramePosition()
+AbilityAlerts.SetAlertFramePosition = function()
     if uiTlw.alertFrame and uiTlw.alertFrame:GetType() == CT_TOPLEVELCONTROL then
         uiTlw.alertFrame:ClearAnchors()
 
@@ -324,7 +324,7 @@ function AbilityAlerts.SetAlertFramePosition()
     uiTlw.alertFrame.preview.anchorLabel:SetText((savedPos ~= nil and #savedPos == 2) and zo_strformat("<<1>>, <<2>>", savedPos[1], savedPos[2]) or "default")
 end
 
-function AbilityAlerts.SetMovingStateAlert(state)
+AbilityAlerts.SetMovingStateAlert = function(state)
     if not CombatInfo.Enabled then
         return
     end
@@ -337,7 +337,7 @@ function AbilityAlerts.SetMovingStateAlert(state)
 end
 
 -- Called by AbilityAlerts.SetMovingState from the menu as well as by AbilityAlerts.OnUpdateCastbar when preview is enabled
-function AbilityAlerts.GenerateAlertFramePreview(state)
+AbilityAlerts.GenerateAlertFramePreview = function(state)
     for i = 1, 3 do
         local alert = _G["LUIE_Alert" .. i]
         alert.prefix:SetText("")
@@ -363,7 +363,7 @@ function AbilityAlerts.GenerateAlertFramePreview(state)
 end
 
 -- Update ticker for Alerts
-function AbilityAlerts.AlertUpdate(currentTime)
+AbilityAlerts.AlertUpdate = function(currentTime)
     for i = 1, 3 do
         local alert = _G["LUIE_Alert" .. i]
         if alert.data.duration then
@@ -422,7 +422,7 @@ function AbilityAlerts.AlertUpdate(currentTime)
     end
 end
 
-function AbilityAlerts.AlertInterrupt(eventCode, resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
+AbilityAlerts.AlertInterrupt = function(eventCode, resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
     if targetType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER_PET or targetType == COMBAT_UNIT_TYPE_GROUP then
         return
     end
@@ -477,7 +477,7 @@ function AbilityAlerts.AlertInterrupt(eventCode, resultType, isError, abilityNam
     end
 end
 
-function AbilityAlerts.CrowdControlColorSetup(crowdControl, isBorder)
+AbilityAlerts.CrowdControlColorSetup = function(crowdControl, isBorder)
     if crowdControl == LUIE_CC_TYPE_STUN or crowdControl == LUIE_CC_TYPE_KNOCKDOWN then -- Stun/Knockdown
         return CombatInfo.SV.alerts.colors.stunColor
     elseif crowdControl == LUIE_CC_TYPE_KNOCKBACK then                                  -- Knockback
@@ -510,7 +510,7 @@ function AbilityAlerts.CrowdControlColorSetup(crowdControl, isBorder)
 end
 
 -- Called from Menu to preview sounds
-function AbilityAlerts.PreviewAlertSound(value)
+AbilityAlerts.PreviewAlertSound = function(value)
     local Settings = CombatInfo.SV.alerts
     for i = 1, Settings.toggles.soundVolume do
         PlaySound(LUIE.Sounds[value])
@@ -518,7 +518,7 @@ function AbilityAlerts.PreviewAlertSound(value)
 end
 
 -- Play a sound if the option is enabled and priority is set.
-function AbilityAlerts.PlayAlertSound(abilityId, ...)
+AbilityAlerts.PlayAlertSound = function(abilityId, ...)
     local Settings = CombatInfo.SV.alerts
 
     local isPlay
@@ -568,7 +568,7 @@ function AbilityAlerts.PlayAlertSound(abilityId, ...)
 end
 
 local drawLocation = 1
-function AbilityAlerts.SetupSingleAlertFrame(abilityId, textPrefix, textModifier, textName, textMitigation, abilityIcon, currentTime, endTime, showDuration, crowdControl, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt)
+AbilityAlerts.SetupSingleAlertFrame = function(abilityId, textPrefix, textModifier, textName, textMitigation, abilityIcon, currentTime, endTime, showDuration, crowdControl, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt)
     local labelColor
     local borderColor
 
@@ -660,13 +660,13 @@ function AbilityAlerts.SetupSingleAlertFrame(abilityId, textPrefix, textModifier
     AbilityAlerts.RealignAlerts(drawLocation)
 end
 
-function AbilityAlerts.RealignAlerts(alertNumber)
+AbilityAlerts.RealignAlerts = function(alertNumber)
     local height = (CombatInfo.SV.alerts.toggles.alertFontSize * 2)
     local alert = _G["LUIE_Alert" .. alertNumber]
     alert:SetDimensions(alert.prefix:GetTextWidth() + alert.name:GetTextWidth() + alert.modifier:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth(), height)
 end
 
-function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
+AbilityAlerts.ProcessAlert = function(abilityId, unitName, sourceUnitId)
     local Settings = CombatInfo.SV.alerts
 
     -- Just in case
@@ -983,7 +983,7 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     end
 end
 
-local function CheckInterruptEvent(unitId, abilityId, resultType)
+local CheckInterruptEvent = function(unitId, abilityId, resultType)
     for i = 1, 3 do
         local alert = _G["LUIE_Alert" .. i]
         if alert.data.sourceUnitId then
@@ -1024,7 +1024,7 @@ local function CheckInterruptEvent(unitId, abilityId, resultType)
     end
 end
 
-function AbilityAlerts.AlertEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
+AbilityAlerts.AlertEffectChanged = function(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
     -- Bail out if we're not in combat (reduce spam for nearby)
     if not IsUnitInCombat("player") then
         return
@@ -1058,7 +1058,7 @@ function AbilityAlerts.AlertEffectChanged(eventCode, changeType, effectSlot, eff
     end
 end
 
-function AbilityAlerts.OnCombatIn(eventCode, resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
+AbilityAlerts.OnCombatIn = function(eventCode, resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
     if not Alerts[abilityId] then
         return
     end
@@ -1153,7 +1153,7 @@ function AbilityAlerts.OnCombatIn(eventCode, resultType, isError, abilityName, a
     end
 end
 
-function AbilityAlerts.OnCombatAlert(eventCode, resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
+AbilityAlerts.OnCombatAlert = function(eventCode, resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
     -- Bail out if we're not in combat (reduce spam for nearby)
     if not IsUnitInCombat("player") then
         return
@@ -1206,7 +1206,7 @@ function AbilityAlerts.OnCombatAlert(eventCode, resultType, isError, abilityName
     end
 end
 
-function AbilityAlerts.FormatAlertString(inputFormat, params)
+AbilityAlerts.FormatAlertString = function(inputFormat, params)
     return zo_strgsub(inputFormat, "%%.", function (x)
         if x == "%n" then
             return params.source or ""
@@ -1218,7 +1218,7 @@ function AbilityAlerts.FormatAlertString(inputFormat, params)
     end)
 end
 
-local function generateMitigationString(Settings, avoid, block, dodge, blockstagger, interrupt, shouldusecc, spacer)
+local generateMitigationString = function(Settings, avoid, block, dodge, blockstagger, interrupt, shouldusecc, spacer)
     local stringBlock = ""
     local stringDodge = ""
     local stringAvoid = ""
@@ -1266,7 +1266,7 @@ local function generateMitigationString(Settings, avoid, block, dodge, blockstag
 end
 
 -- VIEWER
-function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, sourceName, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, hiddenDuration, crowdControl, modifier, block, blockstagger, dodge, avoid, interrupt, shouldusecc)
+AbilityAlerts.OnEvent = function(alertType, abilityId, abilityName, abilityIcon, sourceName, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, hiddenDuration, crowdControl, modifier, block, blockstagger, dodge, avoid, interrupt, shouldusecc)
     local Settings = CombatInfo.SV.alerts
     local labelColor = Settings.colors.alertShared
     local prefix
@@ -1366,7 +1366,7 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
 end
 
 -- Updates local variables with new font
-function AbilityAlerts.ApplyFontAlert()
+AbilityAlerts.ApplyFontAlert = function()
     if not CombatInfo.Enabled then
         return
     end

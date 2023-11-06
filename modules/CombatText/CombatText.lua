@@ -344,7 +344,7 @@ CombatText.Defaults = {
 }
 CombatText.SV = nil
 
-local function SavePosition(panel)
+local SavePosition = function(panel)
     local anchor = { panel:GetAnchor(0) }
     local dimensions = { panel:GetDimensions() }
     local panelSettings = LUIE.CombatText.SV.panels[panel:GetName()]
@@ -356,7 +356,7 @@ local function SavePosition(panel)
 end
 
 -- Bulk list add from menu buttons
-function CombatText.AddBulkToCustomList(list, table)
+CombatText.AddBulkToCustomList = function(list, table)
     if table ~= nil then
         for k, v in pairs(table) do
             CombatText.AddToCustomList(list, k)
@@ -364,7 +364,7 @@ function CombatText.AddBulkToCustomList(list, table)
     end
 end
 
-function CombatText.ClearCustomList(list)
+CombatText.ClearCustomList = function(list)
     local listRef = list == CombatText.SV.blacklist and GetString(LUIE_STRING_CUSTOM_LIST_CT_BLACKLIST) or ""
     for k, v in pairs(list) do
         list[k] = nil
@@ -375,7 +375,7 @@ function CombatText.ClearCustomList(list)
 end
 
 -- List Handling (Add) for Prominent Auras & Blacklist
-function CombatText.AddToCustomList(list, input)
+CombatText.AddToCustomList = function(list, input)
     local id = tonumber(input)
     local listRef = list == CombatText.SV.blacklist and GetString(LUIE_STRING_CUSTOM_LIST_CT_BLACKLIST) or ""
     if id and id > 0 then
@@ -402,7 +402,7 @@ function CombatText.AddToCustomList(list, input)
 end
 
 -- List Handling (Remove) for Prominent Auras & Blacklist
-function CombatText.RemoveFromCustomList(list, input)
+CombatText.RemoveFromCustomList = function(list, input)
     local id = tonumber(input)
     local listRef = list == CombatText.SV.blacklist and GetString(LUIE_STRING_CUSTOM_LIST_CT_BLACKLIST) or ""
     if id and id > 0 then
@@ -422,7 +422,7 @@ function CombatText.RemoveFromCustomList(list, input)
     end
 end
 
-function CombatText.ApplyFont()
+CombatText.ApplyFont = function()
     local fontName = LUIE.Fonts[LUIE.CombatText.SV.fontFace]
     LUIE.CombatText.SV.fontFaceApplied = fontName
     if not fontName or fontName == "" then
@@ -432,7 +432,7 @@ function CombatText.ApplyFont()
 end
 
 -- Module initialization
-function CombatText.Initialize(enabled)
+CombatText.Initialize = function(enabled)
     -- Load settings
     local isCharacterSpecific = LUIESV.Default[GetDisplayName()]["$AccountWide"].CharacterSpecificSV
     if isCharacterSpecific then

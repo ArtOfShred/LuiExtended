@@ -11,7 +11,7 @@ local string_format = string.format
     @return number: The converted integer value.
     @throws error: If the value cannot be cast to a number.
 ]]
-local function ToInteger(number)
+local ToInteger = function(number)
     return zo_floor(tonumber(number) or error("Could not cast '" .. tostring(number) .. "' to number.'"))
 end
 
@@ -26,7 +26,7 @@ LUIE.TimeStampColorize = nil
 --[[
     Updates the timestamp color based on the value in LUIE.ChatAnnouncements.SV.TimeStampColor.
 ]]
-function LUIE.UpdateTimeStampColor()
+LUIE.UpdateTimeStampColor = function()
     LUIE.TimeStampColorize = ZO_ColorDef:New(unpack(LUIE.ChatAnnouncements.SV.TimeStampColor)):ToHex()
 end
 
@@ -34,7 +34,7 @@ end
     Toggle the display of the Alert Frame.
     Sets the visibility of the ZO_AlertTextNotification based on the value of LUIE.SV.HideAlertFrame.
 ]]
-function LUIE.SetupAlertFrameVisibility()
+LUIE.SetupAlertFrameVisibility = function()
     ZO_AlertTextNotification:SetHidden(LUIE.SV.HideAlertFrame)
 end
 
@@ -44,7 +44,7 @@ end
     @param formatStr string (optional): The format string for the timestamp. If not provided, the default format from LUIE.ChatAnnouncements.SV.TimeStampFormat will be used.
     @return string: The formatted timestamp.
 ]]
-local function CreateTimestamp(timeStr, formatStr)
+local CreateTimestamp = function(timeStr, formatStr)
     formatStr = formatStr or LUIE.ChatAnnouncements.SV.TimeStampFormat
     -- split up default timestamp
     local hours, minutes, seconds = zo_strmatch(timeStr, "([^%:]+):([^%:]+):([^%:]+)")
@@ -84,7 +84,7 @@ LUIE.CreateTimestamp = CreateTimestamp
     @param doTimestamp boolean: If true, a timestamp will be added to the formatted message.
     @return string: The formatted message.
 ]]
-local function FormatMessage(msg, doTimestamp)
+local FormatMessage = function(msg, doTimestamp)
     local formattedMsg = msg or ""
     if doTimestamp then
         local timestring = GetTimeString()
@@ -98,7 +98,7 @@ end
     Hides or shows all LUIE components.
     @param hidden boolean: If true, all components will be hidden. If false, all components will be shown.
 ]]
-function LUIE.ToggleVisibility(hidden)
+LUIE.ToggleVisibility = function(hidden)
     for _, control in pairs(LUIE.Components) do
         control:SetHidden(hidden)
     end
@@ -109,7 +109,7 @@ end
     @param ...: Variable number of arguments to be passed to CHAT_ROUTER:AddSystemMessage.
     @return: The return value of CHAT_ROUTER:AddSystemMessage.
 ]]
-function LUIE.AddSystemMessage(...)
+LUIE.AddSystemMessage = function(...)
     return CHAT_ROUTER:AddSystemMessage(...)
 end
 
@@ -119,7 +119,7 @@ end
     @param msg string: The message to be printed.
     @param isSystem boolean: If true, the message is considered a system message.
 ]]
-function LUIE.PrintToChat(msg, isSystem)
+LUIE.PrintToChat = function(msg, isSystem)
     if CHAT_SYSTEM.primaryContainer then
         if LUIE.ChatAnnouncements.SV.ChatMethod == "Print to All Tabs" then
             if not LUIE.ChatAnnouncements.SV.ChatBypassFormat and CHAT_SYSTEM.primaryContainer then
@@ -174,7 +174,7 @@ end
     @param comma boolean: Whether to add commas or not.
     @return number|string: The formatted number with commas.
 ]]
-function LUIE.AbbreviateNumber(number, shorten, comma)
+LUIE.AbbreviateNumber = function(number, shorten, comma)
     if number > 0 and shorten then
         local value
         local suffix
@@ -224,7 +224,7 @@ end
     @param callback function: The callback function to be executed when the button is clicked.
     @return table: The created dialogue button table.
 ]]
-function LUIE.RegisterDialogueButton(identifier, title, text, callback)
+LUIE.RegisterDialogueButton = function(identifier, title, text, callback)
     ESO_Dialogs[identifier] = {
         gamepadInfo = {
             dialogType = GAMEPAD_DIALOGS.BASIC,
@@ -253,7 +253,7 @@ end
     Function to update guild data.
     Retrieves information about each guild the player is a member of and stores it in LUIE.GuildIndexData table.
 ]]
-function LUIE.UpdateGuildData()
+LUIE.UpdateGuildData = function()
     local GuildsIndex = GetNumGuilds()
     LUIE.GuildIndexData = {}
     for i = 1, GuildsIndex do
@@ -268,7 +268,7 @@ end
     Simple function to check the veteran difficulty.
     @return boolean: Returns true if the player is in a veteran dungeon or using veteran difficulty, false otherwise.
 ]]
-function LUIE.ResolveVeteranDifficulty()
+LUIE.ResolveVeteranDifficulty = function()
     if GetGroupSize() <= 1 and IsUnitUsingVeteranDifficulty("player") then
         return true
     elseif GetCurrentZoneDungeonDifficulty() == 2 or IsGroupUsingVeteranDifficulty() == true then
@@ -282,7 +282,7 @@ end
     Simple function that checks if the player is in a PVP zone.
     @return boolean: Returns true if the player is PvP flagged, false otherwise.
 ]]
-function LUIE.ResolvePVPZone()
+LUIE.ResolvePVPZone = function()
     if IsUnitPvPFlagged("player") then
         return true
     else
@@ -295,7 +295,7 @@ end
     @param abilityId number: The AbilityId of the skill.
     @return string: The name of the current morph of the skill.
 ]]
-function LUIE.GetSkillMorphName(abilityId)
+LUIE.GetSkillMorphName = function(abilityId)
     local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
     local abilityName = GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
     return abilityName
@@ -306,7 +306,7 @@ end
     @param abilityId number: The AbilityId of the skill.
     @return string: The icon path of the current morph of the skill.
 ]]
-function LUIE.GetSkillMorphIcon(abilityId)
+LUIE.GetSkillMorphIcon = function(abilityId)
     local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
     local abilityIcon = select(2, GetSkillAbilityInfo(skillType, skillIndex, abilityIndex))
     return abilityIcon
@@ -317,7 +317,7 @@ end
     @param abilityId number: The AbilityId of the skill.
     @return number: The AbilityId of the current morph of the skill.
 ]]
-function LUIE.GetSkillMorphAbilityId(abilityId)
+LUIE.GetSkillMorphAbilityId = function(abilityId)
     local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
     local morphAbilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex, false)
     return morphAbilityId -- renamed local (abilityId) to avoid naming conflicts with the parameter
@@ -329,7 +329,7 @@ end
     @param tooltipText string: The original tooltip text.
     @return string: The updated tooltip text.
 ]]
-function LUIE.UpdateMundusTooltipSyntax(abilityId, tooltipText)
+LUIE.UpdateMundusTooltipSyntax = function(abilityId, tooltipText)
     -- Update syntax for The Lady, The Lover, and the Thief Mundus stones since they aren't consistent with other buffs.
     if abilityId == 13976 or abilityId == 13981 then -- The Lady / The Lover
         tooltipText = zo_strgsub(tooltipText, GetString(LUIE_STRING_SKILL_MUNDUS_SUB_RES_PEN), GetString(LUIE_STRING_SKILL_MUNDUS_SUB_RES_PEN_REPLACE))

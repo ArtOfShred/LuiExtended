@@ -11,7 +11,7 @@ local zo_strformat = zo_strformat
 local pairs = pairs
 
 -- Slash Command to invite someone to a guild
-function SlashCommands.SlashGuildInvite(option)
+SlashCommands.SlashGuildInvite = function(option)
     -- If no input was entered, display an error and end.
     if option == "" or option == nil then
         printToChat(GetString(LUIE_STRING_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV), true)
@@ -67,7 +67,7 @@ function SlashCommands.SlashGuildInvite(option)
 end
 
 -- Slash Command to leave a guild
-function SlashCommands.SlashGuildQuit(guildnumber)
+SlashCommands.SlashGuildQuit = function(guildnumber)
     if guildnumber == "1" and LUIE.GuildIndexData[1] then
         guildnumber = LUIE.GuildIndexData[1].id
     elseif guildnumber == "2" and LUIE.GuildIndexData[2] then
@@ -102,7 +102,7 @@ function SlashCommands.SlashGuildQuit(guildnumber)
 end
 
 -- Slash Command to kick someone from a guild
-function SlashCommands.SlashGuildKick(option)
+SlashCommands.SlashGuildKick = function(option)
     -- If no input was entered, display an error and end.
     if option == "" or option == nil then
         printToChat(GetString(LUIE_STRING_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK), true)

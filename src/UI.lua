@@ -18,7 +18,7 @@ local windowManager = WINDOW_MANAGER
     @param object table: The object to chain methods to.
     @return table: The metatable for method chaining.
 ]]
-function UI.Chain(object)
+UI.Chain = function(object)
     -- Setup the metatable
     local T = {}
     setmetatable(T, {
@@ -45,7 +45,7 @@ end
     @param dims table: The dimensions of the window.
     @return userdata: The created top-level window.
 ]]
-function UI.TopLevel(anchors, dims)
+UI.TopLevel = function(anchors, dims)
     local tlw = windowManager:CreateTopLevelWindow()
     tlw:SetClampedToScreen(true)
     tlw:SetMouseEnabled(false)
@@ -69,7 +69,7 @@ end
     @param name string: The name of the control.
     @return userdata: The created control.
 ]]
-function UI.Control(parent, anchors, dims, hidden, name)
+UI.Control = function(parent, anchors, dims, hidden, name)
     if not parent then
         return
     end
@@ -99,7 +99,7 @@ end
     @param hidden boolean: Whether the texture is hidden or not.
     @return userdata: The created texture control.
 ]]
-function UI.Texture(parent, anchors, dims, texture, drawlayer, hidden)
+UI.Texture = function(parent, anchors, dims, texture, drawlayer, hidden)
     if not parent then
         return
     end
@@ -134,7 +134,7 @@ end
     @param hidden boolean: Whether the backdrop is hidden or not.
     @return userdata: The created backdrop control.
 ]]
-function UI.Backdrop(parent, anchors, dims, center, edge, hidden)
+UI.Backdrop = function(parent, anchors, dims, center, edge, hidden)
     if not parent then
         return
     end
@@ -169,7 +169,7 @@ end
     @param hidden boolean: Whether the backdrop is hidden or not.
     @return userdata: The created backdrop control.
 ]]
-function UI.ChatBackdrop(parent, anchors, dims, color, edge_size, hidden)
+UI.ChatBackdrop = function(parent, anchors, dims, color, edge_size, hidden)
     if not parent then
         return
     end
@@ -205,7 +205,7 @@ end
     @param hidden boolean: Whether the status bar is hidden or not.
     @return userdata: The created status bar control.
 ]]
-function UI.StatusBar(parent, anchors, dims, color, hidden)
+UI.StatusBar = function(parent, anchors, dims, color, hidden)
     if not parent then
         return
     end
@@ -239,7 +239,7 @@ end
     @param name string: The name of the label control.
     @return userdata: The created label control.
 ]]
-function UI.Label(parent, anchors, dims, align, font, text, hidden, name)
+UI.Label = function(parent, anchors, dims, align, font, text, hidden, name)
     if not parent then
         return
     end

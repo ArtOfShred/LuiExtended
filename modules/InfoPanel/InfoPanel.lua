@@ -97,7 +97,7 @@ local uiBags = {
 
 local panelFragment
 
-function InfoPanel.SetDisplayOnMap()
+InfoPanel.SetDisplayOnMap = function()
     if InfoPanel.SV.DisplayOnWorldMap then
         sceneManager:GetScene("worldMap"):AddFragment(panelFragment)
     else
@@ -105,7 +105,7 @@ function InfoPanel.SetDisplayOnMap()
     end
 end
 
-local function CreateUIControls()
+local CreateUIControls = function()
     uiPanel = UI.TopLevel(nil, { 240, 48 })
     uiPanel:SetDrawLayer(DL_BACKGROUND)
     uiPanel:SetDrawTier(DT_LOW)
@@ -174,7 +174,7 @@ local function CreateUIControls()
 end
 
 -- Rearranges panel elements. Called from Initialize and settings menu.
-function InfoPanel.RearrangePanel()
+InfoPanel.RearrangePanel = function()
     if not InfoPanel.Enabled then
         return
     end
@@ -278,7 +278,7 @@ function InfoPanel.RearrangePanel()
     uiPanel:SetHidden(false)
 end
 
-function InfoPanel.Initialize(enabled)
+InfoPanel.Initialize = function(enabled)
     -- Load settings
     local isCharacterSpecific = LUIESV.Default[GetDisplayName()]["$AccountWide"].CharacterSpecificSV
     if isCharacterSpecific then
@@ -326,7 +326,7 @@ function InfoPanel.Initialize(enabled)
     eventManager:RegisterForUpdate(moduleName .. "60", 60000, InfoPanel.OnUpdate60)
 end
 
-function InfoPanel.ResetPosition()
+InfoPanel.ResetPosition = function()
     InfoPanel.SV.position = nil
     if not InfoPanel.Enabled then
         return
@@ -336,7 +336,7 @@ function InfoPanel.ResetPosition()
 end
 
 -- Unlock panel for moving. Called from Settings Menu.
-function InfoPanel.SetMovingState(state)
+InfoPanel.SetMovingState = function(state)
     if not InfoPanel.Enabled then
         return
     end
@@ -347,7 +347,7 @@ function InfoPanel.SetMovingState(state)
 end
 
 -- Set scale of Info Panel. Called from Settings Menu.
-function InfoPanel.SetScale()
+InfoPanel.SetScale = function()
     if not InfoPanel.Enabled then
         return
     end
@@ -356,7 +356,7 @@ function InfoPanel.SetScale()
 end
 
 -- Fake Component callback function used by main module
---[[function fakeControl.SetHidden(self, hidden)
+--[[fakeControl.SetHidden = function(self, hidden)
     -- update not more then once every 5 second
     if not hidden and DelayBuffer( "InfoPanelFakeControl", 5000 ) then
         InfoPanel.OnUpdate60()
@@ -365,7 +365,7 @@ end]]
 --
 
 -- Listens to EVENT_INVENTORY_SINGLE_SLOT_UPDATE and EVENT_LOOT_RECEIVED
-function InfoPanel.OnBagUpdate()
+InfoPanel.OnBagUpdate = function()
     -- We shall not execute bags size calculation immediately, but rather set a flag with delay function
     -- This is needed to avoid lockups when the game start flooding us with same event for every bag slot used
     -- While we do not need any good latency, we can afford to update info-panel label with 250ms delay
@@ -374,7 +374,7 @@ end
 
 -- Performs calculation of empty space in bags
 -- Called with delay by corresponding event listener
-function InfoPanel.DoBagUpdate()
+InfoPanel.DoBagUpdate = function()
     -- Clear pending event
     eventManager:UnregisterForUpdate(moduleName .. "PendingBagsUpdate")
 
@@ -412,12 +412,12 @@ function InfoPanel.DoBagUpdate()
     uiGems.label:SetText((fullCount > 9) and fullText or (fullText .. "/" .. emptyCount))
 end
 
-local function FormatClock(clockFormat)
+local FormatClock = function(clockFormat)
     local timestring = GetTimeString()
     return LUIE.CreateTimestamp(timestring, clockFormat)
 end
 
-function InfoPanel.OnUpdate01()
+InfoPanel.OnUpdate01 = function()
     -- Update time
     uiClock.label:SetText(FormatClock(InfoPanel.SV.ClockFormat))
 
@@ -437,7 +437,7 @@ function InfoPanel.OnUpdate01()
     uiFps.label:SetColor(color.r, color.g, color.b, 1)
 end
 
-function InfoPanel.OnUpdate10()
+InfoPanel.OnUpdate10 = function()
     -- Update latency
     local lat = GetLatency()
     local color = colors.WHITE
@@ -454,7 +454,7 @@ function InfoPanel.OnUpdate10()
     uiLatency.label:SetColor(color.r, color.g, color.b, 1)
 end
 
-function InfoPanel.OnUpdate60()
+InfoPanel.OnUpdate60 = function()
     -- Update mountfeedtimer
     if not InfoPanel.SV.HideMountFeed and not uiFeedTimer.hideLocally then
         local mountFeedTimer, mountFeedTotalTime = GetTimeUntilCanBeTrained()

@@ -9,7 +9,7 @@ local eventManager = EVENT_MANAGER
 --[[
     Load saved settings.
 ]]
-local function LoadSavedVars()
+local LoadSavedVars = function()
     -- Addon options
     LUIE.SV = ZO_SavedVars:NewAccountWide(LUIE.SVName, LUIE.SVVer, nil, LUIE.Defaults)
     if LUIE.SV.CharacterSpecificSV then
@@ -20,7 +20,7 @@ end
 --[[
     Load additional fonts from LMP.
 ]]
-local function UpdateFonts()
+local UpdateFonts = function()
     local LMP = LibMediaProvider
     if LMP == nil then
         return
@@ -35,7 +35,7 @@ end
 --[[
     Load additional status bar textures from LMP.
 ]]
-local function UpdateStatusbarTextures()
+local UpdateStatusbarTextures = function()
     local LMP = LibMediaProvider
     if LMP == nil then
         return
@@ -50,7 +50,7 @@ end
 --[[
     Load additional sounds from LMP.
 ]]
-local function UpdateSounds()
+local UpdateSounds = function()
     local LMP = LibMediaProvider
     if LMP == nil then
         return
@@ -65,7 +65,7 @@ end
 --[[
     Load additional media from LMP.
 ]]
-local function LoadMedia()
+local LoadMedia = function()
     UpdateFonts()
     UpdateStatusbarTextures()
     UpdateSounds()
@@ -74,7 +74,7 @@ end
 --[[
     Startup Info string.
 ]]
-local function LoadScreen()
+local LoadScreen = function()
     eventManager:UnregisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED)
     -- Set Positions for moved Default UI elements
     LUIE.SetElementPosition()
@@ -86,7 +86,7 @@ end
 --[[
     Register events.
 ]]
-local function RegisterEvents()
+local RegisterEvents = function()
     eventManager:RegisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED, LoadScreen)
     -- Keep track of guilds for the /ginvite commands & Chat Announcement EVENT_GUILD_SELF_LEFT_GUILD handler
     if LUIE.SV.SlashCommands_Enable or LUIE.SV.ChatAnnouncements_Enable then
@@ -99,7 +99,7 @@ end
 --[[
     LuiExtended Initialization.
 ]]
-local function OnAddonOnLoaded(eventCode, addonName)
+local OnAddonOnLoaded = function(eventCode, addonName)
     -- Only initialize our own addon
     if LUIE.name ~= addonName then
         return

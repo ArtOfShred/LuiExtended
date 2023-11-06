@@ -56,7 +56,7 @@ SlashCommands.SV = nil
 LUIE.LastMementoUsed = 0              -- Set by the SlashCollectible function, passes this value to CA to display the Memento we used if a slash command is used
 LUIE.SlashCollectibleOverride = false -- Set by the SlashCollectible function, flags the CA function to display info on the collectible used even if the CA option are DISABLED.
 
-function SlashCommands.Initialize(enabled)
+SlashCommands.Initialize = function(enabled)
     -- Load Settings
     local isCharacterSpecific = LUIESV.Default[GetDisplayName()]["$AccountWide"].CharacterSpecificSV
     if isCharacterSpecific then
@@ -74,7 +74,7 @@ function SlashCommands.Initialize(enabled)
     SlashCommands.RegisterSlashCommands()
 end
 
-function SlashCommands.RegisterSlashCommands()
+SlashCommands.RegisterSlashCommands = function()
     CHAT_SYSTEM.textEntry.slashCommandAutoComplete:InvalidateSlashCommandCache()
 
     -- Register commands that replace default functions

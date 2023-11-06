@@ -37,7 +37,7 @@ local g_guildSkillThrottleLine = nil -- Grab the name for Fighter's Guild reputa
 ------------------------------------------------
 
 -- EVENT_EXPERIENCE_GAIN HANDLER
-function ChatAnnouncements.OnExperienceGain(eventCode, reason, level, previousExperience, currentExperience, championPoints)
+ChatAnnouncements.OnExperienceGain = function(eventCode, reason, level, previousExperience, currentExperience, championPoints)
     -- d("Experience Gain) previousExperience: " .. previousExperience .. " --- " .. "currentExperience: " .. currentExperience)
     if ChatAnnouncements.SV.XP.Experience and (not (ChatAnnouncements.SV.XP.ExperienceHideCombat and reason == PROGRESS_REASON_KILL) or not reason == PROGRESS_REASON_KILL) then
         local change = currentExperience - previousExperience -- Change in Experience Points on gaining them
@@ -69,7 +69,7 @@ function ChatAnnouncements.OnExperienceGain(eventCode, reason, level, previousEx
 end
 
 -- Print Experience Gain
-function ChatAnnouncements.PrintExperienceGain(change)
+ChatAnnouncements.PrintExperienceGain = function(change)
     local icon = ChatAnnouncements.SV.XP.ExperienceIcon and "|t16:16:/esoui/art/icons/icon_experience.dds|t " or ""
     local xpName = zo_strformat(ChatAnnouncements.SV.XP.ExperienceName, change)
     local messageP1 = ("|r|c" .. ColorizeColors.ExperienceNameColorize .. icon .. ZO_LocalizeDecimalNumber(change) .. " " .. xpName .. "|r|c" .. ColorizeColors.ExperienceMessageColorize)
@@ -82,7 +82,7 @@ function ChatAnnouncements.PrintExperienceGain(change)
 end
 
 -- Print Buffered Experience Gain
-function ChatAnnouncements.PrintBufferedXP()
+ChatAnnouncements.PrintBufferedXP = function()
     if g_xpCombatBufferValue > 0 and g_xpCombatBufferValue > ChatAnnouncements.SV.XP.ExperienceFilter then
         local change = g_xpCombatBufferValue
         ChatAnnouncements.PrintExperienceGain(change)
@@ -92,7 +92,7 @@ function ChatAnnouncements.PrintBufferedXP()
 end
 
 -- EVENT_SKILL_XP_UPDATE HANDLER
-function ChatAnnouncements.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previousXP, currentXP)
+ChatAnnouncements.SkillXPUpdate = function(eventCode, skillType, skillIndex, reason, rank, previousXP, currentXP)
     if skillType == SKILL_TYPE_GUILD then
         local lineName, _, _, lineId = GetSkillLineInfo(skillType, skillIndex)
         local formattedName = zo_strformat("<<C:1>>", lineName)
@@ -157,7 +157,7 @@ function ChatAnnouncements.SkillXPUpdate(eventCode, skillType, skillIndex, reaso
 end
 
 -- Helper function to get the color for the Guild
-local function GetGuildColor(lineId)
+local GetGuildColor = function(lineId)
     local GUILD_SKILL_COLOR_TABLE = {
         [45] = ColorizeColors.SkillGuildColorizeFG,
         [44] = ColorizeColors.SkillGuildColorizeMG,
@@ -180,7 +180,7 @@ local GUILD_SKILL_ICONS = {
 }
 
 -- Print Guild Rep Gain
-function ChatAnnouncements.PrintGuildRep(change, lineName, lineId, priority)
+ChatAnnouncements.PrintGuildRep = function(change, lineName, lineId, priority)
     local icon = zo_iconFormatInheritColor(GUILD_SKILL_ICONS[lineId], 16, 16)
     local formattedIcon = ChatAnnouncements.SV.Skills.SkillGuildIcon and (icon .. " ") or ""
 
@@ -197,7 +197,7 @@ function ChatAnnouncements.PrintGuildRep(change, lineName, lineId, priority)
 end
 
 -- Print Buffered Guild Rep Gain
-function ChatAnnouncements.PrintBufferedGuildRep()
+ChatAnnouncements.PrintBufferedGuildRep = function()
     if g_guildSkillThrottle > 0 and g_guildSkillThrottle > ChatAnnouncements.SV.Skills.SkillGuildThreshold then
         local lineId = 45
         local lineName = g_guildSkillThrottleLine

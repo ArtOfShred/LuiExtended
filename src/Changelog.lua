@@ -46,14 +46,14 @@ local changelogMessages = {
 }
 
 -- Hide toggle called by the menu or xml button
-function LUIE.ToggleChangelog(option)
+LUIE.ToggleChangelog = function(option)
     LUIE_Changelog:ClearAnchors()
     LUIE_Changelog:SetAnchor(CENTER, GuiRoot, CENTER, 0, -120)
     LUIE_Changelog:SetHidden(option)
 end
 
 -- Called on initialize
-function LUIE.ChangelogScreen()
+LUIE.ChangelogScreen = function()
     -- concat messages into one string
     local changelog = table_concat(changelogMessages, "\n")
     -- If text start with '*' replace it with bullet texture

@@ -9,7 +9,7 @@ local pairs = pairs
 local table_concat = table.concat
 
 -- Create Settings Menu
-function LUIE.CreateSettings()
+LUIE.CreateSettings = function()
     -- Load LibAddonMenu
     local LAM = LibAddonMenu2
     if LAM == nil then
@@ -25,7 +25,7 @@ function LUIE.CreateSettings()
     local profileQueuedCopy      -- Currently queued character copy name for copy button
 
     -- Generate list of character profiles for Menu function
-    local function GenerateCharacterProfiles()
+    local GenerateCharacterProfiles = function()
         local isCharacterSpecific = LUIESV.Default[GetDisplayName()]["$AccountWide"].CharacterSpecificSV -- Pull info from SV for account wide
         local playerName = GetUnitName("player")
 
@@ -45,12 +45,12 @@ function LUIE.CreateSettings()
 
     -- Copies data either to override character's data or creates a new table if no data for that character exists.
     -- Borrowed from Srendarr
-    local function CopyTable(src, dest)
+    local CopyTable = function(src, dest)
         return ZO_DeepTableCopy(src, dest)
     end
 
     -- Called from Menu by either reset current character or reset account wide settings button.
-    local function DeleteCurrentProfile(account)
+    local DeleteCurrentProfile = function(account)
         local deleteProfile
         if account then
             deleteProfile = table_concat({ "$AccountWide (", GetDisplayName(), ")" })
@@ -66,7 +66,7 @@ function LUIE.CreateSettings()
     end
 
     -- Copy a character profile & replace another.
-    local function CopyCharacterProfile()
+    local CopyCharacterProfile = function()
         local displayName = GetDisplayName()
         if not LUIESV.Default[displayName] or not LUIESV.Default[displayName]["$AccountWide"] then
             return
