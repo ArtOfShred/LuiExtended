@@ -27,9 +27,9 @@ local defaultPanels = {
     [ZO_PlayerToPlayerAreaPromptContainer] = { GetString(LUIE_STRING_DEFAULT_FRAME_PLAYER_INTERACTION), nil, 30 },
     [ZO_SynergyTopLevelContainer] = { GetString(LUIE_STRING_DEFAULT_FRAME_SYNERGY) },
     [ZO_AlertTextNotification] = { GetString(LUIE_STRING_DEFAULT_FRAME_ALERTS), 600, 56 },
-    [ZO_CompassFrame] = { GetString(LUIE_STRING_DEFAULT_FRAME_COMPASS) },                               -- Needs custom template applied
-    [ZO_ActiveCombatTipsTip] = { GetString(LUIE_STRING_DEFAULT_FRAME_ACTIVE_COMBAT_TIPS), 250, 20 },    -- Needs custom template applied
-    [ZO_PlayerProgress] = { GetString(LUIE_STRING_DEFAULT_FRAME_PLAYER_PROGRESS) },                     -- Needs custom template applied
+    [ZO_CompassFrame] = { GetString(LUIE_STRING_DEFAULT_FRAME_COMPASS) },                                        -- Needs custom template applied
+    [ZO_ActiveCombatTipsTip] = { GetString(LUIE_STRING_DEFAULT_FRAME_ACTIVE_COMBAT_TIPS), 250, 20 },             -- Needs custom template applied
+    [ZO_PlayerProgress] = { GetString(LUIE_STRING_DEFAULT_FRAME_PLAYER_PROGRESS) },                              -- Needs custom template applied
     --[ZO_CenterScreenAnnounce] = { GetString(LUIE_STRING_DEFAULT_FRAME_CSA), nil, 100 }, -- Needs custom template applied
     [ZO_EndDunHUDTrackerContainer] = { GetString(LUIE_STRING_DEFAULT_FRAME_ENDLESS_DUNGEON_TRACKER), 230, 100 }, -- Needs custom template applied
 }
@@ -38,8 +38,12 @@ local defaultPanels = {
 local g_LUIE_Movers = {}
 local g_framesUnlocked = false
 
--- Replace the template function for certain elements to also use our custom positions.
--- Concept for template replacement function thanks to Phinix (Azurah).
+--[[
+    Replace the template function for certain elements to also use custom positions.
+    @param object table: The object containing the template function to be replaced.
+    @param functionName string: The name of the template function to be replaced.
+    @param frameName string: The name of the frame associated with the template function.
+]]
 local function ReplaceDefaultTemplate(object, functionName, frameName)
     local zos_function = object[functionName]
     object[functionName] = function (self)
@@ -57,7 +61,11 @@ local function ReplaceDefaultTemplate(object, functionName, frameName)
     end
 end
 
--- Run when the UI scene changes to hide the unlocked elements if we're in the Addon Settings Menu.
+--[[
+    Run when the UI scene changes to hide the unlocked elements if we're in the Addon Settings Menu.
+    @param oldState number: The previous state of the UI scene.
+    @param newState number: The new state of the UI scene.
+]]
 local function sceneChange(oldState, newState)
     if g_framesUnlocked then
         local isHidden = false
@@ -66,14 +74,17 @@ local function sceneChange(oldState, newState)
         elseif (newState == SCENE_HIDDEN) then
             isHidden = false
         end
-
         for k, v in pairs(g_LUIE_Movers) do
             v:SetHidden(isHidden)
         end
     end
 end
 
--- Helper function to adjust element
+--[[
+    Helper function to adjust an element.
+    @param k userdata: The element to be adjusted.
+    @param v table: The table containing adjustment values.
+]]
 local function adjustElement(k, v)
     k:SetClampedToScreen(true)
     if v[2] then
@@ -84,7 +95,11 @@ local function adjustElement(k, v)
     end
 end
 
--- Helper function to set anchor
+--[[
+    Helper function to set the anchor of an element.
+    @param k userdata: The element to set the anchor for.
+    @param frameName string: The name of the frame associated with the element.
+]]
 local function setAnchor(k, frameName)
     local x = LUIE.SV[frameName][1]
     local y = LUIE.SV[frameName][2]
@@ -115,7 +130,9 @@ local function setAnchor(k, frameName)
     end
 end
 
--- Called when an element mover is adjusted and on initialization to update all positions.
+--[[
+    Called when an element mover is adjusted and on initialization to update all positions.
+]]
 function LUIE.SetElementPosition()
     for k, v in pairs(defaultPanels) do
         local frameName = k:GetName()
@@ -131,21 +148,32 @@ function LUIE.SetElementPosition()
     end
 end
 
--- Helper function to create a top level window
+--[[
+    Helper function to create a top-level window.
+    @param k userdata: The element to create the top-level window for.
+    @param v table: The table containing window configuration values.
+    @param point number: The anchor point for the top-level window.
+    @param relativePoint number: The relative anchor point for the top-level window.
+    @param offsetX number: The X offset for the top-level window.
+    @param offsetY number: The Y offset for the top-level window.
+    @param relativeTo userdata: The element to which the top-level window is relative.
+    @return userdata: The created top-level window.
+]]
 local function createTopLevelWindow(k, v, point, relativePoint, offsetX, offsetY, relativeTo)
     local tlw = UI.TopLevel({ point, relativePoint, offsetX, offsetY, relativeTo }, { k:GetWidth(), k:GetHeight() })
-
     tlw:SetDrawLayer(DL_BACKGROUND)
     tlw:SetDrawTier(DT_MEDIUM)
     tlw.customPositionAttr = k:GetName()
     tlw.preview = UI.Backdrop(tlw, "fill", nil, nil, nil, false)
     tlw.preview:SetAnchorFill()
     tlw.previewLabel = UI.Label(tlw.preview, { CENTER, CENTER }, nil, nil, "ZoFontGameMedium", v[1], false)
-
     return tlw
 end
 
--- Setup Movers for Elements, called by the menu unlock settings.
+--[[
+    Setup Movers for Elements, called by the menu unlock settings.
+    @param state boolean: The state indicating whether the elements are unlocked or not.
+]]
 function LUIE.SetupElementMover(state)
     g_framesUnlocked = state
     for k, v in pairs(defaultPanels) do
@@ -157,10 +185,8 @@ function LUIE.SetupElementMover(state)
             if v[3] then
                 k:SetHeight(v[3])
             end
-
-            -- Create a top level window for backbar butons.
+            -- Create a top-level window for backbar buttons.
             local isValidAnchor, point, relativeTo, relativePoint, offsetX, offsetY = k:GetAnchor()
-
             -- Default Alert text doesn't really align with the frame so we just move this visually on initial setup.
             if k == ZO_AlertTextNotification then
                 local frameName = k:GetName()
@@ -172,9 +198,7 @@ function LUIE.SetupElementMover(state)
                     offsetY = 0
                 end
             end
-
             local tlw = createTopLevelWindow(k, v, point, relativePoint, offsetX, offsetY, relativeTo)
-
             -- Setup handlers to set the custom position SV and call LUIE.SetElementPosition() to apply this positioning
             tlw:SetHandler("OnMoveStop", function (self)
                 LUIE.SV[self.customPositionAttr] = { self:GetLeft(), self:GetTop() }
@@ -195,7 +219,9 @@ function LUIE.SetupElementMover(state)
     firstRun = false
 end
 
--- Reset position of windows. Called from Settings Menu.
+--[[
+    Reset the position of windows. Called from the Settings Menu.
+]]
 function LUIE.ResetElementPosition()
     for k, v in pairs(defaultPanels) do
         local frameName = k:GetName()
