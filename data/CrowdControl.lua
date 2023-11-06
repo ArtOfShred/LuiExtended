@@ -733,6 +733,7 @@ CrowdControl.IgnoreList = {
     [203125] = true, -- Verse Select
     [203101] = true, -- Vision Select
     [211431] = true, -- Side Content Transporter
+    [211433] = true, -- Side Content Selector (Group)
     [192506] = true, -- Unstable Metamorphosis
 
     ----------------
