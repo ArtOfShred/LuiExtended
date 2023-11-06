@@ -31,7 +31,13 @@ function LUIE.InitializeHooks()
     -- Hook Gamepad Skill Advisor for custom icon support
     LUIE.InitializeHooksSkillAdvisor()
 
-    -- Hook for Icon/Name changes
+    --[[
+    Hook for Icon/Name changes.
+    @param skillType number: The skill type.
+    @param skillIndex number: The skill index.
+    @param abilityIndex number: The ability index.
+    @return string, string, number, boolean, boolean, boolean, number, number: The name, texture, earned rank, passive flag, ultimate flag, purchased flag, progression index, and rank index.
+]]
     local zos_GetSkillAbilityInfo = GetSkillAbilityInfo
     GetSkillAbilityInfo = function (skillType, skillIndex, abilityIndex)
         local name, texture, earnedRank, passive, ultimate, purchased, progressionIndex, rankIndex = zos_GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
@@ -45,7 +51,13 @@ function LUIE.InitializeHooks()
         return name, texture, earnedRank, passive, ultimate, purchased, progressionIndex, rankIndex
     end
 
-    -- Hook for Icon/Name changes
+    --[[
+    Hook for Icon/Name changes.
+    @param skillType number: The skill type.
+    @param skillIndex number: The skill index.
+    @param abilityIndex number: The ability index.
+    @return string, string, number: The name, texture, and earned rank.
+]]
     local zos_GetSkillAbilityNextUpgradeInfo = GetSkillAbilityNextUpgradeInfo
     GetSkillAbilityNextUpgradeInfo = function (skillType, skillIndex, abilityIndex)
         local name, texture, earnedRank = zos_GetSkillAbilityNextUpgradeInfo(skillType, skillIndex, abilityIndex)
@@ -59,7 +71,12 @@ function LUIE.InitializeHooks()
         return name, texture, earnedRank
     end
 
-    -- Hook for Icon/Name changes
+    --[[
+    Hook for Icon/Name changes.
+    @param unitTag string: The unit tag.
+    @param buffIndex number: The buff index.
+    @return string, number, number, number, number, string, number, number, number, number, number, boolean, boolean: The buff name, start time, end time, buff slot, stack count, icon file, buff type, effect type, ability type, status effect type, ability id, can click off, and cast by player.
+]]
     local zos_GetUnitBuffInfo = GetUnitBuffInfo
     GetUnitBuffInfo = function (unitTag, buffIndex)
         local buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = zos_GetUnitBuffInfo(unitTag, buffIndex)
@@ -69,34 +86,42 @@ function LUIE.InitializeHooks()
         if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].icon then
             iconFile = LUIE.Data.Effects.EffectOverride[abilityId].icon
         end
-
         return buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer
     end
 
-    -- Hook DoesKillingAttackHaveAttacker - Add a source to attacks that don't normally show one (mostly for environmental effects)
-    -- Hook GetKillingAttackerInfo - Change Source Name, Pet Name, or toggle damage that is sourced from the Player on/off
-    -- Hook GetKillingAttackInfo - Change Icon or Name (additional support for Zone based changes, and source attacker/pet changes)
+    --[[
+    Hook for DoesKillingAttackHaveAttacker - Add a source to attacks that don't normally show one (mostly for environmental effects).
+    Hook for GetKillingAttackerInfo - Change Source Name, Pet Name, or toggle damage that is sourced from the Player on/off.
+    Hook for GetKillingAttackInfo - Change Icon or Name (additional support for Zone based changes, and source attacker/pet changes).
+]]
     local zos_GetKillingAttackerInfo = GetKillingAttackerInfo
     local zos_GetKillingAttackInfo = GetKillingAttackInfo
     local zos_DoesKillingAttackHaveAttacker = DoesKillingAttackHaveAttacker
 
+    --[[
+    Override function for DoesKillingAttackHaveAttacker.
+    @param index number: The index of the killing attack.
+    @return boolean: True if the killing attack has an attacker, false otherwise.
+]]
     DoesKillingAttackHaveAttacker = function (index)
         local hasAttacker = zos_DoesKillingAttackHaveAttacker
         local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
-
         if LUIE.Data.Effects.EffectSourceOverride[abilityId] then
             if LUIE.Data.Effects.EffectSourceOverride[abilityId].addSource then
                 hasAttacker = true
             end
         end
-
         return hasAttacker
     end
 
+    --[[
+    Override function for GetKillingAttackerInfo.
+    @param index number: The index of the killing attack.
+    @return string, number, number, number, boolean, boolean, number, string, string: The attacker raw name, attacker champion points, attacker level, attacker alliance rank, is player, is boss, alliance, minion name, attacker display name.
+]]
     GetKillingAttackerInfo = function (index)
         local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index)
         local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
-
         if LUIE.Data.Effects.EffectSourceOverride[abilityId] then
             if LUIE.Data.Effects.EffectSourceOverride[abilityId].source then
                 attackerRawName = LUIE.Data.Effects.EffectSourceOverride[abilityId].source
@@ -122,22 +147,30 @@ function LUIE.InitializeHooks()
                 end
             end
         end
-
         return attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName
     end
 
+    --[[
+Override function for GetKillingAttackInfo.
+@param index number: The index of the killing attack.
+@return string, number, string, boolean, number, number, number: The attack name, attack damage, attack icon, was killing blow, cast time ago in milliseconds, duration in milliseconds, number of attack hits.
+]]
     GetKillingAttackInfo = function (index)
         local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index)
         local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
 
+        -- Check if there is an effect override for the abilityId
         if LUIE.Data.Effects.EffectOverride[abilityId] then
             attackName = LUIE.Data.Effects.EffectOverride[abilityId].name or attackName
             attackIcon = LUIE.Data.Effects.EffectOverride[abilityId].icon or attackIcon
         end
 
+        -- Check if there is a zone data override for the abilityId
         if LUIE.Data.Effects.ZoneDataOverride[abilityId] then
             local index2 = GetZoneId(GetCurrentMapZoneIndex())
             local zoneName = GetPlayerLocationName()
+
+            -- Check if there is a zone data override for the current zone index
             if LUIE.Data.Effects.ZoneDataOverride[abilityId][index2] then
                 if LUIE.Data.Effects.ZoneDataOverride[abilityId][index2].icon then
                     attackIcon = LUIE.Data.Effects.ZoneDataOverride[abilityId][index2].icon
@@ -149,6 +182,8 @@ function LUIE.InitializeHooks()
                     return
                 end
             end
+
+            -- Check if there is a zone data override for the current zone name
             if LUIE.Data.Effects.ZoneDataOverride[abilityId][zoneName] then
                 if LUIE.Data.Effects.ZoneDataOverride[abilityId][zoneName].icon then
                     attackIcon = LUIE.Data.Effects.ZoneDataOverride[abilityId][zoneName].icon
@@ -162,9 +197,11 @@ function LUIE.InitializeHooks()
             end
         end
 
-        -- Override name, icon, or hide based on Map Name
+        -- Check if there is a map data override for the abilityId
         if LUIE.Data.Effects.MapDataOverride[abilityId] then
             local mapName = GetMapName()
+
+            -- Check if there is a map data override for the current map name
             if LUIE.Data.Effects.MapDataOverride[abilityId][mapName] then
                 if LUIE.Data.Effects.MapDataOverride[abilityId][mapName].icon then
                     attackIcon = LUIE.Data.Effects.MapDataOverride[abilityId][mapName].icon
@@ -178,9 +215,12 @@ function LUIE.InitializeHooks()
             end
         end
 
+        -- Check if there is an effect override by name for the abilityId
         if LUIE.Data.Effects.EffectOverrideByName[abilityId] then
             local unitName = zo_strformat("<<C:1>>", attackerRawName)
             local petName = zo_strformat("<<C:1>>", minionName)
+
+            -- Check if there is an effect override by name for the attacker unit name
             if LUIE.Data.Effects.EffectOverrideByName[abilityId][unitName] then
                 if LUIE.Data.Effects.EffectOverrideByName[abilityId][unitName].hide then
                     return
@@ -188,6 +228,8 @@ function LUIE.InitializeHooks()
                 attackName = LUIE.Data.Effects.EffectOverrideByName[abilityId][unitName].name or attackName
                 attackIcon = LUIE.Data.Effects.EffectOverrideByName[abilityId][unitName].icon or attackIcon
             end
+
+            -- Check if there is an effect override by name for the minion name
             if LUIE.Data.Effects.EffectOverrideByName[abilityId][petName] then
                 if LUIE.Data.Effects.EffectOverrideByName[abilityId][petName].hide then
                     return
@@ -197,6 +239,7 @@ function LUIE.InitializeHooks()
             end
         end
 
+        -- Check if the attack name is "Fall Damage" and there is an effect override for abilityId 10950
         if attackName == GetString(LUIE_STRING_SKILL_FALL_DAMAGE) then
             if LUIE.Data.Effects.EffectOverride[10950] then
                 attackIcon = LUIE.Data.Effects.EffectOverride[10950].icon
@@ -206,7 +249,11 @@ function LUIE.InitializeHooks()
         return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
     end
 
-    -- Hook support for Custom Ability Icons (Helps normalize with other addons)
+    --[[
+    Hook support for Custom Ability Icons (Helps normalize with other addons)
+    @param abilityId number: The ID of the ability.
+    @return string: The icon file path for the ability.
+]]
     LUIE.GetAbilityIcon = GetAbilityIcon -- Used only for PTS testing
     local zos_GetAbilityIcon = GetAbilityIcon
     GetAbilityIcon = function (abilityId)
@@ -217,7 +264,11 @@ function LUIE.InitializeHooks()
         return icon
     end
 
-    -- Hook support for Custom Ability Names (Helps normalize with other addons)
+    --[[
+    Hook support for Custom Ability Names (Helps normalize with other addons)
+    @param abilityId number: The ID of the ability.
+    @return string: The name of the ability.
+]]
     LUIE.GetAbilityName = GetAbilityName -- Used only for PTS testing
     local zos_GetAbilityName = GetAbilityName
     GetAbilityName = function (abilityId)
@@ -228,7 +279,11 @@ function LUIE.InitializeHooks()
         return abilityName
     end
 
-    -- Hook support for ArtificialffectId's
+    --[[
+    Hook support for ArtificialffectId's
+    @param artificialEffectId number: The ID of the artificial effect.
+    @return string, string, number, number, number, number: The display name, icon file path, effect type, sort order, time started, and time ending of the artificial effect.
+]]
     LUIE.GetArtificialEffectInfo = GetArtificialEffectInfo -- Used only for PTS testing
     local zos_GetArtificialEffectInfo = GetArtificialEffectInfo
     GetArtificialEffectInfo = function (artificialEffectId)
@@ -242,7 +297,11 @@ function LUIE.InitializeHooks()
         return displayName, iconFile, effectType, sortOrder, timeStarted, timeEnding
     end
 
-    -- Hook support to pull custom tooltips for ArtificialEffectId's
+    --[[
+    Hook support to pull custom tooltips for ArtificialEffectId's
+    @param artificialEffectId number: The ID of the artificial effect.
+    @return string: The tooltip text for the artificial effect.
+]]
     local zos_GetArtificialEffectTooltipText = GetArtificialEffectTooltipText
     GetArtificialEffectTooltipText = function (artificialEffectId)
         local tooltip
@@ -255,11 +314,11 @@ function LUIE.InitializeHooks()
         end
     end
 
-    -- Hook synergy popup Icon/Name (to fix inconsistencies and add custom icons for some Quest/Encounter based Synergies)
-    ---@diagnostic disable-next-line: duplicate-set-field
+    --[[
+    Hook synergy popup Icon/Name (to fix inconsistencies and add custom icons for some Quest/Encounter based Synergies)
+]]
     ZO_Synergy.OnSynergyAbilityChanged = function (self)
         local synergyName, iconFilename = GetSynergyInfo()
-
         if LUIE.Data.Effects.SynergyNameOverride[synergyName] then
             if LUIE.Data.Effects.SynergyNameOverride[synergyName].icon then
                 iconFilename = LUIE.Data.Effects.SynergyNameOverride[synergyName].icon
@@ -268,24 +327,22 @@ function LUIE.InitializeHooks()
                 synergyName = LUIE.Data.Effects.SynergyNameOverride[synergyName].name
             end
         end
-
         if synergyName and iconFilename then
             if self.lastSynergyName ~= synergyName then
                 PlaySound(SOUNDS.ABILITY_SYNERGY_READY)
-
                 self.action:SetText(zo_strformat(SI_USE_SYNERGY, synergyName))
             end
-
             self.icon:SetTexture(iconFilename)
             SHARED_INFORMATION_AREA:SetHidden(self, false)
         else
             SHARED_INFORMATION_AREA:SetHidden(self, true)
         end
-
         self.lastSynergyName = synergyName
     end
 
-    -- Hook STATS Screen Buffs & Debuffs to hide buffs not needed, update icons, names, durations, and tooltips
+    --[[
+    Hook STATS Screen Buffs & Debuffs to hide buffs not needed, update icons, names, durations, and tooltips
+]]
     local function EffectsRowComparator(left, right)
         local leftIsArtificial, rightIsArtificial = left.isArtificial, right.isArtificial
         if leftIsArtificial ~= rightIsArtificial then

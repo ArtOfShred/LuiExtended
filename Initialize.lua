@@ -1,24 +1,25 @@
 --[[
     LuiExtended
     License: The MIT License (MIT)
---]]
+]]
 
 local zo_strformat = zo_strformat
-
 local eventManager = EVENT_MANAGER
 
--- Load saved settings
+--[[
+    Load saved settings.
+]]
 local function LoadSavedVars()
     -- Addon options
     LUIE.SV = ZO_SavedVars:NewAccountWide(LUIE.SVName, LUIE.SVVer, nil, LUIE.Defaults)
-
     if LUIE.SV.CharacterSpecificSV then
         LUIE.SV = ZO_SavedVars:New(LUIE.SVName, LUIE.SVVer, nil, LUIE.Defaults)
     end
 end
 
-
--- Load additional fonts from LMP
+--[[
+    Load additional fonts from LMP.
+]]
 local function UpdateFonts()
     local LMP = LibMediaProvider
     if LMP == nil then
@@ -31,7 +32,9 @@ local function UpdateFonts()
     end
 end
 
--- Load additional status bar textures from LMP
+--[[
+    Load additional status bar textures from LMP.
+]]
 local function UpdateStatusbarTextures()
     local LMP = LibMediaProvider
     if LMP == nil then
@@ -44,7 +47,9 @@ local function UpdateStatusbarTextures()
     end
 end
 
--- Load additional sounds from LMP
+--[[
+    Load additional sounds from LMP.
+]]
 local function UpdateSounds()
     local LMP = LibMediaProvider
     if LMP == nil then
@@ -57,26 +62,30 @@ local function UpdateSounds()
     end
 end
 
--- Load additional media from LMP
+--[[
+    Load additional media from LMP.
+]]
 local function LoadMedia()
     UpdateFonts()
     UpdateStatusbarTextures()
     UpdateSounds()
 end
 
-
--- Startup Info string
+--[[
+    Startup Info string.
+]]
 local function LoadScreen()
     eventManager:UnregisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED)
-
     -- Set Positions for moved Default UI elements
     LUIE.SetElementPosition()
-
     if not LUIE.SV.StartupInfo then
         LUIE.PrintToChat(zo_strformat("|cFFFFFF<<1>> by|r |c00C000<<2>>|r |cFFFFFFv<<3>>|r", LUIE.name, LUIE.author, LUIE.version), true)
     end
 end
 
+--[[
+    Register events.
+]]
 local function RegisterEvents()
     eventManager:RegisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED, LoadScreen)
     -- Keep track of guilds for the /ginvite commands & Chat Announcement EVENT_GUILD_SELF_LEFT_GUILD handler
@@ -87,7 +96,9 @@ local function RegisterEvents()
     end
 end
 
--- LuiExtended Initialization
+--[[
+    LuiExtended Initialization.
+]]
 local function OnAddonOnLoaded(eventCode, addonName)
     -- Only initialize our own addon
     if LUIE.name ~= addonName then
@@ -95,24 +106,18 @@ local function OnAddonOnLoaded(eventCode, addonName)
     end
     -- Once we know it's ours, lets unregister the event listener
     eventManager:UnregisterForEvent(addonName, eventCode)
-
     -- Load additional media from LMP and other addons
     LoadMedia()
-
     -- Load saved variables
     LoadSavedVars()
-
     -- Initialize Hooks
     LUIE.InitializeHooks()
-
     -- Toggle Alert Frame Visibility if needed
     LUIE.SetupAlertFrameVisibility()
-
     LUIE.PlayerNameRaw = GetRawUnitName("player")
     LUIE.PlayerNameFormatted = zo_strformat("<<C:1>>", GetUnitName("player"))
     LUIE.PlayerDisplayName = zo_strformat("<<C:1>>", GetUnitDisplayName("player"))
     LUIE.PlayerFaction = GetUnitAlliance("player")
-
     -- Initialize this addon modules according to user preferences
     LUIE.ChatAnnouncements.Initialize(LUIE.SV.ChatAnnouncements_Enable)
     LUIE.CombatInfo.Initialize(LUIE.SV.CombatInfo_Enabled)
@@ -121,10 +126,8 @@ local function OnAddonOnLoaded(eventCode, addonName)
     LUIE.UnitFrames.Initialize(LUIE.SV.UnitFrames_Enabled)
     LUIE.SpellCastBuffs.Initialize(LUIE.SV.SpellCastBuff_Enable)
     LUIE.SlashCommands.Initialize(LUIE.SV.SlashCommands_Enable)
-
     -- Load Timetamp Color
     LUIE.UpdateTimeStampColor()
-
     -- Create settings menus for our addon
     LUIE.CreateSettings()
     LUIE.ChatAnnouncements.CreateSettings()
@@ -135,10 +138,8 @@ local function OnAddonOnLoaded(eventCode, addonName)
     LUIE.SpellCastBuffs.CreateSettings()
     LUIE.SlashCommands.CreateSettings()
     LUIE.SlashCommands.MigrateSettings()
-
     -- Display changelog screen
     LUIE.ChangelogScreen()
-
     -- Register global event listeners
     RegisterEvents()
 end
