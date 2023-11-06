@@ -21,7 +21,7 @@ local guildRankDisplayOptionsKeys = { ["Self Only"] = 1, ["All w/ Permissions"] 
 local duelStartOptions = { "Message + Icon", "Message Only", "Icon Only" }
 local duelStartOptionsKeys = { ["Message + Icon"] = 1, ["Message Only"] = 2, ["Icon Only"] = 3 }
 
-ChatAnnouncements.CreateSettings = function()
+ChatAnnouncements.CreateSettings = function ()
     -- Load LibAddonMenu
     local LAM = LibAddonMenu2
     if LAM == nil then

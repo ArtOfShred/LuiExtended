@@ -138,7 +138,7 @@ function CrowdControlTracker:OnOff()
     end
 end
 
-CrowdControlTracker.Initialize = function()
+CrowdControlTracker.Initialize = function ()
     CrowdControlTracker:OnOff()
     if CombatInfo.SV.cct.enabled then
         CrowdControlTracker.currentlyPlaying = nil
@@ -149,7 +149,7 @@ CrowdControlTracker.Initialize = function()
 end
 
 local priority = 0
-local AddAOECategory = function(categoryTable, setting)
+local AddAOECategory = function (categoryTable, setting)
     if setting then
         for k, v in pairs(categoryTable) do
             priority = priority + v
@@ -159,7 +159,7 @@ local AddAOECategory = function(categoryTable, setting)
     end
 end
 
-CrowdControlTracker.UpdateAOEList = function()
+CrowdControlTracker.UpdateAOEList = function ()
     CrowdControlTracker.aoeTypesId = {}
 
     AddAOECategory(CrowdControl.aoePlayerUltimate, CombatInfo.SV.cct.aoePlayerUltimate)
@@ -172,7 +172,7 @@ CrowdControlTracker.UpdateAOEList = function()
     priority = 0
 end
 
-CrowdControlTracker.PlaySoundAoe = function(abilityId)
+CrowdControlTracker.PlaySoundAoe = function (abilityId)
     -- I hope you like inline conditionals, because we've got them for days!
     -- If we have sound enabled for the type of AOE this ability is then fetch it.
     local playSound = ((CrowdControl.aoePlayerUltimate[abilityId] and CombatInfo.SV.cct.aoePlayerUltimateSoundToggle) and CombatInfo.SV.cct.aoePlayerUltimateSound) or ((CrowdControl.aoePlayerSet[abilityId] and CombatInfo.SV.cct.aoePlayerSetSoundToggle) and CombatInfo.SV.cct.aoePlayerSetSound) or ((CrowdControl.aoePlayerNormal[abilityId] and CombatInfo.SV.cct.aoePlayerNormalSoundToggle) and CombatInfo.SV.cct.aoePlayerNormalSound) or ((CrowdControl.aoeTraps[abilityId] and CombatInfo.SV.cct.aoeTrapsSoundToggle) and CombatInfo.SV.cct.aoeTrapsSound) or ((CrowdControl.aoeNPCBoss[abilityId] and CombatInfo.SV.cct.aoeNPCBossSoundToggle) and CombatInfo.SV.cct.aoeNPCBossSound) or ((CrowdControl.aoeNPCElite[abilityId] and CombatInfo.SV.cct.aoeNPCEliteSoundToggle) and CombatInfo.SV.cct.aoeNPCEliteSound) or ((CrowdControl.aoeNPCNormal[abilityId] and CombatInfo.SV.cct.aoeNPCNormalSoundToggle) and CombatInfo.SV.cct.aoeNPCNormalSound)
@@ -196,7 +196,7 @@ function CrowdControlTracker:SavePosition()
     LUIE_CCTracker:SetAnchor(CENTER, GuiRoot, CENTER, CombatInfo.SV.cct.offsetX, CombatInfo.SV.cct.offsetY)
 end
 
-CrowdControlTracker.ResetPosition = function()
+CrowdControlTracker.ResetPosition = function ()
     CombatInfo.SV.cct.offsetX = 0
     CombatInfo.SV.cct.offsetY = 0
     LUIE_CCTracker:ClearAnchors()
@@ -268,7 +268,7 @@ function CrowdControlTracker:AoePriority(abilityId, result)
     end
 end
 
-local ResolveAbilityName = function(abilityId, sourceName)
+local ResolveAbilityName = function (abilityId, sourceName)
     local abilityName = GetAbilityName(abilityId)
 
     if Effects.EffectOverrideByName[abilityId] then
@@ -302,7 +302,7 @@ local ResolveAbilityName = function(abilityId, sourceName)
     return abilityName
 end
 
-local ResolveAbilityIcon = function(abilityId, sourceName)
+local ResolveAbilityIcon = function (abilityId, sourceName)
     local abilityIcon = GetAbilityIcon(abilityId)
 
     if Effects.EffectOverrideByName[abilityId] then
@@ -344,7 +344,7 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
     if CrowdControl.IgnoreList[abilityId] then
         return
     end
-    local StringEnd = function(String, End)
+    local StringEnd = function (String, End)
         return End == "" or zo_strsub(String, -zo_strlen(End)) == End
     end
 
@@ -714,7 +714,7 @@ function CrowdControlTracker:RemoveCC(ccType, currentEndTime)
     local currentTime = GetFrameTimeMilliseconds()
     local secondInterval, thirdInterval, fourthInterval, sixthInterval, seventhInterval, eighthInterval = PriorityTwo.endTime - currentTime, PriorityThree.endTime - currentTime, PriorityFour.endTime - currentTime, PrioritySix.endTime - currentTime, PrioritySeven.endTime - currentTime, PriorityEight.endTime - currentTime
 
-    local removeCCAndCallLater = function(nextCCType, nextCCInterval, nextCCPriority)
+    local removeCCAndCallLater = function (nextCCType, nextCCInterval, nextCCPriority)
         self.currentCC = nextCCType
         zo_callLater(function ()
             self:RemoveCC(nextCCType, nextCCPriority.endTime)
@@ -722,7 +722,7 @@ function CrowdControlTracker:RemoveCC(ccType, currentEndTime)
         self:OnDraw(nextCCPriority.abilityId, nextCCPriority.abilityIcon, nextCCPriority.hitValue, nextCCPriority.result, nextCCPriority.abilityName, nextCCInterval)
     end
 
-    local checkAndRemoveCC = function(ccType, ccPriority, nextCCType, nextCCInterval, nextCCPriority)
+    local checkAndRemoveCC = function (ccType, ccPriority, nextCCType, nextCCInterval, nextCCPriority)
         if ccType == self.currentCC and ccPriority.endTime ~= currentEndTime then
             return
         end

@@ -26,7 +26,7 @@ local Blacklist, BlacklistValues = {}, {}
 local ACTION_RESULT_AREA_EFFECT = 669966
 
 -- Create a list of abilityId's / abilityName's to use for Blacklist
-local GenerateCustomList = function(input)
+local GenerateCustomList = function (input)
     local options, values = {}, {}
     local counter = 0
     for id in pairs(input) do
@@ -55,14 +55,14 @@ local dialogs = {
     },
 }
 
-local loadDialogButtons = function()
+local loadDialogButtons = function ()
     for i = 1, #dialogs do
         local dialog = dialogs[i]
         LUIE.RegisterDialogueButton(dialog.identifier, dialog.title, dialog.text, dialog.callback)
     end
 end
 
-CombatInfo.CreateSettings = function()
+CombatInfo.CreateSettings = function ()
     -- Load LibAddonMenu
     local LAM = LibAddonMenu2
     if LAM == nil then

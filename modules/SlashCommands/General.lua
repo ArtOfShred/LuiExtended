@@ -17,7 +17,7 @@ for id, name in pairs(LUIE.Data.CollectibleTables.Companions) do
 end
 
 -- Slash Command to port to primary home
-SlashCommands.SlashHome = function(option)
+SlashCommands.SlashHome = function (option)
     -- Check option is valid if it exists
     -- Return an error message if no input is entered.
     if option and option ~= "" then
@@ -97,7 +97,7 @@ SlashCommands.SlashHome = function(option)
     end
 end
 
-SlashCommands.SlashSetPrimaryHome = function()
+SlashCommands.SlashSetPrimaryHome = function ()
     local currentHouse = GetCurrentZoneHouseId()
     if currentHouse ~= nil and currentHouse > 0 then
         local houseName = GetPlayerActiveZoneName()
@@ -135,7 +135,7 @@ SlashCommands.SlashSetPrimaryHome = function()
 end
 
 -- Slash Command to initiate a trade dialogue
-SlashCommands.SlashTrade = function(option)
+SlashCommands.SlashTrade = function (option)
     if option == "" or option == nil then
         printToChat(GetString(LUIE_STRING_SLASHCMDS_TRADE_FAILED_NONAME), true)
         if LUIE.ChatAnnouncements.SV.Notify.NotificationTradeAlert then
@@ -150,7 +150,7 @@ end
 local firstRun = true -- Changed by SlashCommands.SlashCampaignQ() when called, used to index available campaigns.
 
 -- Slash Command to queue for a campaign
-SlashCommands.SlashCampaignQ = function(option)
+SlashCommands.SlashCampaignQ = function (option)
     -- Return an error message if no input is entered.
     if option == "" or option == nil then
         printToChat(GetString(LUIE_STRING_SLASHCMDS_CAMPAIGN_FAILED_NONAME), true)
@@ -216,7 +216,7 @@ SlashCommands.SlashCampaignQ = function(option)
 end
 
 -- Slash Command to use collectibles based on their collectible id
-SlashCommands.SlashCollectible = function(id)
+SlashCommands.SlashCollectible = function (id)
     if id == nil or id == "" or id == 1 then
         return
     end
@@ -279,7 +279,7 @@ SlashCommands.SlashCollectible = function(id)
     end
 end
 
-SlashCommands.SlashCompanion = function(option)
+SlashCommands.SlashCompanion = function (option)
     if option == nil or option == "" then
         SlashCommands.SlashCollectible(SlashCommands.SV.SlashCompanionChoice)
     elseif companionKeys[option] ~= nil then
@@ -287,24 +287,24 @@ SlashCommands.SlashCompanion = function(option)
     end
 end
 
-SlashCommands.SlashBanker = function()
+SlashCommands.SlashBanker = function ()
     SlashCommands.SlashCollectible(SlashCommands.SV.SlashBankerChoice)
 end
 
-SlashCommands.SlashMerchant = function()
+SlashCommands.SlashMerchant = function ()
     SlashCommands.SlashCollectible(SlashCommands.SV.SlashMerchantChoice)
 end
 
-SlashCommands.SlashArmory = function()
+SlashCommands.SlashArmory = function ()
     SlashCommands.SlashCollectible(SlashCommands.SV.SlashArmoryChoice)
 end
 
-SlashCommands.SlashDecon = function()
+SlashCommands.SlashDecon = function ()
     SlashCommands.SlashCollectible(SlashCommands.SV.SlashDeconChoice)
 end
 
 -- Slash Command to equip a chosen outfit by number
-SlashCommands.SlashOutfit = function(option)
+SlashCommands.SlashOutfit = function (option)
     if option == "" or option == nil then
         printToChat(GetString(LUIE_STRING_SLASHCMDS_OUTFIT_NOT_VALID))
         if LUIE.SV.TempAlertOutfit then
@@ -348,7 +348,7 @@ SlashCommands.SlashOutfit = function(option)
 end
 
 -- Slash Command to report a player by given name and attach useful information
-SlashCommands.SlashReport = function(player)
+SlashCommands.SlashReport = function (player)
     local location = GetPlayerLocationName()
     local currenttime = GetTimeString()
     local currentdate = GetDateStringFromTimestamp(GetTimeStamp())
@@ -381,7 +381,7 @@ local petIds = {
 }
 
 -- Slash Command to dismiss pets and optionally non-combat pets
-SlashCommands.SlashPet = function()
+SlashCommands.SlashPet = function ()
     for i = 1, GetNumBuffs("player") do
         local _, _, _, buffSlot, _, _, _, _, _, _, abilityId = GetUnitBuffInfo("player", i)
         if petIds[abilityId] then

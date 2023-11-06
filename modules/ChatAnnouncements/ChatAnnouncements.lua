@@ -871,7 +871,7 @@ local ChatEventFormattersDelete = {
     [EVENT_TRIAL_FEATURE_RESTRICTED] = true,
 }
 
-ChatAnnouncements.SlayChatHandlers = function()
+ChatAnnouncements.SlayChatHandlers = function ()
     -- Unregister ZOS handlers for events we need to modify
     for eventCode, _ in pairs(ChatEventFormattersDelete) do
         EVENT_MANAGER:UnregisterForEvent("ChatRouter", eventCode)
@@ -884,7 +884,7 @@ ChatAnnouncements.SlayChatHandlers = function()
     end
 end
 
-ChatAnnouncements.Initialize = function(enabled)
+ChatAnnouncements.Initialize = function (enabled)
     -- Load settings
     local isCharacterSpecific = LUIESV.Default[GetDisplayName()]["$AccountWide"].CharacterSpecificSV
     if isCharacterSpecific then
@@ -963,7 +963,7 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
-ChatAnnouncements.RegisterColorEvents = function()
+ChatAnnouncements.RegisterColorEvents = function ()
     local SV = ChatAnnouncements.SV -- store the SV table in a local variable for better performance
 
     ColorizeColors.CurrencyColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyColor))
@@ -1013,7 +1013,7 @@ ChatAnnouncements.RegisterColorEvents = function()
     ColorizeColors.AntiquityColorize = ZO_ColorDef:New(unpack(SV.Antiquities.AntiquityColor))
 end
 
-ChatAnnouncements.RegisterSocialEvents = function()
+ChatAnnouncements.RegisterSocialEvents = function ()
     eventManager:RegisterForEvent(moduleName, EVENT_FRIEND_ADDED, ChatAnnouncements.FriendAdded)
     eventManager:RegisterForEvent(moduleName, EVENT_FRIEND_REMOVED, ChatAnnouncements.FriendRemoved)
     eventManager:RegisterForEvent(moduleName, EVENT_INCOMING_FRIEND_INVITE_ADDED, ChatAnnouncements.FriendInviteAdded)
@@ -1022,7 +1022,7 @@ ChatAnnouncements.RegisterSocialEvents = function()
     eventManager:RegisterForEvent(moduleName, EVENT_FRIEND_PLAYER_STATUS_CHANGED, ChatAnnouncements.FriendPlayerStatus)
 end
 
-ChatAnnouncements.RegisterQuestEvents = function()
+ChatAnnouncements.RegisterQuestEvents = function ()
     eventManager:RegisterForEvent(moduleName, EVENT_QUEST_SHARED, ChatAnnouncements.QuestShared)
     -- Create a table for quests
     for i = 1, 25 do
@@ -1043,7 +1043,7 @@ ChatAnnouncements.RegisterQuestEvents = function()
     end
 end
 
-ChatAnnouncements.RegisterGuildEvents = function()
+ChatAnnouncements.RegisterGuildEvents = function ()
     -- TODO: Possibly implement conditionals here again in the future
     eventManager:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD, ChatAnnouncements.GuildAddedSelf)
     eventManager:RegisterForEvent(moduleName, EVENT_GUILD_INVITE_ADDED, ChatAnnouncements.GuildInviteAdded)
@@ -1055,21 +1055,21 @@ ChatAnnouncements.RegisterGuildEvents = function()
     eventManager:RegisterForEvent(moduleName, EVENT_GUILD_MOTD_CHANGED, ChatAnnouncements.GuildTextChanged)
 end
 
-ChatAnnouncements.RegisterAchievementsEvent = function()
+ChatAnnouncements.RegisterAchievementsEvent = function ()
     eventManager:UnregisterForEvent(moduleName, EVENT_ACHIEVEMENT_UPDATED)
     if ChatAnnouncements.SV.Achievement.AchievementUpdateCA or ChatAnnouncements.SV.Achievement.AchievementUpdateAlert then
         eventManager:RegisterForEvent(moduleName, EVENT_ACHIEVEMENT_UPDATED, ChatAnnouncements.OnAchievementUpdated)
     end
 end
 
-ChatAnnouncements.RegisterXPEvents = function()
+ChatAnnouncements.RegisterXPEvents = function ()
     eventManager:UnregisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN)
     if ChatAnnouncements.SV.XP.Experience or ChatAnnouncements.SV.XP.ExperienceLevelUp then
         eventManager:RegisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN, ChatAnnouncements.OnExperienceGain)
     end
 end
 
-ChatAnnouncements.RegisterGoldEvents = function()
+ChatAnnouncements.RegisterGoldEvents = function ()
     eventManager:UnregisterForEvent(moduleName, EVENT_CURRENCY_UPDATE)
     eventManager:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED)
     eventManager:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED)
@@ -1090,7 +1090,7 @@ ChatAnnouncements.RegisterGoldEvents = function()
     eventManager:RegisterForEvent(moduleName, EVENT_MAIL_REMOVED, ChatAnnouncements.MailRemoved)
 end
 
-ChatAnnouncements.RegisterMailEvents = function()
+ChatAnnouncements.RegisterMailEvents = function ()
     eventManager:UnregisterForEvent(moduleName, EVENT_MAIL_READABLE)
     eventManager:UnregisterForEvent(moduleName, EVENT_MAIL_TAKE_ATTACHED_ITEM_SUCCESS)
     eventManager:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED)
@@ -1119,7 +1119,7 @@ ChatAnnouncements.RegisterMailEvents = function()
     end
 end
 
-ChatAnnouncements.RegisterLootEvents = function()
+ChatAnnouncements.RegisterLootEvents = function ()
     -- NON CONDITIONAL EVENTS
     -- LOCKPICK
     eventManager:RegisterForEvent(moduleName, EVENT_LOCKPICK_BROKE, ChatAnnouncements.MiscAlertLockBroke)
@@ -1235,7 +1235,7 @@ ChatAnnouncements.RegisterLootEvents = function()
     end]]
 end
 
-ChatAnnouncements.RegisterDisguiseEvents = function()
+ChatAnnouncements.RegisterDisguiseEvents = function ()
     eventManager:UnregisterForEvent(moduleName .. "Player", EVENT_DISGUISE_STATE_CHANGED)
     if ChatAnnouncements.SV.Notify.DisguiseCA or ChatAnnouncements.SV.Notify.DisguiseCSA or ChatAnnouncements.SV.Notify.DisguiseAlert or ChatAnnouncements.SV.Notify.DisguiseWarnCA or ChatAnnouncements.SV.Notify.DisguiseWarnCSA or ChatAnnouncements.SV.Notify.DisguiseWarnAlert then
         eventManager:RegisterForEvent(moduleName .. "Player", EVENT_DISGUISE_STATE_CHANGED, ChatAnnouncements.DisguiseState)
@@ -1260,7 +1260,7 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- Called by most functions that use character or display name to resolve LINK display method.
-ChatAnnouncements.ResolveNameLink = function(characterName, displayName)
+ChatAnnouncements.ResolveNameLink = function (characterName, displayName)
     local nameLink
 
     if ChatAnnouncements.SV.ChatPlayerDisplayOptions == 1 then
@@ -1288,7 +1288,7 @@ ChatAnnouncements.ResolveNameLink = function(characterName, displayName)
 end
 
 -- Called by most functions that use character or display name to resolve NON-LINK display method (mostly used for alerts).
-ChatAnnouncements.ResolveNameNoLink = function(characterName, displayName)
+ChatAnnouncements.ResolveNameNoLink = function (characterName, displayName)
     local nameLink
     if ChatAnnouncements.SV.ChatPlayerDisplayOptions == 1 then
         nameLink = displayName
@@ -1301,23 +1301,23 @@ ChatAnnouncements.ResolveNameNoLink = function(characterName, displayName)
     return nameLink
 end
 
-local ShouldShowSocialErrorInChat = function(error)
+local ShouldShowSocialErrorInChat = function (error)
     return not ShouldShowSocialErrorInAlert(error)
 end
 
 -- TODO: Better function later when we implement more error handlers
 -- EVENT_SOCIAL_ERROR - New handler to replace the chat handler
-ChatAnnouncements.OnErrorSocialChat = function(eventCode, error)
+ChatAnnouncements.OnErrorSocialChat = function (eventCode, error)
     if not IsSocialErrorIgnoreResponse(error) and ShouldShowSocialErrorInChat(error) then
         printToChat(zo_strformat(GetString("SI_SOCIALACTIONRESULT", error)))
     end
 end
 
-ChatAnnouncements.OnDigStart = function()
+ChatAnnouncements.OnDigStart = function ()
     g_weAreInADig = true
 end
 
-ChatAnnouncements.OnDigEnd = function()
+ChatAnnouncements.OnDigEnd = function ()
     zo_callLater(function ()
         g_weAreInADig = false
     end, 1000)
@@ -1365,7 +1365,7 @@ end
 --
 
 -- Copied from Writ Creator for CSA handling purposes - Only called when WritCreater is detected so shouldn't cause issues
-local isQuestWritQuest = function(questId)
+local isQuestWritQuest = function (questId)
     local writs = WritCreater.writSearch()
     for k, v in pairs(writs) do
         if v == questId then
@@ -1375,7 +1375,7 @@ local isQuestWritQuest = function(questId)
 end
 
 -- Copied from Writ Creator for CSA handling purposes - Only called when WritCreater is detected so shouldn't cause issues
-local rejectQuest = function(questIndex)
+local rejectQuest = function (questIndex)
     for itemLink, _ in pairs(WritCreater:GetSettings().skipItemQuests) do
         if not WritCreater:GetSettings().skipItemQuests[itemLink] then
             for i = 1, GetJournalQuestNumConditions(questIndex, QUEST_MAIN_STEP_INDEX) do
@@ -1388,7 +1388,7 @@ local rejectQuest = function(questIndex)
     return false
 end
 
-ChatAnnouncements.GuildRanksSaved = function(eventCode, guildId)
+ChatAnnouncements.GuildRanksSaved = function (eventCode, guildId)
     local guildName = GetGuildName(guildId)
     local guildAlliance = GetGuildAlliance(guildId)
     local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or ColorizeColors.GuildColorize
@@ -1406,7 +1406,7 @@ ChatAnnouncements.GuildRanksSaved = function(eventCode, guildId)
     end
 end
 
-ChatAnnouncements.GuildRankSaved = function(eventCode, guildId, rankIndex)
+ChatAnnouncements.GuildRankSaved = function (eventCode, guildId, rankIndex)
     local rankName
     local rankNameDefault = GetDefaultGuildRankName(guildId, rankIndex)
     local rankNameCustom = GetGuildRankCustomName(guildId, rankIndex)
@@ -1435,7 +1435,7 @@ ChatAnnouncements.GuildRankSaved = function(eventCode, guildId, rankIndex)
     end
 end
 
-ChatAnnouncements.GuildTextChanged = function(eventCode, guildId)
+ChatAnnouncements.GuildTextChanged = function (eventCode, guildId)
     local guildName = GetGuildName(guildId)
     local guildAlliance = GetGuildAlliance(guildId)
     local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or ColorizeColors.GuildColorize
@@ -1457,7 +1457,7 @@ ChatAnnouncements.GuildTextChanged = function(eventCode, guildId)
     end
 end
 
-ChatAnnouncements.GuildRankChanged = function(eventCode, guildId, displayName, newRank)
+ChatAnnouncements.GuildRankChanged = function (eventCode, guildId, displayName, newRank)
     -- Don't show this for the player since EVENT_GUILD_PLAYER_RANK_CHANGED will handle that
     if displayName == LUIE.PlayerDisplayName then
         return
@@ -1511,7 +1511,7 @@ ChatAnnouncements.GuildRankChanged = function(eventCode, guildId, displayName, n
     end
 end
 
-ChatAnnouncements.GuildPlayerRankChanged = function(eventId, guildId, rankIndex, guildRankChangeAction)
+ChatAnnouncements.GuildPlayerRankChanged = function (eventId, guildId, rankIndex, guildRankChangeAction)
     local rankText = GetFinalGuildRankName(guildId, rankIndex)
     local icon = GetFinalGuildRankTextureSmall(guildId, rankIndex)
     local guildName = GetGuildName(guildId)
@@ -1541,7 +1541,7 @@ ChatAnnouncements.GuildPlayerRankChanged = function(eventId, guildId, rankIndex,
     end
 end
 
-ChatAnnouncements.GuildMemberPromoteSuccessful = function(eventId, displayName, newRankIndex, guildId)
+ChatAnnouncements.GuildMemberPromoteSuccessful = function (eventId, displayName, newRankIndex, guildId)
     if newRankIndex > 0 then
         local displayNameLink
         if ChatAnnouncements.SV.BracketOptionCharacter == 1 then
@@ -1570,7 +1570,7 @@ ChatAnnouncements.GuildMemberPromoteSuccessful = function(eventId, displayName, 
     g_disableRankMessage = true
 end
 
-ChatAnnouncements.GuildMemberDemoteSuccessful = function(eventId, displayName, newRankIndex, guildId)
+ChatAnnouncements.GuildMemberDemoteSuccessful = function (eventId, displayName, newRankIndex, guildId)
     if newRankIndex <= GetNumGuildRanks(guildId) then
         local displayNameLink
         if ChatAnnouncements.SV.BracketOptionCharacter == 1 then
@@ -1600,7 +1600,7 @@ ChatAnnouncements.GuildMemberDemoteSuccessful = function(eventId, displayName, n
 end
 
 -- EVENT_GUILD_SELF_JOINED_GUILD
-ChatAnnouncements.GuildAddedSelf = function(eventCode, guildId, guildName)
+ChatAnnouncements.GuildAddedSelf = function (eventCode, guildId, guildName)
     local guilds = GetNumGuilds()
     for i = 1, guilds do
         local id = GetGuildId(i)
@@ -1624,7 +1624,7 @@ ChatAnnouncements.GuildAddedSelf = function(eventCode, guildId, guildName)
 end
 
 -- EVENT_GUILD_INVITE_ADDED
-ChatAnnouncements.GuildInviteAdded = function(eventCode, guildId, guildName, guildAlliance, inviterName)
+ChatAnnouncements.GuildInviteAdded = function (eventCode, guildId, guildName, guildAlliance, inviterName)
     local displayNameLink
     if ChatAnnouncements.SV.BracketOptionCharacter == 1 then
         displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(inviterName, nil, DISPLAY_NAME_LINK_TYPE, inviterName)
@@ -1642,7 +1642,7 @@ ChatAnnouncements.GuildInviteAdded = function(eventCode, guildId, guildName, gui
     end
 end
 
-ChatAnnouncements.FriendAdded = function(eventCode, displayName)
+ChatAnnouncements.FriendAdded = function (eventCode, displayName)
     if ChatAnnouncements.SV.Social.FriendIgnoreCA then
         local displayNameLink
         if ChatAnnouncements.SV.BracketOptionCharacter == 1 then
@@ -1657,7 +1657,7 @@ ChatAnnouncements.FriendAdded = function(eventCode, displayName)
     end
 end
 
-ChatAnnouncements.FriendRemoved = function(eventCode, displayName)
+ChatAnnouncements.FriendRemoved = function (eventCode, displayName)
     if ChatAnnouncements.SV.Social.FriendIgnoreCA then
         local displayNameLink
         if ChatAnnouncements.SV.BracketOptionCharacter == 1 then
@@ -1672,7 +1672,7 @@ ChatAnnouncements.FriendRemoved = function(eventCode, displayName)
     end
 end
 
-ChatAnnouncements.FriendInviteAdded = function(eventCode, displayName)
+ChatAnnouncements.FriendInviteAdded = function (eventCode, displayName)
     if ChatAnnouncements.SV.Social.FriendIgnoreCA then
         local displayNameLink
         if ChatAnnouncements.SV.BracketOptionCharacter == 1 then
@@ -1687,7 +1687,7 @@ ChatAnnouncements.FriendInviteAdded = function(eventCode, displayName)
     end
 end
 
-ChatAnnouncements.IgnoreAdded = function(eventCode, displayName)
+ChatAnnouncements.IgnoreAdded = function (eventCode, displayName)
     if ChatAnnouncements.SV.Social.FriendIgnoreCA then
         local displayNameLink
         if ChatAnnouncements.SV.BracketOptionCharacter == 1 then
@@ -1702,7 +1702,7 @@ ChatAnnouncements.IgnoreAdded = function(eventCode, displayName)
     end
 end
 
-ChatAnnouncements.IgnoreRemoved = function(eventCode, displayName)
+ChatAnnouncements.IgnoreRemoved = function (eventCode, displayName)
     if ChatAnnouncements.SV.Social.FriendIgnoreCA then
         local displayNameLink
         if ChatAnnouncements.SV.BracketOptionCharacter == 1 then
@@ -1717,7 +1717,7 @@ ChatAnnouncements.IgnoreRemoved = function(eventCode, displayName)
     end
 end
 
-ChatAnnouncements.FriendPlayerStatus = function(eventCode, displayName, characterName, oldStatus, newStatus)
+ChatAnnouncements.FriendPlayerStatus = function (eventCode, displayName, characterName, oldStatus, newStatus)
     local wasOnline = oldStatus ~= PLAYER_STATUS_OFFLINE
     local isOnline = newStatus ~= PLAYER_STATUS_OFFLINE
 
@@ -1760,7 +1760,7 @@ ChatAnnouncements.FriendPlayerStatus = function(eventCode, displayName, characte
     end
 end
 
-ChatAnnouncements.QuestShared = function(eventCode, questId)
+ChatAnnouncements.QuestShared = function (eventCode, questId)
     if ChatAnnouncements.SV.Quests.QuestShareCA or ChatAnnouncements.SV.Quests.QuestShareAlert then
         local questName, characterName, timeSinceRequestMs, displayName = GetOfferedQuestShareInfo(questId)
 
@@ -1779,17 +1779,17 @@ ChatAnnouncements.QuestShared = function(eventCode, questId)
 end
 
 -- EVENT_CHATTER_BEGIN
-ChatAnnouncements.OnChatterBegin = function()
+ChatAnnouncements.OnChatterBegin = function ()
     g_talkingToNPC = true
 end
 
 -- EVENT_CHATTER_END
-ChatAnnouncements.OnChatterEnd = function()
+ChatAnnouncements.OnChatterEnd = function ()
     g_talkingToNPC = false
 end
 
 -- EVENT_GROUPING_TOOLS_LFG_JOINED
-ChatAnnouncements.GroupingToolsLFGJoined = function(eventCode, locationName)
+ChatAnnouncements.GroupingToolsLFGJoined = function (eventCode, locationName)
     -- Update the current activity id with the one we are in now.
     g_currentActivityId = GetCurrentLFGActivityId()
     -- Get the name of the current activityId that is generated on initialization.
@@ -1811,7 +1811,7 @@ ChatAnnouncements.GroupingToolsLFGJoined = function(eventCode, locationName)
 end
 
 -- EVENT_ACTIVITY_FINDER_STATUS_UPDATE
-ChatAnnouncements.ActivityStatusUpdate = function(eventCode, status)
+ChatAnnouncements.ActivityStatusUpdate = function (eventCode, status)
     --d("status: " .. status)
     local message
     if g_showActivityStatus then
@@ -1869,7 +1869,7 @@ ChatAnnouncements.ActivityStatusUpdate = function(eventCode, status)
 end
 
 -- EVENT_GROUPING_TOOLS_READY_CHECK_UPDATED
-ChatAnnouncements.ReadyCheckUpdate = function(eventCode)
+ChatAnnouncements.ReadyCheckUpdate = function (eventCode)
     --d("ready check update")
     local activityType, playerRole = GetLFGReadyCheckNotificationInfo()
     local tanksAccepted, tanksPending, healersAccepted, healersPending, dpsAccepted, dpsPending = GetLFGReadyCheckCounts()
@@ -2082,7 +2082,7 @@ local LUIE_AttributeDisplayType = {
 }
 
 -- Called by various functions to display a respec message, type serves as the message type, delay allows the message to sync timing with the chat printer based on source.
-ChatAnnouncements.PointRespecDisplay = function(respecType)
+ChatAnnouncements.PointRespecDisplay = function (respecType)
     local message = LUIE_AttributeDisplayType[respecType] .. "."
     local messageCSA = LUIE_AttributeDisplayType[respecType]
 
@@ -2105,9 +2105,9 @@ ChatAnnouncements.PointRespecDisplay = function(respecType)
     end
 end
 
-ChatAnnouncements.OnLootUpdated = function(eventCode)
+ChatAnnouncements.OnLootUpdated = function (eventCode)
     g_containerRecentlyOpened = true
-    local ResetContainerRecentlyOpened = function()
+    local ResetContainerRecentlyOpened = function ()
         g_containerRecentlyOpened = false
         eventManager:UnregisterForUpdate(moduleName .. "ResetContainer")
     end
@@ -2115,7 +2115,7 @@ ChatAnnouncements.OnLootUpdated = function(eventCode)
     eventManager:RegisterForUpdate(moduleName .. "ResetContainer", 150, ResetContainerRecentlyOpened)
 end
 
-ChatAnnouncements.OnCurrencyUpdate = function(eventCode, currency, currencyLocation, newValue, oldValue, reason)
+ChatAnnouncements.OnCurrencyUpdate = function (eventCode, currency, currencyLocation, newValue, oldValue, reason)
     if currencyLocation ~= CURRENCY_LOCATION_CHARACTER and currencyLocation ~= CURRENCY_LOCATION_ACCOUNT then
         return
     end
@@ -2586,7 +2586,7 @@ end
 
 -- Printer function receives values from currency update or from other functions that display currency updates.
 -- Type here refers to an LUIE_CURRENCY_TYPE
-ChatAnnouncements.CurrencyPrinter = function(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type, carriedItem, carriedItemTotal)
+ChatAnnouncements.CurrencyPrinter = function (formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type, carriedItem, carriedItemTotal)
     local messageP1 -- First part of message - Change
     local messageP2 -- Second part of the message (if enabled) - Total
     local item
@@ -2602,7 +2602,7 @@ ChatAnnouncements.CurrencyPrinter = function(formattedValue, changeColor, change
 
     local formattedMessageP1
     if type == "LUIE_CURRENCY_BAG" or type == "LUIE_CURRENCY_BANK" then
-        local ResolveStorageType = function()
+        local ResolveStorageType = function ()
             local bagType
             local icon
             if type == "LUIE_CURRENCY_BAG" then
@@ -2625,7 +2625,7 @@ ChatAnnouncements.CurrencyPrinter = function(formattedValue, changeColor, change
         ]]
         --
     elseif type == "LUIE_CURRENCY_RIDING_SPEED" or type == "LUIE_CURRENCY_RIDING_CAPACITY" or type == "LUIE_CURRENCY_RIDING_STAMINA" then
-        local ResolveRidingStats = function()
+        local ResolveRidingStats = function ()
             -- if somevar then icon = else no
             local skillType
             local icon
@@ -2682,7 +2682,7 @@ ChatAnnouncements.CurrencyPrinter = function(formattedValue, changeColor, change
     end
 end
 
-ChatAnnouncements.CurrencyGoldThrottlePrinter = function()
+ChatAnnouncements.CurrencyGoldThrottlePrinter = function ()
     if g_currencyGoldThrottleValue > 0 and g_currencyGoldThrottleValue > ChatAnnouncements.SV.Currency.CurrencyGoldFilter then
         local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1))
         local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and ColorizeColors.CurrencyUpColorize:ToHex() or ColorizeColors.CurrencyColorize:ToHex()
@@ -2700,7 +2700,7 @@ ChatAnnouncements.CurrencyGoldThrottlePrinter = function()
     g_currencyGoldThrottleTotal = 0
 end
 
-ChatAnnouncements.CurrencyAPThrottlePrinter = function()
+ChatAnnouncements.CurrencyAPThrottlePrinter = function ()
     if g_currencyAPThrottleValue > 0 and g_currencyAPThrottleValue > ChatAnnouncements.SV.Currency.CurrencyAPFilter then
         local formattedValue = ZO_LocalizeDecimalNumber(g_currencyAPThrottleTotal)
         local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and ColorizeColors.CurrencyUpColorize:ToHex() or ColorizeColors.CurrencyColorize:ToHex()
@@ -2719,7 +2719,7 @@ ChatAnnouncements.CurrencyAPThrottlePrinter = function()
     g_currencyAPThrottleTotal = 0
 end
 
-ChatAnnouncements.CurrencyTVThrottlePrinter = function()
+ChatAnnouncements.CurrencyTVThrottlePrinter = function ()
     if g_currencyTVThrottleValue > 0 and g_currencyTVThrottleValue > ChatAnnouncements.SV.Currency.CurrencyTVFilter then
         local formattedValue = ZO_LocalizeDecimalNumber(g_currencyTVThrottleTotal)
         local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and ColorizeColors.CurrencyUpColorize:ToHex() or ColorizeColors.CurrencyColorize:ToHex()
@@ -2738,14 +2738,14 @@ ChatAnnouncements.CurrencyTVThrottlePrinter = function()
     g_currencyTVThrottleTotal = 0
 end
 
-ChatAnnouncements.MiscAlertLockBroke = function(eventCode, inactivityLengthMs)
+ChatAnnouncements.MiscAlertLockBroke = function (eventCode, inactivityLengthMs)
     g_lockpickBroken = true
     zo_callLater(function ()
         g_lockpickBroken = false
     end, 200)
 end
 
-ChatAnnouncements.MiscAlertLockSuccess = function(eventCode)
+ChatAnnouncements.MiscAlertLockSuccess = function (eventCode)
     if ChatAnnouncements.SV.Notify.NotificationLockpickCA then
         local message = GetString(LUIE_STRING_CA_LOCKPICK_SUCCESS)
         QueuedMessages[QueuedMessagesCounter] = { message = message, type = "NOTIFICATION" }
@@ -2761,7 +2761,7 @@ ChatAnnouncements.MiscAlertLockSuccess = function(eventCode)
     end, 200)
 end
 
-ChatAnnouncements.StorageBag = function(eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
+ChatAnnouncements.StorageBag = function (eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
     if previousCapacity > 0 and previousCapacity ~= currentCapacity and previousUpgrade ~= currentUpgrade then
         if ChatAnnouncements.SV.Notify.StorageBagCA then
             local formattedString = ColorizeColors.StorageBagColorize:Colorize(zo_strformat(SI_INVENTORY_BAG_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
@@ -2777,7 +2777,7 @@ ChatAnnouncements.StorageBag = function(eventCode, previousCapacity, currentCapa
     end
 end
 
-ChatAnnouncements.StorageBank = function(eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
+ChatAnnouncements.StorageBank = function (eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
     if previousCapacity > 0 and previousCapacity ~= currentCapacity and previousUpgrade ~= currentUpgrade then
         if ChatAnnouncements.SV.Notify.StorageBagCA then
             local formattedString = ColorizeColors.StorageBagColorize:Colorize(zo_strformat(SI_INVENTORY_BANK_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
@@ -2793,7 +2793,7 @@ ChatAnnouncements.StorageBank = function(eventCode, previousCapacity, currentCap
     end
 end
 
-ChatAnnouncements.OnBuybackItem = function(eventCode, itemName, quantity, money, itemSound)
+ChatAnnouncements.OnBuybackItem = function (eventCode, itemName, quantity, money, itemSound)
     local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and ColorizeColors.CurrencyDownColorize:ToHex() or ColorizeColors.CurrencyColorize:ToHex()
     if ChatAnnouncements.SV.Inventory.LootVendorCurrency and ChatAnnouncements.SV.Currency.CurrencyContextMergedColor then
         changeColor = ColorizeColors.CurrencyColorize:ToHex()
@@ -2911,7 +2911,7 @@ local isShopCollectible = {
     [GetCollectibleInfo(9162)] = 9162, -- Smoke-Wreathed Griffon Feather (Dagonic Quasigriff)
 }
 
-ChatAnnouncements.OnBuyItem = function(eventCode, itemName, entryType, quantity, money, specialCurrencyType1, specialCurrencyInfo1, specialCurrencyQuantity1, specialCurrencyType2, specialCurrencyInfo2, specialCurrencyQuantity2, itemSoundCategory)
+ChatAnnouncements.OnBuyItem = function (eventCode, itemName, entryType, quantity, money, specialCurrencyType1, specialCurrencyInfo1, specialCurrencyQuantity1, specialCurrencyType2, specialCurrencyInfo2, specialCurrencyQuantity2, itemSoundCategory)
     local itemIcon
     if entryType == STORE_ENTRY_TYPE_COLLECTIBLE then
         if isShopCollectible[itemName] then
@@ -2965,7 +2965,7 @@ ChatAnnouncements.OnBuyItem = function(eventCode, itemName, entryType, quantity,
     g_savedPurchase = {}
 end
 
-ChatAnnouncements.OnSellItem = function(eventCode, itemName, quantity, money)
+ChatAnnouncements.OnSellItem = function (eventCode, itemName, quantity, money)
     local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and ColorizeColors.CurrencyUpColorize:ToHex() or ColorizeColors.CurrencyColorize:ToHex()
     if ChatAnnouncements.SV.Inventory.LootVendorCurrency and ChatAnnouncements.SV.Currency.CurrencyContextMergedColor then
         changeColor = ColorizeColors.CurrencyColorize:ToHex()
@@ -3013,7 +3013,7 @@ ChatAnnouncements.OnSellItem = function(eventCode, itemName, quantity, money)
     g_savedPurchase = {}
 end
 
-ChatAnnouncements.TradingHouseResponseReceived = function(eventCode, TradingHouseResult, result)
+ChatAnnouncements.TradingHouseResponseReceived = function (eventCode, TradingHouseResult, result)
     -- Bail if a pending item isn't being sold
     if not TradingHouseResult == TRADING_HOUSE_RESULT_POST_PENDING then
         return
@@ -3072,7 +3072,7 @@ ChatAnnouncements.TradingHouseResponseReceived = function(eventCode, TradingHous
     g_savedItem = {}
 end
 
-ChatAnnouncements.MailMoneyChanged = function(eventCode)
+ChatAnnouncements.MailMoneyChanged = function (eventCode)
     g_mailCOD = 0
     g_postageAmount = GetQueuedMailPostage()
     local previousMailAmount = g_mailAmount
@@ -3085,13 +3085,13 @@ ChatAnnouncements.MailMoneyChanged = function(eventCode)
     end
 end
 
-ChatAnnouncements.MailCODChanged = function(eventCode)
+ChatAnnouncements.MailCODChanged = function (eventCode)
     g_mailCOD = GetQueuedCOD()
     g_postageAmount = GetQueuedMailPostage()
     g_mailAmount = GetQueuedMoneyAttachment()
 end
 
-ChatAnnouncements.MailRemoved = function(eventCode)
+ChatAnnouncements.MailRemoved = function (eventCode)
     if ChatAnnouncements.SV.Notify.NotificationMailSendCA or ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
         if ChatAnnouncements.SV.Notify.NotificationMailSendCA then
             local message = GetString(LUIE_STRING_CA_MAIL_DELETED_MSG)
@@ -3105,7 +3105,7 @@ ChatAnnouncements.MailRemoved = function(eventCode)
     end
 end
 
-ChatAnnouncements.OnMailReadable = function(eventCode, mailId)
+ChatAnnouncements.OnMailReadable = function (eventCode, mailId)
     local senderDisplayName, senderCharacterName, _, _, _, fromSystem, fromCustomerService, _, _, _, codAmount = GetMailItemInfo(mailId)
 
     -- Use different color if the mail is from System (Hireling Mail, Rewards for the Worthy, etc)
@@ -3129,7 +3129,7 @@ ChatAnnouncements.OnMailReadable = function(eventCode, mailId)
     end
 end
 
-ChatAnnouncements.OnMailTakeAttachedItem = function(eventCode, mailId)
+ChatAnnouncements.OnMailTakeAttachedItem = function (eventCode, mailId)
     if ChatAnnouncements.SV.Notify.NotificationMailSendCA or ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
         local mailString
         if g_mailCODPresent then
@@ -3150,7 +3150,7 @@ ChatAnnouncements.OnMailTakeAttachedItem = function(eventCode, mailId)
     end
 end
 
-ChatAnnouncements.OnMailAttach = function(eventCode, attachmentSlot)
+ChatAnnouncements.OnMailAttach = function (eventCode, attachmentSlot)
     g_postageAmount = GetQueuedMailPostage()
     g_mailAmount = GetQueuedMoneyAttachment()
     local mailIndex = attachmentSlot
@@ -3162,14 +3162,14 @@ ChatAnnouncements.OnMailAttach = function(eventCode, attachmentSlot)
 end
 
 -- Removes items from index if they are removed from the trade
-ChatAnnouncements.OnMailAttachRemove = function(eventCode, attachmentSlot)
+ChatAnnouncements.OnMailAttachRemove = function (eventCode, attachmentSlot)
     g_postageAmount = GetQueuedMailPostage()
     g_mailAmount = GetQueuedMoneyAttachment()
     local mailIndex = attachmentSlot
     g_mailStacksOut[mailIndex] = nil
 end
 
-ChatAnnouncements.OnMailOpenBox = function(eventCode)
+ChatAnnouncements.OnMailOpenBox = function (eventCode)
     eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if ChatAnnouncements.SV.Inventory.LootMail then
         eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, ChatAnnouncements.InventoryUpdate)
@@ -3179,7 +3179,7 @@ ChatAnnouncements.OnMailOpenBox = function(eventCode)
     g_inMail = true
 end
 
-ChatAnnouncements.OnMailCloseBox = function(eventCode)
+ChatAnnouncements.OnMailCloseBox = function (eventCode)
     eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if ChatAnnouncements.SV.Inventory.Loot or ChatAnnouncements.SV.Inventory.LootShowDisguise then
         eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, ChatAnnouncements.InventoryUpdate)
@@ -3262,7 +3262,7 @@ end
 --     g_mailStacksOut = {}
 -- end
 
-ChatAnnouncements.OnMailSuccess = function(eventCode)
+ChatAnnouncements.OnMailSuccess = function (eventCode)
     local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1))
     local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and ColorizeColors.CurrencyDownColorize:ToHex() or ColorizeColors.CurrencyColorize:ToHex()
     local currencyTypeColor = ColorizeColors.CurrencyGoldColorize:ToHex()
@@ -3322,13 +3322,13 @@ ChatAnnouncements.OnMailSuccess = function(eventCode)
 end
 
 -- Helper function to return color (without |c prefix) according to current percentage
-local AchievementPctToColor = function(pct)
+local AchievementPctToColor = function (pct)
     return pct == 1 and "71DE73" or pct < 0.33 and "F27C7C" or pct < 0.66 and "EDE858" or "CCF048"
 end
 
 ---@param achievementId any
 ---@return number|nil
-local GetCategoryInfoFromAchievementIdDetailed = function(achievementId)
+local GetCategoryInfoFromAchievementIdDetailed = function (achievementId)
     -- If the user is selecting from the recent achievements list, there
     --  will not be an open category id, so attempt to get the category
     --  from the achievement.
@@ -3353,7 +3353,7 @@ local GetCategoryInfoFromAchievementIdDetailed = function(achievementId)
     return nil
 end
 
-ChatAnnouncements.OnAchievementUpdated = function(eventCode, id)
+ChatAnnouncements.OnAchievementUpdated = function (eventCode, id)
     local topLevelIndex, categoryIndex, achievementIndex = GetCategoryInfoFromAchievementIdDetailed(id)
     -- Bail out if this achievement comes from unwanted category
     if ChatAnnouncements.SV.Achievement.AchievementCategoryIgnore[topLevelIndex] then
@@ -3468,26 +3468,26 @@ ChatAnnouncements.OnAchievementUpdated = function(eventCode, id)
     end
 end
 
-ChatAnnouncements.GuildBankItemAdded = function(eventCode, slotId, addedByLocalPlayer)
+ChatAnnouncements.GuildBankItemAdded = function (eventCode, slotId, addedByLocalPlayer)
     if addedByLocalPlayer then
         zo_callLater(ChatAnnouncements.LogGuildBankChange, 50)
     end
 end
 
-ChatAnnouncements.GuildBankItemRemoved = function(eventCode, slotId, addedByLocalPlayer)
+ChatAnnouncements.GuildBankItemRemoved = function (eventCode, slotId, addedByLocalPlayer)
     if addedByLocalPlayer then
         zo_callLater(ChatAnnouncements.LogGuildBankChange, 50)
     end
 end
 
-ChatAnnouncements.LogGuildBankChange = function()
+ChatAnnouncements.LogGuildBankChange = function ()
     if g_guildBankCarry ~= nil then
         ChatAnnouncements.ItemPrinter(g_guildBankCarry.icon, g_guildBankCarry.stack, g_guildBankCarry.itemType, g_guildBankCarry.itemId, g_guildBankCarry.itemLink, g_guildBankCarry.receivedBy, g_guildBankCarry.logPrefix, g_guildBankCarry.gainOrLoss, false)
     end
     g_guildBankCarry = nil
 end
 
-ChatAnnouncements.IndexInventory = function()
+ChatAnnouncements.IndexInventory = function ()
     --d("Debug - Inventory Indexed!")
     local bagsize = GetBagSize(BAG_BACKPACK)
 
@@ -3502,7 +3502,7 @@ ChatAnnouncements.IndexInventory = function()
     end
 end
 
-ChatAnnouncements.IndexEquipped = function()
+ChatAnnouncements.IndexEquipped = function ()
     --d("Debug - Equipped Items Indexed!")
     local bagsize = GetBagSize(BAG_WORN)
 
@@ -3517,7 +3517,7 @@ ChatAnnouncements.IndexEquipped = function()
     end
 end
 
-ChatAnnouncements.IndexBank = function()
+ChatAnnouncements.IndexBank = function ()
     --("Debug - Bank Indexed!")
     local bagsizebank = GetBagSize(BAG_BANK)
     local bagsizesubbank = GetBagSize(BAG_SUBSCRIBER_BANK)
@@ -3558,7 +3558,7 @@ local HouseBags = {
     [10] = BAG_HOUSE_BANK_TEN,
 }
 
-ChatAnnouncements.IndexHouseBags = function()
+ChatAnnouncements.IndexHouseBags = function ()
     for bagIndex = 1, 10 do
         local bag = HouseBags[bagIndex]
         local bagsize = GetBagSize(bag)
@@ -3577,7 +3577,7 @@ ChatAnnouncements.IndexHouseBags = function()
     end
 end
 
-ChatAnnouncements.CraftingOpen = function(eventCode, craftSkill, sameStation)
+ChatAnnouncements.CraftingOpen = function (eventCode, craftSkill, sameStation)
     eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if ChatAnnouncements.SV.Inventory.LootCraft then
         eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, ChatAnnouncements.InventoryUpdateCraft)
@@ -3589,7 +3589,7 @@ ChatAnnouncements.CraftingOpen = function(eventCode, craftSkill, sameStation)
     end
 end
 
-ChatAnnouncements.CraftingClose = function(eventCode, craftSkill)
+ChatAnnouncements.CraftingClose = function (eventCode, craftSkill)
     eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if ChatAnnouncements.SV.Inventory.Loot or ChatAnnouncements.SV.Inventory.LootShowDisguise then
         eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, ChatAnnouncements.InventoryUpdate)
@@ -3601,7 +3601,7 @@ ChatAnnouncements.CraftingClose = function(eventCode, craftSkill)
     g_banksubStacks = {}
 end
 
-ChatAnnouncements.BankOpen = function(eventCode, bankBag)
+ChatAnnouncements.BankOpen = function (eventCode, bankBag)
     eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if ChatAnnouncements.SV.Inventory.LootBank then
         eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, ChatAnnouncements.InventoryUpdateBank)
@@ -3616,7 +3616,7 @@ ChatAnnouncements.BankOpen = function(eventCode, bankBag)
     g_bankBag = bankBag > 6 and 2 or 1
 end
 
-ChatAnnouncements.BankClose = function(eventCode)
+ChatAnnouncements.BankClose = function (eventCode)
     eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if ChatAnnouncements.SV.Inventory.Loot or ChatAnnouncements.SV.Inventory.LootShowDisguise then
         eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, ChatAnnouncements.InventoryUpdate)
@@ -3629,7 +3629,7 @@ ChatAnnouncements.BankClose = function(eventCode)
     g_houseBags = {}
 end
 
-ChatAnnouncements.GuildBankOpen = function(eventCode)
+ChatAnnouncements.GuildBankOpen = function (eventCode)
     eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if ChatAnnouncements.SV.Inventory.LootBank then
         eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, ChatAnnouncements.InventoryUpdateGuildBank)
@@ -3638,7 +3638,7 @@ ChatAnnouncements.GuildBankOpen = function(eventCode)
     end
 end
 
-ChatAnnouncements.GuildBankClose = function(eventCode)
+ChatAnnouncements.GuildBankClose = function (eventCode)
     eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if ChatAnnouncements.SV.Inventory.Loot or ChatAnnouncements.SV.Inventory.LootShowDisguise then
         eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, ChatAnnouncements.InventoryUpdate)
@@ -3648,7 +3648,7 @@ ChatAnnouncements.GuildBankClose = function(eventCode)
     end
 end
 
-ChatAnnouncements.FenceOpen = function(eventCode, allowSell, allowLaunder)
+ChatAnnouncements.FenceOpen = function (eventCode, allowSell, allowLaunder)
     g_weAreInAFence = true
     eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if ChatAnnouncements.SV.Inventory.LootVendor then
@@ -3658,11 +3658,11 @@ ChatAnnouncements.FenceOpen = function(eventCode, allowSell, allowLaunder)
     end
 end
 
-ChatAnnouncements.StoreOpen = function(eventCode)
+ChatAnnouncements.StoreOpen = function (eventCode)
     g_weAreInAStore = true
 end
 
-ChatAnnouncements.StoreClose = function(eventCode)
+ChatAnnouncements.StoreClose = function (eventCode)
     eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if ChatAnnouncements.SV.Inventory.Loot or ChatAnnouncements.SV.Inventory.LootShowDisguise then
         eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, ChatAnnouncements.InventoryUpdate)
@@ -3676,12 +3676,12 @@ ChatAnnouncements.StoreClose = function(eventCode)
     end, 1000)
 end
 
-ChatAnnouncements.GuildStoreOpen = function(eventCode)
+ChatAnnouncements.GuildStoreOpen = function (eventCode)
     g_weAreInAStore = true
     g_weAreInAGuildStore = true
 end
 
-ChatAnnouncements.GuildStoreClose = function(eventCode)
+ChatAnnouncements.GuildStoreClose = function (eventCode)
     eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if ChatAnnouncements.SV.Inventory.Loot or ChatAnnouncements.SV.Inventory.LootShowDisguise then
         eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, ChatAnnouncements.InventoryUpdate)
@@ -3695,7 +3695,7 @@ ChatAnnouncements.GuildStoreClose = function(eventCode)
     end, 1000)
 end
 
-ChatAnnouncements.FenceSuccess = function(eventCode, result)
+ChatAnnouncements.FenceSuccess = function (eventCode, result)
     if result == ITEM_LAUNDER_RESULT_SUCCESS then
         if ChatAnnouncements.SV.Inventory.LootVendorCurrency then
             if g_savedPurchase.formattedValue ~= nil and g_savedPurchase.formattedValue ~= "" then
@@ -3712,12 +3712,12 @@ ChatAnnouncements.FenceSuccess = function(eventCode, result)
 end
 
 -- Only active if destroyed items is enabled, flags the next item that is removed from inventory as destroyed.
-ChatAnnouncements.DestroyItem = function(eventCode, itemSoundCategory)
+ChatAnnouncements.DestroyItem = function (eventCode, itemSoundCategory)
     g_itemWasDestroyed = true
 end
 
-ChatAnnouncements.OnPackSiege = function()
-    local ResetPackSiege = function()
+ChatAnnouncements.OnPackSiege = function ()
+    local ResetPackSiege = function ()
         g_packSiege = false
         eventManager:UnregisterForUpdate(moduleName .. "ResetPackSiege")
     end
@@ -3727,7 +3727,7 @@ ChatAnnouncements.OnPackSiege = function()
 end
 
 -- Helper function for Craft Bag
-ChatAnnouncements.GetItemLinkFromItemId = function(itemId)
+ChatAnnouncements.GetItemLinkFromItemId = function (itemId)
     local name = GetItemLinkName(ZO_LinkHandler_CreateLink("Test Trash", nil, ITEM_LINK_TYPE, itemId, 1, 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 10000, 0))
     if ChatAnnouncements.SV.BracketOptionItem == 1 then
         return ZO_LinkHandler_CreateLinkWithoutBrackets(zo_strformat("<<t:1>>", name), nil, ITEM_LINK_TYPE, itemId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -3738,10 +3738,10 @@ end
 
 local questItemIndex = {}
 
-ChatAnnouncements.AddQuestItemsToIndex = function()
+ChatAnnouncements.AddQuestItemsToIndex = function ()
     questItemIndex = {}
 
-    local AddQuests = function(questIndex)
+    local AddQuests = function (questIndex)
         local inventory = PLAYER_INVENTORY.inventories[INVENTORY_QUEST_ITEM]
         local itemTable = inventory.slots[questIndex]
         if itemTable then
@@ -3760,7 +3760,7 @@ ChatAnnouncements.AddQuestItemsToIndex = function()
     end
 end
 
-ChatAnnouncements.ResolveQuestItemChange = function()
+ChatAnnouncements.ResolveQuestItemChange = function ()
     for itemId, _ in pairs(questItemIndex) do
         local countChange = nil
         local newValue = questItemIndex[itemId].stack + questItemIndex[itemId].counter
@@ -3961,7 +3961,7 @@ ChatAnnouncements.ResolveQuestItemChange = function()
     eventManager:UnregisterForUpdate(moduleName .. "QuestItemUpdater")
 end
 
-local DisplayQuestItem = function(itemId, stackCount, icon, reset)
+local DisplayQuestItem = function (itemId, stackCount, icon, reset)
     if not questItemIndex[itemId] then
         questItemIndex[itemId] = { stack = 0, counter = 0, icon = icon }
         --d("New item created with 0 stack")
@@ -3977,12 +3977,12 @@ local DisplayQuestItem = function(itemId, stackCount, icon, reset)
     eventManager:RegisterForUpdate(moduleName .. "QuestItemUpdater", 25, ChatAnnouncements.ResolveQuestItemChange)
 end
 
-ChatAnnouncements.OnLootReceived = function(eventCode, receivedBy, itemLink, quantity, itemSound, lootType, lootedBySelf, isPickpocketLoot, questItemIcon, itemId, isStolen)
+ChatAnnouncements.OnLootReceived = function (eventCode, receivedBy, itemLink, quantity, itemSound, lootType, lootedBySelf, isPickpocketLoot, questItemIcon, itemId, isStolen)
     -- If the player loots an item
     if not isPickpocketLoot and lootedBySelf then
         g_isLooted = true
 
-        local ResetIsLooted = function()
+        local ResetIsLooted = function ()
             g_isLooted = false
             eventManager:UnregisterForUpdate(moduleName .. "ResetLooted")
         end
@@ -3994,7 +3994,7 @@ ChatAnnouncements.OnLootReceived = function(eventCode, receivedBy, itemLink, qua
     if isPickpocketLoot and lootedBySelf then
         g_isPickpocketed = true
 
-        local ResetIsPickpocketed = function()
+        local ResetIsPickpocketed = function ()
             g_isPickpocketed = false
             eventManager:UnregisterForUpdate(moduleName .. "ResetPickpocket")
         end
@@ -4044,8 +4044,8 @@ ChatAnnouncements.OnLootReceived = function(eventCode, receivedBy, itemLink, qua
     end
 end
 
-ChatAnnouncements.OnInventoryItemUsed = function(eventCode, itemSoundCategory)
-    local ResetCombinedRecipe = function()
+ChatAnnouncements.OnInventoryItemUsed = function (eventCode, itemSoundCategory)
+    local ResetCombinedRecipe = function ()
         g_combinedRecipe = false
         eventManager:UnregisterForUpdate(moduleName .. "ResetCombinedRecipe")
     end
@@ -4059,7 +4059,7 @@ ChatAnnouncements.OnInventoryItemUsed = function(eventCode, itemSoundCategory)
 end
 
 -- If filter is true, we run the item through this function to determine if we should display it. Filter only gets set to true for group loot and relevant loot functions. Mail, trade, stores, etc don't apply the filter.
-ChatAnnouncements.ItemFilter = function(itemType, itemId, itemLink, groupLoot)
+ChatAnnouncements.ItemFilter = function (itemType, itemId, itemLink, groupLoot)
     if ChatAnnouncements.SV.Inventory.LootBlacklist and g_blacklistIDs[itemId] or (ChatAnnouncements.SV.Inventory.LootLogOverride and LootLog) then
         return false
     end
@@ -4083,7 +4083,7 @@ ChatAnnouncements.ItemFilter = function(itemType, itemId, itemLink, groupLoot)
     end
 end
 
-local CheckLibLazyCraftingActive = function()
+local CheckLibLazyCraftingActive = function ()
     -- If an addon is installed that uses LibLazyCrafting, we need to replace the messages with used and crafted.
     if LibLazyCrafting then
         if LibLazyCrafting:IsPerformingCraftProcess() then
@@ -4094,7 +4094,7 @@ local CheckLibLazyCraftingActive = function()
     end
 end
 
-ChatAnnouncements.ItemPrinter = function(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter, groupLoot, alwaysFirst, delay)
+ChatAnnouncements.ItemPrinter = function (icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter, groupLoot, alwaysFirst, delay)
     if filter then
         -- If filter returns false then bail out right now, we're not displaying this item.
         if not ChatAnnouncements.ItemFilter(itemType, itemId, itemLink, false) then
@@ -4254,7 +4254,7 @@ ChatAnnouncements.ItemPrinter = function(icon, stack, itemType, itemId, itemLink
 end
 
 -- Simple function combines our strings or modifies the prefix if RECEIEVED instead of looted
-ChatAnnouncements.ResolveItemMessage = function(message, formattedRecipient, color, logPrefix, totalString, groupLoot)
+ChatAnnouncements.ResolveItemMessage = function (message, formattedRecipient, color, logPrefix, totalString, groupLoot)
     -- Conditions for looted/quest item rewards to adjust string prefix.
     if logPrefix == "" then
         if g_isLooted and not g_itemReceivedIsQuestReward and not g_isPickpocketed and not g_isStolen then
@@ -4316,7 +4316,7 @@ ChatAnnouncements.ResolveItemMessage = function(message, formattedRecipient, col
 end
 
 -- Simple posthook into ZOS crafting mode functions, based off MultiCraft, thanks Ayantir!
-ChatAnnouncements.CraftModeOverrides = function()
+ChatAnnouncements.CraftModeOverrides = function ()
     -- Get SMITHING mode
     g_smithing.GetMode = function ()
         return SMITHING.mode
@@ -4367,7 +4367,7 @@ end
 local delayedItemPool = {}    -- Store items we are counting up when the player loots multiple bodies at once to print combined counts for any duplicate items
 local delayedItemPoolOut = {} -- Stacks for outbound delayed item pool
 
-ChatAnnouncements.ItemCounterDelay = function(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter, groupLoot, alwaysFirst, delay)
+ChatAnnouncements.ItemCounterDelay = function (icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter, groupLoot, alwaysFirst, delay)
     if delayedItemPool[itemId] then
         stack = delayedItemPool[itemId].stack + stack -- Add stack count first, only if item already exists.
     end
@@ -4390,7 +4390,7 @@ ChatAnnouncements.ItemCounterDelay = function(icon, stack, itemType, itemId, ite
     eventManager:RegisterForUpdate(moduleName .. "SendDelayedItems", 25, ChatAnnouncements.SendDelayedItems)
 end
 
-ChatAnnouncements.SendDelayedItems = function()
+ChatAnnouncements.SendDelayedItems = function ()
     for id, data in pairs(delayedItemPool) do
         if id then
             ChatAnnouncements.ItemPrinter(data.icon, data.stack, data.itemType, id, data.itemLink, data.receivedBy, data.logPrefix, data.gainOrLoss, data.filter, data.groupLoot, data.alwaysFirst, data.delay)
@@ -4399,7 +4399,7 @@ ChatAnnouncements.SendDelayedItems = function()
     delayedItemPool = {}
 end
 
-ChatAnnouncements.ItemCounterDelayOut = function(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter, groupLoot, alwaysFirst, delay)
+ChatAnnouncements.ItemCounterDelayOut = function (icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter, groupLoot, alwaysFirst, delay)
     if delayedItemPoolOut[itemId] then
         stack = delayedItemPoolOut[itemId].stack + stack -- Add stack count first, only if item already exists.
     end
@@ -4422,7 +4422,7 @@ ChatAnnouncements.ItemCounterDelayOut = function(icon, stack, itemType, itemId, 
     eventManager:RegisterForUpdate(moduleName .. "SendDelayedItemsOut", 25, ChatAnnouncements.SendDelayedItemsOut)
 end
 
-ChatAnnouncements.SendDelayedItemsOut = function()
+ChatAnnouncements.SendDelayedItemsOut = function ()
     for id, data in pairs(delayedItemPoolOut) do
         if id then
             ChatAnnouncements.ItemPrinter(data.icon, data.stack, data.itemType, id, data.itemLink, data.receivedBy, data.logPrefix, data.gainOrLoss, data.filter, data.groupLoot, data.alwaysFirst, data.delay)
@@ -4440,7 +4440,7 @@ local crownRidingIds = {
     [135117] = true, -- Crown Lesson: Riding Capacity
 }
 
-ChatAnnouncements.InventoryUpdate = function(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
+ChatAnnouncements.InventoryUpdate = function (eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
     -- End right now if this is any other reason (durability loss, etc)
     if inventoryUpdateReason ~= INVENTORY_UPDATE_REASON_DEFAULT then
         return
@@ -4448,7 +4448,7 @@ ChatAnnouncements.InventoryUpdate = function(eventCode, bagId, slotId, isNewItem
 
     if IsItemStolen(bagId, slotId) then
         g_isStolen = true
-        local ResetIsStolen = function()
+        local ResetIsStolen = function ()
             g_isStolen = false
             eventManager:UnregisterForUpdate(moduleName .. "ResetStolen")
         end
@@ -4823,7 +4823,7 @@ ChatAnnouncements.InventoryUpdate = function(eventCode, bagId, slotId, isNewItem
 end
 
 -- TODO: DELETE - This is a dummy function for testing chat messages being cut off.
-ChatAnnouncements.Dummy = function()
+ChatAnnouncements.Dummy = function ()
     -- Items Removed
     LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 808, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, -200)
     LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 4482, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, -500)
@@ -4854,13 +4854,13 @@ ChatAnnouncements.Dummy = function()
     --LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 46142, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 66)
 end
 
-ChatAnnouncements.InventoryUpdateCraft = function(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
+ChatAnnouncements.InventoryUpdateCraft = function (eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
     -- End right now if this is any other reason (durability loss, etc)
     if inventoryUpdateReason ~= INVENTORY_UPDATE_REASON_DEFAULT then
         return
     end
 
-    local ResolveCraftingUsed = function(itemType)
+    local ResolveCraftingUsed = function (itemType)
         local craftingType = GetCraftingInteractionType()
         local smithingMode = g_smithing.GetMode()
 
@@ -5256,7 +5256,7 @@ ChatAnnouncements.InventoryUpdateCraft = function(eventCode, bagId, slotId, isNe
     g_lockpickBroken = false
 end
 
-ChatAnnouncements.InventoryUpdateBank = function(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
+ChatAnnouncements.InventoryUpdateBank = function (eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
     -- End right now if this is any other reason (durability loss, etc)
     if inventoryUpdateReason ~= INVENTORY_UPDATE_REASON_DEFAULT then
         return
@@ -5618,7 +5618,7 @@ ChatAnnouncements.InventoryUpdateBank = function(eventCode, bagId, slotId, isNew
     g_lockpickBroken = false
 end
 
-ChatAnnouncements.InventoryUpdateGuildBank = function(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
+ChatAnnouncements.InventoryUpdateGuildBank = function (eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
     local receivedBy = ""
     ---------------------------------- INVENTORY ----------------------------------
     if bagId == BAG_BACKPACK then
@@ -5746,7 +5746,7 @@ ChatAnnouncements.InventoryUpdateGuildBank = function(eventCode, bagId, slotId, 
     g_lockpickBroken = false
 end
 
-ChatAnnouncements.InventoryUpdateFence = function(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
+ChatAnnouncements.InventoryUpdateFence = function (eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
     -- End right now if this is any other reason (durability loss, etc)
     if inventoryUpdateReason ~= INVENTORY_UPDATE_REASON_DEFAULT then
         return
@@ -5962,16 +5962,16 @@ ChatAnnouncements.InventoryUpdateFence = function(eventCode, bagId, slotId, isNe
 end
 
 -- Makes it so bank withdraw/deposit events only occur when we can confirm the item is crossing over.
-ChatAnnouncements.BankFixer = function()
+ChatAnnouncements.BankFixer = function ()
     InventoryOn = false
     BankOn = false
 end
 
-ChatAnnouncements.JusticeStealRemove = function(eventCode)
+ChatAnnouncements.JusticeStealRemove = function (eventCode)
     zo_callLater(ChatAnnouncements.JusticeRemovePrint, 50)
 end
 
-ChatAnnouncements.JusticeDisplayConfiscate = function()
+ChatAnnouncements.JusticeDisplayConfiscate = function ()
     if ChatAnnouncements.SV.Notify.NotificationConfiscateCA or ChatAnnouncements.SV.Notify.NotificationConfiscateAlert then
         local ConfiscateMessage
         if g_itemsConfiscated then
@@ -5991,7 +5991,7 @@ ChatAnnouncements.JusticeDisplayConfiscate = function()
     g_itemsConfiscated = false
 end
 
-ChatAnnouncements.JusticeRemovePrint = function()
+ChatAnnouncements.JusticeRemovePrint = function ()
     g_itemsConfiscated = true
 
     -- PART 1 -- INVENTORY
@@ -6085,7 +6085,7 @@ ChatAnnouncements.JusticeRemovePrint = function()
     ChatAnnouncements.IndexInventory() -- Reindex the inventory with the correct values!
 end
 
-ChatAnnouncements.DisguiseState = function(eventCode, unitTag, disguiseState)
+ChatAnnouncements.DisguiseState = function (eventCode, unitTag, disguiseState)
     if disguiseState == DISGUISE_STATE_DANGER then
         if ChatAnnouncements.SV.Notify.DisguiseWarnCA then
             local message = GetString(LUIE_STRING_CA_JUSTICE_DISGUISE_STATE_DANGER)
@@ -6178,7 +6178,7 @@ ChatAnnouncements.DisguiseState = function(eventCode, unitTag, disguiseState)
     end
 end
 
-ChatAnnouncements.OnPlayerActivated = function(eventCode)
+ChatAnnouncements.OnPlayerActivated = function (eventCode)
     -- Get current trades if UI is reloaded
     local characterName, _, displayName = GetTradeInviteInfo()
 
@@ -6296,7 +6296,7 @@ end
 -- LINK_HANDLER.LINK_MOUSE_UP_EVENT
 -- LINK_HANDLER.LINK_CLICKED_EVENT
 -- Custom Link Handlers to deal with when a book link in chat is clicked, this will open the book rather than the default link that only shows whether a lore entry has been read or not.
-LUIE.HandleClickEvent = function(rawLink, mouseButton, linkText, linkStyle, linkType, categoryIndex, collectionIndex, bookIndex)
+LUIE.HandleClickEvent = function (rawLink, mouseButton, linkText, linkStyle, linkType, categoryIndex, collectionIndex, bookIndex)
     if linkType == "LINK_TYPE_LUIBOOK" then
         -- Read the book
         ZO_LoreLibrary_ReadBook(categoryIndex, collectionIndex, bookIndex)
@@ -6320,7 +6320,7 @@ LUIE.HandleClickEvent = function(rawLink, mouseButton, linkText, linkStyle, link
 end
 
 -- Used by functions calling bar updates
-local ValidateProgressBarParams = function(barParams)
+local ValidateProgressBarParams = function (barParams)
     local barType = barParams:GetParams()
     if not (barType and PLAYER_PROGRESS_BAR:GetBarTypeInfoByBarType(barType)) then
         local INVALID_VALUE = -1
@@ -6329,7 +6329,7 @@ local ValidateProgressBarParams = function(barParams)
 end
 
 -- Used by functions calling bar updates
-local GetRelevantBarParams = function(level, previousExperience, currentExperience, championPoints, triggeringEvent)
+local GetRelevantBarParams = function (level, previousExperience, currentExperience, championPoints, triggeringEvent)
     local championXpToNextPoint
     if CanUnitGainChampionPoints("player") then
         championXpToNextPoint = GetNumChampionXPInChampionPoint(championPoints)
@@ -6349,7 +6349,7 @@ local GetRelevantBarParams = function(level, previousExperience, currentExperien
 end
 
 -- Used by functions calling bar updates
-local GetCurrentChampionPointsBarParams = function(triggeringEvent)
+local GetCurrentChampionPointsBarParams = function (triggeringEvent)
     local championPoints = GetPlayerChampionPointsEarned()
     local currentChampionXP = GetPlayerChampionXP()
     local barParams = CENTER_SCREEN_ANNOUNCE:CreateBarParams(PPB_CP, championPoints, currentChampionXP, currentChampionXP)
@@ -6390,11 +6390,11 @@ local GUILD_SKILL_ICONS = {
 }
 
 -- A:ERT & EVENT HANDLER PREHOOK FUNCTIONS
-ChatAnnouncements.HookFunction = function()
+ChatAnnouncements.HookFunction = function ()
     local alertHandlers = ZO_AlertText_GetHandlers()
 
     -- EVENT_STYLE_LEARNED (Alert Handler)
-    local StyleLearnedHook = function(itemStyleId, chapterIndex, isDefaultRacialStyle)
+    local StyleLearnedHook = function (itemStyleId, chapterIndex, isDefaultRacialStyle)
         local flag
         if ChatAnnouncements.SV.Inventory.LootShowMotif and ChatAnnouncements.SV.Inventory.LootRecipeHideAlert then
             flag = true
@@ -6417,7 +6417,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_RECIPE_LEARNED (Alert Handler)
-    local RecipeLearnedHook = function(recipeListIndex, recipeIndex)
+    local RecipeLearnedHook = function (recipeListIndex, recipeIndex)
         local flag
         if ChatAnnouncements.SV.Inventory.LootShowRecipe and ChatAnnouncements.SV.Inventory.LootRecipeHideAlert then
             flag = true
@@ -6434,7 +6434,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_MULTIPLE_RECIPES_LEARNED (Alert Handler)
-    local MultipleRecipeLearnedHook = function(numLearned)
+    local MultipleRecipeLearnedHook = function (numLearned)
         local flag
         if ChatAnnouncements.SV.Inventory.LootShowRecipe and ChatAnnouncements.SV.Inventory.LootRecipeHideAlert then
             flag = true
@@ -6451,13 +6451,13 @@ ChatAnnouncements.HookFunction = function()
 
     -- EVENT_LORE_BOOK_ALREADY_KNOWN (Alert Handler)
     -- Note: We just hide this alert because it is pointless pretty much (only ever seen in trigger from server lag)
-    local AlreadyKnowBookHook = function(bookTitle)
+    local AlreadyKnowBookHook = function (bookTitle)
         return true
     end
 
     -- EVENT_RIDING_SKILL_IMPROVEMENT (Alert Handler)
     -- Note: We allow the CSA handler to handle any changes made from skill books in order to properly throttle all messages, and use the alert handler for stables upgrades.
-    local RidingSkillImprovementAlertHook = function(ridingSkill, previous, current, source)
+    local RidingSkillImprovementAlertHook = function (ridingSkill, previous, current, source)
         if source == RIDING_TRAIN_SOURCE_STABLES then
             -- If we purchased from the stables, display a currency announcement if relevant
             if ChatAnnouncements.SV.Currency.CurrencyGoldChange then
@@ -6504,7 +6504,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_LORE_BOOK_LEARNED (Alert Handler)
-    local LoreBookLearnedAlertHook = function(categoryIndex, collectionIndex, bookIndex, guildReputationIndex, isMaxRank)
+    local LoreBookLearnedAlertHook = function (categoryIndex, collectionIndex, bookIndex, guildReputationIndex, isMaxRank)
         if guildReputationIndex == 0 or isMaxRank then
             -- We only want to fire this event if a player is not part of the guild or if they've reached max level in the guild.
             -- Otherwise, the _SKILL_EXPERIENCE version of this event will send a center screen message instead.
@@ -6595,7 +6595,7 @@ ChatAnnouncements.HookFunction = function()
     -----------------------------
 
     -- EVENT_DUEL_INVITE_RECEIVED (Alert Handler)
-    local DuelInviteReceivedAlert = function(inviterCharacterName, inviterDisplayName)
+    local DuelInviteReceivedAlert = function (inviterCharacterName, inviterDisplayName)
         -- Display CA
         if ChatAnnouncements.SV.Social.DuelCA then
             local finalName = ChatAnnouncements.ResolveNameLink(inviterCharacterName, inviterDisplayName)
@@ -6613,7 +6613,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_DUEL_INVITE_ACCEPTED (Alert Handler)
-    local DuelInviteAcceptedAlert = function()
+    local DuelInviteAcceptedAlert = function ()
         -- Display CA
         if ChatAnnouncements.SV.Social.DuelCA then
             printToChat(GetString(LUIE_STRING_CA_DUEL_INVITE_ACCEPTED), true)
@@ -6628,7 +6628,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_DUEL_INVITE_SENT (Alert Handler)
-    local DuelInviteSentAlert = function(inviteeCharacterName, inviteeDisplayName)
+    local DuelInviteSentAlert = function (inviteeCharacterName, inviteeDisplayName)
         -- Display CA
         if ChatAnnouncements.SV.Social.DuelCA then
             local finalName = ChatAnnouncements.ResolveNameLink(inviteeCharacterName, inviteeDisplayName)
@@ -6671,7 +6671,7 @@ ChatAnnouncements.HookFunction = function()
     SafeAddString(SI_SENDMAILRESULT3, GetString(LUIE_STRING_CA_MAIL_SENDMAILRESULT3), 5)
 
     -- EVENT_DUEL_INVITE_FAILED (Alert Handler)
-    local DuelInviteFailedAlert = function(reason, targetCharacterName, targetDisplayName)
+    local DuelInviteFailedAlert = function (reason, targetCharacterName, targetDisplayName)
         local userFacingName = ZO_GetPrimaryPlayerNameWithSecondary(targetDisplayName, targetCharacterName)
         -- Display CA
         if ChatAnnouncements.SV.Social.DuelCA then
@@ -6699,7 +6699,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_DUEL_INVITE_DECLINED (Alert Handler)
-    local DuelInviteDeclinedAlert = function()
+    local DuelInviteDeclinedAlert = function ()
         -- Display CA
         if ChatAnnouncements.SV.Social.DuelCA then
             printToChat(GetString(LUIE_STRING_CA_DUEL_INVITE_DECLINED), true)
@@ -6714,7 +6714,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_DUEL_INVITE_CANCELED (Alert Handler)
-    local DuelInviteCanceledAlert = function()
+    local DuelInviteCanceledAlert = function ()
         -- Display CA
         if ChatAnnouncements.SV.Social.DuelCA then
             printToChat(GetString(LUIE_STRING_CA_DUEL_INVITE_CANCELED), true)
@@ -6729,13 +6729,13 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_PLEDGE_OF_MARA_RESULT (Alert Handler)
-    local PledgeOfMaraResultAlert = function(result, characterName, displayName)
+    local PledgeOfMaraResultAlert = function (result, characterName, displayName)
         -- Note: We replace everything here and move it all into the CSA handler event
         return true
     end
 
     -- EVENT_GROUP_INVITE_RESPONSE (Alert Handler)
-    local GroupInviteResponseAlert = function(characterName, response, displayName)
+    local GroupInviteResponseAlert = function (characterName, response, displayName)
         local finalName
         local finalAlertName
 
@@ -6786,7 +6786,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_GROUP_INVITE_ACCEPT_RESPONSE_TIMEOUT (Alert Handler)
-    local GroupInviteTimeoutAlert = function()
+    local GroupInviteTimeoutAlert = function ()
         printToChat(GetString("LUIE_STRING_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_GENERIC_JOIN_FAILURE), true)
         if ChatAnnouncements.SV.Group.GroupAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString("LUIE_STRING_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_GENERIC_JOIN_FAILURE))
@@ -6796,7 +6796,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_GROUP_NOTIFICATION_MESSAGE (Alert Handler)
-    local GroupNotificationMessageAlert = function(groupMessageCode)
+    local GroupNotificationMessageAlert = function (groupMessageCode)
         local message = GetString("SI_GROUPNOTIFICATIONMESSAGE", groupMessageCode)
         if message ~= "" then
             printToChat(message, true)
@@ -6809,13 +6809,13 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_GROUP_UPDATE (Alert Handler)
-    local GroupUpdateAlert = function()
+    local GroupUpdateAlert = function ()
         g_currentGroupLeaderRawName = GetRawUnitName(GetGroupLeaderUnitTag())
         g_currentGroupLeaderDisplayName = GetUnitDisplayName(GetGroupLeaderUnitTag())
     end
 
     -- EVENT_GROUP_MEMBER_LEFT (Alert Handler)
-    local GroupMemberLeftAlert = function(characterName, reason, isLocalPlayer, isLeader, displayName, actionRequiredVote)
+    local GroupMemberLeftAlert = function (characterName, reason, isLocalPlayer, isLeader, displayName, actionRequiredVote)
         ChatAnnouncements.IndexGroupLoot()
 
         local message = nil
@@ -6948,7 +6948,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_GROUP_MEMBER_JOINED (Alert Handler)
-    local OnGroupMemberJoined = function(characterName, displayName, isLocalPlayer)
+    local OnGroupMemberJoined = function (characterName, displayName, isLocalPlayer)
         -- Update index for Group Loot
         ChatAnnouncements.IndexGroupLoot()
         g_currentGroupLeaderRawName = GetRawUnitName(GetGroupLeaderUnitTag())
@@ -6977,7 +6977,7 @@ ChatAnnouncements.HookFunction = function()
 
     -- EVENT_LEADER_UPDATE (Alert Handler)
     -- Note: This event only fires if the characterId of the leader has changed (it's a new leader)
-    local LeaderUpdateAlert = function(leaderTag)
+    local LeaderUpdateAlert = function (leaderTag)
         local leaderRawName = GetRawUnitName(leaderTag)
         local showAlert = leaderRawName ~= "" and (g_currentGroupLeaderRawName ~= "" and g_currentGroupLeaderRawName ~= nil)
         g_currentGroupLeaderRawName = leaderRawName
@@ -7019,7 +7019,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_ACTIVITY_QUEUE_RESULT (Alert Handler)
-    local ActivityQueueResultAlert = function(result)
+    local ActivityQueueResultAlert = function (result)
         if result ~= ACTIVITY_QUEUE_RESULT_SUCCESS then
             if ChatAnnouncements.SV.Group.GroupLFGCA then
                 printToChat(GetString("SI_ACTIVITYQUEUERESULT", result), true)
@@ -7035,7 +7035,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_GROUP_ELECTION_FAILED (Alert Handler)
-    local GroupElectionFailedAlert = function(failureType, descriptor)
+    local GroupElectionFailedAlert = function (failureType, descriptor)
         if failureType ~= GROUP_ELECTION_FAILURE_NONE then
             if ChatAnnouncements.SV.Group.GroupVoteCA then
                 printToChat(GetString("SI_GROUPELECTIONFAILURE", failureType), true)
@@ -7056,7 +7056,7 @@ ChatAnnouncements.HookFunction = function()
     }
 
     -- EVENT_GROUP_ELECTION_RESULT (Alert Handler)
-    local GroupElectionResultAlert = function(resultType, descriptor)
+    local GroupElectionResultAlert = function (resultType, descriptor)
         if resultType ~= GROUP_ELECTION_RESULT_IN_PROGRESS and resultType ~= GROUP_ELECTION_RESULT_NOT_APPLICABLE then
             resultType = ZO_GetSimplifiedGroupElectionResultType(resultType)
             local alertText
@@ -7117,7 +7117,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_GROUP_ELECTION_REQUESTED (Alert Handler)
-    local GroupElectionRequestedAlert = function(descriptor)
+    local GroupElectionRequestedAlert = function (descriptor)
         local alertText
         local messageText
         if descriptor then
@@ -7158,7 +7158,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_GROUPING_TOOLS_READY_CHECK_CANCELLED (Alert Handler)
-    local GroupReadyCheckCancelAlert = function(reason)
+    local GroupReadyCheckCancelAlert = function (reason)
         local message
 
         if reason ~= LFG_READY_CHECK_CANCEL_REASON_NOT_IN_READY_CHECK and reason ~= LFG_READY_CHECK_CANCEL_REASON_GROUP_FORMED_SUCCESSFULLY then
@@ -7189,7 +7189,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_GROUP_VETERAN_DIFFICULTY_CHANGED (Alert Handler)
-    local GroupDifficultyChangeAlert = function(isVeteranDifficulty)
+    local GroupDifficultyChangeAlert = function (isVeteranDifficulty)
         local message
         local sound
         if isVeteranDifficulty then
@@ -7212,7 +7212,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_GUILD_SELF_LEFT_GUILD (Alert Handler)
-    local GuildSelfLeftAlert = function(guildId, guildName)
+    local GuildSelfLeftAlert = function (guildId, guildName)
         local GuildIndexData = LUIE.GuildIndexData
         for i = 1, 5 do
             local guild = GuildIndexData[i]
@@ -7237,7 +7237,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_SAVE_GUILD_RANKS_RESPONSE (Alert Handler)
-    local GuildRanksResponseAlert = function(guildId, result)
+    local GuildRanksResponseAlert = function (guildId, result)
         if result ~= SOCIAL_RESULT_NO_ERROR then
             if ChatAnnouncements.SV.Social.GuildCA then
                 printToChat(GetString("SI_SOCIALACTIONRESULT", result), true)
@@ -7250,7 +7250,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_LOCKPICK_FAILED (Alert Handler)
-    local LockpickFailedAlert = function(result)
+    local LockpickFailedAlert = function (result)
         if ChatAnnouncements.SV.Notify.NotificationLockpickCA then
             local message = GetString(LUIE_STRING_CA_LOCKPICK_FAILED)
             QueuedMessages[QueuedMessagesCounter] = { message = message, type = "NOTIFICATION" }
@@ -7273,7 +7273,7 @@ ChatAnnouncements.HookFunction = function()
     }
 
     -- EVENT_CLIENT_INTERACT_RESULT (Alert Handler)
-    local ClientInteractResult = function(result, interactTargetName)
+    local ClientInteractResult = function (result, interactTargetName)
         local formatString = GetString("SI_CLIENTINTERACTRESULT", result)
         if formatString ~= "" then
             printToChat(zo_strformat(formatString, interactTargetName))
@@ -7287,7 +7287,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_TRADE_INVITE_FAILED (Alert Handler)
-    local TradeInviteFailedAlert = function(errorReason, inviteeCharacterName, inviteeDisplayName)
+    local TradeInviteFailedAlert = function (errorReason, inviteeCharacterName, inviteeDisplayName)
         if ChatAnnouncements.SV.Notify.NotificationTradeCA or ChatAnnouncements.SV.Notify.NotificationTradeAlert then
             local finalName = ChatAnnouncements.ResolveNameLink(inviteeCharacterName, inviteeDisplayName)
             local finalAlertName = ChatAnnouncements.ResolveNameNoLink(inviteeCharacterName, inviteeDisplayName)
@@ -7306,7 +7306,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_TRADE_INVITE_CONSIDERING (Alert Handler)
-    local TradeInviteConsideringAlert = function(inviterCharacterName, inviterDisplayName)
+    local TradeInviteConsideringAlert = function (inviterCharacterName, inviterDisplayName)
         if ChatAnnouncements.SV.Notify.NotificationTradeCA or ChatAnnouncements.SV.Notify.NotificationTradeAlert then
             local finalName = ChatAnnouncements.ResolveNameLink(inviterCharacterName, inviterDisplayName)
             local finalAlertName = ChatAnnouncements.ResolveNameNoLink(inviterCharacterName, inviterDisplayName)
@@ -7323,7 +7323,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_TRADE_INVITE_WAITING (Alert Handler)
-    local TradeInviteWaitingAlert = function(inviteeCharacterName, inviteeDisplayName)
+    local TradeInviteWaitingAlert = function (inviteeCharacterName, inviteeDisplayName)
         if ChatAnnouncements.SV.Notify.NotificationTradeCA or ChatAnnouncements.SV.Notify.NotificationTradeAlert then
             local finalName = ChatAnnouncements.ResolveNameLink(inviteeCharacterName, inviteeDisplayName)
             local finalAlertName = ChatAnnouncements.ResolveNameNoLink(inviteeCharacterName, inviteeDisplayName)
@@ -7340,7 +7340,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_TRADE_INVITE_DECLINED (Alert Handler)
-    local TradeInviteDeclinedAlert = function()
+    local TradeInviteDeclinedAlert = function ()
         if ChatAnnouncements.SV.Notify.NotificationTradeCA then
             printToChat(GetString(LUIE_STRING_CA_TRADE_INVITE_DECLINED), true)
         end
@@ -7355,7 +7355,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_TRADE_INVITE_CANCELED (Alert Handler)
-    local TradeInviteCanceledAlert = function()
+    local TradeInviteCanceledAlert = function ()
         if ChatAnnouncements.SV.Notify.NotificationTradeCA then
             printToChat(GetString(LUIE_STRING_CA_TRADE_INVITE_CANCELED), true)
         end
@@ -7370,7 +7370,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_TRADE_CANCELED (Alert Handler)
-    local TradeCanceledAlert = function()
+    local TradeCanceledAlert = function ()
         if ChatAnnouncements.SV.Notify.NotificationTradeCA then
             printToChat(GetString(SI_TRADE_CANCELED), true)
         end
@@ -7395,7 +7395,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_TRADE_FAILED (Alert Handler)
-    local TradeFailedAlert = function(reason)
+    local TradeFailedAlert = function (reason)
         if ChatAnnouncements.SV.Notify.NotificationTradeCA then
             printToChat(GetString("LUIE_STRING_CA_TRADEACTIONRESULT", reason), true)
         end
@@ -7410,7 +7410,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_TRADE_SUCCEEDED (Alert Handler)
-    local TradeSucceededAlert = function()
+    local TradeSucceededAlert = function ()
         if ChatAnnouncements.SV.Notify.NotificationTradeCA then
             local message = GetString(SI_TRADE_COMPLETE)
             QueuedMessages[QueuedMessagesCounter] = { message = message, type = "NOTIFICATION", isSystem = true }
@@ -7458,15 +7458,15 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_DISCOVERY_EXPERIENCE (Alert Handler)
-    local DiscoveryExperienceAlert = function(subzoneName, level, previousExperience, currentExperience, rank, previousPoints, currentPoints)
+    local DiscoveryExperienceAlert = function (subzoneName, level, previousExperience, currentExperience, rank, previousPoints, currentPoints)
         -- Note: We let the CSA Handler take care of this.
         return true
     end
 
     -- EVENT_MAIL_SEND_FAILED (Alert Handler)
-    local MailSendFailedAlert = function(reason)
+    local MailSendFailedAlert = function (reason)
         if reason ~= MAIL_SEND_RESULT_CANCELED then
-            local RestoreMailBackupValues = function()
+            local RestoreMailBackupValues = function ()
                 g_postageAmount = GetQueuedMailPostage()
                 g_mailAmount = GetQueuedMoneyAttachment()
                 g_mailCOD = GetQueuedCOD()
@@ -7557,7 +7557,7 @@ ChatAnnouncements.HookFunction = function()
     local csaCallbackHandlers = ZO_CenterScreenAnnounce_GetCallbackHandlers()
 
     -- EVENT_LORE_BOOK_LEARNED_SKILL_EXPERIENCE (CSA Handler)
-    local LoreBookXPHook = function(categoryIndex, collectionIndex, bookIndex, guildReputationIndex, skillType, skillIndex, rank, previousXP, currentXP)
+    local LoreBookXPHook = function (categoryIndex, collectionIndex, bookIndex, guildReputationIndex, skillType, skillIndex, rank, previousXP, currentXP)
         if guildReputationIndex > 0 then
             local collectionName, _, numKnownBooks, totalBooks, hidden = GetLoreCollectionInfo(categoryIndex, collectionIndex)
             local title, icon = GetLoreBookInfo(categoryIndex, collectionIndex, bookIndex)
@@ -7642,7 +7642,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_LORE_COLLECTION_COMPLETED (CSA Handler)
-    local LoreCollectionHook = function(categoryIndex, collectionIndex, bookIndex, guildReputationIndex, isMaxRank)
+    local LoreCollectionHook = function (categoryIndex, collectionIndex, bookIndex, guildReputationIndex, isMaxRank)
         if guildReputationIndex == 0 or isMaxRank then
             -- Only fire this message if we're not part of the guild or at max level within the guild.
             local collectionName, description, numKnownBooks, totalBooks, hidden, textureName = GetLoreCollectionInfo(categoryIndex, collectionIndex)
@@ -7694,7 +7694,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_LORE_COLLECTION_COMPLETED_SKILL_EXPERIENCE (CSA Handler)
-    local LoreCollectionXPHook = function(categoryIndex, collectionIndex, guildReputationIndex, skillType, skillIndex, rank, previousXP, currentXP)
+    local LoreCollectionXPHook = function (categoryIndex, collectionIndex, guildReputationIndex, skillType, skillIndex, rank, previousXP, currentXP)
         if guildReputationIndex > 0 then
             local collectionName, description, numKnownBooks, totalBooks, hidden, textureName = GetLoreCollectionInfo(categoryIndex, collectionIndex)
             local stringPrefix = ChatAnnouncements.SV.Lorebooks.LorebookCollectionPrefix
@@ -7753,7 +7753,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_SKILL_POINTS_CHANGED (CSA Handler)
-    local SkillPointsChangedHook = function(oldPoints, newPoints, oldPartialPoints, newPartialPoints, changeReason)
+    local SkillPointsChangedHook = function (oldPoints, newPoints, oldPartialPoints, newPartialPoints, changeReason)
         local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
         local numSkillPointsGained = newPoints - oldPoints
         local stringPrefix = ChatAnnouncements.SV.Skills.SkillPointSkyshard
@@ -7843,7 +7843,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_SKILL_LINE_ADDED (CSA Handler) -- Hooked via csaCallbackHandlers[2]
-    local SkillLineAddedHook = function(skillLineData)
+    local SkillLineAddedHook = function (skillLineData)
         if skillLineData:IsAvailable() then
             local skillTypeData = skillLineData:GetSkillTypeData()
             local lineName = skillLineData:GetName()
@@ -7877,7 +7877,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_ABILITY_PROGRESSION_RANK_UPDATE (CSA Handler)
-    local AbilityProgressionRankHook = function(progressionIndex, rank, maxRank, morph)
+    local AbilityProgressionRankHook = function (progressionIndex, rank, maxRank, morph)
         local _, _, _, atMorph = GetAbilityProgressionXPInfo(progressionIndex)
         local name = GetAbilityProgressionAbilityInfo(progressionIndex, morph, rank)
 
@@ -7932,7 +7932,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_SKILL_RANK_UPDATE (CSA Handler)
-    local SkillRankUpdateHook = function(skillType, skillLineIndex, rank)
+    local SkillRankUpdateHook = function (skillType, skillLineIndex, rank)
         -- crafting skill updates get deferred if they're increased while crafting animations are in progress
         -- ZO_Skills_TieSkillInfoHeaderToCraftingSkill handles triggering the deferred center screen announce in that case
         if skillType ~= SKILL_TYPE_RACIAL and (skillType ~= SKILL_TYPE_TRADESKILL or not ZO_CraftingUtils_IsPerformingCraftProcess()) then
@@ -7968,7 +7968,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_SKILL_XP_UPDATE (CSA Handler)
-    local SkillXPUpdateHook = function(skillType, skillLineIndex, reason, rank, previousXP, currentXP)
+    local SkillXPUpdateHook = function (skillType, skillLineIndex, reason, rank, previousXP, currentXP)
         if (skillType == SKILL_TYPE_GUILD and GUILD_SKILL_SHOW_REASONS[reason]) or reason == PROGRESS_REASON_JUSTICE_SKILL_EVENT then
             if not LUIE.SV.HideXPBar then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_NO_TEXT)
@@ -7991,7 +7991,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_COLLECTION_UPDATED (CSA Handler) -- Hooked via csaCallbackHandlers[1]
-    local CollectibleUnlockedHook = function(collectionUpdateType, collectiblesByUnlockState)
+    local CollectibleUnlockedHook = function (collectionUpdateType, collectiblesByUnlockState)
         if collectionUpdateType == ZO_COLLECTION_UPDATE_TYPE.UNLOCK_STATE_CHANGED then
             local nowOwnedCollectibles = collectiblesByUnlockState[COLLECTIBLE_UNLOCK_STATE_UNLOCKED_OWNED]
             if nowOwnedCollectibles then
@@ -8121,16 +8121,16 @@ ChatAnnouncements.HookFunction = function()
         end
     end
 
-    local ResetQuestRewardStatus = function()
+    local ResetQuestRewardStatus = function ()
         g_itemReceivedIsQuestReward = false
     end
 
-    local ResetQuestAbandonStatus = function()
+    local ResetQuestAbandonStatus = function ()
         g_itemReceivedIsQuestAbandon = false
     end
 
     -- EVENT_QUEST_ADDED (CSA Handler)
-    local QuestAddedHook = function(journalIndex, questName, objectiveName)
+    local QuestAddedHook = function (journalIndex, questName, objectiveName)
         eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         ChatAnnouncements.PrintBufferedXP()
 
@@ -8202,7 +8202,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_QUEST_COMPLETE (CSA Handler)
-    local QuestCompleteHook = function(questName, level, previousExperience, currentExperience, championPoints, questType, instanceDisplayType)
+    local QuestCompleteHook = function (questName, level, previousExperience, currentExperience, championPoints, questType, instanceDisplayType)
         eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         ChatAnnouncements.PrintBufferedXP()
 
@@ -8268,7 +8268,7 @@ ChatAnnouncements.HookFunction = function()
 
     -- EVENT_OBJECTIVE_COMPLETED (CSA Handler)
     -- Note we don't play a sound if the CSA is disabled here because the Quest complete message will already do this.
-    local ObjectiveCompletedHook = function(zoneIndex, poiIndex, level, previousExperience, currentExperience, championPoints)
+    local ObjectiveCompletedHook = function (zoneIndex, poiIndex, level, previousExperience, currentExperience, championPoints)
         local name, _, _, finishedDescription = GetPOIInfo(zoneIndex, poiIndex)
         local nameFormatted
         local formattedText
@@ -8311,7 +8311,7 @@ ChatAnnouncements.HookFunction = function()
 
     -- EVENT_QUEST_CONDITION_COUNTER_CHANGED (CSA Handler)
     -- Note: Used for quest failure and updates
-    local ConditionCounterHook = function(journalIndex, questName, conditionText, conditionType, currConditionVal, newConditionVal, conditionMax, isFailCondition, stepOverrideText, isPushed, isComplete, isConditionComplete, isStepHidden, isConditionCompleteChanged)
+    local ConditionCounterHook = function (journalIndex, questName, conditionText, conditionType, currConditionVal, newConditionVal, conditionMax, isFailCondition, stepOverrideText, isPushed, isComplete, isConditionComplete, isStepHidden, isConditionCompleteChanged)
         if isStepHidden or (isPushed and isComplete) or (currConditionVal >= newConditionVal) then
             return true
         end
@@ -8446,7 +8446,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_QUEST_OPTIONAL_STEP_ADVANCED (CSA Handler)
-    local OptionalStepHook = function(text)
+    local OptionalStepHook = function (text)
         if text ~= "" then
             local message = zo_strformat("|c<<1>><<2>>|r", ColorizeColors.QuestColorQuestDescriptionColorize, text)
             local formattedString = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, message)
@@ -8476,7 +8476,7 @@ ChatAnnouncements.HookFunction = function()
 
     -- EVENT_QUEST_REMOVED (Registered through CSA_MiscellaneousHandlers)
     -- EVENT_QUEST_REMOVED (Registered through CSA_MiscellaneousHandlers)
-    local OnQuestRemoved = function(_, isCompleted, _, questName, _, _)
+    local OnQuestRemoved = function (_, isCompleted, _, questName, _, _)
         if isCompleted then
             return
         end
@@ -8542,7 +8542,7 @@ ChatAnnouncements.HookFunction = function()
 
     -- EVENT_QUEST_ADVANCED (Registered through CSA_MiscellaneousHandlers)
     -- Note: Quest Advancement displays all the "appropriate" conditions that the player needs to do to advance the current step
-    local OnQuestAdvanced = function(eventId, questIndex, questName, isPushed, isComplete, mainStepChanged, soundOverride)
+    local OnQuestAdvanced = function (eventId, questIndex, questName, isPushed, isComplete, mainStepChanged, soundOverride)
         -- Check if WritCreater is enabled & then call a copy of a local function from WritCreater to check if this is a Writ Quest
         if WritCreater and WritCreater:GetSettings().suppressQuestAnnouncements and isQuestWritQuest(questIndex) then
             return
@@ -8625,7 +8625,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_QUEST_ADDED (Registered through CSA_MiscellaneousHandlers)
-    local OnQuestAdded = function(eventId, questIndex)
+    local OnQuestAdded = function (eventId, questIndex)
         -- Copied from Writ Creator, abandons a quest if it requires a mat that is disabled in Writ Creator setttings
         if WritCreater then
             local rejectedMat = rejectQuest(questIndex)
@@ -8646,7 +8646,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_DISCOVERY_EXPERIENCE (CSA Handler)
-    local DiscoveryExperienceHook = function(subzoneName, level, previousExperience, currentExperience, championPoints)
+    local DiscoveryExperienceHook = function (subzoneName, level, previousExperience, currentExperience, championPoints)
         eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         ChatAnnouncements.PrintBufferedXP()
 
@@ -8681,7 +8681,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_POI_DISCOVERED (CSA Handler)
-    local PoiDiscoveredHook = function(zoneIndex, poiIndex)
+    local PoiDiscoveredHook = function (zoneIndex, poiIndex)
         eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         ChatAnnouncements.PrintBufferedXP()
 
@@ -8723,7 +8723,7 @@ ChatAnnouncements.HookFunction = function()
 
     -- EVENT_EXPERIENCE_GAIN (CSA Handler)
     -- Note: This function is prehooked in order to allow the XP bar popup to be hidden. In addition we shift the sound over
-    local ExperienceGainHook = function(reason, level, previousExperience, currentExperience, championPoints)
+    local ExperienceGainHook = function (reason, level, previousExperience, currentExperience, championPoints)
         local sound = XP_GAIN_SHOW_SOUNDS[reason]
 
         if XP_GAIN_SHOW_REASONS[reason] and not LUIE.SV.HideXPBar then
@@ -8815,7 +8815,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- Called by EnlightenGainHook()
-    local GetEnlightenedGainedAnnouncement = function(triggeringEvent)
+    local GetEnlightenedGainedAnnouncement = function (triggeringEvent)
         local formattedString = zo_strformat("<<1>>! <<2>>", GetString(SI_ENLIGHTENED_STATE_GAINED_HEADER), GetString(SI_ENLIGHTENED_STATE_GAINED_DESCRIPTION))
         if ChatAnnouncements.SV.XP.ExperienceEnlightenedCA then
             QueuedMessages[QueuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
@@ -8847,14 +8847,14 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_ENLIGHTENED_STATE_GAINED (CSA Handler)
-    local EnlightenGainHook = function()
+    local EnlightenGainHook = function ()
         if IsEnlightenedAvailableForCharacter() then
             return GetEnlightenedGainedAnnouncement(EVENT_ENLIGHTENED_STATE_GAINED)
         end
     end
 
     -- EVENT_ENLIGHTENED_STATE_LOST (CSA Handler)
-    local EnlightenLostHook = function()
+    local EnlightenLostHook = function ()
         if IsEnlightenedAvailableForCharacter() then
             local formattedString = zo_strformat("<<1>>!", GetString(SI_ENLIGHTENED_STATE_LOST_HEADER))
 
@@ -8890,7 +8890,7 @@ ChatAnnouncements.HookFunction = function()
 
     local firstActivation = true
     -- EVENT_PLAYER_ACTIVATED (CSA Handler)
-    local PlayerActivatedHook = function()
+    local PlayerActivatedHook = function ()
         if firstActivation then
             firstActivation = false
 
@@ -8904,7 +8904,7 @@ ChatAnnouncements.HookFunction = function()
     -- EVENT_RIDING_SKILL_IMPROVEMENT (CSA Handler)
     -- Note: This function is effected by a throttle in centerscreenannouncehandlers, we resolve any message that needs to be throttled in this function.
     -- Note: We allow the CSA handler to handle any changes made from skill books in order to properly throttle all messages, and use the alert handler for stables upgrades.
-    local RidingSkillImprovementHook = function(ridingSkill, previous, current, source)
+    local RidingSkillImprovementHook = function (ridingSkill, previous, current, source)
         if source == RIDING_TRAIN_SOURCE_ITEM then
             if ChatAnnouncements.SV.Notify.StorageRidingCA then
                 -- TODO: Switch to using Recipe/Learn variable in the future
@@ -8971,7 +8971,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_INVENTORY_BAG_CAPACITY_CHANGED (CSA Handler)
-    local InventoryBagCapacityHook = function(previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
+    local InventoryBagCapacityHook = function (previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
         if previousCapacity > 0 and previousCapacity ~= currentCapacity and previousUpgrade ~= currentUpgrade then
             if ChatAnnouncements.SV.Notify.StorageBagCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
@@ -8984,7 +8984,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_INVENTORY_BANK_CAPACITY_CHANGED (CSA Handler)
-    local InventoryBankCapacityHook = function(previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
+    local InventoryBankCapacityHook = function (previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
         if previousCapacity > 0 and previousCapacity ~= currentCapacity and previousUpgrade ~= currentUpgrade then
             if ChatAnnouncements.SV.Notify.StorageBagCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
@@ -8998,7 +8998,7 @@ ChatAnnouncements.HookFunction = function()
 
     local CHAMPION_UNLOCKED_LIFESPAN_MS = 12000
     -- EVENT_CHAMPION_LEVEL_ACHIEVED (CSA Handler)
-    local ChampionLevelAchievedHook = function(wasChampionSystemUnlocked)
+    local ChampionLevelAchievedHook = function (wasChampionSystemUnlocked)
         local icon = GetChampionPointsIcon()
 
         if ChatAnnouncements.SV.XP.ExperienceLevelUpCA then
@@ -9059,7 +9059,7 @@ ChatAnnouncements.HookFunction = function()
     local savedEndingPoints = 0 -- We reset this value after the throttled function sends info to the chat printer
     local savedPointDelta = 0   -- We reset this value after the throttled function sends info to the chat printer
 
-    local ChampionPointGainedPrinter = function()
+    local ChampionPointGainedPrinter = function ()
         -- adding one so that we are starting from the first gained point instead of the starting champion points
         local startingPoints = savedEndingPoints - savedPointDelta + 1
         local championPointsByType = {
@@ -9135,7 +9135,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_CHAMPION_POINT_GAINED (CSA Handler)
-    local ChampionPointGainedHook = function(pointDelta)
+    local ChampionPointGainedHook = function (pointDelta)
         -- Print throttled XP value
         eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         ChatAnnouncements.PrintBufferedXP()
@@ -9153,7 +9153,7 @@ ChatAnnouncements.HookFunction = function()
     local DUEL_BOUNDARY_WARNING_LIFESPAN_MS = 2000
     local DUEL_BOUNDARY_WARNING_UPDATE_TIME_MS = 2100
     local lastEventTime = 0
-    local CheckBoundary = function()
+    local CheckBoundary = function ()
         if IsNearDuelBoundary() then
             -- Display CA
             if ChatAnnouncements.SV.Social.DuelBoundaryCA then
@@ -9182,7 +9182,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_DUEL_NEAR_BOUNDARY (CSA Handler)
-    local DuelNearBoundaryHook = function(isInWarningArea)
+    local DuelNearBoundaryHook = function (isInWarningArea)
         if isInWarningArea then
             local nowEventTime = GetFrameTimeMilliseconds()
             eventManager:RegisterForUpdate("EVENT_DUEL_NEAR_BOUNDARY_LUIE", DUEL_BOUNDARY_WARNING_UPDATE_TIME_MS, CheckBoundary)
@@ -9197,7 +9197,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_DUEL_FINISHED (CSA HANDLER)
-    local DuelFinishedHook = function(result, wasLocalPlayersResult, opponentCharacterName, opponentDisplayName)
+    local DuelFinishedHook = function (result, wasLocalPlayersResult, opponentCharacterName, opponentDisplayName)
         -- Setup result format, name, and result sound
         local resultString = wasLocalPlayersResult and GetString("LUIE_STRING_CA_DUEL_SELF_RESULT", result) or GetString("LUIE_STRING_CA_DUEL_RESULT", result)
 
@@ -9256,7 +9256,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_DUEL_COUNTDOWN (CSA Handler)
-    local DuelCountdownHook = function(startTimeMS)
+    local DuelCountdownHook = function (startTimeMS)
         -- Display CSA
         if ChatAnnouncements.SV.Social.DuelStartCSA then
             local displayTime = startTimeMS - GetFrameTimeMilliseconds()
@@ -9270,7 +9270,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_RAID_TRIAL_STARTED (CSA Handler)
-    local RaidStartedHook = function(raidName, isWeekly)
+    local RaidStartedHook = function (raidName, isWeekly)
         -- Display CA
         if ChatAnnouncements.SV.Group.GroupRaidCA then
             local formattedName = zo_strformat("|cFFFFFF<<1>>|r", raidName)
@@ -9299,7 +9299,7 @@ ChatAnnouncements.HookFunction = function()
 
     local TRIAL_COMPLETE_LIFESPAN_MS = 10000
     -- EVENT_RAID_TRIAL_COMPLETE (CSA Handler)
-    local RaidCompleteHook = function(raidName, score, totalTime)
+    local RaidCompleteHook = function (raidName, score, totalTime)
         local wasUnderTargetTime = GetRaidDuration() <= GetRaidTargetTime()
         local formattedTime = ZO_FormatTimeMilliseconds(totalTime, TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_SECONDS)
         local vitalityBonus = GetCurrentRaidLifeScoreBonus()
@@ -9356,7 +9356,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_RAID_TRIAL_FAILED (CSA Handler)
-    local RaidFailedHook = function(raidName, score)
+    local RaidFailedHook = function (raidName, score)
         -- Display CA
         if ChatAnnouncements.SV.Group.GroupRaidCA then
             local formattedName = zo_strformat("|cFFFFFF<<1>>|r", raidName)
@@ -9384,7 +9384,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_RAID_TRIAL_NEW_BEST_SCORE (CSA Handler)
-    local RaidBestScoreHook = function(raidName, score, isWeekly)
+    local RaidBestScoreHook = function (raidName, score, isWeekly)
         -- Display CA
         if ChatAnnouncements.SV.Group.GroupRaidBestScoreCA then
             local formattedName = zo_strformat("|cFFFFFF<<1>>|r", raidName)
@@ -9413,7 +9413,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_RAID_REVIVE_COUNTER_UPDATE (CSA Handler)
-    local RaidReviveCounterHook = function(currentCount, countDelta)
+    local RaidReviveCounterHook = function (currentCount, countDelta)
         if not IsRaidInProgress() then
             return
         end
@@ -9490,7 +9490,7 @@ ChatAnnouncements.HookFunction = function()
     }
 
     -- EVENT_RAID_TRIAL_SCORE_UPDATE (CSA Handler)
-    local RaidScoreUpdateHook = function(scoreUpdateReason, scoreAmount, totalScore)
+    local RaidScoreUpdateHook = function (scoreUpdateReason, scoreAmount, totalScore)
         local reasonAssets = TRIAL_SCORE_REASON_TO_ASSETS[scoreUpdateReason]
         if reasonAssets then
             -- Display CA
@@ -9523,7 +9523,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_ACTIVITY_FINDER_ACTIVITY_COMPLETE (CSA Handler)
-    local ActivityFinderCompleteHook = function()
+    local ActivityFinderCompleteHook = function ()
         local message = GetString(SI_ACTIVITY_FINDER_ACTIVITY_COMPLETE_ANNOUNCEMENT_TEXT)
         if ChatAnnouncements.SV.Group.GroupLFGCompleteCA then
             printToChat(message, true)
@@ -9549,7 +9549,7 @@ ChatAnnouncements.HookFunction = function()
 
     local g_previousEndlessDungeonProgression = { 0, 0, 0 } -- Stage, Cycle, Arc
 
-    local GetEndlessDungeonProgressMessageParams = function()
+    local GetEndlessDungeonProgressMessageParams = function ()
         local stage, cycle, arc = ENDLESS_DUNGEON_MANAGER:GetProgression()
         local previousStage, previousCycle, previousArc = unpack(g_previousEndlessDungeonProgression)
         if stage == 1 and cycle == 1 and arc == 1 then
@@ -9590,7 +9590,7 @@ ChatAnnouncements.HookFunction = function()
         return messageParams
     end
 
-    local RefreshEndlessDungeonProgressionState = function()
+    local RefreshEndlessDungeonProgressionState = function ()
         local stage, cycle, arc = ENDLESS_DUNGEON_MANAGER:GetProgression()
         g_previousEndlessDungeonProgression[1] = stage
         g_previousEndlessDungeonProgression[2] = cycle
@@ -9600,7 +9600,7 @@ ChatAnnouncements.HookFunction = function()
 
     ENDLESS_DUNGEON_MANAGER:RegisterCallback("StateChanged", RefreshEndlessDungeonProgressionState)
 
-    local UpdateEndlessDungeonTrackers = function()
+    local UpdateEndlessDungeonTrackers = function ()
         ENDLESS_DUNGEON_HUD_TRACKER:UpdateProgress()
         ENDLESS_DUNGEON_BUFF_TRACKER_GAMEPAD:UpdateProgress()
         if ENDLESS_DUNGEON_BUFF_TRACKER_KEYBOARD then
@@ -9622,7 +9622,7 @@ ChatAnnouncements.HookFunction = function()
         -- TODO - Need MapIds for Stage 3-9
     }
 
-    local ResolveDisplayAnnouncementMessages = function(type)
+    local ResolveDisplayAnnouncementMessages = function (type)
         local settings
         if type == "Imperial City" then
             settings = LUIE.ChatAnnouncements.SV.DisplayAnnouncements.ZoneIC
@@ -9639,7 +9639,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_DISPLAY_ANNOUNCEMENT (CSA Handler)
-    local DisplayAnnouncementHook = function(primaryText, secondaryText, icon, soundId, lifespanMS, category)
+    local DisplayAnnouncementHook = function (primaryText, secondaryText, icon, soundId, lifespanMS, category)
         -- Disable Respec Display Announcement since we handle this from loot announcements (using Respec scroll)
         if primaryText == GetString(SI_RESPECTYPE_POINTSRESETTITLE1) then
             return true
@@ -9810,7 +9810,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_ACHIEVEMENT_AWARDED (CSA Handler)
-    local AchievementAwardedHook = function(name, points, id)
+    local AchievementAwardedHook = function (name, points, id)
         local topLevelIndex, categoryIndex, achievementIndex = GetCategoryInfoFromAchievementId(id)
 
         -- Bail out if this achievement comes from unwanted category & we don't always show CSA
@@ -9879,7 +9879,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_PLEDGE_OF_MARA_RESULT (CSA Handler)
-    local PledgeOfMaraHook = function(result, characterName, displayName)
+    local PledgeOfMaraHook = function (result, characterName, displayName)
         -- Display CA (Success or Failure)
         if ChatAnnouncements.SV.Social.PledgeOfMaraCA then
             local finalName = ChatAnnouncements.ResolveNameLink(characterName, displayName)
@@ -9919,7 +9919,7 @@ ChatAnnouncements.HookFunction = function()
     end
 
     -- EVENT_ANTIQUITY_LEAD_ACQUIRED (CSA Handler)
-    local AntiquityLeadAcquired = function(antiquityId)
+    local AntiquityLeadAcquired = function (antiquityId)
         -- Get antiquity data
         local antiquityData = ANTIQUITY_DATA_MANAGER:GetAntiquityData(antiquityId)
         -- Get name
@@ -10152,7 +10152,7 @@ ChatAnnouncements.HookFunction = function()
         },
     }
 
-    local AlertIgnored = function(SendString)
+    local AlertIgnored = function (SendString)
         local alertString = IsConsoleUI() and SI_PLAYER_TO_PLAYER_BLOCKED or SendString
         printToChat(GetString(alertString), true)
         if ChatAnnouncements.SV.Group.GroupAlert then
@@ -10181,10 +10181,10 @@ ChatAnnouncements.HookFunction = function()
         --Whisper--
         if IsChatSystemAvailableForCurrentPlatform() then
             local nameToUse = IsConsoleUI() and currentTargetDisplayName or primaryNameInternal
-            local WhisperOption = function()
+            local WhisperOption = function ()
                 StartChatInput(nil, CHAT_CHANNEL_WHISPER, nameToUse)
             end
-            local WhisperIgnore = function()
+            local WhisperIgnore = function ()
                 AlertIgnored(LUIE_STRING_IGNORE_ERROR_WHISPER)
             end
             local whisperFunction = ENABLED_IF_NOT_IGNORED and WhisperOption or WhisperIgnore
@@ -10196,7 +10196,7 @@ ChatAnnouncements.HookFunction = function()
         local groupModicationRequiresVoting = DoesGroupModificationRequireVote()
         local isSoloOrLeader = IsUnitSoloOrGroupLeader("player")
 
-        local AlertGroupDisabled = function()
+        local AlertGroupDisabled = function ()
             printToChat(GetString("LUIE_STRING_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE), true)
             if ChatAnnouncements.SV.Group.GroupAlert then
                 ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, GetString("LUIE_STRING_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE))
@@ -10204,7 +10204,7 @@ ChatAnnouncements.HookFunction = function()
             PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         end
 
-        local AlertGroupKickDisabled = function()
+        local AlertGroupKickDisabled = function ()
             printToChat(GetString(LUIE_STRING_CA_GROUP_LEADERKICK_ERROR))
             if ChatAnnouncements.SV.Group.GroupAlert then
                 ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, GetString(LUIE_STRING_CA_GROUP_LEADERKICK_ERROR), true)
@@ -10246,7 +10246,7 @@ ChatAnnouncements.HookFunction = function()
                 if ENABLED_IF_NOT_IGNORED then
                     groupInviteFunction = AlertGroupDisabled
                 else
-                    local GroupIgnore = function()
+                    local GroupIgnore = function ()
                         AlertIgnored(LUIE_STRING_IGNORE_ERROR_GROUP)
                     end
                     groupInviteFunction = GroupIgnore
@@ -10258,7 +10258,7 @@ ChatAnnouncements.HookFunction = function()
 
         --Friend--
         if IsFriend(currentTargetCharacterNameRaw) then
-            local AlreadyFriendsWarning = function()
+            local AlreadyFriendsWarning = function ()
                 printToChat(GetString("SI_SOCIALACTIONRESULT", SOCIAL_RESULT_ACCOUNT_ALREADY_FRIENDS), true)
                 if ChatAnnouncements.SV.Social.FriendIgnoreAlert then
                     ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, GetString("SI_SOCIALACTIONRESULT", SOCIAL_RESULT_ACCOUNT_ALREADY_FRIENDS))
@@ -10267,7 +10267,7 @@ ChatAnnouncements.HookFunction = function()
             end
             self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_ADD_FRIEND), platformIcons[SI_PLAYER_TO_PLAYER_ADD_FRIEND], DISABLED, AlreadyFriendsWarning)
         else
-            local RequestFriendOption = function()
+            local RequestFriendOption = function ()
                 local isConsoleUI = IsConsoleUI()
                 if isConsoleUI then
                     ZO_ShowConsoleAddFriendDialog(currentTargetCharacterName)
@@ -10286,7 +10286,7 @@ ChatAnnouncements.HookFunction = function()
                     ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, formattedMessage)
                 end
             end
-            local FriendIgnore = function()
+            local FriendIgnore = function ()
                 AlertIgnored(LUIE_STRING_IGNORE_ERROR_FRIEND)
             end
             self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_ADD_FRIEND), platformIcons[SI_PLAYER_TO_PLAYER_ADD_FRIEND], ENABLED_IF_NOT_IGNORED, ENABLED_IF_NOT_IGNORED and RequestFriendOption or FriendIgnore)
@@ -10297,7 +10297,7 @@ ChatAnnouncements.HookFunction = function()
             local mountedState, isRidingGroupMount, hasFreePassengerSlot = GetTargetMountedStateInfo(currentTargetCharacterNameRaw)
             local isPassengerForTarget = IsGroupMountPassengerForTarget(currentTargetCharacterNameRaw)
             local groupMountEnabled = (mountedState == MOUNTED_STATE_MOUNT_RIDER and isRidingGroupMount and (not IsMounted() or isPassengerForTarget))
-            local MountOption = function()
+            local MountOption = function ()
                 UseMountAsPassenger(currentTargetCharacterNameRaw)
             end
             local optionToShow = isPassengerForTarget and SI_PLAYER_TO_PLAYER_DISMOUNT or SI_PLAYER_TO_PLAYER_RIDE_MOUNT
@@ -10305,7 +10305,7 @@ ChatAnnouncements.HookFunction = function()
         end
 
         --Report--
-        local ReportCallback = function()
+        local ReportCallback = function ()
             local nameToReport = IsInGamepadPreferredMode() and currentTargetDisplayName or primaryName
             ZO_HELP_GENERIC_TICKET_SUBMISSION_MANAGER:OpenReportPlayerTicketScene(nameToReport)
         end
@@ -10314,7 +10314,7 @@ ChatAnnouncements.HookFunction = function()
         --Duel--
         local duelStateI, partnerCharacterName, partnerDisplayName = GetDuelInfo()
         if duelStateI ~= DUEL_STATE_IDLE then
-            local AlreadyDuelingWarning = function(duelState, characterName, displayName)
+            local AlreadyDuelingWarning = function (duelState, characterName, displayName)
                 return function ()
                     local userFacingPartnerName = ZO_GetPrimaryPlayerNameWithSecondary(displayName, characterName)
                     local statusString = GetString("SI_DUELSTATE", duelState)
@@ -10324,10 +10324,10 @@ ChatAnnouncements.HookFunction = function()
             end
             self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_INVITE_DUEL), platformIcons[SI_PLAYER_TO_PLAYER_INVITE_DUEL], DISABLED, AlreadyDuelingWarning(duelStateI, partnerCharacterName, partnerDisplayName))
         else
-            local DuelInviteOption = function()
+            local DuelInviteOption = function ()
                 ChallengeTargetToDuel(currentTargetCharacterName)
             end
-            local DuelIgnore = function()
+            local DuelIgnore = function ()
                 AlertIgnored(LUIE_STRING_IGNORE_ERROR_DUEL)
             end
             self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_INVITE_DUEL), platformIcons[SI_PLAYER_TO_PLAYER_INVITE_DUEL], ENABLED_IF_NOT_IGNORED, ENABLED_IF_NOT_IGNORED and DuelInviteOption or DuelIgnore)
@@ -10336,7 +10336,7 @@ ChatAnnouncements.HookFunction = function()
         -- Play Tribute --
         local tributeInviteStateI, partnerCharacterNameI, partnerDisplayNameI = GetTributeInviteInfo()
         if tributeInviteStateI ~= TRIBUTE_INVITE_STATE_NONE then
-            local TributeInviteFailWarning = function(tributeInviteState, characterName, displayName)
+            local TributeInviteFailWarning = function (tributeInviteState, characterName, displayName)
                 return function ()
                     local userFacingPartnerName = ZO_GetPrimaryPlayerNameWithSecondary(displayName, characterName)
                     local statusString = GetString("SI_TRIBUTEINVITESTATE", tributeInviteState)
@@ -10346,21 +10346,21 @@ ChatAnnouncements.HookFunction = function()
             end
             self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_INVITE_TRIBUTE), platformIcons[SI_PLAYER_TO_PLAYER_INVITE_TRIBUTE], DISABLED, TributeInviteFailWarning(tributeInviteStateI, partnerCharacterNameI, partnerDisplayNameI))
         else
-            local TributeInviteOption = function()
+            local TributeInviteOption = function ()
                 ChallengeTargetToTribute(currentTargetCharacterName)
             end
             local isEnabled = ENABLED_IF_NOT_IGNORED and not ZO_IsTributeLocked()
-            local TributeIgnore = function()
+            local TributeIgnore = function ()
                 AlertIgnored(LUIE_STRING_IGNORE_ERROR_TRIBUTE)
             end
             self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_INVITE_TRIBUTE), platformIcons[SI_PLAYER_TO_PLAYER_INVITE_TRIBUTE], isEnabled, ENABLED_IF_NOT_IGNORED and TributeInviteOption or TributeIgnore)
         end
 
         --Trade--
-        local TradeInviteOption = function()
+        local TradeInviteOption = function ()
             TRADE_WINDOW:InitiateTrade(primaryNameInternal)
         end
-        local TradeIgnore = function()
+        local TradeIgnore = function ()
             AlertIgnored(LUIE_STRING_IGNORE_ERROR_TRADE)
         end
         local tradeInviteFunction = ENABLED_IF_NOT_IGNORED and TradeInviteOption or TradeIgnore
@@ -10512,7 +10512,7 @@ ChatAnnouncements.HookFunction = function()
 
     -- Required when hooking ZO_MailSend_Gamepad:IsValid()
     -- Returns whether there is any item attached.
-    local IsAnyItemAttached = function(bagId, slotIndex)
+    local IsAnyItemAttached = function (bagId, slotIndex)
         for i = 1, MAIL_MAX_ATTACHED_ITEMS do
             local queuedFromBag = GetQueuedItemAttachmentInfo(i)
             if queuedFromBag ~= 0 then -- Slot is filled.
@@ -10627,7 +10627,7 @@ ChatAnnouncements.HookFunction = function()
 
     -- Called by hooked TryGroupInviteByName function
     -- TODO: Maybe see about links for names here for non-menu
-    local CompleteGroupInvite = function(characterOrDisplayName, sentFromChat, displayInvitedMessage, isMenu)
+    local CompleteGroupInvite = function (characterOrDisplayName, sentFromChat, displayInvitedMessage, isMenu)
         local isLeader = IsUnitGroupLeader("player")
         local groupSize = GetGroupSize()
         local ALERT = true
@@ -10680,7 +10680,7 @@ ChatAnnouncements.HookFunction = function()
         if IsConsoleUI() then
             local displayName = characterOrDisplayName
 
-            local GroupInviteCallback = function(success)
+            local GroupInviteCallback = function (success)
                 if success then
                     CompleteGroupInvite(displayName, sentFromChat, displayInvitedMessage, isMenu)
                 end
@@ -10775,7 +10775,7 @@ ChatAnnouncements.HookFunction = function()
         local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
         if IsConsoleUI() then
-            local GuildInviteCallback = function(success)
+            local GuildInviteCallback = function (success)
                 if success then
                     GuildInvite(guildId, displayName)
                     if ChatAnnouncements.SV.Social.GuildCA then
@@ -10900,7 +10900,7 @@ ChatAnnouncements.HookFunction = function()
     end
 end
 
-ChatAnnouncements.TradeInviteAccepted = function(eventCode)
+ChatAnnouncements.TradeInviteAccepted = function (eventCode)
     if ChatAnnouncements.SV.Notify.NotificationTradeCA then
         printToChat(GetString(LUIE_STRING_CA_TRADE_INVITE_ACCEPTED), true)
     end
@@ -10918,7 +10918,7 @@ ChatAnnouncements.TradeInviteAccepted = function(eventCode)
 end
 
 -- Adds items to index if they are added in a trade
-ChatAnnouncements.OnTradeAdded = function(eventCode, who, tradeIndex, itemSoundCategory)
+ChatAnnouncements.OnTradeAdded = function (eventCode, who, tradeIndex, itemSoundCategory)
     local index = tradeIndex
     local name, icon, stack = GetTradeItemInfo(who, tradeIndex)
     local itemLink = GetTradeItemLink(who, tradeIndex, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
@@ -10933,7 +10933,7 @@ ChatAnnouncements.OnTradeAdded = function(eventCode, who, tradeIndex, itemSoundC
 end
 
 -- Removes items from index if they are removed from the trade
-ChatAnnouncements.OnTradeRemoved = function(eventCode, who, tradeIndex, itemSoundCategory)
+ChatAnnouncements.OnTradeRemoved = function (eventCode, who, tradeIndex, itemSoundCategory)
     local indexOut = tradeIndex
     if who == 0 then
         g_tradeStacksOut[indexOut] = nil
@@ -10943,7 +10943,7 @@ ChatAnnouncements.OnTradeRemoved = function(eventCode, who, tradeIndex, itemSoun
 end
 
 -- Called on player joining a group to determine if message syntax should show group or LFG group.
-ChatAnnouncements.CheckLFGStatusJoin = function()
+ChatAnnouncements.CheckLFGStatusJoin = function ()
     if not g_stopGroupLeaveQueue then
         if not g_lfgDisableGroupEvents then
             if IsInLFGGroup() and not g_joinLFGOverride then
@@ -10998,7 +10998,7 @@ ChatAnnouncements.CheckLFGStatusJoin = function()
 end
 
 -- Called when another player joins the group.
-ChatAnnouncements.PrintJoinStatusNotSelf = function(SendMessage, SendAlert)
+ChatAnnouncements.PrintJoinStatusNotSelf = function (SendMessage, SendAlert)
     -- Bail out if we're hiding events from LFG.
     if g_stopGroupLeaveQueue or g_lfgDisableGroupEvents then
         return
@@ -11014,7 +11014,7 @@ ChatAnnouncements.PrintJoinStatusNotSelf = function(SendMessage, SendAlert)
 end
 
 -- Called on player leaving a group to determine if message syntax should show group or LFG group.
-ChatAnnouncements.CheckLFGStatusLeave = function(WasKicked)
+ChatAnnouncements.CheckLFGStatusLeave = function (WasKicked)
     -- Bail out if we joined an LFG group.
     if g_stopGroupLeaveQueue or g_lfgDisableGroupEvents then
         g_leaveLFGOverride = false
@@ -11032,7 +11032,7 @@ ChatAnnouncements.CheckLFGStatusLeave = function(WasKicked)
 end
 
 -- EVENT_GROUP_INVITE_RECEIVED
-ChatAnnouncements.OnGroupInviteReceived = function(eventCode, inviterName, inviterDisplayName)
+ChatAnnouncements.OnGroupInviteReceived = function (eventCode, inviterName, inviterDisplayName)
     if ChatAnnouncements.SV.Group.GroupCA then
         local finalName = ChatAnnouncements.ResolveNameLink(inviterName, inviterDisplayName)
         local message = zo_strformat(GetString(LUIE_STRING_CA_GROUP_INVITE_MESSAGE), finalName)
@@ -11045,7 +11045,7 @@ ChatAnnouncements.OnGroupInviteReceived = function(eventCode, inviterName, invit
     end
 end
 
-ChatAnnouncements.IndexGroupLoot = function()
+ChatAnnouncements.IndexGroupLoot = function ()
     local groupSize = GetGroupSize()
     for i = 1, groupSize do
         local characterName = GetUnitName("group" .. i)
@@ -11055,7 +11055,7 @@ ChatAnnouncements.IndexGroupLoot = function()
 end
 
 -- EVENT_GROUP_TYPE_CHANGED
-ChatAnnouncements.OnGroupTypeChanged = function(eventCode, largeGroup)
+ChatAnnouncements.OnGroupTypeChanged = function (eventCode, largeGroup)
     local message
     if largeGroup then
         message = GetString(SI_CHAT_ANNOUNCEMENT_IN_LARGE_GROUP)
@@ -11072,7 +11072,7 @@ ChatAnnouncements.OnGroupTypeChanged = function(eventCode, largeGroup)
 end
 
 -- EVENT_GROUP_ELECTION_NOTIFICATION_ADDED
-ChatAnnouncements.VoteNotify = function(eventCode)
+ChatAnnouncements.VoteNotify = function (eventCode)
     local electionType, timeRemainingSeconds, electionDescriptor, targetUnitTag = GetGroupElectionInfo()
     if electionType == GROUP_ELECTION_TYPE_GENERIC_UNANIMOUS then -- Ready Check
         if ChatAnnouncements.SV.Group.GroupVoteCA then
@@ -11101,12 +11101,12 @@ ChatAnnouncements.VoteNotify = function(eventCode)
 end
 
 -- EVENT_GROUPING_TOOLS_NO_LONGER_LFG
-ChatAnnouncements.LFGLeft = function(eventCode)
+ChatAnnouncements.LFGLeft = function (eventCode)
     g_leaveLFGOverride = true
 end
 
 -- EVENT_PLEDGE_OF_MARA_OFFER - EVENT HANDLER
-ChatAnnouncements.MaraOffer = function(eventCode, characterName, isSender, displayName)
+ChatAnnouncements.MaraOffer = function (eventCode, characterName, isSender, displayName)
     -- Display CA
     if ChatAnnouncements.SV.Social.PledgeOfMaraCA then
         local finalName = ChatAnnouncements.ResolveNameLink(characterName, displayName)
@@ -11131,7 +11131,7 @@ ChatAnnouncements.MaraOffer = function(eventCode, characterName, isSender, displ
 end
 
 -- EVENT_DUEL_STARTED -- EVENT HANDLER
-ChatAnnouncements.DuelStarted = function(eventCode)
+ChatAnnouncements.DuelStarted = function (eventCode)
     -- Display CA
     if ChatAnnouncements.SV.Social.DuelStartCA or ChatAnnouncements.SV.Social.DuelStartAlert then
         local message
@@ -11159,12 +11159,12 @@ ChatAnnouncements.DuelStarted = function(eventCode)
     end
 end
 
-ChatAnnouncements.ResetStackSplit = function()
+ChatAnnouncements.ResetStackSplit = function ()
     g_stackSplit = false
     eventManager:UnregisterForUpdate(moduleName .. "StackTracker")
 end
 
-ChatAnnouncements.PrintQueuedMessages = function()
+ChatAnnouncements.PrintQueuedMessages = function ()
     -- Resolve notification messages first
     for i = 1, #QueuedMessages do
         if QueuedMessages[i] and QueuedMessages[i].message ~= "" and QueuedMessages[i].type == "NOTIFICATION" then
@@ -11326,7 +11326,7 @@ local mementoTable = {
     [479] = GetString(LUIE_STRING_SLASHCMDS_COLLECTIBLE_WITCH),
 }
 
-ChatAnnouncements.AnnounceMemento = function()
+ChatAnnouncements.AnnounceMemento = function ()
     local string = mementoTable[LUIE.LastMementoUsed] or nil
     if string == nil then
         LUIE.LastMementoUsed = 0
@@ -11353,7 +11353,7 @@ ChatAnnouncements.AnnounceMemento = function()
     LUIE.LastMementoUsed = 0
 end
 
-ChatAnnouncements.CollectibleUsed = function(_, result, _)
+ChatAnnouncements.CollectibleUsed = function (_, result, _)
     if result ~= COLLECTIBLE_USAGE_BLOCK_REASON_NOT_BLOCKED then
         return
     end
@@ -11362,7 +11362,7 @@ ChatAnnouncements.CollectibleUsed = function(_, result, _)
     zo_callLater(ChatAnnouncements.CollectibleResult, latency)
 end
 
-ChatAnnouncements.CollectibleResult = function()
+ChatAnnouncements.CollectibleResult = function ()
     ChatAnnouncements.AnnounceMemento()
 
     local newAssistant = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT, GAMEPLAY_ACTOR_CATEGORY_PLAYER)

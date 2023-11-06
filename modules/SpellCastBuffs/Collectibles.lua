@@ -13,7 +13,7 @@ local pairs = pairs
 local zo_strformat = zo_strformat
 
 -- Called by SpellCastBuffs.MountStatus to display mount icon
-SpellCastBuffs.DisplayMountIcon = function()
+SpellCastBuffs.DisplayMountIcon = function ()
     --[[
         -- Target support is not implemented
 
@@ -80,7 +80,7 @@ SpellCastBuffs.DisplayMountIcon = function()
 end
 
 -- EVENT_MOUNTED_STATE_CHANGED handler to create Mount Buff icon for player
-SpellCastBuffs.MountStatus = function(eventCode, mounted)
+SpellCastBuffs.MountStatus = function (eventCode, mounted)
     -- Clear current mount icon
     local abilityId = 999017
     SpellCastBuffs.ClearPlayerBuff(abilityId)
@@ -91,14 +91,14 @@ SpellCastBuffs.MountStatus = function(eventCode, mounted)
 end
 
 -- EVENT_COLLECTIBLE_USE_RESULT handler - Waits 100 ms + latency for the delay in activating collectibles before checking
-SpellCastBuffs.CollectibleUsed = function(eventCode, result, isAttemptingActivation)
+SpellCastBuffs.CollectibleUsed = function (eventCode, result, isAttemptingActivation)
     local latency = GetLatency()
     latency = latency + 100
     zo_callLater(SpellCastBuffs.CollectibleBuff, latency)
 end
 
 -- Handles delayed call from SpellCastBuffs.CollectibleUsed()
-SpellCastBuffs.CollectibleBuff = function()
+SpellCastBuffs.CollectibleBuff = function ()
     -- Remove Icon First
     local ids = { 999018, 999019 }
     for _, v in pairs(ids) do

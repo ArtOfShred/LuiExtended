@@ -1534,7 +1534,7 @@ LUIE.Data.Tooltips = Tooltips
 
 ---@param armorType any
 ---@return integer counter
-local GetEquippedArmorPieces = function(armorType)
+local GetEquippedArmorPieces = function (armorType)
     local counter = 0
     for i = 0, 16 do
         local itemLink = GetItemLink(BAG_WORN, i, LINK_STYLE_DEFAULT)
@@ -1546,7 +1546,7 @@ local GetEquippedArmorPieces = function(armorType)
 end
 
 -- Returns dynamic tooltips when called by Tooltip function
-LUIE.DynamicTooltip = function(abilityId)
+LUIE.DynamicTooltip = function (abilityId)
     local tooltip
 
     -- Brace (TODO: Check if still used)

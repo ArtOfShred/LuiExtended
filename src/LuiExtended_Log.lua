@@ -36,7 +36,7 @@ LUIE.log_to_chat = false
     Retrieves the logger object.
     @return table: The logger object.
 ]]
-LUIE.Logger = function()
+LUIE.Logger = function ()
     local self = LUIE
     if not self.logger then
         if LibDebugLogger then
@@ -54,7 +54,7 @@ end
     @param color string: The color code for the log message.
     @param ...: Variable number of arguments to be formatted and logged.
 ]]
-LUIE.Log = function(color, ...)
+LUIE.Log = function (color, ...)
     if LUIE.log_to_chat then
         d("|c" .. color .. LUIE.name .. ": " .. string_format(...) .. "|r")
     end
@@ -64,7 +64,7 @@ end
     Logs a debug message.
     @param ...: Variable number of arguments to be formatted and logged.
 ]]
-LUIE.Debug = function(...)
+LUIE.Debug = function (...)
     LUIE.Log("666666", ...)
     LUIE.Logger():Debug(...)
 end
@@ -73,7 +73,7 @@ end
     Logs an info message.
     @param ...: Variable number of arguments to be formatted and logged.
 ]]
-LUIE.Info = function(...)
+LUIE.Info = function (...)
     LUIE.Log("999999", ...)
     LUIE.Logger():Info(...)
 end
@@ -82,7 +82,7 @@ end
     Logs a warning message.
     @param ...: Variable number of arguments to be formatted and logged.
 ]]
-LUIE.Warn = function(...)
+LUIE.Warn = function (...)
     LUIE.Log("FF8800", ...)
     LUIE.Logger():Warn(...)
 end
@@ -91,7 +91,7 @@ end
     Logs an error message.
     @param ...: Variable number of arguments to be formatted and logged.
 ]]
-LUIE.Error = function(...)
+LUIE.Error = function (...)
     LUIE.Log("FF6666", ...)
     LUIE.Logger():Error(...)
 end

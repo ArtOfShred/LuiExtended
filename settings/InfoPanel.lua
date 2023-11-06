@@ -8,7 +8,7 @@ local InfoPanel = LUIE.InfoPanel
 local zo_strformat = zo_strformat
 
 -- Create Settings Menu
-InfoPanel.CreateSettings = function()
+InfoPanel.CreateSettings = function ()
     -- Load LibAddonMenu
     local LAM = LibAddonMenu2
     if LAM == nil then

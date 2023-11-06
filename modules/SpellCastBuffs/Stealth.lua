@@ -15,7 +15,7 @@ local Tooltips = LUIE.Data.Tooltips
 local g_currentDisguise = 0
 
 -- Called by SpellCastBuffs.DisguiseItem()
-SpellCastBuffs.SetDisguiseItem = function()
+SpellCastBuffs.SetDisguiseItem = function ()
     local abilityId = 999020
     -- Remove buff first
     SpellCastBuffs.ClearPlayerBuff(abilityId)
@@ -50,7 +50,7 @@ SpellCastBuffs.SetDisguiseItem = function()
 end
 
 -- Called on item slot change for Disguise.
-SpellCastBuffs.DisguiseItem = function(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
+SpellCastBuffs.DisguiseItem = function (eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
     -- If slotId isn't the disguise/tabard slot then return
     if slotId ~= EQUIP_SLOT_COSTUME or SpellCastBuffs.SV.IgnoreDisguise or SpellCastBuffs.SV.HidePlayerBuffs then
         return
@@ -64,7 +64,7 @@ SpellCastBuffs.DisguiseItem = function(eventCode, bagId, slotId, isNewItem, item
 end
 
 -- Handles disguise changes for player/reticleover
-SpellCastBuffs.DisguiseStateChanged = function(eventCode, unitTag, disguiseState)
+SpellCastBuffs.DisguiseStateChanged = function (eventCode, unitTag, disguiseState)
     -- Bail out if we don't have disguise or unitTag buffs enabled
     if unitTag == "player" and (not SpellCastBuffs.SV.DisguiseStatePlayer or SpellCastBuffs.SV.HidePlayerBuffs) then
         return
@@ -104,14 +104,14 @@ SpellCastBuffs.DisguiseStateChanged = function(eventCode, unitTag, disguiseState
     end
 end
 
-local RemoveSneak = function(context)
+local RemoveSneak = function (context)
     local abilityId = 20299
     local abilityName = Abilities.Innate_Sneak
     local contexta = SpellCastBuffs.DetermineContextSimple(context, abilityId, abilityName)
     SpellCastBuffs.EffectsList[contexta][abilityId] = nil
 end
 
-local RemoveHidden = function(context)
+local RemoveHidden = function (context)
     local abilityId = 20309
     local abilityName = Abilities.Innate_Hidden
     local contextb = SpellCastBuffs.DetermineContextSimple(context, abilityId, abilityName)
@@ -119,7 +119,7 @@ local RemoveHidden = function(context)
 end
 
 -- Handles stealth state changes for player/reticleover
-SpellCastBuffs.StealthStateChanged = function(eventCode, unitTag, stealthState)
+SpellCastBuffs.StealthStateChanged = function (eventCode, unitTag, stealthState)
     -- Bail out if we don't have stealth or unitTag buffs enabled
     if unitTag == "player" and (not SpellCastBuffs.SV.StealthStatePlayer or SpellCastBuffs.SV.HidePlayerBuffs) then
         return

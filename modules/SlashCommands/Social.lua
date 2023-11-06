@@ -9,7 +9,7 @@ local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
 
 -- Slash Command to add someone to the friendslist
-SlashCommands.SlashFriend = function(option)
+SlashCommands.SlashFriend = function (option)
     if option == "" or option == nil then
         printToChat(GetString(LUIE_STRING_SLASHCMDS_FRIEND_FAILED_NONAME), true)
         if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
@@ -22,7 +22,7 @@ SlashCommands.SlashFriend = function(option)
 end
 
 -- Slash Command to add someone to ignore list
-SlashCommands.SlashIgnore = function(option)
+SlashCommands.SlashIgnore = function (option)
     if option == "" or option == nil then
         printToChat(GetString(LUIE_STRING_SLASHCMDS_IGNORE_FAILED_NONAME), true)
         if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
@@ -35,7 +35,7 @@ SlashCommands.SlashIgnore = function(option)
 end
 
 -- Slash Command to remove someone from friends list
-SlashCommands.SlashRemoveFriend = function(option)
+SlashCommands.SlashRemoveFriend = function (option)
     if option == "" or option == nil then
         printToChat(GetString(LUIE_STRING_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME), true)
         if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
@@ -84,7 +84,7 @@ SlashCommands.SlashRemoveFriend = function(option)
 end
 
 -- Slash Command to remove a given name from the ignore list
-SlashCommands.SlashRemoveIgnore = function(option)
+SlashCommands.SlashRemoveIgnore = function (option)
     if option == "" or option == nil then
         printToChat(GetString(LUIE_STRING_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE), true)
         if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then

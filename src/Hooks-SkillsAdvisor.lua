@@ -5,7 +5,7 @@
 
 -- Just a copy of esoui/ingame/skillsadvisor/gamepad/skillsadvisor_suggestions_gamepad.lua, this is the easiest way to override for custom ability icons.
 local table_insert = table.insert
-LUIE.InitializeHooksSkillAdvisor = function()
+LUIE.InitializeHooksSkillAdvisor = function ()
     --------------
     --Initialize--
     --------------
@@ -121,7 +121,7 @@ LUIE.InitializeHooksSkillAdvisor = function()
             },
         }
 
-        local Back = function()
+        local Back = function ()
             self:Deactivate()
             PlaySound(SOUNDS.GAMEPAD_MENU_BACK)
             GAMEPAD_SKILLS:SetMode(ZO_GAMEPAD_SKILLS_SKILL_LIST_BROWSE_MODE)
@@ -175,7 +175,7 @@ LUIE.InitializeHooksSkillAdvisor = function()
     end
 
     do
-        local AddEntry = function(scrollData, skillProgressionData)
+        local AddEntry = function (scrollData, skillProgressionData)
             local name = skillProgressionData:IsPassive() and skillProgressionData:GetFormattedNameWithRank() or skillProgressionData:GetFormattedName()
             local icon = GetAbilityIcon(skillProgressionData.abilityId) -- Pull custom ability icon
             local entryData = ZO_GamepadEntryData:New(name, icon)
@@ -278,16 +278,16 @@ LUIE.InitializeHooksSkillAdvisor = function()
     -- XML Functions
     -----------------------------
 
-    ZO_SkillsAdvisorSuggestions_Gamepad_MenuEntryHeader_OnInitialized = function(control)
+    ZO_SkillsAdvisorSuggestions_Gamepad_MenuEntryHeader_OnInitialized = function (control)
         control.label = control:GetNamedChild("Label")
     end
 
-    ZO_SkillsAdvisorSuggestions_Gamepad_MenuEntryTemplate_OnInitialized = function(control)
+    ZO_SkillsAdvisorSuggestions_Gamepad_MenuEntryTemplate_OnInitialized = function (control)
         ZO_SharedGamepadEntry_OnInitialized(control)
         ZO_SharedGamepadEntry_SetHeightFromLabels(control)
     end
 
-    ZO_SkillsAdvisorSuggestions_Gamepad_OnInitialized = function(control)
+    ZO_SkillsAdvisorSuggestions_Gamepad_OnInitialized = function (control)
         ZO_GAMEPAD_SKILLS_ADVISOR_SUGGESTIONS_WINDOW = SkillsAdvisorSuggestions_Gamepad:New(control)
     end
 end

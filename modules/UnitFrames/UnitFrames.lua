@@ -277,7 +277,7 @@ local g_DefaultFramesOptions = {
 }
 
 -- Default Regen/degen animation used on default group frames and custom frames
-local CreateRegenAnimation = function(parent, anchors, dims, alpha, number)
+local CreateRegenAnimation = function (parent, anchors, dims, alpha, number)
     if #dims ~= 2 then
         dims = { parent:GetDimensions() }
     end
@@ -337,7 +337,7 @@ local CreateRegenAnimation = function(parent, anchors, dims, alpha, number)
 end
 
 -- Decreased armour overlay visuals
-local CreateDecreasedArmorOverlay = function(parent, small)
+local CreateDecreasedArmorOverlay = function (parent, small)
     local control = UI.Control(parent, { CENTER, CENTER }, { 512, 32 }, false)
     control.smallTex = UI.Texture(control, { CENTER, CENTER }, { 512, 32 }, "/EsoUI/Art/UnitAttributeVisualizer/attributeBar_dynamic_decreasedArmor_small.dds", 2, false)
     control.smallTex:SetDrawTier(DT_HIGH)
@@ -353,7 +353,7 @@ local CreateDecreasedArmorOverlay = function(parent, small)
     return control
 end
 
-UnitFrames.AddCurrentPetsToCustomList = function(list)
+UnitFrames.AddCurrentPetsToCustomList = function (list)
     for i = 1, 7 do
         local unitTag = "playerpet" .. i
         if DoesUnitExist(unitTag) then
@@ -366,7 +366,7 @@ UnitFrames.AddCurrentPetsToCustomList = function(list)
 end
 
 -- Bulk list add from menu buttons
-UnitFrames.AddBulkToCustomList = function(list, table)
+UnitFrames.AddBulkToCustomList = function (list, table)
     if table ~= nil then
         for k, v in pairs(table) do
             UnitFrames.AddToCustomList(list, k)
@@ -374,7 +374,7 @@ UnitFrames.AddBulkToCustomList = function(list, table)
     end
 end
 
-UnitFrames.ClearCustomList = function(list)
+UnitFrames.ClearCustomList = function (list)
     local listRef = list == UnitFrames.SV.whitelist and GetString(LUIE_STRING_CUSTOM_LIST_UF_WHITELIST) or ""
     for k, v in pairs(list) do
         list[k] = nil
@@ -385,7 +385,7 @@ UnitFrames.ClearCustomList = function(list)
 end
 
 -- List Handling (Add) Pet Whitelist
-UnitFrames.AddToCustomList = function(list, input)
+UnitFrames.AddToCustomList = function (list, input)
     local listRef = list == UnitFrames.SV.whitelist and GetString(LUIE_STRING_CUSTOM_LIST_UF_WHITELIST) or ""
     if input ~= "" then
         list[input] = true
@@ -396,7 +396,7 @@ UnitFrames.AddToCustomList = function(list, input)
 end
 
 -- List Handling (Remove) Pet Whitelist
-UnitFrames.RemoveFromCustomList = function(list, input)
+UnitFrames.RemoveFromCustomList = function (list, input)
     local listRef = list == UnitFrames.SV.whitelist and GetString(LUIE_STRING_CUSTOM_LIST_UF_WHITELIST) or ""
     if input ~= "" then
         list[input] = nil
@@ -406,7 +406,7 @@ UnitFrames.RemoveFromCustomList = function(list, input)
     end
 end
 
-UnitFrames.GetDefaultFramesOptions = function(frame)
+UnitFrames.GetDefaultFramesOptions = function (frame)
     local retval = {}
     for k, v in pairs(g_DefaultFramesOptions) do
         if not (frame == "Boss" and k == 3) then
@@ -416,7 +416,7 @@ UnitFrames.GetDefaultFramesOptions = function(frame)
     return retval
 end
 
-UnitFrames.SetDefaultFramesSetting = function(frame, value)
+UnitFrames.SetDefaultFramesSetting = function (frame, value)
     local key = "DefaultFramesNew" .. tostring(frame)
     if value == g_DefaultFramesOptions[3] then
         SetSetting(SETTING_TYPE_UI, UI_SETTING_RESOURCE_NUMBERS, 0)
@@ -428,7 +428,7 @@ UnitFrames.SetDefaultFramesSetting = function(frame, value)
     end
 end
 
-UnitFrames.GetDefaultFramesSetting = function(frame, default)
+UnitFrames.GetDefaultFramesSetting = function (frame, default)
     local key = "DefaultFramesNew" .. tostring(frame)
     local from = default and UnitFrames.Defaults or UnitFrames.SV
     local value = from[key]
@@ -436,7 +436,7 @@ UnitFrames.GetDefaultFramesSetting = function(frame, default)
 end
 
 -- Right Click function for group frames - basically just a copy of the ZOS group frame menu options
-UnitFrames.GroupFrames_OnMouseUp = function(self, button, upInside)
+UnitFrames.GroupFrames_OnMouseUp = function (self, button, upInside)
     local unitTag = self.defaultUnitTag
     if button == MOUSE_BUTTON_INDEX_RIGHT and upInside then
         ClearMenu()
@@ -510,7 +510,7 @@ UnitFrames.GroupFrames_OnMouseUp = function(self, button, upInside)
     end
 end
 
-UnitFrames.AltBar_OnMouseEnterXP = function(control)
+UnitFrames.AltBar_OnMouseEnterXP = function (control)
     local isChampion = IsUnitChampion("player")
     local level
     local current
@@ -549,8 +549,8 @@ UnitFrames.AltBar_OnMouseEnterXP = function(control)
     end
 end
 
-UnitFrames.AltBar_OnMouseEnterWerewolf = function(control)
-    local UpdateWerewolfPower = function()
+UnitFrames.AltBar_OnMouseEnterWerewolf = function (control)
+    local UpdateWerewolfPower = function ()
         local currentPower, maxPower = GetUnitPower("player", COMBAT_MECHANIC_FLAGS_WEREWOLF)
         local percentagePower = zo_floor(currentPower / maxPower * 100)
 
@@ -565,8 +565,8 @@ UnitFrames.AltBar_OnMouseEnterWerewolf = function(control)
     eventManager:AddFilterForEvent(moduleName .. "TooltipPower", EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, COMBAT_MECHANIC_FLAGS_WEREWOLF, REGISTER_FILTER_UNIT_TAG, "player")
 end
 
-UnitFrames.AltBar_OnMouseEnterMounted = function(control)
-    local UpdateMountPower = function()
+UnitFrames.AltBar_OnMouseEnterMounted = function (control)
+    local UpdateMountPower = function ()
         local currentPower, maxPower = GetUnitPower("player", COMBAT_MECHANIC_FLAGS_MOUNT_STAMINA)
         local percentagePower = zo_floor(currentPower / maxPower * 100)
         InitializeTooltip(InformationTooltip, control, BOTTOM, 0, -10)
@@ -581,8 +581,8 @@ UnitFrames.AltBar_OnMouseEnterMounted = function(control)
     eventManager:AddFilterForEvent(moduleName .. "TooltipPower", EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, COMBAT_MECHANIC_FLAGS_MOUNT_STAMINA, REGISTER_FILTER_UNIT_TAG, "player")
 end
 
-UnitFrames.AltBar_OnMouseEnterSiege = function(control)
-    local UpdateSiegePower = function()
+UnitFrames.AltBar_OnMouseEnterSiege = function (control)
+    local UpdateSiegePower = function ()
         local currentPower, maxPower = GetUnitPower("controlledsiege", COMBAT_MECHANIC_FLAGS_HEALTH)
         local percentagePower = zo_floor(currentPower / maxPower * 100)
         local siegeName = GetUnitName("controlledsiege")
@@ -598,14 +598,14 @@ UnitFrames.AltBar_OnMouseEnterSiege = function(control)
     eventManager:AddFilterForEvent(moduleName .. "TooltipPower", EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, COMBAT_MECHANIC_FLAGS_HEALTH, REGISTER_FILTER_UNIT_TAG, "controlledsiege")
 end
 
-UnitFrames.AltBar_OnMouseExit = function(control)
+UnitFrames.AltBar_OnMouseExit = function (control)
     ClearTooltip(InformationTooltip)
     eventManager:UnregisterForEvent(moduleName .. "TooltipPower", EVENT_POWER_UPDATE)
 end
 
 -- Used to create default frames extender controls for player and target.
 -- Called from UnitFrames.Initialize
-local CreateDefaultFrames = function()
+local CreateDefaultFrames = function ()
     -- Create text overlay for default unit frames for player and reticleover.
     local default_controls = {}
 
@@ -674,7 +674,7 @@ end
 
 -- Used to create custom frames extender controls for player and target.
 -- Called from UnitFrames.Initialize
-local CreateCustomFrames = function()
+local CreateCustomFrames = function ()
     -- Create Custom unit frames
     if UnitFrames.SV.CustomFramesPlayer then
         -- Player Frame
@@ -1605,7 +1605,7 @@ end
 
 local defaultPos = {}
 
-UnitFrames.CustomFramesApplyBarAlignment = function()
+UnitFrames.CustomFramesApplyBarAlignment = function ()
     if UnitFrames.CustomFrames["player"] then
         local hpBar = UnitFrames.CustomFrames["player"][COMBAT_MECHANIC_FLAGS_HEALTH]
         if hpBar then
@@ -1633,13 +1633,13 @@ UnitFrames.CustomFramesApplyBarAlignment = function()
 end
 
 -- Define a function to extract the anchor information
-local GetAnchorInfo = function(frame)
+local GetAnchorInfo = function (frame)
     local isValidAnchor, point, relativeTo, relativePoint, offsetX, offsetY = frame:GetAnchor()
     return { point, relativeTo, relativePoint, offsetX, offsetY }
 end
 
 -- Save default frame positions
-UnitFrames.SaveDefaultFramePositions = function()
+UnitFrames.SaveDefaultFramePositions = function ()
     -- Get Default Positions
     defaultPos.health = GetAnchorInfo(ZO_PlayerAttributeHealth)
     defaultPos.magicka = GetAnchorInfo(ZO_PlayerAttributeMagicka)
@@ -1650,7 +1650,7 @@ UnitFrames.SaveDefaultFramePositions = function()
 end
 
 -- Adjust default frame position.
-UnitFrames.RepositionDefaultFrames = function()
+UnitFrames.RepositionDefaultFrames = function ()
     if not UnitFrames.SV.RepositionFrames then
         if defaultPos.health then
             ZO_PlayerAttributeHealth:ClearAnchors()
@@ -1689,7 +1689,7 @@ UnitFrames.RepositionDefaultFrames = function()
 end
 
 -- Main entry point to this module
-UnitFrames.Initialize = function(enabled)
+UnitFrames.Initialize = function (enabled)
     -- Load settings
     local isCharacterSpecific = LUIESV.Default[GetDisplayName()]["$AccountWide"].CharacterSpecificSV
     if isCharacterSpecific then
@@ -1837,7 +1837,7 @@ UnitFrames.Initialize = function(enabled)
 end
 
 -- Sets out-of-combat transparency values for default user-frames
-UnitFrames.SetDefaultFramesTransparency = function(min_pct_value, max_pct_value)
+UnitFrames.SetDefaultFramesTransparency = function (min_pct_value, max_pct_value)
     if min_pct_value ~= nil then
         UnitFrames.SV.DefaultOocTransparency = min_pct_value
     end
@@ -1860,7 +1860,7 @@ UnitFrames.SetDefaultFramesTransparency = function(min_pct_value, max_pct_value)
 end
 
 -- Update selection for target name coloring
-UnitFrames.TargetColorByReaction = function(value)
+UnitFrames.TargetColorByReaction = function (value)
     -- If we have a parameter, save it
     if value ~= nil then
         UnitFrames.SV.TargetColourByReaction = value
@@ -1872,7 +1872,7 @@ UnitFrames.TargetColorByReaction = function(value)
 end
 
 -- Update selection for target name coloring
-UnitFrames.ReticleColorByReaction = function(value)
+UnitFrames.ReticleColorByReaction = function (value)
     if value ~= nil then
         UnitFrames.SV.ReticleColourByReaction = value
     end
@@ -1883,7 +1883,7 @@ UnitFrames.ReticleColorByReaction = function(value)
 end
 
 -- Update format for labels on CustomFrames
-UnitFrames.CustomFramesFormatLabels = function(menu)
+UnitFrames.CustomFramesFormatLabels = function (menu)
     -- Search CustomFrames for attribute bars with correct labels
 
     -- Format Player Labels
@@ -2029,7 +2029,7 @@ end
 
 -- Runs on the EVENT_PLAYER_ACTIVATED listener.
 -- This handler fires every time the player is loaded. Used to set initial values.
-UnitFrames.OnPlayerActivated = function(eventCode)
+UnitFrames.OnPlayerActivated = function (eventCode)
     -- Reload values for player frames
     UnitFrames.ReloadValues("player")
     UnitFrames.UpdateRegen("player", STAT_MAGICKA_REGEN_COMBAT, ATTRIBUTE_MAGICKA, COMBAT_MECHANIC_FLAGS_MAGICKA)
@@ -2071,7 +2071,7 @@ end
 
 -- Runs on the EVENT_POWER_UPDATE listener.
 -- This handler fires every time unit attribute changes.
-UnitFrames.OnPowerUpdate = function(eventCode, unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax)
+UnitFrames.OnPowerUpdate = function (eventCode, unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax)
     -- Save Health value for future reference -- do it only for tracked unitTags that were defined on initialization
     if powerType == COMBAT_MECHANIC_FLAGS_HEALTH and g_savedHealth[unitTag] then
         g_savedHealth[unitTag] = { powerValue, powerMax, powerEffectiveMax, g_savedHealth[unitTag][4] or 0, g_savedHealth[unitTag][5] or 0 }
@@ -2132,7 +2132,7 @@ UnitFrames.OnPowerUpdate = function(eventCode, unitTag, powerIndex, powerType, p
     end
 end
 
-UnitFrames.CustomFramesUnreferencePetControl = function(first)
+UnitFrames.CustomFramesUnreferencePetControl = function (first)
     local last = 7
     for i = first, last do
         local unitTag = "PetGroup" .. i
@@ -2141,7 +2141,7 @@ UnitFrames.CustomFramesUnreferencePetControl = function(first)
     end
 end
 
-UnitFrames.CompanionUpdate = function()
+UnitFrames.CompanionUpdate = function ()
     if UnitFrames.CustomFrames.companion == nil then
         return
     end
@@ -2156,7 +2156,7 @@ UnitFrames.CompanionUpdate = function()
     end
 end
 
-UnitFrames.CustomPetUpdate = function()
+UnitFrames.CustomPetUpdate = function ()
     if UnitFrames.CustomFrames.PetGroup1 == nil then
         return
     end
@@ -2208,7 +2208,7 @@ UnitFrames.CustomPetUpdate = function()
 end
 
 -- Runs on the EVENT_ACTIVE_COMPANION_STATE_CHANGED listener.
-UnitFrames.ActiveCompanionStateChanged = function(eventCode, newState, oldState)
+UnitFrames.ActiveCompanionStateChanged = function (eventCode, newState, oldState)
     if UnitFrames.CustomFrames.companion == nil then
         return
     end
@@ -2224,7 +2224,7 @@ end
 
 -- Runs on the EVENT_UNIT_CREATED listener.
 -- Used to create DefaultFrames UI controls and request delayed CustomFrames group frame update
-UnitFrames.OnUnitCreated = function(eventCode, unitTag)
+UnitFrames.OnUnitCreated = function (eventCode, unitTag)
     --d( string_format("[%s] OnUnitCreated: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
     -- Create on-fly UI controls for default UI group member and reread his values
     if g_DefaultFrames.SmallGroup then
@@ -2256,7 +2256,7 @@ end
 
 -- Runs on the EVENT_UNIT_DESTROYED listener.
 -- Used to request delayed CustomFrames group frame update
-UnitFrames.OnUnitDestroyed = function(eventCode, unitTag)
+UnitFrames.OnUnitDestroyed = function (eventCode, unitTag)
     --d( string_format("[%s] OnUnitDestroyed: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
     -- Make sure we do not try to update bars on this unitTag before full group update is complete
     if "group" == zo_strsub(unitTag, 0, 5) then
@@ -2278,7 +2278,7 @@ UnitFrames.OnUnitDestroyed = function(eventCode, unitTag)
 end
 
 -- Creates default group unit UI controls on-fly
-UnitFrames.DefaultFramesCreateUnitGroupControls = function(unitTag)
+UnitFrames.DefaultFramesCreateUnitGroupControls = function (unitTag)
     -- First make preparation for "groupN" unitTag labels
     if g_DefaultFrames[unitTag] == nil then         -- If unitTag is already in our list, then skip this
         if "group" == zo_strsub(unitTag, 0, 5) then -- If it is really a group member unitTag
@@ -2307,7 +2307,7 @@ UnitFrames.DefaultFramesCreateUnitGroupControls = function(unitTag)
 end
 
 -- Runs on the EVENT_UNIT_ATTRIBUTE_VISUAL_ADDED listener.
-UnitFrames.OnVisualizationAdded = function(eventCode, unitTag, unitAttributeVisual, statType, attributeType, powerType, value, maxValue)
+UnitFrames.OnVisualizationAdded = function (eventCode, unitTag, unitAttributeVisual, statType, attributeType, powerType, value, maxValue)
     if unitAttributeVisual == ATTRIBUTE_VISUAL_POWER_SHIELDING then
         UnitFrames.UpdateShield(unitTag, value, maxValue)
     elseif unitAttributeVisual == ATTRIBUTE_VISUAL_TRAUMA then
@@ -2322,7 +2322,7 @@ UnitFrames.OnVisualizationAdded = function(eventCode, unitTag, unitAttributeVisu
 end
 
 -- Runs on the EVENT_UNIT_ATTRIBUTE_VISUAL_REMOVED listener.
-UnitFrames.OnVisualizationRemoved = function(eventCode, unitTag, unitAttributeVisual, statType, attributeType, powerType, value, maxValue)
+UnitFrames.OnVisualizationRemoved = function (eventCode, unitTag, unitAttributeVisual, statType, attributeType, powerType, value, maxValue)
     if unitAttributeVisual == ATTRIBUTE_VISUAL_POWER_SHIELDING then
         UnitFrames.UpdateShield(unitTag, 0, maxValue)
     elseif unitAttributeVisual == ATTRIBUTE_VISUAL_TRAUMA then
@@ -2337,7 +2337,7 @@ UnitFrames.OnVisualizationRemoved = function(eventCode, unitTag, unitAttributeVi
 end
 
 -- Runs on the EVENT_UNIT_ATTRIBUTE_VISUAL_UPDATED listener.
-UnitFrames.OnVisualizationUpdated = function(eventCode, unitTag, unitAttributeVisual, statType, attributeType, powerType, oldValue, newValue, oldMaxValue, newMaxValue)
+UnitFrames.OnVisualizationUpdated = function (eventCode, unitTag, unitAttributeVisual, statType, attributeType, powerType, oldValue, newValue, oldMaxValue, newMaxValue)
     if unitAttributeVisual == ATTRIBUTE_VISUAL_POWER_SHIELDING then
         UnitFrames.UpdateShield(unitTag, newValue, newMaxValue)
     elseif unitAttributeVisual == ATTRIBUTE_VISUAL_TRAUMA then
@@ -2354,14 +2354,14 @@ end
 -- Runs on the EVENT_TARGET_CHANGE listener.
 -- This handler fires every time the someone target changes.
 -- This function is needed in case the player teleports via Way Shrine
-UnitFrames.OnTargetChange = function(eventCode, unitTag)
+UnitFrames.OnTargetChange = function (eventCode, unitTag)
     if unitTag ~= "player" then
         return
     end
     UnitFrames.OnReticleTargetChanged(eventCode)
 end
 
-UnitFrames.UpdateDefaultLevelTarget = function()
+UnitFrames.UpdateDefaultLevelTarget = function ()
     local targetLevel = ZO_TargetUnitFramereticleoverLevel
     local targetChamp = ZO_TargetUnitFramereticleoverChampionIcon
     local targetName = ZO_TargetUnitFramereticleoverName
@@ -2392,7 +2392,7 @@ end
 -- Runs on the EVENT_RETICLE_TARGET_CHANGED listener.
 -- This handler fires every time the player's reticle target changes.
 -- Used to read initial values of target's health and shield.
-UnitFrames.OnReticleTargetChanged = function(eventCode)
+UnitFrames.OnReticleTargetChanged = function (eventCode)
     if DoesUnitExist("reticleover") then
         UnitFrames.ReloadValues("reticleover")
 
@@ -2535,14 +2535,14 @@ end
 
 -- Runs on the EVENT_DISPOSITION_UPDATE listener.
 -- Used to reread parameters of the target
-UnitFrames.OnDispositionUpdate = function(eventCode, unitTag)
+UnitFrames.OnDispositionUpdate = function (eventCode, unitTag)
     if unitTag == "reticleover" then
         UnitFrames.OnReticleTargetChanged(eventCode)
     end
 end
 
 -- Used to query initial values and display them in corresponding control
-UnitFrames.ReloadValues = function(unitTag)
+UnitFrames.ReloadValues = function (unitTag)
     -- Build list of powerTypes this unitTag has in both DefaultFrames and CustomFrames
     local powerTypes = {}
     if g_DefaultFrames[unitTag] then
@@ -2613,7 +2613,7 @@ local HIDE_LEVEL_TYPES = {
     [UNIT_TYPE_SIMPLEINTERACTOBJ] = true,
 }
 
-local IsGuildMate = function(unitTag)
+local IsGuildMate = function (unitTag)
     local displayName = GetUnitDisplayName(unitTag)
     if displayName == playerDisplayName then
         return
@@ -2628,7 +2628,7 @@ local IsGuildMate = function(unitTag)
 end
 
 -- Updates text labels, classIcon, etc
-UnitFrames.UpdateStaticControls = function(unitFrame)
+UnitFrames.UpdateStaticControls = function (unitFrame)
     if unitFrame == nil then
         return
     end
@@ -2847,7 +2847,7 @@ UnitFrames.UpdateStaticControls = function(unitFrame)
     end
 end
 
-UnitFrames.MenuUpdatePlayerFrameOptions = function(option)
+UnitFrames.MenuUpdatePlayerFrameOptions = function (option)
     if UnitFrames.CustomFrames.reticleover then
         local reticleover = UnitFrames.CustomFrames.reticleover
         if option == 1 then
@@ -2869,7 +2869,7 @@ end
 
 -- Updates single attribute.
 -- Usually called from OnPowerUpdate handler.
-UnitFrames.UpdateAttribute = function(unitTag, powerType, attributeFrame, powerValue, powerEffectiveMax, isTraumaFlag, forceInit)
+UnitFrames.UpdateAttribute = function (unitTag, powerType, attributeFrame, powerValue, powerEffectiveMax, isTraumaFlag, forceInit)
     if attributeFrame == nil then
         return
     end
@@ -2962,7 +2962,7 @@ end
 
 -- Updates title for unit if changed, and also re-anchors buffs or toggles display on/off if the unitTag had no title selected previously
 -- Called from EVENT_TITLE_UPDATE & EVENT_RANK_POINT_UPDATE
-UnitFrames.TitleUpdate = function(eventCode, unitTag)
+UnitFrames.TitleUpdate = function (eventCode, unitTag)
     -- No need to update title for anything but reticleover target
     if unitTag ~= "reticleover" then
         return
@@ -2974,7 +2974,7 @@ end
 
 -- Updates Invulnerable Overlay for given unit.
 -- Called from EVENT_UNIT_ATTRIBUTE_VISUAL_* listeners.
-UnitFrames.UpdateInvulnerable = function(unitTag)
+UnitFrames.UpdateInvulnerable = function (unitTag)
     if g_savedHealth[unitTag] == nil then
         --d( "LUIE DEBUG: Stored health is nil: ", unitTag )
         return
@@ -2995,7 +2995,7 @@ end
 
 -- Updates shield value for given unit.
 -- Called from EVENT_UNIT_ATTRIBUTE_VISUAL_* listeners.
-UnitFrames.UpdateShield = function(unitTag, value, maxValue)
+UnitFrames.UpdateShield = function (unitTag, value, maxValue)
     if g_savedHealth[unitTag] == nil then
         --d( "LUIE DEBUG: Stored health is nil: ", unitTag )
         return
@@ -3021,7 +3021,7 @@ end
 
 -- Updates trauma value for given unit.
 -- Called from EVENT_UNIT_ATTRIBUTE_VISUAL_* listeners.
-UnitFrames.UpdateTrauma = function(unitTag, value, maxValue)
+UnitFrames.UpdateTrauma = function (unitTag, value, maxValue)
     if g_savedHealth[unitTag] == nil then
         --d( "LUIE DEBUG: Stored health is nil: ", unitTag )
         return
@@ -3046,7 +3046,7 @@ UnitFrames.UpdateTrauma = function(unitTag, value, maxValue)
 end
 
 -- Here actual update of shield bar on attribute is done
-UnitFrames.UpdateShieldBar = function(attributeFrame, shieldValue, healthEffectiveMax)
+UnitFrames.UpdateShieldBar = function (attributeFrame, shieldValue, healthEffectiveMax)
     if attributeFrame == nil or attributeFrame.shield == nil then
         return
     end
@@ -3072,7 +3072,7 @@ UnitFrames.UpdateShieldBar = function(attributeFrame, shieldValue, healthEffecti
 end
 
 -- Here actual update of trauma bar on attribute is done
-UnitFrames.UpdateTraumaBar = function(attributeFrame, traumaValue, healthValue, healthEffectiveMax)
+UnitFrames.UpdateTraumaBar = function (attributeFrame, traumaValue, healthValue, healthEffectiveMax)
     if attributeFrame == nil or attributeFrame.trauma == nil then
         return
     end
@@ -3092,7 +3092,7 @@ end
 
 -- Reroutes call for regen/degen animation for given unit.
 -- Called from EVENT_UNIT_ATTRIBUTE_VISUAL_* listeners.
-UnitFrames.UpdateRegen = function(unitTag, statType, attributeType, powerType)
+UnitFrames.UpdateRegen = function (unitTag, statType, attributeType, powerType)
     if powerType ~= COMBAT_MECHANIC_FLAGS_HEALTH then
         return
     end
@@ -3130,7 +3130,7 @@ UnitFrames.UpdateRegen = function(unitTag, statType, attributeType, powerType)
 end
 
 -- Performs actual display of animation control if any
-UnitFrames.DisplayRegen = function(control, isShown)
+UnitFrames.DisplayRegen = function (control, isShown)
     if control == nil then
         return
     end
@@ -3151,7 +3151,7 @@ end
 -- Updates decreasedArmor texture for given unit.
 -- While this applicable only to custom frames, we do not need to split this function into 2 different ones
 -- Called from EVENT_UNIT_ATTRIBUTE_VISUAL_* listeners.
-UnitFrames.UpdateStat = function(unitTag, statType, attributeType, powerType)
+UnitFrames.UpdateStat = function (unitTag, statType, attributeType, powerType)
     -- Build a list of UI controls to hold this statType on different UnitFrames lists
     local statControls = {}
 
@@ -3181,7 +3181,7 @@ end
 
 -- Forces to reload static information on unit frames.
 -- Called from EVENT_LEVEL_UPDATE and EVENT_VETERAN_RANK_UPDATE listeners.
-UnitFrames.OnLevelUpdate = function(eventCode, unitTag, level)
+UnitFrames.OnLevelUpdate = function (eventCode, unitTag, level)
     UnitFrames.UpdateStaticControls(g_DefaultFrames[unitTag])
     UnitFrames.UpdateStaticControls(UnitFrames.CustomFrames[unitTag])
     UnitFrames.UpdateStaticControls(g_AvaCustFrames[unitTag])
@@ -3194,28 +3194,28 @@ end
 
 -- Runs on the EVENT_PLAYER_COMBAT_STATE listener.
 -- This handler fires every time player enters or leaves combat
-UnitFrames.OnPlayerCombatState = function(eventCode, inCombat)
+UnitFrames.OnPlayerCombatState = function (eventCode, inCombat)
     g_statFull.combat = not inCombat
     UnitFrames.CustomFramesApplyInCombat()
 end
 
 -- Runs on the EVENT_WEREWOLF_STATE_CHANGED listener.
-UnitFrames.OnWerewolf = function(eventCode, werewolf)
+UnitFrames.OnWerewolf = function (eventCode, werewolf)
     UnitFrames.CustomFramesSetupAlternative(werewolf, false, false)
 end
 
 -- Runs on the EVENT_BEGIN_SIEGE_CONTROL, EVENT_END_SIEGE_CONTROL, EVENT_LEAVE_RAM_ESCORT listeners.
-UnitFrames.OnSiege = function(eventCode)
+UnitFrames.OnSiege = function (eventCode)
     UnitFrames.CustomFramesSetupAlternative(false, nil, false)
 end
 
 -- Runs on the EVENT_MOUNTED_STATE_CHANGED listener.
-UnitFrames.OnMount = function(eventCode, mounted)
+UnitFrames.OnMount = function (eventCode, mounted)
     UnitFrames.CustomFramesSetupAlternative(IsWerewolf(), false, mounted)
 end
 
 -- Runs on the EVENT_EXPERIENCE_UPDATE listener.
-UnitFrames.OnXPUpdate = function(eventCode, unitTag, currentExp, maxExp, reason)
+UnitFrames.OnXPUpdate = function (eventCode, unitTag, currentExp, maxExp, reason)
     if unitTag ~= "player" or not UnitFrames.CustomFrames.player then
         return
     end
@@ -3231,7 +3231,7 @@ UnitFrames.OnXPUpdate = function(eventCode, unitTag, currentExp, maxExp, reason)
 end
 
 -- Helper function that updates Champion XP bar. Called from event listener with 5 sec delay
-UnitFrames.UpdateVeteranXP = function()
+UnitFrames.UpdateVeteranXP = function ()
     -- Unregister update function
     eventManager:UnregisterForUpdate(g_PendingUpdate.VeteranXP.name)
 
@@ -3260,14 +3260,14 @@ UnitFrames.UpdateVeteranXP = function()
 end
 
 -- Runs on the EVENT_GROUP_SUPPORT_RANGE_UPDATE listener.
-UnitFrames.OnGroupSupportRangeUpdate = function(eventCode, unitTag, status)
+UnitFrames.OnGroupSupportRangeUpdate = function (eventCode, unitTag, status)
     if UnitFrames.CustomFrames[unitTag] and UnitFrames.CustomFrames[unitTag].control then
         UnitFrames.CustomFrames[unitTag].control:SetAlpha(status and (UnitFrames.SV.GroupAlpha * 0.01) or (UnitFrames.SV.GroupAlpha * 0.01) / 2)
     end
 end
 
 -- Runs on the EVENT_GROUP_MEMBER_CONNECTED_STATUS listener.
-UnitFrames.OnGroupMemberConnectedStatus = function(eventCode, unitTag, isOnline)
+UnitFrames.OnGroupMemberConnectedStatus = function (eventCode, unitTag, isOnline)
     --d( string_format("DC: %s - %s", unitTag, isOnline and "Online" or "Offline" ) )
     if UnitFrames.CustomFrames[unitTag] and UnitFrames.CustomFrames[unitTag].dead then
         UnitFrames.CustomFramesSetDeadLabel(UnitFrames.CustomFrames[unitTag], isOnline and nil or strOffline)
@@ -3277,7 +3277,7 @@ UnitFrames.OnGroupMemberConnectedStatus = function(eventCode, unitTag, isOnline)
     end
 end
 
-UnitFrames.OnGroupMemberRoleChange = function(eventCode, unitTag, dps, healer, tank)
+UnitFrames.OnGroupMemberRoleChange = function (eventCode, unitTag, dps, healer, tank)
     if UnitFrames.CustomFrames[unitTag] then
         if UnitFrames.SV.ColorRoleGroup or UnitFrames.SV.ColorRoleRaid then
             UnitFrames.CustomFramesApplyColorsSingle(unitTag)
@@ -3288,7 +3288,7 @@ UnitFrames.OnGroupMemberRoleChange = function(eventCode, unitTag, dps, healer, t
     end
 end
 
-UnitFrames.OnGroupMemberChange = function(eventCode, memberName)
+UnitFrames.OnGroupMemberChange = function (eventCode, memberName)
     zo_callLater(function ()
         UnitFrames.CustomFramesApplyColors(false)
     end, 200)
@@ -3296,7 +3296,7 @@ end
 
 -- Runs on the EVENT_UNIT_DEATH_STATE_CHANGED listener.
 -- This handler fires every time a valid unitTag dies or is resurrected
-UnitFrames.OnDeath = function(eventCode, unitTag, isDead)
+UnitFrames.OnDeath = function (eventCode, unitTag, isDead)
     --d( string_format("%s - %s", unitTag, isDead and "Dead" or "Alive" ) )
     if UnitFrames.CustomFrames[unitTag] and UnitFrames.CustomFrames[unitTag].dead then
         UnitFrames.ResurrectionMonitor(unitTag)
@@ -3324,7 +3324,7 @@ UnitFrames.OnDeath = function(eventCode, unitTag, isDead)
     end
 end
 
-UnitFrames.ResurrectionMonitor = function(unitTag)
+UnitFrames.ResurrectionMonitor = function (unitTag)
     eventManager:UnregisterForUpdate(moduleName .. "Res" .. unitTag)
 
     -- Check to make sure this unit exists & the custom frame exists
@@ -3358,7 +3358,7 @@ UnitFrames.ResurrectionMonitor = function(unitTag)
 end
 
 -- Runs on the EVENT_LEADER_UPDATE listener.
-UnitFrames.OnLeaderUpdate = function(_, _)
+UnitFrames.OnLeaderUpdate = function (_, _)
     UnitFrames.CustomFramesApplyLayoutGroup(false)
     UnitFrames.CustomFramesApplyLayoutRaid(false)
 end
@@ -3366,7 +3366,7 @@ end
 -- This function is used to setup alternative bar for player
 -- Priority order: Werewolf -> Siege -> Mount -> ChampionXP / Experience
 local XP_BAR_COLORS = ZO_XP_BAR_GRADIENT_COLORS[2]
-UnitFrames.CustomFramesSetupAlternative = function(isWerewolf, isSiege, isMounted)
+UnitFrames.CustomFramesSetupAlternative = function (isWerewolf, isSiege, isMounted)
     if not UnitFrames.CustomFrames.player then
         return
     end
@@ -3656,7 +3656,7 @@ end
 
 -- Runs on EVENT_CHAMPION_POINT_GAINED event listener
 -- Used to change icon on alternative bar for next champion point type
-UnitFrames.OnChampionPointGained = function(eventCode)
+UnitFrames.OnChampionPointGained = function (eventCode)
     if UnitFrames.CustomFrames.player and UnitFrames.CustomFrames.player.ChampionXP then
         local championPoints = GetPlayerChampionPointsEarned()
         local attribute
@@ -3677,7 +3677,7 @@ UnitFrames.OnChampionPointGained = function(eventCode)
 end
 
 -- Runs on the EVENT_COMBAT_EVENT listener.
-UnitFrames.OnCombatEvent = function(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log)
+UnitFrames.OnCombatEvent = function (eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log)
     if isError and sourceType == COMBAT_UNIT_TYPE_PLAYER and targetType == COMBAT_UNIT_TYPE_PLAYER and UnitFrames.CustomFrames.player ~= nil and UnitFrames.CustomFrames.player[powerType] ~= nil and UnitFrames.CustomFrames.player[powerType].backdrop ~= nil and (powerType == COMBAT_MECHANIC_FLAGS_HEALTH or powerType == COMBAT_MECHANIC_FLAGS_STAMINA or powerType == COMBAT_MECHANIC_FLAGS_MAGICKA) then
         if g_powerError[powerType] or IsUnitDead("player") then
             return
@@ -3712,7 +3712,7 @@ UnitFrames.OnCombatEvent = function(eventCode, result, isError, abilityName, abi
 end
 
 -- Helper function to update visibility of 'death/offline' label and hide bars and bar labels
-UnitFrames.CustomFramesSetDeadLabel = function(unitFrame, newValue)
+UnitFrames.CustomFramesSetDeadLabel = function (unitFrame, newValue)
     unitFrame.dead:SetHidden(newValue == nil)
     if newValue ~= nil then
         unitFrame.dead:SetText(newValue)
@@ -3756,7 +3756,7 @@ UnitFrames.CustomFramesSetDeadLabel = function(unitFrame, newValue)
 end
 
 -- Repopulate group members, but try to update only those, that require it
-UnitFrames.CustomFramesGroupUpdate = function()
+UnitFrames.CustomFramesGroupUpdate = function ()
     --d( string_format("[%s] GroupUpdate", GetTimeString()) )
     -- Unregister update function and clear local flag
     eventManager:UnregisterForUpdate(g_PendingUpdate.Group.name)
@@ -3881,7 +3881,7 @@ UnitFrames.CustomFramesGroupUpdate = function()
 end
 
 -- Helper function to hide and remove unitTag reference from unused group controls
-UnitFrames.CustomFramesUnreferenceGroupControl = function(groupType, first)
+UnitFrames.CustomFramesUnreferenceGroupControl = function (groupType, first)
     local last
     if groupType == "SmallGroup" then
         last = 4
@@ -3899,7 +3899,7 @@ UnitFrames.CustomFramesUnreferenceGroupControl = function(groupType, first)
 end
 
 -- Runs EVENT_BOSSES_CHANGED listener
-UnitFrames.OnBossesChanged = function(eventCode)
+UnitFrames.OnBossesChanged = function (eventCode)
     if not UnitFrames.CustomFrames.boss1 then
         return
     end
@@ -3915,7 +3915,7 @@ UnitFrames.OnBossesChanged = function(eventCode)
     end
 end
 
-UnitFrames.ResetCompassBarMenu = function()
+UnitFrames.ResetCompassBarMenu = function ()
     if UnitFrames.SV.DefaultFramesNewBoss == 2 then
         for i = 1, 6 do
             local unitTag = "boss" .. i
@@ -3929,7 +3929,7 @@ UnitFrames.ResetCompassBarMenu = function()
 end
 
 -- Set anchors for all top level windows of CustomFrames
-UnitFrames.CustomFramesSetPositions = function()
+UnitFrames.CustomFramesSetPositions = function ()
     local default_anchors = {}
 
     local player
@@ -4013,7 +4013,7 @@ UnitFrames.CustomFramesSetPositions = function()
 end
 
 -- Reset anchors for all top level windows of CustomFrames
-UnitFrames.CustomFramesResetPosition = function(playerOnly)
+UnitFrames.CustomFramesResetPosition = function (playerOnly)
     for _, unitTag in pairs({ "player", "reticleover" }) do
         if UnitFrames.CustomFrames[unitTag] then
             UnitFrames.SV[UnitFrames.CustomFrames[unitTag].tlw.customPositionAttr] = nil
@@ -4030,7 +4030,7 @@ UnitFrames.CustomFramesResetPosition = function(playerOnly)
 end
 
 -- Unlock CustomFrames for moving. Called from Settings Menu.
-UnitFrames.CustomFramesSetMovingState = function(state)
+UnitFrames.CustomFramesSetMovingState = function (state)
     UnitFrames.CustomFramesMovingState = state
 
     -- Unlock individual frames
@@ -4080,7 +4080,7 @@ UnitFrames.CustomFramesSetMovingState = function(state)
 end
 
 -- Apply selected colors for all known bars on custom unit frames
-UnitFrames.CustomFramesApplyColors = function(isMenu)
+UnitFrames.CustomFramesApplyColors = function (isMenu)
     local health = {
         UnitFrames.SV.CustomColourHealth[1],
         UnitFrames.SV.CustomColourHealth[2],
@@ -4554,7 +4554,7 @@ UnitFrames.CustomFramesApplyColors = function(isMenu)
     end
 end
 
-UnitFrames.CustomFramesApplyColorsSingle = function(unitTag)
+UnitFrames.CustomFramesApplyColorsSingle = function (unitTag)
     local health = {
         UnitFrames.SV.CustomColourHealth[1],
         UnitFrames.SV.CustomColourHealth[2],
@@ -4637,7 +4637,7 @@ UnitFrames.CustomFramesApplyColorsSingle = function(unitTag)
     end
 end
 
-UnitFrames.CustomFramesApplyReactionColor = function(isPlayer)
+UnitFrames.CustomFramesApplyReactionColor = function (isPlayer)
     if isPlayer and UnitFrames.SV.FrameColorClass then
         local classColor = {
             [1] = {
@@ -4882,7 +4882,7 @@ UnitFrames.CustomFramesApplyReactionColor = function(isPlayer)
 end
 
 -- Apply selected texture for all known bars on custom unit frames
-UnitFrames.CustomFramesApplyTexture = function()
+UnitFrames.CustomFramesApplyTexture = function ()
     local texture = LUIE.StatusbarTextures[UnitFrames.SV.CustomTexture]
 
     -- After texture is applied unhide frames, so player can see changes even from menu
@@ -4982,7 +4982,7 @@ UnitFrames.CustomFramesApplyTexture = function()
 end
 
 -- Apply selected font for all known label on default unit frames
-UnitFrames.DefaultFramesApplyFont = function(unitTag)
+UnitFrames.DefaultFramesApplyFont = function (unitTag)
     -- First try selecting font face
     local fontName = LUIE.Fonts[UnitFrames.SV.DefaultFontFace]
     if not fontName or fontName == "" then
@@ -4993,7 +4993,7 @@ UnitFrames.DefaultFramesApplyFont = function(unitTag)
     local fontStyle = (UnitFrames.SV.DefaultFontStyle and UnitFrames.SV.DefaultFontStyle ~= "") and UnitFrames.SV.DefaultFontStyle or "soft-shadow-thick"
     local fontSize = (UnitFrames.SV.DefaultFontSize and UnitFrames.SV.DefaultFontSize > 0) and UnitFrames.SV.DefaultFontSize or 16
 
-    local applyDefaultFont = function(unitTag)
+    local applyDefaultFont = function (unitTag)
         if g_DefaultFrames[unitTag] then
             local unitFrame = g_DefaultFrames[unitTag]
             for _, powerType in pairs({
@@ -5023,9 +5023,9 @@ UnitFrames.DefaultFramesApplyFont = function(unitTag)
 end
 
 -- Reapplies color for default unit frames extender module labels
-UnitFrames.DefaultFramesApplyColor = function()
+UnitFrames.DefaultFramesApplyColor = function ()
     -- Helper function
-    local applyDefaultColor = function(unitTag)
+    local applyDefaultColor = function (unitTag)
         if g_DefaultFrames[unitTag] then
             local unitFrame = g_DefaultFrames[unitTag]
             for _, powerType in pairs({
@@ -5050,7 +5050,7 @@ UnitFrames.DefaultFramesApplyColor = function()
 end
 
 -- Apply selected font for all known label on custom unit frames
-UnitFrames.CustomFramesApplyFont = function()
+UnitFrames.CustomFramesApplyFont = function ()
     -- First try selecting font face
     local fontName = LUIE.Fonts[UnitFrames.SV.CustomFontFace]
     if not fontName or fontName == "" then
@@ -5170,7 +5170,7 @@ UnitFrames.CustomFramesApplyFont = function()
 end
 
 -- Set dimensions of custom group frame and anchors or raid group members
-UnitFrames.CustomFramesApplyLayoutPlayer = function(unhide)
+UnitFrames.CustomFramesApplyLayoutPlayer = function (unhide)
     -- Player frame
     if UnitFrames.CustomFrames.player then
         local player = UnitFrames.CustomFrames.player
@@ -5575,7 +5575,7 @@ UnitFrames.CustomFramesApplyLayoutPlayer = function(unhide)
 end
 
 -- Set dimensions of custom group frame and anchors or raid group members
-UnitFrames.CustomFramesApplyLayoutGroup = function(unhide)
+UnitFrames.CustomFramesApplyLayoutGroup = function (unhide)
     if not UnitFrames.CustomFrames.SmallGroup1 then
         return
     end
@@ -5649,7 +5649,7 @@ UnitFrames.CustomFramesApplyLayoutGroup = function(unhide)
 end
 
 -- Set dimensions of custom raid frame and anchors or raid group members
-UnitFrames.CustomFramesApplyLayoutRaid = function(unhide)
+UnitFrames.CustomFramesApplyLayoutRaid = function (unhide)
     if not UnitFrames.CustomFrames.RaidGroup1 then
         return
     end
@@ -5667,7 +5667,7 @@ UnitFrames.CustomFramesApplyLayoutRaid = function(unhide)
     raid.preview:SetDimensions(groupWidth, groupHeight)
 
     -- Insert player into list if it matches the currentRole
-    local insertRole = function(list, currentRole)
+    local insertRole = function (list, currentRole)
         for index = 1, GetGroupSize() do
             local playerRole = GetGroupMemberSelectedRole(GetGroupUnitTagByIndex(index))
             if playerRole == currentRole then
@@ -5793,7 +5793,7 @@ UnitFrames.CustomFramesApplyLayoutRaid = function(unhide)
 end
 
 -- Set dimensions of custom companion frame and anchors
-UnitFrames.CustomFramesApplyLayoutCompanion = function(unhide)
+UnitFrames.CustomFramesApplyLayoutCompanion = function (unhide)
     if not UnitFrames.CustomFrames.companion then
         return
     end
@@ -5814,7 +5814,7 @@ UnitFrames.CustomFramesApplyLayoutCompanion = function(unhide)
 end
 
 -- Set dimensions of custom pet frame and anchors
-UnitFrames.CustomFramesApplyLayoutPet = function(unhide)
+UnitFrames.CustomFramesApplyLayoutPet = function (unhide)
     if not UnitFrames.CustomFrames.PetGroup1 then
         return
     end
@@ -5838,7 +5838,7 @@ UnitFrames.CustomFramesApplyLayoutPet = function(unhide)
 end
 
 -- Set dimensions of custom raid frame and anchors or raid group members
-UnitFrames.CustomFramesApplyLayoutBosses = function()
+UnitFrames.CustomFramesApplyLayoutBosses = function ()
     if not UnitFrames.CustomFrames.boss1 then
         return
     end
@@ -5863,7 +5863,7 @@ UnitFrames.CustomFramesApplyLayoutBosses = function()
 end
 
 -- This function reduces opacity of custom frames when player is out of combat and has full attributes
-UnitFrames.CustomFramesApplyInCombat = function()
+UnitFrames.CustomFramesApplyInCombat = function ()
     local idle = true
     if UnitFrames.SV.CustomOocAlphaPower then
         for _, value in pairs(g_statFull) do
@@ -5935,7 +5935,7 @@ UnitFrames.CustomFramesApplyInCombat = function()
     end
 end
 
-UnitFrames.CustomFramesGroupAlpha = function()
+UnitFrames.CustomFramesGroupAlpha = function ()
     local alphaGroup = 0.01 * UnitFrames.SV.GroupAlpha
 
     for i = 1, 4 do
@@ -5954,7 +5954,7 @@ UnitFrames.CustomFramesGroupAlpha = function()
 end
 
 -- Reload Names from Menu function call
-UnitFrames.CustomFramesReloadControlsMenu = function(player, group, raid)
+UnitFrames.CustomFramesReloadControlsMenu = function (player, group, raid)
     UnitFrames.UpdateStaticControls(g_DefaultFrames["player"])
     UnitFrames.UpdateStaticControls(UnitFrames.CustomFrames["player"])
     UnitFrames.UpdateStaticControls(g_AvaCustFrames["player"])
@@ -5975,7 +5975,7 @@ UnitFrames.CustomFramesReloadControlsMenu = function(player, group, raid)
     UnitFrames.CustomFramesApplyLayoutRaid(raid)
 end
 
-UnitFrames.CustomFramesReloadExecuteMenu = function()
+UnitFrames.CustomFramesReloadExecuteMenu = function ()
     g_targetThreshold = UnitFrames.SV.ExecutePercentage
 
     if g_DefaultFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH] then
@@ -5996,7 +5996,7 @@ UnitFrames.CustomFramesReloadExecuteMenu = function()
     end
 end
 
-UnitFrames.CustomFramesReloadLowResourceThreshold = function()
+UnitFrames.CustomFramesReloadLowResourceThreshold = function ()
     g_healthThreshold = UnitFrames.SV.LowResourceHealth
     g_magickaThreshold = UnitFrames.SV.LowResourceMagicka
     g_staminaThreshold = UnitFrames.SV.LowResourceStamina
@@ -6017,7 +6017,7 @@ end
 --]]
 ----------------------------------------------------------
 
-UnitFrames.CustomFramesDebugGroup = function()
+UnitFrames.CustomFramesDebugGroup = function ()
     for i = 1, 4 do
         local unitTag = "SmallGroup" .. i
         UnitFrames.CustomFrames[unitTag].unitTag = "player"
@@ -6029,7 +6029,7 @@ UnitFrames.CustomFramesDebugGroup = function()
     UnitFrames.OnLeaderUpdate(nil, "SmallGroup1")
 end
 
-UnitFrames.CustomFramesDebugRaid = function()
+UnitFrames.CustomFramesDebugRaid = function ()
     for i = 1, 24 do
         local unitTag = "RaidGroup" .. i
         UnitFrames.CustomFrames[unitTag].unitTag = "player"
@@ -6040,7 +6040,7 @@ UnitFrames.CustomFramesDebugRaid = function()
 end
 
 -- Updates group frames when a relevant social change event happens
-UnitFrames.SocialUpdateFrames = function()
+UnitFrames.SocialUpdateFrames = function ()
     for i = 1, 24 do
         local unitTag = "group" .. i
         if DoesUnitExist(unitTag) then

@@ -28,8 +28,8 @@ local changelogMessages = {
     "|cFFFF00Chat Announcements:|r",
     '[*] Updated "Display Announcements" to use a much better setup (and added support for Endless Archive Progression). These are misc announcements that cover a lot of different things. Menu option configurations are updated for Display Announcements.',
     '[*] Added support for the new "Archival Fortunes" currency earned in Endless Archive.',
-    '[*] Filleting fish at the crafting station now shows context-specific messages as intended.',
-    '[*] Fixed an issue when mailing gold to another player - if you sent over half of the gold in your inventory the chat announcement would display the value of gold remaining in your bag as the sent amount. This is due to an API issue and required a workaround to fix.',
+    "[*] Filleting fish at the crafting station now shows context-specific messages as intended.",
+    "[*] Fixed an issue when mailing gold to another player - if you sent over half of the gold in your inventory the chat announcement would display the value of gold remaining in your bag as the sent amount. This is due to an API issue and required a workaround to fix.",
     "",
     "|cFFFF00Combat Info:|r",
     "[*] Added a new submenu with an option to display Floating Markers for enemies you are in combat with (thanks to DakJaniels).",
@@ -46,14 +46,14 @@ local changelogMessages = {
 }
 
 -- Hide toggle called by the menu or xml button
-LUIE.ToggleChangelog = function(option)
+LUIE.ToggleChangelog = function (option)
     LUIE_Changelog:ClearAnchors()
     LUIE_Changelog:SetAnchor(CENTER, GuiRoot, CENTER, 0, -120)
     LUIE_Changelog:SetHidden(option)
 end
 
 -- Called on initialize
-LUIE.ChangelogScreen = function()
+LUIE.ChangelogScreen = function ()
     -- concat messages into one string
     local changelog = table_concat(changelogMessages, "\n")
     -- If text start with '*' replace it with bullet texture

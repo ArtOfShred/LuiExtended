@@ -44,7 +44,7 @@ local g_framesUnlocked = false
     @param functionName string: The name of the template function to be replaced.
     @param frameName string: The name of the frame associated with the template function.
 ]]
-local ReplaceDefaultTemplate = function(object, functionName, frameName)
+local ReplaceDefaultTemplate = function (object, functionName, frameName)
     local zos_function = object[functionName]
     object[functionName] = function (self)
         local result = zos_function(self)    -- Get Original Function results
@@ -66,7 +66,7 @@ end
     @param oldState number: The previous state of the UI scene.
     @param newState number: The new state of the UI scene.
 ]]
-local sceneChange = function(oldState, newState)
+local sceneChange = function (oldState, newState)
     if g_framesUnlocked then
         local isHidden = false
         if (newState == SCENE_SHOWN) then
@@ -85,7 +85,7 @@ end
     @param k userdata: The element to be adjusted.
     @param v table: The table containing adjustment values.
 ]]
-local adjustElement = function(k, v)
+local adjustElement = function (k, v)
     k:SetClampedToScreen(true)
     if v[2] then
         k:SetWidth(v[2])
@@ -100,7 +100,7 @@ end
     @param k userdata: The element to set the anchor for.
     @param frameName string: The name of the frame associated with the element.
 ]]
-local setAnchor = function(k, frameName)
+local setAnchor = function (k, frameName)
     local x = LUIE.SV[frameName][1]
     local y = LUIE.SV[frameName][2]
     if x ~= nil and y ~= nil then
@@ -133,7 +133,7 @@ end
 --[[
     Called when an element mover is adjusted and on initialization to update all positions.
 ]]
-LUIE.SetElementPosition = function()
+LUIE.SetElementPosition = function ()
     for k, v in pairs(defaultPanels) do
         local frameName = k:GetName()
         if LUIE.SV[frameName] then
@@ -159,7 +159,7 @@ end
     @param relativeTo userdata: The element to which the top-level window is relative.
     @return userdata: The created top-level window.
 ]]
-local createTopLevelWindow = function(k, v, point, relativePoint, offsetX, offsetY, relativeTo)
+local createTopLevelWindow = function (k, v, point, relativePoint, offsetX, offsetY, relativeTo)
     local tlw = UI.TopLevel({ point, relativePoint, offsetX, offsetY, relativeTo }, { k:GetWidth(), k:GetHeight() })
     tlw:SetDrawLayer(DL_BACKGROUND)
     tlw:SetDrawTier(DT_MEDIUM)
@@ -174,7 +174,7 @@ end
     Setup Movers for Elements, called by the menu unlock settings.
     @param state boolean: The state indicating whether the elements are unlocked or not.
 ]]
-LUIE.SetupElementMover = function(state)
+LUIE.SetupElementMover = function (state)
     g_framesUnlocked = state
     for k, v in pairs(defaultPanels) do
         if firstRun then
@@ -222,7 +222,7 @@ end
 --[[
     Reset the position of windows. Called from the Settings Menu.
 ]]
-LUIE.ResetElementPosition = function()
+LUIE.ResetElementPosition = function ()
     for k, v in pairs(defaultPanels) do
         local frameName = k:GetName()
         LUIE.SV[frameName] = nil

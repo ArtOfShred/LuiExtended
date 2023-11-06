@@ -97,7 +97,7 @@ local uiBags = {
 
 local panelFragment
 
-InfoPanel.SetDisplayOnMap = function()
+InfoPanel.SetDisplayOnMap = function ()
     if InfoPanel.SV.DisplayOnWorldMap then
         sceneManager:GetScene("worldMap"):AddFragment(panelFragment)
     else
@@ -105,7 +105,7 @@ InfoPanel.SetDisplayOnMap = function()
     end
 end
 
-local CreateUIControls = function()
+local CreateUIControls = function ()
     uiPanel = UI.TopLevel(nil, { 240, 48 })
     uiPanel:SetDrawLayer(DL_BACKGROUND)
     uiPanel:SetDrawTier(DT_LOW)
@@ -174,7 +174,7 @@ local CreateUIControls = function()
 end
 
 -- Rearranges panel elements. Called from Initialize and settings menu.
-InfoPanel.RearrangePanel = function()
+InfoPanel.RearrangePanel = function ()
     if not InfoPanel.Enabled then
         return
     end
@@ -278,7 +278,7 @@ InfoPanel.RearrangePanel = function()
     uiPanel:SetHidden(false)
 end
 
-InfoPanel.Initialize = function(enabled)
+InfoPanel.Initialize = function (enabled)
     -- Load settings
     local isCharacterSpecific = LUIESV.Default[GetDisplayName()]["$AccountWide"].CharacterSpecificSV
     if isCharacterSpecific then
@@ -326,7 +326,7 @@ InfoPanel.Initialize = function(enabled)
     eventManager:RegisterForUpdate(moduleName .. "60", 60000, InfoPanel.OnUpdate60)
 end
 
-InfoPanel.ResetPosition = function()
+InfoPanel.ResetPosition = function ()
     InfoPanel.SV.position = nil
     if not InfoPanel.Enabled then
         return
@@ -336,7 +336,7 @@ InfoPanel.ResetPosition = function()
 end
 
 -- Unlock panel for moving. Called from Settings Menu.
-InfoPanel.SetMovingState = function(state)
+InfoPanel.SetMovingState = function (state)
     if not InfoPanel.Enabled then
         return
     end
@@ -347,7 +347,7 @@ InfoPanel.SetMovingState = function(state)
 end
 
 -- Set scale of Info Panel. Called from Settings Menu.
-InfoPanel.SetScale = function()
+InfoPanel.SetScale = function ()
     if not InfoPanel.Enabled then
         return
     end
@@ -365,7 +365,7 @@ end]]
 --
 
 -- Listens to EVENT_INVENTORY_SINGLE_SLOT_UPDATE and EVENT_LOOT_RECEIVED
-InfoPanel.OnBagUpdate = function()
+InfoPanel.OnBagUpdate = function ()
     -- We shall not execute bags size calculation immediately, but rather set a flag with delay function
     -- This is needed to avoid lockups when the game start flooding us with same event for every bag slot used
     -- While we do not need any good latency, we can afford to update info-panel label with 250ms delay
@@ -374,7 +374,7 @@ end
 
 -- Performs calculation of empty space in bags
 -- Called with delay by corresponding event listener
-InfoPanel.DoBagUpdate = function()
+InfoPanel.DoBagUpdate = function ()
     -- Clear pending event
     eventManager:UnregisterForUpdate(moduleName .. "PendingBagsUpdate")
 
@@ -412,12 +412,12 @@ InfoPanel.DoBagUpdate = function()
     uiGems.label:SetText((fullCount > 9) and fullText or (fullText .. "/" .. emptyCount))
 end
 
-local FormatClock = function(clockFormat)
+local FormatClock = function (clockFormat)
     local timestring = GetTimeString()
     return LUIE.CreateTimestamp(timestring, clockFormat)
 end
 
-InfoPanel.OnUpdate01 = function()
+InfoPanel.OnUpdate01 = function ()
     -- Update time
     uiClock.label:SetText(FormatClock(InfoPanel.SV.ClockFormat))
 
@@ -437,7 +437,7 @@ InfoPanel.OnUpdate01 = function()
     uiFps.label:SetColor(color.r, color.g, color.b, 1)
 end
 
-InfoPanel.OnUpdate10 = function()
+InfoPanel.OnUpdate10 = function ()
     -- Update latency
     local lat = GetLatency()
     local color = colors.WHITE
@@ -454,7 +454,7 @@ InfoPanel.OnUpdate10 = function()
     uiLatency.label:SetColor(color.r, color.g, color.b, 1)
 end
 
-InfoPanel.OnUpdate60 = function()
+InfoPanel.OnUpdate60 = function ()
     -- Update mountfeedtimer
     if not InfoPanel.SV.HideMountFeed and not uiFeedTimer.hideLocally then
         local mountFeedTimer, mountFeedTotalTime = GetTimeUntilCanBeTrained()

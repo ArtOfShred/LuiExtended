@@ -14,7 +14,7 @@ local zo_strgsub = zo_strgsub
 local printtochat = LUIE.PrintToChat
 
 -- Add millisecond timestamp to ability debug
-local MillisecondTimestampDebug = function(message)
+local MillisecondTimestampDebug = function (message)
     local currentTime = GetGameTimeMilliseconds()
     local timestamp = FormatTimeMilliseconds(currentTime, TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_MILLISECONDS_NO_HOURS_OR_DAYS, TIME_FORMAT_DIRECTION_NONE)
     timestamp = zo_strgsub(timestamp, "HH", "")
@@ -31,7 +31,7 @@ local MillisecondTimestampDebug = function(message)
 end
 
 -- Debug Display for Combat Events
-SpellCastBuffs.EventCombatDebug = function(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overrideRank, casterUnitTag)
+SpellCastBuffs.EventCombatDebug = function (eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overrideRank, casterUnitTag)
     -- Don't display if this aura is already added to the filter
     if LUIE.DebugAuras[abilityId] and SpellCastBuffs.SV.ShowDebugFilter then
         return
@@ -72,7 +72,7 @@ SpellCastBuffs.EventCombatDebug = function(eventCode, result, isError, abilityNa
 end
 
 -- Debug Display for Effect Events
-SpellCastBuffs.EventEffectDebug = function(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
+SpellCastBuffs.EventEffectDebug = function (eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
     if LUIE.DebugAuras[abilityId] and SpellCastBuffs.SV.ShowDebugFilter then
         return
     end
@@ -121,7 +121,7 @@ SpellCastBuffs.EventEffectDebug = function(eventCode, changeType, effectSlot, ef
 end
 
 -- Account specific DEBUG for ArtOfShred (These are only registered to give me some additional debug options)
-SpellCastBuffs.AuthorCombatDebug = function(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
+SpellCastBuffs.AuthorCombatDebug = function (eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
     local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
     local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
@@ -164,7 +164,7 @@ SpellCastBuffs.AuthorCombatDebug = function(eventCode, result, isError, abilityN
 end
 
 -- Account specific DEBUG for ArtOfShred (These are only registered to give me some additional debug options)
-SpellCastBuffs.AuthorEffectDebug = function(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
+SpellCastBuffs.AuthorEffectDebug = function (eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
     local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
     local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
@@ -201,7 +201,7 @@ SpellCastBuffs.AuthorEffectDebug = function(eventCode, changeType, effectSlot, e
     end
 end
 
-SpellCastBuffs.TempSlashFilter = function()
+SpellCastBuffs.TempSlashFilter = function ()
     local filter = LUIE.SpellCastBuffs.SV.ShowDebugFilter
 
     if filter == true then
@@ -213,7 +213,7 @@ SpellCastBuffs.TempSlashFilter = function()
     end
 end
 
-SpellCastBuffs.TempSlashGround = function()
+SpellCastBuffs.TempSlashGround = function ()
     local ground = LUIE.SpellCastBuffs.SV.GroundDamageAura
 
     if ground == true then
@@ -227,7 +227,7 @@ SpellCastBuffs.TempSlashGround = function()
     LUIE.SpellCastBuffs.ReloadEffects("player")
 end
 
-SpellCastBuffs.TempSlashZoneCheck = function()
+SpellCastBuffs.TempSlashZoneCheck = function ()
     printtochat("--------------------")
     printtochat("ZONE & MAP INFO:")
     printtochat("--------------------")
@@ -254,7 +254,7 @@ SpellCastBuffs.TempSlashZoneCheck = function()
     printtochat("--------------------")
 end
 
-SpellCastBuffs.TempSlashCheckRemovedAbilities = function()
+SpellCastBuffs.TempSlashCheckRemovedAbilities = function ()
     d("Removed AbilityIds:")
     for k, v in pairs(LUIE.DebugAuras) do
         if not DoesAbilityExist(k) then

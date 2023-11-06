@@ -16,13 +16,13 @@ local g_werewolfCounter = 0 -- Counter for Werewolf transformation events
 local g_werewolfQuest = 0   -- Counter for Werewolf transformation events (Quest)
 
 -- Function to pull Werewolf Cast Bar / Buff Aura Icon based off the players morph choice
-local SetWerewolfIcon = function()
+local SetWerewolfIcon = function ()
     local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(32455)
     g_werewolfName, g_werewolfIcon = GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
     g_werewolfId = GetSkillAbilityId(skillType, skillIndex, abilityIndex, false)
 end
 
-SpellCastBuffs.DisplayWerewolfIcon = function()
+SpellCastBuffs.DisplayWerewolfIcon = function ()
     SetWerewolfIcon()
     local context = SpellCastBuffs.DetermineContextSimple("player1", g_werewolfId, g_werewolfName)
     local power = GetUnitPower("player", COMBAT_MECHANIC_FLAGS_WEREWOLF)
@@ -42,13 +42,13 @@ SpellCastBuffs.DisplayWerewolfIcon = function()
     }
 end
 
-SpellCastBuffs.HideWerewolfIcon = function()
+SpellCastBuffs.HideWerewolfIcon = function ()
     local context = SpellCastBuffs.DetermineContextSimple("player1", g_werewolfId, g_werewolfName)
     SpellCastBuffs.EffectsList[context]["Werewolf Indicator"] = nil
 end
 
 -- Get Werewolf State for Werewolf Buff Tracker
-SpellCastBuffs.WerewolfState = function(eventCode, werewolf, onActivation)
+SpellCastBuffs.WerewolfState = function (eventCode, werewolf, onActivation)
     if werewolf and not SpellCastBuffs.SV.HidePlayerBuffs then
         for i = 1, 6 do
             local name, _, discovered, skillLineId = GetSkillLineInfo(SKILL_TYPE_WORLD, i)
@@ -82,7 +82,7 @@ SpellCastBuffs.WerewolfState = function(eventCode, werewolf, onActivation)
 end
 
 -- EVENT_POWER_UPDATE handler for Werewolf Buff Tracker
-SpellCastBuffs.OnPowerUpdate = function(eventCode, unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax)
+SpellCastBuffs.OnPowerUpdate = function (eventCode, unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax)
     if powerValue > 0 then
         SpellCastBuffs.DisplayWerewolfIcon()
     else

@@ -6,15 +6,15 @@
 local SlashCommands = LUIE.SlashCommands
 local CollectibleTables = LUIE.Data.CollectibleTables
 
-local pairs =pairs
+local pairs = pairs
 local table_insert = table.insert
 local zo_strformat = zo_strformat
 
-local GetFormattedCollectibleName = function(id)
+local GetFormattedCollectibleName = function (id)
     return zo_strformat("<<1>>", GetCollectibleName(id)) -- Remove ^M and ^F
 end
 
-local CreateOptions = function(collectibleTable)
+local CreateOptions = function (collectibleTable)
     local options = {}
     local optionKeys = {}
 
@@ -40,7 +40,7 @@ local deconOptions, deconOptionsKeys = CreateOptions(CollectibleTables.Decon)
 local homeOptions = { "Inside", "Outside" }
 local homeOptionsKeys = { ["Inside"] = 1, ["Outside"] = 2 }
 
-SlashCommands.MigrateSettings = function()
+SlashCommands.MigrateSettings = function ()
     local Settings = SlashCommands.SV
 
     -- Migrate old settings
@@ -83,7 +83,7 @@ SlashCommands.MigrateSettings = function()
 end
 
 -- Create Slash Commands Settings Menu
-SlashCommands.CreateSettings = function()
+SlashCommands.CreateSettings = function ()
     -- Load LibAddonMenu
     local LAM = LibAddonMenu2
     if LAM == nil then

@@ -11,8 +11,8 @@ local zo_strformat = zo_strformat
 -- Slash Command to perform a group regroup
 local g_regroupStacks = {}     -- Character stack for Regroup reinvites
 local g_pendingRegroup = false -- Toggled when a regroup is in progress to prevent additional regroup attempts from firing
-SlashCommands.SlashRegroup = function()
-    local RegroupInvite = function()
+SlashCommands.SlashRegroup = function ()
+    local RegroupInvite = function ()
         printToChat(GetString(LUIE_STRING_SLASHCMDS_REGROUP_REINVITE_MSG), true)
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(LUIE_STRING_SLASHCMDS_REGROUP_REINVITE_MSG))
@@ -130,7 +130,7 @@ SlashCommands.SlashRegroup = function()
 end
 
 -- Slash Command to disband the current group
-SlashCommands.SlashDisband = function()
+SlashCommands.SlashDisband = function ()
     local groupSize = GetGroupSize()
     -- Check to make sure player is in a group
     if groupSize <= 1 then
@@ -173,12 +173,12 @@ SlashCommands.SlashDisband = function()
 end
 
 -- Slash Command to leave a group
-SlashCommands.SlashGroupLeave = function()
+SlashCommands.SlashGroupLeave = function ()
     -- EVENT_GROUP_NOTIFICATION_MESSAGE hook handles response to this.
     GroupLeave()
 end
 
-SlashCommands.SlashGroupRole = function(option)
+SlashCommands.SlashGroupRole = function (option)
     if option == "tank" then
         UpdateSelectedLFGRole(LFG_ROLE_TANK)
     elseif option == "heal" then
@@ -189,7 +189,7 @@ SlashCommands.SlashGroupRole = function(option)
 end
 
 -- Slash Command to kick someone from a group
-SlashCommands.SlashGroupKick = function(option)
+SlashCommands.SlashGroupKick = function (option)
     local groupSize = GetGroupSize()
     -- Rather then error out, let the player use /kick and /remove as a substitute for /votekick and /voteremove in LFG
     if IsInLFGGroup() then
@@ -283,7 +283,7 @@ SlashCommands.SlashGroupKick = function(option)
 end
 
 -- If the player uses /kick with no option then we need to play the kick emote, otherwise handle everything with the SlashGroupKick function.
-SlashCommands.SlashKick = function(option)
+SlashCommands.SlashKick = function (option)
     if option == "" or option == nil or not SlashCommands.SV.SlashGroupKick then
         PlayEmoteByIndex(109)
     else
@@ -292,7 +292,7 @@ SlashCommands.SlashKick = function(option)
 end
 
 -- Slash Command to initiate a votekick
-SlashCommands.SlashVoteKick = function(option)
+SlashCommands.SlashVoteKick = function (option)
     local groupSize = GetGroupSize()
     -- Check to make sure player is in a group
     if groupSize <= 1 then
@@ -380,7 +380,7 @@ SlashCommands.SlashVoteKick = function(option)
 end
 
 -- Slash Command to initiate a group ready check
-SlashCommands.SlashReadyCheck = function()
+SlashCommands.SlashReadyCheck = function ()
     local groupSize = GetGroupSize()
     -- Check to make sure player is in a group
     if groupSize <= 1 then
@@ -396,7 +396,7 @@ SlashCommands.SlashReadyCheck = function()
 end
 
 -- Slash Command to send a group invite to a player
-SlashCommands.SlashInvite = function(option)
+SlashCommands.SlashInvite = function (option)
     local groupSize = GetGroupSize()
 
     if groupSize > 1 and not IsUnitGroupLeader("player") then

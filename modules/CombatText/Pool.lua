@@ -42,7 +42,7 @@ function CombatTextPool:CreateNewControl()
     return control
 end
 
-CombatTextPool.ResetControl = function(control)
+CombatTextPool.ResetControl = function (control)
     control:ClearAnchors()
     control.label:ClearAnchors()
     control.icon:ClearAnchors()
