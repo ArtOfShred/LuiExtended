@@ -2838,6 +2838,7 @@ function ChatAnnouncements.OnBuybackItem(eventCode, itemName, quantity, money, i
     g_savedPurchase = {}
 end
 
+-- TODO: Move to a data table outside of CA (maybe?)
 local isShopCollectible = {
     [GetCollectibleInfo(3)] = 3, -- Brown Paint Horse
     [GetCollectibleInfo(4)] = 4, -- Bay Dun Horse
