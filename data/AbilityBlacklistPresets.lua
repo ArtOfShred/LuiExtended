@@ -76,7 +76,7 @@ local BlacklistPresets =
         [61725] = true,  -- Major Maim
         [61727] = true,  -- Major Defile
         [147643] = true, -- Major Cowardice
-        --[145977] = true, -- Major Brittle
+        [145977] = true, -- Major Brittle
     },
 }
 
