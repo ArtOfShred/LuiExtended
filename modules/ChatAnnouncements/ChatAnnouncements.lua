@@ -2921,7 +2921,7 @@ function ChatAnnouncements.OnBuyItem(eventCode, itemName, entryType, quantity, m
             itemName = GetCollectibleLink(id, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
             itemIcon = select(3, GetCollectibleInfo(id))
         else
-            itemIcon, _, _, _, _ = GetItemLinkInfo(itemName)
+            itemIcon = GetItemLinkInfo(itemName)
         end
     end
 
