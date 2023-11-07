@@ -7269,11 +7269,6 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    ZO_ClientInteractResultSpecificSound = {
-        [CLIENT_INTERACT_RESULT_LOCK_TOO_DIFFICULT] = SOUNDS.LOCKPICKING_NO_LOCKPICKS,
-        [CLIENT_INTERACT_RESULT_NO_LOCKPICKS] = SOUNDS.LOCKPICKING_NO_LOCKPICKS,
-    }
-
     -- EVENT_CLIENT_INTERACT_RESULT (Alert Handler)
     local function ClientInteractResult(result, interactTargetName)
         local formatString = GetString("SI_CLIENTINTERACTRESULT", result)
