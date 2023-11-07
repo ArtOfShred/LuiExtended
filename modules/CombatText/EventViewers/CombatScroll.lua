@@ -104,7 +104,7 @@ function CombatTextCombatScrollEventViewer:View(combatType, powerType, value, ab
         if self.lastControl[combatType] == nil then
             offsetY = -25
         else
-            offsetY = math.max(-25, select(6, self.lastControl[combatType]:GetAnchor(0)))
+            offsetY = zo_max(-25, select(6, self.lastControl[combatType]:GetAnchor(0)))
         end
         control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
 
@@ -117,7 +117,7 @@ function CombatTextCombatScrollEventViewer:View(combatType, powerType, value, ab
         if self.lastControl[combatType] == nil then
             offsetY = 25
         else
-            offsetY = math.min(25, select(6, self.lastControl[combatType]:GetAnchor(0)))
+            offsetY = zo_min(25, select(6, self.lastControl[combatType]:GetAnchor(0)))
         end
         control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
 
