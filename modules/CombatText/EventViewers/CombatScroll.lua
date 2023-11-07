@@ -8,12 +8,10 @@ local CombatTextCombatScrollEventViewer = LUIE.CombatTextCombatScrollEventViewer
 
 local CombatTextConstants = LUIE.Data.CombatTextConstants
 local AbbreviateNumber = LUIE.AbbreviateNumber
-local string_format = string.format
+
 function CombatTextCombatScrollEventViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
-    obj:RegisterCallback(CombatTextConstants.eventType.COMBAT, function (...)
-        self:OnEvent(...)
-    end)
+    obj:RegisterCallback(CombatTextConstants.eventType.COMBAT, function (...) self:OnEvent(...) end)
     self.eventBuffer = {}
     self.activeControls = { [CombatTextConstants.combatType.OUTGOING] = {}, [CombatTextConstants.combatType.INCOMING] = {} }
     self.lastControl = {}
@@ -29,7 +27,7 @@ function CombatTextCombatScrollEventViewer:OnEvent(combatType, powerType, value,
     if (isDamageCritical or isHealingCritical or isDotCritical or isHotCritical) and not Settings.toggles.throttleCriticals then
         self:View(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted, 1)
     else
-        local eventKey = string_format("%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s", combatType, powerType, abilityName, abilityId, damageType, sourceName, tostring(isDamage), tostring(isDamageCritical), tostring(isHealing), tostring(isHealingCritical), tostring(isEnergize), tostring(isDrain), tostring(isDot), tostring(isDotCritical), tostring(isHot), tostring(isHotCritical), tostring(isMiss), tostring(isImmune), tostring(isParried), tostring(isReflected), tostring(isDamageShield), tostring(isDodged), tostring(isBlocked), tostring(isInterrupted))
+        local eventKey = string.format("%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s", combatType, powerType, abilityName, abilityId, damageType, sourceName, tostring(isDamage), tostring(isDamageCritical), tostring(isHealing), tostring(isHealingCritical), tostring(isEnergize), tostring(isDrain), tostring(isDot), tostring(isDotCritical), tostring(isHot), tostring(isHotCritical), tostring(isMiss), tostring(isImmune), tostring(isParried), tostring(isReflected), tostring(isDamageShield), tostring(isDodged), tostring(isBlocked), tostring(isInterrupted))
         if self.eventBuffer[eventKey] == nil then
             self.eventBuffer[eventKey] = { value = value, hits = 1 }
             local throttleTime = 0
@@ -50,9 +48,7 @@ function CombatTextCombatScrollEventViewer:OnEvent(combatType, powerType, value,
             elseif isHotCritical then
                 throttleTime = Settings.throttles.hotcritical
             end
-            zo_callLater(function ()
-                self:ViewFromEventBuffer(combatType, powerType, eventKey, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
-            end, throttleTime)
+            zo_callLater(function () self:ViewFromEventBuffer(combatType, powerType, eventKey, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted) end, throttleTime)
         else
             self.eventBuffer[eventKey].value = self.eventBuffer[eventKey].value + value
             self.eventBuffer[eventKey].hits = self.eventBuffer[eventKey].hits + 1
@@ -78,9 +74,9 @@ function CombatTextCombatScrollEventViewer:View(combatType, powerType, value, ab
 
     local textFormat, fontSize, textColor = self:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
     if hits > 1 and Settings.toggles.showThrottleTrailer then
-        value = string_format("%s (%d)", value, hits)
+        value = string.format("%s (%d)", value, hits)
     end
-    if (combatType == CombatTextConstants.combatType.INCOMING) and Settings.toggles.incomingDamageOverride and (isDamage or isDamageCritical) then
+    if combatType == CombatTextConstants.combatType.INCOMING and Settings.toggles.incomingDamageOverride and (isDamage or isDamageCritical) then
         textColor = Settings.colors.incomingDamageOverride
     end
 
@@ -108,7 +104,7 @@ function CombatTextCombatScrollEventViewer:View(combatType, powerType, value, ab
         if self.lastControl[combatType] == nil then
             offsetY = -25
         else
-            offsetY = zo_max(-25, select(6, self.lastControl[combatType]:GetAnchor(0)))
+            offsetY = math.max(-25, select(6, self.lastControl[combatType]:GetAnchor(0)))
         end
         control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
 
@@ -121,7 +117,7 @@ function CombatTextCombatScrollEventViewer:View(combatType, powerType, value, ab
         if self.lastControl[combatType] == nil then
             offsetY = 25
         else
-            offsetY = zo_min(25, select(6, self.lastControl[combatType]:GetAnchor(0)))
+            offsetY = math.min(25, select(6, self.lastControl[combatType]:GetAnchor(0)))
         end
         control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
 
@@ -153,7 +149,7 @@ function CombatTextCombatScrollEventViewer:View(combatType, powerType, value, ab
     animation:Play()
 
     -- Add items back into pool after use
-    zo_callLater(function ()
+    coroutine.wrap(function ()
         self.poolManager:ReleasePoolObject(CombatTextConstants.poolType.CONTROL, controlPoolKey)
         self.poolManager:ReleasePoolObject(animationPoolType, animationPoolKey)
         self.activeControls[combatType][control:GetName()] = nil
@@ -161,4 +157,5 @@ function CombatTextCombatScrollEventViewer:View(combatType, powerType, value, ab
             self.lastControl[combatType] = nil
         end
     end, animation:GetDuration())
+    collectgarbage("step")
 end
