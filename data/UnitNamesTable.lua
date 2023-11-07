@@ -7,7 +7,7 @@ if LUIE.Data.UnitNames == nil then
     LUIE.Data.UnitNames = {}
 end
 
-LUIE.Data.UnitNames = {
+local UnitNames = {
 
     ----------------------------------------------------------------
     -- TARGET DUMMY NAMES ------------------------------------------
@@ -626,3 +626,5 @@ LUIE.Data.UnitNames = {
     NPC_Coldsnap_Ogre = "Coldsnap Ogre",
     Boss_Icestalker = "Icestalker",
 }
+
+LUIE.Data.UnitNames = UnitNames
