@@ -2130,8 +2130,8 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
     --d("OV: " .. oldValue)
     --d("reason: " .. reason)
 
-    -- If the total gold change was 0 or (Reason 7 = Command) or (Reason 28 = Mount Feed) or (Reason 35 = Player Init) - End Now
-    if reason == CURRENCY_CHANGE_REASON_COMMAND or reason == CURRENCY_CHANGE_REASON_FEED_MOUNT or reason == CURRENCY_CHANGE_REASON_PLAYER_INIT then
+    -- If the total gold change was 0 or (Reason 7 = Command) or (Reason 28 = Mount Feed) or (Reason 35 = Player Init) or (Reason 81 = Expiration) - End Now
+    if UpOrDown == 0 or reason == CURRENCY_CHANGE_REASON_COMMAND or reason == CURRENCY_CHANGE_REASON_FEED_MOUNT or reason == CURRENCY_CHANGE_REASON_PLAYER_INIT or reason == CURRENCY_CHANGE_REASON_EXPIRATION then
         return
     end
 
@@ -2521,7 +2521,7 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         else
             messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageSpend
         end
-    elseif reason == 79 then -- TODO: Need to find what this variable is called, used when Endeavors are spent
+    elseif reason == CURRENCY_CHANGE_REASON_PURCHASED_WITH_ENDEAVOR_SEALS then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageSpend
 
         -- ==============================================================================
