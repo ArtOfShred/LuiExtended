@@ -2525,34 +2525,34 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         end
     elseif reason == CURRENCY_CHANGE_REASON_PURCHASED_WITH_ENDEAVOR_SEALS then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageSpend
-    -- ==============================================================================
-    -- DEBUG EVENTS - Don't know if these are implemented or what they are for.
+        -- ==============================================================================
+        -- DEBUG EVENTS - Don't know if these are implemented or what they are for.
     elseif reason == CURRENCY_CHANGE_REASON_ACTION
-    or reason == CURRENCY_CHANGE_REASON_KEEP_UPGRADE
-    or reason == CURRENCY_CHANGE_REASON_DEPRECATED_0
-    or reason == CURRENCY_CHANGE_REASON_DEPRECATED_2
-    or reason == CURRENCY_CHANGE_REASON_SOUL_HEAL
-    or reason == CURRENCY_CHANGE_REASON_CASH_ON_DELIVERY
-    or reason == CURRENCY_CHANGE_REASON_ABILITY_UPGRADE_PURCHASE
-    or reason == CURRENCY_CHANGE_REASON_DEPRECATED_1
-    or reason == CURRENCY_CHANGE_REASON_STABLESPACE
-    or reason == CURRENCY_CHANGE_REASON_ACHIEVEMENT
-    or reason == CURRENCY_CHANGE_REASON_TRAIT_REVEAL
-    or reason == CURRENCY_CHANGE_REASON_REFORGE
-    or reason == CURRENCY_CHANGE_REASON_RECIPE
-    or reason == CURRENCY_CHANGE_REASON_CONSUME_FOOD_DRINK
-    or reason == CURRENCY_CHANGE_REASON_CONSUME_POTION
-    or reason == CURRENCY_CHANGE_REASON_HARVEST_REAGENT
-    or reason == CURRENCY_CHANGE_REASON_RESEARCH_TRAIT
-    or reason == CURRENCY_CHANGE_REASON_GUILD_TABARD
-    or reason == CURRENCY_CHANGE_REASON_GUILD_FORWARD_CAMP
-    or reason == CURRENCY_CHANGE_REASON_BANK_FEE
-    or reason == CURRENCY_CHANGE_REASON_CHARACTER_UPGRADE
-    or reason == CURRENCY_CHANGE_REASON_TRIBUTE then
+    or     reason == CURRENCY_CHANGE_REASON_KEEP_UPGRADE
+    or     reason == CURRENCY_CHANGE_REASON_DEPRECATED_0
+    or     reason == CURRENCY_CHANGE_REASON_DEPRECATED_2
+    or     reason == CURRENCY_CHANGE_REASON_SOUL_HEAL
+    or     reason == CURRENCY_CHANGE_REASON_CASH_ON_DELIVERY
+    or     reason == CURRENCY_CHANGE_REASON_ABILITY_UPGRADE_PURCHASE
+    or     reason == CURRENCY_CHANGE_REASON_DEPRECATED_1
+    or     reason == CURRENCY_CHANGE_REASON_STABLESPACE
+    or     reason == CURRENCY_CHANGE_REASON_ACHIEVEMENT
+    or     reason == CURRENCY_CHANGE_REASON_TRAIT_REVEAL
+    or     reason == CURRENCY_CHANGE_REASON_REFORGE
+    or     reason == CURRENCY_CHANGE_REASON_RECIPE
+    or     reason == CURRENCY_CHANGE_REASON_CONSUME_FOOD_DRINK
+    or     reason == CURRENCY_CHANGE_REASON_CONSUME_POTION
+    or     reason == CURRENCY_CHANGE_REASON_HARVEST_REAGENT
+    or     reason == CURRENCY_CHANGE_REASON_RESEARCH_TRAIT
+    or     reason == CURRENCY_CHANGE_REASON_GUILD_TABARD
+    or     reason == CURRENCY_CHANGE_REASON_GUILD_FORWARD_CAMP
+    or     reason == CURRENCY_CHANGE_REASON_BANK_FEE
+    or     reason == CURRENCY_CHANGE_REASON_CHARACTER_UPGRADE
+    or     reason == CURRENCY_CHANGE_REASON_TRIBUTE then
         messageChange = zo_strformat(GetString(LUIE_STRING_CA_DEBUG_MSG_CURRENCY), reason)
-    -- END DEBUG EVENTS
-    -- ==============================================================================
-    -- If none of these returned true, then we must have just looted the currency (Potentially a few currency change events I missed too may have to adjust later)
+        -- END DEBUG EVENTS
+        -- ==============================================================================
+        -- If none of these returned true, then we must have just looted the currency (Potentially a few currency change events I missed too may have to adjust later)
     else
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageLoot
     end
