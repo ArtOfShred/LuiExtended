@@ -405,6 +405,7 @@ local strings = {
     LUIE_STRING_CA_CURRENCY_MESSAGE_LEARN_STYLE = "Вы изучили %s.",
     LUIE_STRING_CA_CURRENCY_MESSAGE_DEPLOY = "Вы развернули %s.",
     LUIE_STRING_CA_CURRENCY_MESSAGE_STOW = "You stow %s.",
+    LUIE_STRING_CA_CURRENCY_MESSAGE_FILLET = "You fillet %s.",
     LUIE_STRING_CA_CURRENCY_MESSAGE_LOST = "Вы потеряли %s.",
     LUIE_STRING_CA_CURRENCY_MESSAGE_BOUNTY = "Вы заплатили в качестве штрафа: %s.",
     LUIE_STRING_CA_CURRENCY_MESSAGE_REPAIR = "Вы заплатили %s за ремонт.",

@@ -458,6 +458,7 @@ ChatAnnouncements.Defaults = {
         LootShowUseRepairKit = true,
         LootShowUseSoulGem = false,
         LootShowUseSiege = true,
+        LootShowUseFish = true,
         LootShowUseMisc = false,
         LootShowContainer = true,
         LootShowDisguise = true,
@@ -490,6 +491,7 @@ ChatAnnouncements.Defaults = {
         CurrencyMessageDrink = GetString(LUIE_STRING_CA_CURRENCY_MESSAGE_DRINK),
         CurrencyMessageDeploy = GetString(LUIE_STRING_CA_CURRENCY_MESSAGE_DEPLOY),
         CurrencyMessageStow = GetString(LUIE_STRING_CA_CURRENCY_MESSAGE_STOW),
+        CurrencyMessageFillet = GetString(LUIE_STRING_CA_CURRENCY_MESSAGE_FILLET),
         CurrencyMessageLearnRecipe = GetString(LUIE_STRING_CA_CURRENCY_MESSAGE_LEARN_RECIPE),
         CurrencyMessageLearnMotif = GetString(LUIE_STRING_CA_CURRENCY_MESSAGE_LEARN_MOTIF),
         CurrencyMessageLearnStyle = GetString(LUIE_STRING_CA_CURRENCY_MESSAGE_LEARN_STYLE),
@@ -4351,6 +4353,13 @@ local delayedItemPool = {}    -- Store items we are counting up when the player 
 local delayedItemPoolOut = {} -- Stacks for outbound delayed item pool
 
 function ChatAnnouncements.ItemCounterDelay(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter, groupLoot, alwaysFirst, delay)
+    -- Return if we have an invalid itemId
+    if itemId == 0 then
+        if LUIE.PlayerDisplayName == "ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredPTS" then
+            d("Item counter returned invalid items")
+        end
+        return
+    end
     if delayedItemPool[itemId] then
         stack = delayedItemPool[itemId].stack + stack -- Add stack count first, only if item already exists.
     end
@@ -4686,6 +4695,11 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                         logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeploy
                         flag = true
                     end
+                    if ChatAnnouncements.SV.Inventory.LootShowUseFish and removedItemType == ITEMTYPE_FISH then
+                        gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageFillet
+                        flag = true
+                    end
                     -- If this is a Skill respec scroll, manually call an announcement for it if enabled (for some reason doesn't display an EVENT_DISPLAY_ANNOUNCEMENT on use anymore)
                     if removedItemType == ITEMTYPE_CROWN_ITEM and (itemId == 64524 or itemId == 135128) then
                         zo_callLater(function ()
@@ -4883,10 +4897,9 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
             [ITEMTYPE_WOODWORKING_BOOSTER] = true,
             [ITEMTYPE_WOODWORKING_MATERIAL] = true,
             [ITEMTYPE_WOODWORKING_RAW_MATERIAL] = true,
-            [ITEMTYPE_FISH] = true,
         }
 
-        if (craftingType == CRAFTING_TYPE_BLACKSMITHING or craftingType == CRAFTING_TYPE_CLOTHIER or craftingType == CRAFTING_TYPE_WOODWORKING or craftingType == CRAFTING_TYPE_PROVISIONING or craftingType == CRAFTING_TYPE_JEWELRYCRAFTING) and smithingMode == 4 then
+        if (craftingType == CRAFTING_TYPE_BLACKSMITHING or craftingType == CRAFTING_TYPE_CLOTHIER or craftingType == CRAFTING_TYPE_WOODWORKING or craftingType == CRAFTING_TYPE_JEWELRYCRAFTING) and smithingMode == 4  then
             return validItemTypes[itemType] or false
         end
     end
@@ -4966,6 +4979,9 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
             elseif stackCountChange > 0 then
                 gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
                 logPrefix = logPrefixPos
+                if itemId == 33753 then
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
+                end
                 ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 -- STACK COUNT INCREMENTED DOWN
             elseif stackCountChange < 0 then
@@ -4973,6 +4989,9 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
                 gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                 logPrefix = ResolveCraftingUsed(itemType) and ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or logPrefixNeg
                 if logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or ChatAnnouncements.SV.Inventory.LootShowCraftUse then -- If the logprefix isn't (used) then this is a deconstructed message, otherwise only display if used item display is enabled.
+                    if itemType == ITEMTYPE_FISH then
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageFillet
+                    end
                     ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
             end
@@ -5041,6 +5060,9 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
             elseif stackCountChange > 0 then
                 gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
                 logPrefix = logPrefixPos
+                if itemId == 33753 then
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
+                end
                 --ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, false, true)
                 -- STACK COUNT INCREMENTED DOWN
@@ -5050,6 +5072,9 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
                 logPrefix = ResolveCraftingUsed(removedItemType) and ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or logPrefixNeg
                 if logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or ChatAnnouncements.SV.Inventory.LootShowCraftUse then -- If the logprefix isn't (used) then this is a deconstructed message, otherwise only display if used item display is enabled.
                     --ChatAnnouncements.ItemPrinter(removedIcon, change, removedItemType, removedItemId, removedItemLink, receivedBy, logPrefix, gainOrLoss, false)
+                    if removedItemType == ITEMTYPE_FISH then
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageFillet
+                    end
                     ChatAnnouncements.ItemCounterDelay(removedIcon, change, removedItemType, removedItemId, removedItemLink, receivedBy, logPrefix, gainOrLoss, false, nil, true, true)
                 end
             end
@@ -5112,6 +5137,9 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
             elseif stackCountChange > 0 then
                 gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
                 logPrefix = logPrefixPos
+                if itemId == 33753 then
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
+                end
                 --ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, false, true)
                 -- STACK COUNT INCREMENTED DOWN
@@ -5121,6 +5149,9 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
                 logPrefix = ResolveCraftingUsed(itemType) and ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or logPrefixNeg
                 if logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or ChatAnnouncements.SV.Inventory.LootShowCraftUse then -- If the logprefix isn't (used) then this is a deconstructed message, otherwise only display if used item display is enabled.
                     --ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                    if itemType == ITEMTYPE_FISH then
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageFillet
+                    end
                     ChatAnnouncements.ItemCounterDelay(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, true, true)
                 end
             end
@@ -5183,6 +5214,9 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
             elseif stackCountChange > 0 then
                 gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
                 logPrefix = logPrefixPos
+                if itemId == 33753 then
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
+                end
                 --ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, false, true)
                 -- STACK COUNT INCREMENTED DOWN
@@ -5191,6 +5225,9 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
                 gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                 logPrefix = ResolveCraftingUsed(itemType) and ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or logPrefixNeg
                 if logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or ChatAnnouncements.SV.Inventory.LootShowCraftUse then -- If the logprefix isn't (used) then this is a deconstructed message, otherwise only display if used item display is enabled.
+                    if itemType == ITEMTYPE_FISH then
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageFillet
+                    end
                     ChatAnnouncements.ItemCounterDelay(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, true, true)
                 end
             end
@@ -5231,6 +5268,12 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
         end
 
         if logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or ChatAnnouncements.SV.Inventory.LootShowCraftUse then
+            if itemType == ITEMTYPE_FISH then
+                logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageFillet
+            end
+            if itemId == 33753 then
+                logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
+            end
             ChatAnnouncements.ItemCounterDelay(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, alwaysFirst, true)
         end
     end

@@ -1996,6 +1996,24 @@ function ChatAnnouncements.CreateSettings()
                 default = Defaults.Inventory.LootShowUseSiege,
             },
             {
+                -- Show Fillet Fish
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWUSE_FISH)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWUSE_FISH_TP),
+                getFunc = function ()
+                    return Settings.Inventory.LootShowUseFish
+                end,
+                setFunc = function (value)
+                    Settings.Inventory.LootShowUseFish = value
+                    ChatAnnouncements.RegisterLootEvents()
+                end,
+                width = "full",
+                disabled = function ()
+                    return not (Settings.Inventory.Loot and LUIE.SV.ChatAnnouncements_Enable)
+                end,
+                default = Defaults.Inventory.LootShowUseFish,
+            },
+            {
                 -- Show Use Misc
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWUSE_MISC)),
@@ -2666,6 +2684,23 @@ function ChatAnnouncements.CreateSettings()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
                 default = Defaults.ContextMessages.CurrencyMessageStow,
+            },
+            {
+                -- Loot Message (Fillet)
+                type = "editbox",
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_FILLET),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_FILLET_TP),
+                getFunc = function ()
+                    return Settings.ContextMessages.CurrencyMessageFillet
+                end,
+                setFunc = function (value)
+                    Settings.ContextMessages.CurrencyMessageFillet = value
+                end,
+                width = "full",
+                disabled = function ()
+                    return not LUIE.SV.ChatAnnouncements_Enable
+                end,
+                default = Defaults.ContextMessages.CurrencyMessageFillet,
             },
             {
                 -- Loot Message (Learn Recipe)

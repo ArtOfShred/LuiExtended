@@ -405,6 +405,7 @@ local strings = {
     LUIE_STRING_CA_CURRENCY_MESSAGE_LEARN_STYLE = "Du lernst %s.",
     LUIE_STRING_CA_CURRENCY_MESSAGE_DEPLOY = "Du plazierst %s.",
     LUIE_STRING_CA_CURRENCY_MESSAGE_STOW = "Du verstaust %s.",
+    LUIE_STRING_CA_CURRENCY_MESSAGE_FILLET = "You fillet %s.",
     LUIE_STRING_CA_CURRENCY_MESSAGE_LOST = "Du verlierst %s.",
     LUIE_STRING_CA_CURRENCY_MESSAGE_BOUNTY = "Du zahlst dein Kopfgeld in Höhe von %s.",
     LUIE_STRING_CA_CURRENCY_MESSAGE_REPAIR = "Du zahlst %s für Reparaturen.",
