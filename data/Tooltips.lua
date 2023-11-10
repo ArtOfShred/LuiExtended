@@ -3,9 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
-if LUIE.Data.Tooltips == nil then
-    LUIE.Data.Tooltips = {}
-end
+-- Tooltips namespace
+LUIE.Data.Tooltips = {}
 
 local zo_strformat = zo_strformat
 

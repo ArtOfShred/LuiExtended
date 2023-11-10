@@ -3,16 +3,16 @@
     License: The MIT License (MIT)
 --]]
 
-LUIE.CombatTextEventViewer = ZO_InitializingObject:Subclass()
-local CombatTextEventViewer = LUIE.CombatTextEventViewer
+
+local LUIE = LUIE
+LUIE.CombatTextEventViewer = ZO_ObjectPool:Subclass()
 local CombatText = LUIE.CombatText
-local string_format = string.format
+local CombatTextConstants = { LUIE.Data.CombatTextConstants }
+local CombatTextEventViewer = LUIE.CombatTextEventViewer
 local Effects = LUIE.Data.Effects
-local CombatTextConstants = LUIE.Data.CombatTextConstants
-
-local pairs = pairs
-
 local callbackManager = CALLBACK_MANAGER
+local pairs = pairs
+local string_format = string.format
 
 CombatTextEventViewer.resourceNames = setmetatable({}, {
     __index = function (t, k)

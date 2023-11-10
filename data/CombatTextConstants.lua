@@ -4,9 +4,7 @@
 --]]
 
 -- CombatTextConstants namespace
-if LUIE.Data.CombatTextConstants == nil then
-    LUIE.Data.CombatTextConstants = {}
-end
+LUIE.Data.CombatTextConstants = {}
 
 local CombatTextConstants = {
     -- Damage & Healing

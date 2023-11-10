@@ -3,9 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
-if LUIE.Data.AbilityBlacklistPresets == nil then
-    LUIE.Data.AbilityBlacklistPresets = {}
-end
+-- AbilityBlacklistPresets namespace
+LUIE.Data.AbilityBlacklistPresets = {}
 
 local BlacklistPresets =
 {

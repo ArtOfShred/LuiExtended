@@ -4,9 +4,7 @@
 --]]
 
 -- CombatTextBlacklistPresets namespace
-if LUIE.Data.CombatTextBlacklistPresets == nil then
-    LUIE.Data.CombatTextBlacklistPresets = {}
-end
+LUIE.Data.CombatTextBlacklistPresets = {}
 
 local BlacklistPresets = LUIE.Data.CombatTextBlacklistPresets
 

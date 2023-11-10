@@ -4,9 +4,7 @@
 --]]
 
 -- CrowdControl namespace
-if LUIE.Data.CrowdControl == nil then
-    LUIE.Data.CrowdControl = {}
-end
+LUIE.Data.CrowdControl = {}
 
 local CrowdControl = LUIE.Data.CrowdControl
 

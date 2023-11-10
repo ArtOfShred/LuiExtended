@@ -4,10 +4,7 @@
 --]]
 
 -- CastBarTable namespace
-if LUIE.Data.CastBarTable == nil then
-    LUIE.Data.CastBarTable = {}
-end
-
+LUIE.Data.CastBarTable = {}
 
 --local Abilities = LUIE.Data.Abilities --unused local
 

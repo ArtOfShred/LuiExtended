@@ -4,9 +4,8 @@
     License: The MIT License (MIT)
 --]]
 -- DebugResults namespace
-if LUIE.Data.DebugResults == nil then
-    LUIE.Data.DebugResults = {}
-end
+LUIE.Data.DebugResults = {}
+
 -- For debug function - convert result reason codes to string value
 local DebugResults = {
     [-1] = "INVALID",

@@ -3,9 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
-if LUIE.Data.UnitNames == nil then
-    LUIE.Data.UnitNames = {}
-end
+-- UnitNames namespace
+LUIE.Data.UnitNames = {}
 
 local UnitNames = {
 

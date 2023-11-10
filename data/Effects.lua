@@ -4,9 +4,7 @@
 --]]
 
 -- Effects namespace
-if LUIE.Data.Effects == nil then
-    LUIE.Data.Effects = {}
-end
+LUIE.Data.Effects = {}
 
 local Effects = LUIE.Data.Effects
 

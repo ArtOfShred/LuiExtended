@@ -4,9 +4,7 @@
 --]]
 
 -- Quests namespace
-if LUIE.Data.Quests == nil then
-    LUIE.Data.Quests = {}
-end
+LUIE.Data.Quests = {}
 
 local Quests =
 {

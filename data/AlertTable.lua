@@ -3,13 +3,13 @@
     License: The MIT License (MIT)
 --]]
 
+-- ZoneTable namespace
+LUIE.Data.ZoneTable = {}
+
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
 local Abilities = LUIE.Data.Abilities
 
-if LUIE.Data.ZoneTable == nil then
-    LUIE.Data.ZoneTable = {}
-end
 
 local ZoneTable = {
 

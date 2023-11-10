@@ -4,9 +4,7 @@
 --]]
 
 -- CollectibleTables namespace
-if LUIE.Data.CollectibleTables == nil then
-    LUIE.Data.CollectibleTables = {}
-end
+LUIE.Data.CollectibleTables = {}
 
 local CollectibleTables =
 {

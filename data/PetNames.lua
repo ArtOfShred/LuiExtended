@@ -4,9 +4,7 @@
 --]]
 
 -- PetNames namespace
-if LUIE.Data.PetNames == nil then
-    LUIE.Data.PetNames = {}
-end
+LUIE.Data.PetNames = {}
 
 local PetNames =
 {
