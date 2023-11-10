@@ -1894,7 +1894,7 @@ function SpellCastBuffs.OnEffectChangedGround(eventCode, changeType, effectSlot,
 
         local duration = endTime - beginTime
         local groundLabel = Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].groundLabel or false
-        local toggle = Effects.IsToggle[abilityId] or false
+        local toggle = Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].toggle or false
         iconName = Effects.EffectGroundDisplay[abilityId].icon or iconName
         effectName = Effects.EffectGroundDisplay[abilityId].name or effectName
 
@@ -2160,7 +2160,7 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
     else
         local duration = endTime - beginTime
         local groundLabel = Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].groundLabel or false
-        local toggle = Effects.IsToggle[abilityId] or false
+        local toggle = Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].toggle or false
 
         if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].duration then
             if Effects.EffectOverride[abilityId].duration == 0 then
@@ -2492,7 +2492,7 @@ function SpellCastBuffs.OnCombatEventIn(eventCode, result, isError, abilityName,
         local effectType = Effects.AddGroundDamageAura[abilityId].type
         local buffSlot
         local groundLabel = Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].groundLabel or false
-        local toggle = Effects.IsToggle[abilityId] or false
+        local toggle = Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].toggle or false
 
         if Effects.EffectOverride[abilityId] then
             effectName = Effects.EffectOverride[abilityId].name or abilityName
@@ -2891,7 +2891,7 @@ function SpellCastBuffs.OnCombatEventIn(eventCode, result, isError, abilityName,
             g_ignoreAbilityId[abilityId] = true
         end
 
-        local toggle = Effects.IsToggle[abilityId] or false
+        local toggle = Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].toggle or false
 
         iconName = Effects.FakePlayerBuffs[abilityId].icon or GetAbilityIcon(abilityId)
         effectName = Effects.FakePlayerBuffs[abilityId].name or GetAbilityName(abilityId)
@@ -3089,7 +3089,7 @@ function SpellCastBuffs.OnCombatEventOut(eventCode, result, isError, abilityName
 
         SpellCastBuffs.EffectsList[context][abilityId] = nil
 
-        local toggle = Effects.IsToggle[abilityId] or false
+        local toggle = Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].toggle or false
 
         iconName = Effects.FakePlayerOfflineAura[abilityId].icon or GetAbilityIcon(abilityId)
         effectName = Effects.FakePlayerOfflineAura[abilityId].name or GetAbilityName(abilityId)

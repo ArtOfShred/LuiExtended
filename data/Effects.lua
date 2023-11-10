@@ -18,63 +18,6 @@ local Abilities = LUIE.Data.Abilities
 local zo_strformat = zo_strformat
 
 --------------------------------------------------------------------------------------------------------------------------------
--- List of abilities flagged as a Toggle. For the purpose of adding a "T" label to the buff icon.
---------------------------------------------------------------------------------------------------------------------------------
-
-Effects.IsToggle = {
-    -- Innate
-    [40165] = true, -- Scene Choreo Brace (Monster Fight))
-    [29761] = true, -- Brace (Guard)
-
-    -- Sets
-    [117082] = true, -- Frozen Watcher (Frozen Watcher)
-    [134930] = true, -- Duneripper's Scales (Duneripper)
-    [135554] = true, -- Grave Guardian (Grave Guardian's)
-
-    -- Sorcerer
-    [23304] = true, -- Summon Unstable Familiar
-    [23319] = true, -- Summon Unstable Clannfear
-    [23316] = true, -- Summon Volatile Familiar
-    [24613] = true, -- Summon Winged Twilight
-    [24636] = true, -- Summon Twilight Tormentor
-    [24639] = true, -- Summon Twilight Matriarch
-    [24785] = true, -- Overload
-    [24806] = true, -- Energy Overload
-    [24804] = true, -- Power Overload
-
-    -- Warden
-    [85982] = true, -- Feral Guardian
-    [85986] = true, -- Eternal Guardian
-    [85990] = true, -- Wild Guardian
-
-    -- Psijic Order
-    [103923] = true, -- Concentrated Barrier
-    [103966] = true, -- Concentrated Barrier
-    [103543] = true, -- Mend Wounds
-    [103747] = true, -- Mend Spirit
-    [103755] = true, -- Symbiosis
-    [103492] = true, -- Meditate
-    [103652] = true, -- Deep Thoughts
-    [103665] = true, -- Introspection
-
-    -- Support
-    [80923] = true, -- Guard (Guard)
-    [80947] = true, -- Mystic Guard (Mystic Guard)
-    [80983] = true, -- Stalwart Guard (Stalwart Guard)
-
-    -- Vampire
-    [172418] = true, -- Blood Frenzy
-    [134166] = true, -- Simmering Frenzy
-    [172648] = true, -- Sated Fury
-    [32986] = true,  -- Mist Form
-    [38963] = true,  -- Elusive Mist
-    [38965] = true,  -- Blood Mist
-
-    -- NPC Abilities
-    [44258] = true, -- Magelight (Soulbrander)
-}
-
---------------------------------------------------------------------------------------------------------------------------------
 -- This will create an effect on the player or target when X skill is detected as active. SpellCastBuffs creates the buff by the name listed here, this way if 3 or 4 effects all need to display for 1 ability, it will only show the one aura.
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.EffectCreateSkillAura = {
@@ -1598,6 +1541,7 @@ Effects.KeepUpgradeTooltip = {
     - unbreakable = 1 -- Set this effect to display as unbreakable (unremoveable debuff)
     - forcedContainer = "short" or "long" -- Forces this buff to appear in one of these containers (long only applies when the long container exists)
     - groundLabel = "true" -- Display a "G" ground label on this effect to indicate it is the result of standing in a ground aura
+    - toggle = "true" -- Display a "T" toggle label on this effect to indicate it is a toggled effect
 
     Stack Tracking:
     - stack = *number* -- Set a static stack count (or starting stack count - if the values below are also set)
@@ -3031,7 +2975,7 @@ Effects.EffectOverride = {
     [142816] = { name = Abilities.Set_Heed_the_Call },                                                                                                                                                                            -- Kraglen's Howl (Kraglen's)
     [141204] = { icon = "LuiExtended/media/icons/abilities/ability_set_unleashed_terror.dds", tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 },                                                                              -- Unleashed Terror (Terror)-- Dungeon Sets (Heavy)
     [102023] = { icon = "LuiExtended/media/icons/abilities/ability_set_curse_of_doylemish.dds" },                                                                                                                                 -- Curse of Doylemish
-    [134930] = { icon = "LuiExtended/media/icons/abilities/ability_set_dunerippers_scales.dds", tooltip = Tooltips.Set_Dunerippers_Scales },                                                                                      -- Duneripper's Scales
+    [134930] = { icon = "LuiExtended/media/icons/abilities/ability_set_dunerippers_scales.dds", tooltip = Tooltips.Set_Dunerippers_Scales, toggle = true },                                                                                      -- Duneripper's Scales
     [47362] = { icon = "LuiExtended/media/icons/abilities/ability_set_ebon.dds", tooltip = Tooltips.Set_Ebon_Armory },                                                                                                            -- Ebon Armory (Ebon)
     [59695] = { icon = "LuiExtended/media/icons/abilities/ability_set_embershield.dds", tooltip = Tooltips.Set_Embershield },                                                                                                     -- Embershield (Embershield)
     [59696] = { icon = "LuiExtended/media/icons/abilities/ability_set_embershield.dds" },                                                                                                                                         -- Embershield (Embershield)
@@ -3055,11 +2999,11 @@ Effects.EffectOverride = {
     [61200] = { icon = "LuiExtended/media/icons/abilities/ability_set_undaunted_bastion.dds", tooltip = Tooltips.Generic_Damage_Shield_Duration },                                                                                -- Undaunted Bastion (of the Undaunted Bastion)
     [86070] = { icon = "esoui/art/icons/achievement_thievesguild_034.dds", tooltip = Tooltips.Generic_Weapon_Damage_Duration_Value, tooltipValue2 = 460 },                                                                        -- Armor of Truth (of Truth)
     [112414] = { icon = "LuiExtended/media/icons/abilities/ability_set_haven_of_ursus.dds", tooltip = Tooltips.Generic_Damage_Shield_Duration },                                                                                  -- Ursus's Blessing (Haven of Ursus)
-    [117082] = { icon = "esoui/art/icons/ability_wrothgar_bitingcold.dds", tooltip = Tooltips.Set_Frozen_Watcher },                                                                                                               -- Frozen Watcher (Frozen Watcher)
+    [117082] = { icon = "esoui/art/icons/ability_wrothgar_bitingcold.dds", tooltip = Tooltips.Set_Frozen_Watcher, toggle = true },                                                                                                               -- Frozen Watcher (Frozen Watcher)
     [117060] = { icon = "esoui/art/icons/ability_wrothgar_bitingcold.dds" },                                                                                                                                                      -- Frozen Watcher (Frozen Watcher)
     [126535] = { icon = "LuiExtended/media/icons/abilities/ability_set_renalds_resolve.dds", tooltip = Tooltips.Set_Renalds_Resolve },                                                                                            -- Resolve (Renald's)
     [126682] = { icon = "LuiExtended/media/icons/abilities/ability_set_dragons_defilement.dds", tooltip = Tooltips.Set_Dragons_Defilement },                                                                                      -- Dragon's Defilement (Defiled Dragon's)
-    [135554] = { icon = "LuiExtended/media/icons/abilities/ability_set_grave_guardian.dds", tooltip = Tooltips.Set_Grave_Guardian },                                                                                              -- Grave Guardian (Grave Guardian's)
+    [135554] = { icon = "LuiExtended/media/icons/abilities/ability_set_grave_guardian.dds", tooltip = Tooltips.Set_Grave_Guardian, toggle = true },                                                                                              -- Grave Guardian (Grave Guardian's)
     [133451] = { icon = "LuiExtended/media/icons/abilities/ability_set_grave_guardian.dds", groundLabel = true, tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 4430, forcedContainer = "short" }, -- Grave Guardian (Grave Guardian's)
     [141638] = { icon = "LuiExtended/media/icons/abilities/ability_set_crimson_twilight.dds", tooltip = Tooltips.Set_Crimson_Twilight },                                                                                          -- Crimson Twilight (Crimson)
     [141642] = { icon = "LuiExtended/media/icons/abilities/ability_set_crimson_twilight.dds" },                                                                                                                                   -- Crimson Twilight (Crimson)
@@ -3666,16 +3610,16 @@ Effects.EffectOverride = {
 
     -- Summon Unstable Familiar / Summon Unstable Clannfear / Summon Volatile Familiar
     [27287] = { hide = true },                                                                                                                                                           -- Birth Unstable Familiar (Summon Unstable Familiar - All Morphs)
-    [23304] = { tooltip = Tooltips.Skill_Unstable_Familiar },                                                                                                                            -- Summon Unstable Familiar (Summon Unstable Familiar)
+    [23304] = { tooltip = Tooltips.Skill_Unstable_Familiar, toggle = true },                                                                                                                            -- Summon Unstable Familiar (Summon Unstable Familiar)
     [27850] = { icon = "LuiExtended/media/icons/abilities/ability_sorcerer_familiar_melee.dds", name = Abilities.Skill_Entropic_Touch },                                                 -- Familiar Melee (Summon Unstable Familiar + Summon Volatile Familiar)
     [108840] = { icon = "esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds" },                                                                                             -- Summon Unstable Familiar (Summon Unstable Familiar)
     [108842] = { name = Abilities.Skill_Unstable_Pulse, tooltip = Tooltips.Skill_Familiar_Damage_Pulse, icon = "esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds" },      -- Volatile Familiar Damage Pulsi (Summon Unstable Familiar)
     [108843] = { name = Abilities.Skill_Unstable_Pulse, tooltip = Tooltips.Skill_Familiar_Damage_Pulse_Self, icon = "esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds" }, -- Volatile Familiar (Summon Unstable Familiar)
     [108844] = { name = Abilities.Skill_Unstable_Pulse, icon = "esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds" },                                                      -- Familiar Damage Pulse (Summon Unstable Familiar)
-    [23319] = { tooltip = Tooltips.Skill_Unstable_Clannfear },                                                                                                                           -- Summon Unstable Clannfear (Summon Unstable Clannfear)
+    [23319] = { tooltip = Tooltips.Skill_Unstable_Clannfear, toggle = true },                                                                                                                           -- Summon Unstable Clannfear (Summon Unstable Clannfear)
     [29528] = { icon = "LuiExtended/media/icons/abilities/ability_sorcerer_headbutt.dds", name = Abilities.Skill_Headbutt },                                                             -- Claw (Summon Unstable Clannfear)
     [29529] = { icon = "LuiExtended/media/icons/abilities/ability_sorcerer_tail_spike.dds" },                                                                                            -- Tail Spike (Summon Unstable Clannfear)
-    [23316] = { tooltip = Tooltips.Skill_Volatile_Familiar },                                                                                                                            -- Summon Volatile Familiar (Summon Volatile Familiar)
+    [23316] = { tooltip = Tooltips.Skill_Volatile_Familiar, toggle = true },                                                                                                                            -- Summon Volatile Familiar (Summon Volatile Familiar)
     [77187] = { name = Abilities.Skill_Volatile_Pulse, tooltip = Tooltips.Skill_Familiar_Stun_Pulse },                                                                                   -- Volatile Familiar Damage Pulsi (Summon Volatile Familiar)
     [88933] = { name = Abilities.Skill_Volatile_Pulse, tooltip = Tooltips.Skill_Familiar_Stun_Pulse_Self },                                                                              -- Volatile Familiar (Summon Volatile Familiar)
     [77186] = { name = Abilities.Skill_Volatile_Pulse },                                                                                                                                 -- Familiar Damage Pulse (Summon Volatile Familiar)
@@ -3691,18 +3635,18 @@ Effects.EffectOverride = {
     -- Summon Winged Twilight / Summon Twilight Tormentor / Summon Twilight Matriarch
     [24617] = { icon = "LuiExtended/media/icons/abilities/ability_sorcerer_zap.dds", name = Abilities.Skill_Zap },    -- Zap (Summon Winged Twilight - All Morphs)
     [28027] = { icon = "LuiExtended/media/icons/abilities/ability_sorcerer_kick.dds", name = Abilities.Skill_Kick },  -- Kick (Summon Winged Twilight - All Morphs)
-    [24613] = { tooltip = Tooltips.Skill_Winged_Twilight },                                                           -- Summon Winged Twilight (Summon Winged Twilight)
+    [24613] = { tooltip = Tooltips.Skill_Winged_Twilight, toggle = true },                                                           -- Summon Winged Twilight (Summon Winged Twilight)
     [24739] = { hide = true },                                                                                        -- Summon Winged Twilight (Summon Winged Twilight)
     [108845] = { icon = "esoui/art/icons/ability_sorcerer_lightning_prey_summoned.dds" },                             -- Winged Twilight Restore (Summon Winged Twilight)
     [108847] = { icon = "esoui/art/icons/ability_sorcerer_lightning_prey_summoned.dds" },                             -- Winged Twilight Restore (Summon Winged Twilight)
     [108846] = { icon = "esoui/art/icons/ability_sorcerer_lightning_prey_summoned.dds" },                             -- Winged Twilight Restore (Summon Winged Twilight)
-    [24636] = { tooltip = Tooltips.Skill_Twilight_Tormentor },                                                        -- Summon Twilight Tormentor (Summon Twilight Tormentor)
+    [24636] = { tooltip = Tooltips.Skill_Twilight_Tormentor, toggle = true },                                                        -- Summon Twilight Tormentor (Summon Twilight Tormentor)
     [24741] = { hide = true },                                                                                        -- Twilight Tormentor (Summon Twilight Tormentor)
     [77354] = { tooltip = Tooltips.Skill_Tormentor_Damage_Boost },                                                    -- Twilight Tormentor Enrage (Summon Twilight Tormentor)
     [88937] = { tooltip = Tooltips.Skill_Tormentor_Damage_Boost_Self },                                               -- Twilight Tormentor Enrage (Summon Twilight Tormentor)
     [117274] = { icon = "LuiExtended/media/icons/abilities/ability_sorcerer_zap.dds", name = Abilities.Skill_Zap },   -- Twilight Tormentor Zap (Summon Twilight Tormentor)
     [117273] = { icon = "LuiExtended/media/icons/abilities/ability_sorcerer_kick.dds", name = Abilities.Skill_Kick }, -- Twilight Tormentor Kick (Summon Twilight Tormentor)
-    [24639] = { tooltip = Tooltips.Skill_Twilight_Matriarch },                                                        -- Summon Twilight Matriarch (Summon Twilight Matriarch)
+    [24639] = { tooltip = Tooltips.Skill_Twilight_Matriarch, toggle = true },                                                        -- Summon Twilight Matriarch (Summon Twilight Matriarch)
     [24742] = { hide = true },                                                                                        -- Twilight Matriarch (Summon Twilight Matriarch)
     [117321] = { icon = "LuiExtended/media/icons/abilities/ability_sorcerer_zap.dds", name = Abilities.Skill_Zap },   -- Twilight Matriarch Zap (Summon Twilight Matriarch)
     [117320] = { icon = "LuiExtended/media/icons/abilities/ability_sorcerer_kick.dds", name = Abilities.Skill_Kick }, -- Twilight Matriarch Kick (Summon Twilight Matriarch)
@@ -3779,10 +3723,10 @@ Effects.EffectOverride = {
     [23279] = { icon = "LuiExtended/media/icons/abilities/ability_sorcerer_intercept.dds", name = Abilities.Skill_Intercept, hide = true, tooltip = Tooltips.Skill_Intercept }, -- Ball of Lightning (Ball of Lightning)
 
     -- Overload / Power Overload / Energy Overload
-    [24785] = { tooltip = Tooltips.Skill_Overload },                              -- Overload (Overload)
-    [24806] = { tooltip = Tooltips.Skill_Overload },                              -- Power Overload (Power Overload)
+    [24785] = { tooltip = Tooltips.Skill_Overload, toggle = true },                              -- Overload (Overload)
+    [24806] = { tooltip = Tooltips.Skill_Overload, toggle = true },                              -- Power Overload (Power Overload)
     [114769] = { icon = "esoui/art/icons/ability_sorcerer_power_overload.dds" },  -- Power Overload Light Attack (Power Overload)
-    [24804] = { tooltip = Tooltips.Skill_Energy_Overload },                       -- Energy Overload (Energy Overload)
+    [24804] = { tooltip = Tooltips.Skill_Energy_Overload, toggle = true },                       -- Energy Overload (Energy Overload)
     [114773] = { icon = "esoui/art/icons/ability_sorcerer_energy_overload.dds" }, -- Energy Overload Light Attack (Energy Overload)
     [29740] = { icon = "esoui/art/icons/ability_sorcerer_energy_overload.dds" },  -- Energy Overload (Energy Overload)
 
@@ -4002,13 +3946,13 @@ Effects.EffectOverride = {
 
     -- Feral Guardian / Eternal Guardian / Wild Guardian
     [101438] = { icon = "LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds", name = Abilities.Innate_CC_Immunity, tooltip = Tooltips.Generic_CC_Immunity },                                                                                                                                -- Bear Immunity (Feral Guardian - All Morphs)
-    [85982] = { tooltip = Tooltips.Skill_Feral_Guardian },                                                                                                                                                                                                                                                -- Feral Guardian (Feral Guardian)
+    [85982] = { tooltip = Tooltips.Skill_Feral_Guardian, toggle = true },                                                                                                                                                                                                                                                -- Feral Guardian (Feral Guardian)
     [89135] = { icon = "LuiExtended/media/icons/abilities/ability_warden_swipe.dds", name = Abilities.Skill_Bite },                                                                                                                                                                                       -- Swipe (Feral Guardian)
     [89128] = { icon = "LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds" },                                                                                                                                                                                                           -- Crushing Swipe (Feral Guardian)
     [89129] = { icon = "LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds", tooltip = Tooltips.Generic_Knockdown },                                                                                                                                                                     -- Crushing Swipe (Feral Guardian)
     [90284] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Guardians_Wrath },                                                                                                                                                                                              -- Guardian's Wrath (Feral Guardian)
     [93144] = { hide = true },                                                                                                                                                                                                                                                                            -- Guardian's Wrath Trigger (Feral Guardian)
-    [85986] = { tooltip = Tooltips.Skill_Eternal_Guardian },                                                                                                                                                                                                                                              -- Eternal Guardian (Eternal Guardian)
+    [85986] = { tooltip = Tooltips.Skill_Eternal_Guardian, toggle = true },                                                                                                                                                                                                                                              -- Eternal Guardian (Eternal Guardian)
     [109982] = { hide = true },                                                                                                                                                                                                                                                                           -- Eternal Guardian (Eternal Guardian)
     [105906] = { icon = "LuiExtended/media/icons/abilities/ability_warden_swipe.dds", name = Abilities.Skill_Bite },                                                                                                                                                                                      -- Swipe (Eternal Guardian)
     [105907] = { icon = "LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds" },                                                                                                                                                                                                          -- Crushing Swipe (Eternal Guardian)
@@ -4017,7 +3961,7 @@ Effects.EffectOverride = {
     [94626] = { hide = true },                                                                                                                                                                                                                                                                            -- Guardian's Wrath Trigger (Eternal Guardian)
     [109983] = { hide = true },                                                                                                                                                                                                                                                                           -- Eternal Guardian Revive (Eternal Guardian)
     [110384] = { icon = "LuiExtended/media/icons/abilities/ability_warden_eternal_guardian_icd.dds", name = zo_strformat("<<1>> <<2>>", Abilities.Skill_Eternal_Guardian, Abilities.Set_Cooldown), tooltip = Tooltips.Skill_Eternal_Guardian_Cooldown, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Eternal Guardian (Eternal Guardian)
-    [85990] = { tooltip = Tooltips.Skill_Wild_Guardian },                                                                                                                                                                                                                                                 -- Wild Guardian (Wild Guardian)
+    [85990] = { tooltip = Tooltips.Skill_Wild_Guardian, toggle = true },                                                                                                                                                                                                                                                 -- Wild Guardian (Wild Guardian)
     [89219] = { icon = "LuiExtended/media/icons/abilities/ability_warden_swipe.dds", name = Abilities.Skill_Bite },                                                                                                                                                                                       -- Swipe (Wild Guardian)
     [89220] = { icon = "LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds" },                                                                                                                                                                                                           -- Crushing Swipe (Wild Guardian)
     [92666] = { icon = "LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds", tooltip = Tooltips.Generic_Knockdown },                                                                                                                                                                     -- Crushing Swipe (Wild Guardian)
@@ -4816,9 +4760,9 @@ Effects.EffectOverride = {
     [145002] = { icon = "esoui/art/icons/ability_u26_vampire_01_a.dds", tooltip = Tooltips.Skill_Blood_for_Blood, unbreakable = 1 }, -- Blood for Blood (Blood for Blood)
 
     -- Blood Frenzy/Simmering Frenzy/Sated Fury
-    [172418] = { forcedContainer = "short", tooltip = Tooltips.Skill_Blood_Frenzy },     -- Blood Frenzy (Blood Frenzy)
-    [134166] = { forcedContainer = "short", tooltip = Tooltips.Skill_Simmering_Frenzy }, -- Simmering Frenzy (Simmering Frenzy)
-    [172648] = { forcedContainer = "short", tooltip = Tooltips.Skill_Sated_Fury },       -- Sated Fury (Sated Fury)
+    [172418] = { forcedContainer = "short", tooltip = Tooltips.Skill_Blood_Frenzy, toggle = true },     -- Blood Frenzy (Blood Frenzy)
+    [134166] = { forcedContainer = "short", tooltip = Tooltips.Skill_Simmering_Frenzy, toggle = true }, -- Simmering Frenzy (Simmering Frenzy)
+    [172648] = { forcedContainer = "short", tooltip = Tooltips.Skill_Sated_Fury, toggle = true },       -- Sated Fury (Sated Fury)
 
     -- Vampiric Drain/Drain Vigor/Exhilarating Drain
     [134583] = { tooltip = Tooltips.Skill_Vampiric_Drain },     -- Vampiric Drain (Vampiric Drain)
@@ -4832,9 +4776,9 @@ Effects.EffectOverride = {
     [138130] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 53 }, -- Stupefy (Stupefy)
 
     -- Mist Form
-    [32986] = { tooltip = Tooltips.Skill_Mist_Form, forcedContainer = "short" },                                                                                      -- Mist Form
-    [38963] = { tooltip = Tooltips.Skill_Mist_Form, forcedContainer = "short" },                                                                                      -- Elusive Mist
-    [38965] = { tooltip = Tooltips.Skill_Blood_Mist, forcedContainer = "short" },                                                                                     -- Blood Mist
+    [32986] = { tooltip = Tooltips.Skill_Mist_Form, forcedContainer = "short", toggle = true },                                                                                      -- Mist Form
+    [38963] = { tooltip = Tooltips.Skill_Mist_Form, forcedContainer = "short", toggle = true },                                                                                      -- Elusive Mist
+    [38965] = { tooltip = Tooltips.Skill_Blood_Mist, forcedContainer = "short", toggle = true },                                                                                     -- Blood Mist
     [38968] = { icon = "esoui/art/icons/ability_u26_vampire_05_b.dds" },                                                                                              -- Blood Mist (Blood Mist)
     [135427] = { icon = "esoui/art/icons/ability_u26_vampire_05_b.dds" },                                                                                             -- Blood Mist (Blood Mist)
 
@@ -5096,8 +5040,8 @@ Effects.EffectOverride = {
     [103827] = { icon = "LuiExtended/media/icons/abilities/ability_psijic_spell_orb.dds", hide = true },                                                                         -- Spell Orb (Spell Orb - Rank 1)
     [103879] = { icon = "LuiExtended/media/icons/abilities/ability_psijic_spell_orb.dds", tooltip = Tooltips.Skill_Spell_Orb },                                                  -- Spell Orb (Spell Orb - Rank 2)
     [103880] = { icon = "LuiExtended/media/icons/abilities/ability_psijic_spell_orb.dds", hide = true },                                                                         -- Spell Orb (Spell Orb - Rank 2)
-    [103923] = { icon = "LuiExtended/media/icons/abilities/ability_psijic_concentrated_barrier.dds", forcedContainer = "short", tooltip = Tooltips.Skill_Concentrated_Barrier }, -- Concentrated Barrier (Concentrated Barrier - Rank 1)
-    [103966] = { icon = "LuiExtended/media/icons/abilities/ability_psijic_concentrated_barrier.dds", forcedContainer = "short", tooltip = Tooltips.Skill_Concentrated_Barrier }, -- Concentrated Barrier (Concentrated Barrier - Rank 2)
+    [103923] = { icon = "LuiExtended/media/icons/abilities/ability_psijic_concentrated_barrier.dds", forcedContainer = "short", tooltip = Tooltips.Skill_Concentrated_Barrier, toggle = true }, -- Concentrated Barrier (Concentrated Barrier - Rank 1)
+    [103966] = { icon = "LuiExtended/media/icons/abilities/ability_psijic_concentrated_barrier.dds", forcedContainer = "short", tooltip = Tooltips.Skill_Concentrated_Barrier, toggle = true }, -- Concentrated Barrier (Concentrated Barrier - Rank 2)
 
     ----------------------------------------------------------------
     -- PSIJIC ORDER ACTIVE ABILITIES -------------------------------
@@ -5132,24 +5076,24 @@ Effects.EffectOverride = {
     [122260] = { icon = "esoui/art/icons/ability_psijic_005_b.dds", tooltip = Tooltips.Innate_Snare_Immobilize_Immunity }, -- Race Against Time (Race Against Time)
 
     -- Mend Wounds / Mend Spirit / Symbiosis
-    [103543] = { tooltip = Tooltips.Skill_Mend_Wounds },              -- Mend Wounds (Mend Wounds)
+    [103543] = { tooltip = Tooltips.Skill_Mend_Wounds, toggle = true },              -- Mend Wounds (Mend Wounds)
     [107583] = { hide = true },                                       -- Mend Wounds (Mend Wounds)
     [118617] = { icon = "esoui/art/icons/ability_psijic_006.dds" },   -- Mend Wounds (Mend Wounds)
-    [103747] = { tooltip = Tooltips.Skill_Mend_Spirit },              -- Mend Spirit (Mend Spirit)
+    [103747] = { tooltip = Tooltips.Skill_Mend_Spirit, toggle = true },              -- Mend Spirit (Mend Spirit)
     [107629] = { hide = true },                                       -- Mend Spirit (Mend Spirit)
     [118638] = { icon = "esoui/art/icons/ability_psijic_006_a.dds" }, -- Mend Spirit (Mend Spirit)
-    [103755] = { tooltip = Tooltips.Skill_Symbiosis },                -- Symbiosis (Symbiosis)
+    [103755] = { tooltip = Tooltips.Skill_Symbiosis, toggle = true },                -- Symbiosis (Symbiosis)
     [107636] = { hide = true },                                       -- Symbiosis (Symbiosis)
     [118645] = { icon = "esoui/art/icons/ability_psijic_006_b.dds" }, -- Symbiosis (Symbiosis)
 
     -- Meditate / Deep Thoughts / Introspection
-    [103492] = { forcedContainer = "short", tooltip = Tooltips.Skill_Meditate },      -- Meditate (Meditate)
+    [103492] = { forcedContainer = "short", tooltip = Tooltips.Skill_Meditate, toggle = true },      -- Meditate (Meditate)
     [103500] = { icon = "esoui/art/icons/ability_psijic_004.dds" },                   -- Meditate (Meditate)
     [103501] = { icon = "esoui/art/icons/ability_psijic_004.dds" },                   -- Meditate (Meditate)
-    [103652] = { forcedContainer = "short", tooltip = Tooltips.Skill_Meditate },      -- Deep Thoughts (Deep Thoughts)
+    [103652] = { forcedContainer = "short", tooltip = Tooltips.Skill_Meditate, toggle = true },      -- Deep Thoughts (Deep Thoughts)
     [103655] = { icon = "esoui/art/icons/ability_psijic_004_a.dds" },                 -- Deep Thoughts (Deep Thoughts)
     [103656] = { icon = "esoui/art/icons/ability_psijic_004_a.dds" },                 -- Deep Thoughts (Deep Thoughts)
-    [103665] = { forcedContainer = "short", tooltip = Tooltips.Skill_Introspection }, -- Introspection (Introspection)
+    [103665] = { forcedContainer = "short", tooltip = Tooltips.Skill_Introspection, toggle = true }, -- Introspection (Introspection)
     [103668] = { icon = "esoui/art/icons/ability_psijic_004_b.dds" },                 -- Introspection (Introspection)
     [103669] = { icon = "esoui/art/icons/ability_psijic_004_b.dds" },                 -- Introspection (Introspection)
 
@@ -5306,13 +5250,13 @@ Effects.EffectOverride = {
 
     -- Guard / Mystic Guard / Stalwart Guard
     [61511] = { duration = 0, forcedContainer = "short", tooltip = Tooltips.Skill_Guard_Other }, -- Guard (Guard)
-    [80923] = { duration = 0, tooltip = Tooltips.Skill_Guard_Self },                             -- Guard (Guard)
+    [80923] = { duration = 0, tooltip = Tooltips.Skill_Guard_Self, toggle = true },                             -- Guard (Guard)
     [78338] = { icon = "esoui/art/icons/ability_ava_guard.dds" },                                -- Guard (Guard)
     [61536] = { duration = 0, forcedContainer = "short", tooltip = Tooltips.Skill_Guard_Other }, -- Mystic Guard (Mystic Guard)
-    [80947] = { duration = 0, tooltip = Tooltips.Skill_Guard_Self },                             -- Mystic Guard (Mystic Guard)
+    [80947] = { duration = 0, tooltip = Tooltips.Skill_Guard_Self, toggle = true },                             -- Mystic Guard (Mystic Guard)
     [81415] = { icon = "esoui/art/icons/ability_ava_mystic_guard.dds" },                         -- Mystic Guard (Mystic Guard)
     [61529] = { duration = 0, forcedContainer = "short", tooltip = Tooltips.Skill_Guard_Other }, -- Stalwart Guard (Stalwart Guard)
-    [80983] = { duration = 0, tooltip = Tooltips.Skill_Guard_Self },                             -- Stalwart Guard (Stalwart Guard)
+    [80983] = { duration = 0, tooltip = Tooltips.Skill_Guard_Self, toggle = true },                             -- Stalwart Guard (Stalwart Guard)
     [81420] = { icon = "esoui/art/icons/ability_ava_stalwart_guard.dds" },                       -- Stalwart Guard (Stalwart Guard)
 
     -- Skill_Revealing_Flare
@@ -5642,7 +5586,7 @@ Effects.EffectOverride = {
     -- Critter events
     [79544] = { hide = true },                                                                                                                                                  -- Mischievous Dodge (Nixad)
     [79555] = { hide = true },                                                                                                                                                  -- Mischievous Dodge (Nixad)
-    [40165] = { icon = "LuiExtended/media/icons/abilities/ability_innate_block.dds", name = Abilities.Innate_Brace, duration = 0, tooltip = Tooltips.Skill_Block_NPC_Theater }, -- Scene Choreo Brace (Monster Fight)
+    [40165] = { icon = "LuiExtended/media/icons/abilities/ability_innate_block.dds", name = Abilities.Innate_Brace, duration = 0, tooltip = Tooltips.Skill_Block_NPC_Theater, toggle = true }, -- Scene Choreo Brace (Monster Fight)
 
     -- Friendly NPC Abilities
     [48330] = { hide = true },                                                                                                       -- Aspect of Terror (Abnur Tharn)
@@ -5682,7 +5626,7 @@ Effects.EffectOverride = {
     [29400] = { icon = "esoui/art/icons/ability_1handed_005.dds" },                                                                                                                                                             -- Power Bash (Guard)
     [29401] = { icon = "esoui/art/icons/ability_1handed_005.dds", tooltip = Tooltips.Generic_Disorient },                                                                                                                       -- Power Bash (Guard)
     [29402] = { icon = "esoui/art/icons/ability_1handed_005.dds", hide = true, tooltip = Tooltips.Generic_Stagger },                                                                                                            -- Power Bash (Guard)
-    [29761] = { icon = "LuiExtended/media/icons/abilities/ability_innate_block.dds", duration = 0, tooltip = Tooltips.Skill_Block_NPC },                                                                                        -- Brace (Guard)
+    [29761] = { icon = "LuiExtended/media/icons/abilities/ability_innate_block.dds", duration = 0, tooltip = Tooltips.Skill_Block_NPC, toggle = true },                                                                                        -- Brace (Guard)
     [29762] = { hide = true },                                                                                                                                                                                                  -- Blocked Stack (Guard)
     [29757] = { hide = true },                                                                                                                                                                                                  -- Remove block (Guard)
     [84351] = { hide = true },                                                                                                                                                                                                  -- Remove block (Guard)
@@ -5850,7 +5794,7 @@ Effects.EffectOverride = {
 
     -- Soulbrander
     [44323] = { icon = "esoui/art/icons/ability_armor_003_a.dds", tooltip = Tooltips.Skill_Dampen_Magic },                                              -- Dampen Magic (Soulbrander)
-    [44258] = { icon = "esoui/art/icons/ability_mageguild_002.dds", name = Abilities.Skill_Magelight, tooltip = Tooltips.Skill_Radiant_Magelight_NPC }, -- Radiant Magelight (Soulbrander)
+    [44258] = { icon = "esoui/art/icons/ability_mageguild_002.dds", name = Abilities.Skill_Magelight, tooltip = Tooltips.Skill_Radiant_Magelight_NPC, toggle = true }, -- Radiant Magelight (Soulbrander)
     [44263] = { hide = true },                                                                                                                          -- Radiant Magelight (Soulbrander)
     [44259] = { icon = "esoui/art/icons/ability_mageguild_002.dds", hide = true },                                                                      -- Magelight (Soulbrander)
 
