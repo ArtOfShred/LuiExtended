@@ -4852,7 +4852,11 @@ function ChatAnnouncements.Dummy()
 end
 
 function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
+    local Debug = LUIE.Debug
+    local debugTraceback = debug.traceback
+    local traceback = debugTraceback("" .. inventoryUpdateReason, 2)
     -- End right now if this is any other reason (durability loss, etc)
+    Debug("Inventory Update" .. traceback)
     if inventoryUpdateReason ~= INVENTORY_UPDATE_REASON_DEFAULT then
         return
     end
