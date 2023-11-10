@@ -42,6 +42,7 @@ frontend/CrowdControlTracker.xml
 
 src/Unlock.lua
 
+data/_data_namespace.lua
 data/AbilityTables.lua
 data/Tooltips.lua
 data/UnitNamesTable.lua
