@@ -1579,7 +1579,7 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
         -- GameTooltip:SetAbilityId(117391)
 
         -- Debug show default Tooltip on my account
-        if LUIE.PlayerDisplayName == "@ArtOfShredPTS" then
+        if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredPTS" then
             GameTooltip:AddLine("Default Tooltip Below:", "", colorText:UnpackRGBA())
 
             local newtooltipText
