@@ -4355,7 +4355,7 @@ local delayedItemPoolOut = {} -- Stacks for outbound delayed item pool
 function ChatAnnouncements.ItemCounterDelay(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter, groupLoot, alwaysFirst, delay)
     -- Return if we have an invalid itemId
     if itemId == 0 then
-        if LUIE.PlayerDisplayName == "ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredPTS" then
+        if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredPTS"  or LUIE.PlayerDisplayName == "@dack_janiels" then
             d("Item counter returned invalid items")
         end
         return
