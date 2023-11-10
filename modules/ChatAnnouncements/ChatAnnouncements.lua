@@ -4355,7 +4355,7 @@ local delayedItemPoolOut = {} -- Stacks for outbound delayed item pool
 function ChatAnnouncements.ItemCounterDelay(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter, groupLoot, alwaysFirst, delay)
     -- Return if we have an invalid itemId
     if itemId == 0 then
-        if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredPTS"  or LUIE.PlayerDisplayName == "@dack_janiels" then
+        if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@dack_janiels" then
             d("Item counter returned invalid items")
         end
         return
@@ -4853,13 +4853,23 @@ end
 
 function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
     local Debug = LUIE.Debug
-    local debugTraceback = debug.traceback
-    local traceback = debugTraceback("" .. inventoryUpdateReason, 2)
+
     -- End right now if this is any other reason (durability loss, etc)
-    Debug("Inventory Update" .. traceback)
     if inventoryUpdateReason ~= INVENTORY_UPDATE_REASON_DEFAULT then
         return
     end
+
+    local traceback = debug.traceback(
+        "Inventory Update" ..
+        " eventCode: " .. tostring(eventCode) ..
+        " bagId: " .. tostring(bagId) ..
+        " slotId: " .. tostring(slotId) ..
+        " isNewItem: " .. tostring(isNewItem) ..
+        " itemSoundCategory: " .. tostring(itemSoundCategory) ..
+        " inventoryUpdateReason: " .. tostring(inventoryUpdateReason) ..
+        " stackCountChange: " .. tostring(stackCountChange), 2)
+
+    Debug(traceback)
 
     local function ResolveCraftingUsed(itemType)
         local craftingType = GetCraftingInteractionType()
