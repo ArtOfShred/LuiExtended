@@ -3599,10 +3599,10 @@ end
 
 -- Runs OnUpdate - 100 ms buffer
 function SpellCastBuffs.OnUpdate(currentTime)
-    -- local currentTime = GetGameTimeMilliseconds()
     local buffsSorted = {}
     local needs_update = {}
     local isProminent = {}
+
     -- And reset sizes of already existing icons
     for _, container in pairs(containerRouting) do
         needs_update[container] = true
@@ -3610,21 +3610,19 @@ function SpellCastBuffs.OnUpdate(currentTime)
         if buffsSorted[container] == nil then
             buffsSorted[container] = {}
         end
-
         -- Refresh prominent buff labels on each update tick
         if container == "prominentbuffs" or container == "prominentdebuffs" then
             isProminent[container] = true
         end
     end
 
-    -- Filter expired events. and build array for sorting
+    -- Filter expired events and build array for sorting
     for context, effectsList in pairs(SpellCastBuffs.EffectsList) do
         local container = containerRouting[context]
         for k, v in pairs(effectsList) do
             -- Remove effect (that is not permanent and has duration)
             if v.ends ~= nil and v.dur > 0 and v.ends < currentTime then
                 effectsList[k] = nil
-                -- Or append to correct container
             elseif container then
                 -- Add icons to to-be-sorted list only if effect already started
                 if v.starts < currentTime then
@@ -3664,8 +3662,9 @@ function SpellCastBuffs.OnUpdate(currentTime)
         end
         needs_update[container] = false
     end
+
     for _, container in pairs(containerRouting) do
-        if isProminent then
+        if isProminent[container] then
             SpellCastBuffs.updateBar(currentTime, buffsSorted[container], container)
         end
     end
@@ -3691,7 +3690,6 @@ function SpellCastBuffs.OnUpdate(currentTime)
         end
     end
     ]]
-    --
 end
 
 function SpellCastBuffs.updateBar(currentTime, sortedList, container)

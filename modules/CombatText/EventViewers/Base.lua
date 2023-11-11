@@ -3,8 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
-LUIE.CombatTextEventViewer = ZO_InitializingObject:Subclass()
-local CombatTextEventViewer = LUIE.CombatTextEventViewer
+---@class CombatTextEventViewer
+local CombatTextEventViewer = ZO_InitializingObject:Subclass()
 local CombatText = LUIE.CombatText
 local string_format = string.format
 local Effects = LUIE.Data.Effects
@@ -320,3 +320,5 @@ function CombatTextEventViewer:IsOverlapping(control, activeControls)
 
     return false
 end
+
+LUIE.CombatTextEventViewer = CombatTextEventViewer
