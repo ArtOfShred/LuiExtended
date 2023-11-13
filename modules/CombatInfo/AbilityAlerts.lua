@@ -39,14 +39,9 @@ local alertTypes = {
 
 -- Quadratic easing out - decelerating to zero velocity (For buff fade)
 local function EaseOutQuad(t, b, c, d)
-    -- protect against 1 / 0
-    if t == 0 then
-        t = 0.0001
-    end
-    if d == 0 then
-        d = 0.0001
-    end
-
+    -- protect against division by zero
+    t = t == 0 and 0.0001 or t
+    d = d == 0 and 0.0001 or d
     t = t / d
     return -c * t * (t - 2) + b
 end
