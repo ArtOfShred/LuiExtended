@@ -6,9 +6,12 @@
 local SpellCastBuffs = LUIE.SpellCastBuffs
 
 local Effects = LUIE.Data.Effects
-local strfmat = string.format
+
+local pairs = pairs
+local string_format = string.format
 local zo_strformat = zo_strformat
 local zo_strgsub = zo_strgsub
+local printtochat = LUIE.PrintToChat
 
 -- Add millisecond timestamp to ability debug
 local function MillisecondTimestampDebug(message)
@@ -23,7 +26,7 @@ local function MillisecondTimestampDebug(message)
     timestamp = zo_strgsub(timestamp, "A", "")
     timestamp = zo_strgsub(timestamp, "a", "")
     timestamp = zo_strgsub(timestamp, "ms", "")
-    message = strfmat("|c%s[%s]|r %s", LUIE.TimeStampColorize, timestamp, message)
+    message = string_format("|c%s[%s]|r %s", LUIE.TimeStampColorize, timestamp, message)
     return message
 end
 
@@ -65,7 +68,7 @@ function SpellCastBuffs.EventCombatDebug(eventCode, result, isError, abilityName
 
     local finalString = (iconFormatted .. " [" .. abilityId .. "] " .. ability .. ": [S] " .. source .. " --> [T] " .. target .. " [D] " .. duration .. showachantime .. showacasttime .. " [R] " .. formattedResult)
     finalString = MillisecondTimestampDebug(finalString)
-    LUIE.PrintToChat(finalString)
+    printtochat(finalString)
 end
 
 -- Debug Display for Effect Events
@@ -114,7 +117,7 @@ function SpellCastBuffs.EventEffectDebug(eventCode, changeType, effectSlot, effe
         finalString = ("|c00E200Refreshed:|r " .. iconFormatted .. " (" .. changeType .. ") [" .. abilityId .. "] " .. nameFormatted .. ": [Tag] " .. unitName .. " [Dur] " .. duration)
     end
     finalString = MillisecondTimestampDebug(finalString)
-    LUIE.PrintToChat(finalString)
+    printtochat(finalString)
 end
 
 -- Account specific DEBUG for ArtOfShred (These are only registered to give me some additional debug options)
@@ -225,30 +228,30 @@ function SpellCastBuffs.TempSlashGround()
 end
 
 function SpellCastBuffs.TempSlashZoneCheck()
-    LUIE.PrintToChat("--------------------")
-    LUIE.PrintToChat("ZONE & MAP INFO:")
-    LUIE.PrintToChat("--------------------")
+    printtochat("--------------------")
+    printtochat("ZONE & MAP INFO:")
+    printtochat("--------------------")
     local zoneid = GetZoneId(GetCurrentMapZoneIndex())
-    LUIE.PrintToChat("Zone Id: " .. zoneid)
+    printtochat("Zone Id: " .. zoneid)
     local locName = GetPlayerLocationName()
-    LUIE.PrintToChat("Location Name: " .. locName)
-    LUIE.PrintToChat("--------------------")
+    printtochat("Location Name: " .. locName)
+    printtochat("--------------------")
     local mapid = GetCurrentMapId()
-    LUIE.PrintToChat("Map Id: " .. mapid)
+    printtochat("Map Id: " .. mapid)
     local mapindex = GetCurrentMapIndex()
     if mapindex then -- this value can return nil
-        LUIE.PrintToChat("Map Index: " .. mapindex)
+        printtochat("Map Index: " .. mapindex)
     else
-        LUIE.PrintToChat("Map Index: nil")
+        printtochat("Map Index: nil")
     end
-    LUIE.PrintToChat("--------------------")
+    printtochat("--------------------")
     local name, mapType, mapContentType, zoneIndex, description = GetMapInfoById(mapid)
-    LUIE.PrintToChat("Map Name: " .. name)
-    LUIE.PrintToChat("Map Type: " .. mapType)
-    LUIE.PrintToChat("Map Content Type: " .. mapContentType)
-    LUIE.PrintToChat("Zone Index: " .. zoneIndex)
-    LUIE.PrintToChat("Description: " .. description)
-    LUIE.PrintToChat("--------------------")
+    printtochat("Map Name: " .. name)
+    printtochat("Map Type: " .. mapType)
+    printtochat("Map Content Type: " .. mapContentType)
+    printtochat("Zone Index: " .. zoneIndex)
+    printtochat("Description: " .. description)
+    printtochat("--------------------")
 end
 
 function SpellCastBuffs.TempSlashCheckRemovedAbilities()

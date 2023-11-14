@@ -3,9 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
-if LUIE.Data.Tooltips == nil then
-    LUIE.Data.Tooltips = {}
-end
+-- Tooltips namespace
+LUIE.Data.Tooltips = {}
 
 local zo_strformat = zo_strformat
 
@@ -93,7 +92,9 @@ local Tooltips = {
     Skill_Minor_Defile = GetString(LUIE_STRING_SKILL_MINOR_DEFILE_TP),
     Skill_Major_Defile = GetString(LUIE_STRING_SKILL_MAJOR_DEFILE_TP),
     Skill_Minor_Magickasteal = GetString(LUIE_STRING_SKILL_MINOR_MAGICKASTEAL_TP),
+    Skill_Minor_Magickasteal_Other = GetString(LUIE_STRING_SKILL_MINOR_MAGICKASTEAL_OTHER_TP),
     Skill_Minor_Lifesteal = GetString(LUIE_STRING_SKILL_MINOR_LIFESTEAL_TP),
+    Skill_Minor_Lifesteal_Other = GetString(LUIE_STRING_SKILL_MINOR_LIFESTEAL_OTHER_TP),
     Skill_Minor_Enveration = GetString(LUIE_STRING_SKILL_MINOR_ENERVATION_TP),
     Skill_Minor_Uncertainty = GetString(LUIE_STRING_SKILL_MINOR_UNCERTAINTY_TP),
     Skill_Minor_Cowardice = GetString(LUIE_STRING_SKILL_MINOR_COWARDICE_TP),
@@ -118,6 +119,7 @@ local Tooltips = {
 
     Generic_Immunity = GetString(LUIE_STRING_SKILL_SET_GENERIC_IMMUNITY_TP),
     Generic_Immunity_Permanent = GetString(LUIE_STRING_SKILL_GENERIC_IMMUNITY_PERMANENT_TP),
+    Generic_Damage_Immunity_Permanent = GetString(LUIE_STRING_SKILL_GENERIC_DAMAGE_IMMUNITY_PERMANENT_TP),
 
     Generic_Snare = GetString(LUIE_STRING_SKILL_GENERIC_SNARE_TP),
     Generic_Snare_No_Dur = GetString(LUIE_STRING_SKILL_GENERIC_SNARE_NO_DUR_TP),
@@ -1125,7 +1127,6 @@ local Tooltips = {
 
     Skill_AvA_Sanctuary = GetString(LUIE_STRING_SKILL_AVA_SANCTUARY_TP),
     Skill_Lightning_Ballista_Bolt = GetString(LUIE_STRING_SKILL_LIGHTNING_BALLISTA_BOLT_TP),
-    Skill_Meatbag_Catapult = GetString(LUIE_STRING_SKILL_MEATBAG_CATAPULT_TP),
     Skill_Meatbag_Catapult_AOE = GetString(LUIE_STRING_SKILL_MEATBAG_CATAPULT_AOE_TP),
     Skill_Meatbag_Catapult_Ground = GetString(LUIE_STRING_SKILL_MEATBAG_CATAPULT_GROUND_TP),
     Skill_Oil_Catapult_Ground = GetString(LUIE_STRING_SKILL_OIL_CATAPULT_GROUND_TP),

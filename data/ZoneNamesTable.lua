@@ -3,9 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
-if LUIE.Data.ZoneNames == nil then
-    LUIE.Data.ZoneNames = {}
-end
+-- ZoneNames namespace
+LUIE.Data.ZoneNames = {}
 
 local ZoneNames = {
 

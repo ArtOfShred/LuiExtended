@@ -41,6 +41,7 @@ local strings = {
     LUIE_STRING_DEFAULT_FRAME_ALERTS = "Alert Text",
     LUIE_STRING_DEFAULT_FRAME_COMPASS = "Compass Frame",
     LUIE_STRING_DEFAULT_FRAME_PLAYER_PROGRESS = "Experience/Champion Bar",
+    LUIE_STRING_DEFAULT_FRAME_ENDLESS_DUNGEON_TRACKER = "Endless Archive Tracker",
     LUIE_STRING_DEFAULT_FRAME_CSA = "Center Screen Announcements",
     LUIE_STRING_DISMISS_PET = "|cBFBFBFYou dismiss |r<<1>>|cBFBFBF.|r",
 
@@ -404,6 +405,7 @@ local strings = {
     LUIE_STRING_CA_CURRENCY_MESSAGE_LEARN_STYLE = "You learn %s.",
     LUIE_STRING_CA_CURRENCY_MESSAGE_DEPLOY = "You deploy %s.",
     LUIE_STRING_CA_CURRENCY_MESSAGE_STOW = "You stow %s.",
+    LUIE_STRING_CA_CURRENCY_MESSAGE_FILLET = "You fillet %s.",
     LUIE_STRING_CA_CURRENCY_MESSAGE_LOST = "You lose %s.",
     LUIE_STRING_CA_CURRENCY_MESSAGE_BOUNTY = "You pay off your bounty of %s.",
     LUIE_STRING_CA_CURRENCY_MESSAGE_REPAIR = "You pay %s in repairs.",

@@ -2,9 +2,10 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
-if LUIE.Data.Abilities == nil then
-    LUIE.Data.Abilities = {}
-end
+
+-- Abilities namespace
+LUIE.Data.Abilities = {}
+
 -- AbilityTables namespace
 local AbilityTables = {
     -- ---------------------------------------------------
@@ -144,9 +145,6 @@ local AbilityTables = {
 
     -- Glyphs
     Item_Glyph_of_Weapon_Damage = 17910,
-
-    -- Elemental Status Effect
-    Proc_Chilled = 7145,
 
     -- Potions/Poisons
     Potion_Invisiblity = 3668,

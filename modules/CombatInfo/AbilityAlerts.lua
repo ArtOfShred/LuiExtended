@@ -14,9 +14,10 @@ local AlertsZone = LUIE.Data.AlertZoneOverride
 local AlertsMap = LUIE.Data.AlertMapOverride
 local AlertsConvert = LUIE.Data.AlertBossNameConvert
 
+local pairs = pairs
 local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
-local strfmat = string.format
+local string_format = string.format
 local eventManager = EVENT_MANAGER
 local sceneManager = SCENE_MANAGER
 local windowManager = WINDOW_MANAGER
@@ -38,14 +39,9 @@ local alertTypes = {
 
 -- Quadratic easing out - decelerating to zero velocity (For buff fade)
 local function EaseOutQuad(t, b, c, d)
-    -- protect against 1 / 0
-    if t == 0 then
-        t = 0.0001
-    end
-    if d == 0 then
-        d = 0.0001
-    end
-
+    -- protect against division by zero
+    t = t == 0 and 0.0001 or t
+    d = d == 0 and 0.0001 or d
     t = t / d
     return -c * t * (t - 2) + b
 end
@@ -398,7 +394,7 @@ function AbilityAlerts.AlertUpdate(currentTime)
             --
 
             if alert.data.showDuration then
-                alert.timer:SetText(alert.data.showDuration and strfmat(" %.1f", remain / 1000) or "")
+                alert.timer:SetText(alert.data.showDuration and string_format(" %.1f", remain / 1000) or "")
                 alert.timer:SetColor(unpack(CombatInfo.SV.alerts.colors.alertTimer))
             end
             if postCast <= -1100 then
@@ -607,7 +603,7 @@ function AbilityAlerts.SetupSingleAlertFrame(abilityId, textPrefix, textModifier
             alert.modifier:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
             alert.mitigation:SetText(textMitigation)
             alert.mitigation:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
-            alert.timer:SetText(alert.data.showDuration and strfmat(" %.1f", remain / 1000) or "")
+            alert.timer:SetText(alert.data.showDuration and string_format(" %.1f", remain / 1000) or "")
             alert.timer:SetColor(unpack(CombatInfo.SV.alerts.colors.alertTimer))
             alert.icon:SetHidden(false)
             alert:SetHidden(false)
@@ -644,7 +640,7 @@ function AbilityAlerts.SetupSingleAlertFrame(abilityId, textPrefix, textModifier
     alert.modifier:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
     alert.mitigation:SetText(textMitigation)
     alert.mitigation:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
-    alert.timer:SetText(alert.data.showDuration and strfmat(" %.1f", remain / 1000) or "")
+    alert.timer:SetText(alert.data.showDuration and string_format(" %.1f", remain / 1000) or "")
     alert.timer:SetColor(unpack(CombatInfo.SV.alerts.colors.alertTimer))
     alert.icon:SetHidden(false)
     alert:SetHidden(false)

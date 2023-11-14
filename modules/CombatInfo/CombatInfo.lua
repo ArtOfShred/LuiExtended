@@ -12,9 +12,11 @@ local Effects = LUIE.Data.Effects
 local Abilities = LUIE.Data.Abilities
 local Castbar = LUIE.Data.CastBarTable
 
+local pairs = pairs
+local ipairs = ipairs
 local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
-local strfmat = string.format
+local string_format = string.format
 local eventManager = EVENT_MANAGER
 local sceneManager = SCENE_MANAGER
 local windowManager = WINDOW_MANAGER
@@ -310,7 +312,7 @@ local g_backbarButtons = {}                               -- Table to hold backb
 local g_activeWeaponSwapInProgress = false                -- Toggled on when weapon swapping, TODO: maybe not needed
 local g_castbarWorldMapFix = false                        -- Fix for viewing the World Map changing the player coordinates for some reason
 
-local ACTION_BAR = ZO_ActionBar1
+local ACTION_BAR = _G["ZO_ActionBar1"]
 local BAR_INDEX_START = 3
 local BAR_INDEX_END = 8
 local BACKBAR_INDEX_END = 7 -- Separate index for backbar as long as we're not using an ultimate button.
@@ -354,15 +356,23 @@ local KEYBOARD_CONSTANTS = {
     ultimateSlotOffsetX = 62,
 }
 
-function CombatInfo.SetMarker(...)
+-- Set Marker - Called by the menu & EVENT_PLAYER_ACTIVATED (needs to be reset on the player changing zones)
+-- @param removeMarker boolean: Remove the marker by making an empty dummy marker (only called from the menu toggle)
+function CombatInfo.SetMarker(removeMarker)
+    -- Only call with removeMarker param from menu toggle setting - there doesn't appear to be any way to remove floating markers so we only do this so the player doesn't have to reloadUI after toggling the setting off
+    -- We don't wanna draw a pointless marker with no texture otherwise.
+    if removeMarker then
+        eventManager:UnregisterForEvent(moduleName .. "Marker", EVENT_PLAYER_ACTIVATED)
+        SetFloatingMarkerInfo(MAP_PIN_TYPE_AGGRO, CombatInfo.SV.markerSize, "", "", true, false)
+    end
+    -- If Marker is not enabled, return
     if CombatInfo.SV.showMarker ~= true then
         return
     end
-
+    -- Otherwise, setup the marker texture & register EVENT_PLAYER_ACTIVATED handler
     local LUIE_MARKER = "/LuiExtended/media/combatinfo/floatingicon/redarrow.dds"
-    --*function SetFloatingMarkerInfo(markerType: string, size: number, primaryTexturePath: string, secondaryTexturePath: string, primaryPulses: boolean, secondaryPulses: boolean)
-    SetFloatingMarkerInfo(MAP_PIN_TYPE_AGGRO, CombatInfo.SV.markerSize, LUIE_MARKER, LUIE_MARKER, true, false)
-    SetFloatingMarkerGlobalAlpha(1)
+    SetFloatingMarkerInfo(MAP_PIN_TYPE_AGGRO, CombatInfo.SV.markerSize, LUIE_MARKER, "", true, false)
+    eventManager:RegisterForEvent(moduleName .. "Marker", EVENT_PLAYER_ACTIVATED, CombatInfo.OnPlayerActivatedMarker)
 end
 
 local slotsUpdated = {}
@@ -398,7 +408,7 @@ local function SetupSwapAnimation(button)
 end
 
 local function FormatDurationSeconds(remain)
-    return strfmat((CombatInfo.SV.BarMillis and ((remain < CombatInfo.SV.BarMillisThreshold * 1000) or CombatInfo.SV.BarMillisAboveTen)) and "%.1f" or "%.1d", remain / 1000)
+    return string_format((CombatInfo.SV.BarMillis and ((remain < CombatInfo.SV.BarMillisThreshold * 1000) or CombatInfo.SV.BarMillisAboveTen)) and "%.1f" or "%.1d", remain / 1000)
 end
 
 -- Module initialization
@@ -424,8 +434,8 @@ function CombatInfo.Initialize(enabled)
 
     CombatInfo.ApplyFont()
     CombatInfo.ApplyProcSound()
-
-    uiQuickSlot.label = UI.Label(QuickslotButton, { CENTER, CENTER }, nil, nil, g_potionFont, nil, true)
+    local QSB = _G["QuickslotButton"]
+    uiQuickSlot.label = UI.Label(QSB, { CENTER, CENTER }, nil, nil, g_potionFont, nil, true)
     uiQuickSlot.label:SetFont(g_potionFont)
     if CombatInfo.SV.PotionTimerColor then
         uiQuickSlot.label:SetColor(unpack(uiQuickSlot.color))
@@ -437,15 +447,16 @@ function CombatInfo.Initialize(enabled)
     CombatInfo.ResetPotionTimerLabel() -- Set the label position
 
     -- Create Ultimate overlay labels
-    uiUltimate.LabelVal = UI.Label(ActionButton8, { BOTTOM, TOP, 0, -3 }, nil, { 1, 2 }, "$(BOLD_FONT)|16|soft-shadow-thick", nil, true)
-    uiUltimate.LabelPct = UI.Label(ActionButton8, nil, nil, nil, g_ultimateFont, nil, true)
-    local actionButton = ZO_ActionBar_GetButton(8)
+    local AB8 = _G["ActionButton8"]
+    uiUltimate.LabelVal = UI.Label(AB8, { BOTTOM, TOP, 0, -3 }, nil, { 1, 2 }, "$(BOLD_FONT)|16|soft-shadow-thick", nil, true)
+    uiUltimate.LabelPct = UI.Label(AB8, nil, nil, nil, g_ultimateFont, nil, true)
+    local actionButton = ZO_ActionBar_GetButton(g_ultimateSlot, g_hotbarCategory)
     uiUltimate.LabelPct:SetAnchor(TOPLEFT, actionButton.slot)
     uiUltimate.LabelPct:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CombatInfo.SV.UltimateLabelPosition)
 
     uiUltimate.LabelPct:SetColor(unpack(uiUltimate.color))
     -- And buff texture
-    uiUltimate.Texture = UI.Texture(ActionButton8, { CENTER, CENTER }, { 160, 160 }, "/esoui/art/crafting/white_burst.dds", DL_BACKGROUND, true)
+    uiUltimate.Texture = UI.Texture(AB8, { CENTER, CENTER }, { 160, 160 }, "/esoui/art/crafting/white_burst.dds", DL_BACKGROUND, true)
 
     -- Create a top level window for backbar butons
     local tlw = windowManager:CreateControl("LUIE_Backbar", ACTION_BAR, CT_CONTROL)
@@ -460,7 +471,6 @@ function CombatInfo.Initialize(enabled)
 
     CombatInfo.BackbarSetupTemplate()
     CombatInfo.BackbarToggleSettings()
-    CombatInfo.SetMarker()
     -------------------------------------------------------------------------------------
 
     CombatInfo.RegisterCombatInfo()
@@ -468,6 +478,9 @@ function CombatInfo.Initialize(enabled)
     if CombatInfo.SV.GlobalShowGCD then
         CombatInfo.HookGCD()
     end
+
+    -- Setup Floating Marker
+    CombatInfo.SetMarker()
 
     -- Create and update Cast Bar
     CombatInfo.CreateCastBar()
@@ -907,6 +920,10 @@ function CombatInfo.RemoveFromCustomList(list, input)
     end
 end
 
+function CombatInfo.OnPlayerActivatedMarker(eventCode)
+    CombatInfo.SetMarker()
+end
+
 -- Used to populate abilities icons after the user has logged on
 function CombatInfo.OnPlayerActivated(eventCode)
     -- do not call this function for the second time
@@ -1024,9 +1041,9 @@ function CombatInfo.OnUpdate(currentTime)
             elseif remain > 60000 then
                 local m = zo_floor(remain / 60000)
                 local s = remain / 1000 - 60 * m
-                text = m .. ":" .. strfmat("%.2d", s)
+                text = m .. ":" .. string_format("%.2d", s)
             else
-                text = strfmat(CombatInfo.SV.PotionTimerMillis and "%.1f" or "%.1d", 0.001 * remain)
+                text = string_format(CombatInfo.SV.PotionTimerMillis and "%.1f" or "%.1d", 0.001 * remain)
             end
             label:SetText(text)
         else
@@ -1099,9 +1116,9 @@ end
 
 -- Stops Attack Cast when releasing heavy attacks
 function CombatInfo.OnAbilityUsed(eventCode, actionSlotIndex)
-	if actionSlotIndex == 2 then
-		LUIE.CombatInfo.StopCastBar()
-	end
+    if actionSlotIndex == 2 then
+        LUIE.CombatInfo.StopCastBar()
+    end
 end
 
 function CombatInfo.StopCastBar()
@@ -1131,7 +1148,7 @@ function CombatInfo.OnUpdateCastbar(currentTime)
         CombatInfo.StopCastBar()
     else
         if CombatInfo.SV.CastBarTimer then
-            castbar.bar.timer:SetText(strfmat("%.1f", remain / 1000))
+            castbar.bar.timer:SetText(string_format("%.1f", remain / 1000))
         end
         if castbar.type == 1 then
             castbar.bar.bar:SetValue((currentTime - castStarts) / (castEnds - castStarts))
@@ -1732,8 +1749,9 @@ function CombatInfo.BackbarSetupTemplate()
     -- Anchor the backbar to the normal action bar with spacing
     local offsetY = IsInGamepadPreferredMode() and ACTION_BAR:GetHeight() * 1.6 or ACTION_BAR:GetHeight()
     local ActionButton53 = GetControl("ActionButton53")
+    local AB3 = _G["ActionButton3"]
     ActionButton53:ClearAnchors()
-    ActionButton53:SetAnchor(CENTER, ActionButton3, CENTER, 0, -(offsetY * 0.8))
+    ActionButton53:SetAnchor(CENTER, AB3, CENTER, 0, -(offsetY * 0.8))
 end
 
 -- Called from the menu and on init
@@ -1942,7 +1960,7 @@ function CombatInfo.GenerateCastbarPreview(state)
         castbar.bar.name:SetHidden(not state)
     end
     if CombatInfo.SV.CastBarTimer then
-        castbar.bar.timer:SetText(strfmat("1.0"))
+        castbar.bar.timer:SetText(string_format("1.0"))
         castbar.bar.timer:SetHidden(not state)
     end
     castbar.bar.bar:SetValue(1)
@@ -1973,7 +1991,7 @@ function CombatInfo.ClientInteractResult(eventCode, result, interactTargetName)
             castbar.bar.name:SetHidden(false)
         end
         if CombatInfo.SV.CastBarTimer then
-            castbar.bar.timer:SetText(strfmat("%.1f", remain/1000))
+            castbar.bar.timer:SetText(string_format("%.1f", remain/1000))
             castbar.bar.timer:SetHidden(false)
         end
 
@@ -2028,7 +2046,7 @@ function CombatInfo.SoulGemResurrectionStart(eventCode, durationMs)
         castbar.bar.name:SetHidden(false)
     end
     if CombatInfo.SV.CastBarTimer then
-        castbar.bar.timer:SetText(strfmat("%.1f", remain / 1000))
+        castbar.bar.timer:SetText(string_format("%.1f", remain / 1000))
         castbar.bar.timer:SetHidden(false)
     end
 
@@ -2197,7 +2215,7 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
                 castbar.bar.name:SetHidden(false)
             end
             if CombatInfo.SV.CastBarTimer then
-                castbar.bar.timer:SetText(strfmat("%.1f", remain / 1000))
+                castbar.bar.timer:SetText(string_format("%.1f", remain / 1000))
                 castbar.bar.timer:SetHidden(false)
             end
 

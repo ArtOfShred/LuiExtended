@@ -9,6 +9,7 @@ local SlashCommands = LUIE.SlashCommands
 
 local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
+local pairs = pairs
 
 local companionKeys = {}
 for id, name in pairs(LUIE.Data.CollectibleTables.Companions) do
@@ -189,7 +190,8 @@ function SlashCommands.SlashCampaignQ(option)
         local campaignName = GetCampaignName(campaignId)
 
         if GetAssignedCampaignId() == campaignId or GetGuestCampaignId() == campaignId then
-            QueueForCampaign(campaignId)
+            local queueAsGroup
+            QueueForCampaign(campaignId, queueAsGroup)
             printToChat(zo_strformat(GetString(LUIE_STRING_SLASHCMDS_CAMPAIGN_QUEUE), campaignName), true)
             if LUIE.SV.TempAlertCampaign then
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(LUIE_STRING_SLASHCMDS_CAMPAIGN_QUEUE), campaignName))

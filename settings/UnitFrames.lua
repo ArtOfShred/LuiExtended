@@ -5,9 +5,9 @@
 
 local UnitFrames = LUIE.UnitFrames
 local PetNames = LUIE.Data.PetNames
-
+local pairs = pairs
 local zo_strformat = zo_strformat
-
+local table_insert = table.insert
 local g_FramesMovingEnabled = false -- Helper local flag
 
 local nameDisplayOptions = { "@UserID", "Character Name", "Character Name @UserID" }
@@ -102,7 +102,7 @@ function UnitFrames.CreateSettings()
     -- Get fonts
     local FontsList = {}
     for f in pairs(LUIE.Fonts) do
-        table.insert(FontsList, f)
+        table_insert(FontsList, f)
     end
 
     -- Load Dialog Buttons
@@ -111,7 +111,7 @@ function UnitFrames.CreateSettings()
     -- Get statusbar textures
     local StatusbarTexturesList = {}
     for key, _ in pairs(LUIE.StatusbarTextures) do
-        table.insert(StatusbarTexturesList, key)
+        table_insert(StatusbarTexturesList, key)
     end
 
     local panelDataUnitFrames = {

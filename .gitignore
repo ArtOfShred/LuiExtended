@@ -13,4 +13,5 @@ $RECYCLE.BIN/
 # Others
 ~$*
 *~
-*.editorconfig
+
+/.vscode/

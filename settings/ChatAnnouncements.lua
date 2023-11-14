@@ -6,6 +6,7 @@
 local ChatAnnouncements = LUIE.ChatAnnouncements
 
 local zo_strformat = zo_strformat
+local table_insert = table.insert
 
 local chatNameDisplayOptions = { "@UserID", "Character Name", "Character Name @UserID" }
 local chatNameDisplayOptionsKeys = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
@@ -107,18 +108,6 @@ function ChatAnnouncements.CreateSettings()
                 end,
                 default = Defaults.BracketOptionCharacter,
             },
-            --[[{
-                -- Notification Color
-                type = "colorpicker",
-                name = "Notification Color (Unimplemented)",
-                tooltip = "This message will be used to colorize various generic notification messages that are not Social/Guild related or error messages.",
-                getFunc = function() return unpack(Settings.Notify.NotificationColor) end,
-                setFunc = function(r, g, b, a) Settings.Notify.NotificationColor = { r, g, b, a } ChatAnnouncements.RegisterColorEvents() end,
-                width = "full",
-                disabled = function() return not LUIE.TodoLater end,
-                default = {r=Defaults.Notify.NotificationColor[1], g=Defaults.Notify.NotificationColor[2], b=Defaults.Notify.NotificationColor[3]}
-            },]]
-            --
             {
                 -- TODO: Temporary
                 type = "description",
@@ -2007,6 +1996,24 @@ function ChatAnnouncements.CreateSettings()
                 default = Defaults.Inventory.LootShowUseSiege,
             },
             {
+                -- Show Fillet Fish
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWUSE_FISH)),
+                tooltip = GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWUSE_FISH_TP),
+                getFunc = function ()
+                    return Settings.Inventory.LootShowUseFish
+                end,
+                setFunc = function (value)
+                    Settings.Inventory.LootShowUseFish = value
+                    ChatAnnouncements.RegisterLootEvents()
+                end,
+                width = "full",
+                disabled = function ()
+                    return not (Settings.Inventory.Loot and LUIE.SV.ChatAnnouncements_Enable)
+                end,
+                default = Defaults.Inventory.LootShowUseFish,
+            },
+            {
                 -- Show Use Misc
                 type = "checkbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CA_LOOT_LOOTSHOWUSE_MISC)),
@@ -2677,6 +2684,23 @@ function ChatAnnouncements.CreateSettings()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
                 default = Defaults.ContextMessages.CurrencyMessageStow,
+            },
+            {
+                -- Loot Message (Fillet)
+                type = "editbox",
+                name = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_FILLET),
+                tooltip = GetString(LUIE_STRING_LAM_CA_CURRENCY_MESSAGE_FILLET_TP),
+                getFunc = function ()
+                    return Settings.ContextMessages.CurrencyMessageFillet
+                end,
+                setFunc = function (value)
+                    Settings.ContextMessages.CurrencyMessageFillet = value
+                end,
+                width = "full",
+                disabled = function ()
+                    return not LUIE.SV.ChatAnnouncements_Enable
+                end,
+                default = Defaults.ContextMessages.CurrencyMessageFillet,
             },
             {
                 -- Loot Message (Learn Recipe)
@@ -6290,7 +6314,7 @@ function ChatAnnouncements.CreateSettings()
             end,
         }
         -- Add a hardcoded panel for achievement tracking options
-        table.insert(optionsDataChatAnnouncements[#optionsDataChatAnnouncements].controls, checkbox)
+        table_insert(optionsDataChatAnnouncements[#optionsDataChatAnnouncements].controls, checkbox)
     end
 
     -- Chat Announcements - Quest Announcements Options Submenu

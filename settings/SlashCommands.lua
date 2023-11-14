@@ -6,6 +6,8 @@
 local SlashCommands = LUIE.SlashCommands
 local CollectibleTables = LUIE.Data.CollectibleTables
 
+local pairs =pairs
+local table_insert = table.insert
 local zo_strformat = zo_strformat
 
 local function GetFormattedCollectibleName(id)
@@ -20,7 +22,7 @@ local function CreateOptions(collectibleTable)
         for id, _ in pairs(collectibleTable) do
             if IsCollectibleUnlocked(id) then
                 local name = GetFormattedCollectibleName(id)
-                table.insert(options, name)
+                table_insert(options, name)
                 optionKeys[name] = id
             end
         end

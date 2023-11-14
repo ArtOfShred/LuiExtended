@@ -5,6 +5,9 @@
 
 local g_ElementMovingEnabled
 
+local pairs = pairs
+local table_concat = table.concat
+
 -- Create Settings Menu
 function LUIE.CreateSettings()
     -- Load LibAddonMenu
@@ -29,70 +32,55 @@ function LUIE.CreateSettings()
         for accountName, data in pairs(LUIESV.Default) do
             for profile, vars in pairs(data) do
                 if profile == "$AccountWide" then
-                    profile = "$AccountWide (" .. accountName .. ")"
-                end -- Add display name onto Account Wide for differentiation
-                if vars.version == LUIE.SVVer then
-                    if isCharacterSpecific then
-                        -- Add list of other player characters (but not self) to settings to copy. We also add AccountWide here so you can copy from your base settings if desired.
-                        if profile ~= playerName then
-                            table.insert(profileCharacters, profile)
-                        end
-                    else
-                        -- Add list of other player characters to settings to copy. We also add AccountWide here so you can copy from your base settings if desired.
-                        table.insert(profileCharacters, profile)
-                    end
+                    profile = "$AccountWide (" .. accountName .. ")" -- Add display name onto Account Wide for differentiation
+                end
+                if vars.version == LUIE.SVVer and ((isCharacterSpecific and profile ~= playerName) or not isCharacterSpecific) then
+                    -- Add list of other player characters (but not self) to settings to copy. We also add AccountWide here so you can copy from your base settings if desired.
+                    profileCharacters[#profileCharacters+1] = profile -- Use the length operator (#) to append to the table, which is faster than table.insert()
                 end
             end
         end
+        return profileCharacters -- Return the table of profiles
     end
 
     -- Copies data either to override character's data or creates a new table if no data for that character exists.
     -- Borrowed from Srendarr
     local function CopyTable(src, dest)
-        if type(dest) ~= "table" then
-            dest = {}
-        end
-
-        if type(src) == "table" then
-            for k, v in pairs(src) do
-                if type(v) == "table" then
-                    CopyTable(v, dest[k])
-                end
-                dest[k] = v
-            end
-        end
+        return ZO_DeepTableCopy(src, dest)
     end
 
     -- Called from Menu by either reset current character or reset account wide settings button.
     local function DeleteCurrentProfile(account)
         local deleteProfile
         if account then
-            deleteProfile = "$AccountWide (" .. GetDisplayName() .. ")"
+            deleteProfile = table_concat({ "$AccountWide (", GetDisplayName(), ")" })
         else
             deleteProfile = GetUnitName("player")
         end
-
         for accountName, data in pairs(LUIESV.Default) do
-            for profile, vars in pairs(data) do
-                if profile == deleteProfile then
-                    data[profile] = nil
-                    break
-                end
+            if data[deleteProfile] then
+                data[deleteProfile] = nil
+                break
             end
         end
     end
 
     -- Copy a character profile & replace another.
     local function CopyCharacterProfile()
-        local isCharacterSpecific = LUIESV.Default[GetDisplayName()]["$AccountWide"].CharacterSpecificSV -- Pull info from SV for account wide
+        local displayName = GetDisplayName()
+        if not LUIESV.Default[displayName] or not LUIESV.Default[displayName]["$AccountWide"] then
+            return
+        end
+        local isCharacterSpecific = LUIESV.Default[displayName]["$AccountWide"].CharacterSpecificSV -- Pull info from SV for account wide
         local copyTarget = isCharacterSpecific and GetUnitName("player") or "$AccountWide"
         local sourceCharacter, targetCharacter
-
+        local accountWideString = "$AccountWide ("
         for accountName, data in pairs(LUIESV.Default) do
+            local accountWideName = accountWideString .. accountName .. ")"
+            if profileQueuedCopy == accountWideName then
+                profileQueuedCopy = "$AccountWide"
+            end -- When the account name matches the one we're iterating through, copy that value
             for profile, vars in pairs(data) do
-                if profileQueuedCopy == "$AccountWide (" .. accountName .. ")" then
-                    profileQueuedCopy = "$AccountWide"
-                end -- When the account name matches the one we're iterating through, copy that value
                 if profile == profileQueuedCopy then
                     sourceCharacter = vars
                 end
@@ -101,13 +89,12 @@ function LUIE.CreateSettings()
                 end
             end
         end
-
         if not sourceCharacter or not targetCharacter then
             d("LUIE - Unable to copy Character Profile Data.") -- TODO: localization
             return
         else
             CopyTable(sourceCharacter, targetCharacter)
-            ReloadUI()
+            ReloadUI("ingame")
         end
     end
 
@@ -200,7 +187,7 @@ function LUIE.CreateSettings()
                 end,
                 setFunc = function (value)
                     LUIESV.Default[GetDisplayName()]["$AccountWide"].CharacterSpecificSV = value
-                    ReloadUI()
+                    ReloadUI("ingame")
                 end,
                 width = "full",
             },
@@ -239,7 +226,7 @@ function LUIE.CreateSettings()
                 warning = GetString(LUIE_STRING_LAM_RELOADUI_BUTTON),
                 func = function ()
                     DeleteCurrentProfile(false)
-                    ReloadUI()
+                    ReloadUI("ingame")
                 end,
                 width = "half",
                 disabled = function ()
@@ -255,7 +242,7 @@ function LUIE.CreateSettings()
                 width = "half",
                 func = function ()
                     DeleteCurrentProfile(true)
-                    ReloadUI()
+                    ReloadUI("ingame")
                 end,
             },
         },

@@ -4,9 +4,7 @@
 --]]
 
 -- CrowdControl namespace
-if LUIE.Data.CrowdControl == nil then
-    LUIE.Data.CrowdControl = {}
-end
+LUIE.Data.CrowdControl = {}
 
 local CrowdControl = LUIE.Data.CrowdControl
 
@@ -723,6 +721,19 @@ CrowdControl.IgnoreList = {
 
     -- Dreadsail Reef
     [166794] = true, -- Raging Current -- Dreadsail Reef
+
+    -- Endless Archive
+    [192956] = true, -- Enter the Endless
+    [194570] = true, -- Enter the Endless
+    [192972] = true, -- Enter the Endless
+    [194571] = true, -- Enter the Endless
+    [202803] = true, -- Enter the Endless (Group)
+    [212065] = true, -- Enter the Endless
+    [203125] = true, -- Verse Select
+    [203101] = true, -- Vision Select
+    [211431] = true, -- Side Content Transporter
+    [211433] = true, -- Side Content Selector (Group)
+    [192506] = true, -- Unstable Metamorphosis
 
     ----------------
     -- Miscelaneous

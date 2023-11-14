@@ -12,61 +12,36 @@ local UI = LUIE.UI
 
 local windowManager = WINDOW_MANAGER
 
--- A handy chaining function for quickly setting up UI elements
--- Allows us to reference methods to set properties without calling the specific object
-function UI.Chain(object)
-    -- Setup the metatable
-    local T = {}
-    setmetatable(T, {
-        __index = function (self, func)
-            -- Know when to stop chaining
-            if func == "__END" then
-                return object
-            end
-
-            -- Otherwise, add the method to the parent object
-            ---@diagnostic disable-next-line: redefined-local
-            return function (self, ...)
-                assert(object[func], func .. " missing in object")
-                object[func](object, ...)
-                return self
-            end
-        end,
-    })
-
-    -- Return the metatable
-    return T
-end
-
--- Creates empty CT_TOPLEVELCONTROL window
---@param anchors any
---@param dims any
---@return table
+--[[
+    Creates an empty CT_TOPLEVELCONTROL window.
+    @param anchors table: The anchor points for the window.
+    @param dims table: The dimensions of the window.
+    @return userdata: The created top-level window.
+]]
 function UI.TopLevel(anchors, dims)
     local tlw = windowManager:CreateTopLevelWindow()
     tlw:SetClampedToScreen(true)
     tlw:SetMouseEnabled(false)
     tlw:SetMovable(false)
     tlw:SetHidden(true)
-
     if anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
         tlw:SetAnchor(anchors[1], anchors[5] or GuiRoot, anchors[2], anchors[3] or 0, anchors[4] or 0)
     end
-
     if dims ~= nil and #dims == 2 then
         tlw:SetDimensions(dims[1], dims[2])
     end
-
     return tlw
 end
 
--- Creates plain CT_CONTROL UI control element
---@param parent any
---@param anchors any
---@param dims any
---@param hidden any
---@param name any
---@return table
+--[[
+    Creates a plain CT_CONTROL UI control element.
+    @param parent userdata: The parent control for the control.
+    @param anchors table: The anchor points for the control.
+    @param dims table: The dimensions of the control.
+    @param hidden boolean: Whether the control is hidden or not.
+    @param name string: The name of the control.
+    @return userdata: The created control.
+]]
 function UI.Control(parent, anchors, dims, hidden, name)
     if not parent then
         return
@@ -87,53 +62,51 @@ function UI.Control(parent, anchors, dims, hidden, name)
     return c
 end
 
--- Creates CT_TEXTURE UI control element
---@param parent any
---@param anchors any
---@param dims any
---@param texture any
---@param drawlayer any
---@param hidden any
---@return table
+--[[
+    Creates a CT_TEXTURE UI control element.
+    @param parent userdata: The parent control for the texture.
+    @param anchors table: The anchor points for the texture.
+    @param dims table: The dimensions of the texture.
+    @param texture string: The path to the texture for the texture control.
+    @param drawlayer number: The draw layer of the texture.
+    @param hidden boolean: Whether the texture is hidden or not.
+    @return userdata: The created texture control.
+]]
 function UI.Texture(parent, anchors, dims, texture, drawlayer, hidden)
     if not parent then
         return
     end
-
     local t = windowManager:CreateControl(nil, parent, CT_TEXTURE)
     t:SetHidden(hidden)
-
     if anchors == "fill" then
         t:SetAnchorFill()
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
         t:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0)
     end
-
     if dims == "inherit" then
         t:SetDimensions(parent:GetWidth(), parent:GetHeight())
     elseif dims ~= nil and #dims == 2 then
         t:SetDimensions(dims[1], dims[2])
     end
-
     if texture then
         t:SetTexture(texture)
     end
-
     if drawlayer then
         t:SetDrawLayer(drawlayer)
     end
-
     return t
 end
 
--- Creates CT_BACKDROP UI control element
---@param parent any
---@param anchors any
---@param dims any
---@param center any
---@param edge any
---@param hidden any
---@return table
+--[[
+    Creates a CT_BACKDROP UI control element.
+    @param parent userdata: The parent control for the backdrop.
+    @param anchors table: The anchor points for the backdrop.
+    @param dims table: The dimensions of the backdrop.
+    @param center table: The color of the center of the backdrop.
+    @param edge table: The color of the edge of the backdrop.
+    @param hidden boolean: Whether the backdrop is hidden or not.
+    @return userdata: The created backdrop control.
+]]
 function UI.Backdrop(parent, anchors, dims, center, edge, hidden)
     if not parent then
         return
@@ -159,14 +132,16 @@ function UI.Backdrop(parent, anchors, dims, center, edge, hidden)
     return bg
 end
 
--- Creates CT_BACKDROP UI control element with Chat Window background style
---@param parent any
---@param anchors any
---@param dims any
---@param color any
---@param edge_size any
---@param hidden any
---@return table
+--[[
+    Creates a CT_BACKDROP UI control element with Chat Window background style.
+    @param parent userdata: The parent control for the backdrop.
+    @param anchors table: The anchor points for the backdrop.
+    @param dims table: The dimensions of the backdrop.
+    @param color table: The color of the backdrop.
+    @param edge_size number: The size of the backdrop edge.
+    @param hidden boolean: Whether the backdrop is hidden or not.
+    @return userdata: The created backdrop control.
+]]
 function UI.ChatBackdrop(parent, anchors, dims, color, edge_size, hidden)
     if not parent then
         return
@@ -194,50 +169,49 @@ function UI.ChatBackdrop(parent, anchors, dims, color, edge_size, hidden)
     return bg
 end
 
--- Creates CT_STATUSBAR UI control element
---@param parent any
---@param anchors any
---@param dims any
---@param color any
---@param hidden any
---@return table
+--[[
+    Creates a CT_STATUSBAR UI control element.
+    @param parent userdata: The parent control for the status bar.
+    @param anchors table: The anchor points for the status bar.
+    @param dims table: The dimensions of the status bar.
+    @param color table: The color of the status bar.
+    @param hidden boolean: Whether the status bar is hidden or not.
+    @return userdata: The created status bar control.
+]]
 function UI.StatusBar(parent, anchors, dims, color, hidden)
     if not parent then
         return
     end
-
     local sb = windowManager:CreateControl(nil, parent, CT_STATUSBAR)
     sb:SetHidden(hidden)
-
     if anchors == "fill" then
         sb:SetAnchorFill()
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
         sb:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0)
     end
-
     if dims == "inherit" then
         sb:SetDimensions(parent:GetWidth(), parent:GetHeight())
     elseif dims ~= nil and #dims == 2 then
         sb:SetDimensions(dims[1], dims[2])
     end
-
     if color ~= nil and (#color == 3 or #color == 4) then
         sb:SetColor(unpack(color))
     end
-
     return sb
 end
 
--- Creates CT_STATUSBAR UI control element
---@param parent any
---@param anchors any
---@param dims any
---@param align any
---@param font any
---@param text any
---@param hidden any
---@param name any
---@return table
+--[[
+    Creates a CT_STATUSBAR UI control element.
+    @param parent userdata: The parent control for the label.
+    @param anchors table: The anchor points for the label.
+    @param dims table: The dimensions of the label.
+    @param align table: The text alignment of the label.
+    @param font string: The font for the label.
+    @param text string: The text for the label.
+    @param hidden boolean: Whether the label is hidden or not.
+    @param name string: The name of the label control.
+    @return userdata: The created label control.
+]]
 function UI.Label(parent, anchors, dims, align, font, text, hidden, name)
     if not parent then
         return

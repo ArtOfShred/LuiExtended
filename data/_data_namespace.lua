@@ -1,0 +1,22 @@
+LUIE.Data =
+{
+    Abilities = {},
+    AbilityBlacklistPresets = {},
+    AlertBossNameConvert = {},
+    AlertMapOverride = {},
+    AlertTable = {},
+    AlertZoneOverride = {},
+    CastBarTable = {},
+    CollectibleTables = {},
+    CombatTextBlacklistPresets = {},
+    CombatTextConstants = {},
+    CrowdControl = {},
+    DebugResults = {},
+    Effects = {},
+    PetNames = {},
+    Quests = {},
+    Tooltips = {},
+    UnitNames = {},
+    ZoneNames = {},
+    ZoneTable = {},
+}

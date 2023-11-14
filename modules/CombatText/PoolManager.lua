@@ -3,6 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
+local pairs = pairs
+
 LUIE.CombatTextPoolManager = ZO_InitializingObject:Subclass()
 local CombatTextPoolManager = LUIE.CombatTextPoolManager
 

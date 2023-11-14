@@ -8,11 +8,22 @@ local LUIE = LUIE
 LUIE.ChatAnnouncements = {}
 local ChatAnnouncements = LUIE.ChatAnnouncements
 
+-- Queued Messages Storage for CA Modules
+ChatAnnouncements.QueuedMessages = {}
+ChatAnnouncements.QueuedMessagesCounter = 1
+
+-- Setup Color Table
+ChatAnnouncements.Colors = {}
+local ColorizeColors = ChatAnnouncements.Colors
+
 local Effects = LUIE.Data.Effects
 local Quests = LUIE.Data.Quests
 
 local printToChat = LUIE.PrintToChat
-local strfmat = string.format
+local string_format = string.format
+local table_insert = table.insert
+local table_concat = table.concat
+
 local eventManager = EVENT_MANAGER
 local windowManager = WINDOW_MANAGER
 
@@ -445,6 +456,7 @@ ChatAnnouncements.Defaults = {
         LootShowUseRepairKit = true,
         LootShowUseSoulGem = false,
         LootShowUseSiege = true,
+        LootShowUseFish = true,
         LootShowUseMisc = false,
         LootShowContainer = true,
         LootShowDisguise = true,
@@ -477,6 +489,7 @@ ChatAnnouncements.Defaults = {
         CurrencyMessageDrink = GetString(LUIE_STRING_CA_CURRENCY_MESSAGE_DRINK),
         CurrencyMessageDeploy = GetString(LUIE_STRING_CA_CURRENCY_MESSAGE_DEPLOY),
         CurrencyMessageStow = GetString(LUIE_STRING_CA_CURRENCY_MESSAGE_STOW),
+        CurrencyMessageFillet = GetString(LUIE_STRING_CA_CURRENCY_MESSAGE_FILLET),
         CurrencyMessageLearnRecipe = GetString(LUIE_STRING_CA_CURRENCY_MESSAGE_LEARN_RECIPE),
         CurrencyMessageLearnMotif = GetString(LUIE_STRING_CA_CURRENCY_MESSAGE_LEARN_MOTIF),
         CurrencyMessageLearnStyle = GetString(LUIE_STRING_CA_CURRENCY_MESSAGE_LEARN_STYLE),
@@ -601,10 +614,6 @@ ChatAnnouncements.Defaults = {
 -- Basic
 local g_activatedFirstLoad = true
 
--- Message Printer
-local g_queuedMessages = {}       -- Table to hold messages for the 50 ms tick function to print them.
-local g_queuedMessagesCounter = 1 -- Counter value for queued message printer
-
 -- Loot/Currency
 local g_savedPurchase = {}
 local g_savedLaunder = {}
@@ -625,6 +634,8 @@ local g_lockpickBroken = false             -- Tracker for lockpick being broken
 local g_groupLootIndex = {}                -- Table to hold group member names for group loot display.
 local g_stackSplit = false                 -- Determines if we just split an inventory item stack
 local g_combinedRecipe = false             -- Determines if we just used an item that combines a recipe to stop the "learned" message from showing.
+local g_InventoryOn = false                -- Determines if Inventory Updates for Item Changes are on
+local g_bankOn = false                     -- Determines if Bank Updates for Item Changes are on
 
 -- Currency Throttle
 local g_currencyGoldThrottleValue = 0 -- Held value for gold throttle (counter)
@@ -648,11 +659,6 @@ local g_itemCounterLoss = 0        -- Counter value for items removed via crafti
 local g_itemCounterLossTracker = 0 -- Tracker for how many items have been counted, when we reach a certain threshold, it is too many items to display so we cut the string off.
 local g_itemStringLoss = ""        -- Combined string variable for items removed via crafting
 local g_oldItem = {}               -- Saved old item for crafting upgrades
-
--- Experience
-local g_xpCombatBufferValue = 0      -- Buffered XP Value
-local g_guildSkillThrottle = 0       -- Buffered Fighter's Guild Reputation Value
-local g_guildSkillThrottleLine = nil -- Grab the name for Fighter's Guild reputation (since index isn't always the same) to pass over to Buffered Printer Function
 
 -- Mail
 local g_mailCOD = 0            -- Tracks COD amount
@@ -736,82 +742,6 @@ local g_inTrade = false     -- Toggled on when in a trade.
 
 -- Antiquities
 local g_weAreInADig = false -- When in a digsite.
-
-------------------------------------------------
--- COLORIZE VALUES -----------------------------
-------------------------------------------------
-
--- Basic
---local NotificationColorize
-
--- Guild
-local GuildColorize
-
--- Currency
-local CurrencyColorize
-local CurrencyUpColorize
-local CurrencyDownColorize
-local CurrencyGoldColorize
-local CurrencyAPColorize
-local CurrencyTVColorize
-local CurrencyWVColorize
-local CurrencyOutfitTokenColorize
-local CurrencyUndauntedColorize
-local CurrencyTransmuteColorize
-local CurrencyEventColorize
-local CurrencyCrownsColorize
-local CurrencyCrownGemsColorize
-local CurrencyEndeavorsColorize
-local CurrencyEndlessColorize
-
--- Disguise
-local DisguiseAlertColorize
-
--- Achievements
-local AchievementColorize1
-local AchievementColorize2
-
--- Experience
-local ExperienceMessageColorize
-local ExperienceNameColorize
-local ExperienceLevelUpColorize
-
--- Skill Point/Lines
-local SkillPointColorize1
-local SkillPointColorize2
-local SkillLineColorize
-
--- Guild Skills
-local SkillGuildColorize
-local SkillGuildColorizeFG
-local SkillGuildColorizeMG
-local SkillGuildColorizeUD
-local SkillGuildColorizeTG
-local SkillGuildColorizeDB
-local SkillGuildColorizePO
-
--- Collectibles
-local CollectibleColorize1
-local CollectibleColorize2
-local CollectibleUseColorize
-
--- Lorebooks
-local LorebookColorize1
-local LorebookColorize2
-
--- Quests
-local QuestColorLocNameColorize
-local QuestColorLocDescriptionColorize
-local QuestColorQuestNameColorize
-local QuestColorQuestDescriptionColorize
-
--- Storage
-local StorageRidingColorize
-local StorageRidingBookColorize
-local StorageBagColorize
-
--- Antiquities
-local AntiquityColorize
 
 ------------------------------------------------
 -- BRACKET OPTIONS -----------------------------
@@ -1038,52 +968,51 @@ end
 function ChatAnnouncements.RegisterColorEvents()
     local SV = ChatAnnouncements.SV -- store the SV table in a local variable for better performance
 
-    CurrencyColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyColor))
-    CurrencyUpColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyColorUp))
-    CurrencyDownColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyColorDown))
-    CollectibleColorize1 = ZO_ColorDef:New(unpack(SV.Collectibles.CollectibleColor1))
-    CollectibleColorize2 = ZO_ColorDef:New(unpack(SV.Collectibles.CollectibleColor2))
-    CollectibleUseColorize = ZO_ColorDef:New(unpack(SV.Collectibles.CollectibleUseColor))
-    CurrencyGoldColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyGoldColor))
-    CurrencyAPColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyAPColor))
-    CurrencyTVColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyTVColor))
-    CurrencyWVColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyWVColor))
-    CurrencyOutfitTokenColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyOutfitTokenColor))
-    CurrencyUndauntedColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyUndauntedColor))
-    CurrencyTransmuteColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyTransmuteColor))
-    CurrencyEventColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyEventColor))
-    CurrencyCrownsColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyCrownsColor))
-    CurrencyCrownGemsColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyCrownGemsColor))
-    CurrencyEndeavorsColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyEndeavorsColor))
-    CurrencyEndlessColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyEndlessColor))
-    DisguiseAlertColorize = ZO_ColorDef:New(unpack(SV.Notify.DisguiseAlertColor))
-    AchievementColorize1 = ZO_ColorDef:New(unpack(SV.Achievement.AchievementColor1))
-    AchievementColorize2 = ZO_ColorDef:New(unpack(SV.Achievement.AchievementColor2))
-    LorebookColorize1 = ZO_ColorDef:New(unpack(SV.Lorebooks.LorebookColor1))
-    LorebookColorize2 = ZO_ColorDef:New(unpack(SV.Lorebooks.LorebookColor2))
-    ExperienceMessageColorize = ZO_ColorDef:New(unpack(SV.XP.ExperienceColorMessage)):ToHex()
-    ExperienceNameColorize = ZO_ColorDef:New(unpack(SV.XP.ExperienceColorName)):ToHex()
-    ExperienceLevelUpColorize = ZO_ColorDef:New(unpack(SV.XP.ExperienceLevelUpColor))
-    SkillPointColorize1 = ZO_ColorDef:New(unpack(SV.Skills.SkillPointColor1))
-    SkillPointColorize2 = ZO_ColorDef:New(unpack(SV.Skills.SkillPointColor2))
-    SkillLineColorize = ZO_ColorDef:New(unpack(SV.Skills.SkillLineColor))
-    SkillGuildColorize = ZO_ColorDef:New(unpack(SV.Skills.SkillGuildColor)):ToHex()
-    SkillGuildColorizeFG = ZO_ColorDef:New(unpack(SV.Skills.SkillGuildColorFG)):ToHex()
-    SkillGuildColorizeMG = ZO_ColorDef:New(unpack(SV.Skills.SkillGuildColorMG)):ToHex()
-    SkillGuildColorizeUD = ZO_ColorDef:New(unpack(SV.Skills.SkillGuildColorUD)):ToHex()
-    SkillGuildColorizeTG = ZO_ColorDef:New(unpack(SV.Skills.SkillGuildColorTG)):ToHex()
-    SkillGuildColorizeDB = ZO_ColorDef:New(unpack(SV.Skills.SkillGuildColorDB)):ToHex()
-    SkillGuildColorizePO = ZO_ColorDef:New(unpack(SV.Skills.SkillGuildColorPO)):ToHex()
-    QuestColorLocNameColorize = ZO_ColorDef:New(unpack(SV.Quests.QuestColorLocName)):ToHex()
-    QuestColorLocDescriptionColorize = ZO_ColorDef:New(unpack(SV.Quests.QuestColorLocDescription)):ToHex()
-    QuestColorQuestNameColorize = ZO_ColorDef:New(unpack(SV.Quests.QuestColorName))
-    QuestColorQuestDescriptionColorize = ZO_ColorDef:New(unpack(SV.Quests.QuestColorDescription)):ToHex()
-    StorageRidingColorize = ZO_ColorDef:New(unpack(SV.Notify.StorageRidingColor))
-    StorageRidingBookColorize = ZO_ColorDef:New(unpack(SV.Notify.StorageRidingBookColor))
-    StorageBagColorize = ZO_ColorDef:New(unpack(SV.Notify.StorageBagColor))
-    --NotificationColorize = ZO_ColorDef:New(unpack(SV.Notify.NotificationColor))
-    GuildColorize = ZO_ColorDef:New(unpack(SV.Social.GuildColor))
-    AntiquityColorize = ZO_ColorDef:New(unpack(SV.Antiquities.AntiquityColor))
+    ColorizeColors.CurrencyColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyColor))
+    ColorizeColors.CurrencyUpColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyColorUp))
+    ColorizeColors.CurrencyDownColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyColorDown))
+    ColorizeColors.CollectibleColorize1 = ZO_ColorDef:New(unpack(SV.Collectibles.CollectibleColor1))
+    ColorizeColors.CollectibleColorize2 = ZO_ColorDef:New(unpack(SV.Collectibles.CollectibleColor2))
+    ColorizeColors.CollectibleUseColorize = ZO_ColorDef:New(unpack(SV.Collectibles.CollectibleUseColor))
+    ColorizeColors.CurrencyGoldColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyGoldColor))
+    ColorizeColors.CurrencyAPColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyAPColor))
+    ColorizeColors.CurrencyTVColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyTVColor))
+    ColorizeColors.CurrencyWVColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyWVColor))
+    ColorizeColors.CurrencyOutfitTokenColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyOutfitTokenColor))
+    ColorizeColors.CurrencyUndauntedColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyUndauntedColor))
+    ColorizeColors.CurrencyTransmuteColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyTransmuteColor))
+    ColorizeColors.CurrencyEventColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyEventColor))
+    ColorizeColors.CurrencyCrownsColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyCrownsColor))
+    ColorizeColors.CurrencyCrownGemsColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyCrownGemsColor))
+    ColorizeColors.CurrencyEndeavorsColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyEndeavorsColor))
+    ColorizeColors.CurrencyEndlessColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyEndlessColor))
+    ColorizeColors.DisguiseAlertColorize = ZO_ColorDef:New(unpack(SV.Notify.DisguiseAlertColor))
+    ColorizeColors.AchievementColorize1 = ZO_ColorDef:New(unpack(SV.Achievement.AchievementColor1))
+    ColorizeColors.AchievementColorize2 = ZO_ColorDef:New(unpack(SV.Achievement.AchievementColor2))
+    ColorizeColors.LorebookColorize1 = ZO_ColorDef:New(unpack(SV.Lorebooks.LorebookColor1))
+    ColorizeColors.LorebookColorize2 = ZO_ColorDef:New(unpack(SV.Lorebooks.LorebookColor2))
+    ColorizeColors.ExperienceMessageColorize = ZO_ColorDef:New(unpack(SV.XP.ExperienceColorMessage)):ToHex()
+    ColorizeColors.ExperienceNameColorize = ZO_ColorDef:New(unpack(SV.XP.ExperienceColorName)):ToHex()
+    ColorizeColors.ExperienceLevelUpColorize = ZO_ColorDef:New(unpack(SV.XP.ExperienceLevelUpColor))
+    ColorizeColors.SkillPointColorize1 = ZO_ColorDef:New(unpack(SV.Skills.SkillPointColor1))
+    ColorizeColors.SkillPointColorize2 = ZO_ColorDef:New(unpack(SV.Skills.SkillPointColor2))
+    ColorizeColors.SkillLineColorize = ZO_ColorDef:New(unpack(SV.Skills.SkillLineColor))
+    ColorizeColors.SkillGuildColorize = ZO_ColorDef:New(unpack(SV.Skills.SkillGuildColor)):ToHex()
+    ColorizeColors.SkillGuildColorizeFG = ZO_ColorDef:New(unpack(SV.Skills.SkillGuildColorFG)):ToHex()
+    ColorizeColors.SkillGuildColorizeMG = ZO_ColorDef:New(unpack(SV.Skills.SkillGuildColorMG)):ToHex()
+    ColorizeColors.SkillGuildColorizeUD = ZO_ColorDef:New(unpack(SV.Skills.SkillGuildColorUD)):ToHex()
+    ColorizeColors.SkillGuildColorizeTG = ZO_ColorDef:New(unpack(SV.Skills.SkillGuildColorTG)):ToHex()
+    ColorizeColors.SkillGuildColorizeDB = ZO_ColorDef:New(unpack(SV.Skills.SkillGuildColorDB)):ToHex()
+    ColorizeColors.SkillGuildColorizePO = ZO_ColorDef:New(unpack(SV.Skills.SkillGuildColorPO)):ToHex()
+    ColorizeColors.QuestColorLocNameColorize = ZO_ColorDef:New(unpack(SV.Quests.QuestColorLocName)):ToHex()
+    ColorizeColors.QuestColorLocDescriptionColorize = ZO_ColorDef:New(unpack(SV.Quests.QuestColorLocDescription)):ToHex()
+    ColorizeColors.QuestColorQuestNameColorize = ZO_ColorDef:New(unpack(SV.Quests.QuestColorName))
+    ColorizeColors.QuestColorQuestDescriptionColorize = ZO_ColorDef:New(unpack(SV.Quests.QuestColorDescription)):ToHex()
+    ColorizeColors.StorageRidingColorize = ZO_ColorDef:New(unpack(SV.Notify.StorageRidingColor))
+    ColorizeColors.StorageRidingBookColorize = ZO_ColorDef:New(unpack(SV.Notify.StorageRidingBookColor))
+    ColorizeColors.StorageBagColorize = ZO_ColorDef:New(unpack(SV.Notify.StorageBagColor))
+    ColorizeColors.GuildColorize = ZO_ColorDef:New(unpack(SV.Social.GuildColor))
+    ColorizeColors.AntiquityColorize = ZO_ColorDef:New(unpack(SV.Antiquities.AntiquityColor))
 end
 
 function ChatAnnouncements.RegisterSocialEvents()
@@ -1403,9 +1332,9 @@ function ChatAnnouncements.GuildHeraldrySaved()
         local value = g_pendingHeraldryCost > 0 and g_pendingHeraldryCost or 1000
         local type = "LUIE_CURRENCY_HERALDRY"
         local formattedValue = nil -- Un-needed, we're not going to try to show the total guild bank gold here.
-        local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+        local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and ColorizeColors.CurrencyDownColorize:ToHex() or ColorizeColors.CurrencyColorize:ToHex()
         local changeType = ZO_LocalizeDecimalNumber(value)
-        local currencyTypeColor = CurrencyGoldColorize:ToHex()
+        local currencyTypeColor = ColorizeColors.CurrencyGoldColorize:ToHex()
         local currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
         local currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyGoldName, value)
         local currencyTotal = nil
@@ -1419,14 +1348,14 @@ function ChatAnnouncements.GuildHeraldrySaved()
         local guildName = GetGuildName(id)
 
         local guildAlliance = GetGuildAlliance(id)
-        local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+        local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or ColorizeColors.GuildColorize
         local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
         local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
         if ChatAnnouncements.SV.Social.GuildManageCA then
             local finalMessage = zo_strformat(GetString(LUIE_STRING_CA_GUILD_HERALDRY_UPDATE), guildNameAlliance)
-            g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION", isSystem = true }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION", isSystem = true }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
         end
         if ChatAnnouncements.SV.Social.GuildManageAlert then
@@ -1451,7 +1380,7 @@ end
 local function rejectQuest(questIndex)
     for itemLink, _ in pairs(WritCreater:GetSettings().skipItemQuests) do
         if not WritCreater:GetSettings().skipItemQuests[itemLink] then
-            for i = 1, GetJournalQuestNumConditions(questIndex) do
+            for i = 1, GetJournalQuestNumConditions(questIndex, QUEST_MAIN_STEP_INDEX) do
                 if DoesItemLinkFulfillJournalQuestCondition(itemLink, questIndex, 1, i) then
                     return itemLink
                 end
@@ -1464,14 +1393,14 @@ end
 function ChatAnnouncements.GuildRanksSaved(eventCode, guildId)
     local guildName = GetGuildName(guildId)
     local guildAlliance = GetGuildAlliance(guildId)
-    local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+    local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or ColorizeColors.GuildColorize
     local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
     local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
     if ChatAnnouncements.SV.Social.GuildManageCA then
         local finalMessage = zo_strformat(GetString(LUIE_STRING_CA_GUILD_RANKS_UPDATE), guildNameAlliance)
-        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION", isSystem = true }
-        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION", isSystem = true }
+        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
     end
     if ChatAnnouncements.SV.Social.GuildManageAlert then
@@ -1494,7 +1423,7 @@ function ChatAnnouncements.GuildRankSaved(eventCode, guildId, rankIndex)
     local icon1 = GetGuildRankLargeIcon(icon)
     local guildName = GetGuildName(guildId)
     local guildAlliance = GetGuildAlliance(guildId)
-    local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+    local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or ColorizeColors.GuildColorize
     local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
     local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
     local rankSyntax = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon1, 16, 16), rankName)) or (guildColor:Colorize(rankName))
@@ -1511,7 +1440,7 @@ end
 function ChatAnnouncements.GuildTextChanged(eventCode, guildId)
     local guildName = GetGuildName(guildId)
     local guildAlliance = GetGuildAlliance(guildId)
-    local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+    local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or ColorizeColors.GuildColorize
     local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
     local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
     -- Depending on event code set message context.
@@ -1520,8 +1449,8 @@ function ChatAnnouncements.GuildTextChanged(eventCode, guildId)
     if messageString ~= nil then
         if ChatAnnouncements.SV.Social.GuildManageCA then
             local finalMessage = zo_strformat(GetString(messageString), guildNameAlliance)
-            g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION", isSystem = true }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION", isSystem = true }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
         if ChatAnnouncements.SV.Social.GuildManageAlert then
@@ -1565,7 +1494,7 @@ function ChatAnnouncements.GuildRankChanged(eventCode, guildId, displayName, new
             local name = GetGuildName(id)
 
             local guildAlliance = GetGuildAlliance(id)
-            local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+            local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or ColorizeColors.GuildColorize
             local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
             local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
             local rankSyntax = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankText)) or (guildColor:Colorize(rankText))
@@ -1590,7 +1519,7 @@ function ChatAnnouncements.GuildPlayerRankChanged(eventId, guildId, rankIndex, g
     local guildName = GetGuildName(guildId)
 
     local guildAlliance = GetGuildAlliance(guildId)
-    local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+    local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or ColorizeColors.GuildColorize
     local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
     local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
     local rankSyntax = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankText)) or (guildColor:Colorize(rankText))
@@ -1627,7 +1556,7 @@ function ChatAnnouncements.GuildMemberPromoteSuccessful(eventId, displayName, ne
         local guildName = GetGuildName(guildId)
 
         local guildAlliance = GetGuildAlliance(guildId)
-        local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+        local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or ColorizeColors.GuildColorize
         local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
         local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
         local rankSyntax = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankText)) or (guildColor:Colorize(rankText))
@@ -1656,7 +1585,7 @@ function ChatAnnouncements.GuildMemberDemoteSuccessful(eventId, displayName, new
         local guildName = GetGuildName(guildId)
 
         local guildAlliance = GetGuildAlliance(guildId)
-        local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+        local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or ColorizeColors.GuildColorize
         local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
         local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
         local rankSyntax = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankText)) or (guildColor:Colorize(rankText))
@@ -1680,7 +1609,7 @@ function ChatAnnouncements.GuildAddedSelf(eventCode, guildId, guildName)
         local name = GetGuildName(id)
 
         local guildAlliance = GetGuildAlliance(id)
-        local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+        local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or ColorizeColors.GuildColorize
         local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
         local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
@@ -1704,7 +1633,7 @@ function ChatAnnouncements.GuildInviteAdded(eventCode, guildId, guildName, guild
     else
         displayNameLink = ZO_LinkHandler_CreateLink(inviterName, nil, DISPLAY_NAME_LINK_TYPE, inviterName)
     end
-    local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+    local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or ColorizeColors.GuildColorize
     local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
     local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
     if ChatAnnouncements.SV.Social.GuildCA then
@@ -1839,7 +1768,7 @@ function ChatAnnouncements.QuestShared(eventCode, questId)
 
         local finalName = ChatAnnouncements.ResolveNameLink(characterName, displayName)
 
-        local message = zo_strformat(GetString(LUIE_STRING_CA_GROUP_INCOMING_QUEST_SHARE), finalName, QuestColorQuestNameColorize:Colorize(questName))
+        local message = zo_strformat(GetString(LUIE_STRING_CA_GROUP_INCOMING_QUEST_SHARE), finalName, ColorizeColors.QuestColorQuestNameColorize:Colorize(questName))
         local alertMessage = zo_strformat(GetString(LUIE_STRING_CA_GROUP_INCOMING_QUEST_SHARE_P2P), finalName, questName)
 
         if ChatAnnouncements.SV.Quests.QuestShareCA then
@@ -2160,8 +2089,8 @@ function ChatAnnouncements.PointRespecDisplay(respecType)
     local messageCSA = LUIE_AttributeDisplayType[respecType]
 
     if ChatAnnouncements.SV.DisplayAnnouncements.Respec.CA then
-        g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE", isSystem = true }
-        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "MESSAGE", isSystem = true }
+        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
     end
 
@@ -2201,13 +2130,13 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
     --d("OV: " .. oldValue)
     --d("reason: " .. reason)
 
-    -- If the total gold change was 0 or (Reason 7 = Command) or (Reason 28 = Mount Feed) or (Reason 35 = Player Init) - End Now
-    if reason == CURRENCY_CHANGE_REASON_COMMAND or reason == CURRENCY_CHANGE_REASON_FEED_MOUNT or reason == CURRENCY_CHANGE_REASON_PLAYER_INIT then
+    -- If the total gold change was 0 or (Reason 7 = Command) or (Reason 28 = Mount Feed) or (Reason 35 = Player Init) or (Reason 81 = Expiration) - End Now
+    if UpOrDown == 0 or reason == CURRENCY_CHANGE_REASON_COMMAND or reason == CURRENCY_CHANGE_REASON_FEED_MOUNT or reason == CURRENCY_CHANGE_REASON_PLAYER_INIT or reason == CURRENCY_CHANGE_REASON_EXPIRATION then
         return
     end
 
     local formattedValue = ZO_LocalizeDecimalNumber(newValue)
-    local changeColor       -- Gets the value from CurrencyUpColorize or CurrencyDownColorize to color strings
+    local changeColor       -- Gets the value from ColorizeColors.CurrencyUpColorize or ColorizeColors.CurrencyDownColorize to color strings
     local changeType        -- Amount of currency gained or lost
     local currencyTypeColor -- Determines color to use for colorization of currency based off currency type.
     local currencyIcon      -- Determines icon to use for currency based off currency type.
@@ -2238,7 +2167,7 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
             end
         end
 
-        currencyTypeColor = CurrencyGoldColorize:ToHex()
+        currencyTypeColor = ColorizeColors.CurrencyGoldColorize:ToHex()
         currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
         currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyGoldName, UpOrDown)
         currencyTotal = ChatAnnouncements.SV.Currency.CurrencyGoldShowTotal
@@ -2268,7 +2197,7 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
             ChatAnnouncements.CurrencyAPThrottlePrinter()
         end
 
-        currencyTypeColor = CurrencyAPColorize:ToHex()
+        currencyTypeColor = ColorizeColors.CurrencyAPColorize:ToHex()
         currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/alliancepoints.dds|t" or ""
         currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyAPName, UpOrDown)
         currencyTotal = ChatAnnouncements.SV.Currency.CurrencyAPShowTotal
@@ -2299,7 +2228,7 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
             ChatAnnouncements.CurrencyTVThrottlePrinter()
         end
 
-        currencyTypeColor = CurrencyTVColorize:ToHex()
+        currencyTypeColor = ColorizeColors.CurrencyTVColorize:ToHex()
         currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_telvar.dds|t" or ""
         currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyTVName, UpOrDown)
         currencyTotal = ChatAnnouncements.SV.Currency.CurrencyTVShowTotal
@@ -2308,7 +2237,7 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         if not ChatAnnouncements.SV.Currency.CurrencyWVChange then
             return
         end
-        currencyTypeColor = CurrencyWVColorize:ToHex()
+        currencyTypeColor = ColorizeColors.CurrencyWVColorize:ToHex()
         currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_writvoucher.dds|t" or ""
         currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyWVName, UpOrDown)
         currencyTotal = ChatAnnouncements.SV.Currency.CurrencyWVShowTotal
@@ -2317,7 +2246,7 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         if not ChatAnnouncements.SV.Currency.CurrencyOutfitTokenChange then
             return
         end
-        currencyTypeColor = CurrencyOutfitTokenColorize:ToHex()
+        currencyTypeColor = ColorizeColors.CurrencyOutfitTokenColorize:ToHex()
         currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/token_clothing_16.dds|t" or ""
         currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyOutfitTokenName, UpOrDown)
         currencyTotal = ChatAnnouncements.SV.Currency.CurrencyOutfitTokenShowTotal
@@ -2326,7 +2255,7 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         if not ChatAnnouncements.SV.Currency.CurrencyTransmuteChange then
             return
         end
-        currencyTypeColor = CurrencyTransmuteColorize:ToHex()
+        currencyTypeColor = ColorizeColors.CurrencyTransmuteColorize:ToHex()
         currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_seedcrystal_16.dds|t" or ""
         currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyTransmuteName, UpOrDown)
         currencyTotal = ChatAnnouncements.SV.Currency.CurrencyTransmuteShowTotal
@@ -2335,7 +2264,7 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         if not ChatAnnouncements.SV.Currency.CurrencyEventChange then
             return
         end
-        currencyTypeColor = CurrencyEventColorize:ToHex()
+        currencyTypeColor = ColorizeColors.CurrencyEventColorize:ToHex()
         currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_eventticket.dds|t" or ""
         currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyEventName, UpOrDown)
         currencyTotal = ChatAnnouncements.SV.Currency.CurrencyEventShowTotal
@@ -2344,7 +2273,7 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         if not ChatAnnouncements.SV.Currency.CurrencyUndauntedChange then
             return
         end
-        currencyTypeColor = CurrencyUndauntedColorize:ToHex()
+        currencyTypeColor = ColorizeColors.CurrencyUndauntedColorize:ToHex()
         currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/undauntedkey.dds|t" or ""
         currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyUndauntedName, UpOrDown)
         currencyTotal = ChatAnnouncements.SV.Currency.CurrencyUndauntedShowTotal
@@ -2353,7 +2282,7 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         if not ChatAnnouncements.SV.Currency.CurrencyCrownsChange then
             return
         end
-        currencyTypeColor = CurrencyCrownsColorize:ToHex()
+        currencyTypeColor = ColorizeColors.CurrencyCrownsColorize:ToHex()
         currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_crown.dds|t" or ""
         currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyCrownsName, UpOrDown)
         currencyTotal = ChatAnnouncements.SV.Currency.CurrencyCrownsShowTotal
@@ -2362,7 +2291,7 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         if not ChatAnnouncements.SV.Currency.CurrencyCrownGemsChange then
             return
         end
-        currencyTypeColor = CurrencyCrownGemsColorize:ToHex()
+        currencyTypeColor = ColorizeColors.CurrencyCrownGemsColorize:ToHex()
         currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_crown_gems.dds|t" or ""
         currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyCrownGemsName, UpOrDown)
         currencyTotal = ChatAnnouncements.SV.Currency.CurrencyCrownGemsShowTotal
@@ -2371,7 +2300,7 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         if not ChatAnnouncements.SV.Currency.CurrencyEndeavorsChange then
             return
         end
-        currencyTypeColor = CurrencyEndeavorsColorize:ToHex()
+        currencyTypeColor = ColorizeColors.CurrencyEndeavorsColorize:ToHex()
         currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:esoui/art/currency/currency_seals_of_endeavor_32.dds|t" or ""
         currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyEndeavorsName, UpOrDown)
         currencyTotal = ChatAnnouncements.SV.Currency.CurrencyEndeavorsShowTotal
@@ -2380,7 +2309,7 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         if not ChatAnnouncements.SV.Currency.CurrencyEndlessChange then
             return
         end
-        currencyTypeColor = CurrencyEndlessColorize:ToHex()
+        currencyTypeColor = ColorizeColors.CurrencyEndlessColorize:ToHex()
         currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:esoui/art/currency/archivalfragments_mipmaps.dds|t" or ""
         currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyEndlessName, UpOrDown)
         currencyTotal = ChatAnnouncements.SV.Currency.CurrencyEndlessShowTotal
@@ -2392,16 +2321,16 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
     -- Did we gain or lose currency
     if UpOrDown > 0 then
         if ChatAnnouncements.SV.Currency.CurrencyContextColor then
-            changeColor = CurrencyUpColorize:ToHex()
+            changeColor = ColorizeColors.CurrencyUpColorize:ToHex()
         else
-            changeColor = CurrencyColorize:ToHex()
+            changeColor = ColorizeColors.CurrencyColorize:ToHex()
         end
         changeType = ZO_LocalizeDecimalNumber(newValue - oldValue)
     elseif UpOrDown < 0 then
         if ChatAnnouncements.SV.Currency.CurrencyContextColor then
-            changeColor = CurrencyDownColorize:ToHex()
+            changeColor = ColorizeColors.CurrencyDownColorize:ToHex()
         else
-            changeColor = CurrencyColorize:ToHex()
+            changeColor = ColorizeColors.CurrencyColorize:ToHex()
         end
         changeType = ZO_LocalizeDecimalNumber(oldValue - newValue)
     end
@@ -2592,52 +2521,32 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         else
             messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageSpend
         end
-    elseif reason == 79 then -- TODO: Need to find what this variable is called, used when Endeavors are spent
+    elseif reason == CURRENCY_CHANGE_REASON_PURCHASED_WITH_ENDEAVOR_SEALS then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageSpend
-
         -- ==============================================================================
         -- DEBUG EVENTS - Don't know if these are implemented or what they are for.
-    elseif reason == CURRENCY_CHANGE_REASON_ACTION then
-        messageChange = zo_strformat(GetString(LUIE_STRING_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == CURRENCY_CHANGE_REASON_KEEP_UPGRADE then
-        messageChange = zo_strformat(GetString(LUIE_STRING_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == CURRENCY_CHANGE_REASON_DEPRECATED_0 then
-        messageChange = zo_strformat(GetString(LUIE_STRING_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == CURRENCY_CHANGE_REASON_DEPRECATED_2 then
-        messageChange = zo_strformat(GetString(LUIE_STRING_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == CURRENCY_CHANGE_REASON_SOUL_HEAL then
-        messageChange = zo_strformat(GetString(LUIE_STRING_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == CURRENCY_CHANGE_REASON_CASH_ON_DELIVERY then
-        messageChange = zo_strformat(GetString(LUIE_STRING_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == CURRENCY_CHANGE_REASON_ABILITY_UPGRADE_PURCHASE then
-        messageChange = zo_strformat(GetString(LUIE_STRING_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == CURRENCY_CHANGE_REASON_DEPRECATED_1 then
-        messageChange = zo_strformat(GetString(LUIE_STRING_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == CURRENCY_CHANGE_REASON_STABLESPACE then
-        messageChange = zo_strformat(GetString(LUIE_STRING_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == CURRENCY_CHANGE_REASON_ACHIEVEMENT then
-        messageChange = zo_strformat(GetString(LUIE_STRING_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == CURRENCY_CHANGE_REASON_TRAIT_REVEAL then
-        messageChange = zo_strformat(GetString(LUIE_STRING_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == CURRENCY_CHANGE_REASON_REFORGE then
-        messageChange = zo_strformat(GetString(LUIE_STRING_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == CURRENCY_CHANGE_REASON_RECIPE then
-        messageChange = zo_strformat(GetString(LUIE_STRING_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == CURRENCY_CHANGE_REASON_CONSUME_FOOD_DRINK then
-        messageChange = zo_strformat(GetString(LUIE_STRING_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == CURRENCY_CHANGE_REASON_CONSUME_POTION then
-        messageChange = zo_strformat(GetString(LUIE_STRING_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == CURRENCY_CHANGE_REASON_HARVEST_REAGENT then
-        messageChange = zo_strformat(GetString(LUIE_STRING_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == CURRENCY_CHANGE_REASON_RESEARCH_TRAIT then
-        messageChange = zo_strformat(GetString(LUIE_STRING_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == CURRENCY_CHANGE_REASON_GUILD_TABARD then
-        messageChange = zo_strformat(GetString(LUIE_STRING_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == CURRENCY_CHANGE_REASON_GUILD_FORWARD_CAMP then
-        messageChange = zo_strformat(GetString(LUIE_STRING_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == CURRENCY_CHANGE_REASON_BANK_FEE then
-        messageChange = zo_strformat(GetString(LUIE_STRING_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == CURRENCY_CHANGE_REASON_CHARACTER_UPGRADE then
+    elseif reason == CURRENCY_CHANGE_REASON_ACTION
+    or     reason == CURRENCY_CHANGE_REASON_KEEP_UPGRADE
+    or     reason == CURRENCY_CHANGE_REASON_DEPRECATED_0
+    or     reason == CURRENCY_CHANGE_REASON_DEPRECATED_2
+    or     reason == CURRENCY_CHANGE_REASON_SOUL_HEAL
+    or     reason == CURRENCY_CHANGE_REASON_CASH_ON_DELIVERY
+    or     reason == CURRENCY_CHANGE_REASON_ABILITY_UPGRADE_PURCHASE
+    or     reason == CURRENCY_CHANGE_REASON_DEPRECATED_1
+    or     reason == CURRENCY_CHANGE_REASON_STABLESPACE
+    or     reason == CURRENCY_CHANGE_REASON_ACHIEVEMENT
+    or     reason == CURRENCY_CHANGE_REASON_TRAIT_REVEAL
+    or     reason == CURRENCY_CHANGE_REASON_REFORGE
+    or     reason == CURRENCY_CHANGE_REASON_RECIPE
+    or     reason == CURRENCY_CHANGE_REASON_CONSUME_FOOD_DRINK
+    or     reason == CURRENCY_CHANGE_REASON_CONSUME_POTION
+    or     reason == CURRENCY_CHANGE_REASON_HARVEST_REAGENT
+    or     reason == CURRENCY_CHANGE_REASON_RESEARCH_TRAIT
+    or     reason == CURRENCY_CHANGE_REASON_GUILD_TABARD
+    or     reason == CURRENCY_CHANGE_REASON_GUILD_FORWARD_CAMP
+    or     reason == CURRENCY_CHANGE_REASON_BANK_FEE
+    or     reason == CURRENCY_CHANGE_REASON_CHARACTER_UPGRADE
+    or     reason == CURRENCY_CHANGE_REASON_TRIBUTE then
         messageChange = zo_strformat(GetString(LUIE_STRING_CA_DEBUG_MSG_CURRENCY), reason)
         -- END DEBUG EVENTS
         -- ==============================================================================
@@ -2654,12 +2563,12 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
     end
 
     -- Send relevant values over to the currency printer
-    ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
+    ChatAnnouncements.CurrencyPrinter(currency, formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
 end
 
 -- Printer function receives values from currency update or from other functions that display currency updates.
 -- Type here refers to an LUIE_CURRENCY_TYPE
-function ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type, carriedItem, carriedItemTotal)
+function ChatAnnouncements.CurrencyPrinter(baseCurrencyType, formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type, carriedItem, carriedItemTotal)
     local messageP1 -- First part of message - Change
     local messageP2 -- Second part of the message (if enabled) - Total
     local item
@@ -2679,22 +2588,22 @@ function ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeTy
             local bagType
             local icon
             if type == "LUIE_CURRENCY_BAG" then
-                bagType = strfmat(linkBracket1[ChatAnnouncements.SV.BracketOptionItem] .. GetString(LUIE_STRING_CA_STORAGE_BAGTYPE1) .. linkBracket2[ChatAnnouncements.SV.BracketOptionItem])
+                bagType = string_format(linkBracket1[ChatAnnouncements.SV.BracketOptionItem] .. GetString(LUIE_STRING_CA_STORAGE_BAGTYPE1) .. linkBracket2[ChatAnnouncements.SV.BracketOptionItem])
                 icon = ChatAnnouncements.SV.Inventory.LootIcons and "|t16:16:/esoui/art/icons/store_upgrade_bag.dds|t " or ""
             end
             if type == "LUIE_CURRENCY_BANK" then
-                bagType = strfmat(linkBracket1[ChatAnnouncements.SV.BracketOptionItem] .. GetString(LUIE_STRING_CA_STORAGE_BAGTYPE2) .. linkBracket2[ChatAnnouncements.SV.BracketOptionItem])
+                bagType = string_format(linkBracket1[ChatAnnouncements.SV.BracketOptionItem] .. GetString(LUIE_STRING_CA_STORAGE_BAGTYPE2) .. linkBracket2[ChatAnnouncements.SV.BracketOptionItem])
                 icon = ChatAnnouncements.SV.Inventory.LootIcons and "|t16:16:/esoui/art/icons/store_upgrade_bank.dds|t " or ""
             end
-            return strfmat("|r" .. icon .. "|cFFFFFF" .. bagType .. "|r|c" .. changeColor)
+            return string_format("|r" .. icon .. "|cFFFFFF" .. bagType .. "|r|c" .. changeColor)
         end
-        formattedMessageP1 = (strfmat(messageChange, ResolveStorageType(), messageP1))
+        formattedMessageP1 = (string_format(messageChange, ResolveStorageType(), messageP1))
         -- TODO: Fix later
         --[[
     elseif type == "LUIE_CURRENCY_HERALDRY" then
         local icon = ChatAnnouncements.SV.Inventory.LootIcons and "|t16:16:LuiExtended/media/unitframes/ca_heraldry.dds|t " or ""
-        local heraldryMessage = strfmat("|r" .. icon .. "|cFFFFFF" .. linkBracket1[ChatAnnouncements.SV.BracketOptionItem] .. GetString(LUIE_STRING_CA_CURRENCY_NAME_HERALDRY) .. linkBracket2[ChatAnnouncements.SV.BracketOptionItem] .. "|r|c" .. changeColor)
-        formattedMessageP1 = (strfmat(messageChange, messageP1, heraldryMessage))
+        local heraldryMessage = string_format("|r" .. icon .. "|cFFFFFF" .. linkBracket1[ChatAnnouncements.SV.BracketOptionItem] .. GetString(LUIE_STRING_CA_CURRENCY_NAME_HERALDRY) .. linkBracket2[ChatAnnouncements.SV.BracketOptionItem] .. "|r|c" .. changeColor)
+        formattedMessageP1 = (string_format(messageChange, messageP1, heraldryMessage))
         ]]
         --
     elseif type == "LUIE_CURRENCY_RIDING_SPEED" or type == "LUIE_CURRENCY_RIDING_CAPACITY" or type == "LUIE_CURRENCY_RIDING_STAMINA" then
@@ -2703,43 +2612,43 @@ function ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeTy
             local skillType
             local icon
             if type == "LUIE_CURRENCY_RIDING_SPEED" then
-                skillType = strfmat(linkBracket1[ChatAnnouncements.SV.BracketOptionItem] .. GetString(LUIE_STRING_CA_STORAGE_RIDINGTYPE1) .. linkBracket2[ChatAnnouncements.SV.BracketOptionItem])
+                skillType = string_format(linkBracket1[ChatAnnouncements.SV.BracketOptionItem] .. GetString(LUIE_STRING_CA_STORAGE_RIDINGTYPE1) .. linkBracket2[ChatAnnouncements.SV.BracketOptionItem])
                 icon = ChatAnnouncements.SV.Inventory.LootIcons and "|t16:16:/esoui/art/mounts/ridingskill_speed.dds|t " or ""
             elseif type == "LUIE_CURRENCY_RIDING_CAPACITY" then
-                skillType = strfmat(linkBracket1[ChatAnnouncements.SV.BracketOptionItem] .. GetString(LUIE_STRING_CA_STORAGE_RIDINGTYPE2) .. linkBracket2[ChatAnnouncements.SV.BracketOptionItem])
+                skillType = string_format(linkBracket1[ChatAnnouncements.SV.BracketOptionItem] .. GetString(LUIE_STRING_CA_STORAGE_RIDINGTYPE2) .. linkBracket2[ChatAnnouncements.SV.BracketOptionItem])
                 icon = ChatAnnouncements.SV.Inventory.LootIcons and "|t16:16:/esoui/art/mounts/ridingskill_capacity.dds|t " or ""
             elseif type == "LUIE_CURRENCY_RIDING_STAMINA" then
-                skillType = strfmat(linkBracket1[ChatAnnouncements.SV.BracketOptionItem] .. GetString(LUIE_STRING_CA_STORAGE_RIDINGTYPE3) .. linkBracket2[ChatAnnouncements.SV.BracketOptionItem])
+                skillType = string_format(linkBracket1[ChatAnnouncements.SV.BracketOptionItem] .. GetString(LUIE_STRING_CA_STORAGE_RIDINGTYPE3) .. linkBracket2[ChatAnnouncements.SV.BracketOptionItem])
                 icon = ChatAnnouncements.SV.Inventory.LootIcons and "|t16:16:/esoui/art/mounts/ridingskill_stamina.dds|t " or ""
             end
-            return strfmat("|r" .. icon .. "|cFFFFFF" .. skillType .. "|r|c" .. changeColor)
+            return string_format("|r" .. icon .. "|cFFFFFF" .. skillType .. "|r|c" .. changeColor)
         end
-        formattedMessageP1 = (strfmat(messageChange, ResolveRidingStats(), messageP1))
+        formattedMessageP1 = (string_format(messageChange, ResolveRidingStats(), messageP1))
     elseif type == "LUIE_CURRENCY_VENDOR" then
-        item = strfmat("|r" .. carriedItem .. "|c" .. changeColor)
-        formattedMessageP1 = (strfmat(messageChange, item, messageP1))
+        item = string_format("|r" .. carriedItem .. "|c" .. changeColor)
+        formattedMessageP1 = (string_format(messageChange, item, messageP1))
     elseif type == "LUIE_CURRENCY_TRADE" then
-        name = strfmat("|r" .. g_tradeTarget .. "|c" .. changeColor)
-        formattedMessageP1 = (strfmat(messageChange, messageP1, name))
+        name = string_format("|r" .. g_tradeTarget .. "|c" .. changeColor)
+        formattedMessageP1 = (string_format(messageChange, messageP1, name))
     elseif type == "LUIE_CURRENCY_MAIL" then
-        name = strfmat("|r" .. g_mailTarget .. "|c" .. changeColor)
-        formattedMessageP1 = (strfmat(messageChange, messageP1, name))
+        name = string_format("|r" .. g_mailTarget .. "|c" .. changeColor)
+        formattedMessageP1 = (string_format(messageChange, messageP1, name))
     else
-        formattedMessageP1 = (strfmat(messageChange, messageP1))
+        formattedMessageP1 = (string_format(messageChange, messageP1))
     end
-    local formattedMessageP2 = (currencyTotal or (type == "LUIE_CURRENCY_VENDOR" and ChatAnnouncements.SV.Inventory.LootVendorTotalCurrency)) and (strfmat(messageTotal, messageP2)) or messageP2
+    local formattedMessageP2 = (currencyTotal or (type == "LUIE_CURRENCY_VENDOR" and ChatAnnouncements.SV.Inventory.LootVendorTotalCurrency)) and (string_format(messageTotal, messageP2)) or messageP2
     local finalMessage
     if currencyTotal and type ~= "LUIE_CURRENCY_HERALDRY" and type ~= "LUIE_CURRENCY_VENDOR" and type ~= "LUIE_CURRENCY_POSTAGE" or (type == "LUIE_CURRENCY_VENDOR" and ChatAnnouncements.SV.Inventory.LootVendorTotalCurrency) then
         if type == "LUIE_CURRENCY_VENDOR" then
-            finalMessage = strfmat("|c%s%s|r%s |c%s%s|r", changeColor, formattedMessageP1, carriedItemTotal, changeColor, formattedMessageP2)
+            finalMessage = string_format("|c%s%s|r%s |c%s%s|r", changeColor, formattedMessageP1, carriedItemTotal, changeColor, formattedMessageP2)
         else
-            finalMessage = strfmat("|c%s%s|r |c%s%s|r", changeColor, formattedMessageP1, changeColor, formattedMessageP2)
+            finalMessage = string_format("|c%s%s|r |c%s%s|r", changeColor, formattedMessageP1, changeColor, formattedMessageP2)
         end
     else
         if type == "LUIE_CURRENCY_VENDOR" then
-            finalMessage = strfmat("|c%s%s|r%s", changeColor, formattedMessageP1, carriedItemTotal)
+            finalMessage = string_format("|c%s%s|r%s", changeColor, formattedMessageP1, carriedItemTotal)
         else
-            finalMessage = strfmat("|c%s%s|r", changeColor, formattedMessageP1)
+            finalMessage = string_format("|c%s%s|r", changeColor, formattedMessageP1)
         end
     end
 
@@ -2748,9 +2657,9 @@ function ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeTy
         printToChat(finalMessage)
         -- Otherwise sent to our Print Queued Messages function to be processed on a 50 ms delay.
     else
-        local resolveType = type == "LUIE_CURRENCY_POSTAGE" and "CURRENCY POSTAGE" or "CURRENCY"
-        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = resolveType }
-        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+        local resolveType = (type == "LUIE_CURRENCY_POSTAGE" and "CURRENCY POSTAGE") or (baseCurrencyType == CURT_CROWNS and "EXPERIENCE") or "CURRENCY"
+        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = resolveType }
+        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
     end
 end
@@ -2758,16 +2667,16 @@ end
 function ChatAnnouncements.CurrencyGoldThrottlePrinter()
     if g_currencyGoldThrottleValue > 0 and g_currencyGoldThrottleValue > ChatAnnouncements.SV.Currency.CurrencyGoldFilter then
         local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1))
-        local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyUpColorize:ToHex() or CurrencyColorize:ToHex()
+        local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and ColorizeColors.CurrencyUpColorize:ToHex() or ColorizeColors.CurrencyColorize:ToHex()
         local changeType = ZO_LocalizeDecimalNumber(g_currencyGoldThrottleValue)
-        local currencyTypeColor = CurrencyGoldColorize:ToHex()
+        local currencyTypeColor = ColorizeColors.CurrencyGoldColorize:ToHex()
         local currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
         local currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyGoldName, g_currencyGoldThrottleValue)
         local currencyTotal = ChatAnnouncements.SV.Currency.CurrencyGoldShowTotal
         local messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalGold
         local messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageLoot
         local type = "LUIE_CURRENCY_THROTTLE"
-        ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
+        ChatAnnouncements.CurrencyPrinter(nil, formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
     end
     g_currencyGoldThrottleValue = 0
     g_currencyGoldThrottleTotal = 0
@@ -2776,16 +2685,16 @@ end
 function ChatAnnouncements.CurrencyAPThrottlePrinter()
     if g_currencyAPThrottleValue > 0 and g_currencyAPThrottleValue > ChatAnnouncements.SV.Currency.CurrencyAPFilter then
         local formattedValue = ZO_LocalizeDecimalNumber(g_currencyAPThrottleTotal)
-        local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyUpColorize:ToHex() or CurrencyColorize:ToHex()
+        local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and ColorizeColors.CurrencyUpColorize:ToHex() or ColorizeColors.CurrencyColorize:ToHex()
         local changeType = ZO_LocalizeDecimalNumber(g_currencyAPThrottleValue)
-        local currencyTypeColor = CurrencyAPColorize:ToHex()
+        local currencyTypeColor = ColorizeColors.CurrencyAPColorize:ToHex()
         local currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/alliancepoints.dds|t" or ""
         local currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyAPName, g_currencyAPThrottleValue)
         local currencyTotal = ChatAnnouncements.SV.Currency.CurrencyAPShowTotal
         local messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalAP
         local messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageEarn
         local type = "LUIE_CURRENCY_THROTTLE"
-        ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
+        ChatAnnouncements.CurrencyPrinter(nil, formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
     end
     eventManager:UnregisterForUpdate(moduleName .. "BufferedAP")
     g_currencyAPThrottleValue = 0
@@ -2795,16 +2704,16 @@ end
 function ChatAnnouncements.CurrencyTVThrottlePrinter()
     if g_currencyTVThrottleValue > 0 and g_currencyTVThrottleValue > ChatAnnouncements.SV.Currency.CurrencyTVFilter then
         local formattedValue = ZO_LocalizeDecimalNumber(g_currencyTVThrottleTotal)
-        local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyUpColorize:ToHex() or CurrencyColorize:ToHex()
+        local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and ColorizeColors.CurrencyUpColorize:ToHex() or ColorizeColors.CurrencyColorize:ToHex()
         local changeType = ZO_LocalizeDecimalNumber(g_currencyTVThrottleValue)
-        local currencyTypeColor = CurrencyTVColorize:ToHex()
+        local currencyTypeColor = ColorizeColors.CurrencyTVColorize:ToHex()
         local currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_telvar.dds|t" or ""
         local currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyTVName, g_currencyTVThrottleValue)
         local currencyTotal = ChatAnnouncements.SV.Currency.CurrencyTVShowTotal
         local messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalTV
         local messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageLoot
         local type = "LUIE_CURRENCY_THROTTLE"
-        ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
+        ChatAnnouncements.CurrencyPrinter(nil, formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
     end
     eventManager:UnregisterForUpdate(moduleName .. "BufferedTV")
     g_currencyTVThrottleValue = 0
@@ -2821,8 +2730,8 @@ end
 function ChatAnnouncements.MiscAlertLockSuccess(eventCode)
     if ChatAnnouncements.SV.Notify.NotificationLockpickCA then
         local message = GetString(LUIE_STRING_CA_LOCKPICK_SUCCESS)
-        g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "NOTIFICATION" }
-        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "NOTIFICATION" }
+        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
     end
     if ChatAnnouncements.SV.Notify.NotificationLockpickAlert then
@@ -2837,9 +2746,9 @@ end
 function ChatAnnouncements.StorageBag(eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
     if previousCapacity > 0 and previousCapacity ~= currentCapacity and previousUpgrade ~= currentUpgrade then
         if ChatAnnouncements.SV.Notify.StorageBagCA then
-            local formattedString = StorageBagColorize:Colorize(zo_strformat(SI_INVENTORY_BAG_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            local formattedString = ColorizeColors.StorageBagColorize:Colorize(zo_strformat(SI_INVENTORY_BAG_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -2853,9 +2762,9 @@ end
 function ChatAnnouncements.StorageBank(eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
     if previousCapacity > 0 and previousCapacity ~= currentCapacity and previousUpgrade ~= currentUpgrade then
         if ChatAnnouncements.SV.Notify.StorageBagCA then
-            local formattedString = StorageBagColorize:Colorize(zo_strformat(SI_INVENTORY_BANK_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            local formattedString = ColorizeColors.StorageBagColorize:Colorize(zo_strformat(SI_INVENTORY_BANK_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -2867,9 +2776,9 @@ function ChatAnnouncements.StorageBank(eventCode, previousCapacity, currentCapac
 end
 
 function ChatAnnouncements.OnBuybackItem(eventCode, itemName, quantity, money, itemSound)
-    local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+    local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and ColorizeColors.CurrencyDownColorize:ToHex() or ColorizeColors.CurrencyColorize:ToHex()
     if ChatAnnouncements.SV.Inventory.LootVendorCurrency and ChatAnnouncements.SV.Currency.CurrencyContextMergedColor then
-        changeColor = CurrencyColorize:ToHex()
+        changeColor = ColorizeColors.CurrencyColorize:ToHex()
     end
     local itemIcon, _, _, _, _ = GetItemLinkInfo(itemName)
     local icon = itemIcon
@@ -2889,26 +2798,27 @@ function ChatAnnouncements.OnBuybackItem(eventCode, itemName, quantity, money, i
         local total1, total2, total3 = GetItemLinkStacks(itemName)
         local total = total1 + total2 + total3
         if total > 1 then
-            carriedItemTotal = strfmat(" |c%s%s|r %s|cFFFFFF%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+            carriedItemTotal = string_format(" |c%s%s|r %s|cFFFFFF%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
         end
     end
 
     if money ~= 0 and ChatAnnouncements.SV.Inventory.LootVendorCurrency then
         -- Stop messages from printing if for some reason the currency event never triggers
         if g_savedPurchase.formattedValue then
-            ChatAnnouncements.CurrencyPrinter(g_savedPurchase.formattedValue, changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, messageChange, g_savedPurchase.messageTotal, type, carriedItem, carriedItemTotal)
+            ChatAnnouncements.CurrencyPrinter(nil, g_savedPurchase.formattedValue, changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, messageChange, g_savedPurchase.messageTotal, type, carriedItem, carriedItemTotal)
         end
     else
-        local finalMessageP1 = strfmat(carriedItem .. "|r|c" .. changeColor)
-        local finalMessageP2 = strfmat(messageChange, finalMessageP1)
-        local finalMessage = strfmat("|c%s%s|r%s", changeColor, finalMessageP2, carriedItemTotal)
-        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "CURRENCY" }
-        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+        local finalMessageP1 = string_format(carriedItem .. "|r|c" .. changeColor)
+        local finalMessageP2 = string_format(messageChange, finalMessageP1)
+        local finalMessage = string_format("|c%s%s|r%s", changeColor, finalMessageP2, carriedItemTotal)
+        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "CURRENCY" }
+        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
     end
     g_savedPurchase = {}
 end
 
+-- TODO: Move to a data table outside of CA (maybe?)
 local isShopCollectible = {
     [GetCollectibleInfo(3)] = 3, -- Brown Paint Horse
     [GetCollectibleInfo(4)] = 4, -- Bay Dun Horse
@@ -2990,15 +2900,15 @@ function ChatAnnouncements.OnBuyItem(eventCode, itemName, entryType, quantity, m
         if isShopCollectible[itemName] then
             local id = isShopCollectible[itemName]
             itemName = GetCollectibleLink(id, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
-            _, _, itemIcon = GetCollectibleInfo(id)
+            itemIcon = select(3, GetCollectibleInfo(id))
         else
-            itemIcon, _, _, _, _ = GetItemLinkInfo(itemName)
+            itemIcon = GetItemLinkInfo(itemName)
         end
     end
 
-    local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+    local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and ColorizeColors.CurrencyDownColorize:ToHex() or ColorizeColors.CurrencyColorize:ToHex()
     if ChatAnnouncements.SV.Inventory.LootVendorCurrency and ChatAnnouncements.SV.Currency.CurrencyContextMergedColor then
-        changeColor = CurrencyColorize:ToHex()
+        changeColor = ColorizeColors.CurrencyColorize:ToHex()
     end
     local icon = itemIcon
     local formattedIcon = (ChatAnnouncements.SV.Inventory.LootIcons and icon and icon ~= "") and ("|t16:16:" .. icon .. "|t ") or ""
@@ -3017,21 +2927,21 @@ function ChatAnnouncements.OnBuyItem(eventCode, itemName, entryType, quantity, m
         local total1, total2, total3 = GetItemLinkStacks(itemName)
         local total = total1 + total2 + total3
         if total > 1 then
-            carriedItemTotal = strfmat(" |c%s%s|r %s|cFFFFFF%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+            carriedItemTotal = string_format(" |c%s%s|r %s|cFFFFFF%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
         end
     end
 
     if (money ~= 0 or specialCurrencyQuantity1 ~= 0 or specialCurrencyQuantity2 ~= 0) and ChatAnnouncements.SV.Inventory.LootVendorCurrency then
         -- Stop messages from printing if for some reason the currency event never triggers
         if g_savedPurchase.formattedValue then
-            ChatAnnouncements.CurrencyPrinter(g_savedPurchase.formattedValue, changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, messageChange, g_savedPurchase.messageTotal, type, carriedItem, carriedItemTotal)
+            ChatAnnouncements.CurrencyPrinter(nil, g_savedPurchase.formattedValue, changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, messageChange, g_savedPurchase.messageTotal, type, carriedItem, carriedItemTotal)
         end
     else
-        local finalMessageP1 = strfmat(carriedItem .. "|r|c" .. changeColor)
-        local finalMessageP2 = strfmat(messageChange, finalMessageP1)
-        local finalMessage = strfmat("|c%s%s|r%s", changeColor, finalMessageP2, carriedItemTotal)
-        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "CURRENCY" }
-        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+        local finalMessageP1 = string_format(carriedItem .. "|r|c" .. changeColor)
+        local finalMessageP2 = string_format(messageChange, finalMessageP1)
+        local finalMessage = string_format("|c%s%s|r%s", changeColor, finalMessageP2, carriedItemTotal)
+        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "CURRENCY" }
+        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
     end
 
@@ -3039,9 +2949,9 @@ function ChatAnnouncements.OnBuyItem(eventCode, itemName, entryType, quantity, m
 end
 
 function ChatAnnouncements.OnSellItem(eventCode, itemName, quantity, money)
-    local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyUpColorize:ToHex() or CurrencyColorize:ToHex()
+    local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and ColorizeColors.CurrencyUpColorize:ToHex() or ColorizeColors.CurrencyColorize:ToHex()
     if ChatAnnouncements.SV.Inventory.LootVendorCurrency and ChatAnnouncements.SV.Currency.CurrencyContextMergedColor then
-        changeColor = CurrencyColorize:ToHex()
+        changeColor = ColorizeColors.CurrencyColorize:ToHex()
     end
     local itemIcon, _, _, _, _ = GetItemLinkInfo(itemName)
     local icon = itemIcon
@@ -3066,21 +2976,21 @@ function ChatAnnouncements.OnSellItem(eventCode, itemName, quantity, money)
         local total1, total2, total3 = GetItemLinkStacks(itemName)
         local total = total1 + total2 + total3
         if total > 1 then
-            carriedItemTotal = strfmat(" |c%s%s|r %s|cFFFFFF%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+            carriedItemTotal = string_format(" |c%s%s|r %s|cFFFFFF%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
         end
     end
 
     if money ~= 0 and ChatAnnouncements.SV.Inventory.LootVendorCurrency then
         -- Stop messages from printing if for some reason the currency event never triggers
         if g_savedPurchase.formattedValue then
-            ChatAnnouncements.CurrencyPrinter(g_savedPurchase.formattedValue, changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, messageChange, g_savedPurchase.messageTotal, type, carriedItem, carriedItemTotal)
+            ChatAnnouncements.CurrencyPrinter(nil, g_savedPurchase.formattedValue, changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, messageChange, g_savedPurchase.messageTotal, type, carriedItem, carriedItemTotal)
         end
     else
-        local finalMessageP1 = strfmat(carriedItem .. "|r|c" .. changeColor)
-        local finalMessageP2 = strfmat(messageChange, finalMessageP1)
-        local finalMessage = strfmat("|c%s%s|r%s", changeColor, finalMessageP2, carriedItemTotal)
-        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "CURRENCY" }
-        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+        local finalMessageP1 = string_format(carriedItem .. "|r|c" .. changeColor)
+        local finalMessageP2 = string_format(messageChange, finalMessageP1)
+        local finalMessage = string_format("|c%s%s|r%s", changeColor, finalMessageP2, carriedItemTotal)
+        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "CURRENCY" }
+        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
     end
     g_savedPurchase = {}
@@ -3098,9 +3008,9 @@ function ChatAnnouncements.TradingHouseResponseReceived(eventCode, TradingHouseR
         return
     end
 
-    local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+    local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and ColorizeColors.CurrencyDownColorize:ToHex() or ColorizeColors.CurrencyColorize:ToHex()
     if ChatAnnouncements.SV.Inventory.LootVendorCurrency and ChatAnnouncements.SV.Currency.CurrencyContextMergedColor then
-        changeColor = CurrencyColorize:ToHex()
+        changeColor = ColorizeColors.CurrencyColorize:ToHex()
     end
     local type = "LUIE_CURRENCY_VENDOR"
     local messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageListingValue
@@ -3123,23 +3033,23 @@ function ChatAnnouncements.TradingHouseResponseReceived(eventCode, TradingHouseR
         local total1, total2, total3 = GetItemLinkStacks(itemName)
         local total = total1 + total2 + total3
         if total > 1 then
-            carriedItemTotal = strfmat(" |c%s%s|r %s|cFFFFFF%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+            carriedItemTotal = string_format(" |c%s%s|r %s|cFFFFFF%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
         end
     end
 
     if ChatAnnouncements.SV.Inventory.LootVendorCurrency then
-        ChatAnnouncements.CurrencyPrinter(g_savedPurchase.formattedValue, changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, messageChange, g_savedPurchase.messageTotal, type, carriedItem, carriedItemTotal)
+        ChatAnnouncements.CurrencyPrinter(nil, g_savedPurchase.formattedValue, changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, messageChange, g_savedPurchase.messageTotal, type, carriedItem, carriedItemTotal)
     else
         type = "CURRENCY"
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageList
-        local finalMessageP1 = strfmat(carriedItem .. "|r|c" .. changeColor)
-        local finalMessageP2 = strfmat(messageChange, finalMessageP1)
-        local finalMessage = strfmat("|c%s%s|r%s", changeColor, finalMessageP2, carriedItemTotal)
-        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = type }
-        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+        local finalMessageP1 = string_format(carriedItem .. "|r|c" .. changeColor)
+        local finalMessageP2 = string_format(messageChange, finalMessageP1)
+        local finalMessage = string_format("|c%s%s|r%s", changeColor, finalMessageP2, carriedItemTotal)
+        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = type }
+        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageListing
-        ChatAnnouncements.CurrencyPrinter(g_savedPurchase.formattedValue, changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, messageChange, g_savedPurchase.messageTotal, type)
+        ChatAnnouncements.CurrencyPrinter(nil, g_savedPurchase.formattedValue, changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, messageChange, g_savedPurchase.messageTotal, type)
     end
     g_savedPurchase = {}
     g_savedItem = {}
@@ -3168,8 +3078,8 @@ function ChatAnnouncements.MailRemoved(eventCode)
     if ChatAnnouncements.SV.Notify.NotificationMailSendCA or ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
         if ChatAnnouncements.SV.Notify.NotificationMailSendCA then
             local message = GetString(LUIE_STRING_CA_MAIL_DELETED_MSG)
-            g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "NOTIFICATION", isSystem = true }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "NOTIFICATION", isSystem = true }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
         if ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
@@ -3212,8 +3122,8 @@ function ChatAnnouncements.OnMailTakeAttachedItem(eventCode, mailId)
         end
         if mailString then
             if ChatAnnouncements.SV.Notify.NotificationMailSendCA then
-                g_queuedMessages[g_queuedMessagesCounter] = { message = mailString, type = "NOTIFICATION", isSystem = true }
-                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = mailString, type = "NOTIFICATION", isSystem = true }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
             if ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
@@ -3269,30 +3179,30 @@ end
 --     if g_postageAmount > 0 then
 --         local type = "LUIE_CURRENCY_POSTAGE"
 --         local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1))
---         local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+--         local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and ColorizeColors.CurrencyDownColorize:ToHex() or ColorizeColors.CurrencyColorize:ToHex()
 --         local changeType = ZO_LocalizeDecimalNumber(g_postageAmount)
---         local currencyTypeColor = CurrencyGoldColorize:ToHex()
+--         local currencyTypeColor = ColorizeColors.CurrencyGoldColorize:ToHex()
 --         local currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
 --         local currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyGoldName, g_postageAmount)
 --         local currencyTotal = ChatAnnouncements.SV.Currency.CurrencyGoldShowTotal
 --         local messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalGold
 --         local messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessagePostage
---         ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
+--         ChatAnnouncements.CurrencyPrinter(nil, formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
 --     end
 
 --     if not g_mailCODPresent then
 --         if g_mailAmount > 0 then
 --             local type = "LUIE_CURRENCY_MAIL"
 --             local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1))
---             local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+--             local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and ColorizeColors.CurrencyDownColorize:ToHex() or ColorizeColors.CurrencyColorize:ToHex()
 --             local changeType = ZO_LocalizeDecimalNumber(g_mailAmount)
---             local currencyTypeColor = CurrencyGoldColorize:ToHex()
+--             local currencyTypeColor = ColorizeColors.CurrencyGoldColorize:ToHex()
 --             local currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
 --             local currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyGoldName, g_mailAmount)
 --             local currencyTotal = ChatAnnouncements.SV.Currency.CurrencyGoldShowTotal
 --             local messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalGold
 --             local messageChange = g_mailTarget ~= "" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOut or ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOutNoName
---             ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
+--             ChatAnnouncements.CurrencyPrinter(nil, formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
 --         end
 --     end
 
@@ -3307,8 +3217,8 @@ end
 --         end
 --         if mailString then
 --             if ChatAnnouncements.SV.Notify.NotificationMailSendCA then
---                 g_queuedMessages[g_queuedMessagesCounter] = { message = mailString, type = "NOTIFICATION", isSystem = true }
---                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+--                 ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = mailString, type = "NOTIFICATION", isSystem = true }
+--                 ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
 --                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
 --             end
 --             if ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
@@ -3337,8 +3247,8 @@ end
 
 function ChatAnnouncements.OnMailSuccess(eventCode)
     local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1))
-    local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
-    local currencyTypeColor = CurrencyGoldColorize:ToHex()
+    local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and ColorizeColors.CurrencyDownColorize:ToHex() or ColorizeColors.CurrencyColorize:ToHex()
+    local currencyTypeColor = ColorizeColors.CurrencyGoldColorize:ToHex()
     local currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
     local currencyTotal = ChatAnnouncements.SV.Currency.CurrencyGoldShowTotal
     local messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalGold
@@ -3348,7 +3258,7 @@ function ChatAnnouncements.OnMailSuccess(eventCode)
         local changeType = ZO_LocalizeDecimalNumber(g_postageAmount)
         local currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyGoldName, g_postageAmount)
         local messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessagePostage
-        ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
+        ChatAnnouncements.CurrencyPrinter(nil, formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
     end
 
     if not g_mailCODPresent and g_mailAmount > 0 then
@@ -3356,7 +3266,7 @@ function ChatAnnouncements.OnMailSuccess(eventCode)
         local changeType = ZO_LocalizeDecimalNumber(g_mailAmount)
         local currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyGoldName, g_mailAmount)
         local messageChange = g_mailTarget ~= "" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOut or ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOutNoName
-        ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
+        ChatAnnouncements.CurrencyPrinter(nil, formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
     end
 
     if ChatAnnouncements.SV.Notify.NotificationMailSendCA or ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
@@ -3366,8 +3276,8 @@ function ChatAnnouncements.OnMailSuccess(eventCode)
         end
         if mailString then
             if ChatAnnouncements.SV.Notify.NotificationMailSendCA then
-                g_queuedMessages[g_queuedMessagesCounter] = { message = mailString, type = "NOTIFICATION", isSystem = true }
-                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = mailString, type = "NOTIFICATION", isSystem = true }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
             if ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
@@ -3392,58 +3302,6 @@ function ChatAnnouncements.OnMailSuccess(eventCode)
     g_postageAmount = 0
     g_mailAmount = 0
     g_mailStacksOut = {}
-end
-
-function ChatAnnouncements.OnExperienceGain(eventCode, reason, level, previousExperience, currentExperience, championPoints)
-    -- d("Experience Gain) previousExperience: " .. previousExperience .. " --- " .. "currentExperience: " .. currentExperience)
-    if ChatAnnouncements.SV.XP.Experience and (not (ChatAnnouncements.SV.XP.ExperienceHideCombat and reason == PROGRESS_REASON_KILL) or not reason == PROGRESS_REASON_KILL) then
-        local change = currentExperience - previousExperience -- Change in Experience Points on gaining them
-
-        -- If throttle is enabled, save value and end function here
-        if ChatAnnouncements.SV.XP.ExperienceThrottle > 0 and reason == PROGRESS_REASON_KILL then
-            g_xpCombatBufferValue = g_xpCombatBufferValue + change
-            -- We unregister the event, then re-register it, this keeps the buffer at a constant X throttle after XP is gained.
-            eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
-            eventManager:RegisterForUpdate(moduleName .. "BufferedXP", ChatAnnouncements.SV.XP.ExperienceThrottle, ChatAnnouncements.PrintBufferedXP)
-            return
-        end
-
-        -- If filter is enabled and value is below filter then end function here
-        if ChatAnnouncements.SV.XP.ExperienceFilter > 0 and reason == PROGRESS_REASON_KILL then
-            if change < ChatAnnouncements.SV.XP.ExperienceFilter then
-                return
-            end
-        end
-
-        -- If we gain experience from a non combat source, and our buffer function holds a value, then we need to immediately dump this value before the next XP update is processed.
-        if ChatAnnouncements.SV.XP.ExperienceThrottle > 0 and g_xpCombatBufferValue > 0 and (reason ~= PROGRESS_REASON_KILL and reason ~= 99) then
-            eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
-            ChatAnnouncements.PrintBufferedXP()
-        end
-
-        ChatAnnouncements.PrintExperienceGain(change)
-    end
-end
-
-function ChatAnnouncements.PrintExperienceGain(change)
-    local icon = ChatAnnouncements.SV.XP.ExperienceIcon and "|t16:16:/esoui/art/icons/icon_experience.dds|t " or ""
-    local xpName = zo_strformat(ChatAnnouncements.SV.XP.ExperienceName, change)
-    local messageP1 = ("|r|c" .. ExperienceNameColorize .. icon .. ZO_LocalizeDecimalNumber(change) .. " " .. xpName .. "|r|c" .. ExperienceMessageColorize)
-    local formattedMessageP1 = (strfmat(ChatAnnouncements.SV.XP.ExperienceMessage, messageP1))
-    local finalMessage = strfmat("|c%s%s|r", ExperienceMessageColorize, formattedMessageP1)
-
-    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "EXPERIENCE" }
-    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-    eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
-end
-
-function ChatAnnouncements.PrintBufferedXP()
-    if g_xpCombatBufferValue > 0 and g_xpCombatBufferValue > ChatAnnouncements.SV.XP.ExperienceFilter then
-        local change = g_xpCombatBufferValue
-        ChatAnnouncements.PrintExperienceGain(change)
-    end
-    eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
-    g_xpCombatBufferValue = 0
 end
 
 -- Helper function to return color (without |c prefix) according to current percentage
@@ -3495,7 +3353,7 @@ function ChatAnnouncements.OnAchievementUpdated(eventCode, id)
         for i = 1, numCriteria do
             local name, numCompleted, numRequired = GetAchievementCriterion(id, i)
 
-            table.insert(cmpInfo, { zo_strformat(name), numCompleted, numRequired })
+            table_insert(cmpInfo, { zo_strformat(name), numCompleted, numRequired })
 
             -- Collect the numbers to calculate the correct percentage
             totalCmp = totalCmp + numCompleted
@@ -3546,17 +3404,17 @@ function ChatAnnouncements.OnAchievementUpdated(eventCode, id)
             local _, _, _, icon = GetAchievementInfo(id)
             icon = ChatAnnouncements.SV.Achievement.AchievementIcon and ("|t16:16:" .. icon .. "|t ") or ""
 
-            local stringpart1 = AchievementColorize1:Colorize(strfmat("%s%s%s %s%s", bracket1[ChatAnnouncements.SV.Achievement.AchievementBracketOptions], ChatAnnouncements.SV.Achievement.AchievementProgressMsg, bracket2[ChatAnnouncements.SV.Achievement.AchievementBracketOptions], icon, link))
+            local stringpart1 = ColorizeColors.AchievementColorize1:Colorize(string_format("%s%s%s %s%s", bracket1[ChatAnnouncements.SV.Achievement.AchievementBracketOptions], ChatAnnouncements.SV.Achievement.AchievementProgressMsg, bracket2[ChatAnnouncements.SV.Achievement.AchievementBracketOptions], icon, link))
 
-            local stringpart2 = ChatAnnouncements.SV.Achievement.AchievementColorProgress and strfmat(" %s|c%s%d%%|r", AchievementColorize2:Colorize("("), AchievementPctToColor(totalCmp / totalReq), zo_floor(100 * totalCmp / totalReq)) or AchievementColorize2:Colorize(strfmat("%d%%", zo_floor(100 * totalCmp / totalReq)))
+            local stringpart2 = ChatAnnouncements.SV.Achievement.AchievementColorProgress and string_format(" %s|c%s%d%%|r", ColorizeColors.AchievementColorize2:Colorize("("), AchievementPctToColor(totalCmp / totalReq), zo_floor(100 * totalCmp / totalReq)) or ColorizeColors.AchievementColorize2:Colorize(string_format("%d%%", zo_floor(100 * totalCmp / totalReq)))
 
             local stringpart3
             if ChatAnnouncements.SV.Achievement.AchievementCategory and ChatAnnouncements.SV.Achievement.AchievementSubcategory then
-                stringpart3 = AchievementColorize2:Colorize(strfmat(") %s%s - %s%s", bracket3[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions], catName, subcatName, bracket4[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions]))
+                stringpart3 = ColorizeColors.AchievementColorize2:Colorize(string_format(") %s%s - %s%s", bracket3[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions], catName, subcatName, bracket4[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions]))
             elseif ChatAnnouncements.SV.Achievement.AchievementCategory and not ChatAnnouncements.SV.Achievement.AchievementSubcategory then
-                stringpart3 = AchievementColorize2:Colorize(strfmat(") %s%s%s", bracket3[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions], catName, bracket4[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions]))
+                stringpart3 = ColorizeColors.AchievementColorize2:Colorize(string_format(") %s%s%s", bracket3[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions], catName, bracket4[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions]))
             else
-                stringpart3 = AchievementColorize2:Colorize(")")
+                stringpart3 = ColorizeColors.AchievementColorize2:Colorize(")")
             end
 
             -- Prepare details information
@@ -3565,24 +3423,24 @@ function ChatAnnouncements.OnAchievementUpdated(eventCode, id)
                 -- Skyshards needs separate treatment otherwise text become too long
                 -- We also put this short information for achievements that has too many subitems
                 if topLevelIndex == 9 or #cmpInfo > 12 then
-                    stringpart4 = ChatAnnouncements.SV.Achievement.AchievementColorProgress and strfmat(" %s|c%s%d|r%s|c71DE73%d|c87B7CC|r%s", AchievementColorize2:Colorize("("), AchievementPctToColor(totalCmp / totalReq), totalCmp, AchievementColorize2:Colorize("/"), totalReq, AchievementColorize2:Colorize(")")) or AchievementColorize2:Colorize(strfmat(" (%d/%d)", totalCmp, totalReq))
+                    stringpart4 = ChatAnnouncements.SV.Achievement.AchievementColorProgress and string_format(" %s|c%s%d|r%s|c71DE73%d|c87B7CC|r%s", ColorizeColors.AchievementColorize2:Colorize("("), AchievementPctToColor(totalCmp / totalReq), totalCmp, ColorizeColors.AchievementColorize2:Colorize("/"), totalReq, ColorizeColors.AchievementColorize2:Colorize(")")) or ColorizeColors.AchievementColorize2:Colorize(string_format(" (%d/%d)", totalCmp, totalReq))
                 else
                     for i = 1, #cmpInfo do
                         -- Boolean achievement stage
                         if cmpInfo[i][3] == 1 then
-                            cmpInfo[i] = ChatAnnouncements.SV.Achievement.AchievementColorProgress and strfmat("|c%s%s", AchievementPctToColor(cmpInfo[i][2]), cmpInfo[i][1]) or AchievementColorize2:Colorize(strfmat("%s%s", cmpInfo[i][2], cmpInfo[i][1]))
+                            cmpInfo[i] = ChatAnnouncements.SV.Achievement.AchievementColorProgress and string_format("|c%s%s", AchievementPctToColor(cmpInfo[i][2]), cmpInfo[i][1]) or ColorizeColors.AchievementColorize2:Colorize(string_format("%s%s", cmpInfo[i][2], cmpInfo[i][1]))
                             -- Others
                         else
                             local pct = cmpInfo[i][2] / cmpInfo[i][3]
-                            cmpInfo[i] = ChatAnnouncements.SV.Achievement.AchievementColorProgress and strfmat("%s %s|c%s%d|r%s|c71DE73%d|r%s", AchievementColorize2:Colorize(cmpInfo[i][1]), AchievementColorize2:Colorize("("), AchievementPctToColor(pct), cmpInfo[i][2], AchievementColorize2:Colorize("/"), cmpInfo[i][3], AchievementColorize2:Colorize(")")) or AchievementColorize2:Colorize(strfmat("%s (%d/%d)", cmpInfo[i][1], cmpInfo[i][2], cmpInfo[i][3]))
+                            cmpInfo[i] = ChatAnnouncements.SV.Achievement.AchievementColorProgress and string_format("%s %s|c%s%d|r%s|c71DE73%d|r%s", ColorizeColors.AchievementColorize2:Colorize(cmpInfo[i][1]), ColorizeColors.AchievementColorize2:Colorize("("), AchievementPctToColor(pct), cmpInfo[i][2], ColorizeColors.AchievementColorize2:Colorize("/"), cmpInfo[i][3], ColorizeColors.AchievementColorize2:Colorize(")")) or ColorizeColors.AchievementColorize2:Colorize(string_format("%s (%d/%d)", cmpInfo[i][1], cmpInfo[i][2], cmpInfo[i][3]))
                         end
                     end
-                    stringpart4 = " " .. table.concat(cmpInfo, AchievementColorize2:Colorize(", ")) .. ""
+                    stringpart4 = " " .. table_concat(cmpInfo, ColorizeColors.AchievementColorize2:Colorize(", ")) .. ""
                 end
             end
-            local finalString = strfmat("%s%s%s%s", stringpart1, stringpart2, stringpart3, stringpart4)
-            g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "ACHIEVEMENT" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            local finalString = string_format("%s%s%s%s", stringpart1, stringpart2, stringpart3, stringpart4)
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalString, type = "ACHIEVEMENT" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -3824,7 +3682,7 @@ function ChatAnnouncements.FenceSuccess(eventCode, result)
     if result == ITEM_LAUNDER_RESULT_SUCCESS then
         if ChatAnnouncements.SV.Inventory.LootVendorCurrency then
             if g_savedPurchase.formattedValue ~= nil and g_savedPurchase.formattedValue ~= "" then
-                ChatAnnouncements.CurrencyPrinter(g_savedPurchase.formattedValue, g_savedPurchase.changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, g_savedPurchase.messageChange, g_savedPurchase.messageTotal, g_savedPurchase.type, g_savedPurchase.carriedItem, g_savedPurchase.carriedItemTotal)
+                ChatAnnouncements.CurrencyPrinter(nil, g_savedPurchase.formattedValue, g_savedPurchase.changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, g_savedPurchase.messageChange, g_savedPurchase.messageTotal, g_savedPurchase.type, g_savedPurchase.carriedItem, g_savedPurchase.carriedItemTotal)
             end
         else
             if g_savedLaunder.itemId ~= nil and g_savedLaunder.itemId ~= "" then
@@ -3897,9 +3755,9 @@ function ChatAnnouncements.ResolveQuestItemChange()
 
             local itemLink
             if ChatAnnouncements.SV.BracketOptionItem == 1 then
-                itemLink = strfmat("|H0:quest_item:" .. itemId .. "|h|h")
+                itemLink = string_format("|H0:quest_item:" .. itemId .. "|h|h")
             else
-                itemLink = strfmat("|H1:quest_item:" .. itemId .. "|h|h")
+                itemLink = string_format("|H1:quest_item:" .. itemId .. "|h|h")
             end
 
             local color
@@ -3928,9 +3786,9 @@ function ChatAnnouncements.ResolveQuestItemChange()
                 if not Quests.QuestItemHideRemove[itemId] and not g_loginHideQuestLoot then
                     if ChatAnnouncements.SV.Inventory.LootQuestRemove then
                         if ChatAnnouncements.SV.Currency.CurrencyContextColor then
-                            color = CurrencyDownColorize:ToHex()
+                            color = ColorizeColors.CurrencyDownColorize:ToHex()
                         else
-                            color = CurrencyColorize:ToHex()
+                            color = ColorizeColors.CurrencyColorize:ToHex()
                         end
 
                         logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageRemove
@@ -3958,19 +3816,19 @@ function ChatAnnouncements.ResolveQuestItemChange()
                         local quantity = (countChange * -1) > 1 and (" |cFFFFFFx" .. (countChange * -1) .. "|r") or ""
 
                         formattedMessageP1 = ("|r" .. formattedIcon .. itemLink .. quantity .. "|c" .. color)
-                        formattedMessageP2 = strfmat(logPrefix, formattedMessageP1)
+                        formattedMessageP2 = string_format(logPrefix, formattedMessageP1)
 
                         if ChatAnnouncements.SV.Inventory.LootTotal and total > 1 then
-                            totalString = strfmat(" |c%s%s|r %s|cFFFFFF%s|r", color, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+                            totalString = string_format(" |c%s%s|r %s|cFFFFFF%s|r", color, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
                         else
                             totalString = ""
                         end
 
-                        finalMessage = strfmat("|c%s%s|r%s", color, formattedMessageP2, totalString)
+                        finalMessage = string_format("|c%s%s|r%s", color, formattedMessageP2, totalString)
 
                         eventManager:UnregisterForUpdate(moduleName .. "Printer")
-                        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "QUEST LOOT REMOVE", itemId = itemId }
-                        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "QUEST LOOT REMOVE", itemId = itemId }
+                        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                         eventManager:RegisterForUpdate(moduleName .. "Printer", 25, ChatAnnouncements.PrintQueuedMessages)
                     end
                 end
@@ -3996,9 +3854,9 @@ function ChatAnnouncements.ResolveQuestItemChange()
                 if not Quests.QuestItemHideLoot[itemId] and not g_loginHideQuestLoot then
                     if ChatAnnouncements.SV.Inventory.LootQuestAdd then
                         if ChatAnnouncements.SV.Currency.CurrencyContextColor then
-                            color = CurrencyUpColorize:ToHex()
+                            color = ColorizeColors.CurrencyUpColorize:ToHex()
                         else
-                            color = CurrencyColorize:ToHex()
+                            color = ColorizeColors.CurrencyColorize:ToHex()
                         end
 
                         if g_isLooted and not g_itemReceivedIsQuestReward and not g_isPickpocketed and not g_isStolen then
@@ -4037,30 +3895,30 @@ function ChatAnnouncements.ResolveQuestItemChange()
                                 local usedId = Quests.QuestItemMerge[itemId][i]
                                 local usedLink = ""
                                 if ChatAnnouncements.SV.BracketOptionItem == 1 then
-                                    usedLink = strfmat("|H0:quest_item:" .. usedId .. "|h|h")
+                                    usedLink = string_format("|H0:quest_item:" .. usedId .. "|h|h")
                                 else
-                                    usedLink = strfmat("|H1:quest_item:" .. usedId .. "|h|h")
+                                    usedLink = string_format("|H1:quest_item:" .. usedId .. "|h|h")
                                 end
                                 line = (line .. comma .. "|r" .. formattedIcon1 .. usedLink .. quantity .. "|c" .. color)
                             end
 
-                            formattedMessageP2 = strfmat(logPrefix, line, formattedMessageP1)
+                            formattedMessageP2 = string_format(logPrefix, line, formattedMessageP1)
                             -- Or if we don't have a merged message just use the normal one
                         else
-                            formattedMessageP2 = strfmat(logPrefix, formattedMessageP1)
+                            formattedMessageP2 = string_format(logPrefix, formattedMessageP1)
                         end
 
                         if ChatAnnouncements.SV.Inventory.LootTotal and total > 1 then
-                            totalString = strfmat(" |c%s%s|r %s|cFFFFFF%s|r", color, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+                            totalString = string_format(" |c%s%s|r %s|cFFFFFF%s|r", color, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
                         else
                             totalString = ""
                         end
 
-                        finalMessage = strfmat("|c%s%s|r%s", color, formattedMessageP2, totalString)
+                        finalMessage = string_format("|c%s%s|r%s", color, formattedMessageP2, totalString)
 
                         eventManager:UnregisterForUpdate(moduleName .. "Printer")
-                        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "QUEST LOOT ADD", itemId = itemId }
-                        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "QUEST LOOT ADD", itemId = itemId }
+                        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                         eventManager:RegisterForUpdate(moduleName .. "Printer", 25, ChatAnnouncements.PrintQueuedMessages)
                     end
                 end
@@ -4235,15 +4093,15 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
     local formattedIcon = (ChatAnnouncements.SV.Inventory.LootIcons and icon ~= "") and zo_strformat("<<1>> ", zo_iconFormat(icon, 16, 16)) or ""
     local color
     if gainOrLoss == 1 then
-        color = CurrencyUpColorize:ToHex()
+        color = ColorizeColors.CurrencyUpColorize:ToHex()
     elseif gainOrLoss == 2 then
-        color = CurrencyDownColorize:ToHex()
+        color = ColorizeColors.CurrencyDownColorize:ToHex()
         -- 3 = Gain no color, 4 = Loss no color (differentiation only exists for Crafting Strings)
     elseif gainOrLoss == 3 or gainOrLoss == 4 then
-        color = CurrencyColorize:ToHex()
+        color = ColorizeColors.CurrencyColorize:ToHex()
         -- Fallback if gainOrLoss is nil or an invalid number for some reason
     else
-        color = CurrencyColorize:ToHex()
+        color = ColorizeColors.CurrencyColorize:ToHex()
     end
 
     local formattedRecipient
@@ -4265,31 +4123,31 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
     end
 
     if stack > 1 then
-        formattedQuantity = strfmat(" |cFFFFFFx%d|r", stack)
+        formattedQuantity = string_format(" |cFFFFFFx%d|r", stack)
     else
         formattedQuantity = ""
     end
 
     local armorType = GetItemLinkArmorType(itemLink) -- Get Armor Type of item
-    formattedArmorType = (ChatAnnouncements.SV.Inventory.LootShowArmorType and armorType ~= ARMORTYPE_NONE and logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgrade and logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgradeFail) and strfmat(" |cFFFFFF(%s)|r", GetString("SI_ARMORTYPE", armorType)) or ""
+    formattedArmorType = (ChatAnnouncements.SV.Inventory.LootShowArmorType and armorType ~= ARMORTYPE_NONE and logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgrade and logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgradeFail) and string_format(" |cFFFFFF(%s)|r", GetString("SI_ARMORTYPE", armorType)) or ""
 
     local traitType = GetItemLinkTraitInfo(itemLink) -- Get Trait type of item
-    formattedTrait = (ChatAnnouncements.SV.Inventory.LootShowTrait and traitType ~= ITEM_TRAIT_TYPE_NONE and itemType ~= ITEMTYPE_ARMOR_TRAIT and itemType ~= ITEMTYPE_WEAPON_TRAIT and itemType ~= ITEMTYPE_JEWELRY_TRAIT and logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgrade and logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgradeFail) and strfmat(" |cFFFFFF(%s)|r", GetString("SI_ITEMTRAITTYPE", traitType)) or ""
+    formattedTrait = (ChatAnnouncements.SV.Inventory.LootShowTrait and traitType ~= ITEM_TRAIT_TYPE_NONE and itemType ~= ITEMTYPE_ARMOR_TRAIT and itemType ~= ITEMTYPE_WEAPON_TRAIT and itemType ~= ITEMTYPE_JEWELRY_TRAIT and logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgrade and logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgradeFail) and string_format(" |cFFFFFF(%s)|r", GetString("SI_ITEMTRAITTYPE", traitType)) or ""
 
     local styleType = GetItemLinkItemStyle(itemLink) -- Get Style of the item
     local unformattedStyle = zo_strformat("<<1>>", GetItemStyleName(styleType))
-    formattedStyle = (ChatAnnouncements.SV.Inventory.LootShowStyle and styleType ~= ITEMSTYLE_NONE and styleType ~= ITEMSTYLE_UNIQUE and styleType ~= ITEMSTYLE_UNIVERSAL and itemType ~= ITEMTYPE_STYLE_MATERIAL and itemType ~= ITEMTYPE_GLYPH_ARMOR and itemType ~= ITEMTYPE_GLYPH_JEWELRY and itemType ~= ITEMTYPE_GLYPH_WEAPON and logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgrade and logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgradeFail) and strfmat(" |cFFFFFF(%s)|r", unformattedStyle) or ""
+    formattedStyle = (ChatAnnouncements.SV.Inventory.LootShowStyle and styleType ~= ITEMSTYLE_NONE and styleType ~= ITEMSTYLE_UNIQUE and styleType ~= ITEMSTYLE_UNIVERSAL and itemType ~= ITEMTYPE_STYLE_MATERIAL and itemType ~= ITEMTYPE_GLYPH_ARMOR and itemType ~= ITEMTYPE_GLYPH_JEWELRY and itemType ~= ITEMTYPE_GLYPH_WEAPON and logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgrade and logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgradeFail) and string_format(" |cFFFFFF(%s)|r", unformattedStyle) or ""
 
     local formattedTotal = ""
     if ChatAnnouncements.SV.Inventory.LootTotal and receivedBy ~= "LUIE_INVENTORY_UPDATE_DISGUISE" and receivedBy ~= "LUIE_RECEIVE_CRAFT" and not groupLoot and (logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageLearnRecipe and logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageLearnMotif and logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageLearnStyle) then
         local total1, total2, total3 = GetItemLinkStacks(itemLink)
         local total = total1 + total2 + total3
         if total > 1 then
-            formattedTotal = strfmat(" |c%s%s|r %s|cFFFFFF%s|r", color, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+            formattedTotal = string_format(" |c%s%s|r %s|cFFFFFF%s|r", color, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
         end
     end
 
-    local itemString = strfmat("%s%s%s%s%s%s", formattedIcon, itemLink, formattedQuantity, formattedArmorType, formattedTrait, formattedStyle)
+    local itemString = string_format("%s%s%s%s%s%s", formattedIcon, itemLink, formattedQuantity, formattedArmorType, formattedTrait, formattedStyle)
 
     local delayTimer = 50
     local messageType = alwaysFirst and "CONTAINER" or "LOOT"
@@ -4299,7 +4157,7 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
         local itemString2 = itemString
 
         if g_itemStringGain ~= "" then
-            g_itemStringGain = strfmat("%s|c%s,|r %s", g_itemStringGain, color, itemString2)
+            g_itemStringGain = string_format("%s|c%s,|r %s", g_itemStringGain, color, itemString2)
         end
         if g_itemStringGain == "" then
             g_itemStringGain = itemString
@@ -4307,17 +4165,17 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
 
         g_itemCounterGainTracker = g_itemCounterGainTracker + 1
         if g_itemCounterGainTracker > 12 then
-            g_itemStringGain = strfmat("|c%stoo many items to display|r", color)
+            g_itemStringGain = string_format("|c%stoo many items to display|r", color)
         end
 
         if g_itemCounterGain == 0 then
-            g_itemCounterGain = g_queuedMessagesCounter
+            g_itemCounterGain = ChatAnnouncements.QueuedMessagesCounter
         end
-        if g_queuedMessagesCounter - 1 == g_itemCounterGain then
-            g_queuedMessagesCounter = g_itemCounterGain
+        if ChatAnnouncements.QueuedMessagesCounter - 1 == g_itemCounterGain then
+            ChatAnnouncements.QueuedMessagesCounter = g_itemCounterGain
         end
-        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-        g_queuedMessages[g_itemCounterGain] = {
+        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
+        ChatAnnouncements.QueuedMessages[g_itemCounterGain] = {
             message = g_itemStringGain,
             type = messageType,
             formattedRecipient = formattedRecipient,
@@ -4330,7 +4188,7 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
     elseif receivedBy == "LUIE_RECEIVE_CRAFT" and (gainOrLoss == 2 or gainOrLoss == 4) and logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgradeFail then
         local itemString2 = itemString
         if g_itemStringLoss ~= "" then
-            g_itemStringLoss = strfmat("%s|c%s,|r %s", g_itemStringLoss, color, itemString2)
+            g_itemStringLoss = string_format("%s|c%s,|r %s", g_itemStringLoss, color, itemString2)
         end
         if g_itemStringLoss == "" then
             g_itemStringLoss = itemString
@@ -4338,17 +4196,17 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
 
         g_itemCounterLossTracker = g_itemCounterLossTracker + 1
         if g_itemCounterLossTracker > 12 then
-            g_itemStringLoss = strfmat("|c%stoo many items to display|r", color)
+            g_itemStringLoss = string_format("|c%stoo many items to display|r", color)
         end
 
         if g_itemCounterLoss == 0 then
-            g_itemCounterLoss = g_queuedMessagesCounter
+            g_itemCounterLoss = ChatAnnouncements.QueuedMessagesCounter
         end
-        if g_queuedMessagesCounter - 1 == g_itemCounterLoss then
-            g_queuedMessagesCounter = g_itemCounterLoss
+        if ChatAnnouncements.QueuedMessagesCounter - 1 == g_itemCounterLoss then
+            ChatAnnouncements.QueuedMessagesCounter = g_itemCounterLoss
         end
-        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-        g_queuedMessages[g_itemCounterLoss] = {
+        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
+        ChatAnnouncements.QueuedMessages[g_itemCounterLoss] = {
             message = g_itemStringLoss,
             type = messageType,
             formattedRecipient = formattedRecipient,
@@ -4360,7 +4218,7 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
         eventManager:RegisterForUpdate(moduleName .. "Printer", delayTimer, ChatAnnouncements.PrintQueuedMessages)
     else
         local totalString = formattedTotal
-        g_queuedMessages[g_queuedMessagesCounter] = {
+        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = {
             message = itemString,
             type = messageType,
             formattedRecipient = formattedRecipient,
@@ -4369,7 +4227,7 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
             totalString = totalString,
             groupLoot = groupLoot,
         }
-        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
         if delay then
             delayTimer = 25
             eventManager:UnregisterForUpdate(moduleName .. "Printer")
@@ -4404,25 +4262,25 @@ function ChatAnnouncements.ResolveItemMessage(message, formattedRecipient, color
             local formattedIcon = (ChatAnnouncements.SV.Inventory.LootIcons and g_oldItem.icon ~= "") and zo_strformat("<<1>> ", zo_iconFormat(g_oldItem.icon, 16, 16)) or ""
             local formattedMessageUpgrade = ("|r" .. formattedIcon .. g_oldItem.itemLink .. "|c" .. color)
             formattedMessageP1 = ("|r" .. message .. "|c" .. color)
-            formattedMessageP2 = strfmat(logPrefix, formattedMessageUpgrade, formattedMessageP1)
+            formattedMessageP2 = string_format(logPrefix, formattedMessageUpgrade, formattedMessageP1)
             g_oldItem = {}
         else
             formattedMessageP1 = ("|r" .. message .. "|c" .. color)
             if formattedRecipient == "" then
-                formattedMessageP2 = strfmat(logPrefix, formattedMessageP1, "")
+                formattedMessageP2 = string_format(logPrefix, formattedMessageP1, "")
             else
                 local recipient = ("|r" .. formattedRecipient .. "|c" .. color)
-                formattedMessageP2 = strfmat(logPrefix, formattedMessageP1, recipient)
+                formattedMessageP2 = string_format(logPrefix, formattedMessageP1, recipient)
             end
         end
         -- Handle group loot messages
     else
         formattedMessageP1 = ("|r" .. message .. "|c" .. color)
         local recipient = ("|r" .. formattedRecipient .. "|c" .. color)
-        formattedMessageP2 = strfmat(logPrefix, recipient, formattedMessageP1)
+        formattedMessageP2 = string_format(logPrefix, recipient, formattedMessageP1)
     end
 
-    local finalMessage = strfmat("|c%s%s|r%s", color, formattedMessageP2, totalString)
+    local finalMessage = string_format("|c%s%s|r%s", color, formattedMessageP2, totalString)
 
     LUIE.SV.DummyDumpString = finalMessage
 
@@ -4493,6 +4351,13 @@ local delayedItemPool = {}    -- Store items we are counting up when the player 
 local delayedItemPoolOut = {} -- Stacks for outbound delayed item pool
 
 function ChatAnnouncements.ItemCounterDelay(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter, groupLoot, alwaysFirst, delay)
+    -- Return if we have an invalid itemId
+    if itemId == 0 then
+        if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@dack_janiels" then
+            d("Item counter returned invalid items")
+        end
+        return
+    end
     if delayedItemPool[itemId] then
         stack = delayedItemPool[itemId].stack + stack -- Add stack count first, only if item already exists.
     end
@@ -4828,6 +4693,11 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                         logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeploy
                         flag = true
                     end
+                    if ChatAnnouncements.SV.Inventory.LootShowUseFish and removedItemType == ITEMTYPE_FISH then
+                        gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageFillet
+                        flag = true
+                    end
                     -- If this is a Skill respec scroll, manually call an announcement for it if enabled (for some reason doesn't display an EVENT_DISPLAY_ANNOUNCEMENT on use anymore)
                     if removedItemType == ITEMTYPE_CROWN_ITEM and (itemId == 64524 or itemId == 135128) then
                         zo_callLater(function ()
@@ -4980,10 +4850,24 @@ function ChatAnnouncements.Dummy()
 end
 
 function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
+    local Debug = LUIE.Debug
+
     -- End right now if this is any other reason (durability loss, etc)
     if inventoryUpdateReason ~= INVENTORY_UPDATE_REASON_DEFAULT then
         return
     end
+
+    local traceback = debug.traceback(
+        "Inventory Update" ..
+        " eventCode: " .. tostring(eventCode) ..
+        " bagId: " .. tostring(bagId) ..
+        " slotId: " .. tostring(slotId) ..
+        " isNewItem: " .. tostring(isNewItem) ..
+        " itemSoundCategory: " .. tostring(itemSoundCategory) ..
+        " inventoryUpdateReason: " .. tostring(inventoryUpdateReason) ..
+        " stackCountChange: " .. tostring(stackCountChange), 2)
+
+    Debug(traceback)
 
     local function ResolveCraftingUsed(itemType)
         local craftingType = GetCraftingInteractionType()
@@ -5003,6 +4887,7 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
             [ITEMTYPE_ENCHANTING_RUNE_ESSENCE] = true,
             [ITEMTYPE_ENCHANTING_RUNE_POTENCY] = true,
             [ITEMTYPE_ENCHANTMENT_BOOSTER] = true,
+            [ITEMTYPE_FISH] = true,
             [ITEMTYPE_GLYPH_ARMOR] = true,
             [ITEMTYPE_GLYPH_JEWELRY] = true,
             [ITEMTYPE_GLYPH_WEAPON] = true,
@@ -5025,10 +4910,9 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
             [ITEMTYPE_WOODWORKING_BOOSTER] = true,
             [ITEMTYPE_WOODWORKING_MATERIAL] = true,
             [ITEMTYPE_WOODWORKING_RAW_MATERIAL] = true,
-            [ITEMTYPE_FISH] = true,
         }
 
-        if (craftingType == CRAFTING_TYPE_BLACKSMITHING or craftingType == CRAFTING_TYPE_CLOTHIER or craftingType == CRAFTING_TYPE_WOODWORKING or craftingType == CRAFTING_TYPE_PROVISIONING or craftingType == CRAFTING_TYPE_JEWELRYCRAFTING) and smithingMode == 4 then
+        if (craftingType == CRAFTING_TYPE_BLACKSMITHING or craftingType == CRAFTING_TYPE_CLOTHIER or craftingType == CRAFTING_TYPE_WOODWORKING or craftingType == CRAFTING_TYPE_JEWELRYCRAFTING) and smithingMode == 4 then
             return validItemTypes[itemType] or false
         end
     end
@@ -5108,6 +4992,9 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
             elseif stackCountChange > 0 then
                 gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
                 logPrefix = logPrefixPos
+                if itemId == 33753 then
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
+                end
                 ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 -- STACK COUNT INCREMENTED DOWN
             elseif stackCountChange < 0 then
@@ -5115,6 +5002,9 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
                 gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                 logPrefix = ResolveCraftingUsed(itemType) and ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or logPrefixNeg
                 if logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or ChatAnnouncements.SV.Inventory.LootShowCraftUse then -- If the logprefix isn't (used) then this is a deconstructed message, otherwise only display if used item display is enabled.
+                    if itemType == ITEMTYPE_FISH then
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageFillet
+                    end
                     ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
             end
@@ -5183,6 +5073,9 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
             elseif stackCountChange > 0 then
                 gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
                 logPrefix = logPrefixPos
+                if itemId == 33753 then
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
+                end
                 --ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, false, true)
                 -- STACK COUNT INCREMENTED DOWN
@@ -5192,6 +5085,9 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
                 logPrefix = ResolveCraftingUsed(removedItemType) and ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or logPrefixNeg
                 if logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or ChatAnnouncements.SV.Inventory.LootShowCraftUse then -- If the logprefix isn't (used) then this is a deconstructed message, otherwise only display if used item display is enabled.
                     --ChatAnnouncements.ItemPrinter(removedIcon, change, removedItemType, removedItemId, removedItemLink, receivedBy, logPrefix, gainOrLoss, false)
+                    if removedItemType == ITEMTYPE_FISH then
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageFillet
+                    end
                     ChatAnnouncements.ItemCounterDelay(removedIcon, change, removedItemType, removedItemId, removedItemLink, receivedBy, logPrefix, gainOrLoss, false, nil, true, true)
                 end
             end
@@ -5254,6 +5150,9 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
             elseif stackCountChange > 0 then
                 gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
                 logPrefix = logPrefixPos
+                if itemId == 33753 then
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
+                end
                 --ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, false, true)
                 -- STACK COUNT INCREMENTED DOWN
@@ -5263,6 +5162,9 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
                 logPrefix = ResolveCraftingUsed(itemType) and ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or logPrefixNeg
                 if logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or ChatAnnouncements.SV.Inventory.LootShowCraftUse then -- If the logprefix isn't (used) then this is a deconstructed message, otherwise only display if used item display is enabled.
                     --ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                    if itemType == ITEMTYPE_FISH then
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageFillet
+                    end
                     ChatAnnouncements.ItemCounterDelay(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, true, true)
                 end
             end
@@ -5325,6 +5227,9 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
             elseif stackCountChange > 0 then
                 gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
                 logPrefix = logPrefixPos
+                if itemId == 33753 then
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
+                end
                 --ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, false, true)
                 -- STACK COUNT INCREMENTED DOWN
@@ -5333,6 +5238,9 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
                 gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                 logPrefix = ResolveCraftingUsed(itemType) and ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or logPrefixNeg
                 if logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or ChatAnnouncements.SV.Inventory.LootShowCraftUse then -- If the logprefix isn't (used) then this is a deconstructed message, otherwise only display if used item display is enabled.
+                    if itemType == ITEMTYPE_FISH then
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageFillet
+                    end
                     ChatAnnouncements.ItemCounterDelay(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, true, true)
                 end
             end
@@ -5373,6 +5281,12 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
         end
 
         if logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or ChatAnnouncements.SV.Inventory.LootShowCraftUse then
+            if itemType == ITEMTYPE_FISH then
+                logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageFillet
+            end
+            if itemId == 33753 then
+                logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
+            end
             ChatAnnouncements.ItemCounterDelay(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, alwaysFirst, true)
         end
     end
@@ -5406,7 +5320,7 @@ function ChatAnnouncements.InventoryUpdateBank(eventCode, bagId, slotId, isNewIt
             g_inventoryStacks[slotId] = { icon = icon, stack = stack, itemId = itemId, itemType = itemType, itemLink = itemLink }
             gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
             logPrefix = g_bankBag == 1 and ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdraw or ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdrawStorage
-            if InventoryOn then
+            if g_InventoryOn then
                 ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
             end
             -- EXISTING ITEM
@@ -5432,7 +5346,7 @@ function ChatAnnouncements.InventoryUpdateBank(eventCode, bagId, slotId, isNewIt
             if stackCountChange > 0 then
                 gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
                 logPrefix = g_bankBag == 1 and ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdraw or ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdrawStorage
-                if InventoryOn then
+                if g_InventoryOn then
                     ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
                 -- STACK COUNT INCREMENTED DOWN
@@ -5443,7 +5357,7 @@ function ChatAnnouncements.InventoryUpdateBank(eventCode, bagId, slotId, isNewIt
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDestroy
                     ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
-                if InventoryOn and not g_itemWasDestroyed then
+                if g_InventoryOn and not g_itemWasDestroyed then
                     gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                     logPrefix = g_bankBag == 1 and ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeposit or ChatAnnouncements.SV.ContextMessages.CurrencyMessageDepositStorage
                     ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
@@ -5459,10 +5373,10 @@ function ChatAnnouncements.InventoryUpdateBank(eventCode, bagId, slotId, isNewIt
             end
 
             if not g_itemWasDestroyed then
-                BankOn = true
+                g_bankOn = true
             end
             if not g_itemWasDestroyed then
-                InventoryOn = false
+                g_InventoryOn = false
             end
             if not g_itemWasDestroyed then
                 zo_callLater(ChatAnnouncements.BankFixer, 50)
@@ -5488,7 +5402,7 @@ function ChatAnnouncements.InventoryUpdateBank(eventCode, bagId, slotId, isNewIt
             g_bankStacks[slotId] = { icon = icon, stack = stack, itemId = itemId, itemType = itemType, itemLink = itemLink }
             gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
             logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeposit
-            if BankOn then
+            if g_bankOn then
                 ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
             end
             -- EXISTING ITEM
@@ -5514,7 +5428,7 @@ function ChatAnnouncements.InventoryUpdateBank(eventCode, bagId, slotId, isNewIt
             if stackCountChange > 0 then
                 gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                 logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeposit
-                if BankOn then
+                if g_bankOn then
                     ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
                 -- STACK COUNT INCREMENTED DOWN
@@ -5525,7 +5439,7 @@ function ChatAnnouncements.InventoryUpdateBank(eventCode, bagId, slotId, isNewIt
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDestroy
                     ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
-                if BankOn and not g_itemWasDestroyed then
+                if g_bankOn and not g_itemWasDestroyed then
                     gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeposit
                     ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
@@ -5541,10 +5455,10 @@ function ChatAnnouncements.InventoryUpdateBank(eventCode, bagId, slotId, isNewIt
             end
 
             if not g_itemWasDestroyed then
-                InventoryOn = true
+                g_InventoryOn = true
             end
             if not g_itemWasDestroyed then
-                BankOn = false
+                g_bankOn = false
             end
             if not g_itemWasDestroyed then
                 zo_callLater(ChatAnnouncements.BankFixer, 50)
@@ -5570,7 +5484,7 @@ function ChatAnnouncements.InventoryUpdateBank(eventCode, bagId, slotId, isNewIt
             g_banksubStacks[slotId] = { icon = icon, stack = stack, itemId = itemId, itemType = itemType, itemLink = itemLink }
             gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
             logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeposit
-            if BankOn then
+            if g_bankOn then
                 ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
             end
             -- EXISTING ITEM
@@ -5596,7 +5510,7 @@ function ChatAnnouncements.InventoryUpdateBank(eventCode, bagId, slotId, isNewIt
             if stackCountChange > 0 then
                 gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                 logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeposit
-                if BankOn then
+                if g_bankOn then
                     ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
                 -- STACK COUNT INCREMENTED DOWN
@@ -5607,7 +5521,7 @@ function ChatAnnouncements.InventoryUpdateBank(eventCode, bagId, slotId, isNewIt
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDestroy
                     ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
-                if BankOn and not g_itemWasDestroyed then
+                if g_bankOn and not g_itemWasDestroyed then
                     gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeposit
                     ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
@@ -5623,10 +5537,10 @@ function ChatAnnouncements.InventoryUpdateBank(eventCode, bagId, slotId, isNewIt
             end
 
             if not g_itemWasDestroyed then
-                InventoryOn = true
+                g_InventoryOn = true
             end
             if not g_itemWasDestroyed then
-                BankOn = false
+                g_bankOn = false
             end
             if not g_itemWasDestroyed then
                 zo_callLater(ChatAnnouncements.BankFixer, 50)
@@ -5652,7 +5566,7 @@ function ChatAnnouncements.InventoryUpdateBank(eventCode, bagId, slotId, isNewIt
             g_houseBags[bagId][slotId] = { icon = icon, stack = stack, itemId = itemId, itemType = itemType, itemLink = itemLink }
             gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
             logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDepositStorage
-            if BankOn then
+            if g_bankOn then
                 ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
             end
             -- EXISTING ITEM
@@ -5678,7 +5592,7 @@ function ChatAnnouncements.InventoryUpdateBank(eventCode, bagId, slotId, isNewIt
             if stackCountChange > 0 then
                 gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                 logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDepositStorage
-                if BankOn then
+                if g_bankOn then
                     ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
                 -- STACK COUNT INCREMENTED DOWN
@@ -5689,7 +5603,7 @@ function ChatAnnouncements.InventoryUpdateBank(eventCode, bagId, slotId, isNewIt
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDestroy
                     ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
-                if BankOn and not g_itemWasDestroyed then
+                if g_bankOn and not g_itemWasDestroyed then
                     gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDepositStorage
                     ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
@@ -5705,10 +5619,10 @@ function ChatAnnouncements.InventoryUpdateBank(eventCode, bagId, slotId, isNewIt
             end
 
             if not g_itemWasDestroyed then
-                InventoryOn = true
+                g_InventoryOn = true
             end
             if not g_itemWasDestroyed then
-                BankOn = false
+                g_bankOn = false
             end
             if not g_itemWasDestroyed then
                 zo_callLater(ChatAnnouncements.BankFixer, 50)
@@ -5917,15 +5831,15 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
                 gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
                 logPrefix = ChatAnnouncements.SV.Inventory.LootVendorCurrency and ChatAnnouncements.SV.ContextMessages.CurrencyMessageLaunder or ChatAnnouncements.SV.ContextMessages.CurrencyMessageLaunderNoV
                 if not g_weAreInAStore and ChatAnnouncements.SV.Inventory.Loot then
-                    local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+                    local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and ColorizeColors.CurrencyDownColorize:ToHex() or ColorizeColors.CurrencyColorize:ToHex()
                     if ChatAnnouncements.SV.Inventory.LootVendorCurrency and ChatAnnouncements.SV.Currency.CurrencyContextMergedColor then
-                        changeColor = CurrencyColorize:ToHex()
+                        changeColor = ColorizeColors.CurrencyColorize:ToHex()
                     end
                     local type = "LUIE_CURRENCY_VENDOR"
 
-                    local parts = {ZO_LinkHandler_ParseLink(itemLink)}
+                    local parts = { ZO_LinkHandler_ParseLink(itemLink) }
                     parts[22] = "1"
-                    parts = table.concat(parts, ":"):sub(2, -1)
+                    parts = table_concat(parts, ":"):sub(2, -1)
                     itemLink = zo_strformat("|H<<1>>|h|h", parts)
 
                     local formattedIcon = (ChatAnnouncements.SV.Inventory.LootIcons and icon and icon ~= "") and ("|t16:16:" .. icon .. "|t ") or ""
@@ -5936,7 +5850,7 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
                         local total1, total2, total3 = GetItemLinkStacks(itemLink)
                         local total = total1 + total2 + total3
                         if total > 1 then
-                            carriedItemTotal = strfmat(" |c%s%s|r %s|cFFFFFF%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+                            carriedItemTotal = string_format(" |c%s%s|r %s|cFFFFFF%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
                         end
                     end
 
@@ -5975,15 +5889,15 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
                 else
                     gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
                     logPrefix = ChatAnnouncements.SV.Inventory.LootVendorCurrency and ChatAnnouncements.SV.ContextMessages.CurrencyMessageLaunder or ChatAnnouncements.SV.ContextMessages.CurrencyMessageLaunderNoV
-                    local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+                    local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and ColorizeColors.CurrencyDownColorize:ToHex() or ColorizeColors.CurrencyColorize:ToHex()
                     if ChatAnnouncements.SV.Inventory.LootVendorCurrency and ChatAnnouncements.SV.Currency.CurrencyContextMergedColor then
-                        changeColor = CurrencyColorize:ToHex()
+                        changeColor = ColorizeColors.CurrencyColorize:ToHex()
                     end
                     local type = "LUIE_CURRENCY_VENDOR"
 
-                    local parts = {ZO_LinkHandler_ParseLink(itemLink)}
+                    local parts = { ZO_LinkHandler_ParseLink(itemLink) }
                     parts[22] = "1"
-                    parts = table.concat(parts, ":"):sub(2, -1)
+                    parts = table_concat(parts, ":"):sub(2, -1)
                     itemLink = zo_strformat("|H<<1>>|h|h", parts)
 
                     local formattedIcon = (ChatAnnouncements.SV.Inventory.LootIcons and icon and icon ~= "") and ("|t16:16:" .. icon .. "|t ") or ""
@@ -5994,7 +5908,7 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
                         local total1, total2, total3 = GetItemLinkStacks(itemLink)
                         local total = total1 + total2 + total3
                         if total > 1 then
-                            carriedItemTotal = strfmat(" |c%s%s|r %s|cFFFFFF%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+                            carriedItemTotal = string_format(" |c%s%s|r %s|cFFFFFF%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
                         end
                     end
 
@@ -6039,15 +5953,15 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
 
         if not g_weAreInAStore and ChatAnnouncements.SV.Inventory.Loot then
             local change = stackCountChange > 0 and stackCountChange or stackCountChange * -1
-            local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+            local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and ColorizeColors.CurrencyDownColorize:ToHex() or ColorizeColors.CurrencyColorize:ToHex()
             if ChatAnnouncements.SV.Inventory.LootVendorCurrency and ChatAnnouncements.SV.Currency.CurrencyContextMergedColor then
-                changeColor = CurrencyColorize:ToHex()
+                changeColor = ColorizeColors.CurrencyColorize:ToHex()
             end
             local type = "LUIE_CURRENCY_VENDOR"
 
-            local parts = {ZO_LinkHandler_ParseLink(itemLink)}
+            local parts = { ZO_LinkHandler_ParseLink(itemLink) }
             parts[22] = "1"
-            parts = table.concat(parts, ":"):sub(2, -1)
+            parts = table_concat(parts, ":"):sub(2, -1)
             itemLink = zo_strformat("|H<<1>>|h|h", parts)
 
             local formattedIcon = (ChatAnnouncements.SV.Inventory.LootIcons and icon and icon ~= "") and ("|t16:16:" .. icon .. "|t ") or ""
@@ -6058,7 +5972,7 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
                 local total1, total2, total3 = GetItemLinkStacks(itemLink)
                 local total = total1 + total2 + total3
                 if total > 1 then
-                    carriedItemTotal = strfmat(" |c%s%s|r %s|cFFFFFF%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+                    carriedItemTotal = string_format(" |c%s%s|r %s|cFFFFFF%s|r", changeColor, ChatAnnouncements.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
                 end
             end
 
@@ -6088,8 +6002,8 @@ end
 
 -- Makes it so bank withdraw/deposit events only occur when we can confirm the item is crossing over.
 function ChatAnnouncements.BankFixer()
-    InventoryOn = false
-    BankOn = false
+    g_InventoryOn = false
+    g_bankOn = false
 end
 
 function ChatAnnouncements.JusticeStealRemove(eventCode)
@@ -6106,8 +6020,8 @@ function ChatAnnouncements.JusticeDisplayConfiscate()
         end
 
         if ChatAnnouncements.SV.Notify.NotificationConfiscateCA then
-            g_queuedMessages[g_queuedMessagesCounter] = { message = ConfiscateMessage, type = "NOTIFICATION", isSystem = true }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = ConfiscateMessage, type = "NOTIFICATION", isSystem = true }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         else
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, ConfiscateMessage)
@@ -6214,13 +6128,13 @@ function ChatAnnouncements.DisguiseState(eventCode, unitTag, disguiseState)
     if disguiseState == DISGUISE_STATE_DANGER then
         if ChatAnnouncements.SV.Notify.DisguiseWarnCA then
             local message = GetString(LUIE_STRING_CA_JUSTICE_DISGUISE_STATE_DANGER)
-            g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "MESSAGE" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
         if ChatAnnouncements.SV.Notify.DisguiseWarnCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_MAJOR_TEXT, SOUNDS.GROUP_ELECTION_REQUESTED)
-            messageParams:SetText(DisguiseAlertColorize:Colorize(GetString(LUIE_STRING_CA_JUSTICE_DISGUISE_STATE_DANGER)))
+            messageParams:SetText(ColorizeColors.DisguiseAlertColorize:Colorize(GetString(LUIE_STRING_CA_JUSTICE_DISGUISE_STATE_DANGER)))
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COUNTDOWN)
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
@@ -6236,13 +6150,13 @@ function ChatAnnouncements.DisguiseState(eventCode, unitTag, disguiseState)
     if disguiseState == DISGUISE_STATE_SUSPICIOUS then
         if ChatAnnouncements.SV.Notify.DisguiseWarnCA then
             local message = GetString(LUIE_STRING_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS)
-            g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "MESSAGE" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
         if ChatAnnouncements.SV.Notify.DisguiseWarnCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_MAJOR_TEXT, SOUNDS.GROUP_ELECTION_REQUESTED)
-            messageParams:SetText(DisguiseAlertColorize:Colorize(GetString(LUIE_STRING_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS)))
+            messageParams:SetText(ColorizeColors.DisguiseAlertColorize:Colorize(GetString(LUIE_STRING_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS)))
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COUNTDOWN)
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
@@ -6262,8 +6176,8 @@ function ChatAnnouncements.DisguiseState(eventCode, unitTag, disguiseState)
     if g_disguiseState == 1 and (disguiseState == DISGUISE_STATE_NONE) then
         local message = zo_strformat("<<1>> <<2>>", GetString(LUIE_STRING_CA_JUSTICE_DISGUISE_STATE_NONE), Effects.DisguiseIcons[g_currentDisguise].description)
         if ChatAnnouncements.SV.Notify.DisguiseCA then
-            g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "MESSAGE" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
         if ChatAnnouncements.SV.Notify.DisguiseAlert then
@@ -6281,8 +6195,8 @@ function ChatAnnouncements.DisguiseState(eventCode, unitTag, disguiseState)
         g_currentDisguise = GetItemId(BAG_WORN, EQUIP_SLOT_COSTUME) or 0
         local message = zo_strformat("<<1>> <<2>>", GetString(LUIE_STRING_CA_JUSTICE_DISGUISE_STATE_DISGUISED), Effects.DisguiseIcons[g_currentDisguise].description)
         if ChatAnnouncements.SV.Notify.DisguiseCA then
-            g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "MESSAGE" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
         if ChatAnnouncements.SV.Notify.DisguiseAlert then
@@ -6331,8 +6245,8 @@ function ChatAnnouncements.OnPlayerActivated(eventCode)
                 g_currentDisguise = GetItemId(BAG_WORN, EQUIP_SLOT_COSTUME) or 0
                 local message = zo_strformat("<<1>> <<2>>", GetString(LUIE_STRING_CA_JUSTICE_DISGUISE_STATE_DISGUISED), Effects.DisguiseIcons[g_currentDisguise].description)
                 if ChatAnnouncements.SV.Notify.DisguiseCA then
-                    g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
-                    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                    ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "MESSAGE" }
+                    ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                     eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                 end
                 if ChatAnnouncements.SV.Notify.DisguiseAlert then
@@ -6351,8 +6265,8 @@ function ChatAnnouncements.OnPlayerActivated(eventCode)
             if g_disguiseState == 0 then
                 local message = zo_strformat("<<1>> <<2>>", GetString(LUIE_STRING_CA_JUSTICE_DISGUISE_STATE_NONE), Effects.DisguiseIcons[g_currentDisguise].description)
                 if ChatAnnouncements.SV.Notify.DisguiseCA then
-                    g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
-                    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                    ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "MESSAGE" }
+                    ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                     eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                 end
                 if ChatAnnouncements.SV.Notify.DisguiseAlert then
@@ -6449,7 +6363,7 @@ local function ValidateProgressBarParams(barParams)
     local barType = barParams:GetParams()
     if not (barType and PLAYER_PROGRESS_BAR:GetBarTypeInfoByBarType(barType)) then
         local INVALID_VALUE = -1
-        internalassert(false, strfmat("CSAH Bad Bar Params; barType: %d. Triggering Event: %d.", barType or INVALID_VALUE, barParams:GetTriggeringEvent() or INVALID_VALUE))
+        internalassert(false, string_format("CSAH Bad Bar Params; barType: %d. Triggering Event: %d.", barType or INVALID_VALUE, barParams:GetTriggeringEvent() or INVALID_VALUE))
     end
 end
 
@@ -6595,21 +6509,21 @@ function ChatAnnouncements.HookFunction()
                     type = "LUIE_CURRENCY_RIDING_STAMINA"
                 end
                 local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1) + 250)
-                local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+                local changeColor = ChatAnnouncements.SV.Currency.CurrencyContextColor and ColorizeColors.CurrencyDownColorize:ToHex() or ColorizeColors.CurrencyColorize:ToHex()
                 local changeType = ZO_LocalizeDecimalNumber(250)
-                local currencyTypeColor = CurrencyGoldColorize:ToHex()
+                local currencyTypeColor = ColorizeColors.CurrencyGoldColorize:ToHex()
                 local currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
                 local currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyGoldName, 250)
                 local currencyTotal = ChatAnnouncements.SV.Currency.CurrencyGoldShowTotal
                 local messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalGold
                 local messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageStable
-                ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
+                ChatAnnouncements.CurrencyPrinter(nil, formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
             end
 
             if ChatAnnouncements.SV.Notify.StorageRidingCA then
-                local formattedString = StorageRidingColorize:Colorize(zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
-                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
-                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                local formattedString = ColorizeColors.StorageRidingColorize:Colorize(zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
 
@@ -6645,11 +6559,11 @@ function ChatAnnouncements.HookFunction()
                 local bookName
                 local bookLink
                 if ChatAnnouncements.SV.BracketOptionLorebook == 1 then
-                    bookName = strfmat("%s", title)
-                    bookLink = strfmat("|H0:LINK_TYPE_LUIBOOK:%s:%s:%s|h%s|h", categoryIndex, collectionIndex, bookIndex, bookName)
+                    bookName = string_format("%s", title)
+                    bookLink = string_format("|H0:LINK_TYPE_LUIBOOK:%s:%s:%s|h%s|h", categoryIndex, collectionIndex, bookIndex, bookName)
                 else
-                    bookName = strfmat("[%s]", title)
-                    bookLink = strfmat("|H1:LINK_TYPE_LUIBOOK:%s:%s:%s|h%s|h", categoryIndex, collectionIndex, bookIndex, bookName)
+                    bookName = string_format("[%s]", title)
+                    bookLink = string_format("|H1:LINK_TYPE_LUIBOOK:%s:%s:%s|h%s|h", categoryIndex, collectionIndex, bookIndex, bookName)
                 end
 
                 local stringPrefix
@@ -6670,19 +6584,19 @@ function ChatAnnouncements.HookFunction()
                     local stringPart1
                     local stringPart2
                     if stringPrefix ~= "" then
-                        stringPart1 = LorebookColorize1:Colorize(zo_strformat("<<1>><<2>><<3>> ", bracket1[ChatAnnouncements.SV.Lorebooks.LorebookBracket], stringPrefix, bracket2[ChatAnnouncements.SV.Lorebooks.LorebookBracket]))
+                        stringPart1 = ColorizeColors.LorebookColorize1:Colorize(zo_strformat("<<1>><<2>><<3>> ", bracket1[ChatAnnouncements.SV.Lorebooks.LorebookBracket], stringPrefix, bracket2[ChatAnnouncements.SV.Lorebooks.LorebookBracket]))
                     else
                         stringPart1 = ""
                     end
                     if ChatAnnouncements.SV.Lorebooks.LorebookCategory then
-                        stringPart2 = collectionName ~= "" and LorebookColorize2:Colorize(zo_strformat(" <<1>> <<2>>.", GetString(LUIE_STRING_CA_LOREBOOK_ADDED_CA), collectionName)) or LorebookColorize2:Colorize(zo_strformat(" <<1>> <<2>>.", GetString(LUIE_STRING_CA_LOREBOOK_ADDED_CA), GetString(SI_WINDOW_TITLE_LORE_LIBRARY)))
+                        stringPart2 = collectionName ~= "" and ColorizeColors.LorebookColorize2:Colorize(zo_strformat(" <<1>> <<2>>.", GetString(LUIE_STRING_CA_LOREBOOK_ADDED_CA), collectionName)) or ColorizeColors.LorebookColorize2:Colorize(zo_strformat(" <<1>> <<2>>.", GetString(LUIE_STRING_CA_LOREBOOK_ADDED_CA), GetString(SI_WINDOW_TITLE_LORE_LIBRARY)))
                     else
                         stringPart2 = ""
                     end
 
                     local finalMessage = zo_strformat("<<1>><<2>><<3>><<4>>", stringPart1, formattedIcon, bookLink, stringPart2)
-                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "COLLECTIBLE" }
-                    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                    ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "COLLECTIBLE" }
+                    ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                     eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                 end
 
@@ -7342,7 +7256,7 @@ function ChatAnnouncements.HookFunction()
         for i = 1, 5 do
             local guild = GuildIndexData[i]
             if guild.name == guildName then
-                local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guild.guildAlliance) or GuildColorize
+                local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guild.guildAlliance) or ColorizeColors.GuildColorize
                 local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guild.guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
                 local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guild.guildAlliance), "100%", "100%", guildName) or guildName
                 local messageString = (ShouldDisplaySelfKickedFromGuildAlert(guildId)) and SI_GUILD_SELF_KICKED_FROM_GUILD or LUIE_STRING_CA_GUILD_LEAVE_SELF
@@ -7378,8 +7292,8 @@ function ChatAnnouncements.HookFunction()
     local function LockpickFailedAlert(result)
         if ChatAnnouncements.SV.Notify.NotificationLockpickCA then
             local message = GetString(LUIE_STRING_CA_LOCKPICK_FAILED)
-            g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "NOTIFICATION" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "NOTIFICATION" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
         if ChatAnnouncements.SV.Notify.NotificationLockpickAlert then
@@ -7391,11 +7305,6 @@ function ChatAnnouncements.HookFunction()
         end, 200)
         return true
     end
-
-    ZO_ClientInteractResultSpecificSound = {
-        [CLIENT_INTERACT_RESULT_LOCK_TOO_DIFFICULT] = SOUNDS.LOCKPICKING_NO_LOCKPICKS,
-        [CLIENT_INTERACT_RESULT_NO_LOCKPICKS] = SOUNDS.LOCKPICKING_NO_LOCKPICKS,
-    }
 
     -- EVENT_CLIENT_INTERACT_RESULT (Alert Handler)
     local function ClientInteractResult(result, interactTargetName)
@@ -7538,8 +7447,8 @@ function ChatAnnouncements.HookFunction()
     local function TradeSucceededAlert()
         if ChatAnnouncements.SV.Notify.NotificationTradeCA then
             local message = GetString(SI_TRADE_COMPLETE)
-            g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "NOTIFICATION", isSystem = true }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "NOTIFICATION", isSystem = true }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
         if ChatAnnouncements.SV.Notify.NotificationTradeAlert then
@@ -7599,9 +7508,9 @@ function ChatAnnouncements.HookFunction()
 
             -- Stop currency messages from printing here
             if reason == MAIL_SEND_RESULT_FAIL_INVALID_NAME then
-                for i = 1, #g_queuedMessages do
-                    if g_queuedMessages[i].type == "CURRENCY" then
-                        g_queuedMessages[i].type = "GARBAGE"
+                for i = 1, #ChatAnnouncements.QueuedMessages do
+                    if ChatAnnouncements.QueuedMessages[i].type == "CURRENCY" then
+                        ChatAnnouncements.QueuedMessages[i].type = "GARBAGE"
                     end
                 end
                 eventManager:UnregisterForEvent(moduleName, EVENT_CURRENCY_UPDATE)
@@ -7689,11 +7598,11 @@ function ChatAnnouncements.HookFunction()
             local bookName
             local bookLink
             if ChatAnnouncements.SV.BracketOptionLorebook == 1 then
-                bookName = strfmat("%s", title)
-                bookLink = strfmat("|H0:LINK_TYPE_LUIBOOK:%s:%s:%s|h%s|h", categoryIndex, collectionIndex, bookIndex, bookName)
+                bookName = string_format("%s", title)
+                bookLink = string_format("|H0:LINK_TYPE_LUIBOOK:%s:%s:%s|h%s|h", categoryIndex, collectionIndex, bookIndex, bookName)
             else
-                bookName = strfmat("[%s]", title)
-                bookLink = strfmat("|H1:LINK_TYPE_LUIBOOK:%s:%s:%s|h%s|h", categoryIndex, collectionIndex, bookIndex, bookName)
+                bookName = string_format("[%s]", title)
+                bookLink = string_format("|H1:LINK_TYPE_LUIBOOK:%s:%s:%s|h%s|h", categoryIndex, collectionIndex, bookIndex, bookName)
             end
 
             local stringPrefix
@@ -7714,19 +7623,19 @@ function ChatAnnouncements.HookFunction()
                 local stringPart1
                 local stringPart2
                 if stringPrefix ~= "" then
-                    stringPart1 = LorebookColorize1:Colorize(zo_strformat("<<1>><<2>><<3>> ", bracket1[ChatAnnouncements.SV.Lorebooks.LorebookBracket], stringPrefix, bracket2[ChatAnnouncements.SV.Lorebooks.LorebookBracket]))
+                    stringPart1 = ColorizeColors.LorebookColorize1:Colorize(zo_strformat("<<1>><<2>><<3>> ", bracket1[ChatAnnouncements.SV.Lorebooks.LorebookBracket], stringPrefix, bracket2[ChatAnnouncements.SV.Lorebooks.LorebookBracket]))
                 else
                     stringPart1 = ""
                 end
                 if ChatAnnouncements.SV.Lorebooks.LorebookCategory then
-                    stringPart2 = collectionName ~= "" and LorebookColorize2:Colorize(zo_strformat(" <<1>> <<2>>.", GetString(LUIE_STRING_CA_LOREBOOK_ADDED_CA), collectionName)) or LorebookColorize2:Colorize(zo_strformat(" <<1>> <<2>>.", GetString(LUIE_STRING_CA_LOREBOOK_ADDED_CA), GetString(SI_WINDOW_TITLE_LORE_LIBRARY)))
+                    stringPart2 = collectionName ~= "" and ColorizeColors.LorebookColorize2:Colorize(zo_strformat(" <<1>> <<2>>.", GetString(LUIE_STRING_CA_LOREBOOK_ADDED_CA), collectionName)) or ColorizeColors.LorebookColorize2:Colorize(zo_strformat(" <<1>> <<2>>.", GetString(LUIE_STRING_CA_LOREBOOK_ADDED_CA), GetString(SI_WINDOW_TITLE_LORE_LIBRARY)))
                 else
                     stringPart2 = ""
                 end
 
                 local finalMessage = zo_strformat("<<1>><<2>><<3>><<4>>", stringPart1, formattedIcon, bookLink, stringPart2)
-                g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "COLLECTIBLE" }
-                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "COLLECTIBLE" }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
 
@@ -7779,7 +7688,7 @@ function ChatAnnouncements.HookFunction()
                     local stringPart1
                     local stringPart2
                     if stringPrefix ~= "" then
-                        stringPart1 = LorebookColorize1:Colorize(zo_strformat("<<1>><<2>><<3>> ", bracket1[ChatAnnouncements.SV.Lorebooks.LorebookBracket], stringPrefix, bracket2[ChatAnnouncements.SV.Lorebooks.LorebookBracket]))
+                        stringPart1 = ColorizeColors.LorebookColorize1:Colorize(zo_strformat("<<1>><<2>><<3>> ", bracket1[ChatAnnouncements.SV.Lorebooks.LorebookBracket], stringPrefix, bracket2[ChatAnnouncements.SV.Lorebooks.LorebookBracket]))
                     else
                         stringPart1 = ""
                     end
@@ -7787,14 +7696,14 @@ function ChatAnnouncements.HookFunction()
                         formattedIcon = ChatAnnouncements.SV.Lorebooks.LorebookIcon and ("|t16:16:" .. textureName .. "|t ") or ""
                     end
                     if ChatAnnouncements.SV.Lorebooks.LorebookCategory then
-                        stringPart2 = LorebookColorize2:Colorize(zo_strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
+                        stringPart2 = ColorizeColors.LorebookColorize2:Colorize(zo_strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
                     else
                         stringPart2 = ""
                     end
 
                     local finalMessage = zo_strformat("<<1>><<2>><<3>>", stringPart1, formattedIcon, stringPart2)
-                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "COLLECTIBLE" }
-                    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                    ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "COLLECTIBLE" }
+                    ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                     eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                 end
 
@@ -7830,7 +7739,7 @@ function ChatAnnouncements.HookFunction()
                     local stringPart1
                     local stringPart2
                     if stringPrefix ~= "" then
-                        stringPart1 = LorebookColorize1:Colorize(zo_strformat("<<1>><<2>><<3>> ", bracket1[ChatAnnouncements.SV.Lorebooks.LorebookBracket], stringPrefix, bracket2[ChatAnnouncements.SV.Lorebooks.LorebookBracket]))
+                        stringPart1 = ColorizeColors.LorebookColorize1:Colorize(zo_strformat("<<1>><<2>><<3>> ", bracket1[ChatAnnouncements.SV.Lorebooks.LorebookBracket], stringPrefix, bracket2[ChatAnnouncements.SV.Lorebooks.LorebookBracket]))
                     else
                         stringPart1 = ""
                     end
@@ -7838,14 +7747,14 @@ function ChatAnnouncements.HookFunction()
                         formattedIcon = ChatAnnouncements.SV.Lorebooks.LorebookIcon and zo_strformat("<<1>> ", zo_iconFormat(textureName, 16, 16)) or ""
                     end
                     if ChatAnnouncements.SV.Lorebooks.LorebookCategory then
-                        stringPart2 = LorebookColorize2:Colorize(zo_strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
+                        stringPart2 = ColorizeColors.LorebookColorize2:Colorize(zo_strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
                     else
                         stringPart2 = ""
                     end
 
                     local finalMessage = zo_strformat("<<1>><<2>><<3>>", stringPart1, formattedIcon, stringPart2)
-                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "COLLECTIBLE" }
-                    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                    ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "COLLECTIBLE" }
+                    ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                     eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                 end
 
@@ -7905,15 +7814,15 @@ function ChatAnnouncements.HookFunction()
                 finalText = zo_strformat("<<1>> (<<2>>/<<3>>)", largeText, newPartialPoints, NUM_PARTIAL_SKILL_POINTS_FOR_FULL)
                 if hasStringPrefix then
                     if ChatAnnouncements.SV.Skills.SkillPointsPartial then
-                        stringPart1 = SkillPointColorize1:Colorize(zo_strformat("<<1>><<2>><<3>> ", bracket1[ChatAnnouncements.SV.Skills.SkillPointBracket], largeText, bracket2[ChatAnnouncements.SV.Skills.SkillPointBracket]))
+                        stringPart1 = ColorizeColors.SkillPointColorize1:Colorize(zo_strformat("<<1>><<2>><<3>> ", bracket1[ChatAnnouncements.SV.Skills.SkillPointBracket], largeText, bracket2[ChatAnnouncements.SV.Skills.SkillPointBracket]))
                     else
-                        stringPart1 = SkillPointColorize1:Colorize(zo_strformat("<<1>>!", largeText))
+                        stringPart1 = ColorizeColors.SkillPointColorize1:Colorize(zo_strformat("<<1>>!", largeText))
                     end
                 else
                     stringPart1 = ""
                 end
                 if ChatAnnouncements.SV.Skills.SkillPointsPartial then
-                    stringPart2 = SkillPointColorize2:Colorize(skyshardGainedPoints)
+                    stringPart2 = ColorizeColors.SkillPointColorize2:Colorize(skyshardGainedPoints)
                 else
                     stringPart2 = ""
                 end
@@ -7930,11 +7839,11 @@ function ChatAnnouncements.HookFunction()
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_POINTS_GAINED)
                 finalText = messageText
                 if hasStringPrefix then
-                    stringPart1 = SkillPointColorize1:Colorize(zo_strformat("<<1>><<2>><<3>> ", bracket1[ChatAnnouncements.SV.Skills.SkillPointBracket], largeText, bracket2[ChatAnnouncements.SV.Skills.SkillPointBracket]))
+                    stringPart1 = ColorizeColors.SkillPointColorize1:Colorize(zo_strformat("<<1>><<2>><<3>> ", bracket1[ChatAnnouncements.SV.Skills.SkillPointBracket], largeText, bracket2[ChatAnnouncements.SV.Skills.SkillPointBracket]))
                 else
                     stringPart1 = ""
                 end
-                stringPart2 = SkillPointColorize2:Colorize(messageText)
+                stringPart2 = ColorizeColors.SkillPointColorize2:Colorize(messageText)
                 finalMessage = zo_strformat("<<1>><<2>>.", stringPart1, stringPart2)
             end
         elseif numSkillPointsGained > 0 then
@@ -7944,13 +7853,13 @@ function ChatAnnouncements.HookFunction()
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_POINTS_GAINED)
                 local skillPointGained = zo_strformat(SI_SKILL_POINT_GAINED, numSkillPointsGained)
                 messageParams:SetText(skillPointGained)
-                finalMessage = SkillPointColorize2:Colorize(skillPointGained .. ".")
+                finalMessage = ColorizeColors.SkillPointColorize2:Colorize(skillPointGained .. ".")
                 finalText = skillPointGained .. "."
             end
         end
         if flagDisplay then
             if ChatAnnouncements.SV.Skills.SkillPointCA and finalMessage ~= "" then
-                table.insert(g_queuedMessages, { message = finalMessage, type = "SKILL" })
+                table_insert(ChatAnnouncements.QueuedMessages, { message = finalMessage, type = "SKILL" })
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
             if ChatAnnouncements.SV.Skills.SkillPointCSA then
@@ -7976,9 +7885,9 @@ function ChatAnnouncements.HookFunction()
 
             if ChatAnnouncements.SV.Skills.SkillLineUnlockCA then
                 local formattedIcon = ChatAnnouncements.SV.Skills.SkillLineIcon and zo_strformat("<<1>> ", zo_iconFormatInheritColor(icon, 16, 16)) or ""
-                local formattedString = SkillLineColorize:Colorize(zo_strformat(LUIE_STRING_CA_SKILL_LINE_ADDED, formattedIcon, lineName))
-                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL GAIN" }
-                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                local formattedString = ColorizeColors.SkillLineColorize:Colorize(zo_strformat(LUIE_STRING_CA_SKILL_LINE_ADDED, formattedIcon, lineName))
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "SKILL GAIN" }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
             if ChatAnnouncements.SV.Skills.SkillLineUnlockCSA then
@@ -8008,9 +7917,9 @@ function ChatAnnouncements.HookFunction()
 
         if atMorph then
             if ChatAnnouncements.SV.Skills.SkillAbilityCA then
-                local formattedString = SkillLineColorize:Colorize(zo_strformat(SI_MORPH_AVAILABLE_ANNOUNCEMENT, name) .. ".")
-                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL MORPH" }
-                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                local formattedString = ColorizeColors.SkillLineColorize:Colorize(zo_strformat(SI_MORPH_AVAILABLE_ANNOUNCEMENT, name) .. ".")
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "SKILL MORPH" }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
 
@@ -8031,9 +7940,9 @@ function ChatAnnouncements.HookFunction()
             end
         else
             if ChatAnnouncements.SV.Skills.SkillAbilityCA then
-                local formattedString = SkillLineColorize:Colorize(zo_strformat(LUIE_STRING_CA_ABILITY_RANK_UP, name, rank) .. ".")
-                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL" }
-                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                local formattedString = ColorizeColors.SkillLineColorize:Colorize(zo_strformat(LUIE_STRING_CA_ABILITY_RANK_UP, name, rank) .. ".")
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "SKILL" }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
 
@@ -8066,9 +7975,9 @@ function ChatAnnouncements.HookFunction()
                 local lineName = skillLineData:GetName()
 
                 if ChatAnnouncements.SV.Skills.SkillLineCA then
-                    local formattedString = SkillLineColorize:Colorize(zo_strformat(SI_SKILL_RANK_UP, lineName, rank) .. ".")
-                    g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL LINE" }
-                    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                    local formattedString = ColorizeColors.SkillLineColorize:Colorize(zo_strformat(SI_SKILL_RANK_UP, lineName, rank) .. ".")
+                    ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "SKILL LINE" }
+                    ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                     eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                 end
 
@@ -8108,7 +8017,7 @@ function ChatAnnouncements.HookFunction()
                     messageParams:SetBarParams(barParams)
                     CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
                 else
-                    internalassert(false, strfmat("No Rank Start XP %d %d %d %d %d %d", skillType, skillLineIndex, reason, rank, previousXP, currentXP))
+                    internalassert(false, string_format("No Rank Start XP %d %d %d %d %d %d", skillType, skillLineIndex, reason, rank, previousXP, currentXP))
                 end
             end
         end
@@ -8127,14 +8036,14 @@ function ChatAnnouncements.HookFunction()
                     if ChatAnnouncements.SV.Collectibles.CollectibleCA then
                         local string1
                         if stringPrefix ~= "" then
-                            string1 = CollectibleColorize1:Colorize(zo_strformat("<<1>><<2>><<3>> ", bracket1[ChatAnnouncements.SV.Collectibles.CollectibleBracket], stringPrefix, bracket2[ChatAnnouncements.SV.Collectibles.CollectibleBracket]))
+                            string1 = ColorizeColors.CollectibleColorize1:Colorize(zo_strformat("<<1>><<2>><<3>> ", bracket1[ChatAnnouncements.SV.Collectibles.CollectibleBracket], stringPrefix, bracket2[ChatAnnouncements.SV.Collectibles.CollectibleBracket]))
                         else
                             string1 = ""
                         end
-                        local string2 = CollectibleColorize2:Colorize(zo_strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, #nowOwnedCollectibles) .. ".")
+                        local string2 = ColorizeColors.CollectibleColorize2:Colorize(zo_strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, #nowOwnedCollectibles) .. ".")
                         local finalString = zo_strformat("<<1>><<2>>", string1, string2)
-                        g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "COLLECTIBLE" }
-                        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalString, type = "COLLECTIBLE" }
+                        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                     end
 
@@ -8169,11 +8078,11 @@ function ChatAnnouncements.HookFunction()
 
                         if ChatAnnouncements.SV.Collectibles.CollectibleCA then
                             local link = GetCollectibleLink(collectibleId, linkBrackets[ChatAnnouncements.SV.BracketOptionCollectible])
-                            local formattedIcon = ChatAnnouncements.SV.Collectibles.CollectibleIcon and strfmat("|t16:16:%s|t ", icon) or ""
+                            local formattedIcon = ChatAnnouncements.SV.Collectibles.CollectibleIcon and string_format("|t16:16:%s|t ", icon) or ""
 
                             local string1
                             if stringPrefix ~= "" then
-                                string1 = CollectibleColorize1:Colorize(zo_strformat("<<1>><<2>><<3>> ", bracket1[ChatAnnouncements.SV.Collectibles.CollectibleBracket], stringPrefix, bracket2[ChatAnnouncements.SV.Collectibles.CollectibleBracket]))
+                                string1 = ColorizeColors.CollectibleColorize1:Colorize(zo_strformat("<<1>><<2>><<3>> ", bracket1[ChatAnnouncements.SV.Collectibles.CollectibleBracket], stringPrefix, bracket2[ChatAnnouncements.SV.Collectibles.CollectibleBracket]))
                             else
                                 string1 = ""
                             end
@@ -8187,13 +8096,13 @@ function ChatAnnouncements.HookFunction()
                                 else
                                     categoryString = categoryName
                                 end
-                                string2 = CollectibleColorize2:Colorize(zo_strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, link, categoryString) .. ".")
+                                string2 = ColorizeColors.CollectibleColorize2:Colorize(zo_strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, link, categoryString) .. ".")
                             else
                                 string2 = link
                             end
                             local finalString = zo_strformat("<<1>><<2>><<3>>", string1, formattedIcon, string2)
-                            g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "COLLECTIBLE" }
-                            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalString, type = "COLLECTIBLE" }
+                            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                         end
 
@@ -8302,24 +8211,24 @@ function ChatAnnouncements.HookFunction()
             local formattedString
 
             if ChatAnnouncements.SV.Quests.QuestLong then
-                questNameFormatted = (zo_strformat("|c<<1>><<2>>:|r |c<<3>><<4>>|r", QuestColorQuestNameColorize:ToHex(), questName, QuestColorQuestDescriptionColorize, stepText))
+                questNameFormatted = (zo_strformat("|c<<1>><<2>>:|r |c<<3>><<4>>|r", ColorizeColors.QuestColorQuestNameColorize:ToHex(), questName, ColorizeColors.QuestColorQuestDescriptionColorize, stepText))
             else
-                questNameFormatted = (zo_strformat("|c<<1>><<2>>|r", QuestColorQuestNameColorize:ToHex(), questName))
+                questNameFormatted = (zo_strformat("|c<<1>><<2>>|r", ColorizeColors.QuestColorQuestNameColorize:ToHex(), questName))
             end
             if iconTexture and ChatAnnouncements.SV.Quests.QuestIcon then
-                formattedString = strfmat(GetString(LUIE_STRING_CA_QUEST_ACCEPT) .. zo_iconFormat(iconTexture, 16, 16) .. " " .. questNameFormatted)
+                formattedString = string_format(GetString(LUIE_STRING_CA_QUEST_ACCEPT) .. zo_iconFormat(iconTexture, 16, 16) .. " " .. questNameFormatted)
             else
-                formattedString = strfmat("%s%s", GetString(LUIE_STRING_CA_QUEST_ACCEPT), questNameFormatted)
+                formattedString = string_format("%s%s", GetString(LUIE_STRING_CA_QUEST_ACCEPT), questNameFormatted)
             end
 
             -- If this message is duplicated by another addon then don't display twice.
-            for i = 1, #g_queuedMessages do
-                if g_queuedMessages[i].message == formattedString then
+            for i = 1, #ChatAnnouncements.QueuedMessages do
+                if ChatAnnouncements.QueuedMessages[i].message == formattedString then
                     return true
                 end
             end
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "QUEST" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -8367,13 +8276,13 @@ function ChatAnnouncements.HookFunction()
                 formattedString = zo_strformat(SI_NOTIFYTEXT_QUEST_COMPLETE, questNameFormatted)
             end
             -- This event double fires on quest completion, if an equivalent message is already detected in queue, then abort!
-            for i = 1, #g_queuedMessages do
-                if g_queuedMessages[i].message == formattedString then
+            for i = 1, #ChatAnnouncements.QueuedMessages do
+                if ChatAnnouncements.QueuedMessages[i].message == formattedString then
                     return true
                 end
             end
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "QUEST" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -8399,9 +8308,9 @@ function ChatAnnouncements.HookFunction()
         local formattedText
 
         if ChatAnnouncements.SV.Quests.QuestLocLong and finishedDescription ~= "" then
-            nameFormatted = (zo_strformat("|c<<1>><<2>>:|r |c<<3>><<4>>|r", QuestColorLocNameColorize, name, QuestColorLocDescriptionColorize, finishedDescription))
+            nameFormatted = (zo_strformat("|c<<1>><<2>>:|r |c<<3>><<4>>|r", ColorizeColors.QuestColorLocNameColorize, name, ColorizeColors.QuestColorLocDescriptionColorize, finishedDescription))
         else
-            nameFormatted = (zo_strformat("|c<<1>><<2>>|r", QuestColorLocNameColorize, name))
+            nameFormatted = (zo_strformat("|c<<1>><<2>>|r", ColorizeColors.QuestColorLocNameColorize, name))
         end
         formattedText = zo_strformat(SI_NOTIFYTEXT_OBJECTIVE_COMPLETE, nameFormatted)
 
@@ -8421,13 +8330,13 @@ function ChatAnnouncements.HookFunction()
 
         if ChatAnnouncements.SV.Quests.QuestCompleteCA then
             -- This event double fires on quest completion, if an equivalent message is already detected in queue, then abort!
-            for i = 1, #g_queuedMessages do
-                if g_queuedMessages[i].message == formattedText then
+            for i = 1, #ChatAnnouncements.QueuedMessages do
+                if ChatAnnouncements.QueuedMessages[i].message == formattedText then
                     return true
                 end
             end
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedText, type = "QUEST" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedText, type = "QUEST" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -8524,13 +8433,13 @@ function ChatAnnouncements.HookFunction()
         if type == 1 then
             if ChatAnnouncements.SV.Quests.QuestObjCompleteCA then
                 -- This event double fires on quest completion, if an equivalent message is already detected in queue, then abort!
-                for i = 1, #g_queuedMessages do
-                    if g_queuedMessages[i].message == formattedMessage then
+                for i = 1, #ChatAnnouncements.QueuedMessages do
+                    if ChatAnnouncements.QueuedMessages[i].message == formattedMessage then
                         return true
                     end
                 end
-                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedMessage, type = "MESSAGE" } -- We set the message type to MESSAGE so if we loot a quest item that progresses the quest this comes after.
-                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedMessage, type = "MESSAGE" } -- We set the message type to MESSAGE so if we loot a quest item that progresses the quest this comes after.
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
             if ChatAnnouncements.SV.Quests.QuestObjCompleteCSA then
@@ -8547,13 +8456,13 @@ function ChatAnnouncements.HookFunction()
         if type == 2 then
             if ChatAnnouncements.SV.Quests.QuestFailCA then
                 -- This event double fires on quest completion, if an equivalent message is already detected in queue, then abort!
-                for i = 1, #g_queuedMessages do
-                    if g_queuedMessages[i].message == formattedMessage then
+                for i = 1, #ChatAnnouncements.QueuedMessages do
+                    if ChatAnnouncements.QueuedMessages[i].message == formattedMessage then
                         return true
                     end
                 end
-                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedMessage, type = "MESSAGE" }
-                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedMessage, type = "MESSAGE" }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
             if ChatAnnouncements.SV.Quests.QuestFailCSA then
@@ -8573,12 +8482,12 @@ function ChatAnnouncements.HookFunction()
     -- EVENT_QUEST_OPTIONAL_STEP_ADVANCED (CSA Handler)
     local function OptionalStepHook(text)
         if text ~= "" then
-            local message = zo_strformat("|c<<1>><<2>>|r", QuestColorQuestDescriptionColorize, text)
+            local message = zo_strformat("|c<<1>><<2>>|r", ColorizeColors.QuestColorQuestDescriptionColorize, text)
             local formattedString = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, message)
 
             if ChatAnnouncements.SV.Quests.QuestObjCompleteCA then
-                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
-                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
 
@@ -8624,8 +8533,8 @@ function ChatAnnouncements.HookFunction()
                 else
                     formattedString = zo_strformat(LUIE_STRING_CA_QUEST_ABANDONED, questNameFormatted)
                 end
-                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
-                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
 
@@ -8691,14 +8600,14 @@ function ChatAnnouncements.HookFunction()
                 if stepOverrideText ~= "" then
                     if ChatAnnouncements.SV.Quests.QuestObjUpdateCA then
                         -- This event sometimes results in duplicate messages - if an equivalent message is already detected in queue, then abort!
-                        for i = 1, #g_queuedMessages do
-                            if g_queuedMessages[i].message == stepOverrideText then
+                        for i = 1, #ChatAnnouncements.QueuedMessages do
+                            if ChatAnnouncements.QueuedMessages[i].message == stepOverrideText then
                                 -- Set the old message to blank so it gets skipped by the printer
-                                g_queuedMessages[i].message = ""
+                                ChatAnnouncements.QueuedMessages[i].message = ""
                             end
                         end
-                        g_queuedMessages[g_queuedMessagesCounter] = { message = stepOverrideText, type = "MESSAGE" }
-                        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = stepOverrideText, type = "MESSAGE" }
+                        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                     end
                     if ChatAnnouncements.SV.Quests.QuestObjUpdateCSA then
@@ -8718,14 +8627,14 @@ function ChatAnnouncements.HookFunction()
                         if not (isFailCondition or isConditionComplete) and isVisible then
                             if ChatAnnouncements.SV.Quests.QuestObjUpdateCA then
                                 -- This event sometimes results in duplicate messages - if an equivalent message is already detected in queue, then abort!
-                                for i = 1, #g_queuedMessages do
-                                    if g_queuedMessages[i].message == conditionText then
+                                for i = 1, #ChatAnnouncements.QueuedMessages do
+                                    if ChatAnnouncements.QueuedMessages[i].message == conditionText then
                                         -- Set the old message to blank so it gets skipped by the printer
-                                        g_queuedMessages[i].message = ""
+                                        ChatAnnouncements.QueuedMessages[i].message = ""
                                     end
                                 end
-                                g_queuedMessages[g_queuedMessagesCounter] = { message = conditionText, type = "MESSAGE" }
-                                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = conditionText, type = "MESSAGE" }
+                                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                             end
                             if ChatAnnouncements.SV.Quests.QuestObjUpdateCSA then
@@ -8776,10 +8685,10 @@ function ChatAnnouncements.HookFunction()
         ChatAnnouncements.PrintBufferedXP()
 
         if ChatAnnouncements.SV.Quests.QuestLocDiscoveryCA then
-            local nameFormatted = (zo_strformat("|c<<1>><<2>>|r", QuestColorLocNameColorize, subzoneName))
+            local nameFormatted = (zo_strformat("|c<<1>><<2>>|r", ColorizeColors.QuestColorLocNameColorize, subzoneName))
             local formattedString = zo_strformat(LUIE_STRING_CA_QUEST_DISCOVER, nameFormatted)
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "QUEST" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -8813,9 +8722,9 @@ function ChatAnnouncements.HookFunction()
         local name, _, startDescription = GetPOIInfo(zoneIndex, poiIndex)
 
         if ChatAnnouncements.SV.Quests.QuestLocObjectiveCA then
-            local formattedString = (zo_strformat("|c<<1>><<2>>:|r |c<<3>><<4>>|r", QuestColorLocNameColorize, name, QuestColorLocDescriptionColorize, startDescription))
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST_POI" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            local formattedString = (zo_strformat("|c<<1>><<2>>:|r |c<<3>><<4>>|r", ColorizeColors.QuestColorLocNameColorize, name, ColorizeColors.QuestColorLocDescriptionColorize, startDescription))
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "QUEST_POI" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -8890,17 +8799,17 @@ function ChatAnnouncements.HookFunction()
                 if ChatAnnouncements.SV.XP.ExperienceLevelColorByLevel then
                     CurrentLevelFormatted = ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(GetString(SI_GAMEPAD_QUEST_JOURNAL_QUEST_LEVEL) .. " " .. CurrentLevel)
                 else
-                    CurrentLevelFormatted = ExperienceLevelUpColorize:Colorize(GetString(SI_GAMEPAD_QUEST_JOURNAL_QUEST_LEVEL) .. " " .. CurrentLevel)
+                    CurrentLevelFormatted = ColorizeColors.ExperienceLevelUpColorize:Colorize(GetString(SI_GAMEPAD_QUEST_JOURNAL_QUEST_LEVEL) .. " " .. CurrentLevel)
                 end
 
                 local formattedString
                 if ChatAnnouncements.SV.XP.ExperienceLevelColorByLevel then
-                    formattedString = zo_strformat("<<1>><<2>> <<3>><<4>>", ExperienceLevelUpColorize:Colorize(GetString(LUIE_STRING_CA_LVL_ANNOUNCE_XP)), icon, CurrentLevelFormatted, ExperienceLevelUpColorize:Colorize("!"))
+                    formattedString = zo_strformat("<<1>><<2>> <<3>><<4>>", ColorizeColors.ExperienceLevelUpColorize:Colorize(GetString(LUIE_STRING_CA_LVL_ANNOUNCE_XP)), icon, CurrentLevelFormatted, ColorizeColors.ExperienceLevelUpColorize:Colorize("!"))
                 else
-                    formattedString = zo_strformat("<<1>><<2>> <<3>><<4>>", ExperienceLevelUpColorize:Colorize(GetString(LUIE_STRING_CA_LVL_ANNOUNCE_XP)), icon, CurrentLevelFormatted, ExperienceLevelUpColorize:Colorize("!"))
+                    formattedString = zo_strformat("<<1>><<2>> <<3>><<4>>", ColorizeColors.ExperienceLevelUpColorize:Colorize(GetString(LUIE_STRING_CA_LVL_ANNOUNCE_XP)), icon, CurrentLevelFormatted, ColorizeColors.ExperienceLevelUpColorize:Colorize("!"))
                 end
-                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
-                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
 
@@ -8943,8 +8852,8 @@ function ChatAnnouncements.HookFunction()
     local function GetEnlightenedGainedAnnouncement(triggeringEvent)
         local formattedString = zo_strformat("<<1>>! <<2>>", GetString(SI_ENLIGHTENED_STATE_GAINED_HEADER), GetString(SI_ENLIGHTENED_STATE_GAINED_DESCRIPTION))
         if ChatAnnouncements.SV.XP.ExperienceEnlightenedCA then
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -8984,8 +8893,8 @@ function ChatAnnouncements.HookFunction()
             local formattedString = zo_strformat("<<1>>!", GetString(SI_ENLIGHTENED_STATE_LOST_HEADER))
 
             if ChatAnnouncements.SV.XP.ExperienceEnlightenedCA then
-                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
-                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
 
@@ -9062,21 +8971,21 @@ function ChatAnnouncements.HookFunction()
                         icon = "|t16:16:/esoui/art/icons/store_ridinglessons_stamina.dds|t "
                     end
 
-                    local formattedColor = StorageRidingBookColorize:ToHex()
+                    local formattedColor = ColorizeColors.StorageRidingBookColorize:ToHex()
 
                     local messageP1 = ChatAnnouncements.SV.Inventory.LootIcons and (icon .. bookString) or bookString
                     local formattedString = (messageP1 .. "|r|cFFFFFF x" .. value .. "|r|c" .. formattedColor)
-                    local messageP2 = strfmat(learnString, formattedString)
-                    local finalMessage = strfmat("|c%s%s|r", formattedColor, messageP2)
+                    local messageP2 = string_format(learnString, formattedString)
+                    local finalMessage = string_format("|c%s%s|r", formattedColor, messageP2)
 
-                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "MESSAGE" }
-                    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                    ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "MESSAGE" }
+                    ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                     eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                 end
 
-                local formattedString = StorageRidingColorize:Colorize(zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
-                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
-                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                local formattedString = ColorizeColors.StorageRidingColorize:Colorize(zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
 
@@ -9128,9 +9037,9 @@ function ChatAnnouncements.HookFunction()
 
         if ChatAnnouncements.SV.XP.ExperienceLevelUpCA then
             local formattedIcon = ChatAnnouncements.SV.XP.ExperienceLevelUpIcon and zo_strformat("<<1>> ", zo_iconFormatInheritColor(icon, 16, 16)) or ""
-            local formattedString = ExperienceLevelUpColorize:Colorize(zo_strformat(GetString(SI_CHAMPION_ANNOUNCEMENT_UNLOCKED), formattedIcon))
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            local formattedString = ColorizeColors.ExperienceLevelUpColorize:Colorize(zo_strformat(GetString(SI_CHAMPION_ANNOUNCEMENT_UNLOCKED), formattedIcon))
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -9200,10 +9109,10 @@ function ChatAnnouncements.HookFunction()
         end
 
         if ChatAnnouncements.SV.XP.ExperienceLevelUpCA then
-            local formattedString = ExperienceLevelUpColorize:Colorize(zo_strformat(SI_CHAMPION_POINT_EARNED, savedPointDelta) .. ": ")
+            local formattedString = ColorizeColors.ExperienceLevelUpColorize:Colorize(zo_strformat(SI_CHAMPION_POINT_EARNED, savedPointDelta) .. ": ")
             eventManager:UnregisterForUpdate(moduleName .. "Printer")
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 25, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -9221,12 +9130,12 @@ function ChatAnnouncements.HookFunction()
                     if ChatAnnouncements.SV.XP.ExperienceLevelColorByLevel then
                         formattedString = ZO_CP_BAR_GRADIENT_COLORS[pointType][2]:Colorize(zo_strformat(LUIE_STRING_CHAMPION_POINT_TYPE, amount, formattedIcon, disciplineName))
                     else
-                        formattedString = ExperienceLevelUpColorize:Colorize(zo_strformat(LUIE_STRING_CHAMPION_POINT_TYPE, amount, formattedIcon, disciplineName))
+                        formattedString = ColorizeColors.ExperienceLevelUpColorize:Colorize(zo_strformat(LUIE_STRING_CHAMPION_POINT_TYPE, amount, formattedIcon, disciplineName))
                     end
                     if ChatAnnouncements.SV.XP.ExperienceLevelUpCA then
                         eventManager:UnregisterForUpdate(moduleName .. "Printer")
-                        g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
-                        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
+                        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                         eventManager:RegisterForUpdate(moduleName .. "Printer", 25, ChatAnnouncements.PrintQueuedMessages)
                     end
                     if ChatAnnouncements.SV.XP.ExperienceLevelUpCSA then
@@ -9882,8 +9791,8 @@ function ChatAnnouncements.HookFunction()
             if settings == LUIE.ChatAnnouncements.SV.DisplayAnnouncements.ZoneIC and language == "en" then
                 local prefix = GetString(LUIE_STRING_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_PREFIX)
                 caPrimary = zo_strgsub(primaryText, prefix, "")
-                caPrimary = settings.Description and strfmat("%s|c%s%s: |r", prefix, QuestColorLocNameColorize, caPrimary) or strfmat("%s|c%s%s|r", prefix, QuestColorLocNameColorize, caPrimary)
-                caSecondary = settings.Description and strfmat("|c%s%s|r", QuestColorLocDescriptionColorize, caSecondary) or ""
+                caPrimary = settings.Description and string_format("%s|c%s%s: |r", prefix, ColorizeColors.QuestColorLocNameColorize, caPrimary) or string_format("%s|c%s%s|r", prefix, ColorizeColors.QuestColorLocNameColorize, caPrimary)
+                caSecondary = settings.Description and string_format("|c%s%s|r", ColorizeColors.QuestColorLocDescriptionColorize, caSecondary) or ""
                 printToChat(caPrimary .. caSecondary)
                 -- Add an "!" to the CA for Craglorn buffs
             elseif settings == LUIE.ChatAnnouncements.SV.DisplayAnnouncements.ZoneCraglorn and language == "en" then
@@ -9965,27 +9874,27 @@ function ChatAnnouncements.HookFunction()
             local _, _, _, icon = GetAchievementInfo(id)
             icon = ChatAnnouncements.SV.Achievement.AchievementIcon and ("|t16:16:" .. icon .. "|t ") or ""
 
-            local stringpart1 = AchievementColorize1:Colorize(strfmat("%s%s%s %s%s", bracket1[ChatAnnouncements.SV.Achievement.AchievementBracketOptions], ChatAnnouncements.SV.Achievement.AchievementCompleteMsg, bracket2[ChatAnnouncements.SV.Achievement.AchievementBracketOptions], icon, link))
+            local stringpart1 = ColorizeColors.AchievementColorize1:Colorize(string_format("%s%s%s %s%s", bracket1[ChatAnnouncements.SV.Achievement.AchievementBracketOptions], ChatAnnouncements.SV.Achievement.AchievementCompleteMsg, bracket2[ChatAnnouncements.SV.Achievement.AchievementBracketOptions], icon, link))
 
             local stringpart2
             if ChatAnnouncements.SV.Achievement.AchievementCompPercentage then
-                stringpart2 = ChatAnnouncements.SV.Achievement.AchievementColorProgress and strfmat(" %s|c71DE73%s|r%s", AchievementColorize2:Colorize("("), "100%", AchievementColorize2:Colorize(")")) or AchievementColorize2:Colorize(" (100%)")
+                stringpart2 = ChatAnnouncements.SV.Achievement.AchievementColorProgress and string_format(" %s|c71DE73%s|r%s", ColorizeColors.AchievementColorize2:Colorize("("), "100%", ColorizeColors.AchievementColorize2:Colorize(")")) or ColorizeColors.AchievementColorize2:Colorize(" (100%)")
             else
                 stringpart2 = ""
             end
 
             local stringpart3
             if ChatAnnouncements.SV.Achievement.AchievementCategory and ChatAnnouncements.SV.Achievement.AchievementSubcategory then
-                stringpart3 = AchievementColorize2:Colorize(strfmat(" %s%s - %s%s", bracket1[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions], catName, subcatName, bracket2[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions]))
+                stringpart3 = ColorizeColors.AchievementColorize2:Colorize(string_format(" %s%s - %s%s", bracket1[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions], catName, subcatName, bracket2[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions]))
             elseif ChatAnnouncements.SV.Achievement.AchievementCategory and not ChatAnnouncements.SV.Achievement.AchievementSubcategory then
-                stringpart3 = AchievementColorize2:Colorize(strfmat(" %s%s%s", bracket1[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions], catName, bracket2[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions]))
+                stringpart3 = ColorizeColors.AchievementColorize2:Colorize(string_format(" %s%s%s", bracket1[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions], catName, bracket2[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions]))
             else
                 stringpart3 = ""
             end
 
-            local finalString = strfmat("%s%s%s", stringpart1, stringpart2, stringpart3)
-            g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "ACHIEVEMENT" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            local finalString = string_format("%s%s%s", stringpart1, stringpart2, stringpart3)
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalString, type = "ACHIEVEMENT" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -10059,20 +9968,20 @@ function ChatAnnouncements.HookFunction()
             local linkColor = antiquityColor:ToHex()
             if ChatAnnouncements.SV.Antiquities.AntiquityBracket == 1 then
                 formattedName = antiquityName
-                antiquityLink = strfmat("|c%s|H0:LINK_TYPE_LUIANTIQUITY:%s|h%s|h|r", linkColor, antiquityId, formattedName)
+                antiquityLink = string_format("|c%s|H0:LINK_TYPE_LUIANTIQUITY:%s|h%s|h|r", linkColor, antiquityId, formattedName)
             else
                 formattedName = ("[" .. antiquityName .. "]")
-                antiquityLink = strfmat("|c%s|H1:LINK_TYPE_LUIANTIQUITY:%s|h%s|h|r", linkColor, antiquityId, formattedName)
+                antiquityLink = string_format("|c%s|H1:LINK_TYPE_LUIANTIQUITY:%s|h%s|h|r", linkColor, antiquityId, formattedName)
             end
 
             local formattedIcon = ChatAnnouncements.SV.Antiquities.AntiquityIcon and ("|t16:16:" .. antiquityIcon .. "|t ") or ""
 
-            local messageP1 = AntiquityColorize:Colorize(strfmat("%s%s%s %s", bracket1[ChatAnnouncements.SV.Antiquities.AntiquityPrefixBracket], ChatAnnouncements.SV.Antiquities.AntiquityPrefix, bracket2[ChatAnnouncements.SV.Antiquities.AntiquityPrefixBracket], formattedIcon))
+            local messageP1 = ColorizeColors.AntiquityColorize:Colorize(string_format("%s%s%s %s", bracket1[ChatAnnouncements.SV.Antiquities.AntiquityPrefixBracket], ChatAnnouncements.SV.Antiquities.AntiquityPrefix, bracket2[ChatAnnouncements.SV.Antiquities.AntiquityPrefixBracket], formattedIcon))
             local messageP2 = antiquityLink
-            local messageP3 = AntiquityColorize:Colorize(" " .. ChatAnnouncements.SV.Antiquities.AntiquitySuffix)
+            local messageP3 = ColorizeColors.AntiquityColorize:Colorize(" " .. ChatAnnouncements.SV.Antiquities.AntiquitySuffix)
             local finalMessage = zo_strformat("<<1>><<2>><<3>>", messageP1, messageP2, messageP3)
-            g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "ANTIQUITY" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "ANTIQUITY" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -10724,7 +10633,7 @@ function ChatAnnouncements.HookFunction()
             inventory.slots[questIndex] = {}
         end
         questItem.slotIndex = questIndex
-        table.insert(inventory.slots[questIndex], questItem)
+        table_insert(inventory.slots[questIndex], questItem)
 
         -- Display Item if set to display
         if ChatAnnouncements.SV.Inventory.LootQuestAdd or ChatAnnouncements.SV.Inventory.LootQuestRemove then
@@ -10836,7 +10745,7 @@ function ChatAnnouncements.HookFunction()
             local displayNameLink = ChatAnnouncements.ResolveNameLink(rawCharacterName, displayName)
             local guildName = self.guildName
             local guildAlliance = GetGuildAlliance(guildId)
-            local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+            local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or ColorizeColors.GuildColorize
             local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
             local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
@@ -10855,7 +10764,7 @@ function ChatAnnouncements.HookFunction()
         local displayNameLink = ChatAnnouncements.ResolveNameLink(rawCharacterName, displayName)
         local guildName = self.guildName
         local guildAlliance = GetGuildAlliance(guildId)
-        local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+        local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or ColorizeColors.GuildColorize
         local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
         local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
@@ -10895,7 +10804,7 @@ function ChatAnnouncements.HookFunction()
 
         local guildName = GetGuildName(guildId)
         local guildAlliance = GetGuildAlliance(guildId)
-        local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+        local guildColor = ChatAnnouncements.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or ColorizeColors.GuildColorize
         local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
         local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
@@ -11284,107 +11193,6 @@ function ChatAnnouncements.DuelStarted(eventCode)
     end
 end
 
-function ChatAnnouncements.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previousXP, currentXP)
-    if skillType == SKILL_TYPE_GUILD then
-        local lineName, _, _, lineId = GetSkillLineInfo(skillType, skillIndex)
-        local formattedName = zo_strformat("<<C:1>>", lineName)
-
-        -- Bail out early if a certain type is not set to be displayed
-        if lineId == 45 and not ChatAnnouncements.SV.Skills.SkillGuildFighters then
-            return
-        elseif lineId == 44 and not ChatAnnouncements.SV.Skills.SkillGuildMages then
-            return
-        elseif lineId == 55 and not ChatAnnouncements.SV.Skills.SkillGuildUndaunted then
-            return
-        elseif lineId == 117 and not ChatAnnouncements.SV.Skills.SkillGuildThieves then
-            return
-        elseif lineId == 118 and not ChatAnnouncements.SV.Skills.SkillGuildDarkBrotherhood then
-            return
-        elseif lineId == 130 and not ChatAnnouncements.SV.Skills.SkillGuildPsijicOrder then
-            return
-        end
-
-        local change = currentXP - previousXP
-        local priority
-
-        if ChatAnnouncements.SV.Skills.SkillGuildAlert then
-            local text = zo_strformat(GetString(LUIE_STRING_CA_SKILL_GUILD_ALERT), formattedName)
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
-        end
-
-        -- Bail out or save value if Throttle/Threshold conditions are met
-        if lineId == 45 then
-            priority = "EXPERIENCE LEVEL"
-            -- FG rep is either a quest reward (10) or kills (1 & 5)
-            -- Only throttle values 5 or lower (FG Dailies give +10 skill)
-            if ChatAnnouncements.SV.Skills.SkillGuildThrottle > 0 and change <= 5 then
-                g_guildSkillThrottle = g_guildSkillThrottle + change
-                g_guildSkillThrottleLine = formattedName
-                eventManager:UnregisterForUpdate(moduleName .. "BufferedRep")
-                eventManager:RegisterForUpdate(moduleName .. "BufferedRep", ChatAnnouncements.SV.Skills.SkillGuildThrottle, ChatAnnouncements.PrintBufferedGuildRep)
-                return
-            end
-
-            -- If throttle wasn't triggered and the value was below threshold then bail out.
-            if change <= ChatAnnouncements.SV.Skills.SkillGuildThreshold then
-                return
-            end
-        end
-
-        if lineId == 44 then
-            -- Mages Guild rep is either a quest reward (10), book discovered (5), collection discovered (20)
-            if change == 10 then
-                priority = "EXPERIENCE LEVEL"
-            else
-                priority = "MESSAGE"
-            end
-        end
-
-        if lineId == 55 or lineId == 117 or lineId == 118 or lineId == 130 then
-            -- Other guilds are usually either a quest reward or achievement reward
-            priority = "EXPERIENCE LEVEL"
-        end
-        ChatAnnouncements.PrintGuildRep(change, formattedName, lineId, priority)
-    end
-end
-
-function ChatAnnouncements.PrintGuildRep(change, lineName, lineId, priority)
-    -- TODO: Move this (not sure where to since putting it in the base function makes it populate before colors are defined)
-    local GUILD_SKILL_COLOR_TABLE = {
-        [45] = SkillGuildColorizeFG,
-        [44] = SkillGuildColorizeMG,
-        [55] = SkillGuildColorizeUD,
-        [117] = SkillGuildColorizeTG,
-        [118] = SkillGuildColorizeDB,
-        [130] = SkillGuildColorizePO,
-    }
-
-    local icon = zo_iconFormatInheritColor(GUILD_SKILL_ICONS[lineId], 16, 16)
-    local formattedIcon = ChatAnnouncements.SV.Skills.SkillGuildIcon and (icon .. " ") or ""
-
-    local guildString = zo_strformat(ChatAnnouncements.SV.Skills.SkillGuildRepName, change)
-    local colorize = GUILD_SKILL_COLOR_TABLE[lineId]
-    local messageP1 = ("|r|c" .. colorize .. formattedIcon .. change .. " " .. lineName .. " " .. guildString .. "|r|c" .. SkillGuildColorize)
-    local formattedMessageP1 = (strfmat(ChatAnnouncements.SV.Skills.SkillGuildMsg, messageP1))
-    local finalMessage = strfmat("|c%s%s|r", SkillGuildColorize, formattedMessageP1)
-
-    -- We set this to skill gain, so as to avoid creating an entire additional chat message category (we want it to show after XP but before any other skill gains or level up so we place it on top of the level up priority).
-    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = priority }
-    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-    eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
-end
-
-function ChatAnnouncements.PrintBufferedGuildRep()
-    if g_guildSkillThrottle > 0 and g_guildSkillThrottle > ChatAnnouncements.SV.Skills.SkillGuildThreshold then
-        local lineId = 45
-        local lineName = g_guildSkillThrottleLine
-        ChatAnnouncements.PrintGuildRep(g_guildSkillThrottle, lineName, lineId, "EXPERIENCE LEVEL")
-    end
-    eventManager:UnregisterForUpdate(moduleName .. "BufferedRep")
-    g_guildSkillThrottle = 0
-    g_guildSkillThrottleLine = ""
-end
-
 function ChatAnnouncements.ResetStackSplit()
     g_stackSplit = false
     eventManager:UnregisterForUpdate(moduleName .. "StackTracker")
@@ -11392,156 +11200,156 @@ end
 
 function ChatAnnouncements.PrintQueuedMessages()
     -- Resolve notification messages first
-    for i = 1, #g_queuedMessages do
-        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "NOTIFICATION" then
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "NOTIFICATION" then
             local isSystem
-            if g_queuedMessages[i].isSystem then
+            if ChatAnnouncements.QueuedMessages[i].isSystem then
                 isSystem = true
             else
                 isSystem = false
             end
-            printToChat(g_queuedMessages[i].message, isSystem)
+            printToChat(ChatAnnouncements.QueuedMessages[i].message, isSystem)
         end
     end
 
     -- Resolve quest POI added
-    for i = 1, #g_queuedMessages do
-        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "QUEST_POI" then
-            printToChat(g_queuedMessages[i].message)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "QUEST_POI" then
+            printToChat(ChatAnnouncements.QueuedMessages[i].message)
         end
     end
 
     -- Next display Quest/Objective Completion and Experience
-    for i = 1, #g_queuedMessages do
-        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and (g_queuedMessages[i].type == "QUEST" or g_queuedMessages[i].type == "EXPERIENCE") then
-            printToChat(g_queuedMessages[i].message)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and (ChatAnnouncements.QueuedMessages[i].type == "QUEST" or ChatAnnouncements.QueuedMessages[i].type == "EXPERIENCE") then
+            printToChat(ChatAnnouncements.QueuedMessages[i].message)
         end
     end
 
     -- Level Up Notifications
-    for i = 1, #g_queuedMessages do
-        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "EXPERIENCE LEVEL" then
-            printToChat(g_queuedMessages[i].message)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "EXPERIENCE LEVEL" then
+            printToChat(ChatAnnouncements.QueuedMessages[i].message)
         end
     end
 
     -- Skill Gain
-    for i = 1, #g_queuedMessages do
-        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "SKILL GAIN" then
-            printToChat(g_queuedMessages[i].message)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "SKILL GAIN" then
+            printToChat(ChatAnnouncements.QueuedMessages[i].message)
         end
     end
 
     -- Skill Morph
-    for i = 1, #g_queuedMessages do
-        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "SKILL MORPH" then
-            printToChat(g_queuedMessages[i].message)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "SKILL MORPH" then
+            printToChat(ChatAnnouncements.QueuedMessages[i].message)
         end
     end
 
     -- Skill Line
-    for i = 1, #g_queuedMessages do
-        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "SKILL LINE" then
-            printToChat(g_queuedMessages[i].message)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "SKILL LINE" then
+            printToChat(ChatAnnouncements.QueuedMessages[i].message)
         end
     end
 
     -- Skill
-    for i = 1, #g_queuedMessages do
-        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "SKILL" then
-            printToChat(g_queuedMessages[i].message)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "SKILL" then
+            printToChat(ChatAnnouncements.QueuedMessages[i].message)
         end
     end
 
     -- Postage
-    for i = 1, #g_queuedMessages do
-        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "CURRENCY POSTAGE" then
-            printToChat(g_queuedMessages[i].message)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "CURRENCY POSTAGE" then
+            printToChat(ChatAnnouncements.QueuedMessages[i].message)
         end
     end
 
     -- Quest Items (Remove)
-    for i = 1, #g_queuedMessages do
-        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "QUEST LOOT REMOVE" then
-            --if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_queuedMessages[i].itemId) end -- TODO: Remove debug later
-            local itemId = g_queuedMessages[i].itemId
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "QUEST LOOT REMOVE" then
+            --if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(ChatAnnouncements.QueuedMessages[i].itemId) end -- TODO: Remove debug later
+            local itemId = ChatAnnouncements.QueuedMessages[i].itemId
             --if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_questItemAdded[itemId]) end -- TODO: Remove debug later
             if not g_questItemAdded[itemId] == true then
-                printToChat(g_queuedMessages[i].message)
+                printToChat(ChatAnnouncements.QueuedMessages[i].message)
             end
         end
     end
 
     -- Loot (Container)
-    for i = 1, #g_queuedMessages do
-        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "CONTAINER" then
-            ChatAnnouncements.ResolveItemMessage(g_queuedMessages[i].message, g_queuedMessages[i].formattedRecipient, g_queuedMessages[i].color, g_queuedMessages[i].logPrefix, g_queuedMessages[i].totalString, g_queuedMessages[i].groupLoot)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "CONTAINER" then
+            ChatAnnouncements.ResolveItemMessage(ChatAnnouncements.QueuedMessages[i].message, ChatAnnouncements.QueuedMessages[i].formattedRecipient, ChatAnnouncements.QueuedMessages[i].color, ChatAnnouncements.QueuedMessages[i].logPrefix, ChatAnnouncements.QueuedMessages[i].totalString, ChatAnnouncements.QueuedMessages[i].groupLoot)
         end
     end
 
     -- Currency
-    for i = 1, #g_queuedMessages do
-        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "CURRENCY" then
-            printToChat(g_queuedMessages[i].message)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "CURRENCY" then
+            printToChat(ChatAnnouncements.QueuedMessages[i].message)
         end
     end
 
     -- Quest Items (ADD)
-    for i = 1, #g_queuedMessages do
-        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "QUEST LOOT ADD" then
-            --if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_queuedMessages[i].itemId) end -- TODO: Remove debug later
-            local itemId = g_queuedMessages[i].itemId
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "QUEST LOOT ADD" then
+            --if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(ChatAnnouncements.QueuedMessages[i].itemId) end -- TODO: Remove debug later
+            local itemId = ChatAnnouncements.QueuedMessages[i].itemId
             --if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_questItemRemoved[itemId]) end -- TODO: Remove debug later
             if not g_questItemRemoved[itemId] == true then
-                printToChat(g_queuedMessages[i].message)
+                printToChat(ChatAnnouncements.QueuedMessages[i].message)
             end
         end
     end
 
     -- Loot
-    for i = 1, #g_queuedMessages do
-        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "LOOT" then
-            ChatAnnouncements.ResolveItemMessage(g_queuedMessages[i].message, g_queuedMessages[i].formattedRecipient, g_queuedMessages[i].color, g_queuedMessages[i].logPrefix, g_queuedMessages[i].totalString, g_queuedMessages[i].groupLoot)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "LOOT" then
+            ChatAnnouncements.ResolveItemMessage(ChatAnnouncements.QueuedMessages[i].message, ChatAnnouncements.QueuedMessages[i].formattedRecipient, ChatAnnouncements.QueuedMessages[i].color, ChatAnnouncements.QueuedMessages[i].logPrefix, ChatAnnouncements.QueuedMessages[i].totalString, ChatAnnouncements.QueuedMessages[i].groupLoot)
         end
     end
 
     -- Resolve achievement update messages second to last
-    for i = 1, #g_queuedMessages do
-        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "ANTIQUITY" then
-            printToChat(g_queuedMessages[i].message)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "ANTIQUITY" then
+            printToChat(ChatAnnouncements.QueuedMessages[i].message)
         end
     end
 
     -- Collectible
-    for i = 1, #g_queuedMessages do
-        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "COLLECTIBLE" then
-            printToChat(g_queuedMessages[i].message)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "COLLECTIBLE" then
+            printToChat(ChatAnnouncements.QueuedMessages[i].message)
         end
     end
 
     -- Resolve achievement update messages second to last
-    for i = 1, #g_queuedMessages do
-        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "ACHIEVEMENT" then
-            printToChat(g_queuedMessages[i].message)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "ACHIEVEMENT" then
+            printToChat(ChatAnnouncements.QueuedMessages[i].message)
         end
     end
 
     -- Display the rest
-    for i = 1, #g_queuedMessages do
-        if g_queuedMessages[i] and g_queuedMessages[i].message ~= "" and g_queuedMessages[i].type == "MESSAGE" then
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "MESSAGE" then
             local isSystem
-            if g_queuedMessages[i].isSystem then
+            if ChatAnnouncements.QueuedMessages[i].isSystem then
                 isSystem = true
             else
                 isSystem = false
             end
-            printToChat(g_queuedMessages[i].message, isSystem)
+            printToChat(ChatAnnouncements.QueuedMessages[i].message, isSystem)
         end
     end
 
     -- Clear Messages and Unregister Print Event
-    g_queuedMessages = {}
-    g_queuedMessagesCounter = 1
+    ChatAnnouncements.QueuedMessages = {}
+    ChatAnnouncements.QueuedMessagesCounter = 1
     eventManager:UnregisterForUpdate(moduleName .. "Printer")
 end
 
@@ -11569,7 +11377,7 @@ function ChatAnnouncements.AnnounceMemento()
     local alert = zo_strformat(string, name, "")
 
     if message and ChatAnnouncements.SV.Collectibles.CollectibleUseCA or LUIE.LastMementoUsed > 0 then
-        message = CollectibleUseColorize:Colorize(message)
+        message = ColorizeColors.CollectibleUseColorize:Colorize(message)
         printToChat(message)
     end
     if alert and ChatAnnouncements.SV.Collectibles.CollectibleUseAlert then
@@ -11804,7 +11612,7 @@ function ChatAnnouncements.CollectibleResult()
     end
 
     if message and ChatAnnouncements.SV.Collectibles.CollectibleUseCA or LUIE.SlashCollectibleOverride then
-        message = CollectibleUseColorize:Colorize(message)
+        message = ColorizeColors.CollectibleUseColorize:Colorize(message)
         printToChat(message)
     end
     if alert and ChatAnnouncements.SV.Collectibles.CollectibleUseAlert then

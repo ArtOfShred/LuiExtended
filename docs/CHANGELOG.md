@@ -1,3 +1,25 @@
+# Version 6.6.8
+
+General
+- Added the ArchivoNarrow font as a selectable option.
+- Added the ability to move the Endless Archive progress tracker (when you Unlock Default UI Elements).
+
+Buffs & Debuffs
+- Updated tooltips for several effects for Cryodiil Siege weapons that were out of date.
+
+Chat Announcements
+- Fixed an error that could occur with currency announcements when purchasing items on the Crown Store.
+- Added an option to show an item loss message when you fillet a fish (manually).
+- Updated the context messages for filleting fish at the provisioning station to "You fillet..."
+- KNOWN ISSUE: When filleting a certain amount of fish (seems to be under ~50) the messages for filleting at the crafting station won't display the proper amount of fish used. You can read more details about this on the pinned post in the LUIE comments on ESOUI.
+
+Combat Info
+- Crowd Control Tracker will now no longer show a CC warning for the cosmetic stun effects when entering various portals in Endless Archive (Thanks ACastanza for finding all these abilityIds).
+- Floating Markers now use a different more detailed texture.
+- Fixed an issue where the Floating Marker was removed when changing zones.
+
+---
+
 # Version 6.6.7
 
 Unit Frames

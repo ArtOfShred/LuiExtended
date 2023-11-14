@@ -11,7 +11,10 @@ local UI = LUIE.UI
 
 local eventManager = EVENT_MANAGER
 local sceneManager = SCENE_MANAGER
-local strfmat = string.format
+
+local pairs = pairs
+local string_format = string.format
+
 local moduleName = LUIE.name .. "InfoPanel"
 
 local colors = {
@@ -37,7 +40,7 @@ InfoPanel.panelUnlocked = false
 local infoPanelFontFace = "/EsoUI/Common/Fonts/Univers67.otf"
 local infoPanelFontSize = 16
 local infoPanelFontStyle = "soft-shadow-thin"
-local g_infoPanelFont = strfmat("%s|%d|%s", infoPanelFontFace, infoPanelFontSize, infoPanelFontStyle)
+local g_infoPanelFont = string_format("%s|%d|%s", infoPanelFontFace, infoPanelFontSize, infoPanelFontStyle)
 
 local uiPanel = nil
 local uiTopRow = nil
@@ -389,7 +392,7 @@ function InfoPanel.DoBagUpdate()
             end
         end
     end
-    uiBags.label:SetText(strfmat("%d/%d", bagUsed, bagSize))
+    uiBags.label:SetText(string_format("%d/%d", bagUsed, bagSize))
     uiBags.label:SetColor(color.r, color.g, color.b, 1)
 
     -- Update soulgems
@@ -430,7 +433,7 @@ function InfoPanel.OnUpdate01()
             end
         end
     end
-    uiFps.label:SetText(strfmat("%d fps", fps))
+    uiFps.label:SetText(string_format("%d fps", fps))
     uiFps.label:SetColor(color.r, color.g, color.b, 1)
 end
 
@@ -447,7 +450,7 @@ function InfoPanel.OnUpdate10()
             end
         end
     end
-    uiLatency.label:SetText(strfmat("%d ms", lat))
+    uiLatency.label:SetText(string_format("%d ms", lat))
     uiLatency.label:SetColor(color.r, color.g, color.b, 1)
 end
 
@@ -468,7 +471,7 @@ function InfoPanel.OnUpdate60()
             elseif mountFeedTimer > 0 then
                 local hours = zo_floor(mountFeedTimer / 3600000)
                 local minutes = zo_floor((mountFeedTimer - (hours * 3600000)) / 60000)
-                mountFeedMessage = strfmat("%dh %dm", hours, minutes)
+                mountFeedMessage = string_format("%dh %dm", hours, minutes)
             end
         end
         uiFeedTimer.label:SetText(mountFeedMessage)
@@ -495,7 +498,7 @@ function InfoPanel.OnUpdate60()
                 break
             end
         end
-        uiArmour.label:SetText(strfmat("%d%%", duraPercentage))
+        uiArmour.label:SetText(string_format("%d%%", duraPercentage))
         uiArmour.label:SetColor(color.r, color.g, color.b, 1)
         uiArmour.icon:SetColor(iconcolor.r, iconcolor.g, iconcolor.b, 1)
     end

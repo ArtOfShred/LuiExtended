@@ -4,7 +4,7 @@
 --]]
 
 -- Just a copy of esoui/ingame/skillsadvisor/gamepad/skillsadvisor_suggestions_gamepad.lua, this is the easiest way to override for custom ability icons.
-
+local table_insert = table.insert
 function LUIE.InitializeHooksSkillAdvisor()
     --------------
     --Initialize--
@@ -188,7 +188,7 @@ function LUIE.InitializeHooksSkillAdvisor()
                 ZO_AppendNarration(narrations, SCREEN_NARRATION_MANAGER:CreateNarratableObject(name))
                 return narrations
             end
-            table.insert(scrollData, ZO_ScrollList_CreateDataEntry(SKILLS_ADVISOR_SUGGESTIONS_DATA, entryData))
+            table_insert(scrollData, ZO_ScrollList_CreateDataEntry(SKILLS_ADVISOR_SUGGESTIONS_DATA, entryData))
             return entryData
         end
 
@@ -201,7 +201,7 @@ function LUIE.InitializeHooksSkillAdvisor()
             local scrollData = ZO_ScrollList_GetDataList(self.list)
 
             local availableHeaderData = ZO_GamepadEntryData:New(GetString(SI_SKILLS_ADVISOR_ADVISED_TITLE))
-            table.insert(scrollData, ZO_ScrollList_CreateDataEntry(SKILLS_ADVISOR_SUGGESTIONS_HEADER_DATA, availableHeaderData))
+            table_insert(scrollData, ZO_ScrollList_CreateDataEntry(SKILLS_ADVISOR_SUGGESTIONS_HEADER_DATA, availableHeaderData))
 
             local availableAbilities = ZO_SKILLS_ADVISOR_SINGLETON:GetAvailableAbilityList()
             if #availableAbilities > 0 then
@@ -217,13 +217,13 @@ function LUIE.InitializeHooksSkillAdvisor()
                 end
             else
                 local textData = ZO_GamepadEntryData:New(GetString(SI_SKILLS_ADVISOR_NO_ADVISED_ABILITIES_DESCRIPTION))
-                table.insert(scrollData, ZO_ScrollList_CreateDataEntry(SKILLS_ADVISOR_SUGGESTIONS_TEXT, textData))
+                table_insert(scrollData, ZO_ScrollList_CreateDataEntry(SKILLS_ADVISOR_SUGGESTIONS_TEXT, textData))
             end
 
             local purchasedAbilities = ZO_SKILLS_ADVISOR_SINGLETON:GetPurchasedAbilityList()
             if #purchasedAbilities > 0 then
                 local purchasedHeaderData = ZO_GamepadEntryData:New(GetString(SI_SKILLS_ADVISOR_PURCHASED_TITLE))
-                table.insert(scrollData, ZO_ScrollList_CreateDataEntry(SKILLS_ADVISOR_SUGGESTIONS_HEADER_DATA, purchasedHeaderData))
+                table_insert(scrollData, ZO_ScrollList_CreateDataEntry(SKILLS_ADVISOR_SUGGESTIONS_HEADER_DATA, purchasedHeaderData))
 
                 for i, skillProgressionData in ipairs(purchasedAbilities) do
                     local entryData = AddEntry(scrollData, skillProgressionData)

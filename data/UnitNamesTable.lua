@@ -3,11 +3,10 @@
     License: The MIT License (MIT)
 --]]
 
-if LUIE.Data.UnitNames == nil then
-    LUIE.Data.UnitNames = {}
-end
+-- UnitNames namespace
+LUIE.Data.UnitNames = {}
 
-LUIE.Data.UnitNames = {
+local UnitNames = {
 
     ----------------------------------------------------------------
     -- TARGET DUMMY NAMES ------------------------------------------
@@ -626,3 +625,5 @@ LUIE.Data.UnitNames = {
     NPC_Coldsnap_Ogre = "Coldsnap Ogre",
     Boss_Icestalker = "Icestalker",
 }
+
+LUIE.Data.UnitNames = UnitNames

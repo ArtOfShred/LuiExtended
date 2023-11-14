@@ -1,10 +1,10 @@
 ## Title: |cE12000L|cFFFFB0ui E|rxtended|
 ## Author: ArtOfShred, DakJaniels, psypanda, Saenic & SpellBuilder
-## Version: 6.6.7
+## Version: 6.6.8
 ## APIVersion: 101040
-## AddOnVersion: 667
+## AddOnVersion: 668
 ## Description: Provides UnitFrames, InfoPanel, Combat Text & Info, Buffs & Debuff Tracking, Chat Announcements and Slash Commands.
-## DependsOn: LibAddonMenu-2.0>=34 LibMediaProvider-1.0>=27
+## DependsOn: LibAddonMenu-2.0>=35 LibMediaProvider-1.0>=27
 ## OptionalDependsOn: LibChatMessage>=105 pChat>=10000309 CombatMetrics>=10515
 ## OptionalDependsOn: LibDebugLogger>=263 DolgubonsLazyWritCreator LibLazyCrafting>=3086 LootLog
 ## IsLibrary: false
@@ -26,27 +26,31 @@ i18n/skills/Skills_en.lua
 i18n/skills/Skills_$(language).lua
 
 #Addon base functions and code
-LuiExtended.lua
-LuiExtended_Log.lua
-Functions.lua
-Hooks-SkillsAdvisor.lua
-Hooks.lua
-Initialize.lua
-UI.lua
-Changelog.lua
-Bindings.xml
+src/LuiExtended.lua
+src/LuiExtended_Log.lua
+src/Functions.lua
+src/Hooks-SkillsAdvisor.lua
+src/Hooks.lua
+src/Initialize.lua
+src/UI.lua
+src/Changelog.lua
+bindings/Bindings.xml
 
 frontend/Changelog.xml
 frontend/CombatText.xml
 frontend/CrowdControlTracker.xml
 
-Unlock.lua
+src/Unlock.lua
 
+data/_data_namespace.lua
 data/AbilityTables.lua
 data/Tooltips.lua
 data/UnitNamesTable.lua
 data/ZoneNamesTable.lua
 data/Effects.lua
+data/EffectsBarHighlight.lua
+data/EffectsFake.lua
+data/EffectsMisc.lua
 data/CastBarTable.lua
 data/CollectibleTables.lua
 data/CombatTextConstants.lua
@@ -59,6 +63,7 @@ data/AbilityBlacklistPresets.lua
 data/CombatTextBlacklistPresets.lua
 
 modules/ChatAnnouncements/ChatAnnouncements.lua
+modules/ChatAnnouncements/ChatAnnouncementsExperience.lua
 
 modules/CombatText/CombatText.lua
 modules/CombatText/Animation.lua

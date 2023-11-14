@@ -7,6 +7,8 @@
 LUIE.SlashCommands = {}
 local SlashCommands = LUIE.SlashCommands
 
+local pairs = pairs
+
 SlashCommands.Enabled = false
 SlashCommands.Defaults = {
     SlashHome = true,
