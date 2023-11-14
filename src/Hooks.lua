@@ -319,7 +319,6 @@ Override function for GetKillingAttackInfo.
 ]]
     local orgOnSynergyAbilityChanged = ZO_Synergy.OnSynergyAbilityChanged
     local OnSynergyAbilityChanged = function (self)
-        orgOnSynergyAbilityChanged(self)
         local synergyName, iconFilename = GetSynergyInfo()
         if LUIE.Data.Effects.SynergyNameOverride[synergyName] then
             if LUIE.Data.Effects.SynergyNameOverride[synergyName].icon then
