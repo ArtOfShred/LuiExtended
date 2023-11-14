@@ -11,8 +11,6 @@ local ChatAnnouncements = LUIE.ChatAnnouncements
 -- Queued Messages Storage for CA Modules
 ChatAnnouncements.QueuedMessages = {}
 ChatAnnouncements.QueuedMessagesCounter = 1
-local QueuedMessages = ChatAnnouncements.QueuedMessages
-local QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter
 
 -- Setup Color Table
 ChatAnnouncements.Colors = {}
@@ -1356,8 +1354,8 @@ function ChatAnnouncements.GuildHeraldrySaved()
 
         if ChatAnnouncements.SV.Social.GuildManageCA then
             local finalMessage = zo_strformat(GetString(LUIE_STRING_CA_GUILD_HERALDRY_UPDATE), guildNameAlliance)
-            QueuedMessages[QueuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION", isSystem = true }
-            QueuedMessagesCounter = QueuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION", isSystem = true }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
         end
         if ChatAnnouncements.SV.Social.GuildManageAlert then
@@ -1401,8 +1399,8 @@ function ChatAnnouncements.GuildRanksSaved(eventCode, guildId)
 
     if ChatAnnouncements.SV.Social.GuildManageCA then
         local finalMessage = zo_strformat(GetString(LUIE_STRING_CA_GUILD_RANKS_UPDATE), guildNameAlliance)
-        QueuedMessages[QueuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION", isSystem = true }
-        QueuedMessagesCounter = QueuedMessagesCounter + 1
+        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION", isSystem = true }
+        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
     end
     if ChatAnnouncements.SV.Social.GuildManageAlert then
@@ -1451,8 +1449,8 @@ function ChatAnnouncements.GuildTextChanged(eventCode, guildId)
     if messageString ~= nil then
         if ChatAnnouncements.SV.Social.GuildManageCA then
             local finalMessage = zo_strformat(GetString(messageString), guildNameAlliance)
-            QueuedMessages[QueuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION", isSystem = true }
-            QueuedMessagesCounter = QueuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION", isSystem = true }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
         if ChatAnnouncements.SV.Social.GuildManageAlert then
@@ -2091,8 +2089,8 @@ function ChatAnnouncements.PointRespecDisplay(respecType)
     local messageCSA = LUIE_AttributeDisplayType[respecType]
 
     if ChatAnnouncements.SV.DisplayAnnouncements.Respec.CA then
-        QueuedMessages[QueuedMessagesCounter] = { message = message, type = "MESSAGE", isSystem = true }
-        QueuedMessagesCounter = QueuedMessagesCounter + 1
+        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "MESSAGE", isSystem = true }
+        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
     end
 
@@ -2660,8 +2658,8 @@ function ChatAnnouncements.CurrencyPrinter(baseCurrencyType, formattedValue, cha
         -- Otherwise sent to our Print Queued Messages function to be processed on a 50 ms delay.
     else
         local resolveType = (type == "LUIE_CURRENCY_POSTAGE" and "CURRENCY POSTAGE") or (baseCurrencyType == CURT_CROWNS and "EXPERIENCE") or "CURRENCY"
-        QueuedMessages[QueuedMessagesCounter] = { message = finalMessage, type = resolveType }
-        QueuedMessagesCounter = QueuedMessagesCounter + 1
+        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = resolveType }
+        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
     end
 end
@@ -2732,8 +2730,8 @@ end
 function ChatAnnouncements.MiscAlertLockSuccess(eventCode)
     if ChatAnnouncements.SV.Notify.NotificationLockpickCA then
         local message = GetString(LUIE_STRING_CA_LOCKPICK_SUCCESS)
-        QueuedMessages[QueuedMessagesCounter] = { message = message, type = "NOTIFICATION" }
-        QueuedMessagesCounter = QueuedMessagesCounter + 1
+        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "NOTIFICATION" }
+        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
     end
     if ChatAnnouncements.SV.Notify.NotificationLockpickAlert then
@@ -2749,8 +2747,8 @@ function ChatAnnouncements.StorageBag(eventCode, previousCapacity, currentCapaci
     if previousCapacity > 0 and previousCapacity ~= currentCapacity and previousUpgrade ~= currentUpgrade then
         if ChatAnnouncements.SV.Notify.StorageBagCA then
             local formattedString = ColorizeColors.StorageBagColorize:Colorize(zo_strformat(SI_INVENTORY_BAG_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
-            QueuedMessages[QueuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
-            QueuedMessagesCounter = QueuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -2765,8 +2763,8 @@ function ChatAnnouncements.StorageBank(eventCode, previousCapacity, currentCapac
     if previousCapacity > 0 and previousCapacity ~= currentCapacity and previousUpgrade ~= currentUpgrade then
         if ChatAnnouncements.SV.Notify.StorageBagCA then
             local formattedString = ColorizeColors.StorageBagColorize:Colorize(zo_strformat(SI_INVENTORY_BANK_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
-            QueuedMessages[QueuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
-            QueuedMessagesCounter = QueuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -2813,8 +2811,8 @@ function ChatAnnouncements.OnBuybackItem(eventCode, itemName, quantity, money, i
         local finalMessageP1 = string_format(carriedItem .. "|r|c" .. changeColor)
         local finalMessageP2 = string_format(messageChange, finalMessageP1)
         local finalMessage = string_format("|c%s%s|r%s", changeColor, finalMessageP2, carriedItemTotal)
-        QueuedMessages[QueuedMessagesCounter] = { message = finalMessage, type = "CURRENCY" }
-        QueuedMessagesCounter = QueuedMessagesCounter + 1
+        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "CURRENCY" }
+        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
     end
     g_savedPurchase = {}
@@ -2942,8 +2940,8 @@ function ChatAnnouncements.OnBuyItem(eventCode, itemName, entryType, quantity, m
         local finalMessageP1 = string_format(carriedItem .. "|r|c" .. changeColor)
         local finalMessageP2 = string_format(messageChange, finalMessageP1)
         local finalMessage = string_format("|c%s%s|r%s", changeColor, finalMessageP2, carriedItemTotal)
-        QueuedMessages[QueuedMessagesCounter] = { message = finalMessage, type = "CURRENCY" }
-        QueuedMessagesCounter = QueuedMessagesCounter + 1
+        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "CURRENCY" }
+        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
     end
 
@@ -2991,8 +2989,8 @@ function ChatAnnouncements.OnSellItem(eventCode, itemName, quantity, money)
         local finalMessageP1 = string_format(carriedItem .. "|r|c" .. changeColor)
         local finalMessageP2 = string_format(messageChange, finalMessageP1)
         local finalMessage = string_format("|c%s%s|r%s", changeColor, finalMessageP2, carriedItemTotal)
-        QueuedMessages[QueuedMessagesCounter] = { message = finalMessage, type = "CURRENCY" }
-        QueuedMessagesCounter = QueuedMessagesCounter + 1
+        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "CURRENCY" }
+        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
     end
     g_savedPurchase = {}
@@ -3047,8 +3045,8 @@ function ChatAnnouncements.TradingHouseResponseReceived(eventCode, TradingHouseR
         local finalMessageP1 = string_format(carriedItem .. "|r|c" .. changeColor)
         local finalMessageP2 = string_format(messageChange, finalMessageP1)
         local finalMessage = string_format("|c%s%s|r%s", changeColor, finalMessageP2, carriedItemTotal)
-        QueuedMessages[QueuedMessagesCounter] = { message = finalMessage, type = type }
-        QueuedMessagesCounter = QueuedMessagesCounter + 1
+        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = type }
+        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageListing
         ChatAnnouncements.CurrencyPrinter(nil, g_savedPurchase.formattedValue, changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, messageChange, g_savedPurchase.messageTotal, type)
@@ -3080,8 +3078,8 @@ function ChatAnnouncements.MailRemoved(eventCode)
     if ChatAnnouncements.SV.Notify.NotificationMailSendCA or ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
         if ChatAnnouncements.SV.Notify.NotificationMailSendCA then
             local message = GetString(LUIE_STRING_CA_MAIL_DELETED_MSG)
-            QueuedMessages[QueuedMessagesCounter] = { message = message, type = "NOTIFICATION", isSystem = true }
-            QueuedMessagesCounter = QueuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "NOTIFICATION", isSystem = true }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
         if ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
@@ -3124,8 +3122,8 @@ function ChatAnnouncements.OnMailTakeAttachedItem(eventCode, mailId)
         end
         if mailString then
             if ChatAnnouncements.SV.Notify.NotificationMailSendCA then
-                QueuedMessages[QueuedMessagesCounter] = { message = mailString, type = "NOTIFICATION", isSystem = true }
-                QueuedMessagesCounter = QueuedMessagesCounter + 1
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = mailString, type = "NOTIFICATION", isSystem = true }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
             if ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
@@ -3219,8 +3217,8 @@ end
 --         end
 --         if mailString then
 --             if ChatAnnouncements.SV.Notify.NotificationMailSendCA then
---                 QueuedMessages[QueuedMessagesCounter] = { message = mailString, type = "NOTIFICATION", isSystem = true }
---                 QueuedMessagesCounter = QueuedMessagesCounter + 1
+--                 ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = mailString, type = "NOTIFICATION", isSystem = true }
+--                 ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
 --                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
 --             end
 --             if ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
@@ -3278,8 +3276,8 @@ function ChatAnnouncements.OnMailSuccess(eventCode)
         end
         if mailString then
             if ChatAnnouncements.SV.Notify.NotificationMailSendCA then
-                QueuedMessages[QueuedMessagesCounter] = { message = mailString, type = "NOTIFICATION", isSystem = true }
-                QueuedMessagesCounter = QueuedMessagesCounter + 1
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = mailString, type = "NOTIFICATION", isSystem = true }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
             if ChatAnnouncements.SV.Notify.NotificationMailSendAlert then
@@ -3441,8 +3439,8 @@ function ChatAnnouncements.OnAchievementUpdated(eventCode, id)
                 end
             end
             local finalString = string_format("%s%s%s%s", stringpart1, stringpart2, stringpart3, stringpart4)
-            QueuedMessages[QueuedMessagesCounter] = { message = finalString, type = "ACHIEVEMENT" }
-            QueuedMessagesCounter = QueuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalString, type = "ACHIEVEMENT" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -3829,8 +3827,8 @@ function ChatAnnouncements.ResolveQuestItemChange()
                         finalMessage = string_format("|c%s%s|r%s", color, formattedMessageP2, totalString)
 
                         eventManager:UnregisterForUpdate(moduleName .. "Printer")
-                        QueuedMessages[QueuedMessagesCounter] = { message = finalMessage, type = "QUEST LOOT REMOVE", itemId = itemId }
-                        QueuedMessagesCounter = QueuedMessagesCounter + 1
+                        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "QUEST LOOT REMOVE", itemId = itemId }
+                        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                         eventManager:RegisterForUpdate(moduleName .. "Printer", 25, ChatAnnouncements.PrintQueuedMessages)
                     end
                 end
@@ -3919,8 +3917,8 @@ function ChatAnnouncements.ResolveQuestItemChange()
                         finalMessage = string_format("|c%s%s|r%s", color, formattedMessageP2, totalString)
 
                         eventManager:UnregisterForUpdate(moduleName .. "Printer")
-                        QueuedMessages[QueuedMessagesCounter] = { message = finalMessage, type = "QUEST LOOT ADD", itemId = itemId }
-                        QueuedMessagesCounter = QueuedMessagesCounter + 1
+                        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "QUEST LOOT ADD", itemId = itemId }
+                        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                         eventManager:RegisterForUpdate(moduleName .. "Printer", 25, ChatAnnouncements.PrintQueuedMessages)
                     end
                 end
@@ -4171,13 +4169,13 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
         end
 
         if g_itemCounterGain == 0 then
-            g_itemCounterGain = QueuedMessagesCounter
+            g_itemCounterGain = ChatAnnouncements.QueuedMessagesCounter
         end
-        if QueuedMessagesCounter - 1 == g_itemCounterGain then
-            QueuedMessagesCounter = g_itemCounterGain
+        if ChatAnnouncements.QueuedMessagesCounter - 1 == g_itemCounterGain then
+            ChatAnnouncements.QueuedMessagesCounter = g_itemCounterGain
         end
-        QueuedMessagesCounter = QueuedMessagesCounter + 1
-        QueuedMessages[g_itemCounterGain] = {
+        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
+        ChatAnnouncements.QueuedMessages[g_itemCounterGain] = {
             message = g_itemStringGain,
             type = messageType,
             formattedRecipient = formattedRecipient,
@@ -4202,13 +4200,13 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
         end
 
         if g_itemCounterLoss == 0 then
-            g_itemCounterLoss = QueuedMessagesCounter
+            g_itemCounterLoss = ChatAnnouncements.QueuedMessagesCounter
         end
-        if QueuedMessagesCounter - 1 == g_itemCounterLoss then
-            QueuedMessagesCounter = g_itemCounterLoss
+        if ChatAnnouncements.QueuedMessagesCounter - 1 == g_itemCounterLoss then
+            ChatAnnouncements.QueuedMessagesCounter = g_itemCounterLoss
         end
-        QueuedMessagesCounter = QueuedMessagesCounter + 1
-        QueuedMessages[g_itemCounterLoss] = {
+        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
+        ChatAnnouncements.QueuedMessages[g_itemCounterLoss] = {
             message = g_itemStringLoss,
             type = messageType,
             formattedRecipient = formattedRecipient,
@@ -4220,7 +4218,7 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
         eventManager:RegisterForUpdate(moduleName .. "Printer", delayTimer, ChatAnnouncements.PrintQueuedMessages)
     else
         local totalString = formattedTotal
-        QueuedMessages[QueuedMessagesCounter] = {
+        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = {
             message = itemString,
             type = messageType,
             formattedRecipient = formattedRecipient,
@@ -4229,7 +4227,7 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
             totalString = totalString,
             groupLoot = groupLoot,
         }
-        QueuedMessagesCounter = QueuedMessagesCounter + 1
+        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
         if delay then
             delayTimer = 25
             eventManager:UnregisterForUpdate(moduleName .. "Printer")
@@ -6022,8 +6020,8 @@ function ChatAnnouncements.JusticeDisplayConfiscate()
         end
 
         if ChatAnnouncements.SV.Notify.NotificationConfiscateCA then
-            QueuedMessages[QueuedMessagesCounter] = { message = ConfiscateMessage, type = "NOTIFICATION", isSystem = true }
-            QueuedMessagesCounter = QueuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = ConfiscateMessage, type = "NOTIFICATION", isSystem = true }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         else
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, ConfiscateMessage)
@@ -6130,8 +6128,8 @@ function ChatAnnouncements.DisguiseState(eventCode, unitTag, disguiseState)
     if disguiseState == DISGUISE_STATE_DANGER then
         if ChatAnnouncements.SV.Notify.DisguiseWarnCA then
             local message = GetString(LUIE_STRING_CA_JUSTICE_DISGUISE_STATE_DANGER)
-            QueuedMessages[QueuedMessagesCounter] = { message = message, type = "MESSAGE" }
-            QueuedMessagesCounter = QueuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "MESSAGE" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
         if ChatAnnouncements.SV.Notify.DisguiseWarnCSA then
@@ -6152,8 +6150,8 @@ function ChatAnnouncements.DisguiseState(eventCode, unitTag, disguiseState)
     if disguiseState == DISGUISE_STATE_SUSPICIOUS then
         if ChatAnnouncements.SV.Notify.DisguiseWarnCA then
             local message = GetString(LUIE_STRING_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS)
-            QueuedMessages[QueuedMessagesCounter] = { message = message, type = "MESSAGE" }
-            QueuedMessagesCounter = QueuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "MESSAGE" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
         if ChatAnnouncements.SV.Notify.DisguiseWarnCSA then
@@ -6178,8 +6176,8 @@ function ChatAnnouncements.DisguiseState(eventCode, unitTag, disguiseState)
     if g_disguiseState == 1 and (disguiseState == DISGUISE_STATE_NONE) then
         local message = zo_strformat("<<1>> <<2>>", GetString(LUIE_STRING_CA_JUSTICE_DISGUISE_STATE_NONE), Effects.DisguiseIcons[g_currentDisguise].description)
         if ChatAnnouncements.SV.Notify.DisguiseCA then
-            QueuedMessages[QueuedMessagesCounter] = { message = message, type = "MESSAGE" }
-            QueuedMessagesCounter = QueuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "MESSAGE" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
         if ChatAnnouncements.SV.Notify.DisguiseAlert then
@@ -6197,8 +6195,8 @@ function ChatAnnouncements.DisguiseState(eventCode, unitTag, disguiseState)
         g_currentDisguise = GetItemId(BAG_WORN, EQUIP_SLOT_COSTUME) or 0
         local message = zo_strformat("<<1>> <<2>>", GetString(LUIE_STRING_CA_JUSTICE_DISGUISE_STATE_DISGUISED), Effects.DisguiseIcons[g_currentDisguise].description)
         if ChatAnnouncements.SV.Notify.DisguiseCA then
-            QueuedMessages[QueuedMessagesCounter] = { message = message, type = "MESSAGE" }
-            QueuedMessagesCounter = QueuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "MESSAGE" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
         if ChatAnnouncements.SV.Notify.DisguiseAlert then
@@ -6247,8 +6245,8 @@ function ChatAnnouncements.OnPlayerActivated(eventCode)
                 g_currentDisguise = GetItemId(BAG_WORN, EQUIP_SLOT_COSTUME) or 0
                 local message = zo_strformat("<<1>> <<2>>", GetString(LUIE_STRING_CA_JUSTICE_DISGUISE_STATE_DISGUISED), Effects.DisguiseIcons[g_currentDisguise].description)
                 if ChatAnnouncements.SV.Notify.DisguiseCA then
-                    QueuedMessages[QueuedMessagesCounter] = { message = message, type = "MESSAGE" }
-                    QueuedMessagesCounter = QueuedMessagesCounter + 1
+                    ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "MESSAGE" }
+                    ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                     eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                 end
                 if ChatAnnouncements.SV.Notify.DisguiseAlert then
@@ -6267,8 +6265,8 @@ function ChatAnnouncements.OnPlayerActivated(eventCode)
             if g_disguiseState == 0 then
                 local message = zo_strformat("<<1>> <<2>>", GetString(LUIE_STRING_CA_JUSTICE_DISGUISE_STATE_NONE), Effects.DisguiseIcons[g_currentDisguise].description)
                 if ChatAnnouncements.SV.Notify.DisguiseCA then
-                    QueuedMessages[QueuedMessagesCounter] = { message = message, type = "MESSAGE" }
-                    QueuedMessagesCounter = QueuedMessagesCounter + 1
+                    ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "MESSAGE" }
+                    ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                     eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                 end
                 if ChatAnnouncements.SV.Notify.DisguiseAlert then
@@ -6524,8 +6522,8 @@ function ChatAnnouncements.HookFunction()
 
             if ChatAnnouncements.SV.Notify.StorageRidingCA then
                 local formattedString = ColorizeColors.StorageRidingColorize:Colorize(zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
-                QueuedMessages[QueuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
-                QueuedMessagesCounter = QueuedMessagesCounter + 1
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
 
@@ -6597,8 +6595,8 @@ function ChatAnnouncements.HookFunction()
                     end
 
                     local finalMessage = zo_strformat("<<1>><<2>><<3>><<4>>", stringPart1, formattedIcon, bookLink, stringPart2)
-                    QueuedMessages[QueuedMessagesCounter] = { message = finalMessage, type = "COLLECTIBLE" }
-                    QueuedMessagesCounter = QueuedMessagesCounter + 1
+                    ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "COLLECTIBLE" }
+                    ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                     eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                 end
 
@@ -7294,8 +7292,8 @@ function ChatAnnouncements.HookFunction()
     local function LockpickFailedAlert(result)
         if ChatAnnouncements.SV.Notify.NotificationLockpickCA then
             local message = GetString(LUIE_STRING_CA_LOCKPICK_FAILED)
-            QueuedMessages[QueuedMessagesCounter] = { message = message, type = "NOTIFICATION" }
-            QueuedMessagesCounter = QueuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "NOTIFICATION" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
         if ChatAnnouncements.SV.Notify.NotificationLockpickAlert then
@@ -7449,8 +7447,8 @@ function ChatAnnouncements.HookFunction()
     local function TradeSucceededAlert()
         if ChatAnnouncements.SV.Notify.NotificationTradeCA then
             local message = GetString(SI_TRADE_COMPLETE)
-            QueuedMessages[QueuedMessagesCounter] = { message = message, type = "NOTIFICATION", isSystem = true }
-            QueuedMessagesCounter = QueuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "NOTIFICATION", isSystem = true }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
         if ChatAnnouncements.SV.Notify.NotificationTradeAlert then
@@ -7510,9 +7508,9 @@ function ChatAnnouncements.HookFunction()
 
             -- Stop currency messages from printing here
             if reason == MAIL_SEND_RESULT_FAIL_INVALID_NAME then
-                for i = 1, #QueuedMessages do
-                    if QueuedMessages[i].type == "CURRENCY" then
-                        QueuedMessages[i].type = "GARBAGE"
+                for i = 1, #ChatAnnouncements.QueuedMessages do
+                    if ChatAnnouncements.QueuedMessages[i].type == "CURRENCY" then
+                        ChatAnnouncements.QueuedMessages[i].type = "GARBAGE"
                     end
                 end
                 eventManager:UnregisterForEvent(moduleName, EVENT_CURRENCY_UPDATE)
@@ -7636,8 +7634,8 @@ function ChatAnnouncements.HookFunction()
                 end
 
                 local finalMessage = zo_strformat("<<1>><<2>><<3>><<4>>", stringPart1, formattedIcon, bookLink, stringPart2)
-                QueuedMessages[QueuedMessagesCounter] = { message = finalMessage, type = "COLLECTIBLE" }
-                QueuedMessagesCounter = QueuedMessagesCounter + 1
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "COLLECTIBLE" }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
 
@@ -7704,8 +7702,8 @@ function ChatAnnouncements.HookFunction()
                     end
 
                     local finalMessage = zo_strformat("<<1>><<2>><<3>>", stringPart1, formattedIcon, stringPart2)
-                    QueuedMessages[QueuedMessagesCounter] = { message = finalMessage, type = "COLLECTIBLE" }
-                    QueuedMessagesCounter = QueuedMessagesCounter + 1
+                    ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "COLLECTIBLE" }
+                    ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                     eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                 end
 
@@ -7755,8 +7753,8 @@ function ChatAnnouncements.HookFunction()
                     end
 
                     local finalMessage = zo_strformat("<<1>><<2>><<3>>", stringPart1, formattedIcon, stringPart2)
-                    QueuedMessages[QueuedMessagesCounter] = { message = finalMessage, type = "COLLECTIBLE" }
-                    QueuedMessagesCounter = QueuedMessagesCounter + 1
+                    ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "COLLECTIBLE" }
+                    ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                     eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                 end
 
@@ -7861,7 +7859,7 @@ function ChatAnnouncements.HookFunction()
         end
         if flagDisplay then
             if ChatAnnouncements.SV.Skills.SkillPointCA and finalMessage ~= "" then
-                table_insert(QueuedMessages, { message = finalMessage, type = "SKILL" })
+                table_insert(ChatAnnouncements.QueuedMessages, { message = finalMessage, type = "SKILL" })
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
             if ChatAnnouncements.SV.Skills.SkillPointCSA then
@@ -7888,8 +7886,8 @@ function ChatAnnouncements.HookFunction()
             if ChatAnnouncements.SV.Skills.SkillLineUnlockCA then
                 local formattedIcon = ChatAnnouncements.SV.Skills.SkillLineIcon and zo_strformat("<<1>> ", zo_iconFormatInheritColor(icon, 16, 16)) or ""
                 local formattedString = ColorizeColors.SkillLineColorize:Colorize(zo_strformat(LUIE_STRING_CA_SKILL_LINE_ADDED, formattedIcon, lineName))
-                QueuedMessages[QueuedMessagesCounter] = { message = formattedString, type = "SKILL GAIN" }
-                QueuedMessagesCounter = QueuedMessagesCounter + 1
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "SKILL GAIN" }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
             if ChatAnnouncements.SV.Skills.SkillLineUnlockCSA then
@@ -7920,8 +7918,8 @@ function ChatAnnouncements.HookFunction()
         if atMorph then
             if ChatAnnouncements.SV.Skills.SkillAbilityCA then
                 local formattedString = ColorizeColors.SkillLineColorize:Colorize(zo_strformat(SI_MORPH_AVAILABLE_ANNOUNCEMENT, name) .. ".")
-                QueuedMessages[QueuedMessagesCounter] = { message = formattedString, type = "SKILL MORPH" }
-                QueuedMessagesCounter = QueuedMessagesCounter + 1
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "SKILL MORPH" }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
 
@@ -7943,8 +7941,8 @@ function ChatAnnouncements.HookFunction()
         else
             if ChatAnnouncements.SV.Skills.SkillAbilityCA then
                 local formattedString = ColorizeColors.SkillLineColorize:Colorize(zo_strformat(LUIE_STRING_CA_ABILITY_RANK_UP, name, rank) .. ".")
-                QueuedMessages[QueuedMessagesCounter] = { message = formattedString, type = "SKILL" }
-                QueuedMessagesCounter = QueuedMessagesCounter + 1
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "SKILL" }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
 
@@ -7978,8 +7976,8 @@ function ChatAnnouncements.HookFunction()
 
                 if ChatAnnouncements.SV.Skills.SkillLineCA then
                     local formattedString = ColorizeColors.SkillLineColorize:Colorize(zo_strformat(SI_SKILL_RANK_UP, lineName, rank) .. ".")
-                    QueuedMessages[QueuedMessagesCounter] = { message = formattedString, type = "SKILL LINE" }
-                    QueuedMessagesCounter = QueuedMessagesCounter + 1
+                    ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "SKILL LINE" }
+                    ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                     eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                 end
 
@@ -8044,8 +8042,8 @@ function ChatAnnouncements.HookFunction()
                         end
                         local string2 = ColorizeColors.CollectibleColorize2:Colorize(zo_strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, #nowOwnedCollectibles) .. ".")
                         local finalString = zo_strformat("<<1>><<2>>", string1, string2)
-                        QueuedMessages[QueuedMessagesCounter] = { message = finalString, type = "COLLECTIBLE" }
-                        QueuedMessagesCounter = QueuedMessagesCounter + 1
+                        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalString, type = "COLLECTIBLE" }
+                        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                     end
 
@@ -8103,8 +8101,8 @@ function ChatAnnouncements.HookFunction()
                                 string2 = link
                             end
                             local finalString = zo_strformat("<<1>><<2>><<3>>", string1, formattedIcon, string2)
-                            QueuedMessages[QueuedMessagesCounter] = { message = finalString, type = "COLLECTIBLE" }
-                            QueuedMessagesCounter = QueuedMessagesCounter + 1
+                            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalString, type = "COLLECTIBLE" }
+                            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                         end
 
@@ -8224,13 +8222,13 @@ function ChatAnnouncements.HookFunction()
             end
 
             -- If this message is duplicated by another addon then don't display twice.
-            for i = 1, #QueuedMessages do
-                if QueuedMessages[i].message == formattedString then
+            for i = 1, #ChatAnnouncements.QueuedMessages do
+                if ChatAnnouncements.QueuedMessages[i].message == formattedString then
                     return true
                 end
             end
-            QueuedMessages[QueuedMessagesCounter] = { message = formattedString, type = "QUEST" }
-            QueuedMessagesCounter = QueuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "QUEST" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -8278,13 +8276,13 @@ function ChatAnnouncements.HookFunction()
                 formattedString = zo_strformat(SI_NOTIFYTEXT_QUEST_COMPLETE, questNameFormatted)
             end
             -- This event double fires on quest completion, if an equivalent message is already detected in queue, then abort!
-            for i = 1, #QueuedMessages do
-                if QueuedMessages[i].message == formattedString then
+            for i = 1, #ChatAnnouncements.QueuedMessages do
+                if ChatAnnouncements.QueuedMessages[i].message == formattedString then
                     return true
                 end
             end
-            QueuedMessages[QueuedMessagesCounter] = { message = formattedString, type = "QUEST" }
-            QueuedMessagesCounter = QueuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "QUEST" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -8332,13 +8330,13 @@ function ChatAnnouncements.HookFunction()
 
         if ChatAnnouncements.SV.Quests.QuestCompleteCA then
             -- This event double fires on quest completion, if an equivalent message is already detected in queue, then abort!
-            for i = 1, #QueuedMessages do
-                if QueuedMessages[i].message == formattedText then
+            for i = 1, #ChatAnnouncements.QueuedMessages do
+                if ChatAnnouncements.QueuedMessages[i].message == formattedText then
                     return true
                 end
             end
-            QueuedMessages[QueuedMessagesCounter] = { message = formattedText, type = "QUEST" }
-            QueuedMessagesCounter = QueuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedText, type = "QUEST" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -8435,13 +8433,13 @@ function ChatAnnouncements.HookFunction()
         if type == 1 then
             if ChatAnnouncements.SV.Quests.QuestObjCompleteCA then
                 -- This event double fires on quest completion, if an equivalent message is already detected in queue, then abort!
-                for i = 1, #QueuedMessages do
-                    if QueuedMessages[i].message == formattedMessage then
+                for i = 1, #ChatAnnouncements.QueuedMessages do
+                    if ChatAnnouncements.QueuedMessages[i].message == formattedMessage then
                         return true
                     end
                 end
-                QueuedMessages[QueuedMessagesCounter] = { message = formattedMessage, type = "MESSAGE" } -- We set the message type to MESSAGE so if we loot a quest item that progresses the quest this comes after.
-                QueuedMessagesCounter = QueuedMessagesCounter + 1
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedMessage, type = "MESSAGE" } -- We set the message type to MESSAGE so if we loot a quest item that progresses the quest this comes after.
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
             if ChatAnnouncements.SV.Quests.QuestObjCompleteCSA then
@@ -8458,13 +8456,13 @@ function ChatAnnouncements.HookFunction()
         if type == 2 then
             if ChatAnnouncements.SV.Quests.QuestFailCA then
                 -- This event double fires on quest completion, if an equivalent message is already detected in queue, then abort!
-                for i = 1, #QueuedMessages do
-                    if QueuedMessages[i].message == formattedMessage then
+                for i = 1, #ChatAnnouncements.QueuedMessages do
+                    if ChatAnnouncements.QueuedMessages[i].message == formattedMessage then
                         return true
                     end
                 end
-                QueuedMessages[QueuedMessagesCounter] = { message = formattedMessage, type = "MESSAGE" }
-                QueuedMessagesCounter = QueuedMessagesCounter + 1
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedMessage, type = "MESSAGE" }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
             if ChatAnnouncements.SV.Quests.QuestFailCSA then
@@ -8488,8 +8486,8 @@ function ChatAnnouncements.HookFunction()
             local formattedString = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, message)
 
             if ChatAnnouncements.SV.Quests.QuestObjCompleteCA then
-                QueuedMessages[QueuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
-                QueuedMessagesCounter = QueuedMessagesCounter + 1
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
 
@@ -8535,8 +8533,8 @@ function ChatAnnouncements.HookFunction()
                 else
                     formattedString = zo_strformat(LUIE_STRING_CA_QUEST_ABANDONED, questNameFormatted)
                 end
-                QueuedMessages[QueuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
-                QueuedMessagesCounter = QueuedMessagesCounter + 1
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
 
@@ -8602,14 +8600,14 @@ function ChatAnnouncements.HookFunction()
                 if stepOverrideText ~= "" then
                     if ChatAnnouncements.SV.Quests.QuestObjUpdateCA then
                         -- This event sometimes results in duplicate messages - if an equivalent message is already detected in queue, then abort!
-                        for i = 1, #QueuedMessages do
-                            if QueuedMessages[i].message == stepOverrideText then
+                        for i = 1, #ChatAnnouncements.QueuedMessages do
+                            if ChatAnnouncements.QueuedMessages[i].message == stepOverrideText then
                                 -- Set the old message to blank so it gets skipped by the printer
-                                QueuedMessages[i].message = ""
+                                ChatAnnouncements.QueuedMessages[i].message = ""
                             end
                         end
-                        QueuedMessages[QueuedMessagesCounter] = { message = stepOverrideText, type = "MESSAGE" }
-                        QueuedMessagesCounter = QueuedMessagesCounter + 1
+                        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = stepOverrideText, type = "MESSAGE" }
+                        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                     end
                     if ChatAnnouncements.SV.Quests.QuestObjUpdateCSA then
@@ -8629,14 +8627,14 @@ function ChatAnnouncements.HookFunction()
                         if not (isFailCondition or isConditionComplete) and isVisible then
                             if ChatAnnouncements.SV.Quests.QuestObjUpdateCA then
                                 -- This event sometimes results in duplicate messages - if an equivalent message is already detected in queue, then abort!
-                                for i = 1, #QueuedMessages do
-                                    if QueuedMessages[i].message == conditionText then
+                                for i = 1, #ChatAnnouncements.QueuedMessages do
+                                    if ChatAnnouncements.QueuedMessages[i].message == conditionText then
                                         -- Set the old message to blank so it gets skipped by the printer
-                                        QueuedMessages[i].message = ""
+                                        ChatAnnouncements.QueuedMessages[i].message = ""
                                     end
                                 end
-                                QueuedMessages[QueuedMessagesCounter] = { message = conditionText, type = "MESSAGE" }
-                                QueuedMessagesCounter = QueuedMessagesCounter + 1
+                                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = conditionText, type = "MESSAGE" }
+                                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                             end
                             if ChatAnnouncements.SV.Quests.QuestObjUpdateCSA then
@@ -8689,8 +8687,8 @@ function ChatAnnouncements.HookFunction()
         if ChatAnnouncements.SV.Quests.QuestLocDiscoveryCA then
             local nameFormatted = (zo_strformat("|c<<1>><<2>>|r", ColorizeColors.QuestColorLocNameColorize, subzoneName))
             local formattedString = zo_strformat(LUIE_STRING_CA_QUEST_DISCOVER, nameFormatted)
-            QueuedMessages[QueuedMessagesCounter] = { message = formattedString, type = "QUEST" }
-            QueuedMessagesCounter = QueuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "QUEST" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -8725,8 +8723,8 @@ function ChatAnnouncements.HookFunction()
 
         if ChatAnnouncements.SV.Quests.QuestLocObjectiveCA then
             local formattedString = (zo_strformat("|c<<1>><<2>>:|r |c<<3>><<4>>|r", ColorizeColors.QuestColorLocNameColorize, name, ColorizeColors.QuestColorLocDescriptionColorize, startDescription))
-            QueuedMessages[QueuedMessagesCounter] = { message = formattedString, type = "QUEST_POI" }
-            QueuedMessagesCounter = QueuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "QUEST_POI" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -8810,8 +8808,8 @@ function ChatAnnouncements.HookFunction()
                 else
                     formattedString = zo_strformat("<<1>><<2>> <<3>><<4>>", ColorizeColors.ExperienceLevelUpColorize:Colorize(GetString(LUIE_STRING_CA_LVL_ANNOUNCE_XP)), icon, CurrentLevelFormatted, ColorizeColors.ExperienceLevelUpColorize:Colorize("!"))
                 end
-                QueuedMessages[QueuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
-                QueuedMessagesCounter = QueuedMessagesCounter + 1
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
 
@@ -8854,8 +8852,8 @@ function ChatAnnouncements.HookFunction()
     local function GetEnlightenedGainedAnnouncement(triggeringEvent)
         local formattedString = zo_strformat("<<1>>! <<2>>", GetString(SI_ENLIGHTENED_STATE_GAINED_HEADER), GetString(SI_ENLIGHTENED_STATE_GAINED_DESCRIPTION))
         if ChatAnnouncements.SV.XP.ExperienceEnlightenedCA then
-            QueuedMessages[QueuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
-            QueuedMessagesCounter = QueuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -8895,8 +8893,8 @@ function ChatAnnouncements.HookFunction()
             local formattedString = zo_strformat("<<1>>!", GetString(SI_ENLIGHTENED_STATE_LOST_HEADER))
 
             if ChatAnnouncements.SV.XP.ExperienceEnlightenedCA then
-                QueuedMessages[QueuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
-                QueuedMessagesCounter = QueuedMessagesCounter + 1
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
 
@@ -8980,14 +8978,14 @@ function ChatAnnouncements.HookFunction()
                     local messageP2 = string_format(learnString, formattedString)
                     local finalMessage = string_format("|c%s%s|r", formattedColor, messageP2)
 
-                    QueuedMessages[QueuedMessagesCounter] = { message = finalMessage, type = "MESSAGE" }
-                    QueuedMessagesCounter = QueuedMessagesCounter + 1
+                    ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "MESSAGE" }
+                    ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                     eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                 end
 
                 local formattedString = ColorizeColors.StorageRidingColorize:Colorize(zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
-                QueuedMessages[QueuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
-                QueuedMessagesCounter = QueuedMessagesCounter + 1
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
 
@@ -9040,8 +9038,8 @@ function ChatAnnouncements.HookFunction()
         if ChatAnnouncements.SV.XP.ExperienceLevelUpCA then
             local formattedIcon = ChatAnnouncements.SV.XP.ExperienceLevelUpIcon and zo_strformat("<<1>> ", zo_iconFormatInheritColor(icon, 16, 16)) or ""
             local formattedString = ColorizeColors.ExperienceLevelUpColorize:Colorize(zo_strformat(GetString(SI_CHAMPION_ANNOUNCEMENT_UNLOCKED), formattedIcon))
-            QueuedMessages[QueuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
-            QueuedMessagesCounter = QueuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -9113,8 +9111,8 @@ function ChatAnnouncements.HookFunction()
         if ChatAnnouncements.SV.XP.ExperienceLevelUpCA then
             local formattedString = ColorizeColors.ExperienceLevelUpColorize:Colorize(zo_strformat(SI_CHAMPION_POINT_EARNED, savedPointDelta) .. ": ")
             eventManager:UnregisterForUpdate(moduleName .. "Printer")
-            QueuedMessages[QueuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
-            QueuedMessagesCounter = QueuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 25, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -9136,8 +9134,8 @@ function ChatAnnouncements.HookFunction()
                     end
                     if ChatAnnouncements.SV.XP.ExperienceLevelUpCA then
                         eventManager:UnregisterForUpdate(moduleName .. "Printer")
-                        QueuedMessages[QueuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
-                        QueuedMessagesCounter = QueuedMessagesCounter + 1
+                        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
+                        ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
                         eventManager:RegisterForUpdate(moduleName .. "Printer", 25, ChatAnnouncements.PrintQueuedMessages)
                     end
                     if ChatAnnouncements.SV.XP.ExperienceLevelUpCSA then
@@ -9895,8 +9893,8 @@ function ChatAnnouncements.HookFunction()
             end
 
             local finalString = string_format("%s%s%s", stringpart1, stringpart2, stringpart3)
-            QueuedMessages[QueuedMessagesCounter] = { message = finalString, type = "ACHIEVEMENT" }
-            QueuedMessagesCounter = QueuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalString, type = "ACHIEVEMENT" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -9982,8 +9980,8 @@ function ChatAnnouncements.HookFunction()
             local messageP2 = antiquityLink
             local messageP3 = ColorizeColors.AntiquityColorize:Colorize(" " .. ChatAnnouncements.SV.Antiquities.AntiquitySuffix)
             local finalMessage = zo_strformat("<<1>><<2>><<3>>", messageP1, messageP2, messageP3)
-            QueuedMessages[QueuedMessagesCounter] = { message = finalMessage, type = "ANTIQUITY" }
-            QueuedMessagesCounter = QueuedMessagesCounter + 1
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "ANTIQUITY" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
@@ -11202,156 +11200,156 @@ end
 
 function ChatAnnouncements.PrintQueuedMessages()
     -- Resolve notification messages first
-    for i = 1, #QueuedMessages do
-        if QueuedMessages[i] and QueuedMessages[i].message ~= "" and QueuedMessages[i].type == "NOTIFICATION" then
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "NOTIFICATION" then
             local isSystem
-            if QueuedMessages[i].isSystem then
+            if ChatAnnouncements.QueuedMessages[i].isSystem then
                 isSystem = true
             else
                 isSystem = false
             end
-            printToChat(QueuedMessages[i].message, isSystem)
+            printToChat(ChatAnnouncements.QueuedMessages[i].message, isSystem)
         end
     end
 
     -- Resolve quest POI added
-    for i = 1, #QueuedMessages do
-        if QueuedMessages[i] and QueuedMessages[i].message ~= "" and QueuedMessages[i].type == "QUEST_POI" then
-            printToChat(QueuedMessages[i].message)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "QUEST_POI" then
+            printToChat(ChatAnnouncements.QueuedMessages[i].message)
         end
     end
 
     -- Next display Quest/Objective Completion and Experience
-    for i = 1, #QueuedMessages do
-        if QueuedMessages[i] and QueuedMessages[i].message ~= "" and (QueuedMessages[i].type == "QUEST" or QueuedMessages[i].type == "EXPERIENCE") then
-            printToChat(QueuedMessages[i].message)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and (ChatAnnouncements.QueuedMessages[i].type == "QUEST" or ChatAnnouncements.QueuedMessages[i].type == "EXPERIENCE") then
+            printToChat(ChatAnnouncements.QueuedMessages[i].message)
         end
     end
 
     -- Level Up Notifications
-    for i = 1, #QueuedMessages do
-        if QueuedMessages[i] and QueuedMessages[i].message ~= "" and QueuedMessages[i].type == "EXPERIENCE LEVEL" then
-            printToChat(QueuedMessages[i].message)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "EXPERIENCE LEVEL" then
+            printToChat(ChatAnnouncements.QueuedMessages[i].message)
         end
     end
 
     -- Skill Gain
-    for i = 1, #QueuedMessages do
-        if QueuedMessages[i] and QueuedMessages[i].message ~= "" and QueuedMessages[i].type == "SKILL GAIN" then
-            printToChat(QueuedMessages[i].message)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "SKILL GAIN" then
+            printToChat(ChatAnnouncements.QueuedMessages[i].message)
         end
     end
 
     -- Skill Morph
-    for i = 1, #QueuedMessages do
-        if QueuedMessages[i] and QueuedMessages[i].message ~= "" and QueuedMessages[i].type == "SKILL MORPH" then
-            printToChat(QueuedMessages[i].message)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "SKILL MORPH" then
+            printToChat(ChatAnnouncements.QueuedMessages[i].message)
         end
     end
 
     -- Skill Line
-    for i = 1, #QueuedMessages do
-        if QueuedMessages[i] and QueuedMessages[i].message ~= "" and QueuedMessages[i].type == "SKILL LINE" then
-            printToChat(QueuedMessages[i].message)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "SKILL LINE" then
+            printToChat(ChatAnnouncements.QueuedMessages[i].message)
         end
     end
 
     -- Skill
-    for i = 1, #QueuedMessages do
-        if QueuedMessages[i] and QueuedMessages[i].message ~= "" and QueuedMessages[i].type == "SKILL" then
-            printToChat(QueuedMessages[i].message)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "SKILL" then
+            printToChat(ChatAnnouncements.QueuedMessages[i].message)
         end
     end
 
     -- Postage
-    for i = 1, #QueuedMessages do
-        if QueuedMessages[i] and QueuedMessages[i].message ~= "" and QueuedMessages[i].type == "CURRENCY POSTAGE" then
-            printToChat(QueuedMessages[i].message)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "CURRENCY POSTAGE" then
+            printToChat(ChatAnnouncements.QueuedMessages[i].message)
         end
     end
 
     -- Quest Items (Remove)
-    for i = 1, #QueuedMessages do
-        if QueuedMessages[i] and QueuedMessages[i].message ~= "" and QueuedMessages[i].type == "QUEST LOOT REMOVE" then
-            --if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(QueuedMessages[i].itemId) end -- TODO: Remove debug later
-            local itemId = QueuedMessages[i].itemId
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "QUEST LOOT REMOVE" then
+            --if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(ChatAnnouncements.QueuedMessages[i].itemId) end -- TODO: Remove debug later
+            local itemId = ChatAnnouncements.QueuedMessages[i].itemId
             --if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_questItemAdded[itemId]) end -- TODO: Remove debug later
             if not g_questItemAdded[itemId] == true then
-                printToChat(QueuedMessages[i].message)
+                printToChat(ChatAnnouncements.QueuedMessages[i].message)
             end
         end
     end
 
     -- Loot (Container)
-    for i = 1, #QueuedMessages do
-        if QueuedMessages[i] and QueuedMessages[i].message ~= "" and QueuedMessages[i].type == "CONTAINER" then
-            ChatAnnouncements.ResolveItemMessage(QueuedMessages[i].message, QueuedMessages[i].formattedRecipient, QueuedMessages[i].color, QueuedMessages[i].logPrefix, QueuedMessages[i].totalString, QueuedMessages[i].groupLoot)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "CONTAINER" then
+            ChatAnnouncements.ResolveItemMessage(ChatAnnouncements.QueuedMessages[i].message, ChatAnnouncements.QueuedMessages[i].formattedRecipient, ChatAnnouncements.QueuedMessages[i].color, ChatAnnouncements.QueuedMessages[i].logPrefix, ChatAnnouncements.QueuedMessages[i].totalString, ChatAnnouncements.QueuedMessages[i].groupLoot)
         end
     end
 
     -- Currency
-    for i = 1, #QueuedMessages do
-        if QueuedMessages[i] and QueuedMessages[i].message ~= "" and QueuedMessages[i].type == "CURRENCY" then
-            printToChat(QueuedMessages[i].message)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "CURRENCY" then
+            printToChat(ChatAnnouncements.QueuedMessages[i].message)
         end
     end
 
     -- Quest Items (ADD)
-    for i = 1, #QueuedMessages do
-        if QueuedMessages[i] and QueuedMessages[i].message ~= "" and QueuedMessages[i].type == "QUEST LOOT ADD" then
-            --if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(QueuedMessages[i].itemId) end -- TODO: Remove debug later
-            local itemId = QueuedMessages[i].itemId
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "QUEST LOOT ADD" then
+            --if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(ChatAnnouncements.QueuedMessages[i].itemId) end -- TODO: Remove debug later
+            local itemId = ChatAnnouncements.QueuedMessages[i].itemId
             --if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_questItemRemoved[itemId]) end -- TODO: Remove debug later
             if not g_questItemRemoved[itemId] == true then
-                printToChat(QueuedMessages[i].message)
+                printToChat(ChatAnnouncements.QueuedMessages[i].message)
             end
         end
     end
 
     -- Loot
-    for i = 1, #QueuedMessages do
-        if QueuedMessages[i] and QueuedMessages[i].message ~= "" and QueuedMessages[i].type == "LOOT" then
-            ChatAnnouncements.ResolveItemMessage(QueuedMessages[i].message, QueuedMessages[i].formattedRecipient, QueuedMessages[i].color, QueuedMessages[i].logPrefix, QueuedMessages[i].totalString, QueuedMessages[i].groupLoot)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "LOOT" then
+            ChatAnnouncements.ResolveItemMessage(ChatAnnouncements.QueuedMessages[i].message, ChatAnnouncements.QueuedMessages[i].formattedRecipient, ChatAnnouncements.QueuedMessages[i].color, ChatAnnouncements.QueuedMessages[i].logPrefix, ChatAnnouncements.QueuedMessages[i].totalString, ChatAnnouncements.QueuedMessages[i].groupLoot)
         end
     end
 
     -- Resolve achievement update messages second to last
-    for i = 1, #QueuedMessages do
-        if QueuedMessages[i] and QueuedMessages[i].message ~= "" and QueuedMessages[i].type == "ANTIQUITY" then
-            printToChat(QueuedMessages[i].message)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "ANTIQUITY" then
+            printToChat(ChatAnnouncements.QueuedMessages[i].message)
         end
     end
 
     -- Collectible
-    for i = 1, #QueuedMessages do
-        if QueuedMessages[i] and QueuedMessages[i].message ~= "" and QueuedMessages[i].type == "COLLECTIBLE" then
-            printToChat(QueuedMessages[i].message)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "COLLECTIBLE" then
+            printToChat(ChatAnnouncements.QueuedMessages[i].message)
         end
     end
 
     -- Resolve achievement update messages second to last
-    for i = 1, #QueuedMessages do
-        if QueuedMessages[i] and QueuedMessages[i].message ~= "" and QueuedMessages[i].type == "ACHIEVEMENT" then
-            printToChat(QueuedMessages[i].message)
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "ACHIEVEMENT" then
+            printToChat(ChatAnnouncements.QueuedMessages[i].message)
         end
     end
 
     -- Display the rest
-    for i = 1, #QueuedMessages do
-        if QueuedMessages[i] and QueuedMessages[i].message ~= "" and QueuedMessages[i].type == "MESSAGE" then
+    for i = 1, #ChatAnnouncements.QueuedMessages do
+        if ChatAnnouncements.QueuedMessages[i] and ChatAnnouncements.QueuedMessages[i].message ~= "" and ChatAnnouncements.QueuedMessages[i].type == "MESSAGE" then
             local isSystem
-            if QueuedMessages[i].isSystem then
+            if ChatAnnouncements.QueuedMessages[i].isSystem then
                 isSystem = true
             else
                 isSystem = false
             end
-            printToChat(QueuedMessages[i].message, isSystem)
+            printToChat(ChatAnnouncements.QueuedMessages[i].message, isSystem)
         end
     end
 
     -- Clear Messages and Unregister Print Event
-    QueuedMessages = {}
-    QueuedMessagesCounter = 1
+    ChatAnnouncements.QueuedMessages = {}
+    ChatAnnouncements.QueuedMessagesCounter = 1
     eventManager:UnregisterForUpdate(moduleName .. "Printer")
 end
 

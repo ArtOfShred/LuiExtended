@@ -9,8 +9,6 @@ local ChatAnnouncements = LUIE.ChatAnnouncements
 local Effects = LUIE.Data.Effects
 local Quests = LUIE.Data.Quests
 
-local QueuedMessages = ChatAnnouncements.QueuedMessages
-local QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter
 local ColorizeColors = ChatAnnouncements.Colors
 
 local printToChat = LUIE.PrintToChat
@@ -76,8 +74,8 @@ function ChatAnnouncements.PrintExperienceGain(change)
     local formattedMessageP1 = (string_format(ChatAnnouncements.SV.XP.ExperienceMessage, messageP1))
     local finalMessage = string_format("|c%s%s|r", ColorizeColors.ExperienceMessageColorize, formattedMessageP1)
 
-    QueuedMessages[QueuedMessagesCounter] = { message = finalMessage, type = "EXPERIENCE" }
-    QueuedMessagesCounter = QueuedMessagesCounter + 1
+    ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = "EXPERIENCE" }
+    ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
     eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
 end
 
@@ -191,8 +189,8 @@ function ChatAnnouncements.PrintGuildRep(change, lineName, lineId, priority)
     local finalMessage = string_format("|c%s%s|r", ColorizeColors.SkillGuildColorize, formattedMessageP1)
 
     -- We set this to skill gain, so as to avoid creating an entire additional chat message category (we want it to show after XP but before any other skill gains or level up so we place it on top of the level up priority).
-    QueuedMessages[QueuedMessagesCounter] = { message = finalMessage, type = priority }
-    QueuedMessagesCounter = QueuedMessagesCounter + 1
+    ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalMessage, type = priority }
+    ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
     eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
 end
 
