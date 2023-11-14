@@ -948,7 +948,7 @@ Override function for GetKillingAttackInfo.
 
     -- Hook Tooltip Generation for STATS Screen Buffs & Debuffs
     ZO_StatsActiveEffect_OnMouseEnter = function (control)
-        InitializeTooltip(GameTooltip, control, RIGHT, -15, nil)
+        InitializeTooltip(GameTooltip, control, RIGHT, -15, 0)
 
         local detailsLine
         local colorText = ZO_NORMAL_TEXT

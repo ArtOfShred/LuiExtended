@@ -878,7 +878,10 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(LUIE_STRING_LAM_CI_ENEMY_MARKER_TP),
                 default = Settings.showMarker,
                 getFunc = function () return Settings.showMarker end,
-                setFunc = function (value) Settings.showMarker = value or false end,
+                setFunc = function (value)
+                    Settings.showMarker = value
+                    CombatInfo.SetMarker(true)
+                end,
                 width = "half",
             },
             {
@@ -890,7 +893,7 @@ function CombatInfo.CreateSettings()
                 getFunc = function () return Settings.markerSize end,
                 setFunc = function (value)
                     Settings.markerSize = value
-                    CombatInfo.SetMarker(value)
+                    CombatInfo.SetMarker()
                 end,
                 width = "half",
             },

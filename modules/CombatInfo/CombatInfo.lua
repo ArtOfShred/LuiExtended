@@ -356,14 +356,21 @@ local KEYBOARD_CONSTANTS = {
     ultimateSlotOffsetX = 62,
 }
 
-function CombatInfo.SetMarker(...)
+-- Set Marker - Called by the menu & EVENT_ON_PLAYER_ACTIVATED (needs to be reset on the player changing zones)
+-- @param removeMarker boolean: Remove the marker by making an empty dummy marker (only called from the menu toggle)
+function CombatInfo.SetMarker(removeMarker)
+    -- Only call with removeMarker param from menu toggle setting - there doesn't appear to be any way to remove floating markers so we only do this so the player doesn't have to reloadUI after toggling the setting off
+    -- We don't wanna draw a pointless marker with no texture otherwise.
+    if removeMarker then
+        SetFloatingMarkerInfo(MAP_PIN_TYPE_AGGRO, CombatInfo.SV.markerSize, "", "", true, false)
+    end
+    -- If Marker is not enabled, return
     if CombatInfo.SV.showMarker ~= true then
         return
     end
-
+    -- Otherwise, setup the marker texture
     local LUIE_MARKER = "/LuiExtended/media/combatinfo/floatingicon/redarrow.dds"
     SetFloatingMarkerInfo(MAP_PIN_TYPE_AGGRO, CombatInfo.SV.markerSize, LUIE_MARKER, "", true, false)
-    SetFloatingMarkerGlobalAlpha(1)
 end
 
 local slotsUpdated = {}
@@ -924,6 +931,7 @@ function CombatInfo.OnPlayerActivated(eventCode)
         CombatInfo.BarSlotUpdate(i, true, false)
     end
     CombatInfo.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, "player", nil, COMBAT_MECHANIC_FLAGS_ULTIMATE, GetUnitPower("player", COMBAT_MECHANIC_FLAGS_ULTIMATE))
+    CombatInfo.SetMarker()
 end
 
 local savedPlayerX = 0

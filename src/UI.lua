@@ -13,33 +13,6 @@ local UI = LUIE.UI
 local windowManager = WINDOW_MANAGER
 
 --[[
-    A handy chaining function for quickly setting up UI elements.
-    Allows us to reference methods to set properties without calling the specific object.
-    @param object table: The object to chain methods to.
-    @return table: The metatable for method chaining.
-]]
-function UI.Chain(object)
-    -- Setup the metatable
-    local T = {}
-    setmetatable(T, {
-        __index = function (self, func)
-            -- Know when to stop chaining
-            if func == "__END" then
-                return object
-            end
-            -- Otherwise, add the method to the parent object
-            return function (self, ...)
-                assert(object[func], func .. " missing in object")
-                object[func](object, ...)
-                return self
-            end
-        end,
-    })
-    -- Return the metatable
-    return T
-end
-
---[[
     Creates an empty CT_TOPLEVELCONTROL window.
     @param anchors table: The anchor points for the window.
     @param dims table: The dimensions of the window.
