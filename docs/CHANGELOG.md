@@ -1,3 +1,10 @@
+# Version 6.6.9
+
+Combat Text
+- Fixed an issue where the Combat Text settings reset with this update. This was due to an issue where the specific Saved Variables for Combat Text were accidentally renamed. You old settings will be restored as long as you haven't manually cleared your saved variables since the update. The renamed variables will also be cleaned up and removed so as not to inflate the size of your LUIE Saved Variables file.
+
+---
+
 # Version 6.6.8
 
 General
