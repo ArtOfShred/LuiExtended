@@ -436,9 +436,9 @@ function CombatText.Initialize(enabled)
     -- Load settings
     local isCharacterSpecific = LUIESV.Default[GetDisplayName()]["$AccountWide"].CharacterSpecificSV
     if isCharacterSpecific then
-        CombatText.SV = ZO_SavedVars:New(LUIE.SVName, LUIE.SVVer, moduleName, CombatText.Defaults)
+        CombatText.SV = ZO_SavedVars:New(LUIE.SVName, LUIE.SVVer, "CombatText", CombatText.Defaults)
     else
-        CombatText.SV = ZO_SavedVars:NewAccountWide(LUIE.SVName, LUIE.SVVer, moduleName, CombatText.Defaults)
+        CombatText.SV = ZO_SavedVars:NewAccountWide(LUIE.SVName, LUIE.SVVer, "CombatText", CombatText.Defaults)
     end
 
     -- Disable module if setting not toggled on
@@ -510,6 +510,18 @@ function CombatText.Initialize(enabled)
             CombatText.SV.blacklist[20301] = nil
         end
     end
+    if LUIESV.Default[GetDisplayName()]["$AccountWide"].AdjustVarsCT < 4 then
+        for k, v in pairs(LUIESV.Default[GetDisplayName()]) do
+            for j, _ in pairs(v) do
+                if j == "LuiExtendedCombatText" then
+                    -- Don't want to throw any errors here so make sure these values exist before trying to remove them
+                    if LUIESV.Default[GetDisplayName()][k] and LUIESV.Default[GetDisplayName()][k][j] then
+                        LUIESV.Default[GetDisplayName()][k][j] = nil
+                    end
+                end
+            end
+        end
+    end
     -- Increment so this doesn't occur again.
-    LUIESV.Default[GetDisplayName()]["$AccountWide"].AdjustVarsCT = 3
+    LUIESV.Default[GetDisplayName()]["$AccountWide"].AdjustVarsCT = 4
 end
