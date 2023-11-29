@@ -20,6 +20,7 @@ local PriorityOne, PriorityTwo, PriorityThree, PriorityFour, PrioritySix, Priori
 local staggerDuration = 800
 local areaDuration = 1100
 local rootDuration = 1100
+local negateDuration = 20000
 local graceTime = 5
 
 local isRooted = false
@@ -35,12 +36,16 @@ local defaultImmuneIcon
 
 local SET_SCALE_FROM_SV = true
 local BREAK_FREE_ID = 16565
-local NEGATE_MAGIC_ID = 47158
-local NEGATE_MAGIC_1_ID = 51894
 local GENERIC_ROOT_ABILITY_ID = 146956
 local ICON_MISSING = "icon_missing"
 
 local ACTION_RESULT_AREA_EFFECT = 669966
+
+local negateValidNames = {
+    ["Negate Magic"] = true,
+    ["Absorption Field"] = true,
+    ["Suppression Field"] = true,
+}
 
 CrowdControlTracker.controlTypes = {
     ACTION_RESULT_STUNNED,
@@ -56,8 +61,9 @@ CrowdControlTracker.controlTypes = {
 
 CrowdControlTracker.actionResults = {
     [ACTION_RESULT_STUNNED] = true,
-    [ACTION_RESULT_FEARED] = true,
     [ACTION_RESULT_DISORIENTED] = true,
+    [ACTION_RESULT_SILENCED] = true,
+    [ACTION_RESULT_FEARED] = true,
     [ACTION_RESULT_CHARMED] = true,
     [ACTION_RESULT_ROOTED] = true,
     [ACTION_RESULT_SNARED] = true,
@@ -400,6 +406,20 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
                     self:RemoveCC(3, PriorityThree.endTime)
                 end
             end
+        elseif GetFrameTimeMilliseconds() <= (PriorityFour.endTime + graceTime) and #self.negatesQueue ~= 0 then
+            local found_k
+            for k, v in pairs(self.negatesQueue) do
+                if v == abilityId then
+                    found_k = k
+                    break
+                end
+            end
+            if found_k then
+                table_remove(self.negatesQueue, found_k)
+                if #self.negatesQueue == 0 then
+                    self:RemoveCC(4, PriorityFour.endTime)
+                end
+            end
         end
     end
 
@@ -449,6 +469,7 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
         [ACTION_RESULT_CHARMED] = true,
         [ACTION_RESULT_ROOTED] = true,
         [ACTION_RESULT_SNARED] = true,
+        [ACTION_RESULT_SILENCED] = true,
     }
 
     if not validResults[result] then
@@ -487,8 +508,11 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
     end
 
     if result == ACTION_RESULT_EFFECT_GAINED_DURATION then
-        if abilityName == GetAbilityName(NEGATE_MAGIC_ID) or abilityId == NEGATE_MAGIC_ID or abilityId == NEGATE_MAGIC_1_ID then
+        if abilityId == self.incomingCC[ACTION_RESULT_SILENCED] then
+            if not negateValidNames[abilityName] then return end
+            if hitValue < negateDuration then hitValue = negateDuration end
             local currentEndTimeSilence = GetFrameTimeMilliseconds() + hitValue
+            table_insert(self.negatesQueue, abilityId)
             PriorityFour = {
                 endTime = currentEndTimeSilence,
                 abilityId = abilityId,
@@ -1430,6 +1454,7 @@ function CrowdControlTracker:VarReset()
     self.effectsGained = {}
     self.disorientsQueue = {}
     self.fearsQueue = {}
+    self.negatesQueue = {}
     --self.rootsQueue = {}
     --self.snaresQueue = {}
     self.currentCC = 0
