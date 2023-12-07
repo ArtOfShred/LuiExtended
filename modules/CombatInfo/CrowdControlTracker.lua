@@ -40,9 +40,6 @@ local GENERIC_ROOT_ABILITY_ID = 146956
 local ICON_MISSING = "icon_missing"
 
 local ACTION_RESULT_AREA_EFFECT = 669966
-
-local NEGATE_MAGIC_ID = 47158
-local NEGATE_MAGIC_1_ID = 51894
 local negateValidNames = {
     ["Negate Magic"] = true,
     ["Absorption Field"] = true,
@@ -508,7 +505,7 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
     end
 
     if result == ACTION_RESULT_EFFECT_GAINED_DURATION then
-        if abilityName == GetAbilityName(NEGATE_MAGIC_ID) or abilityId == NEGATE_MAGIC_ID or abilityId == NEGATE_MAGIC_1_ID or negateValidNames[abilityName] then
+        if negateValidNames[GetAbilityName(abilityId)] then
             if hitValue < negateDuration then hitValue = negateDuration end
             local currentEndTimeSilence = GetFrameTimeMilliseconds() + hitValue
             table_insert(self.negatesQueue, abilityId)
