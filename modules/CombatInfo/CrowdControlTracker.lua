@@ -467,6 +467,7 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
         [ACTION_RESULT_CHARMED] = true,
         [ACTION_RESULT_ROOTED] = true,
         [ACTION_RESULT_SNARED] = true,
+        [ACTION_RESULT_SILENCED] = true,
     }
 
     if not validResults[result] then
