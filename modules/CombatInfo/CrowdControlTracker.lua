@@ -40,7 +40,6 @@ local GENERIC_ROOT_ABILITY_ID = 146956
 local ICON_MISSING = "icon_missing"
 
 local ACTION_RESULT_AREA_EFFECT = 669966
-
 local negateValidNames = {
     ["Negate Magic"] = true,
     ["Absorption Field"] = true,
@@ -62,7 +61,6 @@ CrowdControlTracker.controlTypes = {
 CrowdControlTracker.actionResults = {
     [ACTION_RESULT_STUNNED] = true,
     [ACTION_RESULT_DISORIENTED] = true,
-    [ACTION_RESULT_SILENCED] = true,
     [ACTION_RESULT_FEARED] = true,
     [ACTION_RESULT_CHARMED] = true,
     [ACTION_RESULT_ROOTED] = true,
@@ -508,8 +506,7 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
     end
 
     if result == ACTION_RESULT_EFFECT_GAINED_DURATION then
-        if abilityId == self.incomingCC[ACTION_RESULT_SILENCED] then
-            if not negateValidNames[abilityName] then return end
+        if negateValidNames[GetAbilityName(abilityId)] then
             if hitValue < negateDuration then hitValue = negateDuration end
             local currentEndTimeSilence = GetFrameTimeMilliseconds() + hitValue
             table_insert(self.negatesQueue, abilityId)
