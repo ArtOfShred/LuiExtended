@@ -7,6 +7,11 @@ local zo_strformat = zo_strformat
 local table_concat = table.concat
 
 local changelogMessages = {
+    "|cFFA500LuiExtended Version 6.7.0|r",
+    "",
+    "|cFFFF00PTS:101041:|r",
+    "[*] Added .slug fonts for API 101041.",
+    "",
     "|cFFA500LuiExtended Version 6.6.9|r",
     "",
     "|cFFFF00Combat Text:|r",
