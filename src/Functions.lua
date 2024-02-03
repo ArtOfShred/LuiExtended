@@ -110,7 +110,7 @@ end
 --- Adds a system message to the chat.
 --- @param msg string: The message to be printed.
 --- @param ... string: Variable number of arguments to be passed to CHAT_ROUTER:AddSystemMessage.
---- @return function: The return value of CHAT_ROUTER:AddSystemMessage.
+--- @return function|nil: The return value of CHAT_ROUTER:AddSystemMessage.
 function LUIE.AddSystemMessage(msg, ...)
     return CHAT_ROUTER:AddSystemMessage(msg, ...)
 end
@@ -118,7 +118,7 @@ end
 --- Easy Print to Chat.
 --- Prints a message to the chat.
 --- @param msg string: The message to be printed.
---- @param isSystem boolean: If true, the message is considered a system message.
+--- @param isSystem? boolean: If true, the message is considered a system message.
 function LUIE.PrintToChat(msg, isSystem)
     if CHAT_SYSTEM.primaryContainer then
         if LUIE.ChatAnnouncements.SV.ChatMethod == "Print to All Tabs" then
