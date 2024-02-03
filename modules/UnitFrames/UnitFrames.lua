@@ -25,17 +25,6 @@ local sceneManager = SCENE_MANAGER
 
 local moduleName = LUIE.name .. "UnitFrames"
 
-local classIcons = {
-    [0] = "/esoui/art/contacts/social_status_offline.dds",
-    [1] = "/esoui/art/icons/class/class_dragonknight.dds",
-    [2] = "/esoui/art/icons/class/class_sorcerer.dds",
-    [3] = "/esoui/art/icons/class/class_nightblade.dds",
-    [4] = "/esoui/art/icons/class/class_warden.dds",
-    [5] = "/esoui/art/icons/class/class_necromancer.dds",
-    [6] = "/esoui/art/icons/class/class_templar.dds",
-    [117] = "/esoui/art/icons/class/class_arcanist.dds",
-}
-
 local roleIcons = {
     [0] = "LuiExtended/media/unitframes/unitframes_class_none.dds",
     [1] = "esoui/art/lfg/lfg_icon_dps.dds",
@@ -2666,7 +2655,7 @@ function UnitFrames.UpdateStaticControls(unitFrame)
     -- If unitFrame has unit classIcon control
     if unitFrame.classIcon ~= nil then
         local unitDifficulty = GetUnitDifficulty(unitFrame.unitTag)
-        local classIcon = classIcons[GetUnitClassId(unitFrame.unitTag)]
+        local classIcon = ZO_GetPlatformClassIcon(GetUnitClassId(unitFrame.unitTag))
         local showClass = (unitFrame.isPlayer and classIcon ~= nil) or (unitDifficulty > 1)
         if unitFrame.isPlayer then
             unitFrame.classIcon:SetTexture(classIcon)
@@ -3719,7 +3708,6 @@ function UnitFrames.CustomFramesSetDeadLabel(unitFrame, newValue)
         unitFrame.dead:SetText(newValue)
     end
     if newValue == "Offline" then
-        local classIcon = classIcons[0]
         if unitFrame.level ~= nil then
             unitFrame.level:SetHidden(newValue ~= "Dead" or newValue ~= nil)
         end
@@ -3730,7 +3718,7 @@ function UnitFrames.CustomFramesSetDeadLabel(unitFrame, newValue)
             unitFrame.friendIcon:SetHidden(newValue ~= "Dead" or newValue ~= nil)
         end
         if unitFrame.classIcon ~= nil then
-            unitFrame.classIcon:SetTexture(classIcon)
+            unitFrame.classIcon:SetTexture("/esoui/art/contacts/social_status_offline.dds")
         end
     end
     if unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH] then
