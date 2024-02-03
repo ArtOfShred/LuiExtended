@@ -3,6 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
+---@class LUIE
+local LUIE = LUIE
 LUIE.CombatTextAnimation = ZO_InitializingObject:Subclass()
 local CombatTextAnimation = LUIE.CombatTextAnimation
 

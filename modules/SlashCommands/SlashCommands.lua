@@ -3,6 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
+---@class LUIE
+local LUIE = LUIE
 -- SlashCommands namespace
 LUIE.SlashCommands = {}
 local SlashCommands = LUIE.SlashCommands

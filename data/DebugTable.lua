@@ -3,10 +3,12 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
--- DebugResults namespace
-LUIE.Data.DebugResults = {}
+
+---@type LUIE
+local LUIE = LUIE
 
 -- For debug function - convert result reason codes to string value
+---@class DebugResults
 local DebugResults = {
     [-1] = "INVALID",
     [1] = "DMG",
@@ -133,13 +135,13 @@ local DebugResults = {
     [1073741840] = "HOT",
     [1073741856] = "HOT!",
 }
+
+---@type DebugResults
 LUIE.Data.DebugResults = DebugResults
--- DebugAuras namespace
-if LUIE.DebugAuras == nil then
-    LUIE.DebugAuras = {}
-end
+
 -- List of all abilityId's that have been processed so far
 -- These id's don't show up on the debug event for EVENT_COMBAT_EVENT or EVENT_EFFECT_CHANGED
+---@class DebugAuras
 local DebugAuras = {
 
     -------------------------------------
@@ -17093,4 +17095,5 @@ local DebugAuras = {
     [120981] = true, -- JusticeDragon-Flee
 }
 
+---@type DebugAuras
 LUIE.DebugAuras = DebugAuras

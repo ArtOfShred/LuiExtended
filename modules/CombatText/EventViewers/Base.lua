@@ -2,8 +2,10 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
+---@class LUIE
+local LUIE = LUIE
 
----@class CombatTextEventViewer
+---@class CombatTextEventViewer : ZO_InitializingObject
 local CombatTextEventViewer = ZO_InitializingObject:Subclass()
 local CombatText = LUIE.CombatText
 local string_format = string.format

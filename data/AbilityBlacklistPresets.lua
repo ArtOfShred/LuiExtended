@@ -3,9 +3,14 @@
     License: The MIT License (MIT)
 --]]
 
--- AbilityBlacklistPresets namespace
-LUIE.Data.AbilityBlacklistPresets = {}
+---@type LUIE
+local LUIE = LUIE
 
+---@class BlacklistPresets
+---@field public MinorBuffs table<number, boolean>
+---@field public MajorBuffs table<number, boolean>
+---@field public MinorDebuffs table<number, boolean>
+---@field public MajorDebuffs table<number, boolean>
 local BlacklistPresets =
 {
     -- Minor Buffs
@@ -79,4 +84,5 @@ local BlacklistPresets =
     },
 }
 
+---@type BlacklistPresets
 LUIE.Data.AbilityBlacklistPresets = BlacklistPresets

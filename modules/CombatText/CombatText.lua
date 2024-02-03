@@ -3,6 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
+---@class LUIE
+local LUIE = LUIE
 -- CombatText namespace
 LUIE.CombatText = {}
 local CombatText = LUIE.CombatText

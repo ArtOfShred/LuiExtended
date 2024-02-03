@@ -3,8 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
--- CastBarTable namespace
-LUIE.Data.CastBarTable = {}
+---@type LUIE
+local LUIE = LUIE
 
 --local Abilities = LUIE.Data.Abilities --unused local
 

@@ -3,8 +3,12 @@
     License: The MIT License (MIT)
 --]]
 
+---@class LUIE
+local LUIE = LUIE
 -- CombatInfo namespace
 LUIE.CombatInfo = {}
+
+---@class CombatInfo : LUIE
 local CombatInfo = LUIE.CombatInfo
 
 local UI = LUIE.UI
@@ -598,7 +602,6 @@ end
 
 function CombatInfo.HookGCD()
     -- Hook to update GCD support
-    ---@diagnostic disable-next-line: duplicate-set-field
     ActionButton.UpdateUsable = function (self)
         local slotnum = self:GetSlot()
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or g_hotbarCategory
@@ -2603,6 +2606,7 @@ function CombatInfo.ShowCustomToggle(slotNum)
         local name = "ActionButton" .. slotNum .. "Toggle_LUIE"
         local window = windowManager:GetControlByName(name, "") -- Check to see if this frame already exists, don't create it if it does.
         if window == nil then
+            ---@class toggleFrame : TextureControl
             local toggleFrame = windowManager:CreateControl("$(parent)Toggle_LUIE", actionButton.slot, CT_TEXTURE)
             --toggleFrame.back = UI.Texture(toggleFrame, nil, nil, "/esoui/art/actionbar/actionslot_toggledon.dds")
             toggleFrame:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))

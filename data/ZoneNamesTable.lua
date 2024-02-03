@@ -3,9 +3,10 @@
     License: The MIT License (MIT)
 --]]
 
--- ZoneNames namespace
-LUIE.Data.ZoneNames = {}
+---@type LUIE
+local LUIE = LUIE
 
+---@class ZoneNames
 local ZoneNames = {
 
     ----------------------------------------------------------------
@@ -59,4 +60,5 @@ local ZoneNames = {
     Zone_Tempest_Island = "Tempest Island",
 }
 
+---@type ZoneNames
 LUIE.Data.ZoneNames = ZoneNames

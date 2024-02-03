@@ -2,7 +2,8 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
-
+---@class LUIE
+local LUIE = LUIE
 LUIE.CombatTextCombatScrollEventViewer = LUIE.CombatTextEventViewer:Subclass()
 local CombatTextCombatScrollEventViewer = LUIE.CombatTextCombatScrollEventViewer
 

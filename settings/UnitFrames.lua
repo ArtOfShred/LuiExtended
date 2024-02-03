@@ -2,7 +2,8 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
-
+---@class LUIE
+local LUIE = LUIE
 local UnitFrames = LUIE.UnitFrames
 local PetNames = LUIE.Data.PetNames
 local pairs = pairs

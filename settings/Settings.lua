@@ -2,7 +2,8 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
-
+---@class LUIE
+local LUIE = LUIE
 local g_ElementMovingEnabled
 
 local pairs = pairs

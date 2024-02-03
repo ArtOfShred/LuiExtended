@@ -3,8 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
--- CombatTextConstants namespace
-LUIE.Data.CombatTextConstants = {}
+---@type LUIE
+local LUIE = LUIE
 
 local CombatTextConstants = {
     -- Damage & Healing

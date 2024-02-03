@@ -2,7 +2,8 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
-
+---@class LUIE
+local LUIE = LUIE
 local SlashCommands = LUIE.SlashCommands
 local CollectibleTables = LUIE.Data.CollectibleTables
 

@@ -3,14 +3,14 @@
     License: The MIT License (MIT)
 --]]
 
--- ZoneTable namespace
-LUIE.Data.ZoneTable = {}
+---@type LUIE
+local LUIE = LUIE
 
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
 local Abilities = LUIE.Data.Abilities
 
-
+---@class ZoneTable
 local ZoneTable = {
 
     [63157] = {
@@ -46,12 +46,13 @@ local ZoneTable = {
     }, -- Flame Shard (Justice Guard 2H)
 }
 
+---@type ZoneTable
 LUIE.Data.ZoneTable = ZoneTable
 
 if LUIE.Data.AlertTable == nil then
     LUIE.Data.AlertTable = {}
 end
-
+---@class AlertTable
 local AlertTable = {
 
     -- SET A PRIORITY
@@ -5429,7 +5430,7 @@ local AlertTable = {
         priority = 1,
         eventdetect = true,
         result = ACTION_RESULT_BEGIN,
-        fakeName = Unitnames.Risen_Dead,
+        fakeName = Unitnames.NPC_Risen_Dead,
         refire = 1000,
         duration = 1500,
     }, -- Necromantic Burst (Risen Dead)
@@ -5952,12 +5953,14 @@ local AlertTable = {
     [83430] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN },           -- Skeletal Smash (Ice Wraith)
 }
 
+---@type AlertTable
 LUIE.Data.AlertTable = AlertTable
 
 if LUIE.Data.AlertBossNameConvert == nil then
     LUIE.Data.AlertBossNameConvert = {}
 end
 -- When a certain boss in in range if this id is cast, use the specified name as the source (There are some cases where bosses have uniquely named abilities as other enemies in the dungeon so this is a way to have both show properly).
+---@class AlertBossNameConvert
 local AlertBossNameConvert = {
 
     [57534] = { -- Focused Healing (Healer)
@@ -6025,12 +6028,13 @@ local AlertBossNameConvert = {
         [Unitnames.Boss_Keeper_Imiril] = Unitnames.NPC_Dark_Clannfear, -- Banished Cells II
     },
 }
-
+---@type AlertBossNameConvert
 LUIE.Data.AlertBossNameConvert = AlertBossNameConvert
 
 if LUIE.Data.AlertZoneOverride == nil then
     LUIE.Data.AlertZoneOverride = {}
 end
+---@class AlertZoneOverride
 local AlertZoneOverride = {
 
     [7835] = {                                                        -- Convalescence (Lamia)
@@ -6856,12 +6860,15 @@ local AlertZoneOverride = {
     },
 }
 
+---@type AlertZoneOverride
 LUIE.Data.AlertZoneOverride = AlertZoneOverride
 
 if LUIE.Data.AlertMapOverride == nil then
     LUIE.Data.AlertMapOverride = {}
 end
+
 -- Map Name override - Sometimes we need to use GetMapName() instead of Location Name or ZoneId
+---@class AlertMapOverride
 local AlertMapOverride = {
 
     [70366] = {                                                      -- Slam (Great Bear)
@@ -6870,4 +6877,5 @@ local AlertMapOverride = {
     },
 }
 
+---@type AlertMapOverride
 LUIE.Data.AlertMapOverride = AlertMapOverride

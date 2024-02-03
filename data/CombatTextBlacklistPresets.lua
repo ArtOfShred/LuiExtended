@@ -3,8 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
--- CombatTextBlacklistPresets namespace
-LUIE.Data.CombatTextBlacklistPresets = {}
+---@type LUIE
+local LUIE = LUIE
 
 local BlacklistPresets = LUIE.Data.CombatTextBlacklistPresets
 

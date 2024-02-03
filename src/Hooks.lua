@@ -3,6 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
+---@class LUIE
+local LUIE = LUIE
 local type, pairs, ipairs = type, pairs, ipairs
 local zo_strformat = zo_strformat
 local printToChat = LUIE.PrintToChat
@@ -317,7 +319,8 @@ Override function for GetKillingAttackInfo.
     --[[
     Hook synergy popup Icon/Name (to fix inconsistencies and add custom icons for some Quest/Encounter based Synergies)
 ]]
-    ZO_Synergy.OnSynergyAbilityChanged = function (self)
+    local zos_OnSynergyAbilityChanged = ZO_Synergy and ZO_Synergy.OnSynergyAbilityChanged
+    local OnSynergyAbilityChanged = function (self)
         local synergyName, iconFilename = GetSynergyInfo()
         if LUIE.Data.Effects.SynergyNameOverride[synergyName] then
             if LUIE.Data.Effects.SynergyNameOverride[synergyName].icon then
@@ -339,7 +342,7 @@ Override function for GetKillingAttackInfo.
         end
         self.lastSynergyName = synergyName
     end
-
+    ZO_Synergy.OnSynergyAbilityChanged = OnSynergyAbilityChanged
     --[[
     Hook STATS Screen Buffs & Debuffs to hide buffs not needed, update icons, names, durations, and tooltips
 ]]

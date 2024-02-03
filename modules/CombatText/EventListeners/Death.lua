@@ -2,7 +2,8 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
-
+---@class LUIE
+local LUIE = LUIE
 LUIE.CombatTextDeathListener = LUIE.CombatTextEventListener:Subclass()
 local CombatTextDeathListener = LUIE.CombatTextDeathListener
 

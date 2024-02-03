@@ -3,8 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
--- Effects namespace
-LUIE.Data.Effects = {}
+---@type LUIE
+local LUIE = LUIE
 
 local Effects = LUIE.Data.Effects
 

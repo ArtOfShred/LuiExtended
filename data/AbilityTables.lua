@@ -3,10 +3,11 @@
     License: The MIT License (MIT)
 --]]
 
--- Abilities namespace
-LUIE.Data.Abilities = {}
+---@class LUIE
+local LUIE = LUIE
 
 -- AbilityTables namespace
+---@class AbilityTables
 local AbilityTables = {
     -- ---------------------------------------------------
     -- GENERIC BUFFS & DEBUFFS ---------------------------
@@ -957,6 +958,7 @@ local AbilityTables = {
     Skill_Warmth = 29430,
     Skill_Arena_Torch = GetString(LUIE_STRING_SKILL_ARENA_TORCH),
     Skill_Biting_Cold = 53341,
+    Skill_Circle_of_Protection_NPC = 35737,
 
     -- Maelstrom Arena
     Skill_Sigil_of_Healing = 66920,
@@ -1173,4 +1175,5 @@ for k, v in pairs(AbilityTables) do
 end
 
 -- Export string data to global namespace
+---@type AbilityTables
 LUIE.Data.Abilities = AbilityTables

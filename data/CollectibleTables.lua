@@ -3,8 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
--- CollectibleTables namespace
-LUIE.Data.CollectibleTables = {}
+---@type LUIE
+local LUIE = LUIE
 
 local CollectibleTables =
 {

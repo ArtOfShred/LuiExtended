@@ -3,8 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
--- CrowdControl namespace
-LUIE.Data.CrowdControl = {}
+---@type LUIE
+local LUIE = LUIE
 
 local CrowdControl = LUIE.Data.CrowdControl
 

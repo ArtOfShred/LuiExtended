@@ -3,9 +3,15 @@
     License: The MIT License (MIT)
 --]]
 
--- PetNames namespace
-LUIE.Data.PetNames = {}
+---@type LUIE
+local LUIE = LUIE
 
+--- @class PetNames
+--- @field Assistants table<string, boolean>
+--- @field Necromancer table<string, boolean>
+--- @field Sets table<string, boolean>
+--- @field Sorcerer table<string, boolean>
+--- @field Warden table<string, boolean>
 local PetNames =
 {
     -- Pet Names (Sorcerer)
@@ -62,4 +68,5 @@ local PetNames =
     },
 }
 
+---@type PetNames
 LUIE.Data.PetNames = PetNames

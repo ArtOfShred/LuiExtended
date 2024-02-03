@@ -3,6 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
+---@class UI : LUIE
 local UI = LUIE.UI
 
 local sceneManager = SCENE_MANAGER
@@ -38,13 +39,12 @@ local defaultPanels = {
 local g_LUIE_Movers = {}
 local g_framesUnlocked = false
 
---[[
-    Replace the template function for certain elements to also use custom positions.
-    @param object table: The object containing the template function to be replaced.
-    @param functionName string: The name of the template function to be replaced.
-    @param frameName string: The name of the frame associated with the template function.
-]]
+--- Replace the template function for certain elements to also use custom positions.
+---@param object table: The object containing the template function to be replaced.
+---@param functionName string: The name of the template function to be replaced.
+---@param frameName string: The name of the frame associated with the template function.
 local function ReplaceDefaultTemplate(object, functionName, frameName)
+    ---@type function
     local zos_function = object[functionName]
     object[functionName] = function (self)
         local result = zos_function(self)    -- Get Original Function results
@@ -53,19 +53,18 @@ local function ReplaceDefaultTemplate(object, functionName, frameName)
         if frameData then
             local x = frameData[1]
             local y = frameData[2]
+            ---@type Control
             local frame = _G[frameName]
             frame:ClearAnchors()
-            frame:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, x, y)
+            frame:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, x, y, frame:GetResizeToFitConstrains())
         end
         return result
     end
 end
 
---[[
-    Run when the UI scene changes to hide the unlocked elements if we're in the Addon Settings Menu.
-    @param oldState number: The previous state of the UI scene.
-    @param newState number: The new state of the UI scene.
-]]
+---Run when the UI scene changes to hide the unlocked elements if we're in the Addon Settings Menu.
+---@param oldState number: The previous state of the UI scene.
+---@param newState number: The new state of the UI scene.
 local function sceneChange(oldState, newState)
     if g_framesUnlocked then
         local isHidden = false
@@ -80,11 +79,9 @@ local function sceneChange(oldState, newState)
     end
 end
 
---[[
-    Helper function to adjust an element.
-    @param k userdata: The element to be adjusted.
-    @param v table: The table containing adjustment values.
-]]
+--- Helper function to adjust an element.
+---@param k Control: The element to be adjusted.
+---@param v table: The table containing adjustment values.
 local function adjustElement(k, v)
     k:SetClampedToScreen(true)
     if v[2] then
@@ -95,17 +92,15 @@ local function adjustElement(k, v)
     end
 end
 
---[[
-    Helper function to set the anchor of an element.
-    @param k userdata: The element to set the anchor for.
-    @param frameName string: The name of the frame associated with the element.
-]]
+--- Helper function to set the anchor of an element.
+---@param k Control: The element to set the anchor for.
+---@param frameName string: The name of the frame associated with the element.
 local function setAnchor(k, frameName)
     local x = LUIE.SV[frameName][1]
     local y = LUIE.SV[frameName][2]
     if x ~= nil and y ~= nil then
         k:ClearAnchors()
-        k:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, x, y)
+        k:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, x, y, k:GetResizeToFitConstrains())
     end
     -- Fix the Objective Capture Meter fill alignment.
     if k == ZO_ObjectiveCaptureMeter then
@@ -130,9 +125,8 @@ local function setAnchor(k, frameName)
     end
 end
 
---[[
-    Called when an element mover is adjusted and on initialization to update all positions.
-]]
+
+--- Called when an element mover is adjusted and on initialization to update all positions.
 function LUIE.SetElementPosition()
     for k, v in pairs(defaultPanels) do
         local frameName = k:GetName()
@@ -148,18 +142,19 @@ function LUIE.SetElementPosition()
     end
 end
 
---[[
-    Helper function to create a top-level window.
-    @param k userdata: The element to create the top-level window for.
-    @param v table: The table containing window configuration values.
-    @param point number: The anchor point for the top-level window.
-    @param relativePoint number: The relative anchor point for the top-level window.
-    @param offsetX number: The X offset for the top-level window.
-    @param offsetY number: The Y offset for the top-level window.
-    @param relativeTo userdata: The element to which the top-level window is relative.
-    @return userdata: The created top-level window.
-]]
+--- Helper function to create a top-level window.
+---@param k Control: The element to create the top-level window for.
+---@param v table: The table containing window configuration values.
+---@param point number: The anchor point for the top-level window.
+---@param relativePoint number: The relative anchor point for the top-level window.
+---@param offsetX number: The X offset for the top-level window.
+---@param offsetY number: The Y offset for the top-level window.
+---@param relativeTo Control: The element to which the top-level window is relative.
+---@return tlw: The created top-level window.
 local function createTopLevelWindow(k, v, point, relativePoint, offsetX, offsetY, relativeTo)
+    ---@class tlw
+    ---@field preview BackdropControl
+    ---@field previewLabel LabelControl
     local tlw = UI.TopLevel({ point, relativePoint, offsetX, offsetY, relativeTo }, { k:GetWidth(), k:GetHeight() })
     tlw:SetDrawLayer(DL_BACKGROUND)
     tlw:SetDrawTier(DT_MEDIUM)
@@ -170,10 +165,8 @@ local function createTopLevelWindow(k, v, point, relativePoint, offsetX, offsetY
     return tlw
 end
 
---[[
-    Setup Movers for Elements, called by the menu unlock settings.
-    @param state boolean: The state indicating whether the elements are unlocked or not.
-]]
+--- Setup Movers for Elements, called by the menu unlock settings.
+---@param state boolean: The state indicating whether the elements are unlocked or not.
 function LUIE.SetupElementMover(state)
     g_framesUnlocked = state
     for k, v in pairs(defaultPanels) do
@@ -198,6 +191,7 @@ function LUIE.SetupElementMover(state)
                     offsetY = 0
                 end
             end
+            ---@type tlw
             local tlw = createTopLevelWindow(k, v, point, relativePoint, offsetX, offsetY, relativeTo)
             -- Setup handlers to set the custom position SV and call LUIE.SetElementPosition() to apply this positioning
             tlw:SetHandler("OnMoveStop", function (self)
@@ -206,6 +200,7 @@ function LUIE.SetupElementMover(state)
             end)
             g_LUIE_Movers[tlw.customPositionAttr] = tlw
         end
+        ---@type tlw
         local tlw = g_LUIE_Movers[k:GetName()]
         tlw:SetMouseEnabled(state)
         tlw:SetMovable(state)
@@ -219,9 +214,7 @@ function LUIE.SetupElementMover(state)
     firstRun = false
 end
 
---[[
-    Reset the position of windows. Called from the Settings Menu.
-]]
+--- Reset the position of windows. Called from the Settings Menu.
 function LUIE.ResetElementPosition()
     for k, v in pairs(defaultPanels) do
         local frameName = k:GetName()

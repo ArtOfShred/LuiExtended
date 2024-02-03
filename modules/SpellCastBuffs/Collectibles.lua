@@ -3,6 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
+---@class LUIE
+local LUIE = LUIE
 local SpellCastBuffs = LUIE.SpellCastBuffs
 
 local Abilities = LUIE.Data.Abilities

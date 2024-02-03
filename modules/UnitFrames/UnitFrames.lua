@@ -2,7 +2,8 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
-
+---@class LUIE
+local LUIE = LUIE
 -- Unit Frames namespace
 LUIE.UnitFrames = {}
 local UnitFrames = LUIE.UnitFrames

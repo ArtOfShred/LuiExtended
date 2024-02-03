@@ -3,6 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
+---@class LUIE
+local LUIE = LUIE
 -- InfoPanel namespace
 LUIE.InfoPanel = {}
 local InfoPanel = LUIE.InfoPanel

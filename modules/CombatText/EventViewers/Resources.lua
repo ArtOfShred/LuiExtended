@@ -3,6 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
+---@class LUIE
+local LUIE = LUIE
 LUIE.CombatTextResourceEventViewer = LUIE.CombatTextEventViewer:Subclass()
 local CombatTextResourceEventViewer = LUIE.CombatTextResourceEventViewer
 local poolTypes = LUIE.Data.CombatTextConstants.poolType

@@ -2,7 +2,10 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
+---@class LUIE
+local LUIE = LUIE
 
+---@class CombatInfo
 local CombatInfo = LUIE.CombatInfo
 CombatInfo.AbilityAlerts = {}
 local AbilityAlerts = CombatInfo.AbilityAlerts
@@ -151,6 +154,12 @@ function AbilityAlerts.CreateAlertFrame()
     local anchor = { CENTER, CENTER, 0, 0, uiTlw.alertFrame }
     local height = (CombatInfo.SV.alerts.toggles.alertFontSize * 2)
     for i = 1, 3 do
+        ---@class alert : c
+        ---@field prefix label
+        ---@field name label
+        ---@field modifier label
+        ---@field alert.icon bg
+        ---@field alert.icon.back t
         local alert = UI.Control(uiTlw.alertFrame, anchor, { nil, height }, false, "LUIE_Alert" .. i)
 
         alert.data = {

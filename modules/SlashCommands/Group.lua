@@ -3,6 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
+---@class LUIE
+local LUIE = LUIE
 local SlashCommands = LUIE.SlashCommands
 
 local printToChat = LUIE.PrintToChat

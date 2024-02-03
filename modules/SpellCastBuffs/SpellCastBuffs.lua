@@ -3,6 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
+---@class LUIE
+local LUIE = LUIE
 -- SpellCastBuffs namespace
 LUIE.SpellCastBuffs = {}
 local SpellCastBuffs = LUIE.SpellCastBuffs

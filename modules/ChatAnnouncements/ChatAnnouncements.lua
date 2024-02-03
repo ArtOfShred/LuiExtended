@@ -2,9 +2,9 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
-
--- ChatAnnouncements namespace
+---@class LUIE
 local LUIE = LUIE
+-- ChatAnnouncements namespace
 LUIE.ChatAnnouncements = {}
 local ChatAnnouncements = LUIE.ChatAnnouncements
 

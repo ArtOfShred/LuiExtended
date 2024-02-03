@@ -4,28 +4,34 @@
 --]]
 
 -- LUIE namespace
-if LUIE == nil then LUIE = {} end
+if LUIE == nil then
+    ---@class LUIE
+    LUIE = {}
+end
 
-LUIE.tag         = "LUIE"
-LUIE.name        = "LuiExtended"
-LUIE.version     = "6.7.0"
-LUIE.author      = "ArtOfShred, DakJaniels, psypanda, Saenic & SpellBuilder"
-LUIE.website     = "https://www.esoui.com/downloads/info818-LuiExtended.html"
-LUIE.github      = "https://github.com/ArtOfShred/LuiExtended"
-LUIE.feedback    = "https://github.com/ArtOfShred/LuiExtended/issues"
-LUIE.translation = "https://github.com/ArtOfShred/LuiExtended/tree/develop/i18n"
-LUIE.donation    = "https://www.paypal.me/ArtOfShred"
+---@class LUIE
+local LUIE        = LUIE
+
+LUIE.tag          = "LUIE"
+LUIE.name         = "LuiExtended"
+LUIE.version      = "6.7.0"
+LUIE.author       = "ArtOfShred, DakJaniels, psypanda, Saenic & SpellBuilder"
+LUIE.website      = "https://www.esoui.com/downloads/info818-LuiExtended.html"
+LUIE.github       = "https://github.com/ArtOfShred/LuiExtended"
+LUIE.feedback     = "https://github.com/ArtOfShred/LuiExtended/issues"
+LUIE.translation  = "https://github.com/ArtOfShred/LuiExtended/tree/develop/i18n"
+LUIE.donation     = "https://www.paypal.me/ArtOfShred"
 
 -- Saved variables options
-LUIE.SV          = nil
-LUIE.SVVer       = 2
-LUIE.SVName      = "LUIESV"
+LUIE.SV           = nil
+LUIE.SVVer        = 2
+LUIE.SVName       = "LUIESV"
 
-LUIE.Data        = {}
-LUIE.Components  = {}
+LUIE.Data         = {}
+LUIE.Components   = {}
 
 -- Default Settings
-LUIE.Defaults    = {
+LUIE.Defaults     = {
     CharacterSpecificSV      = false,
     StartupInfo              = false,
     HideAlertFrame           = false,
@@ -47,93 +53,90 @@ LUIE.Defaults    = {
 }
 
 -- Global fonts table to use in other parts of this addon
-if GetAPIVersion() == 101040 then
-    LUIE.Fonts = {
-        ["Adventure"]                    = "/LuiExtended/media/fonts/Adventure/adventure.ttf",
-        ["ArchivoNarrow Bold"]           = "/LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-Bold.otf",
-        ["ArchivoNarrow BoldItalic"]     = "/LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-BoldItalic.otf",
-        ["ArchivoNarrow Italic"]         = "/LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-Italic.otf",
-        ["ArchivoNarrow Medium"]         = "/LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-Medium.otf",
-        ["ArchivoNarrow MediumItalic"]   = "/LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-MediumItalic.otf",
-        ["ArchivoNarrow Regular"]        = "/LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-Regular.otf",
-        ["ArchivoNarrow SemiBold"]       = "/LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-SemiBold.otf",
-        ["ArchivoNarrow SemiBoldItalic"] = "/LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-SemiBoldItalic.otf",
-        ["Bazooka"]                      = "/LuiExtended/media/fonts/Bazooka/bazooka.ttf",
-        ["Consolas"]                     = "/EsoUI/Common/Fonts/consola.ttf",
-        ["Cooline"]                      = "/LuiExtended/media/fonts/Cooline/cooline.ttf",
-        ["Diogenes"]                     = "/LuiExtended/media/fonts/Diogenes/diogenes.ttf",
-        ["EnigmaBold"]                   = "/LuiExtended/media/fonts/Enigma/EnigmaBold.ttf",
-        ["EnigmaReg"]                    = "/LuiExtended/media/fonts/Enigma/EnigmaReg.ttf",
-        ["FORCED SQUARE"]                = "/LuiExtended/media/fonts/ForcedSquare/FORCED_SQUARE.ttf",
-        ["Fontin Bold"]                  = "/LuiExtended/media/fonts/Fontin/fontin_sans_b.otf",
-        ["Fontin Italic"]                = "/LuiExtended/media/fonts/Fontin/fontin_sans_i.otf",
-        ["Fontin Regular"]               = "/LuiExtended/media/fonts/Fontin/fontin_sans_r.otf",
-        ["Fontin SmallCaps"]             = "/LuiExtended/media/fonts/Fontin/fontin_sans_sc.otf",
-        ["Futura Condensed Bold"]        = "/EsoUI/Common/Fonts/FTN87.otf",
-        ["Futura Condensed Light"]       = "/EsoUI/Common/Fonts/FTN47.otf",
-        ["Futura Condensed"]             = "/EsoUI/Common/Fonts/FTN57.otf",
-        ["Ginko"]                        = "/LuiExtended/media/fonts/Ginko/ginko.ttf",
-        ["Heroic"]                       = "/LuiExtended/media/fonts/Heroic/heroic.ttf",
-        ["Metamorphous"]                 = "/LuiExtended/media/fonts/Metamorphous/metamorphous.otf",
-        ["Porky"]                        = "/LuiExtended/media/fonts/Porky/porky.ttf",
-        ["ProFontWindows"]               = "/LuiExtended/media/fonts/ProFontWindows/ProFontWindows.ttf",
-        ["ProseAntique"]                 = ZoFontBookPaper:GetFontInfo(),
-        ["Roboto Bold Italic"]           = "/LuiExtended/media/fonts/Roboto/Roboto-BoldItalic.ttf",
-        ["Roboto Bold"]                  = "/LuiExtended/media/fonts/Roboto/Roboto-Bold.ttf",
-        ["Skyrim Handwritten"]           = ZoFontBookLetter:GetFontInfo(),
-        ["Talisman"]                     = "/LuiExtended/media/fonts/Talisman/talisman.ttf",
-        ["Trajan Pro Bold"]              = "/LuiExtended/media/fonts/TrajanPro/TrajanProBold.otf",
-        ["Trajan Pro"]                   = ZoFontBookTablet:GetFontInfo(),
-        ["Transformers"]                 = "/LuiExtended/media/fonts/Transformers/transformers.ttf",
-        ["Univers 55"]                   = "/EsoUI/Common/Fonts/univers55.otf",
-        ["Univers 57"]                   = ZoFontGame:GetFontInfo(),
-        ["Univers 67"]                   = ZoFontWinH1:GetFontInfo(),
-        ["Yellowjacket"]                 = "/LuiExtended/media/fonts/Yellowjacket/yellowjacket.ttf",
-    }
-elseif GetAPIVersion() < 101041 then
-    LUIE.Fonts = {
-        ["Adventure"]                    = "/LuiExtended/media/update41_slug_fonts/Adventure/adventure.slug",
-        ["ArchivoNarrow Bold"]           = "/LuiExtended/media/update41_slug_fonts/ArchivoNarrow/ArchivoNarrow-Bold.slug",
-        ["ArchivoNarrow BoldItalic"]     = "/LuiExtended/media/update41_slug_fonts/ArchivoNarrow/ArchivoNarrow-BoldItalic.slug",
-        ["ArchivoNarrow Italic"]         = "/LuiExtended/media/update41_slug_fonts/ArchivoNarrow/ArchivoNarrow-Italic.slug",
-        ["ArchivoNarrow Medium"]         = "/LuiExtended/media/update41_slug_fonts/ArchivoNarrow/ArchivoNarrow-Medium.slug",
-        ["ArchivoNarrow MediumItalic"]   = "/LuiExtended/media/update41_slug_fonts/ArchivoNarrow/ArchivoNarrow-MediumItalic.slug",
-        ["ArchivoNarrow Regular"]        = "/LuiExtended/media/update41_slug_fonts/ArchivoNarrow/ArchivoNarrow-Regular.slug",
-        ["ArchivoNarrow SemiBold"]       = "/LuiExtended/media/update41_slug_fonts/ArchivoNarrow/ArchivoNarrow-SemiBold.slug",
-        ["ArchivoNarrow SemiBoldItalic"] = "/LuiExtended/media/update41_slug_fonts/ArchivoNarrow/ArchivoNarrow-SemiBoldItalic.slug",
-        ["Bazooka"]                      = "/LuiExtended/media/update41_slug_fonts/Bazooka/bazooka.slug",
-        ["Consolas"]                     = "/EsoUI/Common/Fonts/consola.slug",
-        ["Cooline"]                      = "/LuiExtended/media/update41_slug_fonts/Cooline/cooline.slug",
-        ["Diogenes"]                     = "/LuiExtended/media/update41_slug_fonts/Diogenes/diogenes.slug",
-        ["EnigmaBold"]                   = "/LuiExtended/media/update41_slug_fonts/Enigma/EnigmaBold.slug",
-        ["EnigmaReg"]                    = "/LuiExtended/media/update41_slug_fonts/Enigma/EnigmaReg.slug",
-        ["FORCED SQUARE"]                = "/LuiExtended/media/update41_slug_fonts/ForcedSquare/FORCED_SQUARE.slug",
-        ["Fontin Bold"]                  = "/LuiExtended/media/update41_slug_fonts/Fontin/fontin_sans_b.slug",
-        ["Fontin Italic"]                = "/LuiExtended/media/update41_slug_fonts/Fontin/fontin_sans_i.slug",
-        ["Fontin Regular"]               = "/LuiExtended/media/update41_slug_fonts/Fontin/fontin_sans_r.slug",
-        ["Fontin SmallCaps"]             = "/LuiExtended/media/update41_slug_fonts/Fontin/fontin_sans_sc.slug",
-        ["Futura Condensed Bold"]        = "/EsoUI/Common/Fonts/FTN87.slug",
-        ["Futura Condensed Light"]       = "/EsoUI/Common/Fonts/FTN47.slug",
-        ["Futura Condensed"]             = "/EsoUI/Common/Fonts/FTN57.slug",
-        ["Ginko"]                        = "/LuiExtended/media/update41_slug_fonts/Ginko/ginko.slug",
-        ["Heroic"]                       = "/LuiExtended/media/update41_slug_fonts/Heroic/heroic.slug",
-        ["Metamorphous"]                 = "/LuiExtended/media/update41_slug_fonts/Metamorphous/metamorphous.slug",
-        ["Porky"]                        = "/LuiExtended/media/update41_slug_fonts/Porky/porky.slug",
-        ["ProFontWindows"]               = "/LuiExtended/media/update41_slug_fonts/ProFontWindows/ProFontWindows.slug",
-        ["ProseAntique"]                 = ZoFontBookPaper:GetFontInfo(),
-        ["Roboto Bold Italic"]           = "/LuiExtended/media/update41_slug_fonts/Roboto/Roboto-BoldItalic.slug",
-        ["Roboto Bold"]                  = "/LuiExtended/media/update41_slug_fonts/Roboto/Roboto-Bold.slug",
-        ["Skyrim Handwritten"]           = ZoFontBookLetter:GetFontInfo(),
-        ["Talisman"]                     = "/LuiExtended/media/update41_slug_fonts/Talisman/talisman.slug",
-        ["Trajan Pro Bold"]              = "/LuiExtended/media/update41_slug_fonts/TrajanPro/TrajanProBold.slug",
-        ["Trajan Pro"]                   = ZoFontBookTablet:GetFontInfo(),
-        ["Transformers"]                 = "/LuiExtended/media/update41_slug_fonts/Transformers/transformers.slug",
-        ["Univers 55"]                   = "/EsoUI/Common/Fonts/univers55.slug",
-        ["Univers 57"]                   = ZoFontGame:GetFontInfo(),
-        ["Univers 67"]                   = ZoFontWinH1:GetFontInfo(),
-        ["Yellowjacket"]                 = "/LuiExtended/media/update41_slug_fonts/Yellowjacket/yellowjacket.slug",
-    }
-end
+LUIE.Fonts        = {
+    ["Adventure"]                    = "/LuiExtended/media/fonts/Adventure/adventure.ttf",
+    ["ArchivoNarrow Bold"]           = "/LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-Bold.otf",
+    ["ArchivoNarrow BoldItalic"]     = "/LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-BoldItalic.otf",
+    ["ArchivoNarrow Italic"]         = "/LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-Italic.otf",
+    ["ArchivoNarrow Medium"]         = "/LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-Medium.otf",
+    ["ArchivoNarrow MediumItalic"]   = "/LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-MediumItalic.otf",
+    ["ArchivoNarrow Regular"]        = "/LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-Regular.otf",
+    ["ArchivoNarrow SemiBold"]       = "/LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-SemiBold.otf",
+    ["ArchivoNarrow SemiBoldItalic"] = "/LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-SemiBoldItalic.otf",
+    ["Bazooka"]                      = "/LuiExtended/media/fonts/Bazooka/bazooka.ttf",
+    ["Consolas"]                     = "/EsoUI/Common/Fonts/consola.ttf",
+    ["Cooline"]                      = "/LuiExtended/media/fonts/Cooline/cooline.ttf",
+    ["Diogenes"]                     = "/LuiExtended/media/fonts/Diogenes/diogenes.ttf",
+    ["EnigmaBold"]                   = "/LuiExtended/media/fonts/Enigma/EnigmaBold.ttf",
+    ["EnigmaReg"]                    = "/LuiExtended/media/fonts/Enigma/EnigmaReg.ttf",
+    ["FORCED SQUARE"]                = "/LuiExtended/media/fonts/ForcedSquare/FORCED_SQUARE.ttf",
+    ["Fontin Bold"]                  = "/LuiExtended/media/fonts/Fontin/fontin_sans_b.otf",
+    ["Fontin Italic"]                = "/LuiExtended/media/fonts/Fontin/fontin_sans_i.otf",
+    ["Fontin Regular"]               = "/LuiExtended/media/fonts/Fontin/fontin_sans_r.otf",
+    ["Fontin SmallCaps"]             = "/LuiExtended/media/fonts/Fontin/fontin_sans_sc.otf",
+    ["Futura Condensed Bold"]        = "/EsoUI/Common/Fonts/FTN87.otf",
+    ["Futura Condensed Light"]       = "/EsoUI/Common/Fonts/FTN47.otf",
+    ["Futura Condensed"]             = "/EsoUI/Common/Fonts/FTN57.otf",
+    ["Ginko"]                        = "/LuiExtended/media/fonts/Ginko/ginko.ttf",
+    ["Heroic"]                       = "/LuiExtended/media/fonts/Heroic/heroic.ttf",
+    ["Metamorphous"]                 = "/LuiExtended/media/fonts/Metamorphous/metamorphous.otf",
+    ["Porky"]                        = "/LuiExtended/media/fonts/Porky/porky.ttf",
+    ["ProFontWindows"]               = "/LuiExtended/media/fonts/ProFontWindows/ProFontWindows.ttf",
+    ["ProseAntique"]                 = ZoFontBookPaper:GetFontInfo(),
+    ["Roboto Bold Italic"]           = "/LuiExtended/media/fonts/Roboto/Roboto-BoldItalic.ttf",
+    ["Roboto Bold"]                  = "/LuiExtended/media/fonts/Roboto/Roboto-Bold.ttf",
+    ["Skyrim Handwritten"]           = ZoFontBookLetter:GetFontInfo(),
+    ["Talisman"]                     = "/LuiExtended/media/fonts/Talisman/talisman.ttf",
+    ["Trajan Pro Bold"]              = "/LuiExtended/media/fonts/TrajanPro/TrajanProBold.otf",
+    ["Trajan Pro"]                   = ZoFontBookTablet:GetFontInfo(),
+    ["Transformers"]                 = "/LuiExtended/media/fonts/Transformers/transformers.ttf",
+    ["Univers 55"]                   = "/EsoUI/Common/Fonts/univers55.otf",
+    ["Univers 57"]                   = ZoFontGame:GetFontInfo(),
+    ["Univers 67"]                   = ZoFontWinH1:GetFontInfo(),
+    ["Yellowjacket"]                 = "/LuiExtended/media/fonts/Yellowjacket/yellowjacket.ttf",
+}
+LUIE.Fonts_Slug = {
+    ["Adventure"]                    = "/LuiExtended/media/update41_slug_fonts/Adventure/adventure.slug",
+    ["ArchivoNarrow Bold"]           = "/LuiExtended/media/update41_slug_fonts/ArchivoNarrow/ArchivoNarrow-Bold.slug",
+    ["ArchivoNarrow BoldItalic"]     = "/LuiExtended/media/update41_slug_fonts/ArchivoNarrow/ArchivoNarrow-BoldItalic.slug",
+    ["ArchivoNarrow Italic"]         = "/LuiExtended/media/update41_slug_fonts/ArchivoNarrow/ArchivoNarrow-Italic.slug",
+    ["ArchivoNarrow Medium"]         = "/LuiExtended/media/update41_slug_fonts/ArchivoNarrow/ArchivoNarrow-Medium.slug",
+    ["ArchivoNarrow MediumItalic"]   = "/LuiExtended/media/update41_slug_fonts/ArchivoNarrow/ArchivoNarrow-MediumItalic.slug",
+    ["ArchivoNarrow Regular"]        = "/LuiExtended/media/update41_slug_fonts/ArchivoNarrow/ArchivoNarrow-Regular.slug",
+    ["ArchivoNarrow SemiBold"]       = "/LuiExtended/media/update41_slug_fonts/ArchivoNarrow/ArchivoNarrow-SemiBold.slug",
+    ["ArchivoNarrow SemiBoldItalic"] = "/LuiExtended/media/update41_slug_fonts/ArchivoNarrow/ArchivoNarrow-SemiBoldItalic.slug",
+    ["Bazooka"]                      = "/LuiExtended/media/update41_slug_fonts/Bazooka/bazooka.slug",
+    ["Consolas"]                     = "/EsoUI/Common/Fonts/consola.slug",
+    ["Cooline"]                      = "/LuiExtended/media/update41_slug_fonts/Cooline/cooline.slug",
+    ["Diogenes"]                     = "/LuiExtended/media/update41_slug_fonts/Diogenes/diogenes.slug",
+    ["EnigmaBold"]                   = "/LuiExtended/media/update41_slug_fonts/Enigma/EnigmaBold.slug",
+    ["EnigmaReg"]                    = "/LuiExtended/media/update41_slug_fonts/Enigma/EnigmaReg.slug",
+    ["FORCED SQUARE"]                = "/LuiExtended/media/update41_slug_fonts/ForcedSquare/FORCED_SQUARE.slug",
+    ["Fontin Bold"]                  = "/LuiExtended/media/update41_slug_fonts/Fontin/fontin_sans_b.slug",
+    ["Fontin Italic"]                = "/LuiExtended/media/update41_slug_fonts/Fontin/fontin_sans_i.slug",
+    ["Fontin Regular"]               = "/LuiExtended/media/update41_slug_fonts/Fontin/fontin_sans_r.slug",
+    ["Fontin SmallCaps"]             = "/LuiExtended/media/update41_slug_fonts/Fontin/fontin_sans_sc.slug",
+    ["Futura Condensed Bold"]        = "/EsoUI/Common/Fonts/FTN87.slug",
+    ["Futura Condensed Light"]       = "/EsoUI/Common/Fonts/FTN47.slug",
+    ["Futura Condensed"]             = "/EsoUI/Common/Fonts/FTN57.slug",
+    ["Ginko"]                        = "/LuiExtended/media/update41_slug_fonts/Ginko/ginko.slug",
+    ["Heroic"]                       = "/LuiExtended/media/update41_slug_fonts/Heroic/heroic.slug",
+    ["Metamorphous"]                 = "/LuiExtended/media/update41_slug_fonts/Metamorphous/metamorphous.slug",
+    ["Porky"]                        = "/LuiExtended/media/update41_slug_fonts/Porky/porky.slug",
+    ["ProFontWindows"]               = "/LuiExtended/media/update41_slug_fonts/ProFontWindows/ProFontWindows.slug",
+    ["ProseAntique"]                 = ZoFontBookPaper:GetFontInfo(),
+    ["Roboto Bold Italic"]           = "/LuiExtended/media/update41_slug_fonts/Roboto/Roboto-BoldItalic.slug",
+    ["Roboto Bold"]                  = "/LuiExtended/media/update41_slug_fonts/Roboto/Roboto-Bold.slug",
+    ["Skyrim Handwritten"]           = ZoFontBookLetter:GetFontInfo(),
+    ["Talisman"]                     = "/LuiExtended/media/update41_slug_fonts/Talisman/talisman.slug",
+    ["Trajan Pro Bold"]              = "/LuiExtended/media/update41_slug_fonts/TrajanPro/TrajanProBold.slug",
+    ["Trajan Pro"]                   = ZoFontBookTablet:GetFontInfo(),
+    ["Transformers"]                 = "/LuiExtended/media/update41_slug_fonts/Transformers/transformers.slug",
+    ["Univers 55"]                   = "/EsoUI/Common/Fonts/univers55.slug",
+    ["Univers 57"]                   = ZoFontGame:GetFontInfo(),
+    ["Univers 67"]                   = ZoFontWinH1:GetFontInfo(),
+    ["Yellowjacket"]                 = "/LuiExtended/media/update41_slug_fonts/Yellowjacket/yellowjacket.slug",
+}
 
 
 LUIE.Sounds            = {

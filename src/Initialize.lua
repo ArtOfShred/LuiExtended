@@ -3,6 +3,8 @@
     License: The MIT License (MIT)
 ]]
 
+---@class LUIE
+local LUIE = LUIE
 local zo_strformat = zo_strformat
 local eventManager = EVENT_MANAGER
 
@@ -25,9 +27,17 @@ local function UpdateFonts()
     if LMP == nil then
         return
     end
-    for _, f in pairs(LMP:List(LMP.MediaType.FONT)) do
-        if not LUIE.Fonts[f] then
-            LUIE.Fonts[f] = LMP:Fetch(LMP.MediaType.FONT, f)
+    if GetAPIVersion() == 101041 then
+        for _, f in pairs(LMP:List(LMP.MediaType.FONT)) do
+            if not LUIE.Fonts_Slug[f] then
+                LUIE.Fonts_Slug[f] = LMP:Fetch(LMP.MediaType.FONT, f)
+            end
+        end
+    else
+        for _, f in pairs(LMP:List(LMP.MediaType.FONT)) do
+            if not LUIE.Fonts[f] then
+                LUIE.Fonts[f] = LMP:Fetch(LMP.MediaType.FONT, f)
+            end
         end
     end
 end

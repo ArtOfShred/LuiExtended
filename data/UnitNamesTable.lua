@@ -3,9 +3,10 @@
     License: The MIT License (MIT)
 --]]
 
--- UnitNames namespace
-LUIE.Data.UnitNames = {}
+---@class LUIE
+local LUIE = LUIE
 
+---@class UnitNames
 local UnitNames = {
 
     ----------------------------------------------------------------
@@ -626,4 +627,5 @@ local UnitNames = {
     Boss_Icestalker = "Icestalker",
 }
 
+---@type UnitNames
 LUIE.Data.UnitNames = UnitNames

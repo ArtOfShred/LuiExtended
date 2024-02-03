@@ -3,6 +3,9 @@
     License: The MIT License (MIT)
 --]]
 
+---@class LUIE
+local LUIE = LUIE
+
 local string_format = string.format
 
 --[[
@@ -104,21 +107,18 @@ function LUIE.ToggleVisibility(hidden)
     end
 end
 
---[[
-    Adds a system message to the chat.
-    @param ...: Variable number of arguments to be passed to CHAT_ROUTER:AddSystemMessage.
-    @return: The return value of CHAT_ROUTER:AddSystemMessage.
-]]
-function LUIE.AddSystemMessage(...)
-    return CHAT_ROUTER:AddSystemMessage(...)
+--- Adds a system message to the chat.
+--- @param msg string: The message to be printed.
+--- @param ... string: Variable number of arguments to be passed to CHAT_ROUTER:AddSystemMessage.
+--- @return function: The return value of CHAT_ROUTER:AddSystemMessage.
+function LUIE.AddSystemMessage(msg, ...)
+    return CHAT_ROUTER:AddSystemMessage(msg, ...)
 end
 
---[[
-    Easy Print to Chat.
-    Prints a message to the chat.
-    @param msg string: The message to be printed.
-    @param isSystem boolean: If true, the message is considered a system message.
-]]
+--- Easy Print to Chat.
+--- Prints a message to the chat.
+--- @param msg string: The message to be printed.
+--- @param isSystem boolean: If true, the message is considered a system message.
 function LUIE.PrintToChat(msg, isSystem)
     if CHAT_SYSTEM.primaryContainer then
         if LUIE.ChatAnnouncements.SV.ChatMethod == "Print to All Tabs" then
@@ -166,14 +166,12 @@ function LUIE.PrintToChat(msg, isSystem)
     end
 end
 
---[[
-    Returns a formatted number with commas.
-    Function to abbreviate a number by shortening and adding commas.
-    @param number number: The number to be abbreviated.
-    @param shorten boolean: Whether to shorten the number or not.
-    @param comma boolean: Whether to add commas or not.
-    @return number|string: The formatted number with commas.
-]]
+--- Returns a formatted number with commas.
+--- Function to abbreviate a number by shortening and adding commas.
+--- @param number number: The number to be abbreviated.
+--- @param shorten boolean: Whether to shorten the number or not.
+--- @param comma boolean: Whether to add commas or not.
+--- @return number|string: The formatted number with commas.
 function LUIE.AbbreviateNumber(number, shorten, comma)
     if number > 0 and shorten then
         local value
@@ -216,14 +214,12 @@ function LUIE.AbbreviateNumber(number, shorten, comma)
     return number
 end
 
---[[
-    Takes an input with a name identifier, title, text, and callback function to create a dialogue button.
-    @param identifier string: The identifier for the dialogue button.
-    @param title string: The title text for the dialogue button.
-    @param text string: The main text for the dialogue button.
-    @param callback function: The callback function to be executed when the button is clicked.
-    @return table: The created dialogue button table.
-]]
+--- Takes an input with a name identifier, title, text, and callback function to create a dialogue button.
+--- @param identifier string: The identifier for the dialogue button.
+--- @param title string: The title text for the dialogue button.
+--- @param text string: The main text for the dialogue button.
+--- @param callback function: The callback function to be executed when the button is clicked.
+--- @return table identifier: The created dialogue button table.
 function LUIE.RegisterDialogueButton(identifier, title, text, callback)
     ESO_Dialogs[identifier] = {
         gamepadInfo = {
@@ -249,10 +245,8 @@ function LUIE.RegisterDialogueButton(identifier, title, text, callback)
     return ESO_Dialogs[identifier]
 end
 
---[[
-    Function to update guild data.
-    Retrieves information about each guild the player is a member of and stores it in LUIE.GuildIndexData table.
-]]
+--- Function to update guild data.
+--- Retrieves information about each guild the player is a member of and stores it in LUIE.GuildIndexData table.
 function LUIE.UpdateGuildData()
     local GuildsIndex = GetNumGuilds()
     LUIE.GuildIndexData = {}
@@ -264,10 +258,8 @@ function LUIE.UpdateGuildData()
     end
 end
 
---[[
-    Simple function to check the veteran difficulty.
-    @return boolean: Returns true if the player is in a veteran dungeon or using veteran difficulty, false otherwise.
-]]
+--- Simple function to check the veteran difficulty.
+--- @return boolean: Returns true if the player is in a veteran dungeon or using veteran difficulty, false otherwise.
 function LUIE.ResolveVeteranDifficulty()
     if GetGroupSize() <= 1 and IsUnitUsingVeteranDifficulty("player") then
         return true
@@ -278,10 +270,8 @@ function LUIE.ResolveVeteranDifficulty()
     end
 end
 
---[[
-    Simple function that checks if the player is in a PVP zone.
-    @return boolean: Returns true if the player is PvP flagged, false otherwise.
-]]
+--- Simple function that checks if the player is in a PVP zone.
+--- @return boolean: Returns true if the player is PvP flagged, false otherwise.
 function LUIE.ResolvePVPZone()
     if IsUnitPvPFlagged("player") then
         return true
@@ -290,45 +280,37 @@ function LUIE.ResolvePVPZone()
     end
 end
 
---[[
-    Pulls the name for the current morph of a skill.
-    @param abilityId number: The AbilityId of the skill.
-    @return string: The name of the current morph of the skill.
-]]
+--- Pulls the name for the current morph of a skill.
+--- @param abilityId number: The AbilityId of the skill.
+--- @return string abilityName: The name of the current morph of the skill.
 function LUIE.GetSkillMorphName(abilityId)
     local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
     local abilityName = GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
     return abilityName
 end
 
---[[
-    Pulls the icon for the current morph of a skill.
-    @param abilityId number: The AbilityId of the skill.
-    @return string: The icon path of the current morph of the skill.
-]]
+--- Pulls the icon for the current morph of a skill.
+--- @param abilityId number: The AbilityId of the skill.
+--- @return string abilityIcon: The icon path of the current morph of the skill.
 function LUIE.GetSkillMorphIcon(abilityId)
     local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
     local abilityIcon = select(2, GetSkillAbilityInfo(skillType, skillIndex, abilityIndex))
     return abilityIcon
 end
 
---[[
-    Pulls the AbilityId for the current morph of a skill.
-    @param abilityId number: The AbilityId of the skill.
-    @return number: The AbilityId of the current morph of the skill.
-]]
+--- Pulls the AbilityId for the current morph of a skill.
+--- @param abilityId number: The AbilityId of the skill.
+--- @return number morphAbilityId: The AbilityId of the current morph of the skill.
 function LUIE.GetSkillMorphAbilityId(abilityId)
     local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
     local morphAbilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex, false)
     return morphAbilityId -- renamed local (abilityId) to avoid naming conflicts with the parameter
 end
 
---[[
-    Function to update the syntax for default Mundus Stone tooltips we pull (in order to retain scaling).
-    @param abilityId number: The ID of the ability.
-    @param tooltipText string: The original tooltip text.
-    @return string: The updated tooltip text.
-]]
+--- Function to update the syntax for default Mundus Stone tooltips we pull (in order to retain scaling).
+--- @param abilityId number: The ID of the ability.
+--- @param tooltipText string: The original tooltip text.
+--- @return string tooltipText: The updated tooltip text.
 function LUIE.UpdateMundusTooltipSyntax(abilityId, tooltipText)
     -- Update syntax for The Lady, The Lover, and the Thief Mundus stones since they aren't consistent with other buffs.
     if abilityId == 13976 or abilityId == 13981 then -- The Lady / The Lover

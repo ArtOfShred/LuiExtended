@@ -3,6 +3,9 @@
     License: The MIT License (MIT)
 --]]
 
+---@type LUIE
+local LUIE = LUIE
+
 local Effects = LUIE.Data.Effects
 
 local Tooltips = LUIE.Data.Tooltips

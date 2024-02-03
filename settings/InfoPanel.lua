@@ -2,7 +2,8 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
-
+---@class LUIE
+local LUIE = LUIE
 local InfoPanel = LUIE.InfoPanel
 
 local zo_strformat = zo_strformat
