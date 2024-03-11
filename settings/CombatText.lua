@@ -2,7 +2,7 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
----@class LUIE
+
 local LUIE = LUIE
 local CombatText = LUIE.CombatText
 local CombatTextConstants = LUIE.Data.CombatTextConstants

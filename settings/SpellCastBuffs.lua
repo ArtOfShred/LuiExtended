@@ -2,7 +2,7 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
----@class LUIE
+
 local LUIE = LUIE
 local SpellCastBuffs = LUIE.SpellCastBuffs
 local BlacklistPresets = LUIE.Data.AbilityBlacklistPresets

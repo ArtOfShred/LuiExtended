@@ -15,3 +15,6 @@ $RECYCLE.BIN/
 *~
 
 /.vscode/
+frontend/Changelog_Definitions.lua
+frontend/CombatText_Definitions.lua
+frontend/CrowdControlTracker_Definitions.lua

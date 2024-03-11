@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class LUIE
+
 local LUIE = LUIE
 local type, pairs, ipairs = type, pairs, ipairs
 local zo_strformat = zo_strformat

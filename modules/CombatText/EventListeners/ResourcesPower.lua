@@ -2,7 +2,7 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
----@class LUIE
+
 local LUIE = LUIE
 LUIE.CombatTextResourcesPowerEventListener = LUIE.CombatTextEventListener:Subclass()
 local CombatTextResourcesPowerEventListener = LUIE.CombatTextResourcesPowerEventListener

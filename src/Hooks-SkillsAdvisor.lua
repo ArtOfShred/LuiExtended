@@ -3,7 +3,6 @@
     License: The MIT License (MIT)
 --]]
 
----@class LUIE
 local LUIE = LUIE
 
 -- Just a copy of esoui/ingame/skillsadvisor/gamepad/skillsadvisor_suggestions_gamepad.lua, this is the easiest way to override for custom ability icons.

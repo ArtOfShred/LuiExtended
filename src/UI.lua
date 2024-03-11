@@ -11,11 +11,11 @@ local UI = {}
 local windowManager = WINDOW_MANAGER
 
 --- Creates an empty `CT_TOPLEVELCONTROL` window.
----@param anchors table: The anchor points for the window.
----@param dims table: The dimensions of the window.
----@return tlw|nil: The created top-level window.
+---@param anchors table|nil: The anchor points for the window.
+---@param dims table|nil: The dimensions of the window.
+---@return object tlw: The created top-level window.
 function UI.TopLevel(anchors, dims)
-    ---@class tlw : TopLevelWindow
+    ---@type object
     local tlw = windowManager:CreateTopLevelWindow(nil)
     tlw:SetClampedToScreen(true)
     tlw:SetMouseEnabled(false)
@@ -31,18 +31,18 @@ function UI.TopLevel(anchors, dims)
 end
 
 --- Creates a plain `CT_CONTROL` UI control element.
----@param parent Control: The parent control for the control.
----@param anchors table: The anchor points for the control.
----@param dims table: The dimensions of the control.
+---@param parent object|nil: The parent control for the control.
+---@param anchors table|nil: The anchor points for the control.
+---@param dims table|nil: The dimensions of the control.
 ---@param hidden boolean: Whether the control is hidden or not.
 ---@param name string: The name of the control.
----@return c|nil: The created control.
+---@return object|nil c: The created control.
 function UI.Control(parent, anchors, dims, hidden, name)
     if not parent then
         return
     end
     local controlName = name or nil
-    ---@class c : Control
+    ---@type object
     local c = windowManager:CreateControl(controlName, parent, CT_CONTROL)
     c:SetHidden(hidden)
     if anchors == "fill" then
@@ -59,18 +59,18 @@ function UI.Control(parent, anchors, dims, hidden, name)
 end
 
 --- Creates a `CT_TEXTURE` UI control element.
----@param parent Control: The parent control for the texture.
----@param anchors table: The anchor points for the texture.
----@param dims table: The dimensions of the texture.
+---@param parent object|nil: The parent control for the texture.
+---@param anchors table|nil: The anchor points for the texture.
+---@param dims table|nil: The dimensions of the texture.
 ---@param texture string: The path to the texture for the texture control.
 ---@param drawlayer number: The draw layer of the texture.
 ---@param hidden boolean: Whether the texture is hidden or not.
----@return t|nil: The created texture control.
+---@return object|nil t: The created texture control.
 function UI.Texture(parent, anchors, dims, texture, drawlayer, hidden)
     if not parent then
         return
     end
-    ---@class t : TextureControl
+    ---@type object
     local t = windowManager:CreateControl(nil, parent, CT_TEXTURE)
     t:SetHidden(hidden)
     if anchors == "fill" then
@@ -93,20 +93,20 @@ function UI.Texture(parent, anchors, dims, texture, drawlayer, hidden)
 end
 
 --- Creates a `CT_BACKDROP` UI control element.
----@param parent Control: The parent control for the backdrop.
----@param anchors table: The anchor points for the backdrop.
----@param dims table: The dimensions of the backdrop.
----@param center table: The color of the center of the backdrop.
----@param edge table: The color of the edge of the backdrop.
+---@param parent object|nil: The parent control for the backdrop.
+---@param anchors string|table|nil: The anchor points for the backdrop.
+---@param dims table|nil: The dimensions of the backdrop.
+---@param center table|nil: The color of the center of the backdrop.
+---@param edge table|nil: The color of the edge of the backdrop.
 ---@param hidden boolean: Whether the backdrop is hidden or not.
----@return bg|nil: The created backdrop control.
+---@return object|nil bg: The created backdrop control.
 function UI.Backdrop(parent, anchors, dims, center, edge, hidden)
     if not parent then
         return
     end
     local centerColor = (center ~= nil and #center == 4) and center or { 0, 0, 0, 0.4 }
     local edgeColor = (edge ~= nil and #edge == 4) and edge or { 0, 0, 0, 0.6 }
-    ---@class bg : BackdropControl
+    ---@type object
     local bg = windowManager:CreateControl(nil, parent, CT_BACKDROP)
     bg:SetCenterColor(centerColor[1], centerColor[2], centerColor[3], centerColor[4])
     bg:SetEdgeColor(edgeColor[1], edgeColor[2], edgeColor[3], edgeColor[4])
@@ -127,20 +127,20 @@ function UI.Backdrop(parent, anchors, dims, center, edge, hidden)
 end
 
 ---Creates a `CT_BACKDROP` UI control element with Chat Window background style.
----@param parent Control: The parent control for the backdrop.
----@param anchors table: The anchor points for the backdrop.
----@param dims table: The dimensions of the backdrop.
----@param color table: The color of the backdrop.
+---@param parent object|nil: The parent control for the backdrop.
+---@param anchors table|nil: The anchor points for the backdrop.
+---@param dims table|nil: The dimensions of the backdrop.
+---@param color table|nil: The color of the backdrop.
 ---@param edge_size number: The size of the backdrop edge.
 ---@param hidden boolean: Whether the backdrop is hidden or not.
----@return bg|nil: The created backdrop control.
+---@return object|nil bg: The created backdrop control.
 function UI.ChatBackdrop(parent, anchors, dims, color, edge_size, hidden)
     if not parent then
         return
     end
     local bgColor = (color ~= nil and #color == 4) and color or { 0, 0, 0, 1 }
     local edgeSize = (edge_size ~= nil and edge_size > 0) and edge_size or 16
-    ---@class bg : BackdropControl
+    ---@type object
     local bg = windowManager:CreateControl(nil, parent, CT_BACKDROP)
     bg:SetCenterColor(bgColor[1], bgColor[2], bgColor[3], bgColor[4])
     bg:SetEdgeColor(bgColor[1], bgColor[2], bgColor[3], bgColor[4])
@@ -163,17 +163,17 @@ function UI.ChatBackdrop(parent, anchors, dims, color, edge_size, hidden)
 end
 
 ---Creates a `CT_STATUSBAR` UI control element.
----@param parent Control: The parent control for the status bar.
----@param anchors table: The anchor points for the status bar.
----@param dims table: The dimensions of the status bar.
----@param color table: The color of the status bar.
+---@param parent object|nil: The parent control for the status bar.
+---@param anchors table|nil: The anchor points for the status bar.
+---@param dims table|nil: The dimensions of the status bar.
+---@param color table|nil: The color of the status bar.
 ---@param hidden boolean: Whether the status bar is hidden or not.
----@return sb|nil: The created status bar control.
+---@return object|nil sb: The created status bar control.
 function UI.StatusBar(parent, anchors, dims, color, hidden)
     if not parent then
         return
     end
-    ---@class sb : StatusBarControl
+    ---@ctype object
     local sb = windowManager:CreateControl(nil, parent, CT_STATUSBAR)
     sb:SetHidden(hidden)
     if anchors == "fill" then
@@ -193,22 +193,22 @@ function UI.StatusBar(parent, anchors, dims, color, hidden)
 end
 
 --- Creates a `CT_STATUSBAR UI` control element.
---- @param parent Control: The parent control for the label.
---- @param anchors table: The anchor points for the label.
---- @param dims table: The dimensions of the label.
---- @param align table: The text alignment of the label.
---- @param font string: The font for the label.
---- @param text string: The text for the label.
+--- @param parent object|nil: The parent control for the label.
+--- @param anchors table|nil: The anchor points for the label.
+--- @param dims table|nil: The dimensions of the label.
+--- @param align table|nil: The text alignment of the label.
+--- @param font string|nil: The font for the label.
+--- @param text string|nil: The text for the label.
 --- @param hidden boolean: Whether the label is hidden or not.
---- @param name string: The name of the label control.
---- @return label|nil: The created label control.
+--- @param name? string: The name of the label control.
+--- @return object|nil label: The created label control.
 function UI.Label(parent, anchors, dims, align, font, text, hidden, name)
     if not parent then
         return
     end
     local alignment = (align ~= nil and #align == 2) and align or { TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER }
     local labelName = name or nil
-    ---@class label : LabelControl
+    ---@type object
     local label = windowManager:CreateControl(labelName, parent, CT_LABEL)
     label:SetFont(font or "ZoFontGame")
     label:SetHorizontalAlignment(alignment[1])

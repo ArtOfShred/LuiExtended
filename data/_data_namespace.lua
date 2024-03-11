@@ -3,7 +3,6 @@
     License: The MIT License (MIT)
 --]]
 
----@type LUIE
 local LUIE = LUIE
 
 ---@class Data
@@ -51,5 +50,4 @@ local Data =
     ZoneTable = {},
 }
 
----@class LUIE.Data : Data
 LUIE.Data = Data

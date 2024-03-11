@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class LUIE
+
 local LUIE = LUIE
 
 local string_format = string.format
@@ -169,8 +169,8 @@ end
 --- Returns a formatted number with commas.
 --- Function to abbreviate a number by shortening and adding commas.
 --- @param number number: The number to be abbreviated.
---- @param shorten boolean: Whether to shorten the number or not.
---- @param comma boolean: Whether to add commas or not.
+--- @param shorten? boolean: Whether to shorten the number or not.
+--- @param comma? boolean: Whether to add commas or not.
 --- @return number|string: The formatted number with commas.
 function LUIE.AbbreviateNumber(number, shorten, comma)
     if number > 0 and shorten then

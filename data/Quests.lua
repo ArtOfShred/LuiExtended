@@ -373,5 +373,4 @@ Quests.QuestItemModifyOnRemove = {
     end, -- Dwemer Device (Tip of the Spearhead)
 }
 
----@type Quests
 LUIE.Data.Quests = Quests

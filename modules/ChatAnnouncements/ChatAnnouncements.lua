@@ -2,7 +2,8 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
----@class LUIE
+
+
 local LUIE = LUIE
 -- ChatAnnouncements namespace
 LUIE.ChatAnnouncements = {}
@@ -10186,6 +10187,8 @@ function ChatAnnouncements.HookFunction()
         },
     }
 
+    local ALERT_IGNORED_STRING = IsConsoleUI() and SI_PLAYER_TO_PLAYER_BLOCKED or SI_PLAYER_TO_PLAYER_IGNORED
+
     local function AlertIgnored(SendString)
         local alertString = IsConsoleUI() and SI_PLAYER_TO_PLAYER_BLOCKED or SendString
         printToChat(GetString(alertString), true)
@@ -10195,6 +10198,8 @@ function ChatAnnouncements.HookFunction()
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
     end
 
+    ---@param self ZO_PlayerToPlayer
+    ---@param isIgnored boolean
     PLAYER_TO_PLAYER.ShowPlayerInteractMenu = function (self, isIgnored)
         local currentTargetCharacterName = self.currentTargetCharacterName
         local currentTargetCharacterNameRaw = self.currentTargetCharacterNameRaw
@@ -10215,12 +10220,8 @@ function ChatAnnouncements.HookFunction()
         --Whisper--
         if IsChatSystemAvailableForCurrentPlatform() then
             local nameToUse = IsConsoleUI() and currentTargetDisplayName or primaryNameInternal
-            local function WhisperOption()
-                StartChatInput(nil, CHAT_CHANNEL_WHISPER, nameToUse)
-            end
-            local function WhisperIgnore()
-                AlertIgnored(LUIE_STRING_IGNORE_ERROR_WHISPER)
-            end
+            local function WhisperOption() StartChatInput(nil, CHAT_CHANNEL_WHISPER, nameToUse); end
+            local function WhisperIgnore() AlertIgnored(LUIE_STRING_IGNORE_ERROR_WHISPER); end
             local whisperFunction = ENABLED_IF_NOT_IGNORED and WhisperOption or WhisperIgnore
             self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_WHISPER), platformIcons[SI_PLAYER_TO_PLAYER_WHISPER], ENABLED_IF_NOT_IGNORED, whisperFunction)
         end
@@ -10407,6 +10408,8 @@ function ChatAnnouncements.HookFunction()
         self.showingPlayerInteractMenu = true
         self.isLastRadialMenuGamepad = IsInGamepadPreferredMode()
     end
+
+
 
     -- Since the Crown Store Gifting functionality was added, hooking these functions seems to cause an insecure code issue when receiving gifts via the Player to Player notification system.
     -- TODO: Try to securecall some of this or maybe use a message specific filter (hook alerts handling?)

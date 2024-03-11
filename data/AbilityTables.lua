@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class LUIE
+---@type LUIE
 local LUIE = LUIE
 
 -- AbilityTables namespace

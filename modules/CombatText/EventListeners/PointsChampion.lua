@@ -2,7 +2,7 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
----@class LUIE
+
 local LUIE = LUIE
 LUIE.CombatTextPointsChampionEventListener = LUIE.CombatTextEventListener:Subclass()
 local CombatTextPointsChampionEventListener = LUIE.CombatTextPointsChampionEventListener

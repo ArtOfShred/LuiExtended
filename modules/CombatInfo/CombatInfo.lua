@@ -3,12 +3,13 @@
     License: The MIT License (MIT)
 --]]
 
----@class LUIE
+
 local LUIE = LUIE
 -- CombatInfo namespace
+---@class LUIE.CombatInfo : LUIE
 LUIE.CombatInfo = {}
 
----@class CombatInfo : LUIE
+---@class CombatInfo : LUIE.CombatInfo
 local CombatInfo = LUIE.CombatInfo
 
 local UI = LUIE.UI
@@ -2606,7 +2607,6 @@ function CombatInfo.ShowCustomToggle(slotNum)
         local name = "ActionButton" .. slotNum .. "Toggle_LUIE"
         local window = windowManager:GetControlByName(name, "") -- Check to see if this frame already exists, don't create it if it does.
         if window == nil then
-            ---@class toggleFrame : TextureControl
             local toggleFrame = windowManager:CreateControl("$(parent)Toggle_LUIE", actionButton.slot, CT_TEXTURE)
             --toggleFrame.back = UI.Texture(toggleFrame, nil, nil, "/esoui/art/actionbar/actionslot_toggledon.dds")
             toggleFrame:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))

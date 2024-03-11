@@ -3,7 +3,6 @@
     License: The MIT License (MIT)
 --]]
 
----@type LUIE
 local LUIE = LUIE
 
 ---@class BlacklistPresets

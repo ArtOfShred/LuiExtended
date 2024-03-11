@@ -3,7 +3,6 @@
     License: The MIT License (MIT)
 --]]
 
----@class UI : LUIE
 local UI = LUIE.UI
 
 local sceneManager = SCENE_MANAGER
@@ -143,19 +142,17 @@ function LUIE.SetElementPosition()
 end
 
 --- Helper function to create a top-level window.
----@param k Control: The element to create the top-level window for.
+---@param k object: The element to create the top-level window for.
 ---@param v table: The table containing window configuration values.
 ---@param point number: The anchor point for the top-level window.
 ---@param relativePoint number: The relative anchor point for the top-level window.
 ---@param offsetX number: The X offset for the top-level window.
 ---@param offsetY number: The Y offset for the top-level window.
----@param relativeTo Control: The element to which the top-level window is relative.
----@return tlw: The created top-level window.
-local function createTopLevelWindow(k, v, point, relativePoint, offsetX, offsetY, relativeTo)
-    ---@class tlw
-    ---@field preview BackdropControl
-    ---@field previewLabel LabelControl
-    local tlw = UI.TopLevel({ point, relativePoint, offsetX, offsetY, relativeTo }, { k:GetWidth(), k:GetHeight() })
+---@param relativeTo object: The element to which the top-level window is relative.
+---@return TopLevelWindow tlw: The created top-level window.
+local function createTopLevelWindow(k, v, point, relativePoint, offsetX, offsetY, relativeTo, anchorConstrains)
+    ---@type TopLevelWindow
+    local tlw = UI.TopLevel({ point, relativePoint, offsetX, offsetY, relativeTo }, { k:GetWidth(), k:GetHeight() }, k:GetDimensionConstraints())
     tlw:SetDrawLayer(DL_BACKGROUND)
     tlw:SetDrawTier(DT_MEDIUM)
     tlw.customPositionAttr = k:GetName()
@@ -179,7 +176,7 @@ function LUIE.SetupElementMover(state)
                 k:SetHeight(v[3])
             end
             -- Create a top-level window for backbar buttons.
-            local isValidAnchor, point, relativeTo, relativePoint, offsetX, offsetY = k:GetAnchor()
+            local isValidAnchor, point, relativeTo, relativePoint, offsetX, offsetY, anchorConstrains = k:GetAnchor()
             -- Default Alert text doesn't really align with the frame so we just move this visually on initial setup.
             if k == ZO_AlertTextNotification then
                 local frameName = k:GetName()
@@ -189,10 +186,11 @@ function LUIE.SetupElementMover(state)
                     relativePoint = TOPRIGHT
                     offsetX = 0
                     offsetY = 0
+                    anchorConstrains = k:GetDimensionConstraints()
                 end
             end
-            ---@type tlw
-            local tlw = createTopLevelWindow(k, v, point, relativePoint, offsetX, offsetY, relativeTo)
+            ---@type TopLevelWindow
+            local tlw = createTopLevelWindow(k, v, point, relativePoint, offsetX, offsetY, relativeTo, anchorConstrains)
             -- Setup handlers to set the custom position SV and call LUIE.SetElementPosition() to apply this positioning
             tlw:SetHandler("OnMoveStop", function (self)
                 LUIE.SV[self.customPositionAttr] = { self:GetLeft(), self:GetTop() }
@@ -200,7 +198,7 @@ function LUIE.SetupElementMover(state)
             end)
             g_LUIE_Movers[tlw.customPositionAttr] = tlw
         end
-        ---@type tlw
+        ---@type TopLevelWindow
         local tlw = g_LUIE_Movers[k:GetName()]
         tlw:SetMouseEnabled(state)
         tlw:SetMovable(state)

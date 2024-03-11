@@ -4,7 +4,6 @@
     License: The MIT License (MIT)
 --]]
 
----@type LUIE
 local LUIE = LUIE
 
 -- For debug function - convert result reason codes to string value

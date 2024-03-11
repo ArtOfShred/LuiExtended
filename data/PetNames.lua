@@ -68,5 +68,4 @@ local PetNames =
     },
 }
 
----@type PetNames
 LUIE.Data.PetNames = PetNames

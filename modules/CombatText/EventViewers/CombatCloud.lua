@@ -2,14 +2,19 @@
     LuiExtended
     License: The MIT License (MIT)
 --]]
----@class LUIE
+
+
 local LUIE = LUIE
+
+---@class LUIE.CombatTextCombatCloudEventViewer : LUIE, ZO_Object
 LUIE.CombatTextCombatCloudEventViewer = LUIE.CombatTextEventViewer:Subclass()
+
 local CombatTextCombatCloudEventViewer = LUIE.CombatTextCombatCloudEventViewer
 
 local CombatTextConstants = LUIE.Data.CombatTextConstants
 local AbbreviateNumber = LUIE.AbbreviateNumber
 local string_format = string.format
+
 function CombatTextCombatCloudEventViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
     obj:RegisterCallback(CombatTextConstants.eventType.COMBAT, function (...)
