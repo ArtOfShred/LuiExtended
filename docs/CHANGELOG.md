@@ -1,3 +1,15 @@
+# Version 6.7.0
+
+General
+- Updated fonts to .slug format for Update 41 API changes.
+- Fixed an issue where the Player to Player interaction menu could throw UI errors.
+
+Combat Info
+- Fixed issues with Negate tracking in the Crowd Control Tracker (thanks to ACastanza).
+- Fixed issues with CC Tracker occasionally throwing errors with snares & roots.
+
+---
+
 # Version 6.6.9
 
 Combat Text

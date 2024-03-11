@@ -4,7 +4,7 @@ If you'd like to help with LuiExtended localization, the easiest way to contribu
 
 Please always work with the "develop" branch on the [LuiExtended GitHub project page][2].
 
-If you are unfamiliar with GitHub, feel free to reach out to me via email at [artofshred@artofshred.net][3], or you can directly send me your modified .lua file or specific strings through a file upload service or pastebin.
+If you are unfamiliar with GitHub, feel free to reach out to me via email at [ithproductions@gmail.com][3], or you can directly send me your modified .lua file or specific strings through a file upload service or pastebin.
 
 ## Status
 
@@ -48,4 +48,4 @@ This is the translation for the AddOn Settings Menu.
 
 [1]: https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request
 [2]: https://github.com/ArtOfShred/LuiExtended/tree/develop
-[3]: mailto:artofshred@artofshred.net
+[3]: mailto:ithproductions@gmail.com

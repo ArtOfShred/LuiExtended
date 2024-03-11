@@ -1,9 +1,9 @@
-## Title: |cE12000L|cFFFFB0ui E|rxtended|
+## Title: |c00C000Lui Extended|r
 ## Author: ArtOfShred, DakJaniels, psypanda, Saenic & SpellBuilder
 ## Version: 6.7.0
 ## APIVersion: 101041
-## AddOnVersion: 671
-## Description: Provides UnitFrames, InfoPanel, Combat Text & Info, Buffs & Debuff Tracking, Chat Announcements and Slash Commands.
+## AddOnVersion: 670
+## Description: Provides UnitFrames, InfoPanel, Combat Text & Info, Buff & Debuff Tracking, Chat Announcements and Slash Commands.
 ## DependsOn: LibAddonMenu-2.0>=36 LibMediaProvider-1.0>=28
 ## OptionalDependsOn: LibChatMessage>=105 pChat>=10004040 CombatMetrics>=10515
 ## OptionalDependsOn: LibDebugLogger>=263 DolgubonsLazyWritCreator LibLazyCrafting>=4000 LootLog
