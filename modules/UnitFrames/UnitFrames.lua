@@ -247,7 +247,7 @@ local g_PendingUpdate = {
 }
 
 -- Font to be used on default UI overlay labels
-local defaultLabelFont = "/LuiExtended/media/fonts/Fontin/fontin_sans_sc.otf|15|outline"
+local defaultLabelFont = "/LuiExtended/media/fonts/Fontin/fontin_sans_sc.slug|15|outline"
 
 -- Labels for Offline/Dead/Resurrection Status
 local strDead = GetString(SI_UNIT_FRAME_STATUS_DEAD)

@@ -25,12 +25,12 @@ end
 local function UpdateFonts()
     local LMP = LibMediaProvider
     if LMP == nil then
-      return
+        return
     end
     for _, f in pairs(LMP:List(LMP.MediaType.FONT)) do
-      if not LUIE.Fonts[f] then
-        LUIE.Fonts[f] = LMP:Fetch(LMP.MediaType.FONT, f)
-      end
+        if not LUIE.Fonts[f] then
+            LUIE.Fonts[f] = LMP:Fetch(LMP.MediaType.FONT, f)
+        end
     end
 end
 

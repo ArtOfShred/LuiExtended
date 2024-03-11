@@ -51,7 +51,7 @@ LUIE.Defaults     = {
 }
 
 -- Global fonts table to use in other parts of this addon
-LUIE.Fonts  = {
+LUIE.Fonts             = {
     ["Adventure"]                    = "/LuiExtended/media/fonts/Adventure/adventure.slug",
     ["ArchivoNarrow Bold"]           = "/LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-Bold.slug",
     ["ArchivoNarrow BoldItalic"]     = "/LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-BoldItalic.slug",

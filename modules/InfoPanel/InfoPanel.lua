@@ -39,7 +39,7 @@ InfoPanel.SV = nil
 InfoPanel.panelUnlocked = false
 
 -- UI elements
-local infoPanelFontFace = "/EsoUI/Common/Fonts/Univers67.otf"
+local infoPanelFontFace = "/EsoUI/Common/Fonts/Univers67.slug"
 local infoPanelFontSize = 16
 local infoPanelFontStyle = "soft-shadow-thin"
 local g_infoPanelFont = string_format("%s|%d|%s", infoPanelFontFace, infoPanelFontSize, infoPanelFontStyle)
