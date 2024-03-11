@@ -14,6 +14,7 @@ local changelogMessages = {
     "",
     "|cFFFF00PTS:101041:|r",
     "[*] Added .slug fonts for API 101041.",
+	"[*] Updatated dependancy versions.",
     "",
     "|cFFA500LuiExtended Version 6.6.9|r",
     "",
