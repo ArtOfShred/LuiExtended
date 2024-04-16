@@ -1831,7 +1831,7 @@ function CombatInfo.CreateCastBar()
 
     castbar:SetDimensions(CombatInfo.SV.CastBarIconSize, CombatInfo.SV.CastBarIconSize)
 
-    castbar.back = UI.Texture(castbar, nil, nil, "/esoui/art/actionbar/abilityframe64_up.dds", nil, false)
+    castbar.back = UI.Texture(castbar, nil, nil, "LuiExtended/media/icons/icon_border/icon-border.dds", nil, false)
     castbar.back:SetAnchor(TOPLEFT, castbar, TOPLEFT)
     castbar.back:SetAnchor(BOTTOMRIGHT, castbar, BOTTOMRIGHT)
 

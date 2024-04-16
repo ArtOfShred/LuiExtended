@@ -182,7 +182,7 @@ function AbilityAlerts.CreateAlertFrame()
         alert.icon:SetDimensions(CombatInfo.SV.alerts.toggles.alertFontSize + 8, CombatInfo.SV.alerts.toggles.alertFontSize + 8)
         alert.icon:SetAnchor(LEFT, alert.modifier, RIGHT, 6, 0)
 
-        alert.icon.back = UI.Texture(alert.icon, nil, nil, "/esoui/art/actionbar/abilityframe64_up.dds", nil, false)
+        alert.icon.back = UI.Texture(alert.icon, nil, nil, "LuiExtended/media/icons/icon_border/icon-border.dds", nil, false)
         alert.icon.back:SetAnchor(TOPLEFT, alert.icon, TOPLEFT)
         alert.icon.back:SetAnchor(BOTTOMRIGHT, alert.icon, BOTTOMRIGHT)
 

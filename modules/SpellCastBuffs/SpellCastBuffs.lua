@@ -1619,7 +1619,7 @@ function SpellCastBuffs.CreateSingleIcon(container, AnchorItem, effectType)
     buff:SetHandler("OnMouseUp", SpellCastBuffs.Buff_OnMouseUp)
 
     -- Border
-    buff.back = UI.Texture(buff, nil, nil, "/esoui/art/actionbar/abilityframe64_up.dds", nil, false)
+    buff.back = UI.Texture(buff, nil, nil, "LuiExtended/media/icons/icon_border/icon-border.dds", nil, false)
     buff.back:SetAnchor(TOPLEFT, buff, TOPLEFT)
     buff.back:SetAnchor(BOTTOMRIGHT, buff, BOTTOMRIGHT)
     -- Glow border
