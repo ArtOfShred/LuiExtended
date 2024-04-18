@@ -2143,7 +2143,7 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
     end
 
     local duration
-    local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId, overrideRank, casterUnitTag)
+    local channeled, durationValue = GetAbilityCastInfo(abilityId, overrideRank, casterUnitTag)
     local forceChanneled = false
 
     -- Override certain things to display as a channel rather than cast.
@@ -2153,9 +2153,9 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
     end
 
     if channeled then
-        duration = Castbar.CastDurationFix[abilityId] or result == ACTION_RESULT_EFFECT_GAINED_DURATION and hitValue or channelTime
+        duration = Castbar.CastDurationFix[abilityId] or result == ACTION_RESULT_EFFECT_GAINED_DURATION and hitValue or durationValue
     else
-        duration = Castbar.CastDurationFix[abilityId] or castTime
+        duration = Castbar.CastDurationFix[abilityId] or durationValue
     end
 
     -- End the cast bar and restart if a new begin event is detected and the effect isn't a channel or fake cast
@@ -2172,7 +2172,7 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
     if Castbar.CastChannelConvert[abilityId] then
         channeled = true
         forceChanneled = true
-        duration = Castbar.CastDurationFix[abilityId] or castTime
+        duration = Castbar.CastDurationFix[abilityId] or durationValue
     end
 
     -- Some abilities cast into a channeled stun effect - we want these abilities to display the cast and channel if flagged.
@@ -2180,7 +2180,7 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
     if Castbar.MultiCast[abilityId] then
         if result == 2200 then
             channeled = false
-            duration = castTime or 0
+            duration = durationValue or 0
         elseif result == 2240 then
             CombatInfo.StopCastBar() -- Stop the cast bar when the GAINED event happens so that we can display the channel when the cast ends
         end
