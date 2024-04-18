@@ -322,3 +322,12 @@ function LUIE.UpdateMundusTooltipSyntax(abilityId, tooltipText)
     tooltipText = zo_strgsub(tooltipText, GetString(LUIE_STRING_SKILL_MUNDUS_STRING), GetString(LUIE_STRING_SKILL_DRINK_INCREASE))
     return tooltipText
 end
+
+function LUIE.GetSlotTrueBoundId(index, bar)
+    local id = GetSlotBoundId(index, bar)
+    local actionType = GetSlotType(index, bar)
+    if actionType == ACTION_TYPE_CRAFTED_ABILITY then
+        id = GetAbilityIdForCraftedAbilityId(id)
+    end
+    return id
+end
