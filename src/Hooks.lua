@@ -1086,6 +1086,7 @@ Override function for GetKillingAttackInfo.
 
     SetupSlotHandlers = {
         [ACTION_TYPE_ABILITY] = SetupAbilitySlot,
+        [ACTION_TYPE_CRAFTED_ABILITY] = SetupAbilitySlot,
         [ACTION_TYPE_ITEM] = SetupItemSlot,
         [ACTION_TYPE_COLLECTIBLE] = SetupCollectibleActionSlot,
         [ACTION_TYPE_QUEST_ITEM] = SetupQuestItemActionSlot,

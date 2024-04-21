@@ -640,7 +640,7 @@ function CombatInfo.HookGCD()
         local slotType = GetSlotType(slotnum, hotbarCategory)
         local showGlobalCooldownForCollectible = global and slotType == ACTION_TYPE_COLLECTIBLE and globalSlotType == ACTION_TYPE_COLLECTIBLE
         local showCooldown = isInCooldown and (CombatInfo.SV.GlobalShowGCD or not global or showGlobalCooldownForCollectible)
-        local updateChromaQuickslot = slotType ~= ACTION_TYPE_ABILITY and ZO_RZCHROMA_EFFECTS
+        local updateChromaQuickslot = ((slotType ~= ACTION_TYPE_ABILITY) or (slotType ~= ACTION_TYPE_CRAFTED_ABILITY)) and ZO_RZCHROMA_EFFECTS
         local NO_LEADING_EDGE = false
         self.cooldown:SetHidden(not showCooldown)
 
