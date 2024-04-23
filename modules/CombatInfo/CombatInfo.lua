@@ -725,7 +725,7 @@ end
 
 -- Helper function to get override ability duration.
 local function GetUpdatedAbilityDuration(abilityId, overrideRank, casterUnitTag)
-    local duration = g_barDurationOverride[abilityId] or GetAbilityDuration(abilityId, overrideRank, casterUnitTag)
+    local duration = g_barDurationOverride[abilityId] or GetAbilityDuration(abilityId, overrideRank, casterUnitTag) or 0
     return duration
 end
 
@@ -1335,7 +1335,7 @@ function CombatInfo.BarHighlightSwap(abilityId, overrideRank, casterUnitTag)
         end
 
         if duration > 0 then
-            duration = (GetAbilityDuration(duration, overrideRank, casterUnitTag) - GetAbilityDuration(durationMod, overrideRank, casterUnitTag))
+            duration = ((GetAbilityDuration(duration, overrideRank, casterUnitTag) or 0) - (GetAbilityDuration(durationMod, overrideRank, casterUnitTag) or 0))
             local timeStarted = GetGameTimeSeconds()
             local timeEnding = timeStarted + (duration / 1000)
             CombatInfo.OnEffectChanged(nil, EFFECT_RESULT_GAINED, nil, nil, unitTag, timeStarted, timeEnding, 0, nil, nil, 1, ABILITY_TYPE_BONUS, 0, nil, nil, abilityId, 1, true)

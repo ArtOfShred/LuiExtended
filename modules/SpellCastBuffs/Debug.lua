@@ -45,7 +45,7 @@ function SpellCastBuffs.EventCombatDebug(eventCode, result, isError, abilityName
     local source = zo_strformat("<<C:1>>", sourceName)
     local target = zo_strformat("<<C:1>>", targetName)
     local ability = zo_strformat("<<C:1>>", nameFormatted)
-    local duration = GetAbilityDuration(abilityId, overrideRank, casterUnitTag)
+    local duration = GetAbilityDuration(abilityId, overrideRank, casterUnitTag) or 0
     local channeled, durationValue = GetAbilityCastInfo(abilityId, overrideRank, casterUnitTag)
     local showacasttime = "" or GetString(SI_ABILITY_TOOLTIP_CHANNEL_TIME_LABEL)
     local showachantime = "" or GetString(SI_ABILITY_TOOLTIP_CAST_TIME_LABEL)

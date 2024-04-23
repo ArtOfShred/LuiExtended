@@ -456,7 +456,7 @@ Override function for GetKillingAttackInfo.
                         elseif LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Mod then
                             value2 = zo_floor(timer + LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Mod + 0.5)
                         elseif LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id then
-                            value2 = zo_floor(GetAbilityDuration(LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id) + 0.5) / 1000
+                            value2 = zo_floor((GetAbilityDuration(LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id) or 0) + 0.5) / 1000
                         else
                             value2 = 0
                         end
@@ -723,7 +723,7 @@ Override function for GetKillingAttackInfo.
                     elseif LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Mod then
                         value2 = zo_floor(timer + LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Mod + 0.5)
                     elseif LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id then
-                        value2 = zo_floor(GetAbilityDuration(LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id) + 0.5) / 1000
+                        value2 = zo_floor((GetAbilityDuration(LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id) or 0) + 0.5) / 1000
                     else
                         value2 = 0
                     end

@@ -1048,7 +1048,7 @@ local Tooltips = {
     Skill_Structured_Entropy = GetString(LUIE_STRING_SKILL_STRUCTURED_ENTROPY_TP),
     Skill_Fire_Rune = GetString(LUIE_STRING_SKILL_FIRE_RUNE_TP),
     Skill_Volcanic_Rune = GetString(LUIE_STRING_SKILL_VOLCANIC_RUNE_TP),
-    Skill_Scalding_Rune = zo_strformat(GetString(LUIE_STRING_SKILL_SCALDING_RUNE_TP), (GetAbilityDuration(40468, override, csunittag) / 1000) + GetNumPassiveSkillRanks(GetSkillLineIndicesFromSkillLineId(44), select(2, GetSkillLineIndicesFromSkillLineId(44)), 8)),
+    Skill_Scalding_Rune = zo_strformat(GetString(LUIE_STRING_SKILL_SCALDING_RUNE_TP), ((GetAbilityDuration(40468, override, csunittag) or 0) / 1000) + GetNumPassiveSkillRanks(GetSkillLineIndicesFromSkillLineId(44), select(2, GetSkillLineIndicesFromSkillLineId(44)), 8)),
     Skill_Equilibrium = GetString(LUIE_STRING_SKILL_EQUILIBRIUM_TP),
     Skill_Spell_Symmetry = GetString(LUIE_STRING_SKILL_SPELL_SYMMETRY_TP),
     Skill_Meteor = GetString(LUIE_STRING_SKILL_METEOR_TP),
@@ -1591,7 +1591,7 @@ function LUIE.DynamicTooltip(abilityId)
 
     -- Unchained
     if abilityId == 98316 then
-        local duration = GetAbilityDuration(98316) / 1000
+        local duration = (GetAbilityDuration(98316) or 0) / 1000
         local pointsSpent = GetNumPointsSpentOnChampionSkill(64) * 1.1
         local adjustPoints = zo_floor(pointsSpent * 100 + 0.5) / 100 -- Remove decimal places
 
@@ -1611,7 +1611,7 @@ function LUIE.DynamicTooltip(abilityId)
     -- Unstoppable Brute
     if abilityId == 126582 then
         local counter = GetEquippedArmorPieces(ARMORTYPE_HEAVY) * 5
-        local tooltipValue1 = GetAbilityDuration(126582) / 1000
+        local tooltipValue1 = (GetAbilityDuration(126582) or 0) / 1000
         local tooltipValue2 = counter
         tooltip = zo_strformat(GetString(LUIE_STRING_SKILL_UNSTOPPABLE_BRUTE), tooltipValue1, tooltipValue2)
     end
@@ -1619,7 +1619,7 @@ function LUIE.DynamicTooltip(abilityId)
     -- Immovable
     if abilityId == 126583 then
         local counter = GetEquippedArmorPieces(ARMORTYPE_HEAVY) * 5
-        local tooltipValue1 = GetAbilityDuration(126583) / 1000
+        local tooltipValue1 = (GetAbilityDuration(126583) or 0) / 1000
         local tooltipValue2 = counter
         local tooltipValue3 = 65 + counter
         tooltip = zo_strformat(GetString(LUIE_STRING_SKILL_IMMOVABLE), tooltipValue1, tooltipValue2, tooltipValue3)
