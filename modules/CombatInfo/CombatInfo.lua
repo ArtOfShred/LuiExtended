@@ -544,7 +544,7 @@ function CombatInfo.SetupBackBarIcons(button, flip)
     -- Setup icons for backbar
     local hotbarCategory = g_hotbarCategory == HOTBAR_CATEGORY_BACKUP and HOTBAR_CATEGORY_PRIMARY or HOTBAR_CATEGORY_BACKUP
     local slotNum = button.slot.slotNum
-    local slotId = GetSlotBoundId(slotNum - BACKBAR_INDEX_OFFSET, hotbarCategory)
+    local slotId = LUIE.GetSlotTrueBoundId(slotNum - BACKBAR_INDEX_OFFSET, hotbarCategory)
 
     -- Check backbar weapon type
     local weaponSlot = g_hotbarCategory == HOTBAR_CATEGORY_BACKUP and 4 or 20
@@ -640,7 +640,7 @@ function CombatInfo.HookGCD()
         local slotType = GetSlotType(slotnum, hotbarCategory)
         local showGlobalCooldownForCollectible = global and slotType == ACTION_TYPE_COLLECTIBLE and globalSlotType == ACTION_TYPE_COLLECTIBLE
         local showCooldown = isInCooldown and (CombatInfo.SV.GlobalShowGCD or not global or showGlobalCooldownForCollectible)
-        local updateChromaQuickslot = slotType ~= ACTION_TYPE_ABILITY and ZO_RZCHROMA_EFFECTS
+        local updateChromaQuickslot = ((slotType ~= ACTION_TYPE_ABILITY) or (slotType ~= ACTION_TYPE_CRAFTED_ABILITY)) and ZO_RZCHROMA_EFFECTS
         local NO_LEADING_EDGE = false
         self.cooldown:SetHidden(not showCooldown)
 
@@ -725,7 +725,7 @@ end
 
 -- Helper function to get override ability duration.
 local function GetUpdatedAbilityDuration(abilityId, overrideRank, casterUnitTag)
-    local duration = g_barDurationOverride[abilityId] or GetAbilityDuration(abilityId, overrideRank, casterUnitTag)
+    local duration = g_barDurationOverride[abilityId] or GetAbilityDuration(abilityId, overrideRank, casterUnitTag) or 0
     return duration
 end
 
@@ -1335,7 +1335,7 @@ function CombatInfo.BarHighlightSwap(abilityId, overrideRank, casterUnitTag)
         end
 
         if duration > 0 then
-            duration = (GetAbilityDuration(duration, overrideRank, casterUnitTag) - GetAbilityDuration(durationMod, overrideRank, casterUnitTag))
+            duration = ((GetAbilityDuration(duration, overrideRank, casterUnitTag) or 0) - (GetAbilityDuration(durationMod, overrideRank, casterUnitTag) or 0))
             local timeStarted = GetGameTimeSeconds()
             local timeEnding = timeStarted + (duration / 1000)
             CombatInfo.OnEffectChanged(nil, EFFECT_RESULT_GAINED, nil, nil, unitTag, timeStarted, timeEnding, 0, nil, nil, 1, ABILITY_TYPE_BONUS, 0, nil, nil, abilityId, 1, true)
@@ -2143,7 +2143,7 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
     end
 
     local duration
-    local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId, overrideRank, casterUnitTag)
+    local channeled, durationValue = GetAbilityCastInfo(abilityId, overrideRank, casterUnitTag)
     local forceChanneled = false
 
     -- Override certain things to display as a channel rather than cast.
@@ -2153,9 +2153,9 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
     end
 
     if channeled then
-        duration = Castbar.CastDurationFix[abilityId] or result == ACTION_RESULT_EFFECT_GAINED_DURATION and hitValue or channelTime
+        duration = Castbar.CastDurationFix[abilityId] or result == ACTION_RESULT_EFFECT_GAINED_DURATION and hitValue or durationValue
     else
-        duration = Castbar.CastDurationFix[abilityId] or castTime
+        duration = Castbar.CastDurationFix[abilityId] or durationValue
     end
 
     -- End the cast bar and restart if a new begin event is detected and the effect isn't a channel or fake cast
@@ -2172,7 +2172,7 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
     if Castbar.CastChannelConvert[abilityId] then
         channeled = true
         forceChanneled = true
-        duration = Castbar.CastDurationFix[abilityId] or castTime
+        duration = Castbar.CastDurationFix[abilityId] or durationValue
     end
 
     -- Some abilities cast into a channeled stun effect - we want these abilities to display the cast and channel if flagged.
@@ -2180,7 +2180,7 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
     if Castbar.MultiCast[abilityId] then
         if result == 2200 then
             channeled = false
-            duration = castTime or 0
+            duration = durationValue or 0
         elseif result == 2240 then
             CombatInfo.StopCastBar() -- Stop the cast bar when the GAINED event happens so that we can display the channel when the cast ends
         end
@@ -2389,10 +2389,10 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
         return
     end
 
-    local ability_id = GetSlotBoundId(slotNum, g_hotbarCategory)
+    local ability_id = LUIE.GetSlotTrueBoundId(slotNum, g_hotbarCategory)
     if slotNum > BACKBAR_INDEX_OFFSET then
         local hotbarCategory = g_hotbarCategory == HOTBAR_CATEGORY_BACKUP and HOTBAR_CATEGORY_PRIMARY or HOTBAR_CATEGORY_BACKUP
-        ability_id = GetSlotBoundId(slotNum - BACKBAR_INDEX_OFFSET, hotbarCategory)
+        ability_id = LUIE.GetSlotTrueBoundId(slotNum - BACKBAR_INDEX_OFFSET, hotbarCategory)
 
         -- Check backbar weapon type
         local weaponSlot = g_hotbarCategory == HOTBAR_CATEGORY_BACKUP and 4 or 20
@@ -2419,7 +2419,8 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
     end
 
     local abilityName = Effects.EffectOverride[ability_id] and Effects.EffectOverride[ability_id].name or GetAbilityName(ability_id)
-    local duration = GetUpdatedAbilityDuration(ability_id)
+    local duration = GetUpdatedAbilityDuration(ability_id) or 0
+
     local currentTime = GetGameTimeMilliseconds()
 
     local triggeredSlots = slotNum > BACKBAR_INDEX_OFFSET and g_triggeredSlotsBack or g_triggeredSlotsFront

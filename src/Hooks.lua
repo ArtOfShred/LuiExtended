@@ -456,7 +456,7 @@ Override function for GetKillingAttackInfo.
                         elseif LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Mod then
                             value2 = zo_floor(timer + LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Mod + 0.5)
                         elseif LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id then
-                            value2 = zo_floor(GetAbilityDuration(LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id) + 0.5) / 1000
+                            value2 = zo_floor((GetAbilityDuration(LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id) or 0) + 0.5) / 1000
                         else
                             value2 = 0
                         end
@@ -723,7 +723,7 @@ Override function for GetKillingAttackInfo.
                     elseif LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Mod then
                         value2 = zo_floor(timer + LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Mod + 0.5)
                     elseif LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id then
-                        value2 = zo_floor(GetAbilityDuration(LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id) + 0.5) / 1000
+                        value2 = zo_floor((GetAbilityDuration(LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id) or 0) + 0.5) / 1000
                     else
                         value2 = 0
                     end
@@ -1039,7 +1039,7 @@ Override function for GetKillingAttackInfo.
         local slotIcon = GetSlotTexture(slotId, slotObject.button.hotbarCategory)
 
         -- Added function - Replace icons if needed
-        local abilityId = GetSlotBoundId(slotId, slotObject.button.hotbarCategory)
+        local abilityId = LUIE.GetSlotTrueBoundId(slotId, slotObject.button.hotbarCategory)
         if LUIE.Data.Effects.BarIdOverride[abilityId] then
             slotIcon = LUIE.Data.Effects.BarIdOverride[abilityId]
         end
@@ -1086,6 +1086,7 @@ Override function for GetKillingAttackInfo.
 
     SetupSlotHandlers = {
         [ACTION_TYPE_ABILITY] = SetupAbilitySlot,
+        [ACTION_TYPE_CRAFTED_ABILITY] = SetupAbilitySlot,
         [ACTION_TYPE_ITEM] = SetupItemSlot,
         [ACTION_TYPE_COLLECTIBLE] = SetupCollectibleActionSlot,
         [ACTION_TYPE_QUEST_ITEM] = SetupQuestItemActionSlot,
@@ -1100,7 +1101,7 @@ Override function for GetKillingAttackInfo.
         local slotType = GetSlotType(slotnum, hotbarCategory)
         local slotIsEmpty = (slotType == ACTION_TYPE_NOTHING)
 
-        local abilityId = GetSlotBoundId(slotnum, hotbarCategory) -- Check AbilityId for if this should be a fake activation highlight
+        local abilityId = LUIE.GetSlotTrueBoundId(slotnum, hotbarCategory) -- Check AbilityId for if this should be a fake activation highlight
 
         local showHighlight = not slotIsEmpty and (HasActivationHighlight(slotnum, hotbarCategory) or LUIE.Data.Effects.IsAbilityActiveGlow[abilityId] == true) and not self.useFailure and not self.showingCooldown
         local isShowingHighlight = self.activationHighlight:IsHidden() == false
@@ -1139,9 +1140,9 @@ Override function for GetKillingAttackInfo.
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or self.button.hotbarCategory
         local slotType = GetSlotType(slotnum, hotbarCategory)
         local slotIsEmpty = (slotType == ACTION_TYPE_NOTHING)
-        local abilityId = GetSlotBoundId(slotnum, hotbarCategory) -- Check AbilityId for if this should be a fake activation highlight
+        local abilityId = LUIE.GetSlotTrueBoundId(slotnum, hotbarCategory) -- Check AbilityId for if this should be a fake activation highlight
 
-        self.button.actionId = GetSlotBoundId(slotnum, hotbarCategory)
+        self.button.actionId = LUIE.GetSlotTrueBoundId(slotnum, hotbarCategory)
 
         self:UpdateUseFailure()
 
