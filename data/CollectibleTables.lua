@@ -29,6 +29,7 @@ local CollectibleTables =
     Armory = {
         [9745] = "Ghrasharog",
         [10618] = "Zhuqoth",
+        [11876] = "Drinweth",
     },
 
     -- Deconstruction
