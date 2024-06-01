@@ -904,6 +904,24 @@ local CastBarTable =
         [61487] = true, -- Magicka Detonation (Assault)
         [61491] = true, -- Inevitable Detonation (Assault)
 
+        -- Scribing
+        [217228] = true, -- Elemental Explosion
+        [222313] = true, -- Elemental Explosion
+        [217178] = true, -- Smash
+        [217179] = true, -- Smash
+        [217184] = true, -- Smash
+        [217820] = true, -- Smash
+        [219972] = true, -- Smash
+        [217607] = true, -- Torchbearer
+        [217630] = true, -- Torchbearer
+        [217633] = true, -- Torchbearer
+        [217637] = true, -- Torchbearer
+        [223292] = true, -- Torchbearer
+        [217663] = true, -- Trample
+        [220541] = true, -- Trample
+        [220542] = true, -- Trample
+        [220545] = true, -- Trample
+
         ----------------------------------------------------------------
         -- NPC ABILITIES -----------------------------------------------
         ----------------------------------------------------------------
