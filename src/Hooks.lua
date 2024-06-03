@@ -319,8 +319,7 @@ Override function for GetKillingAttackInfo.
     --[[
     Hook synergy popup Icon/Name (to fix inconsistencies and add custom icons for some Quest/Encounter based Synergies)
 ]]
-    local zos_OnSynergyAbilityChanged = ZO_Synergy and ZO_Synergy.OnSynergyAbilityChanged
-    local OnSynergyAbilityChanged = function (self)
+    ZO_Synergy.OnSynergyAbilityChanged = function (self)
         local synergyName, iconFilename = GetSynergyInfo()
         if LUIE.Data.Effects.SynergyNameOverride[synergyName] then
             if LUIE.Data.Effects.SynergyNameOverride[synergyName].icon then
@@ -342,7 +341,7 @@ Override function for GetKillingAttackInfo.
         end
         self.lastSynergyName = synergyName
     end
-    ZO_Synergy.OnSynergyAbilityChanged = OnSynergyAbilityChanged
+
     --[[
     Hook STATS Screen Buffs & Debuffs to hide buffs not needed, update icons, names, durations, and tooltips
 ]]
@@ -456,7 +455,7 @@ Override function for GetKillingAttackInfo.
                         elseif LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Mod then
                             value2 = zo_floor(timer + LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Mod + 0.5)
                         elseif LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id then
-                            value2 = zo_floor(GetAbilityDuration(LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id) + 0.5) / 1000
+                            value2 = zo_floor((GetAbilityDuration(LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id) or 0) + 0.5) / 1000
                         else
                             value2 = 0
                         end
@@ -723,7 +722,7 @@ Override function for GetKillingAttackInfo.
                     elseif LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Mod then
                         value2 = zo_floor(timer + LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Mod + 0.5)
                     elseif LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id then
-                        value2 = zo_floor(GetAbilityDuration(LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id) + 0.5) / 1000
+                        value2 = zo_floor((GetAbilityDuration(LUIE.Data.Effects.EffectOverride[abilityId].tooltipValue2Id) or 0) + 0.5) / 1000
                     else
                         value2 = 0
                     end
@@ -1036,10 +1035,10 @@ Override function for GetKillingAttackInfo.
 
     local function SetupActionSlot(slotObject, slotId)
         -- pass slotObject.button.hotbarCategory which will be nil or companion
-        local slotIcon = GetSlotTexture(slotId, slotObject.button.hotbarCategory)
+        local slotIcon = GetSlotTexture(slotId, slotObject:GetHotbarCategory())
 
         -- Added function - Replace icons if needed
-        local abilityId = GetSlotBoundId(slotId, slotObject.button.hotbarCategory)
+        local abilityId = LUIE.GetSlotTrueBoundId(slotId, slotObject:GetHotbarCategory())
         if LUIE.Data.Effects.BarIdOverride[abilityId] then
             slotIcon = LUIE.Data.Effects.BarIdOverride[abilityId]
         end
@@ -1080,17 +1079,32 @@ Override function for GetKillingAttackInfo.
         slotObject:SetupCount()
     end
 
+    local function SetupEmoteActionSlot(slotObject, slotId)
+        SetupActionSlotWithBg(slotObject, slotId)
+        slotObject:ClearCount()
+    end
+
+    local function SetupQuickChatActionSlot(slotObject, slotId)
+        SetupActionSlotWithBg(slotObject, slotId)
+        slotObject:ClearCount()
+    end
+
     local function SetupEmptyActionSlot(slotObject, slotId)
         slotObject:Clear()
     end
 
-    SetupSlotHandlers = {
-        [ACTION_TYPE_ABILITY] = SetupAbilitySlot,
-        [ACTION_TYPE_ITEM] = SetupItemSlot,
-        [ACTION_TYPE_COLLECTIBLE] = SetupCollectibleActionSlot,
-        [ACTION_TYPE_QUEST_ITEM] = SetupQuestItemActionSlot,
-        [ACTION_TYPE_NOTHING] = SetupEmptyActionSlot,
+    SetupSlotHandlers =
+    {
+        [ACTION_TYPE_ABILITY]         = SetupAbilitySlot,
+        [ACTION_TYPE_ITEM]            = SetupItemSlot,
+        [ACTION_TYPE_CRAFTED_ABILITY] = SetupAbilitySlot,
+        [ACTION_TYPE_COLLECTIBLE]     = SetupCollectibleActionSlot,
+        [ACTION_TYPE_QUEST_ITEM]      = SetupQuestItemActionSlot,
+        [ACTION_TYPE_EMOTE]           = SetupEmoteActionSlot,
+        [ACTION_TYPE_QUICK_CHAT]      = SetupQuickChatActionSlot,
+        [ACTION_TYPE_NOTHING]         = SetupEmptyActionSlot,
     }
+
 
     -- Hook to make Activation Highlight Effect play indefinitely instead of animation only once
     ---@diagnostic disable-next-line: duplicate-set-field
@@ -1100,7 +1114,7 @@ Override function for GetKillingAttackInfo.
         local slotType = GetSlotType(slotnum, hotbarCategory)
         local slotIsEmpty = (slotType == ACTION_TYPE_NOTHING)
 
-        local abilityId = GetSlotBoundId(slotnum, hotbarCategory) -- Check AbilityId for if this should be a fake activation highlight
+        local abilityId = LUIE.GetSlotTrueBoundId(slotnum, hotbarCategory) -- Check AbilityId for if this should be a fake activation highlight
 
         local showHighlight = not slotIsEmpty and (HasActivationHighlight(slotnum, hotbarCategory) or LUIE.Data.Effects.IsAbilityActiveGlow[abilityId] == true) and not self.useFailure and not self.showingCooldown
         local isShowingHighlight = self.activationHighlight:IsHidden() == false
@@ -1139,9 +1153,9 @@ Override function for GetKillingAttackInfo.
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or self.button.hotbarCategory
         local slotType = GetSlotType(slotnum, hotbarCategory)
         local slotIsEmpty = (slotType == ACTION_TYPE_NOTHING)
-        local abilityId = GetSlotBoundId(slotnum, hotbarCategory) -- Check AbilityId for if this should be a fake activation highlight
+        local abilityId = LUIE.GetSlotTrueBoundId(slotnum, hotbarCategory) -- Check AbilityId for if this should be a fake activation highlight
 
-        self.button.actionId = GetSlotBoundId(slotnum, hotbarCategory)
+        self.button.actionId = LUIE.GetSlotTrueBoundId(slotnum, hotbarCategory)
 
         self:UpdateUseFailure()
 
@@ -1730,6 +1744,7 @@ Override function for GetKillingAttackInfo.
         local lastSkillProgressionData = control.skillProgressionData
         control.skillProgressionData = skillProgressionData
         control.slot.skillProgressionData = skillProgressionData
+        control.slot.skillData = skillData
 
         -- slot
         local id = skillProgressionData:GetAbilityId()
@@ -1738,6 +1753,16 @@ Override function for GetKillingAttackInfo.
         ZO_ActionSlot_SetUnusable(control.slotIcon, not isPurchased)
         control.slot:SetEnabled(isPurchased and isActive)
         control.slotLock:SetHidden(isUnlocked)
+
+        local hasSlotStatusUpdated = skillData:HasUpdatedStatusByType(ZO_SKILL_DATA_NEW_STATE.MORPHABLE) or skillData:HasUpdatedStatusByType(ZO_SKILL_DATA_NEW_STATE.CRAFTED_ABILITY)
+        control.slot.statusIcon:SetHidden(not hasSlotStatusUpdated)
+
+        if skillProgressionData:IsActive() and skillProgressionData:GetNumSkillStyles() > 0 then
+            local collectibleData = skillProgressionData:GetSelectedSkillStyleCollectibleData()
+            if collectibleData then
+                control.skillStyleControl.selectedStyleButton.icon:SetTexture(collectibleData:GetIcon())
+            end
+        end
 
         -- xp bar
         local showXPBar = skillProgressionData:HasRankData()
@@ -1836,6 +1861,33 @@ Override function for GetKillingAttackInfo.
 
         increaseButton:SetHidden(hideIncreaseButton)
         decreaseButton:SetHidden(hideDecreaseButton)
+
+        -- Don't show skill style functionality if in respec mode (decrease button showing)
+        local skillStyleControl = control.skillStyleControl
+        if hideDecreaseButton then
+            skillStyleControl:ClearAnchors()
+            if hideIncreaseButton then
+                skillStyleControl:SetAnchor(RIGHT, control.slot, LEFT, -12)
+            else
+                skillStyleControl:SetAnchor(RIGHT, increaseButton, LEFT)
+            end
+
+            if isActive and skillProgressionData:GetNumSkillStyles() ~= 0 then
+                skillStyleControl:SetHidden(false)
+                if skillProgressionData:IsSkillStyleSelected() then
+                    skillStyleControl.defaultStyleButton:SetHidden(true)
+                    skillStyleControl.selectedStyleButton:SetHidden(false)
+                else
+                    skillStyleControl.defaultStyleButton:SetHidden(false)
+                    skillStyleControl.selectedStyleButton:SetHidden(true)
+                end
+                skillStyleControl.statusIcon:SetHidden(not skillData:HasUpdatedStatusByType(ZO_SKILL_DATA_NEW_STATE.STYLE_COLLECTIBLE))
+            else
+                skillStyleControl:SetHidden(true)
+            end
+        else
+            skillStyleControl:SetHidden(true)
+        end
     end
 
     -- Overwrite default Skill Confirm Learn Menu for Skills with Custom Icons (Keyboard)

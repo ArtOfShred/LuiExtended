@@ -734,6 +734,9 @@ CrowdControl.IgnoreList = {
     [211433] = true, -- Side Content Selector (Group)
     [192506] = true, -- Unstable Metamorphosis
 
+    -- Lucient Citadel
+    [218509] = true, -- Arcane Encumberance
+
     ----------------
     -- Miscelaneous
     ----------------

@@ -46,6 +46,7 @@ local negateValidNames = {
     ["Negate Magic"] = true,
     ["Absorption Field"] = true,
     ["Suppression Field"] = true,
+    ["Antimagic Field"] = true,
 }
 
 CrowdControlTracker.controlTypes = {
