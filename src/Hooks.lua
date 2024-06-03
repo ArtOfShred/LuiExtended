@@ -2160,19 +2160,20 @@ Override function for GetKillingAttackInfo.
 
     -- Hook for Gamepad Skills Menu
     function ZO_GamepadSkillEntryTemplate_Setup(control, skillEntry, selected, activated, displayView)
-        --Some skill entries want to target a specific progression data (such as the morph dialog showing two specific morphs). Otherwise they use the skill progression that matches the current point spending.
-        local skillData = skillEntry.skillData or skillEntry.skillProgressionData:GetSkillData()
+        -- Some skill entries want to target a specific progression data (such as the morph dialog showing two specific morphs). Otherwise they use the skill progression that matches the current point spending.
+        local skillData = skillEntry.skillData or skillEntry.skillProgressionData and skillEntry.skillProgressionData:GetSkillData() or skillEntry.craftedAbilityData and skillEntry.craftedAbilityData:GetSkillData()
         local skillProgressionData = skillEntry.skillProgressionData or skillData:GetPointAllocatorProgressionData()
         local skillPointAllocator = skillData:GetPointAllocator()
         local isUnlocked = skillProgressionData:IsUnlocked()
-        local isMorph = skillData:IsActive() and skillProgressionData:IsMorph()
+        local isActive = skillData:IsActive()
+        local isNonCraftedActive = isActive and not skillData:IsCraftedAbility()
+        local isMorph = isNonCraftedActive and skillProgressionData:IsMorph()
         local isPurchased = skillPointAllocator:IsPurchased()
         local isInSkillBuild = skillProgressionData:IsAdvised()
-        local abilityId = skillProgressionData.abilityId
 
-        --Icon
+        -- Icon
         local iconTexture = control.icon
-        iconTexture:SetTexture(GetAbilityIcon(abilityId))
+        iconTexture:SetTexture(GetAbilityIcon(skillProgressionData.abilityId))
         if displayView == ZO_SKILL_ABILITY_DISPLAY_INTERACTIVE then
             if isPurchased then
                 iconTexture:SetColor(ZO_DEFAULT_ENABLED_COLOR:UnpackRGBA())
@@ -2181,9 +2182,9 @@ Override function for GetKillingAttackInfo.
             end
         end
 
-        SetupAbilityIconFrame(control, skillData:IsPassive(), skillData:IsActive(), isInSkillBuild)
+        SetupAbilityIconFrame(control, skillData:IsPassive(), isActive, isInSkillBuild)
 
-        --Label Color
+        -- Label Color
         if displayView == ZO_SKILL_ABILITY_DISPLAY_INTERACTIVE then
             if not skillEntry.isPreview and isPurchased then
                 control.label:SetColor((selected and PURCHASED_COLOR or PURCHASED_UNSELECTED_COLOR):UnpackRGBA())
@@ -2192,7 +2193,7 @@ Override function for GetKillingAttackInfo.
             control.label:SetColor(PURCHASED_COLOR:UnpackRGBA())
         end
 
-        --Lock Icon
+        -- Lock Icon
         if control.lock then
             control.lock:SetHidden(isUnlocked)
         end
@@ -2206,14 +2207,14 @@ Override function for GetKillingAttackInfo.
         labelWidth = labelWidth - indicatorWidth
 
         if displayView == ZO_SKILL_ABILITY_DISPLAY_INTERACTIVE then
-            --Current Binding Text
+            -- Current Binding Text
             if control.keybind then
                 local keybindWidth = SetBindingTextForSkill(control.keybind, skillData)
                 labelWidth = labelWidth - keybindWidth
             end
         end
 
-        --Size the label to allow space for the keybind and decrease icon
+        -- Size the label to allow space for the keybind and decrease icon
         control.label:SetWidth(labelWidth)
     end
 
