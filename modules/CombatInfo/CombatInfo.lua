@@ -2357,6 +2357,10 @@ local function removeSlotFromTable(table, slotNum)
 end
 
 function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
+    if not slotNum or not BACKBAR_INDEX_OFFSET then
+        return
+    end
+
     if slotNum < BACKBAR_INDEX_OFFSET then
         if CombatInfo.SV.ShowToggledUltimate then
             if slotNum < BAR_INDEX_START or slotNum > BAR_INDEX_END then
