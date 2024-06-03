@@ -2224,29 +2224,30 @@ Override function for GetKillingAttackInfo.
         local skillPointAllocator = skillData:GetPointAllocator()
         local isUnlocked = skillProgressionData:IsUnlocked()
         local isPurchased = overrideHotbar ~= nil or skillPointAllocator:IsPurchased()
-        local isMorph = skillData:IsPlayerSkill() and skillData:IsActive() and skillProgressionData:IsMorph()
-        local abilityId = skillProgressionData.abilityId
+        local isActive = skillData:IsActive()
+        local isNonCraftedActive = isActive and not skillData:IsCraftedAbility()
+        local isMorph = skillData:IsPlayerSkill() and isNonCraftedActive and skillProgressionData:IsMorph()
 
-        --Icon
+        -- Icon
         local iconTexture = control.icon
-        iconTexture:SetTexture(GetAbilityIcon(abilityId))
+        iconTexture:SetTexture(skillProgressionData:GetIcon())
         if isPurchased then
             iconTexture:SetColor(ZO_DEFAULT_ENABLED_COLOR:UnpackRGBA())
         else
             iconTexture:SetColor(ZO_DEFAULT_DISABLED_COLOR:UnpackRGBA())
         end
 
-        SetupAbilityIconFrame(control, skillData:IsPassive(), skillData:IsActive(), skillProgressionData:IsAdvised())
+        SetupAbilityIconFrame(control, skillData:IsPassive(), isActive, skillProgressionData:IsAdvised())
 
-        --Label
+        -- Label
         control.label:SetText(skillProgressionData:GetDetailedGamepadName())
         local color = isPurchased and ZO_SELECTED_TEXT or ZO_DISABLED_TEXT
         control.label:SetColor(color:UnpackRGBA())
 
-        --Lock Icon
+        -- Lock Icon
         control.lock:SetHidden(isUnlocked)
 
-        -- indicator
+        -- Indicator
         local labelWidth = SKILL_ENTRY_LABEL_WIDTH
         local NO_RIGHT_INDICATOR = nil
         local SHOW_INCREASE = true
@@ -2258,7 +2259,7 @@ Override function for GetKillingAttackInfo.
         local keybindWidth = SetBindingTextForSkill(control.keybind, skillData, overrideSlotIndex, overrideHotbar)
         labelWidth = labelWidth - keybindWidth
 
-        --Size the label to allow space for the keybind and decrease icon
+        -- Size the label to allow space for the keybind and decrease icon
         control.label:SetWidth(labelWidth)
     end
 end
