@@ -13,7 +13,7 @@ local changelogMessages = {
     "|cFFA500LuiExtended Version 6.7.1|r",
     "",
     "|cFFFF00General:|r",
-    "[*] Update for Gold Coast.",
+    "[*] Update for Gold Road.",
     "",
 }
 
