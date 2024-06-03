@@ -10,15 +10,10 @@ local zo_strformat = zo_strformat
 local table_concat = table.concat
 
 local changelogMessages = {
-    "|cFFA500LuiExtended Version 6.7.0|r",
+    "|cFFA500LuiExtended Version 6.7.1|r",
     "",
     "|cFFFF00General:|r",
-    "[*] Updated fonts to .slug format for Update 41 API changes.",
-    "[*] Fixed an issue where the Player to Player interaction menu could throw UI errors.",
-    "",
-    "|cFFFF00Combat Info:|r",
-    "[*] Fixed issues with Negate tracking in the Crowd Control Tracker (thanks to ACastanza).",
-    "[*] Fixed issues with CC Tracker occasionally throwing errors with snares & roots.",
+    "[*] Update for Gold Coast.",
     "",
 }
 
