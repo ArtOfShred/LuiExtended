@@ -12,7 +12,7 @@ local LUIE        = LUIE
 
 LUIE.tag          = "LUIE"
 LUIE.name         = "LuiExtended"
-LUIE.version      = "6.7.0"
+LUIE.version      = "6.7.1"
 LUIE.author       = "ArtOfShred, DakJaniels, psypanda, Saenic & SpellBuilder"
 LUIE.website      = "https://www.esoui.com/downloads/info818-LuiExtended.html"
 LUIE.github       = "https://github.com/ArtOfShred/LuiExtended"
