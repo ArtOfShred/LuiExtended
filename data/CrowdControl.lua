@@ -90,6 +90,12 @@ CrowdControl.aoePlayerNormal = {
     [32711] = 1, -- Eruption (Eruption)
 
     -- Warden
+    [220630] = 1, -- Warden's Burst (Warden Scribing Class Charm Initial Cast)
+    [220639] = 0, -- Warden's Burst (Warden Scribing Class Charm Initial Cast)
+
+    [221173] = 1, -- Warden's Contingency (Warden Scribing Class Charm Initial Cast)
+    [221174] = 0, -- Warden's Contingency (Warden Scribing Class Charm Initial Cast)
+
     --[130406] = 0, -- Arctic Blast (Arctic Blast)
     [88783] = 1, -- Impaling Shards (Impaling Shards)
     [88791] = 0, -- Gripping Shards (Gripping Shards)
