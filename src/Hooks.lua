@@ -1423,7 +1423,7 @@ Override function for GetKillingAttackInfo.
     ZO_CampaignBonuses_Shared.BuildMasterList = function (self)
         self.masterList = {}
 
-        for bonusType, info in ipairs(BONUS_SECTION_DATA) do
+        for bonusType, info in pairs(BONUS_SECTION_DATA) do
             local infoData = info.infoData
             if type(info.infoData) == "function" then
                 infoData = info.infoData(self.campaignId)
