@@ -13,26 +13,29 @@ local CollectibleTables =
     {
         [267] = "Tythis",
         [6376] = "Ezabi",
-        [8994] = "Crow",
+        [8994] = "Baron",
         [9743] = "Factotum",
         [11097] = "Pyroclast",
+        [12413] = "Eri",
     },
 
     -- Merchants
     Merchants =
     {
+        [300] = "Pirharri",
         [301] = "Nuzimeh",
         [6378] = "Fezez",
-        [8995] = "Crow",
+        [8995] = "Peddler",
         [9744] = "Factotum",
         [11059] = "Hoarfrost",
+        [12414] = "Xyn",
     },
 
     -- Armory Assistants
     Armory =
     {
-        [9745] = "Ghrasharog",
-        [10618] = "Zhuqoth",
+        [9745] = "Ghrashorog",
+        [10618] = "Zuqoth",
         [11876] = "Drinweth",
     },
 
@@ -41,6 +44,7 @@ local CollectibleTables =
     {
         [10184] = "Giladil",
         [10617] = "Aderene",
+        [11877] = "Tzozabrar",
     },
 
     -- Fence
